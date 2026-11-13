@@ -6,6 +6,9 @@
     },
     "o2web/source/x_component_cms_ColumnManager/lp/zh-cn.js": {
       "MWF.xApplication.cms.ColumnManager.LP.documentTypeSelectValue": "게시판 분류의 문서 유형 저장값. x_cms_assemble_control이 \"信息\"/\"数据\"와 비교한다."
+    },
+    "o2web/source/x_component_cms_Index/$Starter/zh-cn.js": {
+      "MWF.xApplication.cms.Index.Starter.lp.documentTypeInfor": "서버 documentType 저장·비교값(信息) — 화면 문구가 아님"
     }
   },
   "relabeledKeys": {

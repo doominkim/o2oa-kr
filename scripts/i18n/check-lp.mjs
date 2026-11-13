@@ -36,9 +36,11 @@ process.chdir(root);
 
 // A filter selects a zh-cn.js file itself or every pack under a directory.
 const selected = (f) => filters.some((p) => f === p || f.startsWith(`${p}/`));
-const sources = execFileSync("git", ["ls-files", "o2web/source/**/lp/zh-cn.js"], { encoding: "utf8" })
+// lp/ packs plus component-local packs loaded as "$<Name>." + language (e.g. $ProcessStarter/zh-cn.js).
+const sources = execFileSync("git", ["ls-files", "o2web/source/**/lp/zh-cn.js", "o2web/source/**/$*/zh-cn.js"], { encoding: "utf8" })
   .split("\n")
   .filter(Boolean)
+  .filter((f) => !f.startsWith("o2web/source/o2_lib/") && !f.includes("/fullcalendar/"))
   .filter((f) => filters.length === 0 || selected(f));
 
 const AUTO = Symbol("autovivified");

@@ -309,7 +309,8 @@ public class General extends ConfigObject {
 
 		@FieldDescribe("只允许上传的文件后缀")
 		private List<String> fileTypeIncludes = Arrays.asList("doc", "docx", "xls", "xlsx", "ppt", "pptx", "pdf",
-				"xapp", "text", "zip", "rar", "mp3", "mp4", "png", "jpg", "gif");
+				"hwp", "hwpx", "txt", "csv", "md", "xapp", "text", "zip", "rar", "7z", "mp3", "mp4", "png", "jpg",
+				"jpeg", "gif", "webp");
 
 		@FieldDescribe("不允许上传的文件后缀")
 		private List<String> fileTypeExcludes = new ArrayList<>();
