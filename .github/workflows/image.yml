@@ -31,7 +31,7 @@ jobs:
           java-version: "11"
 
       - name: Read release pin
-        run: cat deploy/release.env >> "$GITHUB_ENV"
+        run: grep -E '^[A-Z_]+=' deploy/release.env >> "$GITHUB_ENV"
 
       - name: Cache release zip
         id: release-cache
