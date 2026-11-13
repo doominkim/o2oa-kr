@@ -18,6 +18,8 @@ Every changed file falls in one of four groups (compared with the base revision)
   code      anything else (the fork's real changes)    -> compiled and patched as is
 Classes that inline a changed `static final String` (javac copies constant values into the
 classes that use them) are recompiled as dependents and must pass the same bytecode check.
+JPA entities are OpenJPA-enhanced like the release build before the check; entity code changes
+are not supported.
 
 Code files that cannot be compiled against the release libraries must be listed in
 deploy/unpatchable.txt; any other failure aborts. Text-group classes that fail the check
@@ -159,24 +161,40 @@ def is_entity(path):
     return "\n@Entity" in src or "\n@MappedSuperclass" in src
 
 
-def enhance_mapped_superclasses(module, files, out, cp):
-    for f in files:
-        if is_entity(f):
-            cls = os.path.relpath(f, os.path.join(REPO, "o2server", module, "src/main/java"))[:-5].replace("/", ".")
-            if module != "x_base_core_project" or cls not in BASE_MAPPED:
-                sys.exit(f"FAILED: {os.path.relpath(f, REPO)} is a JPA entity; patching entities is not supported")
+def class_of(module, path):
+    return os.path.relpath(path, os.path.join(REPO, "o2server", module, "src/main/java"))[:-5].replace("/", ".")
+
+
+def enhance(module, files, out, cp):
+    """OpenJPA-enhances the compiled entities like the release build (EnhanceBuilder): the patched
+    base superclasses, and entities whose change is text only (code changes to entities are not
+    supported). Text entities then go through the same bytecode check as other text classes."""
     targets = [c for c in BASE_MAPPED if os.path.exists(os.path.join(out, c.replace(".", "/") + ".class"))]
+    for f in files:
+        if not is_entity(f):
+            continue
+        cls = class_of(module, f)
+        if cls in BASE_MAPPED:
+            continue
+        if group[os.path.relpath(f, REPO)] == "code":
+            sys.exit(f"FAILED: {os.path.relpath(f, REPO)} is a JPA entity; patching entity code is not supported")
+        targets.append(cls)
     if not targets:
         return
+    mapped = list(BASE_MAPPED)
+    for p in glob.glob(os.path.join(REPO, "o2server", module, "src/main/java/**/*.java"), recursive=True):
+        if "\n@MappedSuperclass" in open(p, encoding="utf-8").read():
+            mapped.append(class_of(module, p))
     xml = os.path.join(out, "..", "enhance-persistence.xml")
     with open(xml, "w", encoding="utf-8") as w:
         w.write('<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">'
                 '<persistence-unit name="enhance">'
-                + "".join(f"<class>{c}</class>" for c in BASE_MAPPED) + "</persistence-unit></persistence>")
+                + "".join(f"<class>{c}</class>" for c in sorted(set(mapped + targets)))
+                + "</persistence-unit></persistence>")
     paths = [os.path.join(out, c.replace(".", "/") + ".class") for c in targets]
     run([os.path.join(args.java_home, "bin", "java"), "-cp", ":".join([out] + cp),
          "org.apache.openjpa.enhance.PCEnhancer", "-p", xml] + paths)
-    print(f"enhanced {', '.join(t.rsplit('.', 1)[1] for t in targets)}")
+    print(f"enhanced {module}: {len(targets)} classes")
 
 
 def artifact(m):
@@ -313,15 +331,7 @@ try:
         else:
             subprocess.run([JAR, "xf", art], cwd=release, capture_output=True)
             release_classes = release
-        # Entities cannot be recompiled (OpenJPA enhancement); text-only edits in them keep the release text.
-        files = []
-        for f in rel_files:
-            if group[f] != "code" and is_entity(os.path.join(REPO, f)):
-                kept_release.append((f, "entity"))
-            else:
-                files.append(os.path.join(REPO, f))
-        if not files:
-            continue
+        files = [os.path.join(REPO, f) for f in rel_files]
         empty = os.path.join(work, "empty"); os.makedirs(empty, exist_ok=True)
         javac = [JAVAC, "-nowarn", "-encoding", "UTF-8", "--release", "11", "-proc:none", "-implicit:none",
                  "-sourcepath", empty, "-cp", ":".join(cp), "-d", out]
@@ -345,6 +355,7 @@ try:
                                              + " does not compile against the release"))
                 files = [f for f in files if f not in bad]
                 continue
+            enhance(m, files, out, cp)
             # Text and dependent classes: keep only those identical to the release apart from strings.
             checked = collections.defaultdict(list)
             for name in class_names(out):
@@ -363,7 +374,6 @@ try:
             files = [f for f in files if os.path.relpath(f, REPO) not in differing]
         if not files:
             continue
-        enhance_mapped_superclasses(m, [f for f in files if group[os.path.relpath(f, REPO)] == "code"], out, cp)
         if not class_names(out):
             continue
         if kind == "jar":

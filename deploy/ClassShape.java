@@ -92,21 +92,61 @@ public class ClassShape {
 		}
 	}
 
+	/**
+	 * Instructions of one method. Labels are numbered in code order when the method ends, and
+	 * lookupswitch keys are left out (a switch on strings switches on their hash codes, so the
+	 * keys and their order change with the literals); its case targets are compared as a set.
+	 */
 	static final class Code extends MethodVisitor {
 		private final StringBuilder out;
-		private final java.util.Map<Label, Integer> labels = new java.util.IdentityHashMap<>();
+		private final java.util.List<Object> buf = new java.util.ArrayList<>();
+		private final java.util.Map<Label, Integer> order = new java.util.IdentityHashMap<>();
 
 		Code(StringBuilder out) {
 			super(Opcodes.ASM9);
 			this.out = out;
 		}
 
-		private int id(Label l) {
-			return labels.computeIfAbsent(l, k -> labels.size());
+		/** Case targets of a lookupswitch, printed sorted by label number. */
+		private static final class LabelSet {
+			final Label[] labels;
+
+			LabelSet(Label[] labels) {
+				this.labels = labels;
+			}
 		}
 
-		private void op(int opcode, String rest) {
-			out.append("  ").append(opcode).append(rest.isEmpty() ? "" : " " + rest).append('\n');
+		private void op(int opcode, Object... rest) {
+			buf.add("  " + opcode);
+			for (Object r : rest) {
+				buf.add(" ");
+				buf.add(r);
+			}
+			buf.add("\n");
+		}
+
+		private String label(Object l) {
+			Integer n = order.get(l);
+			return "L" + (n == null ? "?" : n);
+		}
+
+		@Override
+		public void visitEnd() {
+			for (Object o : buf) {
+				if (o instanceof Label) {
+					out.append(label(o));
+				} else if (o instanceof LabelSet) {
+					java.util.List<Integer> ns = new java.util.ArrayList<>();
+					for (Label l : ((LabelSet) o).labels) {
+						Integer n = order.get(l);
+						ns.add(n == null ? -1 : n);
+					}
+					java.util.Collections.sort(ns);
+					out.append(ns);
+				} else {
+					out.append(o);
+				}
+			}
 		}
 
 		@Override
@@ -150,12 +190,15 @@ public class ClassShape {
 
 		@Override
 		public void visitJumpInsn(int opcode, Label label) {
-			op(opcode, "L" + id(label));
+			op(opcode, label);
 		}
 
 		@Override
 		public void visitLabel(Label label) {
-			out.append(" L").append(id(label)).append('\n');
+			order.putIfAbsent(label, order.size());
+			buf.add(" ");
+			buf.add(label);
+			buf.add("\n");
 		}
 
 		@Override
@@ -170,20 +213,17 @@ public class ClassShape {
 
 		@Override
 		public void visitTableSwitchInsn(int min, int max, Label dflt, Label... ls) {
-			StringBuilder b = new StringBuilder(min + ".." + max + " default L" + id(dflt));
-			for (Label l : ls) {
-				b.append(" L").append(id(l));
-			}
-			op(Opcodes.TABLESWITCH, b.toString());
+			Object[] parts = new Object[ls.length + 3];
+			parts[0] = min + ".." + max;
+			parts[1] = "default";
+			parts[2] = dflt;
+			System.arraycopy(ls, 0, parts, 3, ls.length);
+			op(Opcodes.TABLESWITCH, parts);
 		}
 
 		@Override
 		public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] ls) {
-			StringBuilder b = new StringBuilder("default L" + id(dflt));
-			for (int i = 0; i < keys.length; i++) {
-				b.append(' ').append(keys[i]).append(":L").append(id(ls[i]));
-			}
-			op(Opcodes.LOOKUPSWITCH, b.toString());
+			op(Opcodes.LOOKUPSWITCH, keys.length, "default", dflt, new LabelSet(ls));
 		}
 
 		@Override
@@ -193,8 +233,13 @@ public class ClassShape {
 
 		@Override
 		public void visitTryCatchBlock(Label start, Label end, Label handler, String type) {
-			out.append("  try L").append(id(start)).append(" L").append(id(end)).append(" L").append(id(handler))
-					.append(' ').append(type).append('\n');
+			buf.add("  try ");
+			buf.add(start);
+			buf.add(" ");
+			buf.add(end);
+			buf.add(" ");
+			buf.add(handler);
+			buf.add(" " + type + "\n");
 		}
 	}
 }
