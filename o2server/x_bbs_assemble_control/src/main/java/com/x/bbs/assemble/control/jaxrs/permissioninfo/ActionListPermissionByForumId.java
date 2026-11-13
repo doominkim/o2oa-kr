@@ -42,7 +42,7 @@ public class ActionListPermissionByForumId extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionPermissionInfoProcess( e, "根据指定的论坛分区列示所有的权限信息时时发生异常.ForumId:" + forumId );
+				Exception exception = new ExceptionPermissionInfoProcess( e, "지정한 포럼 분류의 전체 권한 정보를 조회하는 중 오류가 발생했습니다. ForumId:" + forumId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -52,7 +52,7 @@ public class ActionListPermissionByForumId extends BaseAction {
 				wraps = Wo.copier.copy( permissionInfoList );
 				result.setData( wraps );
 			} catch (Exception e) {
-				Exception exception = new ExceptionPermissionInfoProcess( e, "将查询结果转换为可输出的数据信息时发生异常." );
+				Exception exception = new ExceptionPermissionInfoProcess( e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -68,7 +68,7 @@ public class ActionListPermissionByForumId extends BaseAction {
 		
 		public static WrapCopier< BBSPermissionInfo, Wo > copier = WrapCopierFactory.wo( BBSPermissionInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 		
-		//论坛版块列表
+		//포럼 게시판 목록
 		private List<WoBBSSectionInfo> sections = null;
 
 		public List<WoBBSSectionInfo> getSections() {
@@ -90,7 +90,7 @@ public class ActionListPermissionByForumId extends BaseAction {
 		
 		public static WrapCopier< BBSSectionInfo, WoBBSSectionInfo > copier = WrapCopierFactory.wo( BBSSectionInfo.class, WoBBSSectionInfo.class, null,JpaObject.FieldsInvisible);
 		
-		//版块的子版块信息列表
+		//게시판의 하위 게시판 정보 목록
 		private List<Wo> subSections = null;
 
 		public List<Wo> getSubSections() {

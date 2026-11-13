@@ -7,13 +7,13 @@ public class V2TerminateWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 6045785174271544769L;
 
-	@FieldDescribe("待办选择路由名称.")
+	@FieldDescribe("결재 대기 선택 경로 이름.")
 	private String routeName;
 
-	@FieldDescribe("待办办理意见.")
+	@FieldDescribe("결재 대기 처리 의견.")
 	private String opinion;
 
-	@FieldDescribe("操作人，默认当前登录人.")
+	@FieldDescribe("작업자, 기본값은 현재 로그인 사용자.")
 	private String operator;
 
 	public String getRouteName() {

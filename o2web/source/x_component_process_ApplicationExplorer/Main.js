@@ -155,7 +155,7 @@ MWF.xApplication.process.ApplicationExplorer.Main = new Class({
 			this.fileUploadNode.click();
 		}.bind(this));
 		return ;
-		//老版导出
+		//구버전 내보내기
 		MWF.xDesktop.requireApp("process.ApplicationExplorer", "Importer", function(){
 			(new MWF.xApplication.process.ApplicationExplorer.Importer(this, e)).load();
 		}.bind(this));
@@ -924,7 +924,7 @@ MWF.xApplication.process.ApplicationExplorer.Application = new Class({
 				//appCenter.createApplication(null,this.data.id);
 			}.bind(this));
 			e.stopPropagation();
-			//老版本导出
+			//구버전 내보내기
 			// this.exportApplication(e);
 			// e.stopPropagation();
 		}.bind(this));

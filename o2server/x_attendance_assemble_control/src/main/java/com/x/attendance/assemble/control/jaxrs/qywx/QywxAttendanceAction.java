@@ -29,14 +29,14 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("qywx")
-@JaxrsDescribe("企业微信打卡数据管理（已弃用）")
+@JaxrsDescribe("WeCom 출퇴근 기록 데이터 관리(사용 중단)")
 public class QywxAttendanceAction  extends StandardJaxrsAction {
 
     private static final Logger logger = LoggerFactory.getLogger(QywxAttendanceAction.class);
 
 
-    //删除所有打卡数据
-    @JaxrsMethodDescribe(value = "删除所有打卡数据", action = ActionDeleteAllQywxAttendanceData.class)
+    //모든 출퇴근 기록 데이터 삭제
+    @JaxrsMethodDescribe(value = "모든 출퇴근 기록 데이터 삭제", action = ActionDeleteAllQywxAttendanceData.class)
     @DELETE
     @Path("all")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -55,14 +55,14 @@ public class QywxAttendanceAction  extends StandardJaxrsAction {
 
 
     //
-    @JaxrsMethodDescribe(value = "同步企业微信考勤结果", action = ActionSyncQywxData.class)
+    @JaxrsMethodDescribe(value = "WeCom 근태 결과 동기화", action = ActionSyncQywxData.class)
     @GET
     @Path("sync/from/{dateFrom}/to/{dateTo}/start")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void syncData(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                         @JaxrsParameterDescribe("开始时间: yyyy-MM-dd") @PathParam("dateFrom") String dateFrom,
-                         @JaxrsParameterDescribe("结束时间: yyyy-MM-dd") @PathParam("dateTo") String dateTo) {
+                         @JaxrsParameterDescribe("시작 시간: yyyy-MM-dd") @PathParam("dateFrom") String dateFrom,
+                         @JaxrsParameterDescribe("종료 시간: yyyy-MM-dd") @PathParam("dateTo") String dateTo) {
         ActionResult<WrapBoolean> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -74,7 +74,7 @@ public class QywxAttendanceAction  extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询企业微信同步记录信息", action = ActionListQywxSyncRecord.class)
+    @JaxrsMethodDescribe(value = "WeCom 동기화 기록 정보 조회", action = ActionListQywxSyncRecord.class)
     @GET
     @Path("sync/list")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -91,14 +91,14 @@ public class QywxAttendanceAction  extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询企业微信打卡结果", action = ActionListQywxAttendanceDetail.class)
+    @JaxrsMethodDescribe(value = "WeCom 출퇴근 체크 결과 조회", action = ActionListQywxAttendanceDetail.class)
     @PUT
     @Path("attendance/list/{id}/next/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listDingdingAttendance(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                       @JaxrsParameterDescribe("最后一条数据ID") @PathParam("id") String id,
-                                       @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
+                                       @JaxrsParameterDescribe("마지막 데이터 ID") @PathParam("id") String id,
+                                       @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
                                        JsonElement jsonElement) {
         ActionResult<List<ActionListQywxAttendanceDetail.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);

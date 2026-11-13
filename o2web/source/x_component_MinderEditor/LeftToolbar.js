@@ -119,7 +119,7 @@ MWF.xApplication.MinderEditor.LeftToolbar = new Class({
         //    //this.editor.moveToCenter()
         //}.bind(this));
         //
-        //this.navExpandNode = new Element("div",{ "styles" : this.css.navButton , "title" : "展开节点"  }).inject(this.node);
+        //this.navExpandNode = new Element("div",{ "styles" : this.css.navButton , "title" : "노드 펼치기"  }).inject(this.node);
         //new Element("div",{ "styles" : this.css.navExpandIcon  }).inject(this.navExpandNode);
         //this.navExpandNode.addEvent("click",function(ev){
         //    this.showExpandNode( ev );
@@ -177,7 +177,7 @@ MWF.xApplication.MinderEditor.LeftToolbar = new Class({
         //    this.navSearchNode.click();
         //});
 
-        //this.navExpand = new Element("div",{ "styles" : this.css.navButton , "title" : "展开"  }).inject(this.node);
+        //this.navExpand = new Element("div",{ "styles" : this.css.navButton , "title" : "펼치기"  }).inject(this.node);
         //new Element("div",{ "styles" : this.css.navExpandIcon  }).inject(this.navExpand);
     }
     //setMoveOpen : function( flag ){
@@ -294,7 +294,7 @@ MWF.xApplication.MinderEditor.LeftToolbar = new Class({
     //
     //    var expandAllNode = new Element("div",{
     //        styles : this.css.expandNode,
-    //        text : "展开所有节点"
+    //        text : "모든 노드 펼치기"
     //    }).inject(this.expandArea);
     //    expandAllNode.addEvents({
     //        "mouseover" : function(){ this.node.setStyles( this.navi.css.expandNode_over )}.bind( { navi : this, node : expandAllNode} ),
@@ -308,7 +308,7 @@ MWF.xApplication.MinderEditor.LeftToolbar = new Class({
     //    for( var i=1; i<=deepestLevel; i++ ){
     //        var expandNode = new Element("div",{
     //            styles : this.css.expandNode,
-    //            text : "展开到"+i+"级节点"
+    //            text : ""+i+"단계 노드까지 펼치기"
     //        }).inject(this.expandArea);
     //        expandNode.addEvents({
     //            "mouseover" : function(){ this.node.setStyles( this.navi.css.expandNode_over )}.bind( { navi : this, node : expandNode} ),

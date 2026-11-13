@@ -26,10 +26,10 @@ class ActionListObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private List<String> identityList = new ArrayList<>();
 
-		@FieldDescribe("是否关联查询身份所属组织、角色信息")
+		@FieldDescribe("신분 소속 조직·역할 정보 연관 조회 여부")
 		private Boolean referenceFlag;
 
 		public List<String> getIdentityList() {

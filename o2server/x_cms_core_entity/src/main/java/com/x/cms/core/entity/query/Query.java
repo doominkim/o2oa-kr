@@ -192,7 +192,7 @@ public class Query extends GsonPropertyObject {
 		this.adjustScopeType();
 		this.adjustDateRangeEntry();
 		this.adjustRestrictDateRangeEntry();
-		/* 先调整slectEntry 顺序不能改 */
+		/* 먼저 slectEntry 조정, 순서 변경 불가 */
 		this.adjustSelectEntryList();
 		this.adjustOrderEntryList();
 		this.adjustGroupEntry();
@@ -342,9 +342,9 @@ public class Query extends GsonPropertyObject {
 	}
 
 	public void query() throws Exception {
-		/* 先获取所有记录对应的job值作为返回的结果集 */
+		/* 먼저 모든 레코드에 대응하는 job 값을 반환 결과 집합으로 조회 */
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			/* 先进行字段调整 */
+			/* 먼저 필드 조정 */
 			this.adjust();
 			List<String> docIds = this.listDocIds(emc);
 			Table table = this.concreteTable(docIds);
@@ -370,8 +370,8 @@ public class Query extends GsonPropertyObject {
 					scriptEngine.eval(this.getAfterGroupGridScriptText());
 				}
 				this.setGroupGrid(groupGrid);
-				/* 此部分的功能在前台整理数据时完成 */
-				/* 如果分组输出了那么就不输出grid减少前台js解析Json的开销. */
+				/* 이 기능은 프론트에서 데이터 정리 시 수행 */
+				/* 그룹 출력 시 grid를 출력하지 않아 프론트 js의 Json 파싱 부담 감소. */
 				// this.setGrid(null);
 			}
 			if ((null != this.calculate) && (this.calculate.available())) {
@@ -385,7 +385,7 @@ public class Query extends GsonPropertyObject {
 					scriptEngine.eval(this.getAfterCalculateGridScriptText());
 				}
 			}
-			/* 需要抽取单独的列 */
+			/* 별도 열 추출 필요 */
 			if (ListTools.isNotEmpty(this.columnList)) {
 				this.columnGrid = new ArrayList<Object>();
 				for (String column : this.columnList) {
@@ -393,7 +393,7 @@ public class Query extends GsonPropertyObject {
 					for (Row o : table) {
 						list.add(o.get(column));
 					}
-					/* 只有一列的情况下直接输出List */
+					/* 열이 하나뿐이면 List를 바로 출력 */
 					if (this.columnList.size() == 1) {
 						this.columnGrid = list;
 					} else {
@@ -418,12 +418,12 @@ public class Query extends GsonPropertyObject {
 
 		jobs.addAll(this.listDocIdsWithCondition(emc));
 
-		/** 针对DataItem进行判断 */
+		/** DataItem 기준으로 판단 */
 		if (ListTools.isNotEmpty(this.getRestrictFilterEntryList())
 				|| ListTools.isNotEmpty(this.getFilterEntryList())) {
 			EntityManager em = emc.get(Item.class);
 			CriteriaBuilder cb = em.getCriteriaBuilder();
-			/** 运行RestrictFilterEntry */
+			/** RestrictFilterEntry 실행 */
 			if (ListTools.isNotEmpty(this.getRestrictFilterEntryList())) {
 				List<String> partDocs = new ArrayList<>();
 				for (int i = 0; i < this.getRestrictFilterEntryList().size(); i++) {
@@ -435,7 +435,7 @@ public class Query extends GsonPropertyObject {
 						p = cb.and(p, root.get(Item_.bundle).in(jobs));
 						cq.select(root.get(Item_.bundle)).where(p);
 						List<String> os = em.createQuery(cq).getResultList().stream().distinct().collect(Collectors.toList());
-						/** 不等于在这里单独通过等于处理 */
+						/** 같지 않음은 여기서 같음으로 별도 처리 */
 						if (Comparison.isNotEquals(f.getComparison())) {
 							os = ListUtils.subtract(jobs, os);
 						}
@@ -452,7 +452,7 @@ public class Query extends GsonPropertyObject {
 				}
 				jobs = ListUtils.intersection(jobs, partDocs);
 			}
-			/** 运行FilterEntry */
+			/** FilterEntry 실행 */
 			if (ListTools.isNotEmpty(this.getFilterEntryList())) {
 				List<String> partDocs = new ArrayList<>();
 				for (int i = 0; i < this.getFilterEntryList().size(); i++) {
@@ -464,7 +464,7 @@ public class Query extends GsonPropertyObject {
 						p = cb.and(p, root.get(Item_.bundle).in(jobs));
 						cq.select(root.get(Item_.bundle)).where(p);
 						List<String> os = em.createQuery(cq).getResultList().stream().distinct().collect(Collectors.toList());
-						/** 不等于在这里单独通过等于处理 */
+						/** 같지 않음은 여기서 같음으로 별도 처리 */
 						if (Comparison.isNotEquals(f.getComparison())) {
 							os = ListUtils.subtract(jobs, os);
 						}
@@ -555,7 +555,7 @@ public class Query extends GsonPropertyObject {
 			Object job = tuple.get(selectionDoc);
 			Row row = table.get(job.toString());
 			for (Selection<?> selection : selections) {
-				/* 前面已经填充了默认值,如果是null那么跳过这个值 */
+				/* 앞에서 기본값을 채웠으므로 null이면 이 값을 건너뜀 */
 				if (null != tuple.get(selection)) {
 					row.put(selection.getAlias(), tuple.get(selection));
 				}

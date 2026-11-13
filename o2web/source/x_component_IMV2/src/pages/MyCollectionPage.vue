@@ -17,17 +17,17 @@ onMounted(()=> {
 onUnmounted(() => {
   console.debug('onUnmounted ====> MyCollectionPage ')
 })
-// 是否选择模式
+// 선택 모드 여부
 const chooseMode = ref(false)
-// 消息列表
+// 메시지 목록
 const collectionMsgList = ref([])
-// 选择的消息列表
+// 선택한 메시지 목록
 const selectCollectionMsgList = ref([])
-// 页码
+// 페이지 번호
 const page = ref(1)
-// 是否在加载数据中
+// 데이터 로드 중 여부
 const isLoading = ref(false)
-// 是否有更多数据
+// 추가 데이터 존재 여부
 const hasMoreData = ref(true)
 
 const refreshData = () => {
@@ -60,7 +60,7 @@ const clickSelectCollection = (c) => {
     selectCollectionMsgList.value.push(c)
   }
 }
-// 打开消息
+// 메시지 열기
 const clickOpenMsg = (msg) => {
   console.debug('open msg  ==== MyCollectionPage', msg)
   if (chooseMode.value) {
@@ -73,7 +73,7 @@ const clickOpenMsg = (msg) => {
     if (!needClickMsg(msg)) {
       return;
     }
-    // 打开消息
+    // 메시지 열기
     eventBus.publish(EventName.openMsg, msg)
   }
 }
@@ -82,7 +82,7 @@ const clickOpenQuoteMsg = (msg) => {
     return
   }
   console.debug('open quote msg  ==== MyCollectionPage', msg)
-  // 打开消息
+  // 메시지 열기
   eventBus.publish(EventName.openMsg, msg)
 }
 const clickCancelChooseMode = () => {
@@ -110,7 +110,7 @@ const  deleteCollectionList = async () => {
   const result = await imAction('msgCollectionRemove', body)
   if (result) {
     console.info(`즐겨찾기 삭제 성공 `, result)
-    // 清除列表数据
+    // 목록 데이터 지우기
     collectionMsgList.value = collectionMsgList.value.filter((c) => !deleteList.includes(c.id))
   }
 

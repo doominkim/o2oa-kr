@@ -11,6 +11,6 @@ public class ExceptionNoCode extends PromptException {
     private static final long serialVersionUID = -3068848622774913903L;
 
     public ExceptionNoCode() {
-        super("微信code不能为空");
+        super("WeChat code는 비워 둘 수 없습니다");
     }
 }

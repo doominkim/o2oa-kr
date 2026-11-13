@@ -7,10 +7,10 @@ public class ActionShiftTimeWo extends WrapBoolean {
 
 	private static final long serialVersionUID = 2040132891703254119L;
 
-	@FieldDescribe("已完成工作标识")
+	@FieldDescribe("완료된 업무 문서 식별자")
 	private String id;
 
-	@FieldDescribe("调整分钟数")
+	@FieldDescribe("조정 분 수")
 	private Integer adjustMinutes;
 
 	public String getId() {

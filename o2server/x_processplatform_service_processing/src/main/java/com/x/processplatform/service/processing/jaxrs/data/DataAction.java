@@ -25,18 +25,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("data")
-@JaxrsDescribe("数据操作")
+@JaxrsDescribe("데이터 작업")
 public class DataAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(DataAction.class);
 
-	@JaxrsMethodDescribe(value = "更新指定Work的Data数据.", action = ActionUpdateWithWork.class)
+	@JaxrsMethodDescribe(value = "지정 Work의 Data 데이터 업데이트.", action = ActionUpdateWithWork.class)
 	@PUT
 	@Path("work/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithWork.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -48,14 +48,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Work的Data数据.", action = ActionUpdateWithWorkPath.class)
+	@JaxrsMethodDescribe(value = "지정 Work의 Data 데이터 업데이트.", action = ActionUpdateWithWorkPath.class)
 	@PUT
 	@Path("work/{id}/{path}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithWorkPath(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("路径(多层路径以.分割，如person.name)") @PathParam("path") String path, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("경로(다단계 경로는 .으로 구분, 예: person.name)") @PathParam("path") String path, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithWorkPath.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -67,13 +67,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Job的Data数据.", action = ActionUpdateWithJob.class)
+	@JaxrsMethodDescribe(value = "지정 Job의 Data 데이터 업데이트.", action = ActionUpdateWithJob.class)
 	@PUT
 	@Path("job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("Job标识") @PathParam("job") String job, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("Job 식별자") @PathParam("job") String job, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithJob.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -85,14 +85,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Job的Data数据.", action = ActionUpdateWithJobPath.class)
+	@JaxrsMethodDescribe(value = "지정 Job의 Data 데이터 업데이트.", action = ActionUpdateWithJobPath.class)
 	@PUT
 	@Path("job/{job}/{path}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithJobPath(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								   @JaxrsParameterDescribe("Job标识") @PathParam("job") String job,
-								   @JaxrsParameterDescribe("路径(多层路径以.分割，如person.name)") @PathParam("path") String path, JsonElement jsonElement) {
+								   @JaxrsParameterDescribe("Job 식별자") @PathParam("job") String job,
+								   @JaxrsParameterDescribe("경로(다단계 경로는 .으로 구분, 예: person.name)") @PathParam("path") String path, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithJobPath.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -104,13 +104,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定WorkCompleted的Data数据.", action = ActionUpdateWithWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "지정 WorkCompleted의 Data 데이터 업데이트.", action = ActionUpdateWithWorkCompleted.class)
 	@PUT
 	@Path("workcompleted/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithWorkCompleted(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("完成工作标识") @PathParam("id") String id,
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("완료된 업무 문서 식별자") @PathParam("id") String id,
 			JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -123,14 +123,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定WorkCompleted的Data数据.", action = ActionUpdateWithWorkCompletedPath.class)
+	@JaxrsMethodDescribe(value = "지정 WorkCompleted의 Data 데이터 업데이트.", action = ActionUpdateWithWorkCompletedPath.class)
 	@PUT
 	@Path("workcompleted/{id}/{path}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithWorkCompletedPath(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("完成工作标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("路径(多层路径以.分割，如person.name)") @PathParam("path") String path, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("완료된 업무 문서 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("경로(다단계 경로는 .으로 구분, 예: person.name)") @PathParam("path") String path, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithWorkCompletedPath.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -142,13 +142,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的work添加局部data数据.", action = ActionCreateWithWork.class)
+	@JaxrsMethodDescribe(value = "지정한 work에 부분 data 데이터 추가.", action = ActionCreateWithWork.class)
 	@POST
 	@Path("work/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithWork.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -160,14 +160,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的work添加局部data数据.", action = ActionCreateWithWorkPath.class)
+	@JaxrsMethodDescribe(value = "지정한 work에 부분 data 데이터 추가.", action = ActionCreateWithWorkPath.class)
 	@POST
 	@Path("work/{id}/{path}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithWorkPath(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									@JaxrsParameterDescribe("工作标识") @PathParam("id") String id,
-								   	@JaxrsParameterDescribe("路径(多层路径以.分割，如person.name)") @PathParam("path") String path, JsonElement jsonElement) {
+									@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id,
+								   	@JaxrsParameterDescribe("경로(다단계 경로는 .으로 구분, 예: person.name)") @PathParam("path") String path, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithWorkPath.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -179,13 +179,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的work删除局部data数据.", action = ActionDeleteWithWork.class)
+	@JaxrsMethodDescribe(value = "지정 work의 일부 data 데이터 삭제.", action = ActionDeleteWithWork.class)
 	@POST
 	@Path("work/{id}/delete")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionDeleteWithWork.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -197,14 +197,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的work删除局部data数据.", action = ActionDeleteWithWorkPath.class)
+	@JaxrsMethodDescribe(value = "지정 work의 일부 data 데이터 삭제.", action = ActionDeleteWithWorkPath.class)
 	@POST
 	@Path("work/{id}/{path}/delete")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithWorkPath(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("路径(多层路径以.分割，如person.name)") @PathParam("path") String path, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("경로(다단계 경로는 .으로 구분, 예: person.name)") @PathParam("path") String path, JsonElement jsonElement) {
 		ActionResult<ActionDeleteWithWorkPath.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

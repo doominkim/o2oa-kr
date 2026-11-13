@@ -37,15 +37,15 @@ public class ActionLeaveDurationCalculate extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getPerson())) {
-                throw new ExceptionEmptyParameter("人员标识");
+                throw new ExceptionEmptyParameter("인원 식별자");
             }
             Date startTime = wi.getStartTime();
             Date endTime = wi.getEndTime();
             if (startTime == null) {
-                throw new ExceptionEmptyParameter("开始时间");
+                throw new ExceptionEmptyParameter("시작 시간");
             }
             if (endTime == null) {
-                throw new ExceptionEmptyParameter("结束时间");
+                throw new ExceptionEmptyParameter("종료 시간");
             }
             if (startTime.after(endTime)) {
                 throw new ExceptionDateEndBeforeStartError();
@@ -54,7 +54,7 @@ public class ActionLeaveDurationCalculate extends BaseAction {
             Business business = new Business(emc);
             Person person = business.organization().person().getObject(wi.getPerson(), true);
             if (person == null) {
-                throw new ExceptionNotExistObject("人员 " + wi.getPerson());
+                throw new ExceptionNotExistObject("인원 " + wi.getPerson());
             }
 
             Date startDate = DateTools.floorDate(startTime, 0);
@@ -233,20 +233,20 @@ public class ActionLeaveDurationCalculate extends BaseAction {
 
         private static final long serialVersionUID = 3972136115624287303L;
 
-        @FieldDescribe("人员标识")
+        @FieldDescribe("인원 식별자")
         private String person;
 
-        @FieldDescribe("开始时间，yyyy-MM-dd HH:mm:ss")
+        @FieldDescribe("시작 시간, yyyy-MM-dd HH:mm:ss")
         private Date startTime;
 
-        @FieldDescribe("结束时间，yyyy-MM-dd HH:mm:ss")
+        @FieldDescribe("종료 시간, yyyy-MM-dd HH:mm:ss")
         private Date endTime;
 
 
-        @FieldDescribe("是否排除节假休息日，默认true；传false时不排除节假休息日")
+        @FieldDescribe("공휴일·휴일 제외 여부, 기본값 true. false이면 공휴일·휴일을 제외하지 않음")
         private Boolean excludeRestDay;
 
-        @FieldDescribe("普通周末是否算请假时长，默认false；传true时普通周末按最近过去的工作日班次计算，法定节假日仍排除")
+        @FieldDescribe("일반 주말을 휴가 시간에 포함할지 여부, 기본값 false. true이면 일반 주말은 가장 최근 지난 근무일 교대로 계산하고 법정 공휴일은 계속 제외")
         private Boolean includeWeekend;
 
         public String getPerson() {
@@ -294,19 +294,19 @@ public class ActionLeaveDurationCalculate extends BaseAction {
 
         private static final long serialVersionUID = 2373093028785508444L;
 
-        @FieldDescribe("自然日天数")
+        @FieldDescribe("달력일 일수")
         private Integer totalDays = 0;
 
-        @FieldDescribe("实际请假天数")
+        @FieldDescribe("실제 휴가 일수")
         private Double duration = 0.0;
 
-        @FieldDescribe("实际请假分钟数")
+        @FieldDescribe("실제 휴가 분 수")
         private Long durationMinutes = 0L;
 
-        @FieldDescribe("实际请假的日期列表，yyyy-MM-dd")
+        @FieldDescribe("실제 휴가 날짜 목록, yyyy-MM-dd")
         private List<String> leaveDateList = new ArrayList<>();
 
-        @FieldDescribe("休息日的日期列表，yyyy-MM-dd")
+        @FieldDescribe("휴일 날짜 목록, yyyy-MM-dd")
         private List<String> restDateList = new ArrayList<>();
 
         public Integer getTotalDays() {

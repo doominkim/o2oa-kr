@@ -43,16 +43,16 @@ public class BaseAction extends StandardJaxrsAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 
-			//进行数据库持久化操作
+			//데이터베이스 영속화 작업 수행
 			emc.beginTransaction( Document.class );
 			document = business.getDocumentFactory().get(id);
 			if (null != document) {
-				//修改文档状态
+				//문서 상태 수정
 				document.setDocStatus( stauts );
 				if(Document.DOC_STATUS_PUBLISH.equals(stauts)) {
 					document.setPublishTime(new Date());
 				}
-				//保存文档信息
+				//문서 정보 저장
 				emc.check( document, CheckPersistType.all);
 			}
 			emc.commit();
@@ -70,7 +70,7 @@ public class BaseAction extends StandardJaxrsAction {
 			if( array.length == 3 ){
 				target = sb.append(array[1]).append("@").append(array[2]).toString();
 			}else if( array.length == 2 ){
-				//2段
+				//2단계
 				target = sb.append(array[0]).append("@").append(array[1]).toString();
 			}else{
 				target = array[0];
@@ -89,7 +89,7 @@ public class BaseAction extends StandardJaxrsAction {
 				if (array.length == 3) {
 					target = sb.append(array[1]).append("@").append(array[2]).toString();
 				} else if (array.length == 2) {
-					//2段
+					//2단계
 					target = sb.append(array[0]).append("@").append(array[1]).toString();
 				} else {
 					target = array[0];

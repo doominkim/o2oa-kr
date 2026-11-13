@@ -59,8 +59,8 @@ class ActionListWithController extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @Schema(description = "指定人员.")
-        @FieldDescribe("指定人员.")
+        @Schema(description = "지정 사용자.")
+        @FieldDescribe("지정 사용자.")
         private List<String> personList = new ArrayList<>();
 
         public List<String> getPersonList() {

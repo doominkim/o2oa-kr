@@ -13,7 +13,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.schedule.AbstractJob;
 
 /**
- * 定期对用户手机打卡记录进行分析
+ * 사용자 모바일 출퇴근 기록 정기 분석
  */
 public class MobileRecordAnalyseTask extends AbstractJob {
 

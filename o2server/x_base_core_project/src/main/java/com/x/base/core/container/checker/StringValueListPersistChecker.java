@@ -180,7 +180,7 @@ public class StringValueListPersistChecker extends AbstractChecker {
 				Root<? extends JpaObject> root = cq.from(citationExist.type());
 				Predicate p = cb.disjunction();
 				for (String str : citationExist.fields()) {
-					/* 如果值过长db2会报错 302 22001 */
+					/* 값이 너무 길면 db2에서 302 22001 오류 발생 */
 					if (JpaObjectTools.withinDefinedLength(value, citationExist.type(), str)) {
 						Path<?> path = root.get(str);
 						if (JpaObjectTools.isList(path)) {
@@ -223,7 +223,7 @@ public class StringValueListPersistChecker extends AbstractChecker {
 				Root<? extends JpaObject> root = cq.from(citationNotExist.type());
 				Predicate p = cb.disjunction();
 				for (String str : citationNotExist.fields()) {
-					/* 如果值过长db2会报错 302 22001 */
+					/* 값이 너무 길면 db2에서 302 22001 오류 발생 */
 					if (JpaObjectTools.withinDefinedLength(value, citationNotExist.type(), str)) {
 						Path<?> path = root.get(str);
 						if (JpaObjectTools.isList(path)) {

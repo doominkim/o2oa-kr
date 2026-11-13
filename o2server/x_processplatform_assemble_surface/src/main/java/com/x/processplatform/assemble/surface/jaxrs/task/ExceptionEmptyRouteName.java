@@ -7,6 +7,6 @@ class ExceptionEmptyRouteName extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionEmptyRouteName() {
-		super("路由选择不能为空.");
+		super("처리 선택은 비워 둘 수 없습니다.");
 	}
 }

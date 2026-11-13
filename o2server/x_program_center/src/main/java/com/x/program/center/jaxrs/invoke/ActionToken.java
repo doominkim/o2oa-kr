@@ -37,7 +37,7 @@ class ActionToken extends BaseAction {
 
 		private static final long serialVersionUID = -251331390296713913L;
 
-		@FieldDescribe("鉴权认证接入名称")
+		@FieldDescribe("인증 접속 이름")
 		private String client;
 
 		protected String getClient() {

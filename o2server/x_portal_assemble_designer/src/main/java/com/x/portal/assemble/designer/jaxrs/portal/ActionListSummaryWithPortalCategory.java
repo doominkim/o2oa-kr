@@ -39,7 +39,7 @@ class ActionListSummaryWithPortalCategory extends BaseAction {
 			ActionResult<List<Wo>> result = new ActionResult<>();
 			Business business = new Business(emc);
 			List<String> ids = this.listEditableWithPortalCategory(business, effectivePerson, portalCategory);
-			// 由于有多值字段所以需要全部取出
+			// 다중 값 필드가 있어 전체를 조회해야 함
 			List<Wo> wos = Wo.copier.copy(emc.list(Portal.class, ids));
 			for (Wo wo : wos) {
 				List<String> os = business.page().listWithPortal(wo.getId());

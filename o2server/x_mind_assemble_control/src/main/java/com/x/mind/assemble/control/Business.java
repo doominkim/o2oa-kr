@@ -38,7 +38,7 @@ public class Business {
 	}
 	
 	/**
-	 * 脑图版本信息操作数据服务工厂类
+	 * 마인드맵 버전 정보 데이터 서비스 팩토리 클래스
 	 * @return
 	 * @throws Exception
 	 */
@@ -50,7 +50,7 @@ public class Business {
 	}
 	
 	/**
-	 * 脑图缩略图操作数据服务工厂类
+	 * 마인드맵 썸네일 데이터 서비스 팩토리 클래스
 	 * @return
 	 * @throws Exception
 	 */
@@ -62,7 +62,7 @@ public class Business {
 	}
 	
 	/**
-	 * 脑图分享信息数据库操作工厂类
+	 * 마인드맵 공유 정보 데이터베이스 작업 팩토리 클래스
 	 * @return
 	 * @throws Exception
 	 */
@@ -74,7 +74,7 @@ public class Business {
 	}
 	
 	/**
-	 * 脑图基础信息数据库操作工厂类
+	 * 마인드맵 기본 정보 데이터베이스 작업 팩토리 클래스
 	 * @return
 	 * @throws Exception
 	 */
@@ -86,7 +86,7 @@ public class Business {
 	}
 	
 	/**
-	 * 脑图内容信息数据库操作工厂类
+	 * 마인드맵 내용 정보 데이터베이스 작업 팩토리 클래스
 	 * @return
 	 * @throws Exception
 	 */
@@ -98,7 +98,7 @@ public class Business {
 	}
 	
 	/**
-	 * 脑图文件夹信息数据库操作工厂类
+	 * 마인드맵 폴더 정보 데이터베이스 작업 팩토리 클래스
 	 * @return
 	 * @throws Exception
 	 */
@@ -110,7 +110,7 @@ public class Business {
 	}
 	
 	/**
-	 * 回收站脑图信息数据库操作工厂类
+	 * 휴지통 마인드맵 정보 데이터베이스 작업 팩토리 클래스
 	 * @return
 	 * @throws Exception
 	 */

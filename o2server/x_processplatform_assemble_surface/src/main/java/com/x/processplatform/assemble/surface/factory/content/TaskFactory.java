@@ -145,7 +145,7 @@ public class TaskFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 统计指定人员在指定应用的待办,数量
+	 * 지정 앱에서 지정 사용자의 결재 대기 수 집계
 	 */
 	public Long countWithPersonApplication(String person, String application) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Task.class);
@@ -179,7 +179,7 @@ public class TaskFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 
-	/** 原用于前台将task 绑定到workLog 现废弃 */
+	/** 기존에 프런트에서 task를 workLog에 연결하던 용도, 현재 폐기 */
 	// public <W extends WorkLog> List<Task> listTask(W workLog) throws Exception {
 	// List<String> ids =
 	// this.listWithActivityToken(workLog.getFromActivityToken());

@@ -74,19 +74,19 @@ class ActionSimulate extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("过滤")
+		@FieldDescribe("필터")
 		private List<FilterEntry> filterList = new TreeList<>();
 
-		@FieldDescribe("参数")
+		@FieldDescribe("파라미터")
 		private Map<String, String> parameter = new HashMap<>();
 
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Integer count = 0;
 
-		@FieldDescribe("限定结果集")
+		@FieldDescribe("결과 집합 제한")
 		public List<String> bundleList = new TreeList<>();
 
-		@FieldDescribe("秘钥串，结果集不为空时必须传.")
+		@FieldDescribe("키 문자열, 결과 집합이 비어 있지 않으면 반드시 전달.")
 		private String key;
 
 		public List<FilterEntry> getFilterList() {

@@ -11,13 +11,13 @@ public class ActionProcessingWi extends GsonPropertyObject {
 
 	public static final String PROCESSINGTYPE_RESET = "reset";
 
-	@FieldDescribe("流转类型.")
+	@FieldDescribe("흐름 유형.")
 	private String processingType;
 
-	@FieldDescribe("路由决策.")
+	@FieldDescribe("경로 결정.")
 	private String routeName;
 
-	@FieldDescribe("待办意见.")
+	@FieldDescribe("결재 대기 의견.")
 	private String opinion;
 
 	public String getProcessingType() {

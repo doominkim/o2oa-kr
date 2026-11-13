@@ -9,6 +9,6 @@ class ExceptionNameNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionNameNotExist(String name) {
-		super("用户:{}不存在.",Objects.toString(name) );
+		super("사용자: {}이(가) 없습니다.",Objects.toString(name) );
 	}
 }

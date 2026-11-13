@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class WritingBoard 手写板组件。
- * @o2cn 手写板
+/** @class WritingBoard 손글씨 패드 컴포넌트.
+ * @o2cn 손글씨 패드
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var writingBoard = this.form.get("name"); //获取组件
- * //方法2
- * var writingBoard = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var writingBoard = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var writingBoard = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -37,7 +37,7 @@ MWF.xApplication.process.Xform.WritingBoard = MWF.APPWritingBoard = new Class(
                 return '';
             }
 
-            if ( this.isSectionMergeRead() ) { //区段合并显示
+            if ( this.isSectionMergeRead() ) { //구간 병합 표시
                 this._loadMergeReadNode();
             }else{
                 // if( this.isSectionMergeEdit() ){
@@ -98,22 +98,22 @@ MWF.xApplication.process.Xform.WritingBoard = MWF.APPWritingBoard = new Class(
             return {"value": [value], "text": [value]};
         },
         /**
-         * @summary 判断组件值是否为空.
+         * @summary 컴포넌트 값이 비어 있는지 판단.
          * @example
          * if( this.form.get('fieldId').isEmpty() ){
-         *     this.form.notice('请进行手写', 'warn');
+         *     this.form.notice('손글씨를 입력하십시오', 'warn');
          * }
-         * @return {Boolean} 值是否为空.
+         * @return {Boolean} 값이 비어 있는지 여부.
          */
         isEmpty: function () {
             return !this.getData();
         },
         /**
-         * 获取手写图片的ID。
-         * @summary 获取手写图片的ID。
+         * 손글씨 이미지 ID 조회.
+         * @summary 손글씨 이미지 ID 조회.
          * @example
-         * var id = this.form.get('fieldId').getData(); //获取手写图片的ID
-         * var url = MWF.xDesktop.getImageSrc( id ); //获取图片的url
+         * var id = this.form.get('fieldId').getData(); //손글씨 이미지 ID 조회
+         * var url = MWF.xDesktop.getImageSrc( id ); //이미지 url 조회
          */
         getData: function (data) {
             return this._getBusinessData() || "";
@@ -142,7 +142,7 @@ MWF.xApplication.process.Xform.WritingBoard = MWF.APPWritingBoard = new Class(
             }
         },
         /**
-         * @summary 弹出手写板.
+         * @summary 손글씨 패드 띄우기.
          * @example
          * this.form.get("fieldId").handwriting();
          */
@@ -176,7 +176,7 @@ MWF.xApplication.process.Xform.WritingBoard = MWF.APPWritingBoard = new Class(
         },
         createHandwriting: function () {
             /**
-             * @summary 手写板容器.
+             * @summary 손글씨 패드 컨테이너.
              * @member {Element}
              */
             this.handwritingNode = new Element("div", {"styles": this.form.css.handwritingNode}).inject(this.node, "after");
@@ -253,9 +253,9 @@ MWF.xApplication.process.Xform.WritingBoard = MWF.APPWritingBoard = new Class(
                         "save", "|",
                         "undo",
                         "redo", "|",
-                        "eraser", //橡皮
-                        "input", //输入法
-                        "pen", "|", //笔画
+                        "eraser", //지우개
+                        "input", //입력기
+                        "pen", "|", //획
                         "eraserRadius",
                         "size",
                         "color",
@@ -308,11 +308,11 @@ MWF.xApplication.process.Xform.WritingBoard = MWF.APPWritingBoard = new Class(
                 }
 
                 /**
-                 * @summary 手写板组件.
+                 * @summary 손글씨 패드 컴포넌트.
                  * @member {o2.widget.Tablet}
                  * @example
-                 * var tablet = this.form.get("fieldId").tablet; //获取手写板
-                 * tablet.cancel(); //关闭手写板
+                 * var tablet = this.form.get("fieldId").tablet; //손글씨 패드 조회
+                 * tablet.cancel(); //손글씨 패드 닫기
                  */
                 this.tablet = new MWF.widget.Tablet(this.handwritingAreaNode, opt, null);
                 this.tablet.load();

@@ -31,19 +31,19 @@ public class ProcessingAttributes extends GsonPropertyObject {
 
 	private Integer loop = 1;
 
-	@FieldDescribe("强制从arrive开始")
+	@FieldDescribe("arrive부터 강제 시작")
 	private Boolean forceJoinAtArrive;
 
-	@FieldDescribe("强制从inquire开始")
+	@FieldDescribe("inquire부터 강제 시작")
 	private Boolean forceJoinAtInquire;
 
-	@FieldDescribe("忽略授权的身份")
+	@FieldDescribe("위임된 신분 무시")
 	private List<String> ignoreEmpowerIdentityList = new ArrayList<>();
 
-	@FieldDescribe("当前处理人")
+	@FieldDescribe("현재 처리자")
 	private String person;
 
-	@FieldDescribe("当前处理人身份")
+	@FieldDescribe("현재 처리자 신분")
 	private String identity;
 
 	private SignalStack signalStack = new SignalStack();

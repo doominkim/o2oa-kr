@@ -16,160 +16,160 @@ abstract class BaseAction extends StandardJaxrsAction {
 		public static final String TYPE_READ = "read";
 		public static final String TYPE_READ_COMPLETED = "readCompleted";
 
-		@FieldDescribe("待阅或者已阅标识.")
+		@FieldDescribe("열람 대기 또는 열람 완료 식별자.")
 		private String id;
 
-		@FieldDescribe("类型:read|readCompleted.")
+		@FieldDescribe("유형:read|readCompleted.")
 		private String type;
 
-		@FieldDescribe("任务标识.")
+		@FieldDescribe("작업 식별자.")
 		private String job;
 
-		@FieldDescribe("工作标识.")
+		@FieldDescribe("업무 문서 식별자.")
 		private String work;
 
-		@FieldDescribe("已完成工作标识.")
+		@FieldDescribe("완료된 업무 문서 식별자.")
 		private String workCompleted;
 
-		@FieldDescribe("工作是否已完成.")
+		@FieldDescribe("업무 문서 완료 여부.")
 		private Boolean completed;
 
-		@FieldDescribe("待阅标识.")
+		@FieldDescribe("열람 대기 식별자.")
 		private String read;
 
-		@FieldDescribe("标题.")
+		@FieldDescribe("제목.")
 		private String title;
 
-		@FieldDescribe("应用标识.")
+		@FieldDescribe("앱 식별자.")
 		private String application;
 
-		@FieldDescribe("应用名称.")
+		@FieldDescribe("앱 이름.")
 		private String applicationName;
 
-		@FieldDescribe("应用别名.")
+		@FieldDescribe("앱 별칭.")
 		private String applicationAlias;
 
-		@FieldDescribe("流程标识.")
+		@FieldDescribe("프로세스 식별자.")
 		private String process;
 
-		@FieldDescribe("流程名称.")
+		@FieldDescribe("프로세스 이름.")
 		private String processName;
 
-		@FieldDescribe("流程别名.")
+		@FieldDescribe("프로세스 별칭.")
 		private String processAlias;
 
-		@FieldDescribe("编号.")
+		@FieldDescribe("번호.")
 		private String serial;
 
-		@FieldDescribe("当前处理人.")
+		@FieldDescribe("현재 처리자.")
 		private String person;
 
-		@FieldDescribe("当前处理人身份.")
+		@FieldDescribe("현재 처리자 신분.")
 		private String identity;
 
-		@FieldDescribe("当前处理人所在组织.")
+		@FieldDescribe("현재 처리자 소속 조직.")
 		private String unit;
 
-		@FieldDescribe("处理意见.")
+		@FieldDescribe("처리 의견.")
 		protected String opinion;
 
-		@FieldDescribe("活动标识.")
+		@FieldDescribe("활동 식별자.")
 		private String activity;
 
-		@FieldDescribe("活动名称.")
+		@FieldDescribe("활동 이름.")
 		private String activityName;
 
-		@FieldDescribe("活动别名.")
+		@FieldDescribe("활동 별칭.")
 		private String activityAlias;
 
-		@FieldDescribe("活动说明.")
+		@FieldDescribe("활동 설명.")
 		private String activityDescription;
 
-		@FieldDescribe("活动类型.")
+		@FieldDescribe("활동 유형.")
 		private ActivityType activityType;
 
-		@FieldDescribe("活动Token.")
+		@FieldDescribe("활동 Token.")
 		private String activityToken;
 
-		@FieldDescribe("创建人")
+		@FieldDescribe("생성자")
 		private String creatorPerson;
 
-		@FieldDescribe("创建人Identity")
+		@FieldDescribe("작성자 Identity")
 		private String creatorIdentity;
 
-		@FieldDescribe("创建人组织")
+		@FieldDescribe("작성자 조직")
 		private String creatorUnit;
 
-		@FieldDescribe("开始时间.")
+		@FieldDescribe("시작 시간.")
 		private Date startTime;
 
-		@FieldDescribe("用于在Filter中分类使用.")
+		@FieldDescribe("Filter에서 분류에 사용.")
 		private String startTimeMonth;
 
-		@FieldDescribe("read转成readCompleted的完成时间,也就是任务的完成时间.")
+		@FieldDescribe("read가 readCompleted로 전환된 완료 시간, 즉 작업 완료 시간.")
 		private Date completedTime;
 
-		@FieldDescribe("read转成readCompleted的完成月份,也就是任务的完成时间,用于filter过滤..")
+		@FieldDescribe("read가 readCompleted로 전환된 완료 월, 즉 작업 완료 시간, filter 필터링에 사용..")
 		private String completedTimeMonth;
 
-		@FieldDescribe("工作时长(分钟数).")
+		@FieldDescribe("업무 소요 시간(분).")
 		private Long duration;
 
-		@FieldDescribe("当前活动名称.")
+		@FieldDescribe("현재 활동 이름.")
 		private String currentActivityName;
 
-		@FieldDescribe("业务数据String值01.")
+		@FieldDescribe("업무 데이터 String 값01.")
 		private String stringValue01;
 
-		@FieldDescribe("业务数据String值02.")
+		@FieldDescribe("업무 데이터 String 값02.")
 		private String stringValue02;
 
-		@FieldDescribe("业务数据String值03.")
+		@FieldDescribe("업무 데이터 String 값03.")
 		private String stringValue03;
 
-		@FieldDescribe("业务数据String值04.")
+		@FieldDescribe("업무 데이터 String 값04.")
 		private String stringValue04;
 
-		@FieldDescribe("业务数据String值05.")
+		@FieldDescribe("업무 데이터 String 값05.")
 		private String stringValue05;
 
-		@FieldDescribe("业务数据String值06.")
+		@FieldDescribe("업무 데이터 String 값06.")
 		private String stringValue06;
 
-		@FieldDescribe("业务数据Boolean值01.")
+		@FieldDescribe("업무 데이터 Boolean 값01.")
 		private Boolean booleanValue01;
 
-		@FieldDescribe("业务数据Boolean值02.")
+		@FieldDescribe("업무 데이터 Boolean 값02.")
 		private Boolean booleanValue02;
 
-		@FieldDescribe("业务数据Double值01.")
+		@FieldDescribe("업무 데이터 Double 값01.")
 		private Double doubleValue01;
 
-		@FieldDescribe("业务数据Double值02.")
+		@FieldDescribe("업무 데이터 Double 값02.")
 		private Double doubleValue02;
 
-		@FieldDescribe("业务数据Long值01.")
+		@FieldDescribe("업무 데이터 Long 값01.")
 		private Long longValue01;
 
-		@FieldDescribe("业务数据Long值02.")
+		@FieldDescribe("업무 데이터 Long 값02.")
 		private Long longValue02;
 
-		@FieldDescribe("业务数据DateTime值01.")
+		@FieldDescribe("업무 데이터 DateTime 값01.")
 		private Date dateTimeValue01;
 
-		@FieldDescribe("业务数据DateTime值02.")
+		@FieldDescribe("업무 데이터 DateTime 값02.")
 		private Date dateTimeValue02;
 
-		@FieldDescribe("业务数据Date值01.")
+		@FieldDescribe("업무 데이터 Date 값01.")
 		private Date dateValue01;
 
-		@FieldDescribe("业务数据Date值02.")
+		@FieldDescribe("업무 데이터 Date 값02.")
 		private Date dateValue02;
 
-		@FieldDescribe("业务数据Time值01.")
+		@FieldDescribe("업무 데이터 Time 값01.")
 		private Date timeValue01;
 
-		@FieldDescribe("业务数据Time值02.")
+		@FieldDescribe("업무 데이터 Time 값02.")
 		private Date timeValue02;
 
 		public String getType() {

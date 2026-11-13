@@ -277,7 +277,7 @@ MWF.ProcessFlow.ResetMobile = new Class({
             return typeOf( item ) === "string" ? item : item.distinguishedName;
         }) : [];
     },
-    selectOnComplete: function (items) { //移动端才执行
+    selectOnComplete: function (items) { //모바일에서만 실행
         // var array = items.map(function (item) {
         //     return item.data;
         // });
@@ -342,8 +342,8 @@ MWF.ProcessFlow.ResetMobile = new Class({
         };
     },
     // loadWidgetItem: function(){
-    //     //this 是 MWF.widget.O2Identity 之类的对象
-    //     var _self = this.field; //这个才是field
+    //     //this는 MWF.widget.O2Identity 같은 객체
+    //     var _self = this.field; //이것이 실제 field
     //     var dn = this.data.distinguishedName;
     //     if( _self.flow.options.mainColorEnable ){
     //         this.node.addClass("mainColor_bg");
@@ -351,8 +351,8 @@ MWF.ProcessFlow.ResetMobile = new Class({
     // },
     removeWidgetItem : function( widget, ev ){
         debugger;
-        //this 是 MWF.widget.O2Identity 之类的对象
-        var _self = this.field; //这个才是field
+        //this는 MWF.widget.O2Identity 같은 객체
+        var _self = this.field; //이것이 실제 field
         var dn = this.data.distinguishedName;
         var data = _self.orgData;
         var index;
@@ -373,8 +373,8 @@ MWF.ProcessFlow.AddTaskMobile = new Class({
         return this.flow.path+this.flow.options.style+"/addTask.html";
     },
     setQuickData: function( data ){
-        if(this.position)this.position.setValue( data.routeId === "before" ? "true" : null ); //前后加签存在 routeId
-        if(this.mode)this.mode.setValue( data.routeGroup || null ); //单人、并行、串行存在 routeGroup
+        if(this.position)this.position.setValue( data.routeId === "before" ? "true" : null ); //사전·사후 추가 결재에는 routeId 존재
+        if(this.mode)this.mode.setValue( data.routeGroup || null ); //단일·병렬·직렬에는 routeGroup 존재
         if(this.opinion)this.opinion.setValue( data.opinion || "" );
         this.orgData = data.organizations ? (data.organizations.default || []) : [];
         this.orgContent.empty();
@@ -397,7 +397,7 @@ MWF.ProcessFlow.AddTaskMobile = new Class({
                 text: this.lp.parallel,
                 value: "parallel"
             }],
-            value: this.quickData.mode || this.businessData.activity.defaultAddTaskMode || "single" //默认单人
+            value: this.quickData.mode || this.businessData.activity.defaultAddTaskMode || "single" //기본 단일 사용자
         });
         this.mode.load();
 
@@ -405,7 +405,7 @@ MWF.ProcessFlow.AddTaskMobile = new Class({
         if( this.quickData.routeId ){
             position = (this.quickData.routeId === "before") ? "true" : "false"
         }else{
-            position = this.businessData.activity.defaultAddTaskType === 'before' ? 'true' :"false"; //默认为后加签
+            position = this.businessData.activity.defaultAddTaskType === 'before' ? 'true' :"false"; //기본값은 사후 추가 결재
         }
         this.position = new MWF.ProcessFlow.widget.Radio2(this.positionArea, this.flow, {
             activeIcon: "o2icon-checkbox",
@@ -465,7 +465,7 @@ MWF.ProcessFlow.AddTaskMobile = new Class({
             return typeOf( item ) === "string" ? item : item.distinguishedName;
         }) : [];
     },
-    selectOnComplete: function (items) { //移动端才执行
+    selectOnComplete: function (items) { //모바일에서만 실행
         // var array = items.map(function (item) {
         //     return item.data;
         // });
@@ -530,8 +530,8 @@ MWF.ProcessFlow.AddTaskMobile = new Class({
         };
     },
     // loadWidgetItem: function(){
-    //     //this 是 MWF.widget.O2Identity 之类的对象
-    //     var _self = this.field; //这个才是field
+    //     //this는 MWF.widget.O2Identity 같은 객체
+    //     var _self = this.field; //이것이 실제 field
     //     var dn = this.data.distinguishedName;
     //     if( _self.flow.options.mainColorEnable ){
     //         this.node.addClass("mainColor_bg");
@@ -539,8 +539,8 @@ MWF.ProcessFlow.AddTaskMobile = new Class({
     // },
     removeWidgetItem : function( widget, ev ){
         debugger;
-        //this 是 MWF.widget.O2Identity 之类的对象
-        var _self = this.field; //这个才是field
+        //this는 MWF.widget.O2Identity 같은 객체
+        var _self = this.field; //이것이 실제 field
         var dn = this.data.distinguishedName;
         var data = _self.orgData;
         var index;
@@ -598,7 +598,7 @@ MWF.ProcessFlow.GoBackMobile = new Class({
                 text: this.lp.goBackActivityWayJump,
                 value: "jump"
             }],
-            value: "step", //默认为单人
+            value: "step", //기본값은 단일 사용자
             onLoad: function () {}
         });
         wayRadio.load();
@@ -866,7 +866,7 @@ MWF.ProcessFlow.ProcessorMobile = new Class({
                 defaultRoute = route.id;
                 this.options.defaultRoute = "";
                 isSelectedDefault = true;
-            }else if ( !isSelectedDefault && (visibleRouteConfigList.length === 1 || route.sole )) { //sole表示优先路由
+            }else if ( !isSelectedDefault && (visibleRouteConfigList.length === 1 || route.sole )) { //sole은 우선 경로를 의미
                 defaultRoute = route.id;
             }
         }.bind(this));
@@ -1018,7 +1018,7 @@ MWF.ProcessFlow.ProcessorMobile = new Class({
                         this.flow.noticeError( validation, this.node );
                         return false;
                     } else {
-                        //"路由校验失败"
+                        //"경로 검증에 실패했습니다."
                         this.flow.noticeError(
                             MWF.xApplication.process.Work.LP.routeValidFailure,
                             this.node
@@ -1168,7 +1168,7 @@ MWF.ProcessFlow.Processor.OrgMobile = new Class({
             "onClose": this.selectOnClose.bind(this)
         };
     },
-    selectOnComplete: function (items) { //移动端才执行
+    selectOnComplete: function (items) { //모바일에서만 실행
         var array = [];
         items.each(function (item) {
             array.push(item.data);
@@ -1192,7 +1192,7 @@ MWF.ProcessFlow.Processor.OrgMobile = new Class({
             this.fireEvent("select", [items, values]);
         }.bind(this))
     },
-    selectOnCancel: function () { //移动端才执行
+    selectOnCancel: function () { //모바일에서만 실행
         //this.validation();
     },
     selectOnClose: function () {
@@ -1265,8 +1265,8 @@ MWF.ProcessFlow.Processor.OrgMobile = new Class({
         };
     },
     // loadWidgetItem: function(){
-    //     //this 是 MWF.widget.O2Identity 之类的对象
-    //     var _self = this.field; //这个才是field
+    //     //this는 MWF.widget.O2Identity 같은 객체
+    //     var _self = this.field; //이것이 실제 field
     //     var dn = this.data.distinguishedName;
     //     if( _self.processor.flow.options.mainColorEnable ){
     //         this.node.addClass("mainColor_bg");
@@ -1274,8 +1274,8 @@ MWF.ProcessFlow.Processor.OrgMobile = new Class({
     // },
     removeWidgetItem : function( widget, ev ){
         debugger;
-        //this 是 MWF.widget.O2Identity 之类的对象
-        var _self = this.field; //这个才是field
+        //this는 MWF.widget.O2Identity 같은 객체
+        var _self = this.field; //이것이 실제 field
         var dn = this.data.distinguishedName;
         var data = _self._getBusinessData();
         var index;
@@ -1433,7 +1433,7 @@ MWF.ProcessFlow.widget.OpinionMobile = new Class({
     createHandwriting: function () {
         this.handwritingMask.inject( $(document.body) );
         this.handwritingNode.show().inject(this.handwritingMask, "after");
-        //兼容以前的默认高宽
+        //이전 기본 높이·너비와 호환
         var bodySize = $(document.body).getSize();
         var x = bodySize.x;
         var y = bodySize.y;

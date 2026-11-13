@@ -99,7 +99,7 @@ MWF.xApplication.query.StatDesigner.Main = new Class({
         }.bind(this), null, false);
     },
 
-    //列示所有视图列表
+    //모든 뷰 목록 조회
     createListViewItem: function(view, isNew){
         var _self = this;
         var listViewItem = new Element("div", {"styles": this.css.listViewItem}).inject(this.viewListAreaNode, (isNew) ? "top": "bottom");
@@ -125,7 +125,7 @@ MWF.xApplication.query.StatDesigner.Main = new Class({
         this.itemArray.push(itemObj);
         this.checkShow(itemObj);
     },
-    //打开视图
+    //뷰 열기
     loadViewByData: function(node, e){
         var view = node.retrieve("view");
         if (!view.isNewView){
@@ -291,7 +291,7 @@ MWF.xApplication.query.StatDesigner.Stat.NewNameForm = new Class({
             id = queryData.id;
         }else{
             id = this.data.query;
-            //data.query 和 data.queryName 还是传进来的值
+            //data.query와 data.queryName은 전달된 값 그대로
         }
         var idList = [];
         var nameList = [];
@@ -315,7 +315,7 @@ MWF.xApplication.query.StatDesigner.Stat.NewNameForm = new Class({
                 data.query = queryData.id;
                 data.queryName = queryData.name;
             }else{
-                //data.query 和 data.queryName 还是传进来的值
+                //data.query와 data.queryName은 전달된 값 그대로
             }
             this.fireEvent("save", [data , function(){
                 this.close();

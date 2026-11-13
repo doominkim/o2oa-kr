@@ -53,14 +53,14 @@ public class ActionReAnalyseWithFilter extends BaseAction {
 		if (check) {
 			if(StringUtils.isEmpty( q_year )){
 				check = false;
-				Exception exception = new ExceptionQueryParameterEmpty("查询打卡信息年份不可以为空");
+				Exception exception = new ExceptionQueryParameterEmpty("조회할 체크 정보의 연도는 비워 둘 수 없습니다");
 				result.error(exception);
 			}
 		}
 		if (check) {
 			if(StringUtils.isEmpty( q_month )){
 				check = false;
-				Exception exception = new ExceptionQueryParameterEmpty("查询打卡信息月份不可以为空");
+				Exception exception = new ExceptionQueryParameterEmpty("조회할 체크 정보의 월은 비워 둘 수 없습니다");
 				result.error(exception);
 			}
 		}
@@ -77,7 +77,7 @@ public class ActionReAnalyseWithFilter extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(e,
-						"系统在根据员工姓名，年份月份查询打卡详细信息ID列表时发生异常！"
+						"직원 이름과 연월로 체크 상세 정보 ID 목록을 조회하는 중 오류가 발생했습니다!"
 						+ "Name:" + q_empName + ", Year:" + q_year + ", Month:" + q_month);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
@@ -88,7 +88,7 @@ public class ActionReAnalyseWithFilter extends BaseAction {
 			if (ListTools.isNotEmpty( ids )) {
 
 				if( ids.size() > 100000 ){
-					Exception exception = new ExceptionAttendanceDetailProcess("需要重新分析的打卡记录条目数量过多，请缩小重新分析的信息范围（一次不超过10万条）。需要分析的打卡信息数量：" + ids.size() );
+					Exception exception = new ExceptionAttendanceDetailProcess("재분석할 체크 기록이 너무 많습니다. 재분석 범위를 줄이십시오(1회 최대 10만 건). 분석할 체크 정보 수:" + ids.size() );
 					result.error(exception);
 				}else{
 					try {
@@ -98,7 +98,7 @@ public class ActionReAnalyseWithFilter extends BaseAction {
 //							ThisApplication.detailAnalyseQueue.send( id );
 						}
 					} catch (Exception e) {
-						Exception exception = new ExceptionAttendanceDetailProcess(e,"将需要重新分析的打卡记录发送到分析队列时发生异常！");
+						Exception exception = new ExceptionAttendanceDetailProcess(e,"재분석할 체크 기록을 분석 대기열로 보내는 중 오류가 발생했습니다!");
 						result.error(exception);
 						logger.error(e, currentPerson, request, null);
 					}
@@ -113,13 +113,13 @@ public class ActionReAnalyseWithFilter extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe( "用于查询的人员：DistinguishedName." )
+		@FieldDescribe( "조회 대상 사용자: DistinguishedName." )
 		private String q_empName;
 
-		@FieldDescribe( "查询的年份." )
+		@FieldDescribe( "조회 연도." )
 		private String q_year;
 
-		@FieldDescribe( "查询的月份." )
+		@FieldDescribe( "조회 월." )
 		private String q_month;
 
 		public String getQ_empName() {

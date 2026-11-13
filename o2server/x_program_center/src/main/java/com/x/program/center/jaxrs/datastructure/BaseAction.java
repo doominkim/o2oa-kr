@@ -33,7 +33,7 @@ import com.x.base.core.project.tools.ListTools;
 abstract class BaseAction extends StandardJaxrsAction {
 
 	/**
-	 * 所有需要加载的应用（按启动顺序）
+	 * 로드할 모든 앱(시작 순서대로)
 	 */
 	static final List<String> OFFICIAL_MODULE_SORTED_TEMPLATE = ListTools.toList(
 			x_general_assemble_control.class.getName(), x_organization_assemble_authentication.class.getName(),

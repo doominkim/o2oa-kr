@@ -77,22 +77,22 @@ class ActionExecuteWithQueryV2 extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("前端指定排序列")
+		@FieldDescribe("프런트 지정 정렬 열")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "SelectEntry", fieldValue = "{\"orderType\": \"\",\"column\": \"\",\"displayName\": \"\",\"path\": \"\"}")
 		private List<SelectEntry> orderList;
 
-		@FieldDescribe("过滤")
+		@FieldDescribe("필터")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "FilterEntry", fieldValue = "{value='',otherValue='',path='',formatType='',logic='',comparison=''}", fieldSample = "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}")
 		private List<FilterEntry> filterList;
 
-		@FieldDescribe("指定字段列表")
+		@FieldDescribe("지정 필드 목록")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "SelectEntry", fieldValue = "{\"orderType\": \"\",\"column\": \"\",\"displayName\": \"\",\"path\": \"\"}")
 		private SelectEntries selectList;
 
-		@FieldDescribe("参数")
+		@FieldDescribe("파라미터")
 		private Map<String, String> parameter = new HashMap<>();
 
-		@FieldDescribe("模糊查询内容.")
+		@FieldDescribe("유사 검색 내용.")
 		private String searchKey;
 
 		public List<FilterEntry> getFilterList() {

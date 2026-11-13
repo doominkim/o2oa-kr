@@ -64,54 +64,54 @@ public class ThisApplication {
 			context().startQueue(centerQueue);
 			context().startQueue(logQueue);
 
-			// 政务钉钉拉入同步
+			// 정무 DingTalk 가져오기 동기화
 			if (BooleanUtils.isTrue(Config.zhengwuDingding().getEnable())) {
-				// 启动同步任务
+				// 동기화 작업 시작
 				context().scheduleLocal(ZhengwuDingdingSyncOrganization.class, Config.zhengwuDingding().getSyncCron());
-				// 添加一个强制同步任务
+				// 강제 동기화 작업 하나 추가
 				context().scheduleLocal(ZhengwuDingdingSyncOrganizationTrigger.class,
 						Config.zhengwuDingding().getForceSyncCron());
 			}
-			// 企业微信拉入同步
+			// WeCom 가져오기 동기화
 			if (BooleanUtils.isTrue(Config.qiyeweixin().getEnable())
 					&& StringUtils.isNotBlank(Config.qiyeweixin().getForceSyncCron())) {
-				// 启动同步任务
+				// 동기화 작업 시작
 				context().scheduleLocal(QiyeweixinSyncOrganization.class, Config.qiyeweixin().getSyncCron());
-				// 添加一个强制同步任务
+				// 강제 동기화 작업 하나 추가
 				context().scheduleLocal(QiyeweixinSyncOrganizationTrigger.class,
 						Config.qiyeweixin().getForceSyncCron());
 			}
-			// 钉钉同步
+			// DingTalk 동기화
 			if (BooleanUtils.isTrue(Config.dingding().getEnable())
 					&& StringUtils.isNotBlank(Config.dingding().getForceSyncCron())) {
-				// 启动同步任务
+				// 동기화 작업 시작
 				context().scheduleLocal(DingdingSyncOrganization.class, Config.dingding().getSyncCron());
-				// 添加一个强制同步任务
+				// 강제 동기화 작업 하나 추가
 				context().scheduleLocal(DingdingSyncOrganizationTrigger.class, Config.dingding().getForceSyncCron());
 			}
-			// WeLink同步
+			// WeLink 동기화
 			if (BooleanUtils.isTrue(Config.weLink().getEnable())
 					&& StringUtils.isNotBlank(Config.weLink().getForceSyncCron())) {
-				// 启动同步任务
+				// 동기화 작업 시작
 				context().scheduleLocal(WeLinkSyncOrganization.class, Config.weLink().getSyncCron());
-				// 添加一个强制同步任务
+				// 강제 동기화 작업 하나 추가
 				context().scheduleLocal(WeLinkSyncOrganizationTrigger.class, Config.weLink().getForceSyncCron());
 			}
-			// 移动办公同步
+			// 모바일 오피스 동기화
 			if (StringUtils.isNotBlank(Config.andFx().getForceSyncCron())) {
 				context().scheduleLocal(AndFxSyncOrganization.class, Config.weLink().getForceSyncCron());
 			}
 
-			// 运行间隔由300秒缩减到120秒
+			// 실행 간격 300초에서 120초로 단축
 			context().scheduleLocal(FireSchedule.class, 180, 120);
 			context().scheduleLocal(CleanupCode.class, 10, 60 * 30);
 			context().scheduleLocal(Cleanup.class, 10, 60 * 30);
 			context().scheduleLocal(CollectPerson.class, 10, 60 * 60 * 2);
-			// 运行间隔由60秒缩减到30秒
+			// 실행 간격 60초에서 30초로 단축
 			context().scheduleLocal(TriggerAgent.class, 150, 30);
-			/* 行政区域每周更新一次 */
+			/* 행정 구역 주 1회 업데이트 */
 			context().scheduleLocal(Area.class, 300, 60 * 60 * 24 * 7);
-			// 升级更新,补充activity的unique值
+			// 업그레이드 업데이트, activity의 unique 값 보충
 			context.scheduleLocal(CreateActivityUnique.class);
 		} catch (Exception e) {
 			e.printStackTrace();

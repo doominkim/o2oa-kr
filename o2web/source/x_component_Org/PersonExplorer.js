@@ -642,7 +642,7 @@ MWF.xApplication.Org.PersonExplorer.PersonContent.TitleInfor = new Class({
 
             this.lockPersonAction = new Element("div", {"styles": this.style.titleInforUnlockPersonNode, "text": this.item.explorer.app.lp.lockPerson}).inject(this.nameNode, "before");
             this.lockPersonAction.addEvent("click", function(e){this.lockPerson(e);}.bind(this));
-            if( this.data.status === '1' )this.lockPersonAction.hide(); //data.status = 1 表示已锁定
+            if( this.data.status === '1' )this.lockPersonAction.hide(); //data.status = 1 은 잠김을 의미
 
             this.unlockPersonAction = new Element("div", {"styles": this.style.titleInforUnlockPersonNode, "text": this.item.explorer.app.lp.unlockPerson}).inject(this.nameNode, "before");
             this.unlockPersonAction.addEvent("click", function(e){this.unlockPerson(e);}.bind(this));
@@ -650,7 +650,7 @@ MWF.xApplication.Org.PersonExplorer.PersonContent.TitleInfor = new Class({
 
             this.banPersonAction = new Element("div", {"styles": this.style.titleInforUnlockPersonNode, "text": this.item.explorer.app.lp.banPerson}).inject(this.nameNode, "before");
             this.banPersonAction.addEvent("click", function(e){this.banPerson(e);}.bind(this));
-            if( this.data.status === '2' )this.banPersonAction.hide(); //data.status = 2 表示已禁用
+            if( this.data.status === '2' )this.banPersonAction.hide(); //data.status = 2 는 비활성화를 의미
 
             this.unbanPersonAction = new Element("div", {"styles": this.style.titleInforUnlockPersonNode, "text": this.item.explorer.app.lp.unbanPerson}).inject(this.nameNode, "before");
             this.unbanPersonAction.addEvent("click", function(e){this.unbanPerson(e);}.bind(this));

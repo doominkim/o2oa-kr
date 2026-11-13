@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 MWF.require("MWF.widget.Tab", null, false);
-/** @class Tab 分页组件。
- * @o2cn 分页组件
+/** @class Tab 탭 컴포넌트.
+ * @o2cn 탭 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var tab = this.form.get("fieldId"); //获取组件
- * //方法2
- * var tab = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var tab = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var tab = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -31,19 +31,19 @@ MWF.xApplication.process.Xform.Tab = MWF.APPTab =  new Class(
         if (layout.mobile) style = "mobileForm";
 
         /**
-         * @summary tab组件，平台使用该组件实现分页组件的功能
+         * @summary tab 컴포넌트, 플랫폼이 이 컴포넌트로 탭 기능을 구현
          * @member {MWF.widget.Tab}
          * @example
-         *  //可以在脚本中获取该组件
-         * var tab = this.form.get("fieldId").tab; //获取组件对象
-         * var pages = tab.pages //获取每个分页
+         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+         * var tab = this.form.get("fieldId").tab; //컴포넌트 객체 가져오기
+         * var pages = tab.pages //각 탭 가져오기
          * pages[1].addEvent("queryShow", function(){
-         *     //添加显示分页前事件
+         *     //탭 표시 전 이벤트 추가
          * })
          * pages[1].addEvent("postShow", function(){
-         *     //添加显示分页后事件
+         *     //탭 표시 후 이벤트 추가
          * })
-         * pages[1]._showTab(); //显示第2个分页
+         * pages[1]._showTab(); //두 번째 탭 표시
          */
 		this.tab = new MWF.widget.Tab(this.node, {"style": style});
 		

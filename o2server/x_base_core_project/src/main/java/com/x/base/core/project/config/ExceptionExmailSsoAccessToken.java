@@ -7,6 +7,6 @@ class ExceptionExmailSsoAccessToken extends PromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionExmailSsoAccessToken(Integer code, String message) {
-		super("获取腾讯企业邮单点登录accessToken失败,错误代码:{}, 错误消息:{}.", code, message);
+		super("Tencent 기업 메일 SSO accessToken을 가져오지 못했습니다. 오류 코드: {}, 오류 메시지: {}.", code, message);
 	}
 }

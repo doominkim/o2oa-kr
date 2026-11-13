@@ -48,17 +48,17 @@ MWF.ExcelUtilsV2 = {
 
     openDownloadDialog: function(url, saveName, callback){
         /**
-         * 通用的打开下载对话框方法，没有测试过具体兼容性
-         * @param url 下载地址，也可以是一个blob对象，必选
-         * @param saveName 保存文件名，可选
+         * 다운로드 대화상자를 여는 공통 메서드, 구체적인 호환성은 테스트하지 않음
+         * @param url 다운로드 주소, blob 객체도 가능, 필수
+         * @param saveName 저장 파일 이름, 선택
          */
         if( Browser.name !== 'ie' ){
             if(typeof url == 'object' && url instanceof Blob){
-                url = URL.createObjectURL(url); // 创建blob地址
+                url = URL.createObjectURL(url); // blob 주소 생성
             }
             var aLink = document.createElement('a');
             aLink.href = url;
-            aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+            aLink.download = saveName || ''; // HTML5에 새로 추가된 속성으로 저장 파일 이름 지정, 확장자는 생략 가능, 주의: file:/// 모드에서는 적용되지 않음
             var event;
             if(window.MouseEvent && typeOf( window.MouseEvent ) == "function" ) event = new MouseEvent('click');
             else
@@ -113,16 +113,16 @@ MWF.ExcelUtilsV2 = {
     },
 
     rectanglesIntersect: function(rect1, rect2) {
-        // 检查rect1的右边是否在rect2的左边的左侧（即rect1完全在rect2的左侧）
+        // rect1의 오른쪽 변이 rect2의 왼쪽 변보다 왼쪽에 있는지 확인(즉 rect1이 완전히 rect2의 왼쪽에 있음)
         if (rect1.right <= rect2.left) return false;
 
-        // 检查rect1的左边是否在rect2的右边的右侧（即rect1完全在rect2的右侧）
+        // rect1의 왼쪽 변이 rect2의 오른쪽 변보다 오른쪽에 있는지 확인(즉 rect1이 완전히 rect2의 오른쪽에 있음)
         if (rect1.left >= rect2.right)  return false;
 
-        // 检查rect1的底部是否在rect2的顶部的上方（即rect1完全在rect2的上方）
+        // rect1의 아래쪽 변이 rect2의 위쪽 변보다 위에 있는지 확인(즉 rect1이 완전히 rect2의 위에 있음)
         if (rect1.bottom <= rect2.top) return false;
 
-        // 检查rect1的顶部是否在rect2的底部的下方（即rect1完全在rect2的下方）
+        // rect1의 위쪽 변이 rect2의 아래쪽 변보다 아래에 있는지 확인(즉 rect1이 완전히 rect2의 아래에 있음)
         if (rect1.top >= rect2.bottom) return false;
 
         return true;
@@ -135,7 +135,7 @@ MWF.ExcelUtilsV2 = {
 
         for (var i = colName.length - 1; i >= 0; i--) {
             var charCode = colName.charCodeAt(i);
-            // 'A'的字符编码是65，所以需要减去64来得到对应的数字（1 - 26）
+            // 'A'의 문자 코드는 65이므로 64를 빼서 대응하는 숫자(1 - 26)를 구함
             var digit = charCode - 64;
             index += digit * multiplier;
             multiplier *= 26;
@@ -148,7 +148,7 @@ MWF.ExcelUtilsV2 = {
         if (index < 0) {
             return null;
         }
-        var num = 65;// A的Unicode码
+        var num = 65;// A의 Unicode 코드
         var colName = "";
         do {
             if (colName.length > 0)index--;
@@ -185,16 +185,16 @@ MWF.ExcelImporter = new Class({
     Implements: [Options, Events],
     options:{
         sheet2JsonOptions: {
-            //见https://docs.sheetjs.com/docs/api/utilities/array/#array-output
-            header: 1          // 第一行是表头，返回的数据是每行一个数组，否则返回的数据每行一个对象
-            // range: 2,           // 跳过前 2 行
-            // defval: null,       // 空单元格填充 null
-            // rawNumbers: true,   // 避免科学计数法
-            // dateNF: "yyyy-mm-dd" // 日期格式化
+            //참고: https://docs.sheetjs.com/docs/api/utilities/array/#array-output
+            header: 1          // 첫 행이 헤더이면 반환 데이터는 행마다 배열, 아니면 행마다 객체
+            // range: 2,           // 앞의 2행 건너뜀
+            // defval: null,       // 빈 셀은 null로 채움
+            // rawNumbers: true,   // 지수 표기법 방지
+            // dateNF: "yyyy-mm-dd" // 날짜 형식
         },
         dateColIndexes: [
-            [], //第一个sheet的日期
-            [] //第二个sheet的日期...
+            [], //첫 번째 sheet의 날짜
+            [] //두 번째 sheet의 날짜...
         ],
         needSheetName: false
     },
@@ -233,7 +233,7 @@ MWF.ExcelImporter = new Class({
                 dateNF:'yyyy-mm-dd HH:mm:ss'
             });
 
-            // 遍历所有工作表信息（包含隐藏状态）
+            // 모든 워크시트 정보 순회(숨김 상태 포함)
             const sheetStates = workbook.Workbook?.Sheets || [];
             sheetStates.forEach((sheetInfo, index) => {
                 const sheetName = workbook.SheetNames[index];
@@ -336,7 +336,7 @@ MWF.ExcelExporter = new Class({
             numberIndexArray: [],
             offsetRowIndex: 0,
             offsetColumnIndex: 0,
-            startAddress: '' //如 H12
+            startAddress: '' //예: H12
         }]
     },
     initialize: function( options ){
@@ -347,10 +347,10 @@ MWF.ExcelExporter = new Class({
         this.setOptions(options);
     },
     execute: function(data, callback, mergeConfig=[]){
-        // var array = [["姓名","性别","学历","专业","出生日期","毕业日期"]];
-        // array.push([ "张三","男","大学本科","计算机","2001-1-2","2019-9-2" ]);
-        // array.push([ "李四","男","大学专科","数学","1998-1-2","2018-9-2" ]);
-        // this.exportToExcel(array, "导出数据"+(new Date).format("db"));
+        // var array = [["이름","성별","학력","전공","생년월일","졸업일"]];
+        // array.push([ "홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ]);
+        // array.push([ "김철수","남","전문대학","수학","1998-1-2","2018-9-2" ]);
+        // this.exportToExcel(array, "내보내기 데이터"+(new Date).format("db"));
 
         return new Promise((resolve)=>{
             MWF.ExcelUtilsV2.loadExcelJS(function (){
@@ -416,7 +416,7 @@ MWF.ExcelExporter.Sheet = new Class({
         numberIndexArray: [],
         offsetRowIndex: 0,
         offsetColumnIndex: 0,
-        startAddress: '' //如 H12
+        startAddress: '' //예: H12
     },
     initialize: function( worksheet, options ){
         if( !MWF.xApplication.Template.LP ){
@@ -428,7 +428,7 @@ MWF.ExcelExporter.Sheet = new Class({
 
         this.setOptions(options);
 
-        //startAddress 如 H12
+        //startAddress 예: H12
         if( this.options.startAddress ){
             this._parseStartColRow();
         }
@@ -442,22 +442,22 @@ MWF.ExcelExporter.Sheet = new Class({
         this.options.offsetRowIndex = parseInt(obj.numbers) - 1;
     },
     execute: function(data, callback, mergeConfig){
-        // var array = [["姓名","性别","学历","专业","出生日期","毕业日期"]];
-        // array.push([ "张三","男","大学本科","计算机","2001-1-2","2019-9-2" ]);
-        // array.push([ "李四","男","大学专科","数学","1998-1-2","2018-9-2" ]);
-        // this.exportToExcel(array, "导出数据"+(new Date).format("db"));
-        //第三个参数
+        // var array = [["이름","성별","학력","전공","생년월일","졸업일"]];
+        // array.push([ "홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ]);
+        // array.push([ "김철수","남","전문대학","수학","1998-1-2","2018-9-2" ]);
+        // this.exportToExcel(array, "내보내기 데이터"+(new Date).format("db"));
+        //세 번째 인수
         // [
         //     {
-        //         row: 0,           // 相对表头起始行
-        //         col: 2,           // 相对表头起始列
-        //         rowSpan: 2,       // 向下合并几行
-        //         colSpan: 3        // 向右合并几列
+        //         row: 0,           // 헤더 기준 시작 행
+        //         col: 2,           // 헤더 기준 시작 열
+        //         rowSpan: 2,       // 아래로 병합할 행 수
+        //         colSpan: 3        // 오른쪽으로 병합할 열 수
         //     },
-        //     { row: 0, col: 2, rowSpan: 2 },          // 纵向合并
-        //     { row: 0, col: 3, colSpan: 2 },          // 横向合并
-        //     { start: 'C3', end: 'E5' },              // 区域合并（最直观）
-        //     { type: 'title', level: 0 }              // 语义化合并（高级）
+        //     { row: 0, col: 2, rowSpan: 2 },          // 세로 병합
+        //     { row: 0, col: 3, colSpan: 2 },          // 가로 병합
+        //     { start: 'C3', end: 'E5' },              // 영역 병합(가장 직관적)
+        //     { type: 'title', level: 0 }              // 의미 기반 병합(고급)
         // ]
 
         this.mergeConfig = mergeConfig || [];
@@ -564,7 +564,7 @@ MWF.ExcelExporter.Sheet = new Class({
 
     _parseTitle: function (){
         if( this.options.hasTitle ){
-            //处理表头分类
+            //헤더 분류 처리
             this.titleDataParsed = [];
             this.maxTitleLevel = 1;
             this.titleArray.each(function (title, i){
@@ -669,7 +669,7 @@ MWF.ExcelExporter.Sheet = new Class({
     },
 
     _appendTitle: function(){
-        //处理表头分类
+        //헤더 분류 처리
         if( !this.titleDataParsed || !this.titleDataParsed.length ){
             this._parseTitle();
         }
@@ -782,7 +782,7 @@ MWF.ExcelExporter.Sheet = new Class({
     setDataValidation: function (){
         var validationSheetName = this.options.sheetName.replaceAll('-', '_')+'O2Validation';
         var validationSheet = this.workbook.addWorksheet(validationSheetName);
-        validationSheet.state = 'hidden'; //hidden 隐藏   veryHidden 从“隐藏/取消隐藏”对话框中隐藏工作表
+        validationSheet.state = 'hidden'; //hidden 숨김   veryHidden “숨기기/숨기기 취소” 대화 상자에서도 워크시트 숨김
 
         var colIndex = 0;
         this.titleArray.each(function(title, i){
@@ -803,7 +803,7 @@ MWF.ExcelExporter.Sheet = new Class({
                 allowBlank: true,
                 showErrorMessage: true,
                 showInputMessage: false,
-                formulae: ['='+validationSheetName+'!$'+colName+'$1:$'+colName+'$'+optionsArray.length], // 这里引用Validation Sheet的内容 '=Validation!A1:A3'
+                formulae: ['='+validationSheetName+'!$'+colName+'$1:$'+colName+'$'+optionsArray.length], // 여기서 Validation Sheet의 내용을 참조 '=Validation!A1:A3'
                 //formulae: ['"'+optionsArray.join(",")+'"'],
                 promptTitle: lp.promptTitle,
                 prompt: lp.prompt,
@@ -857,7 +857,7 @@ MWF.TemplateExcelExporter = new Class({
         var _uri = o2.filterUrl(uri.toString());
 
         this._readWorkbookFromRemoteFile( _uri, function(arraybuffer){
-            //名称为dataList的单元格为插入的位置
+            //이름이 dataList인 셀이 삽입 위치
             var wk = new ExcelJS.Workbook();
             wk.xlsx.load( arraybuffer ).then(function(workbook) {
 

@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "Textfield", null, false);
-/** @class Number 数字输入组件。
- * @o2cn 数字输入组件
+/** @class Number 숫자 입력 컴포넌트.
+ * @o2cn 숫자 입력 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("name"); //获取组件
- * //方法2
- * var field = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var field = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.Textfield
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -22,7 +22,7 @@ MWF.xApplication.process.Xform.Number = MWF.APPNumber =  new Class(
         if (!this.isReadable && !!this.isHideUnreadable){
             this.node?.addClass('hide');
         }else{
-            if ( this.isSectionMergeRead() ) { //区段合并显示
+            if ( this.isSectionMergeRead() ) { //구간 병합 표시
                 this.node.empty();
                 this.node.set({
                     "nodeId": this.json.id,
@@ -99,20 +99,20 @@ MWF.xApplication.process.Xform.Number = MWF.APPNumber =  new Class(
         return !this.getData();
     },
     /**
-     * @summary 传入值获取适配最大值和最小值的数值.
+     * @summary 값을 전달하여 최댓값과 최솟값에 맞춘 수치 반환.
      * @example
-     * //如果最大值设置为500，最小值为100
+     * //최댓값이 500, 최솟값이 100으로 설정된 경우
      *
      * var value = this.form.get('field').getRangeValue( 300 );
-     * //value为300
+     * //value는 300
      *
      * var value = this.form.get('field').getRangeValue( 10000 );
-     * //value为500
+     * //value는 500
      *
      * var value = this.form.get('field').getRangeValue( 1 );
-     * //value为100
+     * //value는 100
      * @param value {String|Nummber}
-     * @return {Number} 获取适配最大值和最小值的数值.
+     * @return {Number} 최댓값과 최솟값에 맞춘 수치.
      */
     getRangeValue: function( value ){
         var v = this.getMax( value );
@@ -156,29 +156,29 @@ MWF.xApplication.process.Xform.Number = MWF.APPNumber =  new Class(
 
 
     /**
-     * @summary 传入文本获取清除逗号的数值
+     * @summary 텍스트를 전달하여 쉼표를 제거한 수치 반환
      * @example
      * var value = this.form.get('field').unformatNumber( "30,000" );
-     * //value为30000
-     * @param str{String} 文本
-     * @return {Number} 获取清除逗号的数值.
+     * //value는 30000
+     * @param str{String} 텍스트
+     * @return {Number} 쉼표를 제거한 수치.
      */
     unformatNumber: function(str){
         return str.replace(/,/g, "");
     },
     /**
-     * @summary 传入文本或数值根据配置的小数位数和分隔符返回字符串
+     * @summary 텍스트나 수치를 전달하여 설정된 소수 자릿수와 구분자에 따라 문자열 반환
      * @example
-     * //假设组件的设置为千分位分隔，保留小数两位
+     * //컴포넌트가 천 단위 구분, 소수 둘째 자리까지로 설정되었다고 가정
      *
      * var value = this.form.get('field').formatNumber( "30000.123" );
-     * //value为字符串"30,000.12"
+     * //value는 문자열 "30,000.12"
      *
      * var value = this.form.get('field').formatNumber( 30000.123 );
-     * //value为字符串"30,000.12"
+     * //value는 문자열 "30,000.12"
      *
      * @param str{String|Number}
-     * @return {Number} 根据配置的小数位数和分隔符返回字符串
+     * @return {Number} 설정된 소수 자릿수와 구분자에 따른 문자열
      */
     formatNumber: function(str){
         var v = (str || "0").toFloat();

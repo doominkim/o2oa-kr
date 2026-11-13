@@ -21,7 +21,7 @@ public class StatusImportFileDetail extends GsonPropertyObject implements Serial
 	private Date endTime = null;
 	
 	/**
-	 * 该文件的导入数据是否正在处理
+	 * 해당 파일의 가져오기 데이터 처리 중 여부
 	 */
 	private Boolean processing = false;
 	private String currentProcessName = "NONE";
@@ -31,7 +31,7 @@ public class StatusImportFileDetail extends GsonPropertyObject implements Serial
 	private long process_validate_total = 0;
 	
 	/**
-	 * 该文件的导入数据是否正在入库
+	 * 해당 파일의 가져오기 데이터 저장 중 여부
 	 */
 	private Boolean processing_save = false;
 	private long process_save_count = 0;	

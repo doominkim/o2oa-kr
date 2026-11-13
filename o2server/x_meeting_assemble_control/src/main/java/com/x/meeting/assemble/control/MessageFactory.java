@@ -53,7 +53,7 @@ public class MessageFactory {
 		public static WrapCopier<Meeting, Wo> copier = WrapCopierFactory.wo(Meeting.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("接受或拒绝用户")
+		@FieldDescribe("사용자 수락 또는 거절")
 		private String fromPerson;
 
 		public String getFromPerson() {

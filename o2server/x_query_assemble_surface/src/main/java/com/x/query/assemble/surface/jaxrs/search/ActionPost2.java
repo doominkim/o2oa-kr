@@ -171,7 +171,7 @@ class ActionPost2 extends BaseAction {
 			            Map<String, Object> map = DISPLAY_FIELDS.stream().map(f -> Pair.of(f, document.getField(f)))
 			                    .filter(param -> null != param.second()).map(indexFieldValue)
 			                    .collect(Collectors.toMap(Pair::first, Pair::second));
-			            // 高亮 null 安全
+			            // 하이라이트 null 안전
 			            String body = document.get(Indexs.FIELD_BODY);
 			            if (StringUtils.isNotBlank(body)) {
 							String[] frags = highlighter.getBestFragments(analyzer, Indexs.FIELD_BODY, body,
@@ -236,7 +236,7 @@ class ActionPost2 extends BaseAction {
 	@Schema(name = "com.x.custom.index.assemble.control.jaxrs.search.ActionPost$Wi")
 	public static class Wi extends ActionPostWi {
 
-		@FieldDescribe("排序")
+		@FieldDescribe("정렬")
 		private Sort sort;
 
 		public Sort getSort() {

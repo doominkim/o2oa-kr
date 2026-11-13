@@ -42,12 +42,12 @@ public class ActionShowStForUnitInTopUnit extends BaseAction {
 		}
 		if( check ){
 			try {
-				//根据顶层组织递归查询下级顶层组织经及顶层组织的顶级组织
+				//최상위 조직으로 하위 최상위 조직 및 최상위 조직의 최고 조직 재귀 조회
 				unitNames = getTopUnitNameList( name, unitNames, effectivePerson.getDebugger() );
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess( e, 
-						"根据顶层组织递归查询下级顶层组织经及顶层组织的顶级组织时发生异常！"
+						"최상위 조직의 하위 조직을 재귀 조회하는 중 오류가 발생했습니다!"
 						+ "Name:" + name
 						+ ", Units:" + unitNames );
 				result.error( exception );
@@ -66,7 +66,7 @@ public class ActionShowStForUnitInTopUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e, 
-					"系统根据组织名称列表，年份和月份查询组织统计数据信息ID列表时发生异常.Name:"+unitNames+", Year:"+year+", Month:" + month
+					"조직 이름 목록과 연월로 조직 통계 데이터 ID 목록을 조회하는 중 오류가 발생했습니다. Name:"+unitNames+", Year:"+year+", Month:" + month
 				);
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
@@ -78,7 +78,7 @@ public class ActionShowStForUnitInTopUnit extends BaseAction {
 					statisticUnitForMonth_list = attendanceStatisticServiceAdv.listUnitForMonth( ids );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceStatisticProcess( e, "系统根据ID列表查询组织每月统计数据信息列表时发生异常." );
+					Exception exception = new ExceptionAttendanceStatisticProcess( e, "ID 목록으로 조직 월별 통계 데이터 목록을 조회하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -91,7 +91,7 @@ public class ActionShowStForUnitInTopUnit extends BaseAction {
 					result.setData(wraps);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceStatisticProcess( e, "系统将所有查询到的组织每月统计信息对象转换为可以输出的信息时发生异常." );
+					Exception exception = new ExceptionAttendanceStatisticProcess( e, "조회된 조직 월별 통계 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}

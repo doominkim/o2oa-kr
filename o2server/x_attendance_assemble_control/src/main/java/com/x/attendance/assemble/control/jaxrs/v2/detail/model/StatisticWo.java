@@ -12,35 +12,35 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public class StatisticWo extends GsonPropertyObject {
 
 
-    @FieldDescribe("用户标识")
+    @FieldDescribe("사용자 식별자")
     private String userId;
 
-    @FieldDescribe("工作时长(分钟)")
+    @FieldDescribe("근무 시간(분)")
     private Long workTimeDuration = 0L;
-    @FieldDescribe("平均工时，工作时长/工作日数量，(小时)") //
+    @FieldDescribe("평균 근무 시간, 근무 시간/근무일 수, (시간)") //
     private String averageWorkTimeDuration = "0.0";
-    @FieldDescribe("应出勤天数")
+    @FieldDescribe("출근 대상 일수")
     private Integer workDays = 0;
-    @FieldDescribe("出勤天数")
+    @FieldDescribe("출근 일수")
     private Integer attendance = 0;
-    @FieldDescribe("休息天数")
+    @FieldDescribe("휴무 일수")
     private Integer rest = 0;
-    @FieldDescribe("旷工天数")
+    @FieldDescribe("무단결근 일수")
     private Integer absenteeismDays = 0;
-    @FieldDescribe("迟到次数")
+    @FieldDescribe("지각 횟수")
     private Integer lateTimes = 0;
-    @FieldDescribe("早退次数")//
+    @FieldDescribe("조퇴 횟수")//
     private Integer leaveEarlierTimes = 0;
-    @FieldDescribe("缺卡次数") // 上下班次数相加
+    @FieldDescribe("미체크 횟수") // 출근·퇴근 횟수 합계
     private Integer absenceTimes = 0;
-    @FieldDescribe("外勤打卡次数")
+    @FieldDescribe("외근 체크 횟수")
     private Integer fieldWorkTimes = 0;
-    @FieldDescribe("请假天数")
+    @FieldDescribe("휴가 일수")
     private Integer leaveDays = 0;
-    @FieldDescribe("申诉次数")
+    @FieldDescribe("이의 신청 횟수")
     private Integer appealNums = 0;
 
-    @FieldDescribe("每日数据")
+    @FieldDescribe("일별 데이터")
     private List<DetailWo> detailList;
 
 

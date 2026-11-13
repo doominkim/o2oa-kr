@@ -22,12 +22,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("excel")
-@JaxrsDescribe("生成excel")
+@JaxrsDescribe("excel 생성")
 public class ExcelAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(ExcelAction.class);
 
-	@JaxrsMethodDescribe(value = "根据模板将内容生成Excel", action = ActionExcelExportWithTemplate.class)
+	@JaxrsMethodDescribe(value = "템플릿에 따라 내용으로 Excel 생성", action = ActionExcelExportWithTemplate.class)
 	@POST
 	@Path("excel/with/template")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -45,13 +45,13 @@ public class ExcelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将内容生成Excel", action = ActionExcelExport.class)
+	@JaxrsMethodDescribe(value = "내용으로 Excel 생성", action = ActionExcelExport.class)
 	@POST
 	@Path("excelName/{excelName}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excelWithDataList(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-											@JaxrsParameterDescribe("文件名") @PathParam("excelName") String excelName, JsonElement jsonElement) {
+											@JaxrsParameterDescribe("파일 이름") @PathParam("excelName") String excelName, JsonElement jsonElement) {
 		ActionResult<ActionExcelExport.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -63,13 +63,13 @@ public class ExcelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将内容生成Excel，支持多个sheet页", action = ActionExcelSheetExport.class)
+	@JaxrsMethodDescribe(value = "내용으로 Excel 생성, 여러 sheet 지원", action = ActionExcelSheetExport.class)
 	@POST
 	@Path("excelName/{excelName}/sheetList")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excelSheetWithDataList(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								  @JaxrsParameterDescribe("文件名") @PathParam("excelName") String excelName, JsonElement jsonElement) {
+								  @JaxrsParameterDescribe("파일 이름") @PathParam("excelName") String excelName, JsonElement jsonElement) {
 		ActionResult<ActionExcelSheetExport.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -81,12 +81,12 @@ public class ExcelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出Excel.", action = ActionExcelResult.class)
+	@JaxrsMethodDescribe(value = "Excel 내보내기.", action = ActionExcelResult.class)
 	@GET
 	@Path("result/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excelResult(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							@JaxrsParameterDescribe("对象标识") @PathParam("flag") String flag) {
+							@JaxrsParameterDescribe("객체 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionExcelResult.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -98,16 +98,16 @@ public class ExcelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "解析上传Excel中的内容.", action = ActionUploadExcel.class)
+	@JaxrsMethodDescribe(value = "업로드한 Excel 내용 파싱.", action = ActionUploadExcel.class)
 	@POST
 	@Path("upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void excelToDataList(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					  @JaxrsParameterDescribe("读取内容的Sheet页下标，默认0") @FormDataParam("sheetIndex") Integer sheetIndex,
-					  @JaxrsParameterDescribe("读取内容的起始行下标，默认0") @FormDataParam("rowIndex") Integer rowIndex,
+					  @JaxrsParameterDescribe("읽을 내용의 Sheet 인덱스, 기본값 0") @FormDataParam("sheetIndex") Integer sheetIndex,
+					  @JaxrsParameterDescribe("읽을 내용의 시작 행 인덱스, 기본값 0") @FormDataParam("rowIndex") Integer rowIndex,
 					  @FormDataParam(FILE_FIELD) final byte[] bytes,
-					  @JaxrsParameterDescribe("Excel文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+					  @JaxrsParameterDescribe("Excel 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult< ActionUploadExcel.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -120,7 +120,7 @@ public class ExcelAction extends StandardJaxrsAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "解析url中Excel的内容", action = ActionUploadExcelWithUrl.class)
+	@JaxrsMethodDescribe(value = "url의 Excel 내용 파싱", action = ActionUploadExcelWithUrl.class)
 	@POST
 	@Path("upload/with/url")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

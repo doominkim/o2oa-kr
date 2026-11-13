@@ -55,7 +55,7 @@ public class ActionListParticipantAllGroup extends BaseAction {
             for (AttendanceV2Group group : list) {
                 if (group.getStatus() != null
                     && group.getStatus() == AttendanceV2Group.status_auto) {
-                    continue;  // 跳过自动保存的数据
+                    continue;  // 자동 저장 데이터 건너뜀
                 }
                 participantList.addAll(group.getTrueParticipantList());
             }
@@ -68,7 +68,7 @@ public class ActionListParticipantAllGroup extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("考勤组ID, 不传就是全部考勤组")
+        @FieldDescribe("근태 그룹 ID, 미전달 시 전체 근태 그룹")
         private String groupId;
 
         public String getGroupId() {
@@ -82,7 +82,7 @@ public class ActionListParticipantAllGroup extends BaseAction {
 
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("成员 DN 列表")
+        @FieldDescribe("구성원 DN 목록")
         private List<String> participantList;
 
         public List<String> getParticipantList() {

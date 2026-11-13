@@ -24,12 +24,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("role")
-@JaxrsDescribe("角色接口")
+@JaxrsDescribe("역할 API")
 public class RoleAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(RoleAction.class);
 
-	@JaxrsMethodDescribe(value = "批量查询角色", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "역할 일괄 조회", action = ActionList.class)
 	@POST
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class RoleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组对象", action = ActionListObject.class)
+	@JaxrsMethodDescribe(value = "그룹 객체 일괄 조회", action = ActionListObject.class)
 	@POST
 	@Path("list/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class RoleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询人员所在的群组.", action = ActionListWithPerson.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 그룹 일괄 조회.", action = ActionListWithPerson.class)
 	@POST
 	@Path("list/person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -83,7 +83,7 @@ public class RoleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询人员所在的群组对象.", action = ActionListWithPersonObject.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 그룹 객체 일괄 조회.", action = ActionListWithPersonObject.class)
 	@POST
 	@Path("list/person/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

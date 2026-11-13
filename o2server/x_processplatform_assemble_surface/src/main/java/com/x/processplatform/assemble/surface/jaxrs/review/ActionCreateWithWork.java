@@ -28,7 +28,7 @@ import com.x.processplatform.core.entity.content.Work;
 import com.x.processplatform.core.entity.content.WorkCompleted;
 
 /**
- * 为指定的用户根据Work直接创建Review
+ * 지정 사용자에 대해 Work로 Review 직접 생성
  * 
  * @author zhour
  *
@@ -70,10 +70,10 @@ class ActionCreateWithWork extends BaseAction {
 
 		private static final long serialVersionUID = 6105147807827072026L;
 
-		@FieldDescribe("流转中工作")
+		@FieldDescribe("진행 중 업무 문서")
 		private String work;
 
-		@FieldDescribe("可阅读人员")
+		@FieldDescribe("열람 가능 사용자")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getPersonList() {

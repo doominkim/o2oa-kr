@@ -29,19 +29,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("mapping")
-@JaxrsDescribe("表映射")
+@JaxrsDescribe("테이블 매핑")
 public class MappingAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(MappingAction.class);
 
-	@JaxrsMethodDescribe(value = "列示表映射对象,下一页.", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "테이블 매핑 객체 목록 조회, 다음 페이지.", action = ActionListNext.class)
 	@GET
 	@Path("list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -53,14 +53,14 @@ public class MappingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示表映射对象,上一页.", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "테이블 매핑 객체 목록 조회, 이전 페이지.", action = ActionListPrev.class)
 	@GET
 	@Path("list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -72,13 +72,13 @@ public class MappingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取单个表映射对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "단일 테이블 매핑 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -90,13 +90,13 @@ public class MappingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行表映射.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "테이블 매핑 실행.", action = ActionExecute.class)
 	@GET
 	@Path("{flag}/execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void execute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionExecute.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -108,7 +108,7 @@ public class MappingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建表映射.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "테이블 매핑 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -125,13 +125,13 @@ public class MappingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除表映射对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "테이블 매핑 객체 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,13 +143,13 @@ public class MappingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新表映射.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "테이블 매핑 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -161,13 +161,13 @@ public class MappingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据应用获取表映射.", action = ActionListWithApplication.class)
+	@JaxrsMethodDescribe(value = "앱별 테이블 매핑 조회.", action = ActionListWithApplication.class)
 	@GET
 	@Path("list/application/{applicationFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithApplication(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<List<ActionListWithApplication.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

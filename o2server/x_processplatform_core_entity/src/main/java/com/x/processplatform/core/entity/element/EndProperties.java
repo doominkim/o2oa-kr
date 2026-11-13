@@ -8,7 +8,7 @@ public class EndProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 8342746214747017734L;
 
-	@FieldDescribe("活动自定义数据")
+	@FieldDescribe("활동 사용자 정의 데이터")
 	private JsonElement customData;
 
 	public JsonElement getCustomData() {

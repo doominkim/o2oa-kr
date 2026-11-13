@@ -443,7 +443,7 @@ MWF.xApplication.Org.$Explorer = new Class({
         }.bind(this));
     },
     setNoElementNoticeArea: function(){
-        //没有数据时的提示
+        //데이터가 없을 때의 안내
     },
 
     checkDeleteElements: function(item){

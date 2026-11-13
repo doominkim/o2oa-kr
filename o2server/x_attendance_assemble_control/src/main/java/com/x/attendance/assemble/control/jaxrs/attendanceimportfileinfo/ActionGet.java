@@ -40,7 +40,7 @@ public class ActionGet extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceImportFileProcess(e,
-						"系统根据ID查询指定的人员考勤数据导入文件信息时发生异常.ID:" + id);
+						"ID로 인원 근태 데이터 가져오기 파일 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -52,7 +52,7 @@ public class ActionGet extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceEmployeeProcess(e,
-						"将所有查询出来的有状态的导入文件对象转换为可以输出的过滤过属性的对象时发生异常.");
+						"조회된 가져오기 파일 객체를 출력용 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

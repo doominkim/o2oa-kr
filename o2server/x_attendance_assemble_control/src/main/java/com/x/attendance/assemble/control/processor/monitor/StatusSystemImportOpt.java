@@ -14,14 +14,14 @@ public class StatusSystemImportOpt{
 	private Long taskCount = 0L;
 	
 	/**
-	 * 该文件的导入数据是否正在补充
+	 * 해당 파일의 가져오기 데이터 보충 중 여부
 	 */
 	private Boolean processing_supplement = false;
 	private long process_supplement_count = 0;	
 	private long process_supplement_total = 0;
 	private long process_supplement_error = 0;
 	/**
-	 * 该文件的导入数据是否正在分析
+	 * 해당 파일의 가져오기 데이터 분석 중 여부
 	 */
 	private Boolean processing_analysis = false;
 	private long process_analysis_count = 0;	
@@ -33,7 +33,7 @@ public class StatusSystemImportOpt{
 	private Boolean debugger = false;
 	
 	/**
-	 * 记录数据导入过程以及校验结果的map
+	 * 데이터 가져오기 과정과 검증 결과를 기록하는 map
 	 */
 	private static final Map<String, StatusImportFileDetail> importFileCheckResultMap = new ConcurrentHashMap<>();
 	

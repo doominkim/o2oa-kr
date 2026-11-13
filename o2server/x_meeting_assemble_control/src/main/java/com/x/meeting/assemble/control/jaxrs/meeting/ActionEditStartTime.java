@@ -68,10 +68,10 @@ class ActionEditStartTime extends BaseAction {
 	}
 
 	public static class Wi {
-		@FieldDescribe("所属楼层.")
+		@FieldDescribe("소속 층.")
 		private String room;
 
-		@FieldDescribe("开始时间.")
+		@FieldDescribe("시작 시간.")
 		private Date startTime;
 
 		public String getRoom() {

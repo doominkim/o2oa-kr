@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import com.x.base.core.entity.StorageType;
 
 /**
- * 标记所有可启动模块
+ * 시작 가능한 모든 모듈 표시
  * 
  * @author zhour
  *

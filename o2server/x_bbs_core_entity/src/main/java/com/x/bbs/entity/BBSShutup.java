@@ -14,12 +14,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 禁言人员
+ * 발언 금지 사용자
  *
  * @author sword
  * @date 2022/05/20 10:53
  **/
-@Schema(name = "BBSShutup", description = "论坛禁言人员.")
+@Schema(name = "BBSShutup", description = "포럼 발언 금지 사용자.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSShutup.table, uniqueConstraints = {
@@ -43,7 +43,7 @@ public class BBSShutup extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -53,33 +53,33 @@ public class BBSShutup extends SliceJpaObject {
     }
 
     public static final String operator_FIELDNAME = "operator";
-    @FieldDescribe("操作者")
+    @FieldDescribe("작업자")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + operator_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String operator;
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("被禁言用户")
+    @FieldDescribe("발언 금지 사용자")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + person_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + person_FIELDNAME, unique = true)
     @CheckPersist(allowEmpty = false)
     private String person;
 
     public static final String unmuteDate_FIELDNAME = "unmuteDate";
-    @FieldDescribe("解封时间")
+    @FieldDescribe("해제 시간")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + unmuteDate_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String unmuteDate;
 
     public static final String unmuteDateTime_FIELDNAME = "unmuteDateTime";
-    @FieldDescribe("解封时间date类型")
+    @FieldDescribe("해제 시간 date 유형")
     @Column(name = ColumnNamePrefix + unmuteDateTime_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + unmuteDateTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private Date unmuteDateTime;
 
     public static final String reason_FIELDNAME = "reason";
-    @FieldDescribe("禁言原因")
+    @FieldDescribe("발언 금지 사유")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + reason_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String reason;

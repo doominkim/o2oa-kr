@@ -21,7 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 /**
- * 修改栏目图标
+ * 게시판 아이콘 수정
  * @author sword
  */
 public class ActionAppIconUpload extends BaseAction {
@@ -50,7 +50,7 @@ public class ActionAppIconUpload extends BaseAction {
 			BufferedImage image = ImageIO.read(input);
 			int height = image.getHeight(null);
 			int width = image.getWidth(null);
-			//计算新的宽高
+			//새 너비와 높이 계산
 			double step = 0;
 			if(height > width ) {
 				if( height > size ) {
@@ -69,7 +69,7 @@ public class ActionAppIconUpload extends BaseAction {
 
 			String iconMainColor = ImageTools.hue(image);
 
-			//再获取图片base64编码信息
+			//이어서 이미지 base64 인코딩 정보 조회
 			ImageIO.write(image, "png", bos);
 			String base64 = Base64.encodeBase64String(bos.toByteArray());
 

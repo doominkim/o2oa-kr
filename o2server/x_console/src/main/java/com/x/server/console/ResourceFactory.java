@@ -54,7 +54,7 @@ public class ResourceFactory {
 	private static final int TOKENTHRESHOLDSMAXSIZE = 2000;
 
 	/**
-	 * 用于销毁时的对象
+	 * 소멸 시 사용할 객체
 	 */
 	private static List<DruidDataSourceC3P0Adapter> dataSources = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class ResourceFactory {
 	}
 
 	/**
-	 * 生成DataSources并绑定到jndi
+	 * DataSources를 생성해 jndi에 바인딩
 	 *
 	 * @throws Exception
 	 */
@@ -133,7 +133,7 @@ public class ResourceFactory {
 	}
 
 	/**
-	 * 使用mysql连接服务器端提醒WARN,是由于druid是使用了mysql ping 检测连接导致的 druid 1.2.2版本以上有这个问题.
+	 * mysql 연결 시 서버 측 WARN 알림은 druid가 mysql ping으로 연결을 검사하기 때문이며 druid 1.2.2 이상 버전에서 발생.
 	 * 2021-11-03 15:51:23.398 [com.x.program.center.LogQueue] WARN
 	 * com.alibaba.druid.pool.DruidAbstractDataSource - discard long time none
 	 * received connection. , jdbcUrl :
@@ -145,8 +145,8 @@ public class ResourceFactory {
 	}
 
 	/**
-	 * 需要将custom模块中的entity加入到扫描目录中,
-	 * 所以需要对custom中的web-inf/classes目录下的实体类进行扫描,先把war解压到临时目录然后读取classes目录下的类
+	 * custom 모듈의 entity를 스캔 디렉터리에 추가해야 함,
+	 * 따라서 custom의 web-inf/classes 디렉터리 아래 엔티티 클래스를 스캔해야 함, war를 임시 디렉터리에 먼저 풀고 classes 디렉터리의 클래스를 읽음
 	 *
 	 * @return
 	 * @throws Exception
@@ -216,7 +216,7 @@ public class ResourceFactory {
 	}
 
 	/**
-	 * internal 使用的是H2 server,在执行close dataserver已经完成了数据库关闭,dataSource无法destory.
+	 * internal은 H2 server를 사용하며 close dataserver 실행 시 데이터베이스 종료가 이미 완료되어 dataSource를 destory할 수 없음.
 	 *
 	 * @throws Exception
 	 */
@@ -225,7 +225,7 @@ public class ResourceFactory {
 	}
 
 	/**
-	 * @author ray Druid DataSource 是需要close的.
+	 * @author ray Druid DataSource는 close 해야 함.
 	 */
 	public static void destory() {
 		for (DruidDataSourceC3P0Adapter dataSource : dataSources) {
@@ -266,7 +266,7 @@ public class ResourceFactory {
 					druidDataSource.setTimeBetweenLogStatsMillis(60000L * entry.getValue().getLogStatInterval());
 				}
 			}
-			// 增加autoCommit设置
+			// autoCommit 설정 추가
 			dataSource.setAutoCommitOnClose(false);
 			String name = Config.nodes().dataServers().name(entry.getValue());
 			new Resource(Config.RESOURCE_JDBC_PREFIX + name, dataSource);
@@ -276,7 +276,7 @@ public class ResourceFactory {
 	}
 
 	private static void tokenThresholds() throws NamingException {
-		// java8中无法将 <> 与匿名内部类一起使用,所以这里需要进行类型的申明
+		// java8에서는 <>를 익명 내부 클래스와 함께 쓸 수 없어 여기서 타입을 선언해야 함
 		Map<String, Date> linkedHashMap = new LinkedHashMap<String, Date>() {
 			private static final long serialVersionUID = 2324816564609476854L;
 

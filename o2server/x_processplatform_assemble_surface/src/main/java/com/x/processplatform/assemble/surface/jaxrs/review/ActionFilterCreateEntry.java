@@ -64,13 +64,13 @@ class ActionFilterCreateEntry extends BaseAction {
 
 	public static class Wo {
 
-		@FieldDescribe("可选择的应用")
+		@FieldDescribe("선택 가능한 앱")
 		private List<NameValueCountPair> applicationList = new ArrayList<>();
 
-		@FieldDescribe("可选择的流程")
+		@FieldDescribe("선택 가능한 프로세스")
 		private List<NameValueCountPair> processList = new ArrayList<>();
 
-		@FieldDescribe("可选择的开始月份")
+		@FieldDescribe("선택 가능한 시작 월")
 		private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
 		public List<NameValueCountPair> getApplicationList() {

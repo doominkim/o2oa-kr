@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("bind")
-@JaxrsDescribe("绑定.")
+@JaxrsDescribe("연결.")
 public class BindAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BindAction.class);
 
-	@JaxrsMethodDescribe(value = "列示所有绑定对象.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 연결 객체 목록.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

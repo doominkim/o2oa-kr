@@ -51,7 +51,7 @@ class ActionEdit extends BaseAction {
             Wi.copier.copy(wi, person);
             person.setBirthday(wi.getBirthday());
             person.setBoardDate(wi.getBoardDate());
-            // 防止创建的时候加了空格
+            // 생성 시 공백이 추가되는 것 방지
             person.setName(StringUtils.trim(person.getName()));
             this.checkName(business, person.getName(), person.getId());
             this.checkMobile(business, person.getMobile(), person.getId());
@@ -69,7 +69,7 @@ class ActionEdit extends BaseAction {
             }
             this.convertControllerList(effectivePerson, business, person);
 
-            // 重新计算顶层组织
+            // 최상위 조직 재계산
             person.setTopUnitList(ListTools.extractField(business.listTopUnitWithPerson(person.getId()),
                     JpaObject.id_FIELDNAME, String.class, true, true));
 
@@ -78,8 +78,8 @@ class ActionEdit extends BaseAction {
             emc.beginTransaction(Person.class);
             emc.beginTransaction(Identity.class);
             /*
-             * 从内存中pick出来的无法作为实体保存,不能在前面执行,以为后面的convertControllerList也有一个pick,
-             * 会导致一当前这个对象再次被detech
+             * 메모리에서 pick한 것은 엔티티로 저장할 수 없어 앞에서 실행 불가, 뒤의 convertControllerList에도 pick이 있어
+             * 현재 객체가 다시 detech되는 문제 발생
              */
             Person entityPerson = emc.find(person.getId(), Person.class);
             person.copyTo(entityPerson);
@@ -91,13 +91,13 @@ class ActionEdit extends BaseAction {
                 }
             }
             emc.commit();
-            // 刷新缓存
+            // 캐시 새로고침
             if (isNameUpdate) {
                 CacheManager.notify(Identity.class);
             }
             CacheManager.notify(Person.class);
             if(isMobileUpdate) {
-                // 通知x_collect_service_transmit同步数据到collect
+                // x_collect_service_transmit에 collect로 데이터 동기화 알림
                 business.instrument().collect().person();
             }
 

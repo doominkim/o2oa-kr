@@ -31,18 +31,18 @@ import javax.ws.rs.core.MediaType;
  * @author sword
  */
 @Path("process")
-@JaxrsDescribe("流程")
+@JaxrsDescribe("프로세스")
 public class ProcessAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProcessAction.class);
 
-	@JaxrsMethodDescribe(value = "获取流程内容.含所有节点和路由信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "프로세스 내용 조회. 모든 노드와 경로 정보 포함", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -54,13 +54,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取启用版本流程内容.含所有节点和路由信息", action = ActionGetEnabled.class)
+	@JaxrsMethodDescribe(value = "사용 중인 버전의 프로세스 내용 조회. 모든 노드와 경로 정보 포함", action = ActionGetEnabled.class)
 	@GET
 	@Path("{id}/enabled")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getEnabled(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGetEnabled.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -72,7 +72,7 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建流程.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "결재 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -89,13 +89,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新流程.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "결재 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void put(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -107,13 +107,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置流程权限.", action = ActionEditPermission.class)
+	@JaxrsMethodDescribe(value = "프로세스 권한 설정.", action = ActionEditPermission.class)
 	@POST
 	@Path("{id}/permission")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updatePermission(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditPermission.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -125,13 +125,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "升级流程.", action = ActionUpgrade.class)
+	@JaxrsMethodDescribe(value = "프로세스 업그레이드.", action = ActionUpgrade.class)
 	@POST
 	@Path("{id}/upgrade")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void upgrade(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpgrade.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,14 +143,14 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除流程.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "결재 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}/{onlyRemoveNotCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("仅删除流转中Work") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("진행 중인 Work만 삭제") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -162,14 +162,14 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除流程所有版本.", action = ActionDeleteEdition.class)
+	@JaxrsMethodDescribe(value = "프로세스의 모든 버전 삭제.", action = ActionDeleteEdition.class)
 	@DELETE
 	@Path("{id}/{onlyRemoveNotCompleted}/edition")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteEdition(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("仅删除流转中Work") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("진행 중인 Work만 삭제") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
 		ActionResult<ActionDeleteEdition.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -181,13 +181,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示某个应用的所有流程.", action = ActionListWithApplication.class)
+	@JaxrsMethodDescribe(value = "앱의 모든 프로세스 목록 조회.", action = ActionListWithApplication.class)
 	@GET
 	@Path("application/{applicationId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithApplication(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationId") String applicationId) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationId") String applicationId) {
 		ActionResult<List<ActionListWithApplication.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -199,13 +199,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出流程.", action = ActionLeadOut.class)
+	@JaxrsMethodDescribe(value = "프로세스 내보내기.", action = ActionLeadOut.class)
 	@GET
 	@Path("{id}/lead/out")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void leadOut(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionLeadOut.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -217,13 +217,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行流程数据映射.", action = ActionExecuteProjection.class)
+	@JaxrsMethodDescribe(value = "프로세스 데이터 매핑 실행.", action = ActionExecuteProjection.class)
 	@POST
 	@Path("{id}/execute/projection")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void executeProjection(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionExecuteProjection.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -235,14 +235,14 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示流程的所有版本.", action = ActionListEdition.class)
+	@JaxrsMethodDescribe(value = "프로세스의 모든 버전 목록 조회.", action = ActionListEdition.class)
 	@GET
 	@Path("application/{applicationId}/edition/{edition}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listEdition(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationId") String applicationId,
-			@JaxrsParameterDescribe("流程版本标志") @PathParam("edition") String edition) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationId") String applicationId,
+			@JaxrsParameterDescribe("프로세스 버전 표시") @PathParam("edition") String edition) {
 		ActionResult<List<ActionListEdition.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -254,7 +254,7 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "给所有流程打上版本信息.", action = ActionUpgradeAll.class)
+	@JaxrsMethodDescribe(value = "모든 프로세스에 버전 정보 부여.", action = ActionUpgradeAll.class)
 	@GET
 	@Path("upgrade/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -271,13 +271,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "启用当前版本流程.", action = ActionEnable.class)
+	@JaxrsMethodDescribe(value = "현재 버전 프로세스 사용.", action = ActionEnable.class)
 	@GET
 	@Path("{id}/enable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void enableProcess(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionEnable.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -289,13 +289,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示未启用的流程版本.", action = ActionListDisableEdition.class)
+	@JaxrsMethodDescribe(value = "미사용 프로세스 버전 목록 조회.", action = ActionListDisableEdition.class)
 	@GET
 	@Path("application/{applicationId}/disable/edition")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listDisableEdition(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationId") String applicationId) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationId") String applicationId) {
 		ActionResult<List<ActionListDisableEdition.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -307,13 +307,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "停用当前版本流程.", action = ActionDisable.class)
+	@JaxrsMethodDescribe(value = "현재 버전 프로세스 사용 중지.", action = ActionDisable.class)
 	@GET
 	@Path("{id}/disable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void disableProcess(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDisable.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -325,13 +325,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "仅获取流程内容，不包含节点和路由信息", action = ActionGetProcess.class)
+	@JaxrsMethodDescribe(value = "프로세스 내용만 조회, 노드와 경로 정보 미포함", action = ActionGetProcess.class)
 	@GET
 	@Path("{id}/process")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getProcess(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGetProcess.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -343,13 +343,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询流程的指定节点或路由信息.", action = ActionGetProcessElementList.class)
+	@JaxrsMethodDescribe(value = "프로세스의 지정 노드 또는 경로 정보 조회.", action = ActionGetProcessElementList.class)
 	@POST
 	@Path("{id}/list/element")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getProcessElementList(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionGetProcessElementList.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -361,13 +361,13 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示使用表单的所有流程", action = ActionListWithForm.class)
+	@JaxrsMethodDescribe(value = "양식을 사용하는 모든 프로세스 목록 조회", action = ActionListWithForm.class)
 	@GET
 	@Path("form/{formId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithForm(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单标识") @PathParam("formId") String formId) {
+			@JaxrsParameterDescribe("양식 식별자") @PathParam("formId") String formId) {
 		ActionResult<List<ActionListWithForm.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -379,14 +379,14 @@ public class ProcessAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据活动标识和活动类型获取流程活动信息.", action = ActionGetActivity.class)
+	@JaxrsMethodDescribe(value = "활동 식별자와 활동 유형으로 프로세스 활동 정보 조회.", action = ActionGetActivity.class)
 	@GET
 	@Path("activity/{flag}/activityType/{activityType}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getActivity(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("活动ID或者活动唯一编码") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("活动类型") @PathParam("activityType") String activityType) {
+			@JaxrsParameterDescribe("활동 ID 또는 활동 고유 코드") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("활동 유형") @PathParam("activityType") String activityType) {
 		ActionResult<Activity> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -9,14 +9,14 @@ import com.x.mind.assemble.control.Business;
 import com.x.mind.entity.MindFolderInfo;
 
 /**
- * 脑图文件夹信息查询操作服务类：查询
+ * 마인드맵 폴더 정보 조회 작업 서비스 클래스: 조회
  * @author O2LEE
  *
  */
 class ServiceMindFolderInfoQuery{
 
 	/**
-	 * 根据用户个人名称查询用户所有的个人文件夹信息ID列表
+	 * 사용자 이름으로 사용자의 모든 개인 폴더 정보 ID 목록 조회
 	 * @param emc
 	 * @param person
 	 * @return
@@ -28,7 +28,7 @@ class ServiceMindFolderInfoQuery{
 	}
 
 	/**
-	 * 根据指定的ID列表查询脑图目录信息列表
+	 * 지정 ID 목록으로 마인드맵 디렉터리 정보 목록 조회
 	 * @param emc
 	 * @param ids
 	 * @return
@@ -40,7 +40,7 @@ class ServiceMindFolderInfoQuery{
 	}
 
 	/**
-	 * 根据ID获取脑图文件夹信息对象
+	 * ID로 마인드맵 폴더 정보 객체 조회
 	 * @param emc
 	 * @param id
 	 * @return
@@ -52,7 +52,7 @@ class ServiceMindFolderInfoQuery{
 	}
 
 	/**
-	 * 根据ID获取文件夹的下级目录个数
+	 * ID로 폴더의 하위 디렉터리 수 조회
 	 * @param emc
 	 * @param folderId
 	 * @return
@@ -64,7 +64,7 @@ class ServiceMindFolderInfoQuery{
 	}
 
 	/**
-	 * 根据文件夹ID，获取所有的下级文件夹的ID，递归查询
+	 * 폴더 ID로 모든 하위 폴더 ID 조회(재귀 조회)
 	 * @param emc
 	 * @param folderId
 	 * @param allFolderIds
@@ -89,7 +89,7 @@ class ServiceMindFolderInfoQuery{
 	}
 
 	/**
-	 * 根据上级文件夹ID获取下级文件夹ID列表
+	 * 상위 폴더 ID로 하위 폴더 ID 목록 조회
 	 * @param emc
 	 * @param parentId
 	 * @return

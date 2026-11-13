@@ -114,7 +114,7 @@ public class IdentityFactory extends AbstractFactory {
 	// return em.createQuery(cq).getResultList();
 	// }
 
-	// @MethodDescribe("根据指定的Person获取所有的Identity.")
+	// @MethodDescribe("지정한 Person의 모든 Identity 조회.")
 	// public List<String> listWithPerson(String id) throws Exception {
 	// EntityManager em = this.entityManagerContainer().get(Identity.class);
 	// CriteriaBuilder cb = em.getCriteriaBuilder();

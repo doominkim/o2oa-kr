@@ -7,6 +7,6 @@ class ExceptionWorkNotAtManual extends PromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionWorkNotAtManual(String flag) {
-		super("工作: {} 没有处于人工活动.", flag);
+		super("문서: {}이(가) 사람 처리 단계에 있지 않습니다.", flag);
 	}
 }

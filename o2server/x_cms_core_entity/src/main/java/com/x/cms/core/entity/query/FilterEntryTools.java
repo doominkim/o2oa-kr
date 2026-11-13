@@ -161,7 +161,7 @@ public class FilterEntryTools {
 		if (filter.getFormatType().equals(FormatType.booleanValue)) {
 			if (StringUtils.isNotEmpty(filter.getValue())) {
 				if (Comparison.isNotEquals(filter.getComparison())) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.equal(root.get(Item_.booleanValue), BooleanUtils.toBoolean(filter.getValue())));
 				} else {
 					p = cb.and(p, cb.equal(root.get(Item_.booleanValue), BooleanUtils.toBoolean(filter.getValue())));
@@ -171,7 +171,7 @@ public class FilterEntryTools {
 			if (StringUtils.isNotEmpty(filter.getValue())) {
 				Double value = NumberUtils.toDouble(filter.getValue());
 				if (Comparison.isNotEquals(filter.getComparison())) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.equal(root.get(Item_.numberValue), value));
 				} else if (Comparison.isGreaterThan(filter.getComparison())) {
 					p = cb.and(p, cb.greaterThan(root.get(Item_.numberValue), NumberUtils.toDouble(filter.getValue())));
@@ -190,7 +190,7 @@ public class FilterEntryTools {
 				if (DateTools.isDateTime(filter.getValue())) {
 					Date value = DateTools.parseDateTime(filter.getValue());
 					if (Comparison.isNotEquals(filter.getComparison())) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.equal(root.get(Item_.dateTimeValue), value));
 					} else if (Comparison.isGreaterThan(filter.getComparison())) {
 						p = cb.and(p, cb.greaterThan(root.get(Item_.dateTimeValue), value));
@@ -206,7 +206,7 @@ public class FilterEntryTools {
 				} else if (DateTools.isDate(filter.getValue())) {
 					Date value = DateTools.parseDate(filter.getValue());
 					if (Comparison.isNotEquals(filter.getComparison())) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.equal(root.get(Item_.dateValue), value));
 					} else if (Comparison.isGreaterThan(filter.getComparison())) {
 						p = cb.and(p, cb.greaterThan(root.get(Item_.dateValue), value));
@@ -222,7 +222,7 @@ public class FilterEntryTools {
 				} else if (DateTools.isTime(filter.getValue())) {
 					Date value = DateTools.parseTime(filter.getValue());
 					if (Comparison.isNotEquals(filter.getComparison())) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.equal(root.get(Item_.timeValue), value));
 					} else if (Comparison.isGreaterThan(filter.getComparison())) {
 						p = cb.and(p, cb.greaterThan(root.get(Item_.timeValue), value));
@@ -240,7 +240,7 @@ public class FilterEntryTools {
 		} else {
 			String value = filter.getValue();
 			if (Comparison.isNotEquals(filter.getComparison())) {
-				/** 不等于返回等于值,在外部运算 */
+				/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 				p = cb.and(p, cb.equal(root.get(Item_.stringShortValue), value));
 			} else if (Comparison.isGreaterThan(filter.getComparison())) {
 				p = cb.and(p, cb.greaterThan(root.get(Item_.stringShortValue), value));

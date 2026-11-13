@@ -9,8 +9,8 @@ public class ActionLockWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -7682192241303944945L;
 
-	@FieldDescribe("锁定工作标识.")
-	@Schema(description = "锁定工作标识.")
+	@FieldDescribe("업무 문서 잠금 식별자.")
+	@Schema(description = "업무 문서 잠금 식별자.")
 	private String key;
 
 	public String getKey() {

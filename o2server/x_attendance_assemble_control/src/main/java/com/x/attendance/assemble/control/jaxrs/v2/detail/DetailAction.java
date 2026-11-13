@@ -27,19 +27,19 @@ import java.util.List;
  */
 
 @Path("v2/detail")
-@JaxrsDescribe("考勤数据管理")
+@JaxrsDescribe("근태 데이터 관리")
 public class DetailAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(DetailAction.class);
 
-    @JaxrsMethodDescribe(value = "重新生成考勤信息，人员: 人员DN，日期: yyyy-MM-dd.", action = ActionRebuildDetailWithPersonDate.class)
+    @JaxrsMethodDescribe(value = "근태 정보 재생성, 사용자: 사용자 DN, 날짜: yyyy-MM-dd.", action = ActionRebuildDetailWithPersonDate.class)
     @GET
     @Path("rebuild/person/{person}/date/{date}/")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void rebuild(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员") @PathParam("person") String person,
-            @JaxrsParameterDescribe("日期：yyyy-MM-dd") @PathParam("date") String date) {
+            @JaxrsParameterDescribe("사용자") @PathParam("person") String person,
+            @JaxrsParameterDescribe("날짜: yyyy-MM-dd") @PathParam("date") String date) {
         ActionResult<ActionRebuildDetailWithPersonDate.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -51,14 +51,14 @@ public class DetailAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "分页查询考勤信息列表.", action = ActionListByPage.class)
+    @JaxrsMethodDescribe(value = "근태 정보 목록 페이지 조회.", action = ActionListByPage.class)
     @POST
     @Path("list/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListByPage.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -70,7 +70,7 @@ public class DetailAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "统计查询.", action = ActionStatisticWithFilter.class)
+    @JaxrsMethodDescribe(value = "통계 조회.", action = ActionStatisticWithFilter.class)
     @POST
     @Path("statistic/filter")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -88,7 +88,7 @@ public class DetailAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "按人员查询指定日期考勤信息.", action = ActionListPersonAttendance.class)
+    @JaxrsMethodDescribe(value = "사용자별 지정 날짜 근태 정보 조회.", action = ActionListPersonAttendance.class)
     @POST
     @Path("list/person/attendance")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -106,7 +106,7 @@ public class DetailAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "统计导出.", action = ActionStatisticExportExcel.class)
+    @JaxrsMethodDescribe(value = "통계 내보내기.", action = ActionStatisticExportExcel.class)
     @POST
     @Path("statistic/export/filter")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -123,13 +123,13 @@ public class DetailAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据统计id查询相关的打卡记录列表.", action = ActionRecordListByDetailId.class)
+    @JaxrsMethodDescribe(value = "통계 id로 관련 출퇴근 기록 목록 조회.", action = ActionRecordListByDetailId.class)
     @GET
     @Path("statistic/{detailId}/list/record")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void recordList(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("detail 统计 id") @PathParam("detailId") String detailId) {
+            @JaxrsParameterDescribe("detail 통계 id") @PathParam("detailId") String detailId) {
         ActionResult<List<ActionRecordListByDetailId.WoRecord>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

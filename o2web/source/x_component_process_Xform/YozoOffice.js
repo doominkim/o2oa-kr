@@ -217,7 +217,7 @@ MWF.xApplication.process.Xform.YozoOffice = MWF.APPYozoOffice =  new Class({
         }
         return ename;
     },
-    //书签赋值
+    //책갈피 값 설정
     setBookMarkValue : function(name,value){
 
         var YozoOffice = this.iframe.contentWindow.YozoOffice;

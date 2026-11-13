@@ -7,6 +7,6 @@ class ExceptionPersonNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionPersonNameEmpty() {
-		super("员打卡信息中员工姓名不能为空." );
+		super("체크 정보의 직원 이름은 비워 둘 수 없습니다." );
 	}
 }

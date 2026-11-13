@@ -34,8 +34,8 @@ public class URLTools {
 	}
 
 	/**
-	 * Java8 URLEncoder.encode throw Exception,Java11 URLEncoder.encode 不抛出错误
-	 * 统一这两个方法.
+	 * Java8 URLEncoder.encode throw Exception,Java11 URLEncoder.encode 는 오류를 던지지 않음
+	 * 두 메서드를 통일.
 	 * @param str
 	 * @return
 	 */
@@ -49,9 +49,9 @@ public class URLTools {
 	}
 
 	/**
-	 * 生成指定位数的短链接
+	 * 지정한 길이의 단축 링크 생성
 	 * @param url
-	 * @param length 短链接位数，最少4位
+	 * @param length 단축 링크 길이, 최소 4자리
 	 * @return
 	 */
 	public static String shortUrl(String url, int length) {
@@ -63,23 +63,23 @@ public class URLTools {
 			length = defaultLength;
 		}
 		String hex = MD5Tool.getMD5Str(url);
-		// 把加密字符按照 8 位一组 16 进制与 0x3FFFFFFF 进行位与运算
+		// 암호화 문자를 8자리씩 16진수로 0x3FFFFFFF와 비트 AND 연산
 		int i = random.nextInt(25);
 		String sTempSubString = hex.substring(i, i + 8);
 		long lHexLong = 0x3FFFFFFF & Long.parseLong(sTempSubString, 16);
 		String outChars = "" ;
 		for ( int j = 0; j < length; j++) {
-			// 把得到的值与 0x0000003D 进行位与运算，取得字符数组 chars 索引
+			// 얻은 값을 0x0000003D와 비트 AND 연산하여 문자 배열 chars 인덱스 얻기
 			long index = 0x0000003D & lHexLong;
 			outChars += chars[( int ) index];
-			// 每次循环按位右移 5 位
+			// 반복마다 오른쪽으로 5비트 시프트
 			lHexLong = lHexLong >> 5;
 		}
 		return outChars;
 	}
 
 	/**
-	 * 生成6位数的短链接
+	 * 6자리 단축 링크 생성
 	 * @param url
 	 * @return
 	 */

@@ -28,18 +28,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("applicationdict")
-@JaxrsDescribe("数据字典	")
+@JaxrsDescribe("데이터 사전	")
 public class ApplicationDictAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ApplicationDictAction.class);
 
-	@JaxrsMethodDescribe(value = "获取Application的数据字典列表.", action = ActionListWithApplication.class)
+	@JaxrsMethodDescribe(value = "Application의 데이터 사전 목록 조회.", action = ActionListWithApplication.class)
 	@GET
 	@Path("list/application/{applicationId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithApplication(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationId") String applicationId) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationId") String applicationId) {
 		ActionResult<List<ActionListWithApplication.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -51,13 +51,13 @@ public class ApplicationDictAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取单个数据字典以及数据字典数据.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "단일 데이터 사전 및 데이터 사전 데이터 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,7 +69,7 @@ public class ApplicationDictAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建数据字典以及数据.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "데이터 사전 및 데이터 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -86,13 +86,13 @@ public class ApplicationDictAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新数据字典以及数据.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "데이터 사전 및 데이터 갱신.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void put(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -104,13 +104,13 @@ public class ApplicationDictAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定的数据字典以及数据字典数据.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정한 데이터 사전 및 데이터 사전 데이터 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -122,14 +122,14 @@ public class ApplicationDictAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示数据字典对象.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "데이터 사전 객체 페이지 조회.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-							 @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+							 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+							 @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

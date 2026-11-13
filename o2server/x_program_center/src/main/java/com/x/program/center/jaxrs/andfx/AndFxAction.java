@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("andfx")
-@JaxrsDescribe("移动办公接口")
+@JaxrsDescribe("모바일 오피스 인터페이스")
 public class AndFxAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AndFxAction.class);
 
-	@JaxrsMethodDescribe(value = "立即同步.", action = ActionPullSync.class)
+	@JaxrsMethodDescribe(value = "즉시 동기화.", action = ActionPullSync.class)
 	@GET
 	@Path("pull/sync")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

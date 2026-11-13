@@ -7,6 +7,6 @@ class ExceptionDeleteSystemComponent extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionDeleteSystemComponent() {
-		super("不能删除系统组件.");
+		super("시스템 구성요소는 삭제할 수 없습니다.");
 	}
 }

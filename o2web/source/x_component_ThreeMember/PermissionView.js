@@ -717,7 +717,7 @@ MWF.require("MWF.widget.O2Identity", null, false);
 TMPermissionView.CMSAppViewer = new Class({
     Implements: [Options],
     options : {
-        id : "", //对象或分类的ID
+        id : "", //객체 또는 분류의 ID
         orgTypes: ["person","unit","group"],
         title: MWF.xApplication.ThreeMember.LP.viewer
     },

@@ -16,7 +16,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceWorkDayConfig", description = "考勤统计需求日志.")
+@Schema(name = "AttendanceWorkDayConfig", description = "근태 통계 요청 로그.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceWorkDayConfig.table, uniqueConstraints = {
@@ -37,7 +37,7 @@ public class AttendanceWorkDayConfig extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -46,49 +46,49 @@ public class AttendanceWorkDayConfig extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String configName_FIELDNAME = "configName";
-	@FieldDescribe("配置项名称")
+	@FieldDescribe("설정 항목 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + configName_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String configName = "";
 
 	public static final String configYear_FIELDNAME = "configYear";
-	@FieldDescribe("配置年份")
+	@FieldDescribe("설정 연도")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + configYear_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String configYear = "2016";
 
 	public static final String configMonth_FIELDNAME = "configMonth";
-	@FieldDescribe("配置月份")
+	@FieldDescribe("설정 월")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + configMonth_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String configMonth = "";
 
 	public static final String configDate_FIELDNAME = "configDate";
-	@FieldDescribe("配置日期")
+	@FieldDescribe("설정 날짜")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + configDate_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String configDate = "";
 
 	public static final String configType_FIELDNAME = "configType";
-	@FieldDescribe("配置类型：Holiday|Workday")
+	@FieldDescribe("설정 유형: Holiday|Workday")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + configType_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String configType = "Holiday";
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("配置说明")
+	@FieldDescribe("설정 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String description = "";

@@ -50,7 +50,7 @@ class ActionCurrentPersonConsumed extends BaseAction {
 
 		private static final long serialVersionUID = -8841713058732134969L;
 
-		@FieldDescribe("标识")
+		@FieldDescribe("식별자")
 		private List<String> idList = new ArrayList<>();
 
 		public List<String> getIdList() {

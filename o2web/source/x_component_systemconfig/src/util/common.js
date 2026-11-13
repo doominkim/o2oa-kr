@@ -32,11 +32,11 @@ const downloadFile = (url, fileName = '') => {
     eleLink.style.display = 'none';
     eleLink.target='_blank';
     eleLink.href = url;
-    // 受浏览器安全策略的因素，动态创建的元素必须添加到浏览器后才能实施点击
+    // 브라우저 보안 정책 때문에 동적으로 생성한 요소는 브라우저에 추가한 후에만 클릭할 수 있음
     document.body.appendChild(eleLink);
-    // 触发点击  
+    // 클릭 실행  
     eleLink.click();
-    // 然后移除
+    // 그 후 제거
     document.body.removeChild(eleLink);
   };
   

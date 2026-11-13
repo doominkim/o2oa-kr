@@ -334,7 +334,7 @@ public class ActionControl extends ActionBase {
 	}
 
 	private void host() {
-		logger.print("机器码:{}", Host.generateMachineCode());
+		logger.print("머신 코드:{}", Host.generateMachineCode());
 	}
 
 	private void rst(CommandLine cmd) throws Exception {

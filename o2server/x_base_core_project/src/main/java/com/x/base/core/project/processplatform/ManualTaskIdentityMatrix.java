@@ -173,7 +173,7 @@ public class ManualTaskIdentityMatrix extends GsonPropertyObject {
 	}
 
 	/**
-	 * 工作处理完成,如果在行中有用户直接删除行
+	 * 업무 문서 처리 완료, 행에 사용자가 있으면 행을 바로 삭제
 	 * 
 	 * @param identity
 	 * @return
@@ -192,7 +192,7 @@ public class ManualTaskIdentityMatrix extends GsonPropertyObject {
 	}
 
 	/**
-	 * 工作处理完成,如果在行中有用户直接删除行
+	 * 업무 문서 처리 완료, 행에 사용자가 있으면 행을 바로 삭제
 	 * 
 	 * @param identities
 	 * @return

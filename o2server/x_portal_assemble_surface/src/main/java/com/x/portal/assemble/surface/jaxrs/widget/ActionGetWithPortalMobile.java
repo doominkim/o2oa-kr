@@ -62,7 +62,7 @@ class ActionGetWithPortalMobile extends BaseAction {
 	public static class Wo extends Widget {
 
 		private static final long serialVersionUID = 3454132769791427909L;
-		/** 不输出data数据,单独处理 */
+		/** data 데이터는 출력하지 않고 별도 처리 */
 		static WrapCopier<Widget, Wo> copier = WrapCopierFactory.wo(Widget.class, Wo.class,
 				JpaObject.singularAttributeField(Widget.class, true, true), JpaObject.FieldsInvisible);
 

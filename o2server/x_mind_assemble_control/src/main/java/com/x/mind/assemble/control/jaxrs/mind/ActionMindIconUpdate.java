@@ -39,7 +39,7 @@ public class ActionMindIconUpdate extends BaseAction {
 		if( check ){
 			if( StringUtils.isEmpty(mindId) ){
 				check = false;
-				Exception exception = new ExceptionParameterEmpty( "未获取到脑图ID[mindId]!" );
+				Exception exception = new ExceptionParameterEmpty( "마인드맵 ID[mindId]를 가져오지 못했습니다!" );
 				result.error( exception );
 			}
 		}
@@ -48,7 +48,7 @@ public class ActionMindIconUpdate extends BaseAction {
 				size = 128;
 			}
 		}
-		//判断脑图信息是否已经存在
+		//마인드맵 정보 존재 여부 판단
 		if( check ){
 			try {
 				mindBaseInfo = mindInfoService.getMindBaseInfo( mindId );
@@ -59,7 +59,7 @@ public class ActionMindIconUpdate extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e, "根据ID查询脑图信息时发生异常！ID:" + mindId );
+				Exception exception = new ExceptionMindQuery( e, "ID로 마인드맵 정보를 조회하는 중 오류가 발생했습니다! ID:" + mindId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null );
 			}
@@ -70,7 +70,7 @@ public class ActionMindIconUpdate extends BaseAction {
 				BufferedImage image = ImageIO.read(input);
 				int height = image.getHeight(null);
 				int width = image.getWidth(null);
-				//计算新的宽高
+				//새 너비와 높이 계산
 				double step = 0;
 				if(height > width ) {
 					if( height >   size ) {
@@ -86,7 +86,7 @@ public class ActionMindIconUpdate extends BaseAction {
 					}
 				}				
 				image = Scalr.resize(image, Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH, width, height, Scalr.OP_ANTIALIAS);
-				//再获取图片base64编码信息
+				//이어서 이미지 base64 인코딩 정보 조회
 				ImageIO.write(image, "png", baos);
 				base64 = Base64.encodeBase64String(baos.toByteArray());
 			} catch (IOException e) {

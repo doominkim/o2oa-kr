@@ -36,9 +36,9 @@ class ActionUpdateContent extends BaseAction {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
 			Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
-			// 后面要重新保存
+			// 뒤에서 다시 저장해야 함
 			Work work = emc.find(workId, Work.class);
-			// 判断work是否存在
+			// work 존재 여부 판단
 			if (null == work) {
 				throw new ExceptionEntityNotExist(workId, Work.class);
 			}
@@ -57,7 +57,7 @@ class ActionUpdateContent extends BaseAction {
 			if (!fileName.equalsIgnoreCase(attachment.getName())) {
 				fileName = this.adjustFileName(business, work.getJob(), fileName);
 			}
-			// 统计待办数量判断用户是否可以上传附件
+			// 결재 대기 수를 집계해 사용자의 첨부파일 업로드 가능 여부 판단
 			Control control = new WorkControlBuilder(effectivePerson, business, work).enableAllowSave().build();
 			if (BooleanUtils.isNotTrue(control.getAllowSave())) {
 				throw new ExceptionAccessDenied(effectivePerson, work);

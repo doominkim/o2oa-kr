@@ -65,7 +65,7 @@ public class SyncOrganization {
 		List<PersonAttribute> personAttributes = new ArrayList<>();
 		List<Identity> identities = new ArrayList<>();
 		if (lock.tryLock()) {
-			logger.info("移动办公进行人员组织同步.");
+			logger.info("모바일 오피스 사용자 조직 동기화 진행.");
 			try {
 				AndFxFactory factory = new AndFxFactory();
 				for (Department root : factory.roots()) {
@@ -80,48 +80,48 @@ public class SyncOrganization {
 				CacheManager.notify(Identity.class);
 				CacheManager.notify(Role.class);
 			} catch (Exception e) {
-				logger.warn("移动办公进行人员组织同步时出错：{}", e.getMessage());
+				logger.warn("모바일 오피스 사용자 조직 동기화 중 오류: {}", e.getMessage());
 				logger.error(e);
 			} finally {
 				lock.unlock();
 			}
-			logger.info("移动办公人员组织同步结束.");
+			logger.info("모바일 오피스 사용자 조직 동기화 종료.");
 		}
 		result.end();
 		if (!result.getCreateUnitList().isEmpty()) {
-			logger.info("创建组织({}):{}.", result.getCreateUnitList().size(),
+			logger.info("조직 생성({}):{}.", result.getCreateUnitList().size(),
 					StringUtils.join(result.getCreateUnitList(), ","));
 		}
 		if (!result.getUpdateUnitList().isEmpty()) {
-			logger.info("修改组织({}):{}.", result.getUpdateUnitList().size(),
+			logger.info("조직 수정({}):{}.", result.getUpdateUnitList().size(),
 					StringUtils.join(result.getUpdateUnitList(), ","));
 		}
 		if (!result.getRemoveUnitList().isEmpty()) {
-			logger.info("删除组织({}):{}.", result.getRemoveUnitList().size(),
+			logger.info("조직 삭제({}):{}.", result.getRemoveUnitList().size(),
 					StringUtils.join(result.getRemoveUnitList(), ","));
 		}
 		if (!result.getCreatePersonList().isEmpty()) {
-			logger.info("创建个人({}):{}.", result.getCreatePersonList().size(),
+			logger.info("개인 생성({}):{}.", result.getCreatePersonList().size(),
 					StringUtils.join(result.getCreatePersonList(), ","));
 		}
 		if (!result.getUpdatePersonList().isEmpty()) {
-			logger.info("修改个人({}):{}.", result.getUpdatePersonList().size(),
+			logger.info("개인 수정({}):{}.", result.getUpdatePersonList().size(),
 					StringUtils.join(result.getUpdatePersonList(), ","));
 		}
 		if (!result.getRemovePersonList().isEmpty()) {
-			logger.info("删除个人({}):{}.", result.getRemovePersonList().size(),
+			logger.info("개인 삭제({}):{}.", result.getRemovePersonList().size(),
 					StringUtils.join(result.getRemovePersonList(), ","));
 		}
 		if (!result.getCreateIdentityList().isEmpty()) {
-			logger.info("创建身份({}):{}.", result.getCreateIdentityList().size(),
+			logger.info("신분 생성({}):{}.", result.getCreateIdentityList().size(),
 					StringUtils.join(result.getCreateIdentityList(), ","));
 		}
 		if (!result.getUpdateIdentityList().isEmpty()) {
-			logger.info("修改身份({}):{}.", result.getUpdateIdentityList().size(),
+			logger.info("신분 수정({}):{}.", result.getUpdateIdentityList().size(),
 					StringUtils.join(result.getUpdateIdentityList(), ","));
 		}
 		if (!result.getRemoveIdentityList().isEmpty()) {
-			logger.info("删除身份({}):{}.", result.getRemoveIdentityList().size(),
+			logger.info("신분 삭제({}):{}.", result.getRemoveIdentityList().size(),
 					StringUtils.join(result.getRemoveIdentityList(), ","));
 		}
 		return result;
@@ -134,7 +134,7 @@ public class SyncOrganization {
 		units.add(unit);
 		for (User o : factory.listUser(org)) {
 			Person person = this.checkPerson(business, result, o);
-			/* 如果人员没有手机号,那么就先跳过这个人 */
+			/* 사용자에게 휴대폰 번호가 없으면 이 사용자는 건너뜀 */
 			if (null != person) {
 				people.add(person);
 				Identity identity = this.checkIdentity(business, result, person, unit, o);
@@ -151,12 +151,12 @@ public class SyncOrganization {
 		Unit unit = business.unit().getWithAndFxIdObject(Objects.toString(org.getDepartmentId()));
 		if (null != unit) {
 			if ((null == sup) && (StringUtils.isNotEmpty(unit.getSuperior()))) {
-				/* 不是一个顶层组织所以只能删除重建 */
+				/* 최상위 조직이 아니므로 삭제 후 재생성만 가능 */
 				removeUnit(business, result, unit);
 				unit = null;
 			}
 			if ((null != sup) && (!StringUtils.equals(sup.getId(), unit.getSuperior()))) {
-				/* 指定的上级部门和预期不符 */
+				/* 지정한 상위 부서가 예상과 다름 */
 				removeUnit(business, result, unit);
 				unit = null;
 			}
@@ -209,12 +209,12 @@ public class SyncOrganization {
 	}
 
 	private void removeUnit(Business business, PullResult result, Unit unit) throws Exception {
-		logger.info("正在删除组织{}.", unit.getDistinguishedName());
+		logger.info("조직 {} 삭제 중.", unit.getDistinguishedName());
 		List<Unit> os = new ArrayList<>();
 		os.add(unit);
-		// unit本身要删除 把所有子组织查询出来一起删除
+		// unit 자체를 삭제해야 함, 모든 하위 조직을 조회해 함께 삭제
 		os.addAll(business.unit().listSubNestedObject(unit));
-		// level大的 先删除
+		// level이 큰 것 먼저 삭제
 		os = os.stream()
 				.sorted(Comparator.comparing(Unit::getLevel, Comparator.nullsLast(Integer::compareTo)).reversed())
 				.collect(Collectors.toList());
@@ -224,7 +224,7 @@ public class SyncOrganization {
 	}
 
 	private void removeSingleUnit(Business business, PullResult result, Unit unit) throws Exception {
-		logger.info("正在删除单个组织{}.", unit.getDistinguishedName());
+		logger.info("단일 조직 {} 삭제 중.", unit.getDistinguishedName());
 		EntityManagerContainer emc = business.entityManagerContainer();
 		emc.beginTransaction(UnitAttribute.class);
 		emc.beginTransaction(UnitDuty.class);
@@ -289,7 +289,7 @@ public class SyncOrganization {
 		person.setMobile(user.getMobile());
 		person.setUnique(user.getUid());
 		person.setGenderType(GenderType.d);
-		/* 新增人员需要增加密码 */
+		/* 신규 사용자는 비밀번호 추가 필요 */
 		business.person().setPassword(person, this.initPassword(business, person));
 		emc.persist(person);
 		result.getCreatePersonList().add(person.getDistinguishedName());
@@ -330,11 +330,11 @@ public class SyncOrganization {
 		EntityManagerContainer emc = business.entityManagerContainer();
 
 		List<Identity> identities = this.listIdentity(business, person);
-		// 删除身份组织职务成员,提交后才可以删除身份
+		// 신분 조직 직무 멤버 삭제, 커밋 후에야 신분 삭제 가능
 		emc.beginTransaction(UnitDuty.class);
 		this.removeMemberOfUnitDuty(business, identities);
 		emc.commit();
-		// 删除身份
+		// 신분 삭제
 		emc.beginTransaction(Identity.class);
 		for (Identity o : identities) {
 			emc.remove(o, CheckRemoveType.all);
@@ -349,12 +349,12 @@ public class SyncOrganization {
 		}
 		emc.commit();
 
-		// 删除角色成员
+		// 역할 멤버 삭제
 		emc.beginTransaction(Role.class);
 		this.removeMemberOfRole(business, person);
 		emc.commit();
 
-		// 删除组织的管理个人以及继承的管理个人
+		// 조직의 관리 개인 및 상속된 관리 개인 삭제
 		emc.beginTransaction(Unit.class);
 		this.removeMemberOfUnitController(business, person);
 		emc.commit();
@@ -448,7 +448,7 @@ public class SyncOrganization {
 		if (order != null) {
 			identity.setOrderNumber(order.intValue());
 		}
-		// 人员有多个身份不能设置多个主身份
+		// 사용자에게 여러 신분이 있어도 주 신분을 여러 개 설정할 수 없음
 		boolean major = emc.countEqual(Identity.class, Identity.person_FIELDNAME, person.getId()) < 1;
 		identity.setMajor(major);
 		emc.persist(identity, CheckPersistType.all);
@@ -509,7 +509,7 @@ public class SyncOrganization {
 	private void clean(Business business, PullResult result, List<Unit> units, List<Person> people,
 			List<Identity> identities) throws Exception {
 		EntityManagerContainer emc = business.entityManagerContainer();
-		/* 删除身份 */
+		/* 신분 삭제 */
 		/*
 		 * List<Identity> allIdentities = this.listIdentity(business); for (Identity
 		 * identity : ListUtils.subtract(allIdentities, identities)) { Person person =
@@ -522,7 +522,7 @@ public class SyncOrganization {
 		 * emc.beginTransaction(Identity.class); emc.remove(identity,
 		 * CheckRemoveType.all); emc.commit(); } }
 		 */
-		/* 组织单独方法删除 */
+		/* 조직 개별 메서드로 삭제 */
 		List<Unit> allUnit = this.listUnit(business);
 		List<Unit> removeUnits = ListUtils.subtract(allUnit, units).stream()
 				.sorted(Comparator.comparing(Unit::getLevel, Comparator.nullsLast(Integer::compareTo)).reversed())
@@ -531,7 +531,7 @@ public class SyncOrganization {
 			this.removeSingleUnit(business, result, unit);
 		}
 
-		// 删除个人
+		// 개인 삭제
 		if (BooleanUtils.isTrue(Config.andFx().getSyncDeleteUser())) {
 			List<Person> allPeople = this.listPerson(business);
 			for (Person person : ListUtils.subtract(allPeople, people)) {

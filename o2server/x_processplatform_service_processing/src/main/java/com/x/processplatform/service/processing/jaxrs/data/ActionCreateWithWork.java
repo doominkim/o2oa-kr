@@ -60,7 +60,7 @@ class ActionCreateWithWork extends BaseAction {
 					fill(o, work);
 					business.entityManagerContainer().persist(o);
 				}
-				/* 标识数据已经被修改 */
+				/* 데이터 수정됨 표시 */
 				work.setDataChanged(true);
 				emc.commit();
 

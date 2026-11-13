@@ -1,5 +1,5 @@
 o2.xDesktop.requireApp("process.Xform", "$Input", null, false);
-/** @classdesc $Selector 组件类，此类为所有可选组件的父类
+/** @classdesc $Selector 컴포넌트 클래스, 모든 선택형 컴포넌트의 부모 클래스
  * @class
  * @hideconstructor
  * @o2category FormComponents
@@ -12,9 +12,9 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
     Extends: MWF.APP$Input,
 
     /**
-     * 组件加载后触发。如果选项加载为异步，则异步处理完成后触发此事件
+     * 컴포넌트 로드 후 발생. 선택 항목 로드가 비동기이면 비동기 처리 완료 후 이 이벤트 발생
      * @event MWF.xApplication.process.Xform.$Selector#load
-     * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+     * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
      */
 
     _showValue: function (node, value) {
@@ -28,7 +28,7 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
         }
     },
     /**
-     * @summary 刷新选择项，如果选择项是脚本，重新计算。
+     * @summary 선택 항목 새로고침, 선택 항목이 스크립트이면 다시 계산.
      * @example
      * this.form.get('fieldId').resetOption();
      */
@@ -62,7 +62,7 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
         return null;
     },
     setBusinessDataById: function(v, id ){
-        //对id类似于 xx..0..xx 的字段进行拆分
+        //xx..0..xx 형태의 id를 가진 필드를 분리
         var evdata = this.form.Macro.environment.data;
         var data = this.form.businessData.data;
         var thisId = id || this.json.id;
@@ -94,16 +94,16 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
                     this._checkEvdata(evdata, id + "$text", text);
                 }else{
                     var nexId = idList[i+1];
-                    if(o2.typeOf(nexId) === "number"){ //下一个ID是数字
+                    if(o2.typeOf(nexId) === "number"){ //다음 ID가 숫자
                         if( !data[id] && o2.typeOf(data[id]) !== "array" ){
                             data[id] = [];
                             //evdata.check(id, []);
                             this._checkEvdata(evdata, id, []);
                         }
-                        if( nexId > data[id].length ){ //超过了最大下标，丢弃
+                        if( nexId > data[id].length ){ //최대 인덱스 초과, 버림
                             return;
                         }
-                    }else{ //下一个ID是字符串
+                    }else{ //다음 ID가 문자열
                         if( !data[id] || o2.typeOf(data[id]) !== "object"){
                             data[id] = {};
                             //evdata.check(id, {});
@@ -118,18 +118,18 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
         return evdata;
     },
     /**
-     * @summary 获取选择项。
-     * @return {Array | Promise} 返回选择项数组或Promise，如：<pre><code class='language-js'>[
-     *  "女|female",
-     *  "男|male"
+     * @summary 선택 항목 가져오기.
+     * @return {Array | Promise} 선택 항목 배열 또는 Promise 반환, 예: <pre><code class='language-js'>[
+     *  "여|female",
+     *  "남|male"
      * ]</code></pre>
      * @example
      * this.form.get('fieldId').getOptions();
      * @example
-     * //异步
+     * //비동기
      * var opt = this.form.get('fieldId').getOptions();
      * Promise.resolve(opt).then(function(options){
-     *     //options为选择项数组
+     *     //options는 선택 항목 배열
      * })
      */
     getOptions: function (async, refresh) {
@@ -203,18 +203,18 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
     },
 
     /**
-     * @summary 获取整理后的选择项。
-     * @param {Boolean} [refresh] 是否忽略缓存重新计算可选项。
-     * @return {Object} 返回整理后的选择项数组或Promise，如：
-     * <pre><code class='language-js'>{"valueList": ["","female","male"], "textList": ["","女","男"]}
+     * @summary 정리된 선택 항목 가져오기.
+     * @param {Boolean} [refresh] 캐시를 무시하고 선택 항목을 다시 계산할지 여부.
+     * @return {Object} 정리된 선택 항목 배열 또는 Promise 반환, 예:
+     * <pre><code class='language-js'>{"valueList": ["","female","male"], "textList": ["","여","남"]}
      * </code></pre>
      * @example
      * var optionData = this.form.get('fieldId').getOptionsObj();
      * @example
-     * //异步
+     * //비동기
      * var opt = this.form.get('fieldId').getOptionsObj(true);
      * Promise.resolve(opt).then(function(optionData){
-     *     //optionData为选择项
+     *     //optionData는 선택 항목
      * })
      */
     getOptionsObj: function (refresh) {
@@ -252,14 +252,14 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
     },
 
     /**
-     * @summary 获取选中项的value和text。
-     * @return {Object} 返回选中项的value和text，如：
-     * <pre><code class='language-js'>{"value": ["male"], "text": ["男"]}
+     * @summary 선택된 항목의 value와 text 가져오기.
+     * @return {Object} 선택된 항목의 value와 text 반환, 예:
+     * <pre><code class='language-js'>{"value": ["male"], "text": ["남"]}
      * {"value": [""], "text": [""]}
      * </code></pre>
      * @example
      * var data = this.form.get('fieldId').getTextData();
-     * var text = data.text[0] //获取选中项的文本
+     * var text = data.text[0] //선택된 항목의 텍스트 가져오기
      */
     getTextData: function () {
         var ops;
@@ -299,7 +299,7 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
         });
 
         var paths = (this.json.itemDictPath || "").split("/");
-        paths.splice(0, 1); //第一个是root，删掉
+        paths.splice(0, 1); //첫 번째는 root이므로 삭제
         var path = paths.length ? paths.join(".") : null;
 
         var asy = o2.typeOf(async) === "boolean" ? async : (this.json.itemDictAsync !== false);
@@ -447,8 +447,8 @@ MWF.xApplication.process.Xform.$Selector = MWF.APP$Selector = new Class(
         var data = this.form.Macro.environment.statement.execute({
             "name": obj.name,
             "mode": "data",
-            "page": 1, //（number）可选，当前页码，默认为1
-            "pageSize": 1000, //（number）可选，每页的数据条数，默认为20
+            "page": 1, //(number) 선택, 현재 페이지 번호, 기본값 1
+            "pageSize": 1000, //(number) 선택, 페이지당 데이터 수, 기본값 20
             "filter": filter,
             "parameter": parameter,
             "parameterList": this.json.parameterList

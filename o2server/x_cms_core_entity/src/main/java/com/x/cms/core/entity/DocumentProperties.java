@@ -7,17 +7,17 @@ import com.x.cms.core.entity.query.DocumentNotify;
 import java.util.List;
 
 /**
- * 文档扩展配置
+ * 문서 확장 설정
  * @author sword
  */
 public class DocumentProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -1259157593040432239L;
 
-	@FieldDescribe("消息通知对象")
+	@FieldDescribe("메시지 알림 대상")
 	private DocumentNotify documentNotify;
 
-	@FieldDescribe("文档内容图片列表")
+	@FieldDescribe("문서 내용 이미지 목록")
 	private List<String> cloudPictures;
 
 	public DocumentNotify getDocumentNotify() {

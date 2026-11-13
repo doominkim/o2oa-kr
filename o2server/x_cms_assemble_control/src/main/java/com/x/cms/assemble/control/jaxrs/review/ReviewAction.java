@@ -36,7 +36,7 @@ public class ReviewAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReviewAction.class);
 
-	@JaxrsMethodDescribe(value = "搜索.", action = V2Search.class)
+	@JaxrsMethodDescribe(value = "검색.", action = V2Search.class)
 	@POST
 	@Path("v2/search")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -39,16 +39,16 @@ class ActionManageProcessing extends BaseAction {
 				throw new ExceptionEntityNotExist(task.getApplication(), Application.class);
 			}
 			Process process = business.process().pick(task.getProcess());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (BooleanUtils.isFalse(business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process))) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 			emc.beginTransaction(Task.class);
-			// 如果有输入新的路由决策覆盖原有决策
+			// 새 경로 결정을 입력하면 기존 결정을 덮어씀
 			if (StringUtils.isNotEmpty(wi.getRouteName())) {
 				task.setRouteName(wi.getRouteName());
 			}
-			// 如果有新的流程意见那么覆盖原有流程意见
+			// 새 프로세스 의견이 있으면 기존 의견을 덮어씀
 			if (StringUtils.isNotEmpty(wi.getOpinion())) {
 				task.setOpinion(wi.getOpinion());
 			}

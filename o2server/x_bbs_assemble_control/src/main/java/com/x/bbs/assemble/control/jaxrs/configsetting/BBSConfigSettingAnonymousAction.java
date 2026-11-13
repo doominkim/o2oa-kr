@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.bbs.assemble.control.jaxrs.configsetting.exception.ExceptionConfigSettingProcess;
 
 @Path("setting")
-@JaxrsDescribe("论坛配置查询（匿名）")
+@JaxrsDescribe("포럼 설정 조회(익명)")
 public class BBSConfigSettingAnonymousAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(BBSConfigSettingAnonymousAction.class);
 
-	@JaxrsMethodDescribe(value = "获取BBS系统名称配置的论坛设置对象.", action = ActionGetBBSName.class)
+	@JaxrsMethodDescribe(value = "BBS 시스템 이름 설정의 포럼 설정 객체 조회.", action = ActionGetBBSName.class)
 	@GET
 	@Path("bbsName")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -39,7 +39,7 @@ public class BBSConfigSettingAnonymousAction extends StandardJaxrsAction {
 			result = new ActionGetBBSName().execute(request, effectivePerson);
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionConfigSettingProcess(e, "系统在更新配置信息时发生异常！");
+			Exception exception = new ExceptionConfigSettingProcess(e, "설정 정보를 수정하는 중 오류가 발생했습니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}

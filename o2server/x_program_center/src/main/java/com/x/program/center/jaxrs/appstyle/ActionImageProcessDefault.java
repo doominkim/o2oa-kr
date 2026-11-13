@@ -47,14 +47,14 @@ class ActionImageProcessDefault extends BaseAction {
 			BufferedImage scalrImage = Scalr.resize(image, Method.QUALITY, 90, 90);
 			ImageIO.write(scalrImage, "png", baos);
 			String parentFolder = Image.default_image_folder_path;
-			// 上传图片到 webserver 指定目录
+			// webserver 지정 디렉터리에 이미지 업로드
 			Business.dispatch(true, file, parentFolder, baos.toByteArray());
 
 			
 			Image o = Image.process_default();
 			o.setValue(null);
 			o.setPath(parentFolder + "/" + file);
-			// 由于getImages设置了检查,所以只能对images进行处理
+			// getImages에 검사가 설정되어 있어 images만 처리 가능
 			Set<Image> images = Config.appStyle().getImages();
 			images = images.stream().filter(img -> (!StringUtils.equals(img.getName(), Image.name_process_default)))
 					.collect(Collectors.toSet());

@@ -39,7 +39,7 @@ class ActionListWithPersonSupNested extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getPersonList() {
@@ -62,7 +62,7 @@ class ActionListWithPersonSupNested extends BaseAction {
 		for (Person o : os) {
 			personIds.addAll(business.person().listSupNested(o.getId()));
 		}
-		/** 这里不进行排序,保持逐级主管的顺序 */
+		/** 여기서는 정렬하지 않고 단계별 상급자 순서를 유지 */
 		List<Person> list = business.entityManagerContainer().list(Person.class, personIds);
 		List<String> values = ListTools.extractProperty(list, "distinguishedName", String.class, true, true);
 		Wo wo = new Wo();

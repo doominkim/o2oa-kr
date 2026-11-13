@@ -24,7 +24,7 @@ import com.x.cms.core.entity.element.ViewCategory;
 import com.x.cms.core.entity.element.ViewFieldConfig;
 
 /**
- * 删除栏目信息
+ * 게시판 정보 삭제
  * @author sword
  */
 public class ActionDelete extends BaseAction {
@@ -57,22 +57,22 @@ public class ActionDelete extends BaseAction {
 			}
 		} catch ( Exception e ) {
 			check = false;
-			Exception exception = new ExceptionAppInfoProcess( e, "系统在根据应用栏目ID查询应用下分类个数时发生异常。ID:" + id );
+			Exception exception = new ExceptionAppInfoProcess( e, "게시판 ID로 하위 분류 수를 조회하는 중 오류가 발생했습니다. ID:" + id );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		if( check ){
 			try {
-				// 删除栏目信息
+				// 게시판 정보 삭제
 				appInfoServiceAdv.delete( id, effectivePerson );
 				new LogService().log( null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), id, "", "", "", "APPINFO", "删除");
 
-				//增加删除栏目批量操作（对分类和文档）的信息
+				//게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 				new CmsBatchOperationPersistService().addOperation(
 						CmsBatchOperationProcessService.OPT_OBJ_APPINFO,
 						CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "删除栏目：ID=" + id );
 
-				//更新缓存
+				//캐시 갱신
 				CacheManager.notify( AppInfo.class );
 				CacheManager.notify( AppDict.class );
 				CacheManager.notify( AppDictItem.class );

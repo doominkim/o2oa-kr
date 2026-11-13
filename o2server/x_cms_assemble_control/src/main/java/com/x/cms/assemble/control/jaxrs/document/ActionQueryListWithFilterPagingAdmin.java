@@ -23,7 +23,7 @@ import com.x.cms.core.entity.Document;
 import com.x.cms.core.express.tools.filter.QueryFilter;
 
 /**
- * 管理员用
+ * 관리자용
  */
 public class ActionQueryListWithFilterPagingAdmin extends BaseAction {
 
@@ -90,7 +90,7 @@ public class ActionQueryListWithFilterPagingAdmin extends BaseAction {
                     wo.setPictureList(ListTools.toList(document.getIndexPics().split(",")));
                 }
                 if (wi.getNeedData()) {
-                    //需要组装数据
+                    //데이터 조립 필요
                     wo.setData(documentQueryService.getDocumentData(document));
                 }
                 Long count = documentViewRecordServiceAdv.countWithDocIdAndPerson(wo.getId(),
@@ -111,16 +111,16 @@ public class ActionQueryListWithFilterPagingAdmin extends BaseAction {
 
     public static class Wi extends WrapInDocumentFilter {
 
-        @FieldDescribe("查询指定用户可阅读的文档")
+        @FieldDescribe("지정 사용자가 열람할 수 있는 문서 조회")
         private String person;
 
-        @FieldDescribe("是否查询指定用户可编辑的文档，如果为true则person字段必填，默认为否")
+        @FieldDescribe("지정 사용자가 편집할 수 있는 문서 조회 여부, true이면 person 필드 필수, 기본값 아니오")
         private Boolean isAuthor;
 
-        @FieldDescribe("仅返回数据不查询总数，默认false")
+        @FieldDescribe("데이터만 반환하고 총수는 조회하지 않음, 기본값 false")
         private Boolean justData;
 
-        @FieldDescribe("是否排除全员可读文档，默认false")
+        @FieldDescribe("전체 열람 가능 문서 제외 여부, 기본값 false")
         private Boolean excludeAllRead;
 
         public String getPerson() {

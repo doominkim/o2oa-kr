@@ -32,12 +32,12 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = 3728516737526214370L;
 
-		@FieldDescribe("上下文根.")
-		@Schema(description = "上下文根.")
+		@FieldDescribe("컨텍스트 루트.")
+		@Schema(description = "컨텍스트 루트.")
 		private String servletContextName;
 
-		@FieldDescribe("服务器时间.")
-		@Schema(description = "服务器时间.")
+		@FieldDescribe("서버 시간.")
+		@Schema(description = "서버 시간.")
 		private Date serverTime;
 
 		public String getServletContextName() {

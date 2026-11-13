@@ -21,7 +21,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceSelfHoliday", description = "考勤假日配置.")
+@Schema(name = "AttendanceSelfHoliday", description = "근태 휴일 설정.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceSelfHoliday.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceSelfHoliday.table
@@ -41,7 +41,7 @@ public class AttendanceSelfHoliday extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -50,93 +50,93 @@ public class AttendanceSelfHoliday extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 //	public static final String docId_FIELDNAME = "docId";
-//	@FieldDescribe("流程WorkId")
+//	@FieldDescribe("프로세스 WorkId")
 //	@Column( length = JpaObject.length_id, name = ColumnNamePrefix + docId_FIELDNAME )
 //	@CheckPersist(allowEmpty = true)
 //	private String docId;
 
 	public static final String topUnitName_FIELDNAME = "topUnitName";
-	@FieldDescribe("顶层组织名称")
+	@FieldDescribe("최상위 조직명")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + topUnitName_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String topUnitName;
 
 	public static final String topUnitOu_FIELDNAME = "topUnitOu";
-	@FieldDescribe("顶层组织编号")
+	@FieldDescribe("최상위 조직 번호")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + topUnitOu_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String topUnitOu;
 
 	public static final String unitName_FIELDNAME = "unitName";
-	@FieldDescribe("组织名称")
+	@FieldDescribe("조직명")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + unitName_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String unitName;
 
 	public static final String unitOu_FIELDNAME = "unitOu";
-	@FieldDescribe("组织编号")
+	@FieldDescribe("조직 번호")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + unitOu_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String unitOu;
 
 	public static final String employeeName_FIELDNAME = "employeeName";
-	@FieldDescribe("员工姓名：员工的标识，distinguishedName")
+	@FieldDescribe("직원 이름: 직원 식별자, distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + employeeName_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String employeeName;
 
 	public static final String employeeNumber_FIELDNAME = "employeeNumber";
-	@FieldDescribe("员工号，如果没有员工号，可以使用员工标识代替，不可为空")
+	@FieldDescribe("사번, 사번이 없으면 직원 식별자로 대체 가능, 비울 수 없음")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + employeeNumber_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String employeeNumber;
 
 	public static final String leaveType_FIELDNAME = "leaveType";
-	@FieldDescribe("请假类型:带薪年休假|带薪病假|带薪福利假|扣薪事假|出差|培训|其他")
+	@FieldDescribe("휴가 유형:유급 연차|유급 병가|유급 복지 휴가|무급 개인 휴가|출장|교육|기타")
 	@Column( length = JpaObject.length_32B, name = ColumnNamePrefix + leaveType_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String leaveType;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("开始时间")
+	@FieldDescribe("시작 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column( name = ColumnNamePrefix + startTime_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private Date startTime;
 
 	public static final String endTime_FIELDNAME = "endTime";
-	@FieldDescribe("结束时间")
+	@FieldDescribe("종료 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column( name = ColumnNamePrefix + endTime_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private Date endTime;
 
 	public static final String leaveDayNumber_FIELDNAME = "leaveDayNumber";
-	@FieldDescribe("请假天数")
+	@FieldDescribe("휴가 일수")
 	@Column( name = ColumnNamePrefix + leaveDayNumber_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private Double leaveDayNumber = 0.0;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("请假说明")
+	@FieldDescribe("휴가 설명")
 	@Column( length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String batchFlag_FIELDNAME = "batchFlag";
-	@FieldDescribe("录入批次标识：可以填写流程workId，jobId, CMS的文档ID，或者自定义信息，数据保存时会先根据batchFlag做删除，然后再保存新的数据")
+	@FieldDescribe("입력 배치 식별자: 프로세스 workId, jobId, CMS 문서 ID 또는 사용자 정의 정보 입력 가능. 저장 시 batchFlag 기준으로 먼저 삭제한 뒤 새 데이터 저장")
 	@Column( length = JpaObject.length_id, name = ColumnNamePrefix + batchFlag_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String batchFlag;

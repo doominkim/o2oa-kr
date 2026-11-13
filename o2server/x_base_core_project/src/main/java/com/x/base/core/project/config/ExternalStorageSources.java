@@ -102,7 +102,7 @@ public class ExternalStorageSources extends ConfigObject {
 	}
 
 	public Boolean getEnable() {
-		// 兼容7.2之前版本
+		// 7.2 이전 버전 호환
 		return (null == this.enable) ? Boolean.TRUE : this.enable;
 	}
 
@@ -205,15 +205,15 @@ public class ExternalStorageSources extends ConfigObject {
 	public static class Store {
 
 		private StorageProtocol protocol;
-		@FieldDescribe("登录用户名.")
+		@FieldDescribe("로그인 사용자 이름.")
 		private String username;
-		@FieldDescribe("登录密码.")
+		@FieldDescribe("로그인 비밀번호.")
 		private String password;
-		@FieldDescribe("主机地址或阿里云endpoint.")
+		@FieldDescribe("호스트 주소 또는 알리클라우드 endpoint.")
 		private String host;
-		@FieldDescribe("端口.")
+		@FieldDescribe("포트.")
 		private Integer port;
-		@FieldDescribe("存储节点名,对应存储名称,阿里云为bucket(桶)名称.")
+		@FieldDescribe("스토리지 노드 이름, 스토리지 이름에 대응, 알리클라우드는 bucket 이름.")
 		private String name;
 
 		public StorageProtocol getProtocol() {

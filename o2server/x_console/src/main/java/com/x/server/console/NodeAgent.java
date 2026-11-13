@@ -118,7 +118,7 @@ public class NodeAgent extends Thread {
 									String strCommand = commandObject.getCommand();
 									strCommand = strCommand.trim();
 									strCommand = strCommand.substring(strCommand.indexOf(":") + 1, strCommand.length());
-									LOGGER.info("收接到同步命令:" + strCommand);
+									LOGGER.info("동기화 명령 수신:" + strCommand);
 									String syncFilePath = dis.readUTF();
 									File file = new File(Config.base(), syncFilePath);
 									try (FileOutputStream fos = new FileOutputStream(file)) {
@@ -136,10 +136,10 @@ public class NodeAgent extends Thread {
 											|| syncFilePath.indexOf("person.json") > -1
 											|| syncFilePath.indexOf("general.json") > -1
 											|| syncFilePath.indexOf("query.json") > -1) {
-										// 更新web服务配置信息
+										// web 서비스 설정 정보 업데이트
 										WebServers.updateWebServerConfigJson();
 									}
-									LOGGER.info("同步完成");
+									LOGGER.info("동기화 완료");
 									continue;
 
 								}
@@ -148,7 +148,7 @@ public class NodeAgent extends Thread {
 								if (matcher.find()) {
 									String strCommand = commandObject.getCommand().trim();
 									strCommand = StringUtils.substringAfter(strCommand, ":");
-									LOGGER.info("收接到命令:" + strCommand);
+									LOGGER.info("명령 수신:" + strCommand);
 									String filename = dis.readUTF();
 									FileUtils.forceMkdir(Config.dir_local_temp());
 									File tempFile = new File(Config.dir_local_temp(), filename);
@@ -162,9 +162,9 @@ public class NodeAgent extends Thread {
 									}
 
 									filename = filename.substring(0, filename.lastIndexOf("."));
-									// 部署
+									// 배포
 									String result = this.redeploy(strCommand, filename, tempFile);
-									LOGGER.info("部署:" + result);
+									LOGGER.info("배포:" + result);
 									dos.writeUTF(result);
 									dos.flush();
 									FileUtils.forceDelete(tempFile);
@@ -215,8 +215,8 @@ public class NodeAgent extends Thread {
 									String strCommand = commandObject.getCommand();
 									strCommand = strCommand.trim();
 									strCommand = strCommand.substring(strCommand.indexOf(":") + 1, strCommand.length());
-									LOGGER.info("收接到命令:" + strCommand);
-									// 为了同步文件
+									LOGGER.info("명령 수신:" + strCommand);
+									// 파일 동기화를 위해
 									commandQueue.add(strCommand);
 									continue;
 								}
@@ -491,13 +491,13 @@ public class NodeAgent extends Thread {
 			jars.add(o.getAbsolutePath());
 		}
 		filter = new WildcardFileFilter("openjpa-*.jar");
-		/* 如果不单独导入会导致java.lang.NoClassDefFoundError: org/eclipse/jetty/http/MimeTypes */
+		/* 별도로 가져오지 않으면 java.lang.NoClassDefFoundError: org/eclipse/jetty/http/MimeTypes 발생 */
 		filter = FileFilterUtils.or(filter, new WildcardFileFilter("jetty-all-*.jar"));
 		filter = FileFilterUtils.or(filter, new WildcardFileFilter("quartz-*.jar"));
 		filter = FileFilterUtils.or(filter, new WildcardFileFilter("slf4j-simple-*.jar"));
 		filter = FileFilterUtils.or(filter, new WildcardFileFilter("jul-to-slf4j-*.jar"));
 		filter = FileFilterUtils.or(filter, new WildcardFileFilter("log4j-*.jar"));
-		/* jersey从AppClassLoader加载 */
+		/* jersey는 AppClassLoader에서 로드 */
 		for (File o : FileUtils.listFiles(Config.pathCommonsExt(true).toFile(), filter, null)) {
 			jars.add(o.getAbsolutePath());
 		}

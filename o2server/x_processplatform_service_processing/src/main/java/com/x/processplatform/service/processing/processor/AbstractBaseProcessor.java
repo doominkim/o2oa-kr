@@ -27,7 +27,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 import com.x.processplatform.service.processing.Business;
 
 /***
- * 基础的Processor类,属性以及WorkLog处理
+ * 기본 Processor 클래스, 속성 및 WorkLog 처리
  */
 abstract class AbstractBaseProcessor {
 
@@ -73,7 +73,7 @@ abstract class AbstractBaseProcessor {
 		Date date = new Date();
 		if (BooleanUtils.isTrue(aeiObjects.getActivityProcessingConfigurator().getStampArrivedWorkLog())
 				&& ListTools.isNotEmpty(aeiObjects.getWorkLogs())) {
-			/* 如果为空的话那么就是新建的工作,不需要连接到达日志 */
+			/* 비어 있으면 새로 생성된 업무 문서이므로 도착 로그에 연결할 필요 없음 */
 			this.stampArriveWorkLog(aeiObjects, token, date);
 		}
 		if (BooleanUtils.isTrue(aeiObjects.getActivityProcessingConfigurator().getCreateFromWorkLog())) {
@@ -88,18 +88,18 @@ abstract class AbstractBaseProcessor {
 		aeiObjects.getWork().setActivityType(aeiObjects.getActivity().getActivityType());
 		aeiObjects.getWork().setActivityUnique(aeiObjects.getActivity().getUnique());
 		aeiObjects.getWork().setWorkStatus(WorkStatus.processing);
-		// setDestinationRoute 和 setDestinationRouteName 在退回路由中使用到,无需赋空值
+		// setDestinationRoute와 setDestinationRouteName은 반려 라우팅에서 사용되므로 빈 값 할당 불필요
 		aeiObjects.getWork().setDestinationActivity(null);
 		aeiObjects.getWork().setDestinationActivityType(null);
 		aeiObjects.getWork().setForceRouteEnable(false);
-		// 除去人工活动环节，其他环节都去掉tickets值,否则会一直传递下去.
+		// 수동 활동 단계를 제외한 다른 단계는 tickets 값을 제거, 그렇지 않으면 계속 전달됨.
 		if (!Objects.equals(ActivityType.manual, aeiObjects.getActivity().getActivityType())){
 			aeiObjects.getWork().setTickets(new Tickets());			
 		}
 //		aeiObjects.getWork().setDestinationRoute(null);
 //		aeiObjects.getWork().setDestinationRouteName(null);
 		if (StringUtils.isNotEmpty(aeiObjects.getActivity().getForm())) {
-			/** 检查表单存在 */
+			/** 양식 존재 여부 확인 */
 			Form form = this.business().element().get(aeiObjects.getActivity().getForm(), Form.class);
 			if (null != form) {
 				aeiObjects.getWork().setForm(form.getId());
@@ -114,7 +114,7 @@ abstract class AbstractBaseProcessor {
 						&& BooleanUtils.isNotTrue(o.getConnected()))
 				.findFirst().orElse(null);
 		if (null != workLog) {
-			/* 已经有workLog 进行连接 */
+			/* workLog가 이미 있어 연결 */
 			workLog.setArrivedActivity(aeiObjects.getActivity().getId());
 			workLog.setArrivedActivityName(aeiObjects.getActivity().getName());
 			workLog.setArrivedActivityToken(token);
@@ -133,7 +133,7 @@ abstract class AbstractBaseProcessor {
 			}
 			aeiObjects.getUpdateWorkLogs().add(workLog);
 		} else {
-			/* 拆分情况下是有可能这样的情况的,多份Work其中一份已经连接了formActivityToken的WorkLog */
+			/* 분할 상황에서는 이런 경우가 있을 수 있음, 여러 Work 중 하나가 이미 formActivityToken의 WorkLog에 연결됨 */
 			WorkLog oldest = aeiObjects.getWorkLogs().stream()
 					.filter(o -> StringUtils.equals(aeiObjects.getWork().getActivityToken(), o.getFromActivityToken()))
 					.sorted(Comparator.comparing(WorkLog::getCreateTime, Comparator.nullsLast(Date::compareTo)))
@@ -156,16 +156,16 @@ abstract class AbstractBaseProcessor {
 				workLog.setType(aeiObjects.getProcessingAttributes().getType());
 				aeiObjects.getCreateWorkLogs().add(workLog);
 			} else {
-				/* 这样的情况应该是不可能的 */
-				throw new IllegalStateException("不能发生的情况,没有找到任何WorkLog");
+				/* 이런 경우는 있을 수 없음 */
+				throw new IllegalStateException("발생할 수 없는 상황: WorkLog를 하나도 찾지 못했습니다");
 			}
 		}
 		return workLog;
 	}
 
 	/**
-	 * 退回再次jump到当前节点,需要将所有的已办,已阅,待阅的activityToken进行修改,避免再次退回时由于两个activityToken不同取到了部分已办
-	 * 1、拟稿—办理（多人并行1、2、3），1继续流转到确认，2退回到拟稿，拟稿回到办理，办理2、3生成了待办，2、3继续流转到确认，确认退回只到了2、3，这个不对，应该到1、2、3
+	 * 반려 후 다시 현재 노드로 jump, 모든 처리 완료·열람 완료·열람 대기의 activityToken을 수정해야 함, 그렇지 않으면 다시 반려할 때 두 activityToken이 달라 일부 처리 완료만 조회됨
+	 * 1. 기안—처리(다수 병렬 1, 2, 3), 1은 확인으로 진행, 2는 기안으로 반려, 기안이 처리로 돌아오면 처리 2, 3에 결재 대기 생성, 2, 3이 확인으로 진행, 확인에서 반려하면 2, 3에만 돌아감, 이는 잘못되었으며 1, 2, 3으로 돌아가야 함
 	 * 
 	 * @param aeiObjects
 	 * @param workLog

@@ -45,12 +45,12 @@ class ActionList extends BaseAction {
 			ListTools.groupStick(wos, appDictList, "id", "appId", "appDictList");
 			ListTools.groupStick(wos, fileList, AppInfo.id_FIELDNAME, File.appId_FIELDNAME, "fileList");
 
-			//2020年1月16日 O2LEE 查询每个栏目信息对应的配置支持信息JSON以字符串形式放到WrapCms对象中输出 ---->start
+			//2020년 1월 16일 O2LEE 각 게시판 정보에 대응하는 설정 지원 정보 JSON을 문자열로 WrapCms 객체에 담아 출력 ---->start
 			Business business = new Business(emc);
 			for( Wo wo : wos ){
 				wo.setConfig(business.appInfoConfigFactory().getContent(wo.getId()));
 			}
-			//2020年1月16日 O2LEE 查询每个栏目信息对应的配置支持信息JSON以字符串形式放到WrapCms对象中输出 ---->end
+			//2020년 1월 16일 O2LEE 각 게시판 정보에 대응하는 설정 지원 정보 JSON을 문자열로 WrapCms 객체에 담아 출력 ---->end
 
 			wos = wos.stream()
 					.sorted(Comparator.comparing(Wo::getAppAlias, Comparator.nullsLast(String::compareTo))

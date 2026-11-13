@@ -99,7 +99,7 @@ class ActionListPaging extends BaseAction {
 		static WrapCopier<Wi, DocumentCommend> copier = WrapCopierFactory.wi(Wi.class, DocumentCommend.class, null,
 				ListTools.toList(JpaObject.FieldsUnmodify, DocumentCommend.title_FIELDNAME, DocumentCommend.commentTitle_FIELDNAME));
 
-		@FieldDescribe("是否返回点赞对应文档的首页图片，默认为false.")
+		@FieldDescribe("좋아요 대상 문서의 대표 이미지 반환 여부, 기본값 false.")
 		private Boolean returnDocIndexPic;
 
 		public Boolean getReturnDocIndexPic() {
@@ -118,7 +118,7 @@ class ActionListPaging extends BaseAction {
 		static WrapCopier<DocumentCommend, Wo> copier = WrapCopierFactory.wo(DocumentCommend.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("点赞对应文档的首页图片列表.")
+		@FieldDescribe("좋아요 대상 문서의 대표 이미지 목록.")
 		private List<String> indexPicList;
 
 		public List<String> getIndexPicList() {

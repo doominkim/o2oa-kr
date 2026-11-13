@@ -51,7 +51,7 @@ public class BaseTools {
 	}
 
 	/**
-	 * 从Main.class所在的目录开始递归向上,找到version.o2所在目录,就是程序根目录.
+	 * Main.class가 있는 디렉터리부터 위로 재귀하여 version.o2가 있는 디렉터리를 찾으면 그것이 프로그램 루트 디렉터리.
 	 *
 	 * @return
 	 * @throws IOException
@@ -130,7 +130,7 @@ public class BaseTools {
 	public static boolean executeSyncFile(String syncFilePath) throws Exception {
 		boolean syncflag = false;
 		Nodes nodes = Config.nodes();
-		// 同步config文件
+		// config 파일 동기화
 		if (BooleanUtils.isTrue(Config.general().getConfigApiEnable())) {
 			for (Entry<String, Node> entry : nodes.entrySet()) {
 				if (nodes.get(entry.getKey()).getApplication().getEnable()
@@ -159,14 +159,14 @@ public class BaseTools {
 			dos.writeUTF(syncFilePath);
 			dos.flush();
 
-			LOGGER.info("同步文件:" + syncFilePath + " starting...");
+			LOGGER.info("파일 동기화:" + syncFilePath + " starting...");
 			byte[] bytes = new byte[1024];
 			int length = 0;
 			while ((length = fileInputStream.read(bytes, 0, bytes.length)) != -1) {
 				dos.write(bytes, 0, length);
 				dos.flush();
 			}
-			LOGGER.info("同步文件:" + syncFilePath + " end.");
+			LOGGER.info("파일 동기화:" + syncFilePath + " end.");
 
 			syncFileFlag = true;
 		} catch (Exception ex) {

@@ -25,7 +25,7 @@ public class ActionArchiveAttendanceDetail extends BaseAction {
 					attendanceDetailServiceAdv.archive(id);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统归档员工打卡信息时发生异常！ID:" + id);
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보 보관 중 오류가 발생했습니다! ID:" + id);
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}
@@ -34,7 +34,7 @@ public class ActionArchiveAttendanceDetail extends BaseAction {
 					attendanceDetailServiceAdv.archiveAll();
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统归档员工打卡信息时发生异常！ID:" + id);
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보 보관 중 오류가 발생했습니다! ID:" + id);
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}

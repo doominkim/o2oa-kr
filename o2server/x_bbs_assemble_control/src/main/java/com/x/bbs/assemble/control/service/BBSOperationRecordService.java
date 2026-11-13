@@ -18,7 +18,7 @@ import com.x.bbs.entity.BBSSectionInfo;
 import com.x.bbs.entity.BBSSubjectInfo;
 
 /**
- * 论坛信息管理服务类
+ * 포럼 정보 관리 서비스 클래스
  * @author LIYI
  *
  */
@@ -27,7 +27,7 @@ public class BBSOperationRecordService {
 	private static  Logger logger = LoggerFactory.getLogger( BBSOperationRecordService.class );
 	
 	/**
-	 * 根据传入的ID从数据库查询BBSOperationRecord对象
+	 * 전달된 ID로 데이터베이스에서 BBSOperationRecord 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -44,7 +44,7 @@ public class BBSOperationRecordService {
 	}
 	
 	/**
-	 * 向数据库保存BBSOperationRecord对象
+	 * 데이터베이스에 BBSOperationRecord 객체 저장
 	 * @param wrapIn
 	 */
 	public BBSOperationRecord save( BBSOperationRecord _bBSForumInfo, String hostIp, String hostName ) throws Exception {
@@ -55,12 +55,12 @@ public class BBSOperationRecordService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			_bBSForumInfo_tmp = emc.find( _bBSForumInfo.getId(), BBSOperationRecord.class );
 			if( _bBSForumInfo_tmp == null ){
-				//创建一个新的记录
+				//새 레코드 생성
 				emc.beginTransaction( BBSOperationRecord.class );
 				emc.persist( _bBSForumInfo, CheckPersistType.all);	
 				emc.commit();
 			}else{
-				//更新一条记录
+				//레코드 수정
 				emc.beginTransaction( BBSOperationRecord.class );
 				_bBSForumInfo.copyTo( _bBSForumInfo_tmp, JpaObject.FieldsUnmodify  );
 				emc.check( _bBSForumInfo_tmp, CheckPersistType.all );	
@@ -74,7 +74,7 @@ public class BBSOperationRecordService {
 	}
 	
 	/**
-	 * 根据ID从数据库中删除BBSOperationRecord对象
+	 * ID로 데이터베이스에서 BBSOperationRecord 객체 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -84,7 +84,7 @@ public class BBSOperationRecordService {
 			throw new Exception( "id is null, system can not delete any object." );
 		}
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			operationRecord = emc.find( id, BBSOperationRecord.class );
 			if ( null == operationRecord ) {
 				throw new Exception( "object is not exist {'id':'"+ id +"'}" );

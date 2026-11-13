@@ -43,7 +43,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
 
 
     /**
-     * 查询所有同步记录
+     * 모든 동기화 기록 조회
      *
      * @param type DingdingQywxSyncRecord.syncType_dingding DingdingQywxSyncRecord.syncType_qywx
      * @return
@@ -60,7 +60,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 查询冲突的钉钉同步记录
+     * 충돌하는 DingTalk 동기화 기록 조회
      *
      * @param fromTime
      * @param toTime
@@ -80,7 +80,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 根据用户查询一段时间内的打开数据
+     * 사용자 기준 일정 기간 출퇴근 데이터 조회
      *
      * @param startTime
      * @param endTime
@@ -114,7 +114,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 企业微信 打卡数据查询
+     * WeCom 출퇴근 데이터 조회
      *
      * @param startTime
      * @param endTime
@@ -149,7 +149,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
 
 
     /**
-     * 人员统计数据
+     * 사용자 통계 데이터
      * @param person
      * @param year
      * @param month
@@ -170,7 +170,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 人员统计数据
+     * 사용자 통계 데이터
      * @param unit
      * @param year
      * @param month
@@ -192,7 +192,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
 
 
     /**
-     * 部门统计数据
+     * 부서 통계 데이터
      * @param unit
      * @param year
      * @param month
@@ -212,10 +212,10 @@ public class DingdingAttendanceFactory extends AbstractFactory {
         return em.createQuery(query).getResultList();
     }
 
-    ////////////////////////////////统计/////////////////////////////
+    ////////////////////////////////통계/////////////////////////////
 
     /**
-     * 钉钉考勤 个人统计
+     * DingTalk 근태 개인 통계
      * @param year
      * @param month
      * @param person
@@ -274,10 +274,10 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 钉钉考勤 部门出勤人数 、上班签到人数、下班班签到人数
+     * DingTalk 근태 부서 출근 인원, 출근 체크 인원, 퇴근 체크 인원
      *
      * @param date yyyy-MM-dd
-     * @param unit 单位
+     * @param unit 조직
      * @param duty OnDuty OffDuty
      * @return
      * @throws Exception
@@ -320,7 +320,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 查询所有有数据的组织 去重的
+     * 데이터가 있는 모든 조직 조회(중복 제거)
      * @param date
      * @return
      * @throws Exception
@@ -340,7 +340,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
 
 
     /**
-     * 获取StatitsticDingdingForMonth ids
+     * StatitsticDingdingForMonth ids 조회
      * @param year
      * @param month
      * @param unit
@@ -479,11 +479,11 @@ public class DingdingAttendanceFactory extends AbstractFactory {
         return em.createQuery(query).getSingleResult();
     }
 
-    /*********************企业微信统计 ******************************/
+    /*********************WeCom 통계 ******************************/
 
 
     /**
-     * 部门统计数据
+     * 부서 통계 데이터
      * @param unit
      * @param year
      * @param month
@@ -504,7 +504,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 人员统计数据
+     * 사용자 통계 데이터
      * @param unit
      * @param year
      * @param month
@@ -527,7 +527,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
 
 
     /**
-     * 人员统计数据
+     * 사용자 통계 데이터
      * @param person
      * @param year
      * @param month
@@ -548,7 +548,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 个人 月份 所有数据
+     * 개인 월 전체 데이터
      * @param year
      * @param month
      * @param person
@@ -590,7 +590,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
 
 
     /**
-     * 单位 日期 所有数据
+     * 조직 날짜 전체 데이터
      * @param year
      * @param month
      * @param day
@@ -613,7 +613,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 查询所有有数据的组织 去重的
+     * 데이터가 있는 모든 조직 조회(중복 제거)
      * @param date
      * @return
      * @throws Exception
@@ -632,7 +632,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 查询单位 日期 统计数据的id 删除用的
+     * 조직 날짜 통계 데이터 id 조회(삭제용)
      * @param year
      * @param month
      * @param day
@@ -654,7 +654,7 @@ public class DingdingAttendanceFactory extends AbstractFactory {
     }
 
     /**
-     * 查询单位 月份统计数据的id 删除用的
+     * 조직 월 통계 데이터 id 조회(삭제용)
      * @param year
      * @param month
      * @param unit

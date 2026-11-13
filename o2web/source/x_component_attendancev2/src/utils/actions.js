@@ -1,7 +1,7 @@
 import { o2 } from "@o2oa/component";
 
 /**
- * 查询公共配置
+ * 공통 설정 조회
  * @param {*} name
  * @returns
  */
@@ -11,7 +11,7 @@ function getPublicData(name) {
   });
 }
 /**
- * 设置公共配置
+ * 공통 설정 지정
  * @param {*} name
  * @param {*} value
  * @returns
@@ -23,7 +23,7 @@ function putPublicData(name, value) {
 }
 
 /**
- * 调用后端api 只返回data
+ * 백엔드 api 호출, data만 반환
  * @param {*} content
  * @param {*} action
  * @param {*} method
@@ -36,7 +36,7 @@ async function doAction(content, action, method, ...args) {
   return json.data;
 }
 /**
- * 调用后端api 返回整个response对象
+ * 백엔드 api 호출, response 객체 전체 반환
  * @param {*} content
  * @param {*} action
  * @param {*} method
@@ -48,7 +48,7 @@ async function doActionBackResult(content, action, method, ...args) {
   return await m.apply(m, ...args);
 }
 /**
- * 考勤班次API
+ * 근태 근무조 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -57,7 +57,7 @@ function attendanceShiftAction(method, ...args) {
   return doAction("x_attendance_assemble_control", "ShiftAction", method, args);
 }
 /**
- * 考勤班次分页查询
+ * 근태 근무조 페이지 조회
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -71,7 +71,7 @@ function shiftActionListByPaging(...args) {
   );
 }
 /**
- * 考勤工作地址API
+ * 근태 근무지 주소 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -86,7 +86,7 @@ function attendanceWorkPlaceV2Action(method, ...args) {
 }
 
 /**
- * 考勤组分页查询
+ * 근태 그룹 페이지 조회
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -100,7 +100,7 @@ function groupActionListByPaging(...args) {
   );
 }
 /**
- * 考勤组API
+ * 근태 그룹 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -110,7 +110,7 @@ function groupAction(method, ...args) {
 }
 
 /**
- * 排班API
+ * 근무 편성 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -121,7 +121,7 @@ function  groupScheduleAction(method, ...args) {
 
 
 /**
- * 考勤详细分页查询
+ * 근태 상세 페이지 조회
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -146,7 +146,7 @@ function detailAction(method, ...args) {
 
 
 /**
- * 请假数据详细分页查询
+ * 휴가 데이터 상세 페이지 조회
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -189,7 +189,7 @@ function leaveManagerActionListByPaging(method, ...args) {
 
 
 /**
- * 考勤配置API
+ * 근태 설정 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -201,7 +201,7 @@ function configAction(method, ...args) {
 
 
 /**
- * 申诉分页查询
+ * 이의 신청 페이지 조회
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -215,7 +215,7 @@ function appealInfoActionListByPaging(...args) {
   );
 }
 /**
- * 申诉分页查询
+ * 이의 신청 페이지 조회
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -230,7 +230,7 @@ function appealInfoActionManagerListByPaging(...args) {
 }
 
 /**
- * 原始记录分页查询
+ * 원본 기록 페이지 조회
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -246,7 +246,7 @@ function recordActionListByPaging(...args) {
 
 
 /**
- * 申诉API
+ * 이의 신청 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -255,7 +255,7 @@ function appealInfoAction(method, ...args) {
   return doAction("x_attendance_assemble_control", "AppealInfoAction", method, args);
 }
 /**
- * 流程API
+ * 프로세스 API
  * @param {*} method 
  * @param  {...any} args 
  * @returns 
@@ -275,7 +275,7 @@ function jobAction(method, ...args) {
 
 
 /**
- * 我的考勤API
+ * 내 근태 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -284,7 +284,7 @@ function myAction(method, ...args) {
   return doAction("x_attendance_assemble_control", "MyAction", method, args);
 }
 /**
- * 打卡API
+ * 출퇴근 체크 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -294,7 +294,7 @@ function mobileAction(method, ...args) {
 }
 
 /**
- * 组织管理 人员 API
+ * 조직 관리 사용자 API
  * x_organization_assemble_control
  * @param {*} method
  * @param  {...any} args
@@ -305,7 +305,7 @@ function personAction(method, ...args) {
 }
 
 /**
- * 个人 API
+ * 개인 API
  * x_organization_assemble_personal
  * @param {*} method 
  * @param  {...any} args 
@@ -326,7 +326,7 @@ function definitionAction(method, ...args) {
 }
 
 /**
- * 中心服务 脚本执行
+ * 센터 서비스 스크립트 실행
  * @param {*} method 
  * @param  {...any} args 
  * @returns 
@@ -342,7 +342,7 @@ function qywxAuthAction(method, ...args) {
 
 
 
-//file 下载的url
+//file 다운로드 url
 const getFileDownloadUrl = (id) => {
     var action = o2.Actions.load('x_attendance_assemble_control').FileAction.action;
     var url = action.getAddress() + action.actions.download.uri;

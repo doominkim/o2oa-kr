@@ -7,13 +7,13 @@ public class ActionTaskProcessingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6499166223522045961L;
 
-	@FieldDescribe("记录类型.")
+	@FieldDescribe("기록 유형.")
 	private String recordType;
-	@FieldDescribe("工作记录.")
+	@FieldDescribe("업무 문서 기록.")
 	private String workLog;
-	@FieldDescribe("已办.")
+	@FieldDescribe("처리 완료.")
 	private String taskCompleted;
-	@FieldDescribe("串号.")
+	@FieldDescribe("일련번호.")
 	private String series;
 
 	public String getTaskCompleted() {

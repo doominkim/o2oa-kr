@@ -132,7 +132,7 @@ public class WorkLogTree {
 			}
 		}
 
-		// 查找最近的人工节点,过滤所有
+		// 가장 가까운 수동 노드 찾기, 전체 필터링
 		public Nodes downNextManual() {
 			Nodes nodes = new Nodes();
 			for (Node o : this.children) {
@@ -198,7 +198,7 @@ public class WorkLogTree {
 	}
 
 	/**
-	 * 不包含当前节点
+	 * 현재 노드 제외
 	 * 
 	 * @param node
 	 * @return
@@ -243,7 +243,7 @@ public class WorkLogTree {
 	}
 
 	/**
-	 * 包含当前节点
+	 * 현재 노드 포함
 	 * 
 	 * @param n
 	 * @return

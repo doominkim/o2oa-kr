@@ -48,11 +48,11 @@ public class ActionLeaveLedgerAdjust extends BaseAction {
 
             Person person = business.organization().person().getObject(wi.getPerson(), true);
             if (person == null) {
-                throw new ExceptionNotExistObject("人员 " + wi.getPerson());
+                throw new ExceptionNotExistObject("인원 " + wi.getPerson());
             }
             AttendanceV2LeaveType leaveType = emc.find(wi.getLeaveTypeId(), AttendanceV2LeaveType.class);
             if (leaveType == null) {
-                throw new ExceptionNotExistObject("请假类型 " + wi.getLeaveTypeId());
+                throw new ExceptionNotExistObject("휴가 유형 " + wi.getLeaveTypeId());
             }
 
             String personDN = person.getDistinguishedName();
@@ -92,16 +92,16 @@ public class ActionLeaveLedgerAdjust extends BaseAction {
 
     static void validateParameters(Wi wi, boolean adjustedAmountPresent) throws Exception {
         if (wi == null || StringUtils.isBlank(wi.getPerson())) {
-            throw new ExceptionEmptyParameter("用户");
+            throw new ExceptionEmptyParameter("사용자");
         }
         if (StringUtils.isBlank(wi.getLeaveTypeId())) {
-            throw new ExceptionEmptyParameter("假期类型ID");
+            throw new ExceptionEmptyParameter("휴가 유형 ID");
         }
         if (!adjustedAmountPresent || wi.getAdjustedAmount() == null) {
-            throw new ExceptionEmptyParameter("调整后的额度");
+            throw new ExceptionEmptyParameter("조정 후 한도");
         }
         if (wi.getAdjustedAmount() < 0) {
-            throw new ExceptionWithMessage("调整后的额度不能小于0");
+            throw new ExceptionWithMessage("조정 후 한도는 0보다 작을 수 없습니다");
         }
     }
 
@@ -174,7 +174,7 @@ public class ActionLeaveLedgerAdjust extends BaseAction {
             remainingDeductAmount -= deductAmount;
         }
         if (remainingDeductAmount > 0) {
-            throw new ExceptionWithMessage("调减额度不能超过当前剩余额度");
+            throw new ExceptionWithMessage("차감 한도는 현재 잔여 한도를 초과할 수 없습니다");
         }
         return transactions;
     }
@@ -260,16 +260,16 @@ public class ActionLeaveLedgerAdjust extends BaseAction {
 
         private static final long serialVersionUID = 8335039692968182186L;
 
-        @FieldDescribe("用户")
+        @FieldDescribe("사용자")
         private String person;
 
-        @FieldDescribe("假期类型ID")
+        @FieldDescribe("휴가 유형 ID")
         private String leaveTypeId;
 
-        @FieldDescribe("调整后的账户剩余额度")
+        @FieldDescribe("조정 후 계정 잔여 한도")
         private Double adjustedAmount;
 
-        @FieldDescribe("过期时间")
+        @FieldDescribe("만료 시간")
         private Date expireTime;
 
         public String getPerson() {
@@ -309,13 +309,13 @@ public class ActionLeaveLedgerAdjust extends BaseAction {
 
         private static final long serialVersionUID = -5825139547241453472L;
 
-        @FieldDescribe("调整前额度")
+        @FieldDescribe("조정 전 한도")
         private Double beforeAmount;
 
-        @FieldDescribe("调整后额度")
+        @FieldDescribe("조정 후 한도")
         private Double adjustedAmount;
 
-        @FieldDescribe("调整差额")
+        @FieldDescribe("조정 차액")
         private Double adjustAmount;
 
         public Double getBeforeAmount() {

@@ -62,7 +62,7 @@ public class BaseAction extends StandardJaxrsAction{
 	}
 
 	/**
-	 * 获取用户可访问的所有版块ID列表
+	 * 사용자가 접근 가능한 모든 게시판 ID 목록 조회
 	 *
 	 * @param request
 	 * @param currentPerson
@@ -146,7 +146,7 @@ public class BaseAction extends StandardJaxrsAction{
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectInfoProcess(e, "根据指定ID列表查询版块信息时发生异常.");
+				Exception exception = new ExceptionSubjectInfoProcess(e, "ID 목록으로 섹션 정보를 조회하는 중 오류가 발생했습니다.");
 				logger.error(e, currentPerson, request, null);
 				throw exception;
 			}

@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("password")
-@JaxrsDescribe("密码")
+@JaxrsDescribe("비밀번호")
 public class PasswordAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PasswordAction.class);
 
-	@JaxrsMethodDescribe(value = "修改密码.", action = ActionChangePassword.class)
+	@JaxrsMethodDescribe(value = "비밀번호 변경.", action = ActionChangePassword.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -45,7 +45,7 @@ public class PasswordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "修改密码 MockPutToPost.", action = ActionChangePassword.class)
+	@JaxrsMethodDescribe(value = "비밀번호 변경 MockPutToPost.", action = ActionChangePassword.class)
 	@POST
 	@Path("mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

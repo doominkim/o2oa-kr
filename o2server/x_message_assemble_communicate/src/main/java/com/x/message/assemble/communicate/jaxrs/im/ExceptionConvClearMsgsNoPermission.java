@@ -7,7 +7,7 @@ class ExceptionConvClearMsgsNoPermission extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionConvClearMsgsNoPermission() {
-		super("没有权限清空聊天记录！");
+		super("대화 기록을 비울 권한이 없습니다!");
 	}
 
 

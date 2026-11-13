@@ -57,28 +57,28 @@ public class Context extends AbstractContext {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Context.class);
 
-    /* 应用的磁盘路径 */
+    /* 앱 디스크 경로 */
     private volatile String path;
 
     public String path() {
         return this.path;
     }
 
-    /* 上下文 */
+    /* 컨텍스트 */
     private volatile String servletContextName;
 
     public String servletContextName() {
         return this.servletContextName;
     }
 
-    /* 上下文根 */
+    /* 컨텍스트 루트 */
     private volatile ServletContext servletContext;
 
     public ServletContext servletContext() {
         return this.servletContext;
     }
 
-    /* 随机令牌 */
+    /* 랜덤 토큰 */
     private volatile String token;
 
     public String token() {
@@ -103,14 +103,14 @@ public class Context extends AbstractContext {
         return Config.storageMappings();
     }
 
-    /* 是否已经初始化完成 */
+    /* 초기화 완료 여부 */
     private volatile boolean initialized;
 
     public boolean initialized() {
         return this.initialized;
     }
 
-    /* 应用的权重 */
+    /* 앱 가중치 */
     private volatile Integer weight;
 
     public Integer weight() {
@@ -123,10 +123,10 @@ public class Context extends AbstractContext {
         return this.sslEnable;
     }
 
-    /* quartz 调度器 */
+    /* quartz 스케줄러 */
     private Scheduler scheduler;
 
-    /* 队列 */
+    /* 큐 */
     private List<AbstractQueue<?>> queues;
 
     private Context() throws Exception {
@@ -191,11 +191,11 @@ public class Context extends AbstractContext {
     }
 
     public <T extends Job> void scheduleLocal(Class<T> cls) throws Exception {
-        /* 需要单独生成一个独立任务,保证group和预约的任务不重复 */
+        /* group과 예약 작업이 중복되지 않도록 별도의 독립 작업을 생성해야 함 */
         String group = StringTools.uniqueToken();
         JobDetail jobDetail = JobBuilder.newJob(cls).withIdentity(cls.getName(), group).withDescription(Config.node())
                 .build();
-        /* 经过测试0代表不重复,进运行一次 */
+        /* 테스트 결과 0은 반복 안 함, 1회만 실행 */
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(cls.getName(), group)
                 .withDescription("scheduleLocal")
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(1).withRepeatCount(0))
@@ -328,14 +328,14 @@ public class Context extends AbstractContext {
 
     @Override
     @Deprecated
-    // 重来没用调用过的方法,目标是全部方法全部移动到AbstractContext中
+    // 한 번도 호출된 적 없는 메서드, 모든 메서드를 AbstractContext로 이동하는 것이 목표
 //	public <T extends AbstractJob> void fireScheduleOnLocal(Class<T> cls, Integer delay) throws Exception {
-//		/* 需要单独生成一个独立任务,保证group和预约的任务不重复 */
+//		/* group과 예약 작업이 중복되지 않도록 별도의 독립 작업을 생성해야 함 */
 //		JobDataMap jobDataMap = new JobDataMap();
 //		jobDataMap.put("context", this);
 //		JobDetail jobDetail = JobBuilder.newJob(cls).withIdentity(cls.getName(), clazz.getName())
 //				.usingJobData(jobDataMap).withDescription(Config.node()).build();
-//		/* 经过测试0代表不重复,仅运行一次 */
+//		/* 테스트 결과 0은 반복하지 않고 한 번만 실행함을 의미 */
 //		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(cls.getName(), clazz.getName())
 //				.withDescription("schedule").startAt(DateBuilder.futureDate(delay, IntervalUnit.SECOND))
 //				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(1).withRepeatCount(0))
@@ -344,7 +344,7 @@ public class Context extends AbstractContext {
 //	}
 
     public <T extends AbstractJob> void fireScheduleOnLocal(Class<T> cls, Integer delay) throws Exception {
-        // 需要单独生成一个独立任务,保证group和预约的任务不重复
+        // group과 예약 작업이 중복되지 않도록 별도의 독립 작업을 생성해야 함
         // https://stackoverflow.com/questions/34176482/unable-to-store-job-because-one-already-exists-with-this-identification
         String uniqueGroup = StringTools.uniqueToken();
         JobKey jobKey = JobKey.jobKey(cls.getName(), uniqueGroup);
@@ -353,7 +353,7 @@ public class Context extends AbstractContext {
         jobDataMap.put("context", this);
         JobDetail jobDetail = JobBuilder.newJob(cls).withIdentity(jobKey).usingJobData(jobDataMap)
                 .withDescription(Config.node()).build();
-        // 经过测试0代表不重复,仅运行一次
+        // 테스트 결과 0은 반복하지 않고 한 번만 실행함을 의미
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withDescription("schedule")
                 .startAt(DateBuilder.futureDate(delay, IntervalUnit.SECOND))
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(1).withRepeatCount(0))

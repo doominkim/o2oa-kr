@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Input", null, false);
-/** @class Calendar 日期组件。
- * @o2cn 日期选择
+/** @class Calendar 날짜 컴포넌트.
+ * @o2cn 날짜 선택
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  * @extends MWF.xApplication.process.Xform.$Input
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -20,29 +20,29 @@ MWF.xApplication.process.Xform.Calendar = MWF.APPCalendar =  new Class(
 	iconStyle: "calendarIcon",
     options: {
         /**
-         * 日期选择完成时触发.
+         * 날짜 선택이 완료될 때 발생.
          * @event MWF.xApplication.process.Xform.Calendar#complete
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 日期选择器上点清空时触发.
+         * 날짜 선택기에서 지우기를 누를 때 발생.
          * @event MWF.xApplication.process.Xform.Calendar#clear
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 值改变时触发.
+         * 값이 변경될 때 발생.
          * @event MWF.xApplication.process.Xform.Calendar#change
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 显示日期选择器时触发.
+         * 날짜 선택기를 표시할 때 발생.
          * @event MWF.xApplication.process.Xform.Calendar#show
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 隐藏日期选择器时触发.
+         * 날짜 선택기를 숨길 때 발생.
          * @event MWF.xApplication.process.Xform.Calendar#hide
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["queryLoad","postLoad","load","complete", "clear", "change","show","hide"]
     },
@@ -98,10 +98,10 @@ MWF.xApplication.process.Xform.Calendar = MWF.APPCalendar =  new Class(
         this.setData(this.getValue());
     },
     /**
-     * @summary 获取显示的值，或格式化后的文本。
-     * @return {String} 获取显示的值，或格式化后的文本
+     * @summary 표시 값 또는 서식이 적용된 텍스트 조회.
+     * @return {String} 표시 값 또는 서식이 적용된 텍스트
      * @example
-     * var text = this.form.get('fieldId').getText(); //获取选中项的文本
+     * var text = this.form.get('fieldId').getText(); //선택 항목의 텍스트 가져오기
      */
     getText: function (){
         if( this.node.getFirst() ){
@@ -317,11 +317,11 @@ MWF.xApplication.process.Xform.Calendar = MWF.APPCalendar =  new Class(
 
                 this.setRange( options );
                 /**
-                 * @summary 日期弹出选择界面，只读情况下无此成员.
+                 * @summary 날짜 선택 팝업 화면. 읽기 전용일 때는 이 멤버가 없음.
                  * @member {MWF.widget.Calendar}
                  * @example
-                 * var calendar = this.form.get("fieldId").calendar; //获取组件
-                 * if(calendar)calendar.show(); //弹出选择组件
+                 * var calendar = this.form.get("fieldId").calendar; //컴포넌트 가져오기
+                 * if(calendar)calendar.show(); //선택 컴포넌트 팝업
                  */
                 this.calendar = new MWF.widget.Calendar(this.node.getFirst(), options);
                 if( this.form.json && this.form.json.canlendarStyle && typeOf( this.form.json.canlendarStyle.zIndex ) !== "null" && typeOf( this.form.json.canlendarStyle.zIndex ) !== "undefined" ){
@@ -470,7 +470,7 @@ MWF.xApplication.process.Xform.Calendar = MWF.APPCalendar =  new Class(
         return this.getData();
     },
     setExcelData: function(d){
-        var value = d.replace(/&#10;/g,""); //换行符&#10;
+        var value = d.replace(/&#10;/g,""); //줄바꿈 문자&#10;
         this.excelData = value;
         var json = this.json;
         if( value && (new Date(value).isValid()) ){

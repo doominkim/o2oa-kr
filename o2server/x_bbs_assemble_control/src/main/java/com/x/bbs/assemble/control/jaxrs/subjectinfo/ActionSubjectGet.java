@@ -58,7 +58,7 @@ public class ActionSubjectGet extends BaseAction {
 				result.setData(result_cache.getData());
 				result.setCount(1L);
 			} else {
-				// 继续进行数据查询
+				// 데이터 조회 계속
 				result = getSubjectGetQueryResult(id, request, effectivePerson);
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -81,7 +81,7 @@ public class ActionSubjectGet extends BaseAction {
 		String subjectContent = null;
 		Boolean check = true;
 
-		// 查询版块信息是否存在
+		// 게시판 정보 존재 여부 조회
 		if (check) {
 			try {
 				subjectInfo = subjectInfoServiceAdv.get(id);
@@ -99,10 +99,10 @@ public class ActionSubjectGet extends BaseAction {
 				Exception exception = new ExceptionSubjectNotExists(id);
 				result.error(exception);
 				// logger.error( e, effectivePerson, request, null);
-			} else {// 查到了主题信息
+			} else {// 주제 정보 조회됨
 				try {
 					wrap = Wo.copier.copy(subjectInfo);
-					// 根据附件ID列表查询附件信息
+					// 첨부파일 ID 목록으로 첨부파일 정보 조회
 					if ( ListTools.isNotEmpty( subjectInfo.getAttachmentList() )) {
 						subjectAttachmentList = subjectInfoServiceAdv
 								.listAttachmentByIds(subjectInfo.getAttachmentList());
@@ -121,7 +121,7 @@ public class ActionSubjectGet extends BaseAction {
 		}
 		if (check) {
 			if (wrap != null) {
-				// 填充主题的内容信息
+				// 주제 내용 정보 채우기
 				try {
 					subjectContent = subjectInfoServiceAdv.getSubjectContent(id);
 					if (subjectContent != null) {
@@ -137,7 +137,7 @@ public class ActionSubjectGet extends BaseAction {
 		}
 
 		if (check) {
-			if (wrap != null) {// 获取该主题的投票选项组
+			if (wrap != null) {// 해당 주제의 투표 선택지 그룹 조회
 				try {
 					voteOptionGroupList = subjectVoteService.listVoteOptionGroup(id);
 					if ( ListTools.isNotEmpty( voteOptionGroupList )) {
@@ -177,7 +177,7 @@ public class ActionSubjectGet extends BaseAction {
 	}
 
 	/**
-	 * 将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+	 * @ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 	 *
 	 * latestReplyUserShort = ""; bBSIndexSetterNameShort = "";
 	 * screamSetterNameShort = ""; originalSetterNameShort = ""; creatorNameShort =
@@ -230,7 +230,7 @@ public class ActionSubjectGet extends BaseAction {
 
 		private List<WoSubjectAttachment> subjectAttachmentList;
 
-		@FieldDescribe("投票主题的所有投票选项列表.")
+		@FieldDescribe("투표 주제의 전체 투표 선택지 목록.")
 		private List<WoBBSVoteOptionGroup> voteOptionGroupList;
 
 		private String content = null;
@@ -239,25 +239,25 @@ public class ActionSubjectGet extends BaseAction {
 
 		private String pictureBase64 = null;
 
-		@FieldDescribe("最新回复用户昵称")
+		@FieldDescribe("최근 답글 사용자 닉네임")
 		private String latestReplyUserNickName = "";
 
-		@FieldDescribe("首页推荐人姓名")
+		@FieldDescribe("홈 추천자 이름")
 		private String bBSIndexSetterNameShort = "";
 
-		@FieldDescribe("精华设置人姓名")
+		@FieldDescribe("우수 주제 설정자 이름")
 		private String screamSetterNameShort = "";
 
-		@FieldDescribe("原创设置人姓名")
+		@FieldDescribe("원작 설정자 이름")
 		private String originalSetterNameShort = "";
 
-		@FieldDescribe("创建人姓名")
+		@FieldDescribe("작성자 이름")
 		private String creatorNameShort = "";
 
-		@FieldDescribe("审核人姓名")
+		@FieldDescribe("심사자 이름")
 		private String auditorNameShort = "";
 
-		@FieldDescribe("当前用户是否已经投票过.")
+		@FieldDescribe("현재 사용자의 투표 여부.")
 		private Boolean voted = false;
 
 

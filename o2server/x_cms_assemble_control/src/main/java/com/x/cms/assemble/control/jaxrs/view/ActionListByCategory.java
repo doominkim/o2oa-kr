@@ -39,11 +39,11 @@ public class ActionListByCategory extends BaseAction {
 		} else {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				Business business = new Business(emc);
-				//如判断用户是否有查看所有视图的权限，如果没权限不允许继续操作
+				//사용자가 모든 뷰를 볼 권한이 있는지 판단, 권한이 없으면 작업 계속 불가
 				if (!business.viewEditAvailable( effectivePerson )) {
-					throw new Exception("person{name:" + effectivePerson.getDistinguishedName() + "} 用户没有查询全部视图的权限！");
+					throw new Exception("person{name:" + effectivePerson.getDistinguishedName() + "} 사용자에게 전체 뷰를 조회할 권한이 없습니다!");
 				}
-				//如果有权限，继续操作
+				//권한이 있으면 작업 계속
 				ViewFactory viewFactory  = business.getViewFactory();
 				List<String> ids = viewFactory.listByCategoryId( categoryId );
 				List<View> viewList = emc.list( View.class, ids );
@@ -53,7 +53,7 @@ public class ActionListByCategory extends BaseAction {
 					SortTools.desc( wraps, "sequence" );
 
 					for( Wo wo :  wraps ){
-						//根据FormId补充FormName
+						//FormId로 FormName 보충
 						if(StringUtils.isNotEmpty( wo.getFormId() )) {
 							wo.setFormName( formServiceAdv.getNameWithId( wo.getFormId() ) );
 						}
@@ -77,7 +77,7 @@ public class ActionListByCategory extends BaseAction {
 
 		public static List<String> excludes = new ArrayList<String>();
 
-		@FieldDescribe("绑定的表单名称.")
+		@FieldDescribe("연결된 양식 이름.")
 		private String formName = null;
 
 		public static final WrapCopier<View, Wo> copier = WrapCopierFactory.wo( View.class, Wo.class, null, JpaObject.FieldsInvisible);

@@ -37,7 +37,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 直接发布文档内容
+ * 문서 내용 바로 게시
  *
  * @author O2LEE
  *
@@ -83,7 +83,7 @@ public class ActionPersistPublishContent extends BaseAction {
 			throw new ExceptionAccessDenied(effectivePerson);
 		}
 
-		// 查询分类设置的编辑表单
+		// 분류에 설정된 편집 양식 조회
 		if (StringUtils.isEmpty(categoryInfo.getFormId())) {
 			throw new ExceptionCategoryFormIdEmpty();
 		}
@@ -111,7 +111,7 @@ public class ActionPersistPublishContent extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionDocumentInfoProcess(e,
-							"系统在根据ID查询阅读表单时发生异常！ID：" + categoryInfo.getReadFormId());
+							"ID로 읽기 양식을 조회하는 중 오류가 발생했습니다! ID: " + categoryInfo.getReadFormId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -153,14 +153,14 @@ public class ActionPersistPublishContent extends BaseAction {
 						wi.setCreatorUnitName(effectivePerson.getDistinguishedName());
 						wi.setCreatorTopUnitName(effectivePerson.getDistinguishedName());
 					} else {
-						// 尝试一下根据传入的用户或者当前用户获取用户的第一个身份
+						// 전달된 사용자 또는 현재 사용자로 사용자의 첫 번째 신분 조회 시도
 						wi.setCreatorIdentity(userManagerService.getMajorIdentityWithPerson(wi.getCreatorPerson()));
 					}
 				}
 
 				if (!StringUtils.equals(EffectivePerson.CIPHER, wi.getCreatorIdentity())
 						&& !StringUtils.equals(Token.defaultInitialManager, wi.getCreatorIdentity())) {
-					// 说明是实际的用户，并不使用cipher和xadmin代替
+					// 실제 사용자임을 의미, cipher와 xadmin으로 대체하지 않음
 					if (StringUtils.isNotEmpty(wi.getCreatorIdentity())) {
 						wi.setCreatorPerson(userManagerService.getPersonNameWithIdentity(wi.getCreatorIdentity()));
 						wi.setCreatorUnitName(userManagerService.getUnitNameByIdentity(wi.getCreatorIdentity()));
@@ -204,7 +204,7 @@ public class ActionPersistPublishContent extends BaseAction {
 			}
 		}
 
-		// 从流程管理中复制所有的附件到CMS
+		// 프로세스 관리의 모든 첨부파일을 CMS로 복사
 		if (check) {
 			if (wi.getWf_attachmentIds() != null && wi.getWf_attachmentIds().length > 0) {
 				FileInfo fileInfo = null;
@@ -243,7 +243,7 @@ public class ActionPersistPublishContent extends BaseAction {
 			}
 		}
 
-		// 从CMS其他文档中复制所有的附件到CMS
+		// CMS의 다른 문서에서 모든 첨부파일을 CMS로 복사
 		if (check) {
 			if (wi.getCms_attachmentIds() != null && wi.getCms_attachmentIds().length > 0) {
 				FileInfo fileInfo = null;
@@ -296,7 +296,7 @@ public class ActionPersistPublishContent extends BaseAction {
 		}
 
 		if (check && !wi.getSkipPermission()) {
-			// 将读者以及作者信息持久化到数据库中
+			// 독자 및 작성자 정보를 데이터베이스에 저장
 			try {
 				if (oldDocument == null || wi.getReaderList() != null || wi.getAuthorList() != null) {
 					documentPersistService.refreshDocumentPermission(document.getId(), wi.getReaderList(),
@@ -355,54 +355,54 @@ public class ActionPersistPublishContent extends BaseAction {
 
 		private String id = null;
 
-		@FieldDescribe("文档操作者身份")
+		@FieldDescribe("문서 조작자 신분")
 		private String identity = null;
 
-		@FieldDescribe("启动流程的JobId.")
+		@FieldDescribe("프로세스를 시작한 JobId.")
 		private String wf_jobId = null;
 
-		@FieldDescribe("启动流程的WorkId.")
+		@FieldDescribe("프로세스를 시작한 WorkId.")
 		private String wf_workId = null;
 
-		@FieldDescribe("流程的表单Id.")
+		@FieldDescribe("프로세스의 양식 Id.")
 		private String wf_formId = null;
 
-		@FieldDescribe("启动流程的附件列表.")
+		@FieldDescribe("프로세스를 시작한 첨부파일 목록.")
 		private String[] wf_attachmentIds = null;
 
-		@FieldDescribe("内容管理其他文档的附件列表，非必填")
+		@FieldDescribe("콘텐츠 관리 다른 문서의 첨부파일 목록, 선택 사항")
 		private String[] cms_attachmentIds = null;
 
-		@FieldDescribe("文档数据JSON对象.")
+		@FieldDescribe("문서 데이터 JSON 객체.")
 		private JsonElement docData = null;
 
-		@FieldDescribe("文档读者，Json数组，权限对象需要包含四个属性:<br/>permission权限类别：读者|阅读|作者|管理,  <br/>permissionObjectType使用者类别：所有人|组织|人员|群组, <br/>permissionObjectCode使用者编码：所有人|组织编码|人员UID|群组编码, <br/>permissionObjectName使用者名称：所有人|组织名称|人员名称|群组名称")
+		@FieldDescribe("문서 독자, Json 배열, 권한 객체는 네 가지 속성을 포함해야 함:<br/>permission 권한 유형: 독자|열람|작성자|관리,  <br/>permissionObjectType 사용자 유형: 모든 사람|조직|사용자|그룹, <br/>permissionObjectCode 사용자 코드: 모든 사람|조직 코드|사용자 UID|그룹 코드, <br/>permissionObjectName 사용자 이름: 모든 사람|조직 이름|사용자 이름|그룹 이름")
 		private List<PermissionInfo> readerList = null;
 
-		@FieldDescribe("文档编辑者, ，Json数组，权限对象需要包含四个属性:<br/>permission权限类别：读者|阅读|作者|管理,  <br/>permissionObjectType使用者类别：所有人|组织|人员|群组, <br/>permissionObjectCode使用者编码：所有人|组织编码|人员UID|群组编码, <br/>permissionObjectName使用者名称：所有人|组织名称|人员名称|群组名称")
+		@FieldDescribe("문서 편집자, , Json 배열, 권한 객체는 네 가지 속성을 포함해야 함:<br/>permission 권한 유형: 독자|열람|작성자|관리,  <br/>permissionObjectType 사용자 유형: 모든 사람|조직|사용자|그룹, <br/>permissionObjectCode 사용자 코드: 모든 사람|조직 코드|사용자 UID|그룹 코드, <br/>permissionObjectName 사용자 이름: 모든 사람|조직 이름|사용자 이름|그룹 이름")
 		private List<PermissionInfo> authorList = null;
 
 		private List<String> cloudPictures = null;
 
-		@FieldDescribe("不修改权限（跳过权限设置，保留原来的设置）， True|False.")
+		@FieldDescribe("권한 수정 안 함(권한 설정을 건너뛰고 기존 설정 유지), True|False.")
 		private Boolean skipPermission = false;
 
-		@FieldDescribe("文档摘要，70字以内")
+		@FieldDescribe("문서 요약, 70자 이내")
 		private String summary;
 
-		@FieldDescribe("文档标题，70字以内")
+		@FieldDescribe("문서 제목, 70자 이내")
 		private String title;
 
-		@FieldDescribe("客体密级标识")
+		@FieldDescribe("객체 보안 등급 식별자")
 		private Integer objectSecurityClearance;
 
 		@FieldDescribe("文档类型，跟随分类类型，信息（默认） | 数据")
 		private String documentType = "信息";
 
-		@FieldDescribe("文档状态: published | waitPublish")
+		@FieldDescribe("문서 상태: published | waitPublish")
 		private String docStatus = "published";
 
-		@FieldDescribe("分类ID")
+		@FieldDescribe("분류ID")
 		private String categoryId;
 
 		private String appId;
@@ -446,7 +446,7 @@ public class ActionPersistPublishContent extends BaseAction {
 
 		private Date modifyTime;
 
-		@FieldDescribe("是否置顶")
+		@FieldDescribe("상단 고정 여부")
 		private Boolean isTop = false;
 
 		private Boolean isNotice = true;
@@ -484,13 +484,13 @@ public class ActionPersistPublishContent extends BaseAction {
 		@FieldDescribe("定时发布文档消息提醒对象(参数同消息发布接口对象).")
 		private DocumentNotify documentNotify;
 
-		@FieldDescribe("业务数据String值01.")
+		@FieldDescribe("업무 데이터 String 값01.")
 		private String stringValue01;
 
-		@FieldDescribe("业务数据String值02.")
+		@FieldDescribe("업무 데이터 String 값02.")
 		private String stringValue02;
 
-		@FieldDescribe("业务数据String值03.")
+		@FieldDescribe("업무 데이터 String 값03.")
 		private String stringValue03;
 
 		public String getId() {

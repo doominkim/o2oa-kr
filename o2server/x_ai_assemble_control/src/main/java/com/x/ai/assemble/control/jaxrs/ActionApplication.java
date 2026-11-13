@@ -9,7 +9,7 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 
 /**
- * Jaxrs服务注册类，在此类中注册的Action会向外提供服务
+ * Jaxrs 서비스 등록 클래스, 이 클래스에 등록된 Action이 외부에 서비스 제공
  * @author sword
  */
 @ApplicationPath("jaxrs")
@@ -18,7 +18,7 @@ public class ActionApplication extends AbstractActionApplication {
 	@Override
 	public Set<Class<?>> getClasses() {
 
-		//提供服务的Action类需要在这里注册，不然无法向外提供服务
+		//서비스를 제공하는 Action 클래스는 여기에 등록해야 하며, 그렇지 않으면 외부에 서비스를 제공할 수 없음
 		this.classes.add( ConfigAction.class);
 		this.classes.add( ChatAction.class);
 		this.classes.add( IndexAction.class);

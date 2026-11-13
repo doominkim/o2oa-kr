@@ -53,7 +53,7 @@ public class StartCommand {
 	};
 
 	private static boolean ifInitServerNecessary() {
-		// 密码为空且数据库文件不存在
+		// 비밀번호가 비어 있고 데이터베이스 파일이 존재하지 않음
 		return ifInitServerNecessarySetPassword();
 	}
 
@@ -70,7 +70,7 @@ public class StartCommand {
 	private static void startInitServer() {
 		try {
 			Servers.startInitServer();
-			// 等待停止信号
+			// 중지 신호 대기
 			Servers.getInitServer().join();
 			Servers.stopInitServer();
 		} catch (InterruptedException ie) {
@@ -116,7 +116,7 @@ public class StartCommand {
 	private static void startDataServer() {
 		try {
 			if (BooleanUtils.isNotTrue(Config.externalDataSources().enable())) {
-				// 如果启用了外部数据源,那么不启用默认数据库.
+				// 외부 데이터 소스를 사용하면 기본 데이터베이스는 사용하지 않음.
 				Servers.startDataServer();
 			}
 		} catch (Exception e) {

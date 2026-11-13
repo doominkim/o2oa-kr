@@ -36,7 +36,7 @@ import com.x.base.core.project.tools.DateTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Unit", description = "组织组织对象.")
+@Schema(name = "Unit", description = "조직 조직 객체.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Unit.table, uniqueConstraints = {
@@ -60,21 +60,21 @@ public class Unit extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	@CheckRemove(citationNotExists = {
-			/* 单位没有下级单位 */
+			/* 조직에 하위 조직 없음 */
 			@CitationNotExist(type = Unit.class, fields = Unit.superior_FIELDNAME),
-			/* 单位没有身份成员 */
+			/* 조직에 신분 구성원 없음 */
 			@CitationNotExist(type = Identity.class, fields = Identity.unit_FIELDNAME),
-			/* 单位没有角色 */
+			/* 조직에 역할 없음 */
 			@CitationNotExist(type = UnitAttribute.class, fields = UnitAttribute.unit_FIELDNAME),
-			/* 单位没有职务 */
+			/* 조직에 직무 없음 */
 			@CitationNotExist(type = UnitDuty.class, fields = UnitDuty.unit_FIELDNAME) })
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.pinyin = StringUtils.lowerCase(PinyinHelper.convertToPinyinString(name, "", PinyinFormat.WITHOUT_TONE));
@@ -83,16 +83,16 @@ public class Unit extends SliceJpaObject {
 		this.unique = StringUtils.isBlank(this.unique) ? id : unique;
 		this.distinguishedName = this.name + PersistenceProperties.distinguishNameSplit + this.unique
 				+ PersistenceProperties.distinguishNameSplit + PersistenceProperties.Unit.distinguishNameCharacter;
-		/** 生成默认排序号 */
+		/** 기본 정렬 번호 생성 */
 		if (null == this.orderNumber) {
 			this.orderNumber = DateTools.timeOrderNumber();
 		}
 	}
 
-	/** 默认内容结束 */
+	/** 기본 내용 끝 */
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称,可以重名.")
+	@FieldDescribe("이름, 중복 가능.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -100,7 +100,7 @@ public class Unit extends SliceJpaObject {
 
 	public static final String unique_FIELDNAME = "unique";
 	@Flag
-	@FieldDescribe("唯一标识,不可重复,为空则使用自动填充值")
+	@FieldDescribe("고유 식별자, 중복 불가, 비어 있으면 자동 채움 값 사용")
 	@Column(length = length_255B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true, citationNotExists = @CitationNotExist(fields = {
@@ -109,14 +109,14 @@ public class Unit extends SliceJpaObject {
 
 	public static final String distinguishedName_FIELDNAME = "distinguishedName";
 	@Flag
-	@FieldDescribe("识别名.以@U结尾.")
+	@FieldDescribe("식별명. @U로 끝남.")
 	@Column(length = length_255B, name = ColumnNamePrefix + distinguishedName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + distinguishedName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String distinguishedName;
 
 	public static final String typeList_FIELDNAME = "typeList";
-	@FieldDescribe("组织类型.")
+	@FieldDescribe("조직 유형.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + typeList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -127,21 +127,21 @@ public class Unit extends SliceJpaObject {
 	private List<String> typeList;
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音,自动生成")
+	@FieldDescribe("name 병음, 자동 생성")
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母,自动生成")
+	@FieldDescribe("name 병음 첫 글자, 자동 생성")
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyinInitial;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -149,19 +149,19 @@ public class Unit extends SliceJpaObject {
 
 	public static final String shortName_FIELDNAME = "shortName";
 	@CheckPersist(allowEmpty = true)
-	@FieldDescribe("组织简称。")
+	@FieldDescribe("조직 약칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + shortName_FIELDNAME)
 	private String shortName;
 
 	public static final String level_FIELDNAME = "level";
-	@FieldDescribe("组织级别,1为最上层组织.自动计算.")
+	@FieldDescribe("조직 레벨, 1이 최상위 조직. 자동 계산.")
 	@Column(name = ColumnNamePrefix + level_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + level_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer level;
 
 	public static final String levelName_FIELDNAME = "levelName";
-	@FieldDescribe("显示的层级名.")
+	@FieldDescribe("표시 계층명.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@CheckPersist(allowEmpty = false)
@@ -169,27 +169,27 @@ public class Unit extends SliceJpaObject {
 	private String levelName;
 
 	public static final String levelOrderNumber_FIELDNAME = "levelOrderNumber";
-	@FieldDescribe("层级排序号,使用" + PersistenceProperties.Unit.levelNameSplit
-			+ "进行分割.将逐级unit中的orderNumber的Integer值扩充到在Organization配置中指定位数的文本值,前填充0")
+	@FieldDescribe("계층 정렬 번호, 다음을 사용해" + PersistenceProperties.Unit.levelNameSplit
+			+ "분할. 각 단계 unit의 orderNumber Integer 값을 Organization 설정에 지정된 자릿수의 텍스트 값으로 확장, 앞에 0 채움")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + levelOrderNumber_FIELDNAME)
 	private String levelOrderNumber;
 
 	public static final String superior_FIELDNAME = "superior";
-	@FieldDescribe("上级组织.")
+	@FieldDescribe("상위 조직.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + superior_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + superior_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationExists = { @CitationExist(type = Unit.class) })
 	private String superior;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String controllerList_FIELDNAME = "controllerList";
-	@FieldDescribe("组织的管理人员.")
+	@FieldDescribe("조직의 관리자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + controllerList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -200,76 +200,76 @@ public class Unit extends SliceJpaObject {
 	private List<String> controllerList;
 
 	public static final String dingdingId_FIELDNAME = "dingdingId";
-	@FieldDescribe("钉钉部门ID.")
+	@FieldDescribe("딩톡 부서 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + dingdingId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dingdingId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String dingdingId;
 
 	public static final String dingdingHash_FIELDNAME = "dingdingHash";
-	@FieldDescribe("钉钉部门哈希特征.")
+	@FieldDescribe("딩톡 부서 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + dingdingHash_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dingdingHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String dingdingHash;
 
 	public static final String weLinkId_FIELDNAME = "weLinkId";
-	@FieldDescribe("WeLink部门ID.")
+	@FieldDescribe("WeLink 부서 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + weLinkId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + weLinkId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String weLinkId;
 
 	public static final String weLinkHash_FIELDNAME = "weLinkHash";
-	@FieldDescribe("WeLink部门哈希特征.")
+	@FieldDescribe("WeLink 부서 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + weLinkHash_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + weLinkHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String weLinkHash;
 
 	public static final String qiyeweixinId_FIELDNAME = "qiyeweixinId";
-	@FieldDescribe("企业微信人员ID.")
+	@FieldDescribe("기업 위챗 사용자 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + qiyeweixinId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + qiyeweixinId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String qiyeweixinId;
 
 	public static final String zhengwuDingdingId_FIELDNAME = "zhengwuDingdingId";
-	@FieldDescribe("政务钉钉人员ID.")
+	@FieldDescribe("정무 딩톡 사용자 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + zhengwuDingdingId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + zhengwuDingdingId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String zhengwuDingdingId;
 
 	public static final String andFxId_FIELDNAME = "andFxId";
-	@FieldDescribe("移动办公组织ID.")
+	@FieldDescribe("모바일 오피스 조직 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + andFxId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + andFxId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String andFxId;
 
 	public static final String zhengwuDingdingHash_FIELDNAME = "zhengwuDingdingHash";
-	@FieldDescribe("政务钉钉人员哈希特征.")
+	@FieldDescribe("정무 딩톡 사용자 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + zhengwuDingdingHash_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + zhengwuDingdingHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String zhengwuDingdingHash;
 
 	public static final String qiyeweixinHash_FIELDNAME = "qiyeweixinHash";
-	@FieldDescribe("企业微信人员哈希特征.")
+	@FieldDescribe("기업 위챗 사용자 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + qiyeweixinHash_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + qiyeweixinHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String qiyeweixinHash;
 
 	public static final String andFxHash_FIELDNAME = "andFxHash";
-	@FieldDescribe("移动办公组织哈希特征.")
+	@FieldDescribe("모바일 오피스 조직 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + andFxHash_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + andFxHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String andFxHash;
 
-	/* flag标志位 */
+	/* flag 플래그 비트 */
 
 	// public static String[] FLA GS = new String[] { JpaObject.id_FIELDNAME,
 	// unique_FIELDNAME,

@@ -126,13 +126,13 @@ _worker._getDesingerModule = function(id, restful, par, moduleType, desingerType
 
 _worker._getDesinger_processPlatform = function(id){
     var promiseArr = [];
-    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //所有脚本
+    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //모든 스크립트
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listProcessScript, {"applicationId": id}, "processPlatform", "script"));
     }
-    if (_worker.findData.filterOption.designerTypes.indexOf("form")!=-1){      //所有表单
+    if (_worker.findData.filterOption.designerTypes.indexOf("form")!=-1){      //모든 양식
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listProcessForm, {"applicationId": id}, "processPlatform", "form"));
     }
-    if (_worker.findData.filterOption.designerTypes.indexOf("process")!=-1){   //所有流程
+    if (_worker.findData.filterOption.designerTypes.indexOf("process")!=-1){   //모든 프로세스
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listProcessProcess, {"applicationId": id}, "processPlatform", "process"));
     }
     return promiseArr;
@@ -140,10 +140,10 @@ _worker._getDesinger_processPlatform = function(id){
 
 _worker._getDesinger_cms = function(id){
     var promiseArr = [];
-    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //所有脚本
+    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //모든 스크립트
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listCmsScript, {"flag": id}, "cms", "script"));
     }
-    if (_worker.findData.filterOption.designerTypes.indexOf("form")!=-1){      //所有表单
+    if (_worker.findData.filterOption.designerTypes.indexOf("form")!=-1){      //모든 양식
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listCmsForm, {"appId": id}, "cms", "form"));
     }
     return promiseArr;
@@ -151,13 +151,13 @@ _worker._getDesinger_cms = function(id){
 
 _worker._getDesinger_portal = function(id){
     var promiseArr = [];
-    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //所有脚本
+    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //모든 스크립트
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listPortalScript, {"portalId": id}, "portal", "script"));
     }
-    if (_worker.findData.filterOption.designerTypes.indexOf("page")!=-1){      //所有表单
+    if (_worker.findData.filterOption.designerTypes.indexOf("page")!=-1){      //모든 양식
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listPortalPage, {"portalId": id}, "portal", "page"));
     }
-    if (_worker.findData.filterOption.designerTypes.indexOf("widget")!=-1){   //所有流程
+    if (_worker.findData.filterOption.designerTypes.indexOf("widget")!=-1){   //모든 프로세스
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listPortalWidget, {"portalId": id}, "portal", "widget"));
     }
     return promiseArr;
@@ -165,13 +165,13 @@ _worker._getDesinger_portal = function(id){
 
 _worker._getDesinger_query = function(id){
     var promiseArr = [];
-    if (_worker.findData.filterOption.designerTypes.indexOf("view")!=-1){    //所有脚本
+    if (_worker.findData.filterOption.designerTypes.indexOf("view")!=-1){    //모든 스크립트
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listQueryView, {"flag": id}, "query", "view"));
     }
-    if (_worker.findData.filterOption.designerTypes.indexOf("stat")!=-1){      //所有表单
+    if (_worker.findData.filterOption.designerTypes.indexOf("stat")!=-1){      //모든 양식
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listQueryStat, {"flag": id}, "query", "stat"));
     }
-    if (_worker.findData.filterOption.designerTypes.indexOf("statement")!=-1){   //所有流程
+    if (_worker.findData.filterOption.designerTypes.indexOf("statement")!=-1){   //모든 프로세스
         promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listQueryStatement, {"flag": id}, "query", "statement"));
     }
     return promiseArr;
@@ -179,7 +179,7 @@ _worker._getDesinger_query = function(id){
 
 _worker._getDesinger_service = function(id){
     var promiseArr = [];
-    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //所有脚本
+    if (_worker.findData.filterOption.designerTypes.indexOf("script")!=-1){    //모든 스크립트
         if (id=="invoke"){
             promiseArr.push(_worker._getDesingerModule(id, _worker.findData.actions.listInvoke, null, "service", "script"));
         }else if (id=="script"){
@@ -262,7 +262,7 @@ _worker._parseFindModule = function(moduleList){
                     //     this.filterOptionList.push(filterOption);
                     // });
                     // return Promise.resolve("");
-                    //临时处理
+                    //임시 처리
 
 
                     var pArr = [];

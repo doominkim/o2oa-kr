@@ -37,7 +37,7 @@ import com.x.organization.core.entity.Unit_;
 
 class ActionGet extends BaseAction {
 
-	/** 获取一个组织的信息,要列示其直接下级组织和直接下级身份,同时为了显示的需要,要把下级组织的下级组织数量也带上,不然前端就不知道是否能再逐级展开 */
+	/** 조직 정보를 조회하면서 직속 하위 조직과 직속 하위 신분을 나열하고, 표시를 위해 하위 조직의 하위 조직 수도 함께 포함함. 그렇지 않으면 프론트엔드에서 단계별로 펼칠 수 있는지 알 수 없음 */
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String flag) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
@@ -60,22 +60,22 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("直接上级组织对象")
+		@FieldDescribe("직속 상위 조직 객체")
 		private Wo woSupDirectUnit;
 
-		@FieldDescribe("直接下级身份对象")
+		@FieldDescribe("직속 하위 신분 객체")
 		private List<WoIdentity> woSubDirectIdentityList;
 
-		@FieldDescribe("组织属性对象")
+		@FieldDescribe("조직 속성 객체")
 		private List<WoUnitAttribute> woUnitAttributeList;
 
-		@FieldDescribe("组织职务对象")
+		@FieldDescribe("조직 직무 객체")
 		private List<WoUnitDuty> woUnitDutyList;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,
@@ -169,7 +169,7 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = 7096544058621159846L;
 
-		@FieldDescribe("身份对象")
+		@FieldDescribe("신분 객체")
 		private List<WoIdentity> woIdentityList;
 
 		static WrapCopier<UnitDuty, WoUnitDuty> copier = WrapCopierFactory.wo(UnitDuty.class, WoUnitDuty.class, null,
@@ -265,7 +265,7 @@ class ActionGet extends BaseAction {
 		}
 		wos = business.identity().sort(wos);
 		*/
-		//职务成员需要保证顺序，但没有顺序号只能一个一个查询
+		//직무 구성원은 순서를 유지해야 하지만 순서 번호가 없어 하나씩 조회해야 함
 		List<WoIdentity> wos = new ArrayList<>();
 		if(ListTools.isNotEmpty(woUnitDuty.getIdentityList())){
 			for (String id : woUnitDuty.getIdentityList()){

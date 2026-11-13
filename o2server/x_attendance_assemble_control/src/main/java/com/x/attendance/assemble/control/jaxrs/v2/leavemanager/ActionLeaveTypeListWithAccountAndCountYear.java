@@ -46,7 +46,7 @@ public class ActionLeaveTypeListWithAccountAndCountYear extends BaseAction {
             Business business = new Business(emc);
             Person personObject = business.organization().person().getObject(person, true);
             if (personObject == null) {
-                throw new ExceptionNotExistObject("人员 " + person);
+                throw new ExceptionNotExistObject("인원 " + person);
             }
             List<AttendanceV2LeaveAccount> accounts = emc.listEqual(AttendanceV2LeaveAccount.class,
                     AttendanceV2LeaveAccount.person_FIELDNAME, personObject.getDistinguishedName());
@@ -141,7 +141,7 @@ public class ActionLeaveTypeListWithAccountAndCountYear extends BaseAction {
         static WrapCopier<AttendanceV2LeaveType, Wo> copier = WrapCopierFactory.wo(AttendanceV2LeaveType.class,
                 Wo.class, null, JpaObject.FieldsInvisible);
 
-        @FieldDescribe("当前用户当年请假统计")
+        @FieldDescribe("현재 사용자 올해 휴가 통계")
         private ActionLeaveRequestCountYear.Wo requestCountYear;
 
         public ActionLeaveRequestCountYear.Wo getRequestCountYear() {

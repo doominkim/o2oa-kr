@@ -119,7 +119,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -8698017750369215370L;
 
-		@FieldDescribe("对个人的操作权限")
+		@FieldDescribe("개인 조작 권한")
 		private Control control = new Control();
 
 		public Control getControl() {
@@ -209,7 +209,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			throw new ExceptionInvalidMobile(mobile);
 		}
 		if (StringUtils.isNotEmpty(business.person().getWithMobile(mobile, excludeId))) {
-			throw new ExceptionMobileDuplicate(mobile, "手机号");
+			throw new ExceptionMobileDuplicate(mobile, "휴대폰 번호");
 		}
 	}
 
@@ -218,7 +218,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			throw new ExceptionInitialManagerName();
 		}
 		if (StringUtils.isNotEmpty(business.person().getWithEmployee(employee, excludeId))) {
-			throw new ExceptionEmployeeDuplicate(employee, "员工号");
+			throw new ExceptionEmployeeDuplicate(employee, "사번");
 		}
 	}
 
@@ -233,7 +233,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			throw new ExceptionInvalidUnique(unique);
 		}
 		if (StringUtils.isNotEmpty(business.person().getWithUnique(unique, excludeId))) {
-			throw new ExceptionUniqueDuplicate(unique, "唯一编码");
+			throw new ExceptionUniqueDuplicate(unique, "고유 코드");
 		}
 
 	}
@@ -244,7 +244,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 				throw new ExceptionInvalidMail(mail);
 			}
 			if (StringUtils.isNotEmpty(business.person().getWithMail(mail, excludeId))) {
-				throw new ExceptionEmployeeDuplicate(mail, "邮件地址");
+				throw new ExceptionEmployeeDuplicate(mail, "이메일 주소");
 			}
 		}
 	}
@@ -389,11 +389,11 @@ abstract class BaseAction extends StandardJaxrsAction {
 	}
 
 	protected static class CustomPersonInfo extends GsonPropertyObject{
-		@FieldDescribe("操作人")
+		@FieldDescribe("조작자")
 		private String operator;
-		@FieldDescribe("操作时间")
+		@FieldDescribe("작업 시간")
 		private Date operateTime;
-		@FieldDescribe("被操作用户对象")
+		@FieldDescribe("조작 대상 사용자 객체")
 		private WrapPerson person;
 		private List<WrapIdentity> identityList;
 

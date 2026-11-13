@@ -47,7 +47,7 @@ public class CacheRedisImpl implements Cache {
 
 	@Override
 	public void put(CacheCategory category, CacheKey key, Object o) {
-		// 无法序列化CompiledScript类型,在使用Redis缓存无法缓存CompiledScript类型,直接跳过
+		// CompiledScript 유형은 직렬화할 수 없어 Redis 캐시 사용 시 캐시할 수 없으므로 바로 건너뜀
 		if ((null != o) && (!(o instanceof Source))) {
 			try (Jedis jedis = RedisTools.getJedis();
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();

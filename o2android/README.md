@@ -1,12 +1,12 @@
-# O2OA Android 源码
+# O2OA Android 소스
 
 
 
-Android端源码已经迁移，目前这里不再更新。
+Android 소스는 이전되었으며 이곳에서는 더 이상 업데이트하지 않습니다.
 
 
 
-新地址：
+새 주소:
 
 Gitee -> [https://gitee.com/o2oa/o2oa-android](https://gitee.com/o2oa/o2oa-android)
 

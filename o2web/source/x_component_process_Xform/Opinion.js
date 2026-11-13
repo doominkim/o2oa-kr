@@ -1,19 +1,19 @@
 MWF.xDesktop.requireApp("process.Xform", "$Input", null, false);
 MWF.xDesktop.requireApp("process.Work", "lp." + o2.language, null, false);
-/** @class Opinion 意见输入框。
- * @o2cn 意见输入框
+/** @class Opinion 의견 입력 상자.
+ * @o2cn 의견 입력 상자
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  *
- * var data = field.getData(); //获取值
- * field.setData("字符串值"); //设置值
- * field.hide(); //隐藏字段
- * var id = field.json.id; //获取字段标识
- * var flag = field.isEmpty(); //字段是否为空
+ * var data = field.getData(); //값 조회
+ * field.setData("문자열 값"); //값 설정
+ * field.hide(); //필드 숨기기
+ * var id = field.json.id; //필드 식별자 조회
+ * var flag = field.isEmpty(); //필드가 비어 있는지 여부
  * @extends MWF.xApplication.process.Xform.$Input
  * @o2category FormComponents
  * @o2range {Process}
@@ -166,7 +166,7 @@ MWF.xApplication.process.Xform.Opinion = MWF.APPOpinion = new Class(
 
             if (this.json.isHandwriting !== "no") {
                 /**
-                 * @summary 手写意见按钮按钮。
+                 * @summary 손글씨 의견 버튼.
                  * @member {Element}
                  */
                 this.handwritingAction = new Element("div", {
@@ -181,7 +181,7 @@ MWF.xApplication.process.Xform.Opinion = MWF.APPOpinion = new Class(
             if (this.json.isAudio === "yes") {
                 if (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia) {
                     /**
-                     * @summary 音频按钮.在浏览器支持HTML5的getUserMedia才可用。
+                     * @summary 오디오 버튼. 브라우저가 HTML5 getUserMedia를 지원해야 사용 가능.
                      * @member {Element}
                      */
                     this.audioRecordAction = new Element("div", {
@@ -366,7 +366,7 @@ MWF.xApplication.process.Xform.Opinion = MWF.APPOpinion = new Class(
             this.soundFile = {};
             MWF.require("MWF.widget.AudioRecorder", function () {
                 /**
-                 * @summary 音频意见组件.
+                 * @summary 오디오 의견 컴포넌트.
                  * @member {o2.widget.AudioRecorder}
                  */
                 this.audioRecorder = new MWF.widget.AudioRecorder(this.audioRecordNode, {
@@ -417,7 +417,7 @@ MWF.xApplication.process.Xform.Opinion = MWF.APPOpinion = new Class(
             // });
         },
         /**
-         * @summary 弹出手写板.
+         * @summary 손글씨 패드 띄우기.
          * @example
          * this.form.get("fieldId").handwriting();
          */
@@ -450,7 +450,7 @@ MWF.xApplication.process.Xform.Opinion = MWF.APPOpinion = new Class(
         },
         createHandwriting: function () {
             /**
-             * @summary 手写板容器.
+             * @summary 손글씨 패드 컨테이너.
              * @member {Element}
              */
             this.handwritingNode = new Element("div", {"styles": this.form.css.handwritingNode}).inject(this.node, "after");
@@ -515,7 +515,7 @@ MWF.xApplication.process.Xform.Opinion = MWF.APPOpinion = new Class(
             this.handwritingFile = {};
             MWF.require("MWF.widget.Tablet", function () {
                 /**
-                 * @summary 手写板组件.
+                 * @summary 손글씨 패드 컴포넌트.
                  * @member {o2.widget.Tablet}
                  */
                 this.tablet = new MWF.widget.Tablet(this.handwritingAreaNode, {
@@ -527,9 +527,9 @@ MWF.xApplication.process.Xform.Opinion = MWF.APPOpinion = new Class(
                         "save", "|",
                         "undo",
                         "redo", "|",
-                        "eraser", //橡皮
-                        "input", //输入法
-                        "pen", "|", //笔画
+                        "eraser", //지우개
+                        "input", //입력기
+                        "pen", "|", //획
                         "eraserRadius",
                         "size",
                         "color",

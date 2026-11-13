@@ -26,7 +26,7 @@ class ActionUpdateWithDocumentPath0 extends BaseAction {
 			if (!business.isDocumentEditor(effectivePerson, null, null, document)) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
-			/** 先更新title,serial,objectSecurityClearance,再更新DataItem,因为旧的DataItem中也有title和serial数据. */
+			/** title,serial,objectSecurityClearance를 먼저 수정한 뒤 DataItem 수정, 기존 DataItem에도 title과 serial 데이터가 있기 때문. */
 			if(title_path.equals(path0) || subject_path.equals(path0) || objectSecurityClearance_path.equals(path0)) {
 				this.updateTitleSerialObjectSecurityClearance(business, document, jsonElement);
 			}

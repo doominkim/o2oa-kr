@@ -60,14 +60,14 @@ public class ThisApplication {
             CacheManager.init(context.clazz().getSimpleName());
             MessageConnector.start(context());
             /////////////////// V2///
-            // 处理考勤统计相关的队列
+            // 근태 통계 관련 큐 처리
             context.startQueue(queueV2Detail);
             context.startQueue(queueV2LeavePolicyGrant);
-            // 配置对象 考勤统计定时器可配置
+            // 설정 객체, 근태 통계 타이머 설정 가능
             AttendanceV2Config config = null; 
             String cronString = null;
-            boolean leaveTypeInitialized = false; // 考勤假勤类型的默认数据是否已经初始化
-            boolean chineseHolidaySyncEnable = true; // 是否开启中国节假日数据同步
+            boolean leaveTypeInitialized = false; // 근태 휴가 유형 기본 데이터 초기화 여부
+            boolean chineseHolidaySyncEnable = true; // 중국 공휴일 데이터 동기화 사용 여부
             try  {
                 EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
                 List<AttendanceV2Config> configs = emc.listAll(AttendanceV2Config.class);
@@ -85,24 +85,24 @@ public class ThisApplication {
             if (StringUtils.isEmpty(cronString)) {
                 cronString = "0 0 3 * * ?";
             }
-            // 初始化考勤假勤类型的默认数据
+            // 근태 휴가 유형 기본 데이터 초기화
             if (!leaveTypeInitialized){
                 new AttendanceV2LeaveManagerService().initDefaultLeaveTypeData();
             }
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("定时表达式 {}", cronString);
+                LOGGER.debug("타이머 표현식 {}", cronString);
             }
-            // 每天凌晨3点，计算前一天的考勤数据
+            // 매일 새벽 3시, 전날 근태 데이터 계산
             context.schedule(AttendanceV2DetailGenerateTask.class, cronString);
-            // 每天凌晨 3 点半，重新计算当天要发送消息的数据。
+            // 매일 새벽 3시 30분, 당일 발송할 메시지 데이터 재계산.
             context.schedule(AttendanceV2TodayMessageDataGenerateTask.class, "0 30 3 * * ?");
-            // 4点钟开始 每 5 分钟检查 发送考勤相关消息的任务
+            // 4시부터 5분마다 근태 관련 메시지 발송 작업 확인
             context.schedule(AttendanceV2MessageSendTask.class, "0 0/5 4-23 * * ?");
-            // 30分执行一次 发放任务。
+            // 30분마다 한 번 실행, 작업 발송.
             context.schedule(AttendanceV2LeavePolicyGrantTask.class, "0 0/30 * * * ?");
-            // 每天凌晨 2 点半，处理过期的假期额度批次。
+            // 매일 새벽 2시 30분, 만료된 휴가 한도 배치 처리.
             context.schedule(AttendanceV2LeaveLedgerExpireTask.class, "0 30 2 * * ?");
-            // 每天凌晨 1 点，同步中国节假日数据。
+            // 매일 새벽 1시, 중국 공휴일 데이터 동기화.
             if (chineseHolidaySyncEnable) {
                 context.schedule(AttendanceV2HolidaySyncTask.class, "0 0 1 * * ?");
             }

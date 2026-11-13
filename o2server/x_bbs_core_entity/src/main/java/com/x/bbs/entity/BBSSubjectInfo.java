@@ -31,7 +31,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 主题信息表
+ * 주제 정보 테이블
  *
  * @author LIYI
  */
@@ -58,7 +58,7 @@ public class BBSSubjectInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -68,64 +68,64 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String forumId_FIELDNAME = "forumId";
-	@FieldDescribe("论坛ID")
+	@FieldDescribe("포럼 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + forumId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + forumId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumId = "";
 
 	public static final String forumName_FIELDNAME = "forumName";
-	@FieldDescribe("论坛名称")
+	@FieldDescribe("포럼 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + forumName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumName = "";
 
 	public static final String sectionId_FIELDNAME = "sectionId";
-	@FieldDescribe("版块ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + sectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String sectionId = "";
 
 	public static final String sectionName_FIELDNAME = "sectionName";
-	@FieldDescribe("版块名称")
+	@FieldDescribe("게시판 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + sectionName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String sectionName = "";
 
 	public static final String mainSectionId_FIELDNAME = "mainSectionId";
-	@FieldDescribe("主版块ID")
+	@FieldDescribe("상위 게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + mainSectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mainSectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String mainSectionId = "";
 
 	public static final String mainSectionName_FIELDNAME = "mainSectionName";
-	@FieldDescribe("主版块名称")
+	@FieldDescribe("상위 게시판 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + mainSectionName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String mainSectionName = "";
 
 	public static final String picId_FIELDNAME = "picId";
-	@FieldDescribe("首页图片ID")
+	@FieldDescribe("홈 이미지 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + picId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String picId = "";
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("主题名称：标题")
+	@FieldDescribe("주제명: 제목")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String title = "";
@@ -145,206 +145,206 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private String typeCategory = "信息";
 
 	public static final String summary_FIELDNAME = "summary";
-	@FieldDescribe("主题摘要")
+	@FieldDescribe("주제 요약")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + summary_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String summary = null;
 
 	public static final String latestReplyTime_FIELDNAME = "latestReplyTime";
-	@FieldDescribe("最新回复时间")
+	@FieldDescribe("최근 답글 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + latestReplyTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date latestReplyTime = null;
 
 	public static final String latestReplyUser_FIELDNAME = "latestReplyUser";
-	@FieldDescribe("最新回复用户")
+	@FieldDescribe("최근 답글 사용자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + latestReplyUser_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String latestReplyUser = null;
 
 	public static final String latestReplyId_FIELDNAME = "latestReplyId";
-	@FieldDescribe("最新回复ID")
+	@FieldDescribe("최근 답글 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + latestReplyId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String latestReplyId = null;
 
 	public static final String replyTotal_FIELDNAME = "replyTotal";
-	@FieldDescribe("回复数量")
+	@FieldDescribe("답글 수")
 	@Column(name = ColumnNamePrefix + replyTotal_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long replyTotal = 0L;
 
 	public static final String viewTotal_FIELDNAME = "viewTotal";
-	@FieldDescribe("查看数量")
+	@FieldDescribe("조회 수")
 	@Column(name = ColumnNamePrefix + viewTotal_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long viewTotal = 0L;
 
 	public static final String hot_FIELDNAME = "hot";
-	@FieldDescribe("主题热度")
+	@FieldDescribe("주제 인기도")
 	@Column(name = ColumnNamePrefix + hot_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long hot = 0L;
 
 	public static final String stopReply_FIELDNAME = "stopReply";
-	@FieldDescribe("禁止回贴")
+	@FieldDescribe("답글 금지")
 	@Column(name = ColumnNamePrefix + stopReply_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean stopReply = false;
 
 	public static final String recommendToBBSIndex_FIELDNAME = "recommendToBBSIndex";
-	@FieldDescribe("推荐到系统首页")
+	@FieldDescribe("시스템 첫 페이지에 추천")
 	@Column(name = ColumnNamePrefix + recommendToBBSIndex_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean recommendToBBSIndex = false;
 
 	public static final String bBSIndexSetterName_FIELDNAME = "bBSIndexSetterName";
-	@FieldDescribe("首页推荐人姓名")
+	@FieldDescribe("홈 추천자 이름")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + bBSIndexSetterName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String bBSIndexSetterName = null;
 
 	public static final String bBSIndexSetterTime_FIELDNAME = "bBSIndexSetterTime";
-	@FieldDescribe("首页推荐时间")
+	@FieldDescribe("첫 페이지 추천 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + bBSIndexSetterTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date bBSIndexSetterTime = null;
 
 	public static final String recommendToForumIndex_FIELDNAME = "recommendToForumIndex";
-	@FieldDescribe("推荐到论坛首页")
+	@FieldDescribe("포럼 첫 페이지에 추천")
 	@Column(name = ColumnNamePrefix + recommendToForumIndex_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean recommendToForumIndex = false;
 
 	public static final String forumIndexSetterName_FIELDNAME = "forumIndexSetterName";
-	@FieldDescribe("论坛推荐人姓名")
+	@FieldDescribe("포럼 추천인 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + forumIndexSetterName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String forumIndexSetterName = "";
 
 	public static final String forumIndexSetterTime_FIELDNAME = "forumIndexSetterTime";
-	@FieldDescribe("论坛推荐时间")
+	@FieldDescribe("포럼 추천 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + forumIndexSetterTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date forumIndexSetterTime = null;
 
 	public static final String topToSection_FIELDNAME = "topToSection";
-	@FieldDescribe("版块置顶")
+	@FieldDescribe("게시판 상단 고정")
 	@Column(name = ColumnNamePrefix + topToSection_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean topToSection = false;
 
 	public static final String topToMainSection_FIELDNAME = "topToMainSection";
-	@FieldDescribe("主版块置顶")
+	@FieldDescribe("상위 게시판 상단 고정")
 	@Column(name = ColumnNamePrefix + topToMainSection_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean topToMainSection = false;
 
 	public static final String topToForum_FIELDNAME = "topToForum";
-	@FieldDescribe("论坛置顶")
+	@FieldDescribe("포럼 상단 고정")
 	@Column(name = ColumnNamePrefix + topToForum_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean topToForum = false;
 
 	public static final String topToBBS_FIELDNAME = "topToBBS";
-	@FieldDescribe("全局置顶")
+	@FieldDescribe("전체 상단 고정")
 	@Column(name = ColumnNamePrefix + topToBBS_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean topToBBS = false;
 
 	public static final String isTopSubject_FIELDNAME = "isTopSubject";
-	@FieldDescribe("是否为置顶主题")
+	@FieldDescribe("상단 고정 주제 여부")
 	@Column(name = ColumnNamePrefix + isTopSubject_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isTopSubject = false;
 
 	public static final String isCreamSubject_FIELDNAME = "isCreamSubject";
-	@FieldDescribe("精华主题")
+	@FieldDescribe("우수 주제")
 	@Column(name = ColumnNamePrefix + isCreamSubject_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isCreamSubject = false;
 
 	public static final String isCompleted_FIELDNAME = "isCompleted";
-	@FieldDescribe("是否已解决:为问题贴准备")
+	@FieldDescribe("해결 여부: 질문 글용")
 	@Column(name = ColumnNamePrefix + isCompleted_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isCompleted = false;
 
 	public static final String acceptReplyId_FIELDNAME = "acceptReplyId";
-	@FieldDescribe("采纳的回复ID:为问题贴准备,问题贴可以采纳一个回复")
+	@FieldDescribe("채택된 답글 ID: 질문글용, 질문글은 답글 하나를 채택 가능")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + acceptReplyId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String acceptReplyId = null;
 
 	public static final String screamSetterName_FIELDNAME = "screamSetterName";
-	@FieldDescribe("精华设置人姓名")
+	@FieldDescribe("우수 주제 설정자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + screamSetterName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String screamSetterName = null;
 
 	public static final String screamSetterTime_FIELDNAME = "screamSetterTime";
-	@FieldDescribe("精华设置时间")
+	@FieldDescribe("우수글 설정 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + screamSetterTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date screamSetterTime = null;
 
 	public static final String isOriginalSubject_FIELDNAME = "isOriginalSubject";
-	@FieldDescribe("原创主题")
+	@FieldDescribe("원본 주제")
 	@Column(name = ColumnNamePrefix + isOriginalSubject_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isOriginalSubject = false;
 
 	public static final String originalSetterName_FIELDNAME = "originalSetterName";
-	@FieldDescribe("原创设置人姓名")
+	@FieldDescribe("원작 설정자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + originalSetterName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String originalSetterName = "";
 
 	public static final String originalSetterTime_FIELDNAME = "originalSetterTime";
-	@FieldDescribe("原创设置时间")
+	@FieldDescribe("원본 설정 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + originalSetterTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date originalSetterTime = null;
 
 	public static final String isRecommendSubject_FIELDNAME = "isRecommendSubject";
-	@FieldDescribe("版主推荐主题")
+	@FieldDescribe("게시판 관리자 추천 주제")
 	@Column(name = ColumnNamePrefix + isRecommendSubject_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isRecommendSubject = false;
 
 	public static final String recommendorName_FIELDNAME = "recommendorName";
-	@FieldDescribe("推荐人姓名")
+	@FieldDescribe("추천인 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + recommendorName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String recommendorName = "";
 
 	public static final String recommendTime_FIELDNAME = "recommendTime";
-	@FieldDescribe("推荐时间")
+	@FieldDescribe("추천 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + recommendTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date recommendTime = null;
 
 	public static final String creatorName_FIELDNAME = "creatorName";
-	@FieldDescribe("创建人姓名")
+	@FieldDescribe("작성자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creatorName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorName = "";
 
 	public static final String nickName_FIELDNAME = "nickName";
-	@FieldDescribe("创建人昵称")
+	@FieldDescribe("작성자 닉네임")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + nickName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String nickName = "";
 
 	public static final String lastUpdateUser_FIELDNAME = "lastUpdateUser";
-	@FieldDescribe("最后修改人员")
+	@FieldDescribe("최종 수정자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + lastUpdateUser_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String lastUpdateUser = "";
@@ -356,7 +356,7 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private String subjectAuditStatus = "无审核";
 
 	public static final String auditorName_FIELDNAME = "auditorName";
-	@FieldDescribe("审核人姓名")
+	@FieldDescribe("심사자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + auditorName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String auditorName = null;
@@ -368,14 +368,14 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private String subjectStatus = "启用";
 
 	public static final String voteLimitTime_FIELDNAME = "voteLimitTime";
-	@FieldDescribe("投票截止时间")
+	@FieldDescribe("투표 마감 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + voteLimitTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date voteLimitTime = null;
 
 	public static final String voteResultVisible_FIELDNAME = "voteResultVisible";
-	@FieldDescribe("投票结果是否可见")
+	@FieldDescribe("투표 결과 공개 여부")
 	@Column(name = ColumnNamePrefix + voteResultVisible_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean voteResultVisible = false;
@@ -387,19 +387,19 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private Boolean votePersonVisible = false;
 
 	public static final String anonymousSubject_FIELDNAME = "anonymousSubject";
-	@FieldDescribe("是否匿名发布")
+	@FieldDescribe("익명 게시 여부")
 	@Column(name = ColumnNamePrefix + anonymousSubject_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean anonymousSubject = false;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer orderNumber = 1;
 
 	public static final String attachmentList_FIELDNAME = "attachmentList";
-	@FieldDescribe("附件列表")
+	@FieldDescribe("첨부파일 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + attachmentList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -410,7 +410,7 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private List<String> attachmentList;
 
 	public static final String editorList_FIELDNAME = "editorList";
-	@FieldDescribe("编辑者列表")
+	@FieldDescribe("편집자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + editorList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -421,25 +421,25 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private List<String> editorList;
 
 	public static final String machineName_FIELDNAME = "machineName";
-	@FieldDescribe("设备类别：手机|平板电脑|个人电脑等")
+	@FieldDescribe("기기 유형: 휴대폰|태블릿|개인용 컴퓨터 등")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + machineName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String machineName = "PC";
 
 	public static final String systemType_FIELDNAME = "systemType";
-	@FieldDescribe("系统名称")
+	@FieldDescribe("시스템 이름")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + systemType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String systemType = "Windows";
 
 	public static final String hostIp_FIELDNAME = "hostIp";
-	@FieldDescribe("IP地址")
+	@FieldDescribe("IP 주소")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + hostIp_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String hostIp = "";
 
 	public static final String grade_FIELDNAME = "grade";
-	@FieldDescribe("评分")
+	@FieldDescribe("평점")
 	@Column(name = ColumnNamePrefix + grade_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer grade = 10;

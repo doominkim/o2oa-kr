@@ -39,7 +39,7 @@ import com.x.base.core.project.tools.ListTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Meeting", description = "会议管理会议.")
+@Schema(name = "Meeting", description = "회의 관리 회의.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Meeting.table, uniqueConstraints = {
@@ -62,12 +62,12 @@ public class Meeting extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -75,54 +75,54 @@ public class Meeting extends SliceJpaObject {
 		this.pinyinInitial = StringUtils.lowerCase(PinyinHelper.getShortPinyin(subject));
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String subject_FIELDNAME = "subject";
-	@FieldDescribe("名称")
+	@FieldDescribe("이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + subject_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + subject_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String subject;
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音.")
+	@FieldDescribe("name 병음.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母.")
+	@FieldDescribe("name 병음 첫 글자.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyinInitial;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
-	/* 换到summary 字段 */
+	/* summary 필드로 변경 */
 	@Deprecated
 	private String description;
 
 	public static final String summary_FIELDNAME = "summary";
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + summary_FIELDNAME)
 	private String summary;
 
 	public static final String room_FIELDNAME = "room";
-	@FieldDescribe("所属楼层.")
+	@FieldDescribe("소속 층.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + room_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + room_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationExists = { @CitationExist(type = Room.class) })
 	private String room;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("开始时间.")
+	@FieldDescribe("시작 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + startTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTime_FIELDNAME)
@@ -130,7 +130,7 @@ public class Meeting extends SliceJpaObject {
 	private Date startTime;
 
 	public static final String completedTime_FIELDNAME = "completedTime";
-	@FieldDescribe("结束时间.")
+	@FieldDescribe("종료 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + completedTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + completedTime_FIELDNAME)
@@ -138,7 +138,7 @@ public class Meeting extends SliceJpaObject {
 	private Date completedTime;
 
 	public static final String inviteMemberList_FIELDNAME = "inviteMemberList";
-	@FieldDescribe("邀请人员,身份,组织，群组.")
+	@FieldDescribe("초대 사용자, 신분, 조직, 그룹.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ inviteMemberList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + inviteMemberList_FIELDNAME
@@ -150,7 +150,7 @@ public class Meeting extends SliceJpaObject {
 	private List<String> inviteMemberList;
 
 	public static final String invitePersonList_FIELDNAME = "invitePersonList";
-	@FieldDescribe("邀请人员.")
+	@FieldDescribe("초대 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ invitePersonList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + invitePersonList_FIELDNAME
@@ -162,7 +162,7 @@ public class Meeting extends SliceJpaObject {
 	private List<String> invitePersonList;
 
 	public static final String inviteDelPersonList_FIELDNAME = "inviteDelPersonList";
-	@FieldDescribe("邀请人员,身份,组织已删列表.")
+	@FieldDescribe("초대 사용자, 신분, 조직 삭제 목록.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ inviteDelPersonList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -174,7 +174,7 @@ public class Meeting extends SliceJpaObject {
 	private List<String> inviteDelPersonList;
 
 	public static final String acceptPersonList_FIELDNAME = "acceptPersonList";
-	@FieldDescribe("接受人员.")
+	@FieldDescribe("수락 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ acceptPersonList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + acceptPersonList_FIELDNAME
@@ -186,7 +186,7 @@ public class Meeting extends SliceJpaObject {
 	private List<String> acceptPersonList;
 
 	public static final String rejectPersonList_FIELDNAME = "rejectPersonList";
-	@FieldDescribe("拒绝人员.")
+	@FieldDescribe("거절 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ rejectPersonList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + rejectPersonList_FIELDNAME
@@ -198,7 +198,7 @@ public class Meeting extends SliceJpaObject {
 	private List<String> rejectPersonList;
 
 	public static final String checkinPersonList_FIELDNAME = "checkinPersonList";
-	@FieldDescribe("签到人员.")
+	@FieldDescribe("출석 체크 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ checkinPersonList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -210,7 +210,7 @@ public class Meeting extends SliceJpaObject {
 	private List<String> checkinPersonList;
 
 	public static final String confirmStatus_FIELDNAME = "confirmStatus";
-	@FieldDescribe("会议预定状态")
+	@FieldDescribe("회의 예약 상태")
 	@Enumerated(EnumType.STRING)
 	@Column(length = JpaObject.length_8B, name = ColumnNamePrefix + confirmStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -218,13 +218,13 @@ public class Meeting extends SliceJpaObject {
 	private ConfirmStatus confirmStatus;
 
 	public static final String manualCompleted_FIELDNAME = "manualCompleted";
-	@FieldDescribe("会议是否手工结束")
+	@FieldDescribe("회의 수동 종료 여부")
 	@Column(name = ColumnNamePrefix + manualCompleted_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean manualCompleted;
 
 	public static final String actualStartTime_FIELDNAME = "actualStartTime";
-	@FieldDescribe("实际开始时间.")
+	@FieldDescribe("실제 시작 시간.")
 	@Temporal(TemporalType.TIME)
 	@Column(name = ColumnNamePrefix + actualStartTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + actualStartTime_FIELDNAME)
@@ -232,7 +232,7 @@ public class Meeting extends SliceJpaObject {
 	private Date actualStartTime;
 
 	public static final String actualCompletedTime_FIELDNAME = "actualCompletedTime";
-	@FieldDescribe("实际结束时间.")
+	@FieldDescribe("실제 종료 시간.")
 	@Temporal(TemporalType.TIME)
 	@Column(name = ColumnNamePrefix + actualCompletedTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + actualCompletedTime_FIELDNAME)
@@ -240,21 +240,21 @@ public class Meeting extends SliceJpaObject {
 	private Date actualCompletedTime;
 
 	public static final String applicant_FIELDNAME = "applicant";
-	@FieldDescribe("会议申请人")
+	@FieldDescribe("회의 신청자")
 	@Column(length = length_255B, name = ColumnNamePrefix + applicant_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + applicant_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String applicant;
 
 	public static final String auditor_FIELDNAME = "auditor";
-	@FieldDescribe("会议审核人")
+	@FieldDescribe("회의 심사자")
 	@Column(length = length_255B, name = ColumnNamePrefix + auditor_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + auditor_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String auditor;
 
 	public static final String memo_FIELDNAME = "memo";
-	@FieldDescribe("备注.")
+	@FieldDescribe("비고.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + memo_FIELDNAME)
@@ -262,53 +262,53 @@ public class Meeting extends SliceJpaObject {
 	private String memo;
 
 	public static final String hostUnit_FIELDNAME = "hostUnit";
-	@FieldDescribe("承办部门")
+	@FieldDescribe("주관 부서")
 	@Column(length = length_255B, name = ColumnNamePrefix + hostUnit_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + hostUnit_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String hostUnit;
 
 	public static final String hostPerson_FIELDNAME = "hostPerson";
-	@FieldDescribe("主持人")
+	@FieldDescribe("사회자")
 	@Column(length = length_255B, name = ColumnNamePrefix + hostPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + hostPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String hostPerson;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("会议类型")
+	@FieldDescribe("회의 유형")
 	@Column(length = length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String type;
 
 	public static final String mode_FIELDNAME = "mode";
-	@FieldDescribe("会议方式：online|线上会议;offline|线下会议")
+	@FieldDescribe("회의 방식: online|온라인 회의;offline|오프라인 회의")
 	@Column(length = length_255B, name = ColumnNamePrefix + mode_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String mode;
 
 	public static final String roomId_FIELDNAME = "roomId";
-	@FieldDescribe("线上会议的会议号")
+	@FieldDescribe("온라인 회의 번호")
 	@Column(length = length_255B, name = ColumnNamePrefix + roomId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + roomId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String roomId;
 
 	public static final String roomLink_FIELDNAME = "roomLink";
-	@FieldDescribe("线上会议的链接")
+	@FieldDescribe("온라인 회의 링크")
 	@Column(length = length_255B, name = ColumnNamePrefix + roomLink_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String roomLink;
 
 	public static final String roomInviteCode_FIELDNAME = "roomInviteCode";
-	@FieldDescribe("线上会议的会议邀请码")
+	@FieldDescribe("온라인 회의 초대 코드")
 	@Column(length = length_255B, name = ColumnNamePrefix + roomInviteCode_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + roomInviteCode_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String roomInviteCode;
 
 	public static final String externalPerson_FIELDNAME = "externalPerson";
-	@FieldDescribe("外部参会人员")
+	@FieldDescribe("외부 참석자")
 	@Column(length = 500, name = ColumnNamePrefix + externalPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String externalPerson;
@@ -490,7 +490,7 @@ public class Meeting extends SliceJpaObject {
 	}
 
 	/**
-	 * 添加一个签到人员
+	 * 출석 체크 사용자 1명 추가
 	 *
 	 * @param distinguishedName
 	 */
@@ -499,7 +499,7 @@ public class Meeting extends SliceJpaObject {
 	}
 
 	/**
-	 * 删除一个签到人员
+	 * 출석 체크 사용자 1명 삭제
 	 *
 	 * @param distinguishedName
 	 */

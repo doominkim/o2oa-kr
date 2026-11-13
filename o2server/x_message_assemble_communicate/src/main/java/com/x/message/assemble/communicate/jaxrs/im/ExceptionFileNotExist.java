@@ -7,9 +7,9 @@ class ExceptionFileNotExist extends PromptException {
 	private static final long serialVersionUID = 7750207007061165350L;
 
 	ExceptionFileNotExist(String id) {
-		super("指定的文件: {} 不存在.", id);
+		super("지정한 파일: {}이(가) 없습니다.", id);
 	}
 	ExceptionFileNotExist(String id, String fileId) {
-		super("指定的文件: {} 的附件{}不存在.", id, fileId);
+		super("지정한 파일: {}의 첨부파일 {}이(가) 없습니다.", id, fileId);
 	}
 }

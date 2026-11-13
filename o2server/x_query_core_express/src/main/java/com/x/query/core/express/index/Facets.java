@@ -28,7 +28,7 @@ public class Facets {
             TopGroups<BytesRef> topGroups = param.second().getTopGroups(0);
             if (null != topGroups) {
                 List<ValueCountPair> list = Arrays.stream(topGroups.groups)
-                        // 存在可能为null
+                        // null일 수 있음
                         .filter(o -> null != o.groupValue && StringUtils.isNotEmpty(o.groupValue.utf8ToString()))
                         .map(o -> {
                             ValueCountPair valueCountPair = new ValueCountPair();

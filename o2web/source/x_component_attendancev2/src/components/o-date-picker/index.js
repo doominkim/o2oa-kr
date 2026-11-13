@@ -13,7 +13,7 @@ export default content({
             monthOnly: false,
             showClear: false,
             value: "",
-            key:"" // 反写回去的对象key值，多层用.分割 如 form.startTime
+            key:"" // 되돌려 쓸 객체 key 값, 다단계는 .으로 구분, 예: form.startTime
         };
     },
     afterRender() {
@@ -62,7 +62,7 @@ export default content({
     },
     clearValue() {
       this.bind.value = "";
-       // 反写到oo-model
+       // oo-model에 되돌려 쓰기
        this.component.updateModel("");
     },
     changeValue(date) {
@@ -72,12 +72,12 @@ export default content({
       if (this.bind.monthOnly) {
         const chooseDate = `${year}-${month}`;
         this.bind.value = chooseDate;
-        // 反写到oo-model
+        // oo-model에 되돌려 쓰기
         this.component.updateModel(chooseDate);
       } else {
         const chooseDate = `${year}-${month}-${day}`;
         this.bind.value = chooseDate;
-        // 反写到oo-model
+        // oo-model에 되돌려 쓰기
         this.component.updateModel(chooseDate);
       }
       

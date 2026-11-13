@@ -15,14 +15,14 @@ public class WiSiteFileInfo extends GsonPropertyObject {
     public static final String TYPE_CMS = "cms";
     public static final String TYPE_PROCESS_PLATFORM = "processPlatform";
 
-    @FieldDescribe("附件框分类.")
+    @FieldDescribe("첨부파일 상자 분류.")
     private String site;
 
-    @FieldDescribe("附件列表.")
+    @FieldDescribe("첨부파일 목록.")
     @FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment", fieldValue = "[{'id':'附件id','name':'附件名称'}]")
     private List<WiAttachment> fileInfoList = new ArrayList<>();
 
-    @FieldDescribe("附件来源(cms或processPlatform).")
+    @FieldDescribe("첨부파일 출처(cms 또는 processPlatform).")
     private String type;
 
     public List<WiAttachment> getFileInfoList() {

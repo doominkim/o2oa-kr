@@ -7,6 +7,6 @@ class ExceptionExtensionNotMatchCallback extends CallbackPromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionExtensionNotMatchCallback(String callbackName, String name, String extension) {
-		super(callbackName, "文件: {} 的扩展名不匹配,期望的扩展名: {}.", name);
+		super(callbackName, "파일: {}의 확장자가 일치하지 않습니다. 필요한 확장자: {}.", name);
 	}
 }

@@ -41,7 +41,7 @@ import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
 
-//TODO 需要重写
+//TODO 재작성 필요
 @Deprecated(forRemoval = true, since = "7.2")
 public class DescribeWoBuilder {
 
@@ -205,14 +205,14 @@ public class DescribeWoBuilder {
 //		FormDataParam formDataParam = parameter.getAnnotation(FormDataParam.class);
 //		if (StringUtils.equalsIgnoreCase("file", formDataParam.value())) {
 //			if (parameter.getType() == FormDataContentDisposition.class) {
-//				/** 单独处理附件 */
+//				/** 첨부파일 별도 처리 */
 //				JaxrsFormParameter o = new JaxrsFormParameter();
 //				o.setType("File");
 //				o.setName(formDataParam.value());
 //				if (null != jaxrsParameterDescribe) {
 //					o.setDescription(jaxrsParameterDescribe.value());
 //				} else {
-//					logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+//					logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 //							formDataParam.value());
 //					o.setDescription("");
 //				}
@@ -225,7 +225,7 @@ public class DescribeWoBuilder {
 //			if (null != jaxrsParameterDescribe) {
 //				o.setDescription(jaxrsParameterDescribe.value());
 //			} else {
-//				logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+//				logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 //						formDataParam.value());
 //				o.setDescription("");
 //			}
@@ -243,7 +243,7 @@ public class DescribeWoBuilder {
 //		if (null != jaxrsParameterDescribe) {
 //			o.setDescription(jaxrsParameterDescribe.value());
 //		} else {
-//			logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+//			logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 //					formParam.value());
 //			o.setDescription("");
 //		}
@@ -257,7 +257,7 @@ public class DescribeWoBuilder {
 //		if (null != jaxrsParameterDescribe) {
 //			o.setDescription(jaxrsParameterDescribe.value());
 //		} else {
-//			logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+//			logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 //					queryParam.value());
 //			o.setDescription("");
 //		}
@@ -274,7 +274,7 @@ public class DescribeWoBuilder {
 		if (null != jaxrsParameterDescribe) {
 			o.setDescription(jaxrsParameterDescribe.value());
 		} else {
-			logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+			logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 					pathParam.value());
 			o.setDescription("");
 		}
@@ -330,7 +330,7 @@ public class DescribeWoBuilder {
 //							"<Double>", "<Long>", "<Float>")) {
 //						jaxrsField.setIsBaseType(true);
 //					} else {
-//						// wwx add 获取类信息
+//						// wwx add 클래스 정보 조회
 //						FieldTypeDescribe fieldTypeDescribe = o.getAnnotation(FieldTypeDescribe.class);
 //						if (null != fieldTypeDescribe) {
 //							jaxrsField.setFieldType(fieldTypeDescribe.fieldType());
@@ -341,7 +341,7 @@ public class DescribeWoBuilder {
 //
 //					}
 //				} else {
-//					// O2LEE，String[]未被判断为collection导致组织的JSON格式不符合wrapIn要求
+//					// O2LEE, String[]이 collection으로 판단되지 않아 조직 JSON 형식이 wrapIn 요구 사항에 맞지 않음
 //					if (StringUtils.equalsAnyIgnoreCase("String[]", jaxrsField.getType())) {
 //						jaxrsField.setIsCollection(true);
 //					} else {
@@ -489,7 +489,7 @@ public class DescribeWoBuilder {
 				}
 				if (null != clz) {
 					if (!clz.isEnum()) {
-						// 不是枚举类型
+						// 열거형 유형이 아님
 						List<Field> fields = FieldUtils.getAllFieldsList(clz);
 						List<JaxrsField> jaxrsFieldList = new ArrayList<>();
 						for (Field field : fields) {
@@ -502,7 +502,7 @@ public class DescribeWoBuilder {
 
 									String className = getClassName(field);
 									if (classNameParent.equalsIgnoreCase(getClassName(field))) {
-										jaxrsField.setType(className); // 防止死循环
+										jaxrsField.setType(className); // 무한 루프 방지
 									} else {
 										jaxrsField.setType(this.getJaxrsFieldType(field, className));
 									}
@@ -527,7 +527,7 @@ public class DescribeWoBuilder {
 									jaxrsFieldList.add(jaxrsField);
 								}
 							} else {
-								// 创建List参数中的类型
+								// List 파라미터의 유형 생성
 								FieldDescribe fieldDescribe = field.getAnnotation(FieldDescribe.class);
 								JaxrsField jaxrsField = new JaxrsField();
 								jaxrsField.setName(field.getName());
@@ -538,7 +538,7 @@ public class DescribeWoBuilder {
 								}
 								String className = getClassName(o);
 								if (classNameParent.equalsIgnoreCase(getClassName(field))) {
-									jaxrsField.setType(className); // 防止死循环
+									jaxrsField.setType(className); // 무한 루프 방지
 								} else {
 									jaxrsField.setType(this.getJaxrsFieldType(field, className));
 								}
@@ -714,7 +714,7 @@ public class DescribeWoBuilder {
 		private String description;
 		private Boolean isBaseType;
 
-		// 当参数不是基础类型时，记录类型信息
+		// 파라미터가 기본 유형이 아닐 때 유형 정보 기록
 		private String fieldType;
 		private String fieldValue;
 		private String fieldTypeName;

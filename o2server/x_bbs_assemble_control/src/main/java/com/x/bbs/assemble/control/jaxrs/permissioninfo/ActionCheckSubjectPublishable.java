@@ -43,7 +43,7 @@ public class ActionCheckSubjectPublishable extends BaseAction {
 
 		public static List<String> Excludes = new ArrayList<String>();
 
-		//是否拥有权限
+		//권한 보유 여부
 		private Boolean checkResult = false;
 
 		public Boolean getCheckResult() {

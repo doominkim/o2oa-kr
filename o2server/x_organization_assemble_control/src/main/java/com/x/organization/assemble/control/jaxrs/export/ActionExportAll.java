@@ -47,7 +47,7 @@ import com.x.organization.core.entity.UnitDuty_;
 import com.x.organization.core.entity.Unit_;
 
 /**
- * 导入的文件没有用到文件存储器，是直接放在数据库中的BLOB列
+ * 가져온 파일은 파일 저장소를 사용하지 않고 DB의 BLOB 열에 직접 저장
  */
 public class ActionExportAll extends BaseAction {
 
@@ -66,10 +66,10 @@ public class ActionExportAll extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = null;
 		String fileName = "person_export_" + DateTools.formatDate(new Date()) + ".xlsx";
-		//创建说明sheet
+		//설명 sheet 생성
 		this.createNoticeSheet();
 
-		// 先获取需要导出的数据
+		// 내보낼 데이터 먼저 조회
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 			this.listUnit(business);
@@ -79,19 +79,19 @@ public class ActionExportAll extends BaseAction {
 			this.listGroup(business);
 			this.listRole(business);
 
-			// 将组织信息结果组织成EXCEL
+			// 조직 정보 결과를 EXCEL로 구성
 			this.composeUnit( business, "조직 정보", allUnitList );
 
-			// 将人员基础信息结果组织成EXCEL
+			// 사용자 기본 정보 결과를 EXCEL로 구성
 			this.composePerson( business, "사용자 기본 정보", allPersonList );
 
-			// 将人员身份信息结果组织成EXCEL
+			// 사용자 신분 정보 결과를 EXCEL로 구성
 			this.composeIdentity( business, "사용자 소속 정보", allIdentityList );
 
-			// 将职务信息结果组织成EXCEL
+			// 직무 정보 결과를 EXCEL로 구성
 			this.composeDuty( business, "직무 정보", allDutyList );
 
-			// 将群组信息结果组织成EXCEL
+			// 그룹 정보 결과를 EXCEL로 구성
 			this.composeGroup( business, "그룹 정보", allGroupList );
 
 			this.composeRole( business, "역할 정보", allRoleList );
@@ -206,10 +206,10 @@ public class ActionExportAll extends BaseAction {
 	private void createNoticeSheet() throws Exception {
 
 			Row row = null;
-			// 创建新的表格
+			// 새 표 생성
 			Sheet sheet = wb.createSheet("주의 사항");
 
-			// 先创建表头
+			// 먼저 헤더 생성
 			row = sheet.createRow(2);
 			row.createCell(0).setCellValue("주의 사항:");
 
@@ -235,10 +235,10 @@ public class ActionExportAll extends BaseAction {
 		EntityManagerContainer em = business.entityManagerContainer();
 
 		Row row = null;
-		// 创建新的表格
+		// 새 표 생성
 		Sheet sheet = wb.createSheet(sheetName);
 		sheet.setDefaultColumnWidth(25);
-		// 先创建表头
+		// 먼저 헤더 생성
 		row = sheet.createRow(0);
 		row.createCell(0).setCellValue("조직 이름 *");
 		row.createCell(1).setCellValue("고유 코드 *");
@@ -299,10 +299,10 @@ public class ActionExportAll extends BaseAction {
 		Person person = null;
 
 		Row row = null;
-		// 创建新的表格
+		// 새 표 생성
 		Sheet sheet = wb.createSheet(sheetName);
 		sheet.setDefaultColumnWidth(25);
-		// 先创建表头
+		// 먼저 헤더 생성
 		row = sheet.createRow(0);
 		row.createCell(0).setCellValue("사용자 이름 *");
 		row.createCell(1).setCellValue("고유 코드 *");
@@ -349,10 +349,10 @@ public class ActionExportAll extends BaseAction {
 		Identity identity = null;
 		EntityManagerContainer emc = business.entityManagerContainer();
 		Row row = null;
-		// 创建新的表格
+		// 새 표 생성
 		Sheet sheet = wb.createSheet(sheetName);
 		sheet.setDefaultColumnWidth(25);
-		// 先创建表头
+		// 먼저 헤더 생성
 		row = sheet.createRow(0);
 		row.createCell(0).setCellValue("사용자 고유 코드 *");
 		row.createCell(1).setCellValue("조직 고유 코드 *");
@@ -384,10 +384,10 @@ public class ActionExportAll extends BaseAction {
 		UnitDuty duty = null;
 		EntityManagerContainer emc = business.entityManagerContainer();
 		Row row = null;
-		// 创建新的表格
+		// 새 표 생성
 		Sheet sheet = wb.createSheet(sheetName);
 		sheet.setDefaultColumnWidth(40);
-		// 先创建表头
+		// 먼저 헤더 생성
 		row = sheet.createRow(0);
 		row.createCell(0).setCellValue("직무 이름 *");
 		row.createCell(1).setCellValue("직무 소속 조직 고유 코드 *");
@@ -454,10 +454,10 @@ public class ActionExportAll extends BaseAction {
 
 		Row row = null;
 		EntityManagerContainer emc = business.entityManagerContainer();
-		// 创建新的表格
+		// 새 표 생성
 		Sheet sheet = wb.createSheet(sheetName);
 		sheet.setDefaultColumnWidth(25);
-		// 先创建表头
+		// 먼저 헤더 생성
 		row = sheet.createRow(0);
 		row.createCell(0).setCellValue("그룹 이름 *");
 		row.createCell(1).setCellValue("그룹 코드 *");
@@ -561,10 +561,10 @@ public class ActionExportAll extends BaseAction {
 		Role role = null;
 		Row row = null;
 		EntityManagerContainer emc = business.entityManagerContainer();
-		// 创建新的表格
+		// 새 표 생성
 		Sheet sheet = wb.createSheet(sheetName);
 		sheet.setDefaultColumnWidth(25);
-		// 先创建表头
+		// 먼저 헤더 생성
 		row = sheet.createRow(0);
 		row.createCell(0).setCellValue("역할 이름 *");
 		row.createCell(1).setCellValue("역할 코드 *");

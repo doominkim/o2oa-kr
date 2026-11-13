@@ -29,19 +29,19 @@ public class ActionGetWithShiftByPersonDate extends BaseAction {
       throw new ExceptionEmptyParameter("date");
     }
     if (!AttendanceV2Helper.isValidDateString(date)) {
-      throw new ExceptionWithMessage("日期格式不正确，需要格式：yyyy-MM-dd！");
+      throw new ExceptionWithMessage("날짜 형식이 올바르지 않습니다. 필요한 형식: yyyy-MM-dd!");
     }
     Date dateCheck = null;
     try {
       dateCheck = DateTools.parse(date, DateTools.format_yyyyMMdd);
     } catch (Exception ignore) {}
     if (dateCheck == null) {
-      throw new ExceptionWithMessage("日期格式错误，需要格式：yyyy-MM-dd");
+      throw new ExceptionWithMessage("날짜 형식이 잘못되었습니다. 필요한 형식: yyyy-MM-dd");
     }
     ActionResult<WoGroupShift> result = new ActionResult<>();
     WoGroupShift wo = new WoGroupShift();
     try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-      // 查询当前用户的考勤组
+      // 현재 사용자의 근태 그룹 조회
       Business business = new Business(emc);
       List<AttendanceV2Group> groups = business.getAttendanceV2ManagerFactory()
           .listGroupWithPerson(person);
@@ -51,15 +51,15 @@ public class ActionGetWithShiftByPersonDate extends BaseAction {
       }
       AttendanceV2Group group = groups.get(0);
       wo.setGroup(WoGroupShift.WoGroup.copier.copy(group));
-      // 固定班制
+      // 고정 근무제
       if (group.getCheckType().equals(AttendanceV2Group.CHECKTYPE_Fixed)) {
-        // 正常的班次id
+        // 정상 교대 id
         String shiftId = group.getWorkDateProperties().shiftIdWithDate(dateCheck);
-        // 是否特殊工作日
+        // 특별 근무일 여부
         if (StringUtils.isEmpty(shiftId)) {
           shiftId = AttendanceV2Helper.specialWorkDayShift(date, group);
         }
-        // 是否特殊节假日 清空shiftid
+        // 특별 공휴일 여부, shiftid 비움
         if (StringUtils.isNotEmpty(shiftId) && AttendanceV2Helper.isSpecialRestDay(date, group)) {
           shiftId = null;
         }
@@ -72,12 +72,12 @@ public class ActionGetWithShiftByPersonDate extends BaseAction {
       } else if (group.getCheckType().equals(AttendanceV2Group.CHECKTYPE_Arrangement)) {
         List<AttendanceV2GroupSchedule> schedules = business.getAttendanceV2ManagerFactory()
             .listGroupSchedule(group.getId(), null, date, person);
-        if (schedules != null && !schedules.isEmpty()) { // 有排班
+        if (schedules != null && !schedules.isEmpty()) { // 교대 편성 있음
           AttendanceV2GroupSchedule schedule = schedules.get(0);
           if (StringUtils.isNotEmpty(schedule.getShiftId())) {
             AttendanceV2Shift shift = business.getAttendanceV2ManagerFactory().pick(schedule.getShiftId(),
                 AttendanceV2Shift.class);
-            if (shift != null) { // 有班次对象
+            if (shift != null) { // 교대 객체 있음
               wo.setShift(WoGroupShift.WoShift.copier.copy(shift));
             }
           }

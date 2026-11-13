@@ -7,6 +7,6 @@ class ExceptionEnhanceError extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionEnhanceError(String out) {
-		super("增强失败:{}.", out);
+		super("강화 실패: {}.", out);
 	}
 }

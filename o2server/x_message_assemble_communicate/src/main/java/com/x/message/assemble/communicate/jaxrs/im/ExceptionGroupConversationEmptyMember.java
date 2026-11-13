@@ -7,6 +7,6 @@ class ExceptionGroupConversationEmptyMember extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionGroupConversationEmptyMember() {
-		super("会话的成员列表数量不正确.");
+		super("대화 멤버 수가 올바르지 않습니다.");
 	}
 }

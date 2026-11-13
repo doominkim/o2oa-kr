@@ -24,7 +24,7 @@ class ActionList extends BaseAction {
 		ActionResult<List<Wo>> result = new ActionResult<>();
 		List<Wo> wos = new ArrayList<>();
 		boolean fromProxy = this.formProxy(request, this.getHost(request));
-		String httpProtocol = "http://"; // O2LEE，修正如果开启SSL，x_program_center/jest/list.html 给出的URL都是HTTP协议的，无法访问的问题
+		String httpProtocol = "http://"; // O2LEE, SSL 사용 시 x_program_center/jest/list.html 에서 제공하는 URL이 모두 HTTP 프로토콜이라 접근할 수 없는 문제 수정
 		for (Entry<String, CopyOnWriteArrayList<Application>> en : ThisApplication.context().applications()
 				.entrySet()) {
 			Wo wo = new Wo();

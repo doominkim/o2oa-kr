@@ -39,7 +39,7 @@ public class ActionListImportByFileName extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(e,
-						"系统在根据打卡信息导入文件ID查询员工打卡信息时发生异常！FileId:" + file_id);
+						"체크 정보 가져오기 파일 ID로 직원 체크 정보를 조회하는 중 오류가 발생했습니다! FileId:" + file_id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -52,7 +52,7 @@ public class ActionListImportByFileName extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAttendanceDetailProcess(e,
-							"系统根据开始时间和结束时间查询需要分析的员工打卡信息ID列表时发生异常！");
+							"시작 시간과 종료 시간으로 분석할 직원 체크 정보 ID 목록을 조회하는 중 오류가 발생했습니다!");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -64,7 +64,7 @@ public class ActionListImportByFileName extends BaseAction {
 					wraps = Wo.copier.copy(attendanceDetailList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工打卡信息为输出对象时发生异常.");
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}

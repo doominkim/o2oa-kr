@@ -88,7 +88,7 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 				result.setData( result_cache.getData() );
 				result.setCount( result_cache.getCount() );
 			} else {
-				//继续进行数据查询
+				//데이터 조회 계속
 				result = getSubjectQueryResult(wrapIn, request, effectivePerson, page, count);
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -116,7 +116,7 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 					sectionInfo = sectionInfoServiceAdv.get( wrapIn.getSectionId() );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSubjectInfoProcess( e, "根据指定ID查询版块信息时发生异常.ID:" + wrapIn.getSectionId() );
+					Exception exception = new ExceptionSubjectInfoProcess( e, "지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + wrapIn.getSectionId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -152,11 +152,11 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 			}
 		}
 
-		//查询的最大条目数
+		//조회 최대 항목 수
 		selectTotal = page * count;
-		Boolean selectTopInSection = null;//默认是将版块内所有的置顶和非置顶贴全部查出
+		Boolean selectTopInSection = null;//기본적으로 게시판 내 모든 상단 고정글과 일반글을 조회
 
-		//查询出所有的置顶贴
+		//모든 상단 고정글 조회
 		if ( check && wrapIn != null && wrapIn.getWithTopSubject() != null && wrapIn.getWithTopSubject() ) {
 			try {
 				//subjectInfoList_top = subjectInfoServiceAdv.listAllTopSubject( sectionInfo, wrapIn.getCreatorName(), viewSectionIds ,wrapIn.getStartTime() ,  wrapIn.getEndTime());
@@ -181,7 +181,7 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 		}
 
 		if( check ){
-			//置顶贴会占用分页的每页条目数
+			//상단 고정글은 페이지당 항목 수를 차지함
 			if( wraps_top != null ){
 				if( selectTotal < wraps_top.size() ){
 					selectTotal = 0;
@@ -192,7 +192,7 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 		}
 
 		if( check ){
-			selectTopInSection = false; //置顶贴的处理已经在前面处理过了，置顶贴已经放到一个List里，不需要再次查询出来了，后续的查询过滤置顶贴
+			selectTopInSection = false; //상단 고정글은 앞에서 이미 처리되어 List에 들어 있으므로 다시 조회할 필요 없음, 이후 조회에서 상단 고정글 제외
 			if( selectTotal > 0 ){
 				try{
 					total = subjectInfoServiceAdv.countSubjectWithSubjectTypeForPage(wrapIn.getSectionName() ,wrapIn.getSubjectType(),wrapIn.getSearchContent(), wrapIn.getForumId(), wrapIn.getMainSectionId(), wrapIn.getSectionId(),
@@ -251,11 +251,11 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 			}
 			if( ListTools.isNotEmpty( wraps_out ) ){
 				for( Wo wo : wraps_out ) {
-					//将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+					//@ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 					cutPersonNames( wo );
-					//填充subjectCoent添加到结果集中
+					//subjectCoent를 채워 결과 집합에 추가
 					addSubjectCoent( wo );
-					//填充回复信息到结果集中
+					//답글 정보를 결과 집합에 채우기
 					addReplyInfo(wo);
 				}
 				try {
@@ -273,7 +273,7 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 	}
 
 	/**
-	 *  将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+	 *  @ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 	 *
 	 *  latestReplyUserShort = "";
 		bBSIndexSetterNameShort = "";
@@ -349,43 +349,43 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 
 	public static class Wi{
 
-		@FieldDescribe( "贴子ID." )
+		@FieldDescribe( "게시글 ID." )
 		private String subjectId = null;
 
-		@FieldDescribe( "投标选项ID." )
+		@FieldDescribe( "투표 선택지 ID." )
 		private String voteOptionId = null;
 
-		@FieldDescribe( "贴子所属论坛ID." )
+		@FieldDescribe( "게시글 소속 포럼 ID." )
 		private String forumId = null;
 
-		@FieldDescribe( "贴子所属主版块ID." )
+		@FieldDescribe( "게시글 소속 상위 게시판 ID." )
 		private String mainSectionId = null;
 
-		@FieldDescribe( "贴子所属版块ID." )
+		@FieldDescribe( "게시글 소속 게시판 ID." )
 		private String sectionId = null;
 
-		@FieldDescribe( "贴子所属版块名称.必填" )
+		@FieldDescribe( "게시글 소속 게시판 이름. 필수" )
 		private String sectionName = null;
 
-		@FieldDescribe( "标题类别.必填" )
+		@FieldDescribe( "제목 유형. 필수" )
 		private String subjectType = null;
 
-		@FieldDescribe( "标题模糊搜索关键词" )
+		@FieldDescribe( "제목 유사 검색 키워드" )
 		private String searchContent = null;
 
-		@FieldDescribe( "创建者名称." )
+		@FieldDescribe( "작성자 이름." )
 		private String creatorName = null;
 
-		@FieldDescribe( "是否只查询有大图的贴子." )
+		@FieldDescribe( "큰 이미지가 있는 게시글만 조회할지 여부." )
 		private Boolean needPicture = false;
 
-		@FieldDescribe( "是否包含置顶贴." )
-		private Boolean withTopSubject = false; // 是否包含置顶贴
+		@FieldDescribe( "상단 고정글 포함 여부." )
+		private Boolean withTopSubject = false; // 상단 고정글 포함 여부
 
-		@FieldDescribe( "创建日期开始." )
+		@FieldDescribe( "작성일 시작." )
 		private Date startTime = null;
 
-		@FieldDescribe( "创建日期结束." )
+		@FieldDescribe( "작성일 종료." )
 		private Date endTime = null;
 
 		public static List<String> Excludes = new ArrayList<String>( JpaObject.FieldsUnmodify );
@@ -550,7 +550,7 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 
 		private List<WoSubjectAttachment> subjectAttachmentList;
 
-		@FieldDescribe( "投票主题的所有投票选项列表." )
+		@FieldDescribe( "투표 주제의 전체 투표 선택지 목록." )
 		private List<WoBBSVoteOptionGroup> voteOptionGroupList;
 
 		private String content = null;
@@ -559,25 +559,25 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 
 		private String pictureBase64 = null;
 
-		@FieldDescribe("最新回复用户昵称")
+		@FieldDescribe("최근 답글 사용자 닉네임")
 		private String latestReplyUserNickName = "";
 
-		@FieldDescribe( "首页推荐人姓名" )
+		@FieldDescribe( "홈 추천자 이름" )
 		private String bBSIndexSetterNameShort = "";
 
-		@FieldDescribe( "精华设置人姓名" )
+		@FieldDescribe( "우수 주제 설정자 이름" )
 		private String screamSetterNameShort = "";
 
-		@FieldDescribe( "原创设置人姓名" )
+		@FieldDescribe( "원작 설정자 이름" )
 		private String originalSetterNameShort = "";
 
-		@FieldDescribe( "创建人姓名" )
+		@FieldDescribe( "작성자 이름" )
 		private String creatorNameShort = "";
 
-		@FieldDescribe( "审核人姓名" )
+		@FieldDescribe( "심사자 이름" )
 		private String auditorNameShort = "";
 
-		@FieldDescribe( "当前用户是否已经投票过." )
+		@FieldDescribe( "현재 사용자의 투표 여부." )
 		private Boolean voted = false;
 
 		public List<WoBBSReplyInfo> getWoBBSReplyInfo() {
@@ -732,16 +732,16 @@ public class ActionSubjectListWithSubjectTypeForPage extends BaseAction {
 		public static List<String> Excludes = new ArrayList<String>();
 		public static WrapCopier<BBSReplyInfo, WoBBSReplyInfo> copier = WrapCopierFactory.wo(BBSReplyInfo.class, WoBBSReplyInfo.class, null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe("创建人姓名")
+		@FieldDescribe("작성자 이름")
 		private String creatorNameShort = "";
 
-		@FieldDescribe("审核人姓名")
+		@FieldDescribe("심사자 이름")
 		private String auditorNameShort = "";
 
-		@FieldDescribe("下级回复的数量，默认为0")
+		@FieldDescribe("하위 답글 수, 기본값 0")
 		private Integer subReplyTotal = 0;
 
-		@FieldDescribe("下级回复的数量，默认为0")
+		@FieldDescribe("하위 답글 수, 기본값 0")
 		private List<WoBBSReplyInfo> subReplies;
 
 		public List<WoBBSReplyInfo> getSubReplies() {

@@ -11,24 +11,24 @@ import java.util.List;
  **/
 public class DocIndex extends GsonPropertyObject {
     private String processId;
-    @FieldDescribe("应用名称.")
+    @FieldDescribe("앱 이름.")
     private String processName;
-    @FieldDescribe("关联文档ID.")
+    @FieldDescribe("관련 문서 ID.")
     private String id;
-    @FieldDescribe("文号.")
+    @FieldDescribe("문서 번호.")
     private String serial;
     private String sourceType = "external";
     private String sourceId = "external";
-    @FieldDescribe("文档创建者.")
+    @FieldDescribe("문서 작성자.")
     private String creatorPerson;
     private String creatorUnit;
     private String creatorUnitLevelName;
-    @FieldDescribe("文档创建时间.")
+    @FieldDescribe("문서 작성 시간.")
     private Date createDateTime;
     private Date updateDateTime;
-    @FieldDescribe("标题.")
+    @FieldDescribe("제목.")
     private String title;
-    @FieldDescribe("分类.")
+    @FieldDescribe("분류.")
     private String category;
     private String content;
     private List<String> permissionList;

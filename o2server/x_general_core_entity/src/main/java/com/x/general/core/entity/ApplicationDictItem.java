@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * @author sword
  */
-@Schema(name = "ApplicationDictItem", description = "O2平台数据字典条目.")
+@Schema(name = "ApplicationDictItem", description = "O2 플랫폼 데이터 사전 항목.")
 @Entity
 @ContainerEntity(dumpSize = 100, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.ApplicationDictItem.table, uniqueConstraints = {
@@ -39,7 +39,7 @@ public class ApplicationDictItem extends DataItem {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -152,7 +152,7 @@ public class ApplicationDictItem extends DataItem {
 	@CheckPersist(allowEmpty = false)
 	private ItemStringValueType itemStringValueType;
 
-	@FieldDescribe("数据标识")
+	@FieldDescribe("데이터 식별자")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + bundle_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + bundle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -190,7 +190,7 @@ public class ApplicationDictItem extends DataItem {
 	private Boolean booleanValue;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("所属应用ID.")
+	@FieldDescribe("소속 앱 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

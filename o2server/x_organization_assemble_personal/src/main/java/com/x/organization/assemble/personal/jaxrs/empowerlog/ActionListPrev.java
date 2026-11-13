@@ -29,7 +29,7 @@ class ActionListPrev extends BaseAction {
 		public static WrapCopier<EmpowerLog, Wo> copier = WrapCopierFactory.wo(EmpowerLog.class, Wo.class,
 				JpaObject.singularAttributeField(EmpowerLog.class, true, true), null);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

@@ -40,7 +40,7 @@ public class ActionDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -53,7 +53,7 @@ public class ActionDelete extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据ID删除指定日历信息时发生异常时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "ID로 캘린더 정보를 삭제하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

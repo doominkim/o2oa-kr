@@ -69,7 +69,7 @@ class ActionDelete extends BaseAction {
 				Work work = emc.find(param.id, Work.class);
 				cascadeDeleteWorkBeginButNotCommit(business, work);
 				emc.commit();
-				// 创建删除事件
+				// 삭제 이벤트 생성
 				emc.beginTransaction(WorkEvent.class);
 				emc.persist(WorkEvent.deleteEventInstance(work), CheckPersistType.all);
 				emc.commit();

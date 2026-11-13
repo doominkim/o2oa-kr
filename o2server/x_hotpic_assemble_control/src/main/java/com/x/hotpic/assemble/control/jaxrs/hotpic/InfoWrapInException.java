@@ -7,6 +7,6 @@ class InfoWrapInException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	InfoWrapInException( Throwable e  ) {
-		super("系统将输入的数据转换为一个热点信息对象时发生异常。" , e );
+		super("입력 데이터를 인기 정보 객체로 변환하는 중 오류가 발생했습니다." , e );
 	}
 }

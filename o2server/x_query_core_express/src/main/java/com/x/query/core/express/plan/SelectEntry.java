@@ -27,7 +27,7 @@ public class SelectEntry extends GsonPropertyObject {
 	}
 
 	public String orderType;
-	/** 用于前台排序的列值 */
+	/** 프런트 정렬에 쓰는 열 값 */
 	public Integer orderRank;
 	public String column;
 	public String displayName;

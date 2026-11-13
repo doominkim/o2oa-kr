@@ -8,14 +8,14 @@ import com.x.mind.entity.MindVersionContent;
 import com.x.mind.entity.MindVersionInfo;
 
 /**
- * 脑图历史版本信息查询操作服务类：查询
+ * 마인드맵 이전 버전 정보 조회 작업 서비스 클래스: 조회
  * @author O2LEE
  *
  */
 class ServiceMindVersionInfoQuery{
 
 	/**
-	 * 根据指定的ID列表获取脑图基本信息列表
+	 * 지정 ID 목록으로 마인드맵 기본 정보 목록 조회
 	 * @param emc
 	 * @param ids
 	 * @return
@@ -27,7 +27,7 @@ class ServiceMindVersionInfoQuery{
 	}
 	
 	/**
-	 * 根据ID获取指定的脑图历史版本信息对象
+	 * ID로 지정 마인드맵 이전 버전 정보 객체 조회
 	 * @param emc
 	 * @param id
 	 * @return
@@ -38,7 +38,7 @@ class ServiceMindVersionInfoQuery{
 	}
 	
 	/**
-	 * 根据ID获取指定的脑图历史版本详细内容信息对象
+	 * ID로 지정 마인드맵 이전 버전 상세 내용 정보 객체 조회
 	 * @param emc
 	 * @param id
 	 * @return
@@ -49,7 +49,7 @@ class ServiceMindVersionInfoQuery{
 	}
 	
 	/**
-	 * 根据ID获取指定脑图历史版本的详细内容
+	 * ID로 지정 마인드맵 이전 버전의 상세 내용 조회
 	 * @param emc
 	 * @param id
 	 * @return
@@ -64,7 +64,7 @@ class ServiceMindVersionInfoQuery{
 	}
 
 	/**
-	 * 根据脑图ID获取脑较长的历史版本个数
+	 * 마인드맵 ID로 마인드맵의 이전 버전 수 조회
 	 * @param emc
 	 * @param mindId
 	 * @return
@@ -77,7 +77,7 @@ class ServiceMindVersionInfoQuery{
 
 	
 	/**
-	 * 根据脑图ID获取该脑图所有的版本
+	 * 마인드맵 ID로 해당 마인드맵의 모든 버전 조회
 	 * @param emc
 	 * @param id
 	 * @return

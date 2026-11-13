@@ -25,19 +25,19 @@ public class ApplicationServer extends ConfigObject {
 
 	private static final Integer DEFAULT_PORT = 80;
 
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	private Boolean enable;
-	@FieldDescribe("http/https端口,负责向前端提供数据访问接口.默认为20020端口.")
+	@FieldDescribe("http/https 포트, 프론트엔드에 데이터 접근 인터페이스 제공. 기본값 20020 포트.")
 	private Integer port;
-	@FieldDescribe("是否启用ssl传输加密,如果启用将使用config/keystore文件作为密钥文件.使用config/token.json文件中的sslKeyStorePassword字段为密钥密码,sslKeyManagerPassword为管理密码.")
+	@FieldDescribe("ssl 전송 암호화 사용 여부, 사용 시 config/keystore 파일을 키 파일로 사용. config/token.json 파일의 sslKeyStorePassword 필드를 키 비밀번호로, sslKeyManagerPassword를 관리 비밀번호로 사용.")
 	private Boolean sslEnable;
-	@FieldDescribe("代理主机,当服务器是通过apache/nginx等代理服务器映射到公网或者通过路由器做端口映射,在这样的情况下需要设置此地址以标明公网访问地址.")
+	@FieldDescribe("프록시 호스트, 서버가 apache/nginx 등 프록시 서버를 통해 공인망에 매핑되거나 라우터로 포트 매핑된 경우 공인망 접근 주소를 나타내기 위해 이 주소를 설정해야 함.")
 	private String proxyHost;
-	@FieldDescribe("代理端口,当服务器是通过apache/nginx等代理服务器映射到公网或者通过路由器做端口映射,在这样的情况下需要设置此地址以标明公网访问端口.")
+	@FieldDescribe("프록시 포트, 서버가 apache/nginx 등 프록시 서버를 통해 공인망에 매핑되거나 라우터로 포트 매핑된 경우 공인망 접근 포트를 나타내기 위해 이 주소를 설정해야 함.")
 	private Integer proxyPort;
-	@FieldDescribe("承载的应用,在集群环境下可以选择仅承载部分应用以降低服务器负载,可以使用*作为通配符.")
+	@FieldDescribe("탑재 앱, 클러스터 환경에서 서버 부하를 줄이기 위해 일부 앱만 탑재하도록 선택 가능, *를 와일드카드로 사용 가능.")
 	private CopyOnWriteArrayList<String> includes;
-	@FieldDescribe("选择不承载的应用,和includes的值配合使用可以选择或者排除承载的应用,可以使用*作为通配符.")
+	@FieldDescribe("탑재하지 않을 앱 선택, includes 값과 함께 사용하여 탑재 앱을 선택하거나 제외 가능, *를 와일드카드로 사용 가능.")
 	private CopyOnWriteArrayList<String> excludes;
 
 	public Boolean getEnable() {

@@ -16,40 +16,40 @@ MWF.xApplication.Selector.Person = new Class({
         "exclude" : [],
         "zIndex": 1000,
         "expand": true,
-        "embedded" : false, //是否嵌入在其他容器中
-        "selectAllEnable" : false, //是否允许全选
-        "selectAllRange" : "direct", //全选直属人员 还是 所有下级人员
-        "selectAllActiveNestSub": true, //全选时，是否展开子级级以后的层次
+        "embedded" : false, //다른 컨테이너에 포함되었는지 여부
+        "selectAllEnable" : false, //전체 선택 허용 여부
+        "selectAllRange" : "direct", //전체 선택 대상: 직속 사용자 또는 모든 하위 사용자
+        "selectAllActiveNestSub": true, //전체 선택 시 하위 레벨 이후 계층 펼치기 여부
 
-        "level1Indent" : 10, //第一级的缩进
-        "indent" : 10, //后续的缩进
+        "level1Indent" : 10, //첫 번째 레벨 들여쓰기
+        "indent" : 10, //이후 레벨 들여쓰기
 
-        "hasLetter" : true, //字母
-        "hasTop" : false, //可选、已选的标题
+        "hasLetter" : true, //문자
+        "hasTop" : false, //선택 가능, 선택됨 제목
 
-        "hasShuttle" : false, //穿梭按钮
-        "searchbarInTopNode" : true, //搜索框在标题上还是另起一行
-        "hasSelectedSearchbar" : false, //已选是不是有搜索框
-        "noSelectedContainer" : false, //是否隐藏右侧已选区域
-        "contentUrl" : "", //和默认的页面布局不一样的话，可以传入页面布局HTML URL
-        "categoryUrl" : "", //分类URL
+        "hasShuttle" : false, //이동 버튼
+        "searchbarInTopNode" : true, //검색창을 제목에 둘지 별도 줄에 둘지
+        "hasSelectedSearchbar" : false, //선택 영역에 검색창 표시 여부
+        "noSelectedContainer" : false, //오른쪽 선택 영역 숨김 여부
+        "contentUrl" : "", //기본 페이지 레이아웃과 다르면 페이지 레이아웃 HTML URL 전달 가능
+        "categoryUrl" : "", //분류 URL
         "itemUrl" : "", //itemURL
-        "injectToBody" : false, //当传入HTML URL的时候是否插入到document.body, false的时候插入到this.container
-        "selectSingleItem" : false, //当只有一个候选项的时候，是否默认选中
+        "injectToBody" : false, //HTML URL 전달 시 document.body에 삽입할지 여부, false이면 this.container에 삽입
+        "selectSingleItem" : false, //후보가 하나뿐일 때 기본 선택 여부
         "hiddenEmptyCategory" : false,
 
-        "useBreadcrumbs": false, //分类使用面包屑导航，仅移动端有效
+        "useBreadcrumbs": false, //분류에 브레드크럼 탐색 사용, 모바일에서만 유효
 
-        "flatCategory" : false, //扁平化展现分类,
+        "flatCategory" : false, //분류 평면 표시,
         "selectType" : "person",
 
         "isCheckStatus" : false,
         "showSelectedCount" : false,
 
         "itemHeight" : 29,
-        "identityItemWidth" : 0, //选项宽度，如果不为0，设置为float:left,
+        "identityItemWidth" : 0, //항목 너비, 0이 아니면 float:left로 설정,
 
-        "storeRange" : "full", //数据是否保存为精简，可选值：full,simple
+        "storeRange" : "full", //데이터를 간략하게 저장할지 여부, 가능한 값: full,simple
 
         "showEmptyText" : true
     },
@@ -106,12 +106,12 @@ MWF.xApplication.Selector.Person = new Class({
 
         this.breadcrumbItems = [];
 
-        this.selectedItems = []; //所有已选项
+        this.selectedItems = []; //선택된 모든 항목
 
-        this.items = []; //所有选择项
+        this.items = []; //모든 선택 항목
 
-        this.subCategorys = []; //直接的分类
-        this.subItems = []; //直接的选择项
+        this.subCategorys = []; //직접 분류
+        this.subItems = []; //직접 선택 항목
 
         this.subCategoryMap = {};
         this.subCategoryMapWithDuty = {};
@@ -712,7 +712,7 @@ MWF.xApplication.Selector.Person = new Class({
     getUnitIdentityCount : function(){
 
     },
-    getUnitSelecteIndentityCount : function( unitLevelName ){ //根据组织获取已选身份数
+    getUnitSelecteIndentityCount : function( unitLevelName ){ //조직별 선택된 신분 수 조회
         var count;
         this.selectedItems.each( function (item) {
             if( item.data.unitLevelName.indexOf( unitLevelName ) === 0 )count++;
@@ -722,7 +722,7 @@ MWF.xApplication.Selector.Person = new Class({
     getGroupNestCount : function(){
         // o2.Actions.load("x_organization_assemble_express").
     },
-    getGroupSelecteIndentityCount : function( groupName ){ //根据组织获取已选身份数
+    getGroupSelecteIndentityCount : function( groupName ){ //조직별 선택된 신분 수 조회
         var count;
         this.selectedItems.each( function (item) {
             if( item.data.unitLevelName.indexOf( unitLevelName ) === 0 )count++;
@@ -1740,7 +1740,7 @@ MWF.xApplication.Selector.Person = new Class({
         this.initSearchArea(false);
     },
     loadSelectItems: function(addToNext, lastExcludeCount ){
-        //lastExcludeCount 参数：表示本次加载是为了补足上次load的时候被排除的数量
+        //lastExcludeCount 파라미터: 이번 로드가 지난 load 때 제외된 수량을 보충하기 위한 것임을 의미
         if (!this.isItemLoaded){
             if (!this.loaddingItems){
                 this.loaddingItems = true;
@@ -1760,12 +1760,12 @@ MWF.xApplication.Selector.Person = new Class({
                         }.bind(this));
                         this.loaddingItems = false;
 
-                        if( lastExcludeCount ){ //如果是因为上次load的时候被排除而加载的
-                            if( count - lastExcludeCount - excludedCount < 0 ){ //如果本次load的数量还不够补足排除的数量，需要再次load
-                                excludedCount = lastExcludeCount + excludedCount - count; //把不足的数量作为再次load的参数
+                        if( lastExcludeCount ){ //지난 load 때 제외되어 로드하는 경우
+                            if( count - lastExcludeCount - excludedCount < 0 ){ //이번 load 수량이 제외된 수량을 보충하기에 부족하면 다시 load 필요
+                                excludedCount = lastExcludeCount + excludedCount - count; //부족한 수량을 다음 load의 파라미터로 사용
                                 this.loadItemsQueue++
                             }
-                        }else if( excludedCount > 0  ){ //把排除的数量作为再次load的参数
+                        }else if( excludedCount > 0  ){ //제외된 수량을 다음 load의 파라미터로 사용
                             this.loadItemsQueue++
                         }
                         if (json.data.length<count){
@@ -3156,7 +3156,7 @@ MWF.xApplication.Selector.Person.ItemCategory = new Class({
             "click": function(){
                 if( this.selector.currentFlatCategory === this )return;
                 if( this.selector.currentFlatCategory ){
-                    this.selector.currentFlatCategory.clickFlatCategoryItem(null, true); //取消原来选择的
+                    this.selector.currentFlatCategory.clickFlatCategoryItem(null, true); //기존 선택 취소
                 }
                 this.selector.currentFlatCategory = this;
                 this.clickFlatCategoryItem();
@@ -3255,7 +3255,7 @@ MWF.xApplication.Selector.Person.ItemCategory = new Class({
         }
         if (!this.selector.options.expand) this.children.setStyle("display", "none");
 
-        if( this.selector.options.expandEmptyCategory && !this._hasChildItem() ){ //点击允许展开空分类
+        if( this.selector.options.expandEmptyCategory && !this._hasChildItem() ){ //클릭 시 빈 분류 펼치기 허용
             this.children.hide();
             this.actionNode.setStyles(this.selector.css.selectorItemCategoryActionNode_collapse);
             this.isExpand = false;
@@ -3351,7 +3351,7 @@ MWF.xApplication.Selector.Person.ItemCategory = new Class({
 
         if (!this.selector.options.expand || this.selector.options.useBreadcrumbs) this.children.setStyle("display", "none");
 
-        if( this.selector.options.expandEmptyCategory && !this._hasChildItem() ){ //点击允许展开空分类
+        if( this.selector.options.expandEmptyCategory && !this._hasChildItem() ){ //클릭 시 빈 분류 펼치기 허용
             this.children.hide();
             // this.actionNode.setStyles(this.selector.css.selectorItemCategoryActionNode_collapse);
             this.isExpand = false;

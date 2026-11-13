@@ -25,13 +25,13 @@ public class Cache extends ConfigObject {
 		return this.type;
 	}
 
-	@FieldDescribe("缓存类型:redis,guava")
+	@FieldDescribe("캐시 유형: redis, guava")
 	private String type;
 
-	@FieldDescribe("redis配置")
+	@FieldDescribe("redis 설정")
 	private Redis redis;
 
-	@FieldDescribe("guava配置")
+	@FieldDescribe("guava 설정")
 	private Guava guava;
 
 	public Redis getRedis() {
@@ -70,28 +70,28 @@ public class Cache extends ConfigObject {
 
 		}
 
-		@FieldDescribe("redis服务器地址")
+		@FieldDescribe("redis 서버 주소")
 		private String host;
 
-		@FieldDescribe("redis服务器端口")
+		@FieldDescribe("redis 서버 포트")
 		private Integer port;
 
-		@FieldDescribe("认证用户")
+		@FieldDescribe("인증 사용자")
 		private String user;
 
-		@FieldDescribe("认证口令")
+		@FieldDescribe("인증 비밀번호")
 		private String password;
 
-		@FieldDescribe("连接等待时间")
+		@FieldDescribe("연결 대기 시간")
 		private Integer connectionTimeout;
 
-		@FieldDescribe("response返回等待时间")
+		@FieldDescribe("response 반환 대기 시간")
 		private Integer socketTimeout;
 
-		@FieldDescribe("是否启用ssl")
+		@FieldDescribe("ssl 사용 여부")
 		private Boolean sslEnable;
 
-		@FieldDescribe("数据库编号")
+		@FieldDescribe("데이터베이스 번호")
 		private Integer index;
 
 		public String getHost() {
@@ -144,10 +144,10 @@ public class Cache extends ConfigObject {
 			this.expireMinutes = DEFAULT_EXPIREMINUTES;
 		}
 
-		@FieldDescribe("缓存最大容量,默认值:3000.")
+		@FieldDescribe("캐시 최대 용량, 기본값: 3000.")
 		private Integer maximumSize;
 
-		@FieldDescribe("过期时间,默认值:30.")
+		@FieldDescribe("만료 시간, 기본값: 30.")
 		private Integer expireMinutes;
 
 		public Integer getMaximumSize() {

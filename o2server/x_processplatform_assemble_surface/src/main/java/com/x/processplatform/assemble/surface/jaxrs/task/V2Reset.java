@@ -42,7 +42,7 @@ import com.x.processplatform.core.express.service.processing.jaxrs.task.V2EditWi
 import com.x.processplatform.core.express.service.processing.jaxrs.work.ActionProcessingWo;
 
 /**
- * @since 8.2 重置处理人
+ * @since 8.2 처리자 재설정
  */
 
 public class V2Reset extends BaseAction {
@@ -101,7 +101,7 @@ public class V2Reset extends BaseAction {
 			if (null == manual) {
 				throw new ExceptionEntityNotExist(work.getActivity(), Manual.class);
 			}
-			// 将getDistinguishedNameList和getIdentityList进行合并,兼容前端接口
+			// getDistinguishedNameList와 getIdentityList 병합, 프론트엔드 인터페이스 호환
 			param.distinguishedNameList = business.organization().distinguishedName()
 					.list(ListUtils.sum(wi.getDistinguishedNameList(), wi.getIdentityList())).stream().distinct()
 					.collect(Collectors.toList());

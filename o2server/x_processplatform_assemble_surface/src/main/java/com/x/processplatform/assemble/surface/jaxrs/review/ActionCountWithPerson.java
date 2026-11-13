@@ -16,7 +16,7 @@ import com.x.processplatform.assemble.surface.Business;
 import com.x.processplatform.core.entity.content.Review;
 
 /**
- * 统计指定用户的Review数量,无权限限制
+ * 지정 사용자의 Review 수 통계, 권한 제한 없음
  * 
  * @author zhour
  *

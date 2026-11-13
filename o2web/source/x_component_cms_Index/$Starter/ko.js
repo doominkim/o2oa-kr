@@ -25,6 +25,6 @@ MWF.xApplication.cms.Index.Starter.lp = {
     "processStarted": "문서를 기안했습니다",
     "deal": "처리",
 
-    "documentTypeInfor" : "信息",
+    "documentTypeInfor" : "정보",
     "untitled" : "제목 없음"
 };

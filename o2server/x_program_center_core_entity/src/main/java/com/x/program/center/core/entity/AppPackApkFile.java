@@ -29,7 +29,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * Copyright © 2020 O2. All rights reserved.
  */
 
-@Schema(name = "AppPackApkFile", description = "服务管理安装包.")
+@Schema(name = "AppPackApkFile", description = "서비스 관리 설치 패키지.")
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AppPackApkFile.TABLE, uniqueConstraints = {
@@ -52,39 +52,39 @@ public class AppPackApkFile extends StorageObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     public void onPersist() throws Exception {
 
     }
 
     public static final String name_FIELDNAME = "name";
-    @FieldDescribe("文件名称.")
+    @FieldDescribe("파일 이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
     @CheckPersist(allowEmpty = false, fileNameString = true)
     private String name;
 
     public static final String storage_FIELDNAME = "storage";
-    @FieldDescribe("存储器的名称,也就是多个存放节点的名字.")
+    @FieldDescribe("스토리지 이름, 즉 여러 저장 노드의 이름.")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
     @CheckPersist(allowEmpty = false, simplyString = true)
     @Index(name = TABLE + IndexNameMiddle + storage_FIELDNAME)
     private String storage;
 
     public static final String extension_FIELDNAME = "extension";
-    @FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+    @FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + extension_FIELDNAME)
     @CheckPersist(allowEmpty = false, fileNameString = true)
     private String extension;
 
     public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-    @FieldDescribe("最后更新时间")
+    @FieldDescribe("최종 수정 시간")
     @Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
@@ -92,13 +92,13 @@ public class AppPackApkFile extends StorageObject {
 
 
     public static final String deepPath_FIELDNAME = "deepPath";
-    @FieldDescribe("是否使用更深的路径.")
+    @FieldDescribe("더 깊은 경로 사용 여부.")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
     private Boolean deepPath;
 
     public static final String length_FIELDNAME = "length";
-    @FieldDescribe("文件大小.")
+    @FieldDescribe("파일 크기.")
     @Column(name = ColumnNamePrefix + length_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private Long length;
@@ -119,18 +119,18 @@ public class AppPackApkFile extends StorageObject {
     }
 
     public static final String packInfoId_FIELDNAME = "packInfoId";
-    @FieldDescribe("打包信息id， 关联的会话.")
+    @FieldDescribe("패키지 정보 id, 연관 세션.")
     @Column(length = length_64B, name = ColumnNamePrefix + packInfoId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String packInfoId;
 
     public static final String appVersionName_FIELDNAME = "appVersionName";
-    @FieldDescribe("安装包版本号名称.")
+    @FieldDescribe("설치 패키지 버전 이름.")
     @Column(length = length_64B, name = ColumnNamePrefix + appVersionName_FIELDNAME)
     private String appVersionName;
 
     public static final String appVersionNo_FIELDNAME = "appVersionNo";
-    @FieldDescribe("安装包版本号，可比较.")
+    @FieldDescribe("설치 패키지 버전 번호, 비교 가능.")
     @Column(length = length_64B, name = ColumnNamePrefix + appVersionNo_FIELDNAME)
     private String appVersionNo;
 
@@ -140,12 +140,12 @@ public class AppPackApkFile extends StorageObject {
     public static final Integer statusError = 2;
 
     public static final String status_FIELDNAME = "status";
-    @FieldDescribe("状态，异步下载文件所以需要这个状态，0开启，1下载完成， 2过程有异常.")
+    @FieldDescribe("상태, 파일을 비동기로 다운로드하므로 필요, 0 시작, 1 다운로드 완료, 2 진행 중 오류.")
     @Column(name = ColumnNamePrefix + status_FIELDNAME)
     private Integer status;
 
     public static final String isPackAppIdOuter_FIELDNAME = "isPackAppIdOuter";
-    @FieldDescribe("是否使用外部包名，2: 就是用 net.zoneland.x.bpm.mobile.v1.zoneXBPM.outer 作为apk的applicationId，默认使用老的applicationId，兼容老的版本")
+    @FieldDescribe("외부 패키지명 사용 여부, 2: net.zoneland.x.bpm.mobile.v1.zoneXBPM.outer 를 apk의 applicationId로 사용, 기본값은 기존 applicationId 사용(구버전 호환)")
     @Column(length = length_64B, name = ColumnNamePrefix + isPackAppIdOuter_FIELDNAME)
     private String isPackAppIdOuter;
 

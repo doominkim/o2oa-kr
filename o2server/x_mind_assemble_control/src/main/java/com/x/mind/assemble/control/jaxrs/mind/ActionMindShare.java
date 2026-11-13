@@ -25,7 +25,7 @@ import com.x.mind.entity.MindBaseInfo;
 import com.x.mind.entity.MindShareRecord;
 
 /**
- * 将脑图信息分享给其他用户或者组织
+ * 마인드맵 정보를 다른 사용자 또는 조직에 공유
  * @author O2LEE
  *
  */
@@ -69,7 +69,7 @@ public class ActionMindShare extends BaseAction {
 				}
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e,  "系统在根据ID查询脑图信息时发生异常。", mindId );
+				Exception exception = new ExceptionMindQuery( e,  "ID로 마인드맵 정보를 조회하는 중 오류가 발생했습니다.", mindId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -142,13 +142,13 @@ public class ActionMindShare extends BaseAction {
 
 	public static class Wi {
 		
-		@FieldDescribe( "分享目标人员列表" )
+		@FieldDescribe( "공유 대상 사용자 목록" )
 		private List<String> sharePersons = null;
 		
-		@FieldDescribe( "分享目标组织列表" )
+		@FieldDescribe( "공유 대상 조직 목록" )
 		private List<String> shareUnits = null;
 		
-		@FieldDescribe( "分享目标群组列表" )
+		@FieldDescribe( "공유 대상 그룹 목록" )
 		private List<String> shareGroups = null;
 
 		public List<String> getSharePersons() {

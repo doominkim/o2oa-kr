@@ -10,7 +10,7 @@ public class ExceptionUserNameEmpty  extends LanguagePromptException {
 	private static final long serialVersionUID = 1L;
 
 	ExceptionUserNameEmpty() {
-		super("用户名不能为空.");
+		super("사용자 이름은 비워 둘 수 없습니다.");
 	}
 
 }

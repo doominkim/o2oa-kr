@@ -56,11 +56,11 @@ class ActionListLikePinyin extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("搜索关键字")
+		@FieldDescribe("검색 키워드")
 		private String key;
-		@FieldDescribe("搜索组织范围,为空则不限定")
+		@FieldDescribe("검색 조직 범위, 비어 있으면 제한 없음")
 		private List<String> unitList = new ArrayList<>();
-		@FieldDescribe("组织类型")
+		@FieldDescribe("조직 유형")
 		private String type;
 
 		public String getKey() {
@@ -93,13 +93,13 @@ class ActionListLikePinyin extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("递归上级组织对象")
+		@FieldDescribe("재귀 상위 조직 객체")
 		private List<Wo> woSupNestedUnitList;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,
@@ -139,7 +139,7 @@ class ActionListLikePinyin extends BaseAction {
 		List<String> unitIds = new ArrayList<>();
 		if (ListTools.isNotEmpty(wi.getUnitList())) {
 			unitIds = business.expendUnitToUnit(ListTools.trim(wi.getUnitList(), true, true));
-			/** 去掉指定范围本身,仅包含下级 */
+			/** 지정 범위 자체는 제외하고 하위만 포함 */
 			unitIds.removeAll(ListTools.extractProperty(business.unit().pick(wi.getUnitList()), JpaObject.id_FIELDNAME,
 					String.class, true, true));
 			if (unitIds.isEmpty()) {

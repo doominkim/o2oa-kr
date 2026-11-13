@@ -280,7 +280,7 @@ MWF.xApplication.Attendance.UnitDetail.Explorer = new Class({
     //},
     //createUnitTd : function(tr){
     //    var _self = this;
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "部门"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "부서"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    if( this.app.isAdmin() ){
     //        this.q_unitName = new MDomItem( td, {
@@ -302,7 +302,7 @@ MWF.xApplication.Attendance.UnitDetail.Explorer = new Class({
     //},
     //createYearSelectTd : function( tr ){
     //    var _self = this;
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "年度"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "연도"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.cycleYear = new MDomItem( td, {
     //        "name" : "cycleYear",
@@ -323,7 +323,7 @@ MWF.xApplication.Attendance.UnitDetail.Explorer = new Class({
     //},
     //createMonthSelectTd : function( tr ){
     //    var _self = this;
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "月份"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "월"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.cycleMonth = new MDomItem( td, {
     //        "name" : "cycleMonth",
@@ -342,7 +342,7 @@ MWF.xApplication.Attendance.UnitDetail.Explorer = new Class({
     //createDateSelectTd : function( tr ){
     //    var _self = this;
     //    if( tr ){
-    //        var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "日期"  }).inject(tr);
+    //        var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "날짜"  }).inject(tr);
     //        this.dateSelecterTd = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    }
     //    if( this.q_date ){
@@ -369,47 +369,47 @@ MWF.xApplication.Attendance.UnitDetail.Explorer = new Class({
     //    this.q_date.load();
     //},
     //createIsAbsent: function(tr){
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "缺勤"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "결근"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.isAbsent = new MDomItem( td, {
     //        "name" : "isAbsent",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","缺勤","未缺勤"],
+    //        "selectText" : ["","결근","결근 아님"],
     //    }, true, this.app );
     //    this.isAbsent.load();
     //},
     //createLackOfTimeCount: function(tr){
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "工时不足"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "근무 시간 부족"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.isLackOfTime = new MDomItem( td, {
     //        "name" : "isLackOfTime",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","是","否"],
+    //        "selectText" : ["","예","아니요"],
     //    }, true, this.app );
     //    this.isLackOfTime.load();
     //},
     //createIsLate: function(tr){
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "迟到"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "지각"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.isLate  = new MDomItem( td, {
     //        "name" : "isLate",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","迟到","未迟到"],
+    //        "selectText" : ["","지각","지각 아님"],
     //    }, true, this.app );
     //    this.isLate.load();
     //},
     //createActionTd : function( tr ){
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    var input = new Element("button",{
-    //        "text" : "查询",
+    //        "text" : "조회",
     //        "styles" : this.css.filterButton
     //    }).inject(td);
     //    input.addEvent("click", function(){
     //        if( this.q_unitName.getValue().trim() == "" ){
-    //            this.app.notice( "请先选择部门", "error" );
+    //            this.app.notice( "먼저 부서를 선택하십시오", "error" );
     //            return;
     //        }
     //        var filterData = {
@@ -447,7 +447,7 @@ MWF.xApplication.Attendance.UnitDetail.Explorer = new Class({
     //selecePerson: function(){
     //    var options = {
     //        "type": "unit",
-    //        "title": "选择部门",
+    //        "title": "부서 선택",
     //        "count" : "1",
     //        "onComplete": function(items){
     //            var names = [];
@@ -606,15 +606,15 @@ MWF.xApplication.Attendance.UnitDetail.DetailStaticExplorer = new Class({
     //createActionTd : function( tr ) {
     //    var td = new Element("td", {"styles": this.css.filterTableValue}).inject(tr);
     //    var input = new Element("button", {
-    //        "text": "查询",
+    //        "text": "조회",
     //        "styles": this.css.filterButton
     //    }).inject(td);
     //    input.addEvent("click", function () {
     //        if (this.q_unitName.getValue().trim() == "") {
-    //            this.app.notice("请先选择部门", "error");
+    //            this.app.notice("먼저 부서를 선택하십시오", "error");
     //            return;
     //        }if (this.cycleMonth.getValue().trim() == "") {
-    //            this.app.notice("请先选择月份", "error");
+    //            this.app.notice("먼저 월을 선택하십시오", "error");
     //            return;
     //        }
     //        var filterData = {

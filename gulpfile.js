@@ -233,7 +233,7 @@ function create_license(cb){
         try {
             const licenseDir = path.resolve(process.cwd(), "target/o2server/configInit");
     
-            // 递归创建目录
+            // 디렉터리 재귀 생성
             fs.mkdirSync(licenseDir, { recursive: true });
 
             fs.writeFileSync(path.resolve(process.cwd(), licenseDir+"/o2.license"), respBody.data.license, "utf8");

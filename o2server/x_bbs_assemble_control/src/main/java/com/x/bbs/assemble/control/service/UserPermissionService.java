@@ -23,7 +23,7 @@ import com.x.bbs.entity.BBSShutup;
 import com.x.bbs.entity.BBSUserInfo;
 
 /**
- * 用户组织顶层组织信息管理服务类
+ * 사용자 조직 최상위 조직 정보 관리 서비스 클래스
  *
  * @author LIYI
  *
@@ -54,7 +54,7 @@ public class UserPermissionService {
 				}
 			}
 		} catch (Exception e) {
-			logger.warn("系统根据员工查询论坛用户权限角色信息列表时发生异常！");
+			logger.warn("시스템이 직원으로 포럼 사용자 권한·역할 정보 목록을 조회하는 중 예외가 발생했습니다!");
 			logger.error(e);
 		}
 
@@ -74,14 +74,14 @@ public class UserPermissionService {
 				permissionList = permissionInfoService.listPermissionByCodes(permissionCodes);
 			}
 		} catch (Exception e) {
-			logger.warn("系统根据员工查询论坛用户权限角色信息列表时发生异常！");
+			logger.warn("시스템이 직원으로 포럼 사용자 권한·역할 정보 목록을 조회하는 중 예외가 발생했습니다!");
 			logger.error(e);
 		}
 		return permissionList;
 	}
 
 	/**
-	 * 获取人员的权限信息，优先使用缓存的人员信息
+	 * 사용자 권한 정보 조회, 캐시된 사용자 정보 우선 사용
 	 *
 	 * @param userName
 	 * @return
@@ -110,7 +110,7 @@ public class UserPermissionService {
 	}
 
 	/**
-	 * 获取用户信息，优先使用缓存信息
+	 * 사용자 정보 조회, 캐시 정보 우선 사용
 	 *
 	 * @param userName
 	 * @return
@@ -134,10 +134,10 @@ public class UserPermissionService {
 					userInfo = userInfoService.getByUserName(userName);
 				} catch (Exception e) {
 					check = false;
-					logger.warn("系统根据员工查询论坛用户信息时发生异常！");
+					logger.warn("시스템이 직원으로 포럼 사용자 정보를 조회하는 중 예외가 발생했습니다!");
 					logger.error(e);
 				}
-				// 如果还为空，那么重新组成一个新的用户信息，扫描所有权限信息
+				// 그래도 비어 있으면 사용자 정보를 새로 구성하고 모든 권한 정보 스캔
 				if (userInfo == null) {
 					userInfo = composeUserRoleAndPermission(userName);
 					return userInfo;
@@ -187,7 +187,7 @@ public class UserPermissionService {
 					roleCodes = roleInfoService.listAllRoleCodesForUser(userName);
 				} catch (Exception e) {
 					check = false;
-					logger.warn("系统根据员工查询所有的角色信息时发生异常！");
+					logger.warn("시스템이 직원으로 모든 역할 정보를 조회하는 중 예외가 발생했습니다!");
 					logger.error(e);
 				}
 			}
@@ -197,7 +197,7 @@ public class UserPermissionService {
 						permissionCodes = permissionInfoService.listPermissionCodesByRoleCodes(roleCodes);
 					} catch (Exception e) {
 						check = false;
-						logger.warn("系统根据员工查询所有的权限信息时发生异常！");
+						logger.warn("시스템이 직원으로 모든 권한 정보를 조회하는 중 예외가 발생했습니다!");
 						logger.error(e);
 					}
 				}
@@ -222,7 +222,7 @@ public class UserPermissionService {
 					userInfo = userInfoService.getByUserName(userName);
 				} catch (Exception e) {
 					check = false;
-					logger.warn("系统根据员工查询论坛用户信息时发生异常！");
+					logger.warn("시스템이 직원으로 포럼 사용자 정보를 조회하는 중 예외가 발생했습니다!");
 					logger.error(e);
 				}
 
@@ -257,9 +257,9 @@ public class UserPermissionService {
 		List<BBSPermissionInfo> permissionList = null;
 		List<BBSPermissionInfo> forumViewPermissionList = null;
 
-		// 如果不是匿名用户，则查询该用户所有能访问的论坛信息
+		// 익명 사용자가 아니면 해당 사용자가 접근 가능한 전체 포럼 정보 조회
 		if ( currentPerson != null && !"anonymous".equalsIgnoreCase(currentPerson.getTokenType().name())) {
-			if ( methodExcuteResult.getSuccess()) {// 获取用户拥有的所有权限列表
+			if ( methodExcuteResult.getSuccess()) {// 사용자가 가진 모든 권한 목록 조회
 				try {
 					permissionList = getUserPermissionInfoList( currentPerson.getDistinguishedName() );
 				} catch (Exception e) {
@@ -271,7 +271,7 @@ public class UserPermissionService {
 					logger.error(e);
 				}
 			}
-			if ( methodExcuteResult.getSuccess() ) {// 获取用户可以访问的论坛相关权限
+			if ( methodExcuteResult.getSuccess() ) {// 사용자가 접근 가능한 포럼 관련 권한 조회
 				try {
 					forumViewPermissionList = permissionInfoService.filterPermissionListByPermissionFunction("FORUM_VIEW", permissionList );
 				} catch (Exception e) {
@@ -283,7 +283,7 @@ public class UserPermissionService {
 				}
 			}
 
-			if ( methodExcuteResult.getSuccess() ) {// 获取可访问的论坛ID列表
+			if ( methodExcuteResult.getSuccess() ) {// 접근 가능한 포럼 ID 목록 조회
 				if ( ListTools.isNotEmpty( forumViewPermissionList )) {
 					for (BBSPermissionInfo permission : forumViewPermissionList) {
 						ids.add(permission.getForumId());
@@ -302,9 +302,9 @@ public class UserPermissionService {
 		List<String> ids = new ArrayList<String>();
 		List<BBSPermissionInfo> permissionList = null;
 		List<BBSPermissionInfo> sectionViewPermissionList = null;
-		// 如果不是匿名用户，则查询该用户所有能访问的论坛信息
+		// 익명 사용자가 아니면 해당 사용자가 접근 가능한 전체 포럼 정보 조회
 		if (currentPerson != null && !"anonymous".equalsIgnoreCase(currentPerson.getTokenType().name())) {
-			if (methodExcuteResult.getSuccess()) {// 获取用户拥有的所有权限列表
+			if (methodExcuteResult.getSuccess()) {// 사용자가 가진 모든 권한 목록 조회
 				try {
 					permissionList = getUserPermissionInfoList(currentPerson.getDistinguishedName());
 				} catch (Exception e) {
@@ -316,7 +316,7 @@ public class UserPermissionService {
 					logger.error(e);
 				}
 			}
-			if (methodExcuteResult.getSuccess()) {// 获取用户可以访问的论坛相关权限
+			if (methodExcuteResult.getSuccess()) {// 사용자가 접근 가능한 포럼 관련 권한 조회
 				try {
 					sectionViewPermissionList = permissionInfoService
 							.filterPermissionListByPermissionFunction("SECTION_VIEW", permissionList);
@@ -328,7 +328,7 @@ public class UserPermissionService {
 					logger.error(e);
 				}
 			}
-			if (methodExcuteResult.getSuccess()) {// 获取可访问的论坛ID列表
+			if (methodExcuteResult.getSuccess()) {// 접근 가능한 포럼 ID 목록 조회
 				if ( ListTools.isNotEmpty( sectionViewPermissionList )) {
 					for (BBSPermissionInfo permission : sectionViewPermissionList) {
 						ids.add(permission.getSectionId());
@@ -341,7 +341,7 @@ public class UserPermissionService {
 	}
 
 	/**
-	 * 判断指定用户是否被禁用
+	 * 지정한 사용자의 사용 중지 여부 판단
 	 * @param person
 	 * @return
 	 * @throws Exception

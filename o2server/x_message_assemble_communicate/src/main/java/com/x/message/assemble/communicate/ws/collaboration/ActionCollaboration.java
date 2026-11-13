@@ -35,7 +35,7 @@ import com.x.message.core.entity.Message;
 import com.x.message.core.entity.Message_;
 
 /**
- * websocket连接
+ * websocket 연결
  *
  * @author sword
  */
@@ -97,7 +97,7 @@ public class ActionCollaboration {
 		LOGGER.debug("webSocket OnMessage receive: message {}, person:{}, ip:{}, client:{}.", () -> input,
 				effectivePerson::getDistinguishedName, effectivePerson::getRemoteAddress,
 				effectivePerson::getUserAgent);
-		// 建立心跳，维持websocket链接
+		// 하트비트 설정, websocket 연결 유지
 		if (StringUtils.equals(input, TAG_HEARTBEAT)) {
 			session.getBasicRemote().sendText(TAG_HEARTBEAT);
 		}

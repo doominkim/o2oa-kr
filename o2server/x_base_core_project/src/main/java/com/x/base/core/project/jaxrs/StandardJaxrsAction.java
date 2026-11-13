@@ -47,24 +47,24 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 	protected static final String ASC = "asc";
 
 	/**
-	 * 查询数据的下一页对象信息
+	 * 조회 데이터의 다음 페이지 객체 정보
 	 *
-	 * [2015年12月24日 李义添加了注释内容，代码没有改变]
+	 * [2015년 12월 24일 홍길동이 주석 추가, 코드 변경 없음]
 	 *
-	 * @param cls           实体类
-	 * @param wcls          wrap类
-	 * @param id            上一页最后一条的ID
-	 * @param count         每页条目数:pagesize
-	 * @param sequenceField 作分页序列的属性名
-	 * @param equals        等于的条件集合
-	 * @param notEquals     不等于（例外）的条件集合
-	 * @param likes         模糊查询条件集合
-	 * @param ins           IN查询条件集合
-	 * @param notIns        NOT IN查询条件集合
-	 * @param members       隶属于
-	 * @param notMembers    非隶属于
-	 * @param andJoin       条件的连接方式
-	 * @param order         排序方式ASC|DESC
+	 * @param cls           엔티티 클래스
+	 * @param wcls          wrap 클래스
+	 * @param id            이전 페이지 마지막 항목의 ID
+	 * @param count         페이지당 항목 수:pagesize
+	 * @param sequenceField 페이징 순서로 쓸 속성명
+	 * @param equals        같음 조건 집합
+	 * @param notEquals     같지 않음(예외) 조건 집합
+	 * @param likes         퍼지 조회 조건 집합
+	 * @param ins           IN 조회 조건 집합
+	 * @param notIns        NOT IN 조회 조건 집합
+	 * @param members       소속
+	 * @param notMembers    비소속
+	 * @param andJoin       조건 연결 방식
+	 * @param order         정렬 방식 ASC|DESC
 	 * @return
 	 * @throws Exception
 	 */
@@ -73,25 +73,25 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			LikeTerms likes, InTerms ins, NotInTerms notIns, MemberTerms members, NotMemberTerms notMembers,
 			BetweenTerms betweens, boolean andJoin, String order) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				sequence = PropertyUtils.getProperty(emc.find(id, cls, ExceptionWhen.not_found), sequenceField);
 			}
 			EntityManager em = emc.get(cls);
 			String str = "SELECT o FROM " + cls.getCanonicalName() + " o";
-			/* 预编译的SQL语句的参数序号，必须由1开始 */
+			/* 사전 컴파일 SQL 문의 파라미터 순번, 반드시 1부터 시작 */
 			Integer index = 1;
 			List<String> ps = new ArrayList<>();
 			List<Object> vs = new ArrayList<>();
-			// 如果sequence值不为空，那么从sequence开始，如果为空则从头开始
+			// sequence 값이 비어 있지 않으면 sequence부터, 비어 있으면 처음부터 시작
 			if (null != sequence) {
 				ps.add("o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? "<" : ">")
 						+ (" ?" + (index)));
 				vs.add(sequence);
 				index++;
 			}
-			// 以下组织各种条件子句，放到List<String> ps里，相应的值放到List<Object> vs里
+			// 아래에서 각종 조건절을 구성해 List<String> ps에, 해당 값은 List<Object> vs에 넣음
 			if (null != equals && (!equals.isEmpty())) {
 				for (Entry<String, Object> en : equals.entrySet()) {
 					ps.add("o." + en.getKey() + (" = ?" + index));
@@ -106,7 +106,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// like有点特殊，多个like一般用or相联
+			// like는 특수함, 여러 like는 보통 or로 연결
 			if (null != likes && (!likes.isEmpty())) {
 				List<String> ors = new ArrayList<>();
 				for (Entry<String, Object> en : likes.entrySet()) {
@@ -155,24 +155,24 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// 使用指定的方式将条件子句组合起来
+			// 지정 방식으로 조건절 결합
 			if (!ps.isEmpty()) {
 				str += " where " + StringUtils.join(ps, (andJoin ? " and " : " or "));
 			}
-			// 排序
+			// 정렬
 			str += " order by o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? DESC : ASC);
 			Query query = em.createQuery(str, cls);
-			// 为查询设置所有的参数值
+			// 조회에 모든 매개변수 값 설정
 			for (int i = 0; i < vs.size(); i++) {
 				query.setParameter(i + 1, vs.get(i));
 			}
 
 			List<W> wraps = new ArrayList<W>();
-			// 限制查询的条数，一般就取一页的条目数，最多为超过list_max
+			// 조회 건수 제한, 보통 한 페이지 항목 수를 사용하며 최대 list_max를 넘지 않음
 			@SuppressWarnings("unchecked")
 			List<T> list = query.setMaxResults(Math.max(Math.min(count, list_max), list_min)).getResultList();
 			if (!list.isEmpty()) {
-				// 查询初始的编号
+				// 조회 시작 번호
 				Long rank = this.rank(emc, cls, sequenceField, PropertyUtils.getProperty(list.get(0), sequenceField),
 						equals, notEquals, likes, ins, notIns, members, notMembers, andJoin, order);
 				Constructor<W> constructor = wcls.getConstructor(new Class[] { cls });
@@ -184,30 +184,30 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			}
 			ActionResult<List<W>> result = new ActionResult<>();
 			result.setData(wraps);
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(this.count(emc, cls, equals, notEquals, likes, ins, notIns, members, notMembers, andJoin));
 			return result;
 		}
 	}
 
 	/**
-	 * 查询数据的下一页对象信息
+	 * 조회 데이터의 다음 페이지 객체 정보
 	 *
-	 * [2015年12月24日 李义添加了注释内容，代码没有改变]
+	 * [2015년 12월 24일 홍길동이 주석 추가, 코드 변경 없음]
 	 *
-	 * @param copier        对象转换类
-	 * @param id            上一页最后一条的ID
-	 * @param count         每页条目数:pagesize
-	 * @param sequenceField 作分页序列的属性名
-	 * @param equals        等于的条件集合
-	 * @param notEquals     不等于（例外）的条件集合
-	 * @param likes         模糊查询条件集合
-	 * @param ins           IN查询条件集合
-	 * @param notIns        NOT IN查询条件集合
-	 * @param members       隶属于
-	 * @param notMembers    非隶属于
-	 * @param andJoin       条件的连接方式
-	 * @param order         排序方式ASC|DESC
+	 * @param copier        객체 변환 클래스
+	 * @param id            이전 페이지 마지막 항목의 ID
+	 * @param count         페이지당 항목 수:pagesize
+	 * @param sequenceField 페이징 순서로 쓸 속성명
+	 * @param equals        같음 조건 집합
+	 * @param notEquals     같지 않음(예외) 조건 집합
+	 * @param likes         퍼지 조회 조건 집합
+	 * @param ins           IN 조회 조건 집합
+	 * @param notIns        NOT IN 조회 조건 집합
+	 * @param members       소속
+	 * @param notMembers    비소속
+	 * @param andJoin       조건 연결 방식
+	 * @param order         정렬 방식 ASC|DESC
 	 * @return
 	 * @throws Exception
 	 */
@@ -218,25 +218,25 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 		Class<T> tClass = (Class<T>) copier.getOrigClass();
 		Class<W> wClass = (Class<W>) copier.getDestClass();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				sequence = PropertyUtils.getProperty(emc.find(id, tClass, ExceptionWhen.not_found), sequenceField);
 			}
 			EntityManager em = emc.get(tClass);
 			String str = "SELECT o FROM " + tClass.getCanonicalName() + " o";
-			/* 预编译的SQL语句的参数序号，必须由1开始 */
+			/* 사전 컴파일 SQL 문의 파라미터 순번, 반드시 1부터 시작 */
 			Integer index = 1;
 			List<String> ps = new ArrayList<>();
 			List<Object> vs = new ArrayList<>();
-			// 如果sequence值不为空，那么从sequence开始，如果为空则从头开始
+			// sequence 값이 비어 있지 않으면 sequence부터, 비어 있으면 처음부터 시작
 			if (null != sequence) {
 				ps.add("o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? "<" : ">")
 						+ (" ?" + (index)));
 				vs.add(sequence);
 				index++;
 			}
-			// 以下组织各种条件子句，放到List<String> ps里，相应的值放到List<Object> vs里
+			// 아래에서 각종 조건절을 구성해 List<String> ps에, 해당 값은 List<Object> vs에 넣음
 			if (null != equals && (!equals.isEmpty())) {
 				for (Entry<String, Object> en : equals.entrySet()) {
 					ps.add("o." + en.getKey() + (" = ?" + index));
@@ -251,7 +251,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// like有点特殊，多个like一般用or相联
+			// like는 특수함, 여러 like는 보통 or로 연결
 			if (null != likes && (!likes.isEmpty())) {
 				List<String> ors = new ArrayList<>();
 				for (Entry<String, Object> en : likes.entrySet()) {
@@ -300,26 +300,26 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// 使用指定的方式将条件子句组合起来
+			// 지정 방식으로 조건절 결합
 			if (!ps.isEmpty()) {
 				str += " where " + StringUtils.join(ps, (andJoin ? " and " : " or "));
 			}
-			// 排序
+			// 정렬
 			str += " order by o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? DESC : ASC);
 			Query query = em.createQuery(str, tClass);
-			// 为查询设置所有的参数值
+			// 조회에 모든 매개변수 값 설정
 			for (int i = 0; i < vs.size(); i++) {
 				query.setParameter(i + 1, vs.get(i));
 			}
 			List<W> wraps = new ArrayList<W>();
-			// 限制查询的条数，一般就取一页的条目数，最多为超过list_max
+			// 조회 건수 제한, 보통 한 페이지 항목 수를 사용하며 최대 list_max를 넘지 않음
 			@SuppressWarnings("unchecked")
 			List<T> list = query.setMaxResults(Math.max(Math.min(count, list_max), list_min)).getResultList();
 			if (!list.isEmpty()) {
-				// 查询初始的编号
+				// 조회 시작 번호
 				Long rank = this.rank(emc, tClass, sequenceField, PropertyUtils.getProperty(list.get(0), sequenceField),
 						equals, notEquals, likes, ins, notIns, members, notMembers, andJoin, order);
-				// 为输出的结果进行编号
+				// 출력 결과에 번호 부여
 				for (T t : list) {
 					W w = wClass.newInstance();
 					copier.copy(t, w);
@@ -329,7 +329,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			}
 			ActionResult<List<W>> result = new ActionResult<>();
 			result.setData(wraps);
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(
 					this.count(emc, tClass, equals, notEquals, likes, ins, notIns, members, notMembers, andJoin));
 			return result;
@@ -337,24 +337,24 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 	}
 
 	/**
-	 * 查询数据的上一页对象信息
+	 * 조회 데이터의 이전 페이지 객체 정보
 	 *
-	 * [2015年12月24日 李义添加了注释内容，代码没有改变]
+	 * [2015년 12월 24일 홍길동이 주석 추가, 코드 변경 없음]
 	 *
-	 * @param cls           实体类
-	 * @param wcls          wrap类
-	 * @param id            上一页最后一条的ID
-	 * @param count         每页条目数:pagesize
-	 * @param sequenceField 作分页序列的属性名
-	 * @param equals        等于的条件集合
-	 * @param notEquals     不等于（例外）的条件集合
-	 * @param likes         模糊查询条件集合
-	 * @param ins           IN查询条件集合
-	 * @param notIns        NOT IN查询条件集合
-	 * @param members       隶属于
-	 * @param notMembers    非隶属于
-	 * @param andJoin       条件的连接方式
-	 * @param order         排序方式ASC|DESC
+	 * @param cls           엔티티 클래스
+	 * @param wcls          wrap 클래스
+	 * @param id            이전 페이지 마지막 항목의 ID
+	 * @param count         페이지당 항목 수:pagesize
+	 * @param sequenceField 페이징 순서로 쓸 속성명
+	 * @param equals        같음 조건 집합
+	 * @param notEquals     같지 않음(예외) 조건 집합
+	 * @param likes         퍼지 조회 조건 집합
+	 * @param ins           IN 조회 조건 집합
+	 * @param notIns        NOT IN 조회 조건 집합
+	 * @param members       소속
+	 * @param notMembers    비소속
+	 * @param andJoin       조건 연결 방식
+	 * @param order         정렬 방식 ASC|DESC
 	 * @return
 	 * @throws Exception
 	 */
@@ -363,25 +363,25 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			LikeTerms likes, InTerms ins, NotInTerms notIns, MemberTerms members, NotMemberTerms notMembers,
 			BetweenTerms betweens, boolean andJoin, String order) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				sequence = PropertyUtils.getProperty(emc.find(id, cls, ExceptionWhen.not_found), sequenceField);
 			}
 			EntityManager em = emc.get(cls);
 			String str = "SELECT o FROM " + cls.getCanonicalName() + " o";
-			/* 预编译的SQL语句的参数序号，必须由1开始 */
+			/* 사전 컴파일 SQL 문의 파라미터 순번, 반드시 1부터 시작 */
 			Integer index = 1;
 			List<String> ps = new ArrayList<>();
 			List<Object> vs = new ArrayList<>();
-			// 如果sequence值不为空，那么从sequence开始，如果为空则从头开始
+			// sequence 값이 비어 있지 않으면 sequence부터, 비어 있으면 처음부터 시작
 			if (null != sequence) {
 				ps.add("o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? ">" : "<")
 						+ (" ?" + (index)));
 				vs.add(sequence);
 				index++;
 			}
-			// 以下组织各种条件子句，放到List<String> ps里，相应的值放到List<Object> vs里
+			// 아래에서 각종 조건절을 구성해 List<String> ps에, 해당 값은 List<Object> vs에 넣음
 			if (null != equals && (!equals.isEmpty())) {
 				for (Entry<String, Object> en : equals.entrySet()) {
 					ps.add("o." + en.getKey() + (" = ?" + index));
@@ -396,7 +396,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// like有点特殊，多个like一般用or相联
+			// like는 특수함, 여러 like는 보통 or로 연결
 			if (null != likes && (!likes.isEmpty())) {
 				List<String> ors = new ArrayList<>();
 				for (Entry<String, Object> en : likes.entrySet()) {
@@ -445,28 +445,28 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// 使用指定的方式将条件子句组合起来
+			// 지정 방식으로 조건절 결합
 			if (!ps.isEmpty()) {
 				str += " where " + StringUtils.join(ps, (andJoin ? " and " : " or "));
 			}
-			// 排序
+			// 정렬
 			str += " order by o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? ASC : DESC);
 			Query query = em.createQuery(str, cls);
-			// 为查询设置所有的参数值
+			// 조회에 모든 매개변수 값 설정
 			for (int i = 0; i < vs.size(); i++) {
 				query.setParameter(i + 1, vs.get(i));
 			}
 			List<W> wraps = new ArrayList<W>();
-			// 限制查询的条数，一般就取一页的条目数，最多为超过list_max
+			// 조회 건수 제한, 보통 한 페이지 항목 수를 사용하며 최대 list_max를 넘지 않음
 			@SuppressWarnings("unchecked")
 			List<T> list = query.setMaxResults(Math.max(Math.min(count, list_max), list_min)).getResultList();
 			if (!list.isEmpty()) {
-				// 查询初始的编号
+				// 조회 시작 번호
 				Long rank = this.rank(emc, cls, sequenceField,
 						PropertyUtils.getProperty(list.get(list.size() - 1), sequenceField), equals, notEquals, likes,
 						ins, notIns, members, notMembers, andJoin, order);
 				Constructor<W> constructor = wcls.getConstructor(new Class[] { cls });
-				// 为输出的结果进行编号
+				// 출력 결과에 번호 부여
 				for (int i = list.size() - 1; i >= 0; i--) {
 					W w = (W) constructor.newInstance(new Object[] { list.get(i) });
 					PropertyUtils.setProperty(w, "rank", rank++);
@@ -475,29 +475,29 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			}
 			ActionResult<List<W>> result = new ActionResult<>();
 			result.setData(wraps);
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(this.count(emc, cls, equals, notEquals, likes, ins, notIns, members, notMembers, andJoin));
 			return result;
 		}
 	}
 
 	/**
-	 * 查询数据的上一页对象信息
+	 * 조회 데이터의 이전 페이지 객체 정보
 	 *
-	 * [2015年12月24日 李义添加了注释内容，代码没有改变]
+	 * [2015년 12월 24일 홍길동이 주석 추가, 코드 변경 없음]
 	 *
-	 * @param id            上一页最后一条的ID
-	 * @param count         每页条目数:pagesize
-	 * @param sequenceField 作分页序列的属性名
-	 * @param equals        等于的条件集合
-	 * @param notEquals     不等于（例外）的条件集合
-	 * @param likes         模糊查询条件集合
-	 * @param ins           IN查询条件集合
-	 * @param notIns        NOT IN查询条件集合
-	 * @param members       隶属于
-	 * @param notMembers    非隶属于
-	 * @param andJoin       条件的连接方式
-	 * @param order         排序方式ASC|DESC
+	 * @param id            이전 페이지 마지막 항목의 ID
+	 * @param count         페이지당 항목 수:pagesize
+	 * @param sequenceField 페이징 순서로 쓸 속성명
+	 * @param equals        같음 조건 집합
+	 * @param notEquals     같지 않음(예외) 조건 집합
+	 * @param likes         퍼지 조회 조건 집합
+	 * @param ins           IN 조회 조건 집합
+	 * @param notIns        NOT IN 조회 조건 집합
+	 * @param members       소속
+	 * @param notMembers    비소속
+	 * @param andJoin       조건 연결 방식
+	 * @param order         정렬 방식 ASC|DESC
 	 * @return
 	 * @throws Exception
 	 */
@@ -508,25 +508,25 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 		Class<T> tClass = (Class<T>) copier.getOrigClass();
 		Class<W> wClass = (Class<W>) copier.getDestClass();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				sequence = PropertyUtils.getProperty(emc.find(id, tClass, ExceptionWhen.not_found), sequenceField);
 			}
 			EntityManager em = emc.get(tClass);
 			String str = "SELECT o FROM " + tClass.getCanonicalName() + " o";
-			/* 预编译的SQL语句的参数序号，必须由1开始 */
+			/* 사전 컴파일 SQL 문의 파라미터 순번, 반드시 1부터 시작 */
 			Integer index = 1;
 			List<String> ps = new ArrayList<>();
 			List<Object> vs = new ArrayList<>();
-			// 如果sequence值不为空，那么从sequence开始，如果为空则从头开始
+			// sequence 값이 비어 있지 않으면 sequence부터, 비어 있으면 처음부터 시작
 			if (null != sequence) {
 				ps.add("o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? ">" : "<")
 						+ (" ?" + (index)));
 				vs.add(sequence);
 				index++;
 			}
-			// 以下组织各种条件子句，放到List<String> ps里，相应的值放到List<Object> vs里
+			// 아래에서 각종 조건절을 구성해 List<String> ps에, 해당 값은 List<Object> vs에 넣음
 			if (null != equals && (!equals.isEmpty())) {
 				for (Entry<String, Object> en : equals.entrySet()) {
 					ps.add("o." + en.getKey() + (" = ?" + index));
@@ -541,7 +541,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// like有点特殊，多个like一般用or相联
+			// like는 특수함, 여러 like는 보통 or로 연결
 			if (null != likes && (!likes.isEmpty())) {
 				List<String> ors = new ArrayList<>();
 				for (Entry<String, Object> en : likes.entrySet()) {
@@ -590,27 +590,27 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 					index++;
 				}
 			}
-			// 使用指定的方式将条件子句组合起来
+			// 지정 방식으로 조건절 결합
 			if (!ps.isEmpty()) {
 				str += " where " + StringUtils.join(ps, (andJoin ? " and " : " or "));
 			}
-			// 排序
+			// 정렬
 			str += " order by o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? ASC : DESC);
 			Query query = em.createQuery(str, tClass);
-			// 为查询设置所有的参数值
+			// 조회에 모든 매개변수 값 설정
 			for (int i = 0; i < vs.size(); i++) {
 				query.setParameter(i + 1, vs.get(i));
 			}
 			List<W> wraps = new ArrayList<W>();
-			// 限制查询的条数，一般就取一页的条目数，最多为超过list_max
+			// 조회 건수 제한, 보통 한 페이지 항목 수를 사용하며 최대 list_max를 넘지 않음
 			@SuppressWarnings("unchecked")
 			List<T> list = query.setMaxResults(Math.max(Math.min(count, list_max), list_min)).getResultList();
 			if (!list.isEmpty()) {
-				// 查询初始的编号
+				// 조회 시작 번호
 				Long rank = this.rank(emc, tClass, sequenceField,
 						PropertyUtils.getProperty(list.get(list.size() - 1), sequenceField), equals, notEquals, likes,
 						ins, notIns, members, notMembers, andJoin, order);
-				// 为输出的结果进行编号
+				// 출력 결과에 번호 부여
 				for (int i = list.size() - 1; i >= 0; i--) {
 					W w = wClass.newInstance();
 					copier.copy(list.get(i), w);
@@ -620,7 +620,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			}
 			ActionResult<List<W>> result = new ActionResult<>();
 			result.setData(wraps);
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(
 					this.count(emc, tClass, equals, notEquals, likes, ins, notIns, members, notMembers, andJoin));
 			return result;
@@ -634,7 +634,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			ListOrderedMap<String, Object> notMembers, boolean andJoin, String order) throws Exception {
 		EntityManager em = emc.get(cls);
 		String str = "SELECT count(o) FROM " + cls.getCanonicalName() + " o";
-		/* 预编译的SQL语句的参数序号，必须由1开始 */
+		/* 사전 컴파일 SQL 문의 파라미터 순번, 반드시 1부터 시작 */
 		Integer index = 1;
 		List<String> ps = new ArrayList<>();
 		List<Object> vs = new ArrayList<>();
@@ -760,23 +760,23 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 	}
 
 	/**
-	 * 查询数据的下一页对象信息
+	 * 조회 데이터의 다음 페이지 객체 정보
 	 *
-	 * [2015年12月24日 李义添加了注释内容，代码没有改变]
+	 * [2015년 12월 24일 홍길동이 주석 추가, 코드 변경 없음]
 	 *
-	 * @param copier        对象转换类
-	 * @param id            上一页最后一条的ID
-	 * @param count         每页条目数:pagesize
-	 * @param sequenceField 作分页序列的属性名
-	 * @param equals        等于的条件集合
-	 * @param notEquals     不等于（例外）的条件集合
-	 * @param likes         模糊查询条件集合
-	 * @param ins           IN查询条件集合
-	 * @param notIns        NOT IN查询条件集合
-	 * @param members       隶属于
-	 * @param notMembers    非隶属于
-	 * @param andJoin       条件的连接方式
-	 * @param order         排序方式ASC|DESC
+	 * @param copier        객체 변환 클래스
+	 * @param id            이전 페이지 마지막 항목의 ID
+	 * @param count         페이지당 항목 수:pagesize
+	 * @param sequenceField 페이징 순서로 쓸 속성명
+	 * @param equals        같음 조건 집합
+	 * @param notEquals     같지 않음(예외) 조건 집합
+	 * @param likes         퍼지 조회 조건 집합
+	 * @param ins           IN 조회 조건 집합
+	 * @param notIns        NOT IN 조회 조건 집합
+	 * @param members       소속
+	 * @param notMembers    비소속
+	 * @param andJoin       조건 연결 방식
+	 * @param order         정렬 방식 ASC|DESC
 	 * @return
 	 * @throws Exception
 	 */
@@ -785,7 +785,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			EqualsTerms equals, NotEqualsTerms notEquals, LikeTerms likes, InTerms ins, NotInTerms notIns,
 			MemberTerms members, NotMemberTerms notMembers, boolean andJoin, String order) throws Exception {
 		Class<T> tClass = (Class<T>) copier.getOrigClass();
-		/** 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据 */
+		/** 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회 */
 		Object sequence = null;
 		if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 			Object o = emc.find(id, tClass);
@@ -795,18 +795,18 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 		}
 		EntityManager em = emc.get(tClass);
 		String str = "SELECT o.id FROM " + tClass.getCanonicalName() + " o";
-		/** 预编译的SQL语句的参数序号，必须由1开始 */
+		/** 사전 컴파일 SQL 문의 파라미터 순번, 반드시 1부터 시작 */
 		Integer index = 1;
 		List<String> ps = new ArrayList<>();
 		List<Object> vs = new ArrayList<>();
-		/** 如果sequence值不为空，那么从sequence开始，如果为空则从头开始 */
+		/** sequence 값이 비어 있지 않으면 sequence부터, 비어 있으면 처음부터 시작 */
 		if (null != sequence) {
 			ps.add("o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? "<" : ">")
 					+ (" ?" + (index)));
 			vs.add(sequence);
 			index++;
 		}
-		/** 以下组织各种条件子句，放到List<String> ps里，相应的值放到List<Object> vs里 */
+		/** 아래에서 각종 조건절을 구성해 List<String> ps에, 해당 값은 List<Object> vs에 넣음 */
 		if (null != equals && (!equals.isEmpty())) {
 			for (Entry<String, Object> en : equals.entrySet()) {
 				ps.add("o." + en.getKey() + (" = ?" + index));
@@ -821,7 +821,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 				index++;
 			}
 		}
-		/** like有点特殊，多个like一般用or相联 */
+		/** like는 특수함, 여러 like는 보통 or로 연결 */
 		if (null != likes && (!likes.isEmpty())) {
 			List<String> ors = new ArrayList<>();
 			for (Entry<String, Object> en : likes.entrySet()) {
@@ -861,34 +861,34 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 				index++;
 			}
 		}
-		/** 使用指定的方式将条件子句组合起来 */
+		/** 지정 방식으로 조건절 결합 */
 		if (!ps.isEmpty()) {
 			str += " where " + StringUtils.join(ps, (andJoin ? " and " : " or "));
 		}
-		/** 排序 */
+		/** 정렬 */
 		str += " order by o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? DESC : ASC);
 		Query query = em.createQuery(str, tClass);
-		/** 为查询设置所有的参数值 */
+		/** 조회에 모든 매개변수 값 설정 */
 		for (int i = 0; i < vs.size(); i++) {
 			query.setParameter(i + 1, vs.get(i));
 		}
-		/** 限制查询的条数，一般就取一页的条目数，最多为超过list_max */
+		/** 조회 건수 제한, 보통 한 페이지 항목 수를 사용하며 최대 list_max를 넘지 않음 */
 		@SuppressWarnings("unchecked")
 		List<String> ids = query.setMaxResults(Math.max(Math.min(count, list_max), list_min)).getResultList();
-		/** 获取所有符合条件的id */
+		/** 조건에 맞는 모든 id 조회 */
 		List<W> wos = emc.fetch(ids, copier);
 		if (!wos.isEmpty()) {
-			/** 查询初始的编号 */
+			/** 조회 시작 번호 */
 			Long rank = this.rank(emc, tClass, sequenceField, PropertyUtils.getProperty(wos.get(0), sequenceField),
 					equals, notEquals, likes, ins, notIns, members, notMembers, andJoin, order);
-			/** 为输出的结果进行编号 */
+			/** 출력 결과에 번호 부여 */
 			for (W w : wos) {
 				PropertyUtils.setProperty(w, "rank", rank++);
 			}
 		}
 		ActionResult<List<W>> result = new ActionResult<>();
 		result.setData(wos);
-		/** 设置查询结果的总条目数 */
+		/** 조회 결과 총 항목 수 설정 */
 		result.setCount(this.count(emc, tClass, equals, notEquals, likes, ins, notIns, members, notMembers, andJoin));
 		return result;
 	}
@@ -898,7 +898,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			EqualsTerms equals, NotEqualsTerms notEquals, LikeTerms likes, InTerms ins, NotInTerms notIns,
 			MemberTerms members, NotMemberTerms notMembers, boolean andJoin, String order) throws Exception {
 		Class<T> tClass = (Class<T>) copier.getOrigClass();
-		/** 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据 */
+		/** 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회 */
 		Object sequence = null;
 		if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 			Object o = emc.find(id, tClass);
@@ -908,18 +908,18 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 		}
 		EntityManager em = emc.get(tClass);
 		String str = "SELECT o.id FROM " + tClass.getCanonicalName() + " o";
-		/** 预编译的SQL语句的参数序号，必须由1开始 */
+		/** 사전 컴파일 SQL 문의 파라미터 순번, 반드시 1부터 시작 */
 		Integer index = 1;
 		List<String> ps = new ArrayList<>();
 		List<Object> vs = new ArrayList<>();
-		/** 如果sequence值不为空，那么从sequence开始，如果为空则从头开始 */
+		/** sequence 값이 비어 있지 않으면 sequence부터, 비어 있으면 처음부터 시작 */
 		if (null != sequence) {
 			ps.add("o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? ">" : "<")
 					+ (" ?" + (index)));
 			vs.add(sequence);
 			index++;
 		}
-		/** 以下组织各种条件子句，放到List<String> ps里，相应的值放到List<Object> vs里 */
+		/** 아래에서 각종 조건절을 구성해 List<String> ps에, 해당 값은 List<Object> vs에 넣음 */
 		if (null != equals && (!equals.isEmpty())) {
 			for (Entry<String, Object> en : equals.entrySet()) {
 				ps.add("o." + en.getKey() + (" = ?" + index));
@@ -934,7 +934,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 				index++;
 			}
 		}
-		/** like有点特殊，多个like一般用or相联 */
+		/** like는 특수함, 여러 like는 보통 or로 연결 */
 		if (null != likes && (!likes.isEmpty())) {
 			List<String> ors = new ArrayList<>();
 			for (Entry<String, Object> en : likes.entrySet()) {
@@ -974,34 +974,34 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 				index++;
 			}
 		}
-		/** 使用指定的方式将条件子句组合起来 */
+		/** 지정 방식으로 조건절 결합 */
 		if (!ps.isEmpty()) {
 			str += " where " + StringUtils.join(ps, (andJoin ? " and " : " or "));
 		}
-		/** 排序 */
+		/** 정렬 */
 		str += " order by o." + sequenceField + " " + (StringUtils.equalsIgnoreCase(order, DESC) ? ASC : DESC);
 		Query query = em.createQuery(str, tClass);
-		/** 为查询设置所有的参数值 */
+		/** 조회에 모든 매개변수 값 설정 */
 		for (int i = 0; i < vs.size(); i++) {
 			query.setParameter(i + 1, vs.get(i));
 		}
-		/** 限制查询的条数，一般就取一页的条目数，最多为超过list_max */
+		/** 조회 건수 제한, 보통 한 페이지 항목 수를 사용하며 최대 list_max를 넘지 않음 */
 		@SuppressWarnings("unchecked")
 		List<String> ids = query.setMaxResults(Math.max(Math.min(count, list_max), list_min)).getResultList();
 		List<W> wos = emc.fetch(ids, copier);
 		if (!wos.isEmpty()) {
-			/** 查询初始的编号 */
+			/** 조회 시작 번호 */
 			Long rank = this.rank(emc, tClass, sequenceField,
 					PropertyUtils.getProperty(wos.get(wos.size() - 1), sequenceField), equals, notEquals, likes, ins,
 					notIns, members, notMembers, andJoin, order);
-			/** 为输出的结果进行编号 */
+			/** 출력 결과에 번호 부여 */
 			for (int i = wos.size() - 1; i >= 0; i--) {
 				PropertyUtils.setProperty(wos.get(i), "rank", rank++);
 			}
 		}
 		ActionResult<List<W>> result = new ActionResult<>();
 		result.setData(wos);
-		/** 设置查询结果的总条目数 */
+		/** 조회 결과 총 항목 수 설정 */
 		result.setCount(this.count(emc, tClass, equals, notEquals, likes, ins, notIns, members, notMembers, andJoin));
 		return result;
 	}
@@ -1022,7 +1022,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 		Class<T> tClass = (Class<T>) copier.getOrigClass();
 		Class<W> wClass = (Class<W>) copier.getDestClass();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				T t = emc.fetch(id, tClass, ListTools.toList(sequenceField));
@@ -1071,7 +1071,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 			}
 			ActionResult<List<W>> result = new ActionResult<>();
 			result.setData(ws);
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(this.count(emc, tClass, predicate));
 			return result;
 		}
@@ -1082,7 +1082,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 		Class<T> tClass = (Class<T>) copier.getOrigClass();
 		Class<W> wClass = (Class<W>) copier.getDestClass();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				T t = emc.fetch(id, tClass, ListTools.toList(sequenceField));
@@ -1135,7 +1135,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 
 			ActionResult<List<W>> result = new ActionResult<>();
 			result.setData(ws);
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(this.count(emc, tClass, predicate));
 			return result;
 		}
@@ -1144,7 +1144,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 	public <T extends JpaObject> ActionResult<List<T>> standardListNext(Class<T> cls, String id, Integer count,
 			String sequenceField, String order, Predicate predicate) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				T t = emc.fetch(id, cls, ListTools.toList(sequenceField));
@@ -1177,7 +1177,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 
 			ActionResult<List<T>> result = new ActionResult<>();
 			result.setData(new ArrayList<T>(os));
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(this.count(emc, cls, predicate));
 			return result;
 		}
@@ -1186,7 +1186,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 	public <T extends JpaObject> ActionResult<List<T>> standardListPrev(Class<T> cls, String id, Integer count,
 			String sequenceField, String order, Predicate predicate) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+			// 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 			Object sequence = null;
 			if (!StringUtils.equalsIgnoreCase(id, EMPTY_SYMBOL)) {
 				T t = emc.fetch(id, cls, ListTools.toList(sequenceField));
@@ -1224,7 +1224,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 
 			ActionResult<List<T>> result = new ActionResult<>();
 			result.setData(wos);
-			// 设置查询结果的总条目数
+			// 조회 결과 총 항목 수 설정
 			result.setCount(this.count(emc, cls, predicate));
 			return result;
 		}
@@ -1240,7 +1240,7 @@ public abstract class StandardJaxrsAction extends AbstractJaxrsAction {
 	}
 
 	/**
-	 * 将request参数值转为json
+	 * request 파라미터 값을 json으로 변환
 	 */
 	public String request2Json(HttpServletRequest request) {
 		Map<String, String> map = new HashMap<>();

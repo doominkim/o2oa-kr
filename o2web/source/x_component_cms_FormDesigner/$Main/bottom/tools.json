@@ -16,22 +16,22 @@
   },
 //  "personfield": {
 //    "icon": "personfield.png",
-//    "text": "人员",
+//    "text": "사용자",
 //    "className": "Personfield"
 //  },
 //  "orgfield": {
 //    "icon": "orgfield.png",
-//    "text": "组织",
+//    "text": "조직",
 //    "className": "Orgfield"
 //  },
 //  "readerfield": {
 //    "icon": "readerfield.png",
-//    "text": "读者",
+//    "text": "독자",
 //    "className": "Readerfield"
 //  },
 //  "authorfield": {
 //    "icon": "authorfield.png",
-//    "text": "作者",
+//    "text": "작성자",
 //    "className": "Authorfield"
 //  },
   "org": {
@@ -127,7 +127,7 @@
   },
 //  "splitdiv": {
 //    "icon": "splitdiv.png",
-//    "text": "分布数据容器",
+//    "text": "분산 데이터 컨테이너",
 //    "className": "Div"
 //  },
   "table": {

@@ -49,7 +49,7 @@ public class ActionGetAllWithPermission extends BaseAction {
 				result.setData( result_cache.getData() );
 				result.setCount( result_cache.getCount() );
 			} else {
-				//继续进行数据查询;
+				//데이터 조회 계속;
 				result = getForumWithPermissionQueryResult( request, effectivePerson, isBBSManager );
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -68,7 +68,7 @@ public class ActionGetAllWithPermission extends BaseAction {
 		MethodExcuteResult methodExcuteResult = null;
 		
 		if( check ){
-			//查询公开的论坛
+			//공개 포럼 조회
 			try {
 				forumIds = forumInfoServiceAdv.listAllPublicForumIds();
 				if( ListTools.isNotEmpty( forumIds ) ){
@@ -77,14 +77,14 @@ public class ActionGetAllWithPermission extends BaseAction {
 					}
 				}
 			} catch (Exception e) {
-				Exception exception = new ExceptionForumInfoProcess( e, "系统查询所有公开的论坛信息列表时发生异常。" );
+				Exception exception = new ExceptionForumInfoProcess( e, "공개된 전체 포럼 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
 		}
 		
 		if( check ){
-			//查询有权限访问的论坛
+			//접근 권한이 있는 포럼 조회
 			methodExcuteResult = UserPermissionService.getViewForumIdsFromUserPermission( effectivePerson );
 			if( methodExcuteResult.getSuccess() ){
 				if( methodExcuteResult.getBackObject() != null ){
@@ -100,13 +100,13 @@ public class ActionGetAllWithPermission extends BaseAction {
 			}
 		}
 		
-		if( check ){//从数据库查询论坛列表
+		if( check ){//DB에서 포럼 목록 조회
 			try {
 				forumInfoList = forumInfoServiceAdv.listAllViewAbleForumWithUserPermission( ids );
 				if( forumInfoList == null ){
 					forumInfoList = new ArrayList<BBSForumInfo>();
 				}else {
-					//排除“停用”
+					//「사용 중지」 제외
 					ArrayList<BBSForumInfo> bbsForumInfoList = new ArrayList<BBSForumInfo>();
 					Iterator<BBSForumInfo> it = forumInfoList.iterator();
 					while (it.hasNext()) {
@@ -120,24 +120,24 @@ public class ActionGetAllWithPermission extends BaseAction {
 				
 				
 			} catch (Exception e) {
-				Exception exception = new ExceptionForumInfoProcess( e, "根据ID列表查询论坛信息列表时发生异常。" );
+				Exception exception = new ExceptionForumInfoProcess( e, "ID 목록으로 포럼 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
 		}
 		
-		if( check ){//转换论坛列表为输出格式
+		if( check ){//포럼 목록을 출력 형식으로 변환
 			if( ListTools.isNotEmpty( forumInfoList ) ){
 				try {
 					wraps = Wo.copier.copy( forumInfoList );
 				} catch (Exception e) {
-					Exception exception = new ExceptionForumInfoProcess( e, "系统将论坛信息对象转换为输出数据时发生异常。" );
+					Exception exception = new ExceptionForumInfoProcess( e, "포럼 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
 			}
 		}
-		//TODO 为了不改变前端的逻辑，此处将人员List转为String进行输出，逗号分隔
+		//TODO 프론트엔드 로직을 바꾸지 않기 위해 여기서 사용자 List를 String으로 변환해 출력, 쉼표 구분
 		if( check ){
 			if( ListTools.isNotEmpty( wraps ) ){
 				for( Wo wo : wraps ) {
@@ -165,18 +165,18 @@ public class ActionGetAllWithPermission extends BaseAction {
 
 	public static class Wo extends BBSForumInfo{
 		
-		@FieldDescribe("字符串形式输出的管理员信息，逗号(,)分隔.")
+		@FieldDescribe("문자열 형식의 관리자 정보, 쉼표(,)로 구분.")
 		private String forumManagerName = null;
 	
 		private static final long serialVersionUID = -5076990764713538973L;
 		
 		public static WrapCopier< BBSForumInfo, Wo > copier = WrapCopierFactory.wo( BBSForumInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String forumVisibleResult ;
 		
-		//论坛版块列表
-		@FieldDescribe("版块列表.")
+		//포럼 게시판 목록
+		@FieldDescribe("게시판 목록.")
 		private List<WoSectionInfo> sections = null;
 
 		public List<WoSectionInfo> getSections() {

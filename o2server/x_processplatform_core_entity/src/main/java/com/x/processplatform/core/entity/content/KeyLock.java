@@ -19,7 +19,7 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "KeyLock", description = "流程平台抢办锁定.")
+@Schema(name = "KeyLock", description = "프로세스 플랫폼 선점 처리 잠금.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.KeyLock.table, uniqueConstraints = {
@@ -40,17 +40,17 @@ public class KeyLock extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     public void onPersist() throws Exception {
     }
 
-    /* 更新运行方法 */
+    /* 실행 메서드 업데이트 */
 
     public KeyLock() {
     }
@@ -61,14 +61,14 @@ public class KeyLock extends SliceJpaObject {
     }
 
     public static final String key_FIELDNAME = "key";
-    @FieldDescribe("锁值.")
+    @FieldDescribe("잠금 값.")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + key_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + key_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String key;
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("人员.")
+    @FieldDescribe("사용자.")
     @Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
     @CheckPersist(allowEmpty = false)

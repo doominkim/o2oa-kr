@@ -32,7 +32,7 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 		Boolean check = true;
 		Boolean isAnonymous = effectivePerson.isAnonymous();
 		String personName = effectivePerson.getDistinguishedName();
-		// 文档类型：全部|信息|数据
+		// 문서 유형: 전체|정보|데이터
 		String documentType = "信息";
 		if (check) {
 			try {
@@ -40,7 +40,7 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionSearchProcess(e,
-						"系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+						"사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -71,15 +71,15 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 				}
 			}
 		}
-		// 1、获取栏目统计列表
+		// 1. 게시판 통계 목록 조회
 		if (check) {
-			// 查询用户可访问的文档涉及到的所有栏目信息以及各栏目内文档数量
+			// 사용자가 접근 가능한 문서와 관련된 모든 게시판 정보 및 게시판별 문서 수 조회
 			try {
 				appFilterList = searchServiceAdv.listAppInfoSearchFilter(app_ids, docStatus, categoryId );
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionSearchProcess(e,
-						"系统在根据可访问栏目ID列表，文档状态以及可访问分类ID统计涉及到的所有栏目名称列表时发生异常。"
+						"접근 가능한 게시판 ID 목록, 게시글 상태, 접근 가능한 분류 ID로 관련 게시판 이름 목록을 집계하는 중 오류가 발생했습니다."
 						+ "AppIds:" + app_ids
 						+ ", DocStatus:" + docStatus
 						+ ", CategoryId:" +  categoryId
@@ -88,14 +88,14 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
-		// 2、获取分类统计列表
+		// 2. 분류 통계 목록 조회
 		if (check) {
 			try {
 				categoryFilterList = searchServiceAdv.listCategorySearchFilter(app_ids, docStatus, categoryId);
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionSearchProcess(e,
-						"系统在根据可访问栏目ID列表，文档状态以及可访问分类ID统计涉及到的所有分类名称列表时发生异常。"
+						"접근 가능한 게시판 ID 목록, 게시글 상태, 접근 가능한 분류 ID로 관련 분류 이름 목록을 집계하는 중 오류가 발생했습니다."
 						+ "AppIds:" + app_ids
 						+ ", DocStatus:" + docStatus
 						+ ", CategoryId:" +  categoryId
@@ -110,7 +110,7 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionSearchProcess(e,
-						"系统在根据可访问栏目ID列表，文档状态以及可访问分类ID统计涉及到的所有顶层组织名称列表时发生异常。"
+						"접근 가능한 게시판 ID 목록, 게시글 상태, 접근 가능한 분류 ID로 관련 최상위 조직 이름 목록을 집계하는 중 오류가 발생했습니다."
 						+ "AppIds:" + app_ids
 						+ ", DocStatus:" + docStatus
 						+ ", CategoryId:" +  categoryId
@@ -125,7 +125,7 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionSearchProcess(e,
-						"系统在根据可访问栏目ID列表，文档状态以及可访问分类ID统计涉及到的所有组织名称列表时发生异常。"
+						"접근 가능한 게시판 ID 목록, 게시글 상태, 접근 가능한 분류 ID로 관련 조직 이름 목록을 집계하는 중 오류가 발생했습니다."
 						+ "AppIds:" + app_ids
 						+ ", DocStatus:" + docStatus
 						+ ", CategoryId:" +  categoryId

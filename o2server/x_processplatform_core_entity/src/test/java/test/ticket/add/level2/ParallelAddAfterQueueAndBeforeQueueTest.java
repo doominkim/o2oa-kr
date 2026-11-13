@@ -17,7 +17,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddAfterQueueAndBeforeQueueTest {
 
-	@DisplayName("B后加签EFG,EFG串行处理，E前加签IJK，IJK串行处理,即并行-后加签串行-前加签串行,IJK先处理到ACE,E处理到F,F处理到G")
+	@DisplayName("B후 추가결재EFG,EFG순차 처리,E전 추가결재IJK,IJK순차 처리,즉 병렬-후 추가결재순차-전 추가결재순차,IJK 먼저 처리 후 ACE,E 처리 후 F,F 처리 후 G")
 	@Test
 	@Order(1)
 	void test01() {
@@ -63,7 +63,7 @@ class ParallelAddAfterQueueAndBeforeQueueTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B后加签EFG,EFG串行处理，E前加签IJK，IJK串行处理,即并行-后加签串行-前加签串行,AC先处理到I,IJK依次处理到E,E处理到F,F处理到G")
+	@DisplayName("B후 추가결재EFG,EFG순차 처리,E전 추가결재IJK,IJK순차 처리,즉 병렬-후 추가결재순차-전 추가결재순차,AC 먼저 처리 후 I,IJK 순서대로 처리 후 E,E 처리 후 F,F 처리 후 G")
 	@Test
 	@Order(2)
 	void test02() {
@@ -109,7 +109,7 @@ class ParallelAddAfterQueueAndBeforeQueueTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B后加签EFG,EFG串行处理，E前加签IJK，IJK串行处理,即并行-后加签串行-前加签串行,混合处理,IJK处理完到E,E处理到F,F处理到G")
+	@DisplayName("B후 추가결재EFG,EFG순차 처리,E전 추가결재IJK,IJK순차 처리,즉 병렬-후 추가결재순차-전 추가결재순차,혼합 처리,IJK 처리 완료 후 E,E 처리 후 F,F 처리 후 G")
 	@Test
 	@Order(3)
 	void test03() {

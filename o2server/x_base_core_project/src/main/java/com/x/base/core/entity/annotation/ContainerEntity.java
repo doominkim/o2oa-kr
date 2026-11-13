@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 用于标识Entity,由于@Entity标识可能扫描到其他的类,所以这里单独用一个标识,表示是自建的类,这样可以在scan 的时候区分
+ * Entity 식별용. @Entity 표시는 다른 클래스까지 스캔될 수 있으므로 별도 표시로 자체 생성 클래스임을 나타내어 scan 시 구분할 수 있게 함
  * 
  * 
  * @author zhour
@@ -20,17 +20,17 @@ import java.lang.annotation.Target;
 public @interface ContainerEntity {
 
 	/**
-	 * 执行dump时分组数量
+	 * dump 실행 시 그룹 수
 	 */
 	public int dumpSize() default 200;
 
 	/**
-	 * 类型
+	 * 유형
 	 */
 	public Type type() default Type.content;
 
 	/**
-	 * 引用,强数据,软数据(软数据不会影响系统运行)
+	 * 참조, 강한 데이터, 약한 데이터(약한 데이터는 시스템 실행에 영향을 주지 않음)
 	 */
 
 	public Reference reference() default Reference.strong;

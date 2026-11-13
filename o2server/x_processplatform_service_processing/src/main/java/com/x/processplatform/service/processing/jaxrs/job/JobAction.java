@@ -26,18 +26,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("job")
-@JaxrsDescribe("工作")
+@JaxrsDescribe("문서")
 public class JobAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JobAction.class);
 
-	@JaxrsMethodDescribe(value = "删除Job所有相关联的工作.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "Job과 관련된 모든 업무 문서 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("식별자") @PathParam("job") String job) {
 		ActionResult<List<ActionDelete.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,13 +49,13 @@ public class JobAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据给定的任务标识立即执行字段映射.", action = V2Projection.class)
+	@JaxrsMethodDescribe(value = "지정 작업 식별자로 필드 매핑 즉시 실행.", action = V2Projection.class)
 	@GET
 	@Path("v2/{job}/projection")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void v2Projection(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("식별자") @PathParam("job") String job) {
 		ActionResult<V2Projection.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -67,14 +67,14 @@ public class JobAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "记录待办,待阅访问时间.", action = V2View.class)
+	@JaxrsMethodDescribe(value = "결재 대기, 열람 대기 접근 시간 기록.", action = V2View.class)
 	@GET
 	@Path("v2/{job}/person/{person}/view")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void v2View(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("job") String job,
-			@JaxrsParameterDescribe("人员") @PathParam("person") String person) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("job") String job,
+			@JaxrsParameterDescribe("사용자") @PathParam("person") String person) {
 		ActionResult<V2View.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -132,7 +132,7 @@ public class ScriptFactory extends ElementFactory {
     }
 
     /**
-     * 递归获取脚本以及递归依赖的脚本
+     * 스크립트와 재귀 의존 스크립트를 재귀적으로 조회
      * 
      * @param flag
      * @return

@@ -111,40 +111,40 @@ class V2Reroute extends BaseAction {
 				}
 				AeiObjects aeiObjects = new AeiObjects(business, work, param.activity, new ProcessingAttributes());
 				if (BooleanUtils.isTrue(param.mergeWork)) {
-					// 删除所有待办
+					// 모든 결재 대기 삭제
 					aeiObjects.getTasks().stream().forEach(aeiObjects.getDeleteTasks()::add);
-					// 删除其他工作
+					// 다른 업무 문서 삭제
 					aeiObjects.getWorks().stream().filter(o -> (!StringUtils.equalsIgnoreCase(o.getId(), work.getId())))
 							.forEach(aeiObjects.getDeleteWorks()::add);
-					// 删除其他工作的未连接workLog
+					// 다른 업무 문서의 연결되지 않은 workLog 삭제
 					aeiObjects.getWorkLogs().stream().filter(o -> BooleanUtils.isNotTrue(o.getConnected()))
 							.filter(o -> (!StringUtils.equalsIgnoreCase(o.getFromActivity(), work.getActivity())))
 							.forEach(aeiObjects.getDeleteWorkLogs()::add);
-					// 重新定向read关联的work
+					// read와 연관된 work 재지정
 					aeiObjects.getReads().stream()
 							.filter(o -> (!StringUtils.equalsIgnoreCase(o.getWork(), work.getId()))).forEach(o -> {
 								o.setWork(work.getId());
 								aeiObjects.getUpdateReads().add(o);
 							});
 				} else {
-					// 删除可能的待办
+					// 남아 있을 수 있는 결재 대기 삭제
 					aeiObjects.getTasks().stream().filter(o -> StringUtils.equals(work.getId(), o.getWork()))
 							.forEach(aeiObjects.getDeleteTasks()::add);
 				}
 				if (Manual.class.isAssignableFrom(param.activity.getClass())) {
-					// 重新设置表单
+					// 양식 재설정
 					String formId = business.element().lookupSuitableForm(work.getProcess(), param.activity.getId());
 					if (StringUtils.isNotBlank(formId)) {
 						work.setForm(formId);
 					}
-					// 重新设置处理人
+					// 처리자 재설정
 					if (ListTools.isNotEmpty(param.distinguishedNameList)) {
 						work.setTickets(((Manual) param.activity).identitiesToTickets(param.distinguishedNameList));
 					} else {
 						work.setTickets(new Tickets());
 					}
 				}
-				// 调度强制把这个标志设置为true,这样可以避免在拟稿状态就调度,系统认为是拟稿状态,默认不创建待办.
+				// 스케줄링 시 이 플래그를 강제로 true로 설정, 초안 상태에서 스케줄링할 때 시스템이 초안 상태로 판단해 기본적으로 결재 대기를 생성하지 않는 것을 방지.
 				work.setWorkThroughManual(true);
 				work.setDestinationActivity(param.activity.getId());
 				work.setDestinationActivityType(param.activity.getActivityType());

@@ -10,46 +10,46 @@ import org.apache.commons.collections4.list.TreeList;
 
 public class Runtime extends GsonPropertyObject {
 
-	@FieldDescribe("当前用户")
+	@FieldDescribe("현재 사용자")
 	public String person = "";
 
-	@FieldDescribe("组织")
+	@FieldDescribe("조직")
 	public List<String> unitList = new TreeList<>();
 
-	@FieldDescribe("群组")
+	@FieldDescribe("그룹")
 	public List<String> groupList = new TreeList<>();
 
-	@FieldDescribe("角色")
+	@FieldDescribe("역할")
 	public List<String> roleList = new TreeList<>();
 
-	@FieldDescribe("所有群组")
+	@FieldDescribe("전체 그룹")
 	public List<String> unitAllList = new TreeList<>();
 
-	@FieldDescribe("身份")
+	@FieldDescribe("신분")
 	public List<String> identityList = new TreeList<>();
 
-	@FieldDescribe("所有权限集合")
+	@FieldDescribe("전체 권한 집합")
 	public List<String> authList = new ArrayList<>();
 
-	@FieldDescribe("过滤")
+	@FieldDescribe("필터")
 	public List<FilterEntry> filterList = new TreeList<>();
 
-	@FieldDescribe("指定排序")
+	@FieldDescribe("지정 정렬")
 	public List<SelectEntry> orderList = new TreeList<>();
 
-	@FieldDescribe("参数")
+	@FieldDescribe("파라미터")
 	public Map<String, String> parameter = new HashMap<>();
 
-	@FieldDescribe("每页数量")
+	@FieldDescribe("페이지당 개수")
 	public Integer count = 0;
 
-	@FieldDescribe("第几页")
+	@FieldDescribe("페이지 번호")
 	public Integer page = 0;
 
-	@FieldDescribe("限定结果集")
+	@FieldDescribe("결과 집합 제한")
 	public List<String> bundleList = new TreeList<>();
 
-	@FieldDescribe("指定字段列表")
+	@FieldDescribe("지정 필드 목록")
 	public SelectEntries selectList;
 
 	public boolean hasBundle = false;

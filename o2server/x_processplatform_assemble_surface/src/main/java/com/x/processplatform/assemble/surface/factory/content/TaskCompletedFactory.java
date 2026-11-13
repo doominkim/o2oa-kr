@@ -131,7 +131,7 @@ public class TaskCompletedFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 统计指定人员已办数量
+	 * 지정 사용자의 처리 완료 수 집계
 	 */
 	public Long countWithPerson(String person) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(TaskCompleted.class);
@@ -144,7 +144,7 @@ public class TaskCompletedFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 统计指定人员指定应用的已办数量
+	 * 지정 앱에서 지정 사용자의 처리 완료 수 집계
 	 */
 	public Long countWithPersonWithApplication(String person, String application) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(TaskCompleted.class);
@@ -157,7 +157,7 @@ public class TaskCompletedFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 
-	/* 根据ActivityToken获取TaskCompleted */
+	/* ActivityToken으로 TaskCompleted 조회 */
 	public List<String> listWithActivityToken(String activityToken) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(TaskCompleted.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -176,7 +176,7 @@ public class TaskCompletedFactory extends AbstractFactory {
 		return this.business().entityManagerContainer().list(TaskCompleted.class, ids);
 	}
 
-	/* 根据Person和Job值获取TaskCompleted */
+	/* Person과 Job 값으로 TaskCompleted 조회 */
 	public List<String> listWithPersonWithJob(String person, String job) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(TaskCompleted.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -240,7 +240,7 @@ public class TaskCompletedFactory extends AbstractFactory {
 		cq.select(root.get(TaskCompleted_.id)).where(p);
 		return em.createQuery(cq).getResultList();
 	}
-//	/* 获取可以召回的已办点 */
+//	/* 회수 가능한 처리 완료 지점 조회 */
 //	public String getAllowRetract(String person, Work work) throws Exception {
 //		if (null != work) {
 //			Business business = this.business();
@@ -287,7 +287,7 @@ public class TaskCompletedFactory extends AbstractFactory {
 //		return true;
 //	}
 
-	/** 原用于前台将taskCompleted 绑定到workLog 现废弃 */
+	/** 기존에 프런트에서 taskCompleted를 workLog에 연결하던 용도, 현재 폐기 */
 	// public <W extends WorkLog> List<TaskCompleted> listTaskCompleted(W workLog)
 	// throws Exception {
 	// List<String> ids =
@@ -298,15 +298,15 @@ public class TaskCompletedFactory extends AbstractFactory {
 	// .sorted(Comparator.comparing(TaskCompleted::getCompletedTime,
 	// Comparator.nullsLast(Date::compareTo)))
 	// .collect(Collectors.toList());
-	// /** 补充召回 */
+	// /** 회수 보완 */
 	// List<TaskCompleted> list = new ArrayList<>();
 	// for (TaskCompleted o : os) {
 	// list.add(o);
 	// if (o.getProcessingType().equals(ProcessingType.retract)) {
 	// TaskCompleted retract = new TaskCompleted();
 	// o.copyTo(retract);
-	// retract.setRouteName("撤回");
-	// retract.setOpinion("撤回");
+	// retract.setRouteName("회수");
+	// retract.setOpinion("회수");
 	// retract.setStartTime(retract.getRetractTime());
 	// retract.setCompletedTime(retract.getRetractTime());
 	// list.add(retract);

@@ -19,7 +19,7 @@ class QueueAddBeforeSingleAndBeforeQueueTest {
 
  
 
-	@DisplayName("A前加签EFG,EFG单人处理,E前加签IJK,IJK串行处理，即串行-前加签单人-前加签串行")
+	@DisplayName("A전 추가결재EFG,EFG단일 처리,E전 추가결재IJK,IJK순차 처리,즉 순차-전 추가결재단일-전 추가결재순차")
 	@Test
 	@Order(1)
 	void test01() {

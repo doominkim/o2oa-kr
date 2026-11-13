@@ -44,7 +44,7 @@ MWF.xAction.RestActions.Action["x_attendance_assemble_control"] = new Class({
         }.bind(this));
         //this.action.invoke({"name": "exportAbnormalAttachment", "parameter": {"year": year, "month": month },"success": success,"failure": failure});
     },
-    //统计导出
+    //통계 내보내기
     detailsExportStream: function(q_topUnitName, q_unitName,q_empName,cycleYear,cycleMonth,q_date,isAbsent,isLackOfTime,isLate, stream){
         this.action.getActions(function(){
             var url = this.action.actions.detailsExportStream.uri;
@@ -61,7 +61,7 @@ MWF.xAction.RestActions.Action["x_attendance_assemble_control"] = new Class({
             window.open(this.action.address+url , "_blank");
         }.bind(this));
     },
-    //个人出勤率导出
+    //개인 출근율 내보내기
     exportPersonStatisticAttachment: function(name,year, month, stream){
         this.action.getActions(function(){
             var url = this.action.actions.exportPersonStatisticAttachment.uri;
@@ -72,7 +72,7 @@ MWF.xAction.RestActions.Action["x_attendance_assemble_control"] = new Class({
             window.open(this.action.address+url , "_blank");
         }.bind(this));
     },
-    //部门出勤率导出
+    //부서 출근율 내보내기
     exportUnitStatisticAttachment: function(name,year, month, stream){
         this.action.getActions(function(){
             var url = this.action.actions.exportUnitStatisticAttachment.uri;
@@ -83,7 +83,7 @@ MWF.xAction.RestActions.Action["x_attendance_assemble_control"] = new Class({
             window.open(this.action.address+url , "_blank");
         }.bind(this));
     },
-    //公司出勤率导出
+    //회사 출근율 내보내기
     exportTopUnitStatisticAttachment: function(name,year, month, stream){
         this.action.getActions(function(){
             var url = this.action.actions.exportTopUnitStatisticAttachment.uri;

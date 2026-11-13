@@ -56,7 +56,7 @@ public class ActionSubjectTopToSection extends BaseAction {
 				CacheManager.notify( BBSSubjectInfo.class );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectOperation( e, "用户在设置版块置顶主题信息时发生异常！" );
+				Exception exception = new ExceptionSubjectOperation( e, "주제를 섹션 상단 고정으로 설정하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

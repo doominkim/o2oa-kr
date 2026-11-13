@@ -58,7 +58,7 @@ class ActionGetIcon extends BaseAction {
 	private Wo get(Business business, String flag) throws Exception {
 		String base64;
 		if (Config.token().isInitialManager(flag)) {
-			/* 如果是xadmin单独处理 */
+			/* xadmin이면 별도 처리 */
 			base64 = com.x.base.core.project.config.Person.ICON_MANAGER;
 		} else {
 			Person person = business.person().pick(flag);
@@ -80,21 +80,21 @@ class ActionGetIcon extends BaseAction {
 	}
 
 	private String generate(String name, int size, Color bgColor, Color fontColor) throws IOException {
-		// 只取姓
+		// 성만 사용
 		String firstChar = name.substring(0, 1).toUpperCase();
 		BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = image.createGraphics();
-		// 开启多项抗锯齿和字体平滑
+		// 다중 안티앨리어싱 및 폰트 스무딩 활성화
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.setColor(bgColor);
 		g.fillRect(0, 0, size, size);
-		// 建议选用本地安装的中文字体，字体不存在时会降级
+		// 로컬에 설치된 한글 폰트 사용 권장, 폰트가 없으면 대체됨
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 			Font font = this.font((int) (size * 0.5));
 			g.setFont(font);
-			// 计算文字大小，居中
+			// 글자 크기 계산, 가운데 정렬
 			FontMetrics fm = g.getFontMetrics();
 			int x = (size - fm.stringWidth(firstChar)) / 2;
 			int y = (size - fm.getHeight()) / 2 + fm.getAscent();

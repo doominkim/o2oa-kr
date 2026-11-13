@@ -33,7 +33,7 @@ class ActionListPrev extends BaseAction {
 				result.setCount(co.getCount());
 			} else {
 				String id = EMPTY_SYMBOL;
-				/** 如果不是空位标志位 */
+				/** 비어 있지 않으면 플래그 설정 */
 				if (!StringUtils.equals(EMPTY_SYMBOL, flag)) {
 					Group o = business.group().pick(flag);
 					if (null == o) {
@@ -82,7 +82,7 @@ class ActionListPrev extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private Long rank;
 
 		static WrapCopier<Group, Wo> copier = WrapCopierFactory.wo(Group.class, Wo.class,

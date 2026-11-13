@@ -26,18 +26,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("meeting")
-@JaxrsDescribe("会议操作")
+@JaxrsDescribe("회의 작업")
 public class MeetingAction extends BaseAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(MeetingAction.class);
 
-	@JaxrsMethodDescribe(value = "获取指定会议内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 회의 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,7 +49,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建会议", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "회의 생성", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -66,13 +66,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "修改会议,标题,说明,只能增加邀请人", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "회의, 제목, 설명 수정(초대 대상자는 추가만 가능)", action = ActionEdit.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -84,13 +84,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "修改会议、标题、说明、邀请人", action = ActionModify.class)
+	@JaxrsMethodDescribe(value = "회의, 제목, 설명, 초대 대상자 수정", action = ActionModify.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public void modify(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionModify.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -102,13 +102,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "会议提前开始,修改开始时间", action = ActionEditStartTime.class)
+	@JaxrsMethodDescribe(value = "회의 조기 시작, 시작 시간 수정", action = ActionEditStartTime.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/modify/starttime")
 	public void editStartTime(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditStartTime.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -120,13 +120,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "会议提前结束,修改结束时间", action = ActionEditCompleteTime.class)
+	@JaxrsMethodDescribe(value = "회의 조기 종료, 종료 시간 수정", action = ActionEditCompleteTime.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/modify/completedtime")
 	public void editCompletedTime(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditCompleteTime.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -138,13 +138,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除会议.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "회의 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -156,13 +156,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "同意会议预定.", action = ActionConfirmAllow.class)
+	@JaxrsMethodDescribe(value = "회의 예약 승인.", action = ActionConfirmAllow.class)
 	@GET
 	@Path("{id}/confirm/allow")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void confirmAllow(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionConfirmAllow.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -174,13 +174,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "拒绝会议预定.", action = ActionConfirmDeny.class)
+	@JaxrsMethodDescribe(value = "회의 예약 거절.", action = ActionConfirmDeny.class)
 	@GET
 	@Path("{id}/confirm/deny")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void confirmDeny(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionConfirmDeny.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -192,13 +192,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "接受会议邀请", action = ActionAccept.class)
+	@JaxrsMethodDescribe(value = "회의 초대 수락", action = ActionAccept.class)
 	@GET
 	@Path("{id}/accept")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void accpet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionAccept.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -210,13 +210,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除会议邀请人.", action = ActionDeleteInvite.class)
+	@JaxrsMethodDescribe(value = "회의 초대 대상자 삭제.", action = ActionDeleteInvite.class)
 	@PUT
 	@Path("{id}/delete/invite")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteInvite(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionDeleteInvite.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -228,13 +228,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "会议签到", action = ActionCheckIn.class)
+	@JaxrsMethodDescribe(value = "회의 출석 체크", action = ActionCheckIn.class)
 	@GET
 	@Path("{id}/checkin")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkin(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionCheckIn.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -246,13 +246,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "会议签到二维码", action = ActionCheckInCode.class)
+	@JaxrsMethodDescribe(value = "회의 출석 체크 QR 코드", action = ActionCheckInCode.class)
 	@GET
 	@Path("{id}/checkin/code")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkInBindCode(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionCheckInCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -264,13 +264,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "拒绝会议邀请", action = ActionAccept.class)
+	@JaxrsMethodDescribe(value = "회의 초대 거절", action = ActionAccept.class)
 	@GET
 	@Path("{id}/reject")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void reject(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionReject.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -282,13 +282,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "手动结束Meeting.", action = ActionManualCompleted.class)
+	@JaxrsMethodDescribe(value = "Meeting 수동 종료.", action = ActionManualCompleted.class)
 	@GET
 	@Path("{id}/manual/completed")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void manualCompleted(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id) {
 		ActionResult<ActionManualCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -300,13 +300,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "增加会议邀请人.", action = ActionAddInvite.class)
+	@JaxrsMethodDescribe(value = "회의 초대 대상자 추가.", action = ActionAddInvite.class)
 	@PUT
 	@Path("{id}/add/invite")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addInvite(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionAddInvite.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -318,14 +318,14 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示Meeting对象,下一页.仅管理员可用", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "Meeting 객체 목록 조회, 다음 페이지. 관리자만 사용 가능", action = ActionListNext.class)
 	@GET
 	@Path("list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -337,14 +337,14 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示Meeing对象,上一页.仅管理员可用", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "Meeing 객체 목록 조회, 이전 페이지. 관리자만 사용 가능", action = ActionListPrev.class)
 	@GET
 	@Path("list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("회의 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -356,14 +356,14 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "普通用户，分页列示Meeing对象", action = ActionPaging.class)
+	@JaxrsMethodDescribe(value = "일반 사용자, Meeing 객체 페이지 조회", action = ActionPaging.class)
 	@POST
 	@Path("list/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listMeetingPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -375,14 +375,14 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示我申请的会议", action = ActionApplyPaging.class)
+	@JaxrsMethodDescribe(value = "내가 신청한 회의 페이지 조회", action = ActionApplyPaging.class)
 	@POST
 	@Path("list/apply/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listApplyMeetingPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionApplyPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -394,14 +394,14 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示邀请我的会议", action = ActionInvitePaging.class)
+	@JaxrsMethodDescribe(value = "나를 초대한 회의 페이지 조회", action = ActionInvitePaging.class)
 	@POST
 	@Path("list/invite/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listInviteMeetingPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionInvitePaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -414,14 +414,14 @@ public class MeetingAction extends BaseAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "管理员，分页列示Meeing对象", action = ActionPagingManage.class)
+	@JaxrsMethodDescribe(value = "관리자, Meeing 객체 페이지 조회", action = ActionPagingManage.class)
 	@POST
 	@Path("list/{page}/size/{size}/manage")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listMeetingPagingManage(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("页面") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionPagingManage.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -433,13 +433,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我参与从当前日期开始指定月份范围的会议，或者被邀请，或者是申请人,或者是审核人，管理员可以看到所有.", action = ActionListComingMonth.class)
+	@JaxrsMethodDescribe(value = "현재 날짜부터 지정 개월 범위 내 내가 참여(초대·신청·심사)하는 회의 목록 조회, 관리자는 전체 조회 가능.", action = ActionListComingMonth.class)
 	@GET
 	@Path("list/coming/month/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listComingMonth(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListComingMonth.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -451,13 +451,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我参与从当前日期开始指定日期范围的会议，或者被邀请，或者是申请人,或者是审核人，管理员可以看到所有.", action = ActionListComingDay.class)
+	@JaxrsMethodDescribe(value = "현재 날짜부터 지정 일 범위 내 내가 참여(초대·신청·심사)하는 회의 목록 조회, 관리자는 전체 조회 가능.", action = ActionListComingDay.class)
 	@GET
 	@Path("list/coming/day/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listComingDay(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListComingDay.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -469,14 +469,14 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我参与的指定日期当月的会议，或者被邀请，或者是申请人,或者是审核人，管理员可以看到所有.", action = ActionListOnMonth.class)
+	@JaxrsMethodDescribe(value = "지정 날짜가 속한 달에 내가 참여(초대·신청·심사)하는 회의 목록 조회, 관리자는 전체 조회 가능.", action = ActionListOnMonth.class)
 	@GET
 	@Path("list/year/{year}/month/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listOnMonth(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("年") @PathParam("year") Integer year,
-			@JaxrsParameterDescribe("月") @PathParam("month") Integer month) {
+			@JaxrsParameterDescribe("연") @PathParam("year") Integer year,
+			@JaxrsParameterDescribe("월") @PathParam("month") Integer month) {
 		ActionResult<List<ActionListOnMonth.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -488,14 +488,14 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当月所有的会议.", action = ActionListOnMonthAll.class)
+	@JaxrsMethodDescribe(value = "이번 달 전체 회의 목록 조회.", action = ActionListOnMonthAll.class)
 	@GET
 	@Path("list/year/{year}/month/{month}/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listOnMonthAll(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("年") @PathParam("year") Integer year,
-			@JaxrsParameterDescribe("月") @PathParam("month") Integer month) {
+			@JaxrsParameterDescribe("연") @PathParam("year") Integer year,
+			@JaxrsParameterDescribe("월") @PathParam("month") Integer month) {
 		ActionResult<List<ActionListOnMonthAll.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -507,13 +507,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户从当前时间开始指定月数内需要参与的会议", action = ActionListForwardMonth.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 현재 시간부터 지정 개월 내 참여할 회의 목록 조회", action = ActionListForwardMonth.class)
 	@GET
 	@Path("list/forward/monthcount/{monthCount}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listForwardMonth(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("制定月数") @PathParam("monthCount") Integer monthCount) {
+			@JaxrsParameterDescribe("지정 개월 수") @PathParam("monthCount") Integer monthCount) {
 		ActionResult<List<ActionListForwardMonth.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -525,13 +525,13 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有从当前时间开始指定月数内需要召开的会议", action = ActionListForwardMonthAll.class)
+	@JaxrsMethodDescribe(value = "현재 시간부터 지정 개월 내 열릴 모든 회의 목록 조회", action = ActionListForwardMonthAll.class)
 	@GET
 	@Path("list/forward/monthcount/{monthCount}/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listForwardMonthAll(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("制定月数") @PathParam("monthCount") Integer monthCount) {
+			@JaxrsParameterDescribe("지정 개월 수") @PathParam("monthCount") Integer monthCount) {
 		ActionResult<List<ActionListForwardMonthAll.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -543,15 +543,15 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我参与的指定日期的会议，或者被邀请，或者是申请人,或者是审核人，管理员可以看到所有.", action = ActionListOnDay.class)
+	@JaxrsMethodDescribe(value = "지정 날짜에 내가 참여(초대·신청·심사)하는 회의 목록 조회, 관리자는 전체 조회 가능.", action = ActionListOnDay.class)
 	@GET
 	@Path("list/year/{year}/month/{month}/day/{day}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listOnDay(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("年") @PathParam("year") Integer year,
-			@JaxrsParameterDescribe("月") @PathParam("month") Integer month,
-			@JaxrsParameterDescribe("日") @PathParam("day") Integer day) {
+			@JaxrsParameterDescribe("연") @PathParam("year") Integer year,
+			@JaxrsParameterDescribe("월") @PathParam("month") Integer month,
+			@JaxrsParameterDescribe("일") @PathParam("day") Integer day) {
 		ActionResult<List<ActionListOnDay.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -563,15 +563,15 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有指定日期的会议.", action = ActionListOnDayAll.class)
+	@JaxrsMethodDescribe(value = "지정 날짜의 모든 회의 목록 조회.", action = ActionListOnDayAll.class)
 	@GET
 	@Path("list/year/{year}/month/{month}/day/{day}/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listOnDayAll(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("年") @PathParam("year") Integer year,
-			@JaxrsParameterDescribe("月") @PathParam("month") Integer month,
-			@JaxrsParameterDescribe("日") @PathParam("day") Integer day) {
+			@JaxrsParameterDescribe("연") @PathParam("year") Integer year,
+			@JaxrsParameterDescribe("월") @PathParam("month") Integer month,
+			@JaxrsParameterDescribe("일") @PathParam("day") Integer day) {
 		ActionResult<List<ActionListOnDayAll.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -583,16 +583,16 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定会议室id、指定日期的会议.", action = ActionListOnDayByRoomID.class)
+	@JaxrsMethodDescribe(value = "지정 회의실 id, 지정 날짜의 회의 목록 조회.", action = ActionListOnDayByRoomID.class)
 	@GET
 	@Path("list/year/{year}/month/{month}/day/{day}/{roomId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listOnDayByRoomID(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("年") @PathParam("year") Integer year,
-			@JaxrsParameterDescribe("月") @PathParam("month") Integer month,
-			@JaxrsParameterDescribe("日") @PathParam("day") Integer day,
-			@JaxrsParameterDescribe("会议室记录ID") @PathParam("roomId") String roomId) {
+			@JaxrsParameterDescribe("연") @PathParam("year") Integer year,
+			@JaxrsParameterDescribe("월") @PathParam("month") Integer month,
+			@JaxrsParameterDescribe("일") @PathParam("day") Integer day,
+			@JaxrsParameterDescribe("회의실 레코드 ID") @PathParam("roomId") String roomId) {
 		ActionResult<List<ActionListOnDayByRoomID.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -604,7 +604,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示等待我确认的会议.", action = ActionWaitConfirm.class)
+	@JaxrsMethodDescribe(value = "내 확인을 기다리는 회의 목록 조회.", action = ActionWaitConfirm.class)
 	@GET
 	@Path("list/wait/confirm")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -621,7 +621,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "等待我确认是否参加的会议.", action = ActionWaitAccept.class)
+	@JaxrsMethodDescribe(value = "참석 여부 확인을 기다리는 회의.", action = ActionWaitAccept.class)
 	@GET
 	@Path("list/wait/accept")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -638,7 +638,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我申请的还未开始的会议.", action = ActionAppliedWait.class)
+	@JaxrsMethodDescribe(value = "내가 신청한 아직 시작되지 않은 회의 목록 조회.", action = ActionAppliedWait.class)
 	@GET
 	@Path("list/applied/wait")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -655,7 +655,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我申请的正在进行中的会议.", action = ActionAppliedProcessing.class)
+	@JaxrsMethodDescribe(value = "내가 신청한 진행 중인 회의 목록 조회.", action = ActionAppliedProcessing.class)
 	@GET
 	@Path("list/applied/processing")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -673,7 +673,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我申请的已经结束的会议.", action = ActionAppliedCompleted.class)
+	@JaxrsMethodDescribe(value = "내가 신청한 종료된 회의 목록 조회.", action = ActionAppliedCompleted.class)
 	@GET
 	@Path("list/applied/completed")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -691,7 +691,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我受到邀请的还未开始的会议.", action = ActionInvitedWait.class)
+	@JaxrsMethodDescribe(value = "내가 초대받은 아직 시작되지 않은 회의 목록 조회.", action = ActionInvitedWait.class)
 	@GET
 	@Path("list/invited/wait")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -708,7 +708,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我受到邀请的正在进行中的会议.", action = ActionInvitedProcessing.class)
+	@JaxrsMethodDescribe(value = "내가 초대받은 진행 중인 회의 목록 조회.", action = ActionInvitedProcessing.class)
 	@GET
 	@Path("list/invited/processing")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -726,7 +726,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我受到邀请的已结束的会议.", action = ActionInvitedCompleted.class)
+	@JaxrsMethodDescribe(value = "내가 초대받은 종료된 회의 목록 조회.", action = ActionInvitedCompleted.class)
 	@GET
 	@Path("list/invited/completed")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -743,7 +743,7 @@ public class MeetingAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我受到邀请的已经拒绝的会议.", action = ActionInvitedRejected.class)
+	@JaxrsMethodDescribe(value = "내가 초대받아 거절한 회의 목록 조회.", action = ActionInvitedRejected.class)
 	@GET
 	@Path("list/invited/rejected")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

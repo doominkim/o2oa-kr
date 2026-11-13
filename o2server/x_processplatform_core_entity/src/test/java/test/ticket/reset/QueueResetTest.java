@@ -20,7 +20,7 @@ class QueueResetTest {
 
  
 
-	@DisplayName("A前加签EFG,EFG任意处理")
+	@DisplayName("A 앞에 EFG 추가 결재, EFG 임의 처리")
 	@Test
 	@Order(1)
 	void test01() {

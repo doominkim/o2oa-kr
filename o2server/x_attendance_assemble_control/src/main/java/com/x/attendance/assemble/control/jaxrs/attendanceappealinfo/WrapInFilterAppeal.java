@@ -23,7 +23,7 @@ public class WrapInFilterAppeal extends GsonPropertyObject {
 	
 	private String recordDateString;
 	
-	//审批状态:0-待处理，1-审批通过，-1-审批不能过，2-需要下一次审批
+	//승인 상태: 0-처리 대기, 1-승인, -1-반려, 2-다음 승인 필요
 	private int status = 999;
 	
 	private String appealReason;

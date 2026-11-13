@@ -15,7 +15,7 @@ import java.util.Date;
  * Created by fancyLou on 2023/3/2.
  * Copyright © 2023 O2. All rights reserved.
  */
-@Schema(name = "AttendanceV2AlertMessage", description = "考勤提醒消息对象.")
+@Schema(name = "AttendanceV2AlertMessage", description = "근태 알림 메시지 객체.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2AlertMessage.table, indexes = {
@@ -43,7 +43,7 @@ public class AttendanceV2AlertMessage extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -52,27 +52,27 @@ public class AttendanceV2AlertMessage extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
 
     public static final String userId_FIELDNAME = "userId";
-    @FieldDescribe("用户标识")
+    @FieldDescribe("사용자 식별자")
     @Column(length = length_96B, name = ColumnNamePrefix + userId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String userId;
 
 
     public static final String sendDateTime_FIELDNAME = "sendDateTime";
-    @FieldDescribe("消息发送时间.")
+    @FieldDescribe("메시지 발송 시간.")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = ColumnNamePrefix + sendDateTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
@@ -81,14 +81,14 @@ public class AttendanceV2AlertMessage extends SliceJpaObject {
 
 
     public static final String checkInType_FIELDNAME = "checkInType";
-    @FieldDescribe("考勤类型: OnDuty|OffDuty")
+    @FieldDescribe("근태 유형: OnDuty|OffDuty")
     @Column(length = length_16B, name = ColumnNamePrefix + checkInType_FIELDNAME)
     private String checkInType;
 
 
-    // 每天早上检查 发送消息提醒
+    // 매일 아침 확인 후 알림 메시지 발송
     public static final String sendStatus_FIELDNAME = "sendStatus";
-    @FieldDescribe("是否已经发送消息")
+    @FieldDescribe("메시지 발송 여부")
     @Column(name = ColumnNamePrefix + sendStatus_FIELDNAME)
     private Boolean sendStatus = false;
 

@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 
-@Schema(name = "AttendanceV2WorkPlace", description = "考勤工作场所配置.")
+@Schema(name = "AttendanceV2WorkPlace", description = "근태 근무지 설정.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2WorkPlace.table, uniqueConstraints = {
@@ -32,7 +32,7 @@ public class AttendanceV2WorkPlace extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -41,73 +41,73 @@ public class AttendanceV2WorkPlace extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String placeName_FIELDNAME = "placeName";
-	@FieldDescribe("场所名称")
+	@FieldDescribe("장소 이름")
 	@Column(name = ColumnNamePrefix
                    + placeName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String placeName = "";
 
 	public static final String placeAlias_FIELDNAME = "placeAlias";
-	@FieldDescribe("场所别名")
+	@FieldDescribe("근무지 별칭")
 	@Column(name = ColumnNamePrefix
                    + placeAlias_FIELDNAME)
 	private String placeAlias = "";
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("创建人")
+	@FieldDescribe("생성자")
 	@Column(name = ColumnNamePrefix
                    + creator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator = "";
 
 
-	public static final String POSITION_TYPE_BAIDU = "baidu"; // 百度地图
-	public static final String POSITION_TYPE_AMAP = "amap"; // 高德地图
-	public static final String POSITION_TYPE_TX = "tx"; // 腾讯地图
+	public static final String POSITION_TYPE_BAIDU = "baidu"; // 바이두 지도
+	public static final String POSITION_TYPE_AMAP = "amap"; // 가오더 지도
+	public static final String POSITION_TYPE_TX = "tx"; // 텐센트 지도
 	public static final String positionType_FIELDNAME = "positionType";
-	@FieldDescribe("坐标类型，百度、高德、腾讯")
+	@FieldDescribe("좌표 유형, 바이두, 가오더, 텐센트")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + positionType_FIELDNAME)
 	private String positionType = POSITION_TYPE_BAIDU;
 
 	public static final String longitude_FIELDNAME = "longitude";
-	@FieldDescribe("经度")
+	@FieldDescribe("경도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + longitude_FIELDNAME)
 	private String longitude = null;
 
 	public static final String latitude_FIELDNAME = "latitude";
-	@FieldDescribe("纬度")
+	@FieldDescribe("위도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + latitude_FIELDNAME)
 	private String latitude = null;
 
 	public static final String gpsLng_FIELDNAME = "gpsLng";
-	@FieldDescribe("经度, gps")
+	@FieldDescribe("경도, gps")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + gpsLng_FIELDNAME)
 	private String gpsLng = null;
 
 	public static final String gpsLat_FIELDNAME = "gpsLat";
-	@FieldDescribe("纬度, gps")
+	@FieldDescribe("위도, gps")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + gpsLat_FIELDNAME)
 	private String gpsLat = null;
 
 	public static final String errorRange_FIELDNAME = "errorRange";
-	@FieldDescribe("误差范围")
+	@FieldDescribe("오차 범위")
 	@Column(name = ColumnNamePrefix + errorRange_FIELDNAME)
 	private Integer errorRange = 200;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明备注")
+	@FieldDescribe("비고")
 	@Column(name = ColumnNamePrefix + description_FIELDNAME)
 	private String description = null;
 

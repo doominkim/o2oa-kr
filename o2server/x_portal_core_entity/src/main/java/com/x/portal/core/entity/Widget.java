@@ -29,7 +29,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Objects;
 
-@Schema(name = "Widget", description = "门户组件.")
+@Schema(name = "Widget", description = "포털 컴포넌트.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Widget.table, uniqueConstraints = {
@@ -51,18 +51,18 @@ public class Widget extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     public void onPersist() throws Exception {
     }
 
-    /* flag标志位 */
-    /* Entity 默认字段结束 */
+    /* flag 플래그 비트 */
+    /* Entity 기본 필드 끝 */
 
     public String getDataOrMobileData() {
         if (StringUtils.isNotEmpty(this.getData())) {
@@ -84,41 +84,41 @@ public class Widget extends SliceJpaObject {
 
     public static final String name_FIELDNAME = "name";
     @RestrictFlag
-    @FieldDescribe("名称.")
+    @FieldDescribe("이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
     @CheckPersist(allowEmpty = false, simplyString = true, citationNotExists =
-    /* 检查在同一Portal下不能重名 */
+    /* 동일 Portal 내 이름 중복 불가 확인 */
     @CitationNotExist(fields = { "name", "id",
             "alias" }, type = Widget.class, equals = @Equal(property = "portal", field = "portal")))
     private String name;
 
     public static final String alias_FIELDNAME = "alias";
     @RestrictFlag
-    @FieldDescribe("别名.")
+    @FieldDescribe("별칭.")
     @Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + alias_FIELDNAME)
     @CheckPersist(allowEmpty = true, simplyString = true, citationNotExists =
-    /* 检查在同一应用下不能重名 */
+    /* 같은 앱 안에서 이름 중복 불가 확인 */
     @CitationNotExist(fields = { "name", "id",
             "alias" }, type = Widget.class, equals = @Equal(property = "portal", field = "portal")))
     private String alias;
 
     public static final String category_FIELDNAME = "category";
-    @FieldDescribe("分类")
+    @FieldDescribe("분류")
     @Column(length = length_255B, name = ColumnNamePrefix + category_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + category_FIELDNAME)
     @CheckPersist(allowEmpty = true, simplyString = false)
     private String category;
 
     public static final String description_FIELDNAME = "description";
-    @FieldDescribe("描述.")
+    @FieldDescribe("설명.")
     @Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String description;
 
     public static final String portal_FIELDNAME = "portal";
-    @FieldDescribe("所属的Portal.")
+    @FieldDescribe("소속 Portal.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + portal_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + portal_FIELDNAME)
     @CheckPersist(allowEmpty = false, citationExists = @CitationExist(type = Portal.class, fields = JpaObject.id_FIELDNAME))
@@ -126,7 +126,7 @@ public class Widget extends SliceJpaObject {
     private String portal;
 
     public static final String data_FIELDNAME = "data";
-    @FieldDescribe("文本内容.")
+    @FieldDescribe("텍스트 내용.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
@@ -134,7 +134,7 @@ public class Widget extends SliceJpaObject {
     private String data;
 
     public static final String mobileData_FIELDNAME = "mobileData";
-    @FieldDescribe("移动端文本内容.")
+    @FieldDescribe("모바일 텍스트 내용.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + mobileData_FIELDNAME)
@@ -142,7 +142,7 @@ public class Widget extends SliceJpaObject {
     private String mobileData;
 
     public static final String hasMobile_FIELDNAME = "hasMobile";
-    @FieldDescribe("是否有移动端内容.")
+    @FieldDescribe("모바일 내용 존재 여부.")
     @Column(name = ColumnNamePrefix + hasMobile_FIELDNAME)
     private Boolean hasMobile;
 

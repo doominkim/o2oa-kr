@@ -1,4 +1,4 @@
-/* 所有表单和页面的主容器 */
+/* 모든 양식과 페이지의 메인 컨테이너 */
 .form-layout {
     height: 100%;
     /* overflow: auto; */
@@ -467,7 +467,7 @@
     display: none;
 }
 
-/* 手机 */
+/* 휴대폰 */
 @media only screen and (max-width: 767px) {
     .form-layout .index-content-bottom {
         grid-template-columns: 0 1fr;
@@ -552,7 +552,7 @@
     }
 }
 
-/* 平板电脑 */
+/* 태블릿 */
 @media only screen and (min-width: 768px) and (max-width: 1279px) {
     .form-layout .index-content-bottom {
         grid-template-columns: 0 1fr;
@@ -560,6 +560,6 @@
     }
 }
 
-/* 桌面电脑 */
+/* 데스크톱 */
 @media only screen and (min-width: 1280px) {
 }

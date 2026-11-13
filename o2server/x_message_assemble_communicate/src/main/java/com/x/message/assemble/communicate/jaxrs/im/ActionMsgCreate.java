@@ -48,13 +48,13 @@ public class ActionMsgCreate extends BaseAction {
 				throw new ExceptionMsgEmptyBody();
 			}
 			msg.setCreatePerson(effectivePerson.getDistinguishedName());
-			escapeHTML(msg); // 清除可执行的代码
+			escapeHTML(msg); // 실행 가능한 코드 제거
 			msg.setCreateTime(new Date());
 			LOGGER.info("escape html json:" + msg.getBody());
 			emc.beginTransaction(IMMsg.class);
 			emc.persist(msg, CheckPersistType.all);
 			emc.commit();
-			// 更新会话最后消息时间
+			// 대화 마지막 메시지 시간 업데이트
 			emc.beginTransaction(IMConversation.class);
 			IMConversation conversation = emc.find(msg.getConversationId(), IMConversation.class);
 			if (conversation == null) {
@@ -63,10 +63,10 @@ public class ActionMsgCreate extends BaseAction {
 			conversation.setLastMessageTime(new Date());
 			emc.check(conversation, CheckPersistType.all);
 			emc.commit();
-			if (conversation.getType().equals(CONVERSATION_TYPE_SINGLE)) { // 单聊才有这种情况
+			if (conversation.getType().equals(CONVERSATION_TYPE_SINGLE)) { // 1:1 채팅에만 해당
 				for (int i = 0; i < conversation.getPersonList().size(); i++) {
 					String person = conversation.getPersonList().get(i);
-					// 更新会话扩展 如果已经删除的 有新消息就改为未删除
+					// 대화 확장 업데이트. 이미 삭제된 경우 새 메시지가 있으면 미삭제로 변경
 					Business business = new Business(emc);
 					IMConversationExt ext = business.imConversationFactory()
 							.getConversationExt(person, msg.getConversationId());
@@ -79,7 +79,7 @@ public class ActionMsgCreate extends BaseAction {
 				}
 			}
 
-			// 发送ws消息
+			// ws 메시지 발송
 			sendWsMessage(conversation, msg, MessageConnector.TYPE_IM_CREATE, effectivePerson);
 
 			ActionResult<Wo> result = new ActionResult<>();
@@ -101,7 +101,7 @@ public class ActionMsgCreate extends BaseAction {
 			body.setBody(msgBodyEscape);
 			msg.setBody(gson.toJson(body));
 		}
-		// 特殊处理 fileId 字段
+		// fileId 필드 특수 처리
 		if (StringUtils.isNotEmpty(body.getFileId())) {
 			msg.setBodyFileId(body.getFileId());
 		}
@@ -117,7 +117,7 @@ public class ActionMsgCreate extends BaseAction {
 
 	public static class IMMessageBody {
 		/**
-		 * text emoji image audio location file 20220315新增 process cms
+		 * text emoji image audio location file 20220315 추가 process cms
 		 */
 		private String type;
 		private String body;

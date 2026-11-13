@@ -7,6 +7,6 @@ class ExceptionJsonError extends LanguagePromptException {
 	private static final long serialVersionUID = 6084637626229970254L;
 
 	ExceptionJsonError() {
-		super("内容为非法json格式.");
+		super("내용이 올바른 json 형식이 아닙니다.");
 	}
 }

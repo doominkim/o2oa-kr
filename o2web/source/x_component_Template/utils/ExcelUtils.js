@@ -46,17 +46,17 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
     },
     _openDownloadDialog: function(url, saveName, callback){
         /**
-         * 通用的打开下载对话框方法，没有测试过具体兼容性
-         * @param url 下载地址，也可以是一个blob对象，必选
-         * @param saveName 保存文件名，可选
+         * 다운로드 대화상자를 여는 공통 메서드, 구체적인 호환성은 테스트하지 않음
+         * @param url 다운로드 주소, blob 객체도 가능, 필수
+         * @param saveName 저장 파일 이름, 선택
          */
         if( Browser.name !== 'ie' ){
             if(typeof url == 'object' && url instanceof Blob){
-                url = URL.createObjectURL(url); // 创建blob地址
+                url = URL.createObjectURL(url); // blob 주소 생성
             }
             var aLink = document.createElement('a');
             aLink.href = url;
-            aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+            aLink.download = saveName || ''; // HTML5에 새로 추가된 속성으로 저장 파일 이름 지정, 확장자는 생략 가능, 주의: file:/// 모드에서는 적용되지 않음
             var event;
             if(window.MouseEvent && typeOf( window.MouseEvent ) == "function" ) event = new MouseEvent('click');
             else
@@ -76,7 +76,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
         if (index < 0) {
             return null;
         }
-        var num = 65;// A的Unicode码
+        var num = 65;// A의 Unicode 코드
         var colName = "";
         do {
             if (colName.length > 0)index--;
@@ -108,9 +108,9 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
                 // 	return false;
                 // }
 
-                //第三个参数是日期的列
+                //세 번째 인수는 날짜 열
                 this.importFromExcel( file, function(json){
-                    //json为导入的结果
+                    //json은 가져오기 결과
                     if(callback)callback(json);
                     uploadFileAreaNode.destroy();
                 }.bind(this), dateColArray ); //["E","F"]
@@ -135,10 +135,10 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
         }
     },
     exportToExcel : function(array_arg, fileName_arg, colWidthArr_arg, dateIndexArray_arg, numberIndexArray_arg, callback){
-        // var array = [["姓名","性别","学历","专业","出生日期","毕业日期"]];
-        // array.push([ "张三","男","大学本科","计算机","2001-1-2","2019-9-2" ]);
-        // array.push([ "李四","男","大学专科","数学","1998-1-2","2018-9-2" ]);
-        // this.exportToExcel(array, "导出数据"+(new Date).format("db"));
+        // var array = [["이름","성별","학력","전공","생년월일","졸업일"]];
+        // array.push([ "홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ]);
+        // array.push([ "김철수","남","전문대학","수학","1998-1-2","2018-9-2" ]);
+        // this.exportToExcel(array, "내보내기 데이터"+(new Date).format("db"));
         if( !MWF.xApplication.Template.LP ){
             MWF.xDesktop.requireApp("Template", "lp." + MWF.language, null, false);
         }
@@ -221,7 +221,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
             offsetRowIndex++;
         }
 
-        //处理表头分类
+        //헤더 분류 처리
         var titleDataParsed = [];
         var maxTitleLevel = 1;
         titleArray.each(function (title, i){
@@ -361,7 +361,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
     },
     setDataValidation: function (workbook, dataSheet, titleArray, offsetColumnIndex, offsetRowIndex){
         var validationSheet = workbook.addWorksheet('Validation');
-        validationSheet.state = 'hidden'; //hidden 隐藏   veryHidden 从“隐藏/取消隐藏”对话框中隐藏工作表
+        validationSheet.state = 'hidden'; //hidden 숨김   veryHidden “숨기기/숨기기 취소” 대화 상자에서도 워크시트 숨김
 
         var colIndex = 0;
         titleArray.each(function(title, i){
@@ -380,7 +380,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
                 allowBlank: true,
                 showErrorMessage: true,
                 showInputMessage: false,
-                formulae: ['=Validation!$'+colName+'$1:$'+colName+'$'+optionsArray.length], // 这里引用Validation Sheet的内容 '=Validation!A1:A3'
+                formulae: ['=Validation!$'+colName+'$1:$'+colName+'$'+optionsArray.length], // 여기서 Validation Sheet의 내용을 참조 '=Validation!A1:A3'
                 //formulae: ['"'+optionsArray.join(",")+'"'],
                 promptTitle: MWF.xApplication.Template.LP.excelUtils.promptTitle,
                 prompt: MWF.xApplication.Template.LP.excelUtils.prompt,
@@ -396,19 +396,19 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
         }.bind(this));
     },
     // exportToExcel2: function(array, fileName, colWidthArr, dateIndexArray, numberIndexArray, callback){
-    //     // var array = [["姓名","性别","学历","专业","出生日期","毕业日期"]];
-    //     // array.push([ "张三","男","大学本科","计算机","2001-1-2","2019-9-2" ]);
-    //     // array.push([ "李四","男","大学专科","数学","1998-1-2","2018-9-2" ]);
-    //     // this.exportToExcel(array, "导出数据"+(new Date).format("db"));
+    //     // var array = [["이름","성별","학력","전공","생년월일","졸업일"]];
+    //     // array.push([ "홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ]);
+    //     // array.push([ "김철수","남","전문대학","수학","1998-1-2","2018-9-2" ]);
+    //     // this.exportToExcel(array, "내보내기 데이터"+(new Date).format("db"));
     //     this._loadExportResource( function(){
-    //         var data = window.xlsxUtils.format2Sheet(array, 0, 0, null);//偏移3行按keyMap顺序转换
+    //         var data = window.xlsxUtils.format2Sheet(array, 0, 0, null);//3행 오프셋, keyMap 순서로 변환
     //         var wb = window.xlsxUtils.format2WB(data, "sheet1", undefined);
     //         var wopts = { bookType: 'xlsx', bookSST: false, type: 'binary' };
     //         debugger;
     //         var dataInfo = wb.Sheets[wb.SheetNames[0]];
     //
     //         var widthArray = [];
-    //         array[0].each( function( v, i ){ //设置标题行样式
+    //         array[0].each( function( v, i ){ //제목 행 스타일 설정
     //
     //             if( !colWidthArr )widthArray.push( {wpx: 100} );
     //
@@ -417,7 +417,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
     //             var di = dataInfo[at+"1"];
     //             // di.v = v;
     //             // di.t = "s";
-    //             di.s = {  //设置副标题样式
+    //             di.s = {  //부제목 스타일 설정
     //                 font: {
     //                     //name: 'Malgun Gothic',
     //                     sz: 12,
@@ -448,7 +448,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
     //         var typeFlag = ( dateIndexArray && dateIndexArray.length ) || ( numberIndexArray && numberIndexArray.length );
     //
     //         for( var key in dataInfo ){
-    //             //设置所有样式，wrapText=true 后 /n会被换行
+    //             //모든 스타일 설정, wrapText=true이면 /n에서 줄바꿈
     //             if( key.substr(0, 1) !== "!" ){
     //                 var di = dataInfo[key];
     //                 if( !di.s )di.s = {};
@@ -457,17 +457,17 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
     //
     //                 if( typeFlag ){
     //
-    //                     var colName = key.replace(/\d+/g,''); //清除数字
+    //                     var colName = key.replace(/\d+/g,''); //숫자 제거
     //                     var rowNum = key.replace( colName, '');
     //
     //                     if( rowNum > 1 ){
     //                         if( dateIndexArray && dateIndexArray.length && dateIndexArray.contains( colName ) ){
-    //                             //di.s.numFmt = "yyyy-mm-dd HH:MM:SS"; //日期列 两种方式都可以
-    //                             di.z = 'yyyy-mm-dd HH:MM:SS'; //日期列
+    //                             //di.s.numFmt = "yyyy-mm-dd HH:MM:SS"; //날짜 열, 두 방식 모두 가능
+    //                             di.z = 'yyyy-mm-dd HH:MM:SS'; //날짜 열
     //                         }
     //                         if( numberIndexArray && numberIndexArray.length && numberIndexArray.contains( colName ) ){
     //                             di.s.alignment.wrapText = false;
-    //                             di.t = 'n'; //数字类型
+    //                             di.t = 'n'; //숫자 유형
     //                         }
     //                     }
     //
@@ -481,7 +481,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
     //                 widthArray.push( {wpx: w} );
     //             })
     //         }
-    //         dataInfo['!cols'] = widthArray; //列宽度
+    //         dataInfo['!cols'] = widthArray; //열 너비
     //
     //         this._openDownloadDialog(window.xlsxUtils.format2Blob(wb), fileName +".xlsx", callback);
     //     }.bind(this))
@@ -519,8 +519,8 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
                     cellDates:true,
                     dateNF:'yyyy-mm-dd HH:mm:ss'
                 });
-                //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
-                //wb.Sheets[Sheet名]获取第一个Sheet的数据
+                //wb.SheetNames[0]은 Sheets 중 첫 번째 Sheet의 이름
+                //wb.Sheets[Sheet 이름]으로 첫 번째 Sheet의 데이터 조회
                 var sheet = workbook.SheetNames[0];
                 if (workbook.Sheets.hasOwnProperty(sheet)) {
                     var worksheet = workbook.Sheets[sheet];
@@ -556,7 +556,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
 
                     var json = window.XLSX.utils.sheet_to_json( worksheet, opt );
                     if(callback)callback(json);
-                    // break; // 如果只取第一张表，就取消注释这行
+                    // break; // 첫 번째 시트만 가져오려면 이 줄의 주석을 해제
                 }
             };
             reader.readAsBinaryString(file);

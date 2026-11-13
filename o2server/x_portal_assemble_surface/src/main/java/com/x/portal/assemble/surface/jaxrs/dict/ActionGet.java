@@ -57,8 +57,8 @@ class ActionGet extends BaseAction {
 		static WrapCopier<ApplicationDict, Wo> copier = WrapCopierFactory.wo(ApplicationDict.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("字典数据.")
-		@Schema(description = "字典数据.")
+		@FieldDescribe("사전 데이터.")
+		@Schema(description = "사전 데이터.")
 		private JsonElement data;
 
 		public JsonElement getData() {

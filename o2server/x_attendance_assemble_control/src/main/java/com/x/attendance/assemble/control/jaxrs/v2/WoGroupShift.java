@@ -12,10 +12,10 @@ public class WoGroupShift extends GsonPropertyObject {
 
   private static final long serialVersionUID = -3655619888886551679L;
 
-  @FieldDescribe("考勤组对象")
+  @FieldDescribe("근태 그룹 객체")
   private WoGroup group;
 
-  @FieldDescribe("班次对象")
+  @FieldDescribe("근무조 객체")
   private WoShift shift;
 
   public WoGroup getGroup() {

@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 class ActionDeleteDocIndex extends BaseAction {
 	private static final Logger logger = LoggerFactory.getLogger(ActionDeleteDocIndex.class);
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String id) throws Exception {
-		logger.info("{}操作删除索引文档:{}",effectivePerson.getDistinguishedName(), id);
+		logger.info("{} 작업으로 인덱스 문서 삭제: {}",effectivePerson.getDistinguishedName(), id);
 		if (effectivePerson.isNotManager()) {
 			throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());
 		}
@@ -26,7 +26,7 @@ class ActionDeleteDocIndex extends BaseAction {
 		if (BooleanUtils.isNotTrue(aiConfig.getO2AiEnable())
 				|| StringUtils.isBlank(aiConfig.getO2AiToken()) && StringUtils.isBlank(
 				aiConfig.getO2AiBaseUrl())) {
-			throw new ExceptionCustom("请启用o2 AI智能体，并设置相关参数.");
+			throw new ExceptionCustom("o2 AI 에이전트를 활성화하고 관련 매개변수를 설정하십시오.");
 		}
 		ActionResult<Wo> result = new ActionResult<>();
 		List<NameValuePair> heads = List.of(

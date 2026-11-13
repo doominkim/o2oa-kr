@@ -7,6 +7,6 @@ public class ExceptionBindUserNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionBindUserNameEmpty() {
-		super("绑定人员姓名为空， 无法进行查询." );
+		super("연결된 사용자 이름이 비어 있어 조회할 수 없습니다." );
 	}
 }

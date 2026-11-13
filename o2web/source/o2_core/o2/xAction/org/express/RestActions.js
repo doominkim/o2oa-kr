@@ -7,7 +7,7 @@ MWF.xAction.org.express.RestActions = new Class({
 	initialize: function(){
 		this.action = new MWF.xDesktop.Actions.RestActions("/Actions/action.json", "x_organization_assemble_express", "x_component_Selector");
 	},
-    //公司---------------------------------------------------------------
+    //회사---------------------------------------------------------------
     getSupCompanyDirect: function(success, failure, name, async){
         this.action.invoke({"name": "getSupCompanyDirect","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -46,7 +46,7 @@ MWF.xAction.org.express.RestActions = new Class({
     },
     //-------------------------------------------------------------------
 
-    //公司属性------------------------------------------------------------
+    //회사 속성------------------------------------------------------------
     listCompanyAttribute: function(success, failure, name, async){
         this.action.invoke({"name": "listCompanyAttribute","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -55,7 +55,7 @@ MWF.xAction.org.express.RestActions = new Class({
     },
     //-------------------------------------------------------------------
 
-    //公司职务------------------------------------------------------------
+    //회사 직무------------------------------------------------------------
     listCompanyDuty: function(success, failure, name, async){
         this.action.invoke({"name": "listCompanyDuty","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -71,7 +71,7 @@ MWF.xAction.org.express.RestActions = new Class({
         this.action.invoke({"name": "listSubComplexDirect","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
 
-    //部门---------------------------------------------------------------
+    //부서---------------------------------------------------------------
     getSupDepartmentDirect: function(success, failure, name, async){
         this.action.invoke({"name": "getSupDepartmentDirect","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -108,7 +108,7 @@ MWF.xAction.org.express.RestActions = new Class({
     },
     //-------------------------------------------------------------------
 
-    //部门属性------------------------------------------------------------
+    //부서 속성------------------------------------------------------------
     listDepartmentAttribute: function(success, failure, name, async){
         this.action.invoke({"name": "listDepartmentAttribute","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -118,7 +118,7 @@ MWF.xAction.org.express.RestActions = new Class({
 
     //-------------------------------------------------------------------
 
-    //部门职务------------------------------------------------------------
+    //부서 직무------------------------------------------------------------
     listDepartmentDuty: function(success, failure, name, async){
         this.action.invoke({"name": "listDepartmentDuty","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -130,7 +130,7 @@ MWF.xAction.org.express.RestActions = new Class({
     },
     //-------------------------------------------------------------------
 
-    //身份---------------------------------------------------------------
+    //신분---------------------------------------------------------------
     listIdentityByKeyFromRange: function(success, failure, name, async){
         this.action.invoke({"name": "listIdentityByKeyFromRange","async": async, "parameter": {"key": key},	"success": success,	"failure": failure});
     },
@@ -158,7 +158,7 @@ MWF.xAction.org.express.RestActions = new Class({
     //-------------------------------------------------------------------
 
 
-    //群组---------------------------------------------------------------
+    //그룹---------------------------------------------------------------
     listGroupByPinyin: function(success, failure, key, async){
         this.action.invoke({"name": "listGroupByPinyin","async": async, "parameter": {"key": key},	"success": success,	"failure": failure});
     },
@@ -199,7 +199,7 @@ MWF.xAction.org.express.RestActions = new Class({
     //-------------------------------------------------------------------
 
 
-    //人员---------------------------------------------------------------
+    //사용자---------------------------------------------------------------
     getPersonByIdentity: function(success, failure, name, async){
         this.action.invoke({"name": "getPersonByIdentity","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -232,7 +232,7 @@ MWF.xAction.org.express.RestActions = new Class({
     },
     //-------------------------------------------------------------------
 
-    //人员属性------------------------------------------------------------
+    //사용자 속성------------------------------------------------------------
     listPersonAttribute: function(success, failure, name, async){
         this.action.invoke({"name": "listPersonAttribute","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },
@@ -241,7 +241,7 @@ MWF.xAction.org.express.RestActions = new Class({
     },
     //-------------------------------------------------------------------
 
-    //角色---------------------------------------------------------------
+    //역할---------------------------------------------------------------
     listRoleByGroup: function(success, failure, name, async){
         this.action.invoke({"name": "listRoleByGroup","async": async, "parameter": {"name": name},	"success": success,	"failure": failure});
     },

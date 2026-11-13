@@ -7,6 +7,6 @@ class ExceptionURLEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionURLEmpty() {
-		super("URL为空，无法进行查询操作。" );
+		super("URL이 비어 있어 조회할 수 없습니다." );
 	}
 }

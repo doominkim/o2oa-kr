@@ -25,16 +25,16 @@ class ActionListWithPerson extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private List<String> personList = new ArrayList<>();
 
-		@FieldDescribe("是否递归查询上级群组，默认true")
+		@FieldDescribe("상위 그룹 재귀 조회 여부, 기본값 true")
 		private Boolean recursiveGroupFlag = true;
 
-		@FieldDescribe("是否包含查找人员身份成员、人员归属组织成员的所属群组，默认false")
+		@FieldDescribe("사용자 신분 구성원·사용자 소속 조직 구성원이 속한 그룹 포함 여부, 기본값 false")
 		private Boolean referenceFlag = false;
 
-		@FieldDescribe("是否递归人员归属组织的上级组织所属群组，前提referenceFlag为true，默认false")
+		@FieldDescribe("사용자 소속 조직의 상위 조직이 속한 그룹 재귀 여부, referenceFlag가 true일 때만, 기본값 false")
 		private Boolean recursiveOrgFlag = false;
 
 		public List<String> getPersonList() {

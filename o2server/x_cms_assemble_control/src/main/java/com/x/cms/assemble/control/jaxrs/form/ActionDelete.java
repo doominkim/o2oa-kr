@@ -22,7 +22,7 @@ import com.x.cms.core.entity.element.ViewCategory;
 import com.x.cms.core.entity.element.ViewFieldConfig;
 
 /**
- * 删除表单
+ * 양식 삭제
  * @author sword
  */
 public class ActionDelete extends BaseAction {
@@ -40,7 +40,7 @@ public class ActionDelete extends BaseAction {
 			if (!business.isAppInfoManager( effectivePerson, appInfo)) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			List<String> viewIds = business.getViewFactory().listByFormId(id);
 			List<String> fieldConfigIds = null;
 			List<ViewFieldConfig> fieldConfigs = null;
@@ -61,25 +61,25 @@ public class ActionDelete extends BaseAction {
 					viewCategoryIds = business.getViewCategoryFactory().listByViewId( viewId );
 					viewCategorys = emc.list( ViewCategory.class, viewCategoryIds );
 //							business.getViewCategoryFactory().list( viewCategoryIds );
-					//删除该表单所对应的视图的所有列信息
+					//해당 양식에 대응하는 뷰의 모든 열 정보 삭제
 					if( fieldConfigs != null && !fieldConfigs.isEmpty() ){
 						for( ViewFieldConfig viewFieldConfig : fieldConfigs ){
 							emc.remove( viewFieldConfig, CheckRemoveType.all );
 						}
 					}
-					//删除该表单所对应的视图的所有分类视图关系
+					//해당 양식에 대응하는 뷰의 모든 분류-뷰 관계 삭제
 					if( viewCategorys != null && !viewCategorys.isEmpty() ){
 						for( ViewCategory viewCategory : viewCategorys ){
 							emc.remove( viewCategory, CheckRemoveType.all );
 						}
 					}
-					//删除该表单所对应的视图信息
+					//해당 양식에 대응하는 뷰 정보 삭제
 					if( view != null ){
 						emc.remove( view, CheckRemoveType.all );
 					}
 				}
 			}
-			if( form != null ){//最后删除表单信息
+			if( form != null ){//마지막으로 양식 정보 삭제
 				emc.remove( form, CheckRemoveType.all );
 				emc.commit();
 				logService.log( emc, effectivePerson.getDistinguishedName(), form.getName(), form.getAppId(), "", "", form.getId(), "FORM", "删除");

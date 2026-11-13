@@ -102,7 +102,7 @@ public class UnitFactory extends AbstractFactory {
 		os.addAll(this.listSubNestedObject(unit));
 		for (Unit o : os) {
 			List<Unit> list = this.listSupNestedObject(o);
-			/** 级别从1开始 */
+			/** 레벨은 1부터 시작 */
 			o.setLevel(list.size() + 1);
 			List<String> names = ListTools.extractProperty(list, Unit.name_FIELDNAME, String.class, false, false);
 			// Collections.reverse(names);
@@ -118,7 +118,7 @@ public class UnitFactory extends AbstractFactory {
 		}
 	}
 
-	/** 递归的上级组织,从底层到顶层 */
+	/** 재귀 상위 조직, 하위에서 최상위 순 */
 	public List<Unit> listSupNestedObject(Unit unit) throws Exception {
 		List<Unit> list = new ArrayList<>();
 		if (unit == null) {

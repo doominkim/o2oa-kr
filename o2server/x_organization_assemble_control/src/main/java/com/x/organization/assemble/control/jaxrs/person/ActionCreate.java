@@ -40,7 +40,7 @@ class ActionCreate extends BaseAction {
             Business business = new Business(emc);
             Person person = new Person();
             Wi.copier.copy(wi, person);
-            // 防止创建的时候加了空格
+            // 생성 시 공백이 추가되는 것 방지
             person.setName(StringUtils.trim(person.getName()));
             Unit unit = null;
             if(StringUtils.isNotEmpty(wi.getUnit())){
@@ -83,13 +83,13 @@ class ActionCreate extends BaseAction {
                 person.setSuperior(superior.getId());
             }
 
-            // 不设置默认头像,可以通过为空直接显示默认头像
+            // 기본 프로필 사진 미설정, 비어 있으면 기본 프로필 사진이 바로 표시됨
             if (StringUtils.isNotEmpty(wi.getPassword())) {
                 business.person().setPassword(person, wi.getPassword(), true);
             } else {
                 business.person().setPassword(person, this.initPassword(business, person), true);
             }
-            // 设置默认管理员
+            // 기본 관리자 설정
             this.convertControllerList(effectivePerson, business, person);
             emc.beginTransaction(Person.class);
             emc.persist(person, CheckPersistType.all);
@@ -98,7 +98,7 @@ class ActionCreate extends BaseAction {
             if(unit != null){
                 this.createIdentity(emc, person, unit);
             }
-            // 通知x_collect_service_transmit同步数据到collect
+            // x_collect_service_transmit에 collect로 데이터 동기화 알림
             business.instrument().collect().person();
 
             Wo wo = new Wo();
@@ -138,7 +138,7 @@ class ActionCreate extends BaseAction {
                         Person.changePasswordTime_FIELDNAME, Person.lastLoginTime_FIELDNAME,
                         Person.lastLoginAddress_FIELDNAME, Person.lastLoginClient_FIELDNAME));
 
-        @FieldDescribe("归属组织.")
+        @FieldDescribe("소속 조직.")
         private String unit;
 
         public String getUnit() {

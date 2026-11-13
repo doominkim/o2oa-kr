@@ -18,7 +18,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "BBSConfigSetting", description = "论坛配置.")
+@Schema(name = "BBSConfigSetting", description = "포럼 설정.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSConfigSetting.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class BBSConfigSetting extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -56,70 +56,70 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
     /*
      * =========================================================================
-     * ========= 以上为 JpaObject 默认字段
+     * ========= 위는 JpaObject 기본 필드
      * =========================================================================
      * =========
      */
 
     /*
      * =========================================================================
-     * ========= 以下为具体不同的业务及数据表字段要求
+     * ========= 아래는 업무별 데이터 테이블 필드 요구사항
      * =========================================================================
      * =========
      */
 
     public static final String configName_FIELDNAME = "configName";
-    @FieldDescribe("系统配置名称")
+    @FieldDescribe("시스템 설정 이름")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + configName_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String configName = null;
 
     public static final String configCode_FIELDNAME = "configCode";
-    @FieldDescribe("系统配置编码")
+    @FieldDescribe("시스템 설정 코드")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + configCode_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + configCode_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String configCode = null;
 
     public static final String configValue_FIELDNAME = "configValue";
-    @FieldDescribe("配置值")
+    @FieldDescribe("설정 값")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + configValue_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String configValue = null;
 
     public static final String valueType_FIELDNAME = "valueType";
-    @FieldDescribe("值类型: select | identity | number | date | text")
+    @FieldDescribe("값 유형: select | identity | number | date | text")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + valueType_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String valueType = null;
 
     public static final String selectContent_FIELDNAME = "selectContent";
-    @FieldDescribe("可选值，和select配合使用，以‘|’号分隔")
+    @FieldDescribe("선택 값, select와 함께 사용, ‘|’로 구분")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + selectContent_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String selectContent = "--无--";
 
     public static final String isMultiple_FIELDNAME = "isMultiple";
-    @FieldDescribe("是否可以多值")
+    @FieldDescribe("다중 값 허용 여부")
     @Column(name = ColumnNamePrefix + isMultiple_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private Boolean isMultiple = false;
 
     public static final String orderNumber_FIELDNAME = "orderNumber";
-    @FieldDescribe("排序号")
+    @FieldDescribe("정렬 번호")
     @Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private Integer orderNumber = 1;
 
     public static final String description_FIELDNAME = "description";
-    @FieldDescribe("备注说明")
+    @FieldDescribe("비고 설명")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String description = null;
 
     /**
-     * 获取配置名称
+     * 설정 이름 조회
      *
      * @return
      */
@@ -128,7 +128,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 设置配置名称
+     * 설정 이름 설정
      *
      * @param configName
      */
@@ -137,7 +137,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 获取配置编码
+     * 설정 코드 조회
      *
      * @return
      */
@@ -146,7 +146,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 设置配置编码
+     * 설정 코드 설정
      *
      * @param configCode
      */
@@ -155,7 +155,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 获取配置值
+     * 설정 값 조회
      *
      * @return
      */
@@ -164,7 +164,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 设置配置值
+     * 설정 값 설정
      *
      * @param configValue
      */
@@ -173,7 +173,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 获取排序号
+     * 정렬 번호 조회
      *
      * @return
      */
@@ -182,7 +182,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 设置排序号
+     * 정렬 번호 설정
      *
      * @param orderNumber
      */
@@ -191,7 +191,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 获取备注说明信息
+     * 비고 설명 정보 조회
      *
      * @return
      */
@@ -200,7 +200,7 @@ public class BBSConfigSetting extends SliceJpaObject {
     }
 
     /**
-     * 设置备注说明信息
+     * 비고 설명 정보 설정
      *
      * @param description
      */

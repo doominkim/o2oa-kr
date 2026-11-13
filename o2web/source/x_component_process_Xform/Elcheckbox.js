@@ -1,17 +1,17 @@
 MWF.xDesktop.requireApp("process.Xform", "Elradio", null, false);
-/** @class Elradio 基于Element UI的多选组件。
- * @o2cn 多选组件
+/** @class Elradio Element UI 기반 다중 선택 컴포넌트.
+ * @o2cn 다중 선택 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var radio = this.form.get("name"); //获取组件
- * //方法2
- * var radio = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var radio = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var radio = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.Elradio
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/checkbox|Element UI Checkbox 多选框}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/checkbox|Element UI Checkbox 체크박스}
  */
 MWF.xApplication.process.Xform.Elcheckbox = MWF.APPElcheckbox =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elcheckbox# */
@@ -20,40 +20,40 @@ MWF.xApplication.process.Xform.Elcheckbox = MWF.APPElcheckbox =  new Class(
     Extends: MWF.APPElradio,
     options: {
         /**
-         * 组件加载前触发。当前组件的queryLoad事件还没有在form里注册，通过this.form.get("fieldId")不能获取到当前组件，需要用this.target获取当前组件。
+         * 컴포넌트 로드 전 발생. 현재 컴포넌트의 queryLoad 이벤트 시점에는 form에 등록되지 않아 this.form.get("fieldId")로 가져올 수 없으며, this.target으로 현재 컴포넌트를 가져와야 함.
          * @event MWF.xApplication.process.Xform.Elcheckbox#queryLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 组件加载后触发。如果选项加载为异步，则异步处理完成后触发此事件
+         * 컴포넌트 로드 후 발생. 선택 항목 로드가 비동기이면 비동기 처리 완료 후 이 이벤트 발생
          * @event MWF.xApplication.process.Xform.Elcheckbox#load
          */
         /**
-         * 组件加载后触发.
+         * 컴포넌트 로드 후 발생.
          * @event MWF.xApplication.process.Xform.Elcheckbox#postLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "change"],
         /**
-         * 当绑定值变化时触发的事件。this.event[0]为更新后的值
+         * 바인딩 값이 변경될 때 발생하는 이벤트. this.event[0]은 갱신된 값
          * @event MWF.xApplication.process.Xform.Elcheckbox#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/checkbox|多选框的Checkbox Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/checkbox|체크박스의 Checkbox Events 장}
          */
         "elEvents": ["change"]
     },
     /**
-     * @summary 组件的配置信息，同时也是Vue组件的data。
+     * @summary 컴포넌트 설정 정보이자 Vue 컴포넌트의 data.
      * @member MWF.xApplication.process.Xform.Elradio#json {JsonObject}
      * @example
-     *  //可以在脚本中获取此对象，下面两行代码是等价的，它们获取的是同一个对象
-     * var json = this.form.get("elcheckbox").json;       //获取组件的json对象
-     * var json = this.form.get("elcheckbox").vm.$data;   //获取Vue组件的data数据，
+     *  //스크립트에서 이 객체를 가져올 수 있으며, 아래 두 줄의 코드는 동일한 객체를 가져옴
+     * var json = this.form.get("elcheckbox").json;       //컴포넌트의 json 객체 조회
+     * var json = this.form.get("elcheckbox").vm.$data;   //Vue 컴포넌트의 data 데이터 조회,
      *
-     * //通过json对象操作Element组件
-     * json.border = true;      //带边框的多选按钮
-     * json.size = "small";     //设置多选按钮大小，仅border为true时有效
-     * json.textColor = "#ff0000";  //设置按钮样式时，选中状态的文本颜色
-     * json.fillColor = "#ff0000";  //设置按钮样式时，选中状态的背景颜色
+     * //json 객체로 Element 컴포넌트 조작
+     * json.border = true;      //테두리 있는 체크박스 버튼
+     * json.size = "small";     //체크박스 버튼 크기 설정, border가 true일 때만 유효
+     * json.textColor = "#ff0000";  //버튼 스타일 설정 시 선택 상태의 텍스트 색상
+     * json.fillColor = "#ff0000";  //버튼 스타일 설정 시 선택 상태의 배경 색상
      */
     load: function(){
         this._loadModuleEvents();
@@ -299,7 +299,7 @@ MWF.xApplication.process.Xform.Elcheckbox = MWF.APPElcheckbox =  new Class(
         if (!this.vueApp) this.vueApp = this._createVueExtend(callback);
 
         /**
-         * @summary Vue对象实例
+         * @summary Vue 객체 인스턴스
          * @see https://vuejs.org/
          * @member {VueInstance}
          */
@@ -362,10 +362,10 @@ MWF.xApplication.process.Xform.Elcheckbox = MWF.APPElcheckbox =  new Class(
     },
 
     /**
-     * @summary 获取选中项的text。
-     * @return {String[]} 返回选中项的text数组
+     * @summary 선택 항목의 text 조회.
+     * @return {String[]} 선택 항목의 text 배열 반환
      * @example
-     * var texts = this.form.get('fieldId').getText(); //获取选中项的文本数组
+     * var texts = this.form.get('fieldId').getText(); //선택 항목의 텍스트 배열 조회
      */
     getText: function(){
         var d = this.getTextData();

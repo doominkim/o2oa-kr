@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Relatedlink 相关推荐组件，本组件根据其当前流程实例的相关性分数列式其他流程实例（带权限）。
- * @o2cn 相关推荐组件
+/** @class Relatedlink 관련 추천 컴포넌트, 현재 프로세스 인스턴스와의 관련성 점수에 따라 다른 프로세스 인스턴스를 나열(권한 포함).
+ * @o2cn 관련 추천 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var relatedlink = this.form.get("relatedlink"); //获取组件
- * //方法2
- * var relatedlink = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var relatedlink = this.form.get("relatedlink"); //컴포넌트 가져오기
+ * //방법 2
+ * var relatedlink = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @since v7.3
@@ -20,25 +20,25 @@ MWF.xApplication.process.Xform.Relatedlink = MWF.APPRelatedlink =  new Class(
     Extends: MWF.xApplication.process.Xform.$Module,
     options: {
         /**
-         * 加载数据后事件。
+         * 데이터 로드 후 이벤트.
          * @event MWF.xApplication.process.Xform.Relatedlink#postLoadData
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          * @example
-         * //触发该事件的时候可以获取到链接数据linkData
+         * //이 이벤트 발생 시 링크 데이터 linkData를 가져올 수 있음
          * var linkData = this.target.linkData;
-         * //可以修改linkData达到定制化链接数据的效果
+         * //linkData를 수정하여 링크 데이터를 맞춤화할 수 있음
          * do something
          */
         /**
-         * 创建每行需要导入的数据后触发，this.event指向当前链接对象。
+         * 가져올 각 행의 데이터를 생성한 후 발생, this.event는 현재 링크 객체를 가리킴.
          * @event MWF.xApplication.process.Xform.Relatedlink#postLoadLink
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          * @example
-         * <caption>this.event格式如下：</caption>
+         * <caption>this.event 형식은 다음과 같음:</caption>
          * {
          *  node: DomElement,
          *  data: {
-         *   "title", "标题一",
+         *   "title", "제목1",
          *    ...
          *  }
          * }
@@ -80,8 +80,8 @@ MWF.xApplication.process.Xform.Relatedlink = MWF.APPRelatedlink =  new Class(
         }).inject( this.node );
     },
     /**
-     * @summary 当相关推荐被设置为延迟激活，通过active方法激活
-     * @param {Function} callback 激活后的回调
+     * @summary 관련 추천이 지연 활성화로 설정된 경우 active 메서드로 활성화
+     * @param {Function} callback 활성화 후 콜백
      * @example
      * var relativeLink = this.form.get("fieldId");
      * relativeLink.active(function(){

@@ -57,7 +57,7 @@ class V2Retract extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			rec = emc.find(rec.getId(), Record.class);
 			emc.beginTransaction(Record.class);
-			// 写入撤回的已办标识
+			// 회수한 처리 완료 식별자 기록
 			rec.setRetractTaskCompleted(param.taskCompleted.getId());
 			emc.commit();
 		}
@@ -122,7 +122,7 @@ class V2Retract extends BaseAction {
 	private WorkLog findWorkLog(EffectivePerson effectivePerson, Business business, Work work) throws Exception {
 		WorkLogTree workLogTree = new WorkLogTree(
 				business.entityManagerContainer().listEqual(WorkLog.class, WorkLog.JOB_FIELDNAME, work.getJob()));
-		// 是否可以召回
+		// 회수 가능 여부
 		WorkLog workLog = null;
 		Node node = workLogTree.location(work);
 		if (null != node) {

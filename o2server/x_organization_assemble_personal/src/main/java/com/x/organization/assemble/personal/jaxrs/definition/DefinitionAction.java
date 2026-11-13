@@ -39,15 +39,15 @@ public class DefinitionAction extends StandardJaxrsAction {
 	private static Logger logger = LoggerFactory.getLogger(DefinitionAction.class);
 	private static final String OPERATIONID_PREFIX = "DefinitionAction::";
 
-	@Operation(summary = "访问当前用户指定名称的自定义数据.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "현재 사용자의 지정 이름 사용자 정의 데이터 접근.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = String.class)) }) })
-	@JaxrsMethodDescribe(value = "访问当前用户指定名称的自定义数据.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 지정 이름 사용자 정의 데이터 접근.", action = ActionGet.class)
 	@GET
 	@Path("{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<String> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -59,15 +59,15 @@ public class DefinitionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "访问当前用户获取自定义数据.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "현재 사용자의 사용자 정의 데이터 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = String.class)) }) })
-	@JaxrsMethodDescribe(value = "更新指定名称的Definition.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Definition 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name, String wi) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name, String wi) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -79,13 +79,13 @@ public class DefinitionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定名称的Definition MockPutToPost.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Definition 수정 MockPutToPost.", action = ActionEdit.class)
 	@POST
 	@Path("{name}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name, String wi) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name, String wi) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -97,13 +97,13 @@ public class DefinitionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定名称的Definition.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Definition 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -115,13 +115,13 @@ public class DefinitionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定名称的Definition MockDeleteToGet.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Definition 삭제 MockDeleteToGet.", action = ActionDelete.class)
 	@GET
 	@Path("{name}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -23,18 +23,18 @@ export default content({
         return {
             lp,
             defaultDate: new Date(),
-            appealEnable: false, // 读取配置文件 是否启用了申诉功能
+            appealEnable: false, // 설정 파일 읽기: 이의 신청 기능 사용 여부
             statistic: {},
             detailList: [],
             recordList: []
         };
     },
     async loadConfig() {
-        // 查询配置
+        // 쿼리 설정
         this.imConfig = await configAction("get");
         this.bind.appealEnable = (this.imConfig && this.imConfig.appealEnable && this.imConfig.processId)
     },
-    // 点击日历 日期
+    // 달력 날짜 클릭
     handleDateChange(e) {
         this.loadRecordListWithAppealData(e.detail.value)
     },
@@ -71,11 +71,11 @@ export default content({
         }
     },
 
-    // 日历显示切换
+    // 캘린더 표시 전환
     handleViewChange( e) {
         if (e && e.detail && e.detail.view === 'date') {
             const calendar = this.dom.querySelector('#mobileAttendanceCalendar');
-            // 清除小红点
+            // 빨간 점 지우기
             const els = calendar.querySelectorAll('.calendar-point');
             els.forEach(el=>el.destroy());
             this.bind.detailList = [];
@@ -93,9 +93,9 @@ export default content({
             startDate: startDate,
             endDate: endDate,
         };
-        // 统计数据
+        // 통계 데이터
         this.loadAttendanceStatistics(reqBody);
-        // 日历数据
+        // 캘린더 데이터
         const detailList = (await myAction("listDetailWithDate", reqBody));
         if (detailList && detailList.length > 0) {
             this.bind.detailList = detailList;
@@ -180,17 +180,17 @@ export default content({
         }
         return ''
     },
-    // 启动流程
+    // 프로세스 시작
     async startProcess(appeal) {
         if (this.bind.appealEnable ) {
-            // 检查是否能够申诉 有可能超过限制次数
+            // 이의 신청 가능 여부 확인(제한 횟수 초과 가능성)
             const checkResult = await appealInfoAction("startCheck", appeal.id);
             if (checkResult && this.imConfig.processId) {
                 const process = await processAction("get", this.imConfig.processId);
                 MWF.xDesktop.requireApp("process.TaskCenter", "ProcessStarter", function(){
                     const starter = new MWF.xApplication.process.TaskCenter.ProcessStarter(process, app, {
                         "latest" : false,
-                        "workData" : { "appealId": appeal.id, "record": appeal.record }, // 把id和打卡记录传给流程
+                        "workData" : { "appealId": appeal.id, "record": appeal.record }, // id와 출퇴근 기록을 프로세스로 전달
                         "onStarted": function(data, title, processName){
                             this._afterStartProcess(data, appeal.id);
                         }.bind(this)
@@ -202,7 +202,7 @@ export default content({
             o2.api.page.notice(lp.appeal.startProcessNoConfigError, 'error');
         }
     },
-    // 流程启动后 打开工作文档并更新数据
+    // 프로세스 시작 후 업무 문서를 열고 데이터 업데이트
     async _afterStartProcess(data, id){
         const currentTask = [];
         const jobIds = [];
@@ -212,28 +212,28 @@ export default content({
                 currentTask.push(work.taskList[work.currentTaskIndex].work);
             }
         });
-        // 更新数据
+        // 데이터 업데이트
         const body = {
             job: (jobIds[0] || "")
         };
         const json = await appealInfoAction("startProcess", id, body);
         console.debug('업데이트했습니다', json);
         this.refreshClickDateRecordList();
-        // 打开流程工作文档 移动端页面会跳转 最后再打开
+        // 프로세스 업무 문서 열기, 모바일 페이지는 이동하므로 마지막에 열기
         if (currentTask.length > 0){
             o2.api.page.openWork(currentTask[0]);
         }
     },
-    // 打开流程工作
+    // 프로세스 업무 문서 열기
     async openJob(jobId, id) {
         if (jobId) {
-            // 先查询 工作是否存在 有可能新建检查后待办工作已经删除
+            // 먼저 업무 문서 존재 여부 조회(생성 확인 후 결재 대기 업무 문서가 이미 삭제됐을 수 있음)
             const result = await jobAction("findWorkWorkCompleted", jobId);
             const workList = result.workList || [];
             const workCompletedList =  result.workCompletedList || [];
             if ((workList.length + workCompletedList.length) > 0 ) {
                 o2.api.page.openJob(jobId);
-            } else { // 没有 work  是否已经删除？
+            } else { // work 없음, 이미 삭제되었는지?
                 var _self = this;
                 o2.api.page.confirm(
                     "warn",
@@ -252,7 +252,7 @@ export default content({
             }
         }
     },
-    // 还原数据状态
+    // 데이터 상태 복원
     async resetStatus(id) {
         const json = await appealInfoAction("resetStatus", id);
         console.debug('상태를 복원했습니다', json);

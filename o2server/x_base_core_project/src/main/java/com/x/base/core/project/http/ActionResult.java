@@ -63,7 +63,7 @@ public class ActionResult<T> implements Serializable {
 	}
 
 	/**
-	 * 此方法不会抛出execption 与 ActionResponse 带类型的方法不同
+	 * 이 메서드는 execption을 던지지 않음, ActionResponse 타입 지정 메서드와 다름
 	 * 
 	 * @see ActionResponse
 	 * 

@@ -79,7 +79,7 @@ class ActionCover extends BaseAction {
 			appInfo.setAppAlias(this.idleAppInfoAlias(business, appInfo.getAppAlias(), appInfo.getId()));
 		}
 
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->start
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->start
 		AppInfoConfig appInfoConfig = business.entityManagerContainer().find(wi.getId(), AppInfoConfig.class);
 		if (null == appInfoConfig) {
 			appInfoConfig = new AppInfoConfig();
@@ -90,7 +90,7 @@ class ActionCover extends BaseAction {
 			appInfoConfig.setConfig( wi.getConfig() );
 			checkPersistObjects.add( appInfoConfig );
 		}
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->end
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->end
 
 		for (WrapForm _o : wi.getFormList() ) {
 			Form obj = business.entityManagerContainer().find( _o.getId(), Form.class );
@@ -156,7 +156,7 @@ class ActionCover extends BaseAction {
 			List<AppDictItem> list = converter.disassemble(_o.getData());
 			for (AppDictItem o : list) {
 				o.setBundle(obj.getId());
-				/** 将数据字典和数据存放在同一个分区 */
+				/** 데이터 사전과 데이터를 같은 파티션에 저장 */
 				o.setDistributeFactor(obj.getDistributeFactor());
 				o.setAppId(obj.getAppId());
 				persistObjects.add(o);
@@ -189,24 +189,24 @@ class ActionCover extends BaseAction {
 						CategoryInfo.class, categoryInfo.getId()));
 			}
 
-			//添加CategoryExt信息更新逻辑
+			//CategoryExt 정보 갱신 로직 추가
 			CategoryExt categoryExt = business.entityManagerContainer().find( categoryInfo.getId(), CategoryExt.class);
 			if (null != categoryInfo) {
 				if( wrapCategoryInfo.getCategoryExt() != null ){
 					if( categoryExt != null ){
-						//更新CategoryExt
+						//CategoryExt 갱신
 						wrapCategoryInfo.getCategoryExt().copyTo( categoryExt );
 						checkPersistObjects.add( categoryExt );
 					}else{
-						//原来就没有，需要添加一个
+						//원래 없으므로 새로 추가 필요
 						categoryExt = new CategoryExt();
 						wrapCategoryInfo.getCategoryExt().copyTo( categoryExt );
 						persistObjects.add( categoryInfo );
 					}
 				}else{
-					//需要删除CategoryExt
+					//CategoryExt 삭제 필요
 					if( categoryExt != null ){
-						//删除CategoryExt
+						//CategoryExt 삭제
 						removeObjects.add( categoryExt );
 					}
 				}
@@ -221,9 +221,9 @@ class ActionCover extends BaseAction {
 		business.entityManagerContainer().beginTransaction(AppDictItem.class);
 		business.entityManagerContainer().beginTransaction(CategoryInfo.class);
 		business.entityManagerContainer().beginTransaction(CategoryExt.class);
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->start
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->start
 		business.entityManagerContainer().beginTransaction(AppInfoConfig.class);
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->end
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->end
 
 		for (JpaObject o : removeObjects) {
 			business.entityManagerContainer().remove(o);
@@ -243,9 +243,9 @@ class ActionCover extends BaseAction {
 		CacheManager.notify(Form.class);
 		CacheManager.notify(Script.class);
 		CacheManager.notify(AppInfo.class);
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->start
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->start
 		CacheManager.notify(AppInfoConfig.class);
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->end
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->end
 
 		return appInfo;
 	}
@@ -303,7 +303,7 @@ class ActionCover extends BaseAction {
 	}
 
 	/**
-	 * 根据id 和 name属性，查询重复的对象，适用Dict、Form、Scrpt
+	 * id와 name 속성으로 중복 객체 조회, Dict·Form·Scrpt에 적용
 	 * @param business
 	 * @param id
 	 * @param name
@@ -339,7 +339,7 @@ class ActionCover extends BaseAction {
 	}
 
 	/**
-	 * 根据id 和 alias属性，查询重复的对象，适用Dict、Form、Scrpt
+	 * id와 alias 속성으로 중복 객체 조회, Dict·Form·Scrpt에 적용
 	 * @param business
 	 * @param id
 	 * @param alias
@@ -375,7 +375,7 @@ class ActionCover extends BaseAction {
 	}
 
 	/**
-	 * 根据id 和 name属性，查询重复的对象，适用CategoryInfo
+	 * id와 name 속성으로 중복 객체 조회, CategoryInfo에 적용
 	 * @param business
 	 * @param id
 	 * @param name
@@ -411,7 +411,7 @@ class ActionCover extends BaseAction {
 	}
 
 	/**
-	 * 根据id 和 alias属性，查询重复的对象，适用CategoryInfo
+	 * id와 alias 속성으로 중복 객체 조회, CategoryInfo에 적용
 	 * @param business
 	 * @param id
 	 * @param alias

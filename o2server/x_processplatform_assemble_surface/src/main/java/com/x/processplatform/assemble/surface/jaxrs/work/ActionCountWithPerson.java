@@ -89,7 +89,7 @@ class ActionCountWithPerson extends BaseAction {
 	private CompletableFuture<Long> taskCompletedFuture(String dn, String appId) {
 		return CompletableFuture.supplyAsync(() -> {
 			Long count = 0L;
-			// 已办仅取latest
+			// 처리 완료는 latest만 조회
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				EntityManager em;
 				em = emc.get(TaskCompleted.class);
@@ -165,20 +165,20 @@ class ActionCountWithPerson extends BaseAction {
 
 		private static final long serialVersionUID = -4391978436352777470L;
 
-		@FieldDescribe("待办数量.")
-		@Schema(description = "待办数量.")
+		@FieldDescribe("결재 대기 수량.")
+		@Schema(description = "결재 대기 수량.")
 		private Long task = 0L;
-		@FieldDescribe("已办数量.")
-		@Schema(description = "已办数量.")
+		@FieldDescribe("처리 완료 수량.")
+		@Schema(description = "처리 완료 수량.")
 		private Long taskCompleted = 0L;
-		@FieldDescribe("待阅数量.")
-		@Schema(description = "待阅数量.")
+		@FieldDescribe("열람 대기 수량.")
+		@Schema(description = "열람 대기 수량.")
 		private Long read = 0L;
-		@FieldDescribe("已阅数量.")
-		@Schema(description = "已阅数量.")
+		@FieldDescribe("열람 완료 수량.")
+		@Schema(description = "열람 완료 수량.")
 		private Long readCompleted = 0L;
-		@FieldDescribe("待阅数量.")
-		@Schema(description = "待阅数量.")
+		@FieldDescribe("열람 대기 수량.")
+		@Schema(description = "열람 대기 수량.")
 		private Long review = 0L;
 
 		public Long getTask() {

@@ -7,6 +7,6 @@ class ExceptionQywexinNotConfigured extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionQywexinNotConfigured() {
-		super("没有配置企业微信登录.");
+		super("WeCom 로그인이 설정되어 있지 않습니다.");
 	}
 }

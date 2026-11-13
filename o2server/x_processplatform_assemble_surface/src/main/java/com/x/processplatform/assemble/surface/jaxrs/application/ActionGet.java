@@ -58,8 +58,8 @@ class ActionGet extends BaseAction {
 		static WrapCopier<Application, Wo> copier = WrapCopierFactory.wo(Application.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("当前用户是否可以编辑此应用的列表界面.")
-		@Schema(description = "当前用户是否可以编辑此应用的列表界面.")
+		@FieldDescribe("현재 사용자가 이 앱의 목록 화면을 편집할 수 있는지 여부.")
+		@Schema(description = "현재 사용자가 이 앱의 목록 화면을 편집할 수 있는지 여부.")
 
 		private Boolean allowControl;
 

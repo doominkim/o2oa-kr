@@ -25,7 +25,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Room", description = "会议管理会议室.")
+@Schema(name = "Room", description = "회의 관리 회의실.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Room.table, uniqueConstraints = {
@@ -46,71 +46,71 @@ public class Room extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.pinyin = StringUtils.lowerCase(PinyinHelper.convertToPinyinString(name, "", PinyinFormat.WITHOUT_TONE));
 		this.pinyinInitial = StringUtils.lowerCase(PinyinHelper.getShortPinyin(name));
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音.")
+	@FieldDescribe("name 병음.")
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母.")
+	@FieldDescribe("name 병음 첫 글자.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyinInitial;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称,不可重名.")
+	@FieldDescribe("이름, 중복 불가.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationNotExists =
-	/* 验证不可重名 */
+	/* 이름 중복 검증 */
 	@CitationNotExist(fields = { "name", "id" }, type = Room.class))
 	private String name;
 
 	public static final String building_FIELDNAME = "building";
-	@FieldDescribe("所属building.")
+	@FieldDescribe("소속 building.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + building_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + building_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String building;
 
 	public static final String floor_FIELDNAME = "floor";
-	@FieldDescribe("所属楼层.")
+	@FieldDescribe("소속 층.")
 	@Column(name = ColumnNamePrefix + floor_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer floor;
 
 	public static final String roomNumber_FIELDNAME = "roomNumber";
-	@FieldDescribe("房号.")
+	@FieldDescribe("호실 번호.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + roomNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + roomNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String roomNumber;
 
 	public static final String phoneNumber_FIELDNAME = "phoneNumber";
-	@FieldDescribe("分机号.")
+	@FieldDescribe("내선 번호.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + phoneNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + phoneNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String phoneNumber;
 
 	public static final String device_FIELDNAME = "device";
-	@FieldDescribe("设备内容.")
+	@FieldDescribe("장비 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + device_FIELDNAME)
@@ -118,7 +118,7 @@ public class Room extends SliceJpaObject {
 	private String device;
 
 	public static final String photo_FIELDNAME = "photo";
-	@FieldDescribe("照片.")
+	@FieldDescribe("사진.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + photo_FIELDNAME)
@@ -126,27 +126,27 @@ public class Room extends SliceJpaObject {
 	private String photo;
 
 	public static final String capacity_FIELDNAME = "capacity";
-	@FieldDescribe("会议室容量")
+	@FieldDescribe("회의실 수용 인원")
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = ColumnNamePrefix + capacity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer capacity;
 
 	public static final String auditor_FIELDNAME = "auditor";
-	@FieldDescribe("会议室申请审核人")
+	@FieldDescribe("회의실 신청 검토자")
 	@Column(length = length_255B, name = ColumnNamePrefix + auditor_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + auditor_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String auditor;
 
 	public static final String available_FIELDNAME = "available";
-	@FieldDescribe("会议室状态,可用,不可用")
+	@FieldDescribe("회의실 상태, 사용 가능, 사용 불가")
 	@Column(name = ColumnNamePrefix + available_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean available;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;

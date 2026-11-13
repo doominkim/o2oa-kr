@@ -17,18 +17,18 @@ public class AttendanceV2LeaveManager {
 
     private static final Logger logger = LoggerFactory.getLogger(AttendanceV2LeaveManager.class);
 
-    public static final String ONE_TIME = "ONE_TIME"; // 一次性
+    public static final String ONE_TIME = "ONE_TIME"; // 일회성
 
 
     /**
-     * 异步更新假期账户余额数据
+     * 휴가 계정 잔여 데이터 비동기 업데이트
      *
      * @param personDN
      * @param leaveTypeId
      */
     public static void asyncUpdateLeaveAccount(String personDN, String leaveTypeId) {
         if (logger.isDebugEnabled()) {
-            logger.debug("准备异步更新用户 {} 的请假类型 {} 的余额数据", personDN, leaveTypeId);
+            logger.debug("사용자 {}의 휴가 유형 {} 잔여 데이터 비동기 업데이트 준비", personDN, leaveTypeId);
         }
         Thread thread = new Thread(() -> {
             try {
@@ -84,7 +84,7 @@ public class AttendanceV2LeaveManager {
     }
 
 
-     // 验证日期字符串是否符合指定格式
+     // 날짜 문자열이 지정 형식에 맞는지 검증
     private static Boolean isValidDate(String str, String format) {
         if (StringUtils.isBlank(str) || StringUtils.isBlank(format)) {
             return Boolean.FALSE;
@@ -99,7 +99,7 @@ public class AttendanceV2LeaveManager {
         }
     }
 
-    // 计算下个月的某一天的日期
+    // 다음 달 특정 일의 날짜 계산
     private static Date nextMonthStartDate(Date date, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -108,7 +108,7 @@ public class AttendanceV2LeaveManager {
         return calendar.getTime();
     }
 
-    // 计算下个月的倒数第几天的日期
+    // 다음 달 끝에서 N번째 날의 날짜 계산
     private static Date nextMonthEndDate(Date date, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

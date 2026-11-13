@@ -12,7 +12,7 @@ import com.x.base.core.project.http.EffectivePerson;
 import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
-//获取服器信息列表
+//서버 정보 목록 조회
 class ActionListNode extends BaseAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActionListNode.class);

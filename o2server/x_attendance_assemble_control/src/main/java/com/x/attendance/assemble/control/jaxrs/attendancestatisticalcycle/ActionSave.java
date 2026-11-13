@@ -30,7 +30,7 @@ public class ActionSave extends BaseAction {
 			JsonElement jsonElement) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wrapIn = null;
-		// 获取到当前用户信息
+		// 현재 사용자 정보 조회
 		List<String> ids = null;
 
 		try {
@@ -60,7 +60,7 @@ public class ActionSave extends BaseAction {
 						wrapIn.getUnitName(), wrapIn.getCycleYear(), wrapIn.getCycleMonth());
 				emc.beginTransaction(AttendanceStatisticalCycle.class);
 				if ( ListTools.isNotEmpty(ids) ) {
-					// 说明有重复的
+					// 중복이 있음
 					_attendanceStatisticalCycle = emc.find(wrapIn.getId(), AttendanceStatisticalCycle.class);
 					if (_attendanceStatisticalCycle != null) {
 						Wi.copier.copy(wrapIn, _attendanceStatisticalCycle);
@@ -72,12 +72,12 @@ public class ActionSave extends BaseAction {
 						emc.check(_attendanceStatisticalCycle, CheckPersistType.all);
 					}
 				} else {
-					// 新增就行了
+					// 신규 추가하면 됨
 					if ( wrapIn.getId() != null && wrapIn.getId().length() > 10 ) {
 						attendanceStatisticalCycle.setId(wrapIn.getId());
 					}
 					Wi.copier.copy(wrapIn, attendanceStatisticalCycle);
-					attendanceStatisticalCycle.setId(wrapIn.getId());// 使用参数传入的ID作为记录的ID
+					attendanceStatisticalCycle.setId(wrapIn.getId());// 매개변수로 전달된 ID를 레코드 ID로 사용
 					emc.persist(attendanceStatisticalCycle, CheckPersistType.all);
 				}
 				emc.commit();
@@ -87,7 +87,7 @@ public class ActionSave extends BaseAction {
 				result.setData(new Wo(attendanceStatisticalCycle.getId()));
 			} catch (Exception e) {
 				e.printStackTrace();
-				Exception exception = new ExceptionStatisticCycleProcess(e, "系统保存统计周期信息对象时发生异常.");
+				Exception exception = new ExceptionStatisticCycleProcess(e, "통계 기간 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

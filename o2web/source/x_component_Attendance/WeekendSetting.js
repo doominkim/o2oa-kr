@@ -11,7 +11,7 @@ MWF.xApplication.Attendance.WeekendSetting = new Class({
     decodeData : function( data ){
         //{
         //    'configCode':'APPEALABLE',
-        //    'configName':'申诉功能启用状态',
+        //    'configName':'이의 신청 기능 사용 상태',
         //    'configValue':'false',
         //    'ordernumber':1
         //}
@@ -74,10 +74,10 @@ MWF.xApplication.Attendance.WeekendSetting = new Class({
             ATTENDANCE_WEEKEND : { text : lp.selectWeekend,
                 type : "select",
                 value : d.ATTENDANCE_WEEKEND ,
-                selectValue :this.dataJson.ATTENDANCE_WEEKEND.selectContent.split("|") ,//["周六","周日"]
+                selectValue :this.dataJson.ATTENDANCE_WEEKEND.selectContent.split("|") ,//["토요일","일요일"]
                 /*event : {
                     change : function( item, ev ){
-                        this.createTableArea.getElement("[item='valueArea']").setStyle( "display" , (item.getValue() == "汇报对象") ? "none" : "" );
+                        this.createTableArea.getElement("[item='valueArea']").setStyle( "display" , (item.getValue() == "보고 대상") ? "none" : "" );
                     }.bind(this)
                 }*/
             }

@@ -29,39 +29,39 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("comment")
-@JaxrsDescribe("评论信息管理")
+@JaxrsDescribe("댓글 정보 관리")
 public class DocumentCommentInfoAction extends StandardJaxrsAction {
 
 	private Logger logger = LoggerFactory.getLogger(DocumentCommentInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "根据标识获取评论信息对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "식별자로 댓글 정보 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("评论ID") @PathParam("id") String id) {
+	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("댓글ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
 			result = new ActionGet().execute( request, effectivePerson, id );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionCommentQuery(e, "根据指定ID查询评论信息对象时发生异常。id:" + id );
+			Exception exception = new ExceptionCommentQuery(e, "지정한 ID의 댓글 정보 객체를 조회하는 중 오류가 발생했습니다. id:" + id );
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示评论信息,按页码分页.", action = ActionListPageWithFilter.class)
+	@JaxrsMethodDescribe(value = "댓글 정보 목록, 페이지 번호별.", action = ActionListPageWithFilter.class)
 	@PUT
 	@Path("list/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPageWithFilter(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("最后一条信息数据的ID") @PathParam( "page" ) Integer page,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam( "size" ) Integer size,
-			@JaxrsParameterDescribe("查询过滤条件") JsonElement jsonElement ) {
+			@JaxrsParameterDescribe("마지막 정보 데이터의 ID") @PathParam( "page" ) Integer page,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam( "size" ) Integer size,
+			@JaxrsParameterDescribe("조회 필터 조건") JsonElement jsonElement ) {
 		ActionResult<List<ActionListPageWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -73,15 +73,15 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示评论信息,按页码分页.", action = ActionListPageWithFilter.class)
+	@JaxrsMethodDescribe(value = "댓글 정보 목록, 페이지 번호별.", action = ActionListPageWithFilter.class)
 	@POST
 	@Path("list/{page}/size/{size}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPageWithFilterMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								   @JaxrsParameterDescribe("最后一条信息数据的ID") @PathParam( "page" ) Integer page,
-								   @JaxrsParameterDescribe("每页显示的条目数量") @PathParam( "size" ) Integer size,
-								   @JaxrsParameterDescribe("查询过滤条件") JsonElement jsonElement ) {
+								   @JaxrsParameterDescribe("마지막 정보 데이터의 ID") @PathParam( "page" ) Integer page,
+								   @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam( "size" ) Integer size,
+								   @JaxrsParameterDescribe("조회 필터 조건") JsonElement jsonElement ) {
 		ActionResult<List<ActionListPageWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -93,15 +93,15 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示评论信息,上一页.", action = ActionListPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "댓글 정보 목록, 이전 페이지.", action = ActionListPrevWithFilter.class)
 	@PUT
 	@Path("list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithFilter(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("最后一条信息数据的ID") @PathParam( "id" ) String id,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam( "count" ) Integer count,
-			@JaxrsParameterDescribe("查询过滤条件") JsonElement jsonElement ) {
+			@JaxrsParameterDescribe("마지막 정보 데이터의 ID") @PathParam( "id" ) String id,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam( "count" ) Integer count,
+			@JaxrsParameterDescribe("조회 필터 조건") JsonElement jsonElement ) {
 		ActionResult<List<ActionListPrevWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -113,15 +113,15 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示评论信息,上一页.", action = ActionListPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "댓글 정보 목록, 이전 페이지.", action = ActionListPrevWithFilter.class)
 	@POST
 	@Path("list/{id}/prev/{count}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithFilterMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								   @JaxrsParameterDescribe("最后一条信息数据的ID") @PathParam( "id" ) String id,
-								   @JaxrsParameterDescribe("每页显示的条目数量") @PathParam( "count" ) Integer count,
-								   @JaxrsParameterDescribe("查询过滤条件") JsonElement jsonElement ) {
+								   @JaxrsParameterDescribe("마지막 정보 데이터의 ID") @PathParam( "id" ) String id,
+								   @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam( "count" ) Integer count,
+								   @JaxrsParameterDescribe("조회 필터 조건") JsonElement jsonElement ) {
 		ActionResult<List<ActionListPrevWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -133,15 +133,15 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示评论信息,下一页.", action = ActionListNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "댓글 정보 목록, 다음 페이지.", action = ActionListNextWithFilter.class)
 	@PUT
 	@Path("list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithFilter(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("最后一条信息数据的ID") @PathParam( "id" ) String id,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam( "count" ) Integer count,
-			@JaxrsParameterDescribe("查询过滤条件") JsonElement jsonElement ) {
+			@JaxrsParameterDescribe("마지막 정보 데이터의 ID") @PathParam( "id" ) String id,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam( "count" ) Integer count,
+			@JaxrsParameterDescribe("조회 필터 조건") JsonElement jsonElement ) {
 		ActionResult<List<ActionListNextWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -153,15 +153,15 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示评论信息,下一页.", action = ActionListNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "댓글 정보 목록, 다음 페이지.", action = ActionListNextWithFilter.class)
 	@POST
 	@Path("list/{id}/next/{count}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithFilterMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								   @JaxrsParameterDescribe("最后一条信息数据的ID") @PathParam( "id" ) String id,
-								   @JaxrsParameterDescribe("每页显示的条目数量") @PathParam( "count" ) Integer count,
-								   @JaxrsParameterDescribe("查询过滤条件") JsonElement jsonElement ) {
+								   @JaxrsParameterDescribe("마지막 정보 데이터의 ID") @PathParam( "id" ) String id,
+								   @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam( "count" ) Integer count,
+								   @JaxrsParameterDescribe("조회 필터 조건") JsonElement jsonElement ) {
 		ActionResult<List<ActionListNextWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -173,13 +173,13 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建或者更新一个评论信息.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "댓글 정보 생성 또는 수정.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void save(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("需要保存的评论信息") JsonElement jsonElement ) {
+			@JaxrsParameterDescribe("저장할 댓글 정보") JsonElement jsonElement ) {
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -191,14 +191,14 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据标识删除评论信息.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "식별자로 댓글 정보 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id ) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -210,14 +210,14 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据标识删除评论信息.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "식별자로 댓글 정보 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
 					   @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("标识") @PathParam("id") String id ) {
+					   @JaxrsParameterDescribe("식별자") @PathParam("id") String id ) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -229,13 +229,13 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "文档评论点赞.", action = ActionPersistCommend.class)
+	@JaxrsMethodDescribe(value = "문서 댓글 좋아요.", action = ActionPersistCommend.class)
 	@GET
 	@Path("{id}/commend")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void persist_commend( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("评论ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("댓글ID") @PathParam("id") String id ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionPersistCommend.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -251,13 +251,13 @@ public class DocumentCommentInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "取消文档评论点赞.", action = ActionPersistUnCommend.class)
+	@JaxrsMethodDescribe(value = "문서 댓글 좋아요 취소.", action = ActionPersistUnCommend.class)
 	@GET
 	@Path("{id}/uncommend")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void persist_unCommend( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("评论ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("댓글ID") @PathParam("id") String id ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionPersistUnCommend.Wo> result = new ActionResult<>();
 		Boolean check = true;

@@ -53,10 +53,10 @@ class ActionManageGetAssignment extends BaseAction {
 			if (null == work) {
 				throw new ExceptionWorkNotExist(id);
 			}
-			// Process 也可能为空
+			// Process 도 비어 있을 수 있음
 			Process process = business.process().pick(work.getProcess());
 			Application application = business.application().pick(work.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (BooleanUtils
 					.isNotTrue(business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process))) {
 				throw new ExceptionAccessDenied(effectivePerson);
@@ -151,22 +151,22 @@ class ActionManageGetAssignment extends BaseAction {
 
 		private static final long serialVersionUID = -6847443228032059363L;
 
-		@FieldDescribe("待办对象")
+		@FieldDescribe("결재 대기 객체")
 		private List<WoTask> taskList = new ArrayList<>();
 
-		@FieldDescribe("已办对象")
+		@FieldDescribe("처리 완료 객체")
 		private List<WoTaskCompleted> taskCompletedList = new ArrayList<>();
 
-		@FieldDescribe("待阅对象")
+		@FieldDescribe("열람 대기 객체")
 		private List<WoRead> readList = new ArrayList<>();
 
-		@FieldDescribe("已阅对象")
+		@FieldDescribe("열람 완료 객체")
 		private List<WoReadCompleted> readCompletedList = new ArrayList<>();
 
-		@FieldDescribe("参阅对象")
+		@FieldDescribe("참조 객체")
 		private List<WoReview> reviewList = new ArrayList<>();
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		public List<WoTask> getTaskList() {

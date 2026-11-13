@@ -24,7 +24,7 @@ class ActionChangePassword extends ActionBase {
 	private static final Logger logger = LoggerFactory.getLogger(ActionChangePassword.class);
 
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
-		/* 管理员不可以修改密码 */
+		/* 관리자는 비밀번호를 변경할 수 없습니다 */
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
@@ -83,13 +83,13 @@ class ActionChangePassword extends ActionBase {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("原密码")
+		@FieldDescribe("기존 비밀번호")
 		private String oldPassword;
 
-		@FieldDescribe("新密码")
+		@FieldDescribe("새 비밀번호")
 		private String newPassword;
 
-		@FieldDescribe("确认新密码")
+		@FieldDescribe("새 비밀번호 확인")
 		private String confirmPassword;
 
 		public String getOldPassword() {

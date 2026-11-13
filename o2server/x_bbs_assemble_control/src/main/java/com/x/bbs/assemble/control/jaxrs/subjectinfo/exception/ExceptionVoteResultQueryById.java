@@ -7,6 +7,6 @@ public class ExceptionVoteResultQueryById extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionVoteResultQueryById( Throwable e, String id ) {
-		super("根据指定ID查询主题信息投票结果时发生异常.ID:" + id, e );
+		super("지정한 ID의 주제 투표 결과를 조회하는 중 오류가 발생했습니다. ID:" + id, e );
 	}
 }

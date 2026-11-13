@@ -127,7 +127,7 @@ MWF.xApplication.cms.Xform.Readerfield = MWF.CMSReaderfield =  new Class({
         var options = {
             "type" : "",
             "types": selectType,
-            "units": this.selectUnits, //范围
+            "units": this.selectUnits, //범위
             "unitType": (this.json.selectUnitType==="all") ? "" : this.json.selectUnitType
         };
         if (!this.comboxFilter) this.comboxFilter = new MWF.O2SelectorFilter(value, options);
@@ -506,8 +506,8 @@ MWF.xApplication.cms.Xform.Readerfield = MWF.CMSReaderfield =  new Class({
 		}.bind(this));
 	},
 	removeItem : function( widget, ev ){
-		//this 是 MWF.widget.O2Identity 之类的对象
-		var _self = this.field; //这个才是Readerfield
+		//this는 MWF.widget.O2Identity 같은 객체
+		var _self = this.field; //이것이 실제 Readerfield
 		var dn = this.data.distinguishedName;
 		var data = _self._getBusinessData();
 		var index;
@@ -568,7 +568,7 @@ MWF.xApplication.cms.Xform.Readerfield = MWF.CMSReaderfield =  new Class({
 			"types": selectType,
 			"values" : (this.json.isInput) ? [] : this._getBusinessData(),
 			"count": count,
-			"units": selectUnits, //范围
+			"units": selectUnits, //범위
 			"unitType": (this.json.selectUnitType==="all") ? "" : this.json.selectUnitType,
             "exclude" : exclude,
             "expandSubEnable" : (this.json.expandSubEnable=="no") ? false : true,

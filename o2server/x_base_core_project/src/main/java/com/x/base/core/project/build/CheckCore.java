@@ -67,7 +67,7 @@ public class CheckCore {
 	}
 
 	/*
-	 * 检查数据库字段名是否是ColumnNamePrefix + fieldName
+	 * 데이터베이스 필드명이 ColumnNamePrefix + fieldName인지 검사
 	 */
 	public static void checkColumnName(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
@@ -83,7 +83,7 @@ public class CheckCore {
 	}
 
 	/*
-	 * 检查是否有将Lob类型字段增加索引
+	 * Lob 유형 필드에 인덱스를 추가했는지 검사
 	 */
 	public static void checkLobIndex(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
@@ -100,7 +100,7 @@ public class CheckCore {
 	}
 
 	/*
-	 * 检查是否有将Boolean类型字段增加索引
+	 * Boolean 유형 필드에 인덱스를 추가했는지 검사
 	 */
 	public static void checkBooleanIndex(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
@@ -139,7 +139,7 @@ public class CheckCore {
 	}
 
 	/*
-	 * 检查是否将@FieldDescribe注解到static字段上,如果是意味着上下行搞错了
+	 * @FieldDescribe를 static 필드에 붙였는지 검사, 그렇다면 위아래 줄이 잘못된 것임
 	 */
 	public static void checkFieldDescribeOnStatic(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
@@ -154,7 +154,7 @@ public class CheckCore {
 	}
 
 	/*
-	 * 检查约束名中的table名称和entity类中的TABLE名称是否一致
+	 * 제약 조건 이름의 table 이름과 entity 클래스의 TABLE 이름이 일치하는지 검사
 	 */
 	public static void checkTableNameUniqueConstraintName(List<Class<?>> classes) throws IllegalAccessException {
 		for (Class<?> cls : classes) {
@@ -173,7 +173,7 @@ public class CheckCore {
 	}
 
 	/*
-	 * 检查类中是否有在createTime,updateTime和sequence上的索引,这几个索引已经用约束在类上了
+	 * 클래스에 createTime, updateTime, sequence 인덱스가 있는지 검사, 이 인덱스들은 이미 클래스의 제약 조건으로 지정됨
 	 */
 	public static void checkIdCreateTimeUpdateTimeSequenceIndex(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
@@ -191,7 +191,7 @@ public class CheckCore {
 	}
 
 	/*
-	 * 检查entity是否有重复的字段
+	 * entity에 중복 필드가 있는지 검사
 	 */
 	public static void checkEnum(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
@@ -210,7 +210,7 @@ public class CheckCore {
 		}
 	}
 
-	/* 检查是否有对String lob 之外的字段设定长度 */
+	/* String lob 외의 필드에 길이를 지정했는지 검사 */
 	public static void checkColumnLength(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
 			List<Field> fields = FieldUtils.getFieldsListWithAnnotation(cls, Column.class);
@@ -230,7 +230,7 @@ public class CheckCore {
 		}
 	}
 
-	/* 检查StorageObject的dumpSize是否设置正确 */
+	/* StorageObject의 dumpSize가 올바르게 설정되었는지 검사 */
 	public static void checkDumpSize(List<Class<?>> classes) {
 		for (Class<?> cls : classes) {
 			if (StorageObject.class.isAssignableFrom(cls)) {

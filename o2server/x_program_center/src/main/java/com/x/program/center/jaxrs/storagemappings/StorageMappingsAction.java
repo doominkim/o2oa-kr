@@ -19,13 +19,13 @@ import com.x.base.core.project.jaxrs.ResponseFactory;
 import com.x.base.core.project.jaxrs.StandardJaxrsAction;
 
 @Path("storagemappings")
-@JaxrsDescribe("存储映射")
+@JaxrsDescribe("스토리지 매핑")
 public class StorageMappingsAction extends StandardJaxrsAction {
 
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "获取StorageMappings.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "StorageMappings 조회.", action = ActionGet.class)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<StorageMappings> result = new ActionResult<>();
 		StorageMappings wrap = null;

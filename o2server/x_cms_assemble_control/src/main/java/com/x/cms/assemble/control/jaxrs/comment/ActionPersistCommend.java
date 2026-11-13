@@ -16,7 +16,7 @@ import com.x.cms.core.entity.DocumentCommend;
 import com.x.cms.core.entity.DocumentCommentInfo;
 
 /**
- * 评论点赞
+ * 댓글 좋아요
  * @author sword
  */
 public class ActionPersistCommend extends BaseAction {

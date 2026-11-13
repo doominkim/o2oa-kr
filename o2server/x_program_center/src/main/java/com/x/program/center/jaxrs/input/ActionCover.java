@@ -127,7 +127,7 @@ class ActionCover extends BaseAction {
 			List<ApplicationDictItem> list = converter.disassemble(_o.getData());
 			for (ApplicationDictItem o : list) {
 				o.setBundle(obj.getId());
-				/** 将数据字典和数据存放在同一个分区 */
+				/** 데이터 사전과 데이터를 같은 파티션에 저장 */
 				o.setDistributeFactor(obj.getDistributeFactor());
 				o.setApplication(obj.getApplication());
 				persistObjects.add(o);
@@ -174,7 +174,7 @@ class ActionCover extends BaseAction {
 	}
 
 	/**
-	 * 根据id 和 name属性，查询重复的对象，适用Dict、Form、Scrpt
+	 * id와 name 속성으로 중복 객체 조회, Dict·Form·Scrpt에 적용
 	 * @param business
 	 * @param name
 	 * @param cls
@@ -211,7 +211,7 @@ class ActionCover extends BaseAction {
 	}
 
 	/**
-	 * 根据id 和 alias属性，查询重复的对象，适用Dict、Form、Scrpt
+	 * id와 alias 속성으로 중복 객체 조회, Dict·Form·Scrpt에 적용
 	 * @param business
 	 * @param alias
 	 * @param cls

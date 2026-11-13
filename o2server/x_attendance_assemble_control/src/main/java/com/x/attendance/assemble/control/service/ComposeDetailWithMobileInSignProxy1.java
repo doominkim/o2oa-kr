@@ -14,8 +14,8 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 考勤打卡记录分析服务类
- * 1、一天只打上下班两次卡
+ * 근태 출퇴근 기록 분석 서비스 클래스
+ * 1. 하루 출퇴근 2회만 체크
  */
 class ComposeDetailWithMobileInSignProxy1 {
 	
@@ -24,9 +24,9 @@ class ComposeDetailWithMobileInSignProxy1 {
 
 
 	/**
-	 * 组织一个完整的打卡记录
-	 * 1、上班打卡时间：最早的一次打卡就是上班打卡时间（考虑一下有没有配置中午休息时间，如果有午休时间，上班打卡需要按时间来计算）
-	 * 2、下班打卡时间：第二次以后的打卡都是下班打卡，取最晚的一次
+	 * 완전한 출퇴근 기록 구성
+	 * 1. 출근 기록 시간: 가장 이른 기록이 출근 기록 시간(점심 휴식 시간 설정 여부를 고려하여, 점심 휴식 시간이 있으면 출근 기록은 시간에 따라 계산)
+	 * 2. 퇴근 기록 시간: 두 번째 이후 기록은 모두 퇴근 기록이며 가장 늦은 기록을 사용
 	 * @param mobileDetails
 	 * @param scheduleSetting
 	 * @param debugger
@@ -40,7 +40,7 @@ class ComposeDetailWithMobileInSignProxy1 {
 		String recordAddress = this.getRecordAddress(mobileDetails);
 		String optMachineType = this.getOptMachineType(mobileDetails);
 
-		//组织员工当天的考勤打卡记录
+		//직원의 당일 근태 출퇴근 기록 구성
 		AttendanceDetail detail = new AttendanceDetail();
 		detail.setEmpNo( mobileDetail.getEmpNo() );
 		detail.setEmpName( mobileDetail.getEmpName() );
@@ -55,7 +55,7 @@ class ComposeDetailWithMobileInSignProxy1 {
 		if( StringUtils.equals(offDutyTime, onDutyTime ) ){
 			detail.setOffDutyTime( null );
 		}else{
-			detail.setOffDutyTime( offDutyTime ); //最晚的一次打卡作为当天的下班签退打卡
+			detail.setOffDutyTime( offDutyTime ); //가장 늦은 기록을 당일 퇴근 기록으로 사용
 		}
 		detail.setRecordStatus( 0 );
 		detail.setBatchName( "FromMobile_" + dateOperation.getNowTimeChar() );
@@ -63,7 +63,7 @@ class ComposeDetailWithMobileInSignProxy1 {
 	}
 
 	/**
-	 * 将最晚的一次打卡时间设置为下班打卡时间
+	 * 가장 늦은 기록 시간을 퇴근 기록 시간으로 설정
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception
@@ -88,7 +88,7 @@ class ComposeDetailWithMobileInSignProxy1 {
 	}
 
 	/**
-	 * 将第一次打卡时间，设置为上班打卡时间
+	 * 첫 기록 시간을 출근 기록 시간으로 설정
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception
@@ -111,7 +111,7 @@ class ComposeDetailWithMobileInSignProxy1 {
 	}
 
 	/**
-	 * 获取打卡地址
+	 * 출퇴근 기록 주소 조회
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception
@@ -139,7 +139,7 @@ class ComposeDetailWithMobileInSignProxy1 {
 	}
 
 	/**
-	 * 获取设备信息
+	 * 기기 정보 조회
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception

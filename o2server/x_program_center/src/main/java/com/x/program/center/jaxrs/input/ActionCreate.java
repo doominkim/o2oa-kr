@@ -47,7 +47,7 @@ class ActionCreate extends BaseAction {
 	}
 
 	/**
-	 * 新建导入
+	 * 새로 가져오기
 	 * @param business
 	 * @param wi
 	 * @return
@@ -96,7 +96,7 @@ class ActionCreate extends BaseAction {
 			List<ApplicationDictItem> list = converter.disassemble(_o.getData());
 			for (ApplicationDictItem o : list) {
 				o.setBundle(obj.getId());
-				/** 将数据字典和数据存放在同一个分区 */
+				/** 데이터 사전과 데이터를 같은 파티션에 저장 */
 				o.setDistributeFactor(obj.getDistributeFactor());
 				o.setApplication(obj.getApplication());
 				persistObjects.add(o);

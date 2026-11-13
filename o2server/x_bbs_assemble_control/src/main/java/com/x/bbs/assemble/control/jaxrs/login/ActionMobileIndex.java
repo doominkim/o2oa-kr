@@ -39,13 +39,13 @@ public class ActionMobileIndex extends BaseAction {
 			}
 		}
 
-		// 根据登录的用户查询用户可以访问到的所有论坛信息列表
+		// 로그인 사용자로 접근 가능한 전체 포럼 정보 목록 조회
 		if (check) {
 			wraps = getForumInfoListByPerson(currentPerson, permissionList);
 		}
 
 		if (check) {
-			if ( ListTools.isNotEmpty( wraps )) {// 在每个论坛里查询用户可以访问到的所有版块信息
+			if ( ListTools.isNotEmpty( wraps )) {// 각 포럼에서 사용자가 접근 가능한 전체 게시판 정보 조회
 				for (Wo wrapOutForumInfoForIndex : wraps) {
 					composeMainSectionForForumInIndex(wrapOutForumInfoForIndex, permissionList);
 				}
@@ -100,7 +100,7 @@ public class ActionMobileIndex extends BaseAction {
 	}
 
 	/**
-	 * 根据登录者权限获取可以访问到的所有论坛信息列表
+	 * 로그인 사용자 권한으로 접근 가능한 전체 포럼 정보 목록 조회
 	 * 
 	 * @param currentPerson
 	 * @param permissionList
@@ -155,14 +155,14 @@ public class ActionMobileIndex extends BaseAction {
 	}
 
 	/**
-	 * 根据人员信息查询该用户拥有的所有权限列表
+	 * 사용자 정보로 해당 사용자의 전체 권한 목록 조회
 	 * 
 	 * @param currentPerson
 	 * @return
 	 */
 	private List<BBSPermissionInfo> getPermissionListByUser(EffectivePerson currentPerson) {
 		List<BBSPermissionInfo> permissionList = null;
-		// 如果不是匿名用户，则查询该用户所有能访问的论坛信息
+		// 익명 사용자가 아니면 해당 사용자가 접근 가능한 전체 포럼 정보 조회
 		if ( currentPerson != null && !"anonymous".equalsIgnoreCase(currentPerson.getTokenType().name())) {
 			try {
 				permissionList = userPermissionService.getUserPermissionInfoList(currentPerson.getDistinguishedName());
@@ -185,7 +185,7 @@ public class ActionMobileIndex extends BaseAction {
 		public static WrapCopier<BBSForumInfo, Wo> copier = WrapCopierFactory.wo(BBSForumInfo.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		// 论坛版块列表
+		// 포럼 게시판 목록
 		private List<WoSectionInfoForIndex> sectionInfoList = null;
 
 		public List<WoSectionInfoForIndex> getSectionInfoList() {
@@ -203,7 +203,7 @@ public class ActionMobileIndex extends BaseAction {
 
 		public static WrapCopier<BBSSectionInfo, WoSectionInfoForIndex> copier = WrapCopierFactory
 				.wo(BBSSectionInfo.class, WoSectionInfoForIndex.class, null, JpaObject.FieldsInvisible);
-		// 版块的子版块信息列表
+		// 게시판의 하위 게시판 정보 목록
 		private List<WoSectionInfoForIndex> subSections = null;
 
 		public List<WoSectionInfoForIndex> getSubSections() {

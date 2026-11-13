@@ -78,7 +78,7 @@ public class ActionQueryListWithFilterPaging extends BaseAction {
 				result.setCount( Long.parseLong(wraps.size() + "" ) );
 			} else {
 				try {
-					//一次性取出所有的分类信息，最大2000条，在内存里进行分页
+					//모든 분류 정보를 한 번에 조회(최대 2000건)하여 메모리에서 페이징
 					result = this.standardListNext( Wo.copier, "(0)", 5000, "sequence", equals, null, likes, ins, null, null, null, null, true, DESC);
 					CacheManager.put(cacheCategory, cacheKey, result.getData() );
 				} catch (Exception e) {
@@ -149,13 +149,13 @@ public class ActionQueryListWithFilterPaging extends BaseAction {
 		@FieldDescribe("作为过滤条件的信息内容管理应用ID列表, 可多个, String数组.")
 		private List<String> appIdList;
 
-		@FieldDescribe("作为过滤条件的内容管理分类ID列表, 可多个, String数组.")
+		@FieldDescribe("필터 조건으로 쓰는 콘텐츠 관리 분류 ID 목록, 여러 개 가능, String 배열.")
 		private List<String> categoryIdList;
 
-		@FieldDescribe("作为过滤条件的创建者姓名列表, 可多个, String数组.")
+		@FieldDescribe("필터 조건으로 쓰는 작성자 이름 목록, 여러 개 가능, String 배열.")
 		private List<String> creatorList;
 
-		@FieldDescribe("作为过滤条件的内容管理应用关键字, 通常是应用名称, String, 模糊查询.")
+		@FieldDescribe("필터 조건으로 쓰는 콘텐츠 관리 앱 키워드, 보통 앱 이름, String, 유사 검색.")
 		private String key;
 
 		@FieldDescribe("文档类型：全部 | 信息 | 数据")

@@ -825,7 +825,7 @@ MWF.xApplication.process.ProcessManager.ApplicationProperty = new Class({
                 "color": "#666",
                 "cursor": "pointer"
             },
-            "text": this.app.lp.application.setManager //"设置管理者"
+            "text": this.app.lp.application.setManager //"관리자 설정"
         }).inject(this.contentAreaNode);
         changeAdministrators.addEvent("click", function(){
             this.changeAdministrators();
@@ -860,7 +860,7 @@ MWF.xApplication.process.ProcessManager.ApplicationProperty = new Class({
                 "color": "#666",
                 "cursor": "pointer"
             },
-            "text": this.app.lp.application.setMaintainer //"设置管理者"
+            "text": this.app.lp.application.setMaintainer //"관리자 설정"
         }).inject(this.contentAreaNode);
         changeMaintainer.addEvent("click", function(){
             this.changeMaintainer();
@@ -988,7 +988,7 @@ MWF.xApplication.process.ProcessManager.ApplicationProperty = new Class({
 
         // var changeDepartmentList = new Element("div", {
         //     "styles": this.app.css.selectButtonStyle,
-        //     "text": "设置可用部门"
+        //     "text": "사용 가능 부서 설정"
         // }).inject(this.availableActionAreaNode);
         // changeDepartmentList.addEvent("click", function(){
         //     this.changeAvailableDepartments();
@@ -996,7 +996,7 @@ MWF.xApplication.process.ProcessManager.ApplicationProperty = new Class({
         //
         // var changeCompanyList = new Element("div", {
         //     "styles": this.app.css.selectButtonStyle,
-        //     "text": "设置可用公司"
+        //     "text": "사용 가능 회사 설정"
         // }).inject(this.availableActionAreaNode);
         // changeCompanyList.addEvent("click", function(){
         //     this.changeAvailableCompanys();

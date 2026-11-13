@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("unit")
-@JaxrsDescribe("组织接口")
+@JaxrsDescribe("조직 API")
 public class UnitAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(UnitAction.class);
 
-	@JaxrsMethodDescribe(value = "查询身份所在的组织,并往上递归,找到指定等级的组织.", action = ActionGetWithIdentityWithLevel.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직을 조회하고 상위로 재귀하여 지정 레벨의 조직 찾기.", action = ActionGetWithIdentityWithLevel.class)
 	@POST
 	@Path("identity/level")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -45,7 +45,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询身份所在的组织,并往上递归,找到指定等级的组织.", action = ActionGetWithIdentityWithLevelObject.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직을 조회하고 상위로 재귀하여 지정 레벨의 조직 찾기.", action = ActionGetWithIdentityWithLevelObject.class)
 	@POST
 	@Path("identity/level/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -63,7 +63,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询身份所在的组织,并往上递归,找到有指定组织属性的组织.", action = ActionGetWithIdentityWithType.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직을 조회하고 상위로 재귀하여 지정 조직 속성을 가진 조직 찾기.", action = ActionGetWithIdentityWithType.class)
 	@POST
 	@Path("identity/type")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -81,7 +81,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询身份所在的组织,并往上递归,找到有指定组织属性的组织.", action = ActionGetWithIdentityWithTypeObject.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직을 조회하고 상위로 재귀하여 지정 조직 속성을 가진 조직 찾기.", action = ActionGetWithIdentityWithTypeObject.class)
 	@POST
 	@Path("identity/type/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -99,7 +99,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询所有组织.", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "모든 조직 조회.", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -116,7 +116,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询所有组织对象.", action = ActionListAllObject.class)
+	@JaxrsMethodDescribe(value = "모든 조직 객체 조회.", action = ActionListAllObject.class)
 	@GET
 	@Path("list/all/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -133,7 +133,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "조직 일괄 조회.", action = ActionList.class)
 	@POST
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -151,7 +151,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织对象.", action = ActionListObject.class)
+	@JaxrsMethodDescribe(value = "조직 객체 일괄 조회.", action = ActionListObject.class)
 	@POST
 	@Path("list/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -169,7 +169,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份所在的组织.", action = ActionListWithIdentity.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직 일괄 조회.", action = ActionListWithIdentity.class)
 	@POST
 	@Path("list/identity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -187,7 +187,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份所在的组织.", action = ActionListWithIdentityObject.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직 일괄 조회.", action = ActionListWithIdentityObject.class)
 	@POST
 	@Path("list/identity/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -205,7 +205,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份所在的组织,并递归查找其上级组织.", action = ActionListWithIdentitySupNested.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직 일괄 조회, 상위 조직 재귀 조회.", action = ActionListWithIdentitySupNested.class)
 	@POST
 	@Path("list/identity/sup/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -223,7 +223,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份所在的组织,并递归查找其上级组织对象.", action = ActionListWithIdentitySupNestedObject.class)
+	@JaxrsMethodDescribe(value = "신분이 속한 조직 일괄 조회, 상위 조직 객체 재귀 조회.", action = ActionListWithIdentitySupNestedObject.class)
 	@POST
 	@Path("list/identity/sup/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -241,7 +241,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询指定组织层级的组织.", action = ActionListWithLevel.class)
+	@JaxrsMethodDescribe(value = "지정 조직 레벨의 조직 일괄 조회.", action = ActionListWithLevel.class)
 	@POST
 	@Path("list/level")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -259,7 +259,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询指定组织层级的组织对象.", action = ActionListWithLevelObject.class)
+	@JaxrsMethodDescribe(value = "지정 조직 레벨의 조직 객체 일괄 조회.", action = ActionListWithLevelObject.class)
 	@POST
 	@Path("list/level/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -277,7 +277,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询指定组织层级名称的组织对象.", action = ActionListWithLevelNameObject.class)
+	@JaxrsMethodDescribe(value = "지정 조직 레벨 이름의 조직 객체 일괄 조회.", action = ActionListWithLevelNameObject.class)
 	@POST
 	@Path("list/level/name/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -295,7 +295,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询个人所在的组织.", action = ActionListWithPerson.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 조직 일괄 조회.", action = ActionListWithPerson.class)
 	@POST
 	@Path("list/person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -313,7 +313,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询个人所在的组织.", action = ActionListWithPersonObject.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 조직 일괄 조회.", action = ActionListWithPersonObject.class)
 	@POST
 	@Path("list/person/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -331,7 +331,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询个人所在的组织,并递归查找其上级组织.", action = ActionListWithPersonSupNested.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 조직 일괄 조회, 상위 조직 재귀 조회.", action = ActionListWithPersonSupNested.class)
 	@POST
 	@Path("list/person/sup/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -349,7 +349,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询个人所在的组织,并递归查找其上级组织.", action = ActionListWithPersonSupNestedObject.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 조직 일괄 조회, 상위 조직 재귀 조회.", action = ActionListWithPersonSupNestedObject.class)
 	@POST
 	@Path("list/person/sup/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -367,7 +367,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织属性批量查询组织.", action = ActionListWithUnitAttribute.class)
+	@JaxrsMethodDescribe(value = "조직 속성으로 조직 일괄 조회.", action = ActionListWithUnitAttribute.class)
 	@POST
 	@Path("list/unitattribute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -385,7 +385,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织属性批量查询组织.", action = ActionListWithUnitAttributeObject.class)
+	@JaxrsMethodDescribe(value = "조직 속성으로 조직 일괄 조회.", action = ActionListWithUnitAttributeObject.class)
 	@POST
 	@Path("list/unitattribute/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -403,7 +403,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织职务批量查询组织.", action = ActionListWithUnitDuty.class)
+	@JaxrsMethodDescribe(value = "조직 직무로 조직 일괄 조회.", action = ActionListWithUnitDuty.class)
 	@POST
 	@Path("list/unitduty")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -421,7 +421,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织职务批量查询组织.", action = ActionListWithUnitDutyObject.class)
+	@JaxrsMethodDescribe(value = "조직 직무로 조직 일괄 조회.", action = ActionListWithUnitDutyObject.class)
 	@POST
 	@Path("list/unitduty/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -439,7 +439,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的直接下级组织.", action = ActionListWithUnitSubDirect.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 하위 조직 일괄 조회.", action = ActionListWithUnitSubDirect.class)
 	@POST
 	@Path("list/unit/sub/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -457,7 +457,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的直接下级组织.", action = ActionListWithUnitSubDirectObject.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 하위 조직 일괄 조회.", action = ActionListWithUnitSubDirectObject.class)
 	@POST
 	@Path("list/unit/sub/direct/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -475,7 +475,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的嵌套下级组织.", action = ActionListWithUnitSubNested.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 하위 조직 일괄 조회.", action = ActionListWithUnitSubNested.class)
 	@POST
 	@Path("list/unit/sub/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -493,7 +493,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的嵌套下级组织.", action = ActionListWithUnitSubNestedObject.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 하위 조직 일괄 조회.", action = ActionListWithUnitSubNestedObject.class)
 	@POST
 	@Path("list/unit/sub/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -511,7 +511,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的直接上级组织.", action = ActionListWithUnitSupDirect.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 상위 조직 일괄 조회.", action = ActionListWithUnitSupDirect.class)
 	@POST
 	@Path("list/unit/sup/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -529,7 +529,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的直接上级组织.", action = ActionListWithUnitSupDirectObject.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 상위 조직 일괄 조회.", action = ActionListWithUnitSupDirectObject.class)
 	@POST
 	@Path("list/unit/sup/direct/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -547,7 +547,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的嵌套上级组织.", action = ActionListWithUnitSupNested.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 상위 조직 일괄 조회.", action = ActionListWithUnitSupNested.class)
 	@POST
 	@Path("list/unit/sup/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -565,7 +565,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的嵌套上级组织.", action = ActionListWithUnitSupNestedObject.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 상위 조직 일괄 조회.", action = ActionListWithUnitSupNestedObject.class)
 	@POST
 	@Path("list/unit/sup/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -583,7 +583,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的嵌套下级组织信息-树形模式.", action = ActionListWithUnitTree.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 하위 조직 정보 일괄 조회-트리 모드.", action = ActionListWithUnitTree.class)
 	@POST
 	@Path("list/unit/tree")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -601,7 +601,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "校验身份是否是指定组织的成员.", action = ActionHasIdentity.class)
+	@JaxrsMethodDescribe(value = "신분이 지정 조직의 구성원인지 확인.", action = ActionHasIdentity.class)
 	@POST
 	@Path("check/unit/has/identity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -619,7 +619,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "校验用户是否在指定组织中注册身份.", action = ActionHasPerson.class)
+	@JaxrsMethodDescribe(value = "사용자가 지정 조직에 신분을 등록했는지 확인.", action = ActionHasPerson.class)
 	@POST
 	@Path("check/unit/has/person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -637,7 +637,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "校验组织是否包含指定组织.", action = ActionHasUnit.class)
+	@JaxrsMethodDescribe(value = "조직이 지정 조직을 포함하는지 확인.", action = ActionHasUnit.class)
 	@POST
 	@Path("check/unit/has/unit")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -655,7 +655,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询指定组织类型的组织.", action = ActionListWithTypes.class)
+	@JaxrsMethodDescribe(value = "지정 조직 유형의 조직 일괄 조회.", action = ActionListWithTypes.class)
 	@POST
 	@Path("list/types")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -673,7 +673,7 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询指定组织类型的组织对象.", action = ActionListWithTypesObject.class)
+	@JaxrsMethodDescribe(value = "지정 조직 유형의 조직 객체 일괄 조회.", action = ActionListWithTypesObject.class)
 	@POST
 	@Path("list/types/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -691,13 +691,13 @@ public class UnitAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询指定组织类型的组织对象.", action = ActionListWithTypeObject.class)
+	@JaxrsMethodDescribe(value = "지정 조직 유형의 조직 객체 조회.", action = ActionListWithTypeObject.class)
 	@GET
 	@Path("list/type/{type}/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithTypeObject(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("组织类型") @PathParam("type") String type) {
+					   @JaxrsParameterDescribe("조직 유형") @PathParam("type") String type) {
 		ActionResult<List<ActionListWithTypeObject.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * 查询当前用可以发布的分类（分类需绑定流程）
+ * 현재 사용자가 발행할 수 있는 분류 조회(분류는 프로세스와 연결 필요)
  * @author sword
  */
 public class ActionListPublishWithProcess extends BaseAction {

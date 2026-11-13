@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("unexpectederrorlog")
-@JaxrsDescribe("意外错误")
+@JaxrsDescribe("예기치 않은 오류")
 public class UnexpectedErrorLogAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(UnexpectedErrorLogAction.class);
 
-	@JaxrsMethodDescribe(value = "获取意外错误.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "예기치 않은 오류 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -50,7 +50,7 @@ public class UnexpectedErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "记录UnexpectedException错误.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "UnexpectedException 오류 기록.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -66,14 +66,14 @@ public class UnexpectedErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示UnexpectedExceptionLog,下一页.", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "UnexpectedExceptionLog 나열, 다음 페이지.", action = ActionListNext.class)
 	@GET
 	@Path("list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListNext().execute(id, count);
@@ -84,14 +84,14 @@ public class UnexpectedErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示UnexpectedExceptionLog,上一页.", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "UnexpectedExceptionLog 나열, 이전 페이지.", action = ActionListPrev.class)
 	@GET
 	@Path("list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListPrev().execute(id, count);
@@ -102,15 +102,15 @@ public class UnexpectedErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示UnexpectedExceptionLog,指定日期,下一页.", action = ActionListNextWithDate.class)
+	@JaxrsMethodDescribe(value = "UnexpectedExceptionLog 나열, 지정 날짜, 다음 페이지.", action = ActionListNextWithDate.class)
 	@GET
 	@Path("list/{id}/next/{count}/date/{date}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithDate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("指定日期") @PathParam("date") String date) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("지정 날짜") @PathParam("date") String date) {
 		ActionResult<List<ActionListNextWithDate.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListNextWithDate().execute(id, count, date);
@@ -121,15 +121,15 @@ public class UnexpectedErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示UnexpectedExceptionLog,指定日期,上一页.", action = ActionListPrevWithDate.class)
+	@JaxrsMethodDescribe(value = "UnexpectedExceptionLog 나열, 지정 날짜, 이전 페이지.", action = ActionListPrevWithDate.class)
 	@GET
 	@Path("list/{id}/prev/{count}/date/{date}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithDate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("指定日期") @PathParam("date") String date) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("지정 날짜") @PathParam("date") String date) {
 		ActionResult<List<ActionListPrevWithDate.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListPrevWithDate().execute(id, count, date);

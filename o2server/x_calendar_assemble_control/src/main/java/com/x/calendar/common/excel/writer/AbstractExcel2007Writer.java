@@ -20,7 +20,7 @@
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 //
 ///**
-// * 抽象excel2007读入器，先构建.xlsx一张模板，改写模板中的sheet.xml,使用这种方法 写入.xlsx文件，不需要太大的内存
+// * 추상 excel2007 라이터, 먼저 .xlsx 템플릿을 만든 뒤 템플릿의 sheet.xml을 수정하는 방식으로 .xlsx 파일 작성, 메모리가 많이 필요하지 않음
 // *
 // */
 //public abstract class AbstractExcel2007Writer {
@@ -28,82 +28,82 @@
 //	private SpreadsheetWriter sw;
 //
 //	/**
-//	 * 写入电子表格的主要流程
+//	 * 스프레드시트 쓰기 주요 흐름
 //	 * 
 //	 * @param fileName
 //	 * @throws Exception
 //	 */
 //	@SuppressWarnings("resource")
 //	public void process(String fileName) throws Exception {
-//		// 建立工作簿和电子表格对象
+//		// 워크북 및 스프레드시트 객체 생성
 //		XSSFWorkbook wb = new XSSFWorkbook();
 //		XSSFSheet sheet = wb.createSheet("sheet1");
-//		// 持有电子表格数据的xml文件名 例如 /xl/worksheets/sheet1.xml
+//		// 스프레드시트 데이터를 담는 xml 파일명 예: /xl/worksheets/sheet1.xml
 //		String sheetRef = sheet.getPackagePart().getPartName().getName();
 //
-//		// 保存模板
+//		// 템플릿 저장
 //		try (FileOutputStream os = new FileOutputStream("template.xlsx")) {
 //			wb.write(os);
 //		}
 //
-//		// 生成xml文件
+//		// xml 파일 생성
 //		File tmp = File.createTempFile("sheet", ".xml");
 //		try (Writer fw = new FileWriter(tmp)) {
 //			sw = new SpreadsheetWriter(fw);
 //			generate();
 //		}
 //
-//		// 使用产生的数据替换模板
+//		// 생성된 데이터로 템플릿 교체
 //		File templateFile = new File("template.xlsx");
 //		try (FileOutputStream out = new FileOutputStream(fileName)){
 //			substitute(templateFile, tmp, sheetRef.substring(1), out);
 //		}
-//		// 删除临时模板文件
+//		// 임시 템플릿 파일 삭제
 //		if (templateFile.isFile() && templateFile.exists()) {
 //			templateFile.delete();
 //		}
 //	}
 //
 //	/**
-//	 * 写入电子表格的主要流程
+//	 * 스프레드시트 쓰기 주요 흐름
 //	 * 
 //	 * @param fileName
 //	 * @throws Exception
 //	 */
 //	@SuppressWarnings("resource")
 //	public void process(OutputStream out) throws Exception {
-//		// 建立工作簿和电子表格对象
+//		// 워크북 및 스프레드시트 객체 생성
 //		XSSFWorkbook wb = new XSSFWorkbook();
 //		XSSFSheet sheet = wb.createSheet("sheet1");
-//		// 持有电子表格数据的xml文件名 例如 /xl/worksheets/sheet1.xml
+//		// 스프레드시트 데이터를 담는 xml 파일명 예: /xl/worksheets/sheet1.xml
 //		String sheetRef = sheet.getPackagePart().getPartName().getName();
 //
-//		// 保存模板
+//		// 템플릿 저장
 //		FileOutputStream os = new FileOutputStream("template.xlsx");
 //		wb.write(os);
 //		os.close();
 //
-//		// 生成xml文件
+//		// xml 파일 생성
 //		File tmp = File.createTempFile("sheet", ".xml");
 //		Writer fw = new FileWriter(tmp);
 //		sw = new SpreadsheetWriter(fw);
 //		generate();
 //		fw.close();
 //
-//		// 使用产生的数据替换模板
+//		// 생성된 데이터로 템플릿 교체
 //		File templateFile = new File("template.xlsx");
 //		substitute(templateFile, tmp, sheetRef.substring(1), out);
 //		out.close();
-//		// 删除文件之前调用一下垃圾回收器，否则无法删除模板文件
+//		// 파일 삭제 전 가비지 컬렉터 호출, 그렇지 않으면 템플릿 파일 삭제 불가
 //		System.gc();
-//		// 删除临时模板文件
+//		// 임시 템플릿 파일 삭제
 //		if (templateFile.isFile() && templateFile.exists()) {
 //			templateFile.delete();
 //		}
 //	}
 //
 //	/**
-//	 * 类使用者应该使用此方法进行写操作
+//	 * 클래스 사용자는 이 메서드로 쓰기 작업을 수행해야 함
 //	 * 
 //	 * @throws Exception
 //	 */
@@ -171,7 +171,7 @@
 //	}
 //
 //	/**
-//	 * 在写入器中写入电子表格
+//	 * 라이터에 스프레드시트 쓰기
 //	 * 
 //	 */
 //	public static class SpreadsheetWriter {
@@ -195,9 +195,9 @@
 //		}
 //
 //		/**
-//		 * 插入新行
+//		 * 새 행 삽입
 //		 *
-//		 * @param rownum 以0开始
+//		 * @param rownum 0부터 시작
 //		 */
 //		public void insertRow(int rownum) throws IOException {
 //			_out.write("<row r=\"" + (rownum + 1) + "\">" + LINE_SEPARATOR);
@@ -205,14 +205,14 @@
 //		}
 //
 //		/**
-//		 * 插入行结束标志
+//		 * 행 종료 표시 삽입
 //		 */
 //		public void endRow() throws IOException {
 //			_out.write("</row>" + LINE_SEPARATOR);
 //		}
 //
 //		/**
-//		 * 插入新列
+//		 * 새 열 삽입
 //		 * 
 //		 * @param columnIndex
 //		 * @param value

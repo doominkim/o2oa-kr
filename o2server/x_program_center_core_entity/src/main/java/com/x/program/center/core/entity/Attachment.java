@@ -23,7 +23,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Attachment", description = "服务管理附件.")
+@Schema(name = "Attachment", description = "서비스 관리 첨부파일.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Attachment.TABLE, uniqueConstraints = {
@@ -45,59 +45,59 @@ public class Attachment extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public Attachment() {
 
 	}
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件名称.")
+	@FieldDescribe("파일 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("归属应用ID.")
+	@FieldDescribe("소속 앱 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("类型：首页图片|图片|视频|安装包|静态资源包.")
+	@FieldDescribe("유형: 홈 이미지|이미지|동영상|설치 패키지|정적 리소스 패키지.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("icon Base64编码后的文本.")
+	@FieldDescribe("icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + icon_FIELDNAME)
 	private String icon;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

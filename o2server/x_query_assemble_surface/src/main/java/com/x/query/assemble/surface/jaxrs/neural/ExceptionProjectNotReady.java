@@ -7,6 +7,6 @@ class ExceptionProjectNotReady extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionProjectNotReady(String projectName) {
-		super("神经网络多层感知机({})尚未准备就绪");
+		super("신경망 다층 퍼셉트론({})이 아직 준비되지 않았습니다");
 	}
 }

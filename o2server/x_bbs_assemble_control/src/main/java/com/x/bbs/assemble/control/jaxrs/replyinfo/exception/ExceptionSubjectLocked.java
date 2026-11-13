@@ -7,6 +7,6 @@ public class ExceptionSubjectLocked extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjectLocked( String id ) {
-		super( "主题信息已被锁定，不允许进行回复.ID:" + id );
+		super( "주제가 잠겨 있어 댓글을 달 수 없습니다. ID:" + id );
 	}
 }

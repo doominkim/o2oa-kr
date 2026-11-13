@@ -38,7 +38,7 @@ class ActionEdit extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 			if(StringUtils.isBlank(wi.getSubject())){
-				throw new ExceptionCustomError("会议标题不能为空！");
+				throw new ExceptionCustomError("회의 제목은 비워 둘 수 없습니다!");
 			}
 			MeetingConfigProperties config = business.getConfig();
 			if(MeetingModeEnum.ONLINE.getValue().equals(wi.getMode())){
@@ -49,17 +49,17 @@ class ActionEdit extends BaseAction {
 					}else {
 						boolean flag = HstService.createMeeting(wi, config);
 						if(!flag){
-							throw new ExceptionCustomError("创建线上会议失败，请联系管理员！");
+							throw new ExceptionCustomError("온라인 회의를 만들지 못했습니다. 관리자에게 문의하세요!");
 						}
 					}
 				}else if(StringUtils.isBlank(wi.getRoomId()) || StringUtils.isBlank(wi.getRoomLink())){
-					throw new ExceptionCustomError("会议号和会议链接不能为空！");
+					throw new ExceptionCustomError("회의 번호와 회의 링크는 비워 둘 수 없습니다!");
 				}
 			}else{
 				wi.setRoomId("");
 				wi.setRoomLink("");
 				if(StringUtils.isBlank(wi.getRoom())){
-					throw new ExceptionCustomError("会议室不能为空！");
+					throw new ExceptionCustomError("회의실은 비워 둘 수 없습니다!");
 				}
 			}
 			Room room = null;
@@ -74,7 +74,7 @@ class ActionEdit extends BaseAction {
 				}
 			}
 
-			//判断开始时间或者结束时间有没有修改过
+			//시작 시간 또는 종료 시간이 수정되었는지 판단
 			boolean modifyTime = false;
 			Date StartTime = wi.getStartTime();
 			Date CompletedTime = wi.getCompletedTime();

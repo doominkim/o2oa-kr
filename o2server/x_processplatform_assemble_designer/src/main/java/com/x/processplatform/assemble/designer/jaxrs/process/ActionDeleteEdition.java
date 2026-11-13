@@ -43,7 +43,7 @@ class ActionDeleteEdition extends BaseAction {
 				list.add(editionProcess);
 			}
 			for (Process process : list) {
-				/* 先删除content内容 */
+				/* 먼저 content 내용 삭제 */
 				this.deleteDraft(business, process);
 				this.deleteTask(business, process);
 				this.deleteTaskCompleted(business, process, onlyRemoveNotCompleted);
@@ -61,7 +61,7 @@ class ActionDeleteEdition extends BaseAction {
 				}
 				this.deleteWorkLog(business, process, onlyRemoveNotCompleted);
 			}
-			/* 再删除设计 */
+			/* 다음으로 설계 삭제 */
 			emc.beginTransaction(Process.class);
 			emc.beginTransaction(Agent.class);
 			emc.beginTransaction(Begin.class);

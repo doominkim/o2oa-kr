@@ -31,48 +31,48 @@ public class ActionCheckIn extends BaseAction {
 
     ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
         if (effectivePerson == null || StringUtils.isEmpty(effectivePerson.getDistinguishedName())) {
-            throw new ExceptionEmptyParameter("当前用户信息");
+            throw new ExceptionEmptyParameter("현재 사용자 정보");
         }
         ActionResult<Wo> result = new ActionResult<>();
         String detailDate = null;
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getRecordId())) {
-                throw new ExceptionEmptyParameter("打卡对象id");
+                throw new ExceptionEmptyParameter("체크 대상 id");
             }
             if (StringUtils.isEmpty(wi.getCheckInType()) || (!wi.getCheckInType().equals(AttendanceV2CheckInRecord.OnDuty) && !wi.getCheckInType().equals(AttendanceV2CheckInRecord.OffDuty))) {
-                throw new ExceptionEmptyParameter("打卡类型");
+                throw new ExceptionEmptyParameter("체크 유형");
             }
             if (StringUtils.isEmpty(wi.getLatitude()) || StringUtils.isEmpty(wi.getLongitude())) {
-                throw new ExceptionEmptyParameter("经纬度");
+                throw new ExceptionEmptyParameter("위경도");
             }
             if ((BooleanUtils.isFalse(wi.getFieldWork())) && StringUtils.isEmpty(wi.getWorkPlaceId())) {
-                throw new ExceptionEmptyParameter("打卡工作场所id");
+                throw new ExceptionEmptyParameter("체크 근무 장소 id");
             }
-            // 查询当前用户的考勤组
+            // 현재 사용자의 근태 그룹 조회
             Business business = new Business(emc);
             List<AttendanceV2Group> groups = business.getAttendanceV2ManagerFactory().listGroupWithPerson(effectivePerson.getDistinguishedName());
             if (groups == null || groups.isEmpty()) {
-                throw new ExceptionNotExistObject("考勤组信息");
+                throw new ExceptionNotExistObject("근태 그룹 정보");
             }
 
             AttendanceV2CheckInRecord record = emc.find(wi.getRecordId(), AttendanceV2CheckInRecord.class);
             if (record == null) {
-                throw new ExceptionNotExistObject("打卡记录");
+                throw new ExceptionNotExistObject("체크 기록");
             }
             if (!effectivePerson.getDistinguishedName().equals(record.getUserId())) {
-                throw new ExceptionWithMessage("用户不匹配，无法打卡！");
+                throw new ExceptionWithMessage("사용자가 일치하지 않아 체크할 수 없습니다!");
             }
-            // 极速打卡不能更新已经打卡的数据
+            // 빠른 체크는 이미 체크된 데이터를 업데이트할 수 없습니다
             if (AttendanceV2CheckInRecord.SOURCE_TYPE_FAST_CHECK.equals(wi.getSourceType()) && !AttendanceV2CheckInRecord.CHECKIN_RESULT_PreCheckIn.equals(record.getCheckInResult())) {
                 throw new ExceptionCannotFastCheckIn();
             }
-            // 打卡时间
+            // 체크 시간
             Date nowDate = new Date();
             AttendanceV2CheckInRecord back = executeWithCheckLock("check:" + record.getId(),
                     new CheckInCallableImpl(nowDate, record.getId(), CheckInWi.fromApp(wi)));
             if (back != null) {
-                // 异常数据
+                // 이상 데이터
                 generateAppealInfo(back, groups.get(0).getFieldWorkMarkError(), emc, business);
                 Wo wo = new Wo();
                 wo.setCheckInResult(back.getCheckInResult());
@@ -92,11 +92,11 @@ public class ActionCheckIn extends BaseAction {
 
 
     public static class Wo extends GsonPropertyObject {
-        @FieldDescribe("打卡结果id")
+        @FieldDescribe("체크 결과 id")
         private String checkInRecordId;
-        @FieldDescribe("打卡结果")
+        @FieldDescribe("체크 결과")
         private String checkInResult;
-        @FieldDescribe("打卡记录日期")
+        @FieldDescribe("체크 기록 날짜")
         private Date recordDate;
 
         public String getCheckInRecordId() {
@@ -126,40 +126,40 @@ public class ActionCheckIn extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("打卡对象id")
+        @FieldDescribe("체크 대상 id")
         private String recordId;
 
-        @FieldDescribe("打卡类型，OnDuty OffDuty")
+        @FieldDescribe("출퇴근 체크 유형, OnDuty OffDuty")
         private String checkInType;
 
-        @FieldDescribe("打卡工作场所id，范围内打卡需传入")
+        @FieldDescribe("체크 근무지 id, 범위 내 체크 시 전달 필요")
         private String workPlaceId;
 
-        @FieldDescribe("是否外勤打卡.")
+        @FieldDescribe("외근 체크 여부.")
         private Boolean fieldWork;
 
-        @FieldDescribe("外勤打卡说明")
+        @FieldDescribe("외근 체크 설명")
         private String signDescription;
 
-        @FieldDescribe("外勤打卡拍照附件文件ID列表")
+        @FieldDescribe("외근 체크 사진 첨부파일 ID 목록")
         private List<String> fieldWorkPhotoFileIdList;
 
-        @FieldDescribe("来源设备：Mac|Windows|IOS|Android|其他")
+        @FieldDescribe("출처 기기: Mac|Windows|IOS|Android|기타")
         private String sourceDevice;
 
-        @FieldDescribe("其他说明备注")
+        @FieldDescribe("기타 설명 비고")
         private String description;
 
-        @FieldDescribe("当前位置经度")
+        @FieldDescribe("현재 위치 경도")
         private String longitude;
 
-        @FieldDescribe("当前位置纬度")
+        @FieldDescribe("현재 위치 위도")
         private String latitude;
 
-        @FieldDescribe("当前位置地点描述")
+        @FieldDescribe("현재 위치 장소 설명")
         private String recordAddress;
 
-        @FieldDescribe("打卡数据来源： USER_CHECK（用户打卡） FAST_CHECK（极速打卡） ")
+        @FieldDescribe("체크 데이터 출처: USER_CHECK(사용자 체크) FAST_CHECK(빠른 체크) ")
         private String sourceType;
 
         public String getSourceType() {

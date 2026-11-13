@@ -1,24 +1,24 @@
 {
-  //根据人员获取部门
+  //사용자로 부서 조회
   "listDepartmentByPerson": {"uri": "/jaxrs/department/list/person/{name}"},
-  //根据人员获取所在公司
+  //사용자로 소속 회사 조회
   "listCompanyByPerson": {"uri": "/jaxrs/company/list/person/{name}"},
-  //获取公司的一级部门
+  //회사의 1단계 부서 조회
   "listDepartmentByCompany": {"uri": "/jaxrs/department/list/company/{companyName}/top"},
 
-  //根据身份获取人员
+  //신분으로 사용자 조회
   "getPersonByIdentity": {"uri": "/jaxrs/person/identity/{name}"},
-  //根据人员获取身份
+  //사용자로 신분 조회
   "listIdentityByPerson": {"uri": "/jaxrs/identity/list/person/{name}"},
-  //获取人员
+  //사용자 조회
   "getPerson": {"uri": "/jaxrs/person/{name}"},
   "getPersonIcon": {"uri": "/jaxrs/person/{flag}/icon"},
   "getDepartmentGather" : {"uri":"/jaxrs/okrtask/unit/reportTaskCollect/{id}","method":"GET"},
-  //获取顶层组织名称
+  //최상위 조직 이름 조회
   "getTopUnit":{"uri":"/jaxrs/unit/list/top"},
 
 
-  ///////////////////////////////////////////////新的组织//////////////////////////////////
+  ///////////////////////////////////////////////새 조직//////////////////////////////////
   //data: {"personList": []}
   "listIdentityWithPerson": {"uri": "/jaxrs/identity/list/person/object", "method": "POST"}, //사용자의 소속 객체 조회
   //data: {"identityList":[]}
@@ -26,15 +26,15 @@
   //data: {"identityList":[]}
   "listWithIdentityObject": {"uri": "/jaxrs/person/list/identity/object", "method": "POST"}, //소속에 해당하는 사용자 조회
 
-  //data:{"name":"部门正值","unit":"xxxx@0458bd06-00c7-448a-9ca1-f9178d4b2234@U"}
+  //data:{"name":"부서장","unit":"xxxx@0458bd06-00c7-448a-9ca1-f9178d4b2234@U"}
   "getUnitDuty":{"uri":"/jaxrs/unitduty/list/identity/unit/name","method":"POST"},
 
-  //获取当前用户的战略部门
+  //현재 사용자의 전략 부서 조회
   "listDeptList2" : {"uri":"/jaxrs/strategydeploy/listunitlevel2/{level}","method":"GET"},
-  ///////////////////////////////////////////////新的组织////////////////////////////////////////////
+  ///////////////////////////////////////////////새 조직////////////////////////////////////////////
 
 
-  ///////////////////////////////////////公司工作重点//////////////////////////////////////////////////
+  ///////////////////////////////////////회사 업무 중점//////////////////////////////////////////////////
   "getKeyWorkListYear" : {"uri" : "/jaxrs/strategydeploy/listyears","method":"GET"},
   "getKeyWorkDepartmentByYear" : {"uri" : "/jaxrs/strategydeploy/listdepts/{year}","method":"GET"},
   "getKeyWorkListNext" : {"uri" : "/jaxrs/strategydeploy/filter/list/{id}/next/{count}", "method": "PUT"},
@@ -46,9 +46,9 @@
   "changeKeyWorkPosition":{"uri":"/jaxrs/strategydeploy/updatesequencenumber","method":"POST"},
   "getKeyWorkAddAuthorize":{"uri":"/jaxrs/strategydeploy/isadd","method":"GET"},
 
-  ///////////////////////////////////////公司工作重点//////////////////////////////////////////////////
+  ///////////////////////////////////////회사 업무 중점//////////////////////////////////////////////////
 
-  ///////////////////////////////////////举措//////////////////////////////////////////////////
+  ///////////////////////////////////////조치//////////////////////////////////////////////////
   "getMeasureListYear" : {"uri" : "/jaxrs/measures/listyears","method":"GET"},
   "getMeasureDepartmentByYear" : {"uri" : "/jaxrs/measures/listdept/{year}","method":"GET"},
   "getMeasureListNext" : {"uri" : "/jaxrs/measures/filter/list/{id}/next/{count}", "method": "PUT"},
@@ -64,9 +64,9 @@
   "getMeasureByParentId":{"uri" : "/jaxrs/measures/filter/list/parentid/{parentid}", "method": "GET"},
   "exportMeasure":{"uri":"/jaxrs/exportcontent/export/year/{year}","method":"GET"},
   "downloadFile":{"uri":"/jaxrs/exportcontent/result/flag/{flag}","method":"GET"},
-  ///////////////////////////////////////举措//////////////////////////////////////////////////
+  ///////////////////////////////////////조치//////////////////////////////////////////////////
 
-  //////////////////////////////////五项重点工作//////////////////////////////////////////////////
+  //////////////////////////////////5대 중점 업무//////////////////////////////////////////////////
   "getPriorityDepartments":{"uri" : "/jaxrs/keywork/dept/listdepts","method":"GET"},
   "getYearsByDepartment":{"uri" : "/jaxrs/keywork/listyearsbydept","method":"POST"},
   "getPriorityListNext":{"uri" : "/jaxrs/keywork/filter/list/{id}/next/{count}","method":"PUT"},
@@ -85,6 +85,6 @@
 
   "listHomepageNaviPower": {"uri":"/jaxrs/strategydeploy/listhomepagenavipower"},
 
-  //////////////////////////////////五项重点工作//////////////////////////////////////////////////
+  //////////////////////////////////5대 중점 업무//////////////////////////////////////////////////
   "clazz": "x_strategydeploy_assemble_control"
 }

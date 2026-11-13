@@ -20,7 +20,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindFolderQuery;
 import com.x.mind.entity.MindFolderInfo;
 
 /**
- * 查询用户的个人文件夹信息列表
+ * 사용자의 개인 폴더 정보 목록 조회
  * @author O2LEE
  *
  */
@@ -41,7 +41,7 @@ public class ActionListMyFolder extends BaseAction {
 				ids = mindFolderInfoService.listAllIdsWithPerson(effectivePerson.getDistinguishedName());
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindFolderQuery( e, "系统在根据个人名称查询所有的脑图文件夹信息ID列表时发生异常。" );
+				Exception exception = new ExceptionMindFolderQuery( e, "사용자 이름으로 마인드맵 폴더 ID 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -52,7 +52,7 @@ public class ActionListMyFolder extends BaseAction {
 					folderInfos = mindFolderInfoService.listWithIds(ids);
 				}catch( Exception e ) {
 					check = false;
-					Exception exception = new ExceptionMindFolderQuery(e, "系统在根据脑图文件夹信息ID列表查询文件夹信息列表时发生异常。");
+					Exception exception = new ExceptionMindFolderQuery(e, "마인드맵 폴더 ID 목록으로 폴더 정보 목록을 조회하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -62,7 +62,7 @@ public class ActionListMyFolder extends BaseAction {
 			if( ListTools.isNotEmpty( folderInfos ) ){
 				woFolderInfos = Wo.copier.copy(folderInfos);
 				for( Wo wo : woFolderInfos ) {
-					// 如果上级目录ID为空或者为0，说明是一级目录
+					// 상위 디렉터리 ID가 비어 있거나 0이면 1단계 디렉터리
 					if( StringUtils.isEmpty(wo.getParentId()) || "root".equals(wo.getParentId()) ) {
 						composeChildren(wo, woFolderInfos);
 						wraps.add( wo );
@@ -81,7 +81,7 @@ public class ActionListMyFolder extends BaseAction {
 	}
 
 	/**
-	 * 递归组织下级目录信息
+	 * 하위 디렉터리 정보를 재귀적으로 구성
 	 * @param woFolder
 	 * @param woFolderInfos
 	 */
@@ -106,7 +106,7 @@ public class ActionListMyFolder extends BaseAction {
 		public static List<String> Excludes = new ArrayList<String>();
 		public static WrapCopier<MindFolderInfo, Wo> copier = WrapCopierFactory.wo( MindFolderInfo.class, Wo.class, null,Wo.Excludes);
 		
-		@FieldDescribe( "下级文件夹列表" )
+		@FieldDescribe( "하위 폴더 목록" )
 		private List<Wo> children = null;
 
 		public List<Wo> getChildren() {

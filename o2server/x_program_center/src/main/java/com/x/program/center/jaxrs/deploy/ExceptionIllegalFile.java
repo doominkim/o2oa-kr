@@ -7,7 +7,7 @@ class ExceptionIllegalFile extends LanguagePromptException {
 	private static final long serialVersionUID = -5285650034988505084L;
 
 	public ExceptionIllegalFile(String name) {
-		super("无效的文件:{}.", name);
+		super("유효하지 않은 파일: {}.", name);
 	}
 
 }

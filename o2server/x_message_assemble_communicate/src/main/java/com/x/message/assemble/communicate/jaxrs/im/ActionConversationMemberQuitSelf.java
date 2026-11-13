@@ -36,27 +36,27 @@ public class ActionConversationMemberQuitSelf extends BaseAction {
                 throw new ExceptionConversationNotExist();
             }
             ActionResult<ActionImConfig.Wo> config = new ActionImConfig().execute(effectivePerson);
-            // 没有配置 或者 没有开启撤回
+            // 설정 없음 또는 회수 미사용
             if (config == null || !BooleanUtils.isTrue(config.getData().getEnableGroupMemberQuitSelf())) {
-                throw new ExceptionConversationQuitError("配置未开启。");
+                throw new ExceptionConversationQuitError("설정이 활성화되지 않았습니다.");
             }
-            // 不能退出自己创建的会话
+            // 자신이 만든 대화에서는 나갈 수 없습니다
             if (me.equals(conversation.getAdminPerson())) {
-                throw new ExceptionConversationQuitError("不能退出自己创建的会话。");
+                throw new ExceptionConversationQuitError("자신이 만든 대화방에서는 나갈 수 없습니다.");
             }
-            // 原成员列表
+            // 기존 구성원 목록
             List<String> oldMembers = conversation.getPersonList();
             if (!oldMembers.contains(me)) {
-                throw new ExceptionConversationQuitError("您不在会话成员列表中，不能退出会话。");
+                throw new ExceptionConversationQuitError("대화방 멤버가 아니므로 나갈 수 없습니다.");
             }
             emc.beginTransaction(IMConversation.class);
-            // 退出会话
+            // 대화 나가기
             oldMembers.remove(me);
             conversation.setPersonList(oldMembers);
             conversation.setUpdateTime(new Date());
             emc.check(conversation, CheckPersistType.all);
             emc.commit();
-            // 删除会话扩展信息
+            // 대화 확장 정보 삭제
             Business business = new Business(emc);
             IMConversationExt ext = business.imConversationFactory().getConversationExt(me, conversation.getId());
             if (ext != null) {
@@ -64,9 +64,9 @@ public class ActionConversationMemberQuitSelf extends BaseAction {
                 emc.delete(IMConversationExt.class, ext.getId());
                 emc.commit();
             }
-            // 重新生成会话图标
+            // 대화 아이콘 재생성
             generateConversationIcon(conversation.getId());
-            // 发送消息
+            // 메시지 발송
             sendConversationMsg(oldMembers, conversation,
                     MessageConnector.TYPE_IM_CONVERSATION_UPDATE);
             Wo wo = new Wo();

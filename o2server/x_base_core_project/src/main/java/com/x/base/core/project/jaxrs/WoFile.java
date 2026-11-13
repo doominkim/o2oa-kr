@@ -10,15 +10,15 @@ import com.x.base.core.project.annotation.FieldDescribe;
 public abstract class WoFile extends WoMaxAgeFastETag {
 
 	private static final long serialVersionUID = -4566232046358204025L;
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	private String contentDisposition;
-	@FieldDescribe("类型")
+	@FieldDescribe("유형")
 	private String contentType;
-	@FieldDescribe("字节内容.")
+	@FieldDescribe("바이트 내용.")
 	private byte[] bytes;
-	@FieldDescribe("附件流.")
+	@FieldDescribe("첨부파일 스트림.")
 	private StreamingOutput streamingOutput;
-	@FieldDescribe("附件大小.")
+	@FieldDescribe("첨부파일 크기.")
 	private Long contentLength;
 
 	public WoFile(byte[] bytes, String contentType, String contentDisposition) {

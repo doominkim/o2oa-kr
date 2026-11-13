@@ -32,14 +32,14 @@ public class ScriptAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ScriptAction.class);
 
-	@JaxrsMethodDescribe(value = "获取Script以及依赖脚本内容。", action = ActionLoad.class)
+	@JaxrsMethodDescribe(value = "Script 및 의존 스크립트 내용 조회.", action = ActionLoad.class)
 	@POST
 	@Path("{flag}/application/{applicationFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void load(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("脚本标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag,
+			@JaxrsParameterDescribe("스크립트 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag,
 			JsonElement jsonElement) {
 		ActionResult<ActionLoad.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -52,14 +52,14 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "GET方法获取Script以及依赖脚本内容,POST无法缓存,GET方法不过滤已经导入的脚本.", action = ActionGetImported.class)
+	@JaxrsMethodDescribe(value = "GET 메서드로 Script 및 의존 스크립트 내용 조회, POST는 캐시 불가, GET 메서드는 이미 가져온 스크립트를 필터링하지 않음.", action = ActionGetImported.class)
 	@GET
 	@Path("{flag}/application/{applicationFlag}/imported")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getImported(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("脚本标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("스크립트 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<ActionGetImported.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

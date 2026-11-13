@@ -12,20 +12,20 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "com.x.query.core.express.jaxrs.index.ActionPostWo")
 public class ActionPostWo extends GsonPropertyObject {
 
-    @FieldDescribe("最大得分.")
-    @Schema(description = "最大得分.")
+    @FieldDescribe("최대 점수.")
+    @Schema(description = "최대 점수.")
     private Float maxScore;
 
-    @FieldDescribe("最小得分.")
-    @Schema(description = "最小得分.")
+    @FieldDescribe("최소 점수.")
+    @Schema(description = "최소 점수.")
     private Float minScore;
 
-    @FieldDescribe("相似对象.")
-    @Schema(description = "相似对象.")
+    @FieldDescribe("유사 객체.")
+    @Schema(description = "유사 객체.")
     private List<WoMoreLikeThis> moreLikeThisList = new ArrayList<>();
 
-    @FieldDescribe("返回数量.")
-    @Schema(description = "返回数量.")
+    @FieldDescribe("반환 개수.")
+    @Schema(description = "반환 개수.")
     private Long count;
 
     public Float getMaxScore() {
@@ -54,44 +54,44 @@ public class ActionPostWo extends GsonPropertyObject {
 
     public static class WoMoreLikeThis extends GsonPropertyObject {
 
-        @FieldDescribe("分类.")
-        @Schema(description = "分类.")
+        @FieldDescribe("분류.")
+        @Schema(description = "분류.")
         private String category;
 
-        @FieldDescribe("类型.")
-        @Schema(description = "类型.")
+        @FieldDescribe("유형.")
+        @Schema(description = "유형.")
         private String type;
 
-        @FieldDescribe("目录标识.")
-        @Schema(description = "目录标识.")
+        @FieldDescribe("디렉터리 식별자.")
+        @Schema(description = "디렉터리 식별자.")
         private String key;
 
-        @FieldDescribe("标识.")
-        @Schema(description = "标识.")
+        @FieldDescribe("식별자.")
+        @Schema(description = "식별자.")
         private String flag;
 
-        @FieldDescribe("标题.")
-        @Schema(description = "标题.")
+        @FieldDescribe("제목.")
+        @Schema(description = "제목.")
         private String title;
 
-        @FieldDescribe("创建时间.")
-        @Schema(description = "创建时间.")
+        @FieldDescribe("생성 시간.")
+        @Schema(description = "생성 시간.")
         private Date createTime;
 
-        @FieldDescribe("更新时间.")
-        @Schema(description = "更新时间.")
+        @FieldDescribe("갱신 시간.")
+        @Schema(description = "갱신 시간.")
         private Date updateTime;
 
-        @FieldDescribe("创建人.")
-        @Schema(description = "创建人.")
+        @FieldDescribe("생성자.")
+        @Schema(description = "생성자.")
         private String creatorPerson;
 
-        @FieldDescribe("创建人组织.")
-        @Schema(description = "创建人组织.")
+        @FieldDescribe("생성자 조직.")
+        @Schema(description = "생성자 조직.")
         private String creatorUnit;
 
-        @FieldDescribe("得分.")
-        @Schema(description = "得分.")
+        @FieldDescribe("점수.")
+        @Schema(description = "점수.")
         private Float score;
 
         public String getCategory() {

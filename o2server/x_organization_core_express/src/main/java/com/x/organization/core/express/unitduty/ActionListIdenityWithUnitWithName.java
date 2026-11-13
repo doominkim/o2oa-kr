@@ -25,10 +25,10 @@ class ActionListIdenityWithUnitWithName extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private String unit;
 
-		@FieldDescribe("组织职务名称")
+		@FieldDescribe("조직 직무 이름")
 		private String name;
 
 		public String getName() {

@@ -88,10 +88,10 @@ class ActionListSummaryWithQueryCategory extends BaseAction {
 						Query.queryCategory_FIELDNAME, Query.updateTime_FIELDNAME),
 				null);
 
-		@FieldDescribe("视图对象")
+		@FieldDescribe("뷰 객체")
 		private List<WoView> woViewList = new ArrayList<>();
 
-		@FieldDescribe("统计对象")
+		@FieldDescribe("통계 객체")
 		private List<WoStat> woStatList = new ArrayList<>();
 
 		public List<WoView> getWoViewList() {

@@ -1,16 +1,16 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Elcarousel 基于Element UI的输入框组件。
+/** @class Elcarousel Element UI 기반 입력 상자 컴포넌트.
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|Element UI Tree 树形控件}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|Element UI Tree 트리 컨트롤}
  */
 MWF.xApplication.process.Xform.Elcarousel = MWF.APPElcarousel =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elcarousel# */
@@ -20,9 +20,9 @@ MWF.xApplication.process.Xform.Elcarousel = MWF.APPElcarousel =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 幻灯片切换时触发。this.event[0]为目前激活的幻灯片的索引；
+         * 슬라이드 전환 시 발생. this.event[0]은 현재 활성 슬라이드의 인덱스;
          * @event MWF.xApplication.process.Xform.Elcarousel#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/carousel|幻灯片组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/carousel|슬라이드 컴포넌트의 Events 장}
          */
         "elEvents": ["change"]
     },

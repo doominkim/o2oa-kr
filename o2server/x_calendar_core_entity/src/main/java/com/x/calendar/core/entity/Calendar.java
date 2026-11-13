@@ -29,12 +29,12 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 日历信息
+ * 캘린더 정보
  * 
  * @author O2LEE
  *
  */
-@Schema(name = "Calendar", description = "日程日历信息.")
+@Schema(name = "Calendar", description = "일정 캘린더 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Calendar.table, uniqueConstraints = {
@@ -55,81 +55,81 @@ public class Calendar extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 	public void onPersist() throws Exception {
 
 	}
 
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("日历名称")
+	@FieldDescribe("캘린더 이름")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("日历类别: PERSON | UNIT")
+	@FieldDescribe("캘린더 유형: PERSON | UNIT")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String target_FIELDNAME = "target";
-	@FieldDescribe("人员标识或者组织标识")
+	@FieldDescribe("사용자 식별자 또는 조직 식별자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + target_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + target_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String target;
 
 	public static final String color_FIELDNAME = "color";
-	@FieldDescribe("显示颜色")
+	@FieldDescribe("표시 색상")
 	@Column(length = JpaObject.length_8B, name = ColumnNamePrefix + color_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String color = "#1462be";
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("备注70个字")
+	@FieldDescribe("비고 70자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String source_FIELDNAME = "source";
-	@FieldDescribe("信息来源: LEADER | PERSON | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
+	@FieldDescribe("정보 출처: LEADER | PERSON | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + source_FIELDNAME)
 	private String source;
 
 	public static final String createor_FIELDNAME = "createor";
-	@FieldDescribe("创建者")
+	@FieldDescribe("작성자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ createor_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + createor_FIELDNAME)
 	private String createor = null;
 
 	public static final String isPublic_FIELDNAME = "isPublic";
-	@FieldDescribe("是否公开的日历")
+	@FieldDescribe("공개 캘린더 여부")
 	@Column(name = ColumnNamePrefix + isPublic_FIELDNAME)
 	private Boolean isPublic = false;
 
 	public static final String manageablePersonList_FIELDNAME = "manageablePersonList";
-	@FieldDescribe("可管理人员列表")
+	@FieldDescribe("관리 가능 사용자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -142,7 +142,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> manageablePersonList;
 
 	public static final String followers_FIELDNAME = "followers";
-	@FieldDescribe("关注者列表")
+	@FieldDescribe("구독자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + followers_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -154,7 +154,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> followers;
 
 	public static final String viewablePersonList_FIELDNAME = "viewablePersonList";
-	@FieldDescribe("可见人员列表")
+	@FieldDescribe("열람 가능 사용자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -167,7 +167,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> viewablePersonList;
 
 	public static final String viewableUnitList_FIELDNAME = "viewableUnitList";
-	@FieldDescribe("可见组织列表")
+	@FieldDescribe("열람 가능 조직 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -180,7 +180,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> viewableUnitList;
 
 	public static final String viewableGroupList_FIELDNAME = "viewableGroupList";
-	@FieldDescribe("可见群组列表")
+	@FieldDescribe("열람 가능 그룹 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -193,7 +193,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> viewableGroupList;
 
 	public static final String publishablePersonList_FIELDNAME = "publishablePersonList";
-	@FieldDescribe("可发布人员列表")
+	@FieldDescribe("게시 가능 사용자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -206,7 +206,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> publishablePersonList;
 
 	public static final String publishableUnitList_FIELDNAME = "publishableUnitList";
-	@FieldDescribe("可发布组织列表")
+	@FieldDescribe("게시 가능 조직 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -219,7 +219,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> publishableUnitList;
 
 	public static final String publishableGroupList_FIELDNAME = "publishableGroupList";
-	@FieldDescribe("可发布群组列表")
+	@FieldDescribe("게시 가능 그룹 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -232,7 +232,7 @@ public class Calendar extends SliceJpaObject {
 	private List<String> publishableGroupList;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("日历状态：OPEN|CLOSE")
+	@FieldDescribe("캘린더 상태: OPEN|CLOSE")
 	@Index(name = TABLE + IndexNameMiddle + status_FIELDNAME)
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

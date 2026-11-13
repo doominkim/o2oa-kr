@@ -15,7 +15,7 @@ import java.util.Date;
  * Created by fancyLou on 2023/3/2.
  * Copyright © 2023 O2. All rights reserved.
  */
-@Schema(name = "AttendanceV2AppealInfo", description = "考勤申诉信息.")
+@Schema(name = "AttendanceV2AppealInfo", description = "근태 이의 신청 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2AppealInfo.table, indexes = {
@@ -40,7 +40,7 @@ public class AttendanceV2AppealInfo  extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -49,38 +49,38 @@ public class AttendanceV2AppealInfo  extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
 
     public static final String recordId_FIELDNAME = "recordId";
-    @FieldDescribe("申诉的打卡考勤记录ID.")
+    @FieldDescribe("이의 신청한 출퇴근 기록 ID.")
     @Column( length = JpaObject.length_id, name = ColumnNamePrefix + recordId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String recordId;
 
     public static final String userId_FIELDNAME = "userId";
-    @FieldDescribe("用户标识")
+    @FieldDescribe("사용자 식별자")
     @Column(length = length_96B, name = ColumnNamePrefix + userId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String userId;
 
     public static final String recordDateString_FIELDNAME = "recordDateString";
-    @FieldDescribe("打卡记录日期，yyyy-MM-dd，来自申诉的打卡考勤记录.")
+    @FieldDescribe("출퇴근 기록 날짜, yyyy-MM-dd, 이의 신청한 출퇴근 기록에서 가져옴.")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + recordDateString_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String recordDateString;
 
     public static final String recordDate_FIELDNAME = "recordDate";
-    @FieldDescribe("打卡记录时间，来自申诉的打卡考勤记录.")
+    @FieldDescribe("출퇴근 기록 시간, 이의 신청한 출퇴근 기록에서 가져옴.")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = ColumnNamePrefix + recordDate_FIELDNAME)
     @CheckPersist(allowEmpty = false)
@@ -88,49 +88,49 @@ public class AttendanceV2AppealInfo  extends SliceJpaObject {
 
 
     public static final String startTime_FIELDNAME = "startTime";
-    @FieldDescribe("申诉开始时间")
+    @FieldDescribe("이의 신청 시작 시간")
     @Column( length = JpaObject.length_32B, name = ColumnNamePrefix + startTime_FIELDNAME)
     private String startTime;
 
     public static final String endTime_FIELDNAME = "endTime";
-    @FieldDescribe("申诉结束时间")
+    @FieldDescribe("이의 신청 종료 시간")
     @Column( length = JpaObject.length_32B, name = ColumnNamePrefix + endTime_FIELDNAME)
     private String endTime;
 
     public static final String reason_FIELDNAME = "reason";
     @Lob
     @Basic(fetch = FetchType.EAGER)
-    @FieldDescribe("申诉详细，申诉流程结束后写入.")
+    @FieldDescribe("이의 신청 상세, 이의 신청 프로세스 종료 후 기록.")
     @Column( length = JpaObject.length_2K, name = ColumnNamePrefix + reason_FIELDNAME)
     private String reason;
 
-    public static final Integer status_TYPE_INIT = 0; // 待处理
-    public static final Integer status_TYPE_PROCESSING = 1; // 审批中
-    public static final Integer status_TYPE_PROCESS_AGREE = 2; // 审批通过
-    public static final Integer status_TYPE_PROCESS_DISAGREE = 3; // 审批不通过
-    public static final Integer status_TYPE_END_BY_ADMIN = 4; // 管理员已处理
-    public static final Integer status_TYPE_LOCK = 5; // 已锁定
+    public static final Integer status_TYPE_INIT = 0; // 처리 대기
+    public static final Integer status_TYPE_PROCESSING = 1; // 결재 중
+    public static final Integer status_TYPE_PROCESS_AGREE = 2; // 결재 승인
+    public static final Integer status_TYPE_PROCESS_DISAGREE = 3; // 결재 반려
+    public static final Integer status_TYPE_END_BY_ADMIN = 4; // 관리자 처리 완료
+    public static final Integer status_TYPE_LOCK = 5; // 잠금
     public static final String status_FIELDNAME = "status";
-    @FieldDescribe("申诉状态:0-待处理，1-审批中（已发起流程），2-审批通过，3-审批不通过, 4-管理员处理, 5-已锁定(锁定的数据只能管理员处理)")
+    @FieldDescribe("이의 신청 상태:0-처리 대기, 1-결재 중(프로세스 시작됨), 2-결재 승인, 3-결재 반려, 4-관리자 처리, 5-잠금(잠긴 데이터는 관리자만 처리 가능)")
     @Column( name = ColumnNamePrefix + status_FIELDNAME)
     private Integer status = status_TYPE_INIT;
 
     public static final String jobId_FIELDNAME = "jobId";
-    @FieldDescribe("流程的jobId，申诉流程结束后写入.")
+    @FieldDescribe("프로세스의 jobId, 이의 신청 프로세스 종료 후 기록.")
     @Column( length = JpaObject.length_id, name = ColumnNamePrefix + jobId_FIELDNAME)
     private String jobId;
 
 
     public static final String updateStatusAdminPerson_FIELDNAME = "updateStatusAdminPerson";
-    @FieldDescribe("管理员标识，最后操作人")
+    @FieldDescribe("관리자 식별자, 최종 처리자")
     @Column(length = length_96B, name = ColumnNamePrefix + updateStatusAdminPerson_FIELDNAME)
     private String updateStatusAdminPerson;
 
 
 
-    // 每天早上检查 发送消息提醒
+    // 매일 아침 확인 후 알림 메시지 발송
     public static final String sendStatus_FIELDNAME = "sendStatus";
-    @FieldDescribe("是否已经发送消息")
+    @FieldDescribe("메시지 발송 여부")
     @Column(name = ColumnNamePrefix + sendStatus_FIELDNAME)
     private Boolean sendStatus = false;
 

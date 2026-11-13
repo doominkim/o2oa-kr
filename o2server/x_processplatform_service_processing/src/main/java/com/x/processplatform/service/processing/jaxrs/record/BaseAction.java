@@ -52,7 +52,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 获取所有待办
+	 * 전체 결재 대기 조회
 	 * 
 	 * @param business
 	 * @param job

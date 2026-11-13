@@ -103,7 +103,7 @@ o2.xApplication.systemconfig.LP = {
         "storageNode": "파일 저장소",
 
         "serverData": {
-            // "exposeJest": "接口文档(exposeJest)",
+            // "exposeJest": "API 문서(exposeJest)",
             "httpProtocol": "http 프로토콜(httpProtocol)",
             "host": "호스트(host)",
             "port": "포트(port)",
@@ -113,7 +113,7 @@ o2.xApplication.systemconfig.LP = {
             "requestLogBodyEnable": "로그에 Body 내용 기록",
             "requestLogRetainDays": "로그 보관 일수",
             "sslEnable": "SSL 사용(sslEnable)",
-            // "statEnable": "启用Druid",
+            // "statEnable": "Druid 사용",
 
             "cacheSize": "캐시 크기(cacheSize)",
             "includes": "포함 클래스(includes)",
@@ -335,7 +335,7 @@ o2.xApplication.systemconfig.LP = {
             "mobile": "휴대폰 번호 뒤 6자리 + 고정 문구",
             "unique": "고유 코드 뒤 6자리 + 고정 문구",
             "employee": "사번 + 고정 문구",
-            // "pinyin": "人员名称全拼",
+            // "pinyin": "사용자 이름 전체 병음",
             "text": "고정 문구",
             'script': "스크립트로 초기 비밀번호 사용자 정의"
         },
@@ -596,8 +596,8 @@ o2.xApplication.systemconfig.LP = {
         "securityClearanceEnable": "시스템 보안 등급 표시 사용",
         "securityClearanceEnableInfo": "시스템에 관련 요구 사항이 있다면 보안 등급 표시를 사용할 수 있습니다<br>" +
             "주체 보안 등급과 객체 보안 등급을 설정하여 접근 권한을 제어할 수 있습니다. <br>",
-            // "<b>主体密级：</b>您可在系统配置-三元管理中设置系统的主体密级。<br>" +
-            // "<b>客体密级：</b>可在设计相关表单时增加“密级标识”设计元素，用于设置文档密级标识。",
+            // "<b>주체 보안 등급:</b>시스템 설정-3원 관리에서 시스템의 주체 보안 등급을 설정할 수 있습니다.<br>" +
+            // "<b>객체 보안 등급:</b>관련 양식을 설계할 때 「보안 등급 표시」 설계 요소를 추가하여 문서 보안 등급 표시를 설정할 수 있습니다.",
 
         "subjectSecurityClearance": "주체 보안 등급",
         "subjectSecurityClearanceInfo": "주체 보안 등급을 설정합니다. 값은 숫자이며 클수록 보안 등급이 높습니다. 주체는 보안 등급 값이 자신의 값 이하인 객체에 접근할 수 있습니다. 예를 들어 주체의 보안 등급 값이 300이면 이 주체가 접근할 수 있는 객체의 보안 등급 값은 300 이하여야 합니다.",
@@ -1107,7 +1107,7 @@ o2.xApplication.systemconfig.LP = {
         "indexMode": "인덱스 저장 위치",
         "modeOptions": {
             "localDirectory": "로컬 파일 시스템",
-            // "hdfsDirectory": "hadoop文件系统",
+            // "hdfsDirectory": "hadoop 파일 시스템",
             "sharedDirectory": "공유 파일 시스템"
         },
         "hdfsDirectoryDefaultFS": "hadoop 파일 시스템 주소",

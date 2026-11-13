@@ -25,12 +25,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("qiyeweixin")
-@JaxrsDescribe("企业微信接口")
+@JaxrsDescribe("기업 위챗 인터페이스")
 public class QiyeweixinAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(QiyeweixinAction.class);
 
-	@JaxrsMethodDescribe(value = "发送一个拉入同步请求.", action = ActionRequestPullSync.class)
+	@JaxrsMethodDescribe(value = "풀 동기화 요청 전송.", action = ActionRequestPullSync.class)
 	@POST
 	@Path("request/pull/sync")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -48,7 +48,7 @@ public class QiyeweixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "立即同步.", action = ActionPullSync.class)
+	@JaxrsMethodDescribe(value = "즉시 동기화.", action = ActionPullSync.class)
 	@GET
 	@Path("pull/sync")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class QiyeweixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "随机生成一个企业微信回调的EncodingAESKey.", action = ActionCallbackAESKey.class)
+	@JaxrsMethodDescribe(value = "기업 위챗 콜백용 EncodingAESKey 무작위 생성.", action = ActionCallbackAESKey.class)
 	@GET
 	@Path("get/callback/aes")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -83,7 +83,7 @@ public class QiyeweixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "接收企业微信通讯录变更回调的验证请求.", action = ActionSyncOrganizationCallbackGet.class)
+	@JaxrsMethodDescribe(value = "기업 위챗 주소록 변경 콜백 검증 요청 수신.", action = ActionSyncOrganizationCallbackGet.class)
 	@GET
 	public void syncOrganizationCallbackGet(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
@@ -103,7 +103,7 @@ public class QiyeweixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "接收企业微信通讯录变更回调.", action = ActionSyncOrganizationCallbackPost.class)
+	@JaxrsMethodDescribe(value = "기업 위챗 주소록 변경 콜백 수신.", action = ActionSyncOrganizationCallbackPost.class)
 	@POST
 	public void syncOrganizationCallbackPost(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
@@ -123,7 +123,7 @@ public class QiyeweixinAction extends StandardJaxrsAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "发送获取隐私信息请求的消息.", action = ActionSendGetPrivateInfoMessage.class)
+	@JaxrsMethodDescribe(value = "개인정보 조회 요청 메시지 발송.", action = ActionSendGetPrivateInfoMessage.class)
 	@POST
 	@Path("send/getprivateinfo/message")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

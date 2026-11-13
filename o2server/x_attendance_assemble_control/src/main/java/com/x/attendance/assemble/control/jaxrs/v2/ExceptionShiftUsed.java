@@ -13,6 +13,6 @@ public class ExceptionShiftUsed extends PromptException {
 	private static final long serialVersionUID = 385265565348213466L;
 
 	public ExceptionShiftUsed(@NotNull List<AttendanceV2Group> groupList) {
-		super("当前班次正在被考勤组【"+ groupList.stream().map(AttendanceV2Group::getGroupName).collect(Collectors.joining(",")) +"】使用！");
+		super("현재 근무조는 근태 그룹 【"+ groupList.stream().map(AttendanceV2Group::getGroupName).collect(Collectors.joining(",")) +"】에서 사용 중입니다!");
 	}
 }

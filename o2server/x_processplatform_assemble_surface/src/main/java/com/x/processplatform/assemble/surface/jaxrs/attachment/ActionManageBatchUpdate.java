@@ -35,7 +35,7 @@ class ActionManageBatchUpdate extends BaseAction {
 			if (BooleanUtils.isFalse(business.ifPersonCanManageApplicationOrProcess(effectivePerson, "",""))) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
-			// 天谷印章扩展
+			// 톈구 인장 확장
 			if (StringUtils.isNotEmpty(extraParam)) {
 				WiExtraParam wiExtraParam = gson.fromJson(extraParam, WiExtraParam.class);
 				if (StringUtils.isNotEmpty(wiExtraParam.getFileName())) {

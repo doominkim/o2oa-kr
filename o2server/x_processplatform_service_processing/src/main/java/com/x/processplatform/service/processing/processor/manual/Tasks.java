@@ -42,7 +42,7 @@ public class Tasks {
 				ticket.fromDistinguishedName(), new Date(), null, aeiObjects.getRoutes(), manual.getAllowRapid());
 		task.setLabel(ticket.label());
 		task.setActPerson(ticket.actPerson());
-		// 是第一条待办,进行标记，调度过的待办都标记为非第一个待办
+		// 첫 번째 결재 대기면 표시, 스케줄링된 결재 대기는 모두 첫 번째 결재 대기가 아닌 것으로 표시
 		if (BooleanUtils.isTrue(aeiObjects.getProcessingAttributes().getForceJoinAtArrive())) {
 			task.setFirst(false);
 		} else {
@@ -70,7 +70,7 @@ public class Tasks {
 			aeiObjects.createRead(empowerRead);
 		}
 		if (null != aeiObjects.getWork().getGoBackStore()) {
-			// 如果存储了退回说明下一步需要jump那么待办无需选择路由
+			// 반려가 저장되어 있으면 다음 단계가 jump이므로 결재 대기에서 라우팅을 선택할 필요 없음
 			task.setRouteNameDisable(true);
 		}
 		return task;
@@ -83,7 +83,7 @@ public class Tasks {
 		String unit = aeiObjects.business().organization().unit().getWithIdentity(identity);
 		Task task = new Task(aeiObjects.getWork(), "create", identity, person, unit, fromIdentity, new Date(), null,
 				aeiObjects.getRoutes(), manual.getAllowRapid());
-		// 是第一条待办,进行标记，调度过的待办都标记为非第一个待办
+		// 첫 번째 결재 대기면 표시, 스케줄링된 결재 대기는 모두 첫 번째 결재 대기가 아닌 것으로 표시
 		if (BooleanUtils.isTrue(aeiObjects.getProcessingAttributes().getForceJoinAtArrive())) {
 			task.setFirst(false);
 		} else {
@@ -107,7 +107,7 @@ public class Tasks {
 			aeiObjects.createRead(empowerRead);
 		}
 		if (null != aeiObjects.getWork().getGoBackStore()) {
-			// 如果存储了退回说明下一步需要jump那么待办无需选择路由
+			// 반려가 저장되어 있으면 다음 단계가 jump이므로 결재 대기에서 라우팅을 선택할 필요 없음
 			task.setRouteNameDisable(true);
 		}
 		return task;
@@ -125,7 +125,7 @@ public class Tasks {
 			case script:
 				if (StringUtils.isNotEmpty(manual.getTaskExpireScript())
 						|| StringUtils.isNotEmpty(manual.getTaskExpireScriptText())) {
-					// 有设置的脚本再执行,对应前端选中了用脚本计算但是没有输入内容
+					// 설정된 스크립트가 있을 때만 실행, 프런트에서 스크립트 계산을 선택했지만 내용을 입력하지 않은 경우에 대응
 					expireScript(aeiObjects, manual, task);
 				}
 				break;
@@ -133,7 +133,7 @@ public class Tasks {
 				break;
 			}
 		}
-		// 如果work有截至时间
+		// work에 마감 시간이 있으면
 		if (null != aeiObjects.getWork().getExpireTime()) {
 			if (null == task.getExpireTime()) {
 				task.setExpireTime(aeiObjects.getWork().getExpireTime());
@@ -143,7 +143,7 @@ public class Tasks {
 				}
 			}
 		}
-		// 已经有过期时间了,那么设置催办时间
+		// 이미 만료 시간이 있으면 독촉 시간 설정
 		if (null != task.getExpireTime()) {
 			task.setUrgeTime(DateUtils.addHours(task.getExpireTime(), -2));
 		} else {
@@ -162,7 +162,7 @@ public class Tasks {
 				.setActivityName(work.getActivityName()).setEmpowerTime(new Date());
 	}
 
-	// 从不过期
+	// 만료되지 않음
 	private static void expireNever(Task task) {
 		task.setExpireTime(null);
 	}

@@ -1,6 +1,6 @@
 [
 //  {
-//    "title": "筛选",
+//    "title": "필터",
 //    "id": "1.1",
 //    "action": "loadFileter",
 //    "icon": "publish.png",
@@ -10,7 +10,7 @@
 //    "sub": []
 //  },
 //  {
-//    "title": "新建",
+//    "title": "새로 만들기",
 //    "id": "1.1",
 //    "action": "createDocument",
 //    "icon": "create.png",

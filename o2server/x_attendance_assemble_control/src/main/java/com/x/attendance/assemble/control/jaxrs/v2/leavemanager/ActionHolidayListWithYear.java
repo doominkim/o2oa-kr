@@ -22,7 +22,7 @@ public class ActionHolidayListWithYear extends BaseAction {
 
     ActionResult<Wo> execute(Integer year) throws Exception {
         if (year == null) {
-            throw new ExceptionWithMessage("年份不能为空");
+            throw new ExceptionWithMessage("연도는 비워 둘 수 없습니다");
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             ActionResult<Wo> result = new ActionResult<>();
@@ -58,13 +58,13 @@ public class ActionHolidayListWithYear extends BaseAction {
 
         private static final long serialVersionUID = 8927136890101437265L;
 
-        @FieldDescribe("年份")
+        @FieldDescribe("연도")
         private Integer year;
 
-        @FieldDescribe("工作日数组")
+        @FieldDescribe("근무일 배열")
         private List<AttendanceV2Holiday> workdayList;
 
-        @FieldDescribe("放假日数组")
+        @FieldDescribe("휴일 배열")
         private List<AttendanceV2Holiday> offdayList;
 
         public Integer getYear() {

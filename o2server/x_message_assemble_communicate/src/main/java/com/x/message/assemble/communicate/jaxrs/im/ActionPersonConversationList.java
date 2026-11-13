@@ -27,7 +27,7 @@ public class ActionPersonConversationList extends BaseAction {
 	ActionResult<List<Wo>> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
 		LOGGER.debug("execute ActionPersonConversationList :{}.", effectivePerson::getDistinguishedName);
 		if (!effectivePerson.isManager()) {
-			throw new ExceptionConversationCheckError("没有权限，需要管理员操作");
+			throw new ExceptionConversationCheckError("권한이 없습니다. 관리자가 처리해야 합니다");
 		}
 		Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
 		if (StringUtils.isEmpty(wi.getPerson())) {
@@ -45,7 +45,7 @@ public class ActionPersonConversationList extends BaseAction {
 				if (ext != null) {
 					wo.setExt(ext);
 				} else {
-					LOGGER.info("没有找到对应 IMConversationExt ？？ " + wi.getPerson() + "  " + wo.getId());
+					LOGGER.info("해당 IMConversationExt를 찾을 수 없음?? " + wi.getPerson() + "  " + wo.getId());
 				}
 				if (BooleanUtils.isTrue(wi.getNeedCount())) {
 					wo.setMessageCount(business.imConversationFactory().conversationMessageTotalCount(wo.getId()));
@@ -57,9 +57,9 @@ public class ActionPersonConversationList extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("用户 DN")
+		@FieldDescribe("사용자 DN")
 		private String person;
-		@FieldDescribe("是否需要统计消息数量，会慢一点")
+		@FieldDescribe("메시지 수 통계 필요 여부(조금 느림)")
 		private Boolean needCount;
 
 		public String getPerson() {
@@ -82,9 +82,9 @@ public class ActionPersonConversationList extends BaseAction {
 	public static class Wo extends IMConversation {
 
 		private static final long serialVersionUID = 7287973396081917642L;
-		@FieldDescribe("消息数量.")
+		@FieldDescribe("메시지 수.")
 		private Long messageCount;
-		// 扩展 业务操作使用
+		// 확장. 업무 처리용
 		private IMConversationExt ext;
 
 		static WrapCopier<IMConversation, Wo> copier = WrapCopierFactory.wo(IMConversation.class, Wo.class, null,

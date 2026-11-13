@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  * |------------------------------------------------------------------------------|
- * | O2OA 活力办公 创意无限    o2m.api.js                                            |
+ * | O2OA 활력 있는 업무, 무한한 창의    o2m.api.js                                            |
  * |------------------------------------------------------------------------------|
  * | Distributed under the AGPL license:                                          |
  * |------------------------------------------------------------------------------|
@@ -28,16 +28,16 @@
 
 /**
  * @summary
- * <b>o2m</b> 是O2OA移动端APP提供的调用原生控件的能力，帮助开发者高效使用拍照、定位等手机系统的能力，同时可以直接使用扫一扫、打开原生应用、选择时间，人员，组织等业务的能力，带给门户接近原生代码的体验
+ * <b>o2m</b>은 O2OA 모바일 APP이 제공하는 네이티브 컨트롤 호출 기능으로, 개발자가 촬영·위치 조회 등 휴대폰 시스템 기능을 효율적으로 사용하도록 돕고, 스캔·네이티브 앱 열기·시간·사용자·조직 선택 등 업무 기능을 직접 사용할 수 있게 하여 포털에 네이티브에 가까운 경험을 제공함
  * <br/>
- * <b>o2m</b> 只有在O2OA移动端APP中才能提供能力
+ * <b>o2m</b>은 O2OA 모바일 APP에서만 기능을 제공함
  * @namespace o2m
- * @o2cn 平台移动APP API
+ * @o2cn 플랫폼 모바일 APP API
  * @o2category mobile
  * @o2ordernumber 13
- * @o2range {流程表单|门户}
+ * @o2range {프로세스 양식|포털}
  * @o2syntax
- * // 可以在移动端 流程表单、门户 上使用
+ * // 모바일 프로세스 양식, 포털에서 사용 가능
  * window.o2m
  *
  */
@@ -98,19 +98,19 @@
     }
 
     /**
-     * 添加事件
+     * 이벤트 추가
      * @method addEvent
      * @memberOf o2m
      * @static
-     * @param {String} name 事件名称 (reload, workClose, documentClose)
-     * @param {Function} events 执行方法
+     * @param {String} name 이벤트 이름 (reload, workClose, documentClose)
+     * @param {Function} events 실행 메서드
      * @example
      * const reloadFun = function(){
-     *     //执行业务
+     *     //업무 실행
      * }
-     * o2m.addEvent("reload", reloadFun ); //添加事件
-     * reloadFun.remove(); //从事件中删除
-     * o2m.removeEvent("onReload", reloadFun ); //从事件中删除
+     * o2m.addEvent("reload", reloadFun ); //이벤트 추가
+     * reloadFun.remove(); //이벤트에서 삭제
+     * o2m.removeEvent("onReload", reloadFun ); //이벤트에서 삭제
      */
     this.o2m.addEvent = function (name, ...events) {
         switch (name) {
@@ -171,15 +171,15 @@
     };
 
     /**
-     * 门户加载完成执行
+     * 포털 로드 완료 후 실행
      * @method portalLoaded
      * @memberOf o2m
      * @static
-     * @param {String} callback 操作按钮点击执行函数
-     * @param {String} iconClassName 操作按钮 icon className
-     * @param {Object[]} menuList 操作按钮列表 [{"title": "菜单名称", "callback": "回调函数名称"}]
+     * @param {String} callback 작업 버튼 클릭 시 실행 함수
+     * @param {String} iconClassName 작업 버튼 icon className
+     * @param {Object[]} menuList 작업 버튼 목록 [{"title": "메뉴 이름", "callback": "콜백 함수 이름"}]
      * @example
-     * window.o2m.portalLoaded('callbackName'); //添加操作按钮
+     * window.o2m.portalLoaded('callbackName'); //작업 버튼 추가
      */
     this.o2m.portalLoaded = function (callback, iconClassName, menuList) {
         if (!callback && !menuList) {
@@ -219,18 +219,18 @@
     };
 
     /**
-     * 上传文件，并返回文件 id
+     * 파일 업로드 후 파일 id 반환
      * @method uploadFile
      * @memberOf o2m
      * @static
-     * @param {Object} args 传入对象
+     * @param {Object} args 전달 객체
      * <pre><code class='language-js'>{
-     *  "callback": function,  // 上传结果返回函数
-     *  "onlyTakePhoto": false // 只能拍照
+     *  "callback": function,  // 업로드 결과 반환 함수
+     *  "onlyTakePhoto": false // 촬영만 가능
      * }</code></pre>
      * @example
      * o2m.uploadFile({
-     *  callback : function(result) {//callback将在点击button之后回调}
+     *  callback : function(result) {//callback은 button 클릭 후 호출됨}
      * });
      *
      */
@@ -259,7 +259,7 @@
 
     /** ***** BEGIN NOTIFICATION BLOCK *****
      @ignore
-     @summary notification 模块
+     @summary notification 모듈
       alert
       confirm
       prompt
@@ -324,29 +324,29 @@
         _notification_post(body, onFail);
     };
     /**
-     * 原生Alert提示弹出窗
+     * 네이티브 Alert 알림 팝업
      * @method alert
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj 提示窗传入对象
+     * @param {Object} obj 알림 창에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "title": "提示",  //消息标题，可为空
-     *  "message": "这里是消息内容", //消息内容
-     *  "buttonName": "确定", //确定按钮名称
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "title": "알림",  //메시지 제목, 비워 둘 수 있음
+     *  "message": "여기는 메시지 내용입니다", //메시지 내용
+     *  "buttonName": "확인", //확인 버튼 이름
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/notification_alert.jpeg">
      * </caption>
      * o2m.notification.alert({
-     *  message: "亲爱的",
-     *  title: "提示",//可传空
-     *  buttonName: "收到",
-     *  onSuccess : function() {//onSuccess将在点击button之后回调},
+     *  message: "안녕하세요",
+     *  title: "알림",//비워 둘 수 있음
+     *  buttonName: "확인함",
+     *  onSuccess : function() {//onSuccess는 button 클릭 후 호출됨},
      *  onFail : function(err) {}
      * });
      *
@@ -390,31 +390,31 @@
         _notification_post(body, onFail);
     }
     /**
-     * 原生confirm提示弹出窗
+     * 네이티브 confirm 알림 팝업
      * @method confirm
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj 提示窗传入对象
+     * @param {Object} obj 알림 창에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "title": "提示",  //消息标题，可为空
-     *  "message": "这里是消息内容", //消息内容
-     *  "buttonLabels": ["확인", "취소"], //按钮名称 Array[String]
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "title": "알림",  //메시지 제목, 비워 둘 수 있음
+     *  "message": "여기는 메시지 내용입니다", //메시지 내용
+     *  "buttonLabels": ["확인", "취소"], //버튼 이름 Array[String]
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/notification_confirm.jpeg">
      * </caption>
      * o2m.notification.confirm({
-     *  message: "你爱我吗",
-     *  title: "提示",//可传空
-     *  buttonLabels: ['爱', '不爱'],
+     *  message: "저를 좋아하나요?",
+     *  title: "알림",//비워 둘 수 있음
+     *  buttonLabels: ['좋아함', '안 좋아함'],
      *  onSuccess : function(buttonIndex) {
-     *    //onSuccess将在点击button之后回调
-     *    //buttonIndex: 0 被点击按钮的索引值，Number类型，从0开始
+     *    //onSuccess는 button 클릭 후 호출됨
+     *    //buttonIndex: 0 클릭된 버튼의 인덱스 값, Number 유형, 0부터 시작
      * },
      *  onFail : function(err) {}
      * });
@@ -459,33 +459,33 @@
         _notification_post(body, onFail);
     }
     /**
-     * 原生prompt提示弹出窗
+     * 네이티브 prompt 알림 팝업
      * @method prompt
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj prompt需要传入对象
+     * @param {Object} obj prompt에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "title": "提示",  //消息标题，可为空
-     *  "message": "这里是消息内容", //消息内容
-     *  "buttonLabels": ['继续', '不玩了'], //按钮名称 Array[String]
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "title": "알림",  //메시지 제목, 비워 둘 수 있음
+     *  "message": "여기는 메시지 내용입니다", //메시지 내용
+     *  "buttonLabels": ['계속', '그만'], //버튼 이름 Array[String]
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/notification_prompt.jpeg">
      * </caption>
      * o2m.notification.prompt({
-     *  message: "再说一遍？",
-     *  title: "提示",//可传空
-     *  buttonLabels: ['继续', '不玩了'],
+     *  message: "다시 말해 줄래요?",
+     *  title: "알림",//비워 둘 수 있음
+     *  buttonLabels: ['계속', '그만'],
      *  onSuccess : function(result) {
-     *     //result是一个字符串，格式是json格式，内容如下：
+     *     //result는 json 형식의 문자열이며, 내용은 다음과 같음:
      *     //{
-     *     //    buttonIndex: 0, //被点击按钮的索引值，Number类型，从0开始
-     *     //    value: '' //输入的值
+     *     //    buttonIndex: 0, //클릭된 버튼의 인덱스 값, Number 유형, 0부터 시작
+     *     //    value: '' //입력한 값
      *     //}
      * },
      *  onFail : function(err) {}
@@ -518,16 +518,16 @@
     };
 
     /**
-     * 手机震动
+     * 휴대폰 진동
      * @method vibrate
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj 震动需要传入对象
+     * @param {Object} obj 진동에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "duration": 300,  //震动时间，android可配置 iOS忽略
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "duration": 300,  //진동 시간, android에서 설정 가능 iOS는 무시
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.notification.vibrate({
@@ -570,20 +570,20 @@
     };
 
     /**
-     * toast提示
+     * toast 알림
      * @method toast
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj toast需要传入对象
+     * @param {Object} obj toast에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "message": "这里是提示信息",
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "message": "여기는 알림 정보입니다",
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.notification.toast({
-     *  message: "提示消息内容",
+     *  message: "알림 메시지 내용",
      *  onSuccess : function() {
      * },
      *  onFail : function(err) {}
@@ -625,30 +625,30 @@
         _notification_post(body, onFail);
     };
     /**
-     * 底部弹出菜单
+     * 하단 팝업 메뉴
      * @method actionSheet
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj actionSheet需要传入对象
+     * @param {Object} obj actionSheet에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "title": "谁是最棒哒？",//标题
-     *  "cancelButton": '取消', //取消按钮文本
-     *  "otherButtons": ["孙悟空","猪八戒","唐僧","沙和尚"], //其他选项按钮名称
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "title": "누가 최고일까요?",//제목
+     *  "cancelButton": '취소', //취소 버튼 텍스트
+     *  "otherButtons": ["손오공","저팔계","삼장법사","사오정"], //기타 선택 버튼 이름
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/notification_action_sheet.jpeg">
      * </caption>
      * o2m.notification.actionSheet({
-     *  title: "谁是最棒哒？", //标题
-     *  cancelButton: '取消', //取消按钮文本
-     *  otherButtons: ["孙悟空","猪八戒","唐僧","沙和尚"],
+     *  title: "누가 최고일까요?", //제목
+     *  cancelButton: '취소', //취소 버튼 텍스트
+     *  otherButtons: ["손오공","저팔계","삼장법사","사오정"],
      *  onSuccess : function(buttonIndex) {
-     *  //buttonIndex: 0 被点击按钮的索引值，Number，从0开始, 取消按钮为-1
+     *  //buttonIndex: 0 클릭된 버튼의 인덱스 값, Number, 0부터 시작, 취소 버튼은 -1
      * },
      *  onFail : function(err) {}
      * });
@@ -677,24 +677,24 @@
         _notification_post(body, onFail);
     };
     /**
-     * 显示Loading浮层，请和hideLoading配合使用
+     * Loading 레이어 표시, hideLoading과 함께 사용
      * @method showLoading
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj showLoading需要传入对象
+     * @param {Object} obj showLoading에 전달할 객체
      * <pre><code class='language-js'>{
-     *  text: "使劲加载中..", //loading显示的字符，空表示不显示文字
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  text: "열심히 로딩 중..", //loading에 표시할 문자, 비어 있으면 문자 표시 안 함
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/notification_showLoading.jpeg">
      * </caption>
      * o2m.notification.showLoading({
-     *  text: "使劲加载中..", //loading显示的字符，空表示不显示文字
+     *  text: "열심히 로딩 중..", //loading에 표시할 문자, 비어 있으면 문자 표시 안 함
      *  onSuccess : function() {
      * },
      *  onFail : function(err) {}
@@ -721,15 +721,15 @@
         _notification_post(body, onFail);
     }
     /**
-     * 隐藏Loading浮层
+     * Loading 레이어 숨기기
      * @method hideLoading
      * @memberOf o2m
      * @o2membercategory notification
      * @static
-     * @param {Object} obj hideLoading需要传入对象
+     * @param {Object} obj hideLoading에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.notification.hideLoading({
@@ -745,7 +745,7 @@
     /** ***** BEGIN UTIL BLOCK *****
      * @ignore
      * @summary
-     util 模块
+     util 모듈
      date
      o2m.util.date.datePicker
      o2m.util.date.timePicker
@@ -820,26 +820,26 @@
     };
 
     /**
-     * 日期选择器
+     * 날짜 선택기
      * @method datePicker
      * @memberOf o2m
      * @o2membercategory util.date
      * @static
-     * @param {Object} obj  datePicker需要传入对象
+     * @param {Object} obj  datePicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  value: '2019-04-17', //默认显示日期
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  value: '2019-04-17', //기본 표시 날짜
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/util_date_picker.jpeg">
      * </caption>
      * o2m.util.date.datePicker({
-     * value: '2019-04-17', //默认显示日期
+     * value: '2019-04-17', //기본 표시 날짜
      * onSuccess : function(result) {
-     *     //onSuccess将在点击完成之后回调
+     *     //onSuccess는 완료 클릭 후 호출됨
      *     {
      *         value: "2019-02-10"
      *     }
@@ -870,26 +870,26 @@
         _util_post(body, onFail);
     };
     /**
-     * 时间选择器
+     * 시간 선택기
      * @method timePicker
      * @memberOf o2m
      * @o2membercategory util.date
      * @static
-     * @param {Object} obj  timePicker需要传入对象
+     * @param {Object} obj  timePicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  value: '14:00', //默认显示时间
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  value: '14:00', //기본 표시 시간
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/util_time_picker.jpeg">
      * </caption>
      * o2m.util.date.timePicker({
-     * value: '14:00', //默认显示时间
+     * value: '14:00', //기본 표시 시간
      * onSuccess : function(result) {
-     *     //onSuccess将在点击完成之后回调
+     *     //onSuccess는 완료 클릭 후 호출됨
      *     {
      *         value: "18:10"
      *     }
@@ -921,26 +921,26 @@
         _util_post(body, onFail);
     };
     /**
-     * 日期时间选择器
+     * 날짜·시간 선택기
      * @method dateTimePicker
      * @memberOf o2m
      * @o2membercategory util.date
      * @static
-     * @param {Object} obj  dateTimePicker需要传入对象
+     * @param {Object} obj  dateTimePicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  value: '2019-05-05 14:00', //默认显示时间
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  value: '2019-05-05 14:00', //기본 표시 시간
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/util_date_time_picker.jpeg">
      * </caption>
      * o2m.util.date.dateTimePicker({
-     * value: '2019-05-05 14:00', //默认显示时间
+     * value: '2019-05-05 14:00', //기본 표시 시간
      * onSuccess : function(result) {
-     *     //onSuccess将在点击完成之后回调
+     *     //onSuccess는 완료 클릭 후 호출됨
      *     {
      *         value: "2019-03-18 18:10"
      *     }
@@ -972,26 +972,26 @@
         _util_post(body, onFail);
     };
     /**
-     * 月历日期选择器
+     * 월력 날짜 선택기
      * @method chooseOneDay
      * @memberOf o2m
      * @o2membercategory util.calendar
      * @static
-     * @param {Object} obj  chooseOneDay需要传入对象
+     * @param {Object} obj  chooseOneDay에 전달할 객체
      * <pre><code class='language-js'>{
-     *  value: '2019-05-05', //默认显示日期
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  value: '2019-05-05', //기본 표시 날짜
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/util_choose_one_day.jpeg">
      * </caption>
      * o2m.util.calendar.chooseOneDay({
-     * value: '2019-05-05', //默认显示日期
+     * value: '2019-05-05', //기본 표시 날짜
      * onSuccess : function(result) {
-     *     //onSuccess将在点击完成之后回调
+     *     //onSuccess는 완료 클릭 후 호출됨
      *     {
      *         value: "2019-03-18"
      *     }
@@ -1023,26 +1023,26 @@
         _util_post(body, onFail);
     };
     /**
-     * 月历日期时间选择器
+     * 월력 날짜·시간 선택기
      * @method chooseDateTime
      * @memberOf o2m
      * @o2membercategory util.calendar
      * @static
-     * @param {Object} obj  chooseDateTime需要传入对象
+     * @param {Object} obj  chooseDateTime에 전달할 객체
      * <pre><code class='language-js'>{
-     *  value: '2019-05-05 11:00', //默认显示时间
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  value: '2019-05-05 11:00', //기본 표시 시간
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/util_choose_date_time.jpeg">
      * </caption>
      * o2m.util.calendar.chooseDateTime({
-     * value: '2019-05-05 11:00', //默认显示时间
+     * value: '2019-05-05 11:00', //기본 표시 시간
      * onSuccess : function(result) {
-     *     //onSuccess将在点击完成之后回调
+     *     //onSuccess는 완료 클릭 후 호출됨
      *     {
      *         value: "2019-03-18 18:45"
      *     }
@@ -1076,28 +1076,28 @@
         _util_post(body, onFail);
     };
     /**
-     * 月历日期区间选择器
+     * 월력 날짜 구간 선택기
      * @method chooseInterval
      * @memberOf o2m
      * @o2membercategory util.calendar
      * @static
-     * @param {Object} obj  chooseInterval需要传入对象
+     * @param {Object} obj  chooseInterval에 전달할 객체
      * <pre><code class='language-js'>{
      *  startDate: '2019-05-05',
      *  endDate: '2019-05-06',
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/util_choose_interval.jpeg">
      * </caption>
      * o2m.util.calendar.chooseInterval({
      * startDate: '2019-05-05',
      * endDate: '2019-05-06',
      * onSuccess : function(result) {
-     *     //onSuccess将在点击完成之后回调
+     *     //onSuccess는 완료 클릭 후 호출됨
      *     {
      *         startDate: "2019-05-05",
      endDate: "2019-05-06",
@@ -1127,27 +1127,27 @@
         _util_post(body, onFail);
     };
     /**
-     * 获取手机基础信息
+     * 휴대폰 기본 정보 조회
      * @method getPhoneInfo
      * @memberOf o2m
      * @o2membercategory util.device
      * @static
-     * @param {Object} obj  getPhoneInfo需要传入对象
+     * @param {Object} obj  getPhoneInfo에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.device.getPhoneInfo({
      * onSuccess : function(result) {
      *     {
-     *      screenWidth: 1080, // 手机屏幕宽度
-     *      screenHeight: 1920, // 手机屏幕高度
-     *      brand:'Mi'， // 手机品牌
-     *      model:'Note4', // 手机型号
-     *      version:'7.0'. // 版本
-     *      netInfo:'wifi' , // 网络类型 wifi／4g／3g
-     *      operatorType :'xx' // 运营商信息
+     *      screenWidth: 1080, // 휴대폰 화면 너비
+     *      screenHeight: 1920, // 휴대폰 화면 높이
+     *      brand:'Mi', // 휴대폰 브랜드
+     *      model:'Note4', // 휴대폰 모델
+     *      version:'7.0'. // 버전
+     *      netInfo:'wifi' , // 네트워크 유형 wifi/4g/3g
+     *      operatorType :'xx' // 통신사 정보
      *     }
      *  },
      *  onFail : function(err) {}
@@ -1174,15 +1174,15 @@
         _util_post(body, onFail);
     };
     /**
-     * 旋转屏幕
+     * 화면 회전
      * @method rotate
      * @memberOf o2m
      * @o2membercategory util.device
      * @static
      * @param {Object} obj  rotate
      * <pre><code class='language-js'>{
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.device.rotate({
@@ -1212,20 +1212,20 @@
         _util_post(body, onFail);
     };
     /**
-     * 扫二维码
+     * QR 코드 스캔
      * @method scan
      * @memberOf o2m
      * @o2membercategory util.device
      * @static
-     * @param {Object} obj  scan需要传入对象
+     * @param {Object} obj  scan에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.device.scan({
      * onSuccess : function(result) {
-     *     // result返回结果就是扫码的结果
+     *     // result 반환 결과가 곧 스캔 결과
      *  },
      *  onFail : function(err) {}
      *});
@@ -1251,24 +1251,24 @@
         _util_post(body, onFail);
     };
     /**
-     * 单次定位
+     * 1회 위치 조회
      * @method location
      * @memberOf o2m
      * @o2membercategory util.device
      * @static
-     * @param {Object} obj  location需要传入对象
+     * @param {Object} obj  location에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.device.location({
      * onSuccess : function(result) {
-     *     //这里返回百度坐标系的定位信息
+     *     //여기서 바이두 좌표계의 위치 정보를 반환
      *     {
-     *      'latitude': 39.903578, // 纬度
-     *      'longitude': 116.473565, // 经度
-     *      'address': '地址描述'
+     *      'latitude': 39.903578, // 위도
+     *      'longitude': 116.473565, // 경도
+     *      'address': '주소 설명'
      *      }
      *  },
      *  onFail : function(err) {}
@@ -1282,22 +1282,22 @@
         console.log("util device localAuth back, result:" + result);
     };
     /**
-     * 移动端生物识别认证
+     * 모바일 생체 인증
      * @method localAuth
      * @memberOf o2m
      * @o2membercategory util.device
      * @static
-     * @param {Object} obj  localAuth 需要传入对象
+     * @param {Object} obj  localAuth 에 전달할 객체
      * <pre><code class='language-js'>{
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.device.localAuth({
      * onSuccess : function(result) {
-     *     // result 是一个 json 字符串
+     *     // result 는 json 문자열
      *     {
-     *      "value":  false // 是否授权成功
+     *      "value":  false // 인증 성공 여부
      *      }
      *  },
      *  onFail : function(err) {}
@@ -1339,20 +1339,20 @@
         _util_post(body, onFail);
     };
     /**
-     * 设置原生页面标题
+     * 네이티브 페이지 제목 설정
      * @method setTitle
      * @memberOf o2m
      * @o2membercategory util.navigation
      * @static
-     * @param {Object} obj  setTitle需要传入对象
+     * @param {Object} obj  setTitle에 전달할 객체
      * <pre><code class='language-js'>{
-     *  title : '导航标题',
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  title : '내비게이션 제목',
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.navigation.setTitle({
-     * title : '导航标题',
+     * title : '내비게이션 제목',
      * onSuccess : function() {
      *  },
      *  onFail : function(err) {}
@@ -1379,7 +1379,7 @@
         _util_post(body, onFail);
     };
     /**
-     * 关闭当前原生页面
+     * 현재 네이티브 페이지 닫기
      * @method close
      * @memberOf o2m
      * @o2membercategory util.navigation
@@ -1408,7 +1408,7 @@
         _util_post(body, onFail);
     };
     /**
-     * 返回上级原生页面
+     * 상위 네이티브 페이지로 돌아가기
      * @method goBack
      * @memberOf o2m
      * @o2membercategory util.navigation
@@ -1419,7 +1419,7 @@
     this.o2m.util.navigation.goBack = _o2m_u_navigation_goBack;
 
 
-    //o2m.util.navigation.openInnerApp  内部应用打开 包含门户
+    //o2m.util.navigation.openInnerApp  내부 앱 열기(포털 포함)
     this.o2m.util.navigation.openInnerAppSuccess = function (result) {
         console.log("util navigation openInnerApp back, result:" + result);
     };
@@ -1449,19 +1449,19 @@
     };
 
     /**
-     * 打开内部应用
+     * 내부 앱 열기
      * @method openInnerApp
      * @memberOf o2m
      * @o2membercategory util.navigation
      * @static
-     * @param {Object} obj  openInnerApp需要传入对象
+     * @param {Object} obj  openInnerApp에 전달할 객체
      * <pre><code class='language-js'>{
-     *  appKey : 'attendance',  // 对应用的 key:  task(待办)、taskcompleted(已办)、read(待阅)、readcompleted(已阅)、meeting(会议管理)、clouddisk(网盘)、bbs(论坛)、cms(信息中心)、attendance(考勤)、calendar(日程)、mindMap(脑图)、portal(门户，门户需要传入portalFlag和portalTitle)
-     *  portalFlag : '门户标识',
-     *  portalTitle : '门户标题',
-     *  portalPage : '门户页面 id',
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  appKey : 'attendance',  // 앱의 key:  task(결재 대기), taskcompleted(처리 완료), read(열람 대기), readcompleted(열람 완료), meeting(회의 관리), clouddisk(클라우드 드라이브), bbs(포럼), cms(정보 센터), attendance(근태), calendar(일정), mindMap(마인드맵), portal(포털, 포털은 portalFlag와 portalTitle 전달 필요)
+     *  portalFlag : '포털 식별자',
+     *  portalTitle : '포털 제목',
+     *  portalPage : '포털 페이지 id',
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.navigation.openInnerApp({
@@ -1473,7 +1473,7 @@
      */
     this.o2m.util.navigation.openInnerApp = _o2m_u_navigation_openInnerApp;
 
-    //o2m.util.navigation.openOtherApp 功能不完整，有很多限制。暂时不开放
+    //o2m.util.navigation.openOtherApp 기능이 불완전하고 제한이 많아 당분간 공개하지 않음
     this.o2m.util.navigation.openOtherAppSuccess = function (result) {
         console.log("util navigation openOtherApp back, result:" + result);
     };
@@ -1496,7 +1496,7 @@
     this.o2m.util.navigation.openOtherApp = _o2m_u_navigation_openOtherApp;
 
 
-    //o2m.util.navigation.openWindow 新窗口打开网页 门户
+    //o2m.util.navigation.openWindow 새 창에서 웹 페이지 열기 포털
     this.o2m.util.navigation.openWindowSuccess = function (result) {
         console.log("util navigation openWindow back, result:" + result);
     };
@@ -1518,16 +1518,16 @@
     };
 
     /**
-     * 新窗口打开网页
+     * 새 창에서 웹 페이지 열기
      * @method openWindow
      * @memberOf o2m
      * @o2membercategory util.navigation
      * @static
-     * @param {Object} obj  openWindow需要传入对象
+     * @param {Object} obj  openWindow에 전달할 객체
      * <pre><code class='language-js'>{
-     *  url : 'https://www.o2oa.net',  // 打开的网址
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  url : 'https://www.o2oa.net',  // 열 주소
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * o2m.util.navigation.openWindow({
@@ -1540,7 +1540,7 @@
     this.o2m.util.navigation.openWindow = _o2m_u_navigation_openWindow;
 
 
-    //o2m.util.navigation.openInBrowser 手机默认浏览器打开当前页面
+    //o2m.util.navigation.openInBrowser 휴대폰 기본 브라우저에서 현재 페이지 열기
     this.o2m.util.navigation.openInBrowserSuccess = function (result) {
         console.log("util navigation openInBrowser back, result:" + result);
     };
@@ -1559,7 +1559,7 @@
     };
 
     /**
-     * 手机默认浏览器打开当前页面
+     * 휴대폰 기본 브라우저에서 현재 페이지 열기
      * @method openInBrowser
      * @memberOf o2m
      * @o2membercategory util.navigation
@@ -1574,7 +1574,7 @@
     this.o2m.util.navigation.openInBrowser = _o2m_u_navigation_openInBrowser;
 
 
-    //o2m.util.navigation.clearCache 清理缓存并刷新页面
+    //o2m.util.navigation.clearCache 캐시 정리 후 페이지 새로 고침
     this.o2m.util.navigation.clearCacheSuccess = function (result) {
         console.log("util navigation clearCache back, result:" + result);
     };
@@ -1593,7 +1593,7 @@
     };
 
     /**
-     * 清理缓存并刷新页面
+     * 캐시 정리 후 페이지 새로 고침
      * @method clearCache
      * @memberOf o2m
      * @o2membercategory util.navigation
@@ -1608,7 +1608,7 @@
     this.o2m.util.navigation.clearCache = _o2m_u_navigation_clearCache;
 
 
-    //o2m.util.navigation.share 分享图片
+    //o2m.util.navigation.share 이미지 공유
     this.o2m.util.navigation.shareSuccess = function (result) {
         console.log("util navigation share back, result:" + result);
     };
@@ -1630,14 +1630,14 @@
     };
 
     /**
-     * 分享图片功能，目前只支持 base64 进行分享
+     * 이미지 공유 기능, 현재 base64 공유만 지원
      * @method share
      * @memberOf o2m
      * @o2membercategory util.navigation
      * @static
      * @example
      * o2m.util.navigation.share({
-     * base64: '图片的 base64 编码';
+     * base64: '이미지의 base64 인코딩';
      * onSuccess : function() {
      *  },
      *  onFail : function(err) {}
@@ -1645,7 +1645,7 @@
      */
     this.o2m.util.navigation.share = _o2m_u_navigation_share;
 
-    //o2m.util.navigation.refresh 刷新
+    //o2m.util.navigation.refresh 새로 고침
     this.o2m.util.navigation.refreshSuccess = function (result) {
         console.log("util navigation refresh back, result:" + result);
     };
@@ -1673,7 +1673,7 @@
     /** ***** BEGIN BIZ BLOCK *****
      * @ignore
      * @summary
-     biz 模块
+     biz 모듈
      contact
      o2m.biz.contact.PersonPicker
      o2m.biz.contact.IdentityPicker
@@ -1726,7 +1726,7 @@
         }
     }
     /**
-     * 关闭当前工作页面，<b>只能在工作表单中可以使用</b>
+     * 현재 업무 문서 페이지 닫기, <b>업무 문서 양식에서만 사용 가능</b>
      * @method workClose
      * @memberOf o2m
      * @o2membercategory biz
@@ -1776,34 +1776,34 @@
         }
     }
     /**
-     * 创建一条内容管理文档。
+     * 콘텐츠 관리 문서를 생성합니다.
      * @method createDocument
      * @memberOf o2m
      * @o2membercategory biz
      * @static
      * @param {(String|Object)} [columnOrOptions]
-     * 如果不传参数，则弹出范围为平台所有栏目的选择界面。<br/>
-     * 当使用String时为内容管理应用（栏目）的名称、别名或ID。<br/>
-     * 当使用Object时，本参数后面的参数省略，传入如下格式的内容:
+     * 인자를 전달하지 않으면 플랫폼 전체 게시판 범위의 선택 화면을 띄웁니다.<br/>
+     * String이면 콘텐츠 관리 앱(게시판)의 이름, 별칭 또는 ID입니다.<br/>
+     * Object이면 이 인자 뒤의 인자는 생략하고 다음 형식의 내용을 전달합니다:
      * <pre><code class="language-js">{
-     *   "column" : column, //（string）可选，内容管理应用（栏目）的名称、别名或ID
-     *   "category" : category, //（string）可选，要创建的文档所属的分类的名称、别名或ID
-     *   "data" : data, //（json object）可选，创建文档时默认的业务数据
-     *   "latest" : latest, //（boolean）可选，为true时，如果当前用户已经创建了此分类的文档，并且没有发布过，直接调用此文档为新文档；否则创建一个新文档。默认true。
-     *   "ignoreTitle" : ignoreTitle //（boolean）可选，值为false时，创建的时候需要强制填写标题，默认为false。
+     *   "column" : column, //(string) 선택, 콘텐츠 관리 앱(게시판)의 이름, 별칭 또는 ID
+     *   "category" : category, //(string) 선택, 생성할 문서가 속한 분류의 이름, 별칭 또는 ID
+     *   "data" : data, //(json object) 선택, 문서 생성 시 기본 업무 데이터
+     *   "latest" : latest, //(boolean) 선택, true이면 현재 사용자가 이 분류의 문서를 이미 만들고 게시하지 않은 경우 그 문서를 새 문서로 사용. 아니면 새 문서 생성. 기본값 true.
+     *   "ignoreTitle" : ignoreTitle //(boolean) 선택, false이면 생성 시 제목 입력 필수. 기본값 false.
      * }</code></pre>
-     * @param {String} [category] - 要创建的文档所属的分类的名称、别名或ID
-     * @param {Object} [data] - 创建文档时默认的业务数据
-     * @param {Boolean} [latest] - 为true时，如果当前用户已经创建了此分类的文档，并且没有发布过，直接调用此文档为新文档；否则创建一个新文档。默认true。
-     * @param {Boolean} [ignoreTitle] - 值为false时，创建的时候需要强制填写标题，默认为false。
+     * @param {String} [category] - 생성할 문서가 속한 분류의 이름, 별칭 또는 ID
+     * @param {Object} [data] - 문서 생성 시 기본 업무 데이터
+     * @param {Boolean} [latest] - true이면 현재 사용자가 이 분류의 문서를 이미 만들고 게시하지 않은 경우 그 문서를 새 문서로 사용. 아니면 새 문서 생성. 기본값 true.
+     * @param {Boolean} [ignoreTitle] - false이면 생성 시 제목 입력 필수. 기본값 false.
      * @example
-     * //启动一个通知公告
-     * o2m.biz.createDocument("", "通知公告");
+     * //공지사항 생성
+     * o2m.biz.createDocument("", "공지사항");
      * @example
-     *          //启动一个通知公告，标题为：关于XX的通知，启动后提示
+     *          //공지사항 생성, 제목: XX 관련 공지, 생성 후 알림
      *          o2m.biz.createDocument({
-     *             category : "通知公告",
-     *             data : {"subject": "关于XX的通知"}
+     *             category : "공지사항",
+     *             data : {"subject": "XX에 관한 공지"}
      *          });
      */
     this.o2m.biz.createDocument = _o2m_b_createDocument;
@@ -1837,40 +1837,40 @@
         _biz_post(body, onFail);
     };
     /**
-     * 通讯录选部门
+     * 주소록 부서 선택
      * @method departmentsPicker
      * @memberOf o2m
      * @o2membercategory biz
      * @static
-     * @param {Object} obj  departmentsPicker需要传入对象
+     * @param {Object} obj  departmentsPicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  topList: [],//Array[String] 可选的顶级组织列表，不传或列表为空的时候，显示全部组织
-     *  orgType: "",//String 可选择的组织类别。为空就是全部组织类型都可以
-     *  multiple:true, //是否多选
-     *  maxNumber: 0, //Int 当multiple为true的时候，最多可选择的部门数
-     *  pickedDepartments:[],//Array[String] 已经选择的部门distinguishedName列表
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  topList: [],//Array[String] 선택 가능한 최상위 조직 목록, 전달하지 않거나 빈 목록이면 전체 조직 표시
+     *  orgType: "",//String 선택 가능한 조직 유형. 비어 있으면 모든 조직 유형 선택 가능
+     *  multiple:true, //다중 선택 여부
+     *  maxNumber: 0, //Int multiple이 true일 때 선택 가능한 최대 부서 수
+     *  pickedDepartments:[],//Array[String] 이미 선택한 부서 distinguishedName 목록
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/biz_dept_choose.png">
      * </caption>
      * o2m.biz.contact.departmentsPicker({
-     * topList: [],//不传或者空列表，显示全部组织
-     * orgType: "",//可传空 只显示某种类型的组织
-     * multiple:true, //是否多选
-     * maxNumber: 0, //最大选择数量
-     * pickedDepartments:[],//已选部门
+     * topList: [],//전달하지 않거나 빈 목록이면 전체 조직 표시
+     * orgType: "",//비워 둘 수 있음 특정 유형의 조직만 표시
+     * multiple:true, //다중 선택 여부
+     * maxNumber: 0, //최대 선택 수
+     * pickedDepartments:[],//선택한 부서
      * onSuccess : function(result) {
-     *     //返回结果样例
+     *     //반환 결과 예시
      *     {
      *       departments:[{
      *       "id":"xxxx",
-     *       "name":"部门名称",
+     *       "name":"부서 이름",
      *       "unique":"xxxx",
-     *       "distinguishedName":"部门@xxxx@U",
+     *       "distinguishedName":"부서@xxxx@U",
      *       "typeList":["xxxx"],
      *       "shortName":"xxxx",
      *       "level": 0,
@@ -1914,39 +1914,39 @@
         _biz_post(body, onFail);
     };
     /**
-     * 通讯录选身份
+     * 주소록 신분 선택
      * @method IdentityPicker
      * @memberOf o2m
      * @o2membercategory biz
      * @static
-     * @param {Object} obj  IdentityPicker需要传入对象
+     * @param {Object} obj  IdentityPicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  topList: [],//Array[String] 可选的顶级组织列表，不传或列表为空的时候，显示全部组织
-     *  multiple:true, //Boolean 是否多选
-     *  maxNumber: 0, //Int 当multiple为true的时候，最多可选择的身份数
-     *  pickedIdentities:[],//Array[String] 已经选择的身份distinguishedName列表
-     *  duty: [],//Array[String] 可选择的人员职责
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  topList: [],//Array[String] 선택 가능한 최상위 조직 목록, 전달하지 않거나 빈 목록이면 전체 조직 표시
+     *  multiple:true, //Boolean 다중 선택 여부
+     *  maxNumber: 0, //Int multiple이 true일 때 선택 가능한 최대 신분 수
+     *  pickedIdentities:[],//Array[String] 이미 선택한 신분 distinguishedName 목록
+     *  duty: [],//Array[String] 선택 가능한 사용자 직무
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/biz_identity_choose.png">
      * </caption>
      * o2m.biz.contact.IdentityPicker({
-     * topList: [],//不传或者空列表，显示全部组织
-     * multiple:true, //是否多选
-     * maxNumber: 0, //最大选择数量
-     * pickedIdentities:[],//已选身份列表
-     * duty: [],//人员职责
+     * topList: [],//전달하지 않거나 빈 목록이면 전체 조직 표시
+     * multiple:true, //다중 선택 여부
+     * maxNumber: 0, //최대 선택 수
+     * pickedIdentities:[],//선택한 신분 목록
+     * duty: [],//사용자 직무
      * onSuccess : function(result) {
-     *     //返回结果样例
+     *     //반환 결과 예시
      *     {
      *       identities:[{
      *         "id":"xxxx",
-     *         "name":"姓名",
-     *         "distinguishedName":"姓名@xxxx@I",
+     *         "name":"이름",
+     *         "distinguishedName":"이름@xxxx@I",
      *         "person":"xxx",
      *         "unique":"xxxx",
      *         "unit":"xxx",
@@ -1991,35 +1991,35 @@
         _biz_post(body, onFail);
     };
     /**
-     * 群组选择
+     * 그룹 선택
      * @method GroupPicker
      * @memberOf o2m
      * @o2membercategory biz
      * @static
-     * @param {Object} obj  GroupPicker需要传入对象
+     * @param {Object} obj  GroupPicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  multiple:true, //Boolean 是否多选
-     *  maxNumber: 0, //Int 当multiple为true的时候，最多可选择的身份数
-     *  pickedGroups:[],//Array[String] 已经选择的群组distinguishedName列表
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  multiple:true, //Boolean 다중 선택 여부
+     *  maxNumber: 0, //Int multiple이 true일 때 선택 가능한 최대 신분 수
+     *  pickedGroups:[],//Array[String] 이미 선택한 그룹 distinguishedName 목록
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/biz_group_choose.png">
      * </caption>
      * o2m.biz.contact.GroupPicker({
-     * multiple:true, //是否多选
-     * maxNumber: 0, //最大选择数量
-     * pickedGroups:[],//已选群组列表
+     * multiple:true, //다중 선택 여부
+     * maxNumber: 0, //최대 선택 수
+     * pickedGroups:[],//선택한 그룹 목록
      * onSuccess : function(result) {
-     *     //返回结果样例
+     *     //반환 결과 예시
      *     {
      *        groups:[{
      *           "id":"xxxx",
-     *           "name":"群组名称",
-     *           "distinguishedName":"群组名称@xxxx@G"
+     *           "name":"그룹 이름",
+     *           "distinguishedName":"그룹 이름@xxxx@G"
      *           "unique":"xxxx",
      *           }]
      *     }
@@ -2056,36 +2056,36 @@
         _biz_post(body, onFail);
     };
     /**
-     * 人员选择
+     * 사용자 선택
      * @method PersonPicker
      * @memberOf o2m
      * @o2membercategory biz
      * @static
-     * @param {Object} obj  PersonPicker需要传入对象
+     * @param {Object} obj  PersonPicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  multiple:true, //Boolean 是否多选
-     *  maxNumber: 0, //Int 当multiple为true的时候，最多可选择的身份数
-     *  pickedUsers:[],//Array[String] 已经选择的人员distinguishedName列表
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  multiple:true, //Boolean 다중 선택 여부
+     *  maxNumber: 0, //Int multiple이 true일 때 선택 가능한 최대 신분 수
+     *  pickedUsers:[],//Array[String] 이미 선택한 사용자 distinguishedName 목록
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/biz_person_choose.png">
      * </caption>
      * o2m.biz.contact.PersonPicker({
-     * multiple:true, //是否多选
-     * maxNumber: 0, //最大选择数量
-     * pickedUsers:[],//已选人员列表
+     * multiple:true, //다중 선택 여부
+     * maxNumber: 0, //최대 선택 수
+     * pickedUsers:[],//선택한 사용자 목록
      * onSuccess : function(result) {
-     *     //返回结果样例
+     *     //반환 결과 예시
      *     {
      *         users:[{
      *           "id":"xxx",
-     *           "name":"姓名",
+     *           "name":"이름",
      *           "unique":"xxx",
-     *           "distinguishedName":"姓名@xxxx@P"
+     *           "distinguishedName":"이름@xxxx@P"
      *           "genderType":"xxx",
      *           "employee":"xxx",
      *           "mail":"xxx",
@@ -2142,50 +2142,50 @@
         _biz_post(body, onFail);
     };
     /**
-     * 复合选择器，可配置选择多种数据
+     * 복합 선택기, 여러 데이터를 선택하도록 설정 가능
      * @method ComplexPicker
      * @memberOf o2m
      * @o2membercategory biz
      * @static
-     * @param {Object} obj  ComplexPicker需要传入对象
+     * @param {Object} obj  ComplexPicker에 전달할 객체
      * <pre><code class='language-js'>{
-     *  pickMode: ["departmentPicker", "identityPicker"], //Array[String] 选择器类型，可传入值：departmentPicker、identityPicker、groupPicker、personPicker
-     *  topList：Array[String] 可选的顶级组织列表，不传或列表为空的时候，显示全部组织
-     *  duty: Array[String] 可选择的人员职责
-     *  orgType：String 可选择的组织类别。为空就是全部组织类型都可以
-     *  multiple:true, //Boolean 是否多选
-     *  maxNumber: 0, //Int 当multiple为true的时候，最多可选择的身份数
-     *  pickedDepartments：Array[String] 已经选择的部门distinguishedName列表
-     *  pickedIdentities：Array[String] 已经选择的身份distinguishedName列表
-     *  pickedGroups： Array[String] 已经选择的群组distinguishedName列表
-     *  pickedUsers:[],//Array[String] 已经选择的人员distinguishedName列表
-     *  "onSuccess": function,  //成功回调
-     *  "onFail": function, //失败回调
+     *  pickMode: ["departmentPicker", "identityPicker"], //Array[String] 선택기 유형, 가능한 값: departmentPicker, identityPicker, groupPicker, personPicker
+     *  topList: Array[String] 선택 가능한 최상위 조직 목록, 전달하지 않거나 빈 목록이면 전체 조직 표시
+     *  duty: Array[String] 선택 가능한 사용자 직무
+     *  orgType: String 선택 가능한 조직 유형. 비어 있으면 모든 조직 유형 선택 가능
+     *  multiple:true, //Boolean 다중 선택 여부
+     *  maxNumber: 0, //Int multiple이 true일 때 선택 가능한 최대 신분 수
+     *  pickedDepartments: Array[String] 이미 선택한 부서 distinguishedName 목록
+     *  pickedIdentities: Array[String] 이미 선택한 신분 distinguishedName 목록
+     *  pickedGroups:  Array[String] 이미 선택한 그룹 distinguishedName 목록
+     *  pickedUsers:[],//Array[String] 이미 선택한 사용자 distinguishedName 목록
+     *  "onSuccess": function,  //성공 콜백
+     *  "onFail": function, //실패 콜백
      * }</code></pre>
      * @example
      * <caption>
-     * 样例效果：<br/>
+     * 예시 효과:<br/>
      * <img src="img/module/o2m/biz_complex_choose.png">
      * </caption>
      * o2m.biz.contact.ComplexPicker({
-     * pickMode: ["departmentPicker", "identityPicker"], //选择器类型
-     * topList: [],//不传或者空列表，显示全部组织
-     * orgType: "",//可传空 只显示某种类型的组织
-     * duty: [],//人员职责
-     * multiple:true, //是否多选
-     * maxNumber: 0, //最大选择数量
-     * pickedDepartments:[],//已选部门
-     * pickedIdentities:[],//已选身份列表
-     * pickedGroups:[],//已选群组列表
-     * pickedUsers:[],//已选人员列表
+     * pickMode: ["departmentPicker", "identityPicker"], //선택기 유형
+     * topList: [],//전달하지 않거나 빈 목록이면 전체 조직 표시
+     * orgType: "",//비워 둘 수 있음 특정 유형의 조직만 표시
+     * duty: [],//사용자 직무
+     * multiple:true, //다중 선택 여부
+     * maxNumber: 0, //최대 선택 수
+     * pickedDepartments:[],//선택한 부서
+     * pickedIdentities:[],//선택한 신분 목록
+     * pickedGroups:[],//선택한 그룹 목록
+     * pickedUsers:[],//선택한 사용자 목록
      * onSuccess : function(result) {
-     *     //返回结果样例
+     *     //반환 결과 예시
      *     {
      *       departments:[{
      *       "id":"xxxx",
-     *       "name":"部门名称",
+     *       "name":"부서 이름",
      *       "unique":"xxxx",
-     *       "distinguishedName":"部门@xxxx@U",
+     *       "distinguishedName":"부서@xxxx@U",
      *       "typeList":["xxxx"],
      *       "shortName":"xxxx",
      *       "level": 0,
@@ -2193,8 +2193,8 @@
      *       }],
      *       identities:[{
      *       "id":"xxxx",
-     *       "name":"姓名",
-     *       "distinguishedName":"姓名@xxxx@I",
+     *       "name":"이름",
+     *       "distinguishedName":"이름@xxxx@I",
      *       "person":"xxx",
      *       "unique":"xxxx",
      *       "unit":"xxx",
@@ -2207,15 +2207,15 @@
      *       }],
      *       groups:[{
      *       "id":"xxxx",
-     *       "name":"群组名称",
-     *       "distinguishedName":"群组名称@xxxx@G"
+     *       "name":"그룹 이름",
+     *       "distinguishedName":"그룹 이름@xxxx@G"
      *       "unique":"xxxx",
      *       }],
      *       users:[{
      *       "id":"xxx",
-     *       "name":"姓名",
+     *       "name":"이름",
      *       "unique":"xxx",
-     *       "distinguishedName":"姓名@xxxx@P"
+     *       "distinguishedName":"이름@xxxx@P"
      *       "genderType":"xxx",
      *       "employee":"xxx",
      *       "mail":"xxx",
@@ -2254,7 +2254,7 @@
         };
         _biz_post(body, onFail);
     };
-    // 文件预览 后续要删除
+    // 파일 미리보기 추후 삭제 예정
     this.o2m.biz.file.PreviewDoc = _o2m_b_file_preview;
 
 })();

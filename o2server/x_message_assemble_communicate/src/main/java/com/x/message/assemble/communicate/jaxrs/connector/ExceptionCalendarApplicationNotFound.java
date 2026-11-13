@@ -7,6 +7,6 @@ class ExceptionCalendarApplicationNotFound extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionCalendarApplicationNotFound() {
-		super("没有找到 x_calendar_assemble_control 应用.");
+		super("x_calendar_assemble_control 앱을 찾을 수 없습니다.");
 	}
 }

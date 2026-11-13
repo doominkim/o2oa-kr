@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 class ParallelAddBeforeSingleFellowCheckTest {
 
 	/**
-	 * A和B并行,B前加签单人CD,那么CD和AB分别作为fellow,而CD之间不应该是fellow
+	 * A와 B 병렬, B 앞에 단일 처리 CD 추가 결재, CD와 AB는 각각 fellow가 되지만 CD끼리는 fellow가 아니어야 함
 	 */
 	@Test
 	@Order(1)

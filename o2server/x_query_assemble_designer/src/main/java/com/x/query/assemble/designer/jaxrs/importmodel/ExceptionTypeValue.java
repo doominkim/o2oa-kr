@@ -8,6 +8,6 @@ class ExceptionTypeValue extends LanguagePromptException {
 	private static final long serialVersionUID = -4641740144236932958L;
 
 	ExceptionTypeValue(String value) {
-		super("类型值必须为{}、{}或者 {}, {} 值不可接受.",ImportModel.TYPE_CMS , ImportModel.TYPE_PROCESSPLATFORM, ImportModel.TYPE_DYNAMIC_TABLE,value);
+		super("유형 값은 {}, {} 또는 {}여야 합니다. {} 값은 허용되지 않습니다.",ImportModel.TYPE_CMS , ImportModel.TYPE_PROCESSPLATFORM, ImportModel.TYPE_DYNAMIC_TABLE,value);
 	}
 }

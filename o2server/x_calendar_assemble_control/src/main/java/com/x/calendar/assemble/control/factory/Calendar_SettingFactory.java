@@ -17,7 +17,7 @@ import com.x.calendar.core.entity.Calendar_Setting_;
 
 
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
  * @author O2LEE
  */
 public class Calendar_SettingFactory extends AbstractFactory {
@@ -27,7 +27,7 @@ public class Calendar_SettingFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的Calendar_Setting配置信息对象
+	 * 지정한 Id의 Calendar_Setting 설정 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -37,7 +37,7 @@ public class Calendar_SettingFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示全部的Calendar_Setting配置信息列表
+	 * 전체 Calendar_Setting 설정 정보 목록 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -51,7 +51,7 @@ public class Calendar_SettingFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的Calendar_Setting配置信息列表
+	 * 지정한 Id의 Calendar_Setting 설정 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -69,7 +69,7 @@ public class Calendar_SettingFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据CODE列示指定Id的Calendar_Setting配置信息列表
+	 * CODE로 지정한 Id의 Calendar_Setting 설정 정보 목록 조회
 	 * @param code
 	 * @return
 	 * @throws Exception
@@ -88,7 +88,7 @@ public class Calendar_SettingFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据配置编码查询配置信息对象
+	 * 설정 코드로 설정 정보 객체 조회
 	 * @param configCode
 	 * @return
 	 * @throws Exception

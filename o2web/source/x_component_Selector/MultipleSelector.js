@@ -12,16 +12,16 @@ MWF.xApplication.Selector.MultipleSelector = new Class({
         "types" : [],
         "count": 0,
         "title": "",
-        "groups": [], //选person, group, role 时的范围
-        "roles": [], //选选person, group, role 时的范围
-        "units": [], //选 company, department, duty, identity 时的范围
+        "groups": [], //person, group, role 선택 시의 범위
+        "roles": [], //person, group, role 선택 시의 범위
+        "units": [], //company, department, duty, identity 선택 시의 범위
         "values" : [],
 
         "zIndex": 1000,
         "expand": true,
 
-        "contentUrl" : "", //和默认的页面布局不一样的话，可以传入页面布局HTML URL
-        "injectToBody" : false //当传入HTML URL的时候是否插入到document.body, false的时候插入到this.container
+        "contentUrl" : "", //기본 페이지 레이아웃과 다르면 페이지 레이아웃 HTML URL 전달 가능
+        "injectToBody" : false //HTML URL 전달 시 document.body에 삽입할지 여부, false이면 this.container에 삽입
     },
     initialize: function(container, options){
         this.active = true;
@@ -657,7 +657,7 @@ MWF.xApplication.Selector.MultipleSelector = new Class({
                 this.tab.css.tabNodeCurrent["width"] = tabWidth;
             }
         }else{
-            width = this.container.getSize().x - 160; //160是确定和返回按钮的宽度
+            width = this.container.getSize().x - 160; //160은 확인 및 돌아가기 버튼의 너비
             var w = width / this.options.types.length - 2;
             tabWidth = w < 60 ? w : 60;
             if( this.tab.css.tabNode ){
@@ -675,15 +675,15 @@ MWF.xApplication.Selector.MultipleSelector = new Class({
             var itemAreaScrollNode = selector.itemAreaScrollNode;
             itemAreaScrollNode.addEvents({
                 'touchstart' : function( ev ){
-                    var touch = ev.touches[0]; //获取第一个触点
-                    startY = Number(touch.pageY); //页面触点Y坐标
+                    var touch = ev.touches[0]; //첫 번째 터치 지점 조회
+                    startY = Number(touch.pageY); //페이지 터치 지점 Y 좌표
                 }.bind(this),
                 'touchmove' : function(ev){
-                    var touch = ev.touches[0]; //获取第一个触点
-                    y = Number(touch.pageY); //页面触点Y坐标
+                    var touch = ev.touches[0]; //첫 번째 터치 지점 조회
+                    y = Number(touch.pageY); //페이지 터치 지점 Y 좌표
                 }.bind(this),
                 'touchend' : function( ev ){
-                    if (startY - y > 10) { //向上滑动超过10像素
+                    if (startY - y > 10) { //위로 10픽셀 넘게 스와이프
                         if(selector._scrollEvent){
                             selector._scrollEvent( itemAreaScrollNode.scrollTop + 100 );
                         }
@@ -786,18 +786,18 @@ MWF.xApplication.Selector.MultipleSelector = new Class({
                         if(layout.mobile)selector.overrideSelectedItems();
                         selector.contentNode = pageNode;
 
-                        //如果已选在content节点中，说明每种类型都有自己的已选节点
+                        //선택 항목이 content 노드 안에 있으면 유형마다 자체 선택 노드가 있다는 뜻
                         var selectedNode = this.contentNode.querySelector('[data-o2-element="selectedNode"]');
                         if( !selectedNode && this.selectedNode){
-                            //否则在当前节点中获取
+                            //그렇지 않으면 현재 노드에서 조회
                             selector.selectedNode = this.selectedNode.clone().inject(lastSelectedNode || this.selectedNode, 'after');
                             lastSelectedNode = selector.selectedNode;
                         }
 
-                        //如果有已选数量在content节点中，说明每种类型都有自己的已选节点
+                        //선택 수량이 content 노드 안에 있으면 유형마다 자체 선택 노드가 있다는 뜻
                         var selectedCountTextNode = this.contentNode.querySelector('[data-o2-element="selectedCountTextNode"]');
                         if( !selectedCountTextNode && this.selectedCountTextNode){
-                            //否则在当前节点中获取
+                            //그렇지 않으면 현재 노드에서 조회
                             this.selectedCountTextNode.hide();
                             selector.selectedCountTextNode = this.selectedCountTextNode.clone().show().
                             inject(lastselectedCountTextNode || this.selectedCountTextNode, 'after');
@@ -1120,9 +1120,9 @@ MWF.xApplication.Selector.MultipleSelector.Filter = new Class({
     Implements: [Options, Events],
     options: {
         "types" : [],
-        "groups": [], //选person, group, role 时的范围
-        "roles": [], //选选person, group, role 时的范围
-        "units": [] //选 company, department, duty, identity 时的范围
+        "groups": [], //person, group, role 선택 시의 범위
+        "roles": [], //person, group, role 선택 시의 범위
+        "units": [] //company, department, duty, identity 선택 시의 범위
     },
     initialize: function(value, options){
         this.setOptions(options);

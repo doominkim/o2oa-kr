@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("cachedispatch")
-@JaxrsDescribe("缓存分发")
+@JaxrsDescribe("캐시 분배")
 public class CacheDispatchAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(CacheDispatchAction.class);
 
-	@JaxrsMethodDescribe(value = "接收其他应用发送过来的cache刷新请求,再进行分派.", action = ActionDispatch.class)
+	@JaxrsMethodDescribe(value = "다른 앱에서 보낸 cache 갱신 요청을 받아 분배.", action = ActionDispatch.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

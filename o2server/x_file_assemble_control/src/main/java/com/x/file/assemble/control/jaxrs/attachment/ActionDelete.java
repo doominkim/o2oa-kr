@@ -33,11 +33,11 @@ class ActionDelete extends BaseAction {
 			emc.beginTransaction(Attachment.class);
 			emc.delete(Attachment.class, attachment.getId());
 			emc.commit();
-			/* 发送取消共享通知 */
+			/* 공유 취소 알림 발송 */
 			for (String str : ListTools.trim(attachment.getShareList(), true, true)) {
 				this.message_send_attachment_shareCancel(attachment, str);
 			}
-			/* 发送取消共享编辑通知 */
+			/* 공유 편집 취소 알림 발송 */
 			for (String str : ListTools.trim(attachment.getEditorList(), true, true)) {
 				this.message_send_attachment_editorCancel(attachment, str);
 			}

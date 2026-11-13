@@ -10,7 +10,7 @@ import com.x.base.core.project.bean.NameValueCountPair;
  **/
 public class ProcessNameValueCountPair extends NameValueCountPair {
 
-    @FieldDescribe("流程所属应用.")
+    @FieldDescribe("프로세스 소속 앱.")
     private String application;
 
     public String getApplication() {

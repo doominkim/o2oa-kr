@@ -29,19 +29,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("mergeitemplan")
-@JaxrsDescribe("合并条目计划")
+@JaxrsDescribe("항목 병합 계획")
 public class MergeItemPlanAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(MergeItemPlanAction.class);
 
-	@JaxrsMethodDescribe(value = "分页列示MergeItemPlan对象.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "MergeItemPlan 객체 페이지 목록 조회.", action = ActionListPaging.class)
 	@GET
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -53,16 +53,16 @@ public class MergeItemPlanAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示指定应用下的MergeItemPlan对象.", action = ActionListWithApplicationPaging.class)
+	@JaxrsMethodDescribe(value = "지정 앱의 MergeItemPlan 객체 페이지 목록 조회.", action = ActionListWithApplicationPaging.class)
 	@GET
 	@Path("list/application/{applicationId}/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithApplicationPaging(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationId") String applicationId,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationId") String applicationId,
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListWithApplicationPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -74,13 +74,13 @@ public class MergeItemPlanAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定的MergeItemPlan信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 MergeItemPlan 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -92,7 +92,7 @@ public class MergeItemPlanAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建MergeItemPlan", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "MergeItemPlan 생성", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -109,13 +109,13 @@ public class MergeItemPlanAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新MergeItemPlan", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "MergeItemPlan 수정", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -127,13 +127,13 @@ public class MergeItemPlanAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除MergeItemPlan", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "MergeItemPlan 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -145,7 +145,7 @@ public class MergeItemPlanAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "计算待归档数据总量", action = ActionEstimate.class)
+	@JaxrsMethodDescribe(value = "보관 대상 데이터 총량 계산", action = ActionEstimate.class)
 	@POST
 	@Path("estimate")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

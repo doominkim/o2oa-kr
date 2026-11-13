@@ -40,10 +40,10 @@ public class AreaAction extends StandardJaxrsAction {
 	private static final Logger logger = LoggerFactory.getLogger(AreaAction.class);
 	private static final String OPERATIONID_PREFIX = "AreaAction::";
 
-	@Operation(summary = "列示省级行政区域信息.", operationId = OPERATIONID_PREFIX + "listProvince", responses = {
+	@Operation(summary = "시·도 행정구역 정보 목록.", operationId = OPERATIONID_PREFIX + "listProvince", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListProvince.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示省级行政区域信息.", action = ActionListProvince.class)
+	@JaxrsMethodDescribe(value = "시·도 행정구역 정보 목록.", action = ActionListProvince.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -60,16 +60,16 @@ public class AreaAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示指定省所属市级行政区域信息.", operationId = OPERATIONID_PREFIX + "listCity", responses = {
+	@Operation(summary = "지정 시·도 소속 시 행정구역 정보 목록.", operationId = OPERATIONID_PREFIX + "listCity", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListCity.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定省所属市级行政区域信息.", action = ActionListCity.class)
+	@JaxrsMethodDescribe(value = "지정 시·도 소속 시 행정구역 정보 목록.", action = ActionListCity.class)
 	@GET
 	@Path("list/province/{province}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listCity(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("省") @PathParam("province") String province) {
+			@JaxrsParameterDescribe("시·도") @PathParam("province") String province) {
 		ActionResult<List<ActionListCity.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -81,17 +81,17 @@ public class AreaAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示指定省市所属区行政区域信息.", operationId = OPERATIONID_PREFIX + "listDistrict", responses = {
+	@Operation(summary = "지정 시·도·시 소속 구 행정구역 정보 목록.", operationId = OPERATIONID_PREFIX + "listDistrict", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListDistrict.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定省市所属区行政区域信息.", action = ActionListDistrict.class)
+	@JaxrsMethodDescribe(value = "지정 시·도·시 소속 구 행정구역 정보 목록.", action = ActionListDistrict.class)
 	@GET
 	@Path("list/province/{province}/city/{city}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listDistrict(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("省") @PathParam("province") String province,
-			@JaxrsParameterDescribe("市") @PathParam("city") String city) {
+			@JaxrsParameterDescribe("시·도") @PathParam("province") String province,
+			@JaxrsParameterDescribe("시") @PathParam("city") String city) {
 		ActionResult<List<ActionListDistrict.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -103,17 +103,17 @@ public class AreaAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示指定省市区所属街道行政区域信息.", operationId = OPERATIONID_PREFIX + "listStreet", responses = {
+	@Operation(summary = "지정 시·도·구 소속 읍·면·동 행정구역 정보 목록.", operationId = OPERATIONID_PREFIX + "listStreet", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListStreet.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定省市区所属街道行政区域信息.", action = ActionListStreet.class)
+	@JaxrsMethodDescribe(value = "지정 시·도·구 소속 읍·면·동 행정구역 정보 목록.", action = ActionListStreet.class)
 	@GET
 	@Path("list/province/{province}/city/{city}/district/{district}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStreet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("省") @PathParam("province") String province,
-			@JaxrsParameterDescribe("市") @PathParam("city") String city,
+			@JaxrsParameterDescribe("시·도") @PathParam("province") String province,
+			@JaxrsParameterDescribe("시") @PathParam("city") String city,
 			@JaxrsParameterDescribe("区") @PathParam("district") String district) {
 		ActionResult<List<ActionListStreet.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);

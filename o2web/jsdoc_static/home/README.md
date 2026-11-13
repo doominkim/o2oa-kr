@@ -1,307 +1,307 @@
 # O2OA API {@o2version}
 
-## 简介
+## 소개
 
-* O2OA 是一个高度可定制化的企业级办公平台，您可以通过脚本语言扩展平台功能。
+* O2OA는 고도로 사용자 정의 가능한 기업용 오피스 플랫폼이며, 스크립트 언어로 플랫폼 기능을 확장할 수 있습니다.
 
-* O2OA 前端脚本运行在浏览器和移动端h5页面，基于您使用浏览器的Javascript引擎，使用Javascript语法。
+* O2OA 프런트엔드 스크립트는 브라우저와 모바일 h5 페이지에서 실행되며, 사용 중인 브라우저의 Javascript 엔진을 기반으로 Javascript 문법을 사용합니다.
 
-* O2OA 后端脚本运行在服务器上。V9.0.0版本开始基于GraalVM，完全兼容 ECMAScript 2021 规范。9.0.0（不含）之前基于Nashorn，遵循ECMAScript 5.1规范。除本API的modules.server章节外，后端脚本还支持该文章所描述的特性：[https://www.o2oa.net/cms/service/531.html](https://www.o2oa.net/cms/service/531.html)。
+* O2OA 백엔드 스크립트는 서버에서 실행됩니다. V9.0.0 버전부터 GraalVM 기반으로 ECMAScript 2021 규격과 완전히 호환됩니다. 9.0.0(미포함) 이전에는 Nashorn 기반으로 ECMAScript 5.1 규격을 따릅니다. 이 API의 modules.server 장 외에도 백엔드 스크립트는 다음 글에서 설명하는 기능을 지원합니다: [https://www.o2oa.net/cms/service/531.html](https://www.o2oa.net/cms/service/531.html).
 
-* 本API是O2OA脚本的编写说明，您可以通过脚本访问和操作平台内的各种对象。
+* 이 API는 O2OA 스크립트 작성 안내입니다. 스크립트로 플랫폼의 다양한 객체에 접근하고 조작할 수 있습니다.
 
-## API总览
+## API 개요
 
 ### Namespace
 
-* 平台中的全局命名空间
+* 플랫폼의 전역 네임스페이스
 
 #### web
    {@o2IndexTable namespaces|o2category=web}
 
 
 #### mobile
-   * 移动端H5页面除了可以使用web章节以及Class章节描述的API，还可以使用下列API：
+   * 모바일 H5 페이지는 web 장과 Class 장에서 설명한 API 외에 다음 API도 사용할 수 있습니다:
    
    {@o2IndexTable namespaces|o2category=mobile}
 
 ### Modules
 
-* 为脚本封装的对象、方法和类。通过this[moduleName]调用。
+* 스크립트용으로 캡슐화된 객체, 메서드, 클래스. this[moduleName]으로 호출합니다.
 
  
 #### web
-  * 前台脚本（浏览器/移动端H5页面）可以使用的对象、方法和类。
+  * 프런트엔드 스크립트(브라우저/모바일 H5 페이지)에서 사용할 수 있는 객체, 메서드, 클래스.
   
    {@o2IndexTable modules|o2category=web}
  
   
 #### server
- * 后台脚本（服务端）可以使用的对象、方法和类。
+ * 백엔드 스크립트(서버)에서 사용할 수 있는 객체, 메서드, 클래스.
     
-##### common 通用后台api
+##### common 공통 백엔드 api
 {@o2IndexTable modules|o2category=server.common}
 
-##### process 流程后台api
+##### process 프로세스 백엔드 api
   {@o2IndexTable modules|o2category=server.process}
   
-##### service 服务管理api
+##### service 서비스 관리 api
   {@o2IndexTable modules|o2category=server.service}
  
 
 ### FormComponent
 
-* FormComponent为表单页面组件，在前台脚本中可以使用。可以通过`this.form.get("fieldId")`获取。
+* FormComponent는 양식 페이지 컴포넌트로, 프런트엔드 스크립트에서 사용할 수 있습니다. `this.form.get("fieldId")`로 가져올 수 있습니다.
 
-#### Process 流程表单组件
+#### Process 프로세스 양식 컴포넌트
    {@o2IndexTable classes|o2category=FormComponents|o2range=Process}
 
 
-#### CMS 内容管理表单组件
+#### CMS 콘텐츠 관리 양식 컴포넌트
    {@o2IndexTable classes|o2category=FormComponents|o2range=CMS}
 
 
-#### Portal 门户页面组件
+#### Portal 포털 페이지 컴포넌트
    {@o2IndexTable classes|o2category=FormComponents|o2range=Portal}
 
 ### Query
 
-* Query为数据中心的应用，本章节包括视图、查询视图、导入模型的api。
+* Query는 데이터 센터 앱이며, 이 장에서는 뷰, 조회 뷰, 가져오기 모델의 api를 다룹니다.
 
-#### QueryView 视图类
+#### QueryView 뷰 클래스
    {@o2IndexTable classes|o2category=QueryView|o2range=QueryView}
    
-#### QueryStatement 查询视图类
+#### QueryStatement 조회 뷰 클래스
    {@o2IndexTable classes|o2category=QueryStatement|o2range=QueryStatement}
    
-#### QueryImporter 导入模型类
+#### QueryImporter 가져오기 모델 클래스
    {@o2IndexTable classes|o2category=QueryImporter|o2range=QueryImporter}
     
-### 服务
+### 서비스
 
-* 服务是O2OA后台提供的一系列restful服务。
+* 서비스는 O2OA 백엔드가 제공하는 restful 서비스 모음입니다.
 
 <table>
     <tr>
         <td>x_processplatform_assemble_surface</td>
-        <td>流程平台相关服务</td>
+        <td>프로세스 플랫폼 관련 서비스</td>
     </tr>
     <tr>
          <td>x_portal_assemble_surface</td>
-         <td>门户平台相关服务</td>
+         <td>포털 플랫폼 관련 서비스</td>
      </tr>
     <tr>
          <td>x_cms_assemble_control</td>
-         <td>内容管理平台相关服务</td>
+         <td>콘텐츠 관리 플랫폼 관련 서비스</td>
      </tr>
     <tr>
          <td>x_query_assemble_surface</td>
-         <td>数据平台相关服务</td>
+         <td>데이터 플랫폼 관련 서비스</td>
      </tr>
     <tr>
          <td>x_organization_assemble_express</td>
-         <td>组织架构相关服务</td>
+         <td>조직 구조 관련 서비스</td>
      </tr>
     <tr>
          <td>x_file_assemble_control</td>
-         <td>云文件相关服务</td>
+         <td>클라우드 파일 관련 서비스</td>
      </tr>
     <tr>
          <td>x_meeting_assemble_control</td>
-         <td>会议管理相关服务</td>
+         <td>회의 관리 관련 서비스</td>
      </tr>
      <tr>
           <td>x_bbs_assemble_control</td>
-          <td>论坛相关服务</td>
+          <td>포럼 관련 서비스</td>
       </tr>
      <tr>
           <td>x_calendar_assemble_control</td>
-          <td>日程管理相关服务</td>
+          <td>일정 관리 관련 서비스</td>
       </tr>
      <tr>
           <td>x_hotpic_assemble_control</td>
-          <td>热点信息相关服务</td>
+          <td>핫 정보 관련 서비스</td>
       </tr>
      <tr>
           <td>x_mind_assemble_control</td>
-          <td>脑图模块相关服务</td>
+          <td>마인드맵 모듈 관련 서비스</td>
       </tr>
      <tr>
           <td>x_organization_assemble_personal</td>
-          <td>个人设置相关服务</td>
+          <td>개인 설정 관련 서비스</td>
       </tr>
      <tr>
           <td>x_attendance_assemble_control</td>
-          <td>考勤模块相关服务</td>
+          <td>근태 모듈 관련 서비스</td>
       </tr>
 </table>
 
-## 使用范围
+## 사용 범위
 
-O2OA 可在多个位置嵌入脚本代码，用于扩展平台和实现自定义功能。嵌入脚本代码分为前端执行代码和服务端执行代码。
+O2OA는 여러 위치에 스크립트 코드를 삽입해 플랫폼을 확장하고 사용자 정의 기능을 구현할 수 있습니다. 삽입 스크립트 코드는 프런트엔드 실행 코드와 서버 실행 코드로 나뉩니다.
  
- * 前端脚本使用范围：
+ * 프런트엔드 스크립트 사용 범위:
  <table>
       <tr>
-          <td>脚本库</td>
-          <td>流程平台、门户平台和内容管理平台中，都有脚本设计元素，可以在此创建脚本库。</td>
+          <td>스크립트 라이브러리</td>
+          <td>프로세스 플랫폼, 포털 플랫폼, 콘텐츠 관리 플랫폼에는 모두 스크립트 설계 요소가 있으며 여기서 스크립트 라이브러리를 만들 수 있습니다.</td>
       </tr>
       <tr>
-           <td>表单、页面、视图、查询视图、导入模型及其组件事件</td>
-           <td>流程平台和内容平台的表单、门户平台的页面、数据平台的视图和查询视图中，每个设计组件包含多种事件，包括DOM对象原生事件和O2平台扩展事件。</td>
+           <td>양식, 페이지, 뷰, 조회 뷰, 가져오기 모델 및 컴포넌트 이벤트</td>
+           <td>프로세스 플랫폼과 콘텐츠 플랫폼의 양식, 포털 플랫폼의 페이지, 데이터 플랫폼의 뷰와 조회 뷰에서 각 설계 컴포넌트는 DOM 객체 기본 이벤트와 O2 플랫폼 확장 이벤트를 포함한 여러 이벤트를 가집니다.</td>
        </tr>
       <tr>
-           <td>表单、页面可编辑组件默认值</td>
-           <td>流程平台和内容平台的表单和门户平台的页面中，可编辑组件或文本组件的默认值可以通过脚本指定。</td>
+           <td>양식, 페이지 편집 가능 컴포넌트 기본값</td>
+           <td>프로세스 플랫폼과 콘텐츠 플랫폼의 양식 및 포털 플랫폼의 페이지에서 편집 가능 컴포넌트나 텍스트 컴포넌트의 기본값을 스크립트로 지정할 수 있습니다.</td>
        </tr>
       <tr>
-           <td>表单及可编辑组件校验</td>
-           <td>流程平台和内容管理的表单中，可编辑的字段可以通过脚本进行有效性校验，校验通过返回true，不通过返回提示信息。</td>
+           <td>양식 및 편집 가능 컴포넌트 검증</td>
+           <td>프로세스 플랫폼과 콘텐츠 관리의 양식에서 편집 가능 필드는 스크립트로 유효성을 검증할 수 있으며, 통과하면 true를, 통과하지 못하면 안내 메시지를 반환합니다.</td>
        </tr>
       <tr>
-           <td>流程设计</td>
-           <td>流程设计主要是后台脚本，但也有除外，流程路由属性的扩展附签和选择附签下的脚本使用的是前台脚本。</td>
+           <td>프로세스 설계</td>
+           <td>프로세스 설계는 주로 백엔드 스크립트이지만 예외가 있으며, 프로세스 경로 속성의 확장 탭과 선택 탭의 스크립트는 프런트엔드 스크립트를 사용합니다.</td>
        </tr>
   </table>
   
-  * 后端脚本使用范围：
+  * 백엔드 스크립트 사용 범위:
   <table>
        <tr>
-           <td>脚本库</td>
-           <td>流程平台、门户平台和内容管理平台中，都有脚本设计元素，可以在此创建脚本库。</td>
+           <td>스크립트 라이브러리</td>
+           <td>프로세스 플랫폼, 포털 플랫폼, 콘텐츠 관리 플랫폼에는 모두 스크립트 설계 요소가 있으며 여기서 스크립트 라이브러리를 만들 수 있습니다.</td>
        </tr>
        <tr>
-            <td>服务管理</td>
-            <td>服务管理的接口和定时代理。</td>
+            <td>서비스 관리</td>
+            <td>서비스 관리의 인터페이스와 예약 에이전트.</td>
         </tr>
        <tr>
-            <td>流程设计</td>
-            <td>流程属性的所有脚本（流程事件、时效脚本等等）；流程活动的所有脚本（处理人、待阅人、阅读人脚本，拆分依据、时效脚本，活动事件，参数脚本、响应脚本、执行脚本等等）；流程路由的条件脚本。</td>
+            <td>프로세스 설계</td>
+            <td>프로세스 속성의 모든 스크립트(프로세스 이벤트, 기한 스크립트 등), 프로세스 활동의 모든 스크립트(처리자, 열람 대기자, 열람자 스크립트, 분할 기준, 기한 스크립트, 활동 이벤트, 매개변수 스크립트, 응답 스크립트, 실행 스크립트 등), 프로세스 경로의 조건 스크립트.</td>
         </tr>
        <tr>
-            <td>查询配置</td>
-            <td>查询配置的查询语句和总数语句。</td>
+            <td>조회 설정</td>
+            <td>조회 설정의 조회 구문과 총계 구문.</td>
         </tr>
        <tr>
-            <td>视图列</td>
-            <td>视图列的显示脚本。</td>
+            <td>뷰 열</td>
+            <td>뷰 열의 표시 스크립트.</td>
         </tr>
    </table>
    
 
-### 前端脚本使用范围详情
+### 프런트엔드 스크립트 사용 범위 상세
 
-#### 脚本库
+#### 스크립트 라이브러리
 
-流程平台、门户平台和内容管理平台中，都有脚本设计元素，可以在此创建自己的脚本库。如下图：
-![脚本库](img/home/script.png)
+프로세스 플랫폼, 포털 플랫폼, 콘텐츠 관리 플랫폼에는 모두 스크립트 설계 요소가 있으며 여기서 자신의 스크립트 라이브러리를 만들 수 있습니다. 아래 그림 참고:
+![스크립트 라이브러리](img/home/script.png)
 <br/><br/>
 
-#### 表单、页面、视图、查询视图及其组件事件
+#### 양식, 페이지, 뷰, 조회 뷰 및 컴포넌트 이벤트
 
-流程平台和内容平台的表单、门户平台的页面、数据平台的视图和查询视图中，每个设计组件包含多种事件，包括DOM对象原生事件和O2平台扩展事件。如下图：
-![事件中的脚本](img/home/script_event.png)
+프로세스 플랫폼과 콘텐츠 플랫폼의 양식, 포털 플랫폼의 페이지, 데이터 플랫폼의 뷰와 조회 뷰에서 각 설계 컴포넌트는 DOM 객체 기본 이벤트와 O2 플랫폼 확장 이벤트를 포함한 여러 이벤트를 가집니다. 아래 그림 참고:
+![이벤트의 스크립트](img/home/script_event.png)
 <br/><br/>
 
-#### 表单、页面可编辑组件默认值
+#### 양식, 페이지 편집 가능 컴포넌트 기본값
 
-流程平台和内容平台的表单和门户平台的页面中，可编辑组件或文本组件的默认值可以通过脚本指定。如下图：
-![事件中的脚本](img/home/script_defaultvalue.png)
+프로세스 플랫폼과 콘텐츠 플랫폼의 양식 및 포털 플랫폼의 페이지에서 편집 가능 컴포넌트나 텍스트 컴포넌트의 기본값을 스크립트로 지정할 수 있습니다. 아래 그림 참고:
+![이벤트의 스크립트](img/home/script_defaultvalue.png)
 <br/><br/>
 
-#### 表单、页面、视图、查询视图的部分属性
+#### 양식, 페이지, 뷰, 조회 뷰의 일부 속성
 
-流程平台和内容平台的表单、门户平台的页面、数据平台的视图和查询视图中，有许多组件的相关属性可以通过脚本来定义。<br/>
-如：下拉框、单选多选按钮的可选值、人员字段的选择范围、区段依据等。如下图：<br/>
-![属性中的脚本](img/home/script_attribute.png)
+프로세스 플랫폼과 콘텐츠 플랫폼의 양식, 포털 플랫폼의 페이지, 데이터 플랫폼의 뷰와 조회 뷰에서 많은 컴포넌트의 관련 속성을 스크립트로 정의할 수 있습니다.<br/>
+예: 드롭다운, 단일·다중 선택 버튼의 선택 가능 값, 사용자 필드의 선택 범위, 구간 기준 등. 아래 그림 참고:<br/>
+![속성의 스크립트](img/home/script_attribute.png)
 <br/><br/>
 
-#### 表单及可编辑组件校验
+#### 양식 및 편집 가능 컴포넌트 검증
 
-流程平台和内容管理的表单中，可编辑的字段可以通过脚本进行有效性校验，校验通过返回true，不通过返回提示信息。如下图：
-![脚本](img/home/script_validation.png)
+프로세스 플랫폼과 콘텐츠 관리의 양식에서 편집 가능 필드는 스크립트로 유효성을 검증할 수 있으며, 통과하면 true를, 통과하지 못하면 안내 메시지를 반환합니다. 아래 그림 참고:
+![스크립트](img/home/script_validation.png)
 <br/><br/>
 
-#### 流程路由属性的扩展附签和选择附签下的脚本
-![扩展附签脚本](img/home/script_route_extend.png)
-![选择附签脚本](img/home/script_route_select.png)
+#### 프로세스 경로 속성의 확장 탭과 선택 탭 스크립트
+![확장 탭 스크립트](img/home/script_route_extend.png)
+![선택 탭 스크립트](img/home/script_route_select.png)
 <br/><br/>
 
 
-### 后端脚本使用范围详情
+### 백엔드 스크립트 사용 범위 상세
 
-#### 脚本库
-流程平台、门户平台和内容管理平台中，都有脚本设计元素，可以在此创建脚本库。
-![脚本库](img/home/server_script.png)
+#### 스크립트 라이브러리
+프로세스 플랫폼, 포털 플랫폼, 콘텐츠 관리 플랫폼에는 모두 스크립트 설계 요소가 있으며 여기서 스크립트 라이브러리를 만들 수 있습니다.
+![스크립트 라이브러리](img/home/server_script.png)
 <br/><br/>
 
-#### 服务管理
-服务管理的接口和定时代理。
-![定时代理](img/home/server_agent.png)
-![接口](img/home/server_interface.png)
+#### 서비스 관리
+서비스 관리의 인터페이스와 예약 에이전트.
+![예약 에이전트](img/home/server_agent.png)
+![인터페이스](img/home/server_interface.png)
 <br/><br/>
 
-#### 流程设计
-流程属性的所有脚本（流程事件、时效脚本等等）。
-![流程属性](img/home/server_process.png)
+#### 프로세스 설계
+프로세스 속성의 모든 스크립트(프로세스 이벤트, 기한 스크립트 등).
+![프로세스 속성](img/home/server_process.png)
 
-流程活动的所有脚本（处理人、待阅人、阅读人脚本，拆分依据、时效脚本，活动事件，参数脚本、响应脚本、执行脚本等等）
-![流程活动](img/home/server_process_activity.png)
+프로세스 활동의 모든 스크립트(처리자, 열람 대기자, 열람자 스크립트, 분할 기준, 기한 스크립트, 활동 이벤트, 매개변수 스크립트, 응답 스크립트, 실행 스크립트 등)
+![프로세스 활동](img/home/server_process_activity.png)
 
-流程路由的条件脚本。
-![流程路由](img/home/server_process_route.png)
+프로세스 경로의 조건 스크립트.
+![프로세스 경로](img/home/server_process_route.png)
 
-#### 查询配置
-查询配置的查询语句和总数语句。
-![流程路由](img/home/server_statement.png)
+#### 조회 설정
+조회 설정의 조회 구문과 총계 구문.
+![프로세스 경로](img/home/server_statement.png)
 
-#### 视图列
-视图列的显示脚本，可以使用this.value获取本列的列值、this.entry.data获取本行的数据。
-![视图列显示脚本](img/home/server_view_column.png)
+#### 뷰 열
+뷰 열의 표시 스크립트로, this.value로 이 열의 값을, this.entry.data로 이 행의 데이터를 가져올 수 있습니다.
+![뷰 열 표시 스크립트](img/home/server_view_column.png)
 
-## 样例
-* 这是一个简单的样例，用于展现脚本如何编写和运行。
-* 本例中我们要实现一个表单中，两个下拉框从配置数据中获取可选数据，以及实现联动。
-* 我们需要创建一个流程应用，一个表单以及一个数据字典。在表单中创建两个下拉列表框。
+## 예제
+* 스크립트를 작성하고 실행하는 방법을 보여 주는 간단한 예제입니다.
+* 이 예제에서는 양식의 두 드롭다운이 설정 데이터에서 선택 가능 데이터를 가져오고 서로 연동되도록 구현합니다.
+* 프로세스 앱 하나, 양식 하나, 데이터 사전 하나를 만들고 양식에 드롭다운 목록 두 개를 만듭니다.
 
-1. 先在表单中创建两个下拉框
+1. 먼저 양식에 드롭다운 두 개를 만듭니다
 <br/>
-![下拉框](img/home/example_1_1.png)
+![드롭다운](img/home/example_1_1.png)
 <br/><br/>
 
-2. 在category1和category2两个下拉框的属性中，选择通过“脚本”编辑可选值。
+2. category1과 category2 드롭다운 속성에서 “스크립트”로 선택 가능 값을 편집하도록 선택합니다.
 <br/>
-category1脚本:
+category1 스크립트:
 <br/>
-![下拉框](img/home/example_1_2_1.png)
+![드롭다운](img/home/example_1_2_1.png)
 <br/><br/>
-category2脚本:
+category2 스크립트:
 <br/>
-![下拉框](img/home/example_1_2_2.png)
+![드롭다운](img/home/example_1_2_2.png)
 <br/><br/>
 
-3. 在category1和category2两个下拉框的可选值脚本如下：<br/><br/>
-category1的可选值脚本:
+3. category1과 category2 드롭다운의 선택 가능 값 스크립트는 다음과 같습니다:<br/><br/>
+category1의 선택 가능 값 스크립트:
 ```
-var dict = new this.Dict("category");   //获取名为category的数据字典 
-var categoryList = dict.get();  //获取数据字典
-var options = Object.keys(categoryList);    //获取大类，赋值给options变量
-options.unshift("(请选择大类)|");   //在options数组首位插入提示选项，并将“”作为value，“(请选择大类)”作为text
-return options; //返回列表，作为列表框的可选值 
+var dict = new this.Dict("category");   //이름이 category인 데이터 사전 가져오기 
+var categoryList = dict.get();  //데이터 사전 가져오기
+var options = Object.keys(categoryList);    //대분류를 가져와 options 변수에 할당
+options.unshift("(대분류를 선택하세요)|");   //options 배열 맨 앞에 안내 항목 삽입, “”를 value로, “(대분류를 선택하세요)”를 text로 사용
+return options; //목록을 반환해 목록 상자의 선택 가능 값으로 사용 
 ```    
-category2的可选值脚本:
+category2의 선택 가능 값 스크립트:
 ```  
-var dict = new this.Dict("category"); //获取名为category的数据字典 
-var categoryList = dict.get(this.data.category1); //获取数据字典,以下拉框category1的值为关键字的数据值（数组） 
-return categoryList; //返回列表，作为列表框的可选值 
+var dict = new this.Dict("category"); //이름이 category인 데이터 사전 가져오기 
+var categoryList = dict.get(this.data.category1); //데이터 사전 가져오기, 드롭다운 category1의 값을 키로 하는 데이터 값(배열) 
+return categoryList; //목록을 반환해 목록 상자의 선택 가능 값으로 사용 
 ```  
 
-4. 在category1的change事件中添加如下代码：
+4. category1의 change 이벤트에 다음 코드를 추가합니다:
 ```  
-//获category2下拉框，并刷新可选项
+//category2 드롭다운을 가져와 선택 항목 새로 고침
 this.form.get("category2").resetOption();
 ```  
-5. 设计数据字典如下图，并命名为："分类配置"，别名为：“category”。
-![下拉框](img/home/example_1_5.png)
+5. 데이터 사전을 아래 그림처럼 설계하고 이름은 "분류 설정", 별칭은 “category”로 지정합니다.
+![드롭다운](img/home/example_1_5.png)
 
-6. 预览表单，即可看到大类下拉框中选项为数据字典中的第一层数据，选择不同的大类可与小类下拉框实现联动。
+6. 양식을 미리 보면 대분류 드롭다운의 항목이 데이터 사전의 첫 단계 데이터이며, 대분류를 선택하면 소분류 드롭다운과 연동됩니다.

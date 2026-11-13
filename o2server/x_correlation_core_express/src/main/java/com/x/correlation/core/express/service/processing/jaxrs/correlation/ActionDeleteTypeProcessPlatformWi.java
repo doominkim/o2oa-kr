@@ -16,7 +16,7 @@ public class ActionDeleteTypeProcessPlatformWi extends GsonPropertyObject {
 	}
 
 	private static final long serialVersionUID = -2304428900858206878L;
-	@FieldDescribe("关联内容标识.")
+	@FieldDescribe("연관 콘텐츠 식별자.")
 	private List<String> idList;
 
 }

@@ -37,7 +37,7 @@ public class DelayProcessor extends AbstractDelayProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Delay delay) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.delayArrive(aeiObjects.getWork().getActivityToken(), delay));
 		return aeiObjects.getWork();
 	}
@@ -49,7 +49,7 @@ public class DelayProcessor extends AbstractDelayProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Delay delay) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.delayExecute(aeiObjects.getWork().getActivityToken(), delay));
 		List<Work> results = new ArrayList<>();
 		Date limit = null;
@@ -138,7 +138,7 @@ public class DelayProcessor extends AbstractDelayProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Delay delay) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.delayInquire(aeiObjects.getWork().getActivityToken(), delay));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
@@ -149,9 +149,9 @@ public class DelayProcessor extends AbstractDelayProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

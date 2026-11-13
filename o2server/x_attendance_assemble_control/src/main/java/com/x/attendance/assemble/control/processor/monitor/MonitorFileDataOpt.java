@@ -20,7 +20,7 @@ public class MonitorFileDataOpt {
 	private Gson gson = XGsonBuilder.instance();
 	private MonitorFileDataOptThread optThread = null;
 
-	// 是否结束线程的旗标
+	// 스레드 종료 여부 플래그
 	volatile static boolean flag = true;
 
 	private static MonitorFileDataOpt single = null;
@@ -48,7 +48,7 @@ public class MonitorFileDataOpt {
 		public void run() {
 
 			while (flag) {
-				// 检查系统的操作状态中的每一个文件的操作情况
+				// 시스템 작업 상태에서 각 파일의 작업 상황 검사
 				StatusSystemImportOpt systemImportOptStatus = null;
 				Set<String> keySet = null;
 				Iterator<String> iterator = null;
@@ -77,7 +77,7 @@ public class MonitorFileDataOpt {
 
 					if (cacheImportFileStatus.getMonitor_checkCount() > 10
 							&& "NONE".equals(cacheImportFileStatus.getCurrentProcessName())) {
-						// 如果检查了10次后，仍未开始操作，那么应该是需要删除的无效缓存对象，多半是由于前端查询时fileId输入错误导致的。
+						// 10번 검사한 뒤에도 작업이 시작되지 않았다면 삭제해야 할 무효 캐시 객체이며, 대개 프런트엔드 조회 시 fileId를 잘못 입력해 생긴 것임.
 						StatusSystemImportOpt.getInstance().cleanCacheImportFileStatus(key);
 						StatusSystemImportOpt.getInstance().removeCacheImportFileStatus(key);
 					}
@@ -92,12 +92,12 @@ public class MonitorFileDataOpt {
 					}
 				}
 
-				// 再检查一下是不是所有的处理过程全部已经完成了
+				// 모든 처리 과정이 완료되었는지 다시 확인
 				if (!systemImportOptStatus.isChildrenProcessing()) {
 					long total = 0L;
 					long count = 0L;
 
-					// 看看是否正在分析数据
+					// 데이터 분석 중인지 확인
 					total = systemImportOptStatus.getProcess_analysis_total();
 					count = systemImportOptStatus.getProcess_analysis_count()
 							+ systemImportOptStatus.getProcess_analysis_error();
@@ -105,7 +105,7 @@ public class MonitorFileDataOpt {
 						systemImportOptStatus.setProcessing_analysis(false);
 					}
 
-					// 看看是否正在补充数据
+					// 데이터 보충 중인지 확인
 					total = systemImportOptStatus.getProcess_supplement_total();
 					count = systemImportOptStatus.getProcess_supplement_count()
 							+ systemImportOptStatus.getProcess_supplement_error();
@@ -129,7 +129,7 @@ public class MonitorFileDataOpt {
 		}
 
 		/**
-		 * 检查各个文件处理的状态，并且持久化到数据库中
+		 * 각 파일 처리 상태를 검사하고 데이터베이스에 저장
 		 * 
 		 * @param cacheImportFileStatus
 		 */
@@ -140,7 +140,7 @@ public class MonitorFileDataOpt {
 			String currentProcessName = cacheImportFileStatus.getCurrentProcessName();
 			String file_id = cacheImportFileStatus.getFileId();
 			AttendanceImportFileInfo fileInfo = null;
-			// 获取指定的文件信息
+			// 지정 파일 정보 조회
 			try {
 				fileInfo = importFileInfoService.get(file_id);
 			} catch (Exception e) {
@@ -171,7 +171,7 @@ public class MonitorFileDataOpt {
 								cacheImportFileStatus.setProcessing_save(true);
 								fileInfo.setProcessing(true);
 								fileInfo.setValidateOk(true);
-								// 这个时间临时文件可以删除掉了
+								// 이 시점에는 임시 파일을 삭제할 수 있음
 								if (cacheImportFileStatus.getFilePath() != null
 										&& !cacheImportFileStatus.getFilePath().isEmpty()) {
 									File file = new File(cacheImportFileStatus.getFilePath());
@@ -179,7 +179,7 @@ public class MonitorFileDataOpt {
 										file.delete();
 									}
 								}
-								// 如果数据已经处理完成开始保存数据
+								// 데이터 처리가 완료되었으면 데이터 저장 시작
 								logger.info("file[" + file_id
 										+ "], excel validate complete, system will try to save record to database, record total:"
 										+ process_total);
@@ -206,7 +206,7 @@ public class MonitorFileDataOpt {
 
 							int error_count = Integer.parseInt(cacheImportFileStatus.getErrorCount() + "");
 							if (error_count + process_count == process_total) {
-								// 表示数据自动处理已经完成，不要再对这个对象进行检测了
+								// 데이터 자동 처리가 완료되었음을 표시, 이 객체를 더 이상 검사하지 않음
 								cacheImportFileStatus.setCurrentProcessName(ImportOptDefine.COMPLETED);
 								fileInfo.setCurrentProcessName(ImportOptDefine.COMPLETED);
 								cacheImportFileStatus.setProcessing(false);
@@ -224,7 +224,7 @@ public class MonitorFileDataOpt {
 						fileInfo.setRecordTotle(process_count);
 						fileInfo.setProcessCount(process_total);
 						if (process_count.intValue() == process_total.intValue()) {
-							// 表示数据自动处理已经完成，不要再对这个对象进行检测了
+							// 데이터 자동 처리가 완료되었음을 표시, 이 객체를 더 이상 검사하지 않음
 							cacheImportFileStatus.setCurrentProcessName(ImportOptDefine.COMPLETED);
 							fileInfo.setCurrentProcessName(ImportOptDefine.COMPLETED);
 							cacheImportFileStatus.setProcessing(false);
@@ -245,7 +245,7 @@ public class MonitorFileDataOpt {
 
 							int error_count = Integer.parseInt(cacheImportFileStatus.getErrorCount() + "");
 							if (error_count + process_count == process_total) {
-								// 表示数据自动处理已经完成，不要再对这个对象进行检测了
+								// 데이터 자동 처리가 완료되었음을 표시, 이 객체를 더 이상 검사하지 않음
 								cacheImportFileStatus.setCurrentProcessName(ImportOptDefine.COMPLETED);
 								fileInfo.setCurrentProcessName(ImportOptDefine.COMPLETED);
 								cacheImportFileStatus.setProcessing(false);
@@ -257,7 +257,7 @@ public class MonitorFileDataOpt {
 					}
 				}
 
-				// 将fileInfo 持久化到数据库中。
+				// fileInfo를 데이터베이스에 저장.
 				try {
 					fileInfo.setStartDate(cacheImportFileStatus.getStartTime());
 					fileInfo.setEndDate(cacheImportFileStatus.getEndTime());
@@ -276,7 +276,7 @@ public class MonitorFileDataOpt {
 					e.printStackTrace();
 				}
 			} else {
-				logger.debug( true, ">>>>>>>>>>导入文件不存在：" + file_id);
+				logger.debug( true, ">>>>>>>>>>가져오기 파일이 없습니다: " + file_id);
 			}
 
 		}

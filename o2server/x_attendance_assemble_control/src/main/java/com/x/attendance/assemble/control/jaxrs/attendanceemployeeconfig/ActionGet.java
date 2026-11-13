@@ -39,7 +39,7 @@ public class ActionGet extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "系统根据ID查询指定的人员考勤配置信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "ID로 인원 근태 설정을 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -50,7 +50,7 @@ public class ActionGet extends BaseAction {
 				result.setData(wrap);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象时发生异常.");
+				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "조회된 객체를 출력용 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

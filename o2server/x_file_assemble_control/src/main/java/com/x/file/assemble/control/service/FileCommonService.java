@@ -22,7 +22,7 @@ import com.x.file.core.entity.personal.Folder2;
 public class FileCommonService {
 
     /**
-     * 下载附件并打包为zip
+     * 첨부파일을 내려받아 zip으로 압축
      * @param emc
      * @param files
      * @param folders
@@ -31,17 +31,17 @@ public class FileCommonService {
     public void downToZip(EntityManagerContainer emc, List<Attachment2> files, List<Folder2> folders, OutputStream os) throws Exception {
         Map<String, OriginFile> filePathMap = new HashMap<>();
         List<String> emptyFolderList = new ArrayList<>();
-        /* 生成zip压缩文件内的目录结构 */
+        /* zip 압축 파일 내 디렉터리 구조 생성 */
         if(folders!=null && !folders.isEmpty()) {
             Business business = new Business( emc );
             for (Folder2 folder : folders) {
-                String parentPath = ""; // 初始路径为空
+                String parentPath = ""; // 초기 경로가 비어 있음
                 generateFolderPath(emc, business, emptyFolderList, filePathMap, parentPath, folder);
             }
         }
         if(files!=null) {
             for (Attachment2 att : files) {
-                String parentPath = ""; // 初始路径为空
+                String parentPath = ""; // 초기 경로가 비어 있음
                 generateFilePath(emc, filePathMap, parentPath, att);
             }
         }
@@ -59,7 +59,7 @@ public class FileCommonService {
                     zos.write(bs);
                 }
             }
-            // 往zip里添加空文件夹
+            // zip에 빈 폴더 추가
             for (String emptyFolder : emptyFolderList) {
                 zos.putNextEntry(new ZipEntry(emptyFolder));
             }
@@ -92,7 +92,7 @@ public class FileCommonService {
         }
 
         if (emptyFolder) {
-            parentPath += File.separator;// 需要在路径后面加一个分隔符才会生成空文件夹
+            parentPath += File.separator;// 경로 끝에 구분자를 붙여야 빈 폴더가 생성됨
             emptyFolderList.add(parentPath);
         }
     }

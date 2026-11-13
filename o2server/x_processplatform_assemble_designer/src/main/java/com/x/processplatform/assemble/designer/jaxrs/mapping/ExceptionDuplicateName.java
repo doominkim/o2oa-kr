@@ -7,7 +7,7 @@ class ExceptionDuplicateName extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionDuplicateName() {
-		super("名称已存在.");
+		super("이름이 이미 있습니다.");
 	}
 
 }

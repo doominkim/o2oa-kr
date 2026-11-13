@@ -20,18 +20,18 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("formversion")
-@JaxrsDescribe("表单版本")
+@JaxrsDescribe("양식 버전")
 public class FormVersionAction extends StandardJaxrsAction {
 
 	private static final  Logger LOGGER = LoggerFactory.getLogger(FormVersionAction.class);
 
-	@JaxrsMethodDescribe(value = "根据脚本id获取历史版本列表.", action = ActionListWithForm.class)
+	@JaxrsMethodDescribe(value = "스크립트 id로 이력 버전 목록 조회.", action = ActionListWithForm.class)
 	@GET
 	@Path("list/form/{formId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithForm(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("form标识") @PathParam("formId") String formId) {
+			@JaxrsParameterDescribe("form 식별자") @PathParam("formId") String formId) {
 		ActionResult<List<ActionListWithForm.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -43,13 +43,13 @@ public class FormVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取表单历史版本内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "양식 이력 버전 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

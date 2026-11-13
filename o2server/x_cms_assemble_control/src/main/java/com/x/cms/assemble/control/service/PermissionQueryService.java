@@ -14,7 +14,7 @@ public class PermissionQueryService {
 
 	private CmsPermissionService cmsPermissionService = new CmsPermissionService();
 	/**
-	 * 查询指定用户，组织，群组可以访问到的所有栏目ID列表(包含全员可以访问的栏目)
+	 * 지정 사용자, 조직, 그룹이 접근할 수 있는 모든 게시판 ID 목록 조회(전원 접근 가능 게시판 포함)
 	 * @param personName
 	 * @param isAnonymous
 	 * @param unitNames
@@ -44,7 +44,7 @@ public class PermissionQueryService {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以发布文档的所有栏目ID列表
+	 * 지정 사용자, 조직, 그룹이 문서를 게시할 수 있는 모든 게시판 ID 목록 조회
 	 * @param personName
 	 * @param isAnonymous
 	 * @param unitNames
@@ -69,7 +69,7 @@ public class PermissionQueryService {
 	}
 
 	/**
-	 * 查询指定用户可以管理的所有栏目ID列表( with List copy )
+	 * 지정 사용자가 관리할 수 있는 모든 게시판 ID 목록 조회( with List copy )
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
@@ -90,8 +90,8 @@ public class PermissionQueryService {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以访问到的所有分类ID列表（包含全员可以访问的分类）
-	 * 所获得到的分类列表可能会大于可访问的栏目列表
+	 * 지정 사용자, 조직, 그룹이 접근할 수 있는 모든 분류 ID 목록 조회(전원 접근 가능 분류 포함)
+	 * 얻은 분류 목록이 접근 가능한 게시판 목록보다 클 수 있음
 	 * @param personName
 	 * @param isAnonymous
 	 * @param unitNames
@@ -118,7 +118,7 @@ public class PermissionQueryService {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以发布文档的所有分类ID列表（包含全员可以发布文档的分类） 所获得到的分类列表可能会大于可访问的栏目列表
+	 * 지정 사용자, 조직, 그룹이 문서를 게시할 수 있는 모든 분류 ID 목록 조회(전원 게시 가능 분류 포함) 얻은 분류 목록이 접근 가능한 게시판 목록보다 클 수 있음
 	 * @param personName
 	 * @param isAnonymous
 	 * @param unitNames
@@ -145,7 +145,7 @@ public class PermissionQueryService {
 	}
 
 	/**
-	 * 查询指定用户可以管理的所有分类ID列表( with List copy )
+	 * 지정 사용자가 관리할 수 있는 모든 분류 ID 목록 조회( with List copy )
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
@@ -168,7 +168,7 @@ public class PermissionQueryService {
 	}
 
 	/**
-	 * 对比两个栏目的可见范围是否有变更
+	 * 두 게시판의 열람 범위 변경 여부 비교
 	 * @param old_appInfo
 	 * @param appInfo
 	 * @return
@@ -202,7 +202,7 @@ public class PermissionQueryService {
 	}
 
 	/**
-	 * 对比两个分类的可见范围是否有变更
+	 * 두 분류의 열람 범위 변경 여부 비교
 	 * @param old_categoryInfo
 	 * @param categoryInfo
 	 * @return

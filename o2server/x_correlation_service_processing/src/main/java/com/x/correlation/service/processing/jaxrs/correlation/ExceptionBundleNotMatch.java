@@ -7,6 +7,6 @@ class ExceptionBundleNotMatch extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionBundleNotMatch(String bundle, String other) {
-		super("标识不匹配:{},{}.", bundle, other);
+		super("식별자가 일치하지 않습니다: {}, {}.", bundle, other);
 	}
 }

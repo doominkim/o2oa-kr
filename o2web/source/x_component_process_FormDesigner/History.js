@@ -6,7 +6,7 @@ MWF.xApplication.process.FormDesigner.History = new Class({
     Extends: MWF.widget.Common,
     options: {
         style: "default",
-        maxLength: 20 //最大的item数，0表示不限制
+        maxLength: 20 //최대 item 수, 0은 제한 없음
     },
     initialize: function(form, container, options){
         this.setOptions(options);
@@ -21,14 +21,14 @@ MWF.xApplication.process.FormDesigner.History = new Class({
     },
 
     load: function(data) {
-        //存储当前表面状态数组-上一步
+        //현재 화면 상태 배열 저장-이전 단계
         this.preArray = [];
-        //存储当前表面状态数组-下一步
+        //현재 화면 상태 배열 저장-다음 단계
         this.nextArray = [];
 
         this.node = new Element("div", {"style":"font-size:12px;"}).inject(this.container);
         this.add({
-            "operation": "open", //操作 create, copy, move, delete
+            "operation": "open", //작업 create, copy, move, delete
             "type": "form", //property
             "moduleId": (this.form.json.name || "form" )+ " ["+this.form.json.mode+"]"
         });
@@ -43,7 +43,7 @@ MWF.xApplication.process.FormDesigner.History = new Class({
         //         onPostCreate: function () {
         //             _self.node.inject( this.contentNode );
         //             _self.add({
-        //                 "operation": "open", //操作 create, copy, move, delete
+        //                 "operation": "open", //작업 create, copy, move, delete
         //                 "type": "form", //property
         //                 "moduleId": "form"
         //             });
@@ -53,7 +53,7 @@ MWF.xApplication.process.FormDesigner.History = new Class({
         // );
         // this.tooltips.load();
     },
-    //获取domPath
+    //domPath 조회
     getPath: function (node) {
         var root = this.root;
         var path = [];
@@ -68,22 +68,22 @@ MWF.xApplication.process.FormDesigner.History = new Class({
         return path.reverse();
     },
     add: function(log, module) {
-        // var log = { //也有可能是对象数组
-        //     "operation": "create", //操作 create, copy, move, delete, cut, paste
-        //     "type": "module", //property 组件变化或属性变化
-        //     "moduleType": "", //模块类型
-        //     "moduleId": "", //模块id
-        //      "fromList": [{  //原始数据
-        //          "json": {},  //原始json
-        //         "jsonObject": {}, //本module所包含的子json
-        //         "html": "", //原始html
-        //         "path": [], //原始dom path
+        // var log = { //객체 배열일 수도 있음
+        //     "operation": "create", //작업 create, copy, move, delete, cut, paste
+        //     "type": "module", //property 컴포넌트 변경 또는 속성 변경
+        //     "moduleType": "", //모듈 유형
+        //     "moduleId": "", //모듈 id
+        //      "fromList": [{  //원본 데이터
+        //          "json": {},  //원본 json
+        //         "jsonObject": {}, //이 module에 포함된 하위 json
+        //         "html": "", //원본 html
+        //         "path": [], //원본 dom path
         //      }],
-        //      "toList": [{  //结束数据
-        //          "json": {},  //最终json
-        //          "jsonObject": {}, //本module所包含的子json
-        //          "html": "", //最终html
-        //          "path": [], //最终dom path
+        //      "toList": [{  //최종 데이터
+        //          "json": {},  //최종 json
+        //          "jsonObject": {}, //이 module에 포함된 하위 json
+        //          "html": "", //최종 html
+        //          "path": [], //최종 dom path
         //      }]
         // };
         var item;
@@ -120,7 +120,7 @@ MWF.xApplication.process.FormDesigner.History = new Class({
         //     "changeList": [
         //          {
         //              "name": name,
-        //              "compareName": compareName, //对比名称，value对应的是name, 但是对比名称和name不一样时可以传这个
+        //              "compareName": compareName, //비교 이름, value는 name에 대응하지만 비교 이름이 name과 다를 때 전달 가능
         //              "fromValue": oldValue,
         //              "toValue": this.json[name]
         //          }
@@ -169,7 +169,7 @@ MWF.xApplication.process.FormDesigner.History = new Class({
                         }
                     }else{
                         if (lastChangeList.length === 1 && log.changeList.length === 1  && lastChangeList[0].name === change.name) {
-                            // if( lastSubItem.data.fromValue === change.toValue ){ //回到最初的值了
+                            // if( lastSubItem.data.fromValue === change.toValue ){ //최초 값으로 돌아옴
                             //     if( lastItem.preArray.length === 1 ){
                             //         this.destroyItem( lastItem );
                             //     }else{
@@ -234,7 +234,7 @@ MWF.xApplication.process.FormDesigner.History = new Class({
             it.destroy();
         }
 
-        //删除上一个property的已经undo的subItem
+        //이전 property의 undo된 subItem 삭제
         if( this.preArray.length ){
             it = this.preArray.getLast();
             if( it.data.type === "property" ){
@@ -247,7 +247,7 @@ MWF.xApplication.process.FormDesigner.History = new Class({
 
         this.preArray.push(item);
 
-        //大于最大条目数
+        //최대 항목 수 초과
         if( this.options.maxLength > 0 && this.preArray.length > this.options.maxLength ){
             this.destroyItem(this.preArray[0]);
         }
@@ -275,25 +275,25 @@ MWF.xApplication.process.FormDesigner.History = new Class({
             it = this.preArray.getLast();
             while (it && item !== it){
                 it.undo();
-                this.nextArray.unshift(it); //插入到灰显数组前面
-                this.preArray.pop(); //删除preArray最后一个
+                this.nextArray.unshift(it); //회색 표시 배열 앞에 삽입
+                this.preArray.pop(); //preArray 마지막 항목 삭제
                 it = this.preArray.getLast();
             }
             item.selectModule("undo");
         }else if( item.status === "next" ){
-            if( this.preArray.length ){  //上一个property的subItem要redo一下
+            if( this.preArray.length ){  //이전 property의 subItem redo 필요
                 it = this.preArray.getLast();
                 if( it.data.type === "property" )it.redo();
             }
             it = this.nextArray[0];
             while (it && item !== it){
                 it.redo();
-                this.preArray.push(it); //插入到preArray数组最后
+                this.preArray.push(it); //preArray 배열 끝에 삽입
                 this.nextArray.shift();
                 it = this.nextArray[0];
             }
             item.redo( notRedoItem );
-            this.preArray.push(item); //插入到preArray数组最后
+            this.preArray.push(item); //preArray 배열 끝에 삽입
             this.nextArray.shift();
             item.selectModule("redo");
         }
@@ -365,12 +365,12 @@ MWF.FCWHistory.Item = new Class({
     comeHere: function ( e, notRedoThis ) {
         this.history.goto(this, notRedoThis);
     },
-    undo: function () { //回退
+    undo: function () { //되돌리기
         this.status = "next";
         this.node.setStyles( this.history.css.itemNode_undo );
         this._undo();
     },
-    redo: function(){ //重做
+    redo: function(){ //다시 실행
         this.status = "pre";
         this.node.setStyles(this.history.css.itemNode_redo);
         this._redo();
@@ -436,7 +436,7 @@ MWF.FCWHistory.Item = new Class({
         var module = this.form.loadModule(json, dom, parentModule || this.form);
         module._setEditStyle_custom("id");
     },
-    //根据路径顺序排序
+    //경로 순서로 정렬
     sortByPath: function( arr ){
         arr.sort(function (a, b) {
             var max = Math.max(a.path.length, b.path.length);
@@ -448,7 +448,7 @@ MWF.FCWHistory.Item = new Class({
             return -1;
         });
     },
-    //根据路径获取dom
+    //경로로 dom 조회
     getDomByPath: function(path){
         var i, nodeIndex;
         var node = this.root;
@@ -458,7 +458,7 @@ MWF.FCWHistory.Item = new Class({
         }
         return node;
     },
-    //插入到对应位置
+    //해당 위치에 삽입
     injectToByPath: function(path, dom){
         var i, nodeIndex;
         var node = this.root;
@@ -472,7 +472,7 @@ MWF.FCWHistory.Item = new Class({
         }else{
             var contains = false;
             for( i=0; i<last; i++ ){
-                if( node.children[i] === dom ){ //如果位置包含当前dom
+                if( node.children[i] === dom ){ //위치에 현재 dom이 포함된 경우
                     contains = true;
                     break;
                 }
@@ -482,7 +482,7 @@ MWF.FCWHistory.Item = new Class({
         }
         this.resetTreeNode( dom );
     },
-    //插入HTML到对应位置
+    //해당 위치에 HTML 삽입
     injectHtmlByPath: function(path, html){
         var i, nodeIndex;
         var node = this.root;
@@ -499,7 +499,7 @@ MWF.FCWHistory.Item = new Class({
             node = node.children[last-1];
             dom.inject(node, "after");
         }
-        dom.outerHTML = html; //dom没了
+        dom.outerHTML = html; //dom이 없어짐
         dom = parentNode.children[last];
         return dom;
     },
@@ -665,7 +665,7 @@ MWF.FCWHistory.ModuleTableTdItem = new Class({
     },
     restoreRow: function(){
         this.getTrPathList().each(function (path) {
-            this.injectHtmlByPath( path, "<tr></tr>" ); //创建tr
+            this.injectHtmlByPath( path, "<tr></tr>" ); //tr 생성
         }.bind(this));
         this.restoreTds();
     },
@@ -704,28 +704,28 @@ MWF.FCWHistory.ModuleTableTdItem = new Class({
     },
     _undo: function(){
         switch (this.data.operation) {
-            case "insertRow": //td的操作，插入行
+            case "insertRow": //td 작업, 행 삽입
                 this.deleteRow();
                 break;
-            case "insertCol": //td的操作，插入列
+            case "insertCol": //td 작업, 열 삽입
                 this.deleteTds();
                 break;
-            case "deleteRow": //td的操作，删除行
+            case "deleteRow": //td 작업, 행 삭제
                 this.restoreRow();
                 break;
-            case "deleteCol": //td的操作，删除列
+            case "deleteCol": //td 작업, 열 삭제
                 this.restoreTds();
                 break;
-            case "splitCell": //拆分单元格
-                this.deleteTds(); //先删除新建的单元格
-                var fromLog = this.data.fromList[0]; //恢复原有的单元格
+            case "splitCell": //셀 분할
+                this.deleteTds(); //먼저 새로 만든 셀 삭제
+                var fromLog = this.data.fromList[0]; //원래 셀 복원
                 this.restoreTd( fromLog.path, fromLog.html, fromLog.json, fromLog.jsonObject );
                 break;
-            case "mergeCell": //合并单元格
-                //先删除新建的单元格
+            case "mergeCell": //셀 병합
+                //먼저 새로 만든 셀 삭제
                 var dom = this.getDomByPath( this.data.toList[0].path );
                 this.deleteTd(dom);
-                //恢复原来的单元格
+                //원래 셀 복원
                 for( var i=0; i<this.data.fromList.length; i++ ){
                     var log = this.data.fromList[i];
                     this.restoreTd( log.path, log.html, log.json, log.jsonObject );
@@ -740,30 +740,30 @@ MWF.FCWHistory.ModuleTableTdItem = new Class({
     _redo: function(){
         var dom, module, log;
         switch (this.data.operation) {
-            case "insertRow": //td的操作，插入行
+            case "insertRow": //td 작업, 행 삽입
                 this.restoreRow();
                 break;
-            case "insertCol": //td的操作，插入列
+            case "insertCol": //td 작업, 열 삽입
                 this.restoreTds();
                 break;
-            case "deleteRow": //td的操作，插入列
+            case "deleteRow": //td 작업, 열 삽입
                 this.deleteRow();
                 break;
-            case "deleteCol": //td的操作，删除列
+            case "deleteCol": //td 작업, 열 삭제
                 this.deleteTds();
                 break;
-            case "splitCell": //拆分单元格
+            case "splitCell": //셀 분할
                 dom = this.getDomByPath( this.data.fromList[0].path );
                 this.deleteTd( dom );
                 this.restoreTds();
                 break;
-            case "mergeCell": //合并单元格
-                //删除原单元格
+            case "mergeCell": //셀 병합
+                //원래 셀 삭제
                 for( var i=this.data.fromList.length-1; i>-1; i--){
                     dom = this.getDomByPath( this.data.fromList[i].path );
                     this.deleteTd(dom);
                 }
-                //恢复新的单元格
+                //새 셀 복원
                 var to = this.data.toList[0];
                 this.restoreTd( to.path, to.html, to.json, to.jsonObject );
                 break;
@@ -814,10 +814,10 @@ MWF.FCWHistory.ModuleDatatableTdItem = new Class({
     },
     _undo: function(){
         switch (this.data.operation) {
-            case "insertCol": //td的操作，插入列
+            case "insertCol": //td 작업, 열 삽입
                 this.deleteTds();
                 break;
-            case "deleteCol": //td的操作，删除列
+            case "deleteCol": //td 작업, 열 삭제
                 this.restoreTds();
                 break;
             case "styleBrush":
@@ -829,10 +829,10 @@ MWF.FCWHistory.ModuleDatatableTdItem = new Class({
     _redo: function(){
         var dom, module, log;
         switch (this.data.operation) {
-            case "insertCol": //td的操作，插入列
+            case "insertCol": //td 작업, 열 삽입
                 this.restoreTds();
                 break;
-            case "deleteCol": //td的操作，删除列
+            case "deleteCol": //td 작업, 열 삭제
                 this.deleteTds();
                 break;
             case "styleBrush":
@@ -974,24 +974,24 @@ MWF.FCWHistory.PropertySingleItem = new Class({
         var si = this.preArray.pop();
         while (si){
             si.destroy();
-            si = this.preArray.pop(); //删除preArray最后一个
+            si = this.preArray.pop(); //preArray 마지막 항목 삭제
         }
 
         si = this.nextArray.pop();
         while (si){
             si.destroy();
-            si = this.nextArray.pop(); //删除nextArray最后一个
+            si = this.nextArray.pop(); //nextArray 마지막 항목 삭제
         }
 
         this.node.destroy();
         MWF.release(this);
     },
-    undo: function () { //回退
+    undo: function () { //되돌리기
         this.status = "next";
         this.node.setStyles( this.history.css.itemNode_property_undo );
         this._undo();
     },
-    redo: function( notRedoItem ){ //重做
+    redo: function( notRedoItem ){ //다시 실행
         this.status = "pre";
         this.node.setStyles(this.history.css.itemNode_property_redo);
         if( !notRedoItem )this._redo();
@@ -1006,8 +1006,8 @@ MWF.FCWHistory.PropertySingleItem = new Class({
         while (si){
             si.undo();
             flag = true;
-            this.nextArray.unshift(si); //插入到灰显数组前面
-            this.preArray.pop(); //删除preArray最后一个
+            this.nextArray.unshift(si); //회색 표시 배열 앞에 삽입
+            this.preArray.pop(); //preArray 마지막 항목 삭제
             si = this.preArray.getLast();
         }
         if(flag){
@@ -1027,7 +1027,7 @@ MWF.FCWHistory.PropertySingleItem = new Class({
         while (si){
             si.redo();
             flag = true;
-            this.preArray.push(si); //插入到preArray数组最后
+            this.preArray.push(si); //preArray 배열 끝에 삽입
             this.nextArray.shift();
             si = this.nextArray[0];
         }
@@ -1070,30 +1070,30 @@ MWF.FCWHistory.PropertySingleItem = new Class({
         if( subItem.status === "pre" ){
             si = this.preArray.getLast();
             while (si && subItem !== si){
-                //如果下一个subitem的名称和现在一样，不设置SetEditStyle
+                //다음 subitem의 이름이 현재와 같으면 SetEditStyle을 설정하지 않음
                 si_next = this.preArray.length>1 ? this.preArray[this.preArray.length-2] : null;
                 notSetEditStyle = si_next && (subItem !== si_next) && ( si_next.data.changeList[0].name === si.data.changeList[0].name );
 
                 si.undo( notSetEditStyle );
-                this.nextArray.unshift(si); //插入到灰显数组前面
-                this.preArray.pop(); //删除preArray最后一个
+                this.nextArray.unshift(si); //회색 표시 배열 앞에 삽입
+                this.preArray.pop(); //preArray 마지막 항목 삭제
                 si = this.preArray.getLast();
             }
         }else if( subItem.status === "next" ){
             var subItemNext = this.getNext(subItem);
             si = this.nextArray[0];
             while (si && subItem !== si){
-                //如果下一个subitem的名称和现在一样，不设置SetEditStyle
+                //다음 subitem의 이름이 현재와 같으면 SetEditStyle을 설정하지 않음
                 si_next = this.nextArray.length>1 ? this.nextArray[1] : null;
                 notSetEditStyle = si_next && (subItemNext !== si_next) && ( si_next.data.changeList[0].name === si.data.changeList[0].name );
 
                 si.redo( notSetEditStyle );
-                this.preArray.push(si); //插入到preArray数组最后
+                this.preArray.push(si); //preArray 배열 끝에 삽입
                 this.nextArray.shift();
                 si = this.nextArray[0];
             }
             subItem.redo();
-            this.preArray.push(subItem); //插入到preArray数组最后
+            this.preArray.push(subItem); //preArray 배열 끝에 삽입
             this.nextArray.shift();
         }
         var module = this.getModule();
@@ -1132,12 +1132,12 @@ MWF.FCWHistory.PropertySingleItem.SubItem = new Class({
         this.parentItem.comeHere( null, true );
         this.parentItem.goto( this );
     },
-    undo: function ( notSetEditStyle ) { //回退
+    undo: function ( notSetEditStyle ) { //되돌리기
         this.status = "next";
         this.node.setStyles( this.history.css.subItemNode_undo );
         this._undo( notSetEditStyle );
     },
-    redo: function( notSetEditStyle ){ //重做
+    redo: function( notSetEditStyle ){ //다시 실행
         this.status = "pre";
         this.node.setStyles( this.history.css.subItemNode_redo );
         this._redo( notSetEditStyle );
@@ -1281,15 +1281,15 @@ MWF.FCWHistory.PropertyMultiItem = new Class({
 //     Extends: MTooltips,
 //     options : {
 //         style: "design",
-//         axis: "y",      //箭头在x轴还是y轴上展现
-//         position : { //node 固定的位置
-//             x : "right", //x轴上left center right,  auto 系统自动计算
-//             y : "bottom" //y 轴上top middle bottom, auto 系统自动计算
+//         axis: "y",      //화살표를 x축 또는 y축에 표시
+//         position : { //node 고정 위치
+//             x : "right", //x축 left center right, auto는 시스템 자동 계산
+//             y : "bottom" //y축 top middle bottom, auto는 시스템 자동 계산
 //         },
-//         event : "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+//         event : "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
 //         isAutoHide: false,
-//         hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-//         displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
+//         hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+//         displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
 //         hasArrow : false,
 //         hasCloseAction: true,
 //         hasMask: false,
@@ -1303,7 +1303,7 @@ MWF.FCWHistory.PropertyMultiItem = new Class({
 //     _customNode : function( node, contentNode ){
 //         new Element("div", {
 //             "style": "padding-left: 10px; background-color: rgb(242, 242, 242); color: #333333; height: 30px; line-height: 30px; ",
-//             "text": "历史记录"
+//             "text": "변경 이력"
 //         }).inject(contentNode, "before");
 //     },
 // })

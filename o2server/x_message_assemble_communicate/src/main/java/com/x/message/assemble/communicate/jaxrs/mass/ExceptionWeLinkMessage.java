@@ -8,6 +8,6 @@ class ExceptionWeLinkMessage extends PromptException {
 	private static final long serialVersionUID = 2459165718535980205L;
 
 	ExceptionWeLinkMessage(String retCode, String retMessage) {
-		super("发送华为WeLink消息失败,错误代码:{},错误消息:{}.", retCode, retMessage);
+		super("Huawei WeLink 메시지 전송에 실패했습니다. 오류 코드: {}, 오류 메시지: {}.", retCode, retMessage);
 	}
 }

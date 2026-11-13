@@ -7,13 +7,13 @@ public class Empower extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -4374867210301956570L;
 
-	@FieldDescribe("身份")
+	@FieldDescribe("신분")
 	private String fromIdentity;
 
-	@FieldDescribe("委托身份")
+	@FieldDescribe("위임 신분")
 	private String toIdentity;
 
-	@FieldDescribe("保留授权待办.")
+	@FieldDescribe("결재 대기 권한 위임 유지.")
 	private Boolean keepEnable;
 
 	public Boolean getKeepEnable() {

@@ -11,13 +11,13 @@ MWF.xApplication.Attendance.UnitIndex = new Class({
         "style": "default"
     },
     statusColor : {
-        "normal" : "#4A90E2", //绿色，正常
-        "levelAsked":"#2BC497", //蓝色，请假
-        "late":"#F5A623", //黄色，迟到
-        //"leaveEarly":"#fe8d03", //橙色，早退
-        "noSign":"#FF8080", //粉红色,未签到
-        "lackOfTime" : "#AC71E3",//工时不足人次
-        "abNormalDuty" : "#8B572A"//异常打卡人次
+        "normal" : "#4A90E2", //초록색, 정상
+        "levelAsked":"#2BC497", //파란색, 휴가
+        "late":"#F5A623", //노란색, 지각
+        //"leaveEarly":"#fe8d03", //주황색, 조퇴
+        "noSign":"#FF8080", //분홍색, 미체크
+        "lackOfTime" : "#AC71E3",//근무 시간 부족 인원 횟수
+        "abNormalDuty" : "#8B572A"//비정상 체크 인원 횟수
     },
     initialize: function(node, app, actions, options){
         this.setOptions(options);
@@ -551,7 +551,7 @@ MWF.xApplication.Attendance.UnitIndex = new Class({
 
     },
     listDetailFilterUser :function( callback, name, year, month ){
-        //{'q_empName':'林玲','q_year':'2016','q_month':'03'}
+        //{'q_empName':'임영희','q_year':'2016','q_month':'03'}
         var filter = {};
         if( name )filter.q_empName = name;
         if( year )filter.q_year = year;

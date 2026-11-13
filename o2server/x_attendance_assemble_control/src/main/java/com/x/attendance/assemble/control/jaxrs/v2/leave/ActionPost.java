@@ -31,32 +31,32 @@ public class ActionPost extends BaseAction {
             ActionResult<Wo> result = new ActionResult<>();
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getPerson())) {
-                throw new ExceptionEmptyParameter("人员标识");
+                throw new ExceptionEmptyParameter("인원 식별자");
             }
             if (StringUtils.isEmpty(wi.getLeaveType())) {
-                throw new ExceptionEmptyParameter("外出类型");
+                throw new ExceptionEmptyParameter("외근 유형");
             }
             if (null == wi.getStartTime()) {
-                throw new ExceptionEmptyParameter("开始时间");
+                throw new ExceptionEmptyParameter("시작 시간");
             }
             if (null == wi.getEndTime()) {
-                throw new ExceptionEmptyParameter("结束时间");
+                throw new ExceptionEmptyParameter("종료 시간");
             }
-            // 人员查询 转化成DN
+            // 사용자 조회 후 DN으로 변환
             Business business = new Business(emc);
             Person person = business.organization().person().getObject(wi.getPerson(), true);
             if (person == null) {
-                throw new ExceptionNotExistObject("人员 " + wi.getPerson());
+                throw new ExceptionNotExistObject("인원 " + wi.getPerson());
             }
             AttendanceV2LeaveData leaveData = Wi.copier.copy(wi);
-            if (leaveData.getLeaveDayNumber() <= 0.0) { // 有传入数据 就不计算 按照传入的值来。
-                // 计算日期间隔
+            if (leaveData.getLeaveDayNumber() <= 0.0) { // 전달된 데이터가 있으면 계산하지 않고 전달된 값 사용.
+                // 날짜 간격 계산
                 long interval = wi.getEndTime().getTime() - wi.getStartTime().getTime();
                 if (interval < 0) {
                     interval = -interval;
                 }
                 double days = interval / (1000.0 * 3600 * 24);
-                // 保留1位小数
+                // 소수점 1자리 유지
                 BigDecimal b = new BigDecimal(days);
                 days = b.setScale(1, RoundingMode.HALF_UP).doubleValue();
                 leaveData.setLeaveDayNumber(days);

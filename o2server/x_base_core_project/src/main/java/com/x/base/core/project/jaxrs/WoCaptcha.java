@@ -7,7 +7,7 @@ public abstract class WoCaptcha extends GsonPropertyObject {
 
 	@FieldDescribe("id.")
 	private String id;
-	@FieldDescribe("base64图片值.")
+	@FieldDescribe("base64 이미지 값.")
 	private String image;
 
 	public String getId() {

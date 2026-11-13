@@ -49,7 +49,7 @@ public class ActionGet extends BaseAction {
 				result.setData( result_cache.getData() );
 				result.setCount( 1L);
 			} else {
-				//继续进行数据查询
+				//데이터 조회 계속
 				result = getSectionQueryResult( id, request, effectivePerson );
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -68,7 +68,7 @@ public class ActionGet extends BaseAction {
 				sectionInfo = sectionInfoServiceAdv.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess( e, "根据指定ID查询版块信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionSectionInfoProcess( e, "지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -83,7 +83,7 @@ public class ActionGet extends BaseAction {
 					result.setData( wrap );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSectionInfoProcess( e, "系统在转换所有BBS版块信息为输出对象时发生异常." );
+					Exception exception = new ExceptionSectionInfoProcess( e, "BBS 섹션 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -103,17 +103,17 @@ public class ActionGet extends BaseAction {
 		
 		public static WrapCopier< BBSSectionInfo, Wo > copier = WrapCopierFactory.wo( BBSSectionInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String sectionVisibleResult ;
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String replyPublishResult ;
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String subjectPublishResult ;
 		
-		//版块的子版块信息列表
-		@FieldDescribe("子版块列表.")
+		//게시판의 하위 게시판 정보 목록
+		@FieldDescribe("하위 게시판 목록.")
 		private List<Wo> subSections = null;
 
 		public List<Wo> getSubSections() {

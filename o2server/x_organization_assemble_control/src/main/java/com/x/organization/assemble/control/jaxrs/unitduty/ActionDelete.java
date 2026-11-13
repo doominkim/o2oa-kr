@@ -35,7 +35,7 @@ class ActionDelete extends BaseAction {
             if (!effectivePerson.isSecurityManager() && !business.editable(effectivePerson, unit)) {
                 throw new ExceptionDenyEditUnit(effectivePerson, unit.getName());
             }
-            /** pick出来的需要重新取出 */
+            /** pick으로 가져온 것은 다시 조회해야 함 */
             emc.beginTransaction(UnitDuty.class);
             o = emc.find(o.getId(), UnitDuty.class);
             emc.remove(o, CheckRemoveType.all);

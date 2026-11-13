@@ -36,11 +36,11 @@ class ActionCreate extends BaseAction {
 			Meeting meeting = Wi.copier.copy(wi);
 			Room room = null;
 			if(StringUtils.isBlank(wi.getSubject())){
-				throw new ExceptionCustomError("会议标题不能为空！");
+				throw new ExceptionCustomError("회의 제목은 비워 둘 수 없습니다!");
 			}
 
 			String applicant = effectivePerson.getDistinguishedName();
-			/** 如果是后台调用,通过流程来触发会议 */
+			/** 백엔드 호출이면 프로세스로 회의를 트리거 */
 			if (effectivePerson.isCipher() && StringUtils.isNotEmpty(wi.getApplicant())) {
 				applicant = wi.getApplicant();
 			}
@@ -62,14 +62,14 @@ class ActionCreate extends BaseAction {
 					if(config.onLineEnabled()){
 						boolean flag = HstService.createMeeting(meeting, config);
 						if(!flag){
-							throw new ExceptionCustomError("创建线上会议失败，请联系管理员！");
+							throw new ExceptionCustomError("온라인 회의를 만들지 못했습니다. 관리자에게 문의하세요!");
 						}
 					}else{
-						throw new ExceptionCustomError("会议号和会议链接不能为空！");
+						throw new ExceptionCustomError("회의 번호와 회의 링크는 비워 둘 수 없습니다!");
 					}
 				}
 			}else if(StringUtils.isBlank(wi.getRoom())){
-				throw new ExceptionCustomError("会议室不能为空！");
+				throw new ExceptionCustomError("회의실은 비워 둘 수 없습니다!");
 			}
 			if(StringUtils.isNotBlank(wi.getRoom())){
 				room = emc.find(wi.getRoom(), Room.class);

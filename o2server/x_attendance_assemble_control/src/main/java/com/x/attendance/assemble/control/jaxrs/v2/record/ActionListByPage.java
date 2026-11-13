@@ -64,7 +64,7 @@ public class ActionListByPage extends BaseAction {
                 }
                 userList = new ArrayList<>(new LinkedHashSet<>(userList));
                 if (userList.isEmpty()) {
-                    throw new ExceptionWithMessage("当前查询条件没有找到人员信息！");
+                    throw new ExceptionWithMessage("현재 조회 조건으로 인원 정보를 찾을 수 없습니다!");
                 }
             }
             List<AttendanceV2CheckInRecord> list = business.getAttendanceV2ManagerFactory().listRecordByPage(adjustPage,
@@ -98,23 +98,23 @@ public class ActionListByPage extends BaseAction {
 
 
         private static final long serialVersionUID = 4227642755086093795L;
-        @FieldDescribe("打卡的用户标识")
+        @FieldDescribe("체크 사용자 식별자")
         private String userId;
-        @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
-        @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+        @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
         private Boolean recursive;
-        @FieldDescribe("打卡记录开始日期: YYYY-MM-dd")
+        @FieldDescribe("체크 기록 시작 날짜: YYYY-MM-dd")
         private String startDate;
-        @FieldDescribe("打卡记录结束日期: YYYY-MM-dd")
+        @FieldDescribe("체크 기록 종료 날짜: YYYY-MM-dd")
         private String endDate;
-        @FieldDescribe("打卡数据来源：USER_CHECK|AUTO_CHECK|FAST_CHECK|SYSTEM_IMPORT")
+        @FieldDescribe("체크 데이터 출처: USER_CHECK|AUTO_CHECK|FAST_CHECK|SYSTEM_IMPORT")
         private String sourceType;
-        @FieldDescribe("打卡结果: Normal|Early|Late|SeriousLate|NotSigned")
+        @FieldDescribe("체크 결과: Normal|Early|Late|SeriousLate|NotSigned")
         private String checkInResult;
-        @FieldDescribe("考勤类型: OnDuty|OffDuty")
+        @FieldDescribe("근태 유형: OnDuty|OffDuty")
         private String checkInType;
-        @FieldDescribe("是否外勤打卡.")
+        @FieldDescribe("외근 체크 여부.")
         private Boolean fieldWork;
 
         public String getSourceType() {
@@ -195,9 +195,9 @@ public class ActionListByPage extends BaseAction {
 
     public static class Wo extends AttendanceV2CheckInRecord {
 
-        @FieldDescribe("外出记录")
+        @FieldDescribe("외출 기록")
         private AttendanceV2LeaveData leaveData;
-        @FieldDescribe("请假记录")
+        @FieldDescribe("휴가 기록")
         private AttendanceV2LeaveRequest leaveRequest;
         public AttendanceV2LeaveData getLeaveData() {
             return leaveData;

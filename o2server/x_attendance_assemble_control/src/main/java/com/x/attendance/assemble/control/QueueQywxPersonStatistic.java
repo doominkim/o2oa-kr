@@ -30,7 +30,7 @@ public class QueueQywxPersonStatistic extends AbstractQueue<Date> {
 
     @Override
     protected void execute(Date date) throws Exception {
-        logger.info("开始执行人员企业微信考勤统计，time:"+DateTools.format(date));
+        logger.info("사용자 WeCom 근태 통계 시작, time:"+DateTools.format(date));
         try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
             saveStatisticPersonForMonth(business, emc, date);
@@ -44,10 +44,10 @@ public class QueueQywxPersonStatistic extends AbstractQueue<Date> {
         String month = dateString.substring(5, 7);
 
         Application app = ThisApplication.context().applications().randomWithWeight(x_organization_assemble_control.class.getName());
-        //开始分页查询人员
+        //사용자 페이지 조회 시작
         boolean hasNextPerson = true;
         int personPageSize = 50;
-        //人员查询地址
+        //사용자 조회 주소
         String uri = "person/list/(0)/next/50";
         while (hasNextPerson) {
             List<Person> list = ThisApplication.context().applications()
@@ -124,17 +124,17 @@ public class QueueQywxPersonStatistic extends AbstractQueue<Date> {
                     emc.commit();
                 }
 
-                //是否还有更多用户
+                //사용자가 더 있는지 여부
                 if (list.size() < personPageSize) {
-                    logger.info("统计企业微信考勤个人数据 结束！");
+                    logger.info("WeCom 근태 개인 데이터 통계 종료!");
                     hasNextPerson = false;
                 } else {
-                    //还有更多用户继续查询
+                    //사용자가 더 있어 계속 조회
                     uri = "person/list/" + list.get(list.size() - 1).getDistinguishedName() + "/next/50";
                 }
             }else {
-                //没有用户查询到结束
-                logger.info("统计企业微信考勤个人数据 结束！");
+                //조회된 사용자가 없어 종료
+                logger.info("WeCom 근태 개인 데이터 통계 종료!");
                 hasNextPerson = false;
             }
         }

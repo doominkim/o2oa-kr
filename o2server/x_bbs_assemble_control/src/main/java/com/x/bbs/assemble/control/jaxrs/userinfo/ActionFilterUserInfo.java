@@ -45,11 +45,11 @@ public class ActionFilterUserInfo extends BaseAction {
 		if( check ){
 			if( wrapIn.getUserName() == null ){
 				check = false;
-				Exception exception = new ExceptionPropertyEmpty( "用户姓名(userName)" );
+				Exception exception = new ExceptionPropertyEmpty( "사용자 이름(userName)" );
 				result.error( exception );
 			}
 		}
-		//查询用户信息是否存在
+		//사용자 정보 존재 여부 조회
 		if (check) {
 			try {
 				userInfo = userInfoService.getByUserName( wrapIn.getUserName() );

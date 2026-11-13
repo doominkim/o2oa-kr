@@ -29,7 +29,7 @@ class ActionGet extends BaseAction {
 
 			Wo wo = Wo.copier.copy(dict);
 			List<ApplicationDictItem> items = business.applicationDictItem().listWithApplicationDictObject(id);
-			/* 由于需要排序重新生成可排序List */
+			/* 정렬이 필요하므로 정렬 가능한 List를 다시 생성 */
 			DataItemConverter<ApplicationDictItem> converter = new DataItemConverter<>(ApplicationDictItem.class);
 			JsonElement json = converter.assemble(items);
 			wo.setData(json);

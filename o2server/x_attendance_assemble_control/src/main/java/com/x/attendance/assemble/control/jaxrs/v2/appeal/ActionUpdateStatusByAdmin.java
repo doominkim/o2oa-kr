@@ -21,7 +21,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.DateTools;
 
 /**
- * 管理员修改异常数据为正常
+ * 관리자가 이상 데이터를 정상으로 수정
  * 
  */
 public class ActionUpdateStatusByAdmin extends BaseAction {
@@ -39,28 +39,28 @@ public class ActionUpdateStatusByAdmin extends BaseAction {
       }
       AttendanceV2AppealInfo info = emc.find(id, AttendanceV2AppealInfo.class);
       if (info == null) {
-        throw new ExceptionNotExistObject("数据不存在，" + id);
+        throw new ExceptionNotExistObject("데이터가 없습니다, " + id);
       }
       emc.beginTransaction(AttendanceV2AppealInfo.class);
-      info.setStatus(AttendanceV2AppealInfo.status_TYPE_END_BY_ADMIN); // 管理员处理
+      info.setStatus(AttendanceV2AppealInfo.status_TYPE_END_BY_ADMIN); // 관리자 처리
       info.setEndTime(DateTools.now());
-      info.setUpdateStatusAdminPerson(person.getDistinguishedName()); // 处理人
+      info.setUpdateStatusAdminPerson(person.getDistinguishedName()); // 처리자
       emc.check(info, CheckPersistType.all);
       emc.commit();
       AttendanceV2CheckInRecord record = emc.find(info.getRecordId(), AttendanceV2CheckInRecord.class);
       if (record != null) {
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
-        record.setCheckInResult(AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL); // 修改为正常
-        record.setAppealId(info.getId()); // 回填 id
-        record.setDescription("관리자 처리!"); // 描述
+        record.setCheckInResult(AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL); // 정상으로 수정
+        record.setAppealId(info.getId()); // id 반영
+        record.setDescription("관리자 처리!"); // 설명
         emc.check(record, CheckPersistType.all);
         emc.commit();
-        // 申诉成功后，重新生成对应的数据
-        LOGGER.info("管理员处理成功，重新发起考勤数据生成，Date：{} person: {}", record.getRecordDateString(), record.getUserId());
+        // 이의 신청 성공 후 해당 데이터 재생성
+        LOGGER.info("관리자 처리 성공, 근태 데이터 재생성 요청, Date: {} person: {}", record.getRecordDateString(), record.getUserId());
         ThisApplication.queueV2Detail
             .send(new QueueAttendanceV2DetailModel(record.getUserId(), record.getRecordDateString()));
       } else {
-        LOGGER.info("没有找到对应的打卡记录数据，" + info.getRecordId());
+        LOGGER.info("해당 출퇴근 기록 데이터를 찾지 못했습니다," + info.getRecordId());
       }
     }
     ActionResult<Wo> result = new ActionResult<>();

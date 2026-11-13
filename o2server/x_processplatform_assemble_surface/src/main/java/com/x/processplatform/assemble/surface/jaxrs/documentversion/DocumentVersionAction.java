@@ -42,17 +42,17 @@ public class DocumentVersionAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentVersionAction.class);
 	private static final String OPERATIONID_PREFIX = "DocumentVersionAction::";
 
-	@Operation(summary = "列示指定工作或已完成工作的版式文件历史版本.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "지정 업무 문서 또는 완료된 업무 문서의 서식 파일 이력 버전 목록.", operationId = OPERATIONID_PREFIX
 			+ "listWithWorkOrWorkCompleted", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithWorkOrWorkCompleted.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定工作或已完成工作的版式文件历史版本.", action = ActionListWithWorkOrWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "지정 업무 문서 또는 완료된 업무 문서의 서식 파일 이력 버전 목록.", action = ActionListWithWorkOrWorkCompleted.class)
 	@GET
 	@Path("list/workorworkcompleted/{workOrWorkCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithWorkOrWorkCompleted(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
+			@JaxrsParameterDescribe("식별자") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
 		ActionResult<List<ActionListWithWorkOrWorkCompleted.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -64,18 +64,18 @@ public class DocumentVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示指定工作或已完成工作以及类型的版式文件历史版本.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "지정 업무 문서 또는 완료된 업무 문서 및 유형의 서식 파일 이력 버전 목록.", operationId = OPERATIONID_PREFIX
 			+ "listWithWorkOrWorkCompletedCategory", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithWorkOrWorkCompletedCategory.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定工作或已完成工作以及类型的版式文件历史版本.", action = ActionListWithWorkOrWorkCompletedCategory.class)
+	@JaxrsMethodDescribe(value = "지정 업무 문서 또는 완료된 업무 문서 및 유형의 서식 파일 이력 버전 목록.", action = ActionListWithWorkOrWorkCompletedCategory.class)
 	@GET
 	@Path("list/workorworkcompleted/{workOrWorkCompleted}/category/{category}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithWorkOrWorkCompletedCategory(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("workOrWorkCompleted") String workOrWorkCompleted,
-			@JaxrsParameterDescribe("类型") @PathParam("category") String category) {
+			@JaxrsParameterDescribe("식별자") @PathParam("workOrWorkCompleted") String workOrWorkCompleted,
+			@JaxrsParameterDescribe("유형") @PathParam("category") String category) {
 		ActionResult<List<ActionListWithWorkOrWorkCompletedCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -88,16 +88,16 @@ public class DocumentVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示指定任务标识的版式文件历史版本.", operationId = OPERATIONID_PREFIX + "listWithJob", responses = {
+	@Operation(summary = "지정 작업 식별자의 서식 파일 이력 버전 목록.", operationId = OPERATIONID_PREFIX + "listWithJob", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithJob.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定任务标识的版式文件历史版本.", action = ActionListWithJob.class)
+	@JaxrsMethodDescribe(value = "지정 작업 식별자의 서식 파일 이력 버전 목록.", action = ActionListWithJob.class)
 	@GET
 	@Path("list/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("식별자") @PathParam("job") String job) {
 		ActionResult<List<ActionListWithJob.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -109,17 +109,17 @@ public class DocumentVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示指定任务标识以及类型的版式文件历史版本.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "지정 작업 식별자 및 유형의 서식 파일 이력 버전 목록.", operationId = OPERATIONID_PREFIX
 			+ "listWithJobCategory", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithJobCategory.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定任务标识以及类型的版式文件历史版本.", action = ActionListWithJobCategory.class)
+	@JaxrsMethodDescribe(value = "지정 작업 식별자 및 유형의 서식 파일 이력 버전 목록.", action = ActionListWithJobCategory.class)
 	@GET
 	@Path("list/job/{job}/category/{category}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJobCategory(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("job") String job,
-			@JaxrsParameterDescribe("类型") @PathParam("category") String category) {
+			@JaxrsParameterDescribe("식별자") @PathParam("job") String job,
+			@JaxrsParameterDescribe("유형") @PathParam("category") String category) {
 		ActionResult<List<ActionListWithJobCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -131,17 +131,17 @@ public class DocumentVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "指定工作标识创建版式文件版本.", operationId = OPERATIONID_PREFIX + "create", responses = {
+	@Operation(summary = "지정 업무 문서 식별자로 서식 파일 버전 생성.", operationId = OPERATIONID_PREFIX + "create", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionCreate.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionCreate.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "指定工作标识创建版式文件版本.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "지정 업무 문서 식별자로 서식 파일 버전 생성.", action = ActionCreate.class)
 	@POST
 	@Path("work/{work}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void create(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("work") String work, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("work") String work, JsonElement jsonElement) {
 		ActionResult<ActionCreate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -153,15 +153,15 @@ public class DocumentVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据版式文件历史版本标识获取内容.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "서식 파일 이력 버전 식별자로 내용 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGet.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "根据版式文件历史版本标识获取内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "서식 파일 이력 버전 식별자로 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

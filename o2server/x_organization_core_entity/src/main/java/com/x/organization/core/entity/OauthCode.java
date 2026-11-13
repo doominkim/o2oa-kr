@@ -19,7 +19,7 @@ import com.x.base.core.project.tools.StringTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "OauthCode", description = "组织Oauth码.")
+@Schema(name = "OauthCode", description = "조직 Oauth 코드.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.OauthCode.table, uniqueConstraints = {
@@ -41,12 +41,12 @@ public class OauthCode extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
@@ -60,9 +60,9 @@ public class OauthCode extends SliceJpaObject {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/** 默认内容结束 */
+	/** 기본 내용 끝 */
 	public static final String clientId_FIELDNAME = "clientId";
 	@FieldDescribe("client_id.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + clientId_FIELDNAME)
@@ -71,21 +71,21 @@ public class OauthCode extends SliceJpaObject {
 	private String clientId;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("绑定的用户.")
+	@FieldDescribe("바인딩된 사용자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String scope_FIELDNAME = "scope";
-	@FieldDescribe("授权范围.")
+	@FieldDescribe("권한 범위.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + scope_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + scope_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String scope;
 
 	public static final String code_FIELDNAME = "code";
-	@FieldDescribe("认证code.")
+	@FieldDescribe("인증 code.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + code_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + code_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -98,12 +98,12 @@ public class OauthCode extends SliceJpaObject {
 	private String accessToken;
 
 	public static final String codeUsed_FIELDNAME = "codeUsed";
-	@FieldDescribe("code是否已经使用过.")
+	@FieldDescribe("code 사용 여부.")
 	@CheckPersist(allowEmpty = false)
 	@Column(name = ColumnNamePrefix + codeUsed_FIELDNAME)
 	private Boolean codeUsed;
 
-	/** flag标志位 */
+	/** flag 플래그 비트 */
 
 	public String getScope() {
 		return scope;

@@ -77,7 +77,7 @@ public class ActionUploadWithUrl extends BaseAction {
 		Wo wo = new Wo();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
 			 ByteArrayInputStream in = new ByteArrayInputStream(bytes)) {
-			/* 先保存原图 */
+			/* 원본 이미지 먼저 저장 */
 			file = new File(mapping.getName(), fileName, effectivePerson.getDistinguishedName(), type, wi.getReference());
 			emc.check(file, CheckPersistType.all);
 			file.saveContent(mapping, in, fileName);
@@ -87,21 +87,21 @@ public class ActionUploadWithUrl extends BaseAction {
 			wo.setOrigId(file.getId());
 		}
 
-		/*保存压缩图*/
+		/*압축 이미지 저장*/
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
 			 ByteArrayInputStream in = new ByteArrayInputStream(bytes)) {
 			if ((wi.getScale() > 0) && ArrayUtils.contains(IMAGE_EXTENSIONS_COMPRESS, file.getExtension())) {
 				String fileNameThumbnail = fileName.substring(0, fileName.lastIndexOf(".")) + "_t" + "."+ file.getExtension();
 				File fileThumbnail = new File(mapping.getName(), fileNameThumbnail,effectivePerson.getDistinguishedName(), type, wi.getReference());
-				/** 如果是需要压缩的附件 */
+				/** 압축이 필요한 첨부파일인 경우 */
 				try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 					BufferedImage image = ImageIO.read(in);
 					if (image.getWidth() > wi.getScale()) {
-						/** 图像的实际大小比scale大的要进行压缩 */
+						/** 이미지 실제 크기가 scale보다 크면 압축 */
 						BufferedImage scalrImage = Scalr.resize(image, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH, wi.getScale());
 						ImageIO.write(scalrImage, fileThumbnail.getExtension(), baos);
 					} else {
-						/** 图像的实际大小比scale小,保存原图不进行压缩 */
+						/** 이미지 실제 크기가 scale보다 작으면 압축하지 않고 원본 저장 */
 						ImageIO.write(image, fileThumbnail.getExtension(), baos);
 					}
 					try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray())) {
@@ -115,7 +115,7 @@ public class ActionUploadWithUrl extends BaseAction {
 				}
 
 			} else {
-				//不进行压缩,保存原图id
+				//압축하지 않고 원본 이미지 id 저장
 				wo.setId(file.getId());
 			}
 		}
@@ -131,19 +131,19 @@ public class ActionUploadWithUrl extends BaseAction {
 
 		private static final long serialVersionUID = -3707551996175419386L;
 
-		@FieldDescribe("文件类型：processPlatformJob|processPlatformForm|mindInfo|portalPage|cmsDocument|forumDocument|forumReply|component|teamworkProject")
+		@FieldDescribe("파일 유형: processPlatformJob|processPlatformForm|mindInfo|portalPage|cmsDocument|forumDocument|forumReply|component|teamworkProject")
 		private String referenceType;
 
-		@FieldDescribe("文件名称,带扩展名的文件名.")
+		@FieldDescribe("파일 이름, 확장자를 포함한 파일명.")
 		private String fileName;
 
-		@FieldDescribe("*附件来源url地址.")
+		@FieldDescribe("*첨부파일 원본 url 주소.")
 		private String fileUrl;
 
-		@FieldDescribe("*关联id.")
+		@FieldDescribe("*연관 id.")
 		private String reference;
 
-		@FieldDescribe("缩放,如果指定宽度<=0,则不进行压缩")
+		@FieldDescribe("축소·확대, 지정 너비가 <=0이면 압축하지 않음")
 		private Integer scale;
 
 		public String getReferenceType() {
@@ -197,10 +197,10 @@ public class ActionUploadWithUrl extends BaseAction {
 			this.id = id;
 		}
 
-		@FieldDescribe("缩略图id")
+		@FieldDescribe("썸네일 id")
 		private String id;
 
-		@FieldDescribe("原图id")
+		@FieldDescribe("원본 이미지 id")
 		private String origId;
 
 		public String getId() {

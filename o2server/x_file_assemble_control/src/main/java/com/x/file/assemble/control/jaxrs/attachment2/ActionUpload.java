@@ -62,7 +62,7 @@ class ActionUpload extends BaseAction {
 						.getBytes(DefaultCharset.charset_iso_8859_1), DefaultCharset.charset);
 			}
 			fileName = FilenameUtils.getName(fileName);
-			/** 禁止不带扩展名的文件上传 */
+			/** 확장자 없는 파일 업로드 금지 */
 			if (StringUtils.isEmpty(FilenameUtils.getExtension(fileName))) {
 				throw new ExceptionEmptyExtension(fileName);
 			}
@@ -74,7 +74,7 @@ class ActionUpload extends BaseAction {
 				throw new ExceptionAttachmentNone(fileName);
 			}
 			if (file.length() > ONE_G) {
-				LOGGER.warn("上传超大附件：{},大小：{}", fileName, (file.length() / 1024 / 1024) + "M");
+				LOGGER.warn("대용량 첨부파일 업로드: {}, 크기: {}", fileName, (file.length() / 1024 / 1024) + "M");
 			}
 			if (StringUtils.isEmpty(fileMd5)) {
 				if (file.length() < Integer.MAX_VALUE) {

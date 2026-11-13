@@ -7,6 +7,6 @@ class ExceptionSourceNotExist extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionSourceNotExist(String flag) {
-		super("页面: {} 不存在.", flag);
+		super("페이지: {}이(가) 없습니다.", flag);
 	}
 }

@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Elinput 基于Element UI的输入框组件。
- * @o2cn 输入框
+/** @class Elinput Element UI 기반 입력 상자 컴포넌트.
+ * @o2cn 입력 상자
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/input|Element UI Input 输入框}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/input|Element UI Input 입력 상자}
  */
 MWF.xApplication.process.Xform.Elinput = MWF.APPElinput =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elinput# */
@@ -21,29 +21,29 @@ MWF.xApplication.process.Xform.Elinput = MWF.APPElinput =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 当 input 获得焦点时触发。this.event[0]指向Event
+         * input이 포커스를 얻을 때 발생. this.event[0]은 Event
          * @event MWF.xApplication.process.Xform.Elinput#focus
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|输入组件的Input Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|입력 컴포넌트의 Input Events 장}
          */
         /**
-         * 当 input 失去焦点时触发。this.event[0]指向Event
+         * input이 포커스를 잃을 때 발생. this.event[0]은 Event
          * @event MWF.xApplication.process.Xform.Elinput#blur
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|输入组件的Input Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|입력 컴포넌트의 Input Events 장}
          */
         /**
-         * 仅在输入框失去焦点或用户按下回车时触发。this.event[0]为组件的value
+         * 입력 상자가 포커스를 잃거나 사용자가 Enter를 누를 때만 발생. this.event[0]은 컴포넌트의 value
          * @event MWF.xApplication.process.Xform.Elinput#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|输入组件的Input Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|입력 컴포넌트의 Input Events 장}
          */
         /**
-         * 在 Input 值改变时触发。this.event[0]为组件的value
+         * Input 값이 변경될 때 발생. this.event[0]은 컴포넌트의 value
          * @event MWF.xApplication.process.Xform.Elinput#input
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|输入组件的Input Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|입력 컴포넌트의 Input Events 장}
          */
         /**
-         * 在点击由 clearable 属性生成的清空按钮时触发
+         * clearable 속성으로 생성된 지우기 버튼을 클릭할 때 발생
          * @event MWF.xApplication.process.Xform.Elinput#clear
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|输入组件的Input Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/input|입력 컴포넌트의 Input Events 장}
          */
         "elEvents": ["focus", "blur", "change", "input", "clear"]
     },

@@ -8,6 +8,6 @@ class ExceptionNameExistWithPerson extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionNameExistWithPerson(Person person, String unique) {
-		super("{} 已有名为: {} 的属性.", person.getName(), unique);
+		super("{}에 이름이 {} 인 속성이 이미 있습니다.", person.getName(), unique);
 	}
 }

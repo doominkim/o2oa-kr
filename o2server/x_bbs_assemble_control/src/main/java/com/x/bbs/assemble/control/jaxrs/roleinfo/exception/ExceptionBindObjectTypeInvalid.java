@@ -7,6 +7,6 @@ public class ExceptionBindObjectTypeInvalid extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionBindObjectTypeInvalid( String type ) {
-		super("传入的对象类别不正确，必须是人员、组织或者群组中的一种.Type:" + type );
+		super("대상 유형이 올바르지 않습니다. 사용자, 조직, 그룹 중 하나여야 합니다. Type:" + type );
 	}
 }

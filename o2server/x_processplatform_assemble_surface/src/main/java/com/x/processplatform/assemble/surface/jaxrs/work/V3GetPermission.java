@@ -86,10 +86,10 @@ class V3GetPermission extends BaseAction {
 
 		private static final long serialVersionUID = -8740908895201213169L;
 
-		@FieldDescribe("是否有权限访问")
+		@FieldDescribe("접근 권한 여부")
 		private Boolean enable = false;
 
-		@FieldDescribe("可访问标识")
+		@FieldDescribe("접근 가능 표시")
 		private List<String> accessibleList = new ArrayList<>();
 
 		private List<String> managableList = new ArrayList<>();

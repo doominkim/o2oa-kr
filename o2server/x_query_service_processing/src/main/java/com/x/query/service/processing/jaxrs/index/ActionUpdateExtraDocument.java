@@ -252,7 +252,7 @@ class ActionUpdateExtraDocument extends BaseAction {
 					LOGGER.warn("storageMapping is null, storageType:{}, name:{}.", entry.second(), entry.third());
 				}
 			} catch (Throwable th) {
-				// 需要Throwable,tika可能抛出Error
+				// Throwable 필요, tika가 Error를 던질 수 있음
 				LOGGER.warn("error extract attachment text, message:{}.", th.getMessage());
 			}
 		}
@@ -278,37 +278,37 @@ class ActionUpdateExtraDocument extends BaseAction {
 
 		private static final long serialVersionUID = 8642852156734924824L;
 
-		@FieldDescribe("文档分类,在扩展中可以保持为空")
+		@FieldDescribe("문서 분류, 확장에서는 비워 둘 수 있음")
 		private String type = "";
 
-		@FieldDescribe("索引仓库名称,最终将以EXTRA_{key}的形式创建索引目录")
+		@FieldDescribe("인덱스 저장소 이름, 최종적으로 EXTRA_{key} 형식으로 인덱스 디렉터리 생성")
 		private String key = "";
 
-		@FieldDescribe("文档标识")
+		@FieldDescribe("문서 식별자")
 		private String id = "";
 
-		@FieldDescribe("业务数据")
+		@FieldDescribe("업무 데이터")
 		private JsonObject data;
 
-		@FieldDescribe("存储路径,存储类型,存储名称,附件标题")
+		@FieldDescribe("저장 경로, 저장 유형, 저장 이름, 첨부파일 제목")
 		private List<Quadruple<String, StorageType, String, String>> storageList = new ArrayList<>();
 
-		@FieldDescribe("可阅读人员列表")
+		@FieldDescribe("열람 가능 사용자 목록")
 		private List<String> readerList = new ArrayList<>();
 
-		@FieldDescribe("标题")
+		@FieldDescribe("제목")
 		private String title = "";
 
-		@FieldDescribe("创建时间")
+		@FieldDescribe("생성 시간")
 		private Date createTime;
 
-		@FieldDescribe("更新时间")
+		@FieldDescribe("업데이트 시간")
 		private Date updateTime;
 
-		@FieldDescribe("创建人")
+		@FieldDescribe("생성자")
 		private String creatorPerson = "";
 
-		@FieldDescribe("创建身份所在组织")
+		@FieldDescribe("생성 신분 소속 조직")
 		private String creatorUnit = "";
 
 		public String getType() {

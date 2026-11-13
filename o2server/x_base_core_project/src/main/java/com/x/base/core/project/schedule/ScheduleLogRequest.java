@@ -17,7 +17,7 @@ public class ScheduleLogRequest extends GsonPropertyObject {
 
 	public static final String FIELDSCHEDULELOGID = "scheduleLogId";
 
-	// 新增id字段,用于保存ScheduleLog的时候覆盖自动生成的id
+	// id 필드 추가, ScheduleLog 저장 시 자동 생성 id를 덮어쓰는 용도
 	private String scheduleLogId;
 
 	private String type;

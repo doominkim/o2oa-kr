@@ -11,7 +11,7 @@ public class V2ResetWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -8631082471633729236L;
 
-	@FieldDescribe("重置专有组织标识.")
+	@FieldDescribe("재설정 전용 조직 식별자.")
 	private List<String> distinguishedNameList;
 
 	public List<String> getDistinguishedNameList() {

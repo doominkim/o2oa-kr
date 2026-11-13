@@ -32,11 +32,11 @@ public class ActionDelete extends BaseAction {
 		String hostName = request.getRemoteAddr();
 
 		if (check) {
-			//删除操作权限判断
+			//삭제 작업 권한 판단
 			try {
 				if ( !ThisApplication.isBBSManager(effectivePerson) ) {
 					check = false;
-					logger.warn("用户没有BBSManager角色，并且也不是系统管理员！USER：" + effectivePerson.getDistinguishedName());
+					logger.warn("사용자에게 BBSManager 역할이 없고 시스템 관리자도 아닙니다! USER:" + effectivePerson.getDistinguishedName());
 					Exception exception = new ExceptionInsufficientPermissions(effectivePerson.getDistinguishedName(), ThisApplication.BBSMANAGER );
 					result.error(exception);
 				}
@@ -55,7 +55,7 @@ public class ActionDelete extends BaseAction {
 				result.error(exception);
 			}
 		}
-		if (check) { // 查询论坛信息是否存在
+		if (check) { // 포럼 정보 존재 여부 조회
 			try {
 				forumInfo = forumInfoServiceAdv.get(id);
 				if (forumInfo == null) {
@@ -65,19 +65,19 @@ public class ActionDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionForumInfoProcess(e, "系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + id);
+				Exception exception = new ExceptionForumInfoProcess(e, "ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		if (check) {
-			// 查询论坛是否仍存在版块信息
+			// 포럼에 게시판 정보가 남아 있는지 조회
 			try {
 				sectionCount = sectionInfoServiceAdv.countMainSectionByForumId(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionForumInfoProcess(e, "系统在根据论坛ID查询版块信息数量时发生异常.ID:" + id);
+				Exception exception = new ExceptionForumInfoProcess(e, "포럼 ID로 섹션 수를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -86,15 +86,15 @@ public class ActionDelete extends BaseAction {
 		if (check) {
 			if (sectionCount > 0) {
 				check = false;
-				logger.warn("论坛[" + forumInfo.getForumName() + "]中仍存在" + sectionCount + "个版块，无法继续进行删除操作！ID=" + id);
+				logger.warn("포럼 [" + forumInfo.getForumName() + "]에 아직 " + sectionCount + "개의 게시판이 있어 삭제를 계속할 수 없습니다! ID=" + id);
 				Exception exception = new ExceptionForumCanNotDelete(
-						"论坛[" + forumInfo.getForumName() + "]中仍存在" + sectionCount + "个版块，无法继续进行删除操作！");
+						"포럼 [" + forumInfo.getForumName() + "]에 아직 " + sectionCount + "개의 섹션이 남아 있어 삭제할 수 없습니다!");
 				result.error(exception);
 			}
 		}
 		
 		if (check) {
-			//已经没有任何版块了，可以删除论坛信息以及论坛的权限信息
+			//게시판이 하나도 없으므로 포럼 정보와 포럼 권한 정보 삭제 가능
 			try {
 				forumInfoServiceAdv.delete(id);
 				
@@ -106,7 +106,7 @@ public class ActionDelete extends BaseAction {
 				operationRecordService.forumOperation(effectivePerson.getDistinguishedName(), forumInfo, "DELETE", hostIp, hostName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionForumInfoProcess(e, "根据ID删除BBS论坛分区信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionForumInfoProcess(e, "ID로 BBS 포럼 분류 정보를 삭제하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

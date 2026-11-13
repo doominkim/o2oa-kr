@@ -39,7 +39,7 @@ public class ActionCollectionMsgListWithPersonByPage extends BaseAction {
 					IMMsg message =  emc.find(wo.getMessageId(), IMMsg.class);
 					if (message != null) {
 						IMMsgWo messageWo = IMMsgWo.copier.copy(message);
-						// 引用消息
+						// 인용 메시지
 						if (StringUtils.isNotEmpty(messageWo.getQuoteMessageId())) {
 							IMMsg quoteMessage =  emc.find(messageWo.getQuoteMessageId(), IMMsg.class);
 							if (quoteMessage != null) {
@@ -64,7 +64,7 @@ public class ActionCollectionMsgListWithPersonByPage extends BaseAction {
 		static WrapCopier<IMMsgCollection, Wo> copier = WrapCopierFactory.wo(IMMsgCollection.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("关联消息.")
+		@FieldDescribe("연관 메시지.")
 		private IMMsgWo message;
 
 
@@ -85,7 +85,7 @@ public class ActionCollectionMsgListWithPersonByPage extends BaseAction {
 		static WrapCopier<IMMsg, IMMsgWo> copier = WrapCopierFactory.wo(IMMsg.class, IMMsgWo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("引用消息.")
+		@FieldDescribe("인용 메시지.")
 		private IMMsg quoteMessage;
 
 		public IMMsg getQuoteMessage() {

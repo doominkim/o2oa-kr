@@ -34,7 +34,7 @@ import com.x.base.core.project.tools.DateTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Role", description = "组织角色.")
+@Schema(name = "Role", description = "조직 역할.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Role.table, uniqueConstraints = {
@@ -55,12 +55,12 @@ public class Role extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.pinyin = StringUtils.lowerCase(PinyinHelper.convertToPinyinString(name, "", PinyinFormat.WITHOUT_TONE));
@@ -68,41 +68,41 @@ public class Role extends SliceJpaObject {
 		this.unique = StringUtils.isBlank(this.unique) ? id : unique;
 		this.distinguishedName = this.name + PersistenceProperties.distinguishNameSplit + this.unique
 				+ PersistenceProperties.distinguishNameSplit + PersistenceProperties.Role.distinguishNameCharacter;
-		/** 生成默认排序号 */
+		/** 기본 정렬 번호 생성 */
 		if (null == this.orderNumber) {
 			this.orderNumber = DateTools.timeOrderNumber();
 		}
 	}
 
-	/** 更新运行方法 */
+	/** 실행 메서드 업데이트 */
 
 	// public static String[] FLA GS = new String[] { "id", "unique",
 	// "distinguishedName" };
 
-	/** flag标志位 */
-	/** 默认内容结束 */
+	/** flag 플래그 비트 */
+	/** 기본 내용 끝 */
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音,自动生成")
+	@FieldDescribe("name 병음, 자동 생성")
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母,自动生成")
+	@FieldDescribe("name 병음 첫 글자, 자동 생성")
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
 	private String pinyinInitial;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称,可重名.")
+	@FieldDescribe("이름, 중복 가능.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
@@ -110,30 +110,30 @@ public class Role extends SliceJpaObject {
 
 	public static final String unique_FIELDNAME = "unique";
 	@Flag
-	@FieldDescribe("唯一标识,不可重复,为空则使用自动填充值")
+	@FieldDescribe("고유 식별자, 중복 불가, 비어 있으면 자동 채움 값 사용")
 	@Column(length = length_255B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true, citationNotExists =
-	/* 验证不可重名 */
+	/* 이름 중복 검증 */
 	@CitationNotExist(fields = unique_FIELDNAME, type = Role.class))
 	private String unique;
 
 	public static final String distinguishedName_FIELDNAME = "distinguishedName";
 	@Flag
-	@FieldDescribe("识别名.")
+	@FieldDescribe("식별명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + distinguishedName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + distinguishedName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String distinguishedName;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String personList_FIELDNAME = "personList";
-	@FieldDescribe("角色个人成员,多值,存储 Person ID.")
+	@FieldDescribe("역할 개인 구성원, 다중 값, Person ID 저장.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + personList_FIELDNAME, joinIndex = @Index(name = TABLE
 			+ IndexNameMiddle + personList_FIELDNAME + JoinIndexNameSuffix))
@@ -144,7 +144,7 @@ public class Role extends SliceJpaObject {
 	private List<String> personList = new ArrayList<String>();
 
 	public static final String groupList_FIELDNAME = "groupList";
-	@FieldDescribe("角色群组成员,多值,存储 Group ID.")
+	@FieldDescribe("역할 그룹 구성원, 다중 값, Group ID 저장.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + groupList_FIELDNAME, joinIndex = @Index(name = TABLE
 			+ IndexNameMiddle + groupList_FIELDNAME + JoinIndexNameSuffix))

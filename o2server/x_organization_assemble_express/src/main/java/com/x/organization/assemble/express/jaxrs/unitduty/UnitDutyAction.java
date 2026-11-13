@@ -24,12 +24,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("unitduty")
-@JaxrsDescribe("组织职务接口")
+@JaxrsDescribe("조직 직무 API")
 public class UnitDutyAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(UnitDutyAction.class);
 
-	@JaxrsMethodDescribe(value = "根据组织和组织职务名称获取身份.", action = ActionListIdentityWithUnitWithName.class)
+	@JaxrsMethodDescribe(value = "조직과 조직 직무명으로 신분 조회.", action = ActionListIdentityWithUnitWithName.class)
 	@POST
 	@Path("list/identity/unit/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class UnitDutyAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织和组织职务名称获取身份对象.", action = ActionListIdentityWithUnitWithNameObject.class)
+	@JaxrsMethodDescribe(value = "조직과 조직 직무명으로 신분 객체 조회.", action = ActionListIdentityWithUnitWithNameObject.class)
 	@POST
 	@Path("list/identity/unit/name/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class UnitDutyAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的组织职务名称.", action = ActionListNameWithUnit.class)
+	@JaxrsMethodDescribe(value = "조직의 조직 직무명 일괄 조회.", action = ActionListNameWithUnit.class)
 	@POST
 	@Path("list/name/unit")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -83,7 +83,7 @@ public class UnitDutyAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份的组织职务名称.", action = ActionListNameWithIdentity.class)
+	@JaxrsMethodDescribe(value = "신분의 조직 직무명 일괄 조회.", action = ActionListNameWithIdentity.class)
 	@POST
 	@Path("list/name/identity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -101,7 +101,7 @@ public class UnitDutyAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织的组织职务对象.", action = ActionListWithUnitObject.class)
+	@JaxrsMethodDescribe(value = "조직의 조직 직무 객체 조회.", action = ActionListWithUnitObject.class)
 	@POST
 	@Path("list/unit/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -119,7 +119,7 @@ public class UnitDutyAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织职务名称获取组织职务标识.", action = ActionListWithName.class)
+	@JaxrsMethodDescribe(value = "조직 직무명으로 조직 직무 식별자 조회.", action = ActionListWithName.class)
 	@POST
 	@Path("list/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -137,7 +137,7 @@ public class UnitDutyAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织和职务名称获取职务信息.", action = ActionGetWithUnitWithName.class)
+	@JaxrsMethodDescribe(value = "조직과 직무명으로 직무 정보 조회.", action = ActionGetWithUnitWithName.class)
 	@POST
 	@Path("find/by/unit/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -59,7 +59,7 @@ const uploadImage = (e) => {
     });
   }
 }
-// 在线图片加载完成后计算大小
+// 온라인 이미지 로드 완료 후 크기 계산
 const loadImage = () => {
   if (imgNode.value){
       imgSize.value = {
@@ -71,7 +71,7 @@ const loadImage = () => {
 
 onMounted(()=>{
   nextTick(()=>{
-    // base64  图片加载完成后直接读取大小
+    // base64 이미지 로드 완료 후 크기 바로 읽기
     if (imgNode.value){
       imgSize.value = {
         x: imgNode.value.naturalWidth,

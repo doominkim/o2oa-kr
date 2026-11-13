@@ -40,7 +40,7 @@ o2.addReady(function () {
         }
     };
 
-    //异步载入必要模块
+    //필요한 모듈 비동기 로드
     layout.config = null;
     var configLoaded = false;
     var lpLoaded = false;
@@ -122,7 +122,7 @@ o2.addReady(function () {
 
     var _load = function () {
         var _loadApp = function (json) {
-            //用户已经登录
+            //사용자 로그인 완료
             // layout.user = json.data;
             // layout.session = {};
             // layout.session.user = json.data;

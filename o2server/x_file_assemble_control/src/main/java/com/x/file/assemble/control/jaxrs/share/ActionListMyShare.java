@@ -48,10 +48,10 @@ class ActionListMyShare extends BaseAction {
 		static WrapCopier<Share, Wo> copier = WrapCopierFactory.wo(Share.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("文件类型")
+		@FieldDescribe("파일 유형")
 		private String contentType;
 
-		@FieldDescribe("文件描述")
+		@FieldDescribe("파일 설명")
 		private String description;
 
 		public String getContentType() {

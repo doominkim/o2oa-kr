@@ -69,7 +69,7 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -127291000673692614L;
 
-		@FieldDescribe("是否是系统角色")
+		@FieldDescribe("시스템 역할 여부")
 		private Boolean isSystemRole = false;
 
 		private List<WoGroup> woGroupList;

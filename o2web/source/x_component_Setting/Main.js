@@ -386,7 +386,7 @@ MWF.xApplication.Setting.MobileExplorer = new Class({
             json = null;
             checkData();
         }.bind(this));
-        //微信菜单数据
+        //위챗 메뉴 데이터
         o2.Actions.load("x_program_center").MPWeixinAction.menuWeixinList(function (json) {
             if (json.data && json.data.button) {
                 this.mpweixinListData = json.data.button;
@@ -394,7 +394,7 @@ MWF.xApplication.Setting.MobileExplorer = new Class({
                 this.mpweixinListData = [];
             }
         }.bind(this));
-        // 微信公众号关注 回复
+        // 위챗 공식 계정 팔로우 응답
         o2.Actions.load("x_program_center").MPWeixinAction.menuWeixinSubscribe(function (json) {
             if (json.data ) {
                 this.mpweixinSubscribe = json.data;
@@ -454,7 +454,7 @@ MWF.xApplication.Setting.MobileExplorer = new Class({
     }
 });
 
-// 废弃
+// 폐기
 // MWF.xApplication.Setting.CloudExplorer = new Class({
 //     Extends: MWF.xApplication.Setting.BaseExplorer,
 //     initialize: function(app, content){
@@ -516,7 +516,7 @@ MWF.xApplication.Setting.MobileExplorer = new Class({
 //     },
 
 // });
-// O2云 账号登录相关
+// O2 클라우드 계정 로그인 관련
 MWF.xApplication.Setting.EmptyExplorer = new Class({
     Extends: MWF.xApplication.Setting.BaseExplorer,
     initialize: function(app, content){

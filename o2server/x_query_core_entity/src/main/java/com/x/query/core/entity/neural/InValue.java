@@ -18,7 +18,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.query.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "InValue", description = "数据中心神经网络短语值.")
+@Schema(name = "InValue", description = "데이터 센터 신경망 구문 값.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Neural.InValue.table, uniqueConstraints = {
@@ -40,49 +40,49 @@ public class InValue extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String text_FIELDNAME = "text";
-	@FieldDescribe("值")
+	@FieldDescribe("값")
 	@Column(length = length_255B, name = ColumnNamePrefix + text_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + text_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String text;
 
 	public static final String model_FIELDNAME = "model";
-	@FieldDescribe("模型")
+	@FieldDescribe("모델")
 	@Column(length = length_id, name = ColumnNamePrefix + model_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + model_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String model;
 
 	public static final String serial_FIELDNAME = "serial";
-	@FieldDescribe("编号")
+	@FieldDescribe("번호")
 	@Column(name = ColumnNamePrefix + serial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + serial_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer serial;
 
 	public static final String inTextSerial_FIELDNAME = "inTextSerial";
-	@FieldDescribe("原始编号")
+	@FieldDescribe("원본 번호")
 	@Column(name = ColumnNamePrefix + inTextSerial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + inTextSerial_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer inTextSerial;
 
 	public static final String count_FIELDNAME = "count";
-	@FieldDescribe("数量")
+	@FieldDescribe("수량")
 	@Column(name = ColumnNamePrefix + count_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + count_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

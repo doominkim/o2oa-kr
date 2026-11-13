@@ -45,12 +45,12 @@ import net.fortuna.ical4j.model.parameter.Value;
 import net.fortuna.ical4j.model.property.ExDate;
 
 /**
- * 重复日程宿主信息
+ * 반복 일정 호스트 정보
  * 
  * @author O2LEE
  *
  */
-@Schema(name = "Calendar_EventRepeatMaster", description = "日程重复日程宿主信息.")
+@Schema(name = "Calendar_EventRepeatMaster", description = "일정 반복 일정 호스트 정보.")
 @SuppressWarnings("rawtypes")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
@@ -65,7 +65,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private static final String TABLE = PersistenceProperties.Calendar_EventRepeatMaster.table;
 
 	static {
-		// 强制设置ical4j时区为系统默认时区
+		// ical4j 시간대를 시스템 기본 시간대로 강제 설정
 		System.setProperty("net.fortuna.ical4j.timezone.date.floating", "true");
 	}
 
@@ -77,25 +77,25 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 	public void onPersist() throws Exception {
 
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 构造方法区
+	 * ===== 생성자 영역
 	 * =============================================================================
 	 * =====
 	 */
@@ -134,50 +134,50 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String calendarId_FIELDNAME = "calendarId";
-	@FieldDescribe("日历账号ID")
+	@FieldDescribe("캘린더 계정 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + calendarId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + calendarId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String calendarId = null;
 
 	public static final String eventType_FIELDNAME = "eventType";
-	@FieldDescribe("信息类别: CAL_EVENT | TASK_EVENT")
+	@FieldDescribe("정보 유형: CAL_EVENT | TASK_EVENT")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + eventType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + eventType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String eventType = "CAL_EVENT";
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("事件标题")
+	@FieldDescribe("이벤트 제목")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String title = null;
 
 	public static final String color_FIELDNAME = "color";
-	@FieldDescribe("显示颜色")
+	@FieldDescribe("표시 색상")
 	@Column(length = JpaObject.length_8B, name = ColumnNamePrefix + color_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String color = "#1462be";
 
 	public static final String comment_FIELDNAME = "comment";
-	@FieldDescribe("备注信息")
+	@FieldDescribe("비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + comment_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String comment = null;
 
 	public static final String commentId_FIELDNAME = "commentId";
-	@FieldDescribe("备注LOB信息")
+	@FieldDescribe("비고 LOB 정보")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + commentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String commentId = null;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("事件开始时间")
+	@FieldDescribe("이벤트 시작 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + startTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTime_FIELDNAME)
@@ -185,7 +185,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private Date startTime = null;
 
 	public static final String endTime_FIELDNAME = "endTime";
-	@FieldDescribe("事件结束时间")
+	@FieldDescribe("이벤트 종료 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + endTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + endTime_FIELDNAME)
@@ -193,106 +193,106 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private Date endTime = null;
 
 	public static final String locationName_FIELDNAME = "locationName";
-	@FieldDescribe("地点说明")
+	@FieldDescribe("장소 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + locationName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String locationName = null;
 
 	public static final String longitude_FIELDNAME = "longitude";
-	@FieldDescribe("经度")
+	@FieldDescribe("경도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + longitude_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String longitude = null;
 
 	public static final String latitude_FIELDNAME = "latitude";
-	@FieldDescribe("纬度")
+	@FieldDescribe("위도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + latitude_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String latitude = null;
 
 	public static final String recurrenceStartTime_FIELDNAME = "recurrenceStartTime";
-	@FieldDescribe("重复开始时间")
+	@FieldDescribe("반복 시작 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + recurrenceStartTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date recurrenceStartTime = null;
 
 	public static final String recurrenceRule_FIELDNAME = "recurrenceRule";
-	@FieldDescribe("重复日期表达式RecurrenceRule")
+	@FieldDescribe("반복 날짜 표현식 RecurrenceRule")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + recurrenceRule_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String recurrenceRule = null;
 
 	public static final String recurrenceExc_FIELDNAME = "recurrenceExc";
-	@FieldDescribe("排除日期表达式RecurrenceExc")
+	@FieldDescribe("제외 날짜 표현식 RecurrenceExc")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + recurrenceExc_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String recurrenceExc = null;
 
 	public static final String alarm_FIELDNAME = "alarm";
-	@FieldDescribe("是否提醒")
+	@FieldDescribe("알림 여부")
 	@Column(name = ColumnNamePrefix + alarm_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean alarm = false;
 
 	public static final String alarmTime_FIELDNAME = "alarmTime";
-	@FieldDescribe("当前事件提醒时间")
+	@FieldDescribe("현재 이벤트 알림 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + alarmTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date alarmTime = null;
 
 	public static final String valarmTime_config_FIELDNAME = "valarmTime_config";
-	@FieldDescribe("提醒提配置：天, 时, 分, 秒（负数为提前）")
+	@FieldDescribe("알림 설정: 일, 시, 분, 초(음수는 사전 알림)")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + valarmTime_config_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarmTime_config = "0,0,-10,0";
 
 	public static final String valarm_mailto_FIELDNAME = "valarm_mailto";
-	@FieldDescribe("提交Email地址，为空则不邮件提醒")
+	@FieldDescribe("알림 Email 주소, 비어 있으면 메일 알림 안 함")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + valarm_mailto_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarm_mailto = null;
 
 	public static final String valarm_Summary_FIELDNAME = "valarm_Summary";
-	@FieldDescribe("提醒显示标题")
+	@FieldDescribe("알림 표시 제목")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + valarm_Summary_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarm_Summary = null;
 
 	public static final String valarm_description_FIELDNAME = "valarm_description";
-	@FieldDescribe("提醒备注信息")
+	@FieldDescribe("알림 비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + valarm_description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarm_description = null;
 
 	public static final String isAllDayEvent_FIELDNAME = "isAllDayEvent";
-	@FieldDescribe("是否为全天事件")
+	@FieldDescribe("종일 이벤트 여부")
 	@Column(name = ColumnNamePrefix + isAllDayEvent_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isAllDayEvent = false;
 
 	public static final String daysOfDuration_FIELDNAME = "daysOfDuration";
-	@FieldDescribe("事件持续天数：0、1或者N天")
+	@FieldDescribe("이벤트 지속 일수: 0, 1 또는 N일")
 	@Column(name = ColumnNamePrefix + daysOfDuration_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + daysOfDuration_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer daysOfDuration = 0;
 
 	public static final String isPublic_FIELDNAME = "isPublic";
-	@FieldDescribe("是否公开的事件")
+	@FieldDescribe("공개 이벤트 여부")
 	@Column(name = ColumnNamePrefix + isPublic_FIELDNAME)
 	private Boolean isPublic = false;
 
 	public static final String source_FIELDNAME = "source";
-	@FieldDescribe("信息来源: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
+	@FieldDescribe("정보 출처: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + source_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + source_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String source = "PERSONAL";
 
 	public static final String createPerson_FIELDNAME = "createPerson";
-	@FieldDescribe("创建者")
+	@FieldDescribe("작성자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ createPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + createPerson_FIELDNAME)
@@ -300,7 +300,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private String createPerson = null;
 
 	public static final String updatePerson_FIELDNAME = "updatePerson";
-	@FieldDescribe("最后更新者")
+	@FieldDescribe("최종 수정자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ updatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + updatePerson_FIELDNAME)
@@ -308,14 +308,14 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private String updatePerson = null;
 
 	public static final String targetType_FIELDNAME = "targetType";
-	@FieldDescribe("参与者类型：PERSON | UNIT | GROUP")
+	@FieldDescribe("참여자 유형: PERSON | UNIT | GROUP")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + targetType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String targetType = "PERSON";
 
 	public static final String participants_FIELDNAME = "participants";
-	@FieldDescribe("参与者列表")
+	@FieldDescribe("참여자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + participants_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -327,7 +327,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private List<String> participants = null;
 
 	public static final String manageablePersonList_FIELDNAME = "manageablePersonList";
-	@FieldDescribe("可管理人员列表")
+	@FieldDescribe("관리 가능 사용자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -340,7 +340,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private List<String> manageablePersonList;
 
 	public static final String viewablePersonList_FIELDNAME = "viewablePersonList";
-	@FieldDescribe("可见人员列表")
+	@FieldDescribe("열람 가능 사용자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -353,7 +353,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private List<String> viewablePersonList;
 
 	public static final String viewableUnitList_FIELDNAME = "viewableUnitList";
-	@FieldDescribe("可见组织列表")
+	@FieldDescribe("열람 가능 조직 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -366,7 +366,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private List<String> viewableUnitList;
 
 	public static final String viewableGroupList_FIELDNAME = "viewableGroupList";
-	@FieldDescribe("可见群组列表")
+	@FieldDescribe("열람 가능 그룹 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -379,7 +379,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private List<String> viewableGroupList;
 
 	public static final String createdMonthList_FIELDNAME = "createdMonthList";
-	@FieldDescribe("已经生成的月份")
+	@FieldDescribe("이미 생성된 월")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -724,7 +724,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 新增加已经生成的月份记录： yyyy-mm
+	 * 이미 생성된 월 기록 추가: yyyy-mm
 	 * 
 	 * @param month
 	 * @throws Exception
@@ -742,7 +742,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 判断某月是否已经生成过了
+	 * 특정 월이 이미 생성되었는지 확인
 	 * 
 	 * @param month
 	 * @return
@@ -759,7 +759,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 是否是在一天内结束的日程或者事件
+	 * 하루 안에 끝나는 일정 또는 이벤트인지 여부
 	 * 
 	 * @return
 	 */
@@ -773,7 +773,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 是否为今天的日程或者事件
+	 * 오늘의 일정 또는 이벤트인지 여부
 	 * 
 	 * @return
 	 */
@@ -788,7 +788,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 克隆一个新的日程或者事件对象 Calendar_Record
+	 * 새 일정 또는 이벤트 객체 복제 Calendar_Record
 	 */
 	@Override
 	public Calendar_Event clone() {
@@ -802,21 +802,21 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 添加一个排除日期，先将排除日期表达式转换为日期列表，然后添加一个排除日期，然后再转换回表达示
+	 * 제외 날짜 추가: 제외 날짜 표현식을 날짜 목록으로 변환한 뒤 제외 날짜를 추가하고 다시 표현식으로 변환
 	 * 
 	 * @param excDate
 	 */
 	public void addRecurrenceExc(final Date excDate) {
-		// 计算表达示包含的所有日期列表
+		// 표현식에 포함된 모든 날짜 목록 계산
 		final List<Date> excDates = getRecurrenceExcludeDates(recurrenceExc);
 		excDates.add(excDate);
-		// 将执行时间转换为表达示
+		// 실행 시간을 표현식으로 변환
 		final String excRule = getRecurrenceExcludeRule(excDates);
 		setRecurrenceExc(excRule);
 	}
 
 	/**
-	 * 获取重复时间表达式中结束的日期
+	 * 반복 시간 표현식의 종료 날짜 조회
 	 * @return
 	 */
 	public Date getRecurrenceEndDate() {
@@ -840,7 +840,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 取日程事件下一次执行的事件
+	 * 일정 이벤트의 다음 실행 이벤트 조회
 	 * @param periodStart
 	 * @param periodEnd
 	 * @return
@@ -873,7 +873,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 判断事件是否在指定的时间范围之内
+	 * 이벤트가 지정한 시간 범위 안에 있는지 확인
 	 * @param periodStart
 	 * @param periodEnd
 	 * @return
@@ -885,7 +885,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 获取日程事件在指定时间范围内的执行时间列表
+	 * 지정 시간 범위 내 일정 이벤트의 실행 시간 목록 조회
 	 * 
 	 * @param periodStart
 	 * @param periodEnd
@@ -907,7 +907,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 				e.printStackTrace();
 			}
 
-			// 排队日期
+			// 제외 날짜
 			final String recurrenceExc = getRecurrenceExc();
 			if ( StringUtils.isNotEmpty( recurrenceExc )) {
 				try {
@@ -934,7 +934,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 计算一个重复日程事件在指定时间范围内所有的日程事件列表
+	 * 반복 일정 이벤트의 지정한 시간 범위 내 모든 일정 이벤트 목록 계산
 	 * @param periodStart
 	 * @param periodEnd
 	 * @return
@@ -965,7 +965,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 			recurStartCal.clear();
 			recurStartCal.setTimeInMillis(date.getTime());
 
-			// 单个事件持续时间
+			// 단일 이벤트 지속 시간
 			final long duration = getEndTime().getTime() - getStartTime().getTime();
 
 			final java.util.Calendar beginCal = java.util.Calendar.getInstance();
@@ -1028,7 +1028,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 将指定的日期列表转换为排除表达式 Create exclusion rule based on list with dates.
+	 * 지정한 날짜 목록을 제외 표현식으로 변환 Create exclusion rule based on list with dates.
 	 * 
 	 * @param dates
 	 * @return string with exclude rule
@@ -1047,7 +1047,7 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	}
 
 	/**
-	 * 日程事件对比，排序使用
+	 * 일정 이벤트 비교, 정렬용
 	 */
 	@Override
 	public int compareTo(final Object o1) {

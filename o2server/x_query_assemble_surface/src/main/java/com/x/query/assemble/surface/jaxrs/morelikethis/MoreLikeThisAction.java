@@ -36,10 +36,10 @@ public class MoreLikeThisAction extends StandardJaxrsAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(MoreLikeThisAction.class);
     private static final String OPERATIONID_PREFIX = "MoreLikeThisAction::";
 
-    @Operation(summary = "相似查找.", operationId = OPERATIONID_PREFIX + "list", responses = { @ApiResponse(content = {
+    @Operation(summary = "유사 검색.", operationId = OPERATIONID_PREFIX + "list", responses = { @ApiResponse(content = {
             @Content(schema = @Schema(implementation = ActionPost.Wo.class)) }) }, requestBody = @RequestBody(content = {
                     @Content(schema = @Schema(implementation = ActionPost.Wi.class)) }))
-    @JaxrsMethodDescribe(value = "相似查找.", action = ActionPost.class)
+    @JaxrsMethodDescribe(value = "유사 검색.", action = ActionPost.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)

@@ -17,7 +17,7 @@ MWF.xApplication.process.Work.Processor = new Class({
         "orgHeight": 276,
         "inFlow": false,
         "maxOrgCountPerline": 2,
-        "isManagerProcess": false, //是否为管理员提交
+        "isManagerProcess": false, //관리자 제출 여부
         "useDefaultOpinion": true
     },
 
@@ -171,7 +171,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                     this.setRouteList();
                 }
             }
-        } else { //快速处理
+        } else { //빠른 처리
             this.routeSelectorTile = new Element("div", {
                 "styles": this.css.routeSelectorTile,
                 "text": MWF.xApplication.process.Work.LP.selectRoute
@@ -191,11 +191,11 @@ MWF.xApplication.process.Work.Processor = new Class({
         var routeList = this.getRouteDataList();
         routeList.each(function (route, i) {
 
-            if (route.hiddenScriptText && this.form && this.form.Macro) { //如果隐藏路由，返回
+            if (route.hiddenScriptText && this.form && this.form.Macro) { //경로가 숨김이면 반환
                 if (this.form.Macro.exec(route.hiddenScriptText, this).toString() === "true") return;
             }
 
-            if (route.displayNameScriptText && this.form && this.form.Macro) { //如果有显示名称公式
+            if (route.displayNameScriptText && this.form && this.form.Macro) { //표시 이름 수식이 있으면
                 route.displayName = this.form.Macro.exec(route.displayNameScriptText, this);
             } else {
                 route.displayName = route.name;
@@ -353,7 +353,7 @@ MWF.xApplication.process.Work.Processor = new Class({
 
         var isSelectedDefault = false;
 
-        //this.task.routeNameList = ["送审核", "送办理", "送公司领导阅"];
+        //this.task.routeNameList = ["검토 요청", "처리 요청", "회사 임원 열람 요청"];
         if (!routeList) routeList = this.getRouteDataList();
         routeList.each(function (route, i) {
             var routeName = route.name;
@@ -394,7 +394,7 @@ MWF.xApplication.process.Work.Processor = new Class({
         this.routeSelectorArea.empty();
         //}
         this.selectedRoute = null;
-        //this.task.routeNameList = ["送审核", "送办理", "送公司领导阅"];
+        //this.task.routeNameList = ["검토 요청", "처리 요청", "회사 임원 열람 요청"];
         if (!routeList) routeList = this.getRouteDataList();
         //this.task.routeNameList.each(function(route, i){
         var isSelected = false;
@@ -434,7 +434,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                 this.selectRoute(routeNode);
                 isSelected = true;
                 isSelectedDefault = true;
-            }else if ( !isSelectedDefault && (routeList.length == 1 || route.sole )) { //sole表示优先路由
+            }else if ( !isSelectedDefault && (routeList.length == 1 || route.sole )) { //sole은 우선 경로를 의미
                 selecteRouteId = route.id;
                 this.selectRoute(routeNode);
                 isSelected = true;
@@ -503,7 +503,7 @@ MWF.xApplication.process.Work.Processor = new Class({
     },
     selectRoute: function (node) {
         if (this.selectedRoute) {
-            if (this.selectedRoute.get("text") != node.get("text")) { //选中其他路由
+            if (this.selectedRoute.get("text") != node.get("text")) { //다른 경로 선택
                 this.selectedRoute.setStyles(this.css.routeNode);
                 this.selectedRoute.removeClass("mainColor_bg");
                 //this.selectedRoute.getFirst().setStyles(this.css.routeIconNode);
@@ -526,7 +526,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                 //node.getFirst().setStyle("background-image", "url(../x_component_process_Work/$Processor/default/checked.png)");
                 //node.getLast().setStyle("color", "#FFF");
 
-            } else { //取消选中当前路由
+            } else { //현재 경로 선택 해제
                 if( this.options.useDefaultOpinion ) {
                     if (this.inputTextarea.get("value") === this.getDefaultOpinion(this.selectedRoute)) {
                         this.lastDefaultOpinion = "";
@@ -566,7 +566,7 @@ MWF.xApplication.process.Work.Processor = new Class({
             this.loadOrgs(this.selectedRoute ? this.selectedRoute.retrieve("route") : "");
         }
 
-        //临时添加
+        //임시 추가
         if (this.form.data.json.events && this.form.data.json.events.afterSelectRoute) {
             this.form.Macro.exec(this.form.data.json.events.afterSelectRoute.code, node);
         }
@@ -721,7 +721,7 @@ MWF.xApplication.process.Work.Processor = new Class({
         //var size = (this.options.mediaNode || this.node).getSize();
         //var y = size.y;
         //var x = size.x;
-        //兼容以前的默认高宽
+        //이전 기본 높이·너비와 호환
         var x = 600;
         var y = 320;
         if (!layout.mobile) {
@@ -803,9 +803,9 @@ MWF.xApplication.process.Work.Processor = new Class({
                     "save", "|",
                     "undo",
                     "redo", "|",
-                    "eraser", //橡皮
-                    "input", //输入法
-                    "pen", "|", //笔画
+                    "eraser", //지우개
+                    "input", //입력기
+                    "pen", "|", //획
                     "eraserRadius",
                     "size",
                     "color",
@@ -986,7 +986,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                     move: false,
                     target: this.orgsArea,
                     delayClose: 6000,
-                    content: MWF.xApplication.process.Work.LP.noAppendTaskIdentityConfig //"没有配置转交人，请联系管理员"
+                    content: MWF.xApplication.process.Work.LP.noAppendTaskIdentityConfig //"전달 대상자가 설정되지 않았습니다. 관리자에게 문의하세요."
                 });
                 return false;
             } else {
@@ -1007,7 +1007,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                     move: false,
                     target: this.orgsArea,
                     delayClose: 6000,
-                    content: MWF.xApplication.process.Work.LP.selectAppendTaskIdentityNotice //"请选择转交人"
+                    content: MWF.xApplication.process.Work.LP.selectAppendTaskIdentityNotice //"전달 대상자를 선택하세요."
                 });
                 return;
             }
@@ -1027,7 +1027,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                     );
                     return false;
                 } else {
-                    //"路由校验失败"
+                    //"경로 검증에 실패했습니다."
                     MWF.xDesktop.notice(
                         "error",
                         {"x": "center", "y": "center"},
@@ -1157,7 +1157,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                         );
                         return false;
                     } else {
-                        //"路由校验失败"
+                        //"경로 검증에 실패했습니다."
                         MWF.xDesktop.notice(
                             "error",
                             {"x": "center", "y": "center"},
@@ -1332,7 +1332,7 @@ MWF.xApplication.process.Work.Processor = new Class({
         var routeList = this.getRouteDataList();
         var length = 0;
         routeList.each(function (route) {
-            if (route.hiddenScriptText) { //如果隐藏路由，返回
+            if (route.hiddenScriptText) { //경로가 숨김이면 반환
                 if (this.form.Macro.exec(route.hiddenScriptText, this).toString() === "true") return;
             }
             length = Math.max(length, route.selectConfigList.length);
@@ -1358,7 +1358,7 @@ MWF.xApplication.process.Work.Processor = new Class({
         return list;
     },
     isOrgHidden: function (d) {
-        if (d.hiddenScript && d.hiddenScript.code) { //如果隐藏路由，返回
+        if (d.hiddenScript && d.hiddenScript.code) { //경로가 숨김이면 반환
             var hidden = this.form.Macro.exec(d.hiddenScript.code, this);
             if (hidden && hidden.toString() === "true") return true;
         }
@@ -1744,7 +1744,7 @@ MWF.xApplication.process.Work.Processor = new Class({
         this.loadOrgs(route);
     },
     clearAllOrgs: function () {
-        //清空组织所选人
+        //조직에서 선택한 사람 비우기
         for (var key in this.orgItemsObject) {
             var orgItems = this.orgItemsObject[key] || [];
             orgItems.each(function (org) {
@@ -2117,7 +2117,7 @@ MWF.xApplication.process.Work.Processor = new Class({
 
 });
 
-//兼容快速流转，所以需要判断
+//빠른 진행과 호환하기 위해 판단 필요
 if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
     MWF.xDesktop.requireApp("process.Xform", "Org", null, false);
 
@@ -2137,7 +2137,7 @@ if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
         },
         load: function () {
             if (layout.mobile) {
-                setTimeout(function () { //如果有输入法界面，这个时候页面的计算不对，所以等100毫秒
+                setTimeout(function () { //입력기 화면이 있으면 이때 페이지 계산이 맞지 않으므로 100밀리초 대기
                     var options = this.getOptions();
                     if (options) {
                         //this.selector = new MWF.O2Selector(this.container, options);
@@ -2244,8 +2244,8 @@ if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
                     "width": "auto",
                     "height": "240",
                     "embedded": true,
-                    "hasLetter": false, //字母
-                    "hasTop": true //可选、已选的标题
+                    "hasLetter": false, //문자
+                    "hasTop": true //선택 가능, 선택됨 제목
                 };
             }
 
@@ -2299,7 +2299,7 @@ if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
                     {
                         "type": this.selectTypeList[0],
                         "onLoad": function () {
-                            //this 为 selector
+                            //this는 selector
                             _self.selectOnLoad(this, this.selector)
                         }
                         //"onComplete": function(items){
@@ -2317,7 +2317,7 @@ if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
                     "type": "",
                     "types": this.selectTypeList,
                     "onLoad": function () {
-                        //this 为 selector
+                        //this는 selector
                         _self.selectOnLoad(this)
                     }
                     //"onComplete": function(items){
@@ -2375,7 +2375,7 @@ if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
             }.bind(this));
             return options;
         },
-        selectOnComplete: function (items) { //移动端才执行
+        selectOnComplete: function (items) { //모바일에서만 실행
             var array = [];
             items.each(function (item) {
                 array.push(item.data);
@@ -2402,7 +2402,7 @@ if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
                 this.fireEvent("select", [items, values]);
             }.bind(this))
         },
-        selectOnCancel: function () { //移动端才执行
+        selectOnCancel: function () { //모바일에서만 실행
             //this.validation();
         },
         selectOnLoad: function (selector) {
@@ -3033,7 +3033,7 @@ if (MWF.xApplication.process.Xform && MWF.xApplication.process.Xform.Form) {
             var flag = true;
             if (this.json.validationCount && typeOf(this.json.validationCount.toInt()) === "number") {
                 if (data.length < this.json.validationCount.toInt()) {
-                    //"请至少选择" + this.json.validationCount + "项"
+                    //"최소 " + this.json.validationCount + "개 항목을 선택하세요."
                     flag = MWF.xApplication.process.Xform.LP.selectItemCountNotice.replace("{count}", this.json.validationCount);
                 }
             }

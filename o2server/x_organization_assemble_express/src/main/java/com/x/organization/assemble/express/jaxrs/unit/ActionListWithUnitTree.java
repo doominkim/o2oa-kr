@@ -43,7 +43,7 @@ class ActionListWithUnitTree extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList;
 
 		public List<String> getUnitList() {
@@ -64,16 +64,16 @@ class ActionListWithUnitTree extends BaseAction {
 				ListTools.toList(Unit.id_FIELDNAME, Unit.distinguishedName_FIELDNAME, Unit.levelName_FIELDNAME),
 				null);
 
-		@FieldDescribe("直接下级身份成员数量")
+		@FieldDescribe("직속 하위 신분 구성원 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectIdentityCount = 0L;
 
-		@FieldDescribe("直接下级职务数量")
+		@FieldDescribe("직속 하위 직무 수")
 		private Long subDirectDutyCount = 0L;
 
-		@FieldDescribe("直接下级组织")
+		@FieldDescribe("직속 하위 조직")
 		private List<Wo> subUnits = new ArrayList<>();
 
 		public Long getSubDirectUnitCount() {

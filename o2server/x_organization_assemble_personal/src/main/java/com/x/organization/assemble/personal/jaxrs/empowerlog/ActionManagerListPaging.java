@@ -77,16 +77,16 @@ class ActionManagerListPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("授权人")
+		@FieldDescribe("위임자")
 		private String fromPerson;
 
-		@FieldDescribe("匹配关键字")
+		@FieldDescribe("매칭 키워드")
 		private String key;
 
-		@FieldDescribe("(授权创建时间)开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("(위임 생성 시각)시작 시각yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("(授权创建时间)结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("(위임 생성 시각)종료 시각yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
 		public String getKey() {

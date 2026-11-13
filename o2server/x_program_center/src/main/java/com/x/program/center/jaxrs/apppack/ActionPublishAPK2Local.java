@@ -72,7 +72,7 @@ public class ActionPublishAPK2Local extends BaseAction {
                 emc.persist(appPackApkFile);
                 emc.commit();
 
-                // 开始异步下载apk文件 并更新
+                // apk 파일 비동기 다운로드 및 업데이트 시작
                 DownloadJob job = new DownloadJob(wi, appPackApkFile.getId());
                 job.start();
             }
@@ -97,14 +97,14 @@ public class ActionPublishAPK2Local extends BaseAction {
 
         @Override
         public void run() {
-            logger.info("开始下载apk文件");
+            logger.info("apk 파일 다운로드 시작");
             try {
                 StorageMapping mapping = ThisApplication.context().storageMappings().random(AppPackApkFile.class);
                 if (null == mapping) {
                     throw new ExceptionAllocateStorageMapping();
                 }
                 String url = Config.collect().appPackServerUrl() + wi.getApkPath() + "?token=" + getPackServerSSOToken();
-                logger.info("下载apk的url： " + url);
+                logger.info("apk 다운로드 url: " + url);
                 byte[] bytes = ConnectionAction.getBinary(url, null);
                 try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
                     AppPackApkFile file = emc.find(this.id, AppPackApkFile.class);
@@ -114,21 +114,21 @@ public class ActionPublishAPK2Local extends BaseAction {
                         file.setStatus(AppPackApkFile.statusCompleted);
                         file.setLastUpdateTime(new Date());
                         emc.commit();
-                        // 发布成功了，需要修改jpush配置文件，把outer包的key配置上去
+                        // 배포 성공, jpush 설정 파일을 수정해 outer 패키지의 key를 설정해야 함
                         if (StringUtils.isNotBlank(file.getIsPackAppIdOuter())
                                 && "2".equals(file.getIsPackAppIdOuter())) {
                             updateJpushConfig();
                         }
                         updateAppUrl(wi.getWebUrl());
-                        logger.info("下载发布apk成功！");
+                        logger.info("배포 apk 다운로드에 성공했습니다!");
                     } else {
-                        logger.error(new Exception("错误，没有找到对应的文件对象，id：" + id));
+                        logger.error(new Exception("오류, 해당 파일 객체를 찾을 수 없습니다, id:" + id));
                     }
                 }
 
             } catch (Exception e) {
                 logger.error(e);
-                logger.info("下载失败，更新错误状态.");
+                logger.info("다운로드 실패, 오류 상태 업데이트.");
                 try {
                     try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
                         AppPackApkFile file = emc.find(this.id, AppPackApkFile.class);
@@ -138,7 +138,7 @@ public class ActionPublishAPK2Local extends BaseAction {
                             file.setLastUpdateTime(new Date());
                             emc.commit();
                         } else {
-                            logger.error(new IllegalStateException("错误，没有找到对应的文件对象，id：" + id + "."));
+                            logger.error(new IllegalStateException("오류, 해당 파일 객체를 찾을 수 없습니다, id:" + id + "."));
                         }
                     }
                 } catch (Exception e1) {
@@ -149,7 +149,7 @@ public class ActionPublishAPK2Local extends BaseAction {
 
         private void updateJpushConfig() {
             try {
-                logger.info("开始修改jpush文件.......");
+                logger.info("jpush 파일 수정 시작.......");
                 JpushConfig newConfig = JpushConfig.defaultInstance().getOuterApplicationJpushConfig();
                 updateConfigFileOnLine(Config.NAME_CONFIG_JPUSH, newConfig.toString());
             } catch (Exception e) {
@@ -158,7 +158,7 @@ public class ActionPublishAPK2Local extends BaseAction {
         }
 
         /**
-         * 更新appUrl collect.json配置文件 登录界面扫码可以下载
+         * appUrl collect.json 설정 파일 업데이트, 로그인 화면에서 QR 스캔으로 다운로드 가능
          */
         private void updateAppUrl(String webUrl) {
             try {
@@ -183,7 +183,7 @@ public class ActionPublishAPK2Local extends BaseAction {
                             myUrl = url;
                         }
                     }
-                    logger.info("最后的URL ：" + myUrl);
+                    logger.info("최종 URL :" + myUrl);
                     Config.collect().setAppUrl(myUrl + "/x_desktop/appDownload.html");
                     updateConfigFileOnLine(Config.NAME_CONFIG_COLLECT, Config.collect().toString());
                 }
@@ -194,14 +194,14 @@ public class ActionPublishAPK2Local extends BaseAction {
         }
 
         /**
-         * 更新配置文件
+         * 설정 파일 업데이트
          * 
-         * @param fileName 配置文件名称 如 jpushConfig.json
-         * @param content  配置文件内容 json
+         * @param fileName 설정 파일 이름 예: jpushConfig.json
+         * @param content  설정 파일 내용 json
          * @throws Exception
          */
         private void updateConfigFileOnLine(String fileName, String content) throws Exception {
-            logger.info("更新配置文件！文件：{} ， 内容：{}", fileName, content);
+            logger.info("설정 파일 업데이트! 파일: {} , 내용: {}", fileName, content);
             JPushConfigSaveWi wi = new JPushConfigSaveWi();
             wi.setFileName(fileName);
             wi.setFileContent(content);
@@ -210,10 +210,10 @@ public class ActionPublishAPK2Local extends BaseAction {
             if (response != null) {
                 ActionSave.Wo wo = response.getData(ActionSave.Wo.class);
                 if (wo != null && wo.getStatus() != null) {
-                    logger.info("修改保存[{}]配置文件成功！", fileName);
+                    logger.info("[{}] 설정 파일 수정 저장에 성공했습니다!", fileName);
                 }
             } else {
-                logger.info("保存[{}]配置文件失败, 返回为空！", fileName);
+                logger.info("[{}] 설정 파일 저장에 실패했습니다, 반환값이 비어 있습니다!", fileName);
             }
         }
     }
@@ -240,20 +240,20 @@ public class ActionPublishAPK2Local extends BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("app的下载路径.")
+        @FieldDescribe("app 다운로드 경로.")
         private String apkPath;
-        @FieldDescribe("app的打包id")
+        @FieldDescribe("app 패키징 id")
         private String packInfoId;
 
-        // 版本号 暂时还没有
-        @FieldDescribe("app的版本号名称")
+        // 버전 번호 아직 없음
+        @FieldDescribe("app 버전 이름")
         private String appVersionName;
-        @FieldDescribe("app的版本编译号")
+        @FieldDescribe("app 버전 빌드 번호")
         private String appVersionNo;
-        @FieldDescribe("是否使用外部包名，2: 就是用 net.zoneland.x.bpm.mobile.v1.zoneXBPM.outer 作为apk的applicationId")
+        @FieldDescribe("외부 패키지명 사용 여부, 2: net.zoneland.x.bpm.mobile.v1.zoneXBPM.outer 를 apk의 applicationId로 사용")
         private String isPackAppIdOuter;
 
-        @FieldDescribe("前端web地址，如 http://dd.o2oa.net")
+        @FieldDescribe("프런트엔드 web 주소, 예: http://dd.o2oa.net")
         private String webUrl;
 
         public String getWebUrl() {

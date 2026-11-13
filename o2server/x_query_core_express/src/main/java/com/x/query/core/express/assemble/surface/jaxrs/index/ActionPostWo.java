@@ -16,36 +16,36 @@ public class ActionPostWo extends GsonPropertyObject {
 
     private static final long serialVersionUID = 6427227486701877864L;
 
-    @FieldDescribe("查询耗时.")
-    @Schema(description = "查询耗时.")
+    @FieldDescribe("쿼리 소요 시간.")
+    @Schema(description = "쿼리 소요 시간.")
     private Long queryElapsed;
 
-    @FieldDescribe("开始位置.")
-    @Schema(description = "开始位置.")
+    @FieldDescribe("시작 위치.")
+    @Schema(description = "시작 위치.")
     private Integer start;
 
-    @FieldDescribe("数量.")
-    @Schema(description = "数量.")
+    @FieldDescribe("수량.")
+    @Schema(description = "수량.")
     private Integer rows;
 
-    @FieldDescribe("总数.")
-    @Schema(description = "总数.")
+    @FieldDescribe("총 개수.")
+    @Schema(description = "총 개수.")
     private Long count;
 
-    @FieldDescribe("固定字段.")
-    @Schema(description = "固定字段.")
+    @FieldDescribe("고정 필드.")
+    @Schema(description = "고정 필드.")
     private List<WoField> fixedFieldList = new ArrayList<>();
 
-    @FieldDescribe("动态字段.")
-    @Schema(description = "动态字段.")
+    @FieldDescribe("동적 필드.")
+    @Schema(description = "동적 필드.")
     private List<WoField> dynamicFieldList = new ArrayList<>();
 
-    @FieldDescribe("维度.")
-    @Schema(description = "维度.")
+    @FieldDescribe("차원.")
+    @Schema(description = "차원.")
     private List<WoFacet> facetList = new ArrayList<>();
 
-    @FieldDescribe("搜索结果.")
-    @Schema(description = "搜索结果.")
+    @FieldDescribe("검색 결과.")
+    @Schema(description = "검색 결과.")
     private List<Map<String, Object>> documentList = new ArrayList<>();
 
     public List<WoFacet> getFacetList() {

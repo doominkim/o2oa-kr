@@ -28,7 +28,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.DefaultCharset;
 
 /**
- * android 打包 Created by fancyLou on 6/15/21. Copyright © 2021 O2. All rights
+ * android 패키징 Created by fancyLou on 6/15/21. Copyright © 2021 O2. All rights
  * reserved.
  */
 public class ActionAndroidPack extends BaseAction {
@@ -63,7 +63,7 @@ public class ActionAndroidPack extends BaseAction {
 				throw new ExceptionBuildNoNotNumber();
 			}
 		}
-		/** 文件名编码转换 */
+		/** 파일명 인코딩 변환 */
 		if (StringUtils.isEmpty(fileName)) {
 			try {
 				fileName = new String(disposition.getFileName().getBytes(DefaultCharset.charset_iso_8859_1),
@@ -96,7 +96,7 @@ public class ActionAndroidPack extends BaseAction {
 	}
 
 	/**
-	 * formData 提交打包信息
+	 * formData 패키징 정보 제출
 	 * 
 	 * @param appName
 	 * @param o2ServerProtocol
@@ -112,14 +112,14 @@ public class ActionAndroidPack extends BaseAction {
 			String o2ServerPort, String o2ServerContext, String isPackAppIdOuter, String urlMapping,
 			String appVersionName, String appBuildNo, String deleteHuawei, String fileName, byte[] bytes)
 			throws Exception {
-		logger.info("发起打包请求，form : " + appName + " ," + o2ServerProtocol + " ," + o2ServerHost + " ,"
+		logger.info("패키징 요청 전송, form : " + appName + " ," + o2ServerProtocol + " ," + o2ServerHost + " ,"
 				+ o2ServerPort + " ," + o2ServerContext + " ," + isPackAppIdOuter + " ," + urlMapping + " ,"
 				+ appVersionName + " ," + appBuildNo + " ," + deleteHuawei + " ," + fileName);
 		String boundary = "abcdefghijk";
 		String end = "\r\n";
 		String twoHyphens = "--";
 		String address = Config.collect().appPackServerApi(Collect.ADDRESS_APPPACK_SAVE);
-		logger.info("发起打包请求，url " + address);
+		logger.info("패키징 요청 전송, url " + address);
 		URL url = new URL(address);
 		HttpURLConnection connection = null;
 		String result = "";
@@ -138,7 +138,7 @@ public class ActionAndroidPack extends BaseAction {
 			map.put(ConnectionAction.ACCESS_CONTROL_ALLOW_METHODS, ConnectionAction.ACCESS_CONTROL_ALLOW_METHODS_VALUE);
 			map.put(ConnectionAction.CACHE_CONTROL, ConnectionAction.CACHE_CONTROL_VALUE);
 			map.put(ConnectionAction.CONTENT_TYPE, "multipart/form-data;boundary=" + boundary);
-			// 设置字符编码连接参数
+			// 문자 인코딩 연결 파라미터 설정
 			map.put("Connection", "Keep-Alive");
 			map.put("Charset", "UTF-8");
 			map.put("token", getPackServerSSOToken());
@@ -189,7 +189,7 @@ public class ActionAndroidPack extends BaseAction {
 				connection.disconnect();
 			}
 		}
-		logger.info("打包请求返回，result : " + result);
+		logger.info("패키징 요청 응답, result : " + result);
 		return result;
 	}
 

@@ -57,7 +57,7 @@ class ActionListWithUnit extends BaseAction {
 		static WrapCopier<UnitDuty, Wo> copier = WrapCopierFactory.wo(UnitDuty.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("身份对象")
+		@FieldDescribe("신분 객체")
 		private List<WoIdentity> woIdentityList = new ArrayList<>();
 
 		public List<WoIdentity> getWoIdentityList() {

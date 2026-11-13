@@ -5,6 +5,6 @@ import com.x.base.core.project.exception.PromptException;
 public class ExceptionMsgRevokeOutOfTime extends PromptException {
 
     public ExceptionMsgRevokeOutOfTime() {
-        super("撤回消息超过时限！");
+        super("메시지 회수 가능 시간이 지났습니다!");
     }
 }

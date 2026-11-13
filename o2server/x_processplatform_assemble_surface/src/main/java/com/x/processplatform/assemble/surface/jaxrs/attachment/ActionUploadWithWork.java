@@ -51,7 +51,7 @@ class ActionUploadWithWork extends BaseAction {
 				if (BooleanUtils.isNotTrue(control.getAllowSave())) {
 					throw new ExceptionAccessDenied(effectivePerson, work);
 				}
-				/* 天谷印章扩展 */
+				/* 톈구 인장 확장 */
 				if (StringUtils.isNotEmpty(extraParam)) {
 					WiExtraParam wiExtraParam = gson.fromJson(extraParam, WiExtraParam.class);
 					if (StringUtils.isNotEmpty(wiExtraParam.getFileName())) {
@@ -79,7 +79,7 @@ class ActionUploadWithWork extends BaseAction {
 			fileName = this.fileName(disposition);
 		}
 		fileName = fileName.replace("\r", " ").replace("\n", " ");
-		/* 调整可能的附件名称 */
+		/* 가능한 첨부파일 이름 조정 */
 		fileName = this.adjustFileName(business, draft.getId(), fileName);
 		this.verifyConstraint(bytes.length, fileName, null);
 		StorageMapping mapping = ThisApplication.context().storageMappings().random(Attachment.class);
@@ -96,7 +96,7 @@ class ActionUploadWithWork extends BaseAction {
 			fileName = this.fileName(disposition);
 		}
 		fileName = fileName.replace("\r", " ").replace("\n", " ");
-		/* 调整可能的附件名称 */
+		/* 가능한 첨부파일 이름 조정 */
 		fileName = this.adjustFileName(business, work.getJob(), fileName);
 
 		this.verifyConstraint(bytes.length, fileName, null);
@@ -122,7 +122,7 @@ class ActionUploadWithWork extends BaseAction {
 		attachment.setPerson(effectivePerson.getDistinguishedName());
 		attachment.setLastUpdatePerson(effectivePerson.getDistinguishedName());
 		attachment.setSite(site);
-		/** 用于判断目录的值 */
+		/** 디렉터리 값 판단용 */
 		attachment.setWorkCreateTime(work.getCreateTime());
 		attachment.setApplication(work.getApplication());
 		attachment.setProcess(work.getProcess());
@@ -140,7 +140,7 @@ class ActionUploadWithWork extends BaseAction {
 		attachment.setPerson(effectivePerson.getDistinguishedName());
 		attachment.setLastUpdatePerson(effectivePerson.getDistinguishedName());
 		attachment.setSite(site);
-		/** 用于判断目录的值 */
+		/** 디렉터리 값 판단용 */
 		attachment.setWorkCreateTime(draft.getCreateTime());
 		attachment.setApplication(draft.getApplication());
 		attachment.setProcess(draft.getProcess());

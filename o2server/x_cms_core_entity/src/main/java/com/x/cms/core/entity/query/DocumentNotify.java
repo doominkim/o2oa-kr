@@ -6,7 +6,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.base.core.project.gson.GsonPropertyObject;
 
 /**
- * 消息通知对象
+ * 메시지 알림 대상
  *
  * @author sword
  * @date 2022/03/10 16:45
@@ -15,13 +15,13 @@ public class DocumentNotify extends GsonPropertyObject {
 
     private String documentId;
 
-    @FieldDescribe("消息通知对象：人员、组织或者群组")
+    @FieldDescribe("메시지 알림 대상: 사용자, 조직 또는 그룹")
     private List<String> notifyPersonList;
 
-    @FieldDescribe("是否根据文档的可见范围发送：true(忽略notifyPersonList的值)|false(默认)")
+    @FieldDescribe("문서 열람 범위에 따라 발송 여부: true(notifyPersonList 값 무시)|false(기본)")
     private Boolean notifyByDocumentReadPerson;
 
-    @FieldDescribe("是否通知文档创建人：true(默认)|false")
+    @FieldDescribe("문서 작성자 알림 여부: true(기본)|false")
     private Boolean notifyCreatePerson;
 
     public String getDocumentId() {

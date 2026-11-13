@@ -18,11 +18,11 @@ import com.x.mind.entity.MindShareRecord_;
 
 
 /**
- * 类   名：MindShareRecordFactory<br/>
- * 实体类：MindShareRecord<br/>
- * 作   者：O2LEE<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-11-15 17:17:26 
+ * 클래스 이름: MindShareRecordFactory<br/>
+ * 엔티티 클래스: MindShareRecord<br/>
+ * 작성자: O2LEE<br/>
+ * 소속: O2 Team<br/>
+ * 일시: 2016-11-15 17:17:26 
 **/
 public class MindShareRecordFactory extends AbstractFactory {
 

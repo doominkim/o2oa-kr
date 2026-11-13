@@ -32,12 +32,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("form")
-@JaxrsDescribe("表单信息管理")
+@JaxrsDescribe("양식 정보 관리")
 public class FormAction extends StandardJaxrsAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( FormAction.class );
 
-	@JaxrsMethodDescribe(value = "获取全部的表单模板列表.", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "전체 양식 템플릿 목록 조회.", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -49,61 +49,61 @@ public class FormAction extends StandardJaxrsAction {
 			result = new ActionListAll().execute( request, effectivePerson );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在查询所有CMS表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "전체 CMS 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定栏目的全部表单模板信息列表.", action = ActionListByApp.class)
+	@JaxrsMethodDescribe(value = "지정 게시판의 전체 양식 템플릿 정보 목록 조회.", action = ActionListByApp.class)
 	@GET
 	@Path("list/app/{appId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listFormByAppId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("栏目ID") @PathParam("appId") String appId ) {
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("appId") String appId ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByApp.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListByApp().execute( request, effectivePerson, appId );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在根据栏目ID查询表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "게시판 ID로 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取表单对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 양식 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("양식 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
 			result = new ActionGet().execute( request, effectivePerson, id );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在根据ID查询表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "ID로 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据表单标识和栏目标识获取表单.", action = ActionGetWithAppInfo.class)
+	@JaxrsMethodDescribe(value = "양식 식별자와 게시판 식별자로 양식 조회.", action = ActionGetWithAppInfo.class)
 	@GET
 	@Path("{formFlag}/appinfo/{appFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithAppInfo( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("栏目标识：ID、表单名称") @PathParam("formFlag") String formFlag,
-			@JaxrsParameterDescribe("表单标识：ID、栏目名称、栏目别名") @PathParam("appFlag") String appFlag) {
+			@JaxrsParameterDescribe("게시판 식별자: ID, 양식 이름") @PathParam("formFlag") String formFlag,
+			@JaxrsParameterDescribe("양식 식별자: ID, 게시판 이름, 게시판 별칭") @PathParam("appFlag") String appFlag) {
 		ActionResult<ActionGetWithAppInfo.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -115,7 +115,7 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "保存表单信息对象.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "양식 정보 객체 저장.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -136,13 +136,13 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新表单信息对象.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "양식 정보 객체 수정.", action = ActionSave.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void put( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单ID") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("양식 ID") @PathParam("id") String id, JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -159,13 +159,13 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新表单信息对象.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "양식 정보 객체 수정.", action = ActionSave.class)
 	@POST
 	@Path("{id}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void putMockPutToPost( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("表单ID") @PathParam("id") String id, JsonElement jsonElement) {
+					 @JaxrsParameterDescribe("양식 ID") @PathParam("id") String id, JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -182,55 +182,55 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除表单信息对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 양식 정보 객체 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("양식 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<WrapOutId> result = new ActionResult<>();
 		try {
 			result = new ActionDelete().execute( request, effectivePerson, id );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在根据ID删除表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "ID로 양식을 삭제하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除表单信息对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 양식 정보 객체 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						@JaxrsParameterDescribe("表单ID") @PathParam("id") String id) {
+						@JaxrsParameterDescribe("양식 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<WrapOutId> result = new ActionResult<>();
 		try {
 			result = new ActionDelete().execute( request, effectivePerson, id );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在根据ID删除表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "ID로 양식을 삭제하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示满足过滤条件的表单信息,下一页.", action = ActionListNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 양식 정보 목록, 다음 페이지.", action = ActionListNextWithFilter.class)
 	@PUT
 	@Path("filter/list/{id}/next/{count}/app/{appId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithFilter( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("栏目ID") @PathParam("appId") String appId,
+			@JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("appId") String appId,
 			JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListNextWithFilter.Wo>> result = new ActionResult<>();
@@ -238,22 +238,22 @@ public class FormAction extends StandardJaxrsAction {
 			result = new ActionListNextWithFilter().execute( request, effectivePerson, id, count, appId, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在查询所有CMS表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "전체 CMS 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示满足过滤条件的表单信息,下一页.", action = ActionListNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 양식 정보 목록, 다음 페이지.", action = ActionListNextWithFilter.class)
 	@POST
 	@Path("filter/list/{id}/next/{count}/app/{appId}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithFilterMockPutToPost( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									@JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-									@JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
-									@JaxrsParameterDescribe("栏目ID") @PathParam("appId") String appId,
+									@JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+									@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
+									@JaxrsParameterDescribe("게시판 ID") @PathParam("appId") String appId,
 									JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListNextWithFilter.Wo>> result = new ActionResult<>();
@@ -261,22 +261,22 @@ public class FormAction extends StandardJaxrsAction {
 			result = new ActionListNextWithFilter().execute( request, effectivePerson, id, count, appId, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在查询所有CMS表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "전체 CMS 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示满足过滤条件的表单信息,上一页.", action = ActionListPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 양식 정보 목록, 이전 페이지.", action = ActionListPrevWithFilter.class)
 	@PUT
 	@Path("filter/list/{id}/prev/{count}/app/{appId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithFilter( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("栏目ID") @PathParam("appId") String appId,
+			@JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("appId") String appId,
 			JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListPrevWithFilter.Wo>> result = new ActionResult<>();
@@ -284,22 +284,22 @@ public class FormAction extends StandardJaxrsAction {
 			result = new ActionListPrevWithFilter().execute( request, effectivePerson, id, count, appId, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在查询所有CMS表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "전체 CMS 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示满足过滤条件的表单信息,上一页.", action = ActionListPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 양식 정보 목록, 이전 페이지.", action = ActionListPrevWithFilter.class)
 	@POST
 	@Path("filter/list/{id}/prev/{count}/app/{appId}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithFilterMockPutToPost( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									@JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-									@JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
-									@JaxrsParameterDescribe("栏目ID") @PathParam("appId") String appId,
+									@JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+									@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
+									@JaxrsParameterDescribe("게시판 ID") @PathParam("appId") String appId,
 									JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListPrevWithFilter.Wo>> result = new ActionResult<>();
@@ -307,21 +307,21 @@ public class FormAction extends StandardJaxrsAction {
 			result = new ActionListPrevWithFilter().execute( request, effectivePerson, id, count, appId, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在查询所有CMS表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "전체 CMS 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据指定的栏目获取栏目下所有表单包含的字段字段信息.", action = ActionListFormFieldWithAppInfo.class)
+	@JaxrsMethodDescribe(value = "지정 게시판 아래 모든 양식에 포함된 필드 정보 조회.", action = ActionListFormFieldWithAppInfo.class)
 	@GET
 	@Path("list/formfield/appInfo/{appId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listFormFiledWithApplication(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("栏目Id") @PathParam("appId") String applicationId) {
+			@JaxrsParameterDescribe("게시판 Id") @PathParam("appId") String applicationId) {
 		ActionResult<WrapOutMap> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -333,13 +333,13 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据指定的Form获取所有包含的字段信息.", action = ActionListFormFieldWithForm.class)
+	@JaxrsMethodDescribe(value = "지정 Form에 포함된 모든 필드 정보 조회.", action = ActionListFormFieldWithForm.class)
 	@GET
 	@Path("list/{id}/formfield")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listFormFiledWithForm(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<WrapOutMap> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -351,14 +351,14 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询表单,如果有表单那么返回表单id,如果表单不存在那么返回分类的默认Form.", action = V2LookupDoc.class)
+	@JaxrsMethodDescribe(value = "양식 조회, 양식이 있으면 양식 id 반환, 없으면 분류의 기본 Form 반환.", action = V2LookupDoc.class)
 	@GET
 	@Path("v2/lookup/document/{docId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2LookupDoc(@Suspended final AsyncResponse asyncResponse,
 											@Context HttpServletRequest request,
-											@JaxrsParameterDescribe("文档ID") @PathParam("docId") String docId) {
+											@JaxrsParameterDescribe("문서ID") @PathParam("docId") String docId) {
 		ActionResult<V2LookupDoc.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -370,14 +370,14 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询表单,如果有表单那么返回表单id,如果表单不存在返回分类的默认FormMobile.", action = V2LookupDocMobile.class)
+	@JaxrsMethodDescribe(value = "양식 조회, 양식이 있으면 양식 id 반환, 없으면 분류의 기본 FormMobile 반환.", action = V2LookupDocMobile.class)
 	@GET
 	@Path("v2/lookup/document/{docId}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2LookupDocMobile(@Suspended final AsyncResponse asyncResponse,
 												  @Context HttpServletRequest request,
-												  @JaxrsParameterDescribe("文档ID") @PathParam("docId") String docId) {
+												  @JaxrsParameterDescribe("문서ID") @PathParam("docId") String docId) {
 		ActionResult<V2LookupDocMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -389,14 +389,14 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取表单.", action = V2Get.class)
+	@JaxrsMethodDescribe(value = "양식 조회.", action = V2Get.class)
 	@GET
 	@Path("v2/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2Get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					  @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-					  @JaxrsParameterDescribe("缓存标志") @QueryParam("t") String t) {
+					  @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+					  @JaxrsParameterDescribe("캐시 플래그") @QueryParam("t") String t) {
 		ActionResult<V2Get.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -408,14 +408,14 @@ public class FormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取表单Mobile.", action = V2GetMobile.class)
+	@JaxrsMethodDescribe(value = "양식 Mobile 조회.", action = V2GetMobile.class)
 	@GET
 	@Path("v2/{id}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2GetMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-							@JaxrsParameterDescribe("缓存标志") @QueryParam("t") String t) {
+							@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+							@JaxrsParameterDescribe("캐시 플래그") @QueryParam("t") String t) {
 		ActionResult<V2GetMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

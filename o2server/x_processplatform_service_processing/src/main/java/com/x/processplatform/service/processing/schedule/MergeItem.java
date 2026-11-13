@@ -68,7 +68,7 @@ public class MergeItem extends AbstractJob {
 		do {
 			workCompleted = this.getWorkCompleted(emc, mergeItemPlan);
 			if (Objects.nonNull(workCompleted)) {
-				logger.print("开始合并已完成工作数据条目, 标识:{}, 标题:{}.", workCompleted.getId(), workCompleted.getTitle());
+				logger.print("완료된 업무 문서 데이터 항목 병합 시작, 식별자:{}, 제목:{}.", workCompleted.getId(), workCompleted.getTitle());
 				this.mergeItem(emc, workCompleted);
 				emc.beginTransaction(MergeItemPlan.class);
 				Long count = mergeItemPlan.getCount();
@@ -102,7 +102,7 @@ public class MergeItem extends AbstractJob {
 		emc.beginTransaction(WorkCompleted.class);
 		workCompleted.setMerged(true);
 		emc.commit();
-		logger.print("已完成工作数据条目合并, 标题:{}.", workCompleted.getTitle());
+		logger.print("완료된 업무 문서 데이터 항목 병합, 제목:{}.", workCompleted.getTitle());
 	}
 
 	private MergeItemPlan getMergeItemPlan(EntityManagerContainer emc) throws Exception {

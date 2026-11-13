@@ -89,7 +89,7 @@ class ActionTypeAbandoned extends BaseAction {
 				clean(business, items, works, tasks, taskCompleteds, reads, readCompleteds, reviews, workLogs, records,
 						documentVersions, docSigns, docSignScrawls);
 				emc.commit();
-				// 创建删除事件
+				// 삭제 이벤트 생성
 				emc.beginTransaction(WorkEvent.class);
 				emc.persist(WorkEvent.deleteEventInstance(work), CheckPersistType.all);
 				emc.commit();

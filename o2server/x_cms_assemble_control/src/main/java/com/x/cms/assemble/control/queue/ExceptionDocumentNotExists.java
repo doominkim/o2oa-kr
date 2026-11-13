@@ -7,6 +7,6 @@ class ExceptionDocumentNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionDocumentNotExists( String docId ) {
-		super("文档信息不存在，无法进行数据保存。ID:" + docId );
+		super("게시글 정보가 없어 데이터를 저장할 수 없습니다. ID:" + docId );
 	}
 }

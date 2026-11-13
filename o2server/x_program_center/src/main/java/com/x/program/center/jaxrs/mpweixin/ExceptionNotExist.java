@@ -11,6 +11,6 @@ public class ExceptionNotExist extends LanguagePromptException {
     private static final long serialVersionUID = 4862362281353270832L;
 
     ExceptionNotExist() {
-        super("对象不存在");
+        super("객체가 없습니다");
     }
 }

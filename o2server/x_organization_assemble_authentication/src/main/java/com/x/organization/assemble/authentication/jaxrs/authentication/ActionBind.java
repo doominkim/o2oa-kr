@@ -39,14 +39,14 @@ class ActionBind extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();
 		String meta = StringTools.uniqueToken();
-		// 二维码内容
+		// QR 코드 내용
 		String url = UriBuilder.fromUri(Config.collect().getAppUrl()).queryParam("meta", meta).build().toASCIIString();
-		int width = 200; // 二维码图片宽度
-		int height = 200; // 二维码图片高度
-		String format = "png";// 二维码的图片格式
+		int width = 200; // QR 코드 이미지 너비
+		int height = 200; // QR 코드 이미지 높이
+		String format = "png";// QR 코드 이미지 형식
 
 		Map<EncodeHintType, String> hints = new HashMap<>();
-		// 内容所使用字符集编码
+		// 내용에 사용하는 문자셋 인코딩
 		hints.put(EncodeHintType.MARGIN, "1");
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q.toString());
 
@@ -80,8 +80,8 @@ class ActionBind extends BaseAction {
 
 		private static final long serialVersionUID = -3574645735233129236L;
 
-		@FieldDescribe("Base64编码图像.")
-		@Schema(description = "Base64编码图像.")
+		@FieldDescribe("Base64 인코딩 이미지.")
+		@Schema(description = "Base64 인코딩 이미지.")
 		private String image;
 
 		public String getImage() {

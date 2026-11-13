@@ -5,7 +5,7 @@ MWF.xApplication.Selector.ListSelector = new Class({
     options: {
         "style": "default",
         "count": 0,
-        "title": MWF.xApplication.Selector.LP.selectList, //"选择列表"
+        "title": MWF.xApplication.Selector.LP.selectList, //"목록 선택"
         "values": [],
         "appId" : "",
         "formId": "",

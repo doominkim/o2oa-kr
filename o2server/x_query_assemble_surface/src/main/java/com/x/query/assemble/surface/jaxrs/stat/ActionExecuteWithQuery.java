@@ -46,7 +46,7 @@ class ActionExecuteWithQuery extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson, stat);
 			}
 			Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
-			// 有可能前台不传任何参数
+			// 프런트에서 매개변수를 전혀 보내지 않을 수 있음
 			if (null == wi) {
 				wi = new Wi();
 			}

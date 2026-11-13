@@ -57,7 +57,7 @@ class ActionEdit extends BaseAction {
 			for (AppDictItem o : adds) {
 				o.setItemCategory(ItemCategory.pp_dict);
 				o.setBundle(dict.getId());
-				/** 将数据字典和数据存放在同一个分区 */
+				/** 데이터 사전과 데이터를 같은 파티션에 저장 */
 				o.setDistributeFactor(dict.getDistributeFactor());
 				o.setAppId(appInfo.getId());
 				emc.persist(o, CheckPersistType.all);

@@ -18,11 +18,11 @@ import com.x.bbs.entity.BBSUserRole;
 import com.x.bbs.entity.BBSUserRole_;
 
 /**
- * 类   名：BBSUserRoleFactory<br/>
- * 实体类：BBSUserRole<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-08-10 17:17:26
+ * 클래스명: BBSUserRoleFactory<br/>
+ * 엔티티 클래스: BBSUserRole<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-08-10 17:17:26
 **/
 public class BBSUserRoleFactory extends AbstractFactory {
 
@@ -30,12 +30,12 @@ public class BBSUserRoleFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSUserRole实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSUserRole 엔티티 정보 객체 조회" )
 	public BBSUserRole get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSUserRole.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSUserRole实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSUserRole 엔티티 정보 목록 조회" )
 	public List<BBSUserRole> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSUserRole>();
@@ -48,7 +48,7 @@ public class BBSUserRoleFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "列示全部的BBSUserRole实体信息列表" )
+	//@MethodDescribe( "전체 BBSUserRole 엔티티 정보 목록 조회" )
 	public List<BBSUserRole> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSUserRole.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -56,7 +56,7 @@ public class BBSUserRoleFactory extends AbstractFactory {
 		return em.createQuery( cq ).setMaxResults( 5000 ).getResultList();
 	}
 
-	//@MethodDescribe( "根据绑定对象唯一标识以及绑定对象类别查询所有绑定的角色ID列表" )
+	//@MethodDescribe( "연결 대상 고유 식별자와 연결 대상 유형으로 연결된 전체 역할 ID 목록 조회" )
 	public List<String> listRoleIdsByObjectUniqueId( String uniqueId, String objectType ) throws Exception {
 		if( uniqueId == null || uniqueId.isEmpty() ){
 			throw new Exception("uniqueId is null!");
@@ -74,7 +74,7 @@ public class BBSUserRoleFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 	
-	//@MethodDescribe( "根据绑定对象唯一标识以及绑定对象类别查询所有绑定的角色编码列表" )
+	//@MethodDescribe( "연결 대상 고유 식별자와 연결 대상 유형으로 연결된 전체 역할 코드 목록 조회" )
 	public List<String> listRoleCodeByObjectUniqueId( String uniqueId, String objectType ) throws Exception {
 		if( uniqueId == null || uniqueId.isEmpty() ){
 			throw new Exception("uniqueId is null!");
@@ -92,7 +92,7 @@ public class BBSUserRoleFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 
-	//@MethodDescribe( "根据角色编码查询所有的人员角色绑定信息对象ID列表" )
+	//@MethodDescribe( "역할 코드로 전체 사용자-역할 연결 정보 객체 ID 목록 조회" )
 	public List<String> listIdsByRoleCode( String roleCode ) throws Exception {
 		if( roleCode == null || roleCode.isEmpty() ){
 			throw new Exception("roleCode is null!");
@@ -106,7 +106,7 @@ public class BBSUserRoleFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 
-	//@MethodDescribe( "根据指定的绑定对象唯一标识列表查询在该对象上绑定的所有角色ID列表" )
+	//@MethodDescribe( "지정 연결 대상 고유 식별자 목록으로 해당 대상에 연결된 전체 역할 ID 목록 조회" )
 	public List<String> listRoleIdsByObjectUnique(List<String> objectUniqueIds) throws Exception {
 		if( objectUniqueIds == null || objectUniqueIds.isEmpty() ){
 			return null;
@@ -120,7 +120,7 @@ public class BBSUserRoleFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 	
-	//@MethodDescribe( "根据指定的绑定对象唯一标识列表查询在该对象上绑定的所有角色编码列表" )
+	//@MethodDescribe( "지정 연결 대상 고유 식별자 목록으로 해당 대상에 연결된 전체 역할 코드 목록 조회" )
 	public List<String> listRoleCodesByObjectUnique( List<String> objectUniqueIds ) throws Exception {
 		if( objectUniqueIds == null || objectUniqueIds.isEmpty() ){
 			return null;
@@ -148,7 +148,7 @@ public class BBSUserRoleFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据版块信息ID查询所有的用户角色关联信息
+	 * 게시판 정보 ID로 전체 사용자-역할 연결 정보 조회
 	 * @param sectionId
 	 * @param queryMainSectionId
 	 * @return

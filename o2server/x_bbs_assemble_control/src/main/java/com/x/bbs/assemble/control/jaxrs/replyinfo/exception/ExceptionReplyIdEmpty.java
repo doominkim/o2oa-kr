@@ -7,6 +7,6 @@ public class ExceptionReplyIdEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionReplyIdEmpty() {
-		super("id为空，无法继续查询操作。" );
+		super("id가 비어 있어 조회할 수 없습니다." );
 	}
 }

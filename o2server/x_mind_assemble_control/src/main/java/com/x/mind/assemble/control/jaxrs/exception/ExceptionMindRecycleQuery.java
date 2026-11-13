@@ -7,10 +7,10 @@ public class ExceptionMindRecycleQuery extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionMindRecycleQuery( Throwable e, String message ) {
-		super("回收站脑图信息查询时发生异常。MESSAGE:" + message, e );
+		super("휴지통 마인드맵 정보 조회 중 오류가 발생했습니다. MESSAGE:" + message, e );
 	}
 	
 	public ExceptionMindRecycleQuery( Throwable e, String message,  String id ) {
-		super("回收站脑图信息查询时发生异常。ID:" + id + ",  MESSAGE:" + message , e );
+		super("휴지통 마인드맵 정보 조회 중 오류가 발생했습니다. ID:" + id + ",  MESSAGE:" + message , e );
 	}
 }

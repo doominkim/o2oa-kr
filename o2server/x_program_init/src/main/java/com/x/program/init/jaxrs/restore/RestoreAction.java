@@ -25,12 +25,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("restore")
-@JaxrsDescribe("数据恢复")
+@JaxrsDescribe("데이터 복원")
 public class RestoreAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RestoreAction.class);
 
-	@JaxrsMethodDescribe(value = "上传dataDump数据包.", action = ActionUpload.class)
+	@JaxrsMethodDescribe(value = "dataDump 데이터 패키지 업로드.", action = ActionUpload.class)
 	@POST
 	@Path("upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -48,7 +48,7 @@ public class RestoreAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "取消上传dataDump数据包.", action = ActionUploadCancel.class)
+	@JaxrsMethodDescribe(value = "dataDump 데이터 패키지 업로드 취소.", action = ActionUploadCancel.class)
 	@GET
 	@Path("upload/cancel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

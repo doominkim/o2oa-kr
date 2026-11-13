@@ -33,7 +33,7 @@ class ActionListNext extends BaseAction {
 				result.setCount(co.getCount());
 			} else {
 				String id = EMPTY_SYMBOL;
-				/** 如果不是空位标志位 */
+				/** 비어 있지 않으면 플래그 설정 */
 				if (!StringUtils.equals(EMPTY_SYMBOL, flag)) {
 					PersonAttribute o = business.personAttribute().pick(flag);
 					if (null == o) {
@@ -81,7 +81,7 @@ class ActionListNext extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		static WrapCopier<PersonAttribute, Wo> copier = WrapCopierFactory.wo(PersonAttribute.class, Wo.class, null,

@@ -12,7 +12,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 将EXCEL分析出来的数据发送到队列，由相应的处理器进行数据校验操作
+ * EXCEL에서 분석한 데이터를 큐로 보내 해당 처리기가 데이터 검증 수행
  * 
  * @author O2LEE
  *
@@ -31,7 +31,7 @@ public class SenderForValidateData {
 		
 		try {
 			cacheImportFileStatus.setCurrentProcessName( ImportOptDefine.VALIDATE );
-			//將數據推入隊列，在队列中进行数据格式校验
+			//데이터를 큐에 넣어 큐에서 데이터 형식 검증
 			cacheImportFileStatus.increaseProcess_validate_total( 1 );
 			DataProcessThreadFactory.getInstance().submit( new EntityImportDataDetail( "excel", sheetIndex, curRow, fileKey, data ), StatusSystemImportOpt.getInstance().getDebugger() );
 		} catch (Exception e) {

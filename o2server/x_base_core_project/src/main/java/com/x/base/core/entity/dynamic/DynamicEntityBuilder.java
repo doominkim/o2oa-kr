@@ -129,7 +129,7 @@ public class DynamicEntityBuilder {
 		// public void setId(String id) {
 		// this.id = id;
 		// }
-		// @FieldDescribe("数据库主键,自动生成.")
+		// @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 		// @Id
 		// @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 		// private String id = createId();
@@ -148,7 +148,7 @@ public class DynamicEntityBuilder {
 	}
 
 	/**
-	 * 自建表默认创建bundle属性用于存储流程实例的job
+	 * 자체 생성 테이블은 기본으로 bundle 속성을 생성하여 프로세스 인스턴스의 job 저장
 	 * @param builder
 	 */
 	private void createBundleField(Builder builder) {
@@ -191,7 +191,7 @@ public class DynamicEntityBuilder {
 
 	private void createField(Builder builder, Field field, Class<?> typeClass) {
 		// public static final String stringValue_FIELDNAME = "stringValue";
-		// @FieldDescribe("文本字段.")
+		// @FieldDescribe("텍스트 필드.")
 		// @Column(length = JpaObject.length_255B, name = ColumnNamePrefix +
 		// stringValue_FIELDNAME)
 		// @Index(name = TABLE + IndexNameMiddle + stringValue_FIELDNAME)
@@ -332,7 +332,7 @@ public class DynamicEntityBuilder {
 	private void createListFields(Builder builder, Field field, Class<?> typeClass) {
 
 		// public static final String groupList_FIELDNAME = "groupList";
-		// @FieldDescribe("群组的群组成员.存放群组 ID.")
+		// @FieldDescribe("그룹의 그룹 구성원. 그룹 ID 저장.")
 		// @ContainerTable(name = TABLE + ContainerTableNameMiddle +
 		// groupList_FIELDNAME, joinIndex = @Index(name = TABLE
 		// + IndexNameMiddle + groupList_FIELDNAME + JoinIndexNameSuffix))
@@ -397,7 +397,7 @@ public class DynamicEntityBuilder {
 	private void createStringLobField(Builder builder, Field field) {
 
 		// public static final String stringLobValue_FIELDNAME = "stringLobValue";
-		// @FieldDescribe("长文本.")
+		// @FieldDescribe("긴 텍스트.")
 		// @Lob
 		// @Basic(fetch = FetchType.EAGER)
 		// @Column(length = JpaObject.length_10M, name = ColumnNamePrefix +
@@ -432,7 +432,7 @@ public class DynamicEntityBuilder {
 
 	private void createStringMapField(Builder builder, Field field) {
 
-		// @FieldDescribe("Map类型.")
+		// @FieldDescribe("Map 유형.")
 		// @CheckPersist(allowEmpty = true)
 		// @PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType =
 		// String.class)

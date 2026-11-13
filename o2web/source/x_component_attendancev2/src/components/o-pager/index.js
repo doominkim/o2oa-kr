@@ -12,27 +12,27 @@ export default content({
       lp,
       pageList: ["1"],
       // pagerData: {
-      //   // 父组件通过oo-prop传入这个对象 主要是需要传入 size，totalCount
-      //   page: 1, //页码
+      //   // 부모 컴포넌트가 oo-prop으로 전달하는 객체, 주로 size, totalCount 전달 필요
+      //   page: 1, //페이지 번호
       //   totalPage: 1,
       //   totalCount: content.watch(function() {
       //     console.debug("watch totalCount .....");
       //     console.debug(this.bind);
       //     this.numberCalc();
       //   },0),
-      //   size: 15, // 条目数
+      //   size: 15, // 항목 수
       // },
-      inputPage: '', // 输入的页码
+      inputPage: '', // 입력한 페이지 번호
     };
   },
   afterRender() {
-    // todo 初始化数据
+    // todo 데이터 초기화
     this.numberCalc();
   },
   loadDataEvent() {
     this.component.dispatchEvent("refresh-data");
   },
-  // 计算用，传入参数无用 刷新页面用
+  // 계산용, 전달 인자는 무의미, 페이지 새로고침용
   numberCalc() {
     let totalPage = parseInt(
       this.bind.totalCount / this.bind.size
@@ -42,12 +42,12 @@ export default content({
       totalPage += 1;
     }
     if (totalPage == 0) {
-      totalPage = 1; // 最少是1
+      totalPage = 1; // 최소 1
     }
     this.bind.totalPage = totalPage;
     let pageList = [];
     if (totalPage > 11) {
-      // 最多11条
+      // 최대 11개
       if (this.bind.page < 6) {
         for (let index = 0; index < 11; index++) {
           pageList.push(`${index + 1}`);
@@ -68,7 +68,7 @@ export default content({
       }
     }
     this.bind.pageList = pageList;
-    return ""; // 没用
+    return ""; // 사용 안 함
   },
   clickNumberPage(number) {
     this.bind.page = parseInt(number);

@@ -25,7 +25,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		connection.setUseCaches(false);
 		connection.setDoOutput(false);
 		connection.setDoInput(true);
-		/** 访问主机上的端口 */
+		/** 호스트 접근 포트 */
 		connection.connect();
 		byte[] buffer = null;
 		try (InputStream input = connection.getInputStream()) {

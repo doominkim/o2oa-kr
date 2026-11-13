@@ -44,7 +44,7 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 			wi = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionDocumentInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+			Exception exception = new ExceptionDocumentInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -61,7 +61,7 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionDocumentInfoProcess(e,
-						"文档信息获取操作时发生异常。Id:" + id + ", Name:" + effectivePerson.getDistinguishedName());
+						"게시글 정보를 가져오는 중 오류가 발생했습니다. Id:" + id + ", Name:" + effectivePerson.getDistinguishedName());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -78,7 +78,7 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 				wo.setId( document.getId() );
 				result.setData( wo );
 
-				//检查是否需要删除热点图片
+				//핫 이미지 삭제 필요 여부 확인
 				try {
 					ThisApplication.queueDocumentUpdate.send( document );
 				} catch ( Exception e1 ) {
@@ -104,12 +104,12 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 			}
 		}
 
-		//将读者以及作者信息持久化到数据库中
+		//독자 및 작성자 정보를 데이터베이스에 저장
 		if( !wi.getSkipPermission() ) {
 			try {
 				documentPersistService.refreshDocumentPermission( id, wi.getReaderList(), wi.getAuthorList() );
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在核对文档访问管理权限信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 접근·관리 권한을 확인하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -124,13 +124,13 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 
 		public static WrapCopier<Wi, Document> copier = WrapCopierFactory.wi( Wi.class, Document.class, null, JpaObject.FieldsUnmodify );
 
-		@FieldDescribe( "文档读者." )
+		@FieldDescribe( "문서 독자." )
 		private List<PermissionInfo> readerList = null;
 
-		@FieldDescribe( "文档编辑者." )
+		@FieldDescribe( "문서 편집자." )
 		private List<PermissionInfo> authorList = null;
 
-		@FieldDescribe( "不修改权限（跳过权限设置，保留原来的设置）." )
+		@FieldDescribe( "권한 수정 안 함(권한 설정을 건너뛰고 기존 설정 유지)." )
 		private Boolean skipPermission  = false;
 
 		public Boolean getSkipPermission() {

@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 @Path("v2/shift")
-@JaxrsDescribe("班次管理")
+@JaxrsDescribe("교대 관리")
 public class ShiftAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(ShiftAction.class);
@@ -34,14 +34,14 @@ public class ShiftAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "分页查询班次列表.", action = ActionListByPage.class)
+    @JaxrsMethodDescribe(value = "교대 목록 페이지 조회.", action = ActionListByPage.class)
     @POST
     @Path("list/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-                                @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+                                @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+                                @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListByPage.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -53,7 +53,7 @@ public class ShiftAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "创建班次信息.", action = ActionPost.class)
+    @JaxrsMethodDescribe(value = "교대 정보 생성.", action = ActionPost.class)
     @POST
     @Path("create")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -71,7 +71,7 @@ public class ShiftAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "修改班次信息.", action = ActionUpdate.class)
+    @JaxrsMethodDescribe(value = "교대 정보 수정.", action = ActionUpdate.class)
     @POST
     @Path("update")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -90,13 +90,13 @@ public class ShiftAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "删除班次.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "교대 삭제.", action = ActionDelete.class)
     @GET
     @Path("delete/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                     @JaxrsParameterDescribe("班次ID") @PathParam("id") String id) {
+                                     @JaxrsParameterDescribe("교대 ID") @PathParam("id") String id) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -108,13 +108,13 @@ public class ShiftAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取班次.", action = ActionGet.class)
+    @JaxrsMethodDescribe(value = "교대 조회.", action = ActionGet.class)
     @GET
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                     @JaxrsParameterDescribe("班次ID") @PathParam("id") String id) {
+                                     @JaxrsParameterDescribe("교대 ID") @PathParam("id") String id) {
         ActionResult<ActionGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

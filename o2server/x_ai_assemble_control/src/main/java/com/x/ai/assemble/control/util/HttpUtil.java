@@ -122,7 +122,7 @@ public class HttpUtil {
 
     private static void writeFilePart(DataOutputStream output, FilePart filePart, String boundary) throws IOException {
         String fileName = filePart.getFileName();
-        // 对中文文件名进行 URL 编码
+        // 한글 파일 이름 URL 인코딩
         String convertedFileName = new String(fileName.getBytes(StandardCharsets.UTF_8),StandardCharsets.ISO_8859_1);
         output.writeBytes(StringTools.TWO_HYPHENS + boundary + StringTools.CRLF);
 

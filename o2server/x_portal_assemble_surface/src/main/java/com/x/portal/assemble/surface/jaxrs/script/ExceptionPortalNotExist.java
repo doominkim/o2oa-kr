@@ -7,7 +7,7 @@ class ExceptionPortalNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -4908883340253465376L;
 
 	ExceptionPortalNotExist(String id) {
-		super("指定的站点不存在:{}.", id);
+		super("지정한 포털이 없습니다: {}.", id);
 	}
 
 }

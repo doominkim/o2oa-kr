@@ -52,7 +52,7 @@ class ActionListWithPersonComplex extends BaseAction {
             try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
                 Business business = new Business(emc);
                 List<String> identities = business.organization().identity().listWithPerson(effectivePerson);
-                // 去除部门以及上级部门,如果设置了一级部门可用,那么一级部门下属的二级部门也可用
+                // 부서 및 상위 부서 제거, 1단계 부서가 사용 가능하면 그 하위 2단계 부서도 사용 가능
                 List<String> units = business.organization().unit().listWithPersonSupNested(effectivePerson);
                 List<String> roles = business.organization().role().listWithPerson(effectivePerson);
                 List<String> groups = business.organization().group().listWithIdentity(identities);
@@ -82,12 +82,12 @@ class ActionListWithPersonComplex extends BaseAction {
         static WrapCopier<Application, Wo> copier = WrapCopierFactory.wo(Application.class, Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("流程对象.")
-        @Schema(description = "流程对象.")
+        @FieldDescribe("프로세스 객체.")
+        @Schema(description = "프로세스 객체.")
         private List<WoProcess> processList;
 
-        @FieldDescribe("是否可编辑.")
-        @Schema(description = "是否可编辑.")
+        @FieldDescribe("편집 가능 여부.")
+        @Schema(description = "편집 가능 여부.")
         private Boolean allowControl;
 
         public Boolean getAllowControl() {
@@ -118,9 +118,9 @@ class ActionListWithPersonComplex extends BaseAction {
     }
 
     /**
-     * 从可见的application中获取一份ids<br/>
-     * 从可启动的process中获取一份ids <br/>
-     * 两份ids的交集,这样避免列示只有application没有可以启动process的应用
+     * 볼 수 있는 application에서 ids 한 벌 조회<br/>
+     * 시작 가능한 process에서 ids 한 벌 조회 <br/>
+     * 두 ids의 교집합, application만 있고 시작 가능한 process가 없는 앱이 목록에 나오지 않도록 함
      */
     private List<String> list(Business business, EffectivePerson effectivePerson, List<String> roles,
             List<String> identities, List<String> units, List<String> groups) throws Exception {
@@ -156,7 +156,7 @@ class ActionListWithPersonComplex extends BaseAction {
 
     /**
      *
-     * 从Process中获取可以启动的Process的application.
+     * Process에서 시작 가능한 Process의 application 조회.
      */
     private List<String> listFromProcess(Business business, EffectivePerson effectivePerson, List<String> roles,
             List<String> identities, List<String> units, List<String> groups) throws Exception {

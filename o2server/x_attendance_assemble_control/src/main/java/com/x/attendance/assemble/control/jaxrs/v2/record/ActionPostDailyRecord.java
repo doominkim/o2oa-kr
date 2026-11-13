@@ -44,29 +44,29 @@ public class ActionPostDailyRecord extends BaseAction {
             }
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getPerson())) {
-                throw new ExceptionEmptyParameter("用户标识");
+                throw new ExceptionEmptyParameter("사용자 식별자");
             }
             Person p = business.organization().person().getObject(wi.getPerson());
             if (p == null || StringUtils.isEmpty(p.getDistinguishedName())) {
-                throw new ExceptionNotExistObject("人员：" + wi.getPerson());
+                throw new ExceptionNotExistObject("인원: " + wi.getPerson());
             }
             if (StringUtils.isEmpty(wi.getDate())) {
-                throw new ExceptionEmptyParameter("日期");
+                throw new ExceptionEmptyParameter("날짜");
             }
-            // 打卡日期
+            // 체크 날짜
             Date recordDate = null;
             try {
                 recordDate = DateTools.parse(wi.getDate(), DateTools.format_yyyyMMdd);
             } catch (Exception ignore) {
             }
             if (recordDate == null) {
-                throw new ExceptionWithMessage("日期格式不正确！");
+                throw new ExceptionWithMessage("날짜 형식이 올바르지 않습니다!");
             }
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("打卡日期：" + wi.getDate());
+                LOGGER.debug("체크 날짜: " + wi.getDate());
             }
             if (recordDate.after(new Date())) {
-                throw new ExceptionWithMessage("不能导入未来的数据！");
+                throw new ExceptionWithMessage("미래 데이터는 가져올 수 없습니다!");
             }
 
             List<Date> recordList = new ArrayList<>();
@@ -76,26 +76,26 @@ public class ActionPostDailyRecord extends BaseAction {
             addRecordTimes(wi.getDate(), wi.getOffDutyTime2(), recordList);
             addRecordTimes(wi.getDate(), wi.getOnDutyTime3(), recordList);
             addRecordTimes(wi.getDate(), wi.getOffDutyTime3(), recordList);
-            // 考勤组和班次
+            // 근태 그룹과 교대
             WoGroupShift woGroupShift = business.getAttendanceV2ManagerFactory()
                     .getGroupShiftByPersonDate(p.getDistinguishedName(), wi.getDate());
             if (woGroupShift == null || woGroupShift.getGroup() == null) {
-                throw new ExceptionNotExistObject("没有对应的考勤组");
+                throw new ExceptionNotExistObject("해당하는 근태 그룹이 없습니다");
             }
-            AttendanceV2Group group = woGroupShift.getGroup(); // 考勤组
-            AttendanceV2Shift shift = woGroupShift.getShift(); // 班次
-            // 固定班制 或者 排班制
+            AttendanceV2Group group = woGroupShift.getGroup(); // 근태 그룹
+            AttendanceV2Shift shift = woGroupShift.getShift(); // 근무조
+            // 고정 근무제 또는 교대제
             if ((group.getCheckType().equals(AttendanceV2Group.CHECKTYPE_Fixed)
                     || group.getCheckType().equals(AttendanceV2Group.CHECKTYPE_Arrangement)) && shift != null) {
                 List<AttendanceV2ShiftCheckTime> timeList = shift.getProperties().getTimeList();
                 if (timeList == null || timeList.isEmpty()) {
-                    throw new ExceptionWithMessage("没有对应的上下班打卡时间");
+                    throw new ExceptionWithMessage("해당하는 출퇴근 체크 시간이 없습니다");
                 }
-                // 先删除老的
+                // 기존 것 먼저 삭제
                 deleteOldRecords(p.getDistinguishedName(), wi.getDate(), emc, business);
                 for (int i = 0; i < timeList.size(); i++) {
                     AttendanceV2ShiftCheckTime shiftCheckTime = timeList.get(i);
-                    // 上班打卡
+                    // 출근 체크
                     int recordIndex = i * 2;
                     Date onDutyRecordTime = recordList.get(recordIndex);
                     saveRecord(AttendanceV2CheckInRecord.OnDuty, p.getDistinguishedName(), wi.getDate(),
@@ -111,9 +111,9 @@ public class ActionPostDailyRecord extends BaseAction {
                             group, shift, emc);
                 }
             } else {
-                // 先删除老的
+                // 기존 것 먼저 삭제
                 deleteOldRecords(p.getDistinguishedName(), wi.getDate(), emc, business);
-                // 自由打卡或者节假日没有班次的情况 只读取两条数据
+                // 자유 체크 또는 공휴일에 교대가 없는 경우 두 건만 읽음
                 Date onDutyRecordTime = recordList.get(0);
                 saveRecord(AttendanceV2CheckInRecord.OnDuty, p.getDistinguishedName(), wi.getDate(), onDutyRecordTime,
                         null, null, null,
@@ -123,7 +123,7 @@ public class ActionPostDailyRecord extends BaseAction {
                         null, null, null,
                         group, null, emc);
             }
-            LOGGER.info("导入数据成功，发起考勤数据生成，Date：{} person: {}", wi.getDate(), p.getDistinguishedName());
+            LOGGER.info("데이터 가져오기 성공, 근태 데이터 생성 시작, Date: {} person: {}", wi.getDate(), p.getDistinguishedName());
             ThisApplication.queueV2Detail
                     .send(new QueueAttendanceV2DetailModel(p.getDistinguishedName(), wi.getDate()));
 
@@ -139,7 +139,7 @@ public class ActionPostDailyRecord extends BaseAction {
         try {
             String timeStr = date + " " + dutyTime + ":00";
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("打卡时间：" + timeStr);
+                LOGGER.debug("체크 시간: " + timeStr);
             }
             Date time = DateTools.parse(timeStr, DateTools.format_yyyyMMddHHmmss);
             recordList.add(time);
@@ -156,21 +156,21 @@ public class ActionPostDailyRecord extends BaseAction {
     public static class Wi extends GsonPropertyObject {
 
         private static final long serialVersionUID = -8017286362885456659L;
-        @FieldDescribe("用户唯一标识")
+        @FieldDescribe("사용자 고유 식별자")
         private String person;
-        @FieldDescribe("日期：yyyy-MM-dd")
+        @FieldDescribe("날짜: yyyy-MM-dd")
         private String date;
-        @FieldDescribe("第一次上班打卡时间：HH:mm")
+        @FieldDescribe("첫 번째 출근 체크 시간: HH:mm")
         private String onDutyTime1;
-        @FieldDescribe("第一次下班打卡时间：HH:mm")
+        @FieldDescribe("첫 번째 퇴근 체크 시간: HH:mm")
         private String offDutyTime1;
-        @FieldDescribe("第二次上班打卡时间：HH:mm")
+        @FieldDescribe("두 번째 출근 체크 시간: HH:mm")
         private String onDutyTime2;
-        @FieldDescribe("第二次下班打卡时间：HH:mm")
+        @FieldDescribe("두 번째 퇴근 체크 시간: HH:mm")
         private String offDutyTime2;
-        @FieldDescribe("第三次上班打卡时间：HH:mm")
+        @FieldDescribe("세 번째 출근 체크 시간: HH:mm")
         private String onDutyTime3;
-        @FieldDescribe("第三次下班打卡时间：HH:mm")
+        @FieldDescribe("세 번째 퇴근 체크 시간: HH:mm")
         private String offDutyTime3;
 
         public String getPerson() {

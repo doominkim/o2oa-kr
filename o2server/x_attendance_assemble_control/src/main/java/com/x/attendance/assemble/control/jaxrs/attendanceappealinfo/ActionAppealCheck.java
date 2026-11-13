@@ -46,7 +46,7 @@ public class ActionAppealCheck extends BaseAction {
 		if (check) {
 			if( wrapIn.getIds() == null || wrapIn.getIds().isEmpty() ) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess( "需要复核的申诉ID为空！" );
+				Exception exception = new ExceptionAttendanceAppealProcess( "재검토할 이의 신청 ID가 비어 있습니다!" );
 				result.error(exception);
 			}else {
 				ids =  wrapIn.getIds();
@@ -79,7 +79,7 @@ public class ActionAppealCheck extends BaseAction {
 					processWo.setSuccess( false );
 					processWo.setTitle( "제목 없음" );
 					processWo.setDiscription("근태 소명 정보 조회 중 오류가 발생했습니다!");
-					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询考勤申诉信息数据时发生异常。ID:"+ id);
+					Exception exception = new ExceptionAttendanceAppealProcess(e, "ID로 근태 이의 신청 데이터를 조회하는 중 오류가 발생했습니다. ID:"+ id);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -100,7 +100,7 @@ public class ActionAppealCheck extends BaseAction {
 						check = false;
 						processWo.setSuccess( false );
 						processWo.setDiscription("소명자 조직 조회 중 오류가 발생했습니다! " + effectivePerson.getDistinguishedName() );
-						Exception exception = new ExceptionAttendanceAppealProcess(e, "系统根据员工姓名查询组织信息时发生异常！name:"+effectivePerson.getDistinguishedName());
+						Exception exception = new ExceptionAttendanceAppealProcess(e, "직원 이름으로 조직 정보를 조회하는 중 오류가 발생했습니다! name:"+effectivePerson.getDistinguishedName());
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -141,13 +141,13 @@ public class ActionAppealCheck extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>(JpaObject.FieldsUnmodify);
 
-		@FieldDescribe("需要复核的ID列表")
+		@FieldDescribe("재검토할 ID 목록")
 		private List<String> ids = null;
 
-		@FieldDescribe("复核意见")
+		@FieldDescribe("재검토 의견")
 		private String opinion2;
 
-		@FieldDescribe("申诉人的身份，考勤人员身份：如果考勤人员属于多个组织，可以选择一个身份进行申诉信息绑定.")
+		@FieldDescribe("이의 신청자 신분, 근태 대상자 신분: 근태 대상자가 여러 조직에 속하면 신분 하나를 골라 이의 신청 정보에 연결할 수 있음.")
 		private String identity = null;
 
 		public String getIdentity() {

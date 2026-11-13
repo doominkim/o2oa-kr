@@ -62,7 +62,7 @@ public class LogLongDetained extends AbstractJob {
 			wo.setReads(reads(readCount, readThreshold));
 			java.nio.file.Path path = new File(Config.dir_logs(true), "longDetained.json").toPath();
 			Files.writeString(path, XGsonBuilder.toJson(wo), StandardCharsets.UTF_8);
-			LOGGER.info("记录长时间停滞工作{}个, 待办{}个, 待阅{}个, 耗时:{}.", workCount.intValue(), taskCount.intValue(),
+			LOGGER.info("장기 정체 업무 문서 {}개, 결재 대기 {}개, 열람 대기 {}개 기록, 소요 시간:{}.", workCount.intValue(), taskCount.intValue(),
 					readCount.intValue(), stamp.consumingMilliseconds());
 		} catch (Exception e) {
 			throw new JobExecutionException(e);

@@ -18,16 +18,16 @@ public class AndFxMessage extends GsonPropertyObject {
 	private static final long serialVersionUID = 7918866243690822067L;
 
 	/**
-	 * 消息格式：
+	 * 메시지 형식:
 	 * {
-	 *     "appKey": "替换行业消息appkey",
+	 *     "appKey": "업종 메시지 appkey로 교체",
 	 *     "client_id": "5d3fdc22dbdd7a668be5fbff",
-	 *     "content": "{"extra":{"color":"","action":"native://openurl?data=%7B%22noDefaultMenu%22%3A1%2C%22url%22%3A%22http%3A%2F%2F122.9.45.143%3A80%2Fseeyon%2FaccessMessageDetail.do%3Fmethod%3Dmessage%26ticket%3DMTM3MTAyNTAxNDQ%40%26url%3DaXV1cTswMDIzMy86LzU2LzI1NDs5MTB0ZmZ6cG8wSTYwZHBtbWJjcHNidWpwbzBuZnR0YmhmSm9lZnkvaXVubUBpdW5tPiYzR3RmZnpwbyYzR240JjNHYnFxdCYzR3c2JjNHZHBtbWJjcHNidWpwbyYzR2l1bm0mM0dlZnViam10JjNHdHZubmJzei9pdW5tJjRHYmdnYmpzSmUmNEUuNTM1NjgxNTY2Mjo5NjE6OjI1OCYzN3BxZm9Hc3BuJjRFbWp0dVFmb2Vqb2gmMzd0dm5uYnN6SmUmNEUuMiYzN3FzcHl6SmUmNEUxJjM3eGZqeWpvTmZ0dGJoZiY0RXVzdmY%253D%22%7D","title":"流程中心","content":"开发1发起事务:","sendTime":"1655104600226"},"message":"流程中心","type":"替换分配的行业消息type值","userName":"画押盖流程中心章"}",
+	 *     "content": "{"extra":{"color":"","action":"native://openurl?data=%7B%22noDefaultMenu%22%3A1%2C%22url%22%3A%22http%3A%2F%2F122.9.45.143%3A80%2Fseeyon%2FaccessMessageDetail.do%3Fmethod%3Dmessage%26ticket%3DMTM3MTAyNTAxNDQ%40%26url%3DaXV1cTswMDIzMy86LzU2LzI1NDs5MTB0ZmZ6cG8wSTYwZHBtbWJjcHNidWpwbzBuZnR0YmhmSm9lZnkvaXVubUBpdW5tPiYzR3RmZnpwbyYzR240JjNHYnFxdCYzR3c2JjNHZHBtbWJjcHNidWpwbyYzR2l1bm0mM0dlZnViam10JjNHdHZubmJzei9pdW5tJjRHYmdnYmpzSmUmNEUuNTM1NjgxNTY2Mjo5NjE6OjI1OCYzN3BxZm9Hc3BuJjRFbWp0dVFmb2Vqb2gmMzd0dm5uYnN6SmUmNEUuMiYzN3FzcHl6SmUmNEUxJjM3eGZqeWpvTmZ0dGJoZiY0RXVzdmY%253D%22%7D","title":"프로세스 센터","content":"개발1 사무 발의:","sendTime":"1655104600226"},"message":"프로세스 센터","type":"할당된 업종 메시지 type 값으로 교체","userName":"프로세스 센터 직인 날인"}",
 	 *     "content_type": "xmoa",
 	 *     "receiver": [
 	 *         "13710250144"
 	 *     ],
-	 *     "sender": "替换分配的行业消息sender",
+	 *     "sender": "할당된 업종 메시지 sender로 교체",
 	 *     "sign": "cc044b9667f67e567733eafc1b5af49d8b5ae0ea",
 	 *     "uuid": "b7bd9941061e4ca4a9721e738ad04515"
 	 * }

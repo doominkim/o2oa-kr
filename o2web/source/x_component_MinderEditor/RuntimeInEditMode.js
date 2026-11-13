@@ -91,7 +91,7 @@ MWF.xApplication.MinderEditor.History = new Class({
 });
 
 /**
- * @Desc: 新增一个用于处理系统ctrl+c ctrl+v等方式导入导出节点的MIMETYPE处理，如系统不支持clipboardEvent或者是FF则不初始化改class
+ * @Desc: 시스템 ctrl+c ctrl+v 등으로 노드를 가져오기/내보내기 위한 MIMETYPE 처리를 새로 추가하며, 시스템이 clipboardEvent를 지원하지 않거나 FF이면 이 class를 초기화하지 않음
  * @Editor: Naixor
  * @Date: 2015.9.21
  */
@@ -107,15 +107,15 @@ MWF.xApplication.MinderEditor.ClipboardMimeType = new Class({
         };
     },
     /**
-     * 用于将一段纯文本封装成符合其数据格式的文本
+     * 일반 텍스트를 해당 데이터 형식에 맞는 텍스트로 감싸는 용도
      * @method process 			private
-     * @param  {MIMETYPE} mimetype 数据格式
-     * @param  {String} text     原始文本
-     * @return {String}          符合该数据格式下的文本
+     * @param  {MIMETYPE} mimetype 데이터 형식
+     * @param  {String} text     원본 텍스트
+     * @return {String}          해당 데이터 형식에 맞는 텍스트
      * @example
      * 			var str = "123";
-     * 			str = process('application/km', str); // 返回的内容再经过MimeType判断会读取出其数据格式为application/km
-     * 			process('text/plain', str); // 若接受到一个非纯文本信息，则会将其转换为新的数据格式
+     * 			str = process('application/km', str); // 반환된 내용은 MimeType 판별을 거쳐 데이터 형식이 application/km으로 읽힘
+     * 			process('text/plain', str); // 일반 텍스트가 아닌 정보를 받으면 새 데이터 형식으로 변환
      */
     process: function(mimetype, text) {
         text = text || "";
@@ -133,10 +133,10 @@ MWF.xApplication.MinderEditor.ClipboardMimeType = new Class({
     },
 
     /**
-     * 注册数据类型的标识
+     * 데이터 형식 식별자 등록
      * @method registMimeTypeProtocol  	public
-     * @param  {String} type 数据类型
-     * @param  {String} sign 标识
+     * @param  {String} type 데이터 형식
+     * @param  {String} sign 식별자
      */
     registMimeTypeProtocol : function(type, sign) {
         if (sign && this.SIGN[sign]) {
@@ -150,14 +150,14 @@ MWF.xApplication.MinderEditor.ClipboardMimeType = new Class({
     },
 
     /**
-     * 获取已注册数据类型的协议
+     * 등록된 데이터 형식의 프로토콜 조회
      * @method getMimeTypeProtocol  	public
-     * @param  {String} type 数据类型
-     * @param  {String} text|undefiend  文本内容或不传入
+     * @param  {String} type 데이터 형식
+     * @param  {String} text|undefiend  텍스트 내용 또는 생략
      * @return {String|Function}
      * @example
-     * 			text若不传入则直接返回对应数据格式的处理(process)方法
-     * 			若传入文本则直接调用对应的process方法进行处理，此时返回处理后的内容
+     * 			text를 전달하지 않으면 해당 데이터 형식의 처리(process) 메서드를 바로 반환
+     * 			텍스트를 전달하면 해당 process 메서드를 바로 호출해 처리하고, 처리된 내용을 반환
      * 			var m = new MimeType();
      * 			var kmprocess = m.getMimeTypeProtocol('application/km');
      * 			kmprocess("123") === m.getMimeTypeProtocol('application/km', "123");
@@ -223,7 +223,7 @@ MWF.xApplication.MinderEditor.Clipboard = new Class({
 
 
         /**
-         * 由editor的receiver统一处理全部事件，包括clipboard事件
+         * editor의 receiver가 clipboard 이벤트를 포함한 모든 이벤트를 일괄 처리
          * @Editor: Naixor
          * @Date: 2015.9.24
          */
@@ -232,7 +232,7 @@ MWF.xApplication.MinderEditor.Clipboard = new Class({
         document.addEventListener('paste', this.beforePaste.bind(this));
     },
     /*
-     * 增加对多节点赋值粘贴的处理
+     * 여러 노드 복사·붙여넣기 처리 추가
      */
     encode: function (nodes) {
         var _nodes = [];
@@ -254,8 +254,8 @@ MWF.xApplication.MinderEditor.Clipboard = new Class({
                 case 'normal': {
                     var nodes = [].concat(this.minder.getSelectedNodes());
                     if (nodes.length) {
-                        // 这里由于被粘贴复制的节点的id信息也都一样，故做此算法
-                        // 这里有个疑问，使用node.getParent()或者node.parent会离奇导致出现非选中节点被渲染成选中节点，因此使用isAncestorOf，而没有使用自行回溯的方式
+                        // 붙여넣기로 복사된 노드의 id 정보가 모두 같으므로 이 알고리즘을 사용
+                        // 의문점: node.getParent()나 node.parent를 사용하면 선택되지 않은 노드가 선택된 노드로 렌더링되는 이상 현상이 생기므로, 직접 거슬러 올라가는 방식 대신 isAncestorOf를 사용
                         if (nodes.length > 1) {
                             var targetLevel;
                             nodes.sort(function(a, b) {
@@ -332,7 +332,7 @@ MWF.xApplication.MinderEditor.Clipboard = new Class({
 
             switch (state) {
                 case 'input': {
-                    // input状态下如果格式为application/km则不进行paste操作
+                    // input 상태에서 형식이 application/km이면 paste 작업을 하지 않음
                     if (!this.MimeType.isPureText(textData)) {
                         e.preventDefault();
                         return;
@@ -341,7 +341,7 @@ MWF.xApplication.MinderEditor.Clipboard = new Class({
                 }
                 case 'normal': {
                     /*
-                     * 针对normal状态下通过对选中节点粘贴导入子节点文本进行单独处理
+                     * normal 상태에서 선택한 노드에 붙여넣어 하위 노드 텍스트를 가져오는 경우를 별도 처리
                      */
                     var sNodes = this.minder.getSelectedNodes();
 
@@ -349,7 +349,7 @@ MWF.xApplication.MinderEditor.Clipboard = new Class({
                         var nodes = this.decode(this.MimeType.getPureText(textData));
                         var _node;
                         sNodes.forEach(function(node) {
-                            // 由于粘贴逻辑中为了排除子节点重新排序导致逆序，因此复制的时候倒过来
+                            // 붙여넣기 로직에서 하위 노드 재정렬로 순서가 뒤집히는 것을 막기 위해 복사할 때 역순으로 처리
                             for (var i = nodes.length-1; i >= 0; i--) {
                                 _node = this.minder.createNode(null, node);
                                 this.minder.importNode(_node, nodes[i]);
@@ -464,7 +464,7 @@ MWF.xApplication.MinderEditor.Input = new Class({
     setupPopmenu: function () {
         //popmenu.state('main').button({
         //    position: 'center',
-        //    label: '编辑',
+        //    label: '편집',
         //    key: 'F2',
         //    enable: function() {
         //        return minder.queryCommandState('text') != -1;
@@ -475,7 +475,7 @@ MWF.xApplication.MinderEditor.Input = new Class({
 
 
     /**
-     * 增加对字体的鉴别，以保证用户在编辑状态ctrl/cmd + b/i所触发的加粗斜体与显示一致
+     * 글꼴 판별 추가: 편집 상태에서 ctrl/cmd + b/i로 적용한 굵게·기울임이 표시와 일치하도록 보장
      * @editor Naixor
      * @Date 2015-12-2
      */
@@ -508,7 +508,7 @@ MWF.xApplication.MinderEditor.Input = new Class({
     },
 
     /**
-     * 增加对字体的鉴别，以保证用户在编辑状态ctrl/cmd + b/i所触发的加粗斜体与显示一致
+     * 글꼴 판별 추가: 편집 상태에서 ctrl/cmd + b/i로 적용한 굵게·기울임이 표시와 일치하도록 보장
      * @editor Naixor
      * @Date 2015-12-2
      */
@@ -530,9 +530,9 @@ MWF.xApplication.MinderEditor.Input = new Class({
     },
 
     /**
-     * 按照文本提交操作处理
-     * @Desc: 从其他节点复制文字到另一个节点时部分浏览器(chrome)会自动包裹一个span标签，这样试用一下逻辑出来的就不是text节点二是span节点因此导致undefined的情况发生
-     * @Warning: 下方代码使用[].slice.call来将HTMLDomCollection处理成为Array，ie8及以下会有问题
+     * 텍스트 제출 작업으로 처리
+     * @Desc: 다른 노드의 글자를 다른 노드로 복사할 때 일부 브라우저(chrome)가 자동으로 span 태그를 감싸므로, 아래 로직으로 얻는 것이 text 노드가 아닌 span 노드가 되어 undefined가 발생함
+     * @Warning: 아래 코드는 [].slice.call로 HTMLDomCollection을 Array로 변환하며, ie8 이하에서는 문제가 있음
      * @Editor: Naixor
      * @Date: 2015.9.16
      */
@@ -542,7 +542,7 @@ MWF.xApplication.MinderEditor.Input = new Class({
             ENTER_CHAR = '\n',
             STR_CHECK = /\S/,
             SPACE_CHAR = '\u0020',
-        // 针对FF,SG,BD,LB,IE等浏览器下SPACE的charCode存在为32和160的情况做处理
+        // FF, SG, BD, LB, IE 등 브라우저에서 SPACE의 charCode가 32와 160 두 가지인 경우를 처리
             SPACE_CHAR_REGEXP = new RegExp('(\u0020|' + String.fromCharCode(160) + ')'),
             BR = document.createElement('br');
         var isBold = false,
@@ -555,19 +555,19 @@ MWF.xApplication.MinderEditor.Input = new Class({
             str = textNodes[i];
 
             switch (Object.prototype.toString.call(str)) {
-                // 正常情况处理
+                // 일반적인 경우 처리
                 case '[object HTMLBRElement]': {
                     text += ENTER_CHAR;
                     break;
                 }
                 case '[object Text]': {
-                    // SG下会莫名其妙的加上&nbsp;影响后续判断，干掉！
+                    // SG에서는 이유 없이 &nbsp;가 붙어 이후 판단에 영향을 주므로 제거!
                     /**
-                     * FF下的wholeText会导致如下问题：
-                     *     |123| -> 在一个节点中输入一段字符，此时TextNode为[#Text 123]
-                     *     提交并重新编辑，在后面追加几个字符
-                     *     |123abc| -> 此时123为一个TextNode为[#Text 123, #Text abc]，但是对这两个任意取值wholeText均为全部内容123abc
-                     * 上述BUG仅存在在FF中，故将wholeText更改为textContent
+                     * FF의 wholeText는 다음 문제를 일으킴:
+                     *     |123| -> 노드에 문자열을 입력하면 TextNode는 [#Text 123]
+                     *     제출 후 다시 편집하여 뒤에 문자 몇 개를 추가
+                     *     |123abc| -> 이때 TextNode는 [#Text 123, #Text abc]이지만, 둘 중 어느 것의 wholeText를 가져와도 전체 내용 123abc가 됨
+                     * 위 BUG는 FF에만 있으므로 wholeText를 textContent로 변경
                      */
                     str = str.textContent.replace("&nbsp;", " ");
 
@@ -585,7 +585,7 @@ MWF.xApplication.MinderEditor.Input = new Class({
                     }
                     break;
                 }
-                // ctrl + b/i 会给字体加上<b>/<i>标签来实现黑体和斜体
+                // ctrl + b/i는 글꼴에 <b>/<i> 태그를 붙여 굵게와 기울임을 구현
                 case '[object HTMLElement]': {
                     switch (str.nodeName) {
                         case "B": {
@@ -603,25 +603,25 @@ MWF.xApplication.MinderEditor.Input = new Class({
                     i--;
                     break;
                 }
-                // 被增加span标签的情况会被处理成正常情况并会推交给上面处理
+                // span 태그가 추가된 경우는 일반적인 경우로 바꿔 위쪽 처리로 넘김
                 case '[object HTMLSpanElement]': {
                     [].splice.apply(textNodes, [i, 1].concat([].slice.call(str.childNodes)));
                     l = textNodes.length;
                     i--;
                     break;
                 }
-                // 若标签为image标签，则判断是否为合法url，是将其加载进来
+                // 태그가 image 태그이면 올바른 url인지 확인하고, 맞으면 불러옴
                 case '[object HTMLImageElement]': {
                     if (str.src) {
                         if (/http(|s):\/\//.test(str.src)) {
                             minder.execCommand("Image", str.src, str.alt);
                         } else {
-                            // data:image协议情况
+                            // data:image 프로토콜인 경우
                         }
                     };
                     break;
                 }
-                // 被增加div标签的情况会被处理成正常情况并会推交给上面处理
+                // div 태그가 추가된 경우는 일반적인 경우로 바꿔 위쪽 처리로 넘김
                 case '[object HTMLDivElement]': {
                     _divChildNodes = [];
                     for (var di = 0, l = str.childNodes.length; di < l; di++) {
@@ -650,7 +650,7 @@ MWF.xApplication.MinderEditor.Input = new Class({
                             text += "";
                         }
                     }
-                    // // 其他带有样式的节点被粘贴进来，则直接取textContent，若取不出来则置空
+                    // // 스타일이 있는 다른 노드가 붙여넣어지면 textContent를 바로 가져오고, 가져올 수 없으면 비움
                 }
             }
         };
@@ -675,9 +675,9 @@ MWF.xApplication.MinderEditor.Input = new Class({
     },
 
     /**
-     * 判断节点的文本信息是否是
-     * @Desc: 从其他节点复制文字到另一个节点时部分浏览器(chrome)会自动包裹一个span标签，这样使用以下逻辑出来的就不是text节点二是span节点因此导致undefined的情况发生
-     * @Notice: 此处逻辑应该拆分到 kityminder-core/core/data中去，单独增加一个对某个节点importJson的事件
+     * 노드의 텍스트 정보가 다음인지 판단
+     * @Desc: 다른 노드의 글자를 다른 노드로 복사할 때 일부 브라우저(chrome)가 자동으로 span 태그를 감싸므로, 아래 로직으로 얻는 것이 text 노드가 아닌 span 노드가 되어 undefined가 발생함
+     * @Notice: 이 로직은 kityminder-core/core/data로 분리해, 특정 노드에 importJson하는 이벤트를 별도로 추가해야 함
      * @Editor: Naixor
      * @Date: 2015.9.16
      */
@@ -705,7 +705,7 @@ MWF.xApplication.MinderEditor.Input = new Class({
             this.minder.fire("contentchange");
             this.minder.getRoot().renderTree();
 
-            // 无法被转换成脑图节点则不处理
+            // 마인드맵 노드로 변환할 수 없으면 처리하지 않음
             if (e.toString() !== 'Error: Invalid local format') {
                 throw e;
             }
@@ -714,8 +714,8 @@ MWF.xApplication.MinderEditor.Input = new Class({
 
     commitInputResult: function() {
         /**
-         * @Desc: 进行如下处理：
-         *             根据用户的输入判断是否生成新的节点
+         * @Desc: 다음과 같이 처리:
+         *             사용자 입력에 따라 새 노드 생성 여부를 판단
          *        fix #83 https://github.com/fex-team/kityminder-editor/issues/83
          * @Editor: Naixor
          * @Date: 2015.9.16
@@ -723,13 +723,13 @@ MWF.xApplication.MinderEditor.Input = new Class({
         var textNodes = [].slice.call(this.receiverElement.childNodes);
 
         /**
-         * @Desc: 增加setTimeout的原因：ie下receiverElement.innerHTML=""会导致后
-         * 		  面commitInputText中使用textContent报错，不要问我什么原因！
+         * @Desc: setTimeout을 추가한 이유: ie에서 receiverElement.innerHTML=""이 뒤쪽
+         * 		  commitInputText에서 textContent 사용 시 오류를 일으킴. 이유는 묻지 말 것!
          * @Editor: Naixor
          * @Date: 2015.12.14
          */
         setTimeout(function () {
-            // 解决过大内容导致SVG窜位问题
+            // 내용이 너무 커서 SVG 위치가 어긋나는 문제 해결
             this.receiverElement.innerHTML = "";
         }.bind(this), 0);
         var node = this.minder.getSelectedNode();
@@ -766,13 +766,13 @@ MWF.xApplication.MinderEditor.Input = new Class({
     }
 });
 
-//根据按键控制状态机的跳转
+//키 입력에 따라 상태 머신 전환 제어
 MWF.xApplication.MinderEditor.JumpingInEditMode = function( editor ) {
 /**
- * @Desc: 下方使用receiver.enable()和receiver.disable()通过
- *        修改div contenteditable属性的hack来解决开启热核后依然无法屏蔽浏览器输入的bug;
- *        特别: win下FF对于此种情况必须要先blur在focus才能解决，但是由于这样做会导致用户
- *             输入法状态丢失，因此对FF暂不做处理
+ * @Desc: 아래에서 receiver.enable()과 receiver.disable()로
+ *        div의 contenteditable 속성을 바꾸는 hack을 사용해, 핫박스를 연 뒤에도 브라우저 입력을 막지 못하는 bug를 해결;
+ *        특히: win의 FF는 이 경우 먼저 blur한 뒤 focus해야 해결되지만, 그러면 사용자의
+ *             입력기 상태가 사라지므로 FF는 당분간 처리하지 않음
  * @Editor: Naixor
  * @Date: 2015.09.14
  */
@@ -791,17 +791,17 @@ MWF.xApplication.MinderEditor.JumpingInEditMode = function( editor ) {
         // a-zA-Z
         if (e.keyCode >= 65 && e.keyCode <= 90) return true;
 
-        // 0-9 以及其上面的符号
+        // 0-9 및 그 위의 기호
         if (e.keyCode >= 48 && e.keyCode <= 57) return true;
 
-        // 小键盘区域 (除回车外)
+        // 숫자 키패드 영역 (Enter 제외)
         if (e.keyCode != 108 && e.keyCode >= 96 && e.keyCode <= 111) return true;
 
-        // 小键盘区域 (除回车外)
+        // 숫자 키패드 영역 (Enter 제외)
         // @yinheli from pull request
         if (e.keyCode != 108 && e.keyCode >= 96 && e.keyCode <= 111) return true;
 
-        // 输入法
+        // 입력기
         if (e.keyCode == 229 || e.keyCode === 0) return true;
 
         return false;
@@ -810,12 +810,12 @@ MWF.xApplication.MinderEditor.JumpingInEditMode = function( editor ) {
     // normal -> *
     receiver.listen('normal', function(e) {
         //console.log(  "receiver.listen('normal'" );
-        // 为了防止处理进入edit模式而丢失处理的首字母,此时receiver必须为enable
+        // edit 모드 진입 처리 중 첫 글자를 잃지 않도록 이때 receiver는 반드시 enable 상태여야 함
         receiver.enable();
         // normal -> popmenu
         if (e.is('Space')) {
             e.preventDefault();
-            // safari下Space触发popmenu,然而这时Space已在receiver上留下作案痕迹,因此抹掉
+            // safari에서는 Space가 popmenu를 띄우는데, 이때 Space가 receiver에 흔적을 남기므로 지움
             if (kity.Browser.safari) {
                 receiverElement.innerHTML = '';
             }
@@ -885,11 +885,11 @@ MWF.xApplication.MinderEditor.JumpingInEditMode = function( editor ) {
 
 
     //////////////////////////////////////////////
-    /// 右键呼出热盒
-    /// 判断的标准是：按下的位置和结束的位置一致
+    /// 마우스 오른쪽 버튼으로 핫박스 호출
+    /// 판단 기준: 누른 위치와 뗀 위치가 같음
     //////////////////////////////////////////////
     var downX, downY;
-    var MOUSE_RB = 2; // 右键
+    var MOUSE_RB = 2; // 마우스 오른쪽 버튼
 
     container.addEventListener('mousedown', function(e) {
         if (e.button == MOUSE_RB) {
@@ -931,7 +931,7 @@ MWF.xApplication.MinderEditor.JumpingInEditMode = function( editor ) {
         fsm.jump('popmenu', 'content-menu');
     }, false);
 
-    // 阻止热盒事件冒泡，在热盒正确执行前导致热盒关闭
+    // 핫박스가 제대로 실행되기 전에 닫히지 않도록 핫박스 이벤트 버블링 차단
     //popmenu.$element.addEventListener('mousedown', function(e) {
     //    e.stopPropagation();
     //});

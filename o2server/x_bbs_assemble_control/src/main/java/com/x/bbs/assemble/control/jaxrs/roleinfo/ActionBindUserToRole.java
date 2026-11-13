@@ -36,7 +36,7 @@ public class ActionBindUserToRole extends BaseAction {
 			wrapIn = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionRoleInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+			Exception exception = new ExceptionRoleInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -50,7 +50,7 @@ public class ActionBindUserToRole extends BaseAction {
 		}
 		if (check) {
 			if ( ListTools.isNotEmpty( wrapIn.getBindObjectArray() )) {
-				// 遍历所有的对象，检查对象是否真实存在
+				// 모든 대상을 순회하며 실제 존재 여부 확인
 				for (BindObject bindObject : wrapIn.getBindObjectArray()) {
 					if ( "人员".equals(bindObject.getObjectType()) ) {
 						try {
@@ -103,7 +103,7 @@ public class ActionBindUserToRole extends BaseAction {
 			}
 		}
 
-		// 校验人员和角色编码的合法性
+		// 사용자와 역할 코드의 유효성 검증
 		if (check) {
 			try {
 				roleInfoService.bindUserToRole( wrapIn.getBindRoleCode(), wrapIn.getBindObjectArray() );

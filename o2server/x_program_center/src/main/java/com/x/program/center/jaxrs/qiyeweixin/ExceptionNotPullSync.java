@@ -7,6 +7,6 @@ class ExceptionNotPullSync extends LanguagePromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionNotPullSync() {
-		super("没有启用从企业微信的拉入同步.");
+		super("WeCom에서 가져오는 동기화가 사용 설정되어 있지 않습니다.");
 	}
 }

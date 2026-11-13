@@ -55,7 +55,7 @@ public class TouchDetained extends AbstractJob {
 					triggerProcessing(targets, total, triggerProcessingCount);
 				}
 			} while (!targets.isEmpty());
-			LOGGER.print("完成{}个停滞工作触发,{}个流转到下一个环节, 耗时:{}.", total.intValue(), triggerProcessingCount.intValue(),
+			LOGGER.print("정체 업무 문서 {}건 트리거 완료, {}건 다음 단계로 진행, 소요 시간: {}.", total.intValue(), triggerProcessingCount.intValue(),
 					stamp.consumingMilliseconds());
 		} catch (Exception e) {
 			throw new JobExecutionException(e);

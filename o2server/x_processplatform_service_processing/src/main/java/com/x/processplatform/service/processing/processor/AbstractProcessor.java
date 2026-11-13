@@ -44,7 +44,7 @@ import com.x.processplatform.service.processing.configurator.ProcessingConfigura
 
 /***
  * 
- * 实现3个时间的基础功能
+ * 3가지 시간의 기본 기능 구현
  *
  */
 public abstract class AbstractProcessor extends AbstractBaseProcessor {
@@ -57,7 +57,7 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 
 	public String arrive(String workId, ProcessingConfigurator processingConfigurator,
 			ProcessingAttributes processingAttributes) {
-		// 返回值,如果返回值不为空,将继续循环
+		// 반환값, 반환값이 비어 있지 않으면 루프 계속
 		try {
 			Work work = this.entityManagerContainer().find(workId, Work.class);
 			if (null == work) {
@@ -74,23 +74,23 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 						work.getDestinationActivity());
 			}
 			AeiObjects aeiObjects = new AeiObjects(this.business(), work, activity, processingAttributes);
-			// 清空可能的Manual活动预期人员
+			// 남아 있을 수 있는 Manual 활동 예상 사용자 비우기
 			this.arriveCleanManualTaskIdentityMatrix(aeiObjects);
-			// 清空可能的Manual活动授权信息
+			// 남아 있을 수 있는 Manual 활동 위임 정보 비우기
 			this.arriveCleanManualEmpowerMap(aeiObjects);
-			// 计算是否经过人工节点
+			// 수동 노드 경유 여부 계산
 			this.arriveUpdateWorkThroughManual(aeiObjects);
-			// 清空BeforeExecuted活动执行一次事件
+			// BeforeExecuted 활동 1회 실행 이벤트 비우기
 			work.setBeforeExecuted(false);
 			aeiObjects.getUpdateWorks().add(work);
 			this.callBeforeArriveScript(aeiObjects);
 			this.arriveActivity(aeiObjects);
-			// 创建待阅和参阅
+			// 열람 대기 및 참조 생성
 			aeiObjects.getCreateReads().addAll(this.concreteRead(aeiObjects));
 			aeiObjects.getCreateReviews().addAll(this.concreteReview(aeiObjects));
-			// 主方法,进行业务运行
+			// 주 메서드, 비즈니스 실행
 			work = this.arriveProcessing(aeiObjects);
-			// 主方法结束
+			// 주 메서드 종료
 			if (null == work) {
 				throw new IllegalStateException("arrvie return empty, work{id:" + workId + "}.");
 			}
@@ -106,10 +106,10 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 			}
 			aeiObjects.commit();
 			this.arriveCommitted(aeiObjects);
-			// 运行AfterArriveScript事件
+			// AfterArriveScript 이벤트 실행
 			if (this.callAfterArriveScript(aeiObjects) && aeiObjects.commitData()) {
-				aeiObjects.executeProjection();// 将可能修改的数据进行映射
-				// 执行AfterArriveScript中的代码可能修改了data数据.
+				aeiObjects.executeProjection();// 변경되었을 수 있는 데이터 매핑
+				// AfterArriveScript의 코드 실행 시 data 데이터가 수정되었을 수 있음.
 				aeiObjects.entityManagerContainer().commit();
 			}
 			return work.getId();
@@ -212,24 +212,24 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 						work.getActivity());
 			}
 			AeiObjects aeiObjects = new AeiObjects(this.business(), work, activity, processingAttributes);
-			// 如果是撤回到达这个环节会跳过arrive环节,所以这里要再次给activityUnique进行赋值
+			// 회수로 이 단계에 도착한 경우 arrive 단계를 건너뛰므로 여기서 activityUnique를 다시 할당해야 함
 			work.setActivityUnique(aeiObjects.getActivity().getUnique());
 			aeiObjects.getUpdateWorks().add(work);
-			// 如果是调度路由,需要重新设置froceRoute
+			// 스케줄링 라우팅이면 froceRoute 재설정 필요
 			if (BooleanUtils.isNotTrue(work.getBeforeExecuted())) {
-				// 仅执行一次BeforeExecuteScript中的代码
+				// BeforeExecuteScript의 코드는 1회만 실행
 				this.callBeforeExecuteScript(aeiObjects);
 				work.setBeforeExecuted(true);
 			}
 			List<Work> works = new ArrayList<>();
-			// 8.2版本以前没有使用destinationActivity作为强制路由,如果这里不单独判断,老版本的数据会原地转圈,在同一环节再次进入,重新生成activityToken,现象就是所有待办会重新生成.
-			// 调度reroute靠此代码跳过执行.
+			// 8.2 이전 버전은 destinationActivity를 강제 라우팅으로 사용하지 않았음, 여기서 별도로 판단하지 않으면 구버전 데이터가 제자리에서 맴돌며 같은 단계에 다시 진입해 activityToken을 재생성하고, 그 결과 모든 결재 대기가 재생성됨.
+			// 스케줄링 reroute는 이 코드로 실행을 건너뜀.
 			if (StringUtils.isNotEmpty(work.getDestinationActivity())
 					&& Objects.nonNull(work.getDestinationActivityType())
 					&& BooleanUtils.isTrue(aeiObjects.getWork().getForceRouteEnable())) {
 				works.add(work);
 			} else {
-				// 运行业务方法
+				// 비즈니스 메서드 실행
 				works.addAll(this.executeProcessing(aeiObjects));
 			}
 			if (ListTools.isNotEmpty(works)) {
@@ -238,11 +238,11 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 				}
 			}
 			aeiObjects.commit();
-			// 发送在队列中的待办消息, 待办消息必须在数据提交后发送,否则会不到待办
+			// 큐에 있는 결재 대기 메시지 발송, 결재 대기 메시지는 데이터 커밋 후 발송해야 함, 그렇지 않으면 결재 대기가 조회되지 않음
 			this.executeCommitted(aeiObjects, works);
 			if (ListTools.isNotEmpty(works) && callAfterExecuteScript(aeiObjects) && aeiObjects.commitData()) {
-				aeiObjects.executeProjection();// 将可能修改的数据进行映射
-				// 已经有返回的work将要离开当前环节,执行AfterExecuteScript中的代码可能修改了data数据.
+				aeiObjects.executeProjection();// 변경되었을 수 있는 데이터 매핑
+				// 반환된 work가 현재 단계를 떠나려 함, AfterExecuteScript의 코드 실행 시 data 데이터가 수정되었을 수 있음.
 				aeiObjects.entityManagerContainer().commit();
 			}
 //			if (StringUtils.isNotEmpty(aeiObjects.getProcess().getAfterExecuteScript())
@@ -308,21 +308,21 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 			Activity activity = this.business().element().get(work.getActivity(),
 					ActivityType.getClassOfActivityType(activityType));
 			if (null == activity) {
-				// 如果当前活动被删除,根据work创建一个虚拟活动;
+				// 현재 활동이 삭제되었으면 work를 기준으로 가상 활동 생성;
 				activity = this.createVirtualActivity(work);
 			}
 			AeiObjects aeiObjects = new AeiObjects(this.business(), work, activity, processingAttributes);
 			aeiObjects.getUpdateWorks().add(work);
-			// 运行查询路由前脚本
+			// 라우팅 조회 전 스크립트 실행
 			this.callBeforeInquireScript(aeiObjects);
-			// 运行主方法
+			// 주 메서드 실행
 			Route selectRoute = this.inquireProcessing(aeiObjects);
-			// 主方法运行完成
+			// 주 메서드 실행 완료
 			if (null == selectRoute) {
 				return results;
 			}
 			List<Work> works = new ArrayList<>();
-			// 运行查询路由后脚本
+			// 라우팅 조회 후 스크립트 실행
 			work.setDestinationActivity(selectRoute.getActivity());
 			work.setDestinationActivityType(selectRoute.getActivityType());
 			work.setDestinationRoute(selectRoute.getId());
@@ -343,10 +343,10 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 			}
 			aeiObjects.commit();
 			this.inquireCommitted(aeiObjects);
-			// 运行 AfterInquireScript事件
+			// AfterInquireScript 이벤트 실행
 			if (this.callAfterInquireScript(aeiObjects) && aeiObjects.commitData()) {
-				aeiObjects.executeProjection();// 将可能修改的数据进行映射
-				// 执行AfterInquireScript中的代码可能修改了data数据.
+				aeiObjects.executeProjection();// 변경되었을 수 있는 데이터 매핑
+				// AfterInquireScript의 코드 실행 시 data 데이터가 수정되었을 수 있음.
 				aeiObjects.entityManagerContainer().commit();
 			}
 		} catch (Exception e) {
@@ -356,7 +356,7 @@ public abstract class AbstractProcessor extends AbstractBaseProcessor {
 	}
 
 	/**
-	 * 如果活动不存在,那么创建一个临时活动替代
+	 * 활동이 없으면 임시 활동을 생성해 대체
 	 * 
 	 * @param work
 	 * @return

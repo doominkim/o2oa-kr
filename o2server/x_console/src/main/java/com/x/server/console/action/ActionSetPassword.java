@@ -22,7 +22,7 @@ public class ActionSetPassword extends ActionBase {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActionSetPassword.class);
 
 	public boolean execute(String oldPassword, String newPassword) throws Exception {
-		/** 如果初始密码没有修改就设置为初始密码 */
+		/** 초기 비밀번호를 변경하지 않았으면 초기 비밀번호로 설정 */
 		if (StringUtils.equals(Config.token().getPassword(), Token.initPassword)) {
 			oldPassword = Token.initPassword;
 		}

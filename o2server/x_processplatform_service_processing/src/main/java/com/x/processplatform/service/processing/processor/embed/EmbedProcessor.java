@@ -40,9 +40,9 @@ public class EmbedProcessor extends AbstractEmbedProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Embed embed) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.embedArrive(aeiObjects.getWork().getActivityToken(), embed));
-		// 清理标识
+		// 식별자 정리
 		aeiObjects.getWork().setEmbedCompleted("");
 		aeiObjects.getWork().setEmbedTargetWork("");
 		aeiObjects.getWork().setEmbedTargetJob("");
@@ -56,7 +56,7 @@ public class EmbedProcessor extends AbstractEmbedProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Embed embed) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.embedExecute(aeiObjects.getWork().getActivityToken(), embed));
 		List<Work> results = new ArrayList<>();
 		int blinker = blinker(BooleanUtils.isTrue(embed.getWaitUntilCompleted()),
@@ -173,7 +173,7 @@ public class EmbedProcessor extends AbstractEmbedProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Embed embed) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.embedInquire(aeiObjects.getWork().getActivityToken(), embed));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
@@ -184,9 +184,9 @@ public class EmbedProcessor extends AbstractEmbedProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

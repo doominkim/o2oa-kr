@@ -33,9 +33,9 @@ public class ActionLeaveTypePost extends BaseAction {
             ActionResult<Wo> result = new ActionResult<>();
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isBlank(wi.getName())) {
-                throw new ExceptionEmptyParameter("假期名称");
+                throw new ExceptionEmptyParameter("휴가 이름");
             }
-            // 名称不能重复
+            // 이름은 중복될 수 없습니다
             List<AttendanceV2LeaveType> checkRepetitive = emc.listEqualAndEqual(
                     AttendanceV2LeaveType.class,
                     AttendanceV2LeaveType.name_FIELDNAME, wi.getName(),
@@ -43,19 +43,19 @@ public class ActionLeaveTypePost extends BaseAction {
             if (checkRepetitive != null && !checkRepetitive.isEmpty()) {
                 for (AttendanceV2LeaveType check : checkRepetitive) {
                     if (check.getName().equals(wi.getName()) && !check.getId().equals(wi.getId())) {
-                        throw new ExceptionWithMessage("假期名称已存在");
+                        throw new ExceptionWithMessage("휴가 이름이 이미 있습니다");
                     }
                 }
             }
             if (StringUtils.isBlank(wi.getQuotaType()) || (
                     !QuotaTypeEnum.QUOTA.getValue().equals(wi.getQuotaType())
                     && !QuotaTypeEnum.UNLIMITED.getValue().equals(wi.getQuotaType()))) {
-                throw new ExceptionEmptyParameter("额度类型");
+                throw new ExceptionEmptyParameter("한도 유형");
             }
             if (StringUtils.isBlank(wi.getUnit()) || (
                     !UnitTypeEnum.DAY.getValue().equals(wi.getUnit())
                     && !UnitTypeEnum.HOUR.getValue().equals(wi.getUnit()))) {
-                throw new ExceptionEmptyParameter("单位");
+                throw new ExceptionEmptyParameter("단위");
             }
             AttendanceV2LeaveType leaveType = Wi.copier.copy(wi);
             emc.beginTransaction(AttendanceV2LeaveType.class);

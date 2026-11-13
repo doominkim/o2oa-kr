@@ -7,6 +7,6 @@ class ExceptionRevealNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionRevealNotExist(String flag) {
-		super("展现: {} 不存在.", flag);
+		super("표시: {}이(가) 없습니다.", flag);
 	}
 }

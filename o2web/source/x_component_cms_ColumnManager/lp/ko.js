@@ -289,7 +289,7 @@ MWF.xApplication.cms.ColumnManager.LP = {
     "cancelEdit": "편집 취소",
     "enableProcess" : "결재 프로세스 고정",
     "disableProcess": "결재 프로세스 사용 안 함",
-    "documentTypeSelectValue": ["信息","数据"],
+    "documentTypeSelectValue": ["정보","데이터"],
     "documentTypeSelectText": ["게시글","데이터"],
     "sendNotifySelectText": ["예","아니요"],
     "sendNotifySelectValue": ["true","false"],

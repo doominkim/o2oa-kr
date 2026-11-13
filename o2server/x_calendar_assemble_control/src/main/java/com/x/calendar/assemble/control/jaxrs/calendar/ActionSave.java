@@ -64,7 +64,7 @@ public class ActionSave extends BaseAction {
 		}
 		
 		if( check ) {
-			//校验target是否正常
+			//target 정상 여부 확인
 			if( "UNIT".equals( wi.getType() )) {
 				Unit unit = null;
 				if( StringUtils.isNotEmpty( wi.getTarget() )) {
@@ -98,7 +98,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统将用户传入的数据转换为日历信息对象时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "사용자가 입력한 데이터를 캘린더 정보 객체로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

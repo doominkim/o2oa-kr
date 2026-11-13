@@ -39,12 +39,12 @@ public class ActionListWithForum extends BaseAction {
 				result.error( exception );
 			}
 		}
-		if( check ){ //查询论坛信息是否存在
+		if( check ){ //포럼 정보 존재 여부 조회
 			try{
 				forumInfo = forumInfoServiceAdv.get( forumId );
 			}catch( Exception e ){
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess( e, "系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + forumId );
+				Exception exception = new ExceptionSectionInfoProcess( e, "ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + forumId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -57,7 +57,7 @@ public class ActionListWithForum extends BaseAction {
 			}
 		}
 		if( check ){
-			//从数据库查询主版块列表
+			//데이터베이스에서 상위 게시판 목록 조회
 			try {
 				sectionInfoList = sectionInfoServiceAdv.listMainSectionByForumId( forumId );
 				if (sectionInfoList == null) {
@@ -65,7 +65,7 @@ public class ActionListWithForum extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess( e, "根据指定论坛分区ID查询所有主版块信息时发生异常.Forum:" + forumId );
+				Exception exception = new ExceptionSectionInfoProcess( e, "포럼 분류 ID로 전체 상위 섹션 정보를 조회하는 중 오류가 발생했습니다. Forum:" + forumId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -83,7 +83,7 @@ public class ActionListWithForum extends BaseAction {
 					}
 					result.setData(wraps);
 				} catch (Exception e) {
-					Exception exception = new ExceptionSectionInfoProcess( e, "系统在转换所有BBS版块信息为输出对象时发生异常." );
+					Exception exception = new ExceptionSectionInfoProcess( e, "BBS 섹션 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}		
@@ -100,17 +100,17 @@ public class ActionListWithForum extends BaseAction {
 		
 		public static WrapCopier< BBSSectionInfo, Wo > copier = WrapCopierFactory.wo( BBSSectionInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String sectionVisibleResult ;
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String replyPublishResult ;
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String subjectPublishResult ;
 		
-		//版块的子版块信息列表
-		@FieldDescribe("子版块列表.")
+		//게시판의 하위 게시판 정보 목록
+		@FieldDescribe("하위 게시판 목록.")
 		private List<Wo> subSections = null;
 
 		public List<Wo> getSubSections() {

@@ -13,28 +13,28 @@ public class ActionFilterAttributeFilterWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 3467078298152132280L;
 
-	@FieldDescribe("可选择的应用.")
-	@Schema(description = "可选择的应用.")
+	@FieldDescribe("선택 가능한 앱.")
+	@Schema(description = "선택 가능한 앱.")
 	private List<NameValueCountPair> applicationList = new ArrayList<>();
 
-	@FieldDescribe("可选择的流程.")
-	@Schema(description = "可选择的流程.")
+	@FieldDescribe("선택 가능한 프로세스.")
+	@Schema(description = "선택 가능한 프로세스.")
 	private List<NameValueCountPair> processList = new ArrayList<>();
 
-	@FieldDescribe("可选择的组织.")
-	@Schema(description = "可选择的组织.")
+	@FieldDescribe("선택 가능한 조직.")
+	@Schema(description = "선택 가능한 조직.")
 	private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-	@FieldDescribe("可选择的开始月份.")
-	@Schema(description = "可选择的开始月份.")
+	@FieldDescribe("선택 가능한 시작 월.")
+	@Schema(description = "선택 가능한 시작 월.")
 	private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
-	@FieldDescribe("可选择的活动节点.")
-	@Schema(description = "可选择的活动节点.")
+	@FieldDescribe("선택 가능한 활동 노드.")
+	@Schema(description = "선택 가능한 활동 노드.")
 	private List<NameValueCountPair> activityNameList = new ArrayList<>();
 
-	@FieldDescribe("可选择的完成状态.")
-	@Schema(description = "可选择的完成状态.")
+	@FieldDescribe("선택 가능한 완료 상태.")
+	@Schema(description = "선택 가능한 완료 상태.")
 	private List<NameValueCountPair> completedList = new ArrayList<>();
 
 	public List<NameValueCountPair> getCompletedList() {

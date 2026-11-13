@@ -72,7 +72,7 @@ public class SchedulerBuilder {
 		scheduler.scheduleJob(jobDetail, trigger);
 	}
 
-	/* 更新node节点applications 和 选择center主节点 */
+	/* node 노드 applications 업데이트 및 center 주 노드 선택 */
 	private static void registApplicationsAndVoteCenterTask(String scheduleGroup, Scheduler scheduler)
 			throws Exception {
 		JobDetail jobDetail = JobBuilder.newJob(RegistApplicationsAndVoteCenterTask.class)

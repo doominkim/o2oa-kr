@@ -3,11 +3,11 @@ package com.x.processplatform.assemble.surface;
 import com.x.base.core.project.gson.GsonPropertyObject;
 
 public abstract class WorkCompletedControl extends GsonPropertyObject {
-	/* 是否可以看到 */
+	/* 조회 가능 여부 */
 	private Boolean allowVisit;
-	/* 是否可以处理待阅 */
+	/* 열람 대기 처리 가능 여부 */
 	private Boolean allowReadProcessing;
-	/* 是否可以删除 */
+	/* 삭제 가능 여부 */
 	private Boolean allowDelete;
 
 	public Boolean getAllowVisit() {
@@ -34,6 +34,6 @@ public abstract class WorkCompletedControl extends GsonPropertyObject {
 		this.allowDelete = allowDelete;
 	}
 
-	/** 是否可以在管理界面直接尝试流转文件 */
+	/** 관리 화면에서 문서 진행 직접 시도 가능 여부 */
 
 }

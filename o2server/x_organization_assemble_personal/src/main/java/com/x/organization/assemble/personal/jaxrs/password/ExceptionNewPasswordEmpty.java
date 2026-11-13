@@ -7,7 +7,7 @@ class ExceptionNewPasswordEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionNewPasswordEmpty() {
-		super("新密码不能为空.");
+		super("새 비밀번호는 비워 둘 수 없습니다.");
 	}
 
 }

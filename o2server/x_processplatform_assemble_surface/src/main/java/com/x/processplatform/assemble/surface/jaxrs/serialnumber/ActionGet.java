@@ -42,7 +42,7 @@ class ActionGet extends BaseAction {
 		static WrapCopier<SerialNumber, Wo> copier = WrapCopierFactory.wo(SerialNumber.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("流程名称")
+		@FieldDescribe("프로세스 이름")
 		private String processName;
 
 		public String getProcessName() {

@@ -19,13 +19,13 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-@JaxrsDescribe("配置开放接口.")
+@JaxrsDescribe("개방 인터페이스 설정.")
 @Path("config-open")
 public class ConfigOpenAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConfigOpenAction.class);
 
-	@JaxrsMethodDescribe(value = "获取是否允许导出设计的配置.", action = ActionGetDisableExportEnable.class)
+	@JaxrsMethodDescribe(value = "디자인 내보내기 허용 설정 조회.", action = ActionGetDisableExportEnable.class)
 	@GET
 	@Path("get/disable/export/enable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

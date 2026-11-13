@@ -1,5 +1,5 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class $Input 组件类，此类为所有输入组件的父类
+/** @class $Input 컴포넌트 클래스, 모든 입력 컴포넌트의 부모 클래스
  * @hideconstructor
  * @o2category FormComponents
 * @extends MWF.xApplication.process.Xform.$Module
@@ -24,7 +24,7 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
         this.nodeHtml = this.node.get("html");
     },
 	_loadUserInterface: function(){
-        if ( this.isSectionMergeRead() ) { //区段合并显示
+        if ( this.isSectionMergeRead() ) { //구간 병합 표시
             this._loadMergeReadNode();
         }else{
             if( this.isSectionMergeEdit() ){
@@ -77,9 +77,9 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
         }
     },
     /**
-     * @summary 重新加载组件。会执行postLoad事件。
+     * @summary 컴포넌트 다시 로드. postLoad 이벤트가 실행됨.
      * @example
-     * this.form.get("fieldId").reload(); //重新加载事件
+     * this.form.get("fieldId").reload(); //다시 로드
      */
     reload: function(){
         if( this.iconNode ){
@@ -133,7 +133,7 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
         if (!v){
             if (this.json.description){
                 var size, w;
-                if( this.node.offsetParent === null ){ //隐藏
+                if( this.node.offsetParent === null ){ //숨김
                     size = { y: 26 }
                 }else{
                     size = this.node.getFirst().getSize();
@@ -144,7 +144,7 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
                 }
 
                 /**
-                 * @summary 描述信息节点，允许用户手工输入的组件才有此节点，只读情况下无此节点.
+                 * @summary 설명 정보 노드, 사용자가 직접 입력할 수 있는 컴포넌트에만 있으며 읽기 전용일 때는 없음.
                  * @member {Element}
                  */
                 this.descriptionNode = new Element("div", {"styles": this.form.css.descriptionNode, "text": this.json.description}).inject(this.node);
@@ -328,10 +328,10 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
     _beforeReloaded: function(){},
     _afterReloaded: function(){},
     /**
-     * @summary 判断组件是否只读.
+     * @summary 컴포넌트가 읽기 전용인지 판단.
      * @example
      * var readonly = this.form.get('subject').isReadonly();
-     * @return {Boolean} 是否只读.
+     * @return {Boolean} 읽기 전용 여부.
      */
 	isReadonly : function(){
         return !!(!this.isEditable || this.readonly || this.json.isReadonly || this.form.json.isReadonly || this.json.showMode==="read" || this.isSectionMergeRead());
@@ -344,46 +344,46 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
 		return {"value": [value || ""] , "text": [text || value || ""]};
 	},
     /**
-     * @summary 判断组件值是否为空.
+     * @summary 컴포넌트 값이 비어 있는지 판단.
      * @example
      * if( this.form.get('subject').isEmpty() ){
-     *     this.form.notice('标题不能为空', 'warn');
+     *     this.form.notice('제목은 비워 둘 수 없습니다.', 'warn');
      * }
-     * @return {Boolean} 值是否为空.
+     * @return {Boolean} 값이 비어 있는지 여부.
      */
     isEmpty : function(){
 	    var data = this.getData();
 	    return !data || !data.trim();
     },
     /**
-     * 在脚本中使用 this.data[fieldId] 也可以获取组件值。
-     * 区别如下：<br/>
-     * 1、当使用Promise的时候<br/>
-     * 使用异步函数生成器（Promise）为组件赋值的时候，用getData方法立即获取数据，可能返回修改前的值，当Promise执行完成以后，会返回修改后的值。<br/>
-     * this.data[fieldId] 立即获取数据，可能获取到异步函数生成器，当Promise执行完成以后，会返回修改后的值。<br/>
-     * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|具体差异请查看链接}<br/>
-     * 2、当表单上没有对应组件的时候，可以使用this.data[fieldId]获取值，但是this.form.get('fieldId')无法获取到组件。
-     * @summary 获取组件值。
+     * 스크립트에서 this.data[fieldId]로도 컴포넌트 값을 가져올 수 있음.
+     * 차이는 다음과 같음:<br/>
+     * 1. Promise를 사용하는 경우<br/>
+     * 비동기 함수 생성기(Promise)로 컴포넌트에 값을 할당할 때 getData 메서드로 즉시 가져오면 수정 전 값이 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+     * this.data[fieldId]로 즉시 가져오면 비동기 함수 생성기가 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+     * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|자세한 차이는 링크 참고}<br/>
+     * 2. 양식에 해당 컴포넌트가 없을 때는 this.data[fieldId]로 값을 가져올 수 있지만, this.form.get('fieldId')로는 컴포넌트를 가져올 수 없음.
+     * @summary 컴포넌트 값 가져오기.
      * @example
-     * var data = this.form.get('fieldId').getData(); //没有使用promise的情况、
+     * var data = this.form.get('fieldId').getData(); //Promise를 사용하지 않는 경우,
      * @example
-     *  //如果无法确定表单上是否有组件，需要判断
+     *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
      *  var data;
-     *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+     *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
      *      data = this.form.get('fieldId').getData();
      *  }else{
-     *      data = this.data['fieldId']; //直接从数据中获取字段值
+     *      data = this.data['fieldId']; //데이터에서 필드 값을 직접 가져오기
      *  }
      * @example
-     *  //使用Promise的情况
+     *  //Promise를 사용하는 경우
      *  var field = this.form.get("fieldId");
-     *  var dict = new this.Dict("test"); //test为数据字典名称
-     *  var promise = dict.get("tools", true); //异步使用数据字典的get方法时返回Promise，参数true表示异步
+     *  var dict = new this.Dict("test"); //test는 데이터 사전 이름
+     *  var promise = dict.get("tools", true); //데이터 사전 get 메서드를 비동기로 사용하면 Promise 반환, 인자 true는 비동기를 의미
      *  promise.then( function(){
-     *      var data = field.getData(); //此时由于异步请求已经执行完毕，getData方法获取到了数据字典的值
+     *      var data = field.getData(); //이 시점에는 비동기 요청이 완료되어 getData 메서드로 데이터 사전 값을 가져옴
      *  })
      *  field.setData( promise );
-     * @return 组件的数据.
+     * @return 컴포넌트 데이터.
      */
 	getData: function(when){
         if (this.json.compute == "save") this._setValue(this._computeValue());
@@ -397,32 +397,32 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
         }
     },
     // /**
-    //  * @summary 重置组件的值为默认值或置空。
+    //  * @summary 컴포넌트 값을 기본값으로 재설정하거나 비움.
     //  *  @example
     //  * this.form.get('subject').resetData();
     //  */
     resetData: function(){
         this.setData(this.getValue());
     },
-    /**当参数为Promise的时候，请参考文档: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|使用Promise处理表单异步}<br/>
-     * 当表单上没有对应组件的时候，可以使用this.data.add(fieldId, data, true) 赋值。
-     * @summary 为组件赋值。
+    /**인자가 Promise일 때는 문서 참고: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|Promise로 양식 비동기 처리}<br/>
+     * 양식에 해당 컴포넌트가 없을 때는 this.data.add(fieldId, data, true)로 값을 할당할 수 있음.
+     * @summary 컴포넌트에 값 할당.
      * @param data{String|Promise} .
-     * @param fireChange{boolean} 可选，是否触发change事件，默认false.
+     * @param fireChange{boolean} 선택, change 이벤트 발생 여부, 기본값 false.
      * @example
-     *  this.form.get("fieldId").setData("test"); //赋文本值
+     *  this.form.get("fieldId").setData("test"); //텍스트 값 할당
      * @example
-     *  //如果无法确定表单上是否有组件，需要判断
-     *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+     *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
+     *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
      *      this.form.get('fieldId').setData( data );
      *  }else{
      *      this.data.add(fieldId, data, true);
      *  }
      * @example
-     *  //使用Promise
+     *  //Promise 사용
      *  var field = this.form.get("fieldId");
-     *  var dict = new this.Dict("test"); //test为数据字典名称
-     *  var promise = dict.get("tools", true); //异步使用数据字典的get方法时返回Promise，参数true表示异步
+     *  var dict = new this.Dict("test"); //test는 데이터 사전 이름
+     *  var promise = dict.get("tools", true); //데이터 사전 get 메서드를 비동기로 사용하면 Promise 반환, 인자 true는 비동기를 의미
      *  field.setData( promise );
      */
 	setData: function(data, fireChange){
@@ -491,7 +491,7 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
         var node;
         if( this.form.json.errorStyle ){
             if( this.form.json.errorStyle.type === "notice" ){
-                if( !this.form.errorNoticing ){ //如果是弹出
+                if( !this.form.errorNoticing ){ //팝업이면
                     this.form.errorNoticing = true;
                     this.form.notice(text, "error", this.node, null, null, {
                         onClose : function () {
@@ -669,11 +669,11 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
         return this.getData();
     },
     setExcelData: function(data){
-	    if( typeOf(data) === "string" )data = data.replace(/&#10;/g,""); //excel字段换行是 &#10
+	    if( typeOf(data) === "string" )data = data.replace(/&#10;/g,""); //excel 필드 줄바꿈은 &#10
         this.excelData = data;
         this.setData(data, true);
     },
-    stringToArray: function(string){ //excel字段换行是 &#10;，换行和逗号作为数组分隔符
+    stringToArray: function(string){ //excel 필드 줄바꿈은 &#10;, 줄바꿈과 쉼표를 배열 구분자로 사용
         return string.replace(/&#10;/g,",").split(/\s*,\s*/g ).filter(function(s){
             return !!s;
         });

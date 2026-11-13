@@ -32,7 +32,7 @@ class ActionCode extends BaseAction {
 			}
 			credential =  BooleanUtils.isTrue(Config.token().getRsaEnable()) ? Crypto.rsaDecrypt(URLDecoder.decode(credential, DefaultCharset.charset),
 					Config.privateKey()) : credential;
-			LOGGER.info("{} 用户进行忘记密码修改操作", credential);
+			LOGGER.info("{} 사용자가 비밀번호 찾기 변경 작업 수행", credential);
 			Person person = business.person().getWithCredential(credential);
 			if (null == person) {
 				throw new ExceptionSendCodeResult();

@@ -24,14 +24,14 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Path("v2/mobile")
-@JaxrsDescribe("移动端API")
+@JaxrsDescribe("모바일 API")
 public class MobileAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(MobileAction.class);
 
 
 
-    @JaxrsMethodDescribe(value = "打卡前获取打卡需要信息的请求.", action = ActionPreCheck.class)
+    @JaxrsMethodDescribe(value = "체크 전에 체크에 필요한 정보를 가져오는 요청.", action = ActionPreCheck.class)
     @GET
     @Path("check/pre")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -49,7 +49,7 @@ public class MobileAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "打卡，打卡之前需要先调用preCheckIn接口获取数据.", action = ActionCheckIn.class)
+    @JaxrsMethodDescribe(value = "체크. 체크 전에 preCheckIn API를 먼저 호출해 데이터를 가져와야 합니다.", action = ActionCheckIn.class)
     @POST
     @Path("check")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -68,7 +68,7 @@ public class MobileAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "来自外部的打卡，比如门禁系统。系统调用的接口", action = ActionCheckInRecordFromOut.class)
+    @JaxrsMethodDescribe(value = "외부 출처 체크, 예: 출입 통제 시스템. 시스템 호출 API", action = ActionCheckInRecordFromOut.class)
     @POST
     @Path("check/from/out")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -78,7 +78,7 @@ public class MobileAction extends StandardJaxrsAction {
         executeCheckInRecordFromOut(asyncResponse, request, jsonElement);
     }
 
-    @JaxrsMethodDescribe(value = "来自外部的打卡，比如门禁系统。系统调用的接口，兼容旧路径.", action = ActionCheckInRecordFromOut.class)
+    @JaxrsMethodDescribe(value = "외부 출처 체크, 예: 출입 통제 시스템. 시스템 호출 API, 기존 경로 호환.", action = ActionCheckInRecordFromOut.class)
     @POST
     @Path("check/ from/out")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

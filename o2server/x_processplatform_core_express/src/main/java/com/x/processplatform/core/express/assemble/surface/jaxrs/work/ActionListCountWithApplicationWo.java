@@ -16,13 +16,13 @@ public class ActionListCountWithApplicationWo extends GsonPropertyObject {
 		this.count = count;
 	}
 
-	@FieldDescribe("应用名称")
+	@FieldDescribe("앱 이름")
 	private String value;
 
-	@FieldDescribe("应用标识")
+	@FieldDescribe("앱 식별자")
 	private String name;
 
-	@FieldDescribe("数量")
+	@FieldDescribe("수량")
 	private Long count;
 
 	public String getValue() {

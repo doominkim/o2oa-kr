@@ -7,6 +7,6 @@ class ExceptionTokenNameNotMatch extends LanguagePromptException {
 	private static final long serialVersionUID = -3287459468603291619L;
 
 	ExceptionTokenNameNotMatch(String name) {
-		super("令牌名称不匹配:{}.", name);
+		super("토큰 이름이 일치하지 않습니다: {}.", name);
 	}
 }

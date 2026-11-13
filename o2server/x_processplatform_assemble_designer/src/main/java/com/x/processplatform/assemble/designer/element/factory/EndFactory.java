@@ -39,7 +39,7 @@ public class EndFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的end */
+	/** 양식을 사용하는 end 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(End.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

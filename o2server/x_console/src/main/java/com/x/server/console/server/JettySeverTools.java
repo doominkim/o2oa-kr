@@ -41,9 +41,9 @@ public abstract class JettySeverTools {
 			+ DateFormatUtils.format(new Date(), "z") + "}t \"%r\" %s %O %{ms}T";
 
 	/**
-	 * jetty-all-*.jar 如果不单独导入会导致java.lang.NoClassDefFoundError:
+	 * jetty-all-*.jar를 별도로 가져오지 않으면 java.lang.NoClassDefFoundError 발생:
 	 * org/eclipse/jetty/http/MimeTypes JaxWsDynamicClientFactory
-	 * 需要在WebAppClassLoader加载 jakarta.xml.bind-api-*.jar
+	 * WebAppClassLoader에서 jakarta.xml.bind-api-*.jar 로드 필요
 	 */
 	private static final Collection<String> FILTER_STRINGS = Arrays.asList("openjpa-*.jar",
 			"jetty-all-*.jar", "jetty-proxy-*.jar", "quartz-*.jar", "filters-*.jar", "jakarta.xml.bind-api-*.jar",

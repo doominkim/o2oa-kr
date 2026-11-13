@@ -67,28 +67,28 @@ class ActionCreate extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("标题.")
+		@FieldDescribe("제목.")
 		private String title;
 
-		@FieldDescribe("序号.")
+		@FieldDescribe("순번.")
 		private String serial;
 
-		@FieldDescribe("指定表单.")
+		@FieldDescribe("지정 양식.")
 		private String form;
 
-		@FieldDescribe("指定表单数据.")
+		@FieldDescribe("지정 양식 데이터.")
 		private String formData;
 
-		@FieldDescribe("启动人员身份.")
+		@FieldDescribe("시작 사용자 신분.")
 		private String identity;
 
-		@FieldDescribe("开始日期.")
+		@FieldDescribe("시작 날짜.")
 		private Date startTime;
 
-		@FieldDescribe("结束日期.")
+		@FieldDescribe("종료 날짜.")
 		private Date completedTime;
 
-		@FieldDescribe("工作数据.")
+		@FieldDescribe("업무 문서 데이터.")
 		private JsonElement data;
 
 		public String getTitle() {
@@ -158,7 +158,7 @@ class ActionCreate extends BaseAction {
 	}
 
 	private void fill(Item o, WorkCompleted workCompleted) {
-		/** 将DateItem与Work放在同一个分区 */
+		/** DateItem과 Work를 같은 파티션에 배치 */
 		o.setDistributeFactor(workCompleted.getDistributeFactor());
 		o.setBundle(workCompleted.getJob());
 		o.setItemCategory(ItemCategory.pp);

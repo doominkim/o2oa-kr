@@ -115,10 +115,10 @@ MWF.xApplication.service.AgentDesigner.Agent = new Class({
                 this.editor.editor.setValue(this.data.text);
             }else{
                 // var defaultText = "/********************\n";
-                // defaultText += "resources.getEntityManagerContainer(); //实体管理器\n";
-                // defaultText += "resources.getContext(); //上下文根\n";
-                // defaultText += "resources.getOrganization(); //组织访问\n";
-                // defaultText += "resources.getWebservicesClient();//webSerivces客户端\n";
+                // defaultText += "resources.getEntityManagerContainer(); //엔티티 관리자\n";
+                // defaultText += "resources.getContext(); //컨텍스트 루트\n";
+                // defaultText += "resources.getOrganization(); //조직 접근\n";
+                // defaultText += "resources.getWebservicesClient();//webSerivces 클라이언트\n";
                 // defaultText += "********************/\n";
                 var lp = this.designer.lp.comment;
                 var url = new URI("../api");

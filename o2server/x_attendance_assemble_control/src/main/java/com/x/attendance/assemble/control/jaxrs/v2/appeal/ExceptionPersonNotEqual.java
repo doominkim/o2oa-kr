@@ -8,6 +8,6 @@ public class ExceptionPersonNotEqual extends PromptException {
 	private static final long serialVersionUID = 7385829212190071815L;
 
 	public ExceptionPersonNotEqual() {
-		super(  "当前操作人和数据所属用户不符合.");
+		super(  "현재 작업자와 데이터 소유 사용자가 일치하지 않습니다.");
 	}
 }

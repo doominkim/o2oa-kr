@@ -7,6 +7,6 @@ class ExceptionPersonAttributeNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionPersonAttributeNotExist(String name) {
-		super("个人属性: {} 不存在.", name);
+		super("개인 속성: {}이(가) 없습니다.", name);
 	}
 }

@@ -20,9 +20,9 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 会话消息
+ * 대화 메시지
  */
-@Schema(name = "IMMsg", description = "消息会话消息.")
+@Schema(name = "IMMsg", description = "메시지 대화 메시지.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.IMMsg.table, indexes = {
@@ -56,40 +56,40 @@ public class IMMsg extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
 
     public static final String conversationId_FIELDNAME = "conversationId";
-    @FieldDescribe("会话id， 关联的会话.")
+    @FieldDescribe("대화 id, 연결된 대화.")
     @Column(length = length_64B, name = ColumnNamePrefix + conversationId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String conversationId;
 
     public static final String body_FIELDNAME = "body";
-    @FieldDescribe("消息内容.")
+    @FieldDescribe("메시지 내용.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = length_10M, name = ColumnNamePrefix + body_FIELDNAME)
     private String body;
 
     public static final String bodyFileId_FIELDNAME = "bodyFileId";
-    @FieldDescribe("消息内容如果是有 fileId 的填入这个字段.")
+    @FieldDescribe("메시지 내용에 fileId가 있으면 이 필드에 입력.")
     @Column(length = length_64B, name = ColumnNamePrefix + bodyFileId_FIELDNAME)
     private String bodyFileId;
 
 
     public static final String createPerson_FIELDNAME = "createPerson";
-    @FieldDescribe("创建人，消息发送人")
+    @FieldDescribe("생성자, 메시지 발신자")
     @Column(length = length_255B, name = ColumnNamePrefix + createPerson_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String createPerson;
 
 
     public static final String quoteMessageId_FIELDNAME = "quoteMessageId";
-    @FieldDescribe("引用消息id.")
+    @FieldDescribe("인용 메시지 id.")
     @Column(length = length_64B, name = ColumnNamePrefix + quoteMessageId_FIELDNAME)
     private String quoteMessageId;
 

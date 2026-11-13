@@ -79,7 +79,7 @@ public class BatchNormalization implements Layer {
 
 	@Override
 	public MultilayerPerceptronMatrix forward(MultilayerPerceptronMatrix x) {
-		// 如果单条数据那么直接通过
+		// 단일 데이터이면 바로 통과
 		if (x.row() < 2) {
 			return x;
 		}
@@ -168,7 +168,7 @@ public class BatchNormalization implements Layer {
 
 	@Override
 	public MultilayerPerceptronMatrix backward(MultilayerPerceptronMatrix dout) {
-		// 如果单条数据那么直接通过
+		// 단일 데이터이면 바로 통과
 		if (dout.row() < 2) {
 			return dout;
 		}

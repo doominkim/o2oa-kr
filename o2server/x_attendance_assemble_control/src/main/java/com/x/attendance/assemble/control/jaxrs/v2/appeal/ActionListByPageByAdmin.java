@@ -46,7 +46,7 @@ public class ActionListByPageByAdmin extends BaseAction {
                 }
                 userList = new ArrayList<>(new LinkedHashSet<>(userList));
                 if (userList.isEmpty()) {
-                    throw new ExceptionWithMessage("当前查询条件没有找到人员信息！");
+                    throw new ExceptionWithMessage("현재 조회 조건으로 인원 정보를 찾을 수 없습니다!");
                 }
                 wi.setUsers(userList);
             }
@@ -72,7 +72,7 @@ public class ActionListByPageByAdmin extends BaseAction {
         static WrapCopier<AttendanceV2AppealInfo, Wo> copier = WrapCopierFactory.wo(AttendanceV2AppealInfo.class, Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("打卡记录")
+        @FieldDescribe("체크 기록")
         private AttendanceV2CheckInRecord record;
 
         public AttendanceV2CheckInRecord getRecord() {

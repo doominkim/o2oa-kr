@@ -44,7 +44,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         if (identities.size() == 1) {
             return identities.get(0);
         }
-        /* 有多个身份需要逐一判断是否包含. */
+        /* 신분이 여러 개이면 포함 여부를 하나씩 판단. */
         for (String o : identities) {
             if (StringUtils.equals(o, identityValue)) {
                 return o;

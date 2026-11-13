@@ -16,7 +16,7 @@ public class ActionLeaveTypeGet extends BaseAction {
             ActionResult<Wo> result = new ActionResult<>();
             AttendanceV2LeaveType type = emc.find(id, AttendanceV2LeaveType.class);
             if (type == null) {
-                throw new ExceptionNotExistObject("无法找到指定ID的假期类型信息，ID：" + id);
+                throw new ExceptionNotExistObject("지정한 ID의 휴가 유형 정보를 찾을 수 없습니다. ID:" + id);
             }
             Wo wo = Wo.copier.copy(type);
             result.setData(wo);

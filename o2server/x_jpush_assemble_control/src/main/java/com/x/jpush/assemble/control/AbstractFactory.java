@@ -37,21 +37,21 @@ public abstract class AbstractFactory {
 
 
 	/**
-	 * 极光推送客户端
+	 * JPush 푸시 클라이언트
 	 * @return
 	 */
 	public PushApi jpushClient() throws Exception {
 		String appKey = Config.pushConfig().getAppKey();
 		String masterKey = Config.pushConfig().getMasterSecret();
-		logger.info("极光客户端, appKey:"+appKey+",masterKey:"+masterKey);
+		logger.info("JPush 클라이언트, appKey:"+appKey+",masterKey:"+masterKey);
 		if (StringUtils.isEmpty(appKey) || StringUtils.isEmpty(masterKey)) {
 			return null;
 		} else {
-			// 默认推送
+			// 기본 푸시
 			if (null == pushApi) {
 				pushApi =  new PushApi.Builder()
-						.setAppKey(appKey) // 必填
-						.setMasterSecret(masterKey) // 必填
+						.setAppKey(appKey) // 필수
+						.setMasterSecret(masterKey) // 필수
 						.build();
 			}
 			return pushApi;

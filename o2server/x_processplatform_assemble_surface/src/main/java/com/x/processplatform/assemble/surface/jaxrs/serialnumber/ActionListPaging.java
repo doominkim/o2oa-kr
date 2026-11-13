@@ -76,9 +76,9 @@ class ActionListPaging extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = -4409718421906673933L;
-		@FieldDescribe("应用标志")
+		@FieldDescribe("앱 식별자")
 		private String applicationFlag;
-		@FieldDescribe("流程标志")
+		@FieldDescribe("프로세스 식별자")
 		private String processFlag;
 
 		public String getApplicationFlag() {
@@ -105,10 +105,10 @@ class ActionListPaging extends BaseAction {
 		static WrapCopier<SerialNumber, Wo> copier = WrapCopierFactory.wo(SerialNumber.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("应用名称")
+		@FieldDescribe("앱 이름")
 		private String applicationName;
 
-		@FieldDescribe("流程名称")
+		@FieldDescribe("프로세스 이름")
 		private String processName;
 
 		public String getApplicationName() {

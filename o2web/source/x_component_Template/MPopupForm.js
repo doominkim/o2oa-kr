@@ -433,7 +433,7 @@ MWF.xApplication.Template.MPopupForm = MPopupForm = new Class({
     _createTableContent: function () {
 
         var html = "<table width='100%' bordr='0' cellpadding='5' cellspacing='0' styles='formTable'>" +
-                //"<tr><td colspan='2' styles='formTableHead'>申诉处理单</td></tr>" +
+                //"<tr><td colspan='2' styles='formTableHead'>이의 신청 처리서</td></tr>" +
             "<tr><td styles='formTableTitle' lable='empName'></td>" +
             "    <td styles='formTableValue' item='empName'></td></tr>" +
             "<tr><td styles='formTableTitle' lable='departmentName'></td>" +

@@ -36,7 +36,7 @@ class ActionDownloadImageWidthHeight extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Attachment2 attachment = emc.find(id, Attachment2.class, ExceptionWhen.not_found);
-			/* 判断文件的当前用户是否是管理员或者文件创建者 或者当前用户在分享或者共同编辑中 */
+			/* 현재 사용자가 관리자 또는 파일 생성자이거나 공유 또는 공동 편집 대상인지 판단 */
 			if (effectivePerson.isNotManager() && effectivePerson.isNotPerson(attachment.getPerson())) {
 				throw new Exception("person{name:" + effectivePerson.getDistinguishedName() + "} access attachment{id:"
 						+ id + "} denied.");
@@ -89,7 +89,7 @@ class ActionDownloadImageWidthHeight extends BaseAction {
 					}
 				}catch (Exception e){
 					if(e.getMessage().indexOf("existed") > -1){
-						logger.warn("原始附件{}-{}不存在，删除记录！", originFile.getId(), originFile.getName());
+						logger.warn("원본 첨부파일 {}-{}이(가) 존재하지 않아 기록을 삭제합니다!", originFile.getId(), originFile.getName());
 						emc.beginTransaction(OriginFile.class);
 						emc.delete(OriginFile.class, originFile.getId());
 						emc.commit();

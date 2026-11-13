@@ -34,7 +34,7 @@ public class ActionAppInfoPublisherSave extends BaseAction {
 				wi = this.convertToWrapIn( jsonElement, Wi.class );
 			} catch (Exception e ) {
 				check = false;
-				Exception exception = new ExceptionAppCategoryAdminProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+				Exception exception = new ExceptionAppCategoryAdminProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -67,7 +67,7 @@ public class ActionAppInfoPublisherSave extends BaseAction {
 			}
 		}
 
-		//更新完成
+		//갱신 완료
 		if( check ){
 			String description = "栏目："+appId+"权限变更";
 			new LogService().log( null,  effectivePerson.getDistinguishedName(), description, appId, "", "", appId, "APPINFO_PUBLISHER", "发布权限变更" );
@@ -92,16 +92,16 @@ public class ActionAppInfoPublisherSave extends BaseAction {
 
 	public static class Wi{
 
-		@FieldDescribe("人员列表")
+		@FieldDescribe("사용자 목록")
 		private List<String> personList;
 
-		@FieldDescribe("组织列表")
+		@FieldDescribe("조직 목록")
 		private List<String> unitList;
 
-		@FieldDescribe("群组列表")
+		@FieldDescribe("그룹 목록")
 		private List<String> groupList;
 
-		@FieldDescribe("角色列表")
+		@FieldDescribe("역할 목록")
 		private List<String> roleList;
 
 		public List<String> getPersonList() {

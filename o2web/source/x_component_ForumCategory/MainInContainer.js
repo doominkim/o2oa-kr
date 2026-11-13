@@ -1,4 +1,4 @@
-//用法，z在 cms / 流程表单 / 门户中插入
+//사용법: cms / 프로세스 양식 / 포털에 삽입
 //MWF.xApplication.ForumCategory = MWF.xApplication.ForumCategory || {};
 //MWF.xApplication.ForumCategory.options = MWF.xApplication.ForumCategory.options || {};
 //MWF.xDesktop.requireApp("ForumCategory", "MainInContainer", null, false);

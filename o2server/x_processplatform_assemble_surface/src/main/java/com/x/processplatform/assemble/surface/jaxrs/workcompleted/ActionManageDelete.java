@@ -22,7 +22,7 @@ import com.x.processplatform.core.entity.element.Application;
 import com.x.processplatform.core.entity.element.Process;
 
 /**
- * 在一个应用的管理状态下删除一个workCompleted, 权限:需要至少process的管理权限.
+ * 앱 관리 상태에서 workCompleted 삭제, 권한: 최소 process 관리 권한 필요.
  */
 class ActionManageDelete extends BaseAction {
 
@@ -40,7 +40,7 @@ class ActionManageDelete extends BaseAction {
 			}
 			Process process = business.process().pick(workCompleted.getProcess());
 			Application application = business.application().pick(workCompleted.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (BooleanUtils.isNotTrue(business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process))) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}

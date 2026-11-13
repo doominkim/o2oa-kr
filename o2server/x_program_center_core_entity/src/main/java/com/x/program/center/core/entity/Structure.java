@@ -28,7 +28,7 @@ import com.x.base.core.project.tools.DateTools;
 import com.x.base.core.project.tools.StringTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Structure", description = "服务管理结构体.")
+@Schema(name = "Structure", description = "서비스 관리 구조체.")
 @Entity
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Structure.TABLE, uniqueConstraints = {
@@ -53,16 +53,16 @@ public class Structure extends StorageObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.lastUpdateTime = new Date();
-		/* 如果扩展名为空去掉null */
+		/* 확장자가 비어 있으면 null 제거 */
 		this.extension = StringUtils.trimToEmpty(extension);
 	}
 
@@ -148,7 +148,7 @@ public class Structure extends StorageObject {
 		this.deepPath = deepPath;
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public String getDescription() {
 		if (StringUtils.isNotEmpty(this.descriptionLob)) {
@@ -169,47 +169,47 @@ public class Structure extends StorageObject {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	private String name;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+	@FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true)
 	private String extension;
 
 	public static final String storage_FIELDNAME = "storage";
-	@FieldDescribe("存储器的名称,也就是多个存放节点的名字.")
+	@FieldDescribe("스토리지 이름, 즉 여러 저장 노드의 이름.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	@Index(name = TABLE + IndexNameMiddle + storage_FIELDNAME)
 	private String storage;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Index(name = TABLE + IndexNameMiddle + length_FIELDNAME)
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String descriptionLob_FIELDNAME = "descriptionLob";
-	@FieldDescribe("详细描述.")
+	@FieldDescribe("상세 설명.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + descriptionLob_FIELDNAME)
 	private String descriptionLob;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("导出结构内容")
+	@FieldDescribe("구조 내용 내보내기")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
@@ -217,14 +217,14 @@ public class Structure extends StorageObject {
 	private String data;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String deepPath_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
 	private Boolean deepPath;
@@ -253,7 +253,7 @@ public class Structure extends StorageObject {
 		this.data = data;
 	}
 
-	/* flag标志位 */
-	/* Entity 默认字段结束 */
+	/* flag 플래그 비트 */
+	/* Entity 기본 필드 끝 */
 
 }

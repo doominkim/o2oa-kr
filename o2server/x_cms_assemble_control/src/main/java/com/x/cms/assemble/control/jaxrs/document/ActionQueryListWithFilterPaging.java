@@ -86,7 +86,7 @@ public class ActionQueryListWithFilterPaging extends BaseAction {
                         wo.setPictureList(ListTools.toList(document.getIndexPics().split(",")));
                     }
                     if (BooleanUtils.isTrue(wi.getNeedData())) {
-                        //需要组装数据
+                        //데이터 조립 필요
                         wo.setData(documentQueryService.getDocumentData(document));
                     }
                     Long count = documentViewRecordServiceAdv.countWithDocIdAndPerson(
@@ -96,7 +96,7 @@ public class ActionQueryListWithFilterPaging extends BaseAction {
                     }
                 } catch (Exception e) {
                     Exception exception = new ExceptionDocumentInfoProcess(e,
-                            "系统获取文档数据内容信息时发生异常。Id:"
+                            "게시글 데이터 내용을 가져오는 중 오류가 발생했습니다. Id:"
                                     + document.getCategoryId());
                     result.error(exception);
                     logger.error(e, effectivePerson, request, null);
@@ -111,7 +111,7 @@ public class ActionQueryListWithFilterPaging extends BaseAction {
 
     public static class Wi extends WrapInDocumentFilter {
 
-        @FieldDescribe("仅返回数据不查询总数，默认false")
+        @FieldDescribe("데이터만 반환하고 총수는 조회하지 않음, 기본값 false")
         private Boolean justData;
 
         public Boolean getJustData() {

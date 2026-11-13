@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("output")
-@JaxrsDescribe("导出")
+@JaxrsDescribe("내보내기")
 public class OutputAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(OutputAction.class);
 
-	@JaxrsMethodDescribe(value = "选择应用结构.", action = ActionSelect.class)
+	@JaxrsMethodDescribe(value = "앱 구조 선택.", action = ActionSelect.class)
 	@PUT
 	@Path("{applicationFlag}/select")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag,
 			JsonElement jsonElement) {
 		ActionResult<ActionSelect.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -51,7 +51,7 @@ public class OutputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查看所有应用.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 앱 조회.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

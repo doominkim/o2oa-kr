@@ -8,7 +8,7 @@ public class ActionProcessingSignalWo extends WoId {
 
 	private static final long serialVersionUID = 8851351880636501257L;
 
-	@FieldDescribe("流程信号栈.")
+	@FieldDescribe("프로세스 신호 스택.")
 	private SignalStack signalStack;
 
 	public SignalStack getSignalStack() {

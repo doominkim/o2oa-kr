@@ -3,9 +3,9 @@ package com.x.processplatform.core.entity.element;
 import com.x.base.core.entity.JpaObject;
 
 /**
- * 流程节点枚举类型 agent：脚本节点 begin：开始节点 cancel：取消节点 choice：选择活动节点 delay：定时活动节点
- * end：结束节点 embed：流程调用节点 invoke：服务调用节点 manual：人工节点 merge：合并活动节点 message：
- * parallel：并行活动节点 service：服务节点 split：拆分节点 publish：数据发布节点
+ * 프로세스 노드 열거형 agent: 스크립트 노드 begin: 시작 노드 cancel: 취소 노드 choice: 선택 활동 노드 delay: 지연 활동 노드
+ * end: 종료 노드 embed: 프로세스 호출 노드 invoke: 서비스 호출 노드 manual: 수동 노드 merge: 병합 활동 노드 message:
+ * parallel: 병렬 활동 노드 service: 서비스 노드 split: 분할 노드 publish: 데이터 게시 노드
  * 
  * @author sword
  */

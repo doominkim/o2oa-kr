@@ -34,7 +34,7 @@ import com.x.base.core.project.tools.ListTools;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 栏目信息
+ * 게시판 정보
  *
  * @author O2LEE
  *
@@ -62,7 +62,7 @@ public class AppInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Flag
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
@@ -73,7 +73,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 	public static final String appName_FIELDNAME = "appName";
 	@Flag
-	@FieldDescribe("栏目名称")
+	@FieldDescribe("게시판 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + appName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + appName_FIELDNAME)
 	@CheckPersist(citationNotExists = {
@@ -82,14 +82,14 @@ public class AppInfo extends SliceJpaObject {
 
 	public static final String appAlias_FIELDNAME = "appAlias";
 	@Flag
-	@FieldDescribe("栏目别名")
+	@FieldDescribe("게시판 별칭")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + appAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + appAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appAlias;
 
 	public static final String appType_FIELDNAME = "appType";
-	@FieldDescribe("栏目类别")
+	@FieldDescribe("게시판 유형")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + appType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appType = "未分类";
@@ -113,7 +113,7 @@ public class AppInfo extends SliceJpaObject {
 	private String description;
 
 	public static final String appIcon_FIELDNAME = "appIcon";
-	@FieldDescribe("图标icon Base64编码后的文本.")
+	@FieldDescribe("아이콘 icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + appIcon_FIELDNAME)
@@ -121,7 +121,7 @@ public class AppInfo extends SliceJpaObject {
 	private String appIcon;
 
 	public static final String iconColor_FIELDNAME = "iconColor";
-	@FieldDescribe("图标主色调.")
+	@FieldDescribe("아이콘 주 색조.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + iconColor_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String iconColor;
@@ -133,28 +133,28 @@ public class AppInfo extends SliceJpaObject {
 	private String appMemo;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建人，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorPerson;
 
 	public static final String creatorIdentity_FIELDNAME = "creatorIdentity";
-	@FieldDescribe("创建人Identity，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 Identity, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorIdentity;
 
 	public static final String creatorUnitName_FIELDNAME = "creatorUnitName";
-	@FieldDescribe("创建人组织，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 조직, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorUnitName;
 
 	public static final String creatorTopUnitName_FIELDNAME = "creatorTopUnitName";
-	@FieldDescribe("创建人顶层组织，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 최상위 조직, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorTopUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -166,53 +166,53 @@ public class AppInfo extends SliceJpaObject {
 	private Boolean anonymousAble = true;
 
 	public static final String allowAnonymousAccessDoc_FIELDNAME = "allowAnonymousAccessDoc";
-	@FieldDescribe("是否允许匿名访问栏目下的文档.")
+	@FieldDescribe("게시판 하위 문서의 익명 접근 허용 여부.")
 	@Column(name = ColumnNamePrefix + allowAnonymousAccessDoc_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean allowAnonymousAccessDoc = false;
 
 	public static final String allPeopleView_FIELDNAME = "allPeopleView";
-	@FieldDescribe("可见范围为所有人可见.")
+	@FieldDescribe("열람 범위는 모든 사람.")
 	@Column(name = ColumnNamePrefix + allPeopleView_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean allPeopleView = true;
 
 	public static final String allPeoplePublish_FIELDNAME = "allPeoplePublish";
-	@FieldDescribe("发布范围栏目为所有人可发布.")
+	@FieldDescribe("게시 범위: 게시판에 모든 사람이 게시 가능.")
 	@Column(name = ColumnNamePrefix + allPeoplePublish_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean allPeoplePublish = true;
 
 	public static final String sendNotify_FIELDNAME = "sendNotify";
-	@FieldDescribe("发布文档后是否通知阅读者：true | false")
+	@FieldDescribe("문서 게시 후 독자 알림 여부: true | false")
 	@Column(name = ColumnNamePrefix + sendNotify_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean sendNotify = true;
 
 	public static final String showAllDocuments_FIELDNAME = "showAllDocuments";
-	@FieldDescribe("栏目是否显示全部文档：true | false")
+	@FieldDescribe("게시판 전체 문서 표시 여부: true | false")
 	@Column(name = ColumnNamePrefix + showAllDocuments_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean showAllDocuments = true;
 
 	public static final String allowWaitPublish_FIELDNAME = "allowWaitPublish";
-	@FieldDescribe("栏目是否允许定时发布：true | false(默认)")
+	@FieldDescribe("게시판 예약 게시 허용 여부: true | false(기본값)")
 	@Column(name = ColumnNamePrefix + allowWaitPublish_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean allowWaitPublish = false;
 
 	public static final String defaultEditForm_FIELDNAME = "defaultEditForm";
-	@FieldDescribe("默认编辑表单")
+	@FieldDescribe("기본 편집 양식")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + defaultEditForm_FIELDNAME)
 	private String defaultEditForm;
 
 	public static final String defaultReadForm_FIELDNAME = "defaultReadForm";
-	@FieldDescribe("默认阅读表单")
+	@FieldDescribe("기본 열람 양식")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + defaultReadForm_FIELDNAME)
 	private String defaultReadForm;
 
 	public static final String categoryList_FIELDNAME = "categoryList";
-	@FieldDescribe("分类列表")
+	@FieldDescribe("분류 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + categoryList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -224,7 +224,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> categoryList;
 
 	public static final String viewablePersonList_FIELDNAME = "viewablePersonList";
-	@FieldDescribe("发布可见人员")
+	@FieldDescribe("게시 열람 사용자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -237,7 +237,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> viewablePersonList;
 
 	public static final String viewableUnitList_FIELDNAME = "viewableUnitList";
-	@FieldDescribe("发布可见组织")
+	@FieldDescribe("게시 열람 조직")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -250,7 +250,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> viewableUnitList;
 
 	public static final String viewableGroupList_FIELDNAME = "viewableGroupList";
-	@FieldDescribe("发布可见群组")
+	@FieldDescribe("게시 열람 그룹")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -263,7 +263,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> viewableGroupList;
 
 	public static final String publishablePersonList_FIELDNAME = "publishablePersonList";
-	@FieldDescribe("可发布人员")
+	@FieldDescribe("게시 가능 사용자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -276,7 +276,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> publishablePersonList;
 
 	public static final String publishableUnitList_FIELDNAME = "publishableUnitList";
-	@FieldDescribe("可发布组织")
+	@FieldDescribe("게시 가능 조직")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -289,7 +289,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> publishableUnitList;
 
 	public static final String publishableGroupList_FIELDNAME = "publishableGroupList";
-	@FieldDescribe("可发布群组")
+	@FieldDescribe("게시 가능 그룹")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -302,7 +302,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> publishableGroupList;
 
 	public static final String publishableRoleList_FIELDNAME = "publishableRoleList";
-	@FieldDescribe("可发布角色")
+	@FieldDescribe("게시 가능 역할")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -315,7 +315,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> publishableRoleList;
 
 	public static final String manageablePersonList_FIELDNAME = "manageablePersonList";
-	@FieldDescribe("栏目可管理人员")
+	@FieldDescribe("게시판 관리 가능 사용자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -328,7 +328,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> manageablePersonList;
 
 	public static final String manageableUnitList_FIELDNAME = "manageableUnitList";
-	@FieldDescribe("栏目可管理组织")
+	@FieldDescribe("게시판 관리 가능 조직")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -341,7 +341,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> manageableUnitList;
 
 	public static final String manageableGroupList_FIELDNAME = "manageableGroupList";
-	@FieldDescribe("栏目可管理群组")
+	@FieldDescribe("게시판 관리 가능 그룹")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -354,7 +354,7 @@ public class AppInfo extends SliceJpaObject {
 	private List<String> manageableGroupList;
 
 	public static final String manageableRoleList_FIELDNAME = "manageableRoleList";
-	@FieldDescribe("栏目可管理角色")
+	@FieldDescribe("게시판 관리 가능 역할")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -375,7 +375,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取栏目名称
+	 * 게시판 이름 조회
 	 *
 	 * @return
 	 */
@@ -384,7 +384,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置栏目名称
+	 * 게시판 이름 설정
 	 *
 	 * @return
 	 */
@@ -393,7 +393,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取栏目别名
+	 * 게시판 별칭 조회
 	 *
 	 * @return
 	 */
@@ -402,7 +402,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置栏目别名
+	 * 게시판 별칭 설정
 	 *
 	 * @return
 	 */
@@ -411,7 +411,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取栏目排序号
+	 * 게시판 정렬 번호 조회
 	 *
 	 * @return
 	 */
@@ -420,7 +420,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置栏目排序号
+	 * 게시판 정렬 번호 설정
 	 *
 	 * @return
 	 */
@@ -437,7 +437,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取栏目说明
+	 * 게시판 설명 조회
 	 *
 	 * @return
 	 */
@@ -446,7 +446,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置栏目说明
+	 * 게시판 설명 설정
 	 *
 	 * @return
 	 */
@@ -455,7 +455,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取栏目图标访问路径
+	 * 게시판 아이콘 접근 경로 조회
 	 *
 	 * @return
 	 */
@@ -464,7 +464,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置栏目图标访问路径
+	 * 게시판 아이콘 접근 경로 설정
 	 *
 	 * @return
 	 */
@@ -473,7 +473,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取栏目信息备注
+	 * 게시판 정보 비고 조회
 	 *
 	 * @return
 	 */
@@ -482,7 +482,7 @@ public class AppInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置栏目信息备注
+	 * 게시판 정보 비고 설정
 	 *
 	 * @return
 	 */

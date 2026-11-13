@@ -7,6 +7,6 @@ class InfoWrapOutException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	InfoWrapOutException( Throwable e  ) {
-		super("系统将查询结果转换为可输出的数据信息时发生异常。" , e );
+		super("조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다." , e );
 	}
 }

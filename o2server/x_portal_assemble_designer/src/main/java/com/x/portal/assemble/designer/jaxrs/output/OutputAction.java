@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("output")
-@JaxrsDescribe("导出")
+@JaxrsDescribe("내보내기")
 public class OutputAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(OutputAction.class);
 
-	@JaxrsMethodDescribe(value = "选择门户结构.", action = ActionSelect.class)
+	@JaxrsMethodDescribe(value = "포털 구조 선택.", action = ActionSelect.class)
 	@PUT
 	@Path("{portalFlag}/select")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("portalFlag") String portalFlag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("portalFlag") String portalFlag, JsonElement jsonElement) {
 		ActionResult<ActionSelect.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,12 +50,12 @@ public class OutputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "以文件方式导出应用.", action = ActionSelectFile.class)
+	@JaxrsMethodDescribe(value = "파일로 앱 내보내기.", action = ActionSelectFile.class)
 	@GET
 	@Path("{flag}/select/file")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void selectOutput(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("输出文件标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("출력 파일 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionSelectFile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -67,7 +67,7 @@ public class OutputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查看所有应用.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 앱 조회.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

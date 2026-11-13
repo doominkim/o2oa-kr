@@ -13,7 +13,7 @@ MWF.xApplication.cms.Document.DelayPublishForm = new Class({
         "hasTopIcon" : false,
         "hasTopContent" : true,
         "hasBottom": true,
-        "title": MWF.xApplication.cms.Document.LP.regularPublish, //"设置热点"
+        "title": MWF.xApplication.cms.Document.LP.regularPublish, //"핫스팟 설정"
         "draggable": true,
         "closeAction": true,
         "publishTime": ""

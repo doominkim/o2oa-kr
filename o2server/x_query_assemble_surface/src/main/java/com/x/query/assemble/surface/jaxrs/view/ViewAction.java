@@ -27,19 +27,19 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("view")
-@JaxrsDescribe("视图")
+@JaxrsDescribe("뷰")
 public class ViewAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ViewAction.class);
 
-	@JaxrsMethodDescribe(value = "根据query获取view对象.", action = ActionGetWithQuery.class)
+	@JaxrsMethodDescribe(value = "query 기준 view 객체 조회.", action = ActionGetWithQuery.class)
 	@GET
 	@Path("flag/{flag}/query/{queryFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag) {
 		ActionResult<ActionGetWithQuery.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -51,13 +51,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据query列示view对象.", action = ActionListWithQuery.class)
+	@JaxrsMethodDescribe(value = "query 기준 view 객체 목록.", action = ActionListWithQuery.class)
 	@GET
 	@Path("list/query/{queryFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag) {
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag) {
 		ActionResult<List<ActionListWithQuery.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,13 +69,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取View内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "View 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,13 +87,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行view", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "view 실행", action = ActionExecute.class)
 	@PUT
 	@Path("{id}/execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void execute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<Plan> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -105,15 +105,15 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行view，分页获取数据", action = ActionExecuteV2.class)
+	@JaxrsMethodDescribe(value = "view 실행, 페이지 단위 데이터 조회", action = ActionExecuteV2.class)
 	@POST
 	@Path("{id}/execute/v2/page/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void executeV2(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("第几页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页几条") @PathParam("size") Integer size,
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 건수") @PathParam("size") Integer size,
 			JsonElement jsonElement) {
 		ActionResult<Plan> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -126,13 +126,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行view MockPutToPost", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "view 실행 MockPutToPost", action = ActionExecute.class)
 	@POST
 	@Path("{id}/execute/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void executeMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						@JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+						@JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<Plan> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -144,14 +144,14 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行view", action = ActionExecuteWithQuery.class)
+	@JaxrsMethodDescribe(value = "view 실행", action = ActionExecuteWithQuery.class)
 	@PUT
 	@Path("flag/{flag}/query/{queryFlag}/execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void executeWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
 		ActionResult<Plan> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -163,16 +163,16 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行view，分页获取数据", action = ActionExecuteWithQueryV2.class)
+	@JaxrsMethodDescribe(value = "view 실행, 페이지 단위 데이터 조회", action = ActionExecuteWithQueryV2.class)
 	@POST
 	@Path("flag/{flag}/query/{queryFlag}/execute/v2/page/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void executeWithQueryV2(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag,
-			@JaxrsParameterDescribe("第几页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页几条") @PathParam("size") Integer size,
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag,
+			@JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 건수") @PathParam("size") Integer size,
 			JsonElement jsonElement) {
 		ActionResult<Plan> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -185,14 +185,14 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行view MockPutToPost", action = ActionExecuteWithQuery.class)
+	@JaxrsMethodDescribe(value = "view 실행 MockPutToPost", action = ActionExecuteWithQuery.class)
 	@POST
 	@Path("flag/{flag}/query/{queryFlag}/execute/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void executeWithQueryMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								 @JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-								 @JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+								 @JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+								 @JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
 		ActionResult<Plan> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -204,13 +204,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将视图执行结果作为Excel导出", action = ActionExcel.class)
+	@JaxrsMethodDescribe(value = "뷰 실행 결과를 Excel로 내보내기", action = ActionExcel.class)
 	@PUT
 	@Path("{id}/excel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excel(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionExcel.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -222,13 +222,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将视图执行结果作为Excel导出 MockPutToPost", action = ActionExcel.class)
+	@JaxrsMethodDescribe(value = "뷰 실행 결과를 Excel로 내보내기 MockPutToPost", action = ActionExcel.class)
 	@POST
 	@Path("{id}/excel/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excelMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					  @JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+					  @JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionExcel.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -240,14 +240,14 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将视图执行结果作为Excel导出", action = ActionExcelWithQuery.class)
+	@JaxrsMethodDescribe(value = "뷰 실행 결과를 Excel로 내보내기", action = ActionExcelWithQuery.class)
 	@PUT
 	@Path("flag/{flag}/query/{queryFlag}/excel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excelWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
 		ActionResult<ActionExcelWithQuery.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -259,14 +259,14 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将视图执行结果作为Excel导出 MockPutToPost", action = ActionExcelWithQuery.class)
+	@JaxrsMethodDescribe(value = "뷰 실행 결과를 Excel로 내보내기 MockPutToPost", action = ActionExcelWithQuery.class)
 	@POST
 	@Path("flag/{flag}/query/{queryFlag}/excel/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excelWithQueryMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							   @JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-							   @JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+							   @JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+							   @JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
 		ActionResult<ActionExcelWithQuery.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -278,12 +278,12 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出Excel的执行结果.", action = ActionExcelResult.class)
+	@JaxrsMethodDescribe(value = "Excel 내보내기 실행 결과.", action = ActionExcelResult.class)
 	@GET
 	@Path("excel/result/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void excelResult(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("对象标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("객체 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionExcelResult.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -295,13 +295,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示执行后的bundle列表", action = ActionBundle.class)
+	@JaxrsMethodDescribe(value = "실행 후 bundle 목록", action = ActionBundle.class)
 	@PUT
 	@Path("{id}/bundle")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void bundle(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionBundle.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -313,13 +313,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示执行后的bundle列表 MockPutToPost", action = ActionBundle.class)
+	@JaxrsMethodDescribe(value = "실행 후 bundle 목록 MockPutToPost", action = ActionBundle.class)
 	@POST
 	@Path("{id}/bundle/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void bundleMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+					   @JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionBundle.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -331,13 +331,13 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示bundle列表", action = ActionBundleV2.class)
+	@JaxrsMethodDescribe(value = "bundle 목록 페이지 조회", action = ActionBundleV2.class)
 	@POST
 	@Path("{id}/bundle/v2")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void bundleV2(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionBundleV2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -349,14 +349,14 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示按查询和视图标识执行后的bundle列表", action = ActionBundleWithQuery.class)
+	@JaxrsMethodDescribe(value = "쿼리와 뷰 식별자로 실행한 후 bundle 목록", action = ActionBundleWithQuery.class)
 	@PUT
 	@Path("flag/{flag}/query/{queryFlag}/bundle")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void bundleWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
 		ActionResult<ActionBundleWithQuery.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -368,14 +368,14 @@ public class ViewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示按查询和视图标识执行后的bundle列表 MockPutToPost", action = ActionBundleWithQuery.class)
+	@JaxrsMethodDescribe(value = "쿼리와 뷰 식별자로 실행한 후 bundle 목록 MockPutToPost", action = ActionBundleWithQuery.class)
 	@POST
 	@Path("flag/{flag}/query/{queryFlag}/bundle/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void bundleWithQueryMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								@JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-								@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+								@JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+								@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
 		ActionResult<ActionBundleWithQuery.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

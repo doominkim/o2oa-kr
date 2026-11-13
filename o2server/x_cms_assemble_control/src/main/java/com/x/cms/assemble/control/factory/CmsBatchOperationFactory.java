@@ -16,7 +16,7 @@ import com.x.cms.core.entity.CmsBatchOperation;
 import com.x.cms.core.entity.CmsBatchOperation_;
 
 /**
- * 批处理操作信息记录，比如需要级联删除大量的分类，文档等等
+ * 일괄 처리 작업 정보 기록, 예: 대량의 분류, 문서 등의 연쇄 삭제
  */
 public class CmsBatchOperationFactory extends AbstractFactory {
 

@@ -80,10 +80,10 @@ public class ActionUploadWithUrl extends BaseAction {
 
 		private static final long serialVersionUID = -3707551996175419386L;
 
-		@FieldDescribe("文件名称,带扩展名的文件名.")
+		@FieldDescribe("파일 이름, 확장자를 포함한 파일명.")
 		private String fileName;
 
-		@FieldDescribe("*附件来源url地址.")
+		@FieldDescribe("*첨부파일 원본 url 주소.")
 		private String fileUrl;
 
 		public String getFileName() {

@@ -7,6 +7,6 @@ class ExceptionTypeNotMatch extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionTypeNotMatch(String type, String other) {
-		super("类型不匹配:{},{}.", type, other);
+		super("유형이 일치하지 않습니다: {}, {}.", type, other);
 	}
 }

@@ -57,7 +57,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 //			Building building = business.entityManagerContainer().find(room.getBuilding(), Building.class,
 //					ExceptionWhen.not_found);
 //			for (String str : ListTools.trim(meeting.getInvitePersonList(), true, true, meeting.getApplicant())) {
-//				// "会议室:" + room.getName() + ",会议地点:" + building.getName() +
+//				// "회의실:" + room.getName() + ",회의 장소:" + building.getName() +
 //				// building.getAddress() + ".",
 //				// "meetingReject");
 ////				MeetingCancelMessage message = new MeetingCancelMessage(str, building.getId(), room.getId(),
@@ -73,9 +73,9 @@ abstract class BaseAction extends StandardJaxrsAction {
 //		Building building = business.entityManagerContainer().find(room.getBuilding(), Building.class,
 //				ExceptionWhen.not_found);
 //		for (String str : ListTools.trim(meeting.getInvitePersonList(), true, true, meeting.getApplicant())) {
-//			// Collaboration.notification(str, "会议接受提醒.", person + "接受会议邀请:" +
+//			// Collaboration.notification(str, "회의 수락 알림.", person + "회의 초대 수락:" +
 //			// meeting.getSubject(),
-//			// "会议室:" + room.getName() + ",会议地点:" + building.getName() +
+//			// "회의실:" + room.getName() + ",회의 장소:" + building.getName() +
 //			// building.getAddress() + ".",
 //			// "meetingAccept");
 ////			MeetingAcceptMessage message = new MeetingAcceptMessage(str, building.getId(), room.getId(),

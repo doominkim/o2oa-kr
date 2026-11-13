@@ -96,47 +96,47 @@ public class AeiObjects extends GsonPropertyObject {
 
 	private Work oldWork;
 
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Work> works = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Task> tasks = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<TaskCompleted> taskCompleteds = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Read> reads = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<ReadCompleted> readCompleteds = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Review> reviews = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<DocumentVersion> documentVersions = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<DocSignScrawl> docSignScrawls = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<DocSign> docSigns = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Snap> snaps = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Record> records = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Attachment> attachments = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<WorkLog> workLogs = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Route> routes = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private Process process = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private Application application = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Projection> projections = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private List<Mapping> mappings = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private Activity activity = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private transient WorkDataHelper workDataHelper = null;
-	// 使用用懒加载,初始为null
+	// 지연 로딩 사용, 초기값 null
 	private Data data = null;
 
 	private List<Work> createWorks = new ArrayList<>();
@@ -281,7 +281,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (null == this.workLogs) {
 			List<WorkLog> os = this.business.entityManagerContainer().listEqual(WorkLog.class, WorkLog.JOB_FIELDNAME,
 					this.work.getJob());
-			// 保持和前端得到的相同排序
+			// 프런트엔드에서 받은 것과 동일한 정렬 유지
 			this.workLogs = os.stream()
 					.sorted(Comparator.comparing(WorkLog::getFromTime, Comparator.nullsLast(Date::compareTo))
 							.thenComparing(WorkLog::getArrivedTime, Comparator.nullsLast(Date::compareTo)))
@@ -312,7 +312,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (null == this.attachments) {
 			List<Attachment> os = this.business.entityManagerContainer().listEqual(Attachment.class,
 					Attachment.job_FIELDNAME, this.work.getJob());
-			// 附件需要重新排序,避免每次取得不一样.
+			// 첨부파일은 매번 다르게 조회되지 않도록 재정렬 필요.
 			this.attachments = os.stream().sorted(Comparator
 					.comparing(Attachment::getOrderNumber, Comparator.nullsLast(Integer::compareTo)).thenComparing(
 							Comparator.comparing(Attachment::getCreateTime, Comparator.nullsLast(Date::compareTo))))
@@ -649,7 +649,7 @@ public class AeiObjects extends GsonPropertyObject {
 		this.commitTaskCompleted();
 		this.commitRead();
 		this.commitReadCompleted();
-		/* review必须在task,taskCompleted,read,readCompleted之后提交,需要创建新的review */
+		/* review는 task, taskCompleted, read, readCompleted 이후에 커밋해야 하며 새 review 생성 필요 */
 		this.modify();
 		this.commitReview();
 		this.commitDocumentVersion();
@@ -817,7 +817,7 @@ public class AeiObjects extends GsonPropertyObject {
 		}
 	}
 
-	// 计算需要更新的内容
+	// 업데이트할 내용 계산
 	private void executeProjectionFullyNotIncludeNormal() throws Exception {
 		if (BooleanUtils.isTrue(this.getProcess().getProjectionFully())) {
 			executeProjectionFullyNotIncludeNormalWork();
@@ -879,7 +879,7 @@ public class AeiObjects extends GsonPropertyObject {
 
 	private void executeMapping() throws Exception {
 		for (Mapping m : this.getMappings()) {
-			// 仅处理最后work转workCompleted的事件
+			// 마지막 work를 workCompleted로 전환하는 이벤트만 처리
 			if ((!this.getCreateWorkCompleteds().isEmpty()) || (!this.getUpdateTaskCompleteds().isEmpty())) {
 				List<WorkCompleted> list = new ArrayList<>();
 				list.addAll(this.getCreateWorkCompleteds());
@@ -905,7 +905,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateWorks()) || ListTools.isNotEmpty(this.getDeleteWorks())
 				|| ListTools.isNotEmpty(this.getUpdateWorks())) {
 			this.entityManagerContainer().beginTransaction(Work.class);
-			// 保存工作
+			// 업무 문서 저장
 			this.getCreateWorks().forEach(o -> {
 				try {
 					this.workEvents.add(WorkEvent.createEventInstance(o));
@@ -914,7 +914,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 更新工作
+			// 업무 문서 업데이트
 			this.getUpdateWorks().forEach(o -> {
 				try {
 					this.workEvents.add(WorkEvent.updateEventInstance(o));
@@ -923,7 +923,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除工作
+			// 업무 문서 삭제
 			this.getDeleteWorks().stream().forEach(o -> {
 				Work obj;
 				try {
@@ -943,7 +943,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateWorkCompleteds()) || ListTools.isNotEmpty(this.getDeleteWorkCompleteds())
 				|| ListTools.isNotEmpty(this.getUpdateWorkCompleteds())) {
 			this.entityManagerContainer().beginTransaction(WorkCompleted.class);
-			// 保存完成工作
+			// 완료된 업무 문서 저장
 			this.getCreateWorkCompleteds().stream().forEach(o -> {
 				try {
 					this.workCompletedEvents.add(WorkCompletedEvent.createEventInstance(o));
@@ -952,7 +952,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 更新完成工作
+			// 완료된 업무 문서 업데이트
 			this.getUpdateWorkCompleteds().forEach(o -> {
 				try {
 					this.workCompletedEvents.add(WorkCompletedEvent.updateEventInstance(o));
@@ -961,7 +961,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除完成工作
+			// 완료된 업무 문서 삭제
 			this.getDeleteWorkCompleteds().stream().forEach(o -> {
 				WorkCompleted obj;
 				try {
@@ -981,7 +981,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateWorkLogs()) || ListTools.isNotEmpty(this.getDeleteWorkLogs())
 				|| ListTools.isNotEmpty(this.getUpdateWorkLogs())) {
 			this.entityManagerContainer().beginTransaction(WorkLog.class);
-			// 保存工作日志
+			// 업무 로그 저장
 			this.getCreateWorkLogs().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().persist(o, CheckPersistType.all);
@@ -989,7 +989,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 更新工作日志
+			// 업무 로그 업데이트
 			this.getUpdateWorkLogs().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().check(o, CheckPersistType.all);
@@ -997,7 +997,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除工作日志
+			// 업무 로그 삭제
 			this.getDeleteWorkLogs().stream().forEach(o -> {
 				WorkLog obj;
 				try {
@@ -1016,11 +1016,11 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateTasks()) || ListTools.isNotEmpty(this.getDeleteTasks())
 				|| ListTools.isNotEmpty(this.getUpdateTasks())) {
 			this.entityManagerContainer().beginTransaction(Task.class);
-			// 保存待办
+			// 결재 대기 저장
 			commitTaskCreatePart();
-			// 更新待办
+			// 결재 대기 업데이트
 			commitTaskUpdatePart();
-			// 删除待办
+			// 결재 대기 삭제
 			commitTaskDeletePart();
 		}
 	}
@@ -1028,17 +1028,17 @@ public class AeiObjects extends GsonPropertyObject {
 	private void commitTaskCreatePart() {
 		this.getCreateTasks().stream().forEach(o -> {
 			try {
-				// 写入当前处理人作为上一环节处理人
+				// 현재 처리자를 이전 단계 처리자로 기록
 				if (StringUtils.isNotEmpty(this.processingAttributes.getIdentity())) {
 					o.getProperties().setPrevTaskIdentity(this.processingAttributes.getIdentity());
 					o.getProperties()
 							.setPrevTaskIdentityList(ListTools.trim(o.getProperties().getPrevTaskIdentityList(), true,
 									true, this.processingAttributes.getIdentity()));
 				}
-				// 写入本次操作串号
+				// 이번 작업 일련 식별자 기록
 				o.setSeries(this.getProcessingAttributes().getSeries());
 				this.business.entityManagerContainer().persist(o, CheckPersistType.all);
-				// 创建待办的参阅
+				// 결재 대기의 참조 생성
 				this.createReview(new Review(this.getWork(), o.getPerson()));
 			} catch (Exception e) {
 				LOGGER.error(e);
@@ -1074,11 +1074,11 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateTaskCompleteds()) || ListTools.isNotEmpty(this.getDeleteTaskCompleteds())
 				|| ListTools.isNotEmpty(this.getUpdateTaskCompleteds())) {
 			this.entityManagerContainer().beginTransaction(TaskCompleted.class);
-			// 保存已办
+			// 처리 완료 저장
 			commitTaskCompletedCreatePart();
-			// 更新已办
+			// 처리 완료 업데이트
 			commitTaskCompletedUpdatePart();
-			// 删除已办 */
+			// 처리 완료 삭제 */
 			commitTaskCompletedDeletePart();
 		}
 	}
@@ -1086,11 +1086,11 @@ public class AeiObjects extends GsonPropertyObject {
 	private void commitTaskCompletedCreatePart() {
 		this.getCreateTaskCompleteds().stream().forEach(o -> {
 			try {
-				// 将相同用户的其他已办的lastest标记为false
+				// 동일 사용자의 다른 처리 완료 lastest를 false로 표시
 				this.getTaskCompleteds().stream().filter(p -> StringUtils.equals(o.getPerson(), p.getPerson()))
 						.forEach(p -> p.setLatest(false));
 				this.business.entityManagerContainer().persist(o, CheckPersistType.all);
-				// 创建已办的参阅
+				// 처리 완료의 참조 생성
 				this.createReview(new Review(this.getWork(), o.getPerson()));
 			} catch (Exception e) {
 				LOGGER.error(e);
@@ -1115,7 +1115,7 @@ public class AeiObjects extends GsonPropertyObject {
 						TaskCompleted.class);
 				if (null != deleteTaskCompleted) {
 					this.business.entityManagerContainer().remove(deleteTaskCompleted, CheckRemoveType.all);
-					// 要删除此已经办前此人其他的已办lastest标记为true
+					// 이 처리 완료를 삭제하기 전 이 사용자의 다른 처리 완료 lastest를 true로 표시
 					this.getTaskCompleteds().stream()
 							.filter(p -> !this.getDeleteTaskCompleteds().contains(p)
 									&& StringUtils.equals(o.getPerson(), p.getPerson())
@@ -1135,17 +1135,17 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateReads()) || ListTools.isNotEmpty(this.getDeleteReads())
 				|| ListTools.isNotEmpty(this.getUpdateReads())) {
 			this.entityManagerContainer().beginTransaction(Read.class);
-			// 保存待阅
+			// 열람 대기 저장
 			commitReadCreatePart();
-			// 更新待阅
+			// 열람 대기 업데이트
 			commitReadUpdatePart();
-			// 删除待阅
+			// 열람 대기 삭제
 			commitReadDeletePart();
 		}
 	}
 
 	private void commitReadCreatePart() {
-		// 去重可能的在同一次提交中产生的对同一个人的多份Read
+		// 같은 제출에서 동일인에게 생성되었을 수 있는 여러 Read 중복 제거
 		this.getCreateReads().stream().collect(Collectors.groupingBy(o -> o.getJob() + "#" + o.getPerson())).entrySet()
 				.forEach(
 						entry -> entry
@@ -1161,10 +1161,10 @@ public class AeiObjects extends GsonPropertyObject {
 												.filter(p -> StringUtils.equals(o.getJob(), p.getJob())
 														&& StringUtils.equals(o.getPerson(), p.getPerson()))
 												.findFirst();
-										// 不存在内容重复的待阅
+										// 내용이 중복된 열람 대기 없음
 										if (!existOptional.isPresent()) {
 											this.business.entityManagerContainer().persist(o, CheckPersistType.all);
-											// 创建待阅的参阅
+											// 열람 대기의 참조 생성
 											this.createReview(new Review(this.getWork(), o.getPerson()));
 										} else {
 											o.copyTo(existOptional.get(), JpaObject.FieldsUnmodify);
@@ -1204,11 +1204,11 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateReadCompleteds()) || ListTools.isNotEmpty(this.getDeleteReadCompleteds())
 				|| ListTools.isNotEmpty(this.getUpdateReadCompleteds())) {
 			this.entityManagerContainer().beginTransaction(ReadCompleted.class);
-			// 保存已阅
+			// 열람 완료 저장
 			commitReadCompletedCreatePart();
-			// 更新已阅
+			// 열람 완료 업데이트
 			commitReadCompletedUpdatePart();
-			// 删除已阅
+			// 열람 완료 삭제
 			commitReadCompletedDeletePart();
 		}
 	}
@@ -1216,17 +1216,17 @@ public class AeiObjects extends GsonPropertyObject {
 	private void commitReadCompletedCreatePart() {
 		this.getCreateReadCompleteds().stream().forEach(o -> {
 			try {
-				// 已阅唯一
+				// 열람 완료 고유
 				Optional<ReadCompleted> optional = this.getReadCompleteds().stream()
 						.filter(p -> StringUtils.equals(o.getJob(), p.getJob())
 								&& StringUtils.equals(o.getPerson(), p.getPerson()))
 						.findFirst();
 				if (!optional.isPresent()) {
 					this.business.entityManagerContainer().persist(o, CheckPersistType.all);
-					// 创建已阅参阅
+					// 열람 완료 참조 생성
 					this.createReview(new Review(this.getWork(), o.getPerson()));
 				} else {
-					// 如果逻辑上相同的已阅已经存在,覆盖内容.
+					// 논리적으로 동일한 열람 완료가 이미 있으면 내용 덮어쓰기.
 					o.copyTo(optional.get(), JpaObject.FieldsUnmodify);
 				}
 			} catch (Exception e) {
@@ -1263,17 +1263,17 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateReviews()) || ListTools.isNotEmpty(this.getDeleteReviews())
 				|| ListTools.isNotEmpty(this.getUpdateReviews())) {
 			this.entityManagerContainer().beginTransaction(Review.class);
-			// 保存参阅
+			// 참조 저장
 			commitReviewCreatePart();
-			// 更新参阅
+			// 참조 업데이트
 			commitReviewUpdatePart();
-			// 删除参阅
+			// 참조 삭제
 			commitReviewDeletePart();
 		}
 	}
 
 	private void commitReviewCreatePart() {
-		// 去重可能的在同一次提交中产生的对同一个人的多份Review
+		// 같은 제출에서 동일인에게 생성되었을 수 있는 여러 Review 중복 제거
 		this.getCreateReviews().stream().collect(Collectors.groupingBy(o -> o.getJob() + "#" + o.getPerson()))
 				.entrySet()
 				.forEach(entry -> entry.getValue().stream().sorted(Comparator
@@ -1301,7 +1301,7 @@ public class AeiObjects extends GsonPropertyObject {
 								if (existOptional.isEmpty()) {
 									this.business.entityManagerContainer().persist(o, CheckPersistType.all);
 								} else {
-									// 如果逻辑上相同的已阅已经存在,覆盖内容.
+									// 논리적으로 동일한 열람 완료가 이미 있으면 내용 덮어쓰기.
 									boolean permissionWrite = BooleanUtils
 											.isTrue(existOptional.get().getPermissionWrite())
 											|| BooleanUtils.isTrue(o.getPermissionWrite());
@@ -1344,7 +1344,7 @@ public class AeiObjects extends GsonPropertyObject {
 				|| ListTools.isNotEmpty(this.getDeleteDocumentVersions())
 				|| ListTools.isNotEmpty(this.getUpdateDocumentVersions())) {
 			this.entityManagerContainer().beginTransaction(DocumentVersion.class);
-			// 保存版式文件
+			// 레이아웃 파일 저장
 			this.getCreateDocumentVersions().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().persist(o, CheckPersistType.all);
@@ -1352,7 +1352,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 更新版式文件
+			// 레이아웃 파일 업데이트
 			this.getUpdateDocumentVersions().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().check(o, CheckPersistType.all);
@@ -1360,7 +1360,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除版式文件
+			// 레이아웃 파일 삭제
 			this.getDeleteDocumentVersions().stream().forEach(o -> {
 				try {
 					DocumentVersion obj = this.business.entityManagerContainer().find(o.getId(), DocumentVersion.class);
@@ -1378,7 +1378,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateDocSignScrawls()) || ListTools.isNotEmpty(this.getDeleteDocSignScrawls())
 				|| ListTools.isNotEmpty(this.getUpdateDocSignScrawls())) {
 			this.entityManagerContainer().beginTransaction(DocSignScrawl.class);
-			// 保存签批涂鸦信息
+			// 서명 낙서 정보 저장
 			this.getCreateDocSignScrawls().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().persist(o, CheckPersistType.all);
@@ -1386,7 +1386,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 更新签批涂鸦信息
+			// 서명 낙서 정보 업데이트
 			this.getUpdateDocSignScrawls().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().check(o, CheckPersistType.all);
@@ -1394,7 +1394,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除签批涂鸦信息
+			// 서명 낙서 정보 삭제
 			this.getDeleteDocSignScrawls().stream().forEach(o -> {
 				try {
 					DocSignScrawl obj = this.business.entityManagerContainer().find(o.getId(), DocSignScrawl.class);
@@ -1412,7 +1412,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateDocSigns()) || ListTools.isNotEmpty(this.getDeleteDocSigns())
 				|| ListTools.isNotEmpty(this.getUpdateDocSigns())) {
 			this.entityManagerContainer().beginTransaction(DocSign.class);
-			// 保存手写签批
+			// 자필 서명 저장
 			this.getCreateDocSigns().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().persist(o, CheckPersistType.all);
@@ -1420,7 +1420,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 更新手写签批
+			// 자필 서명 업데이트
 			this.getUpdateDocSigns().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().check(o, CheckPersistType.all);
@@ -1428,7 +1428,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除手写签批
+			// 자필 서명 삭제
 			this.getDeleteDocSigns().stream().forEach(o -> {
 				try {
 					DocSign obj = this.business.entityManagerContainer().find(o.getId(), DocSign.class);
@@ -1477,7 +1477,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateRecords()) || ListTools.isNotEmpty(this.getDeleteRecords())
 				|| ListTools.isNotEmpty(this.getUpdateRecords())) {
 			this.entityManagerContainer().beginTransaction(Record.class);
-			// 保存记录
+			// 기록 저장
 			this.getCreateRecords().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().persist(o, CheckPersistType.all);
@@ -1485,7 +1485,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除记录
+			// 기록 삭제
 			this.getUpdateRecords().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().check(o, CheckPersistType.all);
@@ -1511,7 +1511,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateAttachments()) || ListTools.isNotEmpty(this.getDeleteAttachments())
 				|| ListTools.isNotEmpty(this.getUpdateAttachments())) {
 			this.entityManagerContainer().beginTransaction(Attachment.class);
-			// 保存,更新附件是不可能的,删除附件
+			// 첨부파일 저장·업데이트는 불가능, 첨부파일 삭제
 			this.getDeleteAttachments().stream().forEach(o -> {
 				try {
 					Attachment obj = this.business.entityManagerContainer().find(o.getId(), Attachment.class);
@@ -1531,9 +1531,9 @@ public class AeiObjects extends GsonPropertyObject {
 	}
 
 	/**
-	 * 更新data对象,这个方法会在流程executingCommitted之后再次调用,实现可以在after事件中修改数据.
+	 * data 객체 업데이트, 이 메서드는 프로세스 executingCommitted 이후 다시 호출되어 after 이벤트에서 데이터 수정 가능.
 	 *
-	 * @return 是否有Item发生了更新
+	 * @return Item 업데이트 발생 여부
 	 * @throws Exception
 	 */
 	public boolean commitData() throws Exception {
@@ -1552,7 +1552,7 @@ public class AeiObjects extends GsonPropertyObject {
 		if (ListTools.isNotEmpty(this.getCreateDynamicEntities())
 				|| ListTools.isNotEmpty(this.getDeleteDynamicEntities())
 				|| ListTools.isNotEmpty(this.getUpdateDynamicEntities())) {
-			// 保存自定义对象
+			// 사용자 정의 객체 저장
 			this.getCreateDynamicEntities().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().beginTransaction(o.getClass());
@@ -1561,7 +1561,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 更新自定义对象
+			// 사용자 정의 객체 업데이트
 			this.getUpdateDynamicEntities().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().beginTransaction(o.getClass());
@@ -1570,7 +1570,7 @@ public class AeiObjects extends GsonPropertyObject {
 					LOGGER.error(e);
 				}
 			});
-			// 删除自定义对象
+			// 사용자 정의 객체 삭제
 			this.getDeleteDynamicEntities().stream().forEach(o -> {
 				try {
 					this.business.entityManagerContainer().beginTransaction(o.getClass());
@@ -1611,7 +1611,7 @@ public class AeiObjects extends GsonPropertyObject {
 
 	private void message() throws Exception {
 
-		// 待办转已办处理
+		// 결재 대기를 처리 완료로 전환 처리
 		List<TaskCompleted> copyOfCreateTaskCompleteds = new ArrayList<>(this.getCreateTaskCompleteds());
 		List<Task> copyOfDeleteTasks = new ArrayList<>(this.getDeleteTasks());
 		for (Entry<TaskCompleted, Task> entry : ListTools.pairWithProperty(copyOfCreateTaskCompleteds,
@@ -1620,7 +1620,7 @@ public class AeiObjects extends GsonPropertyObject {
 			copyOfDeleteTasks.remove(entry.getValue());
 			MessageFactory.task_to_taskCompleted(entry.getKey());
 		}
-		// 待阅转已阅处理
+		// 열람 대기를 열람 완료로 전환 처리
 		List<ReadCompleted> copyOfCreateReadCompleteds = new ArrayList<>(this.getCreateReadCompleteds());
 		List<Read> copyOfDeleteReads = new ArrayList<>(this.getDeleteReads());
 		for (Entry<ReadCompleted, Read> entry : ListTools.pairWithProperty(copyOfCreateReadCompleteds,
@@ -1630,7 +1630,7 @@ public class AeiObjects extends GsonPropertyObject {
 			MessageFactory.read_to_readCompleted(entry.getKey());
 		}
 
-		// 工作转已完成工作
+		// 업무 문서를 완료된 업무 문서로 전환
 		List<WorkCompleted> copyOfCreateWorkCompleteds = new ArrayList<>(this.getCreateWorkCompleteds());
 		List<Work> copyOfDeleteWorks = new ArrayList<>(this.getDeleteWorks());
 		for (Entry<WorkCompleted, Work> entry : ListTools.pairWithProperty(copyOfCreateWorkCompleteds,
@@ -1713,7 +1713,7 @@ public class AeiObjects extends GsonPropertyObject {
 	}
 
 	private void messageCreateRead() {
-		// 去重可能的在同一次提交中产生的对同一个人的多份Read
+		// 같은 제출에서 동일인에게 생성되었을 수 있는 여러 Read 중복 제거
 		this.getCreateReads().stream().collect(Collectors.groupingBy(o -> o.getJob() + "#" + o.getPerson())).entrySet()
 				.forEach(
 						entry -> entry
@@ -1728,7 +1728,7 @@ public class AeiObjects extends GsonPropertyObject {
 										if (this.getReads().stream()
 												.noneMatch(p -> StringUtils.equals(o.getJob(), p.getJob())
 														&& StringUtils.equals(o.getPerson(), p.getPerson()))) {
-											// 不存在内容重复的待阅
+											// 내용이 중복된 열람 대기 없음
 											MessageFactory.read_create(o);
 										}
 									} catch (Exception e) {
@@ -1756,7 +1756,7 @@ public class AeiObjects extends GsonPropertyObject {
 	}
 
 	private void messageCreateReview() {
-		// 去重可能的在同一次提交中产生的对同一个人的多份Review
+		// 같은 제출에서 동일인에게 생성되었을 수 있는 여러 Review 중복 제거
 		this.getCreateReviews().stream().collect(Collectors.groupingBy(o -> o.getJob() + "#" + o.getPerson()))
 				.entrySet()
 				.forEach(entry -> entry.getValue().stream()
@@ -1767,7 +1767,7 @@ public class AeiObjects extends GsonPropertyObject {
 							try {
 								if (this.getReviews().stream().noneMatch(p -> StringUtils.equals(o.getJob(), p.getJob())
 										&& StringUtils.equals(o.getPerson(), p.getPerson()))) {
-									// 不存在内容重复的待阅
+									// 내용이 중복된 열람 대기 없음
 									MessageFactory.review_create(o);
 								}
 							} catch (Exception e) {

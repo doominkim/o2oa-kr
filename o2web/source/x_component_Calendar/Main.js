@@ -249,7 +249,7 @@ MWF.xApplication.Calendar.MainPc = new Class({
         this.topMenuRight = new Element("div", {"styles": this.css.topMenuRight }).inject(this.topMenu);
 
         this.createTopMenu_right(this.lp.addEvent, "ooicon-add-circle", "addCalendarEvent");
-        //this.createTopMenu_right("新建日历", "icon_newapply", "addCalendar");
+        //this.createTopMenu_right("새 캘린더", "icon_newapply", "addCalendar");
 
         //var refreshNode = this.createTopMenu_right(this.lp.refresh, "refresh", "refresh");
         //refreshNode.setStyle("float", "right");
@@ -773,7 +773,7 @@ MWF.xApplication.Calendar.MainMobile = new Class({
                     let d = (start > first) ? start.clone() : first.clone();
 
                     while (d <= end && d <= last) {
-                        //在日历上标记日程标识
+                        //캘린더에 일정 표시
                         this.setFlag(d.format( O2_CALENDAR_FORMAT_DATE ));
                         d.increment('day', 1);
                     }
@@ -1121,7 +1121,7 @@ MWF.xApplication.Calendar.Navi = new Class({
         }.bind(this));
         //var seeMore = new Element("div", {
         //    styles : this.css.seeMoreNode,
-        //    "text" : "查看日历广场",
+        //    "text" : "캘린더 광장 보기",
         //    "events" : {
         //        mouseover : function(ev){ ev.target.setStyles( this.css.seeMoreNode_over ) }.bind(this),
         //        mouseout : function(ev){ ev.target.setStyles( this.css.seeMoreNode ) }.bind(this),
@@ -1531,7 +1531,7 @@ MWF.xApplication.Calendar.CalendarMarket = new Class({
 
                     //var typeNode = new Element("div", {
                     //    styles : this.css.marketTypleLabel,
-                    //    text : d.type == "PERSON" ? "个人日历" : "组织日历"
+                    //    text : d.type == "PERSON" ? "개인 캘린더" : "조직 캘린더"
                     //}).inject( topNode );
                     //typeNode.setStyle( "background-color" , MWFCalendar.ColorOptions.getLightColor(d.color ) );
                 }.bind(this))

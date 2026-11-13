@@ -99,7 +99,7 @@ MWF.xApplication.AppMarketV2.RecommendContent.Recommend= new Class({
             apptext = this.content.recommendRightBottomTitle;
             apppar = this.content.rightBottomCoverNode;
         }
-        //获取对应indexPic图片
+        //해당 indexPic 이미지 조회
         this.actions.MarketAction.getCoverPic(d.id,function(json){
             if (json.data && json.data.value){
                 app.setStyle("background-image", "url(data:image/png;base64,"+json.data.value+")");

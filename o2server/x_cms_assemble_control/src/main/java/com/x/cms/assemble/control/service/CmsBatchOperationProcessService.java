@@ -20,7 +20,7 @@ import com.x.cms.core.entity.Document;
 import com.x.cms.core.entity.Review;
 
 /**
- * 批处理操作执行
+ * 일괄 처리 작업 실행
  */
 public class CmsBatchOperationProcessService {
 
@@ -35,14 +35,14 @@ public class CmsBatchOperationProcessService {
 	private DocumentInfoService documentInfoService = new DocumentInfoService();
 	private ReviewService reviewService = new ReviewService();
 	/**
-	 * 批处理操作执行
+	 * 일괄 처리 작업 실행
 	 * @param cmsBatchOperation
 	 * @return
 	 * @throws Exception
 	 */
 	public String process( CmsBatchOperation cmsBatchOperation ) throws Exception {
 		logger.debug( "process -> Cms processing batch operation: " + cmsBatchOperation.toString() );
-		//先把cmsBatchOperation状态修改为执行中
+		//먼저 cmsBatchOperation 상태를 실행 중으로 변경
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			cmsBatchOperation = emc.find( cmsBatchOperation.getId(), CmsBatchOperation.class );
 			if( cmsBatchOperation != null ) {
@@ -57,39 +57,39 @@ public class CmsBatchOperationProcessService {
 		}
 
 		if( "DOCUMENT".equalsIgnoreCase( cmsBatchOperation.getObjType() )) {
-			if( "PERMISSION".equalsIgnoreCase( cmsBatchOperation.getOptType() )) {//文档处理
-				//将categoryName是旧分类名称的所有文档的分类和栏目相关的信息更新掉，最后删除当前的批处理信息
+			if( "PERMISSION".equalsIgnoreCase( cmsBatchOperation.getOptType() )) {//문서 처리
+				//categoryName이 기존 분류 이름인 모든 문서의 분류 및 게시판 관련 정보 갱신 후 마지막으로 현재 일괄 처리 정보 삭제
 				refreshDocumentReview( cmsBatchOperation.getId(), cmsBatchOperation.getBundle() );
 			}else if( "DELETE".equalsIgnoreCase( cmsBatchOperation.getOptType()  )) {
-				//删除文档，并且修改分类所属的栏目中的分类数量和文档数量
+				//문서 삭제 및 분류가 속한 게시판의 분류 수와 문서 수 수정
 				deleteDocumentReview( cmsBatchOperation.getId(), cmsBatchOperation.getBundle() );
 			}
 		}else  if( "CATEGORY".equalsIgnoreCase( cmsBatchOperation.getObjType() )) {
-			//分类处理：分类名称变更，分类删除
+			//분류 처리: 분류 이름 변경, 분류 삭제
 			if( "UPDATENAME".equalsIgnoreCase( cmsBatchOperation.getOptType() )) {
 				if( StringUtils.isNotEmpty( cmsBatchOperation.getOldInfo() )) {
-					//将categoryName是旧分类名称的所有文档的分类和栏目相关的信息更新掉，最后删除当前的批处理信息
+					//categoryName이 기존 분류 이름인 모든 문서의 분류 및 게시판 관련 정보 갱신 후 마지막으로 현재 일괄 처리 정보 삭제
 					changeCategoryNameInDocument( cmsBatchOperation.getId(), cmsBatchOperation.getBundle(), cmsBatchOperation.getOldInfo() );
 				}
 			}else if( "PERMISSION".equalsIgnoreCase( cmsBatchOperation.getOptType()  )) {
-				//分类修改权限
+				//분류 수정 권한
 				refreshDocumentReviewInCagetory( cmsBatchOperation.getId(), cmsBatchOperation.getBundle() );
 			}else if( "DELETE".equalsIgnoreCase( cmsBatchOperation.getOptType()  )) {
-				//删除文档，并且修改分类所属的栏目中的分类数量和文档数量
+				//문서 삭제 및 분류가 속한 게시판의 분류 수와 문서 수 수정
 				deleteDocumentInCategory( cmsBatchOperation.getId(), cmsBatchOperation.getBundle() );
 			}
 		}else  if( "APPINFO".equalsIgnoreCase( cmsBatchOperation.getObjType() )) {
-			//栏目处理：栏目名称变更，栏目删除
+			//게시판 처리: 게시판 이름 변경, 게시판 삭제
 			if( "UPDATENAME".equalsIgnoreCase( cmsBatchOperation.getOptType() )) {
 				if( StringUtils.isNotEmpty( cmsBatchOperation.getOldInfo() )) {
-					//将AppName是旧栏目名称的所有分类以及文档的栏目相关的信息更新掉，最后删除当前的批处理信息
+					//AppName이 기존 게시판 이름인 모든 분류와 문서의 게시판 관련 정보를 갱신하고, 마지막으로 현재 배치 처리 정보 삭제
 					changeAppNameInCategory( cmsBatchOperation.getId(), cmsBatchOperation.getBundle(), cmsBatchOperation.getOldInfo() );
 				}
 			}else if( "PERMISSION".equalsIgnoreCase( cmsBatchOperation.getOptType()  )) {
-				//栏目修改权限
+				//게시판 수정 권한
 				refreshDocumentReviewInAppInfo( cmsBatchOperation.getId(), cmsBatchOperation.getBundle() );
 			}else if( "DELETE".equalsIgnoreCase( cmsBatchOperation.getOptType()  )) {
-				//删除分类以及文档，并且修改分类所属的栏目中的分类数量和文档数量
+				//분류와 문서 삭제 및 분류가 속한 게시판의 분류 수와 문서 수 수정
 				deleteDocumentInApp( cmsBatchOperation.getId(), cmsBatchOperation.getBundle() );
 			}
 		}
@@ -103,7 +103,7 @@ public class CmsBatchOperationProcessService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			cmsBatchOperation = emc.find( id, CmsBatchOperation.class );
-			//查询分类中所有的文档，重发为文档Review更新， 增加删除栏目批量操作（对分类和文档）的信息
+			//분류의 모든 문서를 조회해 문서 Review 갱신으로 재발송, 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 			List<String> ids = null;
 			List<Document> documentList = null;
 			Integer maxQueryCount = 1000;
@@ -155,7 +155,7 @@ public class CmsBatchOperationProcessService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			cmsBatchOperation = emc.find( id, CmsBatchOperation.class );
-			//查询分类中所有的文档，重发为文档Review更新， 增加删除栏目批量操作（对分类和文档）的信息
+			//분류의 모든 문서를 조회해 문서 Review 갱신으로 재발송, 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 			List<String> ids = null;
 			List<Document> documentList = null;
 			Integer maxQueryCount = 1000;
@@ -217,8 +217,8 @@ public class CmsBatchOperationProcessService {
 	}
 
 	/**
-	 * 根据数据库中的文档的信息，重新计算文档的Review信息
-	 * 全部删除，然后再重新插入Review记录
+	 * DB의 문서 정보로 문서 Review 정보 재계산
+	 * 전체 삭제 후 Review 기록 다시 삽입
 	 * @param id
 	 * @param docId
 	 * @throws Exception
@@ -276,8 +276,8 @@ public class CmsBatchOperationProcessService {
 	}
 
 	/**
-	 * 根据数据库中的文档的信息，重新计算文档的Review信息
-	 * 全部删除，然后再重新插入Review记录
+	 * DB의 문서 정보로 문서 Review 정보 재계산
+	 * 전체 삭제 후 Review 기록 다시 삽입
 	 * @param docId
 	 * @throws Exception
 	 */
@@ -326,7 +326,7 @@ public class CmsBatchOperationProcessService {
 
 
 	/**
-	 * 将栏目下所有的文档删除，最后删除当前的批处理信息
+	 * 게시판 아래 모든 문서 삭제 후 마지막으로 현재 일괄 처리 정보 삭제
 	 * @param id
 	 * @param bundle
 	 * @throws Exception
@@ -356,12 +356,12 @@ public class CmsBatchOperationProcessService {
 						emc.commit();
 					}
 
-					//将该目录下所有的文档删除
+					//해당 디렉터리 아래 모든 문서 삭제
 					docCount = business.getDocumentFactory().countByCategoryId( categoryId );
 					if( docCount > 0 ) {
 						totalWhileCount = (int) (docCount/queryMaxCount) + 1;
 						if( totalWhileCount > 0 ) {
-							while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {//查询1000个文档进行操作
+							while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {//문서 1000건 조회 후 처리
 								document_ids = business.getDocumentFactory().listByCategoryId( bundle, queryMaxCount );
 								for( String docId : document_ids ){
 									try {
@@ -374,9 +374,9 @@ public class CmsBatchOperationProcessService {
 										e.printStackTrace();
 									}
 								}
-								//当前循环次数+1
+								//현재 반복 횟수 +1
 								currenteWhileCount ++;
-								//重新查询剩余的文档数量
+								//남은 문서 수 다시 조회
 								docCount = business.getDocumentFactory().countByCategoryId( categoryInfo.getId() );
 							}
 						}
@@ -398,7 +398,7 @@ public class CmsBatchOperationProcessService {
 	}
 
 	/**
-	 * 将AppName是旧栏目名称的所有分类以及文档的栏目相关的信息更新掉，最后删除当前的批处理信息
+	 * AppName이 기존 게시판 이름인 모든 분류와 문서의 게시판 관련 정보를 갱신하고, 마지막으로 현재 배치 처리 정보 삭제
 	 * @param id
 	 * @param bundle
 	 * @param oldName
@@ -415,7 +415,7 @@ public class CmsBatchOperationProcessService {
 		CategoryInfo categoryInfo = null;
 		CmsBatchOperation cmsBatchOperation = null;
 
-		//先查询该栏目下的所有分类信息列表
+		//먼저 해당 게시판 아래 모든 분류 정보 목록 조회
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 			cmsBatchOperation = emc.find( id, CmsBatchOperation.class );
@@ -437,19 +437,19 @@ public class CmsBatchOperationProcessService {
 						logger.info( "changeAppNameInCategory -> cms processing batch operation: change category: " + categoryInfo.getId() + ", app_name: " + oldName + " -> " + categoryInfo.getAppName() );
 						emc.commit();
 					}
-					//再处理该分类下所有的文档信息
+					//이어서 해당 분류 아래 모든 문서 정보 처리
 					docCount = business.getDocumentFactory().countByCategoryId( categoryInfo.getId() );
 					if( docCount > 0 ) {
 						totalWhileCount = (int) (docCount/queryMaxCount) + 1;
 						if( totalWhileCount > 0 ) {
 							while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {
-								//查询1000个文档进行操作
+								//문서 1000건 조회 후 처리
 								document_ids = business.getDocumentFactory().listByCategoryIdAndNotEqualAppName( categoryInfo.getId(), appInfo.getAppName(), queryMaxCount );
 								changeDocumentInfoWithCategory( emc, document_ids, categoryInfo );
 								logger.info( "changeAppNameInCategory -> cms processing batch operation: update app and category info for document, batch("+ currenteWhileCount +"/" + totalWhileCount + ") " );
-								//当前循环次数+1
+								//현재 반복 횟수 +1
 								currenteWhileCount ++;
-								//重新查询剩余未修改栏目名称的文档数量
+								//게시판 이름이 아직 변경되지 않은 남은 문서 수 다시 조회
 								docCount = business.getDocumentFactory().countByCategoryIdAndNotEqualAppName( categoryInfo.getId(), appInfo.getAppName() );
 							}
 						}
@@ -468,7 +468,7 @@ public class CmsBatchOperationProcessService {
 	}
 
 	/**
-	 * 将分类下所有的文档删除，最后删除当前的批处理信息
+	 * 분류 아래 모든 문서 삭제 후 마지막으로 현재 일괄 처리 정보 삭제
 	 * @param id
 	 * @param bundle
 	 * @throws Exception
@@ -494,12 +494,12 @@ public class CmsBatchOperationProcessService {
 				emc.commit();
 			}
 
-			//将该目录下所有的文档删除
+			//해당 디렉터리 아래 모든 문서 삭제
 			docCount = business.getDocumentFactory().countByCategoryId( bundle );
 			if( docCount > 0 ) {
 				totalWhileCount = (int) (docCount/queryMaxCount) + 1;
 				if( totalWhileCount > 0 ) {
-					while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {//查询1000个文档进行操作
+					while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {//문서 1000건 조회 후 처리
 						document_ids = business.getDocumentFactory().listByCategoryId( bundle, queryMaxCount );
 						for( String docId : document_ids ){
 							try {
@@ -512,9 +512,9 @@ public class CmsBatchOperationProcessService {
 								e.printStackTrace();
 							}
 						}
-						//当前循环次数+1
+						//현재 반복 횟수 +1
 						currenteWhileCount ++;
-						//重新查询剩余的未修改分类名称的文档数量
+						//분류 이름이 아직 변경되지 않은 남은 문서 수 다시 조회
 						docCount = business.getDocumentFactory().countByCategoryId( categoryInfo.getId() );
 					}
 				}
@@ -533,10 +533,10 @@ public class CmsBatchOperationProcessService {
 	}
 
 	/**
-	 * 将categoryName是旧分类名称的所有文档的分类和栏目相关的信息更新掉，最后删除当前的批处理信息
-	 * @param id 批处理信息ID
-	 * @param bundle  绑定的分类信息ID
-	 * @param oldName 分类使用的旧名称
+	 * categoryName이 기존 분류 이름인 모든 문서의 분류 및 게시판 관련 정보 갱신 후 마지막으로 현재 일괄 처리 정보 삭제
+	 * @param id 일괄 처리 정보 ID
+	 * @param bundle  연결된 분류 정보 ID
+	 * @param oldName 분류의 기존 이름
 	 * @throws Exception
 	 */
 	private void changeCategoryNameInDocument( String id, String bundle, String oldName ) throws Exception {
@@ -552,19 +552,19 @@ public class CmsBatchOperationProcessService {
 			cmsBatchOperation = emc.find( id, CmsBatchOperation.class );
 			categoryInfo = emc.find( bundle, CategoryInfo.class );
 			if( categoryInfo != null ) {
-				//对该目录下所有的文档的栏目名称和分类别名进行调整
+				//해당 디렉터리 아래 모든 문서의 게시판 이름과 분류 별칭 조정
 				docCount = business.getDocumentFactory().countByCategoryId( bundle );
 				if( docCount > 0 ) {
 					totalWhileCount = (int) (docCount/queryMaxCount) + 1;
 					if( totalWhileCount > 0 ) {
 						while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {
-							//查询1000个文档进行操作
+							//문서 1000건 조회 후 처리
 							document_ids = business.getDocumentFactory().listByCategoryIdAndCategoryName(bundle, categoryInfo.getCategoryName(), queryMaxCount );
 							changeDocumentInfoWithCategory( emc, document_ids, categoryInfo );
 							logger.info( "changeCategoryNameInDocument -> cms processing batch operation: update app and category info for document, batch("+ currenteWhileCount +"/" + totalWhileCount + ") " );
-							//当前循环次数+1
+							//현재 반복 횟수 +1
 							currenteWhileCount ++;
-							//重新查询剩余的文档数量
+							//남은 문서 수 다시 조회
 							docCount = business.getDocumentFactory().countByCategoryIdAndNotEqualsCategoryName( categoryInfo.getId(), categoryInfo.getCategoryName() );
 						}
 					}
@@ -584,7 +584,7 @@ public class CmsBatchOperationProcessService {
 	}
 
 	/**
-	 * 更新指定文档的栏目和分类信息内容
+	 * 지정 문서의 게시판 및 분류 정보 내용 갱신
 	 * @param emc
 	 * @param document_ids
 	 * @param categoryInfo

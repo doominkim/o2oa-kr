@@ -40,7 +40,7 @@ class ActionGetWithPerson extends BaseAction {
 	private Wo get(Business business, String flag) throws Exception {
 		String base64;
 		if (Config.token().isInitialManager(flag)) {
-			/* 如果是xadmin单独处理 */
+			/* xadmin이면 별도 처리 */
 			base64 = com.x.base.core.project.config.Person.ICON_MANAGER;
 		} else {
 			Person person = business.person().pick(flag);

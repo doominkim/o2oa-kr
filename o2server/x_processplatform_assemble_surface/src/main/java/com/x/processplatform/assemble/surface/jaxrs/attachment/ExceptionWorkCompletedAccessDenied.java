@@ -7,7 +7,7 @@ class ExceptionWorkCompletedAccessDenied extends LanguagePromptException {
 	private static final long serialVersionUID = 9085364457175859374L;
 
 	ExceptionWorkCompletedAccessDenied(String person, String title, String workCompletedId) {
-		super("用户:{} 没有权限访问工作 title:{} id:{}.", person, title, workCompletedId);
+		super("사용자: {}에게 문서 title: {} id: {}에 접근할 권한이 없습니다.", person, title, workCompletedId);
 	}
 
 }

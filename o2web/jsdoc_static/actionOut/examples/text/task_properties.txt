@@ -1,14 +1,14 @@
     {
 		"serialVersionUID": 1,
-		"prevTaskIdentity": " ",		//上一人工环节处理人.
+		"prevTaskIdentity": " ",		//이전 수동 단계 처리자.
 		"prevTaskIdentityList": [
 			" "
-		],		//上一人工环节处理人列表.
-		"title": " ",		//标题.
-		"opinion": " ",		//意见.
+		],		//이전 수동 단계 처리자 목록.
+		"title": " ",		//제목.
+		"opinion": " ",		//의견.
 		"prevTaskList": [
 			{
-				"routeName": " ", //路由名称
+				"routeName": " ", //경로 이름
 				"unit": " ",
 				"identity": " ",
 				"person": " ",
@@ -17,10 +17,10 @@
 				"completedTime": "2022-07-27 13:29:35",
                 "activity": "ce6ede22-d49d-44a7-a0a0-776951cb7348",
                 "activityToken": "cc9afcf8-388d-44d2-8801-97d0bc742674",
-                "activityName": "拟稿",
+                "activityName": "기안",
                 "activityType": "manual"
 			}
-		],		//上一人工环节待办对象列表.
+		],		//이전 수동 단계 결재 대기 객체 목록.
 		"prevTask": {
 			"routeName": " ",
 			"unit": " ",
@@ -31,10 +31,10 @@
 			"completedTime": "2022-07-27 13:29:35",
             "activity": "ce6ede22-d49d-44a7-a0a0-776951cb7348",
             "activityToken": "cc9afcf8-388d-44d2-8801-97d0bc742674",
-            "activityName": "拟稿",
+            "activityName": "기안",
             "activityType": "manual"
-		},		//上一人工环节最近待办对象.
-		"pauseStartTime": "2022-07-27 13:29:35",		//待办计时暂停工作时间时长(分钟).
-		"pauseWorkTimeMinutes": 1,		//待办计时暂停工作时间时长(分钟).
-		"pauseMinutes": 1,		//待办计时暂停自然时间时长(分钟).
+		},		//이전 수동 단계 최근 결재 대기 객체.
+		"pauseStartTime": "2022-07-27 13:29:35",		//결재 대기 계시 일시정지 근무 시간(분).
+		"pauseWorkTimeMinutes": 1,		//결재 대기 계시 일시정지 근무 시간(분).
+		"pauseMinutes": 1,		//결재 대기 계시 일시정지 자연 시간(분).
 	}

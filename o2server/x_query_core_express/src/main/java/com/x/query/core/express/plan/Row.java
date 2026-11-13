@@ -45,7 +45,7 @@ public class Row extends GsonPropertyObject {
 		}
 	}
 
-	/** 统计计算时用于转换值,不可转换的值默认为0 */
+	/** 통계 계산 시 값 변환에 사용, 변환할 수 없는 값은 기본 0 */
 	public Double getAsDouble(String key) {
 		Object o = this.data.get(key);
 		String val = Objects.toString(o, "");

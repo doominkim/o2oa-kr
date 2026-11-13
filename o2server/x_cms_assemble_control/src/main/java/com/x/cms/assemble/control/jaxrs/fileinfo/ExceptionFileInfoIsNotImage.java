@@ -7,6 +7,6 @@ class ExceptionFileInfoIsNotImage extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionFileInfoIsNotImage( String id ) {
-		super("文件信息不为图片格式，无法进行图片转换。Id{}", id );
+		super("파일이 이미지 형식이 아니어서 이미지로 변환할 수 없습니다. Id{}", id );
 	}
 }

@@ -26,7 +26,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 查询登录者当天的所有移动打卡信息
+ * 로그인 사용자의 당일 모든 모바일 출퇴근 기록 정보 조회
  */
 public class ActionListMyMobileRecordToday extends BaseAction {
 
@@ -44,9 +44,9 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 		WoScheduleSetting woScheduleSetting = null;
 		String signDate = dateOperation.getDateStringFromDate( new Date(), "YYYY-MM-DD");
 
-		// 检查配置 是否禁用旧版考勤
+		// 설정 확인: 구버전 근태 비활성화 여부
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			AttendanceV2Config config = null; // 配置对象
+			AttendanceV2Config config = null; // 설정 객체
 			List<AttendanceV2Config> configs = emc.listAll(AttendanceV2Config.class);
 			if (configs != null && !configs.isEmpty()) {
 					config = configs.get(0);
@@ -56,14 +56,14 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 			}
 		}
 
-		//先查询该员工所有的考勤数据
+		//먼저 해당 직원의 모든 근태 데이터 조회
 		if (check) {
 			try {
 				attendanceDetailMobileList = attendanceDetailServiceAdv.listAttendanceDetailMobile( effectivePerson.getDistinguishedName(), signDate );
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(e,
-						"根据条件查询员工手机打卡信息列表时发生异常.DistinguishedName:" + effectivePerson.getDistinguishedName() + ",Date:" + signDate);
+						"조건으로 직원 모바일 체크 정보 목록을 조회하는 중 오류가 발생했습니다. DistinguishedName:" + effectivePerson.getDistinguishedName() + ",Date:" + signDate);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -75,32 +75,32 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 					wraps = WoMobileRecord.copier.copy(attendanceDetailMobileList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工手机打卡信息为输出对象时发生异常.");
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 모바일 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}
 			}
 		}
 
-		//根据最后一次打卡信息，计算下一次打卡的信息
+		//마지막 출퇴근 기록 정보로 다음 기록 정보 계산
 		WoSignFeature woSignFeature = null;
 		if (check
 				&& !StringUtils.equalsAnyIgnoreCase("xadmin", effectivePerson.getName())
 				&& !StringUtils.equalsAnyIgnoreCase("cipher", effectivePerson.getName())) {
-			//打卡策略：1-两次打卡（上午上班，下午下班） 2-三次打卡（上午上班，下午下班加中午一次共三次） 3-四次打卡（上午下午都打上班下班卡）
+			//기록 정책: 1-2회 기록(오전 출근, 오후 퇴근) 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회) 3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 			scheduleSetting = attendanceScheduleSettingServiceAdv.getAttendanceScheduleSettingWithPerson( effectivePerson.getDistinguishedName(), effectivePerson.getDebugger() );
 
 			if( scheduleSetting != null ){
 				woScheduleSetting = WoScheduleSetting.copier.copy(scheduleSetting);
 
 				if( woScheduleSetting.getSignProxy() == 3 ){
-					//3-四次打卡（上午下午都打上班下班卡）
+					//3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 					woSignFeature = getWoSignFeatureWithProxy3(wraps, woScheduleSetting);
 				}else if( woScheduleSetting.getSignProxy() == 2 ){
-					//2-三次打卡（上午上班，下午下班加中午一次共三次）
+					//2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회)
 					woSignFeature = getWoSignFeatureWithProxy2(wraps, woScheduleSetting);
 				}else{
-					//1-两次打卡（上午上班，下午下班）
+					//1-2회 기록(오전 출근, 오후 퇴근)
 					woSignFeature = getWoSignFeatureWithProxy1(wraps, woScheduleSetting);
 				}
 			}
@@ -109,12 +109,12 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 			}
 		}
 		
-		//列示排班详情
+		//근무 배정 상세 목록
 		 List<WoSignFeature> scheduleInfos = new ArrayList<>();
 				if (check
 						&& !StringUtils.equalsAnyIgnoreCase("xadmin", effectivePerson.getName())
 						&& !StringUtils.equalsAnyIgnoreCase("cipher", effectivePerson.getName())) {
-					//打卡策略：1-两次打卡（上午上班，下午下班） 2-三次打卡（上午上班，下午下班加中午一次共三次） 3-四次打卡（上午下午都打上班下班
+					//기록 정책: 1-2회 기록(오전 출근, 오후 퇴근) 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회) 3-4회 기록(오전·오후 모두 출근·퇴근
 
 					if( woScheduleSetting != null ){
 						WoSignFeature scheduleInfo1 = new WoSignFeature();
@@ -126,7 +126,7 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 						
 
 						if( woScheduleSetting.getSignProxy() == 3 ){
-							//3-四次打卡（上午下午都打上班下班卡）
+							//3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 							WoSignFeature scheduleInfo2 = new WoSignFeature();
 							scheduleInfo2.setSignSeq(2);
 							scheduleInfo2.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_MORNING_OFFDUTY );
@@ -142,7 +142,7 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 							scheduleInfos.add(scheduleInfo3);
 							
 						}else if( woScheduleSetting.getSignProxy() == 2 ){
-							//2-三次打卡（上午上班，下午下班加中午一次共三次）
+							//2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회)
 							WoSignFeature scheduleInfo3 = new WoSignFeature();
 							scheduleInfo3.setSignSeq(3);
 							scheduleInfo3.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON );
@@ -150,7 +150,7 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 							scheduleInfo3.setSignDate( signDate );
 							scheduleInfos.add(scheduleInfo3);
 						}else{
-							//1-两次打卡（上午上班，下午下班）
+							//1-2회 기록(오전 출근, 오후 퇴근)
 						}
 						
 						WoSignFeature scheduleInfo4 = new WoSignFeature();
@@ -178,16 +178,16 @@ public class ActionListMyMobileRecordToday extends BaseAction {
 
 	public static class Wo{
 
-		@FieldDescribe("所有的打卡记录.")
+		@FieldDescribe("모든 출퇴근 기록.")
 		private List<WoMobileRecord> records;
 
-		@FieldDescribe("个人相关的排班信息")
+		@FieldDescribe("개인 관련 근무 배정 정보")
 		private WoScheduleSetting scheduleSetting;
 
-		@FieldDescribe("下一次打卡信息")
+		@FieldDescribe("다음 출퇴근 기록 정보")
 		private WoSignFeature feature;
 		
-		@FieldDescribe("排班详情")
+		@FieldDescribe("근무 배정 상세")
 		private List<WoSignFeature> scheduleInfos;
 
 		public WoScheduleSetting getScheduleSetting() { return scheduleSetting; }

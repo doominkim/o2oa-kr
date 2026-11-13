@@ -21,7 +21,7 @@ class SingleAddAfterSingleTest {
 
 	private static Gson gson = new Gson();
 
-	@DisplayName("B后加签EFG,FEG任意处理")
+	@DisplayName("B 뒤에 EFG 추가 결재, FEG 임의 처리")
 	@Test
 	@Order(1)
 	void test01() {

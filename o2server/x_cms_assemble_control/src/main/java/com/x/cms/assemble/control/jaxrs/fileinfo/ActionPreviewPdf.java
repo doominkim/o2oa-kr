@@ -70,7 +70,7 @@ class ActionPreviewPdf extends BaseAction {
 						this.contentType(false, fileName),
 						this.contentDisposition(false, fileName));
 				/**
-				 * 对10M以下的文件进行缓存
+				 * 10M 이하 파일 캐시
 				 */
 				if (bytes.length < (1024 * 1024 * 10)) {
 					CacheManager.put(cacheCategory, cacheKey, wo);

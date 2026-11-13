@@ -25,13 +25,13 @@ import javax.ws.rs.core.MediaType;
  * Copyright © 2023 O2. All rights reserved.
  */
 @Path("v2/config")
-@JaxrsDescribe("配置管理")
+@JaxrsDescribe("설정 관리")
 public class ConfigAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(ConfigAction.class);
 
 
-    @JaxrsMethodDescribe(value = "保存配置信息.", action = ActionPost.class)
+    @JaxrsMethodDescribe(value = "설정 정보 저장.", action = ActionPost.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ public class ConfigAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "配置信息.", action = ActionGet.class)
+    @JaxrsMethodDescribe(value = "설정 정보.", action = ActionGet.class)
     @GET
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -66,7 +66,7 @@ public class ConfigAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "保存个人配置信息.", action = ActionPersonConfigPost.class)
+    @JaxrsMethodDescribe(value = "개인 설정 정보 저장.", action = ActionPersonConfigPost.class)
     @POST
     @Path("person")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -85,7 +85,7 @@ public class ConfigAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "个人配置信息.", action = ActionPersonConfigGet.class)
+    @JaxrsMethodDescribe(value = "개인 설정 정보.", action = ActionPersonConfigGet.class)
     @GET
     @Path("person")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

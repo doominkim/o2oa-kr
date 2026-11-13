@@ -38,8 +38,8 @@ class ActionListNext extends BaseAction {
 		static WrapCopier<Empower, Wo> copier = WrapCopierFactory.wo(Empower.class, Wo.class,
 				JpaObject.singularAttributeField(Empower.class, true, true), null);
 
-		@FieldDescribe("排序号.")
-		@Schema(description = "排序号.")
+		@FieldDescribe("정렬 번호.")
+		@Schema(description = "정렬 번호.")
 		private Long rank;
 
 		public Long getRank() {

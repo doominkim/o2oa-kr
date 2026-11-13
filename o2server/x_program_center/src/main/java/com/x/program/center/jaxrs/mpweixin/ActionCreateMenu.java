@@ -67,7 +67,7 @@ public class ActionCreateMenu  extends BaseAction {
             logger.info(json);
             WeixinResp resp = HttpConnection.postAsObject(createUrl, null, json, WeixinResp.class);
             if (resp.getErrcode() != null && resp.getErrcode() == 0) {
-                logger.info("保存菜单成功！");
+                logger.info("메뉴를 저장했습니다!");
                 Wo wo = new Wo();
                 wo.setValue(true);
                 result.setData(wo);

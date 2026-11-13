@@ -42,7 +42,7 @@ public class ActionGetAll extends BaseAction {
 					result.setData( wraps );
 				}
 			} catch ( Exception e ) {
-				Exception exception = new ExceptionConfigSettingInfoProcess( e, "系统在获取所有BBS系统设置信息时发生异常." );
+				Exception exception = new ExceptionConfigSettingInfoProcess( e, "전체 BBS 시스템 설정을 가져오는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

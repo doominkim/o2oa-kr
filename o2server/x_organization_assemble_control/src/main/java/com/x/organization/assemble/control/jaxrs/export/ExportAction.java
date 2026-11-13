@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("export")
-@JaxrsDescribe("导出")
+@JaxrsDescribe("내보내기")
 public class ExportAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ExportAction.class);
 
-	@JaxrsMethodDescribe(value = "获取政务钉钉人员.", action = ActionZhengwuDingdingPerson.class)
+	@JaxrsMethodDescribe(value = "정부용 DingTalk 사용자 조회.", action = ActionZhengwuDingdingPerson.class)
 	@GET
 	@Path("zhengwudingding/person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -46,12 +46,12 @@ public class ExportAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取导出结果.", action = ActionGetResult.class)
+	@JaxrsMethodDescribe(value = "내보내기 결과 조회.", action = ActionGetResult.class)
 	@GET
 	@Path("result/flag/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getResult(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("导入文件返回的结果标记") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("가져오기 파일 반환 결과 표시") @PathParam("flag") String flag) {
 		ActionResult<ActionGetResult.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -63,13 +63,13 @@ public class ExportAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 	
-	@JaxrsMethodDescribe(value = "导出人员组织信息", action = ActionExportAll.class)
+	@JaxrsMethodDescribe(value = "사용자 조직 정보 내보내기", action = ActionExportAll.class)
 	@GET
 	@Path("export/all")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void exportAllPerson(@Suspended final AsyncResponse asyncResponse, 
 			@Context HttpServletRequest request, 
-			@JaxrsParameterDescribe("用.APPLICATION_OCTET_STREAM头输出") @PathParam("stream") Boolean stream) {
+			@JaxrsParameterDescribe(".APPLICATION_OCTET_STREAM 헤더로 출력") @PathParam("stream") Boolean stream) {
 		ActionResult<ActionExportAll.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 获取可管理的分类
+ * 관리 가능한 분류 조회
  * @author sword
  */
 public class ActionListManage extends BaseAction {

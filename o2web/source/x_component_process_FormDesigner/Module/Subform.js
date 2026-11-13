@@ -130,7 +130,7 @@ MWF.xApplication.process.FormDesigner.Module.Subform = MWF.FCSubform = new Class
     _getDroppableNodes: function(){
         var nodes = [this.form.node].concat(this.form.moduleElementNodeList, this.form.moduleContainerNodeList, this.form.moduleComponentNodeList);
         this.form.moduleList.each( function(module){
-            //子表单不能往数据模板里拖
+            //하위 양식은 데이터 템플릿으로 끌어 넣을 수 없음
             if( module.moduleName === "datatemplate" ){
                 var subDoms = this.form.getModuleNodes(module.node);
                 nodes.erase( module.node );

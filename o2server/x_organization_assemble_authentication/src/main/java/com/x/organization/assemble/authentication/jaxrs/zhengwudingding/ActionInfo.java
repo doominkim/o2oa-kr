@@ -59,7 +59,7 @@ class ActionInfo extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("签名地址")
+		@FieldDescribe("서명 주소")
 		private String url;
 
 		public String getUrl() {

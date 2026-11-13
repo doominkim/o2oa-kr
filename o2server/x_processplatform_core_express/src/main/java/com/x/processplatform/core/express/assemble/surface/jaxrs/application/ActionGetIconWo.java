@@ -9,12 +9,12 @@ public class ActionGetIconWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 2554440356814790897L;
 
-	@FieldDescribe("应用图标base64编码值.")
-	@Schema(description = "应用图标base64编码值.")
+	@FieldDescribe("앱 아이콘 base64 인코딩 값.")
+	@Schema(description = "앱 아이콘 base64 인코딩 값.")
 	private String icon;
 
-	@FieldDescribe("应用图标色调.")
-	@Schema(description = "应用图标色调.")
+	@FieldDescribe("앱 아이콘 색조.")
+	@Schema(description = "앱 아이콘 색조.")
 	private String iconHue;
 
 	public String getIcon() {

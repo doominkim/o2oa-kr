@@ -147,7 +147,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);
@@ -212,7 +212,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);
@@ -279,7 +279,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);
@@ -346,7 +346,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);
@@ -415,7 +415,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);
@@ -484,7 +484,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);
@@ -558,7 +558,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);
@@ -629,7 +629,7 @@ public class Applications extends ConcurrentHashMap<String, CopyOnWriteArrayList
 		}
 		Application application = null;
 		if (StringUtils.isEmpty(seed)) {
-			// 如果随机种子是空,那么优先使用本机
+			// 랜덤 시드가 비어 있으면 로컬을 우선 사용
 			application = this.findApplicationWithNode(name, Config.node());
 			if (null == application) {
 				application = this.randomWithWeight(name);

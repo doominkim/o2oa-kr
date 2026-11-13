@@ -8,10 +8,10 @@ public class MergeProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 8342746214747017734L;
 
-	@FieldDescribe("活动自定义数据")
+	@FieldDescribe("활동 사용자 정의 데이터")
 	private JsonElement customData;
 
-	@FieldDescribe("合并层级,0尽量多的合并,1合并1层,2合并不多于2层,3合并不多于3层.")
+	@FieldDescribe("병합 단계, 0 최대한 병합, 1 1단계 병합, 2 2단계 이하 병합, 3 3단계 이하 병합.")
 	private Integer mergeLayerThreshold;
 
 	public Integer getMergeLayerThreshold() {

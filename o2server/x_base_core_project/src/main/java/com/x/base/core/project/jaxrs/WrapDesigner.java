@@ -12,24 +12,24 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class WrapDesigner extends GsonPropertyObject {
 
-	@FieldDescribe("应用Id.")
+	@FieldDescribe("앱 Id.")
 	private String appId;
 
-	@FieldDescribe("应用名称.")
+	@FieldDescribe("앱 이름.")
 	private String appName;
 
-	@FieldDescribe("设计Id.")
+	@FieldDescribe("설계 Id.")
 	private String designerId;
 
-	@FieldDescribe("设计名称.")
+	@FieldDescribe("설계 이름.")
 	private String designerName;
 
-	@FieldDescribe("设计类型.")
+	@FieldDescribe("설계 유형.")
 	private String designerType;
 
 	private Date updateTime;
 
-	@FieldDescribe("匹配信息.")
+	@FieldDescribe("일치 정보.")
 	private List<DesignerPattern> patternList = new ArrayList<>();
 
 	public String getAppId() {
@@ -175,20 +175,20 @@ public class WrapDesigner extends GsonPropertyObject {
 
 	public class DesignerPattern extends GsonPropertyObject {
 
-		@FieldDescribe("元素类型（activity | process）.")
+		@FieldDescribe("요소 유형(activity | process).")
 		private String elementType;
-		@FieldDescribe("元素ID.")
+		@FieldDescribe("요소 ID.")
 		private String elementId;
-		@FieldDescribe("元素名称.")
+		@FieldDescribe("요소 이름.")
 		private String elementName;
 
-		@FieldDescribe("设计属性.")
+		@FieldDescribe("설계 속성.")
 		private String property;
 
-		@FieldDescribe("设计属性值.")
+		@FieldDescribe("설계 속성 값.")
 		private String propertyValue;
 
-		@FieldDescribe("script匹配行")
+		@FieldDescribe("script 일치 줄")
 		private List<PatternLine> lines;
 
 		public void setLines(Map<Integer, String> map){
@@ -258,9 +258,9 @@ public class WrapDesigner extends GsonPropertyObject {
 	}
 
 	public class PatternLine extends GsonPropertyObject {
-		@FieldDescribe("第几行匹配到")
+		@FieldDescribe("일치한 줄 번호")
 		private Integer line;
-		@FieldDescribe("匹配行内容")
+		@FieldDescribe("일치 줄 내용")
 		private String lineValue;
 
 		public Integer getLine() {

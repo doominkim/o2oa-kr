@@ -33,7 +33,7 @@ class ActionListPrevWithDate extends BaseAction {
 		static WrapCopier<WarnLog, Wo> copier = WrapCopierFactory.wo(WarnLog.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

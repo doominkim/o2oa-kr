@@ -13,7 +13,7 @@ public   class WrapInteger extends GsonPropertyObject {
 		this.value = o;
 	}
 
-	@FieldDescribe("整型值")
+	@FieldDescribe("정수 값")
 	private Integer value;
 
 	public Integer getValue() {

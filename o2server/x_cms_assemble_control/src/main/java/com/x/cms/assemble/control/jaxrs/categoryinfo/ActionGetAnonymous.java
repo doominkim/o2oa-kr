@@ -58,7 +58,7 @@ public class ActionGetAnonymous extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionCategoryInfoProcess( e, "根据ID查询分类信息对象时发生异常。Flag:" + flag );
+					Exception exception = new ExceptionCategoryInfoProcess( e, "ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. Flag:" + flag );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -72,7 +72,7 @@ public class ActionGetAnonymous extends BaseAction {
 					result.setData( wo );
 				} catch ( Exception e ) {
 					check = false;
-					Exception exception = new ExceptionCategoryInfoProcess( e, "将查询出来的分类信息对象转换为可输出的数据信息时发生异常。" );
+					Exception exception = new ExceptionCategoryInfoProcess( e, "조회한 분류 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -87,7 +87,7 @@ public class ActionGetAnonymous extends BaseAction {
 
 		public static List<String> Excludes = new ArrayList<String>();
 
-		@FieldDescribe("扩展信息JSON内容")
+		@FieldDescribe("확장 정보 JSON 내용")
 		private String extContent = null;
 
 		static WrapCopier<CategoryInfo, Wo> copier = WrapCopierFactory.wo( CategoryInfo.class, Wo.class, null, ListTools.toList(JpaObject.FieldsInvisible));

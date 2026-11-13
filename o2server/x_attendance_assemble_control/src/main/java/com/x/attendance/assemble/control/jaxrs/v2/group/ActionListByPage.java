@@ -41,7 +41,7 @@ public class ActionListByPage extends BaseAction {
                 wi = new Wi();
             }
             String assistAdmin = null;
-            // 不是管理员 只查询协助管理员的数据
+            // 관리자가 아니면 보조 관리자 데이터만 조회
             if(!business.isManager(effectivePerson)){
                 assistAdmin = effectivePerson.getDistinguishedName();
             }
@@ -52,10 +52,10 @@ public class ActionListByPage extends BaseAction {
             List<Wo> wos = Wo.copier.copy(list);
             if (wos != null && !wos.isEmpty()) {
                 for (Wo group : wos) {
-                    // 只需要数量，前端不需要显示整个列表
+                    // 수량만 필요, 프론트에서 전체 목록 표시 불필요
                     group.setTrueParticipantSize(group.getTrueParticipantList().size());
                     group.setTrueParticipantList(null);
-                    // 班次对象返回
+                    // 교대 객체 반환
                     if (group.getWorkDateProperties() != null && AttendanceV2Group.CHECKTYPE_Fixed.equals( group.getCheckType())) {
                         AttendanceV2GroupWorkDayProperties properties = group.getWorkDateProperties();
                         setPropertiesShiftData(business, properties);
@@ -72,7 +72,7 @@ public class ActionListByPage extends BaseAction {
 
 
         private static final long serialVersionUID = -4138592167949224238L;
-        @FieldDescribe("考勤组名称")
+        @FieldDescribe("근태 그룹 이름")
         private String name;
 
         public String getName() {
@@ -89,10 +89,10 @@ public class ActionListByPage extends BaseAction {
 
         private static final long serialVersionUID = -7147244243285527997L;
 
-        @FieldDescribe("考勤成员数量")
+        @FieldDescribe("근태 구성원 수")
         private int trueParticipantSize;
 
-        @FieldDescribe("考勤组的班次对象")
+        @FieldDescribe("근태 그룹의 교대 객체")
         private AttendanceV2Shift shift;
 
 

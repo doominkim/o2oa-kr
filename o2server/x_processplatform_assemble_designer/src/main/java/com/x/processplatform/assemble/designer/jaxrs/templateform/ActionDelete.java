@@ -15,7 +15,7 @@ class ActionDelete extends BaseAction {
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String id) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
-			/** 添加管理员和流程管理员删除的权限 */
+			/** 관리자 및 프로세스 관리자 삭제 권한 추가 */
 			if (effectivePerson.isNotManager() && (!business.organization().person().hasRole(effectivePerson,
 					OrganizationDefinition.ProcessPlatformManager))) {
 				throw new ExceptionInsufficientPermission(effectivePerson.getDistinguishedName());

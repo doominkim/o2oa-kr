@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 保存列表配置
+ * 목록 설정 저장
  * @author sword
  */
 public class ActionSave extends BaseAction {

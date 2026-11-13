@@ -1,4 +1,4 @@
-//弹出选择框列表类
+//팝업 선택 상자 목록 클래스
 MWF.xApplication.AI.O2Select = new Class({
     Implements: [Options, Events],
     options: {
@@ -105,7 +105,7 @@ MWF.xApplication.AI.O2Select = new Class({
     setSize: function () {
         var bodySize = $(document.body).getSize();
         var cancelNodeY = this.cancelNode.getSize().y + 20;
-        if ((bodySize.y - cancelNodeY) < this.contentNode.getSize().y) { //超过body高度，显示滚动条
+        if ((bodySize.y - cancelNodeY) < this.contentNode.getSize().y) { //body 높이 초과 시 스크롤바 표시
             this.contentNode.setStyle("height", bodySize.y - cancelNodeY);
         }
         this.node.setStyles({

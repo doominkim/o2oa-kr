@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 //MWF.require("MWF.widget.Tree", null, false);
-/** @class Sidebar 侧边操作条。
- * @o2cn 侧边操作条
+/** @class Sidebar 사이드 작업 바.
+ * @o2cn 사이드 작업 바
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var sidebar = this.form.get("fieldId"); //获取侧边操作条
- * //方法2
- * var sidebar = this.target; //在侧边操作条和操作本身的事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var sidebar = this.form.get("fieldId"); //사이드 작업 바 가져오기
+ * //방법 2
+ * var sidebar = this.target; //사이드 작업 바와 작업 자체의 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process}
@@ -19,24 +19,24 @@ MWF.xApplication.process.Xform.Sidebar = MWF.APPSidebar =  new Class(
 	Extends: MWF.APP$Module,
         options: {
             /**
-             * 组件加载前触发。当前组件的queryLoad事件还没有在form里注册，通过this.form.get("fieldId")不能获取到当前组件，需要用this.target获取当前组件。
+             * 컴포넌트 로드 전 발생. 현재 컴포넌트의 queryLoad 이벤트 시점에는 form에 등록되지 않아 this.form.get("fieldId")로 가져올 수 없으며, this.target으로 현재 컴포넌트를 가져와야 함.
              * @event MWF.xApplication.process.Xform.Sidebar#queryLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 组件加载时触发。
+             * 컴포넌트 로드 시 발생.
              * @event MWF.xApplication.process.Xform.Sidebar#load
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 组件加载后事件.由于加载过程中有异步处理，这个时候操作条有可能还未生成。
+             * 컴포넌트 로드 후 이벤트. 로드 과정에 비동기 처리가 있어 이 시점에는 작업 막대가 아직 생성되지 않았을 수 있음.
              * @event MWF.xApplication.process.Xform.Sidebar#postLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 组件加载后事件。这个时候操作条已生成
+             * 컴포넌트 로드 후 이벤트. 이 시점에는 작업 막대가 생성됨
              * @event MWF.xApplication.process.Xform.Sidebar#afterLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "moduleEvents": ["load", "queryLoad", "postLoad", "afterLoad"]
         },
@@ -94,11 +94,11 @@ MWF.xApplication.process.Xform.Sidebar = MWF.APPSidebar =  new Class(
                 //this.json.defaultTools.unshift(o);
 
                 /**
-                 * @summary Toolbar组件，平台使用该组件生成操作条。
+                 * @summary Toolbar 컴포넌트, 플랫폼은 이 컴포넌트로 작업 막대를 생성.
                  * @member {o2.widget.Toolbar}
                  * @example
-                 *  //可以在脚本中获取该组件
-                 * var toolbarWidget = this.form.get("fieldId").toolbarWidget; //获取组件对象
+                 *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+                 * var toolbarWidget = this.form.get("fieldId").toolbarWidget; //컴포넌트 객체 가져오기
                  */
                 this.toolbarWidget = new MWF.widget.Toolbar(this.toolbarNode, {
                     "style": this.json.style,
@@ -433,7 +433,7 @@ MWF.xApplication.process.Xform.Sidebar = MWF.APPSidebar =  new Class(
         return list;
     },
     isOrgHidden: function (d) {
-        if (d.hiddenScript && d.hiddenScript.code) { //如果隐藏路由，返回
+        if (d.hiddenScript && d.hiddenScript.code) { //경로가 숨김이면 반환
             var hidden = this.form.Macro.exec(d.hiddenScript.code, this);
             if (hidden && hidden.toString() === "true") return true;
         }

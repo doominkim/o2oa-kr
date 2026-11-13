@@ -7,6 +7,6 @@ class ExceptionAllocateStorageMapping extends PromptException {
 	private static final long serialVersionUID = 5900374070936937166L;
 
 	ExceptionAllocateStorageMapping() {
-		super("无法获取存储器.");
+		super("스토리지를 가져올 수 없습니다.");
 	}
 }

@@ -40,7 +40,7 @@ MWF.xApplication.cms.FormDesigner.Module.Actionbar = MWF.CMSFCActionbar = new Cl
 		}
 	},
 	_checkProcessTool: function(){
-		//删除从流程拷贝过来的系统按钮
+		//프로세스에서 복사된 시스템 버튼 삭제
 		var processTools = ( this.json.multiTools || [] ).filter( function (tool) {
 			return ["closeWork","saveWork","processWork","rerouteWork","resetWork","addTask","addSplit","retractWork","rollback",
 				"deleteWork","printWork","pressWork","pauseTask","resumeTask"].contains( tool.action )

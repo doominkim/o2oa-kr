@@ -7,6 +7,6 @@ class ExceptionAgentLastNotEnd extends LanguagePromptException {
 	private static final long serialVersionUID = -7954335762204386602L;
 
 	ExceptionAgentLastNotEnd(String id, String name, String alias, String date) {
-		super("代理 id:{}, name:{}, alias:{}, 上次运行尚未结束,上次开始时间:{}.", id, name, alias, date);
+		super("에이전트 id: {}, name: {}, alias: {}의 이전 실행이 아직 끝나지 않았습니다, 이전 시작 시간: {}.", id, name, alias, date);
 	}
 }

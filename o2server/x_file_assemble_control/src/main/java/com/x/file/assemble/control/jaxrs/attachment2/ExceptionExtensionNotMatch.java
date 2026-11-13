@@ -7,6 +7,6 @@ class ExceptionExtensionNotMatch extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionExtensionNotMatch(String name, String extension) {
-		super("文件: {} 的扩展名不匹配,期望的扩展名: {}.", name);
+		super("파일: {}의 확장자가 일치하지 않습니다. 필요한 확장자: {}.", name);
 	}
 }

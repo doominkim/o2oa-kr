@@ -154,7 +154,7 @@ button:focus-visible {
     flex: 1;
 }
 
-/* 小屏幕时隐藏侧边栏 */
+/* 작은 화면에서 사이드바 숨김 */
 .hidden {
     display: none;
 }
@@ -452,11 +452,11 @@ button:focus-visible {
     left: 0;
     top: 0;
     height: 100%;
-    background-color: var(--oo-color-main); /* 半透明进度条颜色 */
+    background-color: var(--oo-color-main); /* 반투명 진행 막대 색상 */
     transition: width 0.3s ease;
 }
 
-/* 头部区域 样式 */
+/* 헤더 영역 스타일 */
 .im-chat-header {
     background-color: var(--oo-im-color-bg-primary);
     height: 4.28rem;
@@ -502,7 +502,7 @@ button:focus-visible {
     color: var(--oo-color-text2);
 }
 
-/* 消息体 样式 */
+/* 메시지 본문 스타일 */
 .im-chat-body {
     flex: 1;
     overflow: auto;
@@ -746,7 +746,7 @@ button:focus-visible {
     float: right;
 }
 
-/*图片消息*/
+/*이미지 메시지*/
 .img-chat {
     max-width: 12rem;
     max-height: 9rem;
@@ -762,7 +762,7 @@ button:focus-visible {
     border-radius: var(--oo-default-radius);
 }
 
-/***** 业务消息 卡片样式 ******/
+/***** 업무 메시지 카드 스타일 ******/
 .chat-card {
     display: flex;
     flex-direction: column;
@@ -796,7 +796,7 @@ button:focus-visible {
     margin-left: 10px;
 }
 
-/* 右键菜单 */
+/* 오른쪽 클릭 메뉴 */
 .chat-menu-list {
     width: 8rem;
     background: #fff;
@@ -848,7 +848,7 @@ button:focus-visible {
     height: 100%;
 }
 
-/* 底部输入区域 样式 */
+/* 하단 입력 영역 스타일 */
 .im-chat-footer {
     height: 12rem;
     background-color: var(--oo-im-color-bg-primary);
@@ -981,7 +981,7 @@ button:focus-visible {
     gap: 1rem;
 }
 
-/* 表情 emoji */
+/* 이모티콘 emoji */
 .im-chat-emoji-mask {
     z-index: 97;
     position: absolute;
@@ -1153,7 +1153,7 @@ button:focus-visible {
     line-height: 2rem;
 }
 
-/* 成员列表 */
+/* 멤버 목록 */
 .im-chat-info-members {
     display: flex;
     flex-direction: column;

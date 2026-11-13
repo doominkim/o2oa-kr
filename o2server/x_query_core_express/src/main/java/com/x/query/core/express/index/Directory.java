@@ -6,16 +6,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public class Directory {
 
-	@FieldDescribe("分类.")
-	@Schema(description = "分类.")
+	@FieldDescribe("분류.")
+	@Schema(description = "분류.")
 	private String category;
 
-	@FieldDescribe("名称.")
-	@Schema(description = "名称.")
+	@FieldDescribe("이름.")
+	@Schema(description = "이름.")
 	private String name;
 
-	@FieldDescribe("标识.")
-	@Schema(description = "标识.")
+	@FieldDescribe("식별자.")
+	@Schema(description = "식별자.")
 	private String key;
 
 	public Directory() {

@@ -27,13 +27,13 @@ public class ActionDeleteAllQywxAttendanceData extends BaseAction {
             if (business.isManager(effectivePerson)) {
                 List<AttendanceQywxDetail> details  = emc.listAll(AttendanceQywxDetail.class);
                 if ( null != details && !details.isEmpty() ) {
-                    //进行数据库持久化操作
+                    //데이터베이스 영속화 작업 수행
                     emc.beginTransaction( AttendanceQywxDetail.class );
                     for (AttendanceQywxDetail d : details) {
                         emc.remove(d);
                     }
                     emc.commit();
-                    logger.info( "成功删除所有的企业微信打卡数据信息"  );
+                    logger.info( "모든 WeCom 출퇴근 기록 데이터를 삭제했습니다"  );
                 }
                 result.setData(new WrapBoolean(true));
             } else {

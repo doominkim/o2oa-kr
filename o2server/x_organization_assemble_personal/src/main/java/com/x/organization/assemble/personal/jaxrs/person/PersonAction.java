@@ -28,12 +28,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("person")
-@JaxrsDescribe("个人操作")
+@JaxrsDescribe("개인 조작")
 public class PersonAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PersonAction.class);
 
-	@JaxrsMethodDescribe(value = "获取个人可以自己的内容", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "개인 본인 내용 조회", action = ActionGet.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新个人的信息,不更新superior和controllerList", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "개인 정보 업데이트, superior와 controllerList는 업데이트하지 않음", action = ActionEdit.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -66,7 +66,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新个人的信息,不更新superior和controllerList MockPutToPost", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "개인 정보 업데이트, superior와 controllerList는 업데이트하지 않음 MockPutToPost", action = ActionEdit.class)
 	@POST
 	@Path("mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -84,7 +84,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取个人头像.", action = ActionGetIcon.class)
+	@JaxrsMethodDescribe(value = "개인 프로필 사진 조회.", action = ActionGetIcon.class)
 	@GET
 	@Path("icon")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -100,14 +100,14 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置个人的头像.", action = ActionSetIcon.class)
+	@JaxrsMethodDescribe(value = "개인 프로필 사진 설정.", action = ActionSetIcon.class)
 	@PUT
 	@Path("icon")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void setIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("头像文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("프로필 사진 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionSetIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -119,14 +119,14 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置个人的头像 MockPutToPost.", action = ActionSetIcon.class)
+	@JaxrsMethodDescribe(value = "개인 프로필 사진 설정 MockPutToPost.", action = ActionSetIcon.class)
 	@POST
 	@Path("icon/mockputtopost")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void setIconMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("头像文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("프로필 사진 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionSetIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -138,8 +138,8 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	/** 为前台flash切图兼容ie9单独增加的方法 */
-	@JaxrsMethodDescribe(value = "设置头像.为了兼容前台增加的POST方法.", action = ActionSetIconOctetStream.class)
+	/** 프런트 flash 이미지 자르기의 ie9 호환을 위해 별도 추가한 메서드 */
+	@JaxrsMethodDescribe(value = "프로필 사진 설정. 프론트 호환을 위해 추가한 POST 메서드.", action = ActionSetIconOctetStream.class)
 	@POST
 	@Path("icon")
 	@Consumes(MediaType.APPLICATION_OCTET_STREAM)
@@ -157,7 +157,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定个人的密码.", action = ActionSetPassword.class)
+	@JaxrsMethodDescribe(value = "지정 개인 비밀번호 변경.", action = ActionSetPassword.class)
 	@PUT
 	@Path("password")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -175,7 +175,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定个人的密码 MockPutToPost.", action = ActionSetPassword.class)
+	@JaxrsMethodDescribe(value = "지정 개인의 비밀번호 업데이트 MockPutToPost.", action = ActionSetPassword.class)
 	@POST
 	@Path("password/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

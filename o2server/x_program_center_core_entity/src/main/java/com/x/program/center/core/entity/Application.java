@@ -22,7 +22,7 @@ import com.x.base.core.entity.annotation.ContainerEntity;
 import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Application", description = "服务管理应用.")
+@Schema(name = "Application", description = "서비스 관리 앱.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Application.TABLE, uniqueConstraints = {
@@ -44,51 +44,51 @@ public class Application extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 	}
 
 	public static final String name_FIELDNAME = "name";
 
-	@FieldDescribe("名称")
+	@FieldDescribe("이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String category_FIELDNAME = "category";
-	@FieldDescribe("分类")
+	@FieldDescribe("분류")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + category_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + category_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String category;
 
 	public static final String subCategory_FIELDNAME = "subCategory";
-	@FieldDescribe("子分类.")
+	@FieldDescribe("하위 분류.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + subCategory_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String subCategory;
 
 	public static final String version_FIELDNAME = "version";
-	@FieldDescribe("版本")
+	@FieldDescribe("버전")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + version_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String version;
 
 	public static final String price_FIELDNAME = "price";
-	@FieldDescribe("价格.")
+	@FieldDescribe("가격.")
 	@Column(name = ColumnNamePrefix + price_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double price;
 
 	public static final String describe_FIELDNAME = "describe";
-	@FieldDescribe("描述.必填")
+	@FieldDescribe("설명.필수")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1K, name = ColumnNamePrefix + describe_FIELDNAME)
@@ -96,7 +96,7 @@ public class Application extends SliceJpaObject {
 	private String describe;
 
 	public static final String abort_FIELDNAME = "abort";
-	@FieldDescribe("应用简介")
+	@FieldDescribe("앱 소개")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_4K, name = ColumnNamePrefix + abort_FIELDNAME)
@@ -104,7 +104,7 @@ public class Application extends SliceJpaObject {
 	private String abort;
 
 	public static final String installSteps_FIELDNAME = "installSteps";
-	@FieldDescribe("应用安装步骤")
+	@FieldDescribe("앱 설치 단계")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + installSteps_FIELDNAME)
@@ -112,57 +112,57 @@ public class Application extends SliceJpaObject {
 	private String installSteps;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("首页图片 Base64编码后的文本.")
+	@FieldDescribe("첫 화면 이미지 Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + icon_FIELDNAME)
 	private String icon;
 
 	public static final String publisher_FIELDNAME = "publisher";
-	@FieldDescribe("发布者.")
+	@FieldDescribe("게시자.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + publisher_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + publisher_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String publisher;
 
 	public static final String publishTime_FIELDNAME = "publishTime";
-	@FieldDescribe("发布时间")
+	@FieldDescribe("게시 시간")
 	@Column(name = ColumnNamePrefix + publishTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + publishTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date publishTime;
 
 	public static final String grade_FIELDNAME = "grade";
-	@FieldDescribe("评分.")
+	@FieldDescribe("평점.")
 	@Column(name = ColumnNamePrefix + grade_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + grade_FIELDNAME)
 	private Double grade;
 
 	public static final String commentCount_FIELDNAME = "commentCount";
-	@FieldDescribe("评论数")
+	@FieldDescribe("댓글 수")
 	@Column(name = ColumnNamePrefix + commentCount_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + commentCount_FIELDNAME)
 	private Integer commentCount;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String recommend_FIELDNAME = "recommend";
-	@FieldDescribe("推荐指数")
+	@FieldDescribe("추천 지수")
 	@Column(name = ColumnNamePrefix + recommend_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + recommend_FIELDNAME)
 	private Integer recommend;
 
 	public static final String downloadCount_FIELDNAME = "downloadCount";
-	@FieldDescribe("下载次数")
+	@FieldDescribe("다운로드 횟수")
 	@Column(name = ColumnNamePrefix + downloadCount_FIELDNAME)
 	private Integer downloadCount;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

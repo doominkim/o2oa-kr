@@ -29,18 +29,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("folder")
-@JaxrsDescribe("目录")
+@JaxrsDescribe("디렉터리")
 public class FolderAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(FolderAction.class);
 
-	@JaxrsMethodDescribe(value = "获取文件夹对象。只能由Folder的所有者进行操作,并返回文件夹的下文件的数量和总字节。", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "폴더 객체 조회. Folder 소유자만 작업할 수 있으며, 폴더 아래 파일 수와 총 바이트 수를 반환.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -52,7 +52,7 @@ public class FolderAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建文件夹.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "폴더 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -69,13 +69,13 @@ public class FolderAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新文件夹,不能重名", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "폴더 갱신, 이름 중복 불가", action = ActionUpdate.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void put(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,13 +87,13 @@ public class FolderAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除分类,同时删除所有下属的文件和文件夹.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "분류를 삭제하고 하위의 모든 파일과 폴더도 함께 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -105,7 +105,7 @@ public class FolderAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员顶层文件夹。", action = ActionListTop.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 최상위 폴더 조회.", action = ActionListTop.class)
 	@GET
 	@Path("list/top")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -122,13 +122,13 @@ public class FolderAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员指定文件夹下的直属文件夹。", action = ActionListWithFolder.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 지정 폴더 아래 직속 폴더 조회.", action = ActionListWithFolder.class)
 	@GET
 	@Path("list/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFolder(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<List<ActionListWithFolder.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

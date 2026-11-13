@@ -65,7 +65,7 @@ class ActionListPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("禁言用户")
+		@FieldDescribe("사용자 발언 금지")
 		private String person;
 
 		public String getPerson() {

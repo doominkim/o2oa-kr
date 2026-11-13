@@ -26,7 +26,7 @@ MWF.xApplication.process.ProcessDesigner.Property = new Class({
             if (callback) callback();
         }
     },
-    //隐藏高级属性
+    //고급 속성 숨기기
     hideAdvanced: function(){
 	    if (this.process.panel.showAdvanced && !this.process.panel.showAdvanced.checked){
             var advs = this.propertyContent.querySelectorAll("*[data-o2-advanced=\"yes\"]");

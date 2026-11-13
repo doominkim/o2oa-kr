@@ -39,14 +39,14 @@ class ActionCheckInCode extends BaseAction {
 		int port = applicationServer.getProxyPort();
 
 		String applicationUrl = getApplicationUrl(sslEnable, host, port) + "/x_meeting_assemble_control/jaxrs/meeting/" + meetingId + "/checkin";
-		/** 二维码内容 */
+		/** QR 코드 내용 */
 		String url = UriBuilder.fromUri(applicationUrl).build().toASCIIString();
-		int width = 800; // 二维码图片宽度
-		int height = 800; // 二维码图片高度
-		String format = "png";// 二维码的图片格式
+		int width = 800; // QR 코드 이미지 너비
+		int height = 800; // QR 코드 이미지 높이
+		String format = "png";// QR 코드 이미지 형식
 
 		Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
-		// 内容所使用字符集编码
+		// 내용에 사용하는 문자셋 인코딩
 		hints.put(EncodeHintType.MARGIN, "1");
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q.toString());
 
@@ -86,7 +86,7 @@ class ActionCheckInCode extends BaseAction {
 
 		private static final long serialVersionUID = -3574645735233129236L;
 
-		@FieldDescribe("Base64编码图像.")
+		@FieldDescribe("Base64 인코딩 이미지.")
 		private String image;
 
 		public String getImage() {

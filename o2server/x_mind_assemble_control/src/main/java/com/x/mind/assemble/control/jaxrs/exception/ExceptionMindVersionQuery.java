@@ -7,10 +7,10 @@ public class ExceptionMindVersionQuery extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionMindVersionQuery( Throwable e, String message ) {
-		super("脑图版本信息查询时发生异常。MESSAGE:" + message, e );
+		super("마인드맵 버전 정보 조회 중 오류가 발생했습니다. MESSAGE:" + message, e );
 	}
 	
 	public ExceptionMindVersionQuery( Throwable e, String message,  String id ) {
-		super("脑图版本信息查询时发生异常。ID:" + id + ",  MESSAGE:" + message , e );
+		super("마인드맵 버전 정보 조회 중 오류가 발생했습니다. ID:" + id + ",  MESSAGE:" + message , e );
 	}
 }

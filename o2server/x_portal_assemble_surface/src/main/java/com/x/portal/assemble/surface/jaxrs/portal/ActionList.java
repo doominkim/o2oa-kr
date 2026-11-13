@@ -27,8 +27,8 @@ import com.x.portal.core.entity.Portal_;
 class ActionList extends BaseAction {
 
 	/**
-	 * 1.身份在可使用列表中 2.部门在可使用部门中 3.公司在可使用公司中 4.没有限定身份,部门或者公司 5.个人在应用管理员中
-	 * 6.是此Portal的创建人员 7.个人有Manage权限 8.个人拥有PortalManager
+	 * 1.신분이 사용 가능 목록에 있음 2.부서가 사용 가능 부서에 있음 3.회사가 사용 가능 회사에 있음 4.신분, 부서 또는 회사 제한 없음 5.개인이 앱 관리자에 포함
+	 * 6.이 Portal의 생성자 7.개인에게 Manage 권한 있음 8.개인이 PortalManager 보유
 	 */
 	ActionResult<List<Wo>> execute(EffectivePerson effectivePerson) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {

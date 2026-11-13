@@ -6,7 +6,7 @@
 	<artifactId>o2server</artifactId>
 	<version>10.0</version>
 	<packaging>pom</packaging>
-	<description>O2OA企业应用开发平台 OpenSource OA Platform</description>
+	<description>O2OA 기업 앱 개발 플랫폼 OpenSource OA Platform</description>
 	<url>https://github.com/o2oa/o2oa</url>
 	<licenses>
 		<license>
@@ -41,7 +41,7 @@
 	</properties>
 	<modules>
 		<module>x_base_core_project</module>
-		<!-- 顺序 -->
+		<!-- 순서 -->
 		<module>x_query_core_entity</module>
 		<module>x_attendance_core_entity</module>
 		<module>x_ai_core_entity</module>
@@ -539,7 +539,7 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-				<!--				源码插件-->
+				<!--				소스 플러그인-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
@@ -553,7 +553,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--				文档插件-->
+				<!--				문서 플러그인-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -565,7 +565,7 @@
 						<encoding>UTF-8</encoding>
 						<docencoding>UTF-8</docencoding>
 						<additionalOptions>
-							<!-- 解决jdk1.8以后编译出错问题-->
+							<!-- jdk1.8 이후 컴파일 오류 해결-->
 							<!--
 							<additionalOption>-Xdoclint:none</additionalOption>-->
 							<additionalparam>-Xdoclint:none</additionalparam>
@@ -580,7 +580,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--				gpg插件 -->
+				<!--				gpg 플러그인 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
@@ -863,7 +863,7 @@
 				<version>3.2.3</version>
 				<exclusions>
 					<exclusion>
-						<groupId>xerces</groupId><!--排除xml-apis-->
+						<groupId>xerces</groupId><!--xml-apis 제외-->
 						<artifactId>xercesImpl</artifactId>
 					</exclusion>
 				</exclusions>
@@ -1312,7 +1312,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<!--	中心仓库发布地址-->
+	<!--	중앙 저장소 배포 주소-->
 	<!--distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>

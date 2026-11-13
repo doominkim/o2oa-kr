@@ -72,7 +72,7 @@ public class ActionLogin extends BaseAction {
 		private String code;
 		private String message;
 		private String userId;
-		private String tenantId;// 租户id
+		private String tenantId;// 테넌트 id
 
 		public String getCode() {
 			return code;

@@ -17,7 +17,7 @@ export default content({
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
     };
   },
@@ -31,13 +31,13 @@ export default content({
       this.loadGroupList();
     });
   },
-  // 班次信息展现
+  // 교대조 정보 표시
   formatAttendanceTime(group) {
     if (!group) {
       return "";
     }
     if (group.checkType === "1" && group.workDateProperties) {
-      // 如果是固定班制 展现周一或周二的班次信息
+      // 고정 근무제면 월요일 또는 화요일 교대조 정보 표시
       let map = {};
       let restList = [];
       for (let key in group.workDateProperties) {
@@ -80,7 +80,7 @@ export default content({
       }
       return retStr;
     } else if (group.checkType === "2") {
-      // 如果是自由工时 直接展现
+      // 자율 근무제면 바로 표시
       const dayList = group.workDateList.split(",").map((d) => {
         switch (d) {
           case "1":
@@ -143,13 +143,13 @@ export default content({
       this.bind.pagerData.totalCount = count;
     }
   },
-  // 添加
+  // 추가
   async addGroup() {
     // const content = (await import(`./editGroup/index.js`)).default;
     // this.addGroupVm = await content.generate(".form", {}, this);
     this.$parent.openGroupForm({});
   },
-  // 修改
+  // 수정
   async clickEditGroup(id) {
     const group = this.bind.groupList.find((g) => g.id === id);
     if (group) {
@@ -158,7 +158,7 @@ export default content({
       this.$parent.openGroupForm({ bind: { updateId: group.id } });
     }
   },
-  // 删除
+  // 삭제
   async clickDeleteGroup(id, name) {
     var _self = this;
     const c = lpFormat(lp, "groupForm.confirmDelete", { name: name });
@@ -178,18 +178,18 @@ export default content({
     );
   },
   async deleteGroup(id) {
-    this.$topParent.closeFormVm(); // 关闭表单
+    this.$topParent.closeFormVm(); // 양식 닫기
     const json = await groupAction("delete", id);
     console.debug(json);
     this.loadGroupList();
   },
-  // 点击事件 打开排班编辑
+  // 클릭 이벤트: 교대 편성 편집 열기
   async clickEditSchedule(group) {
     if (!group || !group.id) {
       console.log('데이터에 이상이 있습니다!');
       return ;
     }
-    this.$topParent.closeFormVm(); // 关闭表单
+    this.$topParent.closeFormVm(); // 양식 닫기
     const result = await groupAction("get", group.id);
     if (result) {
       const data = {
@@ -201,7 +201,7 @@ export default content({
       this.openScheduleWindow(data);
     }
   },
-  // 打开排班界面
+  // 교대 편성 화면 열기
   async openScheduleWindow(bind) {
     if (!bind || !bind.bind || !bind.bind.trueParticipantList || !bind.bind.groupId) {
       console.log('데이터에 이상이 있습니다!');
@@ -211,7 +211,7 @@ export default content({
     this.scheduleVm = await c.generate("#scheduleFom", bind, this);
   },
 
-  // 关闭表单页面
+  // 양식 페이지 닫기
   closeGroup() {
     if (this.addGroupVm) {
       this.addGroupVm.destroy();

@@ -26,11 +26,11 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 论坛用户信息表
+ * 포럼 사용자 정보 테이블
  * 
  * @author LIYI
  */
-@Schema(name = "BBSUserInfo", description = "论坛用户信息.")
+@Schema(name = "BBSUserInfo", description = "포럼 사용자 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSUserInfo.table, uniqueConstraints = {
@@ -51,7 +51,7 @@ public class BBSUserInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -60,99 +60,99 @@ public class BBSUserInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String userName_FIELDNAME = "userName";
-	@FieldDescribe("用户标识")
+	@FieldDescribe("사용자 식별자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + userName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + userName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String userName = null;
 
 	public static final String nickName_FIELDNAME = "nickName";
-	@FieldDescribe("昵称")
+	@FieldDescribe("닉네임")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + nickName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String nickName = null;
 
 	public static final String sex_FIELDNAME = "sex";
-	@FieldDescribe("性别:0-女 1-男")
+	@FieldDescribe("성별: 0-여 1-남")
 	@Column(name = ColumnNamePrefix + sex_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer sex = 0;
 
 	public static final String cardId_FIELDNAME = "cardId";
-	@FieldDescribe("身份证号")
+	@FieldDescribe("주민등록번호")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + cardId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cardId = null;
 
 	public static final String mobile_FIELDNAME = "mobile";
-	@FieldDescribe("移动电话")
+	@FieldDescribe("휴대전화")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + mobile_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String mobile = "";
 
 	public static final String credit_FIELDNAME = "credit";
-	@FieldDescribe("积分")
+	@FieldDescribe("포인트")
 	@Column(name = ColumnNamePrefix + credit_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long credit = 0L;
 
 	public static final String subjectCount_FIELDNAME = "subjectCount";
-	@FieldDescribe("主题数")
+	@FieldDescribe("주제 수")
 	@Column(name = ColumnNamePrefix + subjectCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long subjectCount = 0L;
 
 	public static final String subjectCountToday_FIELDNAME = "subjectCountToday";
-	@FieldDescribe("今日发表主题数")
+	@FieldDescribe("오늘 게시한 주제 수")
 	@Column(name = ColumnNamePrefix + subjectCountToday_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long subjectCountToday = 0L;
 
 	public static final String replyCount_FIELDNAME = "replyCount";
-	@FieldDescribe("回复数")
+	@FieldDescribe("답글 수")
 	@Column(name = ColumnNamePrefix + replyCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long replyCount = 0L;
 
 	public static final String replyCountToday_FIELDNAME = "replyCountToday";
-	@FieldDescribe("今日发表回复数")
+	@FieldDescribe("오늘 작성한 답글 수")
 	@Column(name = ColumnNamePrefix + replyCountToday_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long replyCountToday = 0L;
 
 	public static final String creamCount_FIELDNAME = "creamCount";
-	@FieldDescribe("精华贴数")
+	@FieldDescribe("우수글 수")
 	@Column(name = ColumnNamePrefix + creamCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long creamCount = 0L;
 
 	public static final String originalCount_FIELDNAME = "originalCount";
-	@FieldDescribe("原创贴数")
+	@FieldDescribe("원본글 수")
 	@Column(name = ColumnNamePrefix + originalCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long originalCount = 0L;
 
 	public static final String popularity_FIELDNAME = "popularity";
-	@FieldDescribe("人气")
+	@FieldDescribe("인기")
 	@Column(name = ColumnNamePrefix + popularity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long popularity = 0L;
 
 	public static final String fansCount_FIELDNAME = "fansCount";
-	@FieldDescribe("粉丝数")
+	@FieldDescribe("팬 수")
 	@Column(name = ColumnNamePrefix + fansCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long fansCount = 0L;
@@ -160,7 +160,7 @@ public class BBSUserInfo extends SliceJpaObject {
 	public static final String signContent_FIELDNAME = "signContent";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("签名内容")
+	@FieldDescribe("서명 내용")
 	@Column(length = JpaObject.length_4K, name = ColumnNamePrefix + signContent_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String signContent = "";
@@ -168,26 +168,26 @@ public class BBSUserInfo extends SliceJpaObject {
 	public static final String permissionContent_FIELDNAME = "permissionContent";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("权限角色内容")
+	@FieldDescribe("권한 역할 내용")
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + permissionContent_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String permissionContent = null;
 
 	public static final String online_FIELDNAME = "online";
-	@FieldDescribe("在线状态")
+	@FieldDescribe("온라인 상태")
 	@Column(name = ColumnNamePrefix + online_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean online = false;
 
 	public static final String lastVisitTime_FIELDNAME = "lastVisitTime";
-	@FieldDescribe("上次访问时间")
+	@FieldDescribe("마지막 방문 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + lastVisitTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date lastVisitTime = null;
 
 	public static final String lastOperationTime_FIELDNAME = "lastOperationTime";
-	@FieldDescribe("最近一次操作时间")
+	@FieldDescribe("최근 작업 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + lastOperationTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -200,7 +200,7 @@ public class BBSUserInfo extends SliceJpaObject {
 	private String userStatus = "启用";
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer orderNumber = 1;

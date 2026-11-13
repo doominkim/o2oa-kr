@@ -105,14 +105,14 @@ class ActionListWithJob extends BaseAction {
 	@Schema(name = "com.x.processplatform.assemble.surface.jaxrs.attachment.ActionListWithJob$WoControl")
 	public static class WoControl extends GsonPropertyObject {
 		private static final long serialVersionUID = -7283783148043076205L;
-		@FieldDescribe("可读.")
-		@Schema(description = "可读.")
+		@FieldDescribe("열람 가능.")
+		@Schema(description = "열람 가능.")
 		private Boolean allowRead = false;
-		@FieldDescribe("可写.")
-		@Schema(description = "可写.")
+		@FieldDescribe("쓰기 가능.")
+		@Schema(description = "쓰기 가능.")
 		private Boolean allowEdit = false;
-		@FieldDescribe("可控制.")
-		@Schema(description = "可控制.")
+		@FieldDescribe("제어 가능.")
+		@Schema(description = "제어 가능.")
 		private Boolean allowControl = false;
 
 		public Boolean getAllowRead() {

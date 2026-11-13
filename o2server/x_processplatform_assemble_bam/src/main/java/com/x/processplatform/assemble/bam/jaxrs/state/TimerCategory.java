@@ -28,7 +28,7 @@ import com.x.processplatform.core.entity.content.WorkCompleted_;
 import com.x.processplatform.core.entity.content.Work_;
 import com.x.processplatform.core.entity.element.ActivityType;
 
-/** 统计按应用,流程,活动节点分类的 */
+/** 앱, 프로세스, 활동 노드별 분류 통계 */
 public class TimerCategory extends ActionBase {
 
 	public void execute(Business business) throws Exception {
@@ -498,7 +498,7 @@ public class TimerCategory extends ActionBase {
 						workDuration = this.durationWork(business, start, current, stub);
 					}
 					ActionCategory.WoActivity wo = new ActionCategory.WoActivity();
-					/** 如果是开始或者结束,且所有数据为0,那么忽略数据 */
+					/** 시작 또는 종료이고 모든 데이터가 0이면 데이터 무시 */
 					if ((!Objects.equals(ActivityType.begin, stub.getActivityType()))
 							&& (!Objects.equals(ActivityType.end, stub.getActivityType()))) {
 						if (taskCount != 0L || taskCompletedCount != 0L || workCount != 0L) {

@@ -118,7 +118,7 @@ public class TimerStartTaskApplicationStubs extends BaseAction {
 
 	private ProcessStubs concreteProcessStubs(Business business, DateRange dateRange, ApplicationStub applicationStub)
 			throws Exception {
-		/* 所有属于applicationId的processId总和 */
+		/* applicationId에 속한 모든 processId 합계 */
 		Set<String> ids = new HashSet<>();
 		ids.addAll(this.listProcessFromTask(business, dateRange, applicationStub));
 		ids.addAll(this.listProcessFromTaskCompleted(business, dateRange, applicationStub));
@@ -206,7 +206,7 @@ public class TimerStartTaskApplicationStubs extends BaseAction {
 
 	private ActivityStubs concreteActivityStubs(Business business, DateRange dateRange, ProcessStub processStub)
 			throws Exception {
-		/* 所有属于processId的activityId总和 */
+		/* processId에 속한 모든 activityId 합계 */
 		Set<String> ids = new HashSet<>();
 		ids.addAll(this.listActivityFromTask(business, dateRange, processStub.getValue()));
 		ids.addAll(this.listActivityFromTaskCompleted(business, dateRange, processStub.getValue()));

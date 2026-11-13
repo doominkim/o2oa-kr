@@ -48,7 +48,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_personal"] = new Class({
                     oldPassword : encrypt.encrypt(data.oldPassword),
                     newPassword : encrypt.encrypt(data.newPassword),
                     confirmPassword : encrypt.encrypt(data.confirmPassword),
-                    isEncrypted : "y" //是否启用加密,默认不加密,启用(y)。注意:使用加密先要在服务器运行 create encrypt key"
+                    isEncrypted : "y" //암호화 사용 여부, 기본은 암호화 안 함, 사용(y). 주의: 암호화를 사용하려면 먼저 서버에서 create encrypt key 실행"
                 };
                 this.action.invoke({"name": "setPasswordAnonymous", "async": async, "data": d, "success": success, "failure": failure});
             }.bind(this));

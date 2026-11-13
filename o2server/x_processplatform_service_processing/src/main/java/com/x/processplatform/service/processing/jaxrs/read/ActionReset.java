@@ -129,10 +129,10 @@ class ActionReset extends BaseAction {
 
         private static final long serialVersionUID = 3966536547959075002L;
 
-        @FieldDescribe("身份")
+        @FieldDescribe("신분")
         private List<String> identityList;
 
-        @FieldDescribe("待阅意见")
+        @FieldDescribe("열람 대기 의견")
         private String opinion;
 
         public List<String> getIdentityList() {

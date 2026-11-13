@@ -148,7 +148,7 @@ class ActionRestore extends BaseAction {
 			}
 			emc.commit();
 			if (!snap.getProperties().getWorkList().isEmpty()) {
-				// 创建create事件
+				// create 이벤트 생성
 				emc.beginTransaction(WorkEvent.class);
 				emc.persist(WorkEvent.createEventInstance(snap.getProperties().getWorkList().get(0)),
 						CheckPersistType.all);
@@ -183,7 +183,7 @@ class ActionRestore extends BaseAction {
 			}
 			emc.commit();
 			if (null != snap.getProperties().getWorkCompleted()) {
-				// 创建create事件
+				// create 이벤트 생성
 				emc.beginTransaction(WorkCompletedEvent.class);
 				emc.persist(WorkCompletedEvent.createEventInstance(snap.getProperties().getWorkCompleted()),
 						CheckPersistType.all);

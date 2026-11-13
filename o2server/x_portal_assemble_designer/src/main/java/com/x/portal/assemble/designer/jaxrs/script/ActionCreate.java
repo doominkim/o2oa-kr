@@ -41,7 +41,7 @@ class ActionCreate extends BaseAction {
 			emc.persist(script, CheckPersistType.all);
 			emc.commit();
 			CacheManager.notify(Script.class);
-			// 保存历史版本
+			// 이력 버전 저장
 			ThisApplication.scriptVersionQueue.send(new ScriptVersion(script.getId(), jsonElement, effectivePerson.getDistinguishedName()));
 			Wo wo = new Wo();
 			wo.setId(script.getId());

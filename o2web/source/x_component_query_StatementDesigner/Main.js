@@ -348,8 +348,8 @@ MWF.xApplication.query.StatementDesigner.Main = new Class({
                     var isLetterA = /^[a-zA-Z0-9]/.test(av);
                     var isLetterB = /^[a-zA-Z0-9]/.test(bv);
 
-                    if (isLetterA && !isLetterB) return isDesc ? 1 : -1; // a是字母，b不是，a排在前面
-                    if (!isLetterA && isLetterB) return isDesc ? -1 : 1;  // a不是字母，b是，b排在前面
+                    if (isLetterA && !isLetterB) return isDesc ? 1 : -1; // a는 문자이고 b는 아니면 a를 앞에 배치
+                    if (!isLetterA && isLetterB) return isDesc ? -1 : 1;  // a는 문자가 아니고 b는 문자이면 b를 앞에 배치
 
                     return isDesc ?  bv.localeCompare(av) : av.localeCompare(bv);
                 }
@@ -447,7 +447,7 @@ MWF.xApplication.query.StatementDesigner.Main = new Class({
             }.bind(this));
         }.bind(this), null, false);
     },
-    //列示所有查询配置列表
+    //모든 쿼리 설정 목록 조회
     createListStatementItem: function(statement, isNew){
         var _self = this;
         var listStatementItem = new Element("div", {"styles": this.css.listStatementItem}).inject(this.statementListAreaNode, (isNew) ? "top": "bottom");
@@ -473,7 +473,7 @@ MWF.xApplication.query.StatementDesigner.Main = new Class({
         this.itemArray.push(itemObj);
         this.checkShow(itemObj);
     },
-    //打开查询配置
+    //쿼리 설정 열기
     loadStatementByData: function(node, e){
         var statement = node.retrieve("statement");
         if (!statement.isNewStatement){

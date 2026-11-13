@@ -16,7 +16,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Schema(name = "AttendanceV2Holiday", description = "中国节假日数据.")
+@Schema(name = "AttendanceV2Holiday", description = "중국 공휴일 데이터.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.AttendanceV2Holiday.table, indexes = {
         @Index(name = PersistenceProperties.AttendanceV2Holiday.table + JpaObject.IndexNameMiddle
@@ -50,28 +50,28 @@ public class AttendanceV2Holiday extends SliceJpaObject {
     }
 
     public static final String year_FIELDNAME = "year";
-    @FieldDescribe("年份")
+    @FieldDescribe("연도")
     @Column(name = ColumnNamePrefix + year_FIELDNAME)
     private Integer year;
 
     public static final String dateString_FIELDNAME = "dateString";
-    @FieldDescribe("日期，格式 yyyy-MM-dd")
+    @FieldDescribe("날짜, 형식 yyyy-MM-dd")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + dateString_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String dateString;
 
     public static final String name_FIELDNAME = "name";
-    @FieldDescribe("节假日名称")
+    @FieldDescribe("공휴일 이름")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + name_FIELDNAME)
     private String name;
 
     public static final String offDay_FIELDNAME = "offDay";
-    @FieldDescribe("是否放假日，true 放假，false 调休工作日")
+    @FieldDescribe("휴일 여부, true 휴일, false 대체 근무일")
     @Column(name = ColumnNamePrefix + offDay_FIELDNAME)
     private Boolean offDay;
 
     public static final String source_FIELDNAME = "source";
-    @FieldDescribe("数据来源，SYNC 定时任务同步，API 前端接口新增")
+    @FieldDescribe("데이터 출처, SYNC 예약 작업 동기화, API 프런트엔드 인터페이스 추가")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + source_FIELDNAME)
     private String source;
 

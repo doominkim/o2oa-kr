@@ -2,7 +2,7 @@ package com.x.processplatform.core.entity.element;
 
 public enum ScriptType {
 	/**
-	 * 脚本类型，过程还是函数
+	 * 스크립트 유형, 프로시저 또는 함수
 	 */
 	sub, function
 }

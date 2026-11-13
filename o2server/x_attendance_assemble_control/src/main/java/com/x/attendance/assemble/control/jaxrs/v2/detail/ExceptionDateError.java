@@ -8,6 +8,6 @@ public class ExceptionDateError extends PromptException {
 	private static final long serialVersionUID = 5464536178018732958L;
 
 	public ExceptionDateError() {
-		super(  "日期不正确，请输入一个过去的日期，格式：yyyy-MM-dd.");
+		super(  "날짜가 올바르지 않습니다. 과거 날짜를 입력하십시오. 형식: yyyy-MM-dd.");
 	}
 }

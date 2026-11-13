@@ -55,9 +55,9 @@ class ActionListWithUnitWithType extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("搜索组织范围,为空则不限定")
+		@FieldDescribe("검색 조직 범위, 비어 있으면 제한 없음")
 		private List<String> unitList = new ArrayList<>();
-		@FieldDescribe("组织的type属性值,匹配多值中的某一个,不能为空")
+		@FieldDescribe("조직의 type 속성값, 다중 값 중 하나와 일치, 비워 둘 수 없음")
 		private String type;
 
 		public List<String> getUnitList() {
@@ -90,7 +90,7 @@ class ActionListWithUnitWithType extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("直接下级组织组织对象")
+		@FieldDescribe("직속 하위 조직 객체")
 		private List<Wo> woSubDirectUnitList = new ArrayList<>();
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,
@@ -149,7 +149,7 @@ class ActionListWithUnitWithType extends BaseAction {
 			return wos;
 		}
 		List<String> expendUnitIds = business.expendUnitToUnit(unitIds);
-		/** 搜索范围不包含自己 */
+		/** 검색 범위에 자신 제외 */
 		expendUnitIds.removeAll(unitIds);
 		EntityManager em = business.entityManagerContainer().get(Unit.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

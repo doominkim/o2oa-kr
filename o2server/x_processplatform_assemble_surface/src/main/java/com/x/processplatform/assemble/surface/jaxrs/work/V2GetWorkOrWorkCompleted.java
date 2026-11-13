@@ -158,7 +158,7 @@ class V2GetWorkOrWorkCompleted extends BaseAction {
     }
 
     /**
-     * 通过接口标志待办待阅已读,viewTime标志为当前时间
+     * 인터페이스로 결재 대기·열람 대기를 읽음 표시, viewTime을 현재 시간으로 표시
      *
      * @param effectivePerson
      * @param job
@@ -174,11 +174,11 @@ class V2GetWorkOrWorkCompleted extends BaseAction {
 
     private WoRecord taskToRecord(WoTask woTask) {
         WoRecord o = new WoRecord();
-        // id必须设置为空,否则会影响每次输出的内容都不同,那么会导致etag每次不同.
+        // id는 반드시 비워야 함, 그렇지 않으면 매번 출력 내용이 달라져 etag가 매번 달라짐.
         o.setId("");
-        // order设置为task的最后修改时间,否则会影响每次输出的内容都不同,那么会导致etag每次不同.
+        // order를 task의 마지막 수정 시간으로 설정, 그렇지 않으면 매번 출력 내용이 달라져 etag가 매번 달라짐.
         o.setOrder(woTask.getUpdateTime().getTime());
-        // recordTime设置为task的最后修改时间,否则会影响每次输出的内容都不同,那么会导致etag每次不同.
+        // recordTime을 task의 마지막 수정 시간으로 설정, 그렇지 않으면 매번 출력 내용이 달라져 etag가 매번 달라짐.
         o.setRecordTime(woTask.getUpdateTime());
         o.setType(Record.TYPE_CURRENTTASK);
         o.setFromActivity(woTask.getActivity());
@@ -209,7 +209,7 @@ class V2GetWorkOrWorkCompleted extends BaseAction {
                         DataItem.itemCategory_FIELDNAME, ItemCategory.pp);
                 if (!list.isEmpty()) {
                     JsonElement jsonElement = itemConverter.assemble(list);
-                    // 必须是Object对象
+                    // 반드시 Object 객체여야 함
                     if (jsonElement.isJsonObject()) {
                         business.itemAccess().convert(jsonElement, work.getProcess(),
                                 work.getApplication(), activity,
@@ -448,7 +448,7 @@ class V2GetWorkOrWorkCompleted extends BaseAction {
                             ItemCategory.pp);
                     if (!list.isEmpty()) {
                         JsonElement jsonElement = itemConverter.assemble(list);
-                        // 必须是Object对象
+                        // 반드시 Object 객체여야 함
                         if (jsonElement.isJsonObject()) {
                             Business business = new Business(emc);
                             business.itemAccess().convert(jsonElement, workCompleted.getProcess(),
@@ -527,40 +527,40 @@ class V2GetWorkOrWorkCompleted extends BaseAction {
     public static class Wo extends GsonPropertyObject {
 
         private static final long serialVersionUID = -2651851022553574012L;
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private JsonElement work;
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private Data data;
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private List<WoRead> readList;
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private Integer currentReadIndex = -1;
 
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private Identity creatorIdentity;
 
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private Person creatorPerson;
 
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private Unit creatorUnit;
 
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private List<WoAttachment> attachmentList;
 
-        // work和workCompleted都有,需要先行初始化,因为record可能为空
+        // work와 workCompleted 모두 있음, record가 비어 있을 수 있으므로 먼저 초기화 필요
         private List<WoRecord> recordList = new ArrayList<>();
 
-        // 只有work有
+        // work만 있음
         private WoActivity activity;
-        // 只有work有
+        // work만 있음
         private List<WoTask> taskList;
-        // 只有work有
+        // work만 있음
         private Integer currentTaskIndex = -1;
-        // 只有work有
+        // work만 있음
         private List<WoRoute> routeList;
 
-        // work和workCompleted都有
+        // work와 workCompleted 모두 있음
         private WoReview review;
 
         public JsonElement getWork() {
@@ -755,10 +755,10 @@ class V2GetWorkOrWorkCompleted extends BaseAction {
 
         private Boolean processingTaskOnceUnderSamePerson;
 
-        @FieldDescribe("默认加签方式")
+        @FieldDescribe("기본 결재자 추가 방식")
         private String defaultAddTaskType;
 
-        @FieldDescribe("默认处理方式")
+        @FieldDescribe("기본 처리 방식")
         private String defaultAddTaskMode;
 
         public Boolean getProcessingTaskOnceUnderSamePerson() {

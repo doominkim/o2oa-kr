@@ -32,7 +32,7 @@ public class ActionPersistPublishCancel extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "文档信息获取操作时发生异常。Id:" + id + ", Name:" + effectivePerson.getDistinguishedName());
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 정보를 가져오는 중 오류가 발생했습니다. Id:" + id + ", Name:" + effectivePerson.getDistinguishedName());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -51,7 +51,7 @@ public class ActionPersistPublishCancel extends BaseAction {
 				result.setData( wo );
 
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统将文档状态修改为发布状态时发生异常。Id:" + id);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 상태를 게시로 변경하는 중 오류가 발생했습니다. Id:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -74,7 +74,7 @@ public class ActionPersistPublishCancel extends BaseAction {
 				document = documentQueryService.get(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在收回已发布文档访问管理权限信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시된 게시글의 접근·관리 권한을 회수하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

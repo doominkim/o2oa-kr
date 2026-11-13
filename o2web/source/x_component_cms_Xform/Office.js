@@ -42,7 +42,7 @@ MWF.xApplication.cms.Xform.Office = MWF.CMSOffice =  new Class({
         return file
     },
     getTempleteUrl: function(){
-        //return "../x_desktop/temp/杭州城管委文件.doc";
+        //return "../x_desktop/temp/항저우도시관리위원회문서.doc";
         if (this.json.template){
             var root = "";
             var flag = this.json.template.substr(0,1);

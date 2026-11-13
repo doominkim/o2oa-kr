@@ -10,7 +10,7 @@ public abstract class SliceJpaObject extends JpaObject {
 
 	private static final long serialVersionUID = 805690971791595604L;
 
-	@FieldDescribe("分布式存储标识位.")
+	@FieldDescribe("분산 스토리지 식별 비트.")
 	@Column(name = ColumnNamePrefix + distributeFactor_FIELDNAME)
 	protected Integer distributeFactor;
 

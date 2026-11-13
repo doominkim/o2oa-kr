@@ -7,6 +7,6 @@ public class ExceptionInvalidServerAddress extends PromptException {
     private static final long serialVersionUID = -1367282830558670567L;
 
     ExceptionInvalidServerAddress(String ip) {
-        super("代理ip：{}不符合规则，请联系管理员.", ip);
+        super("프록시 IP: {}이(가) 규칙에 맞지 않습니다. 관리자에게 문의하세요.", ip);
     }
 }

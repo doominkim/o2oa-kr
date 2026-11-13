@@ -10,11 +10,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 
-// 这个表是 性能优化表。
-//否则你每次查余额都要：
+// 이 테이블은 성능 최적화 테이블임.
+//그렇지 않으면 잔여량을 조회할 때마다:
 // sum(ledger.remaining)
 @Entity
-@Schema(name = "AttendanceV2LeaveAccount", description = "假期账户汇总.")
+@Schema(name = "AttendanceV2LeaveAccount", description = "휴가 계정 요약.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.AttendanceV2LeaveAccount.table, indexes = {
         @Index(name = PersistenceProperties.AttendanceV2LeaveAccount.table + JpaObject.IndexNameMiddle
@@ -44,27 +44,27 @@ public class AttendanceV2LeaveAccount extends SliceJpaObject {
 
     public void onPersist() throws Exception {}
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("用户")
+    @FieldDescribe("사용자")
     @Column(length = JpaObject.length_96B, name = ColumnNamePrefix + person_FIELDNAME)
     private String person;
 
     public static final String leaveTypeId_FIELDNAME = "leaveTypeId";
-    @FieldDescribe("假期类型")
+    @FieldDescribe("휴가 유형")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + leaveTypeId_FIELDNAME)
     private String leaveTypeId;
 
     public static final String totalGranted_FIELDNAME = "totalGranted";
-    @FieldDescribe("总发放")
+    @FieldDescribe("총 지급")
     @Column(name = ColumnNamePrefix + totalGranted_FIELDNAME)
     private Double totalGranted = 0.0;
 
     public static final String totalUsed_FIELDNAME = "totalUsed";
-    @FieldDescribe("总使用")
+    @FieldDescribe("총 사용")
     @Column(name = ColumnNamePrefix + totalUsed_FIELDNAME)
     private Double totalUsed = 0.0;
 
     public static final String balance_FIELDNAME = "balance";
-    @FieldDescribe("余额")
+    @FieldDescribe("잔여")
     @Column(name = ColumnNamePrefix + balance_FIELDNAME)
     private Double balance = 0.0;
 

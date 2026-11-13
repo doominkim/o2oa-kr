@@ -36,16 +36,16 @@ public class DataRecordAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataRecordAction.class);
 	private static final String OPERATIONID_PREFIX = "DataRecordAction::";
 
-	@Operation(summary = "根据任务标识获取业务数据变更记录.", operationId = OPERATIONID_PREFIX + "listWithJob", responses = {
+	@Operation(summary = "작업 식별자로 업무 데이터 변경 기록 조회.", operationId = OPERATIONID_PREFIX + "listWithJob", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithJob.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据任务标识获取业务数据变更记录.", action = ActionListWithJob.class)
+	@JaxrsMethodDescribe(value = "작업 식별자로 업무 데이터 변경 기록 조회.", action = ActionListWithJob.class)
 	@GET
 	@Path("list/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作的job") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("업무 문서의 job") @PathParam("job") String job) {
 		ActionResult<List<ActionListWithJob.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -57,17 +57,17 @@ public class DataRecordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据任务标识和业务字段获取数据变更记录.", operationId = OPERATIONID_PREFIX + "getWithJobPath", responses = {
+	@Operation(summary = "작업 식별자와 업무 필드로 데이터 변경 기록 조회.", operationId = OPERATIONID_PREFIX + "getWithJobPath", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionGetWithJobPath.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据任务标识和业务字段获取数据变更记录.", action = ActionGetWithJobPath.class)
+	@JaxrsMethodDescribe(value = "작업 식별자와 업무 필드로 데이터 변경 기록 조회.", action = ActionGetWithJobPath.class)
 	@GET
 	@Path("get/job/{job}/path/{path}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithJobPath(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							@JaxrsParameterDescribe("工作的job") @PathParam("job") String job,
-							@JaxrsParameterDescribe("字段path") @PathParam("path") String path) {
+							@JaxrsParameterDescribe("업무 문서의 job") @PathParam("job") String job,
+							@JaxrsParameterDescribe("필드 path") @PathParam("path") String path) {
 		ActionResult<ActionGetWithJobPath.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

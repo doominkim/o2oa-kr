@@ -81,22 +81,22 @@ class ActionListPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String name;
 
-		@FieldDescribe("分类")
+		@FieldDescribe("분류")
 		private String category;
 
-		@FieldDescribe("排序字段：createTime（创建时间，默认）|orderNumber（排序）|recommend（推荐指数）")
+		@FieldDescribe("정렬 필드: createTime(생성 시간, 기본값)|orderNumber(정렬)|recommend(추천 지수)")
 		private String orderBy;
 
-		@FieldDescribe("是否是升序排序：true|false")
+		@FieldDescribe("오름차순 정렬 여부: true|false")
 		private Boolean isAsc;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
 		public String getName() {
@@ -150,7 +150,7 @@ class ActionListPaging extends BaseAction {
 
 	public static class Wo extends Application2 {
 
-		@FieldDescribe("已安装的版本，空表示未安装")
+		@FieldDescribe("설치된 버전, 비어 있으면 미설치")
 		private String installedVersion;
 
 		public String getInstalledVersion() {

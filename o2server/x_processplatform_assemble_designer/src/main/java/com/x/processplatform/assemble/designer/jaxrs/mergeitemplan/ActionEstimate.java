@@ -66,7 +66,7 @@ class ActionEstimate extends BaseAction {
 
 		private static final long serialVersionUID = 1249521045918498644L;
 
-		@FieldDescribe("总数")
+		@FieldDescribe("총수")
 		private Long count = 0L;
 
 		public Long getCount() {
@@ -83,16 +83,16 @@ class ActionEstimate extends BaseAction {
 
 		private static final long serialVersionUID = -5237741099036357033L;
 
-		@FieldDescribe("应用标识")
+		@FieldDescribe("앱 식별자")
 		private String application;
 
-		@FieldDescribe("流程标识")
+		@FieldDescribe("프로세스 식별자")
 		private String process;
 
-		@FieldDescribe("开始时间")
+		@FieldDescribe("시작 시간")
 		private Date startTime;
 
-		@FieldDescribe("结束时间")
+		@FieldDescribe("종료 시간")
 		private Date completedTime;
 
 		public String getApplication() {

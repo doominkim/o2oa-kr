@@ -17,7 +17,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceV2GroupSchedule", description = "考勤组排班数据.")
+@Schema(name = "AttendanceV2GroupSchedule", description = "근태 그룹 근무 배정 데이터.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2GroupSchedule.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceV2GroupSchedule.table
@@ -38,7 +38,7 @@ public class AttendanceV2GroupSchedule  extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -47,44 +47,44 @@ public class AttendanceV2GroupSchedule  extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String groupId_FIELDNAME = "groupId";
-	@FieldDescribe("考勤组id.")
+	@FieldDescribe("근태 그룹 id.")
 	@Column(length = length_64B, name = ColumnNamePrefix + groupId_FIELDNAME)
   @CheckPersist(allowEmpty = false)
 	private String groupId;
 
   public static final String userId_FIELDNAME = "userId";
-  @FieldDescribe("排班用户标识DN")
+  @FieldDescribe("근무 배정 사용자 식별자 DN")
   @Column(length = length_96B, name = ColumnNamePrefix + userId_FIELDNAME)
   @CheckPersist(allowEmpty = false)
   private String userId;
 
 	public static final String scheduleMonthString_FIELDNAME = "scheduleMonthString";
-  @FieldDescribe("排班月份: YYYY-MM")
+  @FieldDescribe("근무 배정 월: YYYY-MM")
   @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + scheduleMonthString_FIELDNAME)
   @CheckPersist(allowEmpty = false)
   private String scheduleMonthString;
 
   public static final String scheduleDateString_FIELDNAME = "scheduleDateString";
-  @FieldDescribe("排班日期: YYYY-MM-dd")
+  @FieldDescribe("근무 배정 날짜: YYYY-MM-dd")
   @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + scheduleDateString_FIELDNAME)
   @CheckPersist(allowEmpty = false)
   private String scheduleDateString;
    
   public static final String shiftId_FIELDNAME = "shiftId";
-	@FieldDescribe("当天绑定的班次id, 为空就是休息.")
+	@FieldDescribe("당일 지정된 근무 id, 비어 있으면 휴무.")
 	@Column(length = length_64B, name = ColumnNamePrefix + shiftId_FIELDNAME)
 	private String shiftId;
 

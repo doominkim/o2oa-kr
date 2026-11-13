@@ -13,8 +13,8 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 将所有需要分析的数据发送到数据分析队列，由相应的处理器进行数据分析操作
- * 根据员工姓名进行分组，避免多次操作员工排班信息
+ * 분석할 모든 데이터를 데이터 분석 큐로 보내 해당 처리기가 데이터 분석 수행
+ * 직원 이름별로 그룹화하여 직원 근무 일정 정보를 여러 번 조작하지 않도록 함
  * 
  * @author O2LEE
  *

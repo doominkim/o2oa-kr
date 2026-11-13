@@ -34,7 +34,7 @@ public class ActionListAllManageableAppType extends BaseAction {
 			isManager = userManagerService.isManager( effectivePerson );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionAppInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+			Exception exception = new ExceptionAppInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -50,12 +50,12 @@ public class ActionListAllManageableAppType extends BaseAction {
 				appTypes = appInfoServiceAdv.listAllAppType();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess( e, "查询所有应用栏目信息对象时发生异常" );
+				Exception exception = new ExceptionAppInfoProcess( e, "전체 게시판 정보 객체를 조회하는 중 오류가 발생했습니다" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
 			if( check ){
-				//查询每个类别的应用ID列表，查询出ID列表后，根据ID列表查询用户可访问的栏目对象
+				//유형별 앱 ID 목록을 조회한 뒤, ID 목록으로 사용자가 접근 가능한 게시판 객체 조회
 				List<String> appIdsForType = null;
 				if(ListTools.isNotEmpty( appTypes ) ){
 					for( String appType : appTypes ) {
@@ -76,7 +76,7 @@ public class ActionListAllManageableAppType extends BaseAction {
 						}
 					}
 				}
-				//查询所有的未分类的并且有权限查看的栏目列表
+				//미분류이면서 열람 권한이 있는 모든 게시판 목록 조회
 				appIdsForType = appInfoServiceAdv.listAppIdsWithOutAppType();
 				if( !isManager && ListTools.isNotEmpty( appIdsForType ) ){
 					List<String> unitNames = userManagerService.listUnitNamesWithPerson( personName );
@@ -101,10 +101,10 @@ public class ActionListAllManageableAppType extends BaseAction {
 	}
 
 	public static class Wo extends GsonPropertyObject {
-		@FieldDescribe("栏目类别名称")
+		@FieldDescribe("게시판 유형 이름")
 		private String appType;
 
-		@FieldDescribe("栏目数量")
+		@FieldDescribe("게시판 수")
 		private Long count;
 
 		public Wo( String _appType, Long _count ) {

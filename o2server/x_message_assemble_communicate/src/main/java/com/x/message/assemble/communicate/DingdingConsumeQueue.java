@@ -36,19 +36,19 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 			m.setAgent_id(Long.parseLong(Config.dingding().getAgentId(), 10));
 			m.setUserid_list(person.getDingdingId());
 			if (StringUtils.isEmpty(m.getUserid_list())) {
-				LOGGER.warn("没有接收钉钉消息的人员:{}.", message.getPerson());
+				LOGGER.warn("딩톡 메시지를 받을 사용자 없음:{}.", message.getPerson());
 				return;
 			}
 			String openUrl = getOpenUrl(message);
 			if (needTransferLink(message.getType()) && StringUtils.isNotEmpty(openUrl)) {
-					// dingtalk://dingtalkclient/action/openapp?corpid=免登企业corpId&container_type=work_platform&app_id=0_{应用agentid}&redirect_type=jump&redirect_url=跳转url
+					// dingtalk://dingtalkclient/action/openapp?corpid=로그인면제기업corpId&container_type=work_platform&app_id=0_{앱agentid}&redirect_type=jump&redirect_url=이동url
 				String dingtalkUrl = "dingtalk://dingtalkclient/action/openapp?corpid="
 						+ Config.dingding().getCorpId() + "&container_type=work_platform&app_id=0_"
 						+ Config.dingding().getAgentId() + "&redirect_type=jump&redirect_url="
 						+ URLEncoder.encode(openUrl, DefaultCharset.name);
-				LOGGER.info("钉钉pc 打开消息 url：{}",  dingtalkUrl);
-				// 内容管理
-				String cardTitle = cardTitle(message.getTitle()); // message.getTitle() 使用uuid  消息重发的问题
+				LOGGER.info("딩톡 pc 메시지 열기 url:{}",  dingtalkUrl);
+				// 콘텐츠 관리
+				String cardTitle = cardTitle(message.getTitle()); // message.getTitle() 대신 uuid 사용. 메시지 재전송 문제
 				if (MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType())
 						|| MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType())) {
 					String categoryName = DingdingConsumeQueue.OuterMessageHelper.getPropertiesFromBody("categoryName", message.getBody());
@@ -74,7 +74,7 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 					+ "/topapi/message/corpconversation/asyncsend_v2?access_token="
 					+ Config.dingding().corpAccessToken();
 			if(LOGGER.isDebugEnabled()) {
-				LOGGER.debug("钉钉消息体：{}", m::toString);
+				LOGGER.debug("딩톡 메시지 본문:{}", m::toString);
 			}
 			DingdingMessageResp resp = HttpConnection.postAsObject(address, null, m.toString(),
 					DingdingMessageResp.class);
@@ -101,18 +101,18 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 判断打开地址
+	 * 열기 주소 판단
 	 *
 	 * @param message
 	 * @return
 	 */
 	private String getOpenUrl(Message message) {
 		String openUrl = "";
-		// cms 文档
+		// cms 문서
 		if (MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType())
 				|| MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType())) {
 			openUrl = getDingdingOpenCMSDocumentUrl(message.getBody());
-		} else { // 流程工作相关的
+		} else { // 프로세스 업무 문서 관련
 			openUrl = getDingdingOpenWorkUrl(message.getBody());
 		}
 		return openUrl;
@@ -126,7 +126,7 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 标志消息消费成功
+	 * 메시지 소비 성공 표시
 	 *
 	 * @param id
 	 * @throws Exception
@@ -143,7 +143,7 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 文档打开的url
+	 * 문서를 여는 url
 	 *
 	 * @param messageBody
 	 * @return
@@ -160,7 +160,7 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 工作打开的url
+	 * 업무 문서를 여는 url
 	 *
 	 * @param messageBody
 	 * @return
@@ -178,16 +178,16 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 				String messageRedirectPortal = Config.dingding().getMessageRedirectPortal();
 				if (messageRedirectPortal != null && !"".equals(messageRedirectPortal)) {
 					String portal = "portalmobile.html?id=" + messageRedirectPortal;
-					// 2021-11-1 钉钉那边无法使用了 不能进行encode 否则签名不通过
+					// 2021-11-1 딩톡 쪽에서 사용 불가. encode하면 서명이 통과되지 않음
 					workUrl += "&redirectlink=" + portal;
 				}
-				// 2021-11-1 钉钉那边无法使用了 不能进行encode 否则签名不通过
+				// 2021-11-1 딩톡 쪽에서 사용 불가. encode하면 서명이 통과되지 않음
 				LOGGER.debug("o2oa workUrl：" + workUrl);
 				o2oaUrl = o2oaUrl + URLEncoder.encode(workUrl, DefaultCharset.name);
 			} else {
 				o2oaUrl = o2oaUrl + URLEncoder.encode(openPage, DefaultCharset.name);
 			}
-			LOGGER.info("o2oa 地址：" + o2oaUrl);
+			LOGGER.info("o2oa 주소:" + o2oaUrl);
 			return o2oaUrl+"&encode=true";
 		} catch (Exception e) {
 			LOGGER.error(e);
@@ -197,9 +197,9 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 是否需要把钉钉消息转成markdown格式消息 根据是否配置了钉钉工作链接、是否是工作消息（目前只支持工作消息）
+	 * 딩톡 메시지를 markdown 형식 메시지로 변환할지 여부. 딩톡 업무 링크 설정 여부, 업무 메시지 여부에 따라 결정(현재 업무 메시지만 지원)
 	 *
-	 * @param messageType 消息类型 判断是否是工作消息
+	 * @param messageType 메시지 유형. 업무 메시지 여부 판단
 	 * @return
 	 */
 	private boolean needTransferLink(String messageType) {
@@ -247,11 +247,11 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 一些公用方法
+	 * 공용 메서드
 	 */
 	public static class OuterMessageHelper {
 		/**
-		 * 文档打开的url
+		 * 문서를 여는 url
 		 * @param messageBody
 		 * @return
 		 */
@@ -268,7 +268,7 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 				} else {
 					o2oaUrl = o2oaUrl + URLEncoder.encode(openPage, DefaultCharset.name);
 				}
-				LOGGER.info("o2oa 业务地址：" + o2oaUrl);
+				LOGGER.info("o2oa 업무 주소:" + o2oaUrl);
 				return o2oaUrl+"&encode=true";
 			} catch (Exception e) {
 				LOGGER.error(e);
@@ -277,7 +277,7 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * body里面是否有 openPageUrl 这个字段 有就用这个字段作为跳转页面
+		 * body에 openPageUrl 필드가 있는지 여부. 있으면 이 필드를 이동 페이지로 사용
 		 *
 		 * @param messageBody
 		 * @return
@@ -295,7 +295,7 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * 获取workid
+		 * workid 조회
 		 *
 		 * @param messageBody
 		 * @return
@@ -316,8 +316,8 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * 获取消息体内的某个字段值
-		 * @param propertiesName  如：processName
+		 * 메시지 본문 내 특정 필드 값 조회
+		 * @param propertiesName  예: processName
 		 * @param messageBody
 		 * @return
 		 */
@@ -334,9 +334,9 @@ public class DingdingConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * 这个执行的前提是 MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType()) ||
-		 * MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType()) cms的消息
-		 * body获取文档id
+		 * 이 실행의 전제 조건은 MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType()) ||
+		 * MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType()) cms 메시지
+		 * body에서 문서 id 조회
 		 *
 		 * @param messageBody
 		 * @return

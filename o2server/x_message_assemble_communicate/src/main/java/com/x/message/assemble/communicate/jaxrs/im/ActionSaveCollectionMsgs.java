@@ -57,7 +57,7 @@ public class ActionSaveCollectionMsgs extends BaseAction {
 
 
         private static final long serialVersionUID = 3649112474402515842L;
-        @FieldDescribe("消息id列表")
+        @FieldDescribe("메시지 id 목록")
         private List<String> msgIdList;
 
         public List<String> getMsgIdList() {

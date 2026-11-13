@@ -1472,8 +1472,8 @@ var getDateDiff = function (publishTime) {
     var now = new Date().getTime();
     var diffValue = now - dateTimeStamp;
     if (diffValue < 0) {
-        //若日期不符则弹出窗口告之
-        //alert("结束日期不能小于开始日期！");
+        //날짜가 맞지 않으면 팝업으로 알림
+        //alert("종료 날짜는 시작 날짜보다 이전일 수 없습니다!");
     }
     var yesterday = new Date().decrement('day', 1);
     var beforYesterday = new Date().decrement('day', 2);
@@ -1490,8 +1490,8 @@ var getDateDiff = function (publishTime) {
     } else if (yearC > 1) {
         result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
     } else if (monthC >= 1) {
-        //result= parseInt(monthC) + "个月前";
-        // s.getFullYear()+"年";
+        //result= parseInt(monthC) + "개월 전";
+        // s.getFullYear()+"년";
         result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
     } else if (weekC >= 1) {
         result = parseInt(weekC) + MWF.xApplication.ThreeMember.LP.weekAgo;

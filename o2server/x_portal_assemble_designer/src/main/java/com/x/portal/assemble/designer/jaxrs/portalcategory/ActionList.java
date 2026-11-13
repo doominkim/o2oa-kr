@@ -71,10 +71,10 @@ class ActionList extends BaseAction {
 			this.count = count;
 		}
 
-		@FieldDescribe("门户分类")
+		@FieldDescribe("포털 분류")
 		private String portalCategory;
 
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Long count;
 
 		public Long getCount() {

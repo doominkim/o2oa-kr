@@ -1,7 +1,7 @@
 package com.x.cms.common.image.maincolor;
 
 /**
- * 点群定义
+ * 점 그룹 정의
  *
  */
 public class PointGroup {

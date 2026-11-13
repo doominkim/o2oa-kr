@@ -7,6 +7,6 @@ class ExceptionFolderNotExistCallback extends CallbackPromptException {
 	private static final long serialVersionUID = 7750207007061165350L;
 
 	ExceptionFolderNotExistCallback(String callbackName, String id) {
-		super(callbackName, "指定的目录: {} 不存在.", id);
+		super(callbackName, "지정한 폴더: {}이(가) 없습니다.", id);
 	}
 }

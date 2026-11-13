@@ -35,7 +35,7 @@ class ActionOauthBind extends BaseAction {
 			throw new ExceptionPersonNotLogin();
 		}
 		ActionResult<Wo> result = new ActionResult<>();
-		// 获取oauthClient对象
+		// oauthClient 객체 조회
 		OauthClient oauthClient = oauthClient(name);
 		Map<String, Object> param = oauthCreateParam(oauthClient, code, redirectUri);
 		LOGGER.debug("oauth create param:{}", param);

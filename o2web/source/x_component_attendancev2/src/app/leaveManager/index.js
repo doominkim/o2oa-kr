@@ -14,8 +14,8 @@ export default content({
   bind() {
     return {
       lp,
-      self: true,  // 默认显示自己的外出记录
-      // 搜索表单
+      self: true,  // 기본으로 본인 외출 기록 표시
+      // 검색 양식
       form: {
         startDate: "",
         endDate: "",
@@ -27,7 +27,7 @@ export default content({
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
     };
   },
@@ -95,7 +95,7 @@ export default content({
     }
     return person;
   },
-  //  删除
+  //  삭제
   clickDeleteData(id) {
     var _self = this;
     o2.api.page.confirm(
@@ -118,7 +118,7 @@ export default content({
     console.debug(json);
     this.search();
   },
-  // excel导入请假数据
+  // excel로 휴가 데이터 가져오기
   importExcel() {
     chooseSingleFile((file) => this._uploadExcel(file))
   },
@@ -167,7 +167,7 @@ export default content({
     }
     this.search();
   },
-  // 下载导入结果
+  // 가져오기 결과 다운로드
   downloadImportResult(resultFlag) {
     if (resultFlag) {
       const dAction = o2.Actions.load("x_attendance_assemble_control")
@@ -178,7 +178,7 @@ export default content({
       window.open(o2.filterUrl(url));
     }
   },
-  // 下载excel模板
+  // excel 템플릿 다운로드
   excelTemplateDownload() {
     const dAction = o2.Actions.load("x_attendance_assemble_control").LeaveAction
       .action;

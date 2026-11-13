@@ -13,44 +13,44 @@ public class ActionProcessingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -870819172943535910L;
 
-	@FieldDescribe("待办选择路由名称.")
-	@Schema(description = "待办选择路由名称.")
+	@FieldDescribe("결재 대기 선택 경로 이름.")
+	@Schema(description = "결재 대기 선택 경로 이름.")
 	private String routeName;
 
-//	@FieldDescribe("决策.")
-//	@Schema(description = "决策.")
+//	@FieldDescribe("결정.")
+//	@Schema(description = "결정.")
 //	private String decision;
 
-	@FieldDescribe("待办办理意见.")
-	@Schema(description = "待办办理意见.")
+	@FieldDescribe("결재 대기 처리 의견.")
+	@Schema(description = "결재 대기 처리 의견.")
 	private String opinion;
 
-	@FieldDescribe("多媒体意见.")
-	@Schema(description = "多媒体意见.")
+	@FieldDescribe("멀티미디어 의견.")
+	@Schema(description = "멀티미디어 의견.")
 	private String mediaOpinion;
 
-	@FieldDescribe("路由数据.")
-	@Schema(description = "路由数据.")
+	@FieldDescribe("경로 데이터.")
+	@Schema(description = "경로 데이터.")
 	private JsonElement routeData;
 
-	@FieldDescribe("新添加的待办处理人组织专用标识.")
-	@Schema(description = "新添加的待办处理人组织专用标识.")
+	@FieldDescribe("새로 추가된 결재 대기 처리자 조직 전용 식별자.")
+	@Schema(description = "새로 추가된 결재 대기 처리자 조직 전용 식별자.")
 	private List<String> distinguishedNameList;
 
-	@FieldDescribe("新添加的待办处理人身份.")
-	@Schema(description = "新添加的待办处理人身份.")
+	@FieldDescribe("새로 추가된 결재 대기 처리자 신분.")
+	@Schema(description = "새로 추가된 결재 대기 처리자 신분.")
 	private List<String> appendTaskIdentityList;
 
-	@FieldDescribe("忽略授权身份.")
-	@Schema(description = "忽略授权身份.")
+	@FieldDescribe("위임 신분 무시.")
+	@Schema(description = "위임 신분 무시.")
 	private List<String> ignoreEmpowerIdentityList;
 
-	@FieldDescribe("待办处理类型:goBack.")
-	@Schema(description = "待办处理类型:goBack.")
+	@FieldDescribe("결재 대기 처리 유형: goBack.")
+	@Schema(description = "결재 대기 처리 유형: goBack.")
 	private String action;
 
-	@FieldDescribe("action的参数对象.")
-	@Schema(description = "action的参数对象.")
+	@FieldDescribe("action의 매개변수 객체.")
+	@Schema(description = "action의 매개변수 객체.")
 	private JsonElement option;
 
 //	public String getDecision() {

@@ -30,7 +30,7 @@ import com.x.processplatform.service.processing.Business;
 import com.x.processplatform.service.processing.processor.AeiObjects;
 
 /**
- * 在Manual环节计算所有的待办人的Identity
+ * Manual 단계에서 모든 결재 대기자의 Identity 계산
  * 
  * @author Rui
  *
@@ -43,31 +43,31 @@ public class TranslateTaskIdentityTools {
 		// nothing
 	}
 
-	/* 计算manual节点中所有的待办，全部翻译成Identity */
+	/* manual 노드의 모든 결재 대기를 계산하여 모두 Identity로 변환 */
 	public static TaskIdentities translate(AeiObjects aeiObjects, Manual manual) throws Exception {
 		TaskIdentities taskIdentities = new TaskIdentities();
-		// 正常执行
+		// 정상 실행
 		List<String> units = new ArrayList<>();
 		List<String> groups = new ArrayList<>();
-		// 指定的身份
+		// 지정 신분
 		if (ListTools.isNotEmpty(manual.getTaskIdentityList())) {
 			taskIdentities.addIdentities(manual.getTaskIdentityList());
 		}
-		// 流程角色
+		// 프로세스 역할
 		if ((null != manual.getTaskParticipant()) && StringUtils.isNotBlank(manual.getTaskParticipant().getType())) {
 			taskIdentities.addIdentities(participant(aeiObjects, manual));
 		}
-		// 选择了职务
+		// 직무 선택
 		taskIdentities.addIdentities(duty(aeiObjects, manual));
-		// 指定data数据路径值
+		// data 데이터 경로 값 지정
 		data(taskIdentities, units, groups, aeiObjects.getData(), manual);
-		// 使用脚本计算
+		// 스크립트로 계산
 		script(taskIdentities, units, groups, aeiObjects, manual);
-		// 指定处理组织
+		// 처리 조직 지정
 		if (ListTools.isNotEmpty(manual.getTaskUnitList())) {
 			units.addAll(manual.getTaskUnitList());
 		}
-		// 指定处理群组
+		// 처리 그룹 지정
 		if (ListTools.isNotEmpty(manual.getTaskGroupList())) {
 			groups.addAll(manual.getTaskGroupList());
 		}
@@ -81,7 +81,7 @@ public class TranslateTaskIdentityTools {
 		return new TaskIdentities(identities);
 	}
 
-	/* 取到指定职务的identity */
+	/* 지정 직무의 identity 조회 */
 	private static List<String> duty(AeiObjects aeiObjects, Manual manual) throws Exception {
 		List<String> list = new ArrayList<>();
 		if (StringUtils.isNotEmpty(manual.getTaskDuty())) {
@@ -137,7 +137,7 @@ public class TranslateTaskIdentityTools {
 		return list;
 	}
 
-	/* 取到script指定的identity */
+	/* script로 지정된 identity 조회 */
 	private static List<String> script(TaskIdentities taskIdentities, List<String> units, List<String> groups,
 			AeiObjects aeiObjects, Manual manual) throws Exception {
 		List<String> list = new ArrayList<>();
@@ -156,7 +156,7 @@ public class TranslateTaskIdentityTools {
 		return list;
 	}
 
-	/* 取得通过路径指定的identity */
+	/* 경로로 지정된 identity 조회 */
 	private static void data(TaskIdentities taskIdentities, List<String> units, List<String> groups, Data data,
 			Manual manual) throws Exception {
 		if (ListTools.isNotEmpty(manual.getTaskDataPathList())) {

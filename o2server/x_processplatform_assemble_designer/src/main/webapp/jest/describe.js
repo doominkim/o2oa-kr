@@ -164,12 +164,12 @@ Describe.createSampleMootools = function(m) {
 	var address = address +"/"+ m.path;
 	if (m.pathParameters && m.pathParameters.length > 0) {
 		$.each(m.pathParameters, function(pi, p) {
-			address = address.replace('{' + p.name + '}', '替换参数'+pi);
+			address = address.replace('{' + p.name + '}', '매개변수 교체'+pi);
 		});
 	}
 	if (m.queryParameters && m.queryParameters.length > 0) {
 		$.each(m.queryParameters, function(pi, p) {
-			var query = p.name + '=' + '替换参数'+pi;
+			var query = p.name + '=' + '매개변수 교체'+pi;
 			if (address.indexOf("?") > 0) {
 				address += '&' + query;
 			} else {
@@ -187,9 +187,9 @@ Describe.createSampleMootools = function(m) {
 						default:
 							if (i.isBaseType) {
 								if (i.isCollection) {
-									  strSample += '       data["'+i.name+'"] = ["参数1"];' + "\n";
+									  strSample += '       data["'+i.name+'"] = ["매개변수1"];' + "\n";
 								} else {
-									  strSample += '       data["'+i.name+'"] = "参数";' + "\n";
+									  strSample += '       data["'+i.name+'"] = "매개변수";' + "\n";
 								}
 							} else {
 									if(i.isCollection){
@@ -201,30 +201,30 @@ Describe.createSampleMootools = function(m) {
 										  }
 
 										}else{
-										  strSample += '       data["'+i.name+'"] = [{"参数1":"value1","参数2":"value2"}];'+"\n";
+										  strSample += '       data["'+i.name+'"] = [{"매개변수1":"value1","매개변수2":"value2"}];'+"\n";
 										}
 									}else{
 										  if(i.fieldType =='enum'){
 												   strSample += '       data["'+i.name+'"] = "'+ i.fieldValue +'";'+"\n";
 											  }else{
 
-													strSample += '       data["'+i.name+'"] = {"参数1":"value1","参数2":"value2"};'+"\n";
+													strSample += '       data["'+i.name+'"] = {"매개변수1":"value1","매개변수2":"value2"};'+"\n";
 											  }
 									}
 							}
 						}
 				});
 			} else if (m.useJsonElementParameter) {
-				strSample += 'data = {"参数1":"value1","参数2":"value2"};' +"\n";
+				strSample += 'data = {"매개변수1":"value1","매개변수2":"value2"};' +"\n";
 			} else if (m.useStringParameter) {
-				strSample += 'data = "参数";'+"\n";
+				strSample += 'data = "매개변수";'+"\n";
 			}
 
 			strSample += " \n var mootoolsRequest = new Request({" + "\n";
 		    strSample += "        url:'"+address + "',\n";
 			strSample += "        method:'"+ m.type + "',\n";
 			strSample += "        dataType:'json',\n";
-		    strSample += "        headers : {'Content-Type':'application/json;charset=utf8','x-token':'实际的x-token'}" + ",\n";
+		    strSample += "        headers : {'Content-Type':'application/json;charset=utf8','x-token':'실제 x-token'}" + ",\n";
 			if((m.contentType.indexOf('application/json') > -1) && (!m.useStringParameter)){
 				strSample += "        data:JSON.stringify(data),\n";
 			}else{
@@ -243,7 +243,7 @@ Describe.createSampleMootools = function(m) {
 							//formData.append(p.name, $('input[type=file]', '#formParameters')[0].files[0]);
 					strSample += 'formData.append("'+p.name+'", $("input[type=file]")[0].files[0]);' +  "\n";
 					} else {
-					strSample += 'formData.append("'+p.name+'", "参数'+pi+'");' +  "\n";
+					strSample += 'formData.append("'+p.name+'", "매개변수'+pi+'");' +  "\n";
 					}
 				});
 			}
@@ -273,17 +273,17 @@ Describe.createSampleJSO2= function(m) {
 	var parameter = "";
 	if (m.pathParameters && m.pathParameters.length > 0) {
 		$.each(m.pathParameters, function(pi, p) {
-			address = address.replace('{' + p.name + '}', '替换参数'+pi);
+			address = address.replace('{' + p.name + '}', '매개변수 교체'+pi);
 			if(parameter == ""){
-				parameter = "\"" + p.name + "\"" + ":" + '"替换参数'+pi +'"';
+				parameter = "\"" + p.name + "\"" + ":" + '"매개변수 교체'+pi +'"';
 			}else{
-				parameter = parameter +  ",\"" + p.name + "\"" + ":" + '替换参数'+pi +'"';
+				parameter = parameter +  ",\"" + p.name + "\"" + ":" + '매개변수 교체'+pi +'"';
 			}
 		});
 	}
 	if (m.queryParameters && m.queryParameters.length > 0) {
 		$.each(m.queryParameters, function(pi, p) {
-			var query = p.name + '=' + '替换参数'+pi;
+			var query = p.name + '=' + '매개변수 교체'+pi;
 			if (address.indexOf("?") > 0) {
 				address += '&' + query;
 			} else {
@@ -301,9 +301,9 @@ Describe.createSampleJSO2= function(m) {
 						default:
 							if (i.isBaseType) {
 								if (i.isCollection) {
-									  strSample += '       data["'+i.name+'"] = ["参数1"];' + "\n";
+									  strSample += '       data["'+i.name+'"] = ["매개변수1"];' + "\n";
 								} else {
-									  strSample += '       data["'+i.name+'"] = "参数";' + "\n";
+									  strSample += '       data["'+i.name+'"] = "매개변수";' + "\n";
 								}
 							} else {
 									if(i.isCollection){
@@ -315,45 +315,45 @@ Describe.createSampleJSO2= function(m) {
 										  }
 
 										}else{
-										  strSample += '       data["'+i.name+'"] = [{"参数1":"value1","参数2":"value2"}];'+"\n";
+										  strSample += '       data["'+i.name+'"] = [{"매개변수1":"value1","매개변수2":"value2"}];'+"\n";
 										}
 									}else{
 										if(i.fieldType =='enum'){
 										  strSample += '       data["'+i.name+'"] = "'+ i.fieldValue + '";' + "\n";
 										}else{
-										  strSample += '       data["'+i.name+'"] = {"参数1":"value1","参数2":"value2"};'+"\n";
+										  strSample += '       data["'+i.name+'"] = {"매개변수1":"value1","매개변수2":"value2"};'+"\n";
 										}
 									}
 							}
 						}
 				});
 			} else if (m.useJsonElementParameter) {
-				strSample += 'data = {"参数1":"value1","参数2":"value2"};' +"\n";
+				strSample += 'data = {"매개변수1":"value1","매개변수2":"value2"};' +"\n";
 			} else if (m.useStringParameter) {
-				strSample += 'data = "参数";'+"\n";
+				strSample += 'data = "매개변수";'+"\n";
 			}
 			 var functionName = "do";
 			 strSample += "\n var root = \"" + uri + "\";" + "\n";
 			 strSample += " var options = { " + "\n";
-			 strSample += "                 " + functionName + ":{ //服务命名1，自定义"+ "\n";
+			 strSample += "                 " + functionName + ":{ //서비스 이름1, 사용자 정의"+ "\n";
 			 strSample += "                           \"uri\": \"/" + m.path + "\","+ "\n";;
              strSample += "                           \"method\": \""+m.type+"\""+ "\n";
 			 strSample += "                      }"+ "\n";
 			 strSample += "     }" + "\n";
 			 strSample += "var action = new this.Action( root, options);" + "\n\n";
 			 strSample += "action.invoke({" + "\n";
-			 strSample += "        \"name\": \"" + functionName+ "\", //自定义的服务名" + "\n";
-			 strSample += "        \"parameter\": {" + parameter+ "},  //uri参数 " + "\n";
-             strSample += "        \"data\": data, //请求的正文, JsonObject " +  "\n";
-             strSample += "        \"success\": function(json){ //服务调用成功时的回调方法，json 是服务返回的数据" +  "\n";
-             strSample += "        //这里进行具体的处理"+ "\n";
+			 strSample += "        \"name\": \"" + functionName+ "\", //사용자 정의 서비스 이름" + "\n";
+			 strSample += "        \"parameter\": {" + parameter+ "},  //uri 매개변수 " + "\n";
+             strSample += "        \"data\": data, //요청 본문, JsonObject " +  "\n";
+             strSample += "        \"success\": function(json){ //서비스 호출 성공 시 콜백, json은 서비스가 반환한 데이터" +  "\n";
+             strSample += "        //여기서 구체적인 처리 수행"+ "\n";
              strSample += "        }.bind(this),"+ "\n";
-             strSample += "        \"failure\" : function(xhr){ //服务调用失败时的回调方法，xhr 为 XMLHttpRequest 对象" +  "\n";
-             strSample += "        //这里进行具体的处理"+ "\n";
+             strSample += "        \"failure\" : function(xhr){ //서비스 호출 실패 시 콜백, xhr은 XMLHttpRequest 객체" +  "\n";
+             strSample += "        //여기서 구체적인 처리 수행"+ "\n";
              strSample += "     },"+ "\n";
-             strSample += "        \"async\" : true, //同步还是异步，默认为true" + "\n";
-             strSample += "        \"withCredentials\" : true, //是否允许跨域请求，默认为true" + "\n";
-             strSample += "        \"urlEncode\" : true //uri参数是否需要通过encodeURIComponent函数编码，默认为true" + "\n";
+             strSample += "        \"async\" : true, //동기 또는 비동기, 기본값 true" + "\n";
+             strSample += "        \"withCredentials\" : true, //교차 출처 요청 허용 여부, 기본값 true" + "\n";
+             strSample += "        \"urlEncode\" : true //uri 매개변수를 encodeURIComponent 함수로 인코딩할지 여부, 기본값 true" + "\n";
              strSample += "});"
 	} else {
 
@@ -371,12 +371,12 @@ Describe.createSampleO2= function(m) {
 	 address = address.substring(address.indexOf("jaxrs/")+6,address.length);
 	if (m.pathParameters && m.pathParameters.length > 0) {
 		$.each(m.pathParameters, function(pi, p) {
-			address = address.replace('{' + p.name + '}', '替换参数'+pi);
+			address = address.replace('{' + p.name + '}', '매개변수 교체'+pi);
 		});
 	}
 	if (m.queryParameters && m.queryParameters.length > 0) {
 		$.each(m.queryParameters, function(pi, p) {
-			var query = p.name + '=' + '替换参数'+pi;
+			var query = p.name + '=' + '매개변수 교체'+pi;
 			if (address.indexOf("?") > 0) {
 				address += '&' + query;
 			} else {
@@ -394,9 +394,9 @@ Describe.createSampleO2= function(m) {
 						default:
 							if (i.isBaseType) {
 								if (i.isCollection) {
-									  strSample += '       "'+i.name+'" : ["参数1"],' + "\n";
+									  strSample += '       "'+i.name+'" : ["매개변수1"],' + "\n";
 								} else {
-									  strSample += '       "'+i.name+'" : "参数",' + "\n";
+									  strSample += '       "'+i.name+'" : "매개변수",' + "\n";
 								}
 							} else {
 									if(i.isCollection){
@@ -408,13 +408,13 @@ Describe.createSampleO2= function(m) {
 										  }
 
 										}else{
-										  strSample += '       "'+i.name+'" : [{"参数1":"value1","参数2":"value2"}],'+"\n";
+										  strSample += '       "'+i.name+'" : [{"매개변수1":"value1","매개변수2":"value2"}],'+"\n";
 										}
 									}else{
 										if(i.fieldType =='enum'){
 											strSample += '       "'+i.name+'" : "'+i.fieldValue+'"\n';
 										}else{
-											strSample += '       "'+i.name+'" : {"参数1":"value1","参数2":"value2"},'+"\n";
+											strSample += '       "'+i.name+'" : {"매개변수1":"value1","매개변수2":"value2"},'+"\n";
 										}
 
 									}
@@ -426,9 +426,9 @@ Describe.createSampleO2= function(m) {
 			     strSample = strSample +"\n"+ "}"+"\n";
 
 			} else if (m.useJsonElementParameter) {
-				strSample += 'data = {"参数1":"value1","参数2":"value2"};' +"\n";
+				strSample += 'data = {"매개변수1":"value1","매개변수2":"value2"};' +"\n";
 			} else if (m.useStringParameter) {
-				strSample += 'data = "参数";'+"\n";
+				strSample += 'data = "매개변수";'+"\n";
 			}
 
 			if(m.type=="POST"){
@@ -470,12 +470,12 @@ Describe.createSample= function(m) {
 	var address = address +"/"+ m.path;
 	if (m.pathParameters && m.pathParameters.length > 0) {
 		$.each(m.pathParameters, function(pi, p) {
-			address = address.replace('{' + p.name + '}', '替换参数'+pi);
+			address = address.replace('{' + p.name + '}', '매개변수 교체'+pi);
 		});
 	}
 	if (m.queryParameters && m.queryParameters.length > 0) {
 		$.each(m.queryParameters, function(pi, p) {
-			var query = p.name + '=' + '替换参数'+pi;
+			var query = p.name + '=' + '매개변수 교체'+pi;
 			if (address.indexOf("?") > 0) {
 				address += '&' + query;
 			} else {
@@ -493,9 +493,9 @@ Describe.createSample= function(m) {
 						default:
 							if (i.isBaseType) {
 								if (i.isCollection) {
-									  strSample += '       "'+i.name+'" : ["参数1"],' + "\n";
+									  strSample += '       "'+i.name+'" : ["매개변수1"],' + "\n";
 								} else {
-									  strSample += '       "'+i.name+'" : "参数",' + "\n";
+									  strSample += '       "'+i.name+'" : "매개변수",' + "\n";
 								}
 							} else {
 									if(i.isCollection){
@@ -507,14 +507,14 @@ Describe.createSample= function(m) {
 										  }
 
 										}else{
-										  strSample += '       "'+i.name+'" : [{"参数1":"value1","参数2":"value2"}],'+"\n";
+										  strSample += '       "'+i.name+'" : [{"매개변수1":"value1","매개변수2":"value2"}],'+"\n";
 										}
 									}else{
 										if(i.fieldType =='enum'){
 
 											strSample += '       "'+i.name+'" : "'+i.fieldValue+'"\n';
 										}else{
-											strSample += '       "'+i.name+'" : {"参数1":"value1","参数2":"value2"},'+"\n";
+											strSample += '       "'+i.name+'" : {"매개변수1":"value1","매개변수2":"value2"},'+"\n";
 										}
 
 
@@ -526,9 +526,9 @@ Describe.createSample= function(m) {
 				 strSample = strSample.substring(0,strSample.lastIndexOf(","));
 			     strSample = strSample +"\n"+ "}"+"\n";
 			} else if (m.useJsonElementParameter) {
-				strSample += '    data = {"参数1":"value1","参数2":"value2"};' +"\n";
+				strSample += '    data = {"매개변수1":"value1","매개변수2":"value2"};' +"\n";
 			} else if (m.useStringParameter) {
-				strSample += '    data = "参数";'+"\n";
+				strSample += '    data = "매개변수";'+"\n";
 			}
 
 			var dataBlank = true;
@@ -567,7 +567,7 @@ Describe.createSample= function(m) {
 							//formData.append(p.name, $('input[type=file]', '#formParameters')[0].files[0]);
 					strSample += 'formData.append("'+p.name+'", $("input[type=file]")[0].files[0]);' +  "\n";
 					} else {
-					strSample += 'formData.append("'+p.name+'", "参数'+pi+'");' +  "\n";
+					strSample += 'formData.append("'+p.name+'", "매개변수'+pi+'");' +  "\n";
 					}
 				});
 			}
@@ -606,9 +606,9 @@ Describe.createSampleCommon= function(m,className) {
 	if (m.queryParameters && m.queryParameters.length > 0) {
 			$.each(m.queryParameters, function(pi, p) {
 				if (query == "") {
-					 query = "&" + p.name + '=' + '替换参数'+pi;
+					 query = "&" + p.name + '=' + '매개변수 교체'+pi;
 				} else {
-					 query = query + "&"+ p.name + '=' + '替换参数'+pi;
+					 query = query + "&"+ p.name + '=' + '매개변수 교체'+pi;
 				}
 			});
 		}
@@ -622,31 +622,31 @@ Describe.createSampleCommon= function(m,className) {
 						default:
 							if (i.isBaseType) {
 								if (i.isCollection) {
-									  body += '       "'+i.name+'" : ["参数1"],' + "\n";
+									  body += '       "'+i.name+'" : ["매개변수1"],' + "\n";
 								} else {
-									  body += '       "'+i.name+'" : "参数",' + "\n";
+									  body += '       "'+i.name+'" : "매개변수",' + "\n";
 								}
 							} else {
 									if(i.isCollection){
 										if(i.fieldValue){
 										  if(i.fieldType =='enum'){
 											   body += '       "'+i.name+'" : ["'+ i.fieldValue +'"],'+"\n";
-											   body +=(i.fieldSample ? "  "+'<span style="color:red">//注解：'+i.fieldSample +'</span>\n':"");
+											   body +=(i.fieldSample ? "  "+'<span style="color:red">//주석:'+i.fieldSample +'</span>\n':"");
 										  }else{
 											   body += '       "'+i.name+'" : ['+ i.fieldValue +'],'+"\n";
-											   body +=(i.fieldSample ? "  "+'<span style="color:red">//注解：'+i.fieldSample +'</span>\n':"");
+											   body +=(i.fieldSample ? "  "+'<span style="color:red">//주석:'+i.fieldSample +'</span>\n':"");
 										  }
 
 										}else{
-										  body += '       "'+i.name+'" : [{"参数1":"value1","参数2":"value2"}],'+"\n";
+										  body += '       "'+i.name+'" : [{"매개변수1":"value1","매개변수2":"value2"}],'+"\n";
 										}
 									}else{
 										 if(i.fieldType =='enum'){
 											 body += '       "'+i.name+'" : "'+ i.fieldValue +'",'+"\n";
-											 body +=(i.fieldSample ? "  "+'<span style="color:red">//注解：'+i.fieldSample +'</span>\n':"");
+											 body +=(i.fieldSample ? "  "+'<span style="color:red">//주석:'+i.fieldSample +'</span>\n':"");
 
 										 }else{
-										   body += '       "'+i.name+'" : {"参数1":"value1","参数2":"value2"},'+"\n";
+										   body += '       "'+i.name+'" : {"매개변수1":"value1","매개변수2":"value2"},'+"\n";
 										 }
 									}
 							}
@@ -658,9 +658,9 @@ Describe.createSampleCommon= function(m,className) {
 					 body = body +"\n"+ "}"+"\n";
 
 				} else if (m.useJsonElementParameter) {
-					body += '       data = {"参数1":"value1","参数2":"value2"};' +"\n";
+					body += '       data = {"매개변수1":"value1","매개변수2":"value2"};' +"\n";
 				} else if (m.useStringParameter) {
-					body += '       data = "参数";'+"\n";
+					body += '       data = "매개변수";'+"\n";
 				}
 	 if(m.type != "GET" ){
 		 if( body != ""){
@@ -668,22 +668,22 @@ Describe.createSampleCommon= function(m,className) {
 		 }
 	 }
 	 strSample += "var action = this.Actions.load(\"" + root + "\");\n";
-	 strSample += "       action."+ className + "."+m.name+ "(//平台封装好的方法\n";
+	 strSample += "       action."+ className + "."+m.name+ "(//플랫폼에서 제공하는 메서드\n";
 	 if(parameter!=""){
-	   strSample += "      " + parameter  +",//uri的参数\n";
+	   strSample += "      " + parameter  +",//uri 매개변수\n";
 	 }
 	 if(m.type != "GET" ){
 		 if( body != ""){
-	        strSample += "      data,//body请求参数\n";
+	        strSample += "      data,//body 요청 매개변수\n";
 		 }
 	 }
-	 strSample += "      function( json ){ //服务调用成功的回调函数, json为服务传回的数据\n";
-	 strSample += "         data = json.data; //为变量data赋值\n";
+	 strSample += "      function( json ){ //서비스 호출 성공 콜백, json은 서비스가 반환한 데이터\n";
+	 strSample += "         data = json.data; //변수 data에 값 할당\n";
 	 strSample += "      }.bind(this),\n";
-	 strSample +=  "     function( json ){ //服务调用失败的回调函数, json为服务传回的数据\n";
-	 strSample +=  "        data = json.data; //为变量data赋值\n";
+	 strSample +=  "     function( json ){ //서비스 호출 실패 콜백, json은 서비스가 반환한 데이터\n";
+	 strSample +=  "        data = json.data; //변수 data에 값 할당\n";
 	 strSample +=  "     }.bind(this)\n";
-	 //strSample += "      false //同步执行 \n";
+	 //strSample += "      false //동기 실행 \n";
 	 strSample += "    );\n";
 
 	}else{
@@ -695,29 +695,29 @@ Describe.createSampleCommon= function(m,className) {
 					formData += '      formData.append("'+p.name+'", $("input[type=file]").files[0]);' +  "\n";
 					hasFile = true;
 					} else {
-					formData += '      formData.append("'+p.name+'", "参数值'+pi+'");' +  "\n";
+					formData += '      formData.append("'+p.name+'", "매개변수 값'+pi+'");' +  "\n";
 					}
 				});
 			}
 		 strSample += formData;
 		 strSample += "var action = this.Actions.load(\"" + root + "\");\n";
-		 //strSample += "action."+m.name+ "(//平台封装好的方法\n";
-		 strSample += "       action."+ className + "."+m.name+ "(//平台封装好的方法\n";
-		  // strSample += "      "+parameter  +",//uri的参数\n";
+		 //strSample += "action."+m.name+ "(//플랫폼에서 제공하는 메서드\n";
+		 strSample += "       action."+ className + "."+m.name+ "(//플랫폼에서 제공하는 메서드\n";
+		  // strSample += "      "+parameter  +",//uri 매개변수\n";
 		  if(parameter!=""){
-	        strSample += "      " + parameter  +",//uri的参数\n";
+	        strSample += "      " + parameter  +",//uri 매개변수\n";
 	       }
-		  strSample +=  "      formData"+",//from参数\n";
+		  strSample +=  "      formData"+",//from 매개변수\n";
 		 if(hasFile == true){
-		    strSample +=  '      $("input[type=file]").files[0]'+",//file参数\n";
+		    strSample +=  '      $("input[type=file]").files[0]'+",//file 매개변수\n";
 		 }
-		 strSample +=  "function( json ){ //服务调用成功的回调函数, json为服务传回的数据\n";
-		 strSample +=  "      data = json.data; //为变量data赋值\n";
+		 strSample +=  "function( json ){ //서비스 호출 성공 콜백, json은 서비스가 반환한 데이터\n";
+		 strSample +=  "      data = json.data; //변수 data에 값 할당\n";
 		 strSample +=  "}.bind(this),\n";
-		 strSample +=  "function( json ){ //服务调用失败的回调函数, json为服务传回的数据\n";
-		 strSample +=  "      data = json.data; //为变量data赋值\n";
+		 strSample +=  "function( json ){ //서비스 호출 실패 시 콜백 함수, json은 서비스가 반환한 데이터\n";
+		 strSample +=  "      data = json.data; //변수 data에 값 할당\n";
 		 strSample +=  "}.bind(this)\n";
-		 //strSample +=  "false //同步执行 \n";
+		 //strSample +=  "false //동기 실행 \n";
 		 strSample += ");\n"
 		}
    return  strSample ;
@@ -815,12 +815,12 @@ Describe.prototype = {
 									$.each(m.ins, function(ii, i) {
 										if (i.isCollection) {
 
-											txt += '<tr><td><textarea id="' + i.name + '" style="width:600px; padding:1px; border:1px #000000 solid"/></td><td>' + i.name + ':' + i.description +(i.fieldValue ? "  "+'。数据格式：<span style="color:red">'+i.fieldValue +'</span>':"") + (i.fieldSample ? "  "+'<span style="color:red">'+i.fieldSample +'</span>':"")
+											txt += '<tr><td><textarea id="' + i.name + '" style="width:600px; padding:1px; border:1px #000000 solid"/></td><td>' + i.name + ':' + i.description +(i.fieldValue ? "  "+'. 데이터 형식: <span style="color:red">'+i.fieldValue +'</span>':"") + (i.fieldSample ? "  "+'<span style="color:red">'+i.fieldSample +'</span>':"")
 											+'</td></tr>';
 										} else {
 											txt += '<tr><td><input type="text" id="' + i.name + '" style="width:600px; padding:1px; border:1px #000000 solid"/></td><td>' + i.name + ':'
 
-													+ i.description+ (i.fieldValue ? "  "+'。数据格式：<span style="color:red">'+i.fieldValue +'</span>':"") + (i.fieldSample ? "  "+'<span style="color:red">'+i.fieldSample +'</span>':"")
+													+ i.description+ (i.fieldValue ? "  "+'. 데이터 형식: <span style="color:red">'+i.fieldValue +'</span>':"") + (i.fieldSample ? "  "+'<span style="color:red">'+i.fieldSample +'</span>':"")
 													+'</td></tr>';
 
 										}
@@ -1029,7 +1029,7 @@ Describe.prototype = {
 								})
 
 								debugger;
-								$('#Sample').html("<div style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;color: #1E7ACE;\">\n平台推荐脚本样例</span>\n\n"+ Describe.createSampleCommon(m,j.name)+ "</div><div  style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\n后台脚本样例</span>\n\n" + Describe.createSampleO2(m) + "</div><div  style=\"line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\njquery样例</span>\n\n<span style=\"\">"+ Describe.createSample(m)+"</span></div>");
+								$('#Sample').html("<div style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;color: #1E7ACE;\">\n플랫폼 권장 스크립트 예시</span>\n\n"+ Describe.createSampleCommon(m,j.name)+ "</div><div  style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\n백엔드 스크립트 예시</span>\n\n" + Describe.createSampleO2(m) + "</div><div  style=\"line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\njquery 예시</span>\n\n<span style=\"\">"+ Describe.createSample(m)+"</span></div>");
 							});
 				});
 			});
@@ -1195,7 +1195,7 @@ Describe.prototype = {
 									$.each(m.ins, function(ii, i) {
 										if (i.isCollection) {
 
-											txt += '<tr><td><textarea id="' + i.name + '" style="width:600px; padding:1px; border:1px #000000 solid"/></td><td>' + i.name + ':' + i.description +(i.fieldValue ? "  "+'。数据格式：<span style="color:red">'+i.fieldValue +'</span>':"") + (i.fieldSample ? "  "+'<span style="color:red">'+i.fieldSample +'</span>':"")
+											txt += '<tr><td><textarea id="' + i.name + '" style="width:600px; padding:1px; border:1px #000000 solid"/></td><td>' + i.name + ':' + i.description +(i.fieldValue ? "  "+'. 데이터 형식: <span style="color:red">'+i.fieldValue +'</span>':"") + (i.fieldSample ? "  "+'<span style="color:red">'+i.fieldSample +'</span>':"")
 											'</td></tr>';
 										} else {
 											txt += '<tr><td><input type="text" id="' + i.name + '" style="width:600px; padding:1px; border:1px #000000 solid"/></td><td>' + i.name + ':'
@@ -1395,7 +1395,7 @@ Describe.prototype = {
 								})
 
 								debugger;
-								$('#Sample').html("<div style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;color: #1E7ACE;\">\n平台推荐脚本样例</span>\n\n"+ Describe.createSampleCommon(m,j.name)+ "</div><div  style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\n后台脚本样例</span>\n\n" + Describe.createSampleO2(m) + "</div><div  style=\"line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\njquery样例</span>\n\n<span style=\"\">"+ Describe.createSample(m)+"</span></div>");
+								$('#Sample').html("<div style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;color: #1E7ACE;\">\n플랫폼 권장 스크립트 예시</span>\n\n"+ Describe.createSampleCommon(m,j.name)+ "</div><div  style=\"border-bottom:1px solid #E6E6E6;padding-bottom: 40px;line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\n백엔드 스크립트 예시</span>\n\n" + Describe.createSampleO2(m) + "</div><div  style=\"line-height:21px\"><span style=\"font-size:17px;font-weight:bold;\">\n\njquery 예시</span>\n\n<span style=\"\">"+ Describe.createSample(m)+"</span></div>");
 							});
 				});
 			});

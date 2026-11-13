@@ -128,7 +128,7 @@ class V2Rollback extends BaseAction {
 				aeiObjects.getTasks().stream().filter(o -> activityTokens.contains(o.getActivityToken()))
 						.forEach(aeiObjects.getDeleteTasks()::add);
 
-				// 将已有的已办标识为joinInquire=false,这样由于存在已办所以撤回将被禁用.
+				// 기존 처리 완료를 joinInquire=false로 표시, 처리 완료가 존재하므로 회수가 비활성화됨.
 				aeiObjects.getTaskCompleteds().stream()
 						.filter(o -> StringUtils.equals(workLog.getFromActivityToken(), o.getActivityToken()))
 						.forEach(o -> {
@@ -137,11 +137,11 @@ class V2Rollback extends BaseAction {
 						});
 
 				aeiObjects.getTaskCompleteds().stream().filter(o -> activityTokens.contains(o.getActivityToken()))
-						// 前面已经更新,不能再次删除
+						// 앞에서 이미 업데이트했으므로 다시 삭제 불가
 						.filter(o -> !aeiObjects.getUpdateTaskCompleteds().contains(o))
 						.forEach(aeiObjects.getDeleteTaskCompleteds()::add);
 
-				// 调整latest标识,否则有不是latest的已办不会在已办列表中显示
+				// latest 표시 조정, 그렇지 않으면 latest가 아닌 처리 완료가 처리 완료 목록에 표시되지 않음
 				aeiObjects.getTaskCompleteds().stream().filter(o -> !aeiObjects.getDeleteTaskCompleteds().contains(o))
 						.collect(Collectors.groupingBy(TaskCompleted::getPerson)).entrySet().stream()
 						.map(Map.Entry::getValue)
@@ -200,7 +200,7 @@ class V2Rollback extends BaseAction {
 			work.setSplitting(workLog.getSplitting());
 			work.setSplitToken(workLog.getSplitToken());
 			work.setSplitValue(workLog.getSplitValue());
-			// 重新设置表单
+			// 양식 재설정
 			String formId = business.element().lookupSuitableForm(work.getProcess(), work.getActivity());
 			if (StringUtils.isNotBlank(formId)) {
 				work.setForm(formId);

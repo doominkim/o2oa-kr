@@ -43,7 +43,7 @@ class ActionDistinctName extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		/** 组织职务名称 */
+		/** 조직 직무 이름 */
 		private List<String> nameList = new ArrayList<>();
 
 		public List<String> getNameList() {

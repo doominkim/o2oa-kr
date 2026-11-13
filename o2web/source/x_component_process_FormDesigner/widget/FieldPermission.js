@@ -45,16 +45,16 @@ MWF.xApplication.process.FormDesigner.widget.FieldPermission = new Class({
         });
 	},
 	loadConfig: function(){
-		//加载表单默认配值
+		//양식 기본 설정값 로드
 		this.loadDefaultConfig();
 		
 		if (this.isProcess && this.isField){
-			//获取当前字段的流程数据权限配置
+			//현재 필드의 프로세스 데이터 권한 설정 조회
 			const path = this._getModulePath();
 
 			o2.Actions.load('x_processplatform_assemble_designer').ItemAccessAction.listWithPath(path).then((json)=>{
 				if (json.data && json.data.length){
-					//如果已有配置，列出流程数据权限配置
+					//설정이 이미 있으면 프로세스 데이터 권한 설정 나열
 					this.loadProcessConfig(json.data);
 				}
 			});
@@ -153,7 +153,7 @@ MWF.xApplication.process.FormDesigner.widget.FieldPermission = new Class({
                     item.data[name] = [];
                 }
 				if ((type==='process')){
-					//需要直接保存
+					//바로 저장 필요
 					this.saveProcessConfig(item.data)
 				}
             }.bind(this)
@@ -185,7 +185,7 @@ MWF.xApplication.process.FormDesigner.widget.FieldPermission = new Class({
                     item.data[name] = [];
                 }
 				if ((type==='process')){
-					//需要直接保存
+					//바로 저장 필요
 					this.saveProcessConfig(item.data)
 				}
             }.bind(this)

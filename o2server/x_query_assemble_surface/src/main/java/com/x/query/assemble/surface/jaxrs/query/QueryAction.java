@@ -24,18 +24,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("query")
-@JaxrsDescribe("查询")
+@JaxrsDescribe("조회")
 public class QueryAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(QueryAction.class);
 
-	@JaxrsMethodDescribe(value = "获取指定的Application信息,并在Control段附带其操作权限.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 Application 정보 조회, Control 부분에 작업 권한 포함.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -47,7 +47,7 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取可见的应用,同时判断应用下有可见的流程.", action = ActionListWithPerson.class)
+	@JaxrsMethodDescribe(value = "볼 수 있는 앱 조회, 앱 아래 볼 수 있는 프로세스 존재 여부 판단.", action = ActionListWithPerson.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -64,13 +64,13 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取可见的应用,同时判断应用下有可见的流程,并进行流程的名称匹配.", action = ActionListWithPersonLike.class)
+	@JaxrsMethodDescribe(value = "볼 수 있는 앱 조회, 앱 아래 볼 수 있는 프로세스 존재 여부 판단 및 프로세스 이름 매칭.", action = ActionListWithPersonLike.class)
 	@GET
 	@Path("list/key/{key}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPersonLike(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("关键字") @PathParam("key") String key) {
+			@JaxrsParameterDescribe("키워드") @PathParam("key") String key) {
 		ActionResult<List<ActionListWithPersonLike.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

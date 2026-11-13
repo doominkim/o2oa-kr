@@ -18,7 +18,7 @@ import com.x.bbs.entity.BBSSectionInfo;
 import com.x.bbs.entity.BBSSubjectInfo;
 
 /**
- * 新的主题发布后根据配置需要给指定人员发送消息通知
+ * 새 주제 게시 후 설정에 따라 지정 사용자에게 메시지 알림 전송
  */
 public class QueueNewSubjectNotify extends AbstractQueue<BBSSubjectInfo> {
 	
@@ -83,21 +83,21 @@ public class QueueNewSubjectNotify extends AbstractQueue<BBSSubjectInfo> {
 
 		MessageWo wo = composeMessageWo( forumInfo, sectionInfo, subjectInfo );
 		if( send_pushMessage && StringUtils.isNotEmpty( subjectMessageNotifyType )){
-			//尝试发送pushMessage
+			//pushMessage 전송 시도
 			List<String> managerAndModerator = caculatePerson( forumInfo, sectionInfo, subjectMessageNotifyType );
-			//去一下重复
+			//중복 제거
 			HashSet<String> set = new HashSet<String>( managerAndModerator );
 			managerAndModerator.clear();
 			managerAndModerator.addAll(set);
 
-			//向管理员发送Message通知
+			//관리자에게 Message 알림 전송
 			MessageFactory.notifyManager_forNewSubject( managerAndModerator, wo );
 		}
 		logger.debug("system send notify for new SubjectInfo completed!" );
 	}
 
 	/**
-	 * 根据指定的推送配置计算需要接收通知的人员列表
+	 * 지정 푸시 설정에 따라 알림을 받을 사용자 목록 계산
 	 * @param forumInfo
 	 * @param sectionInfo
 	 * @param subjectMessageNotifyType
@@ -106,7 +106,7 @@ public class QueueNewSubjectNotify extends AbstractQueue<BBSSubjectInfo> {
 	private List<String> caculatePerson( BBSForumInfo forumInfo, BBSSectionInfo sectionInfo, String subjectMessageNotifyType ) {
 		List<String> persons = new ArrayList<>();
 		String[] sendPersonTypeConfig = null;
-		//新主题发布消息通知类别：一共3位，第1位是否通知分区管理员ForumManagerList，第2位是否通知版主ModeratorNames，0-不通知|1-通知
+		//새 주제 게시 메시지 알림 유형: 총 3자리, 1번째는 구역 관리자 ForumManagerList 알림 여부, 2번째는 게시판 관리자 ModeratorNames 알림 여부, 0-알림 안 함|1-알림
 		if( StringUtils.isNotEmpty( subjectMessageNotifyType )) {
 			sendPersonTypeConfig = subjectMessageNotifyType.split(",");
 		}

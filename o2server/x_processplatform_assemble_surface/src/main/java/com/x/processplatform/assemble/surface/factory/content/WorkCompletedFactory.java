@@ -23,7 +23,7 @@ public class WorkCompletedFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据job获取Work Id
+	 * job으로 Work Id 조회
 	 */
 	public List<String> listWithJob(String job) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(WorkCompleted.class);
@@ -44,7 +44,7 @@ public class WorkCompletedFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 统计指定人员创建的WorkCompleted数量
+	 * 지정 사용자가 생성한 WorkCompleted 수 집계
 	 */
 	public Long countWithCreatorPerson(String person) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(WorkCompleted.class);
@@ -57,7 +57,7 @@ public class WorkCompletedFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 统计指定人员创建的指定应用WorkCompleted数量
+	 * 지정 사용자가 생성한 지정 앱의 WorkCompleted 수 집계
 	 */
 	public Long countWithCreatorPersonApplication(String person, String application) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(WorkCompleted.class);

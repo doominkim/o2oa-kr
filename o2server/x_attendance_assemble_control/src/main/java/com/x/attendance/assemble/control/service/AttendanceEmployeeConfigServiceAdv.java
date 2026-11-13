@@ -56,7 +56,7 @@ public class AttendanceEmployeeConfigServiceAdv {
 	}
 	
 	/**
-	 * 补充和检验一下配置文件中的人员的所属组织和顶层组织信息是否正常
+	 * 설정 파일에 있는 사용자의 소속 조직과 최상위 조직 정보가 정상인지 보충·검사
 	 * @param attendanceEmployeeConfig
 	 * @return
 	 * @throws Exception
@@ -65,7 +65,7 @@ public class AttendanceEmployeeConfigServiceAdv {
 		String unitName = null;
 		String topUnitName = null;
 		if ( StringUtils.isNotEmpty( attendanceEmployeeConfig.getUnitName() )){
-			//检验一下组织是否存在，如果不存在，则重新进行查询
+			//조직 존재 여부를 확인하고, 없으면 다시 조회
 			unitName = userManagerService.checkUnitNameExists( attendanceEmployeeConfig.getUnitName() );
 		}
 		if( StringUtils.isEmpty( unitName ) ){

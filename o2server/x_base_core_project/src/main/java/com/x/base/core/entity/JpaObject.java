@@ -121,15 +121,15 @@ public abstract class JpaObject extends GsonPropertyObject implements Serializab
 					sequence_FIELDNAME, distributeFactor_FIELDNAME, password_FIELDNAME, scratchString_FIELDNAME,
 					scratchBoolean_FIELDNAME, scratchDate_FIELDNAME, scratchInteger_FIELDNAME));
 
-	@FieldDescribe("创建时间,自动生成,索引创建在约束中.")
+	@FieldDescribe("생성 시간, 자동 생성, 인덱스는 제약 조건에서 생성.")
 	@Column(name = ColumnNamePrefix + createTime_FIELDNAME)
 	private Date createTime;
 
-	@FieldDescribe("修改时间,自动生成,索引创建在约束中.")
+	@FieldDescribe("수정 시간, 자동 생성, 인덱스는 제약 조건에서 생성.")
 	@Column(name = ColumnNamePrefix + updateTime_FIELDNAME)
 	private Date updateTime;
 
-	@FieldDescribe("列表序号,由创建时间以及ID组成.在保存时自动生成,索引创建在约束中.")
+	@FieldDescribe("목록 순번, 생성 시간과 ID로 구성. 저장 시 자동 생성, 인덱스는 제약 조건에서 생성.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + sequence_FIELDNAME)
 	private String sequence;
 

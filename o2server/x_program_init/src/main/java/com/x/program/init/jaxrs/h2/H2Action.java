@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("h2")
-@JaxrsDescribe("H2本地数据库")
+@JaxrsDescribe("H2 로컬 데이터베이스")
 public class H2Action extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(H2Action.class);
 
-	@JaxrsMethodDescribe(value = "本地H2数据库是否配置.", action = ActionCheck.class)
+	@JaxrsMethodDescribe(value = "로컬 H2 데이터베이스 설정 여부.", action = ActionCheck.class)
 	@GET
 	@Path("check")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

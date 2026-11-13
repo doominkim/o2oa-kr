@@ -33,7 +33,7 @@ public class ThisApplication {
 			context.schedule(CleanupBind.class, "0 */15 * * * ?");
 			context.schedule(CleanupOauthCode.class, "0 */15 * * * ?");
 			MessageConnector.start(context());
-			// 如果启用了安全注销需要启动定时任务进行刷新
+			// 안전 로그아웃을 사용하면 갱신용 예약 작업을 시작해야 함
 			if (BooleanUtils.isTrue(Config.person().getEnableSafeLogout())) {
 				context.schedule(CleanupTokenThreshold.class, "50 50 6,12,18 * * ?");
 				context.scheduleLocal(UpdateTokenThresholds.class, 45, 60 * 30);

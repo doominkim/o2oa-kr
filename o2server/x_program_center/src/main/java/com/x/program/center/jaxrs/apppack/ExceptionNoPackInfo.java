@@ -11,6 +11,6 @@ public class ExceptionNoPackInfo extends LanguagePromptException {
     private static final long serialVersionUID = -4443630173583290883L;
 
     ExceptionNoPackInfo() {
-        super("当前O2云账号没有历史打包信息！");
+        super("현재 O2 클라우드 계정에 이전 패키징 정보가 없습니다!");
     }
 }

@@ -20,7 +20,7 @@ import com.x.organization.core.entity.Unit;
 
 class ActionGetWithIdentityWithTypeObject extends BaseAction {
 
-	/*** 查找指定身份所在的递归群组,并返回指定level的那个群组 */
+	/*** 지정한 신분이 속한 재귀 그룹을 찾아 지정한 level의 그룹 반환 */
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
@@ -41,10 +41,10 @@ class ActionGetWithIdentityWithTypeObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private String identity;
 
-		@FieldDescribe("组织类型")
+		@FieldDescribe("조직 유형")
 		private String type;
 
 		public String getIdentity() {
@@ -76,7 +76,7 @@ class ActionGetWithIdentityWithTypeObject extends BaseAction {
 				Unit unit = business.unit().pick(identity.getUnit());
 				if (null != unit) {
 					List<String> unitIds = business.unit().listSupNested(unit.getId());
-					/** 直接所在组织也加入到搜索范围 */
+					/** 직속 소속 조직도 검색 범위에 포함 */
 					unitIds.add(unit.getId());
 					List<Unit> units = business.entityManagerContainer().list(Unit.class, unitIds);
 					units = business.unit().sort(units);

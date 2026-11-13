@@ -7,6 +7,6 @@ class InfoUrlEmptyException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	InfoUrlEmptyException() {
-		super("信息访问地址为空，无法继续查询或者保存数据。" );
+		super("정보 접근 주소가 비어 있어 데이터를 조회하거나 저장할 수 없습니다." );
 	}
 }

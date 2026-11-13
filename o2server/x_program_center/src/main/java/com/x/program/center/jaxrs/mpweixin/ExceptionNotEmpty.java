@@ -11,6 +11,6 @@ public class ExceptionNotEmpty  extends LanguagePromptException {
     private static final long serialVersionUID = 4862362281353270832L;
 
     ExceptionNotEmpty(String name) {
-        super("属性:{} 不能为空.", name);
+        super("속성: {}은(는) 비워 둘 수 없습니다.", name);
     }
 }

@@ -65,13 +65,13 @@ public class ActionSubjectChangeSection extends BaseAction {
 			sectionId = wrapIn.getSectionId();
 		}
 		
-		// 查询版块信息是否存在
+		// 게시판 정보 존재 여부 조회
 		if (check) {
 			try {
 				sectionInfo = sectionInfoServiceAdv.get( sectionId );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectInfoProcess(e, "根据指定ID查询版块信息时发生异常.ID:" + sectionId );
+				Exception exception = new ExceptionSubjectInfoProcess(e, "지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + sectionId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -113,10 +113,10 @@ public class ActionSubjectChangeSection extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("需要变更版块的贴子Id列表")
+		@FieldDescribe("게시판을 변경할 게시글 Id 목록")
 		private List<String> subjectIds = null;
 
-		@FieldDescribe("目标版块ID")
+		@FieldDescribe("대상 게시판 ID")
 		private String sectionId = null;
 
 		public List<String> getSubjectIds() {
@@ -141,13 +141,13 @@ public class ActionSubjectChangeSection extends BaseAction {
 
 	public static class Wo{
 		
-		@FieldDescribe("版块变更成功的贴子ID列表")
+		@FieldDescribe("게시판 변경에 성공한 게시글 ID 목록")
 		private List<String> successList = null;
 		
-		@FieldDescribe("版块变更失败的贴子ID列表")
+		@FieldDescribe("게시판 변경에 실패한 게시글 ID 목록")
 		private List<String> failtureList = null;
 		
-		@FieldDescribe("需要变更版块的贴子总数")
+		@FieldDescribe("게시판을 변경할 게시글 총수")
 		private Integer total = null;
 		
 		public List<String> getSuccessList() {

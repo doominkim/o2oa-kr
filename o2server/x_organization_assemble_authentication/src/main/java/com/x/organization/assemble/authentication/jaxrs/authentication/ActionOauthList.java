@@ -47,7 +47,7 @@ class ActionOauthList extends BaseAction {
 				}
 			}
 		}
-		// 企业微信扫码登录
+		// 위챗 워크 QR 코드 로그인
 		if (BooleanUtils.isTrue(Config.qiyeweixin().getScanLoginEnable())) {
 			Wo wo = new Wo();
 			wo.setName("企业微信");
@@ -55,7 +55,7 @@ class ActionOauthList extends BaseAction {
 			wo.setIcon(Qiyeweixin.qywxLogo);
 			wos.add(wo);
 		}
-		// 钉钉扫码登录
+		// DingTalk QR 코드 로그인
 		if (BooleanUtils.isTrue(Config.dingding().getScanLoginEnable())) {
 			Wo wo = new Wo();
 			wo.setName("钉钉");

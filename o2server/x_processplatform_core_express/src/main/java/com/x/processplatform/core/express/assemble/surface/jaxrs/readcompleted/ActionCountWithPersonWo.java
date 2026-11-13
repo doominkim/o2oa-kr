@@ -9,8 +9,8 @@ public class ActionCountWithPersonWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 2387906569643215824L;
 
-	@FieldDescribe("已阅数量.")
-	@Schema(description = "已阅数量.")
+	@FieldDescribe("열람 완료 수량.")
+	@Schema(description = "열람 완료 수량.")
 	private Long count = 0L;
 
 	public Long getCount() {

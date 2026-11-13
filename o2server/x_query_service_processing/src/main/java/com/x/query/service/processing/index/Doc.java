@@ -264,7 +264,7 @@ public class Doc extends GsonPropertyObject {
 		addDate(document, Indexs.FIELD_UPDATETIME, this.getUpdateTime());
 
 		Set<String> items = new HashSet<>();
-		if (StringUtils.isNotBlank(this.getTitle())) {// 将title加入到items
+		if (StringUtils.isNotBlank(this.getTitle())) {// title을 items에 추가
 			items.add(this.getTitle());
 		}
 		this.stringRepo.entrySet().stream()

@@ -88,7 +88,7 @@ class ActionListFileTypePaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("文件分类：图片(image)|文档(office)|音乐(music)|视频(movie)|其它(other)")
+		@FieldDescribe("파일 분류: 이미지(image)|문서(office)|음악(music)|동영상(movie)|기타(other)")
 		private String fileType;
 
 
@@ -108,7 +108,7 @@ class ActionListFileTypePaging extends BaseAction {
 		static WrapCopier<Attachment2, Wo> copier = WrapCopierFactory.wo(Attachment2.class, Wo.class,
 				JpaObject.singularAttributeField(Attachment2.class, true, true), null);
 
-		@FieldDescribe("文件路径")
+		@FieldDescribe("파일 경로")
 		private String path;
 
 		public String getPath() {

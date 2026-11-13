@@ -37,7 +37,7 @@ MWF.xApplication.process.Work.LP={
 	"selectAppendTaskIdentityNotice": "Please select the transferor",
 	"routeValidFailure": "Route verification failed",
 	"loadedOrgCountUnexpected": "The personnel selection interface has not been loaded, please wait...",
-	"taskCompletedPerson": "办理人",
+	"taskCompletedPerson": "처리자",
 	"readPerson": "Reader",
 	"systemFlow": "Automatic processing",
 	"openWorkError": "You do not have permission to view this document or it has been deleted.",

@@ -29,7 +29,7 @@ class ActionProcessing extends BaseAction {
                 throw new ExceptionWorkNotExist(id);
             }
             emc.beginTransaction(Work.class);
-            /* 标识数据被修改 */
+            /* 데이터 수정 표시 */
             work.setDataChanged(true);
             emc.commit();
         }

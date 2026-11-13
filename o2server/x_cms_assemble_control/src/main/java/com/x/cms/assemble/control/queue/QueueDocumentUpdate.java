@@ -9,7 +9,7 @@ import com.x.cms.assemble.control.ThisApplication;
 import com.x.cms.core.entity.Document;
 
 /**
- * Document变更标题时也需要更新一下热点图片里的数据
+ * Document 제목 변경 시 인기 이미지의 데이터도 함께 업데이트해야 함
  *
  */
 public class QueueDocumentUpdate extends AbstractQueue<Document> {
@@ -31,22 +31,22 @@ public class QueueDocumentUpdate extends AbstractQueue<Document> {
 
 	public static class WrapInHotPictureInfo {
 
-		@FieldDescribe("应用名称")
+		@FieldDescribe("앱 이름")
 		private String application = "";
 
-		@FieldDescribe("信息对象ID")
+		@FieldDescribe("정보 객체 ID")
 		private String infoId = "";
 
-		@FieldDescribe("信息标题")
+		@FieldDescribe("정보 제목")
 		private String title = "";
 
-		@FieldDescribe("信息访问URL")
+		@FieldDescribe("정보 접근 URL")
 		private String url = "";
 
-		@FieldDescribe("信息图片URL")
+		@FieldDescribe("정보 이미지 URL")
 		private String picId = "";
 
-		@FieldDescribe("创建者")
+		@FieldDescribe("작성자")
 		private String creator = "";
 
 		public String getApplication() {

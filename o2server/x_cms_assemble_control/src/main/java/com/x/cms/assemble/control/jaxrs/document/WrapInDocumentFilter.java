@@ -20,70 +20,70 @@ public class WrapInDocumentFilter {
 	public static final String READ_FLAG_READ = "READ";
 	public static final String READ_FLAG_UNREAD = "UNREAD";
 
-	@FieldDescribe( "排序列名" )
+	@FieldDescribe( "정렬 열 이름" )
 	private String orderField = "publishTime";
 
-	@FieldDescribe( "排序方式：ASC|DESC." )
+	@FieldDescribe( "정렬 방식: ASC|DESC." )
 	private String orderType = "DESC";
 
 	@FieldDescribe( "是否需要查询数据，默认不查询." )
 	private Boolean needData = false;
 
-	@FieldDescribe("是否含有首页图片")
+	@FieldDescribe("대표 이미지 포함 여부")
 	private Boolean hasIndexPic;
 
-	@FieldDescribe( "是否已读：ALL|READ|UNREAD." )
+	@FieldDescribe( "열람 여부: ALL|READ|UNREAD." )
 	private String readFlag = "ALL";
 
-	@FieldDescribe( "是否置顶：ALL|TOP|UNTOP." )
+	@FieldDescribe( "상단 고정 여부: ALL|TOP|UNTOP." )
 	private String topFlag = "ALL";
 
-	@FieldDescribe( "只查询minutes分钟之类发布的文档，值为null或者为0时不作限制" )
+	@FieldDescribe( "minutes분 이내에 게시된 문서만 조회, 값이 null 또는 0이면 제한 없음" )
 	private Integer minutes = null;
 
-	@FieldDescribe( "作为过滤条件的CMS应用ID列表, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 사용할 CMS 앱ID 목록, 여러 개 가능, String 배열." )
 	private List<String> appIdList;
 
-	@FieldDescribe( "作为过滤条件的CMS应用名称列表, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 사용할 CMS 앱 이름 목록, 여러 개 가능, String 배열." )
 	private List<String> appNameList;
 
-	@FieldDescribe( "作为过滤条件的CMS应用别名列表, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 사용할 CMS 앱 별칭 목록, 여러 개 가능, String 배열." )
 	private List<String> appAliasList;
 
-	@FieldDescribe( "作为过滤条件的CMS分类ID列表, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 사용할 CMS 분류ID 목록, 여러 개 가능, String 배열." )
 	private List<String> categoryIdList;
 
-	@FieldDescribe( "作为过滤条件的CMS分类名称列表, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 사용할 CMS 분류 이름 목록, 여러 개 가능, String 배열." )
 	private List<String> categoryNameList;
 
-	@FieldDescribe( "作为过滤条件的CMS分类别名列表, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 사용할 CMS 분류 별칭 목록, 여러 개 가능, String 배열." )
 	private List<String> categoryAliasList;
 
-	@FieldDescribe( "作为过滤条件的创建者姓名列表, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 쓰는 작성자 이름 목록, 여러 개 가능, String 배열." )
 	private List<String> creatorList;
 
-	@FieldDescribe( "作为过滤条件的文档状态列表, 可多个, String数组，值：published(默认值) | waitPublish(待发布) | draft(草稿) | archived(归档)" )
+	@FieldDescribe( "필터 조건으로 사용할 문서 상태 목록, 여러 개 가능, String 배열, 값: published(기본값) | waitPublish(게시 대기) | draft(초안) | archived(보관)" )
 	private List<String> statusList;
 
-	@FieldDescribe( "创建日期列表，可以传入1个(开始时间)或者2个(开始和结束时间), 格式：yyyy-MM-dd HH:mm:ss或者yyyy-mm-dd." )
+	@FieldDescribe( "생성 일자 목록, 1개(시작 시간) 또는 2개(시작 및 종료 시간) 전달 가능, 형식: yyyy-MM-dd HH:mm:ss 또는 yyyy-mm-dd." )
 	private List<String> createDateList;
 
-	@FieldDescribe( "发布日期列表，可以传入1个(开始时间)或者2个(开始和结束时间), 格式：yyyy-MM-dd HH:mm:ss或者yyyy-mm-dd." )
+	@FieldDescribe( "게시 일자 목록, 1개(시작 시간) 또는 2개(시작 및 종료 시간) 전달 가능, 형식: yyyy-MM-dd HH:mm:ss 또는 yyyy-mm-dd." )
 	private List<String> publishDateList;
 
-	@FieldDescribe( "文档修改时间列表，可以传入1个(开始时间)或者2个(开始和结束时间), 格式：yyyy-MM-dd HH:mm:ss或者yyyy-mm-dd." )
+	@FieldDescribe( "문서 수정 시간 목록, 1개(시작 시간) 또는 2개(시작 및 종료 시간) 전달 가능, 형식: yyyy-MM-dd HH:mm:ss 또는 yyyy-mm-dd." )
 	private List<String> modifyTimeList;
 
-	@FieldDescribe( "作为过滤条件的发布者所属组织, 可多个, String数组." )
+	@FieldDescribe( "필터 조건으로 사용할 게시자 소속 조직, 여러 개 가능, String 배열." )
 	private List<String> creatorUnitNameList;
 
 	@FieldDescribe( "文档类型：全部(默认值) | 信息 | 数据" )
 	private String documentType = "全部";
 
-	@FieldDescribe( "作为过滤条件的CMS文档关键字, 通常是标题, String, 模糊查询." )
+	@FieldDescribe( "필터 조건으로 사용할 CMS 문서 키워드, 보통 제목, String, 부분 일치 조회." )
 	private String title;
 
-	@FieldDescribe("文件导入的批次号：一般是分类ID+时间缀")
+	@FieldDescribe("파일 가져오기 배치 번호: 보통 분류ID+타임스탬프")
 	private String importBatchName;
 
 	@FieldDescribe("业务数据String值01.")
@@ -450,7 +450,7 @@ public class WrapInDocumentFilter {
 	}
 
 	/**
-	 * 根据传入的查询参数，组织一个完整的QueryFilter对象
+	 * 전달된 조회 파라미터로 완전한 QueryFilter 객체 구성
 	 * @return
 	 * @throws Exception
 	 */
@@ -458,12 +458,12 @@ public class WrapInDocumentFilter {
 		QueryFilter queryFilter = new QueryFilter();
 		queryFilter.setJoinType( "and" );
 
-		//组织查询条件对象
+		//조회 조건 객체 구성
 		if( StringUtils.isNotEmpty( this.getTitle() )) {
 			queryFilter.addLikeTerm( new LikeTerm( "title", this.getTitle() ) );
 		}
 
-		//文档类型：全部 | 信息 | 数据
+		//문서 유형: 전체 | 정보 | 데이터
 		if( StringUtils.isNotEmpty( this.getDocumentType())) {
 			if( "信息".equals( this.getDocumentType() )) {
 				queryFilter.addEqualsTerm( new EqualsTerm( "documentType", this.getDocumentType() ) );
@@ -472,7 +472,7 @@ public class WrapInDocumentFilter {
 			}
 		}
 
-		//是否置顶：ALL|TOP|UNTOP
+		//상단 고정 여부: ALL|TOP|UNTOP
 		if( StringUtils.isNotEmpty( this.getTopFlag())) {
 			if( "TOP".equals( this.getTopFlag() )) {
 				queryFilter.addIsTrueTerm( new IsTrueTerm( "isTop" ) );
@@ -494,7 +494,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getAppAliasList())) {
-			if( this.getAppAliasList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getAppAliasList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "appAlias", this.getAppAliasList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "appAlias", new ArrayList<>( this.getAppAliasList() ) ) );
@@ -502,7 +502,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getAppNameList())) {
-			if( this.getAppNameList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getAppNameList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "appName", this.getAppNameList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "appName", new ArrayList<>( this.getAppNameList() ) ) );
@@ -510,7 +510,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getAppIdList())) {
-			if( this.getAppIdList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getAppIdList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "appId", this.getAppIdList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "appId", new ArrayList<>( this.getAppIdList() ) ) );
@@ -518,7 +518,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getCategoryAliasList())) {
-			if( this.getCategoryAliasList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getCategoryAliasList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "categoryAlias", this.getCategoryAliasList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "categoryAlias", new ArrayList<>( this.getCategoryAliasList() ) ) );
@@ -526,7 +526,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getCategoryNameList())) {
-			if( this.getCategoryNameList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getCategoryNameList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "categoryName", this.getCategoryNameList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "categoryName", new ArrayList<>( this.getCategoryNameList() ) ) );
@@ -534,7 +534,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getCategoryIdList())) {
-			if( this.getCategoryIdList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getCategoryIdList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "categoryId", this.getCategoryIdList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "categoryId", new ArrayList<>( this.getCategoryIdList() ) ) );
@@ -542,7 +542,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getCreatorList())) {
-			if( this.getCreatorList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getCreatorList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "creatorPerson", this.getCreatorList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "creatorPerson", new ArrayList<>( this.getCreatorList() ) ) );
@@ -550,7 +550,7 @@ public class WrapInDocumentFilter {
 		}
 
 		if( ListTools.isNotEmpty( this.getCreatorUnitNameList())) {
-			if( this.getCreatorUnitNameList().size() == 1 ) { //如果只有一个值，就不要用IN，直接使用equals
+			if( this.getCreatorUnitNameList().size() == 1 ) { //값이 하나뿐이면 IN 대신 equals 사용
 				queryFilter.addEqualsTerm( new EqualsTerm( "creatorUnitName", this.getCreatorUnitNameList().get(0) ) );
 			}else {
 				queryFilter.addInTerm( new InTerm( "creatorUnitName", new ArrayList<>( this.getCreatorUnitNameList() ) ) );

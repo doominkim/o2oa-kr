@@ -32,13 +32,13 @@ public class WorkLogAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(WorkLogAction.class);
 
-	@JaxrsMethodDescribe(value = "根据指定job获取工作日志.", action = ActionListWithJob.class)
+	@JaxrsMethodDescribe(value = "지정 job으로 업무 로그 조회.", action = ActionListWithJob.class)
 	@GET
 	@Path("list/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job) {
 		ActionResult<List<ActionListWithJob.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,14 +50,14 @@ public class WorkLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据指定Work或者WorkCompleted获取工作日志.", action = ActionListWithWorkOrWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "지정 Work 또는 WorkCompleted로 업무 로그 조회.", action = ActionListWithWorkOrWorkCompleted.class)
 	@GET
 	@Path("list/workorworkcompleted/{workOrWorkCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithWorkOrWorkCompleted(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作或已完成工作标识") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
+			@JaxrsParameterDescribe("업무 문서 또는 완료된 업무 문서 식별자") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
 		ActionResult<List<ActionListWithWorkOrWorkCompleted.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,14 +69,14 @@ public class WorkLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取工作或完成工作可回滚的工作日志.", action = ActionListRollbackWithWorkOrWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "업무 문서 또는 완료 업무 문서의 롤백 가능한 업무 로그 조회.", action = ActionListRollbackWithWorkOrWorkCompleted.class)
 	@GET
 	@Path("list/rollback/workorworkcompleted/{workOrWorkCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listRollbackWithWorkOrWorkCompleted(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作或已完成工作标识") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
+			@JaxrsParameterDescribe("업무 문서 또는 완료된 업무 문서 식별자") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
 		ActionResult<List<ActionListRollbackWithWorkOrWorkCompleted.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -88,13 +88,13 @@ public class WorkLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取工作或完成工作可回滚的工作日志.", action = ActionListAddSplitWithWork.class)
+	@JaxrsMethodDescribe(value = "업무 문서 또는 완료 업무 문서의 롤백 가능한 업무 로그 조회.", action = ActionListAddSplitWithWork.class)
 	@GET
 	@Path("list/add/split/work/{workId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listAddSplitWithWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId) {
 		ActionResult<List<ActionListAddSplitWithWork.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

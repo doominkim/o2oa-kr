@@ -12,7 +12,7 @@ import com.x.base.core.container.factory.EntityManagerContainerFactory;
 import com.x.base.core.entity.annotation.CheckPersistType;
 
 /**
- * 考勤打卡记录分析服务类
+ * 근태 출퇴근 기록 분석 서비스 클래스
  * @author LIYI
  *
  */
@@ -21,10 +21,10 @@ public class AttendanceDetailMobileAnalyseServiceAdv {
 	private AttendanceDetailMobileAnalyseService attendanceDetailMobileAnalyseService = new AttendanceDetailMobileAnalyseService();
 	
 	/**
-	 * 1、查询该用户是否已经有当天的考勤数据，如果有，则进行时间的更新
-	 * 2、如果当前的打卡记录是上班打卡，则只进行记录不进行分析
-	 * 3、如果当前的打卡记录是下班打卡，则更新考勤信息后，对考勤记录进行分析
-	 * 4、查询该用户是否仍有未分析的考勤数据，如果日期不是今天，那么，全部进行分析
+	 * 1. 해당 사용자의 당일 근태 데이터가 있는지 조회하고, 있으면 시간 갱신
+	 * 2. 현재 체크 기록이 출근 체크이면 기록만 하고 분석하지 않음
+	 * 3. 현재 체크 기록이 퇴근 체크이면 근태 정보를 갱신한 뒤 근태 기록 분석
+	 * 4. 해당 사용자에게 아직 미분석 근태 데이터가 있는지 조회하고, 날짜가 오늘이 아니면 모두 분석
 	 *
 	 * @param id
 	 * @return
@@ -51,7 +51,7 @@ public class AttendanceDetailMobileAnalyseServiceAdv {
 					for( String detailId : ids ){
 						attendanceDetail = emc.find( detailId, AttendanceDetail.class );
 						if( attendanceDetail != null ){
-							//只要不是和手机打卡记录同一天的都需要进行分析
+							//모바일 체크 기록과 같은 날이 아니면 모두 분석해야 함
 							if( !attendanceDetail.getRecordDateString().equals( attendanceDetailMobile.getRecordDateString() )){
 								attendanceDetailAnalyseService.analyseAttendanceDetail( emc, attendanceDetail, debugger );
 							}

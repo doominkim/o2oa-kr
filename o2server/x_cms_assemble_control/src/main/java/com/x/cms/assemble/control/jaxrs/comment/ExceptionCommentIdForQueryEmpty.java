@@ -7,6 +7,6 @@ class ExceptionCommentIdForQueryEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCommentIdForQueryEmpty() {
-		super("查询的评论信息ID为空，无法继续查询数据." );
+		super("조회할 댓글 ID가 비어 있어 데이터를 조회할 수 없습니다." );
 	}
 }

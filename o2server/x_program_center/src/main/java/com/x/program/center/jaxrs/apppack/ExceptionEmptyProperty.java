@@ -11,6 +11,6 @@ public class ExceptionEmptyProperty extends LanguagePromptException {
     private static final long serialVersionUID = -4443630173583290883L;
 
     ExceptionEmptyProperty(String propertyName) {
-        super("参数 "+propertyName+" 不能为空！");
+        super("매개변수 "+propertyName+" 은(는) 비워 둘 수 없습니다!");
     }
 }

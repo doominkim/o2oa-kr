@@ -35,21 +35,21 @@ public class ActionDeleteByDateAndPeople extends BaseAction {
                 throw new ExceptionAccessDenied(effectivePerson);
             }
             if (StringUtils.isEmpty(peopleDn)) {
-                throw new ExceptionEmptyParameter("人员DN");
+                throw new ExceptionEmptyParameter("인원 DN");
             }
             if (StringUtils.isEmpty(date)) {
-                throw new ExceptionEmptyParameter("日期");
+                throw new ExceptionEmptyParameter("날짜");
             }
             Date dateCheck = null;
             try {
-                dateCheck = DateTools.parse(date, DateTools.format_yyyyMMdd); // 检查格式
+                dateCheck = DateTools.parse(date, DateTools.format_yyyyMMdd); // 형식 검사
             } catch (Exception ignore) {}
             if (dateCheck == null) {
-                throw new ExceptionWithMessage("日期格式错误，需要格式：yyyy-MM-dd");
+                throw new ExceptionWithMessage("날짜 형식이 잘못되었습니다. 필요한 형식: yyyy-MM-dd");
             }
             deleteOldRecords(peopleDn, date, emc, business);
-            // 删除了旧的记录，重新生成
-            LOGGER.info("发起考勤数据生成，Date：{} person: {}", date, peopleDn);
+            // 기존 기록을 삭제하고 다시 생성
+            LOGGER.info("근태 데이터 생성 요청, Date: {} person: {}", date, peopleDn);
             ThisApplication.queueV2Detail.send(new QueueAttendanceV2DetailModel(peopleDn, date));
             ActionResult<Wo> result = new ActionResult<>();
             Wo wo = new Wo();

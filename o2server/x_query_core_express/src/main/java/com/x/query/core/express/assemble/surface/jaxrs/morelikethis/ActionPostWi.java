@@ -9,32 +9,32 @@ public class ActionPostWi extends GsonPropertyObject {
 
     private static final long serialVersionUID = 1360655000630283661L;
 
-    @FieldDescribe("标识.")
-    @Schema(description = "标识.")
+    @FieldDescribe("식별자.")
+    @Schema(description = "식별자.")
     private String flag;
 
-    @FieldDescribe("分类.")
-    @Schema(description = "分类.")
+    @FieldDescribe("분류.")
+    @Schema(description = "분류.")
     private String category;
 
-    @FieldDescribe("指定用户.")
-    @Schema(description = "指定用户.")
+    @FieldDescribe("지정 사용자.")
+    @Schema(description = "지정 사용자.")
     private String person;
 
-    @FieldDescribe("过滤分类.")
-    @Schema(description = "过滤分类.")
+    @FieldDescribe("필터 분류.")
+    @Schema(description = "필터 분류.")
     private String filterCategory;
 
-    @FieldDescribe("过滤类型.")
-    @Schema(description = "过滤类型.")
+    @FieldDescribe("필터 유형.")
+    @Schema(description = "필터 유형.")
     private String filterType;
 
-    @FieldDescribe("过滤目录类型.")
-    @Schema(description = "过滤目录类型.")
+    @FieldDescribe("필터 디렉터리 유형.")
+    @Schema(description = "필터 디렉터리 유형.")
     private String filterKey;
 
-    @FieldDescribe("返回数量.")
-    @Schema(description = "返回数量.")
+    @FieldDescribe("반환 개수.")
+    @Schema(description = "반환 개수.")
     private Integer count;
 
     public String getFilterCategory() {

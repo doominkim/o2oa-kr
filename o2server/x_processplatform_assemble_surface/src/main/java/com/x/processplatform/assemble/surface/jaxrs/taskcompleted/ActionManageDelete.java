@@ -28,7 +28,7 @@ class ActionManageDelete extends BaseAction {
 			}
 			Process process = business.process().pick(taskCompleted.getProcess());
 			Application application = business.application().pick(taskCompleted.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (!business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process)) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}

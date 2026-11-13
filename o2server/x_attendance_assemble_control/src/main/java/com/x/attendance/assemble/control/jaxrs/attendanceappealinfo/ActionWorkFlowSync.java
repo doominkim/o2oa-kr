@@ -45,14 +45,14 @@ public class ActionWorkFlowSync extends BaseAction {
 			id = wrapIn.getId();
 			if ( StringUtils.isEmpty( id )) {
 				check = false;
-				result.error(new Exception("传入的id为空，或者不合法，无法同步流程数据。"));
+				result.error(new Exception("전달된 id가 비어 있거나 올바르지 않아 결재 데이터를 동기화할 수 없습니다."));
 			}
 		}
 
 		if (check) {
 			if( wrapIn.getStatus() != 0 & wrapIn.getStatus() != 1 &wrapIn.getStatus() != -1 &wrapIn.getStatus() != 9 ){
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess( "传入的申诉状态不合法。status:" + wrapIn.getStatus());
+				Exception exception = new ExceptionAttendanceAppealProcess( "전달된 이의 신청 상태가 올바르지 않습니다. status:" + wrapIn.getStatus());
 				result.error(exception);
 			}
 		}
@@ -67,7 +67,7 @@ public class ActionWorkFlowSync extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询考勤申诉记录数据时发生异常。ID:" + id);
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "ID로 근태 이의 신청 기록 데이터를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -83,7 +83,7 @@ public class ActionWorkFlowSync extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询考勤申诉审批记录数据时发生异常。ID:" + id);
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "ID로 근태 이의 신청 결재 기록 데이터를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -94,7 +94,7 @@ public class ActionWorkFlowSync extends BaseAction {
 				woWorkComplex = WorkFlowSyncService.getWorkComplex( attendanceAppealAuditInfo.getWorkId() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在获取考勤打卡申诉流程信息时发生异常。ID:" + attendanceAppealAuditInfo.getWorkId() );
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 체크 이의 신청 결재 정보를 가져오는 중 오류가 발생했습니다. ID:" + attendanceAppealAuditInfo.getWorkId() );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -106,7 +106,7 @@ public class ActionWorkFlowSync extends BaseAction {
 					woWorkComplex = WorkFlowSyncService.getWorkCompletedComplex( attendanceAppealAuditInfo.getWorkId() );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在获取考勤打卡申诉流程信息时发生异常。ID:" + attendanceAppealAuditInfo.getWorkId() );
+					Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 체크 이의 신청 결재 정보를 가져오는 중 오류가 발생했습니다. ID:" + attendanceAppealAuditInfo.getWorkId() );
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -116,7 +116,7 @@ public class ActionWorkFlowSync extends BaseAction {
 		if (check) {
 			if( woWorkComplex == null ){
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess("流程（work or workCompleted）不存在。ID:" + attendanceAppealAuditInfo.getWorkId() );
+				Exception exception = new ExceptionAttendanceAppealProcess("결재(work 또는 workCompleted)가 없습니다. ID:" + attendanceAppealAuditInfo.getWorkId() );
 				result.error(exception);
 			}
 		}
@@ -138,7 +138,7 @@ public class ActionWorkFlowSync extends BaseAction {
 
 				result.setData(new Wo(id));
 			} catch (Exception e) {
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在同步考勤打卡申诉流程信息时发生异常。ID:" + id);
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 체크 이의 신청 결재 정보 동기화 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -147,10 +147,10 @@ public class ActionWorkFlowSync extends BaseAction {
 	}
 
 	public static class Wi {
-		@FieldDescribe("考勤申诉id")
+		@FieldDescribe("근태 이의 신청 id")
 		private  String id = "";
 
-		@FieldDescribe("1-审批通过，-1-审批不能过")
+		@FieldDescribe("1-승인, -1-반려")
 		private Integer status = 0;
 
 		public Integer getStatus() {

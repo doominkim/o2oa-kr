@@ -7,7 +7,7 @@ class ExceptionWorkAccessDeniedCallback extends CallbackPromptException {
 	private static final long serialVersionUID = 9085364457175859374L;
 
 	ExceptionWorkAccessDeniedCallback(String callbackName, String person, String title, String workId) {
-		super(callbackName, "用户:{} 没有权限访问工作 title:{} id:{}.", person, title, workId);
+		super(callbackName, "사용자: {}에게 문서 title: {} id: {}에 접근할 권한이 없습니다.", person, title, workId);
 	}
 
 }

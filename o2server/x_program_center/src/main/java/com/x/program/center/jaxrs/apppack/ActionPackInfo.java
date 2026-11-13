@@ -49,7 +49,7 @@ public class ActionPackInfo extends BaseAction  {
         if (info != null) {
             Wo wo = Wo.copier.copy(info);
             try {
-                // 查询 关键的发布apk信息，
+                // 주요 배포 apk 정보 조회,
                 try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
                     EntityManager em = emc.get(AppPackApkFile.class);
                     CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -78,7 +78,7 @@ public class ActionPackInfo extends BaseAction  {
 
 
     /**
-     * 打包信息对象
+     * 패키징 정보 객체
      */
     public static class Wo extends PackInfoFromServer {
 

@@ -77,7 +77,7 @@ public class MappingItem extends GsonPropertyObject {
 		list.add(new MappingItem("密码", "password", MappingItemValueType.string));
 		list.add(new MappingItem("密码到期时间", "passwordExpiredTime", MappingItemValueType.date));
 		list.add(new MappingItem("排序号", "orderNumber", MappingItemValueType.integer));
-		// list.add(new MappingItem("标识", "id", MappingItemValueType.string));
+		// list.add(new MappingItem("식별자", "id", MappingItemValueType.string));
 		list.add(new MappingItem("邮件", "mail", MappingItemValueType.string));
 		list.add(new MappingItem("手机", "mobile", MappingItemValueType.string));
 		list.add(new MappingItem("固定电话", "officePhone", MappingItemValueType.string));

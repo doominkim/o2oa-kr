@@ -10,7 +10,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 专门用于腾讯企业邮第一次开通API接口时用于认证. 开通的认证端口必须是80,443或者8080,腾讯不会访问其他端口.
+ * 텐센트 기업 메일에서 API를 처음 개통할 때 인증 전용. 인증 포트는 80, 443 또는 8080이어야 하며 텐센트는 다른 포트에 접근하지 않음.
  * 
  * @author ray
  *
@@ -22,7 +22,7 @@ class ActionGet extends BaseAction {
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String msg_signature, String timestamp, String nonce,
 			String echostr) throws Exception {
 
-		LOGGER.debug("腾讯企业邮收到,msg_signature:{}, timestamp:{}, nonce:{}, echostr:{}.", () -> msg_signature,
+		LOGGER.debug("텐센트 기업 메일 수신, msg_signature:{}, timestamp:{}, nonce:{}, echostr:{}.", () -> msg_signature,
 				() -> timestamp, () -> nonce, () -> echostr);
 
 		ActionResult<Wo> result = new ActionResult<>();

@@ -25,11 +25,11 @@ public class ActionListByLevel extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 			LogFactory logFactory = business.getLogFactory();
-			List<String> ids = logFactory.listByOperationLevel(operationLevel);// 获取指定文档的操作日志列表
-			List<Log> logList = emc.list( Log.class , ids );// 查询ID IN ids 的所有应用日志信息列表
+			List<String> ids = logFactory.listByOperationLevel(operationLevel);// 지정 문서의 작업 로그 목록 조회
+			List<Log> logList = emc.list( Log.class , ids );// ID IN ids인 모든 앱 로그 정보 목록 조회
 			if( logList != null && !logList.isEmpty() ){
 				wraps = Wo.copier.copy( logList );
-				SortTools.desc( wraps, "createTime" );// 对查询的列表进行排序
+				SortTools.desc( wraps, "createTime" );// 조회 목록 정렬
 				result.setData(wraps);
 			}
 		} catch (Throwable th) {

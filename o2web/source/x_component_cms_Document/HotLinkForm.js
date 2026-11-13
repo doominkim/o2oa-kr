@@ -14,7 +14,7 @@ MWF.xApplication.cms.Document.HotLinkForm = new Class({
         "hasTopIcon" : false,
         "hasTopContent" : true,
         "hasBottom": true,
-        "title": MWF.xApplication.cms.Document.LP.setHotPicture, //"设置热点"
+        "title": MWF.xApplication.cms.Document.LP.setHotPicture, //"핫스팟 설정"
         "draggable": true,
         "closeAction": true,
         "toMain" : true,
@@ -114,7 +114,7 @@ MWF.xApplication.cms.Document.HotLinkForm = new Class({
     //            this.selector_doc.data = json.data || [];
     //            this.selector_doc.loadAttachmentSelecter({
     //                "style": "cms",
-    //                "title": "选择本文档图片",
+    //                "title": "이 문서의 이미지 선택",
     //                "listStyle": "preview",
     //                "selectType": "images"
     //            }, function (url, data, base64Code) {
@@ -130,7 +130,7 @@ MWF.xApplication.cms.Document.HotLinkForm = new Class({
     //    MWF.xDesktop.requireApp("File", "FileSelector", function(){
     //        _self.selector_cloud = new MWF.xApplication.File.FileSelector( document.body ,{
     //            "style" : "default",
-    //            "title": "选择云文件图片",
+    //            "title": "클라우드 파일 이미지 선택",
     //            "listStyle": "preview",
     //            "toBase64" : true,
     //            "selectType" : "images",

@@ -37,10 +37,10 @@ public class GBaseDictionary extends DBDictionary {
 	 */
 	public int lockWaitSeconds = 30;
 
-	// 由decorate方法调用
+	// decorate 메서드에서 호출
 	public boolean disableRetainUpdateLocksSQL = false;
 
-	// 由decorate方法调用
+	// decorate 메서드에서 호출
 	// weak set of connections we've already executed lock mode sql on
 	private final Collection _seenConnections = Collections
 			.synchronizedSet(new ReferenceHashSet(AbstractReferenceMap.ReferenceStrength.WEAK));
@@ -63,9 +63,9 @@ public class GBaseDictionary extends DBDictionary {
 		dateTypeName = "DATE";
 		timeTypeName = "DATETIME HOUR TO SECOND";
 		timestampTypeName = "DATETIME YEAR TO FRACTION(5)";
-		// 避免字段名前后多一个"\"""
+		// 필드명 앞뒤에 "\"""가 하나 더 붙는 것 방지
 		supportsDelimitedIdentifiers = false;
-		// 设置Boolean使用类型
+		// Boolean 사용 유형 설정
 		booleanRepresentation = BooleanRepresentationFactory.BOOLEAN;
 		supportsLockingWithDistinctClause = false;
 		supportsLockingWithMultipleTables = false;
@@ -101,7 +101,7 @@ public class GBaseDictionary extends DBDictionary {
 			if (cols[i].getType() == Types.LONGVARCHAR) {
 				cols[i].setType(Types.CLOB);
 			}
-			// 不知道为什么类型16的boolean识别为bit,显示为unknown(16)强制转换过去
+			// 이유는 모르지만 유형 16의 boolean이 bit로 인식되어 unknown(16)으로 표시되므로 강제 변환
 			if (cols[i].getType() == Types.BOOLEAN) {
 				cols[i].setType(Types.BIT);
 			}
@@ -109,9 +109,9 @@ public class GBaseDictionary extends DBDictionary {
 		return cols;
 	}
 
-	// 必须重写这个方法,否则错误信息
+	// 이 메서드를 반드시 재정의해야 함, 그렇지 않으면 오류 정보
 	// <openjpa-3.2.0-r6f721f6 fatal general error>
-	// org.apache.openjpa.persistence.PersistenceException: 尚未打开游标。
+	// org.apache.openjpa.persistence.PersistenceException: 커서가 아직 열리지 않았습니다.
 	@Override
 	public Connection decorate(Connection conn) throws SQLException {
 		conn = super.decorate(conn);
@@ -149,7 +149,7 @@ public class GBaseDictionary extends DBDictionary {
 		return conn;
 	}
 
-	// 由decorate方法调用
+	// decorate 메서드에서 호출
 	private void execute(String sql, Connection conn, boolean throwExc) {
 		Statement stmnt = null;
 		try {

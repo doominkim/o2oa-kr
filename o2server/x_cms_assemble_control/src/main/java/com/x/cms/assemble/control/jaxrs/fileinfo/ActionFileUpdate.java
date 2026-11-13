@@ -35,10 +35,10 @@ public class ActionFileUpdate extends BaseAction {
 			fileName = this.fileName(disposition);
 		}
 		if( StringUtils.isEmpty(old_attId) ){
-			throw new URLParameterGetException( new Exception("未获取到需要替换的附件ID") );
+			throw new URLParameterGetException( new Exception("교체할 첨부파일 ID를 가져오지 못했습니다") );
 		}
 		if( StringUtils.isEmpty(docId) ){
-			throw new URLParameterGetException( new Exception("未获取到汇报ID") );
+			throw new URLParameterGetException( new Exception("보고 ID를 가져오지 못했습니다") );
 		}
 
 		Document document = documentQueryService.get( docId );
@@ -79,9 +79,9 @@ public class ActionFileUpdate extends BaseAction {
 					attachment.getText());
 		}
 
-		//文件存储
+		//파일 저장
 		attachment.updateContent(mapping, bytes, fileName, Config.general().getStorageEncrypt());
-		//完成替换逻辑
+		//교체 로직 완료
 		attachment = fileInfoServiceAdv.updateAttachment( docId, old_attId, attachment, mapping );
 
 		CacheManager.notify( FileInfo.class );

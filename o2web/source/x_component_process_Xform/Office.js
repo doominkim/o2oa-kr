@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Office Office控件。
- * @o2cn Ntko Office控件
+/** @class Office Office 컨트롤.
+ * @o2cn Ntko Office 컨트롤
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var attachment = this.form.get("name"); //获取组件
- * //方法2
- * var attachment = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var attachment = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var attachment = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -44,52 +44,52 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
          * @ignore
          */
         /**
-         * 点击套红按钮触发。
+         * 양식 서식 적용 버튼 클릭 시 발생.
          * @event MWF.xApplication.process.Xform.Office#redFile
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 点击盖章按钮触发。
+         * 날인 버튼 클릭 시 발생.
          * @event MWF.xApplication.process.Xform.Office#seal
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * Ntko控件执行AfterOpenFromURL事件（BeginOpenFromURL方法执行完毕之后被触发）时执行。</br>
-         * 本事件可以通过this.event获取当前打开的文档对象。比如，对于一个Word文档，第二个参数是一个Word.Document对象。
+         * Ntko 컨트롤이 AfterOpenFromURL 이벤트(BeginOpenFromURL 메서드 실행 완료 후 발생)를 실행할 때 실행.</br>
+         * 이 이벤트에서 this.event로 현재 열린 문서 객체를 가져올 수 있음. 예를 들어 Word 문서의 경우 두 번째 인자는 Word.Document 객체.
          * @event MWF.xApplication.process.Xform.Office#afterOpen
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * Ntko控件执行OnDocumentOpened事件（Office文档打开完毕）时触发。<br/>
-         * 本事件可以通过this.event获取以下内容
+         * Ntko 컨트롤이 OnDocumentOpened 이벤트(Office 문서 열기 완료)를 실행할 때 발생.<br/>
+         * 이 이벤트에서 this.event로 다음 내용을 가져올 수 있음
          * <pre><code>
          {
-            url : url, //Office文档路径或者URL
-            doc : doc //Office文档的自动化接口，比如，对于一个Word文档，第二个参数是一个Word.Document对象。
+            url : url, //Office 문서 경로 또는 URL
+            doc : doc //Office 문서의 자동화 인터페이스, 예를 들어 Word 문서의 경우 두 번째 인자는 Word.Document 객체.
         }
          </pre></code>
          * @event MWF.xApplication.process.Xform.Office#afterOpenOffice
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 在新建Office文档后触发。
+         * 새 Office 문서 생성 후 발생.
          * @event MWF.xApplication.process.Xform.Office#afterCreate
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 在保存Office文档前触发。
+         * Office 문서 저장 전 발생.
          * @event MWF.xApplication.process.Xform.Office#beforeSave
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 在保存Office文档后触发。
+         * Office 문서 저장 후 발생.
          * @event MWF.xApplication.process.Xform.Office#afterSave
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 在关闭Office文档时执行。
+         * Office 문서를 닫을 때 실행.
          * @event MWF.xApplication.process.Xform.Office#afterCloseOffice
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["redFile",
             "afterOpen",
@@ -306,7 +306,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         return "fileInput"+this.json.id+id;
     },
     getTempleteUrl: function(){
-        //return "../x_desktop/temp/杭州城管委文件.doc";
+        //return "../x_desktop/temp/항저우도시관리위원회문서.doc";
         if (this.json.template){
             var root = "";
             var flag = this.json.template.substr(0,1);
@@ -362,7 +362,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         }
     },
     /**
-     * @summary 允许编辑Office文档
+     * @summary Office 문서 편집 허용
      * @example
      * this.form.get("fieldId").editEnabled();
      */
@@ -372,7 +372,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         }catch(e){}
     },
     /**
-     * @summary 设置Office文档为只读
+     * @summary Office 문서를 읽기 전용으로 설정
      * @example
      * this.form.get("fieldId").docReadonly();
      */
@@ -380,23 +380,23 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         this.protect(3);
     },
     /**
-     * @summary 设置Office文档状态
+     * @summary Office 문서 상태 설정
      * @example
      * this.form.get("fieldId").protect(1);
-     * @param {Number} type 1(批注),2(填写窗体),3(只读),0(修订),-1(限制编辑样式)
+     * @param {Number} type 1(메모),2(양식 채우기),3(읽기 전용),0(수정 추적),-1(편집 스타일 제한)
      */
     protect: function(type){
-        // wdAllowOnlyComments = 1         //批注
-        // wdAllowOnlyFormFields = 2       //填写窗体
-        // wdAllowOnlyReading = 3          //只读
-        // wdAllowOnlyRevisions = 0        //修订
-        // wdNoProtection = -1             //限制编辑样式
+        // wdAllowOnlyComments = 1         //메모
+        // wdAllowOnlyFormFields = 2       //양식 채우기
+        // wdAllowOnlyReading = 3          //읽기 전용
+        // wdAllowOnlyRevisions = 0        //수정 추적
+        // wdNoProtection = -1             //편집 스타일 제한
         try {
             this.officeOCX.ActiveDocument.Protect(type);
         }catch(e){}
     },
     /**
-     * @summary 设置Office文档保留痕迹
+     * @summary Office 문서 변경 내용 추적 설정
      */
     startRevisions: function(){
         if (this.officeOCX && (this.officeOCX.DocType==1 || this.officeOCX.DocType==6)){
@@ -413,7 +413,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
             this.officeOCX.ActiveDocument.Application.UserName = layout.desktop.session.user.name;
 
             if( this.officeOCX.ActiveDocument && this.officeOCX.ActiveDocument.Application ){
-                if(15==this.officeOCX.getOfficeVer()){//如果是OFFICE 2013则设置Options.UseLocalUserInfo属性为true,TANGER_OCX_OBJ为文档控件对象
+                if(15==this.officeOCX.getOfficeVer()){//OFFICE 2013이면 Options.UseLocalUserInfo 속성을 true로 설정, TANGER_OCX_OBJ는 문서 컨트롤 객체
                     this.officeOCX.ActiveDocument.Application.Options.UseLocalUserInfo=true;
                     this.officeOCX.WebUserName= layout.desktop.session.user.name;
                 }
@@ -422,7 +422,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         //this.officeOCX.FullScreenMode = true;
     },
     /**
-     * @summary 设置Office文档取消保留痕迹
+     * @summary Office 문서 변경 내용 추적 해제
      */
     stopRevisions: function(accept){
         this.officeOCX.ActiveDocument.TrackRevisions = false;
@@ -719,13 +719,13 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         }
     },
     /**
-     * @summary 盖章
+     * @summary 날인
      */
     seal: function(){
         this.fireEvent("seal");
     },
     /**
-     * @summary 套红
+     * @summary 양식 서식 적용
      */
     redFile: function(){
        // try {
@@ -739,7 +739,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
 
         this.fireEvent("redFile");
             // this.officeOCX.ActiveDocument.Application.Selection.WholeStory();
-            // this.officeOCX.ActiveDocument.Application.Selection.Font.Name = "仿宋";
+            // this.officeOCX.ActiveDocument.Application.Selection.Font.Name = "바탕";
             // this.officeOCX.ActiveDocument.Application.Selection.Font.Size = 14;
             // this.officeOCX.ActiveDocument.Application.Selection.Cut();
             //
@@ -754,7 +754,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         // }
     },
     /**
-     * @summary 显示痕迹
+     * @summary 변경 내용 표시
      */
     showRevisions: function(){
         try {
@@ -766,7 +766,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         }catch(e){}
     },
     /**
-     * @summary 隐藏痕迹
+     * @summary 변경 내용 숨기기
      */
     hideRevisions: function(){
         try {
@@ -802,13 +802,13 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         }
     },
     afterOpen: function(){
-        // this.officeOCX.AddCustomButtonOnMenu(0,"按钮0",false);
-        // this.officeOCX.AddCustomButtonOnMenu(1,"按钮1",true,1);
-        // this.officeOCX.AddCustomButtonOnMenu(2,"按钮2",true,2);
-        // this.officeOCX.AddCustomButtonOnMenu(3,"按钮3",false,3);
+        // this.officeOCX.AddCustomButtonOnMenu(0,"버튼0",false);
+        // this.officeOCX.AddCustomButtonOnMenu(1,"버튼1",true,1);
+        // this.officeOCX.AddCustomButtonOnMenu(2,"버튼2",true,2);
+        // this.officeOCX.AddCustomButtonOnMenu(3,"버튼3",false,3);
         //
         //
-        // this.officeOCX.AddCustomToolButton("预览(0)", 10);
+        // this.officeOCX.AddCustomToolButton("미리보기(0)", 10);
         //
         // alert(111);
 
@@ -889,7 +889,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
                 objectHtml += "_"+key+"='"+p+"'";
             });
             objectHtml += ">";
-            //尚未安装NTKO Web Chrome跨浏览器插件。请点击<a href="../o2_lib/officecontrol/ntkoplugins.xpi">安装组件</a>
+            //NTKO Web Chrome 크로스 브라우저 플러그인이 설치되지 않았습니다. <a href="../o2_lib/officecontrol/ntkoplugins.xpi">컴포넌트 설치</a>
             objectHtml += "<SPAN STYLE='color:red'>"+MWF.xApplication.process.Xform.LP.installNTKOWebChromePluginNotice_xpi+"</SPAN>";
 
             objectHtml += "</OBJECT><input type='hidden' value='"+this.json.id+"' name='site'><input style='display:none' name=\"file\" type=\"file\"/></form>";
@@ -974,7 +974,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
             });
             objectHtml += ">";
 
-            //尚未安装NTKO Web Chrome跨浏览器插件。请点击<a href="../o2_lib/officecontrol/ntkoplugins.crx">安装组件</a>
+            //NTKO Web Chrome 크로스 브라우저 플러그인이 설치되지 않았습니다. <a href="../o2_lib/officecontrol/ntkoplugins.crx">컴포넌트 설치</a>
             objectHtml += "<SPAN STYLE='color:red'>"+MWF.xApplication.process.Xform.LP.installNTKOWebChromePluginNotice_crx+"</SPAN>";
 
             objectHtml += "</OBJECT><input type='hidden' value='"+this.json.id+"' name='site'><input style='display:none' name=\"file\" type=\"file\"/></form>";
@@ -1068,7 +1068,7 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
                 objectHtml += "<PARAM NAME=\""+key+"\" value=\""+p+"\">";
             });
 
-            //objectHtml += "<div style=\"color:red; position:relative; top:-800px; background:#eeeeee; height:760px; padding:20px; text-align:center; font-size:18px; cursor: pointer \">如果不能自动安装控件，请将在点击此处下载并安装签章客户端。</div>";
+            //objectHtml += "<div style=\"color:red; position:relative; top:-800px; background:#eeeeee; height:760px; padding:20px; text-align:center; font-size:18px; cursor: pointer \">컨트롤이 자동으로 설치되지 않으면 여기를 클릭하여 서명 클라이언트를 내려받아 설치하십시오.</div>";
             objectHtml += "</OBJECT><input type='hidden' value='"+this.json.id+"' name='site'><input type='hidden' value='' name='fileName'><input style='display:none' name=\"file\" type=\"file\"/></form>";
             this.officeNode.appendHTML(objectHtml);
             this.officeForm = this.officeNode.getFirst();
@@ -1393,11 +1393,11 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
         this.officeNode.set("html", objectHtml);
         this.officeForm = this.officeNode.getFirst();
         /**
-        @summary Ntko Office 控件对象, 第三方控件
-        @see {@link http://ieoffice.ntko.com/pro/show/mid/1_8/pid/2731|NTKO官网 }
+        @summary Ntko Office 컨트롤 객체, 서드파티 컨트롤
+        @see {@link http://ieoffice.ntko.com/pro/show/mid/1_8/pid/2731|NTKO 공식 사이트 }
          @example
          var officeOCX = this.form.get("fieldId").officeOCX;
-         var activeDocument = officeOCX.ActiveDocument //返回一个Office Document 对象，该对象代表活动文档。
+         var activeDocument = officeOCX.ActiveDocument //활성 문서를 나타내는 Office Document 객체 반환.
          */
         this.officeOCX = this.officeNode.getFirst().getFirst();
 
@@ -1439,8 +1439,8 @@ MWF.xApplication.process.Xform.Office = MWF.APPOffice =  new Class(
     },
     setData: function(){},
     /**
-     * @summary 保存Office文档到后台
-     * @param {Boolean} history - 是否生产保留痕迹文件
+     * @summary Office 문서를 서버에 저장
+     * @param {Boolean} history - 변경 내용 추적 파일 생성 여부
      */
     save: function(history){
         //if (!this.uploadFileAreaNode) this.createUploadFileNode();

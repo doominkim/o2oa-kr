@@ -7,7 +7,7 @@ import com.x.base.core.entity.JsonProperties;
 import com.x.base.core.project.annotation.FieldDescribe;
 
 /**
- * 文件签批扩展信息
+ * 문서 서명 결재 확장 정보
  * @author sword
  */
 public class DocSignProperties extends JsonProperties {
@@ -16,10 +16,10 @@ public class DocSignProperties extends JsonProperties {
 
     private String title;
 
-    @FieldDescribe("输入框列表.")
+    @FieldDescribe("입력 상자 목록.")
     private List<String> inputList = new ArrayList<>();
 
-    @FieldDescribe("涂鸦列表.")
+    @FieldDescribe("손글씨 목록.")
     private List<String> scrawlList = new ArrayList<>();
 
     public Data getData() {

@@ -7,6 +7,6 @@ class ExceptionFlagNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionFlagNotExist(String flag) {
-		super("flag:{}不存在.", flag);
+		super("flag: {}이(가) 없습니다.", flag);
 	}
 }

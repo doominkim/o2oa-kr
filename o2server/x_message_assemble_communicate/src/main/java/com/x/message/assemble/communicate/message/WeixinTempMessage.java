@@ -5,7 +5,7 @@ import java.util.Map;
 import com.x.base.core.project.gson.GsonPropertyObject;
 
 /**
- * 微信发送模版消息的对象
+ * 위챗 템플릿 메시지 발송 객체
  */
 public class WeixinTempMessage extends GsonPropertyObject {
 
@@ -14,7 +14,7 @@ public class WeixinTempMessage extends GsonPropertyObject {
 	private String template_id;
 	private String url;
 	private String topcolor;
-	private Map<String, WeixinTempMessageFieldObj> data; // 模版字段数据
+	private Map<String, WeixinTempMessageFieldObj> data; // 템플릿 필드 데이터
 
 	public String getTouser() {
 		return touser;
@@ -57,7 +57,7 @@ public class WeixinTempMessage extends GsonPropertyObject {
 	}
 
 	/**
-	 * 模版字段对象
+	 * 템플릿 필드 객체
 	 */
 	public static class WeixinTempMessageFieldObj extends GsonPropertyObject {
 

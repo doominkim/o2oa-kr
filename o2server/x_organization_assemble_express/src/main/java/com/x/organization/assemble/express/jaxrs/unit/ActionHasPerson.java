@@ -24,7 +24,7 @@ import com.x.organization.core.entity.Unit;
 
 class ActionHasPerson extends BaseAction {
 
-	/*** 校验用户是否在指定组织中注册身份 */
+	/*** 사용자가 지정 조직에 신분을 등록했는지 확인 */
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
@@ -46,13 +46,13 @@ class ActionHasPerson extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("*用户")
+		@FieldDescribe("*사용자")
 		private String person;
 
-		@FieldDescribe("*组织")
+		@FieldDescribe("*조직")
 		private String unit;
 
-		@FieldDescribe("*是否递归查找组织(true|false)")
+		@FieldDescribe("*조직 재귀 조회 여부(true|false)")
 		private Boolean recursive = true;
 
 		public String getPerson() {

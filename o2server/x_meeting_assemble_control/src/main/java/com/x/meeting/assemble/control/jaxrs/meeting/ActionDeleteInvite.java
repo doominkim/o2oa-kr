@@ -65,7 +65,7 @@ class ActionDeleteInvite extends BaseAction {
 
 		private static final long serialVersionUID = -4637797853096659198L;
 		
-		@FieldDescribe("将要删除名单列表")
+		@FieldDescribe("삭제할 명단 목록")
 		public List<String> InvitePersonList;
 		
 

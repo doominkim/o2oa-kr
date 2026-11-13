@@ -32,7 +32,7 @@ class ActionGetRecord extends BaseAction {
 
 	public static class Wo extends ImportRecord {
 
-		/** 不输出data数据,单独处理 */
+		/** data 데이터는 출력하지 않고 별도 처리 */
 		static WrapCopier<ImportRecord, Wo> copier = WrapCopierFactory.wo(ImportRecord.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible));
 	}

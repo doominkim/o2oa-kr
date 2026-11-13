@@ -12,31 +12,31 @@ public class TaskCompletedProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -7986324325800894903L;
 
-	@FieldDescribe("从task带过来的上一处理人列表")
+	@FieldDescribe("task에서 가져온 이전 처리자 목록")
 	private List<String> prevTaskIdentityList;
 
-	@FieldDescribe("从task带过来的上一处理人")
+	@FieldDescribe("task에서 가져온 이전 처리자")
 	private String prevTaskIdentity;
 
 	@Deprecated(since = "8.2")
-	@FieldDescribe("后续处理人")
+	@FieldDescribe("후속 처리자")
 	private List<String> nextTaskIdentityList = new ArrayList<>();
 
 	@Deprecated(since = "8.2")
-	@FieldDescribe("上一人工环节待办对象列表")
+	@FieldDescribe("이전 수동 단계 결재 대기 객체 목록")
 	private List<PrevTask> prevTaskList;
 
 	@Deprecated(since = "8.2")
-	@FieldDescribe("上一人工环节最近待办对象")
+	@FieldDescribe("이전 수동 단계 최근 결재 대기 객체")
 	private PrevTask prevTask;
 
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	private String title;
 
-	@FieldDescribe("意见")
+	@FieldDescribe("의견")
 	private String opinion;
 
-	@FieldDescribe("Ticket创建方式,create,reset,add.")
+	@FieldDescribe("Ticket 생성 방식, create, reset, add.")
 	private String act;
 
 	public String getAct() {

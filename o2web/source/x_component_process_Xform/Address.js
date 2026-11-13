@@ -1,13 +1,13 @@
 //MWF.require("MWF.widget.PinYin", null, false);
 MWF.xDesktop.requireApp("process.Xform", "Combox", null, false);
-/** @class Address 地址选择组件。
- * @o2cn 地址选择
+/** @class Address 주소 선택 컴포넌트.
+ * @o2cn 주소 선택
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var address = this.form.get("name"); //获取组件
- * //方法2
- * var address = this.target; //组件本身的事件和脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var address = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var address = this.target; //컴포넌트 자체의 이벤트와 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.Combox
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -135,7 +135,7 @@ MWF.xApplication.process.Xform.Address = MWF.APPAddress =  new Class(
             }
         }
         switch (i) {
-            case 0: //省
+            case 0: //시·도
                 o2.Actions.get("x_general_assemble_control").listProvince(function(json){
                     var list = [];
                     json.data.each(function(text){
@@ -165,7 +165,7 @@ MWF.xApplication.process.Xform.Address = MWF.APPAddress =  new Class(
                 //     if (list.length) if (callback) callback(list);
                 // });
                 break;
-            case 1: //市
+            case 1: //시
                 var item = this.combox.getFirst();
 
                 o2.Actions.get("x_general_assemble_control").listCity(item.data || item.value, function(json){
@@ -198,7 +198,7 @@ MWF.xApplication.process.Xform.Address = MWF.APPAddress =  new Class(
                 //     if (list.length) if (callback) callback(list);
                 // });
                 break;
-            case 2: //区
+            case 2: //구
                 var f = this.combox.getFirst();
                 var p = f.data || f.value;
                 var item = this.combox.getFirst().getNextItem();

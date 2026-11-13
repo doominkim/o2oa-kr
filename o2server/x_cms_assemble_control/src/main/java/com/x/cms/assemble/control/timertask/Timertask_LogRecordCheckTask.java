@@ -9,7 +9,7 @@ import com.x.cms.assemble.control.service.DocumentViewRecordServiceAdv;
 import com.x.cms.assemble.control.service.LogService;
 
 /**
- * 定时代理:定期对操作日志以及文档访问日志进行检查 用户操作日志，保留3年，或者最大100万条 文档访问日志，保留3年，或者最大100万条
+ * 예약 에이전트: 작업 로그와 문서 접근 로그를 주기적으로 점검 사용자 작업 로그는 3년 또는 최대 100만 건 보존 문서 접근 로그는 3년 또는 최대 100만 건 보존
  * 
  * @author O2LEE
  *
@@ -19,10 +19,10 @@ public class Timertask_LogRecordCheckTask extends AbstractJob {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Timertask_LogRecordCheckTask.class);
 	private LogService logService = new LogService();
 	private DocumentViewRecordServiceAdv documentViewRecordServiceAdv = new DocumentViewRecordServiceAdv();
-	private Integer stay_yearnum_operationLog = 1; // 保留1年
-	private Integer stay_yeanumr_viewRecord = 1; // 保留1年
-	private Integer stay_count_operationLog = 100000; // 保留100,000条
-	private Integer stay_count_viewRecord = 100000; // 保留100,000条
+	private Integer stay_yearnum_operationLog = 1; // 1년 보존
+	private Integer stay_yeanumr_viewRecord = 1; // 1년 보존
+	private Integer stay_count_operationLog = 100000; // 100,000건 보존
+	private Integer stay_count_viewRecord = 100000; // 100,000건 보존
 
 	@Override
 	public void schedule(JobExecutionContext jobExecutionContext) throws Exception {

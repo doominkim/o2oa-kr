@@ -29,7 +29,7 @@ import com.x.base.core.project.tools.DateTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Identity", description = "组织身份.")
+@Schema(name = "Identity", description = "조직 신분.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Identity.table, uniqueConstraints = {
@@ -51,15 +51,15 @@ public class Identity extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	@CheckRemove(citationNotExists = {
-			/** 不在组织职务 */
+			/** 조직 직무에 없음 */
 			@CitationNotExist(type = UnitDuty.class, fields = UnitDuty.identityList_FIELDNAME) })
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.pinyin = StringUtils.lowerCase(PinyinHelper.convertToPinyinString(name, "", PinyinFormat.WITHOUT_TONE));
@@ -69,37 +69,37 @@ public class Identity extends SliceJpaObject {
 		this.unique = StringUtils.isBlank(this.unique) ? id : unique;
 		this.distinguishedName = this.name + PersistenceProperties.distinguishNameSplit + this.unique
 				+ PersistenceProperties.distinguishNameSplit + PersistenceProperties.Identity.distinguishNameCharacter;
-		/** 生成默认排序号 */
+		/** 기본 정렬 번호 생성 */
 		if (null == this.orderNumber) {
 			this.orderNumber = DateTools.timeOrderNumber();
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/** 默认内容结束 */
+	/** 기본 내용 끝 */
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音,自动生成")
+	@FieldDescribe("name 병음, 자동 생성")
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母,自动生成")
+	@FieldDescribe("name 병음 첫 글자, 자동 생성")
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
 	private String pinyinInitial;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称,可重名.")
+	@FieldDescribe("이름, 중복 가능.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false)
@@ -107,7 +107,7 @@ public class Identity extends SliceJpaObject {
 
 	public static final String unique_FIELDNAME = "unique";
 	@Flag
-	@FieldDescribe("唯一标识,不可重复,为空则使用自动填充值")
+	@FieldDescribe("고유 식별자, 중복 불가, 비어 있으면 자동 채움 값 사용")
 	@Column(length = length_255B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false, citationNotExists = @CitationNotExist(fields = "unique", type = Identity.class))
@@ -115,56 +115,56 @@ public class Identity extends SliceJpaObject {
 
 	public static final String distinguishedName_FIELDNAME = "distinguishedName";
 	@Flag
-	@FieldDescribe("识别名.")
+	@FieldDescribe("식별명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + distinguishedName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + distinguishedName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String distinguishedName;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("身份所属个人,存放个人 ID,不为空.")
+	@FieldDescribe("신분 소유 개인, 개인 ID 저장, 비워 둘 수 없음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Person.class) })
 	private String person;
 
 	public static final String unit_FIELDNAME = "unit";
-	@FieldDescribe("属性所属组织,不可为空.")
+	@FieldDescribe("속성 소유 조직, 비워 둘 수 없음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + unit_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unit_FIELDNAME)
 	private String unit;
 
 	public static final String unitName_FIELDNAME = "unitName";
-	@FieldDescribe("组织名称.")
+	@FieldDescribe("조직 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + unitName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unitName_FIELDNAME)
 	private String unitName;
 
 	public static final String unitLevel_FIELDNAME = "unitLevel";
-	@FieldDescribe("组织级别.")
+	@FieldDescribe("조직 레벨.")
 	@Column(name = ColumnNamePrefix + unitLevel_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unitLevel_FIELDNAME)
 	private Integer unitLevel;
 
 	public static final String unitLevelName_FIELDNAME = "unitLevelName";
-	@FieldDescribe("显示的层级名.")
+	@FieldDescribe("표시 계층명.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_2K, name = ColumnNamePrefix + unitLevelName_FIELDNAME)
 	private String unitLevelName;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String major_FIELDNAME = "major";
-	@FieldDescribe("主身份标识")
+	@FieldDescribe("주 신분 식별")
 	@Column(name = ColumnNamePrefix + major_FIELDNAME)
 	private Boolean major;
 
-	/** flag标志位 */
+	/** flag 플래그 비트 */
 
 	// public static String[] FLA GS = new String[] { JpaObject.id_FIELDNAME,
 	// unique_FIELDNAME,

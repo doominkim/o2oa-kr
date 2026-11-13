@@ -73,7 +73,7 @@ public class StringValuePersistChecker extends AbstractChecker {
 	}
 
 	/**
-	 * 取消simply校验,因为其他语言比如西语在目前的校验规则下全是特殊字符.
+	 * simply 검증 취소, 스페인어 등 다른 언어는 현재 검증 규칙에서 모두 특수 문자로 처리되기 때문.
 	 * 
 	 * @param field
 	 * @param value

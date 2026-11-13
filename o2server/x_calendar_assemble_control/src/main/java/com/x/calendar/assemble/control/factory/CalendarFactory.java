@@ -20,7 +20,7 @@ import com.x.calendar.core.tools.CriteriaBuilderTools;
 
 
 /**
- * 日历账户信息表功能服务类
+ * 캘린더 계정 정보 테이블 기능 서비스 클래스
  * @author O2LEE
  */
 public class CalendarFactory extends AbstractFactory {
@@ -30,7 +30,7 @@ public class CalendarFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的日历账户配置信息对象
+	 * 지정한 Id의 캘린더 계정 설정 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -40,7 +40,7 @@ public class CalendarFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示全部的日历账户配置信息列表
+	 * 전체 캘린더 계정 설정 정보 목록 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -54,7 +54,7 @@ public class CalendarFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的日历账户配置信息列表
+	 * 지정한 Id의 캘린더 계정 설정 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -72,7 +72,7 @@ public class CalendarFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询指定的日历信息ID列表
+	 * 조건으로 지정한 캘린더 정보 ID 목록 조회
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
@@ -133,7 +133,7 @@ public class CalendarFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询我自己（可管理）的日历
+	 * 내(관리 가능한) 캘린더 조회
 	 * @param personName
 	 * @return
 	 * @throws Exception

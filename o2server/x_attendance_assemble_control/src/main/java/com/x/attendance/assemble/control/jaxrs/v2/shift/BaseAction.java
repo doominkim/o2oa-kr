@@ -15,7 +15,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
     protected void checkShiftProperties(AttendanceV2ShiftCheckTimeProperties properties) throws Exception {
         if (properties == null || properties.getTimeList() == null || properties.getTimeList().isEmpty()) {
-            throw new ExceptionEmptyParameter("班次上下班打卡时间");
+            throw new ExceptionEmptyParameter("근무조 출퇴근 체크 시간");
         }
         List<AttendanceV2ShiftCheckTime> timeList = properties.getTimeList();
         AttendanceV2ShiftCheckTime time1 = timeList.get(0);
@@ -28,10 +28,10 @@ abstract class BaseAction extends StandardJaxrsAction {
         }
     }
 
-    // 计算工作时长
+    // 근무 시간 계산
     protected long shiftWorkTime(AttendanceV2ShiftCheckTimeProperties properties) throws Exception {
         if (properties == null || properties.getTimeList() == null || properties.getTimeList().isEmpty()) {
-            throw new ExceptionEmptyParameter("班次上下班打卡时间");
+            throw new ExceptionEmptyParameter("근무조 출퇴근 체크 시간");
         }
         return AttendanceV2ShiftWorkTimeHelper.shiftWorkMinutes(properties);
     }
@@ -39,47 +39,47 @@ abstract class BaseAction extends StandardJaxrsAction {
 
     private void checkOnDutyTimeAndOffDutyTime(AttendanceV2ShiftCheckTime time) throws Exception {
         if (StringUtils.isEmpty(time.getOnDutyTime())) {
-            throw new ExceptionEmptyParameter("上班时间");
+            throw new ExceptionEmptyParameter("출근 시간");
         }
         if (StringUtils.isEmpty(time.getOffDutyTime())) {
-            throw new ExceptionEmptyParameter("下班时间");
+            throw new ExceptionEmptyParameter("퇴근 시간");
         }
         if (!AttendanceV2ShiftWorkTimeHelper.restPeriodAvailable(time.getRestPeriod())) {
-            throw new ExceptionOnDutyOffDuty("休息时间格式错误");
+            throw new ExceptionOnDutyOffDuty("휴식 시간 형식이 잘못되었습니다");
         }
         String onDuty = time.getOnDutyTime().replace(":", "");
         String offDuty = time.getOffDutyTime().replace(":", "");
         if (BooleanUtils.isTrue(time.getOffDutyNextDay())) {
             if (Integer.parseInt(offDuty) > Integer.parseInt(onDuty)) {
-                throw new ExceptionOnDutyOffDuty("跨天的下班时间不能大于上班时间");
+                throw new ExceptionOnDutyOffDuty("익일 퇴근 시간은 출근 시간보다 늦을 수 없습니다");
             }
         } else {
             if (Integer.parseInt(onDuty) > Integer.parseInt(offDuty)) {
-                throw new ExceptionOnDutyOffDuty("上班时间不能大于下班时间");
+                throw new ExceptionOnDutyOffDuty("출근 시간은 퇴근 시간보다 늦을 수 없습니다");
             }
         }
         if (StringUtils.isNotEmpty(time.getOnDutyTimeBeforeLimit())) {
             String onDutyBefore = time.getOnDutyTimeBeforeLimit().replace(":", "");
             if (Integer.parseInt(onDutyBefore) > Integer.parseInt(onDuty)) {
-                throw new ExceptionOnDutyOffDuty("上班前时间不能大于上班时间");
+                throw new ExceptionOnDutyOffDuty("출근 전 시간은 출근 시간보다 늦을 수 없습니다");
             }
         }
         if (StringUtils.isNotEmpty(time.getOnDutyTimeAfterLimit())) {
             String onDutyAfter = time.getOnDutyTimeAfterLimit().replace(":", "");
             if (Integer.parseInt(onDutyAfter) < Integer.parseInt(onDuty)) {
-                throw new ExceptionOnDutyOffDuty("上班后时间不能小于上班时间");
+                throw new ExceptionOnDutyOffDuty("출근 후 시간은 출근 시간보다 이를 수 없습니다");
             }
         }
         if (StringUtils.isNotEmpty(time.getOffDutyTimeBeforeLimit())) {
             String offDutyBefore = time.getOffDutyTimeBeforeLimit().replace(":", "");
             if (Integer.parseInt(offDutyBefore) > Integer.parseInt(offDuty)) {
-                throw new ExceptionOnDutyOffDuty("下班前时间不能大于下班时间");
+                throw new ExceptionOnDutyOffDuty("퇴근 전 시간은 퇴근 시간보다 늦을 수 없습니다");
             }
         }
         if (StringUtils.isNotEmpty(time.getOffDutyTimeAfterLimit())) {
             String offDutyAfter = time.getOffDutyTimeAfterLimit().replace(":", "");
             if (Integer.parseInt(offDutyAfter) < Integer.parseInt(offDuty)) {
-                throw new ExceptionOnDutyOffDuty("下班后时间不能小于下班时间");
+                throw new ExceptionOnDutyOffDuty("퇴근 후 시간은 퇴근 시간보다 이를 수 없습니다");
             }
         }
 

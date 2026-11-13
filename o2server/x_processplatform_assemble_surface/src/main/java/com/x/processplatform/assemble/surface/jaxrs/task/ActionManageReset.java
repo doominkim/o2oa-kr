@@ -15,7 +15,7 @@ class ActionManageReset extends BaseAction {
 //	private Task task;
 //	private List<String> existTaskIds = new ArrayList<>();
 
-	/** 将A的待办直接改为B的待办,转交 */
+	/** A의 결재 대기를 B의 결재 대기로 직접 변경, 전달 */
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String id, JsonElement jsonElement) throws Exception {
 		throw new ExceptionDeprecatedAction(V2Reset.class.getName());
 //		ActionResult<Wo> result = new ActionResult<>();
@@ -38,18 +38,18 @@ class ActionManageReset extends BaseAction {
 //				throw new ExceptionEntityNotExist(WorkLog.class);
 //			}
 //			existTaskIds = emc.idsEqual(Task.class, Task.job_FIELDNAME, task.getJob());
-//			/* 检查reset人员 */
+//			/* reset 사용자 검사 */
 //			List<String> identites = business.organization().identity().list(wi.getIdentityList());
 //			if (identites.isEmpty()) {
 //				throw new ExceptionIdentityEmpty();
 //			}
 //			wi.setIdentityList(identites);
 //			emc.beginTransaction(Task.class);
-//			/* 如果有选择新的路由那么覆盖之前的选择 */
+//			/* 새 경로를 선택하면 이전 선택을 덮어씀 */
 //			if (StringUtils.isNotEmpty(wi.getRouteName())) {
 //				task.setRouteName(wi.getRouteName());
 //			}
-//			/* 如果有新的流程意见那么覆盖流程意见 */
+//			/* 새 프로세스 의견이 있으면 프로세스 의견을 덮어씀 */
 //			if (StringUtils.isNotEmpty(wi.getOpinion())) {
 //				task.setOpinion(wi.getOpinion());
 //			}
@@ -69,7 +69,7 @@ class ActionManageReset extends BaseAction {
 //		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 //			final List<String> nextTaskIdentities = new ArrayList<>();
 //			record = new Record(workLog, task);
-//			// 校验workCompleted,如果存在,那么说明工作已经完成,标识状态为已经完成.
+//			// workCompleted 검사, 존재하면 업무 문서가 이미 완료된 것이므로 상태를 완료로 표시.
 //			WorkCompleted workCompleted = emc.firstEqual(WorkCompleted.class, WorkCompleted.job_FIELDNAME,
 //					task.getJob());
 //			if (null != workCompleted) {
@@ -85,7 +85,7 @@ class ActionManageReset extends BaseAction {
 //							Task.activity_FIELDNAME, Task.activityAlias_FIELDNAME, Task.activityName_FIELDNAME,
 //							Task.activityToken_FIELDNAME, Task.activityType_FIELDNAME, Task.identity_FIELDNAME));
 //			if (BooleanUtils.isNotFalse(wi.getKeep())) {
-//				// 不排除自己,那么把自己再加进去
+//				// 자신을 제외하지 않으면 자신을 다시 추가
 //				list.add(task);
 //			}
 //			list.stream().collect(Collectors.groupingBy(Task::getActivity, Collectors.toList())).entrySet().stream()
@@ -103,7 +103,7 @@ class ActionManageReset extends BaseAction {
 //						}
 //						record.getProperties().getNextManualList().add(nextManual);
 //					});
-//			/* 去重 */
+//			/* 중복 제거 */
 //			record.getProperties().setNextManualTaskIdentityList(ListTools.trim(nextTaskIdentities, true, true));
 //		}
 //		WoId resp = ThisApplication.context().applications()

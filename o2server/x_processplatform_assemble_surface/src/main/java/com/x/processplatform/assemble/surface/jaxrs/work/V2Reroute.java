@@ -54,7 +54,7 @@ class V2Reroute extends BaseAction {
 		processing(param);
 		Record rec = this.recordWorkProcessing(Record.TYPE_REROUTE, param.routeName, param.opinion, param.work.getJob(),
 				param.workLog.getId(),
-				// record一定记录一个处理人
+				// record는 반드시 처리자 하나를 기록
 				StringUtils.isEmpty(param.identity) ? effectivePerson.getDistinguishedName() : param.identity,
 				param.series);
 		Wo wo = Wo.copier.copy(rec);
@@ -95,7 +95,7 @@ class V2Reroute extends BaseAction {
 				throw new ExceptionEntityNotExist(WorkLog.class);
 			}
 			param.workLog = workLog;
-			// 兼容合并distinguishedNameList和manualForceTaskIdentityList
+			// distinguishedNameList와 manualForceTaskIdentityList 호환 병합
 			param.distinguishedNameList = business.organization().distinguishedName().list(Stream
 					.concat(Stream.<List<String>>of(wi.getDistinguishedNameList()),
 							Stream.<List<String>>of(wi.getManualForceTaskIdentityList()))

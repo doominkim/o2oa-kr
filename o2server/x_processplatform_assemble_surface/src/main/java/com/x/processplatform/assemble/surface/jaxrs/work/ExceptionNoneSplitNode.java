@@ -7,7 +7,7 @@ class ExceptionNoneSplitNode extends LanguagePromptException {
 	private static final long serialVersionUID = -7038279889683420366L;
 
 	ExceptionNoneSplitNode(String workId) {
-		super("无法找到工作经过的拆分节点:{}.", workId);
+		super("문서가 거친 분할 단계를 찾을 수 없습니다: {}.", workId);
 	}
 
 }

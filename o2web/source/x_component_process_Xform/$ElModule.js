@@ -1,5 +1,5 @@
 o2.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @classdesc $ElModule ElementUI组件类，此类为所有ElementUI组件的父类。
+/** @classdesc $ElModule ElementUI 컴포넌트 클래스, 모든 ElementUI 컴포넌트의 부모 클래스.
  * @class
  * @o2category FormComponents
  * @hideconstructor
@@ -11,34 +11,34 @@ o2.xApplication.process.Xform.$ElModule = MWF.APP$ElModule =  new Class(
     Extends: MWF.APP$Module,
     options: {
         /**
-         * 组件加载前触发。queryLoad执行的时候，当前组件没有在form里注册，通过this.form.get("fieldId")不能获取到当前组件，需要用this.target获取。
+         * 컴포넌트 로드 전 발생. queryLoad 실행 시점에는 현재 컴포넌트가 form에 등록되지 않아 this.form.get("fieldId")로 가져올 수 없으며, this.target으로 가져와야 함.
          * @event MWF.xApplication.process.Xform.$ElModule#queryLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 组件加载时触发.
+         * 컴포넌트 로드 시 발생.
          * @event MWF.xApplication.process.Xform.$ElModule#load
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 组件加载后触发.
+         * 컴포넌트 로드 후 발생.
          * @event MWF.xApplication.process.Xform.$ElModule#postLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         "elEvents": ["focus", "blur", "change", "input", "clear"]
     },
     /**
-     * @summary 组件的配置信息，同时也是Vue组件的data。
+     * @summary 컴포넌트 설정 정보이자 Vue 컴포넌트의 data.
      * @member MWF.xApplication.process.Xform.Elinput#json {JsonObject}
      * @example
-     *  //可以在脚本中获取此对象，下面两行代码是等价的，它们获取的是同一个对象
-     * var json = this.form.get("elinput").json;       //获取组件的json对象
-     * var json = this.form.get("elinput").vm.$data;   //获取Vue组件的data数据，
+     *  //스크립트에서 이 객체를 가져올 수 있으며, 아래 두 줄의 코드는 동일한 객체를 가져옴
+     * var json = this.form.get("elinput").json;       //컴포넌트의 json 객체 가져오기
+     * var json = this.form.get("elinput").vm.$data;   //Vue 컴포넌트의 data 데이터 가져오기,
      *
-     * //通过json对象操作Element组件
-     * json.size = "mini";      //改变输入框大小
-     * json.disabled = true;     //设置输入框为禁用
+     * //json 객체로 Element 컴포넌트 조작
+     * json.size = "mini";      //입력 상자 크기 변경
+     * json.disabled = true;     //입력 상자를 비활성화로 설정
      */
     load: function(){
         this._loadModuleEvents();
@@ -130,7 +130,7 @@ o2.xApplication.process.Xform.$ElModule = MWF.APP$ElModule =  new Class(
         if (!this.vueApp) this.vueApp = this._createVueExtend();
 
         /**
-         * @summary Vue对象实例
+         * @summary Vue 객체 인스턴스
          * @see https://vuejs.org/
          * @member {VueInstance}
          */
@@ -272,8 +272,8 @@ o2.xApplication.process.Xform.$ElModule = MWF.APP$ElModule =  new Class(
         var styleNode = $("style" + popperClass);
         if (!styleNode && cssText) {
 
-            cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 移除多行注释
-                .replace(/\\n/g, '');             // 移除\n
+            cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 여러 줄 주석 제거
+                .replace(/\\n/g, '');             // \n 제거
 
             cssText = this.form.parseCSS(cssText);
 

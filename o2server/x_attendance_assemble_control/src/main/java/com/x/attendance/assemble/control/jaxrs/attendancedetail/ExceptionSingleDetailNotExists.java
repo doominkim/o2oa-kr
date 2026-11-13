@@ -7,6 +7,6 @@ class ExceptionSingleDetailNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSingleDetailNotExists( ) {
-		super("根据人员和打卡日期查找员工打卡信息不存在！" );
+		super("해당 인원과 체크 날짜의 직원 체크 정보가 없습니다!" );
 	}
 }

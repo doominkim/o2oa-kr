@@ -21,23 +21,23 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("icon")
-@JaxrsDescribe("头像")
+@JaxrsDescribe("프로필 사진")
 /**
- * 用于无权限取得指定用户头像
+ * 권한 없이 지정 사용자의 프로필 사진 조회용
  **/
 public class IconAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(IconAction.class);
 
-	@JaxrsMethodDescribe(value = "获取个人头像.", action = ActionGetWithPerson.class)
+	@JaxrsMethodDescribe(value = "개인 프로필 사진 조회.", action = ActionGetWithPerson.class)
 	@GET
 	@Path("{person}")
 	/**
-	 多个适配外部取头像,比如阿里
+	 외부 프로필 사진 조회 다중 어댑터(예: 알리바바)
 	 * */
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_HTML })
 	public void getIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("person") String person) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("person") String person) {
 		ActionResult<ActionGetWithPerson.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

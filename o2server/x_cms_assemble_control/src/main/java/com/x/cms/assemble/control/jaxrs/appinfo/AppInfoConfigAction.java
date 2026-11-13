@@ -26,18 +26,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("appconfig")
-@JaxrsDescribe("信息发布(CMS)-栏目配置支持信息(APPINFOCONFIG)管理服务")
+@JaxrsDescribe("정보 발행(CMS)-게시판 설정 지원 정보(APPINFOCONFIG) 관리 서비스")
 public class AppInfoConfigAction extends StandardJaxrsAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(AppInfoConfigAction.class);
 
-	@JaxrsMethodDescribe(value = "更新栏目配置支持信息，JSON格式。", action = ActionSaveConfig.class)
+	@JaxrsMethodDescribe(value = "게시판 설정 지원 정보 갱신, JSON 형식.", action = ActionSaveConfig.class)
 	@POST
 	@Path("{appId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void save( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					  @JaxrsParameterDescribe("栏目ID") @PathParam("appId") String appId,
+					  @JaxrsParameterDescribe("게시판 ID") @PathParam("appId") String appId,
 					  JsonElement jsonElement ) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionSaveConfig.Wo> result = new ActionResult<>();
@@ -47,7 +47,7 @@ public class AppInfoConfigAction extends StandardJaxrsAction {
 				result = new ActionSaveConfig().execute( request, effectivePerson, appId, jsonElement );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAppInfoProcess(e, "栏目信息保存时发生异常。");
+				Exception exception = new ExceptionAppInfoProcess(e, "게시판 정보를 저장하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -55,20 +55,20 @@ public class AppInfoConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据栏目ID获取栏目配置支持信息对象.", action = ActionGetConfig.class)
+	@JaxrsMethodDescribe(value = "게시판 ID로 게시판 설정 지원 정보 객체 조회.", action = ActionGetConfig.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, 
-			@JaxrsParameterDescribe("栏目ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<WoText> result = new ActionResult<>();
 		try {
 			result = new ActionGetConfig().execute( request, effectivePerson, id );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionAppInfoProcess(e, "根据指定ID查询应用栏目配置支持信息时发生异常。id:" + id );
+			Exception exception = new ExceptionAppInfoProcess(e, "지정한 ID의 게시판 설정 정보를 조회하는 중 오류가 발생했습니다. id:" + id );
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}

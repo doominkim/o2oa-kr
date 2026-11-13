@@ -45,7 +45,7 @@ public class ActionShowStmForUnit extends BaseAction {
 				check = false;
 				result.error( e );
 				Exception exception = new ExceptionAttendanceStatisticProcess(e, 
-					"系统根据组织名称列表，年份和月份查询组织统计数据信息ID列表时发生异常.Name:"+name+", Year:"+year+", Month:" + month
+					"조직 이름 목록과 연월로 조직 통계 데이터 ID 목록을 조회하는 중 오류가 발생했습니다. Name:"+name+", Year:"+year+", Month:" + month
 				);
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
@@ -57,7 +57,7 @@ public class ActionShowStmForUnit extends BaseAction {
 					statisticUnitForMonth_list = attendanceStatisticServiceAdv.listUnitForMonth( ids );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceStatisticProcess( e, "系统根据ID列表查询组织每月统计数据信息列表时发生异常." );
+					Exception exception = new ExceptionAttendanceStatisticProcess( e, "ID 목록으로 조직 월별 통계 데이터 목록을 조회하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -70,7 +70,7 @@ public class ActionShowStmForUnit extends BaseAction {
 					result.setData(wraps);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceStatisticProcess( e, "系统将所有查询到的组织每月统计信息对象转换为可以输出的信息时发生异常." );
+					Exception exception = new ExceptionAttendanceStatisticProcess( e, "조회된 조직 월별 통계 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}

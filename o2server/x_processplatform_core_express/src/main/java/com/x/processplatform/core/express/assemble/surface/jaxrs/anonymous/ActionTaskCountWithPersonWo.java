@@ -9,8 +9,8 @@ public class ActionTaskCountWithPersonWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 8792811593252273112L;
 
-	@FieldDescribe("待办数量.")
-	@Schema(description = "待办数量.")
+	@FieldDescribe("결재 대기 수량.")
+	@Schema(description = "결재 대기 수량.")
 	private Long count = 0L;
 
 	public Long getCount() {

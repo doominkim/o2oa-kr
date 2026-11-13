@@ -40,12 +40,12 @@ public class GeneralFileAction extends StandardJaxrsAction {
 
 	@Operation(summary = "获取通用附件.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGet.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "获取附件.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "첨부파일 조회.", action = ActionGet.class)
 	@GET
 	@Path("flag/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -57,13 +57,13 @@ public class GeneralFileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载附件.", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "첨부파일 다운로드.", action = ActionDownload.class)
 	@GET
 	@Path("download/flag/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("*附件标志") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("是否直接下载(true|false)") @QueryParam("stream") Boolean stream) {
+			@JaxrsParameterDescribe("*첨부파일 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("바로 다운로드 여부(true|false)") @QueryParam("stream") Boolean stream) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -75,7 +75,7 @@ public class GeneralFileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "base64转文件.", action = ActionBase64ToFile.class)
+	@JaxrsMethodDescribe(value = "base64를 파일로 변환.", action = ActionBase64ToFile.class)
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -92,13 +92,13 @@ public class GeneralFileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取文件Base64编码后的内容.", action = ActionGetBase64.class)
+	@JaxrsMethodDescribe(value = "파일의 Base64 인코딩 내용 조회.", action = ActionGetBase64.class)
 	@GET
 	@Path("flag/{flag}/binary/base64")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getBase64(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetBase64.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

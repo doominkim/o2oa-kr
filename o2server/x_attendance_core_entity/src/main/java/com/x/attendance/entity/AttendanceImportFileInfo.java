@@ -26,7 +26,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceImportFileInfo", description = "考勤雇员配置.")
+@Schema(name = "AttendanceImportFileInfo", description = "근태 직원 설정.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceImportFileInfo.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceImportFileInfo.table
@@ -46,7 +46,7 @@ public class AttendanceImportFileInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -56,20 +56,20 @@ public class AttendanceImportFileInfo extends SliceJpaObject {
 
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + "_lastUpdateTime")
@@ -77,14 +77,14 @@ public class AttendanceImportFileInfo extends SliceJpaObject {
 	private Date lastUpdateTime;
 
 	public static final String fileName_FIELDNAME = "fileName";
-	@FieldDescribe("文件真实名称")
+	@FieldDescribe("파일 실제 이름")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ fileName_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
 	private String fileName = "";
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件真实名称")
+	@FieldDescribe("파일 실제 이름")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
@@ -93,7 +93,7 @@ public class AttendanceImportFileInfo extends SliceJpaObject {
 	public static final String fileBody_FIELDNAME = "fileBody";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("文件内容, 10M大约可以存储50万行Excel")
+	@FieldDescribe("파일 내용, 10M에 약 50만 행 Excel 저장 가능")
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + fileBody_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private byte[] fileBody;
@@ -101,7 +101,7 @@ public class AttendanceImportFileInfo extends SliceJpaObject {
 	public static final String dataContent_FIELDNAME = "dataContent";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("文件数据JSON内容, 10M大约可以存储50万行Excel")
+	@FieldDescribe("파일 데이터 JSON 내용, 10M에 약 50만 행 Excel 저장 가능")
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + dataContent_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String dataContent;
@@ -109,95 +109,95 @@ public class AttendanceImportFileInfo extends SliceJpaObject {
 	public static final String errorContent_FIELDNAME = "errorContent";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("错误数据JSON内容, 10M大约可以存储50万行Excel")
+	@FieldDescribe("오류 데이터 JSON 내용, 10M에 약 50만 행 Excel 저장 가능")
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + errorContent_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String errorContent;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("文件说明")
+	@FieldDescribe("파일 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = "";
 
 	public static final String creatorUid_FIELDNAME = "creatorUid";
-	@FieldDescribe("创建者UID")
+	@FieldDescribe("생성자 UID")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + creatorUid_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorUid = "";
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名")
+	@FieldDescribe("확장자")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
 	private String extension = "xlsx";
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length = 0L;
 
 	public static final String rowCount_FIELDNAME = "rowCount";
-	@FieldDescribe("记录行数.")
+	@FieldDescribe("레코드 행 수.")
 	@Column(name = ColumnNamePrefix + rowCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long rowCount = 0L;
 
 	public static final String fileStatus_FIELDNAME = "fileStatus";
-	@FieldDescribe("文件状态:new|imported.")
+	@FieldDescribe("파일 상태:new|imported.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + fileStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fileStatus = "new";
 
 	public static final String tempFilePath_FIELDNAME = "tempFilePath";
-	@FieldDescribe("临时文件地址")
+	@FieldDescribe("임시 파일 주소")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + tempFilePath_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String tempFilePath = null;
 
 	public static final String currentProcessName_FIELDNAME = "currentProcessName";
-	@FieldDescribe("当前数据处理操作步骤:GETDATA|CHECKDATA|SAVEDATA|SUPPLEMENT|ANALYSIS")
+	@FieldDescribe("현재 데이터 처리 단계:GETDATA|CHECKDATA|SAVEDATA|SUPPLEMENT|ANALYSIS")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + currentProcessName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String currentProcessName = "NONE";
 
 	public static final String validateOk_FIELDNAME = "validateOk";
-	@FieldDescribe("数据校验结果")
+	@FieldDescribe("데이터 검증 결과")
 	@Column(name = ColumnNamePrefix + validateOk_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean validateOk = false;
 
 	public static final String processing_FIELDNAME = "processing";
-	@FieldDescribe("数据操作状态")
+	@FieldDescribe("데이터 처리 상태")
 	@Column(name = ColumnNamePrefix + processing_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean processing = false;
 
 	public static final String recordTotle_FIELDNAME = "recordTotle";
-	@FieldDescribe("数据总量")
+	@FieldDescribe("데이터 총량")
 	@Column(name = ColumnNamePrefix + recordTotle_FIELDNAME)
 	private Long recordTotle = 0L;
 
 	public static final String processCount_FIELDNAME = "processCount";
-	@FieldDescribe("当前数据操作数量")
+	@FieldDescribe("현재 데이터 처리 수량")
 	@Column(name = ColumnNamePrefix + processCount_FIELDNAME)
 	private Long processCount = 0L;
 
 	public static final String startDate_FIELDNAME = "startDate";
-	@FieldDescribe("数据开始日期")
+	@FieldDescribe("데이터 시작 날짜")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + startDate_FIELDNAME)
 	private Date startDate = null;
 
 	public static final String endDate_FIELDNAME = "endDate";
-	@FieldDescribe("数据结束日期")
+	@FieldDescribe("데이터 종료 날짜")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + endDate_FIELDNAME)
 	private Date endDate = null;
 
 	public static final String site_FIELDNAME = "site";
-	@FieldDescribe("附件框分类.")
+	@FieldDescribe("첨부파일 상자 분류.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + site_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String site;
@@ -275,7 +275,7 @@ public class AttendanceImportFileInfo extends SliceJpaObject {
 	}
 
 	/**
-	 * 附件控件框
+	 * 첨부파일 컨트롤 상자
 	 * 
 	 * @return
 	 */

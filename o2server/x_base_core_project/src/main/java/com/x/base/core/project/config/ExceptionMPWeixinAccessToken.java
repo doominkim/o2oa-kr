@@ -11,6 +11,6 @@ public class ExceptionMPWeixinAccessToken extends PromptException {
     private static final long serialVersionUID = 5430065198687029845L;
 
     public ExceptionMPWeixinAccessToken(Integer code, String message) {
-        super("获取微信公众号  access token 失败,错误代码:{}, 错误消息:{}.", new Object[]{code, message});
+        super("WeChat 공식 계정 access token을 가져오지 못했습니다. 오류 코드: {}, 오류 메시지: {}.", new Object[]{code, message});
     }
 }

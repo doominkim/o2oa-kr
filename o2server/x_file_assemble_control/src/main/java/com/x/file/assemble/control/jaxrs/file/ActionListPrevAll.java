@@ -25,7 +25,7 @@ class ActionListPrevAll extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		static WrapCopier<File, Wo> copier = WrapCopierFactory.wo(File.class, Wo.class,

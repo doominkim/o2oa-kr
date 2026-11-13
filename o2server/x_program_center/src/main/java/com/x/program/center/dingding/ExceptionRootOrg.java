@@ -7,6 +7,6 @@ class ExceptionRootOrg extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionRootOrg(Integer retCode, String retMessage) {
-		super("钉钉获取根组织失败,错误代码:{},错误消息:{}.", retCode, retMessage);
+		super("DingTalk에서 최상위 조직을 가져오지 못했습니다, 오류 코드: {}, 오류 메시지: {}.", retCode, retMessage);
 	}
 }

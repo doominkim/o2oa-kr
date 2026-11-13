@@ -46,17 +46,17 @@ public class ActionLeaveRequestSearch extends BaseAction {
                 }
             }
             if (userList.isEmpty()) {
-                logger.warn("没有找到人员信息，查询条件：{0}", wi.getFilterList());
+                logger.warn("사용자 정보를 찾을 수 없습니다. 조회 조건: {0}", wi.getFilterList());
                 result.setData(new ArrayList<>());
                 return result;
             }
             Date startDate = null;
             if (wi.getStartDate() != null && !wi.getStartDate().isEmpty()) {
-                startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 检查格式
+                startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 형식 검사
             }
             Date endDate = null;
             if (wi.getEndDate() != null && !wi.getEndDate().isEmpty()) {
-                endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 检查格式
+                endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 형식 검사
             }
             if (startDate != null && endDate != null && startDate.after(endDate)) {
                 throw new ExceptionDateEndBeforeStartError();
@@ -67,7 +67,7 @@ public class ActionLeaveRequestSearch extends BaseAction {
             List<AttendanceV2LeaveType> leaveTypeList = getLeaveTypeList(null);
             List<Wo> wos = list.stream().map(request -> {
                 Wo wo = Wo.copier.copy(request);
-                // 设置假期类型
+                // 휴가 유형 설정
                 for (AttendanceV2LeaveType type : leaveTypeList) {
                     if (type.getId().equals(request.getLeaveTypeId())) {
                         wo.setLeaveType(type);
@@ -82,7 +82,7 @@ public class ActionLeaveRequestSearch extends BaseAction {
         }
     }
 
-    // 根据人员、时间查询请假申请 分页查询
+    // 사용자·시간으로 휴가 신청 페이지 조회
     private List<AttendanceV2LeaveRequest> findRequestWithPersonAndTime(List<String> userList, Date startDate,
             Date endDate, EntityManagerContainer emc, Integer adjustPage, Integer adjustPageSize) throws Exception {
         EntityManager em = emc.get(AttendanceV2LeaveRequest.class);
@@ -99,7 +99,7 @@ public class ActionLeaveRequestSearch extends BaseAction {
         cq.select(root).where(p).orderBy(cb.desc(root.get(AttendanceV2LeaveRequest_.createTime)));
         return em.createQuery(cq).setFirstResult((adjustPage - 1) * adjustPageSize).setMaxResults(adjustPageSize).getResultList();
     }
-    // 根据人员、时间查询请假申请数量
+    // 사용자·시간으로 휴가 신청 수 조회
     private Long countRequestWithPersonAndTime(List<String> userList, Date startDate,
             Date endDate, EntityManagerContainer emc) throws Exception {
         EntityManager em = emc.get(AttendanceV2LeaveRequest.class);
@@ -120,16 +120,16 @@ public class ActionLeaveRequestSearch extends BaseAction {
     public static class Wi extends GsonPropertyObject {
         private static final long serialVersionUID = 8433642169523374771L;
 
-        @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
 
-        @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+        @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
         private Boolean recursive;
 
-        @FieldDescribe("开始日期")
+        @FieldDescribe("시작 날짜")
         private String startDate;
 
-        @FieldDescribe("结束日期")
+        @FieldDescribe("종료 날짜")
         private String endDate;
 
         public List<String> getFilterList() {

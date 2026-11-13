@@ -19,7 +19,7 @@ MWF.xApplication.Attendance.MyDetail = new Class({
     },
     load: function(){
         //options = {
-        //    "name": "直接主管",
+        //    "name": "직속 상사",
         //        "personName": this.workContext.getWork().creatorPerson
         //}
         //return this.org.getPersonAttribute(options);
@@ -52,7 +52,7 @@ MWF.xApplication.Attendance.MyDetail = new Class({
                 this.detailPage.textNode.removeClass( "mainColor_color" );
             }.bind(this));
 
-            //this.selfHolidayPage = this.tabs.addTab(this.selfHolidayArea, "我的休假明细", false);
+            //this.selfHolidayPage = this.tabs.addTab(this.selfHolidayArea, "내 휴가 상세", false);
             //this.selfHolidayPage.contentNodeArea.set("class","selfHolidayPage");
             //this.selfHolidayPage.addEvent("show",function(){
             //    if( !this.selfHoliday ){
@@ -76,7 +76,7 @@ MWF.xApplication.Attendance.MyDetail = new Class({
                 this.detailStaticPage.textNode.removeClass( "mainColor_color" );
             }.bind(this));
 
-            //this.selfHolidayStaticPage = this.tabs.addTab(this.selfHolidayStaticArea, "我的休假统计", false);
+            //this.selfHolidayStaticPage = this.tabs.addTab(this.selfHolidayStaticArea, "내 휴가 통계", false);
             //this.selfHolidayStaticPage.contentNodeArea.set("class","selfHolidayStaticPage");
             //this.selfHolidayStaticPage.addEvent("show",function(){
             //    if( !this.selfHolidayStaticExplorer ){
@@ -134,7 +134,7 @@ MWF.xApplication.Attendance.MyDetail.Explorer = new Class({
     loadConfig : function(){
         this.config = {};
         var v;
-        //需要判断申述类型listSetting2020年6月16日 by gee
+        //이의 신청 유형 listSetting 판단 필요 2020-06-16 by gee
         this.configSetting = new Object(null);
         this.actions.listSetting(function(json){
             var data = json.data;
@@ -308,7 +308,7 @@ MWF.xApplication.Attendance.MyDetail.Explorer = new Class({
     //},
     //createYearSelectTd : function( tr ){
     //    var _self = this;
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "年度"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "연도"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.cycleYear = new MDomItem( td, {
     //        "name" : "cycleYear",
@@ -329,7 +329,7 @@ MWF.xApplication.Attendance.MyDetail.Explorer = new Class({
     //},
     //createMonthSelectTd : function( tr ){
     //    var _self = this;
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "月份"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "월"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.cycleMonth = new MDomItem( td, {
     //        "name" : "cycleMonth",
@@ -348,7 +348,7 @@ MWF.xApplication.Attendance.MyDetail.Explorer = new Class({
     //createDateSelectTd : function( tr ){
     //    var _self = this;
     //    if( tr ){
-    //        var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "日期"  }).inject(tr);
+    //        var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "날짜"  }).inject(tr);
     //        this.dateSelecterTd = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    }
     //    if( this.q_date ){
@@ -375,53 +375,53 @@ MWF.xApplication.Attendance.MyDetail.Explorer = new Class({
     //    this.q_date.load();
     //},
     //createIsAbsent: function(tr){
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "缺勤"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "결근"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.isAbsent = new MDomItem( td, {
     //        "name" : "isAbsent",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","缺勤","未缺勤"],
+    //        "selectText" : ["","결근","결근 아님"],
     //    }, true, this.app );
     //    this.isAbsent.load();
     //},
     ////createIsLeaveEarlier: function(tr){
-    ////    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "早退"  }).inject(tr);
+    ////    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "조퇴"  }).inject(tr);
     ////    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     ////    this.isLeaveEarlier = new MDomItem( td, {
     ////        "name" : "isLeaveEarlier",
     ////        "type" : "select",
     ////        "selectValue" : ["-1","true","false"],
-    ////        "selectText" : ["","早退","未早退"],
+    ////        "selectText" : ["","조퇴","조퇴 아님"],
     ////    }, true, this.app );
     ////    this.isLeaveEarlier.load();
     ////},
     //createLackOfTimeCount: function(tr){
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "工时不足"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "근무 시간 부족"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.isLackOfTime = new MDomItem( td, {
     //        "name" : "isLackOfTime",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","是","否"],
+    //        "selectText" : ["","예","아니요"],
     //    }, true, this.app );
     //    this.isLackOfTime.load();
     //},
     //createIsLate: function(tr){
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "迟到"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "지각"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.isLate  = new MDomItem( td, {
     //        "name" : "isLate",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","迟到","未迟到"],
+    //        "selectText" : ["","지각","지각 아님"],
     //    }, true, this.app );
     //    this.isLate.load();
     //},
     //createActionTd : function( tr ){
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    var input = new Element("button",{
-    //        "text" : "查询",
+    //        "text" : "조회",
     //        "styles" : this.css.filterButton
     //    }).inject(td);
     //    input.addEvent("click", function(){
@@ -463,7 +463,7 @@ MWF.xApplication.Attendance.MyDetail.Explorer = new Class({
     //selecePerson: function(){
     //    var options = {
     //        "type": "person",
-    //        "title": "选择人员",
+    //        "title": "사용자 선택",
     //        "count" : "1",
     //        "onComplete": function(items){
     //            var names = [];
@@ -1001,7 +1001,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
             if( d.isGetSelfHolidays && ( d.selfHolidayDayTime == "下午" || d.selfHolidayDayTime == appLp.pm ) ){
                 status.push( appLp.levelAsked );
                 //}else if(d.isLeaveEarlier){
-                //    status.push( '早退')
+                //    status.push( '조퇴')
             }else if(d.isAbsent && ( d.absentDayTime == "下午" || d.absentDayTime == appLp.pm ) ){
                 status.push( appLp.abNormalDuty)
             }else if(d.isAbnormalDuty && ( d.abnormalDutyDayTime == "下午" || d.abnormalDutyDayTime == appLp.pm ) ){
@@ -1019,11 +1019,11 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
             appealStatus = appLp.deny
         }
         //if (d.appealStatus == 1) {
-        //    appealStatus = "申诉中"
+        //    appealStatus = "이의 신청 중"
         //} else if (d.appealStatus == -1) {
-        //    appealStatus = "申诉未通过"
+        //    appealStatus = "이의 신청 반려"
         //} else if (d.appealStatus == 9) {
-        //    appealStatus = "申诉通过"
+        //    appealStatus = "이의 신청 승인"
         //}
         this.data.appealStatusShow = appealStatus;
 
@@ -1087,7 +1087,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
                 statusShow : {  text: appLp.attendanceStatus, type : "innertext" },
                 appealStatusShow : { text: appLp.appealStatus, type : "innertext"},
                 //processPerson1 : {
-                //    text : "审核人", type : "select", selectValue : auditors, selectText : function(){
+                //    text : "검토자", type : "select", selectValue : auditors, selectText : function(){
                 //        var array = [];
                 //        auditors.each( function( a ){ array.push(a.split("@")[0] ) } );
                 //        return array;
@@ -1180,7 +1180,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
     },
     getAuditor : function(){
         var lp = MWF.xApplication.Attendance.LP;
-        //获取设置
+        //설정 조회
         var setting = {};
         var result = [];
         this.app.restActions.listSetting(function(json){
@@ -1218,7 +1218,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
                             }else{
                                 var text = lp.noUnitDutyNotice.replace("{unit}",unit.name).replace("{duty}",setting.APPEAL_AUDITOR_VALUE.configValue);
                                 this.app.notice( text, "error");
-                                // this.app.notice("系统中没有配置"+unit.name+"的"+setting.APPEAL_AUDITOR_VALUE.configValue+"职位，请联系管理员", "error");
+                                // this.app.notice("시스템에 "+unit.name+"의 "+setting.APPEAL_AUDITOR_VALUE.configValue+" 직위가 설정되어 있지 않습니다. 관리자에게 문의하십시오", "error");
                             }
                         }.bind(this),null ,false)
                     }.bind(this))
@@ -1295,7 +1295,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
             this._ok( data )
         }
         //}else{
-        //    this.app.notice( "请填写申诉原因和具体描述", "error");
+        //    this.app.notice( "이의 신청 사유와 상세 설명을 입력하십시오", "error");
         //}
     },
     _ok: function( data ){
@@ -1327,7 +1327,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
     //    this.getUnitByPerson( function( unitData ){
     //        this.app.restActions.listPermission( function(json){
     //            if( json.data.length == 0 ){
-    //                this.app.notice( "系统未配置考勤员，请联系管理员！", "error");
+    //                this.app.notice( "시스템에 근태 담당자가 설정되어 있지 않습니다. 관리자에게 문의하십시오!", "error");
     //                return;
     //            }
     //            var unitManager, topUnitManager, processer;
@@ -1341,7 +1341,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
     //            })
     //            processer = unitManager || topUnitManager;
     //            if( !processer ){
-    //                this.app.notice( "未设置您所在部门和公司的考勤管理员，请联系系统管理员！", "error");
+    //                this.app.notice( "소속 부서와 회사의 근태 관리자가 설정되어 있지 않습니다. 시스템 관리자에게 문의하십시오!", "error");
     //            }else{
     //                if(callback)callback(processer)
     //            }

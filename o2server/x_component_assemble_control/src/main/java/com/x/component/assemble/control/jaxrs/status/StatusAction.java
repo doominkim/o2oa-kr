@@ -36,9 +36,9 @@ public class StatusAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "StatusAction::";
 
-	@Operation(summary = "获取所有模块信息,并分类可见与不可见.", operationId = OPERATIONID_PREFIX + "list", responses = {
+	@Operation(summary = "모든 모듈 정보 조회, 표시/비표시로 분류.", operationId = OPERATIONID_PREFIX + "list", responses = {
 			@ApiResponse(content = @Content(schema = @Schema(implementation = ActionList.Wo.class))) })
-	@JaxrsMethodDescribe(value = "获取所有模块信息,并分类可见与不可见.", action = ActionList.class, scope = DescribeScope.commonly)
+	@JaxrsMethodDescribe(value = "모든 모듈 정보 조회, 표시/비표시로 분류.", action = ActionList.class, scope = DescribeScope.commonly)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

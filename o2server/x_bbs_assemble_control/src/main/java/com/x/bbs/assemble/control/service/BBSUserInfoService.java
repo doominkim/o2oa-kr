@@ -15,7 +15,7 @@ import com.x.bbs.assemble.control.Business;
 import com.x.bbs.entity.BBSUserInfo;
 
 /**
- * 用户信息管理服务类
+ * 사용자 정보 관리 서비스 클래스
  *
  * @author LIYI
  *
@@ -25,7 +25,7 @@ public class BBSUserInfoService {
 	private static Logger logger = LoggerFactory.getLogger(BBSUserInfoService.class);
 
 	/**
-	 * 根据传入的ID从数据库查询BBSUserInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSUserInfo 객체 조회
 	 *
 	 * @param id
 	 * @return
@@ -43,7 +43,7 @@ public class BBSUserInfoService {
 	}
 
 	/**
-	 * 根据传入的用户姓名从数据库查询BBSUserInfo对象
+	 * 전달된 사용자 이름으로 데이터베이스에서 BBSUserInfo 객체 조회
 	 *
 	 * @param id
 	 * @return
@@ -71,7 +71,7 @@ public class BBSUserInfoService {
 	}
 
 	/**
-	 * 向数据库保存BBSUserInfo对象
+	 * 데이터베이스에 BBSUserInfo 객체 저장
 	 *
 	 * @param wrapIn
 	 */
@@ -100,7 +100,7 @@ public class BBSUserInfoService {
 				for (int i = 0; i < userInfoList.size(); i++) {
 					userInfo = userInfoList.get(i);
 					if (i == 0) {
-						_bBSUserInfo.copyTo(userInfo, JpaObject.FieldsUnmodify);// 第一条更新，其他删除
+						_bBSUserInfo.copyTo(userInfo, JpaObject.FieldsUnmodify);// 첫 건은 갱신, 나머지는 삭제
 						emc.check(userInfo, CheckPersistType.all);
 					} else {
 						logger.info("user info more than 1, remove one......");
@@ -117,7 +117,7 @@ public class BBSUserInfoService {
 	}
 
 	/**
-	 * 向数据库保存BBSUserInfo对象
+	 * 데이터베이스에 BBSUserInfo 객체 저장
 	 *
 	 * @param wrapIn
 	 */
@@ -148,7 +148,7 @@ public class BBSUserInfoService {
 					if (i == 0) {
 						userInfo.setOnline(true);
 						userInfo.setLastVisitTime(new Date());
-						userInfo.setPermissionContent(_bBSUserInfo.getPermissionContent());// 第一条更新，其他删除
+						userInfo.setPermissionContent(_bBSUserInfo.getPermissionContent());// 첫 건은 갱신, 나머지는 삭제
 						emc.check(userInfo, CheckPersistType.all);
 					} else {
 						emc.remove(userInfo, CheckRemoveType.all);
@@ -164,7 +164,7 @@ public class BBSUserInfoService {
 	}
 
 	/**
-	 * 向数据库保存BBSUserInfo对象
+	 * 데이터베이스에 BBSUserInfo 객체 저장
 	 *
 	 * @param wrapIn
 	 */
@@ -201,7 +201,7 @@ public class BBSUserInfoService {
 	}
 
 	/**
-	 * 根据ID从数据库中删除BBSUserInfo对象
+	 * ID로 데이터베이스에서 BBSUserInfo 객체 삭제
 	 *
 	 * @param id
 	 * @throws Exception
@@ -212,7 +212,7 @@ public class BBSUserInfoService {
 			throw new Exception("id is null, system can not delete any object.");
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			bBSUserInfo = emc.find(id, BBSUserInfo.class);
 			emc.beginTransaction(BBSUserInfo.class);
 			if (null == bBSUserInfo) {
@@ -227,7 +227,7 @@ public class BBSUserInfoService {
 	}
 
 	/**
-	 * 根据userName从数据库中删除BBSUserInfo对象
+	 * userName으로 데이터베이스에서 BBSUserInfo 객체 삭제
 	 *
 	 * @param userName
 	 * @throws Exception
@@ -240,7 +240,7 @@ public class BBSUserInfoService {
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			bBSUserInfoList = business.userInfoFactory().listByUserName(userName);
 			if (ListTools.isNotEmpty(bBSUserInfoList)) {
 				emc.beginTransaction(BBSUserInfo.class);
@@ -331,7 +331,7 @@ public class BBSUserInfoService {
 					if (i == 0) {
 						userInfo.setOnline(false);
 						emc.check(userInfo, CheckPersistType.all);
-					} else {// 删除一个以上的同名用户信息
+					} else {// 동일 이름의 사용자 정보가 하나 이상이면 삭제
 						emc.remove(userInfo, CheckRemoveType.all);
 					}
 				}

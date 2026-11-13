@@ -7,6 +7,6 @@ class ExceptionConversationNotExist extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionConversationNotExist() {
-		super("会话不存在！");
+		super("대화방이 없습니다!");
 	}
 }

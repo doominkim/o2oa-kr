@@ -145,7 +145,7 @@ o2.xDesktop.requireApp = function (module, clazz, callback, async) {
         o2.require("o2.widget.UUID", function () {
             var work = data.work;
             var options = {"draft": work, "appId": "process.Work"+(new o2.widget.UUID).toString(), "desktopReload": false};
-            //先修改当前url为配置的门户地址
+            //먼저 현재 url을 설정된 포털 주소로 변경
             if (redirect) {
                 history.replaceState(null, "startProcess", redirect);
   
@@ -168,7 +168,7 @@ o2.xDesktop.requireApp = function (module, clazz, callback, async) {
         if (currentTask.length == 1) {
             var options = { "workId": currentTask[0], "appId": currentTask[0] };
   
-            //先修改当前url为配置的门户地址
+            //먼저 현재 url을 설정된 포털 주소로 변경
             if (redirect) {
                 history.replaceState(null, "startProcess", redirect);
   
@@ -192,7 +192,7 @@ o2.xDesktop.requireApp = function (module, clazz, callback, async) {
             }
             var appName="process.Work", m_status=null;
             options.redirectlink = redirectlink; 
-            layout.app = null;//创建工作界面
+            layout.app = null;//업무 문서 화면 생성
             layout.openApplication(null, appName, options, m_status);
         }, true);
     };
@@ -225,7 +225,7 @@ o2.xDesktop.requireApp = function (module, clazz, callback, async) {
 
 o2.addReady(function () {
 
-    //兼容方法
+    //호환 메서드
     Element.implement({
         "makeLnk": function (options) { }
     });
@@ -262,7 +262,7 @@ o2.addReady(function () {
         }
     };
 
-    //异步载入必要模块
+    //필요한 모듈 비동기 로드
     layout.config = null;
     var configLoaded = false;
     var lpLoaded = false;
@@ -314,7 +314,7 @@ o2.addReady(function () {
 
     var _load = function () {
         var _loadApp = function (json) {
-            //用户已经登录
+            //사용자 로그인 완료
             layout.user = json.data;
             //layout.session = {};
             layout.session.user = json.data;
@@ -377,25 +377,25 @@ o2.addReady(function () {
             })(layout);
         };
 
-        // 是否ip
+        // ip 여부
         var _isIp = function(ip) {
             var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
             return reg.test(ip);
         };
-        //修改支持x-token
+        //x-token 지원 수정
         var uri = new URI(window.location.href);
         var options = uri.get("data");
         // if (options[o2.tokenName]) {
-        //     // 删除
+        //     // 삭제
         //     Cookie.dispose(o2.tokenName);
-        //     // 写入
-        //     var host = window.location.hostname; // 域名
+        //     // 쓰기
+        //     var host = window.location.hostname; // 도메인
         //     var domain = null;
         //     if (_isIp(host)) {
         //         domain = host;
         //     }else {
         //         if (host.indexOf(".") > 0) {
-        //             domain = host.substring(host.indexOf(".")); // 上级域名 如 .o2oa.net
+        //             domain = host.substring(host.indexOf(".")); // 상위 도메인 예: .o2oa.net
         //         }
         //     }
         //     if (domain) {
@@ -405,9 +405,9 @@ o2.addReady(function () {
         //     }
         // }
 
-        //先判断用户是否登录
+        //먼저 사용자 로그인 여부 확인
         o2.Actions.get("x_organization_assemble_authentication").getAuthentication(function (json) {
-            //已经登录
+            //이미 로그인됨
             _loadProgressBar();
             _loadApp(json);
         }.bind(this), function (json) {
@@ -465,7 +465,7 @@ o2.addReady(function () {
                 };
                 action.invoke({
                     "name": "sso", "async": true, "parameter": { "code": uri.getData("code") }, "success": function (json) {
-                        //基础数据。。。。
+                        //기본 데이터...
                         layout.session.user = json.data;
                         //
                         _load();

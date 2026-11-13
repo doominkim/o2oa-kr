@@ -25,7 +25,7 @@ MWF.xApplication.Minder.Actions.RestActions2 = new Class({
 
 			var async = (option.async===false) ? false : true;
 
-			var progress = (option.progress===false) ? false : true; //控制是否显示进度条
+			var progress = (option.progress===false) ? false : true; //진행 표시줄 표시 여부 제어
 
 			var callback = new MWF.xDesktop.Actions.RestActions.Callback(option.success, option.failure);
 			if (action.enctype && (action.enctype.toLowerCase()=="formdata")){

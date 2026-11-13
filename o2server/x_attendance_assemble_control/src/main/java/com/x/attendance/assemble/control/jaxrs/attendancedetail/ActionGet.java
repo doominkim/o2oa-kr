@@ -41,7 +41,7 @@ public class ActionGet extends BaseAction {
 				attendanceDetail = attendanceDetailServiceAdv.get(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在根据ID查询员工打卡信息时发生异常！ID:" + id);
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "ID로 직원 체크 정보를 조회하는 중 오류가 발생했습니다! ID:" + id);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -57,12 +57,12 @@ public class ActionGet extends BaseAction {
 			try {
 				wrap = Wo.copier.copy(attendanceDetail);
 
-				//判断并补充申诉信息
+				//이의 신청 정보 확인 및 보완
 				List<AttendanceAppealInfo> appealInfos = null;
 				AttendanceAppealAuditInfo appealAuditInfo = null;
 				List<WoAttendanceAppealInfo> woAppealInfos = null;
 				if( wrap.getAppealStatus() != 0 ){
-					//十有八九已经提过申诉了，查询申诉信息
+					//십중팔구 이미 이의 신청했으므로 이의 신청 정보 조회
 					appealInfos = attendanceAppealInfoServiceAdv.listWithDetailId( wrap.getId() );
 					if(ListTools.isNotEmpty( appealInfos ) ){
 						woAppealInfos = WoAttendanceAppealInfo.copier.copy( appealInfos );
@@ -81,7 +81,7 @@ public class ActionGet extends BaseAction {
 				result.setData(wrap);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工打卡信息为输出对象时发生异常.");
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -96,7 +96,7 @@ public class ActionGet extends BaseAction {
 		public static WrapCopier<AttendanceDetail, Wo> copier = WrapCopierFactory.wo(AttendanceDetail.class, Wo.class,
 				null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe("考勤申诉内容")
+		@FieldDescribe("근태 이의 신청 내용")
 		private List<WoAttendanceAppealInfo> appealInfos = null;
 
 		public List<WoAttendanceAppealInfo> getAppealInfos() { return appealInfos; }

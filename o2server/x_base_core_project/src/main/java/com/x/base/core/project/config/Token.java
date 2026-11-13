@@ -45,9 +45,9 @@ public class Token extends ConfigObject {
 
 	public static final Boolean DEFAULT_RSAENABLE = false;
 
-	// 此对象临时计算无需存储
+	// 이 객체는 임시 계산용으로 저장 불필요
 	private transient String _cipher = "";
-	// 此对象临时计算无需存储
+	// 이 객체는 임시 계산용으로 저장 불필요
 	private transient String _password = "";
 
 	public static Token defaultInstance() {
@@ -63,39 +63,39 @@ public class Token extends ConfigObject {
 		this.rsaEnable = DEFAULT_RSAENABLE;
 	}
 
-	// 加密用的key,用于加密口令
-	@FieldDescribe("加密用口令的密钥,修改后会导致用户口令验证失败.")
+	// 암호화용 key, 비밀번호 암호화에 사용
+	@FieldDescribe("비밀번호 암호화용 비밀 키, 변경 시 사용자 비밀번호 검증 실패 발생.")
 	private String key;
 
-	@FieldDescribe("初始管理员密码,用于内部数据库和FTP文件服务器,以及http的token加密.")
+	@FieldDescribe("초기 관리자 비밀번호, 내부 데이터베이스와 FTP 파일 서버, http의 token 암호화에 사용.")
 	private String password;
 
-	@FieldDescribe("ssl密码")
+	@FieldDescribe("ssl 비밀번호")
 	private String sslKeyStorePassword;
 
-	@FieldDescribe("ssl管理密码")
+	@FieldDescribe("ssl 관리 비밀번호")
 	private String sslKeyManagerPassword;
 
-	@FieldDescribe("LDAP认证配置")
+	@FieldDescribe("LDAP 인증 설정")
 	private LdapAuth ldapAuth;
 
-	@FieldDescribe("sso登录配置")
+	@FieldDescribe("sso 로그인 설정")
 	private List<Sso> ssos = new ArrayList<>();
 
-	@FieldDescribe("oauth单点登录配置")
+	@FieldDescribe("oauth SSO 설정")
 	private List<Oauth> oauths = new ArrayList<>();
 
-	@FieldDescribe("作为客户端单点登录配置")
+	@FieldDescribe("클라이언트로서의 SSO 설정")
 	private List<OauthClient> oauthClients = new ArrayList<>();
 
-	@FieldDescribe("启用rsa加密.")
+	@FieldDescribe("rsa 암호화 사용.")
 	private Boolean rsaEnable = DEFAULT_RSAENABLE;
 
 	public Boolean getRsaEnable() {
 		return null == this.rsaEnable ? DEFAULT_RSAENABLE : this.rsaEnable;
 	}
 
-	// 前面的代码是 key+surfix 结果是nullo2platform
+	// 앞의 코드는 key+surfix 결과는 nullo2platform
 	public String getKey() {
 		String val = Objects.toString(key, "") + surfix;
 		return StringUtils.substring(val, 0, 8);
@@ -405,19 +405,19 @@ public class Token extends ConfigObject {
 
 		}
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable;
 
-		@FieldDescribe("客户端名称")
+		@FieldDescribe("클라이언트 이름")
 		private String clientId;
 
-		@FieldDescribe("密钥")
+		@FieldDescribe("비밀 키")
 		private String clientSecret;
 
-		@FieldDescribe("登录地址")
+		@FieldDescribe("로그인 주소")
 		private String loginUrl;
 
-		@FieldDescribe("返回值")
+		@FieldDescribe("반환값")
 		private Map<String, String> mapping;
 
 		public String getClientId() {
@@ -499,47 +499,47 @@ public class Token extends ConfigObject {
 			this.bindingField = "";
 		}
 
-		@FieldDescribe("是否启用.")
+		@FieldDescribe("사용 여부.")
 		private Boolean enable = false;
-		@FieldDescribe("名称.")
+		@FieldDescribe("이름.")
 		private String name = "";
-		@FieldDescribe("显示名称.")
+		@FieldDescribe("표시 이름.")
 		private String displayName = "";
-		@FieldDescribe("图标.")
+		@FieldDescribe("아이콘.")
 		private String icon = "";
-		@FieldDescribe("用户oauth2认证的client_id.")
+		@FieldDescribe("사용자 oauth2 인증의 client_id.")
 		private String clientId = "";
-		@FieldDescribe("用户oauth2认证的client_secret.")
+		@FieldDescribe("사용자 oauth2 인증의 client_secret.")
 		private String clientSecret = "";
-		@FieldDescribe("认证后的跳转地址.")
+		@FieldDescribe("인증 후 이동 주소.")
 		private String authAddress = "";
-		@FieldDescribe("请求密钥方法参数.")
+		@FieldDescribe("키 요청 메서드 파라미터.")
 		private String authParameter = "";
-		@FieldDescribe("请求密钥方法.一般为GET")
+		@FieldDescribe("키 요청 메서드. 일반적으로 GET")
 		private String authMethod = "GET";
-		@FieldDescribe("请求令牌网址.")
+		@FieldDescribe("토큰 요청 URL.")
 		private String tokenAddress = "";
-		@FieldDescribe("请求令牌方法参数.")
+		@FieldDescribe("토큰 요청 메서드 파라미터.")
 		private String tokenParameter = "";
-		@FieldDescribe("请求令牌方法.一般为POST")
+		@FieldDescribe("토큰 요청 메서드. 일반적으로 POST")
 		private String tokenMethod = "POST";
-		@FieldDescribe("token信息格式.json格式或者form格式")
+		@FieldDescribe("token 정보 형식. json 형식 또는 form 형식")
 		private String tokenType = "json";
-		@FieldDescribe("请求信息网址.")
+		@FieldDescribe("정보 요청 URL.")
 		private String infoAddress = "";
-		@FieldDescribe("请求信息方法参数.")
+		@FieldDescribe("정보 요청 메서드 파라미터.")
 		private String infoParameter = "";
-		@FieldDescribe("请求信息方法.一般为GET")
+		@FieldDescribe("정보 요청 메서드. 일반적으로 GET")
 		private String infoMethod = "GET";
-		@FieldDescribe("info信息格式.json格式或者form格式或者script格式")
+		@FieldDescribe("info 정보 형식. json 형식, form 형식 또는 script 형식")
 		private String infoType = "json";
-		@FieldDescribe("info信息中用于标识个人的字段.")
+		@FieldDescribe("info 정보에서 개인을 식별하는 필드.")
 		private String infoCredentialField = "username";
-		@FieldDescribe("info信息中用于标识个人的字段.")
+		@FieldDescribe("info 정보에서 개인을 식별하는 필드.")
 		private String infoScriptText = "";
-		@FieldDescribe("是否允许绑定到用户,如果允许,用户可以自行绑定.")
+		@FieldDescribe("사용자 바인딩 허용 여부, 허용 시 사용자가 직접 바인딩 가능.")
 		private Boolean bindingEnable = false;
-		@FieldDescribe("绑定字段,对端的用户标识,一般为openId绑定到个人字段,可选值为open1Id,open2Id,open3Id,open4Id,open5Id")
+		@FieldDescribe("바인딩 필드, 상대측 사용자 식별자, 일반적으로 openId를 개인 필드에 바인딩, 선택 가능 값은 open1Id,open2Id,open3Id,open4Id,open5Id")
 		private String bindingField = "";
 
 		public String getDisplayName() {
@@ -724,13 +724,13 @@ public class Token extends ConfigObject {
 			this.key = "";
 		}
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable;
 
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String client;
 
-		@FieldDescribe("密钥")
+		@FieldDescribe("비밀 키")
 		private String key;
 
 		public String getClient() {
@@ -773,22 +773,22 @@ public class Token extends ConfigObject {
 			this.userDn = "";
 		}
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable;
 
-		@FieldDescribe("LDAP服务器如：ldap://127.0.0.1:389")
+		@FieldDescribe("LDAP 서버 예:ldap://127.0.0.1:389")
 		private String ldapUrl;
 
-		@FieldDescribe("BindDn用户(需有管理权限的用户)，如：cn=root")
+		@FieldDescribe("BindDn 사용자(관리 권한이 있는 사용자), 예:cn=root")
 		private String bindDnUser;
 
-		@FieldDescribe("BindDn用户的密码")
+		@FieldDescribe("BindDn 사용자의 비밀번호")
 		private String bindDnPwd;
 
-		@FieldDescribe("LDAP查询的根名称如：dc=zone,DC=COM")
+		@FieldDescribe("LDAP 조회 루트 이름 예:dc=zone,DC=COM")
 		private String baseDn;
 
-		@FieldDescribe("认证用户绑定属性：uid、手机号、员工编码或邮箱(需确保在baseDn下查找到的数据是唯一的并且在o2能查到关联人员)")
+		@FieldDescribe("인증 사용자 바인딩 속성:uid, 휴대폰 번호, 직원 번호 또는 이메일(baseDn에서 조회된 데이터가 유일하고 o2에서 연결된 사용자를 찾을 수 있어야 함)")
 		private String userDn;
 
 		public Boolean getEnable() {

@@ -28,12 +28,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("document")
-@JaxrsDescribe("信息发布信息文档管理")
+@JaxrsDescribe("정보 게시 정보 문서 관리")
 public class DocumentAction extends StandardJaxrsAction {
 
     private static final Logger logger = LoggerFactory.getLogger(DocumentAction.class);
 
-    @JaxrsMethodDescribe(value = "变更指定文档的分类信息.", action = ActionPersistChangeCategory.class)
+    @JaxrsMethodDescribe(value = "지정 문서의 분류 정보 변경.", action = ActionPersistChangeCategory.class)
     @PUT
     @Path("category/change")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,7 +51,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "变更指定文档的分类信息.", action = ActionPersistChangeCategory.class)
+    @JaxrsMethodDescribe(value = "지정 문서의 분류 정보 변경.", action = ActionPersistChangeCategory.class)
     @POST
     @Path("category/change/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -69,7 +69,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "指修改指定文档的数据。", action = ActionPersistBatchModifyData.class)
+    @JaxrsMethodDescribe(value = "지정 문서의 데이터만 수정.", action = ActionPersistBatchModifyData.class)
     @PUT
     @Path("batch/data/modify")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -87,7 +87,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "指修改指定文档的数据。", action = ActionPersistBatchModifyData.class)
+    @JaxrsMethodDescribe(value = "지정 문서의 데이터만 수정.", action = ActionPersistBatchModifyData.class)
     @POST
     @Path("batch/data/modify/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -105,14 +105,14 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据导入批次号查询导入状态信息.", action = ActionQueryImportStatusWithName.class)
+    @JaxrsMethodDescribe(value = "가져오기 배치 번호로 가져오기 상태 정보 조회.", action = ActionQueryImportStatusWithName.class)
     @GET
     @Path("batch/{batchName}/status")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_checkImportStatus(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("导入批次号") @PathParam("batchName") String batchName) {
+            @JaxrsParameterDescribe("가져오기 배치 번호") @PathParam("batchName") String batchName) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<DataImportStatus> result = new ActionResult<>();
         try {
@@ -124,7 +124,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询所有的导入状态信息.", action = ActionQueryAllImportStatus.class)
+    @JaxrsMethodDescribe(value = "전체 가져오기 상태 정보 조회.", action = ActionQueryAllImportStatus.class)
     @GET
     @Path("batch/status")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -142,13 +142,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID获取信息发布文档信息对象详细信息，包括附件列表，数据信息.", action = ActionQueryGetDocument.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 게시 문서 정보 객체 상세 조회, 첨부파일 목록과 데이터 정보 포함.", action = ActionQueryGetDocument.class)
     @GET
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionQueryGetDocument.Wo> result = new ActionResult<>();
         try {
@@ -160,7 +160,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示文档对象可供排序和展示使用的列名.", action = ActionQueryListDocumentFields.class)
+    @JaxrsMethodDescribe(value = "정렬과 표시에 사용할 수 있는 문서 객체 열 이름 목록.", action = ActionQueryListDocumentFields.class)
     @GET
     @Path("document/fields")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -178,13 +178,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID访问信息发布文档信息对象详细信息，包括附件列表，数据信息.", action = ActionQueryViewDocument.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 게시 문서 정보 객체 상세 접근, 첨부파일 목록과 데이터 정보 포함.", action = ActionQueryViewDocument.class)
     @GET
     @Path("{id}/view")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_view(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionQueryViewDocument.Wo> result = new ActionResult<>();
         try {
@@ -196,13 +196,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID获取信息发布文档信息被访问次数.", action = ActionQueryCountViewTimes.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 게시 문서 정보 조회 횟수 조회.", action = ActionQueryCountViewTimes.class)
     @GET
     @Path("{id}/view/count")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_getViewCount(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionQueryCountViewTimes.Wo> result = new ActionResult<>();
         try {
@@ -214,7 +214,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询符合过滤条件的已发布的信息数量.", action = ActionQueryCountWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 수 조회.", action = ActionQueryCountWithFilter.class)
     @PUT
     @Path("filter/count")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -232,7 +232,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "查询符合过滤条件的已发布的信息数量.", action = ActionQueryCountWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 수 조회.", action = ActionQueryCountWithFilter.class)
     @POST
     @Path("filter/count/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -250,13 +250,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID删除信息发布文档信息.", action = ActionPersistDeleteDocument.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 게시 문서 정보 삭제.", action = ActionPersistDeleteDocument.class)
     @DELETE
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistDeleteDocument.Wo> result = new ActionResult<>();
         try {
@@ -268,14 +268,14 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID删除信息发布文档信息.", action = ActionPersistDeleteDocument.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 게시 문서 정보 삭제.", action = ActionPersistDeleteDocument.class)
     @GET
     @Path("{id}/mockdeletetoget")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistDeleteDocument.Wo> result = new ActionResult<>();
         try {
@@ -287,14 +287,14 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据批次号删除信息发布文档信息.", action = ActionPersistDeleteWithBatch.class)
+    @JaxrsMethodDescribe(value = "배치 번호로 정보 게시 문서 정보 삭제.", action = ActionPersistDeleteWithBatch.class)
     @DELETE
     @Path("batch/{batchId}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_deleteWithBatchName(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("batchId") String batchId) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("batchId") String batchId) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistDeleteWithBatch.Wo> result = new ActionResult<>();
         try {
@@ -306,14 +306,14 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据批次号删除信息发布文档信息.", action = ActionPersistDeleteWithBatch.class)
+    @JaxrsMethodDescribe(value = "배치 번호로 정보 게시 문서 정보 삭제.", action = ActionPersistDeleteWithBatch.class)
     @GET
     @Path("batch/{batchId}/mockdeletetoget")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_deleteWithBatchNameMockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("batchId") String batchId) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("batchId") String batchId) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistDeleteWithBatch.Wo> result = new ActionResult<>();
         try {
@@ -325,13 +325,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID归档信息发布文档信息.", action = ActionPersistArchive.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 게시 문서 정보 보관.", action = ActionPersistArchive.class)
     @GET
     @Path("achive/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_achive(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistArchive.Wo> result = new ActionResult<>();
         try {
@@ -343,13 +343,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据文档ID正式发布文档，消息通过publishNotify接口发送。", action = ActionPersistPublishAndNotify.class)
+    @JaxrsMethodDescribe(value = "문서ID로 문서 정식 게시, 메시지는 publishNotify 인터페이스로 발송.", action = ActionPersistPublishAndNotify.class)
     @PUT
     @Path("publish/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_publishAndNotify(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
             JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistPublishAndNotify.Wo> result = new ActionResult<>();
@@ -362,13 +362,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据文档ID正式发布文档，消息通过publishNotify接口发送。", action = ActionPersistPublishAndNotify.class)
+    @JaxrsMethodDescribe(value = "문서ID로 문서 정식 게시, 메시지는 publishNotify 인터페이스로 발송.", action = ActionPersistPublishAndNotify.class)
     @POST
     @Path("publish/{id}/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_publishAndNotifyMockPutToPost(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
             JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistPublishAndNotify.Wo> result = new ActionResult<>();
@@ -381,7 +381,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "直接发布信息内容，创建新的信息发布文档并且直接发布.", action = ActionPersistPublishContent.class)
+    @JaxrsMethodDescribe(value = "정보 내용 바로 게시, 새 정보 게시 문서를 생성하고 바로 게시.", action = ActionPersistPublishContent.class)
     @PUT
     @Path("publish/content")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -399,7 +399,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "直接发布信息内容，创建新的信息发布文档并且直接发布.", action = ActionPersistPublishContent.class)
+    @JaxrsMethodDescribe(value = "정보 내용 바로 게시, 새 정보 게시 문서를 생성하고 바로 게시.", action = ActionPersistPublishContent.class)
     @POST
     @Path("publish/content/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -417,13 +417,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID取消信息内容发布状态，修改为草稿.", action = ActionPersistPublishCancel.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 내용 게시 상태를 취소하고 초안으로 변경.", action = ActionPersistPublishCancel.class)
     @PUT
     @Path("publish/{id}/cancel")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_publishCancel(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistPublishCancel.Wo> result = new ActionResult<>();
         try {
@@ -435,14 +435,14 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据ID取消信息内容发布状态，修改为草稿.", action = ActionPersistPublishCancel.class)
+    @JaxrsMethodDescribe(value = "ID로 정보 내용 게시 상태를 취소하고 초안으로 변경.", action = ActionPersistPublishCancel.class)
     @POST
     @Path("publish/{id}/cancel/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_publishCancelMockPutToPost(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistPublishCancel.Wo> result = new ActionResult<>();
         try {
@@ -454,15 +454,15 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示符合过滤条件的已发布的信息内容, 下一页.", action = ActionQueryListNextWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 목록, 다음 페이지.", action = ActionQueryListNextWithFilter.class)
     @PUT
     @Path("filter/list/{id}/next/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listNextWithFilter(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-            @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+            @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListNextWithFilter.Wo>> result = new ActionResult<>();
         try {
@@ -474,15 +474,15 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示符合过滤条件的已发布的信息内容, 下一页.", action = ActionQueryListNextWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 목록, 다음 페이지.", action = ActionQueryListNextWithFilter.class)
     @POST
     @Path("filter/list/{id}/next/{count}/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listNextWithFilterMockPutToPost(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-            @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+            @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListNextWithFilter.Wo>> result = new ActionResult<>();
         try {
@@ -494,15 +494,15 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示符合过滤条件的已发布的信息内容, 上一页.", action = ActionQueryListPrevWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 목록, 이전 페이지.", action = ActionQueryListPrevWithFilter.class)
     @PUT
     @Path("filter/list/{id}/prev/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listPrevWithFilter(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-            @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+            @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListPrevWithFilter.Wo>> result = new ActionResult<>();
         try {
@@ -514,15 +514,15 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示符合过滤条件的已发布的信息内容, 上一页.", action = ActionQueryListPrevWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 목록, 이전 페이지.", action = ActionQueryListPrevWithFilter.class)
     @POST
     @Path("filter/list/{id}/prev/{count}/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listPrevWithFilterMockPutToPost(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-            @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+            @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListPrevWithFilter.Wo>> result = new ActionResult<>();
         try {
@@ -534,15 +534,15 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示符合过滤条件的草稿信息内容, 下一页.", action = ActionQueryListDraftNextWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 초안 정보 내용 목록, 다음 페이지.", action = ActionQueryListDraftNextWithFilter.class)
     @PUT
     @Path("draft/list/{id}/next/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listDraftNextWithFilter(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-            @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+            @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListDraftNextWithFilter.Wo>> result = new ActionResult<>();
         try {
@@ -555,15 +555,15 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示符合过滤条件的草稿信息内容, 下一页.", action = ActionQueryListDraftNextWithFilter.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 초안 정보 내용 목록, 다음 페이지.", action = ActionQueryListDraftNextWithFilter.class)
     @POST
     @Path("draft/list/{id}/next/{count}/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listDraftNextWithFilterMockPutToPost(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-            @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+            @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListDraftNextWithFilter.Wo>> result = new ActionResult<>();
         try {
@@ -576,7 +576,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "保存信息发布文档信息对象.", action = ActionPersistSaveDocument.class)
+    @JaxrsMethodDescribe(value = "정보 게시 문서 정보 객체 저장.", action = ActionPersistSaveDocument.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -593,13 +593,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "文档点赞.", action = ActionPersistCommend.class)
+    @JaxrsMethodDescribe(value = "문서 좋아요.", action = ActionPersistCommend.class)
     @GET
     @Path("{id}/commend")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_commend(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistCommend.Wo> result = new ActionResult<>();
         try {
@@ -611,13 +611,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "取消文档点赞.", action = ActionPersistUnCommend.class)
+    @JaxrsMethodDescribe(value = "문서 좋아요 취소.", action = ActionPersistUnCommend.class)
     @GET
     @Path("{id}/uncommend")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_unCommend(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistUnCommend.Wo> result = new ActionResult<>();
         try {
@@ -629,13 +629,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "文档置顶.", action = ActionPersistTopDocument.class)
+    @JaxrsMethodDescribe(value = "문서 상단 고정.", action = ActionPersistTopDocument.class)
     @GET
     @Path("{id}/top")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_top(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistTopDocument.Wo> result = new ActionResult<>();
         try {
@@ -647,13 +647,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "取消文档置顶.", action = ActionPersistUnTopDocument.class)
+    @JaxrsMethodDescribe(value = "문서 상단 고정 취소.", action = ActionPersistUnTopDocument.class)
     @GET
     @Path("{id}/unTop")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void persist_unTop(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPersistUnTopDocument.Wo> result = new ActionResult<>();
         try {
@@ -665,14 +665,14 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "分页查询符合过滤条件的已发布的信息内容.", action = ActionQueryListWithFilterPaging.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 페이지 조회.", action = ActionQueryListWithFilterPaging.class)
     @PUT
     @Path("filter/list/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listWithFilterPaging(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListWithFilterPaging.Wo>> result = new ActionResult<>();
         try {
@@ -685,14 +685,14 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "分页查询符合过滤条件的已发布的信息内容.", action = ActionQueryListWithFilterPaging.class)
+    @JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 페이지 조회.", action = ActionQueryListWithFilterPaging.class)
     @POST
     @Path("filter/list/{page}/size/{size}/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_listWithFilterPagingMockPutToPost(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListWithFilterPaging.Wo>> result = new ActionResult<>();
         try {
@@ -705,13 +705,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "获取文件访问控制信息.", action = ActionQueryGetControl.class)
+    @JaxrsMethodDescribe(value = "파일 접근 제어 정보 조회.", action = ActionQueryGetControl.class)
     @GET
     @Path("{id}/control")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_getControl(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionQueryGetControl.Wo> result = new ActionResult<>();
         try {
@@ -723,13 +723,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取文件可见范围内的所有人员.", action = ActionQueryListVisiblePersons.class)
+    @JaxrsMethodDescribe(value = "파일 공개 범위 내의 모든 사용자 조회.", action = ActionQueryListVisiblePersons.class)
     @GET
     @Path("{id}/persons")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_getVisiblePersons(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionQueryListVisiblePersons.Wo> result = new ActionResult<>();
         try {
@@ -741,13 +741,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询当前用户是否有阅读文档的权限.", action = ActionQueryPermissionReadDocument.class)
+    @JaxrsMethodDescribe(value = "현재 사용자의 문서 열람 권한 여부 조회.", action = ActionQueryPermissionReadDocument.class)
     @GET
     @Path("{id}/permission/read")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_PermissionReadDocument(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionQueryPermissionReadDocument.Wo> result = new ActionResult<>();
         try {
@@ -759,7 +759,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示文档数据.", action = ActionQueryListDocumentData.class)
+    @JaxrsMethodDescribe(value = "문서 데이터 목록.", action = ActionQueryListDocumentData.class)
     @POST
     @Path("list/document/data")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -777,7 +777,7 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "列示文档.", action = ActionQueryListDocument.class)
+    @JaxrsMethodDescribe(value = "문서 목록.", action = ActionQueryListDocument.class)
     @POST
     @Path("list/document")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -795,13 +795,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "查看文档数据.", action = ActionQueryGetDocumentData.class)
+    @JaxrsMethodDescribe(value = "문서 데이터 조회.", action = ActionQueryGetDocumentData.class)
     @GET
     @Path("{id}/document/data")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void query_getDocumentData(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionQueryGetDocumentData.Wo> result = new ActionResult<>();
         try {
@@ -813,15 +813,15 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "管理员分页查询符合过滤条件的已发布的信息内容.", action = ActionQueryListWithFilterPagingAdmin.class)
+    @JaxrsMethodDescribe(value = "관리자용 필터 조건에 맞는 게시된 정보 내용 페이지 조회.", action = ActionQueryListWithFilterPagingAdmin.class)
     @POST
     @Path("filter/list/{page}/size/{size}/manager")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void managerQuery_listWithFilterPaging(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<List<ActionQueryListWithFilterPagingAdmin.Wo>> result = new ActionResult<>();
         try {
@@ -834,13 +834,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "已发布文档消息通知。", action = ActionNotify.class)
+    @JaxrsMethodDescribe(value = "게시된 문서 메시지 알림.", action = ActionNotify.class)
     @POST
     @Path("{id}/notify")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void publishNotify(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionNotify.Wo> result = new ActionResult<>();
         try {
@@ -852,13 +852,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "已发布文档发送html文本到webServer下。", action = ActionPublishHtml.class)
+    @JaxrsMethodDescribe(value = "게시된 문서 html 텍스트를 webServer로 발송.", action = ActionPublishHtml.class)
     @POST
     @Path("{id}/publish/html")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void publishHtml(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionPublishHtml.Wo> result = new ActionResult<>();
         try {
@@ -870,13 +870,13 @@ public class DocumentAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "更新文档信息。", action = ActionUpdateDocument.class)
+    @JaxrsMethodDescribe(value = "문서 정보 수정.", action = ActionUpdateDocument.class)
     @POST
     @Path("{id}/update")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionUpdateDocument.Wo> result = new ActionResult<>();
         try {

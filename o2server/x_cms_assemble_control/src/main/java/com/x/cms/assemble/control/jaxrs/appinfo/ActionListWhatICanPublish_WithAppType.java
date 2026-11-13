@@ -33,7 +33,7 @@ public class ActionListWhatICanPublish_WithAppType extends BaseAction {
 			isXAdmin = userManagerService.isManager( effectivePerson );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionAppInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+			Exception exception = new ExceptionAppInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -49,7 +49,7 @@ public class ActionListWhatICanPublish_WithAppType extends BaseAction {
 					wos_out = listPublishAbleAppInfoByPermission( personName, isAnonymous, null,"全部", appType, isXAdmin, 1000 );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAppInfoProcess(e, "系统在根据用户权限查询所有可见的分类信息时发生异常。Name:" + personName);
+					Exception exception = new ExceptionAppInfoProcess(e, "사용자 권한으로 볼 수 있는 전체 분류 정보를 조회하는 중 오류가 발생했습니다. Name:" + personName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -61,7 +61,7 @@ public class ActionListWhatICanPublish_WithAppType extends BaseAction {
 							wo.setConfig( appInfoServiceAdv.getConfigJson( wo.getId() ) );
 						} catch (Exception e) {
 							check = false;
-							Exception exception = new ExceptionAppInfoProcess(e, "系统根据ID查询栏目配置支持信息时发生异常。ID=" + wo.getId() );
+							Exception exception = new ExceptionAppInfoProcess(e, "ID로 게시판 설정 정보를 조회하는 중 오류가 발생했습니다. ID=" + wo.getId() );
 							result.error(exception);
 							logger.error(e, effectivePerson, request, null);
 						}
@@ -69,7 +69,7 @@ public class ActionListWhatICanPublish_WithAppType extends BaseAction {
 						wos.add( wo );
 //					}
 				}
-				//按appInfoSeq列的值， 排个序
+				//appInfoSeq 열 값으로 정렬
 				SortTools.asc( wos, "appInfoSeq");
 				CacheManager.put(cacheCategory, cacheKey, wos);
 				result.setData( wos );

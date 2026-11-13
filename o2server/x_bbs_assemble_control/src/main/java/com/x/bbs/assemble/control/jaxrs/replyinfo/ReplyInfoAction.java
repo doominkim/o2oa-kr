@@ -33,18 +33,18 @@ import com.x.bbs.assemble.control.jaxrs.replyinfo.exception.ExceptionReplyIdEmpt
 import com.x.bbs.assemble.control.jaxrs.replyinfo.exception.ExceptionReplyInfoProcess;
 
 @Path("reply")
-@JaxrsDescribe("回复查询服务")
+@JaxrsDescribe("답글 조회 서비스")
 public class ReplyInfoAction extends StandardJaxrsAction {
 	private static Logger logger = LoggerFactory.getLogger(ReplyInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的ReplyInfo, 下一页.", action = ActionListWithSubjectForPage.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 ReplyInfo 목록, 다음 페이지.", action = ActionListWithSubjectForPage.class)
 	@PUT
 	@Path("filter/list/page/{page}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithSubjectForPage(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("页码") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页显示条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListWithSubjectForPage.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -68,7 +68,7 @@ public class ReplyInfoAction extends StandardJaxrsAction {
 				result = new ActionListWithSubjectForPage().execute(request, effectivePerson, page, count, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionReplyInfoProcess(e, "列示根据过滤条件的ReplyInfo下一页时发生异常！");
+				Exception exception = new ExceptionReplyInfoProcess(e, "필터 조건으로 ReplyInfo 다음 페이지를 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -76,13 +76,13 @@ public class ReplyInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据指定ID获取回贴信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 ID로 답글 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("回复信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("답글 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -99,7 +99,7 @@ public class ReplyInfoAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据指定ID获取回贴信息时发生异常！");
+				Exception exception = new ExceptionReplyInfoProcess(e, "지정한 ID로 댓글 정보를 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -107,13 +107,13 @@ public class ReplyInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据回复内容ID 查询 针对该回帖的回复内容的列表.", action = ActionListWithReply.class)
+	@JaxrsMethodDescribe(value = "답글 ID로 해당 답글에 대한 답글 목록 조회.", action = ActionListWithReply.class)
 	@GET
 	@Path("list/sub/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSubRepliesWithReply(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("回复信息ID") @PathParam("id") String id) {
+					@JaxrsParameterDescribe("답글 정보 ID") @PathParam("id") String id) {
 		ActionResult<List<ActionListWithReply.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -130,7 +130,7 @@ public class ReplyInfoAction extends StandardJaxrsAction {
 				result = new ActionListWithReply().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据回复内容ID 查询 针对该回帖的回复内容的列表！");
+				Exception exception = new ExceptionReplyInfoProcess(e, "댓글 ID로 해당 댓글의 답글 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

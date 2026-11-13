@@ -8,12 +8,12 @@ public class WeLinkMessage extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -5678682987495247923L;
 	/**
-	 * { "msgRange": 0,0：按用户推送 必填 "toUserList": ["john@welink", "john@1234"], 用户列表
-	 * 必填 "msgTitle": "{"EN": "hello world", "CN": "你好"}", //标题 必填
-	 * 只有中文就直接写入标题字符串就行不需要json "msgContent": "{"CN": "欢迎使用", "EN":"Welcome"}",
-	 * //消息内容 必填 只有中文就直接写入标题字符串就行不需要json "urlType": "html", //这两个参数是消息超链接用的
-	 * 但是目前只支持小程序 不支持轻应用 "urlPath": "h5://demo.com", "msgOwner": "流程平台", 消息所有者 必填
-	 * "createTime": "1487289600000" 创建时间 }
+	 * { "msgRange": 0,0: 사용자별 푸시 필수 "toUserList": ["john@welink", "john@1234"], 사용자 목록
+	 * 필수 "msgTitle": "{"EN": "hello world", "CN": "안녕하세요"}", //제목 필수
+	 * 중국어만 있으면 제목 문자열을 직접 쓰면 되며 json 불필요 "msgContent": "{"CN": "환영합니다", "EN":"Welcome"}",
+	 * //메시지 내용 필수. 중국어만 있으면 제목 문자열을 직접 쓰면 되며 json 불필요 "urlType": "html", //이 두 파라미터는 메시지 하이퍼링크용
+	 * 단, 현재는 미니 프로그램만 지원하고 경량 앱은 미지원 "urlPath": "h5://demo.com", "msgOwner": "프로세스 플랫폼", 메시지 소유자 필수
+	 * "createTime": "1487289600000" 생성 시간 }
 	 */
 
 	private String msgRange;

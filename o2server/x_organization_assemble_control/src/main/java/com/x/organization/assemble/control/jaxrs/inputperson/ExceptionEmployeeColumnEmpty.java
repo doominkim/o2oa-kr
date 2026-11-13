@@ -7,6 +7,6 @@ class ExceptionEmployeeColumnEmpty extends PromptException {
 	private static final long serialVersionUID = -2139584911736169462L;
 
 	ExceptionEmployeeColumnEmpty() {
-		super("员工账号列不能为空.");
+		super("직원 계정 열은 비워 둘 수 없습니다.");
 	}
 }

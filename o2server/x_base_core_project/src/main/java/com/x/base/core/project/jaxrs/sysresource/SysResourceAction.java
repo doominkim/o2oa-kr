@@ -39,15 +39,15 @@ public class SysResourceAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "SysResourceAction::";
 
-	@Operation(summary = "获取静态资源信息.", operationId = OPERATIONID_PREFIX + "listResource", responses = {
+	@Operation(summary = "정적 리소스 정보 조회.", operationId = OPERATIONID_PREFIX + "listResource", responses = {
 			@ApiResponse(content = @Content(schema = @Schema(implementation = ActionListResource.Wo.class))) })
-	@JaxrsMethodDescribe(value = "获取静态资源信息.", action = ActionListResource.class)
+	@JaxrsMethodDescribe(value = "정적 리소스 정보 조회.", action = ActionListResource.class)
 	@GET
 	@Path("filePath/{filePath}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listResource(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查找路径(根路径:(0))") @PathParam("filePath") String filePath) {
+			@JaxrsParameterDescribe("경로 찾기(루트 경로:(0))") @PathParam("filePath") String filePath) {
 		ActionResult<ActionListResource.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

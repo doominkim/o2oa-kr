@@ -55,13 +55,13 @@ public class ActionPackFileDownload  extends BaseAction  {
                     byte[] bs = os.toByteArray();
                     wo = new Wo(bs, this.contentType(false, apkFile.getName()),
                             this.contentDisposition(false, apkFile.getName()));
-                    // 对10M以下的文件进行缓存
+                    // 10M 이하 파일 캐시
                     if (bs.length < (1024 * 1024 * 10)) {
                         CacheManager.put(cacheCategory, cacheKey, wo);
                     }
                 } catch (Exception e) {
                     if (e.getMessage().contains("existed")) {
-                        logger.warn("原始附件{}-{}不存在，删除记录！", apkFile.getId(), apkFile.getName());
+                        logger.warn("원본 첨부파일 {}-{}이(가) 존재하지 않아 기록을 삭제합니다!", apkFile.getId(), apkFile.getName());
                     }
                     throw e;
                 }

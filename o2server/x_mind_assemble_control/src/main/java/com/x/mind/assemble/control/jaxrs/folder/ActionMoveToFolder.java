@@ -21,7 +21,7 @@ import com.x.mind.assemble.control.jaxrs.mind.BaseAction;
 import com.x.mind.entity.MindFolderInfo;
 
 /**
- * 移动一组脑图和文件夹到指定的文件夹
+ * 마인드맵과 폴더 묶음을 지정 폴더로 이동
  * @author O2LEE
  *
  */
@@ -42,7 +42,7 @@ public class ActionMoveToFolder extends BaseAction {
 				folderInfo = mindFolderInfoService.getWithId( folderId );
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindFolderQuery( e, "系统在根据ID查询所有的脑图文件夹信息时发生异常。" );
+				Exception exception = new ExceptionMindFolderQuery( e, "ID로 모든 마인드맵 폴더 정보를 조회하는 중 오류가 발생했습니다." );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -69,7 +69,7 @@ public class ActionMoveToFolder extends BaseAction {
 		
 		if( check ){
 			try {
-				//移动指定的脑图文件夹
+				//지정 마인드맵 폴더 이동
 				mindFolderInfoService.moveToFolder( wi.getMindIds(), wi.getFolderIds(), folderId );
 				wo.setValue( true );
 			}catch( Exception e ) {
@@ -85,10 +85,10 @@ public class ActionMoveToFolder extends BaseAction {
 	
 	public static class Wi {
 		
-		@FieldDescribe( "需要移动的脑图列表" )
+		@FieldDescribe( "이동할 마인드맵 목록" )
 		private List<String> mindIds = null;
 		
-		@FieldDescribe( "需要移动的文件夹列表" )
+		@FieldDescribe( "이동할 폴더 목록" )
 		private List<String> folderIds = null;
 
 		public List<String> getMindIds() {

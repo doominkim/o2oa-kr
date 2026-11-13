@@ -1,7 +1,7 @@
 package com.x.cms.core.entity.enums;
 
 /**
- * 内容管理文档状态
+ * 콘텐츠 관리 문서 상태
  * @author sword
  */
 public enum DocumentStatus {

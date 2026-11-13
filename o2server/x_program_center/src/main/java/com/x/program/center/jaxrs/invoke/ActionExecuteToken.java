@@ -31,7 +31,7 @@ class ActionExecuteToken extends BaseAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActionExecuteToken.class);
 
-	// 时间限制
+	// 시간 제한
 	private static final int THRESHOLD = 60000 * 30;
 
 	ActionResult<Object> execute(HttpServletRequest request, EffectivePerson effectivePerson, String flag,

@@ -7,6 +7,6 @@ class ExceptionTokenEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionTokenEmpty() {
-		super("sso 没有提供解码令牌.");
+		super("sso에서 디코딩할 토큰을 제공하지 않았습니다.");
 	}
 }

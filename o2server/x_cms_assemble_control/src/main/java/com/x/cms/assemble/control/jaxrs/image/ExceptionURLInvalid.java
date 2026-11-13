@@ -7,6 +7,6 @@ class ExceptionURLInvalid extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionURLInvalid() {
-		super("图片地址URL不合法,无法获取互联网图片信息。" );
+		super("이미지 주소 URL이 올바르지 않아 인터넷 이미지 정보를 가져올 수 없습니다." );
 	}
 }

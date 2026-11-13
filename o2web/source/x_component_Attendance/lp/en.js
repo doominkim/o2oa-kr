@@ -285,9 +285,9 @@ MWF.xApplication.Attendance.LP={
 	],
 	"signinQywxTypeSelectText": [
 		"",
-		"上班打卡",
-		"下班打卡",
-		"外出打卡"
+		"출근 체크",
+		"퇴근 체크",
+		"외근 체크"
 	],
 	"signinResult": "signin result",
 	"signinResultSelectText": [
@@ -302,12 +302,12 @@ MWF.xApplication.Attendance.LP={
 	],
 	"signinQywxResultSelectText": [
 		"",
-		"正常",
-		"时间异常",
-		"地点异常",
-		"未打卡",
-		"wifi异常",
-		"非常用设备"
+		"정상",
+		"시간 이상",
+		"위치 이상",
+		"미체크",
+		"wifi 이상",
+		"비상용 기기"
 	],
 	"recordAddress": "recordAddress",
 	"optMachineType": "optMachineType",

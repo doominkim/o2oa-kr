@@ -12,52 +12,52 @@ public class SnapProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -2320401657143206452L;
 
-	@FieldDescribe("业务数据")
+	@FieldDescribe("업무 데이터")
 	private Data data = new Data();
 
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	private String title;
 
-	@FieldDescribe("标识")
+	@FieldDescribe("식별자")
 	private String job;
 
-	@FieldDescribe("工作")
+	@FieldDescribe("문서")
 	private List<Work> workList = new ArrayList<Work>();
 
-	@FieldDescribe("已完成工作")
+	@FieldDescribe("완료된 업무 문서")
 	private WorkCompleted workCompleted;
 
-	@FieldDescribe("待办")
+	@FieldDescribe("결재 대기")
 	private List<Task> taskList = new ArrayList<Task>();
 
-	@FieldDescribe("已办")
+	@FieldDescribe("처리 완료")
 	private List<TaskCompleted> taskCompletedList = new ArrayList<TaskCompleted>();
 
-	@FieldDescribe("待阅")
+	@FieldDescribe("열람 대기")
 	private List<Read> readList = new ArrayList<Read>();
 
-	@FieldDescribe("已阅")
+	@FieldDescribe("열람 완료")
 	private List<ReadCompleted> readCompletedList = new ArrayList<ReadCompleted>();
 
-	@FieldDescribe("参阅")
+	@FieldDescribe("참조 열람")
 	private List<Review> reviewList = new ArrayList<Review>();
 
-	@FieldDescribe("附件")
+	@FieldDescribe("첨부파일")
 	private List<Attachment> attachmentList = new ArrayList<Attachment>();
 
-	@FieldDescribe("记录")
+	@FieldDescribe("기록")
 	private List<Record> recordList = new ArrayList<Record>();
 
-	@FieldDescribe("工作日志")
+	@FieldDescribe("업무 로그")
 	private List<WorkLog> workLogList = new ArrayList<WorkLog>();
 
-	@FieldDescribe("版式文件版本")
+	@FieldDescribe("서식 파일 버전")
 	private List<DocumentVersion> documentVersionList = new ArrayList<DocumentVersion>();
 
-	@FieldDescribe("文档签批信息")
+	@FieldDescribe("문서 서명 결재 정보")
 	private List<DocSign> docSignList = new ArrayList<>();
 
-	@FieldDescribe("文档签批附件信息")
+	@FieldDescribe("문서 서명 결재 첨부파일 정보")
 	private List<DocSignScrawl> docSignScrawlList = new ArrayList<>();
 
 	private Map<String, String> attachmentContentMap = new HashMap<>();

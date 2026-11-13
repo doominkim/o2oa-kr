@@ -7,13 +7,13 @@ public class ActionWorkTerminateWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6499166223522045961L;
 
-	@FieldDescribe("路由.")
+	@FieldDescribe("경로.")
 	private String routeName;
-	@FieldDescribe("办理意见.")
+	@FieldDescribe("처리 의견.")
 	private String opinion;
-	@FieldDescribe("处理人组织专有标识.")
+	@FieldDescribe("처리자 조직 전용 식별자.")
 	private String distinguishedName;
-	@FieldDescribe("已完成工作标识.")
+	@FieldDescribe("완료된 업무 문서 식별자.")
 	private String workCompleted;
 
 	public String getWorkCompleted() {

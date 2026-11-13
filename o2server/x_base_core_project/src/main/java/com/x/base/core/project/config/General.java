@@ -87,79 +87,79 @@ public class General extends ConfigObject {
 		return o;
 	}
 
-	@FieldDescribe("启用访问日志功能.")
+	@FieldDescribe("접근 로그 기능 사용.")
 	private Boolean requestLogEnable;
 
-	@FieldDescribe("访问日志记录天数,默认7天.")
+	@FieldDescribe("접근 로그 보관 일수, 기본값 7일.")
 	private Integer requestLogRetainDays;
 
-	@FieldDescribe("访问日志是否记录post或者put的body内容,只对content-type为application/json的请求有效.")
+	@FieldDescribe("접근 로그에 post 또는 put의 body 내용 기록 여부, content-type이 application/json인 요청에만 유효.")
 	private Boolean requestLogBodyEnable;
 
-	@FieldDescribe("是否启用webSocket链接.")
+	@FieldDescribe("webSocket 연결 사용 여부.")
 	private Boolean webSocketEnable;
 
-	@FieldDescribe("允许通过接口修改系统配置.")
+	@FieldDescribe("인터페이스를 통한 시스템 설정 수정 허용.")
 	private Boolean configApiEnable;
 
-	@FieldDescribe("是否允许部署war包.")
+	@FieldDescribe("war 패키지 배포 허용 여부.")
 	private Boolean deployWarEnable;
 
-	@FieldDescribe("是否允许部署静态资源.")
+	@FieldDescribe("정적 리소스 배포 허용 여부.")
 	private Boolean deployResourceEnable;
 
-	@FieldDescribe("启用统计,默认启用统计.")
+	@FieldDescribe("통계 사용, 기본값은 통계 사용.")
 	private Boolean statEnable;
 
-	@FieldDescribe("统计忽略路径,默认忽略*.js,*.gif,*.jpg,*.png,*.css,*.ico")
+	@FieldDescribe("통계 제외 경로, 기본값은 *.js,*.gif,*.jpg,*.png,*.css,*.ico 제외")
 	private String statExclusions;
 
-	@FieldDescribe("暴露jest接口.")
+	@FieldDescribe("jest 인터페이스 노출.")
 	private Boolean exposeJest;
 
-	@FieldDescribe("脚本中可加载的类(默认已加载平台com.x.base和com.x.organization开头的类).")
+	@FieldDescribe("스크립트에서 로드 가능한 클래스(com.x.base 및 com.x.organization으로 시작하는 플랫폼 클래스는 기본 로드됨).")
 	private Set<String> scriptingAllowedClasses;
 
-	@FieldDescribe("http referer 校验正则表达式,可以对CSRF攻击进行防护校验,样例:(.+?)o2oa.net(.+?)")
+	@FieldDescribe("http referer 검증 정규식, CSRF 공격 방어 검증에 사용 가능, 예시:(.+?)o2oa.net(.+?)")
 	private String refererHeadCheckRegular = "";
 
-	@FieldDescribe("跨源资源共享许可,设置http返回的Access-Control-Allow-Origin标识,可以用于CORS攻击防护,样例:https://www.o2oa.net")
+	@FieldDescribe("교차 출처 리소스 공유 허용, http 응답의 Access-Control-Allow-Origin 헤더 설정, CORS 공격 방어에 사용 가능, 예시:https://www.o2oa.net")
 	private String accessControlAllowOrigin = "";
 
-	@FieldDescribe("内容安全策略(CSP)")
+	@FieldDescribe("콘텐츠 보안 정책(CSP)")
 	private String contentSecurityPolicy = "";
 
-	@FieldDescribe("附件上传限制大小或者类型.")
+	@FieldDescribe("첨부파일 업로드 크기 또는 유형 제한.")
 	private AttachmentConfig attachmentConfig;
 
-	@FieldDescribe("对象id格式校验正则表达式.")
+	@FieldDescribe("객체 id 형식 검증 정규식.")
 	private String idFormatCheckRegular = "";
 
-	@FieldDescribe("外部http接口服务地址白名单，*代表不限制.")
+	@FieldDescribe("외부 http 인터페이스 서비스 주소 화이트리스트, *는 제한 없음.")
 	private List<String> httpWhiteList;
 
-	@FieldDescribe("存储加密.1:AES,2:AES/GCM/NoPadding,空或者其他值不加密.")
+	@FieldDescribe("저장 암호화.1:AES,2:AES/GCM/NoPadding, 비어 있거나 기타 값이면 암호화하지 않음.")
 	private Integer storageEncrypt;
 
-	@FieldDescribe("web服务器Cache-Control max-age头设置,0表示不设置Cache-Control.")
+	@FieldDescribe("web 서버 Cache-Control max-age 헤더 설정, 0이면 Cache-Control을 설정하지 않음.")
 	private Integer webServerCacheControlMaxAge;
 
-	@FieldDescribe("多语言配置，默认支持中文和英文.")
+	@FieldDescribe("다국어 설정, 기본으로 중국어와 영어 지원.")
 	private Map<String, String> supportedLanguages;
 
-	@FieldDescribe("graalvm执行脚本包装为promise.")
+	@FieldDescribe("graalvm 실행 스크립트를 promise로 래핑.")
 	private Boolean graalvmEvalAsPromise;
 
-	@FieldDescribe("限制访问的uri地址.")
+	@FieldDescribe("접근 제한 uri 주소.")
 	private Set<String> accessDenyUris;
 
-	@FieldDescribe("限制访问的uri地址.")
+	@FieldDescribe("접근 제한 uri 주소.")
 	private Boolean disableExportEnable;
 
-	@FieldDescribe("是否启用x_query_assemble_surface模块中listRowSelect,rowCountWhere接口")
+	@FieldDescribe("x_query_assemble_surface 모듈의 listRowSelect, rowCountWhere 인터페이스 사용 여부")
 	private Boolean tableRowSelectEnable = DEFAULT_TABLEROWSELECTENABLE;
 
-	@FieldDescribe("可信任的代理服务器ip列表，比如访问o2server通过nginx转发的填写nginx的ip.")
+	@FieldDescribe("신뢰할 수 있는 프록시 서버 ip 목록, 예: o2server 접근 시 nginx로 전달하는 경우 nginx의 ip 입력.")
 	private List<String> trustProxyIpList;
 
 	public List<String> getTrustProxyIpList() {
@@ -304,15 +304,15 @@ public class General extends ConfigObject {
 
 		public static final Integer DEFAULT_FILE_SIZE = 2047;
 
-		@FieldDescribe("附件大小限制（单位M，最大2048M）.")
+		@FieldDescribe("첨부파일 크기 제한(단위 M, 최대 2048M).")
 		private Integer fileSize = DEFAULT_FILE_SIZE;
 
-		@FieldDescribe("只允许上传的文件后缀")
+		@FieldDescribe("업로드 허용 파일 확장자")
 		private List<String> fileTypeIncludes = Arrays.asList("doc", "docx", "xls", "xlsx", "ppt", "pptx", "pdf",
 				"hwp", "hwpx", "txt", "csv", "md", "xapp", "text", "zip", "rar", "7z", "mp3", "mp4", "png", "jpg",
 				"jpeg", "gif", "webp");
 
-		@FieldDescribe("不允许上传的文件后缀")
+		@FieldDescribe("업로드 금지 파일 확장자")
 		private List<String> fileTypeExcludes = new ArrayList<>();
 
 		public Integer getFileSize() {

@@ -163,7 +163,7 @@ public class PersonFactory extends AbstractFactory {
 		}
 	}
 
-	/** 递归的上级组织,从底层到顶层 */
+	/** 재귀 상위 조직, 하위에서 최상위 순 */
 	public List<String> listSupNested(String id) throws Exception {
 		List<String> list = new ArrayList<>();
 		if (StringUtils.isEmpty(id)) {

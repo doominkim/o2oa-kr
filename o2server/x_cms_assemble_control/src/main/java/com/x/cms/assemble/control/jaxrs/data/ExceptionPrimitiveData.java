@@ -7,6 +7,6 @@ class ExceptionPrimitiveData extends LanguagePromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionPrimitiveData() {
-		super("更新的数据不能为Primitive.");
+		super("수정할 데이터는 Primitive일 수 없습니다.");
 	}
 }

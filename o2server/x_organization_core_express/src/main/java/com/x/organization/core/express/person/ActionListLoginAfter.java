@@ -21,7 +21,7 @@ class ActionListLoginAfter extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("截至日期")
+		@FieldDescribe("마감일")
 		private Date date;
 
 		public Date getDate() {

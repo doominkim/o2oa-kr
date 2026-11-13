@@ -23,7 +23,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceStatisticRequireLog", description = "考勤统计需求日志.")
+@Schema(name = "AttendanceStatisticRequireLog", description = "근태 통계 요청 로그.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceStatisticRequireLog.table, uniqueConstraints = {
@@ -44,7 +44,7 @@ public class AttendanceStatisticRequireLog extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -53,62 +53,62 @@ public class AttendanceStatisticRequireLog extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String statisticName_FIELDNAME = "statisticName";
-	@FieldDescribe("统计名称")
+	@FieldDescribe("통계 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + statisticName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String statisticName = "";
 
 	public static final String statisticType_FIELDNAME = "statisticType";
-	@FieldDescribe("统计类型:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY")
+	@FieldDescribe("통계 유형:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + statisticType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String statisticType = "";
 
 	public static final String statisticKey_FIELDNAME = "statisticKey";
-	@FieldDescribe("统计键值")
+	@FieldDescribe("통계 키 값")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + statisticKey_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String statisticKey = "";
 
 	public static final String statisticYear_FIELDNAME = "statisticYear";
-	@FieldDescribe("统计年月")
+	@FieldDescribe("통계 연월")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + statisticYear_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String statisticYear = "";
 
 	public static final String statisticMonth_FIELDNAME = "statisticMonth";
-	@FieldDescribe("统计月份")
+	@FieldDescribe("통계 월")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + statisticMonth_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String statisticMonth = "";
 
 	public static final String statisticDay_FIELDNAME = "statisticDay";
-	@FieldDescribe("统计日期")
+	@FieldDescribe("통계 날짜")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + statisticDay_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String statisticDay = "";
 
 	public static final String processTime_FIELDNAME = "processTime";
-	@FieldDescribe("处理时间")
+	@FieldDescribe("처리 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + processTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date processTime = null;
 
 	public static final String processStatus_FIELDNAME = "processStatus";
-	@FieldDescribe("处理状态")
+	@FieldDescribe("처리 상태")
 	@Column(name = ColumnNamePrefix + processStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processStatus = "WAITING";
@@ -116,7 +116,7 @@ public class AttendanceStatisticRequireLog extends SliceJpaObject {
 	public static final String description_FIELDNAME = "description";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("说明备注")
+	@FieldDescribe("비고")
 	@Column(length = JpaObject.length_2K, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = "";
@@ -130,7 +130,7 @@ public class AttendanceStatisticRequireLog extends SliceJpaObject {
 	}
 
 	/**
-	 * 统计类型:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
+	 * 통계 유형:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
 	 * 
 	 * @return
 	 */
@@ -139,7 +139,7 @@ public class AttendanceStatisticRequireLog extends SliceJpaObject {
 	}
 
 	/**
-	 * 统计类型:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
+	 * 통계 유형:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
 	 * 
 	 * @param statisticType
 	 */

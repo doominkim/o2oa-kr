@@ -102,16 +102,16 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 	protected class FilterWi {
 
-		@FieldDescribe("应用id")
+		@FieldDescribe("앱 id")
 		private List<String> applicationList;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("创建人")
+		@FieldDescribe("생성자")
 		private List<String> personList;
 
-		@FieldDescribe("匹配关键字")
+		@FieldDescribe("매칭 키워드")
 		private String key;
 
 		public List<String> getApplicationList() {

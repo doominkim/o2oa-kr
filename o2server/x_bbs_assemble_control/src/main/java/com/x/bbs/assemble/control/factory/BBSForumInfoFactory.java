@@ -17,11 +17,11 @@ import com.x.bbs.entity.BBSForumInfo;
 import com.x.bbs.entity.BBSForumInfo_;
 
 /**
- * 类   名：BBSForumInfoFactory<br/>
- * 实体类：BBSForumInfo<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-08-10 17:17:26
+ * 클래스명: BBSForumInfoFactory<br/>
+ * 엔티티 클래스: BBSForumInfo<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-08-10 17:17:26
 **/
 public class BBSForumInfoFactory extends AbstractFactory {
 
@@ -29,12 +29,12 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe( "获取指定Id的BBSForumInfo实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSForumInfo 엔티티 정보 객체 조회" )
 	public BBSForumInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSForumInfo.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSForumInfo实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSForumInfo 엔티티 정보 목록 조회" )
 	public List<BBSForumInfo> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSForumInfo>();
@@ -48,7 +48,7 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( 1000 ).getResultList();
 	}
 	
-	//@MethodDescribe( "列示全部的BBSForumInfo实体信息列表" )
+	//@MethodDescribe( "전체 BBSForumInfo 엔티티 정보 목록 조회" )
 	public List<BBSForumInfo> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSForumInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -58,7 +58,7 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		return em.createQuery( cq ).setMaxResults( 1000 ).getResultList();
 	}
 	
-	//@MethodDescribe( "根据用户权限列示全部的BBSForumInfo实体信息列表" )
+	//@MethodDescribe( "사용자 권한에 따른 전체 BBSForumInfo 엔티티 정보 목록 조회" )
 	public List<BBSForumInfo> listAllViewAbleForumWithMyPermission( List<String> viewAbleForumIds ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSForumInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -72,7 +72,7 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).setMaxResults( 1000 ).getResultList();
 	}
 	
-//	@MethodDescribe( "列示全部可见性为所有人的BBSForumInfo实体信息ID列表" )
+//	@MethodDescribe( "공개 범위가 전체인 BBSForumInfo 엔티티 정보 ID 목록 조회" )
 	public List<String> listAllPublicForumIds() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSForumInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -84,7 +84,7 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).setMaxResults( 1000 ).getResultList();
 	}
 
-	//@MethodDescribe( "列示已经启用的BBSForumInfo实体信息ID列表" )
+	//@MethodDescribe( "사용 중인 BBSForumInfo 엔티티 정보 ID 목록 조회" )
 	public List<BBSForumInfo> listAllOpenForumInfo() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSForumInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

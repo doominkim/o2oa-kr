@@ -7,6 +7,6 @@ public class ExceptionBindRoleCodeEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionBindRoleCodeEmpty() {
-		super("绑定的角色编码为空， 无法进行查询." );
+		super("연결된 역할 코드가 비어 있어 조회할 수 없습니다." );
 	}
 }

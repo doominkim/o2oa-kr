@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 列示有权限看到文档的指定分类应用
+ * 문서 열람 권한이 있는 지정 분류의 앱 조회
  * @author sword
  */
 public class ActionListHasDocument_WithAppType extends BaseAction {

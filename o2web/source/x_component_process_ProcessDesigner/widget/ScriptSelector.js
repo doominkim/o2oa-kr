@@ -18,7 +18,7 @@ MWF.xApplication.process.ProcessDesigner.widget.ScriptSelector = new Class({
 
         this.selNode = new Element("div", {"styles": this.css.selScriptNode}).inject(this.node, "before");
         this.delNode = new Element("div", {"styles": this.css.delScriptNode}).inject(this.node, "before");
-        //this.selNode = new Element("div", {"styles": this.css.selScriptNode, "text": "选择"}).inject(this.node, "before");
+        //this.selNode = new Element("div", {"styles": this.css.selScriptNode, "text": "선택"}).inject(this.node, "before");
 
         this.node.setStyles(this.css.contentNode);
         //this.node.set("text", script||"");

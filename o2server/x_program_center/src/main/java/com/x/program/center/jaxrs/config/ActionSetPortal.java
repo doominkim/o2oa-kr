@@ -16,7 +16,7 @@ import com.x.base.core.project.http.EffectivePerson;
 import com.x.base.core.project.jaxrs.WrapBoolean;
 
 /**
- * config/portal.json配置修改
+ * config/portal.json 설정 수정
  * @author sword
  */
 public class ActionSetPortal extends BaseAction {

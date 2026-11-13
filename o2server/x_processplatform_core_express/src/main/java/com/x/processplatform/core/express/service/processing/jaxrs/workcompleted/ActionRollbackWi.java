@@ -9,10 +9,10 @@ public class ActionRollbackWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 2040132891703254119L;
 
-	@FieldDescribe("工作日志.")
+	@FieldDescribe("업무 로그.")
 	private String workLog;
 
-	@FieldDescribe("回溯组织专用标识.")
+	@FieldDescribe("되돌리기 조직 전용 식별자.")
 	private List<String> distinguishedNameList;
 
 	public String getWorkLog() {

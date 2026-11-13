@@ -7,6 +7,6 @@ class ExceptionEventRepeatMasterNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionEventRepeatMasterNotExists( String masterId ) {
-		super("指定的日历事件重复宿主信息不存在.MASTERID:" + masterId );
+		super("지정한 반복 일정의 기준 정보가 없습니다. MASTERID:" + masterId );
 	}
 }

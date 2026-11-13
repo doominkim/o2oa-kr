@@ -7,34 +7,34 @@ public class ActionShiftTimeWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 2040132891703254119L;
 
-	@FieldDescribe("已完成工作标识")
+	@FieldDescribe("완료된 업무 문서 식별자")
 	private String id;
 
-	@FieldDescribe("调整分钟数,负数向前调整")
+	@FieldDescribe("조정 분 수, 음수이면 앞으로 조정")
 	private Integer adjustMinutes;
 
-	@FieldDescribe("是否调整已完成工作")
+	@FieldDescribe("완료된 업무 문서 조정 여부")
 	private Boolean workCompletedEnable = true;
 
-	@FieldDescribe("是否调整Data")
+	@FieldDescribe("Data 조정 여부")
 	private Boolean dataEnable = true;
 
-	@FieldDescribe("是否调整工作日志")
+	@FieldDescribe("업무 문서 로그 조정 여부")
 	private Boolean recordEnable = true;
 
-	@FieldDescribe("是否调整已办")
+	@FieldDescribe("처리 완료 조정 여부")
 	private Boolean taskCompletedEnable = true;
 
-	@FieldDescribe("是否调整待阅")
+	@FieldDescribe("열람 대기 조정 여부")
 	private Boolean readEnable = true;
 
-	@FieldDescribe("是否调整已阅")
+	@FieldDescribe("열람 완료 조정 여부")
 	private Boolean readCompletedEnable = true;
 
-	@FieldDescribe("是否调整参阅")
+	@FieldDescribe("참조 열람 조정 여부")
 	private Boolean reviewEnable = true;
 
-	@FieldDescribe("是否调整附件")
+	@FieldDescribe("첨부파일 조정 여부")
 	private Boolean attachmentEnable = true;
 
 	public String getId() {

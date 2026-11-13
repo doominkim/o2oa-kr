@@ -7,6 +7,6 @@ class ExceptionNotExistEnabledProcess extends LanguagePromptException {
 	private static final long serialVersionUID = 7770778192986529177L;
 
 	ExceptionNotExistEnabledProcess(String flag) {
-		super("不存在启用的流程: {}", flag);
+		super("사용 중인 프로세스가 없습니다: {}", flag);
 	}
 }

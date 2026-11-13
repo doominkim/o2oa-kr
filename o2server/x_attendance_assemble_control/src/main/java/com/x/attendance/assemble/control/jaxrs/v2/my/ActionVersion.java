@@ -17,7 +17,7 @@ public class ActionVersion extends BaseAction {
     }
 
     public static class Wo extends GsonPropertyObject {
-        @FieldDescribe("版本")
+        @FieldDescribe("버전")
         private String version = "2";
 
         public String getVersion() {

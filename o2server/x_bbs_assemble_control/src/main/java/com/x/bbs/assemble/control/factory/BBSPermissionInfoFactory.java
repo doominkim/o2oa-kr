@@ -17,11 +17,11 @@ import com.x.bbs.entity.BBSPermissionInfo;
 import com.x.bbs.entity.BBSPermissionInfo_;
 
 /**
- * 类   名：BBSPermissionInfoFactory<br/>
- * 实体类：BBSPermissionInfo<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-08-10 17:17:26
+ * 클래스명: BBSPermissionInfoFactory<br/>
+ * 엔티티 클래스: BBSPermissionInfo<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-08-10 17:17:26
 **/
 public class BBSPermissionInfoFactory extends AbstractFactory {
 
@@ -29,12 +29,12 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSPermissionInfo实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSPermissionInfo 엔티티 정보 객체 조회" )
 	public BBSPermissionInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSPermissionInfo.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSPermissionInfo实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSPermissionInfo 엔티티 정보 목록 조회" )
 	public List<BBSPermissionInfo> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSPermissionInfo>();
@@ -47,7 +47,7 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "列示全部的BBSPermissionInfo实体信息列表" )
+	//@MethodDescribe( "전체 BBSPermissionInfo 엔티티 정보 목록 조회" )
 	public List<BBSPermissionInfo> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSPermissionInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -55,7 +55,7 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 		return em.createQuery( cq ).setMaxResults( 1000 ).getResultList();
 	}
 
-	//@MethodDescribe( "查询指定CODE的权限信息对象" )
+	//@MethodDescribe( "지정 CODE의 권한 정보 객체 조회" )
 	public BBSPermissionInfo getPermissionByCode( String permissionCode ) throws Exception {
 		if( permissionCode == null || permissionCode.isEmpty() ){
 			throw new Exception("permissionCode is null!");
@@ -74,7 +74,7 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 		}
 	}
 
-	//@MethodDescribe( "根据论坛ID查询指定论坛所有相关的权限信息列表" )
+	//@MethodDescribe( "포럼 ID로 해당 포럼 관련 전체 권한 정보 목록 조회" )
 	public List<String> listPermissionByForumId(String forumId) throws Exception {
 		if( forumId == null || forumId.isEmpty() ){
 			throw new Exception("forumId is null!");
@@ -90,9 +90,9 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据版块ID查询指定版块所有相关的权限信息列表
+	 * 게시판 ID로 해당 게시판 관련 전체 권한 정보 목록 조회
 	 * @param sectionId
-	 * @param queryMainSection 是否查询主版块ID
+	 * @param queryMainSection 주 게시판 ID 조회 여부
 	 * @return
 	 * @throws Exception
 	 */
@@ -112,7 +112,7 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 
-	//@MethodDescribe( "根据权限编码列表获取权限信息列表" )
+	//@MethodDescribe( "권한 코드 목록으로 권한 정보 목록 조회" )
 	public List<BBSPermissionInfo> listByPermissionCodes( List<String> permissionCodes ) throws Exception {
 		if( permissionCodes == null || permissionCodes.size() == 0 ){
 			return new ArrayList<BBSPermissionInfo>();
@@ -125,7 +125,7 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据主版块ID获取所有的权限信息列表" )
+	//@MethodDescribe( "주 게시판 ID로 전체 권한 정보 목록 조회" )
 	public List<BBSPermissionInfo> listPermissionByMainSectionId( String mainSectionId ) throws Exception {
 		if( mainSectionId == null || mainSectionId.isEmpty() ){
 			throw new Exception("mainSectionId is null!");

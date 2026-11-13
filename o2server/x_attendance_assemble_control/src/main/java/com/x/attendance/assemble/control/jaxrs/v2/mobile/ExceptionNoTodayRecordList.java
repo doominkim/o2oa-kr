@@ -7,6 +7,6 @@ public class ExceptionNoTodayRecordList extends PromptException {
  
 
 	public ExceptionNoTodayRecordList() {
-		super(  "没有找到打卡记录列表信息.");
+		super(  "체크 기록 목록 정보를 찾을 수 없습니다.");
 	}
 }

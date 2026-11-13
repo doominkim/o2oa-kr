@@ -8,6 +8,6 @@ public class ExceptionAppealLocked extends PromptException {
 	private static final long serialVersionUID = -2802638812469988244L;
 
 	public ExceptionAppealLocked() {
-		super(  "当前数据已锁定.");
+		super(  "현재 데이터가 잠겨 있습니다.");
 	}
 }

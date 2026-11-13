@@ -44,7 +44,7 @@ class ActionModify extends BaseAction {
 				throw new ExceptionRoomNotExist(wi.getRoom());
 			}
 
-			// 判断开始时间或者结束时间有没有修改过
+			// 시작 시간 또는 종료 시간이 수정되었는지 판단
 			boolean modifyTime = false;
 			Date StartTime = wi.getStartTime();
 			Date CompletedTime = wi.getCompletedTime();
@@ -85,7 +85,7 @@ class ActionModify extends BaseAction {
 			}
 			if (ConfirmStatus.allow.equals(meeting.getConfirmStatus())) {
 
-				if (modifyTime) { // 开始时间或者结束时间有修改过
+				if (modifyTime) { // 시작 시간 또는 종료 시간이 수정됨
 					for (String _s : wi.getInvitePersonList()) {
 						MessageFactory.meeting_invite(_s, meeting, room);
 					}

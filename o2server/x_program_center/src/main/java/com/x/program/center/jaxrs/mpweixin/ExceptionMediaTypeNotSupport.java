@@ -11,6 +11,6 @@ public class ExceptionMediaTypeNotSupport extends LanguagePromptException {
     private static final long serialVersionUID = 4862362281353270832L;
 
     ExceptionMediaTypeNotSupport() {
-        super("素材类型不支持，目前只支持 image、voice、video thumb 类型.");
+        super("지원하지 않는 소재 유형입니다. 현재 image, voice, video thumb 유형만 지원합니다.");
     }
 }

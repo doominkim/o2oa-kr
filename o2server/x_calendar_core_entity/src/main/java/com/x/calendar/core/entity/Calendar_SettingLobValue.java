@@ -19,12 +19,12 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 日程管理设置（文本数据）
+ * 일정 관리 설정(텍스트 데이터)
  * 
  * @author O2LEE
  *
  */
-@Schema(name = "Calendar_SettingLobValue", description = "日程管理设置文本数据.")
+@Schema(name = "Calendar_SettingLobValue", description = "일정 관리 설정 텍스트 데이터.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Calendar_SettingLobValue.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class Calendar_SettingLobValue extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -54,14 +54,14 @@ public class Calendar_SettingLobValue extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
@@ -69,7 +69,7 @@ public class Calendar_SettingLobValue extends SliceJpaObject {
 	public static final String lobValue_FIELDNAME = "lobValue";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("配置值")
+	@FieldDescribe("설정 값")
 	@Column(name = "xlobValue", length = JpaObject.length_1M)
 	private String lobValue = "";
 

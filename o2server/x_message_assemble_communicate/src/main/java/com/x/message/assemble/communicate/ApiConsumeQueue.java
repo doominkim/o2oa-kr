@@ -46,7 +46,7 @@ public class ApiConsumeQueue extends AbstractQueue<Message> {
 		}
 		List<String> ids = listOverStay();
 		if (!ids.isEmpty()) {
-			LOGGER.info("滞留 api 消息数量:{}.", ids.size());
+			LOGGER.info("대기 중인 api 메시지 수:{}.", ids.size());
 			for (String id : ids) {
 				Optional<Message> optional = find(id);
 				if (optional.isPresent()) {

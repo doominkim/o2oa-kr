@@ -25,7 +25,7 @@ abstract class AbstractAgentProcessor extends AbstractProcessor {
 	@Override
 	protected Work arriveProcessing(AeiObjects aeiObjects) throws Exception {
 		Agent agent = (Agent) aeiObjects.getActivity();
-		/** 更新data中的work和attachment */
+		/** data의 work와 attachment 업데이트 */
 		aeiObjects.getData().setWork(aeiObjects.getWork());
 		aeiObjects.getData().setAttachmentList(aeiObjects.getAttachments());
 		return arriving(aeiObjects, agent);

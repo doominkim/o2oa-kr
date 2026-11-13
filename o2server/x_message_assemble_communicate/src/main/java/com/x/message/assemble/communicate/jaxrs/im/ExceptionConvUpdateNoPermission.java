@@ -7,7 +7,7 @@ class ExceptionConvUpdateNoPermission extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionConvUpdateNoPermission() {
-		super("没有权限修改会话属性");
+		super("대화방 속성을 수정할 권한이 없습니다");
 	}
 
 

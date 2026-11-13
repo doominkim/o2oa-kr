@@ -70,7 +70,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 	private static final Type OAUTH_PARAMTYPE = new TypeToken<Map<String, Object>>() {
 	}.getType();
 
-	/** 管理员通过密码登录 */
+	/** 관리자 비밀번호 로그인 */
 	<T extends AbstractWoAuthentication> T manager(HttpServletRequest request, HttpServletResponse response,
 			String credential, Class<T> cls) throws Exception {
 		HttpToken httpToken = new HttpToken();
@@ -94,7 +94,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		return t;
 	}
 
-	/** 创建普通用户返回信息 */
+	/** 일반 사용자 생성 반환 정보 */
 	<T extends AbstractWoAuthentication> T user(HttpServletRequest request, HttpServletResponse response,
 			Business business, Person person, Class<T> cls) throws Exception {
 		T t = cls.getDeclaredConstructor().newInstance();
@@ -128,11 +128,11 @@ abstract class BaseAction extends StandardJaxrsAction {
 		}
 		t.setToken(effectivePerson.getToken());
 		t.setTokenType(tokenType);
-		/** 添加角色 */
+		/** 역할 추가 */
 		t.setRoleList(roles);
-		/** 添加身份 */
+		/** 신분 추가 */
 		t.setIdentityList(listIdentity(business, person.getId()));
-		/** 判断密码是否过期需要修改密码 */
+		/** 비밀번호 만료로 변경이 필요한지 판단 */
 		this.passwordExpired(t);
 		this.recordLogin(person.getDistinguishedName(), HttpToken.remoteAddress(request),
 				request.getHeader(HttpToken.X_CLIENT));
@@ -238,15 +238,15 @@ abstract class BaseAction extends StandardJaxrsAction {
 	public abstract static class AbstractWoAuthentication extends Person {
 
 		private static final long serialVersionUID = 6043043594889691395L;
-		@FieldDescribe("令牌类型")
+		@FieldDescribe("토큰 유형")
 		private TokenType tokenType;
-		@FieldDescribe("令牌")
+		@FieldDescribe("토큰")
 		private String token;
-		@FieldDescribe("角色")
+		@FieldDescribe("역할")
 		private List<String> roleList;
-		@FieldDescribe("口令是否过期")
+		@FieldDescribe("비밀번호 만료 여부")
 		private Boolean passwordExpired;
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private List<WoIdentity> identityList;
 
 		public TokenType getTokenType() {
@@ -521,11 +521,11 @@ abstract class BaseAction extends StandardJaxrsAction {
 		if (StringUtils.isNotBlank(xClient)) {
 			xClient = xClient.toLowerCase();
 			if (xClient.indexOf("android") != -1) {
-				// 安卓
+				// Android
 				return true;
 			}
 			if (xClient.indexOf("ios") != -1) {
-				// 安卓
+				// Android
 				return true;
 			}
 		}
@@ -533,20 +533,20 @@ abstract class BaseAction extends StandardJaxrsAction {
 		if (StringUtils.isNotBlank(userAgent)) {
 			userAgent = userAgent.toLowerCase();
 			if (userAgent.indexOf("micromessenger") != -1) {
-				// 微信
+				// WeChat
 				return true;
 			}
 			if (userAgent.indexOf("dingtalk") != -1) {
-				// 钉钉
+				// DingTalk
 				return true;
 			}
 			if (userAgent.indexOf("android") != -1) {
-				// 安卓
+				// Android
 				return true;
 			}
 			if (userAgent.indexOf("iphone") != -1 || userAgent.indexOf("ipad") != -1
 					|| userAgent.indexOf("ipod") != -1) {
-				// 苹果
+				// Apple
 				return true;
 			}
 		}

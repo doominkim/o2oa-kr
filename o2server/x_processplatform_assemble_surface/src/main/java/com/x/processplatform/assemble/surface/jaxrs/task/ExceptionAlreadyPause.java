@@ -7,6 +7,6 @@ class ExceptionAlreadyPause extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionAlreadyPause(String id) {
-		super("待办已经处于挂起状态{}.", id);
+		super("결재 대기가 이미 보류 상태입니다{}.", id);
 	}
 }

@@ -13,17 +13,17 @@ public class UnitDutyFactory {
 
 	private AbstractContext context;
 
-	/** 获取组织属性值 */
+	/** 조직 속성 값 조회 */
 	public List<String> listIdentityWithUnitWithName(String unit, String name) throws Exception {
 		return ActionListIdenityWithUnitWithName.execute(context, unit, name);
 	}
 
-	/** 获取组织的组织职务名称 */
+	/** 조직의 조직 직무 이름 조회 */
 	public List<String> listNameWithUnit(String value) throws Exception {
 		return ActionListNameWithUnit.execute(context, Arrays.asList(value));
 	}
 
-	/** 获取身份的组织职务名称 */
+	/** 신분의 조직 직무 이름 조회 */
 	public List<String> listNameWithIdentity(String value) throws Exception {
 		return ActionListNameWithIdentity.execute(context, Arrays.asList(value));
 	}

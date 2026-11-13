@@ -36,17 +36,17 @@ public class ControlAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ControlAction.class);
 	private static final String OPERATIONID_PREFIX = "ControlAction::";
 
-	@Operation(summary = "根据工作标识或完成工作标识获取权限.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "업무 문서 식별자 또는 완료된 업무 문서 식별자로 권한 조회.", operationId = OPERATIONID_PREFIX
 			+ "getWorkOrWorkCompleted", responses = { @ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionGetWorkOrWorkCompleted.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "根据工作标识或完成工作标识获取权限.", action = ActionGetWorkOrWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "업무 문서 식별자 또는 완료된 업무 문서 식별자로 권한 조회.", action = ActionGetWorkOrWorkCompleted.class)
 	@GET
 	@Path("workorworkcompleted/{workOrWorkCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWorkOrWorkCompleted(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作或已完成工作标识") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
+			@JaxrsParameterDescribe("업무 문서 또는 완료된 업무 문서 식별자") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
 		ActionResult<ActionGetWorkOrWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

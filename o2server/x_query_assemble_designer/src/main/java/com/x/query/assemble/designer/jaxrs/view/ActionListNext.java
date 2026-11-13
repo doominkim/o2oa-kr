@@ -40,7 +40,7 @@ class ActionListNext extends BaseAction {
 		static WrapCopier<View, Wo> copier = WrapCopierFactory.wo(View.class, Wo.class,
 				JpaObject.singularAttributeField(View.class, true, true), null);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

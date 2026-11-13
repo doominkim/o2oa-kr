@@ -46,9 +46,9 @@ public class ComponentAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "ComponentAction::";
 
-	@Operation(summary = "列示所有Component对象.", operationId = OPERATIONID_PREFIX + "listAll", responses = {
+	@Operation(summary = "모든 Component 객체 목록.", operationId = OPERATIONID_PREFIX + "listAll", responses = {
 			@ApiResponse(content = @Content(array = @ArraySchema(schema = @Schema(implementation = ActionListAll.Wo.class)))) })
-	@JaxrsMethodDescribe(value = "列示所有Component对象.", action = ActionListAll.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "모든 Component 객체 목록.", action = ActionListAll.class, scope = DescribeScope.system)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,15 +65,15 @@ public class ComponentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取Component对象.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "Component 객체 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = @Content(schema = @Schema(implementation = ActionGet.Wo.class))) })
-	@JaxrsMethodDescribe(value = "获取Component对象.", action = ActionGet.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "Component 객체 조회.", action = ActionGet.class, scope = DescribeScope.system)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -85,11 +85,11 @@ public class ComponentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "创建Component对象.", operationId = OPERATIONID_PREFIX + "create", responses = {
+	@Operation(summary = "Component 객체 생성.", operationId = OPERATIONID_PREFIX + "create", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionCreate.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionCreate.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "创建Component对象.", action = ActionCreate.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "Component 객체 생성.", action = ActionCreate.class, scope = DescribeScope.system)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -106,17 +106,17 @@ public class ComponentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "更新Component对象.", operationId = OPERATIONID_PREFIX + "edit", responses = {
+	@Operation(summary = "Component 객체 수정.", operationId = OPERATIONID_PREFIX + "edit", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionEdit.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionEdit.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "更新Component对象.", action = ActionEdit.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "Component 객체 수정.", action = ActionEdit.class, scope = DescribeScope.system)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -128,15 +128,15 @@ public class ComponentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "删除Component对象.", operationId = OPERATIONID_PREFIX + "delete", responses = {
+	@Operation(summary = "Component 객체 삭제.", operationId = OPERATIONID_PREFIX + "delete", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionDelete.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "删除Component对象.", action = ActionDelete.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "Component 객체 삭제.", action = ActionDelete.class, scope = DescribeScope.system)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -148,9 +148,9 @@ public class ComponentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "删除所有Component,还原默认布局.", operationId = OPERATIONID_PREFIX + "deleteAll", responses = {
+	@Operation(summary = "모든 Component 삭제, 기본 레이아웃 복원.", operationId = OPERATIONID_PREFIX + "deleteAll", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionDeleteAll.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "删除所有Component,还原默认布局.", action = ActionDeleteAll.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "모든 Component 삭제, 기본 레이아웃 복원.", action = ActionDeleteAll.class, scope = DescribeScope.system)
 	@DELETE
 	@Path("delete/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -7,6 +7,6 @@ public class ExceptionMindRecycleInfoNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionMindRecycleInfoNotExists( String id ) {
-		super("指定ID的回收站脑图信息对象不存在。ID:" + id );
+		super("지정한 ID의 휴지통 마인드맵 정보가 없습니다. ID:" + id );
 	}
 }

@@ -102,7 +102,7 @@ public class Business {
 	}
 
 	/**
-	 * 获取包含自定义jar包的ClassLoader
+	 * 사용자 정의 jar 패키지를 포함한 ClassLoader 조회
 	 *
 	 * @param refresh
 	 * @return

@@ -19,11 +19,11 @@ import com.x.bbs.entity.BBSVoteRecord;
 import com.x.bbs.entity.BBSVoteRecord_;
 
 /**
- * 类   名：BBSVoteRecordFactory<br/>
- * 实体类：BBSVoteRecord<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSVoteRecordFactory<br/>
+ * 엔티티 클래스: BBSVoteRecord<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
 **/
 public class BBSVoteRecordFactory extends AbstractFactory {
 
@@ -31,12 +31,12 @@ public class BBSVoteRecordFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSVoteRecord实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSVoteRecord 엔티티 정보 객체 조회" )
 	public BBSVoteRecord get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSVoteRecord.class, ExceptionWhen.none );
 	}
 	
-//	@MethodDescribe( "列示指定Id的BBSVoteRecord实体信息列表" )
+//	@MethodDescribe( "지정 Id의 BBSVoteRecord 엔티티 정보 목록 조회" )
 	public List<BBSVoteRecord> list( List<String> ids ) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSVoteRecord>();
@@ -50,7 +50,7 @@ public class BBSVoteRecordFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "根据主题信息ID查询所有投票记录信息ID列表" )
+	//@MethodDescribe( "주제 정보 ID로 전체 투표 기록 정보 ID 목록 조회" )
 	public List<String> listVoteRecordBySubjectIds( String subjectId ) throws Exception {
 		if( subjectId == null || subjectId.isEmpty() ){
 			throw new Exception( "subjectId is null!" );
@@ -64,7 +64,7 @@ public class BBSVoteRecordFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "根据主题信息ID查询所有投票记录信息ID列表" )
+	//@MethodDescribe( "주제 정보 ID로 전체 투표 기록 정보 ID 목록 조회" )
 	public List<BBSVoteRecord> listVoteRecordBySubject( String subjectId ) throws Exception {
 		if( subjectId == null || subjectId.isEmpty() ){
 			throw new Exception( "subjectId is null!" );
@@ -152,7 +152,7 @@ public class BBSVoteRecordFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据人员和选项组查询人员选择过的所有选项列表
+	 * 사용자와 선택 항목 그룹으로 사용자가 선택한 전체 항목 목록 조회
 	 * @param personName
 	 * @param optionGroupId
 	 * @return

@@ -50,7 +50,7 @@ public class ActionListByPage extends  BaseAction {
                 }
                 userList = new ArrayList<>(new LinkedHashSet<>(userList));
                 if (userList.isEmpty()) {
-                    LOGGER.warn("没有找到人员信息，查询条件：{}", wi.getFilterList());
+                    LOGGER.warn("사용자 정보를 찾지 못했습니다, 조회 조건: {}", wi.getFilterList());
                     result.setData(new ArrayList<>());
                     result.setCount(0L);
                     return result;
@@ -80,19 +80,19 @@ public class ActionListByPage extends  BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("人员DN")
+        @FieldDescribe("인원 DN")
         private String person;
 
-        @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
 
-        @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+        @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
         private Boolean recursive;
 
-        @FieldDescribe("开始日期: YYYY-MM-dd")
+        @FieldDescribe("시작일: YYYY-MM-dd")
         private String startDate;
 
-        @FieldDescribe("结束日期: YYYY-MM-dd")
+        @FieldDescribe("종료일: YYYY-MM-dd")
         private String endDate;
 
         public String getPerson() {

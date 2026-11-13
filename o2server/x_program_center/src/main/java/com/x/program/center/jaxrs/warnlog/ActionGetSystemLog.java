@@ -47,7 +47,7 @@ class ActionGetSystemLog extends BaseAction {
 		}
 
 		if (Config.node().equals(Config.resource_node_centersPirmaryNode())) {
-			// 控制台最长展现日志时间为30分钟
+			// 콘솔 로그 최대 표시 시간 30분
 			CacheCategory cacheCategory = new CacheCategory(CacheLogObject.class);
 			CacheKey cacheKey = new CacheKey(key, "time");
 			Optional<?> optional = CacheManager.get(cacheCategory, cacheKey);

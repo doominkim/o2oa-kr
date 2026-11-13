@@ -75,7 +75,7 @@ class ActionReference extends BaseAction {
 		if (BooleanUtils.isNotTrue(workLog.getConnected())) {
 			referenceWorkLogTask(business, wo);
 		} else {
-			/* 已经完成的不会有待办，返回一个空数组 */
+			/* 이미 완료된 것은 결재 대기가 없으므로 빈 배열 반환 */
 			wo.setTaskList(new ArrayList<>());
 		}
 		referenceWorkLogTaskCompleted(business, wo);
@@ -96,7 +96,7 @@ class ActionReference extends BaseAction {
 		os = os.stream()
 				.sorted(Comparator.comparing(TaskCompleted::getCompletedTime, Comparator.nullsLast(Date::compareTo)))
 				.collect(Collectors.toList());
-//		/** 补充召回 */
+//		/** 회수 보완 */
 //		List<WoTaskCompleted> wos = WoTaskCompleted.copier.copy(os);
 //		List<WoTaskCompleted> list = new ArrayList<>();
 //		for (WoTaskCompleted o : wos) {
@@ -104,8 +104,8 @@ class ActionReference extends BaseAction {
 //			if (o.getProcessingType().equals(ProcessingType.retract)) {
 //				WoTaskCompleted retract = new WoTaskCompleted();
 //				o.copyTo(retract);
-//				retract.setRouteName("撤回");
-//				retract.setOpinion("撤回");
+//				retract.setRouteName("회수");
+//				retract.setOpinion("회수");
 //				retract.setStartTime(retract.getRetractTime());
 //				retract.setCompletedTime(retract.getRetractTime());
 //				list.add(retract);
@@ -146,16 +146,16 @@ class ActionReference extends BaseAction {
 
 		private static final long serialVersionUID = 6314327570968988398L;
 
-		@FieldDescribe("已办对象")
+		@FieldDescribe("처리 완료 객체")
 		private WoTaskCompleted taskCompleted;
 
-		@FieldDescribe("工作对象")
+		@FieldDescribe("업무 문서 객체")
 		private List<WoWork> workList = new ArrayList<>();
 
-		@FieldDescribe("已完成工作对象")
+		@FieldDescribe("완료된 업무 문서 객체")
 		private List<WoWorkCompleted> workCompletedList = new ArrayList<>();
 
-		@FieldDescribe("工作记录对象")
+		@FieldDescribe("업무 문서 기록 객체")
 		private List<WoWorkLog> workLogList = new ArrayList<>();
 
 		public WoTaskCompleted getTaskCompleted() {

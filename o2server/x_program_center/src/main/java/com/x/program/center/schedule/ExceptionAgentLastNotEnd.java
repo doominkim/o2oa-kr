@@ -9,7 +9,7 @@ class ExceptionAgentLastNotEnd extends LanguagePromptException {
 	private static final long serialVersionUID = -7954335762204386602L;
 
 	ExceptionAgentLastNotEnd(Pair pair) {
-		super("放弃触发代理: {}, 名称 :{}, Cron表达式: {}, 上一次起动时间: {}, 上一次没有运行结束.", pair.getId(),
+		super("에이전트 실행 건너뜀: {}, 이름: {}, Cron 표현식: {}, 이전 시작 시간: {}, 이전 실행이 끝나지 않았습니다.", pair.getId(),
 				pair.getName(), pair.getCron(),
 				(pair.getLastStartTime() == null ? "" : DateTools.format(pair.getLastStartTime())));
 	}

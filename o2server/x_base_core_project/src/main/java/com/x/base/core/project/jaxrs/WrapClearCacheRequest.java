@@ -17,16 +17,16 @@ public abstract class WrapClearCacheRequest extends GsonPropertyObject {
 
 	private String type;
 
-	@FieldDescribe("节点名.")
-	@Schema(description = "节点名.")
+	@FieldDescribe("노드명.")
+	@Schema(description = "노드명.")
 	private String nodeName;
 
-	@FieldDescribe("类名.")
-	@Schema(description = "类名.")
+	@FieldDescribe("클래스명.")
+	@Schema(description = "클래스명.")
 	private String className;
 
-	@FieldDescribe("关键字.")
-	@Schema(description = "关键字.")
+	@FieldDescribe("키워드.")
+	@Schema(description = "키워드.")
 	private List<Object> keys;
 
 	public String getClassName() {

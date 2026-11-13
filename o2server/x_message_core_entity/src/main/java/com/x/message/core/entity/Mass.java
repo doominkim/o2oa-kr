@@ -28,7 +28,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Mass", description = "消息群发.")
+@Schema(name = "Mass", description = "메시지 일괄 발송.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Mass.table, uniqueConstraints = {
@@ -50,20 +50,20 @@ public class Mass extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* flag标志位 */
-	/* Entity 默认字段结束 */
+	/* flag 플래그 비트 */
+	/* Entity 기본 필드 끝 */
 
 	public static final String TYPE_QIYEWEIXIN = "qiyeweixin";
 	public static final String TYPE_DINGDING = "dingding";
@@ -71,28 +71,28 @@ public class Mass extends SliceJpaObject {
 	public static final String TYPE_WELINK = "welink";
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建人，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorPerson;
 
 	public static final String body_FIELDNAME = "body";
-	@FieldDescribe("内容.")
+	@FieldDescribe("내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = length_10M, name = ColumnNamePrefix + body_FIELDNAME)
 	private String body;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("消息类型.")
+	@FieldDescribe("메시지 유형.")
 	@Column(length = length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String type;
 
 	public static final String personList_FIELDNAME = "personList";
-	@FieldDescribe("个人对象.")
+	@FieldDescribe("개인 객체.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -102,7 +102,7 @@ public class Mass extends SliceJpaObject {
 	private List<String> personList;
 
 	public static final String identityList_FIELDNAME = "identityList";
-	@FieldDescribe("身份对象.")
+	@FieldDescribe("신분 객체.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -112,7 +112,7 @@ public class Mass extends SliceJpaObject {
 	private List<String> identityList;
 
 	public static final String groupList_FIELDNAME = "groupList";
-	@FieldDescribe("群组对象.")
+	@FieldDescribe("그룹 객체.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -122,7 +122,7 @@ public class Mass extends SliceJpaObject {
 	private List<String> groupList;
 
 	public static final String unitList_FIELDNAME = "unitList";
-	@FieldDescribe("组织对象.")
+	@FieldDescribe("조직 객체.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -132,7 +132,7 @@ public class Mass extends SliceJpaObject {
 	private List<String> unitList;
 
 	public static final String sendPersonList_FIELDNAME = "sendPersonList";
-	@FieldDescribe("发送人员对象.")
+	@FieldDescribe("발신 사용자 객체.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + sendPersonList_FIELDNAME, joinIndex = @Index(name = TABLE

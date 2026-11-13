@@ -34,7 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 新版考勤 部分共用业务逻辑工具类 Created by fancyLou on 2023/4/24. Copyright © 2023 O2. All rights reserved.
+ * 신규 근태 일부 공용 비즈니스 로직 유틸 클래스 Created by fancyLou on 2023/4/24. Copyright © 2023 O2. All rights reserved.
  */
 public class AttendanceV2Helper {
 
@@ -42,16 +42,16 @@ public class AttendanceV2Helper {
 
 
     /**
-     * 是否是今天之前的日期
+     * 오늘 이전 날짜인지 여부
      *
      * @param date
      * @return
      * @throws Exception
      */
     public static boolean beforeToday(String date) throws Exception {
-        Date dateD = DateTools.parse(date, DateTools.format_yyyyMMdd); // 检查格式
+        Date dateD = DateTools.parse(date, DateTools.format_yyyyMMdd); // 형식 검사
         Date today = new Date();
-        today = DateUtils.truncate(today, Calendar.DATE); // 今天 0 点 0 分
+        today = DateUtils.truncate(today, Calendar.DATE); // 오늘 0시 0분
         if (dateD.after(today) || dateD.equals(today)) {
             throw new ExceptionDateError();
         }
@@ -59,59 +59,59 @@ public class AttendanceV2Helper {
     }
 
     /**
-     * 字符串是不是 月份格式yyyy-MM
+     * 문자열이 월 형식 yyyy-MM인지 여부
      *
      * @param dateString
      * @return
      */
     public static boolean isValidMonthString(String dateString) {
-        // 正则表达式用于检查格式是否匹配
+        // 형식 일치 여부를 검사하는 정규식
         Pattern pattern = Pattern.compile("\\d{4}-\\d{2}");
         Matcher matcher = pattern.matcher(dateString);
         if (!matcher.matches()) {
-            return false; // 格式不匹配
+            return false; // 형식 불일치
         }
         SimpleDateFormat sdf = new SimpleDateFormat(DateTools.format_yyyyMM);
         sdf.setLenient(false);
         try {
-            // 使用SimpleDateFormat尝试解析日期
+            // SimpleDateFormat으로 날짜 파싱 시도
             sdf.parse(dateString);
-            return true; // 解析成功，日期格式正确
+            return true; // 파싱 성공, 날짜 형식 올바름
         } catch (ParseException e) {
-            return false; // 解析失败，日期格式不正确
+            return false; // 파싱 실패, 날짜 형식 올바르지 않음
         }
     }
 
     /**
-     * 字符串是不是 日期格式 yyyy-MM-dd
+     * 문자열이 날짜 형식 yyyy-MM-dd인지 여부
      *
      * @param dateString
      * @return
      */
     public static boolean isValidDateString(String dateString) {
-        // 正则表达式用于检查格式是否匹配
+        // 형식 일치 여부를 검사하는 정규식
         Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
         Matcher matcher = pattern.matcher(dateString);
         if (!matcher.matches()) {
-            return false; // 格式不匹配
+            return false; // 형식 불일치
         }
         SimpleDateFormat sdf = new SimpleDateFormat(DateTools.format_yyyyMMdd);
         sdf.setLenient(false);
         try {
-            // 使用SimpleDateFormat尝试解析日期
+            // SimpleDateFormat으로 날짜 파싱 시도
             sdf.parse(dateString);
-            return true; // 解析成功，日期格式正确
+            return true; // 파싱 성공, 날짜 형식 올바름
         } catch (ParseException e) {
-            return false; // 解析失败，日期格式不正确
+            return false; // 파싱 실패, 날짜 형식 올바르지 않음
         }
     }
 
     /**
-     * 当前打卡对象是否是属于出勤
+     * 현재 출퇴근 객체가 출근에 해당하는지 여부
      * <p>
-     * != CHECKIN_RESULT_NotSigned !=CHECKIN_RESULT_PreCheckIn 没有请假数据
+     * != CHECKIN_RESULT_NotSigned !=CHECKIN_RESULT_PreCheckIn 휴가 데이터 없음
      *
-     * @param r 打卡对象
+     * @param r 출퇴근 객체
      * @return
      */
     public static boolean isRecordAttendance(AttendanceV2CheckInRecord r) {
@@ -122,9 +122,9 @@ public class AttendanceV2Helper {
     }
 
     /**
-     * 当前打卡对象是否属于未打卡数据
+     * 현재 출퇴근 객체가 미체크 데이터에 해당하는지 여부
      * <p>
-     * result = CHECKIN_RESULT_NotSigned 并且 没有请假数据
+     * result = CHECKIN_RESULT_NotSigned 이고 휴가 데이터 없음
      *
      * @param r
      * @return
@@ -135,7 +135,7 @@ public class AttendanceV2Helper {
     }
 
     /**
-     * 处理考勤组 考勤人员 将人员、组织全部换成人员DN
+     * 근태 그룹·근태 사용자 처리, 사용자·조직을 모두 사용자 DN으로 변환
      *
      * @param emc
      * @param business
@@ -148,7 +148,7 @@ public class AttendanceV2Helper {
     public static List<String> calTruePersonFromMixList(EntityManagerContainer emc,
             Business business, String groupId,
             List<String> participateList, List<String> unParticipateList) throws Exception {
-        // 处理考勤组
+        // 근태 그룹 처리
         List<String> peopleList = new ArrayList<>();
         for (String p : participateList) {
             if (p.endsWith("@P")) {
@@ -156,32 +156,32 @@ public class AttendanceV2Helper {
             } else if (p.endsWith("@I")) {
                 String person = business.organization().person().getWithIdentity(p);
                 peopleList.add(person);
-            } else if (p.endsWith("@U")) { // 递归查询人员
+            } else if (p.endsWith("@U")) { // 사용자 재귀 조회
                 List<String> pList = business.organization().person().listWithUnitSubNested(p);
                 peopleList.addAll(pList);
             } else {
-                // LOGGER.info("错误的标识？ " + p);
+                // LOGGER.info("잘못된 식별자? " + p);
             }
         }
-        // 删除排除的人员
+        // 제외 사용자 삭제
         if (unParticipateList != null && !unParticipateList.isEmpty()) {
             for (String p : unParticipateList) {
                 peopleList.remove(p);
             }
         }
-        // 去重复
+        // 중복 제거
         HashSet<String> peopleSet = new HashSet<>(peopleList);
-        // 判断是否和其它考勤组内的成员冲突
+        // 다른 근태 그룹 구성원과 충돌하는지 확인
         List<String> conflictPersonInOtherGroup = new ArrayList<>();
         List<AttendanceV2Group> groups = emc.listAll(AttendanceV2Group.class);
         if (groups != null && !groups.isEmpty()) {
             for (String person : peopleSet) {
                 for (AttendanceV2Group oldG : groups) {
-                    // 自己不用处理
+                    // 자기 자신은 처리하지 않음
                     if (oldG.getId().equals(groupId)) {
                         continue;
                     }
-                    // 跳过自动保存的数据
+                    // 자동 저장 데이터 건너뜀
                     if (oldG.getStatus() != null
                         && oldG.getStatus() == AttendanceV2Group.status_auto) {
                         continue;
@@ -197,14 +197,14 @@ public class AttendanceV2Helper {
             throw new ExceptionParticipateConflict(conflictPersonInOtherGroup);
         }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("考勤组 {} 最终考勤组人员数：{}", groupId, peopleSet.size());
+            LOGGER.debug("근태 그룹 {} 최종 근태 그룹 사용자 수: {}", groupId, peopleSet.size());
         }
 
         return new ArrayList<>(peopleSet);
     }
 
     /**
-     * 解析人员/组织过滤条件，把组织转换为人员DN。
+     * 사용자/조직 필터 조건을 분석해 조직을 사용자 DN으로 변환.
      */
     public static void analysisFilterToPersonList(List<String> userList, String filter, Business business,
             Boolean recursive) throws Exception {
@@ -224,7 +224,7 @@ public class AttendanceV2Helper {
     }
 
     /**
-     * 是否是中国节假日
+     * 중국 공휴일 여부
      *
      * @param date yyyy-MM-dd
      */
@@ -236,14 +236,14 @@ public class AttendanceV2Helper {
         if (wo != null && BooleanUtils.isTrue(wo.getOffDay())) {
             isHoliday = true;
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("日期 {} 是节假日，节假日名称：{}", date, wo.getName());
+                LOGGER.debug("날짜 {} 는 공휴일, 공휴일 이름: {}", date, wo.getName());
             }
         }
         return isHoliday;
     }
 
     /**
-     * 是否中国节假日调休的工作日
+     * 중국 공휴일 대체 근무일 여부
      *
      * @param date yyyy-MM-dd
      */
@@ -255,14 +255,14 @@ public class AttendanceV2Helper {
         if (wo != null && BooleanUtils.isTrue(wo.getWorkDay())) {
             isWorkday = true;
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("日期 {} 是节假日调休的工作日，节假日名称：{}", date, wo.getName());
+                LOGGER.debug("날짜 {} 는 공휴일 대체 근무일, 공휴일 이름: {}", date, wo.getName());
             }
         }
         return isWorkday;
     }
 
     /**
-     * 是否特殊节假日
+     * 특별 공휴일 여부
      *
      * @param date  yyyy-MM-dd
      * @param group
@@ -271,7 +271,7 @@ public class AttendanceV2Helper {
      */
     public static boolean isSpecialRestDay(String date, AttendanceV2Group group) throws Exception {
         boolean isRestDay = false;
-        // 考勤配置 节假日工作日
+        // 근태 설정 공휴일·근무일
         Date myDate = DateTools.parse(date, DateTools.format_yyyyMMdd);
         if (Config.workTime() != null && Config.workTime().inDefinedHoliday(myDate)) {
             isRestDay = true;
@@ -279,38 +279,38 @@ public class AttendanceV2Helper {
         if (checkIsChineseHoliday(date)) {
             isRestDay = true;
         }
-        // 考勤组的无需打卡日
+        // 근태 그룹의 체크 불필요일
         if (group.getNoNeedCheckInDateList() != null && !group.getNoNeedCheckInDateList()
                 .isEmpty()) {
-            for (String d : group.getNoNeedCheckInDateList()) { // 包含日期 ｜ 是否循环
+            for (String d : group.getNoNeedCheckInDateList()) { // 포함 날짜 | 반복 여부
                 String[] dArray = d.split("\\|");
                 if (dArray.length < 2) {
-                    // 格式不正确
+                    // 형식이 올바르지 않음
                     continue;
                 }
                 if (dArray[0].equals(date)) {
-                    isRestDay = true;// 无需打卡就是休息日
+                    isRestDay = true;// 체크 불필요하면 휴일
                     break;
                 }
                 if (dArray[1].equals("week")
                     && DateTools.dateIsInWeekCycle(
                         DateTools.parse(dArray[0], DateTools.format_yyyyMMdd),
-                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 每周
-                    isRestDay = true;// 无需打卡就是休息日
+                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 매주
+                    isRestDay = true;// 체크 불필요하면 휴일
                     break;
                 }
                 if (dArray[1].equals("twoWeek")
                     && DateTools.dateIsInTwoWeekCycle(
                         DateTools.parse(dArray[0], DateTools.format_yyyyMMdd),
-                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 每周
-                    isRestDay = true;// 无需打卡就是休息日
+                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 매주
+                    isRestDay = true;// 체크 불필요하면 휴일
                     break;
                 }
                 if (dArray[1].equals("month")
                     && DateTools.dateIsInMonthCycle(
                         DateTools.parse(dArray[0], DateTools.format_yyyyMMdd),
-                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 每周
-                    isRestDay = true;// 无需打卡就是休息日
+                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 매주
+                    isRestDay = true;// 체크 불필요하면 휴일
                     break;
                 }
             }
@@ -320,7 +320,7 @@ public class AttendanceV2Helper {
     }
 
     /**
-     * 是否特殊工作日 并返回工作日的班次id
+     * 특별 근무일 여부 및 근무일 교대 id 반환
      *
      * @param date  yyyy-MM-dd
      * @param group
@@ -330,7 +330,7 @@ public class AttendanceV2Helper {
     public static String specialWorkDayShift(String date, AttendanceV2Group group)
             throws Exception {
         String shiftId = null;
-        // 工作日
+        // 근무일
         Date myDate = DateTools.parse(date, DateTools.format_yyyyMMdd);
         if (Config.workTime() != null && Config.workTime().inDefinedWorkday(myDate)) {
             shiftId = group.getShiftId();
@@ -338,13 +338,13 @@ public class AttendanceV2Helper {
         if (checkIsChineseWorkday(date)) {
             shiftId = group.getShiftId();
         }
-        // 考勤组的必须打卡日
+        // 근태 그룹의 필수 체크일
         if (group.getRequiredCheckInDateList() != null && !group.getRequiredCheckInDateList()
                 .isEmpty()) {
-            for (String d : group.getRequiredCheckInDateList()) { // 包含日期 ｜ 班次id ｜ 是否循环
+            for (String d : group.getRequiredCheckInDateList()) { // 포함 날짜 | 교대 id | 반복 여부
                 String[] dArray = d.split("\\|");
                 if (dArray.length < 3) {
-                    // 格式不正确
+                    // 형식이 올바르지 않음
                     continue;
                 }
                 if (dArray[0].equals(date)) {
@@ -354,21 +354,21 @@ public class AttendanceV2Helper {
                 if (dArray[2].equals("week")
                     && DateTools.dateIsInWeekCycle(
                         DateTools.parse(dArray[0], DateTools.format_yyyyMMdd),
-                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 每周
+                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 매주
                     shiftId = dArray[1];
                     break;
                 }
                 if (dArray[2].equals("twoWeek")
                     && DateTools.dateIsInTwoWeekCycle(
                         DateTools.parse(dArray[0], DateTools.format_yyyyMMdd),
-                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 每周
+                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 매주
                     shiftId = dArray[1];
                     break;
                 }
                 if (dArray[2].equals("month")
                     && DateTools.dateIsInMonthCycle(
                         DateTools.parse(dArray[0], DateTools.format_yyyyMMdd),
-                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 每周
+                        DateTools.parse(date, DateTools.format_yyyyMMdd))) { // 매주
                     shiftId = dArray[1];
                     break;
                 }
@@ -442,22 +442,22 @@ public class AttendanceV2Helper {
 
 
         private static final long serialVersionUID = -2684730459120409608L;
-        @FieldDescribe("查询日期，格式 yyyy-MM-dd")
+        @FieldDescribe("조회 날짜, 형식 yyyy-MM-dd")
         private String dateString;
 
-        @FieldDescribe("判断结果：WORKDAY 工作日，OFFDAY 放假日，NOT_FOUND 未找到")
+        @FieldDescribe("판정 결과: WORKDAY 근무일, OFFDAY 휴일, NOT_FOUND 찾지 못함")
         private String result;
 
-        @FieldDescribe("节假日名称")
+        @FieldDescribe("공휴일 이름")
         private String name;
 
-        @FieldDescribe("是否工作日")
+        @FieldDescribe("근무일 여부")
         private Boolean workDay;
 
-        @FieldDescribe("是否放假日")
+        @FieldDescribe("휴무일 여부")
         private Boolean offDay;
 
-        @FieldDescribe("节假日数据")
+        @FieldDescribe("휴일 데이터")
         private AttendanceV2Holiday holiday;
 
         public String getDateString() {

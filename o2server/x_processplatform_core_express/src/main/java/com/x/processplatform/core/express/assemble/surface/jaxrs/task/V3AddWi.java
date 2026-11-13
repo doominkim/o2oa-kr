@@ -17,19 +17,19 @@ public class V3AddWi extends GsonPropertyObject {
 	private static final String MODE_QUEUE = "queue";
 	private static final String MODE_PARALLEL = "parallel";
 
-	@FieldDescribe("加签模式:single,queue,parallel.")
+	@FieldDescribe("추가결재 모드: single,queue,parallel.")
 	private String mode;
 
-	@FieldDescribe("是否是前加签,false后加签.")
+	@FieldDescribe("전 추가결재 여부, false이면 후 추가결재.")
 	private Boolean before;
 
-	@FieldDescribe("加签人员.")
+	@FieldDescribe("추가결재 사용자.")
 	private List<String> distinguishedNameList;
 
-	@FieldDescribe("路由名称")
+	@FieldDescribe("경로 이름")
 	private String routeName;
 
-	@FieldDescribe("意见")
+	@FieldDescribe("의견")
 	private String opinion;
 
 	public String getMode() {

@@ -12,14 +12,14 @@ public class ActionDocToWordWorkOrWorkCompletedWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5681105204114768105L;
 
-	@FieldDescribe("转换文件名.")
-	@Schema(description = "转换文件名.")
+	@FieldDescribe("변환 파일명.")
+	@Schema(description = "변환 파일명.")
 	private String fileName;
-	@FieldDescribe("附件site.")
-	@Schema(description = "附件site.")
+	@FieldDescribe("첨부파일 site.")
+	@Schema(description = "첨부파일 site.")
 	private String site;
-	@FieldDescribe("内容.")
-	@Schema(description = "内容.")
+	@FieldDescribe("내용.")
+	@Schema(description = "내용.")
 	private String content;
 
 	public String getFileName() throws Exception {

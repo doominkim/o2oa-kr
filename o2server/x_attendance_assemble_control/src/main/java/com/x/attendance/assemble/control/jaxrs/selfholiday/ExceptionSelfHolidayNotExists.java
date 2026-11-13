@@ -7,6 +7,6 @@ class ExceptionSelfHolidayNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSelfHolidayNotExists( String id ) {
-		super("指定ID的员工个人请假申请信息对象不存在.ID:" + id );
+		super("지정한 ID의 직원 휴가 신청 정보가 없습니다. ID:" + id );
 	}
 }

@@ -139,7 +139,7 @@ MWF.xApplication.Attendance.Echarts = new Class({
         this.chart.setOption({
             // title: {
             //     text: this.lp.attendanceSummary
-            //     //subtext: '纯属虚构'
+            //     //subtext: '가상 데이터'
             // },
             tooltip: {
                 trigger: 'item',
@@ -148,7 +148,7 @@ MWF.xApplication.Attendance.Echarts = new Class({
             //legend: {
             //    orient: 'vertical',
             //    x: 'left',
-            //    data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+            //    data:['직접 방문','이메일 마케팅','제휴 광고','동영상 광고','검색 엔진']
             //},
             series: [
                 {
@@ -302,11 +302,11 @@ MWF.xApplication.Attendance.Echarts = new Class({
         }
         return val;
         //[
-        //    {value:335, name:'直接访问'},
-        //    {value:310, name:'邮件营销'},
-        //    {value:234, name:'联盟广告'},
-        //    {value:135, name:'视频广告'},
-        //    {value:1548, name:'搜索引擎'}
+        //    {value:335, name:'직접 방문'},
+        //    {value:310, name:'이메일 마케팅'},
+        //    {value:234, name:'제휴 광고'},
+        //    {value:135, name:'동영상 광고'},
+        //    {value:1548, name:'검색 엔진'}
         //]
     },
     getDateByMonth : function(){
@@ -388,7 +388,7 @@ MWF.xApplication.Attendance.Echarts = new Class({
         this.chart.setOption({
             // title: {
             //     text: this.lp.attendanceSummary
-            //     //subtext: '纯属虚构'
+            //     //subtext: '가상 데이터'
             // },
             tooltip: {
                 trigger: 'item',
@@ -447,11 +447,11 @@ MWF.xApplication.Attendance.Echarts = new Class({
         }
         return data;
         //[
-        //    {value:335, name:'直接访问'},
-        //    {value:310, name:'邮件营销'},
-        //    {value:234, name:'联盟广告'},
-        //    {value:135, name:'视频广告'},
-        //    {value:1548, name:'搜索引擎'}
+        //    {value:335, name:'직접 방문'},
+        //    {value:310, name:'이메일 마케팅'},
+        //    {value:234, name:'제휴 광고'},
+        //    {value:135, name:'동영상 광고'},
+        //    {value:1548, name:'검색 엔진'}
         //]
     },
     loadUnitBarChart : function(){
@@ -465,16 +465,16 @@ MWF.xApplication.Attendance.Echarts = new Class({
         var option = {
             // title: {
             //     text: this.lp.attendanceTrend
-            //     //subtext: '纯属虚构'
+            //     //subtext: '가상 데이터'
             // },
             tooltip : {
                 trigger: 'axis',
-                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                axisPointer : {            // 좌표축 지시기, 좌표축 트리거 시 유효
+                    type : 'shadow'        // 기본값은 직선, 선택 가능: 'line' | 'shadow'
                 }
             },
             //legend: {
-            //    data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
+            //    data:['직접 방문','이메일 마케팅','제휴 광고','동영상 광고','검색 엔진','바이두','구글','빙','기타']
             //},
             grid: {
                 left: '3%',

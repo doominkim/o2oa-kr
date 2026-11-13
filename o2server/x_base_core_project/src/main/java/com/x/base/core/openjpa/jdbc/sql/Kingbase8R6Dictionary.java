@@ -27,9 +27,9 @@ public class Kingbase8R6Dictionary extends DBDictionary {
 
 	public Kingbase8R6Dictionary() {
 		this.platform = "KingbaseES8R6";
-		// 适配 V8R6
+		// V8R6 대응
 		this.schemaCase = SCHEMA_CASE_LOWER;
-		// 适配 V8R6
+		// V8R6 대응
 		this.doubleTypeName = "DOUBLE PRECISION";
 		// 20241217 this.booleanTypeName = "BOOLEAN";
 		this.booleanTypeName = "INTEGER";

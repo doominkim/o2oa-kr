@@ -61,7 +61,7 @@ class ActionInfo extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = -5190514898231735375L;
-		@FieldDescribe("签名地址")
+		@FieldDescribe("서명 주소")
 		private String url;
 
 		public String getUrl() {

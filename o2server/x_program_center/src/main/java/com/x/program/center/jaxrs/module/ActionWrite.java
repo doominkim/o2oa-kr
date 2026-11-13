@@ -74,7 +74,7 @@ public class ActionWrite extends BaseAction {
 			}
 		}
 		if(StringUtils.isNotBlank(name)) {
-			logger.print("开始安装模块：{}", name);
+			logger.print("모듈 설치 시작: {}", name);
 		}
 		List<WrapPair> replaces = new ArrayList<>();
 		for (WiCommand cmd : wi.getProcessPlatformList()) {
@@ -319,7 +319,7 @@ public class ActionWrite extends BaseAction {
 			}
 		}
 		if(StringUtils.isNotBlank(name)) {
-			logger.print("完成安装模块：{}", name);
+			logger.print("모듈 설치 완료: {}", name);
 		}
 		result.setData(wo);
 		return result;
@@ -328,19 +328,19 @@ public class ActionWrite extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("流程应用")
+		@FieldDescribe("프로세스 앱")
 		private List<WiCommand> processPlatformList = new ArrayList<>();
 
-		@FieldDescribe("门户应用")
+		@FieldDescribe("포털 앱")
 		private List<WiCommand> portalList = new ArrayList<>();
 
-		@FieldDescribe("统计应用")
+		@FieldDescribe("통계 앱")
 		private List<WiCommand> queryList = new ArrayList<>();
 
-		@FieldDescribe("内容管理应用")
+		@FieldDescribe("콘텐츠 관리 앱")
 		private List<WiCommand> cmsList = new ArrayList<>();
 
-		@FieldDescribe("服务管理应用")
+		@FieldDescribe("서비스 관리 앱")
 		private List<WiCommand> serviceModuleList = new ArrayList<>();
 
 		public List<WiCommand> getProcessPlatformList() {
@@ -387,10 +387,10 @@ public class ActionWrite extends BaseAction {
 
 	public static class WiCommand extends GsonPropertyObject {
 
-		@FieldDescribe("标识")
+		@FieldDescribe("식별자")
 		private String id;
 
-		@FieldDescribe("方式")
+		@FieldDescribe("방식")
 		private String method;
 
 		public String getId() {
@@ -413,19 +413,19 @@ public class ActionWrite extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("流程应用")
+		@FieldDescribe("프로세스 앱")
 		private List<String> processPlatformList = new ArrayList<>();
 
-		@FieldDescribe("门户应用")
+		@FieldDescribe("포털 앱")
 		private List<String> portalList = new ArrayList<>();
 
-		@FieldDescribe("统计应用")
+		@FieldDescribe("통계 앱")
 		private List<String> queryList = new ArrayList<>();
 
-		@FieldDescribe("内容管理应用")
+		@FieldDescribe("콘텐츠 관리 앱")
 		private List<String> cmsList = new ArrayList<>();
 
-		@FieldDescribe("服务管理应用")
+		@FieldDescribe("서비스 관리 앱")
 		private List<String> serviceModuleList = new ArrayList<>();
 
 		public List<String> getProcessPlatformList() {

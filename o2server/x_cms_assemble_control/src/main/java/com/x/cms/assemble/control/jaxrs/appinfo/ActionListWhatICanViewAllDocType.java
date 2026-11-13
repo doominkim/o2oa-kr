@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 列示我可查看的应用
+ * 내가 열람할 수 있는 앱 조회
  * @author sword
  */
 public class ActionListWhatICanViewAllDocType extends BaseAction {

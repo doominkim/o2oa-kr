@@ -13,7 +13,7 @@ public class DetailWo extends AttendanceV2Detail {
       DetailWo.class, null,
       JpaObject.FieldsInvisible);
 
-  @FieldDescribe("打卡记录")
+  @FieldDescribe("체크 기록")
   private List<RecordWo> recordList;
 
   public List<RecordWo> getRecordList() {

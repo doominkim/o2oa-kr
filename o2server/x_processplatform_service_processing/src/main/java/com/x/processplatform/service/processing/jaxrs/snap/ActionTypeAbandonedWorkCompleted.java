@@ -84,7 +84,7 @@ class ActionTypeAbandonedWorkCompleted extends BaseAction {
 				clean(business, items, workCompleted, taskCompleteds, reads, readCompleteds, reviews, workLogs, records,
 						docSigns, docSignScrawls);
 				emc.commit();
-				// 创建已完成工作删除事件
+				// 완료된 업무 문서 삭제 이벤트 생성
 				emc.beginTransaction(WorkCompletedEvent.class);
 				emc.persist(WorkCompletedEvent.deleteEventInstance(workCompleted), CheckPersistType.all);
 				emc.commit();

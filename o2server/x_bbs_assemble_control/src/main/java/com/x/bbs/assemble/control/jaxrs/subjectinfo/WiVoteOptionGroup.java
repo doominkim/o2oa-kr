@@ -12,10 +12,10 @@ public class WiVoteOptionGroup extends BBSVoteOptionGroup{
 
 	public static List<String> Excludes = new ArrayList<String>();
 	
-	@FieldDescribe( "投票选项集合" )
+	@FieldDescribe( "투표 선택지 집합" )
 	private List<WiVoteOption> voteOptions = null;
 	
-	@FieldDescribe( "用户提交投票结果时选择的选项的ID集合" )
+	@FieldDescribe( "사용자가 투표 결과 제출 시 선택한 선택지 ID 집합" )
 	private List<String> selectedVoteOptionIds = null;
 
 	public void setVoteOptions(List<WiVoteOption> voteOptions) {

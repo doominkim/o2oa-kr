@@ -37,7 +37,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.program.center.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Meta", description = "服务管理验证数据结构.")
+@Schema(name = "Meta", description = "서비스 관리 검증 데이터 구조.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Validation.Meta.TABLE, uniqueConstraints = {
@@ -67,7 +67,7 @@ public class Meta extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -88,14 +88,14 @@ public class Meta extends SliceJpaObject {
 	}
 
 	public static final String STRINGVALUE_FIELDNAME = "stringValue";
-	@FieldDescribe("String 值.")
+	@FieldDescribe("String 값.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + STRINGVALUE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + STRINGVALUE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue;
 
 	public static final String STRINGLOBVALUE_FIELDNAME = "stringLobValue";
-	@FieldDescribe("String Lob 值.")
+	@FieldDescribe("String Lob 값.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + STRINGLOBVALUE_FIELDNAME)
@@ -103,35 +103,35 @@ public class Meta extends SliceJpaObject {
 	private String stringLobValue;
 
 	public static final String INTEGERVALUE_FIELDNAME = "integerValue";
-	@FieldDescribe("Integer 值.")
+	@FieldDescribe("Integer 값.")
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + INTEGERVALUE_FIELDNAME)
 	@Column(name = ColumnNamePrefix + INTEGERVALUE_FIELDNAME)
 	private Integer integerValue;
 
 	public static final String LONGVALUE_FIELDNAME = "longValue";
-	@FieldDescribe("Long 值.")
+	@FieldDescribe("Long 값.")
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + LONGVALUE_FIELDNAME)
 	@Column(name = ColumnNamePrefix + LONGVALUE_FIELDNAME)
 	private Long longValue;
 
 	public static final String FLOATVALUE_FIELDNAME = "floatValue";
-	@FieldDescribe("Float 值.")
+	@FieldDescribe("Float 값.")
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + FLOATVALUE_FIELDNAME)
 	@Column(name = ColumnNamePrefix + FLOATVALUE_FIELDNAME)
 	private Float floatValue;
 
 	public static final String DOUBLEVALUE_FIELDNAME = "doubleValue";
-	@FieldDescribe("Double 值.")
+	@FieldDescribe("Double 값.")
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + DOUBLEVALUE_FIELDNAME)
 	@Column(name = ColumnNamePrefix + DOUBLEVALUE_FIELDNAME)
 	private Double doubleValue;
 
 	public static final String DATETIMEVALUE_FIELDNAME = "dateTimeValue";
-	@FieldDescribe("DateTime 值.")
+	@FieldDescribe("DateTime 값.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + DATETIMEVALUE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + DATETIMEVALUE_FIELDNAME)
@@ -139,7 +139,7 @@ public class Meta extends SliceJpaObject {
 	private Date dateTimeValue;
 
 	public static final String DATEVALUE_FIELDNAME = "dateValue";
-	@FieldDescribe("Date 值.")
+	@FieldDescribe("Date 값.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + DATEVALUE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + DATEVALUE_FIELDNAME)
@@ -147,7 +147,7 @@ public class Meta extends SliceJpaObject {
 	private Date dateValue;
 
 	public static final String TIMEVALUE_FIELDNAME = "timeValue";
-	@FieldDescribe("Time 值.")
+	@FieldDescribe("Time 값.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + TIMEVALUE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + TIMEVALUE_FIELDNAME)
@@ -155,13 +155,13 @@ public class Meta extends SliceJpaObject {
 	private Date timeValue;
 
 	public static final String BOOLEANVALUE_FIELDNAME = "booleanValue";
-	@FieldDescribe("Boolean 值.")
+	@FieldDescribe("Boolean 값.")
 	@Column(name = ColumnNamePrefix + BOOLEANVALUE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean booleanValue;
 
 	public static final String STRINGVALUELIST_FIELDNAME = "stringValueList";
-	@FieldDescribe("String List 值.")
+	@FieldDescribe("String List 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ STRINGVALUELIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + STRINGVALUELIST_FIELDNAME
@@ -173,7 +173,7 @@ public class Meta extends SliceJpaObject {
 	private List<String> stringValueList;
 
 	public static final String INTEGERVALUELIST_FIELDNAME = "integerValueList";
-	@FieldDescribe("Integer List 值.")
+	@FieldDescribe("Integer List 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ INTEGERVALUELIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + INTEGERVALUELIST_FIELDNAME
@@ -185,7 +185,7 @@ public class Meta extends SliceJpaObject {
 	private List<Integer> integerValueList;
 
 	public static final String LONGVALUELIST_FIELDNAME = "longValueList";
-	@FieldDescribe("Long List类型.")
+	@FieldDescribe("Long List 유형.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ LONGVALUELIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + LONGVALUELIST_FIELDNAME
@@ -197,7 +197,7 @@ public class Meta extends SliceJpaObject {
 	private List<Long> longValueList;
 
 	public static final String FLOATVALUELIST_FIELDNAME = "floatValueList";
-	@FieldDescribe("Float List 值.")
+	@FieldDescribe("Float List 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ FLOATVALUELIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + FLOATVALUELIST_FIELDNAME
@@ -209,7 +209,7 @@ public class Meta extends SliceJpaObject {
 	private List<Float> floatValueList;
 
 	public static final String DOUBLEVALUELIST_FIELDNAME = "doubleValueList";
-	@FieldDescribe("Double List 值.")
+	@FieldDescribe("Double List 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ DOUBLEVALUELIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + DOUBLEVALUELIST_FIELDNAME
@@ -221,7 +221,7 @@ public class Meta extends SliceJpaObject {
 	private List<Double> doubleValueList;
 
 	public static final String DATETIMEVALUELIST_FIELDNAME = "dateTimeValueList";
-	@FieldDescribe("DateTime List 值.")
+	@FieldDescribe("DateTime List 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ DATETIMEVALUELIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -233,7 +233,7 @@ public class Meta extends SliceJpaObject {
 	private List<Date> dateTimeValueList;
 
 	public static final String BOOLEANVALUELIST_FIELDNAME = "booleanValueList";
-	@FieldDescribe("Boolean List 值.")
+	@FieldDescribe("Boolean List 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ BOOLEANVALUELIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + BOOLEANVALUELIST_FIELDNAME
@@ -245,7 +245,7 @@ public class Meta extends SliceJpaObject {
 	private List<Boolean> booleanValueList;
 
 	public static final String STRINGVALUEMAP_FIELDNAME = "stringValueMap";
-	@FieldDescribe("String Map 值.")
+	@FieldDescribe("String Map 값.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType = String.class)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -258,7 +258,7 @@ public class Meta extends SliceJpaObject {
 	private Map<String, String> stringValueMap;
 
 	public static final String INTEGERVALUEMAP_FIELDNAME = "integerValueMap";
-	@FieldDescribe("Integer Map 值.")
+	@FieldDescribe("Integer Map 값.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType = String.class)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -271,7 +271,7 @@ public class Meta extends SliceJpaObject {
 	private Map<String, Integer> integerValueMap;
 
 	public static final String LONGVALUEMAP_FIELDNAME = "longValueMap";
-	@FieldDescribe("Long Map 值.")
+	@FieldDescribe("Long Map 값.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType = String.class)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -284,7 +284,7 @@ public class Meta extends SliceJpaObject {
 	private Map<String, Long> longValueMap;
 
 	public static final String FLOATVALUEMAP_FIELDNAME = "floatValueMap";
-	@FieldDescribe("Float Map 值.")
+	@FieldDescribe("Float Map 값.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType = String.class)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -297,7 +297,7 @@ public class Meta extends SliceJpaObject {
 	private Map<String, Float> floatValueMap;
 
 	public static final String DOUBLEVALUEMAP_FIELDNAME = "doubleValueMap";
-	@FieldDescribe("Double Map 值.")
+	@FieldDescribe("Double Map 값.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType = String.class)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -310,7 +310,7 @@ public class Meta extends SliceJpaObject {
 	private Map<String, Double> doubleValueMap;
 
 	public static final String DATETIMEVALUEMAP_FIELDNAME = "dateTimeValueMap";
-	@FieldDescribe("DateTime Map 值.")
+	@FieldDescribe("DateTime Map 값.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType = String.class)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -323,7 +323,7 @@ public class Meta extends SliceJpaObject {
 	private Map<String, Date> dateTimeValueMap;
 
 	public static final String BOOLEANVALUEMAP_FIELDNAME = "booleanValueMap";
-	@FieldDescribe("Boolean Map值.")
+	@FieldDescribe("Boolean Map 값.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER, elementType = String.class, keyType = String.class)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -336,7 +336,7 @@ public class Meta extends SliceJpaObject {
 	private Map<String, Boolean> booleanValueMap;
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

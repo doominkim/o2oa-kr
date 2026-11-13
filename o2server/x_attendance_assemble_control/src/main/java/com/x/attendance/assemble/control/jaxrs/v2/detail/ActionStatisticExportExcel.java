@@ -46,18 +46,18 @@ public class ActionStatisticExportExcel extends BaseAction {
                 EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             StatisticWi wi = this.convertToWrapIn(jsonElement, StatisticWi.class);
             if (StringUtils.isEmpty(wi.getFilter()) && (wi.getFilterList() == null || wi.getFilterList().isEmpty())) {
-                throw new ExceptionEmptyParameter("过滤人员或组织");
+                throw new ExceptionEmptyParameter("필터 인원 또는 조직");
             }
             if (StringUtils.isEmpty(wi.getStartDate())) {
-                throw new ExceptionEmptyParameter("开始日期");
+                throw new ExceptionEmptyParameter("시작 날짜");
             }
             if (StringUtils.isEmpty(wi.getEndDate())) {
-                throw new ExceptionEmptyParameter("结束日期");
+                throw new ExceptionEmptyParameter("종료 날짜");
             }
-            LOGGER.info("开始统计考勤数据, filter: {}, start:{}, end:{} ", ListTools.toStringJoin(wi.getFilterList()), wi.getStartDate(), wi.getEndDate());
-            // 日期检查
-            Date startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 检查格式
-            Date endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 检查格式
+            LOGGER.info("근태 데이터 통계 시작, filter: {}, start:{}, end:{} ", ListTools.toStringJoin(wi.getFilterList()), wi.getStartDate(), wi.getEndDate());
+            // 날짜 검사
+            Date startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 형식 검사
+            Date endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 형식 검사
             if (startDate.after(endDate)) {
                 throw new ExceptionDateEndBeforeStartError();
             }
@@ -71,17 +71,17 @@ public class ActionStatisticExportExcel extends BaseAction {
                 analysisPerson(userList, wi.getFilter(), business);
             }
             if (userList.isEmpty()) {
-                throw new ExceptionEmptyParameter("过滤人员");
+                throw new ExceptionEmptyParameter("필터 인원");
             }
             ActionResult<Wo> result = new ActionResult<>();
-            // 根据人员循环查询 并统计数据
+            // 사용자별로 반복 조회해 데이터 통계
             List<StatisticWo> wos = new ArrayList<>();
-            // 统计数据计算
+            // 통계 데이터 계산
             statisticDetail(wi, userList, business, wos);
-            // 数据excel文件传教
+            // 데이터 excel 파일 생성
             Workbook wb = new XSSFWorkbook();
             createExcelFile(wb, wos);
-            // 生成excel
+            // excel 생성
             String fileName = "근태통계_"+wi.getStartDate() + "-" + wi.getEndDate() + "_" +DateTools.format(new Date(), DateTools.formatCompact_yyyyMMddHHmmss)+".xlsx";
             wb.write(os);
             StorageMapping gfMapping = ThisApplication.context().storageMappings().random(GeneralFile.class);
@@ -97,12 +97,12 @@ public class ActionStatisticExportExcel extends BaseAction {
             return result;
         } finally {
             lock.unlock();
-            LOGGER.info("统计结束！");
+            LOGGER.info("통계 종료!");
         }
     }
 
     private void analysisPerson(List<String> userList, String filter, Business business) throws Exception {
-        if (filter.endsWith("@U")) { // 组织转化成人员列表 递归
+        if (filter.endsWith("@U")) { // 조직을 사용자 목록으로 변환(재귀)
             List<String> users = business.organization().person().listWithUnitSubNested(filter);
             if (users != null && !users.isEmpty()) {
                 userList.addAll(users);
@@ -113,10 +113,10 @@ public class ActionStatisticExportExcel extends BaseAction {
     }
 
     private void createExcelFile(Workbook wb, List<StatisticWo> wos) throws Exception {
-        // 创建新的表格
+        // 새 표 생성
         Sheet sheet = wb.createSheet("근태 통계");
         sheet.setDefaultColumnWidth(25);
-        // 先创建表头
+        // 먼저 헤더 생성
         Row row  = sheet.createRow(0);
         row.createCell(0).setCellValue("이름");
         row.createCell(1).setCellValue("평균 근무시간(시간)");
@@ -151,10 +151,10 @@ public class ActionStatisticExportExcel extends BaseAction {
 
     }
 
-    // 格式化分钟数为 xx小时xx分钟
+    // 분 수를 xx시간xx분 형식으로 변환
     private String convertMinutesToHoursAndMinutes(int workTimeDuration) {
-        int hours = workTimeDuration / 60; // 取得小时数
-        int remainingMinutes = workTimeDuration % 60; // 取得剩余的分钟数
+        int hours = workTimeDuration / 60; // 시간 수 계산
+        int remainingMinutes = workTimeDuration % 60; // 남은 분 수 계산
         String result = "";
 
         if (hours > 0) {
@@ -171,7 +171,7 @@ public class ActionStatisticExportExcel extends BaseAction {
     public static class Wo extends GsonPropertyObject {
 
         private static final long serialVersionUID = 1380487824637447358L;
-        @FieldDescribe("返回的结果标识，下载结果文件使用")
+        @FieldDescribe("반환 결과 식별자, 결과 파일 다운로드에 사용")
         private String flag;
 
 

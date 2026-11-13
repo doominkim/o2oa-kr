@@ -73,7 +73,7 @@ public class ExecuteV2Search extends BaseAction {
 
 			CmsPlan cmsPlan = null;
 			ProcessPlatformPlan processPlatformPlan = null;
-			// 后续要用到plan中的具体内容,这里先生成,避免后续多次生成
+			// 이후 plan의 구체 내용이 필요하므로 여기서 먼저 생성하여 반복 생성 방지
 			if (View.TYPE_CMS.equals(view.getType())) {
 				cmsPlan = gson.fromJson(view.getData(), CmsPlan.class);
 			} else {
@@ -86,27 +86,27 @@ public class ExecuteV2Search extends BaseAction {
 			Query itemQuery = this.itemQuery(search);
 			Query recencyQuery = this.recencyQuery();
 
-			// 1) 关键词子查询：至少一个字段要命中
+			// 1) 키워드 하위 쿼리: 최소 한 필드는 일치해야 함
 			BooleanQuery.Builder keywordShoulds = new BooleanQuery.Builder();
 			keywordShoulds.add(bodyQuery, BooleanClause.Occur.SHOULD);
 			keywordShoulds.add(attachmentQuery, BooleanClause.Occur.SHOULD);
 			keywordShoulds.add(itemQuery, BooleanClause.Occur.SHOULD);
 			keywordShoulds.setMinimumNumberShouldMatch(1);
 
-			// 2) 外层 Query：权限/范围做 FILTER，关键词子查询做 MUST，时间加分做 SHOULD
+			// 2) 외부 Query: 권한/범위는 FILTER, 키워드 하위 쿼리는 MUST, 시간 가산점은 SHOULD
 			BooleanQuery.Builder qb = new BooleanQuery.Builder();
-			qb.add(scopeFilter, BooleanClause.Occur.FILTER); // 不计分
-			if (this.accessible(view, cmsPlan, processPlatformPlan)) {// 根据view的设置是否忽略权限来判断是否要加入权限判断
+			qb.add(scopeFilter, BooleanClause.Occur.FILTER); // 점수 미반영
+			if (this.accessible(view, cmsPlan, processPlatformPlan)) {// view 설정의 권한 무시 여부에 따라 권한 판단 추가 여부 결정
 				List<String> auths = new ArrayList<>();
 				if (Objects.nonNull(runtime.authList)) {
 					auths.addAll(runtime.authList);
 				}
-				auths.add("*"); // 加入cms任意人员可见标志
+				auths.add("*"); // cms 전체 사용자 열람 가능 표시 추가
 				Query permissionFilter = termInSet(Indexs.FIELD_READERS, auths);
-				qb.add(permissionFilter, BooleanClause.Occur.FILTER); // 不计分
+				qb.add(permissionFilter, BooleanClause.Occur.FILTER); // 점수 미반영
 			}
-			qb.add(keywordShoulds.build(), BooleanClause.Occur.MUST); // 👈 必须至少有一个关键词命中
-			qb.add(recencyQuery, BooleanClause.Occur.SHOULD); // 👈 只加分，不影响是否命中
+			qb.add(keywordShoulds.build(), BooleanClause.Occur.MUST); // 👈 최소 한 개의 키워드가 일치해야 함
+			qb.add(recencyQuery, BooleanClause.Occur.SHOULD); // 👈 가산점만 부여, 일치 여부에는 영향 없음
 
 			BooleanQuery query = qb.build();
 
@@ -208,7 +208,7 @@ public class ExecuteV2Search extends BaseAction {
 
 	private Query recencyQuery() {
 		long now = System.currentTimeMillis();
-		long pivot = TimeUnit.DAYS.toMillis(21); // “半衰期”：与 now 相差 n 天时拿到一半加分
+		long pivot = TimeUnit.DAYS.toMillis(21); // “반감기”: now와 n일 차이일 때 가산점 절반
 		return LongPoint.newDistanceFeatureQuery(Indexs.FIELD_UPDATETIME, 5f, now, pivot);
 	}
 

@@ -4,9 +4,9 @@
         "pinyin": "yunweiqunzu",
         "pinyinInitial": "ywqz",
         "description": "",
-        "name": "运维群组",
+        "name": "운영 그룹",
         "unique": "f2637ec1-d3be-4076-8dde-df88892cb4da",
-        "distinguishedName": "运维群组@f2637ec1-d3be-4076-8dde-df88892cb4da@G",
+        "distinguishedName": "운영 그룹@f2637ec1-d3be-4076-8dde-df88892cb4da@G",
         "orderNumber": 97928948,
         "personList": [
           "3455b82a-399c-4ee4-b9b9-e70ae40fbaf1",

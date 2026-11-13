@@ -27,9 +27,9 @@ public class ActionRefreshAllDocumentPermission extends BaseAction {
 		if (check) {
 			try {
 				if(lock.tryLock()) {
-					logger.info("开始更新所有文档权限........");
+					logger.info("모든 문서 권한 갱신 시작........");
 					documentPersistService.refreshAllDocumentPermission(true);
-					logger.info("完成更新所有文档权限........");
+					logger.info("모든 문서 권한 갱신 완료........");
 					wo.setValue("권한 처리가 완료되었습니다.");
 					lock.unlock();
 				}else{

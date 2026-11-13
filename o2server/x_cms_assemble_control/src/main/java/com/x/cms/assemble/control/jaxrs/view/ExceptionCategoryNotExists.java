@@ -7,6 +7,6 @@ class ExceptionCategoryNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCategoryNotExists( String id ) {
-		super( "指定的分类不存在：{}." + id );
+		super( "지정한 분류가 없습니다: {}." + id );
 	}
 }

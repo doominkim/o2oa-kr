@@ -7,6 +7,6 @@ public class ExceptionSubjectQueryById extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjectQueryById( Throwable e, String id ) {
-		super("根据指定ID查询主题信息时发生异常.ID:" + id, e );
+		super("지정한 ID로 주제 정보를 조회하는 중 오류가 발생했습니다. ID:" + id, e );
 	}
 }

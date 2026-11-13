@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("correlation")
-@JaxrsDescribe("关联内容.")
+@JaxrsDescribe("관련 콘텐츠.")
 public class CorrelationAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CorrelationAction.class);
 
-	@JaxrsMethodDescribe(value = "根据任务标识列示关联内容.", action = ActionListWithJob.class)
+	@JaxrsMethodDescribe(value = "작업 식별자로 관련 내용 목록 조회.", action = ActionListWithJob.class)
 	@GET
 	@Path("list/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job) {
 		ActionResult<List<ActionListWithJob.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,14 +50,14 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据任务标识关联内容框标识列示关联内容.", action = ActionListWithJobWithSite.class)
+	@JaxrsMethodDescribe(value = "작업 식별자와 관련 내용 상자 식별자로 관련 내용 목록 조회.", action = ActionListWithJobWithSite.class)
 	@GET
 	@Path("list/job/{job}/site/{site}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJobWithSite(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job,
-			@JaxrsParameterDescribe("关联内容框标识") @PathParam("site") String site) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job,
+			@JaxrsParameterDescribe("관련 콘텐츠 상자 식별자") @PathParam("site") String site) {
 		ActionResult<List<ActionListWithJobWithSite.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,13 +69,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据任务标识创建关联内容.", action = ActionCreateWithJob.class)
+	@JaxrsMethodDescribe(value = "작업 식별자로 관련 내용 생성.", action = ActionCreateWithJob.class)
 	@POST
 	@Path("job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithJob.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,13 +87,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "替换文档指定site的关联文档数据.", action = ActionUpdateWithJob.class)
+	@JaxrsMethodDescribe(value = "문서 지정 site의 관련 문서 데이터 교체.", action = ActionUpdateWithJob.class)
 	@POST
 	@Path("update/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithJob.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -105,13 +105,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除关联内容.", action = ActionDeleteWithJob.class)
+	@JaxrsMethodDescribe(value = "관련 콘텐츠 삭제.", action = ActionDeleteWithJob.class)
 	@POST
 	@Path("job/{job}/delete")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job, JsonElement jsonElement) {
 		ActionResult<ActionDeleteWithJob.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

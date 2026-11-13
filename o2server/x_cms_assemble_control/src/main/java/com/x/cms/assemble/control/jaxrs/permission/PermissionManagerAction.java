@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("permission/management")
-@JaxrsDescribe("文档权限操作服务（管理员）")
+@JaxrsDescribe("문서 권한 작업 서비스(관리자)")
 public class PermissionManagerAction extends StandardJaxrsAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( PermissionManagerAction.class );
 
-	@JaxrsMethodDescribe(value = "重新计算所有文档的权限信息.", action = ActionRefreshAllDocumentPermission.class)
+	@JaxrsMethodDescribe(value = "모든 문서의 권한 정보 재계산.", action = ActionRefreshAllDocumentPermission.class)
 	@GET
 	@Path("refresh/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -42,7 +42,7 @@ public class PermissionManagerAction extends StandardJaxrsAction {
 				result = new ActionRefreshAllDocumentPermission().execute( request, effectivePerson );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAppCategoryAdminProcess( e, "查询登录用户是否指定栏目的管理员时发生异常。" );
+				Exception exception = new ExceptionAppCategoryAdminProcess( e, "로그인 사용자가 지정한 게시판의 관리자인지 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -50,13 +50,13 @@ public class PermissionManagerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "重新计算指定分类文档的权限信息.", action = ActionRefreshCategoryDocPermission.class)
+	@JaxrsMethodDescribe(value = "지정 분류 문서의 권한 정보 재계산.", action = ActionRefreshCategoryDocPermission.class)
 	@GET
 	@Path("refresh/category/{categoryId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void refreshCategoryDocument( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-										 @JaxrsParameterDescribe("分类ID") @PathParam("categoryId") String categoryId ) {
+										 @JaxrsParameterDescribe("분류ID") @PathParam("categoryId") String categoryId ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionRefreshCategoryDocPermission.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -65,7 +65,7 @@ public class PermissionManagerAction extends StandardJaxrsAction {
 				result = new ActionRefreshCategoryDocPermission().execute( request, effectivePerson, categoryId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAppCategoryAdminProcess( e, "查询登录用户是否指定栏目的管理员时发生异常。" );
+				Exception exception = new ExceptionAppCategoryAdminProcess( e, "로그인 사용자가 지정한 게시판의 관리자인지 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

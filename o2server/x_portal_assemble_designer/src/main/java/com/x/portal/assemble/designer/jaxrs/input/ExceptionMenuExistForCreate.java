@@ -7,6 +7,6 @@ class ExceptionMenuExistForCreate extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionMenuExistForCreate(String id) {
-		super("创建菜单冲突, id:{}.", id);
+		super("메뉴 생성 충돌, id: {}.", id);
 	}
 }

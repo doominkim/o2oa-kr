@@ -8,11 +8,11 @@
     <!-- content -->
     <div class="sl-dialog-content">
       <!-- toolbar -->
-      <!-- 班次选择 -->
+      <!-- 교대조 선택 -->
       <div class="schedule_tool_line">
         <div class="flex_wrap">
           <div >{{$.lp.scheduleForm.shift}}</div>
-          <!-- 操作班次按钮 -->
+          <!-- 교대조 조작 버튼 -->
           <div @click="openShiftSelector" class="margin-left">
             <div class="icon"><i class="o2icon-icon_bianji primary_color"></i></div>
           </div>
@@ -25,7 +25,7 @@
         </div>
       </div>
       
-      <!-- 班次周期 -->
+      <!-- 교대 주기 -->
       <div class="schedule_tool_line">
         <div class="flex_wrap">
           <div >{{$.lp.scheduleForm.cycle}}</div>
@@ -42,7 +42,7 @@
         </div>
       </div>
       
-       <!-- 月份选择 -->
+       <!-- 월 선택 -->
        <div>
         <div class="flex_wrap margin-top margin-bottom" style="float: left;">
           <div class="schedule-date-picker">
@@ -85,14 +85,14 @@
             </div>
           </div>
         </div>
-        <!-- 选择班次的弹出框 -->
+        <!-- 교대조 선택 팝업 -->
         <div class="schedule_selectedFrame" id="selectedFrame" style="display: none;">
           <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
             <div class="t-popup" style="position: absolute;margin: 0px;">
               <div class="t-popup__content" style="margin: 0px; padding: 0px; border-radius: 2px;">
                 <div class="selected_popup">
                   <div class="schedule_list">
-                    <!-- 班次列表 -->
+                    <!-- 교대조 목록 -->
                     <div class="schedule_list_item" oo-each="$.shiftSelector.shiftSelected" oo-item="shift" @click="this.chooseShiftOnDate(shift.value)">
                       {{shift.value.shiftName}}
                     </div>

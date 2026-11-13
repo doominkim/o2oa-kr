@@ -35,7 +35,7 @@ class ActionAssembleWithWebServer extends BaseAction {
             this.data = data;
         }
 
-        @Schema(description = "数据.")
+        @Schema(description = "데이터.")
         private String data;
 
         public String getData() {
@@ -61,7 +61,7 @@ class ActionAssembleWithWebServer extends BaseAction {
         @FieldDescribe("mockConfig")
         private JsonObject mockConfig;
 
-        @FieldDescribe("是否启用单服务器.")
+        @FieldDescribe("단일 서버 사용 여부.")
         private Boolean standalone;
 
         public WoWebServer getWebServer() {

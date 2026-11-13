@@ -31,14 +31,14 @@ import com.x.base.core.project.logger.LoggerFactory;
  */
 
 @Path("v2/my")
-@JaxrsDescribe("我的考勤API")
+@JaxrsDescribe("내 근태 API")
 public class MyAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(MyAction.class);
 
 
 
-    @JaxrsMethodDescribe(value = "考勤版本查询.", action = ActionVersion.class)
+    @JaxrsMethodDescribe(value = "근태 버전 조회.", action = ActionVersion.class)
     @GET
     @Path("version")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -55,7 +55,7 @@ public class MyAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "我的考勤权限.", action = ActionMyControl.class)
+    @JaxrsMethodDescribe(value = "내 근태 권한.", action = ActionMyControl.class)
     @GET
     @Path("controls")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -72,7 +72,7 @@ public class MyAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据日期查询我的考勤数据.", action = ActionListDetailWithDate.class)
+    @JaxrsMethodDescribe(value = "날짜로 내 근태 데이터 조회.", action = ActionListDetailWithDate.class)
     @POST
     @Path("detail/list")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -89,7 +89,7 @@ public class MyAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据日期查询我的打卡记录列表.", action = ActionListCheckInRecordWithDate.class)
+    @JaxrsMethodDescribe(value = "날짜로 내 체크 기록 목록 조회.", action = ActionListCheckInRecordWithDate.class)
     @POST
     @Path("checkin/record/list")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -106,7 +106,7 @@ public class MyAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据日期查询我的考勤统计.", action = ActionMyStatistic.class)
+    @JaxrsMethodDescribe(value = "날짜로 내 근태 통계 조회.", action = ActionMyStatistic.class)
     @POST
     @Path("statistic")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -123,7 +123,7 @@ public class MyAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "是否是休息日.", action = ActionDateIsRestDay.class)
+    @JaxrsMethodDescribe(value = "휴일 여부.", action = ActionDateIsRestDay.class)
     @POST
     @Path("rest/date/check")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

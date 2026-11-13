@@ -29,7 +29,7 @@ class ActionListWithPerson extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(ActionListWithPerson.class);
 
 	/*
-	 * 当前用户可见的Query,通过pick进行缓存
+	 * 현재 사용자에게 보이는 Query, pick으로 캐시
 	 */
 
 	ActionResult<List<Wo>> execute(EffectivePerson effectivePerson) throws Exception {
@@ -38,7 +38,7 @@ class ActionListWithPerson extends BaseAction {
 			Business business = new Business(emc);
 			ActionResult<List<Wo>> result = new ActionResult<>();
 			List<String> identities = business.organization().identity().listWithPerson(effectivePerson);
-			/** 去除部门以及上级部门,如果设置了一级部门可用,那么一级部门下属的二级部门也可用 */
+			/** 부서 및 상위 부서 제거, 1단계 부서가 사용 가능하면 그 하위 2단계 부서도 사용 가능 */
 			List<String> units = business.organization().unit().listWithPersonSupNested(effectivePerson);
 			List<String> ids = this.list(business, effectivePerson, identities, units);
 			List<Query> os = business.query().pick(ids);

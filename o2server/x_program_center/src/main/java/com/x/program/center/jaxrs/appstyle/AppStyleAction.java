@@ -26,12 +26,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("appstyle")
-@JaxrsDescribe("移动客户端样式")
+@JaxrsDescribe("모바일 클라이언트 스타일")
 public class AppStyleAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AppStyleAction.class);
 
-	@JaxrsMethodDescribe(value = "获取当前生效的移动客户端样式.", action = ActionCurrentStyle.class)
+	@JaxrsMethodDescribe(value = "현재 적용 중인 모바일 클라이언트 스타일 조회.", action = ActionCurrentStyle.class)
 	@GET
 	@Path("current/style")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -48,7 +48,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前生效的移动客户端样式最后修改时间,如果默认那么返回2018-01-01 00:00:00.", action = ActionCurrentUpdate.class)
+	@JaxrsMethodDescribe(value = "현재 적용 중인 모바일 클라이언트 스타일 최종 수정 시간 조회, 기본값이면 2018-01-01 00:00:00 반환.", action = ActionCurrentUpdate.class)
 	@GET
 	@Path("current/update")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定的移动客户端样式.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "지정 모바일 클라이언트 스타일 업데이트.", action = ActionEdit.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +82,15 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:首页底部菜单中间主页的按钮(不选中),114x114", action = ActionImageMenuLogoBlur.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 홈 하단 메뉴 가운데 홈 버튼(미선택),114x114", action = ActionImageMenuLogoBlur.class)
 	@PUT
 	@Path("image/menu/logo/blur")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void imageMenuLogoBlur(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("图片名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("图片文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("이미지 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("이미지 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionImageMenuLogoBlur.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -102,15 +102,15 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:首页底部菜单中间主页的按钮(选中),114x114", action = ActionImageMenuLogoFocus.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 홈 하단 메뉴 가운데 홈 버튼(선택),114x114", action = ActionImageMenuLogoFocus.class)
 	@PUT
 	@Path("image/menu/logo/focus")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void imageMenuLogoFocus(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("图片名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("图片文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("이미지 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("이미지 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionImageMenuLogoFocus.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -122,15 +122,15 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:启动页的logo,195x195.", action = ActionImageLaunchLogo.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 시작 화면 logo,195x195.", action = ActionImageLaunchLogo.class)
 	@PUT
 	@Path("image/launch/logo")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void imageLaunchLogo(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("图片名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("图片文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("이미지 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("이미지 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionImageLaunchLogo.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -142,15 +142,15 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:登陆页面默认头像图片,225x225.", action = ActionImageLoginAvatar.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 로그인 화면 기본 프로필 이미지,225x225.", action = ActionImageLoginAvatar.class)
 	@PUT
 	@Path("image/login/avatar")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void imageLoginAvatar(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("图片名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("图片文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("이미지 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("이미지 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionImageLoginAvatar.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -162,15 +162,15 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:流程、应用的默认图片,90x90.", action = ActionImageProcessDefault.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 프로세스·앱 기본 이미지,90x90.", action = ActionImageProcessDefault.class)
 	@PUT
 	@Path("image/process/default")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void imageProcessDefault(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("图片名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("图片文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("이미지 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("이미지 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionImageProcessDefault.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -182,15 +182,15 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:设置页面“关于”项的图标,66x66.", action = ActionImageSetupAboutLogo.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 설정 화면 「정보」 항목 아이콘,66x66.", action = ActionImageSetupAboutLogo.class)
 	@PUT
 	@Path("image/setup/about/logo")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void imageSetupAboutLogo(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("图片名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("图片文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("이미지 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("이미지 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionImageSetupAboutLogo.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -202,15 +202,15 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:应用页面顶部图片,730x390.", action = ActionImageApplicationTop.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 앱 페이지 상단 이미지,730x390.", action = ActionImageApplicationTop.class)
 	@PUT
 	@Path("image/application/top")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void imageApplicationTop(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 									@FormDataParam(FILE_FIELD) final byte[] bytes,
-									@JaxrsParameterDescribe("图片名称") @FormDataParam(FILENAME_FIELD) String fileName,
-									@JaxrsParameterDescribe("图片文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+									@JaxrsParameterDescribe("이미지 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+									@JaxrsParameterDescribe("이미지 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionImageApplicationTop.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -222,7 +222,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除图片:首页底部菜单中间主页的按钮(不选中).", action = ActionImageMenuLogoBlurErase.class)
+	@JaxrsMethodDescribe(value = "이미지 삭제: 홈 하단 메뉴 가운데 홈 버튼(미선택).", action = ActionImageMenuLogoBlurErase.class)
 	@GET
 	@Path("image/menu/logo/blur/erase")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -240,7 +240,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除图片:首页底部菜单中间主页的按钮(选中)..", action = ActionImageMenuLogoFocusErase.class)
+	@JaxrsMethodDescribe(value = "이미지 삭제: 홈 하단 메뉴 가운데 홈 버튼(선택)..", action = ActionImageMenuLogoFocusErase.class)
 	@GET
 	@Path("image/menu/logo/focus/erase")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -258,7 +258,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:启动页的logo.", action = ActionImageLaunchLogoErase.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 시작 화면 logo.", action = ActionImageLaunchLogoErase.class)
 	@GET
 	@Path("image/launch/logo/erase")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -276,7 +276,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:登陆页面默认头像图片.", action = ActionImageLoginAvatarErase.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 로그인 화면 기본 프로필 이미지.", action = ActionImageLoginAvatarErase.class)
 	@GET
 	@Path("image/login/avatar/erase")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -294,7 +294,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:流程、应用的默认图片.", action = ActionImageProcessDefaultErase.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 프로세스·앱 기본 이미지.", action = ActionImageProcessDefaultErase.class)
 	@GET
 	@Path("image/process/default/erase")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -312,7 +312,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:设置页面“关于”项的图标.", action = ActionImageSetupAboutLogoErase.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 설정 화면 「정보」 항목 아이콘.", action = ActionImageSetupAboutLogoErase.class)
 	@GET
 	@Path("image/setup/about/logo/erase")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -330,7 +330,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置图片:应用页面顶部图片,730x390", action = ActionImageApplicationTopErase.class)
+	@JaxrsMethodDescribe(value = "이미지 설정: 앱 페이지 상단 이미지,730x390", action = ActionImageApplicationTopErase.class)
 	@GET
 	@Path("image/application/top/erase")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -348,7 +348,7 @@ public class AppStyleAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取移动端首页门户.", action = ActionGetIndexPortal.class)
+	@JaxrsMethodDescribe(value = "모바일 홈 포털 조회.", action = ActionGetIndexPortal.class)
 	@GET
 	@Path("index/portal")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

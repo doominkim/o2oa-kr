@@ -45,7 +45,7 @@ public class ActionGetBBSName extends BaseAction {
 					result.error( exception );
 				}
 			} catch (Exception e) {
-				Exception exception = new ExceptionConfigSettingInfoProcess( e, "系统在根据编码获取BBS系统设置信息时发生异常！Code:" + "BBS_LOGO_NAME" );
+				Exception exception = new ExceptionConfigSettingInfoProcess( e, "코드로 BBS 시스템 설정을 가져오는 중 오류가 발생했습니다! Code:" + "BBS_LOGO_NAME" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

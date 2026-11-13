@@ -7,6 +7,6 @@ public class ExceptionParameterEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionParameterEmpty(String message) {
-		super("参数不合法！MESSAGE：" + message );
+		super("매개변수가 올바르지 않습니다! MESSAGE:" + message );
 	}
 }

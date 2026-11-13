@@ -78,7 +78,7 @@ class ActionCreate extends BaseAction {
                 Arrays.asList(JpaObject.createTime_FIELDNAME, JpaObject.updateTime_FIELDNAME,
                         JpaObject.sequence_FIELDNAME, JpaObject.distributeFactor_FIELDNAME));
 
-        @FieldDescribe("字典数据(json格式).")
+        @FieldDescribe("사전 데이터(json 형식).")
         private JsonElement data;
 
         public JsonElement getData() {

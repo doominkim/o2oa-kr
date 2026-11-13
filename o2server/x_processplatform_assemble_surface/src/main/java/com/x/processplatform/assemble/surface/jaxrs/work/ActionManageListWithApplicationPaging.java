@@ -297,66 +297,66 @@ class ActionManageListWithApplicationPaging extends BaseAction {
 
 		private static final long serialVersionUID = 295303391325992112L;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程数据：true|false(默认不查找)")
+		@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true|false(기본 조회 안 함)")
 		private Boolean relateEditionProcess = false;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("创建用户")
+		@FieldDescribe("생성 사용자")
 		private List<String> credentialList;
 
-		@FieldDescribe("标题")
+		@FieldDescribe("제목")
 		private String title;
 
-		@FieldDescribe("活动名称")
+		@FieldDescribe("활동 이름")
 		private List<String> activityNameList;
 
-		@FieldDescribe("work工作")
+		@FieldDescribe("work 업무 문서")
 		private List<String> workList;
 
-		@FieldDescribe("job工作实例")
+		@FieldDescribe("job 업무 문서 인스턴스")
 		private List<String> jobList;
 
-		@FieldDescribe("工作状态：start|processing|hanging")
+		@FieldDescribe("업무 문서 상태:start|processing|hanging")
 		private String workStatus;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
-		@FieldDescribe("是否已经经过人工节点,")
+		@FieldDescribe("수동 노드 경유 여부,")
 		private Boolean workThroughManual;
-		@FieldDescribe("工作创建类型,")
+		@FieldDescribe("업무 문서 생성 유형,")
 		private String workCreateType;
 
-		@FieldDescribe("业务数据String值01")
+		@FieldDescribe("업무 데이터 String 값01")
 		private String stringValue01;
-		@FieldDescribe("业务数据String值02")
+		@FieldDescribe("업무 데이터 String 값02")
 		private String stringValue02;
-		@FieldDescribe("业务数据String值03")
+		@FieldDescribe("업무 데이터 String 값03")
 		private String stringValue03;
-		@FieldDescribe("业务数据String值04")
+		@FieldDescribe("업무 데이터 String 값04")
 		private String stringValue04;
-		@FieldDescribe("业务数据String值05")
+		@FieldDescribe("업무 데이터 String 값05")
 		private String stringValue05;
-		@FieldDescribe("业务数据String值06")
+		@FieldDescribe("업무 데이터 String 값06")
 		private String stringValue06;
-		@FieldDescribe("业务数据String值07")
+		@FieldDescribe("업무 데이터 String 값07")
 		private String stringValue07;
-		@FieldDescribe("业务数据String值08")
+		@FieldDescribe("업무 데이터 String 값08")
 		private String stringValue08;
-		@FieldDescribe("业务数据String值09")
+		@FieldDescribe("업무 데이터 String 값09")
 		private String stringValue09;
-		@FieldDescribe("业务数据String值10")
+		@FieldDescribe("업무 데이터 String 값10")
 		private String stringValue10;
 
 		public List<String> getProcessList() {

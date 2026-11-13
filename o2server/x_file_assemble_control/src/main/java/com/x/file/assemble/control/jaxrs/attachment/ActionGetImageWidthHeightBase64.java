@@ -28,7 +28,7 @@ class ActionGetImageWidthHeightBase64 extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Attachment attachment = emc.find(id, Attachment.class, ExceptionWhen.not_found);
-			/* 判断文件的当前用户是否是管理员或者文件创建者 或者当前用户在分享或者共同编辑中 */
+			/* 현재 사용자가 관리자 또는 파일 생성자이거나 공유 또는 공동 편집 대상인지 판단 */
 			if (effectivePerson.isNotManager() && effectivePerson.isNotPerson(attachment.getPerson())
 					&& effectivePerson.isNotPerson(attachment.getShareList())
 					&& effectivePerson.isNotPerson(attachment.getEditorList())) {

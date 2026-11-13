@@ -4,47 +4,47 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public class AndFx extends ConfigObject {
 
-	@FieldDescribe("是否启用.")
+	@FieldDescribe("사용 여부.")
 	private Boolean enable;
-	@FieldDescribe("人员组织同步cron表达式,例如在每天的8点和12点进行同步：10 45 8,12 * * ?.")
+	@FieldDescribe("사용자 조직 동기화 cron 표현식, 예: 매일 8시와 12시에 동기화: 10 45 8,12 * * ?.")
 	private String forceSyncCron;
-	@FieldDescribe("是否开启人员组织同步,默认false")
+	@FieldDescribe("사용자 조직 동기화 사용 여부, 기본값 false")
 	private Boolean forceSyncEnable;
-	@FieldDescribe("是否同步离职人员,默认false（即人员离职需要在O2手工删除）")
+	@FieldDescribe("퇴사자 동기화 여부, 기본값 false(즉 퇴사자는 O2에서 수동 삭제 필요)")
 	private Boolean syncDeleteUser;
-	@FieldDescribe("认证api服务地址")
+	@FieldDescribe("인증 api 서비스 주소")
 	private String ssoApi;
-	@FieldDescribe("统一认证sourceId")
+	@FieldDescribe("통합 인증 sourceId")
 	private String sourceId;
-	@FieldDescribe("统一认证sourceKey")
+	@FieldDescribe("통합 인증 sourceKey")
 	private String sourceKey;
-	@FieldDescribe("客户端ID")
+	@FieldDescribe("클라이언트 ID")
 	private String clientId;
-	@FieldDescribe("企业ID")
+	@FieldDescribe("기업 ID")
 	private String enterId;
-	@FieldDescribe("通讯录api服务地址")
+	@FieldDescribe("주소록 api 서비스 주소")
 	private String addressApi;
-	@FieldDescribe("通讯录appKey")
+	@FieldDescribe("주소록 appKey")
 	private String addressAppKey;
-	@FieldDescribe("通讯录appSecret")
+	@FieldDescribe("주소록 appSecret")
 	private String addressAppSecret;
-	@FieldDescribe("消息推送api服务地址")
+	@FieldDescribe("메시지 푸시 api 서비스 주소")
 	private String msgApi;
-	@FieldDescribe("消息推送appKey")
+	@FieldDescribe("메시지 푸시 appKey")
 	private String msgAppKey;
-	@FieldDescribe("消息推送appSecret")
+	@FieldDescribe("메시지 푸시 appSecret")
 	private String msgAppSecret;
-	@FieldDescribe("消息推送发送者手机号")
+	@FieldDescribe("메시지 푸시 발신자 휴대폰 번호")
 	private String msgSender;
-	@FieldDescribe("消息推送行业消息类型")
+	@FieldDescribe("메시지 푸시 업종 메시지 유형")
 	private String msgType;
-	@FieldDescribe("消息盒子标题")
+	@FieldDescribe("메시지 박스 제목")
 	private String msgBoxTitle;
-	@FieldDescribe("消息打开工作的url地址，如：https://sample.o2oa.net/x_desktop/")
+	@FieldDescribe("메시지에서 업무 문서를 여는 url 주소, 예: https://sample.o2oa.net/x_desktop/")
 	private String workUrl = "";
-	@FieldDescribe("消息处理完成后跳转到特定的门户页面的Id")
+	@FieldDescribe("메시지 처리 완료 후 이동할 특정 포털 페이지의 Id")
 	private String messageRedirectPortal = "";
-	@FieldDescribe("启用消息推送.")
+	@FieldDescribe("메시지 푸시 사용.")
 	private Boolean messageEnable;
 
 	public static AndFx defaultInstance() {

@@ -36,7 +36,7 @@ class ActionListPrevWithFilter extends BaseAction {
 			EqualsTerms equals = new EqualsTerms();
 			InTerms ins = new InTerms();
 			LikeTerms likes = new LikeTerms();
-			/* 可能为空 */
+			/* 비어 있을 수 있음 */
 			Application application = business.application().pick(applicationFlag);
 			String applicationId = null == application ? applicationFlag : application.getId();
 			equals.put("creatorPerson", effectivePerson.getDistinguishedName());
@@ -65,7 +65,7 @@ class ActionListPrevWithFilter extends BaseAction {
 			}
 			result = this.standardListPrev(Wo.copier, id, count, JpaObject.sequence_FIELDNAME, equals, null, likes, ins,
 					null, null, null, null, true, DESC);
-			/* 添加权限 */
+			/* 권한 추가 */
 			if (null != result.getData()) {
 				for (Wo wo : result.getData()) {
 					WorkCompleted o = emc.find(wo.getId(), WorkCompleted.class);
@@ -80,19 +80,19 @@ class ActionListPrevWithFilter extends BaseAction {
 
 		private static final long serialVersionUID = 4245245154285980617L;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false")
+		@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false")
 		private Boolean relateEditionProcess = true;
 
-		@FieldDescribe("结束年月")
+		@FieldDescribe("종료 연월")
 		private List<String> completedTimeMonthList;
 
-		@FieldDescribe("开始年月")
+		@FieldDescribe("시작 연월")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
 		public List<String> getProcessList() {
@@ -144,10 +144,10 @@ class ActionListPrevWithFilter extends BaseAction {
 		static WrapCopier<WorkCompleted, Wo> copier = WrapCopierFactory.wo(WorkCompleted.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		public Long getRank() {

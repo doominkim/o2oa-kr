@@ -26,12 +26,12 @@ public class ActionDelete extends BaseAction {
 
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			FileInfo fileInfo = business.getFileInfoFactory().get(id);
 			if (null == fileInfo) {
 				throw new ExceptionEntityNotExist(id, FileInfo.class);
 			}
-			// 判断文档信息是否存在
+			// 문서 정보 존재 여부 판단
 			Document document = business.getDocumentFactory().get(fileInfo.getDocumentId());
 			if (null == document) {
 				throw new ExceptionEntityNotExist(fileInfo.getDocumentId(), Document.class);
@@ -40,10 +40,10 @@ public class ActionDelete extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 
-			// 删除文件，并且删除记录及文档的关联信息
+			// 파일을 삭제하고 기록 및 문서 연결 정보도 삭제
 			StorageMapping mapping = ThisApplication.context().storageMappings().get(FileInfo.class, fileInfo.getStorage());
 
-			// 从FTP上删除文件
+			// FTP에서 파일 삭제
 			fileInfo.deleteContent(mapping);
 			emc.beginTransaction(FileInfo.class);
 			emc.remove(fileInfo);
@@ -52,7 +52,7 @@ public class ActionDelete extends BaseAction {
 			CacheManager.notify(Document.class);
 			CacheManager.notify(FileInfo.class);
 
-			// 成功删除一个附件信息
+			// 첨부파일 정보 1건 삭제 성공
 			logService.log(emc, effectivePerson.getDistinguishedName(), fileInfo.getName(), fileInfo.getAppId(),
 					fileInfo.getId(), fileInfo.getDocumentId(), fileInfo.getId(), "FILE", "删除");
 

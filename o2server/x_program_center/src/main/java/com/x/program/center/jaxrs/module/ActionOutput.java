@@ -117,7 +117,7 @@ public class ActionOutput extends BaseAction {
 		static WrapCopier<Wi, WrapModule> copier = WrapCopierFactory.wo(Wi.class, WrapModule.class, null,
 				ListTools.toList(JpaObject.FieldsUnmodify, JpaObject.id_FIELDNAME, "category"));
 
-		@FieldDescribe("结构标识")
+		@FieldDescribe("구조 식별자")
 		private String structure;
 
 		public String getStructure() {

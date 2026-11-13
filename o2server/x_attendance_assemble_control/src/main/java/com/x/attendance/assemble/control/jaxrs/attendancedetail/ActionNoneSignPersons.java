@@ -21,10 +21,10 @@ import com.x.base.core.project.organization.Person;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 获取上班时间前X分钟未打卡人员信息的接口
- * 1、获取所有需要打卡的人员信息列表
- * 2、获取指定时间前已经打过卡的人员列表
- * 3、从所有要打卡的人员信息列表中排除已经打过卡的人员后返回
+ * 출근 시간 X분 전 미기록 사용자 정보 조회 인터페이스
+ * 1. 기록 대상 전체 사용자 정보 목록 조회
+ * 2. 지정 시간 이전에 이미 기록한 사용자 목록 조회
+ * 3. 기록 대상 전체 사용자 목록에서 이미 기록한 사용자를 제외하고 반환
  */
 public class ActionNoneSignPersons extends BaseAction {
 	
@@ -71,7 +71,7 @@ public class ActionNoneSignPersons extends BaseAction {
 			try {
 				attendanceEmployeeConfigList = attendanceEmployeeConfigServiceAdv.listByConfigType( "REQUIRED" );
 				if( ListTools.isEmpty( attendanceEmployeeConfigList ) ) {
-					//如果没有配置需要考勤的人员则为全员考勤
+					//근태 대상 사용자 설정이 없으면 전원 근태
 					List<Person> allPersonObjs = userManagerService.listAllPersons();
 					if(ListTools.isNotEmpty( allPersonObjs )){
 						for( Person person : allPersonObjs ){
@@ -85,14 +85,14 @@ public class ActionNoneSignPersons extends BaseAction {
 				}
 			} catch ( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统在查询需要考勤的人员配置列表时发生异常." );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "근태 대상자 설정 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, currentPerson, request, null );
 			}
 		}
 
 		if (check) {
-			//查询在指定截止日期前已经打过卡的人员
+			//지정 마감일 이전에 이미 출퇴근 체크한 사용자 조회
 			if( signTypeList.contains( "all" )){
 				signedPersons = attendanceDetailServiceAdv.listSignedPersonsWithDeadLine( wrapIn.getDeadline(), "all" );
 			}else {
@@ -140,7 +140,7 @@ public class ActionNoneSignPersons extends BaseAction {
 		}
 
 		if (check) {
-			//排除已经打过卡的人
+			//이미 기록한 사용자 제외
 			if( ListTools.isNotEmpty( signedPersons )){
 				for( String distinguishedName : signedPersons ){
 					ListTools.removeStringFromList( distinguishedName, allNeedSignPersons);
@@ -160,10 +160,10 @@ public class ActionNoneSignPersons extends BaseAction {
 
 	public static class Wi{
 
-		@FieldDescribe( "截止时间点，如果不填写，则以当前时间作为截止时间" )
+		@FieldDescribe( "마감 시점, 입력하지 않으면 현재 시간을 마감 시간으로 사용" )
 		private String deadline = null;
 
-		@FieldDescribe( "未打卡类型：all#onDuty#offDuty#morningOffDuty#afternoonOnDuty, 可以多选#分隔" )
+		@FieldDescribe( "미기록 유형: all#onDuty#offDuty#morningOffDuty#afternoonOnDuty, #으로 구분해 여러 개 선택 가능" )
 		private String signType = null;
 
 		public String getDeadline() {

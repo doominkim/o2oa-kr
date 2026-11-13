@@ -27,7 +27,7 @@ import com.x.base.core.project.exception.ExceptionWhen;
 import com.x.base.core.project.http.EffectivePerson;
 import com.x.base.core.project.tools.ListTools;
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
 
  */
 public class AttendanceAppealInfoFactory extends AbstractFactory {
@@ -36,7 +36,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的AttendanceAppealInfo信息对象")
+	//@MethodDescribe("지정 Id의 AttendanceAppealInfo 정보 객체 조회")
 	public AttendanceAppealInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceAppealInfo.class, ExceptionWhen.none);
 	}
@@ -50,7 +50,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe("列示全部的AttendanceAppealInfo信息列表")
+	//@MethodDescribe("전체 AttendanceAppealInfo 정보 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceAppealInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -60,7 +60,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示全部的AttendanceAppealInfo信息列表")
+	//@MethodDescribe("전체 AttendanceAppealInfo 정보 목록 조회")
 	public String getMaxRecordDate() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceAppealInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -75,7 +75,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		}
 	}
 	
-	//@MethodDescribe("根据员工姓名和打卡日期列示AttendanceAppealInfo信息列表")
+	//@MethodDescribe("직원 이름과 출퇴근 날짜로 AttendanceAppealInfo 정보 목록 조회")
 	public List<String> listByEmployeeNameAndAppealDate( String employeeName, String appealDateString ) throws Exception {
 		
 		if( employeeName == null || appealDateString == null ){
@@ -91,7 +91,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where( p )).getResultList();
 	}
 	
-	//@MethodDescribe("根据组织和打卡日期列示AttendanceAppealInfo信息列表")
+	//@MethodDescribe("조직과 출퇴근 날짜로 AttendanceAppealInfo 정보 목록 조회")
 	public List<String> listByUnitNameAndAppealDate( String unitName, String appealDateString ) throws Exception {
 		
 		if( unitName == null || appealDateString == null ){
@@ -107,7 +107,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where( p )).getResultList();
 	}
 	
-	//@MethodDescribe("根据顶层组织和打卡日期列示AttendanceAppealInfo信息列表")
+	//@MethodDescribe("최상위 조직과 출퇴근 날짜로 AttendanceAppealInfo 정보 목록 조회")
 	public List<String> listByTopUnitNameAndAppealDate( String topUnitName, String appealDateString ) throws Exception {
 		
 		if( topUnitName == null || appealDateString == null ){
@@ -123,7 +123,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where( p )).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceAppealInfo信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceAppealInfo 정보 목록 조회")
 	public List<AttendanceAppealInfo> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<AttendanceAppealInfo>();
@@ -136,7 +136,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe("按年份月份查询某用户的申诉记录列表")
+	//@MethodDescribe("연도·월로 특정 사용자의 이의 신청 기록 목록 조회")
 	public List<String> listUserAttendanceAppealInfoByYearAndMonth(String user, String year, String month)  throws Exception {
 		if( user == null || user.isEmpty() ||year == null || month == null || year.isEmpty() || month.isEmpty()  ){
 			return null;
@@ -146,7 +146,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceAppealInfo> root = cq.from( AttendanceAppealInfo.class);
 		cq.select( root.get(AttendanceAppealInfo_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceAppealInfo_.empName), user );
 		if( StringUtils.isNotEmpty( year  ) ){
 			p = cb.and(p, cb.equal( root.get(AttendanceAppealInfo_.yearString), year ));
@@ -158,14 +158,14 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("按年份月份查询某组织的申诉记录列表")
+	//@MethodDescribe("연도·월로 특정 조직의 이의 신청 기록 목록 조회")
 	public List<String> listUnitAttendanceAppealInfoByYearAndMonth(String unitName, String year, String month)  throws Exception {
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceAppealInfo> root = cq.from( AttendanceAppealInfo.class);
 		cq.select( root.get(AttendanceAppealInfo_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceAppealInfo_.unitName), unitName );
 		if( StringUtils.isNotEmpty( year ) ){
 			p = cb.and(p, cb.equal( root.get(AttendanceAppealInfo_.yearString), year ));
@@ -177,14 +177,14 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-//	@MethodDescribe("按年份月份查询某顶层组织的申诉记录列表")
+//	@MethodDescribe("연도·월로 특정 최상위 조직의 이의 신청 기록 목록 조회")
 	public List<String> listTopUnitAttendanceAppealInfoByYearAndMonth(String topUnitName, String year, String month)  throws Exception {
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceAppealInfo> root = cq.from( AttendanceAppealInfo.class);
 		cq.select( root.get(AttendanceAppealInfo_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceAppealInfo_.topUnitName), topUnitName );
 		if( StringUtils.isNotEmpty( year ) ){
 			p = cb.and(p, cb.equal( root.get(AttendanceAppealInfo_.yearString), year ));
@@ -196,20 +196,20 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("查询未归档的申诉记录列表，最大2000条")
+	//@MethodDescribe("보관되지 않은 이의 신청 기록 목록 조회, 최대 2000건")
 	public List<String> listNonArchiveAppealInfoIds()  throws Exception {
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceAppealInfo> root = cq.from( AttendanceAppealInfo.class);
 		cq.select( root.get(AttendanceAppealInfo_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.isNotNull( root.get(AttendanceAppealInfo_.archiveTime) );
 		return em.createQuery(cq.where(p)).setMaxResults(2000).getResultList();
 	}
 	
 	/**
-	 * 查询下一页的信息数据
+	 * 다음 페이지 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -219,13 +219,13 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttendanceAppealInfo> listIdsNextWithFilter( String id, Integer count, Object sequence, WrapInFilterAppeal wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceAppealInfo> cq = cb.createQuery(AttendanceAppealInfo.class);
 		Root<AttendanceAppealInfo> root = cq.from(AttendanceAppealInfo.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -268,7 +268,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		if (wrapIn.getStatus()!=999) {
 			p = cb.and(p,cb.equal(root.get(AttendanceAppealInfo_.status),wrapIn.getStatus()));
 		}
-		//添加OR条件
+		//OR 조건 추가
 		/*if (wrapIn.getOrAtrribute() != null && wrapIn.getOrAtrribute().size() > 0) {
 			sql_stringBuffer.append(" and (");
 			NameValueCountPair nameValueCountPair = null;
@@ -290,7 +290,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询下一页的信息数据--只查询当前人有权限审批的
+	 * 다음 페이지 정보 데이터 조회--현재 사용자가 승인 권한이 있는 것만
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -300,13 +300,13 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttendanceAppealInfo> listIdsNextWithFilterWithCurrentProcessor( String id, Integer count, Object sequence, WrapInFilterAppeal wrapIn ,Boolean isManager) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceAppealInfo> cq = cb.createQuery(AttendanceAppealInfo.class);
 		Root<AttendanceAppealInfo> root = cq.from(AttendanceAppealInfo.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -361,7 +361,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询下一页的信息数据--按管理员组织
+	 * 다음 페이지 정보 데이터 조회--관리자 조직 기준
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -371,14 +371,14 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttendanceAppealInfo> listIdsNextWithFilterWithManager( String id, Integer count, Object sequence, WrapInFilterAppeal wrapIn ,Map<String,List<String>> unitMap,Boolean isManager) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		Boolean unitFlag = false;
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceAppealInfo> cq = cb.createQuery(AttendanceAppealInfo.class);
 		Root<AttendanceAppealInfo> root = cq.from(AttendanceAppealInfo.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -424,7 +424,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		if (wrapIn.getStatus()!=999) {
 			p = cb.and(p,cb.equal(root.get(AttendanceAppealInfo_.status),wrapIn.getStatus()));
 		}
-		// 这个管理员应该不需要 以前的错误逻辑 2022-1-11 @FancyLou
+		// 이 관리자는 필요 없을 것으로 보임, 이전의 잘못된 로직 2022-1-11 @FancyLou
 //		if(!isManager){
 //			if(unitMap.isEmpty()){
 //				p = cb.and(p,cb.isNull(root.get(AttendanceAppealInfo_.detailId)));
@@ -442,7 +442,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询上一页的文档信息数据
+	 * 이전 페이지 문서 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -452,13 +452,13 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttendanceAppealInfo> listIdsPrevWithFilter( String id, Integer count, Object sequence, WrapInFilterAppeal wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceAppealInfo> cq = cb.createQuery(AttendanceAppealInfo.class);
 		Root<AttendanceAppealInfo> root = cq.from(AttendanceAppealInfo.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -501,7 +501,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		if (wrapIn.getStatus()!=999) {
 			p = cb.and(p,cb.equal(root.get(AttendanceAppealInfo_.status),wrapIn.getStatus()));
 		}
-		//添加OR条件
+		//OR 조건 추가
 		/*if (wrapIn.getOrAtrribute() != null && wrapIn.getOrAtrribute().size() > 0) {
 			sql_stringBuffer.append(" and (");
 			NameValueCountPair nameValueCountPair = null;
@@ -523,13 +523,13 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询符合的文档信息总数
+	 * 조건에 맞는 문서 정보 총수 조회
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
 	public long getCountWithFilter( WrapInFilterAppeal wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -566,13 +566,13 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询符合的文档信息总数
+	 * 조건에 맞는 문서 정보 총수 조회
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
 	public long getCountWithFilterWithCurrentProcessor(WrapInFilterAppeal wrapIn , boolean isManager) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -613,13 +613,13 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询符合的文档信息总数
+	 * 조건에 맞는 문서 정보 총수 조회
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
 	public long getCountWithFilterWithManager(WrapInFilterAppeal wrapIn , Map<String,List<String>> unitMap, boolean isManager) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceAppealInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -654,7 +654,7 @@ public class AttendanceAppealInfoFactory extends AbstractFactory {
 		if (wrapIn.getStatus()!=999) {
 			p = cb.and(p,cb.equal(root.get(AttendanceAppealInfo_.status),wrapIn.getStatus()));
 		}
-		// 这个管理员应该不需要 以前的错误逻辑 2022-1-11 @FancyLou
+		// 이 관리자는 필요 없을 것으로 보임, 이전의 잘못된 로직 2022-1-11 @FancyLou
 //		if(!isManager){
 //			if(unitMap.isEmpty()){
 //				p = cb.and(p,cb.isNull(root.get(AttendanceAppealInfo_.detailId)));

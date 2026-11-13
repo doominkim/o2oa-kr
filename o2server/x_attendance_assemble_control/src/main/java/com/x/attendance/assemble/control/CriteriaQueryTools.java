@@ -16,13 +16,13 @@ public class CriteriaQueryTools {
         Field[] fields = clazz_.getFields();
         for (Field field : fields) {
             if (StringUtils.equalsIgnoreCase(field.getName(), fieldName)) {
-                fieldName = field.getName(); // 忽略大小写之后，重置查询字段的名称
+                fieldName = field.getName(); // 대소문자 무시 후 조회 필드 이름 재설정
                 fieldExists = true;
             }
         }
 
         if (!fieldExists) {
-            return null; // 如果查询字段根本和object 对不上，那么就返回null
+            return null; // 조회 필드가 object와 전혀 맞지 않으면 null 반환
         }
 
         if (StringUtils.equalsIgnoreCase(orderType, "asc")) {

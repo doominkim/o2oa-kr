@@ -289,7 +289,7 @@ public class Indexs {
 		return new ArrayList<>();
 	}
 
-	// 只处理processPlatform_ 和 cms_
+	// processPlatform_ 및 cms_만 처리
 	private static List<String> directoriesPath(final java.nio.file.Path path) throws IOException {
 		List<String> list = new ArrayList<>();
 		try (Stream<java.nio.file.Path> stream = Files.walk(path, 1)) {
@@ -417,10 +417,10 @@ public class Indexs {
 	}
 
 	/**
-	 * 判断字段属性.
+	 * 필드 속성 판단.
 	 *
 	 * @param field
-	 * @return 名称,显示名称,类型
+	 * @return 이름, 표시 이름, 유형
 	 */
 
 	public static Triple<String, String, String> judgeField(String field) {
@@ -531,8 +531,8 @@ public class Indexs {
 	/**
 	 *
 	 * @param <T>
-	 * @param indexableFields 同名的所有字段列表,不能为空数组.
-	 * @param fileType        字段类型
+	 * @param indexableFields 같은 이름의 모든 필드 목록, 빈 배열 불가.
+	 * @param fileType        필드 유형
 	 * @return
 	 */
 	public static <T> T indexableFieldValue(IndexableField[] indexableFields, String fileType) {
@@ -566,7 +566,7 @@ public class Indexs {
 	}
 
 	/**
-	 * 根据传入的分类值,processPlatform 或者 cms 或者同时包含确定输出的固定字段.
+	 * 전달된 분류 값(processPlatform 또는 cms 또는 둘 다)에 따라 출력할 고정 필드 결정.
 	 *
 	 * @param list
 	 * @return
@@ -582,7 +582,7 @@ public class Indexs {
 	}
 
 	/**
-	 * 根据directory对象获取reader
+	 * directory 객체로 reader 조회
 	 *
 	 * @param dirs
 	 * @return

@@ -20,11 +20,11 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 脑图图标信息表
+ * 마인드맵 아이콘 정보 테이블
  * 
  * @author O2LEE
  */
-@Schema(name = "MindIconInfo", description = "脑图图标信息.")
+@Schema(name = "MindIconInfo", description = "마인드맵 아이콘 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.MindIconInfo.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class MindIconInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -54,19 +54,19 @@ public class MindIconInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String content_FIELDNAME = "content";
-	@FieldDescribe("图标内容")
+	@FieldDescribe("아이콘 내용")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + content_FIELDNAME)

@@ -1,5 +1,5 @@
 <template>
-  <!-- app在线打包 -->
+  <!-- app 온라인 패키징 -->
   <div class="systemconfig_area">
 
     <div class="systemconfig_item_info" v-html="lp._appTools.onlineBuildInfo"></div>
@@ -105,15 +105,15 @@ const labelStyle={
 
 const load = ()=>{
   doAppPackAction('connect').then((data)=>{
-    if (data.status === 1001) { // 成功 获取token
+    if (data.status === 1001) { // 성공 시 token 조회
         loadAppPackInfo();
-    } else if (data.status === 1) { // o2云未连接 o2云未启用
+    } else if (data.status === 1) { // o2 클라우드 미연결 o2 클라우드 미사용
         // component.notice(lp._appTools.appPack.messageO2cloudNotEnable, 'error');
         errorTip.value = lp._appTools.appPack.messageO2cloudNotEnable;
-    } else if (data.status === 2) { // o2云未登录
+    } else if (data.status === 2) { // o2 클라우드 미로그인
         // component.notice(lp._appTools.appPack.messageO2cloudNotLogin, 'error');
         errorTip.value = lp._appTools.appPack.messageO2cloudNotLogin;
-    } else if (data.status === 3) { // 打包服务器未认证通过
+    } else if (data.status === 3) { // 패키징 서버 인증 실패
         // component.notice(lp._appTools.appPack.messageO2cloudLoginFail, 'error');
         errorTip.value = lp._appTools.appPack.messageO2cloudLoginFail;
     }
@@ -140,7 +140,7 @@ const uploadImage = (e) => {
   if (uploadLogoNode.value.files && uploadLogoNode.value.files.length) {
     const file = uploadLogoNode.value.files[0];
     var URL = window.URL || window.webkitURL;
-    // 通过 file 生成目标 url
+    // file로 대상 url 생성
     var imgURL = URL.createObjectURL(file);
     formLogoUrl.value = imgURL;
   }

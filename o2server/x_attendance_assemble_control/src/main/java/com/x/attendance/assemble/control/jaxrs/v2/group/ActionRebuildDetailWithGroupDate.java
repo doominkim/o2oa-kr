@@ -39,7 +39,7 @@ public class ActionRebuildDetailWithGroupDate  extends BaseAction {
             throw new ExceptionEmptyParameter("date");
         }
         if (!AttendanceV2Helper.isValidDateString(date)) {
-            throw new ExceptionWithMessage("日期格式不正确，需要格式：yyyy-MM-dd！");
+            throw new ExceptionWithMessage("날짜 형식이 올바르지 않습니다. 필요한 형식: yyyy-MM-dd!");
         }
         if (!AttendanceV2Helper.beforeToday(date)) {
             ActionResult<Wo> result = new ActionResult<>();
@@ -55,22 +55,22 @@ public class ActionRebuildDetailWithGroupDate  extends BaseAction {
             }
             AttendanceV2Group group = emc.find(groupId, AttendanceV2Group.class);
             if (group == null) {
-                throw new ExceptionNotExistObject("考勤组"+groupId);
+                throw new ExceptionNotExistObject("근태 그룹"+groupId);
             }
             if (group.getStatus() != null && group.getStatus() == AttendanceV2Group.status_auto) {
                 throw new ExceptionCannotOperateGroup(groupId);
             }
             List<String> trueList =  AttendanceV2Helper.calTruePersonFromMixList(emc, business, group.getId(), group.getParticipateList(), group.getUnParticipateList());
             if (trueList == null || trueList.isEmpty()) {
-                throw new ExceptionEmptyParameter("考勤打卡人员、组织");
+                throw new ExceptionEmptyParameter("근태 체크 인원·조직");
             }
             group.setTrueParticipantList(trueList);
             emc.beginTransaction(AttendanceV2Group.class);
             emc.persist(group, CheckPersistType.all);
             emc.commit();
-            // 发送到队列处理数据
+            // 대기열로 보내 데이터 처리
             for (String person : trueList) {
-                LOGGER.info("发起考勤数据生成，Date：{} person: {}", date, person);
+                LOGGER.info("근태 데이터 생성 요청, Date: {} person: {}", date, person);
                 ThisApplication.queueV2Detail.send(new QueueAttendanceV2DetailModel(person, date));
             }
             ActionResult<Wo> result = new ActionResult<>();

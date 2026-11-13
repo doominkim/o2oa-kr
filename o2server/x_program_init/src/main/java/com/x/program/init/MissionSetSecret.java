@@ -39,7 +39,7 @@ public class MissionSetSecret implements Mission {
 		messages.head(MissionSetSecret.class.getSimpleName());
 		try {
 			if (StringUtils.isBlank(getSecret())) {
-				throw new IllegalArgumentException("密码为空");
+				throw new IllegalArgumentException("비밀번호가 비어 있습니다");
 			}
 			messages.msg("executing");
 			this.changeInternalDataServerPassword(Config.token().getPassword(), getSecret());
@@ -47,7 +47,7 @@ public class MissionSetSecret implements Mission {
 			Config.resource_commandQueue().add("ctl -flushConfig");
 			Config.resource_commandQueue().add("ctl -initResourceFactory");
 			Config.regenerate();
-			// 命令队列是用多线程运行的,后续如果有ctl -initResourceFactory对目录有操作,可能导致重复删除目录冲突.
+			// 명령 큐는 멀티스레드로 실행되므로, 이후 ctl -initResourceFactory가 디렉터리를 조작하면 디렉터리 중복 삭제 충돌이 발생할 수 있음.
 			Thread.sleep(5000);
 			messages.msg("success");
 		} catch (InterruptedException ie) {
@@ -69,7 +69,7 @@ public class MissionSetSecret implements Mission {
 				RunScript.execute(conn,
 						new StringReader("ALTER USER " + H2Tools.USER + " SET PASSWORD '" + newPassword + "'"));
 			} catch (SQLException e) {
-				throw new ExceptionMissionExecute("本地H2数据库密码修改失败,数据库文件损坏或旧密码不匹配.");
+				throw new ExceptionMissionExecute("로컬 H2 데이터베이스 비밀번호 변경에 실패했습니다. 데이터베이스 파일이 손상되었거나 기존 비밀번호가 일치하지 않습니다.");
 			}
 		}
 	}

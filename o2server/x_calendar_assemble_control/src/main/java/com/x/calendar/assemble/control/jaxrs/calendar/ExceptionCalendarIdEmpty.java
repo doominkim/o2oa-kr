@@ -7,6 +7,6 @@ class ExceptionCalendarIdEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCalendarIdEmpty() {
-		super("查询操作传入的参数日历Id为空，无法进行查询操作.");
+		super("캘린더 ID 매개변수가 비어 있어 조회할 수 없습니다.");
 	}
 }

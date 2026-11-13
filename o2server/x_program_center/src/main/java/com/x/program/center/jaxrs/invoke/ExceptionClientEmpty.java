@@ -7,6 +7,6 @@ class ExceptionClientEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionClientEmpty() {
-		super("sso 配置client不能为空.");
+		super("sso 설정 client는 비워 둘 수 없습니다.");
 	}
 }

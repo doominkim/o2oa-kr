@@ -36,15 +36,15 @@ public class ActionOvertimeDurationCalculate extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getPerson())) {
-                throw new ExceptionEmptyParameter("人员标识");
+                throw new ExceptionEmptyParameter("인원 식별자");
             }
             Date startTime = wi.getStartTime();
             Date endTime = wi.getEndTime();
             if (startTime == null) {
-                throw new ExceptionEmptyParameter("开始时间");
+                throw new ExceptionEmptyParameter("시작 시간");
             }
             if (endTime == null) {
-                throw new ExceptionEmptyParameter("结束时间");
+                throw new ExceptionEmptyParameter("종료 시간");
             }
             if (startTime.after(endTime)) {
                 throw new ExceptionDateEndBeforeStartError();
@@ -53,7 +53,7 @@ public class ActionOvertimeDurationCalculate extends BaseAction {
             Business business = new Business(emc);
             Person person = business.organization().person().getObject(wi.getPerson(), true);
             if (person == null) {
-                throw new ExceptionNotExistObject("人员 " + wi.getPerson());
+                throw new ExceptionNotExistObject("인원 " + wi.getPerson());
             }
 
             Date startDate = DateTools.floorDate(startTime, 0);
@@ -364,13 +364,13 @@ public class ActionOvertimeDurationCalculate extends BaseAction {
 
         private static final long serialVersionUID = -2353341673676674384L;
 
-        @FieldDescribe("人员标识")
+        @FieldDescribe("인원 식별자")
         private String person;
 
-        @FieldDescribe("开始时间，yyyy-MM-dd HH:mm:ss")
+        @FieldDescribe("시작 시간, yyyy-MM-dd HH:mm:ss")
         private Date startTime;
 
-        @FieldDescribe("结束时间，yyyy-MM-dd HH:mm:ss")
+        @FieldDescribe("종료 시간, yyyy-MM-dd HH:mm:ss")
         private Date endTime;
 
 
@@ -404,19 +404,19 @@ public class ActionOvertimeDurationCalculate extends BaseAction {
 
         private static final long serialVersionUID = 8498242197758291608L;
 
-        @FieldDescribe("自然日天数")
+        @FieldDescribe("달력일 일수")
         private Integer totalDays = 0;
 
-        @FieldDescribe("实际加班天数")
+        @FieldDescribe("실제 초과근무 일수")
         private Double duration = 0.0;
 
-        @FieldDescribe("实际加班分钟数")
+        @FieldDescribe("실제 초과근무 분 수")
         private Long durationMinutes = 0L;
 
-        @FieldDescribe("实际加班的日期列表，yyyy-MM-dd")
+        @FieldDescribe("실제 초과근무 날짜 목록, yyyy-MM-dd")
         private List<String> overtimeDateList = new ArrayList<>();
 
-        @FieldDescribe("休息日的日期列表，yyyy-MM-dd")
+        @FieldDescribe("휴일 날짜 목록, yyyy-MM-dd")
         private List<String> restDateList = new ArrayList<>();
 
         public Integer getTotalDays() {

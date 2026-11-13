@@ -51,11 +51,11 @@ public class BaseAction extends StandardJaxrsAction {
     protected PermissionQueryService permissionQueryService = new PermissionQueryService();
 
     /**
-     * 当前登录者访问栏目分类列表查询
-     * 1、根据人员的访问权限获取可以访问的栏目信息ID列表
-     * 2、根据人员的访问权限获取可以访问的分类信息ID列表
-     * 3、将栏目信息和分类信息查询出来组织在一起，如果只有分类，那么也要把栏目信息加上
-     * 4、如果栏目信息下没有分类，则删除栏目信息的输出
+     * 현재 로그인 사용자의 접근 가능 게시판·분류 목록 조회
+     * 1. 사용자의 접근 권한에 따라 접근 가능한 게시판 정보 ID 목록 조회
+     * 2. 사용자의 접근 권한에 따라 접근 가능한 분류 정보 ID 목록 조회
+     * 3. 게시판 정보와 분류 정보를 조회해 함께 구성, 분류만 있는 경우에도 게시판 정보를 추가
+     * 4. 게시판 정보에 분류가 없으면 해당 게시판 정보는 출력에서 제외
      *
      * @param personName
      * @param isAnonymous
@@ -77,9 +77,9 @@ public class BaseAction extends StandardJaxrsAction {
         List<String> viewableCategoryIds = new ArrayList<>();
         if (manager) {
             if (ListTools.isNotEmpty(inAppInfoIds)) {
-                viewableAppInfoIds = inAppInfoIds; // 可发布栏目就限制为inAppInfoIds
+                viewableAppInfoIds = inAppInfoIds; // 발행 가능 게시판은 inAppInfoIds로 제한
             } else {
-                // 管理员应该能看所有的栏目
+                // 관리자는 모든 게시판을 볼 수 있어야 함
                 viewableAppInfoIds = appInfoServiceAdv.listAllIds(documentType);
                 if (ListTools.isEmpty(viewableAppInfoIds)) {
                     if (viewableAppInfoIds == null) {
@@ -96,14 +96,14 @@ public class BaseAction extends StandardJaxrsAction {
                 groupNames = userManagerService.listGroupNamesByPerson(personName);
                 roleNames = userManagerService.listRoleNamesByPerson(personName);
             }
-            // 查询用户可以访问到的栏目
+            // 사용자가 접근할 수 있는 게시판 조회
             viewableAppInfoIds = permissionQueryService.listViewableAppIdByPerson(personName, isAnonymous, unitNames,
                     groupNames, roleNames, inAppInfoIds, null, documentType, appType, maxCount);
             if (ListTools.isEmpty(viewableAppInfoIds)) {
                 viewableAppInfoIds.add("NO_APPINFO");
             }
 
-            // 根据人员的发布权限获取可以发布文档的分类信息ID列表
+            // 사용자의 발행 권한에 따라 문서를 발행할 수 있는 분류 정보 ID 목록 조회
             viewableCategoryIds = permissionQueryService.listViewableCategoryIdByPerson(personName, isAnonymous,
                     unitNames, groupNames, roleNames, viewableAppInfoIds,
                     null, null, documentType, appType, maxCount, false);
@@ -112,11 +112,11 @@ public class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 当前登录者文档发布栏目分类列表查询<br/>
-     * 1、根据人员的发布权限获取可以发布文档的栏目信息ID列表<br/>
-     * 2、根据人员的发布权限获取可以发布文档的分类信息ID列表<br/>
-     * 3、将栏目信息和分类信息查询出来组织在一起，如果只有分类，那么也要把栏目信息加上
-     * 4、如果栏目信息下没有分类，则删除栏目信息的输出
+     * 현재 로그인 사용자의 문서 발행 게시판·분류 목록 조회<br/>
+     * 1. 사용자의 발행 권한에 따라 문서를 발행할 수 있는 게시판 정보 ID 목록 조회<br/>
+     * 2. 사용자의 발행 권한에 따라 문서를 발행할 수 있는 분류 정보 ID 목록 조회<br/>
+     * 3. 게시판 정보와 분류 정보를 조회해 함께 구성, 분류만 있는 경우에도 게시판 정보를 추가
+     * 4. 게시판 정보에 분류가 없으면 해당 게시판 정보는 출력에서 제외
      *
      * @param personName
      * @param isAnonymous
@@ -136,17 +136,17 @@ public class BaseAction extends StandardJaxrsAction {
         List<String> roleNames = null;
         List<String> publishableCategoryIds = new ArrayList<>();
         if (manager) {
-            // 管理员，可以在所有的栏目和分类中进行发布，只需要过滤指定的栏目ID和信息类别即可
+            // 관리자는 모든 게시판과 분류에서 발행할 수 있으므로 지정한 게시판 ID와 정보 유형만 필터링하면 됨
             publishableCategoryIds = categoryInfoServiceAdv.listCategoryIdsWithAppIds(inAppInfoIds, documentType,
                     maxCount);
         } else {
-            // 如果不是管理员，则需要根据该员工的权限来进一步分析可见栏目和分类
+            // 관리자가 아니면 해당 사용자의 권한에 따라 열람 가능한 게시판과 분류를 추가로 분석해야 함
             if (!isAnonymous) {
                 unitNames = userManagerService.listUnitNamesWithPerson(personName);
                 groupNames = userManagerService.listGroupNamesByPerson(personName);
                 roleNames = userManagerService.listRoleNamesByPerson(personName);
             }
-            // 2、根据人员的发布权限获取可以发布文档的分类信息ID列表
+            // 2. 사용자의 발행 권한에 따라 문서를 발행할 수 있는 분류 정보 ID 목록 조회
             publishableCategoryIds = permissionQueryService.listPublishableCategoryIdByPerson(
                     personName, isAnonymous, unitNames, groupNames, roleNames, inAppInfoIds, null, null,
                     documentType, appType, maxCount, false);
@@ -155,7 +155,7 @@ public class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 根据指定的栏目和分类ID，将分类组织到栏目信息中
+     * 지정한 게시판과 분류 ID로 분류를 게시판 정보 안에 구성
      *
      * @param appInfoIds
      * @param categoryInfoIds
@@ -188,7 +188,7 @@ public class BaseAction extends StandardJaxrsAction {
             }
         }
 
-        // 循环category_map，将category装配到app_map里相应的app里
+        // category_map을 순회하며 category를 app_map의 해당 app에 조립
         Set<String> category_set = category_map.keySet();
         Iterator<String> category_iterator = category_set.iterator();
         String category_key = null;
@@ -200,7 +200,7 @@ public class BaseAction extends StandardJaxrsAction {
             woCategory = category_map.get(category_key);
             wo_app = app_map.get(woCategory.getAppId());
             if (wo_app == null) {
-                // 栏目信息在map里不存在，将栏目信息查询出来，放到map里
+                // 게시판 정보가 map에 없으면 게시판 정보를 조회해 map에 넣음
                 appInfo = appInfoServiceAdv.get(woCategory.getAppId());
                 if (appInfo != null) {
                     wo_app = Wo.copier.copy(appInfo);
@@ -214,7 +214,7 @@ public class BaseAction extends StandardJaxrsAction {
                 app_map.put(wo_app.getId(), wo_app);
             }
         }
-        // 将app_map转移到List里返回
+        // app_map을 List로 옮겨 반환
         if (wraps == null) {
             wraps = new ArrayList<>();
         }
@@ -252,10 +252,10 @@ public class BaseAction extends StandardJaxrsAction {
 
         public static List<String> excludes = new ArrayList<String>();
 
-        @FieldDescribe("栏目下的分类信息列表")
+        @FieldDescribe("게시판의 분류 정보 목록")
         private List<WoCategory> wrapOutCategoryList = null;
 
-        @FieldDescribe("配置支持信息JSON内容")
+        @FieldDescribe("설정 지원 정보 JSON 내용")
         private String config = null;
 
         public List<WoCategory> getWrapOutCategoryList() {
@@ -300,7 +300,7 @@ public class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 是否是栏目管理员
+     * 게시판 관리자 여부
      *
      * @param person
      * @param appInfo

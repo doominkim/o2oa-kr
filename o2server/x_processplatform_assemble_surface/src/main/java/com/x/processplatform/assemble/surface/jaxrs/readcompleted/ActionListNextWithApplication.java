@@ -52,8 +52,8 @@ class ActionListNextWithApplication extends BaseAction {
 		static WrapCopier<ReadCompleted, Wo> copier = WrapCopierFactory.wo(ReadCompleted.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号.")
-		@Schema(description = "排序号.")
+		@FieldDescribe("정렬 번호.")
+		@Schema(description = "정렬 번호.")
 		private Long rank;
 
 		public Long getRank() {

@@ -69,7 +69,7 @@ public class AttendanceScheduleSettingServiceAdv {
 	}
 	
 	/**
-	 * 先查询直属组织，然后再递归上级组织
+	 * 먼저 직속 조직을 조회한 뒤 상위 조직을 재귀 조회
 	 * @param personName
 	 * @return
 	 * @throws Exception 
@@ -79,7 +79,7 @@ public class AttendanceScheduleSettingServiceAdv {
 	}
 
 	/**
-	 * 先查询直属组织，然后再递归上级组织
+	 * 먼저 직속 조직을 조회한 뒤 상위 조직을 재귀 조회
 	 * @param unitName
 	 * @return
 	 * @throws Exception

@@ -56,7 +56,7 @@ public class ActionGet extends BaseAction {
         static WrapCopier<AttendanceV2Config,  Wo> copier = WrapCopierFactory.wo(AttendanceV2Config.class,  Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("阿里云人脸扩展是否启用")
+        @FieldDescribe("Alibaba Cloud 얼굴 인식 확장 사용 여부")
         private Boolean aliFaceControlEnable = false;
 
         public Boolean getAliFaceControlEnable() {

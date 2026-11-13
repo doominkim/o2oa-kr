@@ -50,7 +50,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 /**
- * 权限交接任务处理
+ * 권한 인계 작업 처리
  * @author sword
  */
 public class HandoverJob extends AbstractJob {
@@ -59,7 +59,7 @@ public class HandoverJob extends AbstractJob {
 
 	@Override
 	public void schedule(JobExecutionContext jobExecutionContext) throws Exception {
-		LOGGER.info("开始处理权限交接任务.");
+		LOGGER.info("권한 인계 작업 처리 시작.");
 		try {
 			List<String> list = list();
 			for (String id : list){
@@ -68,7 +68,7 @@ public class HandoverJob extends AbstractJob {
 		} catch (Exception e) {
 			throw new JobExecutionException(e);
 		}
-		LOGGER.info("完成处理权限交接任务.");
+		LOGGER.info("권한 인계 작업 처리 완료.");
 	}
 
 	private void dear(String id){
@@ -86,7 +86,7 @@ public class HandoverJob extends AbstractJob {
 			handover.setHandoverJobList(new ArrayList<>(jobSet));
 			handover.setStatus(HandoverStatusEnum.PROCESSED.getValue());
 			emc.commit();
-			LOGGER.info("用户{}权限交接给{}, 交接文档数:{}, 耗时:{}.",handover::getPerson, handover::getTargetPerson, jobSet::size, stamp::consumingMilliseconds);
+			LOGGER.info("사용자 {} 권한을 {}에게 인계, 인계 문서 수:{}, 소요 시간:{}.",handover::getPerson, handover::getTargetPerson, jobSet::size, stamp::consumingMilliseconds);
 		}catch (Exception e){
 			LOGGER.error(e);
 		}

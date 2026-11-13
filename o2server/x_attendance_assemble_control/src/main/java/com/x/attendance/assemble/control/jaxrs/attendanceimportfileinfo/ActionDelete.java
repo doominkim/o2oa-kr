@@ -40,7 +40,7 @@ public class ActionDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceImportFileProcess( e, "系统根据ID查询指定的人员考勤数据导入文件信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionAttendanceImportFileProcess( e, "ID로 인원 근태 데이터 가져오기 파일 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -50,7 +50,7 @@ public class ActionDelete extends BaseAction {
 				attendanceImportFileInfoServiceAdv.delete( id );
 				result.setData( new Wo( id ) );
 				
-				//删除临时文件，如果存在的话
+				//임시 파일이 있으면 삭제
 				if( StringUtils.isNotEmpty( attendanceImportFileInfo.getTempFilePath() ) ) {
 					File file = new File( attendanceImportFileInfo.getTempFilePath() );
 					if( file.exists() ) {
@@ -58,13 +58,13 @@ public class ActionDelete extends BaseAction {
 					}
 				}
 				
-				//删除系统操作状态缓存
+				//시스템 작업 상태 캐시 삭제
 				StatusSystemImportOpt.getInstance().cleanCacheImportFileStatus( id );
 				StatusSystemImportOpt.getInstance().removeCacheImportFileStatus( id );
 				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceImportFileProcess( e, "系统根据ID删除人员考勤数据导入文件对象信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionAttendanceImportFileProcess( e, "ID로 인원 근태 데이터 가져오기 파일 정보를 삭제하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

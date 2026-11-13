@@ -60,7 +60,7 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -8456354949288335211L;
 
-		@FieldDescribe("个人对象")
+		@FieldDescribe("개인 객체")
 		private WoPerson woPerson;
 
 		static WrapCopier<PersonAttribute, Wo> copier = WrapCopierFactory.wo(PersonAttribute.class, Wo.class, null,

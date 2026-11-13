@@ -32,7 +32,7 @@ class ActionDelete extends BaseAction {
 			}
 			emc.beginTransaction(Page.class);
 			emc.remove(page, CheckRemoveType.all);
-			/** 删除需要更新首页 */
+			/** 삭제 시 홈 페이지 갱신 필요 */
 			if (StringUtils.equals(page.getId(), portal.getFirstPage())) {
 				emc.beginTransaction(Portal.class);
 				portal.setFirstPage("");

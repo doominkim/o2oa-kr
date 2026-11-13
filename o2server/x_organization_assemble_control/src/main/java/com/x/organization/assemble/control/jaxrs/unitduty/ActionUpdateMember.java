@@ -107,13 +107,13 @@ class ActionUpdateMember extends BaseAction {
 
         private static final long serialVersionUID = -7527954993386512109L;
 
-        @FieldDescribe("职务所属组织：组织的dn、unique或id.")
+        @FieldDescribe("직무 소속 조직: 조직의 dn, unique 또는 id.")
         private String unit;
 
-        @FieldDescribe("职务：职务名称(此时所属组织不能为空)、dn、unique或id.")
+        @FieldDescribe("직무: 직무명(이때 소속 조직은 비워 둘 수 없음), dn, unique 또는 id.")
         private String unitDuty;
 
-        @FieldDescribe("职务身份成员列表，身份的dn、unique或id.")
+        @FieldDescribe("직무 신분 구성원 목록, 신분의 dn, unique 또는 id.")
         private List<String> identityList;
 
         public String getUnit() {

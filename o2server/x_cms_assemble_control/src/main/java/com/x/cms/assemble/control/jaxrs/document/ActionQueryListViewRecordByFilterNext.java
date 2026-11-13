@@ -43,7 +43,7 @@ public class ActionQueryListViewRecordByFilterNext extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionServiceLogic( e,"系统在根据文档ID查询文档访问信息总数时发生异常。ID：" + docId );
+				Exception exception = new ExceptionServiceLogic( e,"게시글 ID로 접근 기록 수를 조회하는 중 오류가 발생했습니다. ID: " + docId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -54,7 +54,7 @@ public class ActionQueryListViewRecordByFilterNext extends BaseAction {
 				documentViewRecordList = documentViewRecordServiceAdv.listNextWithDocIds( id, docId, count, "DESC" );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionServiceLogic( e,"系统在根据文档ID查询文档访问信息列表时发生异常。ID：" + docId );
+				Exception exception = new ExceptionServiceLogic( e,"게시글 ID로 접근 기록 목록을 조회하는 중 오류가 발생했습니다. ID: " + docId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -68,7 +68,7 @@ public class ActionQueryListViewRecordByFilterNext extends BaseAction {
 					result.setData( wraps );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionServiceLogic( e,"系统将查询结果转换为可输出的数据信息时发生异常。" );
+					Exception exception = new ExceptionServiceLogic( e,"조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}

@@ -61,10 +61,10 @@ class ActionListPaging extends BaseAction {
 		static WrapCopier<ApplicationDict, Wo> copier = WrapCopierFactory.wo(ApplicationDict.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("应用名称.")
+		@FieldDescribe("앱 이름.")
 		private String applicationName;
 
-		@FieldDescribe("应用别名.")
+		@FieldDescribe("앱 별칭.")
 		private String applicationAlias;
 
 		public String getApplicationName() {

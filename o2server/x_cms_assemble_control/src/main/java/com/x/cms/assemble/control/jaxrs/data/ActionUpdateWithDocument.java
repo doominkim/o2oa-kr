@@ -17,7 +17,7 @@ class ActionUpdateWithDocument extends BaseAction {
 
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String id, JsonElement jsonElement) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			/** 防止提交空数据清空data */
+			/** 빈 데이터 제출로 data가 비워지는 것을 방지 */
 			if (jsonElement.isJsonNull()) {
 				throw new ExceptionNullData();
 			}
@@ -41,7 +41,7 @@ class ActionUpdateWithDocument extends BaseAction {
 			}
 			JsonElement source = getData(business, id);
 			JsonElement merge = XGsonBuilder.merge(jsonElement, source);
-			/** 先更新title和serial,再更新DataItem,因为旧的DataItem中也有title和serial数据. */
+			/** title과 serial을 먼저 수정한 뒤 DataItem 수정, 기존 DataItem에도 title과 serial 데이터가 있기 때문. */
 			this.updateTitleSerialObjectSecurityClearance(business, document, merge);
 			this.updateData(business, document, merge);
 			emc.beginTransaction(Document.class);

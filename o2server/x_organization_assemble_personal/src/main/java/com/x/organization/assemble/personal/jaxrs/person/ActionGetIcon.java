@@ -49,7 +49,7 @@ class ActionGetIcon extends BaseAction {
 	private Wo get(Business business, EffectivePerson effectivePerson) throws Exception {
 		String base64;
 		if (Config.token().isInitialManager(effectivePerson.getDistinguishedName())) {
-			/* 如果是xadmin单独处理 */
+			/* xadmin이면 별도 처리 */
 			base64 = com.x.base.core.project.config.Person.ICON_MANAGER;
 		} else {
 			Person person = business.person().pick(effectivePerson.getDistinguishedName());
@@ -73,21 +73,21 @@ class ActionGetIcon extends BaseAction {
 	}
 
 	private String generate(String name, int size, Color bgColor, Color fontColor) throws IOException {
-		// 只取姓
+		// 성만 사용
 		String firstChar = name.substring(0, 1).toUpperCase();
 		BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = image.createGraphics();
-		// 开启多项抗锯齿和字体平滑
+		// 다중 안티앨리어싱 및 폰트 스무딩 활성화
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.setColor(bgColor);
 		g.fillRect(0, 0, size, size);
-		// 建议选用本地安装的中文字体，字体不存在时会降级
+		// 로컬에 설치된 한글 폰트 사용 권장, 폰트가 없으면 대체됨
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 			Font font = this.pickFont((int) (size * 0.5));
 			g.setFont(font);
-			// 计算文字大小，居中
+			// 글자 크기 계산, 가운데 정렬
 			FontMetrics fm = g.getFontMetrics();
 			int x = (size - fm.stringWidth(firstChar)) / 2;
 			int y = (size - fm.getHeight()) / 2 + fm.getAscent();
@@ -103,15 +103,15 @@ class ActionGetIcon extends BaseAction {
 	}
 
 	private Font pickFont(int pixel) {
-		// 尝试常见中文家族名，但不做任何 canDisplay 检测；失败也会映射到逻辑字体
-		String[] families = { "微软雅黑", "宋体", "黑体", "SimHei", "Noto Sans CJK SC", "Source Han Sans SC", // 宿主机装了更好
-				"Microsoft YaHei", "PingFang SC", "WenQuanYi Zen Hei", "SimHei", Font.SANS_SERIF, "Dialog" // 逻辑字体兜底
+		// 일반적인 중국어 글꼴 계열명 시도, canDisplay 검사는 하지 않음. 실패 시 논리 글꼴로 매핑
+		String[] families = { "微软雅黑", "宋体", "黑体", "SimHei", "Noto Sans CJK SC", "Source Han Sans SC", // 호스트에 설치되어 있으면 더 좋음
+				"Microsoft YaHei", "PingFang SC", "WenQuanYi Zen Hei", "SimHei", Font.SANS_SERIF, "Dialog" // 논리 글꼴 대체
 		};
 		for (String fam : families) {
 			try {
 				return new Font(fam, Font.PLAIN, pixel);
 			} catch (Exception ignore) {
-				// 保守：new Font 基本不会抛，但这里仍然兜底
+				// 보수적 처리: new Font는 거의 예외를 던지지 않지만 여기서도 대체 처리
 			}
 		}
 		return new Font(Font.SANS_SERIF, Font.PLAIN, pixel);

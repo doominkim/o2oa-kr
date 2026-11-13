@@ -44,7 +44,7 @@ class V2TriggerProcessing extends BaseAction {
 		this.processingWork(param, ProcessingAttributes.TYPE_TASK);
 		boolean flag = true;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 流程流转到取消环节，此时工作已被删除.flag =true 代表存在,false 已经被删除
+			// 프로세스가 취소 단계로 진행되어 업무 문서가 이미 삭제됨.flag =true 는 존재, false 는 이미 삭제됨
 			if ((emc.countEqual(Work.class, Work.job_FIELDNAME, param.task.getJob()) == 0)
 					&& (emc.countEqual(WorkCompleted.class, WorkCompleted.job_FIELDNAME, param.task.getJob()) == 0)) {
 				flag = false;
@@ -55,7 +55,7 @@ class V2TriggerProcessing extends BaseAction {
 			rec = this.recordTaskProcessing(Record.TYPE_TASKTRIGGERPROCESSING, param.workLog.getJob(), param.workLog.getId(),
 					taskCompletedId, param.series);
 		} else {
-//			// 这里的record不需要写入到数据库,work和workCompleted都消失了,可能走了cancel环节,这里的rec仅作为返回值生成wo
+//			// 여기의 record는 DB에 기록할 필요 없음, work와 workCompleted가 모두 사라져 cancel 단계로 갔을 수 있음, 여기의 rec는 wo를 생성하는 반환값으로만 사용
 			rec = new Record(param.workLog);
 			rec.setType(Record.TYPE_TASKTRIGGERPROCESSING);
 			rec.setOpinion(param.task.getOpinion());
@@ -110,7 +110,7 @@ class V2TriggerProcessing extends BaseAction {
 	}
 
 	/**
-	 * 调用人工环节工作流转后执行脚本
+	 * 수동 단계 업무 문서 진행 후 실행 스크립트 호출
 	 * 
 	 * @throws Exception
 	 */
@@ -136,7 +136,7 @@ class V2TriggerProcessing extends BaseAction {
 		if (StringUtils.isBlank(resp.getId())) {
 			throw new ExceptionProcessingTask(param.task.getId());
 		} else {
-			// 获得已办id
+			// 처리 완료 id 조회
 			return resp.getId();
 		}
 	}

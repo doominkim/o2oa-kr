@@ -776,7 +776,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         }
         if (!sz || !sz.toFloat()) sz = 0;
         attr.sz = sz.toFloat()*8;
-        if (Browser.name=="firefox") attr.sz = attr.sz*1.25;    //firefox边框计算问题
+        if (Browser.name=="firefox") attr.sz = attr.sz*1.25;    //firefox 테두리 계산 문제
 
         var color = this.getColorHex(((table.currentStyle) ? table.currentStyle[("border-"+where+"-color").camelCase()] : table.getStyle("border-"+where+"-color")));
         if (!color) color = "auto";
@@ -949,14 +949,14 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         }
     },
     arrangeTable: function(table){
-        //检查table，不合理的colspan
+        //table의 잘못된 colspan 확인
         var tableMatrix = [];
         var trs = table.rows;
         var rowspan = {};
         for (var i=0; i<trs.length; i++){
             tableMatrix[i] = [];
 
-            //垂直合并单元格处理
+            //세로 셀 병합 처리
             var tdIdx = 0;
             var rowspanObj = rowspan[tdIdx];
             while (rowspanObj && rowspanObj.count){
@@ -969,10 +969,10 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
             var tds = trs[i].cells;
             for (var j=0; j<tds.length; j++){
                 var td = tds[j];
-                //记录实体单元格
+                //실제 셀 기록
                 tableMatrix[i].push({"td": td, type: 1});
 
-                //记录此单元格是否有垂直合并
+                //이 셀의 세로 병합 여부 기록
                 var cspan = td.get("colspan");
                 var rspan = td.get("rowspan");
                 if (rspan && parseInt(rspan)>1){
@@ -990,7 +990,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     }
                 }
 
-                //补齐水平合并的虚拟单元格
+                //가로 병합의 가상 셀 보충
 
                 if (cspan && parseInt(cspan)>1){
                     for (var n=1; n<parseInt(cspan); n++){
@@ -999,7 +999,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     }
                 }
 
-                //检查有没有之前的垂直合并内容
+                //이전 세로 병합 내용 존재 여부 확인
                 var nextIdx = tdIdx+1;
                 var rowspanObj = rowspan[nextIdx];
                 while (rowspanObj && rowspanObj.count){
@@ -1057,13 +1057,13 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         var oo_tbl = this.createEl(oo_doc, 'tbl');
         var oo_tblPr = this.createEl(oo_doc, 'tblPr');
 
-        //表格宽度属性
+        //표 너비 속성
         var oo_tblW = this.createEl(oo_doc, 'tblW');
         var tblW = this.getTableTblW(table);
         this.setAttrs(oo_tblW, tblW);
         oo_tblPr.appendChild(oo_tblW);
 
-        //表格边框属性
+        //표 테두리 속성
         var oo_tblBorders = this.createEl(oo_doc, 'tblBorders');
         var oo_top = this.createEl(oo_doc, 'top');
         this.setAttrs(oo_top, this.getTableBorder(table, 'top'));
@@ -1076,7 +1076,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         this.insertSiblings(oo_tblBorders, [oo_top, oo_start, oo_bottom, oo_end], 'beforeend');
         oo_tblPr.appendChild(oo_tblBorders);
 
-        //表格边距
+        //표 여백
         var mar = parseFloat(table.get('cellpadding'));
         if (!mar) mar = 0;
         //if (mar){
@@ -1105,7 +1105,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         oo_tblPr.appendChild(oo_tblCellMar);
         //}
 
-        //左右对齐
+        //좌우 정렬
         var align = table.get('align');
         if (align) {
             var jc = 'start';
@@ -1126,7 +1126,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
             oo_tblPr.appendChild(oo_jc);
         }
 
-        //表格浮动
+        //표 플로팅
         var floatTable = false;
         var msoStyle = this.getMsoStyle(table);
         var horzAnchor = msoStyle['mso-table-anchor-horizontal'];
@@ -1148,7 +1148,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
             floatTable = true;
         }
 
-        //表格背景
+        //표 배경
         var bg = table.getStyle('background-color');
         if (bg && bg !== 'transparent') {
             bg = this.getColorHex(bg);
@@ -1159,7 +1159,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
             }
         }
 
-        //表格必须使用固定宽度表格布局算法
+        //표는 고정 너비 표 레이아웃 알고리즘을 사용해야 함
         //<w:tblLayout w:type="fixed"/>;
         var oo_tblLayout = this.createEl(oo_doc, 'tblLayout');
         this.setAttrs(oo_tblLayout, {'type': 'fixed'});
@@ -1167,7 +1167,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
 
         oo_tbl.appendChild(oo_tblPr);
 
-        //表格网格
+        //표 그리드
         var grids = this.getTableTblGrid(table);
         var oo_tblGrid = this.createEl(oo_doc, 'tblGrid');
         grids.forEach(function (grid) {
@@ -1187,7 +1187,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                 var oo_trPr = this.createEl(oo_doc, 'trPr');
                 oo_tr.appendChild(oo_trPr);
 
-                //行高度 设置模板中table的 data-compute-tr-height 为 y 时计算
+                //행 높이. 템플릿 table의 data-compute-tr-height가 y일 때 계산
                 if (table.dataset.computeTrHeight === 'y') {
                     var oo_trH = this.createEl(oo_doc, 'trHeight');
                     var trH = this.getTableTrH(tr);
@@ -1204,7 +1204,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                 }
 
                 var tdIdx = 0;
-                //垂直合并单元格
+                //세로 셀 병합
                 var nextIdx = tdIdx;
                 var mge = vmge['td' + nextIdx];
                 while (mge) {
@@ -1271,14 +1271,14 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     var oo_tc = this.createEl(oo_doc, 'tc');
 
                     var oo_tcPr = this.createEl(oo_doc, 'tcPr');
-                    //单元格宽度
+                    //셀 너비
                     var oo_tcW = this.createEl(oo_doc, 'tcW');
                     var tcW = this.getTableTblW(td);
                     this.setAttrs(oo_tcW, tcW);
                     //this.setAttrs(oo_tcW, {"w": this.pxToPt(td.clientWidth)*20, "type": "dxa"});
                     oo_tcPr.appendChild(oo_tcW);
 
-                    // //单元格垂直对齐
+                    // //셀 세로 정렬
                     // var valign = td.get('valign');
                     // v = (valign!=='top' && valign!=='bottom') ? 'center' : valign;
                     // var oo_vAlign = this.createEl(oo_doc, "vAlign");
@@ -1286,7 +1286,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     // // <w:vAlign w:val="center"/>
                     // oo_tcPr.appendChild(oo_vAlign);
 
-                    //单元格边框
+                    //셀 테두리
                     var oo_tcBorders = this.createEl(oo_doc, 'tcBorders');
                     var oo_top = this.createEl(oo_doc, 'top');
                     this.setAttrs(oo_top, this.getTableBorder(td, 'top'));
@@ -1299,7 +1299,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     this.insertSiblings(oo_tcBorders, [oo_top, oo_start, oo_bottom, oo_end], 'beforeend');
                     oo_tcPr.appendChild(oo_tcBorders);
 
-                    //单元格背景
+                    //셀 배경
                     var bg = td.getStyle('background-color');
                     if (bg && bg !== 'transparent') {
                         bg = this.getColorHex(bg);
@@ -1310,7 +1310,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                         }
                     }
 
-                    //单元格边距
+                    //셀 여백
                     var left = td.getStyle('padding-left');
                     var right = td.getStyle('padding-right');
                     var top = td.getStyle('padding-top');
@@ -1344,7 +1344,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     var oo_hideMark = this.createEl(oo_doc, 'hideMark');
                     oo_tcPr.appendChild(oo_hideMark);
 
-                    //垂直合并单元格
+                    //세로 셀 병합
                     var colspan = td.get('colspan');
                     var rowspan = td.get('rowspan');
                     if (rowspan && parseInt(rowspan) > 1) {
@@ -1357,7 +1357,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                         this.setAttrs(oo_vMerge, {'val': 'restart'});
                         oo_tcPr.appendChild(oo_vMerge);
                     }
-                    //水平合并单元格
+                    //가로 셀 병합
 
                     if (colspan && parseInt(colspan) > 1) {
                         tdIdx = tdIdx + (parseInt(colspan) - 1);
@@ -1367,7 +1367,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     }
 
                     oo_tc.appendChild(oo_tcPr);
-                    //表格内容；
+                    //표 내용;
                     this.processTableDom(td, oo_tc, td, true, oo_tc);
 
                     var pflag = false;
@@ -1387,7 +1387,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
 
                     oo_tr.appendChild(oo_tc);
 
-                    //垂直合并单元格
+                    //세로 셀 병합
                     tdIdx++;
                     var nextIdx = tdIdx;
                     var mge = vmge['td' + nextIdx];
@@ -1556,7 +1556,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
             var oo_positionV = this.createEl(oo_doc, "positionV", "wp");
             this.setAttrs(oo_positionV, {"relativeFrom": relativeFrom}, false);
             var oo_posOffset = this.createEl(oo_doc, "posOffset", "wp");
-            oo_posOffset.appendChild(oo_doc.createTextNode(positionV));  //此处需要根据行高来设置数值,暂时固定数值
+            oo_posOffset.appendChild(oo_doc.createTextNode(positionV));  //여기서는 행 높이에 따라 값을 설정해야 하나, 임시로 고정값 사용
             oo_positionV.appendChild(oo_posOffset);
             oo_position = oo_anchor;
 
@@ -1583,7 +1583,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
 
         var oo_docPr = this.createEl(oo_doc, "docPr", "wp");
         id = (Math.random()*100).toInt();
-        this.setAttrs(oo_docPr, {"id": id, "name": "PIC"+id}, false);   //id设置随机整数
+        this.setAttrs(oo_docPr, {"id": id, "name": "PIC"+id}, false);   //id를 임의 정수로 설정
 
         var oo_cNvGraphicFramePr = this.createEl(oo_doc, "cNvGraphicFramePr", "wp");
         var oo_graphicFrameLocks = this.createEl(oo_doc, "graphicFrameLocks", "a");
@@ -1684,7 +1684,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
             "pPrs": {
                 "spacing": {
                     "lineRule": "exact",
-                    "line": "40"    //段落行高设置为固定值2pt
+                    "line": "40"    //문단 행 높이를 고정값 2pt로 설정
                 }
             }
         });
@@ -1720,12 +1720,12 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         var oo_positionV = this.createEl(oo_doc, "positionV", "wp");
         this.setAttrs(oo_positionV, {"relativeFrom": "paragraph"}, false);
         var oo_posOffset = this.createEl(oo_doc, "posOffset", "wp");
-        oo_posOffset.appendChild(oo_doc.createTextNode("3810"));  //此处需要根据行高来设置数值,暂时固定数值
+        oo_posOffset.appendChild(oo_doc.createTextNode("3810"));  //여기서는 행 높이에 따라 값을 설정해야 하나, 임시로 고정값 사용
         oo_positionV.appendChild(oo_posOffset);
 
         var oo_extent = this.createEl(oo_doc, "extent", "wp");
         var cx = this.pxToPt(hr.clientWidth)*12700;
-        this.setAttrs(oo_extent, {"cx": cx, "cy": "0"}, false);   //cx为线长度（pt*12700）
+        this.setAttrs(oo_extent, {"cx": cx, "cy": "0"}, false);   //cx는 선 길이(pt*12700)
 
         var oo_effectExtent = this.createEl(oo_doc, "effectExtent", "wp");
         this.setAttrs(oo_effectExtent, {"l": "0", "t": "0", "r": "0", "b": "0"}, false);
@@ -1734,7 +1734,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
 
         var oo_docPr = this.createEl(oo_doc, "docPr", "wp");
         id = (Math.random()*100).toInt();
-        this.setAttrs(oo_docPr, {"id": id, "name": "Red Line"}, false);   //id设置随机整数
+        this.setAttrs(oo_docPr, {"id": id, "name": "Red Line"}, false);   //id를 임의 정수로 설정
 
         var oo_cNvGraphicFramePr = this.createEl(oo_doc, "cNvGraphicFramePr", "wp");
 
@@ -1766,7 +1766,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         var oo_ln = this.createEl(oo_doc, "ln", "a");
 
         var w = this.pxToPt(hr.clientHeight)*12700;
-        this.setAttrs(oo_ln, {"w": w}, false);    //线的粗细 pt*12700
+        this.setAttrs(oo_ln, {"w": w}, false);    //선 두께 pt*12700
         var oo_solidFill = this.createEl(oo_doc, "solidFill", "a");
         var oo_srgbClr = this.createEl(oo_doc, "srgbClr", "a");
 
@@ -1832,17 +1832,17 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
     },
 
     processRunFont: function(node, rPrs, font){
-        //字体处理缩放
+        //글꼴 확대/축소 처리
         var msoStyle = this.getMsoStyle(node);
         if (msoStyle["mso-font-width"]) rPrs.w = {"val": msoStyle["mso-font-width"].toFloat()};
 
-        //处理字号
+        //글자 크기 처리
         if (msoStyle["mso-ansi-font-size"]) rPrs.sz = {"val": this.parseFontSize(msoStyle["mso-ansi-font-size"])*2};
         if (msoStyle["mso-hansi-font-size"]) rPrs.sz = {"val": this.parseFontSize(msoStyle["mso-hansi-font-size"])*2};
         if (msoStyle["mso-font-size"]) rPrs.sz = {"val": this.parseFontSize(msoStyle["mso-font-size"])*2};
         if (msoStyle["mso-fareast-font-size"]) rPrs.sz = {"val": this.parseFontSize(msoStyle["mso-fareast-font-size"])*2};
 
-        //处理字体
+        //글꼴 처리
         if (msoStyle["mso-ansi-font-family"]){
             if (!font) font = { "hint": "eastAsia" };
             font.ascii = this.parseFont(msoStyle["mso-ansi-font-family"]);
@@ -1894,7 +1894,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     rPrs.color = {"val": this.getColorHex(styles["color"])};
                     break;
                 case "letter-spacing":
-                    //实际测试发现letter-spacing * 0.55 转换word比较合适
+                    //실제 테스트 결과 letter-spacing * 0.55가 word 변환에 적합
                     rPrs.spacing = {"val": (styles["letter-spacing"].toFloat()*20 || 0)};
                     break;
                 case "font-weight":
@@ -1981,7 +1981,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
                     rPrs.color = {"val": this.getColorHex(styles["color"])};
                     break;
                 case "letter-spacing":
-                    //实际测试发现letter-spacing * 0.55 转换word比较合适
+                    //실제 테스트 결과 letter-spacing * 0.55가 word 변환에 적합
                     rPrs.spacing = {"val": (styles["letter-spacing"].toFloat()*20 || 0)};
                     break;
                 case "font-weight":
@@ -2125,7 +2125,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
         var pPr = this.createEl(xmlDoc,"pPr");
         p.appendChild(pPr);
         /*
-        * //如：对齐方式描述如下
+        * //예: 정렬 방식은 다음과 같이 기술
         * {
         *   "jc": { val: "both" },
         * }
@@ -2175,7 +2175,7 @@ o2.xApplication.process.Xform.widget.OOXML.WordprocessingML = o2.OOXML.WML = new
             rPr.appendChild(rFonts);
         }
         /*
-        * //如：粗体和字体颜色描述如下
+        * //예: 굵게와 글꼴 색상은 다음과 같이 기술
         * {
         *   "b": { val: "true" },
         *   "color": { val: "FF0000" }

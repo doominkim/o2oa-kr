@@ -85,7 +85,7 @@ public class RestoreData {
 			if ((!Files.exists(dir)) || (!Files.isDirectory(dir))) {
 				throw new IllegalArgumentException("directory not exist: " + path + ".");
 			} else if (dir.startsWith(Paths.get(Config.base())) && (!dir.startsWith(Config.path_local_temp(false)))) {
-				// 如果通过路径来恢复,那么只能在 local/temp 目录下,避免程序文件被删除.
+				// 경로로 복원하는 경우 local/temp 디렉터리에서만 가능, 프로그램 파일 삭제 방지.
 				throw new IllegalArgumentException("path can not in base directory.");
 			}
 		}
@@ -288,7 +288,7 @@ public class RestoreData {
 		}
 
 		private JsonArray convert(Path path) throws IOException {
-			// 必须先转换成 jsonElement 不能直接转成泛型T,如果直接转会有类型不匹配比如Integer变成了Double
+			// 반드시 먼저 jsonElement로 변환해야 하며 제네릭 T로 바로 변환 불가, 바로 변환하면 Integer가 Double이 되는 등 타입 불일치 발생
 			String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
 			JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
 			return jsonElement.getAsJsonArray();

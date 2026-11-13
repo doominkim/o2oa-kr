@@ -122,20 +122,20 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
             mount: this.node,
             mode : this.json.showMode,
             cooperUserAttribute: {
-                isCooperUsersAvatarVisible: this.json.isCooperUsersAvatarVisible //是否显示协作用户头像
+                isCooperUsersAvatarVisible: this.json.isCooperUsersAvatarVisible //공동 작업 사용자 아바타 표시 여부
             },
-            // 通用选项，所有类型文档适用
+            // 공통 옵션, 모든 유형의 문서에 적용
             commonOptions: {
-                isShowTopArea: this.json.isShowTopArea, // 隐藏顶部区域(头部和工具栏)
-                isShowHeader: this.json.isShowHeader, // 隐藏头部区域
-                isBrowserViewFullscreen : this.json.isBrowserViewFullscreen,//是否在浏览器区域全屏
-                isIframeViewFullscreen : this.json.isIframeViewFullscreen//是否在iframe区域内全屏
+                isShowTopArea: this.json.isShowTopArea, // 상단 영역(헤더와 도구 모음) 숨기기
+                isShowHeader: this.json.isShowHeader, // 헤더 영역 숨기기
+                isBrowserViewFullscreen : this.json.isBrowserViewFullscreen,//브라우저 영역 전체 화면 여부
+                isIframeViewFullscreen : this.json.isIframeViewFullscreen//iframe 영역 내 전체 화면 여부
             },
             wordOptions : {
-                isShowDocMap : this.json.isShowDocMap,//是否开启目录功能，默认开启
-                isBestScale : this.json.isBestScale,//打开文档时，默认以最佳比例显示(适用于pc)
-                isShowBottomStatusBar : this.json.isShowBottomStatusBar,//pc-是否展示底部状态栏
-                "mobile.isOpenIntoEdit" : this.json.isOpenIntoEdit//mobile-要有编辑权限，移动端打开时是否进入编辑
+                isShowDocMap : this.json.isShowDocMap,//목차 기능 사용 여부, 기본 사용
+                isBestScale : this.json.isBestScale,//문서 열 때 기본으로 최적 비율로 표시(pc용)
+                isShowBottomStatusBar : this.json.isShowBottomStatusBar,//pc-하단 상태 표시줄 표시 여부
+                "mobile.isOpenIntoEdit" : this.json.isOpenIntoEdit//mobile-편집 권한이 있어야 하며, 모바일에서 열 때 편집 모드 진입 여부
             },
             commandBars: [
                 {
@@ -268,12 +268,12 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
 
         });
         var token = this.wpsToken;
-        // 设置token
+        // token 설정
         // this.wpsOffice.setToken({
         //     token: token,
-        //     timeout: 10000 // token超时时间, 可配合refreshToken配置函数使用，当超时前将调用refreshToken
+        //     timeout: 10000 // token 만료 시간, refreshToken 설정 함수와 함께 사용 가능. 만료 전에 refreshToken 호출
         // })
-        // 打开文档结果
+        // 문서 열기 결과
         this.wpsOffice.on('fileOpen', function(result) {
             this.fireEvent("afterOpen");
         }.bind(this));
@@ -295,7 +295,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         this.wpsOffice.on('error', function(result) {
             // console.log(JSON.stringify(result))
         });
-        //是否显示评论
+        //댓글 표시 여부
         if(this.json.isShowComment){
             this.showComments();
         }else {
@@ -430,30 +430,30 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     startRevisions : function (){
-        //开启修订模式
+        //변경 추적 모드 켜기
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 将当前文档的编辑状态切换成修订模式
+            // 현재 문서의 편집 상태를 수정 추적 모드로 전환
             app.ActiveDocument.TrackRevisions = true;
         }.bind(this));
     },
     stopRevisions : function (){
-        //关闭修订模式
+        //수정 추적 모드 끄기
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
 
-            // 将当前文档的编辑状态切换成修订模式
+            // 현재 문서의 편집 상태를 수정 추적 모드로 전환
             app.ActiveDocument.TrackRevisions = false;
         }.bind(this));
 
     },
     acceptAllRevisions : function (callback){
-        //接受所有修订
+        //모든 변경 내용 수락
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 获取修订对象
+            // 수정 내용 객체 가져오기
             app.ActiveDocument.Revisions.then(function(revisions){
-                // 接受对指定文档的所有修订
+                // 지정한 문서의 모든 수정 내용 적용
                 revisions.AcceptAll().then(function(){
                     if(callback) callback();
                 });
@@ -462,12 +462,12 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     rejectAllRevisions : function (callback){
-        //拒绝所有修订
+        //모든 변경 내용 거부
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 获取修订对象
+            // 수정 내용 객체 가져오기
             app.ActiveDocument.Revisions.then(function(revisions){
-                // 拒绝所有修订
+                // 모든 변경 내용 거부
                 revisions.RejectAll().then(function(){
                     if(callback) callback();
                 });
@@ -475,29 +475,29 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     showRevisions : function (){
-        //显示痕迹
+        //변경 흔적 표시
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 获取节对象
+            // 구역 객체 가져오기
             app.ActiveDocument.ActiveWindow.View.then(function(View){
-                // 设置修订状态为最终状态
+                // 변경 추적 상태를 최종 상태로 설정
                 View.RevisionsView = 0;
 
-                // 设置修订状态为 显示标记的最终状态
+                // 수정 추적 상태를 「메모 및 변경 내용 표시 최종본」으로 설정
                 View.ShowRevisionsAndComments = true;
             });
         }.bind(this));
     },
     hideRevisions : function (){
-        //隐藏
+        //숨김
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 获取节对象
+            // 구역 객체 가져오기
             app.ActiveDocument.ActiveWindow.View.then(function(View){
-                // 设置修订状态为最终状态
+                // 변경 추적 상태를 최종 상태로 설정
                 View.RevisionsView = 0;
 
-                // 设置修订状态为 显示标记的最终状态
+                // 수정 추적 상태를 「메모 및 변경 내용 표시 최종본」으로 설정
                 View.ShowRevisionsAndComments = false;
             });
         }.bind(this));
@@ -514,10 +514,10 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     print : function (){
-        //隐藏
+        //숨김
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 页面定制对象：更多菜单
+            // 페이지 맞춤 객체: 더 보기 메뉴
             app.CommandBars('TabPrintPreview').then(function(printMenu){
                 printMenu.Execute();
             });
@@ -544,7 +544,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     getContentControlsCount : function (callback){
-        //获取内容控件
+        //콘텐츠 컨트롤 조회
         var p1 =  this.wpsOffice.ready();
         p1.then(function(){
             const app = this.wpsOffice.WordApplication();
@@ -592,7 +592,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     getOperatorsInfo : function (callback){
-        //获取文档权限信息
+        //문서 권한 정보 조회
         var p1 =  this.wpsOffice.ready();
         p1.then(function(){
             const app = this.wpsOffice.WordApplication();
@@ -613,7 +613,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     getZoom : function (callback){
-        //获取文档缩放
+        //문서 확대/축소 비율 조회
         var p1 =  this.wpsOffice.ready();
         p1.then(function(){
             const app = this.wpsOffice.WordApplication();
@@ -634,7 +634,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     setZoom : function (zoom,callback){
-        //缩放属性值在50%到 300%之间。
+        //확대/축소 값은 50%~300% 사이입니다.
         var p1 =  this.wpsOffice.ready();
         p1.then(function(){
             const app = this.wpsOffice.Application;
@@ -660,7 +660,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         this.loadDocument();
     },
     hasComments : function (callback){
-        //是否有评论
+        //댓글 존재 여부
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
             var hasComments;
@@ -684,14 +684,14 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
     showComments : function (){
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 控制评论显示与否
+            // 댓글 표시 여부 제어
             app.ActiveDocument.ActiveWindow.View.ShowComments = true;
         }.bind(this));
     },
     hideComments : function (callback){
         this.wpsOffice.ready().then(function(){
             const app = this.wpsOffice.Application;
-            // 控制评论显示与否
+            // 댓글 표시 여부 제어
             app.ActiveDocument.ActiveWindow.View.ShowComments = false;
         }.bind(this));
 
@@ -707,7 +707,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     showPageMode : function (callback){
-        //页面模式
+        //페이지 모드
         var p1 = this.wpsOffice.ready();
         p1.then(function (){
             const app = this.wpsOffice.Application;
@@ -716,7 +716,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     showUnionPageMode : function (callback){
-        //连页模式
+        //연속 페이지 모드
         var p1 = this.wpsOffice.ready();
         p1.then(function (){
             const app = this.wpsOffice.Application;
@@ -725,7 +725,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     showFileName : function (callback){
-        //显示连页模式下的文件名
+        //연속 페이지 모드에서 파일명 표시
         this.showUnionPageMode(function (){
 
             var p1 = this.wpsOffice.ready();
@@ -738,7 +738,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this))
     },
     hideFileName : function (callback){
-        //显示连页模式下的文件名
+        //연속 페이지 모드에서 파일명 표시
         var p1 = this.wpsOffice.ready();
         p1.then(function (){
             const app = this.wpsOffice.Application;
@@ -747,7 +747,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     showDocumentMap : function (callback){
-        //连页模式
+        //연속 페이지 모드
         // var promise =  async () =>{
         //     await this.wpsOffice.ready();
         //     const app = this.wpsOffice.Application;
@@ -767,7 +767,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }.bind(this));
     },
     hideDocumentMap : function (callback){
-        //连页模式
+        //연속 페이지 모드
         var promise = new Promise(function(resolve, reject){
             this.wpsOffice.ready();
             resolve();

@@ -27,7 +27,7 @@ public class BaseAction extends StandardJaxrsAction{
 	protected static DateOperation dateOperation = new DateOperation();
 
 	/**
-	 * 对日历事件信息进行验证，给出正确的提示信息
+	 * 캘린더 이벤트 정보 검증 후 올바른 안내 메시지 제공
 	 * @param event
 	 * @param calendar
 	 * @return
@@ -35,9 +35,9 @@ public class BaseAction extends StandardJaxrsAction{
 	 */
 	protected PromptException eventValidate( Calendar_Event event, Calendar calendar ) throws Exception {
 		
-		//日历ID不能为空
+		//캘린더 ID는 비어 있을 수 없습니다
 		if( StringUtils.isEmpty( event.getCalendarId() ) ){
-			return new ExceptionEventPropertyEmpty("日历ID(calendarId)");
+			return new ExceptionEventPropertyEmpty("캘린더 ID(calendarId)");
 		}
 		
 		if( calendar == null ) {
@@ -48,11 +48,11 @@ public class BaseAction extends StandardJaxrsAction{
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				return new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + event.getCalendarId() );
+				return new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + event.getCalendarId() );
 			}
 		}
 		
-		//事件继承日历的可见范围
+		//이벤트가 캘린더의 공개 범위 상속
 		if( ListTools.isNotEmpty( calendar.getViewablePersonList() )) {
 			for( String value : calendar.getViewablePersonList() ) {
 				event.addViewablePerson( value );
@@ -69,27 +69,27 @@ public class BaseAction extends StandardJaxrsAction{
 			}
 		}
 		
-		//事件继承日历的管理范围
+		//이벤트가 캘린더의 관리 범위 상속
 		if( ListTools.isNotEmpty( calendar.getManageablePersonList() )) {
 			for( String value : calendar.getManageablePersonList() ) {
 				event.addManageablePerson( value );
 			}
 		}
 		
-		//事件继承日历的公开形式
+		//이벤트가 캘린더의 공개 형식 상속
 		event.setIsPublic( calendar.getIsPublic() );
 		
-		//默认使用日历的颜色
+		//기본으로 캘린더 색상 사용
 		if( StringUtils.isEmpty( event.getColor() ) ){
 			event.setColor( calendar.getColor() );
 		}
 				
-		//设置中否公开日历事件，继承日历的设置
+		//캘린더 이벤트 공개 여부 설정, 캘린더 설정 상속
 		event.setIsPublic( calendar.getIsPublic() );
 		
-		//标题不能为空
+		//제목은 비어 있을 수 없습니다
 		if( StringUtils.isEmpty( event.getTitle() ) ){
-			return new ExceptionEventPropertyEmpty("事件标题(title)");
+			return new ExceptionEventPropertyEmpty("일정 제목(title)");
 		}
 		
 		if( event.getStartTime() == null ) {
@@ -108,9 +108,9 @@ public class BaseAction extends StandardJaxrsAction{
 			event.setSource( "PERSONAL" );
 		}
 		
-		//开始和结束时间不能为空，和是否全天进行验证
+		//시작·종료 시간 필수 여부 및 종일 여부 검증
 		if( event.getIsAllDayEvent() ) {
-			//自动填入开始和结束时间，以传入的开始时间为准
+			//시작·종료 시간 자동 입력, 전달된 시작 시간 기준
 			event.setStartTime( dateOperation.getBeginTimeInDay( event.getStartTime() ) );
 			event.setEndTime( dateOperation.getEndTimeInDay( event.getEndTime() ) );
 		}else {
@@ -118,7 +118,7 @@ public class BaseAction extends StandardJaxrsAction{
 				event.setEndTime( new Date() );
 			}
 			if( event.getStartTime().after(event.getEndTime() )) {
-				//交换位置
+				//위치 교환
 				Date temp = event.getStartTime();
 				event.setStartTime( event.getEndTime() );
 				event.setEndTime( temp );
@@ -133,15 +133,15 @@ public class BaseAction extends StandardJaxrsAction{
 			event.setDaysOfDuration( days.size() );
 		}
 		if( event.getDaysOfDuration() == 1 ) {
-			//看看是不是全天，，如果不是全天就设置为0
+			//종일인지 확인, 종일이 아니면 0으로 설정
 			if( !event.getIsAllDayEvent() ) {
 				event.setDaysOfDuration( 0 );
 			}
 		}
 		
-		//对重复规则进行验证
+		//반복 규칙 검증
 		if( "TASK_EVENT".equalsIgnoreCase( event.getEventType() )) {
-			//任务事件不能重复，只有日程事件CAL_EVENT可以有重复规则
+			//작업 이벤트는 반복 불가, 일정 이벤트 CAL_EVENT만 반복 규칙 가능
 			if( StringUtils.isNotEmpty( event.getRecurrenceRule() )) {
 				return new ExceptionTaskEventCanNotRecurrence();
 			}
@@ -150,9 +150,9 @@ public class BaseAction extends StandardJaxrsAction{
 			}
 		}
 
-		//如果有重复规则时，需要验证规则是否正确
+		//반복 규칙이 있으면 규칙이 올바른지 검증 필요
 		if( StringUtils.isNotEmpty( event.getRecurrenceRule() )) {
-			//转换为RRule
+			//RRule로 변환
 			try{
 				new RRule(event.getRecurrenceRule());
 			}catch( Exception e) {
@@ -160,7 +160,7 @@ public class BaseAction extends StandardJaxrsAction{
 			}
 		}
 		
-		//对提醒设置进行验证
+		//알림 설정 검증
 		if( StringUtils.isEmpty( event.getValarmTime_config() ) || "0,0,0,0".equalsIgnoreCase( event.getValarmTime_config().trim() )) {
 			event.setValarmTime_config("0,0,0,0");
 			event.setAlarm( false );
@@ -173,7 +173,7 @@ public class BaseAction extends StandardJaxrsAction{
 			if( StringUtils.isEmpty( event.getValarm_Summary() )) {
 				event.setValarm_Summary( "일정 알림" );
 			}
-			//计算提醒时间，以开始时间为基准
+			//시작 시간 기준으로 알림 시간 계산
 			String[] alarm_config = event.getValarmTime_config().trim().split(","); 
 			if( alarm_config.length == 4 ) {
 				int day, hour, min, sec = 0;
@@ -186,10 +186,10 @@ public class BaseAction extends StandardJaxrsAction{
 					alarmTime = dateOperation.caculateNewDate( event.getStartTime(), day, hour, min, sec );
 					event.setAlarmTime(alarmTime);
 				}catch( Exception e ) {
-					return new ExceptionEventAlarmConfigError("提醒配置应该为使用','分隔的数字。");
+					return new ExceptionEventAlarmConfigError("알림 설정은 ','로 구분한 숫자여야 합니다.");
 				}				 
 			}else {
-				return new ExceptionEventAlarmConfigError("格式错误，正确格式：天,时,分,秒。");
+				return new ExceptionEventAlarmConfigError("형식이 잘못되었습니다. 올바른 형식: 일,시,분,초.");
 			}
 		}
 		return null;

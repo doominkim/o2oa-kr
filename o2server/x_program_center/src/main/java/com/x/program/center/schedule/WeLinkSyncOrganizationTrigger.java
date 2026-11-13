@@ -12,7 +12,7 @@ public class WeLinkSyncOrganizationTrigger implements Job {
 
 	private static Logger logger = LoggerFactory.getLogger(WeLinkSyncOrganizationTrigger.class);
 
-	/* 向列表发送一个同步信号 */
+	/* 목록에 동기화 신호 전송 */
 	@Override
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		ThisApplication.weLinkSyncOrganizationCallbackRequest.add(new Object());

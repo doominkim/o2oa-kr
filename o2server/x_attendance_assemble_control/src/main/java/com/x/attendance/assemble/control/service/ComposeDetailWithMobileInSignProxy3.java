@@ -15,8 +15,8 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 考勤打卡记录分析服务类
- * 3、一天四次打卡：打上午上班，上午下班，下午上班，下午下班四次卡
+ * 근태 출퇴근 기록 분석 서비스 클래스
+ * 3. 하루 4회 체크: 오전 출근, 오전 퇴근, 오후 출근, 오후 퇴근 4회 체크
  */
 class ComposeDetailWithMobileInSignProxy3 {
 	
@@ -24,11 +24,11 @@ class ComposeDetailWithMobileInSignProxy3 {
 	private DateOperation dateOperation = new DateOperation();
 
 	/**
-	 * 组织一个完整的打卡记录，有午休时间记录
-	 * 1、上午上班打卡时间：上午上班时段中，最早的一次打卡时间就是上午上班打卡时间
-	 * 2、上午下班打卡时间：上午上班时段中，最晚的一次打卡时间就是上午下班打卡时间
-	 * 3、下午上班打卡时间：下午上班时段中，最早的一次打卡时间就是下午上班打卡时间
-	 * 3、下午下班打卡时间：下午上班时段中，最晚的一次打卡时间就是下午下班打卡时间
+	 * 점심 휴식 시간 기록이 있는 완전한 출퇴근 기록 구성
+	 * 1. 오전 출근 기록 시간: 오전 근무 시간대 중 가장 이른 기록 시간이 오전 출근 기록 시간
+	 * 2. 오전 퇴근 기록 시간: 오전 근무 시간대 중 가장 늦은 기록 시간이 오전 퇴근 기록 시간
+	 * 3. 오후 출근 기록 시간: 오후 근무 시간대 중 가장 이른 기록 시간이 오후 출근 기록 시간
+	 * 3. 오후 퇴근 기록 시간: 오후 근무 시간대 중 가장 늦은 기록 시간이 오후 퇴근 기록 시간
 	 * @param mobileDetails
 	 * @param scheduleSetting
 	 * @param debugger
@@ -49,19 +49,19 @@ class ComposeDetailWithMobileInSignProxy3 {
 		String middayRestEndTime = scheduleSetting.getMiddayRestEndTime();
 		String onWorkTimeStr = scheduleSetting.getOnDutyTime();
 		String offWorkTimeStr = scheduleSetting.getOffDutyTime();
-		// 上班打卡数据计算
+		// 출근 기록 데이터 계산
 		String onDutyTime = getOnDutyTime( mobileDetails, middayRestStartTime , usedMobileDetailIds);
-		// 中午下班打卡数据计算
+		// 점심 퇴근 기록 데이터 계산
 		String morningOffdutyTime = getMorningOffDutyTime(mobileDetails, onWorkTimeStr, middayRestEndTime, usedMobileDetailIds);
-		// 中午上班打卡数据计算
+		// 점심 출근 기록 데이터 계산
 		String afternoonOndutyTime = getAfternoonOnDutyTime( mobileDetails, middayRestStartTime, offWorkTimeStr , usedMobileDetailIds);
-		// 下班打卡数据计算
+		// 퇴근 기록 데이터 계산
 		String offDutyTime = getOffDutyTime( mobileDetails, middayRestEndTime , usedMobileDetailIds);
 
 		String recordAddress = this.getRecordAddress(mobileDetails);
 		String optMachineType = this.getOptMachineType(mobileDetails);
 
-		//组织员工当天的考勤打卡记录
+		//직원의 당일 근태 출퇴근 기록 구성
 		AttendanceDetail detail = new AttendanceDetail();
 		detail.setEmpNo( mobileDetail.getEmpNo() );
 		detail.setEmpName( mobileDetail.getEmpName() );
@@ -72,24 +72,24 @@ class ComposeDetailWithMobileInSignProxy3 {
 			detail.setMonthString( dateOperation.getMonth( mobileDetail.getRecordDate() ) );
 		}
 		detail.setRecordDateString( mobileDetail.getRecordDateString() );
-		detail.setOnDutyTime( onDutyTime ); //上午上班签到打卡
-		detail.setMorningOffDutyTime( morningOffdutyTime ); //上午下班打卡
-		detail.setAfternoonOnDutyTime( afternoonOndutyTime ); //下午上班打卡
-		detail.setOffDutyTime( offDutyTime ); //下午下班签退打卡
+		detail.setOnDutyTime( onDutyTime ); //오전 출근 기록
+		detail.setMorningOffDutyTime( morningOffdutyTime ); //오전 퇴근 기록
+		detail.setAfternoonOnDutyTime( afternoonOndutyTime ); //오후 출근 기록
+		detail.setOffDutyTime( offDutyTime ); //오후 퇴근 기록
 		detail.setRecordStatus( 0 );
 		detail.setBatchName( "FromMobile_" + dateOperation.getNowTimeChar() );
 		return detail;
 	}
 
 	/**
-	 * 计算上午下班打卡时间：离上午上班时间最近的一次打卡时间
-	 * 取上午上班之后，到下午上班之前最晚的打卡记录
-	 * 2023-1-6 这里逻辑修改过了，不是最晚的打卡记录，改成最早的打开记录，因为已经有使用过的记录排除了
+	 * 오전 퇴근 기록 시간 계산: 오전 출근 시간에 가장 가까운 기록 시간
+	 * 오전 출근 이후부터 오후 출근 이전까지 가장 늦은 기록 사용
+	 * 2023-1-6 로직 수정: 가장 늦은 기록이 아니라 가장 이른 기록으로 변경(이미 사용한 기록은 제외되므로)
 	 *
 	 * @param mobileDetails
-	 * @param onWorkTimeStr 上午上班时间
-	 * @param middayRestEndTime 下午上班时间
-	 * @param usedMobileDetailIds    记录已经使用过的打卡记录
+	 * @param onWorkTimeStr 오전 출근 시간
+	 * @param middayRestEndTime 오후 출근 시간
+	 * @param usedMobileDetailIds    이미 사용한 출퇴근 기록
 	 * @return
 	 */
 	private String getMorningOffDutyTime(List<AttendanceDetailMobile> mobileDetails, String onWorkTimeStr, String middayRestEndTime, List<String> usedMobileDetailIds) throws Exception {
@@ -99,7 +99,7 @@ class ComposeDetailWithMobileInSignProxy3 {
 		String lastUsedDetailId = null;
 		if( ListTools.isNotEmpty( mobileDetails ) && mobileDetails.size() >=2 ) {
 			for( AttendanceDetailMobile detailMobile : mobileDetails ) {
-				// 跳过已经处理过的数据
+				// 이미 처리한 데이터 건너뜀
 				if (usedMobileDetailIds.contains(detailMobile.getId())) {
 					continue;
 				}
@@ -107,7 +107,7 @@ class ComposeDetailWithMobileInSignProxy3 {
 				afternoonOnDutyTime = dateOperation.getDateFromString( middayRestEndTime );
 				onWorkTime = dateOperation.getDateFromString( onWorkTimeStr );
 
-				//去掉上午上班前和下午上班后的打卡信息
+				//오전 출근 전과 오후 출근 후의 기록 제외
 				if( signTime.before( onWorkTime ) || signTime.after( afternoonOnDutyTime )){
 					continue;
 				}
@@ -129,12 +129,12 @@ class ComposeDetailWithMobileInSignProxy3 {
 	}
 
 	/**
-	 * 计算下午上班打卡：离下午上班时间最近的一次打卡时间
-	 * 取上午下班之后，下午下班之前最早的一次打卡时间
+	 * 오후 출근 기록 계산: 오후 출근 시간에 가장 가까운 기록 시간
+	 * 오전 퇴근 이후, 오후 퇴근 이전 가장 이른 기록 시간 사용
 	 * @param mobileDetails
 	 * @param middayRestStartTime
 	 * @param offWorkTimeStr
-	 * @param usedMobileDetailIds    记录已经使用过的打卡记录
+	 * @param usedMobileDetailIds    이미 사용한 출퇴근 기록
 	 * @return
 	 */
 	private String getAfternoonOnDutyTime(List<AttendanceDetailMobile> mobileDetails, String middayRestStartTime, String offWorkTimeStr, List<String> usedMobileDetailIds ) throws Exception {
@@ -144,7 +144,7 @@ class ComposeDetailWithMobileInSignProxy3 {
 		String lastUsedDetailId = null;
 		if( ListTools.isNotEmpty( mobileDetails ) && mobileDetails.size() >=2 ) {
 			for( AttendanceDetailMobile detailMobile : mobileDetails ) {
-				// 跳过已经处理过的数据
+				// 이미 처리한 데이터 건너뜀
 				if (usedMobileDetailIds.contains(detailMobile.getId())) {
 					continue;
 				}
@@ -152,7 +152,7 @@ class ComposeDetailWithMobileInSignProxy3 {
 				morningOffWorkTime = dateOperation.getDateFromString( middayRestStartTime );
 				offWorkTime = dateOperation.getDateFromString( offWorkTimeStr );
 
-				//上午下班之前的打卡和下午下班之后的打卡不算，取上午下班后到下午下班之前最量的一次打卡
+				//오전 퇴근 이전 기록과 오후 퇴근 이후 기록은 제외하고, 오전 퇴근 후부터 오후 퇴근 전까지의 기록 사용
 				if( signTime.before(morningOffWorkTime) || signTime.after( offWorkTime )){
 					continue;
 				}
@@ -174,10 +174,10 @@ class ComposeDetailWithMobileInSignProxy3 {
 	}
 
 	/**
-	 * 将下午上班之后所有的打卡中最晚的一次作为当天下午下班的签退打卡
+	 * 오후 출근 이후 모든 기록 중 가장 늦은 기록을 당일 오후 퇴근 기록으로 사용
 	 *
 	 * @param mobileDetails
-	 * @param usedMobileDetailIds    记录已经使用过的打卡记录
+	 * @param usedMobileDetailIds    이미 사용한 출퇴근 기록
 	 * @return
 	 * @throws Exception
 	 */
@@ -186,13 +186,13 @@ class ComposeDetailWithMobileInSignProxy3 {
 		String result = null;
 		String lastUsedDetailId = null;
 		for( AttendanceDetailMobile detailMobile : mobileDetails ) {
-			// 跳过已经处理过的数据
+			// 이미 처리한 데이터 건너뜀
 			if (usedMobileDetailIds.contains(detailMobile.getId())) {
 				continue;
 			}
 			signTime = dateOperation.getDateFromString(detailMobile.getSignTime() );
 			afterOndutyTime = dateOperation.getDateFromString( middayRestEndTime );
-			//下午上班前的打卡就不算到下午下班打卡了
+			//오후 출근 이전 기록은 오후 퇴근 기록에 포함하지 않음
 			if( signTime.before( afterOndutyTime )){
 				continue;
 			}
@@ -213,11 +213,11 @@ class ComposeDetailWithMobileInSignProxy3 {
 	}
 
 	/**
-	 * 将第一次打卡时间，设置为上班打卡时间
-	 * 只可能在第一区间和第二区间，在上午下班时间之前打卡才能算当天上午的上班打卡
+	 * 첫 기록 시간을 출근 기록 시간으로 설정
+	 * 첫째 구간과 둘째 구간에서만 가능하며, 오전 퇴근 시간 이전에 기록해야 당일 오전 출근 기록으로 인정
 	 * @param mobileDetails
 	 * @param middayRestStartTime
-	 * @param usedMobileDetailIds 记录已经使用过的打卡记录
+	 * @param usedMobileDetailIds 이미 사용한 출퇴근 기록
 	 * @return
 	 * @throws Exception
 	 */
@@ -229,7 +229,7 @@ class ComposeDetailWithMobileInSignProxy3 {
 		for( AttendanceDetailMobile detailMobile : mobileDetails ) {
 			signTime = dateOperation.getDateFromString(detailMobile.getSignTime() );
 			morningOffdutyTime = dateOperation.getDateFromString( middayRestStartTime );
-			//排除在上午下班时间之后的打卡
+			//오전 퇴근 시간 이후의 기록 제외
 			if( signTime.after( morningOffdutyTime )){
 				continue;
 			}
@@ -250,7 +250,7 @@ class ComposeDetailWithMobileInSignProxy3 {
 	}
 
 	/**
-	 * 获取打卡地址
+	 * 출퇴근 기록 주소 조회
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception
@@ -278,7 +278,7 @@ class ComposeDetailWithMobileInSignProxy3 {
 	}
 
 	/**
-	 * 获取设备信息
+	 * 기기 정보 조회
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception

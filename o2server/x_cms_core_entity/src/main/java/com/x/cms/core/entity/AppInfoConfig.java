@@ -21,12 +21,12 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 内容管理栏目配置信息
+ * 콘텐츠 관리 게시판 설정 정보
  * 
  * @author O2LEE
  *
  */
-@Schema(name = "AppInfoConfig", description = "内容管理栏目配置信息.")
+@Schema(name = "AppInfoConfig", description = "콘텐츠 관리 게시판 설정 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AppInfoConfig.table, uniqueConstraints = {
@@ -48,7 +48,7 @@ public class AppInfoConfig extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -57,19 +57,19 @@ public class AppInfoConfig extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String config_FIELDNAME = "config";
-	@FieldDescribe("配置支持信息JSON内容")
+	@FieldDescribe("설정 지원 정보 JSON 내용")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + config_FIELDNAME)

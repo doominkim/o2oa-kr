@@ -23,7 +23,7 @@ import com.x.bbs.assemble.control.jaxrs.replyinfo.exception.ExceptionReplyInfoPr
 import com.x.bbs.entity.BBSReplyInfo;
 
 /**
- * @apiNote 根据回复内容ID 查询 针对该回帖的回复内容的列表
+ * @apiNote 답글 ID로 해당 답글에 대한 답글 목록 조회
  * @Author O2LEE
  */
 public class ActionListWithReply extends BaseAction {
@@ -31,7 +31,7 @@ public class ActionListWithReply extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(ActionListWithReply.class);
 
 	/**
-	 * 根据回复的ID获取针对该回复的回复列表
+	 * 답글 ID로 해당 답글에 대한 답글 목록 조회
 	 * @param request
 	 * @param effectivePerson
 	 * @param replyId
@@ -58,7 +58,7 @@ public class ActionListWithReply extends BaseAction {
 	}
 
 	/**
-	 * 根据回复的ID获取针对该回复的回复列表
+	 * 답글 ID로 해당 답글에 대한 답글 목록 조회
 	 * @param request
 	 * @param effectivePerson
 	 * @param replyId
@@ -79,7 +79,7 @@ public class ActionListWithReply extends BaseAction {
 				replyInfoList = replyInfoService.listRelysWithRelyId(replyId, config_BBS_REPLY_SORTTYPE );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e,"根据回复ID查询针对该回复所有的二级回复数量时发生异常。replyId:" + replyId );
+				Exception exception = new ExceptionReplyInfoProcess(e,"댓글 ID로 해당 댓글의 전체 답글 수를 조회하는 중 오류가 발생했습니다. replyId:" + replyId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -90,7 +90,7 @@ public class ActionListWithReply extends BaseAction {
 					wraps = Wo.copier.copy(replyInfoList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionReplyInfoProcess(e, "将查询结果转换成可以输出的数据信息时发生异常。");
+					Exception exception = new ExceptionReplyInfoProcess(e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -122,10 +122,10 @@ public class ActionListWithReply extends BaseAction {
 		public static WrapCopier<BBSReplyInfo, Wo> copier = WrapCopierFactory.wo(BBSReplyInfo.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("创建人姓名")
+		@FieldDescribe("작성자 이름")
 		private String creatorNameShort = "";
 
-		@FieldDescribe("审核人姓名")
+		@FieldDescribe("심사자 이름")
 		private String auditorNameShort = "";
 
 		public String getCreatorNameShort() {

@@ -25,16 +25,16 @@ class ActionExt extends BaseAction {
 
         private static final long serialVersionUID = -8456354949288335211L;
 
-        @FieldDescribe("身份对象")
+        @FieldDescribe("신분 객체")
         private List<WoIdentity> woIdentityList;
 
-        @FieldDescribe("角色对象")
+        @FieldDescribe("역할 객체")
         private List<WoRole> woRoleList;
 
-        @FieldDescribe("群组对象")
+        @FieldDescribe("그룹 객체")
         private List<WoGroup> woGroupList;
 
-        @FieldDescribe("个人属性对象")
+        @FieldDescribe("개인 속성 객체")
         private List<WoPersonAttribute> woPersonAttributeList;
 
         public List<WoIdentity> getWoIdentityList() {
@@ -75,10 +75,10 @@ class ActionExt extends BaseAction {
 
         private static final long serialVersionUID = 6193615461099768815L;
 
-        @FieldDescribe("组织对象")
+        @FieldDescribe("조직 객체")
         private WoUnit woUnit;
 
-        @FieldDescribe("组织职务对象")
+        @FieldDescribe("조직 직무 객체")
         private List<WoUnitDuty> woUnitDutyList;
 
         public WoUnit getWoUnit() {
@@ -139,7 +139,7 @@ class ActionExt extends BaseAction {
 
         private static final long serialVersionUID = 3145496265299807549L;
 
-        @FieldDescribe("组织对象")
+        @FieldDescribe("조직 객체")
         private WoUnit woUnit;
 
         public WoUnit getWoUnit() {

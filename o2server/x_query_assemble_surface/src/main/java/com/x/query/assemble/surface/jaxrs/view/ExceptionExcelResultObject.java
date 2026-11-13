@@ -7,7 +7,7 @@ class ExceptionExcelResultObject extends LanguagePromptException {
 	private static final long serialVersionUID = -4908883340253465376L;
 
 	ExceptionExcelResultObject(String flag) {
-		super("指定的Excel结果不存在:{}.", flag);
+		super("지정한 Excel 결과가 없습니다: {}.", flag);
 	}
 
 }

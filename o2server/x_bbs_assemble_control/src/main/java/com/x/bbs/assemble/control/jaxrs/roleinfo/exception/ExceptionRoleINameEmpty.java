@@ -7,6 +7,6 @@ public class ExceptionRoleINameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionRoleINameEmpty() {
-		super("角色名称为空，无法保存角色信息." );
+		super("역할 이름이 비어 있어 역할 정보를 저장할 수 없습니다." );
 	}
 }

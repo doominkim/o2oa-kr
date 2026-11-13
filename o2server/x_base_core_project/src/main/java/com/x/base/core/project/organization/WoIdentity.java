@@ -6,10 +6,10 @@ import java.util.List;
 
 public class WoIdentity extends Identity {
 
-	@FieldDescribe("组织对象")
+	@FieldDescribe("조직 객체")
 	private WoUnit woUnit;
 
-	@FieldDescribe("组织职务对象")
+	@FieldDescribe("조직 직무 객체")
 	private List<WoUnitDuty> woUnitDutyList;
 
 	public WoUnit getWoUnit() {

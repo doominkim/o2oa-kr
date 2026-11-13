@@ -2419,7 +2419,7 @@ MWF.xApplication.FindDesigner.Main = new Class({
 
 	//
 	//
-	// //启动一个webworker处理
+	// //webworker 시작하여 처리
 	// listProcessScriptPattern: function (data, patternList, item){
 	// 	patternList.each(function(pattern){
 	// 		if (pattern.property == "text"){

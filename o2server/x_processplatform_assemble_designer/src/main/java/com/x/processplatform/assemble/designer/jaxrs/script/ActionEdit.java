@@ -43,7 +43,7 @@ class ActionEdit extends BaseAction {
             script.setLastUpdateTime(new Date());
             emc.commit();
             CacheManager.notify(Script.class);
-            // 保存版本
+            // 버전 저장
             ThisApplication.scriptVersionQueue.send(new ScriptVersion(script.getId(), jsonElement));
             Wo wo = new Wo();
             wo.setId(script.getId());

@@ -17,7 +17,7 @@ import com.x.cms.core.entity.element.ViewFieldConfig;
 import com.x.cms.core.entity.element.ViewFieldConfig_;
 
 /**
- * 视图配置管理基础功能服务类
+ * 뷰 설정 관리 기본 기능 서비스 클래스
  * 
  * @author O2LEE
  */
@@ -28,22 +28,22 @@ public class ViewFieldConfigFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的ViewFieldConfig信息对象
+	 * 지정한 Id의 ViewFieldConfig 정보 객체 조회
 	 * @param id
 	 * @return ViewFieldConfig
 	 * @throws Exception
 	 */
-	//@MethodDescribe("获取指定Id的ViewFieldConfig信息对象")
+	//@MethodDescribe("지정한 Id의 ViewFieldConfig 정보 객체 조회")
 	public ViewFieldConfig get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, ViewFieldConfig.class, ExceptionWhen.none );
 	}
 	
 	/**
-	 * 列示全部的ViewFieldConfig信息ID列表
+	 * 전체 ViewFieldConfig 정보 ID 목록 조회
 	 * @return List：String
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示全部的ViewFieldConfig文件附件信息ID列表")
+	//@MethodDescribe("전체 ViewFieldConfig 첨부파일 정보 ID 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( ViewFieldConfig.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -54,12 +54,12 @@ public class ViewFieldConfigFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的ViewFieldConfig信息ID列表
-	 * @param ids 需要查询的ID列表
+	 * 지정한 Id의 ViewFieldConfig 정보 ID 목록 조회
+	 * @param ids 조회할 ID 목록
 	 * @return List：ViewFieldConfig
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定Id的ViewFieldConfig文件附件信息ID列表")
+	//@MethodDescribe("지정한 Id의 ViewFieldConfig 첨부파일 정보 ID 목록 조회")
 //	public List<ViewFieldConfig> list(List<String> ids) throws Exception {
 //		EntityManager em = this.entityManagerContainer().get( ViewFieldConfig.class );
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -70,15 +70,15 @@ public class ViewFieldConfigFactory extends AbstractFactory {
 //	}
 	
 	/**
-	 * 列示指定视图的所有展示列配置信息ID列表
-	 * @param id 指定的视图ID
+	 * 지정한 뷰의 모든 표시 열 설정 정보 ID 목록 조회
+	 * @param id 지정한 뷰 ID
 	 * @return
 	 * @throws Exception 
 	 */
-	//@MethodDescribe("列示指定视图的所有展示列配置信息ID列表")
+	//@MethodDescribe("지정한 뷰의 모든 표시 열 설정 정보 ID 목록 조회")
 	public List<String> listByViewId( String id ) throws Exception {		
 		if( StringUtils.isEmpty(id) ){
-			throw new Exception("内容管理listByViewId方法不接受id为空的查询操作！");
+			throw new Exception("게시판 listByViewId 메서드는 id가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( ViewFieldConfig.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();

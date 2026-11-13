@@ -107,11 +107,11 @@ class ActionGetEntityProperties extends BaseAction {
 	}
 
 	public static class Wo extends GsonPropertyObject {
-		@FieldDescribe("属性名称.")
+		@FieldDescribe("속성 이름.")
 		private String name;
-		@FieldDescribe("属性类型.")
+		@FieldDescribe("속성 유형.")
 		private String type;
-		@FieldDescribe("属性描述.")
+		@FieldDescribe("속성 설명.")
 		private String description;
 
 		public String getName() {

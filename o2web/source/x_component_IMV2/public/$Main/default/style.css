@@ -1,11 +1,11 @@
-/* 聊天消息样式 */
+/* 채팅 메시지 스타일 */
 .none {
     display: none;
 }
 .block {
     display: block;
 }
-/* Starter.js 中的 loading 样式 */
+/* Starter.js의 loading 스타일 */
 .loading-overlay {
     position: fixed;
     top: 0;
@@ -273,7 +273,7 @@
     max-width: 200px;
 }
 
-/*分享的会话列表*/
+/*공유한 대화 목록*/
 .share-conversation-out-box {
     background-color: #ebebeb;
     color: rgb(102, 102, 102);

@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "Eldate", null, false);
-/** @class Eldatetime 基于Element UI的日期时间选择组件。
- * @o2cn 日期时间选择
+/** @class Eldatetime Element UI 기반 날짜 시간 선택 컴포넌트.
+ * @o2cn 날짜 시간 선택
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|Element UI DateTimePicker 日期时间选择器}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|Element UI DateTimePicker 날짜 시간 선택기}
  */
 MWF.xApplication.process.Xform.Eldatetime = MWF.APPEldatetime =  new Class(
     /** @lends MWF.xApplication.process.Xform.Eldatetime# */
@@ -21,19 +21,19 @@ MWF.xApplication.process.Xform.Eldatetime = MWF.APPEldatetime =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 当 input 失去焦点时触发。this.event[0]指向组件实例
+         * input이 포커스를 잃을 때 발생. this.event[0]은 컴포넌트 인스턴스
          * @event MWF.xApplication.process.Xform.Eldatetime#blur
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|日期时间选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|날짜 시간 선택 컴포넌트의 Events 장}
          */
         /**
-         * 当 input 获得焦点时触发。this.event[0]指向组件实例
+         * input이 포커스를 얻을 때 발생. this.event[0]은 컴포넌트 인스턴스
          * @event MWF.xApplication.process.Xform.Eldatetime#focus
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|日期时间选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|날짜 시간 선택 컴포넌트의 Events 장}
          */
         /**
-         * 用户确认选定的值时触发。this.event[0]为组件绑定值；格式与绑定值一致，可受 value-format 控制
+         * 사용자가 선택 값을 확인할 때 발생. this.event[0]은 컴포넌트 바인딩 값이며, 형식은 바인딩 값과 같고 value-format으로 제어 가능
          * @event MWF.xApplication.process.Xform.Eldatetime#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|日期时间选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/datetime-picker|날짜 시간 선택 컴포넌트의 Events 장}
          */
         "elEvents": ["focus", "blur", "change"]
     },

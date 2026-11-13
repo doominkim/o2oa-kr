@@ -67,37 +67,37 @@ public class QueueAttendanceV2LeavePolicyGrant extends
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
             List<String> userList = new ArrayList<>();
-            // 全员
+            // 전체 사용자
             if (GrantScopeTypeEnum.ALL.getValue().equals(policy.getGrantScopeType())) {
                 userList = business.organization().person().listAll();
             } else if (GrantScopeTypeEnum.DEPARTMENT.getValue()
                     .equals(policy.getGrantScopeType())) {
-                // 组织
+                // 조직
                 if (policy.getGrantScopeList() != null && !policy.getGrantScopeList().isEmpty()) {
                     for (String filter : policy.getGrantScopeList()) {
                         analysisPerson(userList, filter, business);
                     }
                 }
             }
-            // 排除字段
+            // 제외 필드
             List<String> excludeList = Optional.ofNullable(policy.getGrantExcludeList()).orElse(new ArrayList<>());
-            // userList 去重
+            // userList 중복 제거
             userList = new ArrayList<>(new java.util.HashSet<>(userList));
-            // 移除排除名单中的用户
+            // 제외 명단의 사용자 제거
             if (!excludeList.isEmpty()) {
                 userList.removeAll(excludeList);
             }
-            // 移除后再判断是否为空
+            // 제거 후 비어 있는지 다시 판단
             if (userList == null || userList.isEmpty()) {
                 logger.warn("User list is empty for policy {}, skip this task.", policy.getId());
                 return;
             }
 
-            // 当前日期作为发放标识
+            // 현재 날짜를 지급 식별자로 사용
             String grantPeriod = DateTools.format(today, DateTools.formatCompact_yyyyMMdd);
-            // 循环发放
+            // 반복 지급
             for (String user : userList) {
-                // 发放额度
+                // 지급 한도
                 double grantAmount = 0.0;
                 if (BooleanUtils.isTrue(policy.getGrantAmountTypeUseScript())) {
                     Double ret = executeScriptCalGrantAmount(user, policy.getGrantScript(), business);
@@ -113,7 +113,7 @@ public class QueueAttendanceV2LeavePolicyGrant extends
                             user);
                     continue;
                 }
-                //grantPeriod leaveTypeId person 查询是否已经有记录了，避免重复发放
+                //grantPeriod leaveTypeId person으로 기록이 이미 있는지 조회하여 중복 지급 방지
                 List<AttendanceV2LeaveLedger> list = emc.listEqualAndEqualAndEqual(
                         AttendanceV2LeaveLedger.class, AttendanceV2LeaveLedger.leaveTypeId_FIELDNAME,
                         policy.getLeaveTypeId(), AttendanceV2LeaveLedger.grantPeriod_FIELDNAME, grantPeriod,
@@ -152,19 +152,19 @@ public class QueueAttendanceV2LeavePolicyGrant extends
                 }
                 grantLeaveLedgerAndRefreshAccount(emc, ledger);
             }
-            logger.info("发放完成，政策ID: {}, 用户数量: {} 。 开始更新下一次执行时间",
+            logger.info("지급 완료, 정책 ID: {}, 사용자 수: {}. 다음 실행 시간 갱신 시작",
                     policy.getId(), userList.size());
 
             emc.beginTransaction(AttendanceV2LeavePolicy.class);
             AttendanceV2LeavePolicy policyOld = emc.find(policy.getId(),
                     AttendanceV2LeavePolicy.class);
-            policyOld.setGrantLastExecuteTime(today); // 更新执行定时器时间
+            policyOld.setGrantLastExecuteTime(today); // 실행 타이머 시간 갱신
             emc.check(policyOld, CheckPersistType.all);
             emc.commit();
         }
         if (logger.isDebugEnabled()) {
             logger.debug(
-                    "======================新版考勤假期管理策略 {} 发放 执行完成==============================",
+                    "======================신규 근태 휴가 관리 정책 {} 지급 실행 완료==============================",
                     policy.getPolicyName());
         }
     }
@@ -177,7 +177,7 @@ public class QueueAttendanceV2LeavePolicyGrant extends
         calendar.setTime(date);
         return calendar.get(Calendar.YEAR);
     }
-    // 设置时间到 23:59:59
+    // 시간을 23:59:59로 설정
     private Date endOfDay(Date expireTime) {
         if (expireTime == null) {
             return null;
@@ -191,7 +191,7 @@ public class QueueAttendanceV2LeavePolicyGrant extends
         return calendar.getTime();
     }
 
-    // 执行脚本获取发放额度
+    // 스크립트를 실행하여 지급 한도 조회
     private Double executeScriptCalGrantAmount(String person, String scriptText, Business business) {
         Double ret = null;
         try {
@@ -204,14 +204,14 @@ public class QueueAttendanceV2LeavePolicyGrant extends
                 JsonElement element = GraalvmScriptingFactory.eval(source, binding(p));
                 ret = Double.valueOf(element.toString());
             } else {
-                logger.warn("脚本 或 人员 {} 为空 ，无法执行脚本", person);
+                logger.warn("스크립트 또는 사용자 {}가 비어 있어 스크립트를 실행할 수 없음", person);
             }
         } catch (Exception e) {
             logger.error(e);
         }
         return ret;
     }
-    // 绑定一些参数
+    // 일부 매개변수 바인딩
     private GraalvmScriptingFactory.Bindings binding(Person person) throws Exception {
         Resources resources = new Resources();
         resources.setContext(ThisApplication.context());
@@ -224,10 +224,10 @@ public class QueueAttendanceV2LeavePolicyGrant extends
         return bindings;
     }
 
-    // 解析人员列表，把组织下人员都查询出来放入 userList 中
+    // 사용자 목록 파싱, 조직 아래 사용자를 모두 조회해 userList에 넣음
     private void analysisPerson(List<String> userList, String filter, Business business)
             throws Exception {
-        if (filter.endsWith("@U")) { // 组织转化成人员列表 递归
+        if (filter.endsWith("@U")) { // 조직을 사용자 목록으로 변환(재귀)
             List<String> users = business.organization().person().listWithUnitSubNested(filter);
             if (users != null && !users.isEmpty()) {
                 userList.addAll(users);
@@ -246,10 +246,10 @@ public class QueueAttendanceV2LeavePolicyGrant extends
         transaction.setLeaveTypeId(ledger.getLeaveTypeId());
         transaction.setLedgerId(ledger.getId());
         transaction.setBizType(BizTypeEnum.GRANT.getValue());
-        transaction.setAmount(ledger.getGrantAmount()); // 发放数量
+        transaction.setAmount(ledger.getGrantAmount()); // 지급 수량
         emc.persist(transaction, CheckPersistType.all);
         emc.commit();
-        // 发放完后异步更新账户余额数据
+        // 지급 후 계정 잔액 데이터를 비동기로 갱신
         AttendanceV2LeaveManager.asyncUpdateLeaveAccount(ledger.getPerson(), ledger.getLeaveTypeId());
     }
 

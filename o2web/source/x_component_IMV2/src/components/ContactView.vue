@@ -24,7 +24,7 @@ const _searchConversation = async (content) => {
     return
   }
   searchMode.value = true
-  // 搜索
+  // 검색
   searchOnlineData(content)
 }
 const searchOnlineData = debounce(async (val) => {
@@ -50,13 +50,13 @@ onMounted(async () => {
       unique: org.unique,
       name: org.name,
       distinguishedName: org.distinguishedName,
-      expanded: true,   // 默认展开
+      expanded: true,   // 기본 펼침
       loaded: false,
       children: [],
       persons: []
     }
 
-    await loadChildren(node) // 默认加载第二层
+    await loadChildren(node) // 기본으로 두 번째 단계 로드
     treeData.value.push(node)
   }
 })
@@ -73,14 +73,14 @@ const clickPersonIdentity = async (identity) => {
     console.error('잘못된 대상', identity)
   }
 }
-// 点击展开
+// 클릭해 펼치기
 const handleToggle = async (node) => {
   node.expanded = !node.expanded
   if (node.expanded) {
     await loadChildren(node)
   }
 }
-// 加载组织人员
+// 조직 사용자 로드
 const loadChildren = async (node) => {
   if (node.loaded) return
 
@@ -114,7 +114,7 @@ const listTop = async () => {
   const topList = await orgExpressUnitAction('listObject', body)
   return topList || []
 }
-// 查询下级组织
+// 하위 조직 조회
 const listByParent = async (parent) => {
   const body = {
     countSubDirectIdentity: true,
@@ -124,7 +124,7 @@ const listByParent = async (parent) => {
   const unitList = await orgExpressUnitAction('listWithUnitSubDirectObject', body)
   return unitList || []
 }
-// 查询组织下人员
+// 조직 내 사용자 조회
 const personListByUnit = async (unit) => {
   const identityList = await orgIdentityAction('listWithUnit', unit)
   return identityList || []
@@ -139,11 +139,11 @@ const personListByUnit = async (unit) => {
         <span v-if="searchContent!==''" class="arrow" slot="after-inner-after" @click="clearSearch"><i class="ooicon-error"></i></span>
       </oo-input>
     </div>
-    <!--    搜索结果列表-->
+    <!--    검색 결과 목록-->
     <div class="im-conversation-list" v-if="searchMode">
       <div class="org-tree">
         <div class="org-children">
-          <!-- 人员 -->
+          <!-- 사용자 -->
           <div
               v-for="p in searchPersonList"
               :key="p.id"
@@ -158,7 +158,7 @@ const personListByUnit = async (unit) => {
         </div>
       </div>
     </div>
-    <!--    组织树 -->
+    <!--    조직 트리 -->
     <div class="im-conversation-list" v-else>
       <div class="org-tree">
         <OrgNodeView

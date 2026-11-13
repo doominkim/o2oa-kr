@@ -19,7 +19,7 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Event", description = "流程平台流转事件.")
+@Schema(name = "Event", description = "프로세스 플랫폼 진행 이벤트.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Message.Event.table, uniqueConstraints = {
@@ -43,12 +43,12 @@ public class Event extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		// nothing
@@ -59,26 +59,26 @@ public class Event extends SliceJpaObject {
 	}
 
 	public static final String JOB_FIELDNAME = "job";
-	@FieldDescribe("任务标识.")
+	@FieldDescribe("작업 식별자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + JOB_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String job;
 
 	public static final String TARGET_FIELDNAME = "target";
-	@FieldDescribe("目标对象标识.")
+	@FieldDescribe("대상 객체 식별자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + TARGET_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String target;
 
 	public static final String TYPE_FIELDNAME = "type";
-	@FieldDescribe("消息类型.")
+	@FieldDescribe("메시지 유형.")
 	@Column(length = length_255B, name = ColumnNamePrefix + TYPE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + TYPE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String FAILURE_FIELDNAME = "failure";
-	@FieldDescribe("失败次数.")
+	@FieldDescribe("실패 횟수.")
 	@Column(name = ColumnNamePrefix + FAILURE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer failure;

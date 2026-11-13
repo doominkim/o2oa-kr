@@ -11,12 +11,12 @@ export default content({
         return {
             lp,
             showClear: false,
-            label: "", // 标题文字
-            isRequried: false, // 红星
-            // selectorTitle: "", // 选择器上的标题
-            // value: [], // 流程对象列表
-            // showValue: "", // 流程对象name
-            // placeholder: "", // 没有数据的时候显示的内容
+            label: "", // 제목 텍스트
+            isRequried: false, // 빨간 별
+            // selectorTitle: "", // 선택기 제목
+            // value: [], // 프로세스 객체 목록
+            // showValue: "", // 프로세스 객체 name
+            // placeholder: "", // 데이터가 없을 때 표시할 내용
         };
     },
     afterRender() {
@@ -28,7 +28,7 @@ export default content({
         let newShowValue = [];
         for (let index = 0; index < this.bind.value.length; index++) {
           const element = this.bind.value[index];
-          newShowValue.push(element["name"]||""); // name字段
+          newShowValue.push(element["name"]||""); // name 필드
         }
         this.bind.showValue = newShowValue.join(", ");
       }
@@ -63,7 +63,7 @@ export default content({
     clearValue() {
       this.bind.value = [];
       this.bind.showValue = "";
-      // 反写到oo-model
+      // oo-model에 되돌려 쓰기
       this.component.updateModel([]);
     },
     changeValue(items) {
@@ -76,7 +76,7 @@ export default content({
         });
         this.bind.value = newValue;
         this.showValueFun();
-        // 反写到oo-model
+        // oo-model에 되돌려 쓰기
         this.component.updateModel(newValue);
        }
     },

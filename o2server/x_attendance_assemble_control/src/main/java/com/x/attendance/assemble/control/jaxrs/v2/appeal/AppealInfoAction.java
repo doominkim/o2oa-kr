@@ -25,21 +25,21 @@ import java.util.List;
  * Copyright © 2023 O2. All rights reserved.
  */
 @Path("v2/appeal")
-@JaxrsDescribe("申诉管理")
+@JaxrsDescribe("이의 신청 관리")
 public class AppealInfoAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(AppealInfoAction.class);
 
 
 
-    @JaxrsMethodDescribe(value = "分页查询当前用户的申诉数据列表.", action = ActionListByPage.class)
+    @JaxrsMethodDescribe(value = "현재 사용자의 이의 신청 데이터 목록 페이지 조회.", action = ActionListByPage.class)
     @POST
     @Path("list/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                             @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-                             @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+                             @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+                             @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListByPage.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -51,14 +51,14 @@ public class AppealInfoAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "管理员查询申诉数据列表.", action = ActionListByPageByAdmin.class)
+    @JaxrsMethodDescribe(value = "관리자 이의 신청 데이터 목록 조회.", action = ActionListByPageByAdmin.class)
     @POST
     @Path("list/manager/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void managerListByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                             @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-                             @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+                             @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+                             @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListByPageByAdmin.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -71,7 +71,7 @@ public class AppealInfoAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "考勤信息确认，锁定指定日期范围内待处理和审批中的申诉数据.", action = ActionConfirm.class)
+    @JaxrsMethodDescribe(value = "근태 정보 확인, 지정 날짜 범위 내 대기 중·결재 중인 이의 신청 데이터 잠금.", action = ActionConfirm.class)
     @POST
     @Path("confirm")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -91,13 +91,13 @@ public class AppealInfoAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "管理员处理异常数据为正常.", action = ActionUpdateStatusByAdmin.class)
+    @JaxrsMethodDescribe(value = "관리자가 이상 데이터를 정상으로 처리.", action = ActionUpdateStatusByAdmin.class)
     @GET
     @Path("{id}/manager/status")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void managerSetNormal(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                       @JaxrsParameterDescribe("申诉数据ID") @PathParam("id") String id) {
+                       @JaxrsParameterDescribe("이의 신청 데이터 ID") @PathParam("id") String id) {
         ActionResult<ActionUpdateStatusByAdmin.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -110,13 +110,13 @@ public class AppealInfoAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "申诉数据获取.", action = ActionGet.class)
+    @JaxrsMethodDescribe(value = "이의 신청 데이터 조회.", action = ActionGet.class)
     @GET
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                       @JaxrsParameterDescribe("申诉数据ID") @PathParam("id") String id) {
+                       @JaxrsParameterDescribe("이의 신청 데이터 ID") @PathParam("id") String id) {
         ActionResult<ActionGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -130,13 +130,13 @@ public class AppealInfoAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "检查是否能够申诉.", action = ActionCheckCanStartAppeal.class)
+    @JaxrsMethodDescribe(value = "이의 신청 가능 여부 확인.", action = ActionCheckCanStartAppeal.class)
     @GET
     @Path("{id}/start/check")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void startCheck(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                       @JaxrsParameterDescribe("申诉数据ID") @PathParam("id") String id) {
+                       @JaxrsParameterDescribe("이의 신청 데이터 ID") @PathParam("id") String id) {
         ActionResult<ActionCheckCanStartAppeal.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -150,13 +150,13 @@ public class AppealInfoAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "启动流程后修改状态.", action = ActionUpdateForStart.class)
+    @JaxrsMethodDescribe(value = "프로세스 시작 후 상태 수정.", action = ActionUpdateForStart.class)
     @POST
     @Path("{id}/start/process")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void startProcess(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                       @JaxrsParameterDescribe("申诉数据ID") @PathParam("id") String id,
+                       @JaxrsParameterDescribe("이의 신청 데이터 ID") @PathParam("id") String id,
                              JsonElement jsonElement) {
         ActionResult<ActionUpdateForStart.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -170,13 +170,13 @@ public class AppealInfoAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "还原数据状态，清除流程关联.", action = ActionUpdateForResetStatus.class)
+    @JaxrsMethodDescribe(value = "데이터 상태 복원, 프로세스 연결 해제.", action = ActionUpdateForResetStatus.class)
     @GET
     @Path("{id}/reset/status")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void resetStatus(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                       @JaxrsParameterDescribe("申诉数据ID") @PathParam("id") String id) {
+                       @JaxrsParameterDescribe("이의 신청 데이터 ID") @PathParam("id") String id) {
         ActionResult<ActionUpdateForResetStatus.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -189,13 +189,13 @@ public class AppealInfoAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "流程结束后回填数据.", action = ActionUpdateForEnd.class)
+    @JaxrsMethodDescribe(value = "프로세스 종료 후 데이터 반영.", action = ActionUpdateForEnd.class)
     @POST
     @Path("{id}/end/process")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void endProcess(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                           @JaxrsParameterDescribe("申诉数据ID") @PathParam("id") String id,
+                           @JaxrsParameterDescribe("이의 신청 데이터 ID") @PathParam("id") String id,
                                JsonElement jsonElement) {
         ActionResult<ActionUpdateForEnd.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);

@@ -180,7 +180,7 @@ if (!window.layout || !layout.desktop || !layout.addReady) {
             if (job) docurl += ((docurl.indexOf("?") != -1) ? "&" : "?") + "jobid=" + job;
             docurl += ((redirectlink) ? "&redirectlink=" + redirectlink : "");
             docurl += ((layout.debugger) ? "&debugger" : "");
-            //使用相对路径不需要filterUrl
+            //상대 경로 사용 시 filterUrl 불필요
             //window.location = o2.filterUrl(docurl);
             window.location = docurl;
         };
@@ -372,7 +372,7 @@ if (!window.layout || !layout.desktop || !layout.addReady) {
             var par = "app=" + encodeURIComponent(appNames) + "&status=" + encodeURIComponent((statusObj) ? JSON.encode(statusObj) : "") + "&option=" + encodeURIComponent((options) ? JSON.encode(options) : "");
             
             // if (appNames==='process.Work' && options.onAfterProcess){
-            //     //处理浏览器打开工作时，可能需要的回调操作
+            //     //브라우저에서 업무 문서를 열 때 필요할 수 있는 콜백 처리
             //     const afterProcess = (e)=>{
             //         if (e.origin !== window.location.origin) return;
             //         if (e.data.type==='onAfterProcess' && e.data.id===options.workId){

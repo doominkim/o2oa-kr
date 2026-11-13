@@ -37,10 +37,10 @@ public class EcnetAction extends StandardJaxrsAction {
 	private static final Logger logger = LoggerFactory.getLogger(EcnetAction.class);
 	private static final String OPERATIONID_PREFIX = "EcnetAction::";
 
-	@Operation(summary = "文本纠错检查.", operationId = OPERATIONID_PREFIX + "check", responses = { @ApiResponse(content = {
+	@Operation(summary = "텍스트 오류 교정 검사.", operationId = OPERATIONID_PREFIX + "check", responses = { @ApiResponse(content = {
 			@Content(schema = @Schema(implementation = ActionCheck.Wo.class)) }) }, requestBody = @RequestBody(content = {
 					@Content(schema = @Schema(implementation = ActionCheck.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "文本纠错检查.", action = ActionCheck.class)
+	@JaxrsMethodDescribe(value = "텍스트 오류 교정 검사.", action = ActionCheck.class)
 	@POST
 	@Path("check")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

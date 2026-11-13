@@ -7,6 +7,6 @@ public class ExceptionCredentialEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionCredentialEmpty() {
-		super("用户标识不能为空.");
+		super("사용자 식별자는 비워 둘 수 없습니다.");
 	}
 }

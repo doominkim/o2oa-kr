@@ -7,7 +7,7 @@ class ExceptionActivityNotService extends PromptException {
 	private static final long serialVersionUID = -7038279889683420366L;
 
 	ExceptionActivityNotService(String id) {
-		super("工作:{}, 未处于服务活动环节.", id);
+		super("문서: {}이(가) 서비스 단계에 있지 않습니다.", id);
 	}
 
 }

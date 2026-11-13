@@ -16,30 +16,30 @@ import com.x.base.core.project.gson.GsonPropertyObject;
  */
 public class Mpweixin extends ConfigObject {
 
-	@FieldDescribe("是否启用.")
+	@FieldDescribe("사용 여부.")
 	private Boolean enable;
-	@FieldDescribe("是否启用发布.")
+	@FieldDescribe("게시 사용 여부.")
 	private Boolean enablePublish;
-	@FieldDescribe("微信开放平台appid")
+	@FieldDescribe("위챗 오픈 플랫폼 appid")
 	private String appid;
-	@FieldDescribe("微信开放平台appSecret")
+	@FieldDescribe("위챗 오픈 플랫폼 appSecret")
 	private String appSecret = "";
-	@FieldDescribe("微信公众号配的token")
+	@FieldDescribe("위챗 공식 계정에 설정한 token")
 	private String token = "";
-	@FieldDescribe("微信公众号配的encodingAesKey")
+	@FieldDescribe("위챗 공식 계정에 설정한 encodingAesKey")
 	private String encodingAesKey = "";
-	@FieldDescribe("微信公众号消息打开工作的url地址，如：https://sample.o2oa.net/x_desktop/")
+	@FieldDescribe("위챗 공식 계정 메시지에서 업무 문서를 여는 url 주소, 예:https://sample.o2oa.net/x_desktop/")
 	private String workUrl = "";
-	@FieldDescribe("微信公众号测试菜单的门户地址")
+	@FieldDescribe("위챗 공식 계정 테스트 메뉴의 포털 주소")
 	private String portalId = "";
-	@FieldDescribe("接收到文本消息默认执行的服务脚本id")
+	@FieldDescribe("텍스트 메시지 수신 시 기본 실행할 서비스 스크립트 id")
 	private String scriptId = "";
 
-	@FieldDescribe("是否启用公众号模版消息")
+	@FieldDescribe("공식 계정 템플릿 메시지 사용 여부")
 	private Boolean messageEnable;
-	@FieldDescribe("公众号模版消息id")
+	@FieldDescribe("공식 계정 템플릿 메시지 id")
 	private String tempMessageId;
-	@FieldDescribe("模版字段")
+	@FieldDescribe("템플릿 필드")
 	private List<MPweixinMessageTemp> fieldList;
 
 	public static final String default_apiAddress = "https://api.weixin.qq.com";
@@ -51,7 +51,7 @@ public class Mpweixin extends ConfigObject {
 
 	public Mpweixin() {
 		this.enable = default_enable;
-		this.enablePublish = default_enable; // 禁用发布功能，sample上防止用户乱发布菜单
+		this.enablePublish = default_enable; // 게시 기능 비활성화, sample에서 사용자가 메뉴를 임의로 게시하는 것을 방지
 		this.appid = "";
 		this.appSecret = "";
 		this.token = "";
@@ -65,7 +65,7 @@ public class Mpweixin extends ConfigObject {
 	}
 
 	/**
-	 * 根据code获取accessToken openid 等信息
+	 * code로 accessToken, openid 등 정보 조회
 	 * 
 	 * @param code
 	 * @return
@@ -85,7 +85,7 @@ public class Mpweixin extends ConfigObject {
 	private static Date cacheAccessTokenDate;
 
 	/// cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
-	// 获取accesstoken
+	// accesstoken 조회
 	public String accessToken() throws Exception {
 		if ((StringUtils.isNotEmpty(cacheAccessToken) && (null != cacheAccessTokenDate))
 				&& (cacheAccessTokenDate.after(new Date()))) {
@@ -203,7 +203,7 @@ public class Mpweixin extends ConfigObject {
 	}
 
 	/**
-	 * 微信使用code获取accessToken openid 等数据
+	 * 위챗에서 code로 accessToken, openid 등 데이터 조회
 	 */
 	public static class WeixinAuth2AccessResp extends GsonPropertyObject {
 		private String access_token;
@@ -212,7 +212,7 @@ public class Mpweixin extends ConfigObject {
 		private String openid;
 		private String scope;
 		private String unionid;
-		// 错误信息code
+		// 오류 정보 code
 		private Integer errcode;
 		private String errmsg;
 
@@ -283,9 +283,9 @@ public class Mpweixin extends ConfigObject {
 
 	public static class MPweixinMessageTemp extends ConfigObject {
 
-		@FieldDescribe("流程字段名")
+		@FieldDescribe("프로세스 필드명")
 		private String name;
-		@FieldDescribe("模版字段名")
+		@FieldDescribe("템플릿 필드명")
 		private String tempName = "";
 
 		public static MPweixinMessageTemp defaultInstance() {

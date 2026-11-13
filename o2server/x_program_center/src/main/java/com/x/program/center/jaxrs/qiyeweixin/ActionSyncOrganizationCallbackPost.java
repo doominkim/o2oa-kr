@@ -14,7 +14,7 @@ class ActionSyncOrganizationCallbackPost extends BaseAction {
 
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String msg_signature, String timestamp, String nonce
 			, String body) throws Exception {
-		logger.info("企业微信接收到通讯录同步消息,msg_signature:{}, timestamp:{}, nonce:{}, body:{}.", msg_signature,
+		logger.info("기업 위챗 주소록 동기화 메시지 수신,msg_signature:{}, timestamp:{}, nonce:{}, body:{}.", msg_signature,
 				timestamp, nonce, body);
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();

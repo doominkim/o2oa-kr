@@ -24,10 +24,10 @@ import com.x.file.core.entity.PersistenceProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 云文件系统配置
+ * 클라우드 파일 시스템 설정
  * @author sword
  */
-@Schema(name = "FileConfig", description = "云文件配置.")
+@Schema(name = "FileConfig", description = "클라우드 파일 설정.")
 @ContainerEntity(dumpSize = 100, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Open.FileConfig.table, uniqueConstraints = {
@@ -51,12 +51,12 @@ public class FileConfig extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -69,34 +69,34 @@ public class FileConfig extends SliceJpaObject {
 		this.properties = new FileConfigProperties();
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationNotExists = @CitationNotExist(fields = person_FIELDNAME, type = FileConfig.class))
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("分类名称.")
+	@FieldDescribe("분류 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String name;
 
 	public static final String capacity_FIELDNAME = "capacity";
-	@FieldDescribe("容量(单位M)，0表示无限大.")
+	@FieldDescribe("용량(단위 M), 0은 무제한.")
 	@Column(name = ColumnNamePrefix + capacity_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer capacity;
 
 	public static final String recycleDays_FIELDNAME = "recycleDays";
-	@FieldDescribe("回收站数据保留天数")
+	@FieldDescribe("휴지통 데이터 보관 일수")
 	@Column(name = ColumnNamePrefix + recycleDays_FIELDNAME)
 	private Integer recycleDays;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_4K, name = ColumnNamePrefix + properties_FIELDNAME)

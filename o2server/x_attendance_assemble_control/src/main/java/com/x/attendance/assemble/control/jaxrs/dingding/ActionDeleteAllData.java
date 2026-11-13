@@ -25,14 +25,14 @@ public class ActionDeleteAllData extends BaseAction {
             if ( null == details ) {
                 result.error( new FindEmptyException() );
             }else{
-                //进行数据库持久化操作
+                //데이터베이스 영속화 작업 수행
                 emc.beginTransaction( AttendanceDingtalkDetail.class );
                 for (AttendanceDingtalkDetail d : details) {
                     emc.remove(d);
                 }
                 emc.commit();
                 result.setData(new WrapBoolean(true));
-                logger.info( "成功删除所有的钉钉打卡数据信息"  );
+                logger.info( "모든 DingTalk 출퇴근 기록 데이터를 삭제했습니다"  );
             }
         } catch ( Exception e ) {
             result.error(e);

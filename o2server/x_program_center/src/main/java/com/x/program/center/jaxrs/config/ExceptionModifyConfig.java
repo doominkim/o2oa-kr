@@ -7,6 +7,6 @@ class ExceptionModifyConfig extends LanguagePromptException {
 	private static final long serialVersionUID = -3287459468603291619L;
 
 	ExceptionModifyConfig( ) {
-		super("已禁用config修改.");
+		super("config 수정이 비활성화되었습니다.");
 	}
 }

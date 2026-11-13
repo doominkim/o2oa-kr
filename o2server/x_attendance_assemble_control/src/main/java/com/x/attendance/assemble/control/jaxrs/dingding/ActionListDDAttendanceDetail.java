@@ -57,7 +57,7 @@ public class ActionListDDAttendanceDetail extends BaseAction {
             BetweenTerms betweenTerms = new BetweenTerms();
             betweenTerms.put("userCheckTime", ListTools.toList(startDay.getTime(), endDay.getTime()));
             String id = EMPTY_SYMBOL;
-            /** 如果不是空位标志位 */
+            /** 비어 있지 않으면 플래그 설정 */
             if (!StringUtils.equals(EMPTY_SYMBOL, flag)) {
                 id = flag;
             }
@@ -176,21 +176,21 @@ public class ActionListDDAttendanceDetail extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("年份")
+        @FieldDescribe("연도")
         private String year;
-        @FieldDescribe("月份")
+        @FieldDescribe("월")
         private String month;
-        @FieldDescribe("日期")
+        @FieldDescribe("날짜")
         private String day;
-        @FieldDescribe("人员")
+        @FieldDescribe("사용자")
         private String person;
-        @FieldDescribe("部门")
+        @FieldDescribe("부서")
         private String unit;
-        @FieldDescribe("顶级部门，会及联查询下级部门")
+        @FieldDescribe("최상위 부서, 하위 부서까지 연쇄 조회")
         private String topUnit;
-        @FieldDescribe("打卡类型:OffDuty|OnDuty")
+        @FieldDescribe("출퇴근 체크 유형:OffDuty|OnDuty")
         private String checkType;
-        @FieldDescribe("打卡结果:Normal|Early|Late|SeriousLate|Absenteeism|NotSigned")
+        @FieldDescribe("출퇴근 체크 결과:Normal|Early|Late|SeriousLate|Absenteeism|NotSigned")
         private String timeResult;
 
 
@@ -263,13 +263,13 @@ public class ActionListDDAttendanceDetail extends BaseAction {
         static final WrapCopier<AttendanceDingtalkDetail, Wo> copier =
                 WrapCopierFactory.wo(AttendanceDingtalkDetail.class, Wo.class, null, JpaObject.FieldsInvisible);
 
-        @FieldDescribe("实际打卡时间")
+        @FieldDescribe("실제 출퇴근 체크 시간")
         private Date userCheckTimeFormat;
-        @FieldDescribe("工作日")
+        @FieldDescribe("근무일")
         private Date workDateFormat;
-        @FieldDescribe("基准时间，用于计算迟到和早退")
+        @FieldDescribe("기준 시간, 지각·조퇴 계산용")
         private Date baseCheckTimeFormat;
-        @FieldDescribe("排序号")
+        @FieldDescribe("정렬 번호")
         private Long rank;
 
 

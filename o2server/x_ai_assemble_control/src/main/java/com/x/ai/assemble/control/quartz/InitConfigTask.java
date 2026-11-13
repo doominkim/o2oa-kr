@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobExecutionContext;
 
 /**
- * 定时检测o2ai配置
+ * o2ai 설정 정기 점검
  *
  * @author sword
  */
@@ -34,7 +34,7 @@ public class InitConfigTask extends AbstractJob {
         try {
             AiConfig config = Business.getConfig();
             if (BooleanUtils.isNotTrue(config.getO2AiEnable()) && !"no".equals(config.getO2AiBaseUrl())) {
-                LOGGER.info("检测到o2ai未配置，尝试检测并配置.");
+                LOGGER.info("o2ai 미설정 감지, 점검 및 설정 시도.");
                 HttpConnectionResponse response = HttpConnection.get(
                         AiConfig.DEFAULT_O2_AI_URL + "/infra-auth/who", null);
                 if (SUCCESS_CODE.equals(response.getResponseCode())) {

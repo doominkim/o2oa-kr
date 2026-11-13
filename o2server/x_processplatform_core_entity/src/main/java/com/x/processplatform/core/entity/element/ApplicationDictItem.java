@@ -37,13 +37,13 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 需要编写级联删除的地方:<br/>
- * 1.designer 的Applicaiton删除<br/>
- * 2.designer中的ApplictionDict删除<br/>
- * 3.processing中的脚本运行对象中的insert和delete<br/>
- * 4.surface中的ApplicationDict的增,删,改<br/>
+ * 연쇄 삭제를 작성해야 하는 곳:<br/>
+ * 1.designer의 Applicaiton 삭제<br/>
+ * 2.designer의 ApplictionDict 삭제<br/>
+ * 3.processing의 스크립트 실행 객체의 insert와 delete<br/>
+ * 4.surface의 ApplicationDict 추가, 삭제, 수정<br/>
  */
-@Schema(name = "ApplicationDictItem", description = "流程平台数据字典条目.")
+@Schema(name = "ApplicationDictItem", description = "프로세스 플랫폼 데이터 사전 항목.")
 @Entity
 @ContainerEntity(dumpSize = 100, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.ApplicationDictItem.table, uniqueConstraints = {
@@ -64,12 +64,12 @@ public class ApplicationDictItem extends DataItem {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.path0 = StringUtils.trimToEmpty(this.path0);
@@ -90,9 +90,9 @@ public class ApplicationDictItem extends DataItem {
 		this.path7Location = NumberUtils.toInt(this.path7, -1);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* 修改过的 set get方法 */
+	/* 수정된 set get 메서드 */
 	@Column(length = DataItem.pathLength, name = ColumnNamePrefix + path0_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + path0_FIELDNAME)
 	private String path0 = "";
@@ -181,7 +181,7 @@ public class ApplicationDictItem extends DataItem {
 	@CheckPersist(allowEmpty = false)
 	private ItemStringValueType itemStringValueType;
 
-	@FieldDescribe("数据标识")
+	@FieldDescribe("데이터 식별자")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + bundle_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + bundle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -220,7 +220,7 @@ public class ApplicationDictItem extends DataItem {
 
 	public static final String application_FIELDNAME = "application";
 	@IdReference(Application.class)
-	@FieldDescribe("所属应用ID.")
+	@FieldDescribe("소속 앱 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + "_application")
 	@CheckPersist(allowEmpty = false, citationExists = @CitationExist(type = Application.class))

@@ -141,37 +141,37 @@ class ActionManageListWithApplicationPaging extends BaseAction {
 	public class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = 4580079997611330119L;
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程数据：true|false(默认不查找)")
+		@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true|false(기본 조회 안 함)")
 		private Boolean relateEditionProcess = false;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("创建用户")
+		@FieldDescribe("생성 사용자")
 		private List<String> credentialList;
 
-		@FieldDescribe("work工作")
+		@FieldDescribe("work 업무 문서")
 		private List<String> workList;
 
-		@FieldDescribe("job工作实例")
+		@FieldDescribe("job 업무 문서 인스턴스")
 		private List<String> jobList;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
-		@FieldDescribe("标题")
+		@FieldDescribe("제목")
 		private String title;
 
-		@FieldDescribe("活动名称")
+		@FieldDescribe("활동 이름")
 		private List<String> activityNameList;
 
 		public List<String> getProcessList() {

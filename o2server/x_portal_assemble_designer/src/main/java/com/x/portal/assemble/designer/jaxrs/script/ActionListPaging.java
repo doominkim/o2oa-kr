@@ -59,7 +59,7 @@ class ActionListPaging extends BaseAction {
 		static WrapCopier<Script, Wo> copier = WrapCopierFactory.wo(Script.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible, Script.dependScriptList_FIELDNAME, Script.text_FIELDNAME));
 
-		@FieldDescribe("门户应用名称.")
+		@FieldDescribe("포털 앱 이름.")
 		private String portalName;
 
 		public String getPortalName() {

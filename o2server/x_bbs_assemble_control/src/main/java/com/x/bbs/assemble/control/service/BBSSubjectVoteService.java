@@ -25,7 +25,7 @@ public class BBSSubjectVoteService {
 
 	public void saveVoteOptions( BBSSubjectInfo subjectInfo, List<WiVoteOptionGroup> optionGroups ) throws Exception {
 		if( optionGroups  == null || optionGroups.isEmpty() ){
-			throw new Exception( "选项信息为空!" );
+			throw new Exception( "항목 정보가 비어 있습니다!" );
 		}
 		if( subjectInfo  == null ){
 			throw new Exception( "subjectInfo is null!" );
@@ -97,10 +97,10 @@ public class BBSSubjectVoteService {
 	}
 
 	/**
-	 * 提交投票结果
+	 * 투표 결과 제출
 	 *
-	 * 1、记录投票日志
-	 * 2、计算投票结果到投票选项组信息中
+	 * 1. 투표 로그 기록
+	 * 2. 투표 결과를 투표 선택지 그룹 정보에 계산
 	 *
 	 * @param effectivePerson
 	 * @param subjectInfo
@@ -125,7 +125,7 @@ public class BBSSubjectVoteService {
 					for( String selectedOptionId : group.getSelectedVoteOptionIds()){
 						voteOption = emc.find( selectedOptionId, BBSVoteOption.class );
 						if( voteOption != null ){
-							//查询一下是否已经投过票了
+							//이미 투표했는지 조회
 							List<BBSVoteRecord> recordList = business.voteRecordFactory().listVoteCountByUserAndGroup( effectivePerson.getDistinguishedName(), group.getId() );
 							if( (ListTools.isEmpty( recordList) || recordList.size() < voteOptionGroup.getVoteChooseCount())
 									&& !doseNotChoosen( recordList, selectedOptionId )){
@@ -157,7 +157,7 @@ public class BBSSubjectVoteService {
 	}
 
 	/**
-	 * 选项是否已经被选择过了。
+	 * 선택지가 이미 선택되었는지 여부.
 	 * @param recordList
 	 * @param selectedOptionId
 	 * @return
@@ -203,7 +203,7 @@ public class BBSSubjectVoteService {
 		}
 	}
 	/**
-	 * 根据主题ID查询所有的投票选项列表
+	 * 주제 ID로 모든 투표 선택지 목록 조회
 	 * @param subjectId
 	 * @return
 	 * @throws Exception

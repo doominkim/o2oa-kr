@@ -9,28 +9,28 @@ public class ActionModeWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -7141628080400713769L;
 
-	@FieldDescribe("启用用户名密码登陆.")
-	@Schema(description = "启用用户名密码登陆.")
+	@FieldDescribe("사용자명·비밀번호 로그인 사용.")
+	@Schema(description = "사용자명·비밀번호 로그인 사용.")
 	private Boolean userPwdLogin = true;
 
-	@FieldDescribe("启用图片验证码登陆.")
-	@Schema(description = "启用图片验证码登陆.")
+	@FieldDescribe("이미지 인증 코드 로그인 사용.")
+	@Schema(description = "이미지 인증 코드 로그인 사용.")
 	private Boolean captchaLogin = true;
 
-	@FieldDescribe("启用短信验证码登陆.")
-	@Schema(description = "启用短信验证码登陆.")
+	@FieldDescribe("SMS 인증 코드 로그인 사용.")
+	@Schema(description = "SMS 인증 코드 로그인 사용.")
 	private Boolean codeLogin = false;
 
-	@FieldDescribe("扫描二维码登陆.")
-	@Schema(description = "扫描二维码登陆.")
+	@FieldDescribe("QR 코드 스캔 로그인.")
+	@Schema(description = "QR 코드 스캔 로그인.")
 	private Boolean bindLogin = false;
 
-	@FieldDescribe("人脸识别登陆.")
-	@Schema(description = "人脸识别登陆.")
+	@FieldDescribe("얼굴 인식 로그인.")
+	@Schema(description = "얼굴 인식 로그인.")
 	private Boolean faceLogin = false;
 
-	@FieldDescribe("双因素登陆.")
-	@Schema(description = "双因素登陆.")
+	@FieldDescribe("2단계 인증 로그인.")
+	@Schema(description = "2단계 인증 로그인.")
 	private Boolean twoFactorLogin = false;
 
 	public Boolean getCodeLogin() {

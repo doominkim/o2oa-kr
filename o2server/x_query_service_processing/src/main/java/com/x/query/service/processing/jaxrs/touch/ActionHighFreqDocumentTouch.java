@@ -15,7 +15,7 @@ import com.x.query.service.processing.schedule.HighFreqDocument;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * (0) AbstractJaxrsAction.EMPTY_SYMBOL 表示在有所节点上执行
+ * (0) AbstractJaxrsAction.EMPTY_SYMBOL은 모든 노드에서 실행함을 의미
  * 
  * @author ray
  *

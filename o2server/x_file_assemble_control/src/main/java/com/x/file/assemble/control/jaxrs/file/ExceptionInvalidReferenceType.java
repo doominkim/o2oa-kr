@@ -7,6 +7,6 @@ class ExceptionInvalidReferenceType extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionInvalidReferenceType(String name) {
-		super("参考类型未知: {}.", name);
+		super("알 수 없는 참조 유형: {}.", name);
 	}
 }

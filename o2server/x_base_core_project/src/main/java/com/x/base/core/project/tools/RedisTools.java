@@ -36,20 +36,20 @@ public class RedisTools {
 	}
 
 	/**
-	 * 初始化JedisPool
+	 * JedisPool 초기화
 	 */
 	private static void initJedisPool() throws Exception {
 		JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-		// 设置最大实例总数
+		// 최대 인스턴스 총수 설정
 		jedisPoolConfig.setMaxTotal(300);
-		// 控制一个pool最多有多少个状态为idle(空闲的)的jedis实例。
+		// pool 하나에 idle(유휴) 상태 jedis 인스턴스를 최대 몇 개 둘지 제어.
 		jedisPoolConfig.setMaxIdle(5);
 		jedisPoolConfig.setMinIdle(5);
-		// 表示当borrow(引入)一个jedis实例时，最大的等待时间，如果超过等待时间，则直接抛出JedisConnectionException；
+		// jedis 인스턴스를 borrow(대여)할 때 최대 대기 시간, 대기 시간을 넘으면 바로 JedisConnectionException 발생;
 		jedisPoolConfig.setMaxWaitMillis(3 * 1000);
-		// 在borrow一个jedis实例时，是否提前进行alidate操作；如果为true，则得到的jedis实例均是可用的；
+		// jedis 인스턴스를 borrow할 때 미리 validate 수행 여부; true면 얻은 jedis 인스턴스는 모두 사용 가능;
 		jedisPoolConfig.setTestOnBorrow(true);
-		// 在还会给pool时，是否提前进行validate操作
+		// pool에 반환할 때 미리 validate 수행 여부
 		jedisPoolConfig.setTestOnReturn(true);
 		jedisPoolConfig.setTestWhileIdle(true);
 		jedisPoolConfig.setMinEvictableIdleTimeMillis(500);
@@ -70,7 +70,7 @@ public class RedisTools {
 	}
 
 	/**
-	 * 通用方法：从JedisPool中获取Jedis
+	 * 공통 메서드: JedisPool에서 Jedis 가져오기
 	 *
 	 * @return
 	 */
@@ -96,7 +96,7 @@ public class RedisTools {
 	}
 
 	/**
-	 * 通用方法：释放Jedis
+	 * 공통 메서드: Jedis 해제
 	 *
 	 * @param jedis
 	 */

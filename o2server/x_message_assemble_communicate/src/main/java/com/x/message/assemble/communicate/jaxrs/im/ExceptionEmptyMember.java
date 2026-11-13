@@ -7,6 +7,6 @@ class ExceptionEmptyMember extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionEmptyMember() {
-		super("会话的成员列表不能为空.");
+		super("대화 멤버 목록은 비워 둘 수 없습니다.");
 	}
 }

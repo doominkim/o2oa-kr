@@ -37,7 +37,7 @@ import com.x.organization.core.entity.Unit_;
 
 class ActionGetWithIdentityWithLevel extends BaseAction {
 
-	/*** 查找指定身份所在的递归群组,并返回指定level的那个群组 */
+	/*** 지정한 신분이 속한 재귀 그룹을 찾아 지정한 level의 그룹 반환 */
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String identityFlag, Integer level) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
@@ -60,25 +60,25 @@ class ActionGetWithIdentityWithLevel extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		// @FieldDescribe("直接下级组织对象")
+		// @FieldDescribe("직속 하위 조직 객체")
 		// private List<Wo> woSubDirectUnitList;
 
-		@FieldDescribe("直接上级组织对象")
+		@FieldDescribe("직속 상위 조직 객체")
 		private Wo woSupDirectUnit;
 
-		@FieldDescribe("直接下级身份对象")
+		@FieldDescribe("직속 하위 신분 객체")
 		private List<WoIdentity> woSubDirectIdentityList;
 
-		@FieldDescribe("组织属性对象")
+		@FieldDescribe("조직 속성 객체")
 		private List<WoUnitAttribute> woUnitAttributeList;
 
-		@FieldDescribe("组织职务对象")
+		@FieldDescribe("조직 직무 객체")
 		private List<WoUnitDuty> woUnitDutyList;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,
@@ -145,7 +145,7 @@ class ActionGetWithIdentityWithLevel extends BaseAction {
 			throw new ExceptionUnitNotExist(identity.getUnit());
 		}
 		List<String> unitIds = business.unit().listSupNested(unit.getId());
-		/** 直接所在组织也加入到搜索范围 */
+		/** 직속 소속 조직도 검색 범위에 포함 */
 		unitIds.add(unit.getId());
 		List<Unit> units = business.entityManagerContainer().list(Unit.class, unitIds);
 		units = business.unit().sort(units);
@@ -300,7 +300,7 @@ class ActionGetWithIdentityWithLevel extends BaseAction {
 
 		private static final long serialVersionUID = 7096544058621159846L;
 
-		@FieldDescribe("身份对象")
+		@FieldDescribe("신분 객체")
 		private List<WoIdentity> woIdentityList;
 
 		static WrapCopier<UnitDuty, WoUnitDuty> copier = WrapCopierFactory.wo(UnitDuty.class, WoUnitDuty.class, null,

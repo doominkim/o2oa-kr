@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp('process.Xform', '$Module', null, false);
 //COMMON.AjaxModule.load("JSONTemplate", null, false);
-/** @class SubSource 子数据源。
- * @o2cn 子数据源
+/** @class SubSource 하위 데이터 소스.
+ * @o2cn 하위 데이터 소스
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var subSource = this.form.get("fieldId"); //获取组件
- * //方法2
- * var subSource = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var subSource = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var subSource = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Portal}
@@ -19,14 +19,14 @@ MWF.xApplication.process.Xform.SubSource = MWF.APPSubSource = new Class(
         Extends: MWF.APP$Module,
         options: {
             /**
-             * 加载数据后执行，但这时还未加载下属组件，可以可以使用this.target.data获取数据进行修改。
+             * 데이터 로드 후 실행, 아직 하위 컴포넌트는 로드되지 않았으며 this.target.data로 데이터를 가져와 수정할 수 있음.
              * @event MWF.xApplication.process.Xform.SubSource#postLoadData
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 加载数据、下属组件后执行。
+             * 데이터와 하위 컴포넌트 로드 후 실행.
              * @event MWF.xApplication.process.Xform.SubSource#loadData
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             moduleEvents: ['queryLoad', 'postLoad', 'load', 'postLoadData', 'loadData'],
         },
@@ -90,10 +90,10 @@ MWF.xApplication.process.Xform.SubSource = MWF.APPSubSource = new Class(
                 );
             }
             /**
-             * @summary 该属性获取当前子数据源的数据，当所在上级数据源加载完成后才有值。
+             * @summary 현재 하위 데이터 소스의 데이터, 상위 데이터 소스 로드 완료 후에 값이 있음.
              * @member {Array|Object|String|Number|Boolean|Null}
              * @example
-             * var field = this.form.get("fieldId").data; //获取子数据源数据
+             * var field = this.form.get("fieldId").data; //하위 데이터 소스 데이터 가져오기
              */
             this.data = data;
         },

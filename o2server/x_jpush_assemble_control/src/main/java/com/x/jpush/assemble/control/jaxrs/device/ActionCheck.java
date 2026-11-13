@@ -46,7 +46,7 @@ public class ActionCheck extends BaseAction {
 			result.setData(wraps);
 		} catch (Exception e) {
 			logger.error(e);
-			throw new IllegalArgumentException("系统在检查绑定设备是否存在时发生异常!", e);
+			throw new IllegalArgumentException("연결된 기기가 있는지 확인하는 중 오류가 발생했습니다!", e);
 		}
 
 		logger.info("action 'ActionCheck' execute completed!");

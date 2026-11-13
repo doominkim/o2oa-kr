@@ -23,7 +23,7 @@ public class ApplicationFactory extends AbstractFactory {
 		super(business);
 	}
 
-	/* 如果isManager列示所有应用，如果不是则判断权限 */
+	/* isManager이면 모든 앱 목록, 아니면 권한 확인 */
 	public List<String> listWithPerson(EffectivePerson effectivePerson) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Application.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -39,7 +39,7 @@ public class ApplicationFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/* 如果是isManager列示分类的有所应用，如果不是则判断权限 */
+	/* isManager이면 분류의 모든 앱 목록, 아니면 권한 확인 */
 	public List<String> listWithPersonWithApplicationCategory(EffectivePerson effectivePerson,
 			String applicationCategory) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Application.class);
@@ -57,7 +57,7 @@ public class ApplicationFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	// 如果是isManager列示所有应用，如果不是则判断权限
+	// isManager이면 모든 앱 목록, 아니면 권한 확인
 	public Long countWithPersonWithApplicationCategory(EffectivePerson effectivePerson, String applicationCategory)
 			throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Application.class);

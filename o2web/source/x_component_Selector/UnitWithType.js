@@ -12,8 +12,8 @@ MWF.xApplication.Selector.UnitWithType = new Class({
         "expand": true,
         "exclude" : [],
         "selectType" : "unit",
-        "expandSubEnable" : true, //是否允许展开下一层
-        "selectAllEnable" : true //分类是否允许全选下一层
+        "expandSubEnable" : true, //다음 레벨 펼치기 허용 여부
+        "selectAllEnable" : true //분류에서 다음 레벨 전체 선택 허용 여부
     },
     setInitTitle: function(){
         this.setOptions({"title": MWF.xApplication.Selector.LP.selectUnit});
@@ -238,7 +238,7 @@ MWF.xApplication.Selector.UnitWithType.Item = new Class({
                         if( !this.subItems )this.subItems = [];
                         this.subItems.push( unit );
                     } else {
-                        if (subData.woSubDirectUnitList.length){ // ? 原来是data.woSubDirectUnitList.length 2020-3-1
+                        if (subData.woSubDirectUnitList.length){ // ? 원래는 data.woSubDirectUnitList.length 2020-3-1
                             var category = this.selector._newItemCategory("ItemCategory", subData, this.selector, this.children, this.level+1, this);
                             this.subCategorys.push( category );
                             this.subCategoryMap[subData.levelName] = category;

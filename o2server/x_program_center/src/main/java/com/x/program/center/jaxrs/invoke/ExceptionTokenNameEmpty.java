@@ -7,6 +7,6 @@ class ExceptionTokenNameEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = -3287459468603291619L;
 
 	ExceptionTokenNameEmpty() {
-		super("令牌错误,名称为空.");
+		super("토큰 오류: 이름이 비어 있습니다.");
 	}
 }

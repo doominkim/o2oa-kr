@@ -21,18 +21,18 @@ public class ActionDeleteMobile extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			AttendanceDetailMobile attendanceDetailMobile = emc.find(id, AttendanceDetailMobile.class);
 			if ( null == attendanceDetailMobile ) {
 				Exception exception = new ExceptionDetaillMobileNotExists( id );
 				result.error( exception );
 			}else{
-				//进行数据库持久化操作				
+				//데이터베이스 영속화 작업 수행				
 				emc.beginTransaction( AttendanceDetailMobile.class );
 				emc.remove( attendanceDetailMobile, CheckRemoveType.all );
 				emc.commit();
 				result.setData( new Wo(id) );
-				logger.info( "成功删除打卡数据信息。id=" + id );
+				logger.info( "출퇴근 데이터 정보 삭제 성공. id=" + id );
 			}			
 		} catch ( Exception e ) {
 			Exception exception = new ExceptionDetaillMobileNotExists( id );

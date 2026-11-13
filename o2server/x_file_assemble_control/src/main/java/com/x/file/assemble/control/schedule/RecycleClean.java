@@ -33,7 +33,7 @@ import com.x.file.core.entity.personal.Recycle_;
 import com.x.file.core.entity.personal.Share;
 
 /**
- * 定时清理回收站数据
+ * 휴지통 데이터 정기 정리
  * 
  * @author sword
  */
@@ -46,7 +46,7 @@ public class RecycleClean extends AbstractJob {
         try {
             Date start = new Date();
             this.cleanRecycle();
-            LOGGER.info("结束定时清理网盘回收站数据,耗时:{}ms.", (new Date()).getTime() - start.getTime());
+            LOGGER.info("네트워크 드라이브 휴지통 데이터 정기 정리 종료, 소요 시간: {}ms.", (new Date()).getTime() - start.getTime());
         } catch (Exception e) {
             throw new JobExecutionException(e);
         }
@@ -85,7 +85,7 @@ public class RecycleClean extends AbstractJob {
                 emc.delete(Recycle.class, recycle.getId());
                 emc.commit();
             } catch (Exception e) {
-                LOGGER.warn("清理网盘回收站文件{}异常：{}.", id, e.getMessage());
+                LOGGER.warn("네트워크 드라이브 휴지통 파일 {} 정리 오류: {}.", id, e.getMessage());
             }
         }
     }

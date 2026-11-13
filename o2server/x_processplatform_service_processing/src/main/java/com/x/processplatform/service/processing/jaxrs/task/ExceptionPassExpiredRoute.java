@@ -7,6 +7,6 @@ class ExceptionPassExpiredRoute extends PromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionPassExpiredRoute(String id, String title, String sequence) {
-		super("无法找到待办过期默认的路由, id:{}, title:{}, sequence:{}.", id, title, sequence);
+		super("결재 대기 만료 시 기본 경로를 찾을 수 없습니다, id: {}, title: {}, sequence: {}.", id, title, sequence);
 	}
 }

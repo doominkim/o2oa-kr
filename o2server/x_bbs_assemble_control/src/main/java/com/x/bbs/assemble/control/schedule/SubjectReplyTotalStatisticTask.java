@@ -15,7 +15,7 @@ import com.x.bbs.entity.BBSSectionInfo;
 import com.x.bbs.entity.BBSSubjectInfo;
 
 /**
- * 定时代理，对所有的论坛以及版块进行主题和回贴数、参与人数的统计。 1、遍历所有论坛 2、对每一个论坛，每一个主版块以及子版块进行数据统计
+ * 정기 에이전트, 모든 포럼과 게시판의 주제·답글 수, 참여 인원 통계. 1. 모든 포럼 순회 2. 각 포럼, 각 상위 게시판 및 하위 게시판별 데이터 통계
  * 
  * @author LIYI
  *

@@ -58,11 +58,11 @@ class ActionUpdateUnit extends BaseAction {
 
 		static WrapCopier<Wi, Collect> copier = WrapCopierFactory.wi(Wi.class, Collect.class, null, null);
 
-		@FieldDescribe("手机号码.")
+		@FieldDescribe("휴대폰 번호.")
 		private String mobile;
-		@FieldDescribe("验证码.")
+		@FieldDescribe("인증 코드.")
 		private String codeAnswer;
-		@FieldDescribe("新组织名称.")
+		@FieldDescribe("새 조직 이름.")
 		private String newName;
 
 		public String getMobile() {

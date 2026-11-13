@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class WpsOffice Wps组件。
+/** @class WpsOffice Wps 컴포넌트.
  * @o2cn WpsOffice
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var wpsOffice = this.form.get("fieldId"); //获取组件
- * //方法2
- * var wpsOffice = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var wpsOffice = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var wpsOffice = this.target; //컴포넌트 자체 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -20,17 +20,17 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
         options:{
             "version": "wpsWebOffice",
             /**
-             * 文档打开前事件。
+             * 문서 열기 전 이벤트.
              * @since V8.0
              * @event MWF.xApplication.process.Xform.WpsOffice#beforeOpen
              */
             /**
-             * 文档打开后事件。
+             * 문서 열기 후 이벤트.
              * @since V8.0
              * @event MWF.xApplication.process.Xform.WpsOffice#afterOpen
              */
             /**
-             * 保存后事件。
+             * 저장 후 이벤트.
              * @since V8.0
              * @event MWF.xApplication.process.Xform.WpsOffice#afterSave
              */
@@ -265,20 +265,20 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
                 mount: this.officeNode,
                 mode : this.json.showMode,
                 cooperUserAttribute: {
-                    isCooperUsersAvatarVisible: this.json.isCooperUsersAvatarVisible //是否显示协作用户头像
+                    isCooperUsersAvatarVisible: this.json.isCooperUsersAvatarVisible //공동 작업 사용자 아바타 표시 여부
                 },
-                // 通用选项，所有类型文档适用
+                // 공통 옵션, 모든 유형의 문서에 적용
                 commonOptions: {
-                    isShowTopArea: this.json.isShowTopArea, // 隐藏顶部区域(头部和工具栏)
-                    isShowHeader: this.json.isShowHeader, // 隐藏头部区域
-                    isBrowserViewFullscreen : this.json.isBrowserViewFullscreen,//是否在浏览器区域全屏
-                    isIframeViewFullscreen : this.json.isIframeViewFullscreen//是否在iframe区域内全屏
+                    isShowTopArea: this.json.isShowTopArea, // 상단 영역(헤더와 도구 모음) 숨기기
+                    isShowHeader: this.json.isShowHeader, // 헤더 영역 숨기기
+                    isBrowserViewFullscreen : this.json.isBrowserViewFullscreen,//브라우저 영역 전체 화면 여부
+                    isIframeViewFullscreen : this.json.isIframeViewFullscreen//iframe 영역 내 전체 화면 여부
                 },
                 wordOptions : {
-                    isShowDocMap : this.json.isShowDocMap,//是否开启目录功能，默认开启
-                    isBestScale : this.json.isBestScale,//打开文档时，默认以最佳比例显示(适用于pc)
-                    isShowBottomStatusBar : this.json.isShowBottomStatusBar,//pc-是否展示底部状态栏
-                    "mobile.isOpenIntoEdit" : this.json.isOpenIntoEdit//mobile-要有编辑权限，移动端打开时是否进入编辑
+                    isShowDocMap : this.json.isShowDocMap,//목차 기능 사용 여부, 기본 사용
+                    isBestScale : this.json.isBestScale,//문서 열 때 기본으로 최적 비율로 표시(pc용)
+                    isShowBottomStatusBar : this.json.isShowBottomStatusBar,//pc-하단 상태 표시줄 표시 여부
+                    "mobile.isOpenIntoEdit" : this.json.isOpenIntoEdit//mobile-편집 권한이 있어야 하며, 모바일에서 열 때 편집 모드 진입 여부
                 },
                 commandBars: [
                     {
@@ -434,7 +434,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
                 this.wpsOffice = OpenSDK.config(config);
                 this.wpsOffice.setToken({
                     token: layout.session.token,
-                    timeout: 100 * 60 * 1000 // token超时时间, 可配合refreshToken配置函数使用，当超时前将调用refreshToken
+                    timeout: 100 * 60 * 1000 // token 만료 시간, refreshToken 설정 함수와 함께 사용 가능, 만료 전에 refreshToken 호출
                 });
             }else {
                 this.action.CustomAction.getWpsFileUrl(this.documentId,{
@@ -449,7 +449,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
                 this.wpsOffice = WebOfficeSDK.config(config);
                 this.wpsOffice.setToken({
                     token: layout.session.token,
-                    timeout: 100 * 60 * 1000 // token超时时间, 可配合refreshToken配置函数使用，当超时前将调用refreshToken
+                    timeout: 100 * 60 * 1000 // token 만료 시간, refreshToken 설정 함수와 함께 사용 가능, 만료 전에 refreshToken 호출
                 });
 
             }
@@ -475,7 +475,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             this.wpsOffice.on('error', function(result) {
                 // console.log(JSON.stringify(result))
             });
-            //是否显示评论
+            //댓글 표시 여부
             if(this.json.isShowComment){
                 this.showComments();
             }else {
@@ -526,7 +526,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
         },
         /**
-         * @summary 保存wps
+         * @summary wps 저장
          * @example
          * this.form.get("fieldId").save(callback)
          */
@@ -537,9 +537,9 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             });
         },
         /**
-         * @summary 发送全局广播
+         * @summary 전역 브로드캐스트 전송
          * @example
-         * this.form.get("fieldId").sendBroadcast("测试")
+         * this.form.get("fieldId").sendBroadcast("테스트")
          */
         sendBroadcast : async function (text){
             await this.wpsOffice.ready();
@@ -550,8 +550,8 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             });
         },
         /**
-         * @summary 获取word页面总数，
-         * @return 返回是个Promise对象
+         * @summary word 전체 페이지 수 가져오기,
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").getTotalPage()
          */
@@ -563,12 +563,12 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return totalPages;
         },
         /**
-         * @summary 获取当前页
+         * @summary 현재 페이지 가져오기
          * @example
          * this.form.get("fieldId").getCurrentPage()
          */
         getCurrentPage: async function (){
-            // 获取当前页数
+            // 현재 페이지 번호 가져오기
             await this.wpsOffice.ready();
             const app = this.wpsOffice.Application;
             const currentPage = await app.ActiveDocument.ActiveWindow.Selection.Information(
@@ -577,7 +577,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return currentPage;
         },
         /**
-         * @summary 跳转到指定页
+         * @summary 지정한 페이지로 이동
          * @example
          * this.form.get("fieldId").gotoPage(page)
          */
@@ -591,8 +591,8 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             });
         },
         /**
-         * @summary 获取所有书签
-         * @return 返回是个Promise对象
+         * @summary 모든 책갈피 가져오기
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").getAllBookmark()
          */
@@ -603,8 +603,8 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return bookMarks;
         },
         /**
-         * @summary 获取书签值
-         * @return 返回是个Promise对象
+         * @summary 책갈피 값 가져오기
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").getBookmarkText()
          */
@@ -617,7 +617,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return text;
         },
         /**
-         * @summary 跳转到书签
+         * @summary 책갈피로 이동
          * @example
          * this.form.get("fieldId").gotoBookmark()
          */
@@ -632,8 +632,8 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             });
         },
         /**
-         * @summary 给书签赋值
-         * @return 返回是个Promise对象
+         * @summary 책갈피에 값 설정
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").setBookmarkText(name,value)
          */
@@ -642,9 +642,9 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
             const app = this.wpsOffice.Application;
 
-            // 书签对象
+            // 책갈피 객체
             const bookmarks = await app.ActiveDocument.Bookmarks;
-            // 替换书签内容
+            // 책갈피 내용 교체
             const isReplaceSuccess = await bookmarks.ReplaceBookmark([
                 {
                     name: name,
@@ -655,8 +655,8 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return isReplaceSuccess;
         },
         /**
-         * @summary 盖章
-         * @return 返回是个Promise对象
+         * @summary 날인
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").setSeal(bookmark,img,left,top,width,height)
          */
@@ -665,36 +665,36 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
             const app = this.wpsOffice.Application;
 
-            //获取当前选区
+            //현재 선택 영역 가져오기
             const selection = await app.ActiveDocument.ActiveWindow.Selection;
-            // 跳转到指定的书签
+            // 지정한 책갈피로 이동
             await app.ActiveDocument.ActiveWindow.Selection.GoTo(
-                app.Enum.WdGoToItem.wdGoToBookmark, // 类型：Bookmark
-                app.Enum.WdGoToDirection.wdGoToAbsolute, // 定位
-                1, // 数量
-                bookmark, // 书签名
+                app.Enum.WdGoToItem.wdGoToBookmark, // 유형: Bookmark
+                app.Enum.WdGoToDirection.wdGoToAbsolute, // 위치 확인
+                1, // 수량
+                bookmark, // 책갈피 이름
             );
 
-            // 获取图形对象
+            // 도형 객체 가져오기
             const shapes = await app.ActiveDocument.Shapes;
-            // 光标插入非嵌入式图片
+            // 커서 위치에 비포함형 이미지 삽입
             const shape = await shapes.AddPicture({
-                FileName: img, // 图片地址
+                FileName: img, // 이미지 주소
                 LinkToFile: true,
                 SaveWithDocument: true,
-                Left: left, // 图片距离左边位置
-                Top: top, // 图片距离顶部位置
-                Width: width, // 图片宽度
-                Height: height, // 图片高度
+                Left: left, // 이미지 왼쪽 위치
+                Top: top, // 이미지 위쪽 위치
+                Width: width, // 이미지 너비
+                Height: height, // 이미지 높이
             });
 
-            // 设置文字环绕模式为【衬于文字下方】
+            // 텍스트 배치 모드를 [텍스트 뒤]로 설정
             shape.ZOrder(app.Enum.ZOrderCmd.sendBehindText);
         },
 
         /**
-         * @summary 查找替换
-         * @return 返回是个Promise对象
+         * @summary 찾기 및 바꾸기
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").replaceText(key,value)
          */
@@ -706,8 +706,8 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return isReplaceSuccess;
         },
         /**
-         * @summary 开启修订模式
-         * @return 返回是个Promise对象
+         * @summary 수정 추적 모드 켜기
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").startRevisions()
          */
@@ -715,53 +715,53 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
             this.wpsOffice.ready().then(function(){
                 const app = this.wpsOffice.Application;
-                // 将当前文档的编辑状态切换成修订模式
+                // 현재 문서의 편집 상태를 수정 추적 모드로 전환
                 app.ActiveDocument.TrackRevisions = true;
             }.bind(this));
         },
         /**
-         * @summary 关闭修订模式
-         * @return 返回是个Promise对象
+         * @summary 수정 추적 모드 끄기
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").stopRevisions()
          */
         stopRevisions : function (){
-            //关闭修订模式
+            //수정 추적 모드 끄기
             this.wpsOffice.ready().then(function(){
                 const app = this.wpsOffice.Application;
 
-                // 将当前文档的编辑状态切换成修订模式
+                // 현재 문서의 편집 상태를 수정 추적 모드로 전환
                 app.ActiveDocument.TrackRevisions = false;
             }.bind(this));
         },
         /**
-         * @summary 接受所有修订
+         * @summary 모든 수정 내용 적용
          * @example
          * this.form.get("fieldId").acceptAllRevisions()
          */
         acceptAllRevisions : async function (){
             await this.wpsOffice.ready();
             const app = this.wpsOffice.Application;
-            // 获取修订对象
+            // 수정 내용 객체 가져오기
             const revisions = await app.ActiveDocument.Revisions;
-            // 接受对指定文档的所有修订
+            // 지정한 문서의 모든 수정 내용 적용
             await revisions.AcceptAll();
         },
         /**
-         * @summary 拒绝所有修订
+         * @summary 모든 수정 내용 거부
          * @example
          * this.form.get("fieldId").rejectAllRevisions()
          */
         rejectAllRevisions : async function (){
             await this.wpsOffice.ready();
             const app = this.wpsOffice.Application;
-            // 获取修订对象
+            // 수정 내용 객체 가져오기
             const revisions = await app.ActiveDocument.Revisions;
-            // 拒绝对指定文档的所有修订
+            // 지정한 문서의 모든 수정 내용 거부
             await revisions.RejectAll();
         },
         /**
-         * @summary 显示痕迹
+         * @summary 변경 내용 표시
          * @example
          * this.form.get("fieldId").showRevisions()
          */
@@ -769,15 +769,15 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
             await this.wpsOffice.ready();
             const app = this.wpsOffice.Application;
-            // 获取节对象
+            // 구역 객체 가져오기
             const View = await app.ActiveDocument.ActiveWindow.View;
             View.RevisionsView = 0;
-            // 设置修订状态为 显示标记的最终状态
+            // 수정 추적 상태를 「메모 및 변경 내용 표시 최종본」으로 설정
             View.ShowRevisionsAndComments = true;
 
         },
         /**
-         * @summary 隐藏痕迹
+         * @summary 변경 내용 숨기기
          * @example
          * this.form.get("fieldId").hideRevisions()
          */
@@ -785,28 +785,28 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
             await this.wpsOffice.ready();
             const app = this.wpsOffice.Application;
-            // 获取节对象
+            // 구역 객체 가져오기
             const View = await app.ActiveDocument.ActiveWindow.View;
             View.RevisionsView = 0;
-            // 设置修订状态为 显示标记的最终状态
+            // 수정 추적 상태를 「메모 및 변경 내용 표시 최종본」으로 설정
             View.ShowRevisionsAndComments = false;
         },
         /**
-         * @summary 打印
+         * @summary 인쇄
          * @example
          * this.form.get("fieldId").print()
          */
         print : function (){
             this.wpsOffice.ready().then(function(){
                 const app = this.wpsOffice.Application;
-                // 页面定制对象：更多菜单
+                // 페이지 맞춤 객체: 더 보기 메뉴
                 app.CommandBars('TabPrintPreview').then(function(printMenu){
                     printMenu.Execute();
                 });
             }.bind(this));
         },
         /**
-         * @summary 导出pdf
+         * @summary pdf 내보내기
          * @example
          * this.form.get("fieldId").exportPDF()
          */
@@ -829,7 +829,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             window.open(pdfUrl.url);
         },
         /**
-         * @summary 获取文档权限信息
+         * @summary 문서 권한 정보 가져오기
          * @example
          * this.form.get("fieldId").getOperatorsInfo()
          */
@@ -851,23 +851,23 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return operatorsInfo;
         },
         /**
-         * @summary 获取内容控件个数
-         * @return 返回是个Promise对象
+         * @summary 콘텐츠 컨트롤 개수 조회
+         * @return Promise 객체 반환
          * @example
          * this.form.get("fieldId").getContentControlsCount()
          */
         getContentControlsCount : async function (){
-            //获取内容控件
+            //콘텐츠 컨트롤 조회
             await this.wpsOffice.ready();
             const app = this.wpsOffice.Application;
-            // 内容控件对象
+            // 콘텐츠 컨트롤 객체
             const contentControls = await app.ActiveDocument.ContentControls;
-            // 内容控件数量
+            // 콘텐츠 컨트롤 수
             const count = await contentControls.Count;
             return count;
         },
         /**
-         * @summary 获取内容控件文本
+         * @summary 콘텐츠 컨트롤 텍스트 조회
          * @example
          * this.form.get("fieldId").getContentControlText()
          */
@@ -883,7 +883,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             // range.Text = 'WebOffice'
         },
         /**
-         * @summary 设置内容控件文本
+         * @summary 콘텐츠 컨트롤 텍스트 설정
          * @example
          * this.form.get("fieldId").setContentControlText()
          */
@@ -898,7 +898,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
         },
         /**
-         * @summary 获取文档缩放
+         * @summary 문서 확대/축소 비율 조회
          * @example
          * this.form.get("fieldId").getZoom()
          */
@@ -919,12 +919,12 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return zoom;
         },
         /**
-         * @summary 设置文档缩放
+         * @summary 문서 확대/축소 비율 설정
          * @example
          * this.form.get("fieldId").setZoom()
          */
         setZoom : async function (zoom){
-            //缩放属性值在50%到 300%之间。
+            //확대/축소 값은 50%~300% 사이입니다.
             await this.wpsOffice.ready();
             const app = this.wpsOffice.Application;
 
@@ -940,7 +940,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             }
         },
         /**
-         * @summary 是否有评论
+         * @summary 댓글 존재 여부
          * @example
          * this.form.get("fieldId").hasComments()
          */
@@ -961,7 +961,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return hasComments;
         },
         /**
-         * @summary 显示评论
+         * @summary 댓글 표시
          * @example
          * this.form.get("fieldId").showComments()
          */
@@ -971,7 +971,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             app.ActiveDocument.ActiveWindow.View.ShowComments = true;
         },
         /**
-         * @summary 隐藏评论
+         * @summary 댓글 숨기기
          * @example
          * this.form.get("fieldId").hideComments()
          */
@@ -981,7 +981,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             app.ActiveDocument.ActiveWindow.View.ShowComments = false;
         },
         /**
-         * @summary 获取所有评论
+         * @summary 모든 댓글 조회
          * @example
          * this.form.get("fieldId").hideComments()
          */
@@ -992,7 +992,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             return operatorsInfo;
         },
         /**
-         * @summary 页面模式
+         * @summary 페이지 모드
          * @example
          * this.form.get("fieldId").showPageMode()
          */
@@ -1002,7 +1002,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             app.ActiveDocument.SwitchTypoMode(false);
         },
         /**
-         * @summary 连页模式
+         * @summary 연속 페이지 모드
          * @example
          * this.form.get("fieldId").showPageMode()
          */
@@ -1012,7 +1012,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             app.ActiveDocument.SwitchTypoMode(true);
         },
         /**
-         * @summary 显示连页模式下的文件名
+         * @summary 연속 페이지 모드에서 파일명 표시
          * @example
          * this.form.get("fieldId").showFileName()
          */
@@ -1023,7 +1023,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             await app.ActiveDocument.SwitchFileName(true);
         },
         /**
-         * @summary 隐藏连页模式下的文件名
+         * @summary 연속 페이지 모드에서 파일명 숨기기
          * @example
          * this.form.get("fieldId").hideFileName()
          */
@@ -1034,7 +1034,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
             await app.ActiveDocument.SwitchFileName(false);
         },
         /**
-         * @summary 显示导航目录
+         * @summary 탐색 목차 표시
          * @example
          * this.form.get("fieldId").showDocumentMap()
          */
@@ -1047,7 +1047,7 @@ MWF.xApplication.process.Xform.WpsOffice = MWF.APPWpsOffice =  new Class(
 
         },
         /**
-         * @summary 隐藏导航目录
+         * @summary 탐색 목차 숨기기
          * @example
          * this.form.get("fieldId").hideDocumentMap()
          */

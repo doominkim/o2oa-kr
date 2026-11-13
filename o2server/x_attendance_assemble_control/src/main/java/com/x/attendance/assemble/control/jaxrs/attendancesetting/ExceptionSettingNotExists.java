@@ -7,6 +7,6 @@ class ExceptionSettingNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSettingNotExists( String id ) {
-		super("指定的考勤系统配置信息不存在.ID:" + id );
+		super("지정한 근태 시스템 설정이 없습니다. ID:" + id );
 	}
 }

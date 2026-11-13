@@ -37,19 +37,19 @@ public class ActionLeaveRequestCountYear extends BaseAction {
             ActionResult<Wo> result = new ActionResult<>();
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isBlank(wi.getPerson())) {
-                throw new ExceptionEmptyParameter("人员标识");
+                throw new ExceptionEmptyParameter("인원 식별자");
             }
             if (StringUtils.isBlank(wi.getLeaveTypeId())) {
-                throw new ExceptionEmptyParameter("请假类型ID");
+                throw new ExceptionEmptyParameter("휴가 유형 ID");
             }
             Business business = new Business(emc);
             Person person = business.organization().person().getObject(wi.getPerson(), true);
             if (person == null) {
-                throw new ExceptionNotExistObject("人员 " + wi.getPerson());
+                throw new ExceptionNotExistObject("인원 " + wi.getPerson());
             }
             AttendanceV2LeaveType leaveType = emc.find(wi.getLeaveTypeId(), AttendanceV2LeaveType.class);
             if (leaveType == null) {
-                throw new ExceptionNotExistObject("请假类型 " + wi.getLeaveTypeId());
+                throw new ExceptionNotExistObject("휴가 유형 " + wi.getLeaveTypeId());
             }
             YearRange yearRange = currentYearRange();
             Statistic statistic = statisticLeaveRequest(emc, person.getDistinguishedName(), wi.getLeaveTypeId(),
@@ -119,10 +119,10 @@ public class ActionLeaveRequestCountYear extends BaseAction {
 
         private static final long serialVersionUID = -8809321346325663056L;
 
-        @FieldDescribe("人员标识")
+        @FieldDescribe("인원 식별자")
         private String person;
 
-        @FieldDescribe("假期类型ID")
+        @FieldDescribe("휴가 유형 ID")
         private String leaveTypeId;
 
         public String getPerson() {
@@ -146,25 +146,25 @@ public class ActionLeaveRequestCountYear extends BaseAction {
 
         private static final long serialVersionUID = 7216800226516451476L;
 
-        @FieldDescribe("人员DN")
+        @FieldDescribe("인원 DN")
         private String person;
 
-        @FieldDescribe("假期类型ID")
+        @FieldDescribe("휴가 유형 ID")
         private String leaveTypeId;
 
-        @FieldDescribe("统计年份")
+        @FieldDescribe("통계 연도")
         private Integer year;
 
-        @FieldDescribe("统计开始日期")
+        @FieldDescribe("통계 시작 날짜")
         private String startDate;
 
-        @FieldDescribe("统计结束日期")
+        @FieldDescribe("통계 종료 날짜")
         private String endDate;
 
-        @FieldDescribe("请假次数")
+        @FieldDescribe("휴가 횟수")
         private Long count;
 
-        @FieldDescribe("请假总天数")
+        @FieldDescribe("총 휴가 일수")
         private Double totalDays;
 
         public String getPerson() {

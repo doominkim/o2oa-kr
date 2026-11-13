@@ -36,7 +36,7 @@ public class ActionGet extends BaseAction {
 				calendar_Setting = calendar_SettingServiceAdv.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSettingInfoProcess( e, "系统根据ID查询指定考勤系统配置信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionSettingInfoProcess( e, "ID로 근태 시스템 설정을 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -45,14 +45,14 @@ public class ActionGet extends BaseAction {
 			try {
 				wrap = Wo.copier.copy( calendar_Setting );
 				if( wrap.getIsLob() ) {
-					//查询LOB值
+					//LOB 값 조회
 					String lobValue = calendar_SettingServiceAdv.getLobValueWithId( wrap.getId() );
 					wrap.setConfigValue( lobValue );
 				}
 				result.setData( wrap );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSettingInfoProcess( e, "将所有查询到的考勤配置信息对象转换为可以输出的信息时发生异常." );
+				Exception exception = new ExceptionSettingInfoProcess( e, "조회된 근태 설정 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

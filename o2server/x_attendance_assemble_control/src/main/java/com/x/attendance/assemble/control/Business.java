@@ -42,26 +42,26 @@ public class Business {
 		return this.emc;
 	}
 
-	//钉钉同步数据处理
+	//DingTalk 동기화 데이터 처리
 	private DingdingAttendanceFactory dingdingAttendanceFactory;
-	// 人员组织业务处理类
+	// 사용자 조직 업무 처리 클래스
 	private Organization organization;
-	// 系统配置业务处理类
+	// 시스템 설정 업무 처리 클래스
 	private AttendanceSettingFactory attendanceSettingFactory;
-	// 工作场所配置业务处理类
+	// 근무지 설정 업무 처리 클래스
 	private AttendanceWorkPlaceFactory attendanceWorkPlaceFactory;
-	// 节假日工作日配置业务处理类
+	// 공휴일·근무일 설정 업무 처리 클래스
 	private AttendanceWorkDayConfigFactory attendanceWorkDayConfigFactory;
-	// 人员考勤数据导入文件操作业务处理类
+	// 사용자 근태 데이터 가져오기 파일 작업 업무 처리 클래스
 	private AttendanceImportFileInfoFactory attendanceImportFileInfoFactory;
-	// 人员考勤数据业务处理类
+	// 사용자 근태 데이터 업무 처리 클래스
 	private AttendanceDetailFactory attendanceDetailFactory;
 	private AttendanceDetailMobileFactory attendanceDetailMobileFactory;
-	// 考勤管理员业务处理类
+	// 근태 관리자 업무 처리 클래스
 	private AttendanceAdminFactory attendanceAdminFactory;
-	// 排班管理业务处理类
+	// 근무 편성 관리 업무 처리 클래스
 	private AttendanceScheduleSettingFactory attendanceScheduleSettingFactory;
-	// 休假申请数据业务处理类
+	// 휴가 신청 데이터 업무 처리 클래스
 	private AttendanceSelfHolidayFactory attendanceSelfHolidayFactory;
 
 	private StatisticTopUnitForDayFactory statisticTopUnitForDayFactory;
@@ -242,13 +242,13 @@ public class Business {
 	}
 
 	/**
-	 * TODO 判断用户是否管理员权限 1、person.isManager() 2、xadmin 3、ROLE_AttendanceManager
+	 * TODO 사용자의 관리자 권한 여부 판단 1、person.isManager() 2、xadmin 3、ROLE_AttendanceManager
 	 * @return
 	 * @throws Exception
 	 */
 
 	public boolean isManager(EffectivePerson person) throws Exception {
-		// 如果用户的身份是平台的超级管理员，那么就是超级管理员权限
+		// 사용자 신분이 플랫폼 최고 관리자이면 최고 관리자 권한
 		if (person.isManager()) {
 			return true;
 		}

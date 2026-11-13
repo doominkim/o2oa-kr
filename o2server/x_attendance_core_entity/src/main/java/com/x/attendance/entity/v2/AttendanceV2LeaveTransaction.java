@@ -16,7 +16,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Schema(name = "AttendanceV2LeaveTransaction", description = "假期账户流水.")
+@Schema(name = "AttendanceV2LeaveTransaction", description = "휴가 계정 내역.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.AttendanceV2LeaveTransaction.table, indexes = {
         @Index(name = PersistenceProperties.AttendanceV2LeaveTransaction.table + JpaObject.IndexNameMiddle
@@ -51,38 +51,38 @@ public class AttendanceV2LeaveTransaction extends SliceJpaObject {
     public void onPersist() throws Exception {}
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("用户")
+    @FieldDescribe("사용자")
     @Column(length = JpaObject.length_96B, name = ColumnNamePrefix + person_FIELDNAME)
     private String person;
 
     public static final String leaveTypeId_FIELDNAME = "leaveTypeId";
-    @FieldDescribe("假期类型")
+    @FieldDescribe("휴가 유형")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + leaveTypeId_FIELDNAME)
     private String leaveTypeId;
 
     public static final String ledgerId_FIELDNAME = "ledgerId";
-    @FieldDescribe("批次 id")
+    @FieldDescribe("배치 id")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + ledgerId_FIELDNAME)
     private String ledgerId;
 
     public static final String bizType_FIELDNAME = "bizType";
-    @FieldDescribe("业务类型  GRANT: 发放 USE: 使用 CANCEL: 取消 EXPIRE: 过期 CARRYFORWARD: 结转 ADJUST: 调整")
+    @FieldDescribe("업무 유형  GRANT: 지급 USE: 사용 CANCEL: 취소 EXPIRE: 만료 CARRYFORWARD: 이월 ADJUST: 조정")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + bizType_FIELDNAME)
     private String bizType;
 
     public static final String amount_FIELDNAME = "amount";
-    @FieldDescribe("变化额度")
+    @FieldDescribe("변동 한도")
     @Column(name = ColumnNamePrefix + amount_FIELDNAME)
     private Double amount;
 
     
     public static final String leaveRequestId_FIELDNAME = "leaveRequestId";
-    @FieldDescribe("请假申请 id")
+    @FieldDescribe("휴가 신청 id")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + leaveRequestId_FIELDNAME)
     private String leaveRequestId;
 
     public static final String fromYear_FIELDNAME = "fromYear";
-    @FieldDescribe("类型是CARRYFORWARD，来源年份")
+    @FieldDescribe("유형이 CARRYFORWARD일 때, 원본 연도")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + fromYear_FIELDNAME)
     private String fromYear;
 

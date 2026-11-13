@@ -96,7 +96,7 @@ class V2AddSplit extends BaseAction {
 
 				Business business = new Business(emc);
 
-				/* 校验work是否存在 */
+				/* work 존재 여부 검증 */
 				Work work = emc.find(id, Work.class);
 				if (null == work) {
 					throw new ExceptionEntityNotExist(id, Work.class);
@@ -211,7 +211,7 @@ class V2AddSplit extends BaseAction {
 		}
 
 		/**
-		 * 替换掉最后一个值
+		 * 마지막 값 교체
 		 * 
 		 * @param list
 		 * @param value

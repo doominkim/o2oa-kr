@@ -20,7 +20,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 
     /**
-     * 给properties对象查询班次对象并设置进去
+     * properties 객체에 교대 객체를 조회해 설정
      * @param emc
      * @param properties
      * @throws Exception

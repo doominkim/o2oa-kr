@@ -39,9 +39,9 @@ public class BeginProcessor extends AbstractBeginProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Begin begin) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.beginArrive(aeiObjects.getWork().getActivityToken(), begin));
-		// 创建创建者的review
+		// 작성자의 review 생성
 		String person = this.business().organization().person().get(aeiObjects.getWork().getCreatorPerson());
 		if (StringUtils.isNotEmpty(person)) {
 			aeiObjects.createReview(new Review(aeiObjects.getWork(), person));
@@ -62,17 +62,17 @@ public class BeginProcessor extends AbstractBeginProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Begin begin) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.beginExecute(aeiObjects.getWork().getActivityToken(), begin));
 		List<Work> list = new ArrayList<>();
-		// 如果是再次进入begin节点那么就不需要设置开始时间.
+		// begin 노드에 다시 진입한 경우 시작 시간 설정 불필요.
 		if (aeiObjects.getWork().getStartTime() == null) {
-			// 创建work不会进入这里
+			// work 생성 시에는 여기로 들어오지 않음
 			aeiObjects.getWork().setStartTime(new Date());
-			// 计算过期时间
+			// 만료 시간 계산
 			this.calculateExpire(aeiObjects);
 		}
-		// 设置维护人
+		// 관리자 설정
 		if (StringUtils.isNotEmpty(aeiObjects.getProcess().getPermissionWriteScript())
 				|| StringTools.ifScriptHasEffectiveCode(aeiObjects.getProcess().getPermissionWriteScriptText())) {
 			Source source = aeiObjects.business().element().getCompiledScript(aeiObjects.getWork().getApplication(),
@@ -130,7 +130,7 @@ public class BeginProcessor extends AbstractBeginProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Begin begin) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.beginInquire(aeiObjects.getWork().getActivityToken(), begin));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
@@ -141,9 +141,9 @@ public class BeginProcessor extends AbstractBeginProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

@@ -7,6 +7,6 @@ class ExceptionServiceNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = 4976763517919976266L;
 
 	ExceptionServiceNotExist(String flag, String service) {
-		super(service+"服务: {} 不存在.", flag);
+		super(service+"서비스: {}이(가) 없습니다.", flag);
 	}
 }

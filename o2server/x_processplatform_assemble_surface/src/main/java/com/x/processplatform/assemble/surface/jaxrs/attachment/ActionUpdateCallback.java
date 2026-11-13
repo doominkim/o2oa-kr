@@ -28,9 +28,9 @@ class ActionUpdateCallback extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo<WoObject>> result = new ActionResult<>();
 			Business business = new Business(emc);
-			// 后面要重新保存
+			// 뒤에서 다시 저장해야 함
 			Work work = emc.find(workId, Work.class);
-			// 判断work是否存在
+			// work 존재 여부 판단
 			if (null == work) {
 				throw new ExceptionWorkNotExistCallback(callback, workId);
 			}
@@ -46,7 +46,7 @@ class ActionUpdateCallback extends BaseAction {
 			}
 			this.verifyConstraint(bytes.length, fileName, null);
 
-			// 统计待办数量判断用户是否可以上传附件
+			// 결재 대기 수를 집계해 사용자의 첨부파일 업로드 가능 여부 판단
 			Control control = new WorkControlBuilder(effectivePerson, business, work).enableAllowProcessing().build();
 			if (BooleanUtils.isNotTrue(control.getAllowProcessing())) {
 				throw new ExceptionAccessDenied(effectivePerson, work);

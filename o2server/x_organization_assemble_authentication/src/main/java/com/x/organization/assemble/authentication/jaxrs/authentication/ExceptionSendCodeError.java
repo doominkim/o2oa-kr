@@ -6,7 +6,7 @@ class ExceptionSendCodeError extends PromptException {
 
 	private static final long serialVersionUID = 1859164370743532895L;
 
-	public static String defaultMessage = "发送失败.";
+	public static String defaultMessage = "전송에 실패했습니다.";
 
 	ExceptionSendCodeError() {
 		super(defaultMessage);

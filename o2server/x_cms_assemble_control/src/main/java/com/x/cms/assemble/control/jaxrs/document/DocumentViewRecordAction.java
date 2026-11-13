@@ -28,54 +28,54 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("viewrecord")
-@JaxrsDescribe("信息访问日志管理")
+@JaxrsDescribe("정보 접근 로그 관리")
 public class DocumentViewRecordAction extends StandardJaxrsAction{
 
 	private static  Logger logger = LoggerFactory.getLogger( DocumentViewRecordAction.class );
 
-	@JaxrsMethodDescribe(value = "根据文档ID获取该文档的访问用户记录信息，按时间倒序，前50条.", action = ActionQueryListViewRecordByFilterNext.class)
+	@JaxrsMethodDescribe(value = "문서ID로 해당 문서의 접근 사용자 기록 정보 조회, 시간 역순, 상위 50건.", action = ActionQueryListViewRecordByFilterNext.class)
 	@GET
 	@Path("document/{docId}/filter/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listByDocumentFilterNext( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("信息文档ID") @PathParam("docId") String docId,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("정보 문서ID") @PathParam("docId") String docId,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionQueryListViewRecordByFilterNext.Wo>> result = null;
 		try {
 			result = new ActionQueryListViewRecordByFilterNext().execute( request, effectivePerson, docId, id, count );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e,"系统查询文档访问信息时发生未知异常。" );
+			Exception exception = new ExceptionServiceLogic( e,"게시글 접근 정보를 조회하는 중 알 수 없는 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据人员姓名，获取该用户访问的文档记录，按时间倒序，前50条.", action = ActionQueryListViewRecordByPerson.class)
+	@JaxrsMethodDescribe(value = "사용자 이름으로 해당 사용자가 접근한 문서 기록 조회, 시간 역순, 상위 50건.", action = ActionQueryListViewRecordByPerson.class)
 	@GET
 	@Path( "person/{name}" )
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listByPerson( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户姓名") @PathParam("name") String name ) {
+			@JaxrsParameterDescribe("사용자 이름") @PathParam("name") String name ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionQueryListViewRecordByPerson.Wo>> result = null;
 		try {
 			result = new ActionQueryListViewRecordByPerson().execute( request, effectivePerson, name );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e,"系统查询文档访问信息时发生未知异常。" );
+			Exception exception = new ExceptionServiceLogic( e,"게시글 접근 정보를 조회하는 중 알 수 없는 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "从指定的文档ID列表中判断未读过的文档ID列表.", action = ActionQueryListUnReadDocIds.class)
+	@JaxrsMethodDescribe(value = "지정 문서ID 목록에서 미열람 문서ID 목록 판단.", action = ActionQueryListUnReadDocIds.class)
 	@PUT
 	@Path( "unread" )
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -88,14 +88,14 @@ public class DocumentViewRecordAction extends StandardJaxrsAction{
 			result = new ActionQueryListUnReadDocIds().execute( request, effectivePerson, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e,"系统从指定的文档ID列表中判断未读过的文档ID列表时发生未知异常。" );
+			Exception exception = new ExceptionServiceLogic( e,"지정한 게시글 ID 목록에서 읽지 않은 게시글 ID 목록을 확인하는 중 알 수 없는 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "从指定的文档ID列表中判断未读过的文档ID列表.", action = ActionQueryListUnReadDocIds.class)
+	@JaxrsMethodDescribe(value = "지정 문서ID 목록에서 미열람 문서ID 목록 판단.", action = ActionQueryListUnReadDocIds.class)
 	@POST
 	@Path( "unread/mockputtopost" )
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -108,20 +108,20 @@ public class DocumentViewRecordAction extends StandardJaxrsAction{
 			result = new ActionQueryListUnReadDocIds().execute( request, effectivePerson, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e,"系统从指定的文档ID列表中判断未读过的文档ID列表时发生未知异常。" );
+			Exception exception = new ExceptionServiceLogic( e,"지정한 게시글 ID 목록에서 읽지 않은 게시글 ID 목록을 확인하는 중 알 수 없는 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据文档ID查询当前用户是否有阅读记录.", action = ActionQueryHasViewDocument.class)
+	@JaxrsMethodDescribe(value = "문서ID로 현재 사용자의 열람 기록 여부 조회.", action = ActionQueryHasViewDocument.class)
 	@GET
 	@Path("document/{docId}/has/view")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void hasViewDocument( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-										  @JaxrsParameterDescribe("信息文档ID") @PathParam("docId") String docId) {
+										  @JaxrsParameterDescribe("정보 문서ID") @PathParam("docId") String docId) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionQueryHasViewDocument.Wo> result = null;
 		try {
@@ -134,14 +134,14 @@ public class DocumentViewRecordAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查询阅读记录.", action = ActionQueryListViewRecordPaging.class)
+	@JaxrsMethodDescribe(value = "열람 기록 페이지 조회.", action = ActionQueryListViewRecordPaging.class)
 	@POST
 	@Path("list/install/log/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-									 @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+									 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+									 @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionQueryListViewRecordPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

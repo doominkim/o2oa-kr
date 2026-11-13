@@ -29,7 +29,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Form", description = "内容管理表单.")
+@Schema(name = "Form", description = "콘텐츠 관리 양식.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Form.table, uniqueConstraints = {
@@ -50,7 +50,7 @@ public class Form extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -82,64 +82,64 @@ public class Form extends SliceJpaObject {
 		}
 	}
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
-	@FieldDescribe("表单别名.")
+	@FieldDescribe("양식 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ alias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + alias_FIELDNAME)
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("表单所属栏目.")
+	@FieldDescribe("양식 소속 게시판.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + appId_FIELDNAME)
 	@CheckPersist(citationExists = @CitationExist(type = AppInfo.class), allowEmpty = true)
 	private String appId;
 
 	public static final String editor_FIELDNAME = "editor";
-	@FieldDescribe("最后的编辑者.")
+	@FieldDescribe("마지막 편집자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + editor_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String editor;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("文本内容.")
+	@FieldDescribe("텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
 	private String data;
 
 	public static final String mobileData_FIELDNAME = "mobileData";
-	@FieldDescribe("移动端文本内容.")
+	@FieldDescribe("모바일 텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + mobileData_FIELDNAME)
 	private String mobileData;
 
 	public static final String hasMobile_FIELDNAME = "hasMobile";
-	@FieldDescribe("是否有移动端内容.")
+	@FieldDescribe("모바일 내용 존재 여부.")
 	@Column(name = ColumnNamePrefix + hasMobile_FIELDNAME)
 	private Boolean hasMobile;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)

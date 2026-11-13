@@ -35,7 +35,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "View", description = "内容管理视图.")
+@Schema(name = "View", description = "콘텐츠 관리 뷰.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.View.table, uniqueConstraints = {
@@ -56,7 +56,7 @@ public class View extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -71,16 +71,16 @@ public class View extends SliceJpaObject {
 		}
 	}
 
-	/* ==============================================以上为 JpaObject 默认字段 */
+	/* ==============================================위는 JpaObject 기본 필드 */
 
 	/*
-	 * =====================================更新运行方法
+	 * =====================================실행 메서드 업데이트
 	 * =======================================
 	 */
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -88,72 +88,72 @@ public class View extends SliceJpaObject {
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("列表别名.")
+	@FieldDescribe("목록 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = "";
 
 	public static final String formId_FIELDNAME = "formId";
-	@FieldDescribe("列表所属表单.")
+	@FieldDescribe("목록 소속 양식.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + formId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + formId_FIELDNAME)
 	@CheckPersist(citationExists = @CitationExist(type = Form.class), allowEmpty = true)
 	private String formId;
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("列表所属栏目Id.")
+	@FieldDescribe("목록 소속 게시판 Id.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + appId_FIELDNAME)
 	@CheckPersist(citationExists = @CitationExist(type = AppInfo.class), allowEmpty = true)
 	private String appId;
 
 	public static final String editor_FIELDNAME = "editor";
-	@FieldDescribe("最后的编辑者.")
+	@FieldDescribe("마지막 편집자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + editor_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String editor;
 
 	public static final String corderField_FIELDNAME = "orderField";
-	@FieldDescribe("排序列名.")
+	@FieldDescribe("정렬 열 이름.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + corderField_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String orderField = "createTime";
 
 	public static final String orderFieldType_FIELDNAME = "orderFieldType";
-	@FieldDescribe("列数据类型string|datetime.")
+	@FieldDescribe("열 데이터 유형 string|datetime.")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + orderFieldType_FIELDNAME)
 	private String orderFieldType = "datetime";
 
 	public static final String orderType_FIELDNAME = "orderType";
-	@FieldDescribe("排序方式(ASC|DESC).")
+	@FieldDescribe("정렬 방식(ASC|DESC).")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + orderType_FIELDNAME)
 	private String orderType;
 
 	public static final String pageSize_FIELDNAME = "pageSize";
-	@FieldDescribe("每页显示行数")
+	@FieldDescribe("페이지당 표시 행 수")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + pageSize_FIELDNAME)
 	private Integer pageSize = 12;
 
 	public static final String content_FIELDNAME = "content";
-	@FieldDescribe("代码内容.")
+	@FieldDescribe("코드 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + content_FIELDNAME)
 	private String content;
 
 	public static final String fieldConfigList_FIELDNAME = "fieldConfigList";
-	@FieldDescribe("展示列配置列表")
+	@FieldDescribe("표시 열 설정 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + fieldConfigList_FIELDNAME, joinIndex = @Index(name = TABLE

@@ -28,7 +28,7 @@ import com.x.file.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "OriginFile", description = "云文件原始文件.")
+@Schema(name = "OriginFile", description = "클라우드 파일 원본 파일.")
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Open.OriginFile.table, uniqueConstraints = {
@@ -53,20 +53,20 @@ public class OriginFile extends StorageObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.lastUpdateTime = new Date();
-		/* 如果扩展名为空去掉null */
+		/* 확장자가 비어 있으면 null 제거 */
 		this.extension = StringUtils.trimToEmpty(extension);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public OriginFile() {
 
@@ -175,70 +175,70 @@ public class OriginFile extends StorageObject {
 	}
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("上传用户.")
+	@FieldDescribe("업로드 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件名称.")
+	@FieldDescribe("파일 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true)
 	private String name;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+	@FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true)
 	private String extension;
 
 	public static final String storage_FIELDNAME = "storage";
-	@FieldDescribe("存储器的名称,也就是多个存放节点的名字.")
+	@FieldDescribe("스토리지 이름, 즉 여러 저장 노드의 이름.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	@Index(name = TABLE + IndexNameMiddle + storage_FIELDNAME)
 	private String storage;
 
 	public static final String fileMd5_FIELDNAME = "fileMd5";
-	@FieldDescribe("文件md5值.")
+	@FieldDescribe("파일 md5 값.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + fileMd5_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true, citationNotExists =
-	/* 所有文件md5不能重复 */
+	/* 모든 파일의 md5는 중복 불가 */
 	@CitationNotExist(fields = { "fileMd5", "id" }, type = OriginFile.class))
 	@Index(name = TABLE + IndexNameMiddle + fileMd5_FIELDNAME)
 	private String fileMd5;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Index(name = TABLE + IndexNameMiddle + length_FIELDNAME)
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("文件所属分类.")
+	@FieldDescribe("파일 소속 분류.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后更新人员")
+	@FieldDescribe("최종 수정 사용자")
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdatePerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String lastUpdatePerson;
 
 	public static final String deepPath_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
 	private Boolean deepPath;

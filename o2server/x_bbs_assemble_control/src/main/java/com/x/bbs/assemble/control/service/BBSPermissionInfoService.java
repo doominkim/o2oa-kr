@@ -16,36 +16,36 @@ import com.x.bbs.entity.BBSPermissionInfo;
 import com.x.bbs.entity.BBSSectionInfo;
 
 /**
- * 论坛权限信息管理服务类
+ * 포럼 권한 정보 관리 서비스 클래스
  * 
- * 权限列表：
-       论坛权限：
-              论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
-              //论坛发布主题（FORUM_SUBJECT_PUBLISH）:用户可以在论坛中所有版块发布主题
-              //论坛发表回复（FORUM_REPLY_PUBLISH）：用户可以回复论坛中所有主题
-              //论坛主题推荐（FORUM_SUBJECT_RECOMMEND）:用户可以在指定论坛中所有版块对指定主题进行推荐到论坛首页
-              //论坛主题置顶（FORUM_SUBJECT_STICK）：用户拥有对论坛中所有的主题的置顶权限
-              //论坛主题申精（FORUM_SUBJECT_CREAM）：用户拥有对论坛中所有的主题的精华主题设置权限
-              //论坛主题管理（FORUM_SUBJECT_MANAGEMENT）：用户拥有对论坛中所有的主题的锁定删除权限
-              //论坛回贴管理（FORUM_REPLY_MANAGEMENT）：用户拥有对论坛中所有的回复的删除权限
-              论坛版块管理（FORUM_INFO_MANAGEMENT）：用户拥有对论坛的版块增加，删除，修改权限
-              论坛权限管理（FORUM_PERMISSION_MANAGEMENT）：用户拥有对论坛的用户进行该论坛权限设置的权限
-              论坛配置管理（FORUM_CONFIG_MANAGEMENT）：用户拥有对论坛的参数配置进行设置的权限
+ * 권한 목록:
+       포럼 권한:
+              포럼 열람(FORUM_VIEW): 사용자가 BBS 시스템에서 해당 포럼 접근 가능
+              //포럼 주제 게시(FORUM_SUBJECT_PUBLISH): 사용자가 포럼의 모든 게시판에 주제 게시 가능
+              //포럼 답글 작성(FORUM_REPLY_PUBLISH): 사용자가 포럼의 모든 주제에 답글 작성 가능
+              //포럼 주제 추천(FORUM_SUBJECT_RECOMMEND): 사용자가 지정 포럼의 모든 게시판에서 지정 주제를 포럼 홈에 추천 가능
+              //포럼 주제 상단 고정(FORUM_SUBJECT_STICK): 사용자가 포럼의 모든 주제에 대한 상단 고정 권한 보유
+              //포럼 우수 주제 신청(FORUM_SUBJECT_CREAM): 사용자가 포럼의 모든 주제에 대한 우수 주제 설정 권한 보유
+              //포럼 주제 관리(FORUM_SUBJECT_MANAGEMENT): 사용자가 포럼의 모든 주제에 대한 잠금·삭제 권한 보유
+              //포럼 답글 관리(FORUM_REPLY_MANAGEMENT): 사용자가 포럼의 모든 답글에 대한 삭제 권한 보유
+              포럼 게시판 관리(FORUM_INFO_MANAGEMENT): 사용자가 포럼 게시판의 추가·삭제·수정 권한 보유
+              포럼 권한 관리(FORUM_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자에게 해당 포럼 권한을 설정할 수 있는 권한 보유
+              포럼 설정 관리(FORUM_CONFIG_MANAGEMENT): 사용자가 포럼 매개변수 설정 권한 보유
 
-       版块权限：
-              论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
-              发布主题（SECTION_SUBJECT_PUBLISH）:用户可以在指定版块中发布主题
-              审核主题（SECTION_SUBJECT_AUDIT）:用户可以审核在指定版块中发布的主题，如果主题需要审核
-              主题管理（SECTION_SUBJECT_MANAGEMENT）:用户可以在指定版块中对已发布主题进行查询删除
-              发表回复（SECTION_REPLY_PUBLISH）:用户可以在指定版块中对所有主题进行回复
-              审核回复（SECTION_REPLY_AUDIT）:用户可以审核在指定版块中的所有回复内容，如果回复需要审核
-              回贴管理（SECTION_REPLY_MANAGEMENT）:用户可以在指定版块中对回复进行查询或者删除
-              版块主题推荐（SECTION_SUBJECT_RECOMMEND）:用户可以在指定版块中对指定主题进行推荐操作
-              版块主题置顶（SECTION_SUBJECT_STICK）:用户可以在指定版块中对指定主题进行置顶操作
-              版块主题申精（SECTION_SUBJECT_CREAM）:用户可以在指定版块中对指定主题进行精华主题设置操作
-              版块管理（SECTION_SECTION_MANAGER）:用户可以在指定版块中对子版块进行创建和删除等操作
-              版块权限管理（SECTION_PERMISSION_MANAGEMENT）:用户可以对论坛用户进行指定版块的权限管理
-              版块配置管理（SECTION_CONFIG_MANAGEMENT）:用户可以对指定版块进行系统参数配置修改
+       게시판 권한:
+              포럼 열람(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판 접근 가능
+              주제 게시(SECTION_SUBJECT_PUBLISH): 사용자가 지정 게시판에 주제 게시 가능
+              주제 심사(SECTION_SUBJECT_AUDIT): 주제 심사가 필요한 경우 사용자가 지정 게시판에 게시된 주제 심사 가능
+              주제 관리(SECTION_SUBJECT_MANAGEMENT): 사용자가 지정 게시판에서 게시된 주제를 조회·삭제 가능
+              답글 작성(SECTION_REPLY_PUBLISH): 사용자가 지정 게시판의 모든 주제에 답글 작성 가능
+              답글 심사(SECTION_REPLY_AUDIT): 답글 심사가 필요한 경우 사용자가 지정 게시판의 모든 답글 심사 가능
+              답글 관리(SECTION_REPLY_MANAGEMENT): 사용자가 지정 게시판에서 답글 조회 또는 삭제 가능
+              게시판 주제 추천(SECTION_SUBJECT_RECOMMEND): 사용자가 지정 게시판에서 지정 주제 추천 가능
+              게시판 주제 상단 고정(SECTION_SUBJECT_STICK): 사용자가 지정 게시판에서 지정 주제 상단 고정 가능
+              게시판 우수 주제 신청(SECTION_SUBJECT_CREAM): 사용자가 지정 게시판에서 지정 주제의 우수 주제 설정 가능
+              게시판 관리(SECTION_SECTION_MANAGER): 사용자가 지정 게시판에서 하위 게시판 생성·삭제 등 가능
+              게시판 권한 관리(SECTION_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자의 지정 게시판 권한 관리 가능
+              게시판 설정 관리(SECTION_CONFIG_MANAGEMENT): 사용자가 지정 게시판의 시스템 매개변수 설정 수정 가능
               
  * @author LIYI
  *
@@ -56,7 +56,7 @@ public class BBSPermissionInfoService {
 	private static  Logger logger = LoggerFactory.getLogger( BBSPermissionInfoService.class );
 	
 	/**
-	 * 根据角色CODE查询角色所绑定的所有权限信息列表
+	 * 역할 CODE로 역할에 연결된 모든 권한 정보 목록 조회
 	 * @param roleCode
 	 * @return
 	 * @throws Exception
@@ -82,7 +82,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 根据论坛ID查询指定论坛所有权限信息列表
+	 * 포럼 ID로 지정 포럼의 모든 권한 정보 목록 조회
 	 * @param roleCode
 	 * @return
 	 * @throws Exception
@@ -108,7 +108,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 根据论坛ID查询指定版块所有权限信息列表
+	 * 포럼 ID로 지정 게시판의 모든 권한 정보 목록 조회
 	 * @param roleCode
 	 * @return
 	 * @throws Exception
@@ -134,7 +134,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 查询所有的权限列表
+	 * 모든 권한 목록 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -150,7 +150,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 根据指定的ID列表查询指定的权限信息列表
+	 * 지정 ID 목록으로 권한 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -170,7 +170,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 检查并且创建指定论坛的权限对象
+	 * 지정 포럼의 권한 객체 확인 및 생성
 	 * @param _bBSForumInfo
 	 * @throws Exception
 	 */
@@ -181,27 +181,27 @@ public class BBSPermissionInfoService {
 		String forumId = _bBSForumInfo.getId();
 		String forumName = _bBSForumInfo.getForumName();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
+			//포럼 열람(FORUM_VIEW): 사용자가 BBS 시스템에서 해당 포럼 접근 가능
 			checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_VIEW", "FORUM_VIEW_" + forumId, "포럼["+forumName+"] 공개", "포럼[" + forumName + "]에 사용자가 접근할 수 있습니다" );			
-			//论坛发布主题（FORUM_SUBJECT_PUBLISH）:用户可以在论坛中所有版块发布主题
-			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_PUBLISH", "FORUM_SUBJECT_PUBLISH_" + forumId, "论坛["+forumName+"]发布主题", "在论坛[" + forumName + "]中用户可以在所有版块中发布主题" );			
-			//论坛发表回复（FORUM_REPLY_PUBLISH）：用户可以回复论坛中所有主题
-			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_REPLY_PUBLISH", "FORUM_REPLY_PUBLISH_" + forumId, "论坛["+forumName+"]发表回复", "在论坛[" + forumName + "]中用户可以回复所有主题" );			
-            //论坛主题推荐（FORUM_SUBJECT_RECOMMEND）:用户可以在指定论坛中所有版块对指定主题进行推荐到论坛首页
-			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_RECOMMEND", "FORUM_SUBJECT_RECOMMEND_" + forumId, "论坛["+forumName+"]主题推荐", "在论坛[" + forumName + "]中用户可以在所有版块对指定主题进行推荐到论坛首页" );            
-            //论坛主题置顶（FORUM_SUBJECT_STICK）：用户拥有对论坛中所有的主题的置顶权限
-			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_STICK", "FORUM_SUBJECT_STICK_" + forumId, "论坛["+forumName+"]主题置顶", "在论坛[" + forumName + "]中用户拥有所有的主题的置顶权限" );            
-            //论坛主题申精（FORUM_SUBJECT_CREAM）：用户拥有对论坛中所有的主题的精华主题设置权限
-            //checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_CREAM", "FORUM_SUBJECT_CREAM_" + forumId, "论坛["+forumName+"]主题申精", "在论坛[" + forumName + "]中用户拥有所有的主题的精华主题设置权限" );            
-            //论坛主题管理（FORUM_SUBJECT_MANAGEMENT）：用户拥有对论坛中所有的主题的锁定删除权限
-            //checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_MANAGEMENT", "FORUM_SUBJECT_MANAGEMENT_" + forumId, "论坛["+forumName+"]主题管理", "在论坛[" + forumName + "]中用用户拥有所有的主题的锁定删除权限" );            
-            //论坛回贴管理（FORUM_REPLY_MANAGEMENT）：用户拥有对论坛中所有的回复的删除权限
-            //checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_REPLY_MANAGEMENT", "FORUM_REPLY_MANAGEMENT_" + forumId, "论坛["+forumName+"]回贴管理", "在论坛[" + forumName + "]中用户拥有所有的回复的删除权限" );            
-            //论坛版块管理（FORUM_INFO_MANAGEMENT）：用户拥有对论坛的版块增加，删除，修改权限
+			//포럼 주제 게시(FORUM_SUBJECT_PUBLISH): 사용자가 포럼의 모든 게시판에 주제 게시 가능
+			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_PUBLISH", "FORUM_SUBJECT_PUBLISH_" + forumId, "포럼["+forumName+"] 주제 게시", "포럼[" + forumName + "]에서 사용자가 모든 게시판에 주제 게시 가능" );			
+			//포럼 답글 작성(FORUM_REPLY_PUBLISH): 사용자가 포럼의 모든 주제에 답글 작성 가능
+			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_REPLY_PUBLISH", "FORUM_REPLY_PUBLISH_" + forumId, "포럼["+forumName+"] 답글 작성", "포럼[" + forumName + "]에서 사용자가 모든 주제에 답글 작성 가능" );			
+            //포럼 주제 추천(FORUM_SUBJECT_RECOMMEND): 사용자가 지정 포럼의 모든 게시판에서 지정 주제를 포럼 홈에 추천 가능
+			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_RECOMMEND", "FORUM_SUBJECT_RECOMMEND_" + forumId, "포럼["+forumName+"] 주제 추천", "포럼[" + forumName + "]에서 사용자가 모든 게시판의 지정 주제를 포럼 홈에 추천 가능" );            
+            //포럼 주제 상단 고정(FORUM_SUBJECT_STICK): 사용자가 포럼의 모든 주제에 대한 상단 고정 권한 보유
+			//checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_STICK", "FORUM_SUBJECT_STICK_" + forumId, "포럼["+forumName+"] 주제 상단 고정", "포럼[" + forumName + "]에서 사용자가 모든 주제의 상단 고정 권한 보유" );            
+            //포럼 우수 주제 신청(FORUM_SUBJECT_CREAM): 사용자가 포럼의 모든 주제에 대한 우수 주제 설정 권한 보유
+            //checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_CREAM", "FORUM_SUBJECT_CREAM_" + forumId, "포럼["+forumName+"] 우수 주제 신청", "포럼[" + forumName + "]에서 사용자가 모든 주제의 우수 주제 설정 권한 보유" );            
+            //포럼 주제 관리(FORUM_SUBJECT_MANAGEMENT): 사용자가 포럼의 모든 주제에 대한 잠금·삭제 권한 보유
+            //checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_SUBJECT_MANAGEMENT", "FORUM_SUBJECT_MANAGEMENT_" + forumId, "포럼["+forumName+"] 주제 관리", "포럼[" + forumName + "]에서 사용자가 모든 주제의 잠금·삭제 권한 보유" );            
+            //포럼 답글 관리(FORUM_REPLY_MANAGEMENT): 사용자가 포럼의 모든 답글에 대한 삭제 권한 보유
+            //checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_REPLY_MANAGEMENT", "FORUM_REPLY_MANAGEMENT_" + forumId, "포럼["+forumName+"] 답글 관리", "포럼[" + forumName + "]에서 사용자가 모든 답글의 삭제 권한 보유" );            
+            //포럼 게시판 관리(FORUM_INFO_MANAGEMENT): 사용자가 포럼 게시판의 추가·삭제·수정 권한 보유
             checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_INFO_MANAGEMENT", "FORUM_INFO_MANAGEMENT_" + forumId, "포럼["+forumName+"] 섹션 관리", "포럼[" + forumName + "]에서 섹션을 추가, 삭제, 수정할 수 있습니다" );            
-            //论坛权限管理（FORUM_PERMISSION_MANAGEMENT）：用户拥有对论坛的用户进行该论坛权限设置的权限
+            //포럼 권한 관리(FORUM_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자에게 해당 포럼 권한을 설정할 수 있는 권한 보유
             checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_PERMISSION_MANAGEMENT", "FORUM_PERMISSION_MANAGEMENT_" + forumId, "포럼["+forumName+"] 권한 관리", "포럼[" + forumName + "]에서 사용자 권한을 설정할 수 있습니다" );            
-            //论坛配置管理（FORUM_CONFIG_MANAGEMENT）：用户拥有对论坛的参数配置进行设置的权限
+            //포럼 설정 관리(FORUM_CONFIG_MANAGEMENT): 사용자가 포럼 매개변수 설정 권한 보유
             checkAndSaveBBSPermissionInfo( emc, _bBSForumInfo, "FORUM_CONFIG_MANAGEMENT", "FORUM_CONFIG_MANAGEMENT_" + forumId, "포럼["+forumName+"] 설정 관리", "포럼[" + forumName + "]의 매개변수를 설정할 수 있습니다" );            
 		}catch( Exception e ){
 			logger.warn( "system check and create forum permission got an exception!" );
@@ -210,7 +210,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 检查并且创建指定版块的权限对象
+	 * 지정 게시판의 권한 객체 확인 및 생성
 	 * @param _sectionInfo
 	 * @throws Exception
 	 */
@@ -222,31 +222,31 @@ public class BBSPermissionInfoService {
 		String sectionId = _sectionInfo.getId();
 		String sectionName = _sectionInfo.getSectionName();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
+			//포럼 열람(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판 접근 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_VIEW", "SECTION_VIEW_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 공개", "섹션["+forumName+"-"+sectionName+"]에 사용자가 접근할 수 있습니다." );
-			//发布主题（SECTION_SUBJECT_PUBLISH）:用户可以在指定版块中发布主题
+			//주제 게시(SECTION_SUBJECT_PUBLISH): 사용자가 지정 게시판에 주제 게시 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_PUBLISH", "SECTION_SUBJECT_PUBLISH_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 게시", "섹션["+forumName+"-"+sectionName+"]에 주제를 게시할 수 있습니다" );
-            //审核主题（SECTION_SUBJECT_AUDIT）:用户可以审核在指定版块中发布的主题，如果主题需要审核
+            //주제 심사(SECTION_SUBJECT_AUDIT): 주제 심사가 필요한 경우 사용자가 지정 게시판에 게시된 주제 심사 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_AUDIT", "SECTION_SUBJECT_AUDIT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 검토", "섹션["+forumName+"-"+sectionName+"]에 게시된 주제를 검토할 수 있습니다(검토가 필요한 경우)" );
-            //主题管理（SECTION_SUBJECT_MANAGEMENT）:用户可以在指定版块中对已发布主题进行查询删除
+            //주제 관리(SECTION_SUBJECT_MANAGEMENT): 사용자가 지정 게시판에서 게시된 주제를 조회·삭제 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_MANAGEMENT", "SECTION_SUBJECT_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 관리", "섹션["+forumName+"-"+sectionName+"]에 게시된 주제를 조회하거나 삭제할 수 있습니다" );
-            //发表回复（SECTION_REPLY_PUBLISH）:用户可以在指定版块中对所有主题进行回复
+            //답글 작성(SECTION_REPLY_PUBLISH): 사용자가 지정 게시판의 모든 주제에 답글 작성 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_PUBLISH", "SECTION_REPLY_PUBLISH_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 댓글 작성", "섹션["+forumName+"-"+sectionName+"]의 모든 주제에 댓글을 작성할 수 있습니다" );
-            //审核回复（SECTION_REPLY_AUDIT）:用户可以审核在指定版块中的所有回复内容，如果回复需要审核
+            //답글 심사(SECTION_REPLY_AUDIT): 답글 심사가 필요한 경우 사용자가 지정 게시판의 모든 답글 심사 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_AUDIT", "SECTION_REPLY_AUDIT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 댓글 검토", "섹션["+forumName+"-"+sectionName+"]의 모든 댓글을 검토할 수 있습니다(검토가 필요한 경우)" );
-            //回贴管理（SECTION_REPLY_MANAGEMENT）:用户可以在指定版块中对回复进行查询或者删除
+            //답글 관리(SECTION_REPLY_MANAGEMENT): 사용자가 지정 게시판에서 답글 조회 또는 삭제 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_REPLY_MANAGEMENT", "SECTION_REPLY_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 댓글 관리", "섹션["+forumName+"-"+sectionName+"]의 댓글을 조회하거나 삭제할 수 있습니다" );
-            //版块主题推荐（SECTION_SUBJECT_RECOMMEND）:用户可以在指定版块中对指定主题进行推荐操作
+            //게시판 주제 추천(SECTION_SUBJECT_RECOMMEND): 사용자가 지정 게시판에서 지정 주제 추천 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_RECOMMEND", "SECTION_SUBJECT_RECOMMEND_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 추천", "섹션["+forumName+"-"+sectionName+"]의 주제를 추천할 수 있습니다" );
-            //版块主题置顶（SECTION_SUBJECT_STICK）:用户可以在指定版块中对指定主题进行置顶操作
+            //게시판 주제 상단 고정(SECTION_SUBJECT_STICK): 사용자가 지정 게시판에서 지정 주제 상단 고정 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_STICK", "SECTION_SUBJECT_STICK_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 주제 상단 고정", "섹션["+forumName+"-"+sectionName+"]의 주제를 상단에 고정할 수 있습니다" );
-            //版块主题申精（SECTION_SUBJECT_CREAM）:用户可以在指定版块中对指定主题进行精华主题设置操作
+            //게시판 우수 주제 신청(SECTION_SUBJECT_CREAM): 사용자가 지정 게시판에서 지정 주제의 우수 주제 설정 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_SUBJECT_CREAM", "SECTION_SUBJECT_CREAM_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 추천 게시물 지정", "섹션["+forumName+"-"+sectionName+"]의 주제를 추천 게시물로 지정할 수 있습니다" );
-            //版块管理（SECTION_SECTION_MANAGER）:用户可以在指定版块中对子版块进行创建和删除等操作
+            //게시판 관리(SECTION_SECTION_MANAGER): 사용자가 지정 게시판에서 하위 게시판 생성·삭제 등 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_INFO_MANAGER", "SECTION_INFO_MANAGER_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 정보 관리", "섹션["+forumName+"-"+sectionName+"]의 정보를 관리하고 하위 섹션을 만들거나 삭제할 수 있습니다" );
-			//版块权限管理（SECTION_PERMISSION_MANAGEMENT）:用户可以对论坛用户进行指定版块的权限管理
+			//게시판 권한 관리(SECTION_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자의 지정 게시판 권한 관리 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_PERMISSION_MANAGEMENT", "SECTION_PERMISSION_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 권한 관리", "섹션["+forumName+"-"+sectionName+"]의 사용자 권한을 관리할 수 있습니다" );
-            //版块配置管理（SECTION_CONFIG_MANAGEMENT）:用户可以对指定版块进行系统参数配置修改
+            //게시판 설정 관리(SECTION_CONFIG_MANAGEMENT): 사용자가 지정 게시판의 시스템 매개변수 설정 수정 가능
 			checkAndSaveBBSPermissionInfo( emc, _sectionInfo, "SECTION_CONFIG_MANAGEMENT", "SECTION_CONFIG_MANAGEMENT_" + sectionId, "섹션["+forumName+"-"+sectionName+"] 설정 관리", "섹션["+forumName+"-"+sectionName+"]의 시스템 매개변수를 수정할 수 있습니다" );
 		}catch( Exception e ){
 			logger.warn( "system check and create section permission got an exception!" );
@@ -255,7 +255,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 根据传入的参数组织权限信息，并且验证权限是否已经存在，如果不存在则新增一个权限信息
+	 * 전달된 매개변수로 권한 정보를 구성하고 권한 존재 여부를 검증, 없으면 권한 정보 추가
 	 * @param emc
 	 * @param _bBSForumInfo
 	 * @param permissionType
@@ -277,7 +277,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 根据传入的参数组织权限信息，并且验证权限是否已经存在，如果不存在则新增一个权限信息
+	 * 전달된 매개변수로 권한 정보를 구성하고 권한 존재 여부를 검증, 없으면 권한 정보 추가
 	 * @param emc
 	 * @param _sectionInfo
 	 * @param permissionCode
@@ -344,7 +344,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 根据用户姓名获取系统分配给用户的所有权限列表
+	 * 사용자 이름으로 시스템이 사용자에게 할당한 모든 권한 목록 조회
 	 * @param userName
 	 * @return
 	 * @throws Exception
@@ -363,10 +363,10 @@ public class BBSPermissionInfoService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			
-			//将用户的姓名放入唯一标识列表里
+			//사용자 이름을 고유 식별자 목록에 추가
 			uniqueIds.add( userName );
 			
-			//查询用户所属的组织以及上级组织等等
+			//사용자 소속 조직 및 상위 조직 등 조회
 			units = userManagerService.listUnitNamesWithPerson( userName );
 			if( ListTools.isNotEmpty( units ) ){
 				for( String unit : units ){
@@ -380,7 +380,7 @@ public class BBSPermissionInfoService {
 					}
 				}
 			}			
-			//查询用户所属的群组
+			//사용자 소속 그룹 조회
 			groups = userManagerService.listGroupNamesSupNestedWithPerson( userName ); 
 			if( ListTools.isNotEmpty( groups ) ){
 				for( String group : groups){
@@ -389,14 +389,14 @@ public class BBSPermissionInfoService {
 					}
 				}
 			}			
-			//先查询用户被分配了多少角色，查询角色列表
+			//먼저 사용자에게 할당된 역할 목록 조회
 			roleCodes = business.userRoleFactory().listRoleCodesByObjectUnique( uniqueIds );			
 			if( ListTools.isNotEmpty( roleCodes ) ){
-				//再查询所有角色中包括的权限ID列表
+				//이어서 모든 역할에 포함된 권한 ID 목록 조회
 				permissionCodes = business.permissionRoleFactory().listPermissionCodesByRoleCodes( roleCodes );
 			}
 			if( ListTools.isNotEmpty( permissionCodes ) ){
-				//最后权限所有的权限ID列表查询出权限对象信息，并且返回
+				//마지막으로 모든 권한 ID 목록으로 권한 객체 정보를 조회하여 반환
 				return business.permissionInfoFactory().listByPermissionCodes( permissionCodes );
 			}
 			return null;
@@ -407,7 +407,7 @@ public class BBSPermissionInfoService {
 	}
 	
 	/**
-	 * 将组织对象以及上级组织对象放入组织列表里
+	 * 조직 객체와 상위 조직 객체를 조직 목록에 추가
 	 * @param unit
 	 * @param unitList
 	 * @return
@@ -418,7 +418,7 @@ public class BBSPermissionInfoService {
 			unitList = new ArrayList<>();
 		}
 		if( unit != null ){
-			//将组织信息放入组织信息列表里
+			//조직 정보를 조직 정보 목록에 추가
 			unitList.add( unit );
 			List<String> units = null;
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {

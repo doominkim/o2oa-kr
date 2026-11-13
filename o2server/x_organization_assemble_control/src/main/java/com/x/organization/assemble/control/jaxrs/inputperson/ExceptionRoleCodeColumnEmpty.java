@@ -7,6 +7,6 @@ class ExceptionRoleCodeColumnEmpty extends PromptException {
 	private static final long serialVersionUID = -2139584911736169462L;
 
 	ExceptionRoleCodeColumnEmpty() {
-		super("角色编号列不能为空.");
+		super("역할 번호 열은 비워 둘 수 없습니다.");
 	}
 }

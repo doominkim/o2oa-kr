@@ -23,13 +23,13 @@ public class ActionScheduleList extends BaseAction {
       throw new ExceptionEmptyParameter("month");
     }
     if (LOGGER.isDebugEnabled()) {
-      LOGGER.debug("排班数据查询  groupId {} month {}", groupId, month);
+      LOGGER.debug("교대 편성 데이터 조회  groupId {} month {}", groupId, month);
     }
     ActionResult<List<ScheduleWo>> result = new ActionResult<>();
     ActionScheduleListFilter.Wi filterWi = new ActionScheduleListFilter.Wi();
     filterWi.setGroupId(groupId);
     filterWi.setMonth(month);
-    // 执行 ActionScheduleListFilter 查询排班数据
+    // ActionScheduleListFilter 실행해 교대 편성 데이터 조회
     List<ScheduleWo> wos = ThisApplication.context().applications()
         .postQuery(x_attendance_assemble_control.class, "v2/groupschedule/list/filter", filterWi)
         .getDataAsList(ScheduleWo.class);

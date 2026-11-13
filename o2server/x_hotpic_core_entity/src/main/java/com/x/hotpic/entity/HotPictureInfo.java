@@ -19,11 +19,11 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 热图信息（热点图片信息）表
+ * 인기 이미지 정보 테이블
  * 
  * @author O2LEE
  */
-@Schema(name = "HotPictureInfo", description = "热点图片信息.")
+@Schema(name = "HotPictureInfo", description = "인기 이미지 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.HotPictureInfo.table, uniqueConstraints = {
@@ -44,7 +44,7 @@ public class HotPictureInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -53,14 +53,14 @@ public class HotPictureInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
@@ -68,39 +68,39 @@ public class HotPictureInfo extends SliceJpaObject {
 	public static final String APPLICATION_BBS = "BBS";
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用名称")
+	@FieldDescribe("앱 이름")
 	@Column(name = "xapplication", length = JpaObject.length_64B)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	private String application = "";
 
 	public static final String infoId_FIELDNAME = "infoId";
-	@FieldDescribe("信息对象ID")
+	@FieldDescribe("정보 객체 ID")
 	@Column(name = "xinfoId", length = JpaObject.length_id)
 	private String infoId = "";
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("信息标题")
+	@FieldDescribe("정보 제목")
 	@Column(name = "xtitle", length = JpaObject.length_255B)
 	private String title = "";
 
 	public static final String summary_FIELDNAME = "summary";
-	@FieldDescribe("主题摘要")
+	@FieldDescribe("주제 요약")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + summary_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String summary = "";
 
 //	public static final String url_FIELDNAME = "url";
-//	@FieldDescribe("信息访问URL")
+//	@FieldDescribe("정보 접근 URL")
 //	@Column(name = "xurl", length = JpaObject.length_255B)
 //	private String url = "";
 
 	public static final String picId_FIELDNAME = "picId";
-	@FieldDescribe("信息图片URL")
+	@FieldDescribe("정보 이미지 URL")
 	@Column(name = "xpicId", length = JpaObject.length_255B)
 	private String picId = "";
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("创建者")
+	@FieldDescribe("작성자")
 	@Column(name = "xcreator", length = JpaObject.length_64B)
 	private String creator = "";
 

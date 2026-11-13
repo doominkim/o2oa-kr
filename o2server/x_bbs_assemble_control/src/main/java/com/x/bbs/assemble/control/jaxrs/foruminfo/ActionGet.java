@@ -49,7 +49,7 @@ public class ActionGet extends BaseAction {
 				result.setData( result_cache.getData() );
 				result.setCount( 1L);
 			} else {
-				//继续进行数据查询
+				//데이터 조회 계속
 				result = getForumQueryResult( id, request, effectivePerson );
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -68,7 +68,7 @@ public class ActionGet extends BaseAction {
 				forumInfo = forumInfoServiceAdv.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionForumInfoProcess( e, "系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + id );
+				Exception exception = new ExceptionForumInfoProcess( e, "ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -79,13 +79,13 @@ public class ActionGet extends BaseAction {
 				try {
 					wrap = Wo.copier.copy( forumInfo );
 					wrap.setForumVisibleResult( wrap.getVisiblePermissionList() );
-					//TODO 为了不改变前端的逻辑，此处将List转为String进行输出，逗号分隔
+					//TODO 프론트엔드 로직을 바꾸지 않기 위해 여기서 List를 String으로 변환해 출력, 쉼표 구분
 					wrap.setForumManagerName( wrap.transferStringListToString( wrap.getForumManagerList()) );
 					result.setData( wrap );
 					result.setCount(1L);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionForumInfoProcess( e, "系统将论坛信息对象转换为输出数据时发生异常。" );
+					Exception exception = new ExceptionForumInfoProcess( e, "포럼 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -99,18 +99,18 @@ public class ActionGet extends BaseAction {
 
 	public static class Wo extends BBSForumInfo{
 		
-		@FieldDescribe("字符串形式输出的管理员信息，逗号(,)分隔.")
+		@FieldDescribe("문자열 형식의 관리자 정보, 쉼표(,)로 구분.")
 		private String forumManagerName = null;
 		
 		private static final long serialVersionUID = -5076990764713538973L;
 		
 		public static WrapCopier< BBSForumInfo, Wo > copier = WrapCopierFactory.wo( BBSForumInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String forumVisibleResult ;
 		
-		//论坛版块列表
-		@FieldDescribe("版块列表.")
+		//포럼 게시판 목록
+		@FieldDescribe("게시판 목록.")
 		private List<WoSectionInfo> sections = null;
 
 		public List<WoSectionInfo> getSections() {
@@ -158,8 +158,8 @@ public class ActionGet extends BaseAction {
 		
 		private static final long serialVersionUID = -5076990764713538973L;
 		
-		//版块的子版块信息列表
-		@FieldDescribe("子版块列表.")
+		//게시판의 하위 게시판 정보 목록
+		@FieldDescribe("하위 게시판 목록.")
 		private List<WoSectionInfo> subSections = null;
 
 		public List<WoSectionInfo> getSubSections() {

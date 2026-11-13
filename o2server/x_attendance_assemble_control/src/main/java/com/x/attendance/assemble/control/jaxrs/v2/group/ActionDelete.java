@@ -30,7 +30,7 @@ public class ActionDelete extends BaseAction {
             }
             AttendanceV2Group group = emc.find(id, AttendanceV2Group.class);
             if (group == null) {
-                throw new ExceptionNotExistObject(id+"考勤组");
+                throw new ExceptionNotExistObject(id+"근태 그룹");
             }
 
             emc.beginTransaction(AttendanceV2Group.class);

@@ -13,7 +13,7 @@ import com.x.mind.entity.MindBaseInfo;
 import com.x.mind.entity.MindFolderInfo;
 
 /**
- * 脑图文件夹信息服务类
+ * 마인드맵 폴더 정보 서비스 클래스
  * @author O2LEE
  *
  */
@@ -22,7 +22,7 @@ public class MindFolderInfoService{
 	private ServiceMindFolderInfoPersist serviceMindFolderInfoPersist = new ServiceMindFolderInfoPersist();
 
 	/**
-	 * 根据用户个人名称查询用户所有的个人文件夹信息ID列表
+	 * 사용자 이름으로 사용자의 모든 개인 폴더 정보 ID 목록 조회
 	 * @param person
 	 * @return
 	 * @throws Exception 
@@ -36,7 +36,7 @@ public class MindFolderInfoService{
 	}
 	
 	/**
-	 * 根据指定的ID列表查询脑图目录信息列表
+	 * 지정 ID 목록으로 마인드맵 디렉터리 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -50,7 +50,7 @@ public class MindFolderInfoService{
 	}
 
 	/**
-	 * 保存一个脑图目录
+	 * 마인드맵 디렉터리 저장
 	 * @param mindFolderInfo
 	 * @return
 	 * @throws Exception 
@@ -64,7 +64,7 @@ public class MindFolderInfoService{
 	}
 
 	/**
-	 * 根据ID获取脑图文件夹信息
+	 * ID로 마인드맵 폴더 정보 조회
 	 * @param folderId
 	 * @return
 	 * @throws Exception 
@@ -78,7 +78,7 @@ public class MindFolderInfoService{
 	}
 
 	/**
-	 * 根据ID删除脑图文件夹信息
+	 * ID로 마인드맵 폴더 정보 삭제
 	 * @param folderId
 	 * @return
 	 * @throws Exception
@@ -92,7 +92,7 @@ public class MindFolderInfoService{
 	}	
 	
 	/**
-	 * 根据ID删除脑图文件夹信息，强制删除，包括下级文件夹和所有脑图文件
+	 * ID로 마인드맵 폴더 정보 강제 삭제(하위 폴더와 모든 마인드맵 파일 포함)
 	 * @param folderId
 	 * @return
 	 * @throws Exception
@@ -110,7 +110,7 @@ public class MindFolderInfoService{
 			emc.beginTransaction( MindFolderInfo.class );
 			emc.beginTransaction( MindBaseInfo.class );
 			for( String _folderId : folderIds ) {
-				//查询目录下的脑图信息
+				//디렉터리의 마인드맵 정보 조회
 				mindIds = business.mindBaseInfoFactory().list(_folderId, null, null, null, null);
 				if( ListTools.isNotEmpty( mindIds )) {
 					for( String _mindId : mindIds ) {
@@ -129,7 +129,7 @@ public class MindFolderInfoService{
 	}
 	
 	/**
-	 * 根据ID获取文件夹的下级目录个数
+	 * ID로 폴더의 하위 디렉터리 수 조회
 	 * @param folderId
 	 * @return
 	 * @throws Exception

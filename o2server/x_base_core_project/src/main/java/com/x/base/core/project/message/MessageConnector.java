@@ -23,177 +23,177 @@ public class MessageConnector {
 
     private static Gson gson = XGsonBuilder.instance();
 
-    // 创建应用
+    // 앱 생성
     public static final String TYPE_APPLICATION_CREATE = "application_create";
 
-    // 更新应用
+    // 앱 수정
     public static final String TYPE_APPLICATION_UPDATE = "application_update";
 
-    // 删除应用
+    // 앱 삭제
     public static final String TYPE_APPLICATION_DELETE = "application_delete";
 
-    // 创建流程
+    // 프로세스 생성
     public static final String TYPE_PROCESS_CREATE = "process_create";
 
-    // 更新流程
+    // 프로세스 수정
     public static final String TYPE_PROCESS_UPDATE = "process_update";
 
-    // 删除流程
+    // 프로세스 삭제
     public static final String TYPE_PROCESS_DELETE = "process_delete";
 
-    // 有新的工作通过消息节点
+    // 새 업무 문서가 메시지 노드를 통과함
     public static final String TYPE_ACTIVITY_MESSAGE = "activity_message";
 
-    // 工作完成转已完成工作
+    // 업무 문서 완료 후 완료 업무 문서로 전환
     public static final String TYPE_WORK_TO_WORKCOMPLETED = "work_to_workCompleted";
 
-    // 创建工作
+    // 업무 문서 생성
     public static final String TYPE_WORK_CREATE = "work_create";
 
-    // 删除工作
+    // 업무 문서 삭제
     public static final String TYPE_WORK_DELETE = "work_delete";
 
-    // 创建已完成工作
+    // 완료 업무 문서 생성
     public static final String TYPE_WORKCOMPLETED_CREATE = "workCompleted_create";
 
-    // 删除已完成工作
+    // 완료 업무 문서 삭제
     public static final String TYPE_WORKCOMPLETED_DELETE = "workCompleted_delete";
 
-    // 待办完成转已办
+    // 결재 대기 완료 후 처리 완료로 전환
     public static final String TYPE_TASK_TO_TASKCOMPLETED = "task_to_taskCompleted";
 
-    // 创建待办
+    // 결재 대기 생성
     public static final String TYPE_TASK_CREATE = "task_create";
 
-    // 删除待办
+    // 결재 대기 삭제
     public static final String TYPE_TASK_DELETE = "task_delete";
 
-    // 待办即将过期催办
+    // 결재 대기 만료 임박 독촉
     public static final String TYPE_TASK_URGE = "task_urge";
 
-    // 待办过期
+    // 결재 대기 만료
     public static final String TYPE_TASK_EXPIRE = "task_expire";
 
-    // 待办提醒
+    // 결재 대기 알림
     public static final String TYPE_TASK_PRESS = "task_press";
 
-    // 已办创建
+    // 처리 완료 생성
     public static final String TYPE_TASKCOMPLETED_CREATE = "taskCompleted_create";
 
-    // 删除已办
+    // 처리 완료 삭제
     public static final String TYPE_TASKCOMPLETED_DELETE = "taskCompleted_delete";
 
-    // 待阅转已阅
+    // 열람 대기를 열람 완료로 전환
     public static final String TYPE_READ_TO_READCOMPLETED = "read_to_readCompleted";
 
-    // 待阅创建
+    // 열람 대기 생성
     public static final String TYPE_READ_CREATE = "read_create";
 
-    // 待阅删除
+    // 열람 대기 삭제
     public static final String TYPE_READ_DELETE = "read_delete";
 
-    // 已阅创建
+    // 열람 완료 생성
     public static final String TYPE_READCOMPLETED_CREATE = "readCompleted_create";
 
-    // 已阅删除
+    // 열람 완료 삭제
     public static final String TYPE_READCOMPLETED_DELETE = "readCompleted_delete";
 
-    // 创建参阅
+    // 참조 생성
     public static final String TYPE_REVIEW_CREATE = "review_create";
 
-    // 删除参阅
+    // 참조 삭제
     public static final String TYPE_REVIEW_DELETE = "review_delete";
 
-    // 会议邀请
+    // 회의 초대
     public static final String TYPE_MEETING_INVITE = "meeting_invite";
 
-    // 会议删除
+    // 회의 삭제
     public static final String TYPE_MEETING_DELETE = "meeting_delete";
 
-    // 会议邀请接受
+    // 회의 초대 수락
     public static final String TYPE_MEETING_ACCEPT = "meeting_accept";
 
-    // 会议邀请拒绝
+    // 회의 초대 거절
     public static final String TYPE_MEETING_REJECT = "meeting_reject";
 
-    // 创建附件
+    // 첨부파일 생성
     public static final String TYPE_ATTACHMENT_CREATE = "attachment_create";
 
-    // 删除附件
+    // 첨부파일 삭제
     public static final String TYPE_ATTACHMENT_DELETE = "attachment_delete";
 
-    // 附件分享
+    // 첨부파일 공유
     public static final String TYPE_ATTACHMENT_SHARE = "attachment_share";
 
-    // 附件取消分享
+    // 첨부파일 공유 취소
     public static final String TYPE_ATTACHMENT_SHARECANCEL = "attachment_shareCancel";
 
-    // 附件可编辑设置
+    // 첨부파일 편집 가능 설정
     public static final String TYPE_ATTACHMENT_EDITOR = "attachment_editor";
 
-    // 附件可编辑取消
+    // 첨부파일 편집 가능 취소
     public static final String TYPE_ATTACHMENT_EDITORCANCEL = "attachment_editorCancel";
 
-    // 附件可编辑修改
+    // 첨부파일 편집 가능 수정
     public static final String TYPE_ATTACHMENT_EDITORMODIFY = "attachment_editorModify";
 
-    // 日历通知
+    // 캘린더 알림
     public static final String TYPE_CALENDAR_ALARM = "calendar_alarm";
 
-    // 自定义消息创建
+    // 사용자 정의 메시지 생성
     public static final String TYPE_CUSTOM_CREATE = "custom_create";
 
-    // 工作管理任务创建
+    // 업무 관리 작업 생성
     public static final String TYPE_TEAMWORK_TASKCREATE = "teamwork_taskCreate";
 
-    // 工作管理任务更新
+    // 업무 관리 작업 수정
     public static final String TYPE_TEAMWORK_TASKUPDATE = "teamwork_taskUpdate";
 
-    // 工作管理任务删除
+    // 업무 관리 작업 삭제
     public static final String TYPE_TEAMWORK_TASKDELETE = "teamwork_taskDelete";
 
-    // 工作管理任务超时
+    // 업무 관리 작업 시간 초과
     public static final String TYPE_TEAMWORK_TASKOVERTIME = "teamwork_taskOvertime";
 
-    // 工作管理聊天
+    // 업무 관리 채팅
     public static final String TYPE_TEAMWORK_CHAT = "teamwork_chat";
 
-    // 内容管理发布
+    // 콘텐츠 관리 게시
     public static final String TYPE_CMS_PUBLISH = "cms_publish";
 
-    // 内容管理发布创建者通知
+    // 콘텐츠 관리 게시 작성자 알림
     public static final String TYPE_CMS_PUBLISH_TO_CREATOR = "cms_publish_to_creator";
 
-    // 论坛创建贴子
+    // 포럼 게시글 작성
     public static final String TYPE_BBS_SUBJECTCREATE = "bbs_subjectCreate";
 
-    // 论坛创建回复
+    // 포럼 답글 작성
     public static final String TYPE_BBS_REPLYCREATE = "bbs_replyCreate";
 
-    // 脑图文件发送
+    // 마인드맵 파일 전송
     public static final String TYPE_MIND_FILESEND = "mind_fileSend";
 
-    // 脑图文件分享
+    // 마인드맵 파일 공유
     public static final String TYPE_MIND_FILESHARE = "mind_fileShare";
 
-    // IM 聊天消息发送
+    // IM 채팅 메시지 전송
     public static final String TYPE_IM_CREATE = "im_create";
-    // IM 消息撤回
+    // IM 메시지 회수
     public static final String TYPE_IM_REVOKE = "im_revoke";
-    // IM 会话删除
+    // IM 대화 삭제
     public static final String TYPE_IM_CONVERSATION_DELETE = "im_conv_delete";
-    // IM 会话本身更新
+    // IM 대화 자체 수정
     public static final String TYPE_IM_CONVERSATION_UPDATE = "im_conv_update";
 
-    // 考勤 打卡提醒消息
+    // 근태 출퇴근 체크 알림 메시지
     public static final String TYPE_ATTENDANCE_CHECK_IN_ALERT = "attendance_checkInAlert";
-    // 考勤 打卡异常提醒消息
+    // 근태 출퇴근 체크 이상 알림 메시지
     public static final String TYPE_ATTENDANCE_CHECK_IN_EXCEPTION = "attendance_checkInException";
 
-    // 自定义消息
+    // 사용자 정의 메시지
     public static final String TYPE_CUSTOM_PREFIX = "custom_";
 
-    // 审计日志通知
+    // 감사 로그 알림
     // public static final String TYPE_AUDIT_LOG = "audit_log";
 
     public static final String CONSUME_WS = "ws";
@@ -212,22 +212,22 @@ public class MessageConnector {
 
     public static final String CONSUME_QIYEWEIXIN = "qiyeweixin";
 
-    public static final String CONSUME_MPWEIXIN = "mpweixin"; // 微信公众号
+    public static final String CONSUME_MPWEIXIN = "mpweixin"; // 위챗 공식 계정
 
     public static final String CONSUME_KAFKA = "kafka";
 
     public static final String CONSUME_ACTIVEMQ = "activemq";
-    // restful类型
+    // restful 유형
     public static final String CONSUME_RESTFUL = "restful";
-    // 邮件类型
+    // 메일 유형
     public static final String CONSUME_MAIL = "mail";
-    // 系统内部借口调用
+    // 시스템 내부 인터페이스 호출
     public static final String CONSUME_API = "api";
-    // jdbc写入
+    // jdbc 쓰기
     public static final String CONSUME_JDBC = "jdbc";
-    // 自建表
+    // 사용자 정의 테이블
     public static final String CONSUME_TABLE = "table";
-    // 自定消费者类型前缀
+    // 사용자 정의 소비자 유형 접두사
     public static final String CONSUME_CUSTOM_PREFIX = "custom_";
 
     public static final Set<String> TYPES = Set.of(TYPE_APPLICATION_CREATE,
@@ -304,16 +304,16 @@ public class MessageConnector {
 
         private static final long serialVersionUID = 2603938363315602487L;
 
-        @FieldDescribe("类型")
+        @FieldDescribe("유형")
         private String type;
 
-        @FieldDescribe("人员")
+        @FieldDescribe("사용자")
         private String person;
 
-        @FieldDescribe("标题")
+        @FieldDescribe("제목")
         private String title;
 
-        @FieldDescribe("推送内容")
+        @FieldDescribe("콘텐츠 푸시")
         private JsonElement body;
 
         public String getType() {

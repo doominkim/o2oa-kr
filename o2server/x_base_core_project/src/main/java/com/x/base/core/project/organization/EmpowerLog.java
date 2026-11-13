@@ -9,49 +9,49 @@ public class EmpowerLog extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -2962512888249730611L;
 
-	@FieldDescribe("身份.")
+	@FieldDescribe("신분.")
 	private String fromIdentity;
 
-	@FieldDescribe("委托身份.")
+	@FieldDescribe("위임 신분.")
 	private String toIdentity;
 
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	private String application;
 
-	@FieldDescribe("应用名称.")
+	@FieldDescribe("앱 이름.")
 	private String applicationName;
 
-	@FieldDescribe("应用别名.")
+	@FieldDescribe("앱 별칭.")
 	private String applicationAlias;
 
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	private String process;
 
-	@FieldDescribe("流程名称.")
+	@FieldDescribe("프로세스 이름.")
 	private String processName;
 
-	@FieldDescribe("流程别名.")
+	@FieldDescribe("프로세스 별칭.")
 	private String processAlias;
 
-	@FieldDescribe("当前活动ID")
+	@FieldDescribe("현재 활동 ID")
 	private String activity;
 
-	@FieldDescribe("活动名称")
+	@FieldDescribe("활동 이름")
 	private String activityName;
 
-	@FieldDescribe("活动别名")
+	@FieldDescribe("활동 별칭")
 	private String activityAlias;
 
-	@FieldDescribe("任务标识.")
+	@FieldDescribe("작업 식별자.")
 	private String job;
 
-	@FieldDescribe("work标识.")
+	@FieldDescribe("work 식별자.")
 	private String work;
 
-	@FieldDescribe("委托时间.")
+	@FieldDescribe("위임 시간.")
 	private Date empowerTime;
 
-	@FieldDescribe("标题.")
+	@FieldDescribe("제목.")
 	private String title;
 
 	public EmpowerLog setFromIdentity(String fromIdentity) {

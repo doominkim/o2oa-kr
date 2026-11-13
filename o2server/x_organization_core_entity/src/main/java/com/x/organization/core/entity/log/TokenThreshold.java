@@ -21,7 +21,7 @@ import com.x.organization.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "TokenThreshold", description = "组织令牌阈值.")
+@Schema(name = "TokenThreshold", description = "조직 토큰 임계값.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Log.TokenThreshold.table, uniqueConstraints = {
@@ -43,12 +43,12 @@ public class TokenThreshold extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
@@ -64,17 +64,17 @@ public class TokenThreshold extends SliceJpaObject {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("用户.")
+	@FieldDescribe("사용자.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String threshold_FIELDNAME = "threshold";
-	@FieldDescribe("阀值.")
+	@FieldDescribe("임계값.")
 	@Column(name = ColumnNamePrefix + threshold_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + threshold_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

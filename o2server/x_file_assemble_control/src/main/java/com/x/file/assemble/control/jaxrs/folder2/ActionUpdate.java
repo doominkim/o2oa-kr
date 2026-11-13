@@ -49,7 +49,7 @@ class ActionUpdate extends BaseAction {
 				ids.add(folder.getId());
 				ids.addAll(business.folder2().listSubNested(folder.getId(), FileStatus.VALID.getName()));
 				if(ids.contains(wi.getSuperior())){
-					throw new Exception("无效父目录："+wi.getSuperior()+"，父目录不能为本目录及子目录.");
+					throw new Exception("잘못된 상위 폴더: "+wi.getSuperior()+", 상위 폴더는 자기 자신이나 하위 폴더일 수 없습니다.");
 				}
 			}else{
 				wi.setSuperior(Business.TOP_FOLD);

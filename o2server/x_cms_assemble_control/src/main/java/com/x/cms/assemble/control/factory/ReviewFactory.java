@@ -23,7 +23,7 @@ import com.x.cms.core.entity.Review_;
 import com.x.cms.core.express.tools.CriteriaBuilderTools;
 import com.x.cms.core.express.tools.filter.QueryFilter;
 /**
- * 文档权限控制信息服务类
+ * 문서 권한 제어 정보 서비스 클래스
  */
 public class ReviewFactory extends AbstractFactory {
 
@@ -146,7 +146,7 @@ public class ReviewFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询符合条件的文档信息数量
+	 * 조건에 맞는 문서 정보 수 조회
 	 * @param personName
 	 * @param queryFilter
 	 * @return
@@ -167,7 +167,7 @@ public class ReviewFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询符合条件的文档信息ID
+	 * 조건에 맞는 문서 정보 ID 조회
 	 * @param maxCount
 	 * @param orderField
 	 * @param orderType
@@ -201,7 +201,7 @@ public class ReviewFactory extends AbstractFactory {
 
 
 	/**
-	 * 根据条件查询符合条件的文档信息ID，根据上一条的sequnce查询指定数量的信息
+	 * 조건에 맞는 문서 정보 ID 조회, 이전 항목의 sequnce 기준으로 지정한 수만큼 조회
 	 * @param maxCount
 	 * @param sequenceFieldValue
 	 * @param orderField
@@ -251,7 +251,7 @@ public class ReviewFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询符合条件的文档信息ID，根据上一条的sequnce查询指定数量的信息
+	 * 조건에 맞는 문서 정보 ID 조회, 이전 항목의 sequnce 기준으로 지정한 수만큼 조회
 	 * @param maxCount
 	 * @param sequenceFieldValue
 	 * @param orderField
@@ -301,7 +301,7 @@ public class ReviewFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询指定条数符合条件的文档信息Review列表
+	 * 조건에 맞는 문서 정보 Review 목록을 지정한 건수만큼 조회
 	 * @param orderField
 	 * @param orderType
 	 * @param personName
@@ -321,7 +321,7 @@ public class ReviewFactory extends AbstractFactory {
 		}
 		Predicate p = CriteriaBuilderTools.composePredicateWithQueryFilter( Review_.class, cb, p_permission, root, queryFilter );
 
-		//排序，添加排序列，默认使用sequence
+		//정렬: 정렬 열 추가, 기본값은 sequence
 		List<Order> orders = new ArrayList<>();
 		Order orderWithField = CriteriaBuilderTools.getOrder( cb, root, Review_.class, orderField, orderType );
 		if( orderWithField != null ){
@@ -329,7 +329,7 @@ public class ReviewFactory extends AbstractFactory {
 		}
 
 		if( !Document.isFieldInSequence(orderField)) {
-			//如果是其他的列，很可能排序值不唯一，所以使用多一列排序列来确定每次查询的顺序
+			//다른 열은 정렬 값이 고유하지 않을 수 있으므로 정렬 열을 하나 더 사용해 매 조회 순서를 확정
 			orderWithField = CriteriaBuilderTools.getOrder( cb, root, Review_.class, Review.id_FIELDNAME, orderType );
 			if( orderWithField != null ){
 				orders.add( orderWithField );

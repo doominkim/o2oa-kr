@@ -16,7 +16,7 @@ public class ProcessFactory extends AbstractFactory {
     }
 
     /**
-     * 根据processlist获取同版本的所有流程
+     * processlist로 같은 버전의 모든 프로세스 조회
      * @param processList
      * @return
      * @throws Exception

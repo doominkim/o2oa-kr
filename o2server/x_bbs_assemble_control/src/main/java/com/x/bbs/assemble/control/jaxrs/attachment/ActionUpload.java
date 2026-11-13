@@ -41,13 +41,13 @@ public class ActionUpload extends BaseAction {
 		if( check ){
 			if( StringUtils.isEmpty(subjectId) ){
 				check = false;
-				Exception exception = new ExceptionURLParameterGet( new Exception("未获取到主贴ID") );
+				Exception exception = new ExceptionURLParameterGet( new Exception("게시물 ID를 가져오지 못했습니다") );
 				result.error( exception );
 			}
 		}
 
 		if( check ){
-			//判断文档是否已经存在
+			//문서가 이미 존재하는지 판단
 			try {
 				subject = subjectInfoServiceAdv.get( subjectId );
 			} catch (Exception e) {
@@ -60,7 +60,7 @@ public class ActionUpload extends BaseAction {
 		if( check ){
 			try {
 				fileName = FilenameUtils.getName(new String(disposition.getFileName().getBytes(DefaultCharset.name_iso_8859_1), DefaultCharset.name));
-				/** 禁止不带扩展名的文件上传 */
+				/** 확장자 없는 파일 업로드 금지 */
 				if (StringUtils.isEmpty(fileName)) {
 					check = false;
 					Exception exception = new ExceptionEmptyExtension( fileName );
@@ -81,7 +81,7 @@ public class ActionUpload extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				result.error( e );
-				logger.warn( "系统在获取存储的时候发生异常！" );
+				logger.warn( "시스템이 저장소를 가져오는 중 예외가 발생했습니다!" );
 				logger.error( e, effectivePerson, request, null );
 			}
 		}
@@ -96,7 +96,7 @@ public class ActionUpload extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				result.error( e );
-				logger.warn( "系统在保存文件和更新数据时候发生异常！" );
+				logger.warn( "시스템이 파일 저장 및 데이터 갱신 중 예외가 발생했습니다!" );
 				logger.error( e, effectivePerson, request, null );
 			}
 		}

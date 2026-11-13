@@ -59,10 +59,10 @@ class ActionListWithUnitSubDirectLikeObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList = new ArrayList<>();
 
 		public List<String> getUnitList() {

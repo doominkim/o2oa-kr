@@ -60,7 +60,7 @@ public class ActionListQywxAttendanceDetail extends BaseAction {
                 BetweenTerms betweenTerms = new BetweenTerms();
                 betweenTerms.put("checkin_time_date", ListTools.toList(startDay, endDay));
                 String id = EMPTY_SYMBOL;
-                /** 如果不是空位标志位 */
+                /** 비어 있지 않으면 플래그 설정 */
                 if (!StringUtils.equals(EMPTY_SYMBOL, flag)) {
                     id = flag;
                 }
@@ -115,21 +115,21 @@ public class ActionListQywxAttendanceDetail extends BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("年份")
+        @FieldDescribe("연도")
         private String year;
-        @FieldDescribe("月份")
+        @FieldDescribe("월")
         private String month;
-        @FieldDescribe("日期")
+        @FieldDescribe("날짜")
         private String day;
-        @FieldDescribe("人员")
+        @FieldDescribe("사용자")
         private String person;
-        @FieldDescribe("部门")
+        @FieldDescribe("부서")
         private String unit;
-        @FieldDescribe("顶级部门，会及联查询下级部门")
+        @FieldDescribe("최상위 부서, 하위 부서까지 연쇄 조회")
         private String topUnit;
-        @FieldDescribe("打卡类型:上班打卡，下班打卡，外出打卡")
+        @FieldDescribe("출퇴근 체크 유형:출근 체크, 퇴근 체크, 외출 체크")
         private String checkType;
-        @FieldDescribe("打卡结果:时间异常，地点异常，未打卡，wifi异常，非常用设备")
+        @FieldDescribe("출퇴근 체크 결과:시간 이상, 장소 이상, 미체크, wifi 이상, 비상용 기기")
         private String exceptionType;
 
 
@@ -202,9 +202,9 @@ public class ActionListQywxAttendanceDetail extends BaseAction {
         static final WrapCopier<AttendanceQywxDetail, Wo> copier =
                 WrapCopierFactory.wo(AttendanceQywxDetail.class, Wo.class, null, JpaObject.FieldsInvisible);
 
-        @FieldDescribe("实际打卡时间")
+        @FieldDescribe("실제 출퇴근 체크 시간")
         private Date checkTimeFormat;
-        @FieldDescribe("排序号")
+        @FieldDescribe("정렬 번호")
         private Long rank;
 
         public Long getRank() {

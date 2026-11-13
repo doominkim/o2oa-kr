@@ -5,7 +5,7 @@ import java.util.List;
 import com.x.attendance.entity.AttendanceStatisticalCycle;
 
 /**
- * 存储组织信息的对象
+ * 조직 정보를 저장하는 객체
  * @author O2LEE
  *
  */

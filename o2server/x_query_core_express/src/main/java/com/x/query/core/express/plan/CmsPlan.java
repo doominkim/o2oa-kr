@@ -54,7 +54,7 @@ public class CmsPlan extends Plan {
     public WhereEntry where = new WhereEntry();
 
     /**
-     * 获取文档的路径访问权限
+     * 문서 경로 접근 권한 조회
      *
      * @param bundles
      * @return
@@ -70,7 +70,7 @@ public class CmsPlan extends Plan {
     void adjust() throws Exception {
         this.adjustRuntime();
         this.adjustWhere();
-        // 先调整slectEntry 顺序不能改
+        // 먼저 slectEntry 조정, 순서 변경 불가
         this.adjustSelectList();
     }
 
@@ -164,14 +164,14 @@ public class CmsPlan extends Plan {
 
     @Override
     List<String> listBundle() throws Exception {
-        // 根据where条件查询符合条件的所有文档ID列表
+        // where 조건에 맞는 모든 문서 ID 목록 조회
         List<String> docIds = listBundleDocument();
         if (BooleanUtils.isTrue(this.where.accessible) && StringUtils.isNotEmpty(runtime.person)
                 && !OrganizationDefinition.isSystemUser(this.runtime.person)) {
-            // 过滤可见范围
+            // 공개 범위 필터
             docIds = this.listBundleAccessible(docIds, runtime.person);
         }
-        // 针对DataItem进行判断和条件过滤
+        // DataItem에 대한 판단 및 조건 필터
         List<FilterEntry> filterEntries = new TreeList<>();
         for (FilterEntry o : ListTools.trim(this.filterList, true, true)) {
             if (BooleanUtils.isTrue(o.available())) {
@@ -194,7 +194,7 @@ public class CmsPlan extends Plan {
     }
 
     /**
-     * 过滤信息类型的文档
+     * 정보 유형 문서 필터
      *
      * @return
      * @throws Exception
@@ -276,7 +276,7 @@ public class CmsPlan extends Plan {
             for (CompletableFuture<List<String>> future : futures) {
                 os.addAll(future.get(300, TimeUnit.SECONDS));
             }
-            // 不等于在这里单独通过等于处理
+            // 같지 않음은 여기서 같음으로 별도 처리
             if (Comparison.isNotEquals(f.comparison) || Comparison.isNotIn(f.comparison)) {
                 os = ListUtils.subtract(docIds, os);
             }
@@ -332,7 +332,7 @@ public class CmsPlan extends Plan {
         }
 
         /**
-         * 从组织查询条件，信息类文档
+         * 조직 조회 조건, 정보 유형 문서
          *
          * @param cb
          * @param root
@@ -375,11 +375,11 @@ public class CmsPlan extends Plan {
             if (ps.isEmpty()) {
                 throw new Exception("where is empty.");
             }
-            //业务字段过滤
+            //업무 필드 필터
             ps.add(this.assembleFilterPredicate(cb, root, cq, runtime, filterList));
             ps.add(this.assembleFilterPredicate(cb, root, cq, runtime, runtime.filterList));
             ps = ListTools.trim(ps, true, false);
-            //权限过滤
+            //권한 필터링
             if (BooleanUtils.isTrue(this.accessible) && StringUtils.isNotEmpty(runtime.person)
                     && !OrganizationDefinition.isSystemUser(runtime.person)) {
                 Subquery<Long> subquery = cq.subquery(Long.class);

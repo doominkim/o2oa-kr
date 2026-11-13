@@ -31,7 +31,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		return url.getHost();
 	}
 
-	/* 判断请求是否来自proxyHost,center,application,web都需要单独判断 */
+	/* 요청이 proxyHost에서 왔는지 판단, center, application, web은 각각 판단 필요 */
 	private Boolean fromProxy(HttpServletRequest request, String source) throws Exception {
 		if (StringUtils.isEmpty(source)) {
 			return false;
@@ -95,7 +95,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		if (null != entry) {
 			wrap = new WoWebServer();
 			WebServer webServer = entry.getValue();
-			// 如果只配置了center的porxy而没有配置application的proxy,强制设置成source
+			// center의 porxy만 설정하고 application의 proxy를 설정하지 않으면 강제로 source로 설정
 			wrap.setHost(StringUtils.isBlank(webServer.getProxyHost()) ? source : webServer.getProxyHost());
 			wrap.setPort(webServer.getProxyPort());
 			wrap.setSslEnable(webServer.getSslEnable());
@@ -149,7 +149,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			Application application = ThisApplication.context().applications().randomWithWeight(str);
 			if (null != application) {
 				wrap.setContext(application.getContextPath());
-				// 如果只配置了center的porxy而没有配置application的proxy,强制设置成source
+				// center의 porxy만 설정하고 application의 proxy를 설정하지 않으면 강제로 source로 설정
 				wrap.setHost(StringUtils.isBlank(application.getProxyHost()) ? source : application.getProxyHost());
 				wrap.setPort(application.getProxyPort());
 				wrap.setName(application.getName());

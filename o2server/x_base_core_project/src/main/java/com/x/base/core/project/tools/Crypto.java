@@ -86,16 +86,16 @@ public class Crypto {
 
 	private static byte[] encrypt(byte[] data, byte[] key) throws InvalidKeyException, NoSuchAlgorithmException,
 			InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		// 生成一个可信任的随机数源
+		// 신뢰할 수 있는 난수 소스 생성
 		SecureRandom sr = new SecureRandom();
-		// 从原始密钥数据创建DESKeySpec对象
+		// 원본 키 데이터로 DESKeySpec 객체 생성
 		DESKeySpec dks = new DESKeySpec(key);
-		// 创建一个密钥工厂，然后用它把DESKeySpec转换成SecretKey对象
+		// 키 팩토리를 만들어 DESKeySpec을 SecretKey 객체로 변환
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
 		SecretKey securekey = keyFactory.generateSecret(dks);
-		// Cipher对象实际完成加密操作
+		// Cipher 객체가 실제 암호화 수행
 		Cipher cipher = Cipher.getInstance(DES);
-		// 用密钥初始化Cipher对象
+		// 키로 Cipher 객체 초기화
 		cipher.init(Cipher.ENCRYPT_MODE, securekey, sr);
 		return cipher.doFinal(data);
 	}
@@ -114,7 +114,7 @@ public class Crypto {
 		cipher.init(Cipher.ENCRYPT_MODE, aesKey, gcmSpec);
 		byte[] encryptedData = cipher.doFinal(text);
 
-		// 将IV与密文拼接在一起，以便在解密时使用
+		// 복호화 시 사용할 수 있도록 IV와 암호문을 이어 붙임
 		byte[] encryptedDataWithIv = new byte[iv.length + encryptedData.length];
 		System.arraycopy(iv, 0, encryptedDataWithIv, 0, iv.length);
 		System.arraycopy(encryptedData, 0, encryptedDataWithIv, iv.length, encryptedData.length);
@@ -176,16 +176,16 @@ public class Crypto {
 
 	private static byte[] decrypt(byte[] data, byte[] key) throws InvalidKeyException, NoSuchAlgorithmException,
 			InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		// 生成一个可信任的随机数源
+		// 신뢰할 수 있는 난수 소스 생성
 		SecureRandom sr = new SecureRandom();
-		// 从原始密钥数据创建DESKeySpec对象
+		// 원본 키 데이터로 DESKeySpec 객체 생성
 		DESKeySpec dks = new DESKeySpec(key);
-		// 创建一个密钥工厂，然后用它把DESKeySpec转换成SecretKey对象
+		// 키 팩토리를 만들어 DESKeySpec을 SecretKey 객체로 변환
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
 		SecretKey securekey = keyFactory.generateSecret(dks);
-		// Cipher对象实际完成解密操作
+		// Cipher 객체가 실제 복호화 수행
 		Cipher cipher = Cipher.getInstance(DES);
-		// 用密钥初始化Cipher对象
+		// 키로 Cipher 객체 초기화
 		cipher.init(Cipher.DECRYPT_MODE, securekey, sr);
 		return cipher.doFinal(data);
 	}
@@ -277,10 +277,10 @@ public class Crypto {
 	}
 
 	/**
-	 * AES加密
+	 * AES 암호화
 	 *
-	 * @param data 明文
-	 * @param key  秘钥
+	 * @param data 평문
+	 * @param key  비밀 키
 	 * @return
 	 * @throws Exception
 	 */
@@ -297,10 +297,10 @@ public class Crypto {
 	}
 
 	/**
-	 * AES解密
+	 * AES 복호화
 	 *
-	 * @param data 密文
-	 * @param key  秘钥
+	 * @param data 암호문
+	 * @param key  비밀 키
 	 * @return
 	 * @throws Exception
 	 */

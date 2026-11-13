@@ -25,7 +25,7 @@ class BaseAction extends StandardJaxrsAction {
 
 	static class WoIdentityAbstract extends GsonPropertyObject {
 
-		@FieldDescribe("身份识别名")
+		@FieldDescribe("신분 식별 이름")
 		private List<String> identityList = new ArrayList<>();
 
 		public List<String> getIdentityList() {

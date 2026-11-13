@@ -68,7 +68,7 @@ class ActionExecute extends BaseAction {
 		try {
 			ThisApplication.queueImportData.send(wo.getId());
 		} catch (Exception e) {
-			logger.warn("{}-数据导入处理放入队列异常:{}", wo.getId(), e.getMessage());
+			logger.warn("{}-데이터 가져오기 처리 큐 등록 예외:{}", wo.getId(), e.getMessage());
 		}
 		result.setData(wo);
 		return result;
@@ -80,10 +80,10 @@ class ActionExecute extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("导入记录ID.")
+		@FieldDescribe("가져오기 기록 ID.")
 		private String recordId;
 
-		@FieldDescribe("数据.")
+		@FieldDescribe("데이터.")
 		private JsonElement data;
 
 		public String getRecordId() {

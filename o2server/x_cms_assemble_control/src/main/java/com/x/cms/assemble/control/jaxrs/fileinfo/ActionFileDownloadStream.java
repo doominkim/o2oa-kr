@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * 下载附件
+ * 첨부파일 다운로드
  * @author sword
  */
 public class ActionFileDownloadStream extends BaseAction {

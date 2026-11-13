@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Elinput 基于Element UI的滑块组件。
- * @o2cn 滑块组件
+/** @class Elinput Element UI 기반 슬라이더 컴포넌트.
+ * @o2cn 슬라이더 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/slider|Element UI Slider 滑块}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/slider|Element UI Slider 슬라이더}
  */
 MWF.xApplication.process.Xform.Elslider = MWF.APPElslider =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elslider# */
@@ -21,27 +21,27 @@ MWF.xApplication.process.Xform.Elslider = MWF.APPElslider =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 值改变时触发（使用鼠标拖曳时，只在松开鼠标后触发）。this.event[0]为改变后的值
+         * 값이 변경될 때 발생(마우스로 드래그할 때는 마우스를 놓은 후에만 발생). this.event[0]은 변경된 값
          * @event MWF.xApplication.process.Xform.Elslider#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/slider|Slider 滑块的 Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/slider|Slider 슬라이더의 Events 장}
          */
         /**
-         * 数据改变时触发（使用鼠标拖曳时，活动过程实时触发）。this.event[0]为改变后的值
+         * 데이터가 변경될 때 발생(마우스로 드래그할 때는 이동 중 실시간 발생). this.event[0]은 변경된 값
          * @event MWF.xApplication.process.Xform.Elslider#input
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/slider|Slider 滑块的 Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/slider|Slider 슬라이더의 Events 장}
          */
         "elEvents": ["change", "input"]
     },
     /**
-     * @summary 组件的配置信息，同时也是Vue组件的data。
+     * @summary 컴포넌트 설정 정보이자 Vue 컴포넌트의 data.
      * @member MWF.xApplication.process.Xform.Elinput#json {JsonObject}
      * @example
-     *  //可以在脚本中获取此对象，下面两行代码是等价的，它们获取的是同一个对象
-     * var json = this.form.get("elinput").json;       //获取组件的json对象
-     * var json = this.form.get("elinput").vm.$data;   //获取Vue组件的data数据，
+     *  //스크립트에서 이 객체를 가져올 수 있으며, 아래 두 줄의 코드는 동일한 객체를 가져옴
+     * var json = this.form.get("elinput").json;       //컴포넌트의 json 객체 가져오기
+     * var json = this.form.get("elinput").vm.$data;   //Vue 컴포넌트의 data 데이터 가져오기,
      *
-     * //通过json对象操作Element组件
-     * json.disabled = true;     //设置输入框为禁用
+     * //json 객체로 Element 컴포넌트 조작
+     * json.disabled = true;     //입력 상자를 비활성화로 설정
      */
     // _loadNode: function(){
     //     if (this.isReadonly()) this.json.disabled = true;

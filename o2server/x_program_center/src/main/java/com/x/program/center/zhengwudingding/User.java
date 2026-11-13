@@ -10,7 +10,7 @@ public class User extends GsonPropertyObject {
 
 	// {
 	// "userId": 100010000,
-	// "userName": "张三",
+	// "userName": "홍길동",
 	// "email": "",
 	// "orgList": [
 	// 100016013

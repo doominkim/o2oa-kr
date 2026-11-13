@@ -11,12 +11,12 @@ o2.widget.Tablet = o2.Tablet = new Class({
         "iconfontEnable": false,
         "mainColorEnable": false,
 
-        "contentWidth": 0, //绘图区域宽度，不制定则基础 this.node的宽度
-        "contentHeight": 0, //绘图区域高度，不制定则基础 this.node的高度 - 操作条高度
+        "contentWidth": 0, //그리기 영역 너비, 지정하지 않으면 this.node의 너비 기준
+        "contentHeight": 0, //그리기 영역 높이, 지정하지 않으면 this.node의 높이 - 도구 모음 높이 기준
 
-        "lineWidth": 1, //铅笔粗细
-        "eraserRadiusSize": 20, //橡皮大小
-        "color": "#000000", //画笔颜色
+        "lineWidth": 1, //연필 굵기
+        "eraserRadiusSize": 20, //지우개 크기
+        "color": "#000000", //펜 색상
 
         "zIndex": 20003,
 
@@ -24,9 +24,9 @@ o2.widget.Tablet = o2.Tablet = new Class({
             "save", "|",
             "undo",
             "redo", "|",
-            "eraser", //橡皮
-            "input", //输入法
-            "pen", "|", //笔画
+            "eraser", //지우개
+            "input", //입력기
+            "pen", "|", //획
             "eraserRadius",
             "size",
             "color",
@@ -40,21 +40,21 @@ o2.widget.Tablet = o2.Tablet = new Class({
         ],
 
         "toolHidden": [],
-        "description": "", //描述文字
+        "description": "", //설명 텍스트
         "imageSrc": "",
 
         "eraserEnable": true,
         "inputEnable": false,
 
 
-        "action": null, //uploadImage方法的上传服务，可选，如果不设置，使用公共图片服务
-        "method": "", //使用action 的方法
-        "parameter": {}, //action 时的url参数
+        "action": null, //uploadImage 메서드의 업로드 서비스, 선택. 설정하지 않으면 공용 이미지 서비스 사용
+        "method": "", //action의 메서드 사용
+        "parameter": {}, //action 사용 시 url 매개변수
 
-        "data": null, //formdata 的data
-        "reference": "",  //uploadImage方法的使用 使用公共图片服务上传时的参数
-        "referenceType": "", //使用公共图片服务上传时的参数, 目前支持 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument
-        "resultMaxSize": 0, //使用 reference 时有效
+        "data": null, //formdata의 data
+        "reference": "",  //uploadImage 메서드에서 공용 이미지 서비스로 업로드할 때의 매개변수
+        "referenceType": "", //공용 이미지 서비스로 업로드할 때의 매개변수, 현재 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument 지원
+        "resultMaxSize": 0, //reference 사용 시 유효
 
         "rotateWithMobile": true,
         "toolsScale": 1
@@ -121,14 +121,14 @@ o2.widget.Tablet = o2.Tablet = new Class({
         if( layout.mobile && this.options.rotateWithMobile ){
             this.rotate = true;
         }
-        //存储当前表面状态数组-上一步
+        //현재 화면 상태 배열 저장-이전 단계
         this.preDrawAry = [];
-        //存储当前表面状态数组-下一步
+        //현재 화면 상태 배열 저장-다음 단계
         this.nextDrawAry = [];
-        //中间数组
+        //중간 배열
         this.middleAry = [];
 
-        this.mode = "writing"; //writing表示写状态，erasing表示擦除状态, inputing表示输入法
+        this.mode = "writing"; //writing은 쓰기 상태, erasing은 지우기 상태, inputing은 입력기
 
         this.currentColor = this.options.color;
         this.currentFontFamily = "宋体,SimSun";
@@ -138,7 +138,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
             styles:  this.css.container
         }).inject(this.node);
 
-        if( this.rotate ){ //强制横屏显示
+        if( this.rotate ){ //가로 화면 강제 표시
             this.detectOrient();
         }
 
@@ -267,16 +267,16 @@ o2.widget.Tablet = o2.Tablet = new Class({
         }
     },
     storeToPreArray: function(preData){
-        //当前绘图表面状态
+        //현재 그리기 화면 상태
         if(!preData)preData= this.ctx.getImageData(0,0,this.contentWidth,this.contentHeight);
-        //当前绘图表面进栈
+        //현재 그리기 화면 상태를 스택에 넣기
         this.preDrawAry.push(preData);
     },
     storeToMiddleArray: function( preData ){
-        //当前绘图表面状态
+        //현재 그리기 화면 상태
         if( !preData )preData= this.ctx.getImageData(0,0,this.contentWidth,this.contentHeight);
         if( this.nextDrawAry.length==0){
-            //当前绘图表面进栈
+            //현재 그리기 화면 상태를 스택에 넣기
             this.middleAry.push(preData);
         }else{
             this.middleAry=[];
@@ -413,16 +413,16 @@ o2.widget.Tablet = o2.Tablet = new Class({
             if(this.inputList)this.inputList.each(function (input) {
                 input.hide();
             });
-            ctx.lineCap = "round";　　//设置线条两端为圆弧
-            ctx.lineJoin = "round";　　//设置线条转折为圆弧
+            ctx.lineCap = "round";　　//선 양 끝을 둥글게 설정
+            ctx.lineJoin = "round";　　//선 꺾임을 둥글게 설정
             ctx.lineWidth = this.currentEraserRadius || this.options.eraserRadiusSize;
             ctx.globalCompositeOperation = "destination-out";
         }else{
-            //ctx.strokeStyle="#0000ff" 线条颜色; 默认 #000000
-            if( this.options.color )ctx.strokeStyle= this.currentColor || this.options.color; // 线条颜色; 默认 #000000
-            if( this.options.lineWidth  )ctx.lineWidth= this.currentWidth || this.options.lineWidth; //默认1 像素
-            ctx.lineCap = "butt";　　//设置线条两端为平直的边缘
-            ctx.lineJoin = "miter";　　//设置线条转折为圆弧
+            //ctx.strokeStyle="#0000ff" 선 색상; 기본값 #000000
+            if( this.options.color )ctx.strokeStyle= this.currentColor || this.options.color; // 선 색상; 기본값 #000000
+            if( this.options.lineWidth  )ctx.lineWidth= this.currentWidth || this.options.lineWidth; //기본값 1 픽셀
+            ctx.lineCap = "butt";　　//선 양 끝을 평평한 가장자리로 설정
+            ctx.lineJoin = "miter";　　//선 꺾임을 둥글게 설정
             ctx.globalCompositeOperation = "source-over";
         }
 
@@ -448,7 +448,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
             var clientY = ev.type.indexOf('touch') !== -1 ? ev.touches[0].clientY: ev.clientY;
             var clientX = ev.type.indexOf('touch') !== -1 ? ev.touches[0].clientX: ev.clientX;
             var newX = clientY;
-            var newY = _self.canvas.height - clientX; //y轴旋转偏移 // - parseInt(_self.transformOrigin)
+            var newY = _self.canvas.height - clientX; //y축 회전 오프셋 // - parseInt(_self.transformOrigin)
         }else{
             x = ev.clientX-position.x;
             y = ev.clientY-position.y
@@ -471,7 +471,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
             var mx , my;
             if(_self.rotate && _self.transform > 0){
                 mx = ev.client.y;
-                my = _self.canvas.height - ev.client.x //y轴旋转偏移 //  - + parseInt(_self.transformOrigin);
+                my = _self.canvas.height - ev.client.x //y축 회전 오프셋 //  - + parseInt(_self.transformOrigin);
             }else{
                 mx = ev.client.x - position.x;
                 my = ev.client.y - position.y;
@@ -515,13 +515,13 @@ o2.widget.Tablet = o2.Tablet = new Class({
         //}
     },
     detectOrient: function( node ){
-        // 利用 CSS3 旋转 对根容器逆时针旋转 90 度
+        // CSS3 회전으로 루트 컨테이너를 시계 반대 방향으로 90도 회전
         var size = $(document.body).getSize();
         var width = size.x,
             height = size.y,
             styles = {};
 
-        if( width >= height ){ // 横屏
+        if( width >= height ){ // 가로 화면
             this.transform = 0;
             this.transformOrigin = 0;
             styles = {
@@ -533,7 +533,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
                 "transform-origin": "0 0"
             }
         }
-        else{ // 竖屏
+        else{ // 세로 화면
             this.options.lineWidth = 1.5;
             this.transform = 90;
             this.transformOrigin = width / 2;
@@ -565,7 +565,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
                         }.bind(this)
                     });
                 }else if( this.options.reference && this.options.referenceType ){
-                    //公共图片上传服务
+                    //공용 이미지 업로드 서비스
                     var maxSize = this.options.resultMaxSize;
                     o2.xDesktop.uploadImageByScale(
                         this.options.reference,
@@ -711,10 +711,10 @@ o2.widget.Tablet = o2.Tablet = new Class({
             width: canvas.width,
             height: canvas.height
         });
-        // var blank = document.createElement('canvas');//系统获取一个空canvas对象
+        // var blank = document.createElement('canvas');//시스템에서 빈 canvas 객체 생성
         // blank.width = canvas.width;
         // blank.height = canvas.height;
-        return canvas.toDataURL() == blank.toDataURL(); //比较值相等则为空
+        return canvas.toDataURL() == blank.toDataURL(); //값이 같으면 비어 있음
     },
     save: function (){
         if(layout.mobile){
@@ -848,7 +848,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
                     "onHide": function () {
                         itemNode.fireEvent("mouseout");
                     },
-                    "event": this.inMobileDevice ? "click": "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+                    "event": this.inMobileDevice ? "click": "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
                     "hasMask": false,
                     "zoom":  this.options.toolsScale || 1
                 }
@@ -870,7 +870,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
                     "onHide": function () {
                         itemNode.fireEvent("mouseout");
                     },
-                    "event": this.inMobileDevice ? "click": "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+                    "event": this.inMobileDevice ? "click": "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
                     "hasMask": false,
                     "zoom":  this.options.toolsScale || 1
                 }
@@ -1589,18 +1589,18 @@ o2.widget.Tablet.Collect = new Class({
     Extends: MTooltips,
     options: {
         style: "default",
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position: { //node 固定的位置
-            x: "auto", //x 轴上left center right, auto 系统自动计算
-            y: "auto" //y轴上top middle bottom,  auto 系统自动计算
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position: { //node 고정 위치
+            x: "auto", //x축의 left center right, auto는 시스템 자동 계산
+            y: "auto" //y축의 top middle bottom,  auto는 시스템 자동 계산
         },
-        //event: "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+        //event: "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
 
     },
     initialize: function( container, target, app, data, options, targetCoordinates ){
-        //可以传入target 或者 targetCoordinates，两种选一
-        //传入target,表示触发tooltip的节点，本类根据 this.options.event 自动绑定target的事件
-        //传入targetCoordinates，表示 出发tooltip的位置，本类不绑定触发事件
+        //target 또는 targetCoordinates 중 하나를 전달할 수 있음
+        //target 전달 시 tooltip을 트리거하는 노드를 의미하며, 이 클래스는 this.options.event에 따라 target 이벤트를 자동 바인딩
+        //targetCoordinates 전달 시 tooltip을 트리거하는 위치를 의미하며, 이 클래스는 트리거 이벤트를 바인딩하지 않음
         if( options ){
             this.setOptions(options);
         }
@@ -1767,7 +1767,7 @@ o2.widget.Tablet.Collect = new Class({
             if(layout.mobile){
                 var size = $(document.body).getSize();
                 var width = size.x, height = size.y, styles = {};
-                if( width >= height ){ // 横屏
+                if( width >= height ){ // 가로 화면
                     styles = {
                         "webkit-transform": "rotate(0)",
                         "transform": "rotate(0)",
@@ -1775,7 +1775,7 @@ o2.widget.Tablet.Collect = new Class({
                         "transform-origin": "0 0"
                     }
                 }
-                else{ // 竖屏
+                else{ // 세로 화면
                     //var transformOrigin = dlg.node.getSize().x / 2;
                     styles = {
                         "webkit-transform": "rotate(90deg)",
@@ -1795,21 +1795,21 @@ o2.widget.Tablet.SizePicker = new Class({
     Extends: MTooltips,
     options: {
         style: "default",
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position: { //node 固定的位置
-            x: "auto", //x 轴上left center right, auto 系统自动计算
-            y: "auto" //y轴上top middle bottom,  auto 系统自动计算
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position: { //node 고정 위치
+            x: "auto", //x축의 left center right, auto는 시스템 자동 계산
+            y: "auto" //y축의 top middle bottom,  auto는 시스템 자동 계산
         },
-        //event: "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+        //event: "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
         nodeStyles: {
             "min-width": "260px"
         },
         lineWidth: 1
     },
     initialize: function( container, target, app, data, options, targetCoordinates ){
-        //可以传入target 或者 targetCoordinates，两种选一
-        //传入target,表示触发tooltip的节点，本类根据 this.options.event 自动绑定target的事件
-        //传入targetCoordinates，表示 出发tooltip的位置，本类不绑定触发事件
+        //target 또는 targetCoordinates 중 하나를 전달할 수 있음
+        //target 전달 시 tooltip을 트리거하는 노드를 의미하며, 이 클래스는 this.options.event에 따라 target 이벤트를 자동 바인딩
+        //targetCoordinates 전달 시 tooltip을 트리거하는 위치를 의미하며, 이 클래스는 트리거 이벤트를 바인딩하지 않음
         if( options ){
             this.setOptions(options);
         }
@@ -1988,9 +1988,9 @@ o2.widget.Tablet.SizePicker = new Class({
 
         var coordinates = this.previewNode.getCoordinates();
         var doc = $(document);
-        ctx.strokeStyle="#000000"; //线条颜色; 默认 #000000
-        //ctx.strokeStyle= this.currentColor || this.options.color; // 线条颜色; 默认 #000000
-        ctx.lineWidth=  lineWidth ; //默认1 像素
+        ctx.strokeStyle="#000000"; //선 색상; 기본값 #000000
+        //ctx.strokeStyle= this.currentColor || this.options.color; // 선 색상; 기본값 #000000
+        ctx.lineWidth=  lineWidth ; //기본값 1 픽셀
 
         ctx.beginPath();
         //ctx.moveTo( (coordinates.bottom-coordinates.top - lineWidth ) / 2, coordinates.left);
@@ -2165,9 +2165,9 @@ o2.widget.Tablet.EraserRadiusPicker = new Class({
         var ctx = this.ctx;
         ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight);
 
-        // ctx.strokeStyle="#000000"; //线条颜色; 默认 #000000
-        // ctx.lineCap = "round";　　//设置线条两端为圆弧
-        // ctx.lineJoin = "round";　　//设置线条转折为圆弧
+        // ctx.strokeStyle="#000000"; //선 색상; 기본값 #000000
+        // ctx.lineCap = "round";　　//선 양 끝을 둥글게 설정
+        // ctx.lineJoin = "round";　　//선 꺾임을 둥글게 설정
         // ctx.lineWidth=  lineWidth ;
         // ctx.beginPath();
         // ctx.lineTo( 28, 25  );
@@ -2656,7 +2656,7 @@ o2.widget.Tablet.Input = new Class({
     },
     draw: function( callback ){
         var _self = this;
-        if( !this.editarea.offsetParent && this.image ){ //如果被隐藏了
+        if( !this.editarea.offsetParent && this.image ){ //숨겨진 경우
             return this.image || null;
         }else {
             var editareaSize = this.scaleSize(this.editarea.getSize());
@@ -2695,7 +2695,7 @@ o2.widget.Tablet.Input = new Class({
     },
     // draw: function( callback ){
     //     var _self = this;
-    //     if( !this.editarea.offsetParent && this.image ){ //如果被隐藏了
+    //     if( !this.editarea.offsetParent && this.image ){ //숨겨진 경우
     //         return this.image || null;
     //     }else {
     //         var opt = {
@@ -3135,8 +3135,8 @@ o2.widget.Tablet.Input = new Class({
         var coordinates = this.scaleSize(this.node.getCoordinates( this.relativeNode ));
         coordinates.width  = Math.max(coordinates.width, size.x);
         coordinates.height  = Math.max(coordinates.height, size.y);
-        coordinates.top = coordinates.top - 7; //后台服务的偏差
-        coordinates.left = coordinates.left - 7; //后台服务的偏差
+        coordinates.top = coordinates.top - 7; //백엔드 서비스의 시간 편차
+        coordinates.left = coordinates.left - 7; //백엔드 서비스의 시간 편차
         return coordinates;
     },
     ok: function(){
@@ -3219,7 +3219,7 @@ o2.widget.Tablet.FontFamily = new Class({
         "emptyOptionEnable": false,
         "tooltipsOptions": {
             "displayDelay": 300,
-            "event": "mouseenter" //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+            "event": "mouseenter" //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
         }
     },
     _selectItem: function( itemNode, itemData ){
@@ -3290,7 +3290,7 @@ o2.widget.Tablet.FontSize = new Class({
         "event": "mouseenter",
         "tooltipsOptions": {
             "displayDelay": 300,
-            "event": "mouseenter" //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+            "event": "mouseenter" //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
         }
     },
     _selectItem: function( itemNode, itemData ){

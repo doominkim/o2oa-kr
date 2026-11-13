@@ -40,7 +40,7 @@ class ActionSearch extends BaseAction {
 			throw new ExceptionAccessDenied(effectivePerson);
 		}
 		Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
-		LOGGER.debug("{}开始内容管理设计搜索，关键字：{}", effectivePerson.getDistinguishedName(), wi.getKeyword());
+		LOGGER.debug("{}콘텐츠 관리 설계 검색 시작, 키워드: {}", effectivePerson.getDistinguishedName(), wi.getKeyword());
 		if (StringUtils.isBlank(wi.getKeyword())) {
 			throw new ExceptionFieldEmpty("keyword");
 		}

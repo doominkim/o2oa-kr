@@ -15,7 +15,7 @@ public class TestClient {
 
 		Tika tika = new Tika();
 
-		var bytes = Files.readAllBytes(Paths.get("/data/Temp/我的世界观.pdf"));
+		var bytes = Files.readAllBytes(Paths.get("/data/Temp/나의 세계관.pdf"));
 
 		try (InputStream input = new ByteArrayInputStream(bytes)) {
 			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!" + input.available());

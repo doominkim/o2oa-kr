@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.content.Attachment;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 管理员下载
+ * 관리자 다운로드
  * 
  * @author zhour
  *

@@ -17,12 +17,12 @@ import java.util.List;
 import org.apache.openjpa.persistence.jdbc.Strategy;
 
 /**
- * 考勤个人配置
+ * 근태 개인 설정
  * Created by fancyLou on 2023/2/28.
  * Copyright © 2023 O2. All rights reserved.
  */
 
-@Schema(name = "AttendanceV2PersonConfig", description = "考勤个人配置信息.")
+@Schema(name = "AttendanceV2PersonConfig", description = "근태 개인 설정 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2PersonConfig.table, uniqueConstraints = {
@@ -47,7 +47,7 @@ public class AttendanceV2PersonConfig extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -56,56 +56,56 @@ public class AttendanceV2PersonConfig extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("人员DN")
+    @FieldDescribe("인원 DN")
     @Column(length = length_128B, name = ColumnNamePrefix + person_FIELDNAME)
     private String person;
 
     public static final String onDutyFastCheckInEnable_FIELDNAME = "onDutyFastCheckInEnable";
-    @FieldDescribe("上班极速打卡，app端有效")
+    @FieldDescribe("출근 빠른 체크, app에서만 유효")
     @Column(name = ColumnNamePrefix + onDutyFastCheckInEnable_FIELDNAME)
     private Boolean onDutyFastCheckInEnable = false;
 
     public static final String onDutyFastCheckInBegin_FIELDNAME = "onDutyFastCheckInBegin";
-    @FieldDescribe("上班极速打卡开始，上班打卡前几分钟，默认上班时间前1小时，app端有效")
+    @FieldDescribe("출근 빠른 출근 체크 시작, 출근 체크 몇 분 전, 기본값 출근 시간 1시간 전, 앱에서 유효")
     @Column( name = ColumnNamePrefix + onDutyFastCheckInBegin_FIELDNAME)
     private Integer onDutyFastCheckInBegin = -60;
 
     public static final String onDutyFastCheckInEnd_FIELDNAME = "onDutyFastCheckInEnd";
-    @FieldDescribe("上班极速打卡结束，上班打卡后几分钟，默认到上班时间，app端有效")
+    @FieldDescribe("출근 빠른 출근 체크 종료, 출근 체크 몇 분 후, 기본값 출근 시간까지, 앱에서 유효")
     @Column(  name = ColumnNamePrefix + onDutyFastCheckInEnd_FIELDNAME)
     private Integer onDutyFastCheckInEnd = 0;
 
     public static final String offDutyFastCheckInEnable_FIELDNAME = "offDutyFastCheckInEnable";
-    @FieldDescribe("下班极速打卡，app端有效")
+    @FieldDescribe("퇴근 빠른 체크, app에서만 유효")
     @Column(name = ColumnNamePrefix + offDutyFastCheckInEnable_FIELDNAME)
     private Boolean offDutyFastCheckInEnable = false;
 
     public static final String offDutyFastCheckInBegin_FIELDNAME = "offDutyFastCheckInBegin";
-    @FieldDescribe("下班极速打卡开始，下班后几分钟，默认下班时间，app端有效")
+    @FieldDescribe("퇴근 빠른 퇴근 체크 시작, 퇴근 몇 분 후, 기본값 퇴근 시간, 앱에서 유효")
     @Column( name = ColumnNamePrefix + offDutyFastCheckInBegin_FIELDNAME)
     private Integer offDutyFastCheckInBegin = 0;
 
     public static final String offDutyFastCheckInEnd_FIELDNAME = "offDutyFastCheckInEnd";
-    @FieldDescribe("下班极速打卡结束，下班后几分钟，默认到下班后1小时，app端有效")
+    @FieldDescribe("퇴근 빠른 체크 종료, 퇴근 후 몇 분, 기본값은 퇴근 후 1시간, app에서만 유효")
     @Column(  name = ColumnNamePrefix + offDutyFastCheckInEnd_FIELDNAME)
     private Integer offDutyFastCheckInEnd = 60;
 
 
     public static final String PROPERTIES_FIELDNAME = "properties";
-    @FieldDescribe("更多配置信息.")
+    @FieldDescribe("추가 설정 정보.")
     @Persistent
     @Strategy(JsonPropertiesValueHandler)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

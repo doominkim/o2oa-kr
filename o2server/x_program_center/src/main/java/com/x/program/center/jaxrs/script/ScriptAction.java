@@ -21,18 +21,18 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("script")
-@JaxrsDescribe("脚本操作")
+@JaxrsDescribe("스크립트 작업")
 public class ScriptAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ScriptAction.class);
 
-	@JaxrsMethodDescribe(value = "获取指定Script.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 Script 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -44,7 +44,7 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建新的Script.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "새 Script 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -61,13 +61,13 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定的Script.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "지정 Script 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -79,13 +79,13 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定的Script", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정 Script 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -97,7 +97,7 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有脚本.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 스크립트 나열.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -114,14 +114,14 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示Script对象.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "Script 객체 페이지 목록.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+						   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -133,13 +133,13 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Script内容,并递归附带脚本.", action = ActionGetImported.class)
+	@JaxrsMethodDescribe(value = "Script 내용 조회, 참조 스크립트 재귀 포함.", action = ActionGetImported.class)
 	@GET
 	@Path("name/{name}/imported")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getImported(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+							@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<ActionGetImported.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -151,13 +151,13 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据flag获取Script.", action = ActionFlag.class)
+	@JaxrsMethodDescribe(value = "flag로 Script 조회.", action = ActionFlag.class)
 	@POST
 	@Path("name/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void flag(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("名称") @PathParam("name") String name, JsonElement jsonElement) {
+					 @JaxrsParameterDescribe("이름") @PathParam("name") String name, JsonElement jsonElement) {
 		ActionResult<ActionFlag.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -169,13 +169,13 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Script以及依赖脚本内容。", action = ActionLoad.class)
+	@JaxrsMethodDescribe(value = "Script 및 의존 스크립트 내용 조회.", action = ActionLoad.class)
 	@POST
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void load(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("脚本标识") @PathParam("flag") String flag,
+					 @JaxrsParameterDescribe("스크립트 식별자") @PathParam("flag") String flag,
 					 JsonElement jsonElement) {
 		ActionResult<ActionLoad.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);

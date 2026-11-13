@@ -28,19 +28,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("instant")
-@JaxrsDescribe("主体消息")
+@JaxrsDescribe("주체 메시지")
 public class InstantAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(InstantAction.class);
 
-	@JaxrsMethodDescribe(value = "列示所有的主体消息,需要管理员权限或者MessageManager,下一页.", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "모든 주체 메시지 나열. 관리자 권한 또는 MessageManager 필요, 다음 페이지.", action = ActionListNext.class)
 	@GET
 	@Path("list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -52,14 +52,14 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有的主体消息,需要管理员权限或者MessageManager,上一页.", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "모든 주체 메시지 나열. 관리자 권한 또는 MessageManager 필요, 이전 페이지.", action = ActionListPrev.class)
 	@GET
 	@Path("list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,13 +71,13 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员的主体消息,倒序.", action = ActionListWithCurrentPersonDesc.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 주체 메시지 조회, 내림차순.", action = ActionListWithCurrentPersonDesc.class)
 	@GET
 	@Path("list/currentperson/count/{count}/desc")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentPersonDesc(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPersonDesc.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,13 +89,13 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员的主体消息,排除IM消息,倒序.", action = ActionListWithCurrentPersonWithoutIMDesc.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 주체 메시지 조회. IM 메시지 제외, 내림차순.", action = ActionListWithCurrentPersonWithoutIMDesc.class)
 	@GET
 	@Path("list/currentperson/noim/count/{count}/desc")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentPersonWithoutIMDesc(@Suspended final AsyncResponse asyncResponse,
-										  @Context HttpServletRequest request, @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+										  @Context HttpServletRequest request, @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPersonWithoutIMDesc.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -107,13 +107,13 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员的主体消息,顺序.", action = ActionListWithCurrentPersonAsc.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 주체 메시지 조회, 오름차순.", action = ActionListWithCurrentPersonAsc.class)
 	@GET
 	@Path("list/currentperson/count/{count}/asc")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentPersonAsc(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPersonAsc.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -125,13 +125,13 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员已经消费的主体消息,倒序.", action = ActionListWithCurrentPersonConsumedDesc.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 이미 소비한 주체 메시지 조회, 내림차순.", action = ActionListWithCurrentPersonConsumedDesc.class)
 	@GET
 	@Path("list/currentperson/consumed/count/{count}/desc")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentConsumedPersonDesc(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPersonConsumedDesc.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,13 +143,13 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员已经消费的主体消息,顺序.", action = ActionListWithCurrentPersonConsumedAsc.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 이미 소비한 주체 메시지 조회, 오름차순.", action = ActionListWithCurrentPersonConsumedAsc.class)
 	@GET
 	@Path("list/currentperson/consumed/count/{count}/asc")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentPersonConsumedAsc(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPersonConsumedAsc.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -161,13 +161,13 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员还未消费的主体消息,倒序.", action = ActionListWithCurrentPersonNotConsumedDesc.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 아직 소비하지 않은 주체 메시지 조회, 내림차순.", action = ActionListWithCurrentPersonNotConsumedDesc.class)
 	@GET
 	@Path("list/currentperson/not/consumed/count/{count}/desc")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentNotConsumedPersonDesc(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPersonNotConsumedDesc.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -179,13 +179,13 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员还未消费的主体消息,顺序.", action = ActionListWithCurrentPersonNotConsumedAsc.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 아직 소비하지 않은 주체 메시지 조회, 오름차순.", action = ActionListWithCurrentPersonNotConsumedAsc.class)
 	@GET
 	@Path("list/currentperson/not/consumed/count/{count}/asc")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentPersonNotConsumedAsc(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPersonNotConsumedAsc.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -197,7 +197,7 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将当前用户指定的主体消息标识为已消费.", action = ActionCurrentPersonConsumed.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 지정 주체 메시지를 소비됨으로 표시.", action = ActionCurrentPersonConsumed.class)
 	@PUT
 	@Path("currentperson/consumed")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -214,7 +214,7 @@ public class InstantAction extends StandardJaxrsAction {
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
-	@JaxrsMethodDescribe(value = "将当前用户指定的主体消息标识为已消费.", action = ActionCurrentPersonConsumed.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 지정 주체 메시지를 소비됨으로 표시.", action = ActionCurrentPersonConsumed.class)
 	@POST
 	@Path("currentperson/consumed/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -232,7 +232,7 @@ public class InstantAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将当前用户所有主体消息全部标识为已消费.", action = ActionCurrentPersonConsumedAll.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 모든 주체 메시지를 소비됨으로 표시.", action = ActionCurrentPersonConsumedAll.class)
 	@GET
 	@Path("currentperson/consumed/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

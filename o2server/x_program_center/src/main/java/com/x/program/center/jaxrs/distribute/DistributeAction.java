@@ -23,7 +23,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("distribute")
-@JaxrsDescribe("分配模块")
+@JaxrsDescribe("모듈 할당")
 public class DistributeAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DistributeAction.class);
@@ -32,9 +32,9 @@ public class DistributeAction extends StandardJaxrsAction {
 	@Path("assemble/source/{source}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "获取应用模块信息。", action = ActionAssemble.class)
+	@JaxrsMethodDescribe(value = "앱 모듈 정보 조회.", action = ActionAssemble.class)
 	public void assemble(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("访问来源") @PathParam("source") String source) {
+			@JaxrsParameterDescribe("접근 출처") @PathParam("source") String source) {
 		ActionResult<ActionAssemble.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,9 +50,9 @@ public class DistributeAction extends StandardJaxrsAction {
 	@Path("webserver/assemble/source/{source}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "为用户分派应用主机和Web主机。", action = ActionAssembleWithWebServer.class)
+	@JaxrsMethodDescribe(value = "사용자에게 앱 호스트와 Web 호스트 할당.", action = ActionAssembleWithWebServer.class)
 	public void assembleWithWebServer(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("访问主机名") @PathParam("source") String source) {
+			@JaxrsParameterDescribe("접근 호스트 이름") @PathParam("source") String source) {
 		ActionResult<ActionAssembleWithWebServer.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("empowerlog")
-@JaxrsDescribe("委托日志接口")
+@JaxrsDescribe("위임 로그 API")
 public class EmpowerLogAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(EmpowerLogAction.class);
 
-	@JaxrsMethodDescribe(value = "创建委托日志.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "위임 로그 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

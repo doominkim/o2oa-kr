@@ -29,12 +29,12 @@ import com.x.bbs.assemble.control.jaxrs.configsetting.exception.ExceptionConfigS
 import com.x.bbs.assemble.control.jaxrs.configsetting.exception.ExceptionConfigSettingProcess;
 
 @Path("user/setting")
-@JaxrsDescribe("论坛设置操作")
+@JaxrsDescribe("포럼 설정 작업")
 public class BBSConfigSettingAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(BBSConfigSettingAction.class);
 
-	@JaxrsMethodDescribe(value = "更新论坛设置对象, 配置信息不允许新建和删除操作.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "포럼 설정 객체 갱신, 설정 정보는 생성 및 삭제 불가.", action = ActionUpdate.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ public class BBSConfigSettingAction extends StandardJaxrsAction {
 				result = new ActionUpdate().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionConfigSettingProcess(e, "系统在更新配置信息时发生异常！");
+				Exception exception = new ExceptionConfigSettingProcess(e, "설정 정보를 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -57,13 +57,13 @@ public class BBSConfigSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取论坛设置对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 포럼 설정 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		if (id == null || id.isEmpty()) {
@@ -74,7 +74,7 @@ public class BBSConfigSettingAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionConfigSettingProcess(e, "系统在更新配置信息时发生异常！");
+				Exception exception = new ExceptionConfigSettingProcess(e, "설정 정보를 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -82,7 +82,7 @@ public class BBSConfigSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取所有论坛设置信息列表.", action = ActionGetAll.class)
+	@JaxrsMethodDescribe(value = "전체 포럼 설정 정보 목록 조회.", action = ActionGetAll.class)
 	@GET
 	@Path("all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -94,14 +94,14 @@ public class BBSConfigSettingAction extends StandardJaxrsAction {
 			result = new ActionGetAll().execute(request, effectivePerson);
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionConfigSettingProcess(e, "系统在更新配置信息时发生异常！");
+			Exception exception = new ExceptionConfigSettingProcess(e, "설정 정보를 수정하는 중 오류가 발생했습니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据编码获取论坛设置对象.", action = ActionGetWithCode.class)
+	@JaxrsMethodDescribe(value = "코드로 포럼 설정 객체 조회.", action = ActionGetWithCode.class)
 	@Path("code")
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -117,7 +117,7 @@ public class BBSConfigSettingAction extends StandardJaxrsAction {
 				result = new ActionGetWithCode().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionConfigSettingProcess(e, "系统在更新配置信息时发生异常！");
+				Exception exception = new ExceptionConfigSettingProcess(e, "설정 정보를 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

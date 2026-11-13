@@ -65,7 +65,7 @@ class ActionEdit extends BaseAction {
             String strIdentity = gsontool.toJson(identity);
 
             Wi.copier.copy(wi, identity);
-            /** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+            /** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
             if (this.uniqueDuplicateWhenNotEmpty(business, identity)) {
                 throw new ExceptionDuplicateUnique(identity.getName(), identity.getUnique());
             }
@@ -73,7 +73,7 @@ class ActionEdit extends BaseAction {
             identity.setUnitLevel(unit.getLevel());
             identity.setUnitLevelName(unit.getLevelName());
             identity.setUnitName(unit.getName());
-            /* 设置主身份 */
+            /* 주 신분 설정 */
             if (BooleanUtils.isTrue(identity.getMajor())) {
                 for (Identity o : emc.listEqual(Identity.class, Identity.person_FIELDNAME, identity.getPerson())) {
                     if (!StringUtils.equals(identity.getId(), o.getId())) {

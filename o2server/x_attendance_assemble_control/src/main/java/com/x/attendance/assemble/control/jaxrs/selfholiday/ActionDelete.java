@@ -26,7 +26,7 @@ public class ActionDelete extends BaseAction {
 		EffectivePerson currentPerson = this.effectivePerson(request);
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			AttendanceSelfHoliday attendanceSelfHoliday = emc.find(id, AttendanceSelfHoliday.class);
 			if (null == attendanceSelfHoliday) {
 				Exception exception = new ExceptionSelfHolidayNotExists( id );
@@ -36,19 +36,19 @@ public class ActionDelete extends BaseAction {
 				emc.remove( attendanceSelfHoliday, CheckRemoveType.all );
 				emc.commit();
 
-				//清除缓存
+				//캐시 삭제
 				CacheManager.notify( AttendanceSelfHoliday.class );
 
 				result.setData( new Wo(id) );
 
-				//根据员工休假数据来记录与这条数据相关的统计需求记录
+				//직원 휴가 데이터로 관련 통계 요청 기록 기록
 				List<String> ids = attendanceDetailAnalyseServiceAdv.listAnalyseAttendanceDetailIds( attendanceSelfHoliday.getEmployeeName(), attendanceSelfHoliday.getStartTime(), attendanceSelfHoliday.getEndTime(), effectivePerson.getDebugger() );
 //				if( ListTools.isNotEmpty( ids ) ){
 //					attendanceDetailAnalyseServiceAdv.analyseAttendanceDetails( attendanceSelfHoliday.getEmployeeName(), attendanceSelfHoliday.getStartTime(), attendanceSelfHoliday.getEndTime(), effectivePerson.getDebugger()  );
 //				}
 				if( ListTools.isNotEmpty( ids ) ){
 					for( String _id : ids ){
-						try { //分析保存好的考勤数据
+						try { //저장된 근태 데이터 분석
 //							ThisApplication.detailAnalyseQueue.send( _id );
 						} catch ( Exception e1 ) {
 							e1.printStackTrace();
@@ -57,7 +57,7 @@ public class ActionDelete extends BaseAction {
 				}
 			}			
 		} catch ( Exception e ) {
-			Exception exception = new ExceptionSelfHolidayProcess( e, "系统在删除员工请假记录信息时发生异常.ID：" + id );
+			Exception exception = new ExceptionSelfHolidayProcess( e, "직원 휴가 기록 삭제 중 오류가 발생했습니다. ID:" + id );
 			result.error( exception );
 			logger.error( e, currentPerson, request, null);
 		}

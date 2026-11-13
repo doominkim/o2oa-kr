@@ -31,12 +31,12 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("v2/leavemanager")
-@JaxrsDescribe("假期管理")
+@JaxrsDescribe("휴가 관리")
 public class LeaveManagerAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(LeaveManagerAction.class);
 
-    @JaxrsMethodDescribe(value = "保存假期类型数据.", action = ActionLeaveTypePost.class)
+    @JaxrsMethodDescribe(value = "휴가 유형 데이터 저장.", action = ActionLeaveTypePost.class)
     @POST
     @Path("type")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -55,14 +55,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期类型对象.", action = ActionLeaveTypeGet.class)
+    @JaxrsMethodDescribe(value = "휴가 유형 객체.", action = ActionLeaveTypeGet.class)
     @GET
     @Path("type/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void typeGet(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("类型ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("유형 ID") @PathParam("id") String id) {
         ActionResult<ActionLeaveTypeGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -74,14 +74,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "删除假期类型对象.", action = ActionLeaveTypeDelete.class)
+    @JaxrsMethodDescribe(value = "휴가 유형 객체 삭제.", action = ActionLeaveTypeDelete.class)
     @GET
     @Path("type/delete/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void typeDelete(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("类型ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("유형 ID") @PathParam("id") String id) {
         ActionResult<ActionLeaveTypeDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -93,7 +93,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期类型列表.", action = ActionLeaveTypeList.class)
+    @JaxrsMethodDescribe(value = "휴가 유형 목록.", action = ActionLeaveTypeList.class)
     @GET
     @Path("type/list/all")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -111,13 +111,13 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期类型列表,带当前用户账户.", action = ActionLeaveTypeListWithAccount.class)
+    @JaxrsMethodDescribe(value = "휴가 유형 목록, 현재 사용자 계정 포함.", action = ActionLeaveTypeListWithAccount.class)
     @GET
     @Path("type/list/account")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void typeListWithAccount(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("查询人员的 DN") @QueryParam("person") String person) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("사용자 DN 조회") @QueryParam("person") String person) {
         ActionResult<List<ActionLeaveTypeListWithAccount.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -129,13 +129,13 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期类型列表,带用户账户和当年请假统计.", action = ActionLeaveTypeListWithAccountAndCountYear.class)
+    @JaxrsMethodDescribe(value = "휴가 유형 목록, 사용자 계정과 올해 휴가 통계 포함.", action = ActionLeaveTypeListWithAccountAndCountYear.class)
     @GET
     @Path("type/list/account/{person}/count/year")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void typeListWithAccountAndCountYear(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("查询人员的 DN") @PathParam("person") String person) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("사용자 DN 조회") @PathParam("person") String person) {
         ActionResult<List<ActionLeaveTypeListWithAccountAndCountYear.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -147,14 +147,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期类型列表,是否有限额.", action = ActionLeaveTypeListWithQuotaType.class)
+    @JaxrsMethodDescribe(value = "휴가 유형 목록, 한도 여부.", action = ActionLeaveTypeListWithQuotaType.class)
     @GET
     @Path("type/list/quota/{isLimited}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void typeListWithQuota(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("是否有限额") @PathParam("isLimited") Boolean isLimited) {
+            @JaxrsParameterDescribe("한도 여부") @PathParam("isLimited") Boolean isLimited) {
         ActionResult<List<ActionLeaveTypeListWithQuotaType.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -166,7 +166,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "保存假期规则数据.", action = ActionLeavePolicyPost.class)
+    @JaxrsMethodDescribe(value = "휴가 규칙 데이터 저장.", action = ActionLeavePolicyPost.class)
     @POST
     @Path("policy")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -185,14 +185,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期规则对象.", action = ActionLeavePolicyGet.class)
+    @JaxrsMethodDescribe(value = "휴가 규칙 객체.", action = ActionLeavePolicyGet.class)
     @GET
     @Path("policy/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void policyGet(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("规则ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("규칙 ID") @PathParam("id") String id) {
         ActionResult<ActionLeavePolicyGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -204,14 +204,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期规则列表.", action = ActionLeavePolicyList.class)
+    @JaxrsMethodDescribe(value = "휴가 규칙 목록.", action = ActionLeavePolicyList.class)
     @GET
     @Path("policy/list/type/{typeId}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void policyListWithTypeId(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("假期类型ID") @PathParam("typeId") String typeId) {
+            @JaxrsParameterDescribe("휴가 유형 ID") @PathParam("typeId") String typeId) {
         ActionResult<List<ActionLeavePolicyList.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -224,14 +224,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "删除假期规则对象.", action = ActionLeavePolicyDelete.class)
+    @JaxrsMethodDescribe(value = "휴가 규칙 객체 삭제.", action = ActionLeavePolicyDelete.class)
     @GET
     @Path("policy/delete/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void policyDelete(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("规则ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("규칙 ID") @PathParam("id") String id) {
         ActionResult<ActionLeavePolicyDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -243,7 +243,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询假期余额账户.", action = ActionLeaveAccountSearch.class)
+    @JaxrsMethodDescribe(value = "휴가 잔여 계정 조회.", action = ActionLeaveAccountSearch.class)
     @POST
     @Path("account/search")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -261,7 +261,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询假期流水.", action = ActionLeaveTransactionSearch.class)
+    @JaxrsMethodDescribe(value = "휴가 내역 조회.", action = ActionLeaveTransactionSearch.class)
     @POST
     @Path("transaction/search")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -279,7 +279,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询假期发放批次.", action = ActionLeaveLedgerSearch.class)
+    @JaxrsMethodDescribe(value = "휴가 지급 배치 조회.", action = ActionLeaveLedgerSearch.class)
     @POST
     @Path("ledger/search")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -297,7 +297,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "新增假期发放批次.", action = ActionLeaveLedgerPost.class)
+    @JaxrsMethodDescribe(value = "휴가 지급 배치 추가.", action = ActionLeaveLedgerPost.class)
     @POST
     @Path("ledger")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -315,7 +315,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "调整假期额度批次.", action = ActionLeaveLedgerAdjust.class)
+    @JaxrsMethodDescribe(value = "휴가 한도 조정 배치.", action = ActionLeaveLedgerAdjust.class)
     @POST
     @Path("ledger/adjust")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -333,7 +333,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "批量删除假期发放批次.", action = ActionLeaveLedgerBatchDelete.class)
+    @JaxrsMethodDescribe(value = "휴가 지급 배치 일괄 삭제.", action = ActionLeaveLedgerBatchDelete.class)
     @POST
     @Path("ledger/delete/batch")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -351,17 +351,17 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "Excel导入假期发放批次.", action = ActionLeaveLedgerImportExcel.class)
+    @JaxrsMethodDescribe(value = "Excel로 휴가 지급 배치 가져오기.", action = ActionLeaveLedgerImportExcel.class)
     @POST
     @Path("ledger/import")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public void ledgerImport(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("假期类型ID") @FormDataParam("leaveTypeId") String leaveTypeId,
-            @JaxrsParameterDescribe("发放周期") @FormDataParam("grantPeriod") String grantPeriod,
+            @JaxrsParameterDescribe("휴가 유형 ID") @FormDataParam("leaveTypeId") String leaveTypeId,
+            @JaxrsParameterDescribe("지급 주기") @FormDataParam("grantPeriod") String grantPeriod,
             @FormDataParam(FILE_FIELD) final byte[] bytes,
-            @JaxrsParameterDescribe("Excel文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+            @JaxrsParameterDescribe("Excel 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionLeaveLedgerImportExcel.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -374,14 +374,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据年份查询中国节假日数据.", action = ActionHolidayListWithYear.class)
+    @JaxrsMethodDescribe(value = "연도별 중국 공휴일 데이터 조회.", action = ActionHolidayListWithYear.class)
     @GET
     @Path("holiday/year/{year}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void holidayListWithYear(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("年份") @PathParam("year") Integer year) {
+            @JaxrsParameterDescribe("연도") @PathParam("year") Integer year) {
         ActionResult<ActionHolidayListWithYear.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -393,7 +393,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "新增中国节假日数据.", action = ActionHolidayPost.class)
+    @JaxrsMethodDescribe(value = "중국 공휴일 데이터 추가.", action = ActionHolidayPost.class)
     @POST
     @Path("holiday")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -411,7 +411,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "批量导入中国节假日数据.", action = ActionHolidayImport.class)
+    @JaxrsMethodDescribe(value = "중국 공휴일 데이터 일괄 가져오기.", action = ActionHolidayImport.class)
     @POST
     @Path("holiday/import")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -429,14 +429,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "删除中国节假日数据.", action = ActionHolidayDelete.class)
+    @JaxrsMethodDescribe(value = "중국 공휴일 데이터 삭제.", action = ActionHolidayDelete.class)
     @GET
     @Path("holiday/delete/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void holidayDelete(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("节假日数据ID") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("공휴일 데이터 ID") @PathParam("id") String id) {
         ActionResult<ActionHolidayDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -448,14 +448,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据日期判断中国节假日数据.", action = ActionHolidayGetWithDate.class)
+    @JaxrsMethodDescribe(value = "날짜로 중국 공휴일 데이터 판단.", action = ActionHolidayGetWithDate.class)
     @GET
     @Path("holiday/date/{date}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void holidayGetWithDate(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("日期，格式 yyyy-MM-dd") @PathParam("date") String date) {
+            @JaxrsParameterDescribe("날짜, 형식 yyyy-MM-dd") @PathParam("date") String date) {
         ActionResult<ActionHolidayGetWithDate.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -467,15 +467,15 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询假期申请.", action = ActionLeaveRequestSearch.class)
+    @JaxrsMethodDescribe(value = "휴가 신청 조회.", action = ActionLeaveRequestSearch.class)
     @POST
     @Path("request/search/page/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void requestSearch(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size,
+            @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size,
             JsonElement jsonElement) {
         ActionResult<List<ActionLeaveRequestSearch.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -488,14 +488,14 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据日期查询假期申请.", action = ActionLeaveRequestSearchWithDate.class)
+    @JaxrsMethodDescribe(value = "날짜로 휴가 신청 조회.", action = ActionLeaveRequestSearchWithDate.class)
     @GET
     @Path("request/search/date/{date}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void requestSearchWithDate(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("日期，格式 yyyy-MM-dd") @PathParam("date") String date) {
+            @JaxrsParameterDescribe("날짜, 형식 yyyy-MM-dd") @PathParam("date") String date) {
         ActionResult<List<ActionLeaveRequestSearchWithDate.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -507,7 +507,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据人员和假期类型ID查询今年请假次数.", action = ActionLeaveRequestCountYear.class)
+    @JaxrsMethodDescribe(value = "사용자와 휴가 유형 ID로 올해 휴가 횟수 조회.", action = ActionLeaveRequestCountYear.class)
     @POST
     @Path("request/count/year")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -525,7 +525,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据人员和时间统计假期申请和假期余额.", action = ActionLeaveRequestStatic.class)
+    @JaxrsMethodDescribe(value = "사용자와 시간으로 휴가 신청과 휴가 잔여 통계.", action = ActionLeaveRequestStatic.class)
     @POST
     @Path("request/static")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -543,7 +543,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据开始结束时间计算实际请假天数.", action = ActionLeaveDurationCalculate.class)
+    @JaxrsMethodDescribe(value = "시작·종료 시간으로 실제 휴가 일수 계산.", action = ActionLeaveDurationCalculate.class)
     @POST
     @Path("request/duration/calculate")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -561,7 +561,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据开始结束时间计算实际加班时长.", action = ActionOvertimeDurationCalculate.class)
+    @JaxrsMethodDescribe(value = "시작·종료 시간으로 실제 초과근무 시간 계산.", action = ActionOvertimeDurationCalculate.class)
     @POST
     @Path("request/overtime/duration/calculate")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -579,7 +579,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "假期申请.", action = ActionLeaveRequestApply.class)
+    @JaxrsMethodDescribe(value = "휴가 신청.", action = ActionLeaveRequestApply.class)
     @POST
     @Path("request/apply")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -597,7 +597,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "拒绝请假申请.", action = ActionLeaveRequestUpdateStatus.class)
+    @JaxrsMethodDescribe(value = "휴가 신청 반려.", action = ActionLeaveRequestUpdateStatus.class)
     @POST
     @Path("request/reject")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -615,7 +615,7 @@ public class LeaveManagerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "取消请假申请.", action = ActionLeaveRequestUpdateStatus.class)
+    @JaxrsMethodDescribe(value = "휴가 신청 취소.", action = ActionLeaveRequestUpdateStatus.class)
     @POST
     @Path("request/cancel")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

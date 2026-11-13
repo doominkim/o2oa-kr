@@ -21,18 +21,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("reset")
-@JaxrsDescribe("重置操作")
+@JaxrsDescribe("재설정 작업")
 public class ResetAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ResetAction.class);
 
-	@JaxrsMethodDescribe(value = "验证人员是否存在.", action = ActionCheckCredential.class)
+	@JaxrsMethodDescribe(value = "사용자 존재 여부 확인.", action = ActionCheckCredential.class)
 	@GET
 	@Path("check/credential/{credential}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkCredential(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户标识") @PathParam("credential") String credential) {
+			@JaxrsParameterDescribe("사용자 식별자") @PathParam("credential") String credential) {
 		ActionResult<WrapOutBoolean> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -44,13 +44,13 @@ public class ResetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "验证密码强度等级.", action = ActionCheckPassword.class)
+	@JaxrsMethodDescribe(value = "비밀번호 강도 등급 확인.", action = ActionCheckPassword.class)
 	@GET
 	@Path("check/password/{password}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkPassword(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("密码") @PathParam("password") String password) {
+			@JaxrsParameterDescribe("비밀번호") @PathParam("password") String password) {
 		ActionResult<ActionCheckPassword.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -62,13 +62,13 @@ public class ResetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取短信验证码", action = ActionCode.class)
+	@JaxrsMethodDescribe(value = "SMS 인증 코드 조회", action = ActionCode.class)
 	@GET
 	@Path("code/credential/{credential}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void code(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户标识") @PathParam("credential") String credential) {
+			@JaxrsParameterDescribe("사용자 식별자") @PathParam("credential") String credential) {
 		ActionResult<WrapOutBoolean> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -80,7 +80,7 @@ public class ResetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "重置密码.", action = ActionReset.class)
+	@JaxrsMethodDescribe(value = "비밀번호 재설정.", action = ActionReset.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -97,7 +97,7 @@ public class ResetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "重置密码MockPutToPost.", action = ActionReset.class)
+	@JaxrsMethodDescribe(value = "비밀번호 재설정 MockPutToPost.", action = ActionReset.class)
 	@POST
 	@Path("mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -115,7 +115,7 @@ public class ResetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "匿名更新个人的密码.", action = ActionSetPasswordAnonymous.class)
+	@JaxrsMethodDescribe(value = "익명으로 개인 비밀번호 업데이트.", action = ActionSetPasswordAnonymous.class)
 	@POST
 	@Path("password/anonymous")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

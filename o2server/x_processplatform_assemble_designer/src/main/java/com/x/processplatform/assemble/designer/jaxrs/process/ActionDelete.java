@@ -47,7 +47,7 @@ class ActionDelete extends BaseAction {
 					throw new ExceptionProcessEnabled(id);
 				}
 			}
-			/* 先删除content内容 */
+			/* 먼저 content 내용 삭제 */
 			this.deleteDraft(business, process);
 			this.deleteTask(business, process);
 			this.deleteTaskCompleted(business, process, onlyRemoveNotCompleted);
@@ -64,7 +64,7 @@ class ActionDelete extends BaseAction {
 				this.deleteWorkCompleted(business, process);
 			}
 			this.deleteWorkLog(business, process, onlyRemoveNotCompleted);
-			/* 再删除设计 */
+			/* 다음으로 설계 삭제 */
 			emc.beginTransaction(Process.class);
 			emc.beginTransaction(Agent.class);
 			emc.beginTransaction(Begin.class);

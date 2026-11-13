@@ -71,20 +71,20 @@ class V2ListActivityGoBack extends BaseAction {
 				throw new ExceptionEntityExist(work.getActivity());
 			}
 
-			// 条件判断在前面的control中已经判断
+			// 조건 판단은 앞의 control에서 이미 수행됨
 			WorkLogTree workLogTree = this.workLogTree(business, work.getJob());
 			Node node = workLogTree.location(work);
 			if (null != node) {
 				Nodes nodes = workLogTree.up(node);
 //				List<WorkLog> workLogs = truncateWorkLog(nodes, work.getGoBackActivityToken());
 				List<WorkLog> workLogs = nodes.stream().map(Node::getWorkLog).collect(Collectors.toList());
-				// 过滤掉未链接的,过滤掉退回操作,过滤掉不是manual活动的,过滤掉和当前活动一样的活动,每个活动只取最近一次的workLog,stream需要使用LinkedHashMap保证元素顺序
+				// 연결되지 않은 것, 반려 작업, manual 활동이 아닌 것, 현재 활동과 같은 활동을 필터링하고 활동마다 최근 workLog 하나만 취함, stream은 요소 순서 보장을 위해 LinkedHashMap 사용
 				workLogs = workLogs.stream()
 						.filter(o -> Objects.equals(o.getFromActivityType(), ActivityType.manual)
 								&& (!StringUtils.equalsIgnoreCase(o.getType(), ProcessingAttributes.TYPE_GOBACK))
 								&& BooleanUtils.isTrue(o.getConnected())
 								&& (!StringUtils.equalsIgnoreCase(manual.getId(), o.getFromActivity())))
-						.collect(Collectors.groupingBy(WorkLog::getFromActivity, LinkedHashMap::new, // 生成一个新的LinkedHashMap来存储结果
+						.collect(Collectors.groupingBy(WorkLog::getFromActivity, LinkedHashMap::new, // 결과 저장용 새 LinkedHashMap 생성
 								Collectors.toList()))
 						.entrySet().stream()
 						.map(o -> o.getValue().stream()
@@ -140,7 +140,7 @@ class V2ListActivityGoBack extends BaseAction {
 				list.add(wo);
 			});
 		}
-		// 最后时间按早到晚输出,让前端按时间顺序排序.
+		// 마지막 시간을 이른 순서에서 늦은 순서로 출력, 프론트엔드에서 시간순 정렬.
 		return Lists.reverse(list);
 	}
 
@@ -157,7 +157,7 @@ class V2ListActivityGoBack extends BaseAction {
 				LOGGER.error(e);
 			}
 		});
-		// 拼装上最后一次环节处理人
+		// 마지막 단계 처리자 조립
 		list.stream().forEach(o -> {
 			try {
 				List<String> identities = business.entityManagerContainer()
@@ -178,7 +178,7 @@ class V2ListActivityGoBack extends BaseAction {
 				LOGGER.error(e);
 			}
 		});
-		// 过滤掉为空不可goBack的节点
+		// 비어 있어 goBack 불가한 노드 필터링
 		return list.stream().filter(o -> ListTools.isNotEmpty(o.getLastIdentityList())).collect(Collectors.toList());
 	}
 
@@ -190,17 +190,17 @@ class V2ListActivityGoBack extends BaseAction {
 
 		private static final long serialVersionUID = -7690519507479509393L;
 
-		// 上次处理时间
+		// 이전 처리 시간
 		private Date lastModifyTime;
-		// 返回方式
+		// 반환 방식
 		private String way;
-		// 活动标识
+		// 활동 식별자
 		private String activity;
-		// 活动标识
+		// 활동 식별자
 		private String activityToken;
-		// 活动名称
+		// 활동 이름
 		private String name;
-		// 上次处理人
+		// 이전 처리자
 		private List<String> lastIdentityList = new ArrayList<>();
 
 		public String getName() {

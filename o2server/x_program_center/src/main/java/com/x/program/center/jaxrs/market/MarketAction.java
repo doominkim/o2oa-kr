@@ -30,19 +30,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("market")
-@JaxrsDescribe("应用市场")
+@JaxrsDescribe("앱 마켓")
 public class MarketAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(MarketAction.class);
 
-	@JaxrsMethodDescribe(value = "应用分页查询.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "앱 페이지 조회.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+						   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -54,15 +54,15 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据分类查找应用应用.", action = ActionListByCategoryPaging.class)
+	@JaxrsMethodDescribe(value = "분류별 앱 조회.", action = ActionListByCategoryPaging.class)
 	@GET
 	@Path("list/paging/{page}/size/{size}/category/{category}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listByCategoryPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size,
-							@JaxrsParameterDescribe("分类((0)表示全部分类)") @PathParam("category") String category) {
+						   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size,
+							@JaxrsParameterDescribe("분류((0)은 전체 분류)") @PathParam("category") String category) {
 		ActionResult<List<ActionListByCategoryPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -74,13 +74,13 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+					@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -92,13 +92,13 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取封面图片.", action = ActionGetCoverPic.class)
+	@JaxrsMethodDescribe(value = "표지 이미지 조회.", action = ActionGetCoverPic.class)
 	@GET
 	@Path("{flag}/cover/pic")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getCoverPic(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+					@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetCoverPic.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -110,13 +110,13 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "安装或更新应用.", action = ActionInstallOrUpdate.class)
+	@JaxrsMethodDescribe(value = "앱 설치 또는 업데이트.", action = ActionInstallOrUpdate.class)
 	@GET
 	@Path("{flag}/install/or/update")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public synchronized void installOrUpdate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+					@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionInstallOrUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -128,14 +128,14 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "安装记录分页查询.", action = ActionInstallLogListPaging.class)
+	@JaxrsMethodDescribe(value = "설치 기록 페이지 조회.", action = ActionInstallLogListPaging.class)
 	@POST
 	@Path("list/install/log/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void installLogListPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+						   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionInstallLogListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -147,7 +147,7 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有的应用类型.", action = ActionListCategory.class)
+	@JaxrsMethodDescribe(value = "모든 앱 유형 나열.", action = ActionListCategory.class)
 	@GET
 	@Path("list/category")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -164,7 +164,7 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示推荐的3个应用.", action = ActionTopThree.class)
+	@JaxrsMethodDescribe(value = "추천 앱 3개 나열.", action = ActionTopThree.class)
 	@GET
 	@Path("list/top/three")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -181,13 +181,13 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定应用安装记录.", action = ActionGetInstallLog.class)
+	@JaxrsMethodDescribe(value = "지정 앱 설치 기록 조회.", action = ActionGetInstallLog.class)
 	@GET
 	@Path("{flag}/install/log")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getInstallLog(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+					@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetInstallLog.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -199,13 +199,13 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定应用已安装的版本，返回空表示未安装.", action = ActionGetInstalledVersion.class)
+	@JaxrsMethodDescribe(value = "지정 앱의 설치된 버전 조회, 빈 값이면 미설치.", action = ActionGetInstalledVersion.class)
 	@GET
 	@Path("{flag}/installed/version")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getInstalledVersion(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							  @JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+							  @JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetInstalledVersion.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -217,13 +217,13 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "卸载应用.", action = ActionUninstall.class)
+	@JaxrsMethodDescribe(value = "앱 제거.", action = ActionUninstall.class)
 	@GET
 	@Path("{flag}/uninstall")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public synchronized void uninstall(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+								@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionUninstall.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -235,7 +235,7 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "判断注册在O2云用户是否是VIP用户.", action = ActionIsVip.class)
+	@JaxrsMethodDescribe(value = "O2 클라우드에 등록된 사용자가 VIP 사용자인지 판단.", action = ActionIsVip.class)
 	@GET
 	@Path("cloud/unit/is/vip")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -252,15 +252,15 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "离线安装应用.", action = ActionInstallOffline.class)
+	@JaxrsMethodDescribe(value = "앱 오프라인 설치.", action = ActionInstallOffline.class)
 	@POST
 	@Path("install/offline")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void installOffline(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 							  @FormDataParam(FILE_FIELD) final byte[] bytes,
-							  @JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-							  @JaxrsParameterDescribe(".zip文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+							  @JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+							  @JaxrsParameterDescribe(".zip 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionInstallOffline.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -272,12 +272,12 @@ public class MarketAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载应用安装包", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "앱 설치 패키지 다운로드", action = ActionDownload.class)
 	@GET
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						 @JaxrsParameterDescribe("应用标识") @PathParam("id") String id) {
+						 @JaxrsParameterDescribe("앱 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -8,55 +8,55 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class Person extends GsonPropertyObject {
 
-	@FieldDescribe("匹配字段")
+	@FieldDescribe("일치 필드")
 	private String matchKey;
-	@FieldDescribe("数据库主键")
+	@FieldDescribe("데이터베이스 기본 키")
 	private String id;
-	@FieldDescribe("个人名称")
+	@FieldDescribe("개인 이름")
 	private String name;
-	@FieldDescribe("昵称")
+	@FieldDescribe("닉네임")
 	private String nickName;
-	@FieldDescribe("性别,m:男,f:女,d:未知")
+	@FieldDescribe("성별,m:남,f:여,d:알 수 없음")
 	private GenderType genderType;
-	@FieldDescribe("签名")
+	@FieldDescribe("서명")
 	private String signature;
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	private String description;
-	@FieldDescribe("员工号")
+	@FieldDescribe("사번")
 	private String employee;
-	@FieldDescribe("唯一标识")
+	@FieldDescribe("고유 식별자")
 	private String unique;
-	@FieldDescribe("识别名")
+	@FieldDescribe("식별 이름")
 	private String distinguishedName;
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	private Integer orderNumber;
-	@FieldDescribe("主管")
+	@FieldDescribe("상급자")
 	private String superior;
-	@FieldDescribe("邮件地址")
+	@FieldDescribe("이메일 주소")
 	private String mail;
-	@FieldDescribe("微信号")
+	@FieldDescribe("위챗 ID")
 	private String weixin;
-	@FieldDescribe("qq号")
+	@FieldDescribe("qq 번호")
 	private String qq;
-	@FieldDescribe("手机号")
+	@FieldDescribe("휴대폰 번호")
 	private String mobile;
-	@FieldDescribe("办公电话")
+	@FieldDescribe("사무실 전화")
 	private String officePhone;
-	@FieldDescribe("入职时间")
+	@FieldDescribe("입사일")
 	private Date boardDate;
-	@FieldDescribe("生日")
+	@FieldDescribe("생일")
 	private Date birthday;
-	@FieldDescribe("年龄")
+	@FieldDescribe("나이")
 	private Integer age;
-	@FieldDescribe("企业微信Id")
+	@FieldDescribe("기업 위챗 Id")
 	private String qiyeweixinId;
-	@FieldDescribe("钉钉Id")
+	@FieldDescribe("딩톡 Id")
 	private String dingdingId;
-	@FieldDescribe("政务钉钉Id")
+	@FieldDescribe("정부 딩톡 Id")
 	private String zhengwuDingdingId;
-	@FieldDescribe("华为WeLink id")
+	@FieldDescribe("화웨이 WeLink id")
 	private String weLinkId;
-	@FieldDescribe("主体密级标识.")
+	@FieldDescribe("주체 보안 등급 식별자.")
 	private Integer subjectSecurityClearance;
 
 	public Integer getSubjectSecurityClearance() {

@@ -34,24 +34,24 @@ public class ActionLeaveRequestUpdateStatus extends BaseAction {
     ActionResult<Wo> execute(JsonElement jsonElement, LeaveRequestStatusEnum targetStatus) throws Exception {
         if (!LeaveRequestStatusEnum.REJECTED.equals(targetStatus)
                 && !LeaveRequestStatusEnum.CANCELLED.equals(targetStatus)) {
-            throw new ExceptionWithMessage("请假申请目标状态不正确");
+            throw new ExceptionWithMessage("휴가 신청 대상 상태가 올바르지 않습니다");
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             ActionResult<Wo> result = new ActionResult<>();
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isBlank(wi.getRequestId())) {
-                throw new ExceptionEmptyParameter("请假申请ID");
+                throw new ExceptionEmptyParameter("휴가 신청 ID");
             }
             AttendanceV2LeaveRequest request = emc.find(wi.getRequestId(), AttendanceV2LeaveRequest.class);
             if (request == null) {
-                throw new ExceptionNotExistObject("请假申请 " + wi.getRequestId());
+                throw new ExceptionNotExistObject("휴가 신청 " + wi.getRequestId());
             }
             if (targetStatus.getValue().equals(request.getStatus())) {
                 result.setData(buildWo(request, targetStatus, 0.0, 0));
                 return result;
             }
             if (!LeaveRequestStatusEnum.APPLYING.getValue().equals(request.getStatus())) {
-                throw new ExceptionWithMessage("请假申请当前状态为 " + request.getStatus() + "，不能变更为 "
+                throw new ExceptionWithMessage("휴가 신청의 현재 상태는 " + request.getStatus() + "이며, 다음으로 변경할 수 없습니다: "
                         + targetStatus.getValue());
             }
 
@@ -94,7 +94,7 @@ public class ActionLeaveRequestUpdateStatus extends BaseAction {
             }
             AttendanceV2LeaveLedger ledger = emc.find(useTransaction.getLedgerId(), AttendanceV2LeaveLedger.class);
             if (ledger == null) {
-                throw new ExceptionNotExistObject("假期发放批次 " + useTransaction.getLedgerId());
+                throw new ExceptionNotExistObject("휴가 지급 차수 " + useTransaction.getLedgerId());
             }
             double usedAmount = ledger.getUsedAmount() != null ? ledger.getUsedAmount() : 0.0;
             double remainingAmount = ledger.getRemainingAmount() != null ? ledger.getRemainingAmount() : 0.0;
@@ -143,7 +143,7 @@ public class ActionLeaveRequestUpdateStatus extends BaseAction {
 
         private static final long serialVersionUID = -1270396609149589793L;
 
-        @FieldDescribe("请假申请ID")
+        @FieldDescribe("휴가 신청 ID")
         private String requestId;
 
         public String getRequestId() {
@@ -159,16 +159,16 @@ public class ActionLeaveRequestUpdateStatus extends BaseAction {
 
         private static final long serialVersionUID = 5371987634131454858L;
 
-        @FieldDescribe("请假申请ID")
+        @FieldDescribe("휴가 신청 ID")
         private String requestId;
 
-        @FieldDescribe("请假申请状态")
+        @FieldDescribe("휴가 신청 상태")
         private String status;
 
-        @FieldDescribe("还原的请假额度")
+        @FieldDescribe("복원된 휴가 한도")
         private Double restoredAmount;
 
-        @FieldDescribe("新增的还原流水数量")
+        @FieldDescribe("새로 추가된 복원 내역 수")
         private Integer transactionRows;
 
         public String getRequestId() {

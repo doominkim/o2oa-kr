@@ -42,7 +42,7 @@ class ActionCheckToken extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("令牌")
+		@FieldDescribe("토큰")
 		private String token;
 
 		public String getToken() {

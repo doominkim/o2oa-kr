@@ -118,20 +118,20 @@ class ActionUploadForm extends BaseAction {
 			String key = generalFile.getId();
 			return key;
 		} catch (Exception e) {
-			logger.warn("写表单信息异常" + e.getMessage());
+			logger.warn("양식 정보 쓰기 예외" + e.getMessage());
 		}
 		return "";
 	}
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("待转换html.")
+		@FieldDescribe("변환할 html.")
 		private String workHtml;
 
-		@FieldDescribe("文件标题.")
+		@FieldDescribe("파일 제목.")
 		private String title;
 
-		@FieldDescribe("转pdf页面宽度，默认A4.")
+		@FieldDescribe("pdf 변환 페이지 너비, 기본값 A4.")
 		private Float pageWidth;
 
 		public String getWorkHtml() {

@@ -38,14 +38,14 @@ class ActionLogin extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			// String url =  Config.dingding().getOapiAddress() + "/user/getuserinfo?access_token="
 			// 		+ Config.dingding().corpAccessToken() + "&code=" + code;
-			// v2 版本 api 地址
+			// v2 버전 api 주소
 		  String url =  Config.dingding().getOapiAddress() + "/topapi/v2/user/getuserinfo?access_token="
 					+ Config.dingding().corpAccessToken();
 			GetUserInfoWi wi = new GetUserInfoWi();
 			wi.setCode(code);
 			String value = HttpConnection.postAsString(url, null, wi.toString());
 			if (logger.isDebugEnabled()) {
-				logger.debug("钉钉单点获取用户 userid  返回 ： {}", value);
+				logger.debug("DingTalk SSO 사용자 userid 조회 반환: {}", value);
 			}
 			Type type = new TypeToken<DingdingResponse<GetUserInfoWo>> () {}.getType();
 			DingdingResponse<GetUserInfoWo> resp = gson.fromJson(value, type);
@@ -54,11 +54,11 @@ class ActionLogin extends BaseAction {
 				throw new ExceptionDingding(resp.getErrcode(), resp.getErrmsg());
 			}
 			if (resp.getResult() == null) {
-				throw new ExceptionDingding(-1, " 钉钉返回的 result 为空");
+				throw new ExceptionDingding(-1, " DingTalk가 반환한 result가 비어 있습니다");
 			}
 			String userId = resp.getResult().getUserid();
 			if (StringUtils.isEmpty(userId)) {
-				throw new ExceptionDingding(-1, "钉钉返回的 userId 为空");
+				throw new ExceptionDingding(-1, "DingTalk가 반환한 userId가 비어 있습니다");
 			}
 			Business business = new Business(emc);
 			String personId = business.person().getWithCredential(userId);
@@ -85,11 +85,11 @@ class ActionLogin extends BaseAction {
 		private static final long serialVersionUID = -6591396003538955999L;
 		private String userid;
 		private String device_id; // 
-		private Boolean sys; // 是否管理员
-		private Integer sys_level; // 级别。 1：主管理员 2：子管理员 100：老板 0：其他（如普通员工）
-		private String associated_unionid; // 用户关联的unionId。
-		private String unionid; // 用户unionId。
-		private String name; // 用户名字
+		private Boolean sys; // 관리자 여부
+		private Integer sys_level; // 등급. 1: 주 관리자 2: 하위 관리자 100: 대표 0: 기타(예: 일반 직원)
+		private String associated_unionid; // 사용자에 연결된 unionId.
+		private String unionid; // 사용자 unionId.
+		private String name; // 사용자 이름
     public String getUserid() {
       return userid;
     }

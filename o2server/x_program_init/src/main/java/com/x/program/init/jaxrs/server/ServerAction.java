@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("server")
-@JaxrsDescribe("服务器操作")
+@JaxrsDescribe("서버 작업")
 public class ServerAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServerAction.class);
 
-	@JaxrsMethodDescribe(value = "停止初始服务器.", action = ActionStop.class)
+	@JaxrsMethodDescribe(value = "초기 서버 중지.", action = ActionStop.class)
 	@GET
 	@Path("stop")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -43,7 +43,7 @@ public class ServerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行初始服务器任务.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "초기 서버 작업 실행.", action = ActionExecute.class)
 	@GET
 	@Path("execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -60,7 +60,7 @@ public class ServerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取执行状态.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "실행 상태 조회.", action = ActionExecute.class)
 	@GET
 	@Path("execute/status")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -77,7 +77,7 @@ public class ServerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前产品的license信息.", action = ActionGetLicenseInfo.class)
+	@JaxrsMethodDescribe(value = "현재 제품의 license 정보 조회.", action = ActionGetLicenseInfo.class)
 	@GET
 	@Path("license")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

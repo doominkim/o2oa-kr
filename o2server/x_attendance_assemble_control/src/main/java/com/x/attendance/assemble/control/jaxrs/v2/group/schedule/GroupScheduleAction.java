@@ -26,19 +26,19 @@ import javax.ws.rs.core.MediaType;
  * Copyright © 2023 O2. All rights reserved.
  */
 @Path("v2/groupschedule")
-@JaxrsDescribe("考勤组排班管理")
+@JaxrsDescribe("근태 그룹 교대 편성 관리")
 public class GroupScheduleAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(GroupScheduleAction.class);
 
 
-    @JaxrsMethodDescribe(value = "排班配置数据，方便排班处理.", action = ActionScheduleConfigGet.class)
+    @JaxrsMethodDescribe(value = "교대 편성 설정 데이터, 교대 편성 처리 편의용.", action = ActionScheduleConfigGet.class)
     @GET
     @Path("config/group/{groupId}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void configByGroupId(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                       @JaxrsParameterDescribe("考勤组ID") @PathParam("groupId") String groupId) {
+                       @JaxrsParameterDescribe("근태 그룹 ID") @PathParam("groupId") String groupId) {
         ActionResult<ActionScheduleConfigGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -50,14 +50,14 @@ public class GroupScheduleAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取月份排班数据.", action = ActionScheduleList.class)
+    @JaxrsMethodDescribe(value = "월별 교대 편성 데이터 조회.", action = ActionScheduleList.class)
     @GET
     @Path("list/group/{groupId}/month/{month}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listMonth(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                       @JaxrsParameterDescribe("考勤组ID") @PathParam("groupId") String groupId,
-                       @JaxrsParameterDescribe("月份：yyyy-MM") @PathParam("month") String month) {
+                       @JaxrsParameterDescribe("근태 그룹 ID") @PathParam("groupId") String groupId,
+                       @JaxrsParameterDescribe("월: yyyy-MM") @PathParam("month") String month) {
         ActionResult<List<BaseAction.ScheduleWo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -69,7 +69,7 @@ public class GroupScheduleAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
     
-    @JaxrsMethodDescribe(value = "排班数据查询，后端接口.", action = ActionScheduleListFilter.class)
+    @JaxrsMethodDescribe(value = "교대 편성 데이터 조회, 백엔드 인터페이스.", action = ActionScheduleListFilter.class)
     @POST
     @Path("list/filter")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -87,7 +87,7 @@ public class GroupScheduleAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "月份排班.", action = ActionSchedulePost.class)
+    @JaxrsMethodDescribe(value = "월별 교대 편성.", action = ActionSchedulePost.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)

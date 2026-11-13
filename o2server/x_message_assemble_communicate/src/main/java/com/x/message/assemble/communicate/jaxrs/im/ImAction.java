@@ -35,14 +35,14 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("im")
-@JaxrsDescribe("IM消息")
+@JaxrsDescribe("IM 메시지")
 public class ImAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ImAction.class);
 
 	/**************** im manager ************/
 
-	@JaxrsMethodDescribe(value = "更新IM配置.", action = ActionWriteImConfig.class)
+	@JaxrsMethodDescribe(value = "IM 설정 업데이트.", action = ActionWriteImConfig.class)
 	@POST
 	@Path("manager/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -60,7 +60,7 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取IM配置.", action = ActionImConfig.class)
+	@JaxrsMethodDescribe(value = "IM 설정 조회.", action = ActionImConfig.class)
 	@GET
 	@Path("manager/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -79,7 +79,7 @@ public class ImAction extends StandardJaxrsAction {
 
 	/************* im conversation ************/
 
-	@JaxrsMethodDescribe(value = "创建会话.", action = ActionConversationCreate.class)
+	@JaxrsMethodDescribe(value = "대화 생성.", action = ActionConversationCreate.class)
 	@POST
 	@Path("conversation")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -97,7 +97,7 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "修改会话.", action = ActionConversationUpdate.class)
+	@JaxrsMethodDescribe(value = "대화 수정.", action = ActionConversationUpdate.class)
 	@PUT
 	@Path("conversation")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -115,7 +115,7 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "修改会话.", action = ActionConversationUpdate.class)
+	@JaxrsMethodDescribe(value = "대화 수정.", action = ActionConversationUpdate.class)
 	@POST
 	@Path("conversation/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -134,14 +134,14 @@ public class ImAction extends StandardJaxrsAction {
 	}
 
 
-	// conversation/{id} GET 如果没有扩展就创建扩展
-	@JaxrsMethodDescribe(value = "会话对象.", action = ActionGetConversation.class)
+	// conversation/{id} GET 확장이 없으면 확장 생성
+	@JaxrsMethodDescribe(value = "대화 객체.", action = ActionGetConversation.class)
 	@GET
 	@Path("conversation/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversation(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<ActionGetConversation.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -153,12 +153,12 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "会话头像", action = ActionGetConversationIcon.class)
+	@JaxrsMethodDescribe(value = "대화 프로필 이미지", action = ActionGetConversationIcon.class)
 	@GET
 	@Path("conversation/{id}/icon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<ActionGetConversationIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -171,14 +171,14 @@ public class ImAction extends StandardJaxrsAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "根据业务id查询会话，当前用户在会话中.", action = ActionConversationFindByBusinessId.class)
+	@JaxrsMethodDescribe(value = "업무 id로 대화 조회. 현재 사용자가 대화에 포함됨.", action = ActionConversationFindByBusinessId.class)
 	@GET
 	@Path("conversation/business/{businessId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationFindByBusinessId(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("业务id") @PathParam("businessId") String businessId) {
+			@JaxrsParameterDescribe("업무 id") @PathParam("businessId") String businessId) {
 		ActionResult<List<ActionConversationFindByBusinessId.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -190,14 +190,14 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	// conversation/{id}/read 阅读消息 PUT
-	@JaxrsMethodDescribe(value = "会话阅读消息.", action = ActionConversationRead.class)
+	// conversation/{id}/read 메시지 읽기 PUT
+	@JaxrsMethodDescribe(value = "대화 메시지 읽기.", action = ActionConversationRead.class)
 	@PUT
 	@Path("conversation/{id}/read")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationRead(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<WoId> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -208,13 +208,13 @@ public class ImAction extends StandardJaxrsAction {
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
-	@JaxrsMethodDescribe(value = "会话阅读消息.", action = ActionConversationRead.class)
+	@JaxrsMethodDescribe(value = "대화 메시지 읽기.", action = ActionConversationRead.class)
 	@POST
 	@Path("conversation/{id}/read/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationReadMockputtopost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<WoId> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -226,14 +226,14 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	// conversation/{id}/top 置顶会话 PUT
-	@JaxrsMethodDescribe(value = "会话置顶.", action = ActionConversationSetTop.class)
+	// conversation/{id}/top 대화 상단 고정 PUT
+	@JaxrsMethodDescribe(value = "대화 상단 고정.", action = ActionConversationSetTop.class)
 	@PUT
 	@Path("conversation/{id}/top/set")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationSetTop(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<WoId> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -244,13 +244,13 @@ public class ImAction extends StandardJaxrsAction {
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
-	@JaxrsMethodDescribe(value = "会话置顶.", action = ActionConversationSetTop.class)
+	@JaxrsMethodDescribe(value = "대화 상단 고정.", action = ActionConversationSetTop.class)
 	@POST
 	@Path("conversation/{id}/top/set/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationSetTopMockputtopost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<WoId> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -262,14 +262,14 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	// conversation/{id}/top/cancel 置顶会话 PUT
-	@JaxrsMethodDescribe(value = "会话取消置顶.", action = ActionConversationCancelTop.class)
+	// conversation/{id}/top/cancel 대화 상단 고정 PUT
+	@JaxrsMethodDescribe(value = "대화 상단 고정 취소.", action = ActionConversationCancelTop.class)
 	@PUT
 	@Path("conversation/{id}/top/cancel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationCancelTop(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<WoId> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -280,13 +280,13 @@ public class ImAction extends StandardJaxrsAction {
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
-	@JaxrsMethodDescribe(value = "会话取消置顶.", action = ActionConversationCancelTop.class)
+	@JaxrsMethodDescribe(value = "대화 상단 고정 취소.", action = ActionConversationCancelTop.class)
 	@POST
 	@Path("conversation/{id}/top/cancel/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void conversationCancelTopMockputtopost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("id") String id) {
 		ActionResult<WoId> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -298,7 +298,7 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "我的会话列表.", action = ActionMyConversationList.class)
+	@JaxrsMethodDescribe(value = "내 대화 목록.", action = ActionMyConversationList.class)
 	@GET
 	@Path("conversation/list/my")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -315,12 +315,12 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "退出群聊会话(需开启配置).", action = ActionConversationMemberQuitSelf.class)
+	@JaxrsMethodDescribe(value = "그룹 채팅 대화 나가기(설정 사용 필요).", action = ActionConversationMemberQuitSelf.class)
 	@GET
 	@Path("conversation/{id}/group/quit/self")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void quitGroupSelf(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("会话ID") @PathParam("id") String id) {
+	public void quitGroupSelf(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("대화 ID") @PathParam("id") String id) {
 		ActionResult<ActionConversationMemberQuitSelf.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -332,7 +332,7 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询会话列表，管理员使用.", action = ActionPersonConversationList.class)
+	@JaxrsMethodDescribe(value = "대화 목록 조회. 관리자용.", action = ActionPersonConversationList.class)
 	@POST
 	@Path("conversation/list/with/person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -351,13 +351,13 @@ public class ImAction extends StandardJaxrsAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "删除群聊，只有群主可以删除.", action = ActionDeleteGroupConversation.class)
+	@JaxrsMethodDescribe(value = "그룹 채팅 삭제. 그룹장만 삭제 가능.", action = ActionDeleteGroupConversation.class)
 	@DELETE
 	@Path("conversation/{id}/group")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteGroupConversation(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 ID") @PathParam("id") String id) {
 		ActionResult<ActionDeleteGroupConversation.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -368,13 +368,13 @@ public class ImAction extends StandardJaxrsAction {
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
-	@JaxrsMethodDescribe(value = "删除群聊，只有群主可以删除.", action = ActionDeleteGroupConversation.class)
+	@JaxrsMethodDescribe(value = "그룹 채팅 삭제. 그룹장만 삭제 가능.", action = ActionDeleteGroupConversation.class)
 	@GET
 	@Path("conversation/{id}/group/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteGroupConversationMockdeletetoget(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 ID") @PathParam("id") String id) {
 		ActionResult<ActionDeleteGroupConversation.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -386,13 +386,13 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除单聊会话.", action = ActionDeleteSingleConversationVirtual.class)
+	@JaxrsMethodDescribe(value = "1:1 채팅 대화 삭제.", action = ActionDeleteSingleConversationVirtual.class)
 	@DELETE
 	@Path("conversation/{id}/single")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteSingleConversation(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 ID") @PathParam("id") String id) {
 		ActionResult<ActionDeleteSingleConversationVirtual.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -403,13 +403,13 @@ public class ImAction extends StandardJaxrsAction {
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
-	@JaxrsMethodDescribe(value = "删除单聊会话.", action = ActionDeleteSingleConversationVirtual.class)
+	@JaxrsMethodDescribe(value = "1:1 채팅 대화 삭제.", action = ActionDeleteSingleConversationVirtual.class)
 	@GET
 	@Path("conversation/{id}/single/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteSingleConversationMockdeletetoget(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("대화 ID") @PathParam("id") String id) {
 		ActionResult<ActionDeleteSingleConversationVirtual.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -423,7 +423,7 @@ public class ImAction extends StandardJaxrsAction {
 
 	/************* im message ************/
 
-	@JaxrsMethodDescribe(value = "创建消息，发送消息到某一个会话中.", action = ActionMsgCreate.class)
+	@JaxrsMethodDescribe(value = "메시지 생성. 특정 대화로 메시지 발송.", action = ActionMsgCreate.class)
 	@POST
 	@Path("msg")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -443,13 +443,13 @@ public class ImAction extends StandardJaxrsAction {
 
 
 
-	@JaxrsMethodDescribe(value = "撤回消息", action = ActionMsgRevoke.class)
+	@JaxrsMethodDescribe(value = "메시지 회수", action = ActionMsgRevoke.class)
 	@GET
 	@Path("msg/revoke/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void msgRevoke(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("消息标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("메시지 식별자") @PathParam("id") String id) {
 		ActionResult<ActionMsgRevoke.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -461,14 +461,14 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查询某个会话的消息列表.", action = ActionMsgListWithConversationByPage.class)
+	@JaxrsMethodDescribe(value = "특정 대화의 메시지 목록 페이지 조회.", action = ActionMsgListWithConversationByPage.class)
 	@POST
 	@Path("msg/list/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void msgListByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionMsgListWithConversationByPage.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -480,7 +480,7 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据 id 列表，查询消息列表.", action = ActionMsgListObject.class)
+	@JaxrsMethodDescribe(value = "id 목록으로 메시지 목록 조회.", action = ActionMsgListObject.class)
 	@POST
 	@Path("msg/list/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -498,16 +498,16 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "上传文件.", action = ActionUploadFile.class)
+	@JaxrsMethodDescribe(value = "파일 업로드.", action = ActionUploadFile.class)
 	@POST
 	@Path("msg/upload/{conversationId}/type/{type}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void uploadFile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会话id") @PathParam("conversationId") String conversationId,
-			@JaxrsParameterDescribe("文件类型") @PathParam("type") String type,
-			@JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("上传文件") @FormDataParam(FILE_FIELD) FormDataBodyPart part) {
+			@JaxrsParameterDescribe("대화 id") @PathParam("conversationId") String conversationId,
+			@JaxrsParameterDescribe("파일 유형") @PathParam("type") String type,
+			@JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("파일 업로드") @FormDataParam(FILE_FIELD) FormDataBodyPart part) {
 		ActionResult<ActionUploadFile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -519,12 +519,12 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取文件内容,输出头信息", action = ActionFileDownload.class)
+	@JaxrsMethodDescribe(value = "파일 내용 조회, 헤더 정보 출력", action = ActionFileDownload.class)
 	@GET
 	@Path("msg/download/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionFileDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -536,14 +536,14 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载图片设定宽高后的(png格式).width(0-5000)像素,0代表不限制,height(0-5000)像素,0代表不限制.", action = ActionImageDownloadWidthHeight.class)
+	@JaxrsMethodDescribe(value = "너비·높이를 지정한 이미지 다운로드(png 형식). width(0-5000) 픽셀, 0은 제한 없음, height(0-5000) 픽셀, 0은 제한 없음.", action = ActionImageDownloadWidthHeight.class)
 	@GET
 	@Path("msg/download/{id}/image/width/{width}/height/{height}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void downloadImageWidthHeight(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("宽度") @PathParam("width") Integer width,
-			@JaxrsParameterDescribe("高度") @PathParam("height") Integer height) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("너비") @PathParam("width") Integer width,
+			@JaxrsParameterDescribe("높이") @PathParam("height") Integer height) {
 		ActionResult<ActionImageDownloadWidthHeight.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -556,7 +556,7 @@ public class ImAction extends StandardJaxrsAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "收藏消息.", action = ActionSaveCollectionMsgs.class)
+	@JaxrsMethodDescribe(value = "메시지 즐겨찾기.", action = ActionSaveCollectionMsgs.class)
 	@POST
 	@Path("msg/collection")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -575,7 +575,7 @@ public class ImAction extends StandardJaxrsAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "删除收藏消息.", action = ActionDeleteCollectionMsgs.class)
+	@JaxrsMethodDescribe(value = "즐겨찾기 메시지 삭제.", action = ActionDeleteCollectionMsgs.class)
 	@POST
 	@Path("msg/collection/remove")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -594,14 +594,14 @@ public class ImAction extends StandardJaxrsAction {
 	}
 
 
-	@JaxrsMethodDescribe(value = "分页查询收藏的消息列表.", action = ActionCollectionMsgListWithPersonByPage.class)
+	@JaxrsMethodDescribe(value = "즐겨찾기한 메시지 목록 페이지 조회.", action = ActionCollectionMsgListWithPersonByPage.class)
 	@POST
 	@Path("msg/collection/list/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void collectionListByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size) {
 		ActionResult<List<ActionCollectionMsgListWithPersonByPage.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -613,7 +613,7 @@ public class ImAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "清除聊天消息，至少传入一个条件参数，管理员使用.", action = ActionDeleteMessageByConversation.class)
+	@JaxrsMethodDescribe(value = "채팅 메시지 비우기. 조건 파라미터를 하나 이상 전달해야 함. 관리자용.", action = ActionDeleteMessageByConversation.class)
 	@POST
 	@Path("msg/clear")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -6,11 +6,11 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public class ActionPostEncryptWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -8450939016187545724L;
-	@FieldDescribe("客户标识")
+	@FieldDescribe("클라이언트 식별자")
 	private String client;
-	@FieldDescribe("用户标识")
+	@FieldDescribe("사용자 식별자")
 	private String credential;
-	@FieldDescribe("加密密钥")
+	@FieldDescribe("암호화 키")
 	private String key;
 
 	public String getClient() {

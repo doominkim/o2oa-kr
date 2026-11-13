@@ -34,7 +34,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 2022-11-22
- * 此方法用于在系统菜单->流程中显示可用应用,基于应用中设置的可用身份和可用组织确定
+ * 시스템 메뉴->프로세스에서 사용 가능한 앱을 표시하는 메서드, 앱에 설정된 사용 가능 신분과 사용 가능 조직으로 결정
  * 
  * @author ray
  *
@@ -44,12 +44,12 @@ class ActionListWithPerson extends BaseAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(ActionListWithPerson.class);
 
     /**
-     * 1.身份在可使用列表中 <br/>
-     * 2.组织在可使用组织中 <br/>
-     * 4.没有限定身份和组织 <br/>
-     * 5.个人在应用管理员中 <br/>
-     * 6.应用的创建人员 <br/>
-     * 7.个人有Manage权限或者ProcessPlatformManager身份
+     * 1. 신분이 사용 가능 목록에 있음 <br/>
+     * 2. 조직이 사용 가능 조직에 있음 <br/>
+     * 4. 신분과 조직 제한 없음 <br/>
+     * 5. 개인이 앱 관리자에 포함됨 <br/>
+     * 6. 앱 생성자 <br/>
+     * 7. 개인이 Manage 권한 또는 ProcessPlatformManager 신분을 가짐
      */
     @SuppressWarnings("unchecked")
     ActionResult<List<Wo>> execute(EffectivePerson effectivePerson) throws Exception {
@@ -66,7 +66,7 @@ class ActionListWithPerson extends BaseAction {
             try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
                 Business business = new Business(emc);
                 List<String> identities = business.organization().identity().listWithPerson(effectivePerson);
-                // 去除部门以及上级部门,如果设置了一级部门可用,那么一级部门下属的二级部门也可用
+                // 부서 및 상위 부서 제거, 1단계 부서가 사용 가능하면 그 하위 2단계 부서도 사용 가능
                 List<String> units = business.organization().unit().listWithPersonSupNested(effectivePerson);
                 List<String> roles = business.organization().role().listWithPerson(effectivePerson);
                 // List<String> groups =
@@ -124,7 +124,7 @@ class ActionListWithPerson extends BaseAction {
 
     /**
      * 
-     * 从Process中获取可以启动的Process的application.
+     * Process에서 시작 가능한 Process의 application 조회.
      */
     private List<String> listFromProcess(Business business, EffectivePerson effectivePerson, List<String> roles,
             List<String> identities, List<String> units, List<String> groups) throws Exception {

@@ -45,7 +45,7 @@ import com.x.cms.core.entity.message.DocumentEvent;
 import com.x.query.core.entity.Item;
 
 /**
- * 对文档信息进行持久化服务类
+ * 문서 정보 영속화 서비스 클래스
  *
  * @author sword
  */
@@ -89,7 +89,7 @@ public class DocumentPersistService {
 			}
 
 			document = documentInfoService.save(emc, document);
-			// 如果有数据信息，则保存数据信息
+			// 데이터 정보가 있으면 데이터 정보 저장
 
 			DocumentDataHelper documentDataHelper = new DocumentDataHelper(emc, document);
 			if (jsonElement != null) {
@@ -127,7 +127,7 @@ public class DocumentPersistService {
 	}
 
 	/**
-	 * 根据文档信息更新数据内容中的文档信息内容
+	 * 문서 정보로 데이터 내용의 문서 정보 갱신
 	 *
 	 * @param document
 	 * @return
@@ -139,7 +139,7 @@ public class DocumentPersistService {
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			document = documentInfoService.save(emc, document);
-			// 如果有数据信息，则保存数据信息
+			// 데이터 정보가 있으면 데이터 정보 저장
 			DocumentDataHelper documentDataHelper = new DocumentDataHelper(emc, document);
 			Data data = documentDataHelper.get();
 			data.setDocument(document);
@@ -153,14 +153,14 @@ public class DocumentPersistService {
 	}
 
 	void fill(Item o, Document document) {
-		/** 将DateItem与Document放在同一个分区 */
+		/** DateItem과 Document를 같은 파티션에 배치 */
 		o.setDistributeFactor(document.getDistributeFactor());
 		o.setBundle(document.getId());
 		o.setItemCategory(ItemCategory.cms);
 	}
 
 	/**
-	 * 变更一个文档的分类信息
+	 * 문서의 분류 정보 변경
 	 *
 	 * @param document
 	 * @param categoryInfo
@@ -181,7 +181,7 @@ public class DocumentPersistService {
 
 			document = emc.find(document.getId(), Document.class);
 
-			// 更新document分类相关信息
+			// document 분류 관련 정보 갱신
 			document.setAppId(categoryInfo.getAppId());
 			document.setAppName(categoryInfo.getAppName());
 			document.setCategoryId(categoryInfo.getId());
@@ -211,7 +211,7 @@ public class DocumentPersistService {
 
 			emc.check(document, CheckPersistType.all);
 
-			// 更新数据里的document对象信息
+			// 데이터의 document 객체 정보 갱신
 			documentDataHelper = new DocumentDataHelper(emc, document);
 			data = documentDataHelper.get();
 			data.setDocument(document);
@@ -333,7 +333,7 @@ public class DocumentPersistService {
 	}
 
 	/**
-	 * 删除指定ID的文档
+	 * 지정 ID의 문서 삭제
 	 *
 	 * @param docId
 	 * @throws Exception
@@ -350,7 +350,7 @@ public class DocumentPersistService {
 	}
 
 	/**
-	 * 根据读者作者列表更新文档所有的权限信息
+	 * 독자·작성자 목록으로 문서의 모든 권한 정보 갱신
 	 *
 	 * @param docId
 	 * @param readerList
@@ -371,7 +371,7 @@ public class DocumentPersistService {
 	}
 
 	/**
-	 * 根据组织好的权限信息列表更新指定文档的权限信息
+	 * 구성된 권한 정보 목록으로 지정 문서의 권한 정보 갱신
 	 *
 	 * @param docId
 	 * @param permissionList
@@ -385,7 +385,7 @@ public class DocumentPersistService {
 	}
 
 	/**
-	 * 重新计算所有的文档的权限和review信息
+	 * 모든 문서의 권한과 review 정보 재계산
 	 */
 	public void refreshAllDocumentPermission(boolean flag) throws Exception {
 		try {
@@ -395,9 +395,9 @@ public class DocumentPersistService {
 				List<String> appIds = appInfoService.listAllIds("信息");
 				if (ListTools.isNotEmpty(appIds)) {
 					for (String appId : appIds) {
-						// 查询指定App中所有的文档Id
+						// 지정 App의 모든 문서 Id 조회
 						List<String> documentIds = documentQueryService.listIdsByAppId(appId, "信息", 50000);
-						logger.info("刷新应用{}的数据共{}条", appId, documentIds.size());
+						logger.info("앱 {}의 데이터 총 {}건 새로 고침", appId, documentIds.size());
 						if (ListTools.isNotEmpty(documentIds)) {
 							int count = 0;
 							for (List<String> partDocIds : ListTools.batch(documentIds, 4)) {
@@ -414,7 +414,7 @@ public class DocumentPersistService {
 											document.setIsAllRead(fullRead);
 											emc.commit();
 										} catch (Exception e) {
-											logger.warn("刷新文档权限异常1：{}", e.getMessage());
+											logger.warn("문서 권한 새로 고침 예외 1: {}", e.getMessage());
 										}
 									}, ThisApplication.forkJoinPool());
 									futures.add(future);
@@ -430,12 +430,12 @@ public class DocumentPersistService {
 									try {
 										future.get(200, TimeUnit.SECONDS);
 									} catch (Exception e) {
-										logger.warn("刷新文档权限异常2：{}", e.getMessage());
+										logger.warn("문서 권한 새로 고침 예외 2: {}", e.getMessage());
 									}
 								}
 								futures.clear();
 								if (flag && count > 199 && count % 200 == 0) {
-									logger.info("应用文档权限已刷新{}个", count);
+									logger.info("앱 문서 권한 {}개 새로 고침 완료", count);
 								}
 							}
 						}
@@ -466,7 +466,7 @@ public class DocumentPersistService {
 					documentIds = em.createQuery(cq).getResultList();
 				}
 				if (ListTools.isNotEmpty(documentIds)) {
-					logger.info("刷新分类{}的数据共{}条", categoryId, documentIds.size());
+					logger.info("분류 {}의 데이터 총 {}건 새로 고침", categoryId, documentIds.size());
 					int count = 0;
 					for (List<String> partDocIds : ListTools.batch(documentIds, 10)) {
 						count = count + 10;
@@ -481,7 +481,7 @@ public class DocumentPersistService {
 									document.setIsAllRead(fullRead);
 									emc.commit();
 								} catch (Exception e) {
-									logger.warn("刷新文档权限异常1：{}", e.getMessage());
+									logger.warn("문서 권한 새로 고침 예외 1: {}", e.getMessage());
 								}
 							}, ThisApplication.forkJoinPool());
 							futures.add(future);
@@ -490,21 +490,21 @@ public class DocumentPersistService {
 							try {
 								future.get(200, TimeUnit.SECONDS);
 							} catch (Exception e) {
-								logger.warn("刷新文档权限异常2：{}", e.getMessage());
+								logger.warn("문서 권한 새로 고침 예외 2: {}", e.getMessage());
 							}
 						}
 						futures.clear();
 						if (count > 99 && count % 100 == 0) {
-							logger.info("分类文档权限已刷新{}个", count);
+							logger.info("분류 문서 권한 {}개 새로 고침 완료", count);
 						}
 					}
 				}
 				CacheManager.notify(Document.class);
 				lock.unlock();
 				flag = true;
-				logger.info("完成分类{}的权限刷新", categoryId);
+				logger.info("분류 {}의 권한 새로 고침 완료", categoryId);
 			} else {
-				logger.info("有分类正在刷新权限中，请稍后....");
+				logger.info("권한을 새로 고치는 중인 분류가 있습니다. 잠시 후 다시 시도하십시오....");
 			}
 		} catch (Exception e) {
 			lock.unlock();

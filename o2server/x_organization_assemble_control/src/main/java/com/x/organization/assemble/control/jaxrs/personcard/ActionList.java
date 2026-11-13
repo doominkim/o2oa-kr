@@ -21,7 +21,7 @@ class ActionList extends BaseAction {
 
 
 
-	// 列出创建是当前登录用户的所有线索,并且按照创建时间倒序排列。
+	// 현재 로그인 사용자가 생성한 모든 단서를 생성 시간 역순으로 나열.
 	ActionResult<List<Wo>> MyExecute(EffectivePerson effectivePerson) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<List<Wo>> result = new ActionResult<>();

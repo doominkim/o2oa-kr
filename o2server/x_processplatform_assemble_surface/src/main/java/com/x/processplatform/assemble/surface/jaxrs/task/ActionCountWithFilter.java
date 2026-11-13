@@ -67,7 +67,7 @@ class ActionCountWithFilter extends BaseAction {
 	}
 
 	/**
-	 * 如果同时输入application和process那么和application和process取合集(or)
+	 * application과 process를 함께 입력하면 application과 process의 합집합(or)을 취함
 	 * 
 	 * @param business
 	 * @param personIds

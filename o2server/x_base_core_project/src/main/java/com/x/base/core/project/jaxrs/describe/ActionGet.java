@@ -43,7 +43,7 @@ public class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = 6772463745917569315L;
 
-		@Schema(description = "数据.")
+		@Schema(description = "데이터.")
 		private String data;
 
 		public String getData() {

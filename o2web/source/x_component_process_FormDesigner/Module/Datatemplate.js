@@ -233,7 +233,7 @@ MWF.xApplication.process.FormDesigner.Module.Datatemplate = MWF.FCDatatemplate =
 
 			containerNode.set("html", html );
 
-			//替换重复id
+			//중복 id 교체
 			var changedIdMap = {};
 			var dataTemplateModuleJson;
 			Object.each(data.json.moduleList, function (moduleJson) {
@@ -342,7 +342,7 @@ MWF.xApplication.process.FormDesigner.Module.Datatemplate = MWF.FCDatatemplate =
 	// _getDroppableNodes: function(){
 	// 	var nodes = [this.form.node].concat(this.form.moduleElementNodeList, this.form.moduleContainerNodeList, this.form.moduleComponentNodeList);
 		// this.form.moduleList.each( function(module){
-		// 	//数据模板不能往数据模板里拖
+		// 	//데이터 템플릿은 데이터 템플릿 안으로 끌어 넣을 수 없음
 		// 	if( module.moduleName === "datatemplate" ){
 		// 		var subDoms = this.form.getModuleNodes(module.node);
 		// 		nodes.erase( module.node );
@@ -405,7 +405,7 @@ MWF.xApplication.process.FormDesigner.Module.Datatemplate = MWF.FCDatatemplate =
 		}
 	},
 	setImpExpTableStyles: function(){
-		//设置导入导出表格样式
+		//가져오기·내보내기 표 스타일 설정
 		if(this.form.templateStyles && this.form.templateStyles.table){
 			this.json.impExpTableStyles = Object.merge(this.json.impExpTableStyles||{}, this.form.templateStyles.table.styles||{});
 			this.json.impExpTableTitleStyles = Object.merge(this.json.impExpTableTitleStyles||{}, this.form.templateStyles.table.titleStyles||{});

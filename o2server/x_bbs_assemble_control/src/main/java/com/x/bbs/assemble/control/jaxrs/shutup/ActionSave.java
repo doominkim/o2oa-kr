@@ -69,16 +69,16 @@ class ActionSave extends BaseAction {
 		static WrapCopier<Wi, BBSShutup> copier = WrapCopierFactory.wi(Wi.class, BBSShutup.class, null,
 				ListTools.toList(JpaObject.FieldsUnmodifyExcludeId, BBSShutup.unmuteDateTime_FIELDNAME, BBSShutup.operator_FIELDNAME));
 
-		@FieldDescribe("数据库主键.")
+		@FieldDescribe("데이터베이스 기본 키.")
 		private String id;
 
-		@FieldDescribe("被禁言用户")
+		@FieldDescribe("발언 금지 사용자")
 		private String person;
 
-		@FieldDescribe("解封时间")
+		@FieldDescribe("해제 시간")
 		private String unmuteDate;
 
-		@FieldDescribe("禁言原因")
+		@FieldDescribe("발언 금지 사유")
 		private String reason;
 
 		public String getId() {

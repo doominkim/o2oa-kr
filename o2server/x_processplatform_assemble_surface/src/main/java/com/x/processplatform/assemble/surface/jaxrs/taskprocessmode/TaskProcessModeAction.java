@@ -35,7 +35,7 @@ public class TaskProcessModeAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(TaskProcessModeAction.class);
 
-	@JaxrsMethodDescribe(value = "保存任务处理方式.", action = ActionSaveMode.class)
+	@JaxrsMethodDescribe(value = "작업 처리 방식 저장.", action = ActionSaveMode.class)
 	@POST
 	@Path("save")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -53,7 +53,7 @@ public class TaskProcessModeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前用户指定流程指定环节的任务处理方式记录.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 지정 프로세스 지정 단계 작업 처리 방식 기록 조회.", action = ActionList.class)
 	@POST
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -71,13 +71,13 @@ public class TaskProcessModeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "清除指定用户的任务处理方式记录.", action = ActionManagerClear.class)
+	@JaxrsMethodDescribe(value = "지정 사용자의 작업 처리 방식 기록 삭제.", action = ActionManagerClear.class)
 	@POST
 	@Path("clear/person/{person}/manager")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerClear(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							 @JaxrsParameterDescribe("用户标志，(0)表示清楚所有用户") @PathParam("person") String person) {
+							 @JaxrsParameterDescribe("사용자 식별자, (0)은 모든 사용자 삭제를 의미") @PathParam("person") String person) {
 		ActionResult<ActionManagerClear.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,13 +89,13 @@ public class TaskProcessModeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除记录", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "기록 삭제", action = ActionDelete.class)
 	@GET
 	@Path("{id}/delete")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMode(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

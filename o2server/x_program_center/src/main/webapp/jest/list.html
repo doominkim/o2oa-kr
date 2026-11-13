@@ -64,27 +64,27 @@
 	<script>
 		function tableStructure(){
 			var entityMap = new Map();
-			entityMap.set("x_attendance_core_entity", "考勤相关");
-			entityMap.set("x_bbs_core_entity", "论坛相关");
-			entityMap.set("x_calendar_core_entity", "日程管理相关");
-			entityMap.set("x_cms_core_entity", "内容管理相关");
-			entityMap.set("x_component_core_entity", "组件管理相关");
-			entityMap.set("x_correlation_core_entity", "关联文档相关");
-			entityMap.set("x_file_core_entity", "云文件相关");
-			entityMap.set("x_general_core_entity","常用功能相关");
-			entityMap.set("x_ai_core_entity","AI大模型对接相关");
-			entityMap.set("x_hotpic_core_entity", "热点信息相关");
-			entityMap.set("x_jpush_core_entity", "极光推送");
-			entityMap.set("x_meeting_core_entity", "会议管理相关");
-			entityMap.set("x_message_core_entity", "消息通信相关");
-			entityMap.set("x_mind_core_entity", "脑图模块相关");
-			entityMap.set("x_okr_core_entity", "执行力相关");
-			entityMap.set("x_organization_core_entity", "组织管理相关");
-			entityMap.set("x_portal_core_entity", "门户");
-			entityMap.set("x_processplatform_core_entity", "流程平台");
-			entityMap.set("x_program_center_core_entity", "中心服务");
-			entityMap.set("x_query_core_entity", "数据平台全文检索");
-			entityMap.set("x_teamwork_core_entity", "团队");
+			entityMap.set("x_attendance_core_entity", "근태 관련");
+			entityMap.set("x_bbs_core_entity", "포럼 관련");
+			entityMap.set("x_calendar_core_entity", "일정 관리 관련");
+			entityMap.set("x_cms_core_entity", "콘텐츠 관리 관련");
+			entityMap.set("x_component_core_entity", "컴포넌트 관리 관련");
+			entityMap.set("x_correlation_core_entity", "관련 문서 관련");
+			entityMap.set("x_file_core_entity", "클라우드 파일 관련");
+			entityMap.set("x_general_core_entity","자주 쓰는 기능 관련");
+			entityMap.set("x_ai_core_entity","AI 대규모 모델 연동 관련");
+			entityMap.set("x_hotpic_core_entity", "핫 이슈 관련");
+			entityMap.set("x_jpush_core_entity", "JPush 푸시");
+			entityMap.set("x_meeting_core_entity", "회의 관리 관련");
+			entityMap.set("x_message_core_entity", "메시지 통신 관련");
+			entityMap.set("x_mind_core_entity", "마인드맵 모듈 관련");
+			entityMap.set("x_okr_core_entity", "실행력 관련");
+			entityMap.set("x_organization_core_entity", "조직 관리 관련");
+			entityMap.set("x_portal_core_entity", "포털");
+			entityMap.set("x_processplatform_core_entity", "프로세스 플랫폼");
+			entityMap.set("x_program_center_core_entity", "센터 서비스");
+			entityMap.set("x_query_core_entity", "데이터 플랫폼 전문 검색");
+			entityMap.set("x_teamwork_core_entity", "팀");
 			$(function() {
 				$.getJSON('../describe/table/tableList.json?rd=' + Math.random(), function(json) {
 					$('#apiTable tbody').append("<tr><td colspan='3'><center id='title' style='font-size:32px; font-weight:bold;'>O2OA Table structure</center></td></tr>");
@@ -166,7 +166,7 @@
 				crossDomain : true,
 				error : function(e){
 					$('#contentTable').hide();
-					$('#content').html("<div align = 'center'>您没有权限查看，请以管理员身份登入！</div>");
+					$('#content').html("<div align = 'center'>조회 권한이 없습니다. 관리자 신분으로 로그인하십시오!</div>");
 				}
 			}).done(function(json) {
 				if (json.type == 'success') {
@@ -190,7 +190,7 @@
 							str += '</tr>';
 						});
 
-						//str += '<tr><td>中心服务</td><td>com.x.base.core.project.x_program_center</td><td><a href="http://'+window.location.hostname+':20030/x_program_center/jest/index.html" target="_blank">http://'+window.location.hostname+':20030/x_program_center/jest/index.html</a><br></td></tr>';
+						//str += '<tr><td>센터 서비스</td><td>com.x.base.core.project.x_program_center</td><td><a href="http://'+window.location.hostname+':20030/x_program_center/jest/index.html" target="_blank">http://'+window.location.hostname+':20030/x_program_center/jest/index.html</a><br></td></tr>';
 						str += getCenterJson();
 						str += '</table>';
 						$('#content').html(str);

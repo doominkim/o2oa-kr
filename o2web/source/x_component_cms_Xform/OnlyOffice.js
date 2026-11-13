@@ -80,7 +80,7 @@ MWF.xApplication.cms.Xform.OnlyOffice = MWF.CMSOnlyOffice =  new Class({
             data = this.form.businessData.data[this.json.id];
         }else {
 
-            //判断对应的site里有没有值
+            //해당 site에 값이 있는지 확인
             var attachmentList = this.form.businessData.attachmentList;
             attachmentList = attachmentList.filter(function(att) {
                 return att.site === site;

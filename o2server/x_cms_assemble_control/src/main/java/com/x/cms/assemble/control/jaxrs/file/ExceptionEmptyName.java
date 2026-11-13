@@ -7,6 +7,6 @@ class ExceptionEmptyName extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionEmptyName() {
-		super("名称不能为空.");
+		super("이름은 비워 둘 수 없습니다.");
 	}
 }

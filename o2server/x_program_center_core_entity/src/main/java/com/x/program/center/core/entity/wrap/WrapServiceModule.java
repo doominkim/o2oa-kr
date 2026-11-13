@@ -11,10 +11,10 @@ import com.x.general.core.entity.wrap.WrapApplicationDict;
 
 public class WrapServiceModule extends GsonPropertyObject {
 
-    @FieldDescribe("业务id")
+    @FieldDescribe("업무 id")
     private String id;
 
-    @FieldDescribe("名称.")
+    @FieldDescribe("이름.")
     private String name;
 
     public List<String> listAgentId() throws Exception {
@@ -33,16 +33,16 @@ public class WrapServiceModule extends GsonPropertyObject {
         return ListTools.extractProperty(this.getDictList(), JpaObject.id_FIELDNAME, String.class, true, true);
     }
 
-    @FieldDescribe("接口服务")
+    @FieldDescribe("인터페이스 서비스")
     private List<WrapInvoke> invokeList = new ArrayList<>();
 
-    @FieldDescribe("代理服务")
+    @FieldDescribe("프록시 서비스")
     private List<WrapAgent> agentList = new ArrayList<>();
 
-    @FieldDescribe("脚本")
+    @FieldDescribe("스크립트")
     private List<WrapScript> scriptList = new ArrayList<>();
 
-    @FieldDescribe("数据字典")
+    @FieldDescribe("데이터 사전")
     private List<WrapApplicationDict> dictList = new ArrayList<>();
 
     public String getId() {

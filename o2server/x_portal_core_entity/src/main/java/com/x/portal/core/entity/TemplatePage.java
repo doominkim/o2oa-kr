@@ -30,7 +30,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "TemplatePage", description = "门户页面模板.")
+@Schema(name = "TemplatePage", description = "포털 페이지 템플릿.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.TemplatePage.table, uniqueConstraints = {
@@ -52,23 +52,23 @@ public class TemplatePage extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.category = StringUtils.trimToEmpty(this.category);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	// public static String[] FLA GS = new String[] { JpaObject.id_FIELDNAME };
 
-	/* flag标志位 */
-	/* Entity 默认字段结束 */
+	/* flag 플래그 비트 */
+	/* Entity 기본 필드 끝 */
 
 	public String getDataOrMobileData() {
 		if (StringUtils.isNotEmpty(this.getData())) {
@@ -89,32 +89,32 @@ public class TemplatePage extends SliceJpaObject {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true)
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
-	@FieldDescribe("表单别名.")
+	@FieldDescribe("양식 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String category_FIELDNAME = "category";
-	@FieldDescribe("模版分类.")
+	@FieldDescribe("템플릿 분류.")
 	@Column(length = length_255B, name = ColumnNamePrefix + category_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + category_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true)
 	private String category;
 
 	public static final String availableIdentityList_FIELDNAME = "availableIdentityList";
-	@FieldDescribe("允许使用此模版的身份.")
+	@FieldDescribe("이 템플릿을 사용할 수 있는 신분.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -126,7 +126,7 @@ public class TemplatePage extends SliceJpaObject {
 	private List<String> availableIdentityList;
 
 	public static final String availableUnitList_FIELDNAME = "availableUnitList";
-	@FieldDescribe("允许使用此模版的部门.")
+	@FieldDescribe("이 템플릿을 사용할 수 있는 부서.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -138,7 +138,7 @@ public class TemplatePage extends SliceJpaObject {
 	private List<String> availableUnitList;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("icon Base64编码后的文本.")
+	@FieldDescribe("icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + icon_FIELDNAME)
@@ -146,7 +146,7 @@ public class TemplatePage extends SliceJpaObject {
 	private String icon;
 
 	public static final String preview_FIELDNAME = "preview";
-	@FieldDescribe("缩略图.")
+	@FieldDescribe("썸네일.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + preview_FIELDNAME)
@@ -154,7 +154,7 @@ public class TemplatePage extends SliceJpaObject {
 	private String preview;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("文本内容.")
+	@FieldDescribe("텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	// @Persistent(fetch = FetchType.EAGER)
@@ -163,7 +163,7 @@ public class TemplatePage extends SliceJpaObject {
 	private String data;
 
 	public static final String mobileData_FIELDNAME = "mobileData";
-	@FieldDescribe("移动端文本内容.")
+	@FieldDescribe("모바일 텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + mobileData_FIELDNAME)
@@ -171,7 +171,7 @@ public class TemplatePage extends SliceJpaObject {
 	private String mobileData;
 
 	public static final String controllerList_FIELDNAME = "controllerList";
-	@FieldDescribe("管理者.")
+	@FieldDescribe("관리자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name =  ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + controllerList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -182,21 +182,21 @@ public class TemplatePage extends SliceJpaObject {
 	private List<String> controllerList;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建者.")
+	@FieldDescribe("작성자.")
 	@CheckPersist(allowEmpty = false)
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorPerson_FIELDNAME)
 	private String creatorPerson;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后修改时间.")
+	@FieldDescribe("최종 수정 시간.")
 	@CheckPersist(allowEmpty = false)
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	private Date lastUpdateTime;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后修改者.")
+	@FieldDescribe("최종 수정자.")
 	@CheckPersist(allowEmpty = false)
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdatePerson_FIELDNAME)

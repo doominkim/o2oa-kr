@@ -541,7 +541,7 @@ public class Business {
     }
 
     /**
-     * 判断用户是否有Review的permissionWrite标志
+     * 사용자의 Review에 permissionWrite 표시가 있는지 판단
      *
      * @param effectivePerson
      * @param job
@@ -692,7 +692,7 @@ public class Business {
     }
 
     /**
-     * 用户是否有足够的密级标识等级.
+     * 사용자의 보안 등급이 충분한지 여부.
      *
      * @param person
      * @param objectSecurityClearance

@@ -13,7 +13,7 @@ const {conversation} = defineProps(['conversation'])
 const emit = defineEmits(['closeChatInfo'])
 
 const quitChatShow = ref(false)
-const quitGroupByNormal = ref(false) // 普通成员退出群聊
+const quitGroupByNormal = ref(false) // 일반 멤버 그룹 채팅 나가기
 const isGroupAdmin = ref(false)
 const isGroup = ref(false)
 const memberList = ref([])
@@ -43,12 +43,12 @@ onUnmounted(()=> {
   console.debug(' =====> onUnmounted ChatInfo')
 })
 
-// 关闭
+// 닫기
 const clickClose = () => {
   emit('closeChatInfo')
 }
 
-// 会话名称
+// 대화 이름
 const conversationName = (conversation) => {
   if (conversation.type === "single") {
     let chatPerson = "";
@@ -67,7 +67,7 @@ const conversationName = (conversation) => {
   return conversation.title
 }
 
-// 成员
+// 멤버
 const clickAddMember = () => {
   const topUnitList = imConfigInstance.showAllTopUnit ? [] : layout.session.user.topUnitList || []
   o2.requireApp("Selector","package", () => {
@@ -92,8 +92,8 @@ const clickAddMember = () => {
           if (personList.length === 0 ) {
             $OOUI.notice.warn(lp.alert, lp.msgNeedChoosePerson)
           } else {
-            const mergedArray = [...personList, ...memberList.value] // 合并
-            const set = new Set(mergedArray) // 去重
+            const mergedArray = [...personList, ...memberList.value] // 병합
+            const set = new Set(mergedArray) // 중복 제거
             memberList.value = Array.from(set)
             const body = {
               personList: memberList.value
@@ -143,7 +143,7 @@ const clickRemoveMember = (person) => {
   }
 }
 
-// 编辑群名
+// 그룹 이름 편집
 const clickTitleEdit = (start) => {
   if (!isGroupAdmin.value) {
     return
@@ -164,7 +164,7 @@ const clickSaveTitle = () => {
   updateConversationInfo({title: form.value.title})
   isTitleEdit.value = false
 }
-// 编辑公告
+// 공지 편집
 const clickNoteEdit = (start) => {
   if (!isGroupAdmin.value) {
     return
@@ -202,7 +202,7 @@ const loadConversationOnline = async () => {
   }
 }
 
-// 删除聊天
+// 채팅 삭제
 const clickQuit = () => {
   const msg = isGroup.value ? lp.messageDeleteGroupConversationAlert : lp.messageDeleteSingleConversationAlert
   $OOUI.confirm.warn(lp.alert, msg).then((result) => {
@@ -213,7 +213,7 @@ const clickQuit = () => {
   })
 }
 
-// 单聊删除会话、群聊管理员删除会话
+// 1:1 채팅 대화 삭제, 그룹 채팅 관리자 대화 삭제
 const quitChat = async () => {
   if (isGroup.value && isGroupAdmin.value) {
     const result = await imAction('deleteGroupConversation', conversation.id)
@@ -238,9 +238,9 @@ const clickQuitGroup = () => {
     }
   })
 }
-// 普通成员 退出群聊
+// 일반 멤버 그룹 채팅 나가기
 const quitGroup = async () => {
-   if (isGroup.value && !isGroupAdmin.value) { // 群聊并且不是管理员
+   if (isGroup.value && !isGroupAdmin.value) { // 그룹 채팅이면서 관리자가 아님
      const result = await imAction('quitGroupSelf', conversation.id)
      if (result) {
        console.info(`일반 멤버 그룹 대화 나가기 성공 `, result)
@@ -262,7 +262,7 @@ const quitGroup = async () => {
     </div>
     <div class="im-divider-v"></div>
     <div class="im-chat-info-body">
-      <!--  头像和名称    -->
+      <!--  프로필 사진과 이름    -->
       <div class="im-chat-info-avatar-name">
         <div class="avatar">
           <img :src=" conversationIconUrl(conversation.id) " alt="avatar">
@@ -278,7 +278,7 @@ const quitGroup = async () => {
 
 
       </div>
-      <!--        成员列表-->
+      <!--        구성원 목록-->
       <div class="im-chat-info-item" v-if="isGroup">
         <div class="title-line">
           <div class="tag"></div>
@@ -314,7 +314,7 @@ const quitGroup = async () => {
         </div>
       </div>
       <div class="margin-top-10 margin-bottom-10"></div>
-      <!--        群名-->
+      <!--        그룹 이름-->
 <!--      <div class="im-chat-info-item" v-if="isGroup">-->
 <!--        <div class="label">{{lp.groupName}}</div>-->
 <!--        <div v-if="!isTitleEdit" :class=" isGroupAdmin ? 'value pointer' : 'value' "  @click="clickTitleEdit(true)">{{ form.title ? form.title : lp.groupNamePlaceholder}} <i class="ooicon-edit"></i> </div>-->
@@ -326,7 +326,7 @@ const quitGroup = async () => {
 <!--          <oo-button  type="cancel" style=" margin-left: 0.7rem;" @click="clickTitleEdit(false)">{{lp.cancel}}</oo-button>-->
 <!--        </div>-->
 <!--      </div>-->
-      <!--        群公告-->
+      <!--        그룹 공지-->
       <div class="im-chat-info-item" v-if="isGroup">
         <div class="title-line">
           <div class="tag"></div>
@@ -344,7 +344,7 @@ const quitGroup = async () => {
           <oo-button  type="cancel" style=" margin-left: 0.7rem;" @click="clickNoteEdit(false)">{{lp.cancel}}</oo-button>
         </div>
       </div>
-      <!--        置顶-->
+      <!--        상단 고정-->
 <!--      <div class="im-chat-info-item">-->
 <!--        <div class="label row">-->
 <!--          <div>-->
@@ -354,7 +354,7 @@ const quitGroup = async () => {
 <!--        </div>-->
 <!--      </div>-->
 
-      <!--        退出-->
+      <!--        나가기-->
       <div  v-if="quitChatShow">
         <div class="im-divider-v margin-top-10 margin-bottom-10"></div>
         <div class="im-chat-info-item" @click="clickQuit">
@@ -362,7 +362,7 @@ const quitGroup = async () => {
         </div>
         <div class="im-divider-v"></div>
       </div>
-      <!--   退出群聊 普通成员   -->
+      <!--   그룹 채팅 나가기 (일반 구성원)   -->
       <div  v-if="quitGroupByNormal">
         <div class="im-divider-v margin-top-10 margin-bottom-10"></div>
         <div class="im-chat-info-item" @click="clickQuitGroup">

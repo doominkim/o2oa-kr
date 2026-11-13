@@ -15,7 +15,7 @@ import com.x.attendance.entity.AttendanceScheduleSetting;
 import com.x.attendance.entity.AttendanceScheduleSetting_;
 import com.x.base.core.project.exception.ExceptionWhen;
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
  */
 public class AttendanceScheduleSettingFactory extends AbstractFactory {
 	
@@ -23,12 +23,12 @@ public class AttendanceScheduleSettingFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的AttendanceScheduleSetting应用信息对象")
+	//@MethodDescribe("지정 Id의 AttendanceScheduleSetting 앱 정보 객체 조회")
 	public AttendanceScheduleSetting get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceScheduleSetting.class, ExceptionWhen.none);
 	}
 	
-//	@MethodDescribe("列示全部的AttendanceScheduleSetting应用信息列表")
+//	@MethodDescribe("전체 AttendanceScheduleSetting 앱 정보 목록 조회")
 	@SuppressWarnings("unused")
 	public List<AttendanceScheduleSetting> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceScheduleSetting.class);
@@ -38,7 +38,7 @@ public class AttendanceScheduleSettingFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceScheduleSetting应用信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceScheduleSetting 앱 정보 목록 조회")
 	public List<AttendanceScheduleSetting> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<AttendanceScheduleSetting>();
@@ -51,7 +51,7 @@ public class AttendanceScheduleSettingFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("根据组织名称，查询组织排班信息对象")
+	//@MethodDescribe("조직 이름으로 조직 근무 편성 정보 객체 조회")
 	public List<String> listByUnitName( String unitName ) throws Exception{		
 		EntityManager em = this.entityManagerContainer().get(AttendanceScheduleSetting.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -62,7 +62,7 @@ public class AttendanceScheduleSettingFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("根据组织名称，查询组织排班信息对象")
+	//@MethodDescribe("조직 이름으로 조직 근무 편성 정보 객체 조회")
 	public List<String> listByUnitNames( List<String> unitNameList ) throws Exception{		
 		EntityManager em = this.entityManagerContainer().get(AttendanceScheduleSetting.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -73,7 +73,7 @@ public class AttendanceScheduleSettingFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("根据顶层组织名称，查询顶层组织排班信息对象")
+	//@MethodDescribe("최상위 조직 이름으로 최상위 조직 근무 편성 정보 객체 조회")
 	public List<String> listByTopUnitName( String topUnitName ) throws Exception{		
 		EntityManager em = this.entityManagerContainer().get(AttendanceScheduleSetting.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

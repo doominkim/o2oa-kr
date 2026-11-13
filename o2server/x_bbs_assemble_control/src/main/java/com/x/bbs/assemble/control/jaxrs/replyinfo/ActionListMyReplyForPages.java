@@ -55,7 +55,7 @@ public class ActionListMyReplyForPages extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionReplyInfoProcess(e,
-						"根据个人查询主题内所有的回复数量时发生异常。Person:" + effectivePerson.getDistinguishedName());
+						"개인별 주제 내 전체 댓글 수를 조회하는 중 오류가 발생했습니다. Person:" + effectivePerson.getDistinguishedName());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -68,7 +68,7 @@ public class ActionListMyReplyForPages extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionReplyInfoProcess(e,
-							"根据个人查询主题内所有的回复列表时发生异常。Person:" + effectivePerson.getDistinguishedName());
+							"개인별 주제 내 전체 댓글 목록을 조회하는 중 오류가 발생했습니다. Person:" + effectivePerson.getDistinguishedName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -93,7 +93,7 @@ public class ActionListMyReplyForPages extends BaseAction {
 					wraps = Wo.copier.copy(replyInfoList_out);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionReplyInfoProcess(e, "将查询结果转换成可以输出的数据信息时发生异常。");
+					Exception exception = new ExceptionReplyInfoProcess(e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -128,10 +128,10 @@ public class ActionListMyReplyForPages extends BaseAction {
 		public static WrapCopier<BBSReplyInfo, Wo> copier = WrapCopierFactory.wo(BBSReplyInfo.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("创建人姓名")
+		@FieldDescribe("작성자 이름")
 		private String creatorNameShort = "";
 
-		@FieldDescribe("审核人姓名")
+		@FieldDescribe("심사자 이름")
 		private String auditorNameShort = "";
 
 		public String getCreatorNameShort() {
@@ -153,7 +153,7 @@ public class ActionListMyReplyForPages extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("主题Id")
+		@FieldDescribe("주제 Id")
 		private String subjectId = null;
 
 		public static List<String> Excludes = new ArrayList<String>(JpaObject.FieldsUnmodify);

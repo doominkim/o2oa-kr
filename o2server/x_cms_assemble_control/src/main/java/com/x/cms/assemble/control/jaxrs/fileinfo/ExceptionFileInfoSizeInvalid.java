@@ -7,6 +7,6 @@ class ExceptionFileInfoSizeInvalid extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionFileInfoSizeInvalid() {
-		super("附件文件信息大小size参数不合法，不是数字，无法进行查询操作。" );
+		super("첨부파일 크기 size 매개변수가 숫자가 아니어서 조회할 수 없습니다." );
 	}
 }

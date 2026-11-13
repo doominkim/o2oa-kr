@@ -90,7 +90,7 @@ MWF.xApplication.query.ImporterDesigner.Main = new Class({
         }.bind(this), null, false);
     },
 
-    //列示所有数据表列表
+    //모든 데이터 테이블 목록 조회
     createListViewItem: function(importer, isNew){
         var _self = this;
         var listImporterItem = new Element("div", {"styles": this.css.listViewItem}).inject(this.viewListAreaNode, (isNew) ? "top": "bottom");
@@ -116,7 +116,7 @@ MWF.xApplication.query.ImporterDesigner.Main = new Class({
         this.itemArray.push(itemObj);
         this.checkShow(itemObj);
     },
-    //打开数据表
+    //데이터 테이블 열기
     loadImporterByData: function(node, e){
         var importer = node.retrieve("importer");
         if (!importer.isNewImportModel){
@@ -263,7 +263,7 @@ MWF.xApplication.query.ImporterDesigner.Importer.NewNameForm = new Class({
                 data.query = queryData.id;
                 data.queryName = queryData.name;
             }else{
-                //data.query 和 data.queryName 还是传进来的值
+                //data.query와 data.queryName은 전달된 값 그대로
             }
             this.fireEvent("save", [data , function(){
                 this.close();

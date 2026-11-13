@@ -114,13 +114,13 @@ public class ActionCipherList extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("应用名称：CMS|BBS等等.")
+		@FieldDescribe("앱 이름: CMS|BBS 등.")
 		private String application = null;
 
-		@FieldDescribe("信息ID.")
+		@FieldDescribe("정보 ID.")
 		private String infoId = null;
 
-		@FieldDescribe("信息标题，模糊查询.")
+		@FieldDescribe("정보 제목(부분 일치 검색).")
 		private String title = null;
 
 		// public static List<String> Excludes = new

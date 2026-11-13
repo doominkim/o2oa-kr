@@ -18,7 +18,7 @@ export default content({
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
      
     };
@@ -45,7 +45,7 @@ export default content({
       restPeriodStart: "",
       restPeriodEnd: "",
     };
-    // 添加
+    // 추가
     // const content = (await import(`./addShift/index.js`)).default;
     // this.addShiftVm = await content.generate(".form", { bind: addBind }, this);
     this.$parent.openShiftForm({ bind: addBind });
@@ -64,13 +64,13 @@ export default content({
       this.bind.pagerData.totalCount = count;
     }
   },
-  // 修改
+  // 수정
   async clickEditShift(id) {
     const shiftFilter = this.bind.shiftList.filter(s => s.id == id);
     if (shiftFilter && shiftFilter.length>0) {
       const shift = shiftFilter[0];
       let shiftData = {};
-      // 这里不能直接赋值 会带 proxy 代理过去
+      // 여기서 바로 대입하면 안 됨, proxy 프록시가 함께 전달됨
       if (shift && shift.properties && shift.properties.timeList) {
         shiftData.timeType = shift.properties.timeList.length;
         const restPeriod1 = this.parseRestPeriod(shift.properties.timeList[0].restPeriod);
@@ -116,17 +116,17 @@ export default content({
             restPeriodEnd: restPeriod3.end,
           };
         }
-        // 修改
+        // 수정
         shiftData.form = {
           id: shift.id || "",
-          shiftName: shift.shiftName|| "", //班次名称
-          seriousTardinessLateMinutes: shift.seriousTardinessLateMinutes|| "0", // 严重迟到分钟数
-          absenteeismLateMinutes: shift.absenteeismLateMinutes|| "0", // 旷工迟到分钟数
-          lateAndEarlyOnTime: shift.lateAndEarlyOnTime|| "", // 上班最多可晚时间
-          lateAndEarlyOffTime: shift.lateAndEarlyOffTime|| "", // 下班最多可早走时间
-          workTime: shift.workTime || 0, // 工作时长分钟数.
-          needLimitWorkTime: shift.needLimitWorkTime || true, // 工作时长不足是否记为早退.
-      }; // 多一层的
+          shiftName: shift.shiftName|| "", //근무조 이름
+          seriousTardinessLateMinutes: shift.seriousTardinessLateMinutes|| "0", // 심각한 지각 분 수
+          absenteeismLateMinutes: shift.absenteeismLateMinutes|| "0", // 결근 처리 지각 분 수
+          lateAndEarlyOnTime: shift.lateAndEarlyOnTime|| "", // 출근 최대 허용 지각 시간
+          lateAndEarlyOffTime: shift.lateAndEarlyOffTime|| "", // 퇴근 최대 허용 조기 퇴근 시간
+          workTime: shift.workTime || 0, // 근무 시간(분).
+          needLimitWorkTime: shift.needLimitWorkTime || true, // 근무 시간 부족 시 조퇴 처리 여부.
+      }; // 한 단계 더 있는 것
         // const content = (await import(`./addShift/index.js`)).default;
         // this.addShiftVm = await content.generate(".form", { bind: shiftData }, this);
         this.$parent.openShiftForm({ bind: shiftData });
@@ -166,7 +166,7 @@ export default content({
     );
   },
   async deleteShift(id) {
-    this.$topParent.closeFormVm(); // 关闭表单
+    this.$topParent.closeFormVm(); // 양식 닫기
     const json = await attendanceShiftAction("delete", id);
     console.debug(json);
     this.loadShiftList();

@@ -2,38 +2,38 @@ var MTooltips = new Class({
     Extends: MWF.widget.Common,
     Implements: [Options, Events],
     options : {
-        style : "", //如果有style，就加载 style/css.wcss
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "auto", //x轴上left center right,  auto 系统自动计算
-            y : "auto" //y 轴上top middle bottom, auto 系统自动计算
+        style : "", //style이 있으면 style/css.wcss 로드
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "auto", //x축 left center right, auto는 시스템이 자동 계산
+            y : "auto" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
         priorityOfAuto :{
-            x : [ "center", "right", "left" ], //当position x 为 auto 时候的优先级
-            y : [ "middle", "bottom", "top" ] //当position y 为 auto 时候的优先级
+            x : [ "center", "right", "left" ], //position x가 auto일 때의 우선순위
+            y : [ "middle", "bottom", "top" ] //position y가 auto일 때의 우선순위
         },
         offset : {
             x : 0,
             y : 0
         },
-        isFitToContainer : true, //当position x 不为 auto， y 不为 auto 的时候，自动设置偏移量，使tooltip不超过容器的可见范围
-        isParentOffset: false, //如果容器position不是absoulte 或 relative，计算到祖先absoulte 或 relative的偏移量
-        event : "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-        hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-        displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
+        isFitToContainer : true, //position x가 auto가 아니고 y가 auto가 아닐 때 오프셋을 자동 설정해 tooltip이 컨테이너의 가시 범위를 넘지 않도록 함
+        isParentOffset: false, //컨테이너 position이 absoulte 또는 relative가 아니면 absoulte 또는 relative인 조상까지의 오프셋 계산
+        event : "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+        hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+        displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
         hasArrow : true,
         isAutoShow : true,
         isAutoHide : true,
         hasMask : true,
         hasCloseAction : false,
         hideByClickBody : false,
-        overflow : "hidden", //弹出框高宽超过container的时候怎么处理，hidden 表示超过的隐藏，scroll 表示超过的时候显示滚动条
-        zoom: 1 //target有缩放的情况下,IOS的getCoordinates有问题
+        overflow : "hidden", //팝업 높이·너비가 container를 초과할 때 처리 방식, hidden은 초과분 숨김, scroll은 초과 시 스크롤바 표시
+        zoom: 1 //target이 확대·축소된 경우 IOS의 getCoordinates에 문제가 있음
     },
     initialize : function( container, target, app, data, options, targetCoordinates ){
-        //可以传入target 或者 targetCoordinates，两种选一
-        //传入target,表示触发tooltip的节点，本类根据 this.options.event 自动绑定target的事件
-        //传入targetCoordinates，表示 出发tooltip的位置，本类不绑定触发事件
+        //target 또는 targetCoordinates 중 하나를 전달할 수 있음
+        //target 전달 시 tooltip을 트리거하는 노드를 의미하며, 이 클래스는 this.options.event에 따라 target 이벤트를 자동 바인딩
+        //targetCoordinates 전달 시 tooltip을 트리거하는 위치를 의미하며, 이 클래스는 트리거 이벤트를 바인딩하지 않음
         if( options ){
             this.setOptions(options);
         }
@@ -336,7 +336,7 @@ var MTooltips = new Class({
             "-webkit-user-select": "text",
             "-moz-user-select": "text"
         };
-        if( this.options.nodeStyles ){ //兼容之前在options里设置nodeStyles
+        if( this.options.nodeStyles ){ //이전에 options에서 nodeStyles를 설정한 경우와의 호환
             this.nodeStyles = Object.merge( this.nodeStyles, this.options.nodeStyles );
         }else if( this.css && this.css.nodeStyles ){
             this.nodeStyles = this.css.nodeStyles
@@ -620,7 +620,7 @@ var MTooltips = new Class({
             var ah = this.arrowNode.getSize().y / 2;
             //var th = targetCoondinates.height / 2 - ah;
             var h = Math.min(targetCoondinates.height, nodeSize.y) / 2 - ah;
-            var radiusDv = 0; //圆角和箭头偏移量的差值
+            var radiusDv = 0; //모서리 둥글기와 화살표 오프셋의 차이
             var radius = 0;
             if (arrowY == "middle") {
                 this.arrowNode.setStyles({
@@ -856,8 +856,8 @@ var MTooltips = new Class({
             var aw = this.arrowNode.getSize().x / 2 ;
             //var tw = targetCoondinates.width / 2 - aw;
             var w = Math.min( targetCoondinates.width , nodeSize.x )/ 2 - aw;
-            var radiusDv = 0; //圆角和箭头偏移量的差值
-            var radius = 0; //圆角值
+            var radiusDv = 0; //모서리 둥글기와 화살표 오프셋의 차이
+            var radius = 0; //모서리 둥글기 값
             if( arrowX == "center" ) {
                 this.arrowNode.setStyles({
                     "left": (nodeSize.x/2 - aw - arrowOffsetX )+"px",

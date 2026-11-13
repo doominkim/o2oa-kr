@@ -15,12 +15,12 @@
     "action" : "openSectionSetting"
   }
 //  {
-//    "title" : "权限设置",
+//    "title" : "권한 설정",
 //    "icon" :"permission.png",
 //    "action" : "openPermissionSetting"
 //  },
 //  {
-//    "title" : "角色设置",
+//    "title" : "역할 설정",
 //    "icon" :"role.png",
 //    "action" : "openRoleSetting"
 //  }

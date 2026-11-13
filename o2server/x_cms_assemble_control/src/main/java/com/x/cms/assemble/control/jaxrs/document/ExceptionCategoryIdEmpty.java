@@ -7,6 +7,6 @@ class ExceptionCategoryIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCategoryIdEmpty() {
-		super("栏目信息ID为空，无法进行查询操作。" );
+		super("게시판 ID가 비어 있어 조회할 수 없습니다." );
 	}
 }

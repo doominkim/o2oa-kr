@@ -29,12 +29,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("user/hotpic")
-@JaxrsDescribe("热点信息管理")
+@JaxrsDescribe("인기 정보 관리")
 public class HotPictureInfoAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(HotPictureInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "检查所有的热点新闻还在不在", action = ActionCheck.class)
+	@JaxrsMethodDescribe(value = "모든 인기 뉴스가 아직 존재하는지 확인", action = ActionCheck.class)
 	@GET
 	@Path("exists/check")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -52,13 +52,13 @@ public class HotPictureInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询指定的图片的base64编码", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 이미지의 base64 인코딩 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("热图信息id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("인기 이미지 정보 id") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -70,15 +70,15 @@ public class HotPictureInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据应用类型以及信息ID查询热图信息", action = ActionGetList.class)
+	@JaxrsMethodDescribe(value = "앱 유형과 정보 ID로 인기 이미지 정보 조회", action = ActionGetList.class)
 	@GET
 	@Path("{application}/{infoId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listByApplicationAndInfoId(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用名称：CMS|BBS等等.") @PathParam("application") String application,
-			@JaxrsParameterDescribe("信息id") @PathParam("infoId") String infoId) {
+			@JaxrsParameterDescribe("앱 이름: CMS|BBS 등.") @PathParam("application") String application,
+			@JaxrsParameterDescribe("정보 id") @PathParam("infoId") String infoId) {
 		ActionResult<List<ActionGetList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -90,14 +90,14 @@ public class HotPictureInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的HotPictureInfo,下一页", action = ActionGetListForPage.class)
+	@JaxrsMethodDescribe(value = "필터 조건으로 HotPictureInfo 목록 조회, 다음 페이지", action = ActionGetListForPage.class)
 	@PUT
 	@Path("filter/list/page/{page}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listForPage(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("当前页码") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("현재 페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionGetListForPage.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -110,12 +110,12 @@ public class HotPictureInfoAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 保存热图信息，登录用户访问
+	 * 인기 이미지 정보 저장(로그인 사용자 접근)
 	 *
 	 * @param request
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "创建新的热图信息或者更新热图信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "인기 이미지 정보 생성 또는 수정", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -133,12 +133,12 @@ public class HotPictureInfoAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 修改已经存在的热点图片的标题信息
+	 * 기존 인기 이미지의 제목 정보 수정
 	 *
 	 * @param request
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "修改已经存在的热点图片的标题信息", action = ActionChangeTitle.class)
+	@JaxrsMethodDescribe(value = "기존 인기 이미지의 제목 정보 수정", action = ActionChangeTitle.class)
 	@Path("changeTitle")
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -156,13 +156,13 @@ public class HotPictureInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除指定的热图信息", action = ActionDeleteById.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 인기 이미지 정보 삭제", action = ActionDeleteById.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("信息标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("정보 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDeleteById.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -174,14 +174,14 @@ public class HotPictureInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据应用类型以及信息ID删除热图信息", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "앱 유형과 정보 ID로 인기 이미지 정보 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{application}/{infoId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithApplicationAndInfoId(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("application") String application,
-			@JaxrsParameterDescribe("信息标识") @PathParam("infoId") String infoId) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("application") String application,
+			@JaxrsParameterDescribe("정보 식별자") @PathParam("infoId") String infoId) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

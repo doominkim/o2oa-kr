@@ -8,18 +8,18 @@ import com.x.base.core.project.annotation.FieldDescribe;
  * @date 2025/02/19 15:41
  **/
 public class InvoiceDetail extends JsonProperties {
-    @FieldDescribe("项目名称")
+    @FieldDescribe("항목 이름")
     private String name;
-    @FieldDescribe("车牌号|规格型号")
+    @FieldDescribe("차량 번호|규격 모델")
     private String model;
     private String unit;
     private Double count;
     private Double price;
-    @FieldDescribe("金额")
+    @FieldDescribe("금액")
     private Double amount;
-    @FieldDescribe("税率")
+    @FieldDescribe("세율")
     private Double taxRate;
-    @FieldDescribe("税额")
+    @FieldDescribe("세액")
     private Double taxAmount;
 
     public String getName() {

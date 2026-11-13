@@ -58,13 +58,13 @@ class ActionManualAppendIdentity extends BaseAction {
 
 		private static final long serialVersionUID = 6857844608423951314L;
 
-		@FieldDescribe("添加的待办身份.")
+		@FieldDescribe("추가된 결재 대기 신분.")
 		private List<String> taskIdentityList;
 
-		@FieldDescribe("添加的待阅身份.")
+		@FieldDescribe("추가할 열람 대기 신분.")
 		private List<String> readIdentityList;
 
-		@FieldDescribe("添加的参阅身份.")
+		@FieldDescribe("추가할 참조 신분.")
 		private List<String> reviewIdentityList;
 
 		public List<String> getTaskIdentityList() {
@@ -97,13 +97,13 @@ class ActionManualAppendIdentity extends BaseAction {
 
 		private static final long serialVersionUID = 3490090127579620225L;
 
-		@FieldDescribe("添加的待办身份.")
+		@FieldDescribe("추가된 결재 대기 신분.")
 		private List<String> taskIdentityList;
 
-		@FieldDescribe("添加的待阅身份.")
+		@FieldDescribe("추가할 열람 대기 신분.")
 		private List<String> readIdentityList;
 
-		@FieldDescribe("添加的参阅身份.")
+		@FieldDescribe("추가할 참조 신분.")
 		private List<String> reviewIdentityList;
 
 		public List<String> getTaskIdentityList() {

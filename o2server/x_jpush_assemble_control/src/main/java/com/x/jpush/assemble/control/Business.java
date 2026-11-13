@@ -16,10 +16,10 @@ public class Business {
 		return this.emc;
 	}
 
-	// 组织架构管理相关的工厂服务类
+	// 조직 구조 관리 관련 팩토리 서비스 클래스
 	private Organization organization;
 
-	// 示例数据表工厂服务类
+	// 예시 데이터 테이블 팩토리 서비스 클래스
 	private PushDeviceFactory pushDeviceFactory;
 
 	public PushDeviceFactory pushDeviceFactory() throws Exception {

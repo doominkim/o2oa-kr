@@ -7,6 +7,6 @@ class ExceptionCommentNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCommentNotExists( String id ) {
-		super("指定ID的评论信息不存在。ID:{}.", id );
+		super("지정한 ID의 댓글 정보가 없습니다. ID: {}.", id );
 	}
 }

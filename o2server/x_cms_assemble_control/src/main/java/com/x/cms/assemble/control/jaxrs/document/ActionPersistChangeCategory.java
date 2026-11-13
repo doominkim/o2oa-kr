@@ -41,7 +41,7 @@ public class ActionPersistChangeCategory extends BaseAction {
 			wi = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionDocumentInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。");
+			Exception exception = new ExceptionDocumentInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다.");
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -65,7 +65,7 @@ public class ActionPersistChangeCategory extends BaseAction {
 		}
 
 		if (check) {	
-			//先查询分类是否存在
+			//먼저 분류 존재 여부 조회
 			try {
 				categoryInfo = categoryInfoServiceAdv.get( categoryId );
 				if (categoryInfo == null) {
@@ -75,20 +75,20 @@ public class ActionPersistChangeCategory extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在根据ID查询分类信息时发生异常！ID：" + categoryId);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 분류 정보를 조회하는 중 오류가 발생했습니다! ID: " + categoryId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		if (check) {	
-			//先查询分类是否存在
+			//먼저 분류 존재 여부 조회
 			wo.setTotal( ids.size() );
 			try {
 				documents = documentQueryService.list( ids );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在根据ID列表查询文档信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "ID 목록으로 게시글 정보를 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -100,25 +100,25 @@ public class ActionPersistChangeCategory extends BaseAction {
 				List<String> failture = new ArrayList<>();
 				for( Document document : documents ) {					
 					try {
-						//修改每个document的分类信息
+						//각 document의 분류 정보 수정
 						if ( documentPersistService.changeCategory( document, categoryInfo ) ) {
 							success.add( document.getId() );
 						}else {
 							failture.add( document.getId() );
 						}
 					} catch (Exception e) {
-						Exception exception = new ExceptionDocumentInfoProcess(e, "系统在修改document的分类信息时发生异常！ID=" + document.getId() );
+						Exception exception = new ExceptionDocumentInfoProcess(e, "document의 분류 정보를 수정하는 중 오류가 발생했습니다! ID=" + document.getId() );
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
 					
 					try {
-						//发送重置文档访问权限消息到处理队列
+						//문서 접근 권한 재설정 메시지를 처리 큐로 발송
 						new CmsBatchOperationPersistService().addOperation( 
 								CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT, 
 								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  document.getId(),  document.getId(), "刷新文档权限：ID=" +  document.getId() );
 					} catch (Exception e) {
-						Exception exception = new ExceptionDocumentInfoProcess(e, "系统在发送重置文档访问权限消息到处理队列时发生异常！");
+						Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 접근 권한 재설정 메시지를 처리 대기열에 보내는 중 오류가 발생했습니다!");
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -135,10 +135,10 @@ public class ActionPersistChangeCategory extends BaseAction {
 
 	public static class Wi {
 		
-		@FieldDescribe( "需要调整分类的文档ID列表." )
+		@FieldDescribe( "분류를 변경할 문서ID 목록." )
 		private List<String> ids = null;
 		
-		@FieldDescribe( "目标分类ID." )
+		@FieldDescribe( "대상 분류ID." )
 		private String categoryId = null;
 
 		public List<String> getIds() {
@@ -160,13 +160,13 @@ public class ActionPersistChangeCategory extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 		
-		@FieldDescribe( "需要调整分类的文档ID总数量." )
+		@FieldDescribe( "분류를 변경할 문서ID 총 개수." )
 		private Integer total =0;
 		
-		@FieldDescribe( "成功调整分类的文档ID列表." )
+		@FieldDescribe( "분류 변경에 성공한 문서ID 목록." )
 		private List<String> successList = null;
 		
-		@FieldDescribe( "调整分类失败的文档ID列表." )
+		@FieldDescribe( "분류 변경에 실패한 문서ID 목록." )
 		private List<String> failtureList = null;
 		
 		public List<String> getSuccessList() {

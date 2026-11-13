@@ -19,11 +19,11 @@ import com.x.bbs.entity.BBSSectionInfo;
 import com.x.bbs.entity.BBSSectionInfo_;
 
 /**
- * 类   名：BBSSectionInfoFactory<br/>
- * 实体类：BBSSectionInfo<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSSectionInfoFactory<br/>
+ * 엔티티 클래스: BBSSectionInfo<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
  **/
 public class BBSSectionInfoFactory extends AbstractFactory {
 
@@ -31,12 +31,12 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe( "获取指定Id的BBSSectionInfo实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSSectionInfo 엔티티 정보 객체 조회" )
 	public BBSSectionInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSSectionInfo.class, ExceptionWhen.none );
 	}
 
-	//@MethodDescribe( "据传入的板块名称从数据库查询BBSSectionInfo对象" )
+	//@MethodDescribe( "전달된 게시판 이름으로 DB에서 BBSSectionInfo 객체 조회" )
 	public List<BBSSectionInfo> getMainSectionBySectionName( String mainSectionName ) throws Exception {
 		if( mainSectionName  == null || mainSectionName.isEmpty() ){
 			throw new Exception( "mainSectionName is null!" );
@@ -51,7 +51,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "列示指定Id的BBSSectionInfo实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSSectionInfo 엔티티 정보 목록 조회" )
 	public List<BBSSectionInfo> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSSectionInfo>();
@@ -65,7 +65,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "列示全部的BBSSectionInfo实体信息列表" )
+	//@MethodDescribe( "전체 BBSSectionInfo 엔티티 정보 목록 조회" )
 	public List<BBSSectionInfo> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSSectionInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -75,7 +75,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery( cq ).getResultList();
 	}
 
-	//@MethodDescribe( "根据论坛ID查询所有的主版块信息列表" )
+	//@MethodDescribe( "포럼 ID로 전체 주 게시판 정보 목록 조회" )
 	public List<BBSSectionInfo> listMainSectionByForumId( String forumId ) throws Exception {
 		if( forumId  == null || forumId.isEmpty() ){
 			throw new Exception( "forumId is null!" );
@@ -90,7 +90,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据主版块ID查询所有的子版块信息列表" )
+	//@MethodDescribe( "주 게시판 ID로 전체 하위 게시판 정보 목록 조회" )
 	public List<BBSSectionInfo> listSubSectionByMainSectionId( String sectionId ) throws Exception {
 		if( sectionId  == null || sectionId.isEmpty() ){
 			throw new Exception( "sectionId is null!" );
@@ -105,7 +105,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据主版块ID查询所有的子版块信息Id列表" )
+	//@MethodDescribe( "주 게시판 ID로 전체 하위 게시판 정보 Id 목록 조회" )
 	public List<String> listSubSectionIdsByMainSectionId( String sectionId ) throws Exception {
 		if( sectionId  == null || sectionId.isEmpty() ){
 			throw new Exception( "sectionId is null!" );
@@ -120,7 +120,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据论坛ID表查该论坛所包含的主版块数量" )
+	//@MethodDescribe( "포럼 ID로 해당 포럼의 주 게시판 수 조회" )
 	public Long countMainSectionByForumId( String forumId ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSectionInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -132,7 +132,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据论坛ID表查该论坛所包含的主版块和子版块数量总和" )
+	//@MethodDescribe( "포럼 ID로 해당 포럼의 주 게시판과 하위 게시판 수 합계 조회" )
 	public Long countAllSectionByForumId( String forumId ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSectionInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -143,7 +143,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块ID查询该版块所包含的子版块数量" )
+	//@MethodDescribe( "게시판 ID로 해당 게시판의 하위 게시판 수 조회" )
 	public Long countSubSectionByMainSectionId(String sectionId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSectionInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -156,7 +156,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据论坛ID查询该论坛所包含的所有主版块以及子版块信息列表" )
+	//@MethodDescribe( "포럼 ID로 해당 포럼의 전체 주 게시판 및 하위 게시판 정보 목록 조회" )
 	public List<BBSSectionInfo> listAllSectionByForumId( String forumId ) throws Exception {
 		if( forumId  == null || forumId.isEmpty() ){
 			throw new Exception( "forumId is null!" );
@@ -169,7 +169,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据论坛ID查询该论坛所包含的所有主版块以及子版块信息列表" )
+	//@MethodDescribe( "포럼 ID로 해당 포럼의 전체 주 게시판 및 하위 게시판 정보 목록 조회" )
 	public List<String> listAllSectionIdsByForumId( String forumId ) throws Exception {
 		if( forumId  == null || forumId.isEmpty() ){
 			throw new Exception( "forumId is null!" );
@@ -183,7 +183,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据论坛ID以及用户可访问的版块ID查询用户可访问的所有的主版块信息列表" )
+	//@MethodDescribe( "포럼 ID와 사용자가 접근 가능한 게시판 ID로 접근 가능한 전체 주 게시판 정보 목록 조회" )
 	public List<BBSSectionInfo> viewMainSectionByForumId( String forumId, List<String> viewableSectionIds ) throws Exception {
 		if( forumId  == null || forumId.isEmpty() ){
 			throw new Exception( "forumId is null!" );
@@ -204,7 +204,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块ID以及用户可访问的版块ID列表查询所有用户可访问的子版块信息列表" )
+	//@MethodDescribe( "게시판 ID와 사용자가 접근 가능한 게시판 ID 목록으로 접근 가능한 전체 하위 게시판 정보 목록 조회" )
 	public List<BBSSectionInfo> viewSubSectionByMainSectionId( String sectionId, List<String> viewableSectionIds ) throws Exception {
 		if( sectionId  == null || sectionId.isEmpty() ){
 			throw new Exception( "sectionId is null!" );
@@ -225,7 +225,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据论坛ID列表查询指定论坛范围内所有公开访问的主版块列表" )
+	//@MethodDescribe( "포럼 ID 목록으로 지정 포럼 범위 내 전체 공개 주 게시판 목록 조회" )
 	public List<String> listVisibleToAllUserMainSectionIds( List<String> forumIds ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSSectionInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -241,7 +241,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据论坛ID列表，主版块ID列表查询指定论坛和主版块范围内所有公开访问的子版块列表" )
+	//@MethodDescribe( "포럼 ID 목록, 주 게시판 ID 목록으로 지정 포럼과 주 게시판 범위 내 전체 공개 하위 게시판 목록 조회" )
 	public List<String> listVisibleToAllUserSectionIds( List<String> forumIds, List<String> mainSectionIds ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSSectionInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -260,7 +260,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据论坛ID列表查询指定论坛范围内所有公开访问的主版块和子版块信息列表" )
+	//@MethodDescribe( "포럼 ID 목록으로 지정 포럼 범위 내 전체 공개 주 게시판과 하위 게시판 정보 목록 조회" )
 	public List<String> viewSectionByForumId( List<String> viewforumIds, Boolean publicStatus ) throws Exception {
 		if( viewforumIds  == null || viewforumIds.isEmpty() ){
 			throw new Exception( "viewforumIds is null!" );

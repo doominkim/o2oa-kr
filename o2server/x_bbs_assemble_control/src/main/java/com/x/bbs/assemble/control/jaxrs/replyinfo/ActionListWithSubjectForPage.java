@@ -27,7 +27,7 @@ import com.x.bbs.entity.BBSReplyInfo;
 
 
 /**
- * @apiNote 根据主帖的ID 返回针对主帖的回复列表（其中要包含一个标志 及说明针对该回复的回复内容条数 ）
+ * @apiNote 원글 ID로 원글에 대한 답글 목록 반환(해당 답글에 대한 답글 수를 나타내는 표시 포함)
  * @author O2LEE
  */
 public class ActionListWithSubjectForPage extends BaseAction {
@@ -47,7 +47,7 @@ public class ActionListWithSubjectForPage extends BaseAction {
 			}
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionReplyInfoProcess(e,"系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+			Exception exception = new ExceptionReplyInfoProcess(e,"JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -97,7 +97,7 @@ public class ActionListWithSubjectForPage extends BaseAction {
 				total = replyInfoService.countWithSubjectForPage(wrapIn.getSubjectId(), wrapIn.getShowSubReply() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e,"根据主题ID查询主题内所有的回复数量时发生异常。Subject:" + wrapIn.getSubjectId());
+				Exception exception = new ExceptionReplyInfoProcess(e,"주제 ID로 주제 내 전체 댓글 수를 조회하는 중 오류가 발생했습니다. Subject:" + wrapIn.getSubjectId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -108,7 +108,7 @@ public class ActionListWithSubjectForPage extends BaseAction {
 					replyInfoList = replyInfoService.listWithSubjectForPage( wrapIn.getSubjectId(), wrapIn.getShowSubReply(), page * count, config_BBS_REPLY_SORTTYPE );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionReplyInfoProcess(e,"根据主题ID查询主题内所有的回复列表时发生异常。Subject:" + wrapIn.getSubjectId());
+					Exception exception = new ExceptionReplyInfoProcess(e,"주제 ID로 주제 내 전체 댓글 목록을 조회하는 중 오류가 발생했습니다. Subject:" + wrapIn.getSubjectId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -133,7 +133,7 @@ public class ActionListWithSubjectForPage extends BaseAction {
 					wraps = Wo.copier.copy(replyInfoList_out);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionReplyInfoProcess(e, "将查询结果转换成可以输出的数据信息时发生异常。");
+					Exception exception = new ExceptionReplyInfoProcess(e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -153,7 +153,7 @@ public class ActionListWithSubjectForPage extends BaseAction {
 						wo.setAuditorNameShort(wo.getAuditorName().split("@")[0]);
 					}
 
-					//查询一下该回复是否存在下级回复，以及下级回复的数量，除了第一条，其他的都去掉内容，避免大量的网络传输
+					//해당 답글의 하위 답글 존재 여부와 개수를 조회하고, 첫 번째를 제외한 나머지는 내용을 제거해 대량 네트워크 전송 방지
 					subReplies = replyInfoService.listRelysWithRelyId( wo.getId(), config_BBS_REPLY_SORTTYPE );
 					if( ListTools.isNotEmpty( subReplies )){
 						wrapSubReplies = Wo.copier.copy( subReplies );
@@ -177,10 +177,10 @@ public class ActionListWithSubjectForPage extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("主题Id")
+		@FieldDescribe("주제 Id")
 		private String subjectId = null;
 
-		@FieldDescribe("是否平级显示所有的的回复, 如果为false则只显示第一层")
+		@FieldDescribe("모든 답글을 같은 레벨로 표시할지 여부, false이면 첫 레벨만 표시")
 		private Boolean showSubReply = true;
 
 		public Boolean getShowSubReply() { return showSubReply; }
@@ -203,16 +203,16 @@ public class ActionListWithSubjectForPage extends BaseAction {
 		public static List<String> Excludes = new ArrayList<String>();
 		public static WrapCopier<BBSReplyInfo, Wo> copier = WrapCopierFactory.wo(BBSReplyInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe("创建人姓名")
+		@FieldDescribe("작성자 이름")
 		private String creatorNameShort = "";
 
-		@FieldDescribe("审核人姓名")
+		@FieldDescribe("심사자 이름")
 		private String auditorNameShort = "";
 
-		@FieldDescribe("下级回复的数量，默认为0")
+		@FieldDescribe("하위 답글 수, 기본값 0")
 		private Integer subReplyTotal = 0;
 
-		@FieldDescribe("下级回复的数量，默认为0")
+		@FieldDescribe("하위 답글 수, 기본값 0")
 		private List<Wo> subReplies;
 
 		public List<Wo> getSubReplies() {

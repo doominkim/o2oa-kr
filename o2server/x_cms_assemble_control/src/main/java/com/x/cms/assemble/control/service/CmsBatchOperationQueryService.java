@@ -7,7 +7,7 @@ import com.x.base.core.container.factory.EntityManagerContainerFactory;
 import com.x.cms.core.entity.CmsBatchOperation;
 
 /**
- * 对批处理操作信息进行管理的服务类，利用Service完成事务控制
+ * 배치 처리 작업 정보를 관리하는 서비스 클래스, Service로 트랜잭션 제어
  * 
  */
 public class CmsBatchOperationQueryService {

@@ -28,18 +28,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("output")
-@JaxrsDescribe("导出CMS")
+@JaxrsDescribe("CMS 내보내기")
 public class OutputAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(OutputAction.class);
 
-	@JaxrsMethodDescribe(value = "选择栏目结构.", action = ActionSelect.class)
+	@JaxrsMethodDescribe(value = "게시판 구조 선택.", action = ActionSelect.class)
 	@PUT
 	@Path("{appInfoFlag}/select")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("栏目标识") @PathParam("appInfoFlag") String appInfoFlag,
+			@JaxrsParameterDescribe("게시판 식별자") @PathParam("appInfoFlag") String appInfoFlag,
 			JsonElement jsonElement) {
 		ActionResult<ActionSelect.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -52,13 +52,13 @@ public class OutputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "选择栏目结构.", action = ActionSelect.class)
+	@JaxrsMethodDescribe(value = "게시판 구조 선택.", action = ActionSelect.class)
 	@POST
 	@Path("{appInfoFlag}/select/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void selectMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("栏目标识") @PathParam("appInfoFlag") String appInfoFlag,
+					   @JaxrsParameterDescribe("게시판 식별자") @PathParam("appInfoFlag") String appInfoFlag,
 					   JsonElement jsonElement) {
 		ActionResult<ActionSelect.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -71,7 +71,7 @@ public class OutputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查看所有栏目.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 게시판 보기.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

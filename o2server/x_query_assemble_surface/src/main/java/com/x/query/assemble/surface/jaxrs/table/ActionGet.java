@@ -51,10 +51,10 @@ class ActionGet extends BaseAction {
 		static WrapCopier<Table, Wo> copier = WrapCopierFactory.wo(Table.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("查询应用名称.")
+		@FieldDescribe("쿼리 앱 이름.")
 		private String queryName;
 
-		@FieldDescribe("查询应用别名.")
+		@FieldDescribe("쿼리 앱 별칭.")
 		private String queryAlias;
 
 		public String getQueryName() {

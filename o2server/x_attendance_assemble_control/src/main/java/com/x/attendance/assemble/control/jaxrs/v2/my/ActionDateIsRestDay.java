@@ -28,7 +28,7 @@ public class ActionDateIsRestDay extends BaseAction {
       Business business = new Business(emc);
       Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
       if (wi.getDateList() == null || wi.getDateList().isEmpty()) {
-        logger.info("DateList 是空的！");
+        logger.info("DateList가 비어 있습니다!");
         wo.setRestDateList(restDateList);
         result.setData(wo);
         return result;
@@ -47,7 +47,7 @@ public class ActionDateIsRestDay extends BaseAction {
 
     private static final long serialVersionUID = 7874429260551956123L;
     
-    @FieldDescribe("查询是否休息日的日期列表，yyyy-MM-dd")
+    @FieldDescribe("휴일 여부를 조회할 날짜 목록, yyyy-MM-dd")
     private List<String> dateList;
 
     public List<String> getDateList() {
@@ -63,7 +63,7 @@ public class ActionDateIsRestDay extends BaseAction {
   public static class Wo extends GsonPropertyObject {
     private static final long serialVersionUID = -6596581682844590658L;
     
-    @FieldDescribe("休息日的日期列表，yyyy-MM-dd")
+    @FieldDescribe("휴일 날짜 목록, yyyy-MM-dd")
     private List<String> restDateList;
 
     public List<String> getRestDateList() {

@@ -9,16 +9,16 @@ public class ActionHtmlToPdfWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 8513838302143557434L;
 
-	@FieldDescribe("待转换html.")
-	@Schema(description = "待转换html.")
+	@FieldDescribe("변환할 html.")
+	@Schema(description = "변환할 html.")
 	private String workHtml;
 
-	@FieldDescribe("转pdf页面宽度，默认A4.")
-	@Schema(description = "转pdf页面宽度，默认A4.")
+	@FieldDescribe("pdf 변환 페이지 너비, 기본값 A4.")
+	@Schema(description = "pdf 변환 페이지 너비, 기본값 A4.")
 	private Float pageWidth;
 
-	@FieldDescribe("pdf标题.")
-	@Schema(description = "pdf标题.")
+	@FieldDescribe("pdf 제목.")
+	@Schema(description = "pdf 제목.")
 	private String title;
 
 	public String getWorkHtml() {

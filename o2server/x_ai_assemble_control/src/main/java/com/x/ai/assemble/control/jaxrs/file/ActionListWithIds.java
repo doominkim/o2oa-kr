@@ -42,7 +42,7 @@ class ActionListWithIds extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("文件id列表")
+		@FieldDescribe("파일 id 목록")
 		private List<String> idList;
 
 		public List<String> getIdList() {

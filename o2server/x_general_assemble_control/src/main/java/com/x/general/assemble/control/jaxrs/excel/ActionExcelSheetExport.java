@@ -47,31 +47,31 @@ class ActionExcelSheetExport extends BaseAction {
 			excelName = excelName + EXCEL_EXTENSION;
 		}
 		if (ListTools.isEmpty(wi.getSheetList())) {
-			throw new Exception("sheetList内容为空");
+			throw new Exception("sheetList 내용이 비어 있습니다");
 		}
 		byte[] bytes;
 		try (XSSFWorkbook workbook = new XSSFWorkbook(); ByteArrayOutputStream os = new ByteArrayOutputStream()) {
 
-			// 遍历每一个 WiSheet，创建对应的 sheet
+			// 각 WiSheet를 순회하며 대응하는 sheet 생성
 			for (WiSheet sheetItem : wi.getSheetList()) {
 				String safeSheetName = WorkbookUtil.createSafeSheetName(
 						StringUtils.defaultIfEmpty(sheetItem.getSheetName(), "Sheet")
 				);
-				XSSFSheet sheet = workbook.createSheet(safeSheetName); // 创建 sheet
+				XSSFSheet sheet = workbook.createSheet(safeSheetName); // sheet 생성
 
 				List<List<String>> dataList = sheetItem.getDataList();
 				if (ListTools.isEmpty(dataList)) {
-					continue; // 如果这个 sheet 没有数据，也创建空 sheet
+					continue; // 이 sheet에 데이터가 없어도 빈 sheet 생성
 				}
 
 				int rowNum = 0;
 				for (List<String> rowList : dataList) {
 					Row row = sheet.createRow(rowNum++);
 					int cellNum = 0;
-					// 处理每一行的单元格
+					// 각 행의 셀 처리
 					for (String value : rowList) {
 						Cell cell = row.createCell(cellNum++);
-						cell.setCellValue(StringUtils.defaultString(value)); // 防止 null
+						cell.setCellValue(StringUtils.defaultString(value)); // null 방지
 					}
 				}
 			}
@@ -111,7 +111,7 @@ class ActionExcelSheetExport extends BaseAction {
 
 		private static final long serialVersionUID = -51802802412712709L;
 
-		@FieldDescribe("多个sheet页的内容，例如：{ \"sheetName\": \"Sheet1\", \"dataList\": [[\"姓名\", \"性别\", \"年龄\"],[\"\", \"\", \"\"],[\"小红\", \"女\", \"22\"]]}")
+		@FieldDescribe("여러 sheet의 내용, 예: { \"sheetName\": \"Sheet1\", \"dataList\": [[\"이름\", \"성별\", \"나이\"],[\"\", \"\", \"\"],[\"김영희\", \"여\", \"22\"]]}")
 
 		public List<WiSheet> sheetList;
 
@@ -129,10 +129,10 @@ class ActionExcelSheetExport extends BaseAction {
 
 		private static final long serialVersionUID = -51802802412712709L;
 
-		@FieldDescribe("sheet页名称")
+		@FieldDescribe("sheet 이름")
 		public String sheetName;
 
-		@FieldDescribe("转换为excel的内容，例如：['姓名','性别'],['小明','男']")
+		@FieldDescribe("excel로 변환할 내용, 예: ['이름','성별'],['홍길동','남']")
 		public List<List<String>> dataList;
 
 		public String getSheetName() {

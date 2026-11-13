@@ -12,7 +12,7 @@ public class ActionGet extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();
 		wo.setEnable(Config.meeting().getEnable());
-		/* 如果启用了再加载 */
+		/* 사용 중이면 다시 로드 */
 		if (BooleanUtils.isTrue(Config.meeting().getEnable())) {
 			wo.setHost(Config.meeting().getHost());
 			wo.setPort(Config.meeting().getPort());

@@ -57,7 +57,7 @@ public class ActionSubjectView extends BaseAction {
 				result.setData( result_cache.getData() );
 				result.setCount( 1L);
 			} else {
-				//继续进行数据查询
+				//데이터 조회 계속
 				result = getSubjectViewQueryResult( id, request, effectivePerson );
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -66,7 +66,7 @@ public class ActionSubjectView extends BaseAction {
 		if( check && result.getData() != null ) {
 			WoBBSSubjectInfo currentSubject = result.getData().getCurrentSubject();
 			if (check) {
-				if( currentSubject != null ){//获取该主题的投票选项组
+				if( currentSubject != null ){//해당 주제의 투표 선택지 그룹 조회
 					List<BBSVoteOption> voteOptionList = null;
 					List<BBSVoteOptionGroup> voteOptionGroupList = null;
 					List<WoBBSVoteOptionGroup> wrapOutSubjectVoteOptionGroupList = null;
@@ -87,7 +87,7 @@ public class ActionSubjectView extends BaseAction {
 											wrapOutBBSVoteOption.setVoted( false );
 											try {
 												if( subjectVoteService.optionHasVoted( effectivePerson, wrapOutBBSVoteOption.getId() )){
-													//判断是否已经投过票
+													//이미 투표했는지 판단
 													wrapOutBBSVoteOption.setVoted( true );
 													currentSubject.setVoted( true );
 												}
@@ -116,7 +116,7 @@ public class ActionSubjectView extends BaseAction {
 						logger.error( e, effectivePerson, request, null);
 					}
 					try {
-						//查询投票总数
+						//투표 총수 조회
 						Long voteCount = subjectVoteService.countVoteRecordForSubject( id, null );
 						currentSubject.setVoteCount( voteCount );
 					}catch (Exception e) {
@@ -127,7 +127,7 @@ public class ActionSubjectView extends BaseAction {
 					}
 
 					try {
-						//查询投票总人数
+						//투표 총 인원 조회
 						List<String> voteUsers = subjectVoteService.listVoteUserForSubject( id, null );
 						currentSubject.setVoteUserCount( voteUsers.size() );
 					}catch (Exception e) {
@@ -152,7 +152,7 @@ public class ActionSubjectView extends BaseAction {
 
 		if( check ){
 			try {
-				// 查看次数+1
+				// 조회 수 +1
 				subjectInfoServiceAdv.addViewCount( id );
 			}catch(Exception e) {
 				check = false;
@@ -176,7 +176,7 @@ public class ActionSubjectView extends BaseAction {
 		String subjectContent = null;
 		Boolean check = true;
 
-		if (check) {//查询版块信息是否存在
+		if (check) {//게시판 정보 존재 여부 조회
 			try {
 				subjectInfo = subjectInfoServiceAdv.get( id );
 			} catch (Exception e) {
@@ -192,11 +192,11 @@ public class ActionSubjectView extends BaseAction {
 				check = false;
 				Exception exception = new ExceptionSubjectNotExists( id );
 				result.error( exception );
-			}else{//查到了主题信息
+			}else{//주제 정보 조회됨
 				try {
 					currentSubject = WoBBSSubjectInfo.copier.copy( subjectInfo );
 
-					//根据附件ID列表查询附件信息
+					//첨부파일 ID 목록으로 첨부파일 정보 조회
 					if( currentSubject.getAttachmentList() != null && currentSubject.getAttachmentList().size() > 0 ){
 						subjectAttachmentList = subjectInfoServiceAdv.listAttachmentByIds( currentSubject.getAttachmentList() );
 						if( subjectAttachmentList != null && subjectAttachmentList.size() > 0 ){
@@ -217,7 +217,7 @@ public class ActionSubjectView extends BaseAction {
 		if (check) {
 			if( wrapOutNearSubjectInfo.getCurrentSubject() != null ){
 				currentSubject = wrapOutNearSubjectInfo.getCurrentSubject();
-				//填充主题的内容信息
+				//주제 내용 정보 채우기
 				try {
 					subjectContent = subjectInfoServiceAdv.getSubjectContent( id );
 					if( subjectContent != null ){
@@ -232,7 +232,7 @@ public class ActionSubjectView extends BaseAction {
 			}
 		}
 
-		//开始查询上一个主题的信息
+		//이전 주제 정보 조회 시작
 		if (check) {
 			try {
 				subjectInfo = subjectInfoServiceAdv.getLastSubject( id );
@@ -252,7 +252,7 @@ public class ActionSubjectView extends BaseAction {
 			}
 		}
 
-		//开始查询下一个主题的信息
+		//다음 주제 정보 조회 시작
 		if (check) {
 			try {
 				subjectInfo = subjectInfoServiceAdv.getNextSubject( id );
@@ -271,7 +271,7 @@ public class ActionSubjectView extends BaseAction {
 				wrapOutNearSubjectInfo.setNextSubject( nextSubject );
 			}
 		}
-		//将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+		//@ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 		cutPersonNames( wrapOutNearSubjectInfo.getCurrentSubject() );
 
 		result.setData( wrapOutNearSubjectInfo );
@@ -279,7 +279,7 @@ public class ActionSubjectView extends BaseAction {
 	}
 
 	/**
-	 *  将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+	 *  @ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 	 *
 	 *  latestReplyUserShort = "";
 		bBSIndexSetterNameShort = "";
@@ -364,39 +364,39 @@ public class ActionSubjectView extends BaseAction {
 
 		private List<WoSubjectAttachment> subjectAttachmentList;
 
-		@FieldDescribe( "投票主题的所有投票选项列表." )
+		@FieldDescribe( "투표 주제의 전체 투표 선택지 목록." )
 		private List<WoBBSVoteOptionGroup> voteOptionGroupList;
 
-		@FieldDescribe( "主贴内容" )
+		@FieldDescribe( "원글 내용" )
 		private String content = null;
 
-		@FieldDescribe( "投票总数" )
+		@FieldDescribe( "투표 총수" )
 		private Long voteCount = 0L;
 
-		@FieldDescribe( "投票人数" )
+		@FieldDescribe( "투표 인원" )
 		private Integer voteUserCount = 0;
 
 		private String pictureBase64 = null;
 
-		@FieldDescribe("最新回复用户昵称")
+		@FieldDescribe("최근 답글 사용자 닉네임")
 		private String latestReplyUserNickName = "";
 
-		@FieldDescribe( "首页推荐人姓名" )
+		@FieldDescribe( "홈 추천자 이름" )
 		private String bBSIndexSetterNameShort = "";
 
-		@FieldDescribe( "精华设置人姓名" )
+		@FieldDescribe( "우수 주제 설정자 이름" )
 		private String screamSetterNameShort = "";
 
-		@FieldDescribe( "原创设置人姓名" )
+		@FieldDescribe( "원작 설정자 이름" )
 		private String originalSetterNameShort = "";
 
-		@FieldDescribe( "创建人姓名" )
+		@FieldDescribe( "작성자 이름" )
 		private String creatorNameShort = "";
 
-		@FieldDescribe( "审核人姓名" )
+		@FieldDescribe( "심사자 이름" )
 		private String auditorNameShort = "";
 
-		@FieldDescribe( "当前用户是否已经投票过." )
+		@FieldDescribe( "현재 사용자의 투표 여부." )
 		private Boolean voted = false;
 
 		public Integer getVoteUserCount() { return voteUserCount; }

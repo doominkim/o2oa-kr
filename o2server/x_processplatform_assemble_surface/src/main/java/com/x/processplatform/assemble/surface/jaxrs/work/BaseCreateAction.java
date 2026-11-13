@@ -48,7 +48,7 @@ class BaseCreateAction extends BaseAction {
 	}
 
 	/**
-	 * 如果不是草稿那么需要进行设置
+	 * 초안이 아니면 설정 필요
 	 * 
 	 * @param identity
 	 * @param workId
@@ -66,7 +66,7 @@ class BaseCreateAction extends BaseAction {
 				throw new ExceptionWorkNotExist(workId);
 			}
 			work.setTitle(title);
-			// 写入父work标识
+			// 상위 work 식별자 기록
 			if (StringUtils.isNotBlank(parentWork)) {
 				work.setParentWork(parentWork);
 			}
@@ -82,7 +82,7 @@ class BaseCreateAction extends BaseAction {
 	}
 
 	/**
-	 * 标志工作跳过新建检查
+	 * 업무 문서 신규 생성 검사 건너뛰기 표시
 	 * 
 	 * @param workId
 	 * @throws Exception
@@ -100,7 +100,7 @@ class BaseCreateAction extends BaseAction {
 	}
 
 	/**
-	 * 拼装返回结果
+	 * 반환 결과 조립
 	 *
 	 * @param effectivePerson
 	 * @param workId
@@ -112,14 +112,14 @@ class BaseCreateAction extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 			Work work = emc.find(workId, Work.class);
-			// 如果work是从开始->执行任务->结束,这里work已经结束那么有可能这里已经没有work了.
+			// work가 시작->작업 실행->종료로 진행되어 work가 이미 종료되었다면 여기에는 work가 없을 수 있음.
 			if (null != work) {
 				List<String> ids = business.workLog()
 						.listWithFromActivityTokenForwardNotConnected(work.getActivityToken());
-				// 先取得没有结束的WorkLog
+				// 먼저 종료되지 않은 WorkLog 조회
 				List<WorkLog> list = emc.list(WorkLog.class, ids);
 				wos = this.refercenceWorkLog(business, list);
-				// 标识当前用户的待办
+				// 현재 사용자의 결재 대기 표시
 				for (Wo o : wos) {
 					o.setCurrentTaskIndex(-1);
 					for (int i = 0; i < o.getTaskList().size(); i++) {
@@ -142,20 +142,20 @@ class BaseCreateAction extends BaseAction {
 		static WrapCopier<WorkLog, Wo> copier = WrapCopierFactory.wo(WorkLog.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号.")
-		@Schema(description = "排序号.")
+		@FieldDescribe("정렬 번호.")
+		@Schema(description = "정렬 번호.")
 		private Long rank;
 
-		@FieldDescribe("已办对象.")
-		@Schema(description = "已办对象.")
+		@FieldDescribe("처리 완료 객체.")
+		@Schema(description = "처리 완료 객체.")
 		private List<WoTaskCompleted> taskCompletedList = new ArrayList<>();
 
-		@FieldDescribe("待办对象.")
-		@Schema(description = "待办对象.")
+		@FieldDescribe("결재 대기 객체.")
+		@Schema(description = "결재 대기 객체.")
 		private List<WoTask> taskList = new ArrayList<>();
 
-		@FieldDescribe("当前待办序号.")
-		@Schema(description = "当前待办序号.")
+		@FieldDescribe("현재 결재 대기 순번.")
+		@Schema(description = "현재 결재 대기 순번.")
 		private Integer currentTaskIndex;
 
 		public Long getRank() {

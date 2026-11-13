@@ -54,16 +54,16 @@ class ActionListWithUnitSubDirectObject extends BaseAction {
 
 		private static final long serialVersionUID = 1106979865206299656L;
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList;
 
-		@FieldDescribe("是否要统计直接子部门数量")
+		@FieldDescribe("직속 하위 부서 수 집계 여부")
 		private Boolean countSubDirectUnit = false;
 
-		@FieldDescribe("是否要统计直接部门身份数量")
+		@FieldDescribe("직속 부서 신분 수 집계 여부")
 		private Boolean countSubDirectIdentity = false;
 
-		@FieldDescribe("是否要统计直接部门职务数量")
+		@FieldDescribe("직속 부서 직무 수 집계 여부")
 		private Boolean countSubDirectDuty = false;
 
 		public List<String> getUnitList() {
@@ -103,13 +103,13 @@ class ActionListWithUnitSubDirectObject extends BaseAction {
 
 		private static final long serialVersionUID = -1387072363896397302L;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount;
 
-		@FieldDescribe("直接下级职务数量")
+		@FieldDescribe("직속 하위 직무 수")
 		private Long subDirectDutyCount;
 
 		public Long getSubDirectUnitCount() {

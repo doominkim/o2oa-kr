@@ -27,18 +27,18 @@ import com.x.bbs.assemble.control.jaxrs.foruminfo.exception.ExceptionForumInfoId
 import com.x.bbs.assemble.control.jaxrs.foruminfo.exception.ExceptionForumInfoProcess;
 
 @Path("forum")
-@JaxrsDescribe("论坛信息管理")
+@JaxrsDescribe("포럼 정보 관리")
 public class ForumInfoAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ForumInfoAction.class);
 
 	/**
-	 * 访问论坛信息，匿名用户可以访问
+	 * 포럼 정보 접근, 익명 사용자 접근 가능
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "获取登录者可以访问到的所有ForumInfo的信息列表.", action = ActionGetAllWithPermission.class)
+	@JaxrsMethodDescribe(value = "로그인 사용자가 접근 가능한 전체 ForumInfo 정보 목록 조회.", action = ActionGetAllWithPermission.class)
 	@GET
 	@Path("view/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -54,7 +54,7 @@ public class ForumInfoAction extends StandardJaxrsAction {
 				result = new ActionGetAllWithPermission().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "获取登录者可以访问到的所有ForumInfo的信息列表时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "로그인 사용자가 접근 가능한 전체 ForumInfo 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -62,13 +62,13 @@ public class ForumInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据指定ID获取论坛信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 ID로 포럼 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("양식 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -84,7 +84,7 @@ public class ForumInfoAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "根据指定ID获取论坛信息时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "지정한 ID로 포럼 정보를 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

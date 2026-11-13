@@ -17,7 +17,7 @@ public class AttendanceWorkDayConfigService {
 
 	private CacheCategory cache_AttendanceWorkDayConfig = new CacheCategory( AttendanceWorkDayConfig.class);
 	/**
-	 * 从缓存中获取所有的工作日配置
+	 * 캐시에서 모든 근무일 설정 조회
 	 * @return
 	 * @throws Exception
 	 */

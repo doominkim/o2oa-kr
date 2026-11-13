@@ -54,7 +54,7 @@ public class TouchDelay extends AbstractJob {
 					}
 				}
 			} while (!targets.isEmpty());
-			LOGGER.info("完成触发{}个延时工作, 耗时:{}.", count::intValue, stamp::consumingMilliseconds);
+			LOGGER.info("지연 업무 문서 {}개 트리거 완료, 소요 시간:{}.", count::intValue, stamp::consumingMilliseconds);
 		} catch (Exception e) {
 			throw new JobExecutionException(e);
 		}

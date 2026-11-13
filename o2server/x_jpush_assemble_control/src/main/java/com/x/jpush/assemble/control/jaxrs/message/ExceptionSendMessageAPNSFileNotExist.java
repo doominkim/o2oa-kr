@@ -7,6 +7,6 @@ public class ExceptionSendMessageAPNSFileNotExist extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSendMessageAPNSFileNotExist() {
-		super("苹果推送证书文件不存在，无法进行发送消息.");
+		super("Apple 푸시 인증서 파일이 없어 메시지를 보낼 수 없습니다.");
 	}
 }

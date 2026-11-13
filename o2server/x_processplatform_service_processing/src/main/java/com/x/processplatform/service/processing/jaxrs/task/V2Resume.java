@@ -91,7 +91,7 @@ class V2Resume extends BaseAction {
 					} else {
 						task.getProperties().setPauseMinutes(task.getProperties().getPauseMinutes() + minutes);
 					}
-					// 在原有的过期时间基础上延时workTimeMinutes
+					// 기존 만료 시간에 workTimeMinutes만큼 연장
 					if (null != task.getExpireTime()) {
 						task.setExpireTime(Config.workTime().forwardMinutes(task.getExpireTime(), workTimeMinutes));
 						task.setExpired(task.getExpireTime().before(now));

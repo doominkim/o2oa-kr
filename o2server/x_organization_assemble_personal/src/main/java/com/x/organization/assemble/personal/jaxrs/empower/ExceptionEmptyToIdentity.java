@@ -7,7 +7,7 @@ class ExceptionEmptyToIdentity extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionEmptyToIdentity() {
-		super("被委托身份为空.");
+		super("수임 소속이 비어 있습니다.");
 	}
 
 }

@@ -33,7 +33,7 @@ public class ActionGetWithCode extends BaseAction {
 				attendanceSetting = attendanceSettingServiceAdv.getByCode( code );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceSettingProcess( e, "系统根据指定的编码'CODE'查询所有符合条件的考勤系统设置信息列表时发生异常.Code:" + code );
+				Exception exception = new ExceptionAttendanceSettingProcess( e, "지정한 코드 'CODE'로 근태 시스템 설정 목록을 조회하는 중 오류가 발생했습니다. Code:" + code );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -44,7 +44,7 @@ public class ActionGetWithCode extends BaseAction {
 				result.setData( wrap );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceSettingProcess( e, "将所有查询到的考勤配置信息对象转换为可以输出的信息时发生异常." );
+				Exception exception = new ExceptionAttendanceSettingProcess( e, "조회된 근태 설정 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

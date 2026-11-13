@@ -26,12 +26,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("selfholidaysimple")
-@JaxrsDescribe("员工休假申请信息管理服务（已弃用）")
+@JaxrsDescribe("직원 휴가 신청 정보 관리 서비스(사용 중단)")
 public class AttendanceSelfHolidaySimpleAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceSelfHolidaySimpleAction.class);
 
-	@JaxrsMethodDescribe(value = "新建或者更新员工休假申请信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "직원 휴가 신청 정보 생성 또는 수정", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -46,7 +46,7 @@ public class AttendanceSelfHolidaySimpleAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "新建或者更新员工休假申请信息时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "직원 휴가 신청 정보를 생성 또는 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -54,13 +54,13 @@ public class AttendanceSelfHolidaySimpleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据流程文档ID删除员工休假申请数据对象", action = ActionDeleteByWfDocId.class)
+	@JaxrsMethodDescribe(value = "프로세스 문서 ID로 직원 휴가 신청 데이터 객체 삭제", action = ActionDeleteByWfDocId.class)
 	@DELETE
 	@Path("docId/{docId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteByWfDocId(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档标识") @PathParam("docId") String docId) {
+			@JaxrsParameterDescribe("문서 식별자") @PathParam("docId") String docId) {
 		ActionResult<ActionDeleteByWfDocId.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -70,7 +70,7 @@ public class AttendanceSelfHolidaySimpleAction extends StandardJaxrsAction {
 				result = new ActionDeleteByWfDocId().execute(request, effectivePerson, docId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "根据流程文档ID删除员工休假申请信息时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "결재 문서 ID로 직원 휴가 신청 정보를 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

@@ -527,7 +527,7 @@ public class DateTools {
 	}
 
 	/**
-	 * 根据需求调整年份
+	 * 필요에 따라 연도 조정
 	 *
 	 * @param startTime
 	 * @param yearAdjust
@@ -552,7 +552,7 @@ public class DateTools {
 	}
 
 	/**
-	 * 根据需要调整时间
+	 * 필요에 따라 시간 조정
 	 *
 	 * @param dateTime
 	 * @param dayAdjust
@@ -584,11 +584,11 @@ public class DateTools {
 	}
 
 	/**
-	 * 判断当前日期是星期几
+	 * 현재 날짜의 요일 판단
 	 *
-	 * @param dateTime 修要判断的时间
-	 * @return dayForWeek 判断结果
-	 * @Exception 发生异常
+	 * @param dateTime 판단할 시간
+	 * @return dayForWeek 판단 결과
+	 * @Exception 예외 발생
 	 */
 	public static int dayForWeek(String dateTime) throws Exception {
 		Calendar c = Calendar.getInstance();
@@ -603,11 +603,11 @@ public class DateTools {
 	}
 
 	/**
-	 * 判断当前日期是星期几
+	 * 현재 날짜의 요일 판단
 	 *
-	 * @param dateTime 修要判断的时间
-	 * @return dayForWeek 判断结果
-	 * @Exception 发生异常
+	 * @param dateTime 판단할 시간
+	 * @return dayForWeek 판단 결과
+	 * @Exception 예외 발생
 	 */
 	public static int dayForWeek(Date dateTime) throws Exception {
 		Calendar c = Calendar.getInstance();
@@ -622,11 +622,11 @@ public class DateTools {
 	}
 
 	/**
-	 * 判断当前日期是星期几
+	 * 현재 날짜의 요일 판단
 	 *
-	 * @param dateTime 修要判断的时间
-	 * @return 0-6 代表 星期天-星期六
-	 * @Exception 发生异常
+	 * @param dateTime 판단할 시간
+	 * @return 0-6은 일요일-토요일
+	 * @Exception 예외 발생
 	 */
 	public static int dayForWeekAttendanceV2(Date dateTime) throws Exception {
 		Calendar c = Calendar.getInstance();
@@ -635,7 +635,7 @@ public class DateTools {
 	}
 
 	/**
-	 * 两个日期是否在每周循环上
+	 * 두 날짜가 주간 반복에 해당하는지 여부
 	 * @param originDate
 	 * @param judgeDate
 	 * @return
@@ -648,7 +648,7 @@ public class DateTools {
 	}
 
 	/**
-	 * 两个日期是否在每个14天循环上
+	 * 두 날짜가 14일 반복에 해당하는지 여부
 	 * @param originDate
 	 * @param judgeDate
 	 * @return
@@ -662,7 +662,7 @@ public class DateTools {
 
 
 	/**
-	 * 两个日期是否在每月循环上
+	 * 두 날짜가 월간 반복에 해당하는지 여부
 	 * @param originDate
 	 * @param judgeDate
 	 * @return
@@ -676,7 +676,7 @@ public class DateTools {
 
 
 	/**
-	 * 指定的日期，添加指定的天数
+	 * 지정 날짜에 지정 일수 추가
 	 *
 	 * @param date
 	 * @param dayCount
@@ -685,13 +685,13 @@ public class DateTools {
 	public static Date addDay(Date date, int dayCount) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.add(Calendar.DAY_OF_YEAR, dayCount);// 指定的时间上加上n天
+		calendar.add(Calendar.DAY_OF_YEAR, dayCount);// 지정 시간에 n일 추가
 		date = calendar.getTime();
 		return date;
 	}
 
 	/**
-	 * 指定时间添加指定的分钟数
+	 * 지정 시간에 지정 분 추가
 	 * @param date
 	 * @param minutes
 	 * @return
@@ -699,13 +699,13 @@ public class DateTools {
 	public static Date addMinutes(Date date, int minutes) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.add(Calendar.MINUTE, minutes);// 指定的时间上加上n分钟
+		calendar.add(Calendar.MINUTE, minutes);// 지정 시간에 n분 추가
 		date = calendar.getTime();
 		return date;
 	}
 
 	/**
-	 * 指定时间添加指定的秒数
+	 * 지정 시간에 지정 초 추가
 	 * @param date
 	 * @param seconds
 	 * @return
@@ -713,13 +713,13 @@ public class DateTools {
 	public static Date addSeconds(Date date, int seconds) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.add(Calendar.SECOND, seconds);// 指定的时间上加上n秒
+		calendar.add(Calendar.SECOND, seconds);// 지정 시간에 n초 추가
 		date = calendar.getTime();
 		return date;
 	}
 
 	/**
-	 * endDate比startDate多的天数
+	 * endDate가 startDate보다 많은 일수
 	 * @param startDate
 	 * @param endDate
 	 * @return
@@ -736,16 +736,16 @@ public class DateTools {
 
 		int year1 = cal1.get(Calendar.YEAR);
 		int year2 = cal2.get(Calendar.YEAR);
-		if(year1 != year2)   //同一年
+		if(year1 != year2)   //같은 해
 		{
 			int timeDistance = 0 ;
 			for(int i = year1 ; i < year2 ; i ++)
 			{
-				if(i%4==0 && i%100!=0 || i%400==0)    //闰年
+				if(i%4==0 && i%100!=0 || i%400==0)    //윤년
 				{
 					timeDistance += 366;
 				}
-				else    //不是闰年
+				else    //윤년 아님
 				{
 					timeDistance += 365;
 				}
@@ -753,7 +753,7 @@ public class DateTools {
 
 			return timeDistance + (day2-day1) ;
 		}
-		else    //不同年
+		else    //다른 해
 		{
 			return day2-day1;
 		}
@@ -761,7 +761,7 @@ public class DateTools {
 
 
 	/**
-	 * 时间戳转Unix时间戳
+	 * 타임스탬프를 Unix 타임스탬프로 변환
 	 *
 	 * @param timestamp
 	 * @return
@@ -771,7 +771,7 @@ public class DateTools {
 	}
 
 	/**
-	 * Unix时间戳转时间戳
+	 * Unix 타임스탬프를 타임스탬프로 변환
 	 *
 	 * @param unixTimeStamp
 	 * @return

@@ -261,23 +261,23 @@
 .leave-account-table .sticky-row {
   position: sticky;
   top: 0;
-  z-index: 2;                /* 层级高于普通单元格 */
-  background-color: var(--att-table-head-bg); /* 表头背景色 */
+  z-index: 2;                /* 일반 셀보다 높은 계층 */
+  background-color: var(--att-table-head-bg); /* 헤더 배경색 */
 }
 
 .leave-account-table .sticky-col {
   position: sticky;
   left: 0;
   z-index: 1;
-  background-color: #fff; /* 必须设置背景色，否则滚动时后面内容会透过来 */
+  background-color: #fff; /* 배경색 필수, 없으면 스크롤 시 뒤 내용이 비쳐 보임 */
 }
 
-/* 4. 如果第一列表头同时需要固定在最上层（左上角交汇处），z-index 设得更高 */
+/* 4. 첫 열 헤더도 최상단(왼쪽 위 교차점)에 고정해야 하면 z-index를 더 높게 설정 */
 .leave-account-table  thead th.sticky-row.sticky-col {
   top: 0;
   left: 0;
-  z-index: 3;                /* 层级最高！防止被滚动的首行或首列遮挡 */
-  background-color: var(--att-table-head-bg); /* 交叉点可以换个特殊颜色区分 */
+  z-index: 3;                /* 최상위 계층! 스크롤되는 첫 행이나 첫 열에 가려지지 않도록 함 */
+  background-color: var(--att-table-head-bg); /* 교차점은 특별한 색으로 구분 가능 */
 }
 
 .leave-account-balance {

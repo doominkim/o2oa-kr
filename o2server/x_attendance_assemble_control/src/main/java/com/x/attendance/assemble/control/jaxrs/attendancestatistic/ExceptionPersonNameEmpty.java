@@ -7,6 +7,6 @@ class ExceptionPersonNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionPersonNameEmpty() {
-		super("系统未获取到查询参数员工姓名name，无法进行数据查询");
+		super("조회 매개변수인 직원 이름 name이 없어 데이터를 조회할 수 없습니다");
 	}
 }

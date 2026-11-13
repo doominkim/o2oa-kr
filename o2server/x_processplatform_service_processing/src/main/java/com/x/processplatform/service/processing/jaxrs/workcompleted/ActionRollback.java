@@ -191,7 +191,7 @@ class ActionRollback extends BaseAction {
 				work.setForm(formId);
 			}
 			work.setWorkStatus(WorkStatus.processing);
-			// 因为workCompleted没有workCreateType属性，回溯到任何环节都必须要有待办，默认置为assign
+			// workCompleted에는 workCreateType 속성이 없으므로 어느 단계로 롤백하든 결재 대기가 있어야 하며, 기본값은 assign
 			work.setWorkCreateType(Work.WORKCREATETYPE_ASSIGN);
 			return work;
 		}
@@ -236,7 +236,7 @@ class ActionRollback extends BaseAction {
 					remains.add(o);
 				}
 			}
-			// 调整latest标识,否则有不是latest的已办不会在已办列表中显示
+			// latest 표시 조정, 그렇지 않으면 latest가 아닌 처리 완료가 처리 완료 목록에 표시되지 않음
 			remains.stream().collect(Collectors.groupingBy(TaskCompleted::getPerson)).entrySet().stream()
 					.map(Map.Entry::getValue).filter(o -> o.stream().noneMatch(t -> BooleanUtils.isTrue(t.getLatest())))
 					.forEach(o -> {

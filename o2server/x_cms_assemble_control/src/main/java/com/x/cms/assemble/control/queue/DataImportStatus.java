@@ -7,25 +7,25 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public class DataImportStatus {
 	
-	@FieldDescribe( "导入批次号." )
+	@FieldDescribe( "가져오기 배치 번호." )
 	private String batchName = null;
 	
-	@FieldDescribe( "数据总数." )
+	@FieldDescribe( "데이터 총수." )
 	private Integer dataTotal = 0;
 	
-	@FieldDescribe( "已处理总数." )
+	@FieldDescribe( "처리 총수." )
 	private Integer processTotal = 0;
 	
-	@FieldDescribe( "处理成功总数." )
+	@FieldDescribe( "처리 성공 총수." )
 	private Integer successTotal = 0;
 	
-	@FieldDescribe( "处理失败总数." )
+	@FieldDescribe( "처리 실패 총수." )
 	private Integer errorTotal = 0;
 	
-	@FieldDescribe( "错误的数据列表." )
+	@FieldDescribe( "오류 데이터 목록." )
 	private List<List<String>> errors = null;
 	
-	@FieldDescribe( "导入正确的文档ID列表." )
+	@FieldDescribe( "정상 가져온 문서 ID 목록." )
 	private List<String> documentIds = new ArrayList<>();
 	
 	public DataImportStatus() {

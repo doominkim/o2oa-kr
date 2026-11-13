@@ -5,7 +5,7 @@ import com.x.base.core.project.jaxrs.AnonymousCipherManagerUserJaxrsFilter;
 import javax.servlet.annotation.WebFilter;
 
 /**
- * web服务过滤器，无需登录及可访问
+ * web 서비스 필터, 로그인 없이 접근 가능
  * @author sword
  */
 @WebFilter(urlPatterns = {

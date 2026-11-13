@@ -31,7 +31,7 @@ class ActionUpdateWithWorkCompleted extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		WorkCompleted workCompleted = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			/** 防止提交空数据清空data */
+			/** 빈 데이터 제출로 data가 비워지는 것을 방지 */
 			if (null == jsonElement || (!jsonElement.isJsonObject())) {
 				throw new ExceptionNotJsonObject();
 			}
@@ -43,7 +43,7 @@ class ActionUpdateWithWorkCompleted extends BaseAction {
 			if (null == workCompleted) {
 				throw new ExceptionEntityNotExist(id, WorkCompleted.class);
 			}
-			// 允许创建者在完成后再次修改内容,与前台的可修改不一致,所以单独判断,为的是不影响前台显示.
+			// 작성자가 완료 후 내용을 다시 수정할 수 있도록 허용, 프런트의 수정 가능과 일치하지 않아 별도로 판단하며 프런트 표시에 영향을 주지 않기 위함.
 			Application application = business.application().pick(workCompleted.getApplication());
 			Process process = business.process().pick(workCompleted.getProcess());
 			if (BooleanUtils.isFalse(business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process))

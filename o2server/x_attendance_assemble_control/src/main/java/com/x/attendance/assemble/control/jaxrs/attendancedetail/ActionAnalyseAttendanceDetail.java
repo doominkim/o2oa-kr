@@ -42,7 +42,7 @@ public class ActionAnalyseAttendanceDetail extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统根据ID查询考勤打卡信息时发生异常。" + id );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "ID로 근태 체크 정보를 조회하는 중 오류가 발생했습니다." + id );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -52,7 +52,7 @@ public class ActionAnalyseAttendanceDetail extends BaseAction {
 				attendanceWorkDayConfigList = attendanceWorkDayConfigServiceAdv.listAll();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统在根据ID列表查询工作节假日配置信息列表时发生异常！" );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "ID 목록으로 근무일·휴일 설정 목록을 조회하는 중 오류가 발생했습니다!" );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -62,7 +62,7 @@ public class ActionAnalyseAttendanceDetail extends BaseAction {
 				topUnitAttendanceStatisticalCycleMap = attendanceStatisticCycleServiceAdv.getCycleMapFormAllCycles( effectivePerson.getDebugger() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统在查询并且组织所有的统计周期时发生异常." );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "모든 통계 기간을 조회·구성하는 중 오류가 발생했습니다." );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -73,7 +73,7 @@ public class ActionAnalyseAttendanceDetail extends BaseAction {
 				logger.debug( effectivePerson, ">>>>>>>>>>attendance detail analyse completed.person:" + detail.getEmpName() + ", date:" + detail.getRecordDateString());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统分析员工打卡信息时发生异常！ID:" + id);
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보 분석 중 오류가 발생했습니다! ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

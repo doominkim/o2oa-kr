@@ -22,7 +22,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("datastructure")
-@JaxrsDescribe("调试")
+@JaxrsDescribe("디버그")
 public class DataStructureAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(DataStructureAction.class);
@@ -31,7 +31,7 @@ public class DataStructureAction extends BaseAction {
 	@Path("modules/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "列示所有模块以及实体类依赖信息", action = ActionGetAllModuleStructure.class)
+	@JaxrsMethodDescribe(value = "모든 모듈 및 엔티티 클래스 의존성 정보 나열", action = ActionGetAllModuleStructure.class)
 	public void listAllModules(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request ) {
 		ActionResult<List<ActionGetAllModuleStructure.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -48,7 +48,7 @@ public class DataStructureAction extends BaseAction {
 	@Path("tables/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "列示所有的数据表结构设计", action = ActionGetAllTableStructure.class)
+	@JaxrsMethodDescribe(value = "모든 데이터 테이블 구조 설계 나열", action = ActionGetAllTableStructure.class)
 	public void listAllTables(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request ) {
 		ActionResult<List<ActionGetAllTableStructure.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -65,7 +65,7 @@ public class DataStructureAction extends BaseAction {
 	@Path("fileds/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "列示所有的数据表结构设计(按列展现)", action = ActionGetAllTableFields.class)
+	@JaxrsMethodDescribe(value = "모든 데이터 테이블 구조 설계 나열(컬럼 단위)", action = ActionGetAllTableFields.class)
 	public void listAllFields(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request ) {
 		ActionResult<List<ActionGetAllTableFields.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);

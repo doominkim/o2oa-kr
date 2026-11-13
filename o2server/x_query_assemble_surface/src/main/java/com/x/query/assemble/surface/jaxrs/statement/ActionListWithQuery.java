@@ -67,9 +67,9 @@ class ActionListWithQuery extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-//        @FieldDescribe("是否只查询select语句.")
+//        @FieldDescribe("select 구문만 조회할지 여부.")
 //        private Boolean justSelect;
-        @FieldDescribe("是否只查询含有视图的语句.")
+        @FieldDescribe("뷰가 포함된 구문만 조회할지 여부.")
         private Boolean hasView;
 
 //        public Boolean getJustSelect() {

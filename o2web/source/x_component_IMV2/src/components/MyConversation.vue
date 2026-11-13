@@ -45,7 +45,7 @@ const addConversationToListEventFun = (data) => {
   console.debug("addConversationToList")
   if (data) {
     const index = myConversationList.value.findIndex((item) => item.id === data.id)
-    if (index < 0) { // 会话不存在 添加
+    if (index < 0) { // 대화가 없으면 추가
       myConversationList.value.unshift(data)
     }
     currentConversation.value = data
@@ -53,7 +53,7 @@ const addConversationToListEventFun = (data) => {
 }
 
 // ref
-const {chooseMode} = defineProps(['chooseMode']) // 选择模式
+const {chooseMode} = defineProps(['chooseMode']) // 선택 모드
 const myConversationList = ref([])
 const currentConversation = ref(null)
 const searchContent = ref('')
@@ -66,20 +66,20 @@ const searchConversationResultList = ref([])
 const loadMyConversation = async (isCheckNull) => {
   const list = await imAction('myConversationList')
   if (list) {
-    // 特殊处理，新建并且打开的会话，刷新列表后不见了
+    // 특수 처리: 새로 생성해 연 대화가 목록 새로고침 후 사라지는 문제
     if (myConversationList.value.length === 1 && myConversationList.value[0].newConvStatus) {
-      // 后面添加 list
+      // 뒤에 list 추가
       myConversationList.value = [...myConversationList.value, ...list]
     } else {
       myConversationList.value = list
     }
     if (!chooseMode) {
-      // 被踢出群之类的特殊情况
+      // 그룹에서 강퇴되는 등의 특수 상황
       if (isCheckNull && currentConversation.value && list.findIndex(item => item.id === currentConversation.value.id) < 0) {
         currentConversation.value = null
         openConversation(null)
       }
-      // 第一次打开？ 默认选中
+      // 처음 열 때? 기본 선택
       // else if (currentConversation.value == null && list.length > 0) {
       //
       //   currentConversation.value = list[0]
@@ -184,7 +184,7 @@ const clickConversation = (conversation) => {
         <span v-if="searchContent!==''" class="arrow" slot="after-inner-after" @click="clearSearch"><i class="ooicon-error"></i></span>
       </oo-input>
     </div>
-    <!--      会话列表 -->
+    <!--      대화 목록 -->
     <div class="im-conversation-list" v-if=" !searchMode ">
       <div v-for="item in myConversationList" :key="item.id"
            :class=" item.id === currentConversation?.id ? 'im-conv-item active': 'im-conv-item' "
@@ -205,7 +205,7 @@ const clickConversation = (conversation) => {
         </div>
       </div>
     </div>
-    <!--      搜索结果 -->
+    <!--      검색 결과 -->
     <div class="im-conversation-list" v-if=" searchMode ">
       <div v-for="item in searchConversationResultList" :key="item.id"
            :class=" item.id === currentConversation?.id ? 'im-conv-item active': 'im-conv-item' "

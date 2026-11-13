@@ -22,7 +22,7 @@ import com.x.processplatform.core.entity.element.Activity;
 import com.x.processplatform.service.processing.Business;
 
 /**
- * 在Manual环节计算所有的参阅人的Identity
+ * Manual 단계에서 모든 참조자의 Identity 계산
  * 
  * @author Rui
  *
@@ -35,37 +35,37 @@ public class TranslateReviewPersonTools {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TranslateReviewPersonTools.class);
 
-	/* 计算参阅人，全部翻译成Identity,最终全部转换为person */
+	/* 참조자 계산, 모두 Identity로 변환 후 최종적으로 모두 person으로 변환 */
 	public static List<String> translate(AeiObjects aeiObjects) throws Exception {
 		List<String> identities = new ArrayList<>();
 		List<String> units = new ArrayList<>();
 		List<String> groups = new ArrayList<>();
 		List<String> people = new ArrayList<>();
-		/* 指定的身份 */
+		/* 지정 신분 */
 		if (ListTools.isNotEmpty(aeiObjects.getActivity().getReviewIdentityList())) {
 			identities.addAll(aeiObjects.getActivity().getReviewIdentityList());
 		}
-		/* 选择了职务 */
+		/* 직무 선택 */
 		identities.addAll(duty(aeiObjects));
 		ClassifyDistinguishedName classifyDistinguishedName = null;
-		/* 指定data数据路径值 */
+		/* data 데이터 경로 값 지정 */
 		classifyDistinguishedName = aeiObjects.business().organization().classifyDistinguishedNames(
 				data(aeiObjects.business(), aeiObjects.getData(), aeiObjects.getActivity()));
 		identities.addAll(classifyDistinguishedName.getIdentityList());
 		units.addAll(classifyDistinguishedName.getUnitList());
 		groups.addAll(classifyDistinguishedName.getGroupList());
 		people.addAll(classifyDistinguishedName.getPersonList());
-		/* 使用脚本计算 */
+		/* 스크립트로 계산 */
 		classifyDistinguishedName = aeiObjects.business().organization().classifyDistinguishedNames(script(aeiObjects));
 		identities.addAll(classifyDistinguishedName.getIdentityList());
 		units.addAll(classifyDistinguishedName.getUnitList());
 		groups.addAll(classifyDistinguishedName.getGroupList());
 		people.addAll(classifyDistinguishedName.getPersonList());
-		/* 指定处理组织 */
+		/* 처리 조직 지정 */
 		if (ListTools.isNotEmpty(aeiObjects.getActivity().getReviewUnitList())) {
 			units.addAll(aeiObjects.getActivity().getReviewUnitList());
 		}
-		/* 指定处理群组 */
+		/* 처리 그룹 지정 */
 		if (ListTools.isNotEmpty(aeiObjects.getActivity().getReviewGroupList())) {
 			groups.addAll(aeiObjects.getActivity().getReviewGroupList());
 		}
@@ -86,7 +86,7 @@ public class TranslateReviewPersonTools {
 		return people.stream().distinct().collect(Collectors.toList());
 	}
 
-	/* 取到指定职务的identity */
+	/* 지정 직무의 identity 조회 */
 	private static List<String> duty(AeiObjects aeiObjects) throws Exception {
 		List<String> list = new ArrayList<>();
 		if (StringUtils.isNotEmpty(aeiObjects.getActivity().getReviewDuty())) {
@@ -112,7 +112,7 @@ public class TranslateReviewPersonTools {
 		return ListTools.trim(list, true, true);
 	}
 
-	/* 取到script指定的identity */
+	/* script로 지정된 identity 조회 */
 	private static List<String> script(AeiObjects aeiObjects) throws Exception {
 		List<String> list = new ArrayList<>();
 		if ((StringUtils.isNotEmpty(aeiObjects.getActivity().getReviewScript()))

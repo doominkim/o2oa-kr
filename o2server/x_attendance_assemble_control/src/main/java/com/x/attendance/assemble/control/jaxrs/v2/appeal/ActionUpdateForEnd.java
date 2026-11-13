@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Date;
 
 /**
- * 申诉流程结束后回填数据
+ * 이의 신청 프로세스 종료 후 데이터 반영
  * Created by fancyLou on 2023/3/3.
  * Copyright © 2023 O2. All rights reserved.
  */
@@ -48,27 +48,27 @@ public class ActionUpdateForEnd extends BaseAction {
             throw new ExceptionEmptyParameter("jobId");
         }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("审批结束数据回填：{}", wi.toString());
+            LOGGER.debug("결재 종료 데이터 반영: {}", wi.toString());
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2AppealInfo info = emc.find(id, AttendanceV2AppealInfo.class);
             if (info == null) {
-                throw new ExceptionNotExistObject("数据不存在，" + id);
+                throw new ExceptionNotExistObject("데이터가 없습니다, " + id);
             }
             emc.beginTransaction(AttendanceV2AppealInfo.class);
-            info.setStatus(wi.getResult() == 1 ? AttendanceV2AppealInfo.status_TYPE_PROCESS_AGREE : AttendanceV2AppealInfo.status_TYPE_PROCESS_DISAGREE); // 审批结果
+            info.setStatus(wi.getResult() == 1 ? AttendanceV2AppealInfo.status_TYPE_PROCESS_AGREE : AttendanceV2AppealInfo.status_TYPE_PROCESS_DISAGREE); // 결재 결과
             info.setEndTime(DateTools.now());
             info.setReason(wi.getReason());
             info.setJobId(wi.getJobId());
             emc.check(info, CheckPersistType.all);
             emc.commit();
-            if (wi.getResult() == 1) { // 审批 同意 更新打卡记录 否则不动
+            if (wi.getResult() == 1) { // 결재 승인 시 출퇴근 기록 갱신, 아니면 변경 없음
                 AttendanceV2CheckInRecord record = emc.find(info.getRecordId(), AttendanceV2CheckInRecord.class);
                 if (record != null) {
                     emc.beginTransaction(AttendanceV2CheckInRecord.class);
-                    // 申诉成功后，更新打卡状态
+                    // 이의 신청 성공 후 출퇴근 상태 갱신
                     record.setCheckInResult(AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL);
-                    record.setAppealId(info.getId()); // 申诉完成回填审核数据id
+                    record.setAppealId(info.getId()); // 이의 신청 완료 후 심사 데이터 id 반영
                     record.setDescription("소명 완료!");
                     try {
                         if (BooleanUtils.isTrue(wi.getNeedResetTime())) {
@@ -80,13 +80,13 @@ public class ActionUpdateForEnd extends BaseAction {
                     }
                     emc.check(record, CheckPersistType.all);
                     emc.commit();
-                    // 申诉成功后，重新生成对应的数据
+                    // 이의 신청 성공 후 해당 데이터 재생성
                     if (wi.getResult() == 1) {
-                        LOGGER.info("申诉成功，重新发起考勤数据生成，Date：{} person: {}", record.getRecordDateString(), record.getUserId());
+                        LOGGER.info("이의 신청 성공, 근태 데이터 재생성 요청, Date: {} person: {}", record.getRecordDateString(), record.getUserId());
                         ThisApplication.queueV2Detail.send(new QueueAttendanceV2DetailModel(record.getUserId(), record.getRecordDateString()));
                     }
                 } else {
-                    LOGGER.info("没有找到对应的打卡记录数据，"+info.getRecordId());
+                    LOGGER.info("해당 출퇴근 기록 데이터를 찾지 못했습니다,"+info.getRecordId());
                 }
             }
             ActionResult<Wo> result = new ActionResult<>();
@@ -99,13 +99,13 @@ public class ActionUpdateForEnd extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("审批结果：1-审批通过，-1-审批不通过")
+        @FieldDescribe("결재 결과: 1-승인, -1-반려")
         private Integer result;
-        @FieldDescribe("申诉详细，申诉流程结束后写入.")
+        @FieldDescribe("이의 신청 상세, 이의 신청 프로세스 종료 후 기록.")
         private String reason;
-        @FieldDescribe("流程的jobId，申诉流程结束后写入")
+        @FieldDescribe("프로세스 jobId, 이의 신청 프로세스 종료 후 기록")
         private String jobId;
-        @FieldDescribe("是否需要重置打卡时间")
+        @FieldDescribe("출퇴근 시간 초기화 필요 여부")
         private Boolean needResetTime;
 
         public Boolean getNeedResetTime() {

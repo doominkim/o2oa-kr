@@ -12,7 +12,7 @@ public class ExceptionQywxResponse extends PromptException {
     private static final long serialVersionUID = -2068458307623732091L;
 
     ExceptionQywxResponse(Integer retCode, String retMessage) {
-        super("企业微信单点失败,错误代码:{},错误消息:{}.", retCode, retMessage);
+        super("WeCom 통합 로그인 실패, 오류 코드: {}, 오류 메시지: {}.", retCode, retMessage);
     }
 }
 

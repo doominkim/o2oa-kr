@@ -82,7 +82,7 @@ public class ActionUpdateConfig extends BaseAction {
         if(resp.getCount()!=null && resp.getCount() > 0){
             return;
         }
-        logger.info("同步ai大模型配置到ai服务");
+        logger.info("ai 대형 모델 설정을 ai 서비스에 동기화");
         List<AiModel> modelList = listModel();
         if(ListTools.isNotEmpty(modelList)){
             ActionUpdateModel updateModel = new ActionUpdateModel();
@@ -111,7 +111,7 @@ public class ActionUpdateConfig extends BaseAction {
         if(resp.getCount()!=null && resp.getCount() > 0){
             return;
         }
-        logger.info("同步ai MCP配置到ai服务");
+        logger.info("ai MCP 설정을 ai 서비스에 동기화");
         URL jsonUrl = Thread.currentThread().getContextClassLoader().getResource("InitMcp.json");
         if(jsonUrl != null){
             File file = new File(jsonUrl.toURI());
@@ -162,10 +162,10 @@ public class ActionUpdateConfig extends BaseAction {
 
     public static class ConfigWi extends GsonPropertyObject {
 
-        @FieldDescribe("文件名")
+        @FieldDescribe("파일 이름")
         private String fileName;
 
-        @FieldDescribe("config文件内容")
+        @FieldDescribe("config 파일 내용")
         private String fileContent;
 
         public String getFileName() {

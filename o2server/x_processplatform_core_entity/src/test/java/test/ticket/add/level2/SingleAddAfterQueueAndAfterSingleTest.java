@@ -19,7 +19,7 @@ class SingleAddAfterQueueAndAfterSingleTest {
 
  
 
-	@DisplayName("B后加签EFG,EFG串行处理,E后加签IJK,IJK单人处理,即单人-后加签串行-后加签单人")
+	@DisplayName("B후 추가결재EFG,EFG순차 처리,E후 추가결재IJK,IJK단일 처리,즉 단일-후 추가결재순차-후 추가결재단일")
 	@Test
 	@Order(1)
 	void test01() {

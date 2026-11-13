@@ -71,20 +71,20 @@ class ActionBundleV2 extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("前端指定排序列")
+		@FieldDescribe("프런트 지정 정렬 열")
 		private List<SelectEntry> orderList = new TreeList<>();
 
-		@FieldDescribe("过滤")
+		@FieldDescribe("필터")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "com.x.query.core.express.plan.FilterEntry", fieldValue = "{value='',otherValue='',path='',formatType='',logic='',comparison=''}", fieldSample = "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}")
 		private List<FilterEntry> filterList = new TreeList<>();
 
-		@FieldDescribe("参数")
+		@FieldDescribe("파라미터")
 		private Map<String, String> parameter = new HashMap<>();
 
-		@FieldDescribe("每页数量")
+		@FieldDescribe("페이지당 개수")
 		private Integer size = 0;
 
-		@FieldDescribe("第几页")
+		@FieldDescribe("페이지 번호")
 		private Integer page = 0;
 
 		public List<SelectEntry> getOrderList() {
@@ -130,10 +130,10 @@ class ActionBundleV2 extends BaseAction {
 
 	public static class Wo extends WrapStringList {
 
-		@FieldDescribe("访问execute秘钥串.")
+		@FieldDescribe("execute 접근 키 문자열.")
 		private String key;
 
-		@FieldDescribe("总量.")
+		@FieldDescribe("총량.")
 		private Long count;
 
 		public String getKey() {

@@ -6,7 +6,7 @@ class ExceptionOauthBindDisable extends LanguagePromptException {
 
 	private static final long serialVersionUID = 4132300948670472899L;
 
-	public static String defaultMessage = "绑定已经禁用.";
+	public static String defaultMessage = "연동이 비활성화되었습니다.";
 
 	ExceptionOauthBindDisable() {
 		super(defaultMessage);

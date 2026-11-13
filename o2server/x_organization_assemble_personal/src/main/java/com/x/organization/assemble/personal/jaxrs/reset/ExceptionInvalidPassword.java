@@ -7,6 +7,6 @@ public class ExceptionInvalidPassword extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionInvalidPassword(String hint) {
-		super("不符合密码规则:{}.", hint);
+		super("비밀번호 규칙에 맞지 않습니다: {}.", hint);
 	}
 }

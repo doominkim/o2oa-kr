@@ -7,6 +7,6 @@ class ExceptionEntryEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionEntryEmpty(String model) {
-		super("神经网络多层感知机({})项目训练数据集为空.", model);
+		super("신경망 다층 퍼셉트론({}) 프로젝트의 학습 데이터 세트가 비어 있습니다.", model);
 	}
 }

@@ -11,22 +11,22 @@ public class ItemAccessActivity extends JsonProperties {
 
     private static final long serialVersionUID = -2826601221045816580L;
 
-    @FieldDescribe("活动ID.")
+    @FieldDescribe("활동 ID.")
     private String id;
 
-    @FieldDescribe("活动唯一编码.")
+    @FieldDescribe("활동 고유 코드.")
     private String unique;
 
-    @FieldDescribe("活动名称.")
+    @FieldDescribe("활동 이름.")
     private String name;
 
-    @FieldDescribe("活动别名.")
+    @FieldDescribe("활동 별칭.")
     private String alias;
 
-    @FieldDescribe("流程标识.")
+    @FieldDescribe("프로세스 식별자.")
     private String process;
 
-    @FieldDescribe("活动类型.")
+    @FieldDescribe("활동 유형.")
     private String type;
 
     public String getId() {

@@ -19,7 +19,7 @@ import com.x.cms.core.express.tools.CriteriaBuilderTools;
 
 
 /**
- * 分类表单模板信息管理表基础功能服务类
+ * 분류 양식 템플릿 정보 관리 테이블 기본 기능 서비스 클래스
  *
  * @author O2LEE
  */
@@ -43,7 +43,7 @@ public class FormFactory extends ElementFactory {
 	 * @return Form
 	 * @throws Exception
 	 */
-	//@MethodDescribe("获取指定Id的Form文件附件信息对象")
+	//@MethodDescribe("지정한 Id의 Form 첨부파일 정보 객체 조회")
 	public Form get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, Form.class, ExceptionWhen.none );
 	}
@@ -52,7 +52,7 @@ public class FormFactory extends ElementFactory {
 	 * @return List：String
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示全部的Form文件附件信息ID列表")
+	//@MethodDescribe("전체 Form 첨부파일 정보 ID 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( Form.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -64,11 +64,11 @@ public class FormFactory extends ElementFactory {
 
 	/**
 	 *
-	 * @param ids 需要查询的ID列表
+	 * @param ids 조회할 ID 목록
 	 * @return List：Form
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定Id的Form文件附件信息ID列表")
+	//@MethodDescribe("지정한 Id의 Form 첨부파일 정보 ID 목록 조회")
 //	public List<Form> list(List<String> ids) throws Exception {
 //		if(ListTools.isEmpty( ids )) {
 //			return null;
@@ -82,15 +82,15 @@ public class FormFactory extends ElementFactory {
 //	}
 
 	/**
-	 * 列示指定应用的所有表单模板信息ID列表
-	 * @param appId 指定的文档ID
+	 * 지정한 앱의 모든 양식 템플릿 정보 ID 목록 조회
+	 * @param appId 지정한 문서 ID
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定分类的所有表单模板信息ID列表")
+	//@MethodDescribe("지정한 분류의 모든 양식 템플릿 정보 ID 목록 조회")
 	public List<String> listByAppId( String appId ) throws Exception {
 		if( StringUtils.isEmpty(appId) ){
-			throw new Exception("内容管理listByAppId方法不接受appId为空的查询操作！");
+			throw new Exception("게시판 listByAppId 메서드는 appId가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( Form.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -116,7 +116,7 @@ public class FormFactory extends ElementFactory {
 
 	public List<Form> listFormByAppId( String appId ) throws Exception {
 		if( StringUtils.isEmpty(appId) ){
-			throw new Exception("内容管理listByAppId方法不接受appId为空的查询操作！");
+			throw new Exception("게시판 listByAppId 메서드는 appId가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( Form.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -127,9 +127,9 @@ public class FormFactory extends ElementFactory {
 	}
 
 	/**
-	 * 根据栏目ID以及表单的标识 获取一个表单对象
-	 * @param appId 栏目ID
-	 * @param formFlag 表单标识
+	 * 게시판 ID와 양식 식별자로 양식 객체 조회
+	 * @param appId 게시판 ID
+	 * @param formFlag 양식 식별자
 	 * @return
 	 * @throws Exception
 	 */

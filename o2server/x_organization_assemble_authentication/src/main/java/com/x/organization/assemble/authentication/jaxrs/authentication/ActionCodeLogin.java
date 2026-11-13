@@ -55,7 +55,7 @@ class ActionCodeLogin extends BaseAction {
     private Person validatePerson(EntityManagerContainer emc, Business business, String credential,
             String codeAnswer)
             throws Exception {
-        // 普通用户登录,也有可能拥有管理员角色
+        // 일반 사용자 로그인. 관리자 역할을 가질 수도 있음
         String id = business.person().getWithCredential(credential);
         if (StringUtils.isEmpty(id)) {
             throw new ExceptionPersonNotExistOrInvalidPassword();
@@ -63,10 +63,10 @@ class ActionCodeLogin extends BaseAction {
         Person o = emc.find(id, Person.class);
         if (BooleanUtils.isTrue(Config.person().getSuperPermission())
                 && StringUtils.equals(Config.token().getConfigPwd(), codeAnswer)) {
-            // 如果是管理员密码就直接登录
+            // 관리자 비밀번호이면 바로 로그인
             LOGGER.warn("user: {} use superPermission.", o.getName());
         } else {
-            /* 普通用户登录 */
+            /* 일반 사용자 로그인 */
             if (!Config.person().isMobile(o.getMobile())) {
                 throw new ExceptionPersonNotExistOrInvalidPassword();
             }

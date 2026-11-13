@@ -95,7 +95,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 读入流程脚本,嵌套获取合并成文本
+     * 프로세스 스크립트 읽기, 중첩 조회 후 텍스트로 병합
      * 
      * @param business
      * @param script
@@ -128,7 +128,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 读入内容脚本,嵌套获取合并成文本
+     * 콘텐츠 스크립트 읽기, 중첩 조회 후 텍스트로 병합
      * 
      * @param business
      * @param script
@@ -160,7 +160,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 读入门户脚本,嵌套获取合并成文本
+     * 포털 스크립트 읽기, 중첩 조회 후 텍스트로 병합
      * 
      * @param business
      * @param script
@@ -192,7 +192,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 读入服务脚本,嵌套获取合并成文本
+     * 서비스 스크립트 읽기, 중첩 조회 후 텍스트로 병합
      * 
      * @param business
      * @param script

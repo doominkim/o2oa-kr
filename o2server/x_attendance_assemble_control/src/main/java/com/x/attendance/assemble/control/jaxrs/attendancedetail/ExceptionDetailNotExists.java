@@ -7,6 +7,6 @@ class ExceptionDetailNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionDetailNotExists( String id ) {
-		super("员工打卡信息不存在！ID:" + id );
+		super("직원 체크 정보가 없습니다! ID:" + id );
 	}
 }

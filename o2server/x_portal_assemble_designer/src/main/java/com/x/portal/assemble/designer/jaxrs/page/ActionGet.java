@@ -62,10 +62,10 @@ class ActionGet extends BaseAction {
 		static WrapCopier<Page, Wo> copier = WrapCopierFactory.wo(Page.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("角标关联脚本.")
+		@FieldDescribe("배지 연결 스크립트.")
 		private String cornerMarkScript;
 
-		@FieldDescribe("角标脚本文本.")
+		@FieldDescribe("배지 스크립트 텍스트.")
 		private String cornerMarkScriptText;
 
 		public String getCornerMarkScript() {

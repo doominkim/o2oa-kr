@@ -25,19 +25,19 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("review")
-@JaxrsDescribe("参阅")
+@JaxrsDescribe("참조 열람")
 public class ReviewAction extends StandardJaxrsAction {
 
 
 	private static final Logger logger = LoggerFactory.getLogger(ReviewAction.class);
 
-	@JaxrsMethodDescribe(value = "删除参阅.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "참조 문서 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -51,7 +51,7 @@ public class ReviewAction extends StandardJaxrsAction {
 
 
 
-	@JaxrsMethodDescribe(value = "根据workCompleted批量创建review.", action = ActionCreateWithWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "workCompleted로 review 일괄 생성.", action = ActionCreateWithWorkCompleted.class)
 	@POST
 	@Path("create/workcompleted")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -69,7 +69,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据workId批量创建review.", action = ActionCreateWithWork.class)
+	@JaxrsMethodDescribe(value = "workId 기준 review 일괄 생성.", action = ActionCreateWithWork.class)
 	@POST
 	@Path("create/work")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -87,7 +87,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量初始化特殊用户的review，用于视图权限过滤.", action = ActionInitForView.class)
+	@JaxrsMethodDescribe(value = "특수 사용자의 review 일괄 초기화, 뷰 권한 필터링용.", action = ActionInitForView.class)
 	@POST
 	@Path("init/review")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -42,7 +42,7 @@ class ActionUpdate extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = -1919611450892520477L;
-		@FieldDescribe("标识")
+		@FieldDescribe("식별자")
 		private List<String> idList = new ArrayList<>();
 
 		public List<String> getIdList() {

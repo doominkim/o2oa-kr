@@ -50,7 +50,7 @@ class ActionListWithPersonAndTerminal extends BaseAction {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				Business business = new Business(emc);
 				List<String> identities = business.organization().identity().listWithPerson(effectivePerson);
-				// 去除部门以及上级部门,如果设置了一级部门可用,那么一级部门下属的二级部门也可用
+				// 부서 및 상위 부서 제거, 1단계 부서가 사용 가능하면 그 하위 2단계 부서도 사용 가능
 				List<String> units = business.organization().unit().listWithPersonSupNested(effectivePerson);
 				List<String> roles = business.organization().role().listWithPerson(effectivePerson);
 				List<String> groups = business.organization().group().listWithIdentity(identities);
@@ -81,12 +81,12 @@ class ActionListWithPersonAndTerminal extends BaseAction {
 		static WrapCopier<Application, Wo> copier = WrapCopierFactory.wo(Application.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("流程对象.")
-		@Schema(description = "流程对象.")
+		@FieldDescribe("프로세스 객체.")
+		@Schema(description = "프로세스 객체.")
 		private List<WoProcess> processList;
 
-		@FieldDescribe("是否可编辑.")
-		@Schema(description = "是否可编辑.")
+		@FieldDescribe("편집 가능 여부.")
+		@Schema(description = "편집 가능 여부.")
 		private Boolean allowControl;
 
 		public Boolean getAllowControl() {
@@ -117,7 +117,7 @@ class ActionListWithPersonAndTerminal extends BaseAction {
 	}
 
 	/**
-	 * 从Process中获取可以启动的Process的application.不考虑创建者.
+	 * Process에서 시작 가능한 Process의 application 조회. 생성자 미고려.
 	 *
 	 * @param business
 	 * @param effectivePerson

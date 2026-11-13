@@ -24,19 +24,19 @@ public class RegistApplicationsAndVoteCenterTask implements Job {
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		try {
 			if (BooleanUtils.isTrue(Servers.applicationServerIsStarted())) {
-				// 注册node上所有的application到各个center
+				// node의 모든 application을 각 center에 등록
 				Config.resource_node_eventQueue()
 						.put(XGsonBuilder.instance().toJsonTree(new RegistApplicationsEvent()));
-				// 先选举center
+				// 먼저 center 선출
 				Config.resource_node_eventQueue().put(XGsonBuilder.instance().toJsonTree(new VoteCenterEvent()));
 			}
 			if (StringUtils.equalsIgnoreCase(Config.node(), Config.resource_node_centersPirmaryNode())) {
 				// if (BooleanUtils.isTrue(Servers.centerServerIsStarted())) {
-				// 刷新本地application
+				// 로컬 application 갱신
 				Config.resource_node_eventQueue()
 						.put(XGsonBuilder.instance().toJsonTree(new RefreshApplicationsEvent()));
 			} else {
-				// 从主center更新本地数据
+				// 주 center에서 로컬 데이터 업데이트
 				Config.resource_node_eventQueue()
 						.put(XGsonBuilder.instance().toJsonTree(new UpdateApplicationsEvent()));
 			}

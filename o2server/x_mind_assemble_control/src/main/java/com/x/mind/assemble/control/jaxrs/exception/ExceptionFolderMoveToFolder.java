@@ -7,10 +7,10 @@ public class ExceptionFolderMoveToFolder extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionFolderMoveToFolder( String message ) {
-		super("将文件夹移动到指定文件夹时发生异常！MESSAGE：" + message );
+		super("폴더를 지정한 폴더로 이동하는 중 오류가 발생했습니다! MESSAGE:" + message );
 	}
 	
 	public ExceptionFolderMoveToFolder( Throwable e, String message ) {
-		super("将文件夹信息移动到指定文件夹时发生异常！MESSAGE：" + message, e );
+		super("폴더 정보를 지정한 폴더로 이동하는 중 오류가 발생했습니다! MESSAGE:" + message, e );
 	}
 }

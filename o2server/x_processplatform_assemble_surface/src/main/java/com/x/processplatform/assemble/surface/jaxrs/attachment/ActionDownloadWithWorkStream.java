@@ -47,16 +47,16 @@ class ActionDownloadWithWorkStream extends BaseAction {
 				attachment = emc.find(id, Attachment.class);
 			} else {
 				work = emc.find(workId, Work.class);
-				// 判断work是否存在
+				// work 존재 여부 판단
 				if (null == work) {
 					throw new ExceptionEntityNotExist(workId, Work.class);
 				}
-				// 判断attachment是否存在
+				// attachment 존재 여부 판단
 				attachment = emc.find(id, Attachment.class);
 				if (null == attachment) {
 					throw new ExceptionEntityNotExist(id, Attachment.class);
 				}
-				// 生成当前用户针对work的权限控制,并判断是否可以访问
+				// work에 대한 현재 사용자의 권한 제어를 생성하고 접근 가능 여부 판단
 				Control control = new WorkControlBuilder(effectivePerson, business, work).enableAllowVisit().build();
 				if (BooleanUtils.isNotTrue(control.getAllowVisit())) {
 					throw new ExceptionAccessDenied(effectivePerson, work);

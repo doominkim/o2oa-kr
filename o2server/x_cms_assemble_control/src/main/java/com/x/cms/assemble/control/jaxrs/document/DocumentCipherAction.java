@@ -28,12 +28,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("document/cipher")
-@JaxrsDescribe("信息发布信息文档管理(Cipher)")
+@JaxrsDescribe("정보 게시 정보 문서 관리(Cipher)")
 public class DocumentCipherAction extends StandardJaxrsAction{
 
 	private static  Logger logger = LoggerFactory.getLogger( DocumentCipherAction.class );
 
-	@JaxrsMethodDescribe(value = "直接发布文档信息.", action = ActionPersistPublishByWorkFlow.class)
+	@JaxrsMethodDescribe(value = "문서 정보 바로 게시.", action = ActionPersistPublishByWorkFlow.class)
 	@PUT
 	@Path("publish/content")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -55,7 +55,7 @@ public class DocumentCipherAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "直接发布文档信息.", action = ActionPersistPublishByWorkFlow.class)
+	@JaxrsMethodDescribe(value = "문서 정보 바로 게시.", action = ActionPersistPublishByWorkFlow.class)
 	@POST
 	@Path("publish/content/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -77,14 +77,14 @@ public class DocumentCipherAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查询符合过滤条件的已发布的信息内容(管理员和Ciper使用).", action = ActionQueryListWithFilterPagingAdmin.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 페이지 조회(관리자와 Ciper 사용).", action = ActionQueryListWithFilterPagingAdmin.class)
 	@PUT
 	@Path("filter/list/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void query_listWithFilterPaging( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-											@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-											@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+											@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+											@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionQueryListWithFilterPagingAdmin.Wo>> result = new ActionResult<>();
 		Boolean check = true;
@@ -101,14 +101,14 @@ public class DocumentCipherAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查询符合过滤条件的已发布的信息内容(管理员和Ciper使用).", action = ActionQueryListWithFilterPagingAdmin.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 게시된 정보 내용 페이지 조회(관리자와 Ciper 사용).", action = ActionQueryListWithFilterPagingAdmin.class)
 	@POST
 	@Path("filter/list/{page}/size/{size}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void query_listWithFilterPagingMockPutToPost( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-											@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-											@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+											@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+											@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionQueryListWithFilterPagingAdmin.Wo>> result = new ActionResult<>();
 		Boolean check = true;
@@ -125,14 +125,14 @@ public class DocumentCipherAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询某用户是否有阅读文档的权限.", action = ActionQueryPermissionReadDocument.class)
+	@JaxrsMethodDescribe(value = "특정 사용자의 문서 열람 권한 여부 조회.", action = ActionQueryPermissionReadDocument.class)
 	@GET
 	@Path("{id}/permission/read/person/{person}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void query_PermissionReadDocument( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-											@JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("用户") @PathParam("person") String person) {
+											@JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("사용자") @PathParam("person") String person) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionQueryPermissionReadDocument.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -149,13 +149,13 @@ public class DocumentCipherAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "添加文档的阅读记录.", action = ActionPersistViewRecord.class)
+	@JaxrsMethodDescribe(value = "문서 열람 기록 추가.", action = ActionPersistViewRecord.class)
 	@POST
 	@Path("{id}/persist/view/record")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void persist_documentViewRecord( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-											@JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement ) {
+											@JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionPersistViewRecord.Wo> result = new ActionResult<>();
 

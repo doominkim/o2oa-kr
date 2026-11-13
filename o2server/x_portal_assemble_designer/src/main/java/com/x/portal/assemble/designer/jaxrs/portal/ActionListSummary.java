@@ -26,7 +26,7 @@ class ActionListSummary extends BaseAction {
 			Business business = new Business(emc);
 			List<String> ids = this.listEditable(business, effectivePerson);
 			List<Wo> wos = Wo.copier.copy(emc.list(Portal.class, ids));
-			/* 由于有多值字段所以需要全部取出 */
+			/* 다중 값 필드가 있어 전체를 조회해야 함 */
 			for (Wo wo : wos) {
 				List<String> os = business.page().listWithPortal(wo.getId());
 				// wo.setPageList(WoPage.copier.copy(emc.list(Page.class, os)));
@@ -47,7 +47,7 @@ class ActionListSummary extends BaseAction {
 		static WrapCopier<Portal, Wo> copier = WrapCopierFactory.wo(Portal.class, Wo.class,
 				JpaObject.singularAttributeField(Portal.class, true, false), null);
 
-		@FieldDescribe("页面")
+		@FieldDescribe("페이지")
 		private List<WoPage> pageList = new ArrayList<>();
 
 		public List<WoPage> getPageList() {

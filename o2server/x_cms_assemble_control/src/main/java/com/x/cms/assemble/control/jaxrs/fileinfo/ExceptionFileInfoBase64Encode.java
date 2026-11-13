@@ -7,6 +7,6 @@ class ExceptionFileInfoBase64Encode extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionFileInfoBase64Encode( Throwable e, String id ) {
-		super("系统将文件转换为Base64编码发生异常。Id:{}", id );
+		super("파일을 Base64로 인코딩하는 중 오류가 발생했습니다. Id: {}", id );
 	}
 }

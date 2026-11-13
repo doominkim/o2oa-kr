@@ -44,7 +44,7 @@ class ActionCreate extends BaseAction {
 
         LOGGER.debug("execute:{}.", effectivePerson::getDistinguishedName);
 
-        // 前端在添加人员时重复执行,所以需要同步执行
+        // 프론트엔드에서 사용자 추가 시 중복 실행되므로 동기 실행 필요
         ActionResult<Wo> result = new ActionResult<>();
         Wo wo = new Wo();
         synchronized (ActionCreate.class) {
@@ -77,7 +77,7 @@ class ActionCreate extends BaseAction {
                 if (StringUtils.isBlank(wi.getUnique())) {
                     identity.setUnique(unit.getUnique() + "_" + person.getUnique());
                 }
-                /** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+                /** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
                 if (this.uniqueDuplicateWhenNotEmpty(business, identity)) {
                     throw new ExceptionDuplicateUnique(identity.getName(), identity.getUnique());
                 }
@@ -86,7 +86,7 @@ class ActionCreate extends BaseAction {
                 identity.setUnitLevelName(unit.getLevelName());
                 identity.setUnitName(unit.getName());
                 identity.setPerson(person.getId());
-                /* 设置主身份 */
+                /* 주 신분 설정 */
                 List<Identity> others = emc.listEqual(Identity.class, Identity.person_FIELDNAME, identity.getPerson());
                 if (others.isEmpty()) {
                     identity.setMajor(true);

@@ -24,12 +24,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("input")
-@JaxrsDescribe("导入")
+@JaxrsDescribe("가져오기")
 public class InputAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(InputAction.class);
 
-	@JaxrsMethodDescribe(value = "上传对比数据内容.", action = ActionCompare.class)
+	@JaxrsMethodDescribe(value = "비교 데이터 내용 업로드.", action = ActionCompare.class)
 	@PUT
 	@Path("compare")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "准备覆盖服务.", action = ActionPrepareCover.class)
+	@JaxrsMethodDescribe(value = "서비스 덮어쓰기 준비.", action = ActionPrepareCover.class)
 	@PUT
 	@Path("prepare/cover")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "覆盖服务.", action = ActionCover.class)
+	@JaxrsMethodDescribe(value = "서비스 덮어쓰기.", action = ActionCover.class)
 	@PUT
 	@Path("cover")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -83,7 +83,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "准备创建服务.", action = ActionPrepareCreate.class)
+	@JaxrsMethodDescribe(value = "서비스 생성 준비.", action = ActionPrepareCreate.class)
 	@PUT
 	@Path("prepare/create")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -101,7 +101,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建服务.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "서비스 생성.", action = ActionCreate.class)
 	@PUT
 	@Path("create")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -30,7 +30,7 @@ class ActionList extends BaseAction {
 			List<TemplateForm> os = emc.list(TemplateForm.class, ids);
 			wraps = simpleOutCopier.copy(os);
 			Control control = new Control();
-			/** 检查管理员和流程管理员删除的权限 */
+			/** 관리자 및 프로세스 관리자의 삭제 권한 검사 */
 			if (effectivePerson.isManager() || business.organization().person().hasRole(effectivePerson, OrganizationDefinition.CMSManager)) {
 				control.setAllowDelete(true);
 			} else {

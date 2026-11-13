@@ -15,7 +15,7 @@ public class DocumentExistsCheckTask extends AbstractQueue<DocumentCheckQueue> {
 	private HotPictureInfoServiceAdv hotPictureInfoServiceAdv = new HotPictureInfoServiceAdv();
 	
 	/**
-	 * 检查信息是否存在，如果不存在，则进行数据删除
+	 * 정보 존재 여부를 확인하고, 존재하지 않으면 데이터 삭제
 	 * 
 	 * @param documentCheckQueue
 	 * @throws Exception
@@ -53,7 +53,7 @@ public class DocumentExistsCheckTask extends AbstractQueue<DocumentCheckQueue> {
 				logger.info("Timertask Hotpicture InfoExistsCheckTask : hot picture has deleted.title:" + infoTitle );
 			}
 		}else{
-			try {// 删除，超过100条了，无意义
+			try {// 삭제(100건 초과분은 의미 없음)
 				hotPictureInfoServiceAdv.deleteWithInfoId( infoId );
 			} catch (Exception e) {
 				logger.warn("system delete not exists picture info got an exception.");

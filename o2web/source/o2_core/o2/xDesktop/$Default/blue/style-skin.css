@@ -266,7 +266,7 @@
 
 
 
-/*个人设置---begin*/
+/*개인 설정---begin*/
 .formTableArea table .selectNode:hover {
     background:url(../o2_core/o2/xDesktop/$Default/blue/icons/icon_jia.png) center center no-repeat !important
 }
@@ -297,4 +297,4 @@
 div:hover>.o2_profile_emPower_Btntext{
     color: #4A90E2 !important;
 }
-/*个人设置---end*/
+/*개인 설정---end*/

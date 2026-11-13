@@ -28,12 +28,12 @@ import com.x.base.core.project.logger.LoggerFactory;
  * @author sword
  */
 @Path("userinfo")
-@JaxrsDescribe("论坛用户信息查询服务")
+@JaxrsDescribe("포럼 사용자 정보 조회 서비스")
 public class UserInfoAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(UserInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的论坛用户信息.", action = ActionFilterUserInfo.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 포럼 사용자 정보 목록.", action = ActionFilterUserInfo.class)
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -50,13 +50,13 @@ public class UserInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量更新指定用户帖子和回复的昵称.", action = ActionUpdateNickName.class)
+	@JaxrsMethodDescribe(value = "지정 사용자의 게시글과 답글 닉네임 일괄 수정.", action = ActionUpdateNickName.class)
 	@GET
 	@Path("update/nick/name/{person}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateNickName(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-				@JaxrsParameterDescribe("用户") @PathParam("person") String person) {
+				@JaxrsParameterDescribe("사용자") @PathParam("person") String person) {
 		ActionResult<ActionUpdateNickName.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

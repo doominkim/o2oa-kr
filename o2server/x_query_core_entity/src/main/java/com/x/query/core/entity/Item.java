@@ -31,7 +31,7 @@ import com.x.base.core.entity.dataitem.ItemType;
 import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Item", description = "数据中心数据条目.")
+@Schema(name = "Item", description = "데이터 센터 데이터 항목.")
 @Entity
 @ContainerEntity(dumpSize = 500, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Item.table, uniqueConstraints = {
@@ -65,12 +65,12 @@ public class Item extends DataItem {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.path0 = StringUtils.trimToEmpty(this.path0);
@@ -91,10 +91,10 @@ public class Item extends DataItem {
 		this.path7Location = NumberUtils.toInt(this.path7, -1);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* 修改过的 set get方法 */
-	@FieldDescribe("数据标识")
+	/* 수정된 set get 메서드 */
+	@FieldDescribe("데이터 식별자")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + bundle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String bundle;

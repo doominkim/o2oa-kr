@@ -26,7 +26,7 @@ class ActionSet extends BaseAction {
 
 		MissionExternalDataSources.CheckResult checkResult = MissionExternalDataSources.check();
 		if (BooleanUtils.isTrue(checkResult.getConfigured())) {
-			throw new ExceptionMissionExecute("外部数据源已配置.");
+			throw new ExceptionMissionExecute("외부 데이터 소스가 이미 설정되어 있습니다.");
 		}
 
 		Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
@@ -49,7 +49,7 @@ class ActionSet extends BaseAction {
 
 		private static final long serialVersionUID = -1714043928097428688L;
 
-		@FieldDescribe("外部数据源.")
+		@FieldDescribe("외부 데이터 소스.")
 		private ExternalDataSources externalDataSources;
 
 		public ExternalDataSources getExternalDataSources() {

@@ -28,11 +28,11 @@ o2.addReady(function () {
                                             "userdetail" : {"uri": "/jaxrs/qiyeweixin/update/person/detail/{code}", "method": "GET" } };
                             if (actionCallback) actionCallback();
                         };
-                        if (mode && mode === "snsapi_privateinfo") { // 获取用户详细信息，更新到Person
+                        if (mode && mode === "snsapi_privateinfo") { // 사용자 상세 정보를 조회해 Person에 갱신
                             console.log("사용자 상세 정보를 가져와 Person에 업데이트")
                             action.invoke({
                                 "name": "userdetail", "async": true, "parameter": { "code":  code}, "success":  function(json) {
-                                // 完成认证 关闭页面
+                                // 인증 완료 후 페이지 닫기
                                 if (redirect) {
                                     history.replaceState(null, "page", redirect);
                                     window.location.replace(redirect);
@@ -48,7 +48,7 @@ o2.addReady(function () {
                                     document.id("layout").set("html", "<div>WeCom SSO 로그인 중 오류가 발생했습니다!</div>")
                                 }.bind(this)
                             });
-                        } else { // 默认的单点登录
+                        } else { // 기본 단일 로그인
                             console.log("기본 SSO 로그인")
                             action.invoke({
                                 "name": "sso", "async": true, "parameter": { "code":  code}, "success": function (json) {

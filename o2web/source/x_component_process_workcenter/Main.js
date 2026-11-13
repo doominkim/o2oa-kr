@@ -1037,7 +1037,7 @@ MWF.xApplication.process.workcenter.List = new Class({
 		const scrollSize = this.app.listContentNode.getScrollSize();
 		if (scrollSize.y - scroll.y - size.y < 40){
 			if (this.page<this.pageCount){
-				//载入下一页
+				//다음 페이지 불러오기
 				this.mobile_loadNextPage();
 			}
 		}
@@ -1999,8 +1999,8 @@ MWF.xApplication.process.workcenter.List.Tooltip = new Class({
 			"line-height": "20px"
 		},
 		priorityOfAuto :{
-			x : [ "center", "right", "left" ], //当position x 为 auto 时候的优先级
-			y : [ "middle", "top", "bottom" ] //当position y 为 auto 时候的优先级
+			x : [ "center", "right", "left" ], //position x가 auto일 때의 우선순위
+			y : [ "middle", "top", "bottom" ] //position y가 auto일 때의 우선순위
 		},
 		isFitToContainer : true,
 		overflow : "scroll"

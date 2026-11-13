@@ -35,8 +35,8 @@ import com.x.organization.core.entity.Unit;
 import com.x.organization.core.entity.Unit_;
 
 /**
- * levelName在数据库中是使用clob存储的,在oracle中无法使用where levelName =
- * 'abc',所以先将levelName中的name取出做判断,然后再根据levelName做filter
+ * levelName은 DB에 clob으로 저장되어 oracle에서는 where levelName =
+ * 'abc'를 쓸 수 없으므로, 먼저 levelName에서 name을 꺼내 판단한 뒤 levelName으로 filter
  *
  * @author ray
  *
@@ -69,7 +69,7 @@ class ActionListWithLevelNameObject extends BaseAction {
 
 		private static final long serialVersionUID = -803168445784010894L;
 
-		@FieldDescribe("组织层级名称")
+		@FieldDescribe("조직 레벨 이름")
 		private List<String> unitList = new ArrayList<>();
 
 		public List<String> getUnitList() {
@@ -86,16 +86,16 @@ class ActionListWithLevelNameObject extends BaseAction {
 
 		private static final long serialVersionUID = -8274071194830711313L;
 
-		@FieldDescribe("匹配字段")
+		@FieldDescribe("일치 필드")
 		private String matchKey;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
-		@FieldDescribe("直接下级职务数量")
+		@FieldDescribe("직속 하위 직무 수")
 		private Long subDirectDutyCount;
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,
@@ -135,7 +135,7 @@ class ActionListWithLevelNameObject extends BaseAction {
 	}
 
 	/**
-	 * 取得unitList的层次名,取最后的层次名作为名称进行查询,获取的unit再次进行过滤
+	 * unitList의 레벨 이름을 구해 마지막 레벨 이름을 이름으로 조회하고, 조회한 unit을 다시 필터링
 	 *
 	 * @param wi
 	 * @return

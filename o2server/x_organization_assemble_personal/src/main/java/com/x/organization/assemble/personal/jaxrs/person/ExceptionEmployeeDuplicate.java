@@ -6,7 +6,7 @@ import com.x.base.core.project.exception.LanguagePromptException;
 
 	private static final long serialVersionUID = -3439770681867963457L;
 
-	 public static String defaultMessage = "用户名错误:{}, {}已有值重复.";
+	 public static String defaultMessage = "사용자 이름 오류: {}, {}이(가) 기존 값과 중복됩니다.";
 
 	 ExceptionEmployeeDuplicate(String name, String fieldName) {
 		super(defaultMessage, name, fieldName);

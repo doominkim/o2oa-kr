@@ -236,13 +236,13 @@ MWF.xApplication.Selector.Group.Tooltip = new Class({
             "-moz-user-select": "text",
             "line-height": "20px"
         },
-        position : { //node 固定的位置
-            x : "auto", //x轴上left center right,  auto 系统自动计算
-            y : "top" //y 轴上top middle bottom, auto 系统自动计算
+        position : { //node 고정 위치
+            x : "auto", //x축 left center right, auto는 시스템이 자동 계산
+            y : "top" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
         priorityOfAuto :{
-            x : [ "center", "right", "left" ], //当position x 为 auto 时候的优先级
-            y : [ "middle", "top", "bottom" ] //当position y 为 auto 时候的优先级, "middle", "top", "bottom"
+            x : [ "center", "right", "left" ], //position x가 auto일 때의 우선순위
+            y : [ "middle", "top", "bottom" ] //position y가 auto일 때의 우선순위, "middle", "top", "bottom"
         },
         offset : {
             x : 0,

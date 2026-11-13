@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 MWF.xDesktop.requireApp("cms.Xform", "widget.Comment", null, false);
-/** @class Comment 评论组件。
- * @o2cn 评论组件
+/** @class Comment 댓글 컴포넌트.
+ * @o2cn 댓글 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var comment = this.form.get("name"); //获取组件
- * //方法2
- * var comment = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var comment = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var comment = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {CMS}
@@ -41,12 +41,12 @@ MWF.xApplication.cms.Xform.Comment = MWF.CMSComment =  new Class(
         }
 
         /**
-         * @summary 评论组件使用this.comment实现功能
+         * @summary 댓글 컴포넌트는 this.comment로 기능 구현
          * @member {MWF.xApplication.cms.Xform.widget.Comment}
          * @example
-         *  //可以在脚本中获取该组件
-         * var field = this.form.get("fieldId"); //获取组件对象
-         * var items = field.comment.editor; //获取评论的编辑器对象
+         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+         * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+         * var items = field.comment.editor; //댓글 편집기 객체 조회
          */
         if( !this.downloading ){
             this.comment = new MWF.xApplication.cms.Xform.widget.Comment( this.form.app, this.node, {

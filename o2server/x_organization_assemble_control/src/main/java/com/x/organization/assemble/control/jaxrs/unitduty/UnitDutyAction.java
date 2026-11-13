@@ -26,18 +26,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("unitduty")
-@JaxrsDescribe("组织职务操作")
+@JaxrsDescribe("조직 직무 작업")
 public class UnitDutyAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(UnitDutyAction.class);
 
-	@JaxrsMethodDescribe(value = "获取组织职务.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "조직 직무 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织职务标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("조직 직무 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,7 +49,7 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建组织职务.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "조직 직무 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -66,13 +66,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新组织职务.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "조직 직무 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织职务标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("조직 직무 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -84,7 +84,7 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新职务成员.", action = ActionUpdateMember.class)
+	@JaxrsMethodDescribe(value = "직무 구성원 수정.", action = ActionUpdateMember.class)
 	@POST
 	@Path("update/member")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -102,13 +102,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新组织职务mockputtopost.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "조직 직무 수정 mockputtopost.", action = ActionEdit.class)
 	@POST
 	@Path("{flag}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void editMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("组织职务标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+					 @JaxrsParameterDescribe("조직 직무 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -120,13 +120,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除组织职务.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "조직 직무 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织职务标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("조직 직무 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -138,13 +138,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除组织职务mockdeletetoget.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "조직 직무 삭제 mockdeletetoget.", action = ActionDelete.class)
 	@GET
 	@Path("{flag}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("组织职务标识") @PathParam("flag") String flag) {
+					   @JaxrsParameterDescribe("조직 직무 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -156,14 +156,14 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示组织职务.下一页", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "조직 직무 목록. 다음 페이지", action = ActionListNext.class)
 	@GET
 	@Path("list/{flag}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织职务标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("조직 직무 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -175,14 +175,14 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示组织职务,上一页.", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "조직 직무 목록, 이전 페이지.", action = ActionListPrev.class)
 	@GET
 	@Path("list/{flag}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织职务标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("조직 직무 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -194,13 +194,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据给定的组织,获取组织职务.", action = ActionListWithUnit.class)
+	@JaxrsMethodDescribe(value = "지정한 조직의 조직 직무 조회.", action = ActionListWithUnit.class)
 	@GET
 	@Path("list/unit/{unitFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织标识") @PathParam("unitFlag") String unitFlag) {
+			@JaxrsParameterDescribe("조직 식별자") @PathParam("unitFlag") String unitFlag) {
 		ActionResult<List<ActionListWithUnit.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -212,13 +212,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据给定的身份,获取所拥有的组织职务.", action = ActionListWithIdentity.class)
+	@JaxrsMethodDescribe(value = "지정한 신분이 보유한 조직 직무 조회.", action = ActionListWithIdentity.class)
 	@GET
 	@Path("list/identity/{identityFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithIdentity(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("身份标识") @PathParam("identityFlag") String identityFlag) {
+			@JaxrsParameterDescribe("신분 식별자") @PathParam("identityFlag") String identityFlag) {
 		ActionResult<List<ActionListWithIdentity.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -230,7 +230,7 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取去重的组织职务名称.", action = ActionDistinctName.class)
+	@JaxrsMethodDescribe(value = "중복 제거된 조직 직무명 조회.", action = ActionDistinctName.class)
 	@GET
 	@Path("distinct/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -247,13 +247,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "给定组织职务名称,列示组织职务.", action = ActionListWithName.class)
+	@JaxrsMethodDescribe(value = "지정한 조직 직무명으로 조직 직무 목록.", action = ActionListWithName.class)
 	@GET
 	@Path("list/name/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithName(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("조직명") @PathParam("name") String name) {
 		ActionResult<List<ActionListWithName.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -265,13 +265,13 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "模糊匹配组织职务的名称,匹配名称,拼音和首字母.", action = ActionDistinctNameLike.class)
+	@JaxrsMethodDescribe(value = "조직 직무명 퍼지 검색, 이름·병음·첫 글자 일치.", action = ActionDistinctNameLike.class)
 	@GET
 	@Path("distinct/name/like/{key}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void distinctNameLike(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("关键字,拼音或首字母") @PathParam("key") String key) {
+			@JaxrsParameterDescribe("키워드, 병음 또는 첫 글자") @PathParam("key") String key) {
 		ActionResult<ActionDistinctNameLike.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -283,7 +283,7 @@ public class UnitDutyAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "进行模糊查询.", action = ActionListLike.class)
+	@JaxrsMethodDescribe(value = "퍼지 검색.", action = ActionListLike.class)
 	@PUT
 	@Path("list/like")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

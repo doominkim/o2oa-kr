@@ -27,12 +27,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("schedule")
-@JaxrsDescribe("定时任务")
+@JaxrsDescribe("예약 작업")
 public class ScheduleAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ScheduleAction.class);
 
-	@JaxrsMethodDescribe(value = "执行完成的Schedule进行日志提交.", action = ActionReport.class)
+	@JaxrsMethodDescribe(value = "실행 완료된 Schedule 로그 제출.", action = ActionReport.class)
 	@POST
 	@Path("report")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -50,7 +50,7 @@ public class ScheduleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示统一排程的任务.", action = ActionListSchedule.class)
+	@JaxrsMethodDescribe(value = "통합 스케줄 작업 나열.", action = ActionListSchedule.class)
 	@GET
 	@Path("list/schedule")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -67,7 +67,7 @@ public class ScheduleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示本地任务.", action = ActionListScheduleLocal.class)
+	@JaxrsMethodDescribe(value = "로컬 작업 나열.", action = ActionListScheduleLocal.class)
 	@GET
 	@Path("list/schedulelocal")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -84,13 +84,13 @@ public class ScheduleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示任务日志.", action = ActionListScheduleLog.class)
+	@JaxrsMethodDescribe(value = "작업 로그 나열.", action = ActionListScheduleLog.class)
 	@GET
 	@Path("list/schedulelog/application/{application}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listScheduleLog(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("application") String application) {
+			@JaxrsParameterDescribe("식별자") @PathParam("application") String application) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<List<ActionListScheduleLog.Wo>> result = new ActionResult<>();
 		try {
@@ -102,7 +102,7 @@ public class ScheduleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "触发定时任务.", action = ActionFire.class)
+	@JaxrsMethodDescribe(value = "예약 작업 트리거.", action = ActionFire.class)
 	@POST
 	@Path("schedule/fire")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

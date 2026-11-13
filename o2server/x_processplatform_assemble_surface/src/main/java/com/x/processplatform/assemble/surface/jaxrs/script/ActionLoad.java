@@ -77,7 +77,7 @@ class ActionLoad extends BaseAction {
 
     public class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("导入标识")
+        @FieldDescribe("가져오기 식별자")
         private List<String> importedList;
 
         public List<String> getImportedList() {
@@ -92,10 +92,10 @@ class ActionLoad extends BaseAction {
 
     public class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("脚本内容")
+        @FieldDescribe("스크립트 내용")
         private String text;
 
-        @FieldDescribe("应用脚本")
+        @FieldDescribe("앱 스크립트")
         private List<String> importedList;
 
         public List<String> getImportedList() {

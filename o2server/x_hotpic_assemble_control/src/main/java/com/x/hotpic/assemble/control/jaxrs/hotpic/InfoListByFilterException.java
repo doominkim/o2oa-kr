@@ -7,6 +7,6 @@ class InfoListByFilterException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	InfoListByFilterException( Throwable e ) {
-		super("根据过滤条件查询信息对象列表时发生异常。", e );
+		super("필터 조건으로 정보 객체 목록을 조회하는 중 오류가 발생했습니다.", e );
 	}
 }

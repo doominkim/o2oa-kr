@@ -7,6 +7,6 @@ class ExceptionNoneForm extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionNoneForm() {
-		super("无法找到表单.");
+		super("양식을 찾을 수 없습니다.");
 	}
 }

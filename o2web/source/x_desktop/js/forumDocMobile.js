@@ -10,25 +10,25 @@ o2.addReady(function () {
     o2.load(["../o2_lib/mootools/plugin/mBox.Notice.js", "../o2_lib/mootools/plugin/mBox.Tooltip.js"], { "sequence": true }, function () {
         //MWF.defaultPath = "../x_desktop"+MWF.defaultPath;
 
-        // 是否ip
+        // ip 여부
         var _isIp = function(ip) {
             var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
             return reg.test(ip);
         };
-        //修改支持x-token
+        //x-token 지원 수정
         var uri = new URI(window.location.href);
         var options = uri.get("data");
         if (options[o2.tokenName]) {
-            // 删除
+            // 삭제
             // Cookie.dispose(o2.tokenName);
-            // // 写入
-            // var host = window.location.hostname; // 域名
+            // // 쓰기
+            // var host = window.location.hostname; // 도메인
             // var domain = null;
             // if (_isIp(host)) {
             //     domain = host;
             // }else {
             //     if (host.indexOf(".") > 0) {
-            //         domain = host.substring(host.indexOf(".")); // 上级域名 如 .o2oa.net
+            //         domain = host.substring(host.indexOf(".")); // 상위 도메인 예: .o2oa.net
             //     }
             // }
             // if (domain) {

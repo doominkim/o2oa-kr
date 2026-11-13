@@ -109,7 +109,7 @@ class ActionCopyToWorkSoft extends BaseAction {
 
 		private static final long serialVersionUID = -6412354165514602742L;
 
-		@FieldDescribe("附件对象")
+		@FieldDescribe("첨부파일 객체")
 		private List<WiAttachment> attachmentList = new ArrayList<>();
 
 		public List<WiAttachment> getAttachmentList() {

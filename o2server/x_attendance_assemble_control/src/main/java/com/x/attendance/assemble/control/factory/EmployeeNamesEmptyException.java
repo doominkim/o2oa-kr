@@ -7,6 +7,6 @@ class EmployeeNamesEmptyException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	EmployeeNamesEmptyException() {
-		super("员工姓名列表不能为空.");
+		super("직원 이름 목록은 비워 둘 수 없습니다.");
 	}
 }

@@ -46,7 +46,7 @@ class ActionExcelExport extends BaseAction {
 			excelName = excelName + EXCEL_EXTENSION;
 		}
 		if (ListTools.isEmpty(wi.getDataList())) {
-			throw new Exception("dataList内容为空");
+			throw new Exception("dataList 내용이 비어 있습니다");
 		}
 		byte[] bytes;
 		try (XSSFWorkbook workbook = new XSSFWorkbook(); ByteArrayOutputStream os = new ByteArrayOutputStream()) {
@@ -90,7 +90,7 @@ class ActionExcelExport extends BaseAction {
 
 		private static final long serialVersionUID = -51802802412712709L;
 
-		@FieldDescribe("转换为excel的内容，例如：['姓名','性别'],['小明','男']")
+		@FieldDescribe("excel로 변환할 내용, 예: ['이름','성별'],['홍길동','남']")
 		public List<List<String>> dataList;
 
 

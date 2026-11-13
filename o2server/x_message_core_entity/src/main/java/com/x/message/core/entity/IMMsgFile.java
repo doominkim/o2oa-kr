@@ -29,7 +29,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * Copyright © 2020 O2. All rights reserved.
  */
 
-@Schema(name = "IMMsgFile", description = "消息会话文件.")
+@Schema(name = "IMMsgFile", description = "메시지 대화 파일.")
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.IMMsgFile.table, uniqueConstraints = {
@@ -52,46 +52,46 @@ public class IMMsgFile extends StorageObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     public void onPersist() throws Exception {
 
     }
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("上传用户.")
+    @FieldDescribe("업로드 사용자.")
     @Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String person;
 
     public static final String name_FIELDNAME = "name";
-    @FieldDescribe("文件名称.")
+    @FieldDescribe("파일 이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
     @CheckPersist(allowEmpty = false, fileNameString = true)
     private String name;
 
     public static final String storage_FIELDNAME = "storage";
-    @FieldDescribe("存储器的名称,也就是多个存放节点的名字.")
+    @FieldDescribe("스토리지 이름, 즉 여러 저장 노드의 이름.")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
     @CheckPersist(allowEmpty = false, simplyString = true)
     @Index(name = TABLE + IndexNameMiddle + storage_FIELDNAME)
     private String storage;
 
     public static final String extension_FIELDNAME = "extension";
-    @FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+    @FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + extension_FIELDNAME)
     @CheckPersist(allowEmpty = false, fileNameString = true)
     private String extension;
 
     public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-    @FieldDescribe("最后更新时间")
+    @FieldDescribe("최종 수정 시간")
     @Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
@@ -100,14 +100,14 @@ public class IMMsgFile extends StorageObject {
 
 
     public static final String deepPath_FIELDNAME = "deepPath";
-    @FieldDescribe("是否使用更深的路径.")
+    @FieldDescribe("더 깊은 경로 사용 여부.")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
     private Boolean deepPath;
 
 
     public static final String length_FIELDNAME = "length";
-    @FieldDescribe("文件大小.")
+    @FieldDescribe("파일 크기.")
     @Column(name = ColumnNamePrefix + length_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private Long length;
@@ -133,14 +133,14 @@ public class IMMsgFile extends StorageObject {
     }
 
     public static final String conversationId_FIELDNAME = "conversationId";
-    @FieldDescribe("会话id， 关联的会话.")
+    @FieldDescribe("대화 id, 연결된 대화.")
     @Column(length = length_64B, name = ColumnNamePrefix + conversationId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String conversationId;
 
 
     public static final String type_FIELDNAME = "type";
-    @FieldDescribe("文件分类，对应消息类型.")
+    @FieldDescribe("파일 분류, 메시지 유형에 대응.")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + type_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String type;

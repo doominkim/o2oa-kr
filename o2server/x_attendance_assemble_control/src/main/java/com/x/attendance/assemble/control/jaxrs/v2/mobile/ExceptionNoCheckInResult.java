@@ -8,6 +8,6 @@ public class ExceptionNoCheckInResult extends PromptException {
 	private static final long serialVersionUID = 5464536178018732958L;
 
 	public ExceptionNoCheckInResult() {
-		super(  "没有找到符合打卡的信息.");
+		super(  "체크 가능한 정보를 찾을 수 없습니다.");
 	}
 }

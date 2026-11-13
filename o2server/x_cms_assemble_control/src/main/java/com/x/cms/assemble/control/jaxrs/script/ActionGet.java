@@ -37,7 +37,7 @@ class ActionGet extends BaseAction {
 				wrap = Wo.copier.copy(script);
 				result.setData(wrap);
 
-				// 将查询结果放进缓存里
+				// 조회 결과를 캐시에 저장
 				CacheManager.put(cacheCategory, cacheKey, wrap );
 
 			} catch (Throwable th) {

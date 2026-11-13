@@ -202,13 +202,13 @@ public class ActionLeaveRequestStatic extends BaseAction {
 
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("人员标识")
+        @FieldDescribe("인원 식별자")
         private String person;
 
-        @FieldDescribe("请假统计列表，全部假期类型")
+        @FieldDescribe("휴가 통계 목록, 전체 휴가 유형")
         private List<WoLeaveRequestStatic> leaveRequestStaticList;
 
-        @FieldDescribe("请假类型余额列表，有限额假期类型")
+        @FieldDescribe("휴가 유형별 잔여 목록, 한도가 있는 휴가 유형")
         private List<WoLeaveTypeAccount> leaveTypeAccountList;
 
         public String getPerson() {
@@ -240,12 +240,12 @@ public class ActionLeaveRequestStatic extends BaseAction {
 
     public static class WoLeaveTypeAccount extends GsonPropertyObject {
 
-        @FieldDescribe("请假类型")
+        @FieldDescribe("휴가 유형")
         private AttendanceV2LeaveType leaveType;
 
-        @FieldDescribe("余额账户")
+        @FieldDescribe("잔여 계정")
         private AttendanceV2LeaveAccount leaveAccount;
-        @FieldDescribe("余额")
+        @FieldDescribe("잔여")
         private Double balance;
 
 
@@ -276,13 +276,13 @@ public class ActionLeaveRequestStatic extends BaseAction {
 
     public static class WoLeaveRequestStatic extends GsonPropertyObject {
 
-        @FieldDescribe("请假类型")
+        @FieldDescribe("휴가 유형")
         private AttendanceV2LeaveType leaveType;
 
-        @FieldDescribe("对应请假类型的请假申请列表")
+        @FieldDescribe("해당 휴가 유형의 휴가 신청 목록")
         private List<AttendanceV2LeaveRequest> leaveRequestList;
 
-        @FieldDescribe("请假总天数")
+        @FieldDescribe("총 휴가 일수")
         private Double totalDays;
 
 
@@ -313,16 +313,16 @@ public class ActionLeaveRequestStatic extends BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
 
-        @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+        @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
         private Boolean recursive;
 
-        @FieldDescribe("开始日期")
+        @FieldDescribe("시작 날짜")
         private String startDate;
 
-        @FieldDescribe("结束日期")
+        @FieldDescribe("종료 날짜")
         private String endDate;
 
 

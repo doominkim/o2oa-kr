@@ -7,7 +7,7 @@ class ExceptionSingleConvNotUpdate extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionSingleConvNotUpdate() {
-		super("单聊会话无法修改属性");
+		super("1:1 대화는 속성을 수정할 수 없습니다");
 	}
 
 

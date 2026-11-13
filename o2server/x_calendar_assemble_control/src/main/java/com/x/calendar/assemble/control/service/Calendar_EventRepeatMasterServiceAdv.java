@@ -10,7 +10,7 @@ import com.x.calendar.core.entity.Calendar_EventRepeatMaster;
 
 
 /**
- * 日程日历信息服务类
+ * 일정 캘린더 정보 서비스 클래스
  * @author O2LEE
  *
  */
@@ -27,7 +27,7 @@ public class Calendar_EventRepeatMasterServiceAdv{
 	}	
 	
 	/**
-	 * 根据ID获取指定日历记录信息
+	 * ID로 지정 캘린더 레코드 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -41,7 +41,7 @@ public class Calendar_EventRepeatMasterServiceAdv{
 	}
 
 	/**
-	 * 保存日历记录信息
+	 * 캘린더 레코드 정보 저장
 	 * @param calendar_record
 	 * @return
 	 * @throws Exception
@@ -64,7 +64,7 @@ public class Calendar_EventRepeatMasterServiceAdv{
 	}
 
 	/**
-	 * 根据条件查询指定的日历记录信息ID列表
+	 * 조건에 따라 지정 캘린더 레코드 정보 ID 목록 조회
 	 * @param title
 	 * @param type
 	 * @param source
@@ -89,7 +89,7 @@ public class Calendar_EventRepeatMasterServiceAdv{
 	}
 	
 	/**
-	 * 根据条件查询指定的日历记录信息ID列表
+	 * 조건에 따라 지정 캘린더 레코드 정보 ID 목록 조회
 	 * @param inFilterCalendarIds
 	 * @param personName
 	 * @param unitNames
@@ -110,7 +110,7 @@ public class Calendar_EventRepeatMasterServiceAdv{
 	}
 
 	/**
-	 * 根据ID彻底删除指定的日历记录信息
+	 * ID로 지정 캘린더 레코드 정보 영구 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -123,7 +123,7 @@ public class Calendar_EventRepeatMasterServiceAdv{
 	}
 
 	/**
-	 * 检查该repeatMaster下所有的记录是不是全都是已经删除了，如果没有有效的记录的话，就全部删除掉
+	 * 해당 repeatMaster 아래 모든 레코드가 삭제되었는지 확인, 유효한 레코드가 없으면 모두 삭제
 	 * @param repeatMasterId
 	 * @throws Exception
 	 */

@@ -13,7 +13,7 @@ import com.x.cms.core.entity.Document;
 import com.x.cms.core.entity.DocumentCommend;
 
 /**
- * 取消评论点赞
+ * 댓글 좋아요 취소
  * @author sword
  */
 public class ActionPersistUnCommend extends BaseAction {

@@ -24,19 +24,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("input")
-@JaxrsDescribe("导入")
+@JaxrsDescribe("가져오기")
 public class InputAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(InputAction.class);
 
-	// @JaxrsMethodDescribe(value = "对比数据.", action = ActionCompare.class)
+	// @JaxrsMethodDescribe(value = "데이터 비교.", action = ActionCompare.class)
 	// @POST
 	// @Consumes(MediaType.MULTIPART_FORM_DATA)
 	// @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	// public void upload(@Suspended final AsyncResponse asyncResponse, @Context
 	// HttpServletRequest request,
 	// @FormDataParam(FILE_FIELD) final byte[] bytes,
-	// @JaxrsParameterDescribe(".xapp文件") @FormDataParam(FILE_FIELD) final
+	// @JaxrsParameterDescribe(".xapp 파일") @FormDataParam(FILE_FIELD) final
 	// FormDataContentDisposition disposition) {
 	// ActionResult<ActionUpload.Wo> result = new ActionResult<>();
 	// EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -49,7 +49,7 @@ public class InputAction extends StandardJaxrsAction {
 	// asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	// }
 
-	@JaxrsMethodDescribe(value = "上传对比数据内容.", action = ActionCompare.class)
+	@JaxrsMethodDescribe(value = "비교 데이터 내용 업로드.", action = ActionCompare.class)
 	@PUT
 	@Path("compare")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -67,7 +67,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "准备覆盖应用.", action = ActionPrepareCover.class)
+	@JaxrsMethodDescribe(value = "앱 덮어쓰기 준비.", action = ActionPrepareCover.class)
 	@PUT
 	@Path("prepare/cover")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -85,7 +85,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "覆盖应用.", action = ActionCover.class)
+	@JaxrsMethodDescribe(value = "앱 덮어쓰기.", action = ActionCover.class)
 	@PUT
 	@Path("cover")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -103,7 +103,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "准备创建应用.", action = ActionPrepareCreate.class)
+	@JaxrsMethodDescribe(value = "앱 생성 준비.", action = ActionPrepareCreate.class)
 	@PUT
 	@Path("prepare/create")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -121,7 +121,7 @@ public class InputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建应用.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "앱 생성.", action = ActionCreate.class)
 	@PUT
 	@Path("create")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

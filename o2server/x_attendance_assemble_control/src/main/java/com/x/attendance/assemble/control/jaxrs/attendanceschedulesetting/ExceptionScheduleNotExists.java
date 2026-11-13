@@ -7,6 +7,6 @@ class ExceptionScheduleNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionScheduleNotExists( String id ) {
-		super("指定的组织排班信息不存在.ID:" + id );
+		super("지정한 조직 근무 편성 정보가 없습니다. ID:" + id );
 	}
 }

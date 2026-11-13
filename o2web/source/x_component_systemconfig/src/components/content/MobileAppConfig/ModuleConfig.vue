@@ -1,7 +1,7 @@
 <template>
   <div class="systemconfig_area">
     <div v-if="appStyle">
-      <!-- 主页布局 -->
+      <!-- 홈 레이아웃 -->
       <div class="item_title">{{ lp._appConfig.mobileHomePageLayout }}</div>
       <div class="item_info" v-html="lp._appConfig.mobileHomePageLayoutInfo"></div>
       <BaseBoolean v-model:value="enableHomePageLayout" @change="
@@ -20,7 +20,7 @@
           saveAppStyle(appStyle);
         }
       "></BaseBoolean>
-      <!-- 新版主页布局配置 -->
+      <!-- 새 홈 레이아웃 설정 -->
         <AppLayout v-if="enableHomePageLayout" v-model:value="appStyle.extendParam.homePageList" :images="appStyle.images" @saveLayout="
         (list) => {
           if (!appStyle.extendParam) {
@@ -31,7 +31,7 @@
         }
         "></AppLayout>
       <div class="item_info" v-html="lp._appConfig.mobileHomePageLayoutOperationInfo"></div>
-      <!-- 老版首页配置 -->
+      <!-- 이전 홈 설정 -->
       <div v-if="!enableHomePageLayout">
         <BaseItem :title="lp._appConfig.mobileIndex" :info="lp._appConfig.mobileIndexInfo" :config="mobileIndex"
           :allowEditor="true" type="select" :options="portalList" @changeConfig="saveMobileIndex"></BaseItem>
@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <!-- 首页列表过滤 -->
+      <!-- 홈 목록 필터 -->
       <div class="item_title">{{ lp._appConfig.appIndexCmsFilterTitle }}</div>
       <div class="item_info" v-html="lp._appConfig.appIndexCmsFilterCategoryInfo"></div>
       <div class="item_info">
@@ -161,7 +161,7 @@ import staticData from "@/util/data"
 import AppLayout from "./AppLayout.vue"
 
 const s = staticData()
-const enableHomePageLayout = ref(false); // 移动端主页布局是否开启
+const enableHomePageLayout = ref(false); // 모바일 메인 페이지 레이아웃 사용 여부
 const appStyle = ref();
 const portalList = ref({});
 const mobileIndex = computed(() => {
@@ -213,7 +213,7 @@ const saveMobileIndex = (v) => {
   saveAppStyle(appStyle.value);
 };
 
-// 流程选择
+// 프로세스 선택
 const chooseProcess = () => {
   MWF.requireApp(
     "Selector",
@@ -248,7 +248,7 @@ const chooseProcess = () => {
     }.bind(this)
   );
 };
-// 分类选择
+// 분류 선택
 const chooseCategory = () => {
   MWF.requireApp(
     "Selector",
@@ -302,7 +302,7 @@ const loadCategoryList = () => {
     };
     categoryInfoAction("listObjectsByIds", body).then((data) => {
       const list = data || [];
-      // 选择器必须有 name
+      // 선택기에는 name이 필요함
       categroyFilterList.value = list.map((e) => {
         e.name = e.categoryName;
         return e;
@@ -321,7 +321,7 @@ const load = () => {
       appIndexPagesCheckValues.value.app =
         data.appIndexPages.indexOf("app") > -1;
     }
-    if (data.extendParam && data.extendParam.homePageList) { // 是否有app主页布局数据
+    if (data.extendParam && data.extendParam.homePageList) { // app 메인 페이지 레이아웃 데이터 존재 여부
       enableHomePageLayout.value = true;
     }
     loadProcessList();

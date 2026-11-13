@@ -16,7 +16,7 @@ import com.x.organization.core.entity.Custom_;
 abstract class BaseAction extends StandardJaxrsAction {
 
     /**
-     * 根据那么和人员查找
+     * 이름과 사용자로 조회
      * 
      * @param emc
      * @param person

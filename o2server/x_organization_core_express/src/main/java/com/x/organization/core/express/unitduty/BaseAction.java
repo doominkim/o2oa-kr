@@ -13,7 +13,7 @@ abstract class BaseAction {
 
 	static class WoPersonAttributeAbstract extends GsonPropertyObject {
 
-		@FieldDescribe("身份识别名")
+		@FieldDescribe("신분 식별 이름")
 		private List<String> personAttributeList = new ArrayList<>();
 
 		public List<String> getPersonAttributeList() {

@@ -7,6 +7,6 @@ class DependSelfException extends PromptException {
 	private static final long serialVersionUID = -1393070907328497913L;
 
 	DependSelfException(String name, String id) {
-		super("脚本: {}, id:{}, 依赖其本身.", name, id);
+		super("스크립트: {}, id: {}이(가) 자기 자신에 의존합니다.", name, id);
 	}
 }

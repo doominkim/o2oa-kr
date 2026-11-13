@@ -6,7 +6,7 @@ class ExceptionReadToken extends LanguagePromptException {
 
 	private static final long serialVersionUID = 4132300948670472899L;
 
-	public static String defaultMessage = "无效token, client:{}, token:{}.";
+	public static String defaultMessage = "유효하지 않은 token, client: {}, token: {}.";
 
 	ExceptionReadToken(String client, String token) {
 		super(defaultMessage, client, token);

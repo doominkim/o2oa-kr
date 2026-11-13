@@ -95,7 +95,7 @@ public class WorkLogFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据job获取Work Id
+	 * job으로 Work Id 조회
 	 */
 	public List<String> listWithJob(String job) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(WorkLog.class);
@@ -176,7 +176,7 @@ public class WorkLogFactory extends AbstractFactory {
 
 	public List<String> listWithFromActivityTokenBackward(String activityToken) throws Exception {
 		List<String> results = SetUniqueList.setUniqueList(new ArrayList<String>());
-		/* 需要把开始节点先加入进去 */
+		/* 시작 노드를 먼저 추가해야 함 */
 		results.addAll(this.listWithFromActivityToken(activityToken));
 		this.listWithFromActivityTokenBackward(activityToken, results);
 		return results;

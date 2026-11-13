@@ -25,19 +25,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("table")
-@JaxrsDescribe("表")
+@JaxrsDescribe("테이블")
 public class TableAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TableAction.class);
 
-	@JaxrsMethodDescribe(value = "更新指定表中的行.", action = ActionUpdateWithBundle.class)
+	@JaxrsMethodDescribe(value = "지정 테이블의 행 업데이트.", action = ActionUpdateWithBundle.class)
 	@POST
 	@Path("{flag}/update/{bundle}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithBundle(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("数据行标识") @PathParam("bundle") String bundle, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("데이터 행 식별자") @PathParam("bundle") String bundle, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithBundle.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,13 +49,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "指定表中插入行.", action = ActionInsert.class)
+	@JaxrsMethodDescribe(value = "지정 테이블에 행 삽입.", action = ActionInsert.class)
 	@POST
 	@Path("{flag}/insert")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void insert(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionInsert.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -67,7 +67,7 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "在服务器重新编译dynamicEntity之后需要重新初始化EntityManagerContainerFactory.", action = ActionReloadDynamic.class)
+	@JaxrsMethodDescribe(value = "서버에서 dynamicEntity 재컴파일 후 EntityManagerContainerFactory를 다시 초기화해야 함.", action = ActionReloadDynamic.class)
 	@GET
 	@Path("reload/dynamic")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

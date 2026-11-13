@@ -25,7 +25,7 @@ import com.x.bbs.entity.BBSSubjectInfo;
 import com.x.bbs.entity.BBSUserRole;
 
 /**
- * 论坛信息管理服务类
+ * 포럼 정보 관리 서비스 클래스
  * @author LIYI
  *
  */
@@ -34,7 +34,7 @@ public class BBSSectionInfoServiceAdv {
 	private BBSSectionInfoService sectionInfoService = new BBSSectionInfoService();
 	
 	/**
-	 * 根据传入的ID从数据库查询BBSSectionInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSectionInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -51,7 +51,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 
 	/**
-	 * 据传入的板块名称从数据库查询BBSSectionInfo对象
+	 * 전달된 게시판 이름으로 데이터베이스에서 BBSSectionInfo 객체 조회
 	 * @param mainSectionName
 	 * @return
 	 * @throws Exception
@@ -68,7 +68,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 	
 	/**
-	 * 向数据库保存BBSSectionInfo对象
+	 * 데이터베이스에 BBSSectionInfo 객체 저장
 	 * @param _bBSSectionInfo
 	 */
 	public BBSSectionInfo save( BBSSectionInfo _bBSSectionInfo ) throws Exception {
@@ -83,7 +83,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据ID从数据库中删除BBSSectionInfo对象
+	 * ID로 데이터베이스에서 BBSSectionInfo 객체 삭제
 	 * @param sectionId
 	 * @throws Exception
 	 */
@@ -104,7 +104,7 @@ public class BBSSectionInfoServiceAdv {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			
-			//删除和该版块有关的一切，主要是权限，贴子和版块都被删除过了
+			//해당 게시판과 관련된 모든 것 삭제, 주로 권한이며 게시글과 게시판은 이미 삭제됨
 			emc.beginTransaction( BBSForumInfo.class );
 			emc.beginTransaction( BBSSectionInfo.class );
 			emc.beginTransaction( BBSUserRole.class );
@@ -112,7 +112,7 @@ public class BBSSectionInfoServiceAdv {
 			emc.beginTransaction( BBSPermissionRole.class );
 			emc.beginTransaction( BBSRoleInfo.class );
 			
-			//删除论坛所有的用户与角色信息关联信息
+			//포럼의 모든 사용자-역할 연결 정보 삭제
 			ids = business.userRoleFactory().listBySectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				userRoleList = business.userRoleFactory().list( ids );
@@ -123,7 +123,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除权限角色关联信息
+			//권한-역할 연결 정보 삭제
 			ids = business.permissionRoleFactory().listBySectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				permissionRoleList = business.permissionRoleFactory().list( ids );
@@ -134,7 +134,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除论坛所有的角色信息
+			//포럼의 모든 역할 정보 삭제
 			ids = business.roleInfoFactory().listRoleBySectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				roleInfoList = business.roleInfoFactory().list( ids );
@@ -145,7 +145,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除所有的权限信息
+			//모든 권한 정보 삭제
 			ids = business.permissionInfoFactory().listPermissionBySectionId(sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				permissionInfoList = business.permissionInfoFactory().list( ids );
@@ -158,7 +158,7 @@ public class BBSSectionInfoServiceAdv {
 			
 			sectionInfo = emc.find( sectionId, BBSSectionInfo.class );
 			if( sectionInfo != null ) {
-				//从论坛信息中减去该版块
+				//포럼 정보에서 해당 게시판 차감
 				forumInfo = emc.find( sectionInfo.getForumId(), BBSForumInfo.class );
 				if( forumInfo != null ) {
 					forumInfo.minusSection(1L);
@@ -173,9 +173,9 @@ public class BBSSectionInfoServiceAdv {
 	}
 
 	/**
-	 * 强制删除一个版块，或者是主版块
-	 * 1、如果是主版块，会删除主版块下的所有子版块
-	 * 2、删除子版块、主题、回帖、权限、角色等信息
+	 * 게시판 또는 상위 게시판 강제 삭제
+	 * 1. 상위 게시판이면 그 아래의 모든 하위 게시판 삭제
+	 * 2. 하위 게시판, 주제, 답글, 권한, 역할 등 정보 삭제
 	 * @param sectionId
 	 * @throws Exception 
 	 */
@@ -221,36 +221,36 @@ public class BBSSectionInfoServiceAdv {
 				subSectionTotal = 1L;
 				forumInfo = emc.find( sectionInfo.getForumId(), BBSForumInfo.class );
 				
-				//查询是否有下级版块，需要查询计数
+				//하위 게시판 존재 여부 조회, 개수 조회 필요
 				subSectionIds = business.sectionInfoFactory().listSubSectionIdsByMainSectionId( sectionId );
 				if( ListTools.isNotEmpty( subSectionIds ) ) {
 					subSectionTotal += subSectionIds.size();
 					sectionList = business.sectionInfoFactory().list(subSectionIds);
 				}
-				//删除所有的子版块信息
+				//모든 하위 게시판 정보 삭제
 				if( ListTools.isNotEmpty( sectionList )) {
 					for( BBSSectionInfo subSectionInfo : sectionList ) {
 						emc.remove( subSectionInfo, CheckRemoveType.all );
 					}
 				}
-				//删除版块信息
+				//게시판 정보 삭제
 				emc.remove( sectionInfo, CheckRemoveType.all );
 			}
 
-			//查询今天所有的主题贴数量
+			//오늘의 모든 주제글 수 조회
 			subjectTotalToday = business.subjectInfoFactory().countSubjectByDate( sectionId, dateOperation.getTodayStartTime(), dateOperation.getTodayEndTime(), true );
 			if( subjectTotalToday == null ) {
 				subjectTotalToday = 0L;
 			}
 			
-			//删除该版块涉及的所有主题贴
+			//해당 게시판의 모든 주제글 삭제
 			ids = business.subjectInfoFactory().listIdsByMainAndSubSectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				subjectTotal = Long.parseLong( ids.size() + "" );
 				subjectList = business.subjectInfoFactory().list( ids );
 				if( ListTools.isNotEmpty( subjectList )) {
 					for( BBSSubjectInfo subjectInfo : subjectList ) {
-						//删除详细内容
+						//상세 내용 삭제
 						subjectContent = emc.find( subjectInfo.getId(), BBSSubjectContent.class );
 						if( subjectContent != null ) {
 							emc.remove( subjectContent, CheckRemoveType.all );
@@ -260,7 +260,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除该版块涉及的所有主题贴的附件信息
+			//해당 게시판의 모든 주제글 첨부파일 정보 삭제
 			ids = business.subjectAttachmentFactory().listBySectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				attachmentList = business.subjectAttachmentFactory().list( ids );
@@ -274,13 +274,13 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//查询今天所有的回贴数量
+			//오늘의 모든 답글 수 조회
 			replyTotalToday = business.replyInfoFactory().countReplyByDate( sectionId, dateOperation.getTodayStartTime(), dateOperation.getTodayEndTime(), true );
 			if( replyTotalToday == null ) {
 				replyTotalToday = 0L;
 			}
 			
-			//删除该版块涉及的所有的回贴
+			//해당 게시판의 모든 답글 삭제
 			ids = business.replyInfoFactory().listIdsByMainAndSubSectionId( sectionId );
 			if( ListTools.isNotEmpty( ids )) {
 				replyTotal = Long.parseLong(ids.size() + "");
@@ -292,7 +292,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除论坛所有的用户与角色信息关联信息（包含主版块）
+			//포럼의 모든 사용자-역할 연결 정보 삭제(상위 게시판 포함)
 			ids = business.userRoleFactory().listBySectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				userRoleList = business.userRoleFactory().list( ids );
@@ -303,7 +303,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除权限角色关联信息（包含主版块）
+			//권한-역할 연결 정보 삭제(상위 게시판 포함)
 			ids = business.permissionRoleFactory().listBySectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				permissionRoleList = business.permissionRoleFactory().list( ids );
@@ -314,7 +314,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除论坛所有的角色信息（包含主版块）
+			//포럼의 모든 역할 정보 삭제(상위 게시판 포함)
 			ids = business.roleInfoFactory().listRoleBySectionId( sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				roleInfoList = business.roleInfoFactory().list( ids );
@@ -325,7 +325,7 @@ public class BBSSectionInfoServiceAdv {
 				}
 			}
 			
-			//删除所有的权限信息（包含主版块）
+			//모든 권한 정보 삭제(상위 게시판 포함)
 			ids = business.permissionInfoFactory().listPermissionBySectionId(sectionId, true );
 			if( ListTools.isNotEmpty( ids )) {
 				permissionInfoList = business.permissionInfoFactory().list( ids );
@@ -337,7 +337,7 @@ public class BBSSectionInfoServiceAdv {
 			}
 			
 			if( forumInfo != null ) {
-				//从论坛信息中减去该版块数量以及涉及的主题，回帖相关数量
+				//포럼 정보에서 해당 게시판 수 및 관련 주제, 답글 수 차감
 				forumInfo.minusSection( subSectionTotal );
 				forumInfo.minusSubjectTotal( subjectTotal );
 				forumInfo.minusSubjectTotalToday( subjectTotalToday );
@@ -361,7 +361,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 
 	/**
-	 * 根据论坛ID查询论坛中所有的主版块信息数量
+	 * 포럼 ID로 포럼의 모든 상위 게시판 정보 수 조회
 	 * @param forumId
 	 * @return
 	 * @throws Exception 
@@ -378,7 +378,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据主版块ID查询主版块中所有的子版块信息数量
+	 * 상위 게시판 ID로 상위 게시판의 모든 하위 게시판 정보 수 조회
 	 * @param sectionId
 	 * @return
 	 * @throws Exception 
@@ -395,7 +395,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 
 	/**
-	 * 根据论坛ID查询论坛中所有的版块信息
+	 * 포럼 ID로 포럼의 모든 게시판 정보 조회
 	 * @param forumId
 	 * @return
 	 * @throws Exception 
@@ -412,7 +412,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据论坛ID查询论坛中所有的版块信息
+	 * 포럼 ID로 포럼의 모든 게시판 정보 조회
 	 * @param forumId
 	 * @return
 	 * @throws Exception 
@@ -429,7 +429,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据主版块ID查询所有的子版块信息列表
+	 * 상위 게시판 ID로 모든 하위 게시판 정보 목록 조회
 	 * @param sectionId
 	 * @return
 	 * @throws Exception 
@@ -446,7 +446,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据主版块ID查询所有的子版块信息列表
+	 * 상위 게시판 ID로 모든 하위 게시판 정보 목록 조회
 	 * @param sectionId
 	 * @return
 	 * @throws Exception 
@@ -474,7 +474,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 	
 	/**
-	 * 检查版主的权限和角色设置
+	 * 게시판 관리자의 권한 및 역할 설정 확인
 	 * @param sectionInfo
 	 * @throws Exception 
 	 */
@@ -490,7 +490,7 @@ public class BBSSectionInfoServiceAdv {
 	}
 
 	/**
-	 * 根据用户权限和论坛ID，获取所有主版块信息ID列表
+	 * 사용자 권한과 포럼 ID로 모든 상위 게시판 정보 ID 목록 조회
 	 * @param forumId
 	 * @param sectionIds 
 	 * @return
@@ -510,7 +510,7 @@ public class BBSSectionInfoServiceAdv {
 	/**
 	 * 
 	 * @param viewforumIds
-	 * @param publicStatus 是否公开
+	 * @param publicStatus 공개 여부
 	 * @return
 	 * @throws Exception
 	 */

@@ -12,7 +12,7 @@ public abstract class WoValue extends GsonPropertyObject {
 		this.value = value;
 	}
 
-	@FieldDescribe("对象")
+	@FieldDescribe("객체")
 	private Object value;
 
 	public Object getValue() {

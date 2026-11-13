@@ -11,7 +11,7 @@ import {EventName} from "./utils/eventBus.js";
 import {getBaiduMapUrl, getImFileDownloadUrl, imAction} from "./utils/actions.js";
 import {imConfig, imGlobalOptions, windowState} from './store.js';
 
-// 获取主应用实例（确保在主应用挂载后调用）
+// 메인 앱 인스턴스 가져오기(메인 앱 마운트 후 호출 보장)
 const appInstance = getCurrentInstance()?.appContext;
 
 const windowStateInstance = windowState();
@@ -20,7 +20,7 @@ const imGlobalOptionsInstance = imGlobalOptions();
 // eventBus
 const eventBus = inject('eventBus')
 
-// 外部传入的 options
+// 외부에서 전달된 options
 const { options } = defineProps(['options'])
 
 let openChooseConversationEventName = null
@@ -29,10 +29,10 @@ const resizeListener = ()=> windowStateInstance.updateWindowWidth()
 
 onMounted(() => {
   window.addEventListener("resize", resizeListener)
-  resizeListener() // 初始化值
-  // 根据 options 处理一些特殊情况 比如打开某一个会话
+  resizeListener() // 값 초기화
+  // options에 따라 특수 상황 처리, 예: 특정 대화 열기
   console.debug('APP =====>  onMounted  options', options)
-  // 默认打开的会话 openConversation 是一个 conversation 对象
+  // 기본으로 열 대화, openConversation은 conversation 객체
   if (options && options.openConversation && options.openConversation.id && options.openConversation.personList) {
     openConversationForOutside(options.openConversation)
   } else if (options && options.chatToPerson) {
@@ -46,7 +46,7 @@ onMounted(() => {
     console.debug('APP =====>  imGlobalOptions', imGlobalOptionsInstance.hideSide)
   }
 
-  // 打开会话选择器 data 里面应该包含 回调的eventName
+  // 대화 선택기 열기, data에 콜백 eventName이 포함되어야 함
   eventBus.subscribe(EventName.openChooseConversation, (data) => {
     console.debug("openChooseConversation", data)
     showChooseConversation.value = true
@@ -60,9 +60,9 @@ onMounted(() => {
     console.debug("changeIMConfig", data)
     loadImConfig()
   })
-  // 读取配置
+  // 설정 읽기
   loadImConfig()
-  // 监听 websocket 消息
+  // websocket 메시지 수신 대기
   if (layout.desktop && layout.desktop.socket && layout.desktop.socket.addImListener) {
     console.debug('websocket 메시지 addImListener => ')
     layout.desktop.socket.addImListener("im_revoke", imWsRevokeMessage);
@@ -101,7 +101,7 @@ const chatToPerson = async (person) => {
   }
 }
 
-// 打开会话 给外部调用
+// 대화 열기(외부 호출용)
 const openConversationForOutside = (conversation) => {
   console.debug('APP === 》 openConversationForOutside', conversation)
   if (!conversation) {
@@ -119,16 +119,16 @@ const openConversationForOutside = (conversation) => {
     }
   })
 }
-// 点击会话 打开聊天窗口
+// 대화 클릭 시 채팅 창 열기
 const openConversation = (conversation) => {
   console.debug("openConversation", conversation)
   currentConversation.value = conversation
 }
-// 修改聊天信息对象
+// 채팅 정보 객체 수정
 const updateOrDeleteConversation = ( conv ) => {
   console.debug("updateOrDeleteConversation", conv)
   currentConversation.value = conv
-  eventBus.publish( EventName.refreshMyConversation ) // 刷新列表
+  eventBus.publish( EventName.refreshMyConversation ) // 목록 새로고침
 }
 
 provide('im-app', {
@@ -136,21 +136,21 @@ provide('im-app', {
   updateOrDeleteConversation
 });
 
-// websocket 创建消息
+// websocket 메시지 생성
 const imWsCreateMessage = (msg) => {
   console.debug('websocket 메시지 생성=====> ', msg)
   eventBus.publish( EventName.wsAddMsg, msg )
-  eventBus.publish( EventName.refreshMyConversation ) // 刷新列表
+  eventBus.publish( EventName.refreshMyConversation ) // 목록 새로고침
 }
-// websocket 撤回消息
+// websocket 메시지 회수
 const imWsRevokeMessage = (msg) => {
   console.debug('websocket 메시지 회수=====> ', msg)
   eventBus.publish( EventName.wsRevokeMsg, msg )
 }
-// websocket 会话更新消息
+// websocket 대화 업데이트 메시지
 const imWsConversationMessage = (conversation) => {
   console.debug('websocket 메시지 대화방 업데이트=====> ', conversation)
-  eventBus.publish( EventName.refreshMyConversation ) // 刷新列表
+  eventBus.publish( EventName.refreshMyConversation ) // 목록 새로고침
 }
 
 const hideSide = ref(false)
@@ -170,7 +170,7 @@ const loadImConfig = async () => {
   const config = await imAction('getImConfig')
   imConfigInstance.setImConfig(config)
 }
-// 打开消息
+// 메시지 열기
 const openMsg = (msg) => {
   const body = JSON.parse(msg.body)
   if (body.type === 'messageHistory') {
@@ -187,7 +187,7 @@ const openMsg = (msg) => {
       o2.api.form.openDocument(body.docId);
     }
   } else if (body.type === "file") {
-    // 有安装 onlyOffice
+    // onlyOffice 설치됨
     if (layout.serviceAddressList["x_onlyofficefile_assemble_control"]
         && imConfigInstance.enableOnlyOfficePreview && body.fileExtension
         && (body.fileExtension.toLowerCase() === "docx" || body.fileExtension.toLowerCase() === "doc"
@@ -218,7 +218,7 @@ const openMsg = (msg) => {
     }
   }
 }
-// 图片预览 功能
+// 이미지 미리보기 기능
 let _imageViewer;
 const _openImageView = (imageUrl) => {
   const imgNode = document.createElement("img");
@@ -239,57 +239,57 @@ const _openImageView = (imageUrl) => {
     })
   })
 }
-// 打开聊天记录类型的消息
+// 채팅 기록 유형의 메시지 열기
 const openMsgHistory = async (msg) => {
   const container = document.querySelector('.im-container')
     // const fragment = document.createDocumentFragment()
     // const msgHistoryPageComponent = createApp(MsgHistoryPage, {
     //   msg: msg
     // }).mount(fragment)
-  // 创建一个容器元素
+  // 컨테이너 요소 생성
   const el = document.createElement('div');
-  // 通过主应用的 context 创建 vnode
+  // 메인 앱의 context로 vnode 생성
   const vnode = h(MsgHistoryPage);
   vnode.props = {
     msg: msg
   }
-  // ** 关键代码，继承主应用的 appContext **
+  // ** 핵심 코드, 메인 앱의 appContext 상속 **
   if (appInstance) {
     vnode.appContext = appInstance;
   }
-  // 将 vnode 渲染到 el
+  // vnode를 el에 렌더링
   render(vnode, el);
   $OOUI.dialog(lp.msgHistory, el, container, {buttons: '', canMove: false})
 }
-// 打开设置页面
+// 설정 페이지 열기
 const openImConfigPage = () => {
   const container = document.querySelector('.im-container')
   // const fragment = document.createDocumentFragment()
   // const imConfigPage = createApp(ImConfigPage, {}).mount(fragment)
-  // 创建一个容器元素
+  // 컨테이너 요소 생성
   const el = document.createElement('div');
-  // 通过主应用的 context 创建 vnode
+  // 메인 앱의 context로 vnode 생성
   const vnode = h(ImConfigPage);
-  // ** 关键代码，继承主应用的 appContext **
+  // ** 핵심 코드, 메인 앱의 appContext 상속 **
   if (appInstance) {
     vnode.appContext = appInstance;
   }
-  // 将 vnode 渲染到 el
+  // vnode를 el에 렌더링
   render(vnode, el);
   $OOUI.dialog(lp.setting, el, container, {buttons: '', canMove: false})
 }
-// 打开我的收藏页码
+// 내 즐겨찾기 페이지 열기
 const openMyCollectionPage = () => {
   const container = document.querySelector('.im-container')
-  // 创建一个容器元素
+  // 컨테이너 요소 생성
   const el = document.createElement('div');
-  // 通过主应用的 context 创建 vnode
+  // 메인 앱의 context로 vnode 생성
   const vnode = h(MyCollectionPage);
-  // ** 关键代码，继承主应用的 appContext **
+  // ** 핵심 코드, 메인 앱의 appContext 상속 **
   if (appInstance) {
     vnode.appContext = appInstance;
   }
-  // 将 vnode 渲染到 el
+  // vnode를 el에 렌더링
   render(vnode, el);
   $OOUI.dialog(lp.msgCollectionTitle, el, container, {buttons: '', canMove: false})
 }

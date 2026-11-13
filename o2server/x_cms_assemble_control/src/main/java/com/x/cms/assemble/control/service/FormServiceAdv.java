@@ -10,8 +10,8 @@ import com.x.base.core.project.http.EffectivePerson;
 import com.x.cms.core.entity.element.Form;
 
 /**
- * 对表单信息进行管理的服务类（高级）
- * 高级服务器可以利用Service完成事务控制
+ * 양식 정보 관리 서비스 클래스(고급)
+ * 고급 서비스는 Service로 트랜잭션 제어 가능
  * 
  * @author O2LEE
  */

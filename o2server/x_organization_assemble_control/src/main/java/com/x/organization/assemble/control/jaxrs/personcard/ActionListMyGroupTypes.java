@@ -17,7 +17,7 @@ class ActionListMyGroupTypes extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ActionListMyGroupTypes.class);
 
-	// 列出当前登录用户的所有分组。
+	// 현재 로그인 사용자의 모든 분류 목록.
 	ActionResult<String[]> MyExecute(EffectivePerson effectivePerson) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<String[]> result = new ActionResult<>();

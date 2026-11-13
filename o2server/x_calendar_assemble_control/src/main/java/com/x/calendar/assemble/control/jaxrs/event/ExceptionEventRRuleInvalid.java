@@ -7,6 +7,6 @@ class ExceptionEventRRuleInvalid extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionEventRRuleInvalid( String rule ) {
-		super("日程事件重复规则不合法。RRule:" + rule);
+		super("일정 반복 규칙이 올바르지 않습니다. RRule:" + rule);
 	}
 }

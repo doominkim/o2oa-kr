@@ -34,7 +34,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 	public static class WoPersonAbstract extends Person {
 		private static final long serialVersionUID = -8698017750369215370L;
 
-		@FieldDescribe("对个人的操作权限")
+		@FieldDescribe("개인 조작 권한")
 		private Control control = new Control();
 
 		public Control getControl() {
@@ -114,7 +114,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			throw new ExceptionInvalidMobile(mobile);
 		}
 		if (StringUtils.isNotEmpty(business.person().getWithMobile(mobile, excludeId))) {
-			throw new ExceptionMobileDuplicate(mobile, "手机号");
+			throw new ExceptionMobileDuplicate(mobile, "휴대폰 번호");
 		}
 	}
 
@@ -124,7 +124,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 				throw new ExceptionInvalidEmployee(employee);
 			}
 			if (StringUtils.isNotEmpty(business.person().getWithEmployee(employee, excludeId))) {
-				throw new ExceptionEmployeeDuplicate(employee, "员工号");
+				throw new ExceptionEmployeeDuplicate(employee, "사번");
 			}
 		}
 	}
@@ -135,7 +135,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 				throw new ExceptionInvalidMail(mail);
 			}
 			if (StringUtils.isNotEmpty(business.person().getWithMail(mail, excludeId))) {
-				throw new ExceptionEmployeeDuplicate(mail, "邮件地址");
+				throw new ExceptionEmployeeDuplicate(mail, "이메일 주소");
 			}
 		}
 	}

@@ -6,36 +6,36 @@ MWF.xDesktop.requireApp("Selector", "Unit", null, false);
 
 // this.options.selectableItems = [
 //     {
-//         "name": "项目1",
+//         "name": "항목1",
 //         "id": "item1",
-//         "isItem" : true //第一层的item需要isItem = true
+//         "isItem" : true //첫 번째 단계의 item은 isItem = true 필요
 //     },
 //     {
-//         "name": "项目2",
+//         "name": "항목2",
 //         "id": "item2",
-//         "isItem" : true //第一层的item需要isItem = true
+//         "isItem" : true //첫 번째 단계의 item은 isItem = true 필요
 //     },
 //     {
-//         "name": "分类1",
+//         "name": "분류1",
 //         "id": "category1",
 //         "subItemList": [
 //             {
 //                 "id": "item1.1",
-//                 "name": "项目1.1"
+//                 "name": "항목1.1"
 //             },
 //             {
 //                 "id": "item1.2",
-//                 "name": "项目1.2"
+//                 "name": "항목1.2"
 //             }
 //         ],
 //         "subCategoryList" : [
 //             {
-//                 "name": "分类1.1",
+//                 "name": "분류1.1",
 //                 "id": "category1.1",
 //                 "subItemList" : [
 //                     {
 //                         "id": "item1.1.1",
-//                         "name": "项目1.1.1"
+//                         "name": "항목1.1.1"
 //                     }
 //                 ]
 //             }
@@ -70,8 +70,8 @@ MWF.xApplication.Template.Selector.Custom = new Class({
         this.items = [];
         // this.categorys = [];
 
-        this.subCategorys = []; //直接的分类
-        this.subItems = []; //直接的选择项
+        this.subCategorys = []; //직접 분류
+        this.subItems = []; //직접 선택 항목
 
         this.availableStatusTypes = ["identity","custom"];
 
@@ -459,7 +459,7 @@ MWF.xApplication.Template.Selector.Custom.ItemCategory = new Class({
     _getTtiteText: function () {
         return this.data.name;
     },
-    _addSelectedCount : function( count, nested ){ //增加数字并向上回溯
+    _addSelectedCount : function( count, nested ){ //숫자를 증가시키고 상위로 거슬러 올라감
         if( this.selector.loadingCount === "done" ){
             var c = ( this._getSelectedCount() || 0 ) + count;
             this.selectedCount = c;
@@ -627,7 +627,7 @@ MWF.xApplication.Template.Selector.Custom.ItemCategorySelectable = new Class({
         return this.data.name;
     },
 
-    _addSelectedCount : function( count, nested ){ //增加数字并向上回溯
+    _addSelectedCount : function( count, nested ){ //숫자를 증가시키고 상위로 거슬러 올라감
 
     },
     _getTotalCount : function(){

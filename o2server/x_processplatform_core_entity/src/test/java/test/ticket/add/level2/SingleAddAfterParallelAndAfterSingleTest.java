@@ -19,7 +19,7 @@ class SingleAddAfterParallelAndAfterSingleTest {
 
  
 
-	@DisplayName("B后加签EFG,EFG并行处理,F后加签IJK,IJK单人处理,即单人-后加签并行-后加签单人")
+	@DisplayName("B후 추가결재EFG,EFG병렬 처리,F후 추가결재IJK,IJK단일 처리,즉 단일-후 추가결재병렬-후 추가결재단일")
 	@Test
 	@Order(1)
 	void test01() {

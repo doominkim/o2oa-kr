@@ -33,7 +33,7 @@ import com.x.query.core.entity.Query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Statement", description = "数据中心查询语句.")
+@Schema(name = "Statement", description = "데이터 센터 쿼리 문.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @javax.persistence.Table(name = PersistenceProperties.Schema.Statement.TABLE, uniqueConstraints = {
@@ -79,12 +79,12 @@ public class Statement extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     @Override
     public void onPersist() throws Exception {
@@ -101,7 +101,7 @@ public class Statement extends SliceJpaObject {
 
     public static final String NAME_FIELDNAME = "name";
     @Flag
-    @FieldDescribe("语句名称.")
+    @FieldDescribe("문 이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + NAME_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + NAME_FIELDNAME)
     @CheckPersist(allowEmpty = false)
@@ -109,47 +109,47 @@ public class Statement extends SliceJpaObject {
 
     public static final String ALIAS_FIELDNAME = "alias";
     @Flag
-    @FieldDescribe("别名.")
+    @FieldDescribe("별칭.")
     @Column(length = length_255B, name = ColumnNamePrefix + ALIAS_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + ALIAS_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String alias;
 
     public static final String FORMAT_FIELDNAME = "format";
-    @FieldDescribe("格式,jpql或者script.")
+    @FieldDescribe("형식, jpql 또는 script.")
     @Column(length = length_32B, name = ColumnNamePrefix + FORMAT_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + FORMAT_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String format;
 
     public static final String DESCRIPTION_FIELDNAME = "description";
-    @FieldDescribe("描述.")
+    @FieldDescribe("설명.")
     @Column(length = length_255B, name = ColumnNamePrefix + DESCRIPTION_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String description;
 
     public static final String QUERY_FIELDNAME = "query";
-    @FieldDescribe("所属查询.")
+    @FieldDescribe("소속 쿼리.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + QUERY_FIELDNAME)
     @Index(name = TABLE + ColumnNamePrefix + QUERY_FIELDNAME)
     @CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Query.class) })
     private String query;
 
 //    public static final String TYPE_FIELDNAME = "type";
-//    @FieldDescribe("语句类型,insert,delete,update,select")
+//    @FieldDescribe("문 유형, insert, delete, update, select")
 //    @Column(length = length_16B, name = ColumnNamePrefix + TYPE_FIELDNAME)
 //    @Index(name = TABLE + IndexNameMiddle + TYPE_FIELDNAME)
 //    @CheckPersist(allowEmpty = false)
 //    private String type;
 
     public static final String FV_FIELDNAME = "fv";
-    @FieldDescribe("功能版本号.")
+    @FieldDescribe("기능 버전 번호.")
     @Column(name = ColumnNamePrefix + FV_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private Float fv;
 
     public static final String EXECUTEPERSONLIST_FIELDNAME = "executePersonList";
-    @FieldDescribe("可执行的用户.")
+    @FieldDescribe("실행 가능한 사용자.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
             + EXECUTEPERSONLIST_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -161,7 +161,7 @@ public class Statement extends SliceJpaObject {
     private List<String> executePersonList;
 
     public static final String EXECUTEUNITLIST_FIELDNAME = "executeUnitList";
-    @FieldDescribe("可以访问的组织.")
+    @FieldDescribe("접근 가능한 조직.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle + EXECUTEUNITLIST_FIELDNAME, joinIndex = @Index(name = TABLE
             + IndexNameMiddle + EXECUTEUNITLIST_FIELDNAME + JoinIndexNameSuffix))
@@ -172,7 +172,7 @@ public class Statement extends SliceJpaObject {
     private List<String> executeUnitList;
 
     public static final String EXECUTEGROUPLIST_FIELDNAME = "executeGroupList";
-    @FieldDescribe("可以访问的群组.")
+    @FieldDescribe("접근 가능한 그룹.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
             + EXECUTEGROUPLIST_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -184,7 +184,7 @@ public class Statement extends SliceJpaObject {
     private List<String> executeGroupList;
 
     public static final String DATA_FIELDNAME = "data";
-    @FieldDescribe("jpql语句.")
+    @FieldDescribe("jpql 구문.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_32K, name = ColumnNamePrefix + DATA_FIELDNAME)
@@ -192,7 +192,7 @@ public class Statement extends SliceJpaObject {
     private String data;
 
     public static final String SCRIPTTEXT_FIELDNAME = "scriptText";
-    @FieldDescribe("类型为script的执行脚本.")
+    @FieldDescribe("유형이 script인 실행 스크립트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + SCRIPTTEXT_FIELDNAME)
@@ -200,7 +200,7 @@ public class Statement extends SliceJpaObject {
     private String scriptText;
 
     public static final String COUNTDATA_FIELDNAME = "countData";
-    @FieldDescribe("jpql语句，用于查询总数.")
+    @FieldDescribe("jpql 문, 총 개수 조회용.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_32K, name = ColumnNamePrefix + COUNTDATA_FIELDNAME)
@@ -208,7 +208,7 @@ public class Statement extends SliceJpaObject {
     private String countData;
 
     public static final String COUNTSCRIPTTEXT_FIELDNAME = "countScriptText";
-    @FieldDescribe("类型为script的执行脚本，用于查询总数.")
+    @FieldDescribe("유형이 script인 실행 스크립트, 총 개수 조회용.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + COUNTSCRIPTTEXT_FIELDNAME)
@@ -216,7 +216,7 @@ public class Statement extends SliceJpaObject {
     private String countScriptText;
 
     public static final String SQL_FIELDNAME = "sql";
-    @FieldDescribe("sql语句.")
+    @FieldDescribe("sql 문.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_32K, name = ColumnNamePrefix + SQL_FIELDNAME)
@@ -224,7 +224,7 @@ public class Statement extends SliceJpaObject {
     private String sql;
 
     public static final String SQLSCRIPTTEXT_FIELDNAME = "sqlScriptText";
-    @FieldDescribe("sqlScript的执行脚本.")
+    @FieldDescribe("sqlScript 실행 스크립트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + SQLSCRIPTTEXT_FIELDNAME)
@@ -232,7 +232,7 @@ public class Statement extends SliceJpaObject {
     private String sqlScriptText;
 
     public static final String SQLCOUNT_FIELDNAME = "sqlCount";
-    @FieldDescribe("sql总数统计语句.")
+    @FieldDescribe("sql 총 개수 집계 문.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_32K, name = ColumnNamePrefix + SQLCOUNT_FIELDNAME)
@@ -240,7 +240,7 @@ public class Statement extends SliceJpaObject {
     private String sqlCount;
 
     public static final String SQLCOUNTSCRIPTTEXT_FIELDNAME = "sqlCountScriptText";
-    @FieldDescribe("sql总数统计语句脚本.")
+    @FieldDescribe("sql 총 개수 집계 문 스크립트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + SQLCOUNTSCRIPTTEXT_FIELDNAME)
@@ -248,7 +248,7 @@ public class Statement extends SliceJpaObject {
     private String sqlCountScriptText;
 
     public static final String VIEW_FIELDNAME = "view";
-    @FieldDescribe("展现视图.")
+    @FieldDescribe("표시 뷰.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + VIEW_FIELDNAME)
@@ -256,44 +256,44 @@ public class Statement extends SliceJpaObject {
     private String view;
 
     public static final String CREATORPERSON_FIELDNAME = "creatorPerson";
-    @FieldDescribe("创建者")
+    @FieldDescribe("작성자")
     @CheckPersist(allowEmpty = false)
     @Column(length = length_255B, name = ColumnNamePrefix + CREATORPERSON_FIELDNAME)
     private String creatorPerson;
 
     public static final String LASTUPDATETIME_FIELDNAME = "lastUpdateTime";
-    @FieldDescribe("最后修改时间")
+    @FieldDescribe("최종 수정 시간")
     @CheckPersist(allowEmpty = false)
     @Column(name = ColumnNamePrefix + LASTUPDATETIME_FIELDNAME)
     private Date lastUpdateTime;
 
     public static final String LASTUPDATEPERSON_FIELDNAME = "lastUpdatePerson";
-    @FieldDescribe("最后修改者")
+    @FieldDescribe("최종 수정자")
     @CheckPersist(allowEmpty = false)
     @Column(length = length_255B, name = ColumnNamePrefix + LASTUPDATEPERSON_FIELDNAME)
     private String lastUpdatePerson;
 
     public static final String TABLE_FIELDNAME = "table";
-    @FieldDescribe("执行的表")
+    @FieldDescribe("실행 대상 테이블")
     @Column(length = length_id, name = ColumnNamePrefix + TABLE_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + TABLE_FIELDNAME)
     @CheckPersist(allowEmpty = true, citationExists = { @CitationExist(type = Table.class) })
     private String table;
 
     public static final String ENTITYCLASSNAME_FIELDNAME = "entityClassName";
-    @FieldDescribe("custom,official时使用的类名.")
+    @FieldDescribe("custom, official일 때 사용하는 클래스명.")
     @CheckPersist(allowEmpty = true)
     @Column(length = length_255B, name = ColumnNamePrefix + ENTITYCLASSNAME_FIELDNAME)
     private String entityClassName;
 
     public static final String ENTITYCATEGORY_FIELDNAME = "entityCategory";
-    @FieldDescribe("表类型,official,dynamic,custom")
+    @FieldDescribe("테이블 유형, official, dynamic, custom")
     @Column(length = length_16B, name = ColumnNamePrefix + ENTITYCATEGORY_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String entityCategory;
 
     public static final String TESTPARAMETERS_FIELDNAME = "testParameters";
-    @FieldDescribe("测试参数（json格式文本）.")
+    @FieldDescribe("테스트 매개변수(json 형식 텍스트).")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_4K, name = ColumnNamePrefix + TESTPARAMETERS_FIELDNAME)
@@ -301,29 +301,29 @@ public class Statement extends SliceJpaObject {
     private String testParameters;
 
     public static final String ANONYMOUSACCESSIBLE_FIELDNAME = "anonymousAccessible";
-    @FieldDescribe("是否允许匿名访问（boolean类型）")
+    @FieldDescribe("익명 접근 허용 여부(boolean 유형)")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + ANONYMOUSACCESSIBLE_FIELDNAME)
     private Boolean anonymousAccessible;
 
     public static final String DISPLAY_FIELDNAME = "display";
-    @FieldDescribe("是否前端可见.")
+    @FieldDescribe("프런트 표시 여부.")
     @Column(name = ColumnNamePrefix + DISPLAY_FIELDNAME)
     private Boolean display;
 
     public static final String VIEWENABLE_FIELDNAME = "viewEnable";
-    @FieldDescribe("是否允许作为视图嵌入到表单.")
+    @FieldDescribe("뷰로서 양식에 삽입 허용 여부.")
     @Column(name = ColumnNamePrefix + VIEWENABLE_FIELDNAME)
     private Boolean viewEnable;
 
     public static final String ORDERNUMBER_FIELDNAME = "orderNumber";
-    @FieldDescribe("排序号,为空在最后")
+    @FieldDescribe("정렬 번호, 비어 있으면 마지막")
     @Column(name = ColumnNamePrefix + ORDERNUMBER_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + ORDERNUMBER_FIELDNAME)
     private Integer orderNumber;
 
     public static final String COUNTMETHOD_FIELDNAME = "countMethod";
-    @FieldDescribe("数量总计方法,ignore:忽略,auto:自动,assign:指定.")
+    @FieldDescribe("총 개수 계산 방법, ignore: 무시, auto: 자동, assign: 지정.")
     @Column(length = length_16B, name = ColumnNamePrefix + COUNTMETHOD_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + COUNTMETHOD_FIELDNAME)
     @CheckPersist(allowEmpty = false)

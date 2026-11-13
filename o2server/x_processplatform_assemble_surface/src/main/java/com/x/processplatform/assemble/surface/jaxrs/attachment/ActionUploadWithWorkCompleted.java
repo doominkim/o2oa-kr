@@ -41,9 +41,9 @@ class ActionUploadWithWorkCompleted extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
-			/* 后面要重新保存 */
+			/* 뒤에서 다시 저장해야 함 */
 			WorkCompleted workCompleted = emc.find(workCompletedId, WorkCompleted.class);
-			/** 判断work是否存在 */
+			/** work 존재 여부 판단 */
 			if (null == workCompleted) {
 				throw new ExceptionEntityNotExist(workCompletedId, WorkCompleted.class);
 			}
@@ -52,7 +52,7 @@ class ActionUploadWithWorkCompleted extends BaseAction {
 				throw new ExceptionEntityNotExist(workCompleted.getProcess(), Process.class);
 			}
 
-			/* 用于标识状态的结束节点 */
+			/* 상태 표시용 종료 노드 */
 			List<End> ends = business.end().listWithProcess(process);
 			if (ends.isEmpty()) {
 				throw new ExceptionEndNotExist(process.getId());
@@ -68,12 +68,12 @@ class ActionUploadWithWorkCompleted extends BaseAction {
 			if (StringUtils.isEmpty(fileName)) {
 				fileName = this.fileName(disposition);
 			}
-			/* 调整可能的附件名称 */
+			/* 가능한 첨부파일 이름 조정 */
 			fileName = this.adjustFileName(business, workCompleted.getJob(), fileName);
 
 			this.verifyConstraint(bytes.length, fileName, null);
 
-//			/* 天印扩展 */
+//			/* 톈인 확장 */
 //			if (StringUtils.isNotEmpty(extraParam)) {
 //				WiExtraParam wiExtraParam = gson.fromJson(extraParam, WiExtraParam.class);
 //				if (StringUtils.isNotEmpty(wiExtraParam.getFileName())) {
@@ -83,7 +83,7 @@ class ActionUploadWithWorkCompleted extends BaseAction {
 //					site = wiExtraParam.getSite();
 //				}
 //			}
-			/** 禁止不带扩展名的文件上传 */
+			/** 확장자 없는 파일 업로드 금지 */
 			StorageMapping mapping = ThisApplication.context().storageMappings().random(Attachment.class);
 			Attachment attachment = this.concreteAttachment(workCompleted, effectivePerson, site, ends.get(0));
 			attachment.saveContent(mapping, bytes, fileName, Config.general().getStorageEncrypt());
@@ -105,7 +105,7 @@ class ActionUploadWithWorkCompleted extends BaseAction {
 		attachment.setPerson(effectivePerson.getDistinguishedName());
 		attachment.setLastUpdatePerson(effectivePerson.getDistinguishedName());
 		attachment.setSite(site);
-		/** 用于判断目录的值 */
+		/** 디렉터리 값 판단용 */
 		attachment.setWorkCreateTime(workCompleted.getCreateTime());
 		attachment.setApplication(workCompleted.getApplication());
 		attachment.setProcess(workCompleted.getProcess());

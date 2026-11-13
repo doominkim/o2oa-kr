@@ -16,7 +16,7 @@ public  class WrapBooleanList extends GsonPropertyObject {
 		this.valueList = new ArrayList<Boolean>(collection);
 	}
 
-	@FieldDescribe("布尔值多值.")
+	@FieldDescribe("불리언 다중 값.")
 	private List<Boolean> valueList = new ArrayList<>();
 
 	public List<Boolean> getValueList() {

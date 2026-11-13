@@ -36,8 +36,8 @@ MWF.xApplication.process.FormDesigner.Module.SmartBI = MWF.FCSmartBI = new Class
 	},
 	_setEditStyle: function (name) {
 		this.BIOptions = {
-			"showtoolbar": this.json.smartbidisplaytoolbar || false, //showtoolbar对应SmartBI系统中的参数名
-			"showLeftTree": this.json.smartbidisplaylefttree || false //即席查询是否显示左侧树形
+			"showtoolbar": this.json.smartbidisplaytoolbar || false, //showtoolbar는 SmartBI 시스템의 매개변수명에 대응
+			"showLeftTree": this.json.smartbidisplaylefttree || false //즉석 조회 시 왼쪽 트리 표시 여부
 		}
 
 		if (name == "smartbiresource") {

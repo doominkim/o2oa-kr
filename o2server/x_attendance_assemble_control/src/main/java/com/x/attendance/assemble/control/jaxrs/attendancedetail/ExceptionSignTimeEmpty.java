@@ -7,6 +7,6 @@ class ExceptionSignTimeEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSignTimeEmpty() {
-		super("员工手机打卡信息中打卡时间不能为空，格式: HH:mm:ss." );
+		super("직원 모바일 체크 정보의 체크 시간은 비워 둘 수 없습니다. 형식: HH:mm:ss." );
 	}
 }

@@ -12,19 +12,19 @@ public class ActionFilterAttributeWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 1206560608003793762L;
 
-	@FieldDescribe("可选择的流程")
+	@FieldDescribe("선택 가능한 프로세스")
 	private List<NameValueCountPair> processList = new ArrayList<>();
 
-	@FieldDescribe("可选择的组织")
+	@FieldDescribe("선택 가능한 조직")
 	private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-	@FieldDescribe("可选择的开始月份")
+	@FieldDescribe("선택 가능한 시작 월")
 	private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
-	@FieldDescribe("可选择的活动节点")
+	@FieldDescribe("선택 가능한 활동 노드")
 	private List<NameValueCountPair> activityNameList = new ArrayList<>();
 
-	@FieldDescribe("可选择的工作状态")
+	@FieldDescribe("선택 가능한 업무 문서 상태")
 	@FieldTypeDescribe(fieldType = "enum", fieldValue = "start|processing|hanging", fieldTypeName = "com.x.processplatform.core.entity.content.WorkStatus")
 	private List<NameValueCountPair> workStatusList = new ArrayList<>();
 

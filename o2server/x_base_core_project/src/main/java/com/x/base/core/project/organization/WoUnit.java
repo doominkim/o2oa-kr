@@ -8,7 +8,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
  **/
 public class WoUnit extends Unit {
 
-    @FieldDescribe("上级组织对象.")
+    @FieldDescribe("상위 조직 객체.")
     private WoUnit woSupDirectUnit;
 
     public WoUnit getWoSupDirectUnit() {

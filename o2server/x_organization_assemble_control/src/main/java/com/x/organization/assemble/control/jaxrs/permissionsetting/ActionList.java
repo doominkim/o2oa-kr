@@ -20,7 +20,7 @@ class ActionList extends BaseAction {
 
 
 
-	// 列出所有个人通讯录设置配置。
+	// 모든 개인 주소록 설정 목록.
 	ActionResult<List<Wo>> MyExecute(EffectivePerson effectivePerson) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<List<Wo>> result = new ActionResult<>();

@@ -28,7 +28,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * config/token.json配置修改
+ * config/token.json 설정 수정
  * @author sword
  */
 public class ActionSetToken extends BaseAction {
@@ -40,7 +40,7 @@ public class ActionSetToken extends BaseAction {
 		}
 		Map<String,Object> map = XGsonBuilder.instance().fromJson(jsonElement, Map.class);
 		Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
-		/** 需要修改数据库密码 */
+		/** 데이터베이스 비밀번호 수정 필요 */
 		if (StringUtils.isNotBlank(wi.getPassword()) && !StringUtils.equals(wi.getPassword(), Config.token().getPassword())) {
 			this.changeInternalDataServerPassword(Config.token().getPassword(), wi.getPassword());
 		}

@@ -17,7 +17,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddBeforeParallelAndAfterParallelTest {
 
-	@DisplayName("B前加签EFG,FEG并行处理,F后加签IJK,IJK并行处理,即并行-前加签并行-后加签并行,混合处理EFGIJK都处理完后到B")
+	@DisplayName("B전 추가결재EFG,FEG병렬 처리,F후 추가결재IJK,IJK병렬 처리,즉 병렬-전 추가결재병렬-후 추가결재병렬,혼합 처리EFGIJK 모두 처리 후 B")
 	@Test
 	@Order(1)
 	void test01() {
@@ -62,7 +62,7 @@ class ParallelAddBeforeParallelAndAfterParallelTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B前加签EFG,FEG并行处理,F后加签IJK,IJK并行处理,即并行-前加签并行-后加签并行,EFGIJK都处理完后到ABC")
+	@DisplayName("B전 추가결재EFG,FEG병렬 처리,F후 추가결재IJK,IJK병렬 처리,즉 병렬-전 추가결재병렬-후 추가결재병렬,EFGIJK 모두 처리 후 ABC")
 	@Test
 	@Order(2)
 	void test02() {
@@ -108,7 +108,7 @@ class ParallelAddBeforeParallelAndAfterParallelTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B前加签EFG,FEG并行处理,F后加签IJK,IJK并行处理,即并行-前加签并行-后加签并行,AC先处理,EFGIJK都处理完后到B")
+	@DisplayName("B전 추가결재EFG,FEG병렬 처리,F후 추가결재IJK,IJK병렬 처리,즉 병렬-전 추가결재병렬-후 추가결재병렬,AC 먼저 처리,EFGIJK 모두 처리 후 B")
 	@Test
 	@Order(3)
 	void test03() {

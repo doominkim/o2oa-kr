@@ -13,28 +13,28 @@ public class V2CountWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -8723288394987103327L;
 
-	@FieldDescribe("总数量.")
-	@Schema(description = "总数量.")
+	@FieldDescribe("총 수량.")
+	@Schema(description = "총 수량.")
 	private Long count;
 
-	@FieldDescribe("按应用分类数量.")
-	@Schema(description = "按应用分类数量.")
+	@FieldDescribe("앱별 분류 수량.")
+	@Schema(description = "앱별 분류 수량.")
 	private List<NameValueCountPair> applicationList = new ArrayList<>();
 
-	@FieldDescribe("按流程分类数量.")
-	@Schema(description = "按流程分类数量.")
+	@FieldDescribe("프로세스별 분류 수량.")
+	@Schema(description = "프로세스별 분류 수량.")
 	private List<NameValueCountPair> processList = new ArrayList<>();
 
-	@FieldDescribe("按创建人分类数量.")
-	@Schema(description = "按创建人分类数量.")
+	@FieldDescribe("생성자별 분류 수량.")
+	@Schema(description = "생성자별 분류 수량.")
 	private List<NameValueCountPair> creatorPersonList = new ArrayList<>();
 
-	@FieldDescribe("按创建组织分类数量.")
-	@Schema(description = "按创建组织分类数量.")
+	@FieldDescribe("생성 조직별 분류 수량.")
+	@Schema(description = "생성 조직별 분류 수량.")
 	private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-	@FieldDescribe("按创建的年月分类.")
-	@Schema(description = "按创建的年月分类.")
+	@FieldDescribe("생성 연월별 분류.")
+	@Schema(description = "생성 연월별 분류.")
 	private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
 	public Long getCount() {

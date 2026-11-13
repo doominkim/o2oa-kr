@@ -1,4 +1,4 @@
-//提供两种方式，一种是传入selectValue,selectText, 另外一种是 用onLoadData 或 loadData 加载数据，
+//두 가지 방식 제공: 하나는 selectValue,selectText 전달, 다른 하나는 onLoadData 또는 loadData로 데이터 로드,
 MWF.xDesktop.requireApp("Template", "MTooltips", null, false);
 var MSelector = new Class({
     Extends: MWF.widget.Common,
@@ -12,7 +12,7 @@ var MSelector = new Class({
         "isSetSelectedValue" : true,
         "isChangeOptionStyle" : true,
         "inputEnable" : false,
-        "isCreateReadNode" : true, //适应给MDomitem的做法
+        "isCreateReadNode" : true, //MDomitem 방식에 맞춤
         "emptyOptionEnable" : true,
         "containerIsTarget" : false,
         "tooltipWhenNoSelectValue" : false,
@@ -32,14 +32,14 @@ var MSelector = new Class({
         "isEdited" : true,
 
         "tooltipsOptions" : {
-            axis: "y",      //箭头在x轴还是y轴上展现
-            position : { //node 固定的位置
-                x : "center", //x轴上left center right,  auto 系统自动计算
-                y : "bottom" //y 轴上top middle bottom, auto 系统自动计算
+            axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+            position : { //node 고정 위치
+                x : "center", //x축 left center right, auto는 시스템이 자동 계산
+                y : "bottom" //y축 top middle bottom, auto는 시스템이 자동 계산
             },
-            event : "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-            hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-            displayDelay : 0   //ms , 有target 且事件类型为 mouseenter 时有效
+            event : "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+            hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+            displayDelay : 0   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
         }
     },
     initialize: function (container, options , app, css, dropdownContainer ) {
@@ -54,7 +54,7 @@ var MSelector = new Class({
             }
         }
 
-        this.valSeparator = /,|;|\^\^|\|/; //如果是多值对象，作为用户选择的多个值的分隔符
+        this.valSeparator = /,|;|\^\^|\|/; //다중 값 객체이면 사용자가 선택한 여러 값의 구분자
 
         this.app = app;
         this.container = $(container);
@@ -562,14 +562,14 @@ var MSelector = new Class({
 MSelector.Tootips = new Class({
     Extends: MTooltips,
     options : {
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "center", //x轴上left center right,  auto 系统自动计算
-            y : "bottom" //y 轴上top middle bottom, auto 系统自动计算
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "center", //x축 left center right, auto는 시스템이 자동 계산
+            y : "bottom" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
-        event : "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-        hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-        displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
+        event : "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+        hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+        displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
         hasArrow : false
     },
     _customNode : function( node, contentNode ){ 

@@ -18,7 +18,7 @@ export default content({
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
      
     };

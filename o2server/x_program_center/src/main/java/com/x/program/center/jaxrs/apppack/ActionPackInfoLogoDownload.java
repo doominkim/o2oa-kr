@@ -31,11 +31,11 @@ public class ActionPackInfoLogoDownload extends BaseAction {
                 wo = (Wo) optional.get();
             } else {
                 String url = Config.collect().appPackServerUrl() + info.getAppLogoPath() + "?token=" + getPackServerSSOToken();
-                logger.info("下载 logo 的url： " + url);
+                logger.info("logo 다운로드 url: " + url);
                 byte[] bytes = ConnectionAction.getBinary(url, null);
                 wo = new Wo(bytes, this.contentType(false, "logo.png"),
                         this.contentDisposition(false, "logo.png"));
-                // 对10M以下的文件进行缓存
+                // 10M 이하 파일 캐시
                 if (bytes.length < (1024 * 1024 * 10)) {
                     CacheManager.put(cacheCategory, cacheKey, wo);
                 }

@@ -10,16 +10,16 @@ public class V2GoBackWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6729193803512068864L;
 
-	@FieldDescribe("活动节点")
+	@FieldDescribe("활동 노드")
 	private String activity;
 
-	@FieldDescribe("活动节点")
+	@FieldDescribe("활동 노드")
 	private String activityToken;
 
-	@FieldDescribe("路由方式")
+	@FieldDescribe("경로 방식")
 	private String way;
 
-	@FieldDescribe("人工活动强制处理人.")
+	@FieldDescribe("수동 활동 강제 처리자.")
 	private List<String> distinguishedNameList = new ArrayList<>();
 
 	public String getActivityToken() {

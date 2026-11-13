@@ -82,7 +82,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			if (jsonElement.isJsonObject()) {
 				return gson.fromJson(jsonElement, Data.class);
 			} else {
-				/* 如果不是Object强制返回一个Map对象 */
+				/* Object가 아니면 Map 객체를 강제로 반환 */
 				return new Data();
 			}
 		}
@@ -90,37 +90,37 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 	public static class AbstractWo extends GsonPropertyObject {
 
-		@FieldDescribe("业务数据")
+		@FieldDescribe("업무 데이터")
 		private Data data;
 
-		@FieldDescribe("已完成工作")
+		@FieldDescribe("완료된 업무 문서")
 		private WoWorkCompleted workCompleted;
 
-		@FieldDescribe("待办,必然为空")
+		@FieldDescribe("결재 대기, 반드시 비어 있음")
 		private List<WoTask> taskList = new ArrayList<>();
 
-		@FieldDescribe("已办")
+		@FieldDescribe("처리 완료")
 		private List<WoTaskCompleted> taskCompletedList = new ArrayList<>();
 
-		@FieldDescribe("待阅")
+		@FieldDescribe("열람 대기")
 		private List<WoRead> readList = new ArrayList<>();
 
-		@FieldDescribe("已阅")
+		@FieldDescribe("열람 완료")
 		private List<WoReadCompleted> readCompletedList = new ArrayList<>();
 
-		@FieldDescribe("附件")
+		@FieldDescribe("첨부파일")
 		private List<WoAttachment> attachmentList = new ArrayList<>();
 
-		@FieldDescribe("工作日志")
+		@FieldDescribe("업무 로그")
 		private List<WoWorkLog> workLogList = new ArrayList<>();
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
-		@FieldDescribe("当前待阅索引")
+		@FieldDescribe("현재 열람 대기 인덱스")
 		private Integer currentReadIndex = -1;
 
-		@FieldDescribe("表单")
+		@FieldDescribe("양식")
 		private WoForm form;
 
 		public Data getData() {

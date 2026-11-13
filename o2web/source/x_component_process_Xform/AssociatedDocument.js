@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class AssociatedDocument 视图选择组件。
- * @o2cn 视图选择
+/** @class AssociatedDocument 뷰 선택 컴포넌트.
+ * @o2cn 뷰 선택
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var sourceText = this.form.get("fieldId"); //获取组件
- * //方法2
- * var sourceText = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var sourceText = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var sourceText = this.target; //컴포넌트 자체의 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.Button
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -19,49 +19,49 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
 	Extends: MWF.APP$Module,
     options: {
         /**
-         * 视图参数（options）已经准备好，还未加载视图时执行。可以通过this.event得到视图参数，并可修改this.event修改视图的加载。
+         * 뷰 인자(options)가 준비되었고 아직 뷰를 로드하지 않았을 때 실행. this.event로 뷰 인자를 가져올 수 있으며, this.event를 수정해 뷰 로드를 변경할 수 있음.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#beforeLoadView
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 异步加载视图后执行。
+         * 뷰를 비동기로 로드한 후 실행.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#loadView
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 选中视图中的一条记录后执行。可以通过this.event获取该次选择的记录。
+         * 뷰에서 레코드 하나를 선택한 후 실행. this.event로 이번에 선택한 레코드를 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#select
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 取消选中视图中的一条记录后执行。可以通过this.event获取该次取消选择的记录。
+         * 뷰에서 레코드 하나의 선택을 해제한 후 실행. this.event로 이번에 선택 해제한 레코드를 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#unselect
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 点击确定后执行的事件。可以通过this.event获取选择的记录列表。
+         * 확인 클릭 후 실행되는 이벤트. this.event로 선택한 레코드 목록을 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#selectResult
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 选择完成后，并且整理了关联文档数据后事件。可以通过this.event获取记录列表。
+         * 선택 완료 후 연결 문서 데이터를 정리한 뒤의 이벤트. this.event로 레코드 목록을 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#afterSelectResult
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 删除关联文档前执行的事件。可以通过this.event获取删除的记录。
+         * 연결 문서 삭제 전 실행되는 이벤트. this.event로 삭제할 레코드를 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#deleteDocument
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 删除关联文档后执行的事件。可以通过this.event获取删除的记录。
+         * 연결 문서 삭제 후 실행되는 이벤트. this.event로 삭제한 레코드를 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.AssociatedDocument#afterDeleteDocument
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         // /**
-        //  * 打开关联文档前执行的事件。
+        //  * 연결 문서를 열기 전 실행되는 이벤트.
         //  * @event MWF.xApplication.process.Xform.AssociatedDocument#openDocument
-        //  * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+        //  * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
         //  */
         "moduleEvents": ["load", "queryLoad", "postLoad", "beforeLoadView", "loadView", "select", "unselect", "selectResult",
             "afterSelectResult", "deleteDocument","afterDeleteDocument","openDocument"]
@@ -75,7 +75,7 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
         this.form = form;
 
         this.parentLine = null;
-        //只是为了校验
+        //검증 용도로만 사용
         this.field = true;
         this.fieldModuleLoaded = false;
 
@@ -106,12 +106,12 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
         });
 
         /**
-         * @summary 当前组件关联的文档。
+         * @summary 현재 컴포넌트와 연결된 문서.
          * @member documentList {Array<Object>}
          * @memberOf MWF.xApplication.process.Xform.AssociatedDocument
          * @example
-         *  //可以在脚本中获取该组件
-         * var documentList = this.form.get("fieldId").documentList; //当前组件关联的文档
+         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+         * var documentList = this.form.get("fieldId").documentList; //현재 컴포넌트와 연결된 문서
          */
         this.documentList = [];
 
@@ -248,19 +248,19 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
         return MWF.xApplication.process.Xform.LP;
     },
     /**
-     * @summary 设置关联文档，清空所有的已关联文档后再关联。
+     * @summary 연결 문서 설정, 기존 연결 문서를 모두 비운 뒤 연결.
      * @param data{Object[]} .
      * @param [callback] {Function}
-     * @param [async] {Boolean} 是否异步执行，默认为异步。如果组件未加载完成的时候执行该方法，强制为异步。
+     * @param [async] {Boolean} 비동기 실행 여부, 기본값은 비동기. 컴포넌트 로드가 완료되지 않았을 때 실행하면 강제로 비동기.
      * @return {Promise}
      * @example
      *  this.form.get("fieldId").set([{
-     *      type: 'processPlatform', //类型，processPlatform表示流程，cms表示内容管理，如果为空默认为流程
-     *      bundle: '', //流程实例的 job, 或者是内容管理文档的id
-     *      view: '' //视图的id
+     *      type: 'processPlatform', //유형, processPlatform은 프로세스, cms는 콘텐츠 관리, 비어 있으면 기본값은 프로세스
+     *      bundle: '', //프로세스 인스턴스의 job 또는 콘텐츠 관리 문서의 id
+     *      view: '' //뷰의 id
      *  }], function(json){
-     *      //json.data.failureList 关联失败列表
-     *      //json.data.successList 关联成功列表
+     *      //json.data.failureList 연결 실패 목록
+     *      //json.data.successList 연결 성공 목록
      *  }, true);
      * @example
      *  var p = this.form.get("fieldId").set([{
@@ -269,11 +269,11 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
      *      view: ''
      *  }]);
      *  p.then(function(json){
-     *      //json.data.failureList 关联失败列表
-     *      //json.data.successList 关联成功列表
+     *      //json.data.failureList 연결 실패 목록
+     *      //json.data.successList 연결 성공 목록
      *  })
      *  @example
-     *  this.form.get('fieldId').set([])取消所有关联
+     *  this.form.get('fieldId').set([])로 모든 연결 취소
      */
     set: function(data, callback, async){
         var after = function (json){
@@ -313,24 +313,24 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
         return this.listPromise ? this.listPromise.then( execute ) : execute();
     },
     /**
-     * @summary 根据传入的数据添加关联文档。
+     * @summary 전달된 데이터로 연결 문서 추가.
      * @param data {Object[]}
-     * @param [toTop]{Boolean} 是否添加到已有文档前面，默认为否。
-     * @param [keepOrder]{Boolean} 如果添加的已经存在，是否保留原有位置, 默认不保留。
+     * @param [toTop]{Boolean} 기존 문서 앞에 추가할지 여부, 기본값은 아니오.
+     * @param [keepOrder]{Boolean} 추가한 항목이 이미 있으면 기존 위치를 유지할지 여부, 기본값은 유지하지 않음.
      * @param [callback] {Function}
-     * @param [async]{Boolean} 是否为异步，默认为异步。如果组件未加载完成的时候执行该方法，强制为异步。
+     * @param [async]{Boolean} 비동기 여부, 기본값은 비동기. 컴포넌트 로드가 완료되지 않았을 때 실행하면 강제로 비동기.
      * @return {Promise|Object}
      * @example
      *  this.form.get("fieldId").add([{
-     *      type: 'processPlatform', //类型，processPlatform表示流程，cms表示内容管理，如果为空默认为流程
-     *      bundle: '', //流程实例的 job, 或者是内容管理文档的id
-     *      view: '' //视图的id
+     *      type: 'processPlatform', //유형, processPlatform은 프로세스, cms는 콘텐츠 관리, 비어 있으면 기본값은 프로세스
+     *      bundle: '', //프로세스 인스턴스의 job 또는 콘텐츠 관리 문서의 id
+     *      view: '' //뷰의 id
      *  }],
      *  true,
      *  true,
      *  function(json){
-     *      //json.data.failureList 关联失败列表
-     *      //json.data.successList 关联成功列表
+     *      //json.data.failureList 연결 실패 목록
+     *      //json.data.successList 연결 성공 목록
      *  }, true);
      * @example
      *  var p = this.form.get("fieldId").add([{
@@ -339,8 +339,8 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
      *      view: ''
      *  }]);
      *  p.then(function(json){
-     *      //json.data.failureList 关联失败列表
-     *      //json.data.successList 关联成功列表
+     *      //json.data.failureList 연결 실패 목록
+     *      //json.data.successList 연결 성공 목록
      *  })
      */
     add: function(data, toTop, keepOrder, callback, async){
@@ -372,10 +372,10 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
         return this.listPromise ? this.listPromise.then( execute ) : execute();
     },
     /**
-     * @summary 取消指定的关联。
+     * @summary 지정한 연결 취소.
      * @param bundles {String[]}
      * @param [callback] {Function}
-     * @param [async]{Boolean} 是否为异步，默认为异步。如果组件未加载完成的时候执行该方法，强制为异步。
+     * @param [async]{Boolean} 비동기 여부, 기본값은 비동기. 컴포넌트 로드가 완료되지 않았을 때 실행하면 강제로 비동기.
      * @return {Promise}
      * @example
      *  this.form.get("fieldId").cancel([id1, id2]);
@@ -397,15 +397,15 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
         return this.listPromise ? this.listPromise.then( execute ) : execute();
     },
     /**
-     * @summary 得到关联的列表。
-     * @return {Promise|Object[]} 如果组件未加载完成的时候执行该方法，返回promise，否则返回对象数组。
+     * @summary 연결 목록 가져오기.
+     * @return {Promise|Object[]} 컴포넌트 로드가 완료되지 않았을 때 실행하면 promise, 아니면 객체 배열 반환.
      * <pre>
      * [
      *     {
-     *         "site": "associatedDocument", //组件site，如果没有设置，则为组件id
-     *         "type": "cms", //类型，processPlatform表示流程，cms表示内容管理
-     *         "bundle": "909b78e1-3ec2-4c63-b756-200ff734c318", //流程实例的 job, 或者是内容管理文档的id
-     *         "view": "b5bd7fae-239e-4cab-aa34-8c63350d9e97" //视图的id
+     *         "site": "associatedDocument", //컴포넌트 site, 설정하지 않으면 컴포넌트 id
+     *         "type": "cms", //유형, processPlatform은 프로세스, cms는 콘텐츠 관리
+     *         "bundle": "909b78e1-3ec2-4c63-b756-200ff734c318", //프로세스 인스턴스의 job 또는 콘텐츠 관리 문서의 id
+     *         "view": "b5bd7fae-239e-4cab-aa34-8c63350d9e97" //뷰의 id
      *     }
      * ]
      * </pre>
@@ -1403,7 +1403,7 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
                     this.form.notice(MWF.xApplication.process.Xform.LP.docDeleted, "info");
                 }else{
                     this.form.Macro.environment.form.openJob(d.targetBundle, null, null, function ( app ) {
-                        this.fireEvent("openDocument", [app]); //options 传入的事件
+                        this.fireEvent("openDocument", [app]); //options 전달된 이벤트
                     }.bind(this));
                 }
             }.bind(this));
@@ -1423,7 +1423,7 @@ MWF.xApplication.process.Xform.AssociatedDocument = MWF.APPAssociatedDocument = 
         var node;
         if( this.form.json.errorStyle ){
             if( this.form.json.errorStyle.type === "notice" ){
-                if( !this.form.errorNoticing ){ //如果是弹出
+                if( !this.form.errorNoticing ){ //팝업이면
                     this.form.errorNoticing = true;
                     this.form.notice(text, "error", this.node, null, null, {
                         onClose : function () {

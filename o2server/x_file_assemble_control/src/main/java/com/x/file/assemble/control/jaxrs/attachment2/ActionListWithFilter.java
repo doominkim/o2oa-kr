@@ -46,7 +46,7 @@ class ActionListWithFilter extends BaseAction {
 		static WrapCopier<Attachment2, Wo> copier = WrapCopierFactory.wo(Attachment2.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("文件路径")
+		@FieldDescribe("파일 경로")
 		private String path;
 
 		public String getPath() {

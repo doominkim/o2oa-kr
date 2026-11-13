@@ -77,7 +77,7 @@ public abstract class ElementFactory extends AbstractFactory {
         return t;
     }
 
-    // 取得属于指定Process 的设计元素
+    // 지정 Process에 속한 설계 요소 조회
     @SuppressWarnings("unchecked")
     protected <T extends JpaObject> List<T> listWithProcess(Class<T> clz, Process process) throws Exception {
         List<T> list = new ArrayList<>();
@@ -101,7 +101,7 @@ public abstract class ElementFactory extends AbstractFactory {
                 em.detach(t);
                 list.add(t);
             }
-            // 将object改为unmodifiable
+            // object를 unmodifiable로 변경
             list = Collections.unmodifiableList(list);
             CacheManager.put(cacheCategory, cacheKey, list);
         }

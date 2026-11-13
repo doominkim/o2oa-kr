@@ -21,10 +21,10 @@ import com.x.calendar.assemble.control.ExceptionWrapInConvert;
 import com.x.calendar.core.entity.Calendar_Event;
 
 /**
- * 根据条件和权限列示能访问到的符合条件的日历信息
- * 1、查询时间段内有多少重复事件主体需要进行事件生成
- * 2、生成事件
- * 3、根据条件查询日程事件信息列表
+ * 조건과 권한에 따라 접근 가능한 조건에 맞는 캘린더 정보 조회
+ * 1. 조회 기간 내 이벤트 생성이 필요한 반복 이벤트 주체 조회
+ * 2. 이벤트 생성
+ * 3. 조건에 따라 일정 이벤트 정보 목록 조회
  * @author O2LEE
  *
  */
@@ -49,7 +49,7 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 //				manager = ThisApplication.isCalendarSystemManager( effectivePerson );
 //			}catch( Exception e) {
 //				check = false;
-//				Exception exception = new ExceptionEventProcess( e, "系统根据查询用户是否是系统管理员时发生异常." );
+//				Exception exception = new ExceptionEventProcess( e, "사용자가 시스템 관리자인지 조회하는 중 예외가 발생했습니다." );
 //				result.error( exception );
 //				logger.error( e, effectivePerson, request, null);
 //			}
@@ -65,7 +65,7 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 		}
 		
 		if( check ){
-			//如果没有设置查询日期范围就查本月的
+			//조회 날짜 범위가 설정되지 않으면 이번 달 조회
 			if( wi.getStartTime() == null && wi.getEndTime() == null ) {
 				wi.setStartTime( dateOperation.getFirstDayInMonth( new Date() ));
 				wi.setEndTime( dateOperation.getEndDayInMonth( new Date() ));
@@ -80,7 +80,7 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 				unitNames = userManagerService.listUnitNamesWithPerson( personName );
 				groupNames = userManagerService.listGroupNamesByPerson( personName );
 				if( ListTools.isEmpty( wi.getCalendarIds()  )) {
-					//查询用户可以看到的所有CalendarIds
+					//사용자가 볼 수 있는 모든 CalendarIds 조회
 					wi.setCalendarIds( calendarServiceAdv.listWithCondition(personName, unitNames, groupNames) );
 				}
 				if( ListTools.isNotEmpty( wi.getCalendarIds()  ) ) {
@@ -89,7 +89,7 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户权限查询日历信息ID列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자 권한으로 캘린더 ID 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -99,7 +99,7 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 //							null, null, null, wi.getStartTime(), wi.getEndTime() );
 //				} catch (Exception e) {
 //					check = false;
-//					Exception exception = new ExceptionEventProcess( e, "系统根据用户权限查询日历信息ID列表时发生异常." );
+//					Exception exception = new ExceptionEventProcess( e, "사용자 권한에 따라 캘린더 정보 ID 목록을 조회하는 중 예외가 발생했습니다." );
 //					result.error( exception );
 //					logger.error( e, effectivePerson, request, null);
 //				}
@@ -114,10 +114,10 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 				try {
 					wrapEvents = WoCalendar_Event.copier.copy( calendar_EventList );
 					if( ListTools.isNotEmpty( wrapEvents )) {
-						//组织为输入需要的格式
+						//입력에 필요한 형식으로 구성
 						wo.initInOneDayEventsList( wi.getStartTime(), wi.getEndTime() );
 						for( WoCalendar_Event calendar_Event : wrapEvents ) {
-							//组织输出的形式
+							//출력 형식 구성
 							if( calendar_Event.getDaysOfDuration() >= 1 ) {
 								wo.addWholeDayEvent(calendar_Event);
 							}else {
@@ -133,7 +133,7 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 					}					
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "将所有查询到的日历信息对象转换为可以输出的信息时发生异常." );
+					Exception exception = new ExceptionEventProcess( e, "조회한 캘린더 정보를 출력 정보로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -145,25 +145,25 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 	
 	public static class Wi{
 
-		@FieldDescribe("日历账号ID")
+		@FieldDescribe("캘린더 계정 ID")
 		private List<String> calendarIds = null;
 		
-		@FieldDescribe("信息类别: CAL_EVENT | TASK_EVENT")
+		@FieldDescribe("정보 유형: CAL_EVENT | TASK_EVENT")
 		private String eventType = "CAL_EVENT";
 		
-		@FieldDescribe("信息来源: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
+		@FieldDescribe("정보 출처: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
 		private String source;
 		
-		@FieldDescribe("事件标题 或者 备注信息 模糊搜索")
+		@FieldDescribe("이벤트 제목 또는 비고 정보 유사 검색")
 		private String key = null;
 		
-		@FieldDescribe("查询开始时间")
+		@FieldDescribe("조회 시작 시간")
 		private Date startTime = null;
 
-		@FieldDescribe("查询结束时间")
+		@FieldDescribe("조회 종료 시간")
 		private Date endTime = null;
 
-		@FieldDescribe("创建者")
+		@FieldDescribe("작성자")
 	    private String createPerson = null;
 
 		public String getEventType() {
@@ -226,10 +226,10 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 	
 	public static class Wo {
 		
-		@FieldDescribe("全天或者持续超1天（跨1天）的事件列表.")
+		@FieldDescribe("종일 또는 1일 초과(1일 걸침) 이벤트 목록.")
 		private List<WoCalendar_Event> wholeDayEvents = null;
 		
-		@FieldDescribe("持续时间在1天以内的事件列表.按日期分开")
+		@FieldDescribe("지속 시간 1일 이내 이벤트 목록. 날짜별로 구분")
 		private List<WoCalendar_Event_ForDay> inOneDayEvents = null;
 
 		public List<WoCalendar_Event> getWholeDayEvents() {
@@ -294,10 +294,10 @@ private Logger logger = LoggerFactory.getLogger( ActionListWithCondition.class )
 	
 	public static class WoCalendar_Event_ForDay  {
 		
-		@FieldDescribe("日期字符串.")
+		@FieldDescribe("날짜 문자열.")
 		private String eventDate = null;
 		
-		@FieldDescribe("持续时间在1天以内的事件列表.")
+		@FieldDescribe("지속 시간 1일 이내 이벤트 목록.")
 		private List<WoCalendar_Event> inOneDayEvents = null;
 
 		public String getEventDate() {

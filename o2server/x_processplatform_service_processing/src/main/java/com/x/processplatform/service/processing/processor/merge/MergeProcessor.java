@@ -33,7 +33,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Merge merge) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.mergeArrive(aeiObjects.getWork().getActivityToken(), merge));
 		return aeiObjects.getWork();
 	}
@@ -45,11 +45,11 @@ public class MergeProcessor extends AbstractMergeProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Merge merge) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.mergeExecute(aeiObjects.getWork().getActivityToken(), merge));
 		List<Work> results = new ArrayList<>();
 		if (BooleanUtils.isNotTrue(aeiObjects.getWork().getSplitting())) {
-			/* 如果不是一个拆分文档,直接通过 */
+			/* 분할 문서가 아니면 바로 통과 */
 			results.add(aeiObjects.getWork());
 			return results;
 		}
@@ -66,7 +66,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 			aeiObjects.getWorkLogs().stream()
 					.filter(p -> StringUtils.equals(p.getFromActivityToken(), aeiObjects.getWork().getActivityToken()))
 					.forEach(obj -> aeiObjects.getDeleteWorkLogs().add(obj));
-			// 本体被删除,如果另外合并对象处于merge环节要尝试流转
+			// 본체가 삭제됨, 다른 병합 대상이 merge 단계에 있으면 진행 시도
 			if (Objects.equals(other.get().getActivityType(), ActivityType.merge)) {
 				LOGGER.warn(
 						"The work stays in merge is an illegal state, try to trigger the work(id:{}, job:{}) again.",
@@ -78,14 +78,14 @@ public class MergeProcessor extends AbstractMergeProcessor {
 			if (splitTokenList.isPresent()) {
 				gotoShallower(aeiObjects, merge, splitTokenList.get());
 			} else {
-				// 只有一份也不能直接合并,因为可能设置了合并层数,返回到了处理人是拆分值的情况
+				// 하나뿐이어도 바로 병합할 수 없음, 병합 레벨이 설정되어 처리자가 분할 값인 상태로 돌아갔을 수 있음
 				if ((null != merge.getMergeLayerThreshold()) && (merge.getMergeLayerThreshold() > 0)
 						&& aeiObjects.getWork().getSplitTokenList().size() > merge.getMergeLayerThreshold()) {
 					List<String> list = aeiObjects.getWork().getSplitTokenList().subList(0,
 							aeiObjects.getWork().getSplitTokenList().size() - merge.getMergeLayerThreshold());
 					gotoShallower(aeiObjects, merge, list);
 				} else {
-					// 唯一一份且合并层数大于等于当前的总层数,那么退出拆分状态.
+					// 유일하고 병합 레벨이 현재 총 레벨 이상이면 분할 상태 종료.
 					aeiObjects.getWork().setSplitting(false);
 					aeiObjects.getWork().setSplitToken("");
 					aeiObjects.getWork().setSplitTokenList(new ArrayList<>());
@@ -94,7 +94,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 					aeiObjects.getWork().setSplitTokenValueMap(new LinkedHashMap<>());
 				}
 			}
-			// 不删除必然要继续流转,离开merge环节
+			// 삭제하지 않으면 반드시 계속 진행하여 merge 단계를 떠남
 			results.add(aeiObjects.getWork());
 		}
 		return results;
@@ -107,17 +107,17 @@ public class MergeProcessor extends AbstractMergeProcessor {
 			mergeLayerCount = Math.min(mergeLayerCount, merge.getMergeLayerThreshold());
 		}
 		int threshold = aeiObjects.getWork().getSplitTokenList().size() - mergeLayerCount;
-		// 回滚splitTokenList
+		// splitTokenList 롤백
 		aeiObjects.getWork().setSplitTokenList(aeiObjects.getWork().getSplitTokenList().subList(0, threshold));
-		// 回滚splitToken
+		// splitToken 롤백
 		aeiObjects.getWork().setSplitToken(
 				aeiObjects.getWork().getSplitTokenList().get(aeiObjects.getWork().getSplitTokenList().size() - 1));
-		// 回滚splitValueList,如果是并行过来没有拆分值,通过存储值进行组装
+		// splitValueList 롤백, 병렬로 와서 분할 값이 없으면 저장된 값으로 조립
 		aeiObjects.getWork()
 				.setSplitValueList(aeiObjects.getWork().getSplitTokenList().stream()
 						.map(o -> aeiObjects.getWork().getSplitTokenValueMap().getOrDefault(o, null))
 						.filter(Objects::nonNull).collect(Collectors.toList()));
-		// 回滚splitValue
+		// splitValue 롤백
 		if (ListTools.isNotEmpty(aeiObjects.getWork().getSplitValueList())) {
 			aeiObjects.getWork().setSplitValue(
 					aeiObjects.getWork().getSplitValueList().get(aeiObjects.getWork().getSplitValueList().size() - 1));
@@ -127,7 +127,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 	}
 
 	/**
-	 * 查找同级别或者拆分更深的文档
+	 * 같은 레벨 또는 더 깊게 분할된 문서 조회
 	 * 
 	 * @param aeiObjects
 	 * @return
@@ -135,7 +135,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 	 */
 	private Optional<Work> findWorkSameLevelOrDeeper(AeiObjects aeiObjects) throws Exception {
 		String join = StringUtils.join(aeiObjects.getWork().getSplitTokenList(), ",");
-		// 查找同级
+		// 동일 레벨 조회
 		Optional<Work> other = aeiObjects.getWorks().stream()
 				.filter(o -> BooleanUtils.isTrue(o.getSplitting()) && (o != aeiObjects.getWork())
 						&& StringUtils.equals(StringUtils.join(o.getSplitTokenList(), ","), join))
@@ -144,7 +144,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 			LOGGER.debug("findWorkMergeTo work {} found same split level work {}.", aeiObjects.getWork()::getId,
 					other.get()::getId);
 		}
-		// 找不到同级那么开始早更深层次的文档
+		// 동일 레벨을 찾지 못하면 더 깊은 레벨의 문서 조회 시작
 		if (other.isEmpty()) {
 			other = aeiObjects.getWorks().stream()
 					.filter(o -> BooleanUtils.isTrue(o.getSplitting()) && (o != aeiObjects.getWork())
@@ -165,7 +165,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 	}
 
 	/**
-	 * 查找更浅层次的拆分文档
+	 * 더 얕은 레벨의 분할 문서 조회
 	 * 
 	 * @param aeiObjects
 	 * @return
@@ -183,7 +183,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 	}
 
 	/**
-	 * 在V3Retract会调用到
+	 * V3Retract에서 호출됨
 	 * 
 	 * @param aeiObjects
 	 * @param work
@@ -268,7 +268,7 @@ public class MergeProcessor extends AbstractMergeProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Merge merge) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.mergeInquire(aeiObjects.getWork().getActivityToken(), merge));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
@@ -279,9 +279,9 @@ public class MergeProcessor extends AbstractMergeProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

@@ -17,7 +17,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.queue.AbstractQueue;
 
 /**
- * 对单个员工的打卡信息进行分析的队列
+ * 직원 한 명의 출퇴근 정보를 분석하는 큐
  */
 public class QueueAttendanceDetailStatistic extends AbstractQueue<String> {
 
@@ -38,76 +38,76 @@ public class QueueAttendanceDetailStatistic extends AbstractQueue<String> {
             List<AttendanceStatisticRequireLog> attendanceStatisticRequireLogList = null;
             Map<String, Map<String, List<AttendanceStatisticalCycle>>> statisticalCycleMap = null;
 
-            try {//先查询所有的法定节假日和工作日配置列表
+            try {//먼저 모든 법정 공휴일·근무일 설정 목록 조회
                 workDayConfigList = workDayConfigServiceAdv.getAllWorkDayConfigWithCache(false );
             } catch ( Exception e ) {
-                logger.warn("【统计】系统在查询当月有打卡记录的员工姓名列表时发生异常！" );
+                logger.warn("[통계] 당월 출퇴근 기록이 있는 직원 이름 목록 조회 중 예외가 발생했습니다!" );
                 logger.error(e);
             }
 
-            try{//查询所有的考勤统计周期信息，并且组织成MAP
+            try{//모든 근태 통계 주기 정보를 조회해 MAP으로 구성
                 statisticalCycleMap = statisticalCycleServiceAdv.getAllStatisticalCycleMapWithCache(false);
             }catch(Exception e){
-                logger.warn( "【统计】系统在查询并且组织所有的考勤统计周期信息时发生异常。" );
+                logger.warn( "[통계] 모든 근태 통계 주기 정보 조회 및 구성 중 예외가 발생했습니다." );
                 logger.error(e);
             }
 
-            //先处理所有的统计错误
+            //먼저 모든 통계 오류 처리
             try {
-                logger.debug( false, "准备处理恢复的统计错误信息, 所有错误统计将会重新计算......" );
+                logger.debug( false, "복구할 통계 오류 정보 처리 준비, 모든 오류 통계를 다시 계산합니다......" );
                 statisticRequireLogServiceAdv.resetStatisticError();
             } catch (Exception e) {
-                logger.warn("【统计】系统在重置统计错误信息时发生异常！" );
+                logger.warn("[통계] 통계 오류 정보 재설정 중 예외가 발생했습니다!" );
                 logger.error(e);
             }
-            //统计类型:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
-            //统计处理状态：WAITING|PROCESSING|COMPLETE|ERROR
+            //통계 유형:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
+            //통계 처리 상태: WAITING|PROCESSING|COMPLETE|ERROR
             if( StringUtils.equals( "PERSON_PER_MONTH", log.getStatisticType() )){
-                logger.debug( false, "系统准备统计[员工每月统计]， 员工：" + log.getStatisticKey() + ", 统计月份:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
+                logger.debug( false, "[직원 월별 통계] 준비, 직원:" + log.getStatisticKey() + ", 통계 월:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
                 try {
                     attendanceStatisticalCycle = statisticalCycleServiceAdv.getStatisticCycleByEmployee( log, statisticalCycleMap, false );
                 } catch (Exception e) {
-                    logger.warn("【统计】系统在根据统计需求记录信息查询统计周期信息时发生异常！" );
+                    logger.warn("[통계] 통계 요청 기록으로 통계 주기 정보 조회 중 예외가 발생했습니다!" );
                     logger.error(e);
                 }
                 if( attendanceStatisticalCycle != null ){
                     try{
                         statisticServiceAdv.statisticEmployeeAttendanceForMonth( log, attendanceStatisticalCycle, workDayConfigList, statisticalCycleMap);
                     }catch(Exception e){
-                        logger.warn( "【统计】系统在根据需求进行员工月度打卡记录分析结果统计时发生异常。" );
+                        logger.warn( "[통계] 직원 월별 출퇴근 기록 분석 결과 통계 중 예외가 발생했습니다." );
                         logger.error(e);
                     }
                 }
             } else if ( StringUtils.equals( "UNIT_PER_MONTH", log.getStatisticType() )){
-                logger.debug( false, "系统准备统计[组织每月统计]， 组织：" + log.getStatisticKey() + ", 统计月份:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
+                logger.debug( false, "[조직 월별 통계] 준비, 조직:" + log.getStatisticKey() + ", 통계 월:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
                 try{
                     statisticServiceAdv.statisticUnitAttendanceForMonth( log, workDayConfigList, statisticalCycleMap );
                 }catch(Exception e){
-                    logger.warn( "【统计】系统在根据需求进行员工月度打卡记录分析结果统计时发生异常。" );
+                    logger.warn( "[통계] 직원 월별 출퇴근 기록 분석 결과 통계 중 예외가 발생했습니다." );
                     logger.error(e);
                 }
             } else if ( StringUtils.equals( "TOPUNIT_PER_MONTH", log.getStatisticType() )){
-                logger.debug( false, "系统准备统计[顶层组织每月统计]， 顶层组织：" + log.getStatisticKey() + ", 统计月份:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
+                logger.debug( false, "[최상위 조직 월별 통계] 준비, 최상위 조직:" + log.getStatisticKey() + ", 통계 월:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
                 try{
                     statisticServiceAdv.statisticTopUnitAttendanceForMonth( log, workDayConfigList, statisticalCycleMap);
                 }catch(Exception e){
-                    logger.warn( "【统计】系统在根据需求进行员工月度打卡记录分析结果统计时发生异常。" );
+                    logger.warn( "[통계] 직원 월별 출퇴근 기록 분석 결과 통계 중 예외가 발생했습니다." );
                     logger.error(e);
                 }
             } else if ( StringUtils.equals( "UNIT_PER_DAY", log.getStatisticType() )){
-                logger.debug( false, "系统准备统计[组织每月统计]， 组织：" + log.getStatisticKey() + ", 统计日期:" + log.getStatisticDay() );
+                logger.debug( false, "[조직 월별 통계] 준비, 조직:" + log.getStatisticKey() + ", 통계 날짜:" + log.getStatisticDay() );
                 try{
                     statisticServiceAdv.statisticUnitAttendanceForDay( log, workDayConfigList, statisticalCycleMap, false );
                 }catch(Exception e){
-                    logger.warn( "【统计】系统在根据需求进行组织每日打卡记录分析结果统计时发生异常。" );
+                    logger.warn( "[통계] 조직 일별 출퇴근 기록 분석 결과 통계 중 예외가 발생했습니다." );
                     logger.error(e);
                 }
             } else if ( StringUtils.equals( "TOPUNIT_PER_DAY", log.getStatisticType() )){
-                logger.debug( false, "系统准备统计[顶层组织每月统计]， 顶层组织：" + log.getStatisticKey() + ", 统计日期:" + log.getStatisticDay() );
+                logger.debug( false, "[최상위 조직 월별 통계] 준비, 최상위 조직:" + log.getStatisticKey() + ", 통계 날짜:" + log.getStatisticDay() );
                 try{
                     statisticServiceAdv.statisticTopUnitAttendanceForDay( log, workDayConfigList, statisticalCycleMap );
                 }catch(Exception e){
-                    logger.warn( "【统计】系统在根据需求进行顶层组织每日打卡记录分析结果统计时发生异常。" );
+                    logger.warn( "[통계] 최상위 조직 일별 출퇴근 기록 분석 결과 통계 중 예외가 발생했습니다." );
                     logger.error(e);
                 }
             }else{

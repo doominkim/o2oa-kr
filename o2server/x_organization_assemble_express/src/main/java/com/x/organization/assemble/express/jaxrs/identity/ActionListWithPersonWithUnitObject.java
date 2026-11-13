@@ -77,10 +77,10 @@ class ActionListWithPersonWithUnitObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList = new ArrayList<>();
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getUnitList() {

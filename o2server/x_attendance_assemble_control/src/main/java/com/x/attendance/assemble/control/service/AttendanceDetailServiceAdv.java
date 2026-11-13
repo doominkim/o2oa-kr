@@ -66,7 +66,7 @@ public class AttendanceDetailServiceAdv {
 	}
 
 	/**
-	 * 根据开始和结束日期以及员工信息补充缺失的打卡信息
+	 * 시작·종료 날짜와 직원 정보로 누락된 체크 정보 보충
 	 * @param startDate
 	 * @param endDate
 	 * @param attendanceEmployeeConfig
@@ -109,7 +109,7 @@ public class AttendanceDetailServiceAdv {
 		}
 	}
 	
-	//根据人员和打卡日期查找打卡记录  
+	//사용자와 출퇴근 날짜로 출퇴근 기록 조회  
 	public List<String> listDetailByNameAndDate( String q_empName, String datestr )  throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			return attendanceDetailService.listDetailByNameAndDate( emc, q_empName, datestr);
@@ -280,13 +280,13 @@ public class AttendanceDetailServiceAdv {
 	}
 
 	/**
-	 * 根据所有的移动打卡记录来组织一个完整的打卡记录
+	 * 모든 모바일 체크 기록으로 완전한 출퇴근 기록 구성
 	 * @param distinguishedName
 	 * @param recordDateString
 	 * @throws Exception
 	 */
 	public void pushToDetail(String distinguishedName, String recordDateString, Boolean debugger ) throws Exception {
-		//查询外勤打卡配置
+		//외근 체크 설정 조회
 		Boolean ATTENDANCE_FIELD = false;
 		try (EntityManagerContainer em = EntityManagerContainerFactory.instance().create()) {
 			AttendanceSetting attendanceSettingField = attendanceSettingService.getByCode(em,"ATTENDANCE_FIELD");
@@ -311,16 +311,16 @@ public class AttendanceDetailServiceAdv {
 						ATTENDANCE_FIELD = true;
 					}
 				}
-				//获取打卡策略：两次，三次还是四次
-				//根据考勤打卡规则来判断启用何种规则来进行考勤结果分析
+				//체크 정책 조회: 2회, 3회 또는 4회
+				//근태 체크 규칙에 따라 어떤 규칙으로 근태 결과를 분석할지 판단
 				if( 2 == scheduleSetting.getSignProxy() ){
-					//2、一天三次打卡：打上班，下班两次卡外，中午休息时间也需要打一次卡，以确保员工在公司活动
+					//2. 하루 3회 체크: 출근·퇴근 2회 외에 점심 휴식 시간에도 1회 체크하여 직원의 회사 내 활동 확인
 					detail = new ComposeDetailWithMobileInSignProxy2().compose( mobileDetails, scheduleSetting, debugger);
 				}else if( 3 == scheduleSetting.getSignProxy() ){
-					//3、一天四次打卡：打上午上班，上午下班，下午上班，下午下班四次卡
+					//3. 하루 4회 체크: 오전 출근, 오전 퇴근, 오후 출근, 오후 퇴근 4회 체크
 					detail = new ComposeDetailWithMobileInSignProxy3().compose( mobileDetails, scheduleSetting, debugger);
 				}else{
-					//1、一天只打上下班两次卡
+					//1. 하루 출퇴근 2회만 체크
 					detail = new ComposeDetailWithMobileInSignProxy1().compose( mobileDetails, scheduleSetting, debugger);
 				}
 				detail.setIsExternal(ATTENDANCE_FIELD);
@@ -338,7 +338,7 @@ public class AttendanceDetailServiceAdv {
 					emc.check( detail_old , CheckPersistType.all );
 					emc.commit();
 				}
-				/*可能引起多人同时打卡时commit error
+				/*여러 사용자가 동시에 체크할 때 commit error가 발생할 수 있음
 				emc.beginTransaction( AttendanceDetailMobile.class );
 				for( AttendanceDetailMobile detailMobile : mobileDetails ) {
 					detailMobile.setRecordStatus(1);
@@ -346,7 +346,7 @@ public class AttendanceDetailServiceAdv {
 				}
 				emc.commit();*/
 
-				//分析保存好的考勤数据
+				//저장된 근태 데이터 분석
 				try {
 //					ThisApplication.detailAnalyseQueue.send( detail_old.getId() );
 				} catch ( Exception e1 ) {
@@ -360,7 +360,7 @@ public class AttendanceDetailServiceAdv {
 
 
 	/**
-	 * 根据日期查询未签退的所有打卡记录ID
+	 * 날짜로 퇴근 미체크 출퇴근 기록 ID 전체 조회
 	 * @param dateString yyyy-mm-dd
 	 * @return
 	 */
@@ -376,7 +376,7 @@ public class AttendanceDetailServiceAdv {
 	}
 
 	/**
-	 * 查询在指定截止日期前已经打过卡的人员
+	 * 지정 마감일 이전에 이미 출퇴근 체크한 사용자 조회
 	 * @param deadline
 	 * @param type:all#onDuty#offDuty#morningOffDuty#afternoonOnDuty
 	 * @return

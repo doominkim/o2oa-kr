@@ -22,11 +22,11 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 主题投票结果表
+ * 주제 투표 결과 테이블
  * 
  * @author LIYI
  */
-@Schema(name = "BBSSubjectVoteResult", description = "论坛投票结果.")
+@Schema(name = "BBSSubjectVoteResult", description = "포럼 투표 결과.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSSubjectVoteResult.table, uniqueConstraints = {
@@ -47,7 +47,7 @@ public class BBSSubjectVoteResult extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -56,33 +56,33 @@ public class BBSSubjectVoteResult extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String forumId_FIELDNAME = "forumId";
-	@FieldDescribe("论坛ID")
+	@FieldDescribe("포럼 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + forumId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + forumId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumId = null;
 
 	public static final String sectionId_FIELDNAME = "sectionId";
-	@FieldDescribe("版块ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + sectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String sectionId = null;
 
 	public static final String mainSectionId_FIELDNAME = "mainSectionId";
-	@FieldDescribe("主版块ID")
+	@FieldDescribe("상위 게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + mainSectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mainSectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -91,7 +91,7 @@ public class BBSSubjectVoteResult extends SliceJpaObject {
 	public static final String statisticContent_FIELDNAME = "statisticContent";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("统计内容")
+	@FieldDescribe("통계 내용")
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + statisticContent_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String statisticContent = null;

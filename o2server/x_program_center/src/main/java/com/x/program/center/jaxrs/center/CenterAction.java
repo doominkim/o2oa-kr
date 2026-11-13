@@ -23,7 +23,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("center")
-@JaxrsDescribe("中心服务器")
+@JaxrsDescribe("중앙 서버")
 public class CenterAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(CenterAction.class);
@@ -31,7 +31,7 @@ public class CenterAction extends StandardJaxrsAction {
  
 	@PUT
 	@Path("regist/applications")
-	@JaxrsMethodDescribe(value = "批量注册应用.", action = ActionRegistApplications.class)
+	@JaxrsMethodDescribe(value = "앱 일괄 등록.", action = ActionRegistApplications.class)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void registApplications(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
@@ -49,7 +49,7 @@ public class CenterAction extends StandardJaxrsAction {
 
 	@GET
 	@Path("applications")
-	@JaxrsMethodDescribe(value = "列示应用.", action = ActionApplications.class)
+	@JaxrsMethodDescribe(value = "앱 나열.", action = ActionApplications.class)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void load(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
@@ -67,7 +67,7 @@ public class CenterAction extends StandardJaxrsAction {
 
 	@GET
 	@Path("version")
-	@JaxrsMethodDescribe(value = "查看服务器版本.", action = ActionVersion.class)
+	@JaxrsMethodDescribe(value = "서버 버전 조회.", action = ActionVersion.class)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void version(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {

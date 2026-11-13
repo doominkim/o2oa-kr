@@ -11,8 +11,8 @@ MWF.xApplication.Selector.Unit = new Class({
         "zIndex": 1000,
         "expand": true,
         "exclude" : [],
-        "expandSubEnable" : true, //是否允许展开下一层
-        "selectAllEnable" : true, //分类是否允许全选下一层
+        "expandSubEnable" : true, //다음 레벨 펼치기 허용 여부
+        "selectAllEnable" : true, //분류에서 다음 레벨 전체 선택 허용 여부
         "selectType" : "unit"
     },
     // loadCategoryHtml: function (){
@@ -880,7 +880,7 @@ MWF.xApplication.Selector.Unit.Item = new Class({
             "click": function(){
                 if( this.selector.currentFlatCategory === this )return;
                 if( this.selector.currentFlatCategory ){
-                    this.selector.currentFlatCategory.clickFlatCategoryItem(null, true); //取消原来选择的
+                    this.selector.currentFlatCategory.clickFlatCategoryItem(null, true); //기존 선택 취소
                 }
                 this.selector.currentFlatCategory = this;
                 this.clickFlatCategoryItem();
@@ -999,7 +999,7 @@ MWF.xApplication.Selector.Unit.SearchItem = new Class({
         return this.data.levelName || '';
     },
     loadSubItems: function( callback ){
-        //只是为了在isFlatCategory模式下，加载全称用的，否则用继承的就可以
+        //isFlatCategory 모드에서 전체 이름을 로드하기 위한 용도일 뿐, 그 외에는 상속된 것을 사용하면 됨
         if (!this.loaded && !this.loading){
             this.loading = true;
             if (!this.children){

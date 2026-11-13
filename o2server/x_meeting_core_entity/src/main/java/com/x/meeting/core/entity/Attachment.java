@@ -25,7 +25,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Attachment", description = "会议管理附件.")
+@Schema(name = "Attachment", description = "회의 관리 첨부파일.")
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Attachment.table, uniqueConstraints = {
@@ -47,18 +47,18 @@ public class Attachment extends StorageObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.extension = StringUtils.trimToEmpty(this.extension);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	@Override
 	public String path() throws Exception {
@@ -136,14 +136,14 @@ public class Attachment extends StorageObject {
 	}
 
 	public static final String meeting_FIELDNAME = "meeting";
-	@FieldDescribe("关联的会议.")
+	@FieldDescribe("연관 회의.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + meeting_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + meeting_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String meeting;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件名称.")
+	@FieldDescribe("파일 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
@@ -151,47 +151,47 @@ public class Attachment extends StorageObject {
 	private String name;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名。")
+	@FieldDescribe("확장자.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = true, fileNameString = true)
 	private String extension;
 
 	public static final String storage_FIELDNAME = "storage";
-	@FieldDescribe("关联类型的名称.")
+	@FieldDescribe("연관 유형 이름.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	@Index(name = TABLE + IndexNameMiddle + storage_FIELDNAME)
 	private String storage;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + length_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long length;
 
 	public static final String summary_FIELDNAME = "summary";
-	@FieldDescribe("是否是会议纪要附件.")
+	@FieldDescribe("회의록 첨부파일 여부.")
 	@Column(name = ColumnNamePrefix + summary_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean summary;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后更新人员")
+	@FieldDescribe("최종 수정 사용자")
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdatePerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String lastUpdatePerson;
 
 	public static final String deepPath_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
 	private Boolean deepPath;

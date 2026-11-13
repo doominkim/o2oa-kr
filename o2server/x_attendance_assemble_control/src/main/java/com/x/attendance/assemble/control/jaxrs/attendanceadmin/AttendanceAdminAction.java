@@ -28,12 +28,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("attendanceadmin")
-@JaxrsDescribe("考勤管理员信息配置管理服务（已弃用）")
+@JaxrsDescribe("근태 관리자 정보 설정 관리 서비스(사용 중단)")
 public class AttendanceAdminAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceAdminAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有的考勤管理员信息", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "모든 근태 관리자 정보 조회", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -52,13 +52,13 @@ public class AttendanceAdminAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取指定的考勤管理员信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 근태 관리자 정보 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("考勤管理员配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("근태 관리자 설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -70,7 +70,7 @@ public class AttendanceAdminAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "新建或者更新考勤管理员信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "근태 관리자 정보 생성 또는 수정", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -87,13 +87,13 @@ public class AttendanceAdminAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除考勤管理员信息", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 근태 관리자 정보 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("考勤管理员配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("근태 관리자 설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

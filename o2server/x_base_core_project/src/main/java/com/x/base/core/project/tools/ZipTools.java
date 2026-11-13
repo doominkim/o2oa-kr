@@ -22,7 +22,7 @@ import net.lingala.zip4j.model.ExtraDataRecord;
 import net.lingala.zip4j.model.FileHeader;
 
 /**
- * zip工具类
+ * zip 유틸리티 클래스
  * 
  * @author sword
  */
@@ -167,11 +167,11 @@ public class ZipTools {
 	}
 
 	/**
-	 * 压缩成ZIP 方法1
+	 * ZIP 압축 방법1
 	 * 
-	 * @param sourceFile 待压缩文件夹
-	 * @param out        压缩包输出流
-	 * @param fileList   压缩的文件列表，可以为null
+	 * @param sourceFile 압축할 폴더
+	 * @param out        압축 파일 출력 스트림
+	 * @param fileList   압축할 파일 목록, null 가능
 	 * @return boolean
 	 */
 	public static boolean toZip(File sourceFile, OutputStream out, List<String> fileList) {
@@ -185,11 +185,11 @@ public class ZipTools {
 	}
 
 	/**
-	 * 压缩成ZIP 方法2
+	 * ZIP 압축 방법2
 	 * 
-	 * @param srcFiles 需要压缩的文件列表
-	 * @param out      压缩文件输出流
-	 * @throws RuntimeException 压缩失败会抛出运行时异常
+	 * @param srcFiles 압축할 파일 목록
+	 * @param out      압축 파일 출력 스트림
+	 * @throws RuntimeException 압축 실패 시 런타임 예외 발생
 	 */
 	public static void toZip(List<File> srcFiles, OutputStream out) throws RuntimeException {
 		ZipOutputStream zos = null;
@@ -220,18 +220,18 @@ public class ZipTools {
 	}
 
 	/**
-	 * 递归压缩方法
+	 * 재귀 압축 메서드
 	 * 
-	 * @param sourceFile 源文件
-	 * @param zos        zip输出流
-	 * @param name       压缩后的名称
+	 * @param sourceFile 원본 파일
+	 * @param zos        zip 출력 스트림
+	 * @param name       압축 후 이름
 	 * @throws Exception
 	 */
 	private static void compress(File sourceFile, ZipOutputStream zos, String name, List<String> fileList)
 			throws Exception {
 		byte[] buf = new byte[BUFFER_SIZE];
 		if (sourceFile.isFile()) {
-			// 向zip输出流中添加一个zip实体，构造器中name为zip实体的文件的名字
+			// zip 출력 스트림에 zip 엔트리 추가, 생성자의 name은 zip 엔트리 파일 이름
 			if (StringUtils.isBlank(name)) {
 				name = sourceFile.getName();
 			}
@@ -243,7 +243,7 @@ public class ZipTools {
 				}
 			}
 			zos.putNextEntry(new ZipEntry(name));
-			// copy文件到zip输出流中
+			// 파일을 zip 출력 스트림으로 copy
 			int len;
 			FileInputStream in = new FileInputStream(sourceFile);
 			while ((len = in.read(buf)) != -1) {

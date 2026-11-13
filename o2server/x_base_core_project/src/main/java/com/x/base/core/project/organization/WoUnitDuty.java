@@ -11,16 +11,16 @@ import java.util.List;
  **/
 public class WoUnitDuty extends GsonPropertyObject {
 
-    @FieldDescribe("组织对象")
+    @FieldDescribe("조직 객체")
     private WoUnit woUnit;
 
-    @FieldDescribe("个人属性名称")
+    @FieldDescribe("개인 속성 이름")
     private String name;
 
-    @FieldDescribe("组织")
+    @FieldDescribe("조직")
     private String unit;
 
-    @FieldDescribe("身份信息")
+    @FieldDescribe("신분 정보")
     private List<String> identityList;
 
     public String getName() {

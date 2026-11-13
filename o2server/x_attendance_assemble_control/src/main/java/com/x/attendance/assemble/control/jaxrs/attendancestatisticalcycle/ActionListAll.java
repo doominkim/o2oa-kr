@@ -29,13 +29,13 @@ public class ActionListAll extends BaseAction {
 			attendanceStatisticalCycleFactory = business.getAttendanceStatisticalCycleFactory();
 			attendanceStatisticalCycleList = attendanceStatisticalCycleFactory.listAll();
 			;
-			// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+			// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 			wraps = Wo.copier.copy(attendanceStatisticalCycleList);
 		} catch (Throwable th) {
 			th.printStackTrace();
 			result.error(th);
 		}
-		// 对查询的列表进行排序
+		// 조회 목록 정렬
 		result.setData(wraps);
 		return result;
 	}

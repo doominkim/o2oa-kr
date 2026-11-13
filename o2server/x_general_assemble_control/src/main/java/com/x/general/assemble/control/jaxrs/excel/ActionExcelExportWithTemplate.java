@@ -48,11 +48,11 @@ class ActionExcelExportWithTemplate extends BaseAction {
 			excelName = excelName + EXCEL_EXTENSION;
 		}
 		if (ListTools.isEmpty(wi.getSheetDataList())) {
-			throw new ExceptionCustom("excel内容不能为空");
+			throw new ExceptionCustom("excel 내용은 비워 둘 수 없습니다");
 		}
 		byte[] tempBytes = CipherConnectionAction.getBinary(false, wi.getTemplateUrl());
 		if (tempBytes == null || tempBytes.length == 0) {
-			throw new ExceptionCustom("模板文件下载失败.");
+			throw new ExceptionCustom("템플릿 파일 다운로드에 실패했습니다.");
 		}
 		byte[] bytes;
 		try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
@@ -85,13 +85,13 @@ class ActionExcelExportWithTemplate extends BaseAction {
 
 		private static final long serialVersionUID = -51802802412712709L;
 
-		@FieldDescribe("模板文件的url")
+		@FieldDescribe("템플릿 파일 url")
 		private String templateUrl;
 
-		@FieldDescribe("excel文件名")
+		@FieldDescribe("excel 파일명")
 		private String excelName;
 
-		@FieldDescribe("转换为excel的内容，列表第1个值对应excel第一个sheet内容，列表第2个值对应第2个sheet内容，依此类推")
+		@FieldDescribe("excel로 변환할 내용, 목록의 1번째 값은 excel 첫 번째 sheet 내용, 2번째 값은 2번째 sheet 내용에 대응하며 이후 동일")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "SheetData",
 				fieldValue = "{'sheetName':'excel的sheet名称，可以为空','startRow':'数字类型，表示数据开始行，从第0行开始','dataList':'二维数据列表'}")
 		private List<SheetData> sheetDataList;

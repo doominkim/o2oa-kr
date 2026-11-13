@@ -47,22 +47,22 @@ public class ActionSendMessage extends BaseAction {
             throw new ExceptionSendMessageEmpty();
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("极光推送 消息：{}", wi.toString());
+            logger.debug("JPush 푸시 메시지: {}", wi.toString());
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
-            logger.info("极光推送通道启用中，消息发送到极光推送，人员：{}", wi.getPerson());
+            logger.info("JPush 푸시 채널 사용 중, JPush로 메시지 발송, 사용자: {}", wi.getPerson());
             List<PushDevice> pushDeviceList = business.pushDeviceFactory().listJpushDevice(wi.getPerson());
             if (pushDeviceList != null && !pushDeviceList.isEmpty()) {
                 send2Jpush(pushDeviceList, wi, business.pushDeviceFactory().jpushClient());
             } else {
-                logger.warn("极光推送设备为空，{}", wi.getPerson());
+                logger.warn("JPush 푸시 기기가 비어 있음, {}", wi.getPerson());
             }
             wraps.setValue(true);
             result.setData(wraps);
         } catch (Exception e) {
             logger.error(e);
-            throw new ExceptionSendMessage(e, "系统发送推送消息时异常!");
+            throw new ExceptionSendMessage(e, "푸시 메시지를 보내는 중 오류가 발생했습니다!");
         }
         if (logger.isDebugEnabled()) {
             logger.debug("action 'ActionSendMessage' execute completed!");
@@ -71,7 +71,7 @@ public class ActionSendMessage extends BaseAction {
     }
 
     /**
-     * 极光推送消息
+     * JPush 푸시 메시지
      *
      * @param pushDeviceList
      * @param wi
@@ -117,42 +117,42 @@ public class ActionSendMessage extends BaseAction {
         notificationMessage.setAndroid(android);
         notificationMessage.setIos(iOS);
         param.setNotification(notificationMessage);
-        // 设置推送的目标设备
+        // 푸시 대상 기기 설정
         Audience audience = new Audience();
         audience.setRegistrationIdList(jiguangDeviceList);
         param.setAudience(audience);
         param.setPlatform(Arrays.asList(Platform.android, Platform.ios));
-        // 设置推送其他参数
+        // 푸시 기타 파라미터 설정
         Options options = new Options();
         options.setApnsProduction(!BooleanUtils.isFalse(wi.getApnsProduction()));
-        options.setClassification(1); // 系统消息 1 运营消息 0
+        options.setClassification(1); // 시스템 메시지 1 운영 메시지 0
         Map<String, Object> thirdMap =  Config.pushConfig().getThirdPartyChannelMap() ;
         if (thirdMap != null && !thirdMap.isEmpty()) {
             options.setThirdPartyChannel(thirdMap);
         }
 
         param.setOptions(options);
-        logger.info("极光推送 body: {}", param.toString());
-        // 发送
+        logger.info("JPush 푸시 body: {}", param.toString());
+        // 발송
         PushSendResult pushResult = client.send(param);
-        logger.info("极光推送 发送结果:{}.", pushResult);
+        logger.info("JPush 푸시 발송 결과:{}.", pushResult);
     }
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("人员")
+        @FieldDescribe("사용자")
         private String person;
 
-        @FieldDescribe("消息内容")
+        @FieldDescribe("메시지 내용")
         private String message;
 
-        @FieldDescribe("字符串扩展")
+        @FieldDescribe("문자열 확장")
         private Map<String, String> stringExtras;
-        @FieldDescribe("数字扩展")
+        @FieldDescribe("숫자 확장")
         private Map<String, Number> numberExtras;
-        @FieldDescribe("布尔串扩展")
+        @FieldDescribe("불리언 확장")
         private Map<String, Boolean> booleanExtras;
-        @FieldDescribe("对象扩展")
+        @FieldDescribe("객체 확장")
         private Map<String, Object> jsonExtras;
 
         private Boolean apnsProduction;

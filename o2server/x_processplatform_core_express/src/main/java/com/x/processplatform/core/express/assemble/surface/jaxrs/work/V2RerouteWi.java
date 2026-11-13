@@ -13,28 +13,28 @@ public class V2RerouteWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6729193803512068864L;
 
-	@FieldDescribe("目标节点.")
+	@FieldDescribe("대상 노드.")
 	private String activity;
 
-	@FieldDescribe("节点类型.")
+	@FieldDescribe("노드 유형.")
 	private ActivityType activityType;
 
-	@FieldDescribe("是否合并所有的work")
+	@FieldDescribe("모든 work 병합 여부")
 	private Boolean mergeWork;
 
-	@FieldDescribe("人工活动强制处理人")
+	@FieldDescribe("수동 활동 강제 처리자")
 	private List<String> distinguishedNameList = new ArrayList<>();
 
-	@FieldDescribe("人工活动强制处理人,兼容旧版.")
+	@FieldDescribe("수동 활동 강제 처리자, 구버전 호환.")
 	private List<String> manualForceTaskIdentityList = new ArrayList<>();
 
-	@FieldDescribe("待办选择路由名称.")
+	@FieldDescribe("결재 대기 선택 경로 이름.")
 	private String routeName;
 
-	@FieldDescribe("调度人，默认当前登录人.")
+	@FieldDescribe("배정자, 기본값은 현재 로그인 사용자.")
 	private String operator;
 
-	@FieldDescribe("待办办理意见.")
+	@FieldDescribe("결재 대기 처리 의견.")
 	private String opinion;
 
 	public List<String> getManualForceTaskIdentityList() {

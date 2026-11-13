@@ -29,7 +29,7 @@ public class ActionDelete extends BaseAction {
 				attendanceWorkPlaceServiceAdv.delete(id);
 				result.setData(new Wo(id));
 			} catch (Exception e) {
-				Exception exception = new ExceptionWorkPlaceProcess(e, "工作场所名称不允许为空，无法进行数据保存。ID:" + id);
+				Exception exception = new ExceptionWorkPlaceProcess(e, "근무 장소 이름이 비어 있어 데이터를 저장할 수 없습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}

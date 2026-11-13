@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Document正式发布后，向通知对象或者所有的阅读者推送消息通知
+ * Document 정식 게시 후 알림 대상 또는 모든 열람자에게 메시지 알림 발송
  * @author sword
  */
 public class QueueSendDocumentNotify extends AbstractQueue<DocumentNotify> {
@@ -70,7 +70,7 @@ public class QueueSendDocumentNotify extends AbstractQueue<DocumentNotify> {
 						String topUnitName = document.getCreatorTopUnitName();
 						if (EffectivePerson.CIPHER.equalsIgnoreCase(topUnitName)
 								|| Token.defaultInitialManager.equalsIgnoreCase(topUnitName)) {
-							//取发起人所有顶层组织
+							//작성자의 모든 최상위 조직 가져오기
 							if (!EffectivePerson.CIPHER.equalsIgnoreCase(document.getCreatorIdentity()) &&
 									!Token.defaultInitialManager.equalsIgnoreCase(document.getCreatorIdentity())) {
 								topUnitName = userManagerService.getTopUnitNameByIdentity(document.getCreatorIdentity());
@@ -80,7 +80,7 @@ public class QueueSendDocumentNotify extends AbstractQueue<DocumentNotify> {
 							}
 						}
 						if (StringUtils.isNotEmpty(topUnitName)) {
-							//取顶层组织的所有人
+							//최상위 조직의 모든 사용자 가져오기
 							persons.clear();
 							persons.addAll(listPersonWithUnit(topUnitName));
 						}
@@ -94,7 +94,7 @@ public class QueueSendDocumentNotify extends AbstractQueue<DocumentNotify> {
 			if (ListTools.isNotEmpty(persons)) {
 				List<String> personList = persons.stream().distinct().collect(Collectors.toList());
 				persons.clear();
-				logger.info("{}-文档消息发送人数：{}", document.getTitle(),personList.size());
+				logger.info("{}-문서 메시지 발송 인원: {}", document.getTitle(),personList.size());
 				MessageWo wo = MessageWo.copier.copy(document);
 				for (String person : personList) {
 					if (!StringUtils.equals("*", person)) {
@@ -115,7 +115,7 @@ public class QueueSendDocumentNotify extends AbstractQueue<DocumentNotify> {
 	}
 
 	/**
-	 * 根据组织名称，获取该组织下所有的人员标识
+	 * 조직 이름으로 해당 조직의 모든 사용자 식별자 조회
 	 * @param unitName
 	 * @return
 	 */

@@ -28,17 +28,17 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("cipher/hotpic")
-@JaxrsDescribe("热点信息管理（服务器间调用）")
+@JaxrsDescribe("인기 정보 관리(서버 간 호출)")
 public class HotPictureInfoCipherAction extends StandardJaxrsAction {
 
 	private Logger logger = LoggerFactory.getLogger(HotPictureInfoCipherAction.class);
-	@JaxrsMethodDescribe(value = "根据CMS文档ID删除热点信息", action= ActionCipherDeleteCMS.class )
+	@JaxrsMethodDescribe(value = "CMS 문서 ID로 인기 정보 삭제", action= ActionCipherDeleteCMS.class )
 	@DELETE
 	@Path("cms/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteCms(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("CMS文档ID")  @PathParam("id") String id) {
+			@JaxrsParameterDescribe("CMS 문서 ID")  @PathParam("id") String id) {
 		ActionResult<ActionCipherDeleteCMS.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -51,13 +51,13 @@ public class HotPictureInfoCipherAction extends StandardJaxrsAction {
 	}
 	
 
-	@JaxrsMethodDescribe(value = "根据BBS主贴ID删除热点信息", action= ActionCipherDeleteBBS.class )
+	@JaxrsMethodDescribe(value = "BBS 원글 ID로 인기 정보 삭제", action= ActionCipherDeleteBBS.class )
 	@DELETE
 	@Path("bbs/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteBBS(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("BBS主贴ID")  @PathParam("id") String id) {
+			@JaxrsParameterDescribe("BBS 원글 ID")  @PathParam("id") String id) {
 		ActionResult<ActionCipherDeleteBBS.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -70,13 +70,13 @@ public class HotPictureInfoCipherAction extends StandardJaxrsAction {
 	}
 	
 	
-	@JaxrsMethodDescribe(value = "根据ID获取单个热图信息", action= ActionCipherGet.class )
+	@JaxrsMethodDescribe(value = "ID로 단일 인기 이미지 정보 조회", action= ActionCipherGet.class )
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("热图信息id") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("인기 이미지 정보 id") @PathParam("id") String id) {
 		ActionResult<ActionCipherGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,14 +89,14 @@ public class HotPictureInfoCipherAction extends StandardJaxrsAction {
 	}
 
 	
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的HotPictureInfo,下一页", action= ActionCipherList.class )
+	@JaxrsMethodDescribe(value = "필터 조건으로 HotPictureInfo 목록 조회, 다음 페이지", action= ActionCipherList.class )
 	@PUT
 	@Path("filter/list/page/{page}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listForPage(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("当前页码") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("현재 페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("count") Integer count,
 		     JsonElement jsonElement) {
 		ActionResult<List<ActionCipherList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);

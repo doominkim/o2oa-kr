@@ -25,7 +25,7 @@ class ActionDeployWebRes extends BaseAction {
 		if (BooleanUtils.isNotTrue(Config.general().getDeployResourceEnable())) {
 			throw new ExceptionDeployDisable();
 		}
-		LOGGER.info("{}操作部署资源:{}到web目录{}.", effectivePerson.getDistinguishedName(), wi.getName(), wi.getFilePath());
+		LOGGER.info("{} 리소스 배포 작업:{}를 web 디렉터리 {}로.", effectivePerson.getDistinguishedName(), wi.getName(), wi.getFilePath());
 		String file = wi.getName();
 		ActionResult<Wo> result = new ActionResult<>();
 		if (StringUtils.isEmpty(file)) {

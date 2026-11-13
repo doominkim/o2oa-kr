@@ -42,43 +42,43 @@ class ActionReserveDelete extends BaseAction {
                 if (null == person) {
                     throw new ExceptionEntityNotExist(flag, Person.class);
                 }
-                // 从内存中取到人
+                // 메모리에서 사람 가져오기
                 person = emc.find(person.getId(), Person.class);
                 if (!this.editable(business, effectivePerson, person)) {
                     throw new ExceptionAccessDenied(effectivePerson);
                 }
                 List<Identity> identities = this.listIdentity(business, person);
-                // 删除身份组织职务成员,提交后才可以删除身份
+                // 신분 조직 직무 멤버 삭제, 커밋 후에야 신분 삭제 가능
                 emc.beginTransaction(UnitDuty.class);
                 this.removeMemberOfUnitDuty(business, identities);
                 emc.commit();
-                // 删除身份
+                // 신분 삭제
                 emc.beginTransaction(Identity.class);
                 for (Identity o : identities) {
                     emc.remove(o, CheckRemoveType.all);
                 }
                 emc.commit();
-                // 删除个人属性
+                // 개인 속성 삭제
                 // emc.beginTransaction(PersonAttribute.class);
                 // this.removePersonAttribute(business, person);
-                // 删除个人自定义信息
+                // 개인 사용자 정의 정보 삭제
                 emc.beginTransaction(Custom.class);
                 this.removePersonCustom(business, person);
-                // 删除群组成员
+                // 그룹 멤버 삭제
                 emc.beginTransaction(Group.class);
                 this.removeMemberOfGroup(business, person, identities);
-                // 删除角色成员
+                // 역할 멤버 삭제
                 emc.beginTransaction(Role.class);
                 this.removeMemberOfRole(business, person);
-                // 删除组织的管理个人以及继承的管理个人
+                // 조직의 관리 개인 및 상속된 관리 개인 삭제
                 emc.beginTransaction(Unit.class);
                 this.removeMemberOfUnitController(business, person);
-                // 删除个人管理者成员
+                // 개인 관리자 멤버 삭제
                 this.removeMemberOfPersonController(business, person);
-                // 删除汇报人员为将要删除的人
+                // 보고 대상이 삭제될 사람인 경우 삭제
                 this.removeMemberOfPersonSuperior(business, person);
                 emc.beginTransaction(Person.class);
-                // 先进行一次提交,通过check
+                // check 통과를 위해 먼저 한 번 커밋
                 emc.commit();
                 CacheManager.notify(Person.class);
 

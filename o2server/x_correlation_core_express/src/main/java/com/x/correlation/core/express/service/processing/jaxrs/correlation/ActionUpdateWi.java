@@ -8,10 +8,10 @@ public class ActionUpdateWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -5876504008709428039L;
 
-	@FieldDescribe("用户.")
+	@FieldDescribe("사용자.")
 	private String person;
 
-	@FieldDescribe("关联目标列表.")
+	@FieldDescribe("연관 대상 목록.")
 	private List<SiteTargetWi> siteTargetList;
 
 	public List<SiteTargetWi> getSiteTargetList() {

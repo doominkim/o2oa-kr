@@ -20,19 +20,19 @@ public class WrapQuery extends Query {
     public static WrapCopier<WrapQuery, Query> inCopier = WrapCopierFactory.wi(WrapQuery.class, Query.class, null,
             JpaObject.FieldsUnmodifyExcludeId);
 
-    @FieldDescribe("视图")
+    @FieldDescribe("뷰")
     private List<WrapView> viewList = new ArrayList<>();
 
-    @FieldDescribe("统计")
+    @FieldDescribe("통계")
     private List<WrapStat> statList = new ArrayList<>();
 
-    @FieldDescribe("数据表")
+    @FieldDescribe("데이터 테이블")
     private List<WrapTable> tableList = new ArrayList<>();
 
-    @FieldDescribe("查询配置")
+    @FieldDescribe("쿼리 설정")
     private List<WrapStatement> statementList = new ArrayList<>();
 
-    @FieldDescribe("数据导入模型")
+    @FieldDescribe("데이터 가져오기 모델")
     private List<WrapImportModel> importModelList = new ArrayList<>();
 
     public List<String> listViewId() throws Exception {

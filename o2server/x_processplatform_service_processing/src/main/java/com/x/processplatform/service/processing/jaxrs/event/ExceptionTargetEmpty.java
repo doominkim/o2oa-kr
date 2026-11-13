@@ -7,6 +7,6 @@ class ExceptionTargetEmpty extends PromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionTargetEmpty() {
-		super("target不能为空.");
+		super("target은 비워 둘 수 없습니다.");
 	}
 }

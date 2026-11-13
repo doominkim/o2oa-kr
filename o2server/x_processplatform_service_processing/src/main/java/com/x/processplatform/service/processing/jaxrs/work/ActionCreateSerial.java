@@ -25,7 +25,7 @@ import com.x.processplatform.core.entity.element.Process;
 import com.x.processplatform.service.processing.Business;
 
 /**
- * 创建工作序列号
+ * 업무 문서 일련번호 생성
  *
  * @author jian
  *
@@ -77,9 +77,9 @@ class ActionCreateSerial extends BaseAction {
 	}
 
 	/**
-	 * 工单流水号是放在应用维度，根据依据(name)来区分，
-	 * 同个应用不同流程要使用不同的流水号那他的依据必须不一样,
-	 * 如果依据一样那他们将共用流水号.
+	 * 업무 문서 일련번호는 앱 단위로 관리되며 기준(name)으로 구분됨,
+	 * 같은 앱의 서로 다른 프로세스가 다른 일련번호를 쓰려면 기준이 달라야 함,
+	 * 기준이 같으면 일련번호를 공유함.
 	 * @param processId
 	 * @param application
 	 * @param name

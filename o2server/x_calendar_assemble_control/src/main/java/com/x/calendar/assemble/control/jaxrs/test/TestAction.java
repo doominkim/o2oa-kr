@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("test")
-@JaxrsDescribe("测试")
+@JaxrsDescribe("테스트")
 public class TestAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(TestAction.class);
 
-	@JaxrsMethodDescribe(value = "触发提醒", action = ActionTest1.class)
+	@JaxrsMethodDescribe(value = "알림 트리거", action = ActionTest1.class)
 	@GET
 	@Path("1")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

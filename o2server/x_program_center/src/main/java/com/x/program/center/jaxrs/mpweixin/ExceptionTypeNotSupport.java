@@ -11,6 +11,6 @@ public class ExceptionTypeNotSupport extends LanguagePromptException {
     private static final long serialVersionUID = 4862362281353270832L;
 
     ExceptionTypeNotSupport() {
-        super("菜单类型不支持，目前只支持 click、view、miniprogram 三种类型.");
+        super("지원하지 않는 메뉴 유형입니다. 현재 click, view, miniprogram 세 가지 유형만 지원합니다.");
     }
 }

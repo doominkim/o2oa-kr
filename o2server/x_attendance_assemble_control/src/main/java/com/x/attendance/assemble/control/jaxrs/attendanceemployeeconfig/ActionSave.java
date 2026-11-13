@@ -43,7 +43,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "将传入的参数转换为人员考勤配置对象信息时发生异常.");
+				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "전달된 매개변수를 인원 근태 설정 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -52,10 +52,10 @@ public class ActionSave extends BaseAction {
 			try {
 				attendanceEmployeeConfig = attendanceEmployeeConfigServiceAdv.save(attendanceEmployeeConfig);
 				result.setData(new Wo(attendanceEmployeeConfig.getId()));
-				logger.info("人员考勤配置数据保存成功！");
+				logger.info("사용자 근태 설정 데이터를 저장했습니다!");
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "系统保存人员考勤配置对象信息时发生异常.");
+				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "인원 근태 설정 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

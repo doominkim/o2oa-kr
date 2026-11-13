@@ -7,6 +7,6 @@ public class ExceptionSendMessage extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSendMessage(Throwable e, String message) {
-		super("发送消息异常！message:" + message, e );
+		super("메시지 전송 오류! message:" + message, e );
 	}
 }

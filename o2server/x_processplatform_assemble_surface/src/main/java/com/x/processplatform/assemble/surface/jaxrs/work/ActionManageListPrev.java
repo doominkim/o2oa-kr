@@ -58,7 +58,7 @@ class ActionManageListPrev extends BaseAction {
 							inTerms, null, null, null, null, true, DESC);
 				}
 			}
-			/** 添加权限 */
+			/** 권한 추가 */
 			if (null != result.getData()) {
 				for (Wo wo : result.getData()) {
 					Work o = emc.find(wo.getId(), Work.class);
@@ -77,10 +77,10 @@ class ActionManageListPrev extends BaseAction {
 
 		static WrapCopier<Work, Wo> copier = WrapCopierFactory.wo(Work.class, Wo.class, null, Excludes);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		public Long getRank() {

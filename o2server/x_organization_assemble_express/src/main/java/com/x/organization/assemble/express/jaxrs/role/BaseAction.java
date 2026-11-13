@@ -26,7 +26,7 @@ class BaseAction extends StandardJaxrsAction {
 
 	static class WoRoleAbstract extends GsonPropertyObject {
 
-		@FieldDescribe("角色识别名")
+		@FieldDescribe("역할 식별 이름")
 		private List<String> roleList = new ArrayList<>();
 
 		public List<String> getRoleList() {

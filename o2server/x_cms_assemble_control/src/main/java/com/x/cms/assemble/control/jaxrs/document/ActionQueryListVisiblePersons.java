@@ -28,7 +28,7 @@ public class ActionQueryListVisiblePersons extends BaseAction {
 	private static  Logger logger = LoggerFactory.getLogger(ActionQueryListVisiblePersons.class);
 
 	/**
-	 * 根据文档ID，获取该文档所有的可见者列表
+	 * 문서ID로 해당 문서의 모든 열람 가능자 목록 조회
 	 * @param request
 	 * @param id
 	 * @param effectivePerson
@@ -68,7 +68,7 @@ public class ActionQueryListVisiblePersons extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "文档信息获取操作时发生异常。Id:" + id + ", Name:" + personName);
+					Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 정보를 가져오는 중 오류가 발생했습니다. Id:" + id + ", Name:" + personName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -83,7 +83,7 @@ public class ActionQueryListVisiblePersons extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "系统在根据ID查询分类信息时发生异常！ID：" + document.getCategoryId());
+					Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 분류 정보를 조회하는 중 오류가 발생했습니다! ID: " + document.getCategoryId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -99,19 +99,19 @@ public class ActionQueryListVisiblePersons extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "系统在根据ID查询应用栏目信息时发生异常！ID：" + document.getAppId());
+					Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 게시판 정보를 조회하는 중 오류가 발생했습니다! ID: " + document.getAppId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
 			}
 			
 			if (check) {
-				//计算该文档有多少阅读者
+				//해당 문서의 열람자 수 계산
 				ReviewService reviewService = new ReviewService();
 				List<String> persons = reviewService.listPermissionPersons( appInfo, categoryInfo, document );
 				
 				if( ListTools.isNotEmpty( persons )) {
-					//有可能是*， 一般是所有的人员标识列表
+					//*일 수 있음, 일반적으로 모든 사용자 식별자 목록
 					if( persons.contains( "*" )) {
 						List<String> allPersons = listPersonWithUnit( document.getCreatorTopUnitName() );
 						if( ListTools.isNotEmpty( allPersons )) {
@@ -128,7 +128,7 @@ public class ActionQueryListVisiblePersons extends BaseAction {
 					persons = new ArrayList<>();
 				}
 				
-				//去一下重复
+				//중복 제거
 		        HashSet<String> set = new HashSet<String>( persons );
 		        persons.clear();
 		        persons.addAll(set);
@@ -143,7 +143,7 @@ public class ActionQueryListVisiblePersons extends BaseAction {
 	}
 	
 	/**
-	 * 根据组织名称，获取该组织下所有的人员标识
+	 * 조직 이름으로 해당 조직의 모든 사용자 식별자 조회
 	 * @param unitName
 	 * @return
 	 */

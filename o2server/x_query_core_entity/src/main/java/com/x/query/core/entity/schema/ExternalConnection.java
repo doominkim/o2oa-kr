@@ -19,7 +19,7 @@ import com.x.query.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Statement", description = "数据中心查询语句.")
+@Schema(name = "Statement", description = "데이터 센터 쿼리 문.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @javax.persistence.Table(name = PersistenceProperties.Schema.ExternalConnection.TABLE, uniqueConstraints = {
@@ -43,12 +43,12 @@ public class ExternalConnection extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     @Override
     public void onPersist() throws Exception {
@@ -57,50 +57,50 @@ public class ExternalConnection extends SliceJpaObject {
 
     public static final String NAME_FIELDNAME = "name";
     @Flag
-    @FieldDescribe("名称.")
+    @FieldDescribe("이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + NAME_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + NAME_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String name;
 
     public static final String DESCRIPTION_FIELDNAME = "description";
-    @FieldDescribe("描述.")
+    @FieldDescribe("설명.")
     @Column(length = length_255B, name = ColumnNamePrefix + DESCRIPTION_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String description;
 
     public static final String ENABLE_FIELDNAME = "enable";
-    @FieldDescribe("是否启用.")
+    @FieldDescribe("사용 여부.")
     @CheckPersist(allowEmpty = false)
     @Column(name = ColumnNamePrefix + ENABLE_FIELDNAME)
     private Boolean enable;
 
     public static final String URL_FIELDNAME = "url";
-    @FieldDescribe("描述.")
+    @FieldDescribe("설명.")
     @Column(length = length_255B, name = ColumnNamePrefix + URL_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String url;
 
     public static final String USER_FIELDNAME = "user";
-    @FieldDescribe("数据库jdbc连接用户名.")
+    @FieldDescribe("데이터베이스 jdbc 연결 사용자 이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + USER_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String user;
 
     public static final String PASS_FIELDNAME = "pass";
-    @FieldDescribe("数据库jdbc连接密码.")
+    @FieldDescribe("데이터베이스 jdbc 연결 비밀번호.")
     @Column(length = length_255B, name = ColumnNamePrefix + PASS_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String pass;
 
     public static final String DRIVERCLASSNAME_FIELDNAME = "driverClassName";
-    @FieldDescribe("数据库驱动类名.")
+    @FieldDescribe("데이터베이스 드라이버 클래스 이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + DRIVERCLASSNAME_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String driverClassName;
 
     public static final String SCHEMA_FIELDNAME = "schema";
-    @FieldDescribe("模式.")
+    @FieldDescribe("스키마.")
     @Column(length = length_255B, name = ColumnNamePrefix + SCHEMA_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String schema;

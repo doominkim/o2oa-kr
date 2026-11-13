@@ -7,6 +7,6 @@ class ExceptionDisableRegist extends LanguagePromptException {
 	private static final long serialVersionUID = 6351023802034208595L;
 
 	ExceptionDisableRegist() {
-		super("系统不允许人员注册.");
+		super("사용자 등록이 허용되지 않습니다.");
 	}
 }

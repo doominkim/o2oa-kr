@@ -19,7 +19,7 @@ public class BindFactory extends AbstractFactory {
 		super(business);
 	}
 
-	/* "根据给定的Person Name获取Person Id */
+	/* "지정한 Person Name으로 Person Id 조회 */
 	public String getWithMeta(String meta) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Bind.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

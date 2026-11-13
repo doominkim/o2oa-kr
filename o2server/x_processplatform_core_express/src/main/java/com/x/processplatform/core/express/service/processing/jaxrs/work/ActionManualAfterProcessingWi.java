@@ -9,9 +9,9 @@ public class ActionManualAfterProcessingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -797953382184336448L;
 
-	@FieldDescribe("待办")
+	@FieldDescribe("결재 대기")
 	private Task task;
-	@FieldDescribe("流转记录")
+	@FieldDescribe("흐름 기록")
 	private Record record;
 
 	public Task getTask() {

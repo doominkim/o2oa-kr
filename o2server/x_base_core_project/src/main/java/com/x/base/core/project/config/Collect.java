@@ -62,29 +62,29 @@ public class Collect extends ConfigObject {
 		this.appPackServerUrl = Default_appPackServer;
 	}
 
-	@FieldDescribe("是否启用连接到云平台")
+	@FieldDescribe("클라우드 플랫폼 연결 사용 여부")
 	private Boolean enable;
-	@FieldDescribe("云平台账户名称,同时显示在登录页面底部.")
+	@FieldDescribe("클라우드 플랫폼 계정 이름, 로그인 페이지 하단에도 표시.")
 	private String name;
-	@FieldDescribe("云平台密码")
+	@FieldDescribe("클라우드 플랫폼 비밀번호")
 	private String password;
-	@FieldDescribe("系统标题,同时显示在登录页面上部.")
+	@FieldDescribe("시스템 제목, 로그인 페이지 상단에도 표시.")
 	private String title;
-	@FieldDescribe("底部申明")
+	@FieldDescribe("하단 고지문")
 	private String footer;
-	@FieldDescribe("app下载地址")
+	@FieldDescribe("app 다운로드 주소")
 	private String appUrl;
-	@FieldDescribe("云平台服务器地址")
+	@FieldDescribe("클라우드 플랫폼 서버 주소")
 	private String server;
-	@FieldDescribe("云平台端口")
+	@FieldDescribe("클라우드 플랫폼 포트")
 	private Integer port;
-	@FieldDescribe("云平台连接是否启用ssl")
+	@FieldDescribe("클라우드 플랫폼 연결 ssl 사용 여부")
 	private Boolean sslEnable;
-	@FieldDescribe("推送消息secret")
+	@FieldDescribe("푸시 메시지 secret")
 	private String secret;
-	@FieldDescribe("推送消息key")
+	@FieldDescribe("푸시 메시지 key")
 	private String key;
-	@FieldDescribe("app打包服务器地址")
+	@FieldDescribe("app 패키징 서버 주소")
 	private String appPackServerUrl;
 
 
@@ -129,7 +129,7 @@ public class Collect extends ConfigObject {
 	}
 
 	public String getServer() {
-		/* 强制换掉老域名 */
+		/* 기존 도메인 강제 교체 */
 		if (StringUtils.equalsIgnoreCase("collect.o2oa.io", this.server)) {
 			return Default_server;
 		} else {
@@ -234,7 +234,7 @@ public class Collect extends ConfigObject {
 	}
 
 	/**
-	 * 获取app 打包服务器url地址
+	 * app 패키징 서버 url 주소 조회
 	 * @return
 	 */
 	public String appPackServerUrl() {
@@ -242,7 +242,7 @@ public class Collect extends ConfigObject {
 	}
 
 	/**
-	 * app 打包服务的 api 地址拼接
+	 * app 패키징 서비스 api 주소 조합
 	 * @param path
 	 * @return
 	 */

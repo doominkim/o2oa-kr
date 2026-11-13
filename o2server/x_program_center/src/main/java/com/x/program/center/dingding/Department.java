@@ -9,7 +9,7 @@ public class Department extends GsonPropertyObject {
 	private String name;
 	private Long parent_id;
 	private Long order;
-	private Boolean from_union_org; // 部门是否来自关联组织
+	private Boolean from_union_org; // 부서가 연계 조직에서 왔는지 여부
 	public Long getDept_id() {
 		return dept_id;
 	}

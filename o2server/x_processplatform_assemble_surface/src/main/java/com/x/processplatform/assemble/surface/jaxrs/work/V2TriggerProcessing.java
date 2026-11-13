@@ -72,13 +72,13 @@ class V2TriggerProcessing extends BaseAction {
 				throw new ExceptionWorkNotExist(id);
 			}
 			emc.beginTransaction(Work.class);
-			// 标识数据被修改
+			// 데이터 수정 표시
 			work.setDataChanged(true);
 			param.work = work;
 			WorkLog workLog = emc.firstEqualAndEqual(WorkLog.class, WorkLog.JOB_FIELDNAME, work.getJob(),
 					WorkLog.FROMACTIVITYTOKEN_FIELDNAME, work.getActivityToken());
 			if (null == workLog) {
-				// 如果没有workLog则修复这个问题,创建一个新的workLog
+				// workLog가 없으면 이 문제를 수정하여 새 workLog 생성
 				Activity activity = business.getActivity(work);
 				if (null == activity) {
 					throw new ExceptionWorkNotExist(work.getActivity());

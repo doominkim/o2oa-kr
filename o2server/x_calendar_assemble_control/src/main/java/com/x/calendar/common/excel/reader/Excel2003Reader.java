@@ -30,8 +30,8 @@
 //import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 //
 ///**
-// * 抽象Excel2003读取器，通过实现HSSFListener监听器，采用事件驱动模式解析excel2003
-// * 中的内容，遇到特定事件才会触发，大大减少了内存的使用。
+// * 추상 Excel2003 리더, HSSFListener 리스너를 구현해 이벤트 기반 방식으로 excel2003
+// * 내용을 파싱, 특정 이벤트에서만 트리거되어 메모리 사용을 크게 줄임.
 // *
 // */
 //public class Excel2003Reader implements HSSFListener {
@@ -45,14 +45,14 @@
 //
 //	/** For parsing Formulas */
 //	private SheetRecordCollectingListener workbookBuildingListener;
-//	// excel2003工作薄
+//	// excel2003 워크북
 //	private HSSFWorkbook stubWorkbook;
 //
 //	// Records we pick up as we process
 //	private SSTRecord sstRecord;
 //	private FormatTrackingHSSFListener formatListener;
 //
-//	// 表索引
+//	// 시트 인덱스
 //	private int sheetIndex = -1;
 //	private BoundSheetRecord[] orderedBSRs;
 //	@SuppressWarnings("rawtypes")
@@ -62,9 +62,9 @@
 //	private int nextRow;
 //	private int nextColumn;
 //	private boolean outputNextStringRecord;
-//	// 当前行
+//	// 현재 행
 //	private int curRow = 0;
-//	// 存储行记录的容器
+//	// 행 레코드 저장 컨테이너
 //	private List<String> rowlist = new ArrayList<String>();;
 //	@SuppressWarnings("unused")
 //	private String sheetName;
@@ -80,7 +80,7 @@
 //	}
 //
 //	/**
-//	 * 遍历excel下所有的sheet
+//	 * excel의 모든 sheet 순회
 //	 * 
 //	 * @param fileKey
 //	 * @throws IOException
@@ -99,12 +99,12 @@
 //				request.addListenerForAllRecords(workbookBuildingListener);
 //			}
 //			factory.processWorkbookEvents(request, fs);
-//			// 数据读取完成
+//			// 데이터 읽기 완료
 //		}
 //	}
 //
 //	/**
-//	 * 遍历excel下所有的sheet
+//	 * excel의 모든 sheet 순회
 //	 * 
 //	 * @param fileKey
 //	 * @throws IOException
@@ -122,12 +122,12 @@
 //				request.addListenerForAllRecords(workbookBuildingListener);
 //			}
 //			factory.processWorkbookEvents(request, fs);
-//			// 数据读取完成
+//			// 데이터 읽기 완료
 //		}
 //	}
 //
 //	/**
-//	 * HSSFListener 监听方法，处理 Record
+//	 * HSSFListener 리스너 메서드, Record 처리
 //	 */
 //	@SuppressWarnings("unchecked")
 //	public void processRecord(Record record) {
@@ -142,7 +142,7 @@
 //		case BOFRecord.sid:
 //			BOFRecord br = (BOFRecord) record;
 //			if (br.getType() == BOFRecord.TYPE_WORKSHEET) {
-//				// 如果有需要，则建立子工作薄
+//				// 필요하면 하위 워크북 생성
 //				if (workbookBuildingListener != null && stubWorkbook == null) {
 //					stubWorkbook = workbookBuildingListener.getStubHSSFWorkbook();
 //				}
@@ -166,7 +166,7 @@
 //			thisStr = "";
 //			rowlist.add(thisColumn, thisStr);
 //			break;
-//		case BoolErrRecord.sid: // 单元格为布尔类型
+//		case BoolErrRecord.sid: // 셀이 불리언 타입
 //			BoolErrRecord berec = (BoolErrRecord) record;
 //			thisRow = berec.getRow();
 //			thisColumn = berec.getColumn();
@@ -174,7 +174,7 @@
 //			rowlist.add(thisColumn, thisStr);
 //			break;
 //
-//		case FormulaRecord.sid: // 单元格为公式类型
+//		case FormulaRecord.sid: // 셀이 수식 타입
 //			FormulaRecord frec = (FormulaRecord) record;
 //			thisRow = frec.getRow();
 //			thisColumn = frec.getColumn();
@@ -193,7 +193,7 @@
 //			}
 //			rowlist.add(thisColumn, thisStr);
 //			break;
-//		case StringRecord.sid:// 单元格中公式的字符串
+//		case StringRecord.sid:// 셀 수식의 문자열
 //			if (outputNextStringRecord) {
 //				// String for formula
 //				StringRecord srec = (StringRecord) record;
@@ -211,7 +211,7 @@
 //			value = value.equals("") ? " " : value;
 //			this.rowlist.add(thisColumn, value);
 //			break;
-//		case LabelSSTRecord.sid: // 单元格为字符串类型
+//		case LabelSSTRecord.sid: // 셀이 문자열 타입
 //			LabelSSTRecord lsrec = (LabelSSTRecord) record;
 //			curRow = thisRow = lsrec.getRow();
 //			thisColumn = lsrec.getColumn();
@@ -223,25 +223,25 @@
 //				rowlist.add(thisColumn, value);
 //			}
 //			break;
-//		case NumberRecord.sid: // 单元格为数字类型
+//		case NumberRecord.sid: // 셀이 숫자 타입
 //			NumberRecord numrec = (NumberRecord) record;
 //			curRow = thisRow = numrec.getRow();
 //			thisColumn = numrec.getColumn();
 //			value = formatListener.formatNumberDateCell(numrec).trim();
 //			value = value.equals("") ? " " : value;
-//			// 向容器加入列值
+//			// 컨테이너에 열 값 추가
 //			rowlist.add(thisColumn, value);
 //			break;
 //		default:
 //			break;
 //		}
 //
-//		// 遇到新行的操作
+//		// 새 행을 만났을 때의 처리
 //		if (thisRow != -1 && thisRow != lastRowNumber) {
 //			lastColumnNumber = -1;
 //		}
 //
-//		// 空值的操作
+//		// 빈 값 처리
 //		if (record instanceof MissingCellDummyRecord) {
 //			MissingCellDummyRecord mc = (MissingCellDummyRecord) record;
 //			curRow = thisRow = mc.getRow();
@@ -249,26 +249,26 @@
 //			rowlist.add(thisColumn, " ");
 //		}
 //
-//		// 更新行和列的值
+//		// 행과 열 값 갱신
 //		if (thisRow > -1)
 //			lastRowNumber = thisRow;
 //		if (thisColumn > -1)
 //			lastColumnNumber = thisColumn;
 //
-//		// 行结束时的操作
+//		// 행 종료 시 처리
 //		if (record instanceof LastCellOfRowDummyRecord) {
 //			if (minColumns > 0) {
-//				// 列值重新置空
+//				// 열 값 초기화
 //				if (lastColumnNumber == -1) {
 //					lastColumnNumber = 0;
 //				}
 //			}
 //			lastColumnNumber = -1;
-//			// 每行结束时， 调用getRows() 方法
+//			// 각 행 종료 시 getRows() 메서드 호출
 //
 //			rowReader.getRows(sheetIndex, curRow, rowlist, this.fileKey, this.startRow);
 //
-//			// 清空容器
+//			// 컨테이너 비우기
 //			rowlist.clear();
 //		}
 //	}

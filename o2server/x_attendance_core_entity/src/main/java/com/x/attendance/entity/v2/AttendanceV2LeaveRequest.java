@@ -18,7 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Schema(name = "AttendanceV2LeaveRequest", description = "请假数据.")
+@Schema(name = "AttendanceV2LeaveRequest", description = "휴가 데이터.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.AttendanceV2LeaveRequest.table, indexes = {
         @Index(name = PersistenceProperties.AttendanceV2LeaveRequest.table + JpaObject.IndexNameMiddle
@@ -58,45 +58,45 @@ public class AttendanceV2LeaveRequest extends SliceJpaObject {
     public void onPersist() throws Exception {}
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("用户")
+    @FieldDescribe("사용자")
     @Column(length = JpaObject.length_96B, name = ColumnNamePrefix + person_FIELDNAME)
     private String person;
 
     public static final String leaveTypeId_FIELDNAME = "leaveTypeId";
-    @FieldDescribe("假期类型")
+    @FieldDescribe("휴가 유형")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + leaveTypeId_FIELDNAME)
     private String leaveTypeId;
 
     public static final String startTime_FIELDNAME = "startTime";
-    @FieldDescribe("开始时间")
+    @FieldDescribe("시작 시간")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = ColumnNamePrefix + startTime_FIELDNAME)
     private Date startTime;
 
     public static final String endTime_FIELDNAME = "endTime";
-    @FieldDescribe("结束时间")
+    @FieldDescribe("종료 시간")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = ColumnNamePrefix + endTime_FIELDNAME)
     private Date endTime;
 
     public static final String duration_FIELDNAME = "duration";
-    @FieldDescribe("请假时长")
+    @FieldDescribe("휴가 기간")
     @Column(name = ColumnNamePrefix + duration_FIELDNAME)
     private Double duration;
 
     public static final String status_FIELDNAME = "status";
-    @FieldDescribe("请假当前状态：  APPLYING / REJECTED / CANCELLED")
+    @FieldDescribe("휴가 현재 상태:  APPLYING / REJECTED / CANCELLED")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + status_FIELDNAME)
     private String status;
 
     public static final String jobId_FIELDNAME = "jobId";
-    @FieldDescribe("流程的jobId.")
+    @FieldDescribe("프로세스의 jobId.")
     @Column( length = JpaObject.length_id, name = ColumnNamePrefix + jobId_FIELDNAME)
     private String jobId;
 
 
     public static final String description_FIELDNAME = "description";
-    @FieldDescribe("请假说明")
+    @FieldDescribe("휴가 설명")
     @Column( name = ColumnNamePrefix + description_FIELDNAME )
     private String description;
 

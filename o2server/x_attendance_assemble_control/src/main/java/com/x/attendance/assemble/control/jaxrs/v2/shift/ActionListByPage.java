@@ -54,7 +54,7 @@ public class ActionListByPage extends BaseAction {
 
 
         private static final long serialVersionUID = -4138592167949224238L;
-        @FieldDescribe("班次名称")
+        @FieldDescribe("근무조 이름")
         private String name;
 
         public String getName() {

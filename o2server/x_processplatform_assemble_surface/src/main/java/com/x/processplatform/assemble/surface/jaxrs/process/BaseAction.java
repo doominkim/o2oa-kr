@@ -85,14 +85,14 @@ abstract class BaseAction extends StandardJaxrsAction {
         List<String> ids = onlyRemoveNotCompleted
                 ? business.attachment().listWithProcessWithCompleted(process.getId(), false)
                 : business.attachment().listWithProcess(process.getId());
-        /** 附件需要单独处理删除 */
+        /** 첨부파일은 별도로 삭제 처리 필요 */
         EntityManagerContainer emc = business.entityManagerContainer();
         for (List<String> list : ListTools.batch(ids, 1000)) {
             emc.beginTransaction(Attachment.class);
             for (Attachment o : business.entityManagerContainer().list(Attachment.class, list)) {
                 StorageMapping mapping = ThisApplication.context().storageMappings().get(Attachment.class,
                         o.getStorage());
-                /** 如果找不到存储器就算了 */
+                /** 저장소를 찾지 못하면 무시 */
                 if (null != mapping) {
                     o.deleteContent(mapping);
                 }

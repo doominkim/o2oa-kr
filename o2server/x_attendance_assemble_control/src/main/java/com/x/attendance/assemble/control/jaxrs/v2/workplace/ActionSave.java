@@ -44,15 +44,15 @@ public class ActionSave extends BaseAction {
 		if (StringUtils.isBlank(wrapIn.getLongitude())) {
 			throw new ExceptionLongitudeEmpty();
 		}
-		// 转化 gps 坐标
+		// gps 좌표 변환
 		Double dLat = Double.valueOf(wrapIn.getLatitude());
 		Double dLng = Double.valueOf(wrapIn.getLongitude());
-		// 高德地图
+		// 가오더 지도
 		if (AttendanceV2WorkPlace.POSITION_TYPE_AMAP.equals(wrapIn.getPositionType())) {
 			TransformPosition tp = BaiduLocationTransformHelper.gcj02towgs84(dLng, dLat);
 			wrapIn.setGpsLng(String.valueOf(tp.getLng()));
 			wrapIn.setGpsLat(String.valueOf(tp.getLat()));
-		} else if (AttendanceV2WorkPlace.POSITION_TYPE_BAIDU.equals(wrapIn.getPositionType())) { // 百度地图
+		} else if (AttendanceV2WorkPlace.POSITION_TYPE_BAIDU.equals(wrapIn.getPositionType())) { // 바이두 지도
 			TransformPosition tp = BaiduLocationTransformHelper.bd09towgs84(dLng, dLat);
 			wrapIn.setGpsLng(String.valueOf(tp.getLng()));
 			wrapIn.setGpsLat(String.valueOf(tp.getLat()));
@@ -72,19 +72,19 @@ public class ActionSave extends BaseAction {
 		}
 		wrapIn.setCreator(effectivePerson.getDistinguishedName());
 		if (logger.isDebugEnabled()) {
-			logger.debug("保存工作地点，{}", wrapIn.toString());
+			logger.debug("근무지 저장, {}", wrapIn.toString());
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 			if(!business.isManager(effectivePerson)){
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
-			// 名称不能相同
+			// 이름은 중복될 수 없습니다
 			List<AttendanceV2WorkPlace> checkRepetitive = emc.listEqual(AttendanceV2WorkPlace.class, AttendanceV2WorkPlace.placeName_FIELDNAME, wrapIn.getPlaceName());
 			if (checkRepetitive != null && !checkRepetitive.isEmpty()) {
 				for (AttendanceV2WorkPlace check : checkRepetitive) {
 					if (check.getPlaceName().equals(wrapIn.getPlaceName()) && !check.getId().equals(wrapIn.getId())) {
-						throw new ExceptionCannotRepetitive("场所名称");
+						throw new ExceptionCannotRepetitive("장소 이름");
 					}
 				}
 			}

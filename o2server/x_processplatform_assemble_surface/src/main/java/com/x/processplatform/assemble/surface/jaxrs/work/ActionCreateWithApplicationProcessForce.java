@@ -44,7 +44,7 @@
 //import io.swagger.v3.oas.annotations.media.Schema;
 //
 ///*
-// * 根据应用名称和流程名称进行创建,和直接用process创建基本相同
+// * 앱 이름과 프로세스 이름으로 생성, process로 직접 생성하는 것과 거의 동일
 // * */
 //
 //@Deprecated(forRemoval = true)
@@ -56,9 +56,9 @@
 //			JsonElement jsonElement) throws Exception {
 //		LOGGER.debug("execute:{}, applicationFlag:{}, processFlag:{}.", effectivePerson::getDistinguishedName,
 //				() -> applicationFlag, () -> processFlag);
-//		// 新建工作id
+//		// 새 업무 문서 id
 //		String workId = "";
-//		// 已存在草稿id
+//		// 기존 초안 id
 //		String lastestWorkId = "";
 //		String identity = null;
 //		List<Wo> wos = new ArrayList<>();
@@ -82,7 +82,7 @@
 //				throw new ExceptionAccessDenied(effectivePerson);
 //			}
 //			if (BooleanUtils.isTrue(wi.getLatest())) {
-//				/* 判断是否是要直接打开之前创建的草稿,草稿的判断标准:有待办无任何已办 */
+//				/* 이전에 생성한 초안을 직접 열지 판단, 초안 판단 기준:결재 대기는 있고 처리 완료는 없음 */
 //				lastestWorkId = this.latest(business, process, identity);
 //				workId = lastestWorkId;
 //			}
@@ -94,9 +94,9 @@
 //				workId = woId.getId();
 //			}
 //		}
-//		/* 设置Work信息 */
+//		/* Work 정보 설정 */
 //		if (BooleanUtils.isFalse(wi.getLatest()) || (StringUtils.isEmpty(lastestWorkId))) {
-//			/* 如果不是草稿那么需要进行设置 */
+//			/* 초안이 아니면 설정 필요 */
 //			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 //				Business business = new Business(emc);
 //				Organization organization = business.organization();
@@ -115,14 +115,14 @@
 //				}
 //				emc.commit();
 //			}
-//			/* 驱动工作 */
+//			/* 업무 문서 구동 */
 //			ThisApplication.context().applications().putQuery(x_processplatform_service_processing.class,
 //					"work/" + URLEncoder.encode(workId, DefaultCharset.name) + "/processing", null);
 //		} else {
-//			/* 如果是草稿,准备后面的直接打开 */
+//			/* 초안이면 이후 직접 열기 준비 */
 //			workId = lastestWorkId;
 //		}
-//		/* 拼装返回结果 */
+//		/* 반환 결과 조립 */
 //		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 //			Business business = new Business(emc);
 //			Work work = emc.find(workId, Work.class);
@@ -130,10 +130,10 @@
 //				throw new ExceptionWorkNotExist(workId);
 //			}
 //			List<String> ids = business.workLog().listWithFromActivityTokenForwardNotConnected(work.getActivityToken());
-//			/* 先取得没有结束的WorkLog */
+//			/* 먼저 종료되지 않은 WorkLog 조회 */
 //			List<WorkLog> list = emc.list(WorkLog.class, ids);
 //			wos = this.refercenceWorkLog(business, list);
-//			/* 标识当前用户的待办 */
+//			/* 현재 사용자의 결재 대기 표시 */
 //			for (Wo o : wos) {
 //				o.setCurrentTaskIndex(-1);
 //				for (int i = 0; i < o.getTaskList().size(); i++) {
@@ -153,24 +153,24 @@
 //
 //		private static final long serialVersionUID = -2930419287174683732L;
 //
-//		@FieldDescribe("直接打开指定人员已经有的草稿,草稿判断:工作没有已办,只有一条此人的待办.")
-//		@Schema(description = "直接打开指定人员已经有的草稿,草稿判断:工作没有已办,只有一条此人的待办.")
+//		@FieldDescribe("지정 사용자의 기존 초안을 직접 열기, 초안 판단:업무 문서에 처리 완료가 없고 이 사용자의 결재 대기만 하나 있음.")
+//		@Schema(description = "지정 사용자의 기존 초안을 직접 열기, 초안 판단:업무 문서에 처리 완료가 없고 이 사용자의 결재 대기만 하나 있음.")
 //		private Boolean latest;
 //
-//		@FieldDescribe("标题.")
-//		@Schema(description = "标题.")
+//		@FieldDescribe("제목.")
+//		@Schema(description = "제목.")
 //		private String title;
 //
-//		@FieldDescribe("启动人员身份.")
-//		@Schema(description = "启动人员身份.")
+//		@FieldDescribe("시작 사용자 신분.")
+//		@Schema(description = "시작 사용자 신분.")
 //		private String identity;
 //
-//		@FieldDescribe("工作数据.")
-//		@Schema(description = "工作数据.")
+//		@FieldDescribe("업무 문서 데이터.")
+//		@Schema(description = "업무 문서 데이터.")
 //		private JsonElement data;
 //
-//		@FieldDescribe("父工作标识.")
-//		@Schema(description = "父工作标识.")
+//		@FieldDescribe("상위 업무 문서 식별자.")
+//		@Schema(description = "상위 업무 문서 식별자.")
 //		private String parentWork;
 //
 //		public String getTitle() {
@@ -223,20 +223,20 @@
 //		static WrapCopier<WorkLog, Wo> copier = WrapCopierFactory.wo(WorkLog.class, Wo.class, null,
 //				JpaObject.FieldsInvisible);
 //
-//		@FieldDescribe("排序号.")
-//		@Schema(description = "排序号.")
+//		@FieldDescribe("정렬 번호.")
+//		@Schema(description = "정렬 번호.")
 //		private Long rank;
 //
-//		@FieldDescribe("已办对象.")
-//		@Schema(description = "已办对象.")
+//		@FieldDescribe("처리 완료 객체.")
+//		@Schema(description = "처리 완료 객체.")
 //		private List<WoTaskCompleted> taskCompletedList;
 //
-//		@FieldDescribe("待办对象.")
-//		@Schema(description = "待办对象.")
+//		@FieldDescribe("결재 대기 객체.")
+//		@Schema(description = "결재 대기 객체.")
 //		private List<WoTask> taskList;
 //
-//		@FieldDescribe("当前待办序号.")
-//		@Schema(description = "当前待办序号.")
+//		@FieldDescribe("현재 결재 대기 순번.")
+//		@Schema(description = "현재 결재 대기 순번.")
 //		private Integer currentTaskIndex;
 //
 //		public Long getRank() {
@@ -319,7 +319,7 @@
 //			if (BooleanUtils.isNotTrue(o.getConnected())) {
 //				this.referenceTask(business, wo);
 //			} else {
-//				/** 已经完成的不会有待办，返回一个空数组 */
+//				/** 이미 완료된 것은 결재 대기가 없으므로 빈 배열 반환 */
 //				wo.setTaskList(new ArrayList<>());
 //			}
 //			this.referenceTaskCompleted(business, wo);
@@ -340,7 +340,7 @@
 //			} else if (identities.size() == 1) {
 //				return identities.get(0);
 //			} else {
-//				/* 有多个身份需要逐一判断是否包含. */
+//				/* 신분이 여러 개이면 포함 여부를 하나씩 판단. */
 //				for (String o : identities) {
 //					if (StringUtils.equals(o, wi.getIdentity())) {
 //						return o;

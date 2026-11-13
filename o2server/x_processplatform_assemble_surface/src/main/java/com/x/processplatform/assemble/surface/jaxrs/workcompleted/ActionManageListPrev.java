@@ -51,7 +51,7 @@ class ActionManageListPrev extends BaseAction {
 							inTerms, null, null, null, null, true, DESC);
 				}
 			}
-			/* 添加权限 */
+			/* 권한 추가 */
 			if (null != result.getData()) {
 				for (Wo wo : result.getData()) {
 					WorkCompleted o = emc.find(wo.getId(), WorkCompleted.class);
@@ -71,7 +71,7 @@ class ActionManageListPrev extends BaseAction {
 
 		private Long rank;
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		public Long getRank() {

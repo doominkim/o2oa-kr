@@ -8,6 +8,6 @@ class ExceptionAttachmentNone extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionAttachmentNone(String name) {
-		super("未上传附件: {}.", name);
+		super("업로드된 첨부파일이 없습니다: {}.", name);
 	}
 }

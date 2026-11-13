@@ -39,11 +39,11 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 流程平台应用
+ * 프로세스 플랫폼 앱
  *
  * @author sword
  */
-@Schema(name = "Application", description = "流程平台应用.")
+@Schema(name = "Application", description = "프로세스 플랫폼 앱.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Application.table, uniqueConstraints = {
@@ -66,12 +66,12 @@ public class Application extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -102,10 +102,10 @@ public class Application extends SliceJpaObject {
 		this.properties = new ApplicationProperties();
 	}
 
-	/* Entity 默认字段结束 */
+	/* Entity 기본 필드 끝 */
 
 	public static final String DEFAULTFORM_FIELDNAME = "defaultForm";
-	@FieldDescribe("应用默认表单.")
+	@FieldDescribe("앱 기본 양식.")
 	@Transient
 	private String defaultForm;
 
@@ -123,7 +123,7 @@ public class Application extends SliceJpaObject {
 	}
 
 	public static final String MAINTENANCEIDENTITY_FIELDNAME = "maintenanceIdentity";
-	@FieldDescribe("流程维护身份,如果无法找到处理身份默认的流程处理身份.")
+	@FieldDescribe("프로세스 관리 신분, 처리 신분을 찾을 수 없을 때의 기본 프로세스 처리 신분.")
 	@Transient
 	private String maintenanceIdentity;
 
@@ -136,7 +136,7 @@ public class Application extends SliceJpaObject {
 		this.getProperties().setMaintenanceIdentity(maintenanceIdentity);
 	}
 
-	@FieldDescribe("当前应用下所以流程的流程实例维护者列表")
+	@FieldDescribe("현재 앱의 모든 프로세스 인스턴스 관리자 목록")
 	@Transient
 	private List<String> maintainerList;
 
@@ -151,7 +151,7 @@ public class Application extends SliceJpaObject {
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true, citationNotExists = @CitationNotExist(type = Application.class, fields = {
@@ -160,20 +160,20 @@ public class Application extends SliceJpaObject {
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("应用别名,如果有必须唯一.")
+	@FieldDescribe("앱 별칭, 있으면 고유해야 함.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true, citationNotExists = @CitationNotExist(type = Application.class, fields = {
 			"id", "name", "alias" }))
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String availableIdentityList_FIELDNAME = "availableIdentityList";
-	@FieldDescribe("可见应用的身份.")
+	@FieldDescribe("앱을 볼 수 있는 신분.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -185,7 +185,7 @@ public class Application extends SliceJpaObject {
 	private List<String> availableIdentityList;
 
 	public static final String availableUnitList_FIELDNAME = "availableUnitList";
-	@FieldDescribe("可见应用的组织.")
+	@FieldDescribe("앱을 볼 수 있는 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -197,7 +197,7 @@ public class Application extends SliceJpaObject {
 	private List<String> availableUnitList;
 
 	public static final String availableGroupList_FIELDNAME = "availableGroupList";
-	@FieldDescribe("可见应用的群组,目前无效,没有对组织的设置接口.")
+	@FieldDescribe("앱을 볼 수 있는 그룹, 현재 무효, 조직 설정 인터페이스 없음.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -209,13 +209,13 @@ public class Application extends SliceJpaObject {
 	private List<String> availableGroupList;
 
 	public static final String applicationCategory_FIELDNAME = "applicationCategory";
-	@FieldDescribe("应用分类.")
+	@FieldDescribe("앱 분류.")
 	@Column(length = length_255B, name = ColumnNamePrefix + applicationCategory_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true)
 	private String applicationCategory;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("icon Base64编码后的文本.")
+	@FieldDescribe("icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + icon_FIELDNAME)
@@ -223,13 +223,13 @@ public class Application extends SliceJpaObject {
 	private String icon;
 
 	public static final String iconHue_FIELDNAME = "iconHue";
-	@FieldDescribe("icon的主色调")
+	@FieldDescribe("icon의 주 색상")
 	@Column(length = JpaObject.length_8B, name = ColumnNamePrefix + iconHue_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String iconHue;
 
 	public static final String controllerList_FIELDNAME = "controllerList";
-	@FieldDescribe("应用管理者.")
+	@FieldDescribe("앱 관리자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -241,25 +241,25 @@ public class Application extends SliceJpaObject {
 	private List<String> controllerList;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("应用的创建者。")
+	@FieldDescribe("앱 생성자.")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	private String creatorPerson;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("应用的最后修改时间。")
+	@FieldDescribe("앱 최종 수정 시간.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	private Date lastUpdateTime;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("应用的最后修改者")
+	@FieldDescribe("앱 최종 수정자")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	private String lastUpdatePerson;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)

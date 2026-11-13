@@ -14,40 +14,40 @@ public class ActionCreateWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5156711320925350432L;
 
-	@FieldDescribe("直接打开指定人员已经有的草稿,草稿判断:工作没有已办,只有一条此人的待办.")
-	@Schema(description = "直接打开指定人员已经有的草稿,草稿判断:工作没有已办,只有一条此人的待办.")
+	@FieldDescribe("지정 사용자의 기존 초안을 직접 열기, 초안 판단:업무 문서에 처리 완료가 없고 이 사용자의 결재 대기만 하나 있음.")
+	@Schema(description = "지정 사용자의 기존 초안을 직접 열기, 초안 판단:업무 문서에 처리 완료가 없고 이 사용자의 결재 대기만 하나 있음.")
 	private Boolean latest;
 
-	@FieldDescribe("标题.")
-	@Schema(description = "标题.")
+	@FieldDescribe("제목.")
+	@Schema(description = "제목.")
 	private String title;
 
-	@FieldDescribe("启动人员身份.")
-	@Schema(description = "启动人员身份.")
+	@FieldDescribe("시작 사용자 신분.")
+	@Schema(description = "시작 사용자 신분.")
 	private String identity;
 
-	@FieldDescribe("工作数据.")
-	@Schema(description = "工作数据.")
+	@FieldDescribe("업무 문서 데이터.")
+	@Schema(description = "업무 문서 데이터.")
 	private JsonElement data;
 
-	@FieldDescribe("父工作标识.")
-	@Schema(description = "父工作标识.")
+	@FieldDescribe("상위 업무 문서 식별자.")
+	@Schema(description = "상위 업무 문서 식별자.")
 	private String parentWork;
 
-	@FieldDescribe("允许启动非当但版本流程,默认否并自动升级到当前版本流程.")
-	@Schema(description = "允许启动非当但版本流程,默认否并自动升级到当前版本流程.")
+	@FieldDescribe("현재 버전이 아닌 프로세스 시작 허용, 기본값은 아니오이며 현재 버전 프로세스로 자동 업그레이드.")
+	@Schema(description = "현재 버전이 아닌 프로세스 시작 허용, 기본값은 아니오이며 현재 버전 프로세스로 자동 업그레이드.")
 	private Boolean allowEdition;
 
-	@FieldDescribe("是否跳过新建检查(默认根据流程的新建检查配置，设置true则不进行新建检查).")
-	@Schema(description = "是否跳过新建检查(默认根据流程的新建检查配置，设置true则不进行新建检查).")
+	@FieldDescribe("신규 생성 검사 건너뛰기 여부(기본값은 프로세스의 신규 생성 검사 설정에 따름, true로 설정하면 신규 생성 검사를 하지 않음).")
+	@Schema(description = "신규 생성 검사 건너뛰기 여부(기본값은 프로세스의 신규 생성 검사 설정에 따름, true로 설정하면 신규 생성 검사를 하지 않음).")
 	private Boolean skipDraftCheck = false;
 
-	@FieldDescribe("附件列表")
+	@FieldDescribe("첨부파일 목록")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment",
 			fieldValue = "{'id':'附件id','name':'附件名称','site':'附件框分类','isSoftCopy':'是否软拷贝，默认false，true表示不拷贝真实存储附件，共用附件，仅支持流程附件','copyFrom':'附件来源(cms或processPlatform，默认为processPlatform)'}")
 	private List<WiAttachment> attachmentList = new ArrayList<>();
 
-	@FieldDescribe("关联文档列表.")
+	@FieldDescribe("관련 문서 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "TargetWi",
 			fieldValue = "{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','site':'关联内容框标识','view':'来源视图'}")
 	private List<TargetWi> correlationTargetList;

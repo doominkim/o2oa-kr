@@ -142,7 +142,7 @@ public class QueryFilter {
 		for (EqualsTerm _term : this.equalsTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue(term.getValue());
 			}
 		}
@@ -163,7 +163,7 @@ public class QueryFilter {
 		for (InTerm _term : this.inTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue(term.getValue());
 			}
 		}
@@ -184,7 +184,7 @@ public class QueryFilter {
 		for (LikeTerm _term : this.likeTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue(term.getValue());
 			}
 		}
@@ -205,7 +205,7 @@ public class QueryFilter {
 		for (MemberTerm _term : this.memberTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue(term.getValue());
 			}
 		}
@@ -226,7 +226,7 @@ public class QueryFilter {
 		for (NotEqualsTerm _term : this.notEqualsTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue(term.getValue());
 			}
 		}
@@ -247,7 +247,7 @@ public class QueryFilter {
 		for (NotInTerm _term : this.notInTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue(term.getValue());
 			}
 		}
@@ -268,7 +268,7 @@ public class QueryFilter {
 		for (NotMemberTerm _term : this.notMemberTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue(term.getValue());
 			}
 		}
@@ -297,7 +297,7 @@ public class QueryFilter {
 		for ( DateBetweenTerm _term : this.dateBetweenTerms) {
 			if (_term.getName().equals(term.getName())) {
 				exists = true;
-				// 替换新的值
+				// 새 값으로 교체
 				_term.setValue( term.getValue() );
 			}
 		}
@@ -464,7 +464,7 @@ public class QueryFilter {
 	}
 
 	/**
-	 * 将查询的所有内容组织成String，然后计算一个SHA1 DigestUtils.sha1Hex(content)
+	 * 조회한 모든 내용을 String으로 구성한 뒤 SHA1 DigestUtils.sha1Hex(content) 계산
 	 * 
 	 * @return
 	 */

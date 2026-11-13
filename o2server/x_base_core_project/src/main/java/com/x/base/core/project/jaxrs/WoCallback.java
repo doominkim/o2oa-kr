@@ -4,7 +4,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public abstract class WoCallback<T> {
 
-	@FieldDescribe("回调函数名")
+	@FieldDescribe("콜백 함수명")
 	private String callbackName;
 
 	private T object;

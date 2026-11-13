@@ -31,7 +31,7 @@ public class ActionFilterAttribute extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Map<String, List<NameValueCountPair>>> result = new ActionResult<>();
 			Business business = new Business(emc);
-			// 因为是已经完成工作,可能为空
+			// 완료된 업무 문서이므로 비어 있을 수 있음
 			Application application = business.application().pick(applicationFlag);
 			String applicationId = null == application ? applicationFlag : application.getId();
 			Map<String, List<NameValueCountPair>> wrap = new HashMap<>();

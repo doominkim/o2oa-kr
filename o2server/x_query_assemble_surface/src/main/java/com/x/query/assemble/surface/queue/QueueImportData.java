@@ -30,7 +30,7 @@ import com.x.query.core.entity.ImportRecordItem;
 import com.x.query.core.entity.schema.Table;
 
 /**
- * 数据模板数据导入
+ * 데이터 템플릿 데이터 가져오기
  * @author sword
  */
 public class QueueImportData extends AbstractQueue<String> {
@@ -43,27 +43,27 @@ public class QueueImportData extends AbstractQueue<String> {
 
 	@Override
 	public void execute(String recordId) {
-		logger.info("开始数据模板数据导入：{}", recordId);
+		logger.info("데이터 템플릿 데이터 가져오기 시작: {}", recordId);
 		try {
 			ImportRecord record;
 			ImportModel model;
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				record = emc.find(recordId, ImportRecord.class);
 				if (record == null) {
-					logger.warn("导入记录不存在：{}", recordId);
+					logger.warn("가져오기 기록이 존재하지 않음: {}", recordId);
 					return;
 				}
 				if (record.getStatus().equals(ImportRecord.STATUS_PROCESSING)) {
-					logger.warn("导入记录正在导入：{}", recordId);
+					logger.warn("가져오기 기록 가져오는 중: {}", recordId);
 					return;
 				}
 				if (record.getStatus().equals(ImportRecord.STATUS_SUCCESS)) {
-					logger.warn("导入记录已成功导入：{}", recordId);
+					logger.warn("가져오기 기록 이미 가져오기 성공: {}", recordId);
 					return;
 				}
 				model = emc.find(record.getModelId(), ImportModel.class);
 				if (model == null) {
-					logger.warn("导入记录对应的导入模型不存在：{}", record.getModelId());
+					logger.warn("가져오기 기록에 해당하는 가져오기 모델이 존재하지 않음: {}", record.getModelId());
 					return;
 				}
 				emc.beginTransaction(ImportRecord.class);
@@ -93,14 +93,14 @@ public class QueueImportData extends AbstractQueue<String> {
 					}
 					emc.commit();
 				}
-				logger.warn("数据模板数据导入异常：{}", recordId);
+				logger.warn("데이터 템플릿 데이터 가져오기 예외: {}", recordId);
 				logger.error(e);
 			}
 		} catch (Exception e) {
-			logger.warn("数据模板数据导入异常：{}", recordId);
+			logger.warn("데이터 템플릿 데이터 가져오기 예외: {}", recordId);
 			logger.error(e);
 		}
-		logger.info("完成数据模板数据导入：{}", recordId);
+		logger.info("데이터 템플릿 데이터 가져오기 완료: {}", recordId);
 	}
 
 	private void importCms(final ImportRecord record, final ImportModel model) throws Exception {
@@ -114,7 +114,7 @@ public class QueueImportData extends AbstractQueue<String> {
 					ImportRecordItem.recordId_FIELDNAME, record.getId(), ImportRecordItem.status_FIELDNAME,
 					ImportRecordItem.STATUS_FAILED);
 			if (ListTools.isNotEmpty(itemList)) {
-				logger.info("重新导入失败的CMS数据：{}", record.getId());
+				logger.info("실패한 CMS 데이터 다시 가져오기: {}", record.getId());
 				reImport = true;
 				int count = itemList.size();
 				ImportRecord ir = emc.find(record.getId(), ImportRecord.class);
@@ -195,7 +195,7 @@ public class QueueImportData extends AbstractQueue<String> {
 				emc.persist(item, CheckPersistType.all);
 				emc.commit();
 			} catch (Exception e) {
-				logger.warn("保存ImportRecordItem异常：{}", e.getMessage());
+				logger.warn("ImportRecordItem 저장 예외: {}", e.getMessage());
 			}
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
@@ -277,7 +277,7 @@ public class QueueImportData extends AbstractQueue<String> {
 					ImportRecordItem.recordId_FIELDNAME, record.getId(), ImportRecordItem.status_FIELDNAME,
 					ImportRecordItem.STATUS_FAILED);
 			if (ListTools.isNotEmpty(itemList)) {
-				logger.info("重新导入失败的流程工单数据：{}", record.getId());
+				logger.info("실패한 프로세스 업무 문서 데이터 다시 가져오기: {}", record.getId());
 				reImport = true;
 				int count = itemList.size();
 				ImportRecord ir = emc.find(record.getId(), ImportRecord.class);
@@ -371,7 +371,7 @@ public class QueueImportData extends AbstractQueue<String> {
 				emc.persist(item, CheckPersistType.all);
 				emc.commit();
 			} catch (Exception e) {
-				logger.warn("保存ImportRecordItem异常：{}", e.getMessage());
+				logger.warn("ImportRecordItem 저장 예외: {}", e.getMessage());
 			}
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {

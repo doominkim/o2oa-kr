@@ -14,7 +14,7 @@ class ActionSyncOrganizationCallback extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(ActionSyncOrganizationCallback.class);
 
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
-		logger.info("政务钉钉接收到同步消息:{}.", jsonElement);
+		logger.info("정무 딩톡 동기화 메시지 수신:{}.", jsonElement);
 		ActionResult<Wo> result = new ActionResult<>();
 		if (Config.zhengwuDingding().getEnable()) {
 			ThisApplication.zhengwuDingdingSyncOrganizationCallbackRequest.add(jsonElement);

@@ -79,7 +79,7 @@ public abstract class StorageObject extends SliceJpaObject {
 
 	public static final String MIN_HTTPS = "https";
 
-	@FieldDescribe("文件密钥.")
+	@FieldDescribe("파일 키.")
 	@Column(name = ColumnNamePrefix + ENCRYPTKEY_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String encryptKey;
@@ -133,7 +133,7 @@ public abstract class StorageObject extends SliceJpaObject {
 		this.bytes = bytes;
 	}
 
-	/** 将内容导入到bytes字段，用于进行导入导出 */
+	/** 내용을 bytes 필드로 가져오기, 가져오기/내보내기에 사용 */
 	public Long dumpContent(StorageMapping mapping) throws Exception {
 		long length = -1L;
 		try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
@@ -164,7 +164,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * 将导入的流进行保存
+	 * 가져온 스트림 저장
 	 *
 	 * @param mapping
 	 * @param input
@@ -215,7 +215,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * 更新内容
+	 * 내용 업데이트
 	 *
 	 * @param mapping
 	 * @param input
@@ -242,7 +242,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * 读出内容
+	 * 내용 읽기
 	 *
 	 * @param mapping
 	 * @return
@@ -256,7 +256,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * 将内容流出到output
+	 * 내용을 output으로 출력
 	 *
 	 * @param mapping
 	 * @param output
@@ -268,7 +268,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * 检查是否存在内容
+	 * 내용 존재 여부 확인
 	 *
 	 * @param mapping
 	 * @return
@@ -283,7 +283,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * 取得完整访问路径的前半部分
+	 * 전체 접근 경로의 앞부분 조회
 	 *
 	 * @param mapping
 	 * @return
@@ -392,7 +392,7 @@ public abstract class StorageObject extends SliceJpaObject {
 		case ftp:
 			FtpFileSystemConfigBuilder ftpBuilder = FtpFileSystemConfigBuilder.getInstance();
 			/*
-			 * 如果使用被动模式在阿里云centos7下会经常性出现无法连接 Caused by: java.net.ConnectException:
+			 * 패시브 모드를 사용하면 알리클라우드 centos7에서 자주 연결 실패 발생 Caused by: java.net.ConnectException:
 			 * Connection timed out (Connection timed out) at
 			 * java.net.PlainSocketImpl.socketConnect(Native Method) at
 			 * java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
@@ -403,7 +403,7 @@ public abstract class StorageObject extends SliceJpaObject {
 			 * java.net.Socket.connect(Socket.java:589)
 			 */
 			ftpBuilder.setPassiveMode(opts, true);
-			// 强制不校验IP
+			// IP 검증 강제 생략
 			ftpBuilder.setRemoteVerification(opts, false);
 			// FtpFileType.BINARY is the default
 			ftpBuilder.setFileType(opts, FtpFileType.BINARY);
@@ -414,7 +414,7 @@ public abstract class StorageObject extends SliceJpaObject {
 		case ftps:
 			FtpsFileSystemConfigBuilder ftpsBuilder = FtpsFileSystemConfigBuilder.getInstance();
 			ftpsBuilder.setPassiveMode(opts, true);
-			// 强制不校验IP
+			// IP 검증 강제 생략
 			ftpsBuilder.setRemoteVerification(opts, false);
 			// FtpFileType.BINARY is the default
 			ftpsBuilder.setFileType(opts, FtpFileType.BINARY);
@@ -452,10 +452,10 @@ public abstract class StorageObject extends SliceJpaObject {
 		long length = -1L;
 		FileSystemManager manager = this.getFileSystemManager();
 		/*
-		 * 需要进行两次判断，在前端使用nginx分发的情况下，可能同时触发多个文件的上传，多个文件同时上传可能会同时创建文件的存储目录，会在后台导致错误
+		 * 두 번 판단 필요. 프론트에서 nginx로 분산하는 경우 여러 파일 업로드가 동시에 발생할 수 있고, 동시에 파일 저장 디렉터리를 생성하면 백엔드에서 오류가 발생함
 		 * org.apache.commons.vfs2.FileSystemException: Could not create folder
 		 * "ftp://processPlatform:***@o2.server01.com:20040/20200601/1beb018a-5009-4baa-a9ef-7e903f9d48ef".
-		 * 这种情况下再次发起请求尝试获取文件可以解决这个问题.
+		 * 이 경우 다시 요청하여 파일 조회를 시도하면 문제가 해결됨.
 		 */
 		for (int i = 0; i < 2; i++) {
 			try (FileObject fo = manager.resolveFile(prefix + PATHSEPARATOR + path, options);
@@ -466,7 +466,7 @@ public abstract class StorageObject extends SliceJpaObject {
 						&& (!Objects.equals(StorageProtocol.sftp, mapping.getProtocol()))
 						&& (!Objects.equals(StorageProtocol.ali, mapping.getProtocol()))
 						&& (!Objects.equals(StorageProtocol.s3, mapping.getProtocol()))) {
-					/* webdav关闭会试图去关闭commons.httpClient */
+					/* webdav를 닫으면 commons.httpClient를 닫으려고 시도함 */
 					manager.closeFileSystem(fo.getFileSystem());
 				}
 				this.setStorage(mapping.getName());
@@ -474,7 +474,7 @@ public abstract class StorageObject extends SliceJpaObject {
 				break;
 			} catch (FileSystemException fse) {
 				if (i != 0) {
-					// 第一次错误先跳过,直接执行第二次.如果第二次错误那么报错.
+					// 첫 번째 오류는 건너뛰고 바로 두 번째 실행. 두 번째도 오류이면 오류 발생.
 					throw fse;
 				}
 			}
@@ -483,7 +483,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * vfs读取数据
+	 * vfs 데이터 읽기
 	 *
 	 * @param mapping
 	 * @param output
@@ -509,7 +509,7 @@ public abstract class StorageObject extends SliceJpaObject {
 					&& (!Objects.equals(StorageProtocol.sftp, mapping.getProtocol()))
 					&& (!Objects.equals(StorageProtocol.ali, mapping.getProtocol()))
 					&& (!Objects.equals(StorageProtocol.s3, mapping.getProtocol()))) {
-				/* webdav关闭会试图去关闭commons.httpClient */
+				/* webdav를 닫으면 commons.httpClient를 닫으려고 시도함 */
 				manager.closeFileSystem(fo.getFileSystem());
 			}
 		}
@@ -527,7 +527,7 @@ public abstract class StorageObject extends SliceJpaObject {
 	}
 
 	/**
-	 * 删除内容,同时判断上一级目录(只判断一级)是否为空,为空则删除上一级目录
+	 * 내용 삭제, 동시에 상위 디렉터리(한 단계만)가 비었는지 판단하여 비었으면 상위 디렉터리 삭제
 	 *
 	 * @param mapping
 	 * @throws Exception
@@ -552,7 +552,7 @@ public abstract class StorageObject extends SliceJpaObject {
 					&& (!Objects.equals(StorageProtocol.sftp, mapping.getProtocol()))
 					&& (!Objects.equals(StorageProtocol.ali, mapping.getProtocol()))
 					&& (!Objects.equals(StorageProtocol.s3, mapping.getProtocol()))) {
-				// webdav关闭会试图去关闭commons.httpClient
+				// webdav를 닫으면 commons.httpClient를 닫으려고 시도함
 				manager.closeFileSystem(fo.getFileSystem());
 			}
 		}

@@ -7,7 +7,7 @@ import com.x.base.core.project.message.MessageConnector;
 import com.x.cms.assemble.control.queue.QueueSendDocumentNotify.MessageWo;
 
 /**
- * 消息发送
+ * 메시지 발송
  * @author sword
  */
 public class MessageFactory {

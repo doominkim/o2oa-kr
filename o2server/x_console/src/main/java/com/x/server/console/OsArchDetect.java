@@ -27,11 +27,11 @@ public class OsArchDetect {
 		boolean isWindows = osName.contains("win");
 		boolean isLinux = osName.contains("linux");
 
-		// 归一化架构：x64 / aarch64 / 其它
+		// 아키텍처 정규화: x64 / aarch64 / 기타
 		boolean isX64 = osArch.equals("amd64") || osArch.equals("x86_64");
 		boolean isAArch64 = osArch.equals("aarch64") || osArch.equals("arm64");
 
-		// 你定义的三个目标
+		// 정의한 세 가지 대상
 		if (isWindows && (isX64)) {
 			return OS_WINDOWS_X64;
 		}

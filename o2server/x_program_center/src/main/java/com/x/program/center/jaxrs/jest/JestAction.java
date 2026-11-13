@@ -25,7 +25,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("jest")
-@JaxrsDescribe("调试")
+@JaxrsDescribe("디버그")
 public class JestAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(JestAction.class);
@@ -34,7 +34,7 @@ public class JestAction extends StandardJaxrsAction {
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "列示所有应用的地址", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 앱의 주소 나열", action = ActionList.class)
 	public void list(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<List<ActionList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -51,7 +51,7 @@ public class JestAction extends StandardJaxrsAction {
 	@Path("center/list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "列示所有中心服务的地址", action = ActionCenterList.class)
+	@JaxrsMethodDescribe(value = "모든 센터 서비스의 주소 나열", action = ActionCenterList.class)
 	public void centerList(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionCenterList.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -68,7 +68,7 @@ public class JestAction extends StandardJaxrsAction {
 	@Path("version")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "列示服务器版本", action = ActionVersion.class)
+	@JaxrsMethodDescribe(value = "서버 버전 나열", action = ActionVersion.class)
 	public void getVersion(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionVersion.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -85,9 +85,9 @@ public class JestAction extends StandardJaxrsAction {
 	@Path("clear/cache/{source}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "清除服务器缓存", action = ActionClearCache.class)
+	@JaxrsMethodDescribe(value = "서버 캐시 삭제", action = ActionClearCache.class)
 	public void clearCache(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("*标识：all(所有)|org|cms|portal|process|query|agent|invoke") @PathParam("source") String source) {
+						   @JaxrsParameterDescribe("*식별자: all(전체)|org|cms|portal|process|query|agent|invoke") @PathParam("source") String source) {
 		ActionResult<ActionClearCache.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

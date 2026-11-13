@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("applicationcategory")
-@JaxrsDescribe("应用分类")
+@JaxrsDescribe("앱 분류")
 public class ApplicationCategoryAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ApplicationCategoryAction.class);
 
-	@JaxrsMethodDescribe(value = "获取应用分类信息并统计同一分类的数量.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "앱 분류 정보 조회 및 분류별 수 통계.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

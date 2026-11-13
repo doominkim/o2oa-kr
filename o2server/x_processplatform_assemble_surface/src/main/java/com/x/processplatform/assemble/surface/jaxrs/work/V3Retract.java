@@ -153,7 +153,7 @@ class V3Retract extends BaseAction {
 
 		private static final long serialVersionUID = 6034396222207463624L;
 
-		@FieldDescribe("撤回待办标识")
+		@FieldDescribe("회수 결재 대기 식별자")
 		private List<String> retractTaskList;
 
 		public List<String> getRetractTaskList() {

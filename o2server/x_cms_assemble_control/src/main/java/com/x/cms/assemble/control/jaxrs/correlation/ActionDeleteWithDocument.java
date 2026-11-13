@@ -63,7 +63,7 @@ class ActionDeleteWithDocument extends BaseAction {
 
 		private static final long serialVersionUID = 6571915741994756275L;
 
-		@FieldDescribe("取消关联目标.")
+		@FieldDescribe("연결 대상 해제.")
 		private List<String> idList;
 
 		public List<String> getIdList() {

@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JSON数组操作工具类
+ * JSON 배열 조작 유틸리티 클래스
  */
 public class JsonArrayOperator {
 
     private static final Gson gson = new Gson();
 
     /**
-     * 在指定位置插入JSON对象
-     * @param jsonArray 原始JSON数组
-     * @param index 插入位置索引
-     * @param jsonObject 要插入的JSON对象
-     * @return 操作后的新JSON数组
-     * @throws IllegalArgumentException 如果索引越界
+     * 지정 위치에 JSON 객체 삽입
+     * @param jsonArray 원본 JSON 배열
+     * @param index 삽입 위치 인덱스
+     * @param jsonObject 삽입할 JSON 객체
+     * @return 작업 후 새 JSON 배열
+     * @throws IllegalArgumentException 인덱스가 범위를 벗어난 경우
      */
     public static JsonArray insert(JsonArray jsonArray, int index, JsonObject jsonObject) {
         if (jsonArray == null) {
@@ -28,20 +28,20 @@ public class JsonArrayOperator {
         }
 
         if (index < 0 || index > jsonArray.size()) {
-            throw new IllegalArgumentException("插入位置索引越界: " + index);
+            throw new IllegalArgumentException("삽입 위치 인덱스가 범위를 벗어났습니다: " + index);
         }
 
         JsonArray result = new JsonArray();
 
-        // 插入位置前的元素
+        // 삽입 위치 앞의 요소
         for (int i = 0; i < index; i++) {
             result.add(jsonArray.get(i));
         }
 
-        // 插入新元素
+        // 새 요소 삽입
         result.add(jsonObject);
 
-        // 插入位置后的元素
+        // 삽입 위치 뒤의 요소
         for (int i = index; i < jsonArray.size(); i++) {
             result.add(jsonArray.get(i));
         }
@@ -50,11 +50,11 @@ public class JsonArrayOperator {
     }
 
     /**
-     * 在指定位置插入对象（自动转换为JSON）
-     * @param jsonArray 原始JSON数组
-     * @param index 插入位置索引
-     * @param object 要插入的对象
-     * @return 操作后的新JSON数组
+     * 지정 위치에 객체 삽입(JSON으로 자동 변환)
+     * @param jsonArray 원본 JSON 배열
+     * @param index 삽입 위치 인덱스
+     * @param object 삽입할 객체
+     * @return 작업 후 새 JSON 배열
      */
     public static JsonArray insert(JsonArray jsonArray, int index, Object object) {
         JsonObject jsonObject = gson.toJsonTree(object).getAsJsonObject();
@@ -62,11 +62,11 @@ public class JsonArrayOperator {
     }
 
     /**
-     * 删除指定位置的JSON对象
-     * @param jsonArray 原始JSON数组
-     * @param index 要删除的位置索引
-     * @return 操作后的新JSON数组
-     * @throws IllegalArgumentException 如果索引越界
+     * 지정 위치의 JSON 객체 삭제
+     * @param jsonArray 원본 JSON 배열
+     * @param index 삭제할 위치 인덱스
+     * @return 작업 후 새 JSON 배열
+     * @throws IllegalArgumentException 인덱스가 범위를 벗어난 경우
      */
     public static JsonArray remove(JsonArray jsonArray, int index) {
         if (jsonArray == null || jsonArray.size() == 0) {
@@ -74,7 +74,7 @@ public class JsonArrayOperator {
         }
 
         if (index < 0 || index >= jsonArray.size()) {
-            throw new IllegalArgumentException("删除位置索引越界: " + index);
+            throw new IllegalArgumentException("삭제 위치 인덱스가 범위를 벗어났습니다: " + index);
         }
 
         JsonArray result = new JsonArray();
@@ -89,12 +89,12 @@ public class JsonArrayOperator {
     }
 
     /**
-     * 移动指定位置的对象到新位置
-     * @param jsonArray 原始JSON数组
-     * @param fromIndex 原位置索引
-     * @param toIndex 目标位置索引
-     * @return 操作后的新JSON数组
-     * @throws IllegalArgumentException 如果索引越界
+     * 지정 위치의 객체를 새 위치로 이동
+     * @param jsonArray 원본 JSON 배열
+     * @param fromIndex 원래 위치 인덱스
+     * @param toIndex 대상 위치 인덱스
+     * @return 작업 후 새 JSON 배열
+     * @throws IllegalArgumentException 인덱스가 범위를 벗어난 경우
      */
     public static JsonArray move(JsonArray jsonArray, int fromIndex, int toIndex) {
         if (jsonArray == null || jsonArray.size() == 0) {
@@ -103,29 +103,29 @@ public class JsonArrayOperator {
 
         if (fromIndex < 0 || fromIndex >= jsonArray.size() ||
                 toIndex < 0 || toIndex >= jsonArray.size()) {
-            throw new IllegalArgumentException("移动位置索引越界: fromIndex=" + fromIndex + ", toIndex=" + toIndex);
+            throw new IllegalArgumentException("이동 위치 인덱스가 범위를 벗어났습니다: fromIndex=" + fromIndex + ", toIndex=" + toIndex);
         }
 
         if (fromIndex == toIndex) {
-            // 位置相同，直接返回原数组的副本
+            // 위치가 같으면 원본 배열의 복사본을 바로 반환
             return deepCopy(jsonArray);
         }
 
-        // 先移除原位置的元素
+        // 먼저 원래 위치의 요소 제거
         JsonElement movedElement = jsonArray.get(fromIndex);
         JsonArray tempArray = remove(jsonArray, fromIndex);
 
-        // 计算在新数组中的插入位置
+        // 새 배열에서의 삽입 위치 계산
         int insertIndex = (toIndex > fromIndex) ? toIndex - 1 : toIndex;
 
-        // 插入到新位置
+        // 새 위치에 삽입
         return insert(tempArray, insertIndex, movedElement.getAsJsonObject());
     }
 
     /**
-     * 深拷贝JSON数组
-     * @param jsonArray 原始JSON数组
-     * @return 深拷贝后的新JSON数组
+     * JSON 배열 깊은 복사
+     * @param jsonArray 원본 JSON 배열
+     * @return 깊은 복사된 새 JSON 배열
      */
     public static JsonArray deepCopy(JsonArray jsonArray) {
         if (jsonArray == null) {
@@ -140,10 +140,10 @@ public class JsonArrayOperator {
     }
 
     /**
-     * 将JSON数组转换为对象列表
-     * @param jsonArray JSON数组
-     * @param clazz 目标类型
-     * @return 对象列表
+     * JSON 배열을 객체 목록으로 변환
+     * @param jsonArray JSON 배열
+     * @param clazz 대상 타입
+     * @return 객체 목록
      */
     public static <T> List<T> toList(JsonArray jsonArray, Class<T> clazz) {
         List<T> list = new ArrayList<>();
@@ -156,9 +156,9 @@ public class JsonArrayOperator {
     }
 
     /**
-     * 将对象列表转换为JSON数组
-     * @param list 对象列表
-     * @return JSON数组
+     * 객체 목록을 JSON 배열로 변환
+     * @param list 객체 목록
+     * @return JSON 배열
      */
     public static <T> JsonArray fromList(List<T> list) {
         JsonArray jsonArray = new JsonArray();

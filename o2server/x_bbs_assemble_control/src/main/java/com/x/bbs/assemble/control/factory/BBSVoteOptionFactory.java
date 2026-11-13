@@ -18,11 +18,11 @@ import com.x.bbs.entity.BBSVoteOptionGroup_;
 import com.x.bbs.entity.BBSVoteOption_;
 
 /**
- * 类   名：BBSVoteOptionFactory<br/>
- * 实体类：BBSVoteOption<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSVoteOptionFactory<br/>
+ * 엔티티 클래스: BBSVoteOption<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
 **/
 public class BBSVoteOptionFactory extends AbstractFactory {
 
@@ -30,12 +30,12 @@ public class BBSVoteOptionFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSVoteOption实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSVoteOption 엔티티 정보 객체 조회" )
 	public BBSVoteOption get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSVoteOption.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSVoteOption实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSVoteOption 엔티티 정보 목록 조회" )
 	public List<BBSVoteOption> list( List<String> ids ) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSVoteOption>();
@@ -49,7 +49,7 @@ public class BBSVoteOptionFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "根据主题信息ID查询所有投票选择项信息ID列表" )
+	//@MethodDescribe( "주제 정보 ID로 전체 투표 선택 항목 정보 ID 목록 조회" )
 	public List<String> listVoteOptionIdsBySubject( String subjectId ) throws Exception {
 		if( subjectId == null || subjectId.isEmpty() ){
 			throw new Exception( "subjectId is null!" );
@@ -63,7 +63,7 @@ public class BBSVoteOptionFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "根据主题信息ID查询所有投票选择项信息列表" )
+	//@MethodDescribe( "주제 정보 ID로 전체 투표 선택 항목 정보 목록 조회" )
 	public List<BBSVoteOption> listVoteOptionBySubject( String subjectId ) throws Exception {
 		if( subjectId == null || subjectId.isEmpty() ){
 			throw new Exception( "subjectId is null!" );
@@ -76,7 +76,7 @@ public class BBSVoteOptionFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据主题信息ID查询所有投票选择项分组信息列表" )
+	//@MethodDescribe( "주제 정보 ID로 전체 투표 선택 항목 그룹 정보 목록 조회" )
 	public List<BBSVoteOptionGroup> listVoteOptionGroupBySubject( String subjectId ) throws Exception {
 		if( subjectId == null || subjectId.isEmpty() ){
 			throw new Exception( "subjectId is null!" );

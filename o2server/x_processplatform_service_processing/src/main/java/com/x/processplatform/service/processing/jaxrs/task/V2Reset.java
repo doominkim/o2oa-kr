@@ -26,7 +26,7 @@ import com.x.processplatform.service.processing.Business;
 import com.x.processplatform.service.processing.ProcessPlatformKeyClassifyExecutorFactory;
 
 /**
- * @since 8.2 tickets 重置处理人.
+ * @since 8.2 tickets 처리자 재설정.
  */
 class V2Reset extends BaseAction {
 

@@ -6,9 +6,9 @@ import template from './temp.html';
 import style from "./style.scope.css";
 import oInput from '../../../components/o-input';
 import oTextarea from '../../../components/o-textarea';
-import baiduMap from './baidu-map'; // 百度地图
-import amap from './amap'; // 高德地图
-import tencentMap from './tencent-map'; // 腾讯地图
+import baiduMap from './baidu-map'; // 바이두 지도
+import amap from './amap'; // 가오더 지도
+import tencentMap from './tencent-map'; // 텐센트 지도
 
 
 export default content({
@@ -26,16 +26,16 @@ export default content({
                 longitude: "",
                 latitude: "",
                 description: "",
-                status: "a", // a 新增 ，u 更新， v 查看
+                status: "a", // a 신규, u 업데이트, v 조회
                 isView: false,
-                positionType: "amap" // baidu amap tx 如果为空需要输入经纬度
+                positionType: "amap" // baidu amap tx가 비어 있으면 경위도 입력 필요
             },
         };
     },
-    // 如果有数据过来
+    // 전달된 데이터가 있으면
     beforeRender() {
         console.debug(this.bind.form)
-        // 有值 表示是查看
+        // 값이 있으면 조회 모드
         if (this.bind.form.id && this.bind.form.status === 'v') {
             this.bind.form.isView = true;
             this.bind.fTitle = lp.workAddressView;
@@ -78,7 +78,7 @@ export default content({
         o2.api.page.notice(lp.workAddressForm.success, 'success');
         this.close();
     },
-    // 简单判断经纬度是否正确
+    // 경위도가 올바른지 간단히 판단
     isValidCoords(lng, lat) {
         const regLng = /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
         const regLat = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;

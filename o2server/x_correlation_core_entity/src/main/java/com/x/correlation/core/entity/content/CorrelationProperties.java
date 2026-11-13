@@ -9,19 +9,19 @@ public class CorrelationProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 5628694071505848771L;
 
-	@FieldDescribe("关联内容标题.")
+	@FieldDescribe("연관 콘텐츠 제목.")
 	private String targetTitle;
 
-	@FieldDescribe("关联内容分类,processPlatform:流程名称,cms:应用名称.")
+	@FieldDescribe("연관 콘텐츠 분류, processPlatform: 프로세스 이름, cms: 앱 이름.")
 	private String targetCategory;
 
-	@FieldDescribe("关联内容创建时间")
+	@FieldDescribe("연관 콘텐츠 생성 시간")
 	private Date targetStartTime;
 
-	@FieldDescribe("关联内容创建人")
+	@FieldDescribe("연관 콘텐츠 생성자")
 	private String targetCreatorPerson;
 
-	@FieldDescribe("来源视图")
+	@FieldDescribe("출처 뷰")
 	private String view;
 
 	public String getView() {

@@ -7,6 +7,6 @@ class ExceptionCategoryFormIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCategoryFormIdEmpty() {
-		super("文档所在分类未设置编辑表单或者编辑表单已被清除，无法进行查询或者保存操作。" );
+		super("게시글 분류에 편집 양식이 설정되지 않았거나 삭제되어 조회하거나 저장할 수 없습니다." );
 	}
 }

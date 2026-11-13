@@ -16,14 +16,14 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 获取所有应用的数据表结构
+ * 모든 앱의 데이터 테이블 구조 조회
  */
 class ActionGetAllTableStructure extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ActionGetAllTableStructure.class);
 
 	/**
-	 * 已经分析过的数据表
+	 * 이미 분석한 데이터 테이블
 	 */
 	private List<String> analyzedEntityNames = new ArrayList<>();
 
@@ -33,7 +33,7 @@ class ActionGetAllTableStructure extends BaseAction {
 		List<Wo> wos_newTables = null;
 		Wo wo = null;
 
-		// 遍历所有的模块
+		// 모든 모듈 순회
 		for (String className : OFFICIAL_MODULE_SORTED_TEMPLATE) {
 			wos_newTables = getDataStructure(className);
 			wos.addAll(wos_newTables);
@@ -97,7 +97,7 @@ class ActionGetAllTableStructure extends BaseAction {
 				result = cls_annotation_table_method_name.invoke(annotation_table);
 				woTable.setTableName(result.toString());
 
-				// 遍历所有的有@Column的属性
+				// @Column이 있는 모든 속성 순회
 				Field[] fileds = cls_entity.getDeclaredFields();
 				if (fileds != null && fileds.length > 0) {
 					for (Field field : fileds) {
@@ -110,7 +110,7 @@ class ActionGetAllTableStructure extends BaseAction {
 				woTable.setFields(woFields);
 			}
 		} catch (ClassNotFoundException | NoSuchMethodException e) {
-			logger.info("无法解析实体类" + containerEntity + ",请检查类依赖情况。");
+			logger.info("엔티티 클래스를 해석할 수 없습니다" + containerEntity + ", 클래스 의존성을 확인하십시오.");
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
@@ -135,7 +135,7 @@ class ActionGetAllTableStructure extends BaseAction {
 			Annotation annotation_field_column = field.getAnnotation(cls_annotation_field_column);
 			Annotation annotation_field_describe = null;
 
-			if (annotation_field_column != null) {// 说明有@Column这个注解，是一个列，开始
+			if (annotation_field_column != null) {// @Column 어노테이션이 있으면 컬럼임, 시작
 				annotation_field_describe = field.getAnnotation(cls_annotation_field_describe);
 				if (annotation_field_describe != null) {
 					woField = new WoField();
@@ -168,13 +168,13 @@ class ActionGetAllTableStructure extends BaseAction {
 
 	public static class Wo {
 
-		@FieldDescribe("数据库表名")
+		@FieldDescribe("데이터베이스 테이블 이름")
 		private String tableName;
 
-		@FieldDescribe("实体类名")
+		@FieldDescribe("엔티티 클래스 이름")
 		private String entityName;
 
-		@FieldDescribe("数据表列信息")
+		@FieldDescribe("데이터 테이블 컬럼 정보")
 		private List<WoField> fields;
 
 		public String getEntityName() {
@@ -204,16 +204,16 @@ class ActionGetAllTableStructure extends BaseAction {
 
 	public static class WoField {
 
-		@FieldDescribe("数据表列名")
+		@FieldDescribe("데이터 테이블 컬럼 이름")
 		private String fieldName;
 
-		@FieldDescribe("数据表列类型")
+		@FieldDescribe("데이터 테이블 컬럼 유형")
 		private String fieldType;
 
-		@FieldDescribe("数据表列长度")
+		@FieldDescribe("데이터 테이블 컬럼 길이")
 		private String fieldLength;
 
-		@FieldDescribe("数据表列说明")
+		@FieldDescribe("데이터 테이블 컬럼 설명")
 		private String description;
 
 		public String getFieldName() {

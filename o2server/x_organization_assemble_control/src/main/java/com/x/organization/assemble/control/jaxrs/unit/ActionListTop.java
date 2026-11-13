@@ -25,7 +25,7 @@ import com.x.organization.core.entity.Unit;
 import com.x.organization.core.entity.Unit_;
 
 class ActionListTop extends BaseAction {
-	/** 用于显示顶层组织,输出下级组织和组织成员数量 */
+	/** 최상위 조직 표시용, 하위 조직과 조직 구성원 수 출력 */
 	ActionResult<List<Wo>> execute(EffectivePerson effectivePerson) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<List<Wo>> result = new ActionResult<>();
@@ -48,10 +48,10 @@ class ActionListTop extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接成员身份数量")
+		@FieldDescribe("직속 구성원 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,

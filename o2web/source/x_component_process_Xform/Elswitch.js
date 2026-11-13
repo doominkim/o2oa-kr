@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Elinput 基于Element UI的开关组件。
- * @o2cn 开关组件
+/** @class Elinput Element UI 기반 스위치 컴포넌트.
+ * @o2cn 스위치 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/switch|Element UI Switch 开关}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/switch|Element UI Switch 스위치}
  */
 MWF.xApplication.process.Xform.Elswitch = MWF.APPElswitch =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elswitch# */
@@ -21,9 +21,9 @@ MWF.xApplication.process.Xform.Elswitch = MWF.APPElswitch =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * switch 状态发生变化时的回调函数。this.event[0]为新状态的值
+         * switch 상태가 변경될 때의 콜백 함수. this.event[0]은 새 상태 값
          * @event MWF.xApplication.process.Xform.Elswitch#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/switch|开关组件的的 Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/switch|스위치 컴포넌트의 Events 장}
          */
         "elEvents": ["change"]
     },
@@ -36,15 +36,15 @@ MWF.xApplication.process.Xform.Elswitch = MWF.APPElswitch =  new Class(
         }
     },
     /**
-     * @summary 组件的配置信息，同时也是Vue组件的data。
+     * @summary 컴포넌트 설정 정보이자 Vue 컴포넌트의 data.
      * @member MWF.xApplication.process.Xform.Elinput#json {JsonObject}
      * @example
-     *  //可以在脚本中获取此对象，下面两行代码是等价的，它们获取的是同一个对象
-     * var json = this.form.get("elinput").json;       //获取组件的json对象
-     * var json = this.form.get("elinput").vm.$data;   //获取Vue组件的data数据，
+     *  //스크립트에서 이 객체를 가져올 수 있으며, 아래 두 줄의 코드는 동일한 객체를 가져옴
+     * var json = this.form.get("elinput").json;       //컴포넌트의 json 객체 가져오기
+     * var json = this.form.get("elinput").vm.$data;   //Vue 컴포넌트의 data 데이터 가져오기,
      *
-     * //通过json对象操作Element组件
-     * json.disabled = true;     //设置输入框为禁用
+     * //json 객체로 Element 컴포넌트 조작
+     * json.disabled = true;     //입력 상자를 비활성화로 설정
      */
     // _loadNode: function(){
     //     if (this.isReadonly()) this.json.disabled = true;

@@ -117,7 +117,7 @@ class ActionSelect extends BaseAction {
 
 	public static class Wo extends WrapServiceModule {
 
-		@FieldDescribe("返回标识")
+		@FieldDescribe("반환 식별자")
 		private String flag;
 
 		public String getFlag() {

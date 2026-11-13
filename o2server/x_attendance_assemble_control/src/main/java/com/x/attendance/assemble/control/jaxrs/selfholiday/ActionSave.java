@@ -35,7 +35,7 @@ public class ActionSave extends BaseAction {
 		Wi wrapIn = null;
 		List<AttendanceSelfHoliday> holidayList = null;
 
-		//获取到当前用户信息
+		//현재 사용자 정보 조회
 		EffectivePerson currentPerson = this.effectivePerson(request);
 		Boolean check = true;
 		
@@ -58,7 +58,7 @@ public class ActionSave extends BaseAction {
 						&& wrapIn.getStartTime() != null
 						&& wrapIn.getEndTime() != null
 				){
-					if( wrapIn.getEmployeeName().indexOf("@P") < 0 ){//不是DistinguishedName
+					if( wrapIn.getEmployeeName().indexOf("@P") < 0 ){//DistinguishedName이 아님
 						if( wrapIn.getEmployeeName().indexOf("@I") > 0 ){
 							String personName = userManagerService.getPersonNameByIdentity(wrapIn.getEmployeeName());
 							if( StringUtils.isNotEmpty( personName ) ){
@@ -78,7 +78,7 @@ public class ActionSave extends BaseAction {
 							}
 						}
 
-						//补充员工的组织信息
+						//직원의 조직 정보 보완
 						Unit unit = userManagerService.getUnitWithPersonName( wrapIn.getEmployeeNumber() );
 						Unit topUnit = null;
 						String unitName = null;
@@ -95,25 +95,25 @@ public class ActionSave extends BaseAction {
 							topUnitOu = topUnit.getDistinguishedName();
 						}
 						emc.beginTransaction( AttendanceSelfHoliday.class );
-						//先根据batchFlag删除原来的数据，然后再进行新数据的保存
+						//먼저 batchFlag 기준으로 기존 데이터를 삭제한 뒤 새 데이터 저장
 						if(StringUtils.isNotEmpty( wrapIn.getBatchFlag() ) ){
 							holidayList = attendanceSelfHolidayServiceAdv.listWithBatchFlag( wrapIn.getBatchFlag() );
 							if(ListTools.isNotEmpty( holidayList )){
-								logger.info("先根据batchFlag删除原来的数据，然后再进行新数据的保存" );
+								logger.info("먼저 batchFlag 기준으로 기존 데이터를 삭제한 뒤 새 데이터 저장" );
 								for( AttendanceSelfHoliday holiday : holidayList ){
 									emc.remove( emc.find(holiday.getId(), AttendanceSelfHoliday.class ), CheckRemoveType.all );
 								}
-								logger.info("删除" + holidayList.size() + "条旧请假信息数据。" );
+								logger.info("삭제" + holidayList.size() + "건의 기존 휴가 정보 데이터." );
 							}
 						}
 						if( StringUtils.isNotEmpty( wrapIn.getId() ) ){
-							//根据ID查询信息是否存在，如果存在就update，如果不存在就create
+							//ID로 정보 존재 여부를 조회해 있으면 update, 없으면 create
 							attendanceSelfHoliday = emc.find( wrapIn.getId(), AttendanceSelfHoliday.class );
 							if( attendanceSelfHoliday != null ){
-								//更新已经存在的信息
+								//기존 정보 수정
 								wrapIn.copyTo( attendanceSelfHoliday );
 								attendanceSelfHoliday.setBatchFlag(wrapIn.getBatchFlag());
-								logger.info("更新：gson.toJson( attendanceSelfHoliday ) = " + gson.toJson( attendanceSelfHoliday ) );
+								logger.info("수정: gson.toJson( attendanceSelfHoliday ) = " + gson.toJson( attendanceSelfHoliday ) );
 
 								attendanceSelfHoliday.setUnitName( unitName );
 								attendanceSelfHoliday.setUnitOu( unitOu );
@@ -124,10 +124,10 @@ public class ActionSave extends BaseAction {
 							}else{
 								attendanceSelfHoliday = new AttendanceSelfHoliday();
 								wrapIn.copyTo( attendanceSelfHoliday );
-								//使用参数传入的ID作为记录的ID
+								//매개변수로 전달된 ID를 레코드 ID로 사용
 								attendanceSelfHoliday.setId( wrapIn.getId() );
 								attendanceSelfHoliday.setBatchFlag(wrapIn.getBatchFlag());
-								logger.info("新增：gson.toJson( attendanceSelfHoliday ) = " + gson.toJson( attendanceSelfHoliday ) );
+								logger.info("신규: gson.toJson( attendanceSelfHoliday ) = " + gson.toJson( attendanceSelfHoliday ) );
 
 								attendanceSelfHoliday.setUnitName( unitName );
 								attendanceSelfHoliday.setUnitOu( unitOu );
@@ -137,12 +137,12 @@ public class ActionSave extends BaseAction {
 								emc.persist( attendanceSelfHoliday, CheckPersistType.all);
 							}
 						}else{
-							//没有传入指定的ID
+							//지정한 ID가 전달되지 않았습니다
 							attendanceSelfHoliday = new AttendanceSelfHoliday();
 
 							wrapIn.copyTo( attendanceSelfHoliday );
 							attendanceSelfHoliday.setBatchFlag(wrapIn.getBatchFlag());
-							logger.debug("新增,无ID：gson.toJson( attendanceSelfHoliday ) = " + gson.toJson( attendanceSelfHoliday ) );
+							logger.debug("신규, ID 없음: gson.toJson( attendanceSelfHoliday ) = " + gson.toJson( attendanceSelfHoliday ) );
 
 							attendanceSelfHoliday.setUnitName( unitName );
 							attendanceSelfHoliday.setUnitOu( unitOu );
@@ -155,19 +155,19 @@ public class ActionSave extends BaseAction {
 						emc.commit();
 						result.setData( new Wo( attendanceSelfHoliday.getId() ) );
 
-						//清除缓存
+						//캐시 삭제
 						//ApplicationCache.notify( AttendanceSelfHoliday.class );
 						CacheManager.notify(AttendanceSelfHoliday.class);
 
-						//根据员工休假数据来记录与这条数据相关的统计需求记录
+						//직원 휴가 데이터로 관련 통계 요청 기록 기록
 						//new AttendanceDetailAnalyseService().recordStatisticRequireLog( attendanceSelfHoliday );
-						logger.debug("休假数据有变动，对该员工的该请假时间内的所有打卡记录进行分析......" );
+						logger.debug("휴가 데이터가 변경되어 해당 직원의 휴가 기간 내 모든 출퇴근 기록을 분석합니다......" );
 
-						//休假数据有更新，对该员工的该请假时间内的所有打卡记录进行分析
+						//휴가 데이터가 수정되어 해당 직원의 휴가 기간 내 모든 출퇴근 기록을 분석합니다
 						List<String> ids = attendanceDetailAnalyseServiceAdv.listAnalyseAttendanceDetailIds(attendanceSelfHoliday.getEmployeeName(), attendanceSelfHoliday.getStartTime(), attendanceSelfHoliday.getEndTime(), effectivePerson.getDebugger() );
 						if( ListTools.isNotEmpty( ids ) ){
 							for( String id : ids ){
-								try { //分析保存好的考勤数据
+								try { //저장된 근태 데이터 분석
 //									ThisApplication.detailAnalyseQueue.send( id );
 								} catch ( Exception e1 ) {
 									e1.printStackTrace();
@@ -177,18 +177,18 @@ public class ActionSave extends BaseAction {
 					}
 				}else{
 					if( jsonElement == null ){
-						logger.debug("传入的员工请假信息JSON数据为空......" );
-						Exception exception = new ExceptionSelfHolidayProcess( "传入的员工请假信息JSON数据为空，无法保存数据信息，请检查数据内容！" );
+						logger.debug("전달된 직원 휴가 정보 JSON 데이터가 비어 있습니다......" );
+						Exception exception = new ExceptionSelfHolidayProcess( "전달된 직원 휴가 JSON 데이터가 비어 있어 저장할 수 없습니다. 데이터 내용을 확인하십시오!" );
 						result.error( exception );
 					}else {
-						logger.debug("传入的数据不符合请假数据接口要求......" );
-						Exception exception = new ExceptionSelfHolidayProcess( "传入的数据不符合请假数据接口要求，请检查数据内容：" + jsonElement.getAsString() );
+						logger.debug("전달된 데이터가 휴가 데이터 인터페이스 요구사항에 맞지 않습니다......" );
+						Exception exception = new ExceptionSelfHolidayProcess( "전달된 데이터가 휴가 데이터 인터페이스 요구사항에 맞지 않습니다. 데이터 내용을 확인하십시오:" + jsonElement.getAsString() );
 						result.error( exception );
 					}
 
 				}
 			} catch ( Exception e ) {
-				Exception exception = new ExceptionSelfHolidayProcess( e, "系统在保存员工请假记录信息时发生异常." );
+				Exception exception = new ExceptionSelfHolidayProcess( e, "직원 휴가 기록 저장 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, currentPerson, request, null);
 			}
@@ -198,33 +198,33 @@ public class ActionSave extends BaseAction {
 	
 	public static class Wi {
 
-		@FieldDescribe("ID，如果ID已存在，则为更新")
+		@FieldDescribe("ID, ID가 이미 있으면 수정")
 		private String id;
 
-		@FieldDescribe("员工姓名：员工的标识，<font color='red'>必填</font>，员工的distinguishedName，如：张三@zhangsan@P")
+		@FieldDescribe("직원 이름: 직원 식별자, <font color='red'>필수</font>, 직원의 distinguishedName, 예: 홍길동@zhangsan@P")
 		private String employeeName;
 
 		private String employeeNumber;
 
-		@FieldDescribe("请假类型:带薪年休假|带薪病假|带薪福利假|扣薪事假|出差|培训|其他，<font color='red'>必填</font>")
+		@FieldDescribe("휴가 유형:유급 연차|유급 병가|유급 복지 휴가|무급 개인 휴가|출장|교육|기타, <font color='red'>필수</font>")
 		private String leaveType;
 
-		@FieldDescribe("开始时间，<font color='red'>必填</font>: yyyy-mm-dd hh24:mi:ss")
+		@FieldDescribe("시작 시간, <font color='red'>필수</font>: yyyy-mm-dd hh24:mi:ss")
 		private Date startTime;
 
-		@FieldDescribe("结束时间，<font color='red'>必填</font>: yyyy-mm-dd hh24:mi:ss")
+		@FieldDescribe("종료 시간, <font color='red'>필수</font>: yyyy-mm-dd hh24:mi:ss")
 		private Date endTime;
 
-		@FieldDescribe("请假天数，最小粒度，0.5天，<font color='red'>必填</font>")
+		@FieldDescribe("휴가 일수, 최소 단위 0.5일, <font color='red'>필수</font>")
 		private Double leaveDayNumber = 0.0;
 
-		@FieldDescribe("请假说明")
+		@FieldDescribe("휴가 설명")
 		private String description;
 
-//		@FieldDescribe("流程WorkId")
+//		@FieldDescribe("프로세스 WorkId")
 //		private String docId;
 
-		@FieldDescribe("录入批次标识：可以填写流程workId，jobId, CMS的文档ID，或者自定义信息，数据保存时会先根据batchFlag做删除，然后再保存新的数据")
+		@FieldDescribe("입력 배치 식별자: 프로세스 workId, jobId, CMS 문서 ID 또는 사용자 정의 정보 입력 가능. 저장 시 batchFlag 기준으로 먼저 삭제한 뒤 새 데이터 저장")
 		private String batchFlag;
 
 		public String getId() { return id; }

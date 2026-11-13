@@ -21,7 +21,7 @@ class ActionCancel extends BaseAction {
 				throw new ExceptionEntityNotExist(id);
 			}
 			if(!HandoverStatusEnum.WAIT.getValue().equals(handover.getStatus())){
-				throw new ExceptionHasProcess("不能取消");
+				throw new ExceptionHasProcess("취소할 수 없습니다");
 			}
 			if (!business.ifPersonCanManageApplicationOrProcess(effectivePerson, "", "")) {
 				throw new ExceptionAccessDenied(effectivePerson);

@@ -26,7 +26,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.base.core.project.tools.DateTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "PersonCard", description = "组织人员名片.")
+@Schema(name = "PersonCard", description = "조직 사용자 명함.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.PersonCard.table, uniqueConstraints = {
@@ -50,38 +50,38 @@ public class PersonCard extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.pinyin = StringUtils.lowerCase(PinyinHelper.convertToPinyinString(name, "", PinyinFormat.WITHOUT_TONE));
 		this.pinyinInitial = StringUtils.lowerCase(PinyinHelper.getShortPinyin(name));
-		/** 生成默认排序号 */
+		/** 기본 정렬 번호 생성 */
 		if (null == this.orderNumber) {
 			this.orderNumber = DateTools.timeOrderNumber();
 		}
 		/*if (null == this.groupType || "" == this.groupType) {
-			this.groupType = "默认分组";
+			this.groupType = "기본 분류";
 		}*/
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* Entity 默认字段结束 */
+	/* Entity 기본 필드 끝 */
 	
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称,可重名.")
+	@FieldDescribe("이름, 중복 가능.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false)
 	private String name;
 
 	public static final String genderType_FIELDNAME = "genderType";
-	@FieldDescribe("性别.男:m,女:f,未知:d")
+	@FieldDescribe("성별. 남:m, 여:f, 알 수 없음:d")
 	@Enumerated(EnumType.STRING)
 	@Column(length = GenderType.length, name = ColumnNamePrefix + genderType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + genderType_FIELDNAME)
@@ -89,7 +89,7 @@ public class PersonCard extends SliceJpaObject {
 	private GenderType genderType;
 	
 	public static final String groupType_FIELDNAME = "groupType";
-	@FieldDescribe("所属分组.")
+	@FieldDescribe("소속 분류.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + groupType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + groupType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -97,14 +97,14 @@ public class PersonCard extends SliceJpaObject {
 
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音,自动生成")
+	@FieldDescribe("name 병음, 자동 생성")
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母,自动生成")
+	@FieldDescribe("name 병음 첫 글자, 자동 생성")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
@@ -113,14 +113,14 @@ public class PersonCard extends SliceJpaObject {
 	
 	public static final String distinguishedName_FIELDNAME = "distinguishedName";
 	@Flag
-	@FieldDescribe("录入人,@P结尾.")
+	@FieldDescribe("입력자, @P로 끝남.")
 	@Column(length = length_255B, name = ColumnNamePrefix + distinguishedName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + distinguishedName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String distinguishedName;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -128,28 +128,28 @@ public class PersonCard extends SliceJpaObject {
 
 	public static final String mobile_FIELDNAME = "mobile";
 	@Flag
-	@FieldDescribe("必填,手机号.")
+	@FieldDescribe("필수, 휴대폰 번호.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + mobile_FIELDNAME)
-	/** 其他地区手机号不一致,所以这里使用外部校验,不使用mobileString */
+	/** 다른 지역 휴대폰 번호 형식이 달라 외부 검증 사용, mobileString 미사용 */
 	@Index(name = TABLE + IndexNameMiddle + mobile_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String mobile;
 
 	public static final String officePhone_FIELDNAME = "officePhone";
-	@FieldDescribe("办公电话.")
+	@FieldDescribe("사무실 전화.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + officePhone_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String officePhone;
 	
 	public static final String address_FIELDNAME = "address";
-	@FieldDescribe("地址.")
+	@FieldDescribe("주소.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + address_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + address_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String address;
 	
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("备注.")
+	@FieldDescribe("비고.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -157,7 +157,7 @@ public class PersonCard extends SliceJpaObject {
 	
 	public static final String extend1_FIELDNAME = "extend1";
 	@Flag
-	@FieldDescribe("extend1扩展字段.")
+	@FieldDescribe("extend1 확장 필드.")
 	@Column(length = length_255B, name = ColumnNamePrefix + extend1_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + extend1_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -165,7 +165,7 @@ public class PersonCard extends SliceJpaObject {
 
 	public static final String extend2_FIELDNAME = "extend2";
 	@Flag
-	@FieldDescribe("extend2扩展字段.")
+	@FieldDescribe("extend2 확장 필드.")
 	@Column(length = length_255B, name = ColumnNamePrefix + extend2_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + extend2_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -173,21 +173,21 @@ public class PersonCard extends SliceJpaObject {
 	
 	public static final String extend3_FIELDNAME = "extend3";
 	@Flag
-	@FieldDescribe("extend3扩展字段.")
+	@FieldDescribe("extend3 확장 필드.")
 	@Column(length = length_255B, name = ColumnNamePrefix + extend3_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + extend3_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String extend3;
 
 	public static final String inputTime_FIELDNAME = "inputTime";
-	@FieldDescribe("录入时间.")
+	@FieldDescribe("입력 시간.")
 	@Index(name = TABLE + IndexNameMiddle + inputTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Column(length = length_255B, name = ColumnNamePrefix + inputTime_FIELDNAME)
 	private String inputTime;
 	
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态.草稿,发布")
+	@FieldDescribe("상태. 초안, 게시")
 	@Column(length = length_255B, name = ColumnNamePrefix + status_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

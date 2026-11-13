@@ -80,7 +80,7 @@ public class QueueUpdateExmail extends AbstractQueue<String> {
 			if (null == person) {
 				throw new ExceptionEntityNotExist(userId, Person.class);
 			}
-			// 更新未读邮件数量
+			// 읽지 않은 메일 수 업데이트
 			PersonExtend personExtend = emc.firstEqualAndEqual(PersonExtend.class, PersonExtend.TYPE_FIELDNAME,
 					ExtendExmail.TYPE, PersonExtend.PERSON_FIELDNAME, person.getId());
 			emc.beginTransaction(PersonExtend.class);
@@ -129,7 +129,7 @@ public class QueueUpdateExmail extends AbstractQueue<String> {
 			}
 			String text = fromUser + "(" + DateTools.format(time, "MM-dd HH:mm") + ")";
 			text = StringTools.utf8SubString(title, JpaObject.length_255B - StringTools.utf8Length(text)) + text;
-			// 更新新邮件标题
+			// 새 메일 제목 갱신
 			emc.beginTransaction(PersonExtend.class);
 			PersonExtend personExtend = emc.firstEqualAndEqual(PersonExtend.class, PersonExtend.TYPE_FIELDNAME,
 					ExtendExmail.TYPE, PersonExtend.PERSON_FIELDNAME, person.getId());
@@ -177,7 +177,7 @@ public class QueueUpdateExmail extends AbstractQueue<String> {
 //			for (int i = 0; i < Math.min(30, queue.size()); i++) {
 //				titleAttribute.getAttributeList().add(queue.get(i));
 //			}
-//			// 更新未读邮件数量
+//			// 읽지 않은 메일 수 업데이트
 //			PersonAttribute unreadAttribute = emc.firstEqualAndEqual(PersonAttribute.class,
 //					PersonAttribute.name_FIELDNAME, Config.exmail().getPersonAttributeNewCountName(),
 //					PersonAttribute.person_FIELDNAME, person.getId());
@@ -240,7 +240,7 @@ public class QueueUpdateExmail extends AbstractQueue<String> {
 	 * <MailID><![CDATA[Hr/VDOqk59elyFLdE9n3JU3mnwRsuo5JVzC1tNmquI8=]]></MailID>
 	 * <ToUserID><![CDATA[xielingqiao@o2oa.net]]></ToUserID>
 	 * <FromUser><![CDATA["zhourui@zoneland.net"<zhourui@zoneland.net>]]></FromUser>
-	 * <Title><![CDATA[邮件到达了]]></Title> <Time>1610007415</Time>
+	 * <Title><![CDATA[메일이 도착했습니다]]></Title> <Time>1610007415</Time>
 	 * <NewCount>11</NewCount> </xml> <br>
 	 * <xml><br>
 	 * <CorpID><![CDATA[ww878809d01b17fb5e]]></CorpID>

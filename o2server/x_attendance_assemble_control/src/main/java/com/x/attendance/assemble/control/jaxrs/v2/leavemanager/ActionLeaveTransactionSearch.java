@@ -33,7 +33,7 @@ public class ActionLeaveTransactionSearch extends BaseAction {
             List<String> filterList = filterBlank(wi.getFilterList());
             List<String> leaveTypeList = filterBlank(wi.getLeaveTypeList());
             if (filterList.isEmpty() && leaveTypeList.isEmpty()) {
-                throw new ExceptionWithMessage("用户和假期类型至少需要一个查询条件");
+                throw new ExceptionWithMessage("사용자와 휴가 유형 중 하나 이상의 조회 조건이 필요합니다");
             }
             List<String> personList = listPerson(filterList, emc);
             if (!filterList.isEmpty() && personList.isEmpty()) {
@@ -97,10 +97,10 @@ public class ActionLeaveTransactionSearch extends BaseAction {
 
         private static final long serialVersionUID = -3766728976122646384L;
 
-        @FieldDescribe("过滤人员或组织，组织只支持单层: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 단일 계층만 지원: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
 
-        @FieldDescribe("过滤的假期类型ID列表")
+        @FieldDescribe("필터링할 휴가 유형 ID 목록")
         private List<String> leaveTypeList;
 
         public List<String> getFilterList() {
@@ -124,13 +124,13 @@ public class ActionLeaveTransactionSearch extends BaseAction {
 
         private static final long serialVersionUID = -7462344787658355916L;
 
-        @FieldDescribe("假期流水列表")
+        @FieldDescribe("휴가 내역 목록")
         private List<AttendanceV2LeaveTransaction> transactionList;
 
-        @FieldDescribe("人员列表")
+        @FieldDescribe("사용자 목록")
         private List<String> personList;
 
-        @FieldDescribe("假期类型ID列表")
+        @FieldDescribe("휴가 유형 ID 목록")
         private List<String> leaveTypeList;
 
         public List<AttendanceV2LeaveTransaction> getTransactionList() {

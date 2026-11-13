@@ -17,7 +17,7 @@ import com.x.cms.core.entity.Document;
 import com.x.cms.core.entity.FileInfo;
 
 /**
- * 对文档附件文件信息进行管理的服务类（高级） 高级服务器可以利用Service完成事务控制
+ * 문서 첨부파일 정보 관리 서비스 클래스(고급) 고급 서비스는 Service로 트랜잭션 제어 가능
  *
  * @author O2LEE
  */
@@ -37,7 +37,7 @@ public class FileInfoServiceAdv {
 	}
 
 	/**
-	 * 只是删除一条文件附件信息
+	 * 파일 첨부 정보 한 건만 삭제
 	 * 
 	 * @param id
 	 * @throws Exception
@@ -117,7 +117,7 @@ public class FileInfoServiceAdv {
 				} else {
 					fileInfo_old.setControllerUnitList(new ArrayList<>());
 				}
-				// 密级标识
+				// 보안 등급 표시
 				fileInfo_old.setObjectSecurityClearance(fileInfo.getObjectSecurityClearance());
 				emc.beginTransaction(FileInfo.class);
 				emc.check(fileInfo_old, CheckPersistType.all);

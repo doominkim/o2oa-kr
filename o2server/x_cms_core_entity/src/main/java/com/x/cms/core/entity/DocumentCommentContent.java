@@ -20,9 +20,9 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 信息评论内容表
+ * 정보 댓글 내용 테이블
  */
-@Schema(name = "DocumentCommentCommend", description = "内容管理文档评论内容.")
+@Schema(name = "DocumentCommentCommend", description = "콘텐츠 관리 문서 댓글 내용.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.DocumentCommentContent.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class DocumentCommentContent extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -54,21 +54,21 @@ public class DocumentCommentContent extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String content_FIELDNAME = "content";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("内容")
+	@FieldDescribe("내용")
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + content_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String content = "";

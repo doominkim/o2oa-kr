@@ -37,7 +37,7 @@
       <BaseSelect :label="lp._integrationConfig.mpweixinText.portalId" v-model:value="mPweixinData.portalId"
                   :label-style="labelStyle" :options="portalList"></BaseSelect>
       <div class="item_el_info">{{lp._integrationConfig.mpweixinText.portalIdInfo}}</div>
-      <!--   绑定用户地址   -->
+      <!--   사용자 연결 주소   -->
       <div class="item">
         <label class="item_label" :style="labelStyle">{{lp._integrationConfig.mpweixinText.copyUrl}}</label>
         <div class="item_input_area">

@@ -14,7 +14,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindQuery;
 import com.x.mind.entity.MindBaseInfo;
 
 /**
- * 删除脑图信息
+ * 마인드맵 정보 삭제
  * @author O2LEE
  *
  */
@@ -34,7 +34,7 @@ public class ActionMindDestroyFromNormal extends BaseAction {
 				mindBaseInfo = mindInfoService.getMindBaseInfo(mindId);
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e,  "系统在根据ID查询脑图信息时发生异常。", mindId );
+				Exception exception = new ExceptionMindQuery( e,  "ID로 마인드맵 정보를 조회하는 중 오류가 발생했습니다.", mindId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

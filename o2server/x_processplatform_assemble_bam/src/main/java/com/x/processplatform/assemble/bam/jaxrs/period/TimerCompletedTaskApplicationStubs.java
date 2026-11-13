@@ -86,7 +86,7 @@ public class TimerCompletedTaskApplicationStubs extends BaseAction {
 
 	private ProcessStubs concreteProcessStubs(Business business, DateRange dateRange, ApplicationStub applicationStub)
 			throws Exception {
-		/* 所有属于applicationId的processId总和 */
+		/* applicationId에 속한 모든 processId 합계 */
 		Set<String> ids = new HashSet<>();
 		ids.addAll(this.listProcessFromTaskCompleted(business, dateRange, applicationStub));
 		List<ProcessStub> list = new ArrayList<>();

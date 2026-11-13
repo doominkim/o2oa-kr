@@ -27,7 +27,7 @@ class ActionBatchDownload extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
-			logger.debug("附件列表：{}#目录列表:{}",attIds,folderIds);
+			logger.debug("첨부파일 목록: {}#디렉터리 목록: {}",attIds,folderIds);
 			List<Attachment2> attList = new ArrayList<>();
 			if(attIds!=null && !attIds.isEmpty()){
 				List<Attachment2> atts = emc.list(Attachment2.class, attIds);

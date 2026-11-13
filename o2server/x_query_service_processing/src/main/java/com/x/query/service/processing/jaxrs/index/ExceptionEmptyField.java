@@ -7,7 +7,7 @@ class ExceptionEmptyField extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionEmptyField(String name) {
-		super("字段不能为空:{}.", name);
+		super("필드는 비워 둘 수 없습니다: {}.", name);
 	}
 
 }

@@ -17,7 +17,7 @@ public class WoText extends WoMaxAgeFastETag {
 	@FieldDescribe("text")
 	private String text;
 
-	@FieldDescribe("返回Content_Type")
+	@FieldDescribe("Content_Type 반환")
 	private String contentType;
 
 	public String getContentType() {

@@ -33,7 +33,7 @@ public class ParallelProcessor extends AbstractParallelProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Parallel parallel) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.parallelArrive(aeiObjects.getWork().getActivityToken(), parallel));
 		LOGGER.info(
@@ -51,7 +51,7 @@ public class ParallelProcessor extends AbstractParallelProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Parallel parallel) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.parallelExecute(aeiObjects.getWork().getActivityToken(), parallel));
 		List<Work> results = new ArrayList<>();
@@ -59,8 +59,8 @@ public class ParallelProcessor extends AbstractParallelProcessor {
 		aeiObjects.getWork().setSplitToken(StringTools.uniqueToken());
 		aeiObjects.getWork().getSplitTokenList().add(aeiObjects.getWork().getSplitToken());
 		/*
-		 * 并行拆分不影响 <code>splitValue aeiObjects.getWork().setSplitValue("");</code>
-		 * 新创建并行Work需要单独的workLog,拷贝当前的WorkLog
+		 * 병렬 분할은 영향 없음 <code>splitValue aeiObjects.getWork().setSplitValue("");</code>
+		 * 새로 생성된 병렬 Work는 별도 workLog 필요, 현재 WorkLog 복사
 		 */
 		WorkLog mainWorkLog = aeiObjects.getWorkLogs().stream()
 				.filter(o -> StringUtils.equals(aeiObjects.getWork().getId(), o.getWork())
@@ -75,7 +75,7 @@ public class ParallelProcessor extends AbstractParallelProcessor {
 		}
 
 		List<Route> routes = new ArrayList<>();
-		/* 多条路由进行判断 */
+		/* 다중 라우팅 판단 */
 		for (Route o : aeiObjects.getRoutes()) {
 			Source source = aeiObjects.business().element().getCompiledScript(aeiObjects.getWork().getApplication(), o,
 					Business.EVENT_ROUTE);
@@ -95,7 +95,7 @@ public class ParallelProcessor extends AbstractParallelProcessor {
 				Work work = new Work(aeiObjects.getWork());
 				work.setDestinationRoute(route.getId());
 				work.setDestinationRouteName(route.getName());
-				// 创建新的Token
+				// 새 Token 생성
 				WorkLog workLog = new WorkLog(mainWorkLog);
 				workLog.setWork(work.getId());
 				aeiObjects.getCreateWorks().add(work);
@@ -113,7 +113,7 @@ public class ParallelProcessor extends AbstractParallelProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Parallel parallel) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.parallelInquire(aeiObjects.getWork().getActivityToken(), parallel));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
@@ -125,9 +125,9 @@ public class ParallelProcessor extends AbstractParallelProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

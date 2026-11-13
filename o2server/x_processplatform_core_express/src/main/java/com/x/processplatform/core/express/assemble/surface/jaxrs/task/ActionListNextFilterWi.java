@@ -12,32 +12,32 @@ public class ActionListNextFilterWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -2850154502385336790L;
 
-	@FieldDescribe("应用标识.")
-	@Schema(description = "应用标识.")
+	@FieldDescribe("앱 식별자.")
+	@Schema(description = "앱 식별자.")
 	private List<String> applicationList;
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList;
 
-	@FieldDescribe("是否查找同版本流程数据:true(默认查找)|false")
-	@Schema(description = "是否查找同版本流程数据:true(默认查找)|false")
+	@FieldDescribe("같은 버전 프로세스 데이터 조회 여부: true(기본값, 조회)|false")
+	@Schema(description = "같은 버전 프로세스 데이터 조회 여부: true(기본값, 조회)|false")
 	private Boolean relateEditionProcess = true;
 
-	@FieldDescribe("活动名称")
-	@Schema(description = "活动名称")
+	@FieldDescribe("활동 이름")
+	@Schema(description = "활동 이름")
 	private List<String> activityNameList;
 
-	@FieldDescribe("创建工作身份所属组织.")
-	@Schema(description = "创建工作身份所属组织.")
+	@FieldDescribe("업무 문서 생성 신분의 소속 조직.")
+	@Schema(description = "업무 문서 생성 신분의 소속 조직.")
 	private List<String> creatorUnitList;
 
-	@FieldDescribe("开始年月,格式为文本格式 yyyy-MM")
-	@Schema(description = "开始年月,格式为文本格式 yyyy-MM")
+	@FieldDescribe("시작 연월, 텍스트 형식 yyyy-MM")
+	@Schema(description = "시작 연월, 텍스트 형식 yyyy-MM")
 	private List<String> startTimeMonthList;
 
-	@FieldDescribe("搜索关键字,搜索范围为:标题,意见,文号,创建人,创建部门.")
-	@Schema(description = "搜索关键字,搜索范围为:标题,意见,文号,创建人,创建部门.")
+	@FieldDescribe("검색 키워드, 검색 범위:제목, 의견, 문서번호, 생성자, 생성 부서.")
+	@Schema(description = "검색 키워드, 검색 범위:제목, 의견, 문서번호, 생성자, 생성 부서.")
 	private String key;
 
 	public List<String> getApplicationList() {

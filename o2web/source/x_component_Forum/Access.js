@@ -5,19 +5,19 @@ MWF.xApplication.Forum.PermissionInfoList = [];
 MWF.xApplication.Forum.isBBSSystemAdmin = false;
 
 MWF.xApplication.Forum.Access = new Class({
-    //SECTION_SUBJECT_MANAGEMENT_  主题管理
-    //SECTION_REPLY_MANAGEMENT_  回帖管理
-    //SECTION_SECTION_MANAGER_ 子板块增删改
-    //SECTION_PERMISSION_MANAGEMENT_ 权限管理
-    //SECTION_CONFIG_MANAGEMENT_ 参数配置
-    //"SECTION_GUEST_"; //查看范围
-    //"SECTION_SUBJECT_PUBLISHER_"; //发帖范围
-    //"SECTION_SUBJECT_AUDITOR_"; //发帖审核
-    //"SECTION_REPLY_PUBLISHER_"; //回复范围
-    //"SECTION_REPLY_AUDITOR_"; //回复审核
-    //"SECTION_RECOMMENDER_"; //推荐
-    //"SECTION_SUBJECT_STICK_"; //置顶
-    //"SECTION_SUBJECT_CREAM_"; //精华
+    //SECTION_SUBJECT_MANAGEMENT_  주제 관리
+    //SECTION_REPLY_MANAGEMENT_  답글 관리
+    //SECTION_SECTION_MANAGER_ 하위 게시판 추가·삭제·수정
+    //SECTION_PERMISSION_MANAGEMENT_ 권한 관리
+    //SECTION_CONFIG_MANAGEMENT_ 매개변수 설정
+    //"SECTION_GUEST_"; //열람 범위
+    //"SECTION_SUBJECT_PUBLISHER_"; //게시 범위
+    //"SECTION_SUBJECT_AUDITOR_"; //게시글 검토
+    //"SECTION_REPLY_PUBLISHER_"; //답글 범위
+    //"SECTION_REPLY_AUDITOR_"; //답글 검토
+    //"SECTION_RECOMMENDER_"; //추천
+    //"SECTION_SUBJECT_STICK_"; //상단 고정
+    //"SECTION_SUBJECT_CREAM_"; //추천글
     initialize: function ( actions, lp, userName ) {
         this.actions = actions;
         this.lp = lp;
@@ -126,7 +126,7 @@ MWF.xApplication.Forum.Access = new Class({
                 //if( data.sectionVisible == this.lp.allPerson && data.indexRecommendable == true ){
                 if( MWF.xApplication.Forum.RoleInfoList.indexOf( "SECTION_RECOMMENDER_" + data.id ) != -1 ){
                     flag = true
-                }else if( this.hasSectionAdminAuthority( data, null, null, false ) ){ //如果是管理员
+                }else if( this.hasSectionAdminAuthority( data, null, null, false ) ){ //관리자인 경우
                     flag = true;
                 }
                 //}
@@ -136,7 +136,7 @@ MWF.xApplication.Forum.Access = new Class({
             //if( data.sectionVisible == this.lp.allPerson && data.indexRecommendable == true ){
             if( MWF.xApplication.Forum.RoleInfoList.indexOf( "SECTION_RECOMMENDER_" + data.id ) != -1 ){
                 flag = true
-            }else if( this.hasSectionAdminAuthority( data, null, null, false ) ){ //如果是管理员
+            }else if( this.hasSectionAdminAuthority( data, null, null, false ) ){ //관리자인 경우
                 flag = true;
             }
             //}
@@ -208,14 +208,14 @@ MWF.xApplication.Forum.Access = new Class({
             if( callback )callback( forumIdOrData );
         }
     },
-    isForumManager : function( forumIdOrData, callback, username, async ){  //是否分区管理员
+    isForumManager : function( forumIdOrData, callback, username, async ){  //구역 관리자 여부
         var flag = false;
         this.getCategoryData( forumIdOrData, function( forumData ){
             flag = this.inArray( forumData.forumManagerName , callback, username );
         }.bind(this) );
         return flag;
     },
-    isSectionManager : function( sectionIdOrData , callback, username , async){  //是否板块管理员
+    isSectionManager : function( sectionIdOrData , callback, username , async){  //게시판 관리자 여부
         var flag = false;
         if( typeOf( sectionIdOrData ) == "string" ){
             this.actions.getSection( sectionIdOrData, function( json ){
@@ -226,7 +226,7 @@ MWF.xApplication.Forum.Access = new Class({
         }
         return flag;
     },
-    hasForumAdminAuthority  : function( forumIdOrData, callback, username, async ) { //具有分区管理权限
+    hasForumAdminAuthority  : function( forumIdOrData, callback, username, async ) { //구역 관리 권한 보유
         if (!username && this.isAdmin()){
             if( callback )callback( true );
             return true;
@@ -237,7 +237,7 @@ MWF.xApplication.Forum.Access = new Class({
         }.bind(this), username , async);
         return flag;
     },
-    hasSectionAdminAuthority : function( sectionIdOrData , callback, username, async ){ //具有板块管理权限
+    hasSectionAdminAuthority : function( sectionIdOrData , callback, username, async ){ //게시판 관리 권한 보유
         if (!username && this.isAdmin()) {
             if (callback)callback(true);
             return true;

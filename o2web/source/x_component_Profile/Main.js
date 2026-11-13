@@ -479,7 +479,7 @@ MWF.xApplication.Profile.Main = new Class({
                 this.notice( this.lp.empower.alert2 ,"error");
             }
         }.bind(this));
-        //撤回按钮
+        //회수 버튼
         this.tabEmpower.tabNodeContainerArea.getElements(".o2_profile_emPower_WithDraw").addEvent("click",function(){
             // var checkElement = this.emPowerTable.getElements("input[name=id]:checked");
             var checkElement = this.tabEmpower.showPage.contentNode.getElements("td input[name=id]:checked")
@@ -491,7 +491,7 @@ MWF.xApplication.Profile.Main = new Class({
                     }
                     item.getParent().getParent().getParent().destroy();
                 }.bind(this),null,false);
-                /*enable为false时无法再次委托相同内容，又因为目前没做授权的编辑，所以撤回直接调用delete接口
+                /*enable이 false이면 같은 내용을 다시 위임할 수 없고, 현재 위임 편집 기능이 없으므로 회수 시 delete 인터페이스를 직접 호출
                 var idata = this.emPowerData[item.get("value")];
                 idata.enable = false;
                 this.action.editEmPower(item.get("value"),idata,function(json){
@@ -723,11 +723,11 @@ MWF.xApplication.Profile.Main = new Class({
                 tds.push(td.cloneNode().adopt(new Element("div",{name:"typeName",text:item.applicationName||item.processName||(item.type=='filter'?JSON.parse(item.filterListData)[0].value:"-")})));
                 tds.push(td.cloneNode().adopt(new Element("div",{name:"startTime",text:item.startTime})));
                 tds.push(td.cloneNode().adopt(new Element("div",{name:"completedTime",text:item.completedTime})));
-                //后续添加编辑/删除/撤回按钮
+                //추후 편집/삭제/회수 버튼 추가
                 var _self = this;
 
                 if(type=="myEmPower"){
-                    //启用、禁用按钮
+                    //사용, 사용 안 함 버튼
                     var endTime = new Date(item.completedTime);
                     var startTime= new Date(item.startTime);
                     var nowTime = new Date();
@@ -1050,7 +1050,7 @@ MWF.xApplication.Profile.Main = new Class({
 
         var nickName = this.nickNameInputNode.get("value");
         if( nickName && nickName.trim() && !this.checkNickName( nickName ) ){
-            //不包含特殊字符
+            //특수 문자 미포함
             this.notice(this.lp.nickNameInforError, "error");
             return false;
         }
@@ -1068,7 +1068,7 @@ MWF.xApplication.Profile.Main = new Class({
 
         this.action.updatePerson(this.personData, function(){
             if( oldNickName !== this.personData.nickName ){
-                //通知论坛昵称修改了
+                //포럼 닉네임 변경 알림
                 o2.Actions.load("x_bbs_assemble_control").UserInfoAction.updateNickName( this.personData.distinguishedName );
             }
             this.notice(this.lp.saveInforOk, "success");
@@ -1175,7 +1175,7 @@ MWF.xApplication.Profile.Main = new Class({
     //     this.highTextNode = new Element( "div", {styles : this.css.passwordStrengthText, text : this.lp.high }).inject( highNode );
     // },
     getPasswordLevel: function( password, callback ){
-        /*Level（级别）
+        /*Level(등급)
          •0-3 : [easy]
          •4-6 : [midium]
          •7-9 : [strong]
@@ -1193,9 +1193,9 @@ MWF.xApplication.Profile.Main = new Class({
             return false;
         var sum = 0;
         /*
-        5 分: 小于 8 个字符
-        10 分: 8 到 10 个字符
-        25 分: 大于 10 个字符
+        5점: 8자 미만
+        10점: 8~10자
+        25점: 10자 초과
         */
         if(pwd.length<8){
             sum += 5;
@@ -1205,9 +1205,9 @@ MWF.xApplication.Profile.Main = new Class({
             sum += 25;
         }
         /*
-        0 分: 没有字母
-        10 分: 全都是小（大）写字母
-        25 分: 大小写混合字母
+        0점: 영문자 없음
+        10점: 모두 소문자(대문자)
+        25점: 대소문자 혼합
         */
         var lowerReg = /[a-z]/;
         var uperReg = /[A-Z]/;
@@ -1219,9 +1219,9 @@ MWF.xApplication.Profile.Main = new Class({
             sum += 10;
         }
         /*
-        0 分: 没有数字
-        10 分: 1或2个数字
-        20 分: 大于 2 个数字
+        0점: 숫자 없음
+        10점: 숫자 1~2개
+        20점: 숫자 2개 초과
         */
         var numReg = /[0-9]/;
         var langReg = /[0-9]{3,}/;
@@ -1303,7 +1303,7 @@ MWF.xApplication.Profile.Main = new Class({
     }
 });
 
-/*----2019年8月30日---外出授权---表单*/
+/*----2019년 8월 30일---외출 위임---양식*/
 MWF.xDesktop.requireApp("Template", "MPopupForm", null, false);
 MWF.xApplication.Profile.emPowerPopupForm = new Class({
     Extends : MPopupForm,
@@ -1329,7 +1329,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
         }
     },
     load: function () {
-        //重新指定css文件，由于临时用，所以尽可能写一个文件里
+        //css 파일 재지정, 임시 용도이므로 가능한 한 파일 하나에 작성
         this.cssPath = "../x_component_Profile/$Main/"+this.options.style+"/css.wcss";
         this._loadCss();
 
@@ -1434,7 +1434,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
                     type: {
                         text: this.lp.type, type: "radio",
                         selectText: [this.lp.type_all, this.lp.type_application, this.lp.type_process],
-                        //selectText: ["全部", "应用", "流程"],
+                        //selectText: ["전체", "앱", "프로세스"],
                         selectValue: ["all", "application", "process"],
                         defaultValue: this.data.type||"all",
                         event :{
@@ -1454,7 +1454,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
                     }
                 },
                 onPostLoad:function(){
-                    /*样式重构*/
+                    /*스타일 리팩터링*/
                     this.formTableArea.getElements("td[item=type] div").forEach(function(item){
                         var labelRadio = new Element("label.o2_profile_empower_radio"+(item.getElement("input").get("checked")?".o2_profile_empower_radio__checked.o2_profile_empower_radio_checked":"")).adopt(item.getElement("input")).addEvent("click",function(){
 
@@ -1470,7 +1470,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
 
 
         }.bind(this));
-        /*重构单选框样式
+        /*라디오 버튼 스타일 리팩터링
         * */
 
 
@@ -1493,7 +1493,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
         this.showApplicationNode = new Element("div.showNode", {
             width: "200",
             height: "30",
-            // text: "选择应用"
+            // text: "앱 선택"
         }).inject(this.applicationNode).setStyles(this.css.showNode);
         this.createApplicationSelect(this.showApplicationNode,this.selectApplicationNode,"Application");
         this.processNode = this.formTableArea.getElement("td[item=process]");
@@ -1505,7 +1505,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
         this.showProcessNode = new Element("div.showNode", {
             width: "200",
             height: "30",
-            //text: "选择流程"
+            //text: "프로세스 선택"
         }).inject(this.processNode).setStyles(this.css.showNode);
         this.createApplicationSelect(this.showProcessNode,this.selectProcessNode,"Process");
 
@@ -1524,11 +1524,11 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
         }.bind(this))
     },
     __ok: function (data, callback) {
-        //data 是表单的数据， callback 是正确的回调
+        //data는 양식 데이터, callback은 성공 콜백
         //data.
 
         var submitData = [];
-        //数据处理
+        //데이터 처리
         var sdata = {};
         sdata.fromIdentity = data.fromIdentity;
         sdata.fromPerson = data.fromPerson;
@@ -1654,7 +1654,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
     },
     getHtml : function(){
         return  "<table width='100%' bordr='0' cellpadding='0' cellspacing='0' styles='formTable' id='empowerEditTable'>" +
-            //"<tr><td colspan='2' styles='formTableHead'>申诉处理单</td></tr>" +
+            //"<tr><td colspan='2' styles='formTableHead'>이의 신청 처리서</td></tr>" +
 
             "<tr style='display:"+ (this.userIdentityList.length>1?"":"none")+"'><td styles='formTableTitleRight' lable='fromPerson'></td>" +
             "    <td styles='formTableValue' colspan='2'>" +

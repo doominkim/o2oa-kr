@@ -35,13 +35,13 @@ public class Runtime extends GsonPropertyObject {
                     PARAMETER_UNITALLLIST, PARAMETER_GROUPLIST, PARAMETER_ROLELIST));
 
     public static final String filterList_FIELDNAME = "filterList";
-    @FieldDescribe("过滤条件.")
-    @FieldTypeDescribe(fieldType = "class", fieldTypeName = "com.x.query.core.express.plan.FilterEntry", fieldValue = "{\"logic\": \"and\", \"path\": \"o.name\", \"comparison\": \"equals\", \"value\": \"name\", \"formatType\": \"textValue\"}", fieldSample = "{\"logic\":\"逻辑运算:and\",\"path\":\"data数据的路径:o.title\",\"comparison\":\"比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo\","
+    @FieldDescribe("필터 조건.")
+    @FieldTypeDescribe(fieldType = "class", fieldTypeName = "com.x.query.core.express.plan.FilterEntry", fieldValue = "{\"logic\": \"and\", \"path\": \"o.name\", \"comparison\": \"equals\", \"value\": \"name\", \"formatType\": \"textValue\"}", fieldSample = "{\"logic\":\"논리 연산:and\",\"path\":\"data 데이터 경로:o.title\",\"comparison\":\"비교 연산자:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo\","
             + "\"value\":\"7月\",\"formatType\":\"textValue|numberValue|dateTimeValue|booleanValue\"}")
     public List<FilterEntry> filterList = new ArrayList<>();
 
     public static final String parameter_FIELDNAME = "parameter";
-    @FieldDescribe("参数.")
+    @FieldDescribe("매개변수.")
     public Map<String, Object> parameter = new HashMap<>();
 
     public Map<String, Object> getParameter() {

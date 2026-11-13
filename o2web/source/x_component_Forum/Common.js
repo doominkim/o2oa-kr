@@ -12,8 +12,8 @@ MWFForum.getDateDiff = function (publishTime, justNowStr) {
     var now = new Date().getTime();
     var diffValue = now - dateTimeStamp;
     if (diffValue < 0) {
-        //若日期不符则弹出窗口告之
-        //alert("结束日期不能小于开始日期！");
+        //날짜가 맞지 않으면 팝업으로 알림
+        //alert("종료 날짜는 시작 날짜보다 이전일 수 없습니다!");
     }
     var yesterday = new Date().decrement('day', 1);
     var beforYesterday = new Date().decrement('day', 2);
@@ -30,8 +30,8 @@ MWFForum.getDateDiff = function (publishTime, justNowStr) {
     } else if (yearC > 1) {
         result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
     } else if (monthC >= 1) {
-        //result= parseInt(monthC) + "个月前";
-        // s.getFullYear()+"年";
+        //result= parseInt(monthC) + "개월 전";
+        // s.getFullYear()+"년";
         result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
     } else if (weekC >= 1) {
         result = parseInt(weekC) + MWF.xApplication.Forum.LP.weekAgo;
@@ -68,8 +68,8 @@ MWFForum.isSubjectMuted = function( usecache ){
         debugger;
         // json.data = {
         //     "id": "a13843ac-0700-4a94-b7d9-a85e6fca131b",
-        //     "operator": "蔡祥熠@cxy@P",
-        //     "person": "龚新民@91eed25b-8891-4ba6-b234-a70ed97c42ae@P",
+        //     "operator": "홍길동@cxy@P",
+        //     "person": "김철수@91eed25b-8891-4ba6-b234-a70ed97c42ae@P",
         //     "unmuteDate": "2022-05-25",
         //     "reason": "888",
         //     "createTime": "2022-05-24 16:09:48",

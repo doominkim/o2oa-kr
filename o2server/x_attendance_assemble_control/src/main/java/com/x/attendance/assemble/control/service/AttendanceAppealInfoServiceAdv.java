@@ -67,7 +67,7 @@ public class AttendanceAppealInfoServiceAdv {
 	}
 
 	/**
-	 * 根据打卡信息以及系统相关配置，获取申诉信息处理人
+	 * 체크 정보와 시스템 관련 설정으로 소명 정보 처리자 조회
 	 * @param personName
 	 * @param personUnitName
 	 * @param identity
@@ -76,16 +76,16 @@ public class AttendanceAppealInfoServiceAdv {
 	 */
 	public String getAppealAuditPerson( String personName, String personUnitName, String identity ) throws Exception {
 		/**
-		 * 系统配置 APPEAL_AUDITOR_TYPE 有三种值：
-		 * 1、指定人 
-		 * 2、人员属性
-		 * 3、所属部门职位
-		 * 根据相关的配置来获取申诉处理人
+		 * 시스템 설정 APPEAL_AUDITOR_TYPE은 세 가지 값을 가짐:
+		 * 1. 지정 사용자 
+		 * 2. 사용자 속성
+		 * 3. 소속 부서 직위
+		 * 관련 설정으로 소명 처리자 조회
 		 */
 		AttendanceSetting attendanceSetting  = null;
 		String appeal_auditor_type = null;
 		String appeal_auditor_value = null;
-		//1、先获取系统配置 APPEAL_AUDITOR_TYPE
+		//1. 먼저 시스템 설정 APPEAL_AUDITOR_TYPE 조회
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			attendanceSetting = attendanceSettingService.getByCode( emc, "APPEAL_AUDITOR_TYPE" );
 			if( attendanceSetting != null ) {
@@ -102,7 +102,7 @@ public class AttendanceAppealInfoServiceAdv {
 	}
 
 	/**
-	 * 根据打卡信息以及系统相关配置，获取申诉信息复核人
+	 * 체크 정보와 시스템 관련 설정으로 소명 정보 재검토자 조회
 	 * @param personName
 	 * @param personUnitName
 	 * @param identity
@@ -111,16 +111,16 @@ public class AttendanceAppealInfoServiceAdv {
 	 */
 	public String getAppealCheckPerson( String personName, String personUnitName, String identity ) throws Exception {
 		/**
-		 * 系统配置 APPEAL_AUDITOR_TYPE 有三种值：
-		 * 1、指定人 
-		 * 2、人员属性
-		 * 3、所属部门职位
-		 * 根据相关的配置来获取申诉处理人
+		 * 시스템 설정 APPEAL_AUDITOR_TYPE은 세 가지 값을 가짐:
+		 * 1. 지정 사용자 
+		 * 2. 사용자 속성
+		 * 3. 소속 부서 직위
+		 * 관련 설정으로 소명 처리자 조회
 		 */
 		AttendanceSetting attendanceSetting  = null;
 		String appeal_checker_type = null;
 		String appeal_checker_value = null;
-		//1、先获取系统配置 APPEAL_AUDITOR_TYPE
+		//1. 먼저 시스템 설정 APPEAL_AUDITOR_TYPE 조회
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			attendanceSetting = attendanceSettingService.getByCode( emc, "APPEAL_CHECKER_TYPE" );
 			if( attendanceSetting != null ) {
@@ -137,7 +137,7 @@ public class AttendanceAppealInfoServiceAdv {
 	}
 
 	/**
-	 * 根据打卡信息以及系统相关配置，获取申诉信息处理人
+	 * 체크 정보와 시스템 관련 설정으로 소명 정보 처리자 조회
 	 * @param personName
 	 * @param auditorType
 	 * @param auditorTypeValue
@@ -173,11 +173,11 @@ public class AttendanceAppealInfoServiceAdv {
 	}
 	
 	/**
-	 * 获取指定人员所属组织的职位
-	 * @param personName  考勤人员
-	 * @param dutyName 职位名称
-	 * @param personUnitName 考勤人员所属组织
-	 * @param identity  考勤人员可选身份
+	 * 지정한 사용자 소속 조직의 직위 조회
+	 * @param personName  근태 대상 사용자
+	 * @param dutyName 직위 이름
+	 * @param personUnitName 근태 대상 사용자 소속 조직
+	 * @param identity  근태 대상 사용자 선택 가능 신분
 	 * @return
 	 * @throws Exception
 	 */
@@ -207,7 +207,7 @@ public class AttendanceAppealInfoServiceAdv {
 	}
 
 	/**
-	 * 获取指定人员的汇报对象
+	 * 지정한 사용자의 보고 대상 조회
 	 * @param personName
 	 * @return
 	 * @throws Exception 
@@ -217,7 +217,7 @@ public class AttendanceAppealInfoServiceAdv {
 	}
 
 	/**
-	 * 获取指定人员的个人属性
+	 * 지정한 사용자의 개인 속성 조회
 	 * @param personName
 	 * @param attributeName
 	 * @return
@@ -239,7 +239,7 @@ public class AttendanceAppealInfoServiceAdv {
 	 * @param processor
 	 * @param processTime
 	 * @param opinion
-	 * @param status // 申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过
+	 * @param status // 소명 상태: 0-미소명, 1-소명 중, -1-소명 반려, 9-소명 승인
 	 * @return
 	 * @throws Exception
 	 */
@@ -247,7 +247,7 @@ public class AttendanceAppealInfoServiceAdv {
 		AttendanceAppealAuditInfo attendanceAppealAuditInfo = null;
 		AttendanceAppealInfo attendanceAppealInfo = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//修改申诉信息状态和处理过程信息
+			//소명 정보 상태와 처리 과정 정보 수정
 			emc.beginTransaction( AttendanceAppealAuditInfo.class );
 			emc.beginTransaction( AttendanceAppealInfo.class );
 			emc.beginTransaction( AttendanceDetail.class );
@@ -258,8 +258,8 @@ public class AttendanceAppealInfoServiceAdv {
 					attendanceAppealInfo.setCurrentProcessor( null );
 					attendanceDetailService.updateAppealProcessStatus( emc, id, 9, false );
 					attendanceNoticeService.notifyAttendanceAppealAcceptMessage( attendanceAppealInfo, attendanceAppealInfo.getEmpName() );
-				} else if ( status == 2 ) {// 如果需要继续第二级审批
-					//判断是否存在用户的复核人信息
+				} else if ( status == 2 ) {// 2차 승인을 계속해야 하는 경우
+					//사용자의 재검토자 정보가 있는지 판단
 					if( attendanceAppealAuditInfo.getProcessPerson2() == null || attendanceAppealAuditInfo.getProcessPerson2().isEmpty() ) {
 						attendanceDetailService.updateAppealProcessStatus( emc, id, 1, false );
 						attendanceAppealAuditInfo.setCurrentProcessor( attendanceAppealAuditInfo.getProcessPerson2() );
@@ -268,7 +268,7 @@ public class AttendanceAppealInfoServiceAdv {
 						emc.check( attendanceAppealAuditInfo, CheckPersistType.all );
 						attendanceNoticeService.notifyAttendanceAppealProcessness2Message( attendanceAppealInfo );
 					}
-				} else {// 如果审批不通过
+				} else {// 승인되지 않은 경우
 					attendanceAppealInfo.setCurrentProcessor( null );
 					attendanceDetailService.updateAppealProcessStatus( emc, id, -1, false );
 					attendanceNoticeService.notifyAttendanceAppealRejectMessage( attendanceAppealInfo, attendanceAppealInfo.getEmpName());
@@ -289,7 +289,7 @@ public class AttendanceAppealInfoServiceAdv {
 	 * @param processor
 	 * @param processTime
 	 * @param opinion
-	 * @param status //申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过
+	 * @param status //소명 상태: 0-미소명, 1-소명 중, -1-소명 반려, 9-소명 승인
 	 * @return
 	 * @throws Exception
 	 */
@@ -298,7 +298,7 @@ public class AttendanceAppealInfoServiceAdv {
 		AttendanceAppealAuditInfo attendanceAppealAuditInfo = null;
 		AttendanceAppealInfo attendanceAppealInfo = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//修改申诉信息状态和处理过程信息
+			//소명 정보 상태와 처리 과정 정보 수정
 			emc.beginTransaction( AttendanceAppealAuditInfo.class );
 			emc.beginTransaction( AttendanceAppealInfo.class );
 			emc.beginTransaction( AttendanceDetail.class );
@@ -308,7 +308,7 @@ public class AttendanceAppealInfoServiceAdv {
 				if ( status == 1 ) {
 					attendanceDetailService.updateAppealProcessStatus( emc, id, 9, false );
 					attendanceNoticeService.notifyAttendanceAppealAcceptMessage( attendanceAppealInfo, attendanceAppealInfo.getEmpName() );
-				}else {// 如果审批不通过
+				}else {// 승인되지 않은 경우
 					attendanceDetailService.updateAppealProcessStatus( emc, id, -1, false );
 					attendanceNoticeService.notifyAttendanceAppealRejectMessage( attendanceAppealInfo, attendanceAppealInfo.getEmpName());
 				}
@@ -356,10 +356,10 @@ public class AttendanceAppealInfoServiceAdv {
 	}
 
 	/**
-	 * 根据人员姓名，默认组织名称，人员身份来确定一个组织名称
-	 * 首选，传入的身份名称
-	 * 第二，传入的组织名称
-	 * 最后，根据人员姓名选取一个组织名称
+	 * 사용자 이름, 기본 조직 이름, 사용자 신분으로 조직 이름 하나를 결정
+	 * 우선, 전달된 신분 이름
+	 * 둘째, 전달된 조직 이름
+	 * 마지막으로, 사용자 이름으로 조직 이름 하나를 선택
 	 * 
 	 * @param personName
 	 * @param unitName
@@ -369,12 +369,12 @@ public class AttendanceAppealInfoServiceAdv {
 	 */
 	public String getPersonUnitName( String personName, String unitName, String identity ) throws Exception {
 		if( identity != null && !identity.isEmpty() ) {
-			//根据身份去查询指定的组织
+			//신분으로 지정 조직 조회
 			return userManagerService.getUnitNameWithIdentity(identity);
 		}else if( unitName != null && !unitName.isEmpty() ) {
 			return unitName;
 		}else {
-			//根据人员去查询
+			//사용자로 조회
 			return userManagerService.getTopUnitNameWithPersonName( personName );
 		}
 	}
@@ -390,7 +390,7 @@ public class AttendanceAppealInfoServiceAdv {
 
 
 	/**
-	 * 申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过
+	 * 소명 상태: 0-미소명, 1-소명 중, -1-소명 반려, 9-소명 승인
 	 * @param attendanceAppealInfo
 	 * @param activityType
 	 * @param currentProcessor
@@ -409,7 +409,7 @@ public class AttendanceAppealInfoServiceAdv {
 			emc.beginTransaction( AttendanceDetail.class );
 
 			attendanceAppealInfo.setStatus(status);
-			if( StringUtils.equalsAnyIgnoreCase( "end", activityType )){//审核结束了
+			if( StringUtils.equalsAnyIgnoreCase( "end", activityType )){//심사 종료
 				attendanceAppealInfo.setCurrentProcessor( null );
 				attendanceAppealAuditInfo.setCurrentProcessor( null );
 			}else{

@@ -7,7 +7,7 @@ public class FileInfoProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 2260565650639079889L;
 
-	@FieldDescribe("名称")
+	@FieldDescribe("이름")
 	private String name;
 
 	public String getName() {

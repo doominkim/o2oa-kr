@@ -97,7 +97,7 @@ public class ReadCompletedFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 
-	/* 统计指定人员的已阅数量 */
+	/* 지정 사용자의 열람 완료 수 집계 */
 	public Long countWithPerson(String person) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(ReadCompleted.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -108,7 +108,7 @@ public class ReadCompletedFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 
-	/* 统计指定人员在指定应用的已阅数量 */
+	/* 지정 앱에서 지정 사용자의 열람 완료 수 집계 */
 	public Long countWithPersonApplication(String person, String application) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(ReadCompleted.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -35,14 +35,14 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 			List<String> list = new ArrayList<>();
 			String unique = this.getWeLinkId(message.getPerson());
 			if (StringUtils.isEmpty(unique)) {
-				LOGGER.error(new ExceptionWeLinkMessage("-1", "没有找到对应welink用户id"));
+				LOGGER.error(new ExceptionWeLinkMessage("-1", "해당 welink 사용자 id를 찾을 수 없음"));
 				return;
 			}
 			list.add(unique);
 			WeLinkMessage m = new WeLinkMessage();
 			m.setToUserList(list);
 			m.setMsgRange("0");
-			// 处理消息标题和内容
+			// 메시지 제목과 내용 처리
 			if (message.getTitle().contains(":")) {
 				int i = message.getTitle().indexOf(":");
 				m.setMsgTitle(message.getTitle().substring(0, i));
@@ -53,7 +53,7 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 			}
 			m.setMsgOwner(appOwnerByType(message.getType()));
 			m.setCreateTime(new Date().getTime() + "");
-			// 是否添加超链接
+			// 하이퍼링크 추가 여부
 			addHyperlink(message, m);
 			String address = Config.weLink().getOapiAddress() + "/messages/v3/send";
 			LOGGER.info("welink send url: {}" ,()-> address);
@@ -83,7 +83,7 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 		String value = "";
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
-			// openid 查询用户
+			// openid로 사용자 조회
 			Person person = business.message().getPersonWithCredential(credential);
 			if (null != person) {
 				value = person.getWeLinkId();
@@ -93,7 +93,7 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 标志消息消费成功
+	 * 메시지 소비 성공 표시
 	 * 
 	 * @param id
 	 * @throws Exception
@@ -111,18 +111,18 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 
 
 	/**
-	 * 判断打开地址
+	 * 열기 주소 판단
 	 *
 	 * @param message
 	 * @return
 	 */
 	private String getOpenUrl(Message message) {
 		String openUrl = "";
-		// cms 文档
+		// cms 문서
 		if (MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType())
 				|| MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType())) {
 			openUrl = getWeiLinkOpenCMSDocumentUrl(message.getBody());
-		} else { // 流程工作相关的
+		} else { // 프로세스 업무 문서 관련
 			openUrl = getWeiLinkOpenWorkUrl(message.getBody());
 		}
 		return openUrl;
@@ -130,7 +130,7 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 
 
 	/**
-	 * 文档打开的url
+	 * 문서를 여는 url
 	 *
 	 * @param messageBody
 	 * @return
@@ -147,7 +147,7 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 生成单点登录和打开工作的地址
+	 * SSO 및 업무 문서 열기 주소 생성
 	 * 
 	 * @param messageBody
 	 * @return
@@ -183,9 +183,9 @@ public class WelinkConsumeQueue extends AbstractQueue<Message> {
 
 
 	/**
-	 * 是否需要把钉钉消息转成markdown格式消息 根据是否配置了钉钉工作链接、是否是工作消息（目前只支持工作消息）
+	 * 딩톡 메시지를 markdown 형식 메시지로 변환할지 여부. 딩톡 업무 링크 설정 여부, 업무 메시지 여부에 따라 결정(현재 업무 메시지만 지원)
 	 * 
-	 * @param messageType 消息类型 判断是否是工作消息
+	 * @param messageType 메시지 유형. 업무 메시지 여부 판단
 	 * @return
 	 */
 	private boolean needTransferLink(String messageType) {

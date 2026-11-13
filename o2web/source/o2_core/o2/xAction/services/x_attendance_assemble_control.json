@@ -116,46 +116,46 @@ URL：x_attendance_assemble_control/jaxrs/attendancedetail/filter/list/{id}/prev
   "checkDetail" : {"uri" :"/jaxrs/attendancedetail/checkDetailWithPersonByCycle/{cycleYear}/{cycleMonth}"},
   //{'startDate':'2016-03-12','endDate':'2016-03-29'}
   "analyseDetail" : {"uri" :"/jaxrs/attendancedetail/analyse/{startDate}/{endDate}"},
-  //统计考勤记录,如果year或者month为(0)，那么会统计当年所有月份的数据
+  //근태 기록 통계, year 또는 month가 (0)이면 해당 연도 전체 월의 데이터를 통계
   "staticDetail" : {"uri" : "/jaxrs/statistic/do/{year}/{month}"},
 
   "staticAllDetail" : {"uri" : "/jaxrs/statistic/do"},
 
-  //每月个人考勤统计 Method： Servlet - GET Data： String name, String year, String month
+  //월별 개인 근태 통계 Method: Servlet - GET Data: String name, String year, String month
   "listStaticMonthPerson" : {"uri" :"/jaxrs/statisticshow/person/{name}/{year}/{month}"},
-  // 查询指定月份里每天部门考勤统计  Method： Servlet - GET Data： String name, String year, String month
+  // 지정 월의 일별 부서 근태 통계 조회  Method: Servlet - GET Data: String name, String year, String month
   "listStaticDayUnit" : {"uri" :"/jaxrs/statisticshow/unit/day/{name}/{year}/{month}"},
-  //  查询指定日期部门考勤统计  Method： Servlet - GET Data： String name, String year, String month
+  //  지정 날짜의 부서 근태 통계 조회  Method: Servlet - GET Data: String name, String year, String month
   "listStaticDateUnit" : {"uri" :"/jaxrs/statisticshow/unit/day/{name}/{date}"},
-  //每月部门考勤统计(如果查全年，month可以以(0)代替) GET Data： String name, String year, String month
+  //월별 부서 근태 통계(연간 조회 시 month는 (0)으로 대체 가능) GET Data: String name, String year, String month
   "listStaticMonthUnit" : {"uri" :"/jaxrs/statisticshow/unit/{name}/{year}/{month}"},
 
-  //每月部门及子部门考勤统计(如果查全年，month可以以(0)代替) GET Data： String name, String year, String month
+  //월별 부서 및 하위 부서 근태 통계(연간 조회 시 month는 (0)으로 대체 가능) GET Data: String name, String year, String month
   "listStaticMonthUnitSum" : {"uri" :"/jaxrs/statisticshow/unit/sum/{name}/{year}/{month}"},
 
-  //指定月份里每天公司考勤统计 Method： Servlet - GET Data： String name, String year, String month
+  //지정 월의 일별 회사 근태 통계 Method: Servlet - GET Data: String name, String year, String month
   "listStaticDayTopUnit" : {"uri" :"/jaxrs/statisticshow/topUnit/day/{name}/{year}/{month}"},
-  //每月公司考勤统计(如果查全年，month可以以(0)代替) - GET Data： String name, String year, String month
+  //월별 회사 근태 통계(연간 조회 시 month는 (0)으로 대체 가능) - GET Data: String name, String year, String month
   "listStaticMonthTopUnit" : {"uri" :"/jaxrs/statisticshow/topUnit/{name}/{year}/{month}"},
-  //查询部门里所有人员的月统计
+  //부서 내 전체 사용자의 월 통계 조회
   "listStaticMonthPersonByUnit" : {"uri":"/jaxrs/statisticshow/persons/unit/{name}/{year}/{month}"},
-  //查询部门及子部门的所有人员月统计
+  //부서 및 하위 부서의 전체 사용자 월 통계 조회
   "listStaticMonthPersonByUnitNested" : {"uri":"/jaxrs/statisticshow/persons/unit/subnested/{name}/{year}/{month}"},
 
-  //根据公司查询公司下所有部门的统计数据信息：
+  //회사 기준으로 회사 하위 전체 부서의 통계 데이터 정보 조회:
   "listUnitDateStaticByTopUnit" : {"uri":"/jaxrs/statisticshow/unit/day/topUnit/{name}/{date}"},
-  //根据公司查询公司下所有部门的统计数据信息：
+  //회사 기준으로 회사 하위 전체 부서의 통계 데이터 정보 조회:
   "listUnitMonthStaticByTopUnit" : {"uri":"/jaxrs/statisticshow/unit/topUnit/{name}/{year}/{month}"},
-  //根据部门查询部门下所有员工的统计数据信息：
+  //부서 기준으로 부서 하위 전체 직원의 통계 데이터 정보 조회:
   "listPersonMonthStaticByUnit" : {"uri":"/jaxrs/statisticshow/persons/unit/subnested/{name}/{year}/{month}"},
 
-  //发起申诉  { 'appealReason':'', 'appealDescription:'', 'processPerson1':'', 'processPerson2':''}
+  //이의 신청  { 'appealReason':'', 'appealDescription:'', 'processPerson1':'', 'processPerson2':''}
   "createAppeal" : {"uri":"/jaxrs/attendanceappealInfo/appeal/{detailId}","method" : "PUT"},
-  //第一次审批 ids(申诉ID列表)，opinion(审核意见)， status(审核状态:1-通过;2-需要进行复核;-1-不通过)
+  //1차 승인 ids(이의 신청 ID 목록), opinion(심사 의견), status(심사 상태:1-통과;2-재검토 필요;-1-불통과)
   "processAppeal" : {"uri":"/jaxrs/attendanceappealInfo/audit","method" :"PUT"},
-  //第二次审批 ids(申诉ID列表)，opinion(审核意见)， status(审核状态:1-通过;-1-不通过)
+  //2차 승인 ids(이의 신청 ID 목록), opinion(심사 의견), status(심사 상태:1-통과;-1-불통과)
   "process2Appeal" : {"uri":"/jaxrs/attendanceappealInfo/check ","method" :"PUT"},
-  //获取申诉记录
+  //이의 신청 기록 조회
   "getAppeal" :{"uri":"/jaxrs/attendanceappealInfo/{id}"},
   /*페이지 조회
    detailId:  출퇴근 체크 기록ID
@@ -178,13 +178,13 @@ URL：x_attendance_assemble_control/jaxrs/attendancedetail/filter/list/{id}/prev
   "saveWorkplace" : {"uri":"/jaxrs/workplace", "method": "POST"},
   "deleteWorkplace" : {"uri":"/jaxrs/workplace/{id}","method": "DELETE"},
 
-  //统计导出
+  //통계 내보내기
   "detailsExportStream" : {"uri" : "/jaxrs/file/export/filter/{q_topUnitName}/{q_unitName}/{q_empName}/{cycleYear}/{cycleMonth}/{q_date}/{isAbsent}/{isLackOfTime}/{isLate}/stream/{stream}", "method": "GET"},
-  //个人出勤率导出
+  //개인 출근율 내보내기
   "exportPersonStatisticAttachment" : {"uri":"/jaxrs/file/export/person/{name}/{year}/{month}/stream/{stream}", "method": "GET"},
-  //部门出勤率导出
+  //부서 출근율 내보내기
   "exportUnitStatisticAttachment" : {"uri":"/jaxrs/file/export/unit/{name}/{year}/{month}/stream/{stream}", "method": "GET"},
-  //公司出勤率导出
+  //회사 출근율 내보내기
   "exportTopUnitStatisticAttachment" : {"uri":"/jaxrs/file/export/topunit/{name}/{year}/{month}/stream/{stream}", "method": "GET"},
 
   "clazz": "x_attendance_assemble_control"

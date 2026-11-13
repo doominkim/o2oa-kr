@@ -7,7 +7,7 @@ import com.x.base.core.container.factory.EntityManagerContainerFactory;
 import com.x.base.core.project.http.EffectivePerson;
 import com.x.cms.core.entity.DocumentCommentInfo;
 /**
- * 对评论信息的持久化服务
+ * 댓글 정보 영속화 서비스
  *
  * @author O2LEE
  */
@@ -25,9 +25,9 @@ public class DocumentCommentInfoPersistService {
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			DocumentCommentInfo documentCommentInfo = documentCommentInfoService.get(emc, flag);
-			//管理员可以删除，创建者可以删除
+			//관리자와 작성자는 삭제 가능
 			if( !hasDeletePermission ) {
-				//看看是不是评论信息创建者
+				//댓글 정보 작성자인지 확인
 				if( documentCommentInfo.getCreatorName().equalsIgnoreCase( effectivePerson.getDistinguishedName() )) {
 					hasDeletePermission = true;
 				}
@@ -43,7 +43,7 @@ public class DocumentCommentInfoPersistService {
 	}
 
 	/**
-	 * 保存评论信息
+	 * 댓글 정보 저장
 	 * @param documentCommentInfo
 	 * @param effectivePerson
 	 * @return

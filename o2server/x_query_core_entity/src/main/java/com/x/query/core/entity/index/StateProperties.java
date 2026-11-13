@@ -10,7 +10,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public class StateProperties extends JsonProperties {
 
-    @FieldDescribe("最后更新对象标识.")
+    @FieldDescribe("최종 업데이트 객체 식별자.")
     @Transient
     private List<String> latestIdList = new ArrayList<>();
 

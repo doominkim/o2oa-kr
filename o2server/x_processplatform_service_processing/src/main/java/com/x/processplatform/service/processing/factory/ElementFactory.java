@@ -62,7 +62,7 @@ public class ElementFactory extends AbstractFactory {
 		super(business);
 	}
 
-	// 取得属于指定Process 的设计元素
+	// 지정 Process에 속한 설계 요소 조회
 	@SuppressWarnings("unchecked")
 	public <T extends JpaObject> List<T> listWithProcess(Class<T> clz, Process process) throws Exception {
 		List<T> list = new ArrayList<>();
@@ -78,7 +78,7 @@ public class ElementFactory extends AbstractFactory {
 				em.detach(t);
 				list.add(t);
 			}
-			// 将object改为unmodifiable
+			// object를 unmodifiable로 변경
 			list = Collections.unmodifiableList(list);
 			CacheManager.put(cacheCategory, cacheKey, list);
 		}
@@ -195,7 +195,7 @@ public class ElementFactory extends AbstractFactory {
 		}
 	}
 
-	// 用Process的updateTime作为缓存值
+	// Process의 updateTime을 캐시 값으로 사용
 	public Begin getBeginWithProcess(String id) throws Exception {
 		Begin begin = null;
 		CacheCategory cacheCategory = new CacheCategory(Begin.class);
@@ -342,7 +342,7 @@ public class ElementFactory extends AbstractFactory {
 
 	public List<Route> listRouteWithActvity(String id, ActivityType activityType) throws Exception {
 		List<Route> list = new ArrayList<>();
-		// 在执行beforeArrive时如果在begin环节设置了脚本,那么返回为空.需要单独判断段
+		// beforeArrive 실행 시 begin 단계에 스크립트를 설정했으면 빈 값 반환. 별도 판단 필요
 		if (null == activityType) {
 			return list;
 		}
@@ -816,7 +816,7 @@ public class ElementFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据活动节点查找合适的显示表单.
+	 * 활동 노드에 따라 적합한 표시 양식 조회.
 	 *
 	 * @param actvityId
 	 * @return

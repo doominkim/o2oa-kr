@@ -49,7 +49,7 @@ public class ActionDestroyWithMaster extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历事件信息时发生异常.ID:" + eventId );
+				Exception exception = new ExceptionEventProcess( e, "ID로 일정 정보를 조회하는 중 오류가 발생했습니다. ID:" + eventId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -66,7 +66,7 @@ public class ActionDestroyWithMaster extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + calendar_event.getCalendarId() );
+					Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + calendar_event.getCalendarId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -74,13 +74,13 @@ public class ActionDestroyWithMaster extends BaseAction {
 		}
 		
 		if( check && !ThisApplication.isCalendarSystemManager(effectivePerson) ) {
-			//判断用户权限
+			//사용자 권한 판단
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(personName);
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 				if( calendar != null ) {
 					if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
-							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//没权限
+							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 						check = false;
 						Exception exception = new ExceptionInsufficientPermissions( "您没有权限从日历中删除日程事件.日历:" + calendar.getName() );
 						result.error( exception );
@@ -88,14 +88,14 @@ public class ActionDestroyWithMaster extends BaseAction {
 				}				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
 		}
 		
 		if( check ){
-			//然后把repeatMaster删除, repeatMaster删除时会把该Master生成的所有事件全部删除
+			//그 다음 repeatMaster 삭제, repeatMaster 삭제 시 해당 Master가 생성한 모든 이벤트가 함께 삭제됨
 			try {
 				calendar_RepeatedMasterServiceAdv.destoryWithMasterId( calendar_event.getRepeatMasterId() );
 				Wo wo = new Wo();
@@ -103,7 +103,7 @@ public class ActionDestroyWithMaster extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据事件ID删除所有重复事件信息时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "일정 ID로 모든 반복 일정을 삭제하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

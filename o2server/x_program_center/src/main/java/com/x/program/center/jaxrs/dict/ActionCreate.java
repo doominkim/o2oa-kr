@@ -69,7 +69,7 @@ class ActionCreate extends BaseAction {
 		static WrapCopier<Wi, ApplicationDict> copier = WrapCopierFactory.wi(Wi.class, ApplicationDict.class, null,
 				ListTools.toList(JpaObject.FieldsUnmodifyExcludeId, ApplicationDict.project_FIELDNAME, ApplicationDict.application_FIELDNAME));
 
-		@FieldDescribe("字典数据(json格式).")
+		@FieldDescribe("사전 데이터(json 형식).")
 		private JsonElement data;
 
 		public JsonElement getData() {

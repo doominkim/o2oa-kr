@@ -303,7 +303,7 @@ MWF.xDesktop.Layout = new Class({
         };
         //this.loadSession();
         this.loadTop();
-        //this.loadNavi(); //@todo 暂时不要快速启动导航了
+        //this.loadNavi(); //@todo 빠른 실행 내비게이션 임시 사용 안 함
         this.loadLnkArea();
         this.setEvent();
         this.loadWidget();
@@ -2097,7 +2097,7 @@ MWF.xDesktop.Layout.Top = new Class({
 //		this.startMenu.load();
 //
 //		var icon = MWF.defaultPath+"/xDesktop/$Layout/"+this.layout.options.style+"/menu/find.png";
-//		this.startMenu.addMenuItem("查找", "click", function(){}.bind(this), icon);
+//		this.startMenu.addMenuItem("찾기", "click", function(){}.bind(this), icon);
 //
 //		this.startMenu.addMenuLine();
 //
@@ -2397,8 +2397,8 @@ MWF.xDesktop.Layout.Top = new Class({
     showDesktopMessage: function(){
         if (!this.layout.message.isShow){
 			// this.layout.message.addMessage({
-			// 	"subject": "测试消息",
-			// 	"content": "这是一个测试消息，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果，看看效果"
+			// 	"subject": "테스트 메시지",
+			// 	"content": "테스트 메시지입니다. 효과를 확인합니다. 효과를 확인합니다. 효과를 확인합니다. 효과를 확인합니다. 효과를 확인합니다. 효과를 확인합니다. 효과를 확인합니다. 효과를 확인합니다."
 			// });
             this.layout.message.show();
         }

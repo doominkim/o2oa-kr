@@ -20,18 +20,18 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("scriptversion")
-@JaxrsDescribe("脚本版本")
+@JaxrsDescribe("스크립트 버전")
 public class ScriptVersionAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ScriptVersionAction.class);
 
-	@JaxrsMethodDescribe(value = "根据脚本id获取历史版本列表.", action = ActionListWithScript.class)
+	@JaxrsMethodDescribe(value = "스크립트 id로 이력 버전 목록 조회.", action = ActionListWithScript.class)
 	@GET
 	@Path("list/script/{scriptId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithScript(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("script标识") @PathParam("scriptId") String scriptId) {
+			@JaxrsParameterDescribe("script 식별자") @PathParam("scriptId") String scriptId) {
 		ActionResult<List<ActionListWithScript.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -43,13 +43,13 @@ public class ScriptVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取脚本历史版本内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "스크립트 이력 버전 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

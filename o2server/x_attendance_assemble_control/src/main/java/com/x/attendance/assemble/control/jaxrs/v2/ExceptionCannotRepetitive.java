@@ -8,6 +8,6 @@ public class ExceptionCannotRepetitive extends PromptException {
 	private static final long serialVersionUID = -5833270743616112672L;
 
 	public ExceptionCannotRepetitive(String name) {
-		super(name + "不能重复.");
+		super(name + "중복될 수 없습니다.");
 	}
 }

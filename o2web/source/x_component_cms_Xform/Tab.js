@@ -15,7 +15,7 @@ MWF.xApplication.cms.Xform.tab$Content = MWF.CMSTab$Content = new Class({
 		}, null, function (moduleNodes, moduleJsons, modules) {
 			var hasSubModule = false;
 			(moduleJsons || []).each(function (json) {
-				//流程组件
+				//프로세스 컴포넌트
 				if( ( json.type === "Log" && json.logType ) || ["Sidebar","Monitor","ReadLog"].contains(json.type) ){
 				}else{
 					hasSubModule = true;

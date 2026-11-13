@@ -21,15 +21,15 @@ export default content({
         this.loadMyStatistic();
     },
     async loadMyStatistic() {
-        // 获取当前日期
+        // 현재 날짜 조회
         const today = new Date();
-        // 获取当前月份
+        // 현재 월 조회
         const currentMonth = today.getMonth();
-        // 获取当前年份
+        // 현재 연도 조회
         const currentYear = today.getFullYear();
         this.bind.year = currentYear;
         this.bind.month = (currentMonth + 1);
-        // 获取当月的天数
+        // 해당 월의 일수 조회
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
         const startDate = `${currentYear}-${(currentMonth + 1) < 10 ? "0" + (currentMonth + 1) : (currentMonth + 1)}-01`;
         const endDate = `${currentYear}-${(currentMonth + 1) < 10 ? "0" + (currentMonth + 1) : (currentMonth + 1)}-${daysInMonth}`;

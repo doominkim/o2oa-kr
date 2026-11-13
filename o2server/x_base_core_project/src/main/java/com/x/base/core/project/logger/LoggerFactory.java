@@ -12,7 +12,7 @@ public class LoggerFactory {
 	@Deprecated
 	/**
 	 * 
-	 * 此方法已经废弃没有任何用处,有部分custom模块编写时错误的使用了这个方法,作为兼容custom模块的空方法.
+	 * 이 메서드는 폐기되어 아무 용도가 없음, 일부 custom 모듈 작성 시 이 메서드를 잘못 사용하여 custom 모듈 호환용 빈 메서드로 둠.
 	 */
 	public static void setLevel(Object o) {
 		// nothing

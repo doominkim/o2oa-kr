@@ -8,19 +8,19 @@ public class WsMessage extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -3163827472907732223L;
 
-	@FieldDescribe("Ws消息类别.")
+	@FieldDescribe("Ws 메시지 분류.")
 	private String type;
 
-	@FieldDescribe("Ws消息说明.")
+	@FieldDescribe("Ws 메시지 설명.")
 	private String description;
 
-	@FieldDescribe("Ws消息接收人.")
+	@FieldDescribe("Ws 메시지 수신자.")
 	private String person;
 
-	@FieldDescribe("Ws消息标题.")
+	@FieldDescribe("Ws 메시지 제목.")
 	private String title;
 
-	@FieldDescribe("Ws消息内容.")
+	@FieldDescribe("Ws 메시지 내용.")
 	private JsonElement body;
 
 	public String getDescription() {

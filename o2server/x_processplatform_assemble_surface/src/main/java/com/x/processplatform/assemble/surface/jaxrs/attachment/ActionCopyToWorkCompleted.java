@@ -87,7 +87,7 @@ class ActionCopyToWorkCompleted extends BaseAction {
 
 		private static final long serialVersionUID = -455300115594765428L;
 
-		@FieldDescribe("附件对象列表.")
+		@FieldDescribe("첨부파일 객체 목록.")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment",
 				fieldValue = "{'id':'附件id','name':'附件名称','site':'附件框分类','copyFrom':'附件来源(cms|内容管理附件、processPlatform|流程平台附件、x_pan_assemble_control|企业网盘附件，默认为processPlatform)'}")
 		private List<WiAttachment> attachmentList = new ArrayList<>();

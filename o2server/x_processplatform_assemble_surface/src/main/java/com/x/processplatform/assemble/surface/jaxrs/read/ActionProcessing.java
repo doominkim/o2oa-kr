@@ -61,7 +61,7 @@ class ActionProcessing extends BaseAction {
 				}
 			}
 			emc.beginTransaction(Read.class);
-			/* 如果有新的流程意见那么覆盖原有流程意见 */
+			/* 새 프로세스 의견이 있으면 기존 의견을 덮어씀 */
 			if (StringUtils.isNotEmpty(wi.getOpinion())) {
 				read.setOpinion(wi.getOpinion());
 			}

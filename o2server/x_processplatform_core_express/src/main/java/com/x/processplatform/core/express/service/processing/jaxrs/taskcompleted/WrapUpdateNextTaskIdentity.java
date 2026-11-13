@@ -10,10 +10,10 @@ public class WrapUpdateNextTaskIdentity extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -597948505960097189L;
 
-	@FieldDescribe("后续环节待办人")
+	@FieldDescribe("후속 단계 결재 대기자")
 	private List<String> nextTaskIdentityList = new ArrayList<>();
 
-	@FieldDescribe("已办标识")
+	@FieldDescribe("처리 완료 식별자")
 	private List<String> taskCompletedList = new ArrayList<>();
 
 	public List<String> getNextTaskIdentityList() {

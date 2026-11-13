@@ -16,7 +16,7 @@ class ActionAccept extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Meeting meeting = emc.find(id, Meeting.class);
 			ActionResult<Wo> result = new ActionResult<>();
-			/* 在被邀请参加的人员之内 */
+			/* 초대받은 사용자에 포함 */
 			if (meeting.getInvitePersonList().contains(effectivePerson.getDistinguishedName())) {
 				emc.beginTransaction(Meeting.class);
 				ListTools.addWithProperty(meeting, "acceptPersonList", true, effectivePerson.getDistinguishedName());

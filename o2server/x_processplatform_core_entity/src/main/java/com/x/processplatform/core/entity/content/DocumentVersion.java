@@ -25,7 +25,7 @@ import com.x.processplatform.core.entity.element.ActivityType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "DocumentVersion", description = "流程平台版式文件版本.")
+@Schema(name = "DocumentVersion", description = "프로세스 플랫폼 서식 파일 버전.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.DocumentVersion.table, uniqueConstraints = {
@@ -47,56 +47,56 @@ public class DocumentVersion extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("任务.")
+	@FieldDescribe("작업.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("当前处理人")
+	@FieldDescribe("현재 처리자")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String category_FIELDNAME = "category";
-	@FieldDescribe("类别,一份work中允许有多个版式文件.")
+	@FieldDescribe("유형, 하나의 work에 여러 서식 파일 허용.")
 	@Column(length = length_255B, name = ColumnNamePrefix + category_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + category_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String category;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程.")
+	@FieldDescribe("프로세스.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("版式文件数据.")
+	@FieldDescribe("서식 파일 데이터.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
@@ -104,35 +104,35 @@ public class DocumentVersion extends SliceJpaObject {
 	private String data;
 
 	public static final String activity_FIELDNAME = "activity";
-	@FieldDescribe("活动ID.")
+	@FieldDescribe("활동 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activity_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String activity;
 
 	public static final String activityName_FIELDNAME = "activityName";
-	@FieldDescribe("活动名称.")
+	@FieldDescribe("활동 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityName;
 
 	public static final String activityAlias_FIELDNAME = "activityAlias";
-	@FieldDescribe("活动别名.")
+	@FieldDescribe("활동 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityAlias;
 
 	public static final String activityDescription_FIELDNAME = "activityDescription";
-	@FieldDescribe("活动说明.")
+	@FieldDescribe("활동 설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityDescription_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityDescription_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityDescription;
 
 	public static final String activityType_FIELDNAME = "activityType";
-	@FieldDescribe("活动类型.")
+	@FieldDescribe("활동 유형.")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + activityType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityType_FIELDNAME)
@@ -140,14 +140,14 @@ public class DocumentVersion extends SliceJpaObject {
 	private ActivityType activityType;
 
 	public static final String activityToken_FIELDNAME = "activityToken";
-	@FieldDescribe("活动Token.")
+	@FieldDescribe("활동 Token.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activityToken_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityToken_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String activityToken;
 
 	public static final String completed_FIELDNAME = "completed";
-	@FieldDescribe("整个job是否已经完成.")
+	@FieldDescribe("전체 job 완료 여부.")
 	@Column(name = ColumnNamePrefix + completed_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean completed;

@@ -56,7 +56,7 @@ public class StorageMappings extends ConcurrentHashMap<StorageType, CopyOnWriteA
 
 	public StorageMappings(Nodes nodeConfigs) throws Exception {
 		super();
-		/** 填充空值 */
+		/** 빈 값 채우기 */
 		for (StorageType o : StorageType.values()) {
 			this.put(o, new CopyOnWriteArrayList<>());
 		}

@@ -14,16 +14,16 @@ public class WoFacet extends GsonPropertyObject {
 
     private static final long serialVersionUID = 6427227486701877864L;
 
-    @FieldDescribe("字段标识.")
-    @Schema(description = "字段标识.")
+    @FieldDescribe("필드 식별자.")
+    @Schema(description = "필드 식별자.")
     private String field;
 
-    @FieldDescribe("字段名称.")
-    @Schema(description = "字段名称.")
+    @FieldDescribe("필드 이름.")
+    @Schema(description = "필드 이름.")
     private String name;
 
-    @FieldDescribe("分类值列表.")
-    @Schema(description = "分类值列表.")
+    @FieldDescribe("분류 값 목록.")
+    @Schema(description = "분류 값 목록.")
     private List<ValueCountPair> valueCountPairList = new ArrayList<>();
 
     public String getField() {

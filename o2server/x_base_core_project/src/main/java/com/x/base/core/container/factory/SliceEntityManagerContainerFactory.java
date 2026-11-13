@@ -36,15 +36,15 @@ public abstract class SliceEntityManagerContainerFactory {
 	protected static final String META_INF = "META-INF";
 	protected static final String PERSISTENCE_XML_PATH = META_INF + "/persistence.xml";
 
-	/* class 与 entityManagerFactory 映射表 */
+	/* class와 entityManagerFactory 매핑 테이블 */
 	protected Map<Class<? extends JpaObject>, EntityManagerFactory> entityManagerFactoryMap = new ConcurrentHashMap<>();
-	/* class 与 @Flag字段 映射表 */
+	/* class와 @Flag 필드 매핑 테이블 */
 	protected Map<Class<? extends JpaObject>, List<Field>> flagMap = new ConcurrentHashMap<>();
-	/* class 与 entityManagerFactory 映射表 */
+	/* class와 entityManagerFactory 매핑 테이블 */
 	protected Map<Class<? extends JpaObject>, List<Field>> restrictFlagMap = new ConcurrentHashMap<>();
-	/* class 与 class 中需要检查 Persist 字段的对应表 */
+	/* class와 class 내 Persist 검사 대상 필드의 대응 테이블 */
 	protected Map<Class<? extends JpaObject>, Map<Field, CheckPersist>> checkPersistFieldMap = new ConcurrentHashMap<>();
-	/* class 与 class 中需要检查 Remove 字段的对应表 */
+	/* class와 class 내 Remove 검사 대상 필드의 대응 테이블 */
 	protected Map<Class<? extends JpaObject>, Map<Field, CheckRemove>> checkRemoveFieldMap = new ConcurrentHashMap<>();
 
 	@SuppressWarnings("unchecked")
@@ -174,7 +174,7 @@ public abstract class SliceEntityManagerContainerFactory {
 			reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 			reader.setFeature("http://xml.org/sax/features/external-general-entities", false);
 			reader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-			// 3. ⭐ 禁止外部 DTD（修复漏洞的关键）
+			// 3. ⭐ 외부 DTD 금지(취약점 수정의 핵심)
 			reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 			Document document = reader.read(file);
 			for (Element unit : document.getRootElement().elements("persistence-unit")) {

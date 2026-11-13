@@ -21,7 +21,7 @@ import com.x.base.core.entity.annotation.ContainerEntity;
 import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "ImportRecord", description = "数据中心导入记录.")
+@Schema(name = "ImportRecord", description = "데이터 센터 가져오기 기록.")
 @Entity
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Import.ImportRecord.table, uniqueConstraints = {
@@ -53,50 +53,50 @@ public class ImportRecord extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("导入模型名称.")
+	@FieldDescribe("가져오기 모델 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false)
 	private String name;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建者")
+	@FieldDescribe("작성자")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	private String creatorPerson;
 
 	public static final String modelId_FIELDNAME = "modelId";
-	@FieldDescribe("所属导入模型.")
+	@FieldDescribe("소속 가져오기 모델.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + modelId_FIELDNAME)
 	@Index(name = TABLE + ColumnNamePrefix + modelId_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = ImportModel.class) })
 	private String modelId;
 
 	public static final String query_FIELDNAME = "query";
-	@FieldDescribe("所属查询.")
+	@FieldDescribe("소속 쿼리.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + query_FIELDNAME)
 	@Index(name = TABLE + ColumnNamePrefix + query_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Query.class) })
 	private String query;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态.")
+	@FieldDescribe("상태.")
 	@Column(length = length_255B, name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String status;
 
 	public static final String count_FIELDNAME = "count";
-	@FieldDescribe("导入数量.")
+	@FieldDescribe("가져오기 수량.")
 	@Column(name = ColumnNamePrefix + count_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer count;
@@ -108,7 +108,7 @@ public class ImportRecord extends SliceJpaObject {
 	private Integer failCount;
 
 	public static final String distribution_FIELDNAME = "distribution";
-	@FieldDescribe("导入结果描述.")
+	@FieldDescribe("가져오기 결과 설명.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_4K, name = ColumnNamePrefix + distribution_FIELDNAME)
@@ -116,7 +116,7 @@ public class ImportRecord extends SliceJpaObject {
 	private String distribution;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("导入数据.")
+	@FieldDescribe("가져오기 데이터.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_20M, name = ColumnNamePrefix + data_FIELDNAME)

@@ -7,6 +7,6 @@ class ExceptionViewNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionViewNotExists( String id ) {
-		super("数据视图不存在，无法继续进行操作。Id:{}", id );
+		super("데이터 뷰가 없어 작업을 계속할 수 없습니다. Id: {}", id );
 	}
 }

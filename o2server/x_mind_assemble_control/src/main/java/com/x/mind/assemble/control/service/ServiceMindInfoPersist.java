@@ -19,14 +19,14 @@ import com.x.mind.entity.MindShareRecord;
 import com.x.mind.entity.MindVersionInfo;
 
 /**
- * 脑图信息持久化操作服务类：保存、更新、删除
+ * 마인드맵 정보 영속화 작업 서비스 클래스: 저장, 수정, 삭제
  * @author O2LEE
  *
  */
 class ServiceMindInfoPersist{
 	
 	/**
-	 * 保存脑图信息
+	 * 마인드맵 정보 저장
 	 * @param emc
 	 * @param _mindBaseInfo
 	 * @param content
@@ -46,7 +46,7 @@ class ServiceMindInfoPersist{
 		oldContent = emc.find( _mindBaseInfo.getId(), MindContentInfo.class );
 		emc.beginTransaction( MindBaseInfo.class );
 		emc.beginTransaction( MindContentInfo.class );
-		//保存脑图基本信息
+		//마인드맵 기본 정보 저장
 		if( oldMindBase == null ){
 			oldMindBase = _mindBaseInfo;
 			oldMindBase.composeSequnces();
@@ -61,7 +61,7 @@ class ServiceMindInfoPersist{
 			_mindBaseInfo.composeSequnces();
 			emc.check( _mindBaseInfo, CheckPersistType.all );	
 		}
-		//保存脑图内容
+		//마인드맵 내용 저장
 		if( oldContent == null ){
 			oldContent =  new MindContentInfo();
 			oldContent.setContent(content);
@@ -77,15 +77,15 @@ class ServiceMindInfoPersist{
 	}
 
 	/**
-	 * 根据脑图ID删除脑图信息
-	 * 基础信息、详细内容以及分享的信息
+	 * 마인드맵 ID로 마인드맵 정보 삭제
+	 * 기본 정보, 상세 내용 및 공유 정보
 	 * @param mindId
 	 * @throws Exception 
 	 */
 	public Boolean destroyMind(EntityManagerContainer emc, String mindId) throws Exception {
 		Business business = new Business(emc);
 		
-		//先根据ID删除一个脑图
+		//먼저 ID로 마인드맵 삭제
 		MindBaseInfo mindBaseInfo = emc.find( mindId, MindBaseInfo.class);
 		MindContentInfo mindContentInfo = emc.find( mindId, MindContentInfo.class);
 		List<MindShareRecord>mindShareRecords = null;
@@ -104,24 +104,24 @@ class ServiceMindInfoPersist{
 		emc.beginTransaction( MindShareRecord.class );
 		emc.beginTransaction( MindVersionInfo.class );
 		
-		//删除分享表里的脑图信息
+		//공유 테이블의 마인드맵 정보 삭제
 		if(ListTools.isNotEmpty( mindShareRecords )) {
 			for( MindShareRecord mindShareInfo : mindShareRecords) {
 				emc.remove( mindShareInfo, CheckRemoveType.all );
 			}
 		}
 		
-		//删除回收站里的脑图信息
+		//휴지통의 마인드맵 정보 삭제
 		if( mindRecycleInfo != null ) {
 			emc.remove( mindRecycleInfo, CheckRemoveType.all );
 		}
 		
-		//删除脑图基础信息表信息
+		//마인드맵 기본 정보 테이블 정보 삭제
 		if( mindBaseInfo != null ) {
 			emc.remove( mindBaseInfo, CheckRemoveType.all );
 		}
 		
-		//删除详细信息表信息
+		//상세 정보 테이블 정보 삭제
 		if( mindContentInfo != null ) {
 			emc.remove( mindContentInfo, CheckRemoveType.all );
 		}
@@ -131,28 +131,28 @@ class ServiceMindInfoPersist{
 	}
 
 	/**
-	 * 根据脑图ID将脑图信息放入回收站
-	 * 基础信息从基础信息表换入回收站信息表，以及分享的信息状态置为已删除
+	 * 마인드맵 ID로 마인드맵 정보를 휴지통으로 이동
+	 * 기본 정보를 기본 정보 테이블에서 휴지통 정보 테이블로 옮기고 공유 정보 상태를 삭제됨으로 설정
 	 * @param mindId
 	 * @throws Exception 
 	 */
 	public Boolean recycle(EntityManagerContainer emc, String mindId) throws Exception {
 		Business business = new Business(emc);
 		
-		//先查询回收站中是否已经存在这个mindBaseInfo，如果存在则先删除，如果不存在则新增
+		//먼저 휴지통에 이 mindBaseInfo가 있는지 조회해 있으면 먼저 삭제하고 없으면 새로 추가
 		MindRecycleInfo mindRecycleInfo = emc.find( mindId,  MindRecycleInfo.class );
 
-		//先删除回收站内的关于该脑图的相关信息
+		//먼저 휴지통에서 해당 마인드맵 관련 정보 삭제
 		if( mindRecycleInfo != null ) {
 			emc.beginTransaction( MindRecycleInfo.class );
 			emc.remove( mindRecycleInfo, CheckRemoveType.all );
 			emc.commit();
 		}
 		
-		//查询脑图信息
+		//마인드맵 정보 조회
 		MindBaseInfo mindBaseInfo = emc.find( mindId, MindBaseInfo.class);
 		
-		//根据脑图的信息，创建一个新的脑图回收信息
+		//마인드맵 정보로 새 마인드맵 휴지통 정보 생성
 		MindRecycleInfo newMindRecycleInfo = new MindRecycleInfo();
 		newMindRecycleInfo.setId( mindBaseInfo.getId() );
 		newMindRecycleInfo.setName( mindBaseInfo.getName() );
@@ -161,47 +161,47 @@ class ServiceMindInfoPersist{
 		newMindRecycleInfo.setCreatorUnit( mindBaseInfo.getCreatorUnit() );
 		newMindRecycleInfo.setDescription( mindBaseInfo.getDescription() );
 		newMindRecycleInfo.setFileVersion( mindBaseInfo.getFileVersion() );
-		newMindRecycleInfo.setShared( false );//放入回收站后，文件的分享信息全部被清空
+		newMindRecycleInfo.setShared( false );//휴지통으로 이동하면 파일의 공유 정보가 모두 삭제됨
 		
-		//查询所有分享过的脑图文档
+		//공유했던 모든 마인드맵 문서 조회
 		List<MindShareRecord> mindShareRecords = null;
 		List<String> ids = business.mindShareRecordFactory().listIdsWithMindId(mindId);
 		if( ListTools.isNotEmpty( ids )) {
 			mindShareRecords = business.mindShareRecordFactory().list(ids);
 		}
 		
-		//查询脑图文档所有的版本信息
+		//마인드맵 문서의 모든 버전 정보 조회
 		List<MindVersionInfo> mindVersionInfos = null;
 		ids = business.mindVersionInfoFactory().listVersionsWithMindId(mindId);
 		if( ListTools.isNotEmpty( ids )) {
 			mindVersionInfos = business.mindVersionInfoFactory().listVersionsWithIds(ids);
 		}
 		
-		//最后进行持久化操作
+		//마지막으로 영속화 작업 수행
 		emc.beginTransaction( MindRecycleInfo.class );
 		emc.beginTransaction( MindBaseInfo.class );
 		emc.beginTransaction( MindShareRecord.class );
 		emc.beginTransaction( MindVersionInfo.class );
 		
-		//删除分享过的脑图文件的记录状态
+		//공유했던 마인드맵 파일의 기록 상태 삭제
 		if( ListTools.isNotEmpty( mindShareRecords )) {
 			for( MindShareRecord mindShareInfo : mindShareRecords ) {
 				emc.remove( mindShareInfo, CheckRemoveType.all);
 			}
 		}
 		
-		//查询脑图文档所有的版本信息
+		//마인드맵 문서의 모든 버전 정보 조회
 		if( ListTools.isNotEmpty( mindVersionInfos )) {
 			for( MindVersionInfo mindVersionInfo : mindVersionInfos ) {
 				emc.remove( mindVersionInfo, CheckRemoveType.all);
 			}
 		}
 		
-		//新增一个回收站脑图信息
+		//휴지통 마인드맵 정보 추가
 		newMindRecycleInfo.composeSequnces();
 		emc.persist( newMindRecycleInfo, CheckPersistType.all );
 		
-		//删除脑图基础信息对象
+		//마인드맵 기본 정보 객체 삭제
 		emc.remove( mindBaseInfo, CheckRemoveType.all );
 		
 		emc.commit();
@@ -209,23 +209,23 @@ class ServiceMindInfoPersist{
 	}
 	
 	/**
-	 * 根据脑图ID从回收站还原脑图信息
-	 * 基础信息从回收站信息表换入基础信息表，以及分享的信息状态置为正常
-	 * 注意原来的目录是否仍然存在，如果不存在，则放入根目录 root
+	 * 마인드맵 ID로 휴지통에서 마인드맵 정보 복원
+	 * 기본 정보를 휴지통 정보 테이블에서 기본 정보 테이블로 옮기고 공유 정보 상태를 정상으로 설정
+	 * 원래 디렉터리가 아직 있는지 확인하고, 없으면 루트 디렉터리 root에 넣음
 	 * @param mindId
 	 * @throws Exception 
 	 */
 	public Boolean restore(EntityManagerContainer emc, String mindId) throws Exception {
 		if( StringUtils.isEmpty( mindId ) ) {
-			throw new Exception("脑图ID为空，无法还原脑图信息！");
+			throw new Exception("마인드맵 ID가 비어 있어 마인드맵 정보를 복원할 수 없습니다!");
 		}
-		//先查询回收站中是否已经存在这个MindRecycleInfo，如果不存在则无法还原
+		//먼저 휴지통에 이 MindRecycleInfo가 있는지 조회해 없으면 복원할 수 없음
 		MindRecycleInfo mindRecycleInfo = emc.find( mindId,  MindRecycleInfo.class );
 		if( mindRecycleInfo == null ) {
-			throw new Exception("根据指定的ID未能从回收站查询到脑图信息，无法还原脑图信息！mindId：" + mindId);
+			throw new Exception("지정한 ID로 휴지통에서 마인드맵 정보를 찾지 못해 복원할 수 없습니다! mindId:" + mindId);
 		}
 		
-		//查询脑图信息, 如果已存在，则先删除后还原
+		//마인드맵 정보 조회, 이미 있으면 먼저 삭제한 뒤 복원
 		MindBaseInfo mindBaseInfo = emc.find( mindId, MindBaseInfo.class);
 		if( mindBaseInfo != null ) {
 			emc.beginTransaction( MindBaseInfo.class );
@@ -233,10 +233,10 @@ class ServiceMindInfoPersist{
 			emc.commit();
 		}
 		
-		//查询脑较长原来的目录是否仍然存在，如果不存在，将脑图放入根目录root
+		//마인드맵의 원래 디렉터리가 아직 있는지 조회해 없으면 마인드맵을 루트 디렉터리 root에 넣음
 		MindFolderInfo mindFolderInfo = emc.find( mindRecycleInfo.getFolderId(), MindFolderInfo.class );
 		
-		//根据脑图的回收站信息，创建一个新的脑图信息
+		//마인드맵 휴지통 정보로 새 마인드맵 정보 생성
 		mindBaseInfo = new MindBaseInfo();
 		mindBaseInfo.setId( mindId );
 		mindBaseInfo.setName( mindRecycleInfo.getName() );
@@ -249,21 +249,21 @@ class ServiceMindInfoPersist{
 		mindBaseInfo.setCreatorUnit( mindRecycleInfo.getCreatorUnit() );
 		mindBaseInfo.setDescription( mindRecycleInfo.getDescription() );
 		mindBaseInfo.setFileVersion( mindRecycleInfo.getFileVersion() );
-		mindBaseInfo.setShared( false ); //放入回收站后，会清空所有的分享信息
+		mindBaseInfo.setShared( false ); //휴지통으로 이동하면 모든 공유 정보가 삭제됨
 		
 		List<String> editorList = new ArrayList<>();
 		editorList.add( mindRecycleInfo.getCreator() );
 		mindBaseInfo.setEditorList(editorList);
 		
-		//最后进行持久化操作
+		//마지막으로 영속화 작업 수행
 		emc.beginTransaction( MindRecycleInfo.class );
 		emc.beginTransaction( MindBaseInfo.class );
 		
-		//新增一个脑图信息， 详细信息已经存在了
+		//마인드맵 정보 추가, 상세 정보는 이미 있음
 		mindBaseInfo.composeSequnces();
 		emc.persist( mindBaseInfo, CheckPersistType.all );
 		
-		//删除回收站中脑图基础信息对象
+		//휴지통의 마인드맵 기본 정보 객체 삭제
 		emc.remove( mindRecycleInfo, CheckRemoveType.all );
 		
 		emc.commit();

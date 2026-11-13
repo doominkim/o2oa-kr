@@ -12,19 +12,19 @@ public class V2AddTaskWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -3293122515327864483L;
 
-	@FieldDescribe("身份")
+	@FieldDescribe("신분")
 	private List<String> identityList = new ArrayList<>();
 
-	@FieldDescribe("加入在指定位置之后,否则加入在指定位置之前.")
+	@FieldDescribe("지정 위치 뒤에 추가, 아니면 지정 위치 앞에 추가.")
 	private Boolean after;
 
-	@FieldDescribe("是否执行替换")
+	@FieldDescribe("교체 실행 여부")
 	private Boolean replace;
 
-	@FieldDescribe("工作标识")
+	@FieldDescribe("업무 문서 식별자")
 	private String work;
 
-	@FieldDescribe("定位身份标识")
+	@FieldDescribe("위치 지정 신분 식별자")
 	private String identity;
 
 	public List<String> getIdentityList() {

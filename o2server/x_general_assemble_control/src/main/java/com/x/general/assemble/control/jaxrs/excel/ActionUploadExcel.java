@@ -39,54 +39,54 @@ public class ActionUploadExcel extends BaseAction {
 
 
                 if (sheetIndexValue < 0 || sheetIndexValue >= workbook.getNumberOfSheets()) {
-                    throw new Exception("无效的 sheet 索引: " + sheetIndexValue +
-                            "，总共有 " + workbook.getNumberOfSheets() + " 个 sheet。");
+                    throw new Exception("잘못된 sheet 인덱스: " + sheetIndexValue +
+                            ", 전체 " + workbook.getNumberOfSheets() + " 개 sheet가 있습니다.");
                 }
                 Sheet sheet = workbook.getSheetAt(sheetIndexValue); // sheet
 
-                int firstRow = sheet.getFirstRowNum(); // 第一行
+                int firstRow = sheet.getFirstRowNum(); // 첫 번째 행
                 int lastRow = sheet.getLastRowNum();
 
-                //  校验 rowIndex 是否在有效范围内
+                //  rowIndex가 유효 범위 내인지 검증
                 if (rowIndexValue < firstRow) {
-                    rowIndexValue = firstRow; // 自动修正为第一行
+                    rowIndexValue = firstRow; // 첫 번째 행으로 자동 보정
                 }
                 if (rowIndexValue > lastRow) {
-                    // 表示从 rowIndex 开始无数据
-                    LOGGER.warn("指定的起始行号 {} 超出数据范围（最大行号为 {}），返回空数据。", rowIndexValue, lastRow);
+                    // rowIndex부터 데이터 없음
+                    LOGGER.warn("지정한 시작 행 번호 {}이(가) 데이터 범위(최대 행 번호 {})를 벗어나 빈 데이터를 반환합니다.", rowIndexValue, lastRow);
                     ActionResult<Wo> result = new ActionResult<>();
                     Wo wo = new Wo();
-                    wo.setDataList(new ArrayList<>()); // 空列表
+                    wo.setDataList(new ArrayList<>()); // 빈 목록
                     result.setData(wo);
                     return result;
                 }
 
-                //用于存储所有行的数据
+                //모든 행 데이터 저장용
                 List<List<Object>> rowList = new ArrayList<>();
 
-                // 先扫描一遍所有行，确定最大列数
+                // 모든 행을 먼저 스캔하여 최대 열 수 확인
                 int maxColumnCount = 0;
                 for (int i = rowIndexValue; i <= lastRow; i++) {
                     Row row = sheet.getRow(i);
                     if (row != null) {
-                        int lastCellNum = row.getLastCellNum(); // 注意：这是列数量（从0开始的索引+1）
+                        int lastCellNum = row.getLastCellNum(); // 주의: 열 개수임(0부터 시작하는 인덱스+1)
                         if (lastCellNum > maxColumnCount) {
                             maxColumnCount = lastCellNum;
                         }
                     }
                 }
-//                LOGGER.info("excel内容最大列数：{}", maxColumnCount);
+//                LOGGER.info("excel 내용 최대 열 수: {}", maxColumnCount);
                 for (int i = rowIndexValue; i <= lastRow; i++) {
                     if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("处理行数：" + i + " ========================================");
+                        LOGGER.debug("처리 행 수: " + i + " ========================================");
                     }
                     Row row = sheet.getRow(i);
                     List<Object> colList = new ArrayList<>();
 
                     try {
                         if (row == null) {
-//                            LOGGER.info("空行的时候最大列数：{}", maxColumnCount);
-                            // 空行：添加 maxColumnCount 个空字符串
+//                            LOGGER.info("빈 행일 때 최대 열 수: {}", maxColumnCount);
+                            // 빈 행: maxColumnCount개의 빈 문자열 추가
                             for (int j = 0; j < maxColumnCount; j++) {
                                 colList.add("");
                             }
@@ -95,7 +95,7 @@ public class ActionUploadExcel extends BaseAction {
 //                                Cell cell = row != null ? row.getCell(j) : null;
                                 Cell cell = row.getCell(j);
                                 if (cell == null) {
-                                    colList.add(""); // 完全不存在的行或单元格
+                                    colList.add(""); // 존재하지 않는 행 또는 셀
                                 } else {
                                     colList.add(getCellValueAsString(cell,evaluator));
                                 }
@@ -104,7 +104,7 @@ public class ActionUploadExcel extends BaseAction {
 
                     } catch (Exception e) {
 
-                        LOGGER.warn("处理第 {} 行时发生异常：{}", i, e.getMessage());
+                        LOGGER.warn("{}번째 행 처리 중 오류 발생: {}", i, e.getMessage());
                         colList.clear();
                         for (int j = 0; j < maxColumnCount; j++) {
                             colList.add("");
@@ -114,7 +114,7 @@ public class ActionUploadExcel extends BaseAction {
                     rowList.add(colList);
 
                 }
-//                LOGGER.debug("解析的excel完整数据：{} ", rowList);
+//                LOGGER.debug("파싱한 excel 전체 데이터: {} ", rowList);
                 ActionResult<Wo> result = new ActionResult<>();
 
                 Wo wo = new Wo();
@@ -125,15 +125,15 @@ public class ActionUploadExcel extends BaseAction {
     }
 
     /**
-     * 将 Excel 单元格的值安全地转换为字符串
-     * 智能判断日期格式：有时间则输出时分秒，否则只输出日期
+     * Excel 셀 값을 안전하게 문자열로 변환
+     * 날짜 형식 자동 판단: 시간이 있으면 시분초까지, 없으면 날짜만 출력
      */
     private Object getCellValueAsString(Cell cell, FormulaEvaluator evaluator) {
         if (cell == null) {
             return "";
         }
 
-        // 处理公式
+        // 수식 처리
         if (cell.getCellType() == CellType.FORMULA) {
             try {
                 CellValue evaluated = evaluator.evaluate(cell);
@@ -143,7 +143,7 @@ public class ActionUploadExcel extends BaseAction {
                     case STRING:
                         return evaluated.getStringValue();
                     case NUMERIC:
-                        // 注意：公式结果也可能是日期
+                        // 주의: 수식 결과도 날짜일 수 있음
                         return formatNumericValue(evaluated.getNumberValue(), cell);
                     case BOOLEAN:
                         return String.valueOf(evaluated.getBooleanValue());
@@ -153,12 +153,12 @@ public class ActionUploadExcel extends BaseAction {
                         return "";
                 }
             } catch (Exception e) {
-                LOGGER.warn("公式计算失败,错误：{}", e.getMessage());
-                return ""; // 公式错误返回空
+                LOGGER.warn("수식 계산 실패, 오류: {}", e.getMessage());
+                return ""; // 수식 오류 시 빈 값 반환
             }
         }
 
-        // 非公式，按类型处理
+        // 수식이 아니면 유형별 처리
         switch (cell.getCellType()) {
             case STRING:
                 return cell.getStringCellValue();
@@ -167,7 +167,7 @@ public class ActionUploadExcel extends BaseAction {
                 if (DateUtil.isCellDateFormatted(cell)) {
                     return formatDateValue(cell.getDateCellValue(), cell);
                 } else {
-//                    LOGGER.info("处理值：{}", cell.getNumericCellValue());
+//                    LOGGER.info("처리 값: {}", cell.getNumericCellValue());
                     return formatNumericValue(cell.getNumericCellValue(), null);
                 }
 
@@ -183,42 +183,42 @@ public class ActionUploadExcel extends BaseAction {
     }
 
     /**
-     * 格式化数值（整数、小数），避免科学计数法
+     * 수치(정수, 소수) 서식화, 과학적 표기법 방지
      */
     private Object formatNumericValue(double value, Cell cell) {
-        // 处理特殊值
+        // 특수 값 처리
         if (Double.isNaN(value) || Double.isInfinite(value)) {
-            return String.valueOf(value); // NaN 或 Infinity 无法用 BigDecimal 表示
+            return String.valueOf(value); // NaN 또는 Infinity는 BigDecimal로 표현 불가
         }
 
-        // 优先判断是否为日期格式
+        // 날짜 형식 여부 우선 판단
         if (cell != null && DateUtil.isCellDateFormatted(cell)) {
             return formatDateValue(DateUtil.getJavaDate(value), cell);
         }
 
-        // 使用 String.valueOf 避免 double 精度问题
+        // String.valueOf로 double 정밀도 문제 방지
         try {
             BigDecimal bd = new BigDecimal(String.valueOf(value));
-//            LOGGER.info("处理后的值：{}", bd.stripTrailingZeros().toPlainString());
-            return Double.valueOf(bd.stripTrailingZeros().toPlainString()); // 去掉末尾多余的 0
+//            LOGGER.info("처리 후 값: {}", bd.stripTrailingZeros().toPlainString());
+            return Double.valueOf(bd.stripTrailingZeros().toPlainString()); // 끝의 불필요한 0 제거
         } catch (NumberFormatException e) {
             // fallback
-            return value; // 返回原始 double
+            return value; // 원래 double 반환
         }
     }
 
 
     /**
-     * 根据单元格的格式字符串智能格式化日期
+     * 셀 서식 문자열에 따라 날짜 자동 서식화
      */
     private String formatDateValue(Date date, Cell cell) {
         if (date == null) return "";
 
-        // 获取单元格的格式化字符串，如 "m/d/yy" 或 "yyyy-mm-dd hh:mm"
+        // 셀 서식 문자열 조회, 예: "m/d/yy" 또는 "yyyy-mm-dd hh:mm"
         short formatIndex = cell.getCellStyle().getDataFormat();
         String formatString = cell.getCellStyle().getDataFormatString();
 
-        // 常见的含时间的关键字
+        // 시간을 포함하는 일반적인 키워드
         boolean hasTime = formatString != null &&
                 (formatString.contains("H") || formatString.contains("h") ||
                         formatString.contains("M") && formatString.contains(":") ||
@@ -240,7 +240,7 @@ public class ActionUploadExcel extends BaseAction {
     public static class Wo extends GsonPropertyObject {
 
         private static final long serialVersionUID = 6022979308455360363L;
-        @FieldDescribe("excel解析出的内容，例如：['姓名','性别'],['小明','男']")
+        @FieldDescribe("excel에서 파싱한 내용, 예: ['이름','성별'],['홍길동','남']")
         public List<List<Object>> dataList;
 
 

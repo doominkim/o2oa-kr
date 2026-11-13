@@ -68,7 +68,7 @@ public class ActionListWithUnit extends BaseAction {
 				maxRecordDate = dateOperation.getDateFromString(maxRecordDateString);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在查询打卡信息记录最大日期时发生异常.");
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "체크 기록의 최대 날짜를 조회하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -90,7 +90,7 @@ public class ActionListWithUnit extends BaseAction {
 					}
 				} catch (Exception e) {
 					Exception exception = new ExceptionAttendanceDetailProcess(e,
-							"根据组织名称列示所有下级组织名称发生异常！Unit:" + q_unitName);
+							"조직 이름으로 모든 하위 조직 이름을 조회하는 중 오류가 발생했습니다! Unit:" + q_unitName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -102,7 +102,7 @@ public class ActionListWithUnit extends BaseAction {
 				ids = attendanceDetailServiceAdv.listUnitAttendanceDetailByYearAndMonth(unitNames, q_year, q_month);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在根据组织名称，年份、月份查询打卡详细信息ID列表时发生异常！"
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "조직 이름과 연월로 체크 상세 정보 ID 목록을 조회하는 중 오류가 발생했습니다!"
 						+ "UnitName:" + unitNames + ", Year:" + q_year + ", Month:" + q_month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
@@ -113,7 +113,7 @@ public class ActionListWithUnit extends BaseAction {
 				attendanceDetailList = attendanceDetailServiceAdv.list(ids);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统根据开始时间和结束时间查询需要分析的员工打卡信息ID列表时发生异常！");
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "시작 시간과 종료 시간으로 분석할 직원 체크 정보 ID 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -124,7 +124,7 @@ public class ActionListWithUnit extends BaseAction {
 					wraps = Wo.copier.copy(attendanceDetailList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工打卡信息为输出对象时发生异常.");
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -149,9 +149,9 @@ public class ActionListWithUnit extends BaseAction {
 				}
 				detail.setSignProxy( signProxy );
 
-				//判断并补充申诉信息
+				//이의 신청 정보 확인 및 보완
 				if( detail.getAppealStatus() != 0 ){
-					//十有八九已经提过申诉了，查询申诉信息
+					//십중팔구 이미 이의 신청했으므로 이의 신청 정보 조회
 					appealInfos = attendanceAppealInfoServiceAdv.listWithDetailId( detail.getId() );
 					if(ListTools.isNotEmpty( appealInfos ) ){
 						woAppealInfos = WoAttendanceAppealInfo.copier.copy( appealInfos );
@@ -183,10 +183,10 @@ public class ActionListWithUnit extends BaseAction {
 		public static WrapCopier<AttendanceDetail, Wo> copier = WrapCopierFactory.wo(AttendanceDetail.class, Wo.class,
 				null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe("员工所属组织的排班打卡策略：1-两次打卡（上午上班，下午下班） 2-三次打卡（上午上班，下午下班加中午一次共三次） 3-四次打卡（上午下午都打上班下班卡）")
+		@FieldDescribe("직원 소속 조직의 근무 배정 기록 정책: 1-2회 기록(오전 출근, 오후 퇴근) 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회) 3-4회 기록(오전·오후 모두 출근·퇴근 기록)")
 		private Integer signProxy = 1;
 
-		@FieldDescribe("考勤申诉内容")
+		@FieldDescribe("근태 이의 신청 내용")
 		private List<WoAttendanceAppealInfo> appealInfos = null;
 
 		public List<WoAttendanceAppealInfo> getAppealInfos() { return appealInfos; }

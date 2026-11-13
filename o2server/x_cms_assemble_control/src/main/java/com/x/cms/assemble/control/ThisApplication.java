@@ -32,19 +32,19 @@ public class ThisApplication {
 
 	public static final String ROLE_CMSManager = "CMSManager@CMSManagerSystemRole@R";
 	public static final String ROLE_Manager = "Manager@ManagerSystemRole@R";
-	// Document删除时也需要检查一下热点图片里的数据是否已经删除掉了
+	// Document 삭제 시 핫 이미지의 데이터도 삭제되었는지 확인 필요
 	public static final QueueDocumentDelete queueDocumentDelete = new QueueDocumentDelete();
-	// Document变更标题时也需要更新一下热点图片里的数据
+	// Document 제목 변경 시 인기 이미지의 데이터도 함께 업데이트해야 함
 	public static final QueueDocumentUpdate queueDocumentUpdate = new QueueDocumentUpdate();
-	// Document被访问时，需要将总的访问量更新到item的document中，便于视图使用，在队列里异步修改
+	// Document 조회 시 총 조회수를 item의 document에 반영해야 함(뷰에서 사용), 큐에서 비동기로 수정
 	public static final QueueDocumentViewCountUpdate queueDocumentViewCountUpdate = new QueueDocumentViewCountUpdate();
-	// 执行数据库中的批处理操作
+	// 데이터베이스 일괄 처리 작업 실행
 	public static final QueueBatchOperation queueBatchOperation = new QueueBatchOperation();
-	// 执行文档权限的批处理操作
+	// 문서 권한 일괄 처리 작업 실행
 	public static final QueueDocumentOperation queueDocumentOperation = new QueueDocumentOperation();
-	// Document发布时，向所有阅读者推送通知
+	// Document 발행 시 모든 열람자에게 알림 발송
 	public static final QueueSendDocumentNotify queueSendDocumentNotify = new QueueSendDocumentNotify();
-	// 执行文档的数据映射
+	// 문서 데이터 매핑 실행
 	public static final ProjectionExecuteQueue projectionExecuteQueue = new ProjectionExecuteQueue();
 
 	public static final FormVersionQueue formVersionQueue = new FormVersionQueue();
@@ -68,19 +68,19 @@ public class ThisApplication {
 		context().startQueue(projectionExecuteQueue);
 		context().startQueue(formVersionQueue);
 		context().startQueue(scriptVersionQueue);
-		// 每天凌晨2点执行一次
+		// 매일 새벽 2시에 한 번 실행
 		context.schedule(Timertask_LogRecordCheckTask.class, "0 0 2 * * ?");
 
 		context.schedule(Timertask_BatchOperationTask.class, "0 */5 * * * ?");
 
 		/**
-		 * 每5分钟执行对待发布文档进行发布
+		 * 5분마다 발행 대기 문서 발행
 		 */
 		context.schedule(PublishWaitDocumentTask.class, "0 */5 * * * ?");
 
-		// 每天凌晨1点，计算所有的文档的权限信息
+		// 매일 새벽 1시, 모든 문서의 권한 정보 계산
 		context.schedule(Timertask_RefreshAllDocumentReviews.class, "0 0 1 * * ?");
-		// 集群下多台会一起运行，Timertask_BatchOperationTask运行即可
+		// 클러스터에서는 여러 대가 함께 실행되므로 Timertask_BatchOperationTask만 실행하면 됨
 		context.scheduleLocal(Timertask_InitOperationRunning.class, 150);
 	}
 

@@ -53,7 +53,7 @@ public class SyncOrganization {
 	private static Logger logger = LoggerFactory.getLogger(SyncOrganization.class);
 
 	public PullResult execute(Business business) throws Exception {
-		logger.print("开始与WeLink同步人员组织,方向:拉入.");
+		logger.print("WeLink와 사용자 조직 동기화 시작, 방향:가져오기.");
 		PullResult result = new PullResult();
 		String accessToken = Config.weLink().accessToken();
 		logger.print("accessToken：" + accessToken);
@@ -74,42 +74,42 @@ public class SyncOrganization {
 		CacheManager.notify(Identity.class);
 		result.end();
 		if (!result.getCreateUnitList().isEmpty()) {
-			logger.print("创建组织({}):{}.", result.getCreateUnitList().size(),
+			logger.print("조직 생성({}):{}.", result.getCreateUnitList().size(),
 					StringUtils.join(result.getCreateUnitList(), ","));
 		}
 		if (!result.getUpdateUnitList().isEmpty()) {
-			logger.print("修改组织({}):{}.", result.getUpdateUnitList().size(),
+			logger.print("조직 수정({}):{}.", result.getUpdateUnitList().size(),
 					StringUtils.join(result.getUpdateUnitList(), ","));
 		}
 		if (!result.getRemoveUnitList().isEmpty()) {
-			logger.print("删除组织({}):{}.", result.getRemoveUnitList().size(),
+			logger.print("조직 삭제({}):{}.", result.getRemoveUnitList().size(),
 					StringUtils.join(result.getRemoveUnitList(), ","));
 		}
 		if (!result.getCreatePersonList().isEmpty()) {
-			logger.print("创建个人({}):{}.", result.getCreatePersonList().size(),
+			logger.print("개인 생성({}):{}.", result.getCreatePersonList().size(),
 					StringUtils.join(result.getCreatePersonList(), ","));
 		}
 		if (!result.getUpdatePersonList().isEmpty()) {
-			logger.print("修改个人({}):{}.", result.getUpdatePersonList().size(),
+			logger.print("개인 수정({}):{}.", result.getUpdatePersonList().size(),
 					StringUtils.join(result.getUpdatePersonList(), ","));
 		}
 		if (!result.getRemovePersonList().isEmpty()) {
-			logger.print("删除个人({}):{}.", result.getRemovePersonList().size(),
+			logger.print("개인 삭제({}):{}.", result.getRemovePersonList().size(),
 					StringUtils.join(result.getRemovePersonList(), ","));
 		}
 		if (!result.getCreateIdentityList().isEmpty()) {
-			logger.print("创建身份({}):{}.", result.getCreateIdentityList().size(),
+			logger.print("신분 생성({}):{}.", result.getCreateIdentityList().size(),
 					StringUtils.join(result.getCreateIdentityList(), ","));
 		}
 		if (!result.getUpdateIdentityList().isEmpty()) {
-			logger.print("修改身份({}):{}.", result.getUpdateIdentityList().size(),
+			logger.print("신분 수정({}):{}.", result.getUpdateIdentityList().size(),
 					StringUtils.join(result.getUpdateIdentityList(), ","));
 		}
 		if (!result.getRemoveIdentityList().isEmpty()) {
-			logger.print("删除身份({}):{}.", result.getRemoveIdentityList().size(),
+			logger.print("신분 삭제({}):{}.", result.getRemoveIdentityList().size(),
 					StringUtils.join(result.getRemoveIdentityList(), ","));
 		}
-		logger.print("从钉钉同步人员结束.");
+		logger.print("딩톡에서 사용자 동기화 종료.");
 		return result;
 	}
 
@@ -120,7 +120,7 @@ public class SyncOrganization {
 		units.add(unit);
 		for (User o : factory.listUser(org)) {
 			Person person = this.checkPerson(business, result, accessToken, o);
-			/* 如果人员没有手机号,那么就先跳过这个人 */
+			/* 사용자에게 휴대폰 번호가 없으면 이 사용자는 건너뜀 */
 			if (null != person) {
 				people.add(person);
 				Identity identity = this.checkIdentity(business, result, person, unit, o);
@@ -137,7 +137,7 @@ public class SyncOrganization {
 			List<Identity> identities) throws Exception {
 		EntityManagerContainer emc = business.entityManagerContainer();
 		List<Identity> allIdentities = this.listIdentity(business);
-		/* 删除身份 */
+		/* 신분 삭제 */
 		for (Identity identity : ListUtils.subtract(allIdentities, identities)) {
 			Person person = emc.find(identity.getPerson(), Person.class);
 			if (null == person || StringUtils.isNotEmpty(person.getWeLinkId())) {
@@ -155,7 +155,7 @@ public class SyncOrganization {
 				emc.commit();
 			}
 		}
-		/* 组织单独方法删除 */
+		/* 조직 개별 메서드로 삭제 */
 		List<Unit> allUnit = this.listUnit(business);
 		List<Unit> removeUnits = ListUtils.subtract(allUnit, units).stream()
 				.sorted(Comparator.comparing(Unit::getLevel, Comparator.nullsLast(Integer::compareTo)))
@@ -164,7 +164,7 @@ public class SyncOrganization {
 			this.removeSingleUnit(business, result, unit);
 		}
 		List<Person> allPeople = this.listPerson(business);
-		/* 删除个人 */
+		/* 개인 삭제 */
 		for (Person person : ListUtils.subtract(allPeople, people)) {
 			this.removePerson(business, result, person);
 		}
@@ -215,7 +215,7 @@ public class SyncOrganization {
 		if (order != null) {
 			identity.setOrderNumber(order.intValue());
 		}
-		// 人员有多个身份不能设置多个主身份
+		// 사용자에게 여러 신분이 있어도 주 신분을 여러 개 설정할 수 없음
 		identity.setMajor(false);
 		emc.persist(identity, CheckPersistType.all);
 		emc.commit();
@@ -313,7 +313,7 @@ public class SyncOrganization {
 			person.setMail(user.getUserEmail());
 			person.setOfficePhone(user.getLandlineNumber());
 			person.setGenderType(GenderType.d);
-			/* 新增人员需要增加密码 */
+			/* 신규 사용자는 비밀번호 추가 필요 */
 			business.person().setPassword(person, this.initPassword(business, person));
 			emc.persist(person, CheckPersistType.all);
 			result.getCreatePersonList().add(person.getDistinguishedName());
@@ -342,12 +342,12 @@ public class SyncOrganization {
 		Unit unit = business.unit().getWithWeLinkDeptCodeObject(Objects.toString(org.getDeptCode()));
 		if (null != unit) {
 			if ((null == sup) && (StringUtils.isNotEmpty(unit.getSuperior()))) {
-				/* 不是一个顶层组织所以只能删除重建 */
+				/* 최상위 조직이 아니므로 삭제 후 재생성만 가능 */
 				removeUnit(business, result, unit);
 				unit = null;
 			}
 			if ((null != sup) && (!StringUtils.equals(sup.getId(), unit.getSuperior()))) {
-				/* 指定的上级部门和预期不符 */
+				/* 지정한 상위 부서가 예상과 다름 */
 				removeUnit(business, result, unit);
 				unit = null;
 			}
@@ -400,7 +400,7 @@ public class SyncOrganization {
 	}
 
 	private void removeUnit(Business business, PullResult result, Unit unit) throws Exception {
-		logger.print("正在删除组织{}.", unit.getDistinguishedName());
+		logger.print("조직 {} 삭제 중.", unit.getDistinguishedName());
 		List<Unit> os = new ArrayList<>();
 		os.add(unit);
 		os.addAll(business.unit().listSupNestedObject(unit));
@@ -473,7 +473,7 @@ public class SyncOrganization {
 	}
 
 	private void removeSingleUnit(Business business, PullResult result, Unit unit) throws Exception {
-		logger.print("正在删除单个组织{}.", unit.getDistinguishedName());
+		logger.print("단일 조직 {} 삭제 중.", unit.getDistinguishedName());
 		EntityManagerContainer emc = business.entityManagerContainer();
 		emc.beginTransaction(UnitAttribute.class);
 		emc.beginTransaction(UnitDuty.class);

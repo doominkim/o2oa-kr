@@ -32,7 +32,7 @@ public class FileTools {
 	}
 
 	/**
-	 * 创建目录-递归父级
+	 * 디렉터리 생성-상위 재귀
 	 *
 	 * @param dist
 	 * @throws Exception
@@ -46,10 +46,10 @@ public class FileTools {
 	}
 
 	/**
-	 * 获取文件夹下所有的文件 + 模糊查询（当不需要模糊查询时，queryStr传空或null即可）
+	 * 폴더 아래 모든 파일 조회 + 퍼지 조회(퍼지 조회가 필요 없으면 queryStr에 빈 값 또는 null 전달)
 	 *
-	 * @param folderPath 路径
-	 * @param queryStr   模糊查询字符串
+	 * @param folderPath 경로
+	 * @param queryStr   유사 검색 문자열
 	 * @return
 	 */
 	public static Map<String, List<FileInfo>> getFiles(String folderPath, String queryStr, String splitPath) {
@@ -58,7 +58,7 @@ public class FileTools {
 		List<FileInfo> folders = new ArrayList<>();
 		File f = new File(folderPath);
 		if (f.exists()) {
-			if (!f.isDirectory()) { // 路径为文件
+			if (!f.isDirectory()) { // 경로가 파일임
 				String path = f.getAbsolutePath().replaceAll("\\\\", "/");
 				if (StringUtils.isNotEmpty(splitPath) && f.getAbsolutePath().indexOf(splitPath) > -1) {
 					path = StringUtils.substringAfter(path, splitPath);
@@ -66,7 +66,7 @@ public class FileTools {
 				if (StringUtils.isEmpty(queryStr) || f.getName().indexOf(queryStr) != -1) {
 					files.add(new FileInfo(path, f.getName(), "file", f.lastModified()));
 				}
-			} else { // 路径为文件夹
+			} else { // 경로가 폴더임
 				File fa[] = f.listFiles();
 				for (int i = 0; i < fa.length; i++) {
 					File fs = fa[i];
@@ -148,8 +148,8 @@ public class FileTools {
 
 	public static String toFileName(String name) {
 		/*
-		 * windows下文件名中不能含有：\ / : * ? " < > | 英文的这些字符 ，这里使用"."、"'"进行替换。 \/:?| 用.替换 "<>
-		 * 用'替换
+		 * windows 파일명에는 \ / : * ? " < > | 영문 문자를 포함할 수 없어, 여기서는 "."、"'"로 대체. \/:?| 는 .로 대체 "<>
+		 * '로 대체
 		 */
 		name = name.replaceAll("[/\\\\:*?|]", "_");
 		name = name.replaceAll("[\"<>]", "'");
@@ -157,7 +157,7 @@ public class FileTools {
 	}
 
 	/**
-	 * 判断附件是否符合大小、文件类型的约束
+	 * 첨부파일이 크기·파일 형식 제약에 맞는지 판단
 	 *
 	 * @param size
 	 * @param fileName

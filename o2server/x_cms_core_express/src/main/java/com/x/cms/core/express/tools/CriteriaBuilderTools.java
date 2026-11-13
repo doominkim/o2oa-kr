@@ -56,11 +56,11 @@ public class CriteriaBuilderTools {
 	}
 	
 	/**
-	 * 根据过滤条件组织查询语句
-	 * @param cls  -查询的实体类名
-	 * @param cls_  -查询的实体类对应的StaticMetamodel
+	 * 필터 조건에 따라 조회문 구성
+	 * @param cls  -조회 대상 엔티티 클래스명
+	 * @param cls_  -조회 대상 엔티티 클래스에 대응하는 StaticMetamodel
 	 * @param em  -EntityManager
-	 * @param queryFilter  -查询过滤条件
+	 * @param queryFilter  -조회 필터 조건
 	 * @return
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
@@ -75,12 +75,12 @@ public class CriteriaBuilderTools {
 	}
 	
 	/**
-	 * 根据过滤条件组织查询语句
-	 * @param cls_  -查询的实体类对应的StaticMetamodel
+	 * 필터 조건에 따라 조회문 구성
+	 * @param cls_  -조회 대상 엔티티 클래스에 대응하는 StaticMetamodel
 	 * @param cb  -CriteriaBuilder
 	 * @param p  -Predicate
-	 * @param root  -查询根
-	 * @param queryFilter  -查询过滤条件
+	 * @param root  -조회 루트
+	 * @param queryFilter  -조회 필터 조건
 	 * @return
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
@@ -90,7 +90,7 @@ public class CriteriaBuilderTools {
 		if( queryFilter == null ) {
 			queryFilter = new QueryFilter();
 		}
-		//组装条件
+		//조건 조립
 		if( ListTools.isNotEmpty( queryFilter.getEqualsTerms() )) {
 			for( EqualsTerm term : queryFilter.getEqualsTerms() ) {
 				if( StringUtils.isEmpty( term.getName() ) || term.getValue() == null || StringUtils.isEmpty( term.getValue().toString() )) {
@@ -216,7 +216,7 @@ public class CriteriaBuilderTools {
 			}
 		}
 		
-		//继续递归查询条件
+		//조회 조건 재귀 계속
 		if( queryFilter.getAnd() != null  ) {
 			queryFilter.setJoinType( "and" );
 			composePredicateWithQueryFilter( cls_, cb, p, root,  queryFilter.getAnd() ) ;
@@ -231,15 +231,15 @@ public class CriteriaBuilderTools {
 	}
 	
 	/**
-	 * 通用的分页查询
+	 * 공통 페이지 조회
 	 * @param em  -EntityManager
-	 * @param cls  -查询的实体类名
-	 * @param cls_  -查询的实体类对应的StaticMetamodel
-	 * @param maxCount  -输出最大条目数量
-	 * @param queryFilter  -查询过滤条件
-	 * @param sequenceFieldValue  -上一条的序列值
-	 * @param orderField  -排序列名，默认createTime
-	 * @param order  -排序方式，默认DESC
+	 * @param cls  -조회 대상 엔티티 클래스명
+	 * @param cls_  -조회 대상 엔티티 클래스에 대응하는 StaticMetamodel
+	 * @param maxCount  -출력 최대 항목 수
+	 * @param queryFilter  -조회 필터 조건
+	 * @param sequenceFieldValue  -이전 항목의 시퀀스 값
+	 * @param orderField  -정렬 열 이름, 기본 createTime
+	 * @param order  -정렬 방식, 기본 DESC
 	 * @return
 	 * @throws Exception
 	 */
@@ -261,7 +261,7 @@ public class CriteriaBuilderTools {
 		Root<T> root = cq.from( cls );
 		
 		Predicate p = null;
-		//根据序列来排序
+		//시퀀스 기준 정렬
 		if( sequenceFieldValue != null ){
 			if( "DESC".equalsIgnoreCase( order )){
 				p = predicate_and( cb, p, cb.lessThan( root.get( cls_.getDeclaredField( orderField ).getName() ), sequenceFieldValue.toString() ));
@@ -270,10 +270,10 @@ public class CriteriaBuilderTools {
 			}
 		}
 		
-		//根据过滤条件来组织查询语句
+		//필터 조건으로 조회문 구성
 		p = CriteriaBuilderTools.composePredicateWithQueryFilter( cls_, cb, p, root, queryFilter );
 		
-		//按要求排序查询结果
+		//요구에 따라 조회 결과 정렬
 		if( "DESC".equalsIgnoreCase( order )){
 			cq.orderBy( cb.desc( root.get( cls_.getDeclaredField( orderField ).getName() )));
 		}else{
@@ -284,7 +284,7 @@ public class CriteriaBuilderTools {
 	}
 	
 	/**
-	 * 根据条件组织一个排序的语句
+	 * 조건에 따라 정렬문 구성
 	 * @param <T>
 	 * @param <T_>
 	 * @param cb
@@ -313,12 +313,12 @@ public class CriteriaBuilderTools {
 			Field[] fields = cls_.getDeclaredFields();
 			for( Field field : fields ) {
 				if( field.getName().equalsIgnoreCase( fieldName ) ) {
-					fieldName = field.getName(); //校正排序列的名称避免大小写的影响
+					fieldName = field.getName(); //대소문자 영향을 피하도록 정렬 열 이름 보정
 					fieldExists = true;
 				}
 			}
 		}
-		if( !fieldExists ) { //如果排序列不存在，就直接使用sequence，让SQL可以正常执行
+		if( !fieldExists ) { //정렬 열이 없으면 sequence를 바로 사용해 SQL이 정상 실행되도록 함
 			fieldName = Document.sequence_FIELDNAME;
 		}
 		if( StringUtils.isEmpty( orderType )) {

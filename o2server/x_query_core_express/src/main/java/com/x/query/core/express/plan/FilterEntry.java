@@ -52,7 +52,7 @@ public class FilterEntry extends GsonPropertyObject {
 
 	public static final String WILDCARD = "*";
 
-	/** 用于customFilterEntry */
+	/** customFilterEntry용 */
 	public String title;
 
 	public String value;
@@ -123,7 +123,7 @@ public class FilterEntry extends GsonPropertyObject {
 			Boolean booleanValue = BooleanUtils.toBoolean(compareValue);
 			if (null != booleanValue) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.or(cb.isNull(root.get(Item_.booleanValue)),
 							cb.equal(root.get(Item_.booleanValue), booleanValue)));
 				} else {
@@ -134,7 +134,7 @@ public class FilterEntry extends GsonPropertyObject {
 			Double doubleValue = NumberUtils.toDouble(compareValue);
 			if (null != doubleValue) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.or(cb.isNull(root.get(Item_.numberValue)),
 							cb.equal(root.get(Item_.numberValue), doubleValue)));
 				} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -155,7 +155,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			}
 		} else if (StringUtils.equals(this.formatType, FORMAT_DATEVALUE)) {
-			/* 日期值比较 */
+			/* 날짜 값 비교 */
 			if (StringUtils.isNotEmpty(compareValue)) {
 				Date value = null;
 				Date otherValue = null;
@@ -175,7 +175,7 @@ public class FilterEntry extends GsonPropertyObject {
 				if (null != value) {
 					value = DateTools.floorDate(value, 0);
 					if (Comparison.isNotEquals(this.comparison)) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.or(cb.isNull(root.get(Item_.dateValue)),
 								cb.equal(root.get(Item_.dateValue), value)));
 					} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -215,7 +215,7 @@ public class FilterEntry extends GsonPropertyObject {
 						ceil = DateTools.ceilYear(new Date(), 0);
 					}
 					if (Comparison.isNotEquals(this.comparison)) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.or(cb.isNull(root.get(Item_.dateValue)),
 								cb.between(root.get(Item_.dateValue), floor, ceil)));
 					} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -233,7 +233,7 @@ public class FilterEntry extends GsonPropertyObject {
 					}
 				} else if (StringUtils.equals(compareValue, DEFINE_TIME)) {
 					if (Comparison.isNotEquals(this.comparison)) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.or(cb.isNull(root.get(Item_.dateValue)),
 								cb.equal(root.get(Item_.dateValue), new Date())));
 					} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -252,7 +252,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			}
 		} else if (StringUtils.equals(this.formatType, FORMAT_TIMEVALUE)) {
-			/* 时间值比较 */
+			/* 시간 값 비교 */
 			if (StringUtils.isNotEmpty(compareValue)) {
 				Date value = null;
 				Date otherValue = null;
@@ -268,7 +268,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 				if (null != value) {
 					if (Comparison.isNotEquals(this.comparison)) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.or(cb.isNull(root.get(Item_.timeValue)),
 								cb.equal(root.get(Item_.timeValue), value)));
 					} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -288,7 +288,7 @@ public class FilterEntry extends GsonPropertyObject {
 					}
 				} else if (StringUtils.equals(compareValue, DEFINE_TIME)) {
 					if (Comparison.isNotEquals(this.comparison)) {
-						/** 不等于返回等于值,在外部运算 */
+						/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 						p = cb.and(p, cb.or(cb.isNull(root.get(Item_.timeValue)),
 								cb.equal(root.get(Item_.timeValue), new Date())));
 					} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -321,7 +321,7 @@ public class FilterEntry extends GsonPropertyObject {
 			}
 			if (null != value) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.or(cb.isNull(root.get(Item_.dateTimeValue)),
 							cb.equal(root.get(Item_.dateTimeValue), value)));
 				} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -360,7 +360,7 @@ public class FilterEntry extends GsonPropertyObject {
 					ceil = DateTools.ceilYear(new Date(), 0);
 				}
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.or(cb.isNull(root.get(Item_.dateTimeValue)),
 							cb.between(root.get(Item_.dateTimeValue), floor, ceil)));
 				} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -378,7 +378,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			} else if (StringUtils.equals(compareValue, DEFINE_TIME)) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.or(cb.isNull(root.get(Item_.dateTimeValue)),
 							cb.equal(root.get(Item_.dateTimeValue), new Date())));
 				} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -396,10 +396,10 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			}
 		} else {
-			/* TEXT 内容值 */
+			/* TEXT 내용 값 */
 			if (StringUtils.equals(compareValue, DEFINE_PERSON)) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.or(cb.isNull(root.get(Item_.stringShortValue)),
 							cb.equal(root.get(Item_.stringShortValue), runtime.person)));
 				} else if (Comparison.isGreaterThan(this.comparison)) {
@@ -421,7 +421,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			} else if (StringUtils.equals(compareValue, DEFINE_UNITLIST)) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					if(runtime.unitList.size()==1){
 						p = cb.and(p, cb.or(cb.isNull(root.get(Item_.stringShortValue)),
 								cb.equal(root.get(Item_.stringShortValue), runtime.unitList.get(0))));
@@ -451,7 +451,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			} else if (StringUtils.equals(compareValue, DEFINE_UNITALLLIST)) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, root.get(Item_.stringShortValue).in(runtime.unitAllList));
 				} else if (Comparison.isGreaterThan(this.comparison)) {
 					throw new Exception("unkown comparison:" + this.comparison);
@@ -472,7 +472,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			} else if (StringUtils.equals(compareValue, DEFINE_IDENTITYLIST)) {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, root.get(Item_.stringShortValue).in(runtime.identityList));
 				} else if (Comparison.isGreaterThan(this.comparison)) {
 					throw new Exception("unkown comparison:" + this.comparison);
@@ -493,7 +493,7 @@ public class FilterEntry extends GsonPropertyObject {
 				}
 			} else {
 				if (Comparison.isNotEquals(this.comparison)) {
-					/** 不等于返回等于值,在外部运算 */
+					/** 같지 않음은 같음 값을 반환하고 외부에서 연산 */
 					p = cb.and(p, cb.or(cb.isNull(root.get(Item_.stringShortValue)),
 							cb.equal(root.get(Item_.stringShortValue), compareValue)));
 				} else if (Comparison.isGreaterThan(this.comparison)) {

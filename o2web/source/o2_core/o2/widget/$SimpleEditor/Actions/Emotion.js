@@ -129,7 +129,7 @@ o2.widget.SimpleEditor.Actions.Emotion = new Class({
 				//this.node.getElements(".MWF_editor_emotion").addEvent("click", self.command.bind(self) );
 			},
 			"onQueryInjectNode": function(){
-				//chrom  在iframe中，不能对已经存在的对象插入东东,所以不能在onPostLoad 做这件事
+				//chrom  iframe에서는 이미 존재하는 객체에 무언가를 삽입할 수 없으므로 onPostLoad에서 이 작업을 할 수 없음
 				this.node.addEvent("mousedown",function(e){e.stopPropagation()});
 				this.node.getElement(".MWF_dialod_close") && this.node.getElement(".MWF_dialod_close").addEvent("click", self.closeDialog.bind(self) );
 				this.node.getElements(".MWF_editor_emotion") && this.node.getElements(".MWF_editor_emotion").addEvent("click", self.command.bind(self) );

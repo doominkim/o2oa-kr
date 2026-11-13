@@ -26,18 +26,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("snap")
-@JaxrsDescribe("快照")
+@JaxrsDescribe("스냅샷")
 public class SnapAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(SnapAction.class);
 
-	@JaxrsMethodDescribe(value = "对工作进行快照", action = ActionTypeSnap.class)
+	@JaxrsMethodDescribe(value = "업무 문서 스냅샷", action = ActionTypeSnap.class)
 	@GET
 	@Path("work/{workId}/type/snap")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void typeSnap(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId) {
 		ActionResult<ActionTypeSnap.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,13 +49,13 @@ public class SnapAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "挂起工作", action = ActionTypeSuspend.class)
+	@JaxrsMethodDescribe(value = "업무 문서 보류", action = ActionTypeSuspend.class)
 	@GET
 	@Path("work/{workId}/type/suspend")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void typeSuspend(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId) {
 		ActionResult<ActionTypeSuspend.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -67,13 +67,13 @@ public class SnapAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "废弃工作", action = ActionTypeAbandoned.class)
+	@JaxrsMethodDescribe(value = "업무 문서 폐기", action = ActionTypeAbandoned.class)
 	@GET
 	@Path("work/{workId}/type/abandoned")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void typeAbandoned(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId) {
 		ActionResult<ActionTypeAbandoned.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -85,14 +85,14 @@ public class SnapAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "废弃已完成工作", action = ActionTypeAbandonedWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "완료된 업무 문서 폐기", action = ActionTypeAbandonedWorkCompleted.class)
 	@GET
 	@Path("workcompleted/{workCompletedId}/type/abandonedworkcompleted")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void typeAbandonedWorkCompleted(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("已完成工作标识") @PathParam("workCompletedId") String workCompletedId) {
+			@JaxrsParameterDescribe("완료된 업무 문서 식별자") @PathParam("workCompletedId") String workCompletedId) {
 		ActionResult<ActionTypeAbandonedWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -104,13 +104,13 @@ public class SnapAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对已完成工作进行快照", action = ActionTypeSnapWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "완료된 업무 문서 스냅샷", action = ActionTypeSnapWorkCompleted.class)
 	@GET
 	@Path("workcompleted/{workCompletedId}/type/snapworkcompleted")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void typeSnapWorkCompleted(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("已完成工作标识") @PathParam("workCompletedId") String workCompletedId) {
+			@JaxrsParameterDescribe("완료된 업무 문서 식별자") @PathParam("workCompletedId") String workCompletedId) {
 		ActionResult<ActionTypeSnapWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -122,13 +122,13 @@ public class SnapAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除快照", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "스냅샷 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -140,13 +140,13 @@ public class SnapAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "恢复快照", action = ActionRestore.class)
+	@JaxrsMethodDescribe(value = "스냅샷 복원", action = ActionRestore.class)
 	@GET
 	@Path("{id}/restore")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void restore(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionRestore.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -158,7 +158,7 @@ public class SnapAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导入快照", action = ActionUpload.class)
+	@JaxrsMethodDescribe(value = "스냅샷 가져오기", action = ActionUpload.class)
 	@POST
 	@Path("upload")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

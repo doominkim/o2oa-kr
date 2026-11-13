@@ -6,7 +6,7 @@ import com.x.cms.assemble.control.service.CmsBatchOperationProcessService;
 import com.x.cms.core.entity.CmsBatchOperation;
 
 /**
- * 批处理操作执行
+ * 일괄 처리 작업 실행
  */
 public class QueueBatchOperation extends AbstractQueue<CmsBatchOperation> {
 	

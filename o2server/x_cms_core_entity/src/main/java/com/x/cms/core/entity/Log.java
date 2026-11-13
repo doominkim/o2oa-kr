@@ -19,10 +19,10 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 内容管理日志信息表
+ * 콘텐츠 관리 로그 정보 테이블
  *
  */
-@Schema(name = "Log", description = "内容管理日志信息.")
+@Schema(name = "Log", description = "콘텐츠 관리 로그 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Log.table, uniqueConstraints = {
@@ -43,7 +43,7 @@ public class Log extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -53,78 +53,78 @@ public class Log extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String operationType_FIELDNAME = "operationType";
-	@FieldDescribe("操作类别：新增|修改|删除|查看|查询")
+	@FieldDescribe("작업 유형: 추가|수정|삭제|조회|검색")
 	@Index(name = TABLE + IndexNameMiddle + operationType_FIELDNAME)
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + operationType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String operationType;
 
 	public static final String operationLevel_FIELDNAME = "operationLevel";
-	@FieldDescribe("操作级别：应用|分类|文档|文件")
+	@FieldDescribe("작업 수준: 앱|분류|문서|파일")
 	@Index(name = TABLE + IndexNameMiddle + operationLevel_FIELDNAME)
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + operationLevel_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String operationLevel;
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("操作对象：应用ID")
+	@FieldDescribe("작업 대상: 앱 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + appId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appId;
 
 	public static final String categoryId_FIELDNAME = "categoryId";
-	@FieldDescribe("操作对象：分类ID")
+	@FieldDescribe("작업 대상: 분류 ID")
 	@Index(name = TABLE + IndexNameMiddle + categoryId_FIELDNAME)
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + categoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryId;
 
 	public static final String documentId_FIELDNAME = "documentId";
-	@FieldDescribe("操作对象：文档ID")
+	@FieldDescribe("작업 대상: 문서 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + documentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String documentId;
 
 	public static final String fileId_FIELDNAME = "fileId";
-	@FieldDescribe("操作对象：文件ID")
+	@FieldDescribe("작업 대상: 파일 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + fileId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fileId;
 
 	public static final String operatorUid_FIELDNAME = "operatorUid";
-	@FieldDescribe("操作者UID")
+	@FieldDescribe("작업자 UID")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + operatorUid_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + operatorUid_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String operatorUid;
 
 	public static final String operatorName_FIELDNAME = "operatorName";
-	@FieldDescribe("操作者姓名")
+	@FieldDescribe("작업자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + operatorName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String operatorName;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("操作文字描述")
+	@FieldDescribe("작업 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	/**
-	 * 获取操作类别
+	 * 작업 유형 조회
 	 * 
 	 * @return
 	 */
@@ -133,7 +133,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作类别
+	 * 작업 유형 설정
 	 * 
 	 * @param operationType
 	 */
@@ -142,7 +142,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取操作者帐号
+	 * 작업자 계정 조회
 	 * 
 	 * @return
 	 */
@@ -151,7 +151,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作者帐号
+	 * 작업자 계정 설정
 	 * 
 	 * @param operatorUid
 	 */
@@ -160,7 +160,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取操作者姓名
+	 * 작업자 이름 조회
 	 * 
 	 * @return
 	 */
@@ -169,7 +169,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作者姓名
+	 * 작업자 이름 설정
 	 * 
 	 * @param operatorName
 	 */
@@ -178,7 +178,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取操作日志文字描述
+	 * 작업 로그 설명 조회
 	 * 
 	 * @return
 	 */
@@ -187,7 +187,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作日志文字描述
+	 * 작업 로그 설명 설정
 	 * 
 	 * @param description
 	 */
@@ -196,7 +196,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取操作的应用ID
+	 * 작업 대상 앱 ID 조회
 	 * 
 	 * @return
 	 */
@@ -205,7 +205,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作的应用ID
+	 * 작업 대상 앱 ID 설정
 	 * 
 	 * @param appId
 	 */
@@ -214,7 +214,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取操作的分类ID
+	 * 작업 대상 분류 ID 조회
 	 * 
 	 * @return
 	 */
@@ -223,7 +223,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作的分类ID
+	 * 작업 대상 분류 ID 설정
 	 * 
 	 * @param appId
 	 */
@@ -232,7 +232,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取操作的文档ID
+	 * 작업 대상 문서 ID 조회
 	 * 
 	 * @return
 	 */
@@ -241,7 +241,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作的文档ID
+	 * 작업 대상 문서 ID 설정
 	 * 
 	 * @param appId
 	 */
@@ -250,7 +250,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 获取操作的文件ID
+	 * 작업 대상 파일 ID 조회
 	 * 
 	 * @return
 	 */
@@ -259,7 +259,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 设置操作的文件ID
+	 * 작업 대상 파일 ID 설정
 	 * 
 	 * @param appId
 	 */
@@ -268,7 +268,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 操作对象级别：应用|分类|文档|文件
+	 * 작업 대상 수준: 앱|분류|문서|파일
 	 * 
 	 * @return
 	 */
@@ -277,7 +277,7 @@ public class Log extends SliceJpaObject {
 	}
 
 	/**
-	 * 操作对象级别：应用|分类|文档|文件
+	 * 작업 대상 수준: 앱|분류|문서|파일
 	 * 
 	 * @return
 	 */

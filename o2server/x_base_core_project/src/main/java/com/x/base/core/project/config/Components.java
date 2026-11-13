@@ -140,7 +140,7 @@ public class Components extends ConfigObject {
         return new Components();
     }
 
-    @FieldDescribe("默认模块")
+    @FieldDescribe("기본 모듈")
     private List<Component> systems = new ArrayList<>();
 
     public void save() throws Exception {
@@ -166,28 +166,28 @@ public class Components extends ConfigObject {
             this.type = type;
         }
 
-        @FieldDescribe("名称")
+        @FieldDescribe("이름")
         private String name;
 
-        @FieldDescribe("路径")
+        @FieldDescribe("경로")
         private String path;
 
-        @FieldDescribe("标题")
+        @FieldDescribe("제목")
         private String title;
 
         @FieldDescribe("iconPath")
         private String iconPath;
 
-        @FieldDescribe("排序号")
+        @FieldDescribe("정렬 번호")
         private Integer orderNumber;
 
-        @FieldDescribe("类型")
+        @FieldDescribe("유형")
         private String type;
 
-        @FieldDescribe("允许列表,可以混用person,role")
+        @FieldDescribe("허용 목록, person과 role 혼용 가능")
         private List<String> allowList = new ArrayList<>();
 
-        @FieldDescribe("禁止列表,可以混用person,role")
+        @FieldDescribe("금지 목록, person과 role 혼용 가능")
         private List<String> dentyList = new ArrayList<>();
 
         public String getName() {

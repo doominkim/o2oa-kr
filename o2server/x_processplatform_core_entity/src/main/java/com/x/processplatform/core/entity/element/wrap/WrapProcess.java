@@ -39,7 +39,7 @@ public class WrapProcess extends Process {
 	private List<WrapService> serviceList = new ArrayList<>();
 	private List<WrapSplit> splitList = new ArrayList<>();
 
-	@FieldDescribe("流程业务字段权限配置")
+	@FieldDescribe("프로세스 업무 필드 권한 설정")
 	private List<WrapItemAccess> itemAccessList = new ArrayList<>();
 
 	public List<WrapAgent> getAgentList() {

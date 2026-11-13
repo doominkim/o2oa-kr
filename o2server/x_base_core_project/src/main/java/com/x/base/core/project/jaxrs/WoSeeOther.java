@@ -12,7 +12,7 @@ public class WoSeeOther extends GsonPropertyObject {
 		this.url = url;
 	}
 
-	@FieldDescribe("地址")
+	@FieldDescribe("주소")
 	private String url;
 
 	public String getUrl() {

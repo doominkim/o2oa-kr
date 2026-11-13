@@ -26,17 +26,17 @@ import com.x.base.core.project.logger.LoggerFactory;
  * @author sword
  */
 @Path("anonymous/file")
-@JaxrsDescribe("File操作")
+@JaxrsDescribe("File 작업")
 public class FileAnonymousAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileAnonymousAction.class);
 
-	@JaxrsMethodDescribe(value = "下载文件,以附件方式,不输出contentType头.", action = ActionDownloadStream.class)
+	@JaxrsMethodDescribe(value = "파일 다운로드, 첨부파일 방식, contentType 헤더 미출력.", action = ActionDownloadStream.class)
 	@GET
 	@Path("{id}/download/stream")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void downloadStream(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDownloadStream.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -48,12 +48,12 @@ public class FileAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载文件,输出contentType头.", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "파일 다운로드, contentType 헤더 출력.", action = ActionDownload.class)
 	@GET
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -65,13 +65,13 @@ public class FileAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	/** 为IOS访问单独增加的方法 */
-	@JaxrsMethodDescribe(value = "下载文件,以附件方式,不输出contentType头,使用POST方法访问.", action = ActionDownloadStream.class)
+	/** iOS 접근용으로 별도 추가한 메서드 */
+	@JaxrsMethodDescribe(value = "파일 다운로드, 첨부파일 방식, contentType 헤더 미출력, POST 방식으로 접근.", action = ActionDownloadStream.class)
 	@POST
 	@Path("{id}/download/stream")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void postDownloadStream(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionDownloadStream.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -83,13 +83,13 @@ public class FileAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	/** 为IOS访问单独增加的方法 */
-	@JaxrsMethodDescribe(value = "下载文件,输出contentType头,使用POST方法访问.", action = ActionDownload.class)
+	/** iOS 접근용으로 별도 추가한 메서드 */
+	@JaxrsMethodDescribe(value = "파일 다운로드, contentType 헤더 출력, POST 방식으로 접근.", action = ActionDownload.class)
 	@POST
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void postDownload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

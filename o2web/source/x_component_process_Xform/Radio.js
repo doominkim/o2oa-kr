@@ -1,19 +1,19 @@
 MWF.xDesktop.requireApp("process.Xform", "$Selector", null, false);
 MWF.require("MWF.widget.UUID", null, false);
-/** @class Radio 单选按钮。
- * @o2cn 单选按钮
+/** @class Radio 라디오 버튼.
+ * @o2cn 라디오 버튼
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  *
- * var data = field.getData(); //获取值
- * field.setData("字符串值"); //设置值
- * field.hide(); //隐藏字段
- * var id = field.json.id; //获取字段标识
- * var flag = field.isEmpty(); //字段是否为空
+ * var data = field.getData(); //값 조회
+ * field.setData("문자열 값"); //값 설정
+ * field.hide(); //필드 숨기기
+ * var id = field.json.id; //필드 식별자 조회
+ * var flag = field.isEmpty(); //필드가 비어 있는지 여부
  * @extends MWF.xApplication.process.Xform.$Selector
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -25,16 +25,16 @@ MWF.xApplication.process.Xform.Radio = MWF.APPRadio =  new Class(
 	Implements: [Events],
 	Extends: MWF.APP$Selector,
         /**
-         * 组件加载后触发。如果选项加载为异步，则异步处理完成后触发此事件
+         * 컴포넌트 로드 후 발생. 선택 항목 로드가 비동기이면 비동기 처리 완료 후 이 이벤트 발생
          * @event MWF.xApplication.process.Xform.Radio#load
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
 
 
         /**
-         * 值改变时触发。可以通过this.event获取修改后的选择项（Dom对象）。
+         * 값이 변경될 때 발생. this.event로 변경된 선택 항목(Dom 객체)을 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.Radio#change
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
 
     /**
@@ -361,10 +361,10 @@ MWF.xApplication.process.Xform.Radio = MWF.APPRadio =  new Class(
 		return {"value": [value || ""] , "text": [text || value || ""]};
 	},
     /**
-     * @summary 获取选中项的text。
-     * @return {String} 返回选中项的text
+     * @summary 선택 항목의 text 조회.
+     * @return {String} 선택 항목의 text 반환
      * @example
-     * var text = this.form.get('fieldId').getText(); //获取选中项的文本
+     * var text = this.form.get('fieldId').getText(); //선택 항목의 텍스트 가져오기
      */
     getText: function(){
 		var d = this.getTextData();
@@ -401,8 +401,8 @@ MWF.xApplication.process.Xform.Radio = MWF.APPRadio =  new Class(
     },
 
     /**
-     * @summary 获取选中的Dom对象。
-     * @return {Element} 返回选中的Dom对象
+     * @summary 선택된 Dom 객체 가져오기.
+     * @return {Element} 선택된 Dom 객체 반환
      * @example
      * var input = this.form.get('fieldId').getSelectedInput();
      */
@@ -502,7 +502,7 @@ MWF.xApplication.process.Xform.Radio = MWF.APPRadio =  new Class(
 		});
 	},
     setExcelData: function(d, type){
-		var value = d.replace(/&#10;/g,""); //换行符&#10;
+		var value = d.replace(/&#10;/g,""); //줄바꿈 문자&#10;
 		this.excelData = value;
 		if( type === "value" ){
 			this.setData(value, true);

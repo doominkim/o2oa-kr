@@ -955,13 +955,13 @@ MWF.xApplication.query.Query.Statistician.GroupStat = new Class({
         if( !calculates.length )return value;
         var calculate = calculates[0];
         switch (calculate.formatType) {
-            case "currency": //货币
+            case "currency": //통화
                 value = this.addZero( value );
-                value = value.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); //添加逗号
+                value = value.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); //쉼표 추가
                 value = "￥" + value;
                 break;
-            case "percent": //百分比
-                value = value.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); //添加逗号
+            case "percent": //백분율
+                value = value.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); //쉼표 추가
                 value = value + "%";
                 break;
         }
@@ -1076,9 +1076,9 @@ MWF.xApplication.query.Query.Statistician.GroupStat = new Class({
         this.checkSelectedCells();
     },
     completeDrag: function(td, e){
-        //设置选中样式
+        //선택 스타일 설정
         var trs = this.table.getElements("tr[class!='totalTr']");
-        //取消全部选中
+        //전체 선택 해제
         trs.each(function (tr, i) {
             if( i === 0 ){
                 tr.getElements("td").each(function (td, i) {

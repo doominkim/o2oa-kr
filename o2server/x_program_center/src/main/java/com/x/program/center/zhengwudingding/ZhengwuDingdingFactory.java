@@ -34,7 +34,7 @@ public class ZhengwuDingdingFactory {
 	    		if(time == 0) {
 	    			time =defaultTime;
 	    		}
-	    		Thread.sleep(time);//延时2秒
+	    		Thread.sleep(time);//2초 지연
 	 		} catch (InterruptedException e) {
 	 			// TODO Auto-generated catch block
 	 			e.printStackTrace();
@@ -163,7 +163,7 @@ public class ZhengwuDingdingFactory {
 		// "retMessage": "success",
 		// "retData": {
 		// "orgNumber": 100016000,
-		// "name": "互联网+事业部",
+		// "name": "인터넷+사업부",
 		// "type": 1,
 		// "parentId": 1,
 		// "fullName": "",

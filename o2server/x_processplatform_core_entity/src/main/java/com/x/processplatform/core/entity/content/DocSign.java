@@ -29,11 +29,11 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 签批信息
+ * 서명 결재 정보
  * @author sword
  */
 
-@Schema(name = "DocSign", description = "流程平台签名信息.")
+@Schema(name = "DocSign", description = "프로세스 플랫폼 서명 정보.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.DocSign.table, uniqueConstraints = {
@@ -57,7 +57,7 @@ public class DocSign extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -115,79 +115,79 @@ public class DocSign extends SliceJpaObject {
 	}
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("标题.")
+	@FieldDescribe("제목.")
 	@Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("工单ID.")
+	@FieldDescribe("업무 문서 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String taskId_FIELDNAME = "taskId";
-	@FieldDescribe("待办ID.")
+	@FieldDescribe("결재 대기 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + taskId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + taskId_FIELDNAME, unique = true)
 	@CheckPersist(allowEmpty = false)
 	private String taskId;
 
 	public static final String activity_FIELDNAME = "activity";
-	@FieldDescribe("活动ID.")
+	@FieldDescribe("활동 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String activity;
 
 	public static final String activityName_FIELDNAME = "activityName";
-	@FieldDescribe("活动名称.")
+	@FieldDescribe("활동 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityName;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("当前处理人")
+	@FieldDescribe("현재 처리자")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String signScrawlId_FIELDNAME = "signScrawlId";
-	@FieldDescribe("正文签批转存为图片的ID.")
+	@FieldDescribe("본문 서명 결재 이미지 저장 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + signScrawlId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String signScrawlId;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态：1(暂存)|2(签批正文不可以修改)|3(签批正文可以修改).")
+	@FieldDescribe("상태: 1(임시 저장)|2(서명 결재 본문 수정 불가)|3(서명 결재 본문 수정 가능).")
 	@Column(name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer status;
 
 	public static final String commitTime_FIELDNAME = "commitTime";
-	@FieldDescribe("提交时间.")
+	@FieldDescribe("제출 시간.")
 	@Column(name = ColumnNamePrefix + commitTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + commitTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date commitTime;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_20M, name = ColumnNamePrefix + properties_FIELDNAME)

@@ -7,7 +7,7 @@ class ExceptionAdd extends LanguagePromptException {
 	private static final long serialVersionUID = -1678718913437722938L;
 
 	ExceptionAdd(String id) {
-		super("添加待办人失败, task:{}.", id);
+		super("결재 대기자 추가 실패, task: {}.", id);
 	}
 
 }

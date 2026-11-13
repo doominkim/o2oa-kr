@@ -18,7 +18,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Bind", description = "组织绑定信息.")
+@Schema(name = "Bind", description = "조직 바인딩 정보.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Bind.table, uniqueConstraints = {
@@ -39,27 +39,27 @@ public class Bind extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("登录的用户,可以重复.")
+	@FieldDescribe("로그인 사용자, 중복 가능.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String meta_FIELDNAME = "meta";
-	@FieldDescribe("二维码中附带的标识信息.")
+	@FieldDescribe("QR 코드에 포함된 식별 정보.")
 	@Column(length = length_255B, name = ColumnNamePrefix + meta_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + meta_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

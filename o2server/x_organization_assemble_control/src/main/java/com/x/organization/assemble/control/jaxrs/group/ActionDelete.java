@@ -44,7 +44,7 @@ class ActionDelete extends BaseAction {
             emc.beginTransaction(Group.class);
             group = emc.find(group.getId(), Group.class);
             emc.beginTransaction(Role.class);
-            // 删除有群组成员的群组和角色成员
+            // 그룹 멤버가 있는 그룹 및 역할 멤버 삭제
             this.removeGroupMember(business, group);
             this.removeRoleMember(business, group);
             emc.remove(group, CheckRemoveType.all);

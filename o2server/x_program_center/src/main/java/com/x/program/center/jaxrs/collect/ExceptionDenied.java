@@ -7,6 +7,6 @@ class ExceptionDenied extends LanguagePromptException {
 	private static final long serialVersionUID = 9107373129400635015L;
 
 	ExceptionDenied() {
-		super("短信验证码不可为空.");
+		super("SMS 인증 코드는 비워 둘 수 없습니다.");
 	}
 }

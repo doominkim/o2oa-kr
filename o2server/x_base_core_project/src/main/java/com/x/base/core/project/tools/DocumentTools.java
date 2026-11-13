@@ -332,7 +332,7 @@ public class DocumentTools {
 				return Base64.decodeBase64(wrap.getValue());
 			}
 		} catch (Exception e) {
-			logger.warn(fileName+"-转换html异常："+e.getMessage());
+			logger.warn(fileName+"-html 변환 예외:"+e.getMessage());
 			return null;
 		}
 		return null;
@@ -428,7 +428,7 @@ public class DocumentTools {
 				return Base64.decodeBase64(wrap.getValue());
 			}
 		} catch (Exception e) {
-			logger.warn(fileName+"-转换pdf异常："+e.getMessage());
+			logger.warn(fileName+"-pdf 변환 예외:"+e.getMessage());
 			return null;
 		}
 		return null;

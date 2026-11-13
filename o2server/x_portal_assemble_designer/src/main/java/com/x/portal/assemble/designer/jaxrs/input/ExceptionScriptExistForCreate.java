@@ -7,6 +7,6 @@ class ExceptionScriptExistForCreate extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionScriptExistForCreate(String id) {
-		super("创建脚本冲突, id:{}.");
+		super("스크립트 생성 충돌, id: {}.");
 	}
 }

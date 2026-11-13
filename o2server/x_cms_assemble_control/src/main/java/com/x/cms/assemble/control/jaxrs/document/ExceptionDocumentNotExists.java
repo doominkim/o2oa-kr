@@ -7,6 +7,6 @@ class ExceptionDocumentNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionDocumentNotExists( String id ) {
-		super("文档信息不存在，无法继续进行操作。id:{}", id );
+		super("게시글 정보가 없어 작업을 계속할 수 없습니다. id: {}", id );
 	}
 }

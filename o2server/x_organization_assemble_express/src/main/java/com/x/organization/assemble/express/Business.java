@@ -371,7 +371,7 @@ public class Business {
 	}
 
 	public boolean hasAnyRole(EffectivePerson effectivePerson, String... roleFlags) throws Exception {
-		/** 如果不加这个xadmin会报错 */
+		/** 이것을 넣지 않으면 xadmin에서 오류 발생 */
 		if (effectivePerson.isManager()) {
 			return true;
 		}

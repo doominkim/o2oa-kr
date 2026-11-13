@@ -5,29 +5,29 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class Identity extends GsonPropertyObject {
 
-	@FieldDescribe("匹配字段")
+	@FieldDescribe("일치 필드")
 	private String matchKey;
-	@FieldDescribe("身份名称")
+	@FieldDescribe("신분 이름")
 	private String name;
-	@FieldDescribe("身份标识")
+	@FieldDescribe("신분 식별자")
 	private String unique;
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	private String description;
-	@FieldDescribe("识别名")
+	@FieldDescribe("식별 이름")
 	private String distinguishedName;
-	@FieldDescribe("人员")
+	@FieldDescribe("사용자")
 	private String person;
-	@FieldDescribe("组织")
+	@FieldDescribe("조직")
 	private String unit;
-	@FieldDescribe("组织名称")
+	@FieldDescribe("조직명")
 	private String unitName;
-	@FieldDescribe("组织级别")
+	@FieldDescribe("조직 레벨")
 	private Integer unitLevel;
-	@FieldDescribe("组织级别名")
+	@FieldDescribe("조직 레벨명")
 	private String unitLevelName;
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	private Integer orderNumber;
-	@FieldDescribe("是否是设定的主身份")
+	@FieldDescribe("지정된 주 신분 여부")
 	private Boolean major;
 
 	public String getMatchKey() {

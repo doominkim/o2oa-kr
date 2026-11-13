@@ -13,25 +13,25 @@ import java.util.Map;
 public class McpConfig extends GsonPropertyObject {
     public static final String TYPE_HTTP = "http";
 
-    @FieldDescribe("名称.")
+    @FieldDescribe("이름.")
     private String name;
 
-    @FieldDescribe("显示名称.")
+    @FieldDescribe("표시 이름.")
     private String displayName;
 
-    @FieldDescribe("分组.")
+    @FieldDescribe("그룹.")
     private String category;
 
-    @FieldDescribe("说明.")
+    @FieldDescribe("설명.")
     private String desc;
 
-    @FieldDescribe("是否启用.")
+    @FieldDescribe("사용 여부.")
     private Boolean enable;
 
     @FieldDescribe("id.")
     private String id;
 
-    @FieldDescribe("http选项：{\n"
+    @FieldDescribe("http 옵션: {\n"
             + "    \"url\": \"https://xxx/x_program_center/jaxrs/invoke/createMeeting/execute\",\n"
             + "    \"method\": \"post\",\n"
             + "    \"headerMap\": {\n"
@@ -42,23 +42,23 @@ public class McpConfig extends GsonPropertyObject {
             + "    }.")
     private HttpOption httpOption;
 
-    @FieldDescribe("mcp参数列表：[\n"
+    @FieldDescribe("mcp 매개변수 목록: [\n"
             + "    {\n"
             + "      \"name\": \"subject\",\n"
-            + "      \"desc\": \"会议主题,描述会议主要议题或内容.\",\n"
+            + "      \"desc\": \"회의 주제, 회의의 주요 의제나 내용 설명.\",\n"
             + "      \"type\": \"string\",\n"
             + "      \"required\": true\n"
             + "    },\n"
             + "  ].")
     private List<McpParameter> mcpParameterList;
 
-    @FieldDescribe("创建时间.")
+    @FieldDescribe("생성 시간.")
     private Date createDateTime;
 
-    @FieldDescribe("修改时间.")
+    @FieldDescribe("수정 시간.")
     private Date updateDateTime;
 
-    @FieldDescribe("扩展参数，json对象.")
+    @FieldDescribe("확장 매개변수, json 객체.")
     private Map<String, Object> extra;
 
     private String type = "http";
@@ -163,16 +163,16 @@ public class McpConfig extends GsonPropertyObject {
     }
 
     public static class McpParameter extends GsonPropertyObject{
-        @FieldDescribe("参数名称.")
+        @FieldDescribe("매개변수 이름.")
         private String name;
 
-        @FieldDescribe("参数描述.")
+        @FieldDescribe("매개변수 설명.")
         private String desc;
 
-        @FieldDescribe("参数类型.")
+        @FieldDescribe("매개변수 유형.")
         private String type;
 
-        @FieldDescribe("是否必填.")
+        @FieldDescribe("필수 여부.")
         private Boolean required;
 
         public String getName() {
@@ -209,16 +209,16 @@ public class McpConfig extends GsonPropertyObject {
     }
 
     public static class HttpOption extends GsonPropertyObject{
-        @FieldDescribe("URL地址.")
+        @FieldDescribe("URL 주소.")
         private String url;
 
-        @FieldDescribe("http方法.")
+        @FieldDescribe("http 메서드.")
         private String method;
 
-        @FieldDescribe("http头,使用${}替换参数.")
+        @FieldDescribe("http 헤더, ${}로 매개변수 치환.")
         private Map<String,String> headerMap;
 
-        @FieldDescribe("http体,使用${}替换参数.")
+        @FieldDescribe("http 본문, ${}로 매개변수 치환.")
         private Map<String,String> bodyMap;
 
         private Boolean internalEnable = false;

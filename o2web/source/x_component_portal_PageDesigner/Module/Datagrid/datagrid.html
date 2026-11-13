@@ -28,10 +28,10 @@
                 <td class="editTableValue"><input type="color" name="zebraColor" value="text{$.zebraColor}" class="editTableInput"/></td>
             </tr>
             <!--<tr>-->
-            <!--<td class="editTableTitle">序号:</td>-->
+            <!--<td class="editTableTitle">순번:</td>-->
             <!--<td class="editTableValue">-->
-            <!--<input type="radio" name="sequence" value="yes" text{($.sequence=='yes')?'checked':''}/>显示-->
-            <!--<input type="radio" name="sequence" value="no" text{($.sequence=='no')?'checked':''}/>不显示-->
+            <!--<input type="radio" name="sequence" value="yes" text{($.sequence=='yes')?'checked':''}/>표시-->
+            <!--<input type="radio" name="sequence" value="no" text{($.sequence=='no')?'checked':''}/>표시 안 함-->
             <!--</td>-->
             <!--</tr>-->
         </table>
@@ -123,7 +123,7 @@
         <div class="MWFMaplist" name="itemTitleStyles" collapse="true" title="{{$.lp.itemTitleStyle}}"></div>
     </div>
     <div title="{{$.lp.power}}"  class="MWFTab">
-        <!-- 可阅读配置 -->
+        <!-- 열람 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.readConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.readConfigInfo}}</div>
         
@@ -184,7 +184,7 @@
             </table>
         </div>
         
-        <!-- 可编辑配置 -->
+        <!-- 편집 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.editConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.editConfigInfo}}</div>
 

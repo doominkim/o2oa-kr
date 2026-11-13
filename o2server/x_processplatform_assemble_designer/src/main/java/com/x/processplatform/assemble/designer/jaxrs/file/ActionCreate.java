@@ -42,7 +42,7 @@ class ActionCreate extends BaseAction {
             }
             File file = new File();
             Wi.copier.copy(wi, file);
-            /** 设置file 的Id由前端生成提供 */
+            /** file의 Id를 프런트엔드에서 생성해 제공하도록 설정 */
             file.setId(wi.getId());
             file.setApplication(application.getId());
             this.updateCreator(file, effectivePerson);

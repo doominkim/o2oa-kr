@@ -7,6 +7,6 @@ class ExceptionAttendanceImportFileProcess extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionAttendanceImportFileProcess( Throwable e, String message ) {
-		super("用户在进行导入文件信息处理时发生异常！message:" + message, e );
+		super("가져오기 파일 정보 처리 중 오류가 발생했습니다! message:" + message, e );
 	}
 }

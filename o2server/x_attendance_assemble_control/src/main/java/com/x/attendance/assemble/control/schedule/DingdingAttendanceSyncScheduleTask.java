@@ -14,8 +14,8 @@ import com.x.base.core.project.schedule.AbstractJob;
 import com.x.base.core.project.tools.DateTools;
 
 /**
- * 钉钉考勤结果同步的定时器
- * 每天晚上1点同步前一天的结果
+ * DingTalk 근태 결과 동기화 타이머
+ * 매일 밤 1시에 전날 결과 동기화
  * Created by fancyLou on 2020-03-26.
  * Copyright © 2020 O2. All rights reserved.
  */
@@ -26,7 +26,7 @@ public class DingdingAttendanceSyncScheduleTask extends AbstractJob {
     @Override
     public void schedule(JobExecutionContext jobExecutionContext) throws Exception {
         try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-            //前一天 0点到23点
+            //전날 0시부터 23시까지
             Date from = new Date();
             from = DateTools.addDay(from, -1);
             from = DateTools.floorDate(from, null);

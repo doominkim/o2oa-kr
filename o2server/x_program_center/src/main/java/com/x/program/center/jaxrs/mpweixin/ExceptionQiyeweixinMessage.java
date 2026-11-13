@@ -7,6 +7,6 @@ public class ExceptionQiyeweixinMessage extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionQiyeweixinMessage(Integer retCode, String retMessage) {
-		super("发送企业微信消息失败,错误代码:{},错误消息:{}.", retCode, retMessage);
+		super("WeCom 메시지 전송에 실패했습니다. 오류 코드: {}, 오류 메시지: {}.", retCode, retMessage);
 	}
 }

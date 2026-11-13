@@ -47,15 +47,15 @@ public class WebServerTools extends JettySeverTools {
 
 	public static Server start() throws Exception {
 
-		// 更新web服务配置信息
+		// web 서비스 설정 정보 업데이트
 		WebServers.updateWebServerConfigJson();
-		// 更新 favicon.ico
+		// favicon.ico 갱신
 		updateFavicon();
-		// 创建index.html
+		// index.html 생성
 		createIndexPage();
 		// copyDefaultHtml
 		copyDefaultHtml();
-		// 覆盖 webServer
+		// webServer 덮어쓰기
 		coverToWebServer();
 
 		WebServer webServer = Config.currentNode().getWeb();
@@ -168,7 +168,7 @@ public class WebServerTools extends JettySeverTools {
 	}
 
 	private static void moveNonDefaultDirectoryToWebroot() throws Exception {
-		// 将webServer目录下的自定义目录移动到webroot
+		// webServer 디렉터리의 사용자 정의 디렉터리를 webroot로 이동
 		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Config.path_servers_webServer(true),
 				Files::isDirectory)) {
 			directoryStream.forEach(o -> {

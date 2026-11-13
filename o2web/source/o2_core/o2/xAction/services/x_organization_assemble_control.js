@@ -1,7 +1,7 @@
 MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
     Extends: MWF.xAction.RestActions.Action,
 
-    //个人接口服务--
+    //개인 인터페이스 서비스--
     savePerson: function(data, success, failure){
         if (data.id){
             this.updatePerson(data.id, data, success, failure);
@@ -32,7 +32,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
     },
 
 
-    //个人属性接口服务---
+    //개인 속성 인터페이스 서비스---
     savePersonAttribute: function(data, success, failure){
         if (data.id){
             this.updatePersonAttribute(data.id, data, success, failure);
@@ -41,7 +41,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
         }
     },
 
-    //身份接口服务---
+    //신분 인터페이스 서비스---
     saveIdentity: function(data, success, failure){
         if (data.id){
             this.updateIdentity(data.id, data, success, failure);
@@ -65,7 +65,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
         this.action.invoke({"name": "listIdentityByPinyininitial","async": async, "data": data,	"success": success,	"failure": failure});
     },
 
-    //角色接口服务---
+    //역할 인터페이스 서비스---
     saveRole: function(data, success, failure){
         if (data.id){
             this.updateRole(data.id, data, success, failure);
@@ -89,7 +89,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
         this.action.invoke({"name": "listRoleByKey","async": async, "data": data,	"success": success,	"failure": failure});
     },
 
-    //群组接口服务---
+    //그룹 인터페이스 서비스---
     saveGroup: function(data, success, failure){
         if (data.id){
             this.updateGroup(data.id, data, success, failure);
@@ -113,7 +113,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
         this.action.invoke({"name": "listGroupByPinyininitial","async": async, "data": data,	"success": success,	"failure": failure});
     },
 
-    //组织接口服务---
+    //조직 인터페이스 서비스---
     saveUnit: function(data, success, failure){
         if (data.id){
             this.updateUnit(data.id, data, success, failure);
@@ -137,7 +137,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
         this.action.invoke({"name": "listUnitByPinyininitial","async": async, "data": data,	"success": success,	"failure": failure});
     },
 
-    //组织属性接口服务---
+    //조직 속성 인터페이스 서비스---
     saveUnitattribute: function(data, success, failure){
         if (data.id){
             this.updateUnitattribute(data.id, data, success, failure);
@@ -146,7 +146,7 @@ MWF.xAction.RestActions.Action["x_organization_assemble_control"] = new Class({
         }
     },
 
-    //职务接口服务---
+    //직무 인터페이스 서비스---
     saveUnitduty: function(data, success, failure){
         if (data.id){
             this.updateUnitduty(data.id, data, success, failure);

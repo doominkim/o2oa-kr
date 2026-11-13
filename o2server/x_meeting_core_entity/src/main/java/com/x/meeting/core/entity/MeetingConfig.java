@@ -13,10 +13,10 @@ import org.apache.openjpa.persistence.jdbc.Strategy;
 import javax.persistence.*;
 
 /**
- * 会议系统配置
+ * 회의 시스템 설정
  * @author sword
  */
-@Schema(name = "MeetingConfig", description = "会议系统配置.")
+@Schema(name = "MeetingConfig", description = "회의 시스템 설정.")
 @ContainerEntity(dumpSize = 100, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.MeetingConfig.table, uniqueConstraints = {
@@ -41,12 +41,12 @@ public class MeetingConfig extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -59,17 +59,17 @@ public class MeetingConfig extends SliceJpaObject {
 		this.properties = new MeetingConfigProperties();
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("配置名称.")
+	@FieldDescribe("설정 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME, unique = true)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段(json对象).")
+	@FieldDescribe("속성 객체 저장 필드(json 객체).")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_4K, name = ColumnNamePrefix + properties_FIELDNAME)

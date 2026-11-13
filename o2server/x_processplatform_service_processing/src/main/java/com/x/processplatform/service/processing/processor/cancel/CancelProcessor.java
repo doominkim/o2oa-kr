@@ -36,7 +36,7 @@ public class CancelProcessor extends AbstractCancelProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Cancel cancel) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.cancelArrive(aeiObjects.getWork().getActivityToken(), cancel));
 		return aeiObjects.getWork();
 	}
@@ -48,10 +48,10 @@ public class CancelProcessor extends AbstractCancelProcessor {
 
 	@Override
 	public List<Work> executing(AeiObjects aeiObjects, Cancel cancel) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.cancelExecute(aeiObjects.getWork().getActivityToken(), cancel));
-		// 唯一work处理
+		// 유일 work 처리
 		if (aeiObjects.getWorks().size() > 1) {
 			aeiObjects.getDeleteWorks().add(aeiObjects.getWork());
 			aeiObjects.getTasks().stream().filter(o -> StringUtils.equals(o.getWork(), aeiObjects.getWork().getId()))
@@ -67,14 +67,14 @@ public class CancelProcessor extends AbstractCancelProcessor {
 			aeiObjects.getDocSigns().stream().forEach(o -> aeiObjects.getDeleteDocSigns().add(o));
 			aeiObjects.getRecords().stream().forEach(o -> aeiObjects.getDeleteRecords().add(o));
 			aeiObjects.getWorkLogs().stream().forEach(o -> aeiObjects.getDeleteWorkLogs().add(o));
-			// 附件删除单独处理,需要删除Attachment的二进制文件
+			// 첨부파일 삭제는 별도 처리, Attachment의 바이너리 파일 삭제 필요
 			aeiObjects.getAttachments().stream().forEach(o -> aeiObjects.getDeleteAttachments().add(o));
-			// 如果只有一份数据，没有拆分，那么删除Data
+			// 데이터가 하나뿐이고 분할되지 않았으면 Data 삭제
 			aeiObjects.getWorkDataHelper().remove();
 			aeiObjects.getWorks().stream().forEach(o -> aeiObjects.getDeleteWorks().add(o));
-			// cancel 可以不删除快照
+			// cancel은 스냅샷을 삭제하지 않아도 됨
 		}
-		// 需要返回work,否则事件无法执行.
+		// work를 반환해야 함, 그렇지 않으면 이벤트 실행 불가.
 		List<Work> results = new ArrayList<>();
 		results.add(aeiObjects.getWork());
 		return results;
@@ -82,7 +82,7 @@ public class CancelProcessor extends AbstractCancelProcessor {
 
 	@Override
 	protected void executingCommitted(AeiObjects aeiObjects, Cancel cancel, List<Work> works) throws Exception {
-		// 删除后再次检查，如果存在多个副本，且都已经在End状态，那么试图推动一个
+		// 삭제 후 다시 확인, 여러 사본이 있고 모두 End 상태이면 하나를 진행 시도
 		if (!aeiObjects.getWorks().isEmpty()) {
 			Predicate<Work> p = o -> Objects.equals(ActivityType.end, o.getActivityType());
 			if (aeiObjects.getWorks().stream().allMatch(p)) {
@@ -112,7 +112,7 @@ public class CancelProcessor extends AbstractCancelProcessor {
 	}
 
 	private void updateParentWork(AeiObjects aeiObjects, Work parent, Embed embed) throws Exception {
-		// 先把状态值注入,这样脚本执行时可以取得到值.
+		// 상태값을 먼저 주입해 스크립트 실행 시 값을 가져올 수 있게 함.
 		parent.setEmbedCompleted(ActivityType.cancel.toString());
 		AeiObjects embedAeiObjects = new AeiObjects(aeiObjects.business(), parent, embed,
 				aeiObjects.getProcessingAttributes());
@@ -136,7 +136,7 @@ public class CancelProcessor extends AbstractCancelProcessor {
 	}
 
 	/**
-	 * 触发在等待状态的父文档
+	 * 대기 상태의 상위 문서 트리거
 	 * 
 	 * @param parentWorkId
 	 */
@@ -155,7 +155,7 @@ public class CancelProcessor extends AbstractCancelProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Cancel cancel) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.cancelInquire(aeiObjects.getWork().getActivityToken(), cancel));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
@@ -167,9 +167,9 @@ public class CancelProcessor extends AbstractCancelProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

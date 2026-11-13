@@ -29,12 +29,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("templatepage")
-@JaxrsDescribe("页面模版")
+@JaxrsDescribe("페이지 템플릿")
 public class TemplatePageAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(TemplatePageAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有可见的模版,按category进行分类", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "표시 가능한 모든 템플릿 조회, category별 분류", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,13 +51,13 @@ public class TemplatePageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取单个模版.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "단일 템플릿 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,7 +69,7 @@ public class TemplatePageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建新的模版.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "새 템플릿 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -86,13 +86,13 @@ public class TemplatePageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定的模版.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정한 템플릿 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -104,7 +104,7 @@ public class TemplatePageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "统计分类数量.", action = ActionListCategory.class)
+	@JaxrsMethodDescribe(value = "분류 수 통계.", action = ActionListCategory.class)
 	@GET
 	@Path("list/category")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -121,7 +121,7 @@ public class TemplatePageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定分类下的模版.", action = ActionListWithCategory.class)
+	@JaxrsMethodDescribe(value = "지정한 분류의 템플릿 목록.", action = ActionListWithCategory.class)
 	@PUT
 	@Path("list/category")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

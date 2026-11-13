@@ -552,7 +552,7 @@ MWF.xApplication.query.ViewDesigner.ViewBase = new Class({
     cloneObject : function( obj ){
         if (null == obj || "object" != typeof obj) return obj;
 
-        if ( typeof obj.length==='number'){ //数组
+        if ( typeof obj.length==='number'){ //배열
             //print( "array" );
             var copy = [];
             for (var i = 0, len = obj.length; i < len; ++i) {

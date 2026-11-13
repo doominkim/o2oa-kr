@@ -54,7 +54,7 @@ public class ActionSumStForUnit extends BaseAction {
 				unitNameList = userManagerService.listSubUnitNameWithParent(name);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceStatisticProcess(e, "根据组织名称列示所有下级组织名称发生异常！Unit:" + name);
+				Exception exception = new ExceptionAttendanceStatisticProcess(e, "조직 이름으로 모든 하위 조직 이름을 조회하는 중 오류가 발생했습니다! Unit:" + name);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -72,7 +72,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'缺勤天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '결근 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -84,7 +84,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'请休假天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '휴가 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -96,7 +96,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'迟到天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '지각 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -108,7 +108,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'早退天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '조퇴 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -120,7 +120,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'签到天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '출근 체크 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -132,7 +132,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'签退天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '퇴근 체크 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -144,7 +144,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'缺勤天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '결근 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -156,7 +156,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'工时不足天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '근무 시간 부족 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -168,7 +168,7 @@ public class ActionSumStForUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceStatisticProcess(e,
-						"系统在查询组织每月统计数据中'缺勤天数'总和时发生异常.Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
+						"조직 월별 통계의 '결근 일수' 합계를 조회하는 중 오류가 발생했습니다. Name:" + unitNameList + ", Year:" + year + ", Month:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -199,7 +199,7 @@ public class ActionSumStForUnit extends BaseAction {
 				result.setData(wraps);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceStatisticProcess(e, "系统将所有查询到的组织每月统计信息对象转换为可以输出的信息时发生异常.");
+				Exception exception = new ExceptionAttendanceStatisticProcess(e, "조회된 조직 월별 통계 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

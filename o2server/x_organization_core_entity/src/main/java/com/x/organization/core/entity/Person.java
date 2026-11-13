@@ -51,7 +51,7 @@ import com.x.base.core.project.tools.StringTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Person", description = "组织人员.")
+@Schema(name = "Person", description = "조직 사용자.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Person.table, uniqueConstraints = {
@@ -79,25 +79,25 @@ public class Person extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	@CheckRemove(citationNotExists = {
-			/* 角色中没有此人员 */
+			/* 역할에 해당 사용자 없음 */
 			@CitationNotExist(type = Role.class, fields = Role.personList_FIELDNAME),
-			/* 群组中没有此人员 */
+			/* 그룹에 해당 사용자 없음 */
 			@CitationNotExist(type = Group.class, fields = Group.personList_FIELDNAME),
-			/* 人员的身份为空 */
+			/* 사용자의 신분이 비어 있음 */
 			@CitationNotExist(type = Identity.class, fields = Identity.person_FIELDNAME),
-			/* 不在所有的个人管理员中 */
+			/* 전체 개인 관리자에 없음 */
 			@CitationNotExist(type = Person.class, fields = Person.controllerList_FIELDNAME),
-			/* 不在所有的组织管理员中 */
+			/* 전체 조직 관리자에 없음 */
 			@CitationNotExist(type = Unit.class, fields = Unit.controllerList_FIELDNAME),
-			/* 没有人员属性 */
+			/* 사용자 속성 없음 */
 			@CitationNotExist(type = PersonAttribute.class, fields = PersonAttribute.person_FIELDNAME) })
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -111,7 +111,7 @@ public class Person extends SliceJpaObject {
 					- DateUtils.toCalendar(this.birthday).get(Calendar.YEAR);
 		}
 		this.controllerList = StringTools.trimUnique(this.controllerList);
-		/** 保证unique不为空 */
+		/** unique가 비어 있지 않도록 보장 */
 		if (StringUtils.isEmpty(this.unique)) {
 			this.unique = StringTools.uniqueToken();
 		}
@@ -121,7 +121,7 @@ public class Person extends SliceJpaObject {
 							+ PersistenceProperties.distinguishNameSplit
 							+ PersistenceProperties.Person.distinguishNameCharacter;
 		}
-		/** 生成默认排序号 */
+		/** 기본 정렬 번호 생성 */
 		if (null == this.orderNumber) {
 			this.orderNumber = DateTools.timeOrderNumber();
 		}
@@ -148,55 +148,55 @@ public class Person extends SliceJpaObject {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* Entity 默认字段结束 */
+	/* Entity 기본 필드 끝 */
 
 	public static final String genderType_FIELDNAME = "genderType";
-	@FieldDescribe("性别.男:m,女:f,未知:d")
+	@FieldDescribe("성별. 남:m, 여:f, 알 수 없음:d")
 	@Enumerated(EnumType.STRING)
 	@Column(length = GenderType.length, name = ColumnNamePrefix + genderType_FIELDNAME)
-	// Enum类型不需要进行索引
+	// Enum 타입은 인덱스 불필요
 	// @Index(name = TABLE + IndexNameMiddle + genderType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private GenderType genderType;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("icon Base64编码后的文本.")
+	@FieldDescribe("icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + icon_FIELDNAME)
 	private String icon;
 
 	public static final String iconMdpi_FIELDNAME = "iconMdpi";
-	@FieldDescribe("icon Base64编码后的文本（中等尺寸图像）.")
+	@FieldDescribe("icon Base64 인코딩 텍스트(중간 크기 이미지).")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + iconMdpi_FIELDNAME)
 	private String iconMdpi;
 
 	public static final String iconLdpi_FIELDNAME = "iconLdpi";
-	@FieldDescribe("icon Base64编码后的文本（小尺寸图像）.")
+	@FieldDescribe("icon Base64 인코딩 텍스트(작은 크기 이미지).")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + iconLdpi_FIELDNAME)
 	private String iconLdpi;
 
 	public static final String signature_FIELDNAME = "signature";
-	@FieldDescribe("个性签名.")
+	@FieldDescribe("개인 서명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + signature_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String signature;
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音,自动生成")
+	@FieldDescribe("name 병음, 자동 생성")
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母,自动生成")
+	@FieldDescribe("name 병음 첫 글자, 자동 생성")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
@@ -204,27 +204,27 @@ public class Person extends SliceJpaObject {
 	private String pinyinInitial;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称,可重名.")
+	@FieldDescribe("이름, 중복 가능.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false)
 	private String name;
 
 	public static final String nickName_FIELDNAME = "nickName";
-	@FieldDescribe("昵称.")
+	@FieldDescribe("닉네임.")
 	@Column(length = length_255B, name = ColumnNamePrefix + nickName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String nickName;
 
 	public static final String employee_FIELDNAME = "employee";
 	@Flag
-	@FieldDescribe("工号,不可重复.")
+	@FieldDescribe("사번, 중복 불가.")
 	@Column(length = length_255B, name = ColumnNamePrefix + employee_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + employee_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false, citationNotExists = @CitationNotExist(fields = employee_FIELDNAME, type = Person.class))
@@ -232,7 +232,7 @@ public class Person extends SliceJpaObject {
 
 	public static final String unique_FIELDNAME = "unique";
 	@Flag
-	@FieldDescribe("唯一标识,不可重复,为空则使用自动填充值")
+	@FieldDescribe("고유 식별자, 중복 불가, 비어 있으면 자동 채움 값 사용")
 	@Column(length = length_255B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false, citationNotExists = @CitationNotExist(fields = unique_FIELDNAME, type = Person.class))
@@ -240,20 +240,20 @@ public class Person extends SliceJpaObject {
 
 	public static final String distinguishedName_FIELDNAME = "distinguishedName";
 	@Flag
-	@FieldDescribe("识别名,自动填充,@P结尾.")
+	@FieldDescribe("식별명, 자동 채움, @P로 끝남.")
 	@Column(length = length_255B, name = ColumnNamePrefix + distinguishedName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + distinguishedName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String distinguishedName;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String controllerList_FIELDNAME = "controllerList";
-	@FieldDescribe("个人管理者.默认为创建者。")
+	@FieldDescribe("개인 관리자. 기본값은 생성자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -265,34 +265,34 @@ public class Person extends SliceJpaObject {
 	private List<String> controllerList;
 
 	public static final String superior_FIELDNAME = "superior";
-	@FieldDescribe("汇报对象.")
+	@FieldDescribe("보고 대상.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + superior_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + superior_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationExists = { @CitationExist(type = Person.class) })
 	private String superior;
 
 	public static final String password_FIELDNAME = "password";
-	@FieldDescribe("密码.")
+	@FieldDescribe("비밀번호.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + password_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String password;
 
 	public static final String passwordExpiredTime_FIELDNAME = "passwordExpiredTime";
-	@FieldDescribe("用户密码到期时间.")
+	@FieldDescribe("사용자 비밀번호 만료 시간.")
 	@Temporal(TemporalType.DATE)
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + passwordExpiredTime_FIELDNAME)
 	private Date passwordExpiredTime;
 
 	public static final String changePasswordTime_FIELDNAME = "changePasswordTime";
-	@FieldDescribe("用户密码最后修改时间.")
+	@FieldDescribe("사용자 비밀번호 마지막 변경 시간.")
 	@Temporal(TemporalType.DATE)
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + changePasswordTime_FIELDNAME)
 	private Date changePasswordTime;
 
 	public static final String lastLoginTime_FIELDNAME = "lastLoginTime";
-	@FieldDescribe("最后登录时间.")
+	@FieldDescribe("마지막 로그인 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + lastLoginTime_FIELDNAME)
@@ -300,41 +300,41 @@ public class Person extends SliceJpaObject {
 	private Date lastLoginTime;
 
 	public static final String lastLoginAddress_FIELDNAME = "lastLoginAddress";
-	@FieldDescribe("最后登录地址.")
+	@FieldDescribe("마지막 로그인 주소.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + lastLoginAddress_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastLoginAddress_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String lastLoginAddress;
 
 	public static final String lastLoginClient_FIELDNAME = "lastLoginClient";
-	@FieldDescribe("最后登录客户端类型,web,android或者ios.")
+	@FieldDescribe("마지막 로그인 클라이언트 유형, web, android 또는 ios.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + lastLoginClient_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String lastLoginClient;
 
 	public static final String ipAddress_FIELDNAME = "ipAddress";
-	@FieldDescribe("允许登录的IP.")
+	@FieldDescribe("로그인 허용 IP.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + ipAddress_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String ipAddress;
 
 	public static final String mail_FIELDNAME = "mail";
 	@Flag
-	@FieldDescribe("邮件地址.")
+	@FieldDescribe("이메일 주소.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + mail_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mail_FIELDNAME)
 	@CheckPersist(allowEmpty = true, mailString = true, citationNotExists = @CitationNotExist(fields = mail_FIELDNAME, type = Person.class))
 	private String mail;
 
 	public static final String weixin_FIELDNAME = "weixin";
-	@FieldDescribe("微信号.")
+	@FieldDescribe("위챗 ID.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + weixin_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationNotExists = @CitationNotExist(fields = weixin_FIELDNAME, type = Person.class))
 	@Index(name = TABLE + IndexNameMiddle + weixin_FIELDNAME)
 	private String weixin;
 
 	public static final String qq_FIELDNAME = "qq";
-	@FieldDescribe("QQ号.")
+	@FieldDescribe("QQ 번호.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + qq_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationNotExists = @CitationNotExist(fields = qq_FIELDNAME, type = Person.class))
 	@Index(name = TABLE + IndexNameMiddle + qq_FIELDNAME)
@@ -342,112 +342,112 @@ public class Person extends SliceJpaObject {
 
 	public static final String mobile_FIELDNAME = "mobile";
 	@Flag
-	@FieldDescribe("必填,手机号.")
+	@FieldDescribe("필수, 휴대폰 번호.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + mobile_FIELDNAME)
-	/** 其他地区手机号不一致,所以这里使用外部校验,不使用mobileString */
+	/** 다른 지역 휴대폰 번호 형식이 달라 외부 검증 사용, mobileString 미사용 */
 	@Index(name = TABLE + IndexNameMiddle + mobile_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationNotExists = @CitationNotExist(fields = mobile_FIELDNAME, type = Person.class))
 	private String mobile;
 
 	public static final String hiddenMobile_FIELDNAME = "hiddenMobile";
-	@FieldDescribe("是否隐藏手机号.")
+	@FieldDescribe("휴대폰 번호 숨김 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + hiddenMobile_FIELDNAME)
 	private Boolean hiddenMobile;
 
 	public static final String officePhone_FIELDNAME = "officePhone";
-	@FieldDescribe("办公电话.")
+	@FieldDescribe("사무실 전화.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + officePhone_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String officePhone;
 
 	public static final String boardDate_FIELDNAME = "boardDate";
-	@FieldDescribe("入职时间.")
+	@FieldDescribe("입사일.")
 	@Temporal(TemporalType.DATE)
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + boardDate_FIELDNAME)
 	private Date boardDate;
 
 	public static final String birthday_FIELDNAME = "birthday";
-	@FieldDescribe("生日.")
+	@FieldDescribe("생일.")
 	@Temporal(TemporalType.DATE)
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + birthday_FIELDNAME)
 	private Date birthday;
 
 	public static final String age_FIELDNAME = "age";
-	@FieldDescribe("年龄")
+	@FieldDescribe("나이")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + age_FIELDNAME)
 	private Integer age;
 
 	public static final String dingdingId_FIELDNAME = "dingdingId";
-	@FieldDescribe("钉钉人员ID.")
+	@FieldDescribe("딩톡 사용자 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + dingdingId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dingdingId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String dingdingId;
 
 	public static final String dingdingHash_FIELDNAME = "dingdingHash";
-	@FieldDescribe("钉钉人员哈希特征.")
+	@FieldDescribe("딩톡 사용자 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + dingdingHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String dingdingHash;
 
 	public static final String weLinkId_FIELDNAME = "weLinkId";
-	@FieldDescribe("WeLikn人员ID.")
+	@FieldDescribe("WeLikn 사용자 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + weLinkId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + weLinkId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String weLinkId;
 
 	public static final String weLinkHash_FIELDNAME = "weLinkHash";
-	@FieldDescribe("WeLink人员哈希特征.")
+	@FieldDescribe("WeLink 사용자 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + weLinkHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String weLinkHash;
 
 	public static final String zhengwuDingdingId_FIELDNAME = "zhengwuDingdingId";
-	@FieldDescribe("政务钉钉人员ID.")
+	@FieldDescribe("정무 딩톡 사용자 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + zhengwuDingdingId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + zhengwuDingdingId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String zhengwuDingdingId;
 
 	public static final String andFxId_FIELDNAME = "andFxId";
-	@FieldDescribe("移动办公人员ID.")
+	@FieldDescribe("모바일 오피스 사용자 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + andFxId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + andFxId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String andFxId;
 
 	public static final String zhengwuDingdingHash_FIELDNAME = "zhengwuDingdingHash";
-	@FieldDescribe("政务钉钉人员哈希特征.")
+	@FieldDescribe("정무 딩톡 사용자 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + zhengwuDingdingHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String zhengwuDingdingHash;
 
 	public static final String qiyeweixinId_FIELDNAME = "qiyeweixinId";
-	@FieldDescribe("企业微信人员ID.")
+	@FieldDescribe("기업 위챗 사용자 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + qiyeweixinId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + qiyeweixinId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String qiyeweixinId;
 
 	public static final String qiyeweixinHash_FIELDNAME = "qiyeweixinHash";
-	@FieldDescribe("企业微信人员哈希特征.")
+	@FieldDescribe("기업 위챗 사용자 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + qiyeweixinHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String qiyeweixinHash;
 
 	public static final String andFxHash_FIELDNAME = "andFxHash";
-	@FieldDescribe("移动办公人员哈希特征.")
+	@FieldDescribe("모바일 오피스 사용자 해시 특징.")
 	@Column(length = length_255B, name = ColumnNamePrefix + andFxHash_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String andFxHash;
 
 	public static final String mpweixinOpenId_FIELDNAME = "mpwxopenId";
-	@FieldDescribe("微信公众号人员openid.")
+	@FieldDescribe("위챗 공식 계정 사용자 openid.")
 	@Column(length = length_255B, name = ColumnNamePrefix + mpweixinOpenId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mpweixinOpenId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -455,7 +455,7 @@ public class Person extends SliceJpaObject {
 
 	public static final String open1Id_FIELDNAME = "open1Id";
 	@Flag
-	@FieldDescribe("oauth登录id1.")
+	@FieldDescribe("oauth 로그인 id1.")
 	@Column(length = length_255B, name = ColumnNamePrefix + open1Id_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + open1Id_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -463,7 +463,7 @@ public class Person extends SliceJpaObject {
 
 	public static final String open2Id_FIELDNAME = "open2Id";
 	@Flag
-	@FieldDescribe("oauth登录id2.")
+	@FieldDescribe("oauth 로그인 id2.")
 	@Column(length = length_255B, name = ColumnNamePrefix + open2Id_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + open2Id_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -471,7 +471,7 @@ public class Person extends SliceJpaObject {
 
 	public static final String open3Id_FIELDNAME = "open3Id";
 	@Flag
-	@FieldDescribe("oauth登录id3.")
+	@FieldDescribe("oauth 로그인 id3.")
 	@Column(length = length_255B, name = ColumnNamePrefix + open3Id_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + open3Id_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -479,7 +479,7 @@ public class Person extends SliceJpaObject {
 
 	public static final String open4Id_FIELDNAME = "open4Id";
 	@Flag
-	@FieldDescribe("oauth登录id4.")
+	@FieldDescribe("oauth 로그인 id4.")
 	@Column(length = length_255B, name = ColumnNamePrefix + open4Id_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + open4Id_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -487,34 +487,34 @@ public class Person extends SliceJpaObject {
 
 	public static final String open5Id_FIELDNAME = "open5Id";
 	@Flag
-	@FieldDescribe("oauth登录id5.")
+	@FieldDescribe("oauth 로그인 id5.")
 	@Column(length = length_255B, name = ColumnNamePrefix + open5Id_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + open5Id_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String open5Id;
 
 	public static final String failureTime_FIELDNAME = "failureTime";
-	@FieldDescribe("登录失败记录时间.")
+	@FieldDescribe("로그인 실패 기록 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + failureTime_FIELDNAME)
 	private Date failureTime;
 
 	public static final String failureCount_FIELDNAME = "failureCount";
-	@FieldDescribe("登录失败次数")
+	@FieldDescribe("로그인 실패 횟수")
 	@Column(name = ColumnNamePrefix + failureCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer failureCount;
-	/* flag标志位 */
+	/* flag 플래그 비트 */
 
 	public static final String language_FIELDNAME = "language";
-	@FieldDescribe("国际化语言,如：zh-CN,zh,en,zh_TW等.")
+	@FieldDescribe("국제화 언어, 예: zh-CN,zh,en,zh_TW 등.")
 	@Column(length = length_255B, name = ColumnNamePrefix + language_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String language;
 
 	public static final String topUnitList_FIELDNAME = "topUnitList";
-	@FieldDescribe("所属顶层组织.")
+	@FieldDescribe("소속 최상위 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -526,26 +526,26 @@ public class Person extends SliceJpaObject {
 	private List<String> topUnitList;
 
 	public static final String SUBJECTSECURITYCLEARANCE_FIELDNAME = "subjectSecurityClearance";
-	@FieldDescribe("主体秘级标识.")
+	@FieldDescribe("주체 보안 등급 식별.")
 	@Column(name = ColumnNamePrefix + SUBJECTSECURITYCLEARANCE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer subjectSecurityClearance;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态：0|正常、1|锁定、2|禁用.")
+	@FieldDescribe("상태: 0|정상, 1|잠금, 2|비활성화.")
 	@Column(length = length_32B, name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String status;
 
 	public static final String lockExpireTime_FIELDNAME = "lockExpireTime";
-	@FieldDescribe("锁定到期时间.")
+	@FieldDescribe("잠금 만료 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + lockExpireTime_FIELDNAME)
 	private Date lockExpireTime;
 
 	public static final String statusDes_FIELDNAME = "statusDes";
-	@FieldDescribe("状态描述.")
+	@FieldDescribe("상태 설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + statusDes_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String statusDes;

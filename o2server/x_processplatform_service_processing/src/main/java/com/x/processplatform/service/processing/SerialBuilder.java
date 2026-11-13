@@ -27,7 +27,7 @@ import com.x.processplatform.core.entity.element.Process;
 import com.x.processplatform.service.processing.processor.AeiObjects;
 
 /**
- * 创建流程序列号
+ * 프로세스 일련번호 생성
  * 
  * @author sword
  */
@@ -105,57 +105,57 @@ public class SerialBuilder {
 
 	public class Serial {
 
-		// 输入文本,返回文本
+		// 텍스트 입력, 텍스트 반환
 		public String text(String str) {
 			return str;
 		}
 
-		// 输入format日期格式,返回当前时间的中年的部分,按指定格式返回
+		// format 날짜 형식 입력, 현재 시간의 연도 부분을 지정 형식으로 반환
 		public String year(String format) {
 			return DateFormatUtils.format(date, format);
 		}
 
-		// 输入format日期格式,返回work创建时间的中年的部分,按指定格式返回
+		// format 날짜 형식 입력, work 생성 시간의 연도 부분을 지정 형식으로 반환
 		public String createYear(String format) {
 			return DateFormatUtils.format(work.getCreateTime(), format);
 		}
 
-		// 返回当前时间月的部分,按指定格式返回
+		// 현재 시간의 월 부분을 지정 형식으로 반환
 		public String month(String format) {
 			return DateFormatUtils.format(date, format);
 		}
 
-		// 返回创建时间月的部分,按指定格式返回
+		// 생성 시간의 월 부분을 지정 형식으로 반환
 		public String createMonth(String format) {
 			return DateFormatUtils.format(work.getCreateTime(), format);
 		}
 
-		// 返回当前时间天的部分,按指定格式返回
+		// 현재 시간의 일 부분을 지정 형식으로 반환
 		public String day(String format) {
 			return DateFormatUtils.format(date, format);
 		}
 
-		// 返回创建时间天的部分,按指定格式返回
+		// 생성 시간의 일 부분을 지정 형식으로 반환
 		public String createDay(String format) {
 			return DateFormatUtils.format(work.getCreateTime(), format);
 		}
 
-		// 返回创建身份所在的组织
+		// 생성 신분 소속 조직 반환
 		public String unit() {
 			return work.getCreatorUnit();
 		}
 
-		// 返回创建人员
+		// 생성 사용자 반환
 		public String person() {
 			return work.getCreatorPerson();
 		}
 
-		// 返回创建身份
+		// 생성 신분 반환
 		public String identity() {
 			return work.getCreatorIdentity();
 		}
 
-		// 返回创建组织的指定组织属性
+		// 생성 조직의 지정 조직 속성 반환
 		public String unitAttribute(String name) throws Exception {
 			String result = "";
 			Organization org = new Organization(context);
@@ -166,7 +166,7 @@ public class SerialBuilder {
 			return result;
 		}
 
-		// 返回创建人员的指定属性
+		// 생성 사용자의 지정 속성 반환
 		public String personAttribute(String name) throws Exception {
 			String result = "";
 			Organization org = new Organization(context);
@@ -178,7 +178,7 @@ public class SerialBuilder {
 			return result;
 		}
 
-		// 获取下一个编号值,输入为keys为编号依据,size为返回的长度,不足补零
+		// 다음 번호 값 조회, 입력 keys는 번호 기준, size는 반환 길이, 부족하면 0으로 채움
 		public String nextSerialNumber(List<Integer> keys, Integer size) throws Exception {
 			String name = "";
 			for (Integer i : keys) {

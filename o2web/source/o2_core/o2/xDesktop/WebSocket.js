@@ -29,7 +29,7 @@ MWF.xDesktop.WebSocket = new Class({
         // this.ws = "ws://"+addressObj.host+(addressObj.port==80 ? "" : ":"+addressObj.port)+addressObj.context+"/ws/collaboration";
         //var ws = "ws://hbxa01.bf.ctc.com/x_collaboration_assemble_websocket/ws/collaboration";
 
-        //使用轮询方式处理消息.....
+        //폴링 방식으로 메시지 처리.....
         // this.webSocket = {
         //     "readyState":"1",
         //     "close": function(){},
@@ -39,7 +39,7 @@ MWF.xDesktop.WebSocket = new Class({
         //     o2.Actions.get("")
         // }, 10000);
 
-        ///*暂时不启用WebSocket了------------
+        ///*WebSocket 임시 사용 안 함------------
         //this.ws = this.ws+"?x-token="+encodeURIComponent(Cookie.read("x-token"))+"&authorization="+encodeURIComponent(Cookie.read("x-token"));
 
         this.connect();
@@ -384,42 +384,42 @@ MWF.xDesktop.WebSocket = new Class({
         var tooltipItem = layout.desktop.message.addTooltip(msg);
     },
 
-    // im消息处理器 messageType 消息类型，如im_revoke im_create , callback处理函数
+    // im 메시지 처리기 messageType 메시지 유형, 예: im_revoke im_create , callback 처리 함수
     addImListener: function(messageType, callback) {
         this.imListenerMap = this.imListenerMap || {};
         this.imListenerMap[messageType] = callback;
     },
-    /// im消息处理
+    /// im 메시지 처리
     receiveIMMessage: function(data){
         var imBody = data.body;
         if (!imBody) {
             return;
         }
-        // 更新会话或删除会话
+        // 대화 업데이트 또는 대화 삭제
         if (data.type === "im_conv_update" || data.type === "im_conv_delete") {
-            // 执行im callback 刷新页面信息
+            // im callback 실행해 페이지 정보 새로 고침
             if (this.imListenerMap && this.imListenerMap["im_conversation"] && typeof this.imListenerMap["im_conversation"] == 'function') {
                 this.imListenerMap["im_conversation"](imBody);
             }
             return;
         }
-        // 撤回消息
+        // 메시지 회수
         if (data.type == "im_revoke") {
-            // 执行im callback 刷新页面信息
+            // im callback 실행해 페이지 정보 새로 고침
             if (this.imListenerMap && this.imListenerMap["im_revoke"] && typeof this.imListenerMap["im_revoke"] == 'function') {
                 this.imListenerMap["im_revoke"](imBody);
             }
             return;
         }
-        // im_create 暂时不变
+        // im_create 일단 변경 없음
         if (data.type === "im_create") {
-            // 系统消息提示
+            // 시스템 메시지 알림
             if (layout.desktop.message && imBody.createPerson !== layout.session.user.distinguishedName) {
                 var jsonBody = imBody.body;
                 var conversationId = imBody.conversationId;
                 var body = JSON.parse(jsonBody);
-                var msgBody = body.body; //默认text 文本消息
-                if (body.type && body.type === "emoji") { //表情 消息
+                var msgBody = body.body; //기본 text 텍스트 메시지
+                if (body.type && body.type === "emoji") { //이모티콘 메시지
                     msgBody = "["+MWF.LP.desktop.messsage.emoji+"]";
                 } else if (body.type === "process") {
                     msgBody = "["+MWF.LP.desktop.messsage.processWork+"]";
@@ -445,7 +445,7 @@ MWF.xDesktop.WebSocket = new Class({
                     layout.desktop.openApplication(e, "IMV2", options);
                 }.bind(this));
             }
-            // 执行im callback 刷新页面信息
+            // im callback 실행해 페이지 정보 새로 고침
             if (this.imListenerMap && this.imListenerMap["im_create"] && typeof this.imListenerMap["im_create"] == 'function') {
                 this.imListenerMap["im_create"](imBody);
             }
@@ -540,7 +540,7 @@ MWF.xDesktop.WebSocket = new Class({
                 });
             }else{
 
-                //应用市场中的云文件，门户cloudFile
+                //앱 마켓의 클라우드 파일, 포털 cloudFile
                 o2.Actions.load("x_portal_assemble_surface").PortalAction.get("cloudFile", function () {
                     layout.desktop.openApplication(e, "portal.Portal", {
                         portalId : "cloudFile"

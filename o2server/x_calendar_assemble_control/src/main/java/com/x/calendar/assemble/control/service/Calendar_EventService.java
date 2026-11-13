@@ -20,7 +20,7 @@ import com.x.calendar.core.entity.Calendar_EventRepeatMaster;
 
 
 /**
- * 日历记录信息服务类
+ * 캘린더 레코드 정보 서비스 클래스
  * @author O2LEE
  *
  */
@@ -29,7 +29,7 @@ public class Calendar_EventService {
 	private DateOperation dateOperation = new DateOperation();
 
 	/**
-	 * 根据ID彻底删除指定的日历记录信息
+	 * ID로 지정 캘린더 레코드 정보 영구 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -69,7 +69,7 @@ public class Calendar_EventService {
 	}
 
 	/**
-	 * 创建日历记录信息
+	 * 캘린더 레코드 정보 생성
 	 * @param emc
 	 * @param calendar_record
 	 * @param autoTransaction
@@ -98,10 +98,10 @@ public class Calendar_EventService {
 	}
 	
 	/**
-	 * 更新日历记录信息
+	 * 캘린더 레코드 정보 수정
 	 * @param emc
 	 * @param calendar_record
-	 * @param autoTransaction  - 是否自动提交
+	 * @param autoTransaction  - 자동 커밋 여부
 	 * @return
 	 * @throws Exception
 	 */
@@ -131,7 +131,7 @@ public class Calendar_EventService {
 	}
 
 	/**
-	 * 根据条件查询指定的日历信息ID列表
+	 * 조건으로 지정한 캘린더 정보 ID 목록 조회
 	 * @param emc
 	 * @param key
 	 * @param eventType
@@ -155,7 +155,7 @@ public class Calendar_EventService {
 	}
 	
 	/**
-	 * 根据重复主体以及日期落雷查询指定的日历记录信息ID列表
+	 * 반복 주체 및 날짜 범위에 따라 지정 캘린더 레코드 정보 ID 목록 조회
 	 * @param emc
 	 * @param repeatMasterId
 	 * @param startTime
@@ -174,7 +174,7 @@ public class Calendar_EventService {
 	}
 
 	/**
-	 * 根据日期范围为指定的日期重复主体生成日历事件信息
+	 * 날짜 범위에 따라 지정 반복 주체의 캘린더 이벤트 정보 생성
 	 * @param emc
 	 * @param repeatMasterIds
 	 * @param startTime
@@ -196,13 +196,13 @@ public class Calendar_EventService {
 				}
 				if( ListTools.isNotEmpty( calendarEvents )) {
 					for( Calendar_Event calendar_Event : calendarEvents ) {
-						//判断该事件是否已经存在，如果不存在，则进行数据添加
+						//해당 이벤트가 이미 존재하는지 확인, 없으면 데이터 추가
 						if ( !business.calendar_EventFactory().eventExists( calendar_Event ) ) {							
 							calendar_Event.setCreatePerson( eventRepeatMaster.getCreatePerson() );
 							calendar_Event.addParticipants( eventRepeatMaster.getCreatePerson() );
 							calendar_Event.setRepeatMasterId(eventRepeatMaster.getId());							
 		
-							//计算提醒时间，以开始时间为基准
+							//시작 시간 기준으로 알림 시간 계산
 							if( calendar_Event.getAlarm() ) {
 								String[] alarm_config = calendar_Event.getValarmTime_config().trim().split(","); 
 								if( alarm_config.length == 4 ) {
@@ -248,7 +248,7 @@ public class Calendar_EventService {
 	}
 	
 	/**
-	 * 查询需要提醒的日程事件列表
+	 * 알림이 필요한 일정 이벤트 목록 조회
 	 * @param date
 	 * @return
 	 * @throws Exception 
@@ -278,7 +278,7 @@ public class Calendar_EventService {
 	}
 
 	/**
-	 * 创建一个新的Calendar_EventComment，不检查是否已经存在
+	 * 새 Calendar_EventComment 생성, 존재 여부 확인 안 함
 	 * @param emc
 	 * @param calendar_event
 	 * @return
@@ -286,10 +286,10 @@ public class Calendar_EventService {
 	 */
 	public Calendar_EventComment createNewEventComment( EntityManagerContainer emc, Calendar_Event calendar_event ) throws Exception {
 		Calendar_EventComment calendar_EventComment = null;
-		//先判断commnet的大小，如果过长，则需要存储到Calendar_EventComment表里
+		//먼저 commnet 크기 확인, 너무 길면 Calendar_EventComment 테이블에 저장 필요
 		if( StringUtils.isNotEmpty( calendar_event.getComment() ) && StringTools.utf8Length( calendar_event.getComment() ) > 255 ){
 			emc.beginTransaction( Calendar_EventComment.class );
-			//需要新建一个Calendar_EventComment
+			//새 Calendar_EventComment 생성 필요
 			calendar_EventComment = new Calendar_EventComment();
 			calendar_EventComment.setId( Calendar_EventComment.createId() );
 			calendar_EventComment.setLobValue( calendar_event.getComment() );
@@ -300,7 +300,7 @@ public class Calendar_EventService {
 	}
 
 	/**
-	 * 创建或者检查Calendar_EventComment，如果已经存在，则进行更新
+	 * Calendar_EventComment 생성 또는 확인, 이미 있으면 수정
 	 * @param emc
 	 * @param calendar_event
 	 * @return
@@ -308,21 +308,21 @@ public class Calendar_EventService {
 	 */
 	public Calendar_EventComment createOrUpdateEventComment( EntityManagerContainer emc, Calendar_Event calendar_event ) throws Exception {
 		Calendar_EventComment calendar_EventComment = null;
-		//先判断commnet的大小，如果过长，则需要存储到Calendar_EventComment表里
+		//먼저 commnet 크기 확인, 너무 길면 Calendar_EventComment 테이블에 저장 필요
 		if( StringUtils.isNotEmpty( calendar_event.getComment() ) && StringTools.utf8Length( calendar_event.getComment() ) > 255 ){
 			emc.beginTransaction( Calendar_EventComment.class );
 			if( StringUtils.isNotEmpty( calendar_event.getCommentId() )){
-				//根据ID查询出Calendar_EventComment
+				//ID로 Calendar_EventComment 조회
 				calendar_EventComment = emc.find( calendar_event.getCommentId(), Calendar_EventComment.class );
 			}
 			if( calendar_EventComment == null ){
-				//需要新建一个Calendar_EventComment
+				//새 Calendar_EventComment 생성 필요
 				calendar_EventComment = new Calendar_EventComment();
 				calendar_EventComment.setId( Calendar_EventComment.createId() );
 				calendar_EventComment.setLobValue( calendar_event.getComment() );
 				emc.persist( calendar_EventComment, CheckPersistType.all );
 			}else{
-				//需要更新Calendar_EventComment
+				//Calendar_EventComment 수정 필요
 				calendar_EventComment.setLobValue( calendar_event.getComment() );
 				emc.check( calendar_EventComment, CheckPersistType.all );
 			}

@@ -65,13 +65,13 @@ class ActionListFilter extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("文件名称")
+		@FieldDescribe("파일 이름")
 		private String name;
-		@FieldDescribe("文件所属应用ID")
+		@FieldDescribe("파일 소속 앱ID")
 		private String appId;
-		@FieldDescribe("文件所属分类ID")
+		@FieldDescribe("파일 소속 분류ID")
 		private String categoryId;
-		@FieldDescribe("文件所属文档ID")
+		@FieldDescribe("파일 소속 문서ID")
 		private String documentId;
 
 		public String getName() {

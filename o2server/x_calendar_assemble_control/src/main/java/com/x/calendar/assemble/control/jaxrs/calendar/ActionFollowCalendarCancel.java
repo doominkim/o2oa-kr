@@ -12,7 +12,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 取消关注一个公开的日历
+ * 공개 캘린더 구독 취소
  * 
  * @author O2LEE
  *
@@ -40,7 +40,7 @@ public class ActionFollowCalendarCancel extends BaseAction {
 				check = calendarServiceAdv.followCancel( effectivePerson, id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据ID取消对指定日历信息的关注时发生异常.ID:" + id );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "ID로 캘린더 구독을 취소하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

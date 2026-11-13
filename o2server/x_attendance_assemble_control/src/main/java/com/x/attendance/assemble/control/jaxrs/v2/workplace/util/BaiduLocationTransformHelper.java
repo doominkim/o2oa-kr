@@ -8,13 +8,13 @@ public class BaiduLocationTransformHelper {
   public static double a = 6378245.0;
   public static double ee = 0.00669342162296594323;
 
-  // 百度坐标转 gps
+  // 바이두 좌표를 gps로 변환
   public static TransformPosition bd09towgs84(double bdLng, double bdLat) {
     TransformPosition gcj02 = bd09togcj02(bdLng, bdLat);
     return gcj02towgs84(gcj02.getLng(), gcj02.getLat());
   }
 
-  // 百度坐标转火星坐标
+  // 바이두 좌표를 GCJ-02 좌표로 변환
   public static TransformPosition bd09togcj02(double bdLng, double bdLat) {
     double xPi = 3.14159265358979324 * 3000.0 / 180.0;
     double x = bdLng - 0.0065;
@@ -26,7 +26,7 @@ public class BaiduLocationTransformHelper {
     return new TransformPosition(ggLng, ggLat);
   }
 
-  // 火星转GPS
+  // GCJ-02를 GPS로 변환
   public static TransformPosition gcj02towgs84(double lng, double lat) {
     if (_outOfChina(lng, lat)) {
       return new TransformPosition(lng, lat);

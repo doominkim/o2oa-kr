@@ -41,7 +41,7 @@ class ActionGetMobile extends BaseAction {
 
 		private static final long serialVersionUID = -8067704098385000667L;
 
-		/** 不输出data数据,单独处理 */
+		/** data 데이터는 출력하지 않고 별도 처리 */
 		static WrapCopier<Page, Wo> copier = WrapCopierFactory.wo(Page.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible, Page.data_FIELDNAME, Page.mobileData_FIELDNAME));
 	}

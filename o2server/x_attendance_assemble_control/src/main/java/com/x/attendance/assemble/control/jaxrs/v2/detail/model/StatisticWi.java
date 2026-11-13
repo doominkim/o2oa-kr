@@ -15,20 +15,20 @@ public class StatisticWi extends GsonPropertyObject {
     private static final long serialVersionUID = -4697552136228406338L;
 
 
-    @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+    @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
     private String filter;
 
-    // 这个 filterList 字段为准 上面的 filter 字段已经弃用
-    @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+    // 이 filterList 필드를 기준으로 함, 위 filter 필드는 사용 중단
+    @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
     private List<String> filterList;
 
-    @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+    @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
     private Boolean recursive;
 
-    @FieldDescribe("开始日期，包含")
+    @FieldDescribe("시작일, 포함")
     private String startDate;
 
-    @FieldDescribe("结束日期， 包含")
+    @FieldDescribe("종료일, 포함")
     private String endDate;
 
     public String getFilter() {

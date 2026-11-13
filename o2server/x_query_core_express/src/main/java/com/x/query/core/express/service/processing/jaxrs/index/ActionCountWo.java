@@ -8,24 +8,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "com.x.query.core.express.jaxrs.index.ActionPostWo")
 public class ActionCountWo extends GsonPropertyObject {
 
-    @FieldDescribe("分类.")
-    @Schema(description = "分类.")
+    @FieldDescribe("분류.")
+    @Schema(description = "분류.")
     private String category;
 
-    @FieldDescribe("类型.")
-    @Schema(description = "类型.")
+    @FieldDescribe("유형.")
+    @Schema(description = "유형.")
     private String type;
 
-    @FieldDescribe("标识.")
-    @Schema(description = "标识.")
+    @FieldDescribe("식별자.")
+    @Schema(description = "식별자.")
     private String key;
 
-    @FieldDescribe("搜索内容.")
-    @Schema(description = "搜索内容.")
+    @FieldDescribe("검색 내용.")
+    @Schema(description = "검색 내용.")
     private Long count;
 
-    @FieldDescribe("是否存在.")
-    @Schema(description = "是否存在.")
+    @FieldDescribe("존재 여부.")
+    @Schema(description = "존재 여부.")
     private Boolean exists;
 
     public Boolean getExists() {

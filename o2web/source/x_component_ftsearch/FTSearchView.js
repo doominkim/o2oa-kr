@@ -476,10 +476,10 @@ MWF.xApplication.ftsearch.FTSearchView = new Class({
         this.curMultiSelectConditionList.each(function (cond, idx) {
             if( cond.field === item.field && cond.value === item.value )index = idx;
         });
-        if( index > -1 ){ //已经选择了
+        if( index > -1 ){ //이미 선택함
             target.getElement("i.checkbox").removeClass("o2icon-check_box").addClass("o2icon-check_box_outline_blank").removeClass("mainColor_color");
             this.curMultiSelectConditionList.splice(index, 1);
-        }else{ //还没有选择
+        }else{ //아직 선택하지 않음
             target.getElement("i.checkbox").removeClass("o2icon-check_box_outline_blank").addClass("o2icon-check_box").addClass("mainColor_color");
             this.curMultiSelectConditionList.push(item);
         }
@@ -551,7 +551,7 @@ MWF.xApplication.ftsearch.FTSearchView = new Class({
         this.selectedConditionList.each(function (cond, idx) {
             if( cond.field === item.field )index = idx;
         });
-        if( index > -1 ) { //已经选择了
+        if( index > -1 ) { //이미 선택함
             this.selectedConditionList.splice(index, 1);
         }else{
             this.selectedConditionList.push(item);
@@ -568,7 +568,7 @@ MWF.xApplication.ftsearch.FTSearchView = new Class({
                 valueIndex = cond.valueList.indexOf(item.value);
             }
         });
-        if( valueIndex > -1 ){ //已经选择了
+        if( valueIndex > -1 ){ //이미 선택함
             e.target.removeClass('mainColor_bg');
             e.target.store("selected", false);
             this.selectedConditionList[itemIndex].valueList.splice(valueIndex, 1);
@@ -576,7 +576,7 @@ MWF.xApplication.ftsearch.FTSearchView = new Class({
             if( !this.selectedConditionList[itemIndex].valueList.length ){
                 this.selectedConditionList.splice(itemIndex, 1);
             }
-        }else{ //还没有选择
+        }else{ //아직 선택하지 않음
             e.target.removeClass('mainColor_bg_opacity');
             e.target.addClass('mainColor_bg');
             e.target.store("selected", true);
@@ -694,7 +694,7 @@ MWF.xApplication.ftsearch.FTSearchView = new Class({
         this.selectedFilterList.each(function (f, idx) {
             if( f.field === item.field )index = idx;
         });
-        if( index > -1 ) { //已经选择了
+        if( index > -1 ) { //이미 선택함
             this.selectedFilterList.splice(index, 1);
         }
         this._search();
@@ -720,9 +720,9 @@ MWF.xApplication.ftsearch.FTSearchView = new Class({
                 x : 0,
                 y : -2
             },
-            position : { //node 固定的位置
-                x : "center", //x 轴上left center right, auto 系统自动计算
-                y : "bottom" //y轴上top middle bottom,  auto 系统自动计算
+            position : { //node 고정 위치
+                x : "center", //x축의 left center right, auto는 시스템 자동 계산
+                y : "bottom" //y축의 top middle bottom,  auto는 시스템 자동 계산
             },
             overflow : "scroll",
             isFitToContainer: true,

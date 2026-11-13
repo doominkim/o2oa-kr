@@ -23,11 +23,11 @@ import com.x.processplatform.service.processing.Business;
 import com.x.processplatform.service.processing.MessageFactory;
 
 /**
- * 创建处于start状态的work
+ * start 상태의 work 생성
  * 
  * @author Rui
  * 
- *         此方法不需要推入线程池运行
+ *         이 메서드는 스레드 풀에 넣어 실행할 필요 없음
  */
 class ActionCreate extends BaseAction {
 
@@ -70,7 +70,7 @@ class ActionCreate extends BaseAction {
 	private Work create(Application application, Process process, Begin begin) throws Exception {
 		Date now = new Date();
 		Work work = new Work();
-		/* 标识工作数据未修改 */
+		/* 업무 문서 데이터 미수정 표시 */
 		work.setDataChanged(false);
 		work.setWorkThroughManual(false);
 		work.setWorkCreateType(Work.WORKCREATETYPE_SURFACE);

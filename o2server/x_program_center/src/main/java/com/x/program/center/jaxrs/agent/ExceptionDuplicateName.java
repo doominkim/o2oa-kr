@@ -7,6 +7,6 @@ class ExceptionDuplicateName extends LanguagePromptException {
 	private static final long serialVersionUID = -3287459468603291619L;
 
 	ExceptionDuplicateName(String name) {
-		super("名称: {} 重复.", name);
+		super("이름: {} 중복.", name);
 	}
 }

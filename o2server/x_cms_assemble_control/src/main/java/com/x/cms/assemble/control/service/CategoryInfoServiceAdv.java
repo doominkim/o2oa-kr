@@ -15,8 +15,8 @@ import com.x.cms.core.entity.CategoryInfo;
 import com.x.query.core.entity.View;
 
 /**
- * 对栏目分类信息进行管理的服务类（高级）
- * 高级服务器可以利用Service完成事务控制
+ * 게시판 분류 정보 관리 서비스 클래스(고급)
+ * 고급 서비스는 Service로 트랜잭션 제어 가능
  * 
  * @author O2LEE
  */
@@ -52,7 +52,7 @@ public class CategoryInfoServiceAdv {
     }
 
 	/**
-	 * 根据需要过滤的栏目列表和信息类型以及返回最大条目数量列示栏目信息ID列表(无权限查询)
+	 * 필터링할 게시판 목록, 정보 유형, 최대 반환 건수로 게시판 정보 ID 목록 조회(권한 없이 조회)
 	 * @param inAppIds
 	 * @param documentType
 	 * @param maxCount
@@ -159,7 +159,7 @@ public class CategoryInfoServiceAdv {
 			throw new Exception("wrapIn is null.");
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 检查一下该应用栏目是否存在管理者，如果不存在，则将当前登录者作为应用栏目的管理者
+			// 해당 앱 게시판에 관리자가 있는지 검사, 없으면 현재 로그인 사용자를 앱 게시판 관리자로 지정
 			if( ListTools.isEmpty( categoryInfo.getManageablePersonList())  && ListTools.isEmpty( categoryInfo.getManageableUnitList())  &&ListTools.isEmpty( categoryInfo.getManageableGroupList())) {
 				categoryInfo.addManageablePerson( effectivePerson.getDistinguishedName() );
 			}
@@ -227,7 +227,7 @@ public class CategoryInfoServiceAdv {
 	}
 
 	/**
-	 * 更新分类管理员权限信息
+	 * 분류 관리자 권한 정보 갱신
 	 * @param categoryId
 	 * @param personList
 	 * @param unitList
@@ -252,7 +252,7 @@ public class CategoryInfoServiceAdv {
 	}
 	
 	/**
-	 * 更新分类发布权限信息
+	 * 분류 게시 권한 정보 갱신
 	 * @param categoryId
 	 * @param personList
 	 * @param unitList
@@ -277,7 +277,7 @@ public class CategoryInfoServiceAdv {
 	}
 	
 	/**
-	 * 更新分类可见权限信息
+	 * 분류 공개 권한 정보 갱신
 	 * @param categoryId
 	 * @param personList
 	 * @param unitList
@@ -330,7 +330,7 @@ public class CategoryInfoServiceAdv {
 	}
 
 	/**
-	 * 判断用户是否为指定分类的管理员
+	 * 사용자가 지정 분류의 관리자인지 판단
 	 * @param categoryId
 	 * @param personName
 	 * @param unitNames
@@ -348,7 +348,7 @@ public class CategoryInfoServiceAdv {
 	}
 	
 	/**
-	 * 判断用户是否拥有指定分类的发布者权限
+	 * 사용자가 지정 분류의 게시자 권한을 가졌는지 판단
 	 * @param categoryId
 	 * @param personName
 	 * @param unitNames
@@ -366,7 +366,7 @@ public class CategoryInfoServiceAdv {
 	}
 	
 	/**
-	 *  判断用户是否拥有指定分类的访问权限
+	 *  사용자가 지정 분류의 접근 권한을 가졌는지 판단
 	 * @param categoryId
 	 * @param personName
 	 * @param unitNames
@@ -384,7 +384,7 @@ public class CategoryInfoServiceAdv {
 	}
 
 	/**
-	 * 判断用户是否为指定分类的管理员
+	 * 사용자가 지정 분류의 관리자인지 판단
 	 * @param categoryInfo
 	 * @param personName
 	 * @param unitNames
@@ -414,7 +414,7 @@ public class CategoryInfoServiceAdv {
 	}
 	
 	/**
-	 * 判断用户是否拥有指定分类的发布者权限
+	 * 사용자가 지정 분류의 게시자 권한을 가졌는지 판단
 	 * @param categoryInfo
 	 * @param personName
 	 * @param unitNames
@@ -459,7 +459,7 @@ public class CategoryInfoServiceAdv {
 	}
 	
 	/**
-	 *  判断用户是否拥有指定分类的访问权限
+	 *  사용자가 지정 분류의 접근 권한을 가졌는지 판단
 	 * @param categoryInfo
 	 * @param personName
 	 * @param unitNames
@@ -523,7 +523,7 @@ public class CategoryInfoServiceAdv {
 	}
 
 	/**
-	 * 为分类绑定导入的列表信息ID
+	 * 분류에 가져온 목록 정보 ID 연결
 	 * @param categoryInfo
 	 * @param view
 	 * @throws Exception

@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("connector")
-@JaxrsDescribe("消息连接器")
+@JaxrsDescribe("메시지 커넥터")
 public class ConnectorAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ConnectorAction.class);
 
-	@JaxrsMethodDescribe(value = "接收.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "수신.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

@@ -59,19 +59,19 @@ public class ActionLeaveLedgerPost extends BaseAction {
     static AttendanceV2LeaveLedger buildLedger(Wi wi, Date now, boolean grantAmountPresent)
             throws Exception {
         if (StringUtils.isBlank(wi.getPerson())) {
-            throw new ExceptionEmptyParameter("用户");
+            throw new ExceptionEmptyParameter("사용자");
         }
         if (StringUtils.isBlank(wi.getLeaveTypeId())) {
-            throw new ExceptionEmptyParameter("假期类型ID");
+            throw new ExceptionEmptyParameter("휴가 유형 ID");
         }
         if (StringUtils.isBlank(wi.getGrantPeriod())) {
-            throw new ExceptionEmptyParameter("发放周期");
+            throw new ExceptionEmptyParameter("지급 주기");
         }
         if (!grantAmountPresent || wi.getGrantAmount() == null) {
-            throw new ExceptionEmptyParameter("发放额度");
+            throw new ExceptionEmptyParameter("지급 한도");
         }
         if (wi.getGrantAmount() < 0) {
-            throw new ExceptionWithMessage("发放额度不能小于0");
+            throw new ExceptionWithMessage("지급 한도는 0보다 작을 수 없습니다");
         }
 
         AttendanceV2LeaveLedger ledger = Wi.copier.copy(wi);
@@ -84,7 +84,7 @@ public class ActionLeaveLedgerPost extends BaseAction {
 
     static void validateLedgerNotExists(List<AttendanceV2LeaveLedger> ledgers) throws Exception {
         if (ledgers != null && !ledgers.isEmpty()) {
-            throw new ExceptionWithMessage("当前用户该假期类型在当前发放周期已存在发放批次");
+            throw new ExceptionWithMessage("현재 사용자의 이 휴가 유형은 현재 지급 주기에 이미 지급 차수가 있습니다");
         }
     }
 

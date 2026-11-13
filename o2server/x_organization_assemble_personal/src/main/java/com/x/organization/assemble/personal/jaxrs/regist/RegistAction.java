@@ -25,12 +25,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("regist")
-@JaxrsDescribe("注册")
+@JaxrsDescribe("등록")
 public class RegistAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(RegistAction.class);
 
-	@JaxrsMethodDescribe(value = "当前允许的注册模式,disable,captcha,code", action = ActionMode.class)
+	@JaxrsMethodDescribe(value = "현재 허용된 등록 모드, disable,captcha,code", action = ActionMode.class)
 	@GET
 	@Path("mode")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,14 +47,14 @@ public class RegistAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "生成一个captcha", action = ActionCaptcha.class)
+	@JaxrsMethodDescribe(value = "captcha 생성", action = ActionCaptcha.class)
 	@GET
 	@Path("captcha/width/{width}/height/{height}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void captcha(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("图像宽度") @PathParam("width") Integer width,
-			@JaxrsParameterDescribe("图像高度") @PathParam("height") Integer height) {
+			@JaxrsParameterDescribe("이미지 너비") @PathParam("width") Integer width,
+			@JaxrsParameterDescribe("이미지 높이") @PathParam("height") Integer height) {
 		ActionResult<ActionCaptcha.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -66,13 +66,13 @@ public class RegistAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "生成一个code", action = ActionCode.class)
+	@JaxrsMethodDescribe(value = "code 생성", action = ActionCode.class)
 	@GET
 	@Path("code/mobile/{mobile}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void code(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("电话号码") @PathParam("mobile") String mobile) {
+			@JaxrsParameterDescribe("전화번호") @PathParam("mobile") String mobile) {
 		ActionResult<ActionCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -84,13 +84,13 @@ public class RegistAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "校验mobile是否已经存在", action = ActionCheckMobile.class)
+	@JaxrsMethodDescribe(value = "mobile 존재 여부 확인", action = ActionCheckMobile.class)
 	@GET
 	@Path("check/mobile/{mobile}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("电话号码") @PathParam("mobile") String mobile) {
+			@JaxrsParameterDescribe("전화번호") @PathParam("mobile") String mobile) {
 		ActionResult<ActionCheckMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -102,13 +102,13 @@ public class RegistAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "校验name是否已经存在", action = ActionCheckName.class)
+	@JaxrsMethodDescribe(value = "name 존재 여부 확인", action = ActionCheckName.class)
 	@GET
 	@Path("check/name/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkName(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户名") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("사용자 이름") @PathParam("name") String name) {
 		ActionResult<ActionCheckName.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -120,13 +120,13 @@ public class RegistAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "校验password密码等级.", action = ActionCheckPassword.class)
+	@JaxrsMethodDescribe(value = "password 비밀번호 등급 검증.", action = ActionCheckPassword.class)
 	@GET
 	@Path("check/password/{password}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkPassword(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("密码") @PathParam("password") String password) {
+			@JaxrsParameterDescribe("비밀번호") @PathParam("password") String password) {
 		ActionResult<ActionCheckPassword.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -138,7 +138,7 @@ public class RegistAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "注册人员", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "사용자 등록", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

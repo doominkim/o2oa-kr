@@ -45,12 +45,12 @@ class ActionCreate extends BaseAction {
 			page.getProperties().setMobileRelatedScriptMap(wi.getMobileRelatedScriptMap());
 			emc.persist(page, CheckPersistType.all);
 			emc.beginTransaction(Portal.class);
-			/** 更新首页 */
+			/** 홈 페이지 갱신 */
 			if (this.isBecomeFirstPage(business, portal, page)) {
 				portal.setFirstPage(page.getId());
 			} else if (StringUtils.isEmpty(portal.getFirstPage())
 					|| (null == emc.find(portal.getFirstPage(), Page.class))) {
-				/* 如果是第一个页面,设置这个页面为当前页面 */
+				/* 첫 페이지면 이 페이지를 현재 페이지로 설정 */
 				portal.setFirstPage(page.getId());
 			}
 			if(StringUtils.isNotBlank(wi.getCornerMarkScript()) && StringUtils.isNotBlank(wi.getCornerMarkScriptText())) {
@@ -60,7 +60,7 @@ class ActionCreate extends BaseAction {
 			emc.commit();
 			CacheManager.notify(Page.class);
 			CacheManager.notify(Portal.class);
-			// 保存历史版本
+			// 이력 버전 저장
 			ThisApplication.pageVersionQueue.send(new PageVersion(page.getId(), jsonElement, effectivePerson.getDistinguishedName()));
 			Wo wo = new Wo();
 			wo.setId(page.getId());
@@ -76,22 +76,22 @@ class ActionCreate extends BaseAction {
 		static WrapCopier<Wi, Page> copier = WrapCopierFactory.wi(Wi.class, Page.class, null,
 				JpaObject.FieldsUnmodifyExcludeId);
 
-		@FieldDescribe("关联Widget.")
+		@FieldDescribe("연결 Widget.")
 		private List<String> relatedWidgetList = new ArrayList<>();
 
-		@FieldDescribe("移动端关联Widget.")
+		@FieldDescribe("모바일 연결 Widget.")
 		private List<String> mobileRelatedWidgetList = new ArrayList<>();
 
-		@FieldDescribe("关联脚本.")
+		@FieldDescribe("연결 스크립트.")
 		private Map<String, String> relatedScriptMap = new LinkedHashMap<>();
 
-		@FieldDescribe("移动端关联脚本.")
+		@FieldDescribe("모바일 연결 스크립트.")
 		private Map<String, String> mobileRelatedScriptMap = new LinkedHashMap<>();
 
-		@FieldDescribe("角标关联脚本.")
+		@FieldDescribe("배지 연결 스크립트.")
 		private String cornerMarkScript;
 
-		@FieldDescribe("角标脚本文本.")
+		@FieldDescribe("배지 스크립트 텍스트.")
 		private String cornerMarkScriptText;
 
 		public List<String> getRelatedWidgetList() {

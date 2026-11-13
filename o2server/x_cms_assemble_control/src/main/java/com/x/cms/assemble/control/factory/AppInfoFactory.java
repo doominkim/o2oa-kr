@@ -23,7 +23,7 @@ import com.x.cms.core.express.tools.CriteriaBuilderTools;
 
 
 /**
- * 应用信息表基础功能服务类
+ * 앱 정보 테이블 기본 기능 서비스 클래스
  *
  * @author O2LEE
  */
@@ -179,7 +179,7 @@ public class AppInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询所有未设置可见权限的AppInfo的ID列表( with List copy ) 全员可发布的栏目也包含在内：判断allPeopleView or
+	 * 열람 권한이 설정되지 않은 모든 AppInfo의 ID 목록 조회( with List copy ) 전체 사용자가 발행 가능한 게시판도 포함: allPeopleView or 확인
 	 * allPeoplePublish
 	 *
 	 * @return
@@ -238,7 +238,7 @@ public class AppInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询指定用户可以管理的所有栏目ID列表
+	 * 지정한 사용자가 관리할 수 있는 모든 게시판 ID 목록 조회
 	 *
 	 * @param personName
 	 * @param groupNames
@@ -254,7 +254,7 @@ public class AppInfoFactory extends AbstractFactory {
 		Root<AppInfo> root = cq.from(AppInfo.class);
 		Predicate p_permission = null;
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.isMember(personName, root.get(AppInfo_.manageablePersonList));
 		}
 		if (ListTools.isNotEmpty(unitNames)) {
@@ -271,15 +271,15 @@ public class AppInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据权限查询用户可以发布文档的栏目ID列表（检测allPeoplePublish ）
+	 * 권한에 따라 사용자가 문서를 발행할 수 있는 게시판 ID 목록 조회(allPeoplePublish 확인)
 	 *
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
 	 * @param inAppInfoIds
-	 *            - 栏目ID的最大范围
+	 *            - 게시판 ID의 최대 범위
 	 * @param excludAppInfoIds
-	 *            - 需要排队的栏目ID
+	 *            - 제외할 게시판 ID
 	 * @return
 	 * @throws Exception
 	 */
@@ -293,11 +293,11 @@ public class AppInfoFactory extends AbstractFactory {
 
 		Predicate p = null;
 		Predicate p_filter = null;
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p_filter = root.get(AppInfo_.id).in(inAppInfoIds);
 		}
-		// 排队指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			if (p_filter == null) {
 				p_filter = cb.not(root.get(AppInfo_.id).in(excludAppInfoIds));
@@ -310,7 +310,7 @@ public class AppInfoFactory extends AbstractFactory {
 		p_permission = cb.isTrue(root.get(AppInfo_.allPeoplePublish));
 
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.manageablePersonList)));
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.publishablePersonList)));
 		}
@@ -321,7 +321,7 @@ public class AppInfoFactory extends AbstractFactory {
 			p_permission = cb.or(p_permission, root.get(AppInfo_.publishableGroupList).in(groupNames));
 		}
 
-		// 使用新的条件将两个条件组合起来
+		// 새 조건으로 두 조건을 결합
 		if (p_filter != null) {
 			p = p_filter;
 		}
@@ -342,15 +342,15 @@ public class AppInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据权限查询用户可以发布文档的栏目ID列表（不检测allPeopleView 和 allPeoplePublish ）
+	 * 권한에 따라 사용자가 문서를 발행할 수 있는 게시판 ID 목록 조회(allPeopleView, allPeoplePublish 미확인)
 	 *
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
 	 * @param inAppInfoIds
-	 *            - 栏目ID的最大范围
+	 *            - 게시판 ID의 최대 범위
 	 * @param excludAppInfoIds
-	 *            - 需要排队的栏目ID
+	 *            - 제외할 게시판 ID
 	 * @return
 	 * @throws Exception
 	 */
@@ -364,11 +364,11 @@ public class AppInfoFactory extends AbstractFactory {
 
 		Predicate p = null;
 		Predicate p_filter = null;
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p_filter = root.get(AppInfo_.id).in(inAppInfoIds);
 		}
-		// 排队指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			if (p_filter == null) {
 				p_filter = cb.not(root.get(AppInfo_.id).in(excludAppInfoIds));
@@ -379,7 +379,7 @@ public class AppInfoFactory extends AbstractFactory {
 
 		Predicate p_permission = null;
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.isMember(personName, root.get(AppInfo_.manageablePersonList));
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.publishablePersonList)));
 		}
@@ -390,7 +390,7 @@ public class AppInfoFactory extends AbstractFactory {
 			p_permission = cb.or(p_permission, root.get(AppInfo_.publishableGroupList).in(groupNames));
 		}
 
-		// 使用新的条件将两个条件组合起来
+		// 새 조건으로 두 조건을 결합
 		if (p_filter != null) {
 			p = p_filter;
 		}
@@ -411,7 +411,7 @@ public class AppInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询用户有权限访问的所有栏目ID列表（检测allPeopleView 和 allPeoplePublish ）
+	 * 사용자가 접근 권한을 가진 모든 게시판 ID 목록 조회(allPeopleView, allPeoplePublish 확인)
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -431,11 +431,11 @@ public class AppInfoFactory extends AbstractFactory {
 
 		Predicate p = null;
 		Predicate p_filter = null;
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p_filter = root.get(AppInfo_.id).in(inAppInfoIds);
 		}
-		// 排队指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			if (p_filter == null) {
 				p_filter = cb.not(root.get(AppInfo_.id).in(excludAppInfoIds));
@@ -448,7 +448,7 @@ public class AppInfoFactory extends AbstractFactory {
 		p_permission = cb.isTrue(root.get(AppInfo_.allPeopleView));
 		p_permission = cb.or(p_permission, cb.isTrue(root.get(AppInfo_.allPeoplePublish)));
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.manageablePersonList)));
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.publishablePersonList)));
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.viewablePersonList)));
@@ -462,7 +462,7 @@ public class AppInfoFactory extends AbstractFactory {
 			p_permission = cb.or(p_permission, root.get(AppInfo_.viewableGroupList).in(groupNames));
 		}
 
-		// 使用新的条件将两个条件组合起来
+		// 새 조건으로 두 조건을 결합
 		if (p_filter != null) {
 			p = p_filter;
 		}
@@ -483,7 +483,7 @@ public class AppInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询用户有权限访问的所有栏目ID列表（不检测allPeopleView）
+	 * 사용자가 접근 권한을 가진 모든 게시판 ID 목록 조회(allPeopleView 미확인)
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -503,11 +503,11 @@ public class AppInfoFactory extends AbstractFactory {
 
 		Predicate p = null;
 		Predicate p_filter = null;
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p_filter = root.get(AppInfo_.id).in(inAppInfoIds);
 		}
-		// 排队指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			if (p_filter == null) {
 				p_filter = cb.not(root.get(AppInfo_.id).in(excludAppInfoIds));
@@ -518,7 +518,7 @@ public class AppInfoFactory extends AbstractFactory {
 
 		Predicate p_permission = null;
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.isMember(personName, root.get(AppInfo_.manageablePersonList));
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.publishablePersonList)));
 			p_permission = cb.or(p_permission, cb.isMember(personName, root.get(AppInfo_.viewablePersonList)));
@@ -532,7 +532,7 @@ public class AppInfoFactory extends AbstractFactory {
 			p_permission = cb.or(p_permission, root.get(AppInfo_.viewableGroupList).in(groupNames));
 		}
 
-		// 使用新的条件将两个条件组合起来
+		// 새 조건으로 두 조건을 결합
 		if (p_filter != null) {
 			p = p_filter;
 		}
@@ -587,7 +587,7 @@ public class AppInfoFactory extends AbstractFactory {
 //		Root<AppInfo> root = cq.from(AppInfo.class);
 //		Predicate p = cb.isNull( root.get(AppInfo_.appType) );
 //		p = cb.or( p, cb.equal( root.get(AppInfo_.appType), ""));
-//		p = cb.or( p, cb.equal( root.get(AppInfo_.appType), "未分类"));
+//		p = cb.or( p, cb.equal( root.get(AppInfo_.appType), "미분류"));
 //		cq.select(cb.count(root));
 //		return em.createQuery(cq.where(p)).getSingleResult();
 //	}

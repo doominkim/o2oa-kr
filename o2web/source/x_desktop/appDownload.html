@@ -168,7 +168,7 @@
     <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png" />
 </head>
 <body>
-  <!-- 移动端app下载页面，用于自助打包发布的app下载 目前就只有android -->
+  <!-- 모바일 app 다운로드 페이지, 자체 패키징으로 배포한 app 다운로드용. 현재 android만 지원 -->
   <div id="app">
     <div class="app_box">
       <img
@@ -178,7 +178,7 @@
       <h3 class="app_title">O2OA</h3>
       <div class="app_line"></div>
 
-      <!-- 下载页面内容 -->
+      <!-- 다운로드 페이지 내용 -->
       <div id="android_box">
         <div
           id="android_version"
@@ -195,13 +195,13 @@
         </div>
       </div>
       
-      <!-- 下载页面底部 -->
+      <!-- 다운로드 페이지 하단 -->
       <!-- <div class="app_footer">
-        <div class="app_footer_name">浙江兰德纵横网络技术股份有限公司</div>
+        <div class="app_footer_name">저장 란더종횡 네트워크 기술 주식회사</div>
         <div class="app_footer_links">
-          <div class="app_footer_link"><a href="https://www.o2oa.net/secret.html" target="_blank">隐私协议</a></div>
+          <div class="app_footer_link"><a href="https://www.o2oa.net/secret.html" target="_blank">개인정보 처리방침</a></div>
           <div style="margin:10px;color: #999999;"> | </div>
-          <div class="app_footer_link" @click="clickPermission()">用户权限</div>
+          <div class="app_footer_link" @click="clickPermission()">사용자 권한</div>
         </div>
       </div> -->
  
@@ -226,9 +226,9 @@
     layout.addReady(function(){
         (function(layout){
            
-          // 判断手机信息
+          // 휴대폰 정보 판단
           var checkUserAgent = function() {
-              //判断平台
+              //플랫폼 판단
               var ua = window.navigator.userAgent.toLowerCase();
               console.log(ua);
               var isiOS = /(iPhone|iPad|iPod|iOS)/i.test(ua);
@@ -238,10 +238,10 @@
               var isDingding = false;
               var isWeixin = false;
               if (ua.match(/DingTalk/i) == "dingtalk") {
-                //用钉钉打开
+                //DingTalk으로 열기
                 isDingding = true;
               } else if (ua.match(/MicroMessenger/i) == "micromessenger") {
-                //用微信打开
+                //WeChat으로 열기
                 isWeixin = true;
               }
 
@@ -253,7 +253,7 @@
               })
           };
             
-          // 获取最新版本apk数据
+          // 최신 버전 apk 데이터 조회
           var _loadLastPublishAPK = function() {
               o2.Actions.load("x_program_center").AppPackAnonymousAction.androidPackLastAPk(function(json) {
                 if (json && json.data && json.data.id) {

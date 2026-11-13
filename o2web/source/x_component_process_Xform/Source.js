@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp('process.Xform', 'Div', null, false);
 
-/** @class Source 数据源组件。
- * @o2cn 数据源
+/** @class Source 데이터 소스 컴포넌트.
+ * @o2cn 데이터 소스
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var source = this.form.get("fieldId"); //获取数据源组件
- * //方法2
- * var source = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var source = this.form.get("fieldId"); //데이터 소스 컴포넌트 가져오기
+ * //방법 2
+ * var source = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.Div
  * @o2category FormComponents
  * @o2range {Portal}
@@ -19,14 +19,14 @@ MWF.xApplication.process.Xform.Source = MWF.APPSource = new Class(
         Extends: MWF.APPDiv,
         options: {
             /**
-             * 加载数据后执行，但这时还未加载下属组件，可以可以使用this.target.data获取数据进行修改。
+             * 데이터 로드 후 실행, 아직 하위 컴포넌트는 로드되지 않았으며 this.target.data로 데이터를 가져와 수정할 수 있음.
              * @event MWF.xApplication.process.Xform.Source#postLoadData
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 加载数据、下属组件后执行。
+             * 데이터와 하위 컴포넌트 로드 후 실행.
              * @event MWF.xApplication.process.Xform.Source#loadData
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             moduleEvents: ['queryLoad', 'postLoad', 'load', 'postLoadData', 'loadData'],
         },
@@ -234,10 +234,10 @@ MWF.xApplication.process.Xform.Source = MWF.APPSource = new Class(
         _invoke: function (callback) {
             var cb = new MWF.xDesktop.Actions.RestActions.Callback(function (json) {
                 /**
-                 * @summary 该属性获取当前数据源的数据，当数据源加载完成后才有值。
+                 * @summary 현재 데이터 소스의 데이터, 데이터 소스 로드 완료 후에 값이 있음.
                  * @member {Array|Object|String|Number|Boolean|Null}
                  * @example
-                 * var field = this.form.get("fieldId").data; //获取数据源数据
+                 * var field = this.form.get("fieldId").data; //데이터 소스 데이터 가져오기
                  */
                 this.data = json;
                 this.fireEvent('postLoadData');
@@ -257,15 +257,15 @@ MWF.xApplication.process.Xform.Source = MWF.APPSource = new Class(
             this.body = data;
         },
         /**
-         * @summary 替换全部的url参数，但不刷新组件
-         * @param {Object} url参数
+         * @summary 모든 url 파라미터를 교체하되 컴포넌트는 새로 고치지 않음
+         * @param {Object} url 파라미터
          * @example
-         * //如，原来的组件url参数为：
+         * //예: |기존 컴포넌트 url 파라미터:
          * { "page" : 1, "count" : 10  }
          *
          * this.form.get("fieldId").setParameters({"id":"662ede34-4e21-428a-9c3b-f1bf14d15650"});
          *
-         * //执行后变为
+         * //실행 후 변경
          * {"id":"662ede34-4e21-428a-9c3b-f1bf14d15650"}
          */
         setParameters: function (json) {
@@ -274,10 +274,10 @@ MWF.xApplication.process.Xform.Source = MWF.APPSource = new Class(
             this._getO2Uri();
         },
         /**
-         * @summary 新增url参数，但不刷新组件。如果该参数key已经存在，则覆盖
-         * @param {Object} url参数
+         * @summary url 파라미터 추가, 컴포넌트는 새로 고치지 않음. 해당 파라미터 key가 이미 있으면 덮어씀
+         * @param {Object} url 파라미터
          * @example
-         * * //如，原来的组件url参数为：
+         * * //예: |기존 컴포넌트 url 파라미터:
          * { "page" : 1, "count" : 10  }
          *
          * this.form.get("fieldId").addParameters({
@@ -285,7 +285,7 @@ MWF.xApplication.process.Xform.Source = MWF.APPSource = new Class(
          *  "id":"662ede34-4e21-428a-9c3b-f1bf14d15650"
          *  });
          *
-         * //执行后变为
+         * //실행 후 변경
          * {
          *  "page" : 2,
          *  "count" : 10
@@ -304,11 +304,11 @@ MWF.xApplication.process.Xform.Source = MWF.APPSource = new Class(
             this._getO2Uri();
         },
         /**
-         * @summary 重新加载组件。会触发loadData事件
-         * @param {Boolean} notInit - false表示不重新初始化子数据源和数据文本，true表示重新初始化，默认为false
-         * @param {Function} callback 加载完成后的回调
+         * @summary 컴포넌트 다시 로드. loadData 이벤트 발생
+         * @param {Boolean} notInit - false는 하위 데이터 소스와 데이터 텍스트를 다시 초기화하지 않음, true는 다시 초기화, 기본값 false
+         * @param {Function} callback 로드 완료 후 콜백
          * @example
-         * this.form.get("fieldId").reload(); //重新加载组件
+         * this.form.get("fieldId").reload(); //컴포넌트 다시 로드
          */
         reload: function (notInit, callback) {
             if (this.json.sourceType == 'o2') {

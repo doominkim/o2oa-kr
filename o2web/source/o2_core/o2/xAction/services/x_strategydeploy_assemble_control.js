@@ -1,7 +1,7 @@
 MWF.xAction.RestActions.Action["x_strategydeploy_assemble_control"] = new Class({
     Extends: MWF.xAction.RestActions.Action,
 
-    //////////////////////////组织/////////////////////////////////////////
+    //////////////////////////조직/////////////////////////////////////////
     //getNewPerson:function(data,success,failure,async){
     //    this.orgAction.invoke({"name": "getNewPerson","data": data, "async": async, "success": success,"failure": failure});
     //},
@@ -17,13 +17,13 @@ MWF.xAction.RestActions.Action["x_strategydeploy_assemble_control"] = new Class(
     //getUnitDuty:function(data,success,failure,async){
     //    this.orgAction.invoke({"name": "getUnitDuty","data": data, "async": async, "success": success,"failure": failure});
     //},
-    //获取顶层组织名称
+    //최상위 조직 이름 조회
     //getTopUnit:function(success,failure,async){
     //    this.orgActionAlpha.invoke({"name": "getTopUnit", "async": async, "success": success,	"failure": failure});
     //},
-    ///////////////////////////组织///////////////////////////////////////////
+    ///////////////////////////조직///////////////////////////////////////////
 
-    //获取用户头像
+    //사용자 프로필 사진 조회
     //getPersonIcon: function( name, callback ){
     //    this.orgActionAlpha.getActions(function(){
     //        var url = this.orgActionAlpha.actions.getPersonIcon.uri;
@@ -32,7 +32,7 @@ MWF.xAction.RestActions.Action["x_strategydeploy_assemble_control"] = new Class(
     //    }.bind(this));
     //},
 
-    ///////////////////////////公司工作重点///////////////////////////////
+    ///////////////////////////회사 업무 중점///////////////////////////////
     //getKeyWorkListYear:function(success,failure,async){
     //    this.action.invoke({"name": "getKeyWorkListYear", "async": async, "success": success,	"failure": failure});
     //},
@@ -64,9 +64,9 @@ MWF.xAction.RestActions.Action["x_strategydeploy_assemble_control"] = new Class(
     //    this.action.invoke({"name": "getKeyWorkAddAuthorize", "async": async, "success": success,	"failure": failure});
     //},
 
-    ///////////////////////////公司工作重点///////////////////////////////
+    ///////////////////////////회사 업무 중점///////////////////////////////
 
-    ///////////////////////////举措///////////////////////////////
+    ///////////////////////////조치///////////////////////////////
     //getMeasureListYear:function(success,failure,async){
     //    this.action.invoke({"name": "getMeasureListYear", "async": async, "success": success,	"failure": failure});
     //},
@@ -112,9 +112,9 @@ MWF.xAction.RestActions.Action["x_strategydeploy_assemble_control"] = new Class(
     //downloadFile:function(flag,success,failure,async){
     //    this.action.invoke({"name": "downloadFile","parameter": {"flag": flag }, "async": async, "success": success,	"failure": failure});
     //},
-    ///////////////////////////举措///////////////////////////////
+    ///////////////////////////조치///////////////////////////////
 
-    ///////////////////////////五项///////////////////////////////
+    ///////////////////////////다섯 항목///////////////////////////////
     //getPriorityDepartments:function(success,failure,async){
     //    this.action.invoke({"name": "getPriorityDepartments", "async": async, "success": success,	"failure": failure});
     //},
@@ -165,7 +165,7 @@ MWF.xAction.RestActions.Action["x_strategydeploy_assemble_control"] = new Class(
             window.open(o2.filterUrl(this.action.address+url));
         }.bind(this));
     },
-    ///////////////////////////五项///////////////////////////////
+    ///////////////////////////다섯 항목///////////////////////////////
 
     //listDeptList2:function(level,success,failure,async){
     //    this.action.invoke({"name": "listDeptList2","parameter": {"level": level }, "async": async, "success": success,	"failure": failure});

@@ -14,7 +14,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindFolderQuery;
 import com.x.mind.entity.MindFolderInfo;
 
 /**
- * 删除文件夹信息
+ * 폴더 정보 삭제
  * @author O2LEE
  *
  */
@@ -34,7 +34,7 @@ public class ActionFolderDelete extends BaseAction {
 				folderInfo = mindFolderInfoService.getWithId( folderId );
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindFolderQuery( e, "系统在根据ID查询所有的脑图文件夹信息时发生异常。" );
+				Exception exception = new ExceptionMindFolderQuery( e, "ID로 모든 마인드맵 폴더 정보를 조회하는 중 오류가 발생했습니다." );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -46,21 +46,21 @@ public class ActionFolderDelete extends BaseAction {
 				result.error(exception);
 			}
 		}
-		//查询文件夹下是否仍有脑图信息存在
+		//폴더에 마인드맵 정보가 남아 있는지 조회
 		if( check ){
 			Long count = mindFolderInfoService.countChildWithFolder(folderId);
 			if( count > 0 ) {
 				check = false;
-				Exception exception = new ExceptionFolderDelete( "文件夹下仍有" +count+ "个子文件夹，暂时无法删除文件夹！" );
+				Exception exception = new ExceptionFolderDelete( "폴더 안에 아직 " +count+ "개의 하위 폴더가 있어 지금은 폴더를 삭제할 수 없습니다!" );
 				result.error(exception);
 			}
 		}
-		//查询文件夹下是否仍有脑图信息存在
+		//폴더에 마인드맵 정보가 남아 있는지 조회
 		if( check ){
 			Long count = mindInfoService.countMindWithFolder(folderId);
 			if( count > 0 ) {
 				check = false;
-				Exception exception = new ExceptionFolderDelete( "文件夹下仍有" +count+ "个脑图文件，暂时无法删除文件夹！" );
+				Exception exception = new ExceptionFolderDelete( "폴더 안에 아직 " +count+ "개의 마인드맵 파일이 있어 지금은 폴더를 삭제할 수 없습니다!" );
 				result.error(exception);
 			}
 		}

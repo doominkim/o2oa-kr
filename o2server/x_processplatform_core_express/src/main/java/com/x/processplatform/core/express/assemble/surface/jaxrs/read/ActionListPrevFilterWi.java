@@ -11,32 +11,32 @@ public class ActionListPrevFilterWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6793971147187572320L;
 
-	@FieldDescribe("应用标识.")
-	@Schema(description = "应用标识.")
+	@FieldDescribe("앱 식별자.")
+	@Schema(description = "앱 식별자.")
 	private List<String> applicationList;
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList;
 
-	@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false.")
-	@Schema(description = "是否查找同版本流程数据：true(默认查找)|false.")
+	@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false.")
+	@Schema(description = "동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false.")
 	private Boolean relateEditionProcess = true;
 
-	@FieldDescribe("创建身份所在组织.")
-	@Schema(description = "创建身份所在组织.")
+	@FieldDescribe("생성 신분 소속 조직.")
+	@Schema(description = "생성 신분 소속 조직.")
 	private List<String> creatorUnitList;
 
-	@FieldDescribe("待阅开始时间.")
-	@Schema(description = "待阅开始时间.")
+	@FieldDescribe("열람 대기 시작 시간.")
+	@Schema(description = "열람 대기 시작 시간.")
 	private List<String> startTimeMonthList;
 
-	@FieldDescribe("活动名称.")
-	@Schema(description = "活动名称.")
+	@FieldDescribe("활동 이름.")
+	@Schema(description = "활동 이름.")
 	private List<String> activityNameList;
 
-	@FieldDescribe("搜索关键字.")
-	@Schema(description = "搜索关键字.")
+	@FieldDescribe("검색 키워드.")
+	@Schema(description = "검색 키워드.")
 	private String key;
 
 	public List<String> getApplicationList() {

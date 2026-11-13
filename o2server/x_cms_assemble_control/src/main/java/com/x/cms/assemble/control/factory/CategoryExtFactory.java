@@ -5,7 +5,7 @@ import com.x.cms.assemble.control.Business;
 import com.x.cms.core.entity.CategoryExt;
 
 /**
- * 分类扩展信息基础功能服务类
+ * 분류 확장 정보 기본 기능 서비스 클래스
  * 
  * @author O2LEE
  */

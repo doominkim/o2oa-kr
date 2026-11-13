@@ -3,8 +3,8 @@ import {lp, o2, component} from '@o2oa/component';
 import style from './style.scope.css';
 import template from './template.html';
 
-// 月份日期选择组件 
-// 返回结果 MM-DD 格式
+// 월 날짜 선택 컴포넌트 
+// MM-DD 형식으로 결과 반환
 export default content({
     template,
     style,
@@ -13,16 +13,16 @@ export default content({
         return {
             lp,
             showClear: false,
-            value: "", // 最终结果 MM-DD  
-            showValue: "", // 前端显示的时间 格式： x月x日
-            key:"", // 反写回去的对象key值，多层用.分割 如 form.startTime
+            value: "", // 최종 결과 MM-DD  
+            showValue: "", // 프론트엔드 표시 시간 형식: x월x일
+            key:"", // 되돌려 쓸 객체 key 값, 다단계는 .으로 구분, 예: form.startTime
             monthList: [],
             chooseMonth: '',
             dayList: [],
             chooseDay: '',
         };
     },
-    // 组件事件
+    // 컴포넌트 이벤트
     afterRender() {
       if (this.bind.value != '') {
         const valueArr = this.bind.value.split("-");
@@ -30,9 +30,9 @@ export default content({
         this.bind.chooseDay = parseInt(valueArr[1]);
       }
       this.showValueChange()
-      // 初始化 monthList 
+      // monthList 초기화 
       this.initMonthList();
-      // 初始化 dayList
+      // dayList 초기화
       this.initDayList();
       this.selectorDom = this.dom.querySelector(".o-time-minutes-selctor");
       let bindDom = this.dom.querySelector(".input");
@@ -46,9 +46,9 @@ export default content({
         this.selectorDom.hide();
         this.$parent.dom.removeEventListener('mousedown', this.hideEvent);
     },
-    // 选择器关闭
+    // 선택기 닫기
     selectoOutHide(e) {
-      // 计算下拉框的范围，范围外点击隐藏
+      // 드롭다운 범위 계산, 범위 밖 클릭 시 숨김
         const eCoor = this.selectorDom.getBoundingClientRect();
         const elementCoords =  {
           width: this.selectorDom.clientWidth,
@@ -63,7 +63,7 @@ export default content({
           this.selectorHide();
         }
     },
-    // 添加选择器关闭时间
+    // 선택기 닫기 이벤트 추가
     addCloseEventToParent() {
       this.hideEvent = this.selectoOutHide.bind(this);
       this.$parent.dom.addEventListener('mousedown', this.hideEvent );
@@ -77,17 +77,17 @@ export default content({
     },
     initDayList() {
       let dayList = [];
-      if (this.bind.chooseMonth == 2) {// 2月 28 天
+      if (this.bind.chooseMonth == 2) {// 2월 28일
         for (let index = 1; index <= 28; index++) {
           dayList.push(index);
         }
       } else {
-         // 1，3，5，7，8，10，12月 31天
+         // 1, 3, 5, 7, 8, 10, 12월 31일
         if (this.bind.chooseMonth == 1 || this.bind.chooseMonth == 3 || this.bind.chooseMonth == 5 || this.bind.chooseMonth == 7 || this.bind.chooseMonth == 8 || this.bind.chooseMonth == 10 || this.bind.chooseMonth == 12) {
           for (let index = 1; index <= 31; index++) {
             dayList.push(index);
           }
-        } else { // 其他月30天
+        } else { // 기타 월 30일
           for (let index = 1; index <= 30; index++) {
             dayList.push(index);
           }
@@ -96,7 +96,7 @@ export default content({
       this.bind.dayList = dayList;
       
     },
-    // 切换
+    // 전환
     changeChooseMonth(month) {
       this.bind.chooseMonth = month
       this.initDayList();
@@ -115,7 +115,7 @@ export default content({
       const month = this.bind.chooseMonth < 10 ? `0${this.bind.chooseMonth}` : this.bind.chooseMonth;
       const dayStr = this.bind.chooseDay < 10 ? `0${this.bind.chooseDay}` : this.bind.chooseDay;
       this.bind.value = `${month}-${dayStr}`;
-      // 显示
+      // 표시
       this.showValueChange();
       this.selectorHide();
       this.spitOutValue();

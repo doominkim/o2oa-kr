@@ -14,7 +14,7 @@ public class PropertyTools {
 	public static <T> T getOrElse(Object bean, String name, Class<T> cls, T defaultObject) throws Exception {
 		if (null != bean) {
 			try {
-				// 如果使用PropertyUtils.isReadable那么Nested就会失效,无法获取map类型中的值.
+				// PropertyUtils.isReadable을 사용하면 Nested가 동작하지 않아 map 타입의 값을 가져올 수 없음.
 				// Object o = PropertyUtils.getNestedProperty(bean, name);
 				Object o = PropertyUtils.getProperty(bean, name);
 				if (null != o) {

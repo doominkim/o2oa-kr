@@ -19,7 +19,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 打包服务器检测功能
+ * 패키징 서버 점검 기능
  * Created by fancyLou on 6/11/21.
  * Copyright © 2021 O2. All rights reserved.
  */
@@ -31,23 +31,23 @@ public class ActionConnectPackServer extends BaseAction {
         ActionResult<Wo> result = new ActionResult<Wo>();
         Wo wo = new Wo();
         if (BooleanUtils.isNotTrue(connect())) {
-            wo.setStatus(1); // o2云未连接
+            wo.setStatus(1); // o2 클라우드 미연결
             result.setData(wo);
             return result;
         }
         if (BooleanUtils.isFalse(Config.collect().getEnable())) {
-            wo.setStatus(1); // o2云未启用
+            wo.setStatus(1); // o2 클라우드 미사용
             result.setData(wo);
             return result;
         }
         if (BooleanUtils.isNotTrue(validate(Config.collect().getName(), Config.collect().getPassword()))) {
-            wo.setStatus(2); // o2云未登录
+            wo.setStatus(2); // o2 클라우드 미로그인
             result.setData(wo);
             return result;
         }
         String token = getPackServerSSOToken();
         if (StringUtils.isEmpty(token)) {
-            wo.setStatus(3); // 未认证
+            wo.setStatus(3); // 미인증
         }else {
             wo.setStatus(1001);
         }
@@ -57,7 +57,7 @@ public class ActionConnectPackServer extends BaseAction {
 
 
     /**
-     * 检查collect服务器连接
+     * collect 서버 연결 확인
      * @return
      */
     private Boolean connect() {
@@ -66,17 +66,17 @@ public class ActionConnectPackServer extends BaseAction {
             ActionResponse actionResponse = ConnectionAction.get(url, null);
             return Objects.equals(ActionResult.Type.success, actionResponse.getType());
         } catch (Exception e) {
-            logger.info("连接collect服务器失败");
+            logger.info("collect 서버 연결에 실패했습니다");
             logger.error(e);
             return false;
         }
     }
 
     /**
-     * 检查 collect 服务器认证
-     * @param name  collect 账号
-     * @param password collect 密码
-     * @return 认证成功返回true，否则返回false
+     * collect 서버 인증 확인
+     * @param name  collect 계정
+     * @param password collect 비밀번호
+     * @return 인증 성공 시 true, 아니면 false 반환
      */
     private Boolean validate(String name, String password) {
         try {
@@ -87,14 +87,14 @@ public class ActionConnectPackServer extends BaseAction {
             ActionResponse resp = ConnectionAction.post(url, null, map);
             return resp.getData(ReturnWoBoolean.class).getValue();
         } catch (Exception e) {
-            logger.info("登录collect服务器失败");
+            logger.info("collect 서버 로그인에 실패했습니다");
             logger.error( e);
         }
         return false;
     }
 
     /**
-     * 打包服务器认证返回对象
+     * 패키징 서버 인증 반환 객체
      */
     public static class AuthTokenData implements Serializable {
 
@@ -120,9 +120,9 @@ public class ActionConnectPackServer extends BaseAction {
 
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe( "连接状态，1：o2云服务未启用， 2：o2云未登录， 3：打包服务器未登录 , 1001：成功" )
-        private int status; //   1 o2云服务未启用， 2 o2云未登录， 3 apppack服务未登录 , 1001 成功
-        @FieldDescribe( "打包服务器地址" )
+        @FieldDescribe( "연결 상태, 1: o2 클라우드 서비스 미사용, 2: o2 클라우드 미로그인, 3: 패키징 서버 미로그인 , 1001: 성공" )
+        private int status; //   1 o2 클라우드 서비스 미사용, 2 o2 클라우드 미로그인, 3 apppack 서비스 미로그인 , 1001 성공
+        @FieldDescribe( "패키징 서버 주소" )
         private String packServerUrl;
 
         public int getStatus() {

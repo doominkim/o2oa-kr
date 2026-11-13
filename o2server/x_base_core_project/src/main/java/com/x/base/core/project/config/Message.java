@@ -35,7 +35,7 @@ public class Message extends GsonPropertyObject {
 		return new Message();
 	}
 
-	@FieldDescribe("消费通道配置")
+	@FieldDescribe("소비 채널 설정")
 	private List<JsonElement> consumers = new ArrayList<>();
 
 	@FieldDescribe("설명")
@@ -87,17 +87,17 @@ public class Message extends GsonPropertyObject {
 			this.description = description;
 		}
 
-		@FieldDescribe("消费者名称")
+		@FieldDescribe("소비자 이름")
 		private String type;
 		@FieldDescribe("설명")
 		private String description;
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable;
-		@FieldDescribe("装载脚本")
+		@FieldDescribe("로드 스크립트")
 		private String loader;
-		@FieldDescribe("过滤脚本")
+		@FieldDescribe("필터 스크립트")
 		private String filter;
-		@FieldDescribe("配置项")
+		@FieldDescribe("설정 항목")
 		protected String consumer;
 
 		public Boolean getEnable() {
@@ -270,11 +270,11 @@ public class Message extends GsonPropertyObject {
 		private static final String DEFAULT_PATH = "";
 		private static final String DEFAULT_METHOD = "get";
 
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private String application;
-		@FieldDescribe("路径")
+		@FieldDescribe("경로")
 		private String path;
-		@FieldDescribe("方法")
+		@FieldDescribe("메서드")
 		private String method;
 
 		public String getApplication() {
@@ -321,25 +321,25 @@ public class Message extends GsonPropertyObject {
 		private static final String DEFAULT_FROM = "admin@o2oa.net";
 		private static final String DEFAULT_PASSWORD = "password";
 
-		@FieldDescribe("smtp主机.")
+		@FieldDescribe("smtp 호스트.")
 		private String host;
 
-		@FieldDescribe("smtp端口.")
+		@FieldDescribe("smtp 포트.")
 		private Integer port;
 
-		@FieldDescribe("smtp 使用ssl加密.")
+		@FieldDescribe("smtp ssl 암호화 사용.")
 		private Boolean sslEnable;
 
-		@FieldDescribe("smtp 启用升级到加密链接.")
+		@FieldDescribe("smtp 암호화 연결로 업그레이드 사용.")
 		private Boolean startTlsEnable;
 
-		@FieldDescribe("stmp启用认证.")
+		@FieldDescribe("stmp 인증 사용.")
 		private Boolean auth;
 
-		@FieldDescribe("发件人.")
+		@FieldDescribe("발신자.")
 		private String from;
 
-		@FieldDescribe("发件人密码.")
+		@FieldDescribe("발신자 비밀번호.")
 		private String password;
 
 		public String getHost() {
@@ -401,16 +401,16 @@ public class Message extends GsonPropertyObject {
 		private static final String DEFAULT_SCHEMA = "";
 		private static final String DEFAULT_TABLE = "NEWTABLE";
 
-		@FieldDescribe("驱动类")
+		@FieldDescribe("드라이버 클래스")
 		private String driverClass;
 
-		@FieldDescribe("地址")
+		@FieldDescribe("주소")
 		private String url;
 
-		@FieldDescribe("用户名")
+		@FieldDescribe("사용자 이름")
 		private String username;
 
-		@FieldDescribe("密码")
+		@FieldDescribe("비밀번호")
 		private String password;
 
 		@FieldDescribe("catalog")
@@ -419,7 +419,7 @@ public class Message extends GsonPropertyObject {
 		@FieldDescribe("schema")
 		private String schema;
 
-		@FieldDescribe("表名")
+		@FieldDescribe("테이블명")
 		private String table;
 
 		public String getDriverClass() {
@@ -470,7 +470,7 @@ public class Message extends GsonPropertyObject {
 
 		private static final String DEFAULT_TABLE = "";
 
-		@FieldDescribe("自建表")
+		@FieldDescribe("사용자 정의 테이블")
 		private String table;
 
 		public String getTable() {
@@ -500,13 +500,13 @@ public class Message extends GsonPropertyObject {
 
 		}
 
-		@FieldDescribe("地址")
+		@FieldDescribe("주소")
 		private String url;
 
-		@FieldDescribe("方法")
+		@FieldDescribe("메서드")
 		private String method;
 
-		@FieldDescribe("是否是系统内部请求.")
+		@FieldDescribe("시스템 내부 요청 여부.")
 		private Boolean internal;
 
 		public Boolean getInternal() {
@@ -549,22 +549,22 @@ public class Message extends GsonPropertyObject {
 		private static final String DEFAULT_USERNAME = "";
 		private static final String DEFAULT_PASSWORD = "";
 
-		@FieldDescribe("服务器地址")
+		@FieldDescribe("서버 주소")
 		private String bootstrapServers;
 
-		@FieldDescribe("主题")
+		@FieldDescribe("주제")
 		private String topic;
 
-		@FieldDescribe("认证协议")
+		@FieldDescribe("인증 프로토콜")
 		private String securityProtocol;
 
-		@FieldDescribe("加密机制")
+		@FieldDescribe("암호화 방식")
 		private String saslMechanism;
 
-		@FieldDescribe("用户名")
+		@FieldDescribe("사용자 이름")
 		private String username;
 
-		@FieldDescribe("密码")
+		@FieldDescribe("비밀번호")
 		private String password;
 
 		public String getBootstrapServers() {
@@ -616,16 +616,16 @@ public class Message extends GsonPropertyObject {
 		private static final String DEFAULT_URL = "";
 		private static final String DEFAULT_QUEUENAME = "";
 
-		@FieldDescribe("用户名")
+		@FieldDescribe("사용자 이름")
 		private String username;
 
-		@FieldDescribe("密码")
+		@FieldDescribe("비밀번호")
 		private String password;
 
-		@FieldDescribe("服务器地址")
+		@FieldDescribe("서버 주소")
 		private String url;
 
-		@FieldDescribe("消息队列名")
+		@FieldDescribe("메시지 큐 이름")
 		private String queueName;
 
 		public String getUsername() {

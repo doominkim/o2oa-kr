@@ -37,8 +37,8 @@ class ActionListPrev extends BaseAction {
 		static WrapCopier<Draft, Wo> copier = WrapCopierFactory.wo(Draft.class, Wo.class,
 				JpaObject.singularAttributeField(Draft.class, true, true), null);
 
-		@FieldDescribe("排序号.")
-		@Schema(description = "排序号.")
+		@FieldDescribe("정렬 번호.")
+		@Schema(description = "정렬 번호.")
 		private Long rank;
 
 		public Long getRank() {

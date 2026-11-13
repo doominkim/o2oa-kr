@@ -5,11 +5,11 @@
   "removeFolderForce": { "uri": "/jaxrs/folder/{id}/force", "method": "DELETE" },
   "listMyFolder": {"uri": "/jaxrs/folder/tree/my"},
 
-  //{sharePersons:"",shareUnits:"",shareGroups："",folderId:"",orderField:"",orderType:DESC|ASC， 默认为DESC},
+  //{sharePersons:"",shareUnits:"",shareGroups:"",folderId:"",orderField:"",orderType:DESC|ASC, 기본값 DESC},
   "listMySharedMind" : {"uri":"/jaxrs/mind/filter/shared/{id}/next/{count}","method": "PUT"},
   //{sharePersons:"",shareUnits:"",shareGroups：""},
   "shareMind" : {"uri":"/jaxrs/mind/share/{id}","method": "PUT"},
-  //根据分享记录ID取消对脑图的分享
+  //공유 기록 ID로 마인드맵 공유 취소
   "cancelShareMind" : {"uri":"/jaxrs/mind/share/{shareId}/cancel","method": "PUT"},
   "listShareRecordsWithMindId" : {"uri":"/jaxrs/mind/list/{id}/shareRecords"},
 

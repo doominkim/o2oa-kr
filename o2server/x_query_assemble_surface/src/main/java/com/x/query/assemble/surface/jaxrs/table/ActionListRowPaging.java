@@ -80,10 +80,10 @@ class ActionListRowPaging extends BaseAction {
 
 		private static final long serialVersionUID = -297439043438152109L;
 
-		@FieldDescribe("排序字段，默认根据创建时间排序")
+		@FieldDescribe("정렬 필드, 기본값은 생성 시간 기준 정렬")
 		private String orderBy;
 
-		@FieldDescribe("是否倒叙排序,默认倒叙")
+		@FieldDescribe("내림차순 정렬 여부, 기본값 내림차순")
 		private Boolean descOrder;
 
 		public String getOrderBy() {

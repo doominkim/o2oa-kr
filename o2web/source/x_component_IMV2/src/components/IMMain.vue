@@ -36,25 +36,25 @@ const hideSide = ref(false);
 const conversation = ref(null);
 
 const chatBodyNodeRef = useTemplateRef('chatBodyNodeRef');
-// 是否选择模式
+// 선택 모드 여부
 const chooseMode = ref(false);
-// 输入的文字消息
+// 입력한 텍스트 메시지
 const inputMsg = ref('');
-// 是否在加载数据中
+// 데이터 로드 중 여부
 const isLoading = ref(false);
-// 是否有更多数据
+// 추가 데이터 존재 여부
 const hasMoreMsgData = ref(false);
-// 消息列表
+// 메시지 목록
 const msgList = ref([]);
 //
 const msgNode = ref();
-// 选择的消息数据
+// 선택한 메시지 데이터
 const msgSelectedList = ref([]);
-// 消息分页查询
+// 메시지 페이지 조회
 const page = ref(1);
-// 引用消息
+// 인용 메시지
 const quoteMessage = ref(null);
-// 选择表情
+// 이모티콘 선택
 const showEmoji = ref(false);
 //
 const showChatInfo = ref(false);
@@ -105,7 +105,7 @@ watch(
 const quoteDescRef = useTemplateRef('quoteDescRef');
 
 watch(quoteMessage, async () =>  {
-  await nextTick() // 等待DOM 更新完成
+  await nextTick() // DOM 업데이트 완료 대기
   const links = quoteDescRef.value?.querySelectorAll('a')
   if (links && links.length) {
     links.forEach(link => {
@@ -117,7 +117,7 @@ watch(quoteMessage, async () =>  {
   }
 });
 
-// 事件组合
+// 이벤트 조합
 const eventMap = {
   dragenter: (e) => unionEvents('dragenter', e),
   dragover: (e) => unionEvents('dragover', e),
@@ -127,25 +127,25 @@ const eventMap = {
 };
 
 // method
-// 添加事件绑定
+// 이벤트 바인딩 추가
 const addDragEvents = () => {
   const mainNode = document.querySelector('.im-main');
-  // 绑定拖拽事件，拖拽上传文件 发送文件消息
+  // 드래그 이벤트 바인딩, 파일을 끌어 업로드해 파일 메시지 전송
   for (let eventMapKey in eventMap) {
     mainNode.addEventListener(eventMapKey, eventMap[eventMapKey]);
   }
 };
-// 删除事件绑定
+// 이벤트 바인딩 삭제
 const removeDragEvents = () => {
   const mainNode = document.querySelector('.im-main');
   for (let eventMapKey in eventMap) {
     mainNode.removeEventListener(eventMapKey, eventMap[eventMapKey]);
   }
 };
-// 多个事件统一处理
+// 여러 이벤트 일괄 처리
 const unionEvents = (eventName, e) => {
   console.debug(`unionEvents ================> ${eventName}`);
-  // 阻止默认行为（防止文件打开）
+  // 기본 동작 방지(파일 열림 방지)
   if (eventName !== 'paste') {
     e.preventDefault();
     e.stopPropagation();
@@ -172,7 +172,7 @@ const unionEvents = (eventName, e) => {
       break;
   }
 };
-// 拖入/离开时的样式变化
+// 드래그 진입/이탈 시 스타일 변경
 const dragEnterOverEvent = () => {
   console.debug(`dragEnterOverEvent ================>`);
   const chatNode = document.querySelector('.im-chat');
@@ -183,7 +183,7 @@ const dragLeaveEvent = () => {
   const chatNode = document.querySelector('.im-chat');
   chatNode.classList.remove('im-drag-style');
 };
-// 拖入文件发送消息
+// 끌어 놓은 파일로 메시지 전송
 const dragDropFileSendMsg = (e) => {
   console.debug(`dragDropFileSendMsg ================>`);
   if (e && e.dataTransfer && e.dataTransfer.files) {
@@ -196,18 +196,18 @@ const dragDropFileSendMsg = (e) => {
     });
   }
 };
-// 从剪贴板 复制文件 发送消息
+// 클립보드에서 파일 복사해 메시지 전송
 const pasteFileSendMsg = (e) => {
   if (!e || !e.clipboardData || !e.clipboardData.items) {
     return;
   }
   console.debug(`pasteFileSendMsg ================>`);
-  // 获取粘贴的内容
+  // 붙여넣은 내용 가져오기
   const items = e.clipboardData.items;
-  // 遍历剪贴板中的所有项目
+  // 클립보드의 모든 항목 순회
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    // 判断是否为文件类型
+    // 파일 유형인지 판단
     if (item.kind === 'file') {
       const file = item.getAsFile();
       if (file) {
@@ -215,7 +215,7 @@ const pasteFileSendMsg = (e) => {
         _sendFileMsg(file);
       }
     } else if (item.type.indexOf('image') > -1) {
-      // 处理图片类型，可以通过 getAsFile 获取 Blob 对象
+      // 이미지 유형 처리, getAsFile로 Blob 객체 가져오기 가능
       const file = item.getAsFile();
       if (file) {
         console.debug('붙여넣은 이미지:', file);
@@ -224,11 +224,11 @@ const pasteFileSendMsg = (e) => {
     }
   }
 };
-// 关闭当前页面
+// 현재 페이지 닫기
 const closeMainPage = () => {
   openConversation(null)
 }
-// 初始化数据
+// 데이터 초기화
 const initMainPage = async () => {
   console.debug('imGlobalOptions', imGlobalOptionsInstance.hideSide);
   hideSide.value = imGlobalOptionsInstance.hideSide;
@@ -269,7 +269,7 @@ const loadMsgByPage = async () => {
       msgList.value.unshift(...newList);
     } else {
       msgList.value = newList;
-      // 滚动到底部
+      // 맨 아래로 스크롤
       scrollToBottom();
     }
     hasMoreMsgData.value = list.length >= 20;
@@ -278,7 +278,7 @@ const loadMsgByPage = async () => {
   }
   isLoading.value = false;
 };
-// 会话标题
+// 대화 제목
 const conversationName = (conversation) => {
   if (conversation.type === 'single') {
     let chatPerson = '';
@@ -296,7 +296,7 @@ const conversationName = (conversation) => {
   }
   return conversation.title;
 };
-// 点击发送消息
+// 클릭해 메시지 전송
 const clickSendMsg = () => {
   const text = inputMsg.value;
   if (text.trim() === '') {
@@ -319,10 +319,10 @@ const clickSendMsg = () => {
     textMessage.quoteMessageId = quoteMessage.value.id;
     textMessage.quoteMessage = quoteMessage.value;
   }
-  // 添加到界面上
+  // 화면에 추가
   msgList.value.push(textMessage);
   _sendTextMsg(textMessage);
-  // 会话更新
+  // 대화 업데이트
   quoteMessage.value = null;
   inputMsg.value = '';
   scrollToBottom();
@@ -337,7 +337,7 @@ const _sendMsgOnline = async (msg) => {
     console.log('메시지 전송 성공', res);
   }
 };
-// 输入框回车事件
+// 입력창 엔터 이벤트
 const inputKeyupEvent = (e) => {
   if (e.keyCode === 13) {
     e.preventDefault();
@@ -363,7 +363,7 @@ const _sendFileMsg = async (file) => {
   // formData.append('file', file);
   // formData.append('fileName', file.name);
   // const fileExt = file.name.substring(file.name.lastIndexOf('.'));
-  // // 图片消息
+  // // 이미지 메시지
   // let type;
   // if (fileExt.toLowerCase() === '.webp' && canUseWebP()) {
   //     type = 'image';
@@ -375,10 +375,10 @@ const _sendFileMsg = async (file) => {
   // ) {
   //     type = 'image';
   // } else {
-  //     // 文件消息
+  //     // 파일 메시지
   //     type = 'file';
   // }
-  // //上传文件
+  // //파일 업로드
   // const res = await imUploadFile(conversation.value.id, type, formData, file);
   // console.debug(res);
   // if (res) {
@@ -400,18 +400,18 @@ const _sendFileMsg = async (file) => {
   //         createTime: ymdhms(new Date()),
   //         sendStatus: 1,
   //     };
-  //     // 添加到界面上
+  //     // 화면에 추가
   //     msgList.value.push(message);
   //     await _sendMsgOnline(message);
   //     eventBus.publish(EventName.refreshMyConversation, 'sendMsg');
   //     scrollToBottom();
   // }
 };
-// 删除引用消息
+// 인용 메시지 삭제
 const deleteQuoteMessage = () => {
   quoteMessage.value = null;
 };
-// 引用消息内容
+// 인용 메시지 내용
 const quoteMsgContent = (quoteMessage) => {
   if (!quoteMessage || !quoteMessage.body || !quoteMessage.createPerson) {
     console.error('잘못된 인용 메시지');
@@ -429,7 +429,7 @@ const quoteMsgContent = (quoteMessage) => {
     name +=  title;
   } else if (msgBody.type === 'cms') {
     name +=  msgBody.title || '';
-  } else  if (msgBody.type !== 'emoji' && msgBody.type !== 'image') { // 表情和图片不需要再加内容，只需要 name:
+  } else  if (msgBody.type !== 'emoji' && msgBody.type !== 'image') { // 이모티콘과 이미지는 내용을 추가할 필요 없이 name:만 필요
     let quoteDesc = contentEscapeBackToSymbol(lastMessage);
     if (containsUrl(quoteDesc)) {
       quoteDesc = marked.parse(convertUrlToMarkdown(quoteDesc))
@@ -443,7 +443,7 @@ const quoteMsgContent = (quoteMessage) => {
   }
   return name;
 };
-// 选择消息
+// 메시지 선택
 const clickSelectMsg = (msg) => {
   const i = msgSelectedList.value.findIndex((m) => m.id === msg.id);
   if (i > -1) {
@@ -452,26 +452,26 @@ const clickSelectMsg = (msg) => {
     msgSelectedList.value.push(msg);
   }
 };
-// 打开消息
+// 메시지 열기
 const clickOpenMsg = (msg) => {
   if (chooseMode.value) {
     clickSelectMsg(msg);
   } else {
-    // 打开消息
+    // 메시지 열기
     if (!needClickMsg(msg)) {
       return;
     }
     eventBus.publish(EventName.openMsg, msg);
   }
 };
-// 引用消息
+// 인용 메시지
 const clickOpenQuoteMsg = (msg) => {
   console.debug('open quote msg  === main', msg);
   if (!chooseMode.value) {
     eventBus.publish(EventName.openMsg, msg);
   }
 };
-// 选择表情
+// 이모티콘 선택
 const chooseEmoji = (emoji) => {
   console.log('선택한 이모티콘', emoji);
   const text = inputMsg.value;
@@ -483,10 +483,10 @@ const openEmojiPicker = () => {
 const closeEmojiPicker = () => {
   showEmoji.value = false;
 };
-// 右键菜单
+// 오른쪽 클릭 메뉴
 const msgContextMenu = (msg, e) => {
   e.preventDefault();
-  const menuList = []; // 菜单列表
+  const menuList = []; // 메뉴 목록
   if (imConfigInstance.enableRevokeMsg === true) {
     const createPerson = msg.createPerson;
     const me = layout.session.user.distinguishedName;
@@ -499,13 +499,13 @@ const msgContextMenu = (msg, e) => {
       menuList.push({id: 'revokeMsg', text: lp.msgMenuItemRevokeMsg});
     }
   }
-  // 转发
+  // 전달
   menuList.push({id: 'forward', text: lp.msgMenuItemForwardMsg});
-  // 收藏
+  // 즐겨찾기
   menuList.push({id: 'collection', text: lp.msgMenuItemCollectionMsg});
-  // 选择
+  // 선택
   menuList.push({id: 'select', text: lp.msgMenuItemSelectMsg});
-  // 引用
+  // 인용
   menuList.push({id: 'quote', text: lp.msgMenuItemQuoteMsg});
   console.debug('우클릭 메뉴', menuList);
   createContextMenu({
@@ -533,13 +533,13 @@ const msgContextMenu = (msg, e) => {
     left: e.clientX,
   });
 };
-// 选择
+// 선택
 const _openChooseMode = (msg) => {
   chooseMode.value = true;
   msgSelectedList.value = [msg];
   console.debug('선택 모드', msg);
 };
-// 转发
+// 전달
 const _forwardMsg = (msg) => {
   conversationPicker(eventBus).then((conv) => {
     if (conv) {
@@ -548,7 +548,7 @@ const _forwardMsg = (msg) => {
     }
   });
 };
-// 撤回
+// 회수
 const _revokeMsg = (msg) => {
   console.debug('회수', msg);
   imAction('msgRevoke', msg.id);
@@ -557,12 +557,12 @@ const _revokeMsg = (msg) => {
       1,
   );
 };
-// 引用
+// 인용
 const _quoteMsg = (msg) => {
   console.debug('인용', msg);
   quoteMessage.value = msg;
 };
-// 收藏
+// 즐겨찾기
 const _collectMsg = (msg) => {
   console.debug('즐겨찾기', msg);
   _collectMsgListOnline([msg]);
@@ -577,7 +577,7 @@ const _collectMsgListOnline = async (msgList) => {
     $OOUI.notice.success(lp.alert, lp.msgCollectionSuccess);
   }
 };
-// 转发消息
+// 메시지 전달
 const _forwardMsgListOnline = async (conv, list) => {
   if (!conv || !list || list.length < 1) {
     return;
@@ -596,7 +596,7 @@ const _forwardMsgListOnline = async (conv, list) => {
   }
   eventBus.publish(EventName.refreshMyConversation, 'sendMsg');
 };
-// 逐个消息转发
+// 메시지 개별 전달
 const clickOneByOneForward = () => {
   if (msgSelectedList.value.length < 1) {
     $OOUI.notice.warn(lp.alert, lp.msgNeedSelectMessage);
@@ -610,14 +610,14 @@ const clickOneByOneForward = () => {
     }
   });
 };
-// 合并消息转发
+// 메시지 병합 전달
 const clickMergeForward = () => {
   if (msgSelectedList.value.length < 1) {
     $OOUI.notice.warn(lp.alert, lp.msgNeedSelectMessage);
     return;
   }
   let list = msgSelectedList.value.slice();
-  // 倒序
+  // 역순
   list.sort(function (a, b) {
     return new Date(b.createTime) - new Date(a.createTime);
   });
@@ -675,44 +675,44 @@ const clickMergeForward = () => {
     }
   });
 };
-// 收藏消息
+// 메시지 즐겨찾기
 const clickCollectionMsg = () => {
   if (msgSelectedList.value.length < 1) {
     $OOUI.notice.warn(lp.alert, lp.msgNeedSelectMessage);
     return;
   }
   let list = msgSelectedList.value.slice();
-  // 顺序
+  // 순서
   list.sort(function (a, b) {
     return new Date(a.createTime) - new Date(b.createTime);
   });
   _collectMsgListOnline(list);
   closeChooseMode();
 };
-// 关闭选择模式
+// 선택 모드 닫기
 const closeChooseMode = () => {
   chooseMode.value = false;
   msgSelectedList.value = [];
 };
-// 滚动到底部
+// 맨 아래로 스크롤
 const scrollToBottom = () => {
   nextTick(() => {
     msgNode.value[msgList.value.length - 1].scrollIntoView();
   });
 };
 
-// 滚动事件 滚动到顶部的时候加载更多消息
+// 스크롤 이벤트, 맨 위로 스크롤 시 메시지 추가 로드
 const msgListScrollEvent = () => {
-  //滑到顶部时触发下次数据加载
+  //맨 위에 도달하면 다음 데이터 로드
   const chatBodyNode = document.querySelector('#chatBodyNode');
   if (chatBodyNode.scrollTop === 0) {
     if (hasMoreMsgData.value) {
-      // 有更多数据
-      // 间隔1秒 防止频繁
+      // 추가 데이터 있음
+      // 1초 간격, 빈번한 호출 방지
       setTimeout(() => {
-        //将scrollTop置为10以便下次滑到顶部
+        //다음에 맨 위에 도달할 수 있도록 scrollTop을 10으로 설정
         chatBodyNode.scrollTop = 10;
-        //加载数据
+        //데이터 로드
         loadMoreMsgData();
       }, 300);
     }
@@ -735,7 +735,7 @@ const showImChat = () => {
 <template>
   <div class="im-chat-row">
     <div class="im-chat" v-if=" showImChat() ">
-      <!-- 进度条 -->
+      <!-- 진행 막대 -->
       <div class="im-chat-progress" v-if="uploadFileListInstance.uploadFileList.length > 0">
         <div v-for="file in uploadFileListInstance.uploadFileList" :key="file.id"
              class="im-chat-progress-bar-container">
@@ -828,10 +828,10 @@ const showImChat = () => {
           </div>
         </div>
       </div>
-      <!--    emoji 选择 -->
+      <!--    emoji 선택 -->
       <EmojiPicker v-if="showEmoji" @chooseEmoji="chooseEmoji" @closeEmojiPicker="closeEmojiPicker"></EmojiPicker>
     </div>
-    <!--  聊天信息 -->
+    <!--  채팅 정보 -->
     <ChatInfo v-if="showChatInfo && conversation" :conversation="conversation"
               @closeChatInfo="showChatInfo = false"></ChatInfo>
   </div>

@@ -44,12 +44,12 @@ MWF.APPPOD.LP = {
         "changeToSequenceTitle": "확인",
         "changeToSequence": "이 작업은 이미 추가한 구성요소를 삭제합니다. \"번호\" 열로 바꾸시겠습니까?",
 
-        //"confiltNoPix" : "请填写前缀或后缀",
+        //"confiltNoPix" : "접두사 또는 접미사를 입력하십시오",
         "selectPage" : "페이지를 선택하세요",
         "selectPortal" : "포털을 선택하세요",
         "selectWidget" : "위젯을 선택하세요",
-        //"moduleConflitError" : "组件标识重复",
-        //"moduleConflitErrorOnPix" : "添加了前缀或后缀后组件标识仍然重复"
+        //"moduleConflitError" : "컴포넌트 식별자가 중복됩니다",
+        //"moduleConflitErrorOnPix" : "접두사 또는 접미사를 추가한 후에도 컴포넌트 식별자가 중복됩니다"
         "widgetNameEmpty": "위젯 이름을 입력하세요",
         "widgetNameConflict" : "위젯 이름이 중복됩니다",
         "widget_save_success" : "위젯을 저장했습니다"

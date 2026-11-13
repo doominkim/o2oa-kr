@@ -21,7 +21,7 @@ import com.x.base.core.project.jaxrs.StandardJaxrsAction;
 @Path("openmeeting")
 public class OpenMeetingAction extends StandardJaxrsAction {
 
-	@JaxrsMethodDescribe(value = "获取openmeeting配置.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "openmeeting 설정 조회.", action = ActionGet.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -36,7 +36,7 @@ public class OpenMeetingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取openmeeting的room.", action = ActionListRoom.class)
+	@JaxrsMethodDescribe(value = "openmeeting의 room 조회.", action = ActionListRoom.class)
 	@GET
 	@Path("list/room")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

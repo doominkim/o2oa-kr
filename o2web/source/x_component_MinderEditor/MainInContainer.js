@@ -10,9 +10,9 @@ MWF.xApplication.MinderEditor.MainInContainer = new Class({
     initialize: function(desktop, options, container, content, scrollNode){
         this.setOptions(options);
         this.desktop = desktop;
-        this.container = container; //container， 脑图内容容器
-        this.content = content; //content, 父app的 content,比如 在流程或者门户 app的 content
-        this.scrollNode = scrollNode;  //出现滚动条的节点
+        this.container = container; //container, 마인드맵 콘텐츠 컨테이너
+        this.content = content; //content, 상위 app의 content, 예: 프로세스나 포털 app의 content
+        this.scrollNode = scrollNode;  //스크롤바가 나타나는 노드
         this.path = "../x_component_"+this.options.name.replace(/\./g, "_")+"/$Main/";
         this.options.icon = this.path+this.options.style+"/"+this.options.icon;
 

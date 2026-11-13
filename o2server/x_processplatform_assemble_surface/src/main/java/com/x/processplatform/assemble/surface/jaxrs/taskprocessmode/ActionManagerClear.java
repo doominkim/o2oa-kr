@@ -24,7 +24,7 @@ class ActionManagerClear extends BaseAction {
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String person) throws Exception {
 
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			LOGGER.info("{}操作清除【{}】的待办处理方式记录.", effectivePerson.getDistinguishedName(), person);
+			LOGGER.info("{} 작업으로 [{}]의 결재 대기 처리 방식 기록 삭제.", effectivePerson.getDistinguishedName(), person);
 			ActionResult<Wo> result = new ActionResult<>();
 
 			Business business = new Business(emc);

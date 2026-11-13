@@ -91,7 +91,7 @@ MWF.xApplication.cms.Index.Main = new Class({
 		}).inject(this.lnbNode);
 		this.allTypeNode =  new Element("div.columnTop_All",{
 			"styles" : this.css.columnTop_All,
-			"text" : this.lp.allColumn //"全部栏目"
+			"text" : this.lp.allColumn //"전체 게시판"
 		}).inject( this.lnbTreeNode );
 		new Element("i.ooicon-documents", {"styles": this.css.columnTop_AllIcon}).inject(this.allTypeNode, "top");
 		this.allTypeNode.addEvents({
@@ -711,8 +711,8 @@ MWF.xApplication.cms.Index.Column = new Class({
 			"statusList": ["published"]
 		};
 		this.getDocumentData(function(json){
-			//json.count //栏目下文档总数
-			//json.size //当前条数
+			//json.count //게시판의 전체 문서 수
+			//json.size //현재 건수
 			if( json.count > json.size ){
 				this.loadMoreItem( json.count, json.size )
 			}
@@ -725,8 +725,8 @@ MWF.xApplication.cms.Index.Column = new Class({
 		if(this.documentList)this.documentList.empty();
 		if(this.moreArea)this.moreArea.destroy();
 		this.getDocumentData(function(json){
-			//json.count //栏目下文档总数
-			//json.size //当前条数
+			//json.count //게시판의 전체 문서 수
+			//json.size //현재 건수
 			//if( json.count > json.size ){
 			//	this.loadMoreItem( json.count, json.size )
 			//}

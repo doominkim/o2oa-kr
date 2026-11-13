@@ -77,7 +77,7 @@ class ActionGetWorkOrWorkCompleted extends BaseAction {
         static WrapCopier<Control, Wo> copier = WrapCopierFactory.wo(Control.class, Wo.class, null,
                 null);
 
-        @FieldDescribe("字段权限配置列表")
+        @FieldDescribe("필드 권한 설정 목록")
         private List<WoItemAccess> itemAccessList;
 
         public List<WoItemAccess> getItemAccessList() {

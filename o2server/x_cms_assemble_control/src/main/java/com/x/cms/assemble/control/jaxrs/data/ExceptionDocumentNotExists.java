@@ -7,6 +7,6 @@ class ExceptionDocumentNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionDocumentNotExists( String docId ) {
-		super("指定的文档不存在:{}." + docId );
+		super("지정한 게시글이 없습니다: {}." + docId );
 	}
 }

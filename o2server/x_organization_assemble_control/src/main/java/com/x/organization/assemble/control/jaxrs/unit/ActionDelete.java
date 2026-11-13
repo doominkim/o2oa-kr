@@ -53,7 +53,7 @@ class ActionDelete extends BaseAction {
             }
             List<Unit> list = new ArrayList<>();
             list.add(unit);
-            /** 查找子组织 */
+            /** 하위 조직 조회 */
             list.addAll(business.unit().listSubNestedObject(unit));
             list = list.stream().sorted(Comparator.comparing(Unit::getLevel).reversed()).collect(Collectors.toList());
             for (Unit o : list) {
@@ -73,39 +73,39 @@ class ActionDelete extends BaseAction {
     }
 
     private void remove(Business business, Unit o) throws Exception {
-        /** 前面是pick出来的,真正删除需要重新取出 */
+        /** 앞에서는 pick으로 가져온 것이므로 실제 삭제하려면 다시 조회해야 함 */
         Unit unit = business.entityManagerContainer().find(o.getId(), Unit.class);
         if (null != unit) {
-            /** 删除组织属性 */
+            /** 조직 속성 삭제 */
             business.entityManagerContainer().beginTransaction(UnitAttribute.class);
             this.removeUnitAttribute(business, unit);
             business.entityManagerContainer().commit();
-            /** 删除组织职务 */
+            /** 조직 직무 삭제 */
             business.entityManagerContainer().beginTransaction(UnitDuty.class);
             this.removeUnitDuty(business, unit);
-            /** 先提交,否则删除身份无法通过校验 */
+            /** 먼저 커밋해야 신분 삭제 검증을 통과함 */
             business.entityManagerContainer().commit();
-            /** 先获取身份 */
+            /** 먼저 신분 조회 */
             List<Identity> identities = this.listIdentity(business, unit);
-            /** 获取身份的ID */
+            /** 신분 ID 조회 */
             List<String> identityIds = ListTools.extractProperty(identities, JpaObject.id_FIELDNAME, String.class, true,
                     true);
-            /** 删除在其他组织属性中可能的值 */
+            /** 다른 조직 속성에 있을 수 있는 값 삭제 */
             business.entityManagerContainer().beginTransaction(UnitDuty.class);
             this.removeMemberOfUnitDuty(business, identityIds);
             business.entityManagerContainer().commit();
-            /** 删除在群组中可能的值 */
+            /** 그룹에 있을 수 있는 값 삭제 */
             business.entityManagerContainer().beginTransaction(Group.class);
             this.removeMemberOfGroup(business, unit);
             business.entityManagerContainer().commit();
-            /** 删除身份 */
+            /** 신분 삭제 */
             business.entityManagerContainer().beginTransaction(Identity.class);
             for (Identity identity : identities) {
                 business.entityManagerContainer().remove(identity, CheckRemoveType.all);
             }
-            /** 先提交,否则删除组织无法通过校验 */
+            /** 먼저 커밋해야 조직 삭제 검증을 통과함 */
             business.entityManagerContainer().commit();
-            /** 最后删除组织 */
+            /** 마지막으로 조직 삭제 */
             business.entityManagerContainer().beginTransaction(Unit.class);
             business.entityManagerContainer().remove(unit, CheckRemoveType.all);
             business.entityManagerContainer().commit();

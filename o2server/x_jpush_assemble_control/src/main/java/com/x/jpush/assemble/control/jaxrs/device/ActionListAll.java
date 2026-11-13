@@ -59,7 +59,7 @@ public class ActionListAll extends BaseAction {
 //            }
 		} catch (Exception e) {
 			logger.error(e);
-			throw new IllegalArgumentException("系统在查询绑定设备时发生异常!", e);
+			throw new IllegalArgumentException("연결된 기기를 조회하는 중 오류가 발생했습니다!", e);
 		}
 
 		logger.info("action 'ActionListAll' execute completed!");
@@ -68,7 +68,7 @@ public class ActionListAll extends BaseAction {
 
 	/**
 	 *
-	 * 向外输出的结果对象包装类
+	 * 외부 출력 결과 객체 래퍼 클래스
 	 *
 	 */
 	public static class Wo extends GsonPropertyObject {

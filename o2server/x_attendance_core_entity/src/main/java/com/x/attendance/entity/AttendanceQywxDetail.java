@@ -18,7 +18,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceDetail", description = "考勤企业微信信息.")
+@Schema(name = "AttendanceDetail", description = "근태 WeCom 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceQywxDetail.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceQywxDetail.table
@@ -44,38 +44,38 @@ public class AttendanceQywxDetail extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String o2User_FIELDNAME = "o2User";
-	@FieldDescribe("O2用户distinguishedName")
+	@FieldDescribe("O2 사용자 distinguishedName")
 	@Column(name = ColumnNamePrefix + o2User_FIELDNAME, length = AbstractPersistenceProperties.organization_name_length)
 	private String o2User;
 
 	public static final String o2Unit_FIELDNAME = "o2Unit";
-	@FieldDescribe("O2用户所在的组织distinguishedName")
+	@FieldDescribe("O2 사용자 소속 조직 distinguishedName")
 	@Column(name = ColumnNamePrefix + o2Unit_FIELDNAME, length = AbstractPersistenceProperties.organization_name_length)
 	private String o2Unit;
 
 	public static final String userid_FIELDNAME = "userid";
-	@FieldDescribe("用户id")
+	@FieldDescribe("사용자 id")
 	@Column(name = ColumnNamePrefix + userid_FIELDNAME, length = length_96B)
 	private String userid;
 
 	public static final String groupname_FIELDNAME = "groupname";
-	@FieldDescribe("打卡规则名称")
+	@FieldDescribe("출퇴근 체크 규칙 이름")
 	@Column(name = ColumnNamePrefix + groupname_FIELDNAME, length = length_128B)
 	private String groupname;
 
-	// 打卡类型
+	// 체크 유형
 	public static final String CHECKIN_TYPE_ON = "上班打卡";
 	public static final String CHECKIN_TYPE_OFF = "下班打卡";
 	public static final String CHECKIN_TYPE_OUTSIDE = "外出打卡";
@@ -86,16 +86,16 @@ public class AttendanceQywxDetail extends SliceJpaObject {
 	private String checkin_type;
 
 	public static final String checkin_time_FIELDNAME = "checkin_time";
-	@FieldDescribe("打卡时间。Unix时间戳")
+	@FieldDescribe("출퇴근 체크 시간. Unix 타임스탬프")
 	@Column(name = ColumnNamePrefix + checkin_time_FIELDNAME)
 	private long checkin_time;
 
 	public static final String checkin_time_date_FIELDNAME = "checkin_time_date";
-	@FieldDescribe("实际打卡时间,  用Date格式存储")
+	@FieldDescribe("실제 체크 시간, Date 형식으로 저장")
 	@Column(name = ColumnNamePrefix + checkin_time_date_FIELDNAME)
 	private Date checkin_time_date;
 
-	// 异常类型
+	// 예외 유형
 	public static final String EXCEPTION_TYPE_TIME = "时间异常";
 	public static final String EXCEPTION_TYPE_ADDRESS = "地点异常";
 	public static final String EXCEPTION_TYPE_WIFI = "wifi异常";
@@ -109,22 +109,22 @@ public class AttendanceQywxDetail extends SliceJpaObject {
 	private String exception_type;
 
 	public static final String location_title_FIELDNAME = "location_title";
-	@FieldDescribe("打卡地点title")
+	@FieldDescribe("출퇴근 체크 장소 title")
 	@Column(name = ColumnNamePrefix + location_title_FIELDNAME, length = length_255B)
 	private String location_title;
 
 	public static final String location_detail_FIELDNAME = "location_detail";
-	@FieldDescribe("打卡地点详情")
+	@FieldDescribe("출퇴근 체크 장소 상세")
 	@Column(name = ColumnNamePrefix + location_detail_FIELDNAME, length = length_255B)
 	private String location_detail;
 
 	public static final String wifiname_FIELDNAME = "wifiname";
-	@FieldDescribe("打卡wifi名称")
+	@FieldDescribe("출퇴근 체크 wifi 이름")
 	@Column(name = ColumnNamePrefix + wifiname_FIELDNAME, length = length_255B)
 	private String wifiname;
 
 	public static final String notes_FIELDNAME = "notes";
-	@FieldDescribe("打卡备注")
+	@FieldDescribe("출퇴근 체크 비고")
 	@Column(name = ColumnNamePrefix + notes_FIELDNAME, length = length_255B)
 	private String notes;
 

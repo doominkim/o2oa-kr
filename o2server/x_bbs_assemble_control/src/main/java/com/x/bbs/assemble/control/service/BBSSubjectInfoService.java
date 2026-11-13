@@ -30,7 +30,7 @@ import com.x.bbs.entity.BBSVoteOptionGroup;
 import com.x.bbs.entity.BBSVoteRecord;
 
 /**
- * 论坛信息管理服务类
+ * 포럼 정보 관리 서비스 클래스
  * @author LIYI
  *
  */
@@ -40,7 +40,7 @@ public class BBSSubjectInfoService {
 	private DateOperation dateOperation = new DateOperation();
 
 	/**
-	 * 根据传入的ID从数据库查询BBSSubjectInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSubjectInfo 객체 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -59,7 +59,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 根据传入的ID从数据库查询BBSSubjectInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSubjectInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -76,7 +76,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 根据传入的ID从数据库查询BBSSubjectInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSubjectInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -98,7 +98,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 根据传入的ID从数据库查询BBSSubjectInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSubjectInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -120,7 +120,7 @@ public class BBSSubjectInfoService {
 
 
 	/**
-	 * 向数据库保存BBSSubjectInfo对象
+	 * 데이터베이스에 BBSSubjectInfo 객체 저장
 	 * @param emc
 	 * @param _bBSSubjectInfo
 	 * @param content
@@ -181,8 +181,8 @@ public class BBSSubjectInfoService {
 					BBSSubjectInfo.creatorName_FIELDNAME, BBSSubjectInfo.nickName_FIELDNAME));
 			emc.check( _subjectInfo_tmp, CheckPersistType.all );
 		}
-		//检查和绑定附件信息
-		//1、先查询所有的附件绑定信息
+		//첨부파일 정보 확인 및 바인딩
+		//1. 모든 첨부파일 바인딩 정보 먼저 조회
 		attachList = business.subjectAttachmentFactory().listBySubjectId( _bBSSubjectInfo.getId() );
 		if( ListTools.isNotEmpty(attachList) ){
 			for( BBSSubjectAttachment attachment : attachList ){
@@ -196,7 +196,7 @@ public class BBSSubjectInfoService {
 				}else{
 					exists = false;
 				}
-				if( !exists ){//删除
+				if( !exists ){//삭제
 					emc.remove( attachment, CheckRemoveType.all );
 				}
 			}
@@ -222,13 +222,13 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 根据ID从数据库中删除BBSSubjectInfo对象
-	 * 	 * 删除主题后，要对一系列的数据进行操作：
-	 * 	 * 1、所有的回贴删除，记录回贴数量n
-	 * 	 * 2、版块主题数量-1，如果有主版块，主版块主题数量-1
-	 * 	 * 3、论坛主题数量-1
-	 * 	 * 4、版块回复数量-n，如果有主版块，主版块回复数量-n
-	 * 	 * 5、论坛回复数量-n
+	 * ID로 데이터베이스에서 BBSSubjectInfo 객체 삭제
+	 * 	 * 주제 삭제 후 일련의 데이터 처리 필요:
+	 * 	 * 1. 모든 답글 삭제, 답글 수 n 기록
+	 * 	 * 2. 게시판 주제 수 -1, 상위 게시판이 있으면 상위 게시판 주제 수 -1
+	 * 	 * 3. 포럼 주제 수 -1
+	 * 	 * 4. 게시판 답글 수 -n, 상위 게시판이 있으면 상위 게시판 답글 수 -n
+	 * 	 * 5. 포럼 답글 수 -n
 	 * @param emc
 	 * @param subjectId
 	 * @throws Exception
@@ -264,7 +264,7 @@ public class BBSSubjectInfoService {
 		emc.beginTransaction( BBSSubjectVoteResult.class );
 
 		business = new Business( emc );
-		//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+		//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 		subjectInfo = emc.find( subjectId, BBSSubjectInfo.class );
 		subjectContent = emc.find( subjectId, BBSSubjectContent.class );
 		replyInfoList = business.replyInfoFactory().listWithSubjectForPage( subjectId, true, null, "ASC" );
@@ -404,8 +404,8 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 根据版块信息，查询所有需要展现的所有置顶主题列表
-	 * 包括：全局置顶贴, 当前论坛置顶贴, 当前版块置顶贴和主版块的置顶贴
+	 * 게시판 정보로 표시할 모든 상단 고정 주제 목록 조회
+	 * 포함: 전체 상단 고정글, 현재 포럼 상단 고정글, 현재 게시판 상단 고정글, 상위 게시판 상단 고정글
 	 * @param sectionInfo
 	 * @return
 	 * @throws Exception
@@ -436,8 +436,8 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 根据版块信息，查询所有需要展现的所有置顶主题列表
-	 * 包括：全局置顶贴, 当前论坛置顶贴, 当前版块置顶贴和主版块的置顶贴
+	 * 게시판 정보로 표시할 모든 상단 고정 주제 목록 조회
+	 * 포함: 전체 상단 고정글, 현재 포럼 상단 고정글, 현재 게시판 상단 고정글, 상위 게시판 상단 고정글
 	 * @param sectionInfo
 	 * @return
 	 * @throws Exception
@@ -494,7 +494,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 精华贴设置
+	 * 우수글 설정
 	 * @param subjectId
 	 * @param isCream
 	 * @param setterName
@@ -540,7 +540,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 全局置顶设置
+	 * 전체 상단 고정 설정
 	 * @param subjectId
 	 * @param topToBBS
 	 * @param setterName
@@ -569,7 +569,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 论坛置顶设置
+	 * 포럼 상단 고정 설정
 	 * @param subjectId
 	 * @param topToForum
 	 * @param name
@@ -595,7 +595,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 版块置顶设置
+	 * 게시판 상단 고정 설정
 	 * @param emc
 	 * @param subjectId
 	 * @param topToSection
@@ -625,7 +625,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 主版块置顶设置
+	 * 상위 게시판 상단 고정 설정
 	 * @param subjectId
 	 * @param topToMainSection
 	 * @param name
@@ -654,7 +654,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 设置原创主题
+	 * 원본 주제 설정
 	 * @param subjectId
 	 * @param isOriginalSubject
 	 * @param name
@@ -738,7 +738,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 根据指定的主题ID，查询上一个主题的信息
+	 * 지정한 주제 ID로 이전 주제 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -905,7 +905,7 @@ public class BBSSubjectInfoService {
 	}
 
 	/**
-	 * 版块和论坛可见性要是所有人可见才能显示到首页
+	 * 게시판과 포럼이 모든 사람에게 공개되어야 첫 페이지에 표시 가능
 	 * @param count
 	 * @return
 	 * @throws Exception

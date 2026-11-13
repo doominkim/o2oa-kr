@@ -45,7 +45,7 @@ public class ActionSave extends BaseAction {
 			documentCommentInfo.setCommentAuditStatus( "通过" );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionCommentPersist(e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+			Exception exception = new ExceptionCommentPersist(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -64,7 +64,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCommentPersist(e, "文档信息获取操作时发生异常。ID:" + wi.getDocumentId() );
+				Exception exception = new ExceptionCommentPersist(e, "게시글 정보를 가져오는 중 오류가 발생했습니다. ID:" + wi.getDocumentId() );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -73,7 +73,7 @@ public class ActionSave extends BaseAction {
 			try {
 				documentCommentInfo = documentCommentInfoPersistService.save( documentCommentInfo, wi.getContent(),  effectivePerson );
 
-				// 更新缓存
+				// 캐시 갱신
 				CacheManager.notify( Document.class );
 				CacheManager.notify( DocumentCommentInfo.class );
 
@@ -82,7 +82,7 @@ public class ActionSave extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCommentPersist(e, "评论信息保存时发生异常。");
+				Exception exception = new ExceptionCommentPersist(e, "댓글 정보를 저장하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -92,25 +92,25 @@ public class ActionSave extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("评论ID")
+		@FieldDescribe("댓글ID")
 		private String id = "";
 
-		@FieldDescribe("文档ID")
+		@FieldDescribe("문서ID")
 		private String documentId = "";
 
-		@FieldDescribe("评论标题：如果没有则与主题相同")
+		@FieldDescribe("댓글 제목: 없으면 주제와 동일")
 		private String title = "";
 
-		@FieldDescribe("上级评论ID")
+		@FieldDescribe("상위 댓글ID")
 		private String parentId = "";
 
-		@FieldDescribe("内容")
+		@FieldDescribe("내용")
 		private String content = "";
 
-		@FieldDescribe("是否私信评论")
+		@FieldDescribe("비공개 댓글 여부")
 		private Boolean isPrivate = false;
 
-		@FieldDescribe("评论用户(仅管理员可指定)")
+		@FieldDescribe("댓글 사용자(관리자만 지정 가능)")
 		private String commentUser = "";
 
 		public static final WrapCopier<Wi, DocumentCommentInfo> copier = WrapCopierFactory.wi( Wi.class, DocumentCommentInfo.class, null, null );

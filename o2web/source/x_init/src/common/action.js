@@ -7,18 +7,18 @@ const password_set = '/jaxrs/secret/set';       //post  {"secret":"o2oa@2022"}
 const password_cancel = '/jaxrs/secret/cancel';
 
 //server
-const server_execute = '/jaxrs/server/execute';         //get 执行服务器任务,执行完成后将停止init服务器,随后正常启动.
-const server_stop = '/jaxrs/server/stop';               //get 停止init服务器
-const server_status = '/jaxrs/server/execute/status';   //get 取初始服务器任务执行状态
-const server_echo = '/x_desktop/res/config/config.json';  //get 检查O2OA服务器是否启动成功
+const server_execute = '/jaxrs/server/execute';         //get 서버 작업 실행, 완료 후 init 서버를 중지하고 정상 시작.
+const server_stop = '/jaxrs/server/stop';               //get init 서버 중지
+const server_status = '/jaxrs/server/execute/status';   //get 초기 서버 작업 실행 상태 조회
+const server_echo = '/x_desktop/res/config/config.json';  //get O2OA 서버 시작 성공 여부 확인
 
 
 //database
-// const database_check = '/jaxrs/externaldatasources/check';          //get 检查是否可以设置外部数据源
-const database_check = '/jaxrs/externaldatasources/check'   //get 获取已经配置的数据库信息
-const database_h2_check = '/jaxrs/h2/check'   //get 获取是否已存在h2数据库文件
-const database_list = '/jaxrs/externaldatasources/list';            //get 列示可用的外部数据源配置样例
-const database_set = '/jaxrs/externaldatasources/set';              //post 设置外部数据源
+// const database_check = '/jaxrs/externaldatasources/check';          //get 외부 데이터 소스 설정 가능 여부 확인
+const database_check = '/jaxrs/externaldatasources/check'   //get 설정된 데이터베이스 정보 조회
+const database_h2_check = '/jaxrs/h2/check'   //get h2 데이터베이스 파일 존재 여부 조회
+const database_list = '/jaxrs/externaldatasources/list';            //get 사용 가능한 외부 데이터 소스 설정 예시 목록
+const database_set = '/jaxrs/externaldatasources/set';              //post 외부 데이터 소스 설정
 /**
 {
     "externalDataSources": [{
@@ -37,8 +37,8 @@ const database_set = '/jaxrs/externaldatasources/set';              //post 设�
 */
 
 
-const database_cancel = '/jaxrs/externaldatasources/set/cancel';    //get 取消设置外部数据源
-const database_test = '/jaxrs/externaldatasources/validate';        //post 测试数据库链接
+const database_cancel = '/jaxrs/externaldatasources/set/cancel';    //get 외부 데이터 소스 설정 취소
+const database_test = '/jaxrs/externaldatasources/validate';        //post 데이터베이스 연결 테스트
 /** {
     "externalDataSources": [{
         "enable": true,
@@ -55,13 +55,13 @@ const database_test = '/jaxrs/externaldatasources/validate';        //post 测�
 * */
 
 
-const h2_check = '/jaxrs/h2/check';             //get 检查h2服务服务器是否需要升级
-const h2_upgrade = '/jaxrs/h2/upgrade';         //get 确认需要进行升级
-const h2_cancel = '/jaxrs/h2/upgrade/cancel';   //get 取消升级
+const h2_check = '/jaxrs/h2/check';             //get h2 서버 업그레이드 필요 여부 확인
+const h2_upgrade = '/jaxrs/h2/upgrade';         //get 업그레이드 진행 확인
+const h2_cancel = '/jaxrs/h2/upgrade/cancel';   //get 업그레이드 취소
 
 //restore
-const restore_upload = '/jaxrs/restore/upload'; //post 上传zip格式数据包,字段名file
-const restore_cancel = '/jaxrs/restore/upload/cancel'; //get 上传zip格式数据包,字段名file
+const restore_upload = '/jaxrs/restore/upload'; //post zip 형식 데이터 패키지 업로드, 필드명 file
+const restore_cancel = '/jaxrs/restore/upload/cancel'; //get zip 형식 데이터 패키지 업로드, 필드명 file
 
 async function get(url, noerror) {
     try {
@@ -193,8 +193,8 @@ async function echoServer() {
 }
 
 
-// const server_execute = '/jaxrs/server/execute';         //get 执行服务器任务,执行完成后将停止init服务器,随后正常启动.
-// const server_stop = '/jaxrs/server/stop';               //get 停止init服务器
+// const server_execute = '/jaxrs/server/execute';         //get 서버 작업 실행, 완료 후 init 서버를 중지하고 정상 시작.
+// const server_stop = '/jaxrs/server/stop';               //get init 서버 중지
 
 export {
     checkPassword,

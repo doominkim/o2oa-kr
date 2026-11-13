@@ -11,10 +11,10 @@ public class V2RollbackWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 4148950553127792266L;
 
-	@FieldDescribe("工作日志")
+	@FieldDescribe("업무 로그")
 	private String workLog;
 
-	@FieldDescribe("组织对象专有标识.")
+	@FieldDescribe("조직 객체 전용 식별자.")
 	private List<String> distinguishedNameList;
 
 	public String getWorkLog() {

@@ -27,7 +27,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.DefaultCharset;
 
 /**
- * 上传素材到微信 永久的素材 Created by fancyLou on 2022/3/1. Copyright © 2022 O2. All
+ * 위챗에 영구 소재 업로드 Created by fancyLou on 2022/3/1. Copyright © 2022 O2. All
  * rights reserved.
  */
 public class ActionUploadMediaForever extends BaseAction {
@@ -44,7 +44,7 @@ public class ActionUploadMediaForever extends BaseAction {
 		if (!"image".equals(type) && !"voice".equals(type) && !"video".equals(type) && !"thumb".equals(type)) {
 			throw new ExceptionMediaTypeNotSupport();
 		}
-		/** 文件名编码转换 */
+		/** 파일명 인코딩 변환 */
 		if (StringUtils.isEmpty(fileName)) {
 			try {
 				fileName = new String(disposition.getFileName().getBytes(DefaultCharset.charset_iso_8859_1),
@@ -57,7 +57,7 @@ public class ActionUploadMediaForever extends BaseAction {
 		if (StringUtils.isEmpty(fileName)) {
 			throw new ExceptionNotEmpty("fileName");
 		}
-		// 视频需要上传 title 和 introduction
+		// 동영상은 title 과 introduction 업로드 필요
 		if ("video".equalsIgnoreCase(type)) {
 			if (StringUtils.isEmpty(videoTitle)) {
 				throw new ExceptionNotEmpty("videoTitle");
@@ -67,7 +67,7 @@ public class ActionUploadMediaForever extends BaseAction {
 			}
 		}
 
-		logger.info("发起打包请求，form : " + type + " ," + fileName + " ," + videoTitle + " ," + videoIntroduction);
+		logger.info("패키징 요청 전송, form : " + type + " ," + fileName + " ," + videoTitle + " ," + videoIntroduction);
 		String boundary = "abcdefghijk";
 		String end = "\r\n";
 		String twoHyphens = "--";
@@ -75,7 +75,7 @@ public class ActionUploadMediaForever extends BaseAction {
 		String accessToken = Config.mpweixin().accessToken();
 		String addMediaUrl = Mpweixin.default_apiAddress + "/cgi-bin/material/add_material?access_token=" + accessToken
 				+ "&type=" + type;
-		logger.info("上传永久素材url: " + addMediaUrl);
+		logger.info("영구 소재 업로드 url: " + addMediaUrl);
 
 		URL url = new URL(addMediaUrl);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -94,7 +94,7 @@ public class ActionUploadMediaForever extends BaseAction {
 			map.put(ConnectionAction.ACCESS_CONTROL_ALLOW_METHODS, ConnectionAction.ACCESS_CONTROL_ALLOW_METHODS_VALUE);
 			map.put(ConnectionAction.CACHE_CONTROL, ConnectionAction.CACHE_CONTROL_VALUE);
 			map.put(ConnectionAction.CONTENT_TYPE, "multipart/form-data;boundary=" + boundary);
-			// 设置字符编码连接参数
+			// 문자 인코딩 연결 파라미터 설정
 			map.put("Connection", "Keep-Alive");
 			map.put("Charset", "UTF-8");
 
@@ -132,7 +132,7 @@ public class ActionUploadMediaForever extends BaseAction {
 				throw new Exception("connection{url:" + connection.getURL() + "}, response error{responseCode:" + code
 						+ "}, response:" + result + ".");
 			}
-			logger.info("微信上传素材请求返回，result : " + wxResult);
+			logger.info("위챗 소재 업로드 요청 응답, result : " + wxResult);
 		} catch (Exception e) {
 			logger.error(e);
 		} finally {
@@ -160,13 +160,13 @@ public class ActionUploadMediaForever extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("微信返回的素材id")
+		@FieldDescribe("위챗이 반환한 소재 id")
 		private String media_id;
-		@FieldDescribe("微信返回的素材url")
+		@FieldDescribe("위챗이 반환한 소재 url")
 		private String url;
-		@FieldDescribe("微信返回code")
+		@FieldDescribe("위챗 반환 code")
 		private Integer errcode;
-		@FieldDescribe("微信返回错误信息")
+		@FieldDescribe("위챗 반환 오류 메시지")
 		private String errmsg;
 
 		public String getMedia_id() {

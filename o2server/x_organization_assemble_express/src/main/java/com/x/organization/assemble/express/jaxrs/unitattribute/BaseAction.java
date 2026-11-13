@@ -46,7 +46,7 @@ class BaseAction extends StandardJaxrsAction {
 
 	static class WoUnitAttributeAbstract extends GsonPropertyObject {
 
-		@FieldDescribe("组织属性识别名")
+		@FieldDescribe("조직 속성 식별 이름")
 		private List<String> unitAttributeList = new ArrayList<>();
 
 		public List<String> getUnitAttributeList() {

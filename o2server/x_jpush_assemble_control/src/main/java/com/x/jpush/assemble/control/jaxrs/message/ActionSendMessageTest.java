@@ -87,25 +87,25 @@ public class ActionSendMessageTest extends BaseAction {
                     notificationMessage.setAndroid(android);
                     notificationMessage.setIos(iOS);
                     param.setNotification(notificationMessage);
-                    // 设置推送的目标设备
+                    // 푸시 대상 기기 설정
                     Audience audience = new Audience();
                     audience.setRegistrationIdList(jiguangDeviceList);
                     param.setAudience(audience);
                     param.setPlatform(Arrays.asList(Platform.android, Platform.ios));
-                    // 设置推送其他参数
+                    // 푸시 기타 파라미터 설정
                     Options options = new Options();
                     options.setApnsProduction(true);
-                    options.setClassification(1); // 系统消息 1 运营消息 0
+                    options.setClassification(1); // 시스템 메시지 1 운영 메시지 0
 
                     Map<String, Object> thirdMap =  Config.pushConfig().getThirdPartyChannelMap() ;
                     if (thirdMap != null && !thirdMap.isEmpty()) {
                         options.setThirdPartyChannel(thirdMap);
                     }
                     param.setOptions(options);
-                    // 发送
+                    // 발송
                     PushSendResult pushResult = business.pushDeviceFactory().jpushClient()
                             .send(param);
-                    logger.info("发送结果:{}.", pushResult);
+                    logger.info("발송 결과:{}.", pushResult);
                     wraps.setValue(true);
                     result.setData(wraps);
                 } else {
@@ -119,7 +119,7 @@ public class ActionSendMessageTest extends BaseAction {
             }
 
         } catch (Exception e) {
-            Exception exception = new ExceptionSendMessage(e, "系统发送极光消息时异常!");
+            Exception exception = new ExceptionSendMessage(e, "JPush 메시지를 보내는 중 오류가 발생했습니다!");
             result.error(exception);
             logger.error(e);
         }
@@ -131,7 +131,7 @@ public class ActionSendMessageTest extends BaseAction {
 
     public static class Wi {
 
-        @FieldDescribe("消息内容")
+        @FieldDescribe("메시지 내용")
         private String message;
 
 

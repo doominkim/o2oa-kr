@@ -8,10 +8,10 @@ public class SiteTargetWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -5876504008709428039L;
 
-	@FieldDescribe("关联内容框标识.")
+	@FieldDescribe("연관 콘텐츠 박스 식별자.")
 	private String site;
 
-	@FieldDescribe("关联目标.")
+	@FieldDescribe("연결 대상.")
 	private List<TargetWi> targetList;
 
 	public List<TargetWi> getTargetList() {

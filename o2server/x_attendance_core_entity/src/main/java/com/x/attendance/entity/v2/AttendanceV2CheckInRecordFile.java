@@ -25,7 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.Date;
 
-@Schema(name = "AttendanceV2CheckInRecordFile", description = "打卡考勤记录附件.")
+@Schema(name = "AttendanceV2CheckInRecordFile", description = "출퇴근 기록 첨부파일.")
 @Entity
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.AttendanceV2CheckInRecordFile.table, uniqueConstraints = {
@@ -50,7 +50,7 @@ public class AttendanceV2CheckInRecordFile extends StorageObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -83,21 +83,21 @@ public class AttendanceV2CheckInRecordFile extends StorageObject {
 	}
 
 	public static final String NAME_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + NAME_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + NAME_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("创建者.")
+	@FieldDescribe("작성자.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creator_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator;
 
 	public static final String fileId_FIELDNAME = "fileId";
-	@FieldDescribe("关联打卡记录ID.")
+	@FieldDescribe("연관 출퇴근 기록 ID.")
 	@Flag
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + fileId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fileId_FIELDNAME)
@@ -105,32 +105,32 @@ public class AttendanceV2CheckInRecordFile extends StorageObject {
 	private String fileId;
 
 	public static final String EXTENSION_FIELDNAME = "extension";
-	@FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+	@FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + EXTENSION_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true)
 	private String extension;
 
 	public static final String STORAGE_FIELDNAME = "storage";
-	@FieldDescribe("存储器的名称,也就是多个存放节点的名字.")
+	@FieldDescribe("스토리지 이름, 즉 여러 저장 노드의 이름.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + STORAGE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String storage;
 
 	public static final String LENGTH_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Column(name = ColumnNamePrefix + LENGTH_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String LASTUPDATETIME_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + LASTUPDATETIME_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + LASTUPDATETIME_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String DEEPPATH_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + DEEPPATH_FIELDNAME)
 	private Boolean deepPath;

@@ -7,6 +7,6 @@ class ExceptionDataAlreadyExist extends LanguagePromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionDataAlreadyExist(String title, String docId) {
-		super("文档 title:{} id:{} 的数据已存在.", title, docId );
+		super("게시글 title: {} id: {}의 데이터가 이미 있습니다.", title, docId );
 	}
 }

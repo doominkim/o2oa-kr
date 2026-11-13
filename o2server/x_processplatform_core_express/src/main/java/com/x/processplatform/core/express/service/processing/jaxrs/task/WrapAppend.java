@@ -10,7 +10,7 @@ public class WrapAppend extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -8843505395291348770L;
 	
-	@FieldDescribe("添加的待办身份.")
+	@FieldDescribe("추가된 결재 대기 신분.")
 	private List<String> identityList;
 
 	public List<String> getIdentityList() {

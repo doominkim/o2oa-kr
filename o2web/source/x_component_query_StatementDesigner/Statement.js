@@ -2216,7 +2216,7 @@ MWF.xApplication.query.StatementDesigner.View = new Class({
         if (name==="data.viewStyleType"){
 
             var loadOldTemplateStyle = function () {
-				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //如果原来是自定义表单样式
+				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //기존이 사용자 정의 양식 스타일인 경우
 					this.loadCustomTemplateStyles( oldValue , function (oldTemplateStyles) {
 						this.switchTemplateStyles( oldTemplateStyles );
 					}.bind(this))
@@ -2286,7 +2286,7 @@ MWF.xApplication.query.StatementDesigner.View = new Class({
             var oldStyleValue = "";
             if (!this.json.data.viewStyleType) this.json.data.viewStyleType = "v10";
             var viewStyleType = this.json.data.viewStyleType;
-            if( typeOf( viewStyleType ) === "object" && viewStyleType.type === "script"  ){ //如果是自定义表单样式
+            if( typeOf( viewStyleType ) === "object" && viewStyleType.type === "script"  ){ //사용자 정의 양식 스타일인 경우
 				this.loadCustomTemplateStyles( viewStyleType, function ( templateStyles ) {
                     setStyles( templateStyles )
 				}.bind(this))

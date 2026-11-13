@@ -154,31 +154,31 @@ class ActionCreate extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("用户名称.")
+		@FieldDescribe("사용자 이름.")
 		private String name;
 
-		@FieldDescribe("性别.男:m,女:f,未知:d")
+		@FieldDescribe("성별. 남:m, 여:f, 알 수 없음:d")
 		private GenderType genderType;
 
-		@FieldDescribe("密码.")
+		@FieldDescribe("비밀번호.")
 		private String password;
 
-		@FieldDescribe("必填,手机号.")
+		@FieldDescribe("필수, 휴대폰 번호.")
 		private String mobile;
 
-		@FieldDescribe("手机认证码")
+		@FieldDescribe("휴대폰 인증 코드")
 		private String codeAnswer;
 
-		@FieldDescribe("图片认证码")
+		@FieldDescribe("이미지 인증 코드")
 		private String captchaAnswer;
 
-		@FieldDescribe("图片认证编号")
+		@FieldDescribe("이미지 인증 번호")
 		private String captcha;
 
-		@FieldDescribe("邮件地址(非必填).")
+		@FieldDescribe("이메일 주소(선택).")
 		private String mail;
 
-		@FieldDescribe("归属组织(非必填).")
+		@FieldDescribe("소속 조직(선택).")
 		private String unit;
 
 		public String getName() {

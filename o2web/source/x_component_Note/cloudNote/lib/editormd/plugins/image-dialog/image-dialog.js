@@ -108,7 +108,7 @@
 
                             this.hide().lockScreen(false).hideMask();
 
-                            //删除对话框
+                            //대화상자 삭제
                             this.remove();
 
                             return false;
@@ -117,7 +117,7 @@
                         cancel : [lang.buttons.cancel, function() {
                             this.hide().lockScreen(false).hideMask();
 
-                            //删除对话框
+                            //대화상자 삭제
                             this.remove();
                             
                             return false;

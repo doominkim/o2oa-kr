@@ -25,7 +25,7 @@ public class ActionStatisticPersonMonthData extends BaseAction {
         if (StringUtils.isEmpty(year) || StringUtils.isEmpty(month)) {
             throw new ExceptionSearchArgEmpty();
         }
-        logger.info("开始执行全部人员考勤信息统计 year:"+year+", month:"+month);
+        logger.info("전체 사용자 근태 정보 통계 실행 시작 year:"+year+", month:"+month);
         Date date = DateTools.parse(year+"-"+month+"-01");
 //        ThisApplication.personStatisticQueue.send(date);
         result.setData(new WrapBoolean(true));

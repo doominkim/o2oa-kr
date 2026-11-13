@@ -19,7 +19,7 @@ class ActionLeaveLedgerAdjustTest {
     @Test
     void validateParametersRequiresAdjustedAmount() {
         ActionLeaveLedgerAdjust.Wi wi = new ActionLeaveLedgerAdjust.Wi();
-        wi.setPerson("张三@P");
+        wi.setPerson("홍길동@P");
         wi.setLeaveTypeId("leaveTypeId");
 
         assertThrows(ExceptionEmptyParameter.class,
@@ -29,7 +29,7 @@ class ActionLeaveLedgerAdjustTest {
     @Test
     void validateParametersRejectsNegativeAdjustedAmount() {
         ActionLeaveLedgerAdjust.Wi wi = new ActionLeaveLedgerAdjust.Wi();
-        wi.setPerson("张三@P");
+        wi.setPerson("홍길동@P");
         wi.setLeaveTypeId("leaveTypeId");
         wi.setAdjustedAmount(-1.0);
 
@@ -46,9 +46,9 @@ class ActionLeaveLedgerAdjustTest {
         wi.setAdjustedAmount(6.0);
         wi.setExpireTime(expireTime);
 
-        AttendanceV2LeaveLedger ledger = ActionLeaveLedgerAdjust.buildAdjustmentLedger("张三@P", wi, now);
+        AttendanceV2LeaveLedger ledger = ActionLeaveLedgerAdjust.buildAdjustmentLedger("홍길동@P", wi, now);
 
-        assertEquals("张三@P", ledger.getPerson());
+        assertEquals("홍길동@P", ledger.getPerson());
         assertEquals("leaveTypeId", ledger.getLeaveTypeId());
         assertEquals("ADJUST_123456789", ledger.getGrantPeriod());
         assertEquals(6.0, ledger.getGrantAmount());
@@ -62,7 +62,7 @@ class ActionLeaveLedgerAdjustTest {
     @Test
     void buildNewLedgerAdjustmentCreatesAdjustTransaction() {
         AttendanceV2LeaveLedger ledger = new AttendanceV2LeaveLedger();
-        ledger.setPerson("张三@P");
+        ledger.setPerson("홍길동@P");
         ledger.setLeaveTypeId("leaveTypeId");
 
         ActionLeaveLedgerAdjust.Adjustment adjustment = ActionLeaveLedgerAdjust.buildNewLedgerAdjustment(ledger, 6.0);
@@ -100,13 +100,13 @@ class ActionLeaveLedgerAdjustTest {
     @Test
     void applyAdjustmentDeductsBalanceFromLatestLedgers() throws Exception {
         AttendanceV2LeaveLedger latestLedger = new AttendanceV2LeaveLedger();
-        latestLedger.setPerson("张三@P");
+        latestLedger.setPerson("홍길동@P");
         latestLedger.setLeaveTypeId("leaveTypeId");
         latestLedger.setUsedAmount(0.0);
         latestLedger.setRemainingAmount(2.0);
         latestLedger.setGrantAmount(2.0);
         AttendanceV2LeaveLedger previousLedger = new AttendanceV2LeaveLedger();
-        previousLedger.setPerson("张三@P");
+        previousLedger.setPerson("홍길동@P");
         previousLedger.setLeaveTypeId("leaveTypeId");
         previousLedger.setUsedAmount(3.0);
         previousLedger.setRemainingAmount(5.0);
@@ -152,12 +152,12 @@ class ActionLeaveLedgerAdjustTest {
     @Test
     void buildAdjustTransactionUsesAdjustAmount() {
         AttendanceV2LeaveLedger ledger = new AttendanceV2LeaveLedger();
-        ledger.setPerson("张三@P");
+        ledger.setPerson("홍길동@P");
         ledger.setLeaveTypeId("leaveTypeId");
 
         AttendanceV2LeaveTransaction transaction = ActionLeaveLedgerAdjust.buildAdjustTransaction(ledger, -2.5);
 
-        assertEquals("张三@P", transaction.getPerson());
+        assertEquals("홍길동@P", transaction.getPerson());
         assertEquals("leaveTypeId", transaction.getLeaveTypeId());
         assertEquals(ledger.getId(), transaction.getLedgerId());
         assertEquals(BizTypeEnum.ADJUST.getValue(), transaction.getBizType());

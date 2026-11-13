@@ -25,18 +25,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("neural")
-@JaxrsDescribe("神经网络多层感知机")
+@JaxrsDescribe("신경망 다층 퍼셉트론")
 public class NeuralAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(NeuralAction.class);
 
-	@JaxrsMethodDescribe(value = "创建用于学习的数据集.", action = ActionGenerate.class)
+	@JaxrsMethodDescribe(value = "학습용 데이터셋 생성.", action = ActionGenerate.class)
 	@GET
 	@Path("generate/model/{modelFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void generate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("模型标识") @PathParam("modelFlag") String modelFlag) {
+			@JaxrsParameterDescribe("모델 식별자") @PathParam("modelFlag") String modelFlag) {
 		ActionResult<ActionGenerate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -48,13 +48,13 @@ public class NeuralAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "停止数据生成.", action = ActionStopGenerating.class)
+	@JaxrsMethodDescribe(value = "데이터 생성 중지.", action = ActionStopGenerating.class)
 	@GET
 	@Path("stop/generating/model/{modelFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void stopGenerating(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("项目标识") @PathParam("modelFlag") String modelFlag) {
+			@JaxrsParameterDescribe("프로젝트 식별자") @PathParam("modelFlag") String modelFlag) {
 		ActionResult<ActionStopGenerating.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -66,13 +66,13 @@ public class NeuralAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "学习.", action = ActionLearn.class)
+	@JaxrsMethodDescribe(value = "학습.", action = ActionLearn.class)
 	@GET
 	@Path("learn/model/{modelFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void learn(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("模型标识") @PathParam("modelFlag") String modelFlag) {
+			@JaxrsParameterDescribe("모델 식별자") @PathParam("modelFlag") String modelFlag) {
 		ActionResult<ActionLearn.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -84,13 +84,13 @@ public class NeuralAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "停止学习.", action = ActionStopLearning.class)
+	@JaxrsMethodDescribe(value = "학습 중지.", action = ActionStopLearning.class)
 	@GET
 	@Path("stop/learning/model/{modelFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void stopLearning(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("模型标识") @PathParam("modelFlag") String modelFlag) {
+			@JaxrsParameterDescribe("모델 식별자") @PathParam("modelFlag") String modelFlag) {
 		ActionResult<ActionStopLearning.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -102,14 +102,14 @@ public class NeuralAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "计算输入工作ID进行计算.", action = ActionListCalculateWithWork.class)
+	@JaxrsMethodDescribe(value = "입력 업무 문서 ID 계산.", action = ActionListCalculateWithWork.class)
 	@GET
 	@Path("list/calculate/model/{modelFlag}/work/{workId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listCalculateWithWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("模型标识") @PathParam("modelFlag") String modelFlag,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId) {
+			@JaxrsParameterDescribe("모델 식별자") @PathParam("modelFlag") String modelFlag,
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId) {
 		ActionResult<List<ActionListCalculateWithWork.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

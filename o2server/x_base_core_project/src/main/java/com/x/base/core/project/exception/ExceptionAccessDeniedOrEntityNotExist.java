@@ -8,7 +8,7 @@ public class ExceptionAccessDeniedOrEntityNotExist extends LanguagePromptExcepti
 
 	private static final long serialVersionUID = -7354813827434276962L;
 
-	public static String defaultMessage = "用户:{} 权限不足或者对象不存在.";
+	public static String defaultMessage = "사용자: {} 권한이 없거나 대상이 존재하지 않습니다.";
 
 	public ExceptionAccessDeniedOrEntityNotExist(String person) {
 		super(defaultMessage, person);
@@ -19,7 +19,7 @@ public class ExceptionAccessDeniedOrEntityNotExist extends LanguagePromptExcepti
 	}
 
 	public ExceptionAccessDeniedOrEntityNotExist(EffectivePerson effectivePerson, String message) {
-		super("用户:{} 权限不足或者对象不存在, {}.", effectivePerson.getDistinguishedName(), Objects.toString(message, ""));
+		super("사용자: {} 권한이 없거나 대상이 존재하지 않습니다, {}.", effectivePerson.getDistinguishedName(), Objects.toString(message, ""));
 		this.setLanguageKey(this.getClass().getName()+"_1");
 	}
 

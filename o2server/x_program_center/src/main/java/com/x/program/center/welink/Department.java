@@ -6,7 +6,7 @@ public class Department extends GsonPropertyObject {
 
 	//{
 	//        "deptCode": "1",
-	//        "deptNameCn": "产品销售部",
+	//        "deptNameCn": "제품영업부",
 	//        "deptNameEn": "Sales Dept",
 	//        "fatherCode": "0",
 	//        "deptLevel": "2",

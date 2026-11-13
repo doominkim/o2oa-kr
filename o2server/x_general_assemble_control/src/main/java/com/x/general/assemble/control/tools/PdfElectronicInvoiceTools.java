@@ -21,7 +21,7 @@ public class PdfElectronicInvoiceTools {
     private PdfElectronicInvoiceTools(){}
 
     /**
-     * 电子发票解析
+     * 전자 세금계산서 파싱
      *
      * @param allText
      * @param pageWidth
@@ -157,7 +157,7 @@ public class PdfElectronicInvoiceTools {
             PDFTextStripperByArea detailStripper, Map<String, List<Position>> positionListMap,
             int pageWidth) {
         Position taxRate = positionListMap.get("税率").get(0);
-//        Position totalAmount = positionListMap.get("价税合计").get(0);
+//        Position totalAmount = positionListMap.get("세금 포함 합계").get(0);
         Position amount = positionListMap.get("合计").get(0);
         Position model = null;
         if (!positionListMap.get("规格型号").isEmpty()) {

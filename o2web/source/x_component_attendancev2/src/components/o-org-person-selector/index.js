@@ -16,11 +16,11 @@ export default content({
             label: "",
             selectorTitle: "",
             value: [],
-            units:[], // 控制选择范围
+            units:[], // 선택 범위 제어
             showValue: "",
             placeholder: "",
-            types: ["identity", "unit"], // 选择器类型
-            count: 0 , // 0是多选 其它是固定数据选择
+            types: ["identity", "unit"], // 선택기 유형
+            count: 0 , // 0은 다중 선택, 그 외는 고정 데이터 선택
             selectedResult: [] //
         };
     },
@@ -74,7 +74,7 @@ export default content({
     clearValue() {
       this.bind.value = [];
       this.bind.showValue = "";
-      // 反写到oo-model
+      // oo-model에 되돌려 쓰기
       this.component.updateModel([]);
     },
     changeValue(items) {
@@ -102,7 +102,7 @@ export default content({
         this.bind.selectedResult = selectedResult;
         this.bind.value = newValue;
         this.bind.showValue = newShowValue.join(", ");
-        // 反写到oo-model
+        // oo-model에 되돌려 쓰기
         this.component.updateModel(newValue);
        }
     },

@@ -32,12 +32,12 @@ import com.x.bbs.assemble.control.jaxrs.roleinfo.exception.ExceptionRoleInfoIdEm
 import com.x.bbs.assemble.control.jaxrs.roleinfo.exception.ExceptionRoleInfoProcess;
 
 @Path("user/role")
-@JaxrsDescribe("角色管理服务")
+@JaxrsDescribe("역할 관리 서비스")
 public class RoleInfoAction extends StandardJaxrsAction {
 
 	private Logger logger = LoggerFactory.getLogger(RoleInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有角色信息列表.", action = ActionGetAll.class)
+	@JaxrsMethodDescribe(value = "전체 역할 정보 목록 조회.", action = ActionGetAll.class)
 	@GET
 	@Path("all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,7 +51,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionGetAll().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "获取所有RoleInfo的信息列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "전체 역할 정보 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -59,13 +59,13 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据论坛角色ID查询论角色信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "포럼 역할 ID로 역할 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("角色ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("역할 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -81,7 +81,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据论坛ID查询论坛的角色列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "포럼 ID로 포럼 역할 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -89,7 +89,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据论坛ID查询论坛的角色列表.", action = ActionListByForum.class)
+	@JaxrsMethodDescribe(value = "포럼 ID로 포럼 역할 목록 조회.", action = ActionListByForum.class)
 	@PUT
 	@Path("forum/{forumId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -105,7 +105,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionListByForum().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据论坛ID查询论坛的角色列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "포럼 ID로 포럼 역할 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -113,7 +113,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "把一个或者多个角色CODE绑定到一个对象（对象名称#对象类型）上.", action = ActionBindRoleToUser.class)
+	@JaxrsMethodDescribe(value = "하나 이상의 역할 CODE를 하나의 대상(대상명#대상유형)에 연결.", action = ActionBindRoleToUser.class)
 	@PUT
 	@Path("bind/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -131,7 +131,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionBindRoleToUser().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "把一个或者多个角色CODE绑定到一个对象（对象名称#对象类型）上时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "하나 이상의 역할 코드를 대상(대상 이름#대상 유형)에 연결하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -139,7 +139,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "把一个或者多个对象（对象名称#对象类型）绑定到一个角色CODE上.", action = ActionBindUserToRole.class)
+	@JaxrsMethodDescribe(value = "하나 이상의 대상(대상명#대상유형)을 하나의 역할 CODE에 연결.", action = ActionBindUserToRole.class)
 	@PUT
 	@Path("bind/role")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -157,7 +157,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionBindUserToRole().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "把一个或者多个对象（对象名称#对象类型）绑定到一个角色CODE上！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "하나 이상의 대상(대상 이름#대상 유형)을 역할 코드에 연결합니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -165,7 +165,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据版块ID查询版块的角色列表.", action = ActionListBySection.class)
+	@JaxrsMethodDescribe(value = "게시판 ID로 게시판 역할 목록 조회.", action = ActionListBySection.class)
 	@PUT
 	@Path("section/{sectionId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -181,7 +181,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionListBySection().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据版块ID查询版块的角色列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "섹션 ID로 섹션 역할 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -189,7 +189,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织名称查询角色列表.", action = ActionListBySection.class)
+	@JaxrsMethodDescribe(value = "조직명으로 역할 목록 조회.", action = ActionListBySection.class)
 	@PUT
 	@Path("unit/selected")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -205,7 +205,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionListBySection().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据组织名称查询角色列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "조직 이름으로 역할 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -213,7 +213,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据用户姓名查询角色列表.", action = ActionListSelectedRoleByUser.class)
+	@JaxrsMethodDescribe(value = "사용자 이름으로 역할 목록 조회.", action = ActionListSelectedRoleByUser.class)
 	@PUT
 	@Path("user/selected")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -229,7 +229,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionListSelectedRoleByUser().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据用户姓名查询角色列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "사용자 이름으로 역할 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -237,7 +237,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据角色编码查询绑定的对象列表.", action = ActionLisstBindObjectByRoleCode.class)
+	@JaxrsMethodDescribe(value = "역할 코드로 연결된 대상 목록 조회.", action = ActionLisstBindObjectByRoleCode.class)
 	@PUT
 	@Path("rolecode/selected")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -253,7 +253,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionLisstBindObjectByRoleCode().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据角色编码查询绑定的对象列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "역할 코드로 연결된 대상 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -261,7 +261,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建新的角色信息或者更新角色信息.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "새 역할 정보 생성 또는 역할 정보 수정.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -276,7 +276,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "创建新的角色信息或者更新角色信息时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "역할 정보를 새로 만들거나 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -284,13 +284,13 @@ public class RoleInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除指定的角色信息.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 역할 정보 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("角色ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("역할 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -306,7 +306,7 @@ public class RoleInfoAction extends StandardJaxrsAction {
 				result = new ActionDelete().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据ID删除指定的角色信息时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "ID로 역할 정보를 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

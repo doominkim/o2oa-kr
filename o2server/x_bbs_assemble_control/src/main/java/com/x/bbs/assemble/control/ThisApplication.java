@@ -119,7 +119,7 @@ public class ThisApplication {
 	}
 
 	/**
-	 * 判断用户是否有BBS系统管理权限 1、系统管理员Manager或者xadmin 2、拥有BBSManager角色的人员
+	 * 사용자가 BBS 시스템 관리 권한이 있는지 판단 1. 시스템 관리자 Manager 또는 xadmin 2. BBSManager 역할을 가진 사용자
 	 *
 	 * @param effectivePerson
 	 * @return
@@ -138,7 +138,7 @@ public class ThisApplication {
 	}
 
 	/**
-	 * 判断用户是否有权限对指定的论坛进行管理 1、系统管理员、BBS管理员 2、指定论坛设置的管理员
+	 * 사용자가 지정한 포럼을 관리할 권한이 있는지 판단 1. 시스템 관리자, BBS 관리자 2. 지정 포럼에 설정된 관리자
 	 *
 	 * @param effectivePerson
 	 * @param forumInfo

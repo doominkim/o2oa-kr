@@ -11,96 +11,96 @@ public class ActionManageListFilterPagingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5271416306646803042L;
 
-	@FieldDescribe("应用标识.")
-	@Schema(description = "应用标识.")
+	@FieldDescribe("앱 식별자.")
+	@Schema(description = "앱 식별자.")
 	private List<String> applicationList;
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList;
 
-	@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false.")
-	@Schema(description = "是否查找同版本流程数据：true(默认查找)|false.")
+	@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false.")
+	@Schema(description = "동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false.")
 	private Boolean relateEditionProcess = true;
 
-	@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss.")
-	@Schema(description = "开始时间yyyy-MM-dd HH:mm:ss.")
+	@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss.")
+	@Schema(description = "시작 시간yyyy-MM-dd HH:mm:ss.")
 	private String startTime;
 
-	@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss.")
-	@Schema(description = "结束时间yyyy-MM-dd HH:mm:ss.")
+	@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss.")
+	@Schema(description = "종료 시간yyyy-MM-dd HH:mm:ss.")
 	private String endTime;
 
-	@FieldDescribe("人员.")
-	@Schema(description = "人员.")
+	@FieldDescribe("사용자.")
+	@Schema(description = "사용자.")
 	private List<String> credentialList;
 
-	@FieldDescribe("活动名称.")
-	@Schema(description = "活动名称.")
+	@FieldDescribe("활동 이름.")
+	@Schema(description = "활동 이름.")
 	private List<String> activityNameList;
 
-	@FieldDescribe("创建组织.")
-	@Schema(description = "创建组织.")
+	@FieldDescribe("조직 생성.")
+	@Schema(description = "조직 생성.")
 	private List<String> creatorUnitList;
 
-	@FieldDescribe("工作标识.")
-	@Schema(description = "工作标识.")
+	@FieldDescribe("업무 문서 식별자.")
+	@Schema(description = "업무 문서 식별자.")
 	private List<String> workList;
 
-	@FieldDescribe("任务标识.")
-	@Schema(description = "任务标识.")
+	@FieldDescribe("작업 식별자.")
+	@Schema(description = "작업 식별자.")
 	private List<String> jobList;
 
-	@FieldDescribe("开始时期(年月).")
-	@Schema(description = "开始时期(年月).")
+	@FieldDescribe("시작 시기(연월).")
+	@Schema(description = "시작 시기(연월).")
 	private List<String> startTimeMonthList;
 
-	@FieldDescribe("匹配关键字.")
-	@Schema(description = "匹配关键字.")
+	@FieldDescribe("일치 키워드.")
+	@Schema(description = "일치 키워드.")
 	private String key;
 
-	@FieldDescribe("当前待办人.")
-	@Schema(description = "当前待办人.")
+	@FieldDescribe("현재 결재 대기자.")
+	@Schema(description = "현재 결재 대기자.")
 	private String person;
 
-	@FieldDescribe("业务数据String值01.")
-	@Schema(description = "业务数据String值01.")
+	@FieldDescribe("업무 데이터 String 값01.")
+	@Schema(description = "업무 데이터 String 값01.")
 	private String stringValue01;
 
-	@FieldDescribe("业务数据String值02.")
-	@Schema(description = "业务数据String值02.")
+	@FieldDescribe("업무 데이터 String 값02.")
+	@Schema(description = "업무 데이터 String 값02.")
 	private String stringValue02;
 
-	@FieldDescribe("业务数据String值03.")
-	@Schema(description = "业务数据String值03.")
+	@FieldDescribe("업무 데이터 String 값03.")
+	@Schema(description = "업무 데이터 String 값03.")
 	private String stringValue03;
 
-	@FieldDescribe("业务数据String值04.")
-	@Schema(description = "业务数据String值04.")
+	@FieldDescribe("업무 데이터 String 값04.")
+	@Schema(description = "업무 데이터 String 값04.")
 	private String stringValue04;
 
-	@FieldDescribe("业务数据String值05.")
-	@Schema(description = "业务数据String值05.")
+	@FieldDescribe("업무 데이터 String 값05.")
+	@Schema(description = "업무 데이터 String 값05.")
 	private String stringValue05;
 
-	@FieldDescribe("业务数据String值06.")
-	@Schema(description = "业务数据String值06.")
+	@FieldDescribe("업무 데이터 String 값06.")
+	@Schema(description = "업무 데이터 String 값06.")
 	private String stringValue06;
 
-	@FieldDescribe("业务数据String值07.")
-	@Schema(description = "业务数据String值07.")
+	@FieldDescribe("업무 데이터 String 값07.")
+	@Schema(description = "업무 데이터 String 값07.")
 	private String stringValue07;
 
-	@FieldDescribe("业务数据String值08.")
-	@Schema(description = "业务数据String值08.")
+	@FieldDescribe("업무 데이터 String 값08.")
+	@Schema(description = "업무 데이터 String 값08.")
 	private String stringValue08;
 
-	@FieldDescribe("业务数据String值09.")
-	@Schema(description = "业务数据String值09.")
+	@FieldDescribe("업무 데이터 String 값09.")
+	@Schema(description = "업무 데이터 String 값09.")
 	private String stringValue09;
 
-	@FieldDescribe("业务数据String值10.")
-	@Schema(description = "业务数据String值10.")
+	@FieldDescribe("업무 데이터 String 값10.")
+	@Schema(description = "업무 데이터 String 값10.")
 	private String stringValue10;
 
 	public List<String> getApplicationList() {

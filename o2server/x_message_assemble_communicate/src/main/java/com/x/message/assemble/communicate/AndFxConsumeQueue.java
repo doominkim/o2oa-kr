@@ -50,7 +50,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 					Map<String, String> map = new HashMap<>();
 					map.put("url", openUrl);
 					andFxUrl = "native://openurl?data=" + gson.toJson(map);
-					LOGGER.debug("移动办公 打开消息 url：{}", andFxUrl);
+					LOGGER.debug("모바일 오피스 메시지 열기 url:{}", andFxUrl);
 				}
 			}
 
@@ -73,7 +73,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 			m.setSign(this.sign(m));
 			String address = Config.andFx().getMsgApi();
 			if(LOGGER.isDebugEnabled()) {
-				LOGGER.debug("移动办公消息体：{}", m::toString);
+				LOGGER.debug("모바일 오피스 메시지 본문:{}", m::toString);
 			}
 			AndFxMessageResp resp;
 			if(address.startsWith("https://test.yd.cmzq-office.com")){
@@ -83,7 +83,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 				String res = httpClient.post(address, m.toString(), null);
 				resp = gson.fromJson(res, AndFxMessageResp.class);
 			}else {
-				LOGGER.info("移动办公消息体：{}", m::toString);
+				LOGGER.info("모바일 오피스 메시지 본문:{}", m::toString);
 				resp = HttpConnection.postAsObject(address, null, m.toString(),
 						AndFxMessageResp.class);
 			}
@@ -106,18 +106,18 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 判断打开地址
+	 * 열기 주소 판단
 	 *
 	 * @param message
 	 * @return
 	 */
 	private String getOpenUrl(Message message) {
 		String openUrl = "";
-		// cms 文档
+		// cms 문서
 		if (MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType())
 				|| MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType())) {
 			openUrl = getOpenCMSDocumentUrl(message.getBody());
-		} else { // 流程工作相关的
+		} else { // 프로세스 업무 문서 관련
 			openUrl = getOpenWorkUrl(message.getBody());
 		}
 		return openUrl;
@@ -131,7 +131,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 标志消息消费成功
+	 * 메시지 소비 성공 표시
 	 *
 	 * @param id
 	 * @throws Exception
@@ -148,7 +148,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 文档打开的url
+	 * 문서를 여는 url
 	 *
 	 * @param messageBody
 	 * @return
@@ -165,7 +165,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 工作打开的url
+	 * 업무 문서를 여는 url
 	 *
 	 * @param messageBody
 	 * @return
@@ -192,7 +192,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 			} else {
 				o2oaUrl = o2oaUrl + openPage;
 			}
-			LOGGER.info("o2oa 地址：" + o2oaUrl);
+			LOGGER.info("o2oa 주소:" + o2oaUrl);
 			o2oaUrl = URLEncoder.encode(o2oaUrl, DefaultCharset.name);
 			return o2oaUrl;
 		} catch (Exception e) {
@@ -203,9 +203,9 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 是否需要把钉钉消息转成markdown格式消息 根据是否配置了钉钉工作链接、是否是工作消息（目前只支持工作消息）
+	 * 딩톡 메시지를 markdown 형식 메시지로 변환할지 여부. 딩톡 업무 링크 설정 여부, 업무 메시지 여부에 따라 결정(현재 업무 메시지만 지원)
 	 *
-	 * @param messageType 消息类型 判断是否是工作消息
+	 * @param messageType 메시지 유형. 업무 메시지 여부 판단
 	 * @return
 	 */
 	private boolean needTransferLink(String messageType) {
@@ -243,11 +243,11 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 一些公用方法
+	 * 공용 메서드
 	 */
 	public static class OuterMessageHelper {
 		/**
-		 * 文档打开的url
+		 * 문서를 여는 url
 		 * @param messageBody
 		 * @return
 		 */
@@ -266,7 +266,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 				} else {
 					o2oaUrl = o2oaUrl + openPage;
 				}
-				LOGGER.info("o2oa 业务地址：" + o2oaUrl);
+				LOGGER.info("o2oa 업무 주소:" + o2oaUrl);
 				return o2oaUrl;
 			} catch (Exception e) {
 				LOGGER.error(e);
@@ -275,7 +275,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * body里面是否有 openPageUrl 这个字段 有就用这个字段作为跳转页面
+		 * body에 openPageUrl 필드가 있는지 여부. 있으면 이 필드를 이동 페이지로 사용
 		 *
 		 * @param messageBody
 		 * @return
@@ -293,7 +293,7 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * 获取workid
+		 * workid 조회
 		 *
 		 * @param messageBody
 		 * @return
@@ -314,8 +314,8 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * 获取消息体内的某个字段值
-		 * @param propertiesName  如：processName
+		 * 메시지 본문 내 특정 필드 값 조회
+		 * @param propertiesName  예: processName
 		 * @param messageBody
 		 * @return
 		 */
@@ -332,9 +332,9 @@ public class AndFxConsumeQueue extends AbstractQueue<Message> {
 		}
 
 		/**
-		 * 这个执行的前提是 MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType()) ||
-		 * MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType()) cms的消息
-		 * body获取文档id
+		 * 이 실행의 전제 조건은 MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType()) ||
+		 * MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType()) cms 메시지
+		 * body에서 문서 id 조회
 		 *
 		 * @param messageBody
 		 * @return

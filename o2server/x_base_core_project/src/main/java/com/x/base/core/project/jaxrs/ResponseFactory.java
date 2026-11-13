@@ -105,7 +105,7 @@ public class ResponseFactory {
 			}
 		} else {
 			if ((null != result.getData()) && (result.getData() instanceof WoFile)) {
-				// 附件,二进制流文件
+				// 첨부파일, 바이너리 스트림 파일
 				WoFile wo = (WoFile) result.getData();
 				Integer maxAge = maxAgeDefault(wo);
 				if (null != maxAge) {
@@ -140,7 +140,7 @@ public class ResponseFactory {
 					}
 				}
 			} else if ((null != result.getData()) && (result.getData() instanceof WoText)) {
-				// 纯文本text
+				// 일반 텍스트 text
 				WoText wo = (WoText) result.getData();
 				EntityTag tag = new EntityTag(etagWoText(wo));
 				if (notModified(request, tag)) {

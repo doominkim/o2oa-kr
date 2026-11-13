@@ -51,11 +51,11 @@ public class ActionSave extends BaseAction {
 		String hostName = request.getRemoteAddr();
 
 		if (check) {
-			//保存操作权限判断
+			//저장 작업 권한 판단
 			try {
 				if ( !ThisApplication.isBBSManager(effectivePerson) ) {
 					check = false;
-					logger.warn("用户没有BBSManager角色，并且也不是系统管理员！USER：" + effectivePerson.getDistinguishedName());
+					logger.warn("사용자에게 BBSManager 역할이 없고 시스템 관리자도 아닙니다! USER:" + effectivePerson.getDistinguishedName());
 					Exception exception = new ExceptionInsufficientPermissions(effectivePerson.getDistinguishedName(), ThisApplication.BBSMANAGER );
 					result.error(exception);
 				}
@@ -76,7 +76,7 @@ public class ActionSave extends BaseAction {
 			logger.error(e, effectivePerson, request, null);
 		}
 
-		// 校验论坛名称
+		// 포럼 이름 검증
 		if (check) {
 			if ( StringUtils.isEmpty( wrapIn.getForumName() ) ) {
 				check = false;
@@ -85,7 +85,7 @@ public class ActionSave extends BaseAction {
 			}
 		}
 		
-		// 校验论坛分类:信息|问题|投票,只能是这三类中的
+		// 포럼 분류 검증: 정보|질문|투표, 이 세 가지 중 하나만 가능
 		if (check) {
 			if ( StringUtils.isEmpty( wrapIn.getTypeCategory() )) {
 				check = false;
@@ -119,7 +119,7 @@ public class ActionSave extends BaseAction {
 		}
 		if (check) {
 			if ( StringUtils.isNotEmpty( wrapIn.getForumManagerName() )) {
-				// 判断指定的用户是否存在
+				// 지정 사용자 존재 여부 판단
 				names = wrapIn.getForumManagerName().split(",");
 				for (String name : names) {
 					try {
@@ -193,7 +193,7 @@ public class ActionSave extends BaseAction {
 				operationRecordService.forumOperation( effectivePerson.getDistinguishedName(), forumInfo, "SAVE", hostIp, hostName );
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionForumInfoProcess(e, "系统在保存BBS论坛操作记录时发生异常.");
+				Exception exception = new ExceptionForumInfoProcess(e, "BBS 포럼 작업 기록 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -201,7 +201,7 @@ public class ActionSave extends BaseAction {
 		
 		if (check) {
 			try {
-				// 论坛信息添加成功，继续添加权限和角色信息
+				// 포럼 정보 추가 성공, 권한과 역할 정보 계속 추가
 				permissionInfoService.createForumPermission( forumInfo );
 			} catch (Exception e) {
 				check = false;
@@ -212,7 +212,7 @@ public class ActionSave extends BaseAction {
 		
 		if (check) {
 			try {
-				// 论坛信息添加成功，继续添加权限和角色信息
+				// 포럼 정보 추가 성공, 권한과 역할 정보 계속 추가
 				roleInfoService.createForumRole( effectivePerson, forumInfo );
 			} catch (Exception e) {
 				check = false;
@@ -221,7 +221,7 @@ public class ActionSave extends BaseAction {
 				logger.error(e);
 			}
 		}
-		if (check) {// 检查论坛管理员权限的设置
+		if (check) {// 포럼 관리자 권한 설정 확인
 			try {
 				forumInfoServiceAdv.checkForumManager( forumInfo );
 			} catch (Exception e) {
@@ -235,10 +235,10 @@ public class ActionSave extends BaseAction {
 
 	public static class Wi extends BBSForumInfo {
 		
-		@FieldDescribe("论坛管理员.")
+		@FieldDescribe("포럼 관리자.")
 		private String forumManagerName = null;
 
-		@FieldDescribe("论坛可见范围.")
+		@FieldDescribe("포럼 공개 범위.")
 		private String forumVisibleResult ;
 		
 		private static final long serialVersionUID = -5076990764713538973L;

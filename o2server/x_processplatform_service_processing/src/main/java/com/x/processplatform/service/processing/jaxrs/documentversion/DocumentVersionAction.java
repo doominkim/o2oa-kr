@@ -24,18 +24,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("documentversion")
-@JaxrsDescribe("版式文件版本")
+@JaxrsDescribe("서식 파일 버전")
 public class DocumentVersionAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(DocumentVersionAction.class);
 
-	@JaxrsMethodDescribe(value = "创建版式文件版本.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "레이아웃 파일 버전 생성.", action = ActionCreate.class)
 	@POST
 	@Path("work/{work}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void processing(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("work") String work, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("work") String work, JsonElement jsonElement) {
 		ActionResult<ActionCreate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

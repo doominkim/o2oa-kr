@@ -7,7 +7,7 @@ class ExceptionUnknownHttpMethod extends RunningException {
 	private static final long serialVersionUID = 9085364457175859374L;
 
 	ExceptionUnknownHttpMethod(String method) {
-		super("未知http method:{}.",method);
+		super("알 수 없는 http method: {}.",method);
 	}
 
 }

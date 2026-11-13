@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 配置文件
+ * 설정 파일
  *
  * @author sword
  * @date 2022/02/17 16:17
@@ -18,22 +18,22 @@ public class AiConfig extends GsonPropertyObject {
     public static final String DEFAULT_O2_AI_URL = "http://127.0.0.1:7080/app/api";
 
     public static final String appName_FIELD = "appName";
-    @FieldDescribe("应用名称.")
+    @FieldDescribe("앱 이름.")
     private String appName = "O2OA";
 
     public static final String appIconUrl_FIELD = "appIconUrl";
-    @FieldDescribe("应用图标地址.")
+    @FieldDescribe("앱 아이콘 주소.")
     private String appIconUrl = "";
 
     public static final String title_FIELD = "title";
-    @FieldDescribe("欢迎主题.")
+    @FieldDescribe("환영 주제.")
     private String title = "";
 
     public static final String desc_FIELD = "desc";
-    @FieldDescribe("主题功能描述.")
+    @FieldDescribe("주제 기능 설명.")
     private String desc = "";
 
-    @FieldDescribe("知识库索引应用列表.")
+    @FieldDescribe("지식 베이스 인덱스 앱 목록.")
     private List<String> knowledgeIndexAppList = List.of("dc45465e-e12e-4767-a404-b3ef9e7260d7|知识库",
             "e7e2272a-44fd-49bc-aa0b-fb351a3ef5eb|通知公告",
             "647307ad-bfc6-4914-9ee6-a0b0f3980766|公司新闻",
@@ -41,30 +41,30 @@ public class AiConfig extends GsonPropertyObject {
             "a3583660-a58c-4ede-8384-30f60f313df8|热点新闻",
             "cfc037a8-5b9e-4a2c-bb0c-a6d0d24d2aa2|行业新闻");
 
-    @FieldDescribe("问答库库索引应用列表.")
+    @FieldDescribe("Q&A 베이스 인덱스 앱 목록.")
     private List<String> questionsIndexAppList = List.of("02b8190c-4815-4126-b715-a149618c8002|问答");
 
-    @FieldDescribe("o2智能体附件解析支持的文件类型.")
+    @FieldDescribe("o2 에이전트 첨부파일 파싱 지원 파일 유형.")
     private List<String> o2AiFileList = List.of("pdf", "docx", "doc", "txt", "md", "pptx", "ppt", "xlsx", "xls");
 
     public static final String o2AiBaseUrl_FIELD = "o2AiBaseUrl";
-    @FieldDescribe("o2智能体服务地址.")
+    @FieldDescribe("o2 에이전트 서비스 주소.")
     private String o2AiBaseUrl = DEFAULT_O2_AI_URL;
 
     public static final String o2AiToken_FIELD = "o2AiToken";
-    @FieldDescribe("o2智能体服务认证秘钥.")
+    @FieldDescribe("o2 에이전트 서비스 인증 키.")
     private String o2AiToken = "";
 
     public static final String o2AiEnable_FIELD = "o2AiEnable";
-    @FieldDescribe("是否启用o2智能体.")
+    @FieldDescribe("o2 에이전트 사용 여부.")
     private Boolean o2AiEnable = false;
 
     public static final String deepSeekApiUrl_FIELD = "deepSeekApiUrl";
-    @FieldDescribe("deepSeek服务地址.")
+    @FieldDescribe("deepSeek 서비스 주소.")
     private String deepSeekApiUrl = "https://api.deepseek.com/v1/chat/completions";
 
     public static final String aliApiUrl_FIELD = "aliApiUrl";
-    @FieldDescribe("deepSeek服务地址.")
+    @FieldDescribe("deepSeek 서비스 주소.")
     private String aliApiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions";
 
     public String getAppName() {

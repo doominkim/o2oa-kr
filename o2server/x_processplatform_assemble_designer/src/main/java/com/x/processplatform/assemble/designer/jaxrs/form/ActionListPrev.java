@@ -24,7 +24,7 @@ class ActionListPrev extends BaseAction {
 				JpaObject.singularAttributeField(Form.class, true, true),
 				ListTools.toList(JpaObject.FieldsInvisible, Form.data_FIELDNAME, Form.mobileData_FIELDNAME));
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

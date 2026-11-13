@@ -1,4 +1,4 @@
-/* 操作条容器 */
+/* 작업 바 컨테이너 */
 .form-toolbar-area {
     box-shadow: 0 2px 10px 0 var(--oo-color-gray-e1);
     background-color: #ffffff;
@@ -105,7 +105,7 @@
     color: var(--oo-color-text2);
 }
 
-/** 内容管理阅读记录***************************/
+/** 콘텐츠 관리 열람 기록***************************/
 /* .form-content-area div[data-mwf-el-type='MWFFormDesignerLog'] {
     margin-top: 0 !important;
 }
@@ -162,7 +162,7 @@
     border-bottom: 1px solid #dfdfdf !important;
 } */
 
-/* 数据表格 **/
+/* 데이터 테이블 **/
 .form-layout .mwf_addlineaction .addLineAction {
     line-height: 20px !important;
     text-align: center !important;
@@ -285,7 +285,7 @@ div[mwftype='datatable'].form-datatable-card .mwf_datatable .mwf_editaction {
     display: none;
 }
 .form-layout .form-datatable-card .mwf_datatable ~ .mwf_datatable .moveLineAction {
-    display: block;   /* 原样式是 float/inline-block 的话改成对应值 */
+    display: block;   /* 원래 스타일이 float/inline-block이면 해당 값으로 변경 */
 }
 .form-layout .form-datatable-card tr:nth-child(odd),
 .form-layout .form-datatable-card tr:nth-child(even){
@@ -340,8 +340,8 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     background-color: #999999;
 }
 
-/* 意见区域 */
-/* 流程意见默认样式 */
+/* 의견 영역 */
+/* 프로세스 의견 기본 스타일 */
 .form-layout div.form-log[mwftype='log'] > div {
     overflow: hidden;
     margin: 0;
@@ -509,7 +509,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     white-space: nowrap;
 }
 
-/*** 视图样式 *********************************/
+/*** 뷰 스타일 *********************************/
 .form-layout .page-content-section div[mwftype='statement'] {
     flex: 100%;
     background-color: #ffffff;
@@ -659,7 +659,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     border-radius: var(--oo-default-radius) !important;
 }
 
-/* 视图选择按钮 */
+/* 뷰 선택 버튼 */
 .form-layout .form-content-view-selector,
 .form-layout .form-content-button {
     color: #ffffff !important;
@@ -693,7 +693,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     box-sizing: content-box !important;
 }
 
-/* 关联文档 */
+/* 관련 문서 */
 .form-layout .MWFADContent {
 }
 .form-layout .MWFADContent .doc-icon {
@@ -766,7 +766,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
 
 
 
-/**一键下载**/
+/**일괄 다운로드**/
 .downloading.form-layout .form-content-work-status {
     margin-bottom: 0;
 }
@@ -801,7 +801,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
 }
 
 
-/* 手机 */
+/* 휴대폰 */
 @media only screen and (max-width: 767px) {
     /* :root{
         --oo-shadow-border: inset 0 -1px 0 0px var(--oo-color-gray-d);
@@ -1191,22 +1191,22 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
         background-color: #ffffff;
     }
     .datatable_edit_mode .addLineAction::after {
-        content: '添加';
+        content: '추가';
         display: block;
         margin-left: 0.3em;
     }
     .datatable_edit_mode .delLineAction::after {
-        content: '删除';
+        content: '삭제';
         display: block;
         margin-left: 0.3em;
     }
     .datatable_edit_mode .completeLineAction::after {
-        content: '确定';
+        content: '확인';
         display: block;
         margin-left: 0.3em;
     }
     .datatable_edit_mode .cancelLineEditAction::after {
-        content: '取消';
+        content: '취소';
         display: block;
         margin-left: 0.3em;
     }
@@ -1248,7 +1248,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
         -webkit-font-smoothing: antialiased;
     } */
     .datatable_edit_mode .mwf_moveaction > div::after {
-        content: '上移';
+        content: '위로 이동';
         display: block;
     }
     .datatable_edit_mode .mwf_totaltr {
@@ -1270,7 +1270,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     }
 
     .datatable_edit_mode .mwf_totaltr .mwf_editaction > span::before {
-        content: '合计';
+        content: '합계';
         display: block;
     }
 
@@ -1404,7 +1404,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     }
     .mwf_selectView_node .searchAreaNode > div::after {
         /* display: block;
-        content: '搜索';
+        content: '검색';
         padding: 0.5em 1.5em;
         background-color: var(--oo-color-main);
         color: #ffffff;
@@ -1415,7 +1415,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     /*    float: right;*/
     /*    background-image: none !important;*/
     /*    display: block;*/
-    /*    content: '搜索';*/
+    /*    content: '검색';*/
     /*    background-color: var(--oo-color-main) !important;*/
     /*    color: rgb(255, 255, 255);*/
     /*    padding: 0.5em 1.5em;*/
@@ -1426,7 +1426,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     /*    width: unset !important;*/
     /*}*/
     /*.mwf_selectView_node .searchAreaNode > div > div:first-child::after {*/
-    /*    content: '搜索';*/
+    /*    content: '검색';*/
     /*}*/
 
     .mwf_selectView_node .searchAreaNode oo-input[type='search']{
@@ -1478,7 +1478,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
 
     .mwf_selectView_node .form-content-view .search-area.showFilter .page-content-search-fields{
         background-image: none !important;
-        content: '搜索';
+        content: '검색';
         background-color: #ffffff !important;
         color: rgb(255, 255, 255);
         padding: 0.5em 1.5em;
@@ -1686,7 +1686,7 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
         padding: 0 !important;
     }
     
-    /* 继续流转界面 **/
+    /* 계속 진행 화면 **/
     .flowNode_mobile div.o2flow-quick-select {
         border-radius: var(--oo-default-radius);
         /* box-shadow: var(--oo-shadow-border) !important; */
@@ -1981,14 +1981,14 @@ div[mwftype='datatable'].form-datatable-card oo-datetime[readmode='false'] {
     }
 }
 
-/* 平板电脑 */
+/* 태블릿 */
 @media only screen and (min-width: 768px) and (max-width: 1279px) {
     .form-toolbar-area {
         display: flex !important;
     }
 }
 
-/* 桌面电脑 */
+/* 데스크톱 */
 @media only screen and (min-width: 1280px) {
     .form-toolbar-area {
         display: flex !important;

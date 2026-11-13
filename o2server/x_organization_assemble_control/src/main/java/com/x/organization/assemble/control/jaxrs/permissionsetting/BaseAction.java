@@ -22,7 +22,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		private static final long serialVersionUID = 8148720363115902733L;
 	}
 	
-	// 初始化信息
+	// 초기화 정보
 		public PersonCard initDefaultValue(EffectivePerson effectivePerson, PersonCard personCard,PersonCard newCard) {
 		    //System.out.println("personCard_groupType="+personCard.getStatus());
 		    //System.out.println("newCard_groupType="+newCard);
@@ -30,7 +30,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		}
 	
 	
-	/** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+	/** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
 	protected boolean uniqueDuplicateWhenNotEmpty(Business business, Role role) throws Exception {
 		if (StringUtils.isNotEmpty(role.getUnique())) {
 			if (business.entityManagerContainer().duplicateWithFlags(role.getId(), Role.class, role.getUnique())) {
@@ -43,7 +43,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 	public static class WoRoleAbstract extends Role {
 
 		private static final long serialVersionUID = 8148720363115902733L;
-		@FieldDescribe("对角色的操作权限")
+		@FieldDescribe("역할 조작 권한")
 		private Control control = new Control();
 
 		public Control getControl() {

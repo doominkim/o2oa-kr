@@ -29,22 +29,22 @@ import com.x.base.core.project.logger.LoggerFactory;
  */
 
 @Path("qywxstatistic")
-@JaxrsDescribe("企业微信打卡数据统计管理（已弃用）")
+@JaxrsDescribe("WeCom 출퇴근 기록 데이터 통계 관리(사용 중단)")
 public class QywxAttendanceStatisticAction extends BaseAction {
 
     private static final Logger logger = LoggerFactory.getLogger(QywxAttendanceStatisticAction.class);
 
 
 
-    @JaxrsMethodDescribe(value = "人员月份统计查询", action = ActionPersonStatistic.class)
+    @JaxrsMethodDescribe(value = "사용자 월별 통계 조회", action = ActionPersonStatistic.class)
     @GET
     @Path("person/{person}/{year}/{month}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void personMonth(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                            @JaxrsParameterDescribe("人员") @PathParam("person") String person,
-                            @JaxrsParameterDescribe("年份: yyyy") @PathParam("year") String year,
-                            @JaxrsParameterDescribe("月份: MM") @PathParam("month") String month) {
+                            @JaxrsParameterDescribe("사용자") @PathParam("person") String person,
+                            @JaxrsParameterDescribe("연도: yyyy") @PathParam("year") String year,
+                            @JaxrsParameterDescribe("월: MM") @PathParam("month") String month) {
         ActionResult<List<ActionPersonStatistic.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -56,15 +56,15 @@ public class QywxAttendanceStatisticAction extends BaseAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据部门查询人员月份统计", action = ActionPersonStatisticWithUnit.class)
+    @JaxrsMethodDescribe(value = "부서별 사용자 월별 통계 조회", action = ActionPersonStatisticWithUnit.class)
     @GET
     @Path("person/unit/{unit}/{year}/{month}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void personMonthWithUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                    @JaxrsParameterDescribe("部门") @PathParam("unit") String unit,
-                                    @JaxrsParameterDescribe("年份: yyyy") @PathParam("year") String year,
-                                    @JaxrsParameterDescribe("月份: MM") @PathParam("month") String month) {
+                                    @JaxrsParameterDescribe("부서") @PathParam("unit") String unit,
+                                    @JaxrsParameterDescribe("연도: yyyy") @PathParam("year") String year,
+                                    @JaxrsParameterDescribe("월: MM") @PathParam("month") String month) {
         ActionResult<List<ActionPersonStatisticWithUnit.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -76,15 +76,15 @@ public class QywxAttendanceStatisticAction extends BaseAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "部门月份统计查询", action = ActionUnitStatistic.class)
+    @JaxrsMethodDescribe(value = "부서 월별 통계 조회", action = ActionUnitStatistic.class)
     @GET
     @Path("unit/{unit}/{year}/{month}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void unitMonth(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                          @JaxrsParameterDescribe("部门") @PathParam("unit") String unit,
-                          @JaxrsParameterDescribe("年份: yyyy") @PathParam("year") String year,
-                          @JaxrsParameterDescribe("月份: MM") @PathParam("month") String month) {
+                          @JaxrsParameterDescribe("부서") @PathParam("unit") String unit,
+                          @JaxrsParameterDescribe("연도: yyyy") @PathParam("year") String year,
+                          @JaxrsParameterDescribe("월: MM") @PathParam("month") String month) {
         ActionResult<ActionUnitStatistic.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

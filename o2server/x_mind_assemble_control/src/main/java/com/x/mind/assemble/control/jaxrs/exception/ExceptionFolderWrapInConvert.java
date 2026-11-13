@@ -7,6 +7,6 @@ public class ExceptionFolderWrapInConvert extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionFolderWrapInConvert( Throwable e, String jsonString ) {
-		super("JsonElement转换为一个脑图目录对象时发生异常。JSON:" + jsonString, e );
+		super("JsonElement를 마인드맵 폴더 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonString, e );
 	}
 }

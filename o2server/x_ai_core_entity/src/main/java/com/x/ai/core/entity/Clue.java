@@ -20,10 +20,10 @@ import javax.persistence.UniqueConstraint;
 import org.apache.openjpa.persistence.jdbc.Index;
 
 /**
- * 线索
+ * 스레드
  * @author sword
  */
-@Schema(name = "Clue", description = "线索.")
+@Schema(name = "Clue", description = "스레드.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Clue.table, uniqueConstraints = {
@@ -55,7 +55,7 @@ public class Clue extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -74,23 +74,23 @@ public class Clue extends SliceJpaObject {
 	}
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("标题.")
+	@FieldDescribe("제목.")
 	@Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String title;
 
-	@FieldDescribe("创建时间.")
+	@FieldDescribe("생성 시간.")
 	@Transient
 	private Date createDateTime;
 
-	@FieldDescribe("修改时间.")
+	@FieldDescribe("수정 시간.")
 	@Transient
 	private Date updateDateTime;
 

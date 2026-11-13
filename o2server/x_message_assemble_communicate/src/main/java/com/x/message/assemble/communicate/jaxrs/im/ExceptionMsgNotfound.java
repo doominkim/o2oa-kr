@@ -8,6 +8,6 @@ class ExceptionMsgNotfound extends PromptException {
 	private static final long serialVersionUID = -7038583339545967795L;
 
 	ExceptionMsgNotfound() {
-		super("消息对象查询不到.");
+		super("메시지를 찾을 수 없습니다.");
 	}
 }

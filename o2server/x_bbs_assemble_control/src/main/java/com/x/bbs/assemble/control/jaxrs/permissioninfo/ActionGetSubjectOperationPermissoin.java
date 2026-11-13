@@ -44,7 +44,7 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 				subjectInfo = subjectInfoService.get(subjectId);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionPermissionInfoProcess(e, "根据指定ID查询主题信息时发生异常.ID:" + subjectId);
+				Exception exception = new ExceptionPermissionInfoProcess(e, "지정한 ID로 주제 정보를 조회하는 중 오류가 발생했습니다. ID:" + subjectId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -62,7 +62,7 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionPermissionInfoProcess(e,
-						"根据指定ID查询版块信息时发生异常.ID:" + subjectInfo.getSectionId());
+						"지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + subjectInfo.getSectionId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -75,14 +75,14 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 				// logger.error( e, effectivePerson, request, null);
 			}
 		}
-		if (check) {// 获取用户的权限列表
+		if (check) {// 사용자 권한 목록 조회
 			if (!"anonymous".equalsIgnoreCase(effectivePerson.getTokenType().name())) {
 				try {
 					roleAndPermission = UserPermissionService.getUserRoleAndPermission(effectivePerson.getDistinguishedName());
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionPermissionInfoProcess(e,
-							"获取用户的论坛访问权限列表时发生异常.Person:" + effectivePerson.getDistinguishedName());
+							"사용자의 포럼 접근 권한 목록을 가져오는 중 오류가 발생했습니다. Person:" + effectivePerson.getDistinguishedName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -160,11 +160,11 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 				wrap.setReplyPublishAble(false);
 			}
 		}
-		// 自己发的贴子自己可以删除和编辑
+		// 본인이 작성한 게시글은 본인이 삭제·편집 가능
 		if (check) {
 			if (effectivePerson.getDistinguishedName() != null
 					&& subjectInfo.getCreatorName().equalsIgnoreCase(effectivePerson.getDistinguishedName())) {
-				//如果该贴子已经有回复内容了，就不允许删除了
+				//게시글에 이미 답글이 있으면 삭제 불가
 				if( replyInfoService.countWithSubjectForPage( subjectId, false ) == 0 ){
 					wrap.setEditAble(true);
 				}else{
@@ -173,7 +173,7 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 			}
 		}
 		
-		//是否是管理员
+		//관리자 여부
 		Business business = new Business(null);
 		Boolean userBBSManager = business.organization().person().hasRole(effectivePerson, OrganizationDefinition.BBSManager);
 		Boolean userManager = business.organization().person().hasRole(effectivePerson, OrganizationDefinition.Manager);
@@ -195,31 +195,31 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 
 	public static class Wo{
 		
-		@FieldDescribe( "用户是否可以审核该主题." )
+		@FieldDescribe( "사용자의 해당 주제 심사 가능 여부." )
 		private Boolean auditAble = false;
 		
-		@FieldDescribe( "用户是否可以编辑该主题." )
+		@FieldDescribe( "사용자의 해당 주제 편집 가능 여부." )
 		private Boolean editAble = false;
 		
-		@FieldDescribe( "用户是否可以管理该主题." )
+		@FieldDescribe( "사용자의 해당 주제 관리 가능 여부." )
 		private Boolean manageAble = false;	
 		
-		@FieldDescribe( "用户是否可以推荐该主题." )
+		@FieldDescribe( "사용자의 해당 주제 추천 가능 여부." )
 		private Boolean recommendAble = false;
 		
-		@FieldDescribe( "用户是否可以置顶该主题." )
+		@FieldDescribe( "사용자의 해당 주제 상단 고정 가능 여부." )
 		private Boolean stickAble = false;
 		
-		@FieldDescribe( "用户是否可以对该主题进行精华主题设置操作." )
+		@FieldDescribe( "사용자의 해당 주제 우수 주제 설정 가능 여부." )
 		private Boolean creamAble = false;
 		
-		@FieldDescribe( "用户是否可以在该主题中进行回复操作." )
+		@FieldDescribe( "사용자의 해당 주제 답글 작성 가능 여부." )
 		private Boolean replyPublishAble = false;
 		
-		@FieldDescribe( "用户是否可以在版块中对回复进行审核." )
+		@FieldDescribe( "사용자의 게시판 내 답글 심사 가능 여부." )
 		private Boolean replyAuditAble = false;	
 		
-		@FieldDescribe( "用户是否可以在主题中对回复进行查询或者删除." )
+		@FieldDescribe( "사용자의 주제 내 답글 조회 또는 삭제 가능 여부." )
 		private Boolean replyManageAble = false;		
 
 		public Boolean getEditAble() {

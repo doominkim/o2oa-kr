@@ -29,18 +29,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("personcard")
-@JaxrsDescribe("个人通讯录操作")
+@JaxrsDescribe("개인 주소록 작업")
 public class PersonCardAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PersonCardAction.class);
 
-	@JaxrsMethodDescribe(value = "获取个人名片.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "개인 명함 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名片标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("명함 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -52,7 +52,7 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建名片.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "명함 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -69,13 +69,13 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新个人名片.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "개인 명함 수정.", action = ActionUpdate.class)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名片标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("명함 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,13 +87,13 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除个人名片.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "개인 명함 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名片标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("명함 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -105,13 +105,13 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除个人名片mockdeletetoget.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "개인 명함 삭제 mockdeletetoget.", action = ActionDelete.class)
 	@GET
 	@Path("{flag}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("名片标识") @PathParam("flag") String flag) {
+					   @JaxrsParameterDescribe("명함 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -123,7 +123,7 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前登录人的所有名片", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "현재 로그인 사용자의 모든 명함 조회", action = ActionList.class)
 	@GET
 	@Path("mylist")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -140,15 +140,15 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前登录人的名片.分页", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "현재 로그인 사용자의 명함 조회. 페이지", action = ActionListPaging.class)
 	@PUT
 	@Path("listpaging/page/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void ListPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("页码") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页几条") @PathParam("size") Integer size,
-			@JaxrsParameterDescribe("姓名，手机号，电话，姓名拼音，分组，状态") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 건수") @PathParam("size") Integer size,
+			@JaxrsParameterDescribe("이름, 휴대폰 번호, 전화, 이름 병음, 분류, 상태") JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -160,15 +160,15 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前登录人的名片分页mockputtopost.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "현재 로그인 사용자의 명함 페이지 조회 mockputtopost.", action = ActionListPaging.class)
 	@POST
 	@Path("listpaging/page/{page}/size/{size}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void ListPagingMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("页码") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页几条") @PathParam("size") Integer size,
-						   @JaxrsParameterDescribe("姓名，手机号，电话，姓名拼音，分组，状态") JsonElement jsonElement) {
+						   @JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 건수") @PathParam("size") Integer size,
+						   @JaxrsParameterDescribe("이름, 휴대폰 번호, 전화, 이름 병음, 분류, 상태") JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -180,15 +180,15 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "按分组查询当前登录人的名片.分页", action = ActionListPagingWithGroup.class)
+	@JaxrsMethodDescribe(value = "분류별 현재 로그인 사용자의 명함 조회. 페이지", action = ActionListPagingWithGroup.class)
 	@PUT
 	@Path("listpagingwithgroup/page/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void ListPagingWithGroupType(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("页码") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页几条") @PathParam("size") Integer size,
-			@JaxrsParameterDescribe("匹配关键字(分组)") JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 건수") @PathParam("size") Integer size,
+			@JaxrsParameterDescribe("매칭 키워드(분류)") JsonElement jsonElement) {
 		ActionResult<List<ActionListPagingWithGroup.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -200,15 +200,15 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "按分组查询当前登录人的名片分页mockputtopost.", action = ActionListPagingWithGroup.class)
+	@JaxrsMethodDescribe(value = "분류별 현재 로그인 사용자의 명함 페이지 조회 mockputtopost.", action = ActionListPagingWithGroup.class)
 	@POST
 	@Path("listpagingwithgroup/page/{page}/size/{size}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void ListPagingWithGroupTypeMockPutToPost(@Suspended final AsyncResponse asyncResponse,
-										@Context HttpServletRequest request, @JaxrsParameterDescribe("页码") @PathParam("page") Integer page,
-										@JaxrsParameterDescribe("每页几条") @PathParam("size") Integer size,
-										@JaxrsParameterDescribe("匹配关键字(分组)") JsonElement jsonElement) {
+										@Context HttpServletRequest request, @JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+										@JaxrsParameterDescribe("페이지당 건수") @PathParam("size") Integer size,
+										@JaxrsParameterDescribe("매칭 키워드(분류)") JsonElement jsonElement) {
 		ActionResult<List<ActionListPagingWithGroup.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -220,7 +220,7 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列出当前用户的所有分组", action = ActionListMyGroupTypes.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 모든 분류 목록", action = ActionListMyGroupTypes.class)
 	@GET
 	@Path("listgrouptypes")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -237,12 +237,12 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "个人通讯录生成二维码", action = ActionCreateCode.class)
+	@JaxrsMethodDescribe(value = "개인 주소록 QR 코드 생성", action = ActionCreateCode.class)
 	@GET
 	@Path("createQR/{cardId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void code(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名片id") @PathParam("cardId") String cardId) {
+			@JaxrsParameterDescribe("명함 id") @PathParam("cardId") String cardId) {
 		ActionResult<ActionCreateCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -254,12 +254,12 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "组织人员生成二维码", action = ActionPersonCode.class)
+	@JaxrsMethodDescribe(value = "조직 사용자 QR 코드 생성", action = ActionPersonCode.class)
 	@GET
 	@Path("createCode/{cardId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void personcode(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名片id") @PathParam("cardId") String cardId) {
+			@JaxrsParameterDescribe("명함 id") @PathParam("cardId") String cardId) {
 		ActionResult<ActionPersonCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -271,12 +271,12 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出组织通讯录vcf", action = ActionExportVcf.class)
+	@JaxrsMethodDescribe(value = "조직 주소록 vcf 내보내기", action = ActionExportVcf.class)
 	@GET
 	@Path("listVCf/{idList}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listVCf(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名片id组") @PathParam("idList") String idList) {
+			@JaxrsParameterDescribe("명함 id 목록") @PathParam("idList") String idList) {
 		ActionResult<ActionExportVcf.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -288,12 +288,12 @@ public class PersonCardAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出个人通讯录vcf", action = ActionExportPersonalVcf.class)
+	@JaxrsMethodDescribe(value = "개인 주소록 vcf 내보내기", action = ActionExportPersonalVcf.class)
 	@GET
 	@Path("listPersonalVCf/{idList}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPersonalVCf(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名片id组") @PathParam("idList") String idList) {
+			@JaxrsParameterDescribe("명함 id 목록") @PathParam("idList") String idList) {
 		ActionResult<ActionExportPersonalVcf.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

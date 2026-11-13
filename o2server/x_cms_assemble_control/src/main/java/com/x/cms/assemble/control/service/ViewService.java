@@ -28,10 +28,10 @@ public class ViewService {
 		
 		emc.beginTransaction( ViewFieldConfig.class );
 		emc.beginTransaction( View.class);
-		//先保存所有的列信息
+		//먼저 모든 열 정보 저장
 		ids = business.getViewFieldConfigFactory().listByViewId( wrapIn.getId() );
 		if( ids != null && !ids.isEmpty() ){
-			//说明原来有列配置，先删除掉
+			//기존 열 설정이 있으므로 먼저 삭제
 			for( String id : ids ){
 				fieldConfig = business.getViewFieldConfigFactory().get(id);
 				if( fieldConfig != null ){
@@ -42,23 +42,23 @@ public class ViewService {
 		if( fields != null && !fields.isEmpty() ){
 			for( ViewFieldConfig wrapInField : fields ){
 				wrapInField.setViewId( wrapIn.getId() );
-				//查询是否已经存在
+				//이미 존재하는지 조회
 				fieldConfig = business.getViewFieldConfigFactory().get( wrapInField.getId() );
-				if( fieldConfig == null ){//新增
+				if( fieldConfig == null ){//신규
 					fieldConfig = new ViewFieldConfig();
 					wrapInField.copyTo( fieldConfig );
 					if( wrapInField.getId() != null && !wrapInField.getId().isEmpty() ){
 						fieldConfig.setId( wrapInField.getId() );
 					}
 					emc.persist( fieldConfig, CheckPersistType.all );
-				}else{//更新
+				}else{//수정
 					wrapInField.copyTo( fieldConfig, JpaObject.FieldsUnmodify  );
 					emc.check( fieldConfig, CheckPersistType.all );
 				}
 				fieldIds.add( fieldConfig.getId() );
 			}
 		}
-		//再保存视图信息
+		//뷰 정보 저장
 		view = emc.find( wrapIn.getId(), View.class );
 		if( view == null ){
 			view = new View();

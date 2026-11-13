@@ -19,10 +19,10 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 内容管理应用目录分类扩展信息
+ * 콘텐츠 관리 앱 디렉터리 분류 확장 정보
  *
  */
-@Schema(name = "AppInfoConfig", description = "内容管理目录分类信息.")
+@Schema(name = "AppInfoConfig", description = "콘텐츠 관리 디렉터리 분류 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.CategoryExt.table, uniqueConstraints = {
@@ -44,7 +44,7 @@ public class CategoryExt extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -53,19 +53,19 @@ public class CategoryExt extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String content_FIELDNAME = "content";
-	@FieldDescribe("扩展信息JSON内容")
+	@FieldDescribe("확장 정보 JSON 내용")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + content_FIELDNAME)

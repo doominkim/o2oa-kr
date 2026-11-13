@@ -71,69 +71,69 @@ abstract class V2Base extends StandardJaxrsAction {
 			return true;
 		}
 
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private List<String> applicationList;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false")
+		@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false")
 		private Boolean relateEditionProcess = true;
 
-		@FieldDescribe("标题")
+		@FieldDescribe("제목")
 		private String title;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
-		@FieldDescribe("创建用户")
+		@FieldDescribe("생성 사용자")
 		private List<String> creatorPersonList;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("开始时间")
+		@FieldDescribe("시작 시간")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("结束时间")
+		@FieldDescribe("종료 시간")
 		private List<String> completedTimeMonthList;
 
-		@FieldDescribe("已经结束的.")
+		@FieldDescribe("종료된 항목.")
 		private Boolean completed;
 
-		@FieldDescribe("尚未结束的")
+		@FieldDescribe("종료되지 않은 항목")
 		private Boolean notCompleted;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
-		@FieldDescribe("排序字段，默认根据创建时间倒叙")
+		@FieldDescribe("정렬 필드, 기본값은 생성 시간 내림차순")
 		private String orderBy;
-		@FieldDescribe("是否升序排序，默认false")
+		@FieldDescribe("오름차순 정렬 여부, 기본값 false")
 		private Boolean ascOrder;
 
-		@FieldDescribe("业务数据String值01")
+		@FieldDescribe("업무 데이터 String 값01")
 		private String stringValue01;
-		@FieldDescribe("业务数据String值02")
+		@FieldDescribe("업무 데이터 String 값02")
 		private String stringValue02;
-		@FieldDescribe("业务数据String值03")
+		@FieldDescribe("업무 데이터 String 값03")
 		private String stringValue03;
-		@FieldDescribe("业务数据String值04")
+		@FieldDescribe("업무 데이터 String 값04")
 		private String stringValue04;
-		@FieldDescribe("业务数据String值05")
+		@FieldDescribe("업무 데이터 String 값05")
 		private String stringValue05;
-		@FieldDescribe("业务数据String值06")
+		@FieldDescribe("업무 데이터 String 값06")
 		private String stringValue06;
-		@FieldDescribe("业务数据String值07")
+		@FieldDescribe("업무 데이터 String 값07")
 		private String stringValue07;
-		@FieldDescribe("业务数据String值08")
+		@FieldDescribe("업무 데이터 String 값08")
 		private String stringValue08;
-		@FieldDescribe("业务数据String值09")
+		@FieldDescribe("업무 데이터 String 값09")
 		private String stringValue09;
-		@FieldDescribe("业务数据String值10")
+		@FieldDescribe("업무 데이터 String 값10")
 		private String stringValue10;
 
 		public String getStringValue01() {
@@ -361,22 +361,22 @@ abstract class V2Base extends StandardJaxrsAction {
 			return true;
 		}
 
-		@FieldDescribe("是否关联work")
+		@FieldDescribe("work 연결 여부")
 		private Boolean relateWork;
 
-		@FieldDescribe("是否关联workCompleted")
+		@FieldDescribe("workCompleted 연결 여부")
 		private Boolean relateWorkCompleted;
 
-		@FieldDescribe("是否关联task")
+		@FieldDescribe("task 연결 여부")
 		private Boolean relateTask;
 
-		@FieldDescribe("是否关联taskCompleted")
+		@FieldDescribe("taskCompleted 연결 여부")
 		private Boolean relateTaskCompleted;
 
-		@FieldDescribe("是否关联read")
+		@FieldDescribe("read 연결 여부")
 		private Boolean relateRead;
 
-		@FieldDescribe("是否关联readCompleted")
+		@FieldDescribe("readCompleted 연결 여부")
 		private Boolean relateReadCompleted;
 
 		public Boolean getRelateWork() {

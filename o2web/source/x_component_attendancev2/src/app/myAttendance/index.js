@@ -12,9 +12,9 @@ export default content({
   bind() {
     return {
       lp,
-      startFromMonday: true, // 是否从星期一开始 
-      dayList: [], // 星期列表
-      dateWithData: [], // 日历数据包含业务数据
+      startFromMonday: true, // 월요일부터 시작 여부 
+      dayList: [], // 요일 목록
+      dateWithData: [], // 업무 데이터를 포함한 달력 데이터
       statistic: {
         userId: "",
         workTimeDuration: 0,
@@ -28,14 +28,14 @@ export default content({
         fieldWorkTimes: 0,
         leaveDays: 0,
         appealNums: 0
-      } // 统计数据
+      } // 통계 데이터
     };
   },
   afterRender() {
     this.loadDayList();
     this.loadDate();
   },
-  // 星期列表 
+  // 요일 목록 
   loadDayList() {
     let dayList = [];
     if (this.bind.startFromMonday) {
@@ -62,7 +62,7 @@ export default content({
     }
     this.bind.dayList = dayList;
   },
-  // 获取星期的中文名
+  // 요일의 한국어 이름 조회
   dayName(index) {
     switch(index) {
       case 0 :
@@ -83,19 +83,19 @@ export default content({
         return "";             
     }
   },
-  // 获取当前月份的所有日期，并补齐前后几天，形成完整的日历表
-  // 默认从星期天开始  startFromMonday = true 从星期一开始
+  // 현재 월의 모든 날짜를 가져오고 앞뒤 날짜를 채워 완전한 달력 구성
+  // 기본은 일요일부터 시작, startFromMonday = true 이면 월요일부터 시작
   loadDate() {
     let start = 0
     if (this.bind.startFromMonday) {
       start = 1;
     }
-    // 获取当前日期
+    // 현재 날짜 조회
     const today = new Date();
     this.bind.currentDateTime = today.getTime();
-    // 获取当前月份
+    // 현재 월 조회
     const currentMonth = today.getMonth();
-    // 获取当前年份
+    // 현재 연도 조회
     const currentYear = today.getFullYear();
     const currentDate = today.getDate();
     this.bind.todayString = `${currentYear}-${(currentMonth + 1) < 10 ? "0" + (currentMonth + 1) : (currentMonth + 1)}-${(currentDate) < 10 ? "0" + (currentDate) : (currentDate)}`
@@ -109,16 +109,16 @@ export default content({
     }
     const preDateTime = this.bind.currentDateTime || new Date().getTime();
     const preDate = new Date(preDateTime);
-    // 获取当前月份
+    // 현재 월 조회
     const preMonth = preDate.getMonth();
-    // 获取当前年份
+    // 현재 연도 조회
     let currentYear = preDate.getFullYear();
     let currentMonth = preMonth + 1;
     if (currentMonth == 12) {
       currentMonth = 0;
       currentYear = currentYear + 1;
     }
-    this.bind.currentDateTime = new Date(currentYear, currentMonth, 1).getTime();// 下个月 1 号
+    this.bind.currentDateTime = new Date(currentYear, currentMonth, 1).getTime();// 다음 달 1일
     this.loadDataByDate(start, currentYear, currentMonth);
   },
   clickToPreMonth() {
@@ -128,34 +128,34 @@ export default content({
     }
     const lastDateTime = this.bind.currentDateTime || new Date().getTime();
     const lastDate = new Date(lastDateTime);
-    // 获取当前月份
+    // 현재 월 조회
     const lastMonth = lastDate.getMonth();
-     // 获取当前年份
+     // 현재 연도 조회
      let currentYear = lastDate.getFullYear();
      let currentMonth = lastMonth - 1;
      if (currentMonth == -1) {
        currentMonth = 11;
        currentYear = currentYear - 1;
      }
-     this.bind.currentDateTime = new Date(currentYear, currentMonth, 1).getTime();// 下个月 1 号
+     this.bind.currentDateTime = new Date(currentYear, currentMonth, 1).getTime();// 다음 달 1일
      this.loadDataByDate(start, currentYear, currentMonth);
   },
-  // 加载数据
-  // @param start 1 从星期一开始
+  // 데이터 로드
+  // @param start 1 월요일부터 시작
   async loadDataByDate( start, currentYear, currentMonth) {
-    // 获取当月的天数
+    // 해당 월의 일수 조회
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // 10-31
-    // 获取当月第一天是星期几
-    const firstDayOfMonth =  new Date(currentYear, currentMonth, 1).getDay(); // 星期天  0
-    // 获取当月最后一天是星期几
-    // 计算需要补齐的天数
+    // 해당 월 첫째 날의 요일 조회
+    const firstDayOfMonth =  new Date(currentYear, currentMonth, 1).getDay(); // 일요일  0
+    // 해당 월 마지막 날의 요일 조회
+    // 채워야 할 일수 계산
     const daysToPad = (7 - ((daysInMonth + firstDayOfMonth) % 7) + start) % 7; //  4
-    // 计算需要补齐的前一个月的天数
+    // 채워야 할 이전 달 일수 계산
     const lastMonthEndDate = new Date(currentYear, currentMonth, 0);
     const daysInPrevMonth = lastMonthEndDate.getDate(); // 9-30  
-    // 创建一个数组来存储日期
+    // 날짜를 저장할 배열 생성
     let dates = [];
-    // 查询当月的打卡数据
+    // 해당 월 출퇴근 체크 데이터 조회
     const startDate = `${currentYear}-${(currentMonth + 1) < 10 ? "0" + (currentMonth + 1) : (currentMonth + 1)}-01`;
     const endDate = `${currentYear}-${(currentMonth + 1) < 10 ? "0" + (currentMonth + 1) : (currentMonth + 1)}-${daysInMonth}`;
     const reqBody = {
@@ -168,7 +168,7 @@ export default content({
     } catch (error) {
      console.error(error);  
     }
-    // 添加需要补齐的前一个月的日期
+    // 채워야 할 이전 달 날짜 추가
     const preDay = firstDayOfMonth == 0 ? daysInPrevMonth - 6 + start : daysInPrevMonth - firstDayOfMonth + 1 + start 
     for (
       let i = preDay;
@@ -177,11 +177,11 @@ export default content({
     ) {
       dates.push({
         date: i,
-        notCurrent: 1, // 是否当前月份
+        notCurrent: 1, // 현재 월 여부
         dateYmd: `${lastMonthEndDate.getFullYear()}-${(lastMonthEndDate.getMonth() + 1)  < 10 ? "0" + (lastMonthEndDate.getMonth() + 1) : (lastMonthEndDate.getMonth() + 1) }-${i}`
       });
     }
-    // 添加当前月份的所有日期
+    // 현재 월의 모든 날짜 추가
     for (let i = 1; i <= daysInMonth; i++) {
       const dateYmd = `${currentYear}-${(currentMonth + 1) < 10 ? "0" + (currentMonth + 1) : (currentMonth + 1)}-${i < 10 ? "0"+i : i}`;
       dates.push({
@@ -190,7 +190,7 @@ export default content({
         dateYmd: dateYmd,
       });
     }
-    // 添加需要补齐的下一个月的日期
+    // 채워야 할 다음 달 날짜 추가
     const nextMonthFirstDate = new Date(currentYear, currentMonth + 1, 1);
     for (let i = 1; i <= daysToPad; i++) {
       dates.push({
@@ -199,25 +199,25 @@ export default content({
         dateYmd: `${nextMonthFirstDate.getFullYear()}-${ (nextMonthFirstDate.getMonth() + 1) < 10 ? "0" + (nextMonthFirstDate.getMonth() + 1) : (nextMonthFirstDate.getMonth() + 1) }-0${i}`
       });
     }
-    // 数据合并到日历中
+    // 데이터를 달력에 병합
     const newDates = dates.map(date => {
       const detail = list.find(element => element.recordDateString === date.dateYmd) || null;
       date.detail = detail;
-      date.workDay = true; // 默认白色背景
+      date.workDay = true; // 기본 흰색 배경
       return date;
     });
     const checkWorkDayList = dates.map(date => {
       return date.dateYmd;
     });
-    // 输出日期数组
+    // 날짜 배열 출력
     this.bind.dateWithData = convertTo2DArray(newDates, 7);
-    // 当前统计周期 月份和日期
+    // 현재 통계 주기 월과 날짜
     this.bind.cycleMonth = `${currentYear}${lp.year}${(currentMonth + 1)}${lp.month}`;
     const showMonth = (currentMonth + 1) < 10 ? "0" + (currentMonth + 1) : (currentMonth + 1);
     this.bind.cycleDate = `${showMonth}${lp.month}01 - ${showMonth}${lp.month}${daysInMonth}`;
-    // 统计信息
+    // 통계 정보
     this.loadMyStatistic(reqBody);
-    // 查询是否工作日
+    // 근무일 여부 조회
     this.loadIsWorkDay(checkWorkDayList);
   },
   async loadMyStatistic(body) {
@@ -248,7 +248,7 @@ export default content({
       }
     }
   },
-  // 日历方块的class
+  // 달력 칸의 class
   formatCalItemClass(item) {
     let className = 'item';
     if (item.notCurrent === 1) {
@@ -259,7 +259,7 @@ export default content({
     }
     return className;
   },
-  // 打卡
+  // 출퇴근 체크
   formatRecord(record) {
     let time = "";
     let type = lp.offDutySimple;
@@ -271,7 +271,7 @@ export default content({
     }
     return `${time}`;
   },
-  // 日期的 class
+  // 날짜의 class
   formatDateClass(date) {
     if (date === this.bind.todayString) {
       return 'item-cal-date-text item-cal-date-today';
@@ -300,7 +300,7 @@ export default content({
       } else if (record.leaveData || record.leaveRequest) {
         statusClassName =  "item-record-status-tag record-status-leave";
       }  else if (record.appealId && statusClassName === "") {
-        // 管理员处理 算正常
+        // 관리자 처리 시 정상으로 간주
         if (record.appealData && record.appealData.status === 4) {
           statusClassName =  "";
         } else {
@@ -332,7 +332,7 @@ export default content({
       } else if (record.leaveData || record.leaveRequest) {
         tagName =  lp.appeal.leave;
       } else if (record.appealId && tagName === "") {
-        // 管理员处理 算正常
+        // 관리자 처리 시 정상으로 간주
         if (record.appealData && record.appealData.status === 4) {
           tagName =  "";
         } else {

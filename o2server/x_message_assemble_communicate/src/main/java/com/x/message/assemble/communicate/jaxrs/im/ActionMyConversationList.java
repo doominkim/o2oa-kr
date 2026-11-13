@@ -38,7 +38,7 @@ public class ActionMyConversationList extends BaseAction {
 			Business business = new Business(emc);
 			List<IMConversation> list = business.imConversationFactory().listConversationWithPerson2(effectivePerson.getDistinguishedName());
 			List<Wo> wos = Wo.copier.copy(list);
-			// 批量查询优化
+			// 일괄 조회 최적화
 			List<String> conversationIds = wos.stream().map(Wo::getId).collect(Collectors.toList());
 			Map<String, IMConversationExt> extMap = business.imConversationFactory().getConversationExts(effectivePerson.getDistinguishedName(), conversationIds);
 			Map<String, Long> unreadMap = business.imConversationFactory().getUnreadNumbers(new ArrayList<>(extMap.values()));
@@ -50,27 +50,27 @@ public class ActionMyConversationList extends BaseAction {
 					wo.setUnreadNumber(unreadMap.getOrDefault(wo.getId(), 0L));
 					wo.setExt(ext);
 				} else {
-					LOGGER.info("没有找到对应 IMConversationExt ？？ " + effectivePerson.getDistinguishedName() + "  " + wo.getId());
+					LOGGER.info("해당 IMConversationExt를 찾을 수 없음?? " + effectivePerson.getDistinguishedName() + "  " + wo.getId());
 				}
 			}
 
-			List<Wo> trueWos = wos.stream().filter((wo) -> { // 已删除的单聊不展现
+			List<Wo> trueWos = wos.stream().filter((wo) -> { // 삭제된 1:1 채팅은 표시하지 않음
 				if (wo.getExt() != null && wo.getExt().getIsDeleted() != null && BooleanUtils.isTrue(wo.getExt().getIsDeleted()) && wo.getType().equals(CONVERSATION_TYPE_SINGLE)) {
 					return false;
 				}
 				return true;
-			}).filter((wo)-> {// 删除空的会话
+			}).filter((wo)-> {// 빈 대화 삭제
 				WoMsg woMsg = null;
 				IMMsg lastMsg = lastMsgMap.get(wo.getId());
 				if (lastMsg != null) {
 					woMsg = WoMsg.copier.copy(lastMsg);
 					wo.setLastMessage(woMsg);
 				}
-				// 群聊不管有没有聊天消息都展现。
+				// 그룹 채팅은 채팅 메시지 유무와 관계없이 표시.
 				if (wo.getType() != null && wo.getType().equals(CONVERSATION_TYPE_GROUP)) {
 					return true;
 				}
-				// 单聊没有聊天消息就不展现
+				// 1:1 채팅은 채팅 메시지가 없으면 표시하지 않음
 				return (woMsg != null);
 			}).filter(Objects::nonNull).sorted((a, b)-> {
 				if (a.getLastMessage() == null && b.getLastMessage() == null) {
@@ -94,15 +94,15 @@ public class ActionMyConversationList extends BaseAction {
 
 	public static class Wo extends IMConversation {
 
-		@FieldDescribe("是否置顶.")
+		@FieldDescribe("상단 고정 여부.")
 		private Boolean isTop = false;
 
-		@FieldDescribe("未读数量.")
+		@FieldDescribe("읽지 않은 수.")
 		private Long unreadNumber;
 
-		@FieldDescribe("最后一条消息.")
+		@FieldDescribe("마지막 메시지.")
 		private WoMsg lastMessage;
-		// 扩展 业务操作使用
+		// 확장. 업무 처리용
 		private IMConversationExt ext;
 
 		private static final long serialVersionUID = 3434938936805201380L;

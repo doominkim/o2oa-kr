@@ -91,11 +91,11 @@
 
 <!--		<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--			<tr>-->
-<!--				<td class="editTableTitle">保留历史版本:</td>-->
+<!--				<td class="editTableTitle">이전 버전 보존:</td>-->
 <!--				<td class="editTableValue">-->
-<!--					<input class="editTableRadio" name="saveHistoricalFile" text{($.saveHistoricalFile!='n')?'checked':''} type="radio" value="y"/>保存-->
-<!--					<input class="editTableRadio" name="saveHistoricalFile" text{($.saveHistoricalFile=='n')?'checked':''} type="radio" value="n"/>不保存-->
-<!--					<br><div>如果选择保存历史版本，如果正文内容与上一版本有差异，系统会在流转时保存一个新版本</div>-->
+<!--					<input class="editTableRadio" name="saveHistoricalFile" text{($.saveHistoricalFile!='n')?'checked':''} type="radio" value="y"/>저장-->
+<!--					<input class="editTableRadio" name="saveHistoricalFile" text{($.saveHistoricalFile=='n')?'checked':''} type="radio" value="n"/>저장 안 함-->
+<!--					<br><div>보존을 선택하면 본문 내용이 이전 버전과 다를 경우 흐름 진행 시 새 버전을 저장합니다</div>-->
 <!--				</td>-->
 <!--			</tr>-->
 <!--		</table>-->
@@ -201,7 +201,7 @@
 					<td class="editTableValue">
 						<input class="editTableRadio" name="toWordTrigger" text{($.toWordTrigger!='save' && $.toWordTrigger!=='open')?'checked':''} type="radio" value="submit"/>{{$.lp.onSubmit}}
 						<input class="editTableRadio" name="toWordTrigger" text{($.toWordTrigger=='save')?'checked':''} type="radio" value="save"/>{{$.lp.onSave}}
-<!--						<input class="editTableRadio" name="toWordTrigger" text{($.toWordTrigger=='open')?'checked':''} type="radio" value="open"/>打开时-->
+<!--						<input class="editTableRadio" name="toWordTrigger" text{($.toWordTrigger=='open')?'checked':''} type="radio" value="open"/>열 때-->
 					</td>
 				</tr>
 				<tr>
@@ -212,10 +212,10 @@
 					</td>
 				</tr>
 <!--				<tr>-->
-<!--					<td class="editTableTitle">转换服务:</td>-->
+<!--					<td class="editTableTitle">변환 서비스:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" title="如果您已经连接云服务器" name="toWordService" text{($.toWordService=='cloud')?'checked':''} type="radio" value="cloud"/>云服务-->
-<!--						<input class="editTableRadio" name="toWordService" text{($.toWordService!='cloud')?'checked':''} type="radio" value="local"/>本地服务-->
+<!--						<input class="editTableRadio" title="클라우드 서버에 연결된 경우" name="toWordService" text{($.toWordService=='cloud')?'checked':''} type="radio" value="cloud"/>클라우드 서비스-->
+<!--						<input class="editTableRadio" name="toWordService" text{($.toWordService!='cloud')?'checked':''} type="radio" value="local"/>로컬 서비스-->
 <!--					</td>-->
 <!--				</tr>-->
 			</table>
@@ -270,14 +270,14 @@
 		</div>
 
 
-<!--		<div class="MWFMaplist" name="editorProperties" title="属性"></div>-->
-<!--		<div style="text-align:center">更多属性帮助请查看 <a target="_blank" href="http://docs.ckeditor.com/">CKEditor Documentation</a></div>-->
+<!--		<div class="MWFMaplist" name="editorProperties" title="속성"></div>-->
+<!--		<div style="text-align:center">추가 속성 도움말은 다음을 참고하십시오: <a target="_blank" href="http://docs.ckeditor.com/">CKEditor Documentation</a></div>-->
 <!--		<br/>-->
 
-<!--		<div style="height: 24px; text-align: center; line-height: 24px; border-top-color: rgb(153, 153, 153); border-top-width: 1px; border-top-style: solid; background-color: rgb(238, 238, 238);">默认值</div>-->
+<!--		<div style="height: 24px; text-align: center; line-height: 24px; border-top-color: rgb(153, 153, 153); border-top-width: 1px; border-top-style: solid; background-color: rgb(238, 238, 238);">기본값</div>-->
 
 		<div class="MWFMaplist" name="defaultValue" title="{{$.lp.defaultValue}}"></div>
-<!--		<div class="MWFScriptArea" name="defaultValueScript" title="默认值脚本 (S)"></div>-->
+<!--		<div class="MWFScriptArea" name="defaultValueScript" title="기본값 스크립트 (S)"></div>-->
 
 		<div class="MWFCssArea" name="css" title="CSS"></div>
 
@@ -287,7 +287,7 @@
 	<div title="{{$.lp.config}}" class="MWFTab">
 <!--		<div class="MWFRedDocumentEditor" name="config"></div>-->
 
-<!-----------------------------------------------份数密级紧急度------------------------------------------------------------------->
+<!-----------------------------------------------부수·보안등급·긴급도------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.copiesSecretPriority}}</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -302,9 +302,9 @@
 			</table>
 			<div id="text{$.pid}copiesSecretPriorityShowScriptArea" style="display: text{($.redHeaderShow=='s')?'block':'none'}" class="MWFFormulaArea" name="copiesSecretPriorityShowScript" title="{{$.lp.showScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------份数密级紧急度------------------------------------------------------------------->
+<!-----------------------------------------------부수·보안등급·긴급도------------------------------------------------------------------->
 
-<!-----------------------------------------------份数------------------------------------------------------------------->
+<!-----------------------------------------------부수------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.copies}} (copies)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -322,15 +322,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copiesEditScriptArea').setStyle('display', 'none')}" name="copiesEdit" text{($.copiesEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copiesEditScriptArea').setStyle('display', 'none')}" name="copiesEdit" text{($.copiesEdit!='y' && $.copiesEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copiesEditScriptArea').setStyle('display', 'block')}" name="copiesEdit" text{($.copiesEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copiesEditScriptArea').setStyle('display', 'none')}" name="copiesEdit" text{($.copiesEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copiesEditScriptArea').setStyle('display', 'none')}" name="copiesEdit" text{($.copiesEdit!='y' && $.copiesEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copiesEditScriptArea').setStyle('display', 'block')}" name="copiesEdit" text{($.copiesEdit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}copiesEditScriptArea" style="display: text{($.copiesEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="copiesEditScript" title="份数编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}copiesEditScriptArea" style="display: text{($.copiesEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="copiesEditScript" title="부수 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -353,9 +353,9 @@
 			<div id="text{$.pid}copiesValueScriptArea" style="display: text{($.copiesValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="copiesValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
 
-<!-----------------------------------------------份数------------------------------------------------------------------->
+<!-----------------------------------------------부수------------------------------------------------------------------->
 
-<!-----------------------------------------------密级------------------------------------------------------------------->
+<!-----------------------------------------------보안 등급------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.secret}} (secret)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -373,15 +373,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}secretEditScriptArea').setStyle('display', 'none')}" name="secretEdit" text{($.secretEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}secretEditScriptArea').setStyle('display', 'none')}" name="secretEdit" text{($.secretEdit!='y' && $.secretEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}secretEditScriptArea').setStyle('display', 'block')}" name="secretEdit" text{($.secretEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}secretEditScriptArea').setStyle('display', 'none')}" name="secretEdit" text{($.secretEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}secretEditScriptArea').setStyle('display', 'none')}" name="secretEdit" text{($.secretEdit!='y' && $.secretEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}secretEditScriptArea').setStyle('display', 'block')}" name="secretEdit" text{($.secretEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}secretEditScriptArea" style="display: text{($.secretEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="secretEditScript" title="密级编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}secretEditScriptArea" style="display: text{($.secretEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="secretEditScript" title="보안 등급 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -403,9 +403,9 @@
 
 			<div id="text{$.pid}secretValueScriptArea" style="display: text{($.secretValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="secretValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------密级------------------------------------------------------------------->
+<!-----------------------------------------------보안 등급------------------------------------------------------------------->
 
-<!-----------------------------------------------紧急度------------------------------------------------------------------->
+<!-----------------------------------------------긴급도------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.priority}} (priority}</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -423,15 +423,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}priorityEditScriptArea').setStyle('display', 'none')}" name="priorityEdit" text{($.priorityEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}priorityEditScriptArea').setStyle('display', 'none')}" name="priorityEdit" text{($.priorityEdit!='y' && $.priorityEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}priorityEditScriptArea').setStyle('display', 'block')}" name="priorityEdit" text{($.priorityEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}priorityEditScriptArea').setStyle('display', 'none')}" name="priorityEdit" text{($.priorityEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}priorityEditScriptArea').setStyle('display', 'none')}" name="priorityEdit" text{($.priorityEdit!='y' && $.priorityEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}priorityEditScriptArea').setStyle('display', 'block')}" name="priorityEdit" text{($.priorityEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}priorityEditScriptArea" style="display: text{($.priorityEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="priorityEditScript" title="紧急度编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}priorityEditScriptArea" style="display: text{($.priorityEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="priorityEditScript" title="긴급도 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -453,9 +453,9 @@
 
 			<div id="text{$.pid}priorityValueScriptArea" style="display: text{($.priorityValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="priorityValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------紧急度------------------------------------------------------------------->
+<!-----------------------------------------------긴급도------------------------------------------------------------------->
 
-<!-----------------------------------------------红头------------------------------------------------------------------->
+<!-----------------------------------------------레드헤더------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.redHeader}} (redHeader)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -473,15 +473,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}redHeaderEditScriptArea').setStyle('display', 'none')}" name="redHeaderEdit" text{($.redHeaderEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}redHeaderEditScriptArea').setStyle('display', 'none')}" name="redHeaderEdit" text{($.redHeaderEdit!='y' && $.redHeaderEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}redHeaderEditScriptArea').setStyle('display', 'block')}" name="redHeaderEdit" text{($.redHeaderEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}redHeaderEditScriptArea').setStyle('display', 'none')}" name="redHeaderEdit" text{($.redHeaderEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}redHeaderEditScriptArea').setStyle('display', 'none')}" name="redHeaderEdit" text{($.redHeaderEdit!='y' && $.redHeaderEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}redHeaderEditScriptArea').setStyle('display', 'block')}" name="redHeaderEdit" text{($.redHeaderEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}redHeaderEditScriptArea" style="display: text{($.redHeaderEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="redHeaderEditScript" title="红头编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}redHeaderEditScriptArea" style="display: text{($.redHeaderEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="redHeaderEditScript" title="레드헤더 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -503,9 +503,9 @@
 
 			<div id="text{$.pid}redHeaderValueScriptArea" style="display: text{($.redHeaderValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="redHeaderValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------红头------------------------------------------------------------------->
+<!-----------------------------------------------레드헤더------------------------------------------------------------------->
 
-<!-----------------------------------------------红线------------------------------------------------------------------->
+<!-----------------------------------------------레드라인------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.redLine}} (redLine)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -520,9 +520,9 @@
 			</table>
 			<div id="text{$.pid}redLineShowScriptArea" style="display: text{($.redHeaderShow=='s')?'block':'none'}" class="MWFFormulaArea" name="redLineShowScript" title="{{$.lp.showScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------红头------------------------------------------------------------------->
+<!-----------------------------------------------레드헤더------------------------------------------------------------------->
 
-<!-----------------------------------------------文号------------------------------------------------------------------->
+<!-----------------------------------------------문서 번호------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.fileNo}} (fileno)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -540,15 +540,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}filenoEditScriptArea').setStyle('display', 'none')}" name="filenoEdit" text{($.filenoEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}filenoEditScriptArea').setStyle('display', 'none')}" name="filenoEdit" text{($.filenoEdit!='y' && $.filenoEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}filenoEditScriptArea').setStyle('display', 'block')}" name="filenoEdit" text{($.filenoEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}filenoEditScriptArea').setStyle('display', 'none')}" name="filenoEdit" text{($.filenoEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}filenoEditScriptArea').setStyle('display', 'none')}" name="filenoEdit" text{($.filenoEdit!='y' && $.filenoEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}filenoEditScriptArea').setStyle('display', 'block')}" name="filenoEdit" text{($.filenoEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}filenoEditScriptArea" style="display: text{($.filenoEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="filenoEditScript" title="文号编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}filenoEditScriptArea" style="display: text{($.filenoEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="filenoEditScript" title="문서 번호 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -570,9 +570,9 @@
 
 			<div id="text{$.pid}filenoValueScriptArea" style="display: text{($.filenoValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="filenoValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------文号------------------------------------------------------------------->
+<!-----------------------------------------------문서 번호------------------------------------------------------------------->
 
-<!-----------------------------------------------签发人------------------------------------------------------------------->
+<!-----------------------------------------------발행인------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.signer}} (signer)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -590,15 +590,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}signerEditScriptArea').setStyle('display', 'none')}" name="signerEdit" text{($.signerEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}signerEditScriptArea').setStyle('display', 'none')}" name="signerEdit" text{($.signerEdit!='y' && $.signerEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}signerEditScriptArea').setStyle('display', 'block')}" name="signerEdit" text{($.signerEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}signerEditScriptArea').setStyle('display', 'none')}" name="signerEdit" text{($.signerEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}signerEditScriptArea').setStyle('display', 'none')}" name="signerEdit" text{($.signerEdit!='y' && $.signerEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}signerEditScriptArea').setStyle('display', 'block')}" name="signerEdit" text{($.signerEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}signerEditScriptArea" style="display: text{($.signerEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="signerEditScript" title="签发人编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}signerEditScriptArea" style="display: text{($.signerEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="signerEditScript" title="발행인 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -620,9 +620,9 @@
 
 			<div id="text{$.pid}signerValueScriptArea" style="display: text{($.signerValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="signerValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------签发人------------------------------------------------------------------->
+<!-----------------------------------------------발행인------------------------------------------------------------------->
 
-<!-----------------------------------------------文件标题------------------------------------------------------------------->
+<!-----------------------------------------------문서 제목------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.subject}} (subject)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -685,9 +685,9 @@
 				</tr>
 			</table>
 		</div>
-<!-----------------------------------------------文件标题------------------------------------------------------------------->
+<!-----------------------------------------------문서 제목------------------------------------------------------------------->
 
-<!-----------------------------------------------主送------------------------------------------------------------------->
+<!-----------------------------------------------수신처------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.mainSend}} (mainSend)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -705,15 +705,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}mainSendEditScriptArea').setStyle('display', 'none')}" name="mainSendEdit" text{($.mainSendEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}mainSendEditScriptArea').setStyle('display', 'none')}" name="mainSendEdit" text{($.mainSendEdit!='y' && $.mainSendEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}mainSendEditScriptArea').setStyle('display', 'block')}" name="mainSendEdit" text{($.mainSendEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}mainSendEditScriptArea').setStyle('display', 'none')}" name="mainSendEdit" text{($.mainSendEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}mainSendEditScriptArea').setStyle('display', 'none')}" name="mainSendEdit" text{($.mainSendEdit!='y' && $.mainSendEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}mainSendEditScriptArea').setStyle('display', 'block')}" name="mainSendEdit" text{($.mainSendEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}mainSendEditScriptArea" style="display: text{($.mainSendEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="mainSendEditScript" title="主送编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}mainSendEditScriptArea" style="display: text{($.mainSendEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="mainSendEditScript" title="수신처 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -735,9 +735,9 @@
 
 			<div id="text{$.pid}mainSendValueScriptArea" style="display: text{($.mainSendValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="mainSendValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------主送------------------------------------------------------------------->
+<!-----------------------------------------------수신처------------------------------------------------------------------->
 
-<!-----------------------------------------------附件------------------------------------------------------------------->
+<!-----------------------------------------------첨부파일------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.attachment}} (attachment)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -755,15 +755,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}attachmentEditScriptArea').setStyle('display', 'none')}" name="attachmentEdit" text{($.attachmentEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}attachmentEditScriptArea').setStyle('display', 'none')}" name="attachmentEdit" text{($.attachmentEdit!='y' && $.attachmentEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}attachmentEditScriptArea').setStyle('display', 'block')}" name="attachmentEdit" text{($.attachmentEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}attachmentEditScriptArea').setStyle('display', 'none')}" name="attachmentEdit" text{($.attachmentEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}attachmentEditScriptArea').setStyle('display', 'none')}" name="attachmentEdit" text{($.attachmentEdit!='y' && $.attachmentEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}attachmentEditScriptArea').setStyle('display', 'block')}" name="attachmentEdit" text{($.attachmentEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}attachmentEditScriptArea" style="display: text{($.attachmentEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="attachmentEditScript" title="附件编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}attachmentEditScriptArea" style="display: text{($.attachmentEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="attachmentEditScript" title="첨부파일 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -785,9 +785,9 @@
 
 			<div id="text{$.pid}attachmentValueScriptArea" style="display: text{($.attachmentValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="attachmentValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------附件------------------------------------------------------------------->
+<!-----------------------------------------------첨부파일------------------------------------------------------------------->
 
-<!-----------------------------------------------附件内容------------------------------------------------------------------->
+<!-----------------------------------------------첨부 내용------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.attachmentText}} (attachment)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -802,9 +802,9 @@
 			</table>
 			<div id="text{$.pid}attachmentTextEditScriptArea" style="display: text{($.attachmentTextEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="attachmentTextEditScript" title="{{$.lp.editScript}} (S)"></div>
 		</div>
-		<!-----------------------------------------------附件内容------------------------------------------------------------------->
+		<!-----------------------------------------------첨부 내용------------------------------------------------------------------->
 
-<!-----------------------------------------------成文单位------------------------------------------------------------------->
+<!-----------------------------------------------작성 기관------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.issuanceUnit}} (issuanceUnit)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -852,9 +852,9 @@
 
 			<div id="text{$.pid}issuanceUnitValueScriptArea" style="display: text{($.issuanceUnitValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="issuanceUnitValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------成文单位------------------------------------------------------------------->
+<!-----------------------------------------------작성 기관------------------------------------------------------------------->
 
-<!-----------------------------------------------成文日期------------------------------------------------------------------->
+<!-----------------------------------------------작성 일자------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.issuanceDate}} (issuanceDate)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -872,15 +872,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}issuanceDateEditScriptArea').setStyle('display', 'none')}" name="issuanceDateEdit" text{($.issuanceDateEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}issuanceDateEditScriptArea').setStyle('display', 'none')}" name="issuanceDateEdit" text{($.issuanceDateEdit!='y' && $.issuanceDateEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}issuanceDateEditScriptArea').setStyle('display', 'block')}" name="issuanceDateEdit" text{($.issuanceDateEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}issuanceDateEditScriptArea').setStyle('display', 'none')}" name="issuanceDateEdit" text{($.issuanceDateEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}issuanceDateEditScriptArea').setStyle('display', 'none')}" name="issuanceDateEdit" text{($.issuanceDateEdit!='y' && $.issuanceDateEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}issuanceDateEditScriptArea').setStyle('display', 'block')}" name="issuanceDateEdit" text{($.issuanceDateEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}issuanceDateEditScriptArea" style="display: text{($.issuanceDateEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="issuanceDateEditScript" title="成文日期编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}issuanceDateEditScriptArea" style="display: text{($.issuanceDateEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="issuanceDateEditScript" title="작성 일자 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -902,9 +902,9 @@
 
 			<div id="text{$.pid}issuanceDateValueScriptArea" style="display: text{($.issuanceDateValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="issuanceDateValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------成文日期------------------------------------------------------------------->
+<!-----------------------------------------------작성 일자------------------------------------------------------------------->
 
-<!-----------------------------------------------附注------------------------------------------------------------------->
+<!-----------------------------------------------비고------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.annotation}} (annotation)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -922,15 +922,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}annotationEditScriptArea').setStyle('display', 'none')}" name="annotationEdit" text{($.annotationEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}annotationEditScriptArea').setStyle('display', 'none')}" name="annotationEdit" text{($.annotationEdit!='y' && $.annotationEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}annotationEditScriptArea').setStyle('display', 'block')}" name="annotationEdit" text{($.annotationEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}annotationEditScriptArea').setStyle('display', 'none')}" name="annotationEdit" text{($.annotationEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}annotationEditScriptArea').setStyle('display', 'none')}" name="annotationEdit" text{($.annotationEdit!='y' && $.annotationEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}annotationEditScriptArea').setStyle('display', 'block')}" name="annotationEdit" text{($.annotationEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}annotationEditScriptArea" style="display: text{($.annotationEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="annotationEditScript" title="附注编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}annotationEditScriptArea" style="display: text{($.annotationEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="annotationEditScript" title="비고 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -952,9 +952,9 @@
 
 			<div id="text{$.pid}annotationValueScriptArea" style="display: text{($.annotationValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="annotationValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------附注------------------------------------------------------------------->
+<!-----------------------------------------------비고------------------------------------------------------------------->
 
-<!-----------------------------------------------抄送------------------------------------------------------------------->
+<!-----------------------------------------------참조------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.copyto}} (copyto)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -972,15 +972,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copytoEditScriptArea').setStyle('display', 'none')}" name="copytoEdit" text{($.copytoEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copytoEditScriptArea').setStyle('display', 'none')}" name="copytoEdit" text{($.copytoEdit!='y' && $.copytoEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copytoEditScriptArea').setStyle('display', 'block')}" name="copytoEdit" text{($.copytoEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copytoEditScriptArea').setStyle('display', 'none')}" name="copytoEdit" text{($.copytoEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copytoEditScriptArea').setStyle('display', 'none')}" name="copytoEdit" text{($.copytoEdit!='y' && $.copytoEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copytoEditScriptArea').setStyle('display', 'block')}" name="copytoEdit" text{($.copytoEdit=='s')?'checked':''} type="radio" value="s"/>스크립트에 따름-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}copytoEditScriptArea" style="display: text{($.copytoEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="copytoEditScript" title="抄送编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}copytoEditScriptArea" style="display: text{($.copytoEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="copytoEditScript" title="참조 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1002,9 +1002,9 @@
 
 			<div id="text{$.pid}copytoValueScriptArea" style="display: text{($.copytoValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="copytoValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------抄送------------------------------------------------------------------->
+<!-----------------------------------------------참조------------------------------------------------------------------->
 
-<!-----------------------------------------------发------------------------------------------------------------------->
+<!-----------------------------------------------발송------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.copyto2}} (copyto2)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -1022,15 +1022,15 @@
 
 			<!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 			<!--				<tr>-->
-			<!--					<td class="editTableTitle">允许编辑:</td>-->
+			<!--					<td class="editTableTitle">편집 허용:</td>-->
 			<!--					<td class="editTableValue">-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copyto2EditScriptArea').setStyle('display', 'none')}" name="copyto2Edit" text{($.copyto2Edit=='y')?'checked':''} type="radio" value="y"/>允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copyto2EditScriptArea').setStyle('display', 'none')}" name="copyto2Edit" text{($.copyto2Edit!='y' && $.copyto2Edit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copyto2EditScriptArea').setStyle('display', 'block')}" name="copyto2Edit" text{($.copyto2Edit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copyto2EditScriptArea').setStyle('display', 'none')}" name="copyto2Edit" text{($.copyto2Edit=='y')?'checked':''} type="radio" value="y"/>허용-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copyto2EditScriptArea').setStyle('display', 'none')}" name="copyto2Edit" text{($.copyto2Edit!='y' && $.copyto2Edit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}copyto2EditScriptArea').setStyle('display', 'block')}" name="copyto2Edit" text{($.copyto2Edit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 			<!--					</td>-->
 			<!--				</tr>-->
 			<!--			</table>-->
-			<!--			<div id="text{$.pid}copyto2EditScriptArea" style="display: text{($.copyto2Edit=='s')?'block':'none'}" class="MWFFormulaArea" name="copyto2EditScript" title="抄送编辑脚本 (S)"></div>-->
+			<!--			<div id="text{$.pid}copyto2EditScriptArea" style="display: text{($.copyto2Edit=='s')?'block':'none'}" class="MWFFormulaArea" name="copyto2EditScript" title="참조 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1052,9 +1052,9 @@
 
 			<div id="text{$.pid}copyto2ValueScriptArea" style="display: text{($.copyto2ValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="copyto2ValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------抄送------------------------------------------------------------------->
+<!-----------------------------------------------참조------------------------------------------------------------------->
 
-<!-----------------------------------------------印发单位------------------------------------------------------------------->
+<!-----------------------------------------------발행 기관------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.editionUnit}} (editionUnit)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -1072,15 +1072,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionUnitEditScriptArea').setStyle('display', 'none')}" name="editionUnitEdit" text{($.editionUnitEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionUnitEditScriptArea').setStyle('display', 'none')}" name="editionUnitEdit" text{($.editionUnitEdit!='y' && $.editionUnitEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionUnitEditScriptArea').setStyle('display', 'block')}" name="editionUnitEdit" text{($.editionUnitEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionUnitEditScriptArea').setStyle('display', 'none')}" name="editionUnitEdit" text{($.editionUnitEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionUnitEditScriptArea').setStyle('display', 'none')}" name="editionUnitEdit" text{($.editionUnitEdit!='y' && $.editionUnitEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionUnitEditScriptArea').setStyle('display', 'block')}" name="editionUnitEdit" text{($.editionUnitEdit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}editionUnitEditScriptArea" style="display: text{($.editionUnitEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="editionUnitEditScript" title="印发单位编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}editionUnitEditScriptArea" style="display: text{($.editionUnitEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="editionUnitEditScript" title="발행 기관 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1102,9 +1102,9 @@
 
 			<div id="text{$.pid}editionUnitValueScriptArea" style="display: text{($.editionUnitValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="editionUnitValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------印发单位------------------------------------------------------------------->
+<!-----------------------------------------------발행 기관------------------------------------------------------------------->
 
-<!-----------------------------------------------印发日期------------------------------------------------------------------->
+<!-----------------------------------------------발행 일자------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.editionDate}} (editionDate)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -1122,15 +1122,15 @@
 
 <!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 <!--				<tr>-->
-<!--					<td class="editTableTitle">允许编辑:</td>-->
+<!--					<td class="editTableTitle">편집 허용:</td>-->
 <!--					<td class="editTableValue">-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionDateEditScriptArea').setStyle('display', 'none')}" name="editionDateEdit" text{($.editionDateEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionDateEditScriptArea').setStyle('display', 'none')}" name="editionDateEdit" text{($.editionDateEdit!='y' && $.editionDateEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionDateEditScriptArea').setStyle('display', 'block')}" name="editionDateEdit" text{($.editionDateEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionDateEditScriptArea').setStyle('display', 'none')}" name="editionDateEdit" text{($.editionDateEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionDateEditScriptArea').setStyle('display', 'none')}" name="editionDateEdit" text{($.editionDateEdit!='y' && $.editionDateEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}editionDateEditScriptArea').setStyle('display', 'block')}" name="editionDateEdit" text{($.editionDateEdit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 <!--					</td>-->
 <!--				</tr>-->
 <!--			</table>-->
-<!--			<div id="text{$.pid}editionDateEditScriptArea" style="display: text{($.editionDateEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="editionDateEditScript" title="印发单位编辑脚本 (S)"></div>-->
+<!--			<div id="text{$.pid}editionDateEditScriptArea" style="display: text{($.editionDateEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="editionDateEditScript" title="발행 기관 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1152,9 +1152,9 @@
 
 			<div id="text{$.pid}editionDateValueScriptArea" style="display: text{($.editionDateValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="editionDateValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------印发日期------------------------------------------------------------------->
+<!-----------------------------------------------발행 일자------------------------------------------------------------------->
 
-<!-----------------------------------------------会议出席------------------------------------------------------------------->
+<!-----------------------------------------------회의 참석------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.meetingAttend}} (meetingAttend)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -1172,15 +1172,15 @@
 
 			<!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 			<!--				<tr>-->
-			<!--					<td class="editTableTitle">允许编辑:</td>-->
+			<!--					<td class="editTableTitle">편집 허용:</td>-->
 			<!--					<td class="editTableValue">-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingAttendEditScriptArea').setStyle('display', 'none')}" name="meetingAttendEdit" text{($.meetingAttendEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingAttendEditScriptArea').setStyle('display', 'none')}" name="meetingAttendEdit" text{($.meetingAttendEdit!='y' && $.meetingAttendEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingAttendEditScriptArea').setStyle('display', 'block')}" name="meetingAttendEdit" text{($.meetingAttendEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingAttendEditScriptArea').setStyle('display', 'none')}" name="meetingAttendEdit" text{($.meetingAttendEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingAttendEditScriptArea').setStyle('display', 'none')}" name="meetingAttendEdit" text{($.meetingAttendEdit!='y' && $.meetingAttendEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingAttendEditScriptArea').setStyle('display', 'block')}" name="meetingAttendEdit" text{($.meetingAttendEdit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 			<!--					</td>-->
 			<!--				</tr>-->
 			<!--			</table>-->
-			<!--			<div id="text{$.pid}meetingAttendEditScriptArea" style="display: text{($.meetingAttendEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingAttendEditScript" title="会议出席编辑脚本 (S)"></div>-->
+			<!--			<div id="text{$.pid}meetingAttendEditScriptArea" style="display: text{($.meetingAttendEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingAttendEditScript" title="회의 참석 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1202,9 +1202,9 @@
 
 			<div id="text{$.pid}meetingAttendValueScriptArea" style="display: text{($.meetingAttendValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="meetingAttendValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------会议出席------------------------------------------------------------------->
+<!-----------------------------------------------회의 참석------------------------------------------------------------------->
 
-<!-----------------------------------------------会议请假------------------------------------------------------------------->
+<!-----------------------------------------------회의 불참------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.meetingLeave}} (meetingLeave)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -1222,15 +1222,15 @@
 
 			<!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 			<!--				<tr>-->
-			<!--					<td class="editTableTitle">允许编辑:</td>-->
+			<!--					<td class="editTableTitle">편집 허용:</td>-->
 			<!--					<td class="editTableValue">-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingLeaveEditScriptArea').setStyle('display', 'none')}" name="meetingLeaveEdit" text{($.meetingLeaveEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingLeaveEditScriptArea').setStyle('display', 'none')}" name="meetingLeaveEdit" text{($.meetingLeaveEdit!='y' && $.meetingLeaveEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingLeaveEditScriptArea').setStyle('display', 'block')}" name="meetingLeaveEdit" text{($.meetingLeaveEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingLeaveEditScriptArea').setStyle('display', 'none')}" name="meetingLeaveEdit" text{($.meetingLeaveEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingLeaveEditScriptArea').setStyle('display', 'none')}" name="meetingLeaveEdit" text{($.meetingLeaveEdit!='y' && $.meetingLeaveEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingLeaveEditScriptArea').setStyle('display', 'block')}" name="meetingLeaveEdit" text{($.meetingLeaveEdit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 			<!--					</td>-->
 			<!--				</tr>-->
 			<!--			</table>-->
-			<!--			<div id="text{$.pid}meetingLeaveEditScriptArea" style="display: text{($.meetingLeaveEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingLeaveEditScript" title="会议请假编辑脚本 (S)"></div>-->
+			<!--			<div id="text{$.pid}meetingLeaveEditScriptArea" style="display: text{($.meetingLeaveEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingLeaveEditScript" title="회의 불참 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1252,9 +1252,9 @@
 
 			<div id="text{$.pid}meetingLeaveValueScriptArea" style="display: text{($.meetingLeaveValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="meetingLeaveValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------会议请假------------------------------------------------------------------->
+<!-----------------------------------------------회의 불참------------------------------------------------------------------->
 
-<!-----------------------------------------------会议列席------------------------------------------------------------------->
+<!-----------------------------------------------회의 배석------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.meetingSit}} (meetingSit)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -1272,15 +1272,15 @@
 
 			<!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 			<!--				<tr>-->
-			<!--					<td class="editTableTitle">允许编辑:</td>-->
+			<!--					<td class="editTableTitle">편집 허용:</td>-->
 			<!--					<td class="editTableValue">-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingSitEditScriptArea').setStyle('display', 'none')}" name="meetingSitEdit" text{($.meetingSitEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingSitEditScriptArea').setStyle('display', 'none')}" name="meetingSitEdit" text{($.meetingSitEdit!='y' && $.meetingSitEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingSitEditScriptArea').setStyle('display', 'block')}" name="meetingSitEdit" text{($.meetingSitEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingSitEditScriptArea').setStyle('display', 'none')}" name="meetingSitEdit" text{($.meetingSitEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingSitEditScriptArea').setStyle('display', 'none')}" name="meetingSitEdit" text{($.meetingSitEdit!='y' && $.meetingSitEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingSitEditScriptArea').setStyle('display', 'block')}" name="meetingSitEdit" text{($.meetingSitEdit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 			<!--					</td>-->
 			<!--				</tr>-->
 			<!--			</table>-->
-			<!--			<div id="text{$.pid}meetingSitEditScriptArea" style="display: text{($.meetingSitEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingSitEditScript" title="会议列席编辑脚本 (S)"></div>-->
+			<!--			<div id="text{$.pid}meetingSitEditScriptArea" style="display: text{($.meetingSitEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingSitEditScript" title="회의 배석 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1302,9 +1302,9 @@
 
 			<div id="text{$.pid}meetingSitValueScriptArea" style="display: text{($.meetingSitValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="meetingSitValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------会议列席------------------------------------------------------------------->
+<!-----------------------------------------------회의 배석------------------------------------------------------------------->
 
-<!-----------------------------------------------会议记录------------------------------------------------------------------->
+<!-----------------------------------------------회의록------------------------------------------------------------------->
 		<div onclick="var node = this.getNext(); node.setStyle('display', ((node.getStyle('display')=='none') ? 'block' : 'none'));" style="cursor: pointer; height: 24px; padding-left:5px; text-align: left; line-height: 24px; border-top: 1px solid #cccccc; border-bottom: 1px solid #999999; font-weight: bold; background-color: #eeeeee;">{{$.lp.meetingRecord}} (meetingRecord)</div>
 		<div style="display: none">
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -1322,15 +1322,15 @@
 
 			<!--			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
 			<!--				<tr>-->
-			<!--					<td class="editTableTitle">允许编辑:</td>-->
+			<!--					<td class="editTableTitle">편집 허용:</td>-->
 			<!--					<td class="editTableValue">-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingRecordEditScriptArea').setStyle('display', 'none')}" name="meetingRecordEdit" text{($.meetingRecordEdit=='y')?'checked':''} type="radio" value="y"/>允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingRecordEditScriptArea').setStyle('display', 'none')}" name="meetingRecordEdit" text{($.meetingRecordEdit!='y' && $.meetingRecordEdit!='s')?'checked':''} type="radio" value="n"/>不允许-->
-			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingRecordEditScriptArea').setStyle('display', 'block')}" name="meetingRecordEdit" text{($.meetingRecordEdit=='s')?'checked':''} type="radio" value="s"/>根据脚本-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingRecordEditScriptArea').setStyle('display', 'none')}" name="meetingRecordEdit" text{($.meetingRecordEdit=='y')?'checked':''} type="radio" value="y"/>허용-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingRecordEditScriptArea').setStyle('display', 'none')}" name="meetingRecordEdit" text{($.meetingRecordEdit!='y' && $.meetingRecordEdit!='s')?'checked':''} type="radio" value="n"/>허용 안 함-->
+			<!--						<input class="editTableRadio" onclick="if (this.checked) {$('text{$.pid}meetingRecordEditScriptArea').setStyle('display', 'block')}" name="meetingRecordEdit" text{($.meetingRecordEdit=='s')?'checked':''} type="radio" value="s"/>스크립트 기준-->
 			<!--					</td>-->
 			<!--				</tr>-->
 			<!--			</table>-->
-			<!--			<div id="text{$.pid}meetingRecordEditScriptArea" style="display: text{($.meetingRecordEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingRecordEditScript" title="会议记录编辑脚本 (S)"></div>-->
+			<!--			<div id="text{$.pid}meetingRecordEditScriptArea" style="display: text{($.meetingRecordEdit=='s')?'block':'none'}" class="MWFFormulaArea" name="meetingRecordEditScript" title="회의록 편집 스크립트 (S)"></div>-->
 
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
 				<tr>
@@ -1352,13 +1352,13 @@
 
 			<div id="text{$.pid}meetingRecordValueScriptArea" style="display: text{($.meetingRecordValueType=='script')?'block':'none'}" class="MWFFormulaArea" name="meetingRecordValueScript" title="{{$.lp.bindValueScript}} (S)"></div>
 		</div>
-<!-----------------------------------------------会议记录------------------------------------------------------------------->
+<!-----------------------------------------------회의록------------------------------------------------------------------->
 
 		<div class="MWFMaplist" name="customFields" title="{{$.lp.customElement}}"></div>
 
 	</div>
 	<div title="{{$.lp.power}}"  class="MWFTab">
-        <!-- 可阅读配置 -->
+        <!-- 열람 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.readConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.readConfigInfo}}</div>
         
@@ -1419,7 +1419,7 @@
             </table>
         </div>
         
-        <!-- 可编辑配置 -->
+        <!-- 편집 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.editConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.editConfigInfo}}</div>
 

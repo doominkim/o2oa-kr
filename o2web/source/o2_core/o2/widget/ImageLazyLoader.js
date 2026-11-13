@@ -77,7 +77,7 @@ o2.widget.ImageLazyLoader = o2.ImageLazyLoader = new Class({
                     image1 = this.addAttribute(image1, "onerror", "MWF.xDesktop.setImageSrc()");
 
                     var src =  this.getAttributeValue(image, "src");
-                    if( src.substr(0, 5) !== "data:" ){ //不是base64位
+                    if( src.substr(0, 5) !== "data:" ){ //base64가 아님
                         var size = this.getSize(image);
                         if( size ){
                             image1 = this.removeAttribute(image1, "src");
@@ -115,7 +115,7 @@ o2.widget.ImageLazyLoader = o2.ImageLazyLoader = new Class({
                     var image = images[i];
                     var image1 = this.removeAttribute(image, "onerror");
                     // var src =  this.getAttributeValue(image, "src");
-                    // if( src.substr(0, 5) !== "data:" ){ //不是base64位
+                    // if( src.substr(0, 5) !== "data:" ){ //base64가 아님
                     //     var size = this.getSize(image);
                     //     if( size ){
                     //         image1 = this.replaceStyles(image1, {
@@ -206,9 +206,9 @@ o2.widget.ImageLazyLoader = o2.ImageLazyLoader = new Class({
         return str.replace( regexp, "" );
     },
     replaceStyles: function(str, object){
-        /*object 参数 {
-           "width" : "100px", //添加或替换
-           "height": "" //删除
+        /*object 매개변수 {
+           "width" : "100px", //추가 또는 교체
+           "height": "" //삭제
         }*/
         var regexp = new RegExp( this.getAttrRegExp("style") , "i");
         var array = str.match( regexp );
@@ -226,7 +226,7 @@ o2.widget.ImageLazyLoader = o2.ImageLazyLoader = new Class({
                 }
             }
         }
-        if(o2.typeOf(array) === "array" && array[0]){ //原先有style
+        if(o2.typeOf(array) === "array" && array[0]){ //원래 style이 있음
             if( newArray.length === 0 ){
                 return str.replace(array[0], "")
             }else{
@@ -241,7 +241,7 @@ o2.widget.ImageLazyLoader = o2.ImageLazyLoader = new Class({
         }
     },
     getSize: function(imgStr){
-        //获取占位图片高宽，先从style获取高宽，没有从data-width获取，并判断maxWidth
+        //자리표시 이미지의 너비와 높이 조회. 먼저 style에서 조회하고 없으면 data-width에서 조회하며 maxWidth를 판단
         var width="", height="", maxWidth="";
         var style = this.getAttributeValue(imgStr, "style");
         var styles = style.split(";");

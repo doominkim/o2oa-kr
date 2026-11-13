@@ -46,7 +46,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Manual", description = "流程平台人工活动.")
+@Schema(name = "Manual", description = "프로세스 플랫폼 수동 활동.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Manual.table, uniqueConstraints = {
@@ -67,12 +67,12 @@ public class Manual extends Activity {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -108,7 +108,7 @@ public class Manual extends Activity {
 		this.properties = properties;
 	}
 
-	@FieldDescribe("流程参与者作为待办人设置.")
+	@FieldDescribe("프로세스 참여자를 결재 대기자로 설정.")
 	@Transient
 	private Participant taskParticipant;
 
@@ -146,7 +146,7 @@ public class Manual extends Activity {
 
 	public static final String ALLOWADDTASK_FIELDNAME = "allowAddTask";
 	@Transient
-	@FieldDescribe("是否允许加签")
+	@FieldDescribe("추가 결재 허용 여부")
 	private Boolean allowAddTask;
 
 	public Boolean getAllowAddTask() {
@@ -164,7 +164,7 @@ public class Manual extends Activity {
 
 	public static final String defaultAddTaskType_FIELDNAME = "defaultAddTaskType";
 	@Transient
-	@FieldDescribe("默认加签方式")
+	@FieldDescribe("기본 결재자 추가 방식")
 	private String defaultAddTaskType;
 
 	public String getDefaultAddTaskType() {
@@ -182,7 +182,7 @@ public class Manual extends Activity {
 
 	public static final String defaultAddTaskMode_FIELDNAME = "defaultAddTaskMode";
 	@Transient
-	@FieldDescribe("默认处理方式")
+	@FieldDescribe("기본 처리 방식")
 	private String defaultAddTaskMode;
 
 	public String getDefaultAddTaskMode() {
@@ -201,7 +201,7 @@ public class Manual extends Activity {
 	public static final String PROCESSINGTASKONCEUNDERSAMEPERSON_FIELDNAME = "processingTaskOnceUnderSamePerson";
 	@Deprecated(since = "如果使用tickets的distingushedName,那么这个设置将要废弃.")
 	@Transient
-	@FieldDescribe("同一处理人不同身份待办合并处理一次.")
+	@FieldDescribe("동일 처리자의 다른 신분 결재 대기를 한 번에 병합 처리.")
 	private Boolean processingTaskOnceUnderSamePerson;
 
 	public Boolean getProcessingTaskOnceUnderSamePerson() {
@@ -219,7 +219,7 @@ public class Manual extends Activity {
 
 	public static final String ALLOWGOBACK_FIELDNAME = "allowGoBack";
 	@Transient
-	@FieldDescribe("是否允许退回.")
+	@FieldDescribe("반송 허용 여부.")
 	// @since 8.0.2
 	private Boolean allowGoBack;
 
@@ -238,7 +238,7 @@ public class Manual extends Activity {
 
 	public static final String GOBACKCONFIG_FIELDNAME = "goBackConfig";
 	@Transient
-	@FieldDescribe("回退配置.")
+	@FieldDescribe("반송 설정.")
 	// @since 8.0.2
 	private GoBackConfig goBackConfig;
 
@@ -257,7 +257,7 @@ public class Manual extends Activity {
 
 	public static final String MANUALAFTERPROCESSINGSCRIPT_FIELDNAME = "manualAfterProcessingScript";
 	@Transient
-	@FieldDescribe("人工环节工作流转后执行脚本.")
+	@FieldDescribe("수동 단계 업무 문서 진행 후 실행 스크립트.")
 	// @since 8.1.0
 	private String manualAfterProcessingScript;
 
@@ -276,7 +276,7 @@ public class Manual extends Activity {
 
 	public static final String MANUALAFTERPROCESSINGSCRIPTTEXT_FIELDNAME = "manualAfterProcessingScriptText";
 	@Transient
-	@FieldDescribe("人工环节工作流转后执行脚本文本.")
+	@FieldDescribe("수동 단계 업무 문서 진행 후 실행 스크립트 텍스트.")
 	// @since 8.1.0
 	private String manualAfterProcessingScriptText;
 
@@ -333,7 +333,7 @@ public class Manual extends Activity {
 
 	public static final String ALLOWTERMINATE_FIELDNAME = "allowTerminate";
 	@Transient
-	@FieldDescribe("是否允许终止.")
+	@FieldDescribe("종료 허용 여부.")
 	// @since 8.2.0
 	private Boolean allowTerminate;
 
@@ -350,50 +350,50 @@ public class Manual extends Activity {
 		this.properties.setAllowTerminate(allowTerminate);
 	}
 
-	@FieldDescribe("分组.")
+	@FieldDescribe("그룹.")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + group_FIELDNAME)
 	private String group;
 
-	@FieldDescribe("意见分组.")
+	@FieldDescribe("의견 그룹.")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + opinionGroup_FIELDNAME)
 	private String opinionGroup;
 
-	@FieldDescribe("节点名称.")
+	@FieldDescribe("노드 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String name;
 
 	@Flag
-	@FieldDescribe("节点别名.")
+	@FieldDescribe("노드 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String alias;
 
-	@FieldDescribe("节点唯一标识")
+	@FieldDescribe("노드 고유 식별자")
 	@Column(length = length_64B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String unique = createId();
 
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	@IdReference(Process.class)
-	@FieldDescribe("流程标识,不为空.")
+	@FieldDescribe("프로세스 식별자, 비어 있을 수 없음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
-	@FieldDescribe("节点位置.")
+	@FieldDescribe("노드 위치.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + position_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String position;
 
-	@FieldDescribe("前端自定内容.")
+	@FieldDescribe("프런트엔드 사용자 정의 내용.")
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + extension_FIELDNAME)
 	@Basic(fetch = FetchType.EAGER)
 	@Lob
@@ -401,13 +401,13 @@ public class Manual extends Activity {
 	private String extension;
 
 	@IdReference(Form.class)
-	@FieldDescribe("节点使用的表单.")
+	@FieldDescribe("노드에서 사용하는 양식.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + form_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + form_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String form;
 
-	@FieldDescribe("待阅人名称,存储 Identity,多值.")
+	@FieldDescribe("열람 대기자 이름, Identity 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readIdentityList_FIELDNAME
@@ -418,7 +418,7 @@ public class Manual extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readIdentityList;
 
-	@FieldDescribe("待阅组织名称,存储unit,多值.")
+	@FieldDescribe("열람 대기 조직 이름, unit 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readUnitList_FIELDNAME
@@ -429,7 +429,7 @@ public class Manual extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readUnitList;
 
-	@FieldDescribe("待阅群组名称,存储group,多值.")
+	@FieldDescribe("열람 대기 그룹 이름, group 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readGroupList_FIELDNAME
@@ -441,26 +441,26 @@ public class Manual extends Activity {
 	private List<String> readGroupList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("待阅人脚本.")
+	@FieldDescribe("열람 대기자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + readScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readScript;
 
-	@FieldDescribe("待阅人脚本文本.")
+	@FieldDescribe("열람 대기자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + readScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readScriptText;
 
-	@FieldDescribe("待阅角色定义内容.")
+	@FieldDescribe("열람 대기 역할 정의 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + readDuty_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readDuty;
 
-	@FieldDescribe("活动待阅人员data数据路径.")
+	@FieldDescribe("활동 열람 대기 사용자 data 데이터 경로.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readDataPathList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readDataPathList_FIELDNAME
@@ -471,7 +471,7 @@ public class Manual extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readDataPathList;
 
-	@FieldDescribe("参与人名称,多值.")
+	@FieldDescribe("참여자 이름, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -482,7 +482,7 @@ public class Manual extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> reviewIdentityList;
 
-	@FieldDescribe("参与人组织名称,多值.")
+	@FieldDescribe("참여자 조직 이름, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + reviewUnitList_FIELDNAME
@@ -493,7 +493,7 @@ public class Manual extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> reviewUnitList;
 
-	@FieldDescribe("参与人群组名称,存储group,多值.")
+	@FieldDescribe("참여자 그룹 이름, group 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + reviewGroupList_FIELDNAME
@@ -505,26 +505,26 @@ public class Manual extends Activity {
 	private List<String> reviewGroupList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("参与人脚本.")
+	@FieldDescribe("참여자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + reviewScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewScript;
 
-	@FieldDescribe("参与人脚本文本.")
+	@FieldDescribe("참여자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + reviewScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewScriptText;
 
-	@FieldDescribe("参阅角色定义内容.")
+	@FieldDescribe("참조 열람 역할 정의 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + reviewDuty_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewDuty;
 
-	@FieldDescribe("参阅人员data数据路径.")
+	@FieldDescribe("참조 열람 사용자 data 데이터 경로.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewDataPathList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -536,12 +536,12 @@ public class Manual extends Activity {
 	private List<String> reviewDataPathList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动到达前事件脚本.")
+	@FieldDescribe("활동 도착 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeArriveScript;
 
-	@FieldDescribe("活动到达前事件脚本文本.")
+	@FieldDescribe("활동 도착 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeArriveScriptText_FIELDNAME)
@@ -549,12 +549,12 @@ public class Manual extends Activity {
 	private String beforeArriveScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动到达后事件脚本.")
+	@FieldDescribe("활동 도착 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterArriveScript;
 
-	@FieldDescribe("活动到达后事件脚本文本.")
+	@FieldDescribe("활동 도착 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterArriveScriptText_FIELDNAME)
@@ -562,12 +562,12 @@ public class Manual extends Activity {
 	private String afterArriveScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动执行前事件脚本.")
+	@FieldDescribe("활동 실행 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeExecuteScript;
 
-	@FieldDescribe("活动执行前事件脚本文本.")
+	@FieldDescribe("활동 실행 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeExecuteScriptText_FIELDNAME)
@@ -575,12 +575,12 @@ public class Manual extends Activity {
 	private String beforeExecuteScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动执行后事件脚本.")
+	@FieldDescribe("활동 실행 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterExecuteScript;
 
-	@FieldDescribe("活动执行后事件脚本文本.")
+	@FieldDescribe("활동 실행 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterExecuteScriptText_FIELDNAME)
@@ -588,12 +588,12 @@ public class Manual extends Activity {
 	private String afterExecuteScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("路由查询前事件脚本.")
+	@FieldDescribe("경로 조회 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeInquireScript;
 
-	@FieldDescribe("路由查询前事件脚本文本.")
+	@FieldDescribe("경로 조회 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeInquireScriptText_FIELDNAME)
@@ -601,31 +601,31 @@ public class Manual extends Activity {
 	private String beforeInquireScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("路由查询后事件脚本.")
+	@FieldDescribe("경로 조회 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterInquireScript;
 
-	@FieldDescribe("路由查询后事件脚本文本.")
+	@FieldDescribe("경로 조회 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterInquireScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterInquireScriptText;
 
-	@FieldDescribe("允许调度")
+	@FieldDescribe("스케줄링 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowReroute_FIELDNAME)
 	private Boolean allowReroute;
 
-	@FieldDescribe("允许调度到此节点")
+	@FieldDescribe("이 노드로의 스케줄링 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowRerouteTo_FIELDNAME)
 	private Boolean allowRerouteTo;
 
 	public static final String routeList_FIELDNAME = "routeList";
 	@IdReference(Route.class)
-	@FieldDescribe("出口路由,多值.")
+	@FieldDescribe("출구 경로, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ routeList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + routeList_FIELDNAME
@@ -637,7 +637,7 @@ public class Manual extends Activity {
 	private List<String> routeList;
 
 	public static final String taskIdentityList_FIELDNAME = "taskIdentityList";
-	@FieldDescribe("人工节点的待办人名称,存储 Identity name,多值.")
+	@FieldDescribe("수동 노드의 결재 대기자 이름, Identity name 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ taskIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + taskIdentityList_FIELDNAME
@@ -649,7 +649,7 @@ public class Manual extends Activity {
 	private List<String> taskIdentityList;
 
 	public static final String taskUnitList_FIELDNAME = "taskUnitList";
-	@FieldDescribe("人工节点的待办部门名称,存储 Unit name,多值.")
+	@FieldDescribe("수동 노드의 결재 대기 부서 이름, Unit name 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ taskUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + taskUnitList_FIELDNAME
@@ -661,7 +661,7 @@ public class Manual extends Activity {
 	private List<String> taskUnitList;
 
 	public static final String taskGroupList_FIELDNAME = "taskGroupList";
-	@FieldDescribe("待办人群组名称,存储group,多值.")
+	@FieldDescribe("결재 대기 그룹 이름, group 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ taskGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + taskGroupList_FIELDNAME
@@ -674,13 +674,13 @@ public class Manual extends Activity {
 
 	public static final String taskScript_FIELDNAME = "taskScript";
 	@IdReference(Script.class)
-	@FieldDescribe("待办人脚本.")
+	@FieldDescribe("결재 대기자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + taskScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String taskScript;
 
 	public static final String taskScriptText_FIELDNAME = "taskScriptText";
-	@FieldDescribe("待办人脚本文本.")
+	@FieldDescribe("결재 대기자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + taskScriptText_FIELDNAME)
@@ -688,7 +688,7 @@ public class Manual extends Activity {
 	private String taskScriptText;
 
 	public static final String taskExpireType_FIELDNAME = "taskExpireType";
-	@FieldDescribe("过期方式.")
+	@FieldDescribe("만료 방식.")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ExpireType.length, name = ColumnNamePrefix + taskExpireType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + taskExpireType_FIELDNAME)
@@ -696,32 +696,32 @@ public class Manual extends Activity {
 	private ExpireType taskExpireType = ExpireType.never;
 
 	public static final String taskExpireDay_FIELDNAME = "taskExpireDay";
-	@FieldDescribe("过期日期.")
+	@FieldDescribe("만료 날짜.")
 	@Column(name = ColumnNamePrefix + taskExpireDay_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer taskExpireDay;
 
 	public static final String taskExpireHour_FIELDNAME = "taskExpireHour";
-	@FieldDescribe("过期小时.")
+	@FieldDescribe("만료 시간(시).")
 	@Column(name = ColumnNamePrefix + taskExpireHour_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer taskExpireHour;
 
 	public static final String taskExpireWorkTime_FIELDNAME = "taskExpireWorkTime";
-	@FieldDescribe("过期是否是工作时间.")
+	@FieldDescribe("만료 시간의 근무 시간 기준 여부.")
 	@Column(name = ColumnNamePrefix + taskExpireWorkTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean taskExpireWorkTime;
 
 	public static final String taskExpireScript_FIELDNAME = "taskExpireScript";
 	@IdReference(Script.class)
-	@FieldDescribe("过期时间设定脚本.")
+	@FieldDescribe("만료 시간 설정 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + taskExpireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String taskExpireScript;
 
 	public static final String taskExpireScriptText_FIELDNAME = "taskExpireScriptText";
-	@FieldDescribe("过期时间设定脚本文本.")
+	@FieldDescribe("만료 시간 설정 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + taskExpireScriptText_FIELDNAME)
@@ -729,7 +729,7 @@ public class Manual extends Activity {
 	private String taskExpireScriptText;
 
 	public static final String taskDuty_FIELDNAME = "taskDuty";
-	@FieldDescribe("待办角色定义内容.")
+	@FieldDescribe("결재 대기 역할 정의 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + taskDuty_FIELDNAME)
@@ -737,7 +737,7 @@ public class Manual extends Activity {
 	private String taskDuty;
 
 	public static final String taskDataPathList_FIELDNAME = "taskDataPathList";
-	@FieldDescribe("活动待办人员data数据路径.")
+	@FieldDescribe("활동 결재 대기 사용자 data 데이터 경로.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + IndexNameMiddle
 			+ taskDataPathList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + taskDataPathList_FIELDNAME
@@ -749,67 +749,67 @@ public class Manual extends Activity {
 	private List<String> taskDataPathList;
 
 	public static final String allowReset_FIELDNAME = "allowReset";
-	@FieldDescribe("允许重置处理人")
+	@FieldDescribe("처리자 재설정 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowReset_FIELDNAME)
 	private Boolean allowReset;
 
 	public static final String allowRetract_FIELDNAME = "allowRetract";
-	@FieldDescribe("允许工作召回")
+	@FieldDescribe("업무 문서 회수 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowRetract_FIELDNAME)
 	private Boolean allowRetract;
 
 	public static final String allowRollback_FIELDNAME = "allowRollback";
-	@FieldDescribe("允许回滚")
+	@FieldDescribe("롤백 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowRollback_FIELDNAME)
 	private Boolean allowRollback;
 
 	public static final String allowDeleteWork_FIELDNAME = "allowDeleteWork";
-	@FieldDescribe("允许删除Work")
+	@FieldDescribe("Work 삭제 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowDeleteWork_FIELDNAME)
 	private Boolean allowDeleteWork;
 
 	public static final String allowRapid_FIELDNAME = "allowRapid";
-	@FieldDescribe("允许快速处理。")
+	@FieldDescribe("빠른 처리 허용.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowRapid_FIELDNAME)
 	private Boolean allowRapid;
 
 	public static final String allowAddSplit_FIELDNAME = "allowAddSplit";
-	@FieldDescribe("允许在会签拆分状态下增加会签分支.")
+	@FieldDescribe("합의 분할 상태에서 합의 분기 추가 허용.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowAddSplit_FIELDNAME)
 	private Boolean allowAddSplit;
 
 	public static final String allowPress_FIELDNAME = "allowPress";
-	@FieldDescribe("允许提醒.")
+	@FieldDescribe("알림 허용.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowPress_FIELDNAME)
 	private Boolean allowPress;
 
 	public static final String allowPause_FIELDNAME = "allowPause";
-	@FieldDescribe("允许暂停待办的计时.")
+	@FieldDescribe("결재 대기 타이머 일시 중지 허용.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowPause_FIELDNAME)
 	private Boolean allowPause;
 
 	public static final String resetRange_FIELDNAME = "resetRange";
-	@FieldDescribe("重置范围.")
+	@FieldDescribe("재설정 범위.")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + resetRange_FIELDNAME)
 	private String resetRange;
 
 	public static final String resetCount_FIELDNAME = "resetCount";
-	@FieldDescribe("允许最大重置次数.")
+	@FieldDescribe("최대 재설정 횟수.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + resetCount_FIELDNAME)
 	private Integer resetCount;
 
 	public static final String manualMode_FIELDNAME = "manualMode";
-	@FieldDescribe("人工节点的处理方式.")
+	@FieldDescribe("수동 노드의 처리 방식.")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ManualMode.length, name = ColumnNamePrefix + manualMode_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + manualMode_FIELDNAME)
@@ -818,14 +818,14 @@ public class Manual extends Activity {
 
 	public static final String manualBeforeTaskScript_FIELDNAME = "manualBeforeTaskScript";
 	@IdReference(Script.class)
-	@FieldDescribe("待办执行前脚本.")
+	@FieldDescribe("결재 대기 실행 전 스크립트.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ manualBeforeTaskScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String manualBeforeTaskScript;
 
 	public static final String manualBeforeTaskScriptText_FIELDNAME = "manualBeforeTaskScriptText";
-	@FieldDescribe("待办执行前脚本文本.")
+	@FieldDescribe("결재 대기 실행 전 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + manualBeforeTaskScriptText_FIELDNAME)
@@ -834,14 +834,14 @@ public class Manual extends Activity {
 
 	public static final String manualAfterTaskScript_FIELDNAME = "manualAfterTaskScript";
 	@IdReference(Script.class)
-	@FieldDescribe("待办执行后脚本.")
+	@FieldDescribe("결재 대기 실행 후 스크립트.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ manualAfterTaskScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String manualAfterTaskScript;
 
 	public static final String manualAfterTaskScriptText_FIELDNAME = "manualAfterTaskScriptText";
-	@FieldDescribe("待办执行后脚本文本.")
+	@FieldDescribe("결재 대기 실행 후 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + manualAfterTaskScriptText_FIELDNAME)
@@ -850,14 +850,14 @@ public class Manual extends Activity {
 
 	public static final String manualStayScript_FIELDNAME = "manualStayScript";
 	@IdReference(Script.class)
-	@FieldDescribe("人工活动有停留脚本.")
+	@FieldDescribe("수동 활동 체류 스크립트.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ manualStayScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String manualStayScript;
 
 	public static final String manualStayScriptText_FIELDNAME = "manualStayScriptText";
-	@FieldDescribe("人工活动有停留脚本文本.")
+	@FieldDescribe("수동 활동 체류 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + manualStayScriptText_FIELDNAME)
@@ -865,31 +865,31 @@ public class Manual extends Activity {
 	private String manualStayScriptText;
 
 	public static final String manualMergeSameJobActivity_FIELDNAME = "manualMergeSameJobActivity";
-	@FieldDescribe("合并相同job相同活动的工作.")
+	@FieldDescribe("동일 job 동일 활동의 업무 문서 병합.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + manualMergeSameJobActivity_FIELDNAME)
 	private Boolean manualMergeSameJobActivity;
 
 	public static final String manualUncompletedTaskToRead_FIELDNAME = "manualUncompletedTaskToRead";
-	@FieldDescribe("人工活动中将未处理的待办转为待阅.")
+	@FieldDescribe("수동 활동에서 미처리 결재 대기를 열람 대기로 전환.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + manualUncompletedTaskToRead_FIELDNAME)
 	private Boolean manualUncompletedTaskToRead;
 
 	@IdReference(Script.class)
-	@FieldDescribe("生成displayLog脚本.")
+	@FieldDescribe("displayLog 생성 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + displayLogScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String displayLogScript;
 
-	@FieldDescribe("生成displayLog脚本文本.")
+	@FieldDescribe("displayLog 생성 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + displayLogScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String displayLogScriptText;
 
-	@FieldDescribe("重置处理人脚本文本.")
+	@FieldDescribe("처리자 재설정 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + resetRangeScriptText_FIELDNAME)
@@ -897,12 +897,12 @@ public class Manual extends Activity {
 	private String resetRangeScriptText;
 
 	public static final String edition_FIELDNAME = "edition";
-	@FieldDescribe("版本编码.")
+	@FieldDescribe("버전 코드.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + edition_FIELDNAME)
 	private String edition;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)

@@ -25,7 +25,7 @@ import com.x.processplatform.core.entity.content.WorkCompleted;
 import com.x.processplatform.core.entity.element.Application;
 
 /**
- * 在一个应用的管理状态下列示filter的上一页.不需要权限.同时需要添加一个permission
+ * 앱 관리 상태에서 filter 이전 페이지 목록 조회. 권한 불필요. 동시에 permission 추가 필요
  */
 class ActionManageListPrevFilter extends BaseAction {
 
@@ -61,7 +61,7 @@ class ActionManageListPrevFilter extends BaseAction {
 			}
 			result = this.standardListPrev(Wo.copier, id, count, JpaObject.sequence_FIELDNAME, equals, null, likes, ins,
 					null, null, null, null, true, DESC);
-			/* 添加权限 */
+			/* 권한 추가 */
 			if (null != result.getData()) {
 				for (Wo wo : result.getData()) {
 					WorkCompleted o = emc.find(wo.getId(), WorkCompleted.class);
@@ -76,16 +76,16 @@ class ActionManageListPrevFilter extends BaseAction {
 
 		private static final long serialVersionUID = -2348442602883419942L;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("启动月份")
+		@FieldDescribe("시작 월")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("完成月份")
+		@FieldDescribe("완료 월")
 		private List<String> completedTimeMonthList;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
 		public List<String> getProcessList() {
@@ -129,10 +129,10 @@ class ActionManageListPrevFilter extends BaseAction {
 		static WrapCopier<WorkCompleted, Wo> copier = WrapCopierFactory.wo(WorkCompleted.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		public Long getRank() {

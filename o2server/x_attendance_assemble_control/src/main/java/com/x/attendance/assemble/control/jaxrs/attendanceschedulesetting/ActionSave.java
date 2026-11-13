@@ -48,7 +48,7 @@ public class ActionSave extends BaseAction {
 					System.out.println(">>>>>>>>>wrapIn.getUnitName()不为空，判断unitName是否存在！ unitName：" + unitName );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceScheduleProcess(e, "系统根据组织名称查询组织信息时发生异常. Name:" + wrapIn.getUnitName());
+					Exception exception = new ExceptionAttendanceScheduleProcess(e, "조직 이름으로 조직 정보를 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getUnitName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -60,7 +60,7 @@ public class ActionSave extends BaseAction {
 			}
 		}
 		
-		//查询顶层组织
+		//최상위 조직 조회
 		if (check) {
 			if (StringUtils.isNotEmpty(unitName) ) {
 				try {
@@ -68,7 +68,7 @@ public class ActionSave extends BaseAction {
 					System.out.println(">>>>>>>>>userManagerService.getTopUnitNameWithUnitName(unitName) = " + topUnitName );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceScheduleProcess(e, "系统根据组织名称查询所属顶层组织信息时发生异常. unitName:" + unitName);
+					Exception exception = new ExceptionAttendanceScheduleProcess(e, "조직 이름으로 상위 최상위 조직 정보를 조회하는 중 오류가 발생했습니다. unitName:" + unitName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -90,13 +90,13 @@ public class ActionSave extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceScheduleProcess(e,
-						"将所有查询出来的有状态的导入文件对象转换为可以输出的过滤过属性的对象时发生异常.");
+						"조회된 가져오기 파일 객체를 출력용 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 		if (check) {
-			//计算由于打卡次数发生变化引起的打开时间值变化
+			//기록 횟수 변경에 따른 기록 시간 값 변화 계산
 			Integer signProxy = attendanceScheduleSetting.getSignProxy();
 			switch(signProxy){
 				case 1 :
@@ -116,7 +116,7 @@ public class ActionSave extends BaseAction {
 				result.setData(new Wo(attendanceScheduleSetting.getId()));
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceScheduleProcess(e, "保存组织排班信息时发生异常.");
+				Exception exception = new ExceptionAttendanceScheduleProcess(e, "조직 근무 편성 정보 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

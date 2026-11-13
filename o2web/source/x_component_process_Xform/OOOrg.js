@@ -126,7 +126,7 @@ MWF.xApplication.process.Xform.OOOrg = MWF.APPOOOrg = new Class({
                 const o = {
                     valueMissing: MWF.xApplication.process.Xform.LP.requiredHint.replace('{label}', label),
                 }
-                //通过 e.detail 获取 验证有效性状态对象：ValidityState
+                //e.detail로 유효성 상태 객체 ValidityState 조회
                 for (const k in o){
                     if (e.detail[k]){
                         if (o[k]){
@@ -168,7 +168,7 @@ MWF.xApplication.process.Xform.OOOrg = MWF.APPOOOrg = new Class({
     clickSelect: function( ev ){
         if (this.isReadonly() || !this.isEditable)return;
         if( layout.mobile ){
-            setTimeout( function(){ //如果有输入法界面，这个时候页面的计算不对，所以等100毫秒
+            setTimeout( function(){ //입력기 화면이 있으면 이때 페이지 계산이 맞지 않으므로 100밀리초 대기
                 var options = this.getOptions();
                 if(options){
                     if( !options.title && this.json.label ){
@@ -179,12 +179,12 @@ MWF.xApplication.process.Xform.OOOrg = MWF.APPOOOrg = new Class({
                     }else if( this.selector && this.selector.selector && this.selector.selector.active ){
                     }else{
                         /**
-                         * @summary 人员选择框package的对象
+                         * @summary 사용자 선택 상자 package 객체
                          * @member {o2.O2Selector}
                          * @example
-                         *  //可以在脚本中获取该组件
-                         * var selector = this.form.get("fieldId").selector.selector; //获取人员选择框对象
-                         * var options = selector.options; //获取人员选择框的选项
+                         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+                         * var selector = this.form.get("fieldId").selector.selector; //사용자 선택 상자 객체 가져오기
+                         * var options = selector.options; //사용자 선택 상자 옵션 가져오기
                          */
                         //options.style = 'v10';
                         // Object.assign(options, {

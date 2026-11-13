@@ -11,7 +11,7 @@ loadComponent('attendancev2', (d, cb) => {
 
     const status = component.status || {};
     const navAction = status.navAction || "";
-    if (navAction === "detailStatisticManager") { // 统计页面
+    if (navAction === "detailStatisticManager") { // 통계 페이지
         document.title = "통계";
         publicStatistic.render(d, { bind: { person: status.person || "" } }).then(() => {
             cb();

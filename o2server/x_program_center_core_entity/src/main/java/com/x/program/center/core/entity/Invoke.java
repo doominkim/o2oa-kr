@@ -30,9 +30,9 @@ import org.apache.openjpa.persistence.jdbc.Index;
 
 /**
  * @author sword
- * 服务管理接口
+ * 서비스 관리 인터페이스
  */
-@Schema(name = "Invoke", description = "服务管理接口.")
+@Schema(name = "Invoke", description = "서비스 관리 인터페이스.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Invoke.TABLE, uniqueConstraints = {
@@ -56,7 +56,7 @@ public class Invoke extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -74,60 +74,60 @@ public class Invoke extends SliceJpaObject {
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	private String name;
 
 	public static final String enableToken_FIELDNAME = "enableToken";
-	@FieldDescribe("是否启用token验证.")
+	@FieldDescribe("token 인증 사용 여부.")
 	@Column(name = ColumnNamePrefix + enableToken_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean enableToken = true;
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true, citationNotExists =
-	// 检查在同一应用下不能重名
+	// 같은 앱 안에서 이름 중복 불가 확인
 	@CitationNotExist(fields = { "name", "id", "alias" }, type = Invoke.class))
 	private String alias;
 
 	public static final String category_FIELDNAME = "category";
-	@FieldDescribe("分类.")
+	@FieldDescribe("분류.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + category_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + category_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String category;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String validated_FIELDNAME = "validated";
-	@FieldDescribe("代码格式是否正确.")
+	@FieldDescribe("코드 형식 정상 여부.")
 	@Column(name = ColumnNamePrefix + validated_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean validated;
 
 	public static final String enable_FIELDNAME = "enable";
-	@FieldDescribe("是否启用.")
+	@FieldDescribe("사용 여부.")
 	@Column(name = ColumnNamePrefix + enable_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean enable;
 
 	public static final String enableAnonymous_FIELDNAME = "enableAnonymous";
-	@FieldDescribe("是否允许匿名用户访问接口.")
+	@FieldDescribe("익명 사용자의 인터페이스 접근 허용 여부.")
 	@Column(name = ColumnNamePrefix + enableAnonymous_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean enableAnonymous = false;
 
 	public static final String text_FIELDNAME = "text";
-	@FieldDescribe("脚本内容.")
+	@FieldDescribe("스크립트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + text_FIELDNAME)
@@ -135,28 +135,28 @@ public class Invoke extends SliceJpaObject {
 	private String text;
 
 	public static final String lastStartTime_FIELDNAME = "lastStartTime";
-	@FieldDescribe("最近开始时间.")
+	@FieldDescribe("최근 시작 시간.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + lastStartTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastStartTime_FIELDNAME)
 	private Date lastStartTime;
 
 	public static final String lastEndTime_FIELDNAME = "lastEndTime";
-	@FieldDescribe("最近结束时间.")
+	@FieldDescribe("최근 종료 시간.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + lastEndTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastEndTime_FIELDNAME)
 	private Date lastEndTime;
 
 	public static final String remoteAddrRegex_FIELDNAME = "remoteAddrRegex";
-	@FieldDescribe("访问地址的表达式.")
+	@FieldDescribe("접근 주소 표현식.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + remoteAddrRegex_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	@Index(name = TABLE + IndexNameMiddle + remoteAddrRegex_FIELDNAME)
 	private String remoteAddrRegex;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("自定义字段.")
+	@FieldDescribe("사용자 정의 필드.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
@@ -164,7 +164,7 @@ public class Invoke extends SliceJpaObject {
 	private String data;
 
 	public static final String executorList_FIELDNAME = "executorList";
-	@FieldDescribe("执行权限")
+	@FieldDescribe("실행 권한")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ executorList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + executorList_FIELDNAME

@@ -7,6 +7,6 @@ class ExceptionDisableCaptcha extends LanguagePromptException {
 	private static final long serialVersionUID = 6351023802034208595L;
 
 	ExceptionDisableCaptcha() {
-		super("系统不允许通过图片验证码注册人员.");
+		super("이미지 인증 코드로 사용자를 등록할 수 없도록 설정되어 있습니다.");
 	}
 }

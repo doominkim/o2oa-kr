@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("config")
-@JaxrsDescribe("云文件管理配置")
+@JaxrsDescribe("클라우드 파일 관리 설정")
 public class ConfigAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ConfigAction.class);
 
-	@JaxrsMethodDescribe(value = "判断当前用户是否是云文件管理员。", action = ActionIsManager.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 클라우드 파일 관리자인지 판단.", action = ActionIsManager.class)
 	@GET
 	@Path("is/file/manager")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -45,7 +45,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取云文件系统配置。", action = ActionGetSystemConfig.class)
+	@JaxrsMethodDescribe(value = "클라우드 파일 시스템 설정 조회.", action = ActionGetSystemConfig.class)
 	@GET
 	@Path("system/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -62,7 +62,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "保存云文件系统配置.", action = ActionSaveSystemConfig.class)
+	@JaxrsMethodDescribe(value = "클라우드 파일 시스템 설정 저장.", action = ActionSaveSystemConfig.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

@@ -35,18 +35,18 @@ class ActionEdit extends BaseAction {
 			if (null == person) {
 				throw new ExceptionPersonNotExist(effectivePerson.getDistinguishedName());
 			}
-			/** 从内存中pick出来的无法作为实体保存 */
+			/** 메모리에서 pick한 것은 엔티티로 저장 불가 */
 			person = emc.find(person.getId(), Person.class);
 			Wi.copier.copy(wi, person);
 			this.checkMobile(business, person.getMobile(), person.getId());
 			this.checkMail(business, person.getMail(), person.getId());
-			/** 不能更新person的superior 和 controllerList */
+			/** person의 superior와 controllerList는 업데이트 불가 */
 			emc.beginTransaction(Person.class);
 			emc.check(person, CheckPersistType.all);
 			emc.commit();
-			/** 刷新缓存 */
+			/** 캐시 새로고침 */
 			CacheManager.notify(Person.class);
-			/** 通知x_collect_service_transmit同步数据到collect */
+			/** x_collect_service_transmit에 collect로 데이터 동기화 알림 */
 			business.instrument().collect().person();
 			Wo wo = new Wo();
 			wo.setId(person.getId());

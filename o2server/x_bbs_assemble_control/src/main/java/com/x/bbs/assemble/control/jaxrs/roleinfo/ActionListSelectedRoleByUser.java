@@ -37,7 +37,7 @@ public class ActionListSelectedRoleByUser extends BaseAction {
 			wrapIn = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionRoleInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+			Exception exception = new ExceptionRoleInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -71,7 +71,7 @@ public class ActionListSelectedRoleByUser extends BaseAction {
 				roleInfoList = roleInfoService.listRoleByObjectUniqueId(wrapIn.getUserName(), "人员");
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "系统在根据被角色绑定对象的唯一标识查询角色信息列表时发生异常.Name:" + wrapIn.getUserName() + ", Type:人员" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "역할이 연결된 대상의 고유 식별자로 역할 목록을 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getUserName() + ", Type:人员" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -83,7 +83,7 @@ public class ActionListSelectedRoleByUser extends BaseAction {
 					result.setData(wraps);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionRoleInfoProcess( e, "系统在转换所有BBS角色信息为输出对象时发生异常." );
+					Exception exception = new ExceptionRoleInfoProcess( e, "전체 BBS 역할 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -205,7 +205,7 @@ public class ActionListSelectedRoleByUser extends BaseAction {
 		
 		public static WrapCopier< BBSPermissionInfo, WoPermissionInfo > copier = WrapCopierFactory.wo( BBSPermissionInfo.class, WoPermissionInfo.class, null, JpaObject.FieldsInvisible);
 		
-		//论坛版块列表
+		//포럼 게시판 목록
 		private List<WoSectionInfo> sections = null;
 
 		public List<WoSectionInfo> getSections() {
@@ -223,7 +223,7 @@ public class ActionListSelectedRoleByUser extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>();
 		
-		//版块的子版块信息列表
+		//게시판의 하위 게시판 정보 목록
 		private List<WoSectionInfo> subSections = null;
 
 		public List<WoSectionInfo> getSubSections() {

@@ -16,7 +16,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Captcha", description = "服务管理图片验证码.")
+@Schema(name = "Captcha", description = "서비스 관리 이미지 인증 코드.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Captcha.TABLE, uniqueConstraints = {
@@ -38,27 +38,27 @@ public class Captcha extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String answer_FIELDNAME = "answer";
-	@FieldDescribe("图片密码值.")
+	@FieldDescribe("이미지 비밀번호 값.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + answer_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String answer;
 
 	public static final String meta_FIELDNAME = "meta";
-	@FieldDescribe("关联的内容,还不知道干啥")
+	@FieldDescribe("연관 내용, 용도 미확인")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + meta_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String meta;

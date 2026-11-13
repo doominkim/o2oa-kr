@@ -4,7 +4,7 @@ import com.x.base.core.entity.JpaObject;
 import com.x.base.core.project.cache.CacheManager;
 
 /**
- * 缓存管理帮助类
+ * 캐시 관리 헬퍼 클래스
  *
  */
 public class CacheUtil {

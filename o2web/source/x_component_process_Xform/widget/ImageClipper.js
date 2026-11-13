@@ -44,7 +44,7 @@ MWF.xApplication.process.Xform.widget.ImageClipper = new Class({
             y = 0;
         }
         var _self = this;
-        if (layout.mobile) { //移动端直接选择图片
+        if (layout.mobile) { //모바일에서 이미지 직접 선택
             this.fileNode = new Element("input.file", {
 				"type" : "file",
                 "accept":" .jpeg, .jpg, .png",
@@ -76,13 +76,13 @@ MWF.xApplication.process.Xform.widget.ImageClipper = new Class({
                     "container": outBody,
                     "buttonList": [
                         // {
-                        //     "text": MWF.LP.process.button.download || "下载",
+                        //     "text": MWF.LP.process.button.download || "다운로드",
                         //     "action": function () {
                         //         _self.download();
                         //     }
                         // },
                         // {
-                        //     "text": MWF.LP.process.button.remove || "删除",
+                        //     "text": MWF.LP.process.button.remove || "삭제",
                         //     "action": function () {
                         //         _self.remove();
                         //     }
@@ -129,9 +129,9 @@ MWF.xApplication.process.Xform.widget.ImageClipper = new Class({
         }
 
     },
-    //移动端h5 上传图片
+    //모바일 h5 이미지 업로드
     uploadImageForH5:function(file) {
-        //公共图片上传服务
+        //공용 이미지 업로드 서비스
         var maxSize = this.options.resultMaxSize ? this.options.resultMaxSize : 800;
         var formData = new FormData();
 		formData.append('file', file, file.name);

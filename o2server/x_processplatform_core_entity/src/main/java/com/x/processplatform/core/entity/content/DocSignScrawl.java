@@ -32,11 +32,11 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 签批涂鸦信息
+ * 서명 결재 낙서 정보
  * 
  * @author sword
  */
-@Schema(name = "DocSignScrawl", description = "流程平台批注.")
+@Schema(name = "DocSignScrawl", description = "프로세스 플랫폼 주석.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.DocSignScrawl.table, uniqueConstraints = {
@@ -67,7 +67,7 @@ public class DocSignScrawl extends StorageObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -106,7 +106,7 @@ public class DocSignScrawl extends StorageObject {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件名称,带扩展名的文件名.")
+	@FieldDescribe("파일 이름, 확장자를 포함한 파일명.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
@@ -114,34 +114,34 @@ public class DocSignScrawl extends StorageObject {
 	private String name;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名。")
+	@FieldDescribe("확장자.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = true, fileNameString = true)
 	private String extension;
 
 	public static final String storage_FIELDNAME = "storage";
-	@FieldDescribe("关联的存储名称.")
+	@FieldDescribe("연결된 저장소 이름.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true)
 	@Index(name = TABLE + IndexNameMiddle + storage_FIELDNAME)
 	private String storage;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + length_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date lastUpdateTime;
 
 	public static final String deepPath_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
 	private Boolean deepPath;
@@ -207,33 +207,33 @@ public class DocSignScrawl extends StorageObject {
 	}
 
 	public static final String signId_FIELDNAME = "signId";
-	@FieldDescribe("签批ID.")
+	@FieldDescribe("서명 결재 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + signId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + signId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String signId;
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("任务.")
+	@FieldDescribe("작업.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String activity_FIELDNAME = "activity";
-	@FieldDescribe("活动ID.")
+	@FieldDescribe("활동 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String activity;
 
 	public static final String activityName_FIELDNAME = "activityName";
-	@FieldDescribe("活动名称.")
+	@FieldDescribe("활동 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityName;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("签批人")
+	@FieldDescribe("서명 결재자")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -241,26 +241,26 @@ public class DocSignScrawl extends StorageObject {
 
 	public static final String commitTime_FIELDNAME = "commitTime";
 	@Temporal(TemporalType.TIME)
-	@FieldDescribe("提交时间.")
+	@FieldDescribe("제출 시간.")
 	@Column(name = ColumnNamePrefix + commitTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + commitTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date commitTime;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("涂鸦类型：placeholder(占位符)|base64(图片base64存储在data字段中)|image(图片存储在附件中)")
+	@FieldDescribe("낙서 유형: placeholder(자리표시자)|base64(이미지 base64를 data 필드에 저장)|image(이미지를 첨부파일에 저장)")
 	@Column(length = length_64B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String type;
 
 	public static final String width_FIELDNAME = "width";
-	@FieldDescribe("宽")
+	@FieldDescribe("너비")
 	@Column(length = length_64B, name = ColumnNamePrefix + width_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String width;
 
 	public static final String height_FIELDNAME = "height";
-	@FieldDescribe("高")
+	@FieldDescribe("높이")
 	@Column(length = length_64B, name = ColumnNamePrefix + height_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String height;

@@ -22,27 +22,27 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 
 public class CodeUtil {
-	private static final int QRCOLOR = 0xFF000000; // 默认是黑色
-	private static final int BGWHITE = 0xFFFFFFFF; // 背景颜色
-	private static final int WIDTH = 300; // 二维码宽
-	private static final int HEIGHT = 300; // 二维码高
+	private static final int QRCOLOR = 0xFF000000; // 기본값은 검은색
+	private static final int BGWHITE = 0xFFFFFFFF; // 배경 색상
+	private static final int WIDTH = 300; // QR 코드 너비
+	private static final int HEIGHT = 300; // QR 코드 높이
 
 	/**
-	 * 生成带logo的二维码图片
+	 * logo가 포함된 QR 코드 이미지 생성
 	 * 
-	 * @param logoFile /logo图片文件
-	 * @param codeFile /二维码图片
-	 * @param qrUrl    /二维码存储的信息：vcard格式
-	 * @param note     /二维码描述信息
+	 * @param logoFile /logo 이미지 파일
+	 * @param codeFile /QR 코드 이미지
+	 * @param qrUrl    /QR 코드에 저장할 정보: vcard 형식
+	 * @param note     /QR 코드 설명 정보
 	 */
 	public static void drawLogoQRCode(File logoFile, File codeFile, String qrUrl, String note) {
 		try {
 			MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-			// 参数顺序分别为：编码内容，编码类型，生成图片宽度，生成图片高度，设置参数
+			// 매개변수 순서: 인코딩 내용, 인코딩 유형, 생성 이미지 너비, 생성 이미지 높이, 설정 매개변수
 			BitMatrix bm = multiFormatWriter.encode(qrUrl, BarcodeFormat.QR_CODE, WIDTH, HEIGHT, hints);
 			BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 
-			// 开始利用二维码数据创建Bitmap图片，分别设为黑（0xFFFFFFFF）白（0xFF000000）两色
+			// QR 코드 데이터로 Bitmap 이미지 생성 시작, 각각 검정(0xFFFFFFFF) 흰색(0xFF000000) 두 색으로 설정
 			for (int x = 0; x < WIDTH; x++) {
 				for (int y = 0; y < HEIGHT; y++) {
 					image.setRGB(x, y, bm.get(x, y) ? QRCOLOR : BGWHITE);
@@ -52,30 +52,30 @@ public class CodeUtil {
 			int width = image.getWidth();
 			int height = image.getHeight();
 			if (Objects.nonNull(logoFile) && logoFile.exists()) {
-				// 构建绘图对象
+				// 그리기 객체 생성
 				Graphics2D g = image.createGraphics();
-				// 读取Logo图片
+				// Logo 이미지 읽기
 				BufferedImage logo = ImageIO.read(logoFile);
-				// 开始绘制logo图片
+				// logo 이미지 그리기 시작
 				g.drawImage(logo, width * 2 / 5, height * 2 / 5, width * 2 / 10, height * 2 / 10, null);
 				g.dispose();
 				logo.flush();
 			}
 
-			// 自定义文本描述
+			// 사용자 정의 텍스트 설명
 			if (StringUtils.isNotEmpty(note)) {
-				// 新的图片，把带logo的二维码下面加上文字
+				// 새 이미지, logo가 포함된 QR 코드 아래에 텍스트 추가
 				BufferedImage outImage = new BufferedImage(400, 445, BufferedImage.TYPE_4BYTE_ABGR);
 				Graphics2D outg = outImage.createGraphics();
-				// 画二维码到新的面板
+				// 새 패널에 QR 코드 그리기
 				outg.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
-				// 画文字到新的面板
+				// 새 패널에 텍스트 그리기
 				outg.setColor(Color.BLACK);
-				outg.setFont(new Font("楷体", Font.BOLD, 30)); // 字体、字型、字号
+				outg.setFont(new Font("楷体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 				int strWidth = outg.getFontMetrics().stringWidth(note);
 				if (strWidth > WIDTH) {
-					// //长度过长就截取前面部分
-					// 长度过长就换行
+					// //길이가 너무 길면 앞부분만 자름
+					// 길이가 너무 길면 줄바꿈
 					String note1 = note.substring(0, note.length() / 2);
 					String note2 = note.substring(note.length() / 2, note.length());
 					int strWidth1 = outg.getFontMetrics().stringWidth(note1);
@@ -85,14 +85,14 @@ public class CodeUtil {
 					Graphics2D outg2 = outImage2.createGraphics();
 					outg2.drawImage(outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
 					outg2.setColor(Color.BLACK);
-					outg2.setFont(new Font("宋体", Font.BOLD, 30)); // 字体、字型、字号
+					outg2.setFont(new Font("宋体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 					outg2.drawString(note2, 200 - strWidth2 / 2,
 							outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight()) / 2 + 5);
 					outg2.dispose();
 					outImage2.flush();
 					outImage = outImage2;
 				} else {
-					outg.drawString(note, 200 - strWidth / 2, height + (outImage.getHeight() - height) / 2 + 12); // 画文字
+					outg.drawString(note, 200 - strWidth / 2, height + (outImage.getHeight() - height) / 2 + 12); // 텍스트 그리기
 				}
 				outg.dispose();
 				outImage.flush();
@@ -111,23 +111,23 @@ public class CodeUtil {
 	}
 
 	/**
-	 * 生成带logo的二维码图片
+	 * logo가 포함된 QR 코드 이미지 생성
 	 * 
-	 * @param logoFile /logo图片文件
-	 * @param codeFile /二维码图片
-	 * @param qrUrl    /二维码存储的信息：vcard格式
-	 * @param note     /二维码描述信息
+	 * @param logoFile /logo 이미지 파일
+	 * @param codeFile /QR 코드 이미지
+	 * @param qrUrl    /QR 코드에 저장할 정보: vcard 형식
+	 * @param note     /QR 코드 설명 정보
 	 */
 	public static byte[] drawLogoQRCodeByte(BufferedImage logo, ByteArrayOutputStream codeFile, String qrUrl,
 			String note) {
 		byte[] bs = null;
 		try {
 			MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-			// 参数顺序分别为：编码内容，编码类型，生成图片宽度，生成图片高度，设置参数
+			// 매개변수 순서: 인코딩 내용, 인코딩 유형, 생성 이미지 너비, 생성 이미지 높이, 설정 매개변수
 			BitMatrix bm = multiFormatWriter.encode(qrUrl, BarcodeFormat.QR_CODE, WIDTH, HEIGHT, hints);
 			BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 
-			// 开始利用二维码数据创建Bitmap图片，分别设为黑（0xFFFFFFFF）白（0xFF000000）两色
+			// QR 코드 데이터로 Bitmap 이미지 생성 시작, 각각 검정(0xFFFFFFFF) 흰색(0xFF000000) 두 색으로 설정
 			for (int x = 0; x < WIDTH; x++) {
 				for (int y = 0; y < HEIGHT; y++) {
 					image.setRGB(x, y, bm.get(x, y) ? QRCOLOR : BGWHITE);
@@ -137,30 +137,30 @@ public class CodeUtil {
 			int width = image.getWidth();
 			int height = image.getHeight();
 			if (Objects.nonNull(logo)) {
-				// 构建绘图对象
+				// 그리기 객체 생성
 				Graphics2D g = image.createGraphics();
-				// 读取Logo图片
+				// Logo 이미지 읽기
 				// BufferedImage logo = ImageIO.read(logoFile);
-				// 开始绘制logo图片
+				// logo 이미지 그리기 시작
 				g.drawImage(logo, width * 2 / 5, height * 2 / 5, width * 2 / 10, height * 2 / 10, null);
 				g.dispose();
 				logo.flush();
 			}
 
-			// 自定义文本描述
+			// 사용자 정의 텍스트 설명
 			if (StringUtils.isNotEmpty(note)) {
-				// 新的图片，把带logo的二维码下面加上文字
+				// 새 이미지, logo가 포함된 QR 코드 아래에 텍스트 추가
 				BufferedImage outImage = new BufferedImage(400, 445, BufferedImage.TYPE_4BYTE_ABGR);
 				Graphics2D outg = outImage.createGraphics();
-				// 画二维码到新的面板
+				// 새 패널에 QR 코드 그리기
 				outg.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
-				// 画文字到新的面板
+				// 새 패널에 텍스트 그리기
 				outg.setColor(Color.BLACK);
-				outg.setFont(new Font("楷体", Font.BOLD, 30)); // 字体、字型、字号
+				outg.setFont(new Font("楷体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 				int strWidth = outg.getFontMetrics().stringWidth(note);
 				if (strWidth > WIDTH) {
-					// //长度过长就截取前面部分
-					// 长度过长就换行
+					// //길이가 너무 길면 앞부분만 자름
+					// 길이가 너무 길면 줄바꿈
 					String note1 = note.substring(0, note.length() / 2);
 					String note2 = note.substring(note.length() / 2, note.length());
 					int strWidth1 = outg.getFontMetrics().stringWidth(note1);
@@ -170,14 +170,14 @@ public class CodeUtil {
 					Graphics2D outg2 = outImage2.createGraphics();
 					outg2.drawImage(outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
 					outg2.setColor(Color.BLACK);
-					outg2.setFont(new Font("宋体", Font.BOLD, 30)); // 字体、字型、字号
+					outg2.setFont(new Font("宋体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 					outg2.drawString(note2, 200 - strWidth2 / 2,
 							outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight()) / 2 + 5);
 					outg2.dispose();
 					outImage2.flush();
 					outImage = outImage2;
 				} else {
-					outg.drawString(note, 200 - strWidth / 2, height + (outImage.getHeight() - height) / 2 + 12); // 画文字
+					outg.drawString(note, 200 - strWidth / 2, height + (outImage.getHeight() - height) / 2 + 12); // 텍스트 그리기
 				}
 				outg.dispose();
 				outImage.flush();
@@ -194,19 +194,19 @@ public class CodeUtil {
 		return bs;
 	}
 
-	// 用于设置QR二维码参数
+	// QR 코드 매개변수 설정용
 	private static Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>() {
 		private static final long serialVersionUID = 1L;
 		{
 			// put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);//
-			// 设置QR二维码的纠错级别（H为最高级别）具体级别信息
-			put(EncodeHintType.CHARACTER_SET, "utf-8");// 设置编码方式
+			// QR 코드 오류 정정 수준 설정(H가 최고 수준) 상세 수준 정보
+			put(EncodeHintType.CHARACTER_SET, "utf-8");// 인코딩 방식 설정
 			put(EncodeHintType.MARGIN, 1);
 		}
 	};
 
 	/**
-	 * 将base64字符解码保存文件
+	 * base64 문자를 디코딩해 파일로 저장
 	 *
 	 * @param base64Code
 	 * @param targetPath

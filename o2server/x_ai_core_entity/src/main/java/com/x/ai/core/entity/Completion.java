@@ -29,10 +29,10 @@ import org.apache.openjpa.persistence.jdbc.ElementIndex;
 import org.apache.openjpa.persistence.jdbc.Index;
 
 /**
- * 会话
+ * 대화
  * @author sword
  */
-@Schema(name = "Completion", description = "会话.")
+@Schema(name = "Completion", description = "대화.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Completion.table, uniqueConstraints = {
@@ -66,7 +66,7 @@ public class Completion extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -85,40 +85,40 @@ public class Completion extends SliceJpaObject {
 	}
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String clueId_FIELDNAME = "clueId";
-	@FieldDescribe("线索ID")
+	@FieldDescribe("스레드 ID")
 	@Column(length = length_255B, name = ColumnNamePrefix + clueId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String clueId;
 
 	public static final String generateType_FIELDNAME = "generateType";
-	@FieldDescribe("生成类型")
+	@FieldDescribe("생성 유형")
 	@Column(length = length_255B, name = ColumnNamePrefix + generateType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String generateType;
 
 	public static final String input_FIELDNAME = "input";
-	@FieldDescribe("输入内容.")
+	@FieldDescribe("입력 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + input_FIELDNAME)
 	private String input;
 
 	public static final String content_FIELDNAME = "content";
-	@FieldDescribe("输出内容.")
+	@FieldDescribe("출력 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + content_FIELDNAME)
 	private String content;
 
 	public static final String referenceIdList_FIELDNAME = "referenceIdList";
-	@FieldDescribe("关联素材ID列表.")
+	@FieldDescribe("연관 소재 ID 목록.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + referenceIdList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -128,24 +128,24 @@ public class Completion extends SliceJpaObject {
 	@CheckPersist(allowEmpty = true)
 	private List<String> referenceIdList;
 
-	@FieldDescribe("创建时间.")
+	@FieldDescribe("생성 시간.")
 	@Transient
 	private Date createDateTime;
 
-	@FieldDescribe("修改时间.")
+	@FieldDescribe("수정 시간.")
 	@Transient
 	private Date updateDateTime;
 
 	public static final String extra_FIELDNAME = "extra";
-	@FieldDescribe("扩展信息.")
+	@FieldDescribe("확장 정보.")
 	@Transient
 	private Map<String, Object> extra;
 
-	@FieldDescribe("工具调用信息列表.")
+	@FieldDescribe("도구 호출 정보 목록.")
 	@Transient
 	private List<ToolCall> toolCallList;
 
-	@FieldDescribe("扩展消息.")
+	@FieldDescribe("확장 메시지.")
 	@Transient
 	private List<Object> extendList;
 

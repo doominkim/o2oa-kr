@@ -15,7 +15,7 @@ public class ActionLeavePolicyDelete extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2LeavePolicy policy = emc.find(id, AttendanceV2LeavePolicy.class);
             if (policy == null) {
-                throw new ExceptionNotExistObject("无法找到指定ID的假期规则信息，ID：" + id);
+                throw new ExceptionNotExistObject("지정한 ID의 휴가 규칙 정보를 찾을 수 없습니다. ID:" + id);
             }
             emc.beginTransaction(AttendanceV2LeavePolicy.class);
             policy.setActive(false);

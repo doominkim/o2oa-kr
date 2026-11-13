@@ -31,12 +31,12 @@ import com.x.base.core.project.logger.LoggerFactory;
 
 
 @Path("view")
-@JaxrsDescribe("信息列表管理")
+@JaxrsDescribe("정보 목록 관리")
 public class ViewAction extends StandardJaxrsAction{
 
 	private static  Logger logger = LoggerFactory.getLogger( ViewAction.class );
 
-	@JaxrsMethodDescribe(value = "获取全部的信息列表.", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "전체 정보 목록 조회.", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -54,13 +54,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定栏目ID的全部信息列表.", action = ActionListByApp.class)
+	@JaxrsMethodDescribe(value = "지정 게시판 ID의 전체 정보 목록 조회.", action = ActionListByApp.class)
 	@GET
 	@Path("list/app/{appId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listViewByAppId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("栏目ID") @PathParam("appId")String appId ) {
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("appId")String appId ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByApp.Wo>> result = new ActionResult<>();
 		try {
@@ -73,13 +73,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定表单ID的全部信息列表.", action = ActionListByForm.class)
+	@JaxrsMethodDescribe(value = "지정 양식 ID의 전체 정보 목록 조회.", action = ActionListByForm.class)
 	@GET
 	@Path("list/form/{formId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listViewByFormId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单ID") @PathParam("formId")String formId ) {
+			@JaxrsParameterDescribe("양식 ID") @PathParam("formId")String formId ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByForm.Wo>> result = new ActionResult<>();
 		try {
@@ -92,13 +92,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定分类的全部视图信息列表.", action = ActionListByCategory.class)
+	@JaxrsMethodDescribe(value = "지정 분류의 전체 뷰 정보 목록 조회.", action = ActionListByCategory.class)
 	@GET
 	@Path("list/category/{categoryId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listViewByCategoryId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分类ID") @PathParam("categoryId")String categoryId ) {
+			@JaxrsParameterDescribe("분류ID") @PathParam("categoryId")String categoryId ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByCategory.Wo>> result = new ActionResult<>();
 		try {
@@ -111,13 +111,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取信息列表对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 정보 목록 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列表ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("목록 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -130,7 +130,7 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建列表信息.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "목록 정보 생성.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -150,13 +150,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新信息列表.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "정보 목록 갱신.", action = ActionSave.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void put( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列表ID") @PathParam("id") String id, JsonElement jsonElement ) {
+			@JaxrsParameterDescribe("목록 ID") @PathParam("id") String id, JsonElement jsonElement ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -172,13 +172,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新信息列表.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "정보 목록 갱신.", action = ActionSave.class)
 	@POST
 	@Path("{id}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void putMockPutToPost( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("列表ID") @PathParam("id") String id, JsonElement jsonElement ) {
+					 @JaxrsParameterDescribe("목록 ID") @PathParam("id") String id, JsonElement jsonElement ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -194,13 +194,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除信息对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 정보 객체 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列表ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("목록 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		try {
@@ -213,13 +213,13 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除信息对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 정보 객체 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						@JaxrsParameterDescribe("列表ID") @PathParam("id") String id) {
+						@JaxrsParameterDescribe("목록 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		try {
@@ -232,14 +232,14 @@ public class ViewAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示符合条件的视图数据列表,下一页.", action = ActionListNextPageViewData.class)
+	@JaxrsMethodDescribe(value = "조건에 맞는 뷰 데이터 목록, 다음 페이지.", action = ActionListNextPageViewData.class)
 	@POST
 	@Path("viewdata/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nextPageViewDataList( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("上一页最后一条ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页条目数量") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("이전 페이지 마지막 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 항목 수") @PathParam("count") Integer count,
 			JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListNextPageViewData.Wo>> result = new ActionResult<>();

@@ -7,6 +7,6 @@ class ExceptionWrapInViewIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionWrapInViewIdEmpty( ) {
-		super( "系统未能获取到列所属视图ID." );
+		super( "열이 속한 뷰 ID를 가져오지 못했습니다." );
 	}
 }

@@ -28,12 +28,12 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.processplatform.core.entity.element.Route;
 
 @Path("designer")
-@JaxrsDescribe("设计")
+@JaxrsDescribe("설계")
 public class DesignerAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(DesignerAction.class);
 
-    @JaxrsMethodDescribe(value = "根据关键字搜索设计对象.", action = ActionSearch.class)
+    @JaxrsMethodDescribe(value = "키워드로 설계 객체 검색.", action = ActionSearch.class)
     @POST
     @Path("search")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,13 +51,13 @@ public class DesignerAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据关键字搜索设计对象.", action = ActionGetRoute.class)
+    @JaxrsMethodDescribe(value = "키워드로 설계 객체 검색.", action = ActionGetRoute.class)
     @GET
     @Path("route/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void getRoute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
         ActionResult<Route> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

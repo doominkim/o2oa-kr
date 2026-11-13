@@ -61,7 +61,7 @@ public class ActionSave extends BaseAction {
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
-		// 校验版块名称
+		// 게시판 이름 검증
 		if (check) {
 			if (wrapIn.getSectionName() == null || wrapIn.getSectionName().isEmpty()) {
 				check = false;
@@ -69,7 +69,7 @@ public class ActionSave extends BaseAction {
 				result.error(exception);
 			}
 		}
-		// 校验论坛信息是否有效，并且补充论坛名称
+		// 포럼 정보 유효성 검증 및 포럼 이름 보완
 		if (check) {
 			if (wrapIn.getForumId() == null || wrapIn.getForumId().isEmpty()) {
 				check = false;
@@ -90,17 +90,17 @@ public class ActionSave extends BaseAction {
 		}
 		if (check) {
 			if (forumInfo == null) {
-				// 论坛信息不存在
+				// 포럼 정보가 존재하지 않습니다
 				check = false;
 				Exception exception = new ExceptionForumInfoNotExists(wrapIn.getForumId());
 				result.error(exception);
 			} else {
-				// 补充论坛名称
+				// 포럼 이름 보완
 				wrapIn.setForumName(forumInfo.getForumName());
 			}
 		}
 		
-		// 判断论坛是否允许用户创建版块
+		// 포럼의 사용자 게시판 생성 허용 여부 판단
 		if (check) {
 			if (!forumInfo.getSectionCreateAble()) {
 				check = false;
@@ -109,10 +109,10 @@ public class ActionSave extends BaseAction {
 			}
 		}
 		
-		// 判断用户是否有权限进行论坛信息新增或者更新：
-		// 1、系统管理员 2、论坛设置的管理员
+		// 사용자의 포럼 정보 추가·수정 권한 판단:
+		// 1. 시스템 관리자 2. 포럼에 설정된 관리자
 		if ( check ) {
-			if ( !ThisApplication.isForumManager( effectivePerson, forumInfo ) ) {//无权限进行版块删除操作
+			if ( !ThisApplication.isForumManager( effectivePerson, forumInfo ) ) {//게시판 삭제 권한이 없습니다
 				check = false;
 				String forumName = "없거나 삭제된 포럼";
 				if( forumInfo != null ) {
@@ -148,10 +148,10 @@ public class ActionSave extends BaseAction {
 				wrapIn.setTypeCategory(forumInfo.getTypeCategory());
 			}
 		}
-		// 校验版块管理员（版主）是否存在
+		// 게시판 관리자(운영자) 존재 여부 검증
 		if (check) {
 			if ( ListTools.isNotEmpty( wrapIn.getModeratorNames() )) {
-				// 判断指定的用户是否存在
+				// 지정 사용자 존재 여부 판단
 				names = wrapIn.getModeratorNames();
 				for (String name : names) {
 					try {
@@ -194,7 +194,7 @@ public class ActionSave extends BaseAction {
 			}
 		}
 		if (check) {
-			// 如果主版的ID为空，或者主版ID与当前ID一致，则版块为一级版块，主版块
+			// 상위 게시판 ID가 비어 있거나 현재 ID와 같으면 1단계 게시판, 즉 상위 게시판
 			if (sectionInfo.getMainSectionId() == null || sectionInfo.getMainSectionId().isEmpty() || sectionInfo.getId().equals(sectionInfo.getMainSectionId())) {
 				sectionInfo.setMainSectionId(sectionInfo.getId());
 				sectionInfo.setMainSectionName(sectionInfo.getSectionName());
@@ -285,7 +285,7 @@ public class ActionSave extends BaseAction {
 
 		if (check) {
 			try {
-				// 论坛信息添加成功，继续添加权限和角色信息
+				// 포럼 정보 추가 성공, 권한과 역할 정보 계속 추가
 				permissionInfoService.createSectionPermission(sectionInfo);
 			} catch (Exception e) {
 				check = false;
@@ -298,7 +298,7 @@ public class ActionSave extends BaseAction {
 
 		if (check) {
 			try {
-				// 论坛信息添加成功，继续添加权限和角色信息
+				// 포럼 정보 추가 성공, 권한과 역할 정보 계속 추가
 				roleInfoService.createSectionRole( effectivePerson.getDistinguishedName(), sectionInfo);
 			} catch (Exception e) {
 				check = false;
@@ -311,7 +311,7 @@ public class ActionSave extends BaseAction {
 			if (sectionInfo.getMainSectionId() != null
 					&& !sectionInfo.getMainSectionId().equalsIgnoreCase(sectionInfo.getId())) {
 				try {
-					// 如果该版块是子版块，那么主版块的角色也需要重新维护
+					// 하위 게시판이면 상위 게시판 역할도 재설정 필요
 					roleInfoService.createSectionRole( effectivePerson.getDistinguishedName(), sectionInfo.getMainSectionId());
 				} catch (Exception e) {
 					check = false;
@@ -323,7 +323,7 @@ public class ActionSave extends BaseAction {
 		}
 		if (check) {
 			try {
-				// 该版块所处的论坛的角色需要重新维护
+				// 게시판이 속한 포럼의 역할 재설정 필요
 				roleInfoService.createForumRole( effectivePerson, sectionInfo.getForumId());
 			} catch (Exception e) {
 				check = false;
@@ -332,7 +332,7 @@ public class ActionSave extends BaseAction {
 				logger.error(e);
 			}
 		}
-		if (check) {// 检查版主权限的设置
+		if (check) {// 게시판 관리자 권한 설정 확인
 			try {
 				sectionInfoServiceAdv.checkSectionManager(sectionInfo);
 			} catch (Exception e) {
@@ -377,13 +377,13 @@ public class ActionSave extends BaseAction {
 		
 		public static WrapCopier< Wi, BBSSectionInfo > copier = WrapCopierFactory.wi( Wi.class, BBSSectionInfo.class, null, JpaObject.FieldsUnmodify);
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String sectionVisibleResult ;
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String replyPublishResult ;
 		
-		@FieldDescribe("版块访问权限列表，用于接收参数.")
+		@FieldDescribe("게시판 접근 권한 목록, 파라미터 수신용.")
 		private String subjectPublishResult ;
 
 		public String getSectionVisibleResult() {

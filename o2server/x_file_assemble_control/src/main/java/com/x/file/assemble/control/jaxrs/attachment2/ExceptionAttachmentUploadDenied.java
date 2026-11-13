@@ -7,6 +7,6 @@ class ExceptionAttachmentUploadDenied extends PromptException {
 	private static final long serialVersionUID = -7797553180316608418L;
 
 	ExceptionAttachmentUploadDenied(String name) {
-		super("【{}】文件类型不符合上传要求", name);
+		super("[{}] 파일 형식이 업로드 조건에 맞지 않습니다", name);
 	}
 }

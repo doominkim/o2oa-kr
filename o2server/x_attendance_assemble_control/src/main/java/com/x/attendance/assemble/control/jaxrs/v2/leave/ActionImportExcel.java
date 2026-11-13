@@ -32,7 +32,7 @@ import com.x.base.core.project.tools.DateTools;
 import com.x.general.core.entity.GeneralFile;
 
 /**
- * excel 导入请假数据
+ * excel 휴가 데이터 가져오기
  * Created by fancyLou on 2023/4/6.
  * Copyright © 2023 O2. All rights reserved.
  */
@@ -46,7 +46,7 @@ public class ActionImportExcel extends BaseAction {
             throws Exception {
         lock.lock();
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("开始导入请假数据！！！！！！");
+            LOGGER.debug("휴가 데이터 가져오기 시작!!!!!!");
         }
         try (InputStream is = new ByteArrayInputStream(bytes);
              XSSFWorkbook workbook = new XSSFWorkbook(is);
@@ -57,13 +57,13 @@ public class ActionImportExcel extends BaseAction {
                 throw new ExceptionAccessDenied(effectivePerson);
             }
 
-            Sheet sheet = workbook.getSheetAt(0); // 第一个sheet
-            // 固定模版
-            int firstRow = sheet.getFirstRowNum() + 1; // 第一行是标题跳过
+            Sheet sheet = workbook.getSheetAt(0); // 첫 번째 sheet
+            // 고정 템플릿
+            int firstRow = sheet.getFirstRowNum() + 1; // 첫 행은 제목이므로 건너뜀
             int lastRow = sheet.getLastRowNum();
             for (int i = firstRow; i <= lastRow; i++) {
                 Row row = sheet.getRow(i);
-                String person = AttendanceV2Helper.getExcelCellStringValue(row.getCell(0)); // 第一条是person
+                String person = AttendanceV2Helper.getExcelCellStringValue(row.getCell(0)); // 첫 번째는 person
                 if (StringUtils.isEmpty(person)) {
                     setExcelCellError(row, "사용자 식별자는 비워 둘 수 없습니다");
                     continue;
@@ -73,12 +73,12 @@ public class ActionImportExcel extends BaseAction {
                     setExcelCellError(row, "사용자 식별자에 해당하는 사람을 찾을 수 없습니다");
                     continue;
                 }
-                String type = AttendanceV2Helper.getExcelCellStringValue(row.getCell(1)); // 第二条是外出类型:出差|培训|其他
+                String type = AttendanceV2Helper.getExcelCellStringValue(row.getCell(1)); // 두 번째는 외출 유형:출장|교육|기타
                 if (StringUtils.isEmpty(type)) {
                     setExcelCellError(row, "외출 유형은 비워 둘 수 없습니다");
                     continue;
                 }
-                String start = AttendanceV2Helper.getExcelCellStringValue(row.getCell(2)); // 开始时间：yyyy-MM-dd HH:mm:ss
+                String start = AttendanceV2Helper.getExcelCellStringValue(row.getCell(2)); // 시작 시간: yyyy-MM-dd HH:mm:ss
                 if (StringUtils.isEmpty(start)) {
                     setExcelCellError(row, "시작 시간은 비워 둘 수 없습니다");
                     continue;
@@ -90,7 +90,7 @@ public class ActionImportExcel extends BaseAction {
                     setExcelCellError(row, "시작 시간 형식이 올바르지 않습니다");
                     continue;
                 }
-                String end = AttendanceV2Helper.getExcelCellStringValue(row.getCell(3)); // 结束时间：yyyy-MM-dd HH:mm:ss
+                String end = AttendanceV2Helper.getExcelCellStringValue(row.getCell(3)); // 종료 시간: yyyy-MM-dd HH:mm:ss
                 if (StringUtils.isEmpty(end)) {
                     setExcelCellError(row, "종료 시간은 비워 둘 수 없습니다");
                     continue;
@@ -102,11 +102,11 @@ public class ActionImportExcel extends BaseAction {
                     setExcelCellError(row, "종료 시간 형식이 올바르지 않습니다");
                     continue;
                 }
-                String desc = AttendanceV2Helper.getExcelCellStringValue(row.getCell(4)); // 外出说明
+                String desc = AttendanceV2Helper.getExcelCellStringValue(row.getCell(4)); // 외출 설명
                 if (StringUtils.isEmpty(desc)) {
                     desc = "";
                 }
-                String job = AttendanceV2Helper.getExcelCellStringValue(row.getCell(5)); // 流程的jobId,可为空
+                String job = AttendanceV2Helper.getExcelCellStringValue(row.getCell(5)); // 프로세스 jobId, 비워 둘 수 있음
                 if (StringUtils.isEmpty(job)) {
                     job = "";
                 }
@@ -118,12 +118,12 @@ public class ActionImportExcel extends BaseAction {
                 wi.setDescription(desc);
                 wi.setJobId(job);
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("导入数据，row ： " + i + " ， " + wi.toString());
+                    LOGGER.debug("데이터 가져오기, row : " + i + " ， " + wi.toString());
                 }
                 try {
                     ActionPost.Wo postResult = ThisApplication.context().applications().postQuery(x_attendance_assemble_control.class, "v2/leave", wi).getData(ActionPost.Wo.class);
                     if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("处理结果，{}", postResult.toString());
+                        LOGGER.debug("처리 결과, {}", postResult.toString());
                     }
                 } catch (Exception e) {
                     setExcelCellError(row, e.getLocalizedMessage());
@@ -140,7 +140,7 @@ public class ActionImportExcel extends BaseAction {
         } finally {
             lock.unlock();
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("导入结束！！！！！！");
+                LOGGER.debug("가져오기 종료!!!!!!");
             }
         }
     }
@@ -165,7 +165,7 @@ public class ActionImportExcel extends BaseAction {
 
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("返回的结果标识，下载结果文件使用")
+        @FieldDescribe("반환 결과 식별자, 결과 파일 다운로드에 사용")
         private String flag;
 
         public String getFlag() {

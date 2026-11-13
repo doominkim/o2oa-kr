@@ -32,7 +32,7 @@ public class ActionSendTemplateMessage extends BaseAction {
         logger.info(gson.toJson(jsonElement));
         Wo wo = new Wo();
         if (!Config.mpweixin().getEnable() || !Config.mpweixin().getMessageEnable()) {
-            logger.warn("没有开启微信公众号消息功能！");
+            logger.warn("위챗 공식 계정 메시지 기능이 활성화되지 않았습니다!");
             throw new ExceptionConfigError();
         }
         Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
@@ -50,32 +50,32 @@ public class ActionSendTemplateMessage extends BaseAction {
         }
         Person person = getPerson(wi.getReceiver());
         if (person == null) {
-            logger.warn("没有找到用户.");
+            logger.warn("사용자를 찾을 수 없습니다.");
             throw new ExceptionNotExist();
         }
         String openId = person.getMpwxopenId();
         if (StringUtils.isEmpty(openId)) {
-            logger.warn("用户 {} 没有绑定微信 openid ", person.getName());
+            logger.warn("사용자 {} 에 위챗 openid 가 바인딩되지 않았습니다 ", person.getName());
             wo.setValue(false);
             result.setData(wo);
             return result;
         }
         String workUrl = getOpenWorkUrl(wi.getMsgUrl());
         if (StringUtils.isEmpty(workUrl)) {
-            logger.warn("错误的打开地址 ", wi.getMsgUrl());
-            throw new ExceptionNotEmpty("workUrl参数没有配置");
+            logger.warn("잘못된 열기 주소 ", wi.getMsgUrl());
+            throw new ExceptionNotEmpty("workUrl 매개변수가 설정되어 있지 않습니다");
         }
         WeixinTempMessage wxMessage = new WeixinTempMessage();
         wxMessage.setTouser(openId);
         wxMessage.setUrl(workUrl);
         wxMessage.setTemplate_id(wi.getTempId());
         wxMessage.setData(wi.getFieldMap());
-        logger.debug("发送的消息对象:{}.", wxMessage::toString);
+        logger.debug("발송한 메시지 객체:{}.", wxMessage::toString);
         String url = Mpweixin.default_apiAddress + "/cgi-bin/message/template/send?access_token="
                 + Config.mpweixin().accessToken();
         WeixinResponse response = HttpConnection.postAsObject(url, null, wxMessage.toString(),
                 WeixinResponse.class);
-        logger.debug("返回:{}.", response);
+        logger.debug("반환:{}.", response);
         if (response.getErrcode() != 0) {
             ExceptionQiyeweixinMessage e = new ExceptionQiyeweixinMessage(response.getErrcode(), response.getErrmsg());
             logger.error(e);
@@ -91,7 +91,7 @@ public class ActionSendTemplateMessage extends BaseAction {
         Person person;
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
-            // 查询用户
+            // 조회 사용자
             person = business.person().getWithCredential(credential);
         }
         return person;
@@ -102,7 +102,7 @@ public class ActionSendTemplateMessage extends BaseAction {
             String workUrl = url;
             String o2oaUrl = Config.mpweixin().getWorkUrl();
             if (StringUtils.isEmpty(o2oaUrl)) {
-                logger.warn( "没有获取到workUrl参数无法");
+                logger.warn( "workUrl 파라미터를 가져오지 못해 불가");
                 return null;
             }
             workUrl = URLEncoder.encode(workUrl, DefaultCharset.name);
@@ -127,16 +127,16 @@ public class ActionSendTemplateMessage extends BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("接收者，人员 DN")
+        @FieldDescribe("수신자, 사용자 DN")
         private String receiver;
 
-        @FieldDescribe("模板消息 id")
+        @FieldDescribe("템플릿 메시지 id")
         private String tempId;
 
-        @FieldDescribe("模板字段对应填充内容，key是模板字段的名称，value是对应字段填充的内容")
+        @FieldDescribe("템플릿 필드 채움 내용, key는 템플릿 필드 이름, value는 해당 필드에 채울 내용")
         private Map<String, WeixinTempMessageFieldObj> fieldMap;
 
-        @FieldDescribe("点击消息打开的O2OA地址， x_desktop/ 后的地址。")
+        @FieldDescribe("메시지 클릭 시 여는 O2OA 주소, x_desktop/ 뒤의 주소.")
         private String msgUrl;
 
         public String getMsgUrl() {
@@ -176,9 +176,9 @@ public class ActionSendTemplateMessage extends BaseAction {
     public static class WeixinTempMessageFieldObj extends GsonPropertyObject {
 
 
-        @FieldDescribe("模板字段填充内容")
+        @FieldDescribe("템플릿 필드 채움 내용")
         private String value;
-        @FieldDescribe("模板字段文字颜色，如 #173177")
+        @FieldDescribe("템플릿 필드 글자 색, 예: #173177")
         private String color;
 
         public String getValue() {
@@ -200,7 +200,7 @@ public class ActionSendTemplateMessage extends BaseAction {
 
 
     /**
-     * 微信发送模版消息的对象
+     * 위챗 템플릿 메시지 발송 객체
      */
     public class WeixinTempMessage extends GsonPropertyObject {
 
@@ -208,7 +208,7 @@ public class ActionSendTemplateMessage extends BaseAction {
         private String template_id;
         private String url;
         private String topcolor;
-        private Map<String, WeixinTempMessageFieldObj> data; // 模版字段数据
+        private Map<String, WeixinTempMessageFieldObj> data; // 템플릿 필드 데이터
 
         public String getTouser() {
             return touser;

@@ -7,7 +7,7 @@ class ExceptionInvalidCategory extends LanguagePromptException {
 	private static final long serialVersionUID = 6984800093761853101L;
 
 	ExceptionInvalidCategory(String category) {
-		super("分类字段校验不通过:{}.", category);
+		super("분류 필드 검증에 실패했습니다: {}.", category);
 	}
 
 }

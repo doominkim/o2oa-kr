@@ -55,19 +55,19 @@ public class MissionRestore implements Mission {
 					|| BooleanUtils.isNotTrue(Config.externalDataSources().enable())) {
 				Config.resource_commandQueue().add("start dataSkipInit");
 				Config.resource_commandQueue().add("ctl -initResourceFactory");
-				// 命令队列是用多线程运行的,后续如果有ctl -initResourceFactory对目录有操作,可能导致重复删除目录冲突.
+				// 명령 큐는 멀티스레드로 실행되므로, 이후 ctl -initResourceFactory가 디렉터리를 조작하면 디렉터리 중복 삭제 충돌이 발생할 수 있음.
 				Thread.sleep(5000);
 			}
 			if ((null == Config.externalStorageSources())
 					|| BooleanUtils.isNotTrue(Config.externalStorageSources().getEnable())) {
 				Config.resource_commandQueue().add("start storageSkipInit");
-				// 命令队列是用多线程运行的,后续如果有ctl -initResourceFactory对目录有操作,可能导致重复删除目录冲突.
+				// 명령 큐는 멀티스레드로 실행되므로, 이후 ctl -initResourceFactory가 디렉터리를 조작하면 디렉터리 중복 삭제 충돌이 발생할 수 있음.
 				Thread.sleep(5000);
 			}
 			Optional<Path> folder = locationFolder(unzipFolder);
 			if (folder.isPresent()) {
 				Config.resource_commandQueue().add("ctl -rd " + folder.get().toAbsolutePath().toString());
-				Config.resource_commandTerminatedSignal_ctl_rd().take();// 等待执行完成信号.
+				Config.resource_commandTerminatedSignal_ctl_rd().take();// 실행 완료 신호 대기.
 				messages.msg("success");
 			} else {
 				messages.err("can not find catalog.json in folder:{}.", unzipFolder);

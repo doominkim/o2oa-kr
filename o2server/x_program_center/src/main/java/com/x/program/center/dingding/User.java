@@ -13,16 +13,16 @@ public class User extends GsonPropertyObject {
 private static final long serialVersionUID = 4198572763092545607L;
 	// 	{
 // 		"leader":"true",
-// 		"extension":"{\"爱好\":\"旅游\",\"年龄\":\"24\"}",
+// 		"extension":"{\"취미\":\"여행\",\"나이\":\"24\"}",
 // 		"unionid":"z21HjQliSzpw0YWCNxmii6u2Os62cZ62iSZ",
 // 		"boss":"true",
 // 		"exclusive_account":"false",
 // 		"admin":"true",
-// 		"remark":"备注备注",
-// 		"title":"技术总监",
+// 		"remark":"비고비고",
+// 		"title":"기술 이사",
 // 		"hired_date":"1597573616828",
 // 		"userid":"zhangsan",
-// 		"work_place":"未来park",
+// 		"work_place":"미래park",
 // 		"dept_id_list":"[2,3,4]",
 // 		"job_number":"4",
 // 		"email":"test@xxx.com",
@@ -33,7 +33,7 @@ private static final long serialVersionUID = 4198572763092545607L;
 // 		"avatar":"xxx",
 // 		"hide_mobile":"false",
 // 		"org_email":"test@xxx.com",
-// 		"name":"张三",
+// 		"name":"홍길동",
 // 		"state_code":"86"
 // }
 	private String userid;
@@ -50,7 +50,7 @@ private static final long serialVersionUID = 4198572763092545607L;
 	private Boolean leader;
 	private String name;
 	private Boolean active;
-	private List<Long> dept_id_list; // 所属部门id列表。v2 版本 api
+	private List<Long> dept_id_list; // 소속 부서 id 목록. v2 버전 api
 	private String email;
 	private String avatar;
 	private String job_number;

@@ -833,7 +833,7 @@ MWF.xApplication.process.TaskCenter.List.Item = new Class({
 
     openTask: function(e){
         //     this._getJobByTask(function(data){
-        // 判断是否是钉钉环境 是否是独立窗口
+        // DingTalk 환경인지, 독립 창인지 판단
         if (layout.inBrowser && (o2.thirdparty.isDingdingPC() || o2.thirdparty.isQywxPC())) {
             var url = "../x_desktop/work.html?workid=" + this.data.work;
             window.location = o2.filterUrl(url);

@@ -26,19 +26,19 @@ class ActionLogout extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("令牌类型")
+		@FieldDescribe("토큰 유형")
 		private TokenType tokenType;
 
-		@FieldDescribe("令牌")
+		@FieldDescribe("토큰")
 		private String token;
 
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String name;
 
-		@FieldDescribe("标识")
+		@FieldDescribe("식별자")
 		private String unique;
 
-		@FieldDescribe("识别名")
+		@FieldDescribe("식별 이름")
 		private String distinguishedName;
 
 		public String getToken() {

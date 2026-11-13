@@ -7,16 +7,16 @@ public class TargetWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 395825437810549953L;
 
-	@FieldDescribe("关联目标类型.")
+	@FieldDescribe("연관 대상 유형.")
 	private String type;
 
-	@FieldDescribe("关联目标标识.")
+	@FieldDescribe("연관 대상 식별자.")
 	private String bundle;
 
-	@FieldDescribe("关联内容框标识.")
+	@FieldDescribe("연관 콘텐츠 박스 식별자.")
 	private String site;
 
-	@FieldDescribe("来源视图.")
+	@FieldDescribe("출처 뷰.")
 	private String view;
 
 	public String getView() {

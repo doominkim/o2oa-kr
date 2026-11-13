@@ -30,7 +30,7 @@ public class ActionListAll extends BaseAction {
 				report_S_SettingList = calendar_SettingServiceAdv.listAll();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSettingInfoProcess( e, "系统查询所有考勤系统设置信息列表时发生异常." );
+				Exception exception = new ExceptionSettingInfoProcess( e, "전체 근태 시스템 설정 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -41,7 +41,7 @@ public class ActionListAll extends BaseAction {
 				if( ListTools.isNotEmpty(wraps) ) {
 					for( Wo wo : wraps) {
 						if( wo.getIsLob() ) {
-							//查询LOB值
+							//LOB 값 조회
 							lobValue = calendar_SettingServiceAdv.getLobValueWithId( wo.getId() );
 							wo.setConfigValue( lobValue );
 						}
@@ -50,7 +50,7 @@ public class ActionListAll extends BaseAction {
 				result.setData(wraps);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSettingInfoProcess( e, "将所有查询到的考勤配置信息对象转换为可以输出的信息时发生异常." );
+				Exception exception = new ExceptionSettingInfoProcess( e, "조회된 근태 설정 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

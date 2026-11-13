@@ -46,21 +46,21 @@ public class OperatorDataSupplement implements Runnable{
 		attendanceEmployeeConfig = entitySupplementData.getAttendanceEmployeeConfig();
 
 		/*if( check ) {
-			//补充和检验一下配置文件中的人员的所属组织和顶层组织信息是否正常
+			//설정 파일에 있는 사용자의 소속 조직과 최상위 조직 정보가 정상인지 보충·검사
 			try {
 				attendanceEmployeeConfig = attendanceEmployeeConfigServiceAdv.checkAttendanceEmployeeConfig( entitySupplementData.getAttendanceEmployeeConfig() );
 			} catch (Exception e) {
 				check = false;
-				logger.warn( "系统检查需要考勤员工配置信息时发生异常." );
+				logger.warn( "시스템이 근태 대상 직원 설정 정보를 검사하는 중 예외가 발생했습니다." );
 				logger.error(e);
 			}
 		}
-		logger.debug( debugger, ">>>>>>>>>>系统正在核对并补充员工的考勤打卡信息：" + attendanceEmployeeConfig.getEmployeeName() );
+		logger.debug( debugger, ">>>>>>>>>>시스템이 직원 근태 출퇴근 정보를 확인 및 보충하는 중: " + attendanceEmployeeConfig.getEmployeeName() );
 		*/
 		if( check ) {
-			//根据组织信息、统计周期年、月从所有的顶层组织统计周期信息MAP中查询一个适合的统计周期，如果没有则为该组织新建一个新的配置
+			//조직 정보, 통계 주기 연·월로 전체 최상위 조직 통계 주기 MAP에서 적합한 통계 주기를 조회하고, 없으면 해당 조직의 새 설정을 생성
 			try {
-				logger.debug( debugger, ">>>>>>>>>>查询指定的统计周期："+attendanceEmployeeConfig.getTopUnitName() + ", " +
+				logger.debug( debugger, ">>>>>>>>>>지정한 통계 주기 조회:"+attendanceEmployeeConfig.getTopUnitName() + ", " +
 						attendanceEmployeeConfig.getUnitName() + ",  " +
 						entitySupplementData.getCycleYear() + "-" +
 						entitySupplementData.getCycleMonth() + "."
@@ -75,7 +75,7 @@ public class OperatorDataSupplement implements Runnable{
 				);
 			} catch (Exception e) {
 				check = false;
-				logger.warn( "系统在根据员工的顶层组织和组织名称查询指定的统计周期时发生异常."
+				logger.warn( "시스템이 직원의 최상위 조직과 조직 이름으로 지정한 통계 주기를 조회하는 중 예외가 발생했습니다."
 						+ "TopUnit:" + attendanceEmployeeConfig.getTopUnitName()
 						+ ", Unit:" + attendanceEmployeeConfig.getUnitName()
 						+ ", CycleYear:" + entitySupplementData.getCycleYear()
@@ -86,9 +86,9 @@ public class OperatorDataSupplement implements Runnable{
 		
 		if( check ) {
 			if ( attendanceStatisticalCycle != null ) {
-				//System.out.println( ">>>>>>>>>>获取到统计周期：cycle="+attendanceStatisticalCycle.getTopUnitName()+", unitName="+attendanceStatisticalCycle.getUnitName()+", CycleStartDate="+attendanceStatisticalCycle.getCycleStartDateString()+", cycleEndDate="+ attendanceStatisticalCycle.getCycleEndDateString() );
+				//System.out.println( ">>>>>>>>>>통계 주기 조회됨: cycle="+attendanceStatisticalCycle.getTopUnitName()+", unitName="+attendanceStatisticalCycle.getUnitName()+", CycleStartDate="+attendanceStatisticalCycle.getCycleStartDateString()+", cycleEndDate="+ attendanceStatisticalCycle.getCycleEndDateString() );
 				try {
-					logger.warn( "系统尝试核对和补充人员考勤数据，"
+					logger.warn( "시스템이 사용자 근태 데이터 확인 및 보충을 시도합니다."
 							+ "StartDate:" + attendanceStatisticalCycle.getCycleStartDate()
 							+ ", EndDate:" + attendanceStatisticalCycle.getCycleEndDate() );
 					attendanceDetailServiceAdv.dataSupplement( 
@@ -97,10 +97,10 @@ public class OperatorDataSupplement implements Runnable{
 							attendanceEmployeeConfig
 					);
 				} catch (Exception e) {
-					logger.warn( "系统根据时间列表核对和补充员工打卡信息时发生异常.CycleStartDate:" + attendanceStatisticalCycle.getCycleStartDate() + ", CycleEndDate:" + attendanceStatisticalCycle.getCycleEndDate());
+					logger.warn( "시스템이 시간 목록으로 직원 출퇴근 정보를 확인·보충하는 중 예외가 발생했습니다. CycleStartDate:" + attendanceStatisticalCycle.getCycleStartDate() + ", CycleEndDate:" + attendanceStatisticalCycle.getCycleEndDate());
 				}
 			}else {
-				logger.info( "未查询到考勤统计周期信息.......");
+				logger.info( "근태 통계 주기 정보를 찾을 수 없습니다.......");
 			}
 		}
 		

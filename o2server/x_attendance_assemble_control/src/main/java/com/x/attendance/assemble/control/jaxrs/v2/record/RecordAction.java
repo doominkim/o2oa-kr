@@ -29,7 +29,7 @@ import java.util.List;
 
 
 @Path("v2/record")
-@JaxrsDescribe("打卡记录")
+@JaxrsDescribe("체크 기록")
 public class RecordAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(RecordAction.class);
@@ -38,14 +38,14 @@ public class RecordAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "分页查询班次列表.", action = ActionListByPage.class)
+    @JaxrsMethodDescribe(value = "교대 목록 페이지 조회.", action = ActionListByPage.class)
     @POST
     @Path("list/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                             @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-                             @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+                             @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+                             @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListByPage.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -57,13 +57,13 @@ public class RecordAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取打卡记录对象.", action = ActionGet.class)
+    @JaxrsMethodDescribe(value = "체크 기록 객체 조회.", action = ActionGet.class)
     @GET
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                    @JaxrsParameterDescribe("打卡记录ID") @PathParam("id") String id) {
+                    @JaxrsParameterDescribe("체크 기록 ID") @PathParam("id") String id) {
         ActionResult<ActionGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -75,14 +75,14 @@ public class RecordAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据人员和日期删除打卡记录.", action = ActionDeleteByDateAndPeople.class)
+    @JaxrsMethodDescribe(value = "사용자와 날짜로 체크 기록 삭제.", action = ActionDeleteByDateAndPeople.class)
     @GET
     @Path("delete/people/{people}/date/{date}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteByDate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                    @JaxrsParameterDescribe("人员 DN") @PathParam("people") String people,
-                       @JaxrsParameterDescribe("日期 yyyy-MM-dd") @PathParam("date") String date) {
+                    @JaxrsParameterDescribe("사용자 DN") @PathParam("people") String people,
+                       @JaxrsParameterDescribe("날짜 yyyy-MM-dd") @PathParam("date") String date) {
         ActionResult<ActionDeleteByDateAndPeople.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -96,7 +96,7 @@ public class RecordAction extends StandardJaxrsAction {
  
 
 
-    @JaxrsMethodDescribe(value = "获取导入打卡记录数据的模版.", action = ActionExcelTemplate.class)
+    @JaxrsMethodDescribe(value = "체크 기록 데이터 가져오기 템플릿 조회.", action = ActionExcelTemplate.class)
     @GET
     @Path("template")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -113,14 +113,14 @@ public class RecordAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "上传Excel导入打卡记录数据.", action = ActionImportExcel.class)
+    @JaxrsMethodDescribe(value = "Excel 업로드로 체크 기록 데이터 가져오기.", action = ActionImportExcel.class)
     @POST
     @Path("import")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     public void input(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
                       @FormDataParam(FILE_FIELD) final byte[] bytes,
-                      @JaxrsParameterDescribe("Excel文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+                      @JaxrsParameterDescribe("Excel 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult< ActionImportExcel.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -135,7 +135,7 @@ public class RecordAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "导入某一天的打卡记录.", action = ActionPostDailyRecord.class)
+    @JaxrsMethodDescribe(value = "특정 날짜의 체크 기록 가져오기.", action = ActionPostDailyRecord.class)
     @POST
     @Path("import/daily")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -152,7 +152,7 @@ public class RecordAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "外勤打卡审批数据回写.", action = ActionFieldWorkJobFinished.class)
+    @JaxrsMethodDescribe(value = "외근 체크 결재 데이터 회신.", action = ActionFieldWorkJobFinished.class)
     @POST
     @Path("fieldwork/callback")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

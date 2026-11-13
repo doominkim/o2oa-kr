@@ -96,7 +96,7 @@ public class DataServerTools {
 	}
 
 	/**
-	 * 如果H2文件存在,jarVersion 和 localRepositoryDataH2Version 版本不一致,需要升级服务器.
+	 * H2 파일이 존재하고 jarVersion과 localRepositoryDataH2Version 버전이 다르면 서버 업그레이드 필요.
 	 * 
 	 * @throws Exception
 	 */
@@ -122,7 +122,7 @@ public class DataServerTools {
 	}
 
 	/**
-	 * 移动原有数据库
+	 * 기존 데이터베이스 이동
 	 * 
 	 * @param path
 	 * @throws IOException

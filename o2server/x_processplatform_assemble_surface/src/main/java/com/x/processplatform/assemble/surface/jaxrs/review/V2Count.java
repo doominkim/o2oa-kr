@@ -176,19 +176,19 @@ class V2Count extends V2Base {
 
 	public static class Wi extends FilterWi {
 
-		@FieldDescribe("按应用分类")
+		@FieldDescribe("앱별 분류")
 		private Boolean groupByApplication;
 
-		@FieldDescribe("按流程分类")
+		@FieldDescribe("프로세스별 분류")
 		private Boolean groupByProcess;
 
-		@FieldDescribe("按创建人分类")
+		@FieldDescribe("생성자별 분류")
 		private Boolean groupByCreatorPerson;
 
-		@FieldDescribe("按创建人分类")
+		@FieldDescribe("생성자별 분류")
 		private Boolean groupByCreatorUnit;
 
-		@FieldDescribe("按创建年月分类")
+		@FieldDescribe("생성 연월별 분류")
 		private Boolean groupByStartTimeMonth;
 
 		public Boolean getGroupByApplication() {
@@ -235,22 +235,22 @@ class V2Count extends V2Base {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("总数量")
+		@FieldDescribe("총 수량")
 		private Long count;
 
-		@FieldDescribe("按应用分类数量")
+		@FieldDescribe("앱별 분류 수량")
 		private List<NameValueCountPair> applicationList = new ArrayList<>();
 
-		@FieldDescribe("按流程分类数量")
+		@FieldDescribe("프로세스별 분류 수량")
 		private List<NameValueCountPair> processList = new ArrayList<>();
 
-		@FieldDescribe("按创建人分类数量")
+		@FieldDescribe("생성자별 분류 수량")
 		private List<NameValueCountPair> creatorPersonList = new ArrayList<>();
 
-		@FieldDescribe("按创建组织分类数量")
+		@FieldDescribe("생성 조직별 분류 수량")
 		private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-		@FieldDescribe("按创建的年月分类")
+		@FieldDescribe("생성 연월별 분류")
 		private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
 		public Long getCount() {

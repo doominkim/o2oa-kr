@@ -49,7 +49,7 @@ public class ActionGet extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历记录信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 기록 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -65,7 +65,7 @@ public class ActionGet extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -80,7 +80,7 @@ public class ActionGet extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历记录信息时发生异常.ID:" + id );
+					Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 기록 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -94,7 +94,7 @@ public class ActionGet extends BaseAction {
 				result.setData( wrap );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "将所有查询到的日历记录信息对象转换为可以输出的信息时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "조회한 캘린더 기록 정보를 출력 정보로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -108,7 +108,7 @@ public class ActionGet extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>();
 		
-		@FieldDescribe("用户是否可以对该事件进行管理.")
+		@FieldDescribe("사용자가 해당 이벤트를 관리할 수 있는지 여부.")
 		private Boolean manageable = false;
 		
 		public static WrapCopier<Calendar_Event, Wo> copier = WrapCopierFactory.wo( Calendar_Event.class, Wo.class, null,Wo.Excludes);

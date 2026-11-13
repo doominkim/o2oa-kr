@@ -6,7 +6,7 @@ class ExceptionAppInfoAccessDenied extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionAppInfoAccessDenied() {
-		super("栏目信息不允许匿名访问.");
+		super("게시판 정보는 익명으로 접근할 수 없습니다.");
 	}
 
 }

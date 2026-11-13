@@ -69,7 +69,7 @@ public class ProcessPlatformPlan extends Plan {
 	void adjust() throws Exception {
 		this.adjustRuntime();
 		this.adjustWhere();
-		// 先调整slectEntry 顺序不能改
+		// 먼저 slectEntry 조정, 순서 변경 불가
 		this.adjustSelectList();
 	}
 
@@ -101,7 +101,7 @@ public class ProcessPlatformPlan extends Plan {
 	}
 
 	/**
-	 * 获取文档的路径访问权限
+	 * 문서 경로 접근 권한 조회
 	 *
 	 * @param bundles
 	 * @return
@@ -288,8 +288,8 @@ public class ProcessPlatformPlan extends Plan {
 	}
 
 	/**
-	 * 过滤字段权限列表，返回有权限的活动列表 一个流程中存在一个字段不可查，则限制这个流程查询
-	 * 一个流程中多个限制字段的活动列表取交集，取交集后值为空则限制这个字段查询 多个流程之间字段权限互不干扰
+	 * 필드 권한 목록 필터, 권한이 있는 활동 목록 반환. 프로세스에 조회 불가 필드가 하나라도 있으면 해당 프로세스 조회 제한
+	 * 한 프로세스의 여러 제한 필드의 활동 목록은 교집합을 취하고, 교집합이 비면 해당 필드 조회 제한. 프로세스 간 필드 권한은 서로 독립
 	 *
 	 * @param emc
 	 * @param root
@@ -449,9 +449,9 @@ public class ProcessPlatformPlan extends Plan {
 			}
 			for (CompletableFuture<List<String>> future : futures) {
 				os.addAll(future.get(300, TimeUnit.SECONDS));
-				LOGGER.debug("批次数据填充完成.");
+				LOGGER.debug("배치 데이터 채우기 완료.");
 			}
-			// 不等于在这里单独通过等于处理
+			// 같지 않음은 여기서 같음으로 별도 처리
 			if (Comparison.isNotEquals(f.comparison) || Comparison.isNotIn(f.comparison)) {
 				os = ListUtils.subtract(jobs, os);
 			}
@@ -547,7 +547,7 @@ public class ProcessPlatformPlan extends Plan {
 			if (ps.isEmpty()) {
 				throw new IllegalAccessException("where is empty.");
 			}
-			// 业务字段过滤
+			// 업무 필드 필터
 			ps.add(this.assembleFilterPredicate(cb, root, cq, runtime, filterList));
 			ps.add(this.assembleFilterPredicate(cb, root, cq, runtime, runtime.filterList));
 			ps = ListTools.trim(ps, true, false);

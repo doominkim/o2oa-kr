@@ -24,39 +24,39 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("anonymous/form")
-@JaxrsDescribe("可匿名访问的表单信息管理服务")
+@JaxrsDescribe("익명 접근 가능한 양식 정보 관리 서비스")
 public class FormAnonymousAction extends StandardJaxrsAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( FormAnonymousAction.class );
 
-	@JaxrsMethodDescribe(value = "根据ID获取表单对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 양식 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("양식 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
 			result = new ActionGet().execute( request, effectivePerson, id );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在根据ID查询表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "ID로 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询表单,如果有表单那么返回表单id,如果表单不存在那么返回分类的默认Form.", action = V2LookupDoc.class)
+	@JaxrsMethodDescribe(value = "양식 조회, 양식이 있으면 양식 id 반환, 없으면 분류의 기본 Form 반환.", action = V2LookupDoc.class)
 	@GET
 	@Path("v2/lookup/document/{docId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2LookupDoc(@Suspended final AsyncResponse asyncResponse,
 											@Context HttpServletRequest request,
-											@JaxrsParameterDescribe("文档ID") @PathParam("docId") String docId) {
+											@JaxrsParameterDescribe("문서ID") @PathParam("docId") String docId) {
 		ActionResult<V2LookupDoc.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -68,14 +68,14 @@ public class FormAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询表单,如果有表单那么返回表单id,如果表单不存在返回分类的默认FormMobile.", action = V2LookupDocMobile.class)
+	@JaxrsMethodDescribe(value = "양식 조회, 양식이 있으면 양식 id 반환, 없으면 분류의 기본 FormMobile 반환.", action = V2LookupDocMobile.class)
 	@GET
 	@Path("v2/lookup/document/{docId}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2LookupDocMobile(@Suspended final AsyncResponse asyncResponse,
 												  @Context HttpServletRequest request,
-												  @JaxrsParameterDescribe("文档ID") @PathParam("docId") String docId) {
+												  @JaxrsParameterDescribe("문서ID") @PathParam("docId") String docId) {
 		ActionResult<V2LookupDocMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,14 +87,14 @@ public class FormAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取表单.", action = V2Get.class)
+	@JaxrsMethodDescribe(value = "양식 조회.", action = V2Get.class)
 	@GET
 	@Path("v2/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2Get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					  @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-					  @JaxrsParameterDescribe("缓存标志") @QueryParam("t") String t) {
+					  @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+					  @JaxrsParameterDescribe("캐시 플래그") @QueryParam("t") String t) {
 		ActionResult<V2Get.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,14 +106,14 @@ public class FormAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取表单Mobile.", action = V2GetMobile.class)
+	@JaxrsMethodDescribe(value = "양식 Mobile 조회.", action = V2GetMobile.class)
 	@GET
 	@Path("v2/{id}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2GetMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-							@JaxrsParameterDescribe("缓存标志") @QueryParam("t") String t) {
+							@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+							@JaxrsParameterDescribe("캐시 플래그") @QueryParam("t") String t) {
 		ActionResult<V2GetMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

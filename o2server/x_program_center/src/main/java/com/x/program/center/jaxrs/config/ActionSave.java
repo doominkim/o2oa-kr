@@ -33,7 +33,7 @@ import com.x.base.core.project.tools.StringTools;
 import com.x.message.core.entity.Message;
 
 /**
- * 系统配置文件保存
+ * 시스템 설정 파일 저장
  *
  * @author sword
  */
@@ -81,11 +81,11 @@ public class ActionSave extends BaseAction {
 		if (BooleanUtils.isNotTrue(Config.general().getConfigApiEnable()) && !MESSAGE_CONFIG.equals(fileName)) {
 			throw new ExceptionModifyConfig();
 		}
-		LOGGER.info("{}修改配置文件：{}", effectivePerson.getDistinguishedName(), fileName);
+		LOGGER.info("{} 설정 파일 수정: {}", effectivePerson.getDistinguishedName(), fileName);
 		byte[] bytes = wi.getFileContent().getBytes(StandardCharsets.UTF_8);
 
 		Nodes nodes = Config.nodes();
-		// 同步config文件
+		// config 파일 동기화
 		for (String node : nodes.keySet()) {
 			executeSyncFile(Config.DIR_CONFIG + "/" + fileName, node, nodes.get(node).nodeAgentPort(), bytes);
 		}
@@ -107,7 +107,7 @@ public class ActionSave extends BaseAction {
 	}
 
 	/**
-	 * 文件同步
+	 * 파일 동기화
 	 *
 	 * @param syncFilePath
 	 * @param nodeName
@@ -142,7 +142,7 @@ public class ActionSave extends BaseAction {
 			}
 			syncFileFlag = true;
 		} catch (Exception ex) {
-			LOGGER.warn("同步文件{}到节点{}异常：{}.", syncFilePath, nodeName, ex.getMessage());
+			LOGGER.warn("파일 {}를 노드 {}에 동기화 중 예외: {}.", syncFilePath, nodeName, ex.getMessage());
 			syncFileFlag = false;
 		}
 		return syncFileFlag;
@@ -150,10 +150,10 @@ public class ActionSave extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("文件名")
+		@FieldDescribe("파일 이름")
 		private String fileName;
 
-		@FieldDescribe("config文件内容")
+		@FieldDescribe("config 파일 내용")
 		private String fileContent;
 
 		public String getFileName() {
@@ -178,10 +178,10 @@ public class ActionSave extends BaseAction {
 
 		private static final long serialVersionUID = 8468331052732208961L;
 
-		@FieldDescribe("执行时间")
+		@FieldDescribe("실행 시간")
 		private String time;
 
-		@FieldDescribe("执行结果")
+		@FieldDescribe("실행 결과")
 		private String status;
 
 		public String getTime() {

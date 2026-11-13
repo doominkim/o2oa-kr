@@ -19,7 +19,7 @@ import com.x.general.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "District", description = "通用区域.")
+@Schema(name = "District", description = "공통 지역.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.soft)
 @Entity
 @Table(name = PersistenceProperties.Area.District.table, uniqueConstraints = {
@@ -46,79 +46,79 @@ public class District extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* 默认内容结束 */
+	/* 기본 내용 끝 */
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String name;
 
 	public static final String zipCode_FIELDNAME = "zipCode";
-	@FieldDescribe("邮编.")
+	@FieldDescribe("우편번호.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + zipCode_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + zipCode_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String zipCode;
 
 	public static final String cityCode_FIELDNAME = "cityCode";
-	@FieldDescribe("城市区号.")
+	@FieldDescribe("도시 지역번호.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + cityCode_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + cityCode_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cityCode;
 
 	public static final String level_FIELDNAME = "level";
-	@FieldDescribe("级别.")
+	@FieldDescribe("등급.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + level_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + level_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String level;
 
 	public static final String center_FIELDNAME = "center";
-	@FieldDescribe("中心坐标.")
+	@FieldDescribe("중심 좌표.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + center_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + center_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String center;
 
 	public static final String province_FIELDNAME = "province";
-	@FieldDescribe("上级省.")
+	@FieldDescribe("상위 도.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + province_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + province_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String province;
 
 	public static final String city_FIELDNAME = "city";
-	@FieldDescribe("上级市.")
+	@FieldDescribe("상위 시.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + city_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + city_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String city;
 
 	public static final String district_FIELDNAME = "district";
-	@FieldDescribe("上级区.")
+	@FieldDescribe("상위 구.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + district_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + district_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String district;
 
 	public static final String sha_FIELDNAME = "sha";
-	@FieldDescribe("md5校验码.")
+	@FieldDescribe("md5 검증 코드.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sha_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sha_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

@@ -7,6 +7,6 @@ public class ExceptionFolderNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionFolderNotExists( String id ) {
-		super("目录信息对象不存在。ID:" + id );
+		super("폴더 정보가 없습니다. ID:" + id );
 	}
 }

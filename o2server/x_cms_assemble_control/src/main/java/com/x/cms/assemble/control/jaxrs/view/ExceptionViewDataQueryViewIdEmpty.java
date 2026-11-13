@@ -7,6 +7,6 @@ class ExceptionViewDataQueryViewIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionViewDataQueryViewIdEmpty() {
-		super("列表数据查询条件[categoryId]为空,无法进行数据查询。" );
+		super("목록 데이터 조회 조건 [categoryId]가 비어 있어 데이터를 조회할 수 없습니다." );
 	}
 }

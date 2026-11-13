@@ -8,6 +8,6 @@ public class SyncDateException extends PromptException {
     private static final long serialVersionUID = -6409463169780597687L;
 
     public SyncDateException() {
-        super("传入的同步时间不正确！");
+        super("전달된 동기화 시간이 올바르지 않습니다!");
     }
 }

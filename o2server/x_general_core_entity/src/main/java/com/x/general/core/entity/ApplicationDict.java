@@ -12,7 +12,7 @@ import org.apache.openjpa.persistence.jdbc.Index;
 
 import javax.persistence.*;
 
-@Schema(name = "ApplicationDict", description = "流程平台数据字典.")
+@Schema(name = "ApplicationDict", description = "프로세스 플랫폼 데이터 사전.")
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.ApplicationDict.table, uniqueConstraints = {
@@ -40,32 +40,32 @@ public class ApplicationDict extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() {
 	}
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("字典名称.")
+	@FieldDescribe("사전 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true, citationNotExists =
@@ -74,13 +74,13 @@ public class ApplicationDict extends SliceJpaObject {
 	private String alias;
 
 	public static final String project_FIELDNAME = "project";
-	@FieldDescribe("归属项目.")
+	@FieldDescribe("소속 프로젝트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + project_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String project;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;

@@ -4,11 +4,11 @@ import com.x.base.core.entity.JpaObject;
 
 public enum ItemType {
 	/*
-	 * JSONElement的类型，
-	 * 2020年3月11日： Simon Wu
+	 * JSONElement의 유형,
+	 * 2020년 3월 11일: Simon Wu
 	 * o:JsonObject
 	 * a:JsonArray
-	 * p:JsonPrimitive 基本类型
+	 * p:JsonPrimitive 기본 유형
 	 * n:JsonNull
 	 * j:JsonElement
 	 * */

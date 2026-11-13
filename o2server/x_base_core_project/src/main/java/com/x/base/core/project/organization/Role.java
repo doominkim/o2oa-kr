@@ -8,19 +8,19 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class Role extends GsonPropertyObject {
 
-	@FieldDescribe("角色名称")
+	@FieldDescribe("역할 이름")
 	private String name;
-	@FieldDescribe("唯一标识")
+	@FieldDescribe("고유 식별자")
 	private String unique;
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	private String description;
-	@FieldDescribe("识别名")
+	@FieldDescribe("식별 이름")
 	private String distinguishedName;
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	private Integer orderNumber;
-	@FieldDescribe("成员个人")
+	@FieldDescribe("구성원 개인")
 	private List<String> personList = new ArrayList<>();
-	@FieldDescribe("成员群组")
+	@FieldDescribe("구성원 그룹")
 	private List<String> groupList = new ArrayList<>();
 
 	public String getName() {

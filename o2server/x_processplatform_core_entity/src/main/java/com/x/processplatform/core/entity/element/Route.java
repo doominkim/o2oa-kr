@@ -32,7 +32,7 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Route", description = "流程平台路由.")
+@Schema(name = "Route", description = "프로세스 플랫폼 경로.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Route.table, uniqueConstraints = {
@@ -42,11 +42,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Route extends SliceJpaObject {
 
-    // 路由类型,正常
+    // 경로 유형, 정상
     public static final String TYPE_NORMAL = "normal";
-    // 路由类型,转交
+    // 경로 유형, 전달
     public static final String TYPE_APPENDTASK = "appendTask";
-    // 路由类型,退回
+    // 경로 유형, 반송
     public static final String TYPE_BACK = "back";
 
     public static final String APPENDTASKIDENTITYTYPE_SCRIPT = "script";
@@ -63,13 +63,13 @@ public class Route extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
     public void onPersist() throws Exception {
-        // 如果脚本为空，添加默认返回true 的脚本
+        // 스크립트가 비어 있으면 기본으로 true를 반환하는 스크립트 추가
         if (StringUtils.isEmpty(script) && StringUtils.isEmpty(scriptText)) {
             this.scriptText = "return true;";
         }
@@ -125,50 +125,50 @@ public class Route extends SliceJpaObject {
     }
 
     public static final String ASYNCSUPPORTED_FIELDNAME = "asyncSupported";
-    @FieldDescribe("是否启用异步返回.")
+    @FieldDescribe("비동기 반환 사용 여부.")
     @Transient
     private Boolean asyncSupported;
 
     public static final String SOLEDIRECT_FIELDNAME = "soleDirect";
-    @FieldDescribe("选择优先路由时是否直接执行路由(一票否决),默认null.")
+    @FieldDescribe("우선 경로 선택 시 경로 직접 실행 여부(일표 부결), 기본값 null.")
     @Transient
     private Boolean soleDirect;
 
     public static final String DEFAULTSELECTED_FIELDNAME = "defaultSelected";
-    @FieldDescribe("默认选中的路由.")
+    @FieldDescribe("기본 선택 경로.")
     @Transient
     private Boolean defaultSelected;
 
     public static final String name_FIELDNAME = "name";
-    @FieldDescribe("名称.")
+    @FieldDescribe("이름.")
     @Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
-    /* 路由名称可能包含 >= 这样的符号，所以不校验简单字串 */
+    /* 경로 이름에 >= 같은 기호가 포함될 수 있으므로 단순 문자열은 검증하지 않음 */
     @CheckPersist(allowEmpty = true)
     private String name;
 
     public static final String alias_FIELDNAME = "alias";
     @Flag
-    @FieldDescribe("代理节点别名.")
+    @FieldDescribe("대리 노드 별칭.")
     @Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
     @CheckPersist(allowEmpty = true, simplyString = false)
     private String alias;
 
     public static final String description_FIELDNAME = "description";
-    @FieldDescribe("描述.")
+    @FieldDescribe("설명.")
     @Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String description;
 
     public static final String process_FIELDNAME = "process";
     @IdReference(Process.class)
-    @FieldDescribe("流程标识符.")
+    @FieldDescribe("프로세스 식별자.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String process;
 
     public static final String activityType_FIELDNAME = "activityType";
-    @FieldDescribe("目标类别.")
+    @FieldDescribe("대상 유형.")
     @Enumerated(EnumType.STRING)
     @Column(length = ActivityType.length, name = ColumnNamePrefix + activityType_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + activityType_FIELDNAME)
@@ -178,39 +178,39 @@ public class Route extends SliceJpaObject {
     public static final String activity_FIELDNAME = "activity";
     @IdReference({ Agent.class, Begin.class, Cancel.class, Choice.class, Choice.class, Delay.class, Embed.class,
             End.class, Invoke.class, Manual.class, Merge.class, Parallel.class, Service.class, Split.class })
-    @FieldDescribe("目标活动节点标识符.")
+    @FieldDescribe("대상 활동 노드 식별자.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + activity_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String activity;
 
     public static final String track_FIELDNAME = "track";
-    @FieldDescribe("路由的曲线坐标.")
+    @FieldDescribe("경로의 곡선 좌표.")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + track_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String track;
 
     public static final String orderNumber_FIELDNAME = "orderNumber";
-    @FieldDescribe("排序号,升序排列,为空在最后.")
+    @FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막.")
     @Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
     private Integer orderNumber;
 
     public static final String position_FIELDNAME = "position";
-    @FieldDescribe("文本位置.")
+    @FieldDescribe("텍스트 위치.")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + position_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String position;
 
     public static final String script_FIELDNAME = "script";
     @IdReference(Script.class)
-    @FieldDescribe("路由脚本")
+    @FieldDescribe("경로 스크립트")
     @Column(length = length_255B, name = ColumnNamePrefix + script_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String script;
 
     public static final String scriptText_FIELDNAME = "scriptText";
-    @FieldDescribe("路由脚本文本.")
+    @FieldDescribe("경로 스크립트 텍스트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + scriptText_FIELDNAME)
@@ -219,13 +219,13 @@ public class Route extends SliceJpaObject {
 
     public static final String validationScript_FIELDNAME = "validationScript";
     @IdReference(Script.class)
-    @FieldDescribe("校验脚本")
+    @FieldDescribe("검증 스크립트")
     @Column(length = length_255B, name = ColumnNamePrefix + validationScript_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String validationScript;
 
     public static final String validationScriptText_FIELDNAME = "validationScriptText";
-    @FieldDescribe("校验脚本文本.")
+    @FieldDescribe("검증 스크립트 텍스트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + validationScriptText_FIELDNAME)
@@ -233,50 +233,50 @@ public class Route extends SliceJpaObject {
     private String validationScriptText;
 
     public static final String passSameTarget_FIELDNAME = "passSameTarget";
-    @FieldDescribe("如何与前一个环节处理人相同那么自动执行.")
+    @FieldDescribe("이전 단계 처리자와 같으면 자동 실행.")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + passSameTarget_FIELDNAME)
     private Boolean passSameTarget;
 
     public static final String passExpired_FIELDNAME = "passExpired";
-    @FieldDescribe("超时时候的默认路由.")
+    @FieldDescribe("시간 초과 시 기본 경로.")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + passExpired_FIELDNAME)
     private Boolean passExpired;
 
     public static final String opinion_FIELDNAME = "opinion";
-    @FieldDescribe("默认意见.")
+    @FieldDescribe("기본 의견.")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + opinion_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String opinion;
 
     public static final String decisionOpinion_FIELDNAME = "decisionOpinion";
-    @FieldDescribe("决策性意见,使用#分割.")
+    @FieldDescribe("결정성 의견, #으로 구분.")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + decisionOpinion_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String decisionOpinion;
 
     public static final String SOLE_FIELDNAME = "sole";
-    @FieldDescribe("唯一路由,当多人处理时,如果有人选择此路由将通过此路由,后续处理人还是需要处理的,不会一票否决.")
+    @FieldDescribe("유일 경로, 여러 명이 처리할 때 누군가 이 경로를 선택하면 이 경로로 진행하되 후속 처리자는 계속 처리해야 하며 일표 부결되지 않음.")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + SOLE_FIELDNAME)
     private Boolean sole;
 
     public static final String opinionRequired_FIELDNAME = "opinionRequired";
-    @FieldDescribe("路由意见是否必填.")
+    @FieldDescribe("경로 의견 필수 여부.")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + opinionRequired_FIELDNAME)
     private Boolean opinionRequired;
 
     public static final String hiddenScript_FIELDNAME = "hiddenScript";
     @IdReference(Script.class)
-    @FieldDescribe("路由隐藏脚本.")
+    @FieldDescribe("경로 숨김 스크립트.")
     @Column(length = length_255B, name = ColumnNamePrefix + hiddenScript_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String hiddenScript;
 
     public static final String hiddenScriptText_FIELDNAME = "hiddenScriptText";
-    @FieldDescribe("路由隐藏脚本文本.")
+    @FieldDescribe("경로 숨김 스크립트 텍스트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + hiddenScriptText_FIELDNAME)
@@ -285,13 +285,13 @@ public class Route extends SliceJpaObject {
 
     public static final String displayNameScript_FIELDNAME = "displayNameScript";
     @IdReference(Script.class)
-    @FieldDescribe("路由显示名称脚本.")
+    @FieldDescribe("경로 표시 이름 스크립트.")
     @Column(length = length_255B, name = ColumnNamePrefix + displayNameScript_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String displayNameScript;
 
     public static final String displayNameScriptText_FIELDNAME = "displayNameScriptText";
-    @FieldDescribe("路由显示名称脚本文本.")
+    @FieldDescribe("경로 표시 이름 스크립트 텍스트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + displayNameScriptText_FIELDNAME)
@@ -299,7 +299,7 @@ public class Route extends SliceJpaObject {
     private String displayNameScriptText;
 
     public static final String selectConfig_FIELDNAME = "selectConfig";
-    @FieldDescribe("路由选人设置文本.")
+    @FieldDescribe("경로 담당자 선택 설정 텍스트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + selectConfig_FIELDNAME)
@@ -307,27 +307,27 @@ public class Route extends SliceJpaObject {
     private String selectConfig;
 
     public static final String type_FIELDNAME = "type";
-    @FieldDescribe("路由类型")
+    @FieldDescribe("경로 유형")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + type_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String type;
 
     public static final String appendTaskIdentityType_FIELDNAME = "appendTaskIdentityType";
-    @FieldDescribe("添加待办方式.")
+    @FieldDescribe("결재 대기 추가 방식.")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + appendTaskIdentityType_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String appendTaskIdentityType;
 
     public static final String appendTaskIdentityScript_FIELDNAME = "appendTaskIdentityScript";
     @IdReference(Script.class)
-    @FieldDescribe("添加待办人脚本.")
+    @FieldDescribe("결재 대기자 추가 스크립트.")
     @Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
             + appendTaskIdentityScript_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String appendTaskIdentityScript;
 
     public static final String appendTaskIdentityScriptText_FIELDNAME = "appendTaskIdentityScriptText";
-    @FieldDescribe("添加待办人脚本文本.")
+    @FieldDescribe("결재 대기자 추가 스크립트 텍스트.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_1M, name = ColumnNamePrefix + appendTaskIdentityScriptText_FIELDNAME)
@@ -335,11 +335,11 @@ public class Route extends SliceJpaObject {
     private String appendTaskIdentityScriptText;
 
     public static final String edition_FIELDNAME = "edition";
-    @FieldDescribe("版本编码.")
+    @FieldDescribe("버전 코드.")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + edition_FIELDNAME)
     private String edition;
 
-    @FieldDescribe("属性对象存储字段.")
+    @FieldDescribe("속성 객체 저장 필드.")
     @Persistent(fetch = FetchType.EAGER)
     @Strategy(JsonPropertiesValueHandler)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

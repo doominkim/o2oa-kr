@@ -7,6 +7,6 @@ class ExceptionFormForEditNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionFormForEditNotExists( String id ) {
-		super("分类设置的文档编辑表单不存在。ID:{}", id );
+		super("분류에 설정된 게시글 편집 양식이 없습니다. ID: {}", id );
 	}
 }

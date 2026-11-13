@@ -16,8 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Date;
 
 /**
- * 单聊 虚拟删除
- * 在 IMConversationExt 会话扩展中添加一个删除标识，一个最新删除日期
+ * 1:1 채팅 가상 삭제
+ * IMConversationExt 대화 확장에 삭제 표시와 최근 삭제 일자 추가
  * Created by fancyLou on 2022/12/1.
  * Copyright © 2022 O2. All rights reserved.
  */
@@ -28,7 +28,7 @@ public class ActionDeleteSingleConversationVirtual  extends BaseAction {
 
     ActionResult<Wo> execute(EffectivePerson effectivePerson, String conversationId) throws Exception {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("单聊 个人虚拟删除会话 person:{}, conversationId:{}.", effectivePerson.getDistinguishedName(), conversationId);
+            LOGGER.debug("1:1 채팅 개인 가상 삭제 대화 person:{}, conversationId:{}.", effectivePerson.getDistinguishedName(), conversationId);
         }
         ActionResult<Wo> result = new ActionResult<>();
         if (StringUtils.isEmpty(conversationId)) {
@@ -39,7 +39,7 @@ public class ActionDeleteSingleConversationVirtual  extends BaseAction {
             if (conversation == null) {
                 throw new ExceptionConversationNotExist();
             }
-            // 这个Action操作是针对单聊的，不是单聊不给操作！
+            // 이 Action은 1:1 채팅 전용입니다. 1:1 채팅이 아니면 처리할 수 없습니다!
             if (!conversation.getType().equals(IMConversation.CONVERSATION_TYPE_SINGLE)) {
                 throw new ExceptionConvDeleteNoPermission();
             }
@@ -56,7 +56,7 @@ public class ActionDeleteSingleConversationVirtual  extends BaseAction {
             emc.beginTransaction(IMConversationExt.class);
             emc.persist(ext, CheckPersistType.all);
             emc.commit();
-            LOGGER.info("虚拟删除单聊成功 person {} ==============================================", effectivePerson.getDistinguishedName());
+            LOGGER.info("1:1 채팅 가상 삭제 성공 person {} ==============================================", effectivePerson.getDistinguishedName());
             Wo wo = new Wo();
             wo.setValue(true);
             result.setData(wo);

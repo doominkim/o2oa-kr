@@ -42,7 +42,7 @@ public class ActionFileUpload extends BaseAction {
 			fileName = this.fileName(disposition);
 		}
 		if( StringUtils.isEmpty(docId) ){
-			throw new URLParameterGetException( new Exception("未获取到汇报ID") );
+			throw new URLParameterGetException( new Exception("보고 ID를 가져오지 못했습니다") );
 		}
 
 		Document document = documentQueryService.get( docId );

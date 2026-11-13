@@ -41,7 +41,7 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Embed", description = "流程平台流程调用.")
+@Schema(name = "Embed", description = "프로세스 플랫폼 프로세스 호출.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Embed.table, uniqueConstraints = {
@@ -62,12 +62,12 @@ public class Embed extends Activity {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -87,7 +87,7 @@ public class Embed extends Activity {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	@Override
 	public List<String> getRouteList() {
@@ -114,37 +114,37 @@ public class Embed extends Activity {
 	}
 
 	public static final String COMPLETEDSCRIPT_FIELDNAME = "completedScript";
-	@FieldDescribe("嵌入子流程在结束事件(包含cancel和end活动)脚本,.")
+	@FieldDescribe("내장 하위 프로세스 종료 이벤트(cancel과 end 활동 포함) 스크립트.")
 	@Transient
 	private String completedScript;
 
 	public static final String COMPLETEDSCRIPTTEXT_FIELDNAME = "completedScriptText";
-	@FieldDescribe("嵌入子流程在结束事件包含cancel和end活动脚本文本.")
+	@FieldDescribe("내장 하위 프로세스 종료 이벤트(cancel과 end 활동 포함) 스크립트 텍스트.")
 	@Transient
 	private String completedScriptText;
 
 	public static final String COMPLETEDENDSCRIPT_FIELDNAME = "completedEndScript";
-	@FieldDescribe("嵌入子流程在End节点结束事件脚本.")
+	@FieldDescribe("내장 하위 프로세스 End 노드 종료 이벤트 스크립트.")
 	@Transient
 	private String completedEndScript;
 
 	public static final String COMPLETEDENDSCRIPTTEXT_FIELDNAME = "completedEndScriptText";
-	@FieldDescribe("嵌入子流程在End节点结束事件脚本文本.")
+	@FieldDescribe("내장 하위 프로세스 End 노드 종료 이벤트 스크립트 텍스트.")
 	@Transient
 	private String completedEndScriptText;
 
 	public static final String COMPLETEDCANCELSCRIPT_FIELDNAME = "completedCancelScript";
-	@FieldDescribe("嵌入子流程在Cancel节点结束事件脚本.")
+	@FieldDescribe("내장 하위 프로세스 Cancel 노드 종료 이벤트 스크립트.")
 	@Transient
 	private String completedCancelScript;
 
 	public static final String COMPLETEDCANCELSCRIPTTEXT_FIELDNAME = "completedCancelScriptText";
-	@FieldDescribe("嵌入子流程在Cancel节点结束事件脚本文本.")
+	@FieldDescribe("내장 하위 프로세스 Cancel 노드 종료 이벤트 스크립트 텍스트.")
 	@Transient
 	private String completedCancelScriptText;
 
 	public static final String CUSTOMDATA_FIELDNAME = "customData";
-	@FieldDescribe("节点自定义数据.")
+	@FieldDescribe("노드 사용자 정의 데이터.")
 	@Transient
 	private JsonElement customData;
 
@@ -213,50 +213,50 @@ public class Embed extends Activity {
 		this.completedScriptText = completedScriptText;
 	}
 
-	@FieldDescribe("分组")
+	@FieldDescribe("그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + group_FIELDNAME)
 	private String group;
 
-	@FieldDescribe("意见分组")
+	@FieldDescribe("의견 그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + opinionGroup_FIELDNAME)
 	private String opinionGroup;
 
-	@FieldDescribe("节点名称.")
+	@FieldDescribe("노드 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String name;
 
 	@Flag
-	@FieldDescribe("节点别名.")
+	@FieldDescribe("노드 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String alias;
 
-	@FieldDescribe("节点唯一标识")
+	@FieldDescribe("노드 고유 식별자")
 	@Column(length = length_64B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String unique = createId();
 
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	@IdReference(Process.class)
-	@FieldDescribe("流程标识,不为空.")
+	@FieldDescribe("프로세스 식별자, 비어 있을 수 없음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
-	@FieldDescribe("节点位置.")
+	@FieldDescribe("노드 위치.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + position_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String position;
 
-	@FieldDescribe("前端自定内容.")
+	@FieldDescribe("프런트엔드 사용자 정의 내용.")
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + extension_FIELDNAME)
 	@Basic(fetch = FetchType.EAGER)
 	@Lob
@@ -264,13 +264,13 @@ public class Embed extends Activity {
 	private String extension;
 
 	@IdReference(Form.class)
-	@FieldDescribe("节点使用的表单.")
+	@FieldDescribe("노드에서 사용하는 양식.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + form_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + form_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String form;
 
-	@FieldDescribe("待阅人名称,存储 Identity,多值.")
+	@FieldDescribe("열람 대기자 이름, Identity 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readIdentityList_FIELDNAME
@@ -281,7 +281,7 @@ public class Embed extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readIdentityList;
 
-	@FieldDescribe("待阅组织名称,存储unit,多值.")
+	@FieldDescribe("열람 대기 조직 이름, unit 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readUnitList_FIELDNAME
@@ -292,7 +292,7 @@ public class Embed extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readUnitList;
 
-	@FieldDescribe("待阅群组名称,存储group,多值.")
+	@FieldDescribe("열람 대기 그룹 이름, group 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readGroupList_FIELDNAME
@@ -304,26 +304,26 @@ public class Embed extends Activity {
 	private List<String> readGroupList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("待阅人脚本.")
+	@FieldDescribe("열람 대기자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + readScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readScript;
 
-	@FieldDescribe("待阅人脚本文本.")
+	@FieldDescribe("열람 대기자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + readScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readScriptText;
 
-	@FieldDescribe("待阅角色定义内容.")
+	@FieldDescribe("열람 대기 역할 정의 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + readDuty_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readDuty;
 
-	@FieldDescribe("活动待阅人员data数据路径.")
+	@FieldDescribe("활동 열람 대기 사용자 data 데이터 경로.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readDataPathList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readDataPathList_FIELDNAME
@@ -334,7 +334,7 @@ public class Embed extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readDataPathList;
 
-	@FieldDescribe("参与人名称,多值.")
+	@FieldDescribe("참여자 이름, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -345,7 +345,7 @@ public class Embed extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> reviewIdentityList;
 
-	@FieldDescribe("参与人组织名称,多值.")
+	@FieldDescribe("참여자 조직 이름, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + reviewUnitList_FIELDNAME
@@ -356,7 +356,7 @@ public class Embed extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> reviewUnitList;
 
-	@FieldDescribe("参与人群组名称,存储group,多值.")
+	@FieldDescribe("참여자 그룹 이름, group 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + reviewGroupList_FIELDNAME
@@ -368,26 +368,26 @@ public class Embed extends Activity {
 	private List<String> reviewGroupList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("参与人脚本.")
+	@FieldDescribe("참여자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + reviewScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewScript;
 
-	@FieldDescribe("参与人脚本文本.")
+	@FieldDescribe("참여자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + reviewScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewScriptText;
 
-	@FieldDescribe("参阅角色定义内容.")
+	@FieldDescribe("참조 열람 역할 정의 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + reviewDuty_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewDuty;
 
-	@FieldDescribe("参阅人员data数据路径.")
+	@FieldDescribe("참조 열람 사용자 data 데이터 경로.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewDataPathList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -399,12 +399,12 @@ public class Embed extends Activity {
 	private List<String> reviewDataPathList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动到达前事件脚本.")
+	@FieldDescribe("활동 도착 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeArriveScript;
 
-	@FieldDescribe("活动到达前事件脚本文本.")
+	@FieldDescribe("활동 도착 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeArriveScriptText_FIELDNAME)
@@ -412,12 +412,12 @@ public class Embed extends Activity {
 	private String beforeArriveScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动到达后事件脚本.")
+	@FieldDescribe("활동 도착 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterArriveScript;
 
-	@FieldDescribe("活动到达后事件脚本文本.")
+	@FieldDescribe("활동 도착 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterArriveScriptText_FIELDNAME)
@@ -425,12 +425,12 @@ public class Embed extends Activity {
 	private String afterArriveScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动执行前事件脚本.")
+	@FieldDescribe("활동 실행 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeExecuteScript;
 
-	@FieldDescribe("活动执行前事件脚本文本.")
+	@FieldDescribe("활동 실행 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeExecuteScriptText_FIELDNAME)
@@ -438,12 +438,12 @@ public class Embed extends Activity {
 	private String beforeExecuteScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动执行后事件脚本.")
+	@FieldDescribe("활동 실행 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterExecuteScript;
 
-	@FieldDescribe("活动执行后事件脚本文本.")
+	@FieldDescribe("활동 실행 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterExecuteScriptText_FIELDNAME)
@@ -451,12 +451,12 @@ public class Embed extends Activity {
 	private String afterExecuteScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("路由查询前事件脚本.")
+	@FieldDescribe("경로 조회 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeInquireScript;
 
-	@FieldDescribe("路由查询前事件脚本文本.")
+	@FieldDescribe("경로 조회 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeInquireScriptText_FIELDNAME)
@@ -464,45 +464,45 @@ public class Embed extends Activity {
 	private String beforeInquireScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("路由查询后事件脚本.")
+	@FieldDescribe("경로 조회 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterInquireScript;
 
-	@FieldDescribe("路由查询后事件脚本文本.")
+	@FieldDescribe("경로 조회 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterInquireScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterInquireScriptText;
 
-	@FieldDescribe("允许调度")
+	@FieldDescribe("스케줄링 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowReroute_FIELDNAME)
 	private Boolean allowReroute;
 
-	@FieldDescribe("允许调度到此节点")
+	@FieldDescribe("이 노드로의 스케줄링 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowRerouteTo_FIELDNAME)
 	private Boolean allowRerouteTo;
 
 	public static final String route_FIELDNAME = "route";
 	@IdReference(Route.class)
-	@FieldDescribe("出口路由.")
+	@FieldDescribe("출구 경로.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + route_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String route;
 
 	public static final String targetApplication_FIELDNAME = "targetApplication";
 	@IdReference(Application.class)
-	@FieldDescribe("目标应用")
+	@FieldDescribe("대상 앱")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + targetApplication_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetApplication_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String targetApplication;
 
 	public static final String targetApplicationName_FIELDNAME = "targetApplicationName";
-	@FieldDescribe("目标应用名称.")
+	@FieldDescribe("대상 앱 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ targetApplicationName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetApplicationName_FIELDNAME)
@@ -510,7 +510,7 @@ public class Embed extends Activity {
 	private String targetApplicationName;
 
 	public static final String targetApplicationAlias_FIELDNAME = "targetApplicationAlias";
-	@FieldDescribe("目标应用别名.")
+	@FieldDescribe("대상 앱 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ targetApplicationAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetApplicationAlias_FIELDNAME)
@@ -519,14 +519,14 @@ public class Embed extends Activity {
 
 	public static final String targetProcess_FIELDNAME = "targetProcess";
 	@IdReference(Process.class)
-	@FieldDescribe("目标流程ID.")
+	@FieldDescribe("대상 프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + targetProcess_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetProcess_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String targetProcess;
 
 	public static final String targetProcessName_FIELDNAME = "targetProcessName";
-	@FieldDescribe("目标流程名称.")
+	@FieldDescribe("대상 프로세스 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ targetProcessName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetProcessName_FIELDNAME)
@@ -534,7 +534,7 @@ public class Embed extends Activity {
 	private String targetProcessName;
 
 	public static final String targetProcessAlias_FIELDNAME = "targetProcessAlias";
-	@FieldDescribe("目标流程别名.")
+	@FieldDescribe("대상 프로세스 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ targetProcessAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetProcessAlias_FIELDNAME)
@@ -542,7 +542,7 @@ public class Embed extends Activity {
 	private String targetProcessAlias;
 
 	public static final String targetIdentity_FIELDNAME = "targetIdentity";
-	@FieldDescribe("指定的启动者.")
+	@FieldDescribe("지정된 시작자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ targetIdentity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetIdentity_FIELDNAME)
@@ -550,19 +550,19 @@ public class Embed extends Activity {
 	private String targetIdentity;
 
 	public static final String inheritData_FIELDNAME = "inheritData";
-	@FieldDescribe("是否继承Data")
+	@FieldDescribe("Data 상속 여부")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + inheritData_FIELDNAME)
 	private Boolean inheritData;
 
 	public static final String inheritAttachment_FIELDNAME = "inheritAttachment";
-	@FieldDescribe("是否继承附件")
+	@FieldDescribe("첨부파일 상속 여부")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + inheritAttachment_FIELDNAME)
 	private Boolean inheritAttachment;
 
 	public static final String embedCreatorType_FIELDNAME = "embedCreatorType";
-	@FieldDescribe("嵌入启动流程的启动人员类型:creator, identity, lastIdentity")
+	@FieldDescribe("내장 시작 프로세스의 시작자 유형: creator, identity, lastIdentity")
 	@Enumerated(EnumType.STRING)
 	@Column(length = EmbedCreatorType.length, name = ColumnNamePrefix + embedCreatorType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -570,14 +570,14 @@ public class Embed extends Activity {
 
 	public static final String targetTitleScript_FIELDNAME = "targetTitleScript";
 	@IdReference(Script.class)
-	@FieldDescribe("产生标题脚本.")
+	@FieldDescribe("제목 생성 스크립트.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ targetTitleScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String targetTitleScript;
 
 	public static final String targetTitleScriptText_FIELDNAME = "targetTitleScriptText";
-	@FieldDescribe("产生标题脚本文本.")
+	@FieldDescribe("제목 생성 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + targetTitleScriptText_FIELDNAME)
@@ -586,13 +586,13 @@ public class Embed extends Activity {
 
 	public static final String targetIdentityScript_FIELDNAME = "targetIdentityScript";
 	@IdReference(Script.class)
-	@FieldDescribe("产生创建这身份.")
+	@FieldDescribe("생성자 신분 생성.")
 	@Column(length = length_255B, name = ColumnNamePrefix + targetIdentityScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String targetIdentityScript;
 
 	public static final String targetIdentityScriptText_FIELDNAME = "targetIdentityScriptText";
-	@FieldDescribe("产生创建这身份文本.")
+	@FieldDescribe("생성자 신분 생성 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + targetIdentityScriptText_FIELDNAME)
@@ -601,13 +601,13 @@ public class Embed extends Activity {
 
 	public static final String targetAssginDataScript_FIELDNAME = "targetAssginDataScript";
 	@IdReference(Script.class)
-	@FieldDescribe("修改调用数据的脚本.")
+	@FieldDescribe("호출 데이터 수정 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + targetAssginDataScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String targetAssginDataScript;
 
 	public static final String targetAssginDataScriptText_FIELDNAME = "targetAssginDataScriptText";
-	@FieldDescribe("修改调用数据的脚本文本.")
+	@FieldDescribe("호출 데이터 수정 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + targetAssginDataScriptText_FIELDNAME)
@@ -615,18 +615,18 @@ public class Embed extends Activity {
 	private String targetAssginDataScriptText;
 
 //	public static final String async_FIELDNAME = "async";
-//	@FieldDescribe("是否是异步调用")
+//	@FieldDescribe("비동기 호출 여부")
 //	@Column(name = ColumnNamePrefix + async_FIELDNAME)
 //	@CheckPersist(allowEmpty = true)
 //	private Boolean async;
 
 	@IdReference(Script.class)
-	@FieldDescribe("生成displayLog脚本.")
+	@FieldDescribe("displayLog 생성 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + displayLogScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String displayLogScript;
 
-	@FieldDescribe("生成displayLog脚本文本.")
+	@FieldDescribe("displayLog 생성 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + displayLogScriptText_FIELDNAME)
@@ -634,12 +634,12 @@ public class Embed extends Activity {
 	private String displayLogScriptText;
 
 	public static final String edition_FIELDNAME = "edition";
-	@FieldDescribe("版本编码.")
+	@FieldDescribe("버전 코드.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + edition_FIELDNAME)
 	private String edition;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -647,7 +647,7 @@ public class Embed extends Activity {
 	private EmbedProperties properties;
 
 	public static final String WAITUNTILCOMPLETED_FIELDNAME = "waitUntilCompleted";
-	@FieldDescribe("等待至子流程结束.")
+	@FieldDescribe("하위 프로세스 종료까지 대기.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + WAITUNTILCOMPLETED_FIELDNAME)
 	private Boolean waitUntilCompleted;

@@ -142,7 +142,7 @@ class ActionCreate extends BaseAction {
 		case MessageConnector.CONSUME_ANDFX:
 			message = this.v3AndFxMessage(wi, consumer);
 			break;
-		// custom_消息需要判断事件类型
+		// custom_ 메시지는 이벤트 유형 판단 필요
 		default:
 			if (StringUtils.startsWith(type, MessageConnector.CONSUME_CUSTOM_PREFIX)) {
 				message = this.v3Message(wi, consumer);
@@ -163,7 +163,7 @@ class ActionCreate extends BaseAction {
 		EvalMessage evalMessage = this.v3Load(wi, consumer.getLoader());
 		if (null != evalMessage) {
 			JsonElement jsonElement = evalMessage.getBody();
-			// 如果脚本直接返回HTML或者text那么直接输出
+			// 스크립트가 HTML이나 text를 직접 반환하면 그대로 출력
 			if (jsonElement.isJsonPrimitive()) {
 				message.setBody(jsonElement.getAsJsonPrimitive().getAsString());
 			} else {
@@ -331,7 +331,7 @@ class ActionCreate extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			LOGGER.warn("执行filter脚本 {} 异常:{}.", () -> filter, e::getMessage);
+			LOGGER.warn("filter 스크립트 {} 실행 예외:{}.", () -> filter, e::getMessage);
 		}
 		return true;
 	}
@@ -365,7 +365,7 @@ class ActionCreate extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			LOGGER.warn("执行 loader 脚本 {} 异常:{}.", () -> loader, e::getMessage);
+			LOGGER.warn("loader 스크립트 {} 실행 예외:{}.", () -> loader, e::getMessage);
 		}
 		return null;
 	}

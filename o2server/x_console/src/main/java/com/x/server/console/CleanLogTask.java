@@ -35,7 +35,7 @@
 //				String value = StringUtils.substringBefore(name, ".");
 //				Date date = DateTools.parse(value, "yyyy_MM_dd");
 //				if (now.getTime() - date.getTime() > (1000 * 60 * 60 * 24 * Config.currentNode().logSize())) {
-//					logger.print("删除旧的日志文件:{}.", f.getAbsolutePath());
+//					logger.print("이전 로그 파일 삭제:{}.", f.getAbsolutePath());
 //					FileUtils.forceDelete(f);
 //				}
 //			}

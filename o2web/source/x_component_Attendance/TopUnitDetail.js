@@ -361,18 +361,18 @@ MWF.xApplication.Attendance.TopUnitDetail.Explorer = new Class({
     ////        "name" : "isLeaveEarlier",
     ////        "type" : "select",
     ////        "selectValue" : ["-1","true","false"],
-    ////        "selectText" : ["","早退","未早退"],
+    ////        "selectText" : ["","조퇴","조퇴 아님"],
     ////    }, true, this.app );
     ////    this.isLeaveEarlier.load();
     ////},
     //createLackOfTimeCount: function(tr){
-    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "工时不足"  }).inject(tr);
+    //    var td = new Element("td", {  "styles" : this.css.filterTableTitle, "text" : "근무 시간 부족"  }).inject(tr);
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    this.isLackOfTime = new MDomItem( td, {
     //        "name" : "isLackOfTime",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","是","否"],
+    //        "selectText" : ["","예","아니요"],
     //    }, true, this.app );
     //    this.isLackOfTime.load();
     //},
@@ -383,19 +383,19 @@ MWF.xApplication.Attendance.TopUnitDetail.Explorer = new Class({
     //        "name" : "isLate",
     //        "type" : "select",
     //        "selectValue" : ["","true","false"],
-    //        "selectText" : ["","迟到","未迟到"],
+    //        "selectText" : ["","지각","지각 아님"],
     //    }, true, this.app );
     //    this.isLate.load();
     //},
     //createActionTd : function( tr ){
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    var input = new Element("button",{
-    //        "text" : "查询",
+    //        "text" : "조회",
     //        "styles" : this.css.filterButton
     //    }).inject(td);
     //    input.addEvent("click", function(){
     //        if( this.q_topUnitName.getValue().trim() == "" ){
-    //            this.app.notice( "请先选择公司", "error" );
+    //            this.app.notice( "먼저 회사를 선택하십시오", "error" );
     //            return;
     //        }
     //        var filterData = {
@@ -432,7 +432,7 @@ MWF.xApplication.Attendance.TopUnitDetail.Explorer = new Class({
     //selecePerson: function(){
     //    var options = {
     //        "type": "topUnit",
-    //        "title": "选择公司",
+    //        "title": "회사 선택",
     //        "count" : "1",
     //        "onComplete": function(items){
     //            var names = [];
@@ -574,16 +574,16 @@ MWF.xApplication.Attendance.TopUnitDetail.DetailStaticExplorer = new Class({
     //createActionTd : function( tr ){
     //    var td = new Element("td", {  "styles" : this.css.filterTableValue }).inject(tr);
     //    var input = new Element("button",{
-    //        "text" : "查询",
+    //        "text" : "조회",
     //        "styles" : this.css.filterButton
     //    }).inject(td);
     //    input.addEvent("click", function(){
     //        if( this.q_topUnitName.getValue().trim() == "" ){
-    //            this.app.notice( "请先选择公司", "error" );
+    //            this.app.notice( "먼저 회사를 선택하십시오", "error" );
     //            return;
     //        }
     //        //if( this.q_type.getValue() == "day" && this.q_date.getValue()=="" ){
-    //        //    this.app.notice( "请先选择日期", "error" );
+    //        //    this.app.notice( "먼저 날짜를 선택하십시오", "error" );
     //        //    return;
     //        //}
     //        var filterData = {

@@ -9,12 +9,12 @@ public class V2EditWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -8631082471633729236L;
 
-	@FieldDescribe("选择的路由名称")
-	@Schema(description = "选择的路由名称")
+	@FieldDescribe("선택한 경로 이름")
+	@Schema(description = "선택한 경로 이름")
 	private String routeName;
 
-	@FieldDescribe("意见")
-	@Schema(description = "意见")
+	@FieldDescribe("의견")
+	@Schema(description = "의견")
 	private String opinion;
 
 	public String getRouteName() {

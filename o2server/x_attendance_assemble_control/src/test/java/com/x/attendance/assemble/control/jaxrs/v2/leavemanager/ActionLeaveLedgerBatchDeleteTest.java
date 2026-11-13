@@ -30,13 +30,13 @@ class ActionLeaveLedgerBatchDeleteTest {
     @Test
     void buildCancelTransactionUsesRemainingAmount() {
         AttendanceV2LeaveLedger ledger = new AttendanceV2LeaveLedger();
-        ledger.setPerson("张三@P");
+        ledger.setPerson("홍길동@P");
         ledger.setLeaveTypeId("leaveTypeId");
         ledger.setRemainingAmount(3.5);
 
         AttendanceV2LeaveTransaction transaction = ActionLeaveLedgerBatchDelete.buildCancelTransaction(ledger);
 
-        assertEquals("张三@P", transaction.getPerson());
+        assertEquals("홍길동@P", transaction.getPerson());
         assertEquals("leaveTypeId", transaction.getLeaveTypeId());
         assertEquals(ledger.getId(), transaction.getLedgerId());
         assertEquals(BizTypeEnum.CANCEL.getValue(), transaction.getBizType());

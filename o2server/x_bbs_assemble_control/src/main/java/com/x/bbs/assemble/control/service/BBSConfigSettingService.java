@@ -18,7 +18,7 @@ import com.x.bbs.entity.BBSConfigSetting;
 
 
 /**
- * 平台配置
+ * 플랫폼 설정
  * @author sword
  */
 public class BBSConfigSettingService{
@@ -28,7 +28,7 @@ public class BBSConfigSettingService{
 	private Cache.CacheCategory cacheCategory = new Cache.CacheCategory(BBSConfigSetting.class);
 
 	/**
-	 * 根据传入的ID从数据库查询BBSConfigSetting对象
+	 * 전달된 ID로 데이터베이스에서 BBSConfigSetting 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -45,7 +45,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 * 向数据库保存BBSConfigSetting对象
+	 * 데이터베이스에 BBSConfigSetting 객체 저장
 	 * @param bbsConfigSetting
 	 */
 	public BBSConfigSetting save( BBSConfigSetting bbsConfigSetting ) throws Exception {
@@ -71,7 +71,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 * 向数据库保存BBSConfigSetting对象
+	 * 데이터베이스에 BBSConfigSetting 객체 저장
 	 * @param bbsConfigSetting
 	 */
 	public BBSConfigSetting update( BBSConfigSetting bbsConfigSetting ) throws Exception {
@@ -97,7 +97,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 * 根据ID从数据库中删除BBSConfigSetting对象
+	 * ID로 데이터베이스에서 BBSConfigSetting 객체 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -107,7 +107,7 @@ public class BBSConfigSettingService{
 			throw new Exception( "id is null, system can not delete any object." );
 		}
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			bbsConfigSetting = emc.find(id, BBSConfigSetting.class);
 			if (null == bbsConfigSetting) {
 				logger.warn( "object is not exist {'id':'"+ id +"'}" );
@@ -123,7 +123,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 * 根据传入的ID从数据库查询BBSConfigSetting对象
+	 * 전달된 ID로 데이터베이스에서 BBSConfigSetting 객체 조회
 	 * @param configCode
 	 * @return
 	 * @throws Exception
@@ -151,7 +151,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 * 论坛是否启用昵称，默认不启用
+	 * 포럼 닉네임 사용 여부, 기본값 사용 안 함
 	 */
 	public boolean useNickName() {
 		try {
@@ -166,7 +166,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 * 根据传入的ID从数据库查询BBSConfigSetting对象
+	 * 전달된 ID로 데이터베이스에서 BBSConfigSetting 객체 조회
 	 * @param configCode
 	 * @return
 	 * @throws Exception
@@ -195,7 +195,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 * 检查配置项是否存在，如果不存在根据信息创建一个新的配置项
+	 * 설정 항목 존재 여부를 확인하고, 없으면 정보로 새 설정 항목 생성
 	 * @param configCode
 	 * @param configName
 	 * @param configValue
@@ -218,7 +218,7 @@ public class BBSConfigSettingService{
 			logger.warn( "system find system config{'configCode':'"+configCode+"'} got an exception. " );
 			throw e;
 		}
-		//如果配置不存在，则新建一个配置记录
+		//설정이 없으면 새 설정 레코드 생성
 		if( bbsConfigSetting == null ){
 			bbsConfigSetting = new BBSConfigSetting();
 			bbsConfigSetting.setConfigCode( configCode );
@@ -269,7 +269,7 @@ public class BBSConfigSettingService{
 	}
 
 	/**
-	 *  BBS_LOGO_NAME	论坛系统名称	ADMIN_AND_ALLLEADER
+	 *  BBS_LOGO_NAME	포럼 시스템 이름	ADMIN_AND_ALLLEADER
 	 */
 	public void initAllSystemConfig() {
 		String value = null, description = null, type = null, selectContent = null;

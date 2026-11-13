@@ -79,19 +79,19 @@ class ActionListIdentityWithUnitWithName extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("组织职务名称")
+        @FieldDescribe("조직 직무 이름")
         private String name;
 
-        @FieldDescribe("组织")
+        @FieldDescribe("조직")
         private String unit;
 
-        @FieldDescribe("组织职务名称(多值)")
+        @FieldDescribe("조직 직무명(다중 값)")
         private List<String> nameList;
 
-        @FieldDescribe("组织(多值)")
+        @FieldDescribe("조직(다중 값)")
         private List<String> unitList;
 
-        @FieldDescribe("是否递归下级组织（默认false）")
+        @FieldDescribe("하위 조직 재귀 여부(기본값 false)")
         private Boolean recursiveUnit;
 
         public String getName() {
@@ -137,7 +137,7 @@ class ActionListIdentityWithUnitWithName extends BaseAction {
 
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("身份")
+        @FieldDescribe("신분")
         List<String> identityList = new ArrayList<>();
 
         public List<String> getIdentityList() {

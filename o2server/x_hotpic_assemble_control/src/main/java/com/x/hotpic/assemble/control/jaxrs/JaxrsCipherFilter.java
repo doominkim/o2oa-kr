@@ -5,7 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import com.x.base.core.project.jaxrs.CipherJaxrsFilter;
 
 /**
- * web服务过滤器，将指定的URL定义为需要用户认证的服务，如果用户未登录，则无法访问该服务
+ * web 서비스 필터, 지정한 URL을 사용자 인증이 필요한 서비스로 정의하며 사용자가 로그인하지 않으면 해당 서비스에 접근할 수 없음
  */
 @WebFilter(urlPatterns = { "/jaxrs/cipher/*" }, asyncSupported = true)
 public class JaxrsCipherFilter extends CipherJaxrsFilter {

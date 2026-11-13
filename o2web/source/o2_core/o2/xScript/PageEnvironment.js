@@ -216,8 +216,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             }
         };
         this.org = {
-            //群组***************
-            //获取群组--返回群组的对象数组
+            //그룹***************
+            //그룹 조회--그룹 객체 배열 반환
             getGroup: function (name, async) {
                 getOrgActions();
                 var data = {"groupList": getNameFlag(name)};
@@ -238,8 +238,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // orgActions.listGroup(data, function(json){v = json.data;}, null, false);
                 // return (v && v.length===1) ? v[0] : v;
             },
-            //查询下级群组--返回群组的对象数组
-            //nested  布尔  true嵌套下级；false直接下级；默认false；
+            //하위 그룹 조회--그룹 객체 배열 반환
+            //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
             listSubGroup: function (name, nested, async) {
                 getOrgActions();
                 var data = {"groupList": getNameFlag(name)};
@@ -271,8 +271,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // }
                 // return v;
             },
-            //查询上级群组--返回群组的对象数组
-            //nested  布尔  true嵌套上级；false直接上级；默认false；
+            //상위 그룹 조회--그룹 객체 배열 반환
+            //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
             listSupGroup: function (name, nested, async) {
                 getOrgActions();
                 var data = {"groupList": getNameFlag(name)};
@@ -299,7 +299,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // }
                 // return v;
             },
-            //人员所在群组（嵌套）--返回群组的对象数组
+            //사용자 소속 그룹(중첩)--그룹 객체 배열 반환
             listGroupWithPerson: function (name, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -317,7 +317,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // orgActions.listGroupWithPerson(data, function(json){v = json.data;}, null, false);
                 // return v;
             },
-            //身份所在群组（嵌套）--返回群组的对象数组
+            //신분 소속 그룹(중첩)--그룹 객체 배열 반환
             listGroupWithIdentity:function(identity, async){
                 getOrgActions();
                 var data = {"identityList": getNameFlag(identity)};
@@ -332,7 +332,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listGroupWithIdentity(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //群组是否拥有角色--返回true, false
+            //그룹의 역할 보유 여부--true, false 반환
             groupHasRole: function (name, role, async) {
                 getOrgActions();
                 nameFlag = (typeOf(name) === "object") ? (name.distinguishedName || name.id || name.unique || name.name) : name;
@@ -353,8 +353,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // return v;
             },
 
-            //角色***************
-            //获取角色--返回角色的对象数组
+            //역할***************
+            //역할 조회--역할 객체 배열 반환
             getRole: function (name, async) {
                 getOrgActions();
                 var data = {"roleList": getNameFlag(name)};
@@ -374,7 +374,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // orgActions.listRole(data, function(json){v = json.data;}, null, false);
                 // return (v && v.length===1) ? v[0] : v;
             },
-            //人员所有角色（嵌套）--返回角色的对象数组
+            //사용자의 모든 역할(중첩)--역할 객체 배열 반환
             listRoleWithPerson: function (name, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -393,8 +393,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // return v;
             },
 
-            //人员***************
-            //人员是否拥有角色--返回true, false
+            //사용자***************
+            //사용자의 역할 보유 여부--true, false 반환
             personHasRole: function (name, role, async) {
                 getOrgActions();
                 nameFlag = (typeOf(name) === "object") ? (name.distinguishedName || name.id || name.unique || name.name) : name;
@@ -414,7 +414,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // orgActions.personHasRole(data, function(json){v = json.data.value;}, null, false);
                 // return v;
             },
-            //获取人员,附带身份,身份所在的组织,个人所在群组,个人拥有角色.
+            //사용자 조회, 신분, 신분 소속 조직, 개인 소속 그룹, 개인 보유 역할 포함.
             getPersonData: function(name, async){
                 getOrgActions();
                 var v = null;
@@ -426,7 +426,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.getPerson(null, cb, null, !!async, {"flag": name});
                 return (!!async) ? promise : v;
             },
-            //获取人员--返回人员的对象数组
+            //사용자 조회--사용자 객체 배열 반환
             getPerson: function (name, async, findCN) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -447,8 +447,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // orgActions.listPerson(data, function(json){v = json.data;}, null, false);
                 // return (v && v.length===1) ? v[0] : v;
             },
-            //查询下级人员--返回人员的对象数组
-            //nested  布尔  true嵌套下级；false直接下级；默认false；
+            //하위 사용자 조회--사용자 객체 배열 반환
+            //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
             listSubPerson: function (name, nested, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -468,8 +468,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 }
                 return (!!async) ? promise : v;
             },
-            //查询上级人员--返回人员的对象数组
-            //nested  布尔  true嵌套上级；false直接上级；默认false；
+            //상위 사용자 조회--사용자 객체 배열 반환
+            //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
             listSupPerson: function (name, nested, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -488,7 +488,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 }
                 return (!!async) ? promise : v;
             },
-            //获取群组的所有人员--返回人员的对象数组
+            //그룹의 모든 사용자 조회--사용자 객체 배열 반환
             listPersonWithGroup: function (name, async) {
                 getOrgActions();
                 var data = {"groupList": getNameFlag(name)};
@@ -503,7 +503,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listPersonWithGroup(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //获取角色的所有人员--返回人员的对象数组
+            //역할의 모든 사용자 조회--사용자 객체 배열 반환
             listPersonWithRole: function (name, async) {
                 getOrgActions();
                 var data = {"roleList": getNameFlag(name)};
@@ -518,7 +518,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 promise = orgActions.listPersonWithRole(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //获取身份的所有人员--返回人员的对象数组
+            //신분의 모든 사용자 조회--사용자 객체 배열 반환
             listPersonWithIdentity: function (name, async) {
                 getOrgActions();
                 var data = {"identityList": getNameFlag(name)};
@@ -532,7 +532,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listPersonWithIdentity(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //获取身份的所有人员--返回人员的对象数组或人员对象
+            //신분의 모든 사용자 조회--사용자 객체 배열 또는 사용자 객체 반환
             getPersonWithIdentity: function (name, async) {
                 getOrgActions();
                 var data = {"identityList": getNameFlag(name)};
@@ -547,8 +547,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listPersonWithIdentity(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //查询组织成员的人员--返回人员的对象数组
-            //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+            //조직 구성원 사용자 조회--사용자 객체 배열 반환
+            //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
             listPersonWithUnit: function (name, nested, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -567,9 +567,9 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 }
                 return (!!async) ? promise : v;
             },
-            //根据属性查询人员--返回人员的对象数组
-            //name  string 属性名
-            //value  string 属性值
+            //속성으로 사용자 조회--사용자 객체 배열 반환
+            //name  string 속성 이름
+            //value  string 속성 값
             listPersonWithAttribute: function (name, value, async) {
                 getOrgActions();
                 var data = {"name": name, "attribute": value};
@@ -583,9 +583,9 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listPersonWithAttribute(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //根据属性查询人员--返回人员的全称数组
-            //name  string 属性名
-            //value  string 属性值
+            //속성으로 사용자 조회--사용자 전체 이름 배열 반환
+            //name  string 속성 이름
+            //value  string 속성 값
             listPersonNameWithAttribute: function (name, value, async) {
                 getOrgActions();
                 var data = {"name": name, "attribute": value};
@@ -600,8 +600,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return (!!async) ? promise : v;
             },
 
-            //人员属性************
-            //添加人员属性值(在属性中添加values值，如果没有此属性，则创建一个)
+            //사용자 속성************
+            //사용자 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
             appendPersonAttribute: function (person, attr, values, success, failure, async) {
                 getOrgActions();
                 var personFlag = (typeOf(person) === "object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -624,7 +624,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 //
                 // orgActions.appendPersonAttribute(data, cb, null, !!async);
             },
-            //设置人员属性值(将属性值修改为values，如果没有此属性，则创建一个)
+            //사용자 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
             setPersonAttribute: function (person, attr, values, success, failure, async) {
                 getOrgActions();
                 var personFlag = (typeOf(person) === "object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -647,7 +647,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 //
                 // orgActions.setPersonAttribute(data, cb, null, !!async);
             },
-            //获取人员属性值
+            //사용자 속성 값 조회
             getPersonAttribute: function (person, attr, async) {
                 getOrgActions();
                 var personFlag = (typeOf(person) === "object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -662,7 +662,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.getPersonAttribute(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //列出人员所有属性的名称
+            //사용자의 모든 속성 이름 목록
             listPersonAttributeName: function (name, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -676,7 +676,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listPersonAttributeName(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //列出人员的所有属性
+            //사용자의 모든 속성 목록
             listPersonAllAttribute: function (name, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -691,8 +691,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return (!!async) ? promise : v;
             },
 
-            //身份**********
-            //获取身份
+            //신분**********
+            //신분 조회
             getIdentity: function (name, async) {
                 getOrgActions();
                 var data = {"identityList": getNameFlag(name)};
@@ -707,7 +707,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listIdentity(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //列出人员的身份
+            //사용자의 신분 목록
             listIdentityWithPerson: function (name, async, findCN) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -724,8 +724,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listIdentityWithPerson(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //查询组织成员身份--返回身份的对象数组
-            //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+            //조직 구성원 신분 조회--신분 객체 배열 반환
+            //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
             listIdentityWithUnit: function (name, nested, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -756,8 +756,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return (!!async) ? promise : v;
             },
 
-            //组织**********
-            //获取组织
+            //조직**********
+            //조직 조회
             getUnit: function (name, async, findCN) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -775,8 +775,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listUnit(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //查询组织的下级--返回组织的对象数组
-            //nested  布尔  true嵌套下级；false直接下级；默认false；
+            //조직의 하위 조회--조직 객체 배열 반환
+            //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
             listSubUnit: function (name, nested, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -795,9 +795,9 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 }
                 return (!!async) ? promise : v;
             },
-            //查询组织的上级--返回组织的对象数组
-            //nested  布尔  true嵌套上级；false直接上级；默认false；
-            //async 布尔 true异步请求
+            //조직의 상위 조회--조직 객체 배열 반환
+            //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
+            //async 불리언 true 비동기 요청
             listSupUnit: function (name, nested, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -884,10 +884,10 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 }
             },
 
-            //根据个人身份获取组织
-            //flag 数字    表示获取第几层的组织
-            //     字符串  表示获取指定类型的组织
-            //     空     表示获取直接所在的组织
+            //개인 신분으로 조직 조회
+            //flag 숫자    몇 번째 단계의 조직을 조회할지 나타냄
+            //     문자열  지정 유형의 조직 조회를 나타냄
+            //     비어 있음     직접 소속 조직 조회를 나타냄
             getUnitByIdentity: function (name, flag, async) {
                 getOrgActions();
                 var getUnitMethod = "current";
@@ -958,7 +958,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 }
                 return (!!async) ? promise : v;
             },
-            //列出身份所在组织的所有上级组织
+            //신분 소속 조직의 모든 상위 조직 목록
             listAllSupUnitWithIdentity: function (name, async) {
                 getOrgActions();
                 var data = {"identityList": getNameFlag(name)};
@@ -972,7 +972,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listUnitSupNestedWithIdentity(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //获取人员所在的所有组织
+            //사용자가 소속된 모든 조직 조회
             listUnitWithPerson: function (name, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -986,7 +986,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listUnitWithPerson(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //列出人员所在组织的所有上级组织
+            //사용자 소속 조직의 모든 상위 조직 목록
             listAllSupUnitWithPerson: function (name, async) {
                 getOrgActions();
                 var data = {"personList": getNameFlag(name)};
@@ -1000,7 +1000,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listUnitSupNestedWithPerson(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //根据组织属性，获取所有符合的组织
+            //조직 속성으로 일치하는 모든 조직 조회
             listUnitWithAttribute: function (name, attribute, async) {
                 getOrgActions();
                 var data = {"name": name, "attribute": attribute};
@@ -1014,7 +1014,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 promise = orgActions.listUnitWithAttribute(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //根据组织职务，获取所有符合的组织
+            //조직 직무로 일치하는 모든 조직 조회
             listUnitWithDuty: function (name, id, async) {
                 getOrgActions();
                 var data = {
@@ -1032,8 +1032,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return (!!async) ? promise : v;
             },
 
-            //组织职务***********
-            //获取指定的组织职务的身份
+            //조직 직무***********
+            //지정 조직 직무의 신분 조회
             getDuty: function (duty, id, async) {
                 getOrgActions();
                 var data = {
@@ -1051,7 +1051,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.getDuty(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //获取身份的所有职务名称
+            //신분의 모든 직무 이름 조회
             listDutyNameWithIdentity: function (name, async) {
                 getOrgActions();
                 var data = {"identityList": getNameFlag(name)};
@@ -1065,7 +1065,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listDutyNameWithIdentity(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //获取组织的所有职务名称
+            //조직의 모든 직무 이름 조회
             listDutyNameWithUnit: function (name, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -1079,7 +1079,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listDutyNameWithUnit(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //获取组织的所有职务
+            //조직의 모든 직무 조회
             listUnitAllDuty: function (name, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -1093,7 +1093,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listUnitAllDuty(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //列出顶层组织
+            //최상위 조직 목록
             listTopUnit: function (async) {
                 var action = MWF.Actions.get("x_organization_assemble_control");
                 var v = null;
@@ -1107,8 +1107,8 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return (!!async) ? promise : v;
             },
 
-            //组织属性**************
-            //添加组织属性值(在属性中添加values值，如果没有此属性，则创建一个)
+            //조직 속성**************
+            //조직 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
             appendUnitAttribute: function (unit, attr, values, success, failure, async) {
                 getOrgActions();
                 var unitFlag = (typeOf(unit) === "object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -1141,7 +1141,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 //     if (failure) failure(xhr, text, error);
                 // }, false);
             },
-            //设置组织属性值(将属性值修改为values，如果没有此属性，则创建一个)
+            //조직 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
             setUnitAttribute: function (unit, attr, values, success, failure, async) {
                 getOrgActions();
                 var unitFlag = (typeOf(unit) === "object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -1173,7 +1173,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 //     if (failure) failure(xhr, text, error);
                 // }, false);
             },
-            //获取组织属性值
+            //조직 속성 값 조회
             getUnitAttribute: function (unit, attr, async) {
                 getOrgActions();
                 var unitFlag = (typeOf(unit) === "object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -1188,7 +1188,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.getUnitAttribute(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //列出组织所有属性的名称
+            //조직의 모든 속성 이름 목록
             listUnitAttributeName: function (name, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -1202,7 +1202,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 var promise = orgActions.listUnitAttributeName(data, cb, null, !!async);
                 return (!!async) ? promise : v;
             },
-            //列出组织的所有属性
+            //조직의 모든 속성 목록
             listUnitAllAttribute: function (name, async) {
                 getOrgActions();
                 var data = {"unitList": getNameFlag(name)};
@@ -1650,7 +1650,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             parseParameter : function( obj, format ){
                 if( typeOf(obj) !== "object" )return {};
                 var parameter = {};
-                //传入的参数
+                //전달된 매개변수
                 for( var p in obj ){
                     var value = obj[p];
                     if( typeOf( value ) === "date" ){
@@ -1717,13 +1717,13 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             }
         };
 
-        //include 引用脚本
+        //include 스크립트 참조
         //optionsOrName : {
-        //  type : "", 默认为portal, 可以为 portal  process  cms
-        //  application : "", 门户/流程/CMS的名称/别名/id, 默认为当前应用
-        //  name : "" // 脚本名称/别名/id
+        //  type : "", 기본값 portal, portal  process  cms 가능
+        //  application : "", 포털/프로세스/CMS의 이름/별칭/id, 기본값은 현재 앱
+        //  name : "" // 스크립트 이름/별칭/id
         //}
-        //或者name: "" // 脚本名称/别名/id
+        //또는 name: "" // 스크립트 이름/별칭/id
         // if( !window.includedScripts ){
         //     var includedScripts = window.includedScripts = [];
         // }else{
@@ -1769,7 +1769,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
         }
 
 
-        //缓存名称、别名、id
+        //캐시 이름, 별칭, id
         var _parseScriptImportList = function (json, type){
             var includedScripts = [];
             var importedList = json.data.importedList || [];
@@ -1812,7 +1812,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 key = type + "-" + name;
             }
 
-            //js 加载过就不重新加载了
+            //js는 이미 로드했으면 다시 로드하지 않음
             if (includedScripts.indexOf(key) > -1) {
                 if (callback) callback.apply(this);
                 return;
@@ -1942,10 +1942,10 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             }
         }
 
-        //如果前端事件有异步调用，想要在异步调用结束后继续运行页面加载，
-        //可在调用前执行 var resolve = this.wait();
-        //在异步调用结束后 执行 resolve.cb()；
-        //目前只有表单的queryload事件支持此方法。
+        //프런트엔드 이벤트에 비동기 호출이 있고, 비동기 호출이 끝난 뒤 페이지 로드를 계속하려면,
+        //호출 전에 var resolve = this.wait(); 실행
+        //비동기 호출이 끝난 뒤 resolve.cb(); 실행
+        //현재는 양식의 queryload 이벤트만 이 방법을 지원함.
         this.wait = function () {
             resolve = {};
             var setResolve = function (callback) {
@@ -1954,9 +1954,9 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             this.target.event_resolve = setResolve;
             return resolve;
         };
-        //和this.wait配合使用，
-        //如果没有异步，则resolve.cb方法不存在，
-        //所以在回调中中使用this.goon();使表单继续加载
+        //this.wait와 함께 사용,
+        //비동기가 없으면 resolve.cb 메서드가 없으므로,
+        //콜백에서 this.goon();을 사용해 양식 로드를 계속함
         this.goon = function () {
             this.target.event_resolve = null;
         };
@@ -1965,57 +1965,57 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             return this.Actions.load('x_program_center').InvokeAction.execute(name, data);
         }
         
-        //仅前台对象-----------------------------------------
+        //프런트엔드 객체 전용-----------------------------------------
         //form
         /**
-         * page对象可在门户页面中可用。它的很多方法与form类似。<b>（仅前端脚本可用）</b><br/>
+         * page 객체는 포털 페이지에서 사용할 수 있습니다. 많은 메서드가 form과 유사합니다.<b>(프런트엔드 스크립트 전용)</b><br/>
          * @module page
-         * @o2cn 门户页面
+         * @o2cn 포털 페이지
          * @o2category web
          * @o2range {Portal}
          * @o2ordernumber 50
          * @o2syntax
-         * //您可以在门户表单中，通过this来获取page对象，如下：
+         * //포털 양식에서 this를 통해 page 객체를 가져올 수 있습니다. 예:
          * var page = this.page;
          */
         this.page = this.form = {
-            /** 跳转到当前门户的指定页面。<b>（仅门户页面脚本可用）</b>
+            /** 현재 포털의 지정 페이지로 이동.<b>(포털 페이지 스크립트 전용)</b>
              * @method toPage
              * @static
-             * @param {String} name - 要跳转的页面名称
-             * @param {Object} [par] - 要传入被打开页面的数据。在被打开的页面可以用this.page.parameters获取
-             * @param {Boolean} [nohis] - 页面跳转的时候，不往History里增加历史状态，默认为false
+             * @param {String} name - 이동할 페이지 이름
+             * @param {Object} [par] - 열리는 페이지에 전달할 데이터. 열린 페이지에서 this.page.parameters로 조회 가능
+             * @param {Boolean} [nohis] - 페이지 이동 시 History에 기록 상태를 추가하지 않음, 기본값 false
              * @o2syntax
-             * //跳转到当前门户的指定页面。
+             * //현재 포털의 지정 페이지로 이동.
              * this.page.toPage( name, par, nohis );
              * @example
-             * this.page.toPage("列表页面", {"key": "发文列表"});//打开“列表页面”，并传入一个json数据。
+             * this.page.toPage("목록 페이지", {"key": "발신 문서 목록"});//“목록 페이지”를 열고 json 데이터 하나를 전달.
              *
-             * //在列表页面中，通过this.page.parameters获取传入的数据。
-             * var key = this.page.parameters.key; //key="发文列表"
+             * //목록 페이지에서 this.page.parameters로 전달된 데이터 조회.
+             * var key = this.page.parameters.key; //key="발신 문서 목록"
              */
             "toPage": function (name, par, nohis) {
                 _form.app.toPage(name, par, nohis);
             },
 
-            /** 跳转到指定门户页面。<b>（仅门户页面脚本可用）</b>
+            /** 지정 포털 페이지로 이동.<b>(포털 페이지 스크립트 전용)</b>
              * @method toPortal
              * @static
-             * @param {String} portal - 要跳转的门户名称。
-             * @param {String} [page] - 要打开的门户的页面名称。为空则打开指定门户的默认首页。
-             * @param {String} [par] - 在被打开的页面可以用this.page.parameters获取。
+             * @param {String} portal - 이동할 포털 이름.
+             * @param {String} [page] - 열 포털의 페이지 이름. 비어 있으면 지정 포털의 기본 첫 페이지를 염.
+             * @param {String} [par] - 열린 페이지에서 this.page.parameters로 조회 가능.
              * @o2syntax
              * this.page.toPortal( portal, page, par );
              * @example
-             * this.page.toPortal("公文门户", "列表页面", {"key": "发文列表"});//打开“公文门户”的“列表页面”，并传入一个json数据。
+             * this.page.toPortal("공문 포털", "목록 페이지", {"key": "발신 문서 목록"});//“공문 포털”의 “목록 페이지”를 열고 json 데이터 하나를 전달.
              *
-             * //在列表页面中，通过this.page.parameters获取传入的数据。
-             * var key = this.page.parameters.key; //key="发文列表"
+             * //목록 페이지에서 this.page.parameters로 전달된 데이터 조회.
+             * var key = this.page.parameters.key; //key="발신 문서 목록"
              */
             "toPortal": function (portal, page, par) {
                 _form.app.toPortal(portal, page, par);
             },
-            /**获取当前页面的基本信息
+            /**현재 페이지 기본 정보 조회
              * @method getInfor
              * @static
              * @see module:form.getInfor
@@ -2024,7 +2024,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return ev.pageInfor;
             },
             "infor": ev.pageInfor,
-            /**获取打开当前页面的component对象。
+            /**현재 페이지를 연 component 객체 조회.
              * @method getApp
              * @static
              * @see module:form.getApp
@@ -2033,7 +2033,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return _form.app;
             },
             "app": _form.app,
-            /**获取page对应的DOM对象。
+            /**page에 대응하는 DOM 객체 조회.
              * @method node
              * @static
              * @see module:form.node
@@ -2042,7 +2042,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return _form.node;
             },
             //"readonly": _form.options.readonly,
-            /**获取页面元素对象。
+            /**페이지 요소 객체 조회.
              * @method get
              * @static
              * @see module:form.get
@@ -2058,29 +2058,29 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 // return (_form.all) ? _form.all[name] : null;
             },
 
-            /**获取指定部件元素对象。<br/>
+            /**지정 위젯 요소 객체 조회.<br/>
              * @method getWidgetModule
              * @static
-             * @param {String} widgetId  - 在主页面嵌入部件时用的标识。
-             * @param {String} fieldId  - 部件内组件标识。
-             * @return {FormComponent} 请查看本文档的Classes导航下的FormComponents。
+             * @param {String} widgetId  - 메인 페이지에 위젯을 삽입할 때 사용한 식별자.
+             * @param {String} fieldId  - 위젯 내 컴포넌트 식별자.
+             * @return {FormComponent} 이 문서의 Classes 탐색에서 FormComponents를 참고하세요.
              * @see module:form.get
              * @o2syntax
              * this.page.getWidgetModule( widgetId, fieldId );
              * @example
              * <caption>
-             * 1、设计了一个部件，包含一个设计元素subject。<br/>
-             * 2、在主页面里两次嵌入1步骤创建的部件，一个标识是widget_1, widget_2。
+             * 1. 설계 요소 subject를 포함한 위젯을 설계.<br/>
+             * 2. 메인 페이지에 1단계에서 만든 위젯을 두 번 삽입, 식별자는 widget_1, widget_2.
              * </caption>
-             * var module = this.page.getWidgetModule( "widget_1", "subject"); //部件widget_1的subject组件
-             * var data2 = this.page.getWidgetModule( "widget_2", "subject").getData(); //部件widget_2的subject组件的值
+             * var module = this.page.getWidgetModule( "widget_1", "subject"); //위젯 widget_1의 subject 컴포넌트
+             * var data2 = this.page.getWidgetModule( "widget_2", "subject").getData(); //위젯 widget_2의 subject 컴포넌트 값
              */
             "getWidgetModule": function (widget, moduleName) {
                 if (!_form.widgetModules || !_form.widgetModules[widget]) return null;
                 var module = _form.widgetModules[widget][moduleName];
                 return module || null;
             },
-            /**获取页面中可输入的字段元素对象
+            /**페이지의 입력 가능한 필드 요소 객체 조회
              * @method getField
              * @static
              * @see module:form.getField
@@ -2100,7 +2100,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             },
             //"save": function(callback){_form.saveWork(callback);},
 
-            /**关闭当前页面
+            /**현재 페이지 닫기
              * @method close
              * @static
              * @see module:form.close
@@ -2113,7 +2113,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 _form.printWork(application, form);
             },
 
-            /**弹出一个确认框
+            /**확인 창 표시
              * @method confirm
              * @static
              * @see module:form.confirm
@@ -2140,7 +2140,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                     _form.confirm(type, e, title, text, width, height, ok, cancel, callback, mask, style);
                 }
             },
-            /**显示一个带关闭按钮的信息框
+            /**닫기 버튼이 있는 정보 창 표시
              * @method alert
              * @static
              * @see module:form.alert
@@ -2149,7 +2149,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 _form.alert(type, title, text, width, height);
             },
 
-            /**显示一个信息框
+            /**정보 창 표시
              * @method notice
              * @static
              * @see module:form.notice
@@ -2158,7 +2158,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 _form.notice(content, type, target, where, offset, option);
             },
 
-            /**打开一个对话框
+            /**대화상자 열기
              * @method dialog
              * @static
              * @see module:form.dialog
@@ -2167,7 +2167,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return _form.dialog( options );
             },
 
-            /**打开人员组织选择界面
+            /**사용자 조직 선택 화면 열기
              * @method selectOrg
              * @static
              * @see module:form.selectOrg
@@ -2177,7 +2177,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 return new MWF.O2Selector(container, options, delayLoad);
             },
 
-            /**给页面添加事件。
+            /**페이지에 이벤트 추가.
              * @method addEvent
              * @static
              * @see module:form.addEvent
@@ -2190,7 +2190,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 _form.openWindow(form, app);
             },
 
-            /**打开一个在流转或已完成的流程实例
+            /**진행 중이거나 완료된 프로세스 인스턴스 열기
              * @method openWork
              * @static
              * @see module:form.openWork
@@ -2203,7 +2203,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 op.appId = "process.Work" + (op.workId || op.workCompletedId);
                 return layout.desktop.openApplication(this.event, "process.Work", op);
             },
-            /**使用流程的jobId打开工作
+            /**프로세스 jobId로 업무 문서 열기
              * @method openJob
              * @static
              * @see module:form.openJob
@@ -2345,7 +2345,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                     }));
                 }
             },
-            /**打开一个内容管理文档
+            /**콘텐츠 관리 문서 열기
              * @method openDocument
              * @static
              * @see module:form.openDocument
@@ -2377,7 +2377,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                 }
                 return layout.desktop.openApplication(this.event, "cms.Document", op);
             },
-            /**打开一个门户页面
+            /**포털 페이지 열기
              * @method openPortal
              * @static
              * @see module:form.openPortal
@@ -2407,7 +2407,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
 
                 });
             },
-            /**打开一个门户页面
+            /**포털 페이지 열기
              * @method loadPortal
              * @static
              * @see module:form.loadPortal
@@ -2440,7 +2440,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
 
                 return app;
             },
-            /**打开一个内容管理栏目（应用）
+            /**콘텐츠 관리 게시판(앱) 열기
              * @method openCMS
              * @static
              * @see module:form.openCMS
@@ -2456,7 +2456,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                     }
                 });
             },
-            /**打开一个流程应用
+            /**프로세스 앱 열기
              * @method openProcess
              * @static
              * @see module:form.openProcess
@@ -2472,7 +2472,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                     }
                 });
             },
-            /**打开一个任意一个component应用
+            /**임의의 component 앱 열기
              * @method openApplication
              * @static
              * @see module:form.openApplication
@@ -2480,7 +2480,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             "openApplication": function (name, options, status) {
                 return layout.desktop.openApplication(null, name, options, status);
             },
-            /**创建一个内容管理文档
+            /**콘텐츠 관리 문서 생성
              * @method createDocument
              * @static
              * @see module:form.createDocument
@@ -2535,7 +2535,7 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
                     starter.load();
                 })
             },
-            /**启动一个流程实例
+            /**프로세스 인스턴스 시작
              * @method startProcess
              * @static
              * @see module:form.startProcess
@@ -2662,36 +2662,36 @@ if (!MWF.xScript || !MWF.xScript.PageEnvironment) {
             },
 
             /**
-             * 在打开的页面的任意脚本中，获取传入的参数。
+             * 열린 페이지의 임의 스크립트에서 전달된 파라미터 조회.
              * @member parameters
              * @static
-             * @return {Boolean} 任意数据类型，根据传入的参数决定。
+             * @return {Boolean} 임의 데이터 타입, 전달된 파라미터에 따라 결정.
              * @o2syntax
              * var par = this.page.parameters
              * @example
-             * //打开页面时传入参数：
+             * //페이지를 열 때 파라미터 전달:
              * this.form.openPortal(id, "", {"type": "my type"});
              *
-             * //在打开的页面的任意脚本中，可以获取parameters：
+             * //열린 페이지의 임의 스크립트에서 parameters 조회 가능:
              * var par = this.page.parameters;
-             * //par的内容：{"type": "my type"}
+             * //par의 내용: {"type": "my type"}
              */
             "parameters": _form.options.parameters,
 
             /**
-             * 在嵌入部件的时候，可以在主页面上传入参数。通过本方法，可以在对应部件或者部件元素的脚本中获取传入的参数。
+             * 위젯 삽입 시 메인 페이지에서 파라미터를 전달할 수 있습니다. 이 메서드로 해당 위젯 또는 위젯 요소의 스크립트에서 전달된 파라미터를 조회할 수 있습니다.
              * @method getWidgetPrameters
              * @static
-             * @return {Object} 任意数据类型，根据传入的参数决定。
+             * @return {Object} 임의 데이터 타입, 전달된 파라미터에 따라 결정.
              * @o2syntax
              * var par = this.page.getWidgetPrameters();
              * @example
-             * //在主页面嵌入部件的地方传入参数：
+             * //메인 페이지의 위젯 삽입 위치에서 파라미터 전달:
              * return {"type": "my type"};
              *
-             * //在对应部件脚本中，可以获取parameters：
+             * //해당 위젯 스크립트에서 parameters 조회 가능:
              * var par = this.page.getWidgetPrameters();
-             * //par的内容：{"type": "my type"}
+             * //par의 내용: {"type": "my type"}
              */
             "getWidgetPrameters": function (target) {
                 var currentTarget = target || this.target;
@@ -3082,8 +3082,8 @@ if (!MWF.xScript.createDict) {
             for (var j = 0; j < dictFlagList.length; j++) {
                 var k = dictFlagList[j] + type + appFlagList[i] + enableAnonymous;
                 if (!MWF.xScript.dictLoaded[k]) {
-                    MWF.xScript.dictLoaded[k] = cache; //指向同一个对象
-                    // MWF.xScript.dictLoaded[k][path] = json; //指向不同的对象
+                    MWF.xScript.dictLoaded[k] = cache; //같은 객체를 가리킴
+                    // MWF.xScript.dictLoaded[k][path] = json; //서로 다른 객체를 가리킴
                 } else if (i === 0 && j === 0) {
                     MWF.xScript.setDictToCache(k, path, json);
                     var arr = path.split(/\./g);
@@ -3226,12 +3226,12 @@ if (!MWF.xScript.createDict) {
 
     MWF.xScript.createDict = function (application, appType) {
         //optionsOrName : {
-        //  type : "", //默认为process, 可以为  process  cms
-        //  application : "", //流程/CMS的名称/别名/id, 默认为当前应用
-        //  name : "", // 数据字典名称/别名/id
-        //  anonymous : false //允许在未登录的情况下读取CMS的数据字典， 该参数名也可以是 enableAnonymous
+        //  type : "", //기본값 process, process  cms 가능
+        //  application : "", //프로세스/CMS의 이름/별칭/id, 기본값은 현재 앱
+        //  name : "", // 데이터 사전 이름/별칭/id
+        //  anonymous : false //로그인하지 않은 상태에서 CMS 데이터 사전 읽기 허용, 이 매개변수 이름은 enableAnonymous도 가능
         //}
-        //或者name: "" // 数据字典名称/别名/id
+        //또는 name: "" // 데이터 사전 이름/별칭/id
         return function (optionsOrName) {
             var options = optionsOrName;
             if (typeOf(options) == "string") {

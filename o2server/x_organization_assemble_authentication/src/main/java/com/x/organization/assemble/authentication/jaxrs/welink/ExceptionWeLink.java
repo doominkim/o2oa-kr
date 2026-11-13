@@ -7,6 +7,6 @@ class ExceptionWeLink extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionWeLink(String errcode, String errmsg) {
-		super("WeLink返回错误: errcode: {}, errmsg:{}.", errcode, errmsg);
+		super("WeLink 오류 반환: errcode: {}, errmsg: {}.", errcode, errmsg);
 	}
 }

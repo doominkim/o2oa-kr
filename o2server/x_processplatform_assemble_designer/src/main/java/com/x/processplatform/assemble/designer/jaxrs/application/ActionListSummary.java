@@ -48,10 +48,10 @@ class ActionListSummary extends BaseAction {
 		static WrapCopier<Application, Wo> copier = WrapCopierFactory.wo(Application.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("流程对象")
+		@FieldDescribe("프로세스 객체")
 		private List<WoProcess> processList = new ArrayList<>();
 
-		@FieldDescribe("表单对象")
+		@FieldDescribe("양식 객체")
 		private List<WoForm> formList = new ArrayList<>();
 
 		public List<WoProcess> getProcessList() {
@@ -137,7 +137,7 @@ class ActionListSummary extends BaseAction {
 		return map;
 	}
 
-	/** From 的 data和mobileData 数据量大,如果直接取出,会有秒级的延时 */
+	/** From의 data와 mobileData는 데이터량이 커서 직접 조회하면 초 단위 지연 발생 */
 	private Map<String, List<WoForm>> mapForm(Business business, List<String> applicationIds) throws Exception {
 		EntityManager em = business.entityManagerContainer().get(Form.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

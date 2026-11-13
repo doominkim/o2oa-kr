@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("statistic")
-@JaxrsDescribe("数据统计执行服务（已弃用）")
+@JaxrsDescribe("데이터 통계 실행 서비스(사용 중단)")
 public class AttendanceStatisticAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceStatisticAction.class);
 
-	@JaxrsMethodDescribe(value = "驱动系统主动进行一次数据统计", action = ActionStatisticCaculate.class)
+	@JaxrsMethodDescribe(value = "시스템이 데이터 통계를 한 번 실행하도록 구동", action = ActionStatisticCaculate.class)
 	@GET
 	@Path("do")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -41,7 +41,7 @@ public class AttendanceStatisticAction extends StandardJaxrsAction {
 				result = new ActionStatisticCaculate().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "驱动系统主动进行数据统计时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "데이터 통계를 수동 실행하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

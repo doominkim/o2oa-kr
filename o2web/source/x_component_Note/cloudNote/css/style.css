@@ -366,7 +366,7 @@
 .icon_comment{
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAgCAYAAAB3j6rJAAACBElEQVRYR+1XMYsTQRR+35g0VlaCglgIJ3ZWdsKJICiKNoKQ8ziL7NtJqvsHd//AJmxmIqzNXZHGSkUQ7sRKUOxsRAsFLQ14VZbMkwmzR4yXrOgm1U6xy7zZme97b74dvgGFliTJFoB7AM7nsUW9AXwTkXdEtMnMnzwO/MMY84KIri0KuGDds8z8Bd1uNwJg8o8B7C+B0IqInA44T5n5JowxnkTkg865B1rrx0sgQtbaVEQ2xtsC3IC1dk9EVn2AmcdbtYyWJMmqUmovFGC7IlJVZFp3VUWqihSdRZVGKo1UGimqQKWRogr9cY5MObQrWutlWMXfHJo30dOe9QDA26JsjhofjUavtNZbR435ZAGsTIxNelZvFW+X6uIBPMmybL3dbh/koMaYPhHdnZPcQ2bePPSo1tqGiDSI6Pq/VGRizksiWmfm7z6WJMmGUiqdsaZlZh4b6P8EHU/v9XoXnHO7RHQxrPdGRO7HcfzR940xp5xzhxe3Wq32M8uyz61W60eOXwqRAHZORHYBXAqLf3DOrWmt3/9NsqUR8WCdTudMvV7fEZHLAfyrUqrRbDZfF5EplUjQxEmllN+mqwF84LUXx/GzeWRKJ+LB0jQ9MRwOPZlc+CMAt6Ioej6LzEKIBM0cJ6IdIrrj+8657VnnTGl/zaws+/3+scFg8MhfaQG05lXkFytXlDPFLp7jAAAAAElFTkSuQmCC);
 }
-/*弹出框*/
+/*팝업 상자*/
 .popover{
     padding: 0;
     margin-top: -5px;
@@ -394,7 +394,7 @@
     margin-bottom: 16px;
     margin-left: 18px
 }
-/*列表项*/
+/*목록 항목*/
 .group_container {
     margin: 0;
     max-height: 350px;
@@ -532,7 +532,7 @@
     color: #878787
 }
 /*    white-space: nowrap;*/
-/*****右侧样式**********/
+/*****오른쪽 스타일**********/
 .main_view{
     position: absolute;
     left: 180px;
@@ -872,7 +872,7 @@ div.tagsinput {
     margin-left: 18px
 }
 
-/*修正marckdonw*/
+/*marckdonw 수정*/
 .editormd{
     border:0!important;
 }
@@ -1305,7 +1305,7 @@ div.tagsinput {
 .ant-popover-placement-leftBottom > .ant-popover-content > .ant-popover-arrow {
     bottom: 14px;
 }
-/*评论样式----------begin**/
+/*댓글 스타일----------begin**/
 .comment_container {
     position: absolute;
     width: 260px;
@@ -1445,7 +1445,7 @@ div.tagsinput {
     border: 1px solid #e0e1e5;
     resize: none;
 }
-/*评论样式----------end**/
+/*댓글 스타일----------end**/
 .tagsinput .tag {
     border: 1px solid #a5d24a;
     -moz-border-radius: 2px;

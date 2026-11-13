@@ -82,7 +82,7 @@ class V3RetractStage extends BaseAction {
 
 		private static final long serialVersionUID = -5007785846454720742L;
 
-		@FieldDescribe("工作标识列表")
+		@FieldDescribe("업무 문서 식별자 목록")
 		private List<WoWork> workList = new ArrayList<>();
 
 		public List<WoWork> getWorkList() {

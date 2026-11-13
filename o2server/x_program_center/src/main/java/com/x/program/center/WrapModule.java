@@ -18,37 +18,37 @@ public class WrapModule extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -9154145057201937680L;
 
-	@FieldDescribe("模块名称")
+	@FieldDescribe("모듈 이름")
 	private String name;
 
-	@FieldDescribe("标识")
+	@FieldDescribe("식별자")
 	private String id;
 
-	@FieldDescribe("分类")
+	@FieldDescribe("분류")
 	private String category;
 
-	@FieldDescribe("图标")
+	@FieldDescribe("아이콘")
 	private String icon;
 
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	private String description;
 	
-	@FieldDescribe("下载次数")
+	@FieldDescribe("다운로드 횟수")
 	private Integer downloadCount;
 
-	@FieldDescribe("流程")
+	@FieldDescribe("프로세스")
 	private List<WrapProcessPlatform> processPlatformList = new ArrayList<>();
 
-	@FieldDescribe("门户")
+	@FieldDescribe("포털")
 	private List<WrapPortal> portalList = new ArrayList<>();
 
-	@FieldDescribe("查询")
+	@FieldDescribe("조회")
 	private List<WrapQuery> queryList = new ArrayList<>();
 
-	@FieldDescribe("内容")
+	@FieldDescribe("내용")
 	private List<WrapCms> cmsList = new ArrayList<>();
 
-	@FieldDescribe("服务")
+	@FieldDescribe("서비스")
 	private List<WrapServiceModule> serviceModuleList = new ArrayList<>();
 
 	public WrapProcessPlatform getProcessPlatform(String id) {

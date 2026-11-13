@@ -45,9 +45,9 @@ class ActionUploadCallback extends BaseAction {
 			if (null == mapping) {
 				throw new ExceptionAllocateStorageMaapingCallback(callback);
 			}
-			/** 由于这里需要根据craeteTime创建path,先进行赋值,再进行校验,最后保存 */
-			/** 禁止不带扩展名的文件上传 */
-			/** 文件名编码转换 */
+			/** createTime으로 path를 생성해야 하므로 먼저 값을 할당하고 검증한 뒤 저장 */
+			/** 확장자 없는 파일 업로드 금지 */
+			/** 파일명 인코딩 변환 */
 			String fileName = new String(disposition.getFileName().getBytes(DefaultCharset.charset_iso_8859_1),
 					DefaultCharset.charset);
 			fileName = FilenameUtils.getName(fileName);
@@ -58,15 +58,15 @@ class ActionUploadCallback extends BaseAction {
 			File file = new File(mapping.getName(), fileName, effectivePerson.getDistinguishedName(), type, reference);
 			emc.check(file, CheckPersistType.all);
 			if ((scale > 0) && ArrayUtils.contains(IMAGE_EXTENSIONS_COMPRESS, file.getExtension())) {
-				/** 如果是需要压缩的附件 */
+				/** 압축이 필요한 첨부파일인 경우 */
 				try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 					BufferedImage image = ImageIO.read(in);
 					if (image.getWidth() > scale) {
-						/** 图像的实际大小比scale大的要进行压缩 */
+						/** 이미지 실제 크기가 scale보다 크면 압축 */
 						BufferedImage scalrImage = Scalr.resize(image, Method.QUALITY, Mode.FIT_TO_WIDTH, scale);
 						ImageIO.write(scalrImage, file.getExtension(), baos);
 					} else {
-						/** 图像的实际大小比scale小,保存原图不进行压缩 */
+						/** 이미지 실제 크기가 scale보다 작으면 압축하지 않고 원본 저장 */
 						ImageIO.write(image, file.getExtension(), baos);
 					}
 					try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray())) {

@@ -134,15 +134,15 @@ MWF.xApplication.Attendance.ImportExplorer = new Class({
             }.bind(this));
 
             // var tr = new Element("tr").inject(table);
-            // new Element("td",{ "text" :"1、下载Excel模板，根据模板格式填写考勤数据；" , "styles" : this.css.descriptionTdValue  }).inject(tr);
+            // new Element("td",{ "text" :"1. Excel 템플릿을 내려받아 템플릿 형식에 맞게 근태 데이터를 입력합니다." , "styles" : this.css.descriptionTdValue  }).inject(tr);
             // var tr = new Element("tr").inject(table);
-            // new Element("td",{ "text" : "2、点击导入考勤数据按钮，选择考勤数据并确定，系统将校验考勤数据是否正确并导入数据；"  , "styles" : this.css.descriptionTdValue }).inject(tr);
+            // new Element("td",{ "text" : "2. 근태 데이터 가져오기 버튼을 클릭하고 근태 데이터를 선택해 확인하면, 시스템이 근태 데이터의 정확성을 검증하고 가져옵니다."  , "styles" : this.css.descriptionTdValue }).inject(tr);
             // var tr = new Element("tr").inject(table);
-            // new Element("td",{ "text" : "3、点击核对考勤数据按钮，选择需要核对的年度和月份，系统将核对需要考勤的人员的数据；"  , "styles" : this.css.descriptionTdValue }).inject(tr);
+            // new Element("td",{ "text" : "3. 근태 데이터 대조 버튼을 클릭하고 대조할 연도와 월을 선택하면, 시스템이 근태 대상 사용자의 데이터를 대조합니다."  , "styles" : this.css.descriptionTdValue }).inject(tr);
             // var tr = new Element("tr").inject(table);
-            // new Element("td",{ "text" : "4、点击分析考勤数据按钮，系统将生成出勤明细数据；"  , "styles" : this.css.descriptionTdValue }).inject(tr);
+            // new Element("td",{ "text" : "4. 근태 데이터 분석 버튼을 클릭하면, 시스템이 출근 상세 데이터를 생성합니다."  , "styles" : this.css.descriptionTdValue }).inject(tr);
             // var tr = new Element("tr").inject(table);
-            // new Element("td",{ "text" : "5、点击统计考勤数据按钮，系统将生成个人、部门、公司的出勤率统计。"  , "styles" : this.css.descriptionTdValue }).inject(tr);
+            // new Element("td",{ "text" : "5. 근태 데이터 통계 버튼을 클릭하면, 시스템이 개인·부서·회사의 출근율 통계를 생성합니다."  , "styles" : this.css.descriptionTdValue }).inject(tr);
         }
     }
 });
@@ -202,7 +202,7 @@ MWF.xApplication.Attendance.ImportExplorer.YearMonthSelctor = new Class({
         });
 
         var html = "<table width='100%' bordr='0' cellpadding='5' cellspacing='0' styles='formTable'>"+
-            //"<tr><td colspan='2' styles='formTableHead'>选择核对月份</td></tr>" +
+            //"<tr><td colspan='2' styles='formTableHead'>대조할 월 선택</td></tr>" +
             "<tr><td styles='formTabelTitle' lable='cycleYear'></td>"+
             "    <td styles='formTableValue' item='cycleYear'></td></tr>" +
             "<tr><td styles='formTabelTitle' lable='cycleMonth'></td>"+
@@ -340,7 +340,7 @@ MWF.xApplication.Attendance.ImportExplorer.Result = new Class({
             var text = lp.importDataResultFail.replace("{fileName}",this.data.fileName ).
                     replace("{errorCount}", this.checkData.errorCount).
                     replace("{count}", this.checkData.detailList.length);
-            // var text ="您上传的文件:“" +  this.data.fileName + "”未通过校验，有"+ this.checkData.errorCount +"条错误数据。请修改后重新导入。下面显示其中的"+this.checkData.detailList.length+"条：" ;
+            // var text ="업로드한 파일 “" +  this.data.fileName + "”이(가) 검증을 통과하지 못했습니다. 오류 데이터가 "+ this.checkData.errorCount +"건 있습니다. 수정 후 다시 가져오십시오. 아래에 그중 "+this.checkData.detailList.length+"건을 표시합니다:" ;
         }
         this.formDescriptionNode = new Element("div", {
             "styles": this.css.formDescriptionNode,
@@ -356,16 +356,16 @@ MWF.xApplication.Attendance.ImportExplorer.Result = new Class({
         Array.each( lp.importDataResultThList, function(text){
             td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : text  }).inject(tr);
         }.bind(this));
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "行号"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "员工号"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "员工名字"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "日期"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "上午上班打卡时间"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "上午下班打卡时间"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "下午上班打卡时间"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "下午下班打卡时间"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "检查结果"  }).inject(tr);
-        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "描述"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "행 번호"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "사번"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "직원 이름"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "날짜"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "오전 출근 체크 시간"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "오전 퇴근 체크 시간"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "오후 출근 체크 시간"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "오후 퇴근 체크 시간"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "검사 결과"  }).inject(tr);
+        // var td = new Element("td", {  "styles" : this.explorer.css.editTableTitle, "text" : "설명"  }).inject(tr);
         // td.setStyle( "width" , "300px" );
 
         this.checkData.detailList.each(function( d ){
@@ -495,13 +495,13 @@ MWF.xApplication.Attendance.ImportExplorer.Progress = new Class({
             if( type == "VALIDATE" ){
                 var text = lp.checkingDataContent.replace("{speed}",speed).replace("{total}",total).replace("{remaining}",( total - loaded ));
                 text += errorCount ? lp.checkingDataErrorContent.replace("{errorCount}",errorCount) : "";
-                // var text = "正检查数据"+": "+speed+u + ",共"+total+"条,剩余"+( total - loaded )+"条";
-                // text += errorCount ? ",出错"+errorCount+"条" : ""
+                // var text = "데이터 검사 중"+": "+speed+u + ", 총 "+total+"건, 남은 "+( total - loaded )+"건";
+                // text += errorCount ? ", 오류 "+errorCount+"건" : ""
             }else{
                 var text = lp.importingDataContent.replace("{speed}",speed).replace("{total}",total).replace("{remaining}",( total - loaded ));
                 text += errorCount ? lp.importingDataErrorContent.replace("{errorCount}",errorCount) : "";
-                // var text = "正导入数据"+": "+speed+u + ",共"+total+"条,剩余"+( total - loaded )+"条";
-                // text += errorCount ? ",出错"+errorCount+"条" : ""
+                // var text = "데이터 가져오는 중"+": "+speed+u + ", 총 "+total+"건, 남은 "+( total - loaded )+"건";
+                // text += errorCount ? ", 오류 "+errorCount+"건" : ""
             }
             progressInforNode.set("text", text);
         }
@@ -543,14 +543,14 @@ MWF.xApplication.Attendance.ImportExplorer.Progress = new Class({
             this.setMessageTitle( lp.importSuccessTitle );
             var text = lp.importSuccessContent.replace("{total}",size).replace("{speed}",speed).replace("{timeStr}",timeStr);
             this.setMessageText( text );
-            // this.setMessageText( "共导入数据"+size+"条  速度"+": "+speed+u+"  "+"耗时"+": "+timeStr);
+            // this.setMessageText( "총 "+size+"건 가져옴  속도"+": "+speed+u+"  "+"소요 시간"+": "+timeStr);
         }else{
             var size = data.process_validate_total;
             this.setMessageTitle( lp.importFailTitle );
 
             var text = lp.importFailContent.replace("{total}",size).replace("{errorCount}",errorCount).replace("{timeStr}",timeStr);
             this.setMessageText( text );
-            // this.setMessageText( "共有数据"+size+"条  出错"+ errorCount +"条  耗时"+": "+timeStr +"  请修改后重新导入");
+            // this.setMessageText( "총 데이터 "+size+"건  오류 "+ errorCount +"건  소요 시간"+": "+timeStr +"  수정 후 다시 가져오십시오");
         }
         this.clearMessageProgress();
     },

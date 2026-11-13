@@ -47,17 +47,17 @@ class ActionReference extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson, task);
 			}
 			Wo wo = new Wo();
-			// 组装 Task 信息
+			// Task 정보 조립
 			wo.setTask(WoTask.copier.copy(task));
 			Work work = emc.find(task.getWork(), Work.class);
-			// 组装 Work
+			// Work 조립
 			if (null != work) {
 				wo.setWork(WoWork.copier.copy(work));
-				// 组装 Attachment
+				// Attachment 조립
 				wo.setAttachmentList(this.listAttachment(business, work));
 			}
 			wo.setWorkCompletedList(this.listWorkCompleted(business, task));
-			// 装载WorkLog 信息
+			// WorkLog 정보 적재
 			wo.setWorkLogList(this.listWorkLog(business, task));
 			result.setData(wo);
 			return result;
@@ -67,18 +67,18 @@ class ActionReference extends BaseAction {
 	@Schema(name = "com.x.processplatform.assemble.surface.jaxrs.task.ActionReference.Wo")
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("待办对象.")
-		@Schema(description = "待办对象.")
+		@FieldDescribe("결재 대기 객체.")
+		@Schema(description = "결재 대기 객체.")
 		private WoTask task;
-		@FieldDescribe("工作对象.")
-		@Schema(description = "工作对象.")
+		@FieldDescribe("업무 문서 객체.")
+		@Schema(description = "업무 문서 객체.")
 		private WoWork work;
-		@FieldDescribe("附件对象")
-		@Schema(description = "工作对象.")
+		@FieldDescribe("첨부파일 객체")
+		@Schema(description = "업무 문서 객체.")
 		private List<WoAttachment> attachmentList = new ArrayList<>();
-		@FieldDescribe("已完成工作对象")
+		@FieldDescribe("완료된 업무 문서 객체")
 		private List<WoWorkCompleted> workCompletedList = new ArrayList<>();
-		@FieldDescribe("工作日志对象")
+		@FieldDescribe("업무 로그 객체")
 		private List<WoWorkLog> workLogList = new ArrayList<>();
 
 		public WoTask getTask() {
@@ -250,7 +250,7 @@ class ActionReference extends BaseAction {
 		if (!workLog.getConnected()) {
 			referenceWorkLogTask(business, wo);
 		} else {
-			// 已经完成的不会有待办，返回一个空数组
+			// 이미 완료된 것은 결재 대기가 없으므로 빈 배열 반환
 			wo.setTaskList(new ArrayList<>());
 		}
 		referenceWorkLogTaskCompleted(business, wo);
@@ -271,7 +271,7 @@ class ActionReference extends BaseAction {
 		os = os.stream()
 				.sorted(Comparator.comparing(TaskCompleted::getCompletedTime, Comparator.nullsLast(Date::compareTo)))
 				.collect(Collectors.toList());
-//		/** 补充召回 */
+//		/** 회수 보완 */
 //		List<WoTaskCompleted> wos = WoTaskCompleted.copier.copy(os);
 //		List<WoTaskCompleted> list = new ArrayList<>();
 //		for (WoTaskCompleted o : wos) {
@@ -279,8 +279,8 @@ class ActionReference extends BaseAction {
 //			if (Objects.equal(o.getProcessingType(), ProcessingType.retract)) {
 //				WoTaskCompleted retract = new WoTaskCompleted();
 //				o.copyTo(retract);
-//				retract.setRouteName("撤回");
-//				retract.setOpinion("撤回");
+//				retract.setRouteName("회수");
+//				retract.setOpinion("회수");
 //				retract.setStartTime(retract.getRetractTime());
 //				retract.setCompletedTime(retract.getRetractTime());
 //				list.add(retract);

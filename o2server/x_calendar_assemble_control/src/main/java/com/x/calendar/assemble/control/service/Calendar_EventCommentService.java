@@ -12,7 +12,7 @@ import com.x.calendar.core.entity.Calendar_EventComment;
 
 
 /**
- * 日历记录信息服务类
+ * 캘린더 레코드 정보 서비스 클래스
  * @author O2LEE
  *
  */
@@ -21,7 +21,7 @@ public class Calendar_EventCommentService {
 	private DateOperation dateOperation = new DateOperation();
 
 	/**
-	 * 获取指定的备注信息对象列表
+	 * 지정 비고 정보 객체 목록 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -47,7 +47,7 @@ public class Calendar_EventCommentService {
 	}
 
 	/**
-	 * 查询检查时间早于now的maxCount条记录的ID列表
+	 * 확인 시간이 now보다 이른 maxCount건의 ID 목록 조회
 	 * @param emc
 	 * @param now
 	 * @param maxCount

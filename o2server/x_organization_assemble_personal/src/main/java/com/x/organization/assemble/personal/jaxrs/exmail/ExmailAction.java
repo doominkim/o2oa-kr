@@ -42,9 +42,9 @@ public class ExmailAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExmailAction.class);
 	private static final String OPERATIONID_PREFIX = "ExmailAction::";
 
-	@Operation(summary = "获取当前用户的exmail邮件数量,即时访问腾讯企业邮获取.", operationId = OPERATIONID_PREFIX + "newCount", responses = {
+	@Operation(summary = "현재 사용자의 exmail 메일 수 조회, 텐센트 기업 메일에 즉시 접근해 조회.", operationId = OPERATIONID_PREFIX + "newCount", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionNewCount.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "获取当前用户的exmail邮件数量,即时访问腾讯企业邮获取.", action = ActionNewCount.class, scope = DescribeScope.commonly)
+	@JaxrsMethodDescribe(value = "현재 사용자의 exmail 메일 수 조회, 텐센트 기업 메일에 즉시 접근해 조회.", action = ActionNewCount.class, scope = DescribeScope.commonly)
 	@GET
 	@Path("new/count")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -61,10 +61,10 @@ public class ExmailAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取当前用户的exmail邮件数量,读取通过回调写入PersonAttribute的值.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "현재 사용자의 exmail 메일 수 조회, 콜백으로 PersonAttribute에 기록된 값 읽기.", operationId = OPERATIONID_PREFIX
 			+ "newCountPassive", responses = { @ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionNewCountPassive.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "获取当前用户的exmail邮件数量,读取通过回调写入PersonAttribute的值.", action = ActionNewCountPassive.class, scope = DescribeScope.commonly)
+	@JaxrsMethodDescribe(value = "현재 사용자의 exmail 메일 수 조회, 콜백으로 PersonAttribute에 기록된 값 읽기.", action = ActionNewCountPassive.class, scope = DescribeScope.commonly)
 	@GET
 	@Path("new/count/passive")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -81,10 +81,10 @@ public class ExmailAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示当前用户腾讯企业邮标题,读取通过回调写入PersonAttribute的值.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "현재 사용자의 텐센트 기업 메일 제목 목록, 콜백으로 PersonAttribute에 기록된 값 읽기.", operationId = OPERATIONID_PREFIX
 			+ "listTitlePassive", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListTitlePassive.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示当前用户腾讯企业邮标题,读取通过回调写入PersonAttribute的值.", action = ActionListTitlePassive.class, scope = DescribeScope.commonly)
+	@JaxrsMethodDescribe(value = "현재 사용자의 텐센트 기업 메일 제목 목록, 콜백으로 PersonAttribute에 기록된 값 읽기.", action = ActionListTitlePassive.class, scope = DescribeScope.commonly)
 	@GET
 	@Path("list/title/passive")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -101,9 +101,9 @@ public class ExmailAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取当前用户邮件单点登录地址.", operationId = OPERATIONID_PREFIX + "sso", responses = {
+	@Operation(summary = "현재 사용자 메일 SSO 주소 조회.", operationId = OPERATIONID_PREFIX + "sso", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionSso.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "获取当前用户邮件单点登录地址.", action = ActionSso.class, scope = DescribeScope.commonly)
+	@JaxrsMethodDescribe(value = "현재 사용자 메일 SSO 주소 조회.", action = ActionSso.class, scope = DescribeScope.commonly)
 	@GET
 	@Path("sso")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -120,9 +120,9 @@ public class ExmailAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "接收腾讯企业邮回调GET方法.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "텐센트 기업 메일 콜백 GET 메서드 수신.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGet.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "接收腾讯企业邮回调GET方法.", action = ActionGet.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "텐센트 기업 메일 콜백 GET 메서드 수신.", action = ActionGet.class, scope = DescribeScope.system)
 	@GET
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@JaxrsParameterDescribe("msg_signature") @QueryParam("msg_signature") String msg_signature,
@@ -140,11 +140,11 @@ public class ExmailAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "接收腾讯企业邮回调POST方法.", operationId = OPERATIONID_PREFIX + "callback", responses = {
+	@Operation(summary = "텐센트 기업 메일 콜백 POST 메서드 수신.", operationId = OPERATIONID_PREFIX + "callback", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionCallback.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = String.class)) }))
-	@JaxrsMethodDescribe(value = "接收腾讯企业邮回调POST方法.", action = ActionCallback.class, scope = DescribeScope.system)
+	@JaxrsMethodDescribe(value = "텐센트 기업 메일 콜백 POST 메서드 수신.", action = ActionCallback.class, scope = DescribeScope.system)
 	@POST
 	public void callback(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@JaxrsParameterDescribe("msg_signature") @QueryParam("msg_signature") String msg_signature,

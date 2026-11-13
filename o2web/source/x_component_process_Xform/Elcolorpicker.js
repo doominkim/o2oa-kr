@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Elinput 基于Element UI的颜色选择组件。
- * @o2cn 颜色选择
+/** @class Elinput Element UI 기반 색상 선택 컴포넌트.
+ * @o2cn 색상 선택
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/color-picker|Element UI ColorPicker 颜色选择器}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/color-picker|Element UI ColorPicker 색상 선택기}
  */
 MWF.xApplication.process.Xform.Elcolorpicker = MWF.APPElcolorpicker =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elcolorpicker# */
@@ -22,21 +22,21 @@ MWF.xApplication.process.Xform.Elcolorpicker = MWF.APPElcolorpicker =  new Class
         "moduleEvents": ["load", "queryLoad", "postLoad"],
 
         /**
-         * 	当绑定值变化时触发。this.event[0]为当前值
+         * 	바인딩 값이 변경될 때 발생. this.event[0]은 현재 값
          * @event MWF.xApplication.process.Xform.Elcolorpicker#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/color-picker|颜色选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/color-picker|색상 선택 컴포넌트의 Events 장}
          */
 
         /**
-         * 面板中当前显示的颜色发生改变时触发。this.event[0]当前显示的颜色值
+         * 패널에 현재 표시된 색상이 변경될 때 발생. this.event[0]은 현재 표시된 색상 값
          * @event MWF.xApplication.process.Xform.Elcolorpicker#active-change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/color-picker|颜色选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/color-picker|색상 선택 컴포넌트의 Events 장}
          */
         "elEvents": ["change","active-change"]
     },
     _loadMergeReadContentNode: function( contentNode, data ){
         // var d = o2.typeOf( data.data ) === "array" ? data.data : [data.data];
-        // contentNode.set("text", d.join( this.json.rangeSeparator ? " "+this.json.rangeSeparator+" " : " 至 " ) );
+        // contentNode.set("text", d.join( this.json.rangeSeparator ? " "+this.json.rangeSeparator+" " : " ~ " ) );
 
         var _self = this;
 

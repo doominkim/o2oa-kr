@@ -33,13 +33,13 @@ public class ServiceAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ServiceAction.class);
 
-	@JaxrsMethodDescribe(value = "访问服务.", action = ActionTouch.class)
+	@JaxrsMethodDescribe(value = "서비스 접근.", action = ActionTouch.class)
 	@PUT
 	@Path("work/{id}/touch")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void touch(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionTouch.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -57,7 +57,7 @@ public class ServiceAction extends StandardJaxrsAction {
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void touchMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionTouch.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

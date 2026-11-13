@@ -181,7 +181,7 @@ class ActionSave extends BaseAction {
 			}
 		}
 		if (bytes == null) {
-			throw new IllegalStateException("签批转图片异常！");
+			throw new IllegalStateException("서명을 이미지로 변환하는 중 오류가 발생했습니다!");
 		}
 		DocSignScrawl signScrawl = new DocSignScrawl(docSign, name);
 		signScrawl.setType(DocSignScrawl.SCRAWL_TYPE_IMAGE);
@@ -194,17 +194,17 @@ class ActionSave extends BaseAction {
 
 		private static final long serialVersionUID = 8217095918226150147L;
 
-		@FieldDescribe("状态：1(暂存)|2(签批正文不可以修改)|3(签批正文可以修改,正文保存为图片).")
+		@FieldDescribe("상태:1(임시 저장)|2(서명 결재 본문 수정 불가)|3(서명 결재 본문 수정 가능, 본문을 이미지로 저장).")
 		private Integer status;
-		@FieldDescribe("包含签批的html正文后内容，状态为3时必传.")
+		@FieldDescribe("서명 결재가 포함된 html 본문 내용, 상태가 3일 때 필수.")
 		private String htmlContent;
-		@FieldDescribe("html正文宽度，允许为空.")
+		@FieldDescribe("html 본문 너비, 비워 둘 수 있음.")
 		private Double htmlWidth;
-		@FieldDescribe("html正文高度，允许为空.")
+		@FieldDescribe("html 본문 높이, 비워 둘 수 있음.")
 		private Double htmlHeight;
-		@FieldDescribe("输入框列表.")
+		@FieldDescribe("입력 상자 목록.")
 		private List<String> inputList = new ArrayList<>();
-		@FieldDescribe("涂鸦列表，示例[\"{'src':'base64图片','width':'100','height':'100'}\"].")
+		@FieldDescribe("손글씨 목록, 예시[\"{'src':'base64 이미지','width':'100','height':'100'}\"].")
 		private List<String> scrawlList = new ArrayList<>();
 
 		public Integer getStatus() {

@@ -53,7 +53,7 @@ class ActionExecuteProjection extends BaseAction {
 
 		private static final long serialVersionUID = 8751222971648353980L;
 
-		@FieldDescribe("无效字段")
+		@FieldDescribe("유효하지 않은 필드")
 		private String dummy;
 
 		public String getDummy() {

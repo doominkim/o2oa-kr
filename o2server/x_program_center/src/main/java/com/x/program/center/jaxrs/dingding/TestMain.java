@@ -35,7 +35,7 @@ public class TestMain {
 
 //            String j = dingTalkEncryptor.getDecryptMsg("111108bb8e6dbce3c9671d6fdb69d15066227608", "1783610513", "123456",
 //                    "1ojQf0NSvw2WPvW7LijxS8UvISr8pdDP+rXpPbcLGOmIBNbWetRg7IP0vdhVgkVwSoZBJeQwY2zhROsJq/HJ+q6tp1qhl9L1+ccC9ZjKs1wV5bmA9NoAWQiZ+7MpzQVq+j74rJQljdVyBdI/dGOvsnBSCxCVW0ISWX0vn9lYTuuHSoaxwCGylH9xRhYHL9bRDskBc7bO0FseHQQasdfghjkl");
-//            System.out.println(j+"点点滴滴");
+//            System.out.println(j+"조금씩");
 
 
         } catch (Exception e) {

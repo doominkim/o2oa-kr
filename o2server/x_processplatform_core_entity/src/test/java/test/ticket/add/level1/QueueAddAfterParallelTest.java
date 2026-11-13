@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class QueueAddAfterParallelTest {
 
-	@DisplayName("A后加签EFG,EFG并行处理")
+	@DisplayName("A 뒤에 EFG 추가 결재, EFG 병렬 처리")
 	@Test
 	@Order(1)
 	void test01() {

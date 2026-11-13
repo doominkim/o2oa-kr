@@ -50,7 +50,7 @@ public class ShaTools {
         for (byte aByte : bytes) {
             temp = Integer.toHexString(aByte & 0xFF);
             if (temp.length() == 1) {
-                // 1得到一位的进行补0操作
+                // 한 자리면 0을 채움
                 sb.append("0");
             }
             sb.append(temp);
@@ -59,11 +59,11 @@ public class ShaTools {
     }
 
     /**
-     * HMACSHA256 加密算法
+     * HMACSHA256 암호화 알고리즘
      *
-     * @param data 加密字符串
-     * @param key  密钥
-     * @return 加密结果字符串
+     * @param data 암호화할 문자열
+     * @param key  키
+     * @return 암호화 결과 문자열
      */
     public static String HMACSHA256(String data, String key) {
         StringBuilder sb = new StringBuilder();

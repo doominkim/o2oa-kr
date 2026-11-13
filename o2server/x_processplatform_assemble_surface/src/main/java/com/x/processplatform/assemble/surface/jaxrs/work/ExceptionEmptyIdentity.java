@@ -11,10 +11,10 @@ class ExceptionEmptyIdentity extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionEmptyIdentity(List<String> identities) {
-		super("指定的身份不存在或者为空:{}.", StringUtils.join(identities, ","));
+		super("지정한 소속이 없거나 비어 있습니다: {}.", StringUtils.join(identities, ","));
 	}
 
 	ExceptionEmptyIdentity(String identity) {
-		super("指定的身份不存在或者为空:{}.", identity);
+		super("지정한 소속이 없거나 비어 있습니다: {}.", identity);
 	}
 }

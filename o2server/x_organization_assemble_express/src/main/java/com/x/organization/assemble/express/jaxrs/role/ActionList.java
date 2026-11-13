@@ -39,7 +39,7 @@ class ActionList extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("角色")
+		@FieldDescribe("역할")
 		private List<String> roleList = new ArrayList<>();
 
 		public List<String> getRoleList() {

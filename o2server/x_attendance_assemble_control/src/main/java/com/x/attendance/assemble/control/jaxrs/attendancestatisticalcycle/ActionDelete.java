@@ -20,13 +20,13 @@ public class ActionDelete extends BaseAction {
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String id ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			AttendanceStatisticalCycle attendanceStatisticalCycle = emc.find(id, AttendanceStatisticalCycle.class);
 			if (null == attendanceStatisticalCycle) {
 				Exception exception = new ExceptionStatisticCycleNotExists(id);
 				result.error(exception);
 			} else {
-				// 进行数据库持久化操作
+				// 데이터베이스 영속화 작업 수행
 				emc.beginTransaction(AttendanceStatisticalCycle.class);
 				emc.remove(attendanceStatisticalCycle, CheckRemoveType.all);
 				emc.commit();
@@ -36,7 +36,7 @@ public class ActionDelete extends BaseAction {
 				result.setData(new Wo(id));
 			}
 		} catch (Exception e) {
-			Exception exception = new ExceptionStatisticCycleProcess(e, "系统删除统计周期信息对象时发生异常.ID:" +  id);
+			Exception exception = new ExceptionStatisticCycleProcess(e, "통계 기간 삭제 중 오류가 발생했습니다. ID:" +  id);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}

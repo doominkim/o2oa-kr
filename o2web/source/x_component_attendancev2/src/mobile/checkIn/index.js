@@ -23,7 +23,7 @@ export default content({
                 tip: '',
                 submitting: false,
             },
-            showAMap: false, //  ture 显示高德地图
+            showAMap: false, //  ture 이면 Amap 지도 표시
             location: {
                 status: false,
                 locating: true,
@@ -52,10 +52,10 @@ export default content({
         this.loadQywxSdk();
 
     },
-    // 加载高德地图api等资源
+    // Amap 지도 api 등 리소스 로드
     async loadAMap() {
         if (!window.AMapApiLoaded) {
-            const config = await getPublicData("attendanceMapConfig"); // 地图配置
+            const config = await getPublicData("attendanceMapConfig"); // 지도 설정
             if (config && config.aMapAccountKey) {
                 this.bind.showAMap = true;
                  let apiPath = "http://webapi.amap.com/maps?v=1.4.15&key=" + config.aMapAccountKey;
@@ -70,55 +70,55 @@ export default content({
                 });
             } else {
                 console.error("지도 Key가 설정되지 않았습니다!");
-                this.bind.showAMap = false; // 不显示地图，显示定位信息
+                this.bind.showAMap = false; // 지도 미표시, 위치 정보 표시
             }
         } else {
             this.bind.showAMap = true;
             this.showAMap();
         }
     },
-    // 添加高德地图
+    // Amap 지도 추가
     async showAMap() {
         const point = new AMap.LngLat(109.173571, 18.328807);
         this.createAMap(point);
     },
-    // 创建高德地图
+    // Amap 지도 생성
     createAMap(point) {
         console.debug("AMap 지도 생성 시작!", point);
         if (!this.amap) {
             this.amap = new AMap.Map("amap-container", {
-                zoom: 17, //级别
-                center: point, //中心点坐标
-                viewMode: "3D", //使用3D视图
-            }); // 创建Map实例
+                zoom: 17, //레벨
+                center: point, //중심점 좌표
+                viewMode: "3D", //3D 뷰 사용
+            }); // Map 인스턴스 생성
         }
     },
-    // 添加高德地图圆形范围
+    // Amap 지도 원형 범위 추가
     addAMapCircle(point, radius) {
-        // 先清除
+        // 먼저 지움
         if (this.amapCircle) {
             this.amap.remove(this.amapCircle);
             this.amapCircle = null;
         }
-        //创建圆形 Circle 实例
+        //원형 Circle 인스턴스 생성
         this.amapCircle = new AMap.Circle({
-            center: point, //圆心
-            radius: radius, //半径
-            bubble: true, //允许覆盖物点击事件冒泡到地图，避免拦截地图 click
-            // borderWeight: 3, //描边的宽度
-            strokeColor: "#1791fc", //轮廓线颜色
-            strokeOpacity: 1, //轮廓线透明度
-            strokeWeight: 1, //轮廓线宽度
-            fillOpacity: 0.4, //圆形填充透明度
-            // strokeStyle: "dashed", //轮廓线样式
-            fillColor: "#1791fc", //圆形填充颜色
-            zIndex: 50, //圆形的叠加顺序
+            center: point, //원 중심
+            radius: radius, //반경
+            bubble: true, //오버레이 클릭 이벤트가 지도로 버블링되도록 허용, 지도 click 가로채기 방지
+            // borderWeight: 3, //테두리 너비
+            strokeColor: "#1791fc", //윤곽선 색상
+            strokeOpacity: 1, //윤곽선 투명도
+            strokeWeight: 1, //윤곽선 너비
+            fillOpacity: 0.4, //원 채우기 투명도
+            // strokeStyle: "dashed", //윤곽선 스타일
+            fillColor: "#1791fc", //원 채우기 색상
+            zIndex: 50, //원의 겹침 순서
         });
-        this.amap.add(this.amapCircle); //在地图上添加圆形
+        this.amap.add(this.amapCircle); //지도에 원 추가
     },
-    // 添加高德地图标记点
+    // Amap 지도 마커 추가
     addAMapMarkPoint(point, placeName) {
-        // 先清除
+        // 먼저 지움
         if (this.aMapMarker) {
             this.amap.remove(this.aMapMarker);
             this.aMapMarker = null;
@@ -132,7 +132,7 @@ export default content({
             },
         });
         this.amap.add(this.aMapMarker);
-        // 地图移动到当前点的位置
+        // 지도를 현재 지점 위치로 이동
         this.amap.setCenter(point);
     },
     async loadCheckInAlertConfigEnable() {
@@ -247,7 +247,7 @@ export default content({
             this.location();
         }
     },
-    // 企业微信sdk加载
+    // WeCom sdk 로드
     async loadQywxSdk() {
         let sdkPath = 'https://wwcdn.weixin.qq.com/node/wework/wwopen/js/wecom-jssdk-2.4.0.js';
         if (window.location.protocol.toLowerCase() === 'https:') {
@@ -279,14 +279,14 @@ export default content({
         }
         return this.configSignature;
     },
-    //企业微信定位
+    //WeCom 위치 확인
     async qywxLocation() {
         this.bind.location.locating = true;
         this.bind.location.title = lp.mobile.locationIng;
         this.bind.location.inRange = false;
         this.bind.location.workPlace = null;
         this.configSignature = await this.getConfigSignature();
-        // 先注册 api
+        // 먼저 api 등록
         const re = await ww.register({
             corpId: this.configSignature.corpId,
             jsApiList: ['getLocation', 'chooseImage', 'getLocalImgData'],
@@ -298,7 +298,7 @@ export default content({
             if (res && res.latitude && res.longitude) {
                 this.bind.location.lnglat.longitude = res.longitude;
                 this.bind.location.lnglat.latitude = res.latitude;
-                // 查询地址
+                // 주소 조회
                 this.getQywxGeoAddress(res.latitude, res.longitude);
             } else {
                 console.error('WeCom 위치 조회 실패', res);
@@ -309,7 +309,7 @@ export default content({
             this.setLocationError();
         });
     },
-    // 百度地图定位
+    // Baidu 지도 위치 확인
     location() {
         this.bind.location.locating = true;
         this.bind.location.title = lp.mobile.locationIng;
@@ -336,7 +336,7 @@ export default content({
             SDKLocation: true,
         });
     },
-    // 百度地图查询地址
+    // Baidu 지도 주소 조회
     getGeoAddress(point) {
         const geocoder = new BMap.Geocoder();
         geocoder.getLocation(point, (result) => {
@@ -366,7 +366,7 @@ export default content({
         this.bind.location.title = address || '현재 위치를 가져왔습니다';
         this.qywxCalDistance();
     },
-    // 企业微信计算距离
+    // WeCom 거리 계산
     qywxCalDistance() {
         if (!this.bind.location.status || !this.bind.location.lnglat.longitude || !this.bind.location.lnglat.latitude) {
             return;
@@ -388,7 +388,7 @@ export default content({
                 continue;
             }
             const gcj02Point = WGS84_TO_GCJ02.transform(latitude, longitude);
-            // 下面地图模式要使用
+            // 아래 지도 모드에서 사용
             place.longitude = gcj02Point.longitude;
             place.latitude = gcj02Point.latitude;
             const distance = getDistance(gcj02Point.latitude, gcj02Point.longitude, this.bind.location.lnglat.latitude, this.bind.location.lnglat.longitude);
@@ -400,7 +400,7 @@ export default content({
         this.bind.location.inRange = !!matchedPlace;
         this.bind.location.workPlace = matchedPlace;
         this.bind.location.title = matchedPlace ? (matchedPlace.placeAlias || matchedPlace.placeName) : this.bind.location.address;
-        // 地图模式
+        // 지도 모드
         if (this.bind.showAMap && this.amap && matchedPlace) {
             const point = new AMap.LngLat( parseFloat(matchedPlace.longitude), parseFloat(matchedPlace.latitude));
             const range = matchedPlace.errorRange || 200;
@@ -417,7 +417,7 @@ export default content({
         this.bind.location.workPlace = null;
         this.bind.location.title = lp.mobile.locationError;
     },
-    // 百度地图计算距离
+    // Baidu 지도 거리 계산
     calDistance() {
         if (!this.bind.location.status || !this.bind.location.lnglat.longitude || !this.bind.location.lnglat.latitude) {
             return;

@@ -7,6 +7,6 @@ class InsufficientPermissionException extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	InsufficientPermissionException(String person) {
-		super("用户: {} 没有足够的权限.", person);
+		super("사용자: {}에게 충분한 권한이 없습니다.", person);
 	}
 }

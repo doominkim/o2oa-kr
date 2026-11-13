@@ -24,7 +24,7 @@ public class PermissionOperateService {
 
 	private static ReentrantLock lock = new ReentrantLock();
 	/**
-	 * 根据文档ID，为文档设置用户访问和管理权限
+	 * 문서 ID로 문서에 사용자 접근 및 관리 권한 설정
 	 * @param docId
 	 * @param readerList
 	 * @param authorList
@@ -34,7 +34,7 @@ public class PermissionOperateService {
 		List<PermissionInfo> permissionList = composeDocmentAllPermissions(readerList, authorList);
 		lock.lock();
 		try {
-			//将读者以及作者信息持久化到数据库中
+			//독자 및 작성자 정보를 데이터베이스에 저장
 			return refreshDocumentPermission( docId, permissionList );
 		} finally {
 			lock.unlock();
@@ -42,7 +42,7 @@ public class PermissionOperateService {
 	}
 	
 	/**
-	 * 根据读者和作者组织所有的权限对象列表
+	 * 독자와 작성자로 모든 권한 객체 목록 구성
 	 * @param readerList
 	 * @param authorList
 	 * @throws Exception
@@ -51,7 +51,7 @@ public class PermissionOperateService {
 		
 		List<PermissionInfo> permissionList = new ArrayList<>();
 		PermissionInfo new_permissionInfo = null;
-		//添加读者信息，如果没有限定读者，那么所有可访问分类的用户可读
+		//독자 정보 추가, 독자를 제한하지 않으면 분류에 접근 가능한 모든 사용자가 열람 가능
 		if ( ListTools.isEmpty( readerList ) ) {
 			permissionList.add( new PermissionInfo( PermissionName.READER, "所有人", "所有人", "所有人" ) );
 		} else {
@@ -67,14 +67,14 @@ public class PermissionOperateService {
 			}
 		}
 		
-		//将所有的作者都添加到阅读者里去
+		//모든 작성자를 독자에 추가
 		if ( authorList != null && !authorList.isEmpty() ) {
 			for( PermissionInfo p : authorList ) {
 //				System.out.println(">>>>>authorList:" + p.getPermissionObjectCode());
-				//如果p是所有人，那么需要判断一下，是否存在不是所有人的读者，如果存在就不能添加所有人可见
+				//p가 모든 사람이면 모든 사람이 아닌 독자가 있는지 판단해야 하며, 있으면 모든 사람 열람을 추가할 수 없음
 				Boolean existsReaderPermission = false;
 				if( StringUtils.equals( p.getPermissionObjectCode(), "所有人")) {
-					//判断是否存在不是所有人可见的权限
+					//모든 사람 열람이 아닌 권한이 있는지 판단
 					for(  PermissionInfo p1 : permissionList ) {
 						if( ( StringUtils.equals( p1.getPermission(), "读者") || StringUtils.equals( p1.getPermission(), "阅读"))
 								&& !StringUtils.equals( p1.getPermissionObjectCode(),  "所有人" )) {
@@ -94,7 +94,7 @@ public class PermissionOperateService {
 				}
 				
 								
-				//添加作者信息，作者可以对文档进行编辑
+				//작성자 정보 추가, 작성자는 문서 편집 가능
 				new_permissionInfo = createPermissionInfo( PermissionName.AUTHOR, p.getPermissionObjectType(), p.getPermissionObjectCode(), p.getPermissionObjectName() );
 				if( new_permissionInfo != null ) {
 					if( StringUtils.isEmpty( new_permissionInfo.getPermissionObjectCode() )) {
@@ -109,13 +109,13 @@ public class PermissionOperateService {
 	
 	
 	private PermissionInfo createPermissionInfo( String permission, String permissionObjectType, String permissionObjectCode, String permissionObjectName ) throws Exception {
-		//如果存在身份信息，将身份信息替换为个人信息
+		//신분 정보가 있으면 신분 정보를 개인 정보로 대체
 		String personFlag = null;
 		if( StringUtils.isEmpty( permissionObjectCode ) ) {
 			permissionObjectCode = permissionObjectName;
 		}
 		if( StringUtil.isNotEmpty( permissionObjectCode ) && permissionObjectCode.endsWith("@I") ) {
-			//将身份转换为个人 @P
+			//신분을 개인으로 변환 @P
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				personFlag = new Business(emc).organization().person().getWithIdentity( permissionObjectCode );
 			}
@@ -134,7 +134,7 @@ public class PermissionOperateService {
 	}
 	
 	/**
-	 * 根据文档ID，为文档设置用户访问和管理权限
+	 * 문서 ID로 문서에 사용자 접근 및 관리 권한 설정
 	 * @param docId
 	 * @param permissionList
 	 * @throws Exception 
@@ -148,7 +148,7 @@ public class PermissionOperateService {
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 			document = emc.find( docId, Document.class );
 			if( document != null ) {
-				//清空文档权限信息
+				//문서 권한 정보 초기화
 				document.setManagerList( null );
 				document.setReadPersonList( null );
 				document.setReadUnitList( null );
@@ -187,18 +187,18 @@ public class PermissionOperateService {
 				
 				if( ListTools.isEmpty( document.getReadPersonList() ) && ListTools.isEmpty( document.getReadUnitList() ) 
 						&& ListTools.isEmpty( document.getReadGroupList() )) {
-					//可读范围都为空，则是所有人可访问
+					//열람 범위가 모두 비어 있으면 모든 사람이 접근 가능
 					document.addToReadPersonList("所有人");
 					document.addToReadPersonList(document.getCreatorPerson());
 				}
 				if( ListTools.isEmpty( document.getAuthorPersonList() ) && ListTools.isEmpty( document.getAuthorUnitList() ) 
 						&& ListTools.isEmpty( document.getAuthorGroupList() )) {
-					//编辑全部都为空，则是创建人可编辑
+					//편집 범위가 모두 비어 있으면 작성자가 편집 가능
 					document.addToReadPersonList( document.getCreatorPerson() );
 					document.addToAuthorPersonList( document.getCreatorPerson() );
 				}
 				if( ListTools.isEmpty( document.getManagerList() ) ) {
-					//管理全部都为空，则是创建人可以管理
+					//관리 범위가 모두 비어 있으면 작성자가 관리 가능
 					document.addToReadPersonList( document.getCreatorPerson() );
 					document.addToManagerList( document.getCreatorPerson() );
 				}

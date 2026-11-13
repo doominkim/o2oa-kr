@@ -54,7 +54,7 @@ MWF.xApplication.LogViewer.Main = new Class({
         this.count = 20;
         this.currentId = "(0)";
 
-        //定时器
+        //타이머
     },
     loadBottom: function(){
 
@@ -255,7 +255,7 @@ MWF.xApplication.LogViewer.Main = new Class({
                 this.showSystemLog(json.data);
             }.bind(this));
 
-            //添加定时器
+            //타이머 추가
             this.timeDo = this.tiemShowSystemLog.periodical(1000,this);
 
         }else{

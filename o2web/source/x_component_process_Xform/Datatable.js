@@ -9,7 +9,7 @@ MWF.xDesktop.requireApp("process.Xform", "DatatableV10", null, false);
 //     MWF.xApplication.process.Xform.Datatable$Title = MWF.APPDatatable$Title = MWF.xApplication.process.Xform.DatatablePC$Title;
 //     MWF.xApplication.process.Xform.Datatable$Data = MWF.APPDatatable$Data = MWF.xApplication.process.Xform.DatatablePC$Data;
 // }else
-//为了适配历史移动端表单并且增加了配置。在form.js的_getModuleType中获取最终的类型。
+//기존 모바일 양식에 맞추기 위해 설정을 추가함. form.js의 _getModuleType에서 최종 유형을 가져옴.
 // if ((layout.mobile || COMMON.Browser.Platform.isMobile)){
 //     MWF.xApplication.process.Xform.Datatable = MWF.APPDatatable = MWF.xApplication.process.Xform.DatatableMobile;
 //     MWF.xApplication.process.Xform.Datatable$Title = MWF.APPDatatable$Title = MWF.xApplication.process.Xform.DatatableMobile$Title;

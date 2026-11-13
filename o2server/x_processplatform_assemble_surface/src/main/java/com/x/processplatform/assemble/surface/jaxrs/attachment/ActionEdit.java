@@ -42,7 +42,7 @@ class ActionEdit extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 			Work work = emc.find(workId, Work.class);
-			// 判断work是否存在
+			// work 존재 여부 판단
 			if (null == work) {
 				throw new ExceptionEntityNotExist(workId, Work.class);
 			}

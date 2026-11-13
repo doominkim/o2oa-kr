@@ -70,9 +70,9 @@ const newConversation = async (personList, type) => {
   loadingStore.hideLoading()
   if (res) {
     res.newConvStatus = true;
-    // 打开添加到会话列表
+    // 대화 목록에 추가 열기
     eventBus.publish(EventName.addConversationToList, res)
-    // 打开会话
+    // 대화 열기
     openConversation(res)
   }
 }
@@ -91,14 +91,14 @@ const chatWithPerson =  (personDn) => {
     console.error('전달된 매개변수 오류', personDn)
     return
   }
-  toggleTab(0) // 切换到聊天列表
+  toggleTab(0) // 채팅 목록으로 전환
   nextTick(() => {
     newConversation([personDn],"single")
   })
 }
 
 const showContact = () => {
-  toggleTab(1) // 切换到通讯录
+  toggleTab(1) // 주소록으로 전환
 }
 
 </script>
@@ -124,7 +124,7 @@ const showContact = () => {
           <i class="ooicon-config"></i>
         </div>
       </div>
-      <!-- 会话列表 -->
+      <!-- 대화 목록 -->
       <div class="im-conversation-content">
         <MyConversation @showContact="showContact"/>
       </div>

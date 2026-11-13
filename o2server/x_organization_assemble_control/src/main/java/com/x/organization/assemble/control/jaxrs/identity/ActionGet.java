@@ -54,10 +54,10 @@ class ActionGet extends BaseAction {
 		static WrapCopier<Identity, Wo> copier = WrapCopierFactory.wo(Identity.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible));
 
-		@FieldDescribe("组织对象")
+		@FieldDescribe("조직 객체")
 		private WoUnit woUnit;
 
-		@FieldDescribe("个人对象")
+		@FieldDescribe("개인 객체")
 		private WoPerson woPerson;
 
 		public WoUnit getWoUnit() {
@@ -82,10 +82,10 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = 2465212973550376118L;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
 		static WrapCopier<Unit, WoUnit> copier = WrapCopierFactory.wo(Unit.class, WoUnit.class, null,

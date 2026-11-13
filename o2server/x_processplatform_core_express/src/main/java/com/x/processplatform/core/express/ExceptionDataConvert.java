@@ -7,6 +7,6 @@ class ExceptionDataConvert extends PromptException {
 	private static final long serialVersionUID = -2875973555673919197L;
 
 	ExceptionDataConvert(Exception e, String job) {
-		super(e, "无法将DataItem转换为Data对象, job:{}.", job);
+		super(e, "DataItem을 Data 객체로 변환할 수 없습니다, job: {}.", job);
 	}
 }

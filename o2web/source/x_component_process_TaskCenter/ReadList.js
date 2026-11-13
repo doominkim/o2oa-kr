@@ -79,7 +79,7 @@ MWF.xApplication.process.TaskCenter.ReadList.Item = new Class({
         }.bind(this), null, this.data.id);
     },
     //loadActions: function(){
-    //    this.editNode = new Element("div", {"styles": this.list.css.titleActionReadedNode, "title": "设置为已阅"}).inject(this.titleActionNode);
+    //    this.editNode = new Element("div", {"styles": this.list.css.titleActionReadedNode, "title": "열람 완료로 설정"}).inject(this.titleActionNode);
     //    this.closeNode = new Element("div", {"styles": this.list.css.titleActionCloseNode}).inject(this.titleActionNode);
     //},
     loadActions: function(){
@@ -155,7 +155,7 @@ MWF.xApplication.process.TaskCenter.ReadList.Item = new Class({
     },
     setReaded: function(e){
         var _self = this;
-        // var text = "您确定要将“"+this.data.title+"”标记为已阅吗？"
+        // var text = "“"+this.data.title+"”을(를) 열람 완료로 표시하시겠습니까?"
         var text = this.list.app.lp.setReadedConfirmContent.replace("{title}", this.data.title );
         this.list.app.confirm("infor", e, this.list.app.lp.setReadedConfirmTitle, text, 350, 230, function(){
             _self.list.app.action.setReaded(function(){
@@ -170,7 +170,7 @@ MWF.xApplication.process.TaskCenter.ReadList.Item = new Class({
         }, null, this.list.app.content);
     },
     openWorkByTaskCompleted: function(e, id){
-        // 判断是否是钉钉环境 是否是独立窗口
+        // DingTalk 환경인지, 독립 창인지 판단
         if (layout.inBrowser && (o2.thirdparty.isDingdingPC() || o2.thirdparty.isQywxPC())) {
             var url = "../x_desktop/work.html?workid=" + id;
             window.location = o2.filterUrl(url);
@@ -190,7 +190,7 @@ MWF.xApplication.process.TaskCenter.ReadList.Item = new Class({
         }
     },
     openWorkCompleteedByTaskCompleted: function(e, id){
-        // 判断是否是钉钉环境 是否是独立窗口
+        // DingTalk 환경인지, 독립 창인지 판단
         var ua = navigator.userAgent.toLowerCase();
         if (layout.inBrowser && (o2.thirdparty.isDingdingPC() || o2.thirdparty.isQywxPC())) {
             var url = "../x_desktop/work.html?workCompletedId=" + id;

@@ -44,7 +44,7 @@ public class AttendanceAppealInfoService {
 		if( StringUtils.isNotEmpty( id ) && !"(0)".equals( id )){
 			attendanceAppealInfo = emc.find(id, AttendanceAppealInfo.class);
 			if ( null == attendanceAppealInfo ) {
-				throw new Exception("需要删除的申诉信息信息不存在。id=" + id);
+				throw new Exception("삭제할 이의 신청 정보가 없습니다. id=" + id);
 			} else {
 				emc.beginTransaction( AttendanceAppealInfo.class );
 				emc.remove( attendanceAppealInfo, CheckRemoveType.all );
@@ -84,7 +84,7 @@ public class AttendanceAppealInfoService {
 				emc.persist( attendanceAppealAuditInfo, CheckPersistType.all);
 			}
 
-			//将打卡记录表里的打卡数据置为正在申诉中
+			//출퇴근 기록 테이블의 체크 데이터를 소명 진행 중으로 설정
 			attendanceDetail.setAppealStatus(1);
 			attendanceDetail.setAppealProcessor( attendanceAppealInfo.getCurrentProcessor() );
 			attendanceDetail.setAppealReason( attendanceAppealInfo.getAppealReason());

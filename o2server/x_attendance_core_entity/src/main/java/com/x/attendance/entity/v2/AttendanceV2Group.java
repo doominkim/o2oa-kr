@@ -19,9 +19,9 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * 考勤组
+ * 근태 그룹
  */
-@Schema(name = "AttendanceV2Group", description = "考勤组.")
+@Schema(name = "AttendanceV2Group", description = "근태 그룹.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2Group.table, uniqueConstraints = {
@@ -46,7 +46,7 @@ public class AttendanceV2Group extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -55,56 +55,56 @@ public class AttendanceV2Group extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
     public static final String groupName_FIELDNAME = "groupName";
-    @FieldDescribe("考勤组名称")
+    @FieldDescribe("근태 그룹 이름")
     @Column(name = ColumnNamePrefix + groupName_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String groupName;
 
-    // 考勤类型 固定班制 自由打卡 排班制  目前只有一种固定班制
-    public static final String CHECKTYPE_Fixed = "1"; // 固定班制
-    public static final String CHECKTYPE_Free = "2"; // 自由打卡
-    public static final String CHECKTYPE_Arrangement = "3"; // 排班制
+    // 근태 유형 고정 근무제 자율 체크 교대 근무제, 현재는 고정 근무제만 지원
+    public static final String CHECKTYPE_Fixed = "1"; // 고정 근무제
+    public static final String CHECKTYPE_Free = "2"; // 자율 체크
+    public static final String CHECKTYPE_Arrangement = "3"; // 교대 근무제
     public static final String checkType_FIELDNAME = "checkType";
-    @FieldDescribe("打卡类型 ")
+    @FieldDescribe("체크 유형 ")
     @Column(name = ColumnNamePrefix + checkType_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String checkType;
 
 
     public static final String shiftId_FIELDNAME = "shiftId";
-    @FieldDescribe("节假日调班的工作班次id.")
+    @FieldDescribe("공휴일 대체 근무 id.")
     @Column(length = length_64B, name = ColumnNamePrefix + shiftId_FIELDNAME)
     private String shiftId;
 
 
     public static final String operator_FIELDNAME = "operator";
-    @FieldDescribe("最后操作人")
+    @FieldDescribe("최종 처리자")
     @Column(name = ColumnNamePrefix + operator_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String operator;
 
-    public static final int status_auto = 2; //数据状态 自动存储
-    public static final int status_manual = 1; //数据状态 手动存储
+    public static final int status_auto = 2; //데이터 상태 자동 저장
+    public static final int status_manual = 1; //데이터 상태 수동 저장
     public static final String status_FIELDNAME = "status";
-    @FieldDescribe("考勤组数据状态.")
+    @FieldDescribe("근태 그룹 데이터 상태.")
     @Column(name = ColumnNamePrefix + status_FIELDNAME)
     private Integer status;
 
 
     public static final String assistAdminList_FIELDNAME = "assistAdminList";
-    @FieldDescribe("协助管理员.")
+    @FieldDescribe("보조 관리자.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -115,7 +115,7 @@ public class AttendanceV2Group extends SliceJpaObject {
     private List<String> assistAdminList;
 
     public static final String participateList_FIELDNAME = "participateList";
-    @FieldDescribe("考勤打卡人员、组织.")
+    @FieldDescribe("근태 체크 대상 사용자·조직.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -123,10 +123,10 @@ public class AttendanceV2Group extends SliceJpaObject {
             TABLE + participateList_FIELDNAME + JoinIndexNameSuffix))
     @ElementColumn(name = ColumnNamePrefix + participateList_FIELDNAME)
     @ElementIndex(name = TABLE + participateList_FIELDNAME + ElementIndexNameSuffix)
-    private List<String> participateList; // 考勤打卡人员、组织
+    private List<String> participateList; // 근태 체크 인원·조직
 
     public static final String unParticipateList_FIELDNAME = "unParticipateList";
-    @FieldDescribe("无需考勤打卡的人员.")
+    @FieldDescribe("근태 체크가 필요 없는 사용자.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -134,10 +134,10 @@ public class AttendanceV2Group extends SliceJpaObject {
             TABLE + unParticipateList_FIELDNAME + JoinIndexNameSuffix))
     @ElementColumn(name = ColumnNamePrefix + unParticipateList_FIELDNAME)
     @ElementIndex(name = TABLE + unParticipateList_FIELDNAME + ElementIndexNameSuffix)
-    private List<String> unParticipateList; // 无需考勤打卡的人员 只有人员
+    private List<String> unParticipateList; // 근태 체크가 필요 없는 사용자, 사용자만
 
     public static final String trueParticipantList_FIELDNAME = "trueParticipantList";
-    @FieldDescribe("真实的考勤打卡的人员列表，participateList和unParticipateList组合计算的结果.")
+    @FieldDescribe("실제 근태 체크 대상 사용자 목록, participateList와 unParticipateList를 조합해 계산한 결과.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -145,42 +145,42 @@ public class AttendanceV2Group extends SliceJpaObject {
             TABLE + trueParticipantList_FIELDNAME + JoinIndexNameSuffix))
     @ElementColumn(name = ColumnNamePrefix + trueParticipantList_FIELDNAME)
     @ElementIndex(name = TABLE + trueParticipantList_FIELDNAME + ElementIndexNameSuffix)
-    private List<String> trueParticipantList; // 必须考勤打卡的人员 只有人员
+    private List<String> trueParticipantList; // 반드시 근태 체크해야 하는 사용자, 사용자만
 
     public static final String workDateList_FIELDNAME = "workDateList";
-    @FieldDescribe("考勤工作日设置.打卡类型为 自由打卡 的时候需要配置，如 1,2,3,4,5 。 0-6代表周日到周六.")
+    @FieldDescribe("근태 근무일 설정. 체크 유형이 자율 체크일 때 설정 필요, 예: 1,2,3,4,5. 0-6은 일요일~토요일.")
     @Column(length = length_64B, name = ColumnNamePrefix + workDateList_FIELDNAME)
-    private String workDateList; // 打卡的工作日设置  如 1,2,3,4,5 。 0-6代表周日到周六
+    private String workDateList; // 체크 근무일 설정, 예: 1,2,3,4,5. 0-6은 일요일~토요일
 
     public static final String workDateProperties_FIELDNAME = "workDateProperties";
-    @FieldDescribe("考勤工作日设置. 打卡类型为 固定班制 的时候需要配置，可以为每个打卡日配置班次")
+    @FieldDescribe("근태 근무일 설정. 체크 유형이 고정 근무제일 때 설정 필요, 체크일마다 근무 설정 가능")
     @Persistent
     @Strategy(JsonPropertiesValueHandler)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + workDateProperties_FIELDNAME)
     private AttendanceV2GroupWorkDayProperties workDateProperties;
 
     public static final String allowFieldWork_FIELDNAME = "allowFieldWork";
-    @FieldDescribe("是否允许外勤打卡.")
+    @FieldDescribe("외근 체크 허용 여부.")
     @Column(name = ColumnNamePrefix + allowFieldWork_FIELDNAME)
     private Boolean allowFieldWork = true;
 
     public static final String requiredFieldWorkRemarks_FIELDNAME = "requiredFieldWorkRemarks";
-    @FieldDescribe("外勤打卡备注是否必填.")
+    @FieldDescribe("외근 체크 비고 필수 여부.")
     @Column(name = ColumnNamePrefix + requiredFieldWorkRemarks_FIELDNAME)
     private Boolean requiredFieldWorkRemarks = true;
 
     public static final String requiredFieldWorkPhoto_FIELDNAME = "requiredFieldWorkPhoto";
-    @FieldDescribe("外勤打卡是否必须拍照.")
+    @FieldDescribe("외근 체크 사진 필수 여부.")
     @Column(name = ColumnNamePrefix + requiredFieldWorkPhoto_FIELDNAME)
     private Boolean requiredFieldWorkPhoto = false;
 
     public static final String fieldWorkMarkError_FIELDNAME = "fieldWorkMarkError";
-    @FieldDescribe("外勤打卡是否作为异常数据处理.")
+    @FieldDescribe("외근 체크를 비정상 데이터로 처리할지 여부.")
     @Column(name = ColumnNamePrefix + fieldWorkMarkError_FIELDNAME)
     private Boolean fieldWorkMarkError = true;
 
     public static final String workPlaceIdList_FIELDNAME = "workPlaceIdList";
-    @FieldDescribe("工作场所列表.")
+    @FieldDescribe("근무지 목록.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -193,7 +193,7 @@ public class AttendanceV2Group extends SliceJpaObject {
 
 
     public static final String requiredCheckInDateList_FIELDNAME = "requiredCheckInDateList";
-    @FieldDescribe("必须打卡的日期，包含日期 ｜ 班次id ｜ 是否循环，如 2023-01-01|shiftId|week.")
+    @FieldDescribe("반드시 체크해야 하는 날짜, 날짜 | 근무 id | 반복 여부 포함, 예: 2023-01-01|shiftId|week.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -205,7 +205,7 @@ public class AttendanceV2Group extends SliceJpaObject {
 
 
     public static final String noNeedCheckInDateList_FIELDNAME = "noNeedCheckInDateList";
-    @FieldDescribe("无需打卡的日期，包含日期 ｜ 是否循环 如 2023-01-01|week .")
+    @FieldDescribe("체크가 필요 없는 날짜, 날짜 | 반복 여부 포함, 예: 2023-01-01|week .")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle

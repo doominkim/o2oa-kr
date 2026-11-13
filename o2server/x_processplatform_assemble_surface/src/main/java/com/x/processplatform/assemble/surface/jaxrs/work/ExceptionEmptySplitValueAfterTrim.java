@@ -7,6 +7,6 @@ class ExceptionEmptySplitValueAfterTrim extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionEmptySplitValueAfterTrim(String id) {
-		super("工作: {},过滤后的拆分值为空.", id);
+		super("문서: {}, 필터링 후 분할 값이 비어 있습니다.", id);
 	}
 }

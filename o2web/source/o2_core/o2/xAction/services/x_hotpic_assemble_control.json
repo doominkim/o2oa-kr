@@ -3,7 +3,7 @@
   "saveHotPic" : {"uri":"/jaxrs/user/hotpic", "method": "POST"},
   "removeHotPic" : {"uri":"/jaxrs/user/hotpic/{id}","method": "DELETE"},
   "removeHotPicByInfor" : {"uri":"/jaxrs/user/hotpic/{application}/{infoId}","method": "DELETE"},
-  //filter条件
-  //{ application : "CMS|BBS" , infoId : "信息ID." , title : "信息标题，模糊查询."}
+  //filter 조건
+  //{ application : "CMS|BBS" , infoId : "정보 ID." , title : "정보 제목, 유사 검색."}
   "listHotPicFilterPage": {"uri" : "/jaxrs/user/hotpic/filter/list/page/{page}/count/{count}", "method": "PUT"}
 }

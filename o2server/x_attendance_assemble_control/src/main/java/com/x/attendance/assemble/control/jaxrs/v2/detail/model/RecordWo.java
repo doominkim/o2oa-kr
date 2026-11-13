@@ -11,11 +11,11 @@ import com.x.base.core.project.bean.WrapCopier;
 import com.x.base.core.project.bean.WrapCopierFactory;
 
 public class RecordWo extends AttendanceV2CheckInRecord {
-  @FieldDescribe("外出记录")
+  @FieldDescribe("외출 기록")
   private AttendanceV2LeaveData leaveData;
-  @FieldDescribe("请假记录")
+  @FieldDescribe("휴가 기록")
   private AttendanceV2LeaveRequest leaveRequest;
-  @FieldDescribe("申诉记录")
+  @FieldDescribe("이의 신청 기록")
   private AttendanceV2AppealInfo appealData;
 
   public static WrapCopier<AttendanceV2CheckInRecord, RecordWo> copier = WrapCopierFactory.wo(AttendanceV2CheckInRecord.class,

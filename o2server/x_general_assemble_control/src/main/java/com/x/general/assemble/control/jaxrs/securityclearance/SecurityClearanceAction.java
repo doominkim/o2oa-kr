@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("securityclearance")
-@JaxrsDescribe("密级标识.")
+@JaxrsDescribe("보안 등급 식별.")
 public class SecurityClearanceAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SecurityClearanceAction.class);
 
-	@JaxrsMethodDescribe(value = "是否启用密级标识.", action = ActionEnable.class)
+	@JaxrsMethodDescribe(value = "보안 등급 식별 사용 여부.", action = ActionEnable.class)
 	@GET
 	@Path("enable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -43,7 +43,7 @@ public class SecurityClearanceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取密级标识信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "보안 등급 식별 정보 조회.", action = ActionGet.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ public class SecurityClearanceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取主体密级标识.", action = ActionSubject.class)
+	@JaxrsMethodDescribe(value = "주체 보안 등급 식별 조회.", action = ActionSubject.class)
 	@GET
 	@Path("subject")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -76,7 +76,7 @@ public class SecurityClearanceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取客体密级标识.", action = ActionObject.class)
+	@JaxrsMethodDescribe(value = "객체 비밀 등급 표식 조회.", action = ActionObject.class)
 	@GET
 	@Path("object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -93,7 +93,7 @@ public class SecurityClearanceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取系统密级标识.", action = ActionSystem.class)
+	@JaxrsMethodDescribe(value = "시스템 비밀 등급 표식 조회.", action = ActionSystem.class)
 	@GET
 	@Path("system")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

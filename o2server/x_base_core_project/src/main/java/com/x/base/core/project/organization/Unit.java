@@ -9,37 +9,37 @@ public class Unit extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5213623128307370812L;
 
-	@FieldDescribe("组织名称")
+	@FieldDescribe("조직명")
 	private String name;
-	@FieldDescribe("唯一标识")
+	@FieldDescribe("고유 식별자")
 	private String unique;
-	@FieldDescribe("识别名")
+	@FieldDescribe("식별 이름")
 	private String distinguishedName;
-	@FieldDescribe("组织类型")
+	@FieldDescribe("조직 유형")
 	private List<String> typeList;
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	private String description;
-	@FieldDescribe("简称")
+	@FieldDescribe("약칭")
 	private String shortName;
-	@FieldDescribe("组织层次")
+	@FieldDescribe("조직 계층")
 	private Integer level;
-	@FieldDescribe("组织层次名")
+	@FieldDescribe("조직 계층명")
 	private String levelName;
-	@FieldDescribe("上级组织")
+	@FieldDescribe("상위 조직")
 	private String superior;
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	private Integer orderNumber;
-	@FieldDescribe("层级排序号")
+	@FieldDescribe("계층 정렬 번호")
 	private String levelOrderNumber;
-	@FieldDescribe("企业微信Id")
+	@FieldDescribe("기업 위챗 Id")
 	private String qiyeweixinId;
-	@FieldDescribe("钉钉Id")
+	@FieldDescribe("딩톡 Id")
 	private String dingdingId;
-	@FieldDescribe("政务钉钉Id")
+	@FieldDescribe("정부 딩톡 Id")
 	private String zhengwuDingdingId;
-	@FieldDescribe("华为WeLink Id")
+	@FieldDescribe("화웨이 WeLink Id")
 	private String weLinkId;
-	@FieldDescribe("组织管理员")
+	@FieldDescribe("조직 관리자")
 	private List<String> controllerList;
 
 	public String getWeLinkId() {

@@ -5,7 +5,7 @@ import com.x.cms.assemble.control.Business;
 import com.x.cms.core.entity.AppInfoConfig;
 
 /**
- * 栏目配置支持信息基础功能服务类
+ * 게시판 설정 지원 정보 기본 기능 서비스 클래스
  * 
  * @author O2LEE
  */

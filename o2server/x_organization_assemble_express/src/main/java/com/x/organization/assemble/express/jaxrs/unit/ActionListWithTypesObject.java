@@ -49,7 +49,7 @@ class ActionListWithTypesObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织类型")
+		@FieldDescribe("조직 유형")
 		private List<String> typeList = new ArrayList<>();
 
 		public List<String> getTypeList() {

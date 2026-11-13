@@ -33,12 +33,12 @@ public class ActionDelete extends BaseAction {
 			}
 		}
 		if (check) {
-			// 查询角色信息是否存在
+			// 역할 정보 존재 여부 조회
 			try {
 				roleInfo = roleInfoService.get(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess(e, "系统在根据ID获取BBS角色信息时发生异常！ID:" + id);
+				Exception exception = new ExceptionRoleInfoProcess(e, "ID로 BBS 역할 정보를 가져오는 중 오류가 발생했습니다! ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -62,7 +62,7 @@ public class ActionDelete extends BaseAction {
 						hostName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据ID删除BBS角色信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionRoleInfoProcess(e, "ID로 BBS 역할 정보를 삭제하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

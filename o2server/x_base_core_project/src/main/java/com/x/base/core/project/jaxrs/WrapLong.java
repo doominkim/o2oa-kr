@@ -13,7 +13,7 @@ public class WrapLong extends GsonPropertyObject {
 		this.value = o;
 	}
 
-	@FieldDescribe("长整型值")
+	@FieldDescribe("장정수 값")
 	private Long value;
 
 	public Long getValue() {

@@ -17,11 +17,11 @@ import com.x.hotpic.entity.HotPictureInfo_;
 
 
 /**
- * 类   名：HotPictureInfoFactory<br/>
- * 实体类：HotPictureInfo<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-11-15 17:17:26 
+ * 클래스명: HotPictureInfoFactory<br/>
+ * 엔티티 클래스: HotPictureInfo<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 일시: 2016-11-15 17:17:26 
 **/
 public class HotPictureInfoFactory extends AbstractFactory {
 
@@ -29,12 +29,12 @@ public class HotPictureInfoFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe( "获取指定Id的HotPictureInfo实体信息对象" )
+	//@MethodDescribe( "지정 Id의 HotPictureInfo 엔티티 정보 객체 조회" )
 	public HotPictureInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, HotPictureInfo.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的HotPictureInfo实体信息列表" )
+	//@MethodDescribe( "지정 Id의 HotPictureInfo 엔티티 정보 목록 조회" )
 	public List<HotPictureInfo> list( List<String> ids ) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<HotPictureInfo>();
@@ -49,7 +49,7 @@ public class HotPictureInfoFactory extends AbstractFactory {
 	}
 	
 	@SuppressWarnings("unused")
-	//@MethodDescribe( "列示全部的HotPictureInfo实体信息列表" )
+	//@MethodDescribe( "전체 HotPictureInfo 엔티티 정보 목록 조회" )
 	public List<HotPictureInfo> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(HotPictureInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

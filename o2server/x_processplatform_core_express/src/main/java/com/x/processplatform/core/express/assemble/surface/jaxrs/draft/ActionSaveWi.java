@@ -11,16 +11,16 @@ public class ActionSaveWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 447720452199696830L;
 
-	@FieldDescribe("业务数据.")
-	@Schema(description = "业务数据.")
+	@FieldDescribe("업무 데이터.")
+	@Schema(description = "업무 데이터.")
 	private Data data = new Data();
 
-	@FieldDescribe("工作.")
-	@Schema(description = "工作.")
+	@FieldDescribe("업무 문서.")
+	@Schema(description = "업무 문서.")
 	private Work work;
 
-	@FieldDescribe("身份.")
-	@Schema(description = "身份.")
+	@FieldDescribe("신분.")
+	@Schema(description = "신분.")
 	private String identity;
 
 	public Data getData() {

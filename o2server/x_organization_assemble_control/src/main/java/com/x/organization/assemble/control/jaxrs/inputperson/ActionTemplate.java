@@ -43,7 +43,7 @@ public class ActionTemplate extends BaseAction {
 	private void templateRemark(XSSFWorkbook workbook) {
 		XSSFSheet sheet = workbook.createSheet("주의 사항");
 		Row row = sheet.createRow(0);
-		// 先创建表头
+		// 먼저 헤더 생성
 		row = sheet.createRow(2);
 		row.createCell(0).setCellValue("주의 사항:");
 

@@ -65,7 +65,7 @@ MWF.xApplication.systemconfig.LP={
 		"language": "Locales",
 		"languageInfo": "Set the server locale.",
 		"languageValues": {
-			"zh-CN": "简体中文",
+			"zh-CN": "간체 중국어",
 			"en": "English",
 			"es": "Spanish"
 		},
@@ -569,7 +569,7 @@ MWF.xApplication.systemconfig.LP={
 		"dumpCheckButton": "Check backup status",
 		"dumpCheck": "Checking backup status ...",
 		"dumpStop": "Data backup not performed",
-		"dumpRunning": "数data backup in progress ...",
+		"dumpRunning": "data backup in progress ...",
 		"dumpEnd": "Data backup completed",
 		"restoreTools": "Data Recovery",
 		"restoreToolsInfo": "Click this button for data recovery,<span style='color: red'>Do not perform it when the system frequently reads and writes data.</span>",
@@ -756,13 +756,13 @@ MWF.xApplication.systemconfig.LP={
 			"Friday": 6,
 			"Saturday": 7,
 			"Sunday": 1,
-			"周一": 2,
-			"周二": 3,
-			"周三": 4,
-			"周四": 5,
-			"周五": 6,
-			"周六": 7,
-			"周日": 1
+			"월요일": 2,
+			"화요일": 3,
+			"수요일": 4,
+			"목요일": 5,
+			"금요일": 6,
+			"토요일": 7,
+			"일요일": 1
 		}
 	},
 	"_cacheConfig": {
@@ -1267,7 +1267,7 @@ MWF.xApplication.systemconfig.LP={
 		"onlineBuild": "APP online packaging",
 		"mpweixinMenu": "Official account menu config",
 		"onlineBuildInfo": " <ul style='padding: 0'><li>Currently, the mobile App online packaging function only supports the Android side.</li><li>To package online, you must register and log in to the 'Cloud Service Config' first.</li><li>After submitting the information, the current packaging status will be displayed. The packaging process takes a long time. You can leave the current page first, wait for the packaging to complete, and then download the APK file from this page.</li></ul>",
-		"onlineBuildInfo1": "<span class='mainColor_color'>We have provided more excellent 'App在线打包' applications in the application market, you can go to the application market to view and obtain them.</span>",
+		"onlineBuildInfo1": "<span class='mainColor_color'>We have provided more excellent 'App online packaging' applications in the application market, you can go to the application market to view and obtain them.</span>",
 		"appPack": {
 			"formSubmitBtnTitle": "Commit and start packaging.",
 			"formReinputBtnTitle": "Fill out the form again and pack it up.",

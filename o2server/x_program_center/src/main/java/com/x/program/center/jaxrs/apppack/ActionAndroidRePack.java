@@ -32,7 +32,7 @@ public class ActionAndroidRePack extends BaseAction  {
         List<NameValuePair> header = new ArrayList<>();
         header.add(new NameValuePair("token", getPackServerSSOToken()));
         String json = HttpConnection.postAsString(url, header, "{}");
-        logger.info("返回结果： "+json);
+        logger.info("반환 결과: "+json);
         Type type = new TypeToken<AppPackResult<ActionAndroidPack.IdValue>>() {
         }.getType();
         AppPackResult<ActionAndroidPack.IdValue> appPackResult = XGsonBuilder.instance().fromJson(json, type);

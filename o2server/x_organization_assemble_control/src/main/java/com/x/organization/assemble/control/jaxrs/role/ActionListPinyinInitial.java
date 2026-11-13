@@ -55,11 +55,11 @@ class ActionListPinyinInitial extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("搜索关键字")
+		@FieldDescribe("검색 키워드")
 		private String key;
-		@FieldDescribe("搜索群组范围,为空则不限定")
+		@FieldDescribe("검색 그룹 범위, 비어 있으면 제한 없음")
 		private List<String> groupList = new ArrayList<>();
-		@FieldDescribe("搜索角色范围,为空则不限定")
+		@FieldDescribe("검색 역할 범위, 비어 있으면 제한 없음")
 		private List<String> roleList = new ArrayList<>();
 
 		public String getKey() {

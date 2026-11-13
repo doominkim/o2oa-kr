@@ -20,7 +20,7 @@ import com.x.processplatform.service.processing.ThisApplication;
 
 /**
  * 
- * @author zhour 删除指定附件
+ * @author zhour 지정 첨부파일 삭제
  */
 class ActionDelete extends BaseAction {
 
@@ -50,7 +50,7 @@ class ActionDelete extends BaseAction {
 					}
 					StorageMapping mapping = ThisApplication.context().storageMappings().get(Attachment.class,
 							attachment.getStorage());
-					// 如果没有存储器,跳过
+					// 저장소가 없으면 건너뜀
 					if (null != mapping) {
 						attachment.deleteContent(mapping);
 					}

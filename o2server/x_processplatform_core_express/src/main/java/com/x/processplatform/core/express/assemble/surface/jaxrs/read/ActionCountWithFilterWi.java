@@ -11,16 +11,16 @@ public class ActionCountWithFilterWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -5626519123284286315L;
 
-	@FieldDescribe("人员标识.")
-	@Schema(description = "人员标识.")
+	@FieldDescribe("사용자 식별자.")
+	@Schema(description = "사용자 식별자.")
 	private List<String> credentialList;
 
-	@FieldDescribe("应用标识.")
-	@Schema(description = "应用标识.")
+	@FieldDescribe("앱 식별자.")
+	@Schema(description = "앱 식별자.")
 	private List<String> appliationList;
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList;
 
 	public List<String> getCredentialList() {

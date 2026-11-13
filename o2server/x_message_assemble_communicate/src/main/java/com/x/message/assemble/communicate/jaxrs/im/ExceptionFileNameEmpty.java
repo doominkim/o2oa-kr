@@ -7,6 +7,6 @@ class ExceptionFileNameEmpty extends PromptException {
 	private static final long serialVersionUID = 7750207007061165350L;
 
 	ExceptionFileNameEmpty() {
-		super("文件名称不能为空");
+		super("파일 이름은 비워 둘 수 없습니다");
 	}
 }

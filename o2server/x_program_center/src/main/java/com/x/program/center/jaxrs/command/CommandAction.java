@@ -21,12 +21,12 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-@JaxrsDescribe("命令")
+@JaxrsDescribe("명령")
 @Path("command")
 public class CommandAction extends StandardJaxrsAction {
 	private static final Logger logger = LoggerFactory.getLogger(CommandAction.class);
 
-	@JaxrsMethodDescribe(value = "执行服务器命令", action = ActionCommand.class)
+	@JaxrsMethodDescribe(value = "서버 명령 실행", action = ActionCommand.class)
 	@POST
 	@Path("execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -44,7 +44,7 @@ public class CommandAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取所有节点信息.", action = ActionListNode.class)
+	@JaxrsMethodDescribe(value = "모든 노드 정보 조회.", action = ActionListNode.class)
 	@GET
 	@Path("list/node")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

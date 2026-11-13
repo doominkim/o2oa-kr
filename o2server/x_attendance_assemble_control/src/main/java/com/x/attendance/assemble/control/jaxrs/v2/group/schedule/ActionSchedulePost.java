@@ -39,10 +39,10 @@ public class ActionSchedulePost extends BaseAction {
       throw new ExceptionEmptyParameter("month");
     }
     if (!AttendanceV2Helper.isValidMonthString(wi.getMonth())) {
-      throw new ExceptionWithMessage("月份格式不正确！");
+      throw new ExceptionWithMessage("월 형식이 올바르지 않습니다!");
     }
     if (wi.getScheduleList() == null || wi.getScheduleList().isEmpty()) {
-      throw new ExceptionEmptyParameter("排班数据");
+      throw new ExceptionEmptyParameter("근무 편성 데이터");
     }
     try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
       Business business = new Business(emc);
@@ -60,7 +60,7 @@ public class ActionSchedulePost extends BaseAction {
       for (ScheduleWi sWi : wi.getScheduleList()) {
         sWi.setId(null);
         if (StringUtils.isEmpty(sWi.getUserId()) || StringUtils.isEmpty(sWi.getShiftId())) {
-          continue; // 无效数据 丢弃
+          continue; // 유효하지 않은 데이터 폐기
         }
         AttendanceV2GroupSchedule s = ScheduleWi.copier.copy(sWi);
         s.setGroupId(wi.getGroupId());
@@ -69,7 +69,7 @@ public class ActionSchedulePost extends BaseAction {
         emc.persist(s, CheckPersistType.all);
         emc.commit();
       }
-      // 保存配置
+      // 설정 저장
       try {
         List<AttendanceV2GroupScheduleConfig> configs = business.getAttendanceV2ManagerFactory().listGroupScheduleConfig(wi.getGroupId());
         AttendanceV2GroupScheduleConfig config;
@@ -104,16 +104,16 @@ public class ActionSchedulePost extends BaseAction {
 
     private static final long serialVersionUID = 4366904799875578729L;
 
-    @FieldDescribe("考勤组 id")
+    @FieldDescribe("근태 그룹 id")
     private String groupId;
 
-    @FieldDescribe("月份: yyyy-MM")
+    @FieldDescribe("월: yyyy-MM")
     private String month;
 
-    @FieldDescribe("排班数据 ")
+    @FieldDescribe("교대 편성 데이터 ")
     private List<ScheduleWi> scheduleList;
 
-    @FieldDescribe("排班的一些配置数据")
+    @FieldDescribe("교대 편성 관련 설정 데이터")
     private String scheduleConfigJson;
 
     

@@ -16,140 +16,140 @@ public class WrapOutDocumentList extends GsonPropertyObject {
 	@FieldDescribe( "sequence." )
 	private String sequence;
 
-	@FieldDescribe( "文档ID." )
+	@FieldDescribe( "문서ID." )
 	private String id;
 
-	@FieldDescribe( "创建时间" )
+	@FieldDescribe( "생성 시간" )
 	private Date createTime;
 
-	@FieldDescribe("文档发布时间")
+	@FieldDescribe("문서 게시 시간")
 	private Date publishTime;
 
-	@FieldDescribe( "最近修改时间" )
+	@FieldDescribe( "최근 수정 시간" )
 	private Date updateTime;
 
-	@FieldDescribe("文档修改时间")
+	@FieldDescribe("문서 수정 시간")
 	private Date modifyTime;
 
-	@FieldDescribe("文档摘要")
+	@FieldDescribe("문서 요약")
 	private String summary;
 
-	@FieldDescribe("文档标题")
+	@FieldDescribe("문서 제목")
 	private String title;
 
-	@FieldDescribe("文件导入的批次号：一般是分类ID+时间缀")
+	@FieldDescribe("파일 가져오기 배치 번호: 보통 분류ID+타임스탬프")
 	private String importBatchName;
 
-	@FieldDescribe("说明备注，可以填写说明信息，如导入信息检验失败原因等")
+	@FieldDescribe("설명 비고, 가져오기 정보 검증 실패 원인 등 설명 정보 입력 가능")
 	private String description = null;
 
-	@FieldDescribe( "分类唯一标识" )
+	@FieldDescribe( "분류 고유 식별자" )
 	private String categoryAlias;
 
-	@FieldDescribe( "分类名称" )
+	@FieldDescribe( "분류 이름" )
 	private String categoryName;
 
-	@FieldDescribe( "栏目ID" )
+	@FieldDescribe( "게시판 ID" )
 	private String appId;
 
-	@FieldDescribe( "栏目名称" )
+	@FieldDescribe( "게시판 이름" )
 	private String appName;
 
-	@FieldDescribe( "分类ID" )
+	@FieldDescribe( "분류ID" )
 	private String categoryId;
 
-	@FieldDescribe("创建人，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자, 시스템이 생성한 경우 비어 있을 수 있음.")
 	private String creatorPerson;
 
-	@FieldDescribe("创建人组织名称，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 조직 이름, 시스템이 생성한 경우 비어 있을 수 있음.")
 	private String creatorUnitName;
 
-	@FieldDescribe("创建人顶层组织名称，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 최상위 조직 이름, 시스템이 생성한 경우 비어 있을 수 있음.")
 	private String creatorTopUnitName;
 
-	@FieldDescribe("文档状态: published | draft | waitPublish")
+	@FieldDescribe("문서 상태: published | draft | waitPublish")
 	private String docStatus = "draft";
 
-	@FieldDescribe("文档被查看次数")
+	@FieldDescribe("문서 조회 횟수")
 	private Long viewCount = 0L;
 
-	@FieldDescribe("文档被评论次数")
+	@FieldDescribe("문서 댓글 수")
 	private Long commentCount = 0L;
 
-	@FieldDescribe("文档被点赞次数")
+	@FieldDescribe("문서 좋아요 수")
 	private Long commendCount = 0L;
 
-	@FieldDescribe("是否含有首页图片")
+	@FieldDescribe("대표 이미지 포함 여부")
 	private Boolean hasIndexPic = false;
 
-	@FieldDescribe("首页图片列表，分页展现返回前3个图片")
+	@FieldDescribe("대표 이미지 목록, 페이지 표시 시 앞 3개 이미지 반환")
 	private List<String> pictureList;
 
-	@FieldDescribe("文档所有数据信息.")
+	@FieldDescribe("문서 전체 데이터 정보.")
 	private Map<?, ?> data;
 
-	@FieldDescribe( "是否置顶." )
+	@FieldDescribe( "상단 고정 여부." )
 	private Boolean isTop;
 
-	@FieldDescribe( "是否全员可读." )
+	@FieldDescribe( "전체 열람 가능 여부." )
 	private Boolean isAllRead;
 
-	@FieldDescribe("业务数据String值01.")
+	@FieldDescribe("업무 데이터 String 값01.")
 	private String stringValue01;
 
-	@FieldDescribe("业务数据String值02.")
+	@FieldDescribe("업무 데이터 String 값02.")
 	private String stringValue02;
 
-	@FieldDescribe("业务数据String值03.")
+	@FieldDescribe("업무 데이터 String 값03.")
 	private String stringValue03;
 
-	@FieldDescribe("业务数据String值04.")
+	@FieldDescribe("업무 데이터 String 값04.")
 	private String stringValue04;
 
-	@FieldDescribe("业务数据String值05.")
+	@FieldDescribe("업무 데이터 String 값05.")
 	private String stringValue05;
 
-	@FieldDescribe("业务数据String值06.")
+	@FieldDescribe("업무 데이터 String 값06.")
 	private String stringValue06;
 
-	@FieldDescribe("业务数据String值07.")
+	@FieldDescribe("업무 데이터 String 값07.")
 	private String stringValue07;
 
-	@FieldDescribe("业务数据String值08.")
+	@FieldDescribe("업무 데이터 String 값08.")
 	private String stringValue08;
 
-	@FieldDescribe("业务数据String值09.")
+	@FieldDescribe("업무 데이터 String 값09.")
 	private String stringValue09;
 
-	@FieldDescribe("业务数据String值10.")
+	@FieldDescribe("업무 데이터 String 값10.")
 	private String stringValue10;
 
-	@FieldDescribe("业务数据Long值01.")
+	@FieldDescribe("업무 데이터 Long 값01.")
 	private Long longValue01;
 
-	@FieldDescribe("业务数据Long值02.")
+	@FieldDescribe("업무 데이터 Long 값02.")
 	private Long longValue02;
 
-	@FieldDescribe("业务数据Double值01.")
+	@FieldDescribe("업무 데이터 Double 값01.")
 	private Double doubleValue01;
 
-	@FieldDescribe("业务数据Double值02.")
+	@FieldDescribe("업무 데이터 Double 값02.")
 	private Double doubleValue02;
 
-	@FieldDescribe("业务数据DateTime值01.")
+	@FieldDescribe("업무 데이터 DateTime 값01.")
 	private Date dateTimeValue01;
 
-	@FieldDescribe("业务数据DateTime值02.")
+	@FieldDescribe("업무 데이터 DateTime 값02.")
 	private Date dateTimeValue02;
 
-	@FieldDescribe("业务数据DateTime值03.")
+	@FieldDescribe("업무 데이터 DateTime 값03.")
 	private Date dateTimeValue03;
 
-	@FieldDescribe( "是否已读." )
+	@FieldDescribe( "열람 여부." )
 	private Boolean hasRead = false;
 
 	/**
-	 * 只作显示用
+	 * 표시용으로만 사용
 	 */
 	private String creatorPersonShort = null;
 

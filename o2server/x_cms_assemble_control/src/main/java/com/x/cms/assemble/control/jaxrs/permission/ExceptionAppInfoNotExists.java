@@ -7,6 +7,6 @@ class ExceptionAppInfoNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionAppInfoNotExists( String id ) {
-		super( "指定的应用不存在:{}." ,id );
+		super( "지정한 앱이 없습니다: {}." ,id );
 	}
 }

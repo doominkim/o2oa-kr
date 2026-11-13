@@ -25,7 +25,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 考勤打卡记录分析服务类
+ * 근태 출퇴근 기록 분석 서비스 클래스
  * @author LIYI
  *
  */
@@ -42,8 +42,8 @@ public class AttendanceDetailAnalyseService {
 	private  AttendanceSettingServiceAdv attendanceSettingServiceAdv = new AttendanceSettingServiceAdv();
 
 	/**
-	 * 根据员工姓名\开始日期\结束日期查询日期范围内所有的打卡记录信息ID列表<br/>
-	 * 时间从开始日期0点，到结束日期23点59分
+	 * 직원 이름\시작 날짜\종료 날짜로 날짜 범위 안의 모든 출퇴근 기록 정보 ID 목록 조회<br/>
+	 * 시간은 시작 날짜 0시부터 종료 날짜 23시 59분까지
 	 * @param empName
 	 * @param startDate
 	 * @param endDate
@@ -62,7 +62,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 对一组的打卡信息数据进行分析
+	 * 체크 정보 데이터 묶음 분석
 	 * @param emc
 	 * @param detailIds
 	 * @param debugger
@@ -79,7 +79,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 对一组的打卡信息数据进行分析
+	 * 체크 정보 데이터 묶음 분석
 	 * @param emc
 	 * @param detailList
 	 * @param debugger
@@ -107,7 +107,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 对一组的打卡信息数据进行分析
+	 * 체크 정보 데이터 묶음 분석
 	 * @param emc
 	 * @param detailList
 	 * @param statisticalCycleMap
@@ -135,7 +135,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 根据员工姓名，开始日期和结束日期重新分析所有的打卡记录，一般在用户补了休假记录的时候使用，补充了休假记录，需要将休假日期范围内的所有打卡记录重新分析，并且触发相关月份的统计
+	 * 직원 이름, 시작 날짜, 종료 날짜로 모든 출퇴근 기록을 재분석. 보통 사용자가 휴가 기록을 보충했을 때 사용하며, 휴가 날짜 범위 안의 모든 출퇴근 기록을 재분석하고 해당 월 통계를 실행해야 함
 	 * @param emc
 	 * @param empName
 	 * @param startDate
@@ -175,7 +175,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 对单条的打卡数据进行分析
+	 * 체크 데이터 한 건 분석
 	 * @param emc
 	 * @param detailId
 	 * @param debugger
@@ -189,13 +189,13 @@ public class AttendanceDetailAnalyseService {
 					statisticalCycleService.getAllStatisticalCycleMapWithCache(debugger),
 					debugger );
 		}else{
-			logger.info( "detailId为空，无法继续进行分析。" );
+			logger.info( "detailId가 비어 있어 분석을 계속할 수 없습니다." );
 		}
 		return false;
 	}
 
 	/**
-	 * 对单条的打卡数据进行分析
+	 * 체크 데이터 한 건 분석
 	 * @param emc
 	 * @param detail
 	 * @param debugger
@@ -209,13 +209,13 @@ public class AttendanceDetailAnalyseService {
 					statisticalCycleService.getAllStatisticalCycleMapWithCache(debugger),
 					debugger );
 		}else{
-			logger.info( "detail为空，无法继续进行分析。" );
+			logger.info( "detail이 비어 있어 분석을 계속할 수 없습니다." );
 		}
 		return false;
 	}
 
 	/**
-	 * 对单条的打卡数据进行详细分析
+	 * 체크 데이터 한 건 상세 분석
 	 * @param emc
 	 * @param detail
 	 * @param workDayConfigList
@@ -230,7 +230,7 @@ public class AttendanceDetailAnalyseService {
 		List<AttendanceSelfHoliday> selfHolidayList = null;
 		if( detail != null ){
 			selfHolidayList = attendanceSelfHolidayService.listWithPersonFromCache(emc, detail.getEmpName(), false );
-			//查询用户匹配的排班配置
+			//사용자에 맞는 근무 일정 설정 조회
 			if(StringUtils.isNotEmpty(detail.getUnitName())){
 				scheduleSetting = attendanceScheduleSettingService.getAttendanceScheduleSettingWithDetail( detail, debugger );
 			}else{
@@ -245,7 +245,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 对单条的打卡数据进行详细分析
+	 * 체크 데이터 한 건 상세 분석
 	 * @param emc
 	 * @param detail
 	 * @param scheduleSetting
@@ -273,12 +273,12 @@ public class AttendanceDetailAnalyseService {
 				saveAnalyseResultAndStatus( emc, detail.getId(), -1, "직원[" + detail.getEmpName() + "]의 소속 조직 근무 일정을 찾을 수 없습니다" );
 			}
 
-			//初始化考勤打卡记录
+			//근태 출퇴근 기록 초기화
 			if( check ){
-				//要重新查询，才可能在这个emc里进行事务管理
+				//다시 조회해야 이 emc 안에서 트랜잭션 관리가 가능함
 				detail = emc.find( detail.getId(), AttendanceDetail.class );
 				if( detail != null ){
-					//将打卡数据里分析过的状态全部清空，还原成未分析的数据
+					//체크 데이터의 분석된 상태를 모두 비워 미분석 데이터로 되돌림
 					detail.refresh();
 				}else{
 					check = false;
@@ -290,7 +290,7 @@ public class AttendanceDetailAnalyseService {
 			if( check ){
 				if( StringUtils.isNotEmpty(detail.getRecordDateString()) ){
 					try{
-						//把日期字符串转换为日期对象，便于比较计算
+						//날짜 문자열을 날짜 객체로 변환하여 비교·계산하기 쉽게 함
 						recordDate = dateOperation.getDateFromString( detail.getRecordDateString());
 					}catch(Exception e){
 						saveAnalyseResultAndStatus( emc, detail.getId(), -1, "출퇴근 날짜 변환 중 오류가 발생해 recordDate를 설정하지 못했습니다. recordDateString: " + detail.getRecordDateString() );
@@ -384,7 +384,7 @@ public class AttendanceDetailAnalyseService {
 			}
 			if( check ){
 				try{
-					//使用分析核心算法进行考勤状态分析
+					//분석 핵심 알고리즘으로 근태 상태 분석
 					detail = attendanceDetailAnalyseCoreService.analyseCore( detail, scheduleSetting, debugger );
 				}catch( Exception e ){
 					check = false;
@@ -394,7 +394,7 @@ public class AttendanceDetailAnalyseService {
 				}
 			}
 			if( check ){
-				//保存打卡数据分析结果
+				//체크 데이터 분석 결과 저장
 				emc.beginTransaction( AttendanceDetail.class );
 				detail.setRecordStatus( 1 );
 				detail.setDescription("직원 출퇴근 기록 분석 완료!" );
@@ -403,7 +403,7 @@ public class AttendanceDetailAnalyseService {
 			}
 
 			if( check ){
-				//分析成功根据打卡数据来记录与这条数据相关的统计需求记录
+				//분석 성공 시 체크 데이터로 이 데이터와 관련된 통계 요청 기록
 				recordStatisticRequireLog( detail, debugger );
 			}
 			return true;
@@ -414,7 +414,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 分析打卡信息，为打卡数据计算考勤周期信息
+	 * 체크 정보를 분석하여 체크 데이터의 근태 주기 정보 계산
 	 *
 	 * @param detail
 	 * @return
@@ -422,7 +422,7 @@ public class AttendanceDetailAnalyseService {
 	 */
 	private AttendanceDetail composeStatisticCycleForAttendanceDetail( AttendanceDetail detail, Map<String, Map<String, List<AttendanceStatisticalCycle>>> topUnitAttendanceStatisticalCycleMap, Boolean debugger ) throws Exception{
 		AttendanceStatisticalCycle attendanceStatisticalCycle = null;
-		//根据打卡信息所属个人的组织获取一个合适的统计周期对象
+		//체크 정보 소유자의 조직으로 적합한 통계 주기 객체 조회
 		attendanceStatisticalCycle = statisticalCycleService.getStatisticCycleWithStartAndEnd(
 				detail.getTopUnitName(),
 				detail.getUnitName(),
@@ -431,7 +431,7 @@ public class AttendanceDetailAnalyseService {
 				debugger
 		);
 		if( attendanceStatisticalCycle != null ) {
-			logger.debug( debugger, "日期" + detail.getRecordDateString() + ", 周期" + attendanceStatisticalCycle.getCycleStartDateString() + "-" + attendanceStatisticalCycle.getCycleEndDateString() );
+			logger.debug( debugger, "날짜" + detail.getRecordDateString() + ", 주기" + attendanceStatisticalCycle.getCycleStartDateString() + "-" + attendanceStatisticalCycle.getCycleEndDateString() );
 			detail.setCycleYear( attendanceStatisticalCycle.getCycleYear() );
 			detail.setCycleMonth( attendanceStatisticalCycle.getCycleMonth() );
 		}
@@ -439,52 +439,52 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 分析打卡信息，判断员工是否正在休假以及休假的时段
+	 * 체크 정보를 분석하여 직원이 휴가 중인지와 휴가 시간대를 판단
 	 * @param attendanceSelfHolidayList
 	 * @return
 	 * @throws Exception
 	 */
 	private AttendanceDetail composeSelfHolidaysForAttendanceDetail( AttendanceDetail detail, List<AttendanceSelfHoliday> attendanceSelfHolidayList, DateOperation dateOperation, Boolean debugger ) throws Exception {
-		//查询当前打卡用户所有的请假申请中，打卡时间是否处于休假时间段中
+		//현재 체크 사용자의 모든 휴가 신청 중 체크 시간이 휴가 기간 안에 있는지 조회
 		Date dayWorkStart = null, dayWorkEnd = null, dayMiddle = null ;
 		if( attendanceSelfHolidayList != null ){
-			//如果打卡日期全天 在 休假时间的中间，那么是全天请假
+			//체크 날짜 하루 전체가 휴가 기간 안에 있으면 종일 휴가
 			try {
 				dayWorkStart = dateOperation.getDateFromString( dateOperation.getDateStringFromDate(detail.getRecordDate(), "yyyy-MM-dd") + " " + detail.getOnWorkTime());
 			} catch (Exception e) {
-				logger.warn( "获取打卡日期的一天的工作开始时间发生异常。" );
+				logger.warn( "체크 날짜의 근무 시작 시간을 조회하는 중 예외가 발생했습니다." );
 				logger.error(e);
 				return detail;
 			}
 			try {
 				dayWorkEnd = dateOperation.getDateFromString( dateOperation.getDateStringFromDate(detail.getRecordDate(), "yyyy-MM-dd") + " " + detail.getOffWorkTime() );
 			} catch (Exception e) {
-				logger.warn( "获取打卡日期的一天的工作结束时间发生异常。" );
+				logger.warn( "체크 날짜의 근무 종료 시간을 조회하는 중 예외가 발생했습니다." );
 				logger.error(e);
 				return detail;
 			}
 			try {
 				dayMiddle = dateOperation.getDateFromString( dateOperation.getDateStringFromDate(detail.getRecordDate(), "yyyy-MM-dd") + " 12:00:00" );
 			} catch (Exception e) {
-				logger.warn( "获取打卡日期的一天的工作午休时间发生异常。" );
+				logger.warn( "체크 날짜의 점심 휴식 시간을 조회하는 중 예외가 발생했습니다." );
 				logger.error(e);
 				return detail;
 			}
-			//循环比对，看看是否全天请假
+			//반복 비교하여 종일 휴가인지 확인
 			for( AttendanceSelfHoliday selfHoliday : attendanceSelfHolidayList ){
 				if( selfHoliday.getEndTime().getTime() > dayWorkStart.getTime() && selfHoliday.getStartTime().getTime() < dayWorkEnd.getTime() ){
-					//对比员工姓名，员工姓名是唯一键
+					//직원 이름 비교, 직원 이름은 고유 키
 					if( detail.getEmpName().equals( selfHoliday.getEmployeeName() ) ){
 						if( selfHoliday.getStartTime().getTime() <= dayWorkStart.getTime() && selfHoliday.getEndTime().getTime() >= ( dayMiddle.getTime() + 2*60*60*1000 )){
 							logger.debug( debugger, detail.getEmpName()+"全天请假了");
-							//全天休假
+							//종일 휴가
 							detail.setIsGetSelfHolidays(true);
 							detail.setLeaveType(selfHoliday.getLeaveType());
 							detail.setSelfHolidayDayTime("全天");
 							detail.setGetSelfHolidayDays(1.0);
 						}else if( selfHoliday.getEndTime().getTime() <= dayMiddle.getTime() && selfHoliday.getEndTime().getTime() > dayWorkStart.getTime()
 						){
-							//上午休假
+							//오전 휴가
 							logger.debug( debugger, detail.getEmpName()+"上午休假了");
 							detail.setIsGetSelfHolidays(true);
 							detail.setLeaveType(selfHoliday.getLeaveType());
@@ -492,7 +492,7 @@ public class AttendanceDetailAnalyseService {
 							detail.setGetSelfHolidayDays(0.5);
 						}else if( selfHoliday.getStartTime().getTime() >= dayMiddle.getTime() && selfHoliday.getStartTime().getTime() <= dayWorkEnd.getTime()
 						){
-							//上午休假
+							//오전 휴가
 							logger.debug( debugger, detail.getEmpName()+"下午休假了");
 							detail.setIsGetSelfHolidays( true );
 							detail.setLeaveType(selfHoliday.getLeaveType());
@@ -507,7 +507,7 @@ public class AttendanceDetailAnalyseService {
 	}
 	
 	/**
-	 * 判断当前日期是否为调休工作日
+	 * 현재 날짜가 대체 근무일인지 판단
 	 * @param detail
 	 * @param attendanceWorkDayConfigList
 	 * @return
@@ -519,10 +519,10 @@ public class AttendanceDetailAnalyseService {
 				try {
 					configDate = dateOperation.getDateFromString( workDayConfig.getConfigDate() );
 				} catch (Exception e) {
-					logger.warn( "系统转换"+workDayConfig.getConfigDate()+"格式为日期时发生异常！" );
+					logger.warn( "시스템 변환"+workDayConfig.getConfigDate()+"날짜 형식 변환 중 예외가 발생했습니다!" );
 					logger.error(e);
 				}
-				//进行日期对比
+				//날짜 비교
 				Calendar calendar_record = Calendar.getInstance();
 				Calendar calendar_config = Calendar.getInstance();
 				calendar_record.setTime( detail.getRecordDate() );
@@ -540,7 +540,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 判断当前日期是否为法定节假日
+	 * 현재 날짜가 법정 공휴일인지 판단
 	 * @param detail
 	 * @param attendanceWorkDayConfigList
 	 * @return
@@ -552,10 +552,10 @@ public class AttendanceDetailAnalyseService {
 				try {
 					configDate = dateOperation.getDateFromString( workDayConfig.getConfigDate() );
 				} catch (Exception e) {
-					logger.warn( "系统转换"+workDayConfig.getConfigDate()+"格式为日期时发生异常！" );
+					logger.warn( "시스템 변환"+workDayConfig.getConfigDate()+"날짜 형식 변환 중 예외가 발생했습니다!" );
 					logger.error(e);
 				}
-				//进行日期对比
+				//날짜 비교
 				Calendar calendar_record = Calendar.getInstance();
 				Calendar calendar_config = Calendar.getInstance();
 				calendar_record.setTime( detail.getRecordDate() );
@@ -573,7 +573,7 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 修改打卡记录的分析状态，0-未分析，1-已分析
+	 * 출퇴근 기록의 분석 상태 수정, 0-미분석, 1-분석 완료
 	 * @param emc
 	 * @param id
 	 * @param status
@@ -593,13 +593,13 @@ public class AttendanceDetailAnalyseService {
 	}
 
 	/**
-	 * 根据打卡数据来记录与这条数据相关的统计需求记录
+	 * 체크 데이터로 이 데이터와 관련된 통계 요청 기록
 	 * @param detail
 	 * @param debugger
 	 * @throws Exception
 	 */
 	public void recordStatisticRequireLog( AttendanceDetail detail, Boolean debugger ) throws Exception{
-		//数据分析完成，那么需要记录一下需要统计的信息数据
+		//데이터 분석이 완료되면 통계가 필요한 정보 데이터를 기록해야 함
 		AttendanceStatisticRequireLog log = null;
 		AttendanceStatisticRequireLogFactory attendanceStatisticRequireLogFactory = null;
 		Business business = null;
@@ -607,10 +607,10 @@ public class AttendanceDetailAnalyseService {
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 			business = new Business(emc);
 			attendanceStatisticRequireLogFactory = business.getAttendanceStatisticRequireLogFactory();
-			//个人统计每月统计
+			//개인 월별 통계
 			logList = attendanceStatisticRequireLogFactory.getByNameKeyAndStatus("PERSON_PER_MONTH", detail.getEmpName(), detail.getCycleYear(), detail.getCycleMonth(), null, "WAITING");
 			if( ListTools.isEmpty(logList) ){
-				logger.debug( debugger, "统计数据不存在：PERSON_PER_MONTH，"+ detail.getEmpName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
+				logger.debug( debugger, "통계 데이터 없음: PERSON_PER_MONTH,"+ detail.getEmpName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
 				log = new AttendanceStatisticRequireLog();
 				log.setStatisticName("직원 월별 통계");
 				log.setStatisticType("PERSON_PER_MONTH");
@@ -621,19 +621,19 @@ public class AttendanceDetailAnalyseService {
 				emc.persist( log, CheckPersistType.all);
 				emc.commit();
 
-				//统计考勤数据
+				//근태 데이터 통계
 				try {
 					// ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
 			}else{
-				logger.debug( debugger, "统计数据已存在：PERSON_PER_MONTH，"+ detail.getEmpName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
+				logger.debug( debugger, "통계 데이터 이미 있음: PERSON_PER_MONTH,"+ detail.getEmpName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
 			}
-			//组织按月统计
+			//조직 월별 통계
 			logList = attendanceStatisticRequireLogFactory.getByNameKeyAndStatus("UNIT_PER_MONTH", detail.getUnitName(), detail.getCycleYear(), detail.getCycleMonth(), null, "WAITING");
 			if( ListTools.isEmpty(logList) ){
-				logger.debug( debugger, "统计数据不存在：UNIT_PER_MONTH，"+ detail.getUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
+				logger.debug( debugger, "통계 데이터 없음: UNIT_PER_MONTH,"+ detail.getUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
 				log = new AttendanceStatisticRequireLog();
 				log.setStatisticName("조직 월별 통계");
 				log.setStatisticType("UNIT_PER_MONTH");
@@ -643,19 +643,19 @@ public class AttendanceDetailAnalyseService {
 				emc.beginTransaction( AttendanceStatisticRequireLog.class );
 				emc.persist( log, CheckPersistType.all);
 				emc.commit();
-				//统计考勤数据
+				//근태 데이터 통계
 				try {
 					// ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
 			}else{
-				logger.debug( debugger, "统计数据已存在：UNIT_PER_MONTH，"+ detail.getUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
+				logger.debug( debugger, "통계 데이터 이미 있음: UNIT_PER_MONTH,"+ detail.getUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
 			}
-			//顶层组织按月统计
+			//최상위 조직 월별 통계
 			logList = attendanceStatisticRequireLogFactory.getByNameKeyAndStatus("TOPUNIT_PER_MONTH", detail.getTopUnitName(), detail.getCycleYear(), detail.getCycleMonth(), null, "WAITING");
 			if( ListTools.isEmpty(logList) ){
-				logger.debug( debugger, "统计数据不存在：TOPUNIT_PER_MONTH，"+ detail.getTopUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
+				logger.debug( debugger, "통계 데이터 없음: TOPUNIT_PER_MONTH,"+ detail.getTopUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
 				log = new AttendanceStatisticRequireLog();
 				log.setStatisticName("최상위 조직 월별 통계");
 				log.setStatisticType("TOPUNIT_PER_MONTH");
@@ -665,19 +665,19 @@ public class AttendanceDetailAnalyseService {
 				emc.beginTransaction( AttendanceStatisticRequireLog.class );
 				emc.persist( log, CheckPersistType.all);
 				emc.commit();
-				//统计考勤数据
+				//근태 데이터 통계
 				try {
 					// ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
 			}else{
-				logger.debug( debugger, "统计数据已存在：TOPUNIT_PER_MONTH，"+ detail.getTopUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
+				logger.debug( debugger, "통계 데이터 이미 있음: TOPUNIT_PER_MONTH,"+ detail.getTopUnitName() + ", " + detail.getCycleYear() + ", " + detail.getCycleMonth() + ", null, WAITING" );
 			}
-			//组织每日统计
+			//조직 일별 통계
 			logList = attendanceStatisticRequireLogFactory.getByNameKeyAndStatus("UNIT_PER_DAY", detail.getUnitName(), null, null, detail.getRecordDateString(), "WAITING");
 			if( ListTools.isEmpty(logList) ){
-				logger.debug( debugger, "统计数据不存在：UNIT_PER_DAY，"+ detail.getUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
+				logger.debug( debugger, "통계 데이터 없음: UNIT_PER_DAY,"+ detail.getUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
 				log = new AttendanceStatisticRequireLog();
 				log.setStatisticName("조직 일별 통계");
 				log.setStatisticType("UNIT_PER_DAY");
@@ -688,19 +688,19 @@ public class AttendanceDetailAnalyseService {
 				emc.beginTransaction( AttendanceStatisticRequireLog.class );
 				emc.persist( log, CheckPersistType.all);
 				emc.commit();
-				//统计考勤数据
+				//근태 데이터 통계
 				try {
 					// ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
 			}else{
-				logger.debug( debugger, "统计数据已存在：UNIT_PER_DAY，"+ detail.getUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
+				logger.debug( debugger, "통계 데이터 이미 있음: UNIT_PER_DAY,"+ detail.getUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
 			}
-			//顶层组织每日统计
+			//최상위 조직 일별 통계
 			logList = attendanceStatisticRequireLogFactory.getByNameKeyAndStatus("TOPUNIT_PER_DAY", detail.getTopUnitName(), null, null, detail.getRecordDateString(), "WAITING");
 			if( ListTools.isEmpty(logList) ){
-				logger.debug( debugger, "统计数据不存在：TOPUNIT_PER_DAY，"+ detail.getTopUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
+				logger.debug( debugger, "통계 데이터 없음: TOPUNIT_PER_DAY,"+ detail.getTopUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
 				log = new AttendanceStatisticRequireLog();
 				log.setStatisticName("최상위 조직 일별 통계");
 				log.setStatisticType("TOPUNIT_PER_DAY");
@@ -711,17 +711,17 @@ public class AttendanceDetailAnalyseService {
 				emc.beginTransaction( AttendanceStatisticRequireLog.class );
 				emc.persist( log, CheckPersistType.all);
 				emc.commit();
-				//统计考勤数据
+				//근태 데이터 통계
 				try {
 					// ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
 			}else{
-				logger.debug( debugger, "统计数据已存在：TOPUNIT_PER_DAY，"+ detail.getTopUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
+				logger.debug( debugger, "통계 데이터 이미 있음: TOPUNIT_PER_DAY,"+ detail.getTopUnitName() + ", null, null , "+ detail.getRecordDateString() +", WAITING" );
 			}
 		}catch(Exception e){
-			logger.warn("系统在向数据库新增统计需求时发生异常" );
+			logger.warn("시스템이 데이터베이스에 통계 요청을 추가하는 중 예외가 발생했습니다" );
 			logger.error(e);
 		}
 	}

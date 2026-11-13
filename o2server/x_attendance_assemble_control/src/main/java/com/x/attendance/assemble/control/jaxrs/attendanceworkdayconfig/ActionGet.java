@@ -23,9 +23,9 @@ public class ActionGet extends BaseAction {
 			attendanceWorkDayConfig = emc.find(id, AttendanceWorkDayConfig.class);
 
 			if (attendanceWorkDayConfig != null) {
-				// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 				wrap = Wo.copier.copy( attendanceWorkDayConfig );
-				// 对查询的列表进行排序
+				// 조회 목록 정렬
 				result.setData(wrap);
 			}
 

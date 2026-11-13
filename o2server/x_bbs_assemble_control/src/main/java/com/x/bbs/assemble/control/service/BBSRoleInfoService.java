@@ -21,63 +21,63 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 论坛角色信息管理服务类
+ * 포럼 역할 정보 관리 서비스 클래스
  *
- * 论坛角色
- * 论坛访客(FORUM_GUEST):论坛访客
- * 		0、论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
+ * 포럼 역할
+ * 포럼 방문자(FORUM_GUEST): 포럼 방문자
+ * 		0. 포럼 보기(FORUM_VIEW): 사용자가 BBS 시스템에서 해당 포럼에 접근 가능
  *
- * 论坛管理员(FORUM_SUPER_MANAGER):论坛管理员，拥有该论坛管理的最大权限
- *      0、论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
- * 		1、论坛信息管理（FORUM_INFO_MANAGEMENT）：用户拥有对论坛的版块增加，删除，修改权限
- * 		1、论坛发布主题（FORUM_SUBJECT_PUBLISH）:用户可以在论坛中所有版块发布主题
- * 		2、论坛发表回复（FORUM_REPLY_PUBLISH）：用户可以回复论坛中所有主题
- * 		3、论坛主题推荐（FORUM_SUBJECT_RECOMMEND）:用户可以在指定论坛中所有版块对指定主题进行推荐到论坛首页
- * 		4、论坛主题置顶（FORUM_SUBJECT_STICK）：用户拥有对论坛中所有的主题的置顶权限
- * 		5、论坛主题申精（FORUM_SUBJECT_CREAM）：用户拥有对论坛中所有的主题的精华主题设置权限
- * 		6、论坛主题管理（FORUM_SUBJECT_MANAGEMENT）：用户拥有对论坛中所有的主题的锁定删除权限
- * 		7、论坛回贴管理（FORUM_REPLY_MANAGEMENT）：用户拥有对论坛中所有的回复的删除权限
- * 		8、论坛权限管理（FORUM_PERMISSION_MANAGEMENT）：用户拥有对论坛的用户进行该论坛权限设置的权限
- * 		9、论坛配置管理（FORUM_CONFIG_MANAGEMENT）：用户拥有对论坛的参数配置进行设置的权限
+ * 포럼 관리자(FORUM_SUPER_MANAGER): 포럼 관리자, 해당 포럼 관리의 최대 권한 보유
+ *      0. 포럼 보기(FORUM_VIEW): 사용자가 BBS 시스템에서 해당 포럼에 접근 가능
+ * 		1. 포럼 정보 관리(FORUM_INFO_MANAGEMENT): 사용자가 포럼의 게시판 추가, 삭제, 수정 권한 보유
+ * 		1. 포럼 주제 게시(FORUM_SUBJECT_PUBLISH): 사용자가 포럼의 모든 게시판에 주제 게시 가능
+ * 		2. 포럼 답글 작성(FORUM_REPLY_PUBLISH): 사용자가 포럼의 모든 주제에 답글 작성 가능
+ * 		3. 포럼 주제 추천(FORUM_SUBJECT_RECOMMEND): 사용자가 지정한 포럼의 모든 게시판에서 지정한 주제를 포럼 첫 페이지에 추천 가능
+ * 		4. 포럼 주제 상단 고정(FORUM_SUBJECT_STICK): 사용자가 포럼의 모든 주제에 대한 상단 고정 권한 보유
+ * 		5. 포럼 주제 우수글 지정(FORUM_SUBJECT_CREAM): 사용자가 포럼의 모든 주제에 대한 우수글 설정 권한 보유
+ * 		6. 포럼 주제 관리(FORUM_SUBJECT_MANAGEMENT): 사용자가 포럼의 모든 주제에 대한 잠금·삭제 권한 보유
+ * 		7. 포럼 답글 관리(FORUM_REPLY_MANAGEMENT): 사용자가 포럼의 모든 답글에 대한 삭제 권한 보유
+ * 		8. 포럼 권한 관리(FORUM_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자에 대해 해당 포럼 권한을 설정할 수 있는 권한 보유
+ * 		9. 포럼 설정 관리(FORUM_CONFIG_MANAGEMENT): 사용자가 포럼 매개변수 설정 권한 보유
  *
  *
- * 版块角色
- * 版块访客(SECTION_GUEST):版块访客
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
+ * 게시판 역할
+ * 게시판 방문자(SECTION_GUEST): 게시판 방문자
+ * 		0. 포럼 보기(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판에 접근 가능
  *
- * 版块主(SECTION_MANAGER):拥有版块及版块内容管理的最大权限
- *      0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、发布主题（SECTION_SUBJECT_PUBLISH）:用户可以在指定版块中发布主题
- *		2、审核主题（SECTION_SUBJECT_AUDIT）:用户可以审核在指定版块中发布的主题，如果主题需要审核
- * 		3、主题管理（SECTION_SUBJECT_MANAGEMENT）:用户可以在指定版块中对已发布主题进行查询删除
- * 		4、发表回复（SECTION_REPLY_PUBLISH）:用户可以在指定版块中对所有主题进行回复
- *		5、审核回复（SECTION_REPLY_AUDIT）:用户可以审核在指定版块中的所有回复内容，如果回复需要审核
- *		6、回贴管理（SECTION_REPLY_MANAGEMENT）:用户可以在指定版块中对回复进行查询或者删除
- * 		7、版块主题推荐（SECTION_SUBJECT_RECOMMEND）:用户可以在指定版块中对指定主题进行推荐操作
- * 		8、版块主题置顶（SECTION_SUBJECT_STICK）:用户可以在指定版块中对指定主题进行置顶操作
- * 		9、版块主题申精（SECTION_SUBJECT_CREAM）:用户可以在指定版块中对指定主题进行精华主题设置操作
- * 		10、版块权限管理（SECTION_PERMISSION_MANAGEMENT）:用户可以对论坛用户进行指定版块的权限管理
- * 		11、版块配置管理（SECTION_CONFIG_MANAGEMENT）:用户可以对指定版块进行系统参数配置修改
+ * 게시판 관리자(SECTION_MANAGER): 게시판 및 게시판 콘텐츠 관리의 최대 권한 보유
+ *      0. 포럼 보기(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판에 접근 가능
+ * 		1. 주제 게시(SECTION_SUBJECT_PUBLISH): 사용자가 지정한 게시판에 주제 게시 가능
+ *		2. 주제 심사(SECTION_SUBJECT_AUDIT): 주제에 심사가 필요한 경우 사용자가 지정한 게시판에 게시된 주제를 심사 가능
+ * 		3. 주제 관리(SECTION_SUBJECT_MANAGEMENT): 사용자가 지정한 게시판에서 게시된 주제를 조회·삭제 가능
+ * 		4. 답글 작성(SECTION_REPLY_PUBLISH): 사용자가 지정한 게시판의 모든 주제에 답글 작성 가능
+ *		5. 답글 심사(SECTION_REPLY_AUDIT): 답글에 심사가 필요한 경우 사용자가 지정한 게시판의 모든 답글 내용을 심사 가능
+ *		6. 답글 관리(SECTION_REPLY_MANAGEMENT): 사용자가 지정한 게시판에서 답글을 조회 또는 삭제 가능
+ * 		7. 게시판 주제 추천(SECTION_SUBJECT_RECOMMEND): 사용자가 지정한 게시판에서 지정한 주제를 추천 가능
+ * 		8. 게시판 주제 상단 고정(SECTION_SUBJECT_STICK): 사용자가 지정한 게시판에서 지정한 주제를 상단 고정 가능
+ * 		9. 게시판 주제 우수글 지정(SECTION_SUBJECT_CREAM): 사용자가 지정한 게시판에서 지정한 주제를 우수글로 설정 가능
+ * 		10. 게시판 권한 관리(SECTION_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자에 대해 지정한 게시판의 권한 관리 가능
+ * 		11. 게시판 설정 관리(SECTION_CONFIG_MANAGEMENT): 사용자가 지정한 게시판의 시스템 매개변수 설정 수정 가능
  *
- * 主题发布者(SECTION_SUBJECT_PUBLISHER):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、发布主题（SECTION_SUBJECT_PUBLISH）:用户可以在指定版块中发布主题
+ * 주제 게시자(SECTION_SUBJECT_PUBLISHER): 지정한 게시판에 주제 게시 허용
+ * 		0. 포럼 보기(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판에 접근 가능
+ * 		1. 주제 게시(SECTION_SUBJECT_PUBLISH): 사용자가 지정한 게시판에 주제 게시 가능
  *
- * 主题回复者(SECTION_REPLY_PUBLISHER):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、发表回复（SECTION_REPLY_PUBLISH）:用户可以在指定版块中对所有主题进行回复
+ * 주제 답글 작성자(SECTION_REPLY_PUBLISHER): 지정한 게시판에 주제 게시 허용
+ * 		0. 포럼 보기(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판에 접근 가능
+ * 		1. 답글 작성(SECTION_REPLY_PUBLISH): 사용자가 지정한 게시판의 모든 주제에 답글 작성 가능
  *
- * 主题推荐者(SECTION_RECOMMENDER):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、版块主题推荐（SECTION_SUBJECT_RECOMMEND）:用户可以在指定版块中对指定主题进行推荐操作
+ * 주제 추천자(SECTION_RECOMMENDER): 지정한 게시판에 주제 게시 허용
+ * 		0. 포럼 보기(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판에 접근 가능
+ * 		1. 게시판 주제 추천(SECTION_SUBJECT_RECOMMEND): 사용자가 지정한 게시판에서 지정한 주제를 추천 가능
  *
- * 主题审核者(SECTION_SUBJECT_AUDITOR):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、审核主题（SECTION_SUBJECT_AUDIT）:用户可以审核在指定版块中发布的主题，如果主题需要审核
+ * 주제 심사자(SECTION_SUBJECT_AUDITOR): 지정한 게시판에 주제 게시 허용
+ * 		0. 포럼 보기(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판에 접근 가능
+ * 		1. 주제 심사(SECTION_SUBJECT_AUDIT): 주제에 심사가 필요한 경우 사용자가 지정한 게시판에 게시된 주제를 심사 가능
  *
- * 回复审核者(SECTION_REPLY_AUDITOR):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、审核回复（SECTION_REPLY_AUDIT）:用户可以审核在指定版块中的所有回复内容，如果回复需要审核 *
+ * 답글 심사자(SECTION_REPLY_AUDITOR): 지정한 게시판에 주제 게시 허용
+ * 		0. 포럼 보기(SECTION_VIEW): 사용자가 BBS 시스템에서 해당 게시판에 접근 가능
+ * 		1. 답글 심사(SECTION_REPLY_AUDIT): 답글에 심사가 필요한 경우 사용자가 지정한 게시판의 모든 답글 내용을 심사 가능 *
  *
  * @author LIYI
  *
@@ -87,7 +87,7 @@ public class BBSRoleInfoService {
 	private static  Logger logger = LoggerFactory.getLogger( BBSRoleInfoService.class );
 	private UserManagerService userManagerService = new UserManagerService();
 	/**
-	 * 根据ID查询指定的角色信息对象
+	 * ID로 지정한 역할 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -107,7 +107,7 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 查询所有的角色信息
+	 * 모든 역할 정보 조회
 	 *
 	 * @return
 	 * @throws Exception
@@ -124,7 +124,7 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 根据指定的ID列表查询角色信息
+	 * 지정한 ID 목록으로 역할 정보 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -157,7 +157,7 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 检查并且创建指定论坛的角色对象
+	 * 지정한 포럼의 역할 객체 확인 및 생성
 	 * @param _bBSForumInfo
 	 * @throws Exception
 	 */
@@ -181,24 +181,24 @@ public class BBSRoleInfoService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business( emc );
 			/**
-			 * 论坛角色信息管理服务类
+			 * 포럼 역할 정보 관리 서비스 클래스
 			 *
-			 * 论坛角色
-			 * 论坛访客(FORUM_GUEST):论坛访客
-			 * 		0、论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
+			 * 포럼 역할
+			 * 포럼 방문자(FORUM_GUEST): 포럼 방문자
+			 * 		0. 포럼 보기(FORUM_VIEW): 사용자가 BBS 시스템에서 해당 포럼에 접근 가능
 			 *
-			 * 论坛管理员(FORUM_SUPER_MANAGER):论坛管理员，拥有该论坛管理的最大权限
-			 *      0、论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
-			 * 		1、论坛信息管理（FORUM_INFO_MANAGEMENT）：用户拥有对论坛的版块增加，删除，修改权限
-			 * 		1、论坛发布主题（FORUM_SUBJECT_PUBLISH）:用户可以在论坛中所有版块发布主题
-			 * 		2、论坛发表回复（FORUM_REPLY_PUBLISH）：用户可以回复论坛中所有主题
-			 * 		3、论坛主题推荐（FORUM_SUBJECT_RECOMMEND）:用户可以在指定论坛中所有版块对指定主题进行推荐到论坛首页
-			 * 		4、论坛主题置顶（FORUM_SUBJECT_STICK）：用户拥有对论坛中所有的主题的置顶权限
-			 * 		5、论坛主题申精（FORUM_SUBJECT_CREAM）：用户拥有对论坛中所有的主题的精华主题设置权限
-			 * 		6、论坛主题管理（FORUM_SUBJECT_MANAGEMENT）：用户拥有对论坛中所有的主题的锁定删除权限
-			 * 		7、论坛回贴管理（FORUM_REPLY_MANAGEMENT）：用户拥有对论坛中所有的回复的删除权限
-			 * 		8、论坛权限管理（FORUM_PERMISSION_MANAGEMENT）：用户拥有对论坛的用户进行该论坛权限设置的权限
-			 * 		9、论坛配置管理（FORUM_CONFIG_MANAGEMENT）：用户拥有对论坛的参数配置进行设置的权限
+			 * 포럼 관리자(FORUM_SUPER_MANAGER): 포럼 관리자, 해당 포럼 관리의 최대 권한 보유
+			 *      0. 포럼 보기(FORUM_VIEW): 사용자가 BBS 시스템에서 해당 포럼에 접근 가능
+			 * 		1. 포럼 정보 관리(FORUM_INFO_MANAGEMENT): 사용자가 포럼의 게시판 추가, 삭제, 수정 권한 보유
+			 * 		1. 포럼 주제 게시(FORUM_SUBJECT_PUBLISH): 사용자가 포럼의 모든 게시판에 주제 게시 가능
+			 * 		2. 포럼 답글 작성(FORUM_REPLY_PUBLISH): 사용자가 포럼의 모든 주제에 답글 작성 가능
+			 * 		3. 포럼 주제 추천(FORUM_SUBJECT_RECOMMEND): 사용자가 지정한 포럼의 모든 게시판에서 지정한 주제를 포럼 첫 페이지에 추천 가능
+			 * 		4. 포럼 주제 상단 고정(FORUM_SUBJECT_STICK): 사용자가 포럼의 모든 주제에 대한 상단 고정 권한 보유
+			 * 		5. 포럼 주제 우수글 지정(FORUM_SUBJECT_CREAM): 사용자가 포럼의 모든 주제에 대한 우수글 설정 권한 보유
+			 * 		6. 포럼 주제 관리(FORUM_SUBJECT_MANAGEMENT): 사용자가 포럼의 모든 주제에 대한 잠금·삭제 권한 보유
+			 * 		7. 포럼 답글 관리(FORUM_REPLY_MANAGEMENT): 사용자가 포럼의 모든 답글에 대한 삭제 권한 보유
+			 * 		8. 포럼 권한 관리(FORUM_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자에 대해 해당 포럼 권한을 설정할 수 있는 권한 보유
+			 * 		9. 포럼 설정 관리(FORUM_CONFIG_MANAGEMENT): 사용자가 포럼 매개변수 설정 권한 보유
 			 */
 			permissionCodeList.clear();
 			permissionCodeList.add( "FORUM_VIEW_" + forumId );
@@ -206,10 +206,10 @@ public class BBSRoleInfoService {
 					_bBSForumInfo, "FORUM_GUEST_" + forumId, forumName + "-포럼 방문자", "시스템 역할: 포럼["+ forumName +"]이(가) 지정된 범위의 사용자에게 공개됩니다.",
 					permissionCodeList );
 
-			//查询该论坛下有多少版块
+			//해당 포럼의 게시판 수 조회
 			sectionInfoList = business.sectionInfoFactory().listAllSectionByForumId( _bBSForumInfo.getId() );
 
-			//论坛超级管理员(FORUM_SUPER_MANAGER):删除、审核，回复，置顶，精华，推荐等等
+			//포럼 최고 관리자(FORUM_SUPER_MANAGER): 삭제, 심사, 답글, 상단 고정, 우수글, 추천 등
 			permissionCodeList.clear();
 			permissionCodeList.add( "FORUM_VIEW_" + forumId );
 			permissionCodeList.add( "FORUM_INFO_MANAGEMENT_" + forumId );
@@ -222,7 +222,7 @@ public class BBSRoleInfoService {
 //			permissionCodeList.add( "FORUM_REPLY_MANAGEMENT_" + forumId );
 			permissionCodeList.add( "FORUM_PERMISSION_MANAGEMENT_" + forumId );
 			permissionCodeList.add( "FORUM_CONFIG_MANAGEMENT_" + forumId );
-			//该论坛下所有版块的相关权限都要给
+			//해당 포럼의 모든 게시판 관련 권한을 모두 부여
 			if( sectionInfoList != null ){
 				for( BBSSectionInfo section : sectionInfoList ){
 					sectionId = section.getId();
@@ -263,7 +263,7 @@ public class BBSRoleInfoService {
 		}
 	}
 	/**
-	 * 检查并且创建指定版块的权限对象
+	 * 지정 게시판의 권한 객체 확인 및 생성
 	 * @param _sectionInfo
 	 * @throws Exception
 	 */
@@ -280,7 +280,7 @@ public class BBSRoleInfoService {
 		Business business = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business( emc );
-			//查询该论坛下有多少版块
+			//해당 포럼의 게시판 수 조회
 			sectionInfoList = business.sectionInfoFactory().listSubSectionByMainSectionId( _sectionInfo.getId() );
 
 			permissionCodeList.clear();
@@ -293,7 +293,7 @@ public class BBSRoleInfoService {
 			}
 			checkAndSaveBBSRoleInfo( emc, creatorName,  _sectionInfo, "SECTION_GUEST_" + sectionId, forumName + "-" + sectionName + "-섹션 방문", "시스템 역할: 섹션[" + forumName + "-"+ sectionName +"]이(가) 지정된 범위의 사용자에게 공개되며, 게시와 댓글 작성이 가능합니다.", permissionCodeList );
 
-			//版主(SECTION_MANAGER):拥有版块及版块内容管理的最大权限
+			//게시판 관리자(SECTION_MANAGER): 게시판 및 게시판 콘텐츠 관리의 최대 권한 보유
 			permissionCodeList.clear();
 			permissionCodeList.add( "SECTION_VIEW_" + sectionId );
 			permissionCodeList.add( "SECTION_INFO_MANAGER_" + sectionId );
@@ -308,7 +308,7 @@ public class BBSRoleInfoService {
 			permissionCodeList.add( "SECTION_SUBJECT_CREAM_" + sectionId );
 			permissionCodeList.add( "SECTION_PERMISSION_MANAGEMENT_" + sectionId );
 			permissionCodeList.add( "SECTION_CONFIG_MANAGEMENT_" + sectionId );
-			//该版块下所有子版块的相关权限都要给
+			//해당 게시판의 모든 하위 게시판 관련 권한을 모두 부여
 			if( sectionInfoList != null ){
 				for( BBSSectionInfo section : sectionInfoList ){
 					sectionId_tmp = section.getId();
@@ -396,7 +396,7 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 根据传入的参数组织角色信息，并且验证角色是否已经存在，如果不存在则新增一个角色信息
+	 * 전달된 매개변수로 역할 정보를 구성하고 역할 존재 여부를 확인, 없으면 역할 정보를 새로 추가
 	 * @param emc
 	 * @param _bBSForumInfo
 	 * @param roleCode
@@ -419,12 +419,12 @@ public class BBSRoleInfoService {
         	emc.persist( roleInfo, CheckPersistType.all );
         	if( ListTools.isNotEmpty( permissionCodeList ) ){
         		for( String permissionCode : permissionCodeList ){
-        			//查询权限是否存在
+        			//권한 존재 여부 조회
         			permissionInfo = permissionInfoFactory.getPermissionByCode( permissionCode );
         			if( permissionInfo == null ){
         				continue;
         			}
-        			//查询角色和权限的绑定关系是否存在，如果不存在则进行数据增加，此操作只在新增角色的时候进行一次
+        			//역할과 권한의 바인딩 관계 존재 여부를 조회하고 없으면 데이터 추가, 이 작업은 역할을 새로 추가할 때 한 번만 수행
         			if( !permissionRoleFactory.exsistPermissionRole( roleCode, permissionCode ) ){
         				emc.beginTransaction( BBSPermissionRole.class );
         				permissionRole = new BBSPermissionRole( roleInfo.getForumId(), roleInfo.getForumName(), roleInfo.getSectionId(),
@@ -439,7 +439,7 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 根据传入的参数组织权限信息，并且验证权限是否已经存在，如果不存在则新增一个权限信息
+	 * 전달된 매개변수로 권한 정보를 구성하고 권한 존재 여부를 검증, 없으면 권한 정보 추가
 	 * @param emc
 	 * @param _sectionInfo
 	 * @param roleCode
@@ -463,12 +463,12 @@ public class BBSRoleInfoService {
         	emc.persist( roleInfo, CheckPersistType.all );
         	if( ListTools.isNotEmpty( permissionCodeList ) ){
         		for( String permissionCode : permissionCodeList ){
-        			//查询权限是否存在
+        			//권한 존재 여부 조회
         			permissionInfo = permissionInfoFactory.getPermissionByCode( permissionCode );
         			if( permissionInfo == null ){
         				continue;
         			}
-        			//查询角色和权限的绑定关系是否存在，如果不存在则进行数据增加，此操作只在新增角色的时候进行一次
+        			//역할과 권한의 바인딩 관계 존재 여부를 조회하고 없으면 데이터 추가, 이 작업은 역할을 새로 추가할 때 한 번만 수행
         			if( !permissionRoleFactory.exsistPermissionRole( roleCode, permissionCode ) ){
         				emc.beginTransaction( BBSPermissionRole.class );
         				permissionRole = new BBSPermissionRole( roleInfo.getForumId(), roleInfo.getForumName(), roleInfo.getSectionId(),
@@ -515,7 +515,7 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 根据对象类别和对象的唯一标识来查询对象所关联的角色信息
+	 * 객체 유형과 객체 고유 식별자로 객체에 연결된 역할 정보 조회
 	 *
 	 * @param uniqueId
 	 * @param objectType
@@ -542,7 +542,7 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 根据角色的编码获取角色信息
+	 * 역할 코드로 역할 정보 조회
 	 * @param roleCode
 	 * @return
 	 * @throws Exception
@@ -562,11 +562,11 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 保存角色信息
-	 * 同时保存角色绑定的权限信息
-	 * 1、删除无效的权限信息，不在绑定权限列表内的
-	 * 2、新增或者更新一个角色信息
-	 * 3、判断并且新增需要的角色权限绑定信息
+	 * 역할 정보 저장
+	 * 역할에 바인딩된 권한 정보도 함께 저장
+	 * 1. 바인딩 권한 목록에 없는 유효하지 않은 권한 정보 삭제
+	 * 2. 역할 정보 추가 또는 갱신
+	 * 3. 필요한 역할 권한 바인딩 정보 확인 및 추가
 	 * @param _roleInfo
 	 * @param permissionCodes
 	 * @return
@@ -586,10 +586,10 @@ public class BBSRoleInfoService {
 			emc.beginTransaction( BBSPermissionInfo.class );
 			emc.beginTransaction( BBSPermissionRole.class );
 
-			//=========================================  1、删除无效的权限信息，不在绑定权限列表内的
-			//根据角色编码获取所有的权限信息列表
+			//=========================================  1. 바인딩 권한 목록에 없는 유효하지 않은 권한 정보 삭제
+			//역할 코드로 모든 권한 정보 목록 조회
 			ids = business.permissionRoleFactory().listPermissionByRoleCode( _roleInfo.getRoleCode() );
-			//先删除不需要的绑定关系
+			//불필요한 바인딩 관계 먼저 삭제
 			if( ListTools.isNotEmpty( ids ) ){
 				permissionRoleList = business.permissionRoleFactory().list( ids );
 				if( ListTools.isNotEmpty( permissionRoleList ) ){
@@ -607,26 +607,26 @@ public class BBSRoleInfoService {
 				}
 			}
 
-			//=========================================  2、新增或者更新一个角色信息
+			//=========================================  2. 역할 정보 추가 또는 갱신
 			_roleInfo_tmp = business.roleInfoFactory().getRoleByCode( _roleInfo.getRoleCode() );
 			if( _roleInfo_tmp == null ){
-				//创建一个新的记录
+				//새 레코드 생성
 				if( _roleInfo.getId() == null || _roleInfo.getId().isEmpty() ){
 					_roleInfo.setId( BBSRoleInfo.createId() );
 				}
 				emc.persist( _roleInfo, CheckPersistType.all);
 			}else{
-				//更新一条记录
+				//레코드 수정
 				_roleInfo.copyTo( _roleInfo_tmp, JpaObject.FieldsUnmodify  );
 				emc.check( _roleInfo_tmp, CheckPersistType.all );
 			}
 
-			//=========================================  3、判断并且新增需要的角色权限绑定信息
-			//根据权限ID获取所有的权限信息列表
+			//=========================================  3. 필요한 역할 권한 바인딩 정보 확인 및 추가
+			//권한 ID로 모든 권한 정보 목록 조회
 			permissionInfoList = business.permissionInfoFactory().listByPermissionCodes( permissionCodes );
 			if( ListTools.isNotEmpty( permissionInfoList ) ){
 				for( BBSPermissionInfo permissionInfo : permissionInfoList ){
-					//查询绑定指定角色和权限的关系
+					//지정한 역할과 권한의 바인딩 관계 조회
 					permissionRole = business.permissionRoleFactory().getByRoleAndPermission( _roleInfo.getRoleCode(), permissionInfo.getPermissionCode() );
 					if( permissionRole == null ){
 						permissionRole = new BBSPermissionRole( _roleInfo.getForumId(), _roleInfo.getForumName(), _roleInfo.getSectionId(), _roleInfo.getSectionName(),
@@ -662,12 +662,12 @@ public class BBSRoleInfoService {
 			if( roleInfo == null ){
 				throw new Exception("role info not exists, can not excute delete.");
 			}
-			//角色信息存在，删除角色信息，删除角色信息与权限的绑定，删除角色信息与用户和组织群组的绑定
+			//역할 정보가 존재하면 역할 정보, 역할-권한 바인딩, 역할-사용자·조직·그룹 바인딩 삭제
 			ids = business.permissionRoleFactory().listPermissionByRoleCode( roleInfo.getRoleCode() );
 			if( ids != null ){
 				permissionRoleList = business.permissionRoleFactory().list(ids);
 				if( ListTools.isNotEmpty( permissionRoleList ) ){
-					//全部删除
+					//전체 삭제
 					for( BBSPermissionRole permissionRole : permissionRoleList ){
 						emc.remove( permissionRole, CheckRemoveType.all );
 					}
@@ -677,7 +677,7 @@ public class BBSRoleInfoService {
 			if( ids != null ){
 				uerRoleList = business.userRoleFactory().list(ids);
 				if( ListTools.isNotEmpty( uerRoleList ) ){
-					//全部删除
+					//전체 삭제
 					for( BBSUserRole userRole : uerRoleList ){
 						emc.remove( userRole, CheckRemoveType.all );
 					}
@@ -702,7 +702,7 @@ public class BBSRoleInfoService {
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 			business = new Business( emc );
 			emc.beginTransaction( BBSUserRole.class );
-			//先删该用户的所有角色绑定
+			//해당 사용자의 모든 역할 바인딩 먼저 삭제
 			ids = business.userRoleFactory().listRoleIdsByObjectUniqueId( bindObject.getObjectName(), bindObject.getObjectType() );
 			for( String id : ids ){
 				userRole = emc.find( id, BBSUserRole.class );
@@ -752,7 +752,7 @@ public class BBSRoleInfoService {
 				throw new Exception( "roleInfo not exists!bindRoleCode = " + bindRoleCode );
 			}
 
-			//先删该用户的所有角色绑定
+			//해당 사용자의 모든 역할 바인딩 먼저 삭제
 			ids = business.userRoleFactory().listIdsByRoleCode( bindRoleCode );
 			for( String id : ids ){
 				userRole = emc.find( id, BBSUserRole.class );
@@ -806,11 +806,11 @@ public class BBSRoleInfoService {
 	}
 
 	/**
-	 * 根据用户姓名获取用户所有的角色信息列表
-	 * 1、查询用户所在的组织，以及上级组织
-	 * 2、查询用户所在的顶层组织
-	 * 3、查询用户所在的所有群组
-	 * 查询用户所有的组织，顶层组织和群组所关联的所有角色列表
+	 * 사용자 이름으로 사용자의 모든 역할 정보 목록 조회
+	 * 1. 사용자가 속한 조직 및 상위 조직 조회
+	 * 2. 사용자가 속한 최상위 조직 조회
+	 * 3. 사용자가 속한 모든 그룹 조회
+	 * 사용자의 모든 조직, 최상위 조직, 그룹에 연결된 모든 역할 목록 조회
 	 * @param userName
 	 * @return
 	 * @throws Exception
@@ -819,7 +819,7 @@ public class BBSRoleInfoService {
 		if( userName == null ){
 			throw new Exception("userName is null, can not query any role info!");
 		}
-		//1、查询用户所在的组织信息，需要递归查询上级组织信息
+		//1. 사용자가 속한 조직 정보 조회, 상위 조직 정보는 재귀 조회 필요
 		Business business = null;
 		List<String> objectUniqueIds = new ArrayList<>();
 		List<String> unitNameList = new ArrayList<>();
@@ -834,7 +834,7 @@ public class BBSRoleInfoService {
 			unitNameList = userManagerService.listUnitNamesWithPerson( userName );
 			groupNameList = userManagerService.listGroupNamesSupNestedWithPerson(userName);
 
-			//然后把组织名称，群组名称放到同一个LIST里供查询使用
+			//그 다음 조직 이름, 그룹 이름을 같은 LIST에 넣어 조회에 사용
 			if( ListTools.isNotEmpty( unitNameList ) ){
 				for( String unitName : unitNameList ){
 					objectUniqueIds.add( unitName );
@@ -857,7 +857,7 @@ public class BBSRoleInfoService {
 		if( userName == null ){
 			throw new Exception("userName is null, can not query any role info!");
 		}
-		//1、查询用户所在的组织信息，需要递归查询上级组织信息
+		//1. 사용자가 속한 조직 정보 조회, 상위 조직 정보는 재귀 조회 필요
 		Business business = null;
 		List<String> objectUniqueIds = new ArrayList<>();
 		List<String> unitNameList = new ArrayList<>();
@@ -871,7 +871,7 @@ public class BBSRoleInfoService {
 			unitNameList = userManagerService.listUnitSupNestedWithPerson( userName );
 			groupNameList = userManagerService.listGroupNamesSupNestedWithPerson(userName);
 
-			//然后把组织名称,群组名称放到同一个LIST里供查询使用
+			//그 다음 조직 이름, 그룹 이름을 같은 LIST에 넣어 조회에 사용
 			if( ListTools.isNotEmpty( unitNameList ) ){
 				for( String unitName : unitNameList ){
 					objectUniqueIds.add( unitName );

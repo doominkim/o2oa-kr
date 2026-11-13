@@ -6,7 +6,7 @@ class ExceptionCaptchaEmpty extends LanguagePromptException {
 
 	private static final long serialVersionUID = 1859164370743532895L;
 
-	public static String defaultMessage = "图片验证码不能为空.";
+	public static String defaultMessage = "이미지 인증 코드는 비워 둘 수 없습니다.";
 
 	ExceptionCaptchaEmpty() {
 		super(defaultMessage);

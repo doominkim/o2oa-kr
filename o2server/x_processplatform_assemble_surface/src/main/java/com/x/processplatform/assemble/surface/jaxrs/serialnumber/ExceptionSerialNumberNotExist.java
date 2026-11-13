@@ -7,6 +7,6 @@ class ExceptionSerialNumberNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionSerialNumberNotExist(String flag) {
-		super("不存在的流水号: {}.", flag);
+		super("없는 일련번호: {}.", flag);
 	}
 }

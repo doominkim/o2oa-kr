@@ -7,6 +7,6 @@ class ExceptionEventIsNotRecurrenceEvent extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionEventIsNotRecurrenceEvent( String id ) {
-		super("日程事件不是重复事件。ID:" + id);
+		super("반복 일정이 아닙니다. ID:" + id);
 	}
 }

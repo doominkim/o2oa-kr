@@ -1,7 +1,7 @@
 //mootools
 var GLOBAL_ITEMS=function(){var t=[];for(var e in this)t.push(e);return t}();!function(){this.MooTools={version:"1.5.0dev",build:"%build%"};var t=this.typeOf=function(t){if(null==t)return"null";if(null!=t.$family)return t.$family();if(t.nodeName){if(1==t.nodeType)return"element";if(3==t.nodeType)return/\S/.test(t.nodeValue)?"textnode":"whitespace"}else if("number"==typeof t.length){if(t.callee)return"arguments";if("item"in t)return"collection"}return typeof t},e=(this.instanceOf=function(t,e){if(null==t)return!1;for(var n=t.$constructor||t.constructor;n;){if(n===e)return!0;n=n.parent}return!!t.hasOwnProperty&&t instanceof e},this.Function),n=!0;for(var r in{toString:1})n=null;n&&(n=["hasOwnProperty","valueOf","isPrototypeOf","propertyIsEnumerable","toLocaleString","toString","constructor"]),e.prototype.overloadSetter=function(t){var e=this;return function(r,i){if(null==r)return this;if(t||"string"!=typeof r){for(var a in r)e.call(this,a,r[a]);if(n)for(var o=n.length;o--;)a=n[o],r.hasOwnProperty(a)&&e.call(this,a,r[a])}else e.call(this,r,i);return this}},e.prototype.overloadGetter=function(t){var e=this;return function(n){var r,i;if("string"!=typeof n?r=n:arguments.length>1?r=arguments:t&&(r=[n]),r){i={};for(var a=0;a<r.length;a++)i[r[a]]=e.call(this,r[a])}else i=e.call(this,n);return i}},e.prototype.extend=function(t,e){this[t]=e}.overloadSetter(),e.prototype.implement=function(t,e){this.prototype[t]=e}.overloadSetter();var i=Array.prototype.slice;e.from=function(e){return"function"==t(e)?e:function(){return e}},e.convert=e.from,Array.from=function(e){return null==e?[]:a.isEnumerable(e)&&"string"!=typeof e?"array"==t(e)?e:i.call(e):[e]},Array.convert=Array.from,Number.from=function(t){var e=parseFloat(t);return isFinite(e)?e:null},Number.convert=Number.from,String.from=function(t){return t+""},String.convert=String.from,e.implement({hide:function(){return this.$hidden=!0,this},protect:function(){return this.$protected=!0,this}});var a=this.Type=function(e,n){if(e){var r=e.toLowerCase();a["is"+e]=function(e){return t(e)==r},null!=n&&(n.prototype.$family=function(){return r}.hide())}return null==n?null:(n.extend(this),n.$constructor=a,n.prototype.$constructor=n,n)},o=Object.prototype.toString;a.isEnumerable=function(t){return null!=t&&"number"==typeof t.length&&"[object Function]"!=o.call(t)};var s={},u=function(e){var n=t(e.prototype);return s[n]||(s[n]=[])},c=function(e,n){if(!n||!n.$hidden){for(var r=u(this),a=0;a<r.length;a++){var o=r[a];"type"==t(o)?c.call(o,e,n):o.call(this,e,n)}var s=this.prototype[e];null!=s&&s.$protected||(this.prototype[e]=n),null==this[e]&&"function"==t(n)&&l.call(this,e,(function(t){return n.apply(t,i.call(arguments,1))}))}},l=function(t,e){if(!e||!e.$hidden){var n=this[t];null!=n&&n.$protected||(this[t]=e)}};a.implement({implement:c.overloadSetter(),extend:l.overloadSetter(),alias:function(t,e){c.call(this,t,this.prototype[e])}.overloadSetter(),mirror:function(t){return u(this).push(t),this}}),new a("Type",a);var h=function(t,e,n){var r=e!=Object,i=e.prototype;r&&(e=new a(t,e));for(var o=0,s=n.length;o<s;o++){var u=n[o],c=e[u],l=i[u];c&&c.protect(),r&&l&&e.implement(u,l.protect())}if(r){var f=i.propertyIsEnumerable(n[0]);e.forEachMethod=function(t){if(!f)for(var e=0,r=n.length;e<r;e++)t.call(i,i[n[e]],n[e]);for(var a in i)t.call(i,i[a],a)}}return h};h("String",String,["charAt","charCodeAt","concat","indexOf","lastIndexOf","match","quote","replace","search","slice","split","substr","substring","trim","toLowerCase","toUpperCase"])("Array",Array,["pop","push","reverse","shift","sort","splice","unshift","concat","join","slice","indexOf","lastIndexOf","filter","forEach","every","map","some","reduce","reduceRight"])("Number",Number,["toExponential","toFixed","toLocaleString","toPrecision"])("Function",e,["apply","call","bind"])("RegExp",RegExp,["exec","test"])("Object",Object,["create","defineProperty","defineProperties","keys","getPrototypeOf","getOwnPropertyDescriptor","getOwnPropertyNames","preventExtensions","isExtensible","seal","isSealed","freeze","isFrozen"])("Date",Date,["now"]),Object.extend=l.overloadSetter(),Date.extend("now",(function(){return+new Date})),new a("Boolean",Boolean),Number.prototype.$family=function(){return isFinite(this)?"number":"null"}.hide(),Number.extend("random",(function(t,e){return Math.floor(Math.random()*(e-t+1)+t)}));var f=Object.prototype.hasOwnProperty;Object.extend("forEach",(function(t,e,n){for(var r in t)f.call(t,r)&&e.call(n,t[r],r,t)})),Object.each=Object.forEach,Array.implement({forEach:function(t,e){for(var n=0,r=this.length;n<r;n++)n in this&&t.call(e,this[n],n,this)},each:function(t,e){return Array.forEach(this,t,e),this}});var d=function(e){switch(t(e)){case"array":return e.clone();case"object":return Object.clone(e);default:return e}};Array.implement("clone",(function(){for(var t=this.length,e=new Array(t);t--;)e[t]=d(this[t]);return e}));var g=function(e,n,r){switch(t(r)){case"object":"object"==t(e[n])?Object.merge(e[n],r):e[n]=Object.clone(r);break;case"array":e[n]=r.clone();break;default:e[n]=r}return e};Object.extend({merge:function(e,n,r){if("string"==t(n))return g(e,n,r);for(var i=1,a=arguments.length;i<a;i++){var o=arguments[i];for(var s in o)g(e,s,o[s])}return e},clone:function(t){var e={};for(var n in t)e[n]=d(t[n]);return e},append:function(t){for(var e=1,n=arguments.length;e<n;e++){var r=arguments[e]||{};for(var i in r)t[i]=r[i]}return t}}),["Object","WhiteSpace","TextNode","Collection","Arguments"].each((function(t){new a(t)}));var p=Date.now();String.extend("uniqueID",(function(){return(p++).toString(36)}))}(),Array.implement({every:function(t,e){for(var n=0,r=this.length>>>0;n<r;n++)if(n in this&&!t.call(e,this[n],n,this))return!1;return!0},filter:function(t,e){for(var n,r=[],i=0,a=this.length>>>0;i<a;i++)i in this&&(n=this[i],t.call(e,n,i,this)&&r.push(n));return r},indexOf:function(t,e){for(var n=this.length>>>0,r=e<0?Math.max(0,n+e):e||0;r<n;r++)if(this[r]===t)return r;return-1},map:function(t,e){for(var n=this.length>>>0,r=Array(n),i=0;i<n;i++)i in this&&(r[i]=t.call(e,this[i],i,this));return r},some:function(t,e){for(var n=0,r=this.length>>>0;n<r;n++)if(n in this&&t.call(e,this[n],n,this))return!0;return!1},clean:function(){return this.filter((function(t){return null!=t}))},invoke:function(t){var e=Array.slice(arguments,1);return this.map((function(n){return n[t].apply(n,e)}))},associate:function(t){for(var e={},n=Math.min(this.length,t.length),r=0;r<n;r++)e[t[r]]=this[r];return e},link:function(t){for(var e={},n=0,r=this.length;n<r;n++)for(var i in t)if(t[i](this[n])){e[i]=this[n],delete t[i];break}return e},contains:function(t,e){return-1!=this.indexOf(t,e)},append:function(t){return this.push.apply(this,t),this},getLast:function(){return this.length?this[this.length-1]:null},getRandom:function(){return this.length?this[Number.random(0,this.length-1)]:null},include:function(t){return this.contains(t)||this.push(t),this},combine:function(t){for(var e=0,n=t.length;e<n;e++)this.include(t[e]);return this},erase:function(t){for(var e=this.length;e--;)this[e]===t&&this.splice(e,1);return this},empty:function(){return this.length=0,this},flatten:function(){for(var t=[],e=0,n=this.length;e<n;e++){var r=typeOf(this[e]);"null"!=r&&(t=t.concat("array"==r||"collection"==r||"arguments"==r||instanceOf(this[e],Array)?Array.flatten(this[e]):this[e]))}return t},pick:function(){for(var t=0,e=this.length;t<e;t++)if(null!=this[t])return this[t];return null},hexToRgb:function(t){if(3!=this.length)return null;var e=this.map((function(t){return 1==t.length&&(t+=t),t.toInt(16)}));return t?e:"rgb("+e+")"},rgbToHex:function(t){if(this.length<3)return null;if(4==this.length&&0==this[3]&&!t)return"transparent";for(var e=[],n=0;n<3;n++){var r=(this[n]-0).toString(16);e.push(1==r.length?"0"+r:r)}return t?e:"#"+e.join("")}}),String.implement({test:function(t,e){return("regexp"==typeOf(t)?t:new RegExp(""+t,e)).test(this)},contains:function(t,e){return e?(e+this+e).indexOf(e+t+e)>-1:String(this).indexOf(t)>-1},trim:function(){return String(this).replace(/^\s+|\s+$/g,"")},clean:function(){return String(this).replace(/\s+/g," ").trim()},camelCase:function(){return String(this).replace(/-\D/g,(function(t){return t.charAt(1).toUpperCase()}))},hyphenate:function(){return String(this).replace(/[A-Z]/g,(function(t){return"-"+t.charAt(0).toLowerCase()}))},capitalize:function(){return String(this).replace(/\b[a-z]/g,(function(t){return t.toUpperCase()}))},escapeRegExp:function(){return String(this).replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1")},toInt:function(t){return parseInt(this,t||10)},toFloat:function(){return parseFloat(this)},hexToRgb:function(t){var e=String(this).match(/^#?(\w{1,2})(\w{1,2})(\w{1,2})$/);return e?e.slice(1).hexToRgb(t):null},rgbToHex:function(t){var e=String(this).match(/\d{1,3}/g);return e?e.rgbToHex(t):null},substitute:function(t,e){return String(this).replace(e||/\\?\{([^{}]+)\}/g,(function(e,n){return"\\"==e.charAt(0)?e.slice(1):null!=t[n]?t[n]:""}))}}),Function.extend({attempt:function(){for(var t=0,e=arguments.length;t<e;t++)try{return arguments[t]()}catch(t){}return null}}),Function.implement({attempt:function(t,e){try{return this.apply(e,Array.from(t))}catch(t){}return null},bind:function(t){var e=this,n=arguments.length>1?Array.slice(arguments,1):null,r=function(){},i=function(){var a=t,o=arguments.length;this instanceof i&&(r.prototype=e.prototype,a=new r);var s=n||o?e.apply(a,n&&o?n.concat(Array.slice(arguments)):n||arguments):e.call(a);return a==t?s:a};return i},pass:function(t,e){var n=this;return null!=t&&(t=Array.from(t)),function(){return n.apply(e,t||arguments)}},delay:function(t,e,n){return setTimeout(this.pass(null==n?[]:n,e),t)},periodical:function(t,e,n){return setInterval(this.pass(null==n?[]:n,e),t)}}),Number.implement({limit:function(t,e){return Math.min(e,Math.max(t,this))},round:function(t){return t=Math.pow(10,t||0).toFixed(t<0?-t:0),Math.round(this*t)/t},times:function(t,e){for(var n=0;n<this;n++)t.call(e,n,this)},toFloat:function(){return parseFloat(this)},toInt:function(t){return parseInt(this,t||10)}}),Number.alias("each","times"),function(t){var e={};["abs","acos","asin","atan","atan2","ceil","cos","exp","floor","log","max","min","pow","sin","sqrt","tan"].each((function(t){Number[t]||(e[t]=function(){return Math[t].apply(null,[this].concat(Array.from(arguments)))})})),Number.implement(e)}(),function(){var t=this.Class=new Type("Class",(function(r){instanceOf(r,Function)&&(r={initialize:r});var i=function(){if(n(this),i.$prototyping)return this;this.$caller=null;var t=this.initialize?this.initialize.apply(this,arguments):this;return this.$caller=this.caller=null,t}.extend(this).implement(r);return i.$constructor=t,i.prototype.$constructor=i,i.prototype.parent=e,i})),e=function(){if(!this.$caller)throw new Error('The method "parent" cannot be called.');var t=this.$caller.$name,e=this.$caller.$owner.parent,n=e?e.prototype[t]:null;if(!n)throw new Error('The method "'+t+'" has no parent.');return n.apply(this,arguments)},n=function(t){for(var e in t){var r=t[e];switch(typeOf(r)){case"object":var i=function(){};i.prototype=r,t[e]=n(new i);break;case"array":t[e]=r.clone()}}return t},r=function(e,n,r){if(t.Mutators.hasOwnProperty(e)&&null==(n=t.Mutators[e].call(this,n)))return this;if("function"==typeOf(n)){if(n.$hidden)return this;this.prototype[e]=r?n:function(t,e,n){n.$origin&&(n=n.$origin);var r=function(){if(n.$protected&&null==this.$caller)throw new Error('The method "'+e+'" cannot be called.');var t=this.caller,i=this.$caller;this.caller=i,this.$caller=r;var a=n.apply(this,arguments);return this.$caller=i,this.caller=t,a}.extend({$owner:t,$origin:n,$name:e});return r}(this,e,n)}else Object.merge(this.prototype,e,n);return this};t.implement("implement",r.overloadSetter()),t.Mutators={Extends:function(t){this.parent=t,this.prototype=function(t){t.$prototyping=!0;var e=new t;return delete t.$prototyping,e}(t)},Implements:function(t){Array.from(t).each((function(t){var e=new t;for(var n in e)r.call(this,n,e[n],!0)}),this)}}}(),function(){this.Chain=new Class({$chain:[],chain:function(){return this.$chain.append(Array.flatten(arguments)),this},callChain:function(){return!!this.$chain.length&&this.$chain.shift().apply(this,arguments)},clearChain:function(){return this.$chain.empty(),this}});var t=function(t){return t.replace(/^on([A-Z])/,(function(t,e){return e.toLowerCase()}))};this.Events=new Class({$events:{},addEvent:function(e,n,r){return e=t(e),this.$events[e]=(this.$events[e]||[]).include(n),r&&(n.internal=!0),this},addEvents:function(t){for(var e in t)this.addEvent(e,t[e]);return this},fireEvent:function(e,n,r){e=t(e);var i=this.$events[e];return i?(n=Array.from(n),i.each((function(t){r?t.delay(r,this,n):t.apply(this,n)}),this),this):this},removeEvent:function(e,n){e=t(e);var r=this.$events[e];if(r&&!n.internal){var i=r.indexOf(n);-1!=i&&delete r[i]}return this},removeEvents:function(e){var n;if("object"==typeOf(e)){for(n in e)this.removeEvent(n,e[n]);return this}for(n in e&&(e=t(e)),this.$events)if(!e||e==n)for(var r=this.$events[n],i=r.length;i--;)i in r&&this.removeEvent(n,r[i]);return this}}),this.Options=new Class({setOptions:function(){var t=this.options=Object.merge.apply(null,[{},this.options].append(arguments));if(this.addEvent)for(var e in t)"function"==typeOf(t[e])&&/^on[A-Z]/.test(e)&&(this.addEvent(e,t[e]),delete t[e]);return this}})}(),function(){var t=Object.prototype.hasOwnProperty;Object.extend({subset:function(t,e){for(var n={},r=0,i=e.length;r<i;r++){var a=e[r];a in t&&(n[a]=t[a])}return n},map:function(e,n,r){var i={};for(var a in e)t.call(e,a)&&(i[a]=n.call(r,e[a],a,e));return i},filter:function(e,n,r){var i={};for(var a in e){var o=e[a];t.call(e,a)&&n.call(r,o,a,e)&&(i[a]=o)}return i},every:function(e,n,r){for(var i in e)if(t.call(e,i)&&!n.call(r,e[i],i))return!1;return!0},some:function(e,n,r){for(var i in e)if(t.call(e,i)&&n.call(r,e[i],i))return!0;return!1},keys:function(e){var n=[];for(var r in e)t.call(e,r)&&n.push(r);return n},values:function(e){var n=[];for(var r in e)t.call(e,r)&&n.push(e[r]);return n},getLength:function(t){return Object.keys(t).length},keyOf:function(e,n){for(var r in e)if(t.call(e,r)&&e[r]===n)return r;return null},contains:function(t,e){return null!=Object.keyOf(t,e)},toQueryString:function(t,e){var n=[];return Object.each(t,(function(t,r){var i;switch(e&&(r=e+"["+r+"]"),typeOf(t)){case"object":i=Object.toQueryString(t,r);break;case"array":var a={};t.each((function(t,e){a[e]=t})),i=Object.toQueryString(a,r);break;default:i=r+"="+encodeURIComponent(t)}null!=t&&n.push(i)})),n.join("&")}})}(),"undefined"!=typeof exports&&function(){for(var t in this)GLOBAL_ITEMS.contains(t)||(exports[t]=this[t]);exports.apply=function(t){Object.append(t,exports)}}(),MooTools.More={version:"1.6.1-dev",build:"%build%"},function(){var t=function(t){return null!=t},e=Object.prototype.hasOwnProperty;Object.extend({getFromPath:function(t,n){"string"==typeof n&&(n=n.split("."));for(var r=0,i=n.length;r<i;r++){if(!e.call(t,n[r]))return null;t=t[n[r]]}return t},cleanValues:function(e,n){for(var r in n=n||t,e)n(e[r])||delete e[r];return e},erase:function(t,n){return e.call(t,n)&&delete t[n],t},run:function(t){var e=Array.slice(arguments,1);for(var n in t)t[n].apply&&t[n].apply(t,e);return t}})}(),function(){var t=null,e={},n=function(t){return instanceOf(t,r.Set)?t:e[t]},r=this.Locale={define:function(n,i,a,o){var s;return instanceOf(n,r.Set)?(s=n.name)&&(e[s]=n):(e[s=n]||(e[s]=new r.Set(s)),n=e[s]),i&&n.define(i,a,o),t||(t=n),n},use:function(e){return(e=n(e))&&(t=e,this.fireEvent("change",e)),this},getCurrent:function(){return t},get:function(e,n){return t?t.get(e,n):""},inherit:function(t,e,r){return(t=n(t))&&t.inherit(e,r),this},list:function(){return Object.keys(e)}};Object.append(r,new Events),r.Set=new Class({sets:{},inherits:{locales:[],sets:{}},initialize:function(t){this.name=t||""},define:function(t,e,n){var r=this.sets[t];return r||(r={}),e&&("object"==typeOf(e)?r=Object.merge(r,e):r[e]=n),this.sets[t]=r,this},get:function(t,n,r){var i=Object.getFromPath(this.sets,t);if(null!=i){var a=typeOf(i);return"function"==a?i=i.apply(null,Array.convert(n)):"object"==a&&(i=Object.clone(i)),i}var o=t.indexOf("."),s=o<0?t:t.substr(0,o),u=(this.inherits.sets[s]||[]).combine(this.inherits.locales).include("en-US");r||(r=[]);for(var c=0,l=u.length;c<l;c++)if(!r.contains(u[c])){r.include(u[c]);var h=e[u[c]];if(h&&null!=(i=h.get(t,n,r)))return i}return""},inherit:function(t,e){t=Array.convert(t),e&&!this.inherits.sets[e]&&(this.inherits.sets[e]=[]);for(var n=t.length;n--;)(e?this.inherits.sets[e]:this.inherits.locales).unshift(t[n]);return this}})}(),Locale.define("en-US","Date",{months:["January","February","March","April","May","June","July","August","September","October","November","December"],months_abbr:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],days_abbr:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],dateOrder:["month","date","year"],shortDate:"%m/%d/%Y",shortTime:"%I:%M%p",AM:"AM",PM:"PM",firstDayOfWeek:0,ordinal:function(t){return t>3&&t<21?"th":["th","st","nd","rd","th"][Math.min(t%10,4)]},lessThanMinuteAgo:"less than a minute ago",minuteAgo:"about a minute ago",minutesAgo:"{delta} minutes ago",hourAgo:"about an hour ago",hoursAgo:"about {delta} hours ago",dayAgo:"1 day ago",daysAgo:"{delta} days ago",weekAgo:"1 week ago",weeksAgo:"{delta} weeks ago",monthAgo:"1 month ago",monthsAgo:"{delta} months ago",yearAgo:"1 year ago",yearsAgo:"{delta} years ago",lessThanMinuteUntil:"less than a minute from now",minuteUntil:"about a minute from now",minutesUntil:"{delta} minutes from now",hourUntil:"about an hour from now",hoursUntil:"about {delta} hours from now",dayUntil:"1 day from now",daysUntil:"{delta} days from now",weekUntil:"1 week from now",weeksUntil:"{delta} weeks from now",monthUntil:"1 month from now",monthsUntil:"{delta} months from now",yearUntil:"1 year from now",yearsUntil:"{delta} years from now"}),function(){var t=this.Date,e=t.Methods={ms:"Milliseconds",year:"FullYear",min:"Minutes",mo:"Month",sec:"Seconds",hr:"Hours"};["Date","Day","FullYear","Hours","Milliseconds","Minutes","Month","Seconds","Time","TimezoneOffset","Week","Timezone","GMTOffset","DayOfYear","LastMonth","LastDayOfMonth","UTCDate","UTCDay","UTCFullYear","AMPM","Ordinal","UTCHours","UTCMilliseconds","UTCMinutes","UTCMonth","UTCSeconds","UTCMilliseconds"].each((function(e){t.Methods[e.toLowerCase()]=e}));var n=function(t,e,r){return 1==e?t:t<Math.pow(10,e-1)?(r||"0")+n(t,e-1,r):t};t.implement({set:function(t,n){t=t.toLowerCase();var r=e[t]&&"set"+e[t];return r&&this[r]&&this[r](n),this}.overloadSetter(),get:function(t){t=t.toLowerCase();var n=e[t]&&"get"+e[t];return n&&this[n]?this[n]():null}.overloadGetter(),clone:function(){return new t(this.get("time"))},increment:function(e,n){switch(n=null!=n?n:1,e=e||"day"){case"year":return this.increment("month",12*n);case"month":var r=this.get("date");return this.set("date",1).set("mo",this.get("mo")+n),this.set("date",r.min(this.get("lastdayofmonth")));case"week":return this.increment("day",7*n);case"day":return this.set("date",this.get("date")+n)}if(!t.units[e])throw new Error(e+" is not a supported interval");return this.set("time",this.get("time")+n*t.units[e]())},decrement:function(t,e){return this.increment(t,-1*(null!=e?e:1))},isLeapYear:function(){return t.isLeapYear(this.get("year"))},clearTime:function(){return this.set({hr:0,min:0,sec:0,ms:0})},diff:function(e,n){return"string"==typeOf(e)&&(e=t.parse(e)),((e-this)/t.units[n||"day"](3,3)).round()},getLastDayOfMonth:function(){return t.daysInMonth(this.get("mo"),this.get("year"))},getDayOfYear:function(){return(t.UTC(this.get("year"),this.get("mo"),this.get("date")+1)-t.UTC(this.get("year"),0,1))/t.units.day()},setDay:function(e,n){null==n&&""===(n=t.getMsg("firstDayOfWeek"))&&(n=1),e=(7+t.parseDay(e,!0)-n)%7;var r=(7+this.get("day")-n)%7;return this.increment("day",e-r)},getWeek:function(e){null==e&&""===(e=t.getMsg("firstDayOfWeek"))&&(e=1);var n,r=this,i=(7+r.get("day")-e)%7,a=0;if(1==e){var o=r.get("month"),s=r.get("date")-i;if(11==o&&s>28)return 1;0==o&&s<-2&&(r=new t(r).decrement("day",i),i=0),(n=new t(r.get("year"),0,1).get("day")||7)>4&&(a=-7)}else n=new t(r.get("year"),0,1).get("day");return a+=r.get("dayofyear"),a+=6-i,(a+=(7+n-e)%7)/7},getOrdinal:function(e){return t.getMsg("ordinal",e||this.get("date"))},getTimezone:function(){return this.toString().replace(/^.*? ([A-Z]{3}).[0-9]{4}.*$/,"$1").replace(/^.*?\(([A-Z])[a-z]+ ([A-Z])[a-z]+ ([A-Z])[a-z]+\)$/,"$1$2$3")},getGMTOffset:function(){var t=this.get("timezoneOffset");return(t>0?"-":"+")+n((t.abs()/60).floor(),2)+n(t%60,2)},setAMPM:function(t){t=t.toUpperCase();var e=this.get("hr");return e>11&&"AM"==t?this.decrement("hour",12):e<12&&"PM"==t?this.increment("hour",12):this},getAMPM:function(){return this.get("hr")<12?"AM":"PM"},parse:function(e){return this.set("time",t.parse(e)),this},isValid:function(t){return t||(t=this),"date"==typeOf(t)&&!isNaN(t.valueOf())},format:function(e){if(!this.isValid())return"invalid date";if(e||(e="%x %X"),"string"==typeof e&&(e=a[e.toLowerCase()]||e),"function"==typeof e)return e(this);var r=this;return e.replace(/%([a-z%])/gi,(function(e,i){switch(i){case"a":return t.getMsg("days_abbr")[r.get("day")];case"A":return t.getMsg("days")[r.get("day")];case"b":return t.getMsg("months_abbr")[r.get("month")];case"B":return t.getMsg("months")[r.get("month")];case"c":return r.format("%a %b %d %H:%M:%S %Y");case"d":return n(r.get("date"),2);case"e":return n(r.get("date"),2," ");case"H":return n(r.get("hr"),2);case"I":return n(r.get("hr")%12||12,2);case"j":return n(r.get("dayofyear"),3);case"k":return n(r.get("hr"),2," ");case"l":return n(r.get("hr")%12||12,2," ");case"L":return n(r.get("ms"),3);case"m":return n(r.get("mo")+1,2);case"M":return n(r.get("min"),2);case"o":return r.get("ordinal");case"p":return t.getMsg(r.get("ampm"));case"s":return Math.round(r/1e3);case"S":return n(r.get("seconds"),2);case"T":return r.format("%H:%M:%S");case"U":return n(r.get("week"),2);case"w":return r.get("day");case"x":return r.format(t.getMsg("shortDate"));case"X":return r.format(t.getMsg("shortTime"));case"y":return r.get("year").toString().substr(2);case"Y":return r.get("year");case"z":return r.get("GMTOffset");case"Z":return r.get("Timezone")}return i}))},toISOString:function(){return this.format("iso8601")}}).alias({toJSON:"toISOString",compare:"diff",strftime:"format"});var r=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],i=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],a={db:"%Y-%m-%d %H:%M:%S",compact:"%Y%m%dT%H%M%S",short:"%d %b %H:%M",long:"%B %d, %Y %H:%M",rfc822:function(t){return r[t.get("day")]+t.format(", %d ")+i[t.get("month")]+t.format(" %Y %H:%M:%S %Z")},rfc2822:function(t){return r[t.get("day")]+t.format(", %d ")+i[t.get("month")]+t.format(" %Y %H:%M:%S %z")},iso8601:function(t){return t.getUTCFullYear()+"-"+n(t.getUTCMonth()+1,2)+"-"+n(t.getUTCDate(),2)+"T"+n(t.getUTCHours(),2)+":"+n(t.getUTCMinutes(),2)+":"+n(t.getUTCSeconds(),2)+"."+n(t.getUTCMilliseconds(),3)+"Z"}},o=[],s=t.parse,u=function(e,n,r){var i=-1,a=t.getMsg(e+"s");switch(typeOf(n)){case"object":i=a[n.get(e)];break;case"number":if(!(i=a[n]))throw new Error("Invalid "+e+" index: "+n);break;case"string":var o=a.filter((function(t){return this.test(t)}),new RegExp("^"+n,"i"));if(!o.length)throw new Error("Invalid "+e+" string");if(o.length>1)throw new Error("Ambiguous "+e);i=o[0]}return r?a.indexOf(i):i},c=1900,l=70;t.extend({getMsg:function(t,e){return Locale.get("Date."+t,e)},units:{ms:Function.convert(1),second:Function.convert(1e3),minute:Function.convert(6e4),hour:Function.convert(36e5),day:Function.convert(864e5),week:Function.convert(6084e5),month:function(e,n){var r=new t;return 864e5*t.daysInMonth(null!=e?e:r.get("mo"),null!=n?n:r.get("year"))},year:function(e){return e=e||(new t).get("year"),t.isLeapYear(e)?316224e5:31536e6}},daysInMonth:function(e,n){return[31,t.isLeapYear(n)?29:28,31,30,31,30,31,31,30,31,30,31][e]},isLeapYear:function(t){return t%4==0&&t%100!=0||t%400==0},parse:function(e){var n,r=typeOf(e);return"number"==r?new t(e):"string"!=r?e:(e=e.clean()).length?(o.some((function(t){var r=t.re.exec(e);return!!r&&(n=t.handler(r))})),n&&n.isValid()||(n=new t(s(e)))&&n.isValid()||(n=new t(e.toInt())),n):null},parseDay:function(t,e){return u("day",t,e)},parseMonth:function(t,e){return u("month",t,e)},parseUTC:function(e){var n=new t(e),r=t.UTC(n.get("year"),n.get("mo"),n.get("date"),n.get("hr"),n.get("min"),n.get("sec"),n.get("ms"));return new t(r)},orderIndex:function(e){return t.getMsg("dateOrder").indexOf(e)+1},defineFormat:function(t,e){return a[t]=e,this},defineParser:function(t){return o.push(t.re&&t.handler?t:g(t)),this},defineParsers:function(){return Array.flatten(arguments).each(t.defineParser),this},define2DigitYearStart:function(t){return c=t-(l=t%100),this}}).extend({defineFormats:t.defineFormat.overloadSetter()});var h,f=function(e){return new RegExp("(?:"+t.getMsg(e).map((function(t){return t.substr(0,3)})).join("|")+")[a-z]*")},d={d:/[0-2]?[0-9]|3[01]/,H:/[01]?[0-9]|2[0-3]/,I:/0?[1-9]|1[0-2]/,M:/[0-5]?\d/,s:/\d+/,o:/[a-z]*/,p:/[ap]\.?m\.?/,y:/\d{2}|\d{4}/,Y:/\d{4}/,z:/Z|[+-]\d{2}(?::?\d{2})?/};d.m=d.I,d.S=d.M;var g=function(e){if(!h)return{format:e};var n=[],r=(e.source||e).replace(/%([a-z])/gi,(function(e,n){return function(e){switch(e){case"T":return"%H:%M:%S";case"x":return(1==t.orderIndex("month")?"%m[-./]%d":"%d[-./]%m")+"([-./]%y)?";case"X":return"%H([.:]%M)?([.:]%S([.:]%s)?)? ?%p? ?%z?"}return null}(n)||e})).replace(/\((?!\?)/g,"(?:").replace(/ (?!\?|\*)/g,",? ").replace(/%([a-z%])/gi,(function(t,e){var r=d[e];return r?(n.push(e),"("+r.source+")"):e})).replace(/\[a-z\]/gi,"[a-z\\u00c0-\\uffff;&]");return{format:e,re:new RegExp("^"+r+"$","i"),handler:function(e){e=e.slice(1).associate(n);var r=(new t).clearTime(),i=e.y||e.Y;for(var a in null!=i&&p.call(r,"y",i),"d"in e&&p.call(r,"d",1),("m"in e||e.b||e.B)&&p.call(r,"m",1),e)p.call(r,a,e[a]);return r}}},p=function(e,n){if(!n)return this;switch(e){case"a":case"A":return this.set("day",t.parseDay(n,!0));case"b":case"B":return this.set("mo",t.parseMonth(n,!0));case"d":return this.set("date",n);case"H":case"I":return this.set("hr",n);case"m":return this.set("mo",n-1);case"M":return this.set("min",n);case"p":return this.set("ampm",n.replace(/\./g,""));case"S":return this.set("sec",n);case"s":return this.set("ms",1e3*("0."+n));case"w":return this.set("day",n);case"Y":return this.set("year",n);case"y":return(n=+n)<100&&(n+=c+(n<l?100:0)),this.set("year",n);case"z":"Z"==n&&(n="+00");var r=n.match(/([+-])(\d{2}):?(\d{2})?/);return r=(r[1]+"1")*(60*r[2]+(+r[3]||0))+this.getTimezoneOffset(),this.set("time",this-6e4*r)}return this};t.defineParsers("%Y([-./]%m([-./]%d((T| )%X)?)?)?","%Y%m%d(T%H(%M%S?)?)?","%x( %X)?","%d%o( %b( %Y)?)?( %X)?","%b( %d%o)?( %Y)?( %X)?","%Y %b( %d%o( %X)?)?","%o %b %d %X %z %Y","%T","%H:%M( ?%p)?"),Locale.addEvent("change",(function(t){Locale.get("Date")&&function(t){h=t,d.a=d.A=f("days"),d.b=d.B=f("months"),o.each((function(t,e){t.format&&(o[e]=g(t.format))}))}(t)})).fireEvent("change",Locale.getCurrent())}(),Locale.define("zh-CHS","Date",{months:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],months_abbr:["一","二","三","四","五","六","七","八","九","十","十一","十二"],days:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],days_abbr:["日","一","二","三","四","五","六"],dateOrder:["year","month","date"],shortDate:"%Y-%m-%d",shortTime:"%I:%M%p",AM:"AM",PM:"PM",firstDayOfWeek:1,ordinal:"",lessThanMinuteAgo:"不到1分钟前",minuteAgo:"大约1分钟前",minutesAgo:"{delta}分钟之前",hourAgo:"大约1小时前",hoursAgo:"大约{delta}小时前",dayAgo:"1天前",daysAgo:"{delta}天前",weekAgo:"1星期前",weeksAgo:"{delta}星期前",monthAgo:"1个月前",monthsAgo:"{delta}个月前",yearAgo:"1年前",yearsAgo:"{delta}年前",lessThanMinuteUntil:"从现在开始不到1分钟",minuteUntil:"从现在开始約1分钟",minutesUntil:"从现在开始约{delta}分钟",hourUntil:"从现在开始1小时",hoursUntil:"从现在开始约{delta}小时",dayUntil:"从现在开始1天",daysUntil:"从现在开始{delta}天",weekUntil:"从现在开始1星期",weeksUntil:"从现在开始{delta}星期",monthUntil:"从现在开始一个月",monthsUntil:"从现在开始{delta}个月",yearUntil:"从现在开始1年",yearsUntil:"从现在开始{delta}年"}),Locale.define("zh-CHT","Date",{months:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],months_abbr:["一","二","三","四","五","六","七","八","九","十","十一","十二"],days:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],days_abbr:["日","一","二","三","四","五","六"],dateOrder:["year","month","date"],shortDate:"%Y-%m-%d",shortTime:"%I:%M%p",AM:"AM",PM:"PM",firstDayOfWeek:1,ordinal:"",lessThanMinuteAgo:"不到1分鐘前",minuteAgo:"大約1分鐘前",minutesAgo:"{delta}分鐘之前",hourAgo:"大約1小時前",hoursAgo:"大約{delta}小時前",dayAgo:"1天前",daysAgo:"{delta}天前",weekAgo:"1星期前",weeksAgo:"{delta}星期前",monthAgo:"1个月前",monthsAgo:"{delta}个月前",yearAgo:"1年前",yearsAgo:"{delta}年前",lessThanMinuteUntil:"從現在開始不到1分鐘",minuteUntil:"從現在開始約1分鐘",minutesUntil:"從現在開始約{delta}分鐘",hourUntil:"從現在開始1小時",hoursUntil:"從現在開始約{delta}小時",dayUntil:"從現在開始1天",daysUntil:"從現在開始{delta}天",weekUntil:"從現在開始1星期",weeksUntil:"從現在開始{delta}星期",monthUntil:"從現在開始一個月",monthsUntil:"從現在開始{delta}個月",yearUntil:"從現在開始1年",yearsUntil:"從現在開始{delta}年"}),"undefined"==typeof JSON&&(this.JSON={}),function(){var special={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"},escape=function(t){return special[t]||"\\u"+("0000"+t.charCodeAt(0).toString(16)).slice(-4)};JSON.validate=function(t){return t=t.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,"@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,""),/^[\],:{}\s]*$/.test(t)},JSON.encode=JSON.stringify?function(t){return JSON.stringify(t)}:function(t){switch(t&&t.toJSON&&(t=t.toJSON()),typeOf(t)){case"string":return'"'+t.replace(/[\x00-\x1f\\"]/g,escape)+'"';case"array":return"["+t.map(JSON.encode).clean()+"]";case"object":case"hash":var e=[];return Object.each(t,(function(t,n){var r=JSON.encode(t);r&&e.push(JSON.encode(n)+":"+r)})),"{"+e+"}";case"number":case"boolean":return""+t;case"null":return"null"}return null},JSON.decode=function(string,secure){if(!string||"string"!=typeOf(string))return null;if(secure||JSON.secure){if(JSON.parse)return JSON.parse(string);if(!JSON.validate(string))throw new Error("JSON could not decode the input; security is enabled and the value is not secure.")}return eval("("+string+")")}}();
 
-//fetch方法
+//fetch 메서드
 const _getBytes = function(str){
     const buffer = new ArrayBuffer(str.length);
     const uint8Array = new Uint8Array(buffer);
@@ -11,29 +11,29 @@ const _getBytes = function(str){
     return uint8Array;
 }
 /**
- * this.fetch是一个方法，用于发起http请求。<br/>
- * fetch方法模拟浏览器环境中Fetch API，但要简化一些。fetch方法调用java.net.HttpURLConnection类发起请求。
+ * this.fetch는 http 요청을 보내는 메서드.<br/>
+ * fetch 메서드는 브라우저 환경의 Fetch API를 간소화해 모방함. fetch 메서드는 java.net.HttpURLConnection 클래스를 호출해 요청을 보냄.
  * @module fetch()
  * @o2category server.common
  * @o2ordernumber 150
- * @o2cn 方法定义
- * @param {(String)} url 要获取资源的 URL。
- * @param {Object} options  一个配置项对象，包括对请求的设置。可选的参数有：method, headers, body
- * @return {Promise} resolve 时回传 Response 对象。
+ * @o2cn 메서드 정의
+ * @param {(String)} url 리소스를 가져올 URL.
+ * @param {Object} options  요청 설정을 포함하는 설정 객체. 선택 매개변수: method, headers, body
+ * @return {Promise} resolve 시 Response 객체 전달.
  * @o2syntax
  * const resPromise = fetch(url, options);
  * @example
  * <caption>
- *    <b>样例一：<b> 发起一个GET请求，获取响应文本：
+ *    <b>예시 1:<b> GET 요청을 보내 응답 텍스트 조회:
  * </caption>
  * fetch('http://hostname/resource').then((res)=>{
  *      return res.text();
  * }).then((text)=>{
- *      console.log(`响应的文本信息是：${text}`);
+ *      console.log(`응답 텍스트 정보: ${text}`);
  * });
  * @example
  * <caption>
- *    <b>样例二一：<b> 发起get请求。获取json数据，并在header中附带认证信息。
+ *    <b>예시 21:<b> get 요청 실행. json 데이터를 조회하고 header에 인증 정보 첨부.
  * </caption>
  * fetch('http://hostname/resource', {
  *     headers: {
@@ -42,12 +42,12 @@ const _getBytes = function(str){
  * }).then((res)=>{
  *      return res.json();
  * }).then((json)=>{
- *      console.log(`响应的json对象是：${JSON.stringify(json, null, '\t')}`);
+ *      console.log(`응답 json 객체:${JSON.stringify(json, null, '\t')}`);
  * });
  *
  * @example
  * <caption>
- *    <b>样例三：<b> 发起一个POST请求，获取响应json：
+ *    <b>예시 3:<b> POST 요청을 실행하고 응답 json 조회:
  * </caption>
  * fetch('http://hostname/resource', {
  *     method: 'post',
@@ -58,28 +58,28 @@ const _getBytes = function(str){
  * }).then((res)=>{
  *      return res.json();
  * }).then((json)=>{
- *      console.log(`响应的json对象是：${JSON.stringify(json, null, '\t')}`);
+ *      console.log(`응답 json 객체:${JSON.stringify(json, null, '\t')}`);
  * });
  *
  * @example
  * <caption>
- *    <b>样例四：<b> 使用res.blob()方法获取Response流（java.io.ByteArrayInputStream）；或使用res.arrayBuffer()方法获取Response的ArrayBuffer对象
+ *    <b>예시 4:<b> res.blob() 메서드로 Response 스트림(java.io.ByteArrayInputStream) 조회, 또는 res.arrayBuffer() 메서드로 Response의 ArrayBuffer 객체 조회
  * </caption>
  * fetch('http://hostname/resource').then((res)=>{
  *      return res.blob();
  * }).then((blob)=>{
- *      //获取到 blob，实际上是一个（java.io.ByteArrayInputStream）对象
+ *      //조회한 blob, 실제로는 (java.io.ByteArrayInputStream) 객체
  * });
  *
  * fetch('http://hostname/resource').then((res)=>{
  *      return res.arrayBuffer();
  * }).then((arrayBuffer)=>{
- *      //获取到 arrayBuffer对象
+ *      //조회한 arrayBuffer 객체
  * });
  *
  * @example
  * <caption>
- *    <b>样例五：<b> 错误处理。如果遇到网络错误，fetch将会reject，而如果是服务器响应的错误，如:500, 415等不是一个网络故障，所以想要精确的判断 fetch() 是否成功，需要包含 promise resolved 的情况下，再判断 res.ok 是否为 true。
+ *    <b>예시 5:<b> 오류 처리. 네트워크 오류가 발생하면 fetch는 reject되지만, 500, 415 등 서버 응답 오류는 네트워크 장애가 아니므로 fetch() 성공 여부를 정확히 판단하려면 promise resolved 인 경우를 포함해 res.ok 가 true 인지 확인해야 함.
  * </caption>
  * fetch('http://hostname/resource').then((res)=>{
  *      if (!res.ok){
@@ -87,43 +87,43 @@ const _getBytes = function(str){
  *      }
  *      return res.json();
  * }).then((json)=>{
- *      console.log(`响应的json对象是：${JSON.stringify(json, null, '\t')}`);
+ *      console.log(`응답 json 객체:${JSON.stringify(json, null, '\t')}`);
  * }).catch((e)=>{
- *     //处理请求错误
+ *     //요청 오류 처리
  * });
  *
  * @example
  * <caption>
- *    <b>样例六：<b> 获取响应的信息。
+ *    <b>예시 6:<b> 응답 정보 조회.
  * </caption>
  * fetch('http://hostname/resource').then((res)=>{
- *      res.ok          //请求是否成功
- *      res.status      //请求响应的状态码
- *      res.statusText  //请求响应的状态文本
- *      res.headers     //响应头
- *      res.error       //java.net.HttpURLConnection的错误流
- *      res.connection  //java.net.HttpURLConnection对象
+ *      res.ok          //요청 성공 여부
+ *      res.status      //요청 응답 상태 코드
+ *      res.statusText  //요청 응답 상태 텍스트
+ *      res.headers     //응답 헤더
+ *      res.error       //java.net.HttpURLConnection의 오류 스트림
+ *      res.connection  //java.net.HttpURLConnection 객체
  *
- *      res.text()          //响应内容文本
- *      res.json()          //响应内容json对象
- *      res.blob()          //响应内容Response流（java.io.ByteArrayInputStream）
- *      res.arrayBuffer()   //响应内容Response的ArrayBuffer对象
+ *      res.text()          //응답 내용 텍스트
+ *      res.json()          //응답 내용 json 객체
+ *      해당 사용자의 속성 값 배열 반환.
+ *      res.arrayBuffer()   //응답 내용 Response의 ArrayBuffer 객체
  * });
  *
  * @example
  * <caption>
- *    <b>样例七：<b> 使用await。
+ *    <b>예시 7:<b> await 사용.
  * </caption>
  * try{
  *      const res = await fetch('http://hostname/resource');
  *      if (res.ok){
  *          const json = await res.json();
- *          //获取到json对象
+ *          //json 객체 조회
  *      }else{
- *          log.error(`请求出现错误：${res.statusText}`);
+ *          log.error(`요청 오류 발생: ${res.statusText}`);
  *      }
  * }catch(e){
- *      log.error(`请求出现错误：${e.message}`);
+ *      log.error(`요청 오류 발생: ${e.message}`);
  * }
  */
 const fetch = function(url, options = {}) {
@@ -132,16 +132,16 @@ const fetch = function(url, options = {}) {
     return new Promise((resolve, reject) => {
         try{
             const httpURLConnection = urlObj.openConnection();
-            // 设置请求方法
+            // 요청 메서드 설정
             httpURLConnection.setRequestMethod(options.method ? options.method.toUpperCase() : 'GET');
-            // 设置请求头
+            // 요청 헤더 설정
             if (options.headers) {
                 for (const [header, value] of Object.entries(options.headers)) {
                     httpURLConnection.setRequestProperty(header, value);
                 }
             }
 
-            // 处理请求体
+            // 요청 본문 처리
             if (options.body) {
                 httpURLConnection.setDoOutput(true);
                 const output = httpURLConnection.getOutputStream();
@@ -150,7 +150,7 @@ const fetch = function(url, options = {}) {
                 output.close();
             }
 
-            // 获取响应码
+            // 응답 코드 조회
             const responseCode = httpURLConnection.getResponseCode();
 
             const getResponseBody = function(inputStream, encode){
@@ -214,18 +214,18 @@ const fetch = function(url, options = {}) {
     });
 }
 
-//执行JS脚本
+//JS 스크립트 실행
 /**
- * 执行代码片段，类似eval。使用Function包装。
+ * 코드 조각 실행, eval과 유사. Function으로 감싸서 실행.
  * @module exec()
  * @o2category server.common
  * @o2ordernumber 151
- * @o2cn 方法定义
- * @param text {String} 需要执行的代码片段
- * @param bind {Object} 代码片段中this的指向
- * @param arg {Object} 传入参数。如：{x:1, y:'5'}，在代码片段中可使用 x 和 y 变量。
- * @param throwError {boolean} 当代码片段运行错误时，是否抛出错误
- * @returns {any} 返回执行的代码片段的返回值
+ * @o2cn 메서드 정의
+ * @param text {String} 실행할 코드 조각
+ * @param bind {Object} 코드 조각에서 this가 가리키는 대상
+ * @param arg {Object} 전달 인자. 예: {x:1, y:'5'}, 코드 조각에서 x와 y 변수를 사용할 수 있음.
+ * @param throwError {boolean} 코드 조각 실행 오류 시 오류를 던질지 여부
+ * @returns {any} 실행한 코드 조각의 반환값
  */
 const exec = function(text, bind, arg=null, throwError=true){
     const b = bind || globalThis;
@@ -240,28 +240,28 @@ const exec = function(text, bind, arg=null, throwError=true){
     }
 }
 
-//方法定义
+//메서드 정의
 /**
- * this.define是一个方法，您在脚本中您可以通过this.define()来定义自己的方法。<br/>
- * 通过这种方式定义方法，在不同的应用使用相同的方法名称也不会造成冲突。
+ * this.define은 메서드이며, 스크립트에서 this.define()으로 자체 메서드를 정의할 수 있음.<br/>
+ * 이 방식으로 메서드를 정의하면 서로 다른 앱에서 같은 메서드 이름을 사용해도 충돌하지 않습니다.
  * @module define()
  * @o2category server.common
  * @o2ordernumber 160
- * @o2cn 方法定义
- * @param {(String)} name 定义的方法名称。
- * @param {Function} fun  定义的方法
- * @param {Boolean} [overwrite] 定义的方法是否能被覆盖重写。默认值为true。
+ * @o2cn 메서드 정의
+ * @param {(String)} name 정의할 메서드 이름.
+ * @param {Function} fun  정의할 메서드
+ * @param {Boolean} [overwrite] 정의한 메서드의 덮어쓰기 허용 여부. 기본값 true.
  * @o2syntax
  * this.define(name, fun, overwrite)
  * @example
  * <caption>
- *    <b>样例一：</b>在通用脚本中定义一个通用的方法去获取公文管理所有的文种，在查询语句中根据该方法来拼接JPQL。<br/>
- *     1、在内容管理应用中有一个fileRes的应用，在该应用中创建一个脚本，命名为FileSql，并定义方法。
+ *    <b>예시 1:</b> 공용 스크립트에서 공문 관리의 모든 문서 종류를 조회하는 공용 메서드를 정의하고, 쿼리 구문에서 이 메서드로 JPQL을 조합.<br/>
+ *     1. 콘텐츠 관리에 fileRes 앱이 있고, 이 앱에서 스크립트를 만들어 FileSql로 이름 짓고 메서드를 정의.
  *     <img src='img/module/include/server_define1.png' />
  * </caption>
- * //定义一个方法
+ * //메서드 정의
  * this.define("getFileSQL",function(){
- *   const application = ["公司发文","部门发文","党委发文"];
+ *   const application = ["회사 발신 문서","부서 발신 문서","당위원회 발신 문서"];
  *   const appSql = " ( ";
  *   for (let i=0; i<application.length; i++){
  *       if (i==application.length-1){
@@ -275,7 +275,7 @@ const exec = function(text, bind, arg=null, throwError=true){
  *});
  * @example
  * <caption>
- *      2、在查询语句中使用该方法。
+ *      2. 쿼리 구문에서 이 메서드 사용.
  *     <img src='img/module/include/server_define2.png'/>
  * </caption>
  * this.include({
@@ -295,7 +295,7 @@ const define = function(name, fun, overwrite){
     Object.defineProperties(globalThis, o);
 }
 
-//restful服务Action
+//restful 서비스 Action
 const Action = function(root, json){
     this.actions = json;
     this.root = root;
@@ -393,135 +393,135 @@ Object.assign(Action, {
 });
 
 /**
- * 本文档说明如何在后台脚本中使用Actions调用平台的RESTful服务。<br/>
- * 通过访问以下地址来查询服务列表：http://server/x_program_center/jest/list.html (v7.2之前版本需要加端口20030)
+ * 이 문서는 백엔드 스크립트에서 Actions로 플랫폼의 RESTful 서비스를 호출하는 방법을 설명함.<br/>
+ * 다음 주소에서 서비스 목록 조회: http://server/x_program_center/jest/list.html (v7.2 이전 버전은 포트 20030 추가 필요)
  * @module server.Actions
- * @o2cn 服务调用
+ * @o2cn 서비스 호출
  * @o2category server.common
  * @o2ordernumber 165
  * @o2syntax
- * //获取Actions
+ * //Actions 조회
  * this.Actions
  */
 const Actions = {
     "loadedActions": {},
     /**
-     * 平台预置了Actions对象用于调用平台提供的服务，您可以使用this.Actions.load来获取这些方法。由于是运行在服务器端，服务都是同步调用。
+     * 플랫폼은 플랫폼 제공 서비스를 호출하는 Actions 객체를 미리 제공하며, this.Actions.load로 이 메서드들을 가져올 수 있습니다. 서버에서 실행되므로 서비스는 모두 동기 호출입니다.
      * @method load
      * @methodOf module:server.Actions
      * @instance
-     * @param {String} root 平台RESTful服务根，具体服务列表参见:http://server/x_program_center/jest/list.html。(v7.2之前版本需要加端口20030)
-     * 如:
+     * @param {String} root 플랫폼 RESTful 서비스 루트, 서비스 목록은 http://server/x_program_center/jest/list.html 참고.(v7.2 이전 버전은 포트 20030 추가 필요)
+     * 예:
      *<pre><code class='language-js'>
-     * "x_processplatform_assemble_surface" //流程平台相关服务根
+     * "x_processplatform_assemble_surface" //프로세스 플랫폼 관련 서비스 루트
      * </code></pre>
-     * @return {Object} 返回action对象，用于后续服务调用
+     * @return {Object} 이후 서비스 호출에 사용할 action 객체 반환
      * @o2syntax
      * var actions = this.Actions.load( root );
      * @o2syntax
-     * //获取流程平台服务对象。
+     * //프로세스 플랫폼 서비스 객체 조회.
      * var processAction = this.Actions.load("x_processplatform_assemble_surface");
      * @o2syntax
      * <caption>
-     *     通过this.Actions.load(root)方法得到action对象，就可以访问此服务下的方法了。<br/>
-     *     访问方法的规则如下：
+     *     this.Actions.load(root) 메서드로 action 객체를 얻으면 이 서비스의 메서드에 접근할 수 있습니다.<br/>
+     *     메서드 접근 규칙은 다음과 같습니다:
      *  </caption>
      *  var requestString = this.Actions.load( root )[actionName][methodName]( arguements );
      *
-     *  requestString : 服务返回的响应数据，字符串格式，可以通过 requestObjest = JSON.parse(requestString);解析成对象
+     *  requestString : 서비스가 반환한 응답 데이터, 문자열 형식, requestObjest = JSON.parse(requestString); 로 객체로 파싱 가능
      *
-     *  root : 平台服务根名称，如果 x_processplatform_assemble_surface
+     *  root : 플랫폼 서비스 루트 이름. 예: x_processplatform_assemble_surface
      *
-     *  actionName : 服务下的Action分类名称，如 TaskAction
+     *  actionName : 서비스 아래 Action 분류 이름. 예: TaskAction
      *
-     *  methodName : Action分类下的方法名称，如 get
+     *  methodName : Action 분류 아래 메서드 이름. 예: get
      *
-     *  arguements : 需调用的RESTful服务的相关参数。这些参数需要按照先后顺序传入。根据实际情况可以省略某些参数。参数序列分别是:
+     *  arguements : 호출할 RESTful 서비스의 관련 매개변수. 순서대로 전달해야 하며, 상황에 따라 일부 매개변수는 생략할 수 있습니다. 매개변수 순서는 다음과 같습니다:
      *
-     *      uri的参数, data(Post, Put方法), success, failure, async。
+     *      uri 파라미터, data(Post, Put 메서드), success, failure, async.
      *
-     *      uri参数：如果有uri有多个参数，需要按先后顺序传入。
+     *      uri 매개변수: uri 매개변수가 여러 개이면 순서대로 전달해야 합니다.
      *
-     *      data参数：要提交到后台的数据。POST 和 PUT 方法需要传入，GET方法和DELETE方法省略。
+     *      data 파라미터: 백엔드에 제출할 데이터. POST 와 PUT 메서드는 전달 필요, GET 메서드와 DELETE 메서드는 생략.
      *
-     *      success参数：服务执行成功时的回调方法，形如 function(json){
-     *          json为后台服务传回的数据
+     *      success 매개변수: 서비스 실행 성공 시 콜백 메서드. 형식: function(json){
+     *          json은 서버 서비스가 반환한 데이터
      *      }。
      *
-     *      failure 参数：服务执行失败时的回调方法，形如 function(xhr){
-     *          xhr XmlHttpRequest对象，服务器请求失败时有值
+     *      failure 매개변수: 서비스 실행 실패 시 콜백 메서드. 형식: function(xhr){
+     *          xhr XmlHttpRequest 객체, 서버 요청 실패 시 값이 있음
      *       }
-     *      此参数可以省略，如果省略，系统会自动弹出错误信息。
+     *      이 매개변수는 생략할 수 있으며, 생략하면 시스템이 오류 메시지를 자동으로 띄웁니다.
      *  @o2syntax
      *  <caption>
-     *  处理返回的数据有两种方式，二选一即可：<br/>
-     *  1、该方法返回的结果是响应的 json对象。<br/>
-     *  2、通过success方法作为第一个参数来处理结果。
+     *  반환 데이터 처리 방법은 두 가지이며 하나를 선택하면 됩니다:<br/>
+     *  1. 이 메서드가 반환하는 결과는 응답 json 객체.<br/>
+     *  2. success 메서드를 첫 번째 파라미터로 전달해 결과 처리.
      *  </caption>
-     *  //success：arguements中的第一个function对象
+     *  //success: arguements 중 첫 번째 function 객체
      *  function(json){
-     *    //json为后台服务传回的数据
+     *    //json은 서버 서비스가 반환한 데이터
      *  }
      *  @example
      * <caption>
-     *     <b>样例1:</b>
-     *     根据x_processplatform_assemble_surface服务获取当前用户的待办列表：<br/>
-     *     可以通过对应服务的查询页面，http://server/x_processplatform_assemble_surface/jest/index.html (v7.2之前版本需要加端口20020)<br/>
-     *     可以看到以下界面：<img src="img/module/Actions/Actions.png"/>
-     *     我们可以找到TaskAction的V2ListPaging服务是列式当前用户待办的服务。<br/>
-     *     该服务有以下信息：<br/>
-     *     1、actionName是：TaskAction<br/>
-     *     2、methodName是：V2ListPaging<br/>
-     *     3、有两个url参数，分别是 page(分页), size(每页数量)<br/>
-     *     4、有一系列的body参数<br/>
-     *     5、该服务方法类型是POST<br/>
-     *     根据这些信息我们可以组织出下面的方法：
+     *     <b>예시 1:</b>
+     *     x_processplatform_assemble_surface 서비스로 현재 사용자의 결재 대기 목록 조회:<br/>
+     *     해당 서비스의 조회 페이지에서 확인 가능, http://server/x_processplatform_assemble_surface/jest/index.html (v7.2 이전 버전은 포트 20020 추가 필요)<br/>
+     *     다음 화면을 볼 수 있습니다:<img src="img/module/Actions/Actions.png"/>
+     *     TaskAction의 V2ListPaging 서비스가 현재 사용자의 결재 대기를 나열하는 서비스임을 찾을 수 있습니다.<br/>
+     *     이 서비스의 정보는 다음과 같습니다:<br/>
+     *     1. actionName: TaskAction<br/>
+     *     2. methodName: V2ListPaging<br/>
+     *     3. url 매개변수 2개: page(페이지), size(페이지당 개수)<br/>
+     *     4. 일련의 body 매개변수<br/>
+     *     5. 이 서비스 메서드 유형은 POST<br/>
+     *     이 정보로 다음과 같은 메서드를 구성할 수 있습니다:
      * </caption>
-     * const processAction = this.Actions.load("x_processplatform_assemble_surface"); //获取action
-     * const method = processAction.TaskAction.V2ListPaging; //获取列式方法
-     * //执行方法1
+     * const processAction = this.Actions.load("x_processplatform_assemble_surface"); //action 조회
+     * const method = processAction.TaskAction.V2ListPaging; //목록 메서드 조회
+     * //실행 방법 1
      * method(
-     *  1,  //uri 第1个参数，如果无uri参数，可以省略
-     *  20, //uri 第2个参数，如果无uri参数，可以省略，如果还有其他uri参数，可以用逗号, 分隔
-     *  {   //body 参数，对POST和PUT请求，该参数必须传，可以为空对象
-     *      processList : [xxx] //具体参数
+     *  1,  //uri 첫 번째 매개변수, uri 매개변수가 없으면 생략 가능
+     *  20, //uri 두 번째 매개변수, uri 매개변수가 없으면 생략 가능, 다른 uri 매개변수가 있으면 쉼표(,)로 구분
+     *  {   //body 매개변수, POST와 PUT 요청은 반드시 전달해야 하며 빈 객체 가능
+     *      processList : [xxx] //구체적인 매개변수
      *  },
-     *  function(json){ //正确调用的回调
-     *       //json.data得到服务返回数据
+     *  function(json){ //정상 호출 콜백
+     *       //json.data로 서비스 반환 데이터 획득
      *  },
-     *  function(responseJSON){ //可选，错误信息, json格式
+     *  function(responseJSON){ //선택, 오류 정보, json 형식
      *      print( JSON.stringify(responseJSON) )
      *  }
      * );
      *
-     * //执行方法2
+     * //실행 방법 2
      * const responsJSON = method( 1, 20, {processList : [xxx]} );
      * @example
-     * <caption>出错信息responseJSON的格式</caption>
+     * <caption>오류 정보 responseJSON의 형식</caption>
      * {
-     *       "type": "error", //类型为错误
-     *       "message": "标识为:343434 的 Task 对象不存在.", //提示文本
-     *       "date": "2020-12-29 17:02:13", //出错时间
-     *       "prompt": "com.x.base.core.project.exception.ExceptionEntityNotExist" //后台错误类
+     *       "type": "error", //유형은 오류
+     *       "message": "식별자 343434 인 Task 객체가 존재하지 않습니다.", //안내 문구
+     *       "date": "2020-12-29 17:02:13", //오류 발생 시간
+     *       "prompt": "com.x.base.core.project.exception.ExceptionEntityNotExist" //서버 오류 클래스
      *}
      * @example
      * <caption>
-     *     <b>样例2:</b>
-     *      已知流程实例的workid，在脚本中获取数据，修改后进行保存。
+     *     <b>예시 2:</b>
+     *      프로세스 인스턴스의 workid를 알고 있을 때, 스크립트에서 데이터를 조회해 수정 후 저장.
      * </caption>
-     * //查询服务列表找到获取data数据服务为DataAction的getWithWork方法
-     * //查询服务列表找到更新data数据服务为DataAction的updateWithWork方法
+     * //서비스 목록에서 data 조회 서비스인 DataAction의 getWithWork 메서드 확인
+     * //서비스 목록에서 data 갱신 서비스인 DataAction의 updateWithWork 메서드 확인
      *
      * const workid = "cce8bc22-225a-4f85-8132-7374d546886e";
-     * const json = this.Actions.load("x_processplatform_assemble_surface").DataAction.getWithWork( //平台封装好的方法
-     *      workid, //uri的参数
+     * const json = this.Actions.load("x_processplatform_assemble_surface").DataAction.getWithWork( //플랫폼에서 래핑한 메서드
+     *      workid, //uri 매개변수
      * );
      * const data = json.data;
      *
-     * data.subject = "新标题"; //修改数据
+     * data.subject = "새 제목"; //데이터 수정
      * const result = this.Actions.load("x_processplatform_assemble_surface").DataAction.updateWithWork(
-     *      workid, //uri的参数
-     *      data, //保存的数据
+     *      workid, //uri 매개변수
+     *      data, //저장할 데이터
      * );
      */
     "load": function(root){
@@ -549,7 +549,7 @@ const Actions = {
     }
 };
 
-//log输出
+//log 출력
 const _parsePrint = function(str, ...pars){
     if (!str && str!==0 && str!==false) return str;
     let text = (typeof str!=="string") ? str.toString() : str;
@@ -561,20 +561,20 @@ const _parsePrint = function(str, ...pars){
 }
 
 /**
- * this.print是一个方法，在服务器控制台输出信息。<br/>
+ * this.print는 서버 콘솔에 정보를 출력하는 메서드입니다.<br/>
  * @module print()
- * @o2cn 控制台输出打印
+ * @o2cn 콘솔 출력
  * @o2category server.common
  * @o2ordernumber 152
  *
- * @param {(String)} text 要输出的文本信息。</b>
- * @param {(String)} type 要输出的文本信息的类型，会添加到输出信息的前面，默认为“PRINT”。</b>
+ * @param {(String)} text 출력할 텍스트 정보.</b>
+ * @param {(String)} type 출력할 텍스트 정보의 유형, 출력 정보 앞에 추가됨, 기본값은 “PRINT”.</b>
  * @example
- * this.print("这是我要输出的信息");
- * //2021-12-20 13:26:24.739 [script] PRINT 这是我要输出的信息
+ * this.print("출력할 정보입니다");
+ * //2021-12-20 13:26:24.739 [script] PRINT 출력할 정보입니다
  *
- * this.print("这是一个自定义类型的信息", "MYTYPE");
- * //2021-12-20 13:26:24.765 [script] MYTYPE 这是一个自定义类型的信息
+ * this.print("사용자 정의 유형 정보입니다", "MYTYPE");
+ * //2021-12-20 13:26:24.765 [script] MYTYPE 사용자 정의 유형 정보입니다
  */
 const print = function(text, type){
     // const d = new Intl.DateTimeFormat(undefined, {
@@ -591,23 +591,23 @@ const print = function(text, type){
 }
 
 /**
- * this.log是一个服务器控制台输出方法，可使用log, log.error, log.info, log.warn方法在服务器控制台输入信息。<br/>
+ * this.log는 서버 콘솔 출력 메서드로, log, log.error, log.info, log.warn 메서드로 서버 콘솔에 정보를 출력할 수 있습니다.<br/>
  * @module log
  * @o2category server.common
  * @o2ordernumber 155
- * @o2cn 分等级控制台输出
+ * @o2cn 등급별 콘솔 출력
  * @example
- * log("这是我要输出的信息");
- * //2021-12-20 13:26:24.739 [script] PRINT 这是我要输出的信息
+ * log("출력할 정보입니다");
+ * //2021-12-20 13:26:24.739 [script] PRINT 출력할 정보입니다
  *
- * log.error("这是一个错误信息");
- * //2021-12-20 13:26:24.765 [script] ERROR 这是一个错误信息
+ * log.error("오류 정보입니다");
+ * //2021-12-20 13:26:24.765 [script] ERROR 오류 정보입니다
  *
- * log.info("这是一个普通信息");
- * //2021-12-20 13:26:24.765 [script] INFO 这是一个普通信息
+ * log.info("일반 정보입니다");
+ * //2021-12-20 13:26:24.765 [script] INFO 일반 정보입니다
  *
- * log.warn("这是一个警告信息");
- * //2021-12-20 13:26:24.765 [script] WARN 这是一个警告信息
+ * log.warn("경고 정보입니다");
+ * //2021-12-20 13:26:24.765 [script] WARN 경고 정보입니다
  */
 const log = function(...arg){
     print(_parsePrint(...arg));
@@ -619,7 +619,7 @@ keys.forEach((k)=>{
     }
 });
 
-//组织相关服务
+//조직 관련 서비스
 const _getNameFlag = function(name){
     if (Array.isArray(name)){
         return name.map(n=>((typeof n)==="object" ? (n.distinguishedName || n.id || n.unique || n.name) : n));
@@ -629,30 +629,30 @@ const _getNameFlag = function(name){
 }
 
 /**
- * 您可以通过this.org获取组织中的人员、人员属性、组织、组织属性、身份、群组和角色。后端调用都是同步的。
+ * this.org로 조직의 사용자, 사용자 속성, 조직, 조직 속성, 신분, 그룹과 역할을 조회할 수 있습니다. 백엔드 호출은 모두 동기입니다.
  * @module server.org
- * @o2cn 组织查询
+ * @o2cn 조직 조회
  * @o2category server.common
  * @o2ordernumber 170
  * @since v9.0.4
- * @property    {GroupFactory}  group   后端的GroupFactory实例，可用于获取group群组相关数据
- * @property    {IdentityFactory}  identity   后端的IdentityFactory实例，可用于获取identity身份相关数据
- * @property    {PersonFactory}  person   后端的PersonFactory实例，可用于获取person人员相关数据
- * @property    {PersonAttributeFactory}  personAttribute   后端的GroupFactory实例，可用于获取personAttribute人员属性相关数据
- * @property    {RoleFactory}  role   后端的RoleFactory实例，可用于获取role角色相关数据
- * @property    {UnitFactory}  unit   后端的UnitFactory实例，可用于获取unit相关数据
- * @property    {UnitAttributeFactory}  unitAttribute   后端的UnitAttributeFactory实例，可用于获取unitAttribute组织属性相关数据
- * @property    {UnitDutyFactory}  unitDuty   后端的UnitDutyFactory实例，可用于获取unitDuty组织属性相关数据
+ * @property    {GroupFactory}  group   백엔드 GroupFactory 인스턴스, group 그룹 관련 데이터 조회용
+ * @property    {IdentityFactory}  identity   백엔드 IdentityFactory 인스턴스, identity 신분 관련 데이터 조회용
+ * @property    {PersonFactory}  person   백엔드 PersonFactory 인스턴스, person 사용자 관련 데이터 조회용
+ * @property    {PersonAttributeFactory}  personAttribute   백엔드 GroupFactory 인스턴스, personAttribute 사용자 속성 관련 데이터 조회용
+ * @property    {RoleFactory}  role   백엔드 RoleFactory 인스턴스, role 역할 관련 데이터 조회용
+ * @property    {UnitFactory}  unit   백엔드 UnitFactory 인스턴스, unit 관련 데이터 조회용
+ * @property    {UnitAttributeFactory}  unitAttribute   백엔드 UnitAttributeFactory 인스턴스, unitAttribute 조직 속성 관련 데이터 조회용
+ * @property    {UnitDutyFactory}  unitDuty   백엔드 UnitDutyFactory 인스턴스, unitDuty 조직 속성 관련 데이터 조회용
  * @o2syntax
- * //您可以通过以下引用来获取当前实例的org对象，如下：
+ * //다음 참조로 현재 인스턴스의 org 객체를 가져올 수 있습니다:
  * this.org;
  * globalThis.org;
  * org
  *
  *@example
- * //通过后端java类，来获取当前人所在的部门名称
+ * //백엔드 java 클래스로 현재 사용자가 속한 부서 이름 조회
  * const unit = org.unit();
- * const unitNames = unit.listWithPerson("张三@xxx@P");
+ * const unitNames = unit.listWithPerson("홍길동@xxx@P");
  */
 const org = {}
 const _javaOrg = function(){
@@ -685,19 +685,19 @@ Object.assign(org,  {
         return null;
     },
 
-    //群组***************
-    //获取群组--返回群组的对象数组
+    //그룹***************
+    //그룹 조회--그룹 객체 배열 반환
     /**
-     根据群组标识获取对应的群组对象或数组：group对象或数组
+     그룹 식별자로 해당 그룹 객체 또는 배열 조회: group 객체 또는 배열
      * @method getGroup
      * @o2membercategory group
      * @methodOf module:server.org
      * @static
-     * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-     * @return {GroupData|GroupData[]} 返回群组，单个是Object，多个是Array。
+     * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+     * @return {GroupData|GroupData[]} 그룹 반환, 단일이면 Object, 복수면 Array.
      * @o2ActionOut x_organization_assemble_express.GroupAction.listObject|example=Group
      * @o2syntax
-     * //返回群组，单个是Object，多个是Array。
+     * //그룹 반환, 단일이면 Object, 복수면 Array.
      * const groupList = this.org.getGroup( name );
      */
     getGroup: function(name){
@@ -706,20 +706,20 @@ Object.assign(org,  {
         return (v_json && v_json.length===1) ? v_json[0] : v_json;
     },
 
-    //查询下级群组--返回群组的对象数组
-    //nested  布尔  true嵌套下级；false直接下级；默认false；
+    //하위 그룹 조회--그룹 객체 배열 반환
+    //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
     /**
-     根据群组标识获取下级群组的对象数组：group对象数组。
+     그룹 식별자로 하위 그룹 객체 배열 조회: group 객체 배열.
      * @method listSubGroup
      * @o2membercategory group
      * @methodOf module:server.org
      * @static
-     * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested]  true嵌套的所有下级群组；false直接下级群组；默认false。
-     * @return {GroupData[]} 返回群组数组。
+     * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+     * @param {Boolean} [nested]  true 중첩된 모든 하위 그룹, false 직속 하위 그룹, 기본값 false.
+     * @return {GroupData[]} 그룹 배열 반환.
      * @o2ActionOut x_organization_assemble_express.GroupAction.listWithGroupSubDirectObject|example=Group
      * @o2syntax
-     * //返回嵌套下级群组数组。
+     * //중첩 하위 그룹 배열 반환.
      * const groupList = this.org.listSubGroup( name, true );
      */
     listSubGroup: function(name, nested){
@@ -727,38 +727,38 @@ Object.assign(org,  {
     },
 
 
-    //查询上级群组--返回群组的对象数组
-    //nested  布尔  true嵌套上级；false直接上级；默认false；
+    //상위 그룹 조회--그룹 객체 배열 반환
+    //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
     /**
-     根据群组标识获取上级群组的对象数组：group对象数组。
+     그룹 식별자로 상위 그룹 객체 배열 조회: group 객체 배열.
      * @method listSupGroup
      * @o2membercategory group
      * @methodOf module:server.org
      * @static
-     * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested]  true嵌套的所有上级群组；false直接上级群组；默认false。
-     * @return {GroupData[]} 返回群组数组。
+     * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+     * @param {Boolean} [nested]  true 중첩된 모든 상위 그룹, false 직속 상위 그룹, 기본값 false.
+     * @return {GroupData[]} 그룹 배열 반환.
      * @o2ActionOut x_organization_assemble_express.GroupAction.listWithGroupSupDirectObject|example=Group
      * @o2syntax
-     * //返回嵌套上级群组数组。
+     * //중첩 상위 그룹 배열 반환.
      * const groupList = this.org.listSupGroup( name, true );
      */
     listSupGroup:function(name, nested){
         return this.getObject(this.oGroup, this.oGroup[(nested) ? 'listWithGroupSupNested' : 'listWithGroupSupDirect'](_getNameFlag(name)));
     },
 
-    //人员所在群组（嵌套）--返回群组的对象数组
+    //사용자 소속 그룹(중첩)--그룹 객체 배열 반환
     /**
-     * 根据人员标识获取所有的群组对象数组。如果群组具有群组（group）成员，且群组成员中包含该人员，那么该群组也被返回。
+     * 사용자 식별자로 모든 그룹 객체 배열 조회. 그룹에 그룹(group) 구성원이 있고 그 구성원에 해당 사용자가 포함되면 그 그룹도 반환.
      * @method listGroupWithPerson
      * @o2membercategory group
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @return {GroupData[]} 返回群组对象数组。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {GroupData[]} 그룹 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.GroupAction.listWithPersonObject|example=Group
      * @o2syntax
-     * //返回群组数组。
+     * //그룹 배열 반환.
      * const groupList = this.org.listGroupWithPerson( name );
      */
     listGroupWithPerson:function(name){
@@ -766,34 +766,34 @@ Object.assign(org,  {
     },
 
     /**
-     * 根据人员身份取所有的群组对象数组。如果群组具有群组（group）成员，且群组成员中包含该人员和身份，那么该群组也被返回。
+     * 사용자 신분으로 모든 그룹 객체 배열 조회. 그룹에 그룹(group) 구성원이 있고 그 구성원에 해당 사용자와 신분이 포함되면 해당 그룹도 반환.
      * @method listGroupWithIdentity
      * @o2membercategory group
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 身份的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @return {GroupData[]} 返回群组对象数组。
+     * @param {PersonFlag|PersonFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 사용자 객체 또는 위 속성 값과 객체의 배열.
+     * @return {GroupData[]} 그룹 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.GroupAction.listWithPersonObject|example=Group
      * @o2syntax
-     * //返回群组数组。
+     * //그룹 배열 반환.
      * const groupList = this.org.listGroupWithIdentity( name );
      */
     listGroupWithIdentity:function(name){
         return this.getObject(this.oGroup, this.oGroup.listWithIdentity(_getNameFlag(name)));
     },
 
-    //群组是否拥有角色--返回true, false
+    //그룹의 역할 보유 여부--true, false 반환
     /**
-     * 群组是否拥有角色。
+     * 그룹의 역할 보유 여부.
      * @method groupHasRole
      * @o2membercategory role
      * @methodOf module:server.org
      * @static
-     * @param {GroupFlag} name - 群组的distinguishedName、name、id、unique属性值，群组对象。
-     * @param {RoleFlag|RoleFlag[]} roleList - 角色的distinguishedName、name、id、unique属性值，角色对象；或上述属性值和对象的数组。
-     * @return {Boolean} 如果群组拥有角色返回true, 否则返回false。
+     * @param {GroupFlag} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체.
+     * @param {RoleFlag|RoleFlag[]} roleList - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+     * @return {Boolean} 그룹이 역할을 보유하면 true, 아니면 false 반환.
      * @o2syntax
-     * //返回判断结果。
+     * //판단 결과 반환.
      * const groupList = this.org.groupHasRole( name, roleList );
      */
     groupHasRole: function(name, roleList){
@@ -801,19 +801,19 @@ Object.assign(org,  {
         return this.oGroup.hasRole(nameFlag, _getNameFlag(roleList));
     },
 
-    //角色***************
-    //获取角色--返回角色的对象数组
+    //역할***************
+    //역할 조회--역할 객체 배열 반환
     /**
-     * 根据角色标识获取对应的角色对象或数组。
+     * 역할 식별자로 해당 역할 객체 또는 배열 조회.
      * @method getRole
      * @o2membercategory role
      * @methodOf module:server.org
      * @static
-     * @param {RoleFlag|RoleFlag[]} name - 角色的distinguishedName、name、id、unique属性值，角色对象；或上述属性值和对象的数组。
-     * @return {RoleData|RoleData[]} 返回角色，单个为Object，多个为Array。
+     * @param {RoleFlag|RoleFlag[]} name - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+     * @return {RoleData|RoleData[]} 역할 반환, 단일이면 Object, 복수면 Array.
      * @o2ActionOut x_organization_assemble_express.RoleAction.listObject|example=Role
      * @o2syntax
-     * //返回角色，单个为对象，多个为数组。
+     * //역할 반환, 단일이면 객체, 복수면 배열.
      * const roleList = this.org.getRole( name );
      */
     getRole: function(name){
@@ -822,37 +822,37 @@ Object.assign(org,  {
         return (v_json && v_json.length===1) ? v_json[0] : v_json;
     },
 
-    //人员所有角色（嵌套）--返回角色的对象数组
+    //사용자의 모든 역할(중첩)--역할 객체 배열 반환
     /**
-     * 根据人员标识获取所有的角色对象数组。如果角色具有群组（group）成员，且群组中包含该人员，那么该角色也被返回。
+     * 사용자 식별자로 모든 역할 객체 배열 조회. 역할에 그룹(group) 구성원이 있고 그 그룹에 해당 사용자가 포함되면 그 역할도 반환.
      * @method listRoleWithPerson
      * @o2membercategory role
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @return {RoleData[]} 返回角色对象数组。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {RoleData[]} 역할 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.RoleAction.listWithPersonObject|example=Role
      * @o2syntax
-     * //返回角色数组。
+     * //역할 배열 반환.
      * const roleList = this.org.listRoleWithPerson( name );
      */
     listRoleWithPerson:function(name){
         return this.getObject(this.oRole, this.oRole.listWithPerson(_getNameFlag(name)));
     },
 
-    //人员***************
-    //人员是否拥有角色--返回true, false
+    //사용자***************
+    //사용자의 역할 보유 여부--true, false 반환
     /**
-     * 人员是否拥有角色。
+     * 사용자의 역할 보유 여부.
      * @method personHasRole
      * @o2membercategory role
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag} name - 人员的distinguishedName、id、unique属性值，人员对象。
-     * @param {RoleFlag|RoleFlag[]} roleList - 角色的distinguishedName、name、id、unique属性值，角色对象；或上述属性值和对象的数组。
-     * @return {Boolean} 如果人员拥有角色返回true, 否则返回false。
+     * @param {PersonFlag} name - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+     * @param {RoleFlag|RoleFlag[]} roleList - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+     * @return {Boolean} 사용자가 역할을 보유하면 true, 아니면 false 반환.
      * @o2syntax
-     * //返回判断结果。
+     * //판단 결과 반환.
      * const groupList = this.org.personHasRole( name, roleList );
      */
     personHasRole: function(name, roleList){
@@ -860,18 +860,18 @@ Object.assign(org,  {
         return this.oPerson.hasRole(nameFlag, _getNameFlag(roleList));
     },
 
-    //获取人员,附带身份,身份所在的组织,个人所在群组,个人拥有角色.
+    //사용자 조회, 신분, 신분 소속 조직, 개인 소속 그룹, 개인 보유 역할 포함.
     /**
-     根据人员标识获取对应的人员对象,附带身份,身份所在的组织,个人所在群组,个人拥有角色.
+     사용자 식별자로 해당 사용자 객체 조회, 신분, 신분 소속 조직, 개인 소속 그룹, 개인 보유 역할 포함.
      * @method getPersonData
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {String} name - 人员的distinguishedName、id、unique属性值，人员名称。
-     * @return {PersonData} 返回人员对象。
+     * @param {String} name - 사용자의 distinguishedName, id, unique 속성값, 사용자 이름.
+     * @return {PersonData} 사용자 객체 반환.
      * @o2ActionOut x_organization_assemble_express.PersonAction.get|example=PersonData
      * @o2syntax
-     * //返回人员对象。
+     * //사용자 객체 반환.
      * const person = this.org.getPersonData( name );
      */
     getPersonData: function(name){
@@ -879,19 +879,19 @@ Object.assign(org,  {
         return (!v) ? null : JSON.parse(v.toString());
     },
 
-    //获取人员--返回人员的对象数组
+    //사용자 조회--사용자 객체 배열 반환
     /**
-     根据人员标识获取对应的人员对象或数组：person对象或数组
+     사용자 식별자로 해당 사용자 객체 또는 배열 조회: person 객체 또는 배열
      * @method getPerson
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @param {(Boolean)} [findCN] 是否需要额外查找中文名称（如张三），默认false。如果为true，除匹配unique和distingiushedName外，还会在名称的第一段中查找所有匹配到的人（精确匹配）。
-     * @return {PersonData|PersonData[]} 返回人员，单个是Object，多个是Array。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @param {(Boolean)} [findCN] 한글 이름(예: 홍길동)을 추가로 찾을지 여부, 기본값 false. true이면 unique와 distingiushedName 일치 외에 이름 첫 부분에서 일치하는 모든 사람을 찾음(정확히 일치).
+     * @return {PersonData|PersonData[]} 사용자 반환, 단일이면 Object, 복수면 Array.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listObject|example=Person
      * @o2syntax
-     * //返回人员，单个是对象，多个是数组。
+     * //사용자 반환, 단일이면 객체, 복수면 배열.
      * const personList = this.org.getPerson( name );
      */
     getPerson: function(name, findCN){
@@ -900,112 +900,112 @@ Object.assign(org,  {
         return (v_json && v_json.length===1) ? v_json[0] : v_json;
     },
 
-    //查询下级人员--返回人员的对象数组
-    //nested  布尔  true嵌套下级；false直接下级；默认false；
+    //하위 사용자 조회--사용자 객체 배열 반환
+    //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
     /**
-     根据人员标识获取下级人员的对象数组：person对象数组。该上下级关系被人员的汇报对象值（superior）决定。
+     사용자 식별자로 하위 사용자 객체 배열 조회: person 객체 배열. 상하 관계는 사용자의 보고 대상 값(superior)으로 결정.
      * @method listSubPerson
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested]  true嵌套的所有下级人员；false直接下级人员；默认false。
-     * @return {PersonData[]} 返回人员数组。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @param {Boolean} [nested]  true 중첩된 모든 하위 사용자, false 직속 하위 사용자, 기본값 false.
+     * @return {PersonData[]} 사용자 배열 반환.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listWithPersonSubDirectObject|example=Person
      * @o2syntax
-     * //返回嵌套下级人员数组。
+     * //중첩 하위 사용자 배열 반환.
      * const personList = this.org.listSubPerson( name, true );
      */
     listSubPerson: function(name, nested){
         return this.getObject(this.oPerson, this.oPerson[(nested) ? 'listWithPersonSubNested' : 'listWithPersonSubDirect'](_getNameFlag(name)));
     },
 
-    //查询上级人员--返回人员的对象数组
-    //nested  布尔  true嵌套上级；false直接上级；默认false；
+    //상위 사용자 조회--사용자 객체 배열 반환
+    //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
     /**
-     *根据人员标识获取上级人员的对象数组：person对象数组。该上下级关系被人员的汇报对象值（superior）决定。
+     *사용자 식별자로 상위 사용자 객체 배열 조회: person 객체 배열. 상하 관계는 사용자의 보고 대상 값(superior)으로 결정.
      * @method listSupPerson
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested]  true嵌套的所有上级人员；false直接上级人员；默认false。
-     * @return {PersonData[]} 返回人员数组。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @param {Boolean} [nested]  true 중첩된 모든 상위 사용자, false 직속 상위 사용자, 기본값 false.
+     * @return {PersonData[]} 사용자 배열 반환.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listWithPersonSupDirectObject|example=Person
      * @o2syntax
-     * //返回嵌套上级人员数组。
+     * //중첩 상위 사용자 배열 반환.
      * const personList = this.org.listSupPerson( name, true );
      */
     listSupPerson: function(name, nested){
         return this.getObject(this.oPerson, this.oPerson[(nested) ? 'listWithPersonSupNested' : 'listWithPersonSupDirect'](_getNameFlag(name)));
     },
 
-    //获取群组的所有人员--返回人员的对象数组
+    //그룹의 모든 사용자 조회--사용자 객체 배열 반환
     /**
-     * 根据群组标识获取人员对象成员：person对象数组。
+     * 그룹 식별자로 사용자 객체 구성원 조회: person 객체 배열.
      * @method listPersonWithGroup
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-     * @return {PersonData[]} 返回人员对象数组。
+     * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+     * @return {PersonData[]} 사용자 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listWithGroupObject|example=Person
      * @o2syntax
-     * //返回人员数组。
+     * //사용자 배열 반환.
      * const personList = this.org.listPersonWithGroup( group );
      */
     listPersonWithGroup: function(name){
         return this.getObject(this.oPerson, this.oPerson.listWithGroup(_getNameFlag(name)));
     },
 
-    //获取角色的所有人员--返回人员的对象数组
+    //역할의 모든 사용자 조회--사용자 객체 배열 반환
     /**
-     * 根据角色标识获取人员对象数组：person对象数组。
+     * 역할 식별자로 사용자 객체 배열 조회: person 객체 배열.
      * @method listPersonWithRole
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {RoleFlag|RoleFlag[]} name - 角色的distinguishedName、name、id、unique属性值，角色对象，或上述属性值和对象的数组。
-     * @return {PersonData[]} 返回人员对象数组。
+     * @param {RoleFlag|RoleFlag[]} name - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+     * @return {PersonData[]} 사용자 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listWithRoleObject|example=Person
      * @o2syntax
-     * //返回人员数组。
+     * //사용자 배열 반환.
      * const personList = this.org.listPersonWithRole( role );
      */
     listPersonWithRole: function(name){
         return this.getObject(this.oPerson, this.oPerson.listWithRole(_getNameFlag(name)));
     },
 
-    //获取身份的所有人员--返回人员的对象数组
+    //신분의 모든 사용자 조회--사용자 객체 배열 반환
     /**
-     * 根据身份标识获取人员对象成员：person对象数组。
+     * 신분 식별자로 사용자 객체 구성원 조회: person 객체 배열.
      * @method listPersonWithIdentity
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {IdentityFlag|IdentityFlag[]} name - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-     * @return {PersonData[]} 返回人员对象数组。
+     * @param {IdentityFlag|IdentityFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 신분 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {PersonData[]} 사용자 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listWithIdentityObject|example=Person
      * @o2syntax
-     * //返回人员数组。
+     * //사용자 배열 반환.
      * const personList = this.org.listPersonWithIdentity( identity );
      */
     listPersonWithIdentity: function(name){
         return this.getObject(this.oPerson, this.oPerson.listWithIdentity(_getNameFlag(name)));
     },
 
-    //获取身份的所有人员--返回人员的对象数组
+    //신분의 모든 사용자 조회--사용자 객체 배열 반환
     /**
-     * 根据身份标识获取人员对象：person对象数组。
+     * 신분 식별자로 사용자 객체 조회: person 객체 배열.
      * @method getPersonWithIdentity
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {IdentityFlag|IdentityFlag[]} name - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-     * @return {PersonData|PersonData[]} 返回人员对象，单个是Object，多个是Array。
+     * @param {IdentityFlag|IdentityFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 신분 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {PersonData|PersonData[]} 사용자 객체 반환, 단일이면 Object, 여러 개면 Array.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listWithIdentityObject|example=Person
      * @o2syntax
-     * //返回人员，单个是Object，多个是Array。
+     * //사용자 반환, 단일이면 Object, 여러 개면 Array.
      * const personList = this.org.listPersonWithIdentity( identity );
      */
     getPersonWithIdentity: function(name){
@@ -1014,42 +1014,42 @@ Object.assign(org,  {
         return (arr && arr.length===1) ? arr[0] : arr;
     },
 
-    //查询组织成员的人员--返回人员的对象数组
-    //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+    //조직 구성원 사용자 조회--사용자 객체 배열 반환
+    //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
     /**
-     * 根据组织标识获取人员对象成员：person对象数组。
+     * 조직 식별자로 사용자 객체 구성원 조회: person 객체 배열.
      * @method listPersonWithUnit
      * @o2membercategory person
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested] 是否嵌套获取组织以及下级组织的人员，true表示嵌套，flase表示获取直接组织。默认为false
-     * @return {PersonData[]} 返回人员对象数组。
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+     * @param {Boolean} [nested] 조직 및 하위 조직의 사용자를 중첩 조회할지 여부, true는 중첩, flase는 직속 조직 조회. 기본값 false
+     * @return {PersonData[]} 사용자 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.PersonAction.listWithUnitSubDirectObject|example=Person
      * @o2syntax
-     * //返回组织的直接人员数组。
+     * //조직의 직속 사용자 배열 반환.
      * const personList = this.org.listPersonWithUnit( unit );
      *
-     * //返回组织的以及嵌套下级组织所有的人员数组。
+     * //조직 및 중첩 하위 조직의 모든 사용자 배열 반환.
      * const personList = this.org.listPersonWithUnit( unit, true );
      */
     listPersonWithUnit: function(name, nested){
         return this.getObject(this.oPerson, this.oPerson[(nested) ? 'listWithUnitSubNested' : 'listWithUnitSubDirect'](_getNameFlag(name)));
     },
 
-    //人员属性************
-    //添加人员属性值(在属性中添加values值，如果没有此属性，则创建一个)
+    //사용자 속성************
+    //사용자 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
     /**
-     * 添加人员属性值(在属性中添加values值，如果没有此属性，则创建一个)
+     * 사용자 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
      * @method appendPersonAttribute
      * @o2membercategory personAttribute
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag} person - 人员的distinguishedName、id、unique属性值，人员对象。
-     * @param {String} attr 属性名称。
-     * @param {String[]} values 属性值，必须为数组。
+     * @param {PersonFlag} person - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+     * @param {String} attr 속성 이름.
+     * @param {String[]} values 속성값, 반드시 배열.
      * @o2syntax
-     * //添加人员属性值
+     * //사용자 속성 값 추가
      * this.org.appendPersonAttribute( person, attribute, valueArray);
      */
     appendPersonAttribute: function(person, attr, values){
@@ -1057,18 +1057,18 @@ Object.assign(org,  {
         return this.oPersonAttribute.appendWithPersonWithName(personFlag, attr, values);
     },
 
-    //设置人员属性值(将属性值修改为values，如果没有此属性，则创建一个)
+    //사용자 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
     /**
-     * 设置人员属性值(将属性值修改为values，如果没有此属性，则创建一个)
+     * 사용자 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
      * @method setPersonAttribute
      * @o2membercategory personAttribute
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag} person - 人员的distinguishedName、id、unique属性值，人员对象。
-     * @param {String} attr 属性名称。
-     * @param {String[]} values 属性值，必须为数组。
+     * @param {PersonFlag} person - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+     * @param {String} attr 속성 이름.
+     * @param {String[]} values 속성값, 반드시 배열.
      * @o2syntax
-     * //添加人员属性值
+     * //사용자 속성 값 추가
      * this.org.setPersonAttribute( person, attribute, valueArray);
      */
     setPersonAttribute: function(person, attr, values){
@@ -1076,19 +1076,19 @@ Object.assign(org,  {
         return this.oPersonAttribute.setWithPersonWithName(personFlag, attr, values);
     },
 
-    //获取人员属性值
+    //사용자 속성 값 조회
     /**
-     根据人员和属性名称获取属性值数组。
+     사용자와 속성 이름으로 속성값 배열 조회.
      * @method getPersonAttribute
      * @o2membercategory personAttribute
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag} person - 人员的distinguishedName、id、unique属性值，人员对象。
-     * @param {String} attr 属性名称。
-     * @return {String[]} 返回属性值数组，
-     * 如：<pre><code class='language-js'>[ value1, value2 ]</code></pre>
+     * @param {PersonFlag} person - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+     * @param {String} attr 속성 이름.
+     * @return {String[]} 속성 값 배열 반환,
+     * 예: <pre><code class='language-js'>[ value1, value2 ]</code></pre>
      * @o2syntax
-     * //返回该人员的属性值数组。
+     * //res.blob()          //응답 내용 Response 스트림(java.io.ByteArrayInputStream)
      * const attributeList = this.org.getPersonAttribute( person, attr );
      */
     getPersonAttribute: function(person, attr){
@@ -1100,18 +1100,18 @@ Object.assign(org,  {
         return [];
     },
 
-    //列出人员所有属性的名称
+    //사용자의 모든 속성 이름 목록
     /**
-     列出人员所有属性的名称数组。
+     사용자의 모든 속성 이름 배열 나열.
      * @method listPersonAttributeName
      * @o2membercategory personAttribute
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @return {String[]} 返回人员属性名称数组，
-     * 如：<pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {String[]} 사용자 속성 이름 배열 반환,
+     * 예: <pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
      * @o2syntax
-     * //返回人员所有属性的名称数组。
+     * //사용자의 모든 속성 이름 배열 반환.
      * const attributeNameList = this.org.listPersonAttributeName( person );
      */
     listPersonAttributeName: function(name){
@@ -1128,19 +1128,19 @@ Object.assign(org,  {
         return nameList;
     },
 
-    //身份**********
-    //获取身份
+    //신분**********
+    //신분 조회
     /**
-     根据身份标识获取对应的身份对象或数组
+     신분 식별자로 해당 신분 객체 또는 배열 조회
      * @method getIdentity
      * @o2membercategory identity
      * @methodOf module:server.org
      * @static
-     * @param {IdentityFlag|IdentityFlag[]} name - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-     * @return {IdentityData|IdentityData[]} 返回身份，单个是Object，多个是Array。
+     * @param {IdentityFlag|IdentityFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 신분 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {IdentityData|IdentityData[]} 신분 반환, 단일이면 Object, 여러 개면 Array.
      * @o2ActionOut x_organization_assemble_express.IdentityAction.listObject|example=Identity|ignoreNoDescr=true|ignoreProps=[woUnitDutyList,woUnit,woGroupList]
      * @o2syntax
-     * //返回身份，单个是对象，多个是数组。
+     * //신분 반환, 단일이면 객체, 여러 개면 배열.
      * const identityList = this.org.getIdentity( name );
      */
     getIdentity: function(name){
@@ -1150,18 +1150,18 @@ Object.assign(org,  {
     },
 
     /**
-     添加身份
+     신분 추가
      * @method addIdentity
      * @o2membercategory identity
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag} unit - 组织的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-     * @param {PersonFlag} person - 人员的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-     * @param {String} name - 是否的中文名称。
-     * @param {Object} data - 其他值。
-     * @return identityId 返回身份id。
+     * @param {UnitFlag} unit - 조직의 distinguishedName, id, unique 속성 값, 신분 객체 또는 이들 속성 값과 객체의 배열.
+     * @param {PersonFlag} person - 사용자의 distinguishedName, id, unique 속성 값, 신분 객체 또는 이들 속성 값과 객체의 배열.
+     * @param {String} name - 한글 이름.
+     * @param {Object} data - 기타 값.
+     * @return identityId 신분 id 반환.
      * @o2syntax
-     * //返回身份id。
+     * //신분 id 반환.
      * const identityId = this.org.addIdentity( unit, person, name );
      */
     addIdentity: function(unit, person, name, data){
@@ -1171,7 +1171,7 @@ Object.assign(org,  {
             unitList: unitFlag,
             personList: personFlag
         }).data;
-        //不存在，创建身份
+        //존재하지 않으면 신분 생성
         if( !identityList || !identityList.length ) {
             return Actions.load("x_organization_assemble_control").IdentityAction.create({
                 ...data,
@@ -1184,61 +1184,61 @@ Object.assign(org,  {
         }
     },
 
-    //列出人员的身份
+    //사용자의 신분 목록
     /**
-     * 根据人员标识获取对应的身份对象数组。
+     * 사용자 식별자로 해당 신분 객체 배열 조회.
      * @method listIdentityWithPerson
      * @o2membercategory identity
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @return {IdentityData[]} 返回身份对象数组。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {IdentityData[]} 신분 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.IdentityAction.listWithPersonObject|example=Identity
      * @o2syntax
-     * //返回身份对象数组。
+     * //신분 객체 배열 반환.
      * const identityList = this.org.listIdentityWithPerson( person );
      */
     listIdentityWithPerson: function(name){
         return this.getObject(this.oIdentity, this.oIdentity.listWithPerson(_getNameFlag(name)));
     },
 
-    //查询组织成员身份--返回身份的对象数组
-    //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+    //조직 구성원 신분 조회--신분 객체 배열 반환
+    //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
     /**
-     * 根据组织标识获取对应的身份对象数组：identity对象数组。
+     * 조직 식별자로 해당 신분 객체 배열 조회: identity 객체 배열.
      * @method listIdentityWithUnit
      * @o2membercategory identity
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested] true嵌套的所有身份成员；false直接身份成员；默认false。
-     * @return {IdentityData[]} 返回身份对象数组。
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+     * @param {Boolean} [nested] true는 하위 포함 모든 신분 구성원, false는 직속 신분 구성원, 기본값 false.
+     * @return {IdentityData[]} 신분 객체 배열 반환.
      * @o2ActionOut x_organization_assemble_express.IdentityAction.listWithUnitSubNestedObject|example=Identity
      * @o2syntax
-     * //返回直接组织身份对象数组。
+     * //직속 조직 신분 객체 배열 반환.
      * const identityList = this.org.listIdentityWithUnit( unit );
      *
-     * //返回嵌套组织身份对象数组。
+     * //중첩 조직 신분 객체 배열 반환.
      * const identityList = this.org.listIdentityWithUnit( unit, true );
      */
     listIdentityWithUnit: function(name, nested){
         return this.getObject(this.oIdentity, this.oIdentity[(nested) ? 'listWithUnitSubNested' : 'listWithUnitSubDirect'](_getNameFlag(name)));
     },
 
-    //组织**********
-    //获取组织
+    //조직**********
+    //조직 조회
     /**
-     根据组织标识获取对应的组织：unit对象或数组
+     조직 식별자로 해당 조직 조회: unit 객체 또는 배열
      * @method getUnit
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。]
-     * @param {(Boolean)} [findCN] 是否需要额外查找中文名称（如综合部），默认false。如果为true，除匹配unique和distingiushedName外，还会在名称的第一段中查找所有匹配到的部门（精确匹配）。
-     * @return {UnitData|UnitData[]} 单个是Object，多个是Array。
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체 또는 이들 속성 값과 객체의 배열.]
+     * @param {(Boolean)} [findCN] 한글 이름(예: 종합부) 추가 검색 여부, 기본값 false. true이면 unique와 distingiushedName 일치 외에 이름의 첫 구간에서 일치하는 모든 부서를 검색(정확히 일치).
+     * @return {UnitData|UnitData[]} 단일이면 Object, 여러 개면 Array.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listObject|example=Unit
      * @o2syntax
-     * //返回组织，单个是对象，多个是数组。
+     * //조직 반환, 단일이면 객체, 여러 개면 배열.
      * const unitList = this.org.getUnit( name );
      */
     getUnit: function(name, findCN){
@@ -1247,40 +1247,40 @@ Object.assign(org,  {
         return (v_json && v_json.length===1) ? v_json[0] : v_json;
     },
 
-    //查询组织的下级--返回组织的对象数组
-    //nested  布尔  true嵌套下级；false直接下级；默认false；
+    //조직의 하위 조회--조직 객체 배열 반환
+    //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
     /**
-     根据组织标识获取下级组织的对象数组：unit对象数组。
+     조직 식별자로 하위 조직 객체 배열 조회: unit 객체 배열.
      * @method listSubUnit
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested]  true嵌套的所有下级组织；false直接下级组织；默认false。
-     * @return {UnitData[]} 返回组织数组。
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+     * @param {Boolean} [nested]  true 중첩된 모든 하위 조직, false 직속 하위 조직, 기본값 false.
+     * @return {UnitData[]} 조직 배열 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitSubNestedObject|example=Unit
      * @o2syntax
-     * //返回嵌套下级组织数组。
+     * //중첩 하위 조직 배열 반환.
      * const unitList = this.org.listSubUnit( name, true );
      */
     listSubUnit: function(name, nested){
         return this.getObject(this.oUnit, this.oUnit[(nested) ? 'listWithUnitSubNested' : 'listWithUnitSubDirect'](_getNameFlag(name)));
     },
 
-    //查询组织的上级--返回组织的对象数组
-    //nested  布尔  true嵌套上级；false直接上级；默认false；
+    //조직의 상위 조회--조직 객체 배열 반환
+    //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
     /**
-     根据组织标识批量获取上级组织的对象数组：unit对象数组。
+     조직 식별자로 상위 조직 객체 배열 일괄 조회: unit 객체 배열.
      * @method listSupUnit
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-     * @param {Boolean} [nested]  true嵌套的所有上级组织；false直接上级组织；默认false。
-     * @return {UnitData[]} 返回组织数组。
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+     * @param {Boolean} [nested]  true 중첩된 모든 상위 조직, false 직속 상위 조직, 기본값 false.
+     * @return {UnitData[]} 조직 배열 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitSupNestedObject|example=Unit
      * @o2syntax
-     * //返回嵌套上级组织数组。
+     * //중첩 상위 조직 배열 반환.
      * const unitList = this.org.listSupUnit( name, true );
      */
     listSupUnit: function(name, nested){
@@ -1311,28 +1311,28 @@ Object.assign(org,  {
         });
     },
 
-    //根据个人身份获取组织
-    //flag 数字    表示获取第几层的组织
-    //     字符串  表示获取指定类型的组织
-    //     空     表示获取直接所在的组织
+    //개인 신분으로 조직 조회
+    //flag 숫자    몇 번째 단계의 조직을 조회할지 나타냄
+    //     문자열  지정 유형의 조직 조회를 나타냄
+    //     비어 있음     직접 소속 조직 조회를 나타냄
     /**
-     根据个人身份获取组织：unit对象或数组。
+     개인 신분으로 조직 조회: unit 객체 또는 배열.
      * @method getUnitByIdentity
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {IdentityFlag} name - 身份的distinguishedName、id、unique属性值，身份对象。
-     * @param {String|Number} [flag]  当值为数字的时候， 表示获取第几层的组织。<br/> 当值为字符串的时候，表示获取指定类型的组织。<br/> 当值为空的时候，表示获取直接所在组织。
-     * @return {UnitData} 返回对应的组织对象。
+     * @param {IdentityFlag} name - 신분의 distinguishedName, id, unique 속성값, 신분 객체.
+     * @param {String|Number} [flag]  값이 숫자이면 몇 번째 계층의 조직을 조회.<br/> 값이 문자열이면 지정 유형의 조직을 조회.<br/> 값이 비어 있으면 직속 조직을 조회.
+     * @return {UnitData} 해당 조직 객체 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.getWithIdentityWithLevelObject|example=Unit
      * @o2syntax
-     * //返回直接所在组织。
+     * //직속 조직 반환.
      * const unit = this.org.getUnitByIdentity( name );
      *
-     * //返回第一层组织。
+     * //첫 번째 단계 조직 반환.
      * const unit = this.org.getUnitByIdentity( name, 1 );
      *
-     * * //返回类型为company的最近上级组织。
+     * * //유형이 company인 가장 가까운 상위 조직 반환.
      * const unit = this.org.getUnitByIdentity( name, "company" );
      */
     getUnitByIdentity: function(name, flag){
@@ -1358,92 +1358,92 @@ Object.assign(org,  {
         return (o && o.length===1) ? o[0] : o;
     },
 
-    //列出身份所在组织的所有上级组织
+    //신분 소속 조직의 모든 상위 조직 목록
     /**
-     * 批量查询身份所在的组织,并递归查找其上级组织对象.
+     * 신분이 속한 조직 일괄 조회, 상위 조직 객체 재귀 조회.
      * @method listAllSupUnitWithIdentity
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {IdentityFlag|IdentityFlag[]} name - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-     * @return {UnitData[]} 返回组织数组。
+     * @param {IdentityFlag|IdentityFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 신분 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {UnitData[]} 조직 배열 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listWithIdentitySupNestedObject|example=Unit
      * @o2syntax
-     * //返回组织数组。
+     * //조직 배열 반환.
      * const unitList = this.org.listAllSupUnitWithIdentity( name );
      */
     listAllSupUnitWithIdentity: function(name){
         return this.getObject(this.oUnit, this.oUnit.listWithIdentitySupNested(_getNameFlag(name)));
     },
 
-    //获取人员所在的所有组织（直接所在组织）
+    //사용자가 속한 모든 조직 조회(직속 조직)
     /**
-     * 根据个人标识批量获取组织对象成员：Unit对象数组。
+     * 개인 식별자로 조직 객체 구성원 일괄 조회: Unit 객체 배열.
      * @method listUnitWithPerson
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @return {UnitData[]} 返回组织数组。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {UnitData[]} 조직 배열 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listWithPersonObject|example=Unit
      * @o2syntax
-     * //返回组织数组。
+     * //조직 배열 반환.
      * const unitList = this.org.listUnitWithPerson( name );
      */
     listUnitWithPerson: function(name){
         return this.getObject(this.oUnit, this.oUnit.listWithPerson(_getNameFlag(name)));
     },
 
-    //列出人员所在组织的所有上级组织
+    //사용자 소속 조직의 모든 상위 조직 목록
     /**
-     * 根据个人标识批量查询所在组织及所有上级组织：Unit对象数组。
+     * 개인 식별자로 소속 조직 및 모든 상위 조직 일괄 조회: Unit 객체 배열.
      * @method listAllSupUnitWithPerson
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-     * @return {UnitData[]} 返回个人所在组织及所有上级组织。
+     * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {UnitData[]} 개인이 속한 조직과 모든 상위 조직 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listWithPersonSupNestedObject|example=Unit
      * @o2syntax
-     * //返回组织数组。
+     * //조직 배열 반환.
      * const unitList = this.org.listAllSupUnitWithPerson( name );
      */
     listAllSupUnitWithPerson: function(name){
         return this.getObject(this.oUnit, this.oUnit.listWithPersonSupNested(_getNameFlag(name)));
     },
 
-    //根据组织属性，获取所有符合的组织
+    //조직 속성으로 일치하는 모든 조직 조회
     /**
-     * 根据组织属性，获取所有符合的组织。
+     * 조직 속성으로 일치하는 모든 조직 조회.
      * @method listUnitWithAttribute
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {String} name 组织属性名称。
-     * @param {String} attribute 组织属性值。
-     * @return {UnitData[]} 返回组织数组。
+     * @param {String} name 조직 속성 이름.
+     * @param {String} attribute 조직 속성 값.
+     * @return {UnitData[]} 조직 배열 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitAttributeObject|example=Unit
      * @o2syntax
-     * //返回组织数组。
+     * //조직 배열 반환.
      * const unitList = this.org.listUnitWithAttribute( attributeName, attributeName );
      */
     listUnitWithAttribute: function(name, attribute){
         return this.getObject(this.oUnit, this.oUnit.listWithUnitAttribute(name, attribute));
     },
 
-    //根据组织职务，获取所有符合的组织
+    //조직 직무로 일치하는 모든 조직 조회
     /**
-     * 根据组织职务，获取所有符合的组织。
+     * 조직 직무로 일치하는 모든 조직 조회.
      * @method listUnitWithDuty
      * @o2membercategory unit
      * @methodOf module:server.org
      * @static
-     * @param {String} name 组织职务名称。
-     * @param {IdentityFlag} id 身份的distinguishedName、id、unique属性值，身份对象。
-     * @return {UnitData[]} 返回组织数组。
+     * @param {String} name 조직 직무 이름.
+     * @param {IdentityFlag} id 신분의 distinguishedName, id, unique 속성 값, 신분 객체.
+     * @return {UnitData[]} 조직 배열 반환.
      * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitDutyObject|example=Unit
      * @o2syntax
-     * //返回组织数组。
+     * //조직 배열 반환.
      * const unitList = this.org.listUnitWithDuty( dutyName, identity );
      */
     listUnitWithDuty: function(name, id){
@@ -1452,15 +1452,15 @@ Object.assign(org,  {
     },
 
     /**
-     * 列式所有顶层组织。
+     * 모든 최상위 조직 나열.
      * @method listTopUnit
      * @o2membercategory unit
      * @methodOf module:server
      * @static
-     * @return {Promise|UnitData[]} 当async为true时，返回
+     * @return {Promise|UnitData[]} async가 true이면 반환
      * @o2ActionOut x_organization_assemble_express.UnitAction.listObject|example=Unit
      * @o2syntax
-     * //同步执行，返回顶层组织数组。
+     * //동기 실행, 최상위 조직 배열 반환.
      * var unitList = this.org.listTopUnit();
      */
     listTopUnit: function(){
@@ -1468,20 +1468,20 @@ Object.assign(org,  {
         return action.listTop().data;
     },
 
-    //组织职务***********
-    //获取指定的组织职务的身份
+    //조직 직무***********
+    //지정 조직 직무의 신분 조회
     /**
-     * 根据职务名称和组织名称获取身份。
+     * 직무 이름과 조직 이름으로 신분 조회.
      * @method getDuty
      * @o2membercategory duty
      * @methodOf module:server.org
      * @static
-     * @param {String} duty 组织职务名称。
-     * @param {UnitFlag} id 组织的distinguishedName、id、unique属性值，组织对象。
-     * @return {IdentityData[]} 返回身份数组。
+     * @param {String} duty 조직 직무 이름.
+     * @param {UnitFlag} id 조직의 distinguishedName, id, unique 속성 값, 조직 객체.
+     * @return {IdentityData[]} 신분 배열 반환.
      * @o2ActionOut x_organization_assemble_express.UnitDutyAction.getWithUnitWithName|example=Identity
      * @o2syntax
-     * //返回身份数组。
+     * //신분 배열 반환.
      * const identityList = this.org.getDuty( dutyName, unit );
      */
     getDuty: function(duty, id){
@@ -1490,30 +1490,30 @@ Object.assign(org,  {
     },
 
     /**
-     * 把身份添加到职务中。
+     * 신분을 직무에 추가.
      * @method addIdentityToDuty
      * @o2membercategory duty
      * @methodOf module:server.org
      * @static
-     * @param {String} dutyName 组织职务名称。
-     * @param {UnitFlag} unit 组织的distinguishedName、id、unique属性值，组织对象。
-     * @param {IdentityFlag} identity 身份的distinguishedName、id、unique属性值，组织对象。
-     * @return {dutyId} 返回身份数组。
+     * @param {String} dutyName 조직 직무 이름.
+     * @param {UnitFlag} unit 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+     * @param {IdentityFlag} identity 신분의 distinguishedName, id, unique 속성 값, 조직 객체.
+     * @return {dutyId} 신분 배열 반환.
      * @o2syntax
-     * //返回职务id。
+     * //직무 id 반환.
      * const dutyId = this.org.addIdentityToDuty( dutyName, unit, identity );
      */
     addIdentityToDuty: function (dutyName, unit, identity){
         const unitFlag = _getNameFlag(unit);
         const identityFlag = _getNameFlag(identity);
         const dutyActon = Actions.load("x_organization_assemble_control").UnitDutyAction;
-        //获取当前组织下的所有职务
+        //현재 조직의 모든 직무 조회
         const dutyList = dutyActon.listWithUnit(unitFlag[0]);
-        //是否存在同名职务
+        //같은 이름의 직무 존재 여부
         const curDutyList = dutyList.data.filter((duty)=>{
             return duty.name === dutyName;
         });
-        //如果没有职务，创建
+        //직무가 없으면 생성
         let dutyId;
         if( !curDutyList.length ){
             const json = dutyActon.create({
@@ -1526,11 +1526,11 @@ Object.assign(org,  {
             const curDuty = curDutyList[0];
             const person = Actions.load("x_organization_assemble_express").PersonAction.listWithIdentityObject(identityFlag);
             const personId = person.data.length ? person.data[0].id : '';
-            //当前人员是否在职务的身份列表中
+            //현재 사용자가 직무의 신분 목록에 있는지 여부
             const exist = curDuty.woIdentityList.some((identity)=>{
                 return identity.person === personId;
             });
-            //不存在，把身份添加到职务中
+            //존재하지 않으면 신분을 직무에 추가
             if( !exist ){
                 curDuty.identityList.push(identityFlag[0]);
                 dutyActon.edit(curDuty.id, curDuty);
@@ -1540,17 +1540,17 @@ Object.assign(org,  {
         return dutyId;
     },
 
-    //获取身份的所有职务名称
+    //신분의 모든 직무 이름 조회
     /**
-     * 批量获取身份的所有职务名称。
+     * 신분의 모든 직무 이름 일괄 조회.
      * @method listDutyNameWithIdentity
      * @o2membercategory duty
      * @methodOf module:server.org
      * @static
-     * @param {IdentityFlag|IdentityFlag[]} id - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-     * @return {String[]} 返回职务名称数组。
+     * @param {IdentityFlag|IdentityFlag[]} id - 신분의 distinguishedName, id, unique 속성 값, 신분 객체 또는 이들 속성 값과 객체의 배열.
+     * @return {String[]} 직무 이름 배열 반환.
      * @o2syntax
-     * //返回职务名称数组。
+     * //직무 이름 배열 반환.
      * const dutyNameList = this.org.listDutyNameWithIdentity( identity );
      */
     listDutyNameWithIdentity: function(id){
@@ -1567,17 +1567,17 @@ Object.assign(org,  {
         return nameList;
     },
 
-    //获取组织的所有职务名称
+    //조직의 모든 직무 이름 조회
     /**
-     * 批量获取组织的所有职务名称。
+     * 조직의 모든 직무 이름 일괄 조회.
      * @method listDutyNameWithUnit
      * @o2membercategory duty
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-     * @return {String[]} 返回职务名称数组。
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {String[]} 직무 이름 배열 반환.
      * @o2syntax
-     * //返回职务名称数组。
+     * //직무 이름 배열 반환.
      * const dutyNameList = this.org.listDutyNameWithUnit( unit );
      */
     listDutyNameWithUnit: function(name){
@@ -1594,18 +1594,18 @@ Object.assign(org,  {
         return nameList;
     },
 
-    //获取组织的所有职务
+    //조직의 모든 직무 조회
     /**
-     * 批量获取组织的所有职务。
+     * 조직의 모든 직무 일괄 조회.
      * @method listUnitAllDuty
      * @o2membercategory duty
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag} name - 组织的distinguishedName、id、unique属性值，组织对象。
-     * @return {Object[]} 返回职务数组
+     * @param {UnitFlag} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체.
+     * @return {Object[]} 직무 배열 반환
      * @o2ActionOut x_organization_assemble_express.UnitDutyAction.listWithUnitObject|example=Duty
      * @o2syntax
-     * //返回职务数组。
+     * //직무 배열 반환.
      * const dutyList = this.org.listUnitAllDuty( unit );
      */
     listUnitAllDuty: function(name){
@@ -1619,17 +1619,17 @@ Object.assign(org,  {
         return o;
     },
 
-    //组织属性**************
-    //添加组织属性值(在属性中添加values值，如果没有此属性，则创建一个)
+    //조직 속성**************
+    //조직 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
     /**
-     * 添加组织属性值(在属性中添加values值，如果没有此属性，则创建一个)
+     * 조직 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
      * @method appendUnitAttribute
      * @o2membercategory unitAttribute
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag} unit - 组织的distinguishedName、id、unique属性值，组织对象。
-     * @param {String} attr 属性名称。
-     * @param {String[]} values 属性值，必须为数组。
+     * @param {UnitFlag} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+     * @param {String} attr 속성 이름.
+     * @param {String[]} values 속성값, 반드시 배열.
      * @o2syntax
      * this.org.appendUnitAttribute( unit, attribute, valueArray);
      */
@@ -1638,16 +1638,16 @@ Object.assign(org,  {
         return this.oUnitAttribute.appendWithUnitWithName(unitFlag, attr, values);
     },
 
-    //设置组织属性值(将属性值修改为values，如果没有此属性，则创建一个)
+    //조직 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
     /**
-     * 设置组织属性值(将属性值修改为values，如果没有此属性，则创建一个)
+     * 조직 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
      * @method setUnitAttribute
      * @o2membercategory unitAttribute
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag} unit - 组织的distinguishedName、id、unique属性值，组织对象。
-     * @param {String} attr 属性名称。
-     * @param {String[]} values 属性值，必须为数组。
+     * @param {UnitFlag} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+     * @param {String} attr 속성 이름.
+     * @param {String[]} values 속성값, 반드시 배열.
      * @o2syntax
      * this.org.setUnitAttribute( unit, attribute, valueArray);
      */
@@ -1656,19 +1656,19 @@ Object.assign(org,  {
         return this.oUnitAttribute.setWithUnitWithName(unitFlag, attr, values);
     },
 
-    //获取组织属性值
+    //조직 속성 값 조회
     /**
-     根据组织标识和属性名称获取对应属性值。
+     조직 식별자와 속성 이름으로 해당 속성값 조회.
      * @method getUnitAttribute
      * @o2membercategory unitAttribute
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag} unit - 组织的distinguishedName、id、unique属性值，组织对象。
-     * @param {String} attr 属性名称。
-     * @return {String[]} 返回属性值数组，
-     * 如：<pre><code class='language-js'>[ value1, value2 ]</code></pre>
+     * @param {UnitFlag} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+     * @param {String} attr 속성 이름.
+     * @return {String[]} 속성 값 배열 반환,
+     * 예: <pre><code class='language-js'>[ value1, value2 ]</code></pre>
      * @o2syntax
-     * //返回该组织的属性值数组。
+     * //해당 조직의 속성 값 배열 반환.
      * const attributeList = this.org.getUnitAttribute( unit, attr );
      */
     getUnitAttribute: function(unit, attr){
@@ -1680,18 +1680,18 @@ Object.assign(org,  {
         return [];
     },
 
-    //列出组织所有属性的名称
+    //조직의 모든 속성 이름 목록
     /**
-     列出组织所有属性的名称数组。
+     조직의 모든 속성 이름 배열 나열.
      * @method listUnitAttributeName
      * @o2membercategory unitAttribute
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-     * @return {String[]} 返回组织属性名称数组，
-     * 如：<pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {String[]} 조직 속성 이름 배열 반환,
+     * 예: <pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
      * @o2syntax
-     * //返回组织所有属性的名称数组。
+     * //조직의 모든 속성 이름 배열 반환.
      * const attributeNameList = this.org.listUnitAttributeName( unit );
      */
     listUnitAttributeName: function(name){
@@ -1708,25 +1708,25 @@ Object.assign(org,  {
         return nameList;
     },
 
-    //列出组织的所有属性
+    //조직의 모든 속성 목록
     /**
-     列出组织的所有属性对象数组。
+     조직의 모든 속성 객체 배열을 나열합니다.
      * @method listUnitAllAttribute
      * @o2membercategory unitAttribute
      * @methodOf module:server.org
      * @static
-     * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-     * @return {Object[]} 返回组织属性对象数组，如：
+     * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+     * @return {Object[]} 조직 속성 객체 배열 반환, 예:
      * <pre><code class='language-js'>[{
-     *    "name": "部门类别",
-     *    "unit": "开发部@kfb@U",
+     *    "name": "부서 유형",
+     *    "unit": "개발부@kfb@U",
      *    "attributeList": [
-     *        "生产部门",
-     *        "二级部门"
+     *        "생산 부서",
+     *        "2급 부서"
      *    ]
      * }]</code></pre>
      * @o2syntax
-     * //返回组织所有属性的对象数组。
+     * //조직의 모든 속성 객체 배열 반환.
      * const attributeObjectList = this.org.listUnitAllAttribute( unit );
      */
     listUnitAllAttribute: function(name){
@@ -1742,7 +1742,7 @@ Object.assign(org,  {
 })
 
 
-//定义所需的服务
+//필요한 서비스 정의
 const processActions = new Action("x_processplatform_assemble_surface", {
     "getDictionary": {"uri": "/jaxrs/applicationdict/{applicationDict}/application/{applicationFlag}"},
     "getDictRoot": {"uri": "/jaxrs/applicationdict/{applicationDict}/application/{application}/data"},
@@ -1783,89 +1783,89 @@ const serviceActions = new Action("x_program_center", {
 });
 
 
-//include 引用脚本
+//include 스크립트 참조
 //optionsOrName : {
-//  type : "", 默认为process, 可以为 portal  process  cms
-//  application : "", 门户/流程/CMS的名称/别名/id, 默认为当前应用
-//  name : "" // 脚本名称/别名/id
+//  type : "", 기본값 process, portal  process  cms 가능
+//  application : "", 포털/프로세스/CMS의 이름/별칭/id, 기본값은 현재 앱
+//  name : "" // 스크립트 이름/별칭/id
 //}
-//或者name: "" // 脚本名称/别名/id
+//또는 name: "" // 스크립트 이름/별칭/id
 const includedScripts = {};
 
 /**
- * 在流程、门户、内容管理或服务管理中可以创建了脚本配置。</br>
- * 默认情况下系统以javascript格式进行编辑。
- * 这个时候可以使用<code class='language-js'>this.include()</code>引用脚本配置。</br>
- * 在v9.2以后，如果脚本配置名称以.json 、 .html 或 .css结束，系统会加载相应的编辑器。
- * 这种情况您可以使用如下方法获取内容。
+ * 프로세스, 포털, 콘텐츠 관리 또는 서비스 관리에서 스크립트 설정을 만들 수 있습니다.</br>
+ * 기본적으로 시스템은 javascript 형식으로 편집합니다.
+ * 이때 <code class='language-js'>this.include()</code>로 스크립트 설정을 참조할 수 있습니다.</br>
+ * v9.2 이후 스크립트 설정 이름이 .json, .html 또는 .css로 끝나면 시스템이 해당 편집기를 로드합니다.
+ * 이 경우 다음 방법으로 내용을 조회할 수 있습니다.
  * <pre><code class='language-js'>this.includeHmtl();
  * this.includeCss();
  * this.includeJson();
  * </code></pre>
  * @module server.common.include
- * @o2cn 脚本配置相应api
+ * @o2cn 스크립트 설정 관련 api
  * @o2category server.common
  * @o2ordernumber 175
  */
 
 /**
- * this.include是一个方法，当您在流程、门户、内容管理或服务管理中创建了脚本配置，可以使用this.include()用来引用脚本配置。<br/>
- * v8.0及以后版本中增加了服务管理的脚本配置。<br/>
+ * this.include는 메서드로, 프로세스, 포털, 콘텐츠 관리 또는 서비스 관리에서 스크립트 설정을 만들었을 때 this.include()로 스크립트 설정을 참조할 수 있습니다.<br/>
+ * v8.0 이후 버전에 서비스 관리의 스크립트 설정이 추가되었습니다.<br/>
  * @method include
  * @methodOf module:server.common.
- * @o2cn 脚本引用
- * @param {(String|Object)} optionsOrName 可以是脚本标识字符串或者是对象。
+ * @o2cn 스크립트 참조
+ * @param {(String|Object)} optionsOrName 스크립트 식별 문자열 또는 객체.
  * <pre><code class='language-js'>
  *
- * //如果需要引用其他应用的脚本配置，将options设置为Object;
+ * //다른 앱의 스크립트 설정을 참조하려면 options를 Object로 설정;
  * this.include({
- *       //type: 应用类型。可以为 portal  process  cms  service。流程脚本默认为process，服务管理中默认为service
+ *       //type: 앱 유형. portal  process  cms  service 가능. 프로세스 스크립트 기본값은 process, 서비스 관리에서는 기본값 service
  *       type : "portal",
- *       application : "首页", // 门户、流程、CMS的名称、别名、id。 引用服务管理的脚本则忽略该参数。
- *       name : "initScript" // 脚本配置的名称、别名或id
+ *       application : "홈", // 포털, 프로세스, CMS의 이름, 별칭, id. 서비스 관리 스크립트를 참조할 때는 이 매개변수를 무시함.
+ *       name : "initScript" // 스크립트 설정의 이름, 별칭 또는 id
  * });
  *
- * //引用服务管理中的脚本
+ * //서비스 관리의 스크립트 참조
  * this.include({
  *   "type": "service",
  *   "name": "scriptName"
  * });
  *
- * //引用流程管理中的脚本
+ * //프로세스 관리의 스크립트 참조
  * this.include({
  *   "type": "process",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //引用内容管理中的脚本
+ * //콘텐츠 관리의 스크립트 참조
  * this.include({
  *   "type": "cms",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //引用门户管理中的脚本
+ * //포털 관리의 스크립트 참조
  * this.include({
  *   "type": "portal",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  * </code></pre>
- * @param {Function} [callback] 加载后执行的回调方法。
+ * @param {Function} [callback] 로드 후 실행할 콜백 메서드.
  *
  * @o2syntax
- * //您可以在表单、流程、视图和查询视图的各个嵌入脚本中，通过this.include()来引用本应用或其他应用的脚本配置，如下：
+ * //양식, 프로세스, 뷰, 쿼리 뷰의 각 내장 스크립트에서 this.include()로 이 앱이나 다른 앱의 스크립트 설정을 참조할 수 있습니다. 예:
  * this.include( optionsOrName, callback )
  * @example
  * <caption>
- *    <b>样例一：</b>在通用脚本中定义一个通用的方法去获取公文管理所有的文种，在查询语句中根据该方法来拼接JPQL。<br/>
- *     1、在内容管理应用中有一个fileRes的应用，在该应用中创建一个脚本，命名为FileSql，并定义方法。
+ *    <b>예시 1:</b> 공용 스크립트에서 공문 관리의 모든 문서 종류를 조회하는 공용 메서드를 정의하고, 쿼리 구문에서 이 메서드로 JPQL을 조합.<br/>
+ *     1. 콘텐츠 관리에 fileRes 앱이 있고, 이 앱에서 스크립트를 만들어 FileSql로 이름 짓고 메서드를 정의.
  *     <img src='img/module/include/server_define1.png' />
  * </caption>
- * //定义一个方法
+ * //메서드 정의
  * this.define('getFileSQL',function(){
- *   const application = ['公司发文','部门发文','党委发文'];
+ *   const application = ['회사 발신 문서','부서 발신 문서','당위원회 발신 문서'];
  *   const apps = application.map((app)=>{
  *       return `o.applicationName = '${app}'`
  *   });
@@ -1873,7 +1873,7 @@ const includedScripts = {};
  *});
  * @example
  * <caption>
- *      2、在查询语句中使用该方法。
+ *      2. 쿼리 구문에서 이 메서드 사용.
  *     <img src='img/module/include/server_define2.png'/>
  * </caption>
  * this.include({
@@ -1886,185 +1886,185 @@ const includedScripts = {};
  */
 
 /**
- * 当脚本配置保存的是html文件（名称以.html结束），this.includeHtml可以以获取html内容。
+ * 스크립트 설정에 저장된 것이 html 파일(이름이 .html로 끝남)일 때, this.includeHtml로 html 내용을 가져올 수 있습니다.
  * @method includeHtml
  * @since v9.2
  * @methodOf module:server.common.include
- * @param {(String|Object)} optionsOrName 可以是脚本标识字符串或者是对象。
+ * @param {(String|Object)} optionsOrName 스크립트 식별 문자열 또는 객체.
  * <pre><code class='language-js'>
- * //如果需要获取本应用的html(在脚本配置中)，将options设置为String。
- * this.includeHtml("test.html") //脚本配置的名称、别名或id
+ * //현재 앱의 html(스크립트 설정 내)을 가져오려면 options를 String으로 설정합니다.
+ * this.includeHtml("test.html") //스크립트 설정의 이름, 별칭 또는 id
  *
- * //如果需要获取其他应用的html，将options设置为Object;
+ * //다른 앱의 html을 가져오려면 options를 Object로 설정합니다;
  * this.includeHtml({
- *       //type: 应用类型。可以为 portal  process  cms  service。
- *       //如果没有该选项或者值为空字符串，则表示应用脚本和被应用的脚本配置类型相同。
- *       //比如在门户的A应用脚本中引用门户B应用的脚本配置，则type可以省略。
+ *       //type: 앱 유형. portal  process  cms  service 가능.
+ *       //이 옵션이 없거나 값이 빈 문자열이면 참조하는 스크립트와 참조되는 스크립트 설정의 유형이 같음을 의미함.
+ *       //예를 들어 포털 A 앱 스크립트에서 포털 B 앱의 스크립트 설정을 참조하면 type은 생략 가능.
  *       type : "portal",
- *       application : "首页", // 门户、流程、CMS的名称、别名、id。 默认为当前应用，如果脚本在服务管理中忽略该参数
- *       name : "test.html" // 脚本配置的名称、别名或id
+ *       application : "홈", // 포털, 프로세스, CMS의 이름, 별칭, id. 기본값은 현재 앱, 스크립트가 서비스 관리에 있으면 이 매개변수는 무시
+ *       name : "test.html" // 스크립트 설정의 이름, 별칭 또는 id
  * })
  *
- * //获取服务管理中的html
+ * //서비스 관리의 html 가져오기
  * this.includeHtml({
  *   "type": "service",
  *   "name": "scriptName"
  * });
  *
- * //获取流程管理中的html
+ * //프로세스 관리의 html 가져오기
  * this.includeHtml({
  *   "type": "process",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //获取内容管理中的html
+ * //콘텐츠 관리의 html 가져오기
  * this.includeHtml({
  *   "type": "cms",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //获取门户管理中的html
+ * //포털 관리의 html 가져오기
  * this.includeHtml({
  *   "type": "portal",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  * </code></pre>
- * @param {Function} [callback] 加载后执行的回调方法
- * @param {Boolean} [async] 是否异步加载，默认为true
+ * @param {Function} [callback] 로드 후 실행할 콜백 메서드
+ * @param {Boolean} [async] 비동기 로드 여부, 기본값 true
  * @o2syntax
  * this.includeHtml( optionsOrName, callback, async )
  * @example
- * //同步获取html（不推荐）
- * //在门户的脚本库里配置了html，名称为test.html
+ * //동기로 html 가져오기(권장하지 않음)
+ * //포털의 스크립트 라이브러리에 html을 설정, 이름은 test.html
  * var html = this.includeHtml({
  *   "type": "portal",
- *   "application": "appName", //门户的标识
+ *   "application": "appName", //포털 식별자
  *   "name": "test.html"
  * });
  */
 
 
 /**
- * 当脚本配置保存的是css文件（名称以.css结束），this.includeCss可以以获取html内容。
+ * 스크립트 설정에 저장된 것이 css 파일(이름이 .css로 끝남)일 때, this.includeCss로 css 내용을 가져올 수 있습니다.
  * @method includeCss
  * @since v9.2
  * @methodOf  module:server.common.include
- * @param {(String|Object)} optionsOrName 可以是脚本标识字符串或者是对象。
+ * @param {(String|Object)} optionsOrName 스크립트 식별 문자열 또는 객체.
  * <pre><code class='language-js'>
- * //如果需要获取本应用的css(在脚本配置中)，将options设置为String。
- * this.includeCss("test.css") //脚本配置的名称、别名或id
+ * //현재 앱의 css(스크립트 설정 내)를 가져오려면 options를 String으로 설정합니다.
+ * this.includeCss("test.css") //스크립트 설정의 이름, 별칭 또는 id
  *
- * //如果需要获取其他应用的html，将options设置为Object;
+ * //다른 앱의 html을 가져오려면 options를 Object로 설정합니다;
  * this.includeCss({
- *       //type: 应用类型。可以为 portal  process  cms  service。
- *       //如果没有该选项或者值为空字符串，则表示应用脚本和被应用的脚本配置类型相同。
- *       //比如在门户的A应用脚本中引用门户B应用的脚本配置，则type可以省略。
+ *       //type: 앱 유형. portal  process  cms  service 가능.
+ *       //이 옵션이 없거나 값이 빈 문자열이면 참조하는 스크립트와 참조되는 스크립트 설정의 유형이 같음을 의미함.
+ *       //예를 들어 포털 A 앱 스크립트에서 포털 B 앱의 스크립트 설정을 참조하면 type은 생략 가능.
  *       type : "portal",
- *       application : "首页", // 门户、流程、CMS的名称、别名、id。 默认为当前应用，如果脚本在服务管理中忽略该参数
- *       name : "initScript" // 脚本配置的名称、别名或id
+ *       application : "홈", // 포털, 프로세스, CMS의 이름, 별칭, id. 기본값은 현재 앱, 스크립트가 서비스 관리에 있으면 이 매개변수는 무시
+ *       name : "initScript" // 스크립트 설정의 이름, 별칭 또는 id
  * })
  *
- * //获取服务管理中的html
+ * //서비스 관리의 html 가져오기
  * this.includeCss({
  *   "type": "service",
  *   "name": "scriptName"
  * });
  *
- * //获取流程管理中的html
+ * //프로세스 관리의 html 가져오기
  * this.includeCss({
  *   "type": "process",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //获取内容管理中的html
+ * //콘텐츠 관리의 html 가져오기
  * this.includeCss({
  *   "type": "cms",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //获取门户管理中的html
+ * //포털 관리의 html 가져오기
  * this.includeCss({
  *   "type": "portal",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  * </code></pre>
- * @param {Function} [callback] 加载后执行的回调方法
- * @param {Boolean} [async] 是否异步加载，默认为true
+ * @param {Function} [callback] 로드 후 실행할 콜백 메서드
+ * @param {Boolean} [async] 비동기 로드 여부, 기본값 true
  * @o2syntax
  * this.includeCss( optionsOrName, callback, async )
  * @example
- * //同步获取css文本（不推荐）
- * //在门户的脚本库里配置了css，名称为test.css
+ * //동기로 css 텍스트 가져오기(권장하지 않음)
+ * //포털의 스크립트 라이브러리에 css를 설정, 이름은 test.css
  * var cssText = this.includeCss({
  *   "type": "portal",
- *   "application": "appName", //门户的标识
+ *   "application": "appName", //포털 식별자
  *   "name": "test.css"
  * });
  */
 
 /**
- * 当脚本配置保存的是json文件（名称以.json结束），this.includeJson可以以获取json内容。
+ * 스크립트 설정에 저장된 것이 json 파일(이름이 .json으로 끝남)일 때, this.includeJson으로 json 내용을 가져올 수 있습니다.
  * @method includeJson
  * @since v9.2
  * @methodOf  module:server.common.include
- * @param {(String|Object)} optionsOrName 可以是脚本标识字符串或者是对象。
+ * @param {(String|Object)} optionsOrName 스크립트 식별 문자열 또는 객체.
  * <pre><code class='language-js'>
- * //如果需要获取本应用的json(在脚本配置中)，将options设置为String。
- * this.includeJson("test.json") //脚本配置的名称、别名或id
+ * //현재 앱의 json(스크립트 설정 내)을 가져오려면 options를 String으로 설정합니다.
+ * this.includeJson("test.json") //스크립트 설정의 이름, 별칭 또는 id
  *
- * //如果需要获取其他应用的html，将options设置为Object;
+ * //다른 앱의 html을 가져오려면 options를 Object로 설정합니다;
  * this.includeJson({
- *       //type: 应用类型。可以为 portal  process  cms  service。
- *       //如果没有该选项或者值为空字符串，则表示应用脚本和被应用的脚本配置类型相同。
- *       //比如在门户的A应用脚本中引用门户B应用的脚本配置，则type可以省略。
+ *       //type: 앱 유형. portal  process  cms  service 가능.
+ *       //이 옵션이 없거나 값이 빈 문자열이면 참조하는 스크립트와 참조되는 스크립트 설정의 유형이 같음을 의미함.
+ *       //예를 들어 포털 A 앱 스크립트에서 포털 B 앱의 스크립트 설정을 참조하면 type은 생략 가능.
  *       type : "portal",
- *       application : "首页", // 门户、流程、CMS的名称、别名、id。 默认为当前应用，如果脚本在服务管理中忽略该参数
- *       name : "initScript" // 脚本配置的名称、别名或id
+ *       application : "홈", // 포털, 프로세스, CMS의 이름, 별칭, id. 기본값은 현재 앱, 스크립트가 서비스 관리에 있으면 이 매개변수는 무시
+ *       name : "initScript" // 스크립트 설정의 이름, 별칭 또는 id
  * })
  *
- * //获取服务管理中的json对象
+ * //서비스 관리의 json 객체 가져오기
  * this.includeJson({
  *   "type": "service",
  *   "name": "scriptName"
  * });
  *
- * //获取流程管理中的json对象
+ * //프로세스 관리의 json 객체 가져오기
  * this.includeJson({
  *   "type": "process",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //获取内容管理中的json对象
+ * //콘텐츠 관리의 json 객체 가져오기
  * this.includeJson({
  *   "type": "cms",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  *
- * //获取门户管理中的json对象
+ * //포털 관리의 json 객체 가져오기
  * this.includeJson({
  *   "type": "portal",
  *   "application": "appName",
  *   "name": "scriptName"
  * });
  * </code></pre>
- * @param {Function} [callback] 加载后执行的回调方法
- * @param {Boolean} [async] 是否异步加载，默认为true
+ * @param {Function} [callback] 로드 후 실행할 콜백 메서드
+ * @param {Boolean} [async] 비동기 로드 여부, 기본값 true
  * @o2syntax
  * this.includeJson( optionsOrName, callback, async )
  * @example
- * //同步获取json数据（不推荐）
- * //在门户的脚本库里配置了css，名称为test.json
+ * //동기로 json 데이터 가져오기(권장하지 않음)
+ * //포털의 스크립트 라이브러리에 css를 설정, 이름은 test.json
  * var json = this.includeJson({
  *   "type": "portal",
- *   "application": "appName", //门户的标识
+ *   "application": "appName", //포털 식별자
  *   "name": "test.json"
  * });
  */
@@ -2153,46 +2153,46 @@ const includeCss = function (optionsOrName, callback){
     return _includeSource.apply(this, [optionsOrName, callback, 'css']);
 };
 
-//Dict数据字典
+//Dict 데이터 사전
 /**
- * this.Dict是一个工具类，如果您在流程、内容管理、门户和服务管理中创建了数据字典，可以使用this.Dict类对数据字典进行增删改查操作。<br/>
- * 从v8.0版本开始，支持在门户和服务管理中创建数据字典。
+ * this.Dict는 유틸리티 클래스로, 프로세스, 콘텐츠 관리, 포털, 서비스 관리에서 데이터 사전을 만들었다면 this.Dict 클래스로 데이터 사전을 추가·삭제·수정·조회할 수 있습니다.<br/>
+ * v8.0부터 포털과 서비스 관리에서 데이터 사전 생성을 지원합니다.
  * @module server.Dict
- * @o2cn 数据字典
+ * @o2cn 데이터 사전
  * @o2category server.common
  * @o2ordernumber 180
  * @o2syntax
- * //您可以通过this.Dict()对本应用或其他应用的数据字典中的数据进行增删改查，如下：
+ * //this.Dict()로 이 앱이나 다른 앱의 데이터 사전 데이터를 추가·삭제·수정·조회할 수 있음. 예:
  * const dict = new this.Dict( options )
  * @example
  * const dict = new this.Dict({
- *     //type: 应用类型。可以为process  cms portal service。流程脚本默认为process，服务管理中默认为service。
+ *     //type: 앱 유형. process  cms portal service 가능. 프로세스 스크립트 기본값은 process, 서비스 관리에서는 기본값 service.
  *    type : "cms",
- *    application : "bulletin", //流程、CMS、门户管理的名称、别名、id。引用服务管理的数组字典则忽略该参数。
- *    name : "bulletinDictionary", // 数据字典的名称、别名、id
+ *    application : "bulletin", //프로세스, CMS, 포털 관리의 이름, 별칭, id. 서비스 관리의 데이터 사전을 참조할 때는 이 매개변수를 무시함.
+ *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
  * });
  *
- * //引用服务管理中的数据字典
+ * //서비스 관리의 데이터 사전 참조
  * const dict = new this.Dict({
  *   "type": "service",
  *   "name": "dictName"
  * });
  *
- * //引用流程管理中的数据字典
+ * //프로세스 관리의 데이터 사전 참조
  * const dict = new this.Dict({
  *   "type": "process",
  *   "application": "appName",
  *   "name": "dictName"
  * });
  *
- * //引用内容管理中的数据字典
+ * //콘텐츠 관리의 데이터 사전 참조
  * const dict = new this.Dict({
  *   "type": "cms",
  *   "application": "appName",
  *   "name": "dictName"
  * });
  *
- * //引用门户管理中的数据字典
+ * //포털 관리의 데이터 사전 참조
  * const dict = new this.Dict({
  *   "type": "portal",
  *   "application": "appName",
@@ -2222,76 +2222,76 @@ const Dict = function(optionsOrName){
         return ( type === "portal" || type === "service" ) ? ar.join(".") : ar.join("/");
     };
     /**
-     * 根据路径获取数据字典中的数据。
+     * 경로에 따라 데이터 사전의 데이터를 조회합니다.
      * @method get
      * @methodOf module:server.Dict
      * @static
-     * @param {String} [path] 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。当值为空的时候，表示获取数据字典中的所有数据。
-     * @param {Function} [success] 获取数据成功时的回调函数。<b>流程设计后台脚本中无此参数。</b>
-     * @param {Function} [failure] 获取数据失败时的回调。<b>流程设计后台脚本中无此参数。</b>
+     * @param {String} [path] 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. 값이 비어 있으면 데이터 사전의 모든 데이터를 조회.
+     * @param {Function} [success] 데이터 조회 성공 시 콜백 함수. <b>프로세스 설계 백엔드 스크립트에는 이 매개변수가 없음.</b>
+     * @param {Function} [failure] 데이터 조회 실패 시 콜백. <b>프로세스 설계 백엔드 스크립트에는 이 매개변수가 없음.</b>
      * @return {(Object|Array|String|Number|Boolean)}
-     * 返回数据字典的数据，类型和配置数据字典时候指定的一致。
+     * 데이터 사전 데이터 반환, 유형은 데이터 사전 설정 시 지정한 것과 같음.
      * @o2syntax
      * const data = dict.get( path, success, failure )
      * @example
      * <caption>
-     *     已经配置好了如下图所示的数据字典
+     *     아래 그림과 같이 설정된 데이터 사전
      * <img src='img/module/Dict/dict.png' />
      * </caption>
      * const dict = new this.Dict({
-     *     //type: 应用类型。可以为process  cms portal service。默认为process。
+     *     //type: 앱 유형. process  cms portal service 가능. 기본값은 process.
      *    type : "cms",
-     *    application : "bulletin", //流程、CMS、门户管理的名称、别名、id。引用服务管理的数组字典则忽略该参数。
-     *    name : "bulletinDictionary", // 数据字典的名称、别名、id
+     *    application : "bulletin", //프로세스, CMS, 포털 관리의 이름, 별칭, id. 서비스 관리의 데이터 사전을 참조할 때는 이 매개변수를 무시함.
+     *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
      * });
      *
      * const data = dict.get();
-     * //data的值为
+     * //data의 값은
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        }
      *    ]
      * }
      *
      *  const category = dict.get("category");
-     *  //category的值为
+     *  //category의 값은
      *  [
      *     {
      *        "enable": true,
      *        "sequence": 1.0,
-     *        "text": "公司公告",
+     *        "text": "회사 공지",
      *        "value": "company"
      *    },
      *     {
      *       "enable": "false",
      *       "sequence": 2.0,
-     *        "text": "部门公告",
+     *        "text": "부서 공지",
      *        "value": "department"
      *    }
      *  ]
      *
      *  const array0 = dict.get("category.0");
-     *  //array0 的值为
+     *  //array0의 값은
      *  {
      *    "enable": true,
      *    "sequence": 1.0,
-     *    "text": "公司公告",
+     *    "text": "회사 공지",
      *    "value": "company"
      * }
      *
      * const enable = dict.get("category.0.eanble");
-     * //enable 的值为 true
+     * //enable의 값은 true
      */
     this.get = function(path, success, failure){
         const getDataMethodName = (enableAnonymous && type === 'cms') ? 'getDictDataAnonymous' : 'getDictData';
@@ -2308,131 +2308,131 @@ const Dict = function(optionsOrName){
         return json.data;
     };
     /**
-     * 根据路径修改数据字典的数据。
+     * 경로에 따라 데이터 사전의 데이터 수정.
      * @method set
      * @methodOf module:Dict
      * @instance
-     * @param {String} path 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。如果数据路径不存在，则报错。
-     * @param {(Object|Array|String|Number|Boolean)} value 修改后的数据
-     * @param {Function} [success] 设置数据成功时的回调函数。<b>流程设计后台脚本中无此参数。</b>
-     * @param {Function} [failure] 设置数据错误时的回调函数。<b>流程设计后台脚本中无此参数。</b>
+     * @param {String} path 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. 데이터 경로가 없으면 오류 발생.
+     * @param {(Object|Array|String|Number|Boolean)} value 수정 후 데이터
+     * @param {Function} [success] 데이터 설정 성공 시 콜백 함수. <b>프로세스 설계 백엔드 스크립트에는 이 매개변수가 없음.</b>
+     * @param {Function} [failure] 데이터 설정 오류 시 콜백 함수. <b>프로세스 설계 백엔드 스크립트에는 이 매개변수가 없음.</b>
      * @o2syntax
      * dict.set( path, data, success, failure )
      * @example
      * const dict = new this.Dict({
-     *     //type: 应用类型。可以为process  cms portal service。默认为process。
+     *     //type: 앱 유형. process  cms portal service 가능. 기본값은 process.
      *    type : "cms",
-     *    application : "bulletin", //流程、CMS、门户管理的名称、别名、id。引用服务管理的数组字典则忽略该参数。
-     *    name : "bulletinDictionary", // 数据字典的名称、别名、id
+     *    application : "bulletin", //프로세스, CMS, 포털 관리의 이름, 별칭, id. 서비스 관리의 데이터 사전을 참조할 때는 이 매개변수를 무시함.
+     *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
      * });
      *
-     * dict.set( "category", { text : "系统公告", value : "system" }, function(data){
-     *    //data 形如
+     * dict.set( "category", { text : "시스템 공지", value : "system" }, function(data){
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      * @example
      * <caption>
-     *     对Example add的数据字典进行赋值，如下：
+     *     Example add의 데이터 사전에 값 할당. 예:
      * </caption>
      * const dict = new this.Dict({
-     *     //type: 应用类型。可以为process  cms portal service。默认为process。
+     *     //type: 앱 유형. process  cms portal service 가능. 기본값은 process.
      *    type : "cms",
-     *    application : "bulletin", //流程、CMS、门户管理的名称、别名、id。引用服务管理的数组字典则忽略该参数。
-     *    name : "bulletinDictionary", // 数据字典的名称、别名、id
+     *    application : "bulletin", //프로세스, CMS, 포털 관리의 이름, 별칭, id. 서비스 관리의 데이터 사전을 참조할 때는 이 매개변수를 무시함.
+     *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
      * });
      *
-     * dict.set( "archiveOptions", [ { text : "是" }, { text : "否" } ]);
-     *      //数据字典的值变为
+     * dict.set( "archiveOptions", [ { text : "예" }, { text : "아니요" } ]);
+     *      //데이터 사전 값이 다음과 같이 변경됨
      *  {
      *     "category": [
      *         {
      *             "enable": true,
      *             "sequence": 1.0,
-     *             "text": "公司公告",
+     *             "text": "회사 공지",
      *             "value": "company"
      *         },
      *         {
      *             "enable": "false",
      *             "sequence": 2.0,
-     *             "text": "部门公告",
+     *             "text": "부서 공지",
      *             "value": "department"
      *         },
      *         {
      *             "sequence" : 3.0,
-     *             "text": "系统公告",
+     *             "text": "시스템 공지",
      *             "value": "system"
      *         }
      *
      *     ],
-     *     "archiveOptions" : [ { text : "是" }, { text : "否" } ]
+     *     "archiveOptions" : [ { text : "예" }, { text : "아니요" } ]
      * }
      *
-     * dict.set( "category.2", { text : "县级公告", value : "county" }, function(data){
-     *     //data 形如
+     * dict.set( "category.2", { text : "현급 공지", value : "county" }, function(data){
+     *     //data 형식 예
      *     //{
-     *     //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *     //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *     //}
      *  }, function(xhr){
-     *     //xhr 为 xmlHttpRequest
+     *     //xhr은 xmlHttpRequest
      *  });
      *
-     *   /数据字典的值变为
+     *   /데이터 사전 값이 다음과 같이 변경됨
      *  {
      *     "category": [
      *         {
      *             "enable": true,
      *             "sequence": 1.0,
-     *             "text": "公司公告",
+     *             "text": "회사 공지",
      *             "value": "company"
      *         },
      *         {
      *             "enable": "false",
      *             "sequence": 2.0,
-     *             "text": "部门公告",
+     *             "text": "부서 공지",
      *             "value": "department"
      *         },
      *         {
-     *             "text": "县级公告",
+     *             "text": "현급 공지",
      *             "value": "county"
      *         }
      *     ],
-     *     "archiveOptions" : [ { text : "是" }, { text : "否" } ]
+     *     "archiveOptions" : [ { text : "예" }, { text : "아니요" } ]
      * }
      *
      * dict.set( "category.1.sequence", 3 );
      * dict.set( "category.2.sequence", 2 );
-     *      //数据字典的值变为
+     *      //데이터 사전 값이 다음과 같이 변경됨
      *      {
      *     "category": [
      *         {
      *             "enable": true,
      *             "sequence": 1.0,
-     *             "text": "公司公告",
+     *             "text": "회사 공지",
      *             "value": "company"
      *         },
      *         {
      *             "enable": "false",
      *             "sequence": 3.0,
-     *             "text": "部门公告",
+     *             "text": "부서 공지",
      *             "value": "department"
      *         },
      *         {
      *             "sequence": 2.0,
-     *             "text": "县级公告",
+     *             "text": "현급 공지",
      *             "value": "county"
      *         }
      *     ],
-     *     "archiveOptions" : [ { text : "是" }, { text : "否" } ]
+     *     "archiveOptions" : [ { text : "예" }, { text : "아니요" } ]
      * }
      * @example
      * <caption>
-     *     下面是错误的赋值：
+     *     다음은 잘못된 할당입니다:
      * </caption>
-     * dict.set( "category_1", { text : "公司公告" } ); //出错，因为category_1在数据字典中不存在
+     * dict.set( "category_1", { text : "회사 공지" } ); //오류, category_1이 데이터 사전에 존재하지 않음
      */
     this.set = function(path, value, success, failure){
         const successFun = json=>{if (success) success(json.data);}
@@ -2446,133 +2446,133 @@ const Dict = function(optionsOrName){
     };
 
     /**
-     * 根据路径新增数据字典的数据。
+     * 경로에 따라 데이터 사전에 데이터를 추가합니다.
      * @method add
      * @methodOf module:Dict
      * @instance
-     * @param {String} path 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。如果path在数据字典中已有数据，且原有数据是数组，则数组添加一项；如果原有数据不是数组，则报错。
-     * @param {(Object|Array|String|Number|Boolean)} data 需要新增的数据
-     * @param {Function} [success] 增加数据成功时的回调函数。<b>流程设计后台脚本中无此参数。</b>
-     * @param {Function} [failure] 增加数据错误时的回调函数。<b>流程设计后台脚本中无此参数。</b>
+     * @param {String} path 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. path에 이미 데이터가 있고 기존 데이터가 배열이면 배열에 항목 추가, 배열이 아니면 오류 발생.
+     * @param {(Object|Array|String|Number|Boolean)} data 추가할 데이터
+     * @param {Function} [success] 데이터 추가 성공 시 콜백 함수. <b>프로세스 설계 백엔드 스크립트에는 이 매개변수가 없음.</b>
+     * @param {Function} [failure] 데이터 추가 오류 시 콜백 함수. <b>프로세스 설계 백엔드 스크립트에는 이 매개변수가 없음.</b>
      * @o2syntax
      * dict.add( path, data, success, failure )
      * @example
      * const dict = new this.Dict({
-     *     //type: 应用类型。可以为process  cms portal service。默认为process。
+     *     //type: 앱 유형. process  cms portal service 가능. 기본값은 process.
      *    type : "cms",
-     *    application : "bulletin", //流程、CMS、门户管理的名称、别名、id。引用服务管理的数组字典则忽略该参数。
-     *    name : "bulletinDictionary", // 数据字典的名称、别名、id
+     *    application : "bulletin", //프로세스, CMS, 포털 관리의 이름, 별칭, id. 서비스 관리의 데이터 사전을 참조할 때는 이 매개변수를 무시함.
+     *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
      * });
      *
-     * dict.add( "category", { text : "系统公告", value : "system" }, function(data){
-     *    //data 形如
+     * dict.add( "category", { text : "시스템 공지", value : "system" }, function(data){
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      * @example
      * <caption>
-     *     对get方法样例的数据字典进行赋值，如下：
+     *     get 메서드 예제의 데이터 사전에 값 할당, 예:
      * </caption>
      * const dict = new this.Dict({
-     *     //type: 应用类型。可以为process  cms portal service。默认为process。
+     *     //type: 앱 유형. process  cms portal service 가능. 기본값은 process.
      *    type : "cms",
-     *    application : "bulletin", //流程、CMS、门户管理的名称、别名、id。引用服务管理的数组字典则忽略该参数。
-     *    name : "bulletinDictionary", // 数据字典的名称、别名、id
+     *    application : "bulletin", //프로세스, CMS, 포털 관리의 이름, 별칭, id. 서비스 관리의 데이터 사전을 참조할 때는 이 매개변수를 무시함.
+     *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
      * });
      *
-     * dict.add( "category", { text : "系统公告", value : "system" }, function(data){
-     *    //data 形如
+     * dict.add( "category", { text : "시스템 공지", value : "system" }, function(data){
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr, text, error){
-     *    //xhr 为 xmlHttpRequest, text 为错误文本， error为Error对象
+     *    //xhr은 xmlHttpRequest, text는 오류 텍스트, error는 Error 객체
      * });
-     *     //数据字典的值变为
+     *     //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
-     *            "text": "系统公告",
+     *            "text": "시스템 공지",
      *            "value": "system"
      *        }
      *    ]
      * }
      *
      *  dict.add( "category.2.sequence", 3 );
-     *     //数据字典的值变为
+     *     //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
      *            "sequence" : 3.0,
-     *            "text": "系统公告",
+     *            "text": "시스템 공지",
      *            "value": "system"
      *        }
      *    ]
      * }
 
      * dict.add( "archiveOptions", {
-     *    "yes" : "是",
-     *    "no" : "否"
+     *    "yes" : "예",
+     *    "no" : "아니요"
      * });
-     *     //数据字典的值变为
+     *     //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
      *            "sequence" : 3.0,
-     *            "text": "系统公告",
+     *            "text": "시스템 공지",
      *            "value": "system"
      *        }
      *
      *    ],
      *    "archiveOptions" : {
-     *        "yes" : "是",
-     *        "no" : "否"
+     *        "yes" : "예",
+     *        "no" : "아니요"
      *    }
      * }
      * @example
-     * <caption>下面是错误的赋值，如下：</caption>
-     * dict.add( "category.3", { text : "系统公告", value : "system" }); //出错，因为不能对数组下标直接赋值
+     * <caption>아래는 잘못된 할당 예:</caption>
+     * dict.add( "category.3", { text : "시스템 공지", value : "system" }); //오류, 배열 인덱스에 직접 값을 할당할 수 없음
      *
-     * dict.add( "category.1.value", { text : "系统公告" } ); //出错，因为不能对已经存在的非数组路径赋值
+     * dict.add( "category.1.value", { text : "시스템 공지" } ); //오류, 이미 존재하는 비배열 경로에는 값을 할당할 수 없음
      */
     this.add = function(path, value, success, failure){
         const successFun = json=>{if (success) success(json.data);}
@@ -2585,110 +2585,110 @@ const Dict = function(optionsOrName){
         return json.data;
     };
     /**
-     * 根据路径删除数据字典的数据。<b>流程设计后台脚本中无此方法。</b>
+     * 경로로 데이터 사전 데이터 삭제. <b>프로세스 설계 백엔드 스크립트에는 이 메서드가 없음.</b>
      * @method delete
      * @methodOf module:Dict
      * @instance
-     * @param {String} path 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。如果数据路径不存在，则报错。
-     * @param {Function} [success] 删除数据成功时的回调函数。
-     * @param {Function} [failure] 删除数据错误时的回调函数。
+     * @param {String} path 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. 데이터 경로가 없으면 오류 발생.
+     * @param {Function} [success] 데이터 삭제 성공 시 콜백 함수.
+     * @param {Function} [failure] 데이터 삭제 오류 시 콜백 함수.
      * @o2syntax
      * dict.delete( path, success, failure )
      * @example
      * const dict = new this.Dict({
-     *    //type: 应用类型。可以为process  cms portal service。默认为process。
+     *    //type: 앱 유형. process  cms portal service 가능. 기본값은 process.
      *    type : "cms",
-     *    application : "bulletin", //流程、CMS的名称、别名、id, 默认为当前应用
-     *    name : "bulletinDictionary", //流程、CMS、门户管理的名称、别名、id。引用服务管理的数组字典则忽略该参数。
+     *    application : "bulletin", //프로세스, CMS의 이름·별칭·id, 기본값은 현재 앱
+     *    name : "bulletinDictionary", //프로세스, CMS, 포털 관리의 이름, 별칭, id. 서비스 관리의 데이터 사전을 참조할 때는 이 매개변수를 무시함.
      * });
      *
      * dict.delete( "category", function(){
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      * @example
      * <caption>
-     *     对Example set的数据字典进行赋值，如下：
+     *     Example set의 데이터 사전에 값 할당. 예:
      * </caption>
      * const dict = new this.Dict("bulletinDictionary");
      *
      * dict.delete( "archiveOptions");
-     * //数据字典的值变为
+     * //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *     *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 3.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
      *            "sequence": 2.0,
-     *            "text": "县级公告",
+     *            "text": "현급 공지",
      *            "value": "county"
      *        }
      *    ]
      * }
      *
      * dict.delete( "category.2.sequence", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
-     * //数据字典的值变为
+     * //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 3.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
-     *            "text": "县级公告",
+     *            "text": "현급 공지",
      *            "value": "county"
      *        }
      *    ]
      * }
      *
      * dict.delete( "category.2");
-     * //数据字典的值变为
+     * //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 3.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        }
      *    ]
      * }
      * @example
      * <caption>
-     *     下面是错误的删除：
+     *     다음은 잘못된 삭제입니다:
      * </caption>
-     * dict.delete( "category_1" ); //出错，因为category_1在数据字典中不存在
+     * dict.delete( "category_1" ); //오류, category_1이 데이터 사전에 존재하지 않음
      */
     this["delete"] = function(path, success, failure){
         const successFun = json=>{if (success) success(json.data);}
@@ -2704,15 +2704,15 @@ const Dict = function(optionsOrName){
 }
 
 /**
- * this.Table是一个工具类，您可以使用这个类对数据中心的数据表进行增删改查操作。
+ * this.Table은 도구 클래스로, 이 클래스로 데이터 센터의 데이터 테이블을 추가·삭제·수정·조회할 수 있습니다.
  * @module server.Table
- * @o2cn 数据表执行
+ * @o2cn 데이터 테이블 실행
  * @o2category server.common
  * @o2ordernumber 185
- * @param {String} name 数据表的id、名称或别名。
- * @return {Object} table对象
+ * @param {String} name 데이터 테이블의 id, 이름 또는 별칭.
+ * @return {Object} table 객체
  * @o2syntax
- * //您可以在脚本中，通过this.Table()来返回Table的对象，如下：
+ * //스크립트에서 this.Table()로 Table 객체를 반환받을 수 있음. 예:
  * const table = new this.Table( tableName )
  */
 const Table = function(name){
@@ -2720,29 +2720,29 @@ const Table = function(name){
     this.action = Actions.load("x_query_assemble_surface").TableAction;
 
     /**
-     * 列示表中的行对象,下一页。
+     * 테이블의 행 객체 나열, 다음 페이지.
      * @method listRowNext
      * @methodOf module:server.Table
      * @instance
-     * @param {String} id  当前页最后一条数据的Id，如果是第一页使用"(0)"或 "0"。
-     * @param {String|Number} count 下一页的行数
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {String} id  현재 페이지 마지막 데이터의 Id, 첫 페이지면 "(0)" 또는 "0" 사용.
+     * @param {String|Number} count 다음 페이지의 행 수
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.listRowNext( id, count, success, failure )
      * @example
      * const table = new this.Table("table1");
      *
      * table.listRowNext( "0", 20, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":[
      *    //       {
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //        }
      *   //     ],
      *   //       "message": "",
@@ -2750,36 +2750,36 @@ const Table = function(name){
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.listRowNext = function(id, count, success, failure){
         return this.action.listRowNext(this.name, id, count, success, failure);
     };
     /**
-     * 列示表中的行对象,上一页。
+     * 테이블의 행 객체 나열, 이전 페이지.
      * @method listRowPrev
      * @methodOf module:server.Table
      * @instance
-     * @param {String} id  当前页第一条数据的Id，如果是最后一页使用"(0)"或 "0"。
-     * @param {String|Number} count 上一页的行数
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {String} id  현재 페이지 첫 데이터의 Id, 마지막 페이지면 "(0)" 또는 "0" 사용.
+     * @param {String|Number} count 이전 페이지의 행 수
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.listRowPrev( id, count, success, failure )
      * @example
      * const table = new this.Table("table1");
      *
      * table.listRowPrev( "0", 20, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":[
      *    //       {
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //        }
      *   //     ],
      *   //       "message": "",
@@ -2787,38 +2787,38 @@ const Table = function(name){
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.listRowPrev = function(id, count, success, failure){
         return this.action.listRowPrev(this.name, id, count, success, failure);
     };
     /**
-     * 根据条件获取表中的数据。
+     * 조건에 따라 테이블 데이터 조회.
      * @method listRowSelect
      * @methodOf module:server.Table
      * @instance
-     * @param {String} [where] 查询条件，格式为jpql语法,o.name='zhangsan'，允许为空。
-     * @param {String} [orderBy] 排序条件，格式为：o.updateTime desc，允许为空
-     * @param {String|Number} [size] 返回结果集数量,允许为空。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {String} [where] 조회 조건, jpql 문법 형식, o.name='zhangsan', 빈 값 허용.
+     * @param {String} [orderBy] 정렬 조건, 형식: o.updateTime desc, 빈 값 허용
+     * @param {String|Number} [size] 반환 결과 개수, 빈 값 허용.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.listRowSelect( where, orderBy, size, success, failure )
      * @example
      * const table = new this.Table("table1");
      *
-     * //查询字段name等于zhangsan的数据，结果按updateTime倒序
+     * //name 필드가 zhangsan인 데이터 조회, 결과는 updateTime 역순
      * table.listRowSelect( "o.name='zhangsan'", "o.updateTime desc", 20, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":[
      *    //       {
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //        }
      *   //     ],
      *   //       "message": "",
@@ -2826,7 +2826,7 @@ const Table = function(name){
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.listRowSelect = function(where, orderBy, size, success, failure){
@@ -2836,228 +2836,228 @@ const Table = function(name){
         return this.action.listRowSelectWhere(this.name, where, success, failure);
     };
     /**
-     * 通过where 统计数量。
+     * where로 개수 통계.
      * @method rowCountWhere
      * @methodOf module:server.Table
      * @instance
-     * @param {String} where 查询条件，格式为jpql语法,o.name='zhangsan'，允许为空。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {String} where 쿼리 조건, jpql 문법 형식 o.name='zhangsan', 비워 둘 수 있음.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.rowCountWhere( where, success, failure )
      * @example
      * const table = new this.Table("table1");
      *
-     * //查询字段name等于zhangsan的数据，结果按updateTime倒序
+     * //name 필드가 zhangsan인 데이터 조회, 결과는 updateTime 역순
      * table.rowCountWhere( "o.name='zhangsan'", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": 5 //符合条件数据的总条数
+     *    //      "value": 5 //조건에 맞는 데이터 총 건수
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.rowCountWhere = function(where, success, failure){
         return this.action.rowCountWhere(this.name, where, success, failure);
     };
     /**
-     * 删除数据表中指定id的记录。
+     * 데이터 테이블에서 지정 id의 레코드 삭제.
      * @method deleteRow
      * @methodOf module:server.Table
      * @instance
-     * @param {id} [id] 需要删除记录的id。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {id} [id] 삭제할 레코드의 id.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.deleteRow( id, success, failure )
      * @example
      * const table = new this.Table("table1");
      *
      * table.deleteRow( "e1f89185-d8b0-4b66-9e34-aed3323d0d79", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示删除成功，false表示无此数据
+     *    //      "value": true //true는 삭제 성공, false는 해당 데이터 없음
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.deleteRow = function(id, success, failure){
         return this.action.rowDelete(this.name, id, success, failure);
     };
     /**
-     * 删除指定表中所有行的数据。
+     * 지정 테이블의 모든 행 데이터 삭제.
      * @method deleteAllRow
      * @methodOf module:server.Table
      * @instance
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.deleteAllRow( success, failure, async )
      * @example
      * const table = new this.Table("table1");
      *
      * table.deleteAllRow( function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": 1 //表示删除的条数，0表示无数据
+     *    //      "value": 1 //삭제된 건수, 0은 데이터 없음
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.deleteAllRow = function(success, failure){
         return this.action.rowDeleteAll(this.name, success, failure);
     };
     /**
-     * 获取数据表中指定id的记录。
+     * 데이터 테이블에서 지정 id의 레코드 조회.
      * @method getRow
      * @methodOf module:server.Table
      * @instance
-     * @param {id} [id] 需要获取记录的id。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {id} [id] 조회할 레코드의 id.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.getRow( id, success, failure )
      * @example
      * const table = new this.Table("table1");
      *
      * table.getRow( "e1f89185-d8b0-4b66-9e34-aed3323d0d79", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":{
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //     },
      *   //     "message": "",
      *   //     "date": "2021-11-01 18:34:19",
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.getRow = function(id, success, failure){
         return this.action.rowGet(this.name, id, success, failure);
     };
     /**
-     * 往数据表中批量插入数据。
+     * 데이터 테이블에 데이터 일괄 삽입.
      * @method insertRow
      * @methodOf module:server.Table
      * @instance
-     * @param {Object[]} data 需要插入的数据。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {Object[]} data 삽입할 데이터.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.insertRow( data, success, failure )
      * @example
      * const table = new this.Table("table1");
      * const data = [
      *  {
-     *    "subject": "标题一",
-     *    ... //其他字段
+     *    "subject": "제목 1",
+     *    ... //기타 필드
      *  },
      *  ...
      * ];
      * table.insertRow( data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示插入成功
+     *    //      "value": true //true는 삽입 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.insertRow = function(data, success, failure){
         return this.action.rowInsert(this.name, data, success, failure);
     };
     /**
-     * 往数据表中插入单条数据。
+     * 데이터 테이블에 단건 데이터 삽입.
      * @method addRow
      * @methodOf module:Table
      * @instance
-     * @param {Object} data 需要插入的数据。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {Object} data 삽입할 데이터.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.addRow( data, success, failure, async )
      * @example
      * const table = new this.Table("table1");
      * const data = {
-     *    "subject": "标题一",
-     *    ... //其他字段
+     *    "subject": "제목 1",
+     *    ... //기타 필드
      *  };
      * table.addRow( data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "id": 2cf3a20d-b166-490b-8d29-05544db3d79b //true表示修改成功
+     *    //      "id": 2cf3a20d-b166-490b-8d29-05544db3d79b //true는 수정 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.addRow = function(data, success, failure){
         return this.action.rowInsertOne(this.name, data, success, failure);
     };
     /**
-     * 往数据表中修改单条数据。
+     * 데이터 테이블의 단건 데이터 수정.
      * @method updateRow
      * @methodOf module:server.Table
      * @instance
-     * @param {String} id 需要修改的数据id。
-     * @param {Object} data 需要修改的数据。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {String} id 수정할 데이터 id.
+     * @param {Object} data 수정할 데이터.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.updateRow( id, data, success, failure )
      * @example
      * const table = new this.Table("table1");
      * const data = {
      *    "id" : "2cf3a20d-b166-490b-8d29-05544db3d79b",
-     *    "subject": "标题一",
-     *    ... //其他字段
+     *    "subject": "제목 1",
+     *    ... //기타 필드
      *  };
      * table.updateRow( "2cf3a20d-b166-490b-8d29-05544db3d79b", data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示修改成功
+     *    //      "value": true //true는 수정 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.updateRow = function(id, data, success, failure){
@@ -3065,35 +3065,35 @@ const Table = function(name){
     };
 
     /**
-     * 往数据表中部分修改单条数据。
+     * 데이터 테이블의 단건 데이터 부분 수정.
      * @method updateRow
      * @methodOf module:server.Table
      * @instance
-     * @param {String} id 需要修改的数据id。
-     * @param {Object} data 需要修改的部分数据，其他数据不变。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
+     * @param {String} id 수정할 데이터 id.
+     * @param {Object} data 수정할 일부 데이터, 나머지 데이터는 변경 없음.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
      * @o2syntax
      * table.updateRow( id, data, success, failure )
      * @example
      * const table = new this.Table("table1");
      * const data = {
      *    "id" : "2cf3a20d-b166-490b-8d29-05544db3d79b",
-     *    "subject": "标题一",
-     *    ... //其他字段
+     *    "subject": "제목 1",
+     *    ... //기타 필드
      *  };
      * table.updateRow( "2cf3a20d-b166-490b-8d29-05544db3d79b", data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示修改成功
+     *    //      "value": true //true는 수정 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.partUpdateRow = function(id, data, success, failure){
@@ -3102,20 +3102,20 @@ const Table = function(name){
 }
 
 /**
- * 您可以通过statement对象，获取执行查询语句或者对查询结果进行选择。<br/>
+ * statement 객체로 쿼리 문을 실행하거나 쿼리 결과를 선택할 수 있습니다.<br/>
  * @module server.statement
- * @o2cn 查询视图执行
+ * @o2cn 쿼리 뷰 실행
  * @o2category server.common
  * @o2ordernumber 190
  * @o2syntax
- * //您可以在流程表单、内容管理表单、门户页面或视图中，通过this来获取statement对象，如下：
+ * //프로세스 양식, 콘텐츠 관리 양식, 포털 페이지 또는 뷰에서 this로 statement 객체를 가져올 수 있습니다. 예:
  * const statement = this.statement;
  */
 const statement = {
     _parseParameter: function(obj, format){
         if(typeof obj !== 'object')return {};
         const parameter = {};
-        //传入的参数
+        //전달된 매개변수
         for (const [key, value] of Object.entries(obj)) {
             parameter[key] = (typeOf(value) === 'date') ? (['sql', 'sqlScript'].includes(format) ? value.format('db') : `{ts '${value.format('db')}'}`) : value;
         }
@@ -3177,64 +3177,64 @@ const statement = {
         return false;
     },
     /**
-     * 执行指定的查询语句。
+     * 지정한 쿼리 문을 실행합니다.
      * @method execute
      * @static
-     * @param {Object} statement - 要执行的查询语句的信息。数据格式如下：
-     * <div>以下的filter参数参考<a href='global.html#StatementFilter'>StatementFilter</a>,
-     * parameter参数参考<a href='global.html#StatementParameter'>StatementParameter</a></div>
+     * @param {Object} statement - 실행할 쿼리 문 정보. 데이터 형식은 다음과 같습니다:
+     * <div>아래 filter 매개변수는 <a href='global.html#StatementFilter'>StatementFilter</a> 참고,
+     * parameter 매개변수는 <a href='global.html#StatementParameter'>StatementParameter</a> 참고</div>
      * <pre><code class='language-js'>
      * {
-     *  "name" : "tesStatement", //（String）必选，查询配置的名称、别名或ID
-     *  "mode" : "all", //（String）必选，“all”、“data”或者“count”，all表示同时执行查询语句和总数语句，data表示执行查询语句，count表示执行总数语句
-     *  "page" : 1, //（number）可选，当前页码，默认为1
-     *  "pageSize" : 20, //（number）可选，每页的数据条数，默认为20
-     *  "filter": [ //（Array）可选，对查询进行过滤的条件。json数组格式，每个数组元素描述一个过滤条件，每个元素数据格式如下：
+     *  "name" : "tesStatement", //(String) 필수, 쿼리 설정의 이름·별칭 또는 ID
+     *  "mode" : "all", //(String) 필수, “all”·“data”·“count” 중 하나. all은 쿼리 문과 총수 문을 함께 실행, data는 쿼리 문 실행, count는 총수 문 실행
+     *  "page" : 1, //(number) 선택, 현재 페이지 번호, 기본값 1
+     *  "pageSize" : 20, //(number) 선택, 페이지당 데이터 수, 기본값 20
+     *  "filter": [ //(Array) 선택, 쿼리 필터 조건. json 배열 형식이며 각 배열 요소가 하나의 필터 조건, 각 요소의 데이터 형식은 다음과 같음:
      *       {
-     *           "path":"o.title",  //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+     *           "path":"o.title",  //쿼리 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
      *           "comparison":"like",
-     *           "value":"关于",
+     *           "value":"관련",
      *           "formatType":"textValue"
      *       }
      *  ],
      *  parameter : {
-     *       "person" : "", //参数名称为下列值时，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组)
-     *       "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-     *       "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-     *       "processName" : "test流程", //其他写确定的值
-     *       "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+     *       "person" : "", //매개변수 이름이 다음 값이면 백엔드에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹)
+     *       "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+     *       "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+     *       "processName" : "test프로세스", //그 외에는 확정된 값 입력
+     *       "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
      *     }
      * }
      * </code></pre>
-     * @param {Function} callback - 访问成功后的回调函数
+     * @param {Function} callback - 접근 성공 후 콜백 함수
      * @o2syntax
      * this.statement.execute(statement, callback, async);
      * @example
-     * //获取“task”查询中的数据
-     * //查询语句为 select o from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
-     * //总数语句为 select count(o.id) from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
-     * //过滤条件为标题o.title包含包含（like））“7月”。
+     * //“task” 쿼리의 데이터 조회
+     * //쿼리 문은 select o from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
+     * //총수 문은 select count(o.id) from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
+     * //필터 조건은 제목 o.title이 “7월”을 포함(like).
      * this.statement.execute({
      *  "name": "task",
      *  "mode" : "all",
      *  "filter": [
      *      {
-     *      "path":"o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+     *      "path":"o.title", //조회 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
      *      "comparison":"like",
-     *      "value":"7月",
+     *      "value":"7월",
      *      "formatType":"textValue"
      *      }
      * ],
      * "parameter" : {
-     *     "person" : "", //参数名称为下列值时，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组)
-     *     "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-     *     "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-     *     "processName" : "test流程", //其他写确定的值
-     *     "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+     *     "person" : "", //매개변수 이름이 다음 값이면 백엔드에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹)
+     *     "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+     *     "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+     *     "processName" : "test프로세스", //그 외에는 확정된 값 입력
+     *     "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
      *   }
      * }, function(json){
-     *  const count = json.count; //总数语句执行后返回的数字
-     *  const list = json.data; //查询语句后返回的数组
+     *  const count = json.count; //총수 구문 실행 후 반환된 숫자
+     *  const list = json.data; //쿼리 구문 실행 후 반환된 배열
      *   //......
      * });
      */
@@ -3246,73 +3246,73 @@ const statement = {
 };
 
 /**
- * 您可以通过view对象，获取视图数据或选择视图数据。<br/>
+ * view 객체로 뷰 데이터를 조회하거나 뷰 데이터를 선택할 수 있습니다.<br/>
  * @module server.view
- * @o2cn 视图执行
+ * @o2cn 뷰 실행
  * @o2category server.common
  * @o2ordernumber 195
  * @o2syntax
- * //您可以在流程表单、内容管理表单或门户页面中，通过this来获取view对象，如下：
+ * //프로세스 양식, 콘텐츠 관리 양식 또는 포털 페이지에서 this로 view 객체를 가져올 수 있습니다. 예:
  * const view = this.view;
  */
 const view = {
     /**
-     * 获取指定视图的数据。
+     * 지정한 뷰의 데이터를 조회합니다.
      * @method lookup
      * @static
-     * @param {Object} view - 要访问的视图信息。数据格式如下：<br/>
-     * <caption>以下的filter参数参考<a href='global.html#ViewFilter'>ViewFilter</a></caption>
+     * @param {Object} view - 접근할 뷰 정보. 데이터 형식은 다음과 같습니다:<br/>
+     * <caption>아래 filter 매개변수는 <a href='global.html#ViewFilter'>ViewFilter</a> 참고</caption>
      * <pre><code class='language-js'>
      * {
-     *  "view" : "testView", //（String）必选，视图的名称、别名或ID
-     *  "application" : "test数据中心应用", //（String）必选，视图所在数据应用的名称、别名或ID
-     *  "filter": [ //（Array of Object）可选，对视图进行过滤的条件。json数组格式，每个数组元素描述一个过滤条件。
+     *  "view" : "testView", //(String) 필수, 뷰의 이름·별칭 또는 ID
+     *  "application" : "test데이터 센터 앱", //(String) 필수, 뷰가 속한 데이터 앱의 이름·별칭 또는 ID
+     *  "filter": [ //(Array of Object) 선택, 뷰 필터 조건. json 배열 형식이며 각 배열 요소가 하나의 필터 조건을 나타냄.
      *       {
      *           "logic":"and",
      *           "path":"$work.title",
      *           "comparison":"like",
-     *           "value":"7月",
+     *           "value":"7월",
      *           "formatType":"textValue"
      *       }
      *  ]
      * }
      * </code></pre>
-     * @param {Function} callback - 访问成功后的回调函数
-     * @param {Boolean} [async] - 同步或异步调用。true：异步；false：同步。默认为true。
+     * @param {Function} callback - 접근 성공 후 콜백 함수
+     * @param {Boolean} [async] - 동기 또는 비동기 호출. true: 비동기, false: 동기. 기본값 true.
      * @o2syntax
      * this.view.lookup(view, callback, async);
      * @example
-     * //获取“财务管理”应用中“报销审批数据”视图中的数据
-     * //过滤条件为标题（$work.title）包含包含（like））“7月”。
+     * //“재무 관리” 앱의 “경비 결재 데이터” 뷰의 데이터 조회
+     * //필터 조건은 제목($work.title)이 “7월”을 포함(like).
      * this.view.lookup({
-     *   "view": "报销审批数据",
-     *   "application": "财务管理",
+     *   "view": "경비 결재 데이터",
+     *   "application": "재무 관리",
      *   "filter": [
      *       {
      *           "logic":"and",
      *           "path":"$work.title",
      *           "comparison":"like",
-     *           "value":"7月",
+     *           "value":"7월",
      *           "formatType":"textValue"
      *       }
      *   ]
      *}, function(data){
-     *   const grid = data.grid; //得到过滤后的数据
-     *   const groupGrid = data.groupGrid; //如果有分类，得到带分类的数据
+     *   const grid = data.grid; //필터링된 데이터
+     *   const groupGrid = data.groupGrid; //분류가 있으면 분류된 데이터
      *   //......
      *});
      * @example
-     * //获取“财务管理”应用中“报销审批数据”视图中的数据
-     * //过滤条件为标题（$work.title）包含包含（like））“7月”，并且总金额大于500小于5000
+     * //“재무 관리” 앱의 “경비 결재 데이터” 뷰의 데이터 조회
+     * //필터 조건은 제목($work.title)이 “7월”을 포함(like)하고 총금액이 500보다 크고 5000보다 작음
      * this.view.lookup({
-     *   "view": "报销审批数据",
-     *   "application": "财务管理",
+     *   "view": "경비 결재 데이터",
+     *   "application": "재무 관리",
      *   "filter": [
      *       {
      *           "logic":"and",
      *           "path":"$work.title",
      *           "comparison":"like",
-     *           "value":"7月",
+     *           "value":"7월",
      *           "formatType":"textValue"
      *       },
      *       {
@@ -3325,8 +3325,8 @@ const view = {
      *       },
      *   ]
      *}, function(data){
-     *   const grid = data.grid; //得到过滤后的数据
-     *   const groupGrid = data.groupGrid; //如果有分类，得到带分类的数据
+     *   const grid = data.grid; //필터링된 데이터
+     *   const groupGrid = data.groupGrid; //분류가 있으면 분류된 데이터
      *   //......
      *});
      */
@@ -3347,14 +3347,14 @@ const view = {
 };
 
 /**
- * 可以通过service对象发起restful请求，或soap协议的webservice调用。
+ * service 객체로 restful 요청 또는 soap 프로토콜 webservice 호출 가능.
  * @module service
- * @o2cn 通用service调用
+ * @o2cn 공용 service 호출
  * @o2category server.common
  * @o2syntax
  * const service = this.service;
  * @example
- * //通过get方法发起restful请求，获取json数据
+ * //get 메서드로 restful 요청을 보내 json 데이터 조회
  * const res = this.service.restful("get", "config/myjson.json");
  * if (res.responseCode>=200 && responseCode<300){
  *     const jsonData = res.json;
@@ -3362,28 +3362,28 @@ const view = {
  */
 const service = {
     /**
-     * 发起restful请求。
+     * restful 요청 전송.
      * @method restful
      * @o2category server.common
-     * @param {String} [method] - restful请求方法：get、post、put、delete ...
-     * @param {String} [url] - restful请求地址
-     * @param {Object} [headers] - 可选，json对象，请求的header，默认content-type为：“application/json charset=utf-8”
-     * @param {String|Object} [body] - 可选，post、put请求的消息体,传入文本或json对象
-     * @param {Number} [connectTimeout] - 可选，连接超时时间（毫秒），默认是2000。
-     * @param {Number} [readTimeout] - 可选，传输超时时间（毫秒），默认是300000。
-     * @return {Object} 返回json格式的请求结果对象，格式如下：
+     * @param {String} [method] - restful 요청 메서드: get, post, put, delete ...
+     * @param {String} [url] - restful 요청 주소
+     * @param {Object} [headers] - 선택, json 객체, 요청 header, 기본 content-type: “application/json charset=utf-8”
+     * @param {String|Object} [body] - 선택, post, put 요청의 메시지 본문, 텍스트 또는 json 객체 전달
+     * @param {Number} [connectTimeout] - 선택, 연결 시간 제한(밀리초), 기본값은 2000.
+     * @param {Number} [readTimeout] - 선택, 전송 시간 제한(밀리초), 기본값은 300000.
+     * @return {Object} json 형식의 요청 결과 객체 반환, 형식은 다음과 같음:
      * <pre><code class='language-js'>
      * {
-     *  "responseCode" : 200,   //请求返回的code
-     *  "headers" : {},         //响应头
-     *  "body": "",             //响应的body文本内容
-     *  "json": {}              //响应的body的json格式内容
+     *  "responseCode" : 200,   //요청 반환 code
+     *  "headers" : {},         //응답 헤더
+     *  "body": "",             //응답 body 텍스트 내용
+     *  "json": {}              //응답 body의 json 형식 내용
      * }
      * </code></pre>
      * @o2syntax
      * var res = this.service.restful(method, url, headers, body, connectTimeout, readTimeout);
      * @example
-     * //通过get方法发起restful请求，获取json数据
+     * //get 메서드로 restful 요청을 보내 json 데이터 조회
      * var res = this.service.restful("get", "config/myjson.json");
      * if (res.responseCode>=200 && res.responseCode<300){
      *     var jsonData = res.json;
@@ -3406,21 +3406,21 @@ const service = {
     },
 
     /**
-     * 通过get方法发起restful请求。
+     * get 방식으로 restful 요청 실행.
      * @method get
      * @methodOf restful
      * @static
-     * @param {String} [url] - restful请求地址
-     * @param {Object} [headers] - 可选，json对象，请求的header，默认content-type为：“application/json charset=utf-8”
-     * @param {Number} [connectTimeout] - 可选，连接超时时间（毫秒），默认是2000。
-     * @param {Number} [readTimeout] - 可选，传输超时时间（毫秒），默认是300000。
-     * @return {Object} 返回json格式的请求结果对象，格式如下：
+     * @param {String} [url] - restful 요청 주소
+     * @param {Object} [headers] - 선택, json 객체, 요청 header, 기본 content-type: “application/json charset=utf-8”
+     * @param {Number} [connectTimeout] - 선택, 연결 시간 제한(밀리초), 기본값은 2000.
+     * @param {Number} [readTimeout] - 선택, 전송 시간 제한(밀리초), 기본값은 300000.
+     * @return {Object} json 형식의 요청 결과 객체 반환, 형식은 다음과 같음:
      * <pre><code class='language-js'>
      * {
-     *  "responseCode" : 200,   //请求返回的code
-     *  "headers" : {},         //响应头
-     *  "body": "",             //响应的body文本内容
-     *  "json": {}              //响应的body的json格式内容
+     *  "responseCode" : 200,   //요청 반환 code
+     *  "headers" : {},         //응답 헤더
+     *  "body": "",             //응답 body 텍스트 내용
+     *  "json": {}              //응답 body의 json 형식 내용
      * }
      * </code></pre>
      * @o2syntax
@@ -3431,21 +3431,21 @@ const service = {
     },
 
     /**
-     * 通过post方法发起restful请求。
+     * post 방식으로 restful 요청 실행.
      * @method post
      * @static
-     * @param {String} [url] - restful请求地址
-     * @param {Object} [headers] - 可选，json对象，请求的header，默认content-type为：“application/json charset=utf-8”
-     * @param {String|Object} [body] - 可选，post、put请求的消息体,传入文本或json对象
-     * @param {Number} [connectTimeout] - 可选，连接超时时间（毫秒），默认是2000。
-     * @param {Number} [readTimeout] - 可选，传输超时时间（毫秒），默认是300000。
-     * @return {Object} 返回json格式的请求结果对象，格式如下：
+     * @param {String} [url] - restful 요청 주소
+     * @param {Object} [headers] - 선택, json 객체, 요청 header, 기본 content-type: “application/json charset=utf-8”
+     * @param {String|Object} [body] - 선택, post, put 요청의 메시지 본문, 텍스트 또는 json 객체 전달
+     * @param {Number} [connectTimeout] - 선택, 연결 시간 제한(밀리초), 기본값은 2000.
+     * @param {Number} [readTimeout] - 선택, 전송 시간 제한(밀리초), 기본값은 300000.
+     * @return {Object} json 형식의 요청 결과 객체 반환, 형식은 다음과 같음:
      * <pre><code class='language-js'>
      * {
-     *  "responseCode" : 200,   //请求返回的code
-     *  "headers" : {},         //响应头
-     *  "body": "",             //响应的body文本内容
-     *  "json": {}              //响应的body的json格式内容
+     *  "responseCode" : 200,   //요청 반환 code
+     *  "headers" : {},         //응답 헤더
+     *  "body": "",             //응답 body 텍스트 내용
+     *  "json": {}              //응답 body의 json 형식 내용
      * }
      * </code></pre>
      * @o2syntax
@@ -3456,18 +3456,18 @@ const service = {
     },
 
     /**
-     * 发起soap协议的webservice请求。
+     * soap 프로토콜의 webservice 요청 실행.
      * @method soap
      * @o2category server.common
-     * @param {String} [wsdl] - wsdl文件地址
-     * @param {String} [method] - 要调用的方法名称
-     * @param {Array} [pars] - 方法所需要的参数
-     * @return {Object} 与服务返回的类型有关：
+     * @param {String} [wsdl] - wsdl 파일 주소
+     * @param {String} [method] - 호출할 메서드 이름
+     * @param {Array} [pars] - 메서드에 필요한 파라미터
+     * @return {Object} 서비스가 반환하는 유형에 따라 다름:
      * @o2syntax
      * var res = this.service.soap(wsdl, method, pars);
      * @example
-     * //模拟通过webservice获取用户
-     * var res = this.service.soap("wsdl/mywsdl.wsdl", "getPerson", ["张三", "李四"]);
+     * //webservice로 사용자 조회 예시
+     * var res = this.service.soap("wsdl/mywsdl.wsdl", "getPerson", ["홍길동", "김철수"]);
      */
     soap: function(wsdl, method, pars){
         const service = globalThis.java_resources.getWebservicesClient();
@@ -3480,24 +3480,24 @@ const service = {
 }
 
 //=========================================================================================/
-//====以上为公共对象和方法，在服务端脚本中通用================================================/
+//====이상은 공통 객체와 메서드로, 서버 스크립트에서 공통으로 사용================================================/
 //=========================================================================================/
 
 /*****************************************************************/
-/* response - 服务调用活动，响应脚本，获取响应内容 ******************/
-/*            服务管理 invoke，用于设置响应内容  *******************/
-/*    - 接口响应对象，服务端注入对象 java_customResponse  **********/
+/* response - 서비스 호출 활동, 응답 스크립트, 응답 내용 조회 ******************/
+/*            서비스 관리 invoke, 응답 내용 설정용  *******************/
+/*    - 인터페이스 응답 객체, 서버 주입 객체 java_customResponse  **********/
 /*    - java_jaxrsResponse, type()  ******************************/
-/*      java_jaxrsResponse, get() 字符串  ************************/
-/*      java_jaxwsResponse  直接返回不做处理  *********************/
+/*      java_jaxrsResponse, get() 문자열  ************************/
+/*      java_jaxwsResponse  처리 없이 바로 반환  *********************/
 /*****************************************************************/
 const responseDescriptor = {
     get: function(){
-        if (globalThis.java_customResponse){   //注入 java_customResponse 对象，表示脚本运行于 服务管理 invoke 中
+        if (globalThis.java_customResponse){   //java_customResponse 객체 주입, 스크립트가 서비스 관리 invoke 에서 실행됨을 의미
             /**
-             * 用于服务管理的接口脚本，描述服务的响应对象。<br>
-             * @o2range 服务管理-接口
-             * @o2cn 服务的响应对象
+             * 서비스 관리의 인터페이스 스크립트에 사용되며, 서비스의 응답 객체를 나타냄.<br>
+             * @o2range 서비스 관리-인터페이스
+             * @o2cn 서비스의 응답 객체
              * @module server.service.response
              * @o2category server.service
              * @o2ordernumber 245
@@ -3506,11 +3506,11 @@ const responseDescriptor = {
              */
             return {
                 /**
-                 * @summary 服务返回一个303跳转。
+                 * @summary 서비스가 303 리다이렉트를 반환합니다.
                  * @method seeOther
                  * @methodOf service.service.module:response
                  * @static
-                 * @param {String} [url] 跳转的url。
+                 * @param {String} [url] 리다이렉트할 url.
                  * @o2syntax
                  * this.response.seeOther(url);
                  */
@@ -3518,11 +3518,11 @@ const responseDescriptor = {
                     globalThis.java_customResponse.seeOther(url);
                 },
                 /**
-                 * @summary 服务返回一个301跳转。
+                 * @summary 서비스가 301 리다이렉트를 반환합니다.
                  * @method redirect
                  * @methodOf service.service.module:response
                  * @static
-                 * @param {String} [url] 跳转的url。
+                 * @param {String} [url] 리다이렉트할 url.
                  * @o2syntax
                  * this.response.redirect(url);
                  */
@@ -3530,16 +3530,16 @@ const responseDescriptor = {
                     globalThis.java_customResponse.temporaryRedirect(url);
                 },
                 /**
-                 * @summary 服务正常返回数据（200）。
+                 * @summary 서비스 정상 데이터 반환(200).
                  * @method setBody
                  * @methodOf service.service.module:response
                  * @static
-                 * @param {String|Object} [body] 响应内容，文本或json对象。
-                 * @param {String} [contentType] 响应头的Content-Type。
+                 * @param {String|Object} [body] 응답 내용, 텍스트 또는 json 객체.
+                 * @param {String} [contentType] 응답 헤더의 Content-Type.
                  * @o2syntax
                  * this.response.setBody(body, contentType);
                  * @example
-                 * //设置json格式的响应内容
+                 * //json 형식의 응답 내용 설정
                  * this.response.setBody({
                  *     "key1": "value1",
                  *     "key2": "value2"
@@ -3552,12 +3552,12 @@ const responseDescriptor = {
                 customResponse: globalThis.java_customResponse
             }
         }
-        if (globalThis.java_jaxrsResponse) {   //注入 java_jaxrsResponse 对象，表示脚本运行于 服务调用活动，响应脚本 中，并且调用类型为 jaxrs
+        if (globalThis.java_jaxrsResponse) {   //java_jaxrsResponse 객체 주입, 스크립트가 서비스 호출 활동, 응답 스크립트 에서 실행되며 호출 유형이 jaxrs 임을 의미
             /**
-             * 用于流程配置的服务调用活动中的“响应脚本”，描述调用服务后得到的响应。(注意：调用方式为异步时，“响应脚本”不会执行)<br>
-             * @o2range 流程配置-服务调用活动中的“响应脚本”
+             * 프로세스 설정의 서비스 호출 활동 「응답 스크립트」에서 사용하며, 서비스 호출 후 받은 응답을 나타냅니다.(주의: 호출 방식이 비동기이면 「응답 스크립트」는 실행되지 않습니다)<br>
+             * @o2range 프로세스 설정-서비스 호출 활동의 「응답 스크립트」
              * @module server.response
-             * @o2cn 服务调用的响应
+             * @o2cn 서비스 호출 응답
              * @o2category server.process
              * @o2ordernumber 230
              * @o2syntax
@@ -3565,11 +3565,11 @@ const responseDescriptor = {
              */
             return {
                 /**
-                 * @summary jaxrs方式的服务调用活动，请求返回的状态。有四个可能的值：
-                 * <pre><code class="language-js">success : 表示请求成功
-                 * warn : 当调用的是平台内部服务时，虽然请求成功，但产生了警告
-                 * error : 请求调用错误
-                 * connectFatal : 网络连接错误</code></pre>
+                 * @summary jaxrs 방식 서비스 호출 활동의 요청 반환 상태. 가능한 값은 네 가지:
+                 * <pre><code class="language-js">success : 요청 성공
+                 * warn : 플랫폼 내부 서비스를 호출할 때 요청은 성공했지만 경고 발생
+                 * error : 요청 호출 오류
+                 * connectFatal : 네트워크 연결 오류</code></pre>
                  * @member {String} status
                  * @memberOf server.module:response
                  * @o2syntax
@@ -3579,13 +3579,13 @@ const responseDescriptor = {
                     return globalThis.java_jaxrsResponse.type() || '';
                 },
                 /**
-                 * @summary 请求返回的值，如果是jaxrs服务，得到的是响应的文本，如果是jaxws服务，响应类型取决于服务的返回。
+                 * @summary 요청 반환 값. jaxrs 서비스는 응답 텍스트를 받고, jaxws 서비스는 응답 유형이 서비스 반환에 따름.
                  * @member {String|Any} value
                  * @memberOf server.module:response
                  * @o2syntax
                  * const value = this.response.value;
                  * @example
-                 * //处理json对象的返回信息
+                 * //json 객체 반환 정보 처리
                  * const value = this.response.value;
                  * const resData = JSON.parse(value);
                  */
@@ -3593,11 +3593,11 @@ const responseDescriptor = {
                     return globalThis.java_jaxrsResponse.get();
                 },
                 /**
-                 * @summary 获取请求返回的值，如果是jaxrs服务，会尽可能将响应数据转换为json对象，如果不能解析为json对象的，则返回文本，如果是jaxws服务，响应类型取决于服务的返回。
+                 * @summary 요청 반환 값 조회. jaxrs 서비스는 응답 데이터를 가능한 한 json 객체로 변환하고, json 객체로 해석할 수 없으면 텍스트를 반환. jaxws 서비스는 응답 유형이 서비스 반환에 따름.
                  * @method get
                  * @methodOf server.module:response
                  * @static
-                 * @return {Object|String|Any} 响应的内容.
+                 * @return {Object|String|Any} 응답 내용.
                  * @o2syntax
                  * const res = this.response.get();
                  */
@@ -3610,7 +3610,7 @@ const responseDescriptor = {
                 }
             }
         }
-        if (globalThis.java_jaxwsResponse) {   //注入 java_jaxwsResponse 对象，表示脚本运行于 服务调用活动，响应脚本 中，并且调用类型为 jaxws
+        if (globalThis.java_jaxwsResponse) {   //java_jaxwsResponse 객체 주입, 스크립트가 서비스 호출 활동, 응답 스크립트 에서 실행되며 호출 유형이 jaxws 임을 의미
             return {
                 value: globalThis.java_jaxwsResponse,
                 get(){
@@ -3623,33 +3623,33 @@ const responseDescriptor = {
 }
 
 /***************************************************************/
-/* workContext -流程脚本中的 workcontext 对象，用于获取流程实例的相关数据  *****/
+/* workContext -프로세스 스크립트의 workcontext 객체, 프로세스 인스턴스 관련 데이터 조회용  *****/
 /**************************************************************/
 /**
- * 您可以在流程事件、流程路由事件、流程活动事件中通过workContext获取和流程相关的流程实例对象数据。
+ * 프로세스 이벤트, 프로세스 라우트 이벤트, 프로세스 활동 이벤트에서 workContext로 프로세스 관련 프로세스 인스턴스 객체 데이터를 가져올 수 있습니다.
  * @module server.workContext
- * @o2cn 流程实例
+ * @o2cn 프로세스 인스턴스
  * @o2category server.process
- * @o2range {Process} 所有流程配置中的脚本可以使用此对象
+ * @o2range {Process} 모든 프로세스 설정의 스크립트에서 이 객체 사용 가능
  * @o2ordernumber 200
  * @o2syntax
- * //您可以在表单或流程的各个嵌入脚本中，通过this来获取当前流程实例数据，如下：
+ * //양식이나 프로세스의 각 내장 스크립트에서 this로 현재 프로세스 인스턴스 데이터를 조회할 수 있습니다. 예:
  * var context = this.workContext;
  */
 const workContext = {
     /**
-     * 当前流程实例正在流转中，并且当前用户有待办，则返回当前用户的待办对象。
-     * 事实上在后端的活动事件中，大部分的情况下，此方法获取到的是taskCompleted对象，因为在人工活动的事件中，除了“待办处理前”事件，其他事件处理时，当前用户的待办都已经转为已办了。
-     * @summary 获取当前流程与当前用户相关的待办或已办对象：task对象或taskCompleted对象。
+     * 현재 프로세스 인스턴스가 진행 중이고 현재 사용자에게 결재 대기가 있으면 현재 사용자의 결재 대기 객체를 반환합니다.
+     * 실제로 백엔드 활동 이벤트에서는 대부분 이 메서드로 taskCompleted 객체를 가져옵니다. 인공 활동 이벤트에서 「결재 대기 처리 전」 이벤트를 제외한 다른 이벤트 처리 시점에는 현재 사용자의 결재 대기가 이미 처리 완료로 바뀌었기 때문입니다.
+     * @summary 현재 프로세스에서 현재 사용자와 관련된 결재 대기 또는 처리 완료 객체(task 객체 또는 taskCompleted 객체) 조회.
      * @methodOf module:server.workContext
-     * @o2ActionOut x_processplatform_assemble_surface.TaskAction.get|example=Task|Task对象:
+     * @o2ActionOut x_processplatform_assemble_surface.TaskAction.get|example=Task|Task 객체:
      * @method getTask
      * @static
-     * @return {(Task|TaskCompleted|Null)} 当前用户的待办任务对象：task。当前用户没有对此流程实例的待办时，或流程实例已经流转结束，返回null。
+     * @return {(Task|TaskCompleted|Null)} 현재 사용자의 결재 대기 작업 객체(task). 현재 사용자에게 이 프로세스 인스턴스의 결재 대기가 없거나 프로세스 인스턴스가 이미 종료되었으면 null 반환.
      * @o2syntax
      * const task = this.workContext.getTask();
      */
-    getTask: function(){  //根据work获取当前处理的的task或者TaskCompleted  json字符串 只能在流转的过程中获取到
+    getTask: function(){  //work로 현재 처리 중인 task 또는 TaskCompleted json 문자열 조회. 진행 과정에서만 조회 가능
         var taskString = globalThis.java_workContext.getTaskOrTaskCompleted();
         var task = (taskString) ? JSON.parse(taskString) : null;
         if (task){
@@ -3665,17 +3665,17 @@ const workContext = {
         return task;
     },
     /**
-     * 获取当前流程实例对象：work对象或workCompleted对象。
+     * 현재 프로세스 인스턴스 객체 조회: work 객체 또는 workCompleted 객체.
      * @method getWork
      * @methodOf module:server.workContext
      * @static
-     * @return {(Work|WorkCompleted)} 流程实例对象；如果流程已结束，返回已结束的流程实例对象。
-     * @o2ActionOut x_processplatform_assemble_surface.WorkAction.manageGet|example=Work|ignoreNoDescr=true|ignoreProps=[properties,manualTaskIdentityMatrix]|Work对象:
-     * @o2ActionOut x_processplatform_assemble_surface.WorkCompletedAction.get|example=WorkCompleted|ignoreProps=[properties,data,taskCompletedList,readCompletedList,reviewList,recordList,workLogList,storeForm,mobileStoreForm]|WorkCompleted对象:
+     * @return {(Work|WorkCompleted)} 프로세스 인스턴스 객체; 프로세스가 종료된 경우 종료된 프로세스 인스턴스 객체 반환.
+     * @o2ActionOut x_processplatform_assemble_surface.WorkAction.manageGet|example=Work|ignoreNoDescr=true|ignoreProps=[properties,manualTaskIdentityMatrix]|Work 객체:
+     * @o2ActionOut x_processplatform_assemble_surface.WorkCompletedAction.get|example=WorkCompleted|ignoreProps=[properties,data,taskCompletedList,readCompletedList,reviewList,recordList,workLogList,storeForm,mobileStoreForm]|WorkCompleted 객체:
      * @o2syntax
      * const work = this.workContext.getWork();
      */
-    "getWork": function(){  //work的字符串
+    "getWork": function(){  //work 문자열
         var work = JSON.parse(globalThis.java_workContext.getWork());
         work.creatorPersonDn = work.creatorPerson ||"";
         work.creatorUnitDn = work.creatorUnit ||"";
@@ -3685,60 +3685,60 @@ const workContext = {
     },
 
     /**
-     * 获取当前流程实例的所有待办对象。如果流程实例已流转完成，则返回一个空数组。
+     * 현재 프로세스 인스턴스의 모든 결재 대기 객체 조회. 프로세스 인스턴스가 이미 완료된 경우 빈 배열 반환.
      * @method getTaskList
      * @methodOf module:server.workContext
      * @o2ActionOut x_processplatform_assemble_surface.TaskAction.listWithWork|example=Task
      * @static
-     * @return {(Task[])} 待办任务列表.
+     * @return {(Task[])} 결재 대기 작업 목록.
      * @o2syntax
      * const taskList = this.workContext.getTaskList();
      */
-    "getTaskList": function(){return JSON.parse(globalThis.java_workContext.getTaskList());},                       //根据work获取所有的task数组  json字符串
+    "getTaskList": function(){return JSON.parse(globalThis.java_workContext.getTaskList());},                       //work로 모든 task 배열 json 문자열 조회
 
     /**
-     * 获取当前流程实例的所有已办对象。如果流程实例没有任何人处理过，则返回一个空数组。
+     * 현재 프로세스 인스턴스의 모든 처리 완료 객체 조회. 프로세스 인스턴스를 처리한 사람이 없으면 빈 배열 반환.
      * @method getTaskCompletedList
      * @methodOf module:server.workContext
      * @static
-     * @return {(TaskCompleted[])} 已办任务列表.
+     * @return {(TaskCompleted[])} 처리 완료 작업 목록.
      * @o2ActionOut x_processplatform_assemble_surface.TaskCompletedAction.listWithWork|example=Task
      * @o2syntax
      * const taskCompletedList = this.workContext.getTaskCompletedList();
      */
-    "getTaskCompletedList": function(){return JSON.parse(globalThis.java_workContext.getTaskCompletedList());},     //根据work获取所有的TaskCompleted数组  json字符串
+    "getTaskCompletedList": function(){return JSON.parse(globalThis.java_workContext.getTaskCompletedList());},     //work로 모든 TaskCompleted 배열 json 문자열 조회
 
     /**
-     * @summary 获取当前流程实例的所有待阅对象数组。如果流程实例无待阅，则返回一个空数组。
+     * @summary 현재 프로세스 인스턴스의 모든 열람 대기 객체 배열을 조회합니다. 열람 대기가 없으면 빈 배열을 반환합니다.
      * @method getReadList
      * @methodOf module:server.workContext
      * @static
-     * @return {(Read[])} 当前流程实例的所有待阅对象数组.
+     * @return {(Read[])} 현재 프로세스 인스턴스의 모든 열람 대기 객체 배열.
      * @o2ActionOut x_processplatform_assemble_surface.ReadAction.get|example=Read
      * @o2syntax
      * const readList = this.workContext.getReadList();
      */
-    "getReadList": function(){return JSON.parse(globalThis.java_workContext.getReadList());},                       //根据work获取所有的read数组  json字符串
+    "getReadList": function(){return JSON.parse(globalThis.java_workContext.getReadList());},                       //work로 모든 read 배열 json 문자열 조회
 
     /**
-     * @summary 获取当前流程实例的所有已阅对象。如果流程实例没有已阅，则返回一个空数组。
+     * @summary 현재 프로세스 인스턴스의 모든 열람 완료 객체를 조회합니다. 열람 완료가 없으면 빈 배열을 반환합니다.
      * @method getReadCompletedList
      * @methodOf module:server.workContext
      * @static
-     * @return {(ReadCompleted[])} 当前流程实例的所有已阅对象数组.
+     * @return {(ReadCompleted[])} 현재 프로세스 인스턴스의 모든 열람 완료 객체 배열.
      * @o2ActionOut x_processplatform_assemble_surface.ReadCompletedAction.listWithWork|example=Read
      * @o2syntax
      * const readCompletedList = this.workContext.getReadCompletedList();
      */
-    "getReadCompletedList": function(){return JSON.parse(globalThis.java_workContext.getReadCompletedList());},     //根据work获取所有的ReadCompleted数组  json字符串
+    "getReadCompletedList": function(){return JSON.parse(globalThis.java_workContext.getReadCompletedList());},     //work로 모든 ReadCompleted 배열 json 문자열 조회
 
     /**
-     * @summary 获取当前流程实例的所有review对象。如果流程实例没有review，则返回一个空数组。
+     * @summary 현재 프로세스 인스턴스의 모든 review 객체 조회. review가 없으면 빈 배열 반환.
      * @method getReviewList
      * @alias getReviewListByJob
      * @methodOf module:server.workContext
      * @static
-     * @return {(Review[])} 当前流程实例的所有review对象数组.
+     * @return {(Review[])} 현재 프로세스 인스턴스의 모든 review 객체 배열.
      * @o2ActionOut x_processplatform_assemble_surface.ReviewAction.listWithJob|example=Review
      * @o2syntax
      * const reviewList = this.workContext.getReviewList();
@@ -3746,88 +3746,88 @@ const workContext = {
     "getReviewList": function(){return JSON.parse(globalThis.java_workContext.getJobReviewList());},
 
     /**
-     * @summary getTaskListByJob方法的别名。
+     * @summary getTaskListByJob 메서드의 별칭.
      * @method getJobTaskList
      * @static
      * @see server.module:workContext.getTaskListByJob
      */
-    "getJobTaskList": function(){return JSON.parse(globalThis.java_workContext.getJobTaskList());},                 //根据jobid获取所有的task数组  json字符串
+    "getJobTaskList": function(){return JSON.parse(globalThis.java_workContext.getJobTaskList());},                 //jobid로 모든 task 배열 json 문자열 조회
 
     /**
-     * @summary getTaskCompletedListByJob方法的别名。
+     * @summary getTaskCompletedListByJob 메서드의 별칭.
      * @method getJobTaskCompletedList
      * @static
      * @see server.module:workContext.getTaskCompletedListByJob
      */
-    "getJobTaskCompletedList": function(){return JSON.parse(globalThis.java_workContext.getJobTaskCompletedList());},   //根据jobid获取所有的TaskCompleted数组  json字符串
+    "getJobTaskCompletedList": function(){return JSON.parse(globalThis.java_workContext.getJobTaskCompletedList());},   //jobid로 모든 TaskCompleted 배열 json 문자열 조회
     /**
-     * @summary getReadListByJob方法的别名。
+     * @summary getReadListByJob 메서드의 별칭.
      * @method getJobReadList
      * @static
      * @see server.module:workContext.getReadListByJob
      */
-    "getJobReadList": function(){return JSON.parse(globalThis.java_workContext.getJobReadList());},                     //根据jobid获取所有的read数组  json字符串
+    "getJobReadList": function(){return JSON.parse(globalThis.java_workContext.getJobReadList());},                     //jobid로 모든 read 배열 json 문자열 조회
     /**
-     * @summary getReadCompletedListByJob方法的别名。
+     * @summary getReadCompletedListByJob 메서드의 별칭.
      * @method getJobReadCompletedList
      * @static
      * @see server.module:workContext.getReadCompletedListByJob
      */
-    "getJobReadCompletedList": function(){return JSON.parse(globalThis.java_workContext.getJobReadCompletedList());},   //根据jobid获取所有的ReadCompleted数组  json字符串
+    "getJobReadCompletedList": function(){return JSON.parse(globalThis.java_workContext.getJobReadCompletedList());},   //jobid로 모든 ReadCompleted 배열 json 문자열 조회
     /**
-     * @summary getReviewList方法的别名。
+     * @summary getReviewList 메서드의 별칭.
      * @method getJobReviewList
      * @static
      * @see server.module:workContext.getReviewList
      */
-    "getJobReviewList": function (){return this.getReviewList();},                                                                        //根据jobid获取所有的Review数组  json字符串
+    "getJobReviewList": function (){return this.getReviewList();},                                                                        //jobid로 모든 Review 배열 json 문자열 조회
 
     /**
-     * 根据当前工作的job获取当前流程实例的所有待办对象。如果流程实例已流转完成，则返回一个空数组。
+     * 현재 업무 문서의 job으로 현재 프로세스 인스턴스의 모든 결재 대기 객체 조회. 프로세스 인스턴스가 이미 완료된 경우 빈 배열 반환.
      * @method getTaskListByJob
      * @methodOf module:server.workContext
      * @o2ActionOut x_processplatform_assemble_surface.TaskAction.listWithJob|example=Task
      * @static
-     * @return {(Task[])} 待办任务列表.
+     * @return {(Task[])} 결재 대기 작업 목록.
      * @o2syntax
      * const taskList = this.workContext.getTaskListByJob();
      */
     "getTaskListByJob": function(){return this.getJobTaskList();},
     /**
-     * 根据当前工作的job获取当前流程实例的所有已办对象。如果流程实例没有任何人处理过，则返回一个空数组。
+     * 현재 업무 문서의 job으로 현재 프로세스 인스턴스의 모든 처리 완료 객체를 조회합니다. 처리한 사람이 없으면 빈 배열을 반환합니다.
      * @method getTaskCompletedListByJob
      * @methodOf module:server.workContext
      * @static
-     * @return {(TaskCompleted[])} 已办任务列表.
+     * @return {(TaskCompleted[])} 처리 완료 작업 목록.
      * @o2ActionOut x_processplatform_assemble_surface.TaskCompletedAction.listWithJob|example=Task
      * @o2syntax
      * const taskCompletedList = this.workContext.getTaskCompletedListByJob();
      */
     "getTaskCompletedListByJob": function(){return this.getJobTaskCompletedList();},
     /**
-     * @summary 根据当前工作的job获取当前流程实例的所有待阅对象。如果流程实例无待阅，则返回一个空数组。
+     * @summary 현재 업무 문서의 job으로 현재 프로세스 인스턴스의 모든 열람 대기 객체를 조회합니다. 열람 대기가 없으면 빈 배열을 반환합니다.
      * @method getReadListByJob
      * @methodOf module:server.workContext
      * @static
-     * @return {(Read[])} 当前流程实例的所有待阅对象数组.
+     * @return {(Read[])} 현재 프로세스 인스턴스의 모든 열람 대기 객체 배열.
      * @o2ActionOut x_processplatform_assemble_surface.ReadAction.listWithJob|example=Read
      * @o2syntax
      * const readList = this.workContext.getReadListByJob();
      */
     "getReadListByJob": function(){return this.getJobReadList();},
     /**
-     * @summary 根据当前工作的job获取当前流程实例的所有已阅对象。如果流程实例没有已阅，则返回一个空数组。
+     * @summary 현재 업무 문서의 job으로 현재 프로세스 인스턴스의 모든 열람 완료 객체를 조회합니다. 열람 완료가 없으면 빈 배열을 반환합니다.
      * @method getReadCompletedListByJob
      * @methodOf module:server.workContext
      * @static
-     * @return {(ReadCompleted[])} 当前流程实例的所有已阅对象数组.
+     * @return {(ReadCompleted[])} 현재 프로세스 인스턴스의 모든 열람 완료 객체 배열.
      * @o2ActionOut x_processplatform_assemble_surface.ReadCompletedAction.listWithJob|example=Read
      * @o2syntax
      * const readCompletedList = this.workContext.getReadCompletedListByJob();
      */
     "getReadCompletedListByJob": function(){return this.getJobReadCompletedList();},
     /**
-     * @summary getReviewList方法的别名。
+     * @summary getReviewList 메서드의 별칭.
      * @method getReviewListByJob
      * @static
      * @see server.module:workContext.getReviewList
@@ -3835,94 +3835,94 @@ const workContext = {
     "getReviewListByJob": function(){return this.getJobReviewList();},
 
     /**
-     * 获取当前流程实例所在的活动节点对象：activity对象。
+     * 현재 프로세스 인스턴스가 있는 활동 노드 객체 조회: activity 객체.
      * @method getActivity
      * @static
-     * @return {(Activity|Null)} 当前流程实例所在的活动节点对象，如果当前流程实例已流转完成，则返回null.
+     * @return {(Activity|Null)} 현재 프로세스 인스턴스가 있는 활동 노드 객체, 프로세스 인스턴스가 이미 완료된 경우 null 반환.
      * <pre><code class='language-js'>{
-     *      "id": "801087c5-a4e6-4b91-bf4d-a81cdaa04471", //节点ID
-     *      "name": "办理",  //节点名称
-     *      "description": "", //节点描述
-     *      "alias": "",  //节点别名
-     *      "resetRange": "department", //重置处理人范围
-     *      "resetCount": 0,  //重置处理人数字
-     *      "allowReset": true, //是否允许重置
-     *      "manualMode": "single", //处理方式 单人single, 并行parallel, 串行queue, grab抢办
-     *      "customData": { //节点上的自定义属性，如果没有设置，不输出该值
+     *      "id": "801087c5-a4e6-4b91-bf4d-a81cdaa04471", //노드 ID
+     *      "name": "처리",  //노드 이름
+     *      "description": "", //노드 설명
+     *      "alias": "",  //노드 별칭
+     *      "resetRange": "department", //처리자 재지정 범위
+     *      "resetCount": 0,  //처리자 재지정 수
+     *      "allowReset": true, //재지정 허용 여부
+     *      "manualMode": "single", //처리 방식: 단일 single, 병렬 parallel, 순차 queue, 선점 grab
+     *      "customData": { //노드의 사용자 정의 속성, 설정하지 않으면 출력하지 않음
      *
      *      }
      * }</code></pre>
      * @o2syntax
      * const activity = this.workContext.getActivity();
      */
-    "getActivity": function(){return JSON.parse(globalThis.java_workContext.getActivity());},       //活动对象字符串
+    "getActivity": function(){return JSON.parse(globalThis.java_workContext.getActivity());},       //활동 객체 문자열
 
     /**
-     * @summary 获取当前流程实例的所有流程记录(WorkLog)。
+     * @summary 현재 프로세스 인스턴스의 모든 프로세스 기록(WorkLog) 조회.
      * @method getWorkLogList
      * @static
-     * @return {WorkLog[]} 流程记录对象.
+     * @return {WorkLog[]} 프로세스 기록 객체.
      * @o2ActionOut x_processplatform_assemble_surface.WorkLogAction.listWithJob|example=WorkLog|ignoreProps=[properties,goBackFromActivityType]
      * @o2syntax
      * const workLogList = this.workContext.getWorkLogList();
      */
-    "getWorkLogList": function(){return JSON.parse(globalThis.java_workContext.getWorkLogList());}, //WorkLogList对象数组的字符串
+    "getWorkLogList": function(){return JSON.parse(globalThis.java_workContext.getWorkLogList());}, //WorkLogList 객체 배열 문자열
 
     /**
-     * @summary 获取当前流程实例的所有流程记录(Record)。
+     * @summary 현재 프로세스 인스턴스의 모든 프로세스 기록(Record) 조회.
      * @method getRecordList
      * @o2ActionOut x_processplatform_assemble_surface.RecordAction.listWithJob|example=Record
      * @static
-     * @return {Record[]} 流程记录(Record)对象.
+     * @return {Record[]} 프로세스 기록(Record) 객체.
      * @o2syntax
      * const recordList = this.workContext.getRecordList();
      */
-    "getRecordList": function(){return JSON.parse(globalThis.java_workContext.getRecordList());}, //RecordList对象数组的字符串，需要新增
+    "getRecordList": function(){return JSON.parse(globalThis.java_workContext.getRecordList());}, //RecordList 객체 배열 문자열, 추가 필요
 
     /**
-     * @summary 最后一条Record对象，在活动流转完成事件中，获取本次流转的record；在其它事件中获取的是整个job的最后一条record，并不是本次流转的record。
+     * @summary 마지막 Record 객체. 활동 진행 완료 이벤트에서는 이번 진행의 record를, 그 밖의 이벤트에서는 job 전체의 마지막 record를 가져오며 이번 진행의 record가 아님.
      * @method getRecord
      * @o2ActionOut x_processplatform_assemble_surface.RecordAction.listWithJob|example=Record
      * @static
-     * @return {Record[]} 流程记录(Record)对象.
+     * @return {Record[]} 프로세스 기록(Record) 객체.
      * @o2syntax
      * const record = this.workContext.getRecord();
      */
-    "getRecord": function(){return JSON.parse(globalThis.java_workContext.getRecord());}, //最后一条Record对象，（在活动流转完成事件中，获取本次流转的record；在其它事件中获取的是整个job的最后一条record，并不是本次流转的record）
+    "getRecord": function(){return JSON.parse(globalThis.java_workContext.getRecord());}, //마지막 Record 객체(활동 진행 완료 이벤트에서는 이번 진행의 record를, 그 밖의 이벤트에서는 job 전체의 마지막 record를 가져오며 이번 진행의 record가 아님)
 
     /**
-     * @summary 获取当前流程实例的附件对象列表。
+     * @summary 현재 프로세스 인스턴스의 첨부파일 객체 목록 조회.
      * @method getAttachmentList
      * @static
-     * @return {WorkAttachmentData[]} 附件数据.
+     * @return {WorkAttachmentData[]} 첨부파일 데이터.
      * @o2ActionOut x_processplatform_assemble_surface.AttachmentAction.getWithWorkOrWorkCompleted|example=Attachment|ignoreProps=[properties]
      * @o2syntax
-     * //获取附件列表
+     * //첨부파일 목록 조회
      * const attachmentList = this.workContext.getAttachmentList();
      */
-    "getAttachmentList": function(){return JSON.parse(globalThis.java_workContext.getAttachmentList());},   //附件对象数组的字符串
+    "getAttachmentList": function(){return JSON.parse(globalThis.java_workContext.getAttachmentList());},   //첨부파일 객체 배열 문자열
 
     /**
-     * @summary 获取可选路由对象数组的字符串（流转事件中，获取到流转中的可选路由列表，根据当前work状态获取）。
+     * @summary 선택 가능한 라우트 객체 배열 문자열 조회(진행 이벤트에서 현재 work 상태에 따라 진행 중 선택 가능한 라우트 목록을 가져옴).
      * @method getRouteList
      * @static
-     * @return {Route[]} 路由字符串数组.
+     * @return {Route[]} 경로 문자열 배열.
      * @o2syntax
      * const routeList = this.workContext.getRouteList();
      */
-    "getRouteList": function(){return JSON.parse(globalThis.java_workContext.getRouteList());},      //可选路由对象数组的字符串（流转事件中，获取到流转中的可选路由列表，根据当前work状态获取）
+    "getRouteList": function(){return JSON.parse(globalThis.java_workContext.getRouteList());},      //선택 가능한 라우트 객체 배열 문자열(진행 이벤트에서 현재 work 상태에 따라 진행 중 선택 가능한 라우트 목록을 가져옴)
 
     /**
-     * @summary 重新设置流程实例标题
+     * @summary 프로세스 인스턴스 제목 재설정
      * @method setTitle
      * @static
-     * @param {String} title - 标题字符串.
+     * @param {String} title - 제목 문자열.
      * @o2syntax
      * this.workContext.setTitle(title);
      * @example
-     * this.workContext.setTitle("标题");
+     * this.workContext.setTitle("제목");
      */
-    "setTitle": function(title){globalThis.java_workContext.setTitle(title);},                       //设置title
+    "setTitle": function(title){globalThis.java_workContext.setTitle(title);},                       //title 설정
 
 
     "getControl": function(){return null;},
@@ -3931,7 +3931,7 @@ const workContext = {
 const workContent = workContext;
 
 /***************************************************************/
-/* assignData - 流程调用脚本，数据脚本
+/* assignData - 프로세스 호출 스크립트, 데이터 스크립트
 {
 	data:{},
 	application:"",
@@ -3941,47 +3941,47 @@ const workContent = workContext;
 	title: "",
 	processing: true
 }
-可通过return 返回assignData,  **********************************/
+return 으로 assignData 반환 가능,  **********************************/
 /**************************************************************/
 /**
- * 用于流程配置的流程调用活动中的“数据脚本”和“标题脚本”，可以通过assignData对象获取要调用的流程的相关信息，以及要传递给被调用流程实例的业务数据。<br>
- * 也可以修改业务数据，并通过assignData的set方法，将业务数据传递到被调用的流程实例。<br/>
- * @o2range 流程配置-流程调用活动中的“数据脚本”中可用
+ * 프로세스 설정의 프로세스 호출 활동에서 “데이터 스크립트”와 “제목 스크립트”에 사용, assignData 객체로 호출할 프로세스의 관련 정보와 호출되는 프로세스 인스턴스에 전달할 업무 데이터를 조회할 수 있음.<br>
+ * 업무 데이터를 수정한 뒤 assignData의 set 메서드로 호출되는 프로세스 인스턴스에 전달할 수도 있습니다.<br/>
+ * @o2range 프로세스 설정-프로세스 호출 활동의 「데이터 스크립트」에서 사용 가능
  * @module server.assignData
- * @o2cn 流程实例业务数据
+ * @o2cn 프로세스 인스턴스 업무 데이터
  * @o2category server.process
  * @o2ordernumber 210
  * @example
- * //在流程调用活动中的“数据脚本”，通过下面的代码修改业务数据，并传递给被调用流程的实例：
+ * //프로세스 호출 활동의 「데이터 스크립트」에서 아래 코드로 업무 데이터를 수정해 호출되는 프로세스 인스턴스에 전달합니다:
  * const data = this.assignData.get();
- * data.data.parentProcessData = "父流程实例的信息";
+ * data.data.parentProcessData = "상위 프로세스 인스턴스 정보";
  * this.assignData.set(data);
  * @example
  * <caption>
- *    assignData.set方法是为了兼容以前的版本。<br>
- *    <b>建议通过return一个json对象的方式来设置data内容</b>
+ *    assignData.set 메서드는 이전 버전과의 호환을 위한 것입니다.<br>
+ *    <b>json 객체를 return하는 방식으로 data 내용을 설정할 것을 권장합니다</b>
  * </caption>
- * //也可以通过return一个json对象的方式来代替assignData.set方法
+ * //json 객체를 return하는 방식으로 assignData.set 메서드를 대체할 수도 있습니다
  * const data = this.assignData.get();
- * data.data.parentProcessData = "父流程实例的信息";
+ * data.data.parentProcessData = "상위 프로세스 인스턴스 정보";
  * return data;
  */
-const assignData = {     //java_assignData 应用调用活动的创建的流程实例的业务数据处理对象，get set 方法
+const assignData = {     //java_assignData 앱 호출 활동에서 생성한 프로세스 인스턴스의 업무 데이터 처리 객체, get set 메서드
     _data: null,
     /**
-     * @summary 获取要调用的流程的相关信息，以及要传递给被调用流程实例的业务数据。
+     * @summary 호출할 프로세스의 관련 정보와 호출되는 프로세스 인스턴스에 전달할 업무 데이터 조회.
      * @method get
      * @methodOf module:server.assignData
      * @static
-     * @return {Object} 描述被调用的流程的信息，及要传递的业务数据.
+     * @return {Object} 호출되는 프로세스 정보 및 전달할 업무 데이터.
      * <pre><code class='language-js'>{
-     *        "application": "application id",  //被调用的应用id
-     *        "process": "process id",          //被调用的流程id
-     *        "identity": "xxx@xxx@I",          //被调用流程的启动这身份
-     *        "title": "title",                 //被调用流程实例的标题
-     *        "attachmentList": [],             //要传递到被调用的流程实例的附件对象
-     *        "data": {},                       //要传递到被调用的流程实例的业务数据
-     *        "attachmentSoftCopy"              //如果为true，不拷贝附件文件。默认false  @todo
+     *        "application": "application id",  //호출되는 앱 id
+     *        "process": "process id",          //호출되는 프로세스 id
+     *        "identity": "xxx@xxx@I",          //호출되는 프로세스의 시작 신분
+     *        "title": "title",                 //호출되는 프로세스 인스턴스 제목
+     *        "attachmentList": [],             //호출되는 프로세스 인스턴스에 전달할 첨부파일 객체
+     *        "data": {},                       //호출되는 프로세스 인스턴스에 전달할 업무 데이터
+     *        "attachmentSoftCopy"              //true이면 첨부파일을 복사하지 않음. 기본값 false  @todo
      * }</code></pre>
      * @o2syntax
      * const data = this.assignData.get();
@@ -3991,17 +3991,17 @@ const assignData = {     //java_assignData 应用调用活动的创建的流程�
         return this.data;
     },
     /**
-     * @summary 设置修改后的assignData对象。（set方法为了兼容早期的版本。建议使用 return data; 方式直接返回json对象）
+     * @summary 수정한 assignData 객체 설정(set 메서드는 초기 버전과의 호환용. return data; 방식으로 json 객체를 직접 반환하는 것을 권장)
      * @method set
      * @methodOf module:server.assignData
      * @static
-     * @param {Object} [data] 要设置的assignData对象，一般情况都是通过assignData.get()获取并做必要修改的对象。
+     * @param {Object} [data] 설정할 assignData 객체. 일반적으로 assignData.get()으로 가져와 필요한 부분을 수정한 객체.
      * @o2syntax
      * this.assignData.set(data);
-     * @deprecated set方法已不建议使用了。建议return一个json对象或数组的方式来设置data。
+     * @deprecated set 메서드는 더 이상 권장하지 않습니다. json 객체나 배열을 return하는 방식으로 data를 설정하십시오.
      * @example
      * const data = this.assignData.get();
-     * data.data.parentProcessData = "父流程实例的信息";
+     * data.data.parentProcessData = "상위 프로세스 인스턴스 정보";
      * return data;
      */
     "set": function(data){
@@ -4019,64 +4019,64 @@ Object.defineProperties(assignData, {"data": {
 
 
 /***************************************************************/
-/* parameters - 服务调用活动，参数脚本，要传入的参数 ******************/
-/*              数据中心查询语句的脚本中，获取语句参数。***************/
-/*   - 调用活动中，如果是webservice调用，则注入 java_jaxwsParameters 对象，parameters 返回一个对象，包含 add 和 remove方法;***************/
-/*   - 调用活动中，如果是restfyl调用，则注入 java_jaxrsParameters 对象，parameters 返回一个对象，包含 put 和 remove方法;******************/
-/*   - 数据中心查询语句的脚本中，则注入 java_parameters json文本，parameters 返回一个json对象，用于获取调用查询语句的参数******************/
+/* parameters - 서비스 호출 활동, 파라미터 스크립트, 전달할 파라미터 ******************/
+/*              데이터 센터 쿼리문 스크립트에서 쿼리문 파라미터 조회.***************/
+/*   - 호출 활동에서 webservice 호출이면 java_jaxwsParameters 객체를 주입하며, parameters 는 add 와 remove 메서드를 포함한 객체를 반환;***************/
+/*   - 호출 활동에서 restful 호출이면 java_jaxrsParameters 객체를 주입하며, parameters 는 put 과 remove 메서드를 포함한 객체를 반환;******************/
+/*   - 데이터 센터 쿼리문 스크립트에서는 java_parameters json 텍스트를 주입하며, parameters 는 쿼리문 호출 파라미터 조회용 json 객체를 반환******************/
 /***************************************************************/
 /**
- * 用于流程配置的服务调用活动中的“参数脚本”，为jaxrs和jaxws两种服务调用方式传递参数。<br>
- * 当调用类型为jaxrs时：可使用parameters.put和parameters.remove方法<br/>
- * 当调用类型为jaxws时：可使用parameters.add和parameters.remove方法<br/>
- * @o2range 流程配置-服务调用活动中的“参数脚本”中可用
+ * 프로세스 설정의 서비스 호출 활동 「파라미터 스크립트」에서 사용하며, jaxrs와 jaxws 두 서비스 호출 방식에 파라미터를 전달합니다.<br>
+ * 호출 유형이 jaxrs일 때: parameters.put과 parameters.remove 메서드 사용 가능<br/>
+ * 호출 유형이 jaxws일 때: parameters.add와 parameters.remove 메서드 사용 가능<br/>
+ * @o2range 프로세스 설정-서비스 호출 활동의 「파라미터 스크립트」에서 사용 가능
  * @module server.parameters
- * @o2cn 服务调用参数
+ * @o2cn 서비스 호출 파라미터
  * @o2category server.process
  * @o2ordernumber 215
- * @deprecated parameters对象已经不建议使用了。建议return一个json对象或数组的方式来设置参数。
+ * @deprecated parameters 객체는 더 이상 권장하지 않습니다. json 객체나 배열을 return하는 방식으로 파라미터를 설정하십시오.
  * @example
- * //使用jaxrs方式的服务调用活动的参数脚本中
- * //如果rest服务地址为：xxx/{id}/xx/{name},则需要传入两个参数：id和name，可使用如下代码：
+ * //jaxrs 방식 서비스 호출 활동의 파라미터 스크립트에서
+ * //rest 서비스 주소가 xxx/{id}/xx/{name}이면 id와 name 두 파라미터를 전달해야 하며, 다음 코드를 사용할 수 있습니다:
  * this.parameters.put("id", "id value");
  * this.parameters.put("name", "name value");
  *
- * //或者
+ * //또는
  * this.parameters.put({
  *     "id": "id value",
  *     "name": "name value"
  * });
  *
  * @example
- * //使用jaxws方式的服务调用活动的参数脚本中
- * //如果需要传入三个参数，可使用如下代码：
- * this.parameters.add("参数1");
- * this.parameters.add("参数2");
- * this.parameters.add("参数3");
+ * //jaxws 방식 서비스 호출 활동의 파라미터 스크립트에서
+ * //세 개의 파라미터를 전달해야 하면 다음 코드를 사용할 수 있습니다:
+ * this.parameters.add("파라미터1");
+ * this.parameters.add("파라미터2");
+ * this.parameters.add("파라미터3");
  *
- * //或者
- * this.parameters.add(["参数1", "参数2", "参数3"]);
+ * //또는
+ * this.parameters.add(["파라미터1", "파라미터2", "파라미터3"]);
  *
  * @example
  * <caption>
- *    以上两个例子中使用了parameters对象来收集参数，这主要是为了兼容以前的版本。<br>
- *    <b>我们更建议通过return一个json对象或数组的方式来设置参数</b>
+ *    위 두 예시에서는 parameters 객체로 파라미터를 수집했는데, 이는 주로 이전 버전과의 호환을 위한 것입니다.<br>
+ *    <b>json 객체나 배열을 return하는 방식으로 파라미터를 설정할 것을 더 권장합니다</b>
  * </caption>
- * //以上两个例子中使用了parameters对象来收集参数
- * //更好的方式是：通过return一个json对象或数组的方式来设置参数
- * //对于jaxrs方式：
+ * //위 두 예시에서는 parameters 객체로 파라미터를 수집함
+ * //더 나은 방식: json 객체나 배열을 return하는 방식으로 파라미터 설정
+ * //jaxrs 방식의 경우:
  * return {
  *     "id": "id value",
  *     "name": "name value"
  * }
  *
- * //对于jaxws方式：
- * return ["参数1", "参数2", "参数3"];
+ * //jaxws 방식의 경우:
+ * return ["파라미터1", "파라미터2", "파라미터3"];
  */
 /**
- * 用于数据中心查询语句的脚本中，可获取语句参数。json对象，在调用此语句的时候传入<br>
- * @o2range 数据中心-查询配置-通过脚本创建查询语句
- * @o2cn 数据中心查询语句参数
+ * 데이터 센터 쿼리 구문의 스크립트에서 구문 매개변수를 조회할 수 있음. json 객체이며 이 구문을 호출할 때 전달됨<br>
+ * @o2range 데이터 센터-쿼리 설정-스크립트로 쿼리 구문 생성
+ * @o2cn 데이터 센터 쿼리 구문 매개변수
  * @module server.service.parameters
  * @o2category server.service
  * @o2ordernumber 255
@@ -4084,43 +4084,43 @@ Object.defineProperties(assignData, {"data": {
  * var pars = this.parameters;
  * @example
  * <caption>
- *     通过this.statement.execute调用一个名为“task”的查询配置，并传入parameters，代码如下：
- *     <pre><code class='language-js'>//用一个名为“task”的查询配置，并传入parameters
+ *     this.statement.execute로 「task」라는 쿼리 설정을 호출하고 parameters를 전달하는 코드는 다음과 같음:
+ *     <pre><code class='language-js'>//「task」라는 쿼리 설정을 호출하고 parameters 전달
  * this.statement.execute({
  *  "name": "task",
  *  "mode" : "all",
  *  "parameter" : {
- *     "person" : "xxx@xxx@p",  //传入人员参数
- *     "startTime" : (new Date("2020-01-01")) //传入时间参数
+ *     "person" : "xxx@xxx@p",  //사용자 매개변수 전달
+ *     "startTime" : (new Date("2020-01-01")) //시간 매개변수 전달
  *  }
  * }, function(json){
- *  var count = json.count; //总数语句执行后返回的数字
- *  var list = json.data; //查询语句后返回的数组
+ *  var count = json.count; //총수 문 실행 후 반환된 숫자
+ *  var list = json.data; //쿼리 문 실행 후 반환된 배열
  *   //......
  * });
  *     </code></pre>
  *
- *     在task查询配置的脚本中，parameters对象就可获取到执行查询时传入的parameters对象，以便于动态创建查询语句
+ *     task 쿼리 설정의 스크립트에서 parameters 객체로 쿼리 실행 시 전달된 parameters 객체를 얻어 쿼리 구문을 동적으로 생성할 수 있음
  * </caption>
- * //动态生成查询指定用户，在指定时间之后的所有待办数据
+ * //지정한 사용자의 지정 시간 이후 모든 결재 대기 데이터를 조회하는 구문을 동적으로 생성
  * var user = this.parameters.person;
- * var startTime = (new Date(this.parameters.startTime)).format("db");  //格式化为yyyy-mm-dd hh:mm:ss
+ * var startTime = (new Date(this.parameters.startTime)).format("db");  //yyyy-mm-dd hh:mm:ss 형식으로 변환
  * return "SELECT o FROM Task o WHERE o.person='"+user+"' AND o.startTime>{ts '"+startTime+"'}"
  */
 const parametersDescriptor = {
     get: function(){
-        if (globalThis.java_jaxwsParameters){   //注入 java_jaxwsParameters 对象，表示脚本运行于 服务调用活动，参数脚本 中，并且调用类型为 jaxws
+        if (globalThis.java_jaxwsParameters){   //java_jaxwsParameters 객체 주입, 스크립트가 서비스 호출 활동, 파라미터 스크립트 에서 실행되며 호출 유형이 jaxws 임을 의미
             return {
                 /**
-                 * @summary jaxws方式的服务调用活动，“参数脚本”中，使用parameters.add设置参数。
+                 * @summary jaxws 방식 서비스 호출 활동의 「파라미터 스크립트」에서 parameters.add로 파라미터 설정.
                  * @method add
                  * @methodOf module:server.parameters
                  * @static
-                 * @param {Any|Array} [value] 要设置的参数值。
+                 * @param {Any|Array} [value] 설정할 파라미터 값.
                  * @o2syntax
                  * this.parameters.add(value);
-                 * @deprecated 不建议使用，建议return一个数组的方式来设置参数。如：
-                 * <pre><code class='language-js'>return ["参数1", "参数2", "参数3"];</code></pre>
+                 * @deprecated 권장하지 않습니다. 배열을 return하는 방식으로 파라미터를 설정하십시오. 예:
+                 * <pre><code class='language-js'>return ["파라미터1", "파라미터2", "파라미터3"];</code></pre>
                  */
                 add(value){
                     if (Array.isArray(value)){
@@ -4132,33 +4132,33 @@ const parametersDescriptor = {
                     }
                 },
                 /**
-                 * @summary 服务调用活动，“参数脚本”中，删除已设置参数。
+                 * @summary 서비스 호출 활동의 「파라미터 스크립트」에서 설정한 파라미터 삭제.
                  * @method remove
                  * @methodOf module:server.parameters
                  * @static
-                 * @param {String|Number} [name] jaxrs方式的服务调用活动，传入要删除参数的key；jaxws方式的服务调用活动，传入要删除的参数的索引。
+                 * @param {String|Number} [name] jaxrs 방식 서비스 호출 활동은 삭제할 파라미터의 key, jaxws 방식 서비스 호출 활동은 삭제할 파라미터의 인덱스를 전달.
                  * @o2syntax
                  * this.parameters.remove(name);
-                 * @deprecated 不建议使用
+                 * @deprecated 권장하지 않음
                  */
                 remove(name){
                     globalThis.java_jaxwsParameters.remove(name);
                 }
             }
         }
-        if (globalThis.java_jaxrsParameters){   //注入 java_jaxrsParameters 对象，表示脚本运行于 服务调用活动，参数脚本 中，并且调用类型为 jaxrs
+        if (globalThis.java_jaxrsParameters){   //java_jaxrsParameters 객체 주입, 스크립트가 서비스 호출 활동, 파라미터 스크립트 에서 실행되며 호출 유형이 jaxrs 임을 의미
             return {
                 /**
-                 * @summary jaxrs方式的服务调用活动，“参数脚本”中，使用parameters.put设置参数。
+                 * @summary jaxrs 방식 서비스 호출 활동의 「파라미터 스크립트」에서 parameters.put으로 파라미터 설정.
                  * @method put
                  * @methodOf module:server.parameters
                  * @static
-                 * @param {String|Object} [name] 要设置的参数key，或参数json对象。
-                 * @param {String|Number|boolean} [value] 要设置的参数值。
+                 * @param {String|Object} [name] 설정할 파라미터 key 또는 파라미터 json 객체.
+                 * @param {String|Number|boolean} [value] 설정할 파라미터 값.
                  * @o2syntax
                  * this.parameters.put(name, value);
                  * this.parameters.put(obj);
-                 * @deprecated 不建议使用，建议return一个json对象的方式来设置参数。如：
+                 * @deprecated 권장하지 않습니다. json 객체를 return하는 방식으로 파라미터를 설정하십시오. 예:
                  * <pre><code class='language-js'>return {
                  *     "id": "id value",
                  *     "name": "name value"
@@ -4179,7 +4179,7 @@ const parametersDescriptor = {
                 }
             }
         }
-        if (globalThis.java_parameters){        //注入 java_parameters 对象，表示脚本运行于 数据中心查询语句的脚本 中
+        if (globalThis.java_parameters){        //java_parameters 객체 주입, 스크립트가 데이터 센터 쿼리문 스크립트 에서 실행됨을 의미
             return JSON.parse(globalThis.java_parameters)
         }
         return null;
@@ -4188,36 +4188,36 @@ const parametersDescriptor = {
 
 
 /***************************************************************/
-/* body - 服务调用活动，消息体脚本，设置调用消息体 ******************/
+/* body - 서비스 호출 활동, 메시지 본문 스크립트, 호출 메시지 본문 설정 ******************/
 /***************************************************************/
 /**
- * 用于流程配置的服务调用活动中的“消息体脚本”，仅在jaxrs方式的服务调用活动中可用。<br>
- * @o2range 流程配置-服务调用活动中的“消息体脚本”，服务协议为jaxrs
+ * 프로세스 설정의 서비스 호출 활동 「메시지 본문 스크립트」에서 사용하며, jaxrs 방식 서비스 호출 활동에서만 사용할 수 있습니다.<br>
+ * @o2range 프로세스 설정-서비스 호출 활동의 「메시지 본문 스크립트」, 서비스 프로토콜은 jaxrs
  * @module server.body
- * @o2cn 服务调用消息体
+ * @o2cn 서비스 호출 메시지 본문
  * @o2category server.process
  * @o2ordernumber 220
- * @deprecated body对象已经不建议使用了。建议return一个json对象的方式来设置body。如：
+ * @deprecated body 객체는 더 이상 권장하지 않습니다. json 객체를 return하는 방식으로 body를 설정하십시오. 예:
  * <pre><code class='language-js'>return {
  *     "key1": "value1",
  *     "key2": "value2",
  *     "key3": "value3"
  * };</code></pre>
  * @example
- * //设置jaxrs服务调用的消息体
+ * //jaxrs 서비스 호출의 메시지 본문 설정
  * this.body.set({
  *     "key1": "value1",
  *     "key2": "value2",
  *     "key3": "value3"
  * })
  *
- * //或者设置
+ * //또는 설정
  * this.body.set("this is body data");
  *
  * @example
  * <caption>
- *    body.set方法是为了兼容以前的版本。<br>
- *    <b>建议通过return一个json对象的方式来设置消息体内容</b>
+ *    body.set 메서드는 이전 버전과의 호환을 위한 것입니다.<br>
+ *    <b>json 객체를 return하는 방식으로 메시지 본문 내용을 설정할 것을 권장합니다</b>
  * </caption>
  * return {
  *      "key1": "value1",
@@ -4225,19 +4225,19 @@ const parametersDescriptor = {
  *     "key3": "value3"
  * };
  *
- * //或
+ * //또는
  * return "this is body data";
  */
 const body = {
     /**
-     * @summary 服务调用活动中的“消息体脚本”，用于设置消息体内容。
+     * @summary 서비스 호출 활동의 「메시지 본문 스크립트」에서 메시지 본문 내용 설정.
      * @method set
      * @methodOf module:server.body
      * @static
-     * @param {String|Object} [data] 消息体内容。
+     * @param {String|Object} [data] 메시지 본문 내용.
      * @o2syntax
      * this.body.set(data);
-     * @deprecated 不建议使用，建议return一个json对象或数组的方式来设置body。
+     * @deprecated 권장하지 않습니다. json 객체나 배열을 return하는 방식으로 body를 설정하십시오.
      */
     set(data){
         if ((typeof data)==="string"){
@@ -4250,25 +4250,25 @@ const body = {
 };
 
 /***************************************************************/
-/* headers - 服务调用活动，消息头脚本，设置调用消息头 ******************/
+/* headers - 서비스 호출 활동, 메시지 헤더 스크립트, 호출 메시지 헤더 설정 ******************/
 /***************************************************************/
 /**
- * 用于流程配置的服务调用活动中的“消息头脚本”，仅在jaxrs方式的服务调用活动中可用。<br>
- * @o2range 流程配置-服务调用活动中的“消息头脚本”，服务协议为jaxrs
+ * 프로세스 설정의 서비스 호출 활동 「메시지 헤더 스크립트」에서 사용하며, jaxrs 방식 서비스 호출 활동에서만 사용할 수 있습니다.<br>
+ * @o2range 프로세스 설정-서비스 호출 활동의 「메시지 헤더 스크립트」, 서비스 프로토콜은 jaxrs
  * @module server.headers
- * @o2cn 服务调用消息头
+ * @o2cn 서비스 호출 메시지 헤더
  * @o2category server.process
  * @o2ordernumber 225
- * @deprecated headers对象已经不建议使用了，建议return一个json对象的方式来设置headers。如：
+ * @deprecated headers 객체는 더 이상 권장하지 않습니다. json 객체를 return하는 방식으로 headers를 설정하십시오. 예:
  * <pre><code class='language-js'>return {
  *     "Content-Type": "application/x-www-form-urlencoded"，
  *     "Accept-Language": "en"
  * };</code></pre>
  * @example
- * //设置jaxrs服务调用的消息头
+ * //jaxrs 서비스 호출의 메시지 헤더 설정
  * this.headers.put("Content-Type", "application/x-www-form-urlencoded");
  *
- * //或者
+ * //또는
  * this.headers.put({
  *      "Content-Type": "application/x-www-form-urlencoded"，
  *      "Accept-Language": "en"
@@ -4276,8 +4276,8 @@ const body = {
  *
  * @example
  * <caption>
- *    headers.put方法是为了兼容以前的版本。<br>
- *    <b>建议通过return一个json对象的方式来设置消息头内容</b>
+ *    headers.put 메서드는 이전 버전과의 호환을 위한 것입니다.<br>
+ *    <b>json 객체를 return하는 방식으로 메시지 헤더 내용을 설정할 것을 권장합니다</b>
  * </caption>
  * return {
  *      "Content-Type": "application/x-www-form-urlencoded"，
@@ -4286,16 +4286,16 @@ const body = {
  */
 const headers = {
     /**
-     * @summary jaxrs方式的服务调用活动，“消息头脚本”中，headers.put设置消息头。
+     * @summary jaxrs 방식 서비스 호출 활동의 「메시지 헤더 스크립트」에서 headers.put으로 메시지 헤더 설정.
      * @method add
      * @methodOf module:server.headers
      * @static
-     * @param {String|Object} [name] 要设置的消息头名称，或消息头json对象。
-     * @param {String} [value] 要设置的消息头值。
+     * @param {String|Object} [name] 설정할 메시지 헤더 이름 또는 메시지 헤더 json 객체.
+     * @param {String} [value] 설정할 메시지 헤더 값.
      * @o2syntax
      * this.headers.put(name, value);
      * this.headers.put(obj);
-     * @deprecated 不建议使用，建议return一个json对象的方式来设置headers。如：
+     * @deprecated 권장하지 않습니다. json 객체를 return하는 방식으로 headers를 설정하십시오. 예:
      * <pre><code class='language-js'>return {
      *     "Content-Type": "application/x-www-form-urlencoded"，
      *     "Accept-Language": "en"
@@ -4314,14 +4314,14 @@ const headers = {
         }catch(e){}
     },
     /**
-     * @summary jaxrs方式的服务调用活动，“消息头脚本”中，删除已经设置消息头。
+     * @summary jaxrs 방식 서비스 호출 활동의 「메시지 헤더 스크립트」에서 설정한 메시지 헤더 삭제.
      * @method remove
      * @methodOf module:server.headers
      * @static
-     * @param {String} [name] 要删除的消息头名称。
+     * @param {String} [name] 삭제할 메시지 헤더 이름.
      * @o2syntax
      * this.headers.remove(name);
-     * @deprecated 不建议使用
+     * @deprecated 권장하지 않음
      */
     remove(name){
         try{
@@ -4331,32 +4331,32 @@ const headers = {
 };
 
 /***************************************************************/
-/* requestText - 服务活动，服务响应脚本，获取请求的文本内容  ******/
-/*               服务管理 invoke 请求消息体的文本内容 *     ******/
+/* requestText - 서비스 활동, 서비스 응답 스크립트, 요청 텍스트 내용 조회  ******/
+/*               서비스 관리 invoke 요청 메시지 본문의 텍스트 내용 *     ******/
 /***************************************************************/
 /**
- * 调用接口时传入的请求消息体的文本内容。
- * @o2range 服务管理-接口
+ * 인터페이스 호출 시 전달된 요청 메시지 본문의 텍스트 내용.
+ * @o2range 서비스 관리-인터페이스
  * @module server.service.requestText
- * @o2cn 传入的服务消息体文本
+ * @o2cn 전달된 서비스 메시지 본문 텍스트
  * @o2category server.service
  * @o2ordernumber 250
  * @o2syntax
  * const text = this.requestText;
  * @example
- * const text = this.requestText; //传入的服务消息体文本
- * const object = JSON.parse(text); //转成对象
+ * const text = this.requestText; //전달된 서비스 메시지 본문 텍스트
+ * const object = JSON.parse(text); //객체로 변환
  */
 /**
- * 用于流程配置的服务活动中的“服务响应脚本”，获取请求的文本内容。<br>
- * @o2range 流程配置-服务活动中的“响应脚本”
+ * 프로세스 설정의 서비스 활동에서 “서비스 응답 스크립트”에 사용, 요청 텍스트 내용 조회.<br>
+ * @o2range 프로세스 설정-서비스 활동의 「응답 스크립트」
  * @module server.requestText
- * @o2cn 服务调用请求对象
+ * @o2cn 서비스 호출 요청 객체
  * @o2category server.process
  * @o2ordernumber 235
  * @o2syntax
  * const text = this.requestText;
- * const object = JSON.parse(text); //转成对象
+ * const object = JSON.parse(text); //객체로 변환
  */
 const requestTextDescriptor = {
     get: function(){
@@ -4365,17 +4365,17 @@ const requestTextDescriptor = {
 }
 
 /***************************************************************/
-/* request - 服务活动，服务响应脚本，获取请求内容  ****************/
-/*           服务管理 invoke 请求的java对象 java_request *********/
+/* request - 서비스 활동, 서비스 응답 스크립트, 요청 내용 조회  ****************/
+/*           서비스 관리 invoke 요청 java 객체 java_request *********/
 /***************************************************************/
 const requestDescriptor = {
     get: function(){
-        if (globalThis.java_request){       //注入java_request对象，表示脚本运行在 服务管理 invoke 中。直接返回 java_request 对象。
+        if (globalThis.java_request){       //java_request 객체 주입, 스크립트가 서비스 관리 invoke 에서 실행됨을 의미. java_request 객체를 그대로 반환.
             /**
-             * 调用接口时传入的请求对象。java的 request（java.net.http.HttpRequest）对象。
-             * @o2range 服务管理-接口
+             * 인터페이스 호출 시 전달된 요청 객체. java의 request(java.net.http.HttpRequest) 객체.
+             * @o2range 서비스 관리-인터페이스
              * @module server.service.request
-             * @o2cn 传入的服务消息体文本
+             * @o2cn 전달된 서비스 메시지 본문 텍스트
              * @o2category server.service
              * @o2ordernumber 250
              * @o2syntax
@@ -4390,12 +4390,12 @@ const requestDescriptor = {
             }
             return globalThis.java_request;
         }
-        if (globalThis.java_requestText) {  //注入java_requestText对象，表示脚本运行在 服务活动，服务响应脚本 中。
+        if (globalThis.java_requestText) {  //java_requestText 객체 주입, 스크립트가 서비스 활동, 서비스 응답 스크립트 에서 실행됨을 의미.
             /**
-             * 用于流程配置的服务活动中的“服务响应脚本”，描述发起服务的请求对象。<br>
-             * @o2range 流程配置-服务活动中的“响应脚本”
+             * 프로세스 설정의 서비스 활동 「서비스 응답 스크립트」에서 사용하며, 서비스를 요청한 요청 객체를 나타냅니다.<br>
+             * @o2range 프로세스 설정-서비스 활동의 「응답 스크립트」
              * @module server.request
-             * @o2cn 服务调用请求对象
+             * @o2cn 서비스 호출 요청 객체
              * @o2category server.process
              * @o2ordernumber 235
              * @o2syntax
@@ -4403,11 +4403,11 @@ const requestDescriptor = {
              */
             return {
                 /**
-                 * @summary 获取请求的body内容。
+                 * @summary 요청 body 내용 조회.
                  * @method getBody
                  * @methodOf server.module:request
                  * @static
-                 * @return {Object|String} 请求的body内容，如果能转换为json，则返回json对象，否则返回请求的内容的文本.
+                 * @return {Object|String} 요청 body 내용. json으로 변환 가능하면 json 객체를, 아니면 요청 내용 텍스트를 반환.
                  * @o2syntax
                  * const req = this.request.getBody();
                  */
@@ -4419,7 +4419,7 @@ const requestDescriptor = {
                     }
                 },
                 /**
-                 * @summary 获取请求的body的原始内容。
+                 * @summary 요청 body의 원본 내용 조회.
                  * @member {String} text
                  * @memberOf server.module:request
                  * @o2syntax
@@ -4436,88 +4436,88 @@ const requestDescriptor = {
 
 
 /***************************************************************/
-/* expire - 活动时效计算对象，用于设置活动时效 ********************/
+/* expire - 활동 기한 계산 객체, 활동 기한 설정용 ********************/
 /***************************************************************/
-//活动时效计算对象，流程时效得去掉
+//활동 기한 계산 객체, 프로세스 기한은 제거 필요
 //java_expire,
-//脚本返回JSON数据:
+//스크립트 반환 JSON 데이터:
 //{
-//    hour: 3                     //几小时后超时
-//    workHour: 5             //几个工作小时后超时
-//    date: '2016-08-01'   //到达指定时间后超时
+//    hour: 3                     //몇 시간 후 기한 초과
+//    workHour: 5             //몇 근무 시간 후 기한 초과
+//    date: '2016-08-01'   //지정 시간 도달 후 기한 초과
 //}
-//设置指定的超时时间:
+//지정한 기한 초과 시간 설정:
 //this.expire.setDate([Date or String] date)
-//设置几小时后超时:
+//몇 시간 후 기한 초과 설정:
 //this.expire.setHour([Int] hour)
-//设置几个工作小时后超时：
+//몇 근무 시간 후 기한 초과 설정:
 //this.expire.setWorkHour([Int] hour)
 /**
- * 用于流程配置的人工活动的“时效脚本”中，用于设置超时时间。可以通过设置小时数，工作小时数，和指定时间点来设置超时，如果全部设置，则优先级为：工作小时>小时>时间<br>
- * @o2range 流程配置-人工活动中的“时效脚本”
+ * 프로세스 설정의 인공 활동 「기한 스크립트」에서 기한 초과 시간을 설정합니다. 시간 수, 근무 시간 수, 지정 시점으로 기한 초과를 설정할 수 있으며, 모두 설정하면 우선순위는 근무 시간>시간>시간점입니다<br>
+ * @o2range 프로세스 설정-인공 활동의 「기한 스크립트」
  * @module server.expire
- * @o2cn 超时时间设置
+ * @o2cn 기한 초과 시간 설정
  * @o2category server.process
  * @o2ordernumber 240
- * @deprecated expire对象已经不建议使用了。建议return一个json对象的方式来设置超时时间。
+ * @deprecated expire 객체는 더 이상 권장하지 않습니다. json 객체를 return하는 방식으로 기한 초과 시간을 설정하십시오.
  * @example
- * //设置超时时限为待办产生后5小时
+ * //기한을 결재 대기 생성 후 5시간으로 설정
  * this.expire.setHour(5);
  *
- * //设置超时时限为待办产生后5个工作小时（只计算工作时间）
+ * //기한을 결재 대기 생성 후 5 근무 시간으로 설정(근무 시간만 계산)
  * this.expire.setWorkHour(5);
  *
- * //设置超时时限为指定时间，如业务数据中的设定的办理期限（processingTime）
+ * //기한을 지정 시간으로 설정. 예: 업무 데이터에 설정된 처리 기한(processingTime)
  * this.expire.setDate(this.data.processingTime);
  *
  * @example
  * <caption>
- *    expire对象是为了兼容以前的版本。<br>
- *    <b>建议可以直接返回一个json对象来设置超时时间</b>
+ *    expire 객체는 이전 버전과의 호환을 위한 것입니다.<br>
+ *    <b>json 객체를 직접 반환하여 기한 초과 시간을 설정할 것을 권장합니다</b>
  * </caption>
- * //设置超时时限为待办产生后5小时
+ * //기한을 결재 대기 생성 후 5시간으로 설정
  * return {"hour": 5};
  *
- * //设置超时时限为待办产生后5个工作小时（只计算工作时间）
+ * //기한을 결재 대기 생성 후 5 근무 시간으로 설정(근무 시간만 계산)
  * return {"workHour": 5};
  *
- * //设置超时时限为指定时间，如业务数据中的设定的办理期限（processingTime）
+ * //기한을 지정 시간으로 설정. 예: 업무 데이터에 설정된 처리 기한(processingTime)
  * return {"date": this.data.processingTime};
  */
 const expire = {
     /**
-     * @summary 设置超时小时数。
+     * @summary 기한 초과 시간 수 설정.
      * @method setHour
      * @methodOf server.module:expire
      * @static
-     * @param {Number} [hour] 超时的小时数。
-     * @deprecated 不建议使用，建议return一个json对象的方式来设置超时时间。如：
+     * @param {Number} [hour] 기한 초과 시간 수.
+     * @deprecated 권장하지 않습니다. json 객체를 return하는 방식으로 기한 초과 시간을 설정하십시오. 예:
      * <pre><code class='language-js'>return {"hour": 5}</code></pre>
      */
     "setHour": function(hour){
         try{globalThis.java_expire.setHour(hour);}catch(e){}
     },
     /**
-     * @summary 设置超时工作小时数。
+     * @summary 기한 초과 근무 시간 수 설정.
      * @method setWorkHour
      * @methodOf server.module:expire
      * @static
-     * @param {Number} [hour] 超时的工作小时数。
-     * @deprecated 不建议使用，建议return一个json对象的方式来设置超时时间。如：
+     * @param {Number} [hour] 기한 초과 근무 시간 수.
+     * @deprecated 권장하지 않습니다. json 객체를 return하는 방식으로 기한 초과 시간을 설정하십시오. 예:
      * <pre><code class='language-js'>return {"workHour": 5}</code></pre>
      */
     "setWorkHour": function(hour){
         try{globalThis.java_expire.setWorkHour(hour);}catch(e){}
     },
     /**
-     * @summary 设置超时时间。
+     * @summary 기한 초과 시간 설정.
      * @method setDate
      * @methodOf server.module:expire
      * @static
      * YYYY-MM-DD HH:mm:SS
-     * @param {String} [date] 一个表示日期时间的字符串，按以下格式：
-     * <pre><code class="language-js">yyyy-MM-dd HH:mm:ss   //如2021-09-12 18:26:51</code></pre>
-     * @deprecated 不建议使用，建议return一个json对象的方式来设置超时时间。如：
+     * @param {String} [date] 날짜 시간을 나타내는 문자열, 형식은 다음과 같음:
+     * <pre><code class="language-js">yyyy-MM-dd HH:mm:ss   //예: 2021-09-12 18:26:51</code></pre>
+     * @deprecated 권장하지 않습니다. json 객체를 return하는 방식으로 기한 초과 시간을 설정하십시오. 예:
      * <pre><code class='language-js'>return {"date": "2021-09-12 18:26:51"}</code></pre>
      */
     "setDate": function(date){
@@ -4529,46 +4529,46 @@ const expire = {
 
 /******************************************/
 /******************************************/
-/*  data 和 embedData 处理 **************/
+/*  data 와 embedData 처리 **************/
 /******************************************/
 /******************************************/
 /**
- * 在流程调用活动中。当启用流程等待的情况下，在"子流程成功后"、"子流程取消后"、"子流程完成后"，三个事件脚本中，可以访问到embedData对象<br/>
- * embedData对象就是被调用的子流程的业务数据，它是一个类似JSON的对象，您可以用访问JSON对象的方法访问embedData对象的所有数据。<br/>
- * 如果您需要获取embedData的json文本，请使用embedData.toString()方法。<b>注意：JSON.stringify()方法不能用于embedData对象</b><br>
- * 您可以通过work对象的embedCompleted值来判断被调用的子流程是否正常完成。 cancel end terminate
+ * 프로세스 호출 활동에서 프로세스 대기를 사용하면 "하위 프로세스 성공 후", "하위 프로세스 취소 후", "하위 프로세스 완료 후" 세 이벤트 스크립트에서 embedData 객체에 접근할 수 있습니다<br/>
+ * embedData 객체는 호출된 하위 프로세스의 업무 데이터이며 JSON과 유사한 객체로, JSON 객체에 접근하는 방법으로 embedData 객체의 모든 데이터에 접근할 수 있습니다.<br/>
+ * embedData의 json 텍스트가 필요하면 embedData.toString() 메서드를 사용하십시오.<b>주의: JSON.stringify() 메서드는 embedData 객체에 사용할 수 없습니다</b><br>
+ * work 객체의 embedCompleted 값으로 호출된 하위 프로세스가 정상 완료되었는지 판단할 수 있습니다. cancel end terminate
  * <pre><code class='language-js'>
  *  var embedStatus = this.workContext.getWork().embedCompleted;
  *  if (embedStatus=="end"){
- *      //被调用的子流程正常流转到了结束活动
+ *      //호출된 하위 프로세스가 정상적으로 종료 활동까지 진행됨
  *  }
  *  if (embedStatus=="cancel"){
- *      //被调用的子流程流转到了取消活动
+ *      //호출된 하위 프로세스가 취소 활동으로 진행됨
  *  }
  *  if (embedStatus=="terminate"){
- *      //被调用的子流程被终止了
+ *      //호출된 하위 프로세스가 종료됨
  *  }
  * </code></pre>
- * @o2range 流程配置-流程调用活动中，当启用流程等待的情况下，在"子流程成功后"、"子流程取消后"、"子流程完成后"，三个事件中可用
+ * @o2range 프로세스 설정-프로세스 호출 활동에서 프로세스 대기를 사용할 때 "하위 프로세스 성공 후", "하위 프로세스 취소 후", "하위 프로세스 완료 후" 세 이벤트에서 사용 가능
  * @module server.embedData
- * @o2cn 调用活动的子流程业务数据
+ * @o2cn 호출 활동의 하위 프로세스 업무 데이터
  * @o2category server.process
  * @o2ordernumber 205
  * @example
- * //您可以在表单或流程的各个嵌入脚本中，通过this来获取当前实例的业务数据，如下：
+ * //폼 또는 프로세스의 각 내장 스크립트에서 this를 통해 현재 인스턴스의 업무 데이터를 가져올 수 있습니다. 예:
  * var embedData = this.embedData;
  */
 
 /**
- * 在流程事件、流程路由事件、流程活动事件中通过this.data获取流程实例的业务数据。（内容管理无后台脚本）。<br/>
- * 这些数据一般情况下是通过您创建的表单收集而来的，也可以通过脚本进行创建和增删改查操作。<br/>
- * data对象基本上是一个JSON对象，您可以用访问JSON对象的方法访问data对象的所有数据。
+ * 프로세스 이벤트, 프로세스 라우트 이벤트, 프로세스 활동 이벤트에서 this.data로 프로세스 인스턴스의 업무 데이터를 가져옵니다(콘텐츠 관리에는 백엔드 스크립트 없음).<br/>
+ * 이 데이터는 일반적으로 사용자가 만든 양식으로 수집되며, 스크립트로 생성하고 추가·삭제·수정·조회할 수도 있습니다.<br/>
+ * data 객체는 기본적으로 JSON 객체이며, JSON 객체에 접근하는 방법으로 data 객체의 모든 데이터에 접근할 수 있습니다.
  * @module server.data
- * @o2cn 流程数据
+ * @o2cn 프로세스 데이터
  * @o2category server.process
  * @o2ordernumber 205
  * @example
- * //您可以在表单或流程的各个嵌入脚本中，通过this来获取当前实例的业务数据，如下：
+ * //폼 또는 프로세스의 각 내장 스크립트에서 this를 통해 현재 인스턴스의 업무 데이터를 가져올 수 있습니다. 예:
  * var data = this.data;
  * @borrows module:data#[property] as [property]
  */
@@ -4650,11 +4650,11 @@ const embedDataDescriptor = {
 
 
 /************************************************************/
-/*  person text直接注入，oauth配置和默认生成口令脚本中使用 *****/
+/*  person text 직접 주입, oauth 설정과 기본 비밀번호 생성 스크립트에서 사용 *****/
 /************************************************************/
 
 /************************************************************/
-/*  value直接注入，视图显示值中使用 ***************************/
+/*  value 직접 주입, 뷰 표시 값에서 사용 ***************************/
 /************************************************************/
 
 const _get = function(key, java_data){
@@ -4667,9 +4667,9 @@ const o= {
     applications: { get: function(){return ((globalThis.java_resources) ? globalThis.java_resources.getApplications() : null)} },
     organization: { get: function(){return ((globalThis.java_resources) ? globalThis.java_resources.getOrganization() : null)} },
     /**
-     * 获取当前用户对象。
+     * 현재 사용자 객체 조회.
      * @module server.currentPerson
-     * @o2cn 当前用户全称对象
+     * @o2cn 현재 사용자 전체 이름 객체
      * @o2category server.common
      * @o2ordernumber 250
      * @o2syntax
@@ -4683,7 +4683,7 @@ const o= {
     message: { get: function(){return (globalThis.java_message) ? _get('message', globalThis.java_message) : null;} },
 
     //===========================================================================
-    //  将要导出的对象和方法绑定到 globalThis。（以后将通过 export 和 import 来引入）
+    //  내보낼 객체와 메서드를 globalThis 에 바인딩.(향후 export 와 import 로 가져올 예정)
     //===========================================================================
     fetch: { value: fetch },
     exec: { value: exec },
@@ -4720,7 +4720,7 @@ const o= {
     headers: { value: headers },
     expire: { value: expire },
 
-    // @todo 需要包装为javascript对象
+    // @todo javascript 객체로 래핑 필요
     data: dataDescriptor,
     embedData: embedDataDescriptor
     // embedData: { value: globalThis.embedData }
@@ -4728,47 +4728,47 @@ const o= {
 
 Object.defineProperties(globalThis, o);
 
-/* 清除 engine */
+/* engine 정리 */
 globalThis.engine = null;
 
 
 //=== java_resources: =============
-//所有服务段脚本中都有 java对象
-//  Context                 getContext()                    应用上下文对象，无用
-//  Applications            getApplications()               与服务端交互的请求方法
+//모든 서버 스크립트에 있는 java 객체
+//  Context                 getContext()                    앱 컨텍스트 객체, 사용 안 함
+//  Applications            getApplications()               서버와 통신하는 요청 메서드
 //          describeApi()
 //          getQuery()
 //          postQuery()
 //          putQuery()
 //          deleteQuery()
 
-//  Organization            getOrganization()               组织相关的服务
-//  WebservicesClient       getWebservicesClient()          发起HTTP请求和Webservice请求的工具
-//  EntityManagerContainer  getEntityManagerContainer()     jpa管理对象，不暴露
+//  Organization            getOrganization()               조직 관련 서비스
+//  WebservicesClient       getWebservicesClient()          HTTP 요청과 Webservice 요청 실행 도구
+//  EntityManagerContainer  getEntityManagerContainer()     jpa 관리 객체, 노출 안 함
 
 //=== java_customResponse: =========================================
-// 只在服务管理 invoke 中使用，主要用于设置 invoke 的请求响应 java对象
-//      seeOther()              设置 303 跳转
-//      temporaryRedirect()     设置 301 跳转
-//      setBody()               设置 响应数据 和 响应 content-type 200
+// 서비스 관리 invoke 에서만 사용, 주로 invoke 의 요청 응답 java 객체 설정용
+//      seeOther()              303 리다이렉트 설정
+//      temporaryRedirect()     301 리다이렉트 설정
+//      setBody()               응답 데이터와 응답 content-type 200 설정
 
 //=== java_effectivePerson: =========================================
-//当前用户的对象 java对象 -- 改为 json字符串 todo
-//      toJson() 转json字符串
+//현재 사용자 객체 java 객체 -- json 문자열로 변경 todo
+//      toJson() json 문자열로 변환
 
 //=== java_parameters: ==============================================
-//只查询语句中使用，用于参数传递 json字符串
+//쿼리문에서만 사용, 파라미터 전달용 json 문자열
 
 //=== java_requestText: ==============================================
-// 只在服务管理 invoke 中使用，获取请求消息体的文本内容 json字符串
+// 서비스 관리 invoke 에서만 사용, 요청 메시지 본문 텍스트 내용 조회 json 문자열
 
 //=== java_request: ==================================================
-// 只在服务管理 invoke 中使用，请求的 request对象 java对象
+// 서비스 관리 invoke 에서만 사용, 요청 request 객체 java 객체
 
 //=== java_message: ==================================================
-// 只在消息过滤器和加载器中使用，描述消息的 json字符串
-// 主要信息有：title、person、body、type
+// 메시지 필터와 로더에서만 사용, 메시지를 설명하는 json 문자열
+// 주요 정보: title, person, body, type
 
 //=== person: ========================================================
-//  只在系统配置中，默认用户密码设置脚本中使用，获取当前执行到的，即将生成密码的用户。 java对象
-//  getName()、getMobile()、getEmployee() 等获取个人信息的方法
+//  시스템 설정의 기본 사용자 비밀번호 설정 스크립트에서만 사용, 현재 실행 중인 비밀번호를 생성할 사용자 조회. java 객체
+//  getName(), getMobile(), getEmployee() 등 개인 정보 조회 메서드

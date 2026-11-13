@@ -35,7 +35,7 @@ import com.x.query.core.entity.Query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Table", description = "数据中心自建表.")
+@Schema(name = "Table", description = "데이터 센터 자체 생성 테이블.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @javax.persistence.Table(name = PersistenceProperties.Schema.Table.table, uniqueConstraints = {
@@ -63,16 +63,16 @@ public class Table extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
-    /* 已经没有Statement使用Table了 */
+    /* Table을 사용하는 Statement가 더 이상 없음 */
     @CheckRemove(citationNotExists =
-    /* 已经没有Stat使用View了 */
+    /* View를 사용하는 Stat이 더 이상 없음 */
     @CitationNotExist(type = Statement.class, fields = Statement.TABLE_FIELDNAME))
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     @Override
     public void onPersist() throws Exception {
@@ -81,10 +81,10 @@ public class Table extends SliceJpaObject {
         }
     }
 
-    /* 更新运行方法 */
+    /* 실행 메서드 업데이트 */
 
     public static final String QUERY_FIELDNAME = "query";
-    @FieldDescribe("所属查询.")
+    @FieldDescribe("소속 쿼리.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + QUERY_FIELDNAME)
     @Index(name = TABLE + ColumnNamePrefix + QUERY_FIELDNAME)
     @CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Query.class) })
@@ -92,7 +92,7 @@ public class Table extends SliceJpaObject {
 
     public static final String NAME_FIELDNAME = "name";
     @Flag
-    @FieldDescribe("表名,最大64个字符.")
+    @FieldDescribe("테이블명, 최대 64자.")
     @Column(length = length_64B, name = ColumnNamePrefix + NAME_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + NAME_FIELDNAME)
     @CheckPersist(allowEmpty = false, simplyString = true)
@@ -100,20 +100,20 @@ public class Table extends SliceJpaObject {
 
     public static final String ALIAS_FIELDNAME = "alias";
     @Flag
-    @FieldDescribe("别名.")
+    @FieldDescribe("별칭.")
     @Column(length = length_64B, name = ColumnNamePrefix + ALIAS_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + ALIAS_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String alias;
 
     public static final String DESCRIPTION_FIELDNAME = "description";
-    @FieldDescribe("描述.")
+    @FieldDescribe("설명.")
     @Column(length = length_255B, name = ColumnNamePrefix + DESCRIPTION_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String description;
 
     public static final String READPERSONLIST_FIELDNAME = "readPersonList";
-    @FieldDescribe("可以访问数据的用户.")
+    @FieldDescribe("데이터에 접근 가능한 사용자.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle + READPERSONLIST_FIELDNAME, joinIndex = @Index(name = TABLE
             + IndexNameMiddle + READPERSONLIST_FIELDNAME + JoinIndexNameSuffix))
@@ -124,7 +124,7 @@ public class Table extends SliceJpaObject {
     private List<String> readPersonList;
 
     public static final String READUNITLIST_FIELDNAME = "readUnitList";
-    @FieldDescribe("可以访问数据的组织.")
+    @FieldDescribe("데이터에 접근 가능한 조직.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle + READUNITLIST_FIELDNAME, joinIndex = @Index(name = TABLE
             + IndexNameMiddle + READUNITLIST_FIELDNAME + JoinIndexNameSuffix))
@@ -135,7 +135,7 @@ public class Table extends SliceJpaObject {
     private List<String> readUnitList;
 
     public static final String READGROUPLIST_FIELDNAME = "readGroupList";
-    @FieldDescribe("可以访问数据的群组.")
+    @FieldDescribe("데이터에 접근 가능한 그룹.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle + READGROUPLIST_FIELDNAME, joinIndex = @Index(name = TABLE
             + IndexNameMiddle + READGROUPLIST_FIELDNAME + JoinIndexNameSuffix))
@@ -146,7 +146,7 @@ public class Table extends SliceJpaObject {
     private List<String> readGroupList;
 
     public static final String EDITPERSONLIST_FIELDNAME = "editPersonList";
-    @FieldDescribe("可以修改数据的用户.")
+    @FieldDescribe("데이터를 수정 가능한 사용자.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle + EDITPERSONLIST_FIELDNAME, joinIndex = @Index(name = TABLE
             + IndexNameMiddle + EDITPERSONLIST_FIELDNAME + JoinIndexNameSuffix))
@@ -157,7 +157,7 @@ public class Table extends SliceJpaObject {
     private List<String> editPersonList;
 
     public static final String EDITUNITLIST_FIELDNAME = "editUnitList";
-    @FieldDescribe("可以修改数据的组织.")
+    @FieldDescribe("데이터를 수정 가능한 조직.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle + EDITUNITLIST_FIELDNAME, joinIndex = @Index(name = TABLE
             + IndexNameMiddle + EDITUNITLIST_FIELDNAME + JoinIndexNameSuffix))
@@ -168,7 +168,7 @@ public class Table extends SliceJpaObject {
     private List<String> editUnitList;
 
     public static final String EDITGROUPLIST_FIELDNAME = "editGroupList";
-    @FieldDescribe("可以修改数据的群组.")
+    @FieldDescribe("데이터를 수정 가능한 그룹.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle + EDITGROUPLIST_FIELDNAME, joinIndex = @Index(name = TABLE
             + IndexNameMiddle + EDITGROUPLIST_FIELDNAME + JoinIndexNameSuffix))
@@ -179,25 +179,25 @@ public class Table extends SliceJpaObject {
     private List<String> editGroupList;
 
     public static final String CREATORPERSON_FIELDNAME = "creatorPerson";
-    @FieldDescribe("表的创建者")
+    @FieldDescribe("테이블 생성자")
     @CheckPersist(allowEmpty = false)
     @Column(length = length_255B, name = ColumnNamePrefix + CREATORPERSON_FIELDNAME)
     private String creatorPerson;
 
     public static final String LASTUPDATETIME_FIELDNAME = "lastUpdateTime";
-    @FieldDescribe("表的最后修改时间")
+    @FieldDescribe("테이블 최종 수정 시간")
     @CheckPersist(allowEmpty = false)
     @Column(name = ColumnNamePrefix + LASTUPDATETIME_FIELDNAME)
     private Date lastUpdateTime;
 
     public static final String LASTUPDATEPERSON_FIELDNAME = "lastUpdatePerson";
-    @FieldDescribe("表的最后修改者")
+    @FieldDescribe("테이블 최종 수정자")
     @CheckPersist(allowEmpty = false)
     @Column(length = length_255B, name = ColumnNamePrefix + LASTUPDATEPERSON_FIELDNAME)
     private String lastUpdatePerson;
 
     public static final String DATA_FIELDNAME = "data";
-    @FieldDescribe("表结构方案.")
+    @FieldDescribe("테이블 구조 방안.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + DATA_FIELDNAME)
@@ -205,7 +205,7 @@ public class Table extends SliceJpaObject {
     private String data;
 
     public static final String DRAFTDATA_FIELDNAME = "draftData";
-    @FieldDescribe("草稿表结构方案.")
+    @FieldDescribe("초안 테이블 구조 방안.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + DRAFTDATA_FIELDNAME)
@@ -213,24 +213,24 @@ public class Table extends SliceJpaObject {
     private String draftData;
 
     public static final String STATUS_FIELDNAME = "status";
-    @FieldDescribe("状态")
+    @FieldDescribe("상태")
     @CheckPersist(allowEmpty = false)
     @Column(length = length_32B, name = ColumnNamePrefix + STATUS_FIELDNAME)
     private String status;
 
     public static final String BUILDSUCCESS_FIELDNAME = "buildSuccess";
-    @FieldDescribe("是否编译成功.")
+    @FieldDescribe("컴파일 성공 여부.")
     @CheckPersist(allowEmpty = true)
     @Column(name = ColumnNamePrefix + BUILDSUCCESS_FIELDNAME)
     private Boolean buildSuccess;
 
     public static final String DISPLAY_FIELDNAME = "display";
-    @FieldDescribe("是否前端可见.")
+    @FieldDescribe("프런트 표시 여부.")
     @Column(name = ColumnNamePrefix + DISPLAY_FIELDNAME)
     private Boolean display;
 
     public static final String ORDERNUMBER_FIELDNAME = "orderNumber";
-    @FieldDescribe("排序号,为空在最后")
+    @FieldDescribe("정렬 번호, 비어 있으면 마지막")
     @Column(name = ColumnNamePrefix + ORDERNUMBER_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + ORDERNUMBER_FIELDNAME)
     private Integer orderNumber;

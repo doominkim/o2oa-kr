@@ -1,17 +1,17 @@
 MWF.xDesktop.requireApp("process.Xform", "Radio", null, false);
-/** @class Elradio 基于Element UI的单选按钮组件。
- * @o2cn 单选按钮
+/** @class Elradio Element UI 기반 라디오 버튼 컴포넌트.
+ * @o2cn 라디오 버튼
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var radio = this.form.get("name"); //获取组件
- * //方法2
- * var radio = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var radio = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var radio = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Selector
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/radio|Element UI Radio 单选框}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/radio|Element UI Radio 라디오 버튼}
  */
 MWF.xApplication.process.Xform.Elradio = MWF.APPElradio =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elradio# */
@@ -20,24 +20,24 @@ MWF.xApplication.process.Xform.Elradio = MWF.APPElradio =  new Class(
     Extends: MWF.APPRadio,
     options: {
         /**
-         * 组件加载前触发。当前组件的queryLoad事件还没有在form里注册，通过this.form.get("fieldId")不能获取到当前组件，需要用this.target获取当前组件。
+         * 컴포넌트 로드 전 발생. 현재 컴포넌트의 queryLoad 이벤트 시점에는 form에 등록되지 않아 this.form.get("fieldId")로 가져올 수 없으며, this.target으로 현재 컴포넌트를 가져와야 함.
          * @event MWF.xApplication.process.Xform.Elradio#queryLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 组件加载后触发。如果选项加载为异步，则异步处理完成后触发此事件
+         * 컴포넌트 로드 후 발생. 선택 항목 로드가 비동기이면 비동기 처리 완료 후 이 이벤트 발생
          * @event MWF.xApplication.process.Xform.Elradio#load
          */
         /**
-         * 组件加载后触发.
+         * 컴포넌트 로드 후 발생.
          * @event MWF.xApplication.process.Xform.Elradio#postLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "change"],
         /**
-         * 绑定值变化时触发的事件。this.event[0]为选中的 Radio label 值
+         * 바인딩 값이 변경될 때 발생하는 이벤트. this.event[0]은 선택된 Radio label 값
          * @event MWF.xApplication.process.Xform.Elradio#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/radio|单选组件的Radio-group Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/radio|라디오 컴포넌트의 Radio-group Events 장}
          */
         "elEvents": ["change"]
     },
@@ -280,7 +280,7 @@ MWF.xApplication.process.Xform.Elradio = MWF.APPElradio =  new Class(
         if (!this.vueApp) this.vueApp = this._createVueExtend(callback);
 
         /**
-         * @summary Vue对象实例
+         * @summary Vue 객체 인스턴스
          * @see https://vuejs.org/
          * @member {VueInstance}
          */
@@ -374,10 +374,10 @@ MWF.xApplication.process.Xform.Elradio = MWF.APPElradio =  new Class(
         }.bind(this));
     },
         /**
-         * @summary 获取选中项的text。
-         * @return {String} 返回选中项的text
+         * @summary 선택 항목의 text 조회.
+         * @return {String} 선택 항목의 text 반환
          * @example
-         * var text = this.form.get('fieldId').getText(); //获取选中项的文本
+         * var text = this.form.get('fieldId').getText(); //선택 항목의 텍스트 가져오기
          */
         getText: function(){
             var d = this.getTextData();
@@ -405,7 +405,7 @@ MWF.xApplication.process.Xform.Elradio = MWF.APPElradio =  new Class(
 		});
 	},
     setExcelData: function(d, type){
-        var value = d.replace(/&#10;/g,""); //换行符&#10;
+        var value = d.replace(/&#10;/g,""); //줄바꿈 문자&#10;
         this.excelData = value;
         if( type === "value" ){
 			this.setData(value, true);

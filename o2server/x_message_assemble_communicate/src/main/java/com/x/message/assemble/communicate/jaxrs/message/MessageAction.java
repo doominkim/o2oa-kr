@@ -26,12 +26,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("message")
-@JaxrsDescribe("消息")
+@JaxrsDescribe("메시지")
 public class MessageAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(MessageAction.class);
 
-	@JaxrsMethodDescribe(value = "创建定制消息.", action = ActionCustomCreate.class)
+	@JaxrsMethodDescribe(value = "맞춤 메시지 생성.", action = ActionCustomCreate.class)
 	@POST
 	@Path("custom/create")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -49,14 +49,14 @@ public class MessageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "消息分页查询.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "메시지 페이지 조회.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+						   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

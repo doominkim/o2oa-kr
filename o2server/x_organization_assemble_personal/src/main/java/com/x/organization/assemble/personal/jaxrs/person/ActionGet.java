@@ -58,7 +58,7 @@ class ActionGet extends BaseAction {
 				result.setData((Wo) optional.get());
 			} else {
 				if (Config.token().isInitialManager(effectivePerson.getDistinguishedName())) {
-					/** 如果是xadmin单独处理 */
+					/** xadmin이면 별도 처리 */
 					Wo wo = new Wo();
 					Config.token().initialManagerInstance().copyTo(wo, "password");
 					result.setData(wo);
@@ -185,16 +185,16 @@ class ActionGet extends BaseAction {
 		static WrapCopier<Person, Wo> copier = WrapCopierFactory.wo(Person.class, Wo.class, null,
 				person_fieldsInvisible);
 
-		@FieldDescribe("身份对象")
+		@FieldDescribe("신분 객체")
 		private List<WoIdentity> woIdentityList;
 
-		@FieldDescribe("角色对象")
+		@FieldDescribe("역할 객체")
 		private List<WoRole> woRoleList;
 
-		@FieldDescribe("群组对象")
+		@FieldDescribe("그룹 객체")
 		private List<WoGroup> woGroupList;
 
-		@FieldDescribe("个人属性对象")
+		@FieldDescribe("개인 속성 객체")
 		private List<WoPersonAttribute> woPersonAttributeList;
 
 		public List<WoIdentity> getWoIdentityList() {
@@ -238,10 +238,10 @@ class ActionGet extends BaseAction {
 		static WrapCopier<Identity, WoIdentity> copier = WrapCopierFactory.wo(Identity.class, WoIdentity.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible));
 
-		@FieldDescribe("组织对象")
+		@FieldDescribe("조직 객체")
 		private WoUnit woUnit;
 
-		@FieldDescribe("组织职务对象")
+		@FieldDescribe("조직 직무 객체")
 		private List<WoUnitDuty> woUnitDutyList;
 
 		public WoUnit getWoUnit() {
@@ -311,7 +311,7 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = 3145496265299807549L;
 
-		@FieldDescribe("组织对象")
+		@FieldDescribe("조직 객체")
 		private WoUnit woUnit;
 
 		static WrapCopier<UnitDuty, WoUnitDuty> copier = WrapCopierFactory.wo(UnitDuty.class, WoUnitDuty.class, null,

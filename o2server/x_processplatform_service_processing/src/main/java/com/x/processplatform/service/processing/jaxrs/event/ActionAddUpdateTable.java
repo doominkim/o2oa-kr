@@ -53,7 +53,7 @@ class ActionAddUpdateTable extends BaseAction {
 		@FieldDescribe("job")
 		private String job;
 
-		@FieldDescribe("自建表标识")
+		@FieldDescribe("자체 테이블 식별자")
 		private String target;
 
 		public String getJob() {

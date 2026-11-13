@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddAfterSingleAndBeforeParallelTest {
 
-	@DisplayName("B后加签EFG,EFG单人处理，E前加签IJK，IJK并行处理,即并行-后加签单人-前加签并行,IJK先处理完后到ACEFG,F处理后到AC")
+	@DisplayName("B후 추가결재EFG,EFG단일 처리,E전 추가결재IJK,IJK병렬 처리,즉 병렬-후 추가결재단일-전 추가결재병렬,IJK 먼저 처리 완료 후 ACEFG,F 처리 후 AC")
 	@Test
 	@Order(1)
 	void test01() {
@@ -58,7 +58,7 @@ class ParallelAddAfterSingleAndBeforeParallelTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B后加签EFG,EFG单人处理，E前加签IJK，IJK并行处理,即并行-后加签单人-前加签并行,AC先处理,IJK处理完后到E")
+	@DisplayName("B후 추가결재EFG,EFG단일 처리,E전 추가결재IJK,IJK병렬 처리,즉 병렬-후 추가결재단일-전 추가결재병렬,AC 먼저 처리,IJK 처리 완료 후 E")
 	@Test
 	@Order(2)
 	void test02() {

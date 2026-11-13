@@ -7,6 +7,6 @@ class ExceptionAliasExist extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionAliasExist(String str) {
-		super("别名:{},已存在.", str);
+		super("별칭: {}, 이미 있습니다.", str);
 	}
 }

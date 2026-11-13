@@ -7,6 +7,6 @@ class ExceptionSuperiorNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionSuperiorNotExist(String superior) {
-		super("指定的上级住主管: {} 不存在.", superior);
+		super("지정한 상위 관리자: {}이(가) 없습니다.", superior);
 	}
 }

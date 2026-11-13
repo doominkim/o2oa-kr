@@ -40,7 +40,7 @@ import com.x.processplatform.service.processing.WrapScriptObject;
 import com.x.processplatform.service.processing.processor.AeiObjects;
 
 /**
- * 数据发布节点处理器
+ * 데이터 게시 노드 처리기
  *
  * @author sword
  */
@@ -55,7 +55,7 @@ public class PublishProcessor extends AbstractPublishProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Publish publish) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.publishArrive(aeiObjects.getWork().getActivityToken(), publish));
 		return aeiObjects.getWork();
@@ -68,18 +68,18 @@ public class PublishProcessor extends AbstractPublishProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Publish publish) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.publishExecute(aeiObjects.getWork().getActivityToken(), publish));
 		List<Work> results = new ArrayList<>();
 		boolean passThrough = false;
 		switch (publish.getPublishTarget()) {
 		case Publish.PUBLISH_TARGET_CMS:
-			// 发布到内容管理
+			// 콘텐츠 관리에 게시
 			passThrough = this.publishToCms(aeiObjects, publish);
 			break;
 		case Publish.PUBLISH_TARGET_TABLE:
-			// 发布到数据中心自建表
+			// 데이터 센터 자체 테이블에 게시
 			passThrough = this.publishToTable(aeiObjects, publish);
 			break;
 		default:
@@ -161,14 +161,14 @@ public class PublishProcessor extends AbstractPublishProcessor {
 	private boolean publishToCms(AeiObjects aeiObjects, Publish publish) throws Exception {
 		CmsDocument cmsDocument = this.evalCmsBody(aeiObjects, publish);
 		// Data data = aeiObjects.getData();
-		// 以转换后的cms Data 作为后面计算的基础data
+		// 변환된 cms Data를 이후 계산의 기본 data로 사용
 		Data data = XGsonBuilder.convert(cmsDocument.getDocData(), Data.class);
 		cmsDocument.setWf_workId(aeiObjects.getWork().getId());
 		cmsDocument.setWf_jobId(aeiObjects.getWork().getJob());
 		cmsDocument.setIdentity(getCmsCreator(aeiObjects, publish));
 		String categoryId = this.getCmsCategoryId(data, publish);
 		if (StringUtils.isBlank(categoryId)) {
-			LOGGER.warn("{}工作数据发布到内容管理失败：分类ID为空！", () -> aeiObjects.getWork().getId());
+			LOGGER.warn("{} 업무 문서 데이터를 콘텐츠 관리에 게시하지 못했습니다: 분류 ID가 비어 있습니다!", () -> aeiObjects.getWork().getId());
 			return false;
 		}
 		cmsDocument.setCategoryId(categoryId);
@@ -211,8 +211,8 @@ public class PublishProcessor extends AbstractPublishProcessor {
 		cmsDocument.setPictureList(this.findPathData(data, publish.getPictureDataPathList(), false));
 		WoId woId = ThisApplication.context().applications()
 				.putQuery(x_cms_assemble_control.class, CMS_PUBLISH_URI, cmsDocument).getData(WoId.class);
-		LOGGER.info("流程数据发布-发布文档【{}】到内容管理返回：{}", aeiObjects.getWork().getTitle(), woId.getId());
-		// 发送消息通知
+		LOGGER.info("프로세스 데이터 게시-문서 [{}]를 콘텐츠 관리에 게시한 결과: {}", aeiObjects.getWork().getTitle(), woId.getId());
+		// 메시지 알림 발송
 		this.cmsDocumentNotify(aeiObjects, publish, woId);
 		return true;
 	}
@@ -305,7 +305,7 @@ public class PublishProcessor extends AbstractPublishProcessor {
 	}
 
 	/**
-	 * 取得通过路径指定的人员组织
+	 * 경로로 지정된 사용자 조직 조회
 	 */
 	private List<String> findPathData(Data data, String path, boolean isUser) throws Exception {
 		List<String> list = new ArrayList<>();
@@ -518,7 +518,7 @@ public class PublishProcessor extends AbstractPublishProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Publish publish) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.publishInquire(aeiObjects.getWork().getActivityToken(), publish));
 		return aeiObjects.getRoutes().stream().findFirst();

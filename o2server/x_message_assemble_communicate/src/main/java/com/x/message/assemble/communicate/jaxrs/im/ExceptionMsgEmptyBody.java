@@ -7,6 +7,6 @@ class ExceptionMsgEmptyBody extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionMsgEmptyBody() {
-		super("消息内容不能为空.");
+		super("메시지 내용은 비워 둘 수 없습니다.");
 	}
 }

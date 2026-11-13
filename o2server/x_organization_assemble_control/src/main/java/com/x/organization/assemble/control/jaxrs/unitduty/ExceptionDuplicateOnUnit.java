@@ -7,6 +7,6 @@ class ExceptionDuplicateOnUnit extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionDuplicateOnUnit(String name, String unitName) {
-		super("组织职务名称 {} 在同一个组织 {} 中必须唯一.", name, unitName);
+		super("조직 직무 이름 {}은(는) 같은 조직 {} 안에서 고유해야 합니다.", name, unitName);
 	}
 }

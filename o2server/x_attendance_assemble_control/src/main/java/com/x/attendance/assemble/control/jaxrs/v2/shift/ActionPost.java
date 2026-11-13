@@ -40,14 +40,14 @@ public class ActionPost extends BaseAction {
             }
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isBlank(wi.getShiftName())) {
-                throw new ExceptionEmptyParameter("班次名称");
+                throw new ExceptionEmptyParameter("근무조 이름");
             }
-            // 名称不能相同
+            // 이름은 중복될 수 없습니다
             List<AttendanceV2Shift> checkRepetitive = emc.listEqual(AttendanceV2Shift.class, AttendanceV2Shift.shiftName_FIELDNAME, wi.getShiftName());
             if (checkRepetitive != null && !checkRepetitive.isEmpty()) {
                 for (AttendanceV2Shift check : checkRepetitive) {
                     if (check.getShiftName().equals(wi.getShiftName()) && !check.getId().equals(wi.getId())) {
-                        throw new ExceptionCannotRepetitive("班次名称");
+                        throw new ExceptionCannotRepetitive("근무조 이름");
                     }
                 }
             }
@@ -55,16 +55,16 @@ public class ActionPost extends BaseAction {
             AttendanceV2ShiftCheckTimeProperties properties = wi.getProperties();
             checkShiftProperties(properties);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("班次post {}", wi.toString());
+                LOGGER.debug("교대 post {}", wi.toString());
             }
             long workTime = shiftWorkTime(properties);
             if (workTime < 0) {
                 workTime = -workTime;
             }
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("班次工作 "+workTime);
+                LOGGER.debug("교대 근무 "+workTime);
             }
-            // 新增
+            // 신규
             AttendanceV2Shift shift = Wi.copier.copy(wi);
             shift.setOperator(effectivePerson.getDistinguishedName());
             shift.setWorkTime((int)workTime);

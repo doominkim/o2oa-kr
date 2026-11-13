@@ -8,6 +8,6 @@ public class ExceptionWrapInConvert extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionWrapInConvert( Throwable e, JsonElement jsonElement) {
-		super( "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString(), e);
+		super( "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString(), e);
 	}
 }

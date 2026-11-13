@@ -40,22 +40,22 @@ public class WrapCms extends AppInfo {
 		return ListTools.extractProperty(this.getFileList(), JpaObject.id_FIELDNAME, String.class, true, true);
 	}
 	
-	@FieldDescribe("导出的分类设置")
+	@FieldDescribe("내보낸 분류 설정")
 	private List<WrapCategoryInfo> categoryInfoList = new ArrayList<>();
 
-	@FieldDescribe("导出的表单设计")
+	@FieldDescribe("내보낸 양식 디자인")
 	private List<WrapForm> formList = new ArrayList<>();
 	
-	@FieldDescribe("导出的数据字典")
+	@FieldDescribe("내보낸 데이터 사전")
 	private List<WrapAppDict> appDictList = new ArrayList<>();
 
-	@FieldDescribe("导出的脚本")
+	@FieldDescribe("내보낸 스크립트")
 	private List<WrapScript> scriptList = new ArrayList<>();
 	
-	@FieldDescribe("导出的文件")
+	@FieldDescribe("내보낸 파일")
 	private List<WrapFile> fileList = new ArrayList<>();
 
-	@FieldDescribe("导出的栏目配置支持信息，JSON配置项")
+	@FieldDescribe("내보낸 게시판 설정 지원 정보, JSON 설정 항목")
 	private String config = "{}";
 
 	public String getConfig() { return this.config; }

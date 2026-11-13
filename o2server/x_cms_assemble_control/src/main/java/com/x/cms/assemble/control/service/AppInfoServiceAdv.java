@@ -14,8 +14,8 @@ import com.x.cms.core.entity.AppInfo;
 import com.x.cms.core.entity.AppInfoConfig;
 
 /**
- * 对栏目信息进行管理的服务类（高级）
- * 高级服务器可以利用Service完成事务控制
+ * 게시판 정보 관리 서비스 클래스(고급)
+ * 고급 서비스는 Service로 트랜잭션 제어 가능
  *
  * @author O2LEE
  */
@@ -125,7 +125,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 栏目信息保存服务
+	 * 게시판 정보 저장 서비스
 	 * @param appInfo
 	 * @param config
 	 * @param effectivePerson
@@ -137,7 +137,7 @@ public class AppInfoServiceAdv {
 			throw new Exception("appInfo is null.");
 		}
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 检查一下该应用栏目是否存在管理者, 如果不存在，则将当前登录者作为应用栏目的管理者
+			// 해당 앱 게시판에 관리자가 있는지 검사, 없으면 현재 로그인 사용자를 앱 게시판 관리자로 지정
 			if( ListTools.isEmpty( appInfo.getManageablePersonList())  && ListTools.isEmpty( appInfo.getManageableUnitList())  &&ListTools.isEmpty( appInfo.getManageableGroupList())) {
 				if( "xadmin".equalsIgnoreCase( effectivePerson.getName() )) {
 					appInfo.addManageablePerson( "xadmin" );
@@ -226,7 +226,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 更新栏目管理员权限信息
+	 * 게시판 관리자 권한 정보 갱신
 	 * @param appId
 	 * @param personList
 	 * @param unitList
@@ -252,7 +252,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 更新栏目发布权限信息
+	 * 게시판 게시 권한 정보 갱신
 	 * @param appId
 	 * @param personList
 	 * @param unitList
@@ -278,7 +278,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 更新栏目可见权限信息
+	 * 게시판 공개 권한 정보 갱신
 	 * @param appId
 	 * @param personList
 	 * @param unitList
@@ -329,7 +329,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 判断用户是否为指定栏目的管理员
+	 * 사용자가 지정 게시판의 관리자인지 판단
 	 * @param appId
 	 * @param distinguishedName
 	 * @param groupNames
@@ -348,7 +348,7 @@ public class AppInfoServiceAdv {
 
 
 	/**
-	 * 判断用户是否拥有指定栏目的发布者权限
+	 * 사용자가 지정 게시판의 게시자 권한을 가졌는지 판단
 	 * @param appId
 	 * @param personName
 	 * @param unitNames
@@ -366,7 +366,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 判断用户是否拥有指定栏目的访问权限
+	 * 사용자가 지정 게시판의 접근 권한을 가졌는지 판단
 	 * @param appId
 	 * @param personName
 	 * @param unitNames
@@ -384,7 +384,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 判断用户是否为指定栏目的管理员
+	 * 사용자가 지정 게시판의 관리자인지 판단
 	 * @param appInfo
 	 * @param distinguishedName
 	 * @param groupNames
@@ -419,7 +419,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 判断用户是否拥有指定栏目的发布者权限
+	 * 사용자가 지정 게시판의 게시자 권한을 가졌는지 판단
 	 * @param appInfo
 	 * @param personName
 	 * @param unitNames
@@ -477,7 +477,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 判断用户是否拥有指定栏目的访问权限
+	 * 사용자가 지정 게시판의 접근 권한을 가졌는지 판단
 	 * @param appInfo
 	 * @param personName
 	 * @param unitNames
@@ -553,7 +553,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 获取系统内已经存在的所有的栏目类别
+	 * 시스템에 존재하는 모든 게시판 유형 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -582,7 +582,7 @@ public class AppInfoServiceAdv {
 //	}
 
 	/**
-	 * 根据指定的应用类型查询符合类别的所有的内容管理栏目ID列表
+	 * 지정 앱 유형으로 해당 유형의 모든 콘텐츠 관리 게시판 ID 목록 조회
 	 * @param type
 	 * @return
 	 * @throws Exception
@@ -596,7 +596,7 @@ public class AppInfoServiceAdv {
 	}
 
 	/**
-	 * 查询所有未分类的内容管理栏目ID列表
+	 * 분류되지 않은 모든 콘텐츠 관리 게시판 ID 목록 조회
 	 * @return
 	 * @throws Exception
 	 */

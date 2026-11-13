@@ -32,7 +32,7 @@ public class ActionOauthQiyeweixinLogin extends BaseAction {
 			String url = Config.qiyeweixin().getApiAddress() + "/cgi-bin/user/getuserinfo?access_token="
 					+ Config.qiyeweixin().corpAccessToken() + "&code=" + code;
 			String str = HttpConnection.getAsString(url, null);
-			LOGGER.debug("企业微信获取用户 return:{}", str);
+			LOGGER.debug("WeCom 사용자 조회 return:{}", str);
 			JsonElement jsonElement = gson.fromJson(str, JsonElement.class);
 			String userId = jsonElement.getAsJsonObject().get("UserId").getAsString();
 

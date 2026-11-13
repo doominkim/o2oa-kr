@@ -9,6 +9,6 @@ public class ExceptionCannotOperateGroup extends PromptException {
 	private static final long serialVersionUID = 2816307410375246495L;
 
 	public ExceptionCannotOperateGroup(String name) {
-		super(name + " 考勤组未保存使用，无法操作.");
+		super(name + " 근태 그룹이 저장되지 않아 작업할 수 없습니다.");
 	}
 }

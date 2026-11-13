@@ -45,7 +45,7 @@ public class LightSettings {
     }
 
     /**
-     * 参数校验
+     * 파라미터 검증
      */
     public void check() {
         ValidatorUtils.checkArgument(this.color != null, "color must be selected when light_settings is set");

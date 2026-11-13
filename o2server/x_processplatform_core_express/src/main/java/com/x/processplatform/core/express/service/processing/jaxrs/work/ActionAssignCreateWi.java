@@ -15,25 +15,25 @@ public class ActionAssignCreateWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -797953382184336448L;
 
-	@FieldDescribe("应用标识")
+	@FieldDescribe("앱 식별자")
 	private String application;
-	@FieldDescribe("流程标识")
+	@FieldDescribe("프로세스 식별자")
 	private String process;
-	@FieldDescribe("身份标识")
+	@FieldDescribe("신분 식별자")
 	private String identity;
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	private String title;
-	@FieldDescribe("业务数据")
+	@FieldDescribe("업무 데이터")
 	private Data data;
-	@FieldDescribe("附件")
+	@FieldDescribe("첨부파일")
 	private List<WiAttachment> attachmentList = new ArrayList<>();
-	@FieldDescribe("是否软拷贝附件，true表示不拷贝真实存储附件，只拷贝附件记录，共用附件.")
+	@FieldDescribe("첨부파일 소프트 복사 여부, true이면 실제 저장된 첨부파일을 복사하지 않고 첨부파일 기록만 복사하여 첨부파일을 공유함.")
 	private Boolean attachmentSoftCopy;
-	@FieldDescribe("自动流转")
+	@FieldDescribe("자동 흐름")
 	private Boolean processing;
-	@FieldDescribe("在调用子流程的情况下记录父工作id")
+	@FieldDescribe("하위 프로세스 호출 시 상위 업무 문서 id 기록")
 	private String parentWork;
-	@FieldDescribe("在调用子流程的情况下记录父工作job")
+	@FieldDescribe("하위 프로세스 호출 시 상위 업무 문서 job 기록")
 	private String parentJob;
 
 	public String getParentWork() {

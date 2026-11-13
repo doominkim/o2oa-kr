@@ -23,7 +23,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindFolderQuery;
 import com.x.mind.entity.MindBaseInfo;
 
 /**
- * 查询脑图信息（下一步）
+ * 마인드맵 정보 조회(다음 페이지)
  *
  * @author O2LEE
  */
@@ -51,7 +51,7 @@ public class ActionMindListNextWithFilter extends BaseAction {
             mindBaseInfos = mindInfoService.listNextPageWithFilter(id, count, wi.getKey(), wi.getFolderId(), wi.getShared(),
                     wi.getCreator(), wi.getCreatorUnit(), wi.getSharePersons(), wi.getShareUnits(), wi.getShareGroups(), wi.getOrderField(), wi.getOrderType(), null);
         } catch (Exception e) {
-            Exception exception = new ExceptionMindFolderQuery(e, "系统在根据个人名称查询所有的脑图文件夹信息ID列表时发生异常。");
+            Exception exception = new ExceptionMindFolderQuery(e, "사용자 이름으로 마인드맵 폴더 ID 목록을 조회하는 중 오류가 발생했습니다.");
             result.error(exception);
             logger.error(e, effectivePerson, request, null);
             return result;
@@ -67,7 +67,7 @@ public class ActionMindListNextWithFilter extends BaseAction {
             result.setCount(Long.parseLong(wraps.size() + ""));
             return result;
         } catch (Exception e) {
-            Exception exception = new ExceptionMindFolderQuery(e, "系统在转换输出内容时发生异常。");
+            Exception exception = new ExceptionMindFolderQuery(e, "출력 내용을 변환하는 중 오류가 발생했습니다.");
             result.error(exception);
             logger.error(e, effectivePerson, request, null);
             return result;
@@ -78,37 +78,37 @@ public class ActionMindListNextWithFilter extends BaseAction {
 
     public static class Wi {
 
-        @FieldDescribe("模糊搜索")
+        @FieldDescribe("유사 검색")
         private String key = "";
 
-        @FieldDescribe("所属目录")
+        @FieldDescribe("소속 디렉터리")
         private String folderId = "";
 
-        @FieldDescribe("备注信息")
+        @FieldDescribe("비고 정보")
         private String description = "";
 
-        @FieldDescribe("创建者")
+        @FieldDescribe("작성자")
         private String creator = "";
 
-        @FieldDescribe("创建者所属组织")
+        @FieldDescribe("생성자 소속 조직")
         private String creatorUnit = "";
 
-        @FieldDescribe("共享者列表")
+        @FieldDescribe("공유자 목록")
         private List<String> sharePersons = null;
 
-        @FieldDescribe("共享组织列表")
+        @FieldDescribe("공유 조직 목록")
         private List<String> shareUnits = null;
 
-        @FieldDescribe("共享角色列表")
+        @FieldDescribe("공유 역할 목록")
         private List<String> shareGroups = null;
 
-        @FieldDescribe("是否已经分享")
+        @FieldDescribe("공유 여부")
         private Boolean shared = null;
 
-        @FieldDescribe("排序列：默认为sequence")
+        @FieldDescribe("정렬 열: 기본값 sequence")
         String orderField = JpaObject.sequence_FIELDNAME;
 
-        @FieldDescribe("排序方式：DESC|ASC， 默认为DESC")
+        @FieldDescribe("정렬 방식: DESC|ASC, 기본값 DESC")
         String orderType = "DESC";
 
         public String getFolderId() {

@@ -76,7 +76,7 @@ public class AttendanceSettingServiceAdv {
 	}
 
 	/**
-	 * 根据提交的内容以及打卡信息组织一个新的申诉信息对象
+	 * 제출 내용과 출퇴근 기록 정보로 새 이의 신청 정보 객체 구성
 	 * @param attendanceDetail
 	 * @param reason
 	 * @param appealReason
@@ -90,7 +90,7 @@ public class AttendanceSettingServiceAdv {
 	public AttendanceAppealInfo composeAppealInfoWithDetailInfo( AttendanceDetail attendanceDetail, 
 			String reason, String appealReason, String selfHolidayType, String address, String startTime, String endTime, String description ) {
 		DateOperation dateOperation = new DateOperation();
-		// 申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过!
+		// 이의 신청 상태: 0-미신청, 1-신청 중, -1-신청 반려, 9-신청 승인!
 		AttendanceAppealInfo attendanceAppealInfo = new AttendanceAppealInfo();
 		attendanceAppealInfo.setId( attendanceDetail.getId() );
 		attendanceAppealInfo.setDetailId( attendanceDetail.getId() );
@@ -112,7 +112,7 @@ public class AttendanceSettingServiceAdv {
 		return attendanceAppealInfo;
 	}
 	/**
-	 * 判断是否周末
+	 * 주말 여부 판단
 	 * @param recordDate
 	 * @return
 	 */

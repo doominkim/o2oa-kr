@@ -31,12 +31,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("query")
-@JaxrsDescribe("查询")
+@JaxrsDescribe("조회")
 public class QueryAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(QueryAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有查询内容.", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "전체 쿼리 내용 조회.", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -53,13 +53,13 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定分类的查询.", action = ActionListWithQueryCategory.class)
+	@JaxrsMethodDescribe(value = "지정 분류의 쿼리 목록.", action = ActionListWithQueryCategory.class)
 	@GET
 	@Path("list/querycategory/{queryCategory}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithQueryCategory(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询分类") @PathParam("queryCategory") String queryCategory) {
+			@JaxrsParameterDescribe("쿼리 분류") @PathParam("queryCategory") String queryCategory) {
 		ActionResult<List<ActionListWithQueryCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,7 +71,7 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示查询年分类,并统计数量.", action = ActionListQueryCategory.class)
+	@JaxrsMethodDescribe(value = "쿼리 연도 분류 목록 및 수량 통계.", action = ActionListQueryCategory.class)
 	@GET
 	@Path("querycategory/list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -88,13 +88,13 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取查询内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "쿼리 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,7 +106,7 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建查询.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "쿼리 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -123,13 +123,13 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新查询.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "쿼리 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -141,13 +141,13 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "设置数据中心权限.", action = ActionEditPermission.class)
+	@JaxrsMethodDescribe(value = "데이터 센터 권한 설정.", action = ActionEditPermission.class)
 	@POST
 	@Path("{id}/permission")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updatePermission(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								 @JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+								 @JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditPermission.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -159,13 +159,13 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除查询.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "쿼리 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -177,15 +177,15 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新查询图标.", action = ActionSetIcon.class)
+	@JaxrsMethodDescribe(value = "쿼리 아이콘 수정.", action = ActionSetIcon.class)
 	@PUT
 	@Path("{flag}/icon")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void setIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("头像文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("프로필 사진 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionSetIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -197,7 +197,7 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有查询，同时附带视图简要信息和统计简要信息.", action = ActionListSummary.class)
+	@JaxrsMethodDescribe(value = "전체 쿼리 목록, 뷰 요약 정보와 통계 요약 정보 포함.", action = ActionListSummary.class)
 	@GET
 	@Path("list/summary")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -214,14 +214,14 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据查询分类获取查询的简要信息,同时附带视图简要信息和统计简要信息应用分类不为null.", action = ActionListSummaryWithQueryCategory.class)
+	@JaxrsMethodDescribe(value = "쿼리 분류로 쿼리 요약 정보 조회, 뷰 요약 정보와 통계 요약 정보 포함, 앱 분류는 null이 아님.", action = ActionListSummaryWithQueryCategory.class)
 	@GET
 	@Path("list/summary/querycategory/{queryCategory}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSummaryWithApplicationCategory(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询分类") @PathParam("queryCategory") String queryCategory) {
+			@JaxrsParameterDescribe("쿼리 분류") @PathParam("queryCategory") String queryCategory) {
 		ActionResult<List<ActionListSummaryWithQueryCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -233,14 +233,14 @@ public class QueryAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据标识获取语句操作对象的属性信息.", action = ActionGetEntityProperties.class)
+	@JaxrsMethodDescribe(value = "식별자로 구문 대상 객체의 속성 정보 조회.", action = ActionGetEntityProperties.class)
 	@GET
 	@Path("entity/{entity}/category/{entityCategory}/properties")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getEntityProperties(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									@JaxrsParameterDescribe("实体类名称(系统表要全称如com.x.query.core.entity.Query，自建表只要名称)") @PathParam("entity") String entity,
-									@JaxrsParameterDescribe("实体类类型(自建表：dynamic|系统表：official)") @PathParam("entityCategory") String entityCategory) {
+									@JaxrsParameterDescribe("엔티티 클래스 이름(시스템 테이블은 전체 이름 예: com.x.query.core.entity.Query, 사용자 생성 테이블은 이름만)") @PathParam("entity") String entity,
+									@JaxrsParameterDescribe("엔티티 클래스 유형(사용자 생성 테이블: dynamic|시스템 테이블: official)") @PathParam("entityCategory") String entityCategory) {
 		ActionResult<List<ActionGetEntityProperties.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

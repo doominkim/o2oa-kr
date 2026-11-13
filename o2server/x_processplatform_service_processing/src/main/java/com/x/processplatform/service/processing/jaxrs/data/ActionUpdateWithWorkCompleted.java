@@ -34,7 +34,7 @@ class ActionUpdateWithWorkCompleted extends BaseAction {
 		String executorSeed = null;
 		Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
 
-		// 防止提交空数据清空data
+		// 빈 데이터 제출로 data가 비워지는 것을 방지
 		if (null == wi.getJsonElement() || (!wi.getJsonElement().isJsonObject())) {
 			throw new ExceptionNotJsonObject();
 		}
@@ -64,10 +64,10 @@ class ActionUpdateWithWorkCompleted extends BaseAction {
 				JsonElement source = getData(business, workCompleted.getJob());
 				JsonElement merge = XGsonBuilder.merge(wi.getJsonElement(), source);
 
-				/* 先更新title和serial,再更新DataItem,因为旧的DataItem中也有title和serial数据. */
+				/* title과 serial을 먼저 수정한 뒤 DataItem 수정, 기존 DataItem에도 title과 serial 데이터가 있기 때문. */
 				updateTitleSerialObjectSecurityClearance(business, workCompleted, merge);
 				updateData(business, workCompleted, merge);
-				/* updateTitleSerial 和 updateData 方法内进行了提交 */
+				/* updateTitleSerial과 updateData 메서드 내에서 커밋함 */
 
 				wi.init(workCompleted, merge);
 				createDataRecord(business, wi);

@@ -45,7 +45,7 @@ class ActionList extends BaseAction {
 		}
 	}
 
-	/** 如果是isManager列示所有应用，如果不是则判断权限 */
+	/** isManager이면 모든 앱 목록, 아니면 권한 확인 */
 	private List<String> list(Business business, EffectivePerson effectivePerson) throws Exception {
 		EntityManager em = business.entityManagerContainer().get(Application.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

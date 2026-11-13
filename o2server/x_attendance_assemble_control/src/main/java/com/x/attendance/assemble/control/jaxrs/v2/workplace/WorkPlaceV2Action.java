@@ -28,12 +28,12 @@ import java.util.List;
 
 
 @Path("v2/workplace")
-@JaxrsDescribe("工作地点信息管理服务")
+@JaxrsDescribe("근무지 정보 관리 서비스")
 public class WorkPlaceV2Action extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(WorkPlaceV2Action.class);
 
-    @JaxrsMethodDescribe(value = "新建或者更新工作地点信息", action = ActionSave.class)
+    @JaxrsMethodDescribe(value = "근무지 정보 생성 또는 업데이트", action = ActionSave.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -52,13 +52,13 @@ public class WorkPlaceV2Action extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "删除工作地点.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "근무지 삭제.", action = ActionDelete.class)
     @DELETE
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                     @JaxrsParameterDescribe("班次ID") @PathParam("id") String id) {
+                                     @JaxrsParameterDescribe("교대 ID") @PathParam("id") String id) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -72,7 +72,7 @@ public class WorkPlaceV2Action extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "全部的工作地点列表.", action = ActionListAll.class)
+    @JaxrsMethodDescribe(value = "전체 근무지 목록.", action = ActionListAll.class)
     @GET
     @Path("list/all")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -90,7 +90,7 @@ public class WorkPlaceV2Action extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "根据id列表", action = ActionListWithWorkPlaceObject.class)
+    @JaxrsMethodDescribe(value = "id 목록으로", action = ActionListWithWorkPlaceObject.class)
     @POST
     @Path("list/ids")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

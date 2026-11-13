@@ -7,7 +7,7 @@ class ExceptionAlreadyAddQueue extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionAlreadyAddQueue() {
-		super("任务已加入队列.");
+		super("작업이 대기열에 추가되었습니다.");
 	}
 
 }

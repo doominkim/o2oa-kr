@@ -29,7 +29,7 @@ public class ActionIsCategoryInfoManager extends BaseAction {
 			isXAdmin = userManagerService.isManager( effectivePerson );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionServiceLogic(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+			Exception exception = new ExceptionServiceLogic(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}

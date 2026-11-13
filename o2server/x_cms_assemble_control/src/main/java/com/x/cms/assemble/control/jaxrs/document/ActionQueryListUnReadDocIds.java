@@ -28,7 +28,7 @@ public class ActionQueryListUnReadDocIds extends BaseAction {
 			wi = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionDocumentInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。");
+			Exception exception = new ExceptionDocumentInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다.");
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -42,16 +42,16 @@ public class ActionQueryListUnReadDocIds extends BaseAction {
 		}
 
 		if (check) {	
-			//查询在ID范围内用户已读的文档ID列表
+			//ID 범위 내에서 사용자가 열람한 문서ID 목록 조회
 			try {
 				nonReadIds = documentViewRecordServiceAdv.listReadDocId( wi.getIds(), effectivePerson );
 				
-				//取差集
+				//차집합 계산
 				wi.getIds().removeAll( nonReadIds );
 				wo.setUnReadDocIds( wi.getIds() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess( e, "系统在根据指定ID列表查询未读文档ID列表时发生异常！" );
+				Exception exception = new ExceptionDocumentInfoProcess( e, "지정한 ID 목록에서 읽지 않은 게시글 ID 목록을 조회하는 중 오류가 발생했습니다!" );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -62,7 +62,7 @@ public class ActionQueryListUnReadDocIds extends BaseAction {
 
 	public static class Wi {
 		
-		@FieldDescribe( "需要查询是否已阅读过的文档ID列表." )
+		@FieldDescribe( "열람 여부를 조회할 문서ID 목록." )
 		private List<String> ids = null;
 
 		public List<String> getIds() {
@@ -76,7 +76,7 @@ public class ActionQueryListUnReadDocIds extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe( "未读文档ID列表." )
+		@FieldDescribe( "미열람 문서ID 목록." )
 		private List<String> unReadDocIds = null;
 
 		public List<String> getUnReadDocIds() {

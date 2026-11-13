@@ -7,8 +7,8 @@ public class QiyeweixinTextMessage extends QiyeweixinBaseMessage {
 	/**
 	 * { "touser" : "UserID1|UserID2|UserID3", "toparty" : "PartyID1|PartyID2",
 	 * "totag" : "TagID1 | TagID2", "msgtype" : "text", "agentid" : 1, "text" : {
-	 * "content" : "你的快递已到，请携带工卡前往邮件中心领取。\n出发前可查看<a
-	 * href=\"http://work.weixin.qq.com\">邮件中心视频实况</a>，聪明避开排队。" }, "safe":0 }
+	 * "content" : "택배가 도착했습니다. 사원증을 지참하고 우편 센터에서 수령하세요.\n출발 전 <a
+	 * href=\"http://work.weixin.qq.com\">우편 센터 실시간 영상</a>을 확인하여 대기 줄을 피하세요." }, "safe":0 }
 	 */
 
 	public QiyeweixinTextMessage() {

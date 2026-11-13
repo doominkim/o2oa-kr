@@ -28,14 +28,14 @@ public class FooAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FooAction.class);
 
-	@JaxrsMethodDescribe(value = "创建测试数据.", action = ActionCreateMass.class)
+	@JaxrsMethodDescribe(value = "테스트 데이터 생성.", action = ActionCreateMass.class)
 	@GET
 	@Path("create/mass/{from}/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createMass(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("开始编号") @PathParam("from") Integer from,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("시작 번호") @PathParam("from") Integer from,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<ActionCreateMass.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

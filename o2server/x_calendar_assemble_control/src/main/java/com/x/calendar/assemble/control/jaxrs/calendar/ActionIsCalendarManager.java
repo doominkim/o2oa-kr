@@ -40,7 +40,7 @@ public class ActionIsCalendarManager extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + accountId );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + accountId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

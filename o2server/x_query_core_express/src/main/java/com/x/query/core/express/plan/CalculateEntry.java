@@ -13,31 +13,31 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class CalculateEntry extends GsonPropertyObject {
 
-	@FieldDescribe("视图")
+	@FieldDescribe("뷰")
 	public String view;
 
-	@FieldDescribe("统计列")
+	@FieldDescribe("통계 열")
 	public String column;
 
-	@FieldDescribe("统计类型,sum,count,average")
+	@FieldDescribe("통계 유형, sum, count, average")
 	public String calculateType;
 
-	@FieldDescribe("显示名称")
+	@FieldDescribe("표시 이름")
 	public String displayName;
 
-	@FieldDescribe("排序,original,asc,desc")
+	@FieldDescribe("정렬, original, asc, desc")
 	public String orderType;
 
-	@FieldDescribe("格式类型:number,percent,currency")
+	@FieldDescribe("형식 유형: number, percent, currency")
 	public String formatType;
 
-	@FieldDescribe("空值的默认值")
+	@FieldDescribe("빈 값의 기본값")
 	public Double defaultValue;
 
-	@FieldDescribe("小数点位数")
+	@FieldDescribe("소수점 자릿수")
 	public Integer decimal;
 
-	@FieldDescribe("用于标识的id,并不是数据库id")
+	@FieldDescribe("식별용 id, 데이터베이스 id가 아님")
 	public String id;
 
 	public static final String FORMATTYPE_NUMBER = "number";

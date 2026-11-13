@@ -50,7 +50,7 @@ class ActionUpdateWithWorkPath3 extends BaseAction {
 					}
 					wo.setId(work.getId());
 					updateData(business, work, jsonElement, path0, path1, path2, path3);
-					/* updateTitleSerial 和 updateData 方法内进行了提交 */
+					/* updateTitleSerial과 updateData 메서드 내에서 커밋함 */
 				}
 				return "";
 			}

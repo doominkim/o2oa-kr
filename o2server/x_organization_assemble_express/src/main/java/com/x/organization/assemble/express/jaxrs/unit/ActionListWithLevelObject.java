@@ -46,7 +46,7 @@ class ActionListWithLevelObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织层级")
+		@FieldDescribe("조직 레벨")
 		private List<Integer> levelList = new ArrayList<>();
 
 		public List<Integer> getLevelList() {

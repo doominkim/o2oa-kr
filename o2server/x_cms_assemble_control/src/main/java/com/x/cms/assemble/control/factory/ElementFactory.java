@@ -71,7 +71,7 @@ public abstract class ElementFactory extends AbstractFactory {
 		return t;
 	}
 
-	/* 取得属于指定CategoryInfo 的设计元素 */
+	/* 지정한 CategoryInfo 에 속한 설계 요소 조회 */
 	@SuppressWarnings("unchecked")
 	protected <T extends JpaObject> List<T> listWithCategory(Class<T> clz, CategoryInfo categoryInfo) throws Exception {
 		List<T> list = new ArrayList<>();
@@ -95,7 +95,7 @@ public abstract class ElementFactory extends AbstractFactory {
 				em.detach(t);
 				list.add(t);
 			}
-			/* 将object改为unmodifiable */
+			/* object를 unmodifiable로 변경 */
 			list = Collections.unmodifiableList(list);
 			CacheManager.put(cacheCategory, cacheKey, list );
 		}

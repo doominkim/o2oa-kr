@@ -9,7 +9,7 @@ MWF.xApplication.Template.LP={
 	"createSuccess": "Creado con éxito",
 	"updateSuccess": "Actualizado con éxito",
 	"inputName": "Ingrese un nombre",
-	"dateFormatMonth": "%Y年%m月",
+	"dateFormatMonth": "%Y년 %m월",
 	"dateFormatOnlyMonth": "%m",
 	"dateFormatDay": "%Y-%m-%d",
 	"dateFormatMonthDayLocal": "%d de %B",

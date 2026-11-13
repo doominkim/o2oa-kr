@@ -35,9 +35,9 @@ public class KeyLockAction extends BaseAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(KeyLockAction.class);
 	private static final String OPERATIONID_PREFIX = "KeyLockAction::";
 
-	@Operation(summary = "使用当前用户身份锁定工作.", operationId = OPERATIONID_PREFIX + "lock", responses = {
+	@Operation(summary = "현재 사용자 신분으로 업무 문서 잠금.", operationId = OPERATIONID_PREFIX + "lock", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionLock.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "使用当前用户身份锁定工作.", action = ActionLock.class)
+	@JaxrsMethodDescribe(value = "현재 사용자 신분으로 업무 문서 잠금.", action = ActionLock.class)
 	@PUT
 	@Path("lock")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -55,7 +55,7 @@ public class KeyLockAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "使用当前用户身份锁定工作.", operationId = OPERATIONID_PREFIX + "lock", responses = {
+	@Operation(summary = "현재 사용자 신분으로 업무 문서 잠금.", operationId = OPERATIONID_PREFIX + "lock", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionLock.Wo.class)) }) })
 	@JaxrsMethodDescribe(value = "Mock Post To Put.", action = ActionLock.class)
 	@POST

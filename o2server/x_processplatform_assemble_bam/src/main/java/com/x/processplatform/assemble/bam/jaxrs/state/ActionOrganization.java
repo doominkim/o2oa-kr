@@ -22,10 +22,10 @@ class ActionOrganization extends ActionBase {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("按组织统计")
+		@FieldDescribe("조직별 통계")
 		private List<WoUnit> unit = new ArrayList<>();
 
-		@FieldDescribe("按个人统计")
+		@FieldDescribe("개인별 통계")
 		private List<WoPerson> person = new ArrayList<>();
 
 		public List<WoUnit> getUnit() {
@@ -48,19 +48,19 @@ class ActionOrganization extends ActionBase {
 
 	public static class WoUnit extends GsonPropertyObject {
 
-		@FieldDescribe("组织名称")
+		@FieldDescribe("조직명")
 		String name;
-		@FieldDescribe("组织标识")
+		@FieldDescribe("조직 식별자")
 		String value;
-		@FieldDescribe("待办数量")
+		@FieldDescribe("결재 대기 수")
 		Long count;
-		@FieldDescribe("超时待办数量")
+		@FieldDescribe("기한 초과 결재 대기 수")
 		Long expiredCount;
-		@FieldDescribe("待办停留总时长(分钟)")
+		@FieldDescribe("결재 대기 체류 총 시간(분)")
 		Long duration;
-		@FieldDescribe("已办数量")
+		@FieldDescribe("처리 완료 수")
 		Long completedCount;
-		@FieldDescribe("超时已办数量")
+		@FieldDescribe("기한 초과 처리 완료 수")
 		Long completedExpiredCount;
 
 		public String getName() {
@@ -123,19 +123,19 @@ class ActionOrganization extends ActionBase {
 
 	public static class WoPerson extends GsonPropertyObject {
 
-		@FieldDescribe("个人名称")
+		@FieldDescribe("개인 이름")
 		String name;
-		@FieldDescribe("个人标识")
+		@FieldDescribe("개인 식별자")
 		String value;
-		@FieldDescribe("待办数量")
+		@FieldDescribe("결재 대기 수")
 		Long count;
-		@FieldDescribe("超时待办数量")
+		@FieldDescribe("기한 초과 결재 대기 수")
 		Long expiredCount;
-		@FieldDescribe("待办停留总时长(分钟)")
+		@FieldDescribe("결재 대기 체류 총 시간(분)")
 		Long duration;
-		@FieldDescribe("已办数量")
+		@FieldDescribe("처리 완료 수")
 		Long completedCount;
-		@FieldDescribe("超时已办数量")
+		@FieldDescribe("기한 초과 처리 완료 수")
 		Long completedExpiredCount;
 
 		public String getName() {

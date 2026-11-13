@@ -36,7 +36,7 @@ public class RestartCommand extends StopCommand {
 			stopAll();
 			stopAllThreads();
 			String osName = System.getProperty("os.name");
-			// System.out.println("当前操作系统是："+osName);
+			// System.out.println("현재 운영체제: "+osName);
 			File file = new File(Config.base(), "start_linux.sh");
 			if (osName.toLowerCase().startsWith("mac")) {
 				file = new File(Config.base(), "start_macos.sh");

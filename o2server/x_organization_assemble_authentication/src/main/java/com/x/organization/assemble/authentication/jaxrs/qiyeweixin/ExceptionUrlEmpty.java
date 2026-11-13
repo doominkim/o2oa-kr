@@ -8,6 +8,6 @@ class ExceptionUrlEmpty extends PromptException {
 	private static final long serialVersionUID = 7017033987204155801L;
 
 	ExceptionUrlEmpty() {
-		super("url 参数不能为空.");
+		super("url 매개변수는 비워 둘 수 없습니다.");
 	}
 }

@@ -67,10 +67,10 @@ class ActionAuthCode extends BaseAction {
 
 		private static final long serialVersionUID = -1453106326481426734L;
 
-		@FieldDescribe("oauth客户端ID")
+		@FieldDescribe("oauth 클라이언트 ID")
 		private String clientId;
 
-		@FieldDescribe("oauth单点用户")
+		@FieldDescribe("oauth SSO 사용자")
 		private String person;
 
 		public String getClientId() {
@@ -94,7 +94,7 @@ class ActionAuthCode extends BaseAction {
 
 		private static final long serialVersionUID = 4407474946815615148L;
 
-		@FieldDescribe("oauth单点code")
+		@FieldDescribe("oauth SSO code")
 		private String code;
 
 		public String getCode() {

@@ -1361,7 +1361,7 @@ MWF.xApplication.cms.ColumnManager.Input = new Class({
 //
 //            var html =
 //                "<table width='100%' bordr='0' cellpadding='7' cellspacing='0' style='margin:13px 13px 13px 13px;'>" +
-//                "<tr><td style='"+valueStyle+";' width='70'>"+"栏目类型设置为“数据存储”时，将不在信息中心中展现。"+":</td>" +
+//                "<tr><td style='"+valueStyle+";' width='70'>"+"게시판 유형을 “데이터 저장”으로 설정하면 정보 센터에 표시되지 않습니다."+":</td>" +
 //                " </tr>" +
 //                "</table>";
 //        return html;

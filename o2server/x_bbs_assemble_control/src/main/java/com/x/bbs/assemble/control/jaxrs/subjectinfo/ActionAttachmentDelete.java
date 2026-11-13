@@ -51,7 +51,7 @@ public class ActionAttachmentDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectInfoProcess(e, "根据指定ID查询附件信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionSubjectInfoProcess(e, "지정한 ID로 첨부 파일 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(exception, effectivePerson, request, null);
 			}
@@ -73,9 +73,9 @@ public class ActionAttachmentDelete extends BaseAction {
 			if (subjectAttachment != null) {
 				try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 					mapping = ThisApplication.context().storageMappings().get(BBSSubjectAttachment.class, subjectAttachment.getStorage());
-					// 对文件进行删除
+					// 파일 삭제
 					subjectAttachment.deleteContent(mapping);
-					// 对数据库记录进行删除
+					// DB 레코드 삭제
 					subjectAttachment = emc.find(id, BBSSubjectAttachment.class);
 					subjectInfo = emc.find(subjectAttachment.getSubjectId(), BBSSubjectInfo.class);
 					emc.beginTransaction(BBSSubjectAttachment.class);
@@ -91,7 +91,7 @@ public class ActionAttachmentDelete extends BaseAction {
 					CacheManager.notify( BBSSubjectInfo.class );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSubjectInfoProcess(e, "根据指定ID删除附件信息时发生异常.ID:" + subjectAttachment.getSubjectId());
+					Exception exception = new ExceptionSubjectInfoProcess(e, "지정한 ID로 첨부 파일 정보를 삭제하는 중 오류가 발생했습니다. ID:" + subjectAttachment.getSubjectId());
 					result.error(exception);
 					logger.error(exception, effectivePerson, request, null);
 				}

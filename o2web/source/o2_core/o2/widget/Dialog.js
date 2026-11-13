@@ -194,7 +194,7 @@ o2.widget.Dialog = o2.DL = new Class({
 		// }.bind(this));
 	},
 	setResizeNode: function(){
-		//未实现................................
+		//미구현................................
         if (!this.options.isResize){
             if (this.resizeNode) this.resizeNode.hide();
         }else{
@@ -221,7 +221,7 @@ o2.widget.Dialog = o2.DL = new Class({
 		}
 	},
 	getAction: function(){
-		//未完成................................
+		//미완료................................
 		if (this.options.isClose){
 			this.closeAction = new Element("div", {"styles": this.css.closeAction}).inject(this.titleAction);
             this.closeAction.addEvent("click", this.close.bind(this));
@@ -466,7 +466,7 @@ o2.widget.Dialog = o2.DL = new Class({
 					this.content.set("html", responseHTML);
 				}.bind(this),
 				onFailure: function(xhr){
-					alert("回退出现错误："+xhr.status+" "+xhr.statusText);
+					alert("되돌리기 중 오류가 발생했습니다: "+xhr.status+" "+xhr.statusText);
 					window.close();
 				}
 			});*/

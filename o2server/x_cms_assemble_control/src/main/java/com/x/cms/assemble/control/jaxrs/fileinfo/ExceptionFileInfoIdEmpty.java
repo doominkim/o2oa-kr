@@ -7,6 +7,6 @@ class ExceptionFileInfoIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionFileInfoIdEmpty() {
-		super("附件文件信息ID为空，无法进行查询操作。" );
+		super("첨부파일 ID가 비어 있어 조회할 수 없습니다." );
 	}
 }

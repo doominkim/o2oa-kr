@@ -20,7 +20,7 @@ public class TaskCompletedFactory extends AbstractFactory {
 	}
 
 	/*
-	 * 取得最近的TaskCompleted
+	 * 가장 최근 TaskCompleted 조회
 	 */
 	public String getLastWithWork(String id) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(TaskCompleted.class);

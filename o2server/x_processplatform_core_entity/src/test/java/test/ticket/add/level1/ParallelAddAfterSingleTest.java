@@ -17,7 +17,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddAfterSingleTest {
 
-	@DisplayName("B后加签EFG,FEG任意处理,A先处理再EFG任意处理,再C处理")
+	@DisplayName("B 뒤에 EFG 추가 결재, FEG 임의 처리, A 먼저 처리 후 EFG 임의 처리, 그다음 C 처리")
 	@Test
 	@Order(1)
 	void test01() {
@@ -47,7 +47,7 @@ class ParallelAddAfterSingleTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B后加签EFG,FEG任意处理,A,C先处理")
+	@DisplayName("B 뒤에 EFG 추가 결재, FEG 임의 처리, A, C 먼저 처리")
 	@Test
 	@Order(2)
 	void test02() {
@@ -75,7 +75,7 @@ class ParallelAddAfterSingleTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B后加签EFG,FEG任意处理,E先处理一个再AC处理.")
+	@DisplayName("B 뒤에 EFG 추가 결재, FEG 임의 처리, E가 먼저 하나 처리 후 AC 처리.")
 	@Test
 	@Order(3)
 	void test03() {

@@ -26,7 +26,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "PersonExtend", description = "组织人员扩展.")
+@Schema(name = "PersonExtend", description = "조직 사용자 확장.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.PersonExtend.TABLE, uniqueConstraints = {
@@ -48,7 +48,7 @@ public class PersonExtend extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -76,7 +76,7 @@ public class PersonExtend extends SliceJpaObject {
 	}
 
 	public static final String EXTEND_FIELDNAME = "extend";
-	@FieldDescribe("存储数据.")
+	@FieldDescribe("저장 데이터.")
 	@Transient
 	private JsonElement extend;
 
@@ -90,22 +90,22 @@ public class PersonExtend extends SliceJpaObject {
 	}
 
 	public static final String PERSON_FIELDNAME = "person";
-	@FieldDescribe("个人扩展所属个人,不可为空.")
+	@FieldDescribe("개인 확장 소유 개인, 비워 둘 수 없음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + PERSON_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + PERSON_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Person.class) })
 	private String person;
 
 	public static final String TYPE_FIELDNAME = "type";
-	@FieldDescribe("类型.")
+	@FieldDescribe("유형.")
 	@Column(length = length_255B, name = ColumnNamePrefix + TYPE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + TYPE_FIELDNAME)
-	// 同一个用户只有一个类型的数据,不可重名
+	// 같은 사용자는 한 유형의 데이터만 가짐, 중복 불가
 	@CitationNotExist(fields = {
 			TYPE_FIELDNAME }, type = PersonExtend.class, equals = @Equal(property = PERSON_FIELDNAME, field = PERSON_FIELDNAME))
 	private String type;
 
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

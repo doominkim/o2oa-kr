@@ -1,19 +1,19 @@
 /*
-外部方法
+외부 메서드
  getResult(verify, separator, isAlert, onlyModified, keepAllData )
- 返回：如果不校验或者通过了校验返回表单上的数据，如果不能通过校验返回null
- 参数：
- verify 是否校验，
- separator 多值域的分割符，
- isAlert 如果verify为true则是否提醒用户校验未通过，
- onlyModified只获取修改过的结果，
- keepAllData获取所有MDOMItem对象的值并保留未生成对象的data
+ 반환: 검증하지 않거나 검증을 통과하면 양식의 데이터 반환, 검증을 통과하지 못하면 null 반환
+ 파라미터:
+ verify 검증 여부,
+ separator 다중 값 필드의 구분자,
+ isAlert verify가 true일 때 검증 실패를 사용자에게 알릴지 여부,
+ onlyModified 수정된 결과만 조회,
+ keepAllData: 모든 MDOMItem 객체의 값을 조회하고 생성되지 않은 객체의 data 유지
 
  getItem( name )
- 根据name返回MDOMItem对象
+ name으로 MDOMItem 객체 반환
 
  verify(isAlert)
- 校验用户是否已经填写了必填对象
+ 사용자가 필수 객체를 입력했는지 검증
  */
 MWF.xDesktop.requireApp("Template", "MDomItem", null, false);
 var MForm = new Class({
@@ -27,10 +27,10 @@ var MForm = new Class({
         emptyItemContainer : true,
         showNotEmptyFlag : false,
 
-        //batch，所有item的错误都校验，每个item所有错误一起校验，错误显示在Item的字段后或指定区域；
-        //batchSingle, 所有item的错误都校验，每个item只校验一个错误，错误显示在Item的字段后或指定区域；
-        //alert，验证时遇到一个不成功的Item用app.notice()弹出消息后中断,
-        //single，验证时遇到一个不成功的Item在字段后面或指定区域显示错误信息后中断
+        //batch: 모든 item의 오류를 검증하고 각 item의 모든 오류를 함께 검증, 오류는 Item 필드 뒤 또는 지정 영역에 표시;
+        //batchSingle: 모든 item의 오류를 검증하되 각 item은 오류 하나만 검증, 오류는 Item 필드 뒤 또는 지정 영역에 표시;
+        //alert: 검증 중 실패한 Item을 만나면 app.notice()로 메시지를 띄운 뒤 중단,
+        //single: 검증 중 실패한 Item을 만나면 필드 뒤 또는 지정 영역에 오류 정보를 표시한 뒤 중단
         verifyType : "alert",
         itemTemplateUrl : "",
         containerHtml : null,
@@ -74,13 +74,13 @@ var MForm = new Class({
         this.labelContainers = null;
         this.itemContainers = null;
 
-        this.valSeparator = /,|;|\^\^|\|/g; //如果是多值对象，作为用户选择的多个值的分隔符
+        this.valSeparator = /,|;|\^\^|\|/g; //다중 값 객체이면 사용자가 선택한 여러 값의 구분자
     },
     load: function () {
         this.fireEvent("queryLoad");
 
         this.loadTemplate( function(){
-            //如果itemTemplate没有name赋值Key
+            //itemTemplate에 name이 없으면 Key를 할당
             for( var it in this.itemTemplate ){
                 if( !this.itemTemplate[it]["name"] ){
                     this.itemTemplate[it]["name"] = it;
@@ -88,7 +88,7 @@ var MForm = new Class({
                 this.itemTemplate[it]["key"] = it;
             }
 
-            //如果itemTemplate没有name和Key不一致，那么根据name赋值itemTemplate
+            //itemTemplate의 name과 Key가 다르면 name에 따라 itemTemplate 할당
             var json = {};
             for( var it in this.itemTemplate ){
                 if( it != this.itemTemplate[it]["name"] ){
@@ -356,7 +356,7 @@ var MForm = new Class({
         return flag;
     },
     getItemsKeyValue : function(separator , onlyModified ) {
-        //separator 多值合并分隔符
+        //separator 다중 값 병합 구분자
         var key_value = {};
         for (var it in this.items ) {
             var item = this.items[it];

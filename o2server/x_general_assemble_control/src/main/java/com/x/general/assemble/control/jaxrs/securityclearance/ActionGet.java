@@ -31,15 +31,15 @@ public class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = 7851469182619330809L;
 
-		@FieldDescribe("主体密级标识配置.")
+		@FieldDescribe("주체 보안 등급 표시 설정.")
 		private Map<String, Integer> subjectSecurityClearance;
-		@FieldDescribe("客体密级标识配置.")
+		@FieldDescribe("객체 보안 등급 표시 설정.")
 		private Map<String, Integer> objectSecurityClearance;
-		@FieldDescribe("是否启用密级标识.")
+		@FieldDescribe("보안 등급 식별 사용 여부.")
 		private Boolean securityClearanceEnable;
-		@FieldDescribe("默认主体密级标识.")
+		@FieldDescribe("기본 주체 보안 등급 표시.")
 		private Integer defaultSubjectSecurityClearance;
-		@FieldDescribe("系统密级标识.")
+		@FieldDescribe("시스템 보안 등급 표시.")
 		private Integer systemSecurityClearance;
 
 		public Map<String, Integer> getSubjectSecurityClearance() {

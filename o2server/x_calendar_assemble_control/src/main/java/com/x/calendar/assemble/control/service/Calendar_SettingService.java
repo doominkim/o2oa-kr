@@ -11,7 +11,7 @@ import com.x.calendar.core.entity.Calendar_SettingLobValue;
 
 
 /**
- * 日程管理系统设置服务类
+ * 일정 관리 시스템 설정 서비스 클래스
  * @author O2LEE
  *
  */
@@ -20,7 +20,7 @@ public class Calendar_SettingService {
 	//private Logger logger = LoggerFactory.getLogger( Calendar_SettingService.class );
 
 	/**
-	 * 获取所有的系统设置信息
+	 * 모든 시스템 설정 정보 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -30,7 +30,7 @@ public class Calendar_SettingService {
 	}
 	
 	/**
-	 * 根据ID获取指定的系统设置信息
+	 * ID로 지정 시스템 설정 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -40,7 +40,7 @@ public class Calendar_SettingService {
 	}
 
 	/**
-	 * 根据ID删除指定的系统设置信息
+	 * ID로 지정 시스템 설정 정보 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -59,7 +59,7 @@ public class Calendar_SettingService {
 		}
 	}
 	/**
-	 * 根据设置编码获取指定的设置信息
+	 * 설정 코드로 지정 설정 정보 조회
 	 * @param code
 	 * @return
 	 * @throws Exception
@@ -93,7 +93,7 @@ public class Calendar_SettingService {
 	}
 
 	/**
-	 * 创建系统设置信息
+	 * 시스템 설정 정보 생성
 	 * @param report_S_Setting
 	 * @return
 	 * @throws Exception
@@ -108,15 +108,15 @@ public class Calendar_SettingService {
 		}else{
 			emc.beginTransaction( Calendar_Setting.class );
 
-			//对长文本记录进行操作
+			//긴 텍스트 레코드 처리
 			if( report_S_Setting.getIsLob() ) {
 				emc.beginTransaction( Calendar_SettingLobValue.class );
 				reportSettingLobValue = emc.find( report_S_Setting.getId(), Calendar_SettingLobValue.class );
 				if( reportSettingLobValue != null ) {
-					reportSettingLobValue.setLobValue( report_S_Setting.getConfigValue() );//更新值
+					reportSettingLobValue.setLobValue( report_S_Setting.getConfigValue() );//값 수정
 					emc.check( reportSettingLobValue, CheckPersistType.all );
 				}else {
-					//没有，就创建一个LOB值记录
+					//없으면 LOB 값 레코드 생성
 					reportSettingLobValue = new Calendar_SettingLobValue();
 					reportSettingLobValue.setId( report_S_Setting.getId() );
 					reportSettingLobValue.setLobValue( report_S_Setting.getConfigValue() );
@@ -132,7 +132,7 @@ public class Calendar_SettingService {
 	}
 	
 	/**
-	 * 更新系统设置信息
+	 * 시스템 설정 정보 수정
 	 * @param report_S_Setting
 	 * @return
 	 * @throws Exception
@@ -153,15 +153,15 @@ public class Calendar_SettingService {
 			report_S_Setting_old.setOrderNumber( report_S_Setting.getOrderNumber() );
 			report_S_Setting_old.setIsLob( report_S_Setting.getIsLob() );
 			
-			//对长文本记录进行操作
+			//긴 텍스트 레코드 처리
 			if( report_S_Setting_old.getIsLob() ) {
 				emc.beginTransaction( Calendar_SettingLobValue.class );
 				reportSettingLobValue = emc.find( report_S_Setting.getId(), Calendar_SettingLobValue.class );
 				if( reportSettingLobValue != null ) {
-					reportSettingLobValue.setLobValue( report_S_Setting.getConfigValue() );//更新值
+					reportSettingLobValue.setLobValue( report_S_Setting.getConfigValue() );//값 수정
 					emc.check( reportSettingLobValue, CheckPersistType.all );
 				}else {
-					//没有，就创建一个LOB值记录
+					//없으면 LOB 값 레코드 생성
 					reportSettingLobValue = new Calendar_SettingLobValue();
 					reportSettingLobValue.setId( report_S_Setting.getId() );
 					reportSettingLobValue.setLobValue( report_S_Setting.getConfigValue() );

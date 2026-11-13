@@ -7,6 +7,6 @@ class ExceptionEmptyData extends LanguagePromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionEmptyData() {
-		super("更新的数据不能为空.");
+		super("수정할 데이터는 비워 둘 수 없습니다.");
 	}
 }

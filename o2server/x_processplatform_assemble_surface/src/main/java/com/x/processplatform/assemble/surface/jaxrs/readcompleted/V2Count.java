@@ -184,24 +184,24 @@ class V2Count extends V2Base {
 
 		private static final long serialVersionUID = 8585909929028550439L;
 
-		@FieldDescribe("按应用分类.")
-		@Schema(description = "按应用分类.")
+		@FieldDescribe("앱별 분류.")
+		@Schema(description = "앱별 분류.")
 		private Boolean groupByApplication;
 
-		@FieldDescribe("按流程分类.")
-		@Schema(description = "按流程分类.")
+		@FieldDescribe("프로세스별 분류.")
+		@Schema(description = "프로세스별 분류.")
 		private Boolean groupByProcess;
 
-		@FieldDescribe("按创建人分类.")
-		@Schema(description = "按创建人分类.")
+		@FieldDescribe("생성자별 분류.")
+		@Schema(description = "생성자별 분류.")
 		private Boolean groupByCreatorPerson;
 
-		@FieldDescribe("按创建人分类.")
-		@Schema(description = "按创建人分类.")
+		@FieldDescribe("생성자별 분류.")
+		@Schema(description = "생성자별 분류.")
 		private Boolean groupByCreatorUnit;
 
-		@FieldDescribe("按创建年月分类.")
-		@Schema(description = "按创建年月分类.")
+		@FieldDescribe("생성 연월별 분류.")
+		@Schema(description = "생성 연월별 분류.")
 		private Boolean groupByStartTimeMonth;
 
 		public Boolean getGroupByApplication() {

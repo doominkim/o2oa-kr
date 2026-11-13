@@ -8,6 +8,6 @@ public class ExceptionDeviceError extends PromptException {
 	private static final long serialVersionUID = -7628244339899708417L;
 
 	public ExceptionDeviceError(String msg) {
-		super("错误: {}", msg);
+		super("오류: {}", msg);
 	}
 }

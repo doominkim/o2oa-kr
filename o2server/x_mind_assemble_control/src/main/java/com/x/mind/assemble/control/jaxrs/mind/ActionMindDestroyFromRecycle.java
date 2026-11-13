@@ -14,7 +14,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindQuery;
 import com.x.mind.entity.MindRecycleInfo;
 
 /**
- * 从回收站删除脑图信息
+ * 휴지통에서 마인드맵 정보 삭제
  * @author O2LEE
  *
  */
@@ -34,7 +34,7 @@ public class ActionMindDestroyFromRecycle extends BaseAction {
 				mindRecycleInfo = mindInfoService.getMindRecycleInfo(recycleId);
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e,  "系统在根据ID查询回收站脑图信息时发生异常。", recycleId );
+				Exception exception = new ExceptionMindQuery( e,  "ID로 휴지통 마인드맵 정보를 조회하는 중 오류가 발생했습니다.", recycleId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

@@ -27,7 +27,7 @@ public class ActionSaveSystemConfig extends BaseAction {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
 
-			/* 判断当前用户是否有权限访问 */
+			/* 현재 사용자의 접근 권한 여부 판단 */
 			if(!business.controlAble(effectivePerson)) {
 				throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());
 			}
@@ -78,10 +78,10 @@ public class ActionSaveSystemConfig extends BaseAction {
 		static WrapCopier<Wi, FileConfig> copier = WrapCopierFactory.wi(Wi.class, FileConfig.class, null,
 				ListTools.toList(JpaObject.FieldsUnmodify, FileConfig.properties_FIELDNAME));
 
-		@FieldDescribe("只允许上传的文件后缀")
+		@FieldDescribe("업로드 허용 파일 확장자")
 		private List<String> fileTypeIncludes = new ArrayList<>();
 
-		@FieldDescribe("不允许上传的文件后缀")
+		@FieldDescribe("업로드 금지 파일 확장자")
 		private List<String> fileTypeExcludes = new ArrayList<>();
 
 		public List<String> getFileTypeIncludes() {

@@ -31,7 +31,7 @@ class V3Pin extends BaseAction {
 			if (effectivePerson.isNotPerson(task.getPerson()) && effectivePerson.isNotManager()) {
 				throw new ExceptionAccessDenied(effectivePerson, task);
 			}
-			// orderNumber asc排序
+			// orderNumber asc 정렬
 			emc.beginTransaction(Task.class);
 			if (Objects.isNull(task.getOrderNumber())) {
 				task.setOrderNumber(-(new Date()).getTime());

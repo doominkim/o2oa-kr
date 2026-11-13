@@ -7,7 +7,7 @@ class ExceptionFire extends LanguagePromptException {
 	private static final long serialVersionUID = -3287459468603291619L;
 
 	ExceptionFire(Throwable throwable, String className, String application, String node) {
-		super(throwable, "错误触发时间表:className:{}，应用程序:{}，节点:{}.", className, application,
+		super(throwable, "일정 실행 오류: className: {}, 앱: {}, 노드: {}.", className, application,
 				node);
 	}
 }

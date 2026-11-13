@@ -170,7 +170,7 @@ const sendGetPrivateInfoMessage = (ev) => {
   
 }
 
-// 选择组织或人员 发送消息用
+// 메시지 발송용 조직 또는 사용자 선택
 const choosePeopleOrOrg = () => {
   o2.requireApp('Selector', 'package', ()=>{
     new MWF.O2Selector(component.content, {

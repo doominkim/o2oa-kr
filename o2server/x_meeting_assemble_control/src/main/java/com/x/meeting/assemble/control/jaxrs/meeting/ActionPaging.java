@@ -139,52 +139,52 @@ class ActionPaging extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("标题.")
+		@FieldDescribe("제목.")
 		private String subject;
 
-		@FieldDescribe("所属楼层.")
+		@FieldDescribe("소속 층.")
 		private String room;
 
-		@FieldDescribe("开始时间.")
+		@FieldDescribe("시작 시간.")
 		private Date startTime;
 
-		@FieldDescribe("结束时间.")
+		@FieldDescribe("종료 시간.")
 		private Date completedTime;
 
-		@FieldDescribe("会议预定状态.(allow|deny|wait)")
+		@FieldDescribe("회의 예약 상태.(allow|deny|wait)")
 		private String confirmStatus;
 
-		@FieldDescribe("创建人员.")
+		@FieldDescribe("생성 사용자.")
 		private String applicant;
 
-		@FieldDescribe("邀请人员,身份,组织.")
+		@FieldDescribe("초대 사용자, 신분, 조직.")
 		private String invitePersonList;
 
-		@FieldDescribe("接受人员.")
+		@FieldDescribe("수락 사용자.")
 		private String acceptPersonList;
 
-		@FieldDescribe("签到人员.")
+		@FieldDescribe("출석 체크 사용자.")
 		private String checkinPersonList;
 
-		@FieldDescribe("会议是否手工结束.(true|false)")
+		@FieldDescribe("회의 수동 종료 여부.(true|false)")
 		private Boolean manualCompleted;
 
-		@FieldDescribe("会议当前状态.(applying|wait|processing|completed)")
+		@FieldDescribe("회의 현재 상태.(applying|wait|processing|completed)")
 		private String meetingStatus;
 
-		@FieldDescribe("排序字段.(startTime|completedTime|room)")
+		@FieldDescribe("정렬 필드.(startTime|completedTime|room)")
 		private String sortField;
 
-		@FieldDescribe("排序.(desc|asc)")
+		@FieldDescribe("정렬.(desc|asc)")
 		private String sortType;
 
-		@FieldDescribe("承办部门")
+		@FieldDescribe("주관 부서")
 		private String hostUnit;
 
-		@FieldDescribe("主持人")
+		@FieldDescribe("사회자")
 		private String hostPerson;
 
-		@FieldDescribe("类型")
+		@FieldDescribe("유형")
 		private String type;
 
 		public String getSubject() {

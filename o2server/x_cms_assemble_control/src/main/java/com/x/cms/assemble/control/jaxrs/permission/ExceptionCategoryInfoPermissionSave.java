@@ -7,6 +7,6 @@ class ExceptionCategoryInfoPermissionSave extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCategoryInfoPermissionSave( Throwable e, String id ) {
-		super( "保存分类权限时发生异常。ID:{}" ,id, e );
+		super( "분류 권한을 저장하는 중 오류가 발생했습니다. ID: {}" ,id, e );
 	}
 }

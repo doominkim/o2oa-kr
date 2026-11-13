@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public class ReviewProperties extends JsonProperties {
 
-    @FieldDescribe("标题")
+    @FieldDescribe("제목")
     private String title;
 
     public String getTitle() {

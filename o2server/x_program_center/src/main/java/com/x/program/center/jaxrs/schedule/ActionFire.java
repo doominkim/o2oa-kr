@@ -66,11 +66,11 @@ class ActionFire extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = 5415760454523560472L;
-		@FieldDescribe("节点")
+		@FieldDescribe("노드")
 		private String node;
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private String application;
-		@FieldDescribe("任务类")
+		@FieldDescribe("작업 클래스")
 		private String className;
 
 		public String getNode() {

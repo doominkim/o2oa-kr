@@ -20,10 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 根据条件和权限列示能访问到的符合条件的日历信息(输出简单的列表，不按天组织)
- * 1、查询时间段内有多少重复事件主体需要进行事件生成
- * 2、生成事件
- * 3、根据条件查询日程事件信息列表
+ * 조건과 권한에 따라 접근 가능한 조건에 맞는 캘린더 정보 나열(단순 목록 출력, 일별 구성 안 함)
+ * 1. 조회 기간 내 이벤트 생성이 필요한 반복 이벤트 주체 조회
+ * 2. 이벤트 생성
+ * 3. 조건에 따라 일정 이벤트 정보 목록 조회
  * @author O2LEE
  *
  */
@@ -58,7 +58,7 @@ private static final Logger logger = LoggerFactory.getLogger( ActionSimpleListWi
 			unitNames = userManagerService.listUnitNamesWithPerson( personName );
 			groupNames = userManagerService.listGroupNamesByPerson( personName );
 			if( ListTools.isEmpty( wi.getCalendarIds()  )) {
-				//查询用户可以看到的所有CalendarIds
+				//사용자가 볼 수 있는 모든 CalendarIds 조회
 				wi.setCalendarIds( calendarServiceAdv.listWithCondition(personName, unitNames, groupNames) );
 			}
 			if( ListTools.isNotEmpty( wi.getCalendarIds()  ) ) {
@@ -67,7 +67,7 @@ private static final Logger logger = LoggerFactory.getLogger( ActionSimpleListWi
 			}
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionEventProcess( e, "系统根据用户权限查询日历信息ID列表时发生异常." );
+			Exception exception = new ExceptionEventProcess( e, "사용자 권한으로 캘린더 ID 목록을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -82,7 +82,7 @@ private static final Logger logger = LoggerFactory.getLogger( ActionSimpleListWi
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "将所有查询到的日历信息对象转换为可以输出的信息时发生异常." );
+					Exception exception = new ExceptionEventProcess( e, "조회한 캘린더 정보를 출력 정보로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -94,28 +94,28 @@ private static final Logger logger = LoggerFactory.getLogger( ActionSimpleListWi
 
 	public static class Wi{
 
-		@FieldDescribe("日历账号ID")
+		@FieldDescribe("캘린더 계정 ID")
 		private List<String> calendarIds = null;
 
-		@FieldDescribe("信息类别: CAL_EVENT | TASK_EVENT")
+		@FieldDescribe("정보 유형: CAL_EVENT | TASK_EVENT")
 		private String eventType = "CAL_EVENT";
 
-		@FieldDescribe("信息来源: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
+		@FieldDescribe("정보 출처: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
 		private String source;
 
-		@FieldDescribe("事件标题 或者 备注信息 模糊搜索")
+		@FieldDescribe("이벤트 제목 또는 비고 정보 유사 검색")
 		private String key = null;
 
-		@FieldDescribe("查询开始时间")
+		@FieldDescribe("조회 시작 시간")
 		private Date startTime = null;
 
-		@FieldDescribe("查询结束时间")
+		@FieldDescribe("조회 종료 시간")
 		private Date endTime = null;
 
-		@FieldDescribe("创建者")
+		@FieldDescribe("작성자")
 	    private String createPerson = null;
 
-		@FieldDescribe("查询用户")
+		@FieldDescribe("조회 사용자")
 		private String person;
 
 		public String getEventType() {

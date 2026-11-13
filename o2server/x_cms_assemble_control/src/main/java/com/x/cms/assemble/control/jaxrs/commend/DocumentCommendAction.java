@@ -30,17 +30,17 @@ import com.x.base.core.project.logger.LoggerFactory;
  * @author sword
  */
 @Path("commend")
-@JaxrsDescribe("点赞信息管理")
+@JaxrsDescribe("좋아요 정보 관리")
 public class DocumentCommendAction extends StandardJaxrsAction {
 
 	private Logger logger = LoggerFactory.getLogger(DocumentCommendAction.class);
 
-	@JaxrsMethodDescribe(value = "根据标识获取点赞对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "식별자로 좋아요 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("评论ID") @PathParam("id") String id) {
+	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("댓글ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -52,14 +52,14 @@ public class DocumentCommendAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示点赞对象.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "좋아요 객체 페이지 목록.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+						   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

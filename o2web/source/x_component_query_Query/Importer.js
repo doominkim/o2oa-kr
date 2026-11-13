@@ -4,14 +4,14 @@ MWF.require("MWF.widget.Common", null, false);
 MWF.require("MWF.xScript.Macro", null, false);
 MWF.require("o2.widget.Dialog", null, false);
 MWF.xDesktop.requireApp("query.Query", "lp."+o2.language, null, false);
-/** @classdesc Importer 数据中心的导入模型。
+/** @classdesc Importer 데이터 센터의 가져오기 모델.
  * @class
- * @o2cn 导入模型
+ * @o2cn 가져오기 모델
  * @o2category QueryImporter
  * @o2range {QueryImporter}
  * @hideconstructor
  * @example
- * //在导入模型的事件中获取该类
+ * //가져오기 모델 이벤트에서 이 클래스 조회
  * var view = this.target;
  * */
 MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
@@ -23,80 +23,80 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
             "style": "default",
             "moduleEvents": [
                 /**
-                 * 加载importer（导入模型对象）的时候执行。可通过this.target获取当前对象。
+                 * importer(가져오기 모델 객체)를 불러올 때 실행. this.target으로 현재 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Importer#queryLoad
                  */
                 "queryLoad",
                 /**
-                 * 导入前触发，this.event指向导入的数据，您可以通过修改this.event来修改数据。
+                 * 가져오기 전 발생, this.event는 가져올 데이터이며 this.event를 수정해 데이터를 변경할 수 있음.
                  * @event MWF.xApplication.query.Query.Importer#beforeImport
                  * @example
-                 * <caption>this.event数据格式如下：</caption>
+                 * <caption>this.event 데이터 형식은 다음과 같음:</caption>
                  *[
-                 *  [ "标题一","张三","男","大学本科","计算机","2001-1-2","2019-9-2" ], //第一行数据
-                 *  [ "标题二","李四","男","大学专科","数学","1998-1-2","2018-9-2" ]  //第二行数据
+                 *  [ "제목1","홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ], //첫 번째 행 데이터
+                 *  [ "제목2","김철수","남","전문대","수학","1998-1-2","2018-9-2" ]  //두 번째 행 데이터
                  *]
                  */
                 "beforeImport",
                 /**
-                 * 前台校验成功，并且后台执行完导入后触发，this.event指向后台返回的导入结果。
+                 * 프런트 검증 성공 후 서버에서 가져오기를 마친 뒤 발생, this.event는 서버가 반환한 가져오기 결과.
                  * @event MWF.xApplication.query.Query.Importer#afterImport
                  * @example
-                 * <caption>this.event格式如下：</caption>
+                 * <caption>this.event 형식은 다음과 같음:</caption>
                  * {
-                 *     "status": "导入成功", //导入结果：状态有 "导入成功","部分成功","导入失败"
-                 *     "data": {}, //前台组织好的需要导入的数据
-                 *     "rowList": [], //前台组织的行对象数组
-                 *     "count" : 10, //导入总数量
-                 *     "failCount": 0, //失败数量
-                 *     "distribution": "" //导入时候时的错误信息
+                 *     "status": "가져오기 성공", //가져오기 결과: 상태는 "가져오기 성공","일부 성공","가져오기 실패"
+                 *     "data": {}, //프런트에서 구성한 가져올 데이터
+                 *     "rowList": [], //프런트에서 구성한 행 객체 배열
+                 *     "count" : 10, //가져오기 총 개수
+                 *     "failCount": 0, //실패 개수
+                 *     "distribution": "" //가져오기 시 오류 정보
                  * }
                  */
                 "afterImport",
                 /**
-                 * 数据已经生成，前台进行数据校验时触发，this.event指向导入的数据。
+                 * 데이터가 생성되어 프런트에서 데이터 검증 시 발생, this.event는 가져올 데이터.
                  * @event MWF.xApplication.query.Query.Importer#validImport
                  * @example
-                 * <caption>this.event数据格式如下：</caption>
+                 * <caption>this.event 데이터 형식은 다음과 같음:</caption>
                  * {
                  *     "data" : [
-                 *          [ "标题一","张三","男","大学本科","计算机","2001-1-2","2019-9-2" ], //第一行数据
-                 *          [ "标题二","李四","男","大学专科","数学","1998-1-2","2018-9-2" ]  //第二行数据
+                 *          [ "제목1","홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ], //첫 번째 행 데이터
+                 *          [ "제목2","김철수","남","전문대","수학","1998-1-2","2018-9-2" ]  //두 번째 행 데이터
                  * 	    ],
-                 *     "rowList": [], //导入的行对象，数据格式常见本章API的afterCreateRowData说明。
-                 *     "validted" : true  //是否校验通过，可以在本事件中修改该参数，确定是否强制导入
+                 *     "rowList": [], //가져온 행 객체, 데이터 형식은 이 장 API의 afterCreateRowData 설명 참고.
+                 *     "validted" : true  //검증 통과 여부, 이 이벤트에서 수정해 강제 가져오기 여부를 결정할 수 있음
                  * }
                  */
                 "validImport",
                 /**
-                 * 创建每行需要导入的数据前触发，this.event指向当前行对象，您可以通过修改this.event.importData来修改数据。
+                 * 행별 가져올 데이터를 생성하기 전에 발생. this.event는 현재 행 객체를 가리키며, this.event.importData를 수정해 데이터를 변경할 수 있음.
                  * @event MWF.xApplication.query.Query.Importer#beforeCreateRowData
                  */
                 "beforeCreateRowData",
                 /**
-                 * 创建每行需要导入的数据后触发，this.event指向当前行对象。
+                 * 가져올 각 행의 데이터를 생성한 후에 발생, this.event는 현재 행 객체를 가리킵니다.
                  * @event MWF.xApplication.query.Query.Importer#afterCreateRowData
                  * @example
-                 * <caption>this.event格式如下：</caption>
+                 * <caption>this.event 형식은 다음과 같음:</caption>
                  * {
-                 *     "importedData": [ "标题一","张三","男","大学本科","计算机","2001-1-2","2019-9-2" ], //导入的数据
-                 *     "data" : {//根据导入模型生成的业务数据
-                 *  	    "subject", "标题一", //subject为导入模型列配置的路径
-                 *  	 	"name" : "张三",
+                 *     "importedData": [ "제목1","홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ], //가져온 데이터
+                 *     "data" : {//가져오기 모델로 생성한 업무 데이터
+                 *  	    "subject", "제목1", //subject는 가져오기 모델 열 설정의 경로
+                 *  	 	"name" : "홍길동",
                  *  	    ...
                  *     },
-                 *     "document": { //如果导入目标是内容管理，则包含document对象
-                 *          "title": "标题一"
+                 *     "document": { //가져오기 대상이 콘텐츠 관리이면 document 객체 포함
+                 *          "title": "제목1"
                  *          "identity": "xxx@xxx@I"
                  *          ...
                  *     },
-                 *     "work": { //如果导入目标是流程管理，则包含work对象
-                 *          "title": "标题一"
+                 *     "work": { //가져오기 대상이 프로세스 관리이면 work 객체 포함
+                 *          "title": "제목1"
                  *          "identity": "xxx@xxx@I"
                  *          ...
                  *     },
-                 *     "errorTextList" : [],  //错误信息
-                 *     "errorTextListExcel": [] //在出错界面导出Excel时的错误信息
+                 *     "errorTextList" : [],  //오류 정보
+                 *     "errorTextListExcel": [] //오류 화면에서 Excel 내보내기 시 오류 정보
                  * }
                  */
                 "afterCreateRowData"
@@ -285,12 +285,12 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
             return data;
         },
         doImportData: function(){
-            //创建数据
+            //데이터 생성
             // this.rowList.each( function( row, i ){
             //     row.createData();
             // }.bind(this));
 
-            //再次校验数据（计算的内容）
+            //데이터 재검증(계산된 내용)
             var date = new Date();
 
             //var flag = true;
@@ -419,7 +419,7 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
                         this.json.data.columnList.each( function (columnJson, i) {
                             var d = lineData[ i ];
                             var text = typeOf(d) === "string" ? ( d || '' ).replace(/&#10;/g,"<br/>") : d;
-                            htmlArray.push( "<td style='"+contentStyle+"'>"+ o2.txt(text) +"</td>" ); //换行符&#10;
+                            htmlArray.push( "<td style='"+contentStyle+"'>"+ o2.txt(text) +"</td>" ); //줄바꿈 문자&#10;
                         });
                         htmlArray.push( "<td style='"+validContentStyles+"'>"+( row.errorTextList ? row.errorTextList.join("<br/>") : "" )+"</td>" );
                         htmlArray.push( "</tr>" );
@@ -427,7 +427,7 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
                     }.bind(this));
             return htmlArray.join("");
         },
-        //必须校验的数据
+        //필수 검증 데이터
         checkNecessaryImportedData: function(){
             var flag = true;
 
@@ -451,7 +451,7 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
                 });
             })
         },
-        //校验Excel中的数据
+        //Excel 데이터 검증
         checkImportedData : function(){
             var flag = true;
 
@@ -841,7 +841,7 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
             return colWidthArr;
         },
         getDateIndexArray : function(){
-            var dateIndexArr = []; //日期格式列下标
+            var dateIndexArr = []; //날짜 형식 열 인덱스
             this.json.data.columnList.each( function (columnJson, i) {
                 var dataType = this.json.type === "dynamicTable" ? columnJson.dataType_Querytable : columnJson.dataType_CMSProcess;
                 switch ( dataType ) {
@@ -859,7 +859,7 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
         },
 
 
-        //api 使用 开始
+        //api 사용 시작
 
         confirm: function (type, e, title, text, width, height, ok, cancel, callback, mask, style) {
             this.app.confirm(type, e, title, text, width, height, ok, cancel, callback, mask, style)
@@ -870,7 +870,7 @@ MWF.xApplication.query.Query.Importer = MWF.QImporter = new Class(
         notice: function (content, type, target, where, offset, option) {
             this.app.notice(content, type, target, where, offset, option)
         }
-        //api 使用 结束
+        //api 사용 끝
     });
 
 MWF.xApplication.query.Query.Importer.Row = new Class({
@@ -1771,14 +1771,14 @@ MWF.xApplication.query.Query.Importer.ProgressBar = new Class({
             this.actions.getImportModelRecordStatus( this.recordId, function( json ){
                 var data = json.data;
                 this.status = data.status;
-                if( data.status === "待导入" ) { //有其他人正在导入或上次导入还未完成
+                if( data.status === "待导入" ) { //다른 사용자가 가져오기 중이거나 이전 가져오기가 아직 완료되지 않았습니다
                     this.setMessageTitle(this.lp.importWaitingTitle);
                     this.setMessageText(this.lp.importWaitingContent);
-                }else if( data.status === "导入中" ){ //导入中
+                }else if( data.status === "导入中" ){ //가져오기 중
                     this.setMessageTitle( this.lp.importDataTitle );
                     this.setMessageText( this.lp.importDataContent.replace( "{count}", data.executeCount));
                     this.updateProgress( data );
-                }else{ //已经结束, 状态有 "导入成功","部分成功","导入失败"
+                }else{ //종료됨, 상태: "가져오기 성공","부분 성공","가져오기 실패"
                     if( callback )callback( data );
                     if( data.promise && typeOf(data.promise.then) === "function" ){
                         Promise.resolve( data.promise ).then(function () {
@@ -1885,7 +1885,7 @@ MWF.xApplication.query.Query.Importer.ProgressBar = new Class({
             this.setMessageTitle( lp.importPartSuccessTitle );
             var text = lp.importPartSuccessContent.replace("{total}",size).replace("{speed}",speed).replace("{errorCount}",data.failCount).replace("{timeStr}",timeStr);
             this.setMessageText( text );
-        }else{ //导入失败
+        }else{ //가져오기 실패
             var size = data.count;
             this.setMessageTitle( lp.importFailTitle );
             var text = lp.importFailContent.replace("{errorInfo}",data.distribution || "").replace("{total}",size).replace("{timeStr}",timeStr);

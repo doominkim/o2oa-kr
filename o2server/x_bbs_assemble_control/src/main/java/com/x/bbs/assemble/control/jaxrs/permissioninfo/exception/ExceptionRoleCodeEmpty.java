@@ -7,6 +7,6 @@ public class ExceptionRoleCodeEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionRoleCodeEmpty() {
-		super("角色编码roleCode为空， 无法进行查询." );
+		super("역할 코드 roleCode가 비어 있어 조회할 수 없습니다." );
 	}
 }

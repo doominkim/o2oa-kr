@@ -5,25 +5,25 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class ComparePortal extends GsonPropertyObject {
 
-	@FieldDescribe("导入名称")
+	@FieldDescribe("가져오기 이름")
 	private String name;
 
-	@FieldDescribe("导入id")
+	@FieldDescribe("가져오기 id")
 	private String id;
 
-	@FieldDescribe("导入别名")
+	@FieldDescribe("가져오기 별칭")
 	private String alias;
 
-	@FieldDescribe("是否已经存在")
+	@FieldDescribe("이미 존재하는지 여부")
 	private Boolean exist;
 
-	@FieldDescribe("已经存在名称")
+	@FieldDescribe("이미 존재하는 이름")
 	private String existName;
 
-	@FieldDescribe("已经存在id")
+	@FieldDescribe("이미 존재하는 id")
 	private String existId;
 
-	@FieldDescribe("已经存在别名")
+	@FieldDescribe("이미 존재하는 별칭")
 	private String existAlias;
 
 	public String getName() {

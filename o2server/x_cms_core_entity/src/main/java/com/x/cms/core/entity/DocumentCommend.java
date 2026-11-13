@@ -19,12 +19,12 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 文档、评论点赞
+ * 문서, 댓글 좋아요
  *
  * @author O2LEE
  *
  */
-@Schema(name = "DocumentCommend", description = "内容管理文档评论.")
+@Schema(name = "DocumentCommend", description = "콘텐츠 관리 문서 댓글.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.DocumentCommend.table, uniqueConstraints = {
@@ -50,7 +50,7 @@ public class DocumentCommend extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -60,53 +60,53 @@ public class DocumentCommend extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String documentId_FIELDNAME = "documentId";
-	@FieldDescribe("文档ID")
+	@FieldDescribe("문서ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + documentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + documentId_FIELDNAME)
 	private String documentId;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("文档标题")
+	@FieldDescribe("문서 제목")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String commentId_FIELDNAME = "commentId";
-	@FieldDescribe("文档评论ID")
+	@FieldDescribe("문서 댓글 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + commentId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + commentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String commentId;
 
 	public static final String commentTitle_FIELDNAME = "commentTitle";
-	@FieldDescribe("文档评论标题")
+	@FieldDescribe("문서 댓글 제목")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + commentTitle_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String commentTitle;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("文档或评论创建人")
+	@FieldDescribe("문서 또는 댓글 작성자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorPerson;
 
 	public static final String commendPerson_FIELDNAME = "commendPerson";
-	@FieldDescribe("点赞者")
+	@FieldDescribe("좋아요 누른 사용자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + commendPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	@Index(name = TABLE + IndexNameMiddle + commendPerson_FIELDNAME)
 	private String commendPerson;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("点赞类型：document(文档点赞，默认值)、comment(评论点赞)")
+	@FieldDescribe("좋아요 유형: document(문서 좋아요, 기본값), comment(댓글 좋아요)")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + type_FIELDNAME, columnDefinition = "varchar(64) DEFAULT 'document'")
 	@CheckPersist(allowEmpty = true)
 	private String type = COMMEND_TYPE_DOCUMENT;

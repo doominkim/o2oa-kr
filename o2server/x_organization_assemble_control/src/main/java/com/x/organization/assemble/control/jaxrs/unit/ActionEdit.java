@@ -60,7 +60,7 @@ class ActionEdit extends BaseAction {
                 throw new ExceptionNameEmpty();
             }
 
-            /** pick出来的对象需要重新取出 */
+            /** pick으로 가져온 객체는 다시 조회해야 함 */
             emc.beginTransaction(Unit.class);
             unit = emc.find(unit.getId(), Unit.class);
             Gson gsontool = new Gson();
@@ -70,24 +70,24 @@ class ActionEdit extends BaseAction {
                     business.person().pick(ListTools.trim(unit.getControllerList(), true, true)),
                     JpaObject.id_FIELDNAME, String.class, true, true));
             Wi.copier.copy(wi, unit);
-            /** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+            /** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
             if (this.duplicateUniqueWhenNotEmpty(business, unit)) {
                 throw new ExceptionDuplicateUnique(unit.getName(), unit.getUnique());
             }
             if (this.checkNameInvalid(business, unit)) {
                 throw new ExceptionNameInvalid(unit.getName());
             }
-            /** 判断同一级别下name不重复 */
+            /** 같은 레벨에서 name 중복 여부 확인 */
             if (this.duplicateName(business, unit)) {
                 throw new ExceptionDuplicateName(unit.getName());
             }
-            // 现在由于可能修改了上级组织排序,所以都需要重新计算.
+            // 상위 조직 정렬이 변경되었을 수 있으므로 모두 다시 계산함.
             business.unit().adjustInherit(unit);
             emc.check(unit, CheckPersistType.all);
             emc.commit();
             CacheManager.notify(Unit.class);
 
-            /** 判断是否修改了组织级别或组织名称,如果修改了，需要重新计算当前组织及下属组织成员的身份（组织名称，组织级别名称） */
+            /** 조직 레벨이나 조직명이 변경되었는지 확인하고, 변경되었으면 현재 조직과 하위 조직 구성원의 신분(조직명, 조직 레벨명)을 다시 계산 */
             checkFlag = this.checkUnitTypeName(oldUnit, unit);
             if (checkFlag) {
                 this.updateIdentityUnitNameAndUnitLevelName(oldUnit, unit, business);
@@ -115,7 +115,7 @@ class ActionEdit extends BaseAction {
     }
 
     /**
-     * 根据组织标志列出身份列表
+     * 조직 표식으로 신분 목록 조회
      *
      * @param business
      * @param unit
@@ -179,7 +179,7 @@ class ActionEdit extends BaseAction {
     private boolean checkUnitTypeName(Unit oldUnit, Unit unit) throws Exception {
         List<String> oldUnitType = oldUnit.getTypeList();
         List<String> unitType = unit.getTypeList();
-        // 判断两个list是否相同
+        // 두 list가 같은지 확인
         if (oldUnitType.retainAll(unitType) || (!StringUtils.equals(oldUnit.getName(), unit.getName()))
                 || (!StringUtils.equals(oldUnit.getSuperior(), unit.getSuperior()))) {
             return true;

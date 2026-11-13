@@ -31,12 +31,12 @@ import org.glassfish.jersey.media.sse.SseFeature;
  * @author sword
  */
 @Path("chat")
-@JaxrsDescribe("AI智能服务")
+@JaxrsDescribe("AI 지능형 서비스")
 public class ChatAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChatAction.class);
 
-    @JaxrsMethodDescribe(value = "连接ai", action = ActionChat.class)
+    @JaxrsMethodDescribe(value = "ai 연결", action = ActionChat.class)
     @POST
     @Path("completion")
     @Produces(SseFeature.SERVER_SENT_EVENTS)
@@ -50,15 +50,15 @@ public class ChatAction extends StandardJaxrsAction {
         new Thread(() -> actionChat.execute(effectivePerson, sse, eventSink, jsonElement)).start();
     }
 
-    @JaxrsMethodDescribe(value = "分页查找线索.", action = ActionListPaging.class)
+    @JaxrsMethodDescribe(value = "스레드 페이지 조회.", action = ActionListPaging.class)
     @GET
     @Path("list/paging/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listPaging(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+            @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
         ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -70,16 +70,16 @@ public class ChatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据线索分页查找对话.", action = ActionListCompletionPaging.class)
+    @JaxrsMethodDescribe(value = "스레드별 대화 페이지 조회.", action = ActionListCompletionPaging.class)
     @GET
     @Path("list/completion/{clueId}/paging/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listCompletionPaging(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("线索ID") @PathParam("clueId") String clueId,
-            @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+            @JaxrsParameterDescribe("스레드 ID") @PathParam("clueId") String clueId,
+            @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
         ActionResult<List<ActionListCompletionPaging.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -91,14 +91,14 @@ public class ChatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "删除线索.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "스레드 삭제.", action = ActionDelete.class)
     @GET
     @Path("delete/{clueId}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void delete(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("线索标识") @PathParam("clueId") String clueId) {
+            @JaxrsParameterDescribe("스레드 식별자") @PathParam("clueId") String clueId) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -110,7 +110,7 @@ public class ChatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "写入对话扩展数据", action = ActionWriteCompletion.class)
+    @JaxrsMethodDescribe(value = "대화 확장 데이터 기록", action = ActionWriteCompletion.class)
     @POST
     @Path("write/completion/extra")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

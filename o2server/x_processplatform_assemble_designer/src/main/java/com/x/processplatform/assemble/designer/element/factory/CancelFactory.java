@@ -39,7 +39,7 @@ public class CancelFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的cancel */
+	/** 양식을 사용하는 cancel 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Cancel.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

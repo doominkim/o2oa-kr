@@ -43,7 +43,7 @@ abstract class BaseAction extends StandardJaxrsAction {
             String allText = PdfRegularInvoiceTools.replace(fullText).replace("（", "(")
                     .replace("）", ")").replace("￥", "¥");
             invoice.setContent(fullText);
-            LOGGER.info("{}-文件解析的发票内容:{}", invoice.getName(), allText);
+            LOGGER.info("{}-파일에서 파싱한 영수증 내용: {}", invoice.getName(), allText);
             if (allText.contains(PdfRailwayInvoiceTools.KEY)) {
                 LOGGER.info("解析铁路电子发票各项信息");
                 PdfRailwayInvoiceTools.getInvoice(allText, invoice);
@@ -52,7 +52,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                 PdfElectronicInvoiceTools.getFullElectronicInvoice(allText, pageWidth, doc,
                         firstPage, invoice);
             } else {
-                LOGGER.info("解析包含密码区发票各项信息");
+                LOGGER.info("비밀번호 영역이 포함된 영수증의 각 항목 정보 파싱");
                 PdfRegularInvoiceTools.getRegularInvoice(allText, pageWidth, doc, firstPage,
                         invoice);
             }
@@ -60,7 +60,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                 try {
                     invoice.setInvoiceDate(DateTools.parse(invoice.getDate(), "yyyy年MM月dd日"));
                 } catch (Exception e) {
-                    LOGGER.warn("发票日期：{}，转换错误：{}", invoice.getDate(), e.getMessage());
+                    LOGGER.warn("영수증 일자: {}, 변환 오류: {}", invoice.getDate(), e.getMessage());
                 }
             }
             if (CollectionUtils.isNotEmpty(invoice.getProperties().getDetailList())) {

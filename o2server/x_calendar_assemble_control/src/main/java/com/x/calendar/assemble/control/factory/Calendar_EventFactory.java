@@ -20,7 +20,7 @@ import com.x.calendar.core.tools.CriteriaBuilderTools;
 
 
 /**
- * 日历任务记录信息表功能服务类
+ * 캘린더 작업 기록 정보 테이블 기능 서비스 클래스
  * @author O2LEE
  */
 public class Calendar_EventFactory extends AbstractFactory {
@@ -30,7 +30,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的日历任务记录信息对象
+	 * 지정한 Id의 캘린더 작업 기록 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -40,7 +40,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的日历任务记录信息列表
+	 * 지정한 Id의 캘린더 작업 기록 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -71,7 +71,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询指定的日历信息ID列表
+	 * 조건으로 지정한 캘린더 정보 ID 목록 조회
 	 * @param key
 	 * @param eventType
 	 * @param source
@@ -114,7 +114,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 			}
 		}
 
-		//权限过滤
+		//권한 필터링
 		Predicate permission = null;
 		if( StringUtils.isNotEmpty( personName )) {
 			permission =CriteriaBuilderTools.predicate_or( cb, permission, cb.isMember(personName, root.get(Calendar_Event_.manageablePersonList)));
@@ -131,7 +131,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 		}
 		p = CriteriaBuilderTools.predicate_and( cb, p, permission );
 		
-		//模糊搜索
+		//유사 검색
 		Predicate p_key = null;
 		if( StringUtils.isNotEmpty( key )) {
 			p_key = cb.like(root.get(Calendar_Event_.title), key);
@@ -146,7 +146,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据重复主体以及日期查询指定的日历记录信息ID列表
+	 * 반복 주체와 날짜로 지정한 캘린더 기록 정보 ID 목록 조회
 	 * @param repeatMasterId
 	 * @param startTime
 	 * @param endTime
@@ -165,7 +165,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 		}
 		if( startTime != null ) {
 			if( endTime == null ) {
-				//查询startTime之后的所有记录
+				//startTime 이후의 모든 기록 조회
 				p = CriteriaBuilderTools.predicate_and( cb, p, cb.greaterThanOrEqualTo( root.get(Calendar_Event_.startTime), startTime ));
 			}else {
 				p = CriteriaBuilderTools.predicate_and( cb, p, cb.lessThanOrEqualTo( root.get(Calendar_Event_.startTime), endTime ));
@@ -190,7 +190,7 @@ public class Calendar_EventFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据开始结束时间以及标题和重复主体ID
+	 * 시작·종료 시간, 제목, 반복 주체 ID 기준
 	 * @param calendar_Event
 	 * @return
 	 * @throws Exception

@@ -116,7 +116,7 @@ public class GroupFactory extends AbstractFactory {
 		return this.entityManagerContainer().list(Group.class, ids);
 	}
 
-	// @MethodDescribe("获取指定指定群组所在的群组.")
+	// @MethodDescribe("지정 그룹이 속한 그룹 조회.")
 	public List<String> listSupDirect(String id) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Group.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -127,7 +127,7 @@ public class GroupFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	// @MethodDescribe("获取指定指定群组所在的群组,并递归其上级群组.")
+	// @MethodDescribe("지정 그룹이 속한 그룹 조회, 상위 그룹 재귀 포함.")
 	public List<String> listSupNested(String id) throws Exception {
 		ListOrderedSet<String> set = new ListOrderedSet<>();
 		this.supNested(id, set);
@@ -139,7 +139,7 @@ public class GroupFactory extends AbstractFactory {
 		return this.entityManagerContainer().list(Group.class, ids);
 	}
 
-	// @MethodDescribe("上级群组循环递归.")
+	// @MethodDescribe("상위 그룹 순환 재귀.")
 	private void supNested(String id, ListOrderedSet<String> set) throws Exception {
 		List<String> list = new ArrayList<String>();
 		for (String str : this.listSupDirect(id)) {
@@ -160,7 +160,7 @@ public class GroupFactory extends AbstractFactory {
 		return this.entityManagerContainer().list(Group.class, ids);
 	}
 
-	// @MethodDescribe("获取指定个人直接所在的群组.")
+	// @MethodDescribe("지정 개인이 직접 속한 그룹 조회.")
 	public List<String> listSupDirectWithPerson(String id) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Group.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -171,7 +171,7 @@ public class GroupFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	// @MethodDescribe("获取指定身份直接所在的群组.")
+	// @MethodDescribe("지정 신분이 직접 속한 그룹 조회.")
 	public List<String> listSupDirectWithIdentity(String id) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Group.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -182,7 +182,7 @@ public class GroupFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	// @MethodDescribe("获取指定组织直接所在的群组.")
+	// @MethodDescribe("지정한 조직이 직접 속한 그룹 조회.")
 	public List<String> listSupDirectWithUnit(String id) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Group.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -198,7 +198,7 @@ public class GroupFactory extends AbstractFactory {
 		return this.entityManagerContainer().list(Group.class, ids);
 	}
 
-	// @MethodDescribe("获取指定个人所在的群组,并递归其上级群组.")
+	// @MethodDescribe("지정 개인이 속한 그룹 조회, 상위 그룹 재귀 포함.")
 	public List<String> listSupNestedWithPerson(String id) throws Exception {
 		ListOrderedSet<String> set = new ListOrderedSet<>();
 		List<String> list = new ArrayList<>();
@@ -226,7 +226,7 @@ public class GroupFactory extends AbstractFactory {
 		return this.entityManagerContainer().list(Group.class, ids);
 	}
 
-	// @MethodDescribe("查找群组的直接群组成员.")
+	// @MethodDescribe("그룹의 직접 그룹 멤버 조회.")
 	public List<String> listSubDirect(String id) throws Exception {
 		Group group = this.entityManagerContainer().find(id, Group.class, ExceptionWhen.none);
 		EntityManager em = this.entityManagerContainer().get(Group.class);
@@ -238,14 +238,14 @@ public class GroupFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	// @MethodDescribe("查找群组的全部群组成员,包括嵌套的群组成员.")
+	// @MethodDescribe("그룹의 전체 그룹 멤버 조회, 중첩 그룹 멤버 포함.")
 	public List<String> listSubNested(String id) throws Exception {
 		ListOrderedSet<String> set = new ListOrderedSet<String>();
 		this.subNested(id, set);
 		return set.asList();
 	}
 
-	// @MethodDescribe("递归循环调用群组查找。.")
+	// @MethodDescribe("그룹 재귀 순환 조회.")
 	private void subNested(String id, ListOrderedSet<String> set) throws Exception {
 		List<String> list = new ArrayList<String>();
 		for (String str : this.listSubDirect(id)) {

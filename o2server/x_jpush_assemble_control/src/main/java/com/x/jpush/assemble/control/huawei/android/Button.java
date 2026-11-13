@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.x.jpush.assemble.control.huawei.ValidatorUtils;
 
 /**
- * 功能描述
+ * 기능 설명
  *
  * @author l00282963
  * @since 2020-01-19

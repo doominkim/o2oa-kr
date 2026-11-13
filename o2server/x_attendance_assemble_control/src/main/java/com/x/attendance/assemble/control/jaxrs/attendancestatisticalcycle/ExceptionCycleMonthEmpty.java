@@ -7,6 +7,6 @@ class ExceptionCycleMonthEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionCycleMonthEmpty() {
-		super("系统未获取到查询参数周期月份month，无法进行数据查询");
+		super("조회 매개변수인 기간 월 month가 없어 데이터를 조회할 수 없습니다");
 	}
 }

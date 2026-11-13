@@ -33,7 +33,7 @@ public class ActionImConfig extends BaseAction {
 			}
 		}
 		if (wo.getRevokeOutMinute() == null || wo.getRevokeOutMinute() <= 0) {
-			wo.setRevokeOutMinute(2); // 默认2分钟
+			wo.setRevokeOutMinute(2); // 기본 2분
 		}
 		wo.setVersionNo(310);
 		wo.setChangelog("그룹 멤버 직접 나가기 등 기능이 추가되었습니다!");
@@ -45,23 +45,23 @@ public class ActionImConfig extends BaseAction {
 
 		private static final long serialVersionUID = 6217331123000062134L;
 
-		@FieldDescribe("是否开启群成员自主退出的功能.")
+		@FieldDescribe("그룹 구성원 자율 나가기 기능 사용 여부.")
 		private Boolean enableGroupMemberQuitSelf;
-		@FieldDescribe("是否开启清空聊天记录的功能.")
+		@FieldDescribe("채팅 기록 비우기 기능 사용 여부.")
 		private Boolean enableClearMsg;
-		@FieldDescribe("是否开启撤回聊天消息的功能.")
+		@FieldDescribe("채팅 메시지 회수 기능 사용 여부.")
 		private Boolean enableRevokeMsg;
-		@FieldDescribe("是否使用onlyOffice预览文件(需要先安装onlyOffice扩展应用).")
+		@FieldDescribe("onlyOffice로 파일 미리보기 사용 여부(onlyOffice 확장 앱 설치 필요).")
 		private Boolean enableOnlyOfficePreview;
-		@FieldDescribe("是否显示所有顶级单位.")
+		@FieldDescribe("모든 최상위 단위 표시 여부.")
 		private Boolean showAllTopUnit;
-		@FieldDescribe("撤回时效（分钟数）")
+		@FieldDescribe("회수 시효(분)")
 		private Integer revokeOutMinute;
-		@FieldDescribe("会话检查脚本.")
+		@FieldDescribe("대화 검사 스크립트.")
 		private String conversationCheckInvoke;
-		@FieldDescribe("版本号.")
+		@FieldDescribe("버전 번호.")
 		private int versionNo;
-		@FieldDescribe("更新内容.")
+		@FieldDescribe("업데이트 내용.")
 		private String changelog;
 
 		public Boolean getShowAllTopUnit() {

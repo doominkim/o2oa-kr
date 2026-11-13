@@ -116,11 +116,11 @@ public class ActionCreateFormProcessPlatform extends BaseAction {
 
 		private static final long serialVersionUID = 6580325043986545552L;
 
-		@FieldDescribe("会议标识")
+		@FieldDescribe("회의 식별자")
 		private String meeting;
-		@FieldDescribe("工作标识")
+		@FieldDescribe("업무 문서 식별자")
 		private String work;
-		@FieldDescribe("附件标识")
+		@FieldDescribe("첨부파일 식별자")
 		private List<String> attachmentList;
 
 		public String getMeeting() {

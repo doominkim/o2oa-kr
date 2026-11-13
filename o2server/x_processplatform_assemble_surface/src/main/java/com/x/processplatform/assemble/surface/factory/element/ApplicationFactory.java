@@ -35,7 +35,7 @@ public class ApplicationFactory extends ElementFactory {
 		return this.pick(flag, Application.class);
 	}
 
-	/* 判断用户是否有管理权限 */
+	/* 사용자의 관리 권한 여부 판단 */
 	public boolean allowControl(EffectivePerson effectivePerson, Application application) throws Exception {
 		if (effectivePerson.isManager()) {
 			return true;
@@ -51,7 +51,7 @@ public class ApplicationFactory extends ElementFactory {
 		return false;
 	}
 
-	/* 判断是否有阅读的权限 */
+	/* 열람 권한 여부 판단 */
 	public boolean allowRead(EffectivePerson effectivePerson, List<String> roles, List<String> identities,
 			List<String> units, Application application) throws Exception {
 		if (null == application) {
@@ -80,7 +80,7 @@ public class ApplicationFactory extends ElementFactory {
 		return false;
 	}
 
-	/* 获取用户可启动的流程，如果applicationId 为空则取到所有可启动流程 */
+	/* 사용자가 시작할 수 있는 프로세스 조회, applicationId가 비어 있으면 시작 가능한 모든 프로세스 조회 */
 	public List<String> listAvailable(EffectivePerson effectivePerson, List<String> roles, List<String> identities,
 			List<String> units) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Application.class);

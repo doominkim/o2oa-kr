@@ -35,7 +35,7 @@ public class IndexAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(IndexAction.class);
 
-	@JaxrsMethodDescribe(value = "目录中索引数量,category,type,key为空统计search目录数量.", action = ActionDirectoryDocumentCount.class)
+	@JaxrsMethodDescribe(value = "디렉터리의 인덱스 개수, category, type, key가 비어 있으면 search 디렉터리 개수 집계.", action = ActionDirectoryDocumentCount.class)
 	@POST
 	@Path("directory/document/count")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -53,7 +53,7 @@ public class IndexAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新扩展文档.", action = ActionUpdateExtraDocument.class)
+	@JaxrsMethodDescribe(value = "확장 문서 업데이트.", action = ActionUpdateExtraDocument.class)
 	@POST
 	@Path("update/extra/document")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

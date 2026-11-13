@@ -41,7 +41,7 @@ import com.x.base.core.project.tools.StringTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "FileInfo", description = "内容管理文件信息.")
+@Schema(name = "FileInfo", description = "콘텐츠 관리 파일 정보.")
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.FileInfo.table, uniqueConstraints = {
@@ -108,13 +108,13 @@ public class FileInfo extends StorageObject {
 		this.properties = properties;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
@@ -122,26 +122,26 @@ public class FileInfo extends StorageObject {
 	private Date lastUpdateTime;
 
 	public static final String storage_FIELDNAME = "storage";
-	@FieldDescribe("关联的存储名称.")
+	@FieldDescribe("연결된 저장소 이름.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + storage_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + storage_FIELDNAME)
 	private String storage;
 
 	public static final String site_FIELDNAME = "site";
-	@FieldDescribe("附件框分类.")
+	@FieldDescribe("첨부파일 상자 분류.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + site_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String site;
 
 	public static final String businessId_FIELDNAME = "businessId";
-	@FieldDescribe("附件业务ID，需要和document一起来确定唯一的ID.")
+	@FieldDescribe("첨부파일 업무 ID, document와 함께 고유 ID를 결정해야 함.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + businessId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String businessId;
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)
@@ -149,7 +149,7 @@ public class FileInfo extends StorageObject {
 	private FileInfoProperties properties;
 
 	public static final String OBJECTSECURITYCLEARANCE_FIELDNAME = "objectSecurityClearance";
-	@FieldDescribe("客体密级标识.")
+	@FieldDescribe("객체 보안 등급 식별자.")
 	@Column(name = ColumnNamePrefix + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -221,119 +221,119 @@ public class FileInfo extends StorageObject {
 	}
 	/*
 	 * =========================================================================
-	 * ========= 以上为 JpaObject 默认字段
+	 * ========= 위는 JpaObject 기본 필드
 	 * =========================================================================
 	 * =========
 	 */
 
 	/*
 	 * =========================================================================
-	 * ========= 以下为具体不同的业务及数据表字段要求
+	 * ========= 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =========================================================================
 	 * =========
 	 */
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件真实名称")
+	@FieldDescribe("파일 실제 이름")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
 	private String name;
 
 	public static final String cloudId_FIELDNAME = "cloudId";
-	@FieldDescribe("云文件ID")
+	@FieldDescribe("클라우드 파일 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + cloudId_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
 	private String cloudId;
 
 	public static final String fileName_FIELDNAME = "fileName";
-	@FieldDescribe("服务器上编码后的文件名,为了方便辨识带扩展名")
+	@FieldDescribe("서버에서 인코딩된 파일 이름, 식별 편의를 위해 확장자 포함")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ fileName_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
 	private String fileName;
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("文件所属应用ID")
+	@FieldDescribe("파일 소속 앱ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appId;
 
 	public static final String categoryId_FIELDNAME = "categoryId";
-	@FieldDescribe("文件所属分类ID")
+	@FieldDescribe("파일 소속 분류ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + categoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryId;
 
 	public static final String documentId_FIELDNAME = "documentId";
-	@FieldDescribe("文件所属文档ID")
+	@FieldDescribe("파일 소속 문서ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + documentId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + documentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String documentId;
 
 	public static final String fileType_FIELDNAME = "fileType";
-	@FieldDescribe("文件类别：云文件（CLOUD） | 附件(ATTACHMENT)")
+	@FieldDescribe("파일 유형: 클라우드 파일(CLOUD) | 첨부파일(ATTACHMENT)")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + fileType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fileType;
 
 	public static final String fileExtType_FIELDNAME = "fileExtType";
-	@FieldDescribe("文件类别：PICTURE | WORD | EXCEL | PPT | ZIP | TXT | OTHER")
+	@FieldDescribe("파일 유형: PICTURE | WORD | EXCEL | PPT | ZIP | TXT | OTHER")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + fileExtType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fileExtType;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("根据流文件判断的文件类型.")
+	@FieldDescribe("스트림 파일로 판단한 파일 유형.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String type;
 
 	public static final String fileHost_FIELDNAME = "fileHost";
-	@FieldDescribe("文件存储主机名")
+	@FieldDescribe("파일 저장 호스트 이름")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + fileHost_FIELDNAME)
 	private String fileHost;
 
 	public static final String filePath_FIELDNAME = "filePath";
-	@FieldDescribe("文件存储路径")
+	@FieldDescribe("파일 저장 경로")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + filePath_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String filePath;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("文件说明")
+	@FieldDescribe("파일 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String creatorUid_FIELDNAME = "creatorUid";
-	@FieldDescribe("创建者UID")
+	@FieldDescribe("생성자 UID")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ creatorUid_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorUid;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名")
+	@FieldDescribe("확장자")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
 	private String extension;
 
 	public static final String seqNumber_FIELDNAME = "seqNumber";
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	@Column(name = ColumnNamePrefix + seqNumber_FIELDNAME)
 	@CheckPersist(fileNameString = true, allowEmpty = true)
 	private Integer seqNumber = 1000;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@Index(name = TABLE + "_length")
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String text_FIELDNAME = "text";
-	@FieldDescribe("文本.")
+	@FieldDescribe("텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_100M, name = ColumnNamePrefix + text_FIELDNAME)
@@ -341,7 +341,7 @@ public class FileInfo extends StorageObject {
 	private String text;
 
 	public static final String readIdentityList_FIELDNAME = "readIdentityList";
-	@FieldDescribe("可以访问的身份.")
+	@FieldDescribe("접근 가능한 신분.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readIdentityList_FIELDNAME
@@ -353,7 +353,7 @@ public class FileInfo extends StorageObject {
 	private List<String> readIdentityList;
 
 	public static final String readUnitList_FIELDNAME = "readUnitList";
-	@FieldDescribe("可以访问的组织.")
+	@FieldDescribe("접근 가능한 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readUnitList_FIELDNAME
@@ -365,7 +365,7 @@ public class FileInfo extends StorageObject {
 	private List<String> readUnitList;
 
 	public static final String editIdentityList_FIELDNAME = "editIdentityList";
-	@FieldDescribe("可以修改的用户.")
+	@FieldDescribe("수정 가능한 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ editIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + editIdentityList_FIELDNAME
@@ -377,7 +377,7 @@ public class FileInfo extends StorageObject {
 	private List<String> editIdentityList;
 
 	public static final String editUnitList_FIELDNAME = "editUnitList";
-	@FieldDescribe("可以修改的组织.")
+	@FieldDescribe("수정 가능한 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ editUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + editUnitList_FIELDNAME
@@ -389,7 +389,7 @@ public class FileInfo extends StorageObject {
 	private List<String> editUnitList;
 
 	public static final String controllerIdentityList_FIELDNAME = "controllerIdentityList";
-	@FieldDescribe("可以管理的用户.")
+	@FieldDescribe("관리 가능한 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ controllerIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -401,7 +401,7 @@ public class FileInfo extends StorageObject {
 	private List<String> controllerIdentityList;
 
 	public static final String controllerUnitList_FIELDNAME = "controllerUnitList";
-	@FieldDescribe("可以管理的组织.")
+	@FieldDescribe("관리 가능한 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ controllerUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -413,13 +413,13 @@ public class FileInfo extends StorageObject {
 	private List<String> controllerUnitList;
 
 	public static final String deepPath_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
 	private Boolean deepPath;
 
 	/**
-	 * 获取文件所属应用ID
+	 * 파일 소속 앱 ID 조회
 	 *
 	 * @return
 	 */
@@ -428,7 +428,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置文件所属应用ID
+	 * 파일 소속 앱 ID 설정
 	 *
 	 * @param appId
 	 */
@@ -437,7 +437,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取分类说明信息
+	 * 분류 설명 정보 조회
 	 *
 	 * @return
 	 */
@@ -446,7 +446,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置分类说明信息
+	 * 분류 설명 정보 설정
 	 *
 	 * @param description
 	 */
@@ -455,7 +455,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取分类创建者帐号
+	 * 분류 작성자 계정 조회
 	 *
 	 * @return
 	 */
@@ -464,7 +464,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置分类创建者帐号
+	 * 분류 작성자 계정 설정
 	 *
 	 * @param creatorUid
 	 */
@@ -473,7 +473,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取文件名称
+	 * 파일 이름 조회
 	 *
 	 * @return
 	 */
@@ -482,7 +482,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置文件名称
+	 * 파일 이름 설정
 	 *
 	 * @param fileName
 	 */
@@ -491,7 +491,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取文件所属分类ID
+	 * 파일 소속 분류 ID 조회
 	 *
 	 * @return
 	 */
@@ -500,7 +500,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置文件所属分类ID
+	 * 파일 소속 분류 ID 설정
 	 *
 	 * @param categoryId
 	 */
@@ -509,7 +509,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取文件所属应用ID
+	 * 파일 소속 앱 ID 조회
 	 *
 	 * @return
 	 */
@@ -518,7 +518,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置文件所属应用ID
+	 * 파일 소속 앱 ID 설정
 	 *
 	 * @param documentId
 	 */
@@ -527,7 +527,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取文件的类别：文件（FILE）|附件(ATTACHMENT)
+	 * 파일 유형 조회: 파일(FILE)|첨부파일(ATTACHMENT)
 	 *
 	 * @return
 	 */
@@ -536,7 +536,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置文件的类别：文件（FILE）|附件(ATTACHMENT)
+	 * 파일 유형 설정: 파일(FILE)|첨부파일(ATTACHMENT)
 	 *
 	 * @param fileType
 	 */
@@ -545,7 +545,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取文件存储的主机名
+	 * 파일 저장 호스트 이름 조회
 	 *
 	 * @return
 	 */
@@ -554,7 +554,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置文件存储的主机名
+	 * 파일 저장 호스트 이름 설정
 	 *
 	 * @param fileHost
 	 */
@@ -563,7 +563,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 获取文件存储的路径
+	 * 파일 저장 경로 조회
 	 *
 	 * @return
 	 */
@@ -572,7 +572,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 设置文件存储的路径
+	 * 파일 저장 경로 설정
 	 *
 	 * @param filePath
 	 */
@@ -599,7 +599,7 @@ public class FileInfo extends StorageObject {
 	}
 
 	/**
-	 * 附件控件框
+	 * 첨부파일 컨트롤 상자
 	 *
 	 * @return
 	 */

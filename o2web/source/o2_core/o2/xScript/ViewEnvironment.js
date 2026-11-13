@@ -6,42 +6,42 @@
  */
 
 /**
- * ViewFilter 视图过滤条件
+ * ViewFilter 뷰 필터 조건
  * @typedef {Object} ViewFilter
- * @property {String} logic - 可选值：“and”或者“or”，表示和前一个条件的逻辑运算关系。
- * @property {String} path - 要过滤的data数据的路径。
- * @property {String} comparison - 比较运算符，可选值：<br/>
+ * @property {String} logic - 선택값: “and” 또는 “or”, 앞 조건과의 논리 연산 관계.
+ * @property {String} path - 필터링할 data 데이터의 경로.
+ * @property {String} comparison - 비교 연산자, 선택값:<br/>
  * <div style='padding-left:150px;'>
- * <b>equals</b> 或 <b>==</b> 或：表示等于。<br/>
- * <b>notEquals</b> 或 <b>!=</b> ：表示不等于。<br/>
- * <b>greaterThan</b> 或 <b>></b> ：表示大于。<br/>
- * <b>greaterThanOrEqualTo</b> 或 <b>>=</b> ：表示大于或等于。<br/>
- * <b>lessThan</b> 或 <b><</b> ：表示小于。<br/>
- * <b>lessThanOrEqualTo</b> 或 <b><=</b> ：表示小于等于。<br/>
- * <b>like</b> ：表示部分匹配。<br/>
- * <b>notLike</b> ：表示不匹配。<br/>
- * <b>range</b> ：表示一定的范围。<br/>
- * <b>in</b> ：表示在某几个特定的值当中。<br/>
+ * <b>equals</b> 또는 <b>==</b> 또는: 같음.<br/>
+ * <b>notEquals</b> 또는 <b>!=</b>: 같지 않음.<br/>
+ * <b>greaterThan</b> 또는 <b>></b>: 보다 큼.<br/>
+ * <b>greaterThanOrEqualTo</b> 또는 <b>>=</b>: 크거나 같음.<br/>
+ * <b>lessThan</b> 또는 <b><</b>: 보다 작음.<br/>
+ * <b>lessThanOrEqualTo</b> 또는 <b><=</b>: 작거나 같음.<br/>
+ * <b>like</b>: 부분 일치.<br/>
+ * <b>notLike</b>: 일치하지 않음.<br/>
+ * <b>range</b>: 일정 범위.<br/>
+ * <b>in</b>: 특정 값들 중 하나.<br/>
  * </div>
- * @property {String} formatType  - 过滤数据的数据类型，可选值：
+ * @property {String} formatType  - 필터링 데이터의 데이터 타입, 선택값:
  * <div style='padding-left:150px;'>
- * <b>textValue</b> ：文本。<br/>
- * <b>numberValue</b> ：数字。<br/>
- * <b>dateTimeValue</b> ：日期时间。<br/>
- * <b>dateValue</b> ：日期。<br/>
- * <b>booleanValue</b> ：布尔值。<br/>
+ * <b>textValue</b>: 텍스트.<br/>
+ * <b>numberValue</b>: 숫자.<br/>
+ * <b>dateTimeValue</b>: 날짜 시간.<br/>
+ * <b>dateValue</b> : 날짜.<br/>
+ * <b>booleanValue</b> : 불리언 값.<br/>
  * </div>
- * @property {(String|Number|Boolean)} value - 过滤的值，根据formatType提供匹配的数据类型的值.
- * <br/>如果是dateTimeValue数据类型，则提供日期时间格式的字符串，格式如“YYYY-MM-DD HH:MM:SS”。
- * <br/>如果是dateValue数据类型，则提供日期格式的字符串，格式如“YYYY-MM-DD”。
- * <br/>当comparison值为“range”时，此值表示范围中的第一个值。当comparison值为“in”时，多个值用半角逗号","分开。
- * @property {(String|Number|Boolean)} otherValue  - 当comparison值为“range”时，此值表示范围中的第二个值。当comparison值不为“range”时，忽略此值。
+ * @property {(String|Number|Boolean)} value - 필터 값, formatType에 맞는 데이터 유형의 값을 제공.
+ * <br/>dateTimeValue 데이터 유형이면 날짜시간 형식 문자열 제공, 형식 예: “YYYY-MM-DD HH:MM:SS”.
+ * <br/>dateValue 데이터 유형이면 날짜 형식 문자열 제공, 형식 예: “YYYY-MM-DD”.
+ * <br/>comparison 값이 “range”이면 이 값은 범위의 첫 번째 값. comparison 값이 “in”이면 여러 값을 반각 쉼표","로 구분.
+ * @property {(String|Number|Boolean)} otherValue  - comparison 값이 “range”이면 범위의 두 번째 값. comparison 값이 “range”가 아니면 무시.
  * @example
  *  {
  *    "logic":"and",
  *    "path":"$work.title",
  *    "comparison":"like",
- *    "value":"关于",
+ *    "value":"관련",
  *    "formatType":"textValue"
  * }
  * @example
@@ -49,157 +49,157 @@
  *    "logic":"and",
  *    "path":"month",
  *    "comparison":"in",
- *    "value":"一月,二月,三月",
+ *    "value":"1월,2월,3월",
  *    "formatType":"textValue"
  * }
  */
 
 /**
- * StatementFilter 查询视图的过滤条件
+ * StatementFilter 조회 뷰의 필터 조건
  * @typedef {Object} StatementFilter
- * @property {String} path - 要过滤的data数据的路径。
- * 如果语句格式是JPQL,形式为查询语句中的"表别名.字段名"，如"o.title"。
- * 在v8.0以后，系统增加了原生SQL，则使用数据库的字段名，如"xtitle"。
- * @property {String} comparison - 比较运算符，可选值：<br/>
+ * @property {String} path - 필터링할 data 데이터의 경로.
+ * 구문 형식이 JPQL이면 조회 구문의 "테이블 별칭.필드명" 형식. 예: "o.title".
+ * v8.0 이후 시스템에 네이티브 SQL이 추가되어 데이터베이스 필드명을 사용. 예: "xtitle".
+ * @property {String} comparison - 비교 연산자, 선택값:<br/>
  * <div style='padding-left:150px;'>
- * <b>equals</b> 或 <b>==</b> 或：表示等于。<br/>
- * <b>notEquals</b> 或 <b>!=</b> ：表示不等于。<br/>
- * <b>greaterThan</b> 或 <b>></b> ：表示大于。<br/>
- * <b>greaterThanOrEqualTo</b> 或 <b>=></b> ：表示大于或等于。<br/>
- * <b>lessThan</b> 或 <b><</b> ：表示小于。<br/>
- * <b>lessThanOrEqualTo</b> 或 <b><=</b> ：表示小于等于。<br/>
- * <b>like</b> ：表示部分匹配。<br/>
- * <b>notLike</b> ：表示不匹配。<br/>
+ * <b>equals</b> 또는 <b>==</b> 또는: 같음.<br/>
+ * <b>notEquals</b> 또는 <b>!=</b>: 같지 않음.<br/>
+ * <b>greaterThan</b> 또는 <b>></b>: 보다 큼.<br/>
+ * <b>greaterThanOrEqualTo</b> 또는 <b>=></b> : 크거나 같음.<br/>
+ * <b>lessThan</b> 또는 <b><</b>: 보다 작음.<br/>
+ * <b>lessThanOrEqualTo</b> 또는 <b><=</b>: 작거나 같음.<br/>
+ * <b>like</b>: 부분 일치.<br/>
+ * <b>notLike</b>: 일치하지 않음.<br/>
  * </div>
- * @property {String} formatType  - 过滤数据的数据类型，可选值：
+ * @property {String} formatType  - 필터링 데이터의 데이터 타입, 선택값:
  * <div style='padding-left:150px;'>
- * <b>textValue</b> ：文本。<br/>
- * <b>numberValue</b> ：数字。<br/>
- * <b>dateTimeValue</b> ：日期时间。<br/>
- * <b>dateValue</b> ：仅日期。<br/>
- * <b>timeValue</b> ：仅时间。<br/>
- * <b>booleanValue</b> ：布尔值。<br/>
+ * <b>textValue</b>: 텍스트.<br/>
+ * <b>numberValue</b>: 숫자.<br/>
+ * <b>dateTimeValue</b>: 날짜 시간.<br/>
+ * <b>dateValue</b> : 날짜만.<br/>
+ * <b>timeValue</b> : 시간만.<br/>
+ * <b>booleanValue</b> : 불리언 값.<br/>
  * </div>
- * @property {(String|Number|Boolean)} value - 过滤的值，根据formatType提供匹配的数据类型的值。如果是dateTimeValue数据类型，则提供日期格式的字符串，格式如“YYYY-MM-DD HH:MM:SS”。
- * 如果是dateValue数据类型，则提供日期格式的字符串，格式如“YYYY-MM-DD”。如果是timeValue数据类型，则提供时间格式的字符串，格式如“HH:MM:SS”。
+ * @property {(String|Number|Boolean)} value - 필터 값, formatType에 맞는 데이터 유형의 값 제공. dateTimeValue 유형이면 “YYYY-MM-DD HH:MM:SS” 형식의 날짜 문자열 제공.
+ * dateValue 유형이면 “YYYY-MM-DD” 형식의 날짜 문자열, timeValue 유형이면 “HH:MM:SS” 형식의 시간 문자열 제공.
  * @example
  *{
- *    "path":"o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+ *    "path":"o.title", //조회 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
  *    "comparison":"like",
- *    "value":"关于",
+ *    "value":"관련",
  *    "formatType":"textValue"
  *}
  */
 
 /**
- * StatementParameter  查询视图的过滤条件值参数，对查询语句where语句的形如":person"的参数部分进行赋值<br/>
- * 在v8.0以后，系统还新增了问号加数字的传值参数，如"?1"，用法和 ":field"一致。
- * 有以下规则：<br/>
- * 1、参数名称为下列值时，后台自动赋值：person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组)。v8.0以后系统自动解析，不需要再传这类参数。<br/>
- * 2、如果对比的是日期，需要传入 Date 类型。<br/>
- * 3、如果运算符用的是 like, noLike，模糊查询，值为 "%{value}%"。
+ * StatementParameter  조회 뷰의 필터 조건 값 매개변수, 조회 구문 where 절의 ":person" 형태 매개변수에 값 할당<br/>
+ * v8.0 이후 시스템에 물음표+숫자 형태의 매개변수(예: "?1")가 추가되었으며, 사용법은 ":field"와 같습니다.
+ * 다음 규칙이 있습니다:<br/>
+ * 1. 매개변수 이름이 다음 값이면 서버에서 자동 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자 직속 조직), unitAllList(현재 사용자 소속 모든 조직), groupList(현재 사용자 소속 그룹). v8.0 이후 시스템이 자동 해석하므로 이런 매개변수는 전달할 필요 없음.<br/>
+ * 2. 날짜를 비교하는 경우 Date 유형을 전달해야 합니다.<br/>
+ * 3. 연산자가 like, noLike이면 부분 일치 조회이며 값은 "%{value}%".
  * 4、
  * @typedef {Object} StatementParameter
  * @example
  * {
- *    "person" : "", //v8.0以后系统自动解析，不需要再传这类参数。
- *    "startTime" : (new Date("2020-01-01")), //日期格式
- *    "applicationName" : "%test%", //like或notlike
- *    "processName" : "test流程", //其他写确定的值
- *    "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+ *    "person" : "", //v8.0 이후 시스템이 자동 해석하므로 이 파라미터를 전달할 필요 없음.
+ *    "startTime" : (new Date("2020-01-01")), //날짜 형식
+ *    "applicationName" : "%test%", //like 또는 notlike
+ *    "processName" : "test프로세스", //그 외에는 확정된 값 입력
+ *    "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
  * }
  */
 
-/*********this.org 的 typedef 开始********/
+/*********this.org 의 typedef 시작********/
 
 /**
- * 在本API的this.org模块中，当使用群组作为检索参数的时候，允许使用群组的distinguishedName、name、id、unique属性值，或者包含这些属性值的对象。
+ * 이 API의 this.org 모듈에서 그룹을 조회 파라미터로 사용할 때 그룹의 distinguishedName, name, id, unique 속성값 또는 이 속성값을 포함한 객체를 사용할 수 있습니다.
  * @typedef {(String|Object)} GroupFlag
  * @example
- * //以下均为合法参数
+ * //아래는 모두 유효한 파라미터
  *
- * //群组属性值
- * "工作汇报读者@ReportReader@G" //群组识别名
+ * //그룹 속성값
+ * "업무보고열람자@ReportReader@G" //그룹 식별명
  * "cce8bc22-225a-4f85-8132-7374d546886e" //id
- * "ReportReader" //群组unique
- * "工作汇报读者" //群组名称
+ * "ReportReader" //그룹 unique
+ * "업무보고열람자" //그룹 이름
  *
- * //包含下列属性的对象
- * { "distinguishedName": "工作汇报读者@ReportReader@G" } //群组识别名
- * { "unique": "cce8bc22-225a-4f85-8132-7374d546886e" } //群组id
- * { "unique": "ReportReader" } //群组unique
- * { "name": "工作汇报读者" } //群组名称
+ * //다음 속성을 포함한 객체
+ * { "distinguishedName": "업무보고열람자@ReportReader@G" } //그룹 식별명
+ * { "unique": "cce8bc22-225a-4f85-8132-7374d546886e" } //그룹 id
+ * { "unique": "ReportReader" } //그룹 unique
+ * { "name": "업무보고열람자" } //그룹 이름
  */
 
 
 /**
- * 在本API的this.org模块中，当使用人员(个人)作为检索参数的时候，允许使用人员的distinguishedName、name、id、unique属性值或包含这些属性的对象。
+ * 이 API의 this.org 모듈에서 사용자(개인)를 조회 파라미터로 사용할 때 사용자의 distinguishedName, name, id, unique 속성값 또는 이 속성을 포함한 객체를 사용할 수 있습니다.
  * @typedef {(String|Object)} PersonFlag
  * @example
- * //以下均为合法参数
+ * //아래는 모두 유효한 파라미터
  *
- * //人员属性值
- * "李四@lisi@P" //人员识别名
- * "cce8bc22-225a-4f85-8132-7374d546886e" //人员id
- * "lisi" //人员unique
+ * //사용자 속성값
+ * "김철수@lisi@P" //사용자 식별명
+ * "cce8bc22-225a-4f85-8132-7374d546886e" //사용자 id
+ * "lisi" //사용자 unique
  *
- * //包含下列属性的对象
- * { "distinguishedName": "李四@lisi@P" } //人员识别名
- * { "id": "cce8bc22-225a-4f85-8132-7374d546886e" } //人员id
- * { "unique": "lisi" } //人员unique
+ * //다음 속성을 포함한 객체
+ * { "distinguishedName": "김철수@lisi@P" } //사용자 식별명
+ * { "id": "cce8bc22-225a-4f85-8132-7374d546886e" } //사용자 id
+ * { "unique": "lisi" } //사용자 unique
  */
 
 /**
- * 在本API的this.org模块中，当使用角色作为检索参数的时候，允许使用角色的distinguishedName、name、id、unique属性值或包含这些属性的对象。
+ * 이 API의 this.org 모듈에서 역할을 조회 파라미터로 사용할 때 역할의 distinguishedName, name, id, unique 속성값 또는 이 속성을 포함한 객체를 사용할 수 있습니다.
  * @typedef {(String|Object)} RoleFlag
  * @example
- * //以下均为合法参数
+ * //아래는 모두 유효한 파라미터
 
- * //角色属性值
- * "PersonManager@PersonManagerSystemRole@R" //角色识别名
- * "85874fbc-9af0-4a07-bc2f-0ab899cc4c7d" //角色id
- * "PersonManagerSystemRole" //角色unique
- * "PersonManager" //角色名称
+ * //역할 속성값
+ * "PersonManager@PersonManagerSystemRole@R" //역할 식별명
+ * "85874fbc-9af0-4a07-bc2f-0ab899cc4c7d" //역할 id
+ * "PersonManagerSystemRole" //역할 unique
+ * "PersonManager" //역할 이름
  *
- * //包含下列属性的对象
- * { "distinguishedName": "PersonManager@PersonManagerSystemRole@R" } //角色识别名
- * { "id": "85874fbc-9af0-4a07-bc2f-0ab899cc4c7d" } //角色id
- * { "unique": "PersonManagerSystemRole" } //角色unique
- * { "name": "PersonManager" } //角色名称
+ * //다음 속성을 포함한 객체
+ * { "distinguishedName": "PersonManager@PersonManagerSystemRole@R" } //역할 식별명
+ * { "id": "85874fbc-9af0-4a07-bc2f-0ab899cc4c7d" } //역할 id
+ * { "unique": "PersonManagerSystemRole" } //역할 unique
+ * { "name": "PersonManager" } //역할 이름
  */
 
 /**
- * 在本API的this.org模块中，当使用身份作为检索参数的时候，允许使用身份的distinguishedName、id、unique属性值或包含这些属性的对象。
+ * 이 API의 this.org 모듈에서 신분을 조회 파라미터로 사용할 때 신분의 distinguishedName, id, unique 속성값 또는 이 속성을 포함한 객체를 사용할 수 있습니다.
  * @typedef {(String|Object)} IdentityFlag
  * @example
- * //以下均为合法参数
+ * //아래는 모두 유효한 파라미터
 
- * //角色属性值
- * "张三@903dbb04-085c-4bb1-9c24-3009bd5f7372@I" //身份识别名
- * "903dbb04-085c-4bb1-9c24-3009bd5f7372" //身份id
- * "903dbb04-085c-4bb1-9c24-3009bd5f7372" //身份unique，系统默认的unique和id一致
+ * //역할 속성값
+ * "홍길동@903dbb04-085c-4bb1-9c24-3009bd5f7372@I" //신분 식별명
+ * "903dbb04-085c-4bb1-9c24-3009bd5f7372" //신분 id
+ * "903dbb04-085c-4bb1-9c24-3009bd5f7372" //신분 unique, 시스템 기본 unique는 id와 동일
  *
- * //包含下列属性的对象
- * { "distinguishedName": "张三@903dbb04-085c-4bb1-9c24-3009bd5f7372@I" } //身份识别名
- * { "id": "903dbb04-085c-4bb1-9c24-3009bd5f7372" } //身份id
- * { "unique": "903dbb04-085c-4bb1-9c24-3009bd5f7372" } //身份unique，系统默认的unique和id一致
+ * //다음 속성을 포함한 객체
+ * { "distinguishedName": "홍길동@903dbb04-085c-4bb1-9c24-3009bd5f7372@I" } //신분 식별명
+ * { "id": "903dbb04-085c-4bb1-9c24-3009bd5f7372" } //신분 id
+ * { "unique": "903dbb04-085c-4bb1-9c24-3009bd5f7372" } //신분 unique, 시스템 기본 unique는 id와 동일
  */
 
 /**
- * 在本API的this.org模块中，当使用组织作为检索参数的时候，允许使用组织的distinguishedName、id、unique属性值或包含这些属性的对象。
+ * 이 API의 this.org 모듈에서 조직을 조회 파라미터로 사용할 때 조직의 distinguishedName, id, unique 속성값 또는 이 속성을 포함한 객체를 사용할 수 있습니다.
  * @typedef {(String|Object)} UnitFlag
  * @example
- * //以下均为合法参数
+ * //아래는 모두 유효한 파라미터
 
- * //组织属性值
- * "开发部@kfb@U" //组织标识名
- * "cce8bc22-225a-4f85-8132-7374d546886e" //组织id
- * "kfb" //组织unique
+ * //조직 속성값
+ * "개발부@kfb@U" //조직 식별명
+ * "cce8bc22-225a-4f85-8132-7374d546886e" //조직 id
+ * "kfb" //조직 unique
  *
- * //包含下列属性的对象
- * { "distinguishedName": "开发部@kfb@U" } //组织标识名
- * { "id": "cce8bc22-225a-4f85-8132-7374d546886e" } //组织id
- * { "unique": "kfb" } //组织unique
+ * //다음 속성을 포함한 객체
+ * { "distinguishedName": "개발부@kfb@U" } //조직 식별명
+ * { "id": "cce8bc22-225a-4f85-8132-7374d546886e" } //조직 id
+ * { "unique": "kfb" } //조직 unique
  */
 
 MWF.xScript = MWF.xScript || {};
@@ -207,31 +207,31 @@ MWF.xScript.ViewEnvironment = function (ev) {
     var _form = ev.view;
 
     /**
-     * 字符串，当前应用类型。<br/><br/>
+     * 문자열, 현재 앱 유형.<br/><br/>
      * <table>
      *   <tr>
-     *      <th>值</th>
-     *      <th>应用类型</th>
+     *      <th>값</th>
+     *      <th>앱 유형</th>
      *   </tr>
      *   <tr>
      *      <td>cms</td>
-     *      <td>内容管理</td>
+     *      <td>콘텐츠 관리</td>
      *   </tr>
      *   <tr>
      *      <td>process</td>
-     *      <td>流程管理</td>
+     *      <td>프로세스 관리</td>
      *   </tr>
      *   <tr>
      *      <td>portal</td>
-     *      <td>门户管理</td>
+     *      <td>포털 관리</td>
      *   </tr>
      *   <tr>
      *      <td>query</td>
-     *      <td>数据中心</td>
+     *      <td>데이터 센터</td>
      *   </tr>
      * </table>
      * @module appType
-     * @o2cn 应用类型
+     * @o2cn 앱 유형
      * @o2category web
      * @o2ordernumber 170
      * @instance
@@ -270,49 +270,49 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
     //dict
     /**
-     * this.Dict是一个工具类，如果您在流程、内容管理、门户和服务管理中创建了数据字典，可以使用this.Dict类对数据字典进行增删改查操作。<br/>
-     * 从v8.0版本开始，支持在门户和服务管理中创建数据字典。
+     * this.Dict는 유틸리티 클래스로, 프로세스, 콘텐츠 관리, 포털, 서비스 관리에서 데이터 사전을 만들었다면 this.Dict 클래스로 데이터 사전을 추가·삭제·수정·조회할 수 있습니다.<br/>
+     * v8.0부터 포털과 서비스 관리에서 데이터 사전 생성을 지원합니다.
      * @module Dict
-     * @o2cn 数据字典
+     * @o2cn 데이터 사전
      * @o2category web
      * @o2ordernumber 120
-     * @param {(String|Object)} optionsOrName 数据字典标识字符串或者是对象。
-     * <div>如果对本应用的数据字典操作，将optionsOrName设置为string。</div>
-     * <pre><code class='language-js'>var dict = new this.Dict("bulletinDictionary"); //数据字典的名称、别名或id
+     * @param {(String|Object)} optionsOrName 데이터 사전 식별 문자열 또는 객체.
+     * <div>이 앱의 데이터 사전을 다루려면 optionsOrName을 string으로 설정합니다.</div>
+     * <pre><code class='language-js'>var dict = new this.Dict("bulletinDictionary"); //데이터 사전의 이름, 별칭 또는 id
      * </code></pre>
-     * <div>如果需要对其他应用的数据字典进行操作，将options设置为JsonObject</div>
+     * <div>다른 앱의 데이터 사전을 다루려면 options를 JsonObject로 설정합니다</div>
      * <pre><code class='language-js'>var dict = new this.Dict({
-     *     //type: 应用类型。可以为process  cms  portal service。
-     *     //在流程和内容管理中如果没有该选项或者值为空字符串，则表示应用脚本和被应用的脚本配置类型相同。
-     *     //比如在流程的A应用脚本中引用流程B应用的脚本配置，则type可以省略。
-     *     //为了兼容老版本，在门户中使用需要指定type，否则默认值为process
+     *     //type: 앱 유형. process  cms  portal service 가능.
+     *     //프로세스와 콘텐츠 관리에서 이 옵션이 없거나 값이 빈 문자열이면 참조하는 스크립트와 참조되는 스크립트 설정 유형이 같음을 의미합니다.
+     *     //예를 들어 프로세스 A 앱 스크립트에서 프로세스 B 앱의 스크립트 설정을 참조하면 type을 생략할 수 있습니다.
+     *     //이전 버전과의 호환을 위해 포털에서 사용할 때는 type을 지정해야 하며, 그렇지 않으면 기본값은 process입니다
      *    type : "cms",
-     *    application : "bulletin", //数据字典所在的流程、门户、CMS的名称、别名、id, 默认为当前应用，服务管理中忽略该参数
-     *    name : "bulletinDictionary", // 数据字典的名称、别名、id
-     *    anonymous : true //允许用户在未登录的情况下读取cms的数据字典, type为cms的时候改参数才有效，默认为false，该参数名也可以是 enableAnonymous
+     *    application : "bulletin", //데이터 사전이 있는 프로세스, 포털, CMS의 이름, 별칭, id, 기본값은 현재 앱, 서비스 관리에서는 무시
+     *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
+     *    anonymous : true //로그인하지 않은 사용자의 cms 데이터 사전 읽기 허용, type이 cms일 때만 유효, 기본값 false, 파라미터 이름은 enableAnonymous도 가능
      * });
      *
-     * //引用服务管理中的数据字典
+     * //서비스 관리의 데이터 사전 참조
      * var dict = new this.Dict({
      *    "type": "service",
      *    "name": "dictName"
      * });
      *
-     * //引用流程管理中的数据字典
+     * //프로세스 관리의 데이터 사전 참조
      * var dict = new this.Dict({
      *    "type": "process",
      *    "application": "appName",
      *    "name": "dictName"
      * });
      *
-     * //引用内容管理中的数据字典
+     * //콘텐츠 관리의 데이터 사전 참조
      * var dict = new this.Dict({
      *     "type": "cms",
      *     "application": "appName",
      *    "name": "dictName"
      * });
      *
-     * //引用门户管理中的数据字典
+     * //포털 관리의 데이터 사전 참조
      * var dict = new this.Dict({
      *    "type": "portal",
      *    "application": "appName",
@@ -320,359 +320,359 @@ MWF.xScript.ViewEnvironment = function (ev) {
      * });
      *
      * </code></pre>
-     * @return {Object} Dict对象
+     * @return {Object} Dict 객체
      * @o2syntax
-     * //您可以在页面、表单、流程各个嵌入脚本中，通过this.Dict()对本应用或其他应用的数据字典中的数据进行增删改查，如下：
+     * //페이지, 양식, 프로세스의 각 내장 스크립트에서 this.Dict()로 현재 앱 또는 다른 앱의 데이터 사전 데이터를 추가·삭제·수정·조회할 수 있습니다. 예:
      * var dict = new this.Dict( options )
      */
 
     /**
-     * 根据路径获取数据字典中的数据。
+     * 경로에 따라 데이터 사전의 데이터를 조회합니다.
      * @method get
      * @methodOf module:Dict
      * @static
-     * @param {String} [path] 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。当值为空的时候，表示获取数据字典中的所有数据。
-     * @param {Function} [success] 获取数据成功时的回调函数。
-     * @param {Function} [failure] 获取数据失败时的回调。
-     * @param {Boolean} [async] 是否异步执行，默认为false。
-     * @param {Boolean} [refresh] 是否忽略本地缓存直接从服务器获取，默认为false。如果需要在脚本中该数据字典是变化的（比如编号），需设置为true。
+     * @param {String} [path] 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. 값이 비어 있으면 데이터 사전의 모든 데이터를 조회.
+     * @param {Function} [success] 데이터 조회 성공 시 콜백 함수.
+     * @param {Function} [failure] 데이터 조회 실패 시 콜백.
+     * @param {Boolean} [async] 비동기 실행 여부, 기본값 false.
+     * @param {Boolean} [refresh] 로컬 캐시를 무시하고 서버에서 직접 조회할지 여부, 기본값 false. 스크립트에서 데이터 사전 값이 변하는 경우(예: 번호) true로 설정해야 함.
      * @return {(Promise|Object|Array|String|Number|Boolean)}
-     * 当async为true时返回Promise({@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise说明})；
-     * 否则返回数据字典的数据，类型和配置数据字典时候指定的一致。
+     * async가 true이면 Promise({@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise 설명})를 반환;
+     * 그렇지 않으면 데이터 사전의 데이터를 반환하며, 유형은 데이터 사전 설정 시 지정한 것과 같습니다.
      * @o2syntax
      * var data = dict.get( path, success, failure, async, refresh )
      * @example
      * var dict = new this.Dict("bulletinDictionary");
      *
-     * //没有参数的时候，表示同步获取获取所有数据
+     * //매개변수가 없으면 모든 데이터를 동기 조회
      *  var data = dict.get()
      *
-     *  //同步执行，获取category下key为subCategory的数据
+     *  //동기 실행, category 아래 key가 subCategory인 데이터 조회
      *  var data = dict.get("category.subCategory");
      *
-     * //异步执行，使用回调处理数据，如果category为数组，获取第0项数据
+     * //비동기 실행, 콜백으로 데이터 처리, category가 배열이면 0번째 항목 조회
      * dict.get("category.0", function(data){
-     *      //data 是数据字典的数据
+     *      //data는 데이터 사전의 데이터
      *  }, function(xhr){
-     *      //xhr 为 xmlHttpRequest
-     *  }, true //异步执行
+     *      //xhr은 xmlHttpRequest
+     *  }, true //비동기 실행
      * )
      *
-     * //异步执行，使用Promise处理结果
+     * //비동기 실행, Promise로 결과 처리
      * var promise = dict.get("category", null, null, true);
      * promise.then( function(data){
-     *     //data 是数据字典的数据
+     *     //data는 데이터 사전의 데이터
      * })
      * @example
      * <caption>
-     *     已经配置好了如下图所示的数据字典
+     *     아래 그림과 같이 설정된 데이터 사전
      * <img src='img/module/Dict/dict.png' />
      * </caption>
      * var dict = new this.Dict({
-     *     //type: 应用类型。可以为process  cms。
-     *     //如果没有该选项或者值为空字符串，则表示应用脚本和被应用的脚本配置类型相同。
-     *     //比如在流程的A应用脚本中引用流程B应用的脚本配置，则type可以省略。
+     *     //type: 앱 유형. process 또는 cms.
+     *     //이 옵션이 없거나 값이 빈 문자열이면 참조하는 스크립트와 참조되는 스크립트 설정의 유형이 같음을 의미함.
+     *     //예를 들어 프로세스 A 앱 스크립트에서 프로세스 B 앱의 스크립트 설정을 참조하면 type을 생략할 수 있습니다.
      *    type : "cms",
-     *    application : "bulletin", //流程、CMS的名称、别名、id, 默认为当前应用
-     *    name : "bulletinDictionary", // 数据字典的名称、别名、id
-     *    anonymous : true //允许用户在未登录的情况下读取cms的数据字典, type为process的时候此参数无效，默认为false，该参数名也可以是enableAnonymous
+     *    application : "bulletin", //프로세스, CMS의 이름·별칭·id, 기본값은 현재 앱
+     *    name : "bulletinDictionary", // 데이터 사전의 이름, 별칭, id
+     *    anonymous : true //로그인하지 않은 상태에서 cms 데이터 사전 읽기 허용, type이 process이면 무효, 기본값 false, 매개변수 이름은 enableAnonymous도 가능
      * });
      *
      * var data = dict.get();
-     * //data的值为
+     * //data의 값은
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        }
      *    ]
      * }
      *
      *  var category = dict.get("category");
-     *  //category的值为
+     *  //category의 값은
      *  [
      *     {
      *        "enable": true,
      *        "sequence": 1.0,
-     *        "text": "公司公告",
+     *        "text": "회사 공지",
      *        "value": "company"
      *    },
      *     {
      *       "enable": "false",
      *       "sequence": 2.0,
-     *        "text": "部门公告",
+     *        "text": "부서 공지",
      *        "value": "department"
      *    }
      *  ]
      *
      *  var array0 = dict.get("category.0");
-     *  //array0 的值为
+     *  //array0의 값은
      *  {
      *    "enable": true,
      *    "sequence": 1.0,
-     *    "text": "公司公告",
+     *    "text": "회사 공지",
      *    "value": "company"
      * }
      *
      * var enable = dict.get("category.0.eanble");
-     * //enable 的值为 true
+     * //enable의 값은 true
      */
 
     /**
-     * 根据路径新增数据字典的数据。
+     * 경로에 따라 데이터 사전에 데이터를 추가합니다.
      * @method add
      * @methodOf module:Dict
      * @instance
-     * @param {String} path 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。如果path在数据字典中已有数据，且原有数据是数组，则数组添加一项；如果原有数据不是数组，则报错。
-     * @param {(Object|Array|String|Number|Boolean)} data 需要新增的数据
-     * @param {Function} [success] 增加数据成功时的回调函数。
-     * @param {Function} [failure] 增加数据错误时的回调函数。
+     * @param {String} path 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. path에 이미 데이터가 있고 기존 데이터가 배열이면 배열에 항목 추가, 배열이 아니면 오류 발생.
+     * @param {(Object|Array|String|Number|Boolean)} data 추가할 데이터
+     * @param {Function} [success] 데이터 추가 성공 시 콜백 함수.
+     * @param {Function} [failure] 데이터 추가 오류 시 콜백 함수.
      * @o2syntax
      * dict.add( path, data, success, failure )
      * @example
      * var dict = new this.Dict("bulletinDictionary");
      *
-     * dict.add( "category", { text : "系统公告", value : "system" }, function(data){
-     *    //data 形如
+     * dict.add( "category", { text : "시스템 공지", value : "system" }, function(data){
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      * @example
      * <caption>
-     *     对get方法样例的数据字典进行赋值，如下：
+     *     get 메서드 예제의 데이터 사전에 값 할당, 예:
      * </caption>
      * var dict = new this.Dict("bulletinDictionary");
      *
-     * dict.add( "category", { text : "系统公告", value : "system" }, function(data){
-     *    //data 形如
+     * dict.add( "category", { text : "시스템 공지", value : "system" }, function(data){
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr, text, error){
-     *    //xhr 为 xmlHttpRequest, text 为错误文本， error为Error对象
+     *    //xhr은 xmlHttpRequest, text는 오류 텍스트, error는 Error 객체
      * });
-     *     //数据字典的值变为
+     *     //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
-     *            "text": "系统公告",
+     *            "text": "시스템 공지",
      *            "value": "system"
      *        }
      *    ]
      * }
      *
      *  dict.add( "category.2.sequence", 3 );
-     *     //数据字典的值变为
+     *     //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
      *            "sequence" : 3.0,
-     *            "text": "系统公告",
+     *            "text": "시스템 공지",
      *            "value": "system"
      *        }
      *    ]
      * }
 
      * dict.add( "archiveOptions", {
-     *    "yes" : "是",
-     *    "no" : "否"
+     *    "yes" : "예",
+     *    "no" : "아니요"
      * });
-     *     //数据字典的值变为
+     *     //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 2.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
      *            "sequence" : 3.0,
-     *            "text": "系统公告",
+     *            "text": "시스템 공지",
      *            "value": "system"
      *        }
      *
      *    ],
      *    "archiveOptions" : {
-     *        "yes" : "是",
-     *        "no" : "否"
+     *        "yes" : "예",
+     *        "no" : "아니요"
      *    }
      * }
      * @example
-     * <caption>下面是错误的赋值，如下：</caption>
-     * dict.add( "category.3", { text : "系统公告", value : "system" }); //出错，因为不能对数组下标直接赋值
+     * <caption>아래는 잘못된 할당 예:</caption>
+     * dict.add( "category.3", { text : "시스템 공지", value : "system" }); //오류, 배열 인덱스에 직접 값을 할당할 수 없음
      *
-     * dict.add( "category.1.value", { text : "系统公告" } ); //出错，因为不能对已经存在的非数组路径赋值
+     * dict.add( "category.1.value", { text : "시스템 공지" } ); //오류, 이미 존재하는 비배열 경로에는 값을 할당할 수 없음
      */
 
     /**
-     * 根据路径修改数据字典的数据。
+     * 경로에 따라 데이터 사전의 데이터 수정.
      * @method set
      * @methodOf module:Dict
      * @instance
-     * @param {String} path 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。如果数据路径不存在，则报错。
-     * @param {(Object|Array|String|Number|Boolean)} data 修改后的数据
-     * @param {Function} [success] 设置数据成功时的回调函数。
-     * @param {Function} [failure] 设置数据错误时的回调函数。
+     * @param {String} path 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. 데이터 경로가 없으면 오류 발생.
+     * @param {(Object|Array|String|Number|Boolean)} data 수정 후 데이터
+     * @param {Function} [success] 데이터 설정 성공 시 콜백 함수.
+     * @param {Function} [failure] 데이터 설정 오류 시 콜백 함수.
      * @o2syntax
      * dict.set( path, data, success, failure )
      * @example
      * var dict = new this.Dict("bulletinDictionary");
      *
-     * dict.set( "category", { text : "系统公告", value : "system" }, function(data){
-     *    //data 形如
+     * dict.set( "category", { text : "시스템 공지", value : "system" }, function(data){
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      * @example
      * <caption>
-     *     对Example add的数据字典进行赋值，如下：
+     *     Example add의 데이터 사전에 값 할당. 예:
      * </caption>
      * var dict = new this.Dict("bulletinDictionary");
      *
-     * dict.set( "archiveOptions", [ { text : "是" }, { text : "否" } ]);
-     *      //数据字典的值变为
+     * dict.set( "archiveOptions", [ { text : "예" }, { text : "아니요" } ]);
+     *      //데이터 사전 값이 다음과 같이 변경됨
      *  {
      *     "category": [
      *         {
      *             "enable": true,
      *             "sequence": 1.0,
-     *             "text": "公司公告",
+     *             "text": "회사 공지",
      *             "value": "company"
      *         },
      *         {
      *             "enable": "false",
      *             "sequence": 2.0,
-     *             "text": "部门公告",
+     *             "text": "부서 공지",
      *             "value": "department"
      *         },
      *         {
      *             "sequence" : 3.0,
-     *             "text": "系统公告",
+     *             "text": "시스템 공지",
      *             "value": "system"
      *         }
      *
      *     ],
-     *     "archiveOptions" : [ { text : "是" }, { text : "否" } ]
+     *     "archiveOptions" : [ { text : "예" }, { text : "아니요" } ]
      * }
      *
-     * dict.set( "category.2", { text : "县级公告", value : "county" }, function(data){
-     *     //data 形如
+     * dict.set( "category.2", { text : "현급 공지", value : "county" }, function(data){
+     *     //data 형식 예
      *     //{
-     *     //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *     //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *     //}
      *  }, function(xhr){
-     *     //xhr 为 xmlHttpRequest
+     *     //xhr은 xmlHttpRequest
      *  });
      *
-     *   /数据字典的值变为
+     *   /데이터 사전 값이 다음과 같이 변경됨
      *  {
      *     "category": [
      *         {
      *             "enable": true,
      *             "sequence": 1.0,
-     *             "text": "公司公告",
+     *             "text": "회사 공지",
      *             "value": "company"
      *         },
      *         {
      *             "enable": "false",
      *             "sequence": 2.0,
-     *             "text": "部门公告",
+     *             "text": "부서 공지",
      *             "value": "department"
      *         },
      *         {
-     *             "text": "县级公告",
+     *             "text": "현급 공지",
      *             "value": "county"
      *         }
      *     ],
-     *     "archiveOptions" : [ { text : "是" }, { text : "否" } ]
+     *     "archiveOptions" : [ { text : "예" }, { text : "아니요" } ]
      * }
      *
      * dict.set( "category.1.sequence", 3 );
      * dict.set( "category.2.sequence", 2 );
-     *      //数据字典的值变为
+     *      //데이터 사전 값이 다음과 같이 변경됨
      *      {
      *     "category": [
      *         {
      *             "enable": true,
      *             "sequence": 1.0,
-     *             "text": "公司公告",
+     *             "text": "회사 공지",
      *             "value": "company"
      *         },
      *         {
      *             "enable": "false",
      *             "sequence": 3.0,
-     *             "text": "部门公告",
+     *             "text": "부서 공지",
      *             "value": "department"
      *         },
      *         {
      *             "sequence": 2.0,
-     *             "text": "县级公告",
+     *             "text": "현급 공지",
      *             "value": "county"
      *         }
      *     ],
-     *     "archiveOptions" : [ { text : "是" }, { text : "否" } ]
+     *     "archiveOptions" : [ { text : "예" }, { text : "아니요" } ]
      * }
      * @example
      * <caption>
-     *     下面是错误的赋值：
+     *     다음은 잘못된 할당입니다:
      * </caption>
-     * dict.set( "category_1", { text : "公司公告" } ); //出错，因为category_1在数据字典中不存在
+     * dict.set( "category_1", { text : "회사 공지" } ); //오류, category_1이 데이터 사전에 존재하지 않음
      */
 
     /**
-     * 根据路径删除数据字典的数据。
+     * 경로에 따라 데이터 사전의 데이터 삭제.
      * @method delete
      * @methodOf module:Dict
      * @instance
-     * @param {String} path 数据字典中的数据路径，允许使用中文。当路径为多级时，用点号(.)分隔。如果数据路径不存在，则报错。如果删除数组中的某一项，只能删除最后一项。
-     * @param {Function} [success] 删除数据成功时的回调函数。
-     * @param {Function} [failure] 删除数据错误时的回调函数。
+     * @param {String} path 데이터 사전의 데이터 경로, 한글 사용 가능. 다단계 경로는 점(.)으로 구분. 데이터 경로가 없으면 오류 발생. 배열의 항목을 삭제할 때는 마지막 항목만 삭제 가능.
+     * @param {Function} [success] 데이터 삭제 성공 시 콜백 함수.
+     * @param {Function} [failure] 데이터 삭제 오류 시 콜백 함수.
      * @o2syntax
      * dict.delete( path, success, failure )
      * @example
@@ -680,92 +680,92 @@ MWF.xScript.ViewEnvironment = function (ev) {
      *
      * dict.delete( "category", function(){
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      * @example
      * <caption>
-     *     对Example set的数据字典进行赋值，如下：
+     *     Example set의 데이터 사전에 값 할당. 예:
      * </caption>
      * var dict = new this.Dict("bulletinDictionary");
      *
      * dict.delete( "archiveOptions");
-     * //数据字典的值变为
+     * //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *     *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 3.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
      *            "sequence": 2.0,
-     *            "text": "县级公告",
+     *            "text": "현급 공지",
      *            "value": "county"
      *        }
      *    ]
      * }
      *
      * dict.delete( "category.2.sequence", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
-     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id为数据字典ID
+     *    //    "id": "80ed5f60-500f-4358-8bbc-b7e81f77aa39" //id는 데이터 사전 ID
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
-     * //数据字典的值变为
+     * //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 3.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        },
      *        {
-     *            "text": "县级公告",
+     *            "text": "현급 공지",
      *            "value": "county"
      *        }
      *    ]
      * }
      *
      * dict.delete( "category.2");
-     * //category是数组，只能删除最后一项也就是下标2
-     * //数据字典的值变为
+     * //category는 배열이므로 마지막 항목, 즉 인덱스 2만 삭제 가능
+     * //데이터 사전 값이 다음과 같이 변경됨
      * {
      *    "category": [
      *        {
      *            "enable": true,
      *            "sequence": 1.0,
-     *            "text": "公司公告",
+     *            "text": "회사 공지",
      *            "value": "company"
      *        },
      *        {
      *            "enable": "false",
      *            "sequence": 3.0,
-     *            "text": "部门公告",
+     *            "text": "부서 공지",
      *            "value": "department"
      *        }
      *    ]
      * }
      * @example
      * <caption>
-     *     下面是错误的删除：
+     *     다음은 잘못된 삭제입니다:
      * </caption>
-     * dict.delete( "category_1" ); //出错，因为category_1在数据字典中不存在
+     * dict.delete( "category_1" ); //오류, category_1이 데이터 사전에 존재하지 않음
      */
 
     this.Dict = MWF.xScript.createDict();
@@ -791,43 +791,43 @@ MWF.xScript.ViewEnvironment = function (ev) {
     };
 
     /**
-     * 您可以通过this.org获取组织中的人员、人员属性、组织、组织属性、身份、群组和角色。
+     * this.org로 조직의 사용자, 사용자 속성, 조직, 조직 속성, 신분, 그룹, 역할을 조회할 수 있습니다.
      * @module org
-     * @o2cn 组织查询
+     * @o2cn 조직 조회
      * @o2category web
      * @o2ordernumber 100
      * @o2syntax
-     * //您可以在流程表单、内容管理表单、门户页面、视图和查询视图中，通过this来获取当前实例的org对象，如下：
+     * //프로세스 양식, 콘텐츠 관리 양식, 포털 페이지, 뷰, 조회 뷰에서 this로 현재 인스턴스의 org 객체를 가져올 수 있습니다. 예:
      * var org = this.org;
      */
     this.org = {
-        //身份**********
-        //获取身份
+        //신분**********
+        //신분 조회
         /**
-         根据身份标识获取对应的身份对象或数组
+         신분 식별자로 해당 신분 객체 또는 배열 조회
          * @method getIdentity
          * @o2membercategory identity
          * @methodOf module:org
          * @static
-         * @param {IdentityFlag|IdentityFlag[]} name - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|IdentityData|IdentityData[]} 当async为true时，返回
+         * @param {IdentityFlag|IdentityFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 신분 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|IdentityData|IdentityData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回身份，单个是Object，多个是Array。
+         * 그 외에는 신분 반환, 단건은 Object, 다건은 Array.
          * @o2ActionOut x_organization_assemble_express.IdentityAction.listObject|example=Identity|ignoreNoDescr=true|ignoreProps=[woUnitDutyList,woUnit,woGroupList]
          * @o2syntax
-         * //同步执行，返回身份，单个是对象，多个是数组。
+         * //동기 실행, 신분 반환, 단건은 객체, 다건은 배열.
          * var identityList = this.org.getIdentity( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getIdentity( name, true);
          * promise.then(function(identityList){
-         *     //identityList 为返回的身份，单个是对象，多个是数组。
+         *     //identityList 는 반환된 신분, 단건은 객체, 다건은 배열.
          * })
          *
-         * //异步执行，在回调方法中获取身份
+         * //비동기 실행, 콜백 메서드에서 신분 조회
          * this.org.getIdentity( name, function(identityList){
-         *     //identityList 为返回的身份，单个是对象，多个是数组。
+         *     //identityList 는 반환된 신분, 단건은 객체, 다건은 배열.
          * })
          */
         getIdentity: function(name, async){
@@ -844,33 +844,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员的身份
+        //사용자의 신분 목록
         /**
-         * 根据人员标识获取对应的身份对象数组。
+         * 사용자 식별자로 해당 신분 객체 배열 조회.
          * @method listIdentityWithPerson
          * @o2membercategory identity
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @param {(Boolean)} [findCN] 是否需要额外查找中文名称（如张三），默认false。如果为true，除匹配unique和distingiushedName外，还会在身份的第一段中查找所有匹配到的身份（精确匹配）。
-         * @return {Promise|IdentityData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @param {(Boolean)} [findCN] 한글 이름(예: 홍길동) 추가 검색 여부, 기본값 false. true이면 unique와 distingiushedName 일치 외에 신분의 첫 구간에서 일치하는 모든 신분을 검색(정확히 일치).
+         * @return {Promise|IdentityData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回身份对象数组。
+         * 그 외에는 신분 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.IdentityAction.listWithPersonObject|example=Identity
          * @o2syntax
-         * //同步执行，返回身份对象数组。
+         * //동기 실행, 신분 객체 배열 반환.
          * var identityList = this.org.listIdentityWithPerson( person );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listIdentityWithPerson( person, true);
          * promise.then(function(identityList){
-         *     //identityList 返回的身份对象数组。
+         *     //identityList 반환된 신분 객체 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listIdentityWithPerson( person, function(identityList){
-         *     //identityList 返回的身份对象数组。
+         *     //identityList 반환된 신분 객체 배열.
          * })
          */
         listIdentityWithPerson: function(name, async, findCN){
@@ -889,38 +889,38 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listIdentityWithPerson(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //查询组织成员身份--返回身份的对象数组
-        //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+        //조직 구성원 신분 조회--신분 객체 배열 반환
+        //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
         /**
-         * 根据组织标识获取对应的身份对象数组：identity对象数组。
+         * 조직 식별자로 해당 신분 객체 배열 조회: identity 객체 배열.
          * @method listIdentityWithUnit
          * @o2membercategory identity
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested] true嵌套的所有身份成员；false直接身份成员；默认false。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|IdentityData[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {Boolean} [nested] true는 하위 포함 모든 신분 구성원, false는 직속 신분 구성원, 기본값 false.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|IdentityData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回身份对象数组。
+         * 그 외에는 신분 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.IdentityAction.listWithUnitSubNestedObject|example=Identity
          * @o2syntax
-         * //同步执行，返回直接组织身份对象数组。
+         * //동기 실행, 직속 조직 신분 객체 배열 반환.
          * var identityList = this.org.listIdentityWithUnit( unit );
          *
          *
-         * //同步执行，返回嵌套组织身份对象数组。
+         * //동기 실행, 하위 포함 조직 신분 객체 배열 반환.
          * var identityList = this.org.listIdentityWithUnit( unit, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listIdentityWithUnit( unit, false, true);
          * promise.then(function(identityList){
-         *     //identityList 返回直接组织身份对象数组。
+         *     //identityList 반환된 직속 조직 신분 객체 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listIdentityWithUnit( unit, false, function(identityList){
-         *     //identityList 返回直接组织身份对象数组。
+         *     //identityList 반환된 직속 조직 신분 객체 배열.
          * })
          */
         listIdentityWithUnit: function(name, nested, async){
@@ -953,34 +953,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return (!!async) ? promise : v;
         },
 
-        //组织**********
-        //获取组织
+        //조직**********
+        //조직 조회
         /**
-         根据组织标识获取对应的组织：unit对象或数组
+         조직 식별자로 해당 조직 조회: unit 객체 또는 배열
          * @method getUnit
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @param {(Boolean)} [findCN] 是否需要额外查找中文名称（如综合部），默认false。如果为true，除匹配unique和distingiushedName外，还会在名称的第一段中查找所有匹配到的部门（精确匹配）。
-         * @return {Promise|UnitData|UnitData[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @param {(Boolean)} [findCN] 한글 이름(예: 종합부) 추가 검색 여부, 기본값 false. true이면 unique와 distingiushedName 일치 외에 이름의 첫 구간에서 일치하는 모든 부서를 검색(정확히 일치).
+         * @return {Promise|UnitData|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织，单个是Object，多个是Array。
+         * 그 외에는 조직 반환, 단건은 Object, 다건은 Array.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listObject|example=Unit
          * @o2syntax
-         * //同步执行，返回组织，单个是对象，多个是数组。
+         * //동기 실행, 조직 반환, 단건은 객체, 다건은 배열.
          * var unitList = this.org.getUnit( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getUnit( name, true);
          * promise.then(function(unitList){
-         *     //unitList 为返回的组织，单个是对象，多个是数组。
+         *     //unitList 는 반환된 조직, 단건은 객체, 다건은 배열.
          * })
          *
-         * //异步执行，在回调方法中获取组织
+         * //비동기 실행, 콜백 메서드에서 조직 조회
          * this.org.getUnit( name, function(unitList){
-         *     //unitList 为返回的组织，单个是对象，多个是数组。
+         *     //unitList 는 반환된 조직, 단건은 객체, 다건은 배열.
          * })
          */
         getUnit: function(name, async, findCN){
@@ -1000,34 +1000,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listUnit(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //查询组织的下级--返回组织的对象数组
-        //nested  布尔  true嵌套下级；false直接下级；默认false；
+        //조직의 하위 조회--조직 객체 배열 반환
+        //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
         /**
-         根据组织标识获取下级组织的对象数组：unit对象数组。
+         조직 식별자로 하위 조직 객체 배열 조회: unit 객체 배열.
          * @method listSubUnit
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested]  true嵌套的所有下级组织；false直接下级组织；默认false。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {Boolean} [nested]  true 중첩된 모든 하위 조직, false 직속 하위 조직, 기본값 false.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitSubNestedObject|example=Unit
          * @o2syntax
-         * //同步执行，返回嵌套下级组织数组。
+         * //동기 실행, 중첩 하위 조직 배열 반환.
          * var unitList = this.org.listSubUnit( name, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSubUnit( name, false, true);
          * promise.then(function(unitList){
-         *     //unitList 为返回的直接下级组织数组。
+         *     //unitList 반환된 직속 하위 조직 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listSubUnit( name, true, function(unitList){
-         *     //unitList 为返回嵌套下级组织数组。
+         *     //unitList 반환된 중첩 하위 조직 배열.
          * })
          */
         listSubUnit: function(name, nested, async){
@@ -1048,35 +1048,35 @@ MWF.xScript.ViewEnvironment = function (ev) {
             }
             return (!!async) ? promise : v;
         },
-        //查询组织的上级--返回组织的对象数组
-        //nested  布尔  true嵌套上级；false直接上级；默认false；
-        //async 布尔 true异步请求
+        //조직의 상위 조회--조직 객체 배열 반환
+        //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
+        //async 불리언 true 비동기 요청
         /**
-         根据组织标识批量获取上级组织的对象数组：unit对象数组。
+         조직 식별자로 상위 조직 객체 배열 일괄 조회: unit 객체 배열.
          * @method listSupUnit
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested]  true嵌套的所有上级组织；false直接上级组织；默认false。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {Boolean} [nested]  true 중첩된 모든 상위 조직, false 직속 상위 조직, 기본값 false.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitSupNestedObject|example=Unit
          * @o2syntax
-         * //同步执行，返回嵌套上级组织数组。
+         * //동기 실행, 중첩 상위 조직 배열 반환.
          * var unitList = this.org.listSupUnit( name, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSupUnit( name, false, true);
          * promise.then(function(unitList){
-         *     //unitList 为返回的直接上级组织数组。
+         *     //unitList 반환된 직속 상위 조직 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listSupUnit( name, true, function(unitList){
-         *     //unitList 为返回嵌套上级组织数组。
+         *     //unitList 반환된 중첩 상위 조직 배열.
          * })
          */
         listSupUnit: function(name, nested, async){
@@ -1117,31 +1117,31 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
 
         /**
-         根据组织标识和指定层级批量获取上级组织的对象数组（包括传入的数组）：unit对象数组。
+         조직 식별자와 지정 계층으로 상위 조직 객체 배열 일괄 조회(전달된 배열 포함): unit 객체 배열.
          * @method listSupUnitWithLevel
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {Number} level  指定的层级
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {Number} level  지정 계층
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitSupNestedObject|example=Unit
          * @o2syntax
-         * //同步执行，返回嵌套上级组织数组。
+         * //동기 실행, 중첩 상위 조직 배열 반환.
          * var unitList = this.org.listSupUnitWithLevel( name, level );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSupUnitWithLevel( name, level, true);
          * promise.then(function(unitList){
-         *     //unitList 为返回的直接上级组织数组。
+         *     //unitList 반환된 직속 상위 조직 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listSupUnitWithLevel( name, level, function(unitList){
-         *     //unitList 为返回嵌套上级组织数组。
+         *     //unitList 반환된 중첩 상위 조직 배열.
          * })
          */
         listSupUnitWithLevel: function(name, level, async){
@@ -1171,31 +1171,31 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
 
         /**
-         根据组织标识和指定组织类型批量获取上级组织的对象数组（包括传入的数组）：unit对象数组。
+         조직 식별자와 지정 조직 유형으로 상위 조직 객체 배열 일괄 조회(전달된 배열 포함): unit 객체 배열.
          * @method listSupUnitWithType
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {String} type  指定的组织类型
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {String} type  지정 조직 유형
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitSupNestedObject|example=Unit
          * @o2syntax
-         * //同步执行，返回嵌套上级组织数组。
+         * //동기 실행, 중첩 상위 조직 배열 반환.
          * var unitList = this.org.listSupUnitWithType( name, level );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSupUnitWithType( name, level, true);
          * promise.then(function(unitList){
-         *     //unitList 为返回的直接上级组织数组。
+         *     //unitList 반환된 직속 상위 조직 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listSupUnitWithType( name, level, function(unitList){
-         *     //unitList 为返回嵌套上级组织数组。
+         *     //unitList 반환된 중첩 상위 조직 배열.
          * })
          */
         listSupUnitWithType: function(name, type, async){
@@ -1225,42 +1225,42 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
 
 
-        //根据个人身份获取组织
-        //flag 数字    表示获取第几层的组织
-        //     字符串  表示获取指定类型的组织
-        //     空     表示获取直接所在的组织
+        //개인 신분으로 조직 조회
+        //flag 숫자    몇 번째 단계의 조직을 조회할지 나타냄
+        //     문자열  지정 유형의 조직 조회를 나타냄
+        //     비어 있음     직접 소속 조직 조회를 나타냄
         /**
-         根据个人身份获取组织：unit对象或数组。
+         개인 신분으로 조직 조회: unit 객체 또는 배열.
          * @method getUnitByIdentity
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {IdentityFlag} name - 身份的distinguishedName、id、unique属性值，身份对象。
-         * @param {String|Number} [flag]  当值为数字的时候， 表示获取第几层的组织。<br/> 当值为字符串的时候，表示获取指定类型的组织。<br/> 当值为空的时候，表示获取直接所在组织。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData|UnitData[]} 当async为true时，返回
+         * @param {IdentityFlag} name - 신분의 distinguishedName, id, unique 속성값, 신분 객체.
+         * @param {String|Number} [flag]  값이 숫자이면 몇 번째 계층의 조직을 조회.<br/> 값이 문자열이면 지정 유형의 조직을 조회.<br/> 값이 비어 있으면 직속 조직을 조회.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回对应组织，单个为对象，多个为数组。
+         * 그렇지 않으면 해당 조직 반환, 단일은 객체, 복수는 배열.
          * @o2ActionOut x_organization_assemble_express.UnitAction.getWithIdentityWithLevelObject|example=Unit
          * @o2syntax
-         * //同步执行，返回直接所在组织，单个为对象，多个为数组。
+         * //동기 실행, 직속 조직 반환, 단일은 객체, 복수는 배열.
          * var unitList = this.org.getUnitByIdentity( name );
          *
-         * //同步执行，返回第一层组织，单个为对象，多个为数组。
+         * //동기 실행, 첫 번째 계층 조직 반환, 단일은 객체, 복수는 배열.
          * var unitList = this.org.getUnitByIdentity( name, 1 );
          *
-         * * //同步执行，返回类型为company的组织，单个为对象，多个为数组。
+         * * //동기 실행, 유형이 company인 조직 반환, 단일은 객체, 복수는 배열.
          * var unitList = this.org.getUnitByIdentity( name, "company" );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getUnitByIdentity( name, null, true);
          * promise.then(function(unitList){
-         *     //unitList 返回直接所在组织，单个为对象，多个为数组。
+         *     //unitList 직속 조직 반환, 단일은 객체, 복수는 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.getUnitByIdentity( name, 1, function(unitList){
-         *     //unitList 返回第一层组织，单个为对象，多个为数组。
+         *     //unitList 첫 번째 계층 조직 반환, 단일은 객체, 복수는 배열.
          * })
          */
         getUnitByIdentity: function(name, flag, async){
@@ -1325,32 +1325,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             }
             return (!!async) ? promise : v;
         },
-        //列出身份所在组织的所有上级组织
+        //신분 소속 조직의 모든 상위 조직 목록
         /**
-         * 批量查询身份所在的组织,并递归查找其上级组织对象.
+         * 신분이 속한 조직 일괄 조회, 상위 조직 객체 재귀 조회.
          * @method listAllSupUnitWithIdentity
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {IdentityFlag|IdentityFlag[]} name - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {IdentityFlag|IdentityFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 신분 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithIdentitySupNestedObject|example=Unit
          * @o2syntax
-         * //同步执行，返回组织数组。
+         * //동기 실행, 조직 배열 반환.
          * var unitList = this.org.listAllSupUnitWithIdentity( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listAllSupUnitWithIdentity( name, true);
          * promise.then(function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listAllSupUnitWithIdentity( name, function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          */
         listAllSupUnitWithIdentity: function(name, async){
@@ -1366,32 +1366,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listUnitSupNestedWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取人员所在的所有组织
+        //사용자가 소속된 모든 조직 조회
         /**
-         * 根据个人标识批量获取组织对象成员：Unit对象数组。
+         * 개인 식별자로 조직 객체 구성원 일괄 조회: Unit 객체 배열.
          * @method listUnitWithPerson
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithPersonObject|example=Unit
          * @o2syntax
-         * //同步执行，返回组织数组。
+         * //동기 실행, 조직 배열 반환.
          * var unitList = this.org.listUnitWithPerson( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listUnitWithPerson( name, true);
          * promise.then(function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listUnitWithPerson( name, function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          */
         listUnitWithPerson: function(name, async){
@@ -1407,32 +1407,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listUnitWithPerson(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员所在组织的所有上级组织
+        //사용자 소속 조직의 모든 상위 조직 목록
         /**
-         * 根据个人标识批量查询所在组织及所有上级组织：Unit对象数组。
+         * 개인 식별자로 소속 조직 및 모든 상위 조직 일괄 조회: Unit 객체 배열.
          * @method listAllSupUnitWithPerson
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回个人所在组织及所有上级组织。
+         * 그렇지 않으면 개인 소속 조직 및 모든 상위 조직 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithPersonSupNestedObject|example=Unit
          * @o2syntax
-         * //同步执行，返回组织数组。
+         * //동기 실행, 조직 배열 반환.
          * var unitList = this.org.listAllSupUnitWithPerson( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listAllSupUnitWithPerson( name, true);
          * promise.then(function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listAllSupUnitWithPerson( name, function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          */
         listAllSupUnitWithPerson: function(name, async){
@@ -1448,33 +1448,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listUnitSupNestedWithPerson(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //根据组织属性，获取所有符合的组织
+        //조직 속성으로 일치하는 모든 조직 조회
         /**
-         * 根据组织属性，获取所有符合的组织。
+         * 조직 속성으로 일치하는 모든 조직 조회.
          * @method listUnitWithAttribute
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {String} attributeName 组织属性名称。
-         * @param {String} attributeValue 组织属性值。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {String} attributeName 조직 속성 이름.
+         * @param {String} attributeValue 조직 속성값.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitAttributeObject|example=Unit
          * @o2syntax
-         * //同步执行，返回组织数组。
+         * //동기 실행, 조직 배열 반환.
          * var unitList = this.org.listUnitWithAttribute( attributeName, attributeName );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listUnitWithAttribute( attributeName, attributeName, true);
          * promise.then(function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listUnitWithAttribute( attributeName, attributeName, function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          */
         listUnitWithAttribute: function(name, attribute, async){
@@ -1490,33 +1490,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             promise = orgActions.listUnitWithAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //根据组织职务，获取所有符合的组织
+        //조직 직무로 일치하는 모든 조직 조회
         /**
-         * 根据组织职务，获取所有符合的组织。
+         * 조직 직무로 일치하는 모든 조직 조회.
          * @method listUnitWithDuty
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {String} dutyName 组织职务名称。
-         * @param {IdentityFlag} identity 身份的distinguishedName、id、unique属性值，身份对象。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {String} dutyName 조직 직무 이름.
+         * @param {IdentityFlag} identity 신분의 distinguishedName, id, unique 속성값, 신분 객체.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织数组。
+         * 그렇지 않으면 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listWithUnitDutyObject|example=Unit
          * @o2syntax
-         * //同步执行，返回组织数组。
+         * //동기 실행, 조직 배열 반환.
          * var unitList = this.org.listUnitWithDuty( dutyName, identity );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listUnitWithDuty( dutyName, identity, true);
          * promise.then(function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listUnitWithDuty( dutyName, identity, function(unitList){
-         *     //unitList 返回组织数组。
+         *     //unitList 조직 배열 반환.
          * })
          */
         listUnitWithDuty: function(name, id, async){
@@ -1534,29 +1534,29 @@ MWF.xScript.ViewEnvironment = function (ev) {
         },
 
         /**
-         * 列式所有顶层组织。
+         * 모든 최상위 조직 나열.
          * @method listTopUnit
          * @o2membercategory unit
          * @methodOf module:org
          * @static
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|UnitData[]} 当async为true时，返回
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|UnitData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回顶层组织数组。
+         * 그렇지 않으면 최상위 조직 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitAction.listObject|example=Unit
          * @o2syntax
-         * //同步执行，返回顶层组织数组。
+         * //동기 실행, 최상위 조직 배열 반환.
          * var unitList = this.org.listTopUnit();
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listTopUnit(true);
          * promise.then(function(unitList){
-         *     //unitList 返回顶层组织数组。
+         *     //unitList 최상위 조직 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listTopUnit(function(unitList){
-         *     //unitList 返回顶层组织数组。
+         *     //unitList 최상위 조직 배열 반환.
          * })
          */
         listTopUnit: function(async){
@@ -1572,33 +1572,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return (!!async) ? promise : v;
         },
 
-        //人员
-        //获取人员,附带身份,身份所在的组织,个人所在群组,个人拥有角色.
+        //사용자
+        //사용자 조회, 신분, 신분 소속 조직, 개인 소속 그룹, 개인 보유 역할 포함.
         /**
-         根据人员标识获取对应的人员对象，附带身份,身份所在的组织,个人所在群组,个人拥有角色.
+         사용자 식별자로 해당 사용자 객체 조회, 신분, 신분 소속 조직, 개인 소속 그룹, 개인 보유 역할 포함.
          * @method getPersonData
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {String} name - 人员的distinguishedName、id、unique属性值，人员名称。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData} 当async为true时，返回
+         * @param {String} name - 사용자의 distinguishedName, id, unique 속성값, 사용자 이름.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员对象。
+         * 그렇지 않으면 사용자 객체 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.get|example=PersonData
          * @o2syntax
-         * //同步执行，返回人员对象。
+         * //동기 실행, 사용자 객체 반환.
          * var person = this.org.getPersonData( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getPersonData( name, true);
          * promise.then(function(person){
-         *     //personList 为返回的人员对象。
+         *     //personList 반환된 사용자 객체.
          * })
          *
-         * //异步执行，在回调方法中获取人员
+         * //비동기 실행, 콜백 메서드에서 사용자 조회
          * this.org.getPersonData( name, function(person){
-         *     //personList 为返回的人员对象。
+         *     //personList 반환된 사용자 객체.
          * })
          */
         getPersonData: function(name, async){
@@ -1612,33 +1612,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.getPerson(null, cb, null, !!async, {"flag": name});
             return (!!async) ? promise : v;
         },
-        //获取人员--返回人员的对象数组
+        //사용자 조회--사용자 객체 배열 반환
         /**
-         根据人员标识获取对应的人员对象或数组：person对象或数组
+         사용자 식별자로 해당 사용자 객체 또는 배열 조회: person 객체 또는 배열
          * @method getPerson
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @param {(Boolean)} [findCN] 是否需要额外查找中文名称（如张三），默认false。如果为true，除匹配unique和distingiushedName外，还会在名称的第一段中查找所有匹配到的人（精确匹配）。
-         * @return {Promise|PersonData|PersonData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @param {(Boolean)} [findCN] 한글 이름(예: 홍길동)을 추가로 찾을지 여부, 기본값 false. true이면 unique와 distingiushedName 일치 외에 이름 첫 부분에서 일치하는 모든 사람을 찾음(정확히 일치).
+         * @return {Promise|PersonData|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员，单个是Object，多个是Array。
+         * 그렇지 않으면 사용자 반환, 단일은 Object, 복수는 Array.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listObject|example=Person
          * @o2syntax
-         * //同步执行，返回人员，单个是对象，多个是数组。
+         * //동기 실행, 사용자 반환, 단일은 객체, 복수는 배열.
          * var personList = this.org.getPerson( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getPerson( name, true);
          * promise.then(function(personList){
-         *     //personList 为返回的人员，单个是对象，多个是数组。
+         *     //personList 반환된 사용자, 단일은 객체, 복수는 배열.
          * })
          *
-         * //异步执行，在回调方法中获取人员
+         * //비동기 실행, 콜백 메서드에서 사용자 조회
          * this.org.getPerson( name, function(personList){
-         *     //personList 为返回的人员，单个是对象，多个是数组。
+         *     //personList 반환된 사용자, 단일은 객체, 복수는 배열.
          * })
          */
         getPerson: function(name, async, findCN){
@@ -1661,34 +1661,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // orgActions.listPerson(data, function(json){v = json.data;}, null, false);
             // return (v && v.length===1) ? v[0] : v;
         },
-        //查询下级人员--返回人员的对象数组
-        //nested  布尔  true嵌套下级；false直接下级；默认false；
+        //하위 사용자 조회--사용자 객체 배열 반환
+        //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
         /**
-         根据人员标识获取下级人员的对象数组：person对象数组。该上下级关系被人员的汇报对象值（superior）决定。
+         사용자 식별자로 하위 사용자 객체 배열 조회: person 객체 배열. 상하 관계는 사용자의 보고 대상 값(superior)으로 결정.
          * @method listSubPerson
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested]  true嵌套的所有下级人员；false直接下级人员；默认false。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {Boolean} [nested]  true 중첩된 모든 하위 사용자, false 직속 하위 사용자, 기본값 false.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员数组。
+         * 그렇지 않으면 사용자 배열 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listWithPersonSubDirectObject|example=Person
          * @o2syntax
-         * //同步执行，返回嵌套下级人员数组。
+         * //동기 실행, 중첩 하위 사용자 배열 반환.
          * var personList = this.org.listSubPerson( name, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSubPerson( name, false, true);
          * promise.then(function(personList){
-         *     //personList 为返回的直接下级人员数组。
+         *     //personList 반환된 직속 하위 사용자 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listSubPerson( name, true, function(personList){
-         *     //personList 为返回嵌套下级人员数组。
+         *     //personList 반환된 중첩 하위 사용자 배열.
          * })
          */
         listSubPerson: function(name, nested, async){
@@ -1710,34 +1710,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
             }
             return (!!async) ? promise : v;
         },
-        //查询上级人员--返回人员的对象数组
-        //nested  布尔  true嵌套上级；false直接上级；默认false；
+        //상위 사용자 조회--사용자 객체 배열 반환
+        //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
         /**
-         *根据人员标识获取上级人员的对象数组：person对象数组。该上下级关系被人员的汇报对象值（superior）决定。
+         *사용자 식별자로 상위 사용자 객체 배열 조회: person 객체 배열. 상하 관계는 사용자의 보고 대상 값(superior)으로 결정.
          * @method listSupPerson
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested]  true嵌套的所有上级人员；false直接上级人员；默认false。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {Boolean} [nested]  true 중첩된 모든 상위 사용자, false 직속 상위 사용자, 기본값 false.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员数组。
+         * 그렇지 않으면 사용자 배열 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listWithPersonSupDirectObject|example=Person
          * @o2syntax
-         * //同步执行，返回嵌套上级人员数组。
+         * //동기 실행, 중첩 상위 사용자 배열 반환.
          * var personList = this.org.listSupPerson( name, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSupPerson( name, false, true);
          * promise.then(function(personList){
-         *     //personList 为返回的直接上级人员数组。
+         *     //personList 반환된 직속 상위 사용자 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listSupPerson( name, true, function(personList){
-         *     //personList 为返回嵌套上级人员数组。
+         *     //personList 반환된 중첩 상위 사용자 배열.
          * })
          */
         listSupPerson: function(name, nested, async){
@@ -1758,32 +1758,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             }
             return (!!async) ? promise : v;
         },
-        //获取群组的所有人员--返回人员的对象数组
+        //그룹의 모든 사용자 조회--사용자 객체 배열 반환
         /**
-         * 根据群组标识获取人员对象成员：person对象数组。
+         * 그룹 식별자로 사용자 객체 구성원 조회: person 객체 배열.
          * @method listPersonWithGroup
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData[]} 当async为true时，返回
+         * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员对象数组。
+         * 그렇지 않으면 사용자 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listWithGroupObject|example=Person
          * @o2syntax
-         * //同步执行，返回人员数组。
+         * //동기 실행, 사용자 배열 반환.
          * var personList = this.org.listPersonWithGroup( group );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listPersonWithGroup( group, true);
          * promise.then(function(personList){
-         *     //personList 为返回的人员数组。
+         *     //personList 반환된 사용자 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listPersonWithGroup( group, function(personList){
-         *     //personList 为返回的人员数组。
+         *     //personList 반환된 사용자 배열.
          * })
          */
         listPersonWithGroup: function(name, async){
@@ -1800,32 +1800,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listPersonWithGroup(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取角色的所有人员--返回人员的对象数组
+        //역할의 모든 사용자 조회--사용자 객체 배열 반환
         /**
-         * 根据角色标识获取人员对象数组：person对象数组。
+         * 역할 식별자로 사용자 객체 배열 조회: person 객체 배열.
          * @method listPersonWithRole
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {RoleFlag|RoleFlag[]} name - 角色的distinguishedName、name、id、unique属性值，角色对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData[]} 当async为true时，返回
+         * @param {RoleFlag|RoleFlag[]} name - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员对象数组。
+         * 그렇지 않으면 사용자 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listWithRoleObject|example=Person
          * @o2syntax
-         * //同步执行，返回人员数组。
+         * //동기 실행, 사용자 배열 반환.
          * var personList = this.org.listPersonWithRole( role );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listPersonWithRole( role, true);
          * promise.then(function(personList){
-         *     //personList 为返回的人员数组。
+         *     //personList 반환된 사용자 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listPersonWithRole( role, function(personList){
-         *     //personList 为返回的人员数组。
+         *     //personList 반환된 사용자 배열.
          * })
          */
         listPersonWithRole: function(name, async){
@@ -1842,32 +1842,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             promise = orgActions.listPersonWithRole(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取身份的所有人员--返回人员的对象数组
+        //신분의 모든 사용자 조회--사용자 객체 배열 반환
         /**
-         * 根据身份标识获取人员对象成员：person对象数组。
+         * 신분 식별자로 사용자 객체 구성원 조회: person 객체 배열.
          * @method listPersonWithIdentity
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {IdentityFlag|IdentityFlag[]} name - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData[]} 当async为true时，返回
+         * @param {IdentityFlag|IdentityFlag[]} name - 신분의 distinguishedName, id, unique 속성 값, 신분 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员对象数组。
+         * 그렇지 않으면 사용자 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listWithIdentityObject|example=Person
          * @o2syntax
-         * //同步执行，返回人员数组。
+         * //동기 실행, 사용자 배열 반환.
          * var personList = this.org.listPersonWithIdentity( identity );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listPersonWithIdentity( identity, true);
          * promise.then(function(personList){
-         *     //personList 为返回的人员数组。
+         *     //personList 반환된 사용자 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listPersonWithIdentity( identity, function(personList){
-         *     //personList 为返回的人员数组。
+         *     //personList 반환된 사용자 배열.
          * })
          */
         listPersonWithIdentity: function(name, async){
@@ -1883,7 +1883,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listPersonWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取身份的所有人员--返回人员的对象数组或人员对象
+        //신분의 모든 사용자 조회--사용자 객체 배열 또는 사용자 객체 반환
         getPersonWithIdentity: function(name, async){
             getOrgActions();
             var data = {"identityList": getNameFlag(name)};
@@ -1898,37 +1898,37 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listPersonWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //查询组织成员的人员--返回人员的对象数组
-        //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+        //조직 구성원 사용자 조회--사용자 객체 배열 반환
+        //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
         /**
-         * 根据组织标识获取人员对象成员：person对象数组。
+         * 조직 식별자로 사용자 객체 구성원 조회: person 객체 배열.
          * @method listPersonWithUnit
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested] 是否嵌套获取组织以及下级组织的人员，true表示嵌套，flase表示获取直接组织。默认为false
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {Boolean} [nested] 조직 및 하위 조직의 사용자를 중첩 조회할지 여부, true는 중첩, flase는 직속 조직 조회. 기본값 false
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员对象数组。
+         * 그렇지 않으면 사용자 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listWithUnitSubDirectObject|example=Person
          * @o2syntax
-         * //同步执行，返回组织的直接人员数组。
+         * //동기 실행, 조직의 직속 사용자 배열 반환.
          * var personList = this.org.listPersonWithUnit( unit );
          *
-         * //同步执行，返回组织的以及嵌套下级组织所有的人员数组。
+         * //동기 실행, 조직 및 중첩 하위 조직의 모든 사용자 배열 반환.
          * var personList = this.org.listPersonWithUnit( unit, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listPersonWithUnit( unit, false, true);
          * promise.then(function(personList){
-         *     //personList 为返回的组织的直接人员数组。
+         *     //personList 반환된 조직의 직속 사용자 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listPersonWithUnit( unit, false, function(personList){
-         *     //personList 为返回的群组的直接人员数组。
+         *     //personList 반환된 그룹의 직속 사용자 배열.
          * })
          */
         listPersonWithUnit: function(name, nested, async){
@@ -1949,35 +1949,35 @@ MWF.xScript.ViewEnvironment = function (ev) {
             }
             return (!!async) ? promise : v;
         },
-        //根据属性查询人员--返回人员的对象数组
-        //name  string 属性名
-        //value  string 属性值
+        //속성으로 사용자 조회--사용자 객체 배열 반환
+        //name  string 속성 이름
+        //value  string 속성 값
         /**
-         * 根据人员属性名称和属性值获取人员对象成员：person对象数组。
+         * 사용자 속성 이름과 속성값으로 사용자 객체 구성원 조회: person 객체 배열.
          * @method listPersonWithAttribute
          * @o2membercategory person
          * @methodOf module:org
          * @static
-         * @param {String} name 人员属性名称。
-         * @param {String} value 人员属性值。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|PersonData[]} 当async为true时，返回
+         * @param {String} name 사용자 속성 이름.
+         * @param {String} value 사용자 속성값.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|PersonData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员对象数组。
+         * 그렇지 않으면 사용자 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.PersonAction.listWithPersonAttributeObject|example=Person
          * @o2syntax
-         * //同步执行，返回拥有对应属性名和属性值人员数组。
+         * //동기 실행, 해당 속성 이름과 속성값을 가진 사용자 배열 반환.
          * var personList = this.org.listPersonWithAttribute( name, value );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listPersonWithAttribute( name, value, true);
          * promise.then(function(personList){
-         *     //personList 返回拥有对应属性名和属性值人员数组。
+         *     //personList 해당 속성 이름과 속성값을 가진 사용자 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listPersonWithAttribute( name, value, function(personList){
-         *     //personList 返回拥有对应属性名和属性值人员数组。
+         *     //personList 해당 속성 이름과 속성값을 가진 사용자 배열 반환.
          * })
          */
         listPersonWithAttribute: function(name, value, async){
@@ -1993,9 +1993,9 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listPersonWithAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //根据属性查询人员--返回人员的全称数组
-        //name  string 属性名
-        //value  string 属性值
+        //속성으로 사용자 조회--사용자 전체 이름 배열 반환
+        //name  string 속성 이름
+        //value  string 속성 값
         listPersonNameWithAttribute: function(name, value, async){
             getOrgActions();
             var data = {"name": name, "attribute": value};
@@ -2010,34 +2010,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return (!!async) ? promise : v;
         },
 
-        //组织职务***********
-        //获取指定的组织职务的身份
+        //조직 직무***********
+        //지정 조직 직무의 신분 조회
         /**
-         * 根据职务名称和组织名称获取身份。
+         * 직무 이름과 조직 이름으로 신분 조회.
          * @method getDuty
          * @o2membercategory duty
          * @methodOf module:org
          * @static
-         * @param {String} dutyName 组织职务名称。
-         * @param {UnitFlag} unit 组织的distinguishedName、id、unique属性值，组织对象。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|IdentityData[]} 当async为true时，返回
+         * @param {String} dutyName 조직 직무 이름.
+         * @param {UnitFlag} unit 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|IdentityData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回身份数组。
+         * 그렇지 않으면 신분 배열 반환.
          * @o2ActionOut x_organization_assemble_express.UnitDutyAction.getWithUnitWithName|example=Identity
          * @o2syntax
-         * //同步执行，返回身份数组。
+         * //동기 실행, 신분 배열 반환.
          * var identityList = this.org.getDuty( dutyName, unit );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getDuty( dutyName, unit, true);
          * promise.then(function(identityList){
-         *     //identityList 返回身份数组。
+         *     //identityList 신분 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.getDuty( dutyName, unit, function(unitList){
-         *     //unitList 返回身份数组。
+         *     //unitList 신분 배열 반환.
          * })
          */
         getDuty: function(duty, id, async){
@@ -2054,31 +2054,31 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.getDuty(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取身份的所有职务名称
+        //신분의 모든 직무 이름 조회
         /**
-         * 批量获取身份的所有职务名称。
+         * 신분의 모든 직무 이름 일괄 조회.
          * @method listDutyNameWithIdentity
          * @o2membercategory duty
          * @methodOf module:org
          * @static
-         * @param {IdentityFlag|IdentityFlag[]} identity - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|String[]} 当async为true时，返回
+         * @param {IdentityFlag|IdentityFlag[]} identity - 신분의 distinguishedName, id, unique 속성값, 신분 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|String[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回职务名称数组。
+         * 그렇지 않으면 직무 이름 배열 반환.
          * @o2syntax
-         * //同步执行，返回职务名称数组。
+         * //동기 실행, 직무 이름 배열 반환.
          * var dutyNameList = this.org.listDutyNameWithIdentity( identity );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listDutyNameWithIdentity( identity, true);
          * promise.then(function(dutyNameList){
-         *     //dutyNameList 返回职务名称数组。
+         *     //dutyNameList 직무 이름 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listDutyNameWithIdentity( identity, function(dutyNameList){
-         *     //dutyNameList 返回职务名称数组。
+         *     //dutyNameList 직무 이름 배열 반환.
          * })
          */
         listDutyNameWithIdentity: function(name, async){
@@ -2094,31 +2094,31 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listDutyNameWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //批量获取组织的所有职务名称
+        //조직의 모든 직무 이름 일괄 조회
         /**
-         * 批量获取组织的所有职务名称。
+         * 조직의 모든 직무 이름 일괄 조회.
          * @method listDutyNameWithUnit
          * @o2membercategory duty
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} unit - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|String[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|String[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回职务名称数组。
+         * 그렇지 않으면 직무 이름 배열 반환.
          * @o2syntax
-         * //同步执行，返回职务名称数组。
+         * //동기 실행, 직무 이름 배열 반환.
          * var dutyNameList = this.org.listDutyNameWithUnit( unit );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listDutyNameWithUnit( unit, true);
          * promise.then(function(dutyNameList){
-         *     //dutyNameList 返回职务名称数组。
+         *     //dutyNameList 직무 이름 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listDutyNameWithUnit( unit, function(dutyNameList){
-         *     //dutyNameList 返回职务名称数组。
+         *     //dutyNameList 직무 이름 배열 반환.
          * })
          */
         listDutyNameWithUnit: function(name, async){
@@ -2134,32 +2134,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listDutyNameWithUnit(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取组织的所有职务
+        //조직의 모든 직무 조회
         /**
-         * 批量获取组织的所有职务。
+         * 조직의 모든 직무 일괄 조회.
          * @method listUnitAllDuty
          * @o2membercategory duty
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} unit - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|Object[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|Object[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回职务数组
+         * 그렇지 않으면 직무 배열 반환
          * @o2ActionOut x_organization_assemble_express.UnitDutyAction.listWithUnitObject|example=Duty
          * @o2syntax
-         * //同步执行，返回职务数组。
+         * //동기 실행, 직무 배열 반환.
          * var dutyList = this.org.listUnitAllDuty( unit );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listUnitAllDuty( unit, true);
          * promise.then(function(dutyList){
-         *     //dutyList 返回职务数组。
+         *     //dutyList 직무 배열 반환.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listUnitAllDuty( unit, function(dutyList){
-         *     //dutyList 返回职务数组。
+         *     //dutyList 직무 배열 반환.
          * })
          */
         listUnitAllDuty: function(name, async){
@@ -2176,33 +2176,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return (!!async) ? promise : v;
         },
 
-        //群组***************
-        //获取群组--返回群组的对象数组
+        //그룹***************
+        //그룹 조회--그룹 객체 배열 반환
         /**
-         根据群组标识获取对应的群组对象或数组：group对象或数组
+         그룹 식별자로 해당 그룹 객체 또는 배열 조회: group 객체 또는 배열
          * @method getGroup
          * @o2membercategory group
          * @methodOf module:org
          * @static
-         * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|GroupData|GroupData[]} 当async为true时，返回
+         * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|GroupData|GroupData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回群组，单个是Object，多个是Array。
+         * 그렇지 않으면 그룹 반환, 단일은 Object, 복수는 Array.
          * @o2ActionOut x_organization_assemble_express.GroupAction.listObject|example=Group
          * @o2syntax
-         * //同步执行，返回群组，单个是Object，多个是Array。
+         * //동기 실행, 그룹 반환, 단일은 Object, 복수는 Array.
          * var groupList = this.org.getGroup( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getGroup( name, true);
          * promise.then(function(groupList){
-         *     //groupList 为返回的群组，单个是Object，多个是Array。
+         *     //groupList 반환된 그룹, 단일은 Object, 복수는 Array.
          * })
          *
-         * //异步执行，在回调方法中获取群组
+         * //비동기 실행, 콜백 메서드에서 그룹 조회
          * this.org.getGroup( name, function(groupList){
-         *     //groupList 为返回的群组，单个是Object，多个是Array。
+         *     //groupList 반환된 그룹, 단일은 Object, 복수는 Array.
          * })
          */
         getGroup: function(name, async){
@@ -2225,34 +2225,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // orgActions.listGroup(data, function(json){v = json.data;}, null, false);
             // return (v && v.length===1) ? v[0] : v;
         },
-        //查询下级群组--返回群组的对象数组
-        //nested  布尔  true嵌套下级；false直接下级；默认false；
+        //하위 그룹 조회--그룹 객체 배열 반환
+        //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
         /**
-         根据群组标识获取下级群组的对象数组：group对象数组。
+         그룹 식별자로 하위 그룹 객체 배열 조회: group 객체 배열.
          * @method listSubGroup
          * @o2membercategory group
          * @methodOf module:org
          * @static
-         * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested]  true嵌套的所有下级群组；false直接下级群组；默认false。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|GroupData[]} 当async为true时，返回
+         * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+         * @param {Boolean} [nested]  true 중첩된 모든 하위 그룹, false 직속 하위 그룹, 기본값 false.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|GroupData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回群组数组。
+         * 그렇지 않으면 그룹 배열 반환.
          * @o2ActionOut x_organization_assemble_express.GroupAction.listWithGroupSubDirectObject|example=Group
          * @o2syntax
-         * //同步执行，返回嵌套下级群组数组。
+         * //동기 실행, 중첩 하위 그룹 배열 반환.
          * var groupList = this.org.listSubGroup( name, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSubGroup( name, false, true);
          * promise.then(function(groupList){
-         *     //groupList 为返回的直接下级群组数组。
+         *     //groupList 반환된 직속 하위 그룹 배열.
          * })
          *
-         * //异步执行，在回调方法中获取群组
+         * //비동기 실행, 콜백 메서드에서 그룹 조회
          * this.org.listSubGroup( name, true, function(groupList){
-         *     //groupList 为返回嵌套下级群组数组。
+         *     //groupList 반환된 중첩 하위 그룹 배열.
          * })
          */
         listSubGroup: function(name, nested, async){
@@ -2286,34 +2286,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // }
             // return v;
         },
-        //查询上级群组--返回群组的对象数组
-        //nested  布尔  true嵌套上级；false直接上级；默认false；
+        //상위 그룹 조회--그룹 객체 배열 반환
+        //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
         /**
-         根据群组标识获取上级群组的对象数组：group对象数组。
+         그룹 식별자로 상위 그룹 객체 배열 조회: group 객체 배열.
          * @method listSupGroup
          * @o2membercategory group
          * @methodOf module:org
          * @static
-         * @param {GroupFlag|GroupFlag[]} name - 群组的distinguishedName、name、id、unique属性值，群组对象，或上述属性值和对象的数组。
-         * @param {Boolean} [nested]  true嵌套的所有上级群组；false直接上级群组；默认false。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|GroupData[]} 当async为true时，返回
+         * @param {GroupFlag|GroupFlag[]} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체 또는 이 속성값과 객체의 배열.
+         * @param {Boolean} [nested]  true 중첩된 모든 상위 그룹, false 직속 상위 그룹, 기본값 false.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|GroupData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回群组数组。
+         * 그렇지 않으면 그룹 배열 반환.
          * @o2ActionOut x_organization_assemble_express.GroupAction.listWithGroupSupDirectObject|example=Group
          * @o2syntax
-         * //同步执行，返回嵌套上级群组数组。
+         * //동기 실행, 중첩 상위 그룹 배열 반환.
          * var groupList = this.org.listSupGroup( name, true );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listSupGroup( name, false, true);
          * promise.then(function(groupList){
-         *     //groupList 为返回的直接上级群组数组。
+         *     //groupList 반환된 직속 상위 그룹 배열.
          * })
          *
-         * //异步执行，在回调方法中获取群组
+         * //비동기 실행, 콜백 메서드에서 그룹 조회
          * this.org.listSupGroup( name, true, function(groupList){
-         *     //groupList 为返回嵌套上级群组数组。
+         *     //groupList 반환된 중첩 상위 그룹 배열.
          * })
          */
         listSupGroup:function(name, nested, async){
@@ -2342,32 +2342,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // }
             // return v;
         },
-        //人员所在群组（嵌套）--返回群组的对象数组
+        //사용자 소속 그룹(중첩)--그룹 객체 배열 반환
         /**
-         * 根据人员标识获取所有的群组对象数组。如果群组具有群组（group）成员，且群组成员中包含该人员，那么该群组也被返回。
+         * 사용자 식별자로 모든 그룹 객체 배열 조회. 그룹에 그룹(group) 구성원이 있고 그 구성원에 해당 사용자가 포함되면 그 그룹도 반환.
          * @method listGroupWithPerson
          * @o2membercategory group
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|GroupData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|GroupData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回群组对象数组。
+         * 그렇지 않으면 그룹 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.GroupAction.listWithPersonObject|example=Group
          * @o2syntax
-         * //同步执行，返回群组数组。
+         * //동기 실행, 그룹 배열 반환.
          * var groupList = this.org.listGroupWithPerson( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listGroupWithPerson( name, true);
          * promise.then(function(groupList){
-         *     //groupList 为返回的群组数组。
+         *     //groupList 반환된 그룹 배열.
          * })
          *
-         * //异步执行，在回调方法中获取群组
+         * //비동기 실행, 콜백 메서드에서 그룹 조회
          * this.org.listGroupWithPerson( name, function(groupList){
-         *     //groupList 为返回的群组数组。
+         *     //groupList 반환된 그룹 배열.
          * })
          */
         listGroupWithPerson:function(name, async){
@@ -2387,32 +2387,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // orgActions.listGroupWithPerson(data, function(json){v = json.data;}, null, false);
             // return v;
         },
-        //身份所在群组（嵌套）--返回群组的对象数组
+        //신분 소속 그룹(중첩)--그룹 객체 배열 반환
         /**
-         * 根据身份标识获取所有的群组对象数组。如果群组具有群组（group）成员，且群组成员中包含该身份，那么该群组也被返回。
+         * 신분 식별자로 모든 그룹 객체 배열 조회. 그룹에 그룹(group) 구성원이 있고 그 구성원에 해당 신분이 포함되면 그 그룹도 반환.
          * @method listGroupWithIdentity
          * @o2membercategory group
          * @methodOf module:org
          * @static
-         * @param {IdentityFlag|IdentityFlag[]} identity - 身份的distinguishedName、id、unique属性值，身份对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|GroupData[]} 当async为true时，返回
+         * @param {IdentityFlag|IdentityFlag[]} identity - 신분의 distinguishedName, id, unique 속성값, 신분 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|GroupData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回群组对象数组。
+         * 그렇지 않으면 그룹 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.GroupAction.listWithPersonObject|example=Group
          * @o2syntax
-         * //同步执行，返回群组数组。
+         * //동기 실행, 그룹 배열 반환.
          * var groupList = this.org.listGroupWithIdentity( identity );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listGroupWithIdentity( identity, true);
          * promise.then(function(groupList){
-         *     //groupList 为返回的群组数组。
+         *     //groupList 반환된 그룹 배열.
          * })
          *
-         * //异步执行，在回调方法中获取群组
+         * //비동기 실행, 콜백 메서드에서 그룹 조회
          * this.org.listGroupWithPerson( identity, function(groupList){
-         *     //groupList 为返回的群组数组。
+         *     //groupList 반환된 그룹 배열.
          * })
          */
         listGroupWithIdentity:function(identity, async){
@@ -2430,33 +2430,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return (!!async) ? promise : v;
         },
 
-        //角色***************
-        //获取角色--返回角色的对象数组
+        //역할***************
+        //역할 조회--역할 객체 배열 반환
         /**
-         * 根据角色标识获取对应的角色对象或数组。
+         * 역할 식별자로 해당 역할 객체 또는 배열 조회.
          * @method getRole
          * @o2membercategory role
          * @methodOf module:org
          * @static
-         * @param {RoleFlag|RoleFlag[]} name - 角色的distinguishedName、name、id、unique属性值，角色对象；或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|RoleData|RoleData[]} 当async为true时，返回
+         * @param {RoleFlag|RoleFlag[]} name - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|RoleData|RoleData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回角色，单个为Object，多个为Array。
+         * 그렇지 않으면 역할 반환, 단일은 Object, 복수는 Array.
          * @o2ActionOut x_organization_assemble_express.RoleAction.listObject|example=Role
          * @o2syntax
-         * //同步执行，返回角色，单个为对象，多个为数组。
+         * //동기 실행, 역할 반환, 단일은 객체, 복수는 배열.
          * var roleList = this.org.getRole( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getRole( name, true);
          * promise.then(function(roleList){
-         *     //roleList 为返回的角色，单个为对象，多个为数组。
+         *     //roleList 반환된 역할, 단일은 객체, 복수는 배열.
          * })
          *
-         * //异步执行，在回调方法中获取角色，单个为对象，多个为数组
+         * //비동기 실행, 콜백 메서드에서 역할 조회, 단일은 객체, 복수는 배열
          * this.org.getRole( name, function(roleList){
-         *     //roleList 为返回判断结果。
+         *     //roleList 반환된 판단 결과.
          * })
          */
         getRole: function(name, async){
@@ -2478,32 +2478,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // orgActions.listRole(data, function(json){v = json.data;}, null, false);
             // return (v && v.length===1) ? v[0] : v;
         },
-        //人员所有角色（嵌套）--返回角色的对象数组
+        //사용자의 모든 역할(중첩)--역할 객체 배열 반환
         /**
-         * 根据人员标识获取所有的角色对象数组。如果角色具有群组（group）成员，且群组中包含该人员，那么该角色也被返回。
+         * 사용자 식별자로 모든 역할 객체 배열 조회. 역할에 그룹(group) 구성원이 있고 그 그룹에 해당 사용자가 포함되면 그 역할도 반환.
          * @method listRoleWithPerson
          * @o2membercategory role
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|RoleData[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|RoleData[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回角色对象数组。
+         * 그렇지 않으면 역할 객체 배열 반환.
          * @o2ActionOut x_organization_assemble_express.RoleAction.listWithPersonObject|example=Role
          * @o2syntax
-         * //同步执行，返回角色数组。
+         * //동기 실행, 역할 배열 반환.
          * var roleList = this.org.listRoleWithPerson( name );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listRoleWithPerson( name, true);
          * promise.then(function(roleList){
-         *     //roleList 为返回的角色数组。
+         *     //roleList 반환된 역할 배열.
          * })
          *
-         * //异步执行，在回调方法中获取角色
+         * //비동기 실행, 콜백 메서드에서 역할 조회
          * this.org.listRoleWithPerson( name, function(roleList){
-         *     //roleList 为返回的角色数组。
+         *     //roleList 반환된 역할 배열.
          * })
          */
         listRoleWithPerson:function(name, async){
@@ -2524,33 +2524,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // return v;
         },
 
-        //人员***************
-        //人员是否拥有角色--返回true, false
+        //사용자***************
+        //사용자의 역할 보유 여부--true, false 반환
         /**
-         * 人员是否拥有角色。
+         * 사용자의 역할 보유 여부.
          * @method personHasRole
          * @o2membercategory role
          * @methodOf module:org
          * @static
-         * @param {PersonFlag} name - 人员的distinguishedName、id、unique属性值，人员对象。
-         * @param {RoleFlag|RoleFlag[]} roleList - 角色的distinguishedName、name、id、unique属性值，角色对象；或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|Boolean} 当async为true时，返回
+         * @param {PersonFlag} name - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+         * @param {RoleFlag|RoleFlag[]} roleList - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|Boolean} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则如果人员拥有角色返回true, 否则返回false。
+         * 그렇지 않으면 사용자가 역할을 보유하면 true, 아니면 false 반환.
          * @o2syntax
-         * //同步执行，返回判断结果。
+         * //동기 실행, 판단 결과 반환.
          * var flag = this.org.personHasRole( name, roleList );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.personHasRole( name, roleList, true);
          * promise.then(function(flag){
-         *     //flag 为返回判断结果。
+         *     //flag 반환된 판단 결과.
          * })
          *
-         * //异步执行，在回调方法中获取判断结果
+         * //비동기 실행, 콜백 메서드에서 판단 결과 조회
          * this.org.personHasRole( name, roleList, function(flag){
-         *     //flag 为返回判断结果。
+         *     //flag 반환된 판단 결과.
          * })
          */
         personHasRole: function(name, role, async){
@@ -2572,32 +2572,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // orgActions.personHasRole(data, function(json){v = json.data.value;}, null, false);
             // return v;
         },
-        //群组是否拥有角色--返回true, false
+        //그룹의 역할 보유 여부--true, false 반환
         /**
-         * 群组是否拥有角色。
+         * 그룹의 역할 보유 여부.
          * @method groupHasRole
          * @o2membercategory role
          * @methodOf module:org
          * @static
-         * @param {GroupFlag} name - 群组的distinguishedName、name、id、unique属性值，群组对象。
-         * @param {RoleFlag|RoleFlag[]} roleList - 角色的distinguishedName、name、id、unique属性值，角色对象；或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Promise|Boolean} 当async为true时，返回
+         * @param {GroupFlag} name - 그룹의 distinguishedName, name, id, unique 속성값, 그룹 객체.
+         * @param {RoleFlag|RoleFlag[]} roleList - 역할의 distinguishedName, name, id, unique 속성값, 역할 객체 또는 이 속성값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Promise|Boolean} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则如果群组拥有角色返回true, 否则返回false。
+         * 그렇지 않으면 그룹이 역할을 보유하면 true, 아니면 false 반환.
          * @o2syntax
-         * //同步执行，返回判断结果。
+         * //동기 실행, 판단 결과 반환.
          * var groupList = this.org.groupHasRole( name, roleList );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.groupHasRole( name, roleList, true);
          * promise.then(function(flag){
-         *     //flag 为返回判断结果。
+         *     //flag 반환된 판단 결과.
          * })
          *
-         * //异步执行，在回调方法中获取判断结果
+         * //비동기 실행, 콜백 메서드에서 판단 결과 조회
          * this.org.groupHasRole( name, roleList, function(flag){
-         *     //flag 为返回判断结果。
+         *     //flag 반환된 판단 결과.
          * })
          */
         groupHasRole: function(name, role, async){
@@ -2620,27 +2620,27 @@ MWF.xScript.ViewEnvironment = function (ev) {
             // return v;
         },
 
-        //人员属性************
-        //添加人员属性值(在属性中添加values值，如果没有此属性，则创建一个)
+        //사용자 속성************
+        //사용자 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
         /**
-         * 添加人员属性值(在属性中添加values值，如果没有此属性，则创建一个)
+         * 사용자 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
          * @method appendPersonAttribute
          * @o2membercategory personAttribute
          * @methodOf module:org
          * @static
-         * @param {PersonFlag} person - 人员的distinguishedName、id、unique属性值，人员对象。
-         * @param {String} attr 属性名称。
-         * @param {String[]} values 属性值，必须为数组。
-         * @param {Function} [success] 执行成功的回调。
-         * @param {Function} [failure] 执行失败的回调。
-         * @param {(Boolean)} [async] 当参数为boolean，表示是否异步执行，默认为false。
+         * @param {PersonFlag} person - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+         * @param {String} attr 속성 이름.
+         * @param {String[]} values 속성값, 반드시 배열.
+         * @param {Function} [success] 실행 성공 콜백.
+         * @param {Function} [failure] 실행 실패 콜백.
+         * @param {(Boolean)} [async] 파라미터가 boolean이면 비동기 실행 여부, 기본값 false.
          * @o2syntax
-         * //同步执行
+         * //동기 실행
          * this.org.appendPersonAttribute( person, attribute, valueArray);
          *
-         * //异步执行
+         * //비동기 실행
          * this.org.appendPersonAttribute( person, attribute, valueArray, function(){
-         *     //执行成功的回调
+         *     //실행 성공 콜백
          * }, null, true);
          */
         appendPersonAttribute: function(person, attr, values, success, failure, async){
@@ -2665,26 +2665,26 @@ MWF.xScript.ViewEnvironment = function (ev) {
             //
             // orgActions.appendPersonAttribute(data, cb, null, !!async);
         },
-        //设置人员属性值(将属性值修改为values，如果没有此属性，则创建一个)
+        //사용자 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
         /**
-         * 设置人员属性值(将属性值修改为values，如果没有此属性，则创建一个)
+         * 사용자 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
          * @method setPersonAttribute
          * @o2membercategory personAttribute
          * @methodOf module:org
          * @static
-         * @param {PersonFlag} person - 人员的distinguishedName、id、unique属性值，人员对象。
-         * @param {String} attr 属性名称。
-         * @param {String[]} values 属性值，必须为数组。
-         * @param {Function} [success] 执行成功的回调。
-         * @param {Function} [failure] 执行失败的回调。
-         * @param {(Boolean)} [async] 当参数为boolean，表示是否异步执行，默认为false。
+         * @param {PersonFlag} person - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+         * @param {String} attr 속성 이름.
+         * @param {String[]} values 속성값, 반드시 배열.
+         * @param {Function} [success] 실행 성공 콜백.
+         * @param {Function} [failure] 실행 실패 콜백.
+         * @param {(Boolean)} [async] 파라미터가 boolean이면 비동기 실행 여부, 기본값 false.
          * @o2syntax
-         * //同步执行
+         * //동기 실행
          * this.org.setPersonAttribute( person, attribute, valueArray);
          *
-         * //异步执行
+         * //비동기 실행
          * this.org.setPersonAttribute( person, attribute, valueArray, function(){
-         *     //执行成功的回调
+         *     //실행 성공 콜백
          * }, null, true);
          */
         setPersonAttribute: function(person, attr, values, success, failure, async){
@@ -2709,33 +2709,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             //
             // orgActions.setPersonAttribute(data, cb, null, !!async);
         },
-        //获取人员属性值
+        //사용자 속성 값 조회
         /**
-         根据人员和属性名称获取属性值数组。
+         사용자와 속성 이름으로 속성값 배열 조회.
          * @method getPersonAttribute
          * @o2membercategory personAttribute
          * @methodOf module:org
          * @static
-         * @param {PersonFlag} person - 人员的distinguishedName、id、unique属性值，人员对象。
-         * @param {String} attr 属性名称。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {String[]} 当async为true时，返回
+         * @param {PersonFlag} person - 사용자의 distinguishedName, id, unique 속성값, 사용자 객체.
+         * @param {String} attr 속성 이름.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {String[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回属性值数组，
-         * 如：<pre><code class='language-js'>[ value1, value2 ]</code></pre>
+         * 그렇지 않으면 속성값 배열 반환,
+         * 예: <pre><code class='language-js'>[ value1, value2 ]</code></pre>
          * @o2syntax
-         * //同步执行，返回该人员的属性值数组。
+         * //동기 실행, 해당 사용자의 속성값 배열 반환.
          * var attributeList = this.org.getPersonAttribute( person, attr );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getPersonAttribute( person, attr, true);
          * promise.then(function(attributeList){
-         *     //attributeList 为返回该人员的属性值数组。
+         *     //attributeList 반환된 해당 사용자의 속성값 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.getPersonAttribute( person, attr, function(attributeList){
-         *     //attributeList 为返回该人员的属性值数组。
+         *     //attributeList 반환된 해당 사용자의 속성값 배열.
          * })
          */
         getPersonAttribute: function(person, attr, async){
@@ -2752,32 +2752,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.getPersonAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员所有属性的名称
+        //사용자의 모든 속성 이름 목록
         /**
-         列出人员所有属性的名称数组。
+         사용자의 모든 속성 이름 배열 나열.
          * @method listPersonAttributeName
          * @o2membercategory personAttribute
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {String[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {String[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员属性名称数组，
-         * 如：<pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
+         * 그렇지 않으면 사용자 속성 이름 배열 반환,
+         * 예: <pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
          * @o2syntax
-         * //同步执行，返回人员所有属性的名称数组。
+         * //동기 실행, 사용자의 모든 속성 이름 배열 반환.
          * var attributeNameList = this.org.listPersonAttributeName( person );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listPersonAttributeName( person, true);
          * promise.then(function(attributeNameList){
-         *     //attributeNameList 为人员所有属性的名称数组。
+         *     //attributeNameList 사용자의 모든 속성 이름 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listPersonAttributeName( person, function(attributeNameList){
-         *     //attributeNameList 为人员所有属性的名称数组。
+         *     //attributeNameList 사용자의 모든 속성 이름 배열.
          * })
          */
         listPersonAttributeName: function(name, async){
@@ -2793,38 +2793,38 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listPersonAttributeName(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员的所有属性
+        //사용자의 모든 속성 목록
         /**
-         列出人员的所有属性对象数组。
+         사용자의 모든 속성 객체 배열 나열.
          * @method listPersonAllAttribute
          * @o2membercategory personAttribute
          * @methodOf module:org
          * @static
-         * @param {PersonFlag|PersonFlag[]} name - 人员的distinguishedName、id、unique属性值，人员对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Object[]} 当async为true时，返回
+         * @param {PersonFlag|PersonFlag[]} name - 사용자의 distinguishedName, id, unique 속성 값, 사용자 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Object[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回人员属性对象数组，如：
+         * 그렇지 않으면 사용자 속성 객체 배열 반환, 예:
          * <pre><code class='language-js'>[{
-         *    "name": "住址",
-         *    "person": "张三@zhangsan@P",
+         *    "name": "주소",
+         *    "person": "홍길동@zhangsan@P",
          *    "attributeList": [
-         *        "杭州市","绍兴市"
+         *        "서울시","부산시"
          *    ]
          * }]</code></pre>
          * @o2syntax
-         * //同步执行，返回人员所有属性的对象数组。
+         * //동기 실행, 사용자의 모든 속성 객체 배열 반환.
          * var attributeObjectList = this.org.listPersonAllAttribute( person );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listPersonAllAttribute( person, true);
          * promise.then(function(attributeObjectList){
-         *     //attributeObjectList 为人员所有属性的对象数组。
+         *     //attributeObjectList 사용자의 모든 속성 객체 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listPersonAllAttribute( person, function(attributeObjectList){
-         *     //attributeObjectList 为人员所有属性的对象数组。
+         *     //attributeObjectList 사용자의 모든 속성 객체 배열.
          * })
          */
         listPersonAllAttribute: function(name, async){
@@ -2841,27 +2841,27 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return (!!async) ? promise : v;
         },
 
-        //组织属性**************
-        //添加组织属性值(在属性中添加values值，如果没有此属性，则创建一个)
+        //조직 속성**************
+        //조직 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
         /**
-         * 添加组织属性值(在属性中添加values值，如果没有此属性，则创建一个)
+         * 조직 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
          * @method appendUnitAttribute
          * @o2membercategory unitAttribute
          * @methodOf module:org
          * @static
-         * @param {UnitFlag} unit - 组织的distinguishedName、id、unique属性值，组织对象。
-         * @param {String} attribute 属性名称。
-         * @param {String[]} valueArray 属性值，必须为数组。
-         * @param {Function} [success] 执行成功的回调。
-         * @param {Function} [failure] 执行失败的回调。
-         * @param {(Boolean)} [async] 当参数为boolean，表示是否异步执行，默认为false。
+         * @param {UnitFlag} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+         * @param {String} attribute 속성 이름.
+         * @param {String[]} valueArray 속성값, 반드시 배열.
+         * @param {Function} [success] 실행 성공 콜백.
+         * @param {Function} [failure] 실행 실패 콜백.
+         * @param {(Boolean)} [async] 파라미터가 boolean이면 비동기 실행 여부, 기본값 false.
          * @o2syntax
-         * //同步执行
+         * //동기 실행
          * this.org.appendUnitAttribute( unit, attribute, valueArray);
          *
-         * //异步执行
+         * //비동기 실행
          * this.org.appendUnitAttribute( unit, attribute, valueArray, function(){
-         *     //执行成功的回调
+         *     //실행 성공 콜백
          * }, null, true);
          */
         appendUnitAttribute: function(unit, attr, values, success, failure, async){
@@ -2896,26 +2896,26 @@ MWF.xScript.ViewEnvironment = function (ev) {
             //     if (failure) failure(xhr, text, error);
             // }, false);
         },
-        //设置组织属性值(将属性值修改为values，如果没有此属性，则创建一个)
+        //조직 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
         /**
-         * 设置组织属性值(将属性值修改为values，如果没有此属性，则创建一个)
+         * 조직 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
          * @method setUnitAttribute
          * @o2membercategory unitAttribute
          * @methodOf module:org
          * @static
-         * @param {UnitFlag} unit - 组织的distinguishedName、id、unique属性值，组织对象。
-         * @param {String} attribute 属性名称。
-         * @param {String[]} valueArray 属性值，必须为数组。
-         * @param {Function} [success] 执行成功的回调。
-         * @param {Function} [failure] 执行失败的回调。
-         * @param {(Boolean)} [async] 当参数为boolean，表示是否异步执行，默认为false。
+         * @param {UnitFlag} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+         * @param {String} attribute 속성 이름.
+         * @param {String[]} valueArray 속성값, 반드시 배열.
+         * @param {Function} [success] 실행 성공 콜백.
+         * @param {Function} [failure] 실행 실패 콜백.
+         * @param {(Boolean)} [async] 파라미터가 boolean이면 비동기 실행 여부, 기본값 false.
          * @o2syntax
-         * //同步执行
+         * //동기 실행
          * this.org.setUnitAttribute( unit, attribute, valueArray);
          *
-         * //异步执行
+         * //비동기 실행
          * this.org.setUnitAttribute( unit, attribute, valueArray, function(){
-         *     //执行成功的回调
+         *     //실행 성공 콜백
          * }, null, true);
          */
         setUnitAttribute: function(unit, attr, values, success, failure, async){
@@ -2949,33 +2949,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
             //     if (failure) failure(xhr, text, error);
             // }, false);
         },
-        //获取组织属性值
+        //조직 속성 값 조회
         /**
-         根据组织标识和属性名称获取对应属性值。
+         조직 식별자와 속성 이름으로 해당 속성값 조회.
          * @method getUnitAttribute
          * @o2membercategory unitAttribute
          * @methodOf module:org
          * @static
-         * @param {UnitFlag} unit - 组织的distinguishedName、id、unique属性值，组织对象。
-         * @param {String} attr 属性名称。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {String[]} 当async为true时，返回
+         * @param {UnitFlag} unit - 조직의 distinguishedName, id, unique 속성값, 조직 객체.
+         * @param {String} attr 속성 이름.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {String[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回属性值数组，
-         * 如：<pre><code class='language-js'>[ value1, value2 ]</code></pre>
+         * 그렇지 않으면 속성값 배열 반환,
+         * 예: <pre><code class='language-js'>[ value1, value2 ]</code></pre>
          * @o2syntax
-         * //同步执行，返回该组织的属性值数组。
+         * //동기 실행, 해당 조직의 속성값 배열 반환.
          * var attributeList = this.org.getUnitAttribute( unit, attr );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.getUnitAttribute( unit, attr, true);
          * promise.then(function(attributeList){
-         *     //attributeList 为返回该组织的属性值数组。
+         *     //attributeList 반환된 해당 조직의 속성값 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.getUnitAttribute( unit, attr, function(attributeList){
-         *     //attributeList 为返回该组织的属性值数组。
+         *     //attributeList 반환된 해당 조직의 속성값 배열.
          * })
          */
         getUnitAttribute: function(unit, attr, async){
@@ -2992,32 +2992,32 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.getUnitAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出组织所有属性的名称
+        //조직의 모든 속성 이름 목록
         /**
-         列出组织所有属性的名称数组。
+         조직의 모든 속성 이름 배열 나열.
          * @method listUnitAttributeName
          * @o2membercategory unitAttribute
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {String[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {String[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织属性名称数组，
-         * 如：<pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
+         * 그렇지 않으면 조직 속성 이름 배열 반환,
+         * 예: <pre><code class='language-js'>[ attributeName1, attributeName2 ]</code></pre>
          * @o2syntax
-         * //同步执行，返回组织所有属性的名称数组。
+         * //동기 실행, 조직의 모든 속성 이름 배열 반환.
          * var attributeNameList = this.org.listUnitAttributeName( unit );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listUnitAttributeName( unit, true);
          * promise.then(function(attributeNameList){
-         *     //attributeNameList 为组织所有属性的名称数组。
+         *     //attributeNameList 조직의 모든 속성 이름 배열.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listUnitAttributeName( unit, function(attributeNameList){
-         *     //attributeNameList 为组织所有属性的名称数组。
+         *     //attributeNameList 조직의 모든 속성 이름 배열.
          * })
          */
         listUnitAttributeName: function(name, async){
@@ -3033,39 +3033,39 @@ MWF.xScript.ViewEnvironment = function (ev) {
             var promise = orgActions.listUnitAttributeName(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出组织的所有属性
+        //조직의 모든 속성 목록
         /**
-         列出组织的所有属性对象数组。
+         조직의 모든 속성 객체 배열을 나열합니다.
          * @method listUnitAllAttribute
          * @o2membercategory unitAttribute
          * @methodOf module:org
          * @static
-         * @param {UnitFlag|UnitFlag[]} name - 组织的distinguishedName、id、unique属性值，组织对象，或上述属性值和对象的数组。
-         * @param {(Boolean|Function)} [asyncOrCallback] 当参数为boolean，表示是否异步执行，默认为false。当参数为function，表示回调方法。
-         * @return {Object[]} 当async为true时，返回
+         * @param {UnitFlag|UnitFlag[]} name - 조직의 distinguishedName, id, unique 속성 값, 조직 객체, 또는 이 속성 값과 객체의 배열.
+         * @param {(Boolean|Function)} [asyncOrCallback] boolean이면 비동기 실행 여부, 기본값 false. function이면 콜백 메서드.
+         * @return {Object[]} async가 true이면 반환
          * {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}。
-         * 否则返回组织属性对象数组，如：
+         * 그렇지 않으면 조직 속성 객체 배열을 반환합니다. 예:
          * <pre><code class='language-js'>[{
-         *    "name": "部门类别",
-         *    "unit": "开发部@kfb@U",
+         *    "name": "부서 유형",
+         *    "unit": "개발부@kfb@U",
          *    "attributeList": [
-         *        "生产部门",
-         *        "二级部门"
+         *        "생산 부서",
+         *        "2급 부서"
          *    ]
          * }]</code></pre>
          * @o2syntax
-         * //同步执行，返回组织所有属性的对象数组。
+         * //동기 실행, 조직의 모든 속성 객체 배열을 반환합니다.
          * var attributeObjectList = this.org.listUnitAllAttribute( unit );
          *
-         * //异步执行，返回Promise对象
+         * //비동기 실행, Promise 객체 반환
          * var promise = this.org.listUnitAllAttribute( unit, true);
          * promise.then(function(attributeObjectList){
-         *     //attributeObjectList 为组织所有属性的对象数组。
+         *     //attributeObjectList는 조직의 모든 속성 객체 배열입니다.
          * })
          *
-         * //异步执行，在回调方法中获取
+         * //비동기 실행, 콜백 메서드에서 조회
          * this.org.listUnitAllAttribute( unit, function(attributeObjectList){
-         *     //attributeObjectList 为组织所有属性的对象数组。
+         *     //attributeObjectList는 조직의 모든 속성 객체 배열입니다.
          * })
          */
         listUnitAllAttribute: function(name, async){
@@ -3268,101 +3268,101 @@ MWF.xScript.ViewEnvironment = function (ev) {
     };
 
     /**
-     * 您可以通过view对象，获取视图数据或选择视图数据。<br/>
+     * view 객체로 뷰 데이터를 조회하거나 뷰 데이터를 선택할 수 있습니다.<br/>
      * @module view
-     * @o2cn 视图执行
+     * @o2cn 뷰 실행
      * @o2category web
      * @o2ordernumber 70
      * @o2syntax
-     * //您可以在流程表单、内容管理表单或门户页面中，通过this来获取view对象，如下：
+     * //프로세스 양식, 콘텐츠 관리 양식 또는 포털 페이지에서 this로 view 객체를 가져올 수 있습니다. 예:
      * var view = this.view;
      */
     this.view = {
         /**
-         * 获取指定视图的数据。
+         * 지정한 뷰의 데이터를 조회합니다.
          * @method lookup
          * @static
-         * @param {Object} view - 要访问的视图信息。数据格式如下：<br/>
-         * <caption>以下的filter参数参考<a href='global.html#ViewFilter'>ViewFilter</a></caption>
+         * @param {Object} view - 접근할 뷰 정보. 데이터 형식은 다음과 같습니다:<br/>
+         * <caption>아래 filter 매개변수는 <a href='global.html#ViewFilter'>ViewFilter</a> 참고</caption>
          * <pre><code class='language-js'>
          * {
-         *  "view" : "testView", //（String）必选，视图的名称、别名或ID
-         *  "application" : "test数据中心应用", //（String）必选，视图所在数据应用的名称、别名或ID
-         *  "filter": [ //（Array of Object）可选，对视图进行过滤的条件。json数组格式，每个数组元素描述一个过滤条件。
+         *  "view" : "testView", //(String) 필수, 뷰의 이름·별칭 또는 ID
+         *  "application" : "test데이터 센터 앱", //(String) 필수, 뷰가 속한 데이터 앱의 이름·별칭 또는 ID
+         *  "filter": [ //(Array of Object) 선택, 뷰 필터 조건. json 배열 형식이며 각 배열 요소가 하나의 필터 조건을 나타냄.
          *       {
          *           "logic":"and",
          *           "path":"$work.title",
          *           "comparison":"like",
-         *           "value":"7月",
+         *           "value":"7월",
          *           "formatType":"textValue"
          *       }
          *  ]
          * }
          * </code></pre>
-         * @param {Function} callback - 访问成功后的回调函数
-         * @param {Boolean} [async] - 同步或异步调用。true：异步；false：同步。默认为true。
-         * @return {Promise} 返回Promise
+         * @param {Function} callback - 접근 성공 후 콜백 함수
+         * @param {Boolean} [async] - 동기 또는 비동기 호출. true: 비동기, false: 동기. 기본값 true.
+         * @return {Promise} Promise 반환
          * @o2syntax
-         * //通过回调方法获取数据
+         * //콜백 메서드로 데이터 조회
          * this.view.lookup(view, callback, async);
          *
-         * //返回Promise对象后处理
+         * //Promise 객체 반환 후 처리
          * var promise = this.view.lookup( view );
          * promise.then(function(data){
-         *     //data 为返回的数据。
+         *     //data는 반환된 데이터입니다.
          * })
          * @example
-         * //获取“财务管理”应用中“报销审批数据”视图中的数据
-         * //过滤条件为标题（$work.title）包含包含（like））“7月”。
+         * //“재무 관리” 앱의 “경비 결재 데이터” 뷰의 데이터 조회
+         * //필터 조건은 제목($work.title)이 “7월”을 포함(like).
          * this.view.lookup({
-         *   "view": "报销审批数据",
-         *   "application": "财务管理",
+         *   "view": "경비 결재 데이터",
+         *   "application": "재무 관리",
          *   "filter": [
          *       {
          *           "logic":"and",
          *           "path":"$work.title",
          *           "comparison":"like",
-         *           "value":"7月",
+         *           "value":"7월",
          *           "formatType":"textValue"
          *       }
          *   ]
          *}, function(data){
-         *   var grid = data.grid; //得到过滤后的数据
-         *   var groupGrid = data.groupGrid; //如果有分类，得到带分类的数据
+         *   var grid = data.grid; //필터링된 데이터
+         *   var groupGrid = data.groupGrid; //분류가 있으면 분류가 포함된 데이터
          *   //......
          *});
          * @example
-         * //同上，通过返回值获取数据
+         * //위와 같음, 반환값으로 데이터 조회
          * var promise = this.view.lookup({
-         *   "view": "报销审批数据",
-         *   "application": "财务管理",
+         *   "view": "경비 결재 데이터",
+         *   "application": "재무 관리",
          *   "filter": [
          *       {
          *           "logic":"and",
          *           "path":"$work.title",
          *           "comparison":"like",
-         *           "value":"7月",
+         *           "value":"7월",
          *           "formatType":"textValue"
          *       }
          *   ]
          *});
          * promise.then(function(data){
-         *   var grid = data.grid; //得到过滤后的数据
-         *   var groupGrid = data.groupGrid; //如果有分类，得到带分类的数据
+         *   var grid = data.grid; //필터링된 데이터
+         *   var groupGrid = data.groupGrid; //분류가 있으면 분류가 포함된 데이터
          *   //......
          *})
          * @example
-         * //获取“财务管理”应用中“报销审批数据”视图中的数据
-         * //过滤条件为标题（$work.title）包含包含（like））“7月”，并且总金额大于500小于5000
+         * //“재무 관리” 앱의 “경비 결재 데이터” 뷰의 데이터 조회
+         * //필터 조건은 제목($work.title)이 “7월”을 포함(like)하고 총금액이 500보다 크고 5000보다 작음
          * this.view.lookup({
-         *   "view": "报销审批数据",
-         *   "application": "财务管理",
+         *   "view": "경비 결재 데이터",
+         *   "application": "재무 관리",
          *   "filter": [
          *       {
          *           "logic":"and",
          *           "path":"$work.title",
          *           "comparison":"like",
-         *           "value":"7月",
+         *           "value":"7월",
          *           "formatType":"textValue"
          *       },
          *       {
@@ -3375,8 +3375,8 @@ MWF.xScript.ViewEnvironment = function (ev) {
          *       },
          *   ]
          *}, function(data){
-         *   var grid = data.grid; //得到过滤后的数据
-         *   var groupGrid = data.groupGrid; //如果有分类，得到带分类的数据
+         *   var grid = data.grid; //필터링된 데이터
+         *   var groupGrid = data.groupGrid; //분류가 있으면 분류가 포함된 데이터
          *   //......
          *});
          */
@@ -3407,47 +3407,47 @@ MWF.xScript.ViewEnvironment = function (ev) {
         },
 
         /**
-         * 通过视图进行数据选择。
+         * 뷰를 통해 데이터를 선택합니다.
          * @method select
          * @static
-         * @param {Object} view - 要访问的视图信息。数据格式如下：<br/>
-         * <caption>以下的filter参数参考<a href='global.html#ViewFilter'>ViewFilter</a></caption>
+         * @param {Object} view - 접근할 뷰 정보. 데이터 형식은 다음과 같습니다:<br/>
+         * <caption>아래 filter 매개변수는 <a href='global.html#ViewFilter'>ViewFilter</a> 참고</caption>
          * <pre><code class='language-js'>
          * {
-         *  "view" : "testView", //（String）必选，视图的名称、别名或ID
-         *  "application" : "test数据中心应用", //（String）必选，视图所在数据应用的名称、别名或ID
-         *  "isTitle" : true, //（Boolean）可选，是否显示视图标题。默认true
-         *  "isMulti" : true,  //（Boolean）可选，是否允许多选。默认true
-         *  "width" : 700, //（Number）可选，选择框的宽度。默认700
-         *  "height" : 400,  //（Number）可选，选择框的高度。默认400
-         *  "caption" : "标题", //（String）可选，选择框的标题
-         *  "filter": [ //（Array of Object）可选，对视图进行过滤的条件。json数组格式，每个数组元素描述一个过滤条件。
+         *  "view" : "testView", //(String) 필수, 뷰의 이름·별칭 또는 ID
+         *  "application" : "test데이터 센터 앱", //(String) 필수, 뷰가 속한 데이터 앱의 이름·별칭 또는 ID
+         *  "isTitle" : true, //(Boolean) 선택, 뷰 제목 표시 여부. 기본값 true
+         *  "isMulti" : true,  //(Boolean) 선택, 다중 선택 허용 여부. 기본값 true
+         *  "width" : 700, //(Number) 선택, 선택 창 너비. 기본값 700
+         *  "height" : 400,  //(Number) 선택, 선택 창 높이. 기본값 400
+         *  "caption" : "제목", //(String) 선택, 선택 창 제목
+         *  "filter": [ //(Array of Object) 선택, 뷰 필터 조건. json 배열 형식이며 각 배열 요소가 하나의 필터 조건을 나타냄.
          *       {
          *           "logic":"and",
          *           "path":"$work.title",
          *           "comparison":"like",
-         *           "value":"7月",
+         *           "value":"7월",
          *           "formatType":"textValue"
          *       }
          *  ]
          * }
          * </code></pre>
-         * @param {Function} callback - 必选，当选择完成，点击“确定”之后的回调函数。
+         * @param {Function} callback - 필수, 선택 완료 후 “확인”을 클릭하면 실행되는 콜백 함수.
          * @o2syntax
          * this.view.select(view, callback);
          * @example
          * this.view.select({
-         *    "application": "物业材料",  //数据中心中的应用
-         *    "view": "物业材料视图",     //视图的名称
-         *    "isMulti": false,           //只允许单选
+         *    "application": "자재 관리",  //데이터 센터의 앱
+         *    "view": "자재 뷰",     //뷰 이름
+         *    "isMulti": false,           //단일 선택만 허용
          * }, function(items) {
-         *    //如果选择了某个数据，将数据赋值给表单输入框
+         *    //데이터를 선택하면 해당 데이터를 양식 입력 필드에 할당
          *    if (items.length) {
-         *        //物料名称，表单中输入框名为“materialName”， 视图中列的名称为“ylmc”
+         *        //자재명, 양식 입력 필드명은 “materialName”, 뷰 열 이름은 “ylmc”
          *        this.data.materialName = items[0].data.ylmc;
-         *        //规格，表单中输入框名为“specification”， 视图中列的名称为“gg”
+         *        //규격, 양식 입력 필드명은 “specification”, 뷰 열 이름은 “gg”
          *        this.data.specification = items[0].data.gg;
-         *        //单价，表单中输入框名为“price”， 视图中列的名称为“dj”
+         *        //단가, 양식 입력 필드명은 “price”, 뷰 열 이름은 “dj”
          *        this.data.price = items[0].data.dj;
          *    }
          * }.bind(this));
@@ -3573,109 +3573,109 @@ MWF.xScript.ViewEnvironment = function (ev) {
     };
 
     /**
-     * 您可以通过statement对象，获取执行查询语句或者对查询结果进行选择。<br/>
+     * statement 객체로 쿼리 문을 실행하거나 쿼리 결과를 선택할 수 있습니다.<br/>
      * @module statement
-     * @o2cn 查询视图执行
+     * @o2cn 쿼리 뷰 실행
      * @o2category web
      * @o2ordernumber 90
      * @o2syntax
-     * //您可以在流程表单、内容管理表单、门户页面或视图中，通过this来获取statement对象，如下：
+     * //프로세스 양식, 콘텐츠 관리 양식, 포털 페이지 또는 뷰에서 this로 statement 객체를 가져올 수 있습니다. 예:
      * var statement = this.statement;
      */
     this.statement = {
         /**
-         * 执行指定的查询语句。
+         * 지정한 쿼리 문을 실행합니다.
          * @method execute
          * @static
-         * @param {Object} statement - 要执行的查询语句的信息。数据格式如下：
-         * <div>以下的filter参数参考<a href='global.html#StatementFilter'>StatementFilter</a>,
-         * parameter参数参考<a href='global.html#StatementParameter'>StatementParameter</a></div>
+         * @param {Object} statement - 실행할 쿼리 문 정보. 데이터 형식은 다음과 같습니다:
+         * <div>아래 filter 매개변수는 <a href='global.html#StatementFilter'>StatementFilter</a> 참고,
+         * parameter 매개변수는 <a href='global.html#StatementParameter'>StatementParameter</a> 참고</div>
          * <pre><code class='language-js'>
          * {
-         *  "name" : "tesStatement", //（String）必选，查询配置的名称、别名或ID
-         *  "mode" : "all", //（String）必选，“all”、“data”或者“count”，all表示同时执行查询语句和总数语句，data表示执行查询语句，count表示执行总数语句
-         *  "page" : 1, //（number）可选，当前页码，默认为1
-         *  "pageSize" : 20, //（number）可选，每页的数据条数，默认为20
-         *  "filter": [ //（Array）可选，对查询进行过滤的条件。json数组格式，每个数组元素描述一个过滤条件，每个元素数据格式如下：
+         *  "name" : "tesStatement", //(String) 필수, 쿼리 설정의 이름·별칭 또는 ID
+         *  "mode" : "all", //(String) 필수, “all”·“data”·“count” 중 하나. all은 쿼리 문과 총수 문을 함께 실행, data는 쿼리 문 실행, count는 총수 문 실행
+         *  "page" : 1, //(number) 선택, 현재 페이지 번호, 기본값 1
+         *  "pageSize" : 20, //(number) 선택, 페이지당 데이터 수, 기본값 20
+         *  "filter": [ //(Array) 선택, 쿼리 필터 조건. json 배열 형식이며 각 배열 요소가 하나의 필터 조건, 각 요소의 데이터 형식은 다음과 같음:
          *       {
-         *           "path":"o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+         *           "path":"o.title", //조회 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
          *           "comparison":"like",
-         *           "value":"关于",
+         *           "value":"관련",
          *           "formatType":"textValue"
          *       }
          *  ],
          *  parameter : {
-         *       "person" : "", //参数名称为下列值时，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组),roleList(当前人拥有的角色)。v8.0以后系统自动解析，不需要再传这类参数。
-         *       "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-         *       "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-         *       "processName" : "test流程", //其他写确定的值
-         *       "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+         *       "person" : "", //매개변수 이름이 다음 값이면 서버에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹), roleList(현재 사용자의 역할). v8.0 이후 시스템이 자동 해석하므로 이런 매개변수는 전달할 필요 없음.
+         *       "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+         *       "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+         *       "processName" : "test프로세스", //그 외에는 확정된 값 입력
+         *       "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
          *     }
          * }
          * </code></pre>
-         * @param {Function} callback - 访问成功后的回调函数
-         * @param {Boolean} [async] - 同步或异步调用。true：异步；false：同步。默认为true。
-         * @return {Promise} 返回Promise
+         * @param {Function} callback - 접근 성공 후 콜백 함수
+         * @param {Boolean} [async] - 동기 또는 비동기 호출. true: 비동기, false: 동기. 기본값 true.
+         * @return {Promise} Promise 반환
          * @o2syntax
          * this.statement.execute(statement, callback, async);
          *
-         * //返回Promise对象后处理
+         * //Promise 객체 반환 후 처리
          * var promise = this.statement.execute( statement );
          * promise.then(function(data){
-         *     //data 为返回的数据。
+         *     //data는 반환된 데이터입니다.
          * })
          * @example
-         * //获取“task”查询中的数据
-         * //查询语句为 select o from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
-         * //总数语句为 select count(o.id) from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
-         * //过滤条件为标题o.title包含包含（like））“7月”。
+         * //“task” 쿼리의 데이터 조회
+         * //쿼리 문은 select o from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
+         * //총수 문은 select count(o.id) from Task o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
+         * //필터 조건은 제목 o.title이 “7월”을 포함(like).
          * this.statement.execute({
          *  "name": "task",
          *  "mode" : "all",
          *  "filter": [
          *      {
-         *      "path":"o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+         *      "path":"o.title", //조회 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
          *      "comparison":"like",
-         *      "value":"7月",
+         *      "value":"7월",
          *      "formatType":"textValue"
          *      }
          * ],
          * "parameter" : {
-         *     "person" : "", //参数名称为下列值时，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组),roleList(当前人拥有的角色)。v8.0以后系统自动解析，不需要再传这类参数。
-         *     "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-         *     "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-         *     "processName" : "test流程", //其他写确定的值
-         *     "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+         *     "person" : "", //매개변수 이름이 다음 값이면 서버에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹), roleList(현재 사용자의 역할). v8.0 이후 시스템이 자동 해석하므로 이런 매개변수는 전달할 필요 없음.
+         *     "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+         *     "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+         *     "processName" : "test프로세스", //그 외에는 확정된 값 입력
+         *     "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
          *   }
          * }, function(json){
-         *  var count = json.count; //总数语句执行后返回的数字
-         *  var list = json.data; //查询语句后返回的数组
+         *  var count = json.count; //총수 문 실행 후 반환된 숫자
+         *  var list = json.data; //쿼리 문 실행 후 반환된 배열
          *   //......
          * });
          * @example
-         * //同上，使用返回值接收参数
+         * //위와 같음, 반환값으로 결과 수신
          * var promise = this.statement.execute({
          *  "name": "task",
          *  "mode" : "all",
          *  "filter": [
          *      {
-         *      "path":"o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+         *      "path":"o.title", //조회 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
          *      "comparison":"like",
-         *      "value":"7月",
+         *      "value":"7월",
          *      "formatType":"textValue"
          *      }
          * ],
          * "parameter" : {
-         *     "person" : "", //参数名称为下列值时，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组),roleList(当前人拥有的角色)。v8.0以后系统自动解析，不需要再传这类参数。
-         *     "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-         *     "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-         *     "processName" : "test流程", //其他写确定的值
-         *    "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+         *     "person" : "", //매개변수 이름이 다음 값이면 서버에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹), roleList(현재 사용자의 역할). v8.0 이후 시스템이 자동 해석하므로 이런 매개변수는 전달할 필요 없음.
+         *     "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+         *     "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+         *     "processName" : "test프로세스", //그 외에는 확정된 값 입력
+         *    "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
          *   }
          * });
          * promise.then(function(json){
-         *  var count = json.count; //总数语句执行后返回的数字
-         *  var list = json.data; //查询语句后返回的数组
+         *  var count = json.count; //총수 문 실행 후 반환된 숫자
+         *  var list = json.data; //쿼리 문 실행 후 반환된 배열
          *   //......
          * })
          */
@@ -3773,7 +3773,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
         parseParameter : function( obj, format ){
             if( typeOf(obj) !== "object" )return {};
             var parameter = {};
-            //传入的参数
+            //전달된 매개변수
             for( var p in obj ){
                 var value = obj[p];
                 if( typeOf( value ) === "date" ){
@@ -3789,52 +3789,52 @@ MWF.xScript.ViewEnvironment = function (ev) {
         },
 
         /**
-         * 如果查询的类型是"select"，并且配置了查询视图，可以通过本方法进行数据选择。
+         * 쿼리 유형이 "select"이고 쿼리 뷰가 설정되어 있으면 이 메서드로 데이터를 선택할 수 있습니다.
          * @method select
          * @static
-         * @param {Object} statement - 要访问的查询配置的信息。数据格式如下：
-         * <div>以下的filter参数参考<a href='global.html#StatementFilter'>StatementFilter</a>,
-         * parameter参数参考<a href='global.html#StatementParameter'>StatementParameter</a></div>
+         * @param {Object} statement - 접근할 쿼리 설정 정보. 데이터 형식은 다음과 같습니다:
+         * <div>아래 filter 매개변수는 <a href='global.html#StatementFilter'>StatementFilter</a> 참고,
+         * parameter 매개변수는 <a href='global.html#StatementParameter'>StatementParameter</a> 참고</div>
          * <pre><code class='language-js'>
          * {
-         *  "name" : "tesStatement", //（String）必选，查询配置的名称、别名或ID
-         *  "isTitle" : true, //（Boolean）可选，是否显示视图标题。默认true
-         *  "isMulti" : true,  //（Boolean）可选，是否允许多选。默认true
-         *  "width" : 700, //（Number）可选，选择框的宽度。默认700
-         *  "height" : 400,  //（Number）可选，选择框的高度。默认400
-         *  "caption" : "标题", //（String）可选，选择框的标题
-         *  "filter": [ //（Array）可选，对查询进行过滤的条件。json数组格式，每个数组元素描述一个过滤条件，每个元素数据格式如下：
+         *  "name" : "tesStatement", //(String) 필수, 쿼리 설정의 이름·별칭 또는 ID
+         *  "isTitle" : true, //(Boolean) 선택, 뷰 제목 표시 여부. 기본값 true
+         *  "isMulti" : true,  //(Boolean) 선택, 다중 선택 허용 여부. 기본값 true
+         *  "width" : 700, //(Number) 선택, 선택 창 너비. 기본값 700
+         *  "height" : 400,  //(Number) 선택, 선택 창 높이. 기본값 400
+         *  "caption" : "제목", //(String) 선택, 선택 창 제목
+         *  "filter": [ //(Array) 선택, 쿼리 필터 조건. json 배열 형식이며 각 배열 요소가 하나의 필터 조건, 각 요소의 데이터 형식은 다음과 같음:
          *       {
-         *           "path":"o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+         *           "path":"o.title", //조회 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
          *           "comparison":"like",
-         *           "value":"关于",
+         *           "value":"관련",
          *           "formatType":"textValue"
          *       }
          *  ],
          *  parameter : {
-         *       "person" : "", //参数名称为下列值时，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组),roleList(当前人拥有的角色)。v8.0以后系统自动解析，不需要再传这类参数。
-         *       "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-         *       "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-         *       "processName" : "test流程", //其他写确定的值
-         *       "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+         *       "person" : "", //매개변수 이름이 다음 값이면 서버에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹), roleList(현재 사용자의 역할). v8.0 이후 시스템이 자동 해석하므로 이런 매개변수는 전달할 필요 없음.
+         *       "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+         *       "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+         *       "processName" : "test프로세스", //그 외에는 확정된 값 입력
+         *       "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
          *     }
          * }
          * </code></pre>
-         * @param {Function} callback - 访问成功后的回调函数
+         * @param {Function} callback - 접근 성공 후 콜백 함수
          * @o2syntax
          * this.statement.select(statement, callback);
          * @example
          * this.statement.select({
-         *     "name": "物业材料查询",     //查询的名称
-         *     "isMulti": false,           //只允许单选
+         *     "name": "자재 쿼리",     //쿼리 이름
+         *     "isMulti": false,           //단일 선택만 허용
          * }, function(items) {
-         *     //如果选择了某个数据，将数据赋值给表单输入框
+         *     //데이터를 선택하면 해당 데이터를 양식 입력 필드에 할당
          *     if (items.length) {
-         *         //物料名称，表单中输入框名为“materialName”， 查询语句返回的字段名为“ylmc”
+         *         //자재명, 양식 입력 필드명은 “materialName”, 쿼리 문이 반환하는 필드명은 “ylmc”
          *         this.data.materialName = items[0].ylmc;
-         *         //规格，表单中输入框名为“specification”， 查询语句返回的字段名为“gg”
+         *         //규격, 양식 입력 필드명은 “specification”, 쿼리 문이 반환하는 필드명은 “gg”
          *         this.data.specification = items[0].gg;
-         *         //单价，表单中输入框名为“price”， 查询语句返回的字段名为“dj”
+         *         //단가, 양식 입력 필드명은 “price”, 쿼리 문이 반환하는 필드명은 “dj”
          *         this.data.price = items[0].dj;
          *     }
          * }.bind(this));
@@ -3874,28 +3874,28 @@ MWF.xScript.ViewEnvironment = function (ev) {
     };
 
     /**
-     * 您可以通过importer对象，执行导入模型的Excel导入数据功能。<br/>
+     * importer 객체로 가져오기 모델의 Excel 데이터 가져오기 기능을 실행할 수 있습니다.<br/>
      * @module importer
-     * @o2cn 导入数据
+     * @o2cn 데이터 가져오기
      * @o2category web
      * @o2ordernumber 93
      * @o2syntax
-     * //您可以在流程表单、内容管理表单、门户页面或视图中，通过this来获取statement对象，如下：
+     * //프로세스 양식, 콘텐츠 관리 양식, 포털 페이지 또는 뷰에서 this로 statement 객체를 가져올 수 있습니다. 예:
      * var importer = this.importer;
      */
     this.importer = {
         /**
-         * 根据指定的导入模型进行上传。
+         * 지정한 가져오기 모델로 업로드합니다.
          * @method upload
          * @static
-         * @param {Object} options - 要执行的导入模型的选项。数据格式如下：
+         * @param {Object} options - 실행할 가져오기 모델 옵션. 데이터 형식은 다음과 같습니다:
          * <pre><code class='language-js'>{
-         *  "name" : "testImporter", //（String）必选，导入模型的名称、别名或ID
-         *  "application" : "testQuery" //（String）必选，导入模型所在应用的名称、别名或ID
+         *  "name" : "testImporter", //(String) 필수, 가져오기 모델의 이름·별칭 또는 ID
+         *  "application" : "testQuery" //(String) 필수, 가져오기 모델이 속한 앱의 이름·별칭 또는 ID
          * }
          * </code></pre>
-         * @param {Function} [callback] - 导入成功后的回调函数
-         * @param {Boolean} [async] - 同步或异步调用。true：异步；false：同步。默认为true。
+         * @param {Function} [callback] - 가져오기 성공 후 콜백 함수
+         * @param {Boolean} [async] - 동기 또는 비동기 호출. true: 비동기, false: 동기. 기본값 true.
          * @o2syntax
          * this.importer.upload(options, callback, async);
          * @example
@@ -3922,20 +3922,20 @@ MWF.xScript.ViewEnvironment = function (ev) {
             //     }, null, async);
         },
         /**
-         * 根据指定的导入模型下载Excel模板。
+         * 지정한 가져오기 모델의 Excel 템플릿을 다운로드합니다.
          * @method downloadTemplate
          * @static
-         * @param {Object} options - 要执行的导入模型的选项。数据格式如下：
+         * @param {Object} options - 실행할 가져오기 모델 옵션. 데이터 형식은 다음과 같습니다:
          * <pre><code class='language-js'>{
-         *  "name" : "testImporter", //（String）必选，导入模型的名称、别名或ID
-         *  "application" : "testQuery" //（String）必选，导入模型所在应用的名称、别名或ID
+         *  "name" : "testImporter", //(String) 필수, 가져오기 모델의 이름·별칭 또는 ID
+         *  "application" : "testQuery" //(String) 필수, 가져오기 모델이 속한 앱의 이름·별칭 또는 ID
          * }
          * </code></pre>
-         * @param {String} fileName - 导出的Excel名称
-         * @param {Function} callback - 整理好数据，在导出之前执行的方法，可接收参数如下:
+         * @param {String} fileName - 내보낼 Excel 이름
+         * @param {Function} callback - 데이터를 정리해 내보내기 전에 실행하는 메서드, 받을 수 있는 매개변수:
          * <pre><code class='language-js'>{
-         *  "data" : ["标题","拟稿人"], //导出的表头数组
-         *  "colWidthArray" : [200, 150] //列宽度
+         *  "data" : ["제목","기안자"], //내보낼 헤더 배열
+         *  "colWidthArray" : [200, 150] //열 너비
          * }
          * </code></pre>
          * @o2syntax
@@ -3944,9 +3944,9 @@ MWF.xScript.ViewEnvironment = function (ev) {
          * this.importer.downloadTemplate({
          *  "name": "testImporter",
          *  "application" : "testQuery",
-         * },"导入模板", function( object ){
-         *     //添加一项
-         *     object.data[0].push("备注");
+         * },"가져오기 템플릿", function( object ){
+         *     //항목 하나 추가
+         *     object.data[0].push("비고");
          *     object.colWidthArray.push(300)
          * });
          */
@@ -3958,13 +3958,13 @@ MWF.xScript.ViewEnvironment = function (ev) {
         }
     };
 
-    //include 引用脚本
+    //include 스크립트 참조
     //optionsOrName : {
-    //  type : "", 默认为portal, 可以为 portal  process  cms
-    //  application : "", 门户/流程/CMS的名称/别名/id, 默认为当前应用
-    //  name : "" // 脚本名称/别名/id
+    //  type : "", 기본값 portal, portal  process  cms 가능
+    //  application : "", 포털/프로세스/CMS의 이름/별칭/id, 기본값은 현재 앱
+    //  name : "" // 스크립트 이름/별칭/id
     //}
-    //或者name: "" // 脚本名称/别名/id
+    //또는 name: "" // 스크립트 이름/별칭/id
     // if( !window.includedScripts ){
     //     var includedScripts = window.includedScripts = [];
     // }else{
@@ -4010,7 +4010,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
     }
 
 
-    //缓存名称、别名、id
+    //캐시 이름, 별칭, id
     var _parseScriptImportList = function (json, type){
         var includedScripts = [];
         var importedList = json.data.importedList || [];
@@ -4053,7 +4053,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             key = type + "-" + name;
         }
 
-        //js 加载过就不重新加载了
+        //js는 이미 로드했으면 다시 로드하지 않음
         if (includedScripts.indexOf(key) > -1) {
             if (callback) callback.apply(this);
             return;
@@ -4188,14 +4188,14 @@ MWF.xScript.ViewEnvironment = function (ev) {
     }
 
 
-    //仅前台对象-----------------------------------------
+    //프런트엔드 객체 전용-----------------------------------------
     //form
 
     /**
-     * 当查询设计中使用了select语句，并且配置了视图，可以在查询视图中使用本章API。<br/>
-     * queryStatement对象在查询视图中可用。它的很多方法与queryView类似。<b>（仅前端脚本可用）</b><br/>
+     * 쿼리 설계에서 select 문을 사용하고 뷰를 설정한 경우 쿼리 뷰에서 이 장의 API를 사용할 수 있습니다.<br/>
+     * queryStatement 객체는 쿼리 뷰에서 사용 가능합니다. 많은 메서드가 queryView와 비슷합니다.<b>(프론트엔드 스크립트 전용)</b><br/>
      * @module queryStatement
-     * @o2cn 查询视图
+     * @o2cn 쿼리 뷰
      * @o2category web
      * @o2range {QueryStatement}
      * @o2ordernumber 80
@@ -4215,33 +4215,33 @@ MWF.xScript.ViewEnvironment = function (ev) {
      * @borrows module:queryView.createDocument as createDocument
      * @borrows module:queryView.startProcess as startProcess
      * @o2syntax
-     * //您可以在查询视图中，通过this来获取queryStatement对象，如下：
+     * //쿼리 뷰에서 this로 queryStatement 객체를 가져올 수 있습니다. 예:
      * var queryStatement = this.queryStatement;
      */
 
     /**
-     * 当查询视图被嵌入到门户页面、流程表单或内容管理表单的时候，可以在查询视图写脚本的地方通过这个方法来获取页面或表单的上下文。
+     * 쿼리 뷰가 포털 페이지, 프로세스 양식 또는 콘텐츠 관리 양식에 삽입된 경우 쿼리 뷰의 스크립트 작성 위치에서 이 메서드로 페이지나 양식의 컨텍스트를 가져올 수 있습니다.
      * @method getParentEnvironment
      * @memberOf module:queryStatement
      * @static
-     * @return {MWF.xScript.Environment|MWF.xScript.CMSEnvironment} 页面或表单的上下文.
+     * @return {MWF.xScript.Environment|MWF.xScript.CMSEnvironment} 페이지 또는 양식의 컨텍스트.
      * @o2syntax
      * this.queryStatement.getParentEnvironment();
      * @example
-     * var env = this.queryStatement.getParentEnvironment(); //当视图被嵌入到页面的时候，可以在视图里获取页面的上下文
-     * env.page.toPortal( "公文门户" ); //调用page的toPage() 跳转到其他门户
+     * var env = this.queryStatement.getParentEnvironment(); //뷰가 페이지에 삽입된 경우 뷰에서 페이지 컨텍스트 조회
+     * env.page.toPortal( "공문 포털" ); //page의 toPage()를 호출해 다른 포털로 이동
      */
 
     /**
-     * 获取查询视图当前页的基本信息。
+     * 쿼리 뷰 현재 페이지의 기본 정보를 조회합니다.
      * @method getPageInfor
      * @memberOf module:queryStatement
      * @static
-     * @return {Object} 当前页的信息，格式如下:
+     * @return {Object} 현재 페이지 정보, 형식은 다음과 같음:
      *<pre><code class='language-js'>{
-     *     "pages": 3, //总页数
-     *     "perPageCount": 50, //每页的条数
-     *     "currentPageNumber": 1 // 当前页数
+     *     "pages": 3, //총 페이지 수
+     *     "perPageCount": 50, //페이지당 건수
+     *     "currentPageNumber": 1 // 현재 페이지 번호
      * }
      * </code></pre>
      * @o2syntax
@@ -4249,13 +4249,13 @@ MWF.xScript.ViewEnvironment = function (ev) {
      */
 
     /**
-     * 获取当前页的数据。
+     * 현재 페이지의 데이터를 조회합니다.
      * @method getPageData
      * @memberOf module:queryStatement
      * @static
-     * @return {Object[]|Array[]} 当前页数据。
-     * <div>数据格式和 jpql 语句的写法有关</div>
-     * 如:  "select o from table o" 返回 json数组
+     * @return {Object[]|Array[]} 현재 페이지 데이터.
+     * <div>데이터 형식은 jpql 문 작성 방식에 따라 다름</div>
+     * 예:  "select o from table o"는 json 배열 반환
      *<pre><code class='language-js'>[
      {
      "id" : "id1",
@@ -4268,7 +4268,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
      ...
      *]
      * </code></pre>
-     * 如："select id, title from table o" 返回 二维数组：
+     * 예: "select id, title from table o"는 2차원 배열 반환:
      *<pre><code class='language-js'>[
      ["id1", "title1"],
      ["id2", "title2"],
@@ -4280,23 +4280,23 @@ MWF.xScript.ViewEnvironment = function (ev) {
      */
 
     /**
-     * 跳转到指定的页面。
+     * 지정한 페이지로 이동합니다.
      * @method toPage
      * @memberOf module:queryStatement
      * @static
-     * @param {Number} pageNumber - 需要跳转的页码。
-     * @param {Function} [callback ] - 跳转的页面数据加载完成以后的回调方法。
+     * @param {Number} pageNumber - 이동할 페이지 번호.
+     * @param {Function} [callback ] - 이동한 페이지 데이터 로드 완료 후 콜백 메서드.
      * @o2syntax
      * var data = this.queryStatement.toPage( pageNumber, callback );
      * @example
-     * //　跳转到第2页并且获取该页的数据。
+     * //　2페이지로 이동하고 해당 페이지 데이터 조회.
      * this.queryStatement.toPage( 2, function(){
      *      var data = this.queryStatement.getPageData();
      * }.bind(this) )
      */
 
     /**
-     * 当查询视图设置了允许多选的时候，可以通过这个方法全部选中当前页面的条目。
+     * 쿼리 뷰에서 다중 선택을 허용한 경우 이 메서드로 현재 페이지 항목을 모두 선택할 수 있습니다.
      * @method selectAll
      * @memberOf module:queryStatement
      * @static
@@ -4305,7 +4305,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
      */
 
     /**
-     * 当查询视图设置了允许多选的时候，可以通过这个方法取消选中的条目。
+     * 쿼리 뷰에서 다중 선택을 허용한 경우 이 메서드로 선택된 항목을 해제할 수 있습니다.
      * @method unSelectAll
      * @memberOf module:queryStatement
      * @static
@@ -4314,13 +4314,13 @@ MWF.xScript.ViewEnvironment = function (ev) {
      */
 
     /**
-     * 获取选中的条目的数据。
+     * 선택된 항목의 데이터를 조회합니다.
      * @method getSelectedData
      * @memberOf module:queryStatement
      * @static
-     * @return {Object[]|Array[]} 选中的条目的数据。
-     * <div>数据格式和 jpql 语句的写法有关</div>
-     * 如:  "select o from table o" 返回 json数组
+     * @return {Object[]|Array[]} 선택된 항목의 데이터.
+     * <div>데이터 형식은 jpql 문 작성 방식에 따라 다름</div>
+     * 예:  "select o from table o"는 json 배열 반환
      *<pre><code class='language-js'>[
      {
      "id" : "id1",
@@ -4333,7 +4333,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
      ...
      *]
      * </code></pre>
-     * 如："select id, title from table o" 返回 二维数组：
+     * 예: "select id, title from table o"는 2차원 배열 반환:
      *<pre><code class='language-js'>[
      ["id1", "title1"],
      ["id2", "title2"],
@@ -4344,7 +4344,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
      * var data = this.queryStatement.getSelectedData();
      */
 
-    /**获取queryStatement对应的DOM对象。
+    /**queryStatement에 대응하는 DOM 객체를 조회합니다.
      * @method node
      * @static
      * @methodOf module:queryStatement
@@ -4353,7 +4353,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
 
     /**
-     * 重新加载查询视图。
+     * 쿼리 뷰를 다시 로드합니다.
      * @method reload
      * @methodOf module:queryStatement
      * @static
@@ -4363,52 +4363,52 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
 
     /**
-     * queryView对象可在视图中可用。它的很多方法与form类似。<b>（仅前端脚本可用）</b><br/>
+     * queryView 객체는 뷰에서 사용 가능합니다. 많은 메서드가 form과 비슷합니다.<b>(프론트엔드 스크립트 전용)</b><br/>
      * @module queryView
-     * @o2cn 视图
+     * @o2cn 뷰
      * @o2category web
      * @o2range {QueryView}
      * @o2ordernumber 60
      * @o2syntax
-     * //您可以在视图中，通过this来获取queryView对象，如下：
+     * //뷰에서 this로 queryView 객체를 가져올 수 있습니다. 예:
      * var queryView = this.queryView;
      */
     this.page = this.form = this.queryView = this.queryStatement = {
         /**
-         * 当视图被嵌入到门户页面、流程表单或内容管理表单的时候，可以在视图可以写脚本的地方中通过这个方法来获取页面或表单的上下文。
+         * 뷰가 포털 페이지, 프로세스 양식 또는 콘텐츠 관리 양식에 삽입된 경우 뷰의 스크립트 작성 위치에서 이 메서드로 페이지나 양식의 컨텍스트를 가져올 수 있습니다.
          * @method getParentEnvironment
          * @static
-         * @return {MWF.xScript.Environment|MWF.xScript.CMSEnvironment} 页面或表单的上下文.
+         * @return {MWF.xScript.Environment|MWF.xScript.CMSEnvironment} 페이지 또는 양식의 컨텍스트.
          * @o2syntax
          * this.queryView.getParentEnvironment();
          * @example
-         * var env = this.queryView.getParentEnvironment(); //当视图被嵌入到页面的时候，可以在视图里获取页面的上下文
-         * env.page.toPortal( "公文门户" ); //调用page的toPage() 跳转到其他门户
+         * var env = this.queryView.getParentEnvironment(); //뷰가 페이지에 삽입된 경우 뷰에서 페이지 컨텍스트 조회
+         * env.page.toPortal( "공문 포털" ); //page의 toPage()를 호출해 다른 포털로 이동
          */
-        "getParentEnvironment" : function () { return _form.getParentEnvironment(); }, //视图嵌入的表单或页面的上下文
+        "getParentEnvironment" : function () { return _form.getParentEnvironment(); }, //뷰가 삽입된 양식 또는 페이지의 컨텍스트
 
         /**
-         * 获取查询的配置信息。
+         * 쿼리의 설정 정보를 조회합니다.
          * @method getStatementInfor
          * @memberOf module:queryStatement
          * @static
-         * @return {Object} 查询的配置信息.
+         * @return {Object} 쿼리 설정 정보.
          * <pre><code class='language-js'>{
-         *    "query": "26d21c71-5114-4496-8ca1-a69e56324841", //所属应用id
-         *    "id": "ee334220-66d3-4f78-afce-8ccf6b995c8c", //查询id
-         *    "name": "测试查询", //名称
-         *    "alias": "", //别名
-         *    "description": "", //描述
-         *    "table": "", //自建表的id
-         *    "entityClassName": "com.x.processplatform.core.entity.content.Task", //系统表表名
-         *    "entityCategory": "official", //表类型 official(系统表) 或 dynamic(自建表)
-         *    "format": "jpql", //语句类型,jpql 或者 script(脚本) , v8.0后还有 sql, sqlScript
+         *    "query": "26d21c71-5114-4496-8ca1-a69e56324841", //소속 앱 id
+         *    "id": "ee334220-66d3-4f78-afce-8ccf6b995c8c", //쿼리 id
+         *    "name": "테스트 쿼리", //이름
+         *    "alias": "", //별칭
+         *    "description": "", //설명
+         *    "table": "", //사용자 정의 테이블 id
+         *    "entityClassName": "com.x.processplatform.core.entity.content.Task", //시스템 테이블 이름
+         *    "entityCategory": "official", //테이블 유형 official(시스템 테이블) 또는 dynamic(사용자 정의 테이블)
+         *    "format": "jpql", //문 유형, jpql 또는 script(스크립트), v8.0 이후 sql, sqlScript 추가
          *    "type": "select", //select/update/delete
-         *    "data": "SELECT o FROM Task o where o.person = :person", //查询语句
-         *    "countData": "SELECT count(o.id) FROM Task o where o.person = :person", //总数语句
-         *    "countScriptText" : "", //总数语句脚本
-         *    "scriptText" : "", //查询语句脚本
-         *    "viewJson": { ... } //视图相关信息
+         *    "data": "SELECT o FROM Task o where o.person = :person", //쿼리 문
+         *    "countData": "SELECT count(o.id) FROM Task o where o.person = :person", //총수 문
+         *    "countScriptText" : "", //총수 문 스크립트
+         *    "scriptText" : "", //쿼리 문 스크립트
+         *    "viewJson": { ... } //뷰 관련 정보
          * }</code></pre>
          * @o2syntax
          * this.queryStatement.getStatementInfor();
@@ -4416,24 +4416,24 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "getStatementInfor" : function () { return _form.getStatementInfor ? _form.getStatementInfor() : null; },
 
         /**
-         * 获取查询的配置信息。
+         * 쿼리의 설정 정보를 조회합니다.
          * @method getViewInfor
          * @memberOf module:queryView
          * @static
-         * @return {Object} 视图的配置信息.
+         * @return {Object} 뷰 설정 정보.
          * <pre><code class='language-js'>{
-         *      "application": "db9fc893-7dbc-4e0f-a617-99089d2c6323", //视图所在应用
-         *      "query": "db9fc893-7dbc-4e0f-a617-99089d2c6323",  //视图所在应用，同application
-         *      "name": "视图自定义测试", //视图名称
-         *      "viewName": "视图自定义测试",  //视图名称，同name
-         *      "isExpand": "no",  //如果有分类，默认是否展开开
-         *      "id": "705ce967-2f9c-425c-8873-3bd729249e1d", //视图id
-         *      "alias": "", //视图别名
-         *      "description": "",  //视图描述
-         *      "display": true, //视图是否显示
-         *      "type": "cms", //视图嵌入的数据类型, cms 或 process
-         *      "count": 2000, //最多返回2000条
-         *      "pageSize": 20, //每页的条数
+         *      "application": "db9fc893-7dbc-4e0f-a617-99089d2c6323", //뷰가 속한 앱
+         *      "query": "db9fc893-7dbc-4e0f-a617-99089d2c6323",  //뷰가 속한 앱, application과 같음
+         *      "name": "뷰 사용자 정의 테스트", //뷰 이름
+         *      "viewName": "뷰 사용자 정의 테스트",  //뷰 이름, name과 같음
+         *      "isExpand": "no",  //분류가 있으면 기본 펼침 여부
+         *      "id": "705ce967-2f9c-425c-8873-3bd729249e1d", //뷰 id
+         *      "alias": "", //뷰 별칭
+         *      "description": "",  //뷰 설명
+         *      "display": true, //뷰 표시 여부
+         *      "type": "cms", //뷰에 삽입되는 데이터 유형, cms 또는 process
+         *      "count": 2000, //최대 2000건 반환
+         *      "pageSize": 20, //페이지당 건수
          *      "createTime": "2019-09-02 10:18:27",
          *      "updateTime": "2020-03-26 15:53:03"
          * }</code></pre>
@@ -4443,15 +4443,15 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "getViewInfor" : function () { return _form.getViewInfor(); },
 
         /**
-         * 获取视图当前页的基本信息。
+         * 뷰 현재 페이지의 기본 정보를 조회합니다.
          * @method getPageInfor
          * @memberOf module:queryView
          * @static
-         * @return {Object} 当前页的信息，格式如下:
+         * @return {Object} 현재 페이지 정보, 형식은 다음과 같음:
          *<pre><code class='language-js'>{
-         *     "pages": 3, //总页数
-         *     "perPageCount": 50, //每页的条数
-         *     "currentPageNumber": 1 // 当前页数
+         *     "pages": 3, //총 페이지 수
+         *     "perPageCount": 50, //페이지당 건수
+         *     "currentPageNumber": 1 // 현재 페이지 번호
          * }
          * </code></pre>
          * @o2syntax
@@ -4460,34 +4460,34 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "getPageInfor" : function () { return _form.getPageInfor(); },
 
         /**
-         * 获取当前页的数据。
+         * 현재 페이지의 데이터를 조회합니다.
          * @method getPageData
          * @memberOf module:queryView
          * @static
-         * @return {Object[]} 当前页数据。
-         * <div>没有分类时候，数据格式如下：</div>
+         * @return {Object[]} 현재 페이지 데이터.
+         * <div>분류가 없을 때 데이터 형식은 다음과 같음:</div>
          *<pre><code class='language-js'>[
          *   {
-         *       "bundle": "099ed3c9-dfbc-4094-a8b7-5bfd6c5f7070", //cms 的 documentId, process 的 jobId
-         *      "data": {  //视图中配置的数据
-         *        "title": "考勤管理-配置-统计周期设置", //列名称及列值
+         *       "bundle": "099ed3c9-dfbc-4094-a8b7-5bfd6c5f7070", //cms의 documentId, process의 jobId
+         *      "data": {  //뷰에 설정된 데이터
+         *        "title": "근태 관리-설정-통계 주기 설정", //열 이름 및 열 값
          *        "time": "2018-08-25 11:29:45"
          *      }
          *    },
          *   ...
          *]
          * </code></pre>
-         * 有分类的时候，数据格式如下：
+         * 분류가 있을 때 데이터 형식은 다음과 같음:
          *<pre><code class='language-js'>[
          *  {
-         *   "group": "工作日志",  //分类1
-         *   "list": [  //分类下的数据
+         *   "group": "업무 일지",  //분류1
+         *   "list": [  //분류 아래 데이터
          *     {
-         *       "bundle": "001257be-725a-43cf-9679-3892bbab696a", //cms 的 documentId, process 的 jobId
-         *       "data": { //视图中配置的数据
-         *         "title": "标题",  //列名称及列值
+         *       "bundle": "001257be-725a-43cf-9679-3892bbab696a", //cms의 documentId, process의 jobId
+         *       "data": { //뷰에 설정된 데이터
+         *         "title": "제목",  //열 이름 및 열 값
          *         "time": "2018-07-31 15:39:13",
-         *         "category": "工作日志"
+         *         "category": "업무 일지"
          *       }
          *     },
          *     ...
@@ -4502,16 +4502,16 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "getPageData" : function () { return _form.getPageData(); },
 
         /**
-         * 跳转到指定的页面。
+         * 지정한 페이지로 이동합니다.
          * @method toPage
          * @memberOf module:queryView
          * @static
-         * @param {Number} pageNumber - 需要跳转的页码。
-         * @param {Function} [callback ] - 跳转的页面数据加载完成以后的回调方法。
+         * @param {Number} pageNumber - 이동할 페이지 번호.
+         * @param {Function} [callback ] - 이동한 페이지 데이터 로드 완료 후 콜백 메서드.
          * @o2syntax
          * var data = this.queryView.toPage( pageNumber, callback );
          * @example
-         * //　跳转到第2页并且获取该页的数据。
+         * //　2페이지로 이동하고 해당 페이지 데이터 조회.
          * this.queryView.toPage( 2, function(){
          *      var data = this.queryView.getPageData();
          * }.bind(this) )
@@ -4519,7 +4519,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "toPage" : function ( pageNumber, callback ) { return _form.toPage(pageNumber, callback); },
 
         /**
-         * 当视图设置了允许多选的时候，可以通过这个方法全部选中当前页面的条目。
+         * 뷰에서 다중 선택을 허용한 경우 이 메서드로 현재 페이지 항목을 모두 선택할 수 있습니다.
          * @method selectAll
          * @memberOf module:queryView
          * @static
@@ -4529,7 +4529,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "selectAll" : function () { return _form.selectAll(); },
 
         /**
-         * 当视图设置了允许多选的时候，可以通过这个方法取消选中的条目。
+         * 뷰에서 다중 선택을 허용한 경우 이 메서드로 선택된 항목을 해제할 수 있습니다.
          * @method unSelectAll
          * @memberOf module:queryView
          * @static
@@ -4539,18 +4539,18 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "unSelectAll" : function () { return _form.unSelectAll(); },
 
         /**
-         * 获取选中的条目的数据。
+         * 선택된 항목의 데이터를 조회합니다.
          * @method getSelectedData
          * @memberOf module:queryView
          * @static
-         * @return {Object[]} 选中的条目的数据。
-         * <div>格式如下：</div>
+         * @return {Object[]} 선택된 항목의 데이터.
+         * <div>형식은 다음과 같음:</div>
          * <pre><code class='language-js'>
          * [
          {
-         "bundle": "099ed3c9-dfbc-4094-a8b7-5bfd6c5f7070", //cms 的 documentId, process 的 jobId
-         "data": {  //视图中配置的数据
-         "title": "考勤管理-配置-统计周期设置", //列名称及列值
+         "bundle": "099ed3c9-dfbc-4094-a8b7-5bfd6c5f7070", //cms의 documentId, process의 jobId
+         "data": {  //뷰에 설정된 데이터
+         "title": "근태 관리-설정-통계 주기 설정", //열 이름 및 열 값
          "time": "2018-08-25 11:29:45"
          }
          },
@@ -4563,94 +4563,94 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "getSelectedData" : function () { return _form.getSelectedData(); },
 
         /**
-         * 设置视图的过滤条件，该方法不能修改视图中默认的过滤条件（在开发视图的时候添加的过滤条件），而是在这上面新增。
+         * 뷰의 필터 조건을 설정합니다. 이 메서드는 뷰의 기본 필터 조건(뷰 개발 시 추가한 조건)을 수정하지 않고 그 위에 추가합니다.
          * @method setFilter
          * @memberOf module:queryView
          * @static
-         * @param {(ViewFilter[]|ViewFilter|Null)} [filter] 过滤条件。<br/>
-         * 当不传参数、参数为null或为空数组的情况下，表示清空非视图默认的过滤条件。<br/>
-         * 如果传入对象或者非空数组的时候，参数如下：
+         * @param {(ViewFilter[]|ViewFilter|Null)} [filter] 필터 조건.<br/>
+         * 매개변수를 전달하지 않거나 null 또는 빈 배열이면 뷰 기본값이 아닌 필터 조건을 모두 제거.<br/>
+         * 객체 또는 비어 있지 않은 배열을 전달하면 매개변수는 다음과 같음:
          * <pre><code class='language-js'>[
          *    {
          *       "logic":"and",
          *       "path":"$work.title",
          *       "comparison":"like",
-         *       "value":"7月",
+         *       "value":"7월",
          *       "formatType":"textValue"
          *   }
          *]
          * </code></pre>
-         * @param {Function} [callback] 过滤完成并重新加载数据后的回调方法。
+         * @param {Function} [callback] 필터링 후 데이터를 다시 로드한 뒤 콜백 메서드.
          * @o2syntax
          * this.queryView.setFilter( filter );
          */
         "setFilter" : function ( filter, callback ) { return _form.setFilter(filter, callback); },
 
         /**
-         * 增加查询语句where子句的过滤条件。
+         * 쿼리 문 where 절의 필터 조건을 추가합니다.
          * @method setStatementFilter
          * @memberOf module:queryStatement
          * @static
-         * @param {(StatementFilter[]|Null)} [filter] 过滤条件。<br/>
-         * 过滤条件。当不传参数、参数为null或为空数组的情况下，表示清空非视图默认的过滤条件。<br/>
-         * 如果传入非空数组的时候，参数如下：
+         * @param {(StatementFilter[]|Null)} [filter] 필터 조건.<br/>
+         * 필터 조건. 매개변수를 전달하지 않거나 null 또는 빈 배열이면 뷰 기본값이 아닌 필터 조건을 모두 제거.<br/>
+         * 비어 있지 않은 배열을 전달하면 매개변수는 다음과 같음:
          * <pre><code class='language-js'>[
          *    {
-         *      "path":"o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+         *      "path":"o.title", //조회 구문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
          *      "comparison":"like",
-         *      "value":"关于",
+         *      "value":"관련",
          *      "formatType":"textValue"
          *  }
          *]
          * </code></pre>
-         * @param {StatementParameter} [parameter] 过滤条件。对查询语句where子句的形如":person"的参数部分进行赋值，参数如下：
+         * @param {StatementParameter} [parameter] 필터 조건. 쿼리 문 where 절의 ":person" 형태 매개변수 부분에 값을 할당, 매개변수는 다음과 같음:
          * <pre><code class='language-js'>
-         * //假设语句为 select count(o.id) from Read o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)。
-         * //那么可能的参数如下：
+         * //쿼리 문이 select count(o.id) from Read o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)라고 가정.
+         * //가능한 매개변수는 다음과 같음:
          * {
-         *    "person" : "", //出于安全考虑参数名称为下列值时，不需要填写参数值，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组),roleList(当前人拥有的角色)。v8.0以后系统自动解析，不需要再传这类参数。
-         *    "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-         *    "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-         *    "processName" : "test流程", //其他写确定的值
-         *    "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+         *    "person" : "", //보안상 매개변수 이름이 다음 값이면 값을 입력할 필요 없이 서버에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹), roleList(현재 사용자의 역할). v8.0 이후 시스템이 자동 해석하므로 이런 매개변수는 전달할 필요 없음.
+         *    "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+         *    "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+         *    "processName" : "test프로세스", //그 외에는 확정된 값 입력
+         *    "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
          * }
          * </code></pre>
-         * @param {Function} [callback] 过滤完成并重新加载数据后的回调方法。
+         * @param {Function} [callback] 필터링 후 데이터를 다시 로드한 뒤 콜백 메서드.
          * @o2syntax
          * this.queryStatement.setStatementFilter( filter, parameter, callback );
          */
         "setStatementFilter" : function ( filter , parameter, callback) { return _form.setFilter(filter, parameter, callback); },
 
         /**
-         * 把当前视图切换成另外一个视图。
+         * 현재 뷰를 다른 뷰로 전환합니다.
          * @method switchView
          * @memberOf module:queryView
          * @static
-         * @param {Object} options 需要跳转的参数配置。参数说明如下：
-         * <div>下列说明的filter属性参考<a href='global.html#ViewFilter'>ViewFilter</a></div>
+         * @param {Object} options 이동에 필요한 매개변수 설정. 설명은 다음과 같음:
+         * <div>아래 filter 속성은 <a href='global.html#ViewFilter'>ViewFilter</a> 참고</div>
          * <pre><code class='language-js'>{
-         *     "application": application, //必选，视图的所在应用id
-         *     "viewName": viewName, //必选，视图的名称
+         *     "application": application, //필수, 뷰가 속한 앱 id
+         *     "viewName": viewName, //필수, 뷰 이름
          *     "filter": [
          *         {
          *            "logic":"and",
          *             "path":"$work.title",
          *             "comparison":"like",
-         *             "value":"7月",
+         *             "value":"7월",
          *             "formatType":"textValue"
          *         }
-         *     ], //可选，增加视图的过滤条件（ViewFilter），如果不传，则使用原视图的配置；如果需要去掉原视图的配置，则传入空数组 []
-         *     "isTitle": "yes", //可选，是否显示t视图的标题行，可选值有:yes no
-         *     "select": "none", //可选，是否允许新视图选择，如果不传，则使用原视图的配置, 可选值有： 不允许选择 none, 单选 single，多选 multi
+         *     ], //선택, 뷰 필터 조건(ViewFilter) 추가, 전달하지 않으면 원래 뷰 설정 사용, 원래 뷰 설정을 제거하려면 빈 배열 [] 전달
+         *     "isTitle": "yes", //선택, 뷰 제목 행 표시 여부, 가능한 값: yes no
+         *     "select": "none", //선택, 새 뷰 선택 허용 여부, 전달하지 않으면 원래 뷰 설정 사용, 가능한 값: 선택 불가 none, 단일 선택 single, 다중 선택 multi
          *     "titleStyles": {
          *       "color" : "red",
          *       "font-size" : "14px"
-         *     }, //可选，标题行样式，如果不传，则使用原视图的配置
+         *     }, //선택, 제목 행 스타일, 전달하지 않으면 원래 뷰 설정 사용
          *     "itemStyles": {
          *       "color" : "#333",
          *       "font-size" : "12px"
-         *     }, //可选，内容行样式，如果不传，则使用原视图的配置
-         *     "isExpand": "no", //可选，默认是否展开分类，如果不传，则使用原视图的配置, 可选值有:yes no
+         *     }, //선택, 내용 행 스타일, 전달하지 않으면 원래 뷰 설정 사용
+         *     "isExpand": "no", //선택, 분류 기본 펼침 여부, 전달하지 않으면 원래 뷰 설정 사용, 가능한 값: yes no
          *   }
          * </code></pre>
          * @o2syntax
@@ -4659,35 +4659,35 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "switchView" : function ( options ) { return _form.switchView(options); },
 
         /**
-         * 把当前查询视图切换成另外一个查询视图。
+         * 현재 쿼리 뷰를 다른 쿼리 뷰로 전환합니다.
          * @method switchStatement
          * @memberOf module:queryStatement
          * @static
-         * @param {Object} options 需要跳转的参数配置。参数说明如下：
-         * <div>下列说明的filter属性参考<a href='global.html#StatementFilter'>StatementFilter</a>，
-         * parameter属性参考<a href='global.html#StatementParameter'>StatementParameter</a></div>
+         * @param {Object} options 이동에 필요한 매개변수 설정. 설명은 다음과 같음:
+         * <div>아래 filter 속성은 <a href='global.html#StatementFilter'>StatementFilter</a> 참고,
+         * parameter 속성은 <a href='global.html#StatementParameter'>StatementParameter</a> 참고</div>
          * <pre><code class='language-js'>this.queryStatement.switchStatement({
-         *     "statementId": statementId, //必选，查询的名称、别名、id
-         *     "isTitle": "yes", //可选，是否显示视图的标题行，可选值有:yes no
-         *     "select": "multi", //可选，是否允许新视图选择，如果不传，则使用原视图的配置, 可选值有： 不允许选择 none, 单选 single，多选 multi
-         *     "showActionbar": false, //可选，是否显示操作条
-         *     "filter": [  //可选，增加查询语句where子句的过滤条件
+         *     "statementId": statementId, //필수, 쿼리의 이름·별칭·id
+         *     "isTitle": "yes", //선택, 뷰 제목 행 표시 여부, 가능한 값: yes no
+         *     "select": "multi", //선택, 새 뷰 선택 허용 여부, 전달하지 않으면 원래 뷰 설정 사용, 가능한 값: 선택 불가 none, 단일 선택 single, 다중 선택 multi
+         *     "showActionbar": false, //선택, 작업 표시줄 표시 여부
+         *     "filter": [  //선택, 쿼리 문 where 절의 필터 조건 추가
          *       {
-         *         "path": "o.title", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
-         *         "title": "标题",
+         *         "path": "o.title", //쿼리 문 형식이 jpql이면 o.title, 네이티브 sql이면 xtitle 사용
+         *         "title": "제목",
          *         "type": "filter",
          *         "comparison": "like",
          *         "formatType": "textValue",
-         *         "value": "测试"
+         *         "value": "테스트"
          *       }
          *     ],
-         *     //假设语句为 select count(o.id) from Read o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)
-         *     "parameter" : { //可选，对查询语句where语句的形如":person"的参数部分进行赋值
-         *       "person" : "", //出于安全考虑参数名称为下列值时，不需要填写参数值，后台默认赋值，person(当前人),identityList(当前人身份列表),unitList(当前人所在直接组织), unitAllList(当前人所在所有组织), groupList(当前人所在群组),roleList(当前人拥有的角色)。v8.0以后系统自动解析，不需要再传这类参数。
-         *       "startTime" : (new Date("2020-01-01")), //如果对比的是日期，需要传入 Date 类型
-         *       "applicationName" : "%test%", //如果运算符用的是 like, noLike，模糊查询
-         *       "processName" : "test流程" //其他写确定的值
-         *       "?1": "关于" //v8.0后查询语句支持问号加数字的传参
+         *     //쿼리 문이 select count(o.id) from Read o where (o.person = :person) and (o.startTime > :startTime) and (o.applicationName like :applicationName) and (o.processName = :processName)라고 가정
+         *     "parameter" : { //선택, 쿼리 문 where 절의 ":person" 형태 매개변수 부분에 값 할당
+         *       "person" : "", //보안상 매개변수 이름이 다음 값이면 값을 입력할 필요 없이 서버에서 기본값 할당: person(현재 사용자), identityList(현재 사용자 신분 목록), unitList(현재 사용자의 직속 조직), unitAllList(현재 사용자의 모든 조직), groupList(현재 사용자의 그룹), roleList(현재 사용자의 역할). v8.0 이후 시스템이 자동 해석하므로 이런 매개변수는 전달할 필요 없음.
+         *       "startTime" : (new Date("2020-01-01")), //날짜를 비교하는 경우 Date 타입 전달 필요
+         *       "applicationName" : "%test%", //연산자가 like, noLike이면 모호 검색
+         *       "processName" : "test프로세스" //기타는 확정 값 입력
+         *       "?1": "관련" //v8.0 이후 조회문은 물음표+숫자 형식 파라미터 지원
          *     }
          *   })
          * </code></pre>
@@ -4697,7 +4697,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
         "switchStatement" : function ( options ) { if(_form.switchStatement)_form.switchStatement(options) ; },
 
         /**
-         * 重新加载视图。
+         * 뷰를 다시 로드합니다.
          * @method reload
          * @methodOf module:queryView
          * @static
@@ -4708,7 +4708,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
         // "getInfor": function () { return ev.pageInfor; },
         // "infor": ev.pageInfor,
-        /**获取打开当前页面的component对象。
+        /**현재 페이지를 연 component 객체 조회.
          * @method getApp
          * @static
          * @see module:form.getApp
@@ -4716,7 +4716,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
         getApp: function () { return _form.app; },
         // "app": _form.app,
 
-        /**获取queryView对应的DOM对象。
+        /**queryView에 대응하는 DOM 객체를 조회합니다.
          * @method node
          * @static
          * @methodOf module:queryView
@@ -4741,7 +4741,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
         //     _form.printWork(application, form);
         // },
 
-        /**弹出一个确认框。
+        /**확인 창을 띄웁니다.
          * @method confirm
          * @static
          * @methodOf module:queryView
@@ -4770,7 +4770,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             }
         },
 
-        /**显示一个带关闭按钮的信息框。
+        /**닫기 버튼이 있는 정보 창을 표시합니다.
          * @method alert
          * @static
          * @methodOf module:queryView
@@ -4780,7 +4780,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             _form.alert(type, title, text, width, height);
         },
 
-        /**显示一个信息框。
+        /**정보 창을 표시합니다.
          * @method notice
          * @static
          * @methodOf module:queryView
@@ -4790,7 +4790,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             _form.notice(content, type, target, where, offset, option);
         },
 
-        /**打开一个对话框
+        /**대화상자 열기
          * @method dialog
          * @static
          * @see module:form.dialog
@@ -4799,7 +4799,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return  _form.dialog( options );
         },
 
-        /**打开人员组织选择界面
+        /**사용자 조직 선택 화면 열기
          * @method selectOrg
          * @static
          * @see module:form.selectOrg
@@ -4810,7 +4810,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return new MWF.O2Selector(container, options, delayLoad);
         },
 
-        /**　给视图添加事件。
+        /**　뷰에 이벤트를 추가합니다.
          * @method addEvent
          * @static
          * @methodOf module:queryView
@@ -4828,7 +4828,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
         //     _form.app.toPortal(portal, page, par);
         // },
 
-        /**打开一个在流转或已完成的流程实例。
+        /**진행 중이거나 완료된 프로세스 인스턴스를 엽니다.
          * @method openWork
          * @static
          * @methodOf module:queryView
@@ -4843,7 +4843,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return layout.desktop.openApplication(this.event, "process.Work", op);
         },
 
-        /**根据流程的jobId打开工作。
+        /**프로세스의 jobId로 업무 문서를 엽니다.
          * @method openJob
          * @static
          * @methodOf module:queryView
@@ -4987,7 +4987,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             }
         },
 
-        /**打开一个内容管理文档。
+        /**콘텐츠 관리 문서를 엽니다.
          * @method openDocument
          * @static
          * @methodOf module:queryView
@@ -5021,7 +5021,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return layout.desktop.openApplication(this.event, "cms.Document", op);
         },
 
-        /**打开一个门户页面。
+        /**포털 페이지를 엽니다.
          * @method openPortal
          * @static
          * @methodOf module:queryView
@@ -5052,7 +5052,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
             });
         },
-        /**打开一个门户页面
+        /**포털 페이지 열기
          * @method loadPortal
          * @static
          * @see module:form.loadPortal
@@ -5077,7 +5077,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return app;
         },
 
-        /**打开一个内容管理栏目。
+        /**콘텐츠 관리 게시판을 엽니다.
          * @method openCMS
          * @static
          * @methodOf module:queryView
@@ -5095,7 +5095,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             });
         },
 
-        /**打开一个流程应用。
+        /**프로세스 앱을 엽니다.
          * @method openProcess
          * @static
          * @methodOf module:queryView
@@ -5113,7 +5113,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             });
         },
 
-        /**打开一个任意一个component应用。
+        /**임의의 component 앱을 엽니다.
          * @method openApplication
          * @static
          * @methodOf module:queryView
@@ -5123,7 +5123,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             return layout.desktop.openApplication(null, name, options, status);
         },
 
-        /**创建一个内容管理文档。
+        /**콘텐츠 관리 문서를 생성합니다.
          * @method createDocument
          * @static
          * @methodOf module:queryView
@@ -5146,7 +5146,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
                 onAfterPublish = columnOrOptions.onAfterPublish;
                 onPostPublish = columnOrOptions.onPostPublish;
             }
-            // 移动端 app相关的实现
+            // 모바일 app 관련 구현
             if (layout.mobile) {
                 var options = {};
                 if (column) {
@@ -5186,7 +5186,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
                     return;
                 }
             }
-            // 下面是pc端
+            // 아래는 pc용
             if (target) {
                 if (layout.app && layout.app.inBrowser) {
                     layout.app.content.empty();
@@ -5220,7 +5220,7 @@ MWF.xScript.ViewEnvironment = function (ev) {
             })
         },
 
-        /**　启动一个流程实例。
+        /**　프로세스 인스턴스를 시작합니다.
          * @method startProcess
          * @static
          * @methodOf module:queryView
@@ -5356,54 +5356,54 @@ MWF.xScript.ViewEnvironment = function (ev) {
     this.status = ev.status;
 
     /**
-     * 在前端脚本中，可以通过this.session.user来获取当前用户信息。<br/>
+     * 프론트엔드 스크립트에서 this.session.user로 현재 사용자 정보를 가져올 수 있습니다.<br/>
      * @module session
-     * @o2cn 当前用户
+     * @o2cn 현재 사용자
      * @o2category web
      * @o2ordernumber 110
      * @o2syntax
      * var user = this.session.user;
      * @example
-     * //获取当前用户信息
+     * //현재 사용자 정보 조회
      * var user = this.session.user
-     * @return {Object} 当前用户信息，内容和格式如下：
+     * @return {Object} 현재 사용자 정보, 내용과 형식은 다음과 같음:
      * <pre><code class='language-js'>{
-     *    "id": "267a7bcc-f27a-49c8-8364-f1c12061085a",       //人员ID
-     *    "genderType": "m",                                  //性别
-     *    "icon": "...",                                      //头像
-     *    "signature": "",                                    //个人签名
-     *    "name": "张三",                                     //姓名
-     *    "employee": "zhansan",                                 //员工号
-     *    "unique": "zhansan",                                   //唯一标识
-     *    "distinguishedName": "xx@zhansan@P",                   //人员全称
-     *    "superior": "",                                     //上级人员id
-     *    "changePasswordTime": "2017-03-13",                 //修改密码时间
-     *    "lastLoginTime": "2019-01-02",                      //最后登录时间
-     *    "mail": "zhansan@zoneland.net",                        //邮件地址
-     *    "weixin": "",                                       //微信号
+     *    "id": "267a7bcc-f27a-49c8-8364-f1c12061085a",       //사용자 ID
+     *    "genderType": "m",                                  //성별
+     *    "icon": "...",                                      //프로필 사진
+     *    "signature": "",                                    //개인 서명
+     *    "name": "홍길동",                                     //이름
+     *    "employee": "zhansan",                                 //사번
+     *    "unique": "zhansan",                                   //고유 식별자
+     *    "distinguishedName": "xx@zhansan@P",                   //사용자 전체 이름
+     *    "superior": "",                                     //상급자 id
+     *    "changePasswordTime": "2017-03-13",                 //비밀번호 변경 시간
+     *    "lastLoginTime": "2019-01-02",                      //마지막 로그인 시간
+     *    "mail": "zhansan@zoneland.net",                        //이메일 주소
+     *    "weixin": "",                                       //위챗 ID
      *    "qq": "",                                           //QQ
-     *    "mobile": "18057190078",                            //手机号码
-     *    "officePhone": "",                                  //办公电话
-     *    "createTime": "2017-03-13 12:27:04",                //人员创建时间
-     *    "updateTime": "2019-01-02 13:00:04",                //人员修改时间
-     *    "token": "...",                         //当前用户token
-     *    "roleList": [                                       //人员角色
+     *    "mobile": "18057190078",                            //휴대폰 번호
+     *    "officePhone": "",                                  //사무실 전화
+     *    "createTime": "2017-03-13 12:27:04",                //사용자 생성 시간
+     *    "updateTime": "2019-01-02 13:00:04",                //사용자 수정 시간
+     *    "token": "...",                         //현재 사용자 token
+     *    "roleList": [                                       //사용자 역할
      *      "ProcessPlatformCreator@ProcessPlatformCreatorSystemRole@R",
      *      "ProcessPlatformManager@ProcessPlatformManagerSystemRole@R",
      *      "Manager@ManagerSystemRole@R"
      *   ],
-     *    "identityList": [                                   //人员身份列表
+     *    "identityList": [                                   //사용자 신분 목록
      *      {
-     *        "id": "709328c8-44a0-4f5d-a3fa-3c31208232d5",                       //身份ID
-     *        "name": "xx",                                                       //身份名称
-     *        "unique": "709328c8-44a0-4f5d-a3fa-3c31208232d5",                   //身份唯一标识
-     *        "distinguishedName": "xx@709328c8-44a0-4f5d-a3fa-3c31208232d5@I",   //身份全称
-     *        "person": "267a7bcc-f27a-49c8-8364-f1c12061085a",                   //人员ID
-     *        "unit": "d5356fd4-6675-45ad-9a00-5eff20b83dfa",                     //所属组织ID
-     *        "unitName": "开发部",                                               //所属组织名称
-     *        "unitLevel": 2,                                                     //所属组织层级
-     *        "unitLevelName": "兰德纵横/开发部",                                 //所属组织层次名
-     *        "major": true                                                       //是否是主身份
+     *        "id": "709328c8-44a0-4f5d-a3fa-3c31208232d5",                       //신분 ID
+     *        "name": "xx",                                                       //신분 이름
+     *        "unique": "709328c8-44a0-4f5d-a3fa-3c31208232d5",                   //신분 고유 식별자
+     *        "distinguishedName": "xx@709328c8-44a0-4f5d-a3fa-3c31208232d5@I",   //신분 전체 이름
+     *        "person": "267a7bcc-f27a-49c8-8364-f1c12061085a",                   //사용자 ID
+     *        "unit": "d5356fd4-6675-45ad-9a00-5eff20b83dfa",                     //소속 조직 ID
+     *        "unitName": "개발부",                                               //소속 조직 이름
+     *        "unitLevel": 2,                                                     //소속 조직 레벨
+     *        "unitLevelName": "인디고/개발부",                                 //소속 조직 계층 이름
+     *        "major": true                                                       //주 신분 여부
      *      },
      *      {
      *        "id": "343510af-57c2-4a55-a1f2-f30d7af6d284",
@@ -5413,9 +5413,9 @@ MWF.xScript.ViewEnvironment = function (ev) {
      *        "distinguishedName": "xx@343510af-57c2-4a55-a1f2-f30d7af6d284@I",
      *        "person": "267a7bcc-f27a-49c8-8364-f1c12061085a",
      *        "unit": "108b1b7c-cc78-49ab-9ab1-e67073bd6541",
-     *        "unitName": "开发部",
+     *        "unitName": "개발부",
      *        "unitLevel": 2,
-     *        "unitLevelName": "浙江兰德纵横/开发部",
+     *        "unitLevelName": "인디고/개발부",
      *        "major": false
      *      }
      *    ]
@@ -5427,198 +5427,198 @@ MWF.xScript.ViewEnvironment = function (ev) {
 
 
     /**
-     * 本文档说明如何在前台脚本中使用Actions调用平台的RESTful服务。<br/>
-     * 通过访问以下地址来查询服务列表：http://server/x_program_center/jest/list.html (v7.2之前版本需要加端口20030)
+     * 이 문서는 프론트엔드 스크립트에서 Actions로 플랫폼 RESTful 서비스를 호출하는 방법을 설명합니다.<br/>
+     * 다음 주소에서 서비스 목록 조회: http://server/x_program_center/jest/list.html (v7.2 이전 버전은 포트 20030 추가 필요)
      * @module Actions
-     * @o2cn 服务调用
+     * @o2cn 서비스 호출
      * @o2category web
      * @o2ordernumber 130
      * @o2syntax
-     * //获取Actions
+     * //Actions 조회
      * this.Actions
      */
 
     /**
-     * 本平台不同的服务根可能对应不同的域名或端口，您可以使用this.Actions.getHost来获取服务跟对应的host。
+     * 플랫폼의 서비스 루트마다 도메인이나 포트가 다를 수 있으며, this.Actions.getHost로 서비스 루트에 대응하는 host를 가져올 수 있습니다.
      * @method getHost
      * @methodOf module:Actions
      * @static
-     * @param {String} root 平台RESTful服务根，具体服务列表参见:http://server/x_program_center/jest/list.html。(v7.2之前版本需要加端口20030)
-     *如:<pre><code class='language-js'>
-     * "x_processplatform_assemble_surface" //流程平台相关服务根
+     * @param {String} root 플랫폼 RESTful 서비스 루트, 서비스 목록은 http://server/x_program_center/jest/list.html 참고.(v7.2 이전 버전은 포트 20030 추가 필요)
+     *예:<pre><code class='language-js'>
+     * "x_processplatform_assemble_surface" //프로세스 플랫폼 관련 서비스 루트
      * </code></pre>
-     * @return {String} 对应服务跟对应的host。如：http://127.0.0.1 (v7.2之前版本可能带端口20020)
+     * @return {String} 해당 서비스의 host. 예: http://127.0.0.1 (v7.2 이전 버전은 포트 20020이 붙을 수 있음)
      * @o2syntax
      * var actions = this.Actions.getHost( root );
      */
 
     /**
-     * 平台预置了Actions对象用于调用平台提供的服务，您可以使用this.Actions.load来获取这些方法。
+     * 플랫폼에는 플랫폼이 제공하는 서비스를 호출하기 위한 Actions 객체가 미리 준비되어 있으며, this.Actions.load로 이 메서드들을 가져올 수 있습니다.
      * @method load
      * @methodOf module:Actions
      * @instance
-     * @param {String} root 平台RESTful服务根，具体服务列表参见:http://server/x_program_center/jest/list.html (v7.2之前版本需要加端口20030)。
-     * 如:
+     * @param {String} root 플랫폼 RESTful 서비스 루트. 구체적인 서비스 목록은 http://server/x_program_center/jest/list.html 참고 (v7.2 이전 버전은 포트 20030 필요).
+     * 예:
      *<pre><code class='language-js'>
-     * "x_processplatform_assemble_surface" //流程平台相关服务根
+     * "x_processplatform_assemble_surface" //프로세스 플랫폼 관련 서비스 루트
      * </code></pre>
-     * @return {Object} 返回action对象，用于后续服务调用
+     * @return {Object} 이후 서비스 호출에 사용할 action 객체 반환
      * @o2syntax
      * var actions = this.Actions.load( root );
      * @o2syntax
-     * //获取流程平台服务对象。
+     * //프로세스 플랫폼 서비스 객체 조회.
      * var processAction = this.Actions.load("x_processplatform_assemble_surface");
      * @o2syntax
      * <caption>
-     *     通过this.Actions.load(root)方法得到action对象，就可以访问此服务下的方法了。<br/>
-     *     访问方法的规则如下：
+     *     this.Actions.load(root) 메서드로 action 객체를 얻으면 이 서비스의 메서드에 접근할 수 있습니다.<br/>
+     *     메서드 접근 규칙은 다음과 같습니다:
      *  </caption>
      *  var promise = this.Actions.load( root )[actionName][methodName]( arguements );
      *
-     *  promise : Promise对象，可以通过promise.then接收返回数据
+     *  promise : Promise 객체, promise.then으로 반환 데이터를 받을 수 있음
      *      promise.then(
      *        function(json){
-     *             //json为返回的数据
+     *             //json은 반환된 데이터
      *        }
      *      )
      *
-     *  root : 平台服务根名称，如果 x_processplatform_assemble_surface
+     *  root : 플랫폼 서비스 루트 이름. 예: x_processplatform_assemble_surface
      *
-     *  actionName : 服务下的Action分类名称，如 TaskAction
+     *  actionName : 서비스 아래 Action 분류 이름. 예: TaskAction
      *
-     *  methodName : Action分类下的方法名称，如 get
+     *  methodName : Action 분류 아래 메서드 이름. 예: get
      *
-     *  arguements : 需调用的RESTful服务的相关参数。这些参数需要按照先后顺序传入。根据实际情况可以省略某些参数。参数序列分别是:
+     *  arguements : 호출할 RESTful 서비스의 관련 매개변수. 순서대로 전달해야 하며, 상황에 따라 일부 매개변수는 생략할 수 있습니다. 매개변수 순서는 다음과 같습니다:
      *
-     *      uri的参数, data/formData(Post, Put方法), file(附件), success, failure, async。
+     *      uri 매개변수, data/formData(Post, Put 메서드), file(첨부파일), success, failure, async.
      *
-     *      uri参数：如果有uri有多个参数，需要按先后顺序传入。
+     *      uri 매개변수: uri 매개변수가 여러 개이면 순서대로 전달해야 합니다.
      *
-     *      data（formData）参数：提交到后台的数据，如果是上传附件，传入formData。POST 和 PUT 方法需要传入，GET方法和DELETE方法省略。
+     *      data(formData) 매개변수: 서버로 제출할 데이터. 첨부파일 업로드 시 formData를 전달합니다. POST와 PUT 메서드는 전달해야 하며, GET과 DELETE 메서드는 생략합니다.
      *
-     *      file参数：POST 或者 PUT方法中有效，当需要上传附件时传入,否则可以省略。
+     *      file 매개변수: POST 또는 PUT 메서드에서만 유효하며, 첨부파일 업로드 시 전달하고 그 외에는 생략할 수 있습니다.
      *
-     *      success参数：服务执行成功时的回调方法，形如 function(json){
-     *          json为后台服务传回的数据
+     *      success 매개변수: 서비스 실행 성공 시 콜백 메서드. 형식: function(json){
+     *          json은 서버 서비스가 반환한 데이터
      *      }。
      *
-     *      failure 参数：服务执行失败时的回调方法，形如 function(xhr){
-     *          xhr XmlHttpRequest对象，服务器请求失败时有值
-     *          return true; //从v6.3开始，返回true, 可以避免系统自动弹出错误信息；否则弹出错误信息。
+     *      failure 매개변수: 서비스 실행 실패 시 콜백 메서드. 형식: function(xhr){
+     *          xhr XmlHttpRequest 객체, 서버 요청 실패 시 값이 있음
+     *          return true; //v6.3부터 true를 반환하면 시스템이 오류 메시지를 자동으로 띄우지 않음. 그렇지 않으면 오류 메시지를 띄움.
      *       }
-     *      此参数可以省略，如果省略，系统会自动弹出错误信息。
+     *      이 매개변수는 생략할 수 있으며, 생략하면 시스템이 오류 메시지를 자동으로 띄웁니다.
      *
-     *      async : 方法同步或者异步执行，默认为true。
+     *      async : 메서드 동기/비동기 실행 여부, 기본값 true.
      *
-     *      urlEncode : 是否对url进行编码，默认为true。
+     *      urlEncode : url 인코딩 여부, 기본값 true.
      *
-     *      cache : 是否使用缓存，默认为true。
+     *      cache : 캐시 사용 여부, 기본값 true.
      *  @o2syntax
      *  <caption>
-     *  处理返回的数据有两种方式，二选一即可：<br/>
-     *  1、该方法return的结果是Promise对象，可以通过 promise.then() 方法来处理。<br/>
-     *  {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise说明}<br/>
-     *  2、通过success方法作为第一个参数来处理结果
+     *  반환 데이터 처리 방법은 두 가지이며 하나를 선택하면 됩니다:<br/>
+     *  1. 이 메서드가 return하는 결과는 Promise 객체이며, promise.then() 메서드로 처리할 수 있습니다.<br/>
+     *  {@link https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise 설명}<br/>
+     *  2. success 메서드를 첫 번째 매개변수로 하여 결과 처리
      *  </caption>
      *  promise.then(
      *    function(json){
-     *         //json为返回的数据
+     *         //json은 반환된 데이터
      *    }
      *  )
      *
-     *  //success：arguements中的第一个function对象
+     *  //success: arguements 중 첫 번째 function 객체
      *  function(json){
-     *    //json为后台服务传回的数据
+     *    //json은 서버 서비스가 반환한 데이터
      *  }
      *  @example
      * <caption>
-     *     <b>样例1:</b>
-     *     根据x_processplatform_assemble_surface服务获取当前用户的待办列表：<br/>
-     *     可以通过对应服务的查询页面，http://server/x_processplatform_assemble_surface/jest/index.html(v7.2之前版本需要带端口20020)<br/>
-     *     可以看到以下界面：<img src="img/module/Actions/Actions.png"/>
-     *     我们可以找到TaskAction的V2ListPaging服务是列式当前用户待办的服务。<br/>
-     *     该服务有以下信息：<br/>
-     *     1、actionName是：TaskAction<br/>
-     *     2、methodName是：V2ListPaging<br/>
-     *     3、有两个url参数，分别是 page(分页), size(每页数量)<br/>
-     *     4、有一系列的body参数<br/>
-     *     5、该服务方法类型是POST<br/>
-     *     根据这些信息我们可以组织出下面的方法：
+     *     <b>예시 1:</b>
+     *     x_processplatform_assemble_surface 서비스로 현재 사용자의 결재 대기 목록 조회:<br/>
+     *     해당 서비스의 조회 페이지 http://server/x_processplatform_assemble_surface/jest/index.html (v7.2 이전 버전은 포트 20020 필요)에서<br/>
+     *     다음 화면을 볼 수 있습니다:<img src="img/module/Actions/Actions.png"/>
+     *     TaskAction의 V2ListPaging 서비스가 현재 사용자의 결재 대기를 나열하는 서비스임을 찾을 수 있습니다.<br/>
+     *     이 서비스의 정보는 다음과 같습니다:<br/>
+     *     1. actionName: TaskAction<br/>
+     *     2. methodName: V2ListPaging<br/>
+     *     3. url 매개변수 2개: page(페이지), size(페이지당 개수)<br/>
+     *     4. 일련의 body 매개변수<br/>
+     *     5. 이 서비스 메서드 유형은 POST<br/>
+     *     이 정보로 다음과 같은 메서드를 구성할 수 있습니다:
      * </caption>
-     * var processAction = this.Actions.load("x_processplatform_assemble_surface"); //获取action
-     * var method = processAction.TaskAction.V2ListPaging; //获取列式方法
-     * //执行方法1
+     * var processAction = this.Actions.load("x_processplatform_assemble_surface"); //action 조회
+     * var method = processAction.TaskAction.V2ListPaging; //목록 메서드 조회
+     * //실행 방법 1
      * method(
-     *  1,  //uri 第1个参数，如果无uri参数，可以省略
-     *  20, //uri 第2个参数，如果无uri参数，可以省略，如果还有其他uri参数，可以用逗号, 分隔
-     *  {   //body 参数，对POST和PUT请求，该参数必须传，可以为空对象
-     *      processList : [xxx] //具体参数
+     *  1,  //uri 첫 번째 매개변수, uri 매개변수가 없으면 생략 가능
+     *  20, //uri 두 번째 매개변수, uri 매개변수가 없으면 생략 가능, 다른 uri 매개변수가 있으면 쉼표(,)로 구분
+     *  {   //body 매개변수, POST와 PUT 요청은 반드시 전달해야 하며 빈 객체 가능
+     *      processList : [xxx] //구체적인 매개변수
      *  },
-     *  function(json){ //正确调用的回调
-     *       //json.data得到服务返回数据
+     *  function(json){ //정상 호출 콜백
+     *       //json.data로 서비스 반환 데이터 획득
      *  },
-     *  function(xhr){ //可选，错误调用的回调
-     *      //xhr为XmlHttpRequest对象，服务器请求失败时有值
-     *      var responseJSON = JSON.parse( xhr.responseText ) //xhr.responseText {String}是后台返回的出错信息
-     *      //responseJSON见下面的说明
+     *  function(xhr){ //선택, 오류 호출 콜백
+     *      //xhr은 XmlHttpRequest 객체, 서버 요청 실패 시 값이 있음
+     *      var responseJSON = JSON.parse( xhr.responseText ) //xhr.responseText {String}는 서버가 반환한 오류 정보
+     *      //responseJSON은 아래 설명 참고
      *
-     *      var message = responseJSON.message; //message为错误提示文本
+     *      var message = responseJSON.message; //message는 오류 안내 문구
      *  },
-     *  true //可选，true为异步调用，false为同步调用，默认为true
+     *  true //선택, true는 비동기 호출, false는 동기 호출, 기본값 true
      * );
      *
-     * //执行方法2
+     * //실행 방법 2
      * var promise = method( 1, 20, {processList : [xxx]} )
      * promise.then( function(json){
-     *     //json.data得到服务返回数据
+     *     //json.data로 서비스 반환 데이터 획득
      * })
      * @example
-     * <caption>出错信息responseJSON的格式</caption>
+     * <caption>오류 정보 responseJSON의 형식</caption>
      * {
-     *       "type": "error", //类型为错误
-     *       "message": "标识为:343434 的 Task 对象不存在.", //提示文本
-     *       "date": "2020-12-29 17:02:13", //出错时间
-     *       "prompt": "com.x.base.core.project.exception.ExceptionEntityNotExist" //后台错误类
+     *       "type": "error", //유형은 오류
+     *       "message": "식별자 343434 인 Task 객체가 존재하지 않습니다.", //안내 문구
+     *       "date": "2020-12-29 17:02:13", //오류 발생 시간
+     *       "prompt": "com.x.base.core.project.exception.ExceptionEntityNotExist" //서버 오류 클래스
      *}
      * @example
      * <caption>
-     *     <b>样例2:</b>
-     *      已知流程实例的workid，在脚本中获取数据，修改后进行保存。
+     *     <b>예시 2:</b>
+     *      프로세스 인스턴스의 workid를 알고 있을 때, 스크립트에서 데이터를 조회해 수정 후 저장.
      * </caption>
-     * //查询服务列表找到获取data数据服务为DataAction的getWithWork方法
-     * //查询服务列表找到更新data数据服务为DataAction的updateWithWork方法
+     * //서비스 목록에서 data 조회 서비스인 DataAction의 getWithWork 메서드 확인
+     * //서비스 목록에서 data 갱신 서비스인 DataAction의 updateWithWork 메서드 확인
      *
      * var workid = "cce8bc22-225a-4f85-8132-7374d546886e";
      * var data;
-     * this.Actions.load("x_processplatform_assemble_surface").DataAction.getWithWork( //平台封装好的方法
-     *      workid, //uri的参数
-     *      function( json ){ //服务调用成功的回调函数, json为服务传回的数据
-     *          data = json.data; //为变量data赋值
+     * this.Actions.load("x_processplatform_assemble_surface").DataAction.getWithWork( //플랫폼이 제공하는 메서드
+     *      workid, //uri 매개변수
+     *      function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
+     *          data = json.data; //변수 data에 값 할당
      *      }.bind(this),
-     *      false //同步执行
+     *      false //동기 실행
      * )
      *
-     * data.subject = "新标题"; //修改数据
+     * data.subject = "새 제목"; //데이터 수정
      * this.Actions.load("x_processplatform_assemble_surface").DataAction.updateWithWork(
-     *      workid, //uri的参数
-     *      data, //保存的数据
-     *      function(){ //服务调用成功的回调函数
-     *          o2.xDesktop.notice("success", {"y":"top", "x": "right"}, "保存成功");  //提示，{"y":"top", "x": "right"}指提示框在顶部右边
+     *      workid, //uri 매개변수
+     *      data, //저장할 데이터
+     *      function(){ //서비스 호출 성공 콜백 함수
+     *          o2.xDesktop.notice("success", {"y":"top", "x": "right"}, "저장되었습니다");  //안내, {"y":"top", "x": "right"}는 안내창을 상단 오른쪽에 표시
      *      }.bind(this)
      * );
      */
 
     /**
-     * <b>已过时。</b>平台预置了Action的调用方法，您可以使用this.Actions.get来获取这些方法。RESTful配置文件在{服务器目录}/webServer/o2_core/o2/xAction/services下。
+     * <b>더 이상 사용되지 않습니다.</b> 플랫폼에는 Action 호출 메서드가 미리 준비되어 있으며, this.Actions.get으로 이 메서드들을 가져올 수 있습니다. RESTful 설정 파일은 {서버 디렉터리}/webServer/o2_core/o2/xAction/services 아래에 있습니다.
      * @method get
      * @deprecated
      * @methodOf module:Actions
      * @instance
-     * @param {String} root 平台RESTful服务根，具体服务列表参见:http://server/x_program_center/jest/list.html(v7.2之前版本需要加端口20030)。
-     *如:<pre><code class='language-js'>
-     *  "x_processplatform_assemble_surface" //流程平台相关服务根
+     * @param {String} root 플랫폼 RESTful 서비스 루트. 구체적인 서비스 목록은 http://server/x_program_center/jest/list.html 참고 (v7.2 이전 버전은 포트 20030 필요).
+     *예:<pre><code class='language-js'>
+     *  "x_processplatform_assemble_surface" //프로세스 플랫폼 관련 서비스 루트
      * </code></pre>
-     * @return {String} 对应服务根的host。如：http://127.0.0.1 (v7.2之前版本可能带端口20020)
+     * @return {String} 해당 서비스 루트의 host. 예: http://127.0.0.1 (v7.2 이전 버전은 포트 20020이 붙을 수 있음)
      * @o2syntax
      * var actions = this.Actions.get( root );
      * actions[ methodName ]( arguements );
@@ -5627,39 +5627,39 @@ MWF.xScript.ViewEnvironment = function (ev) {
      *
      * this.Actions.get( root )[methodName]( arguements );
      * @o2syntax
-     * methodName :（string）方法名称。
-     * arguements : 见load方法的arguements说明
+     * methodName : (string) 메서드 이름.
+     * arguements : load 메서드의 arguements 설명 참고
      * @example
-     * <caption><b>样例一:</b>已知流程实例的workid，在脚本中获取数据，修改后进行保存。</caption>
-     * //现已知获取数据的方法名称是 getWorkData  uri为： /jaxrs/data/work/{workid}
-     * //已知更新数据的方法名称是 saveData  uri为： /jaxrs/data/work/{workid}
+     * <caption><b>예시 1:</b>프로세스 인스턴스의 workid를 알고 있을 때, 스크립트에서 데이터를 조회해 수정 후 저장.</caption>
+     * //데이터 조회 메서드 이름은 getWorkData, uri는 /jaxrs/data/work/{workid}
+     * //데이터 갱신 메서드 이름은 saveData, uri는 /jaxrs/data/work/{workid}
      * var workid = "cce8bc22-225a-4f85-8132-7374d546886e";
      * var action = this.Actions.get("x_processplatform_assemble_surface");
      * var data;
-     * action.getWorkData( //平台封装好的方法
-     *      workid, //uri的参数
-     *      function( json ){ //服务调用成功的回调函数, json为服务传回的数据
-     *          data = json.data; //为变量data赋值
+     * action.getWorkData( //플랫폼이 제공하는 메서드
+     *      workid, //uri 매개변수
+     *      function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
+     *          data = json.data; //변수 data에 값 할당
      *      }.bind(this),
-     *      false //同步执行
+     *      false //동기 실행
      * );
 
-     * data.subject = "新标题"; //修改数据
+     * data.subject = "새 제목"; //데이터 수정
      * action.saveData(
-     *      workid, //uri的参数
-     *      data, //保存的数据
-     *      function(){ //服务调用成功的回调函数
-     *          o2.xDesktop.notice("success", {"y":"top", "x": "right"}, "保存成功");  //提示，{"y":"top", "x": "right"}指提示框在顶部右边
+     *      workid, //uri 매개변수
+     *      data, //저장할 데이터
+     *      function(){ //서비스 호출 성공 콜백 함수
+     *          o2.xDesktop.notice("success", {"y":"top", "x": "right"}, "저장되었습니다");  //안내, {"y":"top", "x": "right"}는 안내창을 상단 오른쪽에 표시
      *      }.bind(this)
      * );
      * @example
-     * <caption><b>样例二:</b>已知流程应用的workid，分页列式出流程实例。</caption>
-     * //现已知获取数据的方法名称是 listWorkNext  uri为： {"uri": "/jaxrs/work/list/{id}/next/{count}/application/{applicationId}"},
-     * var id = "(0)"; //如果是第一页id是(0)，否则传上一页最后一个流程实例的id
+     * <caption><b>예시 2:</b>프로세스 앱의 workid를 알고 있을 때, 프로세스 인스턴스를 페이지별로 나열.</caption>
+     * //데이터 조회 메서드 이름은 listWorkNext, uri는 {"uri": "/jaxrs/work/list/{id}/next/{count}/application/{applicationId}"},
+     * var id = "(0)"; //첫 페이지이면 id는 (0), 아니면 이전 페이지 마지막 프로세스 인스턴스의 id 전달
      * var count = 10;
      * var applicationId = "dde8bc22-225a-4f85-8132-7374d546886e";
      * this.Actions.get("x_processplatform_assemble_surface").listWorkNext(
-     *      id, //listWorkNext服务有3个uri参数，要按先后顺序列出
+     *      id, //listWorkNext 서비스에는 uri 매개변수가 3개 있으며 순서대로 나열해야 함
      *      count,
      *      applicationId,
      *       function( json ){
@@ -5688,49 +5688,49 @@ MWF.xScript.ViewEnvironment = function (ev) {
     };
 
     /**
-     * this.Table是一个工具类，您可以使用这个类对数据中心的数据表进行增删改查操作。
+     * this.Table은 도구 클래스로, 이 클래스로 데이터 센터의 데이터 테이블을 추가·삭제·수정·조회할 수 있습니다.
      * @module Table
-     * @o2cn 数据表执行
+     * @o2cn 데이터 테이블 실행
      * @o2category web
      * @o2ordernumber 135
-     * @param {String} tableName 数据表的id、名称或别名。
-     * @return {Object} table对象
+     * @param {String} tableName 데이터 테이블의 id, 이름 또는 별칭.
+     * @return {Object} table 객체
      * @o2syntax
-     * //您可以在页面、表单、流程各个嵌入脚本中，通过this.Table()来返回Table的对象，如下：
+     * //페이지, 양식, 프로세스의 각 내장 스크립트에서 this.Table()로 Table 객체를 반환받을 수 있습니다. 예:
      * var table = new this.Table( tableName )
      */
 
     /**
-     * 列示表中的行对象,下一页。
+     * 테이블의 행 객체 나열, 다음 페이지.
      * @method listRowNext
      * @methodOf module:Table
      * @instance
-     * @param {String} id  当前页最后一条数据的Id，如果是第一页使用"(0)"。
-     * @param {String|Number} count 下一页的行数
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {String} id  현재 페이지 마지막 데이터의 Id, 첫 페이지이면 "(0)" 사용.
+     * @param {String|Number} count 다음 페이지의 행 수
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.listRowNext( id, count, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.listRowNext( id, count );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      *
      * table.listRowNext( "0", 20, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":[
      *    //       {
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //        }
      *   //     ],
      *   //       "message": "",
@@ -5738,41 +5738,41 @@ MWF.xScript.ViewEnvironment = function (ev) {
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 列示表中的行对象,上一页。
+     * 테이블의 행 객체 나열, 이전 페이지.
      * @method listRowPrev
      * @methodOf module:Table
      * @instance
-     * @param {String} id  当前页第一条数据的Id，如果是最后一页使用"(0)"。
-     * @param {String|Number} count 上一页的行数
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {String} id  현재 페이지 첫 데이터의 Id, 마지막 페이지이면 "(0)" 사용.
+     * @param {String|Number} count 이전 페이지의 행 수
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.listRowPrev( id, count, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.listRowPrev( id, count );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      *
      * table.listRowPrev( "0", 20, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":[
      *    //       {
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //        }
      *   //     ],
      *   //       "message": "",
@@ -5780,43 +5780,43 @@ MWF.xScript.ViewEnvironment = function (ev) {
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 根据条件获取表中的数据。
+     * 조건에 따라 테이블 데이터 조회.
      * @method listRowSelect
      * @methodOf module:Table
      * @instance
-     * @param {String} [where] 查询条件，格式为jpql语法,o.name='zhangsan'，允许为空。
-     * @param {String} [orderBy] 排序条件，格式为：o.updateTime desc，允许为空
-     * @param {String|Number} [size] 返回结果集数量,允许为空。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {String} [where] 조회 조건, jpql 문법 형식, o.name='zhangsan', 빈 값 허용.
+     * @param {String} [orderBy] 정렬 조건, 형식: o.updateTime desc, 빈 값 허용
+     * @param {String|Number} [size] 반환 결과 개수, 빈 값 허용.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.listRowSelect( where, orderBy, size, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.listRowSelect( where, orderBy, size );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      *
-     * //查询字段name等于zhangsan的数据，结果按updateTime倒序
+     * //name 필드가 zhangsan인 데이터 조회, 결과는 updateTime 역순
      * table.listRowSelect( "o.name='zhangsan'", "o.updateTime desc", 20, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":[
      *    //       {
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //        }
      *   //     ],
      *   //       "message": "",
@@ -5824,309 +5824,309 @@ MWF.xScript.ViewEnvironment = function (ev) {
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 通过where 统计数量。
+     * where로 개수 통계.
      * @method rowCountWhere
      * @methodOf module:Table
      * @instance
-     * @param {String} where 查询条件，格式为jpql语法,o.name='zhangsan'。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {String} where 조회 조건, jpql 문법 형식, o.name='zhangsan'.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.rowCountWhere( where, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.rowCountWhere( where );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      *
-     * //查询字段name等于zhangsan的数据，结果按updateTime倒序
+     * //name 필드가 zhangsan인 데이터 조회, 결과는 updateTime 역순
      * table.rowCountWhere( "o.name='zhangsan", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": 5 //符合条件数据的总条数
+     *    //      "value": 5 //조건에 맞는 데이터 총 건수
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 删除数据表中指定id的记录。
+     * 데이터 테이블에서 지정 id의 레코드 삭제.
      * @method deleteRow
      * @methodOf module:Table
      * @instance
-     * @param {String} id 需要删除记录的id。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {String} id 삭제할 레코드의 id.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.deleteRow( id, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.deleteRow( id );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      *
      * table.deleteRow( "e1f89185-d8b0-4b66-9e34-aed3323d0d79", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示删除成功，false表示无此数据
+     *    //      "value": true //true는 삭제 성공, false는 해당 데이터 없음
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 删除指定表中所有行的数据。
+     * 지정 테이블의 모든 행 데이터 삭제.
      * @method deleteAllRow
      * @methodOf module:Table
      * @instance
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.deleteAllRow( success, failure, async )
-     * //或
+     * //또는
      * var promise = table.deleteAllRow();
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      *
      * table.deleteAllRow( function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": 1 //表示删除的条数，0表示无数据
+     *    //      "value": 1 //삭제된 건수, 0은 데이터 없음
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 获取数据表中指定id的记录。
+     * 데이터 테이블에서 지정 id의 레코드 조회.
      * @method getRow
      * @methodOf module:Table
      * @instance
-     * @param {id} 需要获取记录的id。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {id} 조회할 레코드의 id.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.getRow( id, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.getRow( id );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      *
      * table.getRow( "e1f89185-d8b0-4b66-9e34-aed3323d0d79", function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //    "type": "success",
      *    //    "data":{
-     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //数据的id
-     *    //        "createTime": "2021-11-01 16:23:41", //数据创建时间
-     *    //        "updateTime": "2021-11-01 16:23:41", //数据更新时间
-     *    //         ... //定义的字段（列）和值
+     *    //        "id": "5584e6d1-8088-4694-a948-8968ac8d4923", //데이터 id
+     *    //        "createTime": "2021-11-01 16:23:41", //데이터 생성 시간
+     *    //        "updateTime": "2021-11-01 16:23:41", //데이터 갱신 시간
+     *    //         ... //정의된 필드(열)와 값
      *    //     },
      *   //     "message": "",
      *   //     "date": "2021-11-01 18:34:19",
      *   //     "spent": 13,
      *   //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 往数据表中批量插入数据。
+     * 데이터 테이블에 데이터 일괄 삽입.
      * @method insertRow
      * @methodOf module:Table
      * @instance
-     * @param {Object[]} data 需要插入的数据。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {Object[]} data 삽입할 데이터.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.insertRow( data, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.insertRow( data );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      * var data = [
      *  {
-     *    "subject": "标题一",
-     *    ... //其他字段
+     *    "subject": "제목 1",
+     *    ... //기타 필드
      *  },
      *  ...
      * ];
      * table.insertRow( data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示插入成功
+     *    //      "value": true //true는 삽입 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 往数据表中插入单条数据。
+     * 데이터 테이블에 단건 데이터 삽입.
      * @method addRow
      * @methodOf module:Table
      * @instance
-     * @param {Object} data 需要插入的数据。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {Object} data 삽입할 데이터.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.addRow( data, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.addRow( data );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      * var data = {
-     *    "subject": "标题一",
-     *    ... //其他字段
+     *    "subject": "제목 1",
+     *    ... //기타 필드
      *  };
      * table.addRow( data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "id": 2cf3a20d-b166-490b-8d29-05544db3d79b //true表示修改成功
+     *    //      "id": 2cf3a20d-b166-490b-8d29-05544db3d79b //true는 수정 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 往数据表中修改单条数据。
+     * 데이터 테이블의 단건 데이터 수정.
      * @method updateRow
      * @methodOf module:Table
      * @instance
-     * @param {String} id 需要修改的数据id。
-     * @param {Object} data 需要修改的数据。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {String} id 수정할 데이터 id.
+     * @param {Object} data 수정할 데이터.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.updateRow( id, data, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.updateRow( id, data );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      * var data = {
      *    "id" : "2cf3a20d-b166-490b-8d29-05544db3d79b",
-     *    "subject": "标题一",
-     *    ... //其他字段
+     *    "subject": "제목 1",
+     *    ... //기타 필드
      *  };
      * table.updateRow( "2cf3a20d-b166-490b-8d29-05544db3d79b", data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示修改成功
+     *    //      "value": true //true는 수정 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
 
     /**
-     * 往数据表中部分修改单条数据。
+     * 데이터 테이블의 단건 데이터 부분 수정.
      * @method partUpdateRow
      * @methodOf module:Table
      * @instance
-     * @param {String} id 需要修改的数据id。
-     * @param {Object} data 需要修改的部分数据，其他数据不变。
-     * @param {Function} [success] 调用成功时的回调函数。
-     * @param {Function} [failure] 调用错误时的回调函数。
-     * @param {Boolean} [async] 是否异步调用，默认为true。
-     * @return {Promise} 返回Promise
+     * @param {String} id 수정할 데이터 id.
+     * @param {Object} data 수정할 일부 데이터, 나머지 데이터는 변경 없음.
+     * @param {Function} [success] 호출 성공 시 콜백 함수.
+     * @param {Function} [failure] 호출 오류 시 콜백 함수.
+     * @param {Boolean} [async] 비동기 호출 여부, 기본값 true.
+     * @return {Promise} Promise 반환
      * @o2syntax
      * table.partUpdateRow( id, data, success, failure, async )
-     * //或
+     * //또는
      * var promise = table.partUpdateRow( id, data );
      * promise.then(function(json){
-     *     //json为返回的数据
+     *     //json은 반환된 데이터
      * })
      * @example
      * var table = new this.Table("table1");
      * var data = {
      *    "id" : "2cf3a20d-b166-490b-8d29-05544db3d79b",
-     *    "subject": "标题一"
+     *    "subject": "제목 1"
      *  };
      * table.partUpdateRow( "2cf3a20d-b166-490b-8d29-05544db3d79b", data, function(data){
-     *    //data 形如
+     *    //data 형식 예
      *    //{
      *    //   "type": "success",
      *    //  "data": {
-     *    //      "value": true //true表示修改成功
+     *    //      "value": true //true는 수정 성공
      *    //  },
      *    //  "message": "",
      *    //  "date": "2021-11-01 18:32:27"
      *    //}
      * }, function(xhr){
-     *    //xhr 为 xmlHttpRequest
+     *    //xhr은 xmlHttpRequest
      * });
      */
     this.Table = MWF.xScript.createTable();
@@ -6205,8 +6205,8 @@ if( !MWF.xScript.createDict ){
             for( var j=0; j<dictFlagList.length; j++ ){
                 var k = dictFlagList[j] + type + appFlagList[i] + enableAnonymous;
                 if( !MWF.xScript.dictLoaded[k] ){
-                    MWF.xScript.dictLoaded[k] = cache; //指向同一个对象
-                    // MWF.xScript.dictLoaded[k][path] = json; //指向不同的对象
+                    MWF.xScript.dictLoaded[k] = cache; //같은 객체를 가리킴
+                    // MWF.xScript.dictLoaded[k][path] = json; //서로 다른 객체를 가리킴
                 }else if( i===0 && j===0 ){
                     MWF.xScript.setDictToCache( k, path ,json );
                     var arr = path.split(/\./g);
@@ -6351,12 +6351,12 @@ if( !MWF.xScript.createDict ){
 
     MWF.xScript.createDict = function(application, appType){
         //optionsOrName : {
-        //  type : "", //默认为process, 可以为  process  cms
-        //  application : "", //流程/CMS的名称/别名/id, 默认为当前应用
-        //  name : "", // 数据字典名称/别名/id
-        //  anonymous : false //允许在未登录的情况下读取CMS的数据字典, 改参数名也可以是enableAnonymous
+        //  type : "", //기본값 process, process  cms 가능
+        //  application : "", //프로세스/CMS의 이름/별칭/id, 기본값은 현재 앱
+        //  name : "", // 데이터 사전 이름/별칭/id
+        //  anonymous : false //로그인하지 않은 상태에서 CMS 데이터 사전 읽기 허용, 매개변수 이름은 enableAnonymous도 가능
         //}
-        //或者name: "" // 数据字典名称/别名/id
+        //또는 name: "" // 데이터 사전 이름/별칭/id
         return function(optionsOrName){
             var options = optionsOrName;
             if( typeOf( options ) == "string" ){

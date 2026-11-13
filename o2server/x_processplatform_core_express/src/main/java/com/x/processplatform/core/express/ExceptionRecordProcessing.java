@@ -7,7 +7,7 @@ class ExceptionRecordProcessing extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionRecordProcessing(String id) {
-		super("流程记录处理失败:{}.", id);
+		super("결재 기록 처리 실패: {}.", id);
 	}
 
 }

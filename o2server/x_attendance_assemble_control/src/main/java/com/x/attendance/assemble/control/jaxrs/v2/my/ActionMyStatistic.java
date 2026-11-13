@@ -31,14 +31,14 @@ public class ActionMyStatistic extends BaseAction {
 
         StatisticWi thisWi = this.convertToWrapIn(jsonElement, StatisticWi.class);
         if (StringUtils.isEmpty(thisWi.getStartDate())) {
-            throw new ExceptionEmptyParameter("开始日期");
+            throw new ExceptionEmptyParameter("시작 날짜");
         }
         if (StringUtils.isEmpty(thisWi.getEndDate())) {
-            throw new ExceptionEmptyParameter("结束日期");
+            throw new ExceptionEmptyParameter("종료 날짜");
         }
 
-        Date startDate = DateTools.parse(thisWi.getStartDate(), DateTools.format_yyyyMMdd); // 检查格式
-        Date endDate = DateTools.parse(thisWi.getEndDate(), DateTools.format_yyyyMMdd); // 检查格式
+        Date startDate = DateTools.parse(thisWi.getStartDate(), DateTools.format_yyyyMMdd); // 형식 검사
+        Date endDate = DateTools.parse(thisWi.getEndDate(), DateTools.format_yyyyMMdd); // 형식 검사
         if (startDate.after(endDate)) {
             throw new ExceptionDateEndBeforeStartError();
         }

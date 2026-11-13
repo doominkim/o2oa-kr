@@ -32,7 +32,7 @@ public class AttendanceV2LeaveLedgerExpireTask extends AbstractJob {
     @Override
     public void schedule(JobExecutionContext jobExecutionContext) throws Exception {
         if (logger.isDebugEnabled()) {
-            logger.debug("======================新版考勤假期额度过期定时器开始执行==============================");
+            logger.debug("======================신규 근태 휴가 한도 만료 타이머 실행 시작==============================");
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Date now = new Date();
@@ -54,12 +54,12 @@ public class AttendanceV2LeaveLedgerExpireTask extends AbstractJob {
                     logger.error(e);
                 }
             }
-            logger.info("新版考勤假期额度过期处理完成，过期批次数量: {}, 更新账户数量: {}.", ledgers.size(), accountKeys.size());
+            logger.info("신규 근태 휴가 한도 만료 처리 완료, 만료 배치 수: {}, 갱신 계정 수: {}.", ledgers.size(), accountKeys.size());
         } catch (Exception e) {
             logger.error(e);
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("======================新版考勤假期额度过期定时器执行完成==============================");
+            logger.debug("======================신규 근태 휴가 한도 만료 타이머 실행 완료==============================");
         }
     }
 

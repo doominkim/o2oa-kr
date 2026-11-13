@@ -31,7 +31,7 @@ MWF.xApplication.process.FormDesigner.Module.OnlyOffice = MWF.FCOnlyOffice = new
         //     }
         // }.bind(this));
         // if(flag){
-        //     this.form.designer.notice( "表单中只允许有一个OnlyOffice控件", "error", this.form.container );
+        //     this.form.designer.notice( "양식에는 OnlyOffice 컨트롤을 하나만 둘 수 있습니다", "error", this.form.container );
         //     return false;
         // }
 

@@ -93,7 +93,7 @@ public class TimerOrganization extends ActionBase {
 		for (Date o : os) {
 			duration += current.getTime() - o.getTime();
 		}
-		/** 转化为分钟 */
+		/** 분 단위로 변환 */
 		duration = duration / (1000L * 60L);
 		return duration;
 	}

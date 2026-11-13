@@ -59,7 +59,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSettingInfoProcess( e, "系统将用户传入的数据转换为考勤系统配置对象时发生异常." );
+				Exception exception = new ExceptionSettingInfoProcess( e, "사용자가 전달한 데이터를 근태 시스템 설정 객체로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -70,7 +70,7 @@ public class ActionSave extends BaseAction {
 				result.setData( new Wo( report_S_Setting.getId() ) );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSettingInfoProcess( e, "保存考勤系统配置信息时发生异常." );
+				Exception exception = new ExceptionSettingInfoProcess( e, "근태 시스템 설정 저장 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

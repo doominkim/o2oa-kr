@@ -1,8 +1,8 @@
-/* 首页框架样式 */
+/* 홈 프레임 스타일 */
 @import url('../x_component_process_FormDesigner/Module/Form/skin/v10/index.css');
-/* 门户页面样式 */
+/* 포털 페이지 스타일 */
 @import url('../x_component_process_FormDesigner/Module/Form/skin/v10/homepage.css');
-/* 表单样式 */
+/* 양식 스타일 */
 @import url('../x_component_process_FormDesigner/Module/Form/skin/v10/form.css');
-/* 二级页面样式 */
+/* 2단계 페이지 스타일 */
 @import url('../x_component_process_FormDesigner/Module/Form/skin/v10/view.css');

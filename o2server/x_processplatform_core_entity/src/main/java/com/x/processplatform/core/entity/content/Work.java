@@ -53,7 +53,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Work", description = "流程平台工作.")
+@Schema(name = "Work", description = "프로세스 플랫폼 업무 문서.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.Work.table, uniqueConstraints = {
@@ -63,7 +63,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 /**
- * 7.2.0版本 增加manualTaskIdentityMatrix
+ * 7.2.0 버전 manualTaskIdentityMatrix 추가
  * 
  * @author ray
  *
@@ -84,12 +84,12 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		if (StringUtils.isEmpty(this.startTimeMonth) && (null != this.startTime)) {
@@ -131,7 +131,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public Work() {
 		this.properties = new WorkProperties();
@@ -321,90 +321,90 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	public static final String MANUALEMPOWERMAP_FIELDNAME = "manualEmpowerMap";
 	@Transient
 	@Deprecated(since = "8.2", forRemoval = true)
-	@FieldDescribe("授权对象")
+	@FieldDescribe("위임 대상")
 	private Map<String, String> manualEmpowerMap = new LinkedHashMap<>();
 
 	public static final String SERVICEVALUE_FIELDNAME = "serviceValue";
 	@Transient
-	@FieldDescribe("服务回调值")
+	@FieldDescribe("서비스 콜백 값")
 	private Map<String, Object> serviceValue = new LinkedHashMap<>();
 
 	public static final String GOBACKACTIVITYTOKEN_FIELDNAME = "goBackActivityToken";
 	@Transient
-	@FieldDescribe("goBack进行跳转退回时使用的.")
+	@FieldDescribe("goBack으로 이동 반려 시 사용.")
 	private String goBackActivityToken;
 
 	public static final String GOBACKSTORE_FIELDNAME = "goBackStore";
 	@Transient
-	@FieldDescribe("回退临时存储数据.")
+	@FieldDescribe("되돌리기 임시 저장 데이터.")
 	private GoBackStore goBackStore;
 
 	public static final String SPLITVALUELIST_FIELDNAME = "splitValueList";
 	@Transient
-	@FieldDescribe("要拆分的值")
+	@FieldDescribe("분할할 값")
 	private List<String> splitValueList;
 
 	public static final String EMBEDTARGETJOB_FIELDNAME = "embedTargetJob";
 	@Transient
-	@FieldDescribe("Embed活动生成的Work的Job.")
+	@FieldDescribe("Embed 활동이 생성한 Work의 Job.")
 	private String embedTargetJob;
 
 	public static final String EMBEDCOMPLETED_FIELDNAME = "embedCompleted";
 	@Transient
-	@FieldDescribe("子流程返回标识.")
+	@FieldDescribe("하위 프로세스 반환 식별자.")
 	private String embedCompleted;
 
 	public static final String SPLITTOKENVALUEMAP_FIELDNAME = "splitTokenValueMap";
 	@Transient
-	@FieldDescribe("拆分值存储对象.")
+	@FieldDescribe("분할 값 저장 객체.")
 	private Map<String, String> splitTokenValueMap;
 
 	public static final String MANUALTASKIDENTITYMATRIX_FIELDNAME = "manualTaskIdentityMatrix";
-	@FieldDescribe("待办身份矩阵.")
+	@FieldDescribe("결재 대기 신분 매트릭스.")
 	@Transient
 	private ManualTaskIdentityMatrix manualTaskIdentityMatrix;
 
 	public static final String PARENTWORK_FIELDNAME = "parentWork";
 	@Transient
-	@FieldDescribe("父工作,在当前工作是通过子流程调用时产生.")
+	@FieldDescribe("상위 업무 문서, 현재 업무 문서가 하위 프로세스 호출로 생성된 경우.")
 	private String parentWork;
 
 	public static final String PARENTJOB_FIELDNAME = "parentJob";
 	@Transient
-	@FieldDescribe("父工作Job,在当前工作是通过子流程调用时产生.")
+	@FieldDescribe("상위 업무 문서 Job, 현재 업무 문서가 하위 프로세스 호출로 생성된 경우.")
 	private String parentJob;
 
 	public static final String TICKETS_FIELDNAME = "tickets";
 	@Transient
-	@FieldDescribe("待办凭证.")
+	@FieldDescribe("결재 대기 증빙.")
 	private Tickets tickets;
 
 	public static final String FORCEROUTEENABLE_FIELDNAME = "forceRouteEnable";
 	@Transient
-	@FieldDescribe("强制路由.")
+	@FieldDescribe("강제 경로.")
 	private Boolean forceRouteEnable;
 
 	public static final String MANUALTASKIDENTITYTEXT_FIELDNAME = "manualTaskIdentityText";
 	@Transient
-	@FieldDescribe("当前处理人身份合并文本,用','分割,此字段仅用于显示当前工作的处理人,不索引.")
+	@FieldDescribe("현재 처리자 신분 병합 텍스트, ','로 구분, 이 필드는 현재 업무 문서의 처리자 표시에만 사용, 인덱스 없음.")
 	private String manualTaskIdentityText;
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("工作")
+	@FieldDescribe("문서")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	@Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("工作开始时间")
+	@FieldDescribe("업무 문서 시작 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + startTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTime_FIELDNAME)
@@ -412,35 +412,35 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	private Date startTime;
 
 	public static final String startTimeMonth_FIELDNAME = "startTimeMonth";
-	@FieldDescribe("用于在Filter中分类使用.")
+	@FieldDescribe("Filter에서 분류에 사용.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + startTimeMonth_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTimeMonth_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String startTimeMonth;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建人，可能为空，如果由系统创建.")
+	@FieldDescribe("생성자, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorPerson;
 
 	public static final String creatorIdentity_FIELDNAME = "creatorIdentity";
-	@FieldDescribe("创建人Identity,可能为空,如果由系统创建.")
+	@FieldDescribe("생성자 Identity, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorIdentity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorIdentity;
 
 	public static final String creatorUnit_FIELDNAME = "creatorUnit";
-	@FieldDescribe("创建人组织,可能为空,如果由系统创建。")
+	@FieldDescribe("생성자 조직, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorUnit_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorUnit_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorUnit;
 
 	public static final String creatorUnitLevelName_FIELDNAME = "creatorUnitLevelName";
-	@FieldDescribe("创建人组织层级名.")
+	@FieldDescribe("생성자 조직 계층 이름.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@CheckPersist(allowEmpty = true)
@@ -448,54 +448,54 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	private String creatorUnitLevelName;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用ID")
+	@FieldDescribe("앱 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String applicationName_FIELDNAME = "applicationName";
-	@FieldDescribe("应用名称.")
+	@FieldDescribe("앱 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + applicationName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + applicationName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String applicationName;
 
 	public static final String applicationAlias_FIELDNAME = "applicationAlias";
-	@FieldDescribe("应用别名.")
+	@FieldDescribe("앱 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + applicationAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String applicationAlias;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String process;
 
 	public static final String processName_FIELDNAME = "processName";
-	@FieldDescribe("流程名称.")
+	@FieldDescribe("프로세스 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + processName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + processName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processName;
 
 	public static final String processAlias_FIELDNAME = "processAlias";
-	@FieldDescribe("流程别名.")
+	@FieldDescribe("프로세스 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + processAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processAlias;
 
 	public static final String activity_FIELDNAME = "activity";
-	@FieldDescribe("当前活动ID.")
+	@FieldDescribe("현재 활동 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activity;
 
 	public static final String activityType_FIELDNAME = "activityType";
-	@FieldDescribe("活动类型.")
+	@FieldDescribe("활동 유형.")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + activityType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityType_FIELDNAME)
@@ -503,75 +503,75 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	private ActivityType activityType;
 
 	public static final String activityName_FIELDNAME = "activityName";
-	@FieldDescribe("活动名称.")
+	@FieldDescribe("활동 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityName;
 
 	public static final String activityAlias_FIELDNAME = "activityAlias";
-	@FieldDescribe("活动别名.")
+	@FieldDescribe("활동 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityAlias;
 
 	public static final String activityDescription_FIELDNAME = "activityDescription";
-	@FieldDescribe("活动说明.")
+	@FieldDescribe("활동 설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityDescription_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityDescription_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityDescription;
 
 	public static final String activityToken_FIELDNAME = "activityToken";
-	@FieldDescribe("活动的标识号，每进入一次活动将重新生成一次")
+	@FieldDescribe("활동 식별 번호, 활동에 진입할 때마다 새로 생성")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activityToken_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityToken_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String activityToken;
 
 	public static final String activityUnique_FIELDNAME = "activityUnique";
-	@Schema(description = "活动环节唯一标识")
-	@FieldDescribe("活动环节唯一标识")
+	@Schema(description = "활동 단계 고유 식별자")
+	@FieldDescribe("활동 단계 고유 식별자")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + activityUnique_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityUnique;
 
 	public static final String activityArrivedTime_FIELDNAME = "activityArrivedTime";
-	@FieldDescribe("活动到达时间")
+	@FieldDescribe("활동 도착 시간")
 	@Column(name = ColumnNamePrefix + activityArrivedTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityArrivedTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date activityArrivedTime;
 
 	public static final String serial_FIELDNAME = "serial";
-	@FieldDescribe("编号")
+	@FieldDescribe("번호")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + serial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + serial_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String serial;
 
 	public static final String dataChanged_FIELDNAME = "dataChanged";
-	@FieldDescribe("当前工作是否经过保存修改的操作,用于判断是否是默认生成的未经修改的.")
+	@FieldDescribe("현재 업무 문서의 저장 수정 작업 여부, 기본 생성 후 수정되지 않은 것인지 판단에 사용.")
 	@Column(name = ColumnNamePrefix + dataChanged_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean dataChanged;
 
 	public static final String workThroughManual_FIELDNAME = "workThroughManual";
-	@FieldDescribe("是否已经经过人工节点,用于判断是否是草稿.在到达环节进行判断.")
+	@FieldDescribe("수동 노드 통과 여부, 초안 여부 판단에 사용. 도착 단계에서 판단.")
 	@Column(name = ColumnNamePrefix + workThroughManual_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean workThroughManual;
 
 	public static final String workCreateType_FIELDNAME = "workCreateType";
-	@FieldDescribe("工作创建类型,surface,assgin")
+	@FieldDescribe("업무 문서 생성 유형, surface, assgin")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + workCreateType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + workCreateType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String workCreateType;
 
 	public static final String workStatus_FIELDNAME = "workStatus";
-	@FieldDescribe("工作状态")
+	@FieldDescribe("업무 문서 상태")
 	@Enumerated(EnumType.STRING)
 	@Column(length = WorkStatus.length, name = ColumnNamePrefix + workStatus_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + workStatus_FIELDNAME)
@@ -579,33 +579,33 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	private WorkStatus workStatus;
 
 	public static final String beforeExecuted_FIELDNAME = "beforeExecuted";
-	@FieldDescribe("是否已经通过执行前")
+	@FieldDescribe("실행 전 통과 여부")
 	@Column(name = ColumnNamePrefix + beforeExecuted_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean beforeExecuted;
 
-//	@Deprecated(since = "8.2,使用tickets后将删除此字段.", forRemoval = true)
+//	@Deprecated(since = "8.2,tickets 사용 후 이 필드 삭제 예정.", forRemoval = true)
 //	public static final String MANUALTASKIDENTITYTEXT_FIELDNAME = "manualTaskIdentityText";
-//	@FieldDescribe("当前处理人身份合并文本,用','分割,超长截断,此字段仅用于显示当前工作的处理人,不索引.")
+//	@FieldDescribe("현재 처리자 신분 병합 텍스트, ','로 구분, 너무 길면 잘림, 이 필드는 현재 업무 문서의 처리자 표시에만 사용, 인덱스 없음.")
 //	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + MANUALTASKIDENTITYTEXT_FIELDNAME)
 //	@CheckPersist(allowEmpty = true)
 //	private String manualTaskIdentityText;
 
 	/** Split Attribute */
 	public static final String splitting_FIELDNAME = "splitting";
-	@FieldDescribe("是否是拆分中的工作")
+	@FieldDescribe("분할 중인 업무 문서 여부")
 	@Column(name = ColumnNamePrefix + splitting_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean splitting;
 
 	public static final String splitToken_FIELDNAME = "splitToken";
-	@FieldDescribe("拆分工作令牌")
+	@FieldDescribe("분할 업무 문서 토큰")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + splitToken_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String splitToken;
 
 	public static final String splitTokenList_FIELDNAME = "splitTokenList";
-	@FieldDescribe("拆分工作产生的Token")
+	@FieldDescribe("분할 업무 문서에서 생성된 Token")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -617,46 +617,46 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	private List<String> splitTokenList;
 
 	public static final String splitValue_FIELDNAME = "splitValue";
-	@FieldDescribe("拆分值")
+	@FieldDescribe("분할 값")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + splitValue_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String splitValue;
 
 	public static final String form_FIELDNAME = "form";
-	@FieldDescribe("使用表单")
+	@FieldDescribe("사용 양식")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + form_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String form;
 
 	public static final String destinationRoute_FIELDNAME = "destinationRoute";
-	@FieldDescribe("到达使用的路由")
+	@FieldDescribe("도착 시 사용한 경로")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + destinationRoute_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String destinationRoute;
 
 	public static final String destinationRouteName_FIELDNAME = "destinationRouteName";
-	@FieldDescribe("到达使用的路由")
+	@FieldDescribe("도착 시 사용한 경로")
 	@Column(length = length_255B, name = ColumnNamePrefix + destinationRouteName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String destinationRouteName;
 
 	public static final String destinationActivityType_FIELDNAME = "destinationActivityType";
 	@Enumerated(EnumType.STRING)
-	@FieldDescribe("当前活动类型")
+	@FieldDescribe("현재 활동 유형")
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + destinationActivityType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + destinationActivityType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private ActivityType destinationActivityType;
 
 	public static final String destinationActivity_FIELDNAME = "destinationActivity";
-	@FieldDescribe("目标活动的ID")
+	@FieldDescribe("대상 활동의 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + destinationActivity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + destinationActivity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String destinationActivity;
 
 	public static final String expireTime_FIELDNAME = "expireTime";
-	@FieldDescribe("任务截止时间.")
+	@FieldDescribe("작업 마감 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + expireTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + expireTime_FIELDNAME)
@@ -664,14 +664,14 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	private Date expireTime;
 
 	public static final String embedTargetWork_FIELDNAME = "embedTargetWork";
-	@FieldDescribe("Embed活动生成的WorkId，用于在embed生成targetWork之后在inquire环节进行推动。")
+	@FieldDescribe("Embed 활동이 생성한 WorkId, embed가 targetWork를 생성한 후 inquire 단계에서 진행시키는 데 사용.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + embedTargetWork_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + embedTargetWork_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String embedTargetWork;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -679,152 +679,152 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 	private WorkProperties properties;
 
 	public static final String stringValue01_FIELDNAME = "stringValue01";
-	@FieldDescribe("业务数据String值01.")
+	@FieldDescribe("업무 데이터 String 값01.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue01;
 
 	public static final String stringValue02_FIELDNAME = "stringValue02";
-	@FieldDescribe("业务数据String值02.")
+	@FieldDescribe("업무 데이터 String 값02.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue02;
 
 	public static final String stringValue03_FIELDNAME = "stringValue03";
-	@FieldDescribe("业务数据String值03.")
+	@FieldDescribe("업무 데이터 String 값03.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue03_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue03_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue03;
 
 	public static final String stringValue04_FIELDNAME = "stringValue04";
-	@FieldDescribe("业务数据String值04.")
+	@FieldDescribe("업무 데이터 String 값04.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue04_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue04_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue04;
 
 	public static final String stringValue05_FIELDNAME = "stringValue05";
-	@FieldDescribe("业务数据String值05.")
+	@FieldDescribe("업무 데이터 String 값05.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue05_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue05_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue05;
 
 	public static final String stringValue06_FIELDNAME = "stringValue06";
-	@FieldDescribe("业务数据String值06.")
+	@FieldDescribe("업무 데이터 String 값06.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue06_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue06_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue06;
 
 	public static final String stringValue07_FIELDNAME = "stringValue07";
-	@FieldDescribe("业务数据String值07.")
+	@FieldDescribe("업무 데이터 String 값07.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue07_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue07_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue07;
 
 	public static final String stringValue08_FIELDNAME = "stringValue08";
-	@FieldDescribe("业务数据String值08.")
+	@FieldDescribe("업무 데이터 String 값08.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue08_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue08_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue08;
 
 	public static final String stringValue09_FIELDNAME = "stringValue09";
-	@FieldDescribe("业务数据String值09.")
+	@FieldDescribe("업무 데이터 String 값09.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue09_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue09_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue09;
 
 	public static final String stringValue10_FIELDNAME = "stringValue10";
-	@FieldDescribe("业务数据String值10.")
+	@FieldDescribe("업무 데이터 String 값10.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue10_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue10_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue10;
 
 	public static final String booleanValue01_FIELDNAME = "booleanValue01";
-	@FieldDescribe("业务数据Boolean值01.")
+	@FieldDescribe("업무 데이터 Boolean 값01.")
 	@Column(name = ColumnNamePrefix + booleanValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean booleanValue01;
 
 	public static final String booleanValue02_FIELDNAME = "booleanValue02";
-	@FieldDescribe("业务数据Boolean值02.")
+	@FieldDescribe("업무 데이터 Boolean 값02.")
 	@Column(name = ColumnNamePrefix + booleanValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean booleanValue02;
 
 	public static final String doubleValue01_FIELDNAME = "doubleValue01";
-	@FieldDescribe("业务数据Double值01.")
+	@FieldDescribe("업무 데이터 Double 값01.")
 	@Column(name = ColumnNamePrefix + doubleValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + doubleValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double doubleValue01;
 
 	public static final String doubleValue02_FIELDNAME = "doubleValue02";
-	@FieldDescribe("业务数据Double值02.")
+	@FieldDescribe("업무 데이터 Double 값02.")
 	@Column(name = ColumnNamePrefix + doubleValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + doubleValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double doubleValue02;
 
 	public static final String doubleValue03_FIELDNAME = "doubleValue03";
-	@FieldDescribe("业务数据Double值03.")
+	@FieldDescribe("업무 데이터 Double 값 03.")
 	@Column(name = ColumnNamePrefix + doubleValue03_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + doubleValue03_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double doubleValue03;
 
 	public static final String doubleValue04_FIELDNAME = "doubleValue04";
-	@FieldDescribe("业务数据Double值04.")
+	@FieldDescribe("업무 데이터 Double 값 04.")
 	@Column(name = ColumnNamePrefix + doubleValue04_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + doubleValue04_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double doubleValue04;
 
 	public static final String doubleValue05_FIELDNAME = "doubleValue05";
-	@FieldDescribe("业务数据Double值05.")
+	@FieldDescribe("업무 데이터 Double 값 05.")
 	@Column(name = ColumnNamePrefix + doubleValue05_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + doubleValue05_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double doubleValue05;
 
 	public static final String longValue01_FIELDNAME = "longValue01";
-	@FieldDescribe("业务数据Long值01.")
+	@FieldDescribe("업무 데이터 Long 값01.")
 	@Column(name = ColumnNamePrefix + longValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + longValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long longValue01;
 
 	public static final String longValue02_FIELDNAME = "longValue02";
-	@FieldDescribe("业务数据Long值02.")
+	@FieldDescribe("업무 데이터 Long 값02.")
 	@Column(name = ColumnNamePrefix + longValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + longValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long longValue02;
 
 	public static final String longValue03_FIELDNAME = "longValue03";
-	@FieldDescribe("业务数据Long值03.")
+	@FieldDescribe("업무 데이터 Long 값 03.")
 	@Column(name = ColumnNamePrefix + longValue03_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + longValue03_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long longValue03;
 
 	public static final String longValue04_FIELDNAME = "longValue04";
-	@FieldDescribe("业务数据Long值04.")
+	@FieldDescribe("업무 데이터 Long 값 04.")
 	@Column(name = ColumnNamePrefix + longValue04_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + longValue04_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long longValue04;
 
 	public static final String longValue05_FIELDNAME = "longValue05";
-	@FieldDescribe("业务数据Long值05.")
+	@FieldDescribe("업무 데이터 Long 값 05.")
 	@Column(name = ColumnNamePrefix + longValue05_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + longValue05_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -832,7 +832,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String dateTimeValue01_FIELDNAME = "dateTimeValue01";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值01.")
+	@FieldDescribe("업무 데이터 DateTime 값01.")
 	@Column(name = ColumnNamePrefix + dateTimeValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateTimeValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -840,7 +840,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String dateTimeValue02_FIELDNAME = "dateTimeValue02";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值02.")
+	@FieldDescribe("업무 데이터 DateTime 값02.")
 	@Column(name = ColumnNamePrefix + dateTimeValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateTimeValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -848,7 +848,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String dateTimeValue03_FIELDNAME = "dateTimeValue03";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值03.")
+	@FieldDescribe("업무 데이터 DateTime 값03.")
 	@Column(name = ColumnNamePrefix + dateTimeValue03_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateTimeValue03_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -856,7 +856,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String dateTimeValue04_FIELDNAME = "dateTimeValue04";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值04.")
+	@FieldDescribe("업무 데이터 DateTime 값 04.")
 	@Column(name = ColumnNamePrefix + dateTimeValue04_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateTimeValue04_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -864,7 +864,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String dateTimeValue05_FIELDNAME = "dateTimeValue05";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值05.")
+	@FieldDescribe("업무 데이터 DateTime 값 05.")
 	@Column(name = ColumnNamePrefix + dateTimeValue05_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateTimeValue05_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -872,7 +872,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String dateValue01_FIELDNAME = "dateValue01";
 	@Temporal(TemporalType.DATE)
-	@FieldDescribe("业务数据Date值01.")
+	@FieldDescribe("업무 데이터 Date 값01.")
 	@Column(name = ColumnNamePrefix + dateValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -880,7 +880,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String dateValue02_FIELDNAME = "dateValue02";
 	@Temporal(TemporalType.DATE)
-	@FieldDescribe("业务数据Date值02.")
+	@FieldDescribe("업무 데이터 Date 값02.")
 	@Column(name = ColumnNamePrefix + dateValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -888,7 +888,7 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String timeValue01_FIELDNAME = "timeValue01";
 	@Temporal(TemporalType.TIME)
-	@FieldDescribe("业务数据Time值01.")
+	@FieldDescribe("업무 데이터 Time 값01.")
 	@Column(name = ColumnNamePrefix + timeValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + timeValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -896,14 +896,14 @@ public class Work extends SliceJpaObject implements ProjectionInterface {
 
 	public static final String timeValue02_FIELDNAME = "timeValue02";
 	@Temporal(TemporalType.TIME)
-	@FieldDescribe("业务数据Time值02.")
+	@FieldDescribe("업무 데이터 Time 값02.")
 	@Column(name = ColumnNamePrefix + timeValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + timeValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date timeValue02;
 
 	public static final String OBJECTSECURITYCLEARANCE_FIELDNAME = "objectSecurityClearance";
-	@FieldDescribe("客体密级标识.")
+	@FieldDescribe("객체 보안 등급 식별자.")
 	@Column(name = ColumnNamePrefix + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

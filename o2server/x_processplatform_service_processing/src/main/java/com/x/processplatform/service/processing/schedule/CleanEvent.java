@@ -37,7 +37,7 @@ public class CleanEvent extends AbstractJob {
             Date threshold = DateUtils.addDays(new Date(), -7);
             int workEventCount = this.clean(business, WorkEvent.class, threshold);
             int workComnpletedEventCount = this.clean(business, WorkCompletedEvent.class, threshold);
-            LOGGER.print("清理{}个工作事件, {}个已完成工作事件, 耗时:{}.", workEventCount, workComnpletedEventCount,
+            LOGGER.print("업무 문서 이벤트 {}개, 완료된 업무 문서 이벤트 {}개 정리, 소요 시간:{}.", workEventCount, workComnpletedEventCount,
                     stamp.consumingMilliseconds());
         } catch (Exception e) {
             throw new JobExecutionException(e);

@@ -40,14 +40,14 @@ public class CacheAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "CacheAction::";
 
-	@Operation(summary = "接收缓存刷新指令.", operationId = OPERATIONID_PREFIX + "receive", responses = {
+	@Operation(summary = "캐시 갱신 지시 수신.", operationId = OPERATIONID_PREFIX + "receive", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionReceive.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionReceive.Wi.class)) }))
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "接收缓存刷新指令.", action = ActionReceive.class)
+	@JaxrsMethodDescribe(value = "캐시 갱신 지시 수신.", action = ActionReceive.class)
 	public void receive(@Suspended final AsyncResponse asyncResponse, @Context ServletContext servletContext,
 			@Context HttpServletRequest request, JsonElement jsonElement) {
 		ActionResult<ActionReceive.Wo> result = new ActionResult<>();
@@ -61,13 +61,13 @@ public class CacheAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "接收刷新Config配置文件指令.", operationId = OPERATIONID_PREFIX + "configFlush", responses = {
+	@Operation(summary = "Config 설정 파일 갱신 지시 수신.", operationId = OPERATIONID_PREFIX + "configFlush", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionConfigFlush.Wo.class)) }) })
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("config/flush")
-	@JaxrsMethodDescribe(value = "接收刷新Config配置文件指令.", action = ActionConfigFlush.class)
+	@JaxrsMethodDescribe(value = "Config 설정 파일 갱신 지시 수신.", action = ActionConfigFlush.class)
 	public void configFlush(@Suspended final AsyncResponse asyncResponse, @Context ServletContext servletContext,
 			@Context HttpServletRequest request) {
 		ActionResult<ActionConfigFlush.Wo> result = new ActionResult<>();
@@ -81,13 +81,13 @@ public class CacheAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "接收刷新CommonScript指令.", operationId = OPERATIONID_PREFIX + "commonScriptFlush", responses = {
+	@Operation(summary = "CommonScript 갱신 지시 수신.", operationId = OPERATIONID_PREFIX + "commonScriptFlush", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionCommonScriptFlush.Wo.class)) }) })
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("commonscript/flush")
-	@JaxrsMethodDescribe(value = "接收刷新CommonScript指令.", action = ActionCommonScriptFlush.class)
+	@JaxrsMethodDescribe(value = "CommonScript 갱신 지시 수신.", action = ActionCommonScriptFlush.class)
 	public void commonScriptFlush(@Suspended final AsyncResponse asyncResponse, @Context ServletContext servletContext,
 			@Context HttpServletRequest request) {
 		ActionResult<ActionCommonScriptFlush.Wo> result = new ActionResult<>();
@@ -101,13 +101,13 @@ public class CacheAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "显示缓存状态.", operationId = OPERATIONID_PREFIX + "detail", responses = {
+	@Operation(summary = "캐시 상태 표시.", operationId = OPERATIONID_PREFIX + "detail", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionDetail.Wo.class)) }) })
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("detail")
-	@JaxrsMethodDescribe(value = "显示缓存状态.", action = ActionDetail.class)
+	@JaxrsMethodDescribe(value = "캐시 상태 표시.", action = ActionDetail.class)
 	public void detail(@Suspended final AsyncResponse asyncResponse, @Context ServletContext servletContext,
 			@Context HttpServletRequest request) {
 		ActionResult<ActionDetail.Wo> result = new ActionResult<>();

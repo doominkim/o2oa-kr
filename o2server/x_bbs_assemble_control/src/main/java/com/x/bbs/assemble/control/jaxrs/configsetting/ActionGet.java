@@ -48,7 +48,7 @@ public class ActionGet extends BaseAction {
 						result.error( exception );
 					}
 				} catch ( Exception e ) {
-					Exception exception = new ExceptionConfigSettingInfoProcess( e, "系统在根据ID获取BBS系统设置信息时发生异常！ID:" + id );
+					Exception exception = new ExceptionConfigSettingInfoProcess( e, "ID로 BBS 시스템 설정을 가져오는 중 오류가 발생했습니다! ID:" + id );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}

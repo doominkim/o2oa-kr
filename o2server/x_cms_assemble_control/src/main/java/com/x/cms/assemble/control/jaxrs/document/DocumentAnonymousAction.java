@@ -22,18 +22,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("anonymous/document")
-@JaxrsDescribe("信息发布信息文档管理")
+@JaxrsDescribe("정보 게시 정보 문서 관리")
 public class DocumentAnonymousAction extends StandardJaxrsAction{
 
 	private static final Logger logger = LoggerFactory.getLogger( DocumentAnonymousAction.class );
 
-	@JaxrsMethodDescribe(value = "根据ID访问信息发布文档信息对象详细信息，包括附件列表，数据信息.", action = ActionQueryViewDocument.class)
+	@JaxrsMethodDescribe(value = "ID로 정보 게시 문서 정보 객체 상세 접근, 첨부파일 목록과 데이터 정보 포함.", action = ActionQueryViewDocument.class)
 	@GET
 	@Path("{id}/view")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void view( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("信息文档ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("정보 문서ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionQueryViewDocument.Wo> result = new ActionResult<>();
 		try {

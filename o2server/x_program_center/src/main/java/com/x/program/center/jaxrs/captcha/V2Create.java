@@ -45,10 +45,10 @@ class V2Create extends BaseAction {
 
 	public static class Wo {
 
-		@FieldDescribe("标识")
+		@FieldDescribe("식별자")
 		private String id;
 
-		@FieldDescribe("图像")
+		@FieldDescribe("이미지")
 		private String image;
 
 		public String getImage() {

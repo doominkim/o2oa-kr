@@ -36,7 +36,7 @@ class ActionListWithWork extends BaseAction {
 			ActionResult<List<Wo>> result = new ActionResult<>();
 			Business business = new Business(emc);
 			Work work = emc.find(workId, Work.class);
-			// 判断work是否存在
+			// work 존재 여부 판단
 			if (null == work) {
 				throw new ExceptionEntityNotExist(workId, Work.class);
 			}
@@ -59,8 +59,8 @@ class ActionListWithWork extends BaseAction {
 
 		static WrapCopier<Attachment, Wo> copier = WrapCopierFactory.wo(Attachment.class, Wo.class, null, null, true);
 
-		@FieldDescribe("排序号.")
-		@Schema(description = "排序号.")
+		@FieldDescribe("정렬 번호.")
+		@Schema(description = "정렬 번호.")
 		private Long rank;
 
 		public Long getRank() {

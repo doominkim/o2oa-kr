@@ -23,7 +23,7 @@ class ActionList extends BaseAction {
 
 		private static final long serialVersionUID = 2919655201914964929L;
 
-		@FieldDescribe("组织专有标识.")
+		@FieldDescribe("조직 고유 식별자.")
 		private List<String> distinguishedNameList = new ArrayList<>();
 
 		public List<String> getDistinguishedNameList() {
@@ -40,7 +40,7 @@ class ActionList extends BaseAction {
 
 		private static final long serialVersionUID = -5601967828535997709L;
 
-		@FieldDescribe("组织专有标识.")
+		@FieldDescribe("조직 고유 식별자.")
 		private List<String> distinguishedNameList = new ArrayList<>();
 
 		public List<String> getDistinguishedNameList() {

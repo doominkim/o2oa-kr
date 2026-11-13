@@ -25,7 +25,7 @@ import com.x.cms.core.express.tools.filter.QueryFilter;
 import com.x.query.core.entity.Item;
 
 /**
- * 对文档信息进行查询的服务类
+ * 문서 정보 조회 서비스 클래스
  */
 public class DocumentQueryService {
 
@@ -242,7 +242,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 从Document表里，忽略权限根据条件查询文档数量
+     * Document 테이블에서 권한을 무시하고 조건에 따라 문서 수 조회
      *
      * @param queryFilter
      * @return
@@ -293,7 +293,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 根据条件从Review表里，查询用户可见的所有文档数量
+     * 조건에 따라 Review 테이블에서 사용자가 볼 수 있는 모든 문서 수 조회
      *
      * @param personName
      * @param queryFilter
@@ -336,7 +336,7 @@ public class DocumentQueryService {
                 reviewList = reviewService.listNextViewableWithFilter(emc, pageSize, null,
                         orderField, orderType, person, queryFilter);
             }
-            //根据Review列表查询Document列表信息
+            //Review 목록으로 Document 목록 정보 조회
             documentList = listDocumentsWithReview(reviewList);
             return documentList;
         } catch (Exception e) {
@@ -371,7 +371,7 @@ public class DocumentQueryService {
                 reviewList = reviewService.listPrevViewableWithFilter(emc, pageSize, null,
                         orderField, orderType, person, queryFilter);
             }
-            //根据Review列表查询Document列表信息
+            //Review 목록으로 Document 목록 정보 조회
             documentList = listDocumentsWithReview(reviewList);
             return documentList;
         } catch (Exception e) {
@@ -380,7 +380,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 根据条件查询指定条数符合条件的文档信息Review列表
+     * 조건에 맞는 문서 정보 Review 목록을 지정한 건수만큼 조회
      *
      * @param orderField
      * @param orderType
@@ -435,9 +435,9 @@ public class DocumentQueryService {
     }
 
     /**
-     * 对Document信息进行分页查询（忽略权限） document和Review除了sequence还有5个排序列支持title, appAlias, categoryAlias,
-     * categoryName, creatorUnitName的分页查询 除了sequence和title, appAlias, categoryAlias, categoryName,
-     * creatorUnitName之外，其他的列排序全部在内存进行分页
+     * Document 정보 페이지 조회(권한 무시) document와 Review는 sequence 외에 5개 정렬 열 title, appAlias, categoryAlias,
+     * categoryName, creatorUnitName의 페이지 조회 지원 sequence와 title, appAlias, categoryAlias, categoryName,
+     * creatorUnitName 외의 다른 열 정렬은 모두 메모리에서 페이지 처리
      *
      * @param lastId
      * @param pageSize
@@ -452,7 +452,7 @@ public class DocumentQueryService {
         if (pageSize == 0) {
             pageSize = 20;
         }
-        //按正常逻辑根据序列进行分页查询
+        //일반 로직대로 시퀀스 기준 페이지 조회
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             return documentInfoService.listNextWithCondition(emc, pageSize, lastId, orderField,
                     orderType, queryFilter);
@@ -462,9 +462,9 @@ public class DocumentQueryService {
     }
 
     /**
-     * 对Document信息进行分页查询（忽略权限） document和Review除了sequence还有5个排序列支持title, appAlias, categoryAlias,
-     * categoryName, creatorUnitName的分页查询 除了sequence和title, appAlias, categoryAlias, categoryName,
-     * creatorUnitName之外，其他的列排序全部在内存进行分页
+     * Document 정보 페이지 조회(권한 무시) document와 Review는 sequence 외에 5개 정렬 열 title, appAlias, categoryAlias,
+     * categoryName, creatorUnitName의 페이지 조회 지원 sequence와 title, appAlias, categoryAlias, categoryName,
+     * creatorUnitName 외의 다른 열 정렬은 모두 메모리에서 페이지 처리
      *
      * @param lastId
      * @param pageSize
@@ -479,7 +479,7 @@ public class DocumentQueryService {
         if (pageSize == 0) {
             pageSize = 20;
         }
-        //按正常逻辑根据序列进行分页查询
+        //일반 로직대로 시퀀스 기준 페이지 조회
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             return documentInfoService.listPrevWithCondition(emc, pageSize, lastId, orderField,
                     orderType, queryFilter);
@@ -489,7 +489,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 对Document信息进行分页查询(包含权限)
+     * Document 정보 페이지 조회(권한 포함)
      *
      * @param personName
      * @param orderField
@@ -507,7 +507,7 @@ public class DocumentQueryService {
         if (pageSize == 0) {
             pageSize = 20;
         }
-        //按正常逻辑根据序列进行分页查询
+        //일반 로직대로 시퀀스 기준 페이지 조회
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
             return business.getDocumentFactory()
@@ -519,7 +519,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 根据条件统计Document信息(包含权限)
+     * 조건에 따라 Document 정보 통계(권한 포함)
      *
      * @param personName
      * @param queryFilter
@@ -528,7 +528,7 @@ public class DocumentQueryService {
      */
     public Long countWithCondition(String personName, QueryFilter queryFilter, Boolean isAuthor,
             Boolean excludeAllRead, String readFlag, Boolean isAdmin) throws Exception {
-        //按正常逻辑根据序列进行分页查询
+        //일반 로직대로 시퀀스 기준 페이지 조회
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
             return business.getDocumentFactory()
@@ -540,7 +540,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 根据条件按指定的排序方式查询指定数量的文档信息列表
+     * 조건에 따라 지정 정렬 방식으로 지정 개수의 문서 정보 목록 조회
      *
      * @param orderField
      * @param orderType
@@ -560,7 +560,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 将Review列表转换为Document列表
+     * Review 목록을 Document 목록으로 변환
      *
      * @param reviewList
      * @return
@@ -582,7 +582,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 查询指定文档按数据排序后的列表
+     * 지정 문서를 데이터 정렬한 목록 조회
      *
      * @param docIds
      * @param path0Name
@@ -616,7 +616,7 @@ public class DocumentQueryService {
     }
 
     /**
-     * 判断用户是否有权限进行附件文档的操作 0、管理员允许操作 1、文档创建者允许操作 2、分类和栏目的管理者允许操作 3、拥有文档作者权限的用户允许操作
+     * 사용자에게 첨부파일 문서 작업 권한이 있는지 판단 0. 관리자 허용 1. 문서 작성자 허용 2. 분류와 게시판 관리자 허용 3. 문서 작성자 권한을 가진 사용자 허용
      *
      * @param effectivePerson
      * @param doc
@@ -640,20 +640,20 @@ public class DocumentQueryService {
         });
         own_permissonNames = ListTools.add(own_permissonNames, true, true, oList);
 //		LogUtil.INFO( ">>>>>>>>my_own_permissonNames" , own_permissonNames );
-        //管理员允许操作
+        //관리자 작업 허용
         if (effectivePerson.isManager()) {
             return true;
         }
-        //管理员允许操作
+        //관리자 작업 허용
         if (userManagerService.isHasPlatformRole(effectivePerson.getDistinguishedName(),
                 ThisApplication.ROLE_CMSManager)) {
             return true;
         }
-        //文档创建者允许操作(发布者就是创建者)
+        //문서 작성자 작업 허용(게시자가 곧 작성자)
         if (doc.getCreatorPerson().equalsIgnoreCase(effectivePerson.getDistinguishedName())) {
             return true;
         }
-        //栏目的管理者允许操作
+        //게시판 관리자 작업 허용
         setting_permissonNames.clear();
         setting_permissonNames.addAll(appInfo.getManageablePersonList());
         setting_permissonNames.addAll(appInfo.getManageableUnitList());
@@ -665,7 +665,7 @@ public class DocumentQueryService {
         if (ListTools.isNotEmpty(setting_permissonNames)) {
             return true;
         }
-        //分类的管理者允许操作
+        //분류 관리자 작업 허용
         setting_permissonNames.clear();
         setting_permissonNames.addAll(category.getManageablePersonList());
         setting_permissonNames.addAll(category.getManageableUnitList());
@@ -676,7 +676,7 @@ public class DocumentQueryService {
         if (ListTools.isNotEmpty(setting_permissonNames)) {
             return true;
         }
-        //拥有文档作者权限的用户允许操作
+        //문서 작성자 권한을 가진 사용자 작업 허용
         setting_permissonNames.clear();
         setting_permissonNames.addAll(doc.getAuthorPersonList());
         setting_permissonNames.addAll(doc.getAuthorUnitList());
@@ -698,7 +698,7 @@ public class DocumentQueryService {
             if (array.length == 3) {
                 target = sb.append(array[1]).append("@").append(array[2]).toString();
             } else if (array.length == 2) {
-                //2段
+                //2단계
                 target = sb.append(array[0]).append("@").append(array[1]).toString();
             } else {
                 target = array[0];
@@ -708,12 +708,12 @@ public class DocumentQueryService {
     }
 
     /**
-     * 查询所有isTop属性为空（NULL）的文档ID列表
+     * isTop 속성이 비어 있는(NULL) 모든 문서 ID 목록 조회
      *
      * @return
      */
     public List<String> listNULLIsTopDocIds() throws Exception {
-        //按正常逻辑根据序列进行分页查询
+        //일반 로직대로 시퀀스 기준 페이지 조회
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
             return business.getDocumentFactory().listNULLIsTopDocIds();

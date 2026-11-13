@@ -1,16 +1,16 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/**树组件数据结构
+/**트리 컴포넌트 데이터 구조
  * @typedef {Object} TreeData
  * @example
  * [
  * {
- *    "expand": true, //是否默认展开
- *    "title": "", //鼠标移上叶子节点的文字
- *    "text": "根节点", //叶子节点的文字
- *    "action": "", //执行的脚本
- *    "default": true, //是否默认选中
- *    "icon": "folder.png", //图标
- *    "sub": [ //该节点的子节点
+ *    "expand": true, //기본 펼침 여부
+ *    "title": "", //잎 노드에 마우스를 올렸을 때 표시할 텍스트
+ *    "text": "루트 노드", //잎 노드 텍스트
+ *    "action": "", //실행할 스크립트
+ *    "default": true, //기본 선택 여부
+ *    "icon": "folder.png", //아이콘
+ *    "sub": [ //이 노드의 하위 노드
  *      {
  *        "expand": true,
  *        "title": "",
@@ -26,15 +26,15 @@ MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
  * ]
  */
 
-/** @class Tree 树组件。
- * @o2cn 树组件
+/** @class Tree 트리 컴포넌트.
+ * @o2cn 트리 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var datagrid = this.form.get("name"); //获取组件
- * //方法2
- * var datagrid = this.target; //在组件事件脚本中获取
- * @see {@link TreeData|树组件数据结构}
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var datagrid = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var datagrid = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
+ * @see {@link TreeData|트리 컴포넌트 데이터 구조}
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -46,44 +46,44 @@ MWF.xApplication.process.Xform.Tree = MWF.APPTree =  new Class(
 	Extends: MWF.APP$Module,
 	options: {
 		/**
-		 * 异步加载树前执行。this.target指向当前组件。
+		 * 트리 비동기 로드 전 실행. this.target은 현재 컴포넌트를 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#beforeLoadTree
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		/**
-		 * 异步加载树后执行。this.target指向当前组件。
+		 * 트리 비동기 로드 후 실행. this.target은 현재 컴포넌트를 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#afterLoadTree
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		/**
-		 * 加载树的叶子前执行。this.target指向加载的叶子。
+		 * 트리 잎 로드 전 실행. this.target은 로드되는 잎을 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#beforeLoadTreeNode
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		/**
-		 * 加载树的叶子后执行。this.target指向加载的叶子。
+		 * 트리 잎 로드 후 실행. this.target은 로드되는 잎을 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#afterLoadTreeNode
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		/**
-		 * 加载树的叶子后执行。this.target指向加载的叶子。
+		 * 트리 잎 로드 후 실행. this.target은 로드되는 잎을 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#expand
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		/**
-		 * 折叠节点的时候执行。this.target指向被折叠的节点。
+		 * 노드를 접을 때 실행. this.target은 접힌 노드를 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#collapse
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		/**
-		 * 选中节点前执行。此时原来被选中的节点还未取消。this.target指向选中的节点。
+		 * 노드 선택 전 실행. 이때 기존 선택 노드는 아직 해제되지 않음. this.target은 선택된 노드를 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#beforeSelect
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		/**
-		 * 选中节点后执行。this.target指向选中的节点。
+		 * 노드 선택 후 실행. this.target은 선택된 노드를 가리킴.
 		 * @event MWF.xApplication.process.Xform.Tree#afterSelect
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 		"moduleEvents": ["load", "queryLoad", "postLoad", "beforeLoadTree", "afterLoadTree", "beforeLoadTreeNode", "afterLoadTreeNode", "expand", "collapse", "beforeSelect", "afterSelect"]
 	},
@@ -120,13 +120,13 @@ MWF.xApplication.process.Xform.Tree = MWF.APPTree =  new Class(
 			}
 
 			/**
-			 * @summary 树组件，平台使用该组件实现树的功能，该组件为异步加载
+			 * @summary 트리 컴포넌트, 플랫폼이 이 컴포넌트로 트리 기능을 구현, 비동기로 로드됨
 			 * @member {o2.widget.Tree}
 			 * @example
-			 *  //可以在脚本中获取该组件
-			 * var tree = this.form.get("fieldId").tree; //获取组件对象
-			 * var children = tree.children[]; //获取第一层树叶
-			 * tree.reLoad( json ); //给整颗树重新赋数据，并重新加载
+			 *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+			 * var tree = this.form.get("fieldId").tree; //컴포넌트 객체 가져오기
+			 * var children = tree.children[]; //첫 번째 단계 트리 잎 가져오기
+			 * tree.reLoad( json ); //트리 전체에 데이터를 다시 설정하고 다시 로드
 			 */
 			this.tree = new MWF.widget.Tree(this.node, options);
 			this.tree.form = this.form;

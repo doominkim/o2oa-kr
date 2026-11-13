@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Image 图片。
- * @o2cn 图片
+/** @class Image 이미지.
+ * @o2cn 이미지
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var img = this.form.get("name"); //获取组件
- * //方法2
- * var img = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var img = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var img = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}

@@ -26,18 +26,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("data")
-@JaxrsDescribe("CMS文档数据操作")
+@JaxrsDescribe("CMS 문서 데이터 조작")
 public class DataAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(DataAction.class);
 
-	@JaxrsMethodDescribe(value = "根据documentId获取Data", action = ActionGetWithDocument.class)
+	@JaxrsMethodDescribe(value = "documentId로 Data 조회", action = ActionGetWithDocument.class)
 	@GET
 	@Path("document/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("문서ID") @PathParam("id") String id) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,14 +49,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath0.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath0.class)
 	@GET
 	@Path("document/{id}/{path0}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentPath0(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0) {
+			@JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -68,15 +68,15 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath1.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath1.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentWithPath1(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -88,16 +88,16 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath2.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath2.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentWithPath2(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -109,17 +109,17 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath3.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath3.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentWithPath3(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -131,18 +131,18 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath4.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath4.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentWithPath4(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -154,19 +154,19 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath5.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath5.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentWithPath5(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -179,20 +179,20 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath6.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath6.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentWithPath6(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -205,21 +205,21 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据路径获取指定document的data数据.", action = ActionGetWithDocumentPath7.class)
+	@JaxrsMethodDescribe(value = "경로로 지정 document의 data 데이터 조회.", action = ActionGetWithDocumentPath7.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithDocumentWithPath7(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6,
-			@JaxrsParameterDescribe("7级路径") @PathParam("path7") String path7) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6,
+			@JaxrsParameterDescribe("7단계 경로") @PathParam("path7") String path7) {
 		ActionResult<JsonElement> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -232,13 +232,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据文档标识更新指定路径的数组数据.", action = ActionUpdateArrayDataWithDocument.class)
+	@JaxrsMethodDescribe(value = "문서 식별자로 지정 경로의 배열 데이터 수정.", action = ActionUpdateArrayDataWithDocument.class)
 	@POST
 	@Path("document/{id}/array/data")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateArrayDataWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdateArrayDataWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -250,13 +250,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocument.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocument.class)
 	@PUT
 	@Path("document/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -268,13 +268,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocument.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocument.class)
 	@POST
 	@Path("document/{id}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								   @JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement) {
+								   @JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -286,14 +286,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath0.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath0.class)
 	@PUT
 	@Path("document/{id}/{path0}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath0(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath0.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -305,14 +305,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath0.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath0.class)
 	@POST
 	@Path("document/{id}/{path0}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath0MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath0.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -324,15 +324,15 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath1.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath1.class)
 	@PUT
 	@Path("document/{id}/{path0}/{path1}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath1(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath1.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -344,15 +344,15 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath1.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath1.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath1MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath1.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -364,16 +364,16 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath2.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath2.class)
 	@PUT
 	@Path("document/{id}/{path0}/{path1}/{path2}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath2(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -385,16 +385,16 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath2.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath2.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath2MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -406,17 +406,17 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath3.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath3.class)
 	@PUT
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath3(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath3.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -429,17 +429,17 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath3.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath3.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath3MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath3.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -452,18 +452,18 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath4.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath4.class)
 	@PUT
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath4(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath4.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -476,18 +476,18 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath4.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath4.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath4MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath4.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -500,19 +500,19 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath5.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath5.class)
 	@PUT
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath5(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath5.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -525,19 +525,19 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath5.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath5.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath5MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-											@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+											@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath5.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -550,20 +550,20 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath6.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath6.class)
 	@PUT
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath6(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath6.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -576,20 +576,20 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath6.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath6.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath6MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-											@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-											@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+											@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+											@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath6.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -602,21 +602,21 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath7.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath7.class)
 	@PUT
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath7(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6,
-			@JaxrsParameterDescribe("7级路径") @PathParam("path7") String path7, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6,
+			@JaxrsParameterDescribe("7단계 경로") @PathParam("path7") String path7, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath7.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -629,21 +629,21 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定Document的Data数据.", action = ActionUpdateWithDocumentPath7.class)
+	@JaxrsMethodDescribe(value = "지정 Document의 Data 데이터 수정.", action = ActionUpdateWithDocumentPath7.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocumentWithPath7MockPutToPost(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-											@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-											@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6,
-											@JaxrsParameterDescribe("7级路径") @PathParam("path7") String path7, JsonElement jsonElement) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+											@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+											@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6,
+											@JaxrsParameterDescribe("7단계 경로") @PathParam("path7") String path7, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocumentPath7.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -656,13 +656,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocument.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocument.class)
 	@POST
 	@Path("document/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档ID") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("문서ID") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -674,14 +674,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath0.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath0.class)
 	@POST
 	@Path("document/{id}/{path0}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath0(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath0.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -693,15 +693,15 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath1.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath1.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath1(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath1.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -713,16 +713,16 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath2.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath2.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath2(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -734,17 +734,17 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath3.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath3.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath3(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath3.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -757,18 +757,18 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath4.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath4.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath4(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath4.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -781,19 +781,19 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath5.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath5.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath5(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath5.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -806,20 +806,20 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath6.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath6.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath6(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath6.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -832,21 +832,21 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document添加局部data数据.", action = ActionCreateWithDocumentPath7.class)
+	@JaxrsMethodDescribe(value = "지정 document에 부분 data 데이터 추가.", action = ActionCreateWithDocumentPath7.class)
 	@POST
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocumentWithPath7(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6,
-			@JaxrsParameterDescribe("7级路径") @PathParam("path7") String path7, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6,
+			@JaxrsParameterDescribe("7단계 경로") @PathParam("path7") String path7, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocumentPath7.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -859,13 +859,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocument.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocument.class)
 	@DELETE
 	@Path("document/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("문서ID") @PathParam("id") String id) {
 		ActionResult<ActionDeleteWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -877,13 +877,13 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocument.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocument.class)
 	@GET
 	@Path("document/{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								   @JaxrsParameterDescribe("文档ID") @PathParam("id") String id) {
+								   @JaxrsParameterDescribe("문서ID") @PathParam("id") String id) {
 		ActionResult<ActionDeleteWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -895,14 +895,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath0.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath0.class)
 	@DELETE
 	@Path("document/{id}/{path0}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath0(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0) {
 		ActionResult<ActionDeleteWithDocumentPath0.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -914,14 +914,14 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath0.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath0.class)
 	@GET
 	@Path("document/{id}/{path0}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath0MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0) {
 		ActionResult<ActionDeleteWithDocumentPath0.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -933,15 +933,15 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath1.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath1.class)
 	@DELETE
 	@Path("document/{id}/{path0}/{path1}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath1(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1) {
 		ActionResult<ActionDeleteWithDocumentPath1.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -953,15 +953,15 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath1.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath1.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath1MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1) {
 		ActionResult<ActionDeleteWithDocumentPath1.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -973,16 +973,16 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath2.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath2.class)
 	@DELETE
 	@Path("document/{id}/{path0}/{path1}/{path2}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath2(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2) {
 		ActionResult<ActionDeleteWithDocumentPath2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -994,16 +994,16 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath2.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath2.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath2MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2) {
 		ActionResult<ActionDeleteWithDocumentPath2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1015,17 +1015,17 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath3.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath3.class)
 	@DELETE
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath3(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3) {
 		ActionResult<ActionDeleteWithDocumentPath3.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1037,17 +1037,17 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath3.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath3.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath3MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3) {
 		ActionResult<ActionDeleteWithDocumentPath3.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1059,18 +1059,18 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath4.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath4.class)
 	@DELETE
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath4(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4) {
 		ActionResult<ActionDeleteWithDocumentPath4.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1082,18 +1082,18 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath4.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath4.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath4MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4) {
 		ActionResult<ActionDeleteWithDocumentPath4.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1105,19 +1105,19 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath5.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath5.class)
 	@DELETE
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath5(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5) {
 		ActionResult<ActionDeleteWithDocumentPath5.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1130,19 +1130,19 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath5.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath5.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath5MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-											@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+											@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5) {
 		ActionResult<ActionDeleteWithDocumentPath5.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1155,20 +1155,20 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath6.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath6.class)
 	@DELETE
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath6(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6) {
 		ActionResult<ActionDeleteWithDocumentPath6.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1181,20 +1181,20 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath6.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath6.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath6MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-											@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-											@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+											@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+											@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6) {
 		ActionResult<ActionDeleteWithDocumentPath6.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1207,21 +1207,21 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath7.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath7.class)
 	@DELETE
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath7(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-			@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-			@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-			@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-			@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-			@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-			@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6,
-			@JaxrsParameterDescribe("7级路径") @PathParam("path7") String path7) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+			@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+			@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+			@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+			@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+			@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+			@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6,
+			@JaxrsParameterDescribe("7단계 경로") @PathParam("path7") String path7) {
 		ActionResult<ActionDeleteWithDocumentPath7.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -1234,21 +1234,21 @@ public class DataAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "对指定的document删除局部data数据.", action = ActionDeleteWithDocumentPath7.class)
+	@JaxrsMethodDescribe(value = "지정 document의 부분 data 데이터 삭제.", action = ActionDeleteWithDocumentPath7.class)
 	@GET
 	@Path("document/{id}/{path0}/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocumentWithPath7MockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-											@Context HttpServletRequest request, @JaxrsParameterDescribe("文档ID") @PathParam("id") String id,
-											@JaxrsParameterDescribe("0级路径") @PathParam("path0") String path0,
-											@JaxrsParameterDescribe("1级路径") @PathParam("path1") String path1,
-											@JaxrsParameterDescribe("2级路径") @PathParam("path2") String path2,
-											@JaxrsParameterDescribe("3级路径") @PathParam("path3") String path3,
-											@JaxrsParameterDescribe("4级路径") @PathParam("path4") String path4,
-											@JaxrsParameterDescribe("5级路径") @PathParam("path5") String path5,
-											@JaxrsParameterDescribe("6级路径") @PathParam("path6") String path6,
-											@JaxrsParameterDescribe("7级路径") @PathParam("path7") String path7) {
+											@Context HttpServletRequest request, @JaxrsParameterDescribe("문서ID") @PathParam("id") String id,
+											@JaxrsParameterDescribe("0단계 경로") @PathParam("path0") String path0,
+											@JaxrsParameterDescribe("1단계 경로") @PathParam("path1") String path1,
+											@JaxrsParameterDescribe("2단계 경로") @PathParam("path2") String path2,
+											@JaxrsParameterDescribe("3단계 경로") @PathParam("path3") String path3,
+											@JaxrsParameterDescribe("4단계 경로") @PathParam("path4") String path4,
+											@JaxrsParameterDescribe("5단계 경로") @PathParam("path5") String path5,
+											@JaxrsParameterDescribe("6단계 경로") @PathParam("path6") String path6,
+											@JaxrsParameterDescribe("7단계 경로") @PathParam("path7") String path7) {
 		ActionResult<ActionDeleteWithDocumentPath7.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

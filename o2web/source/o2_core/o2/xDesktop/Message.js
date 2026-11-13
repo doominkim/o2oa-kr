@@ -166,7 +166,7 @@ MWF.xDesktop.Message = new Class({
         return tooltop;
     },
 	getUnread: function(){
-		//获取未读消息列表和数量
+		//읽지 않은 메시지 목록과 개수 조회
 		return this.unread || 0;
 	},
 	setUnread: function(){

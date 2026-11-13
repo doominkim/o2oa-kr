@@ -2,14 +2,14 @@ MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 //MWF.require("MWF.widget.Tree", null, false);
 //MWF.require("MWF.widget.Toolbar", null, false);
 
-/** @class Actionbar 操作条组件。
- * @o2cn 操作条
+/** @class Actionbar 작업 막대 컴포넌트.
+ * @o2cn 작업 막대
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var actionbar = this.form.get("name"); //获取操作条
- * //方法2
- * var actionbar = this.target; //在操作条和操作本身的事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var actionbar = this.form.get("name"); //작업 막대 가져오기
+ * //방법 2
+ * var actionbar = this.target; //작업 막대와 작업 자체의 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -21,31 +21,31 @@ MWF.xApplication.process.Xform.Actionbar = MWF.APPActionbar =  new Class(
         Extends: MWF.APP$Module,
         options: {
             /**
-             * 组件加载前触发。当前组件的queryLoad事件还没有在form里注册，通过this.form.get("fieldId")不能获取到当前组件，需要用this.target获取当前组件。
+             * 컴포넌트 로드 전 발생. 현재 컴포넌트의 queryLoad 이벤트 시점에는 form에 등록되지 않아 this.form.get("fieldId")로 가져올 수 없으며, this.target으로 현재 컴포넌트를 가져와야 함.
              * @event MWF.xApplication.process.Xform.Actionbar#queryLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 组件加载时触发。
+             * 컴포넌트 로드 시 발생.
              * @event MWF.xApplication.process.Xform.Actionbar#load
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 组件加载后事件.由于加载过程中有异步处理，这个时候操作条有可能还未生成。
+             * 컴포넌트 로드 후 이벤트. 로드 과정에 비동기 처리가 있어 이 시점에는 작업 막대가 아직 생성되지 않았을 수 있음.
              * @event MWF.xApplication.process.Xform.Actionbar#postLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             /**
-             * 组件加载后事件。这个时候操作条已生成
+             * 컴포넌트 로드 후 이벤트. 이 시점에는 작업 막대가 생성됨
              * @event MWF.xApplication.process.Xform.Actionbar#afterLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "moduleEvents": ["load", "queryLoad", "postLoad", "afterLoad"]
         },
         /**
-         * @summary 重新加载操作条。会触发afterLoad事件
+         * @summary 작업 막대 다시 로드. afterLoad 이벤트가 발생함
          * @example
-         * this.form.get("name").reload(); //显示操作条
+         * this.form.get("name").reload(); //작업 막대 표시
          */
         reload : function(){
             this._loadUserInterface();
@@ -74,11 +74,11 @@ MWF.xApplication.process.Xform.Actionbar = MWF.APPActionbar =  new Class(
 
             MWF.require("MWF.widget.Toolbar", function(){
                 /**
-                 * @summary Toolbar组件，平台使用该组件生成操作条。
+                 * @summary Toolbar 컴포넌트, 플랫폼은 이 컴포넌트로 작업 막대를 생성.
                  * @member {o2.widget.Toolbar}
                  * @example
-                 *  //可以在脚本中获取该组件
-                 * var toolbarWidget = this.form.get("fieldId").toolbarWidget; //获取组件对象
+                 *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+                 * var toolbarWidget = this.form.get("fieldId").toolbarWidget; //컴포넌트 객체 가져오기
                  */
                 this.toolbarWidget = new MWF.widget.Toolbar(this.toolbarNode, {
                     "style": this.json.style,
@@ -89,8 +89,8 @@ MWF.xApplication.process.Xform.Actionbar = MWF.APPActionbar =  new Class(
                 if (this.json.actionStyles) this.toolbarWidget.css = this.json.actionStyles;
                 //alert(this.readonly)
 
-                if( this.json.multiTools ){ //自定义操作和系统操作混合的情况，用 system : true 来区分系统和自定义
-                    var addReadActionFlag = !this.json.hideSystemTools && !this.json.hideReadedAction; //是否需要增加已阅
+                if( this.json.multiTools ){ //사용자 정의 작업과 시스템 작업이 섞인 경우 system : true로 시스템과 사용자 정의를 구분
+                    var addReadActionFlag = !this.json.hideSystemTools && !this.json.hideReadedAction; //열람 완료 추가 필요 여부
                     var jsonStr = JSON.stringify(this.json.multiTools);
                     jsonStr = o2.bindJson(jsonStr, {"lp": MWF.xApplication.process.Xform.LP.form});
                     this.json.multiTools = JSON.parse(jsonStr);
@@ -161,7 +161,7 @@ MWF.xApplication.process.Xform.Actionbar = MWF.APPActionbar =  new Class(
                 }
 
                 if (this.toolbarWidget.items["action_goBack"]){
-                    // 异步判断是否有可退回的活动
+                    // 반려 가능한 활동이 있는지 비동기 판단
                     if (this.form.businessData.task) o2.Actions.load('x_processplatform_assemble_surface').WorkAction.V2ListActivityGoBack(this.form.businessData.task.work, function(json){
                         if (json.data.length){
                             this.toolbarWidget.items["action_goBack"].show();
@@ -288,14 +288,14 @@ MWF.xApplication.process.Xform.Actionbar = MWF.APPActionbar =  new Class(
             }
         },
         /**
-         * @summary 根据操作id获取操作，该方法在操作条的afterLoad事件中有效，操作的操作脚本有效。
-         *  @param {String} id - 必选，操作id.
-         *  @return {o2.widget.ToolbarButton} 操作
+         * @summary 작업 id로 작업 가져오기, 이 메서드는 작업 막대의 afterLoad 이벤트와 작업의 작업 스크립트에서 유효.
+         *  @param {String} id - 필수, 작업 id.
+         *  @return {o2.widget.ToolbarButton} 작업
          *  @example
-         *  var actionbar = this.form.get("name"); //获取操作条
-         *  var item = actionbar.getItem( "action_delete" ); //获取删除操作
-         *  item.node.hide(); //隐藏删除操作的节点
-         *  item.node.click(); //触发操作的click事件
+         *  var actionbar = this.form.get("name"); //작업 막대 가져오기
+         *  var item = actionbar.getItem( "action_delete" ); //삭제 작업 가져오기
+         *  item.node.hide(); //삭제 작업 노드 숨기기
+         *  item.node.click(); //작업의 click 이벤트 발생
          */
         getItem : function( id ){
             if( this.toolbarWidget && id ){
@@ -303,12 +303,12 @@ MWF.xApplication.process.Xform.Actionbar = MWF.APPActionbar =  new Class(
             }
         },
         /**
-         * @summary 获取所有操作，该方法在操作条的afterLoad事件中有效，操作的操作脚本有效。
-         *  @return {Array} 操作数组
+         * @summary 모든 작업 가져오기, 이 메서드는 작업 막대의 afterLoad 이벤트와 작업의 작업 스크립트에서 유효.
+         *  @return {Array} 작업 배열
          *  @example
-         *  var actionbar = this.form.get("name"); //获取操作条
-         *  var itemList = actionbar.getAllItem(); //获取操作数组
-         *  itemList[1].node.hide(); //隐藏第一个操作
+         *  var actionbar = this.form.get("name"); //작업 막대 가져오기
+         *  var itemList = actionbar.getAllItem(); //작업 배열 가져오기
+         *  itemList[1].node.hide(); //첫 번째 작업 숨기기
          */
         getAllItem : function(){
             return this.toolbarWidget ? this.toolbarWidget.childrenButton : [];

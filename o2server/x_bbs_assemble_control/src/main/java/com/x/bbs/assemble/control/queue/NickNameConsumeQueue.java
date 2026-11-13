@@ -17,7 +17,7 @@ import com.x.bbs.entity.BBSReplyInfo;
 import com.x.bbs.entity.BBSSubjectInfo;
 
 /**
- * 批量更新指定用户帖子和回复的昵称
+ * 지정 사용자의 게시글과 답글 닉네임 일괄 수정
  * @author sword
  */
 public class NickNameConsumeQueue extends AbstractQueue<String> {
@@ -48,14 +48,14 @@ public class NickNameConsumeQueue extends AbstractQueue<String> {
 			try {
 				this.updateSubjectNickName(id, nickName);
 			} catch (Exception e) {
-				logger.warn("更新帖子{}的昵称{}异常：{}",id, nickName, e.getMessage());
+				logger.warn("게시글 {}의 닉네임 {} 수정 예외: {}",id, nickName, e.getMessage());
 			}
 		}
 		for(String id : replyIds){
 			try {
 				this.updateReplayNickName(id, nickName);
 			} catch (Exception e) {
-				logger.warn("更新回帖{}的昵称{}异常：{}",id, nickName, e.getMessage());
+				logger.warn("답글 {}의 닉네임 {} 수정 예외: {}",id, nickName, e.getMessage());
 			}
 		}
 		if(replyIds.size() > 0 || subjectIds.size() > 0){

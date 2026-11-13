@@ -9,19 +9,19 @@ if( !o2.APP$ElSelector ){
     Object.assign(o2.APP$ElSelector.prototype, o2.APP$Selector.prototype);
 }
 
-/** @class Elselect 基于Element UI的选择框组组件。
- * @o2cn 选择框
+/** @class Elselect Element UI 기반 선택 상자 그룹 컴포넌트.
+ * @o2cn 선택 상자
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Selector
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/select|Element UI Select 选择器}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/select|Element UI Select 선택기}
  */
 MWF.xApplication.process.Xform.Elselect = MWF.APPElselect =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elselect# */
@@ -30,39 +30,39 @@ MWF.xApplication.process.Xform.Elselect = MWF.APPElselect =  new Class(
     Extends: MWF.APP$ElSelector,
     options: {
         /**
-         * 组件加载后触发。如果选项加载为异步，则异步处理完成后触发此事件
+         * 컴포넌트 로드 후 발생. 선택 항목 로드가 비동기이면 비동기 처리 완료 후 이 이벤트 발생
          * @event MWF.xApplication.process.Xform.Elselect#load
          */
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 当 input 获得焦点时触发。this.event[0]指向Event
+         * input이 포커스를 얻을 때 발생. this.event[0]은 Event
          * @event MWF.xApplication.process.Xform.Elselect#focus
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|选择器的Select Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|선택기의 Select Events 장}
          */
         /**
-         * 当 input 失去焦点时触发。this.event[0]指向Event
+         * input이 포커스를 잃을 때 발생. this.event[0]은 Event
          * @event MWF.xApplication.process.Xform.Elselect#blur
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|选择器的Select Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|선택기의 Select Events 장}
          */
         /**
-         * 选中值发生变化时触发。this.event[0]为组件目前的选中值
+         * 선택 값이 변경될 때 발생. this.event[0]은 컴포넌트의 현재 선택 값
          * @event MWF.xApplication.process.Xform.Elselect#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|选择器的Select Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|선택기의 Select Events 장}
          */
         /**
-         * 下拉框出现/隐藏时触发。this.event[0]的值出现则为 true，隐藏则为 false
+         * 드롭다운이 표시/숨김될 때 발생. this.event[0] 값은 표시되면 true, 숨겨지면 false
          * @event MWF.xApplication.process.Xform.Elselect#visible-change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|选择器的Select Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|선택기의 Select Events 장}
          */
         /**
-         * 多选模式下移除tag时触发。this.event[0]为移除的tag值
+         * 다중 선택 모드에서 tag를 제거할 때 발생. this.event[0]은 제거된 tag 값
          * @event MWF.xApplication.process.Xform.Elselect#remove-tag
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|选择器的Select Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|선택기의 Select Events 장}
          */
         /**
-         * 可清空的单选模式下用户点击清空按钮时触发。
+         * 지울 수 있는 단일 선택 모드에서 사용자가 지우기 버튼을 클릭할 때 발생.
          * @event MWF.xApplication.process.Xform.Elselect#clear
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|选择器的Select Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/select|선택기의 Select Events 장}
          */
         "elEvents": ["focus", "blur", "change", "visible-change", "remove-tag", "clear"]
     },
@@ -442,10 +442,10 @@ MWF.xApplication.process.Xform.Elselect = MWF.APPElselect =  new Class(
         },
 
         /**
-         * @summary 获取选中项的text或promise。
-         * @return {String|String[]} 返回选中项的text或数组，返回类型依赖是否为多选
+         * @summary 선택 항목의 text 또는 promise 조회.
+         * @return {String|String[]} 선택 항목의 text 또는 배열 반환, 반환 형식은 다중 선택 여부에 따름
          * @example
-         * var texts = this.form.get('fieldId').getText(); //获取选中项的文本或数组
+         * var texts = this.form.get('fieldId').getText(); //선택 항목의 텍스트 또는 배열 조회
          */
         getText: function(){
             if( this.isSearching || this.isFilted ){

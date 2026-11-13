@@ -9,11 +9,11 @@ public class ActionManageProcessingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -3684461752407390735L;
 
-	@FieldDescribe("办理选择路由名称.")
-	@Schema(description = "办理选择路由名称.")
+	@FieldDescribe("처리 선택 경로 이름.")
+	@Schema(description = "처리 선택 경로 이름.")
 	private String routeName;
-	@FieldDescribe("办理意见.")
-	@Schema(description = "办理意见.")
+	@FieldDescribe("처리 의견.")
+	@Schema(description = "처리 의견.")
 	private String opinion;
 	public String getRouteName() {
 		return routeName;

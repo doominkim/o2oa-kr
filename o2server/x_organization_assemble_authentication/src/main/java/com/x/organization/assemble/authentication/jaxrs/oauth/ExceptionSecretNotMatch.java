@@ -7,6 +7,6 @@ class ExceptionSecretNotMatch extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionSecretNotMatch(String client_id, String client_secret) {
-		super("客户标识:{}, 与密钥:{}, 不匹配.", client_id, client_secret);
+		super("클라이언트 식별자: {}와 키: {}가 일치하지 않습니다.", client_id, client_secret);
 	}
 }

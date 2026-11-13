@@ -8,7 +8,7 @@
   "getBBSName" : {"uri" : "/jaxrs/setting/bbsName"},
   "listSystemSettingAll": {"uri" : "/jaxrs/user/setting/all"},
   "getSystemSetting" : {"uri":"/jaxrs/user/setting/{id}"},
-  //根据CODE获取BBSConfigSetting对象. {configCode : 'configCode' }
+  //CODE로 BBSConfigSetting 객체 조회. {configCode : 'configCode' }
   "getSystemSettingByCode" : {"uri":"/jaxrs/user/setting/code", "method":"PUT"},
   "saveSystemSetting" : {"uri":"/jaxrs/user/setting", "method":"PUT"},
 
@@ -43,7 +43,7 @@
   "listSubjectPublishPermission" : {"uri" :"/jaxrs/permission/subjectPublishable/{sectionId}"}, //사용자가 지정 섹션에 주제를 게시할 수 있는지 조회.
   "listReplyPublishPermission" : {"uri" :"/jaxrs/permission/replyPublishable/{subjectId}"}, //사용자가 지정 주제에 댓글을 달 수 있는지 조회.
 
-  //根据角色编码查询所有的人员部门群组绑定信息列表
+  //역할 코드로 모든 사용자·부서·그룹 바인딩 정보 목록 조회
   //{"bindRoleCode":"FORUM_PERMISSION_MANAGER_0ba0f2c7-31ee-472f-895e-977d79482e9f"}
   "listRoleMemberByCode" : {"uri" : "/jaxrs/user/role/rolecode/selected", "method": "PUT"},
   "getRole": {"uri" : "/jaxrs/role/{id}"},
@@ -54,19 +54,19 @@
   "listRoleBySection": {"uri" : "/jaxrs/user/role/section/{sectionId}", "method": "PUT"},
   "listRoleByOrganization": {"uri" : "/jaxrs/user/role/organization/selected", "method": "PUT"},
   "listRoleByUser": {"uri" : "/jaxrs/user/role/user/selected", "method": "PUT"},
-  //把一个或者多个角色CODE绑定到一个对象（对象名称#对象类型）上.
-  //bindObject ： '蔡艳红#人员'
+  //하나 이상의 역할 CODE를 하나의 대상(대상명#대상유형)에 연결.
+  //bindObject : '홍길동#사용자'
   //bindRoleCodes ： ['FORUM_SECTION_MANAGER_d935e8a1-3011-46ad-bd53-629fc6b1c8d4']
   "bindObject" : {"uri":"/jaxrs/user/role/bind/object","method": "PUT"},
-  //把一个或者多个对象（对象名称#对象类型）绑定到一个角色CODE上.
-  //bindObjectArray： ['蔡艳红#人员','开发部#组织']
+  //하나 이상의 대상(대상명#대상유형)을 하나의 역할 CODE에 연결.
+  //bindObjectArray: ['홍길동#사용자','개발부#조직']
   //bindRoleCode： 'FORUM_SECTION_MANAGER_d935e8a1-3011-46ad-bd53-629fc6b1c8d4'
   "bindRole" : {"uri":"/jaxrs/user/role/bind/role","method": "PUT"},
 
   "listRecommendedPage" : {"uri":"/jaxrs/subject/recommended/list/page/{page}/count/{count}", "method": "PUT"},
 
   "listRecommendedSubject" : {"uri":"/jaxrs/subject/recommended/index/{count}"},
-  //精华主题列表查询(分页，可匿名访问)
+  //추천 주제 목록 조회(페이징, 익명 접근 가능)
   //{
   //"forumId":"",
   //"mainSectionId":"",
@@ -78,11 +78,11 @@
   //}
   "listSubjectSearchPage" : {"uri":"/jaxrs/subject/search/list/page/{page}/count/{count}", "method": "PUT"},
   "getSubject" : {"uri":"/jaxrs/user/subject/{id}"},
-  //查看主题信息，和根据ID查询一样，但是这个服务会记录查看主题次数和主题热度(可匿名访问)
+  //주제 정보 조회, ID로 조회와 같지만 이 서비스는 주제 조회 수와 주제 인기도를 기록함(익명 접근 가능)
   "getSubjectView" : {"uri":"/jaxrs/subject/view/{id}"},
   "saveSubject": {"uri" : "/jaxrs/user/subject", "method": "POST"},
   "deleteSubject" : {"uri":"/jaxrs/user/subject/{id}","method": "DELETE"},
-  //根据版块ID查询主题信息，要分页(可匿名访问)
+  //게시판 ID로 주제 정보 조회, 페이징 필요(익명 접근 가능)
   //{
   //"forumId":"",
   //"mainSectionId":"",
@@ -91,7 +91,7 @@
   //}
   "listSubjectFilterPage": {"uri" : "/jaxrs/subject/filter/list/page/{page}/count/{count}", "method": "PUT"},
   "listSubjectWithSubjectTypeForPage": {"uri" : "/jaxrs/subject/filter/listsubjectinfo/page/{page}/count/{count}", "method": "POST"},
-  //根据版块ID查询所有的置顶贴：子版块，版块，论坛，全局置顶全部取到(可匿名访问)
+  //게시판 ID로 모든 상단 고정 글 조회: 하위 게시판, 게시판, 포럼, 전체 고정을 모두 조회(익명 접근 가능)
   "listTopSubject" : {"uri":"/jaxrs/subject/top/{sectionId}"},
   "setCream" : {"uri":"/jaxrs/user/subject/setCream/{id}"},   //추천 게시물 설정
   "cancelCream" : {"uri":"/jaxrs/user/subject/nonCream/{id}"},  //추천 게시물 해제
@@ -114,7 +114,7 @@
   //data {"subjectId":""};
   "listReplyFilterPage": {"uri" : "/jaxrs/reply/filter/list/page/{page}/count/{count}", "method": "PUT"},
 
-  //个人中心
+  //개인 센터
   "listMySubjectPage": {"uri" : "/jaxrs/user/subject/my/list/page/{page}/count/{count}", "method": "PUT"},
   "listMyReplyPage": {"uri" : "/jaxrs/user/reply/my/list/page/{page}/count/{count}", "method": "PUT"},
   //{
@@ -139,15 +139,15 @@
 
   "deployBaseWork" : {"uri" : "/jaxrs/okrworkbaseinfo/deploy", "method": "PUT"},
 
-  //获取互联网URL指向的图片的base64编码[Jaxrs],必填, 需要获取的图片URL地址
-  //  url- 必填, 需要获取的图片URL地址
-  //  size - 转换图片压缩, size为最大宽高限制, 如 size=64 为 64*64
-  //  注意,如果附件本身不是图片格式,则系统不会进行编码,并且给出异常, 扩展名限制:BMP、JPG、JPEG、PNG、GIF、TIFF
-  //  访问文件无权限限制
+  //인터넷 URL이 가리키는 이미지의 base64 인코딩 조회[Jaxrs], 필수, 조회할 이미지 URL 주소
+  //  url- 필수, 조회할 이미지 URL 주소
+  //  size - 이미지 압축 변환, size는 최대 가로세로 제한, 예: size=64 이면 64*64
+  //  주의: 첨부파일 자체가 이미지 형식이 아니면 시스템은 인코딩하지 않고 예외를 발생시킴, 확장자 제한:BMP, JPG, JPEG, PNG, GIF, TIFF
+  //  파일 접근 권한 제한 없음
   "getInternetImageBaseBase64" : {"uri":"/jaxrs/image/encode/base64", "method": "POST"},
-  //上传一个图片,直接转换为一个base64编码[Servlet]
+  //이미지 하나를 업로드해 바로 base64 인코딩으로 변환[Servlet]
   "convertLocalImageToBase64": {"uri": "/servlet/image/encode/base64/size/{size}", "method": "POST", "enctype": "formData"},
-  //将用户已经上传的图片附件直接转换为一个base64编码[Jaxrs]
+  //사용자가 이미 업로드한 이미지 첨부파일을 바로 base64 인코딩으로 변환[Jaxrs]
   "getSubjectAttachmentBase64" : {"uri":"/jaxrs/subjectattach/{id}/binary/base64/{size}"},
 
   "submitVote" : {"uri":"/jaxrs/user/subject/vote/submit", "method" : "PUT"},

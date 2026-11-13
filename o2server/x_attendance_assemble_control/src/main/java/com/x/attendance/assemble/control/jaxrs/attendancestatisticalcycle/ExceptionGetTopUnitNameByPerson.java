@@ -7,6 +7,6 @@ class ExceptionGetTopUnitNameByPerson extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionGetTopUnitNameByPerson( Throwable e, String name ) {
-		super("根据个人信息查询所属顶层组织名称时发生异常！人员:" + name, e );
+		super("개인 정보로 상위 최상위 조직 이름을 조회하는 중 오류가 발생했습니다! 인원:" + name, e );
 	}
 }

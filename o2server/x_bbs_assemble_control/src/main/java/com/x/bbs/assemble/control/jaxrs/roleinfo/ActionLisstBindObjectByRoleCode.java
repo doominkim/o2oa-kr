@@ -36,7 +36,7 @@ public class ActionLisstBindObjectByRoleCode extends BaseAction {
 			wrapIn = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionRoleInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+			Exception exception = new ExceptionRoleInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -53,7 +53,7 @@ public class ActionLisstBindObjectByRoleCode extends BaseAction {
 				roleInfo = roleInfoService.getByRoleCode( wrapIn.getBindRoleCode() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "系统在根据编码获取BBS角色信息时发生异常！Code:" + wrapIn.getBindRoleCode() );
+				Exception exception = new ExceptionRoleInfoProcess( e, "코드로 BBS 역할 정보를 가져오는 중 오류가 발생했습니다! Code:" + wrapIn.getBindRoleCode() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -70,7 +70,7 @@ public class ActionLisstBindObjectByRoleCode extends BaseAction {
 				userRoleList = roleInfoService.listUserRoleByRoleCode(roleInfo.getRoleCode());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "系统在根据角色编码查询角色绑定信息列表时发生异常.Code:" + wrapIn.getBindRoleCode() );
+				Exception exception = new ExceptionRoleInfoProcess( e, "역할 코드로 역할 연결 목록을 조회하는 중 오류가 발생했습니다. Code:" + wrapIn.getBindRoleCode() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -82,7 +82,7 @@ public class ActionLisstBindObjectByRoleCode extends BaseAction {
 					result.setData(wraps);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionRoleInfoProcess( e, "系统在转换所有BBS角色信息为输出对象时发生异常." );
+					Exception exception = new ExceptionRoleInfoProcess( e, "전체 BBS 역할 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}

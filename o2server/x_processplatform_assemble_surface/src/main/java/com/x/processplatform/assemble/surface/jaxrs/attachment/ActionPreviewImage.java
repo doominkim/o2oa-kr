@@ -28,7 +28,7 @@ class ActionPreviewImage extends BaseAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActionPreviewImage.class);
 
-	// 页数参数先放着,还没有实现
+	// 페이지 수 매개변수는 아직 미구현
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String id, Integer page) throws Exception {
 
 		LOGGER.debug("execute:{}, id:{}, page:{}.", effectivePerson::getDistinguishedName, () -> id, () -> page);

@@ -77,7 +77,7 @@ class ActionStart extends BaseAction {
 		req.setTitle(draft.getTitle());
 		req.setAttachmentList(wiAttachmentList);
 
-		// 创建工作
+		// 업무 문서 생성
 		JsonElement jsonElement = ThisApplication.context().applications()
 				.postQuery(x_processplatform_assemble_surface.class,
 						Applications.joinQueryUri("work", "process", process.getId()), req, process.getId())

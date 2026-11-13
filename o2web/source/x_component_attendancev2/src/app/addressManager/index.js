@@ -15,7 +15,7 @@ export default content({
     return {
       lp,
       workAddressList: [],
-      // 地图配置
+      // 지도 설정
       mapConfig: {
         mapType: "", //  amap baidu tx
         baiduAccountKey: "",
@@ -64,17 +64,17 @@ export default content({
       bind: { form: { positionType: this.bind.mapConfig.mapType, status: 'a' } },
     });
   },
-  // 查看位置
+  // 위치 조회
   clickOpenEdit(address) {
     address.status = 'u'
     this.$parent.openAddressForm({ bind: { form: address } });
   },
-  // 查看位置
+  // 위치 조회
   clickOpenView(address) {
     address.status = 'v'
     this.$parent.openAddressForm({ bind: { form: address } });
   },
-  // 删除工作场所
+  // 근무지 삭제
   clickDeleteItem(id, name) {
     debugger;
     var _self = this;

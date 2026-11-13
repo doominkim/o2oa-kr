@@ -53,7 +53,7 @@ public class ActionSave extends BaseAction {
 		} catch (Exception e) {
 			check = false;
 			Exception exception = new ExceptionRoleInfoProcess(e,
-					"系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+					"JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -65,7 +65,7 @@ public class ActionSave extends BaseAction {
 				result.error(exception);
 			}
 		}
-		// 校验角色类别
+		// 역할 유형 검증
 		if (check) {
 			if (wrapIn.getRoleType() == null || wrapIn.getRoleType().isEmpty()) {
 				check = false;
@@ -73,7 +73,7 @@ public class ActionSave extends BaseAction {
 				result.error(exception);
 			}
 		}
-		// 检验信息，如果是论坛角色，那么论坛ID为必须填写，如果是版块角色那么版块ID必须填写
+		// 정보 검증, 포럼 역할이면 포럼 ID 필수, 게시판 역할이면 게시판 ID 필수
 		if (check) {
 			if ("论坛角色".equals(wrapIn.getRoleType())) {
 				if (wrapIn.getForumId() == null || wrapIn.getForumId().isEmpty()) {
@@ -93,7 +93,7 @@ public class ActionSave extends BaseAction {
 				result.error(exception);
 			}
 		}
-		// 检验传入的版块ID和论坛ID是否合法
+		// 전달된 게시판 ID와 포럼 ID의 유효성 검증
 		if (check) {
 			if ("论坛角色".equals(wrapIn.getRoleType())) {
 				try {
@@ -110,7 +110,7 @@ public class ActionSave extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionRoleInfoProcess(e,
-							"系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + wrapIn.getForumId());
+							"ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + wrapIn.getForumId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -131,7 +131,7 @@ public class ActionSave extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionRoleInfoProcess(e,
-							"根据指定ID查询版块信息时发生异常.ID:" + wrapIn.getSectionId());
+							"지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + wrapIn.getSectionId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -144,13 +144,13 @@ public class ActionSave extends BaseAction {
 		if (check) {
 			if (wrapIn.getRoleCode() == null || wrapIn.getRoleCode().isEmpty()) {
 				try {
-					// 自动组织一个角色编码：BBS + 角色名称的拼音 + ID
+					// 역할 코드 자동 생성: BBS + 역할명 병음 + ID
 					wrapIn.setRoleCode(
 							"BBS_" + PinyinHelper.getShortPinyin(wrapIn.getRoleName()).toUpperCase() + "_" + uniCode);
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionRoleInfoProcess(e,
-							"根据指定ID查询版块信息时发生异常.ID:" + wrapIn.getRoleName());
+							"지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + wrapIn.getRoleName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -161,7 +161,7 @@ public class ActionSave extends BaseAction {
 				roleInfo = Wi.copier.copy(wrapIn);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess(e, "将用户传入的信息转换为一个角色信息对象时发生异常。");
+				Exception exception = new ExceptionRoleInfoProcess(e, "사용자가 입력한 정보를 역할 정보 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -173,7 +173,7 @@ public class ActionSave extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionRoleInfoProcess(e,
-							"系统在根据编码获取BBS角色信息时发生异常！Code:" + roleInfo.getRoleCode());
+							"코드로 BBS 역할 정보를 가져오는 중 오류가 발생했습니다! Code:" + roleInfo.getRoleCode());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -196,7 +196,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess(e, "系统在保存BBS角色信息时发生异常.");
+				Exception exception = new ExceptionRoleInfoProcess(e, "BBS 역할 정보를 저장하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

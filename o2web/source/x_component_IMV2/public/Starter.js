@@ -10,11 +10,11 @@ MWF.xApplication.IMV2.Starter = new Class({
     Implements: [Options, Events],
     options: {
         "style": "default",
-        "businessType": "none", // 业务类型 :none, process, cms  。启动聊天 是否带业务类型
-        "businessId": null, // 业务ID 新创建为空
-        "includePersonList": [], // 在规定范围内的人员进行选择, 如果为空，则不限制
-        "conversationId": null, // 传入的会话id, 新创建为空
-        "mode": "default" // 展现模式：default onlyChat 。 onlyChat的模式需要传入conversationId 会打开这个会话的聊天窗口并隐藏左边的会话列表
+        "businessType": "none", // 업무 유형: none, process, cms. 채팅 시작 시 업무 유형 포함 여부
+        "businessId": null, // 업무 ID, 신규 생성 시 비어 있음
+        "includePersonList": [], // 지정 범위 내 사용자 중 선택, 비어 있으면 제한 없음
+        "conversationId": null, // 전달된 대화 id, 신규 생성 시 비어 있음
+        "mode": "default" // 표시 모드: default onlyChat. onlyChat 모드는 conversationId를 전달해야 하며 해당 대화의 채팅 창을 열고 왼쪽 대화 목록을 숨김
     },
     initialize: function (data, app, options) {
         console.log("init   IMV2.Starter ");
@@ -28,19 +28,19 @@ MWF.xApplication.IMV2.Starter = new Class({
     load: function () {
         console.log("init   IMV2.load    ");
         debugger;
-        // 默认创建聊天
+        // 기본 채팅 생성
         if (!(this.options.businessType) || this.options.businessType === "none" || !(this.options.businessId) || this.options.businessId === "") {
             var form = new MWF.xApplication.IMV2.Starter.CreateConversationForm(this);
             form.create()
         } else if (this.options.businessType === "process") {
             if (this.options.businessId) {
-                //TODO 如果已经存在是否考虑可创建多个，那就需要提示创建新的还是打开老的
+                //TODO 이미 존재할 때 여러 개 생성을 허용할지 고려, 그렇다면 새로 만들지 기존 것을 열지 안내 필요
                 console.log("결재 job id로 대화방이 있는지 조회합니다. 있으면 열고, 없으면 만듭니다. jobId: " + this.options.businessId);
                 this.findConversationByBusinessId();
             } else {
                 this.app.notice(this.lp.msgNoBusinessId, "error");
             }
-            //打开工作 o2.env.form.openJob
+            //업무 문서 열기 o2.env.form.openJob
         } else {
             this.app.notice(this.lp.msgNotSupport, "error");
         }
@@ -101,7 +101,7 @@ MWF.xApplication.IMV2.Starter = new Class({
             document.head.removeChild(loadingStyle);
         }
     },
-    // 打开会话聊天窗口
+    // 대화 채팅 창 열기
     openConversationWindow: function (conversation) {
         var options = {
             conversationId: conversation.id,
@@ -110,7 +110,7 @@ MWF.xApplication.IMV2.Starter = new Class({
         }
         layout.openApplication(null, "IMV2", options);
     },
-    // 创建会话
+    // 대화 생성
     newConversation: function (personList) {
         console.log("newConversation", personList);
         this.showLoading()
@@ -133,7 +133,7 @@ MWF.xApplication.IMV2.Starter = new Class({
             this.hideLoading()
         }.bind(this))
     },
-    // 根据流程的job id查询，会话是否存在
+    // 프로세스의 job id로 대화 존재 여부 조회
     findConversationByBusinessId: function () {
         o2.Actions.load("x_message_assemble_communicate").ImAction.conversationFindByBusinessId(this.options.businessId, function (json) {
             if (json.data && json.data.length > 0) {
@@ -150,7 +150,7 @@ MWF.xApplication.IMV2.Starter = new Class({
             }
         }.bind(this));
     },
-    // 有存在的会话 展现可以点击打开会话聊天
+    // 기존 대화가 있으면 클릭해 대화 채팅을 열 수 있도록 표시
     showChooseConversationDialog: function (conversationList) {
         if (conversationList.length === 1) {
             this.openConversationWindow(conversationList[0]);
@@ -161,7 +161,7 @@ MWF.xApplication.IMV2.Starter = new Class({
                 "css": [cssPath],
                 "html": chooseConversationHtmlPath,
             }, {"bind": {"lp": this.lp, "data": {}}, "module": this}, function () {
-                // 会话列表
+                // 대화 목록
                 for (let index = 0; index < conversationList.length; index++) {
                     const conv = conversationList[index];
                     var conversationItem = new Element("div", {"class": "conversation-item"}).inject(this.conversationChooseListNode);
@@ -185,13 +185,13 @@ MWF.xApplication.IMV2.Starter = new Class({
                         }.bind(this)
                     });
                 }
-                // 关闭按钮
+                // 닫기 버튼
                 this.conversationChooseCloseNode.addEvents({
                     "click": function (e) {
                         this.closeChooseConversationDialog();
                     }.bind(this)
                 });
-                // 新建聊天按钮
+                // 새 채팅 버튼
                 this.conversationCreateNewNode.addEvents({
                     "click": function (e) {
                         this.closeChooseConversationDialog();
@@ -203,7 +203,7 @@ MWF.xApplication.IMV2.Starter = new Class({
             }.bind(this));
         }
     },
-    // 关闭会话选择窗口
+    // 대화 선택 창 닫기
     closeChooseConversationDialog: function () {
         if (this.conversationChooseDialogNode) {
             this.conversationChooseDialogNode.destroy();
@@ -211,7 +211,7 @@ MWF.xApplication.IMV2.Starter = new Class({
         }
         if (this.app.refreshAll) this.app.refreshAll();
     },
-    // 显示创建会话的表单，上面列示出人员列表，可以选择人员
+    // 대화 생성 양식 표시, 사용자 목록을 나열해 사용자 선택 가능
     showCreateConversationWithPersonsDialog: function (personList) {
         if (personList && personList.length > 0) {
             var cssPath = this.path + "default/style.css";
@@ -220,11 +220,11 @@ MWF.xApplication.IMV2.Starter = new Class({
                 "css": [cssPath],
                 "html": choosePersonHtmlPath,
             }, {"bind": {"lp": this.lp, "data": {}}, "module": this}, function () {
-                //载入完成后的回调
-                // 人员列表
+                //로드 완료 후 콜백
+                // 사용자 목록
                 for (let index = 0; index < personList.length; index++) {
                     const person = personList[index];
-                    // <div class="person-tag person-tag-active">了国栋</div>
+                    // <div class="person-tag person-tag-active">홍길동</div>
                     var personTag = new Element("div", {"class": "person-tag person-tag-active"}).inject(this.personListNode);
                     var name = person;
                     var cutIndex = person.indexOf("@")
@@ -243,7 +243,7 @@ MWF.xApplication.IMV2.Starter = new Class({
                         }
                     });
                 }
-                // 创建会话按钮
+                // 대화 생성 버튼
                 this.personChooseCreateNode.addEvents({
                     "click": function (e) {
                         var personList = []
@@ -260,7 +260,7 @@ MWF.xApplication.IMV2.Starter = new Class({
                         }
                     }.bind(this)
                 });
-                // 关闭按钮
+                // 닫기 버튼
                 this.personChooseCloseBtnNode.addEvents({
                     "click": function (e) {
                         this.closeChoosePersonDialog();
@@ -272,7 +272,7 @@ MWF.xApplication.IMV2.Starter = new Class({
             this.app.notice(this.lp.msgNoBusinessPerson, "error");
         }
     },
-    // 关闭人员选择
+    // 사용자 선택 닫기
     closeChoosePersonDialog: function () {
         if (this.personChooseDialogNode) {
             this.personChooseDialogNode.destroy();
@@ -281,7 +281,7 @@ MWF.xApplication.IMV2.Starter = new Class({
         if (this.app.refreshAll) this.app.refreshAll();
     },
 
-    // 根据jobid查询review，获取所有相关的人员
+    // jobid로 review를 조회해 관련된 모든 사용자 가져오기
     getProcessReviewByJobId: function () {
         o2.Actions.load("x_processplatform_assemble_surface").ReviewAction.listWithJob(this.options.businessId, function (json) {
             if (json.data && json.data.length > 0) {
@@ -292,7 +292,7 @@ MWF.xApplication.IMV2.Starter = new Class({
                     }
                 });
                 // this.showCreateConversationWithPersonsDialog(personList);
-                // 直接创建会话
+                // 바로 대화 생성
                 this.newConversation(personList);
             } else {
                 // this.showCreateConversationWithPersonsDialog([]);
@@ -309,7 +309,7 @@ MWF.xApplication.IMV2.Starter = new Class({
 });
 
 
-//创建聊天 弹出窗表单
+//채팅 생성 팝업 양식
 MWF.xApplication.IMV2.Starter.CreateConversationForm = new Class({
     Extends: MPopupForm,
     Implements: [Options, Events],
@@ -321,7 +321,7 @@ MWF.xApplication.IMV2.Starter.CreateConversationForm = new Class({
         "hasIcon": false,
         "draggable": true,
         "title": MWF.xApplication.IMV2.LP.createConversation,
-        "includePersonList": [], // 在规定范围内的人员进行选择, 如果为空，则不限制
+        "includePersonList": [], // 지정 범위 내 사용자 중 선택, 비어 있으면 제한 없음
         "personSelected": []
     },
     _createTableContent: function () {
@@ -346,7 +346,7 @@ MWF.xApplication.IMV2.Starter.CreateConversationForm = new Class({
                     orgType: "person",
                     notEmpty: true,
                     exclude: exclude,
-                    count: 0, // 可选人数 0是不限制人数
+                    count: 0, // 선택 가능 인원 수, 0이면 인원 제한 없음
                     value: this.options["personSelected"]
                 },
             }
@@ -384,18 +384,18 @@ MWF.xApplication.IMV2.Starter.CreateConversationForm = new Class({
 
 
 /**
- * 分享消息、转发消息
+ * 메시지 공유, 메시지 전달
  */
 MWF.xApplication.IMV2.ShareToConversation = new Class({
     Extends: MWF.widget.Common,
     Implements: [Options, Events],
     options: {
         "style": "default",
-        "businessType": "none", // 业务类型 :none, process, cms  。启动聊天 是否带业务类型
-        "businessId": null, // 业务ID 新创建为空
-        "includePersonList": [], // 在规定范围内的人员进行选择, 如果为空，则不限制
-        "conversationId": null, // 传入的会话id, 新创建为空
-        "mode": "default" // 展现模式：default onlyChat 。 onlyChat的模式需要传入conversationId 会打开这个会话的聊天窗口并隐藏左边的会话列表
+        "businessType": "none", // 업무 유형: none, process, cms. 채팅 시작 시 업무 유형 포함 여부
+        "businessId": null, // 업무 ID, 신규 생성 시 비어 있음
+        "includePersonList": [], // 지정 범위 내 사용자 중 선택, 비어 있으면 제한 없음
+        "conversationId": null, // 전달된 대화 id, 신규 생성 시 비어 있음
+        "mode": "default" // 표시 모드: default onlyChat. onlyChat 모드는 conversationId를 전달해야 하며 해당 대화의 채팅 창을 열고 왼쪽 대화 목록을 숨김
     },
     initialize: function (data, app, options) {
         console.log("init   IMV2.Starter ");
@@ -403,7 +403,7 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
         this.path = "../x_component_IMV2/$Main/";
         MWF.xDesktop.requireApp("IMV2", "lp." + o2.language, null, false);
         this.lp = MWF.xApplication.IMV2.LP;
-        this.data = data; // msgBody 消息体
+        this.data = data; // msgBody 메시지 본문
         this.app = app;
 
     },
@@ -417,7 +417,7 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
             this.app.notice(this.lp.msgShareNoBody, "error");
         }
     },
-    // 打开窗口
+    // 창 열기
     openConversationListDialog: function () {
         var cssPath = this.path + "default/style.css";
         var choosePersonHtmlPath = this.path + "default/shareToConversation.html";
@@ -441,7 +441,7 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
             this.loadConversationList();
         }.bind(this));
     },
-    // 关闭窗口
+    // 창 닫기
     closeConversationListDialog: function () {
         if (this.conversationChooseDialogNode) {
             this.conversationChooseDialogNode.destroy();
@@ -449,11 +449,11 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
         }
         if (this.app.refreshAll) this.app.refreshAll();
     },
-    // 加载会话列表
+    // 대화 목록 로드
     loadConversationList: function () {
         o2.Actions.load("x_message_assemble_communicate").ImAction.myConversationList(function (json) {
             if (json.data && json.data instanceof Array) {
-                this.conversationList = json.data; // 会话数据
+                this.conversationList = json.data; // 대화 데이터
                 this.conversationNodeItemList = [];
                 for (var i = 0; i < this.conversationList.length; i++) {
                     var conversation = this.conversationList[i];
@@ -463,7 +463,7 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
             }
         }.bind(this));
     },
-    // 搜索会话
+    // 대화 검색
     searchConversationAndPerson: function (value) {
         this.conversationListNode.empty();
         this.searchPersonListNode.empty();
@@ -473,15 +473,15 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
         this.personNodeItemList = [];
         var searchConvList = [];
         if (value) {
-            // 搜索会话
+            // 대화 검색
             searchConvList = this.conversationList.filter((c) => c.title.indexOf(value) > -1);
-            //搜索人员
+            //사용자 검색
             this.searchLoadPerson(value);
         } else {
-            // 还原会话列表
+            // 대화 목록 복원
             searchConvList = this.conversationList;
         }
-        // 会话列表创建
+        // 대화 목록 생성
         for (var i = 0; i < searchConvList.length; i++) {
             var conversation = searchConvList[i];
             var itemNode = this._createConvItemNode(conversation);
@@ -547,13 +547,13 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
         }.bind(this));
 
     },
-    //用户头像
+    //사용자 아바타
     _getIcon: function (id) {
         var orgAction = MWF.Actions.get("x_organization_assemble_control")
         var url = (id) ? orgAction.getPersonIcon(id) : "../x_component_IMV2/$Main/default/group.png";
         return url + "?" + (new Date().getTime());
     },
-    // 创建会话Node
+    // 대화 Node 생성
     _createConvItemNode: function (conversation) {
         var avatarDefault = this._getIcon();
         var convData = {
@@ -592,10 +592,10 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
         })
         return itemNode;
     },
-    // 点击会话
+    // 대화 클릭
     clickConversationItem: function (conversation) {
         console.log(conversation);
-        if (this.data.callback) { // 选择器
+        if (this.data.callback) { // 선택기
             this.data.callback(conversation)
         } else {
             var distinguishedName = layout.session.user.distinguishedName;
@@ -629,12 +629,12 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
     },
     _currentTime: function () {
         var today = new Date();
-        var year = today.getFullYear(); //得到年份
-        var month = today.getMonth();//得到月份
-        var date = today.getDate();//得到日期
-        var hour = today.getHours();//得到小时
-        var minu = today.getMinutes();//得到分钟
-        var sec = today.getSeconds();//得到秒
+        var year = today.getFullYear(); //연도 가져오기
+        var month = today.getMonth();//월 가져오기
+        var date = today.getDate();//날짜 가져오기
+        var hour = today.getHours();//시 가져오기
+        var minu = today.getMinutes();//분 가져오기
+        var sec = today.getSeconds();//초 가져오기
         month = month + 1;
         if (month < 10) month = "0" + month;
         if (date < 10) date = "0" + date;

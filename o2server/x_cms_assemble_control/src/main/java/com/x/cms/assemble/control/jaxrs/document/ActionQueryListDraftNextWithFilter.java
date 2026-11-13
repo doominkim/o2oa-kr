@@ -90,7 +90,7 @@ public class ActionQueryListDraftNextWithFilter extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("作为过滤条件的CMS分类ID列表, 可多个, String数组.")
+		@FieldDescribe("필터 조건으로 사용할 CMS 분류ID 목록, 여러 개 가능, String 배열.")
 		private List<String> categoryIdList;
 
 		@FieldDescribe( "文档类型：全部 | 信息 | 数据" )
@@ -123,7 +123,7 @@ public class ActionQueryListDraftNextWithFilter extends BaseAction {
 				JpaObject.FieldsInvisible);
 
 		/**
-		 * 只作显示用
+		 * 표시용으로만 사용
 		 */
 		private String creatorPersonShort = null;
 

@@ -81,28 +81,28 @@ class ActionListPrevFilter extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private List<String> applicationList;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false")
+		@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false")
 		private Boolean relateEditionProcess = true;
 
-		@FieldDescribe("活动名称")
+		@FieldDescribe("활동 이름")
 		private List<String> activityNameList;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("开始时间(月)")
+		@FieldDescribe("시작 시간(월)")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("结束时间(月)")
+		@FieldDescribe("종료 시간(월)")
 		private List<String> completedTimeMonthList;
 
-		@FieldDescribe("可选择的完成状态")
+		@FieldDescribe("선택 가능한 완료 상태")
 		private List<Boolean> completedList;
 
 		private String key;
@@ -188,7 +188,7 @@ class ActionListPrevFilter extends BaseAction {
 		static WrapCopier<TaskCompleted, Wo> copier = WrapCopierFactory.wo(TaskCompleted.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

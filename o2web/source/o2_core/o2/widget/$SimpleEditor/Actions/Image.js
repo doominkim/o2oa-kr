@@ -57,7 +57,7 @@ o2.widget.SimpleEditor.Actions.Image = new Class({
     showDialog: function () {
         var self = this;
         var originalWidth = 0, originalHeight = 0;
-        var sep = 0 //为了防止缓存...
+        var sep = 0 //캐시 방지를 위해...
         this.fireEvent("queryOpenDialog");
 
         var html = "";
@@ -123,10 +123,10 @@ o2.widget.SimpleEditor.Actions.Image = new Class({
             "isMove": false,
             "mark": false,
             "buttons": {
-                "确定": function () {
+                "확인": function () {
                     self.command.call(self)
                 },
-                "取消": function () {
+                "취소": function () {
                     self.closeDialog.call(self);
                 }
             },
@@ -136,7 +136,7 @@ o2.widget.SimpleEditor.Actions.Image = new Class({
                 //this.node.getElements(".MWF_editor_emotion").addEvent("click", self.command.bind(self) );
             },
             "onQueryInjectNode": function () {
-                //chrom  在iframe中，不能对已经存在的对象插入东东,所以不能在onPostLoad 做这件事
+                //chrom  iframe에서는 이미 존재하는 객체에 무언가를 삽입할 수 없으므로 onPostLoad에서 이 작업을 할 수 없음
                 this.node.getElement(".MWF_dialod_close").addEvent("click", self.closeDialog.bind(self));
                 this.node.getElement("#imageRefresh").addEvent("click", function () {
                     refresh.call(this, true);

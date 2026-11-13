@@ -56,25 +56,25 @@ class ActionFilterAttributeFilter extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("限制应用范围")
+		@FieldDescribe("앱 범위 제한")
 		private List<String> applicationList = new ArrayList<>();
 
-		@FieldDescribe("限制流程范围")
+		@FieldDescribe("프로세스 범위 제한")
 		private List<String> processList = new ArrayList<>();
 
-		@FieldDescribe("限制创建组织范围")
+		@FieldDescribe("생성 조직 범위 제한")
 		private List<String> creatorUnitList = new ArrayList<>();
 
-		@FieldDescribe("限制创建月份范围")
+		@FieldDescribe("생성 월 범위 제한")
 		private List<String> startTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("限制结束月份范围")
+		@FieldDescribe("종료 월 범위 제한")
 		private List<String> completedTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("限制活动名称范围")
+		@FieldDescribe("활동 이름 범위 제한")
 		private List<String> activityNameList = new ArrayList<>();
 
-		@FieldDescribe("可选择的完成状态")
+		@FieldDescribe("선택 가능한 완료 상태")
 		private List<Boolean> completedList = new ArrayList<>();
 
 		public List<String> getApplicationList() {
@@ -137,25 +137,25 @@ class ActionFilterAttributeFilter extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("可选择的应用")
+		@FieldDescribe("선택 가능한 앱")
 		private List<NameValueCountPair> applicationList = new ArrayList<>();
 
-		@FieldDescribe("可选择的流程")
+		@FieldDescribe("선택 가능한 프로세스")
 		private List<NameValueCountPair> processList = new ArrayList<>();
 
-		@FieldDescribe("可选择的组织")
+		@FieldDescribe("선택 가능한 조직")
 		private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-		@FieldDescribe("可选择的开始月份")
+		@FieldDescribe("선택 가능한 시작 월")
 		private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("可选择的结束月份")
+		@FieldDescribe("선택 가능한 종료 월")
 		private List<NameValueCountPair> completedTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("可选择的活动节点")
+		@FieldDescribe("선택 가능한 활동 노드")
 		private List<NameValueCountPair> activityNameList = new ArrayList<>();
 
-		@FieldDescribe("可选择的完成状态")
+		@FieldDescribe("선택 가능한 완료 상태")
 		private List<NameValueCountPair> completedList = new ArrayList<>();
 
 		public List<NameValueCountPair> getCompletedList() {
@@ -242,7 +242,7 @@ class ActionFilterAttributeFilter extends BaseAction {
 		if (ListTools.isNotEmpty(wi.getActivityNameList())) {
 			p = cb.and(p, root.get(TaskCompleted_.activityName).in(wi.getActivityNameList()));
 		}
-		// completed对象按单值处理
+		// completed 객체를 단일 값으로 처리
 		if (ListTools.isNotEmpty(wi.getCompletedList())) {
 			boolean value = BooleanUtils.isTrue(wi.getCompletedList().get(0));
 			if (value) {

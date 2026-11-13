@@ -1276,7 +1276,7 @@ MWF.xApplication.Meeting.MeetingForm = new Class({
         this.data = this.form.getResult(false,null,false,false,true);
 
         if( this.onlineRoomLink )this.data.roomLink = this.onlineRoomLink;
-        if( this.onlineRoomId )this.data.roomId = this.onlineRoomId; //在线会议室ID
+        if( this.onlineRoomId )this.data.roomId = this.onlineRoomId; //온라인 회의실 ID
 
         // this.data.room = this.roomId;
         if( this.invitePersonList ){

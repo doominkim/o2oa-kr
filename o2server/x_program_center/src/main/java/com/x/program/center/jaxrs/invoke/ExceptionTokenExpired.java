@@ -7,6 +7,6 @@ class ExceptionTokenExpired extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionTokenExpired() {
-		super("token超时.");
+		super("token이 만료되었습니다.");
 	}
 }

@@ -90,7 +90,7 @@ public class ActionListNextPageViewData extends BaseAction {
 			isManager = userManagerService.isManager(effectivePerson );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionViewInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+			Exception exception = new ExceptionViewInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -128,7 +128,7 @@ public class ActionListNextPageViewData extends BaseAction {
 		}
 
 		if( check ){
-			//要对比传和的列表的formId和分类的formId是否一致，如果不一致，则无法正确查询
+			//전달된 목록의 formId와 분류의 formId가 일치하는지 비교, 다르면 정상 조회 불가
 			if( !category.getFormId().equals( view.getFormId() ) && !category.getReadFormId().equals( view.getFormId() ) ) {
 				check = false;
 				Exception exception = new ExceptionViewInfoProcess( "分类和列表使用的表单不一致，无法正确查询数据。" );
@@ -138,9 +138,9 @@ public class ActionListNextPageViewData extends BaseAction {
 
 		if( check ){
 			try{
-				//检查当前Category与View的关联是否存在
+				//현재 Category와 View의 연결 존재 여부 검사
 				viewIdsForCategory = viewServiceAdv.listViewIdsWithCategoryId( wi.getCategoryId() );
-				//判断分类与列表信息是否存在关联，如果不存在，则不允许访问
+				//분류와 목록 정보의 연결 존재 여부 판단, 없으면 접근 불가
 				if( ListTools.isEmpty( viewIdsForCategory ) || !viewIdsForCategory.contains( wi.getViewId() )) {
 					check = false;
 					Exception exception = new ExceptionViewAccessDenied( wi.getCategoryId(),  wi.getViewId() );
@@ -154,7 +154,7 @@ public class ActionListNextPageViewData extends BaseAction {
 			}
 		}
 
-		if( check ){//设置查询条件的默认值，如果不传入则使用列表设置的值
+		if( check ){//조회 조건 기본값 설정, 전달되지 않으면 목록 설정값 사용
 			if( StringUtils.isEmpty( wi.getOrderField() ) ) {
 				wi.setOrderField(view.getOrderField());
 			}
@@ -167,9 +167,9 @@ public class ActionListNextPageViewData extends BaseAction {
 		}
 
 		if( check ) {
-			//将Document表拥有的列保存为List备用，判断排序列，或者展现列是否为文档内部属性
+			//Document 테이블의 열을 List로 보관해 두고, 정렬 열 또는 표시 열이 문서 내부 속성인지 판단
 			sortableFieldNames = Arrays.asList( Document.documentFieldNames );
-			//因为有时候查询 的时候排序 列会使用大写的字符串比如：CREATETIME，并非createTime，这样，所以要容个错
+			//조회 시 정렬 열에 CREATETIME처럼 대문자 문자열을 쓰는 경우가 있어 createTime이 아니므로 오류를 허용해야 함
 			sortableFieldNames_upperCase = new ArrayList<>();
 			for( String fieldName : sortableFieldNames ){
 				sortableFieldNames_upperCase.add( fieldName.toUpperCase() );
@@ -178,9 +178,9 @@ public class ActionListNextPageViewData extends BaseAction {
 			List<ViewFieldConfig>  fieldConfigs = viewServiceAdv.listFieldConfigByView( view.getId() );
 			if( ListTools.isNotEmpty( fieldConfigs )) {
 				for( ViewFieldConfig config : fieldConfigs ) {
-					//sortableFieldNames 是Document直接有的属性民，可以直接进行排序的的列
+					//sortableFieldNames는 Document가 직접 가진 속성명으로, 바로 정렬할 수 있는 열
 				    if( !sortableFieldNames.contains(config.getFieldName())) {
-						needData = true; //列表展现列有业务数据列，需要查询所有的业务数据。
+						needData = true; //목록 표시 열에 업무 데이터 열이 있으면 모든 업무 데이터를 조회해야 함.
 						break;
 					}
 				}
@@ -203,11 +203,11 @@ public class ActionListNextPageViewData extends BaseAction {
 				document = documentQueryService.get( lastDocId );
 			}
 
-			//判断一下，如果排序的列不是Document的常规列, 需要从Item里查出符合条件的DocumentID列表
-			//从正常的Document属性列和全大写的属性列中都需要判断一下， sortableFieldNames and sortableFieldNames_upperCase
-			//如果sortableFieldNames and sortableFieldNames_upperCase都没有，那么就属性业务属性数据了，需要从item里去查询
+			//정렬 열이 Document의 일반 열이 아니면 Item에서 조건에 맞는 DocumentID 목록을 조회해야 함
+			//일반 Document 속성 열과 전체 대문자 속성 열 모두에서 판단해야 함, sortableFieldNames and sortableFieldNames_upperCase
+			//sortableFieldNames and sortableFieldNames_upperCase 모두에 없으면 업무 속성 데이터이므로 item에서 조회해야 함
 			if( !sortableFieldNames.contains(wi.getOrderField()) && !sortableFieldNames_upperCase.contains( wi.getOrderField() ) ) {
-				//查询该分类下所有可见的DocId
+				//해당 분류에서 볼 수 있는 모든 DocId 조회
 				List<String> viewableDocList = null;
 				if( isManager ) {
 					documentCount = documentQueryService.countWithConditionOutofPermission( queryFilter );
@@ -217,7 +217,7 @@ public class ActionListNextPageViewData extends BaseAction {
 					viewableDocList = documentQueryService.listDocIdsWithConditionInReview( personName, wi.getOrderField(), wi.getOrderType(), queryFilter, 2000 );
 				}
 				logger.debug("documentCount:{}===viewableDocListCount:{}",documentCount,viewableDocList.size());
-				//以所有可见的DocId为基准，从Item里查询出2000个排序好的对象，拼成 dataObjList ( docId, sortFieldValue )返回
+				//볼 수 있는 모든 DocId를 기준으로 Item에서 정렬된 객체 2000개를 조회해 dataObjList ( docId, sortFieldValue )로 만들어 반환
 				List<SimpleItemObj> simpleItems = documentQueryService.listSortObjWithOrderFieldInData( viewableDocList, wi.getOrderField(), wi.getOrderField(), wi.getOrderType() );
 
 				if( ListTools.isNotEmpty( simpleItems )) {
@@ -225,20 +225,20 @@ public class ActionListNextPageViewData extends BaseAction {
 					Boolean  pickDocument = false;
 					searchResultList = new ArrayList<>();
 					for( SimpleItemObj item : simpleItems ) {
-						//填充Document数据
+						//Document 데이터 채우기
 						sequence = documentQueryService.getSequence( item.getId() );
 						if( StringUtils.isNotEmpty( sequence)) {
-							if( document != null ) { //说明需要查询后一页
+							if( document != null ) { //다음 페이지 조회 필요
 								if( sequence.equalsIgnoreCase( document.getSequence() )) {
-									pickDocument = true;//开始往正式输出的列表里添加pageSize个document
+									pickDocument = true;//정식 출력 목록에 pageSize개 document 추가 시작
 								}
 							}else {
-								pickDocument = true;//取第1页的pageSize个document
+								pickDocument = true;//1페이지의 pageSize개 document 가져오기
 							}
 							if( pickDocument ) {
 								if( searchResultList.size() < pageSize ) {
 									searchResultList.add( documentQueryService.get( item.getId() ));
-								}else {//数据够一页了
+								}else {//데이터가 한 페이지만큼 채워짐
 									break;
 								}
 							}
@@ -246,18 +246,18 @@ public class ActionListNextPageViewData extends BaseAction {
 					}
 				}
 			}else {
-				//如果在 sortableFieldNames or sortableFieldNames_upperCase 中存在，那么就只是根据文档数据进行排序
+				//sortableFieldNames or sortableFieldNames_upperCase에 있으면 문서 데이터로만 정렬
 				if( isManager ) {
 					documentCount = documentQueryService.countWithConditionOutofPermission( queryFilter );
 					if( Document.isFieldInSequence(wi.getOrderField()) ) {
-						//直接从Document忽略权限查询
+						//Document에서 권한을 무시하고 직접 조회
 						searchResultList = documentQueryService.listNextWithConditionOutofPermission( lastDocId, pageSize, wi.getOrderField(), wi.getOrderType(), queryFilter );
-					}else {//如果是有序列的字段，使用序列分页，如果不是，则直接查询2000条，内存排序
+					}else {//순번이 있는 필드면 순번으로 페이지 처리, 아니면 2000건을 바로 조회해 메모리 정렬
 						documentList = documentQueryService.listNextWithConditionOutofPermission( wi.getOrderField(), wi.getOrderType(), queryFilter, 2000 );
-						//循环分页，查询传入的ID所在的位置，向后再查询N条
+						//반복 페이지 처리, 전달된 ID의 위치를 찾아 이후 N건 조회
 						if( ListTools.isNotEmpty( documentList )) {
 							Boolean add2List = false;
-							//放一页到searchResultList中进行返回
+							//한 페이지를 searchResultList에 넣어 반환
 							for( Document doc : documentList ) {
 								if( StringUtils.isEmpty( lastDocId ) || doc.getId().equalsIgnoreCase( lastDocId ) ) {
 									add2List = true;
@@ -273,16 +273,16 @@ public class ActionListNextPageViewData extends BaseAction {
 					}
 				}else {
 					documentCount = documentQueryService.countWithConditionInReview( personName, queryFilter );
-					if( Document.isFieldInSequence(wi.getOrderField()) ) {//如果是有序列的字段，使用序列分页，如果不是，则直接查询2000条，内存排序
-						// 从Review表中查询符合条件的对象，并且转换为Document对象列表
+					if( Document.isFieldInSequence(wi.getOrderField()) ) {//순번이 있는 필드면 순번으로 페이지 처리, 아니면 2000건을 바로 조회해 메모리 정렬
+						// Review 테이블에서 조건에 맞는 객체를 조회해 Document 객체 목록으로 변환
 						searchResultList = documentQueryService.listNextWithConditionInReview( lastDocId, pageSize, wi.getOrderField(), wi.getOrderType(), personName, queryFilter );
 					}else {
 						reviewList =  documentQueryService.listNextWithConditionInReview( wi.getOrderField(), wi.getOrderType(), personName, queryFilter, 2000 );
-						//循环分页，查询传入的ID所在的位置，向后再查询N条，转换为Document放到searchResultList
+						//반복 페이지 처리, 전달된 ID의 위치를 찾아 이후 N건 조회, Document로 변환해 searchResultList에 넣음
 						if( ListTools.isNotEmpty( reviewList )) {
 							Boolean add2List = false;
 							List<String> docIds = new ArrayList<>();
-							//放一页到searchResultList中进行返回
+							//한 페이지를 searchResultList에 넣어 반환
 							for( Review review : reviewList ) {
 								if( StringUtils.isEmpty( lastDocId ) || review.getDocId().equalsIgnoreCase( lastDocId ) ) {
 									add2List = true;
@@ -304,7 +304,7 @@ public class ActionListNextPageViewData extends BaseAction {
 		}
 
 		if( check ){
-			//补充业务数据
+			//업무 데이터 보충
 			if( searchResultList != null && searchResultList.size() > 0 ){
 				for( Document _document : searchResultList ){
 					wo = new Wo();
@@ -327,8 +327,8 @@ public class ActionListNextPageViewData extends BaseAction {
 						result.error( exception );
 						logger.error( e, effectivePerson, request, null);
 					}
-					//如果列表展现列中没有业务数据的需求，就不查了
-					if( needData ) { //存在Document里不存在的列，需要进一步组装Data
+					//목록 표시 열에 업무 데이터가 필요 없으면 조회하지 않음
+					if( needData ) { //Document에 없는 열이 있어 Data를 추가 조립해야 함
 						try {
 							wo.setData( documentQueryService.getDocumentData( _document ) );
 						} catch (Exception e) {
@@ -350,28 +350,28 @@ public class ActionListNextPageViewData extends BaseAction {
 
 	public class Wi {
 
-		@FieldDescribe( "是否置顶：ALL|TOP|UNTOP." )
+		@FieldDescribe( "상단 고정 여부: ALL|TOP|UNTOP." )
 		private String topFlag = "ALL";
 
-		@FieldDescribe("需要过滤文档的分类ID")
+		@FieldDescribe("필터링할 문서의 분류 ID")
 		private String categoryId;
 
-		@FieldDescribe("需要查询的列表ID")
+		@FieldDescribe("조회할 목록 ID")
 		private String viewId;
 
-		@FieldDescribe("当前查询用于排序的列名，默认以列表配置为主")
+		@FieldDescribe("현재 조회의 정렬 열 이름, 기본은 목록 설정 기준")
 		private String orderField;
 
-		@FieldDescribe("当前排序方式：DESC|ASC，默认以列表配置为主")
+		@FieldDescribe("현재 정렬 방식: DESC|ASC, 기본은 목록 설정 기준")
 		private String orderType;
 
-		@FieldDescribe("值类别：支持string | date | time | datetime | boolean | boolean | text")
+		@FieldDescribe("값 유형: string | date | time | datetime | boolean | boolean | text 지원")
 		private String fieldType;
 
 		@FieldDescribe("查询文档类型: 全部 | 信息 | 数据 ")
 		private String documentType;
 
-		@FieldDescribe("需要查询的文档状态：published | draft | archived")
+		@FieldDescribe("조회할 문서 상태: published | draft | archived")
 		private String docStatus;
 
 		public String getFieldType() {
@@ -439,7 +439,7 @@ public class ActionListNextPageViewData extends BaseAction {
 		}
 
 		/**
-		 * 根据传入的查询参数，组织一个完整的QueryFilter对象
+		 * 전달된 조회 파라미터로 완전한 QueryFilter 객체 구성
 		 * @return
 		 * @throws Exception
 		 */
@@ -451,7 +451,7 @@ public class ActionListNextPageViewData extends BaseAction {
 				queryFilter.addEqualsTerm( new EqualsTerm( "categoryId", this.getCategoryId() ) );
 			}
 
-			//文档类型：全部 | 信息 | 数据
+			//문서 유형: 전체 | 정보 | 데이터
 			if( StringUtils.isNotEmpty( this.getDocumentType())) {
 				if( "信息".equals( this.getDocumentType() )) {
 					queryFilter.addEqualsTerm( new EqualsTerm( "documentType", this.getDocumentType() ) );
@@ -460,7 +460,7 @@ public class ActionListNextPageViewData extends BaseAction {
 				}
 			}
 
-			//是否置顶：ALL|TOP|UNTOP
+			//상단 고정 여부: ALL|TOP|UNTOP
 			if( StringUtils.isNotEmpty( this.getTopFlag())) {
 				if( "TOP".equals( this.getTopFlag() )) {
 					queryFilter.addIsTrueTerm( new IsTrueTerm( "isTop" ) );
@@ -480,13 +480,13 @@ public class ActionListNextPageViewData extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe( "文档对象的序列." )
+		@FieldDescribe( "문서 객체 순번." )
 		private String sequence = null;
 
-		@FieldDescribe( "文档对象的ID." )
+		@FieldDescribe( "문서 객체 ID." )
 		private String id = null;
 
-		@FieldDescribe( "排序列的值." )
+		@FieldDescribe( "정렬 열 값." )
 		private String orderFieldValue = null;
 
 		@FieldDescribe( "作为输出的CMS文档数据对象." )
@@ -542,13 +542,13 @@ public class ActionListNextPageViewData extends BaseAction {
 
 		public static final WrapCopier<Document, WoDocument> copier = WrapCopierFactory.wo( Document.class, WoDocument.class, null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe("创建者姓名（简称）")
+		@FieldDescribe("작성자 이름(약칭)")
 		private String creatorPersonShort = null;
 
-		@FieldDescribe("创建者所属组织（简称）")
+		@FieldDescribe("작성자 소속 조직(약칭)")
 		private String creatorUnitNameShort = null;
 
-		@FieldDescribe("创建者顶层组织（简称）")
+		@FieldDescribe("작성자 최상위 조직(약칭)")
 		private String creatorTopUnitNameShort = null;
 
 		public String getCreatorPersonShort() {

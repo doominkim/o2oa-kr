@@ -46,7 +46,7 @@ class ActionListLoginRecent extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Integer count = 0;
 
 		public Integer getCount() {

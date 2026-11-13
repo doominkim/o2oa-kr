@@ -28,19 +28,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("consume")
-@JaxrsDescribe("消费")
+@JaxrsDescribe("소비")
 public class ConsumeAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ConsumeAction.class);
 
-	@JaxrsMethodDescribe(value = "获取消息.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "메시지 조회.", action = ActionList.class)
 	@GET
 	@Path("list/{consume}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void list(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("消费者") @PathParam("consume") String consume,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("소비자") @PathParam("consume") String consume,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -52,14 +52,14 @@ public class ConsumeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取消息,当前人员.", action = ActionListWithCurrentPerson.class)
+	@JaxrsMethodDescribe(value = "메시지 조회, 현재 사용자.", action = ActionListWithCurrentPerson.class)
 	@GET
 	@Path("list/{consume}/currentperson/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCurrentPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("消费者") @PathParam("consume") String consume,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("소비자") @PathParam("consume") String consume,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithCurrentPerson.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,15 +71,15 @@ public class ConsumeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取消息,指定人员.", action = ActionListWithPerson.class)
+	@JaxrsMethodDescribe(value = "메시지 조회, 지정 사용자.", action = ActionListWithPerson.class)
 	@GET
 	@Path("list/{consume}/person/{person}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("消费者") @PathParam("consume") String consume,
-			@JaxrsParameterDescribe("人员") @PathParam("person") String person,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("소비자") @PathParam("consume") String consume,
+			@JaxrsParameterDescribe("사용자") @PathParam("person") String person,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListWithPerson.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -91,14 +91,14 @@ public class ConsumeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新消息,将消息标志为已处理.", action = ActionUpdateSingle.class)
+	@JaxrsMethodDescribe(value = "메시지 업데이트, 메시지를 처리됨으로 표시.", action = ActionUpdateSingle.class)
 	@GET
 	@Path("{id}/type/{type}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateSingle(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("消费类型") @PathParam("type") String type) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("소비 유형") @PathParam("type") String type) {
 		ActionResult<ActionUpdateSingle.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -110,13 +110,13 @@ public class ConsumeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新消息,将消息标志为已处理.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "메시지 업데이트, 메시지를 처리됨으로 표시.", action = ActionUpdate.class)
 	@PUT
 	@Path("type/{type}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("消费类型") @PathParam("type") String type, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("소비 유형") @PathParam("type") String type, JsonElement jsonElement) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -128,13 +128,13 @@ public class ConsumeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新消息,将消息标志为已处理.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "메시지 업데이트, 메시지를 처리됨으로 표시.", action = ActionUpdate.class)
 	@POST
 	@Path("type/{type}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateMockputtopost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("消费类型") @PathParam("type") String type, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("소비 유형") @PathParam("type") String type, JsonElement jsonElement) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

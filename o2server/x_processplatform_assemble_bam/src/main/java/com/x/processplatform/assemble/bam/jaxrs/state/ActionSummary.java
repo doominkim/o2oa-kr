@@ -20,40 +20,40 @@ class ActionSummary extends ActionBase {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("应用数量")
+		@FieldDescribe("앱 수")
 		private Long applicationCount = 0L;
 
-		@FieldDescribe("流程数量")
+		@FieldDescribe("프로세스 수")
 		private Long processCount = 0L;
 
-		@FieldDescribe("待办数量")
+		@FieldDescribe("결재 대기 수")
 		private Long taskCount = 0L;
 
-		@FieldDescribe("已办数量")
+		@FieldDescribe("처리 완료 수")
 		private Long taskCompletedCount = 0L;
 
-		@FieldDescribe("待阅数量")
+		@FieldDescribe("열람 대기 수")
 		private Long readCount = 0L;
 
-		@FieldDescribe("已阅数量")
+		@FieldDescribe("열람 완료 수")
 		private Long readCompletedCount = 0L;
 
-		@FieldDescribe("工作实例数量")
+		@FieldDescribe("업무 문서 인스턴스 수")
 		private Long workCount = 0L;
 
-		@FieldDescribe("已完成工作数量")
+		@FieldDescribe("완료된 업무 문서 수")
 		private Long workCompletedCount = 0L;
 
-		@FieldDescribe("超时待办数量")
+		@FieldDescribe("기한 초과 결재 대기 수")
 		private Long expiredTaskCount = 0L;
 
-		@FieldDescribe("超时已办数量")
+		@FieldDescribe("기한 초과 처리 완료 수")
 		private Long expiredTaskCompletedCount = 0L;
 
-		@FieldDescribe("超时工作数量")
+		@FieldDescribe("기한 초과 업무 문서 수")
 		private Long expiredWorkCount = 0L;
 
-		@FieldDescribe("身份对象")
+		@FieldDescribe("신분 객체")
 		private Long expiredWorkCompletedCount = 0L;
 
 		public Long getApplicationCount() {

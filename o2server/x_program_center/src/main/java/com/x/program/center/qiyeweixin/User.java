@@ -7,10 +7,10 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public class User extends GsonPropertyObject {
 
 	// "userid": "zhangsan",
-	// "name": "李四",
+	// "name": "김철수",
 	// "department": [1, 2],
 	// "order": [1, 2],
-	// "position": "后台工程师",
+	// "position": "백엔드 엔지니어",
 	// "mobile": "15913215421",
 	// "gender": "1",
 	// "email": "zhangsan@gzdev.com",
@@ -23,34 +23,34 @@ public class User extends GsonPropertyObject {
 	// "status": 1,
 	// "extattr": {
 	// "attrs": [{
-	// "name": "爱好",
-	// "value": "旅游"
+	// "name": "취미",
+	// "value": "여행"
 	// }, {
-	// "name": "卡号",
+	// "name": "카드 번호",
 	// "value": "1234567234"
 	// }]
 	// },
 	// "qr_code": "https://open.work.weixin.qq.com/wwopen/userQRCode?vcode=xxx",
-	// "external_position": "产品经理",
+	// "external_position": "프로덕트 매니저",
 	// "external_profile": {
 	// "external_attr": [{
 	// "type": 0,
-	// "name": "文本名称",
+	// "name": "텍스트 이름",
 	// "text": {
-	// "value": "文本"
+	// "value": "텍스트"
 	// }
 	// },
 	// {
 	// "type": 1,
-	// "name": "网页名称",
+	// "name": "웹페이지 이름",
 	// "web": {
 	// "url": "http://www.test.com",
-	// "title": "标题"
+	// "title": "제목"
 	// }
 	// },
 	// {
 	// "type": 2,
-	// "name": "测试app",
+	// "name": "테스트 app",
 	// "miniprogram": {
 	// "appid": "wx8bd80126147df384",
 	// "pagepath": "/index",

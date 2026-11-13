@@ -103,12 +103,12 @@ class V3Retract extends BaseAction {
 						business.element().get(work.getActivity(), Manual.class), new ProcessingAttributes());
 				wo.setWork(work.getId());
 				if (existsTasks.containsAll(retractTasks) && retractTasks.containsAll(existsTasks)) {
-					// 全部待办被清空,导致工作整体撤回
+					// 모든 결재 대기가 비워져 업무 문서 전체가 회수됨
 					retractDelete(aeiObjects, existsWorks, work);
 					update(business, aeiObjects, work, taskCompleted, workLog);
 					wo.setNeedToProcessing(true);
 				} else {
-					// 不重新路由,仅仅删除work与task
+					// 재라우팅 없이 work와 task만 삭제
 					for (Work w : retractWorks) {
 						this.deleteWorkTask(aeiObjects, w,
 								existsTasks.stream().filter(o -> Objects.equals(o.getWork(), w.getId()))
@@ -207,7 +207,7 @@ class V3Retract extends BaseAction {
 					work.setForm(manual.getForm());
 				}
 			}
-			// 必然不为null
+			// 반드시 null이 아님
 			taskCompleted.setProcessingType(TaskCompleted.PROCESSINGTYPE_RETRACT);
 			taskCompleted.setJoinInquire(false);
 			aeiObjects.getUpdateTaskCompleteds().add(taskCompleted);

@@ -5,26 +5,26 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public abstract class WorkControl extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -3251746953649257039L;
-	/* 是否可以看到 */
+	/* 조회 가능 여부 */
 	private Boolean allowVisit;
-	/* 是否可以直接流转 */
+	/* 직접 진행 가능 여부 */
 	private Boolean allowProcessing;
-	/* 是否可以处理待阅 */
+	/* 열람 대기 처리 가능 여부 */
 	private Boolean allowReadProcessing;
-	/* 是否可以保存数据 */
+	/* 데이터 저장 가능 여부 */
 	private Boolean allowSave;
-	/* 是否可以重置处理人 */
+	/* 처리자 재설정 가능 여부 */
 	private Boolean allowReset;
-	/* 是否可以待阅处理人 */
+	/* 열람 대기 처리자 가능 여부 */
 	private Boolean allowReadReset;
-	/* 是否可以召回 */
+	/* 회수 가능 여부 */
 	private Boolean allowRetract;
-	/* 是否可以调度 */
+	/* 조정 가능 여부 */
 	private Boolean allowReroute;
-	/* 是否可以删除 */
+	/* 삭제 가능 여부 */
 	private Boolean allowDelete;
 
-	/** 是否可以在管理界面直接尝试流转文件 */
+	/** 관리 화면에서 문서 진행 직접 시도 가능 여부 */
 
 	// private Boolean allowManageProcessing;
 

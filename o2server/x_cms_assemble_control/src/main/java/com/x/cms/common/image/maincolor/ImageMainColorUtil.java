@@ -24,7 +24,7 @@ public class ImageMainColorUtil {
 		return result;
 	}
 
-	// 得到某位置的像素RBG
+	// 특정 위치의 픽셀 RBG 가져오기
 	public Point getRGB(int x, int y) {
 		Point point = new Point();
 		int pixel = image.getRGB(x, y);
@@ -52,25 +52,25 @@ public class ImageMainColorUtil {
 	@SuppressWarnings("unchecked")
 	public List<Point> getThreeFamilly( List<PointGroup> rootPoint ) {
 		List<Point> pointList = new ArrayList<Point>();
-		// 去除与白色相近的颜色
+		// 흰색에 가까운 색 제거
 		Iterator<PointGroup> it = rootPoint.iterator();
 		int removedCount_white = 0;
 		int removedCount_black = 0;
 		while (it.hasNext()) {
 			PointGroup i = it.next();
 			if (i.point.colorDistance( new Point(255, 255, 255) ) < 10) {
-				//去掉接近白色的色值
+				//흰색에 가까운 색상 값 제거
 				it.remove();
 				removedCount_white ++;
 			}else if (i.point.colorDistance( new Point(0, 0, 0) ) < 10) {
-				//去掉近黑色的色值
+				//검은색에 가까운 색상 값 제거
 				it.remove();
 				removedCount_black ++;
 			}
 		}
-		// 根据RGB的总和对颜色排序
+		// RGB 합계로 색 정렬
 		Collections.sort( rootPoint, new pointCampare() );
-		// 如果颜色小于等于3个，直接输出
+		// 색이 3개 이하이면 바로 출력
 		if ( rootPoint.size() <= 3) {
 			for (int i = 0; i < rootPoint.size(); i++ ) {
 				pointList.add( rootPoint.get(i).point );
@@ -80,7 +80,7 @@ public class ImageMainColorUtil {
 
 		int index = 1;
 		int min = 100000;
-		// 得到3个最相近的颜色
+		// 가장 가까운 색 3개 가져오기
 		for (int i = 1; i < rootPoint.size() - 1; i++) {
 			int temp = rootPoint.get(i + 1).point.colorDistance(rootPoint.get(i).point)
 					+ rootPoint.get(i).point.colorDistance(rootPoint.get(i - 1).point);
@@ -89,9 +89,9 @@ public class ImageMainColorUtil {
 				index = i;
 			}
 		}
-		// 根据R-G-B中最大的排序
+		// R-G-B 중 최댓값 기준 정렬
 		int max = 0;
-		// 得到RGB中最大的分量
+		// RGB 중 최대 성분 가져오기
 		if (rootPoint.get(index).point.R >= rootPoint.get(index).point.G && rootPoint.get(index).point.R >= rootPoint.get(index).point.B) {
 			max = 1;
 		} else if (rootPoint.get(index).point.G >= rootPoint.get(index).point.R && rootPoint.get(index).point.G >= rootPoint.get(index).point.B) {
@@ -101,7 +101,7 @@ public class ImageMainColorUtil {
 		}
 
 		switch (max) {
-		// 根据R值排序
+		// R 값 기준 정렬
 		case 1:
 			int temp = max(rootPoint.get(index - 1).point.R, rootPoint.get(index).point.R, rootPoint.get(index + 1).point.R);
 			pointList.add(rootPoint.get(index - 2 + temp).point);
@@ -133,7 +133,7 @@ public class ImageMainColorUtil {
 				}
 			}
 			break;
-		// 根据G值排序
+		// G 값 기준 정렬
 		case 2:
 			int temp1 = max(rootPoint.get(index - 1).point.G, rootPoint.get(index).point.G,
 					rootPoint.get(index + 1).point.G);
@@ -166,7 +166,7 @@ public class ImageMainColorUtil {
 				}
 			}
 			break;
-		// 根据B值排序
+		// B 값 기준 정렬
 		case 3:
 			int temp3 = max(rootPoint.get(index - 1).point.B, rootPoint.get(index).point.B, rootPoint.get(index + 1).point.B);
 			pointList.add(rootPoint.get(index - 2 + temp3).point);
@@ -212,26 +212,26 @@ public class ImageMainColorUtil {
 	}
 
 	/**
-	 * 根据图片得到配色方案
+	 * 이미지로 배색 구성 계산
 	 * 
 	 * @param image
 	 *            bufferImage
 	 * @param rootPointNum
-	 *            种子点的个数
+	 *            시드 포인트 개수
 	 * @param colorNum
-	 *            得到的色调个数
+	 *            얻은 색조 개수
 	 * @return
 	 */
 	public List<String> getColorSolution( BufferedImage image, int rootPointNum, int colorNum) {
 		this.image = image;
 		int width = image.getWidth();
 		int height = image.getHeight();
-		// 定义最大迭代次数
+		// 최대 반복 횟수 정의
 		int maxIterater = 5000000;
 		int offsetWidth = (int) ( width / 32 );
 		int offsetHeight = (int) ( height / 32 );
 
-		// 随机得到32*32个点，在其中取rootPointNum个点，取RGB值做为种子点
+		// 32*32개 점을 무작위로 얻어 그중 rootPointNum개 점의 RGB 값을 시드 포인트로 사용
 		List<PointGroup> rootPoint = new ArrayList<PointGroup>();		
 		for( int i = 0; i < width; i += offsetWidth ){
 			for ( int j = 0; j < height; j += offsetHeight ) {
@@ -240,9 +240,9 @@ public class ImageMainColorUtil {
 				rootPoint.add( pg );
 			}
 		}			
-		// 设置种子点集群初始阈值
+		// 시드 포인트 클러스터 초기 임계값 설정
 		int threshold = 6;
-		// 当当前的种子点个数大于用户设置的上限时 提高阈值
+		// 현재 시드 포인트 수가 사용자 설정 상한보다 크면 임계값 상향
 		while ( rootPoint.size() > rootPointNum ) {
 			for (int i = 0; i < rootPoint.size(); i++){
 				for (int j = i + 1; j < rootPoint.size(); j++) {
@@ -255,7 +255,7 @@ public class ImageMainColorUtil {
 		}
 		int count = 0;
 		do {
-			// 遍历图片所有像素点，将每个点都加入其中一个种子点
+			// 이미지의 모든 픽셀을 순회하며 각 점을 시드 포인트 하나에 추가
 			for (int i = 0; i < width; i++)
 				for (int j = 0; j < height; j++) {
 					Point point = getRGB(i, j);
@@ -271,7 +271,7 @@ public class ImageMainColorUtil {
 					rootPoint.get(index).addPoint(point);
 					count++;
 				}
-			// 查看是新的种子点平均RGB是否等于原来的种子点，如果有，则说明收敛完毕
+			// 새 시드 포인트 평균 RGB가 기존 시드 포인트와 같은지 확인, 같으면 수렴 완료
 			if (isEnd(rootPoint)) {
 				break;
 			}

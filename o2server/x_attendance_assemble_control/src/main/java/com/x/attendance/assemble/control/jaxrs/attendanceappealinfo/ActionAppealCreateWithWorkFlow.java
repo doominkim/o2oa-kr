@@ -33,7 +33,7 @@ public class ActionAppealCreateWithWorkFlow extends BaseAction {
 			wrapIn = this.convertToWrapIn(jsonElement, Wi.class);
 			if( StringUtils.isEmpty( wrapIn.getWorkId() )){
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess("使用流程启动申诉时，工作流的workId不允许为空");
+				Exception exception = new ExceptionAttendanceAppealProcess("결재로 이의 신청을 시작할 때 workId는 비워 둘 수 없습니다");
 				result.error(exception);
 			}
 		} catch (Exception e) {
@@ -43,7 +43,7 @@ public class ActionAppealCreateWithWorkFlow extends BaseAction {
 			logger.error(e, effectivePerson, request, null);
 		}
 
-		//根据传入的考勤信息ID查询考勤信息对象
+		//전달된 근태 정보 ID로 근태 정보 객체 조회
 		if (check) {
 			try {
 				attendanceDetail = attendanceDetailServiceAdv.get( id );
@@ -54,22 +54,22 @@ public class ActionAppealCreateWithWorkFlow extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询员工打卡信息时发生异常！ID:"+id);
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "ID로 직원 체크 정보를 조회하는 중 오류가 발생했습니다! ID:"+id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		if (check) {
-			// 利用打卡记录中的信息，创建一个申诉信息记录
+			// 출퇴근 기록 정보로 이의 신청 정보 기록 생성
 			attendanceAppealInfo = attendanceSettingServiceAdv.composeAppealInfoWithDetailInfo( attendanceDetail, 
 					wrapIn.getReason(), wrapIn.getAppealReason(),  wrapIn.getSelfHolidayType(),  wrapIn.getAddress(), 
 					wrapIn.getStartTime(),  wrapIn.getEndTime(),  wrapIn.getAppealDescription() );
 
-//			// 申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过!
+//			// 이의 신청 상태: 0-미신청, 1-신청 중, -1-신청 반려, 9-신청 승인!
 //			attendanceAppealInfo.setStatus(wrapIn.getStatus());
 
-			// 创建一个申诉审批记录信息
+			// 이의 신청 승인 기록 정보 생성
 			attendanceAppealAuditInfo = new AttendanceAppealAuditInfo();
 			attendanceAppealAuditInfo.setId( attendanceAppealInfo.getId());
 			attendanceAppealAuditInfo.setDetailId( attendanceDetail.getId() );
@@ -77,14 +77,14 @@ public class ActionAppealCreateWithWorkFlow extends BaseAction {
 			attendanceAppealAuditInfo.setWorkId( wrapIn.getWorkId());
 		}
 
-		//保存申诉信息
+		//이의 신청 정보 저장
 		if (check) {
 			try {
 				attendanceAppealInfo = attendanceAppealInfoServiceAdv.saveNewAppeal( attendanceAppealInfo, attendanceAppealAuditInfo );
 
 				result.setData(new Wo(attendanceAppealInfo.getId()));
 			} catch (Exception e) {
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在保存考勤申诉信息息时发生异常。");
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 이의 신청 정보 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -94,34 +94,34 @@ public class ActionAppealCreateWithWorkFlow extends BaseAction {
 	
 	public static class Wi {
 
-		@FieldDescribe("申诉人的身份，考勤人员身份：如果考勤人员属于多个组织，可以选择一个身份进行申诉信息绑定.")
+		@FieldDescribe("이의 신청자 신분, 근태 대상자 신분: 근태 대상자가 여러 조직에 속하면 신분 하나를 골라 이의 신청 정보에 연결할 수 있음.")
 		private String identity = null;
 
-		@FieldDescribe("考勤流程的workId.")
+		@FieldDescribe("근태 프로세스의 workId.")
 		private String workId = null;
 
-		@FieldDescribe("申诉开始时间")
+		@FieldDescribe("이의 신청 시작 시간")
 		private String startTime;
 
-		@FieldDescribe("申诉结束时间")
+		@FieldDescribe("이의 신청 종료 시간")
 		private String endTime;
 
-		@FieldDescribe("申诉原因简述（60个汉字）")
+		@FieldDescribe("이의 신청 사유 요약(60자)")
 		private String appealReason;
 
-		@FieldDescribe("请假类型")
+		@FieldDescribe("휴가 유형")
 		private String selfHolidayType;
 
-		@FieldDescribe("地址")
+		@FieldDescribe("주소")
 		private String address;
 
-		@FieldDescribe("申诉详细事由, 500字")
+		@FieldDescribe("이의 신청 상세 사유, 500자")
 		private String reason;
 
-		@FieldDescribe("申诉详细说明, 500字")
+		@FieldDescribe("이의 신청 상세 설명, 500자")
 		private String appealDescription;
 
-//		@FieldDescribe("审批状态:申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过")
+//		@FieldDescribe("승인 상태: 이의 신청 상태: 0-미신청, 1-신청 중, -1-신청 반려, 9-신청 승인")
 //		private Integer status = 0;
 
 		public String getWorkId() { return workId; }

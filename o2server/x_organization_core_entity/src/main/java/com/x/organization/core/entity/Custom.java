@@ -23,7 +23,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Custom", description = "组织自定义内容.")
+@Schema(name = "Custom", description = "조직 사용자 정의 내용.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Custom.table, uniqueConstraints = {
@@ -45,39 +45,39 @@ public class Custom extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 	}
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	private String name;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("属性所属个人,不可为空.")
+	@FieldDescribe("속성 소유 개인, 비워 둘 수 없음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("文本内容.")
+	@FieldDescribe("텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String data;
 
-	/** flag标志位 */
+	/** flag 플래그 비트 */
 
 	// public static String[] FLA GS = new String[] { JpaObject.id_FIELDNAME,
 	// name_FIELDNAME };

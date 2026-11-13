@@ -130,7 +130,7 @@ public class CenterServerTools extends JettySeverTools {
 		webApp.setContextPath("/" + x_program_center.class.getSimpleName());
 		webApp.setResourceBase(dir.toAbsolutePath().toString());
 		webApp.setDescriptor(dir.resolve(Paths.get(PathTools.WEB_INF_WEB_XML)).toString());
-		// 加载 ext 目录中的 jar包
+		// ext 디렉터리의 jar 패키지 로드
 		Path ext = dir.resolve("WEB-INF").resolve("ext");
 		if (Files.exists(ext)) {
 			webApp.setExtraClasspath(calculateExtraClassPath(x_program_center.class, ext));

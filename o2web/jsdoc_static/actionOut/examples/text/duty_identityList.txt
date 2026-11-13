@@ -1,17 +1,17 @@
 [
 		{
-			"matchKey": " ",		//匹配字段
-			"name": " ",		//身份名称
-			"unique": " ",		//身份标识
-			"description": " ",		//说明
-			"distinguishedName": " ",		//识别名
-			"person": " ",		//人员
-			"unit": " ",		//组织
-			"unitName": " ",		//组织名称
-			"unitLevel": 1,		//组织级别
-			"unitLevelName": " ",		//组织级别名
-			"orderNumber": 1,		//排序号
-			"major": true,		//是否是设定的主身份
+			"matchKey": " ",		//매칭 필드
+			"name": " ",		//신분 이름
+			"unique": " ",		//신분 식별자
+			"description": " ",		//설명
+			"distinguishedName": " ",		//식별명
+			"person": " ",		//사용자
+			"unit": " ",		//조직
+			"unitName": " ",		//조직 이름
+			"unitLevel": 1,		//조직 레벨
+			"unitLevelName": " ",		//조직 레벨 이름
+			"orderNumber": 1,		//정렬 번호
+			"major": true,		//주 신분 설정 여부
 			"serialVersionUID": 1,
 			"serialVersionUID": 1
 		}

@@ -39,10 +39,10 @@ public class ActionSave extends BaseAction {
 				AttendanceStatisticRequireLog _attendanceStatisticRequireLog = null;
 				AttendanceStatisticRequireLog attendanceStatisticRequireLog = new AttendanceStatisticRequireLog();
 				if (wrapIn.getId() != null && wrapIn.getId().length() > 10) {
-					// 根据ID查询信息是否存在，如果存在就update，如果不存在就create
+					// ID로 정보 존재 여부를 조회해 있으면 update, 없으면 create
 					_attendanceStatisticRequireLog = emc.find(wrapIn.getId(), AttendanceStatisticRequireLog.class);
 					if (_attendanceStatisticRequireLog != null) {
-						// 更新
+						// 수정
 						emc.beginTransaction(AttendanceStatisticRequireLog.class);
 						Wi.copier.copy(wrapIn, _attendanceStatisticRequireLog);
 						emc.check(_attendanceStatisticRequireLog, CheckPersistType.all);
@@ -50,12 +50,12 @@ public class ActionSave extends BaseAction {
 					} else {
 						emc.beginTransaction(AttendanceStatisticRequireLog.class);
 						Wi.copier.copy(wrapIn, attendanceStatisticRequireLog);
-						attendanceStatisticRequireLog.setId(wrapIn.getId());// 使用参数传入的ID作为记录的ID
+						attendanceStatisticRequireLog.setId(wrapIn.getId());// 매개변수로 전달된 ID를 레코드 ID로 사용
 						emc.persist(attendanceStatisticRequireLog, CheckPersistType.all);
 						emc.commit();
 					}
 				} else {
-					// 没有传入指定的ID
+					// 지정한 ID가 전달되지 않았습니다
 					emc.beginTransaction(AttendanceStatisticRequireLog.class);
 					Wi.copier.copy(wrapIn, attendanceStatisticRequireLog);
 					emc.persist(attendanceStatisticRequireLog, CheckPersistType.all);
@@ -63,7 +63,7 @@ public class ActionSave extends BaseAction {
 				}
 				result.setData(new Wo(attendanceStatisticRequireLog.getId()));
 			} catch (Exception e) {
-				Exception exception = new ExceptionStatisticRequireProcess(e, "系统保存统计周期信息对象时发生异常.");
+				Exception exception = new ExceptionStatisticRequireProcess(e, "통계 기간 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

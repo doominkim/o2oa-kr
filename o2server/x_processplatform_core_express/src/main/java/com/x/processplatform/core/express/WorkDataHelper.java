@@ -84,7 +84,7 @@ public class WorkDataHelper {
 				if (jsonElement.isJsonObject()) {
 					return gson.fromJson(jsonElement, Data.class);
 				} else {
-					// 如果不是Object强制返回一个Map对象
+					// Object가 아니면 Map 객체를 강제로 반환
 					return new Data();
 				}
 			}
@@ -128,18 +128,18 @@ public class WorkDataHelper {
 
 	private boolean skipUpdate(JsonElement jsonElement) {
 		if (jsonElement.isJsonNull()) {
-			// 如果是空数据就不更新,避免数据被清空
+			// 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지
 			return true;
 		}
 		if (jsonElement.isJsonPrimitive()) {
-			// 如果是空数据就不更新,避免数据被清空
+			// 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지
 			return true;
 		}
 		if (jsonElement.isJsonObject() && (jsonElement.getAsJsonObject().size() == 0)) {
-			// 如果是空数据就不更新,避免数据被清空
+			// 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지
 			return true;
 		}
-		// 如果是空数据就不更新,避免数据被清空
+		// 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지
 		return (jsonElement.isJsonArray() && (jsonElement.getAsJsonArray().size() == 0));
 	}
 

@@ -14,7 +14,7 @@ MWF.xApplication.process.FormDesigner.Module.Elswitch = MWF.FCElswitch = new Cla
 		this.moduleName = "elswitch";
 	},
 	_createElementHtml: function(){
-		//var html = "<el-input placeholder=\"请输入内容\"></el-input>";
+		//var html = "<el-input placeholder=\"내용을 입력하십시오\"></el-input>";
 		var html = "<el-switch v-model=\""+this.json.id+"\"";
 		// if (this.json.description) html += " placeholder=\""+this.json.description+"\"";
 		// if (this.json.width) html += " width=\""+(this.json.width||40)+"\"";

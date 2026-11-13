@@ -39,7 +39,7 @@ class ActionListWithEditor extends BaseAction {
 		static WrapCopier<Attachment, Wo> copier = WrapCopierFactory.wo(Attachment.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("文件类型")
+		@FieldDescribe("파일 유형")
 		private String contentType;
 
 		public String getContentType() {

@@ -97,30 +97,30 @@ class ActionExcelWithQuery extends BaseAction {
 
 		private static final long serialVersionUID = -51802802412712709L;
 
-		@FieldDescribe("前端指定排序列")
+		@FieldDescribe("프런트 지정 정렬 열")
 		private List<SelectEntry> orderList = new TreeList<>();
 
-		@FieldDescribe("过滤")
+		@FieldDescribe("필터")
 		@FieldTypeDescribe(fieldType = "class", fieldValue = "{value='',otherValue='',path='',formatType='',logic='',comparison=''}", fieldTypeName = "com.x.query.core.express.plan.FilterEntry", fieldSample = "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}")
 		private List<FilterEntry> filterList = new TreeList<>();
 
-		@FieldDescribe("参数")
+		@FieldDescribe("파라미터")
 		private Map<String, String> parameter = new HashMap<>();
 
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Integer count = 0;
 
-		@FieldDescribe("excel导出名称，默认为视图名称")
+		@FieldDescribe("excel 내보내기 이름, 기본값은 뷰 이름")
 		private String excelName;
 
-		@FieldDescribe("限定结果集")
+		@FieldDescribe("결과 집합 제한")
 		private List<String> bundleList = new TreeList<>();
 
-		@FieldDescribe("指定字段列表")
+		@FieldDescribe("지정 필드 목록")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "SelectEntry", fieldValue = "{\"orderType\": \"\",\"column\": \"\",\"displayName\": \"\",\"path\": \"\"}")
 		private SelectEntries selectList;
 
-		@FieldDescribe("秘钥串，结果集不为空时必须传.")
+		@FieldDescribe("키 문자열, 결과 집합이 비어 있지 않으면 반드시 전달.")
 		private String key;
 
 		public List<SelectEntry> getOrderList() {

@@ -22,7 +22,7 @@ public class SlicePropertiesBuilder {
 	public static String driver_kingbase8 = "com.kingbase8.Driver";
 	public static String driver_oscar = "com.oscar.Driver";
 	public static String driver_vastbase = "cn.com.vastbase.Driver";
-	/* 避免db2在aix版本和lwl版本字段长度不一致的问题 */
+	/* db2의 aix 버전과 lwl 버전 간 필드 길이 불일치 문제 방지 */
 	public static String dictionary_db2 = "db2(characterColumnSize=255,maxColumnNameLength=128,maxIndexNameLength=128,maxConstraintNameLength=128,batchLimit=50)";
 	public static String dictionary_oracle = "oracle(maxTableNameLength=128,maxColumnNameLength=128,maxIndexNameLength=128,maxConstraintNameLength=128,maxEmbeddedClobSize=-1,maxEmbeddedBlobSize=-1,batchLimit=50)";
 	public static String dictionary_mysql = "mysql(clobTypeName=LONGTEXT,blobTypeName=LONGBLOB,maxIndexesPerTable=64,batchLimit=50)";
@@ -53,7 +53,7 @@ public class SlicePropertiesBuilder {
 //	public static String validationQuery_oscar = "select 1 from dual";
 //	public static String validationQuery_vastbase = "select 1";
 
-	// 单个slice名称
+	// 단일 slice 이름
 	public static String getName(Integer i) throws Exception {
 		try {
 			return "s" + ((1001 + i) + "").substring(1);

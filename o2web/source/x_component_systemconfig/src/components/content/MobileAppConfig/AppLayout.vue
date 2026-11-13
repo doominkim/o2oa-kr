@@ -73,7 +73,7 @@ const newPageItem = () => {
     dialogTitle.value = '페이지 추가';
     dialogVisible.value = true;
 }
-// 更新页面
+// 페이지 업데이트
 const updatePageItem = () => {
     if (!currentItem.value) {
         return
@@ -88,7 +88,7 @@ const closedDialog = () => {
     dialogPageItem.value = null;
     dialogTitle.value = '';
 }
-// 删除页面
+// 페이지 삭제
 const deletePageItem = (e) => {
     if (!currentItem.value) {
         return
@@ -106,7 +106,7 @@ const _realDeletePage = () => {
     if (index > -1) {
         const item = ev.value[index]
         ev.value.splice(index, 1)
-        if (item.isMain === true && ev.value.length > 0) { // 如果删了主页，第一页作为主页
+        if (item.isMain === true && ev.value.length > 0) { // 메인 페이지를 삭제하면 첫 페이지를 메인 페이지로 설정
             updateMainItem(ev.value[0])
         }
         save()
@@ -114,7 +114,7 @@ const _realDeletePage = () => {
     const firstItem = ev.value.length > 0 ? ev.value[0] : null
     clickItem(firstItem)
 }
-// 修改 isMain 参数
+// isMain 파라미터 수정
 const updateMainItem = (mainItem) => {
     ev.value = ev.value.map(item => ({
         ...item,
@@ -134,14 +134,14 @@ const props = defineProps({
         default: []
     },
 });
-// 页面数组
+// 페이지 배열
 const ev = ref((props.value ?? []));
 watch(
     () => props.value,
     (v) => ev.value = v
 );
 
-// 主页按钮图片
+// 메인 버튼 이미지
 const mainImageFocusUrl = ref('x_desktop/img/app/default/index_bottom_menu_logo_focus.png');
 const mainImageBlurUrl = ref('x_desktop/img/app/default/index_bottom_menu_logo_blur.png');
 watch(
@@ -169,16 +169,16 @@ const setImageUrl = (images) => {
 }
 
 
-// 当前选中的页面对象
+// 현재 선택된 페이지 객체
 const currentItem = ref(null);
-// 是否隐藏头部
+// 헤더 숨김 여부
 const hiddenAppBar = ref(false);
-// 点击底部Item
+// 하단 Item 클릭
 const clickItem = (item) => {
     currentItem.value = item;
     setContentHtml(item)
 }
-// 页面操作
+// 페이지 작업
 const setContentHtml = (item) => {
     const divElement = document.getElementById('app_content');
     divElement.innerHTML = ''
@@ -225,7 +225,7 @@ const setContentHtml = (item) => {
         }
     }
 }
-// 底部 Item 拖拽
+// 하단 Item 드래그
 let draggedIndex = null;
 const onDragStart = (event, index) => {
     draggedIndex = index;

@@ -98,7 +98,7 @@ class ActionValidate extends BaseAction {
 
 		private static final long serialVersionUID = -7076689129338985192L;
 
-		@FieldDescribe("外部数据源.")
+		@FieldDescribe("외부 데이터 소스.")
 		private ExternalDataSources externalDataSources;
 
 		public ExternalDataSources getExternalDataSources() {

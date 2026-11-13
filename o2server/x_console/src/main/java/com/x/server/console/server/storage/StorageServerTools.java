@@ -52,19 +52,19 @@ public class StorageServerTools {
 		connectionConfigFactory.setAnonymousLoginEnabled(false);
 		connectionConfigFactory.setMaxLogins(1000);
 		connectionConfigFactory.setMaxThreads(1000);
-		/** 监听工厂 */
+		/** 리스너 팩토리 */
 		ListenerFactory listenerFactory = new ListenerFactory();
-		/** 数据传输工厂,在监听工厂使用 */
+		/** 데이터 전송 팩토리, 리스너 팩토리에서 사용 */
 		DataConnectionConfigurationFactory dataConnectionConfigurationFactory = new DataConnectionConfigurationFactory();
 		/**
-		 * 如果不指定端口会WARN:<br/>
+		 * 포트를 지정하지 않으면 WARN 발생:<br/>
 		 * <p>
 		 * WARN org.apache.ftpserver.impl.PassivePorts - Releasing unreserved passive
 		 * port: 41662
 		 * </p>
 		 */
 		dataConnectionConfigurationFactory.setPassivePorts(storageServer.getPassivePorts());
-		// /**强制不使用ip检查?不知道啥意思*/
+		// /**IP 검사 강제 미사용? 의미 불명확*/
 		dataConnectionConfigurationFactory.setPassiveIpCheck(false);
 		listenerFactory
 				.setDataConnectionConfiguration(dataConnectionConfigurationFactory.createDataConnectionConfiguration());

@@ -21,7 +21,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Instant", description = "消息实例.")
+@Schema(name = "Instant", description = "메시지 인스턴스.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Instant.table, uniqueConstraints = {
@@ -43,50 +43,50 @@ public class Instant extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* flag标志位 */
-	/* Entity 默认字段结束 */
+	/* flag 플래그 비트 */
+	/* Entity 기본 필드 끝 */
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("通知标题.")
+	@FieldDescribe("알림 제목.")
 	@Column(length = 500, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String body_FIELDNAME = "body";
-	@FieldDescribe("内容.")
+	@FieldDescribe("내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = length_10M, name = ColumnNamePrefix + body_FIELDNAME)
 	private String body;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("消息类型.")
+	@FieldDescribe("메시지 유형.")
 	@Column(length = length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("通知对象.")
+	@FieldDescribe("알림 대상.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String person;
 
 	public static final String consumed_FIELDNAME = "consumed";
-	@FieldDescribe("是否已经消费掉.")
+	@FieldDescribe("소비 완료 여부.")
 	@Column(name = ColumnNamePrefix + consumed_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean consumed;

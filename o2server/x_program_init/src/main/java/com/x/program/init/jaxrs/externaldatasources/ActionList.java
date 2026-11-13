@@ -43,11 +43,11 @@ class ActionList extends BaseAction {
 	public static class Wo extends GsonPropertyObject {
 
 		private static final long serialVersionUID = 7463810035710030958L;
-		@FieldDescribe("数据库类型.")
+		@FieldDescribe("데이터베이스 유형.")
 		private String type;
-		@FieldDescribe("数据库名称.")
+		@FieldDescribe("데이터베이스 이름.")
 		private String name;
-		@FieldDescribe("数据库连接配置.")
+		@FieldDescribe("데이터베이스 연결 설정.")
 		private ExternalDataSources externalDataSources;
 
 		public String getType() {

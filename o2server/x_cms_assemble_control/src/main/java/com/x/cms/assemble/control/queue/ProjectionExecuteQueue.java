@@ -37,7 +37,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 
 	@Override
 	protected void execute(String id) throws Exception {
-		LOGGER.debug("开始执行分类文档数据映射category:{}.", () -> id);
+		LOGGER.debug("분류 문서 데이터 매핑 실행 시작 category:{}.", () -> id);
 		CategoryInfo categoryInfo = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			categoryInfo = emc.find(id, CategoryInfo.class);
@@ -61,7 +61,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			LOGGER.error(e);
 		}
 
-		LOGGER.info("完成执行分类文档数据映射category：{}", id);
+		LOGGER.info("분류 문서 데이터 매핑 실행 완료 category:{}", id);
 	}
 
 	private void doProjection(CategoryInfo categoryInfo, final List<Projection> projections) throws Exception {
@@ -71,7 +71,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			docIdList = business.getDocumentFactory().listByCategoryId(categoryInfo.getId(), null);
 		}
 		if (ListTools.isNotEmpty(docIdList)) {
-			LOGGER.info("需要执行文档数据映射个数：{}", docIdList.size());
+			LOGGER.info("문서 데이터 매핑 실행 대상 수: {}", docIdList.size());
 			int limit = 10;
 			for (List<String> partJobs : ListTools.batch(docIdList, limit)) {
 				List<CompletableFuture<Void>> futures = new TreeList<>();
@@ -80,7 +80,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 						try {
 							this.docProjection(docId, projections);
 						} catch (Exception e) {
-							LOGGER.warn("文档{}数据映射异常：{}", docId, e.getMessage());
+							LOGGER.warn("문서 {} 데이터 매핑 오류: {}", docId, e.getMessage());
 							LOGGER.error(e);
 						}
 					}, ThisApplication.forkJoinPool());
@@ -90,7 +90,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 					try {
 						future.get(300, TimeUnit.SECONDS);
 					} catch (Exception e) {
-						LOGGER.warn("执行文档数据映射任务异常：{}", e.getMessage());
+						LOGGER.warn("문서 데이터 매핑 작업 실행 오류: {}", e.getMessage());
 					}
 				}
 				futures.clear();
@@ -119,7 +119,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			if (jsonElement.isJsonObject()) {
 				return XGsonBuilder.convert(jsonElement, Data.class);
 			} else {
-				// 如果不是Object强制返回一个Map对象
+				// Object가 아니면 Map 객체를 강제로 반환
 				return new Data();
 			}
 		}

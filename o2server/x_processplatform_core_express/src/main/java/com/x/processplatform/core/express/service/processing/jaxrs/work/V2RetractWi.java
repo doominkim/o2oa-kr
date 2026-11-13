@@ -7,10 +7,10 @@ public class V2RetractWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -4469000409900931079L;
 
-	@FieldDescribe("工作日志.")
+	@FieldDescribe("업무 로그.")
 	private String workLog;
 
-	@FieldDescribe("已完成工作标识.")
+	@FieldDescribe("완료된 업무 문서 식별자.")
 	private String taskCompleted;
 
 	public String getTaskCompleted() {

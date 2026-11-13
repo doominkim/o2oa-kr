@@ -16,7 +16,7 @@ public class WrapIdList extends GsonPropertyObject {
 		this.idList = new ArrayList<String>(collection);
 	}
 
-	@FieldDescribe("标识符.")
+	@FieldDescribe("식별자.")
 	private List<String> idList = new ArrayList<>();
 
 	public List<String> add(String value, Boolean unique) {

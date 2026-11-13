@@ -71,7 +71,7 @@ class ActionMoaLogin extends BaseAction {
 			wo.setToken(effective.getToken());
 			HttpToken httpToken = new HttpToken();
 			httpToken.setToken(request, response, effective);
-			logger.info("用户：{},认证凭据：{}认证成功");
+			logger.info("사용자: {}, 인증 자격 증명: {} 인증 성공");
 			result.setData(wo);
 		}
 		return result;

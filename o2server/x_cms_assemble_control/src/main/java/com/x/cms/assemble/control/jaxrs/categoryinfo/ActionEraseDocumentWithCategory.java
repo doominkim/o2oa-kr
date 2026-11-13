@@ -36,7 +36,7 @@ public class ActionEraseDocumentWithCategory extends BaseAction {
 		if (!business.isAppInfoManager(effectivePerson, appInfo)) {
 			throw new ExceptionAccessDenied(effectivePerson);
 		}
-		//查询分类下的文档数量
+		//분류의 문서 수 조회
 		Long count = documentServiceAdv.countByCategoryId(id, true);
 		List<String> idsForDelete = null;
 		Integer queryMaxCount = 1000;
@@ -44,13 +44,13 @@ public class ActionEraseDocumentWithCategory extends BaseAction {
 		Integer currentWhileCount = 0;
 
 		if ( count > 0 ) {
-			logger.info(">>>>一共需要删除"+count+"个文档。");
+			logger.info(">>>>삭제할 문서 총 "+count+"건.");
 			result.setCount(count);
 			whileCount =  (int) (count/queryMaxCount + 1);
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-				//循环清除分类下所有的文档信息
+				//분류의 모든 문서 정보를 반복 삭제
 				while( count > 0 && currentWhileCount<=whileCount ) {
-					logger.info(">>>>正在根据categoryId查询"+queryMaxCount+"个需要删除的文档ID列表。");
+					logger.info(">>>>categoryId로 조회 중: "+queryMaxCount+"건의 삭제할 문서 ID 목록.");
 					idsForDelete = documentServiceAdv.listIdsByCategoryId( id, queryMaxCount );
 					if( ListTools.isNotEmpty(  idsForDelete )) {
 						for( String docId : idsForDelete ) {
@@ -59,7 +59,7 @@ public class ActionEraseDocumentWithCategory extends BaseAction {
 						CacheManager.notify( Document.class );
 					}
 					count = documentServiceAdv.countByCategoryId( id, true );
-					logger.info(">>>>已经删除"+idsForDelete.size()+"个文档，还剩下"+count+"个文档需要删除。");
+					logger.info(">>>>삭제 완료: "+idsForDelete.size()+"건, 남은 문서 "+count+"건 삭제 필요.");
 				}
 			}
 		}

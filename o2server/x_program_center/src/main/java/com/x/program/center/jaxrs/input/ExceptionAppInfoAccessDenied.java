@@ -7,7 +7,7 @@ class ExceptionAppInfoAccessDenied extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionAppInfoAccessDenied(String person, String name, String id) {
-		super("人员:{}访问应用程序名称:{}id:{}，拒绝。", person, name, id);
+		super("사용자: {}의 앱 이름: {} id: {} 접근이 거부되었습니다.", person, name, id);
 	}
 
 }

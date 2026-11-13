@@ -51,21 +51,21 @@ public class Main {
 		Log4j2Configuration.reconfigure();
 		ResourceFactory.init();
 		CommandFactory.printStartHelp();
-		new Resource(Config.RESOURCE_COMMANDQUEUE, commandQueue);// 注册控制台命令队列,命令队列唯一不可改.
-		// 注册 commandTerminatedSignal阻塞队列
+		new Resource(Config.RESOURCE_COMMANDQUEUE, commandQueue);// 콘솔 명령 큐 등록, 명령 큐는 유일하며 변경 불가.
+		// commandTerminatedSignal 블로킹 큐 등록
 		new Resource(Config.RESOURCE_COMMANDTERMINATEDSIGNAL_CTL_RD, new LinkedBlockingQueue<>());
-		// 启动 aiagent
+		// aiagent 시작
 		new AiAgent(base).startIfExists();
 	}
 
 	public static void main(String[] args) throws Exception {
 		init();
 		if (null == Config.currentNode()) {
-			throw new IllegalStateException("无法找到当前节点,请检查config/node_{name}.json与local/node.cfg文件内容中的名称是否一致.");
+			throw new IllegalStateException("현재 노드를 찾을 수 없습니다. config/node_{name}.json과 local/node.cfg 파일의 이름이 일치하는지 확인하세요.");
 		}
 		CommandThreads.start(commandQueue);
 		startNodeAgent();
-		// 启动定时任务
+		// 예약 작업 시작
 		SchedulerBuilder.start();
 
 		if (BooleanUtils.isTrue(Config.currentNode().autoStart())) {
@@ -77,9 +77,9 @@ public class Main {
 	private static void cleanCommandSwap(String base) {
 		try (RandomAccessFile raf = new RandomAccessFile(new File(base, "command.swap"), "rw");
 				FileChannel channel = raf.getChannel()) {
-			FileLock lock = channel.lock(); // 锁定文件
-			channel.truncate(0); // 清空文件
-			lock.release(); // 释放文件锁
+			FileLock lock = channel.lock(); // 파일 잠금
+			channel.truncate(0); // 파일 비우기
+			lock.release(); // 파일 잠금 해제
 		} catch (IOException e) {
 			LOGGER.error(e);
 		}
@@ -101,15 +101,15 @@ public class Main {
 	}
 
 	/**
-	 * 检查store目录下的war文件是否全部在manifest.cfg中
+	 * store 디렉터리의 war 파일이 모두 manifest.cfg에 있는지 확인
 	 *
-	 * @param base o2server的根目录
+	 * @param base o2server 루트 디렉터리
 	 */
 	private static void scanWar(String base) throws IOException {
 		File dir = new File(base, "store");
 		File manifest = new File(dir, MANIFEST_FILENAME);
 		if ((!manifest.exists()) || manifest.isDirectory()) {
-			LOGGER.print("启动过程忽略扫描 store 目录.");
+			LOGGER.print("시작 과정에서 store 디렉터리 스캔 생략.");
 			return;
 		}
 		List<String> manifestNames = readManifest(manifest);
@@ -119,14 +119,14 @@ public class Main {
 				continue;
 			}
 			if (!manifestNames.contains(o.getName())) {
-				LOGGER.print("扫描 store 过程中删除无效的文件:{}.", o.getName());
+				LOGGER.print("store 스캔 중 잘못된 파일 삭제:{}.", o.getName());
 				Files.delete(o.toPath());
 			}
 		}
 	}
 
 	/**
-	 * 从Main.class所在的目录开始递归向上,找到version.o2所在目录,就是程序根目录.
+	 * Main.class가 있는 디렉터리부터 위로 재귀하여 version.o2가 있는 디렉터리를 찾으면 그것이 프로그램 루트 디렉터리.
 	 *
 	 * @return
 	 * @throws IOException

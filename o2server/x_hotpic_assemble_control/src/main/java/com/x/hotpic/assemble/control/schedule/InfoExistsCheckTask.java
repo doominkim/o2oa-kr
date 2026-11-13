@@ -8,7 +8,7 @@ import com.x.base.core.project.schedule.AbstractJob;
 import com.x.hotpic.assemble.control.service.HotPictureInfoServiceAdv;
 
 /**
- * 对所有的信息对象进行检查 ，看看这些信息对象是否存在，如果不存在则进行删除
+ * 모든 정보 객체를 확인하여 존재하지 않으면 삭제
  * 
  * @author liyi_
  *
@@ -19,8 +19,8 @@ public class InfoExistsCheckTask extends AbstractJob {
 	private HotPictureInfoServiceAdv hotPictureInfoServiceAdv = new HotPictureInfoServiceAdv();
 
 	/**
-	 * 1、先查询出所有的信息列表，按照排序号和更新时间倒排序 2、删除50个以外的信息对象
-	 * 3、检查至多50个信息对象，查询每一个对象信息是否仍然存在，如果不存在，则进行删除
+	 * 1. 먼저 전체 정보 목록을 정렬 번호와 수정 시간 역순으로 조회 2. 50개를 초과하는 정보 객체 삭제
+	 * 3. 최대 50개의 정보 객체를 확인하여 각 객체 정보가 여전히 존재하는지 조회하고, 존재하지 않으면 삭제
 	 */
 	@Override
 	public void schedule(JobExecutionContext jobExecutionContext) throws Exception {

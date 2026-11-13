@@ -12,10 +12,10 @@ MWF.xApplication.Selector.IdentityWidthDuty = new Class({
         "zIndex": 1000,
         "expand": false,
         "noUnit" : false,
-        "include" : [], //增加的可选项
-        "resultType" : "", //可以设置成个人，那么结果返回个人
+        "include" : [], //추가 선택 항목
+        "resultType" : "", //개인으로 설정 가능, 그러면 결과로 개인을 반환
         "expandSubEnable": true,
-        "selectAllEnable" : true, //分类是否允许全选下一层
+        "selectAllEnable" : true, //분류에서 다음 레벨 전체 선택 허용 여부
         "exclude" : [],
         "selectType" : "identity"
     },
@@ -96,7 +96,7 @@ MWF.xApplication.Selector.IdentityWidthDuty = new Class({
                     var loadNestedUnit = function(){
                         MWF.Actions.get("x_organization_assemble_express").listUnitSubNested({"unitList": unitList }, function(json1){
                             var unitNames = [];
-                            //排序
+                            //정렬
                             if( this.options.units.length === 1 ){
                                 // unitNames = unitList.concat( json1.data );
                                 unitNames = Array.clone(unitList);
@@ -121,7 +121,7 @@ MWF.xApplication.Selector.IdentityWidthDuty = new Class({
                     }.bind(this);
 
 
-                    var flag = false; //需要获取层次名用于排序
+                    var flag = false; //정렬을 위해 계층 이름 조회 필요
                     if( this.options.units.length === 1 ){
                         loadNestedUnit();
                     }else{
@@ -132,7 +132,7 @@ MWF.xApplication.Selector.IdentityWidthDuty = new Class({
                                 u.levelName ? unitObjectList.push( u ) : (flag = true);
                             }
                         });
-                        if( flag ){ //需要获取层次名来排序
+                        if( flag ){ //정렬을 위해 계층 이름 조회 필요
                             o2.Actions.load("x_organization_assemble_express").UnitAction.listObject( {
                                 unitList: unitList
                             }, function (json) {

@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 //MWF.xDesktop.requireApp("process.Xform", "widget.View", null, false);
-/** @class View 视图组件。
- * @o2cn 视图
+/** @class View 뷰 컴포넌트.
+ * @o2cn 뷰
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var view = this.form.get("fieldId"); //获取组件
- * //方法2
- * var view = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var view = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var view = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -19,35 +19,35 @@ MWF.xApplication.process.Xform.View = MWF.APPView =  new Class(
 	Extends: MWF.APP$Module,
     options: {
         /**
-         * 视图参数（options）已经准备好，还未加载视图时执行。可以通过this.event得到视图参数，并可修改this.event修改视图的加载。
+         * 뷰 인자(options)가 준비되었고 아직 뷰를 로드하지 않았을 때 실행. this.event로 뷰 인자를 가져올 수 있으며, this.event를 수정해 뷰 로드를 변경할 수 있음.
          * @event MWF.xApplication.process.Xform.View#beforeLoadView
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 视图设计已经获取，容器也已经准备好。可以通过this.event得到视图参数，并可修改this.event修改视图的加载。
+         * 뷰 설계를 가져왔고 컨테이너도 준비됨. this.event로 뷰 파라미터를 얻고 this.event를 수정해 뷰 로드를 변경할 수 있음.
          * @event MWF.xApplication.process.Xform.View#loadViewLayout
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 异步加载视图后执行。
+         * 뷰를 비동기로 로드한 후 실행.
          * @event MWF.xApplication.process.Xform.View#loadView
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 选中视图中的一条记录后执行。
+         * 뷰에서 기록 하나를 선택한 후 실행.
          * @event MWF.xApplication.process.Xform.View#select
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 取消选中视图中的一条记录后执行。
+         * 뷰에서 기록 하나의 선택을 해제한 후 실행.
          * @since V8.0
          * @event MWF.xApplication.process.Xform.View#unselect
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 打开视图中的一条记录后执行。
-         * @event MWF.xApplication.process.Xform.View#openDocument，可以通过this.event得到打开的文档参数
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * 뷰에서 기록 하나를 연 후 실행.
+         * @event MWF.xApplication.process.Xform.View#openDocument, this.event로 열린 문서 파라미터를 얻을 수 있음
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "beforeLoadView", "loadViewLayout", "loadView", "queryLoad", "postLoad", "select", "unselect", "openDocument"]
     },
@@ -82,8 +82,8 @@ MWF.xApplication.process.Xform.View = MWF.APPView =  new Class(
         }
     },
     /**
-     * @summary 重新加载视图
-     * @param callback {Function} 刷新后的回调.
+     * @summary 뷰 다시 로드
+     * @param callback {Function} 새로 고침 후 콜백.
      * @example
      * this.form.get("fieldId").reload()
      */
@@ -97,7 +97,7 @@ MWF.xApplication.process.Xform.View = MWF.APPView =  new Class(
         this.loadView( callback, true );
     },
     /**
-     * @summary 当视图被设置为延迟加载（未立即载入），通过active方法激活
+     * @summary 뷰가 지연 로드(즉시 로드 안 함)로 설정된 경우 active 메서드로 활성화
      * @example
      * this.form.get("fieldId").active()
      */
@@ -172,11 +172,11 @@ MWF.xApplication.process.Xform.View = MWF.APPView =  new Class(
         //MWF.xDesktop.requireApp("query.Query", "Viewer", function(){
 
         /**
-         * @summary view组件，平台使用该组件实现视图的功能
+         * @summary view 컴포넌트, 플랫폼이 이 컴포넌트로 뷰 기능을 구현
          * @member {MWF.xApplication.query.Query.Viewer}
          * @example
-         *  //可以在脚本中获取该组件
-         * var view = this.form.get("fieldId").view; //获取组件对象
+         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+         * var view = this.form.get("fieldId").view; //컴포넌트 객체 가져오기
          */
             this.view = new MWF.xApplication.query.Query.Viewer(this.node, viewJson, {
                 "isload": force || (this.json.loadView!=="no"),
@@ -283,8 +283,8 @@ MWF.xApplication.process.Xform.View = MWF.APPView =  new Class(
         }.bind(this));
     },
     /**
-     * @summary 获取视图被选中行的数据
-     * @return {Object[]} 被选中行的数据
+     * @summary 뷰에서 선택된 행의 데이터 가져오기
+     * @return {Object[]} 선택된 행의 데이터
      * @example
      * var data = this.form.get("fieldId").getData();
      */

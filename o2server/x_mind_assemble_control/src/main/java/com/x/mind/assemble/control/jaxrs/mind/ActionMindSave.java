@@ -23,7 +23,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindPersist;
 import com.x.mind.entity.MindBaseInfo;
 
 /**
- * 保存脑图信息
+ * 마인드맵 정보 저장
  * @author O2LEE
  *
  */
@@ -42,7 +42,7 @@ public class ActionMindSave extends BaseAction {
 		
 		if( StringUtils.isEmpty( creatorUnit )) {
 			check = false;
-			Exception exception = new ExceptionEntityCanNotDelete("请为创建者分配组织后再进行此操作！");
+			Exception exception = new ExceptionEntityCanNotDelete("작성자에게 조직을 배정한 뒤 다시 시도하세요!");
 			result.error(exception);
 		}
 		

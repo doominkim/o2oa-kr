@@ -20,7 +20,7 @@ public class ActionDelete extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		EffectivePerson currentPerson = this.effectivePerson(request);
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			AttendanceStatisticRequireLog attendanceStatisticRequireLog = emc.find(id, AttendanceStatisticRequireLog.class);
 			if ( null == attendanceStatisticRequireLog ) {
 				Exception exception = new ExceptionStatisticRequireNotExists( id );
@@ -33,7 +33,7 @@ public class ActionDelete extends BaseAction {
 				result.setData( new Wo( id ) );
 			}			
 		} catch ( Exception e ) {
-			Exception exception = new ExceptionStatisticRequireProcess( e, "系统删除统计需求信息对象时发生异常.ID:" + id );
+			Exception exception = new ExceptionStatisticRequireProcess( e, "통계 요청 삭제 중 오류가 발생했습니다. ID:" + id );
 			result.error( exception );
 			logger.error( e, currentPerson, request, null);
 		}

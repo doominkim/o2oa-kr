@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Elcascader 基于Element UI的级联选择框组件。
- * @o2cn 级联选择框
+/** @class Elcascader Element UI 기반 계단식 선택 상자 컴포넌트.
+ * @o2cn 계단식 선택 상자
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|Element UI Cascader 级联选择器}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|Element UI Cascader 계단식 선택기}
  */
 MWF.xApplication.process.Xform.Elcascader = MWF.APPElcascader =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elcascader# */
@@ -20,44 +20,44 @@ MWF.xApplication.process.Xform.Elcascader = MWF.APPElcascader =  new Class(
     Extends: MWF.APP$Elinput,
     options: {
         /**
-         * 组件加载后触发。如果选项加载为异步，则异步处理完成后触发此事件
+         * 컴포넌트 로드 후 발생. 선택 항목 로드가 비동기이면 비동기 처리 완료 후 이 이벤트 발생
          * @event MWF.xApplication.process.Xform.Elcascader#load
          */
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 当获得焦点时触发。this.event[0]指向Event
+         * 포커스를 얻을 때 발생. this.event[0]은 Event
          * @event MWF.xApplication.process.Xform.Elcascader#focus
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|级联选择框的Cascader Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|계단식 선택 상자의 Cascader Events 장}
          */
         /**
-         * 当失去焦点时触发。this.event[0]指向Event
+         * 포커스를 잃을 때 발생. this.event[0]은 Event
          * @event MWF.xApplication.process.Xform.Elcascader#blur
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|级联选择框的Cascader Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|계단식 선택 상자의 Cascader Events 장}
          */
         /**
-         * 当选中节点变化时触发。this.event[0]为选中节点的值
+         * 선택 노드가 변경될 때 발생. this.event[0]은 선택 노드의 값
          * @event MWF.xApplication.process.Xform.Elcascader#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|级联选择框的Cascader Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|계단식 선택 상자의 Cascader Events 장}
          */
         /**
-         * 下拉框出现/隐藏时触发。this.event[0]的值：出现则为 true，隐藏则为 false
+         * 드롭다운이 표시/숨김될 때 발생. this.event[0] 값: 표시되면 true, 숨겨지면 false
          * @event MWF.xApplication.process.Xform.Elcascader#visible-change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|级联选择框的Cascader Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|계단식 선택 상자의 Cascader Events 장}
          */
         /**
-         * 在多选模式下，移除Tag时触发。this.event[0]为移除的Tag对应的节点的值
+         * 다중 선택 모드에서 Tag를 제거할 때 발생. this.event[0]은 제거된 Tag에 해당하는 노드의 값
          * @event MWF.xApplication.process.Xform.Elcascader#remove-tag
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|级联选择框的Cascader Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|계단식 선택 상자의 Cascader Events 장}
          */
         /**
-         * 当展开节点发生变化时触发。this.event[0]指向各父级选项值组成的数组
+         * 펼친 노드가 변경될 때 발생. this.event[0]은 각 상위 항목 값으로 구성된 배열
          * @event MWF.xApplication.process.Xform.Elcascader#expand-change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|级联选择框的Cascader Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|계단식 선택 상자의 Cascader Events 장}
          */
         /**
-         * 过滤函数调用之前的钩子函数。this.event[0]指向value参数：如果该函数的返回值是 false 或者是一个被拒绝的Promise，那么接下来的过滤便不会执行。
+         * 필터 함수 호출 전 훅 함수. this.event[0]은 value 인자: 이 함수의 반환값이 false이거나 거부된 Promise이면 이후 필터링은 실행되지 않음.
          * @event MWF.xApplication.process.Xform.Elcascader#before-filter
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|级联选择框的Cascader Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/cascader|계단식 선택 상자의 Cascader Events 장}
          */
         "elEvents": ["focus", "blur", "change", "visible-change", "remove-tag", "expand-change", "before-filter"]
     },
@@ -387,10 +387,10 @@ MWF.xApplication.process.Xform.Elcascader = MWF.APPElcascader =  new Class(
         },
 
         /**
-         * @summary 获取选中项的text。
-         * @return {Array} 返回选中项的text数组
+         * @summary 선택 항목의 text 조회.
+         * @return {Array} 선택 항목의 text 배열 반환
          * @example
-         * var texts = this.form.get('fieldId').getText(); //获取选中项的文本数组
+         * var texts = this.form.get('fieldId').getText(); //선택 항목의 텍스트 배열 조회
          */
         getText: function(){
             return this._getText( true );

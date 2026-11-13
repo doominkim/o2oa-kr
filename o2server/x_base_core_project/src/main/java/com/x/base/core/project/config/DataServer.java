@@ -51,39 +51,39 @@ public class DataServer extends ConfigObject {
         this.logStatInterval = DEFAULT_LOGSTATINTERVAL;
     }
 
-    @FieldDescribe("是否启用,如果没有可用的externalDataSources.json文件,那么默认会在节点中启用本地的H2数据库作为默认的数据库.")
+    @FieldDescribe("사용 여부, 사용 가능한 externalDataSources.json 파일이 없으면 기본적으로 노드에서 로컬 H2 데이터베이스를 기본 데이터베이스로 사용.")
     private Boolean enable;
-    @FieldDescribe("H2数据库jdbc连接端口,登录的用户名:sa,密码为xadmin的密码.数据库创建在/o2server/local/repository/data/X.mv.db,一旦数据库文件被创建,那么该数据库的密码被创建.")
+    @FieldDescribe("H2 데이터베이스 jdbc 연결 포트, 로그인 사용자 이름: sa, 비밀번호는 xadmin 비밀번호. 데이터베이스는 /o2server/local/repository/data/X.mv.db에 생성되며, 데이터베이스 파일이 생성되면 해당 데이터베이스 비밀번호가 생성됨.")
     private Integer tcpPort;
-    @FieldDescribe("H2数据库web端口,H2提供一个web端的client,此端口为web端client的访问端口.用户名sa,密码为xadmin数据库初始创建的密码.")
+    @FieldDescribe("H2 데이터베이스 web 포트, H2는 web 클라이언트를 제공하며 이 포트는 web 클라이언트 접근 포트. 사용자 이름 sa, 비밀번호는 xadmin 데이터베이스 최초 생성 비밀번호.")
     private Integer webPort;
-    @FieldDescribe("设置此数据库存储的类,默认情况下存储所有类型,如果需要对每个类进行单独的控制以达到高性能,可以将不同的类存储到不同的节点上提高性能.可以使用通配符*")
+    @FieldDescribe("이 데이터베이스에 저장할 클래스 설정, 기본적으로 모든 유형을 저장하며, 고성능을 위해 클래스별로 개별 제어가 필요하면 다른 클래스를 다른 노드에 저장하여 성능을 높일 수 있음. 와일드카드 * 사용 가능")
     private List<String> includes;
-    @FieldDescribe("在此节点上不存储的类,和includes一起设置实际存储的类,可以使用通配符*")
+    @FieldDescribe("이 노드에 저장하지 않을 클래스, includes와 함께 실제 저장 클래스를 설정, 와일드카드 * 사용 가능")
     private List<String> excludes;
-    @FieldDescribe("是否启动jmx,如果启用,可以通过本地的jmx客户端进行访问,不支持远程jmx客户端.")
+    @FieldDescribe("jmx 시작 여부, 사용 시 로컬 jmx 클라이언트로 접근 가능, 원격 jmx 클라이언트는 미지원.")
     private Boolean jmxEnable;
-    @FieldDescribe("H2数据库缓存大小,设置H2用于作为缓存的内存大小,以M作为单位,这里默认为512M.")
+    @FieldDescribe("H2 데이터베이스 캐시 크기, H2가 캐시로 사용할 메모리 크기를 M 단위로 설정, 기본값 512M.")
     private Integer cacheSize;
-    @FieldDescribe("默认日志级别,FATAL, ERROR, WARN, INFO, TRACE. 完整的配置为DefaultLevel=WARN, Tool=TRACE, Enhance=TRACE, METADATA=TRACE, Runtime=TRACE, Query=TRACE, DataCache=TRACE, JDBC=TRACE, SQL=TRACE")
+    @FieldDescribe("기본 로그 레벨, FATAL, ERROR, WARN, INFO, TRACE. 전체 설정은 DefaultLevel=WARN, Tool=TRACE, Enhance=TRACE, METADATA=TRACE, Runtime=TRACE, Query=TRACE, DataCache=TRACE, JDBC=TRACE, SQL=TRACE")
     private String logLevel;
-    @FieldDescribe("最大使用连接数")
+    @FieldDescribe("최대 사용 연결 수")
     private Integer maxTotal;
-    @FieldDescribe("最大空闲连接数")
+    @FieldDescribe("최대 유휴 연결 수")
     private Integer maxIdle;
-    @FieldDescribe("启用统计,默认关闭")
+    @FieldDescribe("통계 사용, 기본값 사용 안 함")
     private Boolean statEnable;
-    @FieldDescribe("统计方式配置,默认mergeStat")
+    @FieldDescribe("통계 방식 설정, 기본값 mergeStat")
     private String statFilter;
-    @FieldDescribe("默认锁超时时间毫秒).")
+    @FieldDescribe("기본 잠금 시간 제한(밀리초).")
     private Integer lockTimeout;
-    @FieldDescribe("启用记录统计日志.")
+    @FieldDescribe("통계 로그 기록 사용.")
     private Boolean logStatEnable;
-    @FieldDescribe("统计日志输出间隔.")
+    @FieldDescribe("통계 로그 출력 간격.")
     private Integer logStatInterval;
-    @FieldDescribe("是否启用执行慢sql记录.")
+    @FieldDescribe("느린 sql 실행 기록 사용 여부.")
     private Boolean slowSqlEnable;
-    @FieldDescribe("执行慢sql记录阈值,毫秒数,默认3000毫秒.")
+    @FieldDescribe("느린 sql 실행 기록 임계값, 밀리초, 기본값 3000밀리초.")
     private Integer slowSqlThreshold;
 
     public Boolean getLogStatEnable() {

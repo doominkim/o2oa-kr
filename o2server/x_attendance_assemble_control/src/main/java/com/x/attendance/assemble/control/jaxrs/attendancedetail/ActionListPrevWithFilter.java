@@ -61,7 +61,7 @@ public class ActionListPrevWithFilter extends BaseAction {
 				EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
 				Business business = new Business(emc);
 
-				// 查询出ID对应的记录的sequence
+				// ID에 해당하는 기록의 sequence 조회
 				Object sequence = null;
 				if (id == null || "(0)".equals(id) || id.isEmpty()) {
 				} else {
@@ -70,7 +70,7 @@ public class ActionListPrevWithFilter extends BaseAction {
 					}
 				}
 
-				// 处理一下顶层组织，查询下级顶层组织
+				// 최상위 조직 처리, 하위 최상위 조직 조회
 				if ( StringUtils.isNotEmpty( wrapIn.getQ_topUnitName() )) {
 					topUnitNames.add(wrapIn.getQ_topUnitName());
 					scheduleSetting_top = attendanceScheduleSettingServiceAdv.getAttendanceScheduleSettingWithUnit(wrapIn.getQ_topUnitName(), effectivePerson.getDebugger() );
@@ -78,7 +78,7 @@ public class ActionListPrevWithFilter extends BaseAction {
 						topUnitNames_tmp = userManagerService.listSubUnitNameWithParent(wrapIn.getQ_topUnitName());
 					} catch (Exception e) {
 						Exception exception = new ExceptionAttendanceDetailProcess(e,
-								"根据顶层组织顶层组织列示所有下级组织名称发生异常！TopUnit:" + wrapIn.getQ_topUnitName());
+								"최상위 조직의 모든 하위 조직 이름을 조회하는 중 오류가 발생했습니다! TopUnit:" + wrapIn.getQ_topUnitName());
 						result.error(exception);
 						logger.error(e, currentPerson, request, null);
 					}
@@ -90,7 +90,7 @@ public class ActionListPrevWithFilter extends BaseAction {
 					wrapIn.setTopUnitNames(topUnitNames);
 				}
 
-				// 处理一下组织,查询下级组织
+				// 조직 처리, 하위 조직 조회
 				if ( StringUtils.isNotEmpty( wrapIn.getQ_topUnitName() )) {
 					unitNames.add(wrapIn.getQ_topUnitName());
 					scheduleSetting = attendanceScheduleSettingServiceAdv.getAttendanceScheduleSettingWithUnit(wrapIn.getQ_unitName(), effectivePerson.getDebugger() );
@@ -98,7 +98,7 @@ public class ActionListPrevWithFilter extends BaseAction {
 						unitNames_tmp = userManagerService.listSubUnitNameWithParent(wrapIn.getQ_topUnitName());
 					} catch (Exception e) {
 						Exception exception = new ExceptionAttendanceDetailProcess(e,
-								"根据组织名称列示所有下级组织名称发生异常！Unit:" + wrapIn.getQ_topUnitName());
+								"조직 이름으로 모든 하위 조직 이름을 조회하는 중 오류가 발생했습니다! Unit:" + wrapIn.getQ_topUnitName());
 						result.error(exception);
 						logger.error(e, currentPerson, request, null);
 					}
@@ -110,11 +110,11 @@ public class ActionListPrevWithFilter extends BaseAction {
 					wrapIn.setUnitNames(unitNames);
 				}
 
-				// 从数据库中查询符合条件的一页数据对象
+				// 데이터베이스에서 조건에 맞는 한 페이지 데이터 객체 조회
 				detailList = business.getAttendanceDetailFactory().listIdsPrevWithFilter(id, count, sequence, wrapIn);
-				// 从数据库中查询符合条件的对象总数
+				// 데이터베이스에서 조건에 맞는 객체 총수 조회
 				total = business.getAttendanceDetailFactory().getCountWithFilter(wrapIn);
-				// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 				wraps = Wo.copier.copy(detailList);
 
 				if( scheduleSetting == null ){
@@ -132,9 +132,9 @@ public class ActionListPrevWithFilter extends BaseAction {
 						}
 						detail.setSignProxy( signProxy );
 
-						//判断并补充申诉信息
+						//이의 신청 정보 확인 및 보완
 						if( detail.getAppealStatus() != 0 ){
-							//十有八九已经提过申诉了，查询申诉信息
+							//십중팔구 이미 이의 신청했으므로 이의 신청 정보 조회
 							appealInfos = attendanceAppealInfoServiceAdv.listWithDetailId( detail.getId() );
 							if(ListTools.isNotEmpty( appealInfos ) ){
 								woAppealInfos = WoAttendanceAppealInfo.copier.copy( appealInfos );
@@ -170,10 +170,10 @@ public class ActionListPrevWithFilter extends BaseAction {
 
 		private static final long serialVersionUID = -5076990764713538973L;
 
-		@FieldDescribe("员工所属组织的排班打卡策略：1-两次打卡（上午上班，下午下班） 2-三次打卡（上午上班，下午下班加中午一次共三次） 3-四次打卡（上午下午都打上班下班卡）")
+		@FieldDescribe("직원 소속 조직의 근무 배정 기록 정책: 1-2회 기록(오전 출근, 오후 퇴근) 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회) 3-4회 기록(오전·오후 모두 출근·퇴근 기록)")
 		private Integer signProxy = 1;
 
-		@FieldDescribe("考勤申诉内容")
+		@FieldDescribe("근태 이의 신청 내용")
 		private List<WoAttendanceAppealInfo> appealInfos = null;
 
 		public List<WoAttendanceAppealInfo> getAppealInfos() { return appealInfos; }

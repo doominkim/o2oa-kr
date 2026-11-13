@@ -37,7 +37,7 @@ public class ActionUpdateForStart extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2AppealInfo info = emc.find(id, AttendanceV2AppealInfo.class);
             if (info == null) {
-                throw new ExceptionNotExistObject("数据不存在，" + id);
+                throw new ExceptionNotExistObject("데이터가 없습니다, " + id);
             }
             if (!person.getDistinguishedName().equals(info.getUserId())) {
                 throw new ExceptionPersonNotEqual();
@@ -45,7 +45,7 @@ public class ActionUpdateForStart extends BaseAction {
             if (Objects.equals(info.getStatus(), AttendanceV2AppealInfo.status_TYPE_LOCK)) {
                 throw new ExceptionAppealLocked();
             }
-            // 申诉次数限制查询
+            // 이의 신청 횟수 제한 조회
             List<AttendanceV2Config> list = emc.listAll(AttendanceV2Config.class);
             AttendanceV2Config config;
             if (list != null && !list.isEmpty()) {
@@ -56,13 +56,13 @@ public class ActionUpdateForStart extends BaseAction {
             if (BooleanUtils.isNotTrue(config.getAppealEnable())) {
                 throw new ExceptionAppealNotEnable();
             }
-            if (config.getAppealMaxTimes() > 0) { // 大于0才算有限制
+            if (config.getAppealMaxTimes() > 0) { // 0보다 커야 제한 있음
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(info.getRecordDate()); // 当前申诉数据的日期
+                calendar.setTime(info.getRecordDate()); // 현재 이의 신청 데이터의 날짜
                 calendar.set(Calendar.DAY_OF_MONTH, 1);
-                Date beginDate = calendar.getTime(); // 计算所在月的开始日期
+                Date beginDate = calendar.getTime(); // 해당 월의 시작일 계산
                 calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-                Date endDate = calendar.getTime(); // 计算所在月的结束日期
+                Date endDate = calendar.getTime(); // 해당 월의 종료일 계산
                 Business business = new Business(emc);
                 List<AttendanceV2AppealInfo> appealInfoList = business.getAttendanceV2ManagerFactory().listAppealInfoByDateNotInit(beginDate, endDate, person.getDistinguishedName());
                 if (appealInfoList != null && appealInfoList.size() >= config.getAppealMaxTimes()) {
@@ -71,8 +71,8 @@ public class ActionUpdateForStart extends BaseAction {
             }
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             emc.beginTransaction(AttendanceV2AppealInfo.class);
-            info.setJobId(wi.getJob()); // 设置 job  前端根据 job 显示打开流程的按钮
-            info.setStatus(AttendanceV2AppealInfo.status_TYPE_PROCESSING); // 审批中
+            info.setJobId(wi.getJob()); // job 설정, 프론트에서 job 기준으로 프로세스 열기 버튼 표시
+            info.setStatus(AttendanceV2AppealInfo.status_TYPE_PROCESSING); // 결재 중
             info.setStartTime(DateTools.now());
             emc.check(info, CheckPersistType.all);
             emc.commit();
@@ -85,7 +85,7 @@ public class ActionUpdateForStart extends BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("流程返回的 job")
+        @FieldDescribe("프로세스가 반환한 job")
         private String job;
 
         public String getJob() {

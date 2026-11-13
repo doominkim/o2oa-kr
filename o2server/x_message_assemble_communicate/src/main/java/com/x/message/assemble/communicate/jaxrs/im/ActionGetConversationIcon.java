@@ -32,7 +32,7 @@ public class ActionGetConversationIcon extends BaseAction {
             CacheKey cacheKey = new CacheKey(this.getClass(), conversationId);
             Optional<?> optional = CacheManager.get(business.cache(), cacheKey);
             if (optional.isPresent()) {
-                LOGGER.debug("缓存获取 {}", conversationId);
+                LOGGER.debug("캐시 조회 {}", conversationId);
                 result.setData((Wo) optional.get());
             } else {
                 Wo wo = this.get(emc, effectivePerson, conversationId);
@@ -47,7 +47,7 @@ public class ActionGetConversationIcon extends BaseAction {
             String conversationId) throws Exception {
         IMConversation conversation = emc.find(conversationId, IMConversation.class);
         if (conversation == null) {
-            LOGGER.info("没有找到会话对象 {}", conversationId);
+            LOGGER.info("대화 객체를 찾을 수 없음 {}", conversationId);
             throw new ExceptionConversationNotExist();
         }
         String base64 = null;
@@ -77,7 +77,7 @@ public class ActionGetConversationIcon extends BaseAction {
         }
         if (base64 == null) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("没有找到会话头像 icon");
+                LOGGER.debug("대화 프로필 이미지 icon을 찾을 수 없음");
             }
             base64 = ICON_UNKOWN;
         }

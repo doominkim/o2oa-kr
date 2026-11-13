@@ -37,7 +37,7 @@ public class ActionSaveExtContent extends BaseAction {
 			wi = this.convertToWrapIn(jsonElement, Wi.class);
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionCategoryInfoProcess(e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+			Exception exception = new ExceptionCategoryInfoProcess(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -62,7 +62,7 @@ public class ActionSaveExtContent extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess( e, "根据ID查询分类信息对象时发生异常。ID:" + wi.getId() );
+				Exception exception = new ExceptionCategoryInfoProcess( e, "ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + wi.getId() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

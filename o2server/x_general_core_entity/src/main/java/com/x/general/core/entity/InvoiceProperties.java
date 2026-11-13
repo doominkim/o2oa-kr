@@ -7,17 +7,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 电子发票扩展信息
+ * 전자 세금계산서 확장 정보
  * @author sword
  */
 public class InvoiceProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -1259157593040432239L;
 
-	@FieldDescribe("明细记录")
+	@FieldDescribe("상세 기록")
 	private List<InvoiceDetail> detailList = new ArrayList<>();
 
-	@FieldDescribe("原始发票内容")
+	@FieldDescribe("원본 세금계산서 내용")
 	private String content;
 
 	public List<InvoiceDetail> getDetailList() {

@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 
-/** @class Log 流程记录组件。
- * @o2cn 流程记录组件
+/** @class Log 프로세스 기록 컴포넌트.
+ * @o2cn 프로세스 기록 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var log = this.form.get("name"); //获取组件
- * //方法2
- * var log = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var log = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var log = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process}
@@ -19,27 +19,27 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
 	Extends: MWF.APP$Module,
     options: {
         /**
-         * 加载数据后事件。
+         * 데이터 로드 후 이벤트.
          * @event MWF.xApplication.process.Xform.Log#postLoadData
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}   `
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}   `
          * @example
-         * //触发该事件的时候可以获取到流程数据workLog
+         * //이 이벤트 발생 시 프로세스 데이터 workLog를 가져올 수 있음
          * var workLog = this.target.workLog;
-         * //可以修改workLog达到定制化流程记录的效果
+         * //workLog를 수정하여 프로세스 기록을 맞춤화할 수 있음
          * do something
          */
         /**
-         * 加载每行流程信息以后触发，可以通过this.event获得下列信息：
+         * 각 행의 프로세스 정보를 로드한 후 발생, this.event로 다음 정보를 가져올 수 있음:
          * <pre><code>
          * {
-         *    "data" : {}, //当前行流程信息
-         *    "node" : logTaskNode, //当前节点
-         *    "log" : object, //指向流程记录
-         *    "type" : "task"  //"task"表示待办，"taskCompleted"表示已办
+         *    "data" : {}, //현재 행 프로세스 정보
+         *    "node" : logTaskNode, //현재 노드
+         *    "log" : object, //프로세스 기록을 가리킴
+         *    "type" : "task"  //"task"는 결재 대기, "taskCompleted"는 처리 완료
          * }
          </code></pre>
          * @event MWF.xApplication.process.Xform.Log#postLoadLine
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "postLoadData", "postLoadLine"]
     },
@@ -309,8 +309,8 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
             };
             if (this.json.filterActivity && this.json.filterActivity.length){
                 filterActivitys = this.json.filterActivity;
-                if(isExactMatch(this.json.filterActivityExactMatch)){ //精确匹配
-                    flag = filterActivitys.split(/[;|,|\n]/gm).contains(log.fromActivityName); //用;,和空格分隔成数组
+                if(isExactMatch(this.json.filterActivityExactMatch)){ //정확히 일치
+                    flag = filterActivitys.split(/[;|,|\n]/gm).contains(log.fromActivityName); //;,와 공백으로 구분하여 배열로 변환
                 }else{
                     flag = (filterActivitys.indexOf(log.fromActivityName)!==-1);
                 }
@@ -320,8 +320,8 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
                 filterActivityAlias = this.json.filterActivityAlias;
                 //flag = ((log.fromActivityAlias) && filterActivityAlias.indexOf(log.fromActivityAlias)!==-1);
                 if(log.fromActivityAlias){
-                    if(isExactMatch(this.json.filterActivityAliasExactMatch)){ //精确匹配
-                        flag = filterActivityAlias.split(/[;|,|\n]/gm).contains(log.fromActivityAlias); //用;,和空格分隔成数组
+                    if(isExactMatch(this.json.filterActivityAliasExactMatch)){ //정확히 일치
+                        flag = filterActivityAlias.split(/[;|,|\n]/gm).contains(log.fromActivityAlias); //;,와 공백으로 구분하여 배열로 변환
                     }else{
                         flag = (filterActivityAlias.indexOf(log.fromActivityAlias)!==-1);
                     }
@@ -331,7 +331,7 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
             }
 
             if (this.json.filterPerson && this.json.filterPerson.length){
-                if(isExactMatch(this.json.filterPersonExactMatch)) { //精确匹配
+                if(isExactMatch(this.json.filterPersonExactMatch)) { //정확히 일치
                     flag = false;
                     var filterPersonsList = this.json.filterPerson.split(/[;|,|\n]/gm);
                     var matchArr = log.person.split("@").concat([log.person]);
@@ -353,8 +353,8 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
             //}
             if (this.json.filterRoute && this.json.filterRoute.length){
                 filterRoutes = this.json.filterRoute;
-                if(isExactMatch(this.json.filterRouteExactMatch)){ //精确匹配
-                    flag = filterRoutes.split(/[;|,|\n]/gm).contains(log.properties.routeName); //用;,和空格分隔成数组
+                if(isExactMatch(this.json.filterRouteExactMatch)){ //정확히 일치
+                    flag = filterRoutes.split(/[;|,|\n]/gm).contains(log.properties.routeName); //;,와 공백으로 구분하여 배열로 변환
                 }else{
                     flag = (filterRoutes.indexOf(log.properties.routeName)!==-1);
                 }
@@ -772,7 +772,7 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
 
     //worklog -----------------------------------------------------------------------------
     checkWorkLogEndActivity: function(){
-        //判断流程已经结束，但是taskCompletedList为空，则补上系统自动流转
+        //프로세스가 종료되었으나 taskCompletedList가 비어 있으면 시스템 자동 이동을 보충
 	    var workLogList = this.form.businessData.workLogList;
 	    for( var i=workLogList.length-1; i>-1; i-- ){
 	        var log = workLogList[i];
@@ -1569,8 +1569,8 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
             };
             if (this.json.filterActivity && this.json.filterActivity.length){
                 filterActivitys = this.json.filterActivity;
-                if(isExactMatch(this.json.filterActivityExactMatch)){ //精确匹配
-                    flag = filterActivitys.split(/[;|,|\n]/gm).contains(log.fromActivityName); //用;,和空格分隔成数组
+                if(isExactMatch(this.json.filterActivityExactMatch)){ //정확히 일치
+                    flag = filterActivitys.split(/[;|,|\n]/gm).contains(log.fromActivityName); //;,와 공백으로 구분하여 배열로 변환
                 }else{
                     flag = (filterActivitys.indexOf(log.fromActivityName)!==-1);
                 }
@@ -1579,8 +1579,8 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
                 if (this.json.filterActivityAlias.length){
                     filterActivityAlias = this.json.filterActivityAlias;
                     if(log.fromActivityAlias){
-                        if(isExactMatch(this.json.filterActivityAliasExactMatch)){ //精确匹配
-                            flag = filterActivityAlias.split(/[;|,|\n]/gm).contains(log.fromActivityAlias); //用;,和空格分隔成数组
+                        if(isExactMatch(this.json.filterActivityAliasExactMatch)){ //정확히 일치
+                            flag = filterActivityAlias.split(/[;|,|\n]/gm).contains(log.fromActivityAlias); //;,와 공백으로 구분하여 배열로 변환
                         }else{
                             flag = (filterActivityAlias.indexOf(log.fromActivityAlias)!==-1);
                         }
@@ -1592,7 +1592,7 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
                 filterPersons = this.json.filterPerson;
 
                 var tmpTaskCompletedList = [];
-                if(isExactMatch(this.json.filterPersonExactMatch)) { //精确匹配
+                if(isExactMatch(this.json.filterPersonExactMatch)) { //정확히 일치
                     var filterPersonsList = filterPersons.split(/[;|,|\n]/gm);
                     log.taskCompletedList.each(function(taskCompleted){
                         var matchArr = (taskCompleted.person + "@" + taskCompleted.identity).split("@").concat([taskCompleted.person, taskCompleted.identity]);
@@ -1618,8 +1618,8 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
             }
             if (this.json.filterRoute && this.json.filterRoute.length){
                 filterRoutes = this.json.filterRoute;
-                if(isExactMatch(this.json.filterRouteExactMatch)){ //精确匹配
-                    flag = filterRoutes.split(/[;|,|\n]/gm).contains(log.routeName); //用;,和空格分隔成数组
+                if(isExactMatch(this.json.filterRouteExactMatch)){ //정확히 일치
+                    flag = filterRoutes.split(/[;|,|\n]/gm).contains(log.routeName); //;,와 공백으로 구분하여 배열로 변환
                 }else{
                     flag = (filterRoutes.indexOf(log.routeName)!==-1);
                 }
@@ -1640,7 +1640,7 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
             if (this.json.filterPerson && this.json.filterPerson.length){
                 var filterPerson = this.json.filterPerson;
                 flag = false;
-                if(isExactMatch(this.json.filterPersonExactMatch)) { //精确匹配
+                if(isExactMatch(this.json.filterPersonExactMatch)) { //정확히 일치
                     var filterPersonsList = filterPerson.split(/[;|,|\n]/gm);
                     var matchArr = (list.person + "@" + list.identity).split("@").concat([list.person, list.identity]);
                     for(var i=0; i < filterPersonsList.length; i++){
@@ -1826,7 +1826,7 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
                 html = this.form.Macro.exec(this.json.textStyleScript.code, this);
             }
 
-            //如果是自动流转，强制使用默认格式
+            //자동 이동이면 기본 형식을 강제 사용
             if (task.processingType==="autoflow") html = MWF.xApplication.process.Xform.LP.autoFlowHtml;
 
             var person = task.person.substring(0, task.person.indexOf("@"));

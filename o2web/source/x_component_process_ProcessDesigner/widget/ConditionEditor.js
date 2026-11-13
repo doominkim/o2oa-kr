@@ -215,7 +215,7 @@ MWF.xApplication.process.ProcessDesigner.widget.ConditionEditor = new Class({
 			var name = $("inputScriptName").get("value");
 			if (!name){
 				
-				//输入验证。。。。。。。。。。。
+				//입력 검증...........
 				
 				layout.notice("notice", {x: "right", y:"top"}, MWF.LP.process.notice.inputScriptName, this.scriptPanel.content);
 				$("inputScriptName").focus();
@@ -235,7 +235,7 @@ MWF.xApplication.process.ProcessDesigner.widget.ConditionEditor = new Class({
 				"id": scriptId,
 				"name": name,
 				"description": $("inputScriptDescription").get("value"),
-				"code": this.scriptEditor.toCode(),  //要计算出格式的text
+				"code": this.scriptEditor.toCode(),  //서식을 계산할 text
 				"html": this.scriptEditor.toHTML(),
 			};
 			if (!this.scripts[scriptId]){

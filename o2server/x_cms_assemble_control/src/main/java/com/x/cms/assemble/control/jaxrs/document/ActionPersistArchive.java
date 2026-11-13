@@ -46,7 +46,7 @@ public class ActionPersistArchive extends BaseAction {
 			try {
 				documentPersistService.refreshDocumentPermission( id, null, null );
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在发送重置文档访问权限消息到处理队列时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 접근 권한 재설정 메시지를 처리 대기열에 보내는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

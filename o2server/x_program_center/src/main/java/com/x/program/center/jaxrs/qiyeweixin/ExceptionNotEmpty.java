@@ -10,6 +10,6 @@ public class ExceptionNotEmpty extends LanguagePromptException {
 
 
     ExceptionNotEmpty(String name) {
-        super("{} 不能为空.", name);
+        super("{}은(는) 비워 둘 수 없습니다.", name);
     }
 }

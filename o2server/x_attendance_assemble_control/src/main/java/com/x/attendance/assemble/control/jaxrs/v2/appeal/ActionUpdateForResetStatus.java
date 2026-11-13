@@ -14,7 +14,7 @@ import com.x.base.core.project.http.EffectivePerson;
 import com.x.base.core.project.jaxrs.WrapBoolean;
 
 /**
- * 还原数据状态，清除流程关联.
+ * 데이터 상태 복원, 프로세스 연결 해제.
  * Created by fancyLou on 2023/3/3.
  * Copyright © 2023 O2. All rights reserved.
  */
@@ -28,7 +28,7 @@ public class ActionUpdateForResetStatus extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2AppealInfo info = emc.find(id, AttendanceV2AppealInfo.class);
             if (info == null) {
-                throw new ExceptionNotExistObject("数据不存在，" + id);
+                throw new ExceptionNotExistObject("데이터가 없습니다, " + id);
             }
             if (!person.getDistinguishedName().equals(info.getUserId())) {
                 throw new ExceptionPersonNotEqual();
@@ -38,9 +38,9 @@ public class ActionUpdateForResetStatus extends BaseAction {
             }
 
             emc.beginTransaction(AttendanceV2AppealInfo.class);
-            info.setJobId(""); // 设置 job  前端根据 job 显示打开流程的按钮
+            info.setJobId(""); // job 설정, 프론트에서 job 기준으로 프로세스 열기 버튼 표시
             if (Objects.equals(info.getStatus(), AttendanceV2AppealInfo.status_TYPE_PROCESSING)) {
-                info.setStatus(AttendanceV2AppealInfo.status_TYPE_INIT); // 还原状态 初始化
+                info.setStatus(AttendanceV2AppealInfo.status_TYPE_INIT); // 상태 복원 초기화
             }
             emc.check(info, CheckPersistType.all);
             emc.commit();

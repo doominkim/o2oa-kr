@@ -105,8 +105,8 @@ class ActionInputAll extends BaseAction {
 	}
 
 	private void scanUnit(Business business, XSSFWorkbook workbook) throws Exception {
-		// 导入组织信息
-		logger.info("开始导入人员组织所有数据--------start");
+		// 조직 정보 가져오기
+		logger.info("사용자 조직 전체 데이터 가져오기 시작--------start");
 		Sheet sheet = workbook.getSheetAt(1);
 		configuratorUnit = new UnitSheetConfigurator(workbook, sheet);
 		unitItemList = this.scanUnitList(configuratorUnit, sheet);
@@ -117,7 +117,7 @@ class ActionInputAll extends BaseAction {
 	}
 
 	private void scanPerson(Business business, XSSFWorkbook workbook) throws Exception {
-		// 导入人员信息
+		// 사용자 정보 가져오기
 		logger.info("--------scanPerson");
 		Sheet sheet = workbook.getSheetAt(2);
 		configuratorPerson = new PersonSheetConfigurator(workbook, sheet);
@@ -131,60 +131,60 @@ class ActionInputAll extends BaseAction {
 
 	private void scanIdentity(Business business, XSSFWorkbook workbook, List<PersonItem> persons, List<UnitItem> units)
 			throws Exception {
-		// 导入身份信息
+		// 신분 정보 가져오기
 		logger.info("--------scanIdentity");
 		Sheet sheet = workbook.getSheetAt(3);
 		configuratorIdentity = new IdentitySheetConfigurator(workbook, sheet);
 		wholeFlag = this.checkIdentity(business, workbook, configuratorIdentity, sheet, persons, units);
-		// 校验导入的职务信息
+		// 가져온 직무 정보 검증
 		if (wholeFlag) {
 			this.scanDuty(business, workbook);
 		}
 	}
 
 	private void scanDuty(Business business, XSSFWorkbook workbook) throws Exception {
-		// 导入职务信息
+		// 직무 정보 가져오기
 		logger.info("--------scanDuty");
 		Sheet identitySheet = workbook.getSheetAt(3);
 		Sheet dutySheet = workbook.getSheetAt(4);
 		configuratorDuty = new DutySheetConfigurator(workbook, dutySheet);
 		wholeFlag = this.checkDuty(business, workbook, configuratorDuty);
 		if (wholeFlag) {
-			// 保存组织，人员
-			logger.info("开始导入组织信息--------");
+			// 조직, 사용자 저장
+			logger.info("조직 정보 가져오기 시작--------");
 			this.persistUnit(business, workbook, configuratorUnit, unitItemList);
-			logger.info("开始导入人员信息--------");
+			logger.info("사용자 정보 가져오기 시작--------");
 			this.persistPerson(business, workbook, configuratorPerson, personItemList);
-			logger.info("开始导入身份信息--------");
+			logger.info("신분 정보 가져오기 시작--------");
 			identityItemList = this.scanIdentityList(business, configuratorIdentity, identitySheet);
 			this.persistIdentity(workbook, configuratorIdentity, identityItemList);
 
-			logger.info("开始导入职务信息--------");
+			logger.info("직무 정보 가져오기 시작--------");
 			dutyItemList = this.scanDutyList(business, configuratorDuty, dutySheet);
 			this.persistDuty(workbook, configuratorDuty, dutyItemList, business);
 
 			wholeFlag = this.checkGroup(business, workbook);
-			logger.info("开始导入群组信息--------");
+			logger.info("그룹 정보 가져오기 시작--------");
 			this.scanGroup(business, workbook);
 			this.persistGroup(business, workbook, configuratorGroup, groupItemList);
 
 			wholeFlag = this.checkRole(business, workbook);
-			logger.info("开始导入角色信息--------");
+			logger.info("역할 정보 가져오기 시작--------");
 			this.scanRole(business, workbook);
 			this.persistRole(business, workbook, configuratorRole, roleItemList);
-			logger.info("导入人员组织所有数据--------end");
+			logger.info("사용자 조직 전체 데이터 가져오기--------end");
 		}
 	}
 
 	private void scanGroup(Business business, XSSFWorkbook workbook) throws Exception {
-		// 导入群组信息
+		// 그룹 정보 가져오기
 		Sheet sheet = workbook.getSheetAt(5);
 		configuratorGroup = new GroupSheetConfigurator(workbook, sheet);
 		groupItemList = this.scanGroupList(business, configuratorGroup, sheet);
 	}
 
 	private void scanRole(Business business, XSSFWorkbook workbook) throws Exception {
-		// 导入角色信息
+		// 역할 정보 가져오기
 		Sheet sheet = workbook.getSheetAt(6);
 		configuratorRole = new RoleSheetConfigurator(workbook, sheet);
 		roleItemList = this.scanRoleList(business, configuratorRole, sheet);
@@ -561,7 +561,7 @@ class ActionInputAll extends BaseAction {
 						dutyItem.setUnit(iUnit.getId());
 					}
 					List<String> identityList = this.listIdentityList(business, ipersonCode, iunitCode);
-					// 查询对应身份
+					// 해당 신분 조회
 					dutyItem.setIdentityList(identityList);
 				}
 				dutys.add(dutyItem);
@@ -572,7 +572,7 @@ class ActionInputAll extends BaseAction {
 
 	private boolean checkUnit(Business business, XSSFWorkbook workbook, UnitSheetConfigurator configurator,
 			List<UnitItem> unit) throws Exception {
-		// 校验导入的组织
+		// 가져온 조직 검증
 		EntityManagerContainer emc = business.entityManagerContainer();
 		boolean validate = true;
 		for (UnitItem o : unit) {
@@ -618,7 +618,7 @@ class ActionInputAll extends BaseAction {
 
 	private boolean checkPerson(Business business, XSSFWorkbook workbook, PersonSheetConfigurator configurator,
 			List<PersonItem> person) throws Exception {
-		// 校验导入的人员
+		// 가져온 사용자 검증
 		EntityManagerContainer emc = business.entityManagerContainer();
 		boolean validate = true;
 		for (PersonItem o : person) {
@@ -672,7 +672,7 @@ class ActionInputAll extends BaseAction {
 				Person pc = null;
 				pc = emc.flag(o.getMobile(), Person.class);
 				if (null != pc) {
-					logger.info("手机号码: " + o.getMobile() + " 与已经存在手机号码: " + pc.getMobile() + " 冲突.");
+					logger.info("휴대폰 번호: " + o.getMobile() + " 기존 휴대폰 번호: " + pc.getMobile() + " 와 충돌합니다.");
 					this.setPersonMemo(workbook, configurator, o,
 							"휴대전화 번호: " + o.getMobile() + "이(가) 기존 휴대전화 번호: " + pc.getMobile() + "과(와) 충돌합니다.");
 					validate = false;
@@ -684,7 +684,7 @@ class ActionInputAll extends BaseAction {
 
 	private boolean checkIdentity(Business business, XSSFWorkbook workbook, IdentitySheetConfigurator configurator,
 			Sheet sheet, List<PersonItem> persons, List<UnitItem> units) throws Exception {
-		// 校验导入的身份
+		// 가져온 신분 검증
 		if (null == configurator.getUniqueColumn()) {
 			throw new ExceptionUniqueColumnEmpty();
 		}
@@ -785,7 +785,7 @@ class ActionInputAll extends BaseAction {
 
 	private boolean checkGroup(Business business, XSSFWorkbook workbook)
 			throws Exception {
-		// 校验导入的群组
+		// 가져온 그룹 검증
 		Sheet sheet = workbook.getSheetAt(5);
 		configuratorGroup = new GroupSheetConfigurator(workbook, sheet);
 		GroupSheetConfigurator configurator = configuratorGroup;
@@ -867,7 +867,7 @@ class ActionInputAll extends BaseAction {
 
 	private boolean checkRole(Business business, XSSFWorkbook workbook)
 			throws Exception {
-		// 校验导入的角色
+		// 가져온 역할 검증
 		Sheet sheet = workbook.getSheetAt(6);
 		configuratorRole = new RoleSheetConfigurator(workbook, sheet);
 		RoleSheetConfigurator configurator = configuratorRole;
@@ -940,7 +940,7 @@ class ActionInputAll extends BaseAction {
 			List<UnitItem> unitItems) throws Exception {
 		for (List<UnitItem> list : ListTools.batch(unitItems, 200)) {
 			for (UnitItem o : list) {
-				logger.debug("正在保存组织:{}.", o.getName());
+				logger.debug("조직 저장 중:{}.", o.getName());
 				Unit unitObject = new Unit();
 				o.copyTo(unitObject);
 
@@ -982,7 +982,7 @@ class ActionInputAll extends BaseAction {
 		// EntityManagerContainer emc = business.entityManagerContainer();
 		for (List<PersonItem> list : ListTools.batch(personItems, 200)) {
 			for (PersonItem o : list) {
-				logger.debug("正在保存人员:{}.", o.getName());
+				logger.debug("사용자 저장 중:{}.", o.getName());
 				Person personObject = new Person();
 				o.copyTo(personObject);
 
@@ -1023,7 +1023,7 @@ class ActionInputAll extends BaseAction {
 			List<IdentityItem> identityItems) throws Exception {
 		for (List<IdentityItem> list : ListTools.batch(identityItems, 200)) {
 			for (IdentityItem o : list) {
-				logger.debug("正在保存人员:{}.", o.getName());
+				logger.debug("사용자 저장 중:{}.", o.getName());
 				Identity identityObject = new Identity();
 				o.copyTo(identityObject);
 
@@ -1046,7 +1046,7 @@ class ActionInputAll extends BaseAction {
 		for (List<DutyItem> list : ListTools.batch(dutyItems, 200)) {
 			for (DutyItem o : list) {
 				if (!this.getDuty(business, o)) {
-					logger.info("正在保存职务:{}." + o.getName());
+					logger.info("직무 저장 중:{}." + o.getName());
 					UnitDuty dutyObject = new UnitDuty();
 					o.copyTo(dutyObject);
 					String resp = this.saveDuty("unitduty", dutyObject);
@@ -1109,7 +1109,7 @@ class ActionInputAll extends BaseAction {
 					}
 
 				} else {
-					logger.debug("正在保存群组:{}.", o.getName());
+					logger.debug("그룹 저장 중:{}.", o.getName());
 					if (StringUtils.isNotEmpty(o.getGroupCode())) {
 						List<String> groupList = o.getGroupList();
 						if (ListTools.isEmpty(groupList)) {
@@ -1170,7 +1170,7 @@ class ActionInputAll extends BaseAction {
 					}
 
 				} else {
-					logger.debug("正在保存角色:{}.", o.getName());
+					logger.debug("역할 저장 중:{}.", o.getName());
 
 					Role roleObject = new Role();
 					o.copyTo(roleObject);
@@ -1309,7 +1309,7 @@ class ActionInputAll extends BaseAction {
 		unitDutyList = this.listUnitDutyList(business, dutyItem.getName(), dutyItem.getUnit());
 		if (ListTools.isNotEmpty(unitDutyList)) {
 			UnitDuty unitDuty = unitDutyList.get(0);
-			logger.info("更新职务：" + unitDuty.getName());
+			logger.info("직무 수정:" + unitDuty.getName());
 			checkduty = true;
 			List<String> identityList = new ArrayList<>();
 			identityList = unitDuty.getIdentityList();
@@ -1322,12 +1322,12 @@ class ActionInputAll extends BaseAction {
 		return checkduty;
 	}
 
-	// 生成随机数
+	// 난수 생성
 	private String getCard() {
-		Random rand = new SecureRandom();// 生成随机数
+		Random rand = new SecureRandom();// 난수 생성
 		String cardNnumer = "";
 		for (int a = 0; a < 8; a++) {
-			cardNnumer += rand.nextInt(10);// 生成6位数字
+			cardNnumer += rand.nextInt(10);// 6자리 숫자 생성
 		}
 		return cardNnumer;
 
@@ -1406,7 +1406,7 @@ class ActionInputAll extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("返回的结果标识")
+		@FieldDescribe("반환 결과 식별자")
 		private String flag;
 
 		public String getFlag() {

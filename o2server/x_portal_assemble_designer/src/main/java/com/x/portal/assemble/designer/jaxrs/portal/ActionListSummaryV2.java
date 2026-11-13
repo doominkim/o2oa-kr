@@ -30,7 +30,7 @@ class ActionListSummaryV2 extends BaseAction {
 			Business business = new Business(emc);
 			List<Portal> portalList = this.listEditableObj(business, effectivePerson, wi.getName(), wi.getPortalCategory());
 			List<Wo> wos = Wo.copier.copy(portalList);
-			/* 由于有多值字段所以需要全部取出 */
+			/* 다중 값 필드가 있어 전체를 조회해야 함 */
 			for (Wo wo : wos) {
 				wo.setPageCount(emc.countEqual(Page.class, Page.portal_FIELDNAME, wo.getId()));
 				wo.setWidgetCount(emc.countEqual(Widget.class, Widget.portal_FIELDNAME, wo.getId()));
@@ -50,13 +50,13 @@ class ActionListSummaryV2 extends BaseAction {
 	public static class Wi extends GsonPropertyObject{
 
 		private static final long serialVersionUID = 9112168190097470362L;
-		@FieldDescribe("名称(模糊查询)")
+		@FieldDescribe("이름(부분 일치 검색)")
 		private String name;
-		@FieldDescribe("分类名称")
+		@FieldDescribe("분류 이름")
 		private String portalCategory;
-		@FieldDescribe("排序字段：lastUpdateTime|createTime|name(默认)")
+		@FieldDescribe("정렬 필드: lastUpdateTime|createTime|name(기본값)")
 		private String orderBy;
-		@FieldDescribe("是否倒叙排序，默认false")
+		@FieldDescribe("내림차순 정렬 여부, 기본값 false")
 		private Boolean descOrder;
 
 		public String getName() {
@@ -100,16 +100,16 @@ class ActionListSummaryV2 extends BaseAction {
 				JpaObject.singularAttributeField(Portal.class, true, false), null);
 
 
-		@FieldDescribe("页面数量")
+		@FieldDescribe("페이지 수")
 		private Long pageCount;
 
-		@FieldDescribe("部件数量")
+		@FieldDescribe("위젯 수")
 		private Long widgetCount;
 
-		@FieldDescribe("脚本数量")
+		@FieldDescribe("스크립트 수")
 		private Long scriptCount;
 
-		@FieldDescribe("资源数量")
+		@FieldDescribe("리소스 수")
 		private Long fileCount;
 
 		public Long getPageCount() {

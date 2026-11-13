@@ -54,13 +54,13 @@ class ActionLogin extends BaseAction {
 	}
 
 	public static class Wo extends GsonPropertyObject {
-		@FieldDescribe("collect服务地址")
+		@FieldDescribe("collect 서비스 주소")
 		private String collectUrl;
-		@FieldDescribe("collect令牌")
+		@FieldDescribe("collect 토큰")
 		private String collectToken;
-		@FieldDescribe("collect令牌类型")
+		@FieldDescribe("collect 토큰 유형")
 		private TokenType collectTokenType;
-		@FieldDescribe("是否是VIP组织")
+		@FieldDescribe("VIP 조직 여부")
 		private Boolean vipUnit = false;
 
 		public String getCollectUrl() {
@@ -98,13 +98,13 @@ class ActionLogin extends BaseAction {
 
 	public static class LoginWo extends GsonPropertyObject {
 
-		@FieldDescribe("令牌")
+		@FieldDescribe("토큰")
 		private String token;
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String name;
-		@FieldDescribe("令牌类型")
+		@FieldDescribe("토큰 유형")
 		private TokenType tokenType;
-		@FieldDescribe("是否是VIP组织")
+		@FieldDescribe("VIP 조직 여부")
 		private Boolean vipUnit;
 
 		public String getToken() {

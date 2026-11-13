@@ -108,7 +108,7 @@ public class ActionSubjectListCreamedForPages extends BaseAction {
 		}
 
 		if (check) {
-			//将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+			//@ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 			if( ListTools.isNotEmpty( wraps ) ){
 				for( Wo wo : wraps ) {
 					cutPersonNames( wo );
@@ -122,7 +122,7 @@ public class ActionSubjectListCreamedForPages extends BaseAction {
 	}
 
 	/**
-	 *  将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+	 *  @ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 	 *
 	 *  latestReplyUserShort = "";
 		bBSIndexSetterNameShort = "";
@@ -191,7 +191,7 @@ public class ActionSubjectListCreamedForPages extends BaseAction {
 
 		private Boolean needPicture = false;
 
-		private Boolean withTopSubject = null; // 是否包含置顶贴
+		private Boolean withTopSubject = null; // 상단 고정글 포함 여부
 
 		public static List<String> Excludes = new ArrayList<String>( JpaObject.FieldsUnmodify );
 
@@ -280,7 +280,7 @@ public class ActionSubjectListCreamedForPages extends BaseAction {
 
 		private List<WoSubjectAttachment> subjectAttachmentList;
 
-		@FieldDescribe( "投票主题的所有投票选项列表." )
+		@FieldDescribe( "투표 주제의 전체 투표 선택지 목록." )
 		private List<WoBBSVoteOptionGroup> voteOptionGroupList;
 
 		private String content = null;
@@ -289,25 +289,25 @@ public class ActionSubjectListCreamedForPages extends BaseAction {
 
 		private String pictureBase64 = null;
 
-		@FieldDescribe("最新回复用户昵称")
+		@FieldDescribe("최근 답글 사용자 닉네임")
 		private String latestReplyUserNickName = "";
 
-		@FieldDescribe( "首页推荐人姓名" )
+		@FieldDescribe( "홈 추천자 이름" )
 		private String bBSIndexSetterNameShort = "";
 
-		@FieldDescribe( "精华设置人姓名" )
+		@FieldDescribe( "우수 주제 설정자 이름" )
 		private String screamSetterNameShort = "";
 
-		@FieldDescribe( "原创设置人姓名" )
+		@FieldDescribe( "원작 설정자 이름" )
 		private String originalSetterNameShort = "";
 
-		@FieldDescribe( "创建人姓名" )
+		@FieldDescribe( "작성자 이름" )
 		private String creatorNameShort = "";
 
-		@FieldDescribe( "审核人姓名" )
+		@FieldDescribe( "심사자 이름" )
 		private String auditorNameShort = "";
 
-		@FieldDescribe( "当前用户是否已经投票过." )
+		@FieldDescribe( "현재 사용자의 투표 여부." )
 		private Boolean voted = false;
 
 		public String getbBSIndexSetterNameShort() {

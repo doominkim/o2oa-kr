@@ -36,7 +36,7 @@ public class ActionHolidayImport extends BaseAction {
             Wi wi = parseWi(jsonElement);
             List<HolidayItem> items = listHolidayItems(wi, jsonElement);
             if (items == null || items.isEmpty()) {
-                throw new ExceptionEmptyParameter("节假日数据");
+                throw new ExceptionEmptyParameter("휴일 데이터");
             }
 
             boolean overwrite = BooleanUtils.isTrue(wi.getOverwrite());
@@ -122,7 +122,7 @@ public class ActionHolidayImport extends BaseAction {
 
     private AttendanceV2Holiday buildHoliday(Wi wi, HolidayItem item, Set<String> dateSet) throws Exception {
         if (item == null) {
-            throw new ExceptionWithMessage("节假日数据不能为空");
+            throw new ExceptionWithMessage("휴일 데이터는 비워 둘 수 없습니다");
         }
         String dateString = item.dateValue();
         Date date = null;
@@ -132,19 +132,19 @@ public class ActionHolidayImport extends BaseAction {
             date = null;
         }
         if (date == null) {
-            throw new ExceptionWithMessage("日期不能为空，格式为 yyyy-MM-dd");
+            throw new ExceptionWithMessage("날짜는 비워 둘 수 없습니다. 형식: yyyy-MM-dd");
         }
         if (item.offDayValue() == null) {
-            throw new ExceptionEmptyParameter("是否放假日");
+            throw new ExceptionEmptyParameter("휴무일 여부");
         }
         dateString = DateTools.format(date, DateTools.format_yyyyMMdd);
         if (!dateSet.add(dateString)) {
-            throw new ExceptionWithMessage("导入数据中日期重复");
+            throw new ExceptionWithMessage("가져온 데이터에 중복된 날짜가 있습니다");
         }
 
         Integer year = Integer.parseInt(DateTools.format(date, DateTools.format_yyyy));
         if (wi.getYear() != null && !wi.getYear().equals(year)) {
-            throw new ExceptionWithMessage("日期年份与导入年份不一致");
+            throw new ExceptionWithMessage("날짜의 연도가 가져오기 연도와 일치하지 않습니다");
         }
 
         AttendanceV2Holiday holiday = new AttendanceV2Holiday();
@@ -160,19 +160,19 @@ public class ActionHolidayImport extends BaseAction {
 
         private static final long serialVersionUID = 1676427194467963748L;
 
-        @FieldDescribe("年份")
+        @FieldDescribe("연도")
         private Integer year;
 
-        @FieldDescribe("是否覆盖已存在日期的数据，默认 false")
+        @FieldDescribe("기존 날짜 데이터 덮어쓰기 여부, 기본 false")
         private Boolean overwrite;
 
-        @FieldDescribe("节假日数据数组，兼容 date/isOffDay 或 dateString/offDay 字段")
+        @FieldDescribe("공휴일 데이터 배열, date/isOffDay 또는 dateString/offDay 필드 호환")
         private List<HolidayItem> days;
 
-        @FieldDescribe("节假日数据数组，兼容 date/isOffDay 或 dateString/offDay 字段")
+        @FieldDescribe("공휴일 데이터 배열, date/isOffDay 또는 dateString/offDay 필드 호환")
         private List<HolidayItem> holidayList;
 
-        @FieldDescribe("节假日数据数组，兼容 date/isOffDay 或 dateString/offDay 字段")
+        @FieldDescribe("공휴일 데이터 배열, date/isOffDay 또는 dateString/offDay 필드 호환")
         private List<HolidayItem> holidays;
 
         public Integer getYear() {
@@ -279,13 +279,13 @@ public class ActionHolidayImport extends BaseAction {
 
         private static final long serialVersionUID = 5517026127348862685L;
 
-        @FieldDescribe("导入数据序号，从 1 开始")
+        @FieldDescribe("가져오기 데이터 순번, 1부터 시작")
         private Integer index;
 
-        @FieldDescribe("日期")
+        @FieldDescribe("날짜")
         private String dateString;
 
-        @FieldDescribe("错误信息")
+        @FieldDescribe("오류 정보")
         private String message;
 
         public Integer getIndex() {
@@ -317,22 +317,22 @@ public class ActionHolidayImport extends BaseAction {
 
         private static final long serialVersionUID = 7548481497673133785L;
 
-        @FieldDescribe("导入总数")
+        @FieldDescribe("가져오기 총수")
         private int total;
 
-        @FieldDescribe("新增数量")
+        @FieldDescribe("신규 수량")
         private int inserted;
 
-        @FieldDescribe("更新数量")
+        @FieldDescribe("수정 수량")
         private int updated;
 
-        @FieldDescribe("跳过数量")
+        @FieldDescribe("건너뜀 수량")
         private int skipped;
 
-        @FieldDescribe("错误数量")
+        @FieldDescribe("오류 수량")
         private int errors;
 
-        @FieldDescribe("错误明细")
+        @FieldDescribe("오류 상세")
         private List<ImportError> errorItems;
 
         public int getTotal() {

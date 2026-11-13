@@ -28,18 +28,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("collect")
-@JaxrsDescribe("云服务器")
+@JaxrsDescribe("클라우드 서버")
 public class CollectAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(CollectAction.class);
 
-	@JaxrsMethodDescribe(value = "向 collect 服务器转发一个短信验证码申请.", action = ActionCode.class)
+	@JaxrsMethodDescribe(value = "collect 서버에 SMS 인증 코드 요청 전달.", action = ActionCode.class)
 	@GET
 	@Path("code/mobile/{mobile}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void code(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("手机号") @PathParam("mobile") String mobile) {
+			@JaxrsParameterDescribe("휴대폰 번호") @PathParam("mobile") String mobile) {
 		ActionResult<ActionCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -54,7 +54,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "更新Collect配置.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "Collect 설정 업데이트.", action = ActionUpdate.class)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			WrapInCollect wrapIn) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
@@ -71,7 +71,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "获取collect配置", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "collect 설정 조회", action = ActionGet.class)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -88,7 +88,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("connect")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "测试是否可以连接到collect服务器", action = ActionConnect.class)
+	@JaxrsMethodDescribe(value = "collect 서버 연결 가능 여부 테스트", action = ActionConnect.class)
 	public void connect(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionConnect.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -105,7 +105,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("disconnect")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "断开collect服务的连接", action = ActionDisconnect.class)
+	@JaxrsMethodDescribe(value = "collect 서비스 연결 해제", action = ActionDisconnect.class)
 	public void disconnect(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionDisconnect.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -122,7 +122,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("validate")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "测试collect.json中的用户名密码是否正确.", action = ActionValidate.class)
+	@JaxrsMethodDescribe(value = "collect.json의 사용자 이름과 비밀번호가 올바른지 테스트.", action = ActionValidate.class)
 	public void validate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionValidate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -139,7 +139,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("mobile/check/connect")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "生成二维码，移动端测试连接情况.", action = ActionCheckQrCode.class)
+	@JaxrsMethodDescribe(value = "QR 코드 생성, 모바일 연결 상태 테스트.", action = ActionCheckQrCode.class)
 	public void mobileCheckConnect(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionCheckQrCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -156,7 +156,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("validate/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "直接用输入的用户名密码进行验证.", action = ActionValidateDirect.class)
+	@JaxrsMethodDescribe(value = "입력한 사용자 이름과 비밀번호로 직접 검증.", action = ActionValidateDirect.class)
 	public void validateDirect(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			JsonElement jsonElement) {
 		ActionResult<ActionValidateDirect.Wo> result = new ActionResult<>();
@@ -174,7 +174,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("validate/codeanswer")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "验证短信验证码是否正确.", action = ActionValidateCodeAnswer.class)
+	@JaxrsMethodDescribe(value = "SMS 인증 코드가 올바른지 검증.", action = ActionValidateCodeAnswer.class)
 	public void validateCodeAnswer(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			JsonElement jsonElement) {
 		ActionResult<ActionValidateCodeAnswer.Wo> result = new ActionResult<>();
@@ -192,7 +192,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("validate/password")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "验证密码复杂程度.", action = ActionValidatePassword.class)
+	@JaxrsMethodDescribe(value = "비밀번호 복잡도 검증.", action = ActionValidatePassword.class)
 	public void validatePassword(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			JsonElement jsonElement) {
 		ActionResult<ActionValidatePassword.Wo> result = new ActionResult<>();
@@ -210,9 +210,9 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("name/{name}/exist")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "测试用户名是否可用.", action = ActionExist.class)
+	@JaxrsMethodDescribe(value = "사용자 이름 사용 가능 여부 테스트.", action = ActionExist.class)
 	public void exist(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("사용자 이름") @PathParam("name") String name) {
 		ActionResult<ActionExist.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -228,10 +228,10 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("controllermobile/name/{name}/mobile/{mobile}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "测试手机号码是否在管理手机列表中", action = ActionControllerMobile.class)
+	@JaxrsMethodDescribe(value = "휴대폰 번호가 관리 휴대폰 목록에 있는지 테스트", action = ActionControllerMobile.class)
 	public void controllerMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("手机号") @PathParam("mobile") String mobile) {
+			@JaxrsParameterDescribe("사용자 이름") @PathParam("name") String name,
+			@JaxrsParameterDescribe("휴대폰 번호") @PathParam("mobile") String mobile) {
 		ActionResult<ActionControllerMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -247,7 +247,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("controllebbs")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "获取bbs地址", action = ActionGetBbs.class)
+	@JaxrsMethodDescribe(value = "bbs 주소 조회", action = ActionGetBbs.class)
 	public void bbs(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request) {
 		ActionResult<ActionGetBbs.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -263,7 +263,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "在collect服务器上注册一个新的unit.", action = ActionRegist.class)
+	@JaxrsMethodDescribe(value = "collect 서버에 새 unit 등록.", action = ActionRegist.class)
 	public void regist(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			JsonElement jsonElement) {
 		ActionResult<ActionRegist.Wo> result = new ActionResult<>();
@@ -281,7 +281,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("resetpassword")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "重置在collect服务器上的的密码.", action = ActionResetPassword.class)
+	@JaxrsMethodDescribe(value = "collect 서버의 비밀번호 재설정.", action = ActionResetPassword.class)
 	public void resetPassword(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			JsonElement jsonElement) {
 		ActionResult<ActionResetPassword.Wo> result = new ActionResult<>();
@@ -295,7 +295,7 @@ public class CollectAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "向collect服务器发送人员手机信息.", action = ActionPerson.class)
+	@JaxrsMethodDescribe(value = "collect 서버에 사용자 휴대폰 정보 전송.", action = ActionPerson.class)
 	@GET
 	@Path("person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -316,11 +316,11 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("name/{name}/mobile/{mobile}/code/{code}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "删除collect上的unit.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "collect의 unit 삭제.", action = ActionDelete.class)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("手机号") @PathParam("mobile") String mobile,
-			@JaxrsParameterDescribe("短信认证码") @PathParam("code") String code) {
+			@JaxrsParameterDescribe("조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("휴대폰 번호") @PathParam("mobile") String mobile,
+			@JaxrsParameterDescribe("SMS 인증 코드") @PathParam("code") String code) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -336,7 +336,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("updateUnit")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "更新在collect服务器上的unit.", action = ActionUpdateUnit.class)
+	@JaxrsMethodDescribe(value = "collect 서버의 unit 업데이트.", action = ActionUpdateUnit.class)
 	public void updateUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			JsonElement jsonElement) {
 		ActionResult<ActionUpdateUnit.Wo> result = new ActionResult<>();
@@ -354,7 +354,7 @@ public class CollectAction extends StandardJaxrsAction {
 	@Path("login")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@JaxrsMethodDescribe(value = "登录collect服务", action = ActionLogin.class)
+	@JaxrsMethodDescribe(value = "collect 서비스 로그인", action = ActionLogin.class)
 	public void login(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 		ActionResult<ActionLogin.Wo> result = new ActionResult<>();
@@ -368,7 +368,7 @@ public class CollectAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "从collect 服务器同步area信息.", action = ActionSyncArea.class)
+	@JaxrsMethodDescribe(value = "collect 서버에서 area 정보 동기화.", action = ActionSyncArea.class)
 	@GET
 	@Path("sync/area")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -385,7 +385,7 @@ public class CollectAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新urlMapping.", action = ActionUpdateUnitUrlMapping.class)
+	@JaxrsMethodDescribe(value = "urlMapping 업데이트.", action = ActionUpdateUnitUrlMapping.class)
 	@PUT
 	@Path("urlMapping")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

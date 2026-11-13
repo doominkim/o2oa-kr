@@ -12,14 +12,14 @@ MWF.xApplication.Homepage.FileContent  = new Class({
                 this.fireEvent("load");
             }.bind(this));
 
-            // //是否需要定时自动刷新 @todo
+            // //정기 자동 새로고침 필요 여부 @todo
             // this.startProcessAction.addEvent("click", this.startProcess.bind(this));
 
             //this.moreInforAction.addEvent("click", this.moreInfor.bind(this));
         }.bind(this));
     },
     openFile: function(e){
-        //应用市场中的云文件，门户id为95135369-ab35-47ba-a9ce-845f26ff9efb
+        //앱 마켓의 클라우드 파일, 포털 id는 95135369-ab35-47ba-a9ce-845f26ff9efb
         o2.Actions.load("x_portal_assemble_surface").PortalAction.get("95135369-ab35-47ba-a9ce-845f26ff9efb", function () {
             layout.openApplication(e, "portal.Portal", {
                 portalId : "95135369-ab35-47ba-a9ce-845f26ff9efb"

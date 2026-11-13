@@ -8,6 +8,6 @@ class ExceptionConversationQuitError extends PromptException {
 	private static final long serialVersionUID = 8192689860325401533L;
 
 	ExceptionConversationQuitError(String msg) {
-		super("错误：{}", msg);
+		super("오류: {}", msg);
 	}
 }

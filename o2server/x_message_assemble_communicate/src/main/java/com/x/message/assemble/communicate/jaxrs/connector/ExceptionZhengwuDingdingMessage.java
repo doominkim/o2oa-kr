@@ -7,6 +7,6 @@ class ExceptionZhengwuDingdingMessage extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionZhengwuDingdingMessage(Integer retCode, String retMessage) {
-		super("发送政务钉钉消息失败,错误代码:{},错误消息:{}.", retCode, retMessage);
+		super("정부용 DingTalk 메시지 전송에 실패했습니다. 오류 코드: {}, 오류 메시지: {}.", retCode, retMessage);
 	}
 }

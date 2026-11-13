@@ -49,7 +49,7 @@ public class ActionDeployServerRes extends BaseAction {
 			throw new ExceptionDeployDisable();
 		}
 		String fileName = this.fileName(disposition);
-		LOGGER.info("{}操作部署应用:{}.", effectivePerson::getDistinguishedName, () -> fileName);
+		LOGGER.info("{} 앱 배포 작업:{}.", effectivePerson::getDistinguishedName, () -> fileName);
 		String ext = FilenameUtils.getExtension(fileName);
 		String ctl = this.getFileCtl(fileName, ext);
 		if(!StringTools.isFileName(fileName) || StringUtils.isBlank(ext) || !set.contains(ext) || StringUtils.isEmpty(ctl)){

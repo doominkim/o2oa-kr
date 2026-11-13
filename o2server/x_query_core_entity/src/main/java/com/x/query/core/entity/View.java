@@ -33,7 +33,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "View", description = "数据中心视图.")
+@Schema(name = "View", description = "데이터 센터 뷰.")
 @Entity
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.View.table, uniqueConstraints = {
@@ -61,13 +61,13 @@ public class View extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	@CheckRemove(citationNotExists = @CitationNotExist(type = Stat.class, fields = Stat.view_FIELDNAME))
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -98,58 +98,58 @@ public class View extends SliceJpaObject {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* Entity 默认字段结束 */
+	/* Entity 기본 필드 끝 */
 
-	/* 为了和前台对应 */
+	/* 프런트와 대응하기 위함 */
 	public static final String TYPE_PROCESSPLATFORM = "process";
 
 	public static final String TYPE_CMS = "cms";
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false, citationNotExists =
-	/* 验证不可重名 */
+	/* 이름 중복 검증 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = View.class, equals = @Equal(field = "query", property = "query")))
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false, citationNotExists =
-	/* 验证不可重名 */
+	/* 이름 중복 검증 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = View.class, equals = @Equal(field = "query", property = "query")))
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String query_FIELDNAME = "query";
-	@FieldDescribe("所属查询.")
+	@FieldDescribe("소속 쿼리.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + query_FIELDNAME)
 	@Index(name = TABLE + ColumnNamePrefix + query_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Query.class) })
 	private String query;
 
 	public static final String enableCache_FIELDNAME = "enableCache";
-	@FieldDescribe("是否对结果进行缓存.")
+	@FieldDescribe("결과 캐시 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + enableCache_FIELDNAME)
 	private Boolean enableCache;
 
 	public static final String layout_FIELDNAME = "layout";
-	@FieldDescribe("显示布局.")
+	@FieldDescribe("표시 레이아웃.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + layout_FIELDNAME)
@@ -157,7 +157,7 @@ public class View extends SliceJpaObject {
 	private String layout;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("访问方案.")
+	@FieldDescribe("접근 방안.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
@@ -165,7 +165,7 @@ public class View extends SliceJpaObject {
 	private String data;
 
 	public static final String afterGridScriptText_FIELDNAME = "afterGridScriptText";
-	@FieldDescribe("gird生成后运行脚本.")
+	@FieldDescribe("gird 생성 후 실행 스크립트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterGridScriptText_FIELDNAME)
@@ -173,7 +173,7 @@ public class View extends SliceJpaObject {
 	private String afterGridScriptText;
 
 	public static final String afterGroupGridScriptText_FIELDNAME = "afterGroupGridScriptText";
-	@FieldDescribe("gropuGird生成后运行脚本.")
+	@FieldDescribe("gropuGird 생성 후 실행 스크립트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterGroupGridScriptText_FIELDNAME)
@@ -181,7 +181,7 @@ public class View extends SliceJpaObject {
 	private String afterGroupGridScriptText;
 
 	public static final String afterCalculateGridScriptText_FIELDNAME = "afterCalculateGridScriptText";
-	@FieldDescribe("calculateGrid生成后运行脚本.")
+	@FieldDescribe("calculateGrid 생성 후 실행 스크립트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterCalculateGridScriptText_FIELDNAME)
@@ -189,7 +189,7 @@ public class View extends SliceJpaObject {
 	private String afterCalculateGridScriptText;
 
 	public static final String code_FIELDNAME = "code";
-	@FieldDescribe("前台运行脚本.")
+	@FieldDescribe("프런트 실행 스크립트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + code_FIELDNAME)
@@ -197,24 +197,24 @@ public class View extends SliceJpaObject {
 	private String code;
 
 	public static final String display_FIELDNAME = "display";
-	@FieldDescribe("是否前端可见.")
+	@FieldDescribe("프런트 표시 여부.")
 	@Column(name = ColumnNamePrefix + display_FIELDNAME)
 	private Boolean display;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("类型.")
+	@FieldDescribe("유형.")
 	@Column(length = length_32B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false)
 	private String type;
 
 	public static final String cacheAccess_FIELDNAME = "cacheAccess";
-	@FieldDescribe("是否缓存访问内容.")
+	@FieldDescribe("접근 내용 캐시 여부.")
 	@Column(name = ColumnNamePrefix + cacheAccess_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean cacheAccess;
 
 	public static final String availableIdentityList_FIELDNAME = "availableIdentityList";
-	@FieldDescribe("允许使用的用户.")
+	@FieldDescribe("사용 허용 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -226,7 +226,7 @@ public class View extends SliceJpaObject {
 	private List<String> availableIdentityList;
 
 	public static final String availableUnitList_FIELDNAME = "availableUnitList";
-	@FieldDescribe("允许使用的组织.")
+	@FieldDescribe("사용 허용 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -238,7 +238,7 @@ public class View extends SliceJpaObject {
 	private List<String> availableUnitList;
 
 	public static final String availableGroupList_FIELDNAME = "availableGroupList";
-	@FieldDescribe("允许使用的群组.")
+	@FieldDescribe("사용 허용 그룹.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -250,19 +250,19 @@ public class View extends SliceJpaObject {
 	private List<String> availableGroupList;
 
 	public static final String count_FIELDNAME = "count";
-	@FieldDescribe("最大返回数量.")
+	@FieldDescribe("최대 반환 개수.")
 	@Column(name = ColumnNamePrefix + count_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer count;
 
 	public static final String pageSize_FIELDNAME = "pageSize";
-	@FieldDescribe("分页单页数量.")
+	@FieldDescribe("페이지당 개수.")
 	@Column(name = ColumnNamePrefix + pageSize_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer pageSize;
 
 	public static final String toolbar_FIELDNAME = "toolbar";
-	@FieldDescribe("工具条.")
+	@FieldDescribe("툴바.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + toolbar_FIELDNAME)
@@ -270,7 +270,7 @@ public class View extends SliceJpaObject {
 	private String toolbar;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,为空在最后")
+	@FieldDescribe("정렬 번호, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;

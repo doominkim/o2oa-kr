@@ -22,7 +22,7 @@ import com.x.organization.core.entity.Unit_;
 
 abstract class BaseAction extends StandardJaxrsAction {
 
-	/** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+	/** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
 	protected boolean duplicateUniqueWhenNotEmpty(Business business, Unit unit) throws Exception {
 		if (StringUtils.isNotEmpty(unit.getUnique())) {
 			if (business.entityManagerContainer().duplicateWithFlags(unit.getId(), Unit.class, unit.getUnique())) {
@@ -32,7 +32,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		return false;
 	}
 
-	/** 同一上级unit下没有重名的 */
+	/** 같은 상위 unit 아래에 중복 이름 없음 */
 	protected boolean duplicateName(Business business, Unit unit) throws Exception {
 		EntityManager em = business.entityManagerContainer().get(Unit.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -80,7 +80,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -3622801980504937581L;
 
-		@FieldDescribe("当前用户是否可以操作组织")
+		@FieldDescribe("현재 사용자의 조직 작업 가능 여부")
 		private Control control = new Control();
 
 		public Control getControl() {

@@ -7,6 +7,6 @@ class ExceptionFieldEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionFieldEmpty() {
-		super("空内容.");
+		super("내용이 비어 있습니다.");
 	}
 }

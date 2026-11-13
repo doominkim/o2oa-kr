@@ -21,7 +21,7 @@ import com.x.query.core.express.statement.Executor;
 import com.x.query.core.express.statement.Runtime;
 
 /**
- * DATA,COUNT分别执行
+ * DATA, COUNT 각각 실행
  * <p>
  * sql: select xid, xjob FROM PP_C_TASK WHERE xtitle =?1 and xperson=:person and
  * xcreateTime > ?2

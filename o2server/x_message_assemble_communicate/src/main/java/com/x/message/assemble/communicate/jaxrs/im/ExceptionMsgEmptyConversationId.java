@@ -7,6 +7,6 @@ class ExceptionMsgEmptyConversationId extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionMsgEmptyConversationId() {
-		super("会话ID不能为空.");
+		super("대화 ID는 비워 둘 수 없습니다.");
 	}
 }

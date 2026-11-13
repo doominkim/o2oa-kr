@@ -13,7 +13,7 @@ import com.x.bbs.assemble.control.service.BBSUserInfoService;
 import com.x.bbs.entity.BBSUserInfo;
 
 /**
- * 定时代理，对所有用户的今日回复、今日主题 设置为0。
+ * 정기 에이전트, 모든 사용자의 오늘 답글·오늘 주제를 0으로 설정.
  * 
  * @author LIYI
  *
@@ -32,11 +32,11 @@ public class UserCountTodaySetZeroTask extends AbstractJob {
 	}
 
 	/**
-	 * 执行定时代理的业务逻辑
+	 * 정기 에이전트 업무 로직 실행
 	 */
 	private void process() {
 		List<String> operationUserNames = null;
-		// 1、在BBS_OPERATIONRECORD表里查询参与BBS系统的所有人员姓名列表
+		// 1. BBS_OPERATIONRECORD 테이블에서 BBS 시스템 참여 사용자 이름 목록 조회
 		try {
 			operationUserNames = operationRecordService.distinctAllOperationUserNames();
 		} catch (Exception e) {
@@ -44,7 +44,7 @@ public class UserCountTodaySetZeroTask extends AbstractJob {
 			logger.error(e);
 		}
 		if ( ListTools.isNotEmpty( operationUserNames )) {
-			// 2、遍历所有的人员，分别进行统计
+			// 2. 모든 사용자를 순회하며 각각 통계
 			operationUserNames.forEach(u -> {
 				userCountTodaySetZero(u);
 			});
@@ -55,7 +55,7 @@ public class UserCountTodaySetZeroTask extends AbstractJob {
 		if (userName == null || userName.isEmpty()) {
 			return;
 		}
-		//个人回复数增加1
+		//개인 답글 수 1 증가
 		BBSUserInfo userInfo;
 		try {
 			userInfo = userInfoService.getByUserName(userName);

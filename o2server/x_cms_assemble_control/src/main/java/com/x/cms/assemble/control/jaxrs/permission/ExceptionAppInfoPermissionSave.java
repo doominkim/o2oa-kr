@@ -7,6 +7,6 @@ class ExceptionAppInfoPermissionSave extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionAppInfoPermissionSave( Throwable e, String id ) {
-		super( "保存栏目权限时发生异常。ID:{}" ,id, e );
+		super( "게시판 권한을 저장하는 중 오류가 발생했습니다. ID: {}" ,id, e );
 	}
 }

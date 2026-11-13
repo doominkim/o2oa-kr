@@ -7,7 +7,7 @@ class ExceptionOldPasswordNotMatch extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionOldPasswordNotMatch() {
-		super("原密码错误.");
+		super("기존 비밀번호가 올바르지 않습니다.");
 	}
 
 }

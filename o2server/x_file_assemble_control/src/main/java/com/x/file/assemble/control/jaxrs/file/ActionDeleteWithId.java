@@ -32,11 +32,11 @@ class ActionDeleteWithId extends BaseAction {
 
 			file.deleteContent(mapping);
 
-			//启动事务
+			//트랜잭션 시작
 			emc.beginTransaction( File.class );
-			//删除对象
+			//객체 삭제
 			emc.remove( file, CheckRemoveType.all );
-			//提交事务
+			//트랜잭션 커밋
 			emc.commit();
 			result.setData( new Wo( id ));
 

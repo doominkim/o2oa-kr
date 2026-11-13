@@ -31,12 +31,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("templateform")
-@JaxrsDescribe("表单模版")
+@JaxrsDescribe("양식 템플릿")
 public class TemplateFormAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(TemplateFormAction.class);
 
-	@JaxrsMethodDescribe(value = "列示所有分类名称以及分类数量.", action = ActionListCategory.class)
+	@JaxrsMethodDescribe(value = "모든 분류 이름과 분류별 수량 목록 조회.", action = ActionListCategory.class)
 	@GET
 	@Path("list/category")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -53,7 +53,7 @@ public class TemplateFormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有模版表单.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 템플릿 양식 목록.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -70,7 +70,7 @@ public class TemplateFormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "按分类名称列示模版表单.", action = ActionListWithCategory.class)
+	@JaxrsMethodDescribe(value = "분류 이름별 템플릿 양식 목록 조회.", action = ActionListWithCategory.class)
 	@PUT
 	@Path("list/category")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -88,13 +88,13 @@ public class TemplateFormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取模版表单内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "템플릿 양식 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,7 +106,7 @@ public class TemplateFormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建模版表单或者更新模版表单.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "템플릿 양식 생성 또는 갱신.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -123,13 +123,13 @@ public class TemplateFormAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除模版表单.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "템플릿 양식 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

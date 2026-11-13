@@ -7,6 +7,6 @@ class ExceptionFolderNotExist extends PromptException {
 	private static final long serialVersionUID = 7750207007061165350L;
 
 	ExceptionFolderNotExist(String id) {
-		super("分享的目录: {} 不存在.", id);
+		super("공유한 폴더: {}이(가) 없습니다.", id);
 	}
 }

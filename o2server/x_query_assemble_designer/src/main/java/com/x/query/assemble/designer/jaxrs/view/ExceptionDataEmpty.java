@@ -7,6 +7,6 @@ class ExceptionDataEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionDataEmpty() {
-		super("访问计划为空.");
+		super("접근 계획이 비어 있습니다.");
 	}
 }

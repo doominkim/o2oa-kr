@@ -7,6 +7,6 @@ class ExceptionNotCustomMessage extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionNotCustomMessage(String type) {
-		super("无法接收非定制内容:{}.", type);
+		super("사용자 정의가 아닌 내용은 받을 수 없습니다: {}.", type);
 	}
 }

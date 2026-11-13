@@ -12,7 +12,7 @@ class ExceptionNewCount extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionNewCount(String msg) {
-		super("获取新邮件数量失败:{}.", msg);
+		super("새 메일 수를 가져오지 못했습니다: {}.", msg);
 	}
 
 }

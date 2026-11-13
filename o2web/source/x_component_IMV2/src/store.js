@@ -6,7 +6,7 @@ import {uuid} from "@o2oa/util";
 
 export const windowState = defineStore('windowState', {
     state: () => ({
-        windowWidth: window.innerWidth, // 窗口宽度
+        windowWidth: window.innerWidth, // 창 너비
         isMobile: false
     }),
     actions: {
@@ -88,7 +88,7 @@ export const uploadFileList = defineStore('uploadFileList', {
             formData.append('file', file);
             formData.append('fileName', file.name);
             const fileExt = file.name.substring(file.name.lastIndexOf('.'));
-            // 图片消息
+            // 이미지 메시지
             let type;
             if (fileExt.toLowerCase() === '.webp' && canUseWebP()) {
                 type = 'image';
@@ -100,7 +100,7 @@ export const uploadFileList = defineStore('uploadFileList', {
             ) {
                 type = 'image';
             } else {
-                // 文件消息
+                // 파일 메시지
                 type = 'file';
             }
             const fileId = `${uuid()}`
@@ -111,15 +111,15 @@ export const uploadFileList = defineStore('uploadFileList', {
             })
             // this.mockProgress(fileId)
 
-            //上传文件
+            //파일 업로드
             const res = await imUploadFile(conversationId, type, formData, file, (progress)=> {
-                // 更新进度条
+                // 진행 막대 업데이트
                 const data = this.uploadFileList.find((m) => m.id === fileId);
                 if (data) {
                     data.progress = progress
                 }
             });
-            // 删除进度条
+            // 진행 막대 삭제
             const i = this.uploadFileList.findIndex((m) => m.id === fileId);
             if (i > -1) {
                 this.uploadFileList.splice(i, 1);

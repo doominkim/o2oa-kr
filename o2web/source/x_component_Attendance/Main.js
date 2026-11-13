@@ -85,8 +85,8 @@ MWF.xApplication.Attendance.Main = new Class({
 	},
 	loadEnableType: function (callback) {
 		var action = o2.Actions.load("x_attendance_assemble_control");
-		action.AttendanceSettingAction.enableType(//平台封装好的方法
-			function (json) { //服务调用成功的回调函数, json为服务传回的数据
+		action.AttendanceSettingAction.enableType(//플랫폼이 제공하는 메서드
+			function (json) { //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
 				if (json.data && json.data.value) {
 					debugger;
 					this.enableType = json.data.value;
@@ -421,10 +421,10 @@ MWF.xApplication.Attendance.Navi = new Class({
 					if (this.app.isAdmin()) this.createNaviNode(navi);
 				} else if (navi.access && navi.access == "admin_dept") {
 					if (this.app.isUnitManager() || this.app.isAdmin()) this.createNaviNode(navi);
-				} else if (navi.access && navi.access == "dingding") { //启用钉钉考勤同步后
+				} else if (navi.access && navi.access == "dingding") { //DingTalk 근태 동기화 사용 후
 					debugger;
 					if ((this.app.isUnitManager() || this.app.isAdmin()) && (this.app.enableType == "dingding")) this.createNaviNode(navi);
-				} else if (navi.access && navi.access == "qywx") { // 启用企业微信考勤同步后
+				} else if (navi.access && navi.access == "qywx") { // WeCom 근태 동기화 사용 후
 					debugger;
 					if ((this.app.isUnitManager() || this.app.isAdmin()) && (this.app.enableType == "qywx")) this.createNaviNode(navi);
 				} else {

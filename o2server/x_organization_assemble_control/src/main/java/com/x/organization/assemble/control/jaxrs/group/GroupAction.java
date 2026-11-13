@@ -29,18 +29,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("group")
-@JaxrsDescribe("群组操作")
+@JaxrsDescribe("그룹 조작")
 public class GroupAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(GroupAction.class);
 
-	@JaxrsMethodDescribe(value = "获取群组.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "그룹 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -52,7 +52,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建群组.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "그룹 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -69,13 +69,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新群组.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "그룹 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,13 +87,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新群组mockputtopost.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "그룹 수정 mockputtopost.", action = ActionEdit.class)
 	@POST
 	@Path("{flag}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void editMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+					 @JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -105,13 +105,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除群组.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "그룹 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -123,13 +123,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除群组mockdeletetoget.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "그룹 삭제 mockdeletetoget.", action = ActionDelete.class)
 	@GET
 	@Path("{flag}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag) {
+					   @JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -141,14 +141,14 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示群组,下一页.", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "그룹 목록, 다음 페이지.", action = ActionListNext.class)
 	@GET
 	@Path("list/{flag}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -160,14 +160,14 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示群组,上一页.", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "그룹 목록, 이전 페이지.", action = ActionListPrev.class)
 	@GET
 	@Path("list/{flag}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -179,13 +179,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查找群组的直接上级群组.", action = ActionListSupDirect.class)
+	@JaxrsMethodDescribe(value = "그룹의 직접 상위 그룹 조회.", action = ActionListSupDirect.class)
 	@GET
 	@Path("list/{flag}/sup/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSupDirect(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag) {
 		ActionResult<List<ActionListSupDirect.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -197,13 +197,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查找群组的嵌套上级群组", action = ActionListSupNested.class)
+	@JaxrsMethodDescribe(value = "그룹의 중첩 상위 그룹 조회", action = ActionListSupNested.class)
 	@GET
 	@Path("list/{flag}/sup/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSupNested(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag) {
 		ActionResult<List<ActionListSupNested.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -215,14 +215,14 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查找人员直接作为成员所在的群组.", action = ActionListSupDirectWithPerson.class)
+	@JaxrsMethodDescribe(value = "사용자가 직접 멤버로 속한 그룹 조회.", action = ActionListSupDirectWithPerson.class)
 	@GET
 	@Path("list/person/{personFlag}/sup/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSupDirectWithPerson(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("个人标识") @PathParam("personFlag") String personFlag) {
+			@JaxrsParameterDescribe("개인 식별자") @PathParam("personFlag") String personFlag) {
 		ActionResult<List<ActionListSupDirectWithPerson.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -234,14 +234,14 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查找人员所在的群组,包括嵌套的下级群组.", action = ActionListSupNestedWithPerson.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 그룹 조회, 중첩 하위 그룹 포함.", action = ActionListSupNestedWithPerson.class)
 	@GET
 	@Path("list/person/{personFlag}/sup/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSupNestedWithPerson(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("个人标识") @PathParam("personFlag") String personFlag) {
+			@JaxrsParameterDescribe("개인 식별자") @PathParam("personFlag") String personFlag) {
 		ActionResult<List<ActionListSupNestedWithPerson.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -253,13 +253,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查找群组直接作为成员所在的群组.", action = ActionListSubDirect.class)
+	@JaxrsMethodDescribe(value = "그룹이 직접 멤버로 속한 그룹 조회.", action = ActionListSubDirect.class)
 	@GET
 	@Path("list/{flag}/sub/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSubDirect(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag) {
 		ActionResult<List<ActionListSubDirect.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -271,13 +271,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查找群组所在的群组,包括嵌套的下级群组.", action = ActionListSubNested.class)
+	@JaxrsMethodDescribe(value = "그룹이 속한 그룹 조회, 중첩 하위 그룹 포함.", action = ActionListSubNested.class)
 	@GET
 	@Path("list/{flag}/sub/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSubNested(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag) {
 		ActionResult<List<ActionListSubNested.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -289,13 +289,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查找指定角色所包含的群组.", action = ActionListWithRole.class)
+	@JaxrsMethodDescribe(value = "지정 역할에 포함된 그룹 조회.", action = ActionListWithRole.class)
 	@GET
 	@Path("list/role/{roleFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithRole(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("角色标识") @PathParam("roleFlag") String roleFlag) {
+			@JaxrsParameterDescribe("역할 식별자") @PathParam("roleFlag") String roleFlag) {
 		ActionResult<List<ActionListWithRole.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -307,7 +307,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取拼音首字母开始的群组.", action = ActionListPinyinInitial.class)
+	@JaxrsMethodDescribe(value = "병음 첫 글자로 시작하는 그룹 조회.", action = ActionListPinyinInitial.class)
 	@PUT
 	@Path("list/pinyininitial")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -325,7 +325,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取拼音首字母开始的群组mockputtopost.", action = ActionListPinyinInitial.class)
+	@JaxrsMethodDescribe(value = "병음 첫 글자로 시작하는 그룹 조회 mockputtopost.", action = ActionListPinyinInitial.class)
 	@POST
 	@Path("list/pinyininitial/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -343,7 +343,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据名称进行模糊查询.", action = ActionListLike.class)
+	@JaxrsMethodDescribe(value = "이름으로 부분 일치 검색.", action = ActionListLike.class)
 	@PUT
 	@Path("list/like")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -361,7 +361,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据名称进行模糊查询mockputtopost.", action = ActionListLike.class)
+	@JaxrsMethodDescribe(value = "이름으로 퍼지 검색 mockputtopost.", action = ActionListLike.class)
 	@POST
 	@Path("list/like/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -379,7 +379,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据拼音或者首字母进行模糊查询", action = ActionListLikePinyin.class)
+	@JaxrsMethodDescribe(value = "병음 또는 첫 글자로 퍼지 검색", action = ActionListLikePinyin.class)
 	@PUT
 	@Path("list/like/pinyin")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -397,7 +397,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据拼音或者首字母进行模糊查询mockputtopost", action = ActionListLikePinyin.class)
+	@JaxrsMethodDescribe(value = "병음 또는 첫 글자로 퍼지 검색 mockputtopost", action = ActionListLikePinyin.class)
 	@POST
 	@Path("list/like/pinyin/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -415,13 +415,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "添加群组成员.", action = ActionAddMember.class)
+	@JaxrsMethodDescribe(value = "그룹 멤버 추가.", action = ActionAddMember.class)
 	@PUT
 	@Path("{flag}/add/member")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addMember(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionAddMember.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -433,13 +433,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "添加群组成员mockputtopost.", action = ActionAddMember.class)
+	@JaxrsMethodDescribe(value = "그룹 멤버 추가 mockputtopost.", action = ActionAddMember.class)
 	@POST
 	@Path("{flag}/add/member/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addMemberMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						  @JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+						  @JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionAddMember.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -451,13 +451,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除群组成员.", action = ActionDeleteMember.class)
+	@JaxrsMethodDescribe(value = "그룹 멤버 삭제.", action = ActionDeleteMember.class)
 	@PUT
 	@Path("{flag}/delete/member")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMember(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionDeleteMember.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -469,13 +469,13 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除群组成员mockputtopost.", action = ActionDeleteMember.class)
+	@JaxrsMethodDescribe(value = "그룹 멤버 삭제 mockputtopost.", action = ActionDeleteMember.class)
 	@POST
 	@Path("{flag}/delete/member/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMemberMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							 @JaxrsParameterDescribe("群组标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+							 @JaxrsParameterDescribe("그룹 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionDeleteMember.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -11,7 +11,7 @@ import com.x.base.core.container.EntityManagerContainer;
 import com.x.base.core.container.factory.EntityManagerContainerFactory;
 
 /**
- * 考勤打卡记录分析服务类
+ * 근태 출퇴근 기록 분석 서비스 클래스
  * @author LIYI
  *
  */
@@ -19,8 +19,8 @@ public class AttendanceDetailAnalyseServiceAdv {
 	private AttendanceDetailAnalyseService detailAnalyseService = new AttendanceDetailAnalyseService();
 
 	/**
-	 * 根据员工姓名\开始日期\结束日期查询日期范围内所有的打卡记录信息ID列表<br/>
-	 * 时间从开始日期0点，到结束日期23点59分
+	 * 직원 이름\시작 날짜\종료 날짜로 날짜 범위 안의 모든 출퇴근 기록 정보 ID 목록 조회<br/>
+	 * 시간은 시작 날짜 0시부터 종료 날짜 23시 59분까지
 	 * @param empName
 	 * @param startDate
 	 * @param endDate
@@ -36,7 +36,7 @@ public class AttendanceDetailAnalyseServiceAdv {
 	}
 
 	/**
-	 * 对一组的打卡信息数据进行分析
+	 * 체크 정보 데이터 묶음 분석
 	 * @param detailIds
 	 * @param debugger
 	 * @return
@@ -51,7 +51,7 @@ public class AttendanceDetailAnalyseServiceAdv {
 	}
 
 	/**
-	 * 对一组的打卡信息数据进行分析
+	 * 체크 정보 데이터 묶음 분석
 	 * @param detailList
 	 * @param debugger
 	 * @return
@@ -66,7 +66,7 @@ public class AttendanceDetailAnalyseServiceAdv {
 	}
 
 	/**
-	 * 对一组的打卡信息数据进行分析
+	 * 체크 정보 데이터 묶음 분석
 	 * @param detailList
 	 * @param statisticalCycleMap
 	 * @param debugger
@@ -82,7 +82,7 @@ public class AttendanceDetailAnalyseServiceAdv {
 	}
 
 	/**
-	 * 根据员工姓名，开始日期和结束日期重新分析所有的打卡记录，一般在用户补了休假记录的时候使用，补充了休假记录，需要将休假日期范围内的所有打卡记录重新分析，并且触发相关月份的统计
+	 * 직원 이름, 시작 날짜, 종료 날짜로 모든 출퇴근 기록을 재분석. 보통 사용자가 휴가 기록을 보충했을 때 사용하며, 휴가 날짜 범위 안의 모든 출퇴근 기록을 재분석하고 해당 월 통계를 실행해야 함
 	 * @param empName
 	 * @param startDate
 	 * @param endDate
@@ -99,7 +99,7 @@ public class AttendanceDetailAnalyseServiceAdv {
 	}
 
 	/**
-	 * 对单条的打卡数据进行分析
+	 * 체크 데이터 한 건 분석
 	 * @param detailId
 	 * @param debugger
 	 * @return
@@ -114,7 +114,7 @@ public class AttendanceDetailAnalyseServiceAdv {
 	}
 
 	/**
-	 * 对单条的打卡数据进行分析
+	 * 체크 데이터 한 건 분석
 	 * @param detail
 	 * @param debugger
 	 * @return
@@ -129,7 +129,7 @@ public class AttendanceDetailAnalyseServiceAdv {
 	}
 
 	/**
-	 * 对单条的打卡数据进行详细分析
+	 * 체크 데이터 한 건 상세 분석
 	 * @param detail
 	 * @param workDayConfigList
 	 * @param statisticalCycleMap

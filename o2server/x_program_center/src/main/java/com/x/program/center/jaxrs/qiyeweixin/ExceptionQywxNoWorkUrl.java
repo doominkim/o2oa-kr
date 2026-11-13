@@ -10,6 +10,6 @@ public class ExceptionQywxNoWorkUrl extends LanguagePromptException {
 
 
     ExceptionQywxNoWorkUrl() {
-        super("企业微信没有配置打开工作的URL.");
+        super("WeCom에 문서를 여는 URL이 설정되어 있지 않습니다.");
     }
 }

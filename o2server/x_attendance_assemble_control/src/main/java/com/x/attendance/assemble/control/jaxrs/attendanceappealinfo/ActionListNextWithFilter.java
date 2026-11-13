@@ -52,10 +52,10 @@ public class ActionListNextWithFilter extends BaseAction {
 				EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
 				Business business = new Business(emc);
 
-				// 查询出ID对应的记录的sequence
+				// ID에 해당하는 기록의 sequence 조회
 				Object sequence = null;
 				if (id == null || "(0)".equals(id) || id.isEmpty()) {
-					logger.debug(effectivePerson, ">>>>>>>>>>第一页查询，没有id传入");
+					logger.debug(effectivePerson, ">>>>>>>>>>첫 페이지 조회, 전달된 id 없음");
 				} else {
 					if (!StringUtils.equalsIgnoreCase(id, StandardJaxrsAction.EMPTY_SYMBOL)) {
 						sequence = PropertyUtils.getProperty(emc.find(id, AttendanceAppealInfo.class),  JpaObject.sequence_FIELDNAME);
@@ -63,12 +63,12 @@ public class ActionListNextWithFilter extends BaseAction {
 				}
 
 				isManager = business.isManager(effectivePerson);
-				// 从数据库中查询符合条件的一页数据对象(根据当前审批人查询)
+				// 데이터베이스에서 조건에 맞는 한 페이지 데이터 객체 조회(현재 승인자 기준)
 				detailList = business.getAttendanceAppealInfoFactory().listIdsNextWithFilterWithCurrentProcessor(id, count, sequence,
 						wrapIn,isManager);
-				// 从数据库中查询符合条件的对象总数
+				// 데이터베이스에서 조건에 맞는 객체 총수 조회
 				total = business.getAttendanceAppealInfoFactory().getCountWithFilterWithCurrentProcessor(wrapIn,isManager);
-				// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 				wraps = Wo.copier.copy(detailList);
 
 				if(ListTools.isNotEmpty( wraps )){
@@ -80,7 +80,7 @@ public class ActionListNextWithFilter extends BaseAction {
 						}
 					}
 				}
-				// 对查询的列表进行排序
+				// 조회 목록 정렬
 				result.setCount(total);
 			} catch (Throwable th) {
 				th.printStackTrace();
@@ -98,7 +98,7 @@ public class ActionListNextWithFilter extends BaseAction {
 		public static WrapCopier<AttendanceAppealInfo, Wo> copier = WrapCopierFactory.wo(AttendanceAppealInfo.class,
 				Wo.class, null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe("考勤申诉审核内容")
+		@FieldDescribe("근태 이의 신청 심사 내용")
 		private WoAttendanceAppealAuditInfo appealAuditInfo = null;
 
 		public WoAttendanceAppealAuditInfo getAppealAuditInfo() {

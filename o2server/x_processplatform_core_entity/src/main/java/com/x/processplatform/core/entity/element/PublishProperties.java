@@ -13,10 +13,10 @@ public class PublishProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -4838100653273876451L;
 
-	@FieldDescribe("活动自定义数据")
+	@FieldDescribe("활동 사용자 정의 데이터")
 	private JsonElement customData;
 
-	@FieldDescribe("发布的数据表")
+	@FieldDescribe("게시할 데이터 테이블")
 	private List<PublishTable> publishTableList;
 
 	public JsonElement getCustomData() {

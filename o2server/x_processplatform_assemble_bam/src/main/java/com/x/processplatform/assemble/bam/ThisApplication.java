@@ -23,7 +23,7 @@ public class ThisApplication {
 		try {
 			CacheManager.init(context.clazz().getSimpleName());
 			context().scheduleLocal(PeriodTimer.class, 180, 60 * 30);
-			/* state 运行统计需要读取组织库,如果开始运行的时候组织应用还没启动那么会为空 */
+			/* state 실행 통계는 조직 DB를 읽어야 하므로, 실행 시작 시 조직 앱이 아직 시작되지 않았으면 비어 있음 */
 			context().scheduleLocal(StateTimer.class, 180, 60 * 60 * 1);
 		} catch (Exception e) {
 			e.printStackTrace();

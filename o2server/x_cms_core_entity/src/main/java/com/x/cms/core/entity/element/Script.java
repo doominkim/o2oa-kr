@@ -37,7 +37,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "v", description = "内容管理脚本.")
+@Schema(name = "v", description = "콘텐츠 관리 스크립트.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Script.table, uniqueConstraints = {
@@ -58,7 +58,7 @@ public class Script extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -66,51 +66,51 @@ public class Script extends SliceJpaObject {
 	public void onPersist() throws Exception {
 	}
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@CheckPersist(citationNotExists =
-	/* 检查在同一应用下不能重名 */
+	/* 같은 앱 안에서 이름 중복 불가 확인 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = Script.class, equals = @Equal(property = "appId", field = "appId")))
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ alias_FIELDNAME)
 	@CheckPersist(citationNotExists =
-	/* 检查在同一应用下不能重名 */
+	/* 같은 앱 안에서 이름 중복 불가 확인 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = Script.class, equals = @Equal(property = "appId", field = "appId")))
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String validated_FIELDNAME = "validated";
-	@FieldDescribe("代码格式是否正确.")
+	@FieldDescribe("코드 형식 정상 여부.")
 	@Column(name = ColumnNamePrefix + validated_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean validated;
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("脚本所属栏目.")
+	@FieldDescribe("스크립트 소속 게시판.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + appId_FIELDNAME)
 	@CheckPersist(citationExists = @CitationExist(type = AppInfo.class), allowEmpty = true)
 	private String appId;
 
 	public static final String text_FIELDNAME = "text";
-	@FieldDescribe("脚本内容.")
+	@FieldDescribe("스크립트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + text_FIELDNAME)
@@ -118,7 +118,7 @@ public class Script extends SliceJpaObject {
 	private String text;
 
 	public static final String dependScriptList_FIELDNAME = "dependScriptList";
-	@FieldDescribe("依赖的函数列表.")
+	@FieldDescribe("의존 함수 목록.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -131,21 +131,21 @@ public class Script extends SliceJpaObject {
 	private List<String> dependScriptList;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建者.")
+	@FieldDescribe("작성자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorPerson;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后的编辑者.")
+	@FieldDescribe("마지막 편집자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ lastUpdatePerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String lastUpdatePerson;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后的编辑时间.")
+	@FieldDescribe("마지막 편집 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

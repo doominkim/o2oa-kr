@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobExecutionContext;
 
 /**
- * 定时索引文档到知识库
+ * 문서를 지식 베이스에 정기 인덱싱
  *
  * @author sword
  */
@@ -33,7 +33,7 @@ public class CmsDocumentIndexTask extends AbstractJob {
 	public void schedule(JobExecutionContext jobExecutionContext) {
 		try {
 			AiConfig config = Business.getConfig();
-			LOGGER.info("定时索引文档到知识库-来源于内容管理应用：{}", StringUtils.join(config.getKnowledgeIndexAppList()));
+			LOGGER.info("문서를 지식 베이스에 정기 인덱싱 - 콘텐츠 관리 앱 출처: {}", StringUtils.join(config.getKnowledgeIndexAppList()));
 			List<String> appIdList = config.getKnowledgeIndexAppList().stream().map(o -> StringUtils.substringBefore(o, "|")).collect(
 					Collectors.toList());
 			for (String appId : appIdList) {
@@ -42,7 +42,7 @@ public class CmsDocumentIndexTask extends AbstractJob {
 					ThisApplication.queueDocumentIndex.send(docId);
 				}
 			}
-			LOGGER.info("定时索引文档到问答库-来源于内容管理应用：{}", StringUtils.join(config.getQuestionsIndexAppList()));
+			LOGGER.info("문서를 Q&A 베이스에 정기 인덱싱 - 콘텐츠 관리 앱 출처: {}", StringUtils.join(config.getQuestionsIndexAppList()));
 			appIdList = config.getQuestionsIndexAppList().stream().map(o -> StringUtils.substringBefore(o, "|")).collect(
 					Collectors.toList());
 			for (String appId : appIdList) {

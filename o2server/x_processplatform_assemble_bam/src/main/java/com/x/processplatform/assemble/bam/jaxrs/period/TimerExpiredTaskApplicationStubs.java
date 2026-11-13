@@ -209,7 +209,7 @@ public class TimerExpiredTaskApplicationStubs extends BaseAction {
 
 	private ActivityStubs concreteActivityStubs(Business business, DateRange dateRange, ProcessStub processStub)
 			throws Exception {
-		/* 所有属于processId的activityId总和 */
+		/* processId에 속한 모든 activityId 합계 */
 		Set<String> ids = new HashSet<>();
 		ids.addAll(this.listActivityFromTask(business, dateRange, processStub));
 		ids.addAll(this.listActivityFromTaskCompleted(business, dateRange, processStub));

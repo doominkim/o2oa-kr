@@ -44,15 +44,15 @@ public class EmpowerAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmpowerAction.class);
 	private static final String OPERATIONID_PREFIX = "EmpowerAction::";
 
-	@Operation(summary = "获取用户授权对象.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "사용자 위임 객체 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGet.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "获取用户授权对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "사용자 위임 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -64,17 +64,17 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "管理员列示授权对象,下一页.", operationId = OPERATIONID_PREFIX + "listNext", responses = {
+	@Operation(summary = "관리자 위임 객체 목록, 다음 페이지.", operationId = OPERATIONID_PREFIX + "listNext", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListNext.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "管理员列示授权对象,下一页.", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "관리자 위임 객체 목록, 다음 페이지.", action = ActionListNext.class)
 	@GET
 	@Path("list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -86,17 +86,17 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "管理员列示授权对象,上一页.", operationId = OPERATIONID_PREFIX + "listPrev", responses = {
+	@Operation(summary = "관리자 위임 객체 목록, 이전 페이지.", operationId = OPERATIONID_PREFIX + "listPrev", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListPrev.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "管理员列示授权对象,上一页.", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "관리자 위임 객체 목록, 이전 페이지.", action = ActionListPrev.class)
 	@GET
 	@Path("list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -108,10 +108,10 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取当前人员的授权.", operationId = OPERATIONID_PREFIX + "listWithCurrentPerson", responses = {
+	@Operation(summary = "현재 사용자의 위임 조회.", operationId = OPERATIONID_PREFIX + "listWithCurrentPerson", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithCurrentPerson.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "获取当前人员的授权.", action = ActionListWithCurrentPerson.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 위임 조회.", action = ActionListWithCurrentPerson.class)
 	@GET
 	@Path("list/currentperson")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -129,10 +129,10 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取当前人员生效的授权.", operationId = OPERATIONID_PREFIX + "listWithCurrentPersonEnable", responses = {
+	@Operation(summary = "현재 사용자의 유효한 위임 조회.", operationId = OPERATIONID_PREFIX + "listWithCurrentPersonEnable", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithCurrentPersonEnable.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "获取当前人员生效的授权.", action = ActionListWithCurrentPersonEnable.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 유효한 위임 조회.", action = ActionListWithCurrentPersonEnable.class)
 	@GET
 	@Path("list/currentperson/enable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -150,16 +150,16 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "查询指定人员的授权.", operationId = OPERATIONID_PREFIX + "listWithPerson", responses = {
+	@Operation(summary = "지정 사용자의 위임 조회.", operationId = OPERATIONID_PREFIX + "listWithPerson", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithPerson.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "查询指定人员的授权.", action = ActionListWithPerson.class)
+	@JaxrsMethodDescribe(value = "지정 사용자의 위임 조회.", action = ActionListWithPerson.class)
 	@GET
 	@Path("list/person/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("人员") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("사용자") @PathParam("flag") String flag) {
 		ActionResult<List<ActionListWithPerson.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -171,10 +171,10 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取当前人员的被授权.", operationId = OPERATIONID_PREFIX + "listTo", responses = {
+	@Operation(summary = "현재 사용자가 위임받은 내역 조회.", operationId = OPERATIONID_PREFIX + "listTo", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListTo.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "获取当前人员的被授权.", action = ActionListTo.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 위임받은 내역 조회.", action = ActionListTo.class)
 	@GET
 	@Path("list/to")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -191,10 +191,10 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取当前人员的生效的被授权.", operationId = OPERATIONID_PREFIX + "listToEnable", responses = {
+	@Operation(summary = "현재 사용자가 위임받은 유효한 내역 조회.", operationId = OPERATIONID_PREFIX + "listToEnable", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListToEnable.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "获取当前人员的生效的被授权.", action = ActionListToEnable.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 위임받은 유효한 내역 조회.", action = ActionListToEnable.class)
 	@GET
 	@Path("list/to/enable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -211,10 +211,10 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "创建授权.", operationId = OPERATIONID_PREFIX + "create", responses = { @ApiResponse(content = {
+	@Operation(summary = "위임 생성.", operationId = OPERATIONID_PREFIX + "create", responses = { @ApiResponse(content = {
 			@Content(array = @ArraySchema(schema = @Schema(implementation = ActionCreate.Wo.class))) }) }, requestBody = @RequestBody(content = {
 					@Content(schema = @Schema(implementation = ActionCreate.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "创建授权.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "위임 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -231,11 +231,11 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@Operation(summary = "管理员创建授权.", operationId = OPERATIONID_PREFIX + "managerCreate", responses = {
+	@Operation(summary = "관리자 위임 생성.", operationId = OPERATIONID_PREFIX + "managerCreate", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionManagerCreate.Wo.class))) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionManagerCreate.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "管理员创建授权.", action = ActionManagerCreate.class)
+	@JaxrsMethodDescribe(value = "관리자 위임 생성.", action = ActionManagerCreate.class)
 	@Path("manager")
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -253,17 +253,17 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@Operation(summary = "管理员更新授权.", operationId = OPERATIONID_PREFIX + "managerEdit", responses = {
+	@Operation(summary = "관리자 위임 수정.", operationId = OPERATIONID_PREFIX + "managerEdit", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionManagerEdit.Wo.class))) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionManagerEdit.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "管理员更新授权.", action = ActionManagerEdit.class)
+	@JaxrsMethodDescribe(value = "관리자 위임 수정.", action = ActionManagerEdit.class)
 	@PUT
 	@Path("manager/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerEdit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionManagerEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -275,17 +275,17 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@Operation(summary = "管理员更新授权(Mock put to post).", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "관리자 위임 수정(Mock put to post).", operationId = OPERATIONID_PREFIX
 			+ "managerEditMockPutToPost", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionManagerEdit.Wo.class))) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionManagerEdit.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "管理员更新授权(Mock put to post).", action = ActionManagerEdit.class)
+	@JaxrsMethodDescribe(value = "관리자 위임 수정(Mock put to post).", action = ActionManagerEdit.class)
 	@POST
 	@Path("manager/{id}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerEditMockPutToPost(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("标识") @PathParam("id") String id,
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
 			JsonElement jsonElement) {
 		ActionResult<ActionManagerEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -298,16 +298,16 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@Operation(summary = "更新授权.", operationId = OPERATIONID_PREFIX + "edit", responses = { @ApiResponse(content = {
+	@Operation(summary = "위임 수정.", operationId = OPERATIONID_PREFIX + "edit", responses = { @ApiResponse(content = {
 			@Content(array = @ArraySchema(schema = @Schema(implementation = ActionEdit.Wo.class))) }) }, requestBody = @RequestBody(content = {
 					@Content(schema = @Schema(implementation = ActionEdit.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "更新授权.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "위임 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -319,17 +319,17 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@Operation(summary = "更新授权(Mock put to post).", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "위임 수정(Mock put to post).", operationId = OPERATIONID_PREFIX
 			+ "editMockPutToPost", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionEdit.Wo.class))) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionEdit.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "更新授权(Mock put to post).", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "위임 수정(Mock put to post).", action = ActionEdit.class)
 	@POST
 	@Path("{id}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void editMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -341,17 +341,17 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@Operation(summary = "更新授权(Mock put to post).", operationId = OPERATIONID_PREFIX + "delete", responses = {
+	@Operation(summary = "위임 수정(Mock put to post).", operationId = OPERATIONID_PREFIX + "delete", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionEdit.Wo.class))) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionEdit.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "删除授权", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "위임 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -363,13 +363,13 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除授权 MockDeleteToGet", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "위임 삭제 MockDeleteToGet", action = ActionDelete.class)
 	@GET
 	@Path("{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -381,13 +381,13 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "管理员删除授权", action = ActionManagerDelete.class)
+	@JaxrsMethodDescribe(value = "관리자 위임 삭제", action = ActionManagerDelete.class)
 	@DELETE
 	@Path("manager/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerDelete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionManagerDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -399,13 +399,13 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "管理员删除授权 MockDeleteToGet", action = ActionManagerDelete.class)
+	@JaxrsMethodDescribe(value = "관리자 위임 삭제 MockDeleteToGet", action = ActionManagerDelete.class)
 	@GET
 	@Path("manager/{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerDeleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionManagerDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -417,13 +417,13 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "启用授权", action = ActionEnable.class)
+	@JaxrsMethodDescribe(value = "위임 사용", action = ActionEnable.class)
 	@GET
 	@Path("{id}/enable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void enable(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionEnable.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -435,13 +435,13 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "禁用授权", action = ActionDisable.class)
+	@JaxrsMethodDescribe(value = "위임 사용 안 함", action = ActionDisable.class)
 	@GET
 	@Path("{id}/disable")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void disable(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDisable.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -453,14 +453,14 @@ public class EmpowerAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "管理员根据条件查询授权记录.", action = ActionManagerListPaging.class)
+	@JaxrsMethodDescribe(value = "관리자가 조건으로 위임 기록 조회.", action = ActionManagerListPaging.class)
 	@POST
 	@Path("manager/list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerlistPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionManagerListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

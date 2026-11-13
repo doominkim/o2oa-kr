@@ -22,7 +22,7 @@ o2.widget.Calendar = o2.Calendar = new Class({
 		"beforeCurrent": true,
 		"clearEnable": true,
 
-		"weekBegin": 0, //0表示周日，1表示周一
+		"weekBegin": 0, //0은 일요일, 1은 월요일
 
 		"range": false,
 		"rangeNodes": [],
@@ -30,7 +30,7 @@ o2.widget.Calendar = o2.Calendar = new Class({
 		"target": null,
 
 
-		// "enableDate": function (date) {  //一个function，参数为日期，return true不可选
+		// "enableDate": function (date) {  //function, 인자는 날짜, true를 반환하면 선택 불가
 		// 	return date > new Date();
 		// },
 		// "enableHours": function (date) {
@@ -39,9 +39,9 @@ o2.widget.Calendar = o2.Calendar = new Class({
 		// 	}else{
 		// 		return [[0, 8], [16, 24]];
 		// 	}
-		//}, //一个function, 参数为日期
-		// "enableMinutes": null,  //一个function, 参数为日期，hour
-		// "enableSeconds": null,  //一个function, 参数为日期，hour，minutes
+		//}, //function, 인자는 날짜
+		// "enableMinutes": null,  //function, 인자는 날짜, hour
+		// "enableSeconds": null,  //function, 인자는 날짜, hour, minutes
 	},
 	initialize: function(node, options){
 		Locale.use(o2.dateLocale());
@@ -2265,7 +2265,7 @@ o2.Calendar.antiShake = function (fun, wait, bind){
 
 o2.Calendar.findClosest = function(arr, target) {
 	if (!arr.length) {
-		return null; // 如果数组为空，返回null
+		return null; // 배열이 비어 있으면 null 반환
 	}
 	var closest = arr[0];
 	var minDiff = Math.abs(arr[0] - target);
@@ -2282,9 +2282,9 @@ o2.Calendar.findClosest = function(arr, target) {
 o2.Calendar.MobileSelect = new Class({
 	Implements: [Options, Events],
 	options: {
-		"lineHeight" : 40, //每个item的高度
+		"lineHeight" : 40, //각 item의 높이
 		"items": [],
-		"ratio" : 1, //滑动距离倍率
+		"ratio" : 1, //슬라이드 거리 배율
 		"currentItem" : 0
 	},
 	initialize: function (wheelNode, options) {
@@ -2412,7 +2412,7 @@ o2.Calendar.MobileSelect = new Class({
 
 
 o2.Calendar.RangeArrayUtils = {
-	//补集 range [ start, end ]  rangeList  [ [start1, end1], [ start2, end2 ] ... ]
+	//여집합 range [ start, end ]  rangeList  [ [start1, end1], [ start2, end2 ] ... ]
 	complementary : function( range, rangeList, type, offset ){
 		if( !range )return range;
 		var r = this.getRangeObject( range );
@@ -2458,7 +2458,7 @@ o2.Calendar.RangeArrayUtils = {
 			return array;
 		}
 	},
-	//取区域并集rangeList  [ [start1, end1], [ start2, end2 ] ... ]
+	//영역 합집합 rangeList  [ [start1, end1], [ start2, end2 ] ... ]
 	union : function( ranges, type ){
 		if( !ranges || ranges.length == 0)return ranges; //this.parse(this.getRangeObject( ranges ) ) ;
 		var rangeList = Array.clone( ranges );
@@ -2491,7 +2491,7 @@ o2.Calendar.RangeArrayUtils = {
 
 		return this.parse( newRangeList, type );
 	},
-	//取区域交集rangeList  [ [start1, end1], [ start2, end2 ] ... ]，需要测试
+	//영역 교집합 rangeList  [ [start1, end1], [ start2, end2 ] ... ], 테스트 필요
 	intersection: function( ranges, type ){
 		if( !ranges || ranges.length == 0 )return ranges; //this.parse(this.getRangeObject( ranges ) ) ;
 		if( ranges.length === 1 )return ranges[1];
@@ -2520,7 +2520,7 @@ o2.Calendar.RangeArrayUtils = {
 			return [newRange.start, newRange.end];
 		}
 	},
-	//区域是否相交
+	//영역 교차 여부
 	isIntersection : function( range1, range2 ){
 		var r1 = typeOf( range1 ) === "object" ? range1 : this.getRangeObject( range1 );
 		var r2 = typeOf( range2 ) === "object" ? range2 : this.getRangeObject( range2 );

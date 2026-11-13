@@ -22,7 +22,7 @@ import com.x.base.core.project.http.HttpToken;
 import com.x.base.core.project.http.TokenType;
 
 /**
- * 必须由前台已经登陆的用户访问
+ * 프런트에서 이미 로그인한 사용자만 접근 가능
  */
 public abstract class UserJaxrsFilter extends TokenFilter {
 
@@ -37,7 +37,7 @@ public abstract class UserJaxrsFilter extends TokenFilter {
 				HttpToken httpToken = new HttpToken();
 				EffectivePerson effectivePerson = httpToken.who(request, response, Config.token().getCipher());
 				if (TokenType.anonymous.equals(effectivePerson.getTokenType())) {
-					/** 401 Unauthorized 未登录访问被拒绝 */
+					/** 401 Unauthorized 미로그인 접근 거부 */
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 					response.setHeader("Content-Type", "application/json;charset=UTF-8");
 					ActionResult result = new ActionResult();
@@ -49,7 +49,7 @@ public abstract class UserJaxrsFilter extends TokenFilter {
 					}
 					response.getWriter().write(result.toJson());
 				} if (!TokenType.user.equals(effectivePerson.getTokenType())) {
-					/** 需要自己标志500 */
+					/** 500 표시를 직접 해야 함 */
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 					response.setHeader("Content-Type", "application/json;charset=UTF-8");
 					ActionResult result = new ActionResult();

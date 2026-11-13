@@ -38,7 +38,7 @@ public class ActionDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCommentQuery(e, "根据指定flag查询评论信息对象时发生异常。flag:" + flag);
+				Exception exception = new ExceptionCommentQuery(e, "지정한 flag로 댓글 정보 객체를 조회하는 중 오류가 발생했습니다. flag:" + flag);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -47,7 +47,7 @@ public class ActionDelete extends BaseAction {
 		if (check) {
 			try {
 				documentCommentInfoPersistService.delete(flag, effectivePerson );				
-				// 更新缓存
+				// 캐시 갱신
 				CacheManager.notify( Document.class );
 				CacheManager.notify( DocumentCommentInfo.class );
 				
@@ -56,7 +56,7 @@ public class ActionDelete extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCommentPersist(e, "根据指定flag删除评论信息对象时发生异常。flag:" + flag);
+				Exception exception = new ExceptionCommentPersist(e, "지정한 flag로 댓글 정보 객체를 삭제하는 중 오류가 발생했습니다. flag:" + flag);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

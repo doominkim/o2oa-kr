@@ -122,7 +122,7 @@ class ActionCreateWithJob extends BaseAction {
 
 		private static final long serialVersionUID = 8167538341492974963L;
 
-		@FieldDescribe("关联目标.")
+		@FieldDescribe("연결 대상.")
 		private List<TargetWi> targetList;
 
 		public List<TargetWi> getTargetList() {

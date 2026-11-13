@@ -7,6 +7,6 @@ class ExceptionErrorName extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionErrorName(String name) {
-		super("{} 名称错误.", name);
+		super("{} 이름이 잘못되었습니다.", name);
 	}
 }

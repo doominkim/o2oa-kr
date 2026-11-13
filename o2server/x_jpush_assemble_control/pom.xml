@@ -25,7 +25,7 @@
 			<groupId>net.o2oa</groupId>
 			<artifactId>x_jpush_core_entity</artifactId>
 		</dependency>
-		<!--极光推送 sdk-->
+		<!--JPush 푸시 sdk-->
 		<dependency>
 			<groupId>io.github.jpush</groupId>
 			<artifactId>jiguang-sdk</artifactId>

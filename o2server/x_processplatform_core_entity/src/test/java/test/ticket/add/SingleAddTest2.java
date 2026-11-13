@@ -17,7 +17,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SingleAddTest2 {
 
-	@DisplayName("single3层加签中含办理.")
+	@DisplayName("single 3단계 추가 결재 중 처리 포함.")
 	@Test
 	@Order(1)
 	void test01() {

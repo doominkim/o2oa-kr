@@ -33,10 +33,10 @@
     "width" : "9%"
   },
   //  {
-  //    "title": "考勤状态",
+  //    "title": "근태 상태",
   //    "headStyles": "normalThNode",
   //    "contentStyles": "normalTdNode",
-  //    "item": "function( d ){  var status=''; if(d.isGetSelfHolidays){ status = '请假' }else if(d.isAbsent){ status = '缺勤' }else if(d.isLate){ status = '迟到' }else if(d.isLeaveEarlier){ status = '早退' }else{ status = '正常' }; return status; }",
+  //    "item": "function( d ){  var status=''; if(d.isGetSelfHolidays){ status = '휴가' }else if(d.isAbsent){ status = '결근' }else if(d.isLate){ status = '지각' }else if(d.isLeaveEarlier){ status = '조퇴' }else{ status = '정상' }; return status; }",
   //    "name" : "status",
   //    "width" : "10%"
   //  },

@@ -59,19 +59,19 @@ class ActionListWithIdentityObject extends BaseAction {
 
 		private static final long serialVersionUID = 8240724501031453575L;
 
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private String application;
 
-		@FieldDescribe("流程版本")
+		@FieldDescribe("프로세스 버전")
 		private String edition;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private String process;
 
-		@FieldDescribe("工作")
+		@FieldDescribe("문서")
 		private String work;
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private List<String> identityList = new ArrayList<>();
 
 		public List<String> getIdentityList() {

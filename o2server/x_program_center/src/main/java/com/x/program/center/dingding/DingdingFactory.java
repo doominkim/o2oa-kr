@@ -62,8 +62,8 @@ public class DingdingFactory {
 	}
 
 	/**
-	 * 递归查询
-	 * @param parentId 上级组织 id
+	 * 재귀 조회
+	 * @param parentId 상위 조직 id
 	 * @throws Exception
 	 */
 	private void recursionOrg(Long parentId) throws Exception {
@@ -161,7 +161,7 @@ public class DingdingFactory {
 			body.setSize(100);
 			String resString = HttpConnection.postAsString(address, null, body.toString());
 			if (logger.isDebugEnabled()) {
-				logger.debug("分页查询部门用户  response {}", resString);
+				logger.debug("부서 사용자 페이지 조회  response {}", resString);
 			}
 			DingdingResponse<DingdingUserPageResult> response = XGsonBuilder.instance().fromJson(resString, type);
 			if (response.getErrcode() != 0) {
@@ -195,7 +195,7 @@ public class DingdingFactory {
 	}
 
 	/**
-	 * 查询钉钉组织的 post 对象
+	 * DingTalk 조직 조회용 post 객체
 	 */
 	public static class DingdingDepartmentPost extends GsonPropertyObject {
 
@@ -213,7 +213,7 @@ public class DingdingFactory {
 	}
 
 	/**
-	 * 根据组织 id  进行人员查询  post  对象
+	 * 조직 id 기준 사용자 조회  post  객체
 	 */
 	public static class DingdingUserListPost extends GsonPropertyObject {
 
@@ -221,8 +221,8 @@ public class DingdingFactory {
 
 		private Long dept_id;
 
-		private Integer cursor; // 分页游标 分页查询的游标，最开始传0，后续传返回参数中的next_cursor值。
-		private Integer size; // 分页大小 如  100
+		private Integer cursor; // 페이지 커서 페이지 조회용 커서, 처음에는 0을 전달하고 이후에는 반환 파라미터의 next_cursor 값을 전달.
+		private Integer size; // 페이지 크기 예:  100
 
     public Long getDept_id() {
       return dept_id;

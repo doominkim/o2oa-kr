@@ -45,19 +45,19 @@ public class ActionFileUpdateCallback extends BaseAction {
 		if (check) {
 			if (StringUtils.isEmpty(docId)) {
 				check = false;
-				Exception exception = new URLParameterGetExceptionCallback(callback, new Exception("未获取到文档ID"));
+				Exception exception = new URLParameterGetExceptionCallback(callback, new Exception("게시글 ID를 가져오지 못했습니다"));
 				result.error(exception);
 			}
 		}
 		if (check) {
 			if (StringUtils.isEmpty(old_attId)) {
 				check = false;
-				Exception exception = new URLParameterGetExceptionCallback(callback, new Exception("未获取到需要替换的附件ID"));
+				Exception exception = new URLParameterGetExceptionCallback(callback, new Exception("교체할 첨부파일 ID를 가져오지 못했습니다"));
 				result.error(exception);
 			}
 		}
 
-		if (check) {// 判断文档信息是否已经存在
+		if (check) {// 문서 정보 존재 여부 판단
 			try {
 				document = documentQueryService.get(docId);
 				if (null == document) {
@@ -74,7 +74,7 @@ public class ActionFileUpdateCallback extends BaseAction {
 
 		if (check) {
 			try {
-				/** 禁止不带扩展名的文件上传 */
+				/** 확장자 없는 파일 업로드 금지 */
 				if (StringUtils.isEmpty(fileName)) {
 					check = false;
 					Exception exception = new ExceptionEmptyExtensionCallback(callback, fileName);
@@ -92,7 +92,7 @@ public class ActionFileUpdateCallback extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				result.error(e);
-				logger.warn("系统在获取存储的时候发生异常！");
+				logger.warn("시스템이 저장소를 가져오는 중 예외가 발생했습니다!");
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
@@ -116,14 +116,14 @@ public class ActionFileUpdateCallback extends BaseAction {
 				attachment = fileInfoServiceAdv.updateAttachment(docId, old_attId, attachment, mapping);
 //
 //				List<String> keys = new ArrayList<>();
-//				keys.add( "file.all" ); //清除文档的附件列表缓存
-//				keys.add( "file." + old_attId  ); //清除指定ID的附件信息缓存
-//				keys.add( ApplicationCache.concreteCacheKey( "document", document.getId(), isAnonymous, isManager ) ); //清除文档的附件列表缓存
+//				keys.add( "file.all" ); //문서 첨부파일 목록 캐시 삭제
+//				keys.add( "file." + old_attId  ); //지정 ID의 첨부파일 정보 캐시 삭제
+//				keys.add( ApplicationCache.concreteCacheKey( "document", document.getId(), isAnonymous, isManager ) ); //문서 첨부파일 목록 캐시 삭제
 //				ApplicationCache.notify( FileInfo.class, keys );
 //
 //				keys.clear();
-//				keys.add(  ApplicationCache.concreteCacheKey( document.getId(), "view", isAnonymous, isManager ) ); //清除文档阅读缓存
-//				keys.add( ApplicationCache.concreteCacheKey( document.getId(), "get", isManager )  ); //清除文档信息获取缓存
+//				keys.add(  ApplicationCache.concreteCacheKey( document.getId(), "view", isAnonymous, isManager ) ); //문서 열람 캐시 삭제
+//				keys.add( ApplicationCache.concreteCacheKey( document.getId(), "get", isManager )  ); //문서 정보 조회 캐시 삭제
 //				ApplicationCache.notify( Document.class, keys );
 //
 				CacheManager.notify(FileInfo.class);
@@ -136,7 +136,7 @@ public class ActionFileUpdateCallback extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				result.error(e);
-				logger.warn("系统在保存文件和更新数据时候发生异常！");
+				logger.warn("시스템이 파일 저장 및 데이터 갱신 중 예외가 발생했습니다!");
 				logger.error(e, effectivePerson, request, null);
 			}
 		}

@@ -32,7 +32,7 @@ class ActionCreate extends BaseAction {
             Business business = new Business(emc);
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             Group group = Wi.copier.copy(wi);
-            /** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+            /** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
             if (this.uniqueDuplicateWhenNotEmpty(business, group)) {
                 throw new ExceptionDuplicateUnique(group.getName(), group.getUnique());
             }

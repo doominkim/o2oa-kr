@@ -8,6 +8,6 @@ public class ExceptionAppealNotEnable extends PromptException {
 	private static final long serialVersionUID = 4437932988958821670L;
 
 	public ExceptionAppealNotEnable() {
-		super(  "未启用申诉功能.");
+		super(  "이의 신청 기능이 활성화되지 않았습니다.");
 	}
 }

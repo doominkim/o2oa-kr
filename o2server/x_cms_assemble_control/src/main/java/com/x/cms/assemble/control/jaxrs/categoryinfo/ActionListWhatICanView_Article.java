@@ -53,45 +53,45 @@ public class ActionListWhatICanView_Article extends BaseAction {
 			manager = userManagerService.isManager( effectivePerson );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+			Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 
-		if (check) {// 判断用户是否该栏目的管理者
+		if (check) {// 사용자가 해당 게시판의 관리자인지 확인
 			try {
 				if ( appInfoServiceAdv.isAppInfoManager( appId, personName, unitNames, groupNames, roleNames )) {
 					appManager = true;
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		if (check) {// 判断用户是否该栏目的发布者
+		if (check) {// 사용자가 해당 게시판의 발행자인지 확인
 			try {
 				if (appInfoServiceAdv.isAppInfoPublisher( appId, personName, unitNames, groupNames, roleNames )) {
 					appPublisher = true;
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		if (check) {// 判断用户是否该栏目的访问者
+		if (check) {// 사용자가 해당 게시판의 접근자인지 확인
 			try {
 				if (appInfoServiceAdv.isAppInfoViewer( appId, personName, unitNames, groupNames )) {
 					appViewer = true;
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -122,7 +122,7 @@ public class ActionListWhatICanView_Article extends BaseAction {
 									personName, isAnonymous, unitNames, groupNames, roleNames, inAppInfoIds, null, null, "信息", null,1000, manager );
 						} catch (Exception e) {
 							check = false;
-							Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+							Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 							result.error(exception);
 							logger.error(e, effectivePerson, request, null);
 						}

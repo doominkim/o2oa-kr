@@ -113,7 +113,7 @@ MWF.xApplication.Selector.FormStyle = new Class({
                     //         }
                     //
                     //         var category = this._newItemCategory({
-                    //             name : "自定义样式（脚本）",
+                    //             name : "사용자 정의 스타일(스크립트)",
                     //             id : "script",
                     //             applicationList : array
                     //         }, this, this.itemAreaNode);

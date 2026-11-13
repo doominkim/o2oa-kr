@@ -432,7 +432,7 @@ public class DocFunction {
 					&& (o.getLength() < Config.query().index().getAttachmentMaxSize() * 1024 * 1024)) {
 				list.add(storageObjectToText(tika, o));
 			} else {
-				LOGGER.warn("忽略文件长度为0或者过大的附件:{}, size:{}, id:{}.", o.getName(), o.getLength(), o.getId());
+				LOGGER.warn("길이가 0이거나 너무 큰 첨부파일 무시:{}, size:{}, id:{}.", o.getName(), o.getLength(), o.getId());
 			}
 		}
 		return StringUtils.join(list, ",");
@@ -451,7 +451,7 @@ public class DocFunction {
 					&& (o.getLength() < Config.query().index().getAttachmentMaxSize() * 1024 * 1024)) {
 				list.add(storageObjectToText(tika, o));
 			} else {
-				LOGGER.warn("忽略文件长度为0或者过大的附件:{}, size:{}, id:{}.", o.getName(), o.getLength(), o.getId());
+				LOGGER.warn("길이가 0이거나 너무 큰 첨부파일 무시:{}, size:{}, id:{}.", o.getName(), o.getLength(), o.getId());
 			}
 		}
 		return StringUtils.join(list, ",");
@@ -471,7 +471,7 @@ public class DocFunction {
 						storageObject.getId(), storageObject.getName());
 			}
 		} catch (Throwable th) {
-			// 需要Throwable,tika可能抛出Error
+			// Throwable 필요, tika가 Error를 던질 수 있음
 			LOGGER.warn("error extract attachment text, storageObject:{}, name:{}, exception class:{}, message:{}.",
 					storageObject.getId(), storageObject.getName(), th.getClass().getName(), th.getMessage());
 		}

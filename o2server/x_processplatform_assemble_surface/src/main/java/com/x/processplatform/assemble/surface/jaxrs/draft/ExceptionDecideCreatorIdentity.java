@@ -7,6 +7,6 @@ class ExceptionDecideCreatorIdentity extends LanguagePromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionDecideCreatorIdentity() {
-		super("识别身份错误.");
+		super("소속 확인 오류.");
 	}
 }

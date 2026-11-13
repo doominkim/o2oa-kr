@@ -24,12 +24,12 @@ MWF.xApplication.Attendance.LP = {
 	"create_cancel_title": "새로 만들기 취소 확인",
 	"create_cancel": "새로 만들기를 취소하시겠습니까?",
 
-	"normal" : "출근", //绿色，正常
-	"levelAsked":"휴가 또는 외출 신고", //蓝色，请假
-	"late":"지각", //橙色，迟到
+	"normal" : "출근", //초록색, 정상
+	"levelAsked":"휴가 또는 외출 신고", //파란색, 휴가
+	"late":"지각", //주황색, 지각
 	"lateSelectText": ["","지각","지각 아님"],
-	"leaveEarly":"조퇴", //橙色，早退
-	"noSign":"결근", //粉红色,未签到
+	"leaveEarly":"조퇴", //주황색, 조퇴
+	"noSign":"결근", //분홍색, 미체크
 	"appealSuccess" : "이의 신청 승인",
 	"lackOfTime" : "근무시간 부족",
 	"abNormalDuty" : "비정상 체크",
@@ -40,11 +40,11 @@ MWF.xApplication.Attendance.LP = {
 	"pm": "오후",
 
 	"statusText": {
-		"normal" : "출근", //绿色，正常
-		"levelAsked":"휴가", //蓝色，请假
-		"late":"지각", //橙色，迟到
-		"leaveEarly":"조퇴", //橙色，早退
-		"noSign":"결근", //粉红色,未签到
+		"normal" : "출근", //초록색, 정상
+		"levelAsked":"휴가", //파란색, 휴가
+		"late":"지각", //주황색, 지각
+		"leaveEarly":"조퇴", //주황색, 조퇴
+		"noSign":"결근", //분홍색, 미체크
 		"appealSuccess" : "이의",
 		"lackOfTime" : "부족",
 		"abNormalDuty" : "비정상",
@@ -166,13 +166,13 @@ MWF.xApplication.Attendance.LP = {
 				"middayRestEndTime":"오후 출근 시간",
 			}
 		}
-		//"" : "打卡有效时间",
-		//"" : "从",
-		//"" : "到",
-		//"" : "旷工",
-		//"" : "上班缺勤",
-		//"" : "下班缺勤",
-		//"" : "上下班均缺勤"
+		//"" : "체크 유효 시간",
+		//"" : "부터",
+		//"" : "까지",
+		//"" : "무단결근",
+		//"" : "출근 결근",
+		//"" : "퇴근 결근",
+		//"" : "출퇴근 모두 결근"
 	},
 	"holiday" : {
 		"inputValid" : "연도, 휴일 이름, 시작 시간, 종료 시간은 필수입니다. 입력하세요!",
@@ -252,10 +252,10 @@ MWF.xApplication.Attendance.LP = {
 	"noDepartment": "소속 부서를 찾을 수 없습니다. 관리자에게 문의하세요!",
 	"signinType": "체크 유형",
 	"signinTypeSelectText": ["", "출근 체크", "퇴근 체크"],
-	"signinQywxTypeSelectText": ["", "上班打卡", "下班打卡", "外出打卡"],
+	"signinQywxTypeSelectText": ["", "출근 체크", "퇴근 체크", "외근 체크"],
 	"signinResult": "체크 결과",
 	"signinResultSelectText": ["", "정상", "조퇴", "지각", "심각 지각", "무단결근 지각", "체크 누락"],
-	"signinQywxResultSelectText": ["", "正常", "时间异常", "地点异常", "未打卡", "wifi异常", "非常用设备"],
+	"signinQywxResultSelectText": ["", "정상", "시간 이상", "위치 이상", "미체크", "wifi 이상", "비상용 기기"],
 	"recordAddress": "체크 주소",
 	"optMachineType": "기기 정보",
 	"workTime": "근무 시간",
@@ -414,7 +414,7 @@ MWF.xApplication.Attendance.LP = {
 	"statData": "근태 데이터 통계",
 	"analyzeData": "근태 데이터 분석",
 	"viewDescription": "설명 보기",
-	//"myAppealTitleText": "请在“我的考勤统计 -> 我的出勤明细”提出申述",
+	//"myAppealTitleText": "「내 근태 통계 -> 내 출근 상세」에서 이의 신청하십시오",
 	"myAppealTitleText": "\"내 근태 통계\"에서 이의 신청하세요",
 
 	"createManager": "새 관리자 설정",

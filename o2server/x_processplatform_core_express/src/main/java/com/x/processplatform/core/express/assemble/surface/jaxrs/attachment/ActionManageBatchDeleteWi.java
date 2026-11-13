@@ -11,8 +11,8 @@ public class ActionManageBatchDeleteWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -1562006729508038976L;
 
-	@FieldDescribe("待删除附件列表.")
-	@Schema(description = "待删除附件列表.")
+	@FieldDescribe("삭제할 첨부파일 목록.")
+	@Schema(description = "삭제할 첨부파일 목록.")
 	private List<String> idList;
 
 	public List<String> getIdList() {

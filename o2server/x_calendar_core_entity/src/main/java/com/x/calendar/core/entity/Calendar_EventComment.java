@@ -24,13 +24,13 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 日程事件超长LOB信息
- * 如果事件COMMENT超过70个字符时，使用LOB字段进行存储，在COMMENT中使用'CLOB'来标记，在COMMENTID里指定其记录引用
+ * 일정 이벤트 장문 LOB 정보
+ * 이벤트 COMMENT가 70자를 초과하면 LOB 필드에 저장하고 COMMENT에 'CLOB'로 표시하며 COMMENTID에 해당 레코드 참조 지정
  * 
  * @author O2LEE
  *
  */
-@Schema(name = "Calendar_EventComment", description = "日程事件长信息.")
+@Schema(name = "Calendar_EventComment", description = "일정 이벤트 장문 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Calendar_EventComment.table, uniqueConstraints = {
@@ -51,7 +51,7 @@ public class Calendar_EventComment extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -60,14 +60,14 @@ public class Calendar_EventComment extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
@@ -75,12 +75,12 @@ public class Calendar_EventComment extends SliceJpaObject {
 	public static final String lobValue_FIELDNAME = "lobValue";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("COMMENT信息的LOB值")
+	@FieldDescribe("COMMENT 정보의 LOB 값")
 	@Column(name = ColumnNamePrefix + lobValue_FIELDNAME, length = JpaObject.length_10M)
 	private String lobValue = "";
 
 	public static final String checkTime_FIELDNAME = "checkTime";
-	@FieldDescribe("检查时间")
+	@FieldDescribe("확인 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + checkTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

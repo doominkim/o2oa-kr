@@ -18,7 +18,7 @@ public class WrapStringList extends GsonPropertyObject {
 		this.valueList = new ArrayList<String>(collection);
 	}
 
-	@FieldDescribe("字符串多值.")
+	@FieldDescribe("문자열 다중 값.")
 	private List<String> valueList = new ArrayList<>();
 
 	public List<String> getValueList() {

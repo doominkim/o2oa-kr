@@ -29,7 +29,7 @@ class ActionCreateCode extends BaseAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ActionCreateCode.class);
 
-    // 个人通讯录生成二维码。
+    // 개인 주소록 QR 코드 생성.
     ActionResult<Wo> qrcode(EffectivePerson effectivePerson, String flag) throws Exception {
 
         LOGGER.debug("execute:{}, flag:{}.", effectivePerson::getDistinguishedName, () -> flag);
@@ -63,10 +63,10 @@ class ActionCreateCode extends BaseAction {
             content = content + "END:VCARD";
 
             /*
-             * content = "BEGIN:VCARD\n" + "VERSION:1.0\n" + "N:李德伟\n" +
+             * content = "BEGIN:VCARD\n" + "VERSION:1.0\n" + "N:홍길동\n" +
              * "EMAIL:1606841559@qq.com\n" + "TEL:12345678912\n" + "TEL;CELL:12345678913\n"
-             * + "ADR;HOME;POSTAL:;;文二路391号;杭州市;浙江省;433330;中国\n" + "ORG:济南\n" +
-             * "TITLE:软件工程师\n" + "URL:http://blog.csdn.net/lidew521\n" + "NOTE:呼呼测试下吧。。。\n"
+             * + "ADR;HOME;POSTAL:;;테헤란로 391;강남구;서울특별시;433330;대한민국\n" + "ORG:서울\n" +
+             * "TITLE:소프트웨어 엔지니어\n" + "URL:http://blog.csdn.net/lidew521\n" + "NOTE:테스트입니다...\n"
              * + "END:VCARD";
              */
             // getBarCode(content,path);
@@ -79,10 +79,10 @@ class ActionCreateCode extends BaseAction {
     }
 
     /**
-     * 二维码实现
+     * QR 코드 구현
      * 
-     * @param msg  /二维码包含的信息
-     * @param path /二维码存放路径
+     * @param msg  /QR 코드에 포함될 정보
+     * @param path /QR 코드 저장 경로
      */
     public static void getBarCode(String msg, String path) {
         File file = new File(path);
@@ -93,11 +93,11 @@ class ActionCreateCode extends BaseAction {
             String format = "png";
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             Map<EncodeHintType, String> map = new HashMap<EncodeHintType, String>();
-            // 设置编码 EncodeHintType类中可以设置MAX_SIZE，
-            // ERROR_CORRECTION，CHARACTER_SET，DATA_MATRIX_SHAPE，AZTEC_LAYERS等参数
+            // 인코딩 설정, EncodeHintType 클래스에서 MAX_SIZE,
+            // ERROR_CORRECTION, CHARACTER_SET, DATA_MATRIX_SHAPE, AZTEC_LAYERS 등 매개변수 설정 가능
             map.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             map.put(EncodeHintType.MARGIN, "1");
-            // 生成二维码
+            // QR 코드 생성
             BitMatrix bitMatrix = new MultiFormatWriter().encode(msg, BarcodeFormat.QR_CODE, 300, 300, map);
             MatrixToImageWriter.writeToStream(bitMatrix, format, ous);
         } catch (Exception e) {
@@ -106,20 +106,20 @@ class ActionCreateCode extends BaseAction {
     }
 
     /**
-     * 二维码实现
+     * QR 코드 구현
      * 
-     * @param msg /二维码包含的信息
+     * @param msg /QR 코드에 포함될 정보
      */
     public static byte[] getBarCodeWo(String msg) {
         byte[] bs = null;
         try {
             String format = "png";
             Map<EncodeHintType, String> map = new HashMap<EncodeHintType, String>();
-            // 设置编码 EncodeHintType类中可以设置MAX_SIZE，
-            // ERROR_CORRECTION，CHARACTER_SET，DATA_MATRIX_SHAPE，AZTEC_LAYERS等参数
+            // 인코딩 설정, EncodeHintType 클래스에서 MAX_SIZE,
+            // ERROR_CORRECTION, CHARACTER_SET, DATA_MATRIX_SHAPE, AZTEC_LAYERS 등 매개변수 설정 가능
             map.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             map.put(EncodeHintType.MARGIN, "1");
-            // 生成二维码
+            // QR 코드 생성
             BitMatrix bitMatrix = new MultiFormatWriter().encode(msg, BarcodeFormat.QR_CODE, 300, 300, map);
             BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
             ByteArrayOutputStream out = new ByteArrayOutputStream();

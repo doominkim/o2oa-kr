@@ -14,7 +14,7 @@ import com.x.calendar.core.entity.Calendar;
 
 
 /**
- * 日程日历信息服务类
+ * 일정 캘린더 정보 서비스 클래스
  * @author O2LEE
  *
  */
@@ -23,7 +23,7 @@ public class CalendarServiceAdv{
 	private CalendarService calendarInfoService = new CalendarService();
 	
 	/**
-	 * 根据用户获取用户可以访问到的所有日历日历信息
+	 * 사용자가 접근 가능한 모든 캘린더 정보 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -44,7 +44,7 @@ public class CalendarServiceAdv{
 	}	
 	
 	/**
-	 * 根据ID获取指定日历日历信息
+	 * ID로 지정 캘린더 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -58,7 +58,7 @@ public class CalendarServiceAdv{
 	}
 
 	/**
-	 * 保存日历信息
+	 * 캘린더 정보 저장
 	 * @param calendar
 	 * @param effectivePerson 
 	 * @return
@@ -72,14 +72,14 @@ public class CalendarServiceAdv{
 			calendar.setCreateor( effectivePerson.getDistinguishedName() );
 		}
 		
-		//管理者应该都有可见权限
+		//관리자는 모두 열람 권한이 있어야 함
 		if( ListTools.isNotEmpty( calendar.getManageablePersonList() )) {
 			for( String managerName : calendar.getManageablePersonList() ) {
 				addStringToList( managerName, effectivePerson, calendar.getViewablePersonList() );
 			}
 		}
 		
-		//对日历信息进行权限设置，至少自己创建的日历自己可以管理 ，可以发布，可以查看
+		//캘린더 정보 권한 설정, 최소한 본인이 생성한 캘린더는 본인이 관리·게시·열람 가능
 		addStringToList( calendar.getCreateor(), effectivePerson, calendar.getManageablePersonList() );
 		addStringToList( calendar.getCreateor(), effectivePerson, calendar.getPublishablePersonList() );
 		addStringToList( calendar.getCreateor(), effectivePerson, calendar.getViewablePersonList() );
@@ -127,7 +127,7 @@ public class CalendarServiceAdv{
 	}
 
 	/**
-	 * 将一个字符串添加到一个List里
+	 * 문자열을 List에 추가
 	 * @param distinguishedName
 	 * @param manageablePersonList
 	 */
@@ -146,7 +146,7 @@ public class CalendarServiceAdv{
 	}
 
 	/**
-	 * 根据条件查询指定的日历信息ID列表
+	 * 조건으로 지정한 캘린더 정보 ID 목록 조회
 	 * @param name
 	 * @param type
 	 * @param source
@@ -169,7 +169,7 @@ public class CalendarServiceAdv{
 	}
 	
 	/**
-	 * 根据条件查询指定的日历信息ID列表（忽略权限）
+	 * 조건에 따라 지정 캘린더 정보 ID 목록 조회(권한 무시)
 	 * @param name
 	 * @param type
 	 * @param source
@@ -189,7 +189,7 @@ public class CalendarServiceAdv{
 	}
 
 	/**
-	 * 根据权限查询日历信息ID列表
+	 * 권한에 따라 캘린더 정보 ID 목록 조회
 	 * @param personName
 	 * @return
 	 * @throws Exception
@@ -203,7 +203,7 @@ public class CalendarServiceAdv{
 	}
 	
 	/**
-	 * 根据权限查询日历信息ID列表
+	 * 권한에 따라 캘린더 정보 ID 목록 조회
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
@@ -219,7 +219,7 @@ public class CalendarServiceAdv{
 	}
 
 	/**
-	 * 根据Id删除日历信息，要删除日历中所有的记录信息以及重复主体信息
+	 * Id로 캘린더 정보 삭제, 캘린더의 모든 레코드 정보 및 반복 주체 정보도 삭제
 	 * @param id
 	 * @throws Exception 
 	 */
@@ -243,7 +243,7 @@ public class CalendarServiceAdv{
 	}
 
 	/**
-	 * 关注一个日历
+	 * 캘린더 구독
 	 * @param effectivePerson 
 	 * @param id
 	 * @return
@@ -258,7 +258,7 @@ public class CalendarServiceAdv{
 	}
 	
 	/**
-	 * 取消关注一个日历
+	 * 캘린더 구독 취소
 	 * @param effectivePerson 
 	 * @param id
 	 * @return

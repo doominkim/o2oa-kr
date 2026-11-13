@@ -35,7 +35,7 @@ import com.x.base.core.project.tools.DateTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Group", description = "组织群组.")
+@Schema(name = "Group", description = "조직 그룹.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Group.table, uniqueConstraints = {
@@ -57,17 +57,17 @@ public class Group extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	@CheckRemove(citationNotExists = {
-			/* 不在其他群组的成员里面 */
+			/* 다른 그룹의 구성원에 없음 */
 			@CitationNotExist(type = Group.class, fields = Group.groupList_FIELDNAME),
-			/* 不在角色的群组成员里面 */
+			/* 역할의 그룹 구성원에 없음 */
 			@CitationNotExist(type = Role.class, fields = Role.groupList_FIELDNAME) })
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.pinyin = StringUtils.lowerCase(PinyinHelper.convertToPinyinString(name, "", PinyinFormat.WITHOUT_TONE));
@@ -75,31 +75,31 @@ public class Group extends SliceJpaObject {
 		this.unique = StringUtils.isBlank(this.unique) ? id : unique;
 		this.distinguishedName = this.name + PersistenceProperties.distinguishNameSplit + this.unique
 				+ PersistenceProperties.distinguishNameSplit + PersistenceProperties.Group.distinguishNameCharacter;
-		/** 生成默认排序号 */
+		/** 기본 정렬 번호 생성 */
 		if (null == this.orderNumber) {
 			this.orderNumber = DateTools.timeOrderNumber();
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/** 默认内容结束 */
+	/** 기본 내용 끝 */
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音,自动生成")
+	@FieldDescribe("name 병음, 자동 생성")
 	@Index(name = TABLE + IndexNameMiddle + pinyin_FIELDNAME)
 	@Column(length = length_255B, name = ColumnNamePrefix + pinyin_FIELDNAME)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母,自动生成")
+	@FieldDescribe("name 병음 첫 글자, 자동 생성")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ pinyinInitial_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + pinyinInitial_FIELDNAME)
 	private String pinyinInitial;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -107,7 +107,7 @@ public class Group extends SliceJpaObject {
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("群组名称.可重名")
+	@FieldDescribe("그룹 이름. 중복 가능")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
@@ -115,7 +115,7 @@ public class Group extends SliceJpaObject {
 
 	public static final String unique_FIELDNAME = "unique";
 	@Flag
-	@FieldDescribe("唯一标识,不可重复,为空则使用自动填充值")
+	@FieldDescribe("고유 식별자, 중복 불가, 비어 있으면 자동 채움 값 사용")
 	@Column(length = length_255B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true, citationNotExists = @CitationNotExist(fields = unique_FIELDNAME, type = Group.class))
@@ -123,20 +123,20 @@ public class Group extends SliceJpaObject {
 
 	public static final String distinguishedName_FIELDNAME = "distinguishedName";
 	@Flag
-	@FieldDescribe("识别名.")
+	@FieldDescribe("식별명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + distinguishedName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + distinguishedName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String distinguishedName;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String personList_FIELDNAME = "personList";
-	@FieldDescribe("群组的个人成员.存放个人 ID.")
+	@FieldDescribe("그룹의 개인 구성원. 개인 ID 저장.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -148,7 +148,7 @@ public class Group extends SliceJpaObject {
 	private List<String> personList;
 
 	public static final String groupList_FIELDNAME = "groupList";
-	@FieldDescribe("群组的群组成员.存放群组 ID.")
+	@FieldDescribe("그룹의 그룹 구성원. 그룹 ID 저장.")
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ groupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + groupList_FIELDNAME
 					+ JoinIndexNameSuffix))
@@ -160,7 +160,7 @@ public class Group extends SliceJpaObject {
 	private List<String> groupList;
 
 	public static final String unitList_FIELDNAME = "unitList";
-	@FieldDescribe("群组存放组织成员,存放unit ID.")
+	@FieldDescribe("그룹의 조직 구성원, unit ID 저장.")
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ unitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + unitList_FIELDNAME
 					+ JoinIndexNameSuffix))
@@ -172,7 +172,7 @@ public class Group extends SliceJpaObject {
 	private List<String> unitList;
 
 	public static final String identityList_FIELDNAME = "identityList";
-	@FieldDescribe("群组存放身份成员,identity ID.")
+	@FieldDescribe("그룹의 신분 구성원, identity ID.")
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ identityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + identityList_FIELDNAME
 					+ JoinIndexNameSuffix))

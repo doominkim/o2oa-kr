@@ -33,7 +33,7 @@ public class AttendanceStatisticService {
 	protected AttendanceEmployeeConfigServiceAdv attendanceEmployeeConfigServiceAdv = new AttendanceEmployeeConfigServiceAdv();
 	
 	/**
-	 * 根据数据统计需求，进行员工每月考勤分析结果统计
+	 * 통계 요청에 따라 직원 월별 근태 분석 결과 통계
 	 * @param attendanceStatisticRequireLog
 	 * @param attendanceStatisticalCycle
 	 * @param workDayConfigList
@@ -53,7 +53,7 @@ public class AttendanceStatisticService {
 		}
 	}
 	/**
-	 * 根据数据统计需求，进行员工每月考勤分析结果统计
+	 * 통계 요청에 따라 직원 월별 근태 분석 결과 통계
 	 * @param emc
 	 * @param attendanceStatisticRequireLog
 	 * @param attendanceStatisticalCycle
@@ -88,13 +88,13 @@ public class AttendanceStatisticService {
 		try{
 			business = new Business( emc );
 		}catch(Exception e){
-			logger.warn("系统在根据统计周期获取周期内应出勤工作日数量时发生异常！" );
+			logger.warn("시스템이 통계 주기로 주기 내 출근 예정 근무일 수를 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		try{
 			workDayCountForMonth = business.getAttendanceWorkDayConfigFactory().getWorkDaysCountForMonth( attendanceStatisticalCycle.getCycleStartDate(), attendanceStatisticalCycle.getCycleEndDate(), workDayConfigList );
 		}catch(Exception e){
-			logger.warn("系统在根据统计周期获取周期内应出勤工作日数量时发生异常！" );
+			logger.warn("시스템이 통계 주기로 주기 내 출근 예정 근무일 수를 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		try{
@@ -111,10 +111,10 @@ public class AttendanceStatisticService {
 				if( topUnitName != null ){
 					statisticPersonForMonth.setTopUnitName( topUnitName );
 				}else{
-					logger.warn( "根据组织["+unitNames.get( 0 )+"]未查询到顶层组织信息。" );
+					logger.warn( "조직 ["+unitNames.get( 0 )+"]의 최상위 조직 정보를 조회하지 못했습니다." );
 				}
 			}else{
-				//根据员工姓名，查询组织和顶层组织名称
+				//직원 이름으로 조직 및 최상위 조직 이름 조회
 				identities =  userManagerService.listIdentitiesWithPerson( employeeName );
 				if( identities != null && identities.size() > 0){
 					unitName = userManagerService.getUnitNameWithIdentity( identities.get(0) );
@@ -123,50 +123,50 @@ public class AttendanceStatisticService {
 						statisticPersonForMonth.setUnitName( unitName );
 						statisticPersonForMonth.setTopUnitName( topUnitName );
 					}else{
-						logger.warn( "根据身份["+identities.get(0)+"]未查询到组织信息。" );
+						logger.warn( "신분 ["+identities.get(0)+"]의 조직 정보를 조회하지 못했습니다." );
 					}
 				}else{
-					logger.warn("系统中未查询到员工的身份，请管理员核实是否有为员工配置组织信息！");
+					logger.warn("시스템에서 직원의 신분을 조회하지 못했습니다. 관리자에게 직원의 조직 정보 설정 여부를 확인해 주십시오!");
 				}	
 			}
 							
-			//    1.2.1 应出勤天数
+			//    1.2.1 출근 예정 일수
 			if( workDayCountForMonth == null ){ workDayCountForMonth = 0L;}
 			statisticPersonForMonth.setWorkDayCount( Double.parseDouble( workDayCountForMonth + "") );
-			//    1.2.3 异常打卡次数
+			//    1.2.3 출퇴근 기록 이상 횟수
 			abNormalDutyCount = business.getAttendanceDetailStatisticFactory().countAbNormalDutyByEmployeeCycleYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( abNormalDutyCount == null ){ abNormalDutyCount = 0L;}
 			statisticPersonForMonth.setAbNormalDutyCount((long)abNormalDutyCount);
-			//    1.2.4 工时不足次数
+			//    1.2.4 근무 시간 부족 횟수
 			lackOfTimeCount = business.getAttendanceDetailStatisticFactory().countLackOfTimeByEmployeeCycleYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( lackOfTimeCount == null ){ lackOfTimeCount = 0L;}
 			statisticPersonForMonth.setLackOfTimeCount((long)lackOfTimeCount);
-			//    1.2.5 签到次数
+			//    1.2.5 출근 기록 횟수
 			onDutyTimes = business.getAttendanceDetailStatisticFactory().countOnDutyByEmployeeCycleYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( onDutyTimes == null ){ onDutyTimes = 0L;}
 			statisticPersonForMonth.setOnDutyTimes((long)onDutyTimes);
-			//    1.2.6 签退次数
+			//    1.2.6 퇴근 기록 횟수
 			offDutyTimes = business.getAttendanceDetailStatisticFactory().countOffDutyByEmployeeCycleYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( offDutyTimes == null ){ offDutyTimes = 0L;}
 			statisticPersonForMonth.setOffDutyTimes((long)offDutyTimes);
-			//    1.2.7 迟到次数
+			//    1.2.7 지각 횟수
 			lateTimes = business.getAttendanceDetailStatisticFactory().countLateByEmployeeCycleYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( lateTimes == null ){ lateTimes = 0L;}
 			statisticPersonForMonth.setLateTimes((long)lateTimes);
-			//    1.2.8 缺勤天数
+			//    1.2.8 결근 일수
 			absenceDayCount = business.getAttendanceDetailStatisticFactory().sumAbsenceDaysByEmployeeYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( absenceDayCount == null ){ absenceDayCount = 0.0;}
 			statisticPersonForMonth.setAbsenceDayCount((double)absenceDayCount);
-			//    1.2.9 早退次数
+			//    1.2.9 조퇴 횟수
 			leaveEarlyTimes = business.getAttendanceDetailStatisticFactory().countLeaveEarlierByEmployeeCycleYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( leaveEarlyTimes == null ){ leaveEarlyTimes = 0L;}
 			statisticPersonForMonth.setLeaveEarlyTimes((long)leaveEarlyTimes);
-			//    1.2.10 休假天数
+			//    1.2.10 휴가 일수
 			onSelfHolidayCount = business.getAttendanceDetailStatisticFactory().sumOnSelfHolidayDaysByEmployeeYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if( onSelfHolidayCount == null ){ onSelfHolidayCount = 0.0;}
 			statisticPersonForMonth.setOnSelfHolidayCount((double)onSelfHolidayCount);
 			
-			//    1.2.2 实际出勤天数
+			//    1.2.2 실제 출근 일수
 			Long onworkday = business.getAttendanceDetailStatisticFactory().countDutyDaysByEmployeeCycleYearAndMonth(query_employeeNames, cycleYear, cycleMonth);
 			if (onworkday == null) {
 				onworkday = 0L;
@@ -177,7 +177,7 @@ public class AttendanceStatisticService {
 //			}
 			statisticPersonForMonth.setOnDutyDayCount( Double.parseDouble(onworkday+"") );
 			
-			//查询该员工该年份月份的统计是否存在，如果存在则删除
+			//해당 직원의 해당 연월 통계 존재 여부 조회, 있으면 삭제
 			statisticPersonForMonth_tmp = business.getStatisticPersonForMonthFactory().get( employeeName, cycleYear, cycleMonth );
 			
 			emc.beginTransaction(StatisticPersonForMonth.class);
@@ -190,13 +190,13 @@ public class AttendanceStatisticService {
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
-			logger.warn("系统在根据统计周期获取周期内统计数据时发生异常！" );
+			logger.warn("시스템이 통계 주기로 주기 내 통계 데이터를 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 	}
 	
 	/**
-	 * 根据数据统计需求，进行组织每月考勤分析结果统计
+	 * 통계 요청에 따라 조직 월별 근태 분석 결과 통계
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
 	 * @param topUnitAttendanceStatisticalCycleMap
@@ -215,7 +215,7 @@ public class AttendanceStatisticService {
 	}
 
 	/**
-	 * 根据数据统计需求，进行组织每月考勤分析结果统计
+	 * 통계 요청에 따라 조직 월별 근태 분석 결과 통계
 	 * @param emc
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
@@ -258,9 +258,9 @@ public class AttendanceStatisticService {
 			if( topUnitName != null ){
 				statisticUnitForMonth.setTopUnitName( topUnitName );
 			}else{
-				logger.warn( "根据组织名称["+unitName+"]未查询到组织信息。" );
+				logger.warn( "조직 이름 ["+unitName+"]의 조직 정보를 조회하지 못했습니다." );
 			}
-			//    1.2.1 应出勤天数
+			//    1.2.1 출근 예정 일수
 			//workDayCountForMonth = business.getStatisticPersonForMonthFactory().sumAttendanceDayCountByUnitYearAndMonth(query_unitNames, cycleYear, cycleMonth);
 			workDayCountForMonth = business.getStatisticPersonForMonthFactory().sumAttendanceDayCountByUnitYearAndMonthUn(query_unitNames,unUnitNameList,personNameList, cycleYear, cycleMonth);
 			double count = 0.0;
@@ -268,48 +268,48 @@ public class AttendanceStatisticService {
 				count = (double)workDayCountForMonth;
 			}
 			statisticUnitForMonth.setOnDutyEmployeeCount( count );
-			//    1.2.3 异常打卡次数
+			//    1.2.3 출퇴근 기록 이상 횟수
 			//abNormalDutyCount = business.getStatisticPersonForMonthFactory().sumAbNormalDutyCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth );
 			abNormalDutyCount = business.getStatisticPersonForMonthFactory().sumAbNormalDutyCountByUnitYearAndMonthUn( query_unitNames,unUnitNameList,personNameList, cycleYear, cycleMonth );
 			if( abNormalDutyCount == null ){ abNormalDutyCount = 0L;}
 			statisticUnitForMonth.setAbNormalDutyCount((long)abNormalDutyCount);
-			//    1.2.4 工时不足次数
+			//    1.2.4 근무 시간 부족 횟수
 			//lackOfTimeCount = business.getStatisticPersonForMonthFactory().sumLackOfTimeCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth);
 			lackOfTimeCount = business.getStatisticPersonForMonthFactory().sumLackOfTimeCountByUnitYearAndMonthUn( query_unitNames,unUnitNameList,personNameList, cycleYear, cycleMonth);
 			if( lackOfTimeCount == null ){ lackOfTimeCount = 0L;}
 			statisticUnitForMonth.setLackOfTimeCount((long)lackOfTimeCount);
-			//    1.2.5 签到次数
+			//    1.2.5 출근 기록 횟수
 			//onDutyTimes = business.getStatisticPersonForMonthFactory().sumOnDutyCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth);
 			onDutyTimes = business.getStatisticPersonForMonthFactory().sumOnDutyCountByUnitYearAndMonthUn( query_unitNames,unUnitNameList,personNameList, cycleYear, cycleMonth);
 			if( onDutyTimes == null ){ onDutyTimes = 0L;}
 			statisticUnitForMonth.setOnDutyCount( (long)onDutyTimes);
-			//    1.2.6 签退次数
+			//    1.2.6 퇴근 기록 횟수
 			//offDutyTimes = business.getStatisticPersonForMonthFactory().sumOffDutyCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth);
 			offDutyTimes = business.getStatisticPersonForMonthFactory().sumOffDutyCountByUnitYearAndMonthUn( query_unitNames, unUnitNameList,personNameList,cycleYear, cycleMonth);
 			if( offDutyTimes == null ){ offDutyTimes = 0L;}
 			statisticUnitForMonth.setOffDutyCount((long)offDutyTimes);
-			//    1.2.7 迟到次数
+			//    1.2.7 지각 횟수
 			//lateTimes = business.getStatisticPersonForMonthFactory().sumLateCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth);
 			lateTimes = business.getStatisticPersonForMonthFactory().sumLateCountByUnitYearAndMonthUn( query_unitNames, unUnitNameList,personNameList,cycleYear, cycleMonth);
 			if( lateTimes == null ){ lateTimes = 0L;}
 			statisticUnitForMonth.setLateCount((long)lateTimes);
-			//    1.2.8 缺勤天数
+			//    1.2.8 결근 일수
 			//absenceDayCount = business.getStatisticPersonForMonthFactory().sumAbsenceDayCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth);
 			absenceDayCount = business.getStatisticPersonForMonthFactory().sumAbsenceDayCountByUnitYearAndMonthUn( query_unitNames, unUnitNameList,personNameList,cycleYear, cycleMonth);
 			if( absenceDayCount == null ){ absenceDayCount = 0.0;}
 			statisticUnitForMonth.setAbsenceDayCount((double)absenceDayCount);
-			//    1.2.9 早退次数
+			//    1.2.9 조퇴 횟수
 			//leaveEarlyTimes = business.getStatisticPersonForMonthFactory().sumLeaveEarlyCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth);
 			leaveEarlyTimes = business.getStatisticPersonForMonthFactory().sumLeaveEarlyCountByUnitYearAndMonthUn( query_unitNames, unUnitNameList,personNameList,cycleYear, cycleMonth);
 			if( leaveEarlyTimes == null ){ leaveEarlyTimes = 0L;}
 			statisticUnitForMonth.setLeaveEarlyCount((long)leaveEarlyTimes);
-			//    1.2.10 休假天数
+			//    1.2.10 휴가 일수
 			//onSelfHolidayCount = business.getStatisticPersonForMonthFactory().sumOnSelfHolidayCountByUnitYearAndMonth( query_unitNames, cycleYear, cycleMonth);
 			onSelfHolidayCount = business.getStatisticPersonForMonthFactory().sumOnSelfHolidayCountByUnitYearAndMonthUn( query_unitNames,unUnitNameList,personNameList, cycleYear, cycleMonth);
 			if( onSelfHolidayCount == null ){ onSelfHolidayCount = 0.0;}
 			statisticUnitForMonth.setOnSelfHolidayCount((double)onSelfHolidayCount);
 			
-			//查询该组织该年份月份的统计是否存在，如果存在则删除
+			//해당 조직의 해당 연월 통계 존재 여부 조회, 있으면 삭제
 			ids = business.getStatisticUnitForMonthFactory().listByUnitYearAndMonth( unitName, cycleYear, cycleMonth );
 			emc.beginTransaction(StatisticUnitForMonth.class);
 			if( ListTools.isNotEmpty( ids ) ){
@@ -325,7 +325,7 @@ public class AttendanceStatisticService {
 				updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 			}
 		}catch(Exception e){
-			logger.warn("系统在根据统计周期获取周期内组织统计数据时发生异常！" );
+			logger.warn("시스템이 통계 주기로 주기 내 조직 통계 데이터를 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 			if( attendanceStatisticRequireLog != null ){
 				String id = attendanceStatisticRequireLog.getId();
@@ -336,7 +336,7 @@ public class AttendanceStatisticService {
 	}
 	
 	/**
-	 * 根据数据统计需求，进行顶层组织每月考勤分析结果统计
+	 * 통계 요청에 따라 최상위 조직 월별 근태 분석 결과 통계
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
 	 * @param topUnitAttendanceStatisticalCycleMap
@@ -355,7 +355,7 @@ public class AttendanceStatisticService {
 	}
 	
 	/**
-	 * 根据数据统计需求，进行顶层组织每月考勤分析结果统计
+	 * 통계 요청에 따라 최상위 조직 월별 근태 분석 결과 통계
 	 * @param emc
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
@@ -391,47 +391,47 @@ public class AttendanceStatisticService {
 				logger.warn(" statisticUnitForMonthFactory  is null !!!");
 			}
 			
-			// 1.2.1 出勤天数
+			// 1.2.1 출근 일수
 			workDayCountForMonth = statisticUnitForMonthFactory.sumAttendanceDayCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			double count = 0.0;
 			if( workDayCountForMonth != null ){
 				count = (double)workDayCountForMonth;
 			}
 			statisticTopUnitForMonth.setOnDutyEmployeeCount( count );
-			// 1.2.3 异常打卡次数	
+			// 1.2.3 출퇴근 기록 이상 횟수	
 			abNormalDutyCount = statisticUnitForMonthFactory.sumAbNormalDutyCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth );
 			if( abNormalDutyCount == null ){ abNormalDutyCount = 0L;}
 			statisticTopUnitForMonth.setAbNormalDutyCount((long)abNormalDutyCount);
-			// 1.2.4 工时不足次数
+			// 1.2.4 근무 시간 부족 횟수
 			lackOfTimeCount = statisticUnitForMonthFactory.sumLackOfTimeCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			if( lackOfTimeCount == null ){ lackOfTimeCount = 0L;}
 			statisticTopUnitForMonth.setLackOfTimeCount((long)lackOfTimeCount);
-			// 1.2.5 签到次数
+			// 1.2.5 출근 기록 횟수
 			onDutyTimes = statisticUnitForMonthFactory.sumOnDutyCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			if( onDutyTimes == null ){ onDutyTimes = 0L;}
 			statisticTopUnitForMonth.setOnDutyCount( (long)onDutyTimes);
-			// 1.2.6 签退次数
+			// 1.2.6 퇴근 기록 횟수
 			offDutyTimes = statisticUnitForMonthFactory.sumOffDutyCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			if( offDutyTimes == null ){ offDutyTimes = 0L;}
 			statisticTopUnitForMonth.setOffDutyCount((long)offDutyTimes);
-			// 1.2.7 迟到次数
+			// 1.2.7 지각 횟수
 			lateTimes = statisticUnitForMonthFactory.sumLateCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			if( lateTimes == null ){ lateTimes = 0L;}
 			statisticTopUnitForMonth.setLateCount((long)lateTimes);
-			// 1.2.8 缺勤天数
+			// 1.2.8 결근 일수
 			absenceDayCount = statisticUnitForMonthFactory.sumAbsenceDayCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			if( absenceDayCount == null ){ absenceDayCount = 0.0;}
 			statisticTopUnitForMonth.setAbsenceDayCount((double)absenceDayCount);
-			// 1.2.9 早退次数
+			// 1.2.9 조퇴 횟수
 			leaveEarlyTimes = statisticUnitForMonthFactory.sumLeaveEarlyCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			if( leaveEarlyTimes == null ){ leaveEarlyTimes = 0L;}
 			statisticTopUnitForMonth.setLeaveEarlyCount((long)leaveEarlyTimes);
-			// 1.2.10 休假天数
+			// 1.2.10 휴가 일수
 			onSelfHolidayCount = statisticUnitForMonthFactory.sumOnSelfHolidayCountByTopUnitNamesYearAndMonth( query_topUnitNames, cycleYear, cycleMonth);
 			if( onSelfHolidayCount == null ){ onSelfHolidayCount = 0.0;}
 			statisticTopUnitForMonth.setOnSelfHolidayCount((double)onSelfHolidayCount);
 			
-			//查询该组织该年份月份的统计是否存在，如果存在则删除
+			//해당 조직의 해당 연월 통계 존재 여부 조회, 있으면 삭제
 			ids = business.getStatisticTopUnitForMonthFactory().listByTopUnitYearAndMonth( topUnitName, cycleYear, cycleMonth );
 			emc.beginTransaction( StatisticTopUnitForMonth.class );
 			if( ListTools.isNotEmpty( ids ) ){
@@ -445,13 +445,13 @@ public class AttendanceStatisticService {
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
-			logger.warn("系统在根据统计周期获取周期内顶层组织统计数据时发生异常！" );
+			logger.warn("시스템이 통계 주기로 주기 내 최상위 조직 통계 데이터를 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 	}
 	
 	/**
-	 * 根据数据统计需求，进行组织每日考勤分析结果统计
+	 * 통계 요청에 따라 조직 일별 근태 분석 결과 통계
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
 	 * @param topUnitAttendanceStatisticalCycleMap
@@ -471,7 +471,7 @@ public class AttendanceStatisticService {
 	}
 	
 	/**
-	 * 根据数据统计需求，进行组织每日考勤分析结果统计
+	 * 통계 요청에 따라 조직 일별 근태 분석 결과 통계
 	 * @param emc
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
@@ -510,70 +510,70 @@ public class AttendanceStatisticService {
 				topUnitName = userManagerService.getTopUnitNameWithUnitName( unitName );
 				statisticUnitForDay.setTopUnitName( topUnitName );
 			}else{
-				logger.warn( "根据组织名称["+unitName+"]未查询到组织信息。" );
+				logger.warn( "조직 이름 ["+unitName+"]의 조직 정보를 조회하지 못했습니다." );
 			}
-			//    4.2.1 应出勤天数
+			//    4.2.1 출근 예정 일수
 			//statisticUnitForDay.setWorkDayCount( workDayCountForMonth );
-			//    4.2.3 异常打卡次数
+			//    4.2.3 출퇴근 기록 이상 횟수
 			abNormalDutyCount = attendanceDetailStatisticFactory.countAbNormalDutyByUnitAndDate( query_unitNames, statisticDate );
 			if( abNormalDutyCount == null ){ abNormalDutyCount = 0L;}
 			statisticUnitForDay.setAbNormalDutyCount((long)abNormalDutyCount);
-			//    4.2.4 工时不足次数
+			//    4.2.4 근무 시간 부족 횟수
 			lackOfTimeCount = attendanceDetailStatisticFactory.countLackOfTimeByUnitAndDate( query_unitNames, statisticDate );
 			if( lackOfTimeCount == null ){ lackOfTimeCount = 0L;}
 			statisticUnitForDay.setLackOfTimeCount((long)lackOfTimeCount);
-			//    4.2.5 签到次数
+			//    4.2.5 출근 기록 횟수
 			onDutyTimes = attendanceDetailStatisticFactory.countOnDutyByUnitAndDate( query_unitNames, statisticDate );
 			if( onDutyTimes == null ){ onDutyTimes = 0L;}
 			statisticUnitForDay.setOnDutyCount((long)onDutyTimes);
-			//    4.2.6 签退次数
+			//    4.2.6 퇴근 기록 횟수
 			offDutyTimes = attendanceDetailStatisticFactory.countOffDutyByUnitAndDate( query_unitNames, statisticDate );
 			if( offDutyTimes == null ){ offDutyTimes = 0L;}
 			statisticUnitForDay.setOffDutyCount((long)offDutyTimes);
-			//    4.2.7 迟到次数
+			//    4.2.7 지각 횟수
 			lateTimes = attendanceDetailStatisticFactory.countLateByUnitAndDate( query_unitNames, statisticDate );
 			if( lateTimes == null ){ lateTimes = 0L;}
 			statisticUnitForDay.setLateCount((long)lateTimes);
-			//    4.2.8 缺勤天数
+			//    4.2.8 결근 일수
 			absenceDayCount = attendanceDetailStatisticFactory.sumAbsenceDaysByUnitAndDate( query_unitNames, statisticDate );
 			if( absenceDayCount == null ){ absenceDayCount = 0.0;}
 			statisticUnitForDay.setAbsenceDayCount((double)absenceDayCount);
-			//    4.2.9 早退次数
+			//    4.2.9 조퇴 횟수
 			leaveEarlyTimes = attendanceDetailStatisticFactory.countLeaveEarlierByUnitAndDate( query_unitNames, statisticDate );
 			if( leaveEarlyTimes == null ){ leaveEarlyTimes = 0L;}
 			statisticUnitForDay.setLeaveEarlyCount((long)leaveEarlyTimes);
-			//    1.2.10 休假天数
+			//    1.2.10 휴가 일수
 			onSelfHolidayCount = attendanceDetailStatisticFactory.sumOnSelfHolidayDaysByUnitAndDate( query_unitNames, statisticDate );
 			if( onSelfHolidayCount == null ){ onSelfHolidayCount = 0.0;}
 			statisticUnitForDay.setOnSelfHolidayEmployeeCount((double)onSelfHolidayCount);
 			
-			//    4.2.2 实际出勤天数
+			//    4.2.2 실제 출근 일수
 			//statisticUnitForDay.setOnDutyDayCount(workDayCountForMonth-absenceDayCount-onSelfHolidayCount);
 			
-			//查询该组织当天的统计是否存在，如果存在则删除
+			//해당 조직의 당일 통계 존재 여부 조회, 있으면 삭제
 			ids = business.getStatisticUnitForDayFactory().listByUnitDayDate( unitName, statisticDate );
 			emc.beginTransaction( StatisticUnitForDay.class );
 			if( ListTools.isNotEmpty( ids ) ){
 				for( String id : ids ){
-					logger.debug( debugger, ">>>>>>>>>>删除已存在的数据，id=" + id);
+					logger.debug( debugger, ">>>>>>>>>>기존 데이터 삭제, id=" + id);
 					statisticUnitForDay_tmp = emc.find(id, StatisticUnitForDay.class);
 					emc.remove( statisticUnitForDay_tmp );
 				}
 			}else{
-				logger.debug( debugger, ">>>>>>>>>>没有已存在的数据。" );
+				logger.debug( debugger, ">>>>>>>>>>기존 데이터 없음." );
 			}
 			emc.persist( statisticUnitForDay );
 			emc.commit();
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
-			logger.warn("系统在根据统计周期获取周期内统计数据时发生异常！" );
+			logger.warn("시스템이 통계 주기로 주기 내 통계 데이터를 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 	}
 	
 	/**
-	 * 根据数据统计需求，进行顶层组织每日考勤分析结果统计
+	 * 통계 요청에 따라 최상위 조직 일별 근태 분석 결과 통계
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
 	 * @param topUnitAttendanceStatisticalCycleMap
@@ -592,7 +592,7 @@ public class AttendanceStatisticService {
 	}
 	
 	/**
-	 * 根据数据统计需求，进行顶层组织每日考勤分析结果统计
+	 * 통계 요청에 따라 최상위 조직 일별 근태 분석 결과 통계
 	 * @param emc
 	 * @param attendanceStatisticRequireLog
 	 * @param workDayConfigList
@@ -623,45 +623,45 @@ public class AttendanceStatisticService {
 			statisticTopUnitForDay.setStatisticMonth( "" );
 			statisticTopUnitForDay.setStatisticDate(statisticDate);
 			statisticTopUnitForDay.setTopUnitName(topUnitName);
-			//    4.2.1 应出勤天数
+			//    4.2.1 출근 예정 일수
 			//statisticTopUnitForDay.setWorkDayCount( workDayCountForMonth );
-			//    4.2.3 异常打卡次数
+			//    4.2.3 출퇴근 기록 이상 횟수
 			abNormalDutyCount = attendanceDetailStatisticFactory.countAbNormalDutyByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( abNormalDutyCount == null ){ abNormalDutyCount = 0L;}
 			statisticTopUnitForDay.setAbNormalDutyCount((long)abNormalDutyCount);
-			//    4.2.4 工时不足次数
+			//    4.2.4 근무 시간 부족 횟수
 			lackOfTimeCount = attendanceDetailStatisticFactory.countLackOfTimeByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( lackOfTimeCount == null ){ lackOfTimeCount = 0L;}
 			statisticTopUnitForDay.setLackOfTimeCount((long)lackOfTimeCount);
-			//    4.2.5 签到次数
+			//    4.2.5 출근 기록 횟수
 			onDutyTimes = attendanceDetailStatisticFactory.countOnDutyByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( onDutyTimes == null ){ onDutyTimes = 0L;}
 			statisticTopUnitForDay.setOnDutyCount((long)onDutyTimes);
-			//    4.2.6 签退次数
+			//    4.2.6 퇴근 기록 횟수
 			offDutyTimes = attendanceDetailStatisticFactory.countOffDutyByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( offDutyTimes == null ){ offDutyTimes = 0L;}
 			statisticTopUnitForDay.setOffDutyCount((long)offDutyTimes);
-			//    4.2.7 迟到次数
+			//    4.2.7 지각 횟수
 			lateTimes = attendanceDetailStatisticFactory.countLateByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( lateTimes == null ){ lateTimes = 0L;}
 			statisticTopUnitForDay.setLateCount((long)lateTimes);
-			//    4.2.8 缺勤天数
+			//    4.2.8 결근 일수
 			absenceDayCount = attendanceDetailStatisticFactory.sumAbsenceDaysByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( absenceDayCount == null ){ absenceDayCount = 0.0;}
 			statisticTopUnitForDay.setAbsenceDayCount((double)absenceDayCount);
-			//    4.2.9 早退次数
+			//    4.2.9 조퇴 횟수
 			leaveEarlyTimes = attendanceDetailStatisticFactory.countLeaveEarlierByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( leaveEarlyTimes == null ){ leaveEarlyTimes = 0L;}
 			statisticTopUnitForDay.setLeaveEarlyCount((long)leaveEarlyTimes);
-			//    1.2.10 休假天数
+			//    1.2.10 휴가 일수
 			onSelfHolidayCount = attendanceDetailStatisticFactory.sumOnSelfHolidayDaysByTopUnitAndDate( query_topUnitNames, statisticDate );
 			if( onSelfHolidayCount == null ){ onSelfHolidayCount = 0.0;}
 			statisticTopUnitForDay.setOnSelfHolidayEmployeeCount((double)onSelfHolidayCount);
 			
-			//    4.2.2 实际出勤天数
+			//    4.2.2 실제 출근 일수
 			//statisticUnitForDay.setOnDutyDayCount(workDayCountForMonth-absenceDayCount-onSelfHolidayCount);
 			
-			//查询该顶层组织当天的统计是否存在，如果存在则删除
+			//해당 최상위 조직의 당일 통계 존재 여부 조회, 있으면 삭제
 			ids = business.getStatisticTopUnitForDayFactory().listByTopUnitRecordDateString( topUnitName, statisticDate );
 			emc.beginTransaction( StatisticTopUnitForDay.class );
 			if( ListTools.isNotEmpty( ids ) ){
@@ -675,7 +675,7 @@ public class AttendanceStatisticService {
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "COMPLETED", "처리 성공" );
 		}catch(Exception e){
 			updateAttendanceStatisticRequireLog( attendanceStatisticRequireLog.getId(), "ERROR", e.getMessage().length()>1000?e.getMessage().substring(0,700):e.getMessage() );
-			logger.warn("系统在根据统计周期获取周期内统计数据时发生异常！" );
+			logger.warn("시스템이 통계 주기로 주기 내 통계 데이터를 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 	}
@@ -692,10 +692,10 @@ public class AttendanceStatisticService {
 				emc.check( attendanceStatisticRequireLog, CheckPersistType.all);
 				emc.commit();	
 			}else{
-				logger.warn( "系统未能根据ID查询到统计需求信息：{'id':'"+id+"'}" );
+				logger.warn( "시스템이 ID로 통계 요청 정보를 조회하지 못했습니다: {'id':'"+id+"'}" );
 			}
 		}catch(Exception e){
-			logger.warn( "系统在更新统计需求信息状态时发生异常！" );
+			logger.warn( "시스템이 통계 요청 정보 상태를 갱신하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 	}
@@ -712,7 +712,7 @@ public class AttendanceStatisticService {
 		Business business =  new Business( emc );
 		return business.getStatisticPersonForMonthFactory().listByUnitYearAndMonth( unitNameList, year, month );
 	}
-	//排除不需要的组织和人员
+	//불필요한 조직과 사용자 제외
 	public List<String> listPersonForMonthByUnitYearMonthAndUn(EntityManagerContainer emc, List<String> unitNameList,List<String> unUnitNameList,List<String> personNameList,
 			String year, String month) throws Exception {
 		Business business =  new Business( emc );
@@ -732,7 +732,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().listByUnitYearAndMonth( name, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员缺勤人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 결근 건수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -746,7 +746,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumAbsenceDayCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员请假人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 휴가 건수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -760,7 +760,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumOnSelfHolidayCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员迟到次数总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 지각 횟수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -774,7 +774,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumLateCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员早退人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 조퇴 건수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -788,7 +788,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumLeaveEarlyCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员签到人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 출근 체크 건수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -802,7 +802,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumOnDutyCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员签退人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 퇴근 체크 건수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -816,7 +816,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumOffDutyCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员异常打卡次数总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 비정상 체크 횟수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -830,7 +830,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumAbNormalDutyCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员工时不足人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 근무시간 부족 건수 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -844,7 +844,7 @@ public class AttendanceStatisticService {
 		return business.getStatisticUnitForMonthFactory().sumLackOfTimeCountByUnitYearAndMonth( unitNameList, year, month );
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员出勤人天总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 출근 인일 합계 통계
 	 * @param emc
 	 * @param unitNameList
 	 * @param year
@@ -883,7 +883,7 @@ public class AttendanceStatisticService {
 	}
 	
 	/**
-	 * 获取不需要考勤的组织
+	 * 근태 제외 조직 조회
 	 * @return
 	 * @throws Exception 
 	 */
@@ -914,7 +914,7 @@ public class AttendanceStatisticService {
 	}
 	
 	/**
-	 * 获取不需要考勤的人员
+	 * 근태 제외 사용자 조회
 	 * @return
 	 * @throws Exception 
 	 */

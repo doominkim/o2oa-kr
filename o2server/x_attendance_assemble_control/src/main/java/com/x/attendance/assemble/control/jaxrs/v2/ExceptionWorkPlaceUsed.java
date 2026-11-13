@@ -13,6 +13,6 @@ public class ExceptionWorkPlaceUsed extends PromptException {
 	private static final long serialVersionUID = 2153113315776048283L;
 
 	public ExceptionWorkPlaceUsed(@NotNull List<AttendanceV2Group> groupList) {
-		super("当前工作场所正在被考勤组【"+ groupList.stream().map(AttendanceV2Group::getGroupName).collect(Collectors.joining(",")) +"】使用！");
+		super("현재 근무 장소는 근태 그룹 【"+ groupList.stream().map(AttendanceV2Group::getGroupName).collect(Collectors.joining(",")) +"】에서 사용 중입니다!");
 	}
 }

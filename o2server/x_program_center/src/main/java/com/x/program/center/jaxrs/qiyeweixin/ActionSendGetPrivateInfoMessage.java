@@ -36,13 +36,13 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
     ActionResult<Wo> execute(JsonElement jsonElement)  throws Exception {
         Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
         if (wi.getConsumerList() == null || wi.getConsumerList().isEmpty()) {
-            throw new ExceptionNotEmpty("消息接收者");
+            throw new ExceptionNotEmpty("메시지 수신자");
         }
         if (StringUtils.isEmpty(wi.getMessageTitle())) {
-            throw new ExceptionNotEmpty("消息标题");
+            throw new ExceptionNotEmpty("메시지 제목");
         }
         if (StringUtils.isEmpty(wi.getMessageContent())) {
-            throw new ExceptionNotEmpty("消息内容");
+            throw new ExceptionNotEmpty("메시지 내용");
         }
         if (!Config.qiyeweixin().getEnable() || !Config.qiyeweixin().getMessageEnable()) {
             throw new ExceptionQywxNotEnable();
@@ -54,13 +54,13 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
             List<String> consumerPersonList = new ArrayList<>();
             Business business = new Business(emc);
             for (String e : wi.getConsumerList()) {
-                if (e.endsWith( "@U" )) { // 组织
-                    // 递归查询所有人员列表
+                if (e.endsWith( "@U" )) { // 조직
+                    // 모든 사용자 목록 재귀 조회
                     List<String> persons = business.organization().person().listWithUnitSubNested( e );
                     if (persons != null && !persons.isEmpty()) {
                         consumerPersonList.addAll(persons);
                     }
-                } else { // 人员直接加入
+                } else { // 사용자 직접 추가
                     consumerPersonList.add(e);
                 }
             }
@@ -68,7 +68,7 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
                 removeDuplicationByHashSet(consumerPersonList);
             }
             if (logger.isDebugEnabled()) {
-                logger.debug("发送消息人员 ，{} ", Arrays.toString(consumerPersonList.toArray()));
+                logger.debug("메시지 발송 사용자 ,{} ", Arrays.toString(consumerPersonList.toArray()));
             }
             QiyeweixinTextCardMessage m = generateMessage(business, consumerPersonList, wi.getMessageTitle(), wi.getMessageContent());
             String address = Config.qiyeweixin().getApiAddress() + "/cgi-bin/message/send?access_token="
@@ -78,7 +78,7 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
             if (resp.getErrcode() != 0) {
                 throw new ExceptionQiyeweixinMessage(resp.getErrcode(), resp.getErrmsg());
             }
-            logger.info("发送授权消息成功，{}.", resp.toString());
+            logger.info("권한 부여 메시지 발송 성공,{}.", resp.toString());
         }
         ActionResult<Wo> result = new ActionResult<>();
         Wo wo = new Wo();
@@ -95,7 +95,7 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
         cardMessage.getTextcard().setDescription(content);
         cardMessage.getTextcard().setUrl(messageOpenUrl());
         if (logger.isDebugEnabled()) {
-            logger.debug("微信卡片消息：{}", cardMessage::toString);
+            logger.debug("위챗 카드 메시지:{}", cardMessage::toString);
         }
         return cardMessage;
     }
@@ -108,7 +108,7 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
             return null;
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("o2oa 地址：{}" , o2oaUrl);
+            logger.debug("o2oa 주소:{}" , o2oaUrl);
         }
         o2oaUrl = URLEncoder.encode(o2oaUrl, DefaultCharset.name);
         if (logger.isDebugEnabled()) {
@@ -124,15 +124,15 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
         return url;
     }
 
-    /**使用HashSet实现List去重(无序)
+    /**HashSet으로 List 중복 제거(순서 없음)
      *
      * @param list
      * */
     private List<String> removeDuplicationByHashSet(List<String> list) {
         HashSet<String> set = new HashSet<>(list);
-        //把List集合所有元素清空
+        //List 컬렉션의 모든 요소 비우기
         list.clear();
-        //把HashSet对象添加至List集合
+        //HashSet 객체를 List 컬렉션에 추가
         list.addAll(set);
         return list;
     }
@@ -144,11 +144,11 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
     }
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("消息接收者.")
+        @FieldDescribe("메시지 수신자.")
         private List<String> consumerList;
-        @FieldDescribe("消息标题.")
+        @FieldDescribe("메시지 제목.")
         private String messageTitle;
-        @FieldDescribe("消息内容.")
+        @FieldDescribe("메시지 내용.")
         private String messageContent;
 
         public String getMessageTitle() {
@@ -178,8 +178,8 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
 
 
     /**
-     * 文本卡片消息
-     * 用于可以打开的工作消息发送
+     * 텍스트 카드 메시지
+     * 열 수 있는 업무 메시지 발송용
      */
     public static class QiyeweixinTextCardMessage extends QiyeweixinBaseMessage {
 
@@ -194,10 +194,10 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
          *    "msgtype" : "textcard",
          *    "agentid" : 1,
          *    "textcard" : {
-         *             "title" : "领奖通知",
-         *             "description" : "<div class=\"gray\">2016年9月26日</div> <div class=\"normal\">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class=\"highlight\">请于2016年10月10日前联系行政同事领取</div>",
+         *             "title" : "경품 수령 안내",
+         *             "description" : "<div class=\"gray\">2016년 9월 26일</div> <div class=\"normal\">iPhone 7 1대에 당첨되신 것을 축하합니다. 수령 코드: xxxx</div><div class=\"highlight\">2016년 10월 10일 전까지 총무 담당자에게 연락하여 수령하세요</div>",
          *             "url" : "URL",
-         *                         "btntxt":"更多"
+         *                         "btntxt":"더 보기"
          *    },
          *    "enable_id_trans": 0,
          *    "enable_duplicate_check": 0,
@@ -356,7 +356,7 @@ public class ActionSendGetPrivateInfoMessage extends BaseAction {
          * <code>	 {
          * "errcode" : 0,
          * "errmsg" : "ok",
-         * "invaliduser" : "userid1|userid2", // 不区分大小写，返回的列表都统一转为小写
+         * "invaliduser" : "userid1|userid2", // 대소문자 구분 없음, 반환 목록은 모두 소문자로 변환
          * "invalidparty" : "partyid1|partyid2",
          * "invalidtag":"tagid1|tagid2"
          * }

@@ -13,7 +13,7 @@ export default content({
             showClear: false,
             placeholder: lp.components.chooseTimePlaceholder,
             value: "",
-            key:"" // 反写回去的对象key值，多层用.分割 如 form.startTime
+            key:"" // 되돌려 쓸 객체 key 값, 다단계는 .으로 구분, 예: form.startTime
         };
     },
     afterRender() {
@@ -28,7 +28,7 @@ export default content({
               "monthOnly" : false,
               "yearOnly" : false,
               "defaultDate": null,
-              // "clearEnable": false, // 清除按钮
+              // "clearEnable": false, // 지우기 버튼
               "defaultView" : defaultView,
               "target":  this.$parent.dom,
               "onComplate": function(formateDate, date){

@@ -66,10 +66,10 @@ class ActionUpdateWithJob extends BaseAction {
 				List<Work> works = emc.listEqual(Work.class, Work.job_FIELDNAME, job);
 				if (!works.isEmpty()) {
 					for (Work work : works) {
-						/* 先更新title和serial,再更新DataItem,因为旧的DataItem中也有title和serial数据. */
+						/* title과 serial을 먼저 수정한 뒤 DataItem 수정, 기존 DataItem에도 title과 serial 데이터가 있기 때문. */
 						updateTitleSerialObjectSecurityClearance(business, work, merge);
 					}
-					/* updateTitleSerial 和 updateData 方法内进行了提交 */
+					/* updateTitleSerial과 updateData 메서드 내에서 커밋함 */
 					updateData(business, works.get(0), merge);
 
 					wi.init(works.get(0), merge);
@@ -78,10 +78,10 @@ class ActionUpdateWithJob extends BaseAction {
 					List<WorkCompleted> workCompletedList = emc.listEqual(WorkCompleted.class, Work.job_FIELDNAME, job);
 					if (!workCompletedList.isEmpty()) {
 						for (WorkCompleted work : workCompletedList) {
-							/* 先更新title和serial,再更新DataItem,因为旧的DataItem中也有title和serial数据. */
+							/* title과 serial을 먼저 수정한 뒤 DataItem 수정, 기존 DataItem에도 title과 serial 데이터가 있기 때문. */
 							updateTitleSerialObjectSecurityClearance(business, work, merge);
 						}
-						/* updateTitleSerial 和 updateData 方法内进行了提交 */
+						/* updateTitleSerial과 updateData 메서드 내에서 커밋함 */
 						updateData(business, workCompletedList.get(0), merge);
 
 						wi.init(workCompletedList.get(0), merge);

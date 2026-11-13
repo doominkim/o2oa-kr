@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 考勤相关提醒消息发送任务
+ * 근태 관련 알림 메시지 발송 작업
  * <p>
  * Created by fancyLou on 2023/5/8.
  * Copyright © 2023 O2. All rights reserved.
@@ -32,7 +32,7 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
     @Override
     public void schedule(JobExecutionContext jobExecutionContext) throws Exception {
         if (logger.isDebugEnabled()) {
-            logger.debug("======================新版考勤消息发送定时器开始执行==============================");
+            logger.debug("======================신규 근태 메시지 발송 타이머 실행 시작==============================");
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             List<AttendanceV2Config> list = emc.listAll(AttendanceV2Config.class);
@@ -42,23 +42,23 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
             } else {
                 config = new AttendanceV2Config();
             }
-            // 异常数据每天提醒
+            // 이상 데이터 매일 알림
             exceptionMsgAlert(emc, config);
-            // 打卡消息提醒
+            // 출퇴근 체크 메시지 알림
             alertCheckinMessage(emc, config);
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("======================新版考勤消息发送定时器执行完成==============================");
+            logger.debug("======================신규 근태 메시지 발송 타이머 실행 완료==============================");
         }
     }
 
     /**
-     * 打卡提醒 消息发送
+     * 출퇴근 체크 알림 메시지 발송
      *
      * @param emc
      */
     private void alertCheckinMessage(EntityManagerContainer emc, AttendanceV2Config config) {
-        // 启用消息
+        // 메시지 사용
         if (!BooleanUtils.isTrue(config.getCheckInAlertEnable())) {
             return;
         }
@@ -70,19 +70,19 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
                 return;
             }
             for (AttendanceV2AlertMessage message : messageList) {
-                // 先更新消息状态，避免重复发送
+                // 중복 발송을 피하기 위해 메시지 상태를 먼저 갱신
                 AttendanceV2AlertMessage old = emc.find(message.getId(), AttendanceV2AlertMessage.class);
-                old.setSendStatus(true); // 已经发送
+                old.setSendStatus(true); // 이미 발송됨
                 emc.beginTransaction(AttendanceV2AlertMessage.class);
                 emc.persist(old, CheckPersistType.all);
                 emc.commit();
-                // 不是今天的消息，不发送
+                // 오늘 메시지가 아니므로 발송하지 않음
                 String today = DateTools.format(now, DateTools.format_yyyyMMdd);
                 String sendDate = DateTools.format(message.getSendDateTime(), DateTools.format_yyyyMMdd);
                 if (!today.equals(sendDate)) {
                     continue;
                 }
-                // 判断个人配置 是否需要真实的发送消息
+                // 개인 설정에서 실제 메시지 발송이 필요한지 판단
                 List<AttendanceV2PersonConfig> list = business.getAttendanceV2ManagerFactory()
                         .personConfigWithPerson(message.getUserId());
                 boolean isOnDutySendPerson = true;
@@ -104,7 +104,7 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
                 if (message.getCheckInType().equals(AttendanceV2CheckInRecord.OffDuty) && !isOffDutySendPerson) {
                     continue;
                 }
-                // 判断是否已经打过卡了
+                // 이미 출퇴근 체크했는지 판단
                 List<AttendanceV2CheckInRecord> records = business.getAttendanceV2ManagerFactory().listRecordWithPersonAndDate(message.getUserId(), today);
                 if (records != null && !records.isEmpty()) {
                     boolean isOnDutyCheckIn = records.stream().anyMatch(r -> AttendanceV2CheckInRecord.OnDuty.equals(r.getCheckInType()) && !AttendanceV2CheckInRecord.CHECKIN_RESULT_PreCheckIn.equals(r.getCheckInResult()));
@@ -132,30 +132,30 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
     }
 
     /**
-     * 异常数据提醒
+     * 이상 데이터 알림
      *
      * @param emc
      */
     private void exceptionMsgAlert(EntityManagerContainer emc, AttendanceV2Config config) {
         try {
-            // 异常消息提醒
+            // 이상 메시지 알림
             if (!BooleanUtils.isTrue(config.getAppealEnable()) || !BooleanUtils.isTrue(config.getExceptionAlertEnable())) {
                 return;
             }
             String date = config.getExceptionAlertDate();
             String time = config.getExceptionAlertTime();
             if (StringUtils.isEmpty(time)) {
-                time = "09:30"; // 默认 9 点半 执行
+                time = "09:30"; // 기본 9시 30분 실행
             }
             Date now = new Date();
             String today = DateTools.format(now, DateTools.format_yyyyMMdd);
             Date alertTime = DateTools.parse(today + " " + time, DateTools.format_yyyyMMddHHmm);
-            if (today.equals(date) || alertTime.after(now)) { // 今天已经提醒过了 或者 时间没到
+            if (today.equals(date) || alertTime.after(now)) { // 오늘 이미 알림을 보냈거나 시간이 되지 않음
                 return;
             }
-            logger.info("开始发送异常数据提醒，当前时间：{} , 异常数据提醒时间：{}", now.toString(), alertTime.toString());
+            logger.info("이상 데이터 알림 발송 시작, 현재 시간: {} , 이상 데이터 알림 시간: {}", now.toString(), alertTime.toString());
             sendExceptionMsgAlert(emc, config);
-            // 更新配置 today 表示已经发送过提醒
+            // 설정 갱신, today는 이미 알림을 보냈음을 의미
             config.setExceptionAlertDate(today);
             emc.beginTransaction(AttendanceV2Config.class);
             emc.persist(config, CheckPersistType.all);
@@ -167,7 +167,7 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
 
 
     /**
-     * 发送异常数据提醒
+     * 이상 데이터 알림 발송
      */
     private void sendExceptionMsgAlert(EntityManagerContainer emc, AttendanceV2Config config) {
         try {
@@ -175,7 +175,7 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
             //
             Integer dateNumber = config.getExceptionAlertDateNumber();
             if (dateNumber == null || dateNumber < 0 ) {
-                dateNumber = 1; // 默认提醒前一天的异常数据
+                dateNumber = 1; // 기본으로 전날 이상 데이터를 알림
             }
             Date yesterday;
             if (dateNumber == 0) {
@@ -195,7 +195,7 @@ public class AttendanceV2MessageSendTask extends AbstractJob {
                     String title = "처리할 이상 출퇴근 데이터가 " + appealInfoList.size() + "건 있습니다. 신속히 처리해 주세요!";
                     MessageConnector.send(MessageConnector.TYPE_ATTENDANCE_CHECK_IN_EXCEPTION, title, entry.getKey(), appealInfoList.get(0));
                     if (logger.isDebugEnabled()) {
-                        logger.debug("发送异常数据提醒消息，person: {}", entry.getKey());
+                        logger.debug("이상 데이터 알림 메시지 발송, person: {}", entry.getKey());
                     }
                 }
             }

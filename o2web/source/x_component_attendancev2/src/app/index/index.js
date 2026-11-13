@@ -23,7 +23,7 @@ export default content({
       lp,
       admin: "", // admin readAdmin
       menu: {
-        currentMenu: {}, // 当前菜单
+        currentMenu: {}, // 현재 메뉴
         menuData: [],
       },
     };
@@ -60,7 +60,7 @@ export default content({
     });
     console.debug('attendancev2 startOpenMenu .......');
   },
-  // 初始化 EventBus
+  // EventBus 초기화
   _initEventBus() {
     this.eventBus = new EventBus();
   },
@@ -68,16 +68,16 @@ export default content({
     const ooNav = document.querySelector('#app-attendance-v2-menu')
     ooNav.addEventListener('select', (e) => {
       this.bind.menu.currentMenu = e.detail.data;
-      this.closeFormVm(); // 关闭 form 窗口
+      this.closeFormVm(); // form 창 닫기
     })
     ooNav.setMenu(this.bind.menu.menuData)
 
   },
-  // 添加监听
+  // 리스너 추가
   listenEventBus(eventName, callback) {
     this.eventBus.subscribe(eventName, callback);
   },
-  // 原来的请假数据查询页面
+  // 기존 휴가 데이터 조회 페이지
   openOldLeaveManager() {
     const menu = {
       "name": "3-4",
@@ -96,72 +96,72 @@ export default content({
     };
     this.bind.menu.currentMenu = menu;
   },
-  // 发送事件
+  // 이벤트 발송
   publishEvent(eventName, data) {
     this.eventBus.publish(eventName, data);
   },
-  // 打开 打卡记录的详情
+  // 출퇴근 체크 기록 상세 열기
   async openRecordDetailVm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../recordManager/detail/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 打开 原始记录
+  // 원본 기록 열기
   async openRecordListVm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../detailManager/recordList/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 打开 打卡地点表单
+  // 출퇴근 체크 장소 양식 열기
   async openBDMapConfigForm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../addressManager/bdAkConfig/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 打开 打卡地点表单
+  // 출퇴근 체크 장소 양식 열기
   async openAddressForm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../addressManager/addAddress/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 打开班次表单
+  // 교대조 양식 열기
   async openShiftForm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../shiftManager/addShift/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 打开考勤组表单
+  // 근태 그룹 양식 열기
   async openGroupForm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../groupManager/editGroup/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 打开编辑表单页面
+  // 편집 양식 페이지 열기
   async openFomVm(c, bindData) {
     this.formVm = await c.generate("#form", bindData, this);
     this.dom.querySelector("#form").classList.add("index_page_form_container");
   },
-  // 打开请假类型表单
+  // 휴가 유형 양식 열기
   async openLeaveTypeForm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../leaveManagerV2/editLeaveType/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 打开请假类型规则表单
+  // 휴가 유형 규칙 양식 열기
   async openLeaveTypePolicyForm(bind) {
     this.closeFormVm();
     const bindData = bind || {};
     const c = (await import('../leaveManagerV2/editLeaveTypePolicy/index.js')).default;
     this.openFomVm(c, bindData);
   },
-  // 关闭表单
+  // 양식 닫기
   closeFormVm() {
     if (this.formVm) {
       this.formVm.destroy();
@@ -174,20 +174,20 @@ export default content({
     this.bind.admin = "";
     const controls = await myAction("controls");
     if (controls) {
-      if (controls.admin) { // 管理员
+      if (controls.admin) { // 관리자
         this.bind.admin = "admin";
       } else {
-        if (controls.readAdmin) { // 有考勤管理员职务 查看统计权限
+        if (controls.readAdmin) { // 근태 관리자 직책이 있으면 통계 조회 권한
           this.bind.admin = "readAdmin";
           content.myDutyList = controls.unitDutyList || [];
         }
-        if (controls.assistAdmin) { // 考勤组协助管理员
+        if (controls.assistAdmin) { // 근태 그룹 보조 관리자
           this.bind.assistAdmin = true;
         }
       }
     }
   },
-  // 普通菜单数据
+  // 일반 메뉴 데이터
   getCurrentPersonMenu() {
     const menus = this.navDataAll();
     let access = 0;
@@ -197,7 +197,7 @@ export default content({
       access = 2;
     }
     let accessMenus = menus.filter((menu) => menu.access <= access);
-    if (this.bind.assistAdmin) { // 协助管理员 添加考勤组管理菜单
+    if (this.bind.assistAdmin) { // 보조 관리자: 근태 그룹 관리 메뉴 추가
       if (!accessMenus.some((m) => m.access === 2)) {
         accessMenus.push(
           {

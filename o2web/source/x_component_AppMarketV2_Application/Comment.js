@@ -56,11 +56,11 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
     },
     load: function(){
         if (this.app.collectToken=="" || this.app.collectUrl==""){
-            //先登录collcect
-            this.actions.CollectAction.login(//平台封装好的方法
-                function( json ){ //服务调用成功的回调函数, json为服务传回的数据
+            //먼저 collcect 로그인
+            this.actions.CollectAction.login(//플랫폼이 제공하는 메서드
+                function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
                     if (json.type && json.type=="success"){
-                        data = json.data; //为变量data赋值
+                        data = json.data; //변수 data에 값 할당
                         this.app.collectUrl = data.collectUrl;
                         this.app.collectToken = data.collectToken;
                         this.loadCommentsGrade(this,this.commentsGrade.bind(this));
@@ -68,7 +68,7 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
                         this.loadCommentPower(this);
                         this.loadCommentsList(this,this.commentsView.bind(this));
                     }
-                }.bind(this),null,false //同步执行
+                }.bind(this),null,false //동기 실행
             );
         }else{
             //this.loadBbsInfo(this);
@@ -79,14 +79,14 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
         }
     },
     loadBbsInfo: function(content){
-        this.actions.CollectAction.bbs(//平台封装好的方法
-            function( json ){ //服务调用成功的回调函数, json为服务传回的数据
+        this.actions.CollectAction.bbs(//플랫폼이 제공하는 메서드
+            function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
                 if (json.type && json.type=="success"){debugger;
-                    data = json.data; //为变量data赋值
+                    data = json.data; //변수 data에 값 할당
                     this.bbsUrlPath = data.bbsUrlPath;
                     this.bbsUrl = data.bbsUrl;
                 }
-            }.bind(this),null,false //同步执行
+            }.bind(this),null,false //동기 실행
         );
     },
     loadCommentsGrade: function(content,callback){
@@ -244,7 +244,7 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
             "text":this.app.lp.commentCountText.replace("{n}",commentcount)
         }).inject(this.content.applicationcommenttopangular);
 
-        //5星
+        //별 5개
         new Element("div",{"text":"5","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightfive);
         gradeangular = new Element("div",{"class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightfive);
         new Element("img",{"src":this.content.iconPath+"blackfiveangular.png","class":"o2_appmarket_application_introduce_memo_remark_inner_pic"}).inject(gradeangular)
@@ -261,7 +261,7 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
         }
         new Element("div",{"text":this.numberFix(blackratio*100,1)+"%","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightfive);
         debugger;
-        //4星
+        //별 4개
         new Element("div",{"text":"4","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightfour);
         gradeangular = new Element("div",{"class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightfour);
         new Element("img",{"src":this.content.iconPath+"blackfiveangular.png","class":"o2_appmarket_application_introduce_memo_remark_inner_pic"}).inject(gradeangular)
@@ -277,7 +277,7 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
             blackratiodiv.setStyle("width",blackratiowidth+"px");
         }
         new Element("div",{"text":this.numberFix(blackratio*100,1)+"%","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightfour);
-        //3星
+        //별 3개
         new Element("div",{"text":"3","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightthree);
         gradeangular = new Element("div",{"class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightthree);
         new Element("img",{"src":this.content.iconPath+"blackfiveangular.png","class":"o2_appmarket_application_introduce_memo_remark_inner_pic"}).inject(gradeangular)
@@ -293,7 +293,7 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
             blackratiodiv.setStyle("width",blackratiowidth+"px");
         }
         new Element("div",{"text":this.numberFix(blackratio*100,1)+"%","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightthree);
-        //2星
+        //별 2개
         new Element("div",{"text":"2","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrighttwo);
         gradeangular = new Element("div",{"class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrighttwo);
         new Element("img",{"src":this.content.iconPath+"blackfiveangular.png","class":"o2_appmarket_application_introduce_memo_remark_inner_pic"}).inject(gradeangular)
@@ -309,7 +309,7 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
             blackratiodiv.setStyle("width",blackratiowidth+"px");
         }
         new Element("div",{"text":this.numberFix(blackratio*100,1)+"%","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrighttwo);
-        //1星
+        //별 1개
         new Element("div",{"text":"1","class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightone);
         gradeangular = new Element("div",{"class":"o2_appmarket_application_comment_top_right_graderatioItem"}).inject(this.content.applicationcommentrightone);
         new Element("img",{"src":this.content.iconPath+"blackfiveangular.png","class":"o2_appmarket_application_introduce_memo_remark_inner_pic"}).inject(gradeangular)
@@ -516,17 +516,17 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
     },
     numberFix:function(data,n){
         var numbers = '';
-        // 保留几位小数后面添加几个0
+        // 소수점 몇 자리 유지 후 0 추가
         for (var i = 0; i < n; i++) {
             numbers += '0';
         }
         var s = 1 + numbers;
-        // 如果是整数需要添加后面的0
+        // 정수이면 뒤에 0 추가 필요
         var spot = "." + numbers;
-        // Math.round四舍五入
-        //  parseFloat() 函数可解析一个字符串，并返回一个浮点数。
+        // Math.round 반올림
+        //  parseFloat() 함수는 문자열을 해석해 부동소수점 수를 반환.
         var value = Math.round(parseFloat(data) * s) / s;
-        // 从小数点后面进行分割
+        // 소수점 뒤에서 분할
         var d = value.toString().split(".");
         if (d.length == 1) {
             value = value.toString();

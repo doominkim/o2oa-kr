@@ -276,7 +276,7 @@ MWF.xApplication.ForumSection.Main = new Class({
 	closeNavi : function(){
 		if( this.navi )this.navi.close();
 	},
-	colorRgba : function( color, opacity ){ /*16进制颜色转为RGB格式*/
+	colorRgba : function( color, opacity ){ /*16진수 색상을 RGB 형식으로 변환*/
 		var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
 		var sColor = color.toLowerCase();
 		if(sColor && reg.test(sColor)){
@@ -287,7 +287,7 @@ MWF.xApplication.ForumSection.Main = new Class({
 				}
 				sColor = sColorNew;
 			}
-			//处理六位的颜色值
+			//6자리 색상 값 처리
 			var sColorChange = [];
 			for(var i=1; i<7; i+=2){
 				sColorChange.push(parseInt("0x"+sColor.slice(i,i+2)));
@@ -1079,7 +1079,7 @@ MWF.xApplication.ForumSection.Document = new Class({
 	_queryCreateDocumentNode:function( itemData ){
 	},
 	_postCreateDocumentNode: function( itemNode, itemData ){
-		//置顶帖和一般帖之间添加分割线
+		//상단 고정 글과 일반 글 사이에 구분선 추가
 		if( this.index != 1 && !itemData.isTopSubject  ){
 			var prev = this.view.items[this.index-1];
 			if( prev && prev.data.isTopSubject ){

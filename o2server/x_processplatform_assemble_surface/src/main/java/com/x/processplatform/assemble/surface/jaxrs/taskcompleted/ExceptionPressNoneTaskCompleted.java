@@ -7,6 +7,6 @@ class ExceptionPressNoneTaskCompleted extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionPressNoneTaskCompleted(String workId, String person) {
-		super("无法找到当前用户用于提醒的已办,工作标识:{}, 当前用户:{}.", workId, person);
+		super("독촉에 사용할 현재 사용자의 결재 완료를 찾을 수 없습니다, 문서 식별자: {}, 현재 사용자: {}.", workId, person);
 	}
 }

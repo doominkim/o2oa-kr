@@ -29,7 +29,7 @@ import com.x.base.core.project.tools.DefaultCharset;
 import com.x.base.core.project.tools.StringTools;
 
 /**
- * 获取配置文件
+ * 설정 파일 조회
  * @author sword
  */
 public class ActionOpen extends BaseAction {
@@ -105,7 +105,7 @@ public class ActionOpen extends BaseAction {
 
 	public static class Wi  extends GsonPropertyObject{
 
-		@FieldDescribe("文件名")
+		@FieldDescribe("파일 이름")
 		private String fileName;
 
 		public String getFileName() {
@@ -119,16 +119,16 @@ public class ActionOpen extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("执行时间")
+		@FieldDescribe("실행 시간")
 		private String time;
 
-		@FieldDescribe("执行结果")
+		@FieldDescribe("실행 결과")
 		private String status;
 
-		@FieldDescribe("config文件内容")
+		@FieldDescribe("config 파일 내용")
 		private String fileContent;
 
-		@FieldDescribe("是否Sample")
+		@FieldDescribe("Sample 여부")
 		private boolean isSample;
 
 		public String getTime() {

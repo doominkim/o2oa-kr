@@ -4,7 +4,7 @@ MWF.xApplication.cms.ColumnManager.ColumnViewerSetting = new Class({
     Implements: [Options],
     options : {
         orgTypes: ["person","unit","group"],
-        objectId : "" //对象或分类的ID
+        objectId : "" //객체 또는 분류의 ID
         //objectType : "APPINFO", //CATEGORY
         //permission : "VIEW" //PUBLISH
     },

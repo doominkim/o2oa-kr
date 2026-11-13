@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class HandoverProperties extends JsonProperties {
 
-    @FieldDescribe("应用列表.")
+    @FieldDescribe("앱 목록.")
     private List<String> applicationList;
 
-    @FieldDescribe("流程列表.")
+    @FieldDescribe("프로세스 목록.")
     private List<String> processList;
 
-    @FieldDescribe("工作列表.")
+    @FieldDescribe("업무 문서 목록.")
     private List<String> jobList;
 
     public List<String> getApplicationList() {

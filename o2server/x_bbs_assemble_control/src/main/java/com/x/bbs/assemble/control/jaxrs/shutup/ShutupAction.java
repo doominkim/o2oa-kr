@@ -24,12 +24,12 @@ import java.util.List;
  * @author sword
  */
 @Path("shutup")
-@JaxrsDescribe("论坛用户禁言服务")
+@JaxrsDescribe("포럼 사용자 발언 금지 서비스")
 public class ShutupAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ShutupAction.class);
 
-	@JaxrsMethodDescribe(value = "查询当前用户是否被禁言，返回被禁言信息.", action = ActionGetShutup.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 발언 금지 여부 조회, 발언 금지 정보 반환.", action = ActionGetShutup.class)
 	@GET
 	@Path("get/shutup")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -46,7 +46,7 @@ public class ShutupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "保存.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "저장.", action = ActionSave.class)
 	@POST
 	@Path("save")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -64,14 +64,14 @@ public class ShutupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查询.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "페이지 조회.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-									 @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+									 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+									 @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -83,13 +83,13 @@ public class ShutupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "解除禁言", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "발언 금지 해제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+					   @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

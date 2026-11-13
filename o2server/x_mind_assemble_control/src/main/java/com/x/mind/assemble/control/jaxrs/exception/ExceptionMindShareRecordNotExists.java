@@ -7,6 +7,6 @@ public class ExceptionMindShareRecordNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionMindShareRecordNotExists( String id ) {
-		super("脑图文件分享信息对象不存在。ID:" + id );
+		super("마인드맵 파일 공유 정보가 없습니다. ID:" + id );
 	}
 }

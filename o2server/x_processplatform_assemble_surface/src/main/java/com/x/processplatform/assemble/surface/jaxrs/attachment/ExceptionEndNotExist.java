@@ -7,7 +7,7 @@ class ExceptionEndNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -7038279889683420366L;
 
 	ExceptionEndNotExist(String str) {
-		super("无法找到流程: {} 的结束节点.", str);
+		super("결재: {}의 종료 단계를 찾을 수 없습니다.", str);
 	}
 
 }

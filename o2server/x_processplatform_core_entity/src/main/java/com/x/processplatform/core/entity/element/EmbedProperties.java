@@ -8,7 +8,7 @@ public class EmbedProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 8342746214747017734L;
 
-	@FieldDescribe("活动自定义数据")
+	@FieldDescribe("활동 사용자 정의 데이터")
 	private JsonElement customData;
 
 	public JsonElement getCustomData() {
@@ -19,22 +19,22 @@ public class EmbedProperties extends JsonProperties {
 		this.customData = customData;
 	}
 
-	@FieldDescribe("嵌入子流程在结束事件(包含cancel和end活动)脚本,.")
+	@FieldDescribe("내장 하위 프로세스 종료 이벤트(cancel과 end 활동 포함) 스크립트.")
 	private String completedScript;
 
-	@FieldDescribe("嵌入子流程在结束事件包含cancel和end活动脚本文本.")
+	@FieldDescribe("내장 하위 프로세스 종료 이벤트(cancel과 end 활동 포함) 스크립트 텍스트.")
 	private String completedScriptText;
 
-	@FieldDescribe("嵌入子流程在End节点结束事件脚本.")
+	@FieldDescribe("내장 하위 프로세스 End 노드 종료 이벤트 스크립트.")
 	private String completedEndScript;
 
-	@FieldDescribe("嵌入子流程在End节点结束事件脚本文本.")
+	@FieldDescribe("내장 하위 프로세스 End 노드 종료 이벤트 스크립트 텍스트.")
 	private String completedEndScriptText;
 
-	@FieldDescribe("嵌入子流程在Cancel节点结束事件脚本.")
+	@FieldDescribe("내장 하위 프로세스 Cancel 노드 종료 이벤트 스크립트.")
 	private String completedCancelScript;
 
-	@FieldDescribe("嵌入子流程在Cancel节点结束事件脚本文本.")
+	@FieldDescribe("내장 하위 프로세스 Cancel 노드 종료 이벤트 스크립트 텍스트.")
 	private String completedCancelScriptText;
 
 	public String getCompletedEndScript() {

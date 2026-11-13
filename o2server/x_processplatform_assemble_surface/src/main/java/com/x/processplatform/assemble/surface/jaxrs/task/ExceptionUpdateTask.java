@@ -7,7 +7,7 @@ class ExceptionUpdateTask extends LanguagePromptException {
 	private static final long serialVersionUID = 3674258561301135294L;
 
 	ExceptionUpdateTask(String task) {
-		super("更新待办失败, task: {}.", task);
+		super("결재 대기 업데이트 실패, task: {}.", task);
 	}
 
 }

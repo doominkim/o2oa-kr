@@ -17,11 +17,11 @@ import com.x.bbs.entity.BBSRoleInfo;
 import com.x.bbs.entity.BBSRoleInfo_;
 
 /**
- * 类   名：BBSRoleInfoFactory<br/>
- * 实体类：BBSRoleInfo<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-08-10 17:17:26
+ * 클래스명: BBSRoleInfoFactory<br/>
+ * 엔티티 클래스: BBSRoleInfo<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-08-10 17:17:26
 **/
 public class BBSRoleInfoFactory extends AbstractFactory {
 
@@ -29,12 +29,12 @@ public class BBSRoleInfoFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSRoleInfo实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSRoleInfo 엔티티 정보 객체 조회" )
 	public BBSRoleInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSRoleInfo.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSRoleInfo实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSRoleInfo 엔티티 정보 목록 조회" )
 	public List<BBSRoleInfo> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSRoleInfo>();
@@ -47,7 +47,7 @@ public class BBSRoleInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "列示全部的BBSRoleInfo实体信息列表" )
+	//@MethodDescribe( "전체 BBSRoleInfo 엔티티 정보 목록 조회" )
 	public List<BBSRoleInfo> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSRoleInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -55,7 +55,7 @@ public class BBSRoleInfoFactory extends AbstractFactory {
 		return em.createQuery( cq ).setMaxResults( 1000 ).getResultList();
 	}
 
-	//@MethodDescribe( "根据角色编码获取指定的BBSRoleInfo实体信息列表" )
+	//@MethodDescribe( "역할 코드로 지정 BBSRoleInfo 엔티티 정보 목록 조회" )
 	public BBSRoleInfo getRoleByCode( String roleCode ) throws Exception {
 		if( roleCode == null || roleCode.isEmpty() ){
 			throw new Exception("roleCode is null!");
@@ -74,7 +74,7 @@ public class BBSRoleInfoFactory extends AbstractFactory {
 		}
 	}
 
-	//@MethodDescribe( "根据论坛ID获取指定论坛包含的所有BBSRoleInfo实体信息列表" )
+	//@MethodDescribe( "포럼 ID로 해당 포럼의 전체 BBSRoleInfo 엔티티 정보 목록 조회" )
 	public List<String> listRoleByForumId( String forumId ) throws Exception {
 		if( forumId == null || forumId.isEmpty() ){
 			throw new Exception("forumId is null!");
@@ -89,9 +89,9 @@ public class BBSRoleInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据版块ID获取指定版块包含的所有BBSRoleInfo实体信息列表
+	 * 게시판 ID로 해당 게시판의 전체 BBSRoleInfo 엔티티 정보 목록 조회
 	 * @param sectionId
-	 * @param queryMainSectionId 是否查询主版块ID
+	 * @param queryMainSectionId 주 게시판 ID 조회 여부
 	 * @return
 	 * @throws Exception
 	 */

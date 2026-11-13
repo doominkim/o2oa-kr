@@ -63,7 +63,7 @@ class ActionListDeletePaging extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("用户")
+		@FieldDescribe("사용자")
 		private String person;
 
 		public String getPerson() {

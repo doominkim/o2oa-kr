@@ -51,7 +51,7 @@ import com.x.program.center.core.entity.Agent;
 import com.x.program.center.core.entity.Agent_;
 
 /**
- * 定时代理任务处理
+ * 예약 에이전트 작업 처리
  *
  * @author sword
  */

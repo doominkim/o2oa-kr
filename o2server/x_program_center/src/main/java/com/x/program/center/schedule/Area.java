@@ -59,14 +59,14 @@ public class Area extends BaseAction {
 				String sha = DigestUtils.sha256Hex(XGsonBuilder.toJson(wrapProvince));
 				District province = this.getProvinceDistrict(business, wrapProvince.getName());
 				if (null != province && StringUtils.equals(sha, province.getSha())) {
-					LOGGER.debug("{} 无需更新.", wrapProvince::getName);
+					LOGGER.debug("{} 업데이트 불필요.", wrapProvince::getName);
 					continue;
 				}
 				if (null != province) {
-					LOGGER.debug("删除 {}.", wrapProvince::getName);
+					LOGGER.debug("{} 삭제.", wrapProvince::getName);
 					this.removeProvince(business, province);
 				}
-				LOGGER.debug("更新 {}.", wrapProvince::getName);
+				LOGGER.debug("{} 업데이트.", wrapProvince::getName);
 				this.saveProvince(business, wrapProvince, sha);
 			}
 		}
@@ -203,19 +203,19 @@ public class Area extends BaseAction {
 
 	public static class DistractObject extends GsonPropertyObject {
 
-		@FieldDescribe("名称.")
+		@FieldDescribe("이름.")
 		private String name;
 
-		@FieldDescribe("邮编.")
+		@FieldDescribe("우편번호.")
 		private String zipCode;
 
-		@FieldDescribe("城市区号.")
+		@FieldDescribe("도시 지역번호.")
 		private String cityCode;
 
-		@FieldDescribe("级别.")
+		@FieldDescribe("등급.")
 		private String level;
 
-		@FieldDescribe("中心坐标.")
+		@FieldDescribe("중심 좌표.")
 		private String center;
 
 		public String getName() {

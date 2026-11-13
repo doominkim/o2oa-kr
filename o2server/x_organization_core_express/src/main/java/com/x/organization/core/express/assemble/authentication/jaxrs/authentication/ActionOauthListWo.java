@@ -9,32 +9,32 @@ public class ActionOauthListWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -4816908647083844614L;
 
-	@FieldDescribe("名称.")
-	@Schema(description = "名称.")
+	@FieldDescribe("이름.")
+	@Schema(description = "이름.")
 	private String name;
 
-	@FieldDescribe("显示名称.")
-	@Schema(description = "显示名称..")
+	@FieldDescribe("표시 이름.")
+	@Schema(description = "표시 이름..")
 	private String displayName;
 
-	@FieldDescribe("认证地址.")
-	@Schema(description = "认证地址.")
+	@FieldDescribe("인증 주소.")
+	@Schema(description = "인증 주소.")
 	private String authAddress;
 
-	@FieldDescribe("认证方法类型.")
-	@Schema(description = "认证方法类型.")
+	@FieldDescribe("인증 방식 유형.")
+	@Schema(description = "인증 방식 유형.")
 	private String authMethod;
 
-	@FieldDescribe("认证参数.")
-	@Schema(description = "认证参数.")
+	@FieldDescribe("인증 매개변수.")
+	@Schema(description = "인증 매개변수.")
 	private String authParameter;
 
-	@FieldDescribe("图标.")
-	@Schema(description = "图标.")
+	@FieldDescribe("아이콘.")
+	@Schema(description = "아이콘.")
 	private String icon;
 
-	@FieldDescribe("是否启用帐号绑定.")
-	@Schema(description = "是否启用帐号绑定.")
+	@FieldDescribe("계정 연동 사용 여부.")
+	@Schema(description = "계정 연동 사용 여부.")
 	private Boolean bindingEnable;
 
 	public String getIcon() {

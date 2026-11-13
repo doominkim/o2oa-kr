@@ -81,7 +81,7 @@ public class WorkContext {
 		return gson.toJson(work);
 	}
 
-	// 流转完成返回null
+	// 흐름 완료 시 null 반환
 	public String getActivity() {
 		return gson.toJson(this.activity);
 	}
@@ -90,7 +90,7 @@ public class WorkContext {
 		try {
 			List<String> ids = business.workLog().listWithWork(work.getId());
 			List<WorkLog> list = business.entityManagerContainer().list(WorkLog.class, ids);
-			/* 保持和前台一直顺序 */
+			/* 프론트와 동일한 순서 유지 */
 			list = list.stream()
 					.sorted(Comparator.comparing(WorkLog::getFromTime, Comparator.nullsLast(Date::compareTo))
 							.thenComparing(WorkLog::getArrivedTime, Comparator.nullsLast(Date::compareTo)))
@@ -111,7 +111,7 @@ public class WorkContext {
 			List<Record> records = list.stream()
 					.filter(o -> StringUtils.equals(o.getWork(), this.aeiObjects.getWork().getId()))
 					.collect(Collectors.toList());
-			// 考虑到比如已经是最后一个人工环节,那么work已经转为workCompleted,那么直接返回全部record
+			// 이미 마지막 수동 단계라면 work가 이미 workCompleted로 전환되었으므로 전체 record를 바로 반환
 			if (records.isEmpty()) {
 				return gson.toJson(list.stream().sorted(Comparator.nullsLast(Comparator.comparing(Record::getOrder)))
 						.collect(Collectors.toList()));
@@ -125,7 +125,7 @@ public class WorkContext {
 	}
 
 	/**
-	 * 返回record,如果没有绑定进来返回recordList最后一条
+	 * record 반환, 바인딩되지 않았으면 recordList의 마지막 항목 반환
 	 * 
 	 * @param record
 	 */
@@ -165,7 +165,7 @@ public class WorkContext {
 
 	/**
 	 *
-	 * @return 当前注入的路由
+	 * @return 현재 주입된 경로
 	 * @throws Exception
 	 */
 	@Deprecated(forRemoval = true, since = "never use.")
@@ -285,7 +285,7 @@ public class WorkContext {
 	}
 
 	/**
-	 * 为脚本运行准备的Json对象,如果为空那么返回字符串null
+	 * 스크립트 실행용 Json 객체, 비어 있으면 문자열 null 반환
 	 *
 	 * @return
 	 * @throws Exception

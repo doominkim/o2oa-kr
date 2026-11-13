@@ -98,7 +98,7 @@ class ActionListWithApplication extends BaseAction {
 	}
 
 	/**
-	 * 通过活动的form设置得到那些活动使用了表单,再通过活动的process得到processId,生成form->processId的一对多map
+	 * 활동의 form 설정으로 해당 양식을 사용하는 활동을 찾고, 활동의 process로 processId를 얻어 form->processId 일대다 map 생성
 	 * 
 	 * @param business
 	 * @param formIds

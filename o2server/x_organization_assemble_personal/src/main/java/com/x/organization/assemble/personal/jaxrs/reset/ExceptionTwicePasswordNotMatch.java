@@ -7,7 +7,7 @@ class ExceptionTwicePasswordNotMatch extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionTwicePasswordNotMatch() {
-		super("两次输入的新密码不匹配.");
+		super("두 번 입력한 새 비밀번호가 일치하지 않습니다.");
 	}
 
 }

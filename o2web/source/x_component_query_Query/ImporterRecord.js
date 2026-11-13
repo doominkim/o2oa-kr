@@ -554,7 +554,7 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
             this.viewData.each(function(d){
                 var srcData = o2.typeOf(d) === "string" ? JSON.parse(d) : d;
                 if(o2.typeOf(srcData) === "object"){
-                    srcData.o2ErrorText = this.data.distribution || ""; //错误信息
+                    srcData.o2ErrorText = this.data.distribution || ""; //오류 정보
                 }else{
                     srcData.push(this.data.distribution || "");
                 }
@@ -570,7 +570,7 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
                 json.data.each(function(d){
                     var srcData = o2.typeOf(d.srcData) === "string" ? JSON.parse(d.srcData) : d.srcData;
                     if(o2.typeOf(srcData) === "object"){
-                        srcData.o2ErrorText = d.distribution || ""; //错误信息
+                        srcData.o2ErrorText = d.distribution || ""; //오류 정보
                     }else{
                         srcData.push(d.distribution || "");
                     }

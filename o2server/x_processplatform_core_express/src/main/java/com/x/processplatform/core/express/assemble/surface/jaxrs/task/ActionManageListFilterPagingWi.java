@@ -12,95 +12,95 @@ public class ActionManageListFilterPagingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 3548558189684378598L;
 
-	@FieldDescribe("应用标识.")
-	@Schema(description = "应用标识.")
+	@FieldDescribe("앱 식별자.")
+	@Schema(description = "앱 식별자.")
 	private List<String> applicationList;
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList;
 
-	@FieldDescribe("是否查找同版本流程待办：true(默认查找)|false.")
-	@Schema(description = "是否查找同版本流程待办：true(默认查找)|false.")
+	@FieldDescribe("같은 버전 프로세스 결재 대기 조회 여부: true(기본값, 조회)|false.")
+	@Schema(description = "같은 버전 프로세스 결재 대기 조회 여부: true(기본값, 조회)|false.")
 	private Boolean relateEditionProcess = true;
 
-	@FieldDescribe("是否排除草稿待办：false(默认不排除)|true.")
-	@Schema(description = "是否排除草稿待办：false(默认不排除)|true.")
+	@FieldDescribe("임시 저장 결재 대기 제외 여부: false(기본값, 제외 안 함)|true.")
+	@Schema(description = "임시 저장 결재 대기 제외 여부: false(기본값, 제외 안 함)|true.")
 	private Boolean isExcludeDraft;
 
-	@FieldDescribe("开始时间,格式为:yyyy-MM-dd HH:mm:ss.")
-	@Schema(description = "开始时间,格式为:yyyy-MM-dd HH:mm:ss.")
+	@FieldDescribe("시작 시간, 형식:yyyy-MM-dd HH:mm:ss.")
+	@Schema(description = "시작 시간, 형식:yyyy-MM-dd HH:mm:ss.")
 	private String startTime;
 
-	@FieldDescribe("结束时间,格式为:yyyy-MM-dd HH:mm:ss.")
-	@Schema(description = "结束时间,格式为:yyyy-MM-dd HH:mm:ss.")
+	@FieldDescribe("종료 시간, 형식:yyyy-MM-dd HH:mm:ss.")
+	@Schema(description = "종료 시간, 형식:yyyy-MM-dd HH:mm:ss.")
 	private String endTime;
 
-	@FieldDescribe("人员标识.")
-	@Schema(description = "人员标识.")
+	@FieldDescribe("사용자 식별자.")
+	@Schema(description = "사용자 식별자.")
 	private List<String> credentialList;
 
-	@FieldDescribe("活动名称.")
-	@Schema(description = "活动名称.")
+	@FieldDescribe("활동 이름.")
+	@Schema(description = "활동 이름.")
 	private List<String> activityNameList;
 
-	@FieldDescribe("创建工作身份所属组织.")
-	@Schema(description = "创建工作身份所属组织.")
+	@FieldDescribe("업무 문서 생성 신분의 소속 조직.")
+	@Schema(description = "업무 문서 생성 신분의 소속 조직.")
 	private List<String> creatorUnitList;
 
-	@FieldDescribe("工作标识.")
-	@Schema(description = "工作标识.")
+	@FieldDescribe("업무 문서 식별자.")
+	@Schema(description = "업무 문서 식별자.")
 	private List<String> workList;
 
-	@FieldDescribe("任务标识.")
-	@Schema(description = "任务标识.")
+	@FieldDescribe("작업 식별자.")
+	@Schema(description = "작업 식별자.")
 	private List<String> jobList;
 
-	@FieldDescribe("开始年月,格式为文本格式 yyyy-MM")
-	@Schema(description = "开始年月,格式为文本格式 yyyy-MM")
+	@FieldDescribe("시작 연월, 텍스트 형식 yyyy-MM")
+	@Schema(description = "시작 연월, 텍스트 형식 yyyy-MM")
 	private List<String> startTimeMonthList;
 
-	@FieldDescribe("时效超时时间（0表示所有已超时的、1表示超时1小时以上的、2、3...）")
-	@Schema(description = "时效超时时间（0表示所有已超时的、1表示超时1小时以上的、2、3...）")
+	@FieldDescribe("기한 초과 시간(0은 기한이 초과된 전체, 1은 1시간 이상 초과, 2, 3...)")
+	@Schema(description = "기한 초과 시간(0은 기한이 초과된 전체, 1은 1시간 이상 초과, 2, 3...)")
 	private String expireTime;
 
-	@FieldDescribe("催办超时时间（0表示所有已超时的、1表示超时1小时以上的、2、3...）")
-	@Schema(description = "催办超时时间（0表示所有已超时的、1表示超时1小时以上的、2、3...）")
+	@FieldDescribe("독촉 초과 시간(0은 기한이 초과된 전체, 1은 1시간 이상 초과, 2, 3...)")
+	@Schema(description = "독촉 초과 시간(0은 기한이 초과된 전체, 1은 1시간 이상 초과, 2, 3...)")
 	private String urgeTime;
 
-	@FieldDescribe("搜索关键字,搜索范围为:标题,意见,文号,创建人,创建部门.")
-	@Schema(description = "搜索关键字,搜索范围为:标题,意见,文号,创建人,创建部门.")
+	@FieldDescribe("검색 키워드, 검색 범위:제목, 의견, 문서번호, 생성자, 생성 부서.")
+	@Schema(description = "검색 키워드, 검색 범위:제목, 의견, 문서번호, 생성자, 생성 부서.")
 	private String key;
 
-	@FieldDescribe("业务数据String值01.")
-	@Schema(description = "业务数据String值01.")
+	@FieldDescribe("업무 데이터 String 값01.")
+	@Schema(description = "업무 데이터 String 값01.")
 	private String stringValue01;
-	@FieldDescribe("业务数据String值02")
-	@Schema(description = "业务数据String值02.")
+	@FieldDescribe("업무 데이터 String 값02")
+	@Schema(description = "업무 데이터 String 값02.")
 	private String stringValue02;
-	@FieldDescribe("业务数据String值03")
-	@Schema(description = "业务数据String值03.")
+	@FieldDescribe("업무 데이터 String 값03")
+	@Schema(description = "업무 데이터 String 값03.")
 	private String stringValue03;
-	@FieldDescribe("业务数据String值04")
-	@Schema(description = "业务数据String值04.")
+	@FieldDescribe("업무 데이터 String 값04")
+	@Schema(description = "업무 데이터 String 값04.")
 	private String stringValue04;
-	@FieldDescribe("业务数据String值05")
-	@Schema(description = "业务数据String值05.")
+	@FieldDescribe("업무 데이터 String 값05")
+	@Schema(description = "업무 데이터 String 값05.")
 	private String stringValue05;
-	@FieldDescribe("业务数据String值06")
-	@Schema(description = "业务数据String值06.")
+	@FieldDescribe("업무 데이터 String 값06")
+	@Schema(description = "업무 데이터 String 값06.")
 	private String stringValue06;
-	@FieldDescribe("业务数据String值07")
-	@Schema(description = "业务数据String值07.")
+	@FieldDescribe("업무 데이터 String 값07")
+	@Schema(description = "업무 데이터 String 값07.")
 	private String stringValue07;
-	@FieldDescribe("业务数据String值08")
-	@Schema(description = "业务数据String值08.")
+	@FieldDescribe("업무 데이터 String 값08")
+	@Schema(description = "업무 데이터 String 값08.")
 	private String stringValue08;
-	@FieldDescribe("业务数据String值09")
-	@Schema(description = "业务数据String值09.")
+	@FieldDescribe("업무 데이터 String 값09")
+	@Schema(description = "업무 데이터 String 값09.")
 	private String stringValue09;
-	@FieldDescribe("业务数据String值10")
-	@Schema(description = "业务数据String值10.")
+	@FieldDescribe("업무 데이터 String 값10")
+	@Schema(description = "업무 데이터 String 값10.")
 	private String stringValue10;
 
 	public List<String> getApplicationList() {

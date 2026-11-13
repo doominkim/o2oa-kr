@@ -68,7 +68,7 @@ public class ExecuteTarget {
         }
     }
 
-    // 拼装通过runtime传递的附加选择条件
+    // runtime으로 전달된 추가 선택 조건 조합
     private String appendAdditionFilter(Runtime runtime, String sql) throws JSQLParserException {
         if (!ListTools.isEmpty(runtime.getFilterList())) {
             net.sf.jsqlparser.statement.Statement stmt = CCJSqlParserUtil.parse(sql);
@@ -78,8 +78,8 @@ public class ExecuteTarget {
         return sql;
     }
 
-    // 读取 QUESTION MARK PARAMETER
-    // 的值,所有形如?1的参数只可能通过前端传递过来,通过runtime读取到.如果没有读到就直接设置为null
+    // QUESTION MARK PARAMETER 읽기
+    // 의 값, ?1 형태의 매개변수는 모두 프런트에서만 전달되며 runtime으로 읽음. 읽지 못하면 null로 설정
     private void questionMarkParameter(EffectivePerson effectivePerson, Organization organization,
             Runtime runtime, String sql) throws Exception {
         Matcher matcher = QUESTMARK_PARAMETER_REGEX.matcher(sql);
@@ -90,7 +90,7 @@ public class ExecuteTarget {
         }
     }
 
-    // 将 NAMED PARAMETER 转换成 QUESTION MARK PARAMETER,在传入前次的PREVNAMEDPARAM中查找,减少运行次数
+    // NAMED PARAMETER를 QUESTION MARK PARAMETER로 변환, 이전에 전달된 PREVNAMEDPARAM에서 찾아 실행 횟수 감소
     private String namedParameterChangeToQuestionMark(EffectivePerson effectivePerson, Organization organization,
             Runtime runtime, String sql, Map<String, Object> prevNamedParam) throws Exception {
         Matcher matcher = NAMED_PARAMETER_REGEX.matcher(sql);

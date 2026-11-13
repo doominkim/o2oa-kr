@@ -52,7 +52,7 @@ class ActionUpdateModel extends BaseAction {
 			String apiKey = aiModel.getApiKey();
 			String name = aiModel.getName();
 			if(BooleanUtils.isTrue(aiModel.getAsDefault()) && BooleanUtils.isNotTrue(wi.getAsDefault())){
-				throw new ExceptionCustom("请设置一个启用的模型.");
+				throw new ExceptionCustom("활성화된 모델을 하나 설정하십시오.");
 			}
 			List<AiModel> list = new ArrayList<>(emc.listAll(AiModel.class));
 			list.remove(aiModel);

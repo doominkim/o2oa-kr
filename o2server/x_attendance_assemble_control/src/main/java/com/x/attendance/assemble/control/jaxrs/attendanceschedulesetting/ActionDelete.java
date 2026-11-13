@@ -35,7 +35,7 @@ public class ActionDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceScheduleProcess( e, "系统根据ID查询指定组织排班信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionAttendanceScheduleProcess( e, "ID로 조직 근무 편성 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -46,7 +46,7 @@ public class ActionDelete extends BaseAction {
 				result.setData( new Wo( id ) );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceScheduleProcess( e, "根据ID删除组织排班信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionAttendanceScheduleProcess( e, "ID로 조직 근무 편성 정보를 삭제하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

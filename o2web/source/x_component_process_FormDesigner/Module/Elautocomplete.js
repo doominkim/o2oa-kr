@@ -14,7 +14,7 @@ MWF.xApplication.process.FormDesigner.Module.Elautocomplete = MWF.FCElautocomple
 		this.moduleName = "elautocomplete";
 	},
 	_createElementHtml: function(){
-		//var html = "<el-input placeholder=\"请输入内容\"></el-input>";
+		//var html = "<el-input placeholder=\"내용을 입력하십시오\"></el-input>";
 		var html = "<el-autocomplete";
 		// if (this.json.description) html += " placeholder=\""+this.json.description+"\"";
 		// if (this.json.size && this.json.size!=="default") html += " size=\""+this.json.size+"\"";

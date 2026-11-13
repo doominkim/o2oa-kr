@@ -22,7 +22,7 @@ class ActionListNameWithUnit extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList = new ArrayList<>();
 
 		public List<String> getUnitList() {
@@ -37,7 +37,7 @@ class ActionListNameWithUnit extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("组织属性名称")
+		@FieldDescribe("조직 속성 이름")
 		private List<String> nameList = new ArrayList<>();
 
 		public List<String> getNameList() {

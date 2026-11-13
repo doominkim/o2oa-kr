@@ -61,7 +61,7 @@ public class ActionAppealCreate extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询员工打卡信息时发生异常！ID:"+id);
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "ID로 직원 체크 정보를 조회하는 중 오류가 발생했습니다! ID:"+id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -76,25 +76,25 @@ public class ActionAppealCreate extends BaseAction {
 				appeal_flowType_value = attendanceSettingServiceAdv.getValueByCode( "APPEAL_AUDIFLOWTYPE" );
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess( e, "系统在获取申诉审核配置时发生异常！" );
+				Exception exception = new ExceptionAttendanceAppealProcess( e, "이의 신청 심사 설정을 가져오는 중 오류가 발생했습니다!" );
 				result.error( exception);
 				logger.error( e, effectivePerson, request, null);
 			}
 		}
 
 		if (check) {
-			// 利用打卡记录中的信息，创建一个申诉信息记录
+			// 출퇴근 기록 정보로 이의 신청 정보 기록 생성
 			attendanceAppealInfo = attendanceSettingServiceAdv.composeAppealInfoWithDetailInfo( attendanceDetail, 
 					wrapIn.getReason(), wrapIn.getAppealReason(),  wrapIn.getSelfHolidayType(),  wrapIn.getAddress(), 
 					wrapIn.getStartTime(),  wrapIn.getEndTime(),  wrapIn.getAppealDescription() );
-			// 创建一个申诉审批记录信息
+			// 이의 신청 승인 기록 정보 생성
 			attendanceAppealAuditInfo = new AttendanceAppealAuditInfo();
 			attendanceAppealAuditInfo.setId( attendanceAppealInfo.getId());
 			attendanceAppealAuditInfo.setDetailId( attendanceDetail.getId() );
 		}
 
 		
-		//查询申诉审核人
+		//이의 신청 심사자 조회
 		if (check) {
 			if( StringUtils.isNotEmpty( appeal_auditor_type ) ) {
 				try {
@@ -105,15 +105,15 @@ public class ActionAppealCreate extends BaseAction {
 						}
 						attendanceAppealAuditInfo.setProcessPerson1( appealAuditPersonName );
 						attendanceAppealAuditInfo.setCurrentProcessor( appealAuditPersonName );
-						attendanceAppealInfo.setCurrentProcessor( appealAuditPersonName );// 将第一个处理人设置为当前处理人
+						attendanceAppealInfo.setCurrentProcessor( appealAuditPersonName );// 첫 번째 처리자를 현재 처리자로 설정
 						attendanceAppealAuditInfo.setAuditFlowType( AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN );
 					}
 
 				}catch( Exception e ) {
 					check = false;
-					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据根据考勤人员查询申诉审核人信息时发生异常！personName:"+personName );
+					Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 대상자로 이의 신청 심사자 정보를 조회하는 중 오류가 발생했습니다! personName:"+personName );
 					result.error(exception);
-					logger.warn( "系统在根据根据考勤人员查询申诉审核人信息时发生异常！personName:"+personName );
+					logger.warn( "근태 대상자로 이의 신청 심사자 정보를 조회하는 중 오류가 발생했습니다! personName:"+personName );
 					logger.error(e, effectivePerson, request, null);
 				}
 			}
@@ -134,16 +134,16 @@ public class ActionAppealCreate extends BaseAction {
 		
 		if (check && !StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW)) {
 			if( StringUtils.isEmpty(appealAuditPersonName) ) {
-				//申诉审核人不存在
+				//이의 신청 심사자가 존재하지 않습니다
 				check = false;
 				String message = null;
 				String unitLevelName = null;
 				if( StringUtils.isEmpty(appeal_auditor_type)) {
 					message = "소명 심사자 유형이 설정되지 않았습니다!";
-				}else if( "无".equals( appeal_auditor_type.trim() )){//当前人处理
+				}else if( "无".equals( appeal_auditor_type.trim() )){//현재 사용자 처리
 					attendanceAppealAuditInfo.setProcessPerson1( effectivePerson.getDistinguishedName() );
-					attendanceAppealAuditInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 将第一个处理人设置为当前处理人
-					attendanceAppealInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 将第一个处理人设置为当前处理人
+					attendanceAppealAuditInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 첫 번째 처리자를 현재 처리자로 설정
+					attendanceAppealInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 첫 번째 처리자를 현재 처리자로 설정
 				}else if( AppealConfig.APPEAL_AUDITTYPE_UNITDUTY.equals( appeal_auditor_type )){
 					unitLevelName = userManagerService.getUnitLevelNameWithName( attendanceDetail.getUnitName() );
 					message = personName + "의 소속 부서["+unitLevelName+"] 직무["+appeal_auditor_value+"]가 없습니다!";
@@ -161,7 +161,7 @@ public class ActionAppealCreate extends BaseAction {
 			}
 		}
 		
-		//查询申诉复核人
+		//이의 신청 재검토자 조회
 		if (check && (!StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW))) {
 			if( StringUtils.isNotEmpty( appeal_checker_type )   && !"无".equals( appeal_checker_type  ) ) {
 				try {
@@ -169,9 +169,9 @@ public class ActionAppealCreate extends BaseAction {
 					attendanceAppealAuditInfo.setProcessPerson2( appealCheckPersonName );
 				}catch( Exception e ) {
 					check = false;
-					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据根据考勤人员查询申诉复核人信息时发生异常！personName:"+personName );
+					Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 대상자로 이의 신청 재검토자 정보를 조회하는 중 오류가 발생했습니다! personName:"+personName );
 					result.error(exception);
-					logger.warn( "系统在根据根据考勤人员查询申诉复核人信息时发生异常！personName:"+personName );
+					logger.warn( "근태 대상자로 이의 신청 재검토자 정보를 조회하는 중 오류가 발생했습니다! personName:"+personName );
 					logger.error(e, effectivePerson, request, null);
 				}
 			}
@@ -179,7 +179,7 @@ public class ActionAppealCreate extends BaseAction {
 		if (check && (!StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW))) {
 			if( StringUtils.isNotEmpty( appeal_checker_type )  && !StringUtils.equals( appeal_checker_type, "无" ) ) {
 				if( StringUtils.isEmpty(appealCheckPersonName) ) {
-					//申诉复核人不存在
+					//이의 신청 재검토자가 존재하지 않습니다
 					check = false;
 					String message = null;
 					String unitLevelName = null;
@@ -204,93 +204,93 @@ public class ActionAppealCreate extends BaseAction {
 			
 		}
 		
-		//查询申诉审核人所属组织
+		//이의 신청 심사자 소속 조직 조회
 		if (check && (!StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW))) {
 			if( AppealConfig.APPEAL_AUDITTYPE_UNITDUTY.equalsIgnoreCase( appeal_auditor_type ) ) {
 				attendanceAppealAuditInfo.setProcessPersonUnit1(
 						attendanceAppealInfoServiceAdv.getPersonUnitName( appealAuditPersonName, attendanceDetail.getUnitName(), wrapIn.getIdentity() ) );
 			}else {
-				//汇报对象，指定人以及人员属性中指定的人员，根据人员姓名取首选组织（第一个）
+				//보고 대상, 지정 사용자 및 사용자 속성에 지정된 사용자, 사용자 이름으로 기본 조직(첫 번째) 사용
 				if( StringUtils.isNotEmpty( appealAuditPersonName ) ) {
-					try {//获取审核人组织信息
+					try {//심사자 조직 정보 조회
 						attendanceAppealAuditInfo.setProcessPersonUnit1( userManagerService.getUnitNameWithPersonName( appealAuditPersonName ));
 					}catch( Exception e ) {
 						check = false;
-						Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据审核人获取组织信息时发生异常。");
+						Exception exception = new ExceptionAttendanceAppealProcess(e, "심사자로 조직 정보를 가져오는 중 오류가 발생했습니다.");
 						result.error(exception);
-						logger.warn( "系统在根据审核人获取组织信息时发生异常！personName:"+appealAuditPersonName );
+						logger.warn( "시스템이 심사자로 조직 정보를 조회하는 중 예외가 발생했습니다! personName:"+appealAuditPersonName );
 						logger.error(e, effectivePerson, request, null);
 					}
 				}
 			}
 		}
-		//根据所属组织名称查询申诉审核人所属顶层组织
+		//소속 조직명으로 이의 신청 심사자 소속 최상위 조직 조회
 		if (check && !StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW)) {
 			if( StringUtils.isNotEmpty( attendanceAppealAuditInfo.getProcessPersonUnit1() )) {
 				try {
 					attendanceAppealAuditInfo.setProcessPersonTopUnit1( userManagerService.getTopUnitNameWithUnitName( attendanceAppealAuditInfo.getProcessPersonUnit1() ) );
 				}catch( Exception e ) {
 					check = false;
-					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据审核人获取顶层组织信息时发生异常。");
+					Exception exception = new ExceptionAttendanceAppealProcess(e, "심사자로 최상위 조직 정보를 가져오는 중 오류가 발생했습니다.");
 					result.error(exception);
-					logger.warn( "系统在根据审核人获取顶层组织信息时发生异常！personName:"+appealAuditPersonName );
+					logger.warn( "시스템이 심사자로 최상위 조직 정보를 조회하는 중 예외가 발생했습니다! personName:"+appealAuditPersonName );
 					logger.error(e, effectivePerson, request, null);
 				}
 			}
 		}
 		
-		//查询申诉复核人所属组织
+		//이의 신청 재검토자 소속 조직 조회
 		if (check && !StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW)) {
 			if( AppealConfig.APPEAL_AUDITTYPE_UNITDUTY.equalsIgnoreCase( appeal_auditor_type ) ) {
 				attendanceAppealAuditInfo.setProcessPersonUnit2( attendanceAppealInfoServiceAdv.getPersonUnitName( appealCheckPersonName, attendanceDetail.getUnitName(), wrapIn.getIdentity() ) );
 			}else {
-				//汇报对象，指定人以及人员属性中指定的人员，根据人员姓名取首选组织（第一个）
+				//보고 대상, 지정 사용자 및 사용자 속성에 지정된 사용자, 사용자 이름으로 기본 조직(첫 번째) 사용
 				if( appealCheckPersonName != null  && !appealCheckPersonName.isEmpty() ) {
-					try {//获取复核人组织信息
+					try {//재검토자 조직 정보 조회
 						attendanceAppealAuditInfo.setProcessPersonUnit2( userManagerService.getUnitNameWithPersonName( appealCheckPersonName ));
 					}catch( Exception e ) {
 						check = false;
-						Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据复核人获取组织信息时发生异常。");
+						Exception exception = new ExceptionAttendanceAppealProcess(e, "재검토자로 조직 정보를 가져오는 중 오류가 발생했습니다.");
 						result.error(exception);
-						logger.warn( "系统在根据审核人获取组织信息时发生异常！personName:"+appealCheckPersonName );
+						logger.warn( "시스템이 심사자로 조직 정보를 조회하는 중 예외가 발생했습니다! personName:"+appealCheckPersonName );
 						logger.error(e, effectivePerson, request, null);
 					}
 				}
 			}
 		}
-		//根据所属组织名称查询申诉复核人所属顶层组织
+		//소속 조직명으로 이의 신청 재검토자 소속 최상위 조직 조회
 		if (check && !StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW)) {
 			if( StringUtils.isNotEmpty(attendanceAppealAuditInfo.getProcessPersonUnit2())) {
-				try {//获取复核人顶层组织信息
+				try {//재검토자 최상위 조직 정보 조회
 					attendanceAppealAuditInfo.setProcessPersonTopUnit2(  userManagerService.getTopUnitNameWithUnitName( attendanceAppealAuditInfo.getProcessPersonUnit2()) );
 				}catch( Exception e ) {
 					check = false;
-					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据复核人获取顶层组织信息时发生异常。");
+					Exception exception = new ExceptionAttendanceAppealProcess(e, "재검토자로 최상위 조직 정보를 가져오는 중 오류가 발생했습니다.");
 					result.error(exception);
-					logger.warn( "系统在根据审核人获取顶层组织信息时发生异常！personName:"+appealCheckPersonName );
+					logger.warn( "시스템이 심사자로 최상위 조직 정보를 조회하는 중 예외가 발생했습니다! personName:"+appealCheckPersonName );
 					logger.error(e, effectivePerson, request, null);
 				}
 			}
 		}
-		//保存申诉信息
+		//이의 신청 정보 저장
 		if (check) {
 			try {
 				attendanceAppealInfo = attendanceAppealInfoServiceAdv.saveNewAppeal( attendanceAppealInfo, attendanceAppealAuditInfo );
 				result.setData(new Wo(attendanceAppealInfo.getId()));
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在保存考勤申诉信息息时发生异常。");
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 이의 신청 정보 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 		if (check) {
-			// 填充申诉信息内容 - 申诉信息成功生成.尝试向当前处理人[" + attendanceAppealInfo.getCurrentProcessor() + "]发送消息通知......
+			// 이의 신청 정보 내용 채우기 - 이의 신청 정보 생성 성공. 현재 처리자[" + attendanceAppealInfo.getCurrentProcessor() + "]에게 메시지 알림 발송 시도......
 			try {
 				attendanceNoticeService.notifyAttendanceAppealProcessness1Message(attendanceAppealInfo);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "申诉信息提交成功，向申诉当前处理人发送通知消息发生异常！name:"+attendanceAppealAuditInfo.getProcessPerson1());
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "이의 신청은 제출되었으나 현재 처리자에게 알림을 보내는 중 오류가 발생했습니다! name:"+attendanceAppealAuditInfo.getProcessPerson1());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -304,7 +304,7 @@ public class ActionAppealCreate extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>(JpaObject.FieldsUnmodify);
 
-		@FieldDescribe("申诉人的身份，考勤人员身份：如果考勤人员属于多个组织，可以选择一个身份进行申诉信息绑定.")
+		@FieldDescribe("이의 신청자 신분, 근태 대상자 신분: 근태 대상자가 여러 조직에 속하면 신분 하나를 골라 이의 신청 정보에 연결할 수 있음.")
 		private String identity = null;
 
 		public String getIdentity() {
@@ -315,7 +315,7 @@ public class ActionAppealCreate extends BaseAction {
 			this.identity = identity;
 		}
 
-		@FieldDescribe("自定义流程workId")
+		@FieldDescribe("사용자 정의 프로세스 workId")
 		private String workId = null;
 
 		public String getWorkId() {

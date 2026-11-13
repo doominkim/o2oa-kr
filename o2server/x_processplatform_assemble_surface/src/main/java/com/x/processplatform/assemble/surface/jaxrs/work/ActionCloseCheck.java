@@ -72,8 +72,8 @@ class ActionCloseCheck extends BaseAction {
 
 		private static final long serialVersionUID = 837722785808492603L;
 
-		@FieldDescribe("检查删除草稿结果.")
-		@Schema(description = "检查删除草稿结果.")
+		@FieldDescribe("초안 삭제 결과 검사.")
+		@Schema(description = "초안 삭제 결과 검사.")
 		private WoDraft draft;
 
 		public WoDraft getDraft() {

@@ -236,23 +236,23 @@ MWF.xApplication.Attendance.AddressExplorer.BaiduMap = new Class({
                 point = new BMap.Point(116.404, 39.915);
             }
         }
-        var map = this.map = new BMap.Map(this.mapNode);    // 创建Map实例
-        map.centerAndZoom(point, 12);  // 初始化地图,设置中心点坐标和地图级别
-//		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
-//		map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
-        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        var map = this.map = new BMap.Map(this.mapNode);    // Map 인스턴스 생성
+        map.centerAndZoom(point, 12);  // 지도 초기화, 중심점 좌표와 지도 레벨 설정
+//		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 지도 초기화, 중심점 좌표와 지도 레벨 설정
+//		map.setCurrentCity("베이징");          // 지도에 표시할 도시 설정, 반드시 설정해야 함
+        map.enableScrollWheelZoom(true);     //마우스 휠 확대/축소 활성화
     },
     addMapControl: function(){
-        //向地图中添加缩放控件
+        //지도에 확대/축소 컨트롤 추가
         var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_RIGHT,type:BMAP_NAVIGATION_CONTROL_LARGE});
         this.map.addControl(ctrl_nav);
-        //向地图中添加缩略图控件
+        //지도에 미니맵 컨트롤 추가
         var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
         this.map.addControl(ctrl_ove);
-        //向地图中添加比例尺控件
+        //지도에 축척 컨트롤 추가
         var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
         this.map.addControl(ctrl_sca);
-        //map.addControl(new this.mapWindow.BMap.MapTypeControl());   //添加地图类型控件
+        //map.addControl(new this.mapWindow.BMap.MapTypeControl());   //지도 유형 컨트롤 추가
 
         this.addCityListControl();
     },
@@ -260,17 +260,17 @@ MWF.xApplication.Attendance.AddressExplorer.BaiduMap = new Class({
         this.map.addControl(new BMap.CityListControl({
             anchor: BMAP_ANCHOR_TOP_LEFT,
             offset: new BMap.Size(10, 20),
-            // 切换城市之间事件
+            // 도시 전환 전 이벤트
              onChangeBefore: function( ){
              },
-            // 切换城市之后事件
+            // 도시 전환 후 이벤트
              onChangeAfter:function( ){
              }
         }));
     },
     getInfoWindowHtml: function( json ){
         json = json || {};
-        //拼接infowindow内容字串
+        //infowindow 내용 문자열 조합
         var html = [];
         html.push('<br/>');
         html.push('<table border="0" cellpadding="1" cellspacing="1" id="markerTable" docId="'+ (json.id || "") +'" style="font-size:12px;">');
@@ -333,11 +333,11 @@ MWF.xApplication.Attendance.AddressExplorer.BaiduMap = new Class({
             mkr.openInfoWindow(infoWin);
         }.bind(this));
 
-        mkrTool.open(); //打开工具
-        var icon = BMapLib.MarkerTool.SYS_ICONS[14]; //设置工具样式，使用系统提供的样式BMapLib.MarkerTool.SYS_ICONS[0] -- BMapLib.MarkerTool.SYS_ICONS[23]
+        mkrTool.open(); //도구 열기
+        var icon = BMapLib.MarkerTool.SYS_ICONS[14]; //도구 스타일 설정, 시스템 제공 스타일 BMapLib.MarkerTool.SYS_ICONS[0] -- BMapLib.MarkerTool.SYS_ICONS[23] 사용
         mkrTool.setIcon(icon);
     },
-    //创建marker
+    //marker 생성
     addMarkerArray : function ( markerArr ){
         for(var i=0;i<markerArr.length;i++){
             var json = markerArr[i];

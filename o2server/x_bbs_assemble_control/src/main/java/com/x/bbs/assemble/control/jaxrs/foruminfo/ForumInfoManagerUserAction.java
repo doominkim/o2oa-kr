@@ -30,18 +30,18 @@ import com.x.bbs.assemble.control.jaxrs.foruminfo.exception.ExceptionForumInfoId
 import com.x.bbs.assemble.control.jaxrs.foruminfo.exception.ExceptionForumInfoProcess;
 
 @Path("user/forum")
-@JaxrsDescribe("论坛信息查询（匿名）")
+@JaxrsDescribe("포럼 정보 조회(익명)")
 public class ForumInfoManagerUserAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ForumInfoManagerUserAction.class);
 
 	/**
-	 * 访问论坛信息，登录用户访问
+	 * 포럼 정보 접근, 로그인 사용자 접근
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "获取所有论坛信息列表.", action = ActionGetAll.class)
+	@JaxrsMethodDescribe(value = "전체 포럼 정보 목록 조회.", action = ActionGetAll.class)
 	@GET
 	@Path("all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -56,7 +56,7 @@ public class ForumInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionGetAll().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "获取所有ForumInfo的信息列表时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "전체 ForumInfo 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -66,12 +66,12 @@ public class ForumInfoManagerUserAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 保存论坛信息，登录用户访问
+	 * 포럼 정보 저장, 로그인 사용자 접근
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "创建新的论坛信息或者更新论坛信息.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "새 포럼 정보 생성 또는 포럼 정보 갱신.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -85,7 +85,7 @@ public class ForumInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "创建新的论坛信息或者更新论坛信息时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "포럼 정보를 생성 또는 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -94,18 +94,18 @@ public class ForumInfoManagerUserAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 删除论坛信息，登录用户访问
+	 * 포럼 정보 삭제, 로그인 사용자 접근
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "根据ID删除指定的论坛信息，如果论坛里有版块或者贴子，则不允许删除.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 포럼 정보 삭제, 포럼에 게시판이나 게시글이 있으면 삭제 불가.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表单ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("양식 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		Boolean check = true;
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -122,7 +122,7 @@ public class ForumInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionDelete().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "系统在删除论坛信息时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "포럼 정보 삭제 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

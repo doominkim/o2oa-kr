@@ -1,42 +1,42 @@
 /**
- * @fileoverview 百度地图的添加标注工具类，对外开放。
- * 允许用户在地图上点击后添加一个点标注，允许用户设定标注的图标样式。
- * 主入口类是<a href="symbols/BMapLib.MarkerTool.html">MarkerTool</a>，
- * 基于Baidu Map API 1.2。
+ * @fileoverview 바이두 지도의 표시 추가 도구 클래스, 외부 공개.
+ * 사용자가 지도를 클릭해 점 마커를 추가할 수 있으며, 마커 아이콘 스타일을 설정할 수 있음.
+ * 주 진입 클래스는 <a href="symbols/BMapLib.MarkerTool.html">MarkerTool</a>,
+ * Baidu Map API 1.2 기반.
  *
  * @author Baidu Map Api Group
  * @version 1.2
  */
 
 /**
- * @namespace BMap的所有library类均放在BMapLib命名空间下
+ * @namespace BMap의 모든 library 클래스는 BMapLib 네임스페이스 아래에 둠
  */
 var BMapLib = window.BMapLib = BMapLib || {};
 if(typeof BMapLib._toolInUse == "undefined"){
 
-    BMapLib._toolInUse = false; //该工具是否在使用，避免多个鼠标工具一起使用的情况
-                                //如：用户打开了添加标注工具，就不能再打开测距工具。
+    BMapLib._toolInUse = false; //이 도구의 사용 중 여부, 여러 마우스 도구를 동시에 사용하는 상황 방지
+                                //예: 사용자가 표시 추가 도구를 열면 거리 측정 도구를 열 수 없음.
 }
 (function() {
     /**
-     * baidu tangram 代码部分，tangram代码提供了一些基础的操作，如：类的继承、
-     * 事件的派发、事件的绑定等，而且兼容各种浏览器，在tangram基础上构建MarkerTool
-     * 比较快捷。
+     * baidu tangram 코드 부분, tangram 코드는 클래스 상속,
+     * 이벤트 발생, 이벤트 바인딩 등 기본 기능을 제공하며 여러 브라우저와 호환됨. tangram 기반으로 MarkerTool 구축
+     * 비교적 빠름.
      */
     var baidu = baidu || {guid : "$BAIDU$"};
 
     (function() {
-        // 一些页面级别唯一的属性，需要挂载在window[baidu.guid]上
+        // 페이지 단위로 유일한 일부 속성은 window[baidu.guid]에 마운트해야 함
         window[baidu.guid] = {};
 
         /**
-         * 将源对象的所有属性拷贝到目标对象中
+         * 원본 객체의 모든 속성을 대상 객체로 복사
          * @name baidu.extend
          * @function
          * @grammar baidu.extend(target, source)
-         * @param {Object} target 目标对象
-         * @param {Object} source 源对象
-         * @returns {Object} 目标对象
+         * @param {Object} target 대상 객체
+         * @param {Object} source 원본 객체
+         * @returns {Object} 대상 객체
          */
         baidu.extend = function (target, source) {
             for (var p in source) {
@@ -50,16 +50,16 @@ if(typeof BMapLib._toolInUse == "undefined"){
         /**
          * @ignore
          * @namespace
-         * @baidu.lang 对语言层面的封装，包括类型判断、模块扩展、继承基类以及对象自定义事件的支持。
-         * @property guid 对象的唯一标识
+         * @baidu.lang 언어 수준 캡슐화, 타입 판단·모듈 확장·기본 클래스 상속 및 객체 사용자 정의 이벤트 지원 포함.
+         * @property guid 객체의 고유 식별자
          */
         baidu.lang = baidu.lang || {};
 
         /**
-         * 返回一个当前页面的唯一标识字符串。
+         * 현재 페이지의 고유 식별 문자열 반환.
          * @function
          * @grammar baidu.lang.guid()
-         * @returns {String} 当前页面的唯一标识字符串
+         * @returns {String} 현재 페이지의 고유 식별 문자열
          */
         baidu.lang.guid = function() {
             return "TANGRAM__" + (window[baidu.guid]._counter ++).toString(36);
@@ -68,21 +68,21 @@ if(typeof BMapLib._toolInUse == "undefined"){
         window[baidu.guid]._counter = window[baidu.guid]._counter || 1;
 
         /**
-         * 所有类的实例的容器
-         * key为每个实例的guid
+         * 모든 클래스 인스턴스의 컨테이너
+         * key는 각 인스턴스의 guid
          */
         window[baidu.guid]._instances = window[baidu.guid]._instances || {};
 
         /**
-         * Tangram继承机制提供的一个基类，用户可以通过继承baidu.lang.Class来获取它的属性及方法。
+         * Tangram 상속 메커니즘이 제공하는 기본 클래스, 사용자는 baidu.lang.Class를 상속해 속성과 메서드를 얻을 수 있음.
          * @function
          * @name baidu.lang.Class
          * @grammar baidu.lang.Class(guid)
-         * @param {string} guid	对象的唯一标识
+         * @param {string} guid	객체의 고유 식별자
          * @meta standard
-         * @remark baidu.lang.Class和它的子类的实例均包含一个全局唯一的标识guid。
-         * guid是在构造函数中生成的，因此，继承自baidu.lang.Class的类应该直接或者间接调用它的构造函数。<br>
-         * baidu.lang.Class的构造函数中产生guid的方式可以保证guid的唯一性，及每个实例都有一个全局唯一的guid。
+         * @remark baidu.lang.Class와 그 하위 클래스의 인스턴스는 모두 전역 고유 식별자 guid를 가짐.
+         * guid는 생성자에서 생성되므로 baidu.lang.Class를 상속한 클래스는 직접 또는 간접적으로 그 생성자를 호출해야 함.<br>
+         * baidu.lang.Class 생성자에서 guid를 생성하는 방식은 guid의 유일성을 보장하므로 각 인스턴스는 전역 고유 guid를 가짐.
          */
         baidu.lang.Class = function(guid) {
             this.guid = guid || baidu.lang.guid();
@@ -90,42 +90,42 @@ if(typeof BMapLib._toolInUse == "undefined"){
         };
 
         /**
-         * 判断目标参数是否string类型或String对象
+         * 대상 매개변수가 string 타입 또는 String 객체인지 판단
          * @name baidu.lang.isString
          * @function
          * @grammar baidu.lang.isString(source)
-         * @param {Any} source 目标参数
+         * @param {Any} source 대상 매개변수
          * @shortcut isString
          * @meta standard
          *
-         * @returns {boolean} 类型判断结果
+         * @returns {boolean} 유형 판단 결과
          */
         baidu.lang.isString = function (source) {
             return '[object String]' == Object.prototype.toString.call(source);
         };
 
         /**
-         * 判断目标参数是否为function或Function实例
+         * 대상 매개변수가 function 또는 Function 인스턴스인지 판단
          * @name baidu.lang.isFunction
          * @function
          * @grammar baidu.lang.isFunction(source)
-         * @param {Any} source 目标参数
-         * @returns {boolean} 类型判断结果
+         * @param {Any} source 대상 매개변수
+         * @returns {boolean} 유형 판단 결과
          */
         baidu.lang.isFunction = function (source) {
             return '[object Function]' == Object.prototype.toString.call(source);
         };
 
         /**
-         * 重载了默认的toString方法，使得返回信息更加准确一些。
-         * @return {string} 对象的String表示形式
+         * 기본 toString 메서드를 재정의해 반환 정보를 더 정확하게 함.
+         * @return {string} 객체의 String 표현
          */
         baidu.lang.Class.prototype.toString = function(){
             return "[object " + (this._className || "Object" ) + "]";
         };
 
         /**
-         * 释放对象所持有的资源，主要是自定义事件。
+         * 객체가 보유한 리소스(주로 사용자 정의 이벤트) 해제.
          * @name dispose
          * @grammar obj.dispose()
          */
@@ -140,14 +140,14 @@ if(typeof BMapLib._toolInUse == "undefined"){
         };
 
         /**
-         * 自定义的事件对象。
+         * 사용자 정의 이벤트 객체.
          * @function
          * @name baidu.lang.Event
          * @grammar baidu.lang.Event(type[, target])
-         * @param {string} type	 事件类型名称。为了方便区分事件和一个普通的方法，事件类型名称必须以"on"(小写)开头。
-         * @param {Object} [target]触发事件的对象
+         * @param {string} type	 이벤트 유형 이름. 이벤트와 일반 메서드를 구분하기 쉽도록 이벤트 유형 이름은 반드시 "on"(소문자)으로 시작해야 함.
+         * @param {Object} [target]이벤트를 발생시킨 객체
          * @meta standard
-         * @remark 引入该模块，会自动为Class引入3个事件扩展方法：addEventListener、removeEventListener和dispatchEvent。
+         * @remark 이 모듈을 가져오면 Class에 이벤트 확장 메서드 3개(addEventListener, removeEventListener, dispatchEvent)가 자동으로 추가됨.
          * @see baidu.lang.Class
          */
         baidu.lang.Event = function (type, target) {
@@ -158,12 +158,12 @@ if(typeof BMapLib._toolInUse == "undefined"){
         };
 
         /**
-         * 注册对象的事件监听器。引入baidu.lang.Event后，Class的子类实例才会获得该方法。
+         * 객체의 이벤트 리스너 등록. baidu.lang.Event를 가져온 후 Class 하위 클래스 인스턴스에서 이 메서드를 사용할 수 있음.
          * @grammar obj.addEventListener(type, handler[, key])
-         * @param 	{string}   type         自定义事件的名称
-         * @param 	{Function} handler      自定义事件被触发时应该调用的回调函数
-         * @param 	{string}   [key]		为事件监听函数指定的名称，可在移除时使用。如果不提供，方法会默认为它生成一个全局唯一的key。
-         * @remark 	事件类型区分大小写。如果自定义事件名称不是以小写"on"开头，该方法会给它加上"on"再进行判断，即"click"和"onclick"会被认为是同一种事件。
+         * @param 	{string}   type         사용자 정의 이벤트 이름
+         * @param 	{Function} handler      사용자 정의 이벤트 발생 시 호출할 콜백 함수
+         * @param 	{string}   [key]		이벤트 리스너 함수에 지정하는 이름, 제거 시 사용 가능. 제공하지 않으면 전역 고유 key를 기본 생성.
+         * @remark 	이벤트 유형은 대소문자 구분. 사용자 정의 이벤트 이름이 소문자 "on"으로 시작하지 않으면 "on"을 붙여 판단하므로 "click"과 "onclick"은 같은 이벤트로 간주됨.
          */
         baidu.lang.Class.prototype.addEventListener = function (type, handler, key) {
             if (!baidu.lang.isFunction(handler)) {
@@ -187,11 +187,11 @@ if(typeof BMapLib._toolInUse == "undefined"){
         };
 
         /**
-         * 移除对象的事件监听器。引入baidu.lang.Event后，Class的子类实例才会获得该方法。
+         * 객체의 이벤트 리스너 제거. baidu.lang.Event를 가져온 후 Class 하위 클래스 인스턴스에서 이 메서드를 사용할 수 있음.
          * @grammar obj.removeEventListener(type, handler)
-         * @param {string}   type     事件类型
-         * @param {Function|string} handler  要移除的事件监听函数或者监听函数的key
-         * @remark 	如果第二个参数handler没有被绑定到对应的自定义事件中，什么也不做。
+         * @param {string}   type     이벤트 유형
+         * @param {Function|string} handler  제거할 이벤트 리스너 함수 또는 리스너 함수의 key
+         * @remark 	두 번째 매개변수 handler가 해당 사용자 정의 이벤트에 바인딩되어 있지 않으면 아무것도 하지 않음.
          */
         baidu.lang.Class.prototype.removeEventListener = function (type, handler) {
             if (baidu.lang.isFunction(handler)) {
@@ -209,12 +209,12 @@ if(typeof BMapLib._toolInUse == "undefined"){
         };
 
         /**
-         * 派发自定义事件，使得绑定到自定义事件上面的函数都会被执行。引入baidu.lang.Event后，Class的子类实例才会获得该方法。
+         * 사용자 정의 이벤트를 발생시켜 바인딩된 함수를 모두 실행. baidu.lang.Event를 가져온 후 Class 하위 클래스 인스턴스에서 이 메서드를 사용할 수 있음.
          * @grammar obj.dispatchEvent(event, options)
-         * @param {baidu.lang.Event|String} event 	Event对象，或事件名称(1.1.1起支持)
-         * @param {Object} options 扩展参数,所含属性键值会扩展到Event对象上(1.2起支持)
-         * @remark 处理会调用通过addEventListenr绑定的自定义事件回调函数之外，还会调用直接绑定到对象上面的自定义事件。
-         * 例如：<br>
+         * @param {baidu.lang.Event|String} event 	Event 객체 또는 이벤트 이름(1.1.1부터 지원)
+         * @param {Object} options 확장 매개변수, 포함된 속성 키-값이 Event 객체에 확장됨(1.2부터 지원)
+         * @remark addEventListenr로 바인딩한 사용자 정의 이벤트 콜백 함수 외에 객체에 직접 바인딩한 사용자 정의 이벤트도 호출.
+         * 예:<br>
          * myobj.onMyEvent = function(){}<br>
          * myobj.addEventListener("onMyEvent", function(){});
          */
@@ -241,17 +241,17 @@ if(typeof BMapLib._toolInUse == "undefined"){
         };
 
         /**
-         * 为类型构造器建立继承关系
+         * 타입 생성자 간 상속 관계 구성
          * @name baidu.lang.inherits
          * @function
          * @grammar baidu.lang.inherits(subClass, superClass[, className])
-         * @param {Function} subClass 子类构造器
-         * @param {Function} superClass 父类构造器
-         * @param {string} className 类名标识
-         * @remark 使subClass继承superClass的prototype，
-         * 因此subClass的实例能够使用superClass的prototype中定义的所有属性和方法。<br>
-         * 这个函数实际上是建立了subClass和superClass的原型链集成，并对subClass进行了constructor修正。<br>
-         * <strong>注意：如果要继承构造函数，需要在subClass里面call一下，具体见下面的demo例子</strong>
+         * @param {Function} subClass 하위 클래스 생성자
+         * @param {Function} superClass 상위 클래스 생성자
+         * @param {string} className 클래스명 식별자
+         * @remark subClass가 superClass의 prototype을 상속하도록 함,
+         * 따라서 subClass의 인스턴스는 superClass의 prototype에 정의된 모든 속성과 메서드를 사용할 수 있음.<br>
+         * 이 함수는 실제로 subClass와 superClass의 프로토타입 체인을 연결하고 subClass의 constructor를 보정함.<br>
+         * <strong>주의: 생성자를 상속하려면 subClass 안에서 call을 호출해야 함. 자세한 내용은 아래 demo 예제 참고</strong>
          * @shortcut inherits
          * @meta standard
          * @see baidu.lang.Class
@@ -277,49 +277,49 @@ if(typeof BMapLib._toolInUse == "undefined"){
 
 
     /**
-     * MarkerTool代码部分, 此类继承基类baidu.lang.Class，便于派发自定义事件，如：markend事件派发
+     * MarkerTool 코드 부분, 이 클래스는 기본 클래스 baidu.lang.Class를 상속하여 사용자 정의 이벤트 발송이 쉬움. 예: markend 이벤트 발송
      * @exports MarkerTool as BMapLib.MarkerTool
      */
     var MarkerTool =
     /**
-     * MarkerTool类的构造函数
-     * @class 地图上添加标注类，实现点击地图添加点标注<b>入口</b>。
-     * 实例化该类后，即可调用该类提供的<a href="symbols/BMapLib.MarkerTool.html#open">open</a>
-     * 方法开启添加点标注状态。
+     * MarkerTool 클래스 생성자
+     * @class 지도에 마커를 추가하는 클래스, 지도 클릭으로 점 마커를 추가하는 <b>진입점</b>.
+     * 이 클래스를 인스턴스화한 후 클래스가 제공하는 <a href="symbols/BMapLib.MarkerTool.html#open">open</a>
+     * 메서드를 호출하여 점 마커 추가 상태를 시작할 수 있음.
      *
      * @constructor
-     * @param {Map} map Baidu map的实例对象
-     * @param {Json Object} opts 可选的输入参数，非必填项。可输入选项包括：
-     * <br />"<b>icon</b>" : {Icon} 标注使用到的图标，标注时候鼠标跟随样式也通过此属性设置
-     * <br />"<b>followText</b>" : {String} 跟随鼠标移动的说明文字，默认为空
-     * <br />"<b>autoClose</b>" : {Boolean} 是否在每次添加完Marker后自动关闭工具
+     * @param {Map} map Baidu map 인스턴스 객체
+     * @param {Json Object} opts 선택 입력 매개변수, 필수 아님. 입력 가능한 옵션:
+     * <br />"<b>icon</b>" : {Icon} 마커에 사용할 아이콘, 마커 표시 시 마우스 따라다니는 스타일도 이 속성으로 설정
+     * <br />"<b>followText</b>" : {String} 마우스를 따라 이동하는 설명 문구, 기본값은 빈 값
+     * <br />"<b>autoClose</b>" : {Boolean} Marker 추가 후마다 도구 자동 닫기 여부
      *
-     * @example <b>参考示例：</b><br />
-     * var map = new BMap.Map("container");<br />map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);<br />var mkrTool = new BMapLib.MarkerTool(map, {followText: "添加一个点"});
+     * @example <b>참고 예제:</b><br />
+     * var map = new BMap.Map("container");<br />map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);<br />var mkrTool = new BMapLib.MarkerTool(map, {followText: "점 하나 추가"});
      */
         BMapLib.MarkerTool = function(map, opts){
-            baidu.lang.Class.call(this);//继承基类baidu.lang.Class的构造函数
+            baidu.lang.Class.call(this);//기본 클래스 baidu.lang.Class의 생성자 상속
             this._map = map;
             this._opts = {
-                icon: MarkerTool.SYS_ICONS[8], //默认选择红色雨滴样式
-                followText: "지도를 클릭해 근무지를 추가하세요", //鼠标跟随文字提示
-                autoClose: true //是否添加完毕标注就关闭此工具
+                icon: MarkerTool.SYS_ICONS[8], //기본으로 빨간 물방울 스타일 선택
+                followText: "지도를 클릭해 근무지를 추가하세요", //마우스 따라다니는 문구 안내
+                autoClose: true //마커 추가 완료 후 이 도구를 닫을지 여부
             };
 
-            baidu.extend(this._opts, opts);//用户设定参数覆盖默认设定参数
+            baidu.extend(this._opts, opts);//사용자 설정 매개변수로 기본 설정 매개변수 덮어쓰기
 
-            this._isOpen = false; // 表示控件项当前的状态
-            this._opts.followText = this._checkStr(this._opts.followText); //检查字串合法性
+            this._isOpen = false; // 컨트롤 항목의 현재 상태
+            this._opts.followText = this._checkStr(this._opts.followText); //문자열 유효성 검사
 
-            this._followMarker = null; //鼠标跟随Marker
-            this._followLabel = null; //鼠标跟随文本提示
+            this._followMarker = null; //마우스 따라다니는 Marker
+            this._followLabel = null; //마우스 따라다니는 문구 안내
         };
 
-    baidu.lang.inherits(MarkerTool, baidu.lang.Class , "MarkerTool");//继承基类baidu.lang.Class所有prototype属性挂接的方法
+    baidu.lang.inherits(MarkerTool, baidu.lang.Class , "MarkerTool");//기본 클래스 baidu.lang.Class의 모든 prototype 속성에 연결된 메서드 상속
 
     /**
-     * 开启工具
-     * @return {Boolean} true表示开启成功，false表示开启失败
+     * 도구 열기
+     * @return {Boolean} true는 열기 성공, false는 열기 실패
      */
     MarkerTool.prototype.open = function(){
         if(!this._map){
@@ -331,56 +331,56 @@ if(typeof BMapLib._toolInUse == "undefined"){
         if (BMapLib._toolInUse){
             return false;
         }
-        BMapLib._toolInUse = true; //当前鼠标状态正在使用中，如果存在多个鼠标工具，
-        //可以使用此变量限制地图上只能存在一种鼠标操作状态
+        BMapLib._toolInUse = true; //현재 마우스 상태가 사용 중임. 마우스 도구가 여러 개 있으면,
+        //이 변수로 지도 위에 한 가지 마우스 조작 상태만 존재하도록 제한할 수 있음
         this._isOpen = true;
 
-        // 绑定mousemove 和 click 事件
+        // mousemove 및 click 이벤트 바인딩
         if (!this._binded){
             this._bind();
             this._binded = true;
         }
-        //初始化跟随Marker
+        //따라다니는 Marker 초기화
         if (!this._followMarker) {
-            this._followMarker = new BMap.Marker(this._map.getCenter(), {offset: new BMap.Size(-10, -10)}); //偏移-10像素,解决cursor问题
+            this._followMarker = new BMap.Marker(this._map.getCenter(), {offset: new BMap.Size(-10, -10)}); //-10픽셀 오프셋, cursor 문제 해결
             this._map.addOverlay(this._followMarker);
-            this._followMarker.setZIndex(1000); // 设置跟随Marker的z轴高度
+            this._followMarker.setZIndex(1000); // 따라다니는 Marker의 z축 높이 설정
             this._followMarker.hide();
         }
 
-        //初始化跟随Label
+        //따라다니는 Label 초기화
         if (!this._followLabel){
             this._followLabel = new BMap.Label(this._opts.followText, {offset: new BMap.Size(20, 0)});
         }
 
-        this._preCursor = this._map.getDefaultCursor(); //记录当前的鼠标cursor
-        this._map.setDefaultCursor("url(" + MarkerTool.CUR_IMG + "), default");//设置鼠标样式
+        this._preCursor = this._map.getDefaultCursor(); //현재 마우스 cursor 기록
+        this._map.setDefaultCursor("url(" + MarkerTool.CUR_IMG + "), default");//마우스 스타일 설정
 
         return true;
     };
     /**
-     * 关闭工具
-     * @return 无返回值
+     * 도구 닫기
+     * @return 반환값 없음
      */
     MarkerTool.prototype.close = function(){
         if (!this._isOpen){
             return;
         }
 
-        //取消绑定事件
+        //이벤트 바인딩 해제
         this._map.removeEventListener("mousemove", this._mouseMoveHandler);
         this._map.removeEventListener("click", this._clickHandler);
 
-        this._followMarker.hide();//隐藏跟随marker
-        this._map.setDefaultCursor(this._preCursor);//设置鼠标样式
+        this._followMarker.hide();//따라다니는 marker 숨기기
+        this._map.setDefaultCursor(this._preCursor);//마우스 스타일 설정
         BMapLib._toolInUse = false;
         this._isOpen = false;
         this._binded = false;
     };
     /**
-     * 设置标注的图标及鼠标跟随样式
-     * @param {Icon} icon 标注样式及鼠标跟随样式，为了方便用户设置Icon,系统提供了
-     * 24种默认的图标，分别是：BMapLib.MarkerTool.SYS_ICON[0] -- BMapLib.MarkerTool.SYS_ICON[23]
+     * 마커 아이콘 및 마우스 따라다니는 스타일 설정
+     * @param {Icon} icon 마커 스타일 및 마우스 따라다니는 스타일, 사용자가 Icon을 쉽게 설정하도록 시스템에서
+     * 24가지 기본 아이콘 제공: BMapLib.MarkerTool.SYS_ICON[0] -- BMapLib.MarkerTool.SYS_ICON[23]
      */
     MarkerTool.prototype.setIcon = function(icon){
         if (!icon || !(icon instanceof BMap.Icon)){
@@ -389,15 +389,15 @@ if(typeof BMapLib._toolInUse == "undefined"){
         this._opts.icon = icon;
     };
     /**
-     * 获取标注图标及鼠标跟随样式
-     * @return {Icon} 当前标注及鼠标跟随样式
+     * 마커 아이콘 및 마우스 따라다니는 스타일 조회
+     * @return {Icon} 현재 마커 및 마우스 따라다니는 스타일
      */
     MarkerTool.prototype.getIcon = function(){
         return this._opts.icon;
     };
     /**
-     * 检查字串的合法性，剔除xss漏洞输入字符
-     * @return {String} 合法字符
+     * 문자열 유효성 검사, xss 취약점 입력 문자 제거
+     * @return {String} 유효한 문자
      */
     MarkerTool.prototype._checkStr = function(str){
         if (!str){
@@ -406,29 +406,29 @@ if(typeof BMapLib._toolInUse == "undefined"){
         return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     };
     /**
-     * 绑定地图的mousemove 和 click 事件
-     * @return 无返回值
+     * 지도의 mousemove 및 click 이벤트 바인딩
+     * @return 반환값 없음
      */
     MarkerTool.prototype._bind = function(){
         var me = this;
-        if (!me._isOpen){//判断工具是否打开
+        if (!me._isOpen){//도구 열림 여부 판단
             return;
         }
 
-        //绑定mousemove事件
+        //mousemove 이벤트 바인딩
         me._mouseMoveHandler = function(evt){
             var pt = evt.point;
-            me._followMarker.setIcon(me._opts.icon); //每次都检查最新的Icon
+            me._followMarker.setIcon(me._opts.icon); //매번 최신 Icon 확인
             me._followMarker.setPosition(pt);
             me._followMarker.setLabel(me._followLabel);
             me._followMarker.show();
         };
         me._map.addEventListener("mousemove", me._mouseMoveHandler);
 
-        //绑定click事件
+        //click 이벤트 바인딩
         me._clickHandler = function(evt){
             var evtPix = evt.pixel;
-            var iconPix = new BMap.Pixel(evtPix.x - 10, evtPix.y - 10); //补偿_followMarker的-10像素问题,解决cursor问题
+            var iconPix = new BMap.Pixel(evtPix.x - 10, evtPix.y - 10); //_followMarker의 -10픽셀 문제 보정, cursor 문제 해결
             var pt = me._map.pixelToPoint(iconPix);
 
             var mkr = new BMap.Marker(pt, {
@@ -438,31 +438,31 @@ if(typeof BMapLib._toolInUse == "undefined"){
             me._map.addOverlay(mkr);
 
             /**
-             * 添加标注过程中，每次点击地图添加完标注时，派发事件的接口
+             * 마커 추가 과정에서 지도를 클릭해 마커 추가를 마칠 때마다 이벤트를 발송하는 인터페이스
              * @name MarkerTool#onmarkend
              * @event
-             * @param {Event Object} e 回调函数会返回event参数，包括以下返回值：
-             * <br />"<b>type</b> : {String} 事件类型
-             * <br />"<b>target</b>：{MarkerTool} 当前MarkerTool对象
-             * <br />"<b>marker</b>：{Marker} 当前添加的Marker标注
+             * @param {Event Object} e 콜백 함수는 event 매개변수를 반환하며, 다음 반환값 포함:
+             * <br />"<b>type</b> : {String} 이벤트 유형
+             * <br />"<b>target</b>: {MarkerTool} 현재 MarkerTool 객체
+             * <br />"<b>marker</b>: {Marker} 현재 추가된 Marker 마커
              *
-             * @example <b>参考示例：</b><br />
+             * @example <b>참고 예제:</b><br />
              * mkrTool.addEventListener("markend", function(e) {  alert(e.type);  });
              */
             var event = new baidu.lang.Event("onmarkend");
             event.marker = mkr;
             me.dispatchEvent(event);
 
-            if(me._opts.autoClose){ //自动关闭工具
+            if(me._opts.autoClose){ //도구 자동 닫기
                 me.close();
             }
         };
         me._map.addEventListener("click", me._clickHandler);
     };
 
-    MarkerTool.CUR_IMG = "../x_component_Attendance/$AddressExplorer/default/icon/transparent.cur"; //鼠标透明样式，发布时候修改为绝对路径
-    MarkerTool.ICON_IMG = "../x_component_Attendance/$AddressExplorer/default/icon/us_mk_icon.png"; //图标样式，发布时候修改为绝对路径
-    MarkerTool.SYS_ICONS = [//MarkerTool 提供的系统样式，便于用户选择使用
+    MarkerTool.CUR_IMG = "../x_component_Attendance/$AddressExplorer/default/icon/transparent.cur"; //마우스 투명 스타일, 배포 시 절대 경로로 수정
+    MarkerTool.ICON_IMG = "../x_component_Attendance/$AddressExplorer/default/icon/us_mk_icon.png"; //아이콘 스타일, 배포 시 절대 경로로 수정
+    MarkerTool.SYS_ICONS = [//MarkerTool이 제공하는 시스템 스타일, 사용자 선택용
         new BMap.Icon(MarkerTool.ICON_IMG, new BMap.Size(21, 21), {anchor: new BMap.Size(6, 21), imageOffset: new BMap.Size(0, 0)}),
         new BMap.Icon(MarkerTool.ICON_IMG, new BMap.Size(21, 21), {anchor: new BMap.Size(6, 21), imageOffset: new BMap.Size(-23, 0)}),
         new BMap.Icon(MarkerTool.ICON_IMG, new BMap.Size(21, 21), {anchor: new BMap.Size(6, 21), imageOffset: new BMap.Size(-46, 0)}),
@@ -492,4 +492,4 @@ if(typeof BMapLib._toolInUse == "undefined"){
         new BMap.Icon(MarkerTool.ICON_IMG, new BMap.Size(19, 25), {anchor: new BMap.Size(9, 25), imageOffset: new BMap.Size(-125, -67)})
     ];
 
-})();//闭包结束
+})();//클로저 끝

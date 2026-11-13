@@ -5,27 +5,27 @@ import com.x.processplatform.assemble.bam.stub.UnitStubs;
 
 public class Period {
 
-	/** 在 period startTask中选择需要的ApplicationStub和CompanyStub */
+	/** period startTask에서 필요한 ApplicationStub과 CompanyStub 선택 */
 	private ApplicationStubs startTaskApplicationStubs = new ApplicationStubs();
 	private UnitStubs startTaskUnitStubs = new UnitStubs();
 
-	/** 在 period completedTask中选择需要的ApplicationStub和CompanyStub */
+	/** period completedTask에서 필요한 ApplicationStub과 CompanyStub 선택 */
 	private ApplicationStubs completedTaskApplicationStubs = new ApplicationStubs();
 	private UnitStubs completedTaskUnitStubs = new UnitStubs();
 
-	/** 在 period expiredTask中选择需要的ApplicationStub和CompanyStub */
+	/** period expiredTask에서 필요한 ApplicationStub과 CompanyStub 선택 */
 	private ApplicationStubs expiredTaskApplicationStubs = new ApplicationStubs();
 	private UnitStubs expiredTaskUnitStubs = new UnitStubs();
 
-	/** 在 period startWork中选择需要的ApplicationStub和CompanyStub */
+	/** period startWork에서 필요한 ApplicationStub과 CompanyStub 선택 */
 	private ApplicationStubs startWorkApplicationStubs = new ApplicationStubs();
 	private UnitStubs startWorkUnitStubs = new UnitStubs();
 
-	/** 在 period completedWork中选择需要的ApplicationStub和CompanyStub */
+	/** period completedWork에서 필요한 ApplicationStub과 CompanyStub 선택 */
 	private ApplicationStubs completedWorkApplicationStubs = new ApplicationStubs();
 	private UnitStubs completedWorkUnitStubs = new UnitStubs();
 
-	/** 在 period expiredWork中选择需要的ApplicationStub和CompanyStub */
+	/** period expiredWork에서 필요한 ApplicationStub과 CompanyStub 선택 */
 	private ApplicationStubs expiredWorkApplicationStubs = new ApplicationStubs();
 	private UnitStubs expiredWorkUnitStubs = new UnitStubs();
 

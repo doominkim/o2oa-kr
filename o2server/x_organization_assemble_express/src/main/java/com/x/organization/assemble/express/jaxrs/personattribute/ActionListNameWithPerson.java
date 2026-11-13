@@ -49,7 +49,7 @@ class ActionListNameWithPerson extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getPersonList() {
@@ -64,7 +64,7 @@ class ActionListNameWithPerson extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("个人属性名称")
+		@FieldDescribe("개인 속성 이름")
 		private List<String> nameList = new ArrayList<>();
 
 		public List<String> getNameList() {

@@ -7,7 +7,7 @@ class ExceptionEmptyBusinessType extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionEmptyBusinessType() {
-		super("businessType 为空或内容错误！");
+		super("businessType이 비어 있거나 내용이 잘못되었습니다!");
 	}
 
 

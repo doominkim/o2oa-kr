@@ -64,10 +64,10 @@ class ActionListPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("关联文件ID")
+		@FieldDescribe("관련 파일 ID")
 		private String fileId;
 
-		@FieldDescribe("附件名称")
+		@FieldDescribe("첨부파일 이름")
 		private String fileName;
 
 		public String getFileName() {

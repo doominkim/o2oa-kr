@@ -23,7 +23,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 该类旨在提供一个服务创建唯一的UNID
+ * 고유 UNID를 생성하는 서비스를 제공하는 클래스
  *
  */
 @Path("uuid")
@@ -31,7 +31,7 @@ public class UUIDAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(UUIDAction.class);
 
-	// @HttpMethodDescribe(value = "根据随机ID的.", response = JsonElement.class)
+	// @HttpMethodDescribe(value = "랜덤 ID 기준.", response = JsonElement.class)
 	@GET
 	@Path("random")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

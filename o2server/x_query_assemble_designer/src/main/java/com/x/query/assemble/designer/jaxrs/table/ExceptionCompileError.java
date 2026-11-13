@@ -7,6 +7,6 @@ public class ExceptionCompileError extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	public ExceptionCompileError(String out) {
-		super("编译失败:{}.", out);
+		super("컴파일 실패: {}.", out);
 	}
 }

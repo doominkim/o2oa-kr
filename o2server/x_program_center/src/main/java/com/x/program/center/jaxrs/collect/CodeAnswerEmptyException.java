@@ -7,6 +7,6 @@ class CodeAnswerEmptyException extends PromptException {
 	private static final long serialVersionUID = -3287459468603291619L;
 
 	CodeAnswerEmptyException() {
-		super("短信验证码不可为空.");
+		super("SMS 인증 코드는 비워 둘 수 없습니다.");
 	}
 }

@@ -66,10 +66,10 @@ class ActionQueryListViewRecordPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("信息文档ID")
+		@FieldDescribe("정보 문서ID")
 		private String docId;
 
-		@FieldDescribe("阅读人")
+		@FieldDescribe("열람자")
 		private String viewerName;
 
 		public String getDocId() {

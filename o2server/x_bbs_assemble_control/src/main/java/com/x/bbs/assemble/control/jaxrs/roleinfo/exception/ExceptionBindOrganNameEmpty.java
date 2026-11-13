@@ -7,6 +7,6 @@ public class ExceptionBindOrganNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionBindOrganNameEmpty() {
-		super("组织名称为空， 无法进行查询." );
+		super("조직 이름이 비어 있어 조회할 수 없습니다." );
 	}
 }

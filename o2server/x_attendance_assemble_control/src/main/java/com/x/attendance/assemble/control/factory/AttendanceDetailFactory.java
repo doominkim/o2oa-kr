@@ -27,7 +27,7 @@ import com.x.attendance.entity.AttendanceDetail_;
 import com.x.base.core.project.exception.ExceptionWhen;
 import com.x.base.core.project.tools.ListTools;
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
  */
 public class AttendanceDetailFactory extends AbstractFactory {
 	
@@ -35,12 +35,12 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的AttendanceDetail信息对象")
+	//@MethodDescribe("지정 Id의 AttendanceDetail 정보 객체 조회")
 	public AttendanceDetail get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceDetail.class, ExceptionWhen.none);
 	}
 	
-	//@MethodDescribe("列示全部的AttendanceDetail信息列表")
+	//@MethodDescribe("전체 AttendanceDetail 정보 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceDetail.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -50,7 +50,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示全部的AttendanceDetail信息列表")
+	//@MethodDescribe("전체 AttendanceDetail 정보 목록 조회")
 	public String getMaxRecordDate() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceDetail.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();		
@@ -65,7 +65,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		}
 	}
 	
-	//@MethodDescribe("根据员工姓名和打卡日期列示AttendanceDetail信息列表")
+	//@MethodDescribe("직원 이름과 출퇴근 날짜로 AttendanceDetail 정보 목록 조회")
 	public List<String> listByEmployeeNameAndDate( String employeeName, String recordDateString ) throws Exception {
 		
 		if( employeeName == null || recordDateString == null ){
@@ -81,7 +81,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where( p )).getResultList();
 	}
 	
-	//@MethodDescribe("根据员工姓名和打卡日期列示AttendanceDetail信息列表")
+	//@MethodDescribe("직원 이름과 출퇴근 날짜로 AttendanceDetail 정보 목록 조회")
 	public List<AttendanceDetail> listDetailByEmployeeNameAndDate( String employeeName, String recordDateString ) throws Exception {
 		
 		if( employeeName == null || recordDateString == null ){
@@ -96,7 +96,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where( p )).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceDetail信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceDetail 정보 목록 조회")
 	public List<AttendanceDetail> list(List<String> ids) throws Exception {
 		List<AttendanceDetail> resultList = null;
 		if( ids == null || ids.size() == 0 ){
@@ -115,15 +115,15 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 分析时间范围内的所有打卡记录
-	 * 1、如果未传入时间，或者时间有错，那么分析所有未分析过的打卡记录
-	 * 2、只分析未归档的，已经归档的将不再分析了
+	 * 시간 범위 내 모든 출퇴근 기록 분석
+	 * 1、시간이 전달되지 않았거나 잘못되었으면 분석되지 않은 모든 출퇴근 기록 분석
+	 * 2、보관되지 않은 것만 분석하고 이미 보관된 것은 더 이상 분석하지 않음
 	 * @param startDateString
 	 * @param endDateString
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("按指定的开始时间，结束时间列示未被分析的AttendanceDetail信息列表")
+	//@MethodDescribe("지정한 시작·종료 시간으로 분석되지 않은 AttendanceDetail 정보 목록 조회")
 	public List<String> getAllAnalysenessDetails(String startDateString, String endDateString, String personName ) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
@@ -131,11 +131,11 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = root.get( AttendanceDetail_.id ).isNotNull();
-		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //要未归档的，才再次进行分析
+		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //보관되지 않은 것만 다시 분석
 		if( StringUtils.isNotEmpty( personName ) ) {
-			p = cb.and( p, cb.equal( root.get(AttendanceDetail_.empName ), personName)); //匹配员工姓名
+			p = cb.and( p, cb.equal( root.get(AttendanceDetail_.empName ), personName)); //직원 이름 일치
 		}
 		Date startDate = null;
 		Date endDate = null;
@@ -149,7 +149,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		}catch(Exception e){
 			endDate = null;
 		}
-		//如果开始时间和结束时间有值，那么分析一个时间区间内的所有打卡记录，已经分析过了的，也需要重新分析一次
+		//시작·종료 시간 값이 있으면 해당 기간의 모든 출퇴근 기록을 분석하며, 이미 분석된 것도 다시 분석
 		if( startDate != null  && endDate != null ){
 			p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), startDate, endDate));
 		}else{
@@ -160,10 +160,10 @@ public class AttendanceDetailFactory extends AbstractFactory {
 				p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), new Date(), endDate));
 			}
 			if( startDate == null && endDate == null ){
-				//startDateString和endDateString都为空，只分析所有未分析过的
+				//startDateString과 endDateString이 모두 비어 있으면 분석되지 않은 것만 분석
 				List<Integer> statusArray = new ArrayList<Integer>();
-				statusArray.add( 0 ); //未分析的
-				statusArray.add( -1 ); //有错误的
+				statusArray.add( 0 ); //미분석
+				statusArray.add( -1 ); //오류 있음
 				p = cb.and( p, root.get( AttendanceDetail_.recordStatus).in( statusArray ));
 			}
 		}
@@ -173,10 +173,10 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 分析时间范围内的所有打卡记录
-	 * 1、如果未传入时间，或者时间有错，那么分析所有未分析过的打卡记录
-	 * 2、只分析未归档的，已经归档的将不再分析了
-	 * 3、如果forceFlag为true则分析（未分析的，已分析的，错误的）
+	 * 시간 범위 내 모든 출퇴근 기록 분석
+	 * 1、시간이 전달되지 않았거나 잘못되었으면 분석되지 않은 모든 출퇴근 기록 분석
+	 * 2、보관되지 않은 것만 분석하고 이미 보관된 것은 더 이상 분석하지 않음
+	 * 3、forceFlag가 true이면 (미분석, 분석 완료, 오류) 모두 분석
 	 * @param startDateString
 	 * @param endDateString
 	 * @param personName
@@ -184,7 +184,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("按指定的开始时间，结束时间列示未被分析的AttendanceDetail信息列表")
+	//@MethodDescribe("지정한 시작·종료 시간으로 분석되지 않은 AttendanceDetail 정보 목록 조회")
 	public List<String> getAllAnalysenessDetailsForce(String startDateString, String endDateString, String personName ,Boolean forceFlag) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
@@ -192,11 +192,11 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = root.get( AttendanceDetail_.id ).isNotNull();
-		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //要未归档的，才再次进行分析
+		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //보관되지 않은 것만 다시 분석
 		if( StringUtils.isNotEmpty( personName ) ) {
-			p = cb.and( p, cb.equal( root.get(AttendanceDetail_.empName ), personName)); //匹配员工姓名
+			p = cb.and( p, cb.equal( root.get(AttendanceDetail_.empName ), personName)); //직원 이름 일치
 		}
 		Date startDate = null;
 		Date endDate = null;
@@ -210,7 +210,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		}catch(Exception e){
 			endDate = null;
 		}
-		//如果开始时间和结束时间有值，那么分析一个时间区间内的所有打卡记录，已经分析过了的，也需要重新分析一次
+		//시작·종료 시간 값이 있으면 해당 기간의 모든 출퇴근 기록을 분석하며, 이미 분석된 것도 다시 분석
 		if( startDate != null  && endDate != null ){
 			p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), startDate, endDate));
 		}else{
@@ -221,13 +221,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 				p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), new Date(), endDate));
 			}
 			if( startDate == null && endDate == null ){
-				//startDateString和endDateString都为空，只分析所有未分析过的
+				//startDateString과 endDateString이 모두 비어 있으면 분석되지 않은 것만 분석
 				List<Integer> statusArray = new ArrayList<Integer>();
-				statusArray.add( 0 ); //未分析的
+				statusArray.add( 0 ); //미분석
 				if(forceFlag){
-					statusArray.add( 1 ); //已分析的
+					statusArray.add( 1 ); //분석 완료
 				}
-				statusArray.add( -1 ); //有错误的
+				statusArray.add( -1 ); //오류 있음
 				p = cb.and( p, root.get( AttendanceDetail_.recordStatus).in( statusArray ));
 			}
 		}
@@ -237,15 +237,15 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 分析时间范围内的所有打卡记录
-	 * 1、如果未传入时间，或者时间有错，那么分析所有未分析过的打卡记录
-	 * 2、只分析未归档的，已经归档的将不再分析了
+	 * 시간 범위 내 모든 출퇴근 기록 분석
+	 * 1、시간이 전달되지 않았거나 잘못되었으면 분석되지 않은 모든 출퇴근 기록 분석
+	 * 2、보관되지 않은 것만 분석하고 이미 보관된 것은 더 이상 분석하지 않음
 	 * @param startDateString
 	 * @param endDateString
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("按指定的开始时间，结束时间列示未被分析的员工姓名列表")
+	//@MethodDescribe("지정한 시작·종료 시간으로 분석되지 않은 직원 이름 목록 조회")
 	public List<String> getAllAnalysenessPersonNames(String startDateString, String endDateString ) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
@@ -253,9 +253,9 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = root.get( AttendanceDetail_.id ).isNotNull();
-		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //要未归档的，才再次进行分析
+		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //보관되지 않은 것만 다시 분석
 		Date startDate = null;
 		Date endDate = null;
 		try{
@@ -268,7 +268,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		}catch(Exception e){
 			endDate = null;
 		}
-		//如果开始时间和结束时间有值，那么分析一个时间区间内的所有打卡记录，已经分析过了的，也需要重新分析一次
+		//시작·종료 시간 값이 있으면 해당 기간의 모든 출퇴근 기록을 분석하며, 이미 분석된 것도 다시 분석
 		if( startDate != null  && endDate != null ){
 			p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), startDate, endDate));
 		}else{
@@ -279,10 +279,10 @@ public class AttendanceDetailFactory extends AbstractFactory {
 				p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), new Date(), endDate));
 			}
 			if( startDate == null && endDate == null ){
-				//startDateString和endDateString都为空，只分析所有未分析过的
+				//startDateString과 endDateString이 모두 비어 있으면 분석되지 않은 것만 분석
 				List<Integer> statusArray = new ArrayList<Integer>();
-				statusArray.add( 0 ); //未分析的
-				statusArray.add( -1 ); //有错误的
+				statusArray.add( 0 ); //미분석
+				statusArray.add( -1 ); //오류 있음
 				p = cb.and( p, root.get( AttendanceDetail_.recordStatus).in( statusArray ));
 			}
 		}
@@ -294,17 +294,17 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 分析时间范围内的所有打卡记录(可选择已分析/未分析)
-	 * 1、如果未传入时间，或者时间有错， 那么分析所有未分析过的打卡记录
-	 * 2、只分析未归档的，已经归档的将不再分析了
-	 * 3、如果forceFlag为true则分析（未分析的，已分析的，错误的）
+	 * 시간 범위 내 모든 출퇴근 기록 분석(분석 완료/미분석 선택 가능)
+	 * 1、시간이 전달되지 않았거나 잘못되었으면 분석되지 않은 모든 출퇴근 기록 분석
+	 * 2、보관되지 않은 것만 분석하고 이미 보관된 것은 더 이상 분석하지 않음
+	 * 3、forceFlag가 true이면 (미분석, 분석 완료, 오류) 모두 분석
 	 * @param startDateString
 	 * @param endDateString
 	 * @param forceFlag
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("按指定的开始时间，结束时间列示员工姓名列表")
+	//@MethodDescribe("지정한 시작·종료 시간으로 직원 이름 목록 조회")
 	public List<String> getAllAnalysenessPersonNamesForce(String startDateString, String endDateString ,Boolean forceFlag) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
@@ -312,9 +312,9 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = root.get( AttendanceDetail_.id ).isNotNull();
-		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //要未归档的，才再次进行分析
+		p = cb.and( p, root.get( AttendanceDetail_.archiveTime ).isNull()); //보관되지 않은 것만 다시 분석
 		Date startDate = null;
 		Date endDate = null;
 		try{
@@ -327,7 +327,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		}catch(Exception e){
 			endDate = null;
 		}
-		//如果开始时间和结束时间有值，那么分析一个时间区间内的所有打卡记录，已经分析过了的，也需要重新分析一次
+		//시작·종료 시간 값이 있으면 해당 기간의 모든 출퇴근 기록을 분석하며, 이미 분석된 것도 다시 분석
 		if( startDate != null  && endDate != null ){
 			p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), startDate, endDate));
 		}else{
@@ -338,13 +338,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 				p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), new Date(), endDate));
 			}
 			if( startDate == null && endDate == null ){
-				//startDateString和endDateString都为空，只分析所有未分析过的
+				//startDateString과 endDateString이 모두 비어 있으면 분석되지 않은 것만 분석
 				List<Integer> statusArray = new ArrayList<Integer>();
-				statusArray.add( 0 ); //未分析的
+				statusArray.add( 0 ); //미분석
 				if(forceFlag){
-					statusArray.add( 1 ); //已分析的
+					statusArray.add( 1 ); //분석 완료
 				}
-				statusArray.add( -1 ); //有错误的
+				statusArray.add( -1 ); //오류 있음
 				p = cb.and( p, root.get( AttendanceDetail_.recordStatus).in( statusArray ));
 			}
 		}
@@ -353,7 +353,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq).setMaxResults(20000).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("按指定的开始时间，结束时间列示未被分析的AttendanceDetail信息列表")
+	//@MethodDescribe("지정한 시작·종료 시간으로 분석되지 않은 AttendanceDetail 정보 목록 조회")
 	public List<String> getUserAnalysenessDetails(String empName, String startDateString, String endDateString) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
@@ -376,7 +376,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		}catch(Exception e){
 			endDate = null;
 		}
-		//如果开始时间和结束时间有值，那么分析一个时间区间内的所有打卡记录，已经分析过了的，也需要重新分析一次
+		//시작·종료 시간 값이 있으면 해당 기간의 모든 출퇴근 기록을 분석하며, 이미 분석된 것도 다시 분석
 		if( startDate != null  && endDate != null ){
 			p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), startDate, endDate));
 		}else{
@@ -387,17 +387,17 @@ public class AttendanceDetailFactory extends AbstractFactory {
 				p = cb.and( p, cb.between( root.get( AttendanceDetail_.recordDate), new Date(), endDate));
 			}
 			if( startDate == null && endDate == null ){
-				//startDateString和endDateString都为空，只分析所有未分析过的
+				//startDateString과 endDateString이 모두 비어 있으면 분석되지 않은 것만 분석
 				List<Integer> statusArray = new ArrayList<Integer>();
-				statusArray.add( 0 ); //未分析的
-				statusArray.add( -1 ); //有错误的
+				statusArray.add( 0 ); //미분석
+				statusArray.add( -1 ); //오류 있음
 				p = cb.and( p, root.get( AttendanceDetail_.recordStatus).in( statusArray ));
 			}
 		}
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList();
 	}
 	
-	//@MethodDescribe("按指定的年份，月份列示AttendanceDetail信息列表")
+	//@MethodDescribe("지정한 연도·월로 AttendanceDetail 정보 목록 조회")
 	public List<AttendanceDetail> getDetailsByYearAndMonth(String year, String month) throws Exception {
 		if( year == null || month == null ){
 			return null;
@@ -406,14 +406,14 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceDetail> cq = cb.createQuery(AttendanceDetail.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceDetail_.recordStatus), 1 );
 		p = cb.and(p, cb.equal( root.get(AttendanceDetail_.yearString), year ));
 		p = cb.and(p, cb.equal( root.get(AttendanceDetail_.monthString), month ));
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList();
 	}
 	
-	//@MethodDescribe("按指定的统计周期年份，月份列示AttendanceDetail信息列表")
+	//@MethodDescribe("지정한 통계 주기 연도·월로 AttendanceDetail 정보 목록 조회")
 	public List<AttendanceDetail> getDetailsByCycleYearAndMonth(String cycleYear, String cycleMonth) throws Exception {
 		if( cycleYear == null || cycleMonth == null ){
 			return null;
@@ -422,14 +422,14 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceDetail> cq = cb.createQuery(AttendanceDetail.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceDetail_.recordStatus), 1 );
 		p = cb.and(p, cb.equal( root.get(AttendanceDetail_.cycleYear), cycleYear ));
 		p = cb.and(p, cb.equal( root.get(AttendanceDetail_.cycleMonth), cycleMonth ));
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList();
 	}
 	
-	//@MethodDescribe("按指定的年份，月份列示已分析的AttendanceDetail信息中涉及的组织列表")
+	//@MethodDescribe("지정한 연도·월로 분석된 AttendanceDetail 정보의 조직 목록 조회")
 	public List<String> getDetailsUnitsByYearAndMonth(String year, String month) throws Exception {
 		if( year == null || month == null ){
 			return null;
@@ -446,13 +446,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 迟到、缺勤、早退、工时不足、异常打卡，但未申诉通过的
+	 * 지각, 결근, 조퇴, 근무시간 부족, 비정상 체크 중 이의 신청이 승인되지 않은 것
 	 * @param year
 	 * @param month
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("获取所有需要导出所有异常数据（未申诉的、申诉未通过的）")
+	//@MethodDescribe("내보낼 모든 이상 데이터(이의 신청 안 한 것, 이의 신청 미승인) 조회")
 	public List<String> getDetailsWithAllAbnormalCase( String year, String month ) throws Exception {
 		if( year == null || month == null ){
 			return null;
@@ -463,22 +463,22 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
 		
-		Predicate p = cb.lessThan( root.get(AttendanceDetail_.appealStatus), 9); //如果等于9就是申诉通过
+		Predicate p = cb.lessThan( root.get(AttendanceDetail_.appealStatus), 9); //9이면 이의 신청 승인
 		p = cb.and(p, cb.equal( root.get(AttendanceDetail_.cycleYear), year ));
 		p = cb.and(p, cb.equal( root.get(AttendanceDetail_.cycleMonth), month ));
 		
-		Predicate orCase = cb.isTrue(root.get(AttendanceDetail_.isLate)); //迟到
-		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isLeaveEarlier)) ); //或者早退
-		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isAbnormalDuty) )); //或者异常打卡
-		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isAbsent) )); //或者缺勤
-		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isLackOfTime) )); //或者工时不足
+		Predicate orCase = cb.isTrue(root.get(AttendanceDetail_.isLate)); //지각
+		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isLeaveEarlier)) ); //또는 조퇴
+		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isAbnormalDuty) )); //또는 비정상 체크
+		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isAbsent) )); //또는 결근
+		orCase = cb.or( orCase, cb.isTrue( root.get(AttendanceDetail_.isLackOfTime) )); //또는 근무시간 부족
 		
 		Predicate where = cb.and( p, orCase );
 		
 		return em.createQuery(cq.where(where)).setMaxResults(20000).getResultList();
 	}
 	
-	//@MethodDescribe("按指定的统计周期年份，月份列示AttendanceDetail信息中涉及的组织列表")
+	//@MethodDescribe("지정한 통계 주기 연도·월로 AttendanceDetail 정보의 조직 목록 조회")
 	public List<String> getDetailsUnitsByCycleYearAndMonth(String cycleYear, String cycleMonth) throws Exception {
 		if( cycleYear == null || cycleMonth == null ){
 			return null;
@@ -494,7 +494,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("按指定的统计周期年份，月份列示AttendanceDetail信息中涉及的顶层组织名称列表")
+	//@MethodDescribe("지정한 통계 주기 연도·월로 AttendanceDetail 정보의 최상위 조직 이름 목록 조회")
 	public List<String> distinctDetailsTopUnitNamesByYearAndMonth(String year, String month) throws Exception {
 		if( year == null || month == null ){
 			return null;
@@ -510,7 +510,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(1000).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("按指定的统计周期年份，月份列示AttendanceDetail信息中涉及的员工姓名列表")
+	//@MethodDescribe("지정한 통계 주기 연도·월로 AttendanceDetail 정보의 직원 이름 목록 조회")
 	public List<String> distinctDetailsEmployeeNamesByCycleYearAndMonth(String cycleYear, String cycleMonth) throws Exception {
 		if( cycleYear == null || cycleMonth == null ){
 			return null;
@@ -526,7 +526,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("按指定的统计周期年份，月份列示AttendanceDetail信息中涉及的顶层组织名称列表")
+	//@MethodDescribe("지정한 통계 주기 연도·월로 AttendanceDetail 정보의 최상위 조직 이름 목록 조회")
 	public List<String> distinctDetailsTopUnitNamesByCycleYearAndMonth(String cycleYear, String cycleMonth) throws Exception {
 		if( cycleYear == null || cycleMonth == null ){
 			return null;
@@ -542,7 +542,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("按指定的统计周期年份，月份列示AttendanceDetail信息中涉及的组织名称列表")
+	//@MethodDescribe("지정한 통계 주기 연도·월로 AttendanceDetail 정보의 조직 이름 목록 조회")
 	public List<String> distinctDetailsUnitNamesByCycleYearAndMonth( String cycleYear, String cycleMonth ) throws Exception {
 		if( cycleYear == null || cycleMonth == null ){
 			return null;
@@ -558,7 +558,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("按指定的统计周期年份，月份列示AttendanceDetail信息中涉及的组织名称列表")
+	//@MethodDescribe("지정한 통계 주기 연도·월로 AttendanceDetail 정보의 조직 이름 목록 조회")
 	public List<String> distinctDetailsUnitNamesByCycleYearAndMonth( String cycleYear, String cycleMonth, String employeeName ) throws Exception {
 		if( cycleYear == null || cycleMonth == null || employeeName == null ){
 			return null;
@@ -576,7 +576,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 
 
-	//@MethodDescribe("按batchName查询一次导入的所有数据记录列表")
+	//@MethodDescribe("batchName으로 한 번에 가져온 모든 데이터 기록 목록 조회")
 	public List<String> listByBatchName( String file_id ) throws Exception{
 		if( file_id == null ){
 			return null;
@@ -586,12 +586,12 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceDetail_.batchName), file_id );
 		return em.createQuery(cq.where(p)).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 
-	//@MethodDescribe("按年份月份查询某用户的打卡数据记录列表")
+	//@MethodDescribe("연도·월로 특정 사용자의 출퇴근 데이터 기록 목록 조회")
 	public List<String> listUserAttendanceDetailByYearAndMonth(String user, String year, String month)  throws Exception {
 		if( user == null || user.isEmpty() ||year == null || month == null || year.isEmpty() || month.isEmpty()  ){
 			return null;
@@ -601,7 +601,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceDetail_.recordStatus), 1 );
 		if( StringUtils.isNotEmpty( user ) ){
 			p = cb.and(p, cb.equal( root.get(AttendanceDetail_.empName), user ));
@@ -615,7 +615,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("按周期年份月份查询某用户的打卡数据记录列表")
+	//@MethodDescribe("주기 연도·월로 특정 사용자의 출퇴근 데이터 기록 목록 조회")
 	public List<String> listUserAttendanceDetailByCycleYearAndMonth(String user, String year, String month)  throws Exception {
 		if( user == null || user.isEmpty() ||year == null || month == null || year.isEmpty() || month.isEmpty()  ){
 			return null;
@@ -625,7 +625,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceDetail_.recordStatus), 1 );
 		if( StringUtils.isNotEmpty( user ) ){
 			p = cb.and(p, cb.equal( root.get(AttendanceDetail_.empName), user ));
@@ -649,7 +649,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.isNotNull( root.get(AttendanceDetail_.id) );
 		if( StringUtils.isNotEmpty( user ) ){
 			p = cb.and(p, cb.equal( root.get(AttendanceDetail_.empName), user ));
@@ -664,7 +664,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//根据人员和打卡日期查找打卡记录
+	//사용자와 출퇴근 날짜로 출퇴근 기록 조회
 		public List<String> listDetailByNameAndDate( String user, String dateStr )  throws Exception {
 			if( user == null || user.isEmpty() ||dateStr == null ){
 				return null;
@@ -674,7 +674,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 			CriteriaQuery<String> cq = cb.createQuery(String.class);
 			Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 			cq.select( root.get(AttendanceDetail_.id ));
-			//一般始终为true, id is not null
+			//일반적으로 항상 true, id is not null
 			Predicate p = cb.isNotNull( root.get(AttendanceDetail_.id) );
 			if( StringUtils.isNotEmpty( user ) ){
 				p = cb.and(p, cb.equal( root.get(AttendanceDetail_.empName), user ));
@@ -687,14 +687,14 @@ public class AttendanceDetailFactory extends AbstractFactory {
 			return em.createQuery(cq.where(p)).getResultList();
 		}
 	
-	//@MethodDescribe("按年份月份查询某组织的打卡数据记录列表")
+	//@MethodDescribe("연도·월로 특정 조직의 출퇴근 데이터 기록 목록 조회")
 	public List<String> listUnitAttendanceDetailByYearAndMonth( List<String> unitNames, String year, String month)  throws Exception {
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceDetail_.recordStatus), 1 );
 		if( unitNames != null && unitNames.size() > 0 ){
 			p = cb.and(p, root.get(AttendanceDetail_.unitName).in(unitNames));
@@ -709,14 +709,14 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("按年份月份查询某顶层组织的打卡数据记录列表")
+	//@MethodDescribe("연도·월로 특정 최상위 조직의 출퇴근 데이터 기록 목록 조회")
 	public List<String> listTopUnitAttendanceDetailByYearAndMonth(List<String> topUnitNames, String year, String month)  throws Exception {
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.equal( root.get(AttendanceDetail_.recordStatus), 1 );
 		if( ListTools.isNotEmpty(  topUnitNames ) ){
 			p = cb.and(p, root.get(AttendanceDetail_.topUnitName).in( topUnitNames ));
@@ -732,7 +732,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	
 	
 	/**
-	 * 查询下一页的信息数据
+	 * 다음 페이지 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -742,13 +742,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttendanceDetail> listIdsNextWithFilter( String id, Integer count, Object sequence, WrapInFilter wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceDetail> cq = cb.createQuery(AttendanceDetail.class);
 		Root<AttendanceDetail> root = cq.from(AttendanceDetail.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -812,7 +812,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}	
 	
 	/**
-	 * 查询下一页的信息数据(排除不参加考勤的人员)
+	 * 다음 페이지 정보 데이터 조회(근태 미참여 사용자 제외)
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -822,13 +822,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttendanceDetail> listIdsNextWithFilterUn( String id, Integer count, Object sequence, WrapInFilter wrapIn ,List<String> unUnitNameList,List<String> personNameList) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceDetail> cq = cb.createQuery(AttendanceDetail.class);
 		Root<AttendanceDetail> root = cq.from(AttendanceDetail.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -898,19 +898,19 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询考勤信息ids(排除不参加考勤的人员)
+	 * 조건으로 근태 정보 ids 조회(근태 미참여 사용자 제외)
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
-	//根据人员和打卡日期查找打卡记录
+	//사용자와 출퇴근 날짜로 출퇴근 기록 조회
 	public List<AttendanceDetail> listIdsWithFilterUn( WrapInFilter wrapIn ,List<String> unUnitNameList,List<String> personNameList )  throws Exception {
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceDetail> cq = cb.createQuery(AttendanceDetail.class);
 		Root<AttendanceDetail> root = cq.from(AttendanceDetail.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -973,7 +973,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询上一页的文档信息数据
+	 * 이전 페이지 문서 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -983,13 +983,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttendanceDetail> listIdsPrevWithFilter( String id, Integer count, Object sequence, WrapInFilter wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<AttendanceDetail> cq = cb.createQuery(AttendanceDetail.class);
 		Root<AttendanceDetail> root = cq.from(AttendanceDetail.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -1053,13 +1053,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询符合的文档信息总数
+	 * 조건에 맞는 문서 정보 총수 조회
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
 	public long getCountWithFilter( WrapInFilter wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -1111,13 +1111,13 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询符合的文档信息总数(排除不参加考勤的人员)
+	 * 조건에 맞는 문서 정보 총수 조회(근태 미참여 사용자 제외)
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
 	public long getCountWithFilterUn( WrapInFilter wrapIn ,List<String> unUnitNameList,List<String> personNameList) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -1225,14 +1225,14 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("查询未归档的条卡记录列表，最大2000条")
+	//@MethodDescribe("보관되지 않은 출퇴근 기록 목록 조회, 최대 2000건")
 	public List<String> listNonArchiveDetailInfoIds()  throws Exception {
 		EntityManager em = this.entityManagerContainer().get( AttendanceDetail.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select( root.get(AttendanceDetail_.id ));
-		//一般始终为true, id is not null
+		//일반적으로 항상 true, id is not null
 		Predicate p = cb.isNotNull( root.get(AttendanceDetail_.archiveTime) );
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList();
 	}
@@ -1245,8 +1245,8 @@ public class AttendanceDetailFactory extends AbstractFactory {
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
 		cq.select(root.get(AttendanceDetail_.id));
 		Predicate p = cb.equal( root.get( AttendanceDetail_.empName ), empName );
-		statusArray.add( 0 ); //未分析的
-		statusArray.add( -1 ); //有错误的
+		statusArray.add( 0 ); //미분석
+		statusArray.add( -1 ); //오류 있음
 		p = cb.and( p, root.get( AttendanceDetail_.recordStatus).in( statusArray ));
 		return em.createQuery(cq.where(p)).setMaxResults(20000).getResultList();
 	}
@@ -1265,7 +1265,7 @@ public class AttendanceDetailFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询在指定截止日期前已经打过卡的人员
+	 * 지정 마감일 이전에 이미 출퇴근 체크한 사용자 조회
 	 * @param deadline
 	 * @param type:all#onDuty#offDuty#morningOffDuty#afternoonOnDuty
 	 * @return

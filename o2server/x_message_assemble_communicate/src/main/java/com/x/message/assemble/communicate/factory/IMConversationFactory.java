@@ -37,7 +37,7 @@ public class IMConversationFactory extends AbstractFactory {
 
 
     /**
-     * 根据 businessId 获取会话列表 并且成员包含person
+     * businessId로 대화 목록 조회. 구성원에 person 포함
      *
      * @param person
      * @param businessId
@@ -52,7 +52,7 @@ public class IMConversationFactory extends AbstractFactory {
         CriteriaBuilder cbExt = emExt.getCriteriaBuilder();
         CriteriaQuery<IMConversation> cq = cb.createQuery(IMConversation.class);
         Root<IMConversation> root = cq.from(IMConversation.class);
-        // 子条件
+        // 하위 조건
         Subquery<IMConversationExt> subQuery = cq.subquery(IMConversationExt.class);
         Root<IMConversationExt> root1 = subQuery.from(
                 emExt.getMetamodel().entity(IMConversationExt.class));
@@ -70,7 +70,7 @@ public class IMConversationFactory extends AbstractFactory {
 
 
     /**
-     * 获取成员包含person的会话id 列表
+     * 구성원에 person이 포함된 대화 id 목록 조회
      *
      * @param person
      * @return
@@ -92,7 +92,7 @@ public class IMConversationFactory extends AbstractFactory {
         CriteriaBuilder cbExt = emExt.getCriteriaBuilder();
         CriteriaQuery<IMConversation> cq = cb.createQuery(IMConversation.class);
         Root<IMConversation> root = cq.from(IMConversation.class);
-        // 子条件
+        // 하위 조건
         Subquery<IMConversationExt> subQuery = cq.subquery(IMConversationExt.class);
         Root<IMConversationExt> root1 = subQuery.from(
                 emExt.getMetamodel().entity(IMConversationExt.class));
@@ -109,7 +109,7 @@ public class IMConversationFactory extends AbstractFactory {
 
 
     /**
-     * 查询当前用户会话扩展
+     * 현재 사용자 대화 확장 조회
      *
      * @param person
      * @param conversationId
@@ -133,7 +133,7 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 未读消息数量
+     * 읽지 않은 메시지 수
      *
      * @param ext
      * @return
@@ -154,8 +154,8 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 查询某个会话消息总数量
-     * @param conversationId 会话 id
+     * 특정 대화의 메시지 총수 조회
+     * @param conversationId 대화 id
      * @return
      * @throws Exception
      */
@@ -170,9 +170,9 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 获取会话中的最后一条消息
+     * 대화의 마지막 메시지 조회
      *
-     * @param conversationId 会话 id
+     * @param conversationId 대화 id
      * @return
      * @throws Exception
      */
@@ -193,7 +193,7 @@ public class IMConversationFactory extends AbstractFactory {
         }
     }
 
-    // 根据bodyFileId字段搜索消息
+    // bodyFileId 필드로 메시지 검색
     public List<IMMsg> listMessageByFileId(String fileId) throws Exception {
         EntityManager em = this.entityManagerContainer().get(IMMsg.class);
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -204,7 +204,7 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 根据 id 列表获取消息对象列表
+     * id 목록으로 메시지 객체 목록 조회
      *
      * @param ids
      * @return
@@ -228,7 +228,7 @@ public class IMConversationFactory extends AbstractFactory {
 
 
     /**
-     * 查询会话中的聊天消息 分页查询需要
+     * 대화 내 채팅 메시지 조회. 페이지 조회에 필요
      *
      * @param adjustPage
      * @param adjustPageSize
@@ -253,17 +253,17 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 分页查询的聊天消息 如果有截止时间 beforeDate，则查询截止时间之前的消息 如果有会话 id，则查询 会话内的聊天消息
+     * 페이지 단위 채팅 메시지 조회. 마감 시간 beforeDate가 있으면 그 이전 메시지를 조회하고, 대화 id가 있으면 대화 내 채팅 메시지를 조회
      *
-     * @param conversationId 会话 id
-     * @param beforeDate     截止时间，查询这个截止时间之前的所有消息
+     * @param conversationId 대화 id
+     * @param beforeDate     마감 시간. 이 시간 이전의 모든 메시지 조회
      * @return
      * @throws Exception
      */
     public List<IMMsg> listMsgWithConversation(Integer adjustPage, Integer adjustPageSize,
             String conversationId, Date beforeDate) throws Exception {
         if (StringUtils.isEmpty(conversationId) && beforeDate == null) {
-            LOGGER.info("参数不正确，无法查询消息！！！！！！！");
+            LOGGER.info("파라미터가 올바르지 않아 메시지를 조회할 수 없습니다!!!!!!!");
             return Collections.emptyList();
         }
         EntityManager em = this.entityManagerContainer().get(IMMsg.class);
@@ -277,13 +277,13 @@ public class IMConversationFactory extends AbstractFactory {
         if (beforeDate != null) {
             p = cb.and(p, cb.lessThan(root.get(IMMsg_.createTime), beforeDate));
         }
-        cq.select(root).where(p).orderBy(cb.asc(root.get(IMMsg_.createTime))); // 顺序 时间从远往近查
+        cq.select(root).where(p).orderBy(cb.asc(root.get(IMMsg_.createTime))); // 순서: 시간 오래된 순 조회
         return em.createQuery(cq).setFirstResult((adjustPage - 1) * adjustPageSize)
                 .setMaxResults(adjustPageSize).getResultList();
     }
 
     /**
-     * 查询会话聊天消息总数 分页查询需要
+     * 대화 채팅 메시지 총수 조회. 페이지 조회에 필요
      *
      * @param conversationId
      * @return
@@ -303,9 +303,9 @@ public class IMConversationFactory extends AbstractFactory {
 
 
     /**
-     * 根据会话id查询所有的消息id 清空聊天记录用
+     * 대화 id로 모든 메시지 id 조회. 채팅 기록 비우기용
      *
-     * @param conversationId 会话id
+     * @param conversationId 대화 id
      * @return
      * @throws Exception
      */
@@ -319,9 +319,9 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 根据会话id查询所有关联的会话扩展 删除会话扩展用
+     * 대화 id로 연관된 모든 대화 확장 조회. 대화 확장 삭제용
      *
-     * @param conversationId 会话id
+     * @param conversationId 대화 id
      * @return
      * @throws Exception
      */
@@ -337,17 +337,17 @@ public class IMConversationFactory extends AbstractFactory {
 
 
     /**
-     * 查询收藏消息
+     * 즐겨찾기 메시지 조회
      *
-     * @param person 收藏人
-     * @param msgId  消息 id
+     * @param person 즐겨찾기한 사용자
+     * @param msgId  메시지 id
      * @return
      * @throws Exception
      */
     public List<IMMsgCollection> listCollectionByPersonAndMsgId(String person, String msgId)
             throws Exception {
         if (StringUtils.isEmpty(person) && StringUtils.isEmpty(msgId)) {
-            LOGGER.info("参数不正确，无法查询收藏消息！！！！！！！");
+            LOGGER.info("파라미터가 올바르지 않아 즐겨찾기 메시지를 조회할 수 없습니다!!!!!!!");
             return Collections.emptyList();
         }
         EntityManager em = this.entityManagerContainer().get(IMMsgCollection.class);
@@ -366,7 +366,7 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 分页查询收藏消息
+     * 즐겨찾기 메시지 페이지 조회
      *
      * @param adjustPage
      * @param adjustPageSize
@@ -388,7 +388,7 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 批量查询当前用户会话扩展
+     * 현재 사용자 대화 확장 일괄 조회
      *
      * @param person
      * @param conversationIds
@@ -409,7 +409,7 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 批量获取未读消息数量
+     * 읽지 않은 메시지 수 일괄 조회
      *
      * @param exts
      * @return
@@ -423,10 +423,10 @@ public class IMConversationFactory extends AbstractFactory {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<java.lang.Object[]> cq = cb.createQuery(java.lang.Object[].class);
         Root<IMMsg> root = cq.from(IMMsg.class);
-        // 构建条件：conversationId in exts, createPerson != person, createTime > lastReadTime
+        // 조건 구성: conversationId in exts, createPerson != person, createTime > lastReadTime
         java.util.List<String> conversationIds = exts.stream().map(IMConversationExt::getConversationId).collect(java.util.stream.Collectors.toList());
         Predicate p = root.get(IMMsg_.conversationId).in(conversationIds);
-        // 为每个ext添加条件
+        // 각 ext에 조건 추가
         java.util.List<Predicate> predicates = new java.util.ArrayList<>();
         for (IMConversationExt ext : exts) {
             Predicate p1 = cb.equal(root.get(IMMsg_.conversationId), ext.getConversationId());
@@ -443,7 +443,7 @@ public class IMConversationFactory extends AbstractFactory {
     }
 
     /**
-     * 批量获取最后一条消息
+     * 마지막 메시지 일괄 조회
      *
      * @param conversationIds
      * @return
@@ -458,8 +458,8 @@ public class IMConversationFactory extends AbstractFactory {
         CriteriaQuery<IMMsg> cq = cb.createQuery(IMMsg.class);
         Root<IMMsg> root = cq.from(IMMsg.class);
         Predicate p = root.get(IMMsg_.conversationId).in(conversationIds);
-        // 使用窗口函数或子查询获取每个会话的最新消息
-        // 由于JPA Criteria不支持窗口函数，我们用子查询
+        // 윈도 함수 또는 서브쿼리로 각 대화의 최신 메시지 조회
+        // JPA Criteria가 윈도 함수를 지원하지 않아 서브쿼리 사용
         Subquery<java.util.Date> subMaxTime = cq.subquery(java.util.Date.class);
         Root<IMMsg> subRoot = subMaxTime.from(IMMsg.class);
         subMaxTime.select(cb.greatest(subRoot.get(IMMsg_.createTime)))
@@ -472,7 +472,7 @@ public class IMConversationFactory extends AbstractFactory {
 
 
      /**
-     * 收藏消息数量
+     * 즐겨찾기 메시지 수
      *
      * @param person
      * @return

@@ -63,7 +63,7 @@ public class Processing extends BaseProcessing {
 			}
 			// workStatus is processing
 			List<String> nextLoops = SetUniqueList.setUniqueList(new ArrayList<String>());
-			// 强制从arrived开始
+			// arrived부터 강제 시작
 			if (BooleanUtils.isTrue(processingAttributes.ifForceJoinAtArrive())) {
 				workId = this.arrive(workId, processingConfigurator, processingAttributes);
 			}
@@ -77,7 +77,7 @@ public class Processing extends BaseProcessing {
 			if (BooleanUtils.isFalse(processingAttributes.ifForceJoinAtInquire())) {
 				executed = this.execute(workId, processingConfigurator, processingAttributes);
 			} else {
-				// 强制从inquire开始
+				// inquire부터 강제 시작
 				executed = new ArrayList<>();
 				executed.add(workId);
 			}
@@ -92,7 +92,7 @@ public class Processing extends BaseProcessing {
 			processingAttributes.increaseLoop();
 			for (String str : nextLoops) {
 				if (StringUtils.isNotEmpty(str) && BooleanUtils.isTrue(processingConfigurator.getContinueLoop())) {
-					// clone processingAttributes 对象
+					// processingAttributes 객체 clone
 					new Processing(processingAttributes.copyInstancePointToSingletonSignalStack()).processing(str);
 				}
 			}
@@ -159,7 +159,7 @@ public class Processing extends BaseProcessing {
 			default:
 				break;
 			}
-			/** 在内层的方法中进行提交,这里不需要再次进行提交,在内层提交是因为比如发送待办等要在提交后运行 */
+			/** 내부 메서드에서 커밋하므로 여기서 다시 커밋할 필요 없음. 결재 대기 발송 등은 커밋 후 실행해야 하므로 내부에서 커밋함 */
 			return id;
 		} catch (Exception e) {
 			throw new IllegalStateException("processing arrive failure.", e);
@@ -222,7 +222,7 @@ public class Processing extends BaseProcessing {
 			default:
 				break;
 			}
-			// 在内层的方法中进行提交,这里不需要再次进行提交,在内层提交是因为比如发送待办等要在提交后运行
+			// 내부 메서드에서 커밋하므로 여기서 다시 커밋할 필요 없음. 결재 대기 발송 등은 커밋 후 실행해야 하므로 내부에서 커밋함
 			return executed;
 		} catch (Exception e) {
 			throw new IllegalStateException("processing execute failure.", e);
@@ -283,7 +283,7 @@ public class Processing extends BaseProcessing {
 			default:
 				break;
 			}
-			// 在内层的方法中进行提交,这里不需要再次进行提交,在内层提交是因为比如发送待办等要在提交后运行
+			// 내부 메서드에서 커밋하므로 여기서 다시 커밋할 필요 없음. 결재 대기 발송 등은 커밋 후 실행해야 하므로 내부에서 커밋함
 			return inquired;
 		} catch (Exception e) {
 			throw new IllegalStateException("processing inquire failure.", e);

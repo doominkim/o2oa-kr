@@ -36,7 +36,7 @@ public class BBSForumSubjectStatisticService {
 						sectionList = business.sectionInfoFactory().listSubSectionByMainSectionId( mainSectionInfo.getId() );
 						if( ListTools.isNotEmpty( sectionList ) ){
 							for( BBSSectionInfo sectionInfo : mainSectionList ){
-								//统计版块下面的贴子数量
+								//게시판 내 게시글 수 통계
 								count = business.subjectInfoFactory().countByMainAndSubSectionId( sectionInfo.getId(), null );
 								sectionInfo.setSubjectTotal( count.longValue() );
 								count = business.replyInfoFactory().countBySectionId( sectionInfo.getId() );
@@ -53,7 +53,7 @@ public class BBSForumSubjectStatisticService {
 								emc.check( sectionInfo, CheckPersistType.all );
 							}
 						}
-						//统计主版块下面的贴子数量
+						//상위 게시판 내 게시글 수 통계
 						count = business.subjectInfoFactory().countByMainAndSubSectionId( mainSectionInfo.getId(), null );
 						mainSectionInfo.setSubjectTotal( count.longValue() );
 						count = business.replyInfoFactory().countBySectionId( mainSectionInfo.getId() );
@@ -71,10 +71,10 @@ public class BBSForumSubjectStatisticService {
 					}
 				}
 
-				//统计论坛版块数量
+				//포럼 게시판 수 통계
 				count = business.sectionInfoFactory().countAllSectionByForumId( f.getId() );
 				f.setSectionTotal( count.longValue() );
-				//统计论坛下面的贴子数量
+				//포럼 내 게시글 수 통계
 				count = business.subjectInfoFactory().countByForumId( f.getId(), null );
 				f.setSubjectTotal( count.longValue() );
 				count = business.replyInfoFactory().countByForumId( f.getId() );

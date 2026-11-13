@@ -12,13 +12,13 @@ MWF.xApplication.Selector.IdentityWidthDutyCategoryByUnit = new Class({
         "zIndex": 1000,
         "expand": false,
         "noUnit": false,
-        "include": [], //增加的可选项
-        "resultType": "", //可以设置成个人，那么结果返回个人
+        "include": [], //추가 선택 항목
+        "resultType": "", //개인으로 설정 가능, 그러면 결과로 개인을 반환
         "expandSubEnable": true,
-        "selectAllEnable": true, //分类是否允许全选下一层
+        "selectAllEnable": true, //분류에서 다음 레벨 전체 선택 허용 여부
         "exclude": [],
-        "dutyUnitLevelBy": "duty", //组织层级是按身份所在群组还是职务,
-        "identitySortBy" : "identityNumber", //身份排序按身份排序号，还是传入的duty
+        "dutyUnitLevelBy": "duty", //조직 계층을 신분이 속한 그룹 기준으로 할지 직무 기준으로 할지,
+        "identitySortBy" : "identityNumber", //신분 정렬을 신분 정렬 번호로 할지 전달된 duty로 할지
         "selectType": "identity"
     },
     setInitTitle: function(){
@@ -38,7 +38,7 @@ MWF.xApplication.Selector.IdentityWidthDutyCategoryByUnit = new Class({
         return dn;
     },
     loadSelectItems: function (addToNext) {
-        //根据组织分类展现职务
+        //조직 분류에 따라 직무 표시
         if (this.options.resultType === "person") {
             if (this.titleTextNode) {
                 this.titleTextNode.set("text", MWF.xApplication.Selector.LP.selectPerson);
@@ -83,8 +83,8 @@ MWF.xApplication.Selector.IdentityWidthDutyCategoryByUnit = new Class({
             }, function (json) {
                 this.allIdentityData = json.data;
 
-                this.setUnitLevelNameMap(); //如果需要检查状态，创建身份-所在组织层次名对应关系
-                // this.setUnitLevelNameMapInValues(); //如果需要检查状态，创建已选值身份-所在组织层次名对应关系
+                this.setUnitLevelNameMap(); //상태 확인이 필요하면 신분-소속 조직 계층 이름 대응 관계 생성
+                // this.setUnitLevelNameMapInValues(); //상태 확인이 필요하면 선택된 신분-소속 조직 계층 이름 대응 관계 생성
 
                 this._loadSelectItems(json.data)
             }.bind(this))
@@ -262,7 +262,7 @@ MWF.xApplication.Selector.IdentityWidthDutyCategoryByUnit = new Class({
     _listNestedUnitByIdentity: function (identityList, callback) {
         //identityList = Array.unique(identityList);
         var key = this.options.dutyUnitLevelBy === "duty" ? "matchUnitLevelName" : "unitLevelName";
-        //根据unitLevelName整合成组织树
+        //unitLevelName에 따라 조직 트리로 통합
         var unitTree = {};
         for (var i = 0; i < identityList.length; i++) {
             var flag = true;
@@ -439,7 +439,7 @@ MWF.xApplication.Selector.IdentityWidthDutyCategoryByUnit = new Class({
     //    debugger;
     //    this.unitArray = [];
     //    var key = this.options.dutyUnitLevelBy === "duty" ? "matchUnitLevelName" : "unitLevelName";
-    //    //根据unitLevelName整合成组织树
+    //    //unitLevelName에 따라 조직 트리로 통합
     //    var unitTree = {};
     //    for( var i=0; i<identityList.length; i++ ){
     //        var levelNames = identityList[i][key];
@@ -557,7 +557,7 @@ MWF.xApplication.Selector.IdentityWidthDutyCategoryByUnit = new Class({
     },
 
 
-    // setUnitLevelNameMapInValues: function(){ //取消选择的时候用
+    // setUnitLevelNameMapInValues: function(){ //선택 취소 시 사용
     //     var map = this.unitLevelNameMapInValues = {};
     //     if (this.isCheckStatusOrCount() && this.options.values.length > 0) {
     //         var vMap = {};

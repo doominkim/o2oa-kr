@@ -559,19 +559,19 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.CategoryList = new Class({
         //
         //this.input = new Element("input", {
         //    "type": "text",
-        //    "value" : "请输入分类名称",
+        //    "value" : "분류 이름을 입력하십시오",
         //    "styles": this.css.categoryInput
         //}).inject(this.newCategoryNode);
         //
         //this.input.addEvents({
         //    "focus" : function( ev ){
-        //        if( ev.target.value == "请输入分类名称" ){
+        //        if( ev.target.value == "분류 이름을 입력하십시오" ){
         //            ev.target.value = "";
         //        }
         //    }.bind(this),
         //    "blur" : function( ev ){
         //        if( ev.target.value == "" ){
-        //            ev.target.value = "请输入分类名称";
+        //            ev.target.value = "분류 이름을 입력하십시오";
         //        }
         //    }.bind(this)
         //});
@@ -1099,16 +1099,16 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.Category = new Class({
         //this.form.selected();
 
     },
-    _dragIn : function(){   //移动时鼠标进入
+    _dragIn : function(){   //이동 중 마우스 진입
         this.viewNaviListNode.setStyles( this.css.viewNaviListNode_dragIn );
     },
-    _dragOut : function(){  //移动时鼠标移出
+    _dragOut : function(){  //이동 중 마우스 이탈
         this.viewNaviListNode.setStyles( this.css.viewNaviListNode );
     },
-    _dragDrop : function(){ //移动到该对象时鼠标松开
+    _dragDrop : function(){ //해당 객체로 이동 후 마우스 놓음
         this.viewNaviListNode.setStyles( this.css.viewNaviListNode );
     },
-    _dragComplete: function( category ){ //拖拽完成
+    _dragComplete: function( category ){ //드래그 완료
         this.node.inject(category.viewNaviListNode,"after");
         this.viewNaviListNode.inject(this.node,"after");
         this.setCurrentNode();
@@ -1116,7 +1116,7 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.Category = new Class({
         this.moveNode = null;
         this.list.adjustSeq();
     },
-    _dragCancel: function(){  //拖拽取消
+    _dragCancel: function(){  //드래그 취소
         if (this.moveNode) this.moveNode.destroy();
         this.moveNode = null;
     },
@@ -1699,7 +1699,7 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.ViewExplorer =  new Class({
         //    this.elementContentListNode.empty();
         //    var noElementNode = new Element("div", {
         //        "styles": this.css.noElementNode,
-        //        "text": categoryId ? "请先设置分类的编辑表单！" : "请先选择分类！"
+        //        "text": categoryId ? "먼저 분류의 편집 양식을 설정하십시오!" : "먼저 분류를 선택하십시오!"
         //    }).inject(this.elementContentListNode);
         //}
 
@@ -1765,7 +1765,7 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.ViewExplorer =  new Class({
         //    this.elementContentListNode.empty();
         //    var noElementNode = new Element("div", {
         //        "styles": this.css.noElementNode,
-        //        "text": categoryId ? "请先设置分类的编辑表单！" : "请先选择分类！"
+        //        "text": categoryId ? "먼저 분류의 편집 양식을 설정하십시오!" : "먼저 분류를 선택하십시오!"
         //    }).inject(this.elementContentListNode);
         //}
     },
@@ -1924,22 +1924,22 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.ViewExplorer =  new Class({
         //var tr = new Element("tr").inject( table );
         //
         //new Element("td", {
-        //    "text" : "显示标题",
+        //    "text" : "표시 제목",
         //    "styles": this.css.listTableHead
         //}).inject( tr );
         //
         //new Element("td", {
-        //    "text" : "名称",
+        //    "text" : "이름",
         //    "styles": this.css.listTableHead
         //}).inject( tr );
         //
         //new Element("td", {
-        //    "text" : "类型",
+        //    "text" : "유형",
         //    "styles": this.css.listTableHead
         //}).inject( tr );
         //
         //new Element("td", {
-        //    "text" : "操作",
+        //    "text" : "작업",
         //    "width" : "80",
         //    "styles": this.css.listTableHead
         //}).inject( tr );
@@ -2209,7 +2209,7 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.View = new Class({
                 }
             };
             this.explorer.app.desktop.openApplication(e, "cms.ViewDesigner", options);
-        }else if(this.data.type === "queryview"){  //数据中心
+        }else if(this.data.type === "queryview"){  //데이터 센터
             MWF.Actions.get("x_query_assemble_designer").getApplication( this.data.appName, function( json ){
                 var options = {
                     "onQueryLoad": function(){
@@ -2391,13 +2391,13 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.View = new Class({
         //this.form.selected();
 
     },
-    _dragComplete: function( view ){ //拖拽完成
+    _dragComplete: function( view ){ //드래그 완료
         this.node.inject(view.node,"after");
         if (this.moveNode) this.moveNode.destroy();
         this.moveNode = null;
         this.explorer.saveByDom();
     },
-    _dragCancel: function(){  //拖拽取消
+    _dragCancel: function(){  //드래그 취소
         if (this.moveNode) this.moveNode.destroy();
         this.moveNode = null;
     },
@@ -2562,7 +2562,7 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.CategoryProperty = new Class
 
         //this.processTitleNode = new Elements("div.processTitleNode" , {
         //    "styles": this.css.processTitleNode,
-        //    "text" : "流程"
+        //    "text" : "프로세스"
         //}).inject(this.processAreaNode);
 
         //this.processSelectNode = new Elements("div.processSelectNode" , {
@@ -2833,7 +2833,7 @@ MWF.xApplication.cms.ColumnManager.CategoryExplorer.CategoryProperty = new Class
         //     orgWidgetOptions : {
         //         canRemove : false
         //     },
-        //     //value : this.category.data.importViewName || this.category.data.importViewId || "不使用",//this.category.data.documentType || "信息",
+        //     //value : this.category.data.importViewName || this.category.data.importViewId || "사용 안 함",//this.category.data.documentType || "정보",
         //     value : value,
         //     event : {
         //         change : function( item ){

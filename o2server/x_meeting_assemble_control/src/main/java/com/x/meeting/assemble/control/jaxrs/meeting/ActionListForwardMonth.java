@@ -78,7 +78,7 @@ class ActionListForwardMonth extends BaseAction {
 		CriteriaQuery<Meeting> cq = cb.createQuery(Meeting.class);
 		Root<Meeting> root = cq.from(Meeting.class);
 		Predicate p = cb.greaterThanOrEqualTo(root.get(Meeting_.startTime), start);
-		/** 这里两个都是startTime是对的 */
+		/** 여기서는 둘 다 startTime이 맞음 */
 		p = cb.and(p, cb.lessThanOrEqualTo(root.get(Meeting_.startTime), end));
 		p = cb.and(p, cb.notEqual(root.get(Meeting_.manualCompleted), true));
 		if (effectivePerson.isNotManager() && (!business.organization().person().hasRole(effectivePerson,

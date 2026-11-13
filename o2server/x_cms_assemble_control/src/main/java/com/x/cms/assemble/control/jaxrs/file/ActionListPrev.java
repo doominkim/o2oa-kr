@@ -28,10 +28,10 @@ class ActionListPrev extends BaseAction {
 		public static final WrapCopier<File, Wo> copier = WrapCopierFactory.wo(File.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible, File.data_FIELDNAME));
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
-		@FieldDescribe("文件类型")
+		@FieldDescribe("파일 유형")
 		private String contentType;
 
 		public Long getRank() {

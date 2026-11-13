@@ -2,39 +2,39 @@ MWF.xAction = MWF.xAction || {};
 //MWF.require("MWF.xDesktop.Actions.RestActions", null, false);
 
 /**
- * 使用 CryptoJS 进行同步 AES-GCM 解密
- * @param {string} base64Payload - Java 端发来的 [12字节IV] + [密文+Tag] Base64 字符串
- * @param {string} keyString - 密钥字符串 (例如 16 字节)
- * @returns {string} 解密后的UTF-8字符串
+ * CryptoJS로 동기 AES-GCM 복호화
+ * @param {string} base64Payload - Java 측에서 보낸 [12바이트 IV] + [암호문+Tag] Base64 문자열
+ * @param {string} keyString - 키 문자열 (예: 16바이트)
+ * @returns {string} 복호화된 UTF-8 문자열
  */
 var keyString = '98b25ee736a4db745e9b66fe46274fd8';
 function decryptAesGcmSync(base64Payload, keyString) {
   try {
-    // 1. 将 Base64 字符串解析为 SJCL 的 bitArray
+    // 1. Base64 문자열을 SJCL의 bitArray로 파싱
     const payloadBitArray = sjcl.codec.base64.toBits(base64Payload);
 
-    // 2. 截取前 12 字节（96 位）作为 IV
+    // 2. 앞 12바이트(96비트)를 IV로 추출
     const ivBitArray = sjcl.bitArray.bitSlice(payloadBitArray, 0, 96);
 
-    // 3. 截取 12 字节之后的所有数据（密文 + 16字节Tag）
+    // 3. 12바이트 이후의 모든 데이터 추출(암호문 + 16바이트 Tag)
     const ciphertextBitArray = sjcl.bitArray.bitSlice(payloadBitArray, 96);
 
-    // 4. 将密钥字符串转为 bitArray
+    // 4. 키 문자열을 bitArray로 변환
     const keyBitArray = sjcl.codec.utf8String.toBits(keyString);
 
-    // 5. 创建 SJCL AES-GCM 解密器
+    // 5. SJCL AES-GCM 복호화기 생성
     const cipher = new sjcl.cipher.aes(keyBitArray);
 
-    // 6.【同步解密】执行 GCM 模式解密 (默认校验 128 位 Tag)
+    // 6.【동기 복호화】GCM 모드 복호화 실행 (기본 128비트 Tag 검증)
     const decryptedBitArray = sjcl.mode.gcm.decrypt(
       cipher,
       ciphertextBitArray,
       ivBitArray,
-      [], // adata (附加验证数据，无则传空数组)
-      128 // tlen (Tag 长度，对应 Java 的 128 位)
+      [], // adata (추가 인증 데이터, 없으면 빈 배열 전달)
+      128 // tlen (Tag 길이, Java의 128비트에 대응)
     );
 
-    // 7. 将解密出来的 bitArray 还原为 UTF-8 文本
+    // 7. 복호화한 bitArray를 UTF-8 텍스트로 복원
     return sjcl.codec.utf8String.fromBits(decryptedBitArray);
   } catch (error) {
     throw new Error("동기 복호화에 실패했습니다. 암호문이 손상되었거나 키가 일치하지 않습니다. 오류 상세: " + error.message);
@@ -68,7 +68,7 @@ MWF.xAction.RestActions = MWF.Actions = {
         try{
             MWF.getJSON(url, function(json){
                 var dataText = json.data.data;
-                // 解密 dataText
+                // dataText 복호화
                 dataText = decryptAesGcmSync(dataText, keyString);
                 jaxrs = JSON.parse(dataText).jaxrs;
             }.bind(this), false, false, false);
@@ -307,7 +307,7 @@ MWF.xAction.RestActions.Action = new Class({
         this[key] = this.invokeFunction(service, parameters, key);
     },
     invokeFunction: function(service, parameters, key){
-        //uri的参数, data(post, put), file(formData), success, failure, async
+        //uri의 매개변수, data(post, put), file(formData), success, failure, async
         return function(){
             var i = parameters.length-1;
             var n = arguments.length;

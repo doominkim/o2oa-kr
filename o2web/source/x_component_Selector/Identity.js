@@ -12,11 +12,11 @@ MWF.xApplication.Selector.Identity = new Class({
         "zIndex": 1000,
         "expand": false,
         "noUnit" : false,
-        "include" : [], //增加的可选项
-        "exclude" : [], //排除的可选项
-        "resultType" : "", //可以设置成个人，那么结果返回个人
-        "expandSubEnable" : true, //是否允许展开下一层,
-        "selectAllEnable" : true,  //分类是否允许全选下一层
+        "include" : [], //추가 선택 항목
+        "exclude" : [], //제외 선택 항목
+        "resultType" : "", //개인으로 설정 가능, 그러면 결과로 개인을 반환
+        "expandSubEnable" : true, //다음 레벨 펼치기 허용 여부,
+        "selectAllEnable" : true,  //분류에서 다음 레벨 전체 선택 허용 여부
     },
     setInitTitle: function(){
         this.setOptions({"title": MWF.xApplication.Selector.LP.selectIdentity});
@@ -30,7 +30,7 @@ MWF.xApplication.Selector.Identity = new Class({
     },
     loadSelectItems : function(){
         this.itemsMap = {};
-        // this.selectedItemsMap = {}; //所有已选项按dn或id
+        // this.selectedItemsMap = {}; //선택된 모든 항목(dn 또는 id 기준)
 
         if( this.options.disabled ){
             this.afterLoadSelectItem();
@@ -121,9 +121,9 @@ MWF.xApplication.Selector.Identity = new Class({
     loadInclude: function(afterLoadFun) {
         if (!this.includeObject){
             this.includeObject = new MWF.xApplication.Selector.Identity.Include(this, this.itemAreaNode, {
-                "include": this.options.include, //增加的可选项
-                "resultType": this.options.resultType, //可以设置成个人，那么结果返回个人
-                "expandSubEnable": this.options.expandSubEnable, //是否允许展开下一层
+                "include": this.options.include, //추가 선택 항목
+                "resultType": this.options.resultType, //개인으로 설정 가능, 그러면 결과로 개인을 반환
+                "expandSubEnable": this.options.expandSubEnable, //다음 레벨 펼치기 허용 여부
                 "onAfterLoad" : afterLoadFun
             });
         }
@@ -158,13 +158,13 @@ MWF.xApplication.Selector.Identity = new Class({
             var action = filterType === "key" ? "listIdentityByKey" : "listIdentityByPinyin";
             if ( this.options.units.length ){
                 key = this.getLikeKey( key, this.options.units );
-                this.orgAction[action](function(json){ //搜若units内的组织
+                this.orgAction[action](function(json){ //units 내 조직 검색
                     this.includeObject.listByFilter( filterType, key, function( array ){
                         json.data = array.concat( json.data || [] );
                         if (callback) callback.apply(this, [json]);
                     }.bind(this));
                 }.bind(this), failure, key);
-            }else{  //搜索所有人
+            }else{  //전체 사용자 검색
                 this.orgAction[action](function(json){
                     if (callback) callback.apply(this, [json]);
                 }.bind(this), failure, key);
@@ -609,7 +609,7 @@ MWF.xApplication.Selector.Identity = new Class({
                 }, function (json) {
                     json.data.each( function (d) {
                         var list = [];
-                        var listWithIdentity = []; //身份直接所在群组
+                        var listWithIdentity = []; //신분이 직접 속한 그룹
 
                         d.woGroupList.each(function (group) {
                             var gList = this.caculateGroupLevelName(group);
@@ -627,7 +627,7 @@ MWF.xApplication.Selector.Identity = new Class({
                                     resultList.push(lName);
                                 }
                             }.bind(this));
-                        }else{  //数量树没有加载完成的时候 ？？？可能有问题
+                        }else{  //수량 트리 로딩이 끝나지 않았을 때 ??? 문제 가능성 있음
                             list.each(function(lName){
                                 var level1Name = lName.split("/")[0];
                                 if( this.subCategoryMap[ level1Name ] ){
@@ -647,7 +647,7 @@ MWF.xApplication.Selector.Identity = new Class({
             if( callback )callback([itemData.unitLevelName]);
         }
     },
-    //通过身份信息获取的group
+    //신분 정보로 조회한 group
     caculateGroupLevelName: function(g, flag){
         var levelNameMap = flag ? this.groupAllLevelNameListMap : this.groupLevelNameListMap;
         if( levelNameMap[g.distinguishedName] ){
@@ -990,7 +990,7 @@ MWF.xApplication.Selector.Identity.ItemCategory = new Class({
         }
     },
 
-    _addSelectedCount : function( count, nested ){ //增加数字并向上回溯
+    _addSelectedCount : function( count, nested ){ //숫자를 증가시키고 상위로 거슬러 올라감
         if( this.selector.loadingCount === "done" ){
             var c = ( this._getSelectedCount() || 0 ) + count;
             this.selectedCount = c;
@@ -1033,7 +1033,7 @@ MWF.xApplication.Selector.Identity.ItemCategory = new Class({
             _selectAllFun();
             return;
         }
-        //批量获取个人
+        //개인 일괄 조회
         var object = {};
         if( this.selector.options.resultType === "person" ){
             this.subItems.each( function(item){
@@ -1364,7 +1364,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
 
             if( this.data.identityList && this.data.identityList.length > 0 ){
                 if( this.selector.options.resultType === "person" ) {
-                    //根据身份id批量获取人员对象
+                    //신분 id로 사용자 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").PersonAction.listWithIdentityObject({
                         identityList : this.data.identityList
                     }, function (json) {
@@ -1374,7 +1374,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
                         checkCallback("identity", this.data.identityList.length )
                     }.bind(this))
                 }else{
-                    //根据身份id批量获取身份对象
+                    //신분 id로 신분 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").IdentityAction.listObject({
                         identityList : this.data.identityList
                     }, function (json) {
@@ -1388,7 +1388,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
 
             if( this.data.personList && this.data.personList.length > 0 ){
                 if( this.selector.options.resultType === "person" ) {
-                    //根据人员d批量获取人员对象
+                    //사용자 id로 사용자 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").PersonAction.listObject({
                         personList : this.data.personList
                     }, function (json) {
@@ -1398,7 +1398,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
                         checkCallback("person", this.data.personList.length )
                     }.bind(this))
                 }else{
-                    //根据人员id批量获取身份对象
+                    //사용자 id로 신분 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").IdentityAction.listWithPersonObject({
                         personList : this.data.personList
                     }, function (json) {
@@ -1424,7 +1424,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
             //     }
             // }.bind(this));
 
-            //list 服务不能获取下级数量
+            //list 서비스는 하위 수량을 조회할 수 없음
             // if( this.selector.options.expandSubEnable ){
             //     o2.Actions.load("x_organization_assemble_express").UnitAction.listObject({
             //         unitList : this.data.unitList
@@ -1495,7 +1495,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
 
             checkCallback();
 
-            //list 服务不能获取下级数量
+            //list 서비스는 하위 수량을 조회할 수 없음
             // if( this.selector.options.expandSubEnable ){
             //     o2.Actions.load("x_organization_assemble_express").UnitAction.listObject({
             //         unitList : this.data.unitList
@@ -1565,7 +1565,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
 
             if( this.data.identityList && this.data.identityList.length > 0 ){
                 if( this.selector.options.resultType === "person" ) {
-                    //根据身份id批量获取人员对象
+                    //신분 id로 사용자 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").PersonAction.listWithIdentityObject({
                         identityList : this.data.identityList
                     }, function (json) {
@@ -1575,7 +1575,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
                         checkCallback("identity", this.data.identityList.length )
                     }.bind(this))
                 }else{
-                    //根据身份id批量获取身份对象
+                    //신분 id로 신분 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").IdentityAction.listObject({
                         identityList : this.data.identityList
                     }, function (json) {
@@ -1589,7 +1589,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
 
             if( this.data.personList && this.data.personList.length > 0 ){
                 if( this.selector.options.resultType === "person" ) {
-                    //根据人员d批量获取人员对象
+                    //사용자 id로 사용자 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").PersonAction.listObject({
                         personList : this.data.personList
                     }, function (json) {
@@ -1599,7 +1599,7 @@ MWF.xApplication.Selector.Identity.ItemGroupCategory = new Class({
                         checkCallback("person", this.data.personList.length )
                     }.bind(this))
                 }else{
-                    //根据人员id批量获取身份对象
+                    //사용자 id로 신분 객체 일괄 조회
                     o2.Actions.load("x_organization_assemble_express").IdentityAction.listWithPersonObject({
                         personList : this.data.personList
                     }, function (json) {
@@ -1661,9 +1661,9 @@ MWF.xApplication.Selector.Identity.ItemRoleCategory = new Class({
 MWF.xApplication.Selector.Identity.Include = new Class({
     Implements: [Options, Events],
     options: {
-        "include" : [], //增加的可选项
-        "resultType" : "", //可以设置成个人，那么结果返回个人
-        "expandSubEnable" : true //是否允许展开下一层
+        "include" : [], //추가 선택 항목
+        "resultType" : "", //개인으로 설정 가능, 그러면 결과로 개인을 반환
+        "expandSubEnable" : true //다음 레벨 펼치기 허용 여부
     },
     initialize: function(selector, itemAreaNode, options){
         this.setOptions(options);
@@ -1941,7 +1941,7 @@ MWF.xApplication.Selector.Identity.Include = new Class({
         return identitys.concat( persons);
     },
     listByFilterGroup : function( type, key, callback ){
-        //根据关键字获取群组内的人员，再转成身份
+        //키워드로 그룹 내 사용자를 조회한 뒤 신분으로 변환
         var keyString = typeOf( key )==="string" ? key.toLowerCase() : key.key.toLowerCase();
         if( this.includeGroup && this.includeGroup.length ){
             var keyObject = { "key" : keyString, "groupList" : this.includeGroup };
@@ -1966,7 +1966,7 @@ MWF.xApplication.Selector.Identity.Include = new Class({
         }
     },
     listByFilterUnitAndGroup : function( type, key, callback ){
-        //根据关键字获取组织和群组内的身份
+        //키워드로 조직과 그룹 내 신분 조회
         var keyString = typeOf( key )==="string" ? key.toLowerCase() : key.key.toLowerCase();
 
         // if ( (this.includeUnit && this.includeUnit.length) || (this.includeGroup && this.includeGroup.length) ){
@@ -2052,7 +2052,7 @@ MWF.xApplication.Selector.Identity.Filter = new Class({
     options: {
         "style": "default",
         "units": [],
-        "resultType" : "" //可以设置成个人，那么结果返回个人
+        "resultType" : "" //개인으로 설정 가능, 그러면 결과로 개인을 반환
     },
     initialize: function(value, options){
         this.setOptions(options);

@@ -42,7 +42,7 @@ public class QueueDingdingAttendance extends AbstractQueue<DingdingQywxSyncRecor
 
     @Override
     protected void execute(DingdingQywxSyncRecord record) throws Exception {
-        logger.info("开始执行钉钉打卡数据同步，from:" + record.getDateFrom() + ", to:"+record.getDateTo());
+        logger.info("DingTalk 출퇴근 데이터 동기화 시작, from:" + record.getDateFrom() + ", to:"+record.getDateTo());
         if (DingdingQywxSyncRecord.syncType_dingding.equals(record.getType())) {
             try {
                 dingdingSync(record);
@@ -62,41 +62,41 @@ public class QueueDingdingAttendance extends AbstractQueue<DingdingQywxSyncRecor
     }
     private void dingdingSync(DingdingQywxSyncRecord record) throws Exception {
         Application app = ThisApplication.context().applications().randomWithWeight(x_organization_assemble_control.class.getName());
-        //开始分页查询人员
+        //사용자 페이지 조회 시작
         boolean hasNextPerson = true;
         int personPageSize = 50;
-        //开始时间和结束时间
+        //시작 시간과 종료 시간
         Date fromDate = new Date();
         fromDate.setTime(record.getDateFrom());
         Date toDate =new Date();
         toDate.setTime(record.getDateTo());
-        //先删除
+        //먼저 삭제
         deleteDingdingAttendance(fromDate, toDate);
-        //人员查询地址
+        //사용자 조회 주소
         String uri = "person/list/(0)/next/50";
-        //钉钉考勤同步接口地址
+        //DingTalk 근태 동기화 API 주소
         String dingdingUrl = Config.dingding().getOapiAddress() + "/attendance/list?access_token=" + Config.dingding().corpAccessToken();
         int saveNumber = 0;
         while (hasNextPerson) {
             logger.info("uri:"+ uri);
             List<Person> list = ThisApplication.context().applications().getQuery(false, app, uri).getDataAsList(Person.class);
             if (list != null && list.size() > 0) {
-                //钉钉用户id
+                //DingTalk 사용자 id
                 List<String> ddUsers = list.stream().filter(person -> StringUtils.isNotEmpty(person.getDingdingId()))
                         .map(Person::getDingdingId).collect(Collectors.toList());
                 if (ListTools.isNotEmpty(ddUsers)) {
-                    //分页查询
+                    //페이지 조회
                     int page = 0;
                     boolean hasMoreResult = true;
                     while (hasMoreResult) {
                         DingdingAttendancePost post = new DingdingAttendancePost();
-                        //post传入 时间（时间间隔不能超过7天） 人员（人员数量不能超过50个）
+                        //post 전달 시간(간격은 7일 이하) 사용자(인원은 50명 이하)
                         post.setLimit(50L);
-                        post.setOffset(page * 50L);//从0开始翻页
-                        //这里的开始时间和结束时间 查询的是钉钉返回结果中的workDate
-                        //查询考勤打卡记录的起始工作日
+                        post.setOffset(page * 50L);//0부터 페이지 넘김
+                        //여기서 시작 시간과 종료 시간은 DingTalk 반환 결과의 workDate를 조회
+                        //근태 출퇴근 기록 조회 시작 근무일
                         post.setWorkDateFrom(DateTools.format(fromDate));
-                        //查询考勤打卡记录的结束工作日
+                        //근태 출퇴근 기록 조회 종료 근무일
                         post.setWorkDateTo(DateTools.format(toDate));
                         post.setUserIdList(ddUsers);
                         DingdingAttendanceResult result = HttpConnection.postAsObject(dingdingUrl, null, post.toString(), DingdingAttendanceResult.class);
@@ -107,39 +107,39 @@ public class QueueDingdingAttendance extends AbstractQueue<DingdingQywxSyncRecor
                             if (result.hasMore) {
                                 page++;
                             } else {
-                                logger.info("同步钉钉考勤结束！");
+                                logger.info("DingTalk 근태 동기화 종료!");
                                 hasMoreResult = false;
                             }
                         } else {
-                            //请求结果异常 结束
+                            //요청 결과 이상, 종료
                             throw new ExceptionDingDingRequest(result.errmsg);
                         }
                     }
                 }
-                //是否还有更多用户
+                //사용자가 더 있는지 여부
                 if (list.size() < personPageSize) {
-                    logger.info("同步钉钉考勤 没有更多用户了，结束！");
+                    logger.info("DingTalk 근태 동기화: 더 이상 사용자가 없어 종료!");
                     hasNextPerson = false;
                     updateSyncRecord(record, null);
                 } else {
-                    //还有更多用户继续查询
+                    //사용자가 더 있어 계속 조회
                     uri = Applications.joinQueryUri("person","list", list.get(list.size() - 1).getDistinguishedName(), "next", "50");
 //                    uri = "person/list/" + list.get(list.size() - 1).getDistinguishedName() + "/next/50";
                 }
             } else {
-                //没有用户查询到结束
-                logger.info("同步钉钉考勤 查询不到用户了，结束！");
+                //조회된 사용자가 없어 종료
+                logger.info("DingTalk 근태 동기화: 조회되는 사용자가 없어 종료!");
                 hasNextPerson = false;
                 updateSyncRecord(record, null);
             }
         }
-        logger.info("结束 插入："+saveNumber+" 条");
-        //插入数据成功 开始统计程序
+        logger.info("종료, 삽입:"+saveNumber+" 건");
+        //데이터 삽입 성공, 통계 프로그램 시작
 
         boolean hasNextDate = true;
         Date statisticDate = fromDate;
         while (hasNextDate) {
-            logger.info("发起钉钉考勤数据统计， date:"+ DateTools.format(statisticDate));
+            logger.info("DingTalk 근태 데이터 통계 시작, date:"+ DateTools.format(statisticDate));
             // ThisApplication.personStatisticQueue.send(statisticDate);
             // ThisApplication.unitStatisticQueue.send(statisticDate);
             if (!isSameDay(statisticDate, toDate)) {
@@ -148,11 +148,11 @@ public class QueueDingdingAttendance extends AbstractQueue<DingdingQywxSyncRecor
                 hasNextDate = false;
             }
         }
-        logger.info("发起数据统计程序 完成！");
+        logger.info("데이터 통계 프로그램 시작 완료!");
     }
     private void deleteDingdingAttendance(Date fromDate, Date toDate) throws Exception{
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-            //先删除 再同步
+            //먼저 삭제 후 동기화
             EntityManager em = emc.get(AttendanceDingtalkDetail.class);
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<AttendanceDingtalkDetail> query = cb.createQuery(AttendanceDingtalkDetail.class);
@@ -162,17 +162,17 @@ public class QueueDingdingAttendance extends AbstractQueue<DingdingQywxSyncRecor
             Predicate p = cb.between(root.get(AttendanceDingtalkDetail_.workDate), start, end);
             query.select(root).where(p);
             List<AttendanceDingtalkDetail> detailList = em.createQuery(query).getResultList();
-            //先删除
-            logger.info("删除");
+            //먼저 삭제
+            logger.info("삭제");
             if (detailList != null) {
-                logger.info("删除 list:"+detailList.size());
+                logger.info("삭제 list:"+detailList.size());
                 emc.beginTransaction(AttendanceDingtalkDetail.class);
                 for (int i = 0; i < detailList.size(); i++) {
                     emc.remove(detailList.get(i));
                 }
                 emc.commit();
             }
-            logger.info("删除结束");
+            logger.info("삭제 종료");
         }
     }
 
@@ -189,7 +189,7 @@ public class QueueDingdingAttendance extends AbstractQueue<DingdingQywxSyncRecor
                         Date date = new Date(detail.getUserCheckTime());
                         detail.setUserCheckTimeDate(date);
                     }
-                    //添加o2组织和用户
+                    //o2 조직과 사용자 추가
                     Optional<Person> first = personList.stream().filter(p -> item.userId.equals(p.getDingdingId())).findFirst();
                     if (first.isPresent()) {
                         Person person = first.get();
@@ -242,9 +242,9 @@ public class QueueDingdingAttendance extends AbstractQueue<DingdingQywxSyncRecor
         //        {
 //            "workDateFrom": "yyyy-MM-dd HH:mm:ss",
 //                "workDateTo": "yyyy-MM-dd HH:mm:ss",
-//                "userIdList":["员工UserId列表"],    // 必填，与offset和limit配合使用
-//            "offset":0,    // 必填，第一次传0，如果还有多余数据，下次传之前的offset加上limit的值
-//                "limit":1,     // 必填，表示数据条数，最大不能超过50条
+//                "userIdList":["직원 UserId 목록"],    // 필수, offset·limit과 함께 사용
+//            "offset":0,    // 필수, 처음에는 0, 남은 데이터가 있으면 다음에는 이전 offset에 limit 값을 더해 전달
+//                "limit":1,     // 필수, 데이터 건수, 최대 50건을 넘을 수 없음
 //        }
         private String workDateFrom;
         private String workDateTo;

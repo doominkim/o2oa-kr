@@ -26,19 +26,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("anonymous/fileinfo")
-@JaxrsDescribe("可匿名访问的附件信息管理服务")
+@JaxrsDescribe("익명 접근 가능한 첨부파일 정보 관리 서비스")
 public class FileInfoAnonymousAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(FileInfoAnonymousAction.class);
 
-	@JaxrsMethodDescribe(value = "获取指定文档的全部附件信息列表.", action = ActionListByDocId.class)
+	@JaxrsMethodDescribe(value = "지정 문서의 전체 첨부파일 정보 목록 조회.", action = ActionListByDocId.class)
 	@GET
 	@Path("list/document/{documentId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listFileInfoByDocumentId(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("信息文档ID") @PathParam("documentId") String documentId) {
+			@JaxrsParameterDescribe("정보 문서ID") @PathParam("documentId") String documentId) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<List<ActionListByDocId.Wo>> result = new ActionResult<>();
 		try {
@@ -51,14 +51,14 @@ public class FileInfoAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取fileInfo对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 fileInfo 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}/document/{documentId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("信息文档ID") @PathParam("documentId") String documentId) {
+			@JaxrsParameterDescribe("첨부파일 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("정보 문서ID") @PathParam("documentId") String documentId) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -71,13 +71,13 @@ public class FileInfoAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID下载指定附件", action = ActionFileDownload.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 첨부파일 다운로드", action = ActionFileDownload.class)
 	@GET
 	@Path("download/document/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void attachmentDownLoad(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("下载附件名称") @QueryParam("fileName") String fileName) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("다운로드 첨부파일 이름") @QueryParam("fileName") String fileName) {
 		ActionResult<ActionFileDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,13 +89,13 @@ public class FileInfoAnonymousAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据附件ID下载附件,设定是否使用stream输出", action = ActionFileDownloadStream.class)
+	@JaxrsMethodDescribe(value = "첨부파일 ID로 첨부파일 다운로드, stream 출력 사용 여부 설정", action = ActionFileDownloadStream.class)
 	@GET
 	@Path("download/document/{id}/stream")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void attachmentDownloadStream(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("下载附件名称") @QueryParam("fileName") String fileName) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("다운로드 첨부파일 이름") @QueryParam("fileName") String fileName) {
 		ActionResult<ActionFileDownloadStream.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

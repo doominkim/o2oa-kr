@@ -74,19 +74,19 @@ class ActionExecute extends BaseAction {
 
 		private static final long serialVersionUID = -6511081486196917840L;
 
-		@FieldDescribe("类型")
+		@FieldDescribe("유형")
 		private String type;
 
-		@FieldDescribe("jpql语句.")
+		@FieldDescribe("jpql 구문.")
 		private String data;
 
-		@FieldDescribe("同时返回数量的jpql语句.")
+		@FieldDescribe("건수를 함께 반환하는 jpql 구문.")
 		private String countData;
 
-		@FieldDescribe("返回最大结果集.")
+		@FieldDescribe("최대 결과 수.")
 		private Integer maxResults;
 
-		@FieldDescribe("返回结果开始于.")
+		@FieldDescribe("결과 시작 위치.")
 		private Integer firstResult;
 
 		public String getType() {

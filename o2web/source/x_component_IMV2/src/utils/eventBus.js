@@ -1,6 +1,6 @@
 class EventBus {
 
-    // // 外部调用此函数实例化
+    // // 외부에서 이 함수를 호출해 인스턴스화
     // static getInstance() {
     //   if (!EventBus.instance) {
     //     EventBus.instance = new EventBus()

@@ -19,31 +19,31 @@ public class Ticket implements Serializable {
 
 	private static final Pattern DISTINGUISHEDNAME_LABEL_PATTERN = Pattern.compile("([^$]*)\\$\\{([^}]*)}$");
 
-	// 标识
+	// 식별자
 	private String label;
-	// 操作
+	// 작업
 	private String act;
-	// 是否完成
+	// 완료 여부
 	private boolean completed;
-	// 验证有效性
+	// 유효성 검증
 	private boolean valid;
-	// 启用
+	// 사용
 	private boolean enable;
-	// 目标
+	// 대상
 	private String distinguishedName;
-	// 兄弟
+	// 형제
 	private List<String> sibling;
-	// 伙伴
+	// 동료
 	private List<String> fellow;
-	// 后续
+	// 후속
 	private List<String> next;
-	// 模式
+	// 모드
 	private String mode;
-	// 上级
+	// 상위
 	private String parent;
-	// 授权标识
+	// 권한 부여 식별자
 	private String fromDistinguishedName;
-	// 操作人,在加签的时候记录加签人
+	// 작업자, 추가 결재 시 추가 결재자 기록
 	private String actPerson;
 
 	public Ticket() {
@@ -302,7 +302,7 @@ public class Ticket implements Serializable {
 	}
 
 	public Ticket copyFromSkipLabelDistinguishedName(Ticket ticket) {
-		// 不需要复制label,distinguishedName
+		// label, distinguishedName 복사 불필요
 		this.act = ticket.act;
 		this.completed = ticket.completed;
 		this.valid = ticket.valid;

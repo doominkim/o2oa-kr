@@ -15,7 +15,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
-@Schema(name = "TaskProcessMode", description = "待办处理方式记录.")
+@Schema(name = "TaskProcessMode", description = "결재 대기 처리 방식 기록.")
 @Entity
 @ContainerEntity(dumpSize = 100, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.TaskProcessMode.table, uniqueConstraints = {
@@ -48,7 +48,7 @@ public class TaskProcessMode extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -85,78 +85,78 @@ public class TaskProcessMode extends SliceJpaObject {
 	}
 
 	public static final String process_FIELDNAME = "process";
-	@Schema(description = "流程标识.")
-	@FieldDescribe("流程ID.")
+	@Schema(description = "프로세스 식별자.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String processName_FIELDNAME = "processName";
-	@Schema(description = "流程名称.")
-	@FieldDescribe("流程名称.")
+	@Schema(description = "프로세스 이름.")
+	@FieldDescribe("프로세스 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + processName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processName;
 
 	public static final String person_FIELDNAME = "person";
-	@Schema(description = "当前处理人.")
-	@FieldDescribe("当前处理人")
+	@Schema(description = "현재 처리자.")
+	@FieldDescribe("현재 처리자")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String activity_FIELDNAME = "activity";
-	@Schema(description = "活动标识.")
-	@FieldDescribe("活动ID.")
+	@Schema(description = "활동 식별자.")
+	@FieldDescribe("활동 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activity_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String activity;
 
 	public static final String activityName_FIELDNAME = "activityName";
-	@Schema(description = "活动名称.")
-	@FieldDescribe("活动名称.")
+	@Schema(description = "활동 이름.")
+	@FieldDescribe("활동 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityName;
 
 	public static final String activityAlias_FIELDNAME = "activityAlias";
-	@Schema(description = "活动别名.")
-	@FieldDescribe("活动别名.")
+	@Schema(description = "활동 별칭.")
+	@FieldDescribe("활동 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityAlias;
 
 	public static final String routeId_FIELDNAME = "routeId";
-	@Schema(description = "路径ID.")
-	@FieldDescribe("路径ID")
+	@Schema(description = "경로 ID.")
+	@FieldDescribe("경로 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + routeId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String routeId;
 
 	public static final String routeName_FIELDNAME = "routeName";
-	@Schema(description = "活动名称.")
-	@FieldDescribe("活动名称.")
+	@Schema(description = "활동 이름.")
+	@FieldDescribe("활동 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + routeName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String routeName;
 
 	public static final String action_FIELDNAME = "action";
-	@FieldDescribe("处理方式")
+	@FieldDescribe("처리 방식")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + action_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String action;
 
 	public static final String hitCount_FIELDNAME = "hitCount";
-	@FieldDescribe("次数.")
+	@FieldDescribe("횟수.")
 	@Column(name = ColumnNamePrefix + hitCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer hitCount = 0;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -164,22 +164,22 @@ public class TaskProcessMode extends SliceJpaObject {
 	private TaskProcessModeProperties properties;
 
 	public static final String routeGroup_FIELDNAME = "routeGroup";
-	@FieldDescribe("决策组.")
+	@FieldDescribe("결정 그룹.")
 	@Transient
 	private String routeGroup;
 
 	public static final String keepTask_FIELDNAME = "keepTask";
-	@FieldDescribe("是否保留待办.")
+	@FieldDescribe("결재 대기 유지 여부.")
 	@Transient
 	private Boolean keepTask;
 
 	public static final String opinion_FIELDNAME = "opinion";
-	@FieldDescribe("意见.")
+	@FieldDescribe("의견.")
 	@Transient
 	private String opinion;
 
 	public static final String organizations_FIELDNAME = "organizations";
-	@FieldDescribe("人员组织列表.")
+	@FieldDescribe("사용자 조직 목록.")
 	@Transient
 	private Map<String, List<String>> organizations;
 

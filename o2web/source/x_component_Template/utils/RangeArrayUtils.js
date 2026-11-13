@@ -1,5 +1,5 @@
 window.RangeArrayUtils = o2.RangeArrayUtils = {
-    //补集 range [ start, end ]  rangeList  [ [start1, end1], [ start2, end2 ] ... ]
+    //여집합 range [ start, end ]  rangeList  [ [start1, end1], [ start2, end2 ] ... ]
     complementary : function( range, rangeList, type ){
         if( !range )return range;
         var r = this.getRangeObject( range );
@@ -36,7 +36,7 @@ window.RangeArrayUtils = o2.RangeArrayUtils = {
         newList.push( Object.clone(newRange ));
         return this.parse( newList, type );
     },
-    //取区域并集rangeList  [ [start1, end1], [ start2, end2 ] ... ]
+    //영역 합집합 rangeList  [ [start1, end1], [ start2, end2 ] ... ]
     union : function( ranges, type ){
         if( !ranges || ranges.length == 0)return ranges; //this.parse(this.getRangeObject( ranges ) ) ;
         var rangeList = Array.clone( ranges );
@@ -69,7 +69,7 @@ window.RangeArrayUtils = o2.RangeArrayUtils = {
 
         return this.parse( newRangeList, type );
     },
-    //区域是否相交
+    //영역 교차 여부
     isIntersection : function( range1, range2 ){
         var r1 = typeOf( range1 ) === "object" ? range1 : this.getRangeObject( range1 );
         var r2 = typeOf( range2 ) === "object" ? range2 : this.getRangeObject( range2 );

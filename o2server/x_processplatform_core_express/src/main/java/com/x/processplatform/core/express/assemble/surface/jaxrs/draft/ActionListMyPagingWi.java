@@ -11,32 +11,32 @@ public class ActionListMyPagingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -7337529488065203886L;
 
-	@FieldDescribe("应用标识.")
-	@Schema(description = "应用标识.")
+	@FieldDescribe("앱 식별자.")
+	@Schema(description = "앱 식별자.")
 	private List<String> applicationList;
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList;
 
-	@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false.")
-	@Schema(description = "是否查找同版本流程数据：true(默认查找)|false.")
+	@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false.")
+	@Schema(description = "동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false.")
 	private Boolean relateEditionProcess = true;
 
-	@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss.")
-	@Schema(description = "开始时间yyyy-MM-dd HH:mm:ss.")
+	@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss.")
+	@Schema(description = "시작 시간yyyy-MM-dd HH:mm:ss.")
 	private String startTime;
 
-	@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss.")
-	@Schema(description = "结束时间yyyy-MM-dd HH:mm:ss.")
+	@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss.")
+	@Schema(description = "종료 시간yyyy-MM-dd HH:mm:ss.")
 	private String endTime;
 
-	@FieldDescribe("创建组织.")
-	@Schema(description = "创建组织.")
+	@FieldDescribe("조직 생성.")
+	@Schema(description = "조직 생성.")
 	private List<String> creatorUnitList;
 
-	@FieldDescribe("标题.")
-	@Schema(description = "标题.")
+	@FieldDescribe("제목.")
+	@Schema(description = "제목.")
 	private String title;
 
 	public List<String> getApplicationList() {

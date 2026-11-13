@@ -7,6 +7,6 @@ class DependNotExistedException extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	DependNotExistedException(String name, String id, String depend) {
-		super("脚本: {}, id:{}, 依赖的脚本: {}, 不存在.", name, id, depend);
+		super("스크립트: {}, id: {}, 의존하는 스크립트: {}이(가) 없습니다.", name, id, depend);
 	}
 }

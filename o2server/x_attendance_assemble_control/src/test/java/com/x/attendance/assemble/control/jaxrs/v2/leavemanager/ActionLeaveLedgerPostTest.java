@@ -16,7 +16,7 @@ class ActionLeaveLedgerPostTest {
     void buildLedgerDefaultsAmountsAndGrantTime() throws Exception {
         Date now = new Date();
         ActionLeaveLedgerPost.Wi wi = new ActionLeaveLedgerPost.Wi();
-        wi.setPerson("张三@P");
+        wi.setPerson("홍길동@P");
         wi.setLeaveTypeId("leaveTypeId");
         wi.setGrantPeriod("2026");
         wi.setGrantAmount(10.0);
@@ -25,7 +25,7 @@ class ActionLeaveLedgerPostTest {
 
         AttendanceV2LeaveLedger ledger = ActionLeaveLedgerPost.buildLedger(wi, now, true);
 
-        assertEquals("张三@P", ledger.getPerson());
+        assertEquals("홍길동@P", ledger.getPerson());
         assertEquals("leaveTypeId", ledger.getLeaveTypeId());
         assertEquals("2026", ledger.getGrantPeriod());
         assertEquals(10.0, ledger.getGrantAmount());
@@ -51,7 +51,7 @@ class ActionLeaveLedgerPostTest {
     void buildLedgerRequiresGrantAmount() {
         Date now = new Date();
         ActionLeaveLedgerPost.Wi wi = new ActionLeaveLedgerPost.Wi();
-        wi.setPerson("张三@P");
+        wi.setPerson("홍길동@P");
         wi.setLeaveTypeId("leaveTypeId");
         wi.setGrantPeriod("2026");
 
@@ -61,7 +61,7 @@ class ActionLeaveLedgerPostTest {
     @Test
     void validateLedgerNotExistsRejectsDuplicateLedger() {
         AttendanceV2LeaveLedger ledger = new AttendanceV2LeaveLedger();
-        ledger.setPerson("张三@P");
+        ledger.setPerson("홍길동@P");
         ledger.setLeaveTypeId("leaveTypeId");
         ledger.setGrantPeriod("2026");
 

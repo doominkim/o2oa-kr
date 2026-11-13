@@ -7,6 +7,6 @@ public class URLParameterGetException extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public URLParameterGetException(Throwable e ) {
-		super("系统在解析传入的URL参数时发生异常.", e);
+		super("전달된 URL 매개변수를 해석하는 중 오류가 발생했습니다.", e);
 	}
 }

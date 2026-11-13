@@ -32,10 +32,10 @@ public class Clean extends AbstractJob {
 	@Override
 	public void schedule(JobExecutionContext jobExecutionContext) throws Exception {
 		try {
-			LOGGER.debug("开始定时清理过期的缓存附件！");
+			LOGGER.debug("만료된 캐시 첨부파일 정기 정리 시작!");
 			TimeStamp stamp = new TimeStamp();
 			Long instantCount = this.clearGeneralFile();
-			LOGGER.debug("清理过期的缓存附件：{} 条, 耗时: {}.", instantCount, stamp.consumingMilliseconds());
+			LOGGER.debug("만료된 캐시 첨부파일 정리: {} 건, 소요 시간: {}.", instantCount, stamp.consumingMilliseconds());
 		} catch (Exception e) {
 			LOGGER.error(e);
 			throw new JobExecutionException(e);

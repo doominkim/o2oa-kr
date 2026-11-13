@@ -49,25 +49,25 @@ public class InvokeProcessor extends AbstractInvokeProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Invoke invoke) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.invokeArrive(aeiObjects.getWork().getActivityToken(), invoke));
 		return aeiObjects.getWork();
 	}
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Invoke invoke) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.invokeExecute(aeiObjects.getWork().getActivityToken(), invoke));
 		List<Work> results = new ArrayList<>();
 		boolean passThrough = false;
 		switch (invoke.getInvokeMode()) {
 		case jaxws:
-			// 可以根据返回脚本判断时候流转
+			// 반환 스크립트로 진행 여부 판단 가능
 			passThrough = this.jaxws(aeiObjects, invoke);
 			break;
 		case jaxrs:
-			// 可以根据返回脚本判断时候流转
+			// 반환 스크립트로 진행 여부 판단 가능
 			passThrough = this.jaxrs(aeiObjects, invoke);
 			break;
 		default:
@@ -84,7 +84,7 @@ public class InvokeProcessor extends AbstractInvokeProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Invoke invoke) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.invokeInquire(aeiObjects.getWork().getActivityToken(), invoke));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
@@ -96,9 +96,9 @@ public class InvokeProcessor extends AbstractInvokeProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}
@@ -205,7 +205,7 @@ public class InvokeProcessor extends AbstractInvokeProcessor {
 			LOGGER.warn("invoke not success, work:{}, resp:{}.", aeiObjects.getWork().getId(), resp);
 		}
 		boolean passThrough = true;
-		// 同步执行状态下进行调用判断
+		// 동기 실행 상태에서 호출 판단
 		if (!BooleanUtils.isTrue(invoke.getAsync())) {
 			WrapScriptObject jaxrsResponse = new WrapScriptObject();
 			if (null != resp) {
@@ -373,7 +373,7 @@ public class InvokeProcessor extends AbstractInvokeProcessor {
 		default:
 			throw new ExceptionUnknownHttpMethod(invoke.getJaxrsMethod());
 		}
-		// 同步执行状态下进行调用判断
+		// 동기 실행 상태에서 호출 판단
 		if ((!BooleanUtils.isTrue(invoke.getAsync())) && (null == result)) {
 			throw new RunningException("invoke address:{} not success, work:{}.", uri, aeiObjects.getWork().getId());
 		}
@@ -474,7 +474,7 @@ public class InvokeProcessor extends AbstractInvokeProcessor {
 					aeiObjects.getActivity(), Business.EVENT_INVOKEJAXRSPARAMETER);
 			GraalvmScriptingFactory.Bindings bindings = aeiObjects.bindings()
 					.putMember(GraalvmScriptingFactory.BINDING_NAME_JAXRSPARAMETERS, parameters);
-			// map有可能返回null
+			// map은 null을 반환할 수 있음
 			Map<String, String> map = GraalvmScriptingFactory.eval(source, bindings,
 					new TypeToken<Map<String, String>>() {
 					}.getType());

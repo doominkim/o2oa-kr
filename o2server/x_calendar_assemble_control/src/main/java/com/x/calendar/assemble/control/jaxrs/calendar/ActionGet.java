@@ -45,7 +45,7 @@ public class ActionGet extends BaseAction {
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -61,7 +61,7 @@ public class ActionGet extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -105,7 +105,7 @@ public class ActionGet extends BaseAction {
 					}
 				}
 			} catch (Exception e) {
-				Exception exception = new ExceptionCalendarInfoProcess( e, "将所有查询到的日历信息对象转换为可以输出的信息时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "조회한 캘린더 정보를 출력 정보로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -116,10 +116,10 @@ public class ActionGet extends BaseAction {
 
 	public static class Wo extends Calendar  {
 		
-		@FieldDescribe("用户是否可以对该日历进行管理.")
+		@FieldDescribe("사용자의 해당 캘린더 관리 가능 여부.")
 		private Boolean manageable = false;
 		
-		@FieldDescribe("用户是否可以在该日历中发布日程事件.")
+		@FieldDescribe("사용자의 해당 캘린더 일정 이벤트 게시 가능 여부.")
 		private Boolean publishable = false;
 		
 		private static final long serialVersionUID = -5076990764713538973L;

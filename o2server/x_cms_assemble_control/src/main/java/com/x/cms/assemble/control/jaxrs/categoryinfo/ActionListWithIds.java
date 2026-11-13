@@ -40,7 +40,7 @@ public class ActionListWithIds extends BaseAction {
 
   public static class Wi extends GsonPropertyObject {
 
-    @FieldDescribe(" 分类 id 列表(多值逗号隔开).")
+    @FieldDescribe(" 분류 id 목록(여러 값은 쉼표로 구분).")
     private List<String> categoryIdList;
 
     public List<String> getCategoryIdList() {

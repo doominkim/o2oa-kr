@@ -36,11 +36,11 @@ public class SearchAction extends StandardJaxrsAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchAction.class);
     private static final String OPERATIONID_PREFIX = "SearchAction::";
 
-    @Operation(summary = "POST方法执行搜索.", operationId = OPERATIONID_PREFIX + "post", responses = {
+    @Operation(summary = "POST 방식으로 검색 실행.", operationId = OPERATIONID_PREFIX + "post", responses = {
             @ApiResponse(content = {
                     @Content(schema = @Schema(implementation = ActionPost.Wo.class)) }) }, requestBody = @RequestBody(content = {
                             @Content(schema = @Schema(implementation = ActionPost.Wi.class)) }))
-    @JaxrsMethodDescribe(value = "POST方法执行搜索.", action = ActionPost.class)
+    @JaxrsMethodDescribe(value = "POST 방식으로 검색 실행.", action = ActionPost.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)

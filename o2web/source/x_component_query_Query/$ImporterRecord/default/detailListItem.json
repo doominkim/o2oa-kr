@@ -50,7 +50,7 @@
 //        "html": "<td styles='normalTdCenterNode' width='14%'><div item='docType'></div></td>",
 //        "items": {
 //          "docType" : {
-//            "value": "function(d){ if(d.docType==='cms'){return '内容管理'}else if(d.docType==='process'){return '流程管理'}else{return '自建表'} }"
+//            "value": "function(d){ if(d.docType==='cms'){return '콘텐츠 관리'}else if(d.docType==='process'){return '프로세스 관리'}else{return '자체 테이블'} }"
 //          }
 //        }
 //      }

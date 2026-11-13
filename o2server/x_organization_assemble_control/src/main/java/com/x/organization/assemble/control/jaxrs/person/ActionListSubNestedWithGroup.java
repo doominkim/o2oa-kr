@@ -50,7 +50,7 @@ class ActionListSubNestedWithGroup extends BaseAction {
 		}
 		List<String> ids = new ArrayList<>();
 		ids.addAll(business.group().listSubNested(group.getId()));
-		/* 将当前群组也加入到需要搜索成员的群组中 */
+		/* 현재 그룹도 멤버를 검색할 그룹에 추가 */
 		ids.add(group.getId());
 		ArrayList<String> personIds = new ArrayList<>();
 		ArrayList<String> unitIds = new ArrayList<>();
@@ -76,7 +76,7 @@ class ActionListSubNestedWithGroup extends BaseAction {
 		}
 		List<Wo> wos = Wo.copier.copy(business.person().pick(personIds));
 		wos = business.person().sort(wos);
-		// 产生头像
+		// 프로필 사진 생성
 		return wos;
 	}
 

@@ -29,12 +29,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("attendancestatisticalcycle")
-@JaxrsDescribe("考勤统计周期信息管理服务（已弃用）")
+@JaxrsDescribe("근태 통계 주기 정보 관리 서비스(사용 중단)")
 public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceStatisticalCycleAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有考勤统计周期信息", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "모든 근태 통계 주기 정보 조회", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -50,7 +50,7 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 				result = new ActionListAll().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "获取所有考勤统计周期信息时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "전체 근태 통계 기간을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -58,13 +58,13 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取考勤统计周期信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 근태 통계 주기 정보 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计周期信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("통계 주기 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -74,7 +74,7 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "根据ID获取考勤统计周期信息发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "ID로 근태 통계 기간을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -82,14 +82,14 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据登录的用户查询合适的考勤统计周期信息", action = ActionCycleDetail.class)
+	@JaxrsMethodDescribe(value = "로그인 사용자 기준 적합한 근태 통계 주기 정보 조회", action = ActionCycleDetail.class)
 	@GET
 	@Path("cycleDetail/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void cycleDetail(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 월") @PathParam("month") String month) {
 		ActionResult<ActionCycleDetail.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -99,7 +99,7 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 				result = new ActionCycleDetail().execute(request, effectivePerson, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "获取所有系统配置信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "전체 시스템 설정 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -107,7 +107,7 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "新建或者更新考勤统计周期信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "근태 통계 주기 정보 생성 또는 수정", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -122,7 +122,7 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "获取所有系统配置信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "전체 시스템 설정 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -130,13 +130,13 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除考勤统计周期信息", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 근태 통계 주기 정보 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计周期信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("통계 주기 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -146,7 +146,7 @@ public class AttendanceStatisticalCycleAction extends StandardJaxrsAction {
 				result = new ActionDelete().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "获取所有系统配置信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "전체 시스템 설정 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

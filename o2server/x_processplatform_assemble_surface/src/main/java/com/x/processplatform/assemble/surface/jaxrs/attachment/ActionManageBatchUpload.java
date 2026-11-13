@@ -44,7 +44,7 @@ class ActionManageBatchUpload extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (BooleanUtils.isFalse(business.ifPersonCanManageApplicationOrProcess(effectivePerson, "", ""))) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
@@ -53,7 +53,7 @@ class ActionManageBatchUpload extends BaseAction {
 				fileName = this.fileName(disposition);
 			}
 
-			/* 天谷印章扩展 */
+			/* 톈구 인장 확장 */
 			if (StringUtils.isNotEmpty(extraParam)) {
 				WiExtraParam wiExtraParam = gson.fromJson(extraParam, WiExtraParam.class);
 				if (StringUtils.isNotEmpty(wiExtraParam.getFileName())) {
@@ -173,7 +173,7 @@ class ActionManageBatchUpload extends BaseAction {
 		attachment.setPerson(person);
 		attachment.setLastUpdatePerson(person);
 		attachment.setSite(site);
-		// 用于判断目录的值
+		// 디렉터리 값 판단용
 		attachment.setWorkCreateTime(work.getCreateTime());
 		attachment.setApplication(work.getApplication());
 		attachment.setProcess(work.getProcess());
@@ -195,7 +195,7 @@ class ActionManageBatchUpload extends BaseAction {
 		attachment.setPerson(person);
 		attachment.setLastUpdatePerson(person);
 		attachment.setSite(site);
-		// 用于判断目录的值
+		// 디렉터리 값 판단용
 		attachment.setWorkCreateTime(workCompleted.getStartTime());
 		attachment.setApplication(workCompleted.getApplication());
 		attachment.setProcess(workCompleted.getProcess());

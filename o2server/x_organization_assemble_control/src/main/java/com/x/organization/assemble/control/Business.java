@@ -166,7 +166,7 @@ public class Business {
     }
 
     public boolean hasAnyRole(EffectivePerson effectivePerson, String... roleFlags) throws Exception {
-        /** 如果不加这个xadmin会报错 */
+        /** 이것을 넣지 않으면 xadmin에서 오류 발생 */
         if (effectivePerson.isManager()) {
             return true;
         }
@@ -556,7 +556,7 @@ public class Business {
                 unitIds.add(id);
                 unitIds.addAll(unit().listSupNested(id));
             }
-            // 加入预设的顶层组织
+            // 미리 설정된 최상위 조직 추가
             unitIds.addAll(p.getTopUnitList());
             unitIds = ListTools.trim(unitIds, true, true);
             for (Unit u : this.unit().pick(unitIds)) {

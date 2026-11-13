@@ -35,7 +35,7 @@ class ActionUpdate extends BaseAction {
 			emc.check(dict, CheckPersistType.all);
 			this.update(business, dict, wrapIn.getData());
 			emc.commit();
-			/* 这个Action是更新AppDict需要刷新缓存 */
+			/* 이 Action은 AppDict 갱신 시 캐시를 새로 고쳐야 함 */
 			CacheManager.notify(AppDict.class);
 			WrapOutId wrap = new WrapOutId(dict.getId());
 			result.setData(wrap);

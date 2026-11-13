@@ -22,7 +22,7 @@ import com.x.base.core.entity.annotation.ContainerEntity;
 import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "ScheduleLog", description = "服务管理日志记录.")
+@Schema(name = "ScheduleLog", description = "서비스 관리 로그 기록.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.ScheduleLog.TABLE, uniqueConstraints = {
@@ -48,70 +48,70 @@ public class ScheduleLog extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String node_FIELDNAME = "node";
-	@FieldDescribe("运行的服务器.")
+	@FieldDescribe("실행 서버.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + node_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + node_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String node;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("运行的应用.")
+	@FieldDescribe("실행 앱.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String className_FIELDNAME = "className";
-	@FieldDescribe("运行的className")
+	@FieldDescribe("실행 className")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + className_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + className_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String className;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("类型schedule/scheduleOnLocal")
+	@FieldDescribe("유형 schedule/scheduleOnLocal")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String fireTime_FIELDNAME = "fireTime";
-	@FieldDescribe("运行结束时间.")
+	@FieldDescribe("실행 종료 시간.")
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + fireTime_FIELDNAME)
 	@Column(name = ColumnNamePrefix + fireTime_FIELDNAME)
 	private Date fireTime;
 
 	public static final String elapsed_FIELDNAME = "elapsed";
-	@FieldDescribe("运行时长(毫秒).")
+	@FieldDescribe("실행 시간(밀리초).")
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + elapsed_FIELDNAME)
 	@Column(name = ColumnNamePrefix + elapsed_FIELDNAME)
 	private Long elapsed;
 
 	public static final String stackTrace_FIELDNAME = "stackTrace";
-	@FieldDescribe("错误堆栈.")
+	@FieldDescribe("오류 스택.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + stackTrace_FIELDNAME)
 	private String stackTrace;
 
 	public static final String success_FIELDNAME = "success";
-	@FieldDescribe("运行成功.")
+	@FieldDescribe("실행 성공.")
 	@Column(name = ColumnNamePrefix + success_FIELDNAME)
 	private Boolean success;
 

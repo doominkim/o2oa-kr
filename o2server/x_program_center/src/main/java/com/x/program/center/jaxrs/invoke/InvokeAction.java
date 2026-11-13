@@ -32,12 +32,12 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("invoke")
-@JaxrsDescribe("调用接口")
+@JaxrsDescribe("호출 인터페이스")
 public class InvokeAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(InvokeAction.class);
 
-	@JaxrsMethodDescribe(value = "列示所有调用接口.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 호출 인터페이스 나열.", action = ActionList.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -53,13 +53,13 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取调用接口对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,7 +71,7 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建调用接口.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -88,13 +88,13 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "修改调用接口内容.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 내용 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,13 +106,13 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除调用接口.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -124,14 +124,14 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新调用接口内容.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 내용 업데이트.", action = ActionUpdate.class)
 	@PUT
 	@Path("{flag}/file")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, @FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("附件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, @FormDataParam(FILE_FIELD) final byte[] bytes,
+			@JaxrsParameterDescribe("첨부파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,13 +143,13 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行调用接口get方法.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 get 메서드 실행.", action = ActionExecute.class)
 	@GET
 	@Path("{flag}/execute/get")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void executeGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-						   @JaxrsParameterDescribe("参数(json格式)") @QueryParam("params") String params) {
+						   @JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+						   @JaxrsParameterDescribe("파라미터(json 형식)") @QueryParam("params") String params) {
 		ActionResult<Object> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -165,13 +165,13 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, null));
 	}
 
-	@JaxrsMethodDescribe(value = "执行调用接口.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 실행.", action = ActionExecute.class)
 	@POST
 	@Path("{flag}/execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void execute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<Object> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -183,13 +183,13 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "执行调用接口，与execute方法一致.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "호출 인터페이스 실행, execute 메서드와 동일.", action = ActionExecute.class)
 	@POST
 	@Path("{flag}/invoke")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void invoke(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<Object> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -201,15 +201,15 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "进行认证后执行调用接口,认证令牌格式'person#1970年毫秒数'经过3des加密,加密密钥为key值,有效时间15分钟.", action = ActionExecuteToken.class)
+	@JaxrsMethodDescribe(value = "인증 후 호출 인터페이스 실행, 인증 토큰 형식 'person#1970년 이후 밀리초'를 3des로 암호화, 암호화 키는 key 값, 유효 시간 15분.", action = ActionExecuteToken.class)
 	@POST
 	@Path("{flag}/client/{client}/token/{token}/execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void executeToken(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("客户标识") @PathParam("client") String client,
-			@JaxrsParameterDescribe("令牌") @PathParam("token") String token, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("클라이언트 식별자") @PathParam("client") String client,
+			@JaxrsParameterDescribe("토큰") @PathParam("token") String token, JsonElement jsonElement) {
 		ActionResult<Object> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -221,7 +221,7 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "以当前用户身份生成令牌.", action = ActionToken.class)
+	@JaxrsMethodDescribe(value = "현재 사용자 신분으로 토큰 생성.", action = ActionToken.class)
 	@POST
 	@Path("token")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -239,14 +239,14 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定分类下的接口服务.", action = ActionListWithCategory.class)
+	@JaxrsMethodDescribe(value = "지정 분류의 인터페이스 서비스 나열.", action = ActionListWithCategory.class)
 	@GET
 	@Path("list/with/category/{category}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithCategory(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分类") @PathParam("category") String category) {
+			@JaxrsParameterDescribe("분류") @PathParam("category") String category) {
 		ActionResult<List<ActionListWithCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -258,7 +258,7 @@ public class InvokeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示接口服务所有分类.", action = ActionListCategory.class)
+	@JaxrsMethodDescribe(value = "인터페이스 서비스 전체 분류 나열.", action = ActionListCategory.class)
 	@GET
 	@Path("list/category")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

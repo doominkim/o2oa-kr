@@ -8,11 +8,11 @@ public class MessageProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -4943657103264120657L;
 
-	@FieldDescribe("失败次数")
+	@FieldDescribe("실패 횟수")
 	private Integer failure;
-	@FieldDescribe("错误信息")
+	@FieldDescribe("오류 정보")
 	private String error;
-	@FieldDescribe("consumer配置项")
+	@FieldDescribe("consumer 설정 항목")
 	private JsonElement consumerJsonElement;
 
 	public Integer getFailure() {

@@ -21,14 +21,14 @@
 //import org.xml.sax.helpers.XMLReaderFactory;
 //
 ///**
-// * 抽象Excel2007读取器，excel2007的底层数据结构是xml文件，采用SAX的事件驱动的方法解析
-// * xml，需要继承DefaultHandler，在遇到文件内容时，事件会触发，这种做法可以大大降低 内存的耗费，特别使用于大数据量的文件。
+// * 추상 Excel2007 리더, excel2007의 하위 데이터 구조는 xml 파일이며 SAX 이벤트 기반 방식으로 파싱
+// * xml, DefaultHandler를 상속해야 하며 파일 내용을 만나면 이벤트가 트리거됨, 이 방식은 메모리 소모를 크게 줄일 수 있어 대용량 파일에 특히 적합.
 // *
 // */
 //public class Excel2007Reader extends DefaultHandler {
-//	// 共享字符串表
+//	// 공유 문자열 테이블
 //	private SharedStringsTable sst;
-//	// 上一次的内容
+//	// 이전 내용
 //	private String lastContents;
 //
 //	private boolean nextIsString;
@@ -36,13 +36,13 @@
 //	private int sheetIndex = -1;
 //
 //	private List<String> rowlist = new ArrayList<String>();
-//	// 当前行
+//	// 현재 행
 //	private int curRow = 0;
-//	// 当前列
+//	// 현재 열
 //	private int curCol = 0;
-//	// 日期标志
+//	// 날짜 플래그
 //	private boolean dateFlag;
-//	// 数字标志
+//	// 숫자 플래그
 //	private boolean numberFlag;
 //
 //	private boolean isTElement;
@@ -58,7 +58,7 @@
 //	}
 //
 //	/**
-//	 * 只遍历一个电子表格，其中sheetId为要遍历的sheet索引，从1开始，1-3
+//	 * 스프레드시트 하나만 순회, sheetId는 순회할 sheet 인덱스이며 1부터 시작, 1-3
 //	 * 
 //	 * @param filename
 //	 * @param sheetId
@@ -70,7 +70,7 @@
 //		SharedStringsTable sst = r.getSharedStringsTable();
 //		XMLReader parser = fetchSheetParser(sst);
 //
-//		// 根据 rId# 或 rSheet# 查找sheet
+//		// rId# 또는 rSheet#으로 sheet 찾기
 //		InputStream sheet2 = r.getSheet("rId" + sheetId);
 //		sheetIndex++;
 //		InputSource sheetSource = new InputSource(sheet2);
@@ -79,7 +79,7 @@
 //	}
 //
 //	/**
-//	 * 遍历工作簿中所有的电子表格
+//	 * 워크북의 모든 스프레드시트 순회
 //	 * 
 //	 * @param filename
 //	 * @param fileKey
@@ -99,11 +99,11 @@
 //			parser.parse(sheetSource);
 //			sheet.close();
 //		}
-//		// 数据读取完成
+//		// 데이터 읽기 완료
 //	}
 //
 //	/**
-//	 * 遍历工作簿中所有的电子表格
+//	 * 워크북의 모든 스프레드시트 순회
 //	 * 
 //	 * @param is
 //	 * @param fileKey
@@ -123,7 +123,7 @@
 //			parser.parse(sheetSource);
 //			sheet.close();
 //		}
-//		// 数据读取完成
+//		// 데이터 읽기 완료
 //	}
 //
 //	public XMLReader fetchSheetParser(SharedStringsTable sst) throws SAXException {
@@ -135,16 +135,16 @@
 //
 //	public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
 //
-//		// c => 单元格
+//		// c => 셀
 //		if ("c".equals(name)) {
-//			// 如果下一个元素是 SST 的索引，则将nextIsString标记为true
+//			// 다음 요소가 SST 인덱스이면 nextIsString을 true로 표시
 //			String cellType = attributes.getValue("t");
 //			if ("s".equals(cellType)) {
 //				nextIsString = true;
 //			} else {
 //				nextIsString = false;
 //			}
-//			// 日期格式
+//			// 날짜 형식
 //			String cellDateType = attributes.getValue("s");
 //			if ("1".equals(cellDateType)) {
 //				dateFlag = true;
@@ -159,21 +159,21 @@
 //			}
 //
 //		}
-//		// 当元素为t时
+//		// 요소가 t일 때
 //		if ("t".equals(name)) {
 //			isTElement = true;
 //		} else {
 //			isTElement = false;
 //		}
 //
-//		// 置空
+//		// 초기화
 //		lastContents = "";
 //	}
 //
 //	public void endElement(String uri, String localName, String name) throws SAXException {
 //
-//		// 根据SST的索引值的到单元格的真正要存储的字符串
-//		// 这时characters()方法可能会被调用多次
+//		// SST 인덱스 값으로 셀에 실제 저장할 문자열 구하기
+//		// 이때 characters() 메서드가 여러 번 호출될 수 있음
 //		if (nextIsString) {
 //			try {
 //				int idx = Integer.parseInt(lastContents);
@@ -182,18 +182,18 @@
 //				e.printStackTrace();
 //			}
 //		}
-//		// t元素也包含字符串
+//		// t 요소도 문자열 포함
 //		if (isTElement) {
 //			String value = lastContents.trim();
 //			rowlist.add(curCol, value);
 //			curCol++;
 //			isTElement = false;
-//			// v => 单元格的值，如果单元格是字符串则v标签的值为该字符串在SST中的索引
-//			// 将单元格内容加入rowlist中，在这之前先去掉字符串前后的空白符
+//			// v => 셀 값, 셀이 문자열이면 v 태그 값은 SST에서 해당 문자열의 인덱스
+//			// 셀 내용을 rowlist에 추가, 그 전에 문자열 앞뒤 공백 제거
 //		} else if ("v".equals(name)) {
 //			String value = lastContents.trim();
 //			value = value.equals("") ? " " : value;
-//			// 日期格式处理
+//			// 날짜 형식 처리
 //			if (dateFlag) {
 //				try {
 //					Date date = DateUtil.getJavaDate(Double.valueOf(value));
@@ -203,7 +203,7 @@
 //					e.printStackTrace();
 //				}
 //			}
-//			// 数字类型处理
+//			// 숫자 타입 처리
 //			if (numberFlag) {
 //				try {
 //					BigDecimal bd = new BigDecimal(value);
@@ -215,7 +215,7 @@
 //			rowlist.add(curCol, value);
 //			curCol++;
 //		} else {
-//			// 如果标签名称为 row ，这说明已到行尾，调用 optRows() 方法
+//			// 태그 이름이 row이면 행 끝에 도달한 것이므로 optRows() 메서드 호출
 //			if (name.equals("row")) {
 //
 //				rowReader.getRows(sheetIndex, curRow, rowlist, this.fileKey, this.startRow);
@@ -228,7 +228,7 @@
 //	}
 //
 //	public void characters(char[] ch, int start, int length) throws SAXException {
-//		// 得到单元格内容的值
+//		// 셀 내용 값 구하기
 //		lastContents += new String(ch, start, length);
 //	}
 //}

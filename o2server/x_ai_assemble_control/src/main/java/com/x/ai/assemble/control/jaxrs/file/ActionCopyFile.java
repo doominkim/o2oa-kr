@@ -62,7 +62,7 @@ class ActionCopyFile extends BaseAction {
                 downLoadUrl = ThisApplication.context().applications().randomWithWeight(className).getUrlJaxrsRoot();
                 downLoadUrl = downLoadUrl + Applications.joinQueryUri("attachment","download", wi.getId());
             } else {
-                throw new ExceptionCustom("没有匹配的拷贝来源");
+                throw new ExceptionCustom("일치하는 복사 원본이 없습니다");
             }
             List<NameValuePair> headers = ListTools.toList(new NameValuePair(Config.person().getTokenName(), effectivePerson.getToken()));
             byte[] bs = ConnectionAction.getBinary(downLoadUrl, headers);
@@ -85,13 +85,13 @@ class ActionCopyFile extends BaseAction {
 
         private static final long serialVersionUID = 6624639107781167248L;
 
-        @FieldDescribe("附件标识.")
+        @FieldDescribe("첨부파일 식별자.")
         private String id;
 
-        @FieldDescribe("附件名称.")
+        @FieldDescribe("첨부파일 이름.")
         private String name;
 
-        @FieldDescribe("附件来源(cms|内容管理附件、processPlatform|流程平台附件、x_pan_assemble_control|企业网盘附件).")
+        @FieldDescribe("첨부파일 출처(cms|콘텐츠 관리 첨부파일, processPlatform|프로세스 플랫폼 첨부파일, x_pan_assemble_control|기업 네트워크 드라이브 첨부파일).")
         private String copyFrom;
 
         public String getId() {

@@ -103,11 +103,11 @@ public class AttendanceSettingService {
 	}
 
 	/**
-	 *  APPEALABLE	员工申诉及申诉审批	true|false
-		APPEAL_AUDITOR_TYPE	        考勤结果申诉审核人确定方式	       所属组织职位|所属组织属性|人员属性(默认)|指定人|指定角色
-		APPEAL_AUDITOR_VALUE	考勤结果申诉审核人确定内容	    直属领导(默认)    
-		APPEAL_CHECKER_TYPE	        考勤结果申诉复核人确定方式	       无(默认)|所属组织职位|所属组织属性|人员属性|指定人|指定角色
-		APPEAL_CHECKER_VALUE	考勤结果申诉复核人确定内容
+	 *  APPEALABLE	직원 이의 신청 및 신청 승인	true|false
+		APPEAL_AUDITOR_TYPE	        근태 결과 이의 신청 심사자 결정 방식	       소속 조직 직위|소속 조직 속성|사용자 속성(기본)|지정 사용자|지정 역할
+		APPEAL_AUDITOR_VALUE	근태 결과 이의 신청 심사자 결정 내용	    직속 상사(기본)    
+		APPEAL_CHECKER_TYPE	        근태 결과 이의 신청 재검토자 결정 방식	       없음(기본)|소속 조직 직위|소속 조직 속성|사용자 속성|지정 사용자|지정 역할
+		APPEAL_CHECKER_VALUE	근태 결과 이의 신청 재검토자 결정 내용
 	 */
 	public void initAllSystemConfig() {
 		String value = null, description = null, type = null, selectContent = null;
@@ -212,7 +212,7 @@ public class AttendanceSettingService {
 	}
 	
 	/**
-	 * 检查配置项是否存在，如果不存在根据信息创建一个新的配置项
+	 * 설정 항목 존재 여부를 확인하고, 없으면 정보로 새 설정 항목 생성
 	 * @param configCode
 	 * @param configName
 	 * @param configValue
@@ -235,7 +235,7 @@ public class AttendanceSettingService {
 			logger.warn( "system find system config{'configCode':'"+configCode+"'} got an exception. " );
 			logger.error(e);
 		}
-		//如果配置不存在，则新建一个配置记录
+		//설정이 없으면 새 설정 레코드 생성
 		if( attendanceSetting == null ){
 			attendanceSetting = new AttendanceSetting();
 			attendanceSetting.setConfigCode( configCode );

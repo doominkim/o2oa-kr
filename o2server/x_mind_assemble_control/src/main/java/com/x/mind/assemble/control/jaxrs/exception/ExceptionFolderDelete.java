@@ -7,10 +7,10 @@ public class ExceptionFolderDelete extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionFolderDelete( String message ) {
-		super("文件夹信息删除时发生异常！MESSAGE：" + message );
+		super("폴더 정보 삭제 중 오류가 발생했습니다! MESSAGE:" + message );
 	}
 	
 	public ExceptionFolderDelete( Throwable e, String message ) {
-		super("文件夹信息删除时发生异常！MESSAGE：" + message, e );
+		super("폴더 정보 삭제 중 오류가 발생했습니다! MESSAGE:" + message, e );
 	}
 }

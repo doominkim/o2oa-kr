@@ -14,7 +14,7 @@ import com.x.cms.core.entity.Document;
 class ActionCmsDocIndex extends BaseAction {
 	private static final Logger logger = LoggerFactory.getLogger(ActionCmsDocIndex.class);
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String docId) throws Exception {
-		logger.info("{}操作添加索引文档:{}",effectivePerson.getDistinguishedName(), docId);
+		logger.info("{} 작업으로 인덱스 문서 추가: {}",effectivePerson.getDistinguishedName(), docId);
 		ActionResult<Wo> result = new ActionResult<>();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Document document = emc.find(docId, Document.class);

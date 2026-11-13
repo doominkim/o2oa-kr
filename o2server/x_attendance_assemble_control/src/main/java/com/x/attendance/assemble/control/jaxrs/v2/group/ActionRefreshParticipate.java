@@ -35,11 +35,11 @@ public class ActionRefreshParticipate extends BaseAction {
             }
             AttendanceV2Group group = emc.find(id, AttendanceV2Group.class);
             if (group == null) {
-                throw new ExceptionNotExistObject(id+"考勤组");
+                throw new ExceptionNotExistObject(id+"근태 그룹");
             }
             List<String> trueList = AttendanceV2Helper.calTruePersonFromMixList(emc, business, group.getId(), group.getParticipateList(), group.getUnParticipateList());
             if (trueList == null || trueList.isEmpty()) {
-                throw new ExceptionEmptyParameter("考勤打卡人员、组织");
+                throw new ExceptionEmptyParameter("근태 체크 인원·조직");
             }
             group.setTrueParticipantList(trueList);
             emc.beginTransaction(AttendanceV2Group.class);
@@ -59,8 +59,8 @@ public class ActionRefreshParticipate extends BaseAction {
 
         private static final long serialVersionUID = -3249622798550098407L;
 
-         @FieldDescribe("真实的考勤打卡的人员列表.")
-        private List<String> trueParticipantList; // 前端排班使用
+         @FieldDescribe("실제 근태 체크 사용자 목록.")
+        private List<String> trueParticipantList; // 프론트 교대 편성용
 
         public List<String> getTrueParticipantList() {
             return trueParticipantList;

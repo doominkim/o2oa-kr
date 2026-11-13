@@ -25,7 +25,7 @@ class ActionAssemble extends BaseAction {
 			this.data = data;
 		}
 
-		@Schema(description = "数据.")
+		@Schema(description = "데이터.")
 		private String data;
 
 		public String getData() {

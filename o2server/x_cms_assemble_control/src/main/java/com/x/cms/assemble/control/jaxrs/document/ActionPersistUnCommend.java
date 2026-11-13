@@ -30,7 +30,7 @@ public class ActionPersistUnCommend extends BaseAction {
 				wo.setIds( ids );
 				result.setData( wo );
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统根据个人和文档ID删除点赞信息时发生异常。docId:" + docId );
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자와 게시글 ID로 좋아요 정보를 삭제하는 중 오류가 발생했습니다. docId:" + docId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 				throw exception;

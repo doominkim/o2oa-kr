@@ -7,10 +7,10 @@ class ExceptionEventAlarmConfigError extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionEventAlarmConfigError() {
-		super("事件提醒时间配置不合法，请检查提醒设置。");
+		super("일정 알림 시간 설정이 올바르지 않습니다. 알림 설정을 확인하세요.");
 	}
 	
 	ExceptionEventAlarmConfigError( String message ) {
-		super("事件提醒时间配置不合法，" + message );
+		super("일정 알림 시간 설정이 올바르지 않습니다. " + message );
 	}
 }

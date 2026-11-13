@@ -13,10 +13,10 @@ import java.util.Map;
  */
 public class PortalProperties extends JsonProperties {
 
-	@FieldDescribe("角标关联脚本.")
+	@FieldDescribe("배지 연결 스크립트.")
 	private String cornerMarkScript;
 
-	@FieldDescribe("角标脚本.")
+	@FieldDescribe("배지 스크립트.")
 	private String cornerMarkScriptText;
 
 	public String getCornerMarkScript() {

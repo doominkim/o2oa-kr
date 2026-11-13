@@ -99,7 +99,7 @@ public class HighFreqWorkCompleted extends HighFreq {
 								Indexs.CATEGORY_PROCESSPLATFORM, o.getKey(), additionalQuery));
 //						ThisApplication.indexWriteQueue.send(new IndexWriteQueue.DeleteMessage(jobs,
 //								Indexs.CATEGORY_SEARCH, Indexs.KEY_ENTIRE, additionalQuery));
-						// 全文索引没有写入processPlatform_boolean_completed:false
+						// 전문 인덱스에 processPlatform_boolean_completed:false가 기록되지 않음
 						ThisApplication.indexWriteQueue.send(new IndexWriteQueue.DeleteMessage(jobs,
 								Indexs.CATEGORY_SEARCH, Indexs.KEY_ENTIRE, null));
 						deleteCount.addAndGet(jobs.size());

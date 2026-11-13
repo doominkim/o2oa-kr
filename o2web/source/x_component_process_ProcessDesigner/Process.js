@@ -136,7 +136,7 @@ MWF.xApplication.process.ProcessDesigner.Process = new Class({
 		});
 	},
 	checkUUID: function(){
-		//新流程, 此处处理所有元素的id
+		//새 프로세스, 여기서 모든 요소의 id 처리
 		this.process.isNewProcess = true;
 		var idCount = (this.process.begin) ? 2 : 1;
 		idCount += (this.process.endList) ? this.process.endList.length : 0;
@@ -158,7 +158,7 @@ MWF.xApplication.process.ProcessDesigner.Process = new Class({
 		this.designer.actions.getId(idCount, function(ids){
 			this.checkUUIDs = ids.data;
 
-			//流程ID
+			//프로세스 ID
 			this.process.id = this.checkUUIDs.pop().id;
 			this.process.createTime = new Date().format('db');
 			this.process.updateTime = new Date().format('db');

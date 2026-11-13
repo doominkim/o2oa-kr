@@ -17,7 +17,7 @@ import com.x.cms.core.entity.DocumentCommend;
 import com.x.cms.core.entity.DocumentCommend_;
 
 /**
- * 文档点赞基础功能服务类
+ * 문서 추천 기본 기능 서비스 클래스
  *
  * @author O2LEE
  */

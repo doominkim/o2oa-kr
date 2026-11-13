@@ -24,7 +24,7 @@ import com.x.calendar.core.entity.Calendar;
 import com.x.calendar.core.entity.Calendar_Event;
 
 /**
- * 根据事件ID更新单个日程事件信息
+ * 이벤트 ID로 단일 일정 이벤트 정보 수정
  * 
  * @author O2LEE
  *
@@ -67,7 +67,7 @@ public class ActionUpdateSingleEventWithId extends BaseAction {
 				calendar_Event = calendar_EventServiceAdv.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历记录信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 기록 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -92,7 +92,7 @@ public class ActionUpdateSingleEventWithId extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + calendar_Event.getCalendarId() );
+					Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + calendar_Event.getCalendarId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -100,21 +100,21 @@ public class ActionUpdateSingleEventWithId extends BaseAction {
 		}
 		
 		if( check && !ThisApplication.isCalendarSystemManager(effectivePerson) ) {
-			//判断用户权限
+			//사용자 권한 판단
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(personName);
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 				if( calendar != null ) {
 					if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
-							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//没权限
+							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 						check = false;
-						Exception exception = new ExceptionInsufficientPermissions( "您没有权限从日历中删除日程事件.日历:" + calendar.getName() );
+						Exception exception = new ExceptionInsufficientPermissions( "이 캘린더에서 일정을 삭제할 권한이 없습니다. 캘린더:" + calendar.getName() );
 						result.error( exception );
 					}
 				}				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -126,7 +126,7 @@ public class ActionUpdateSingleEventWithId extends BaseAction {
 				new_Event.setId( calendar_Event.getId() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统将用户传入的数据转换为日历事件信息对象时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자가 입력한 데이터를 일정 정보 객체로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -146,7 +146,7 @@ public class ActionUpdateSingleEventWithId extends BaseAction {
 				result.setData( new Wo( calendar_Event.getId() ) );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "更新单个日程信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "단일 일정을 수정하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

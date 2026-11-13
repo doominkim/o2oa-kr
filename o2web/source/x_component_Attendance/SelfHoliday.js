@@ -343,10 +343,10 @@ MWF.xApplication.Attendance.SelfHoliday.Form = new Class({
 //        }).inject( this.createFormNode );
 //
 //        var tr = new Element("tr").inject(table);
-//        var td = new Element("td", { "colspan":'2', "styles" : this.css.editTableHead, "text" : "员工休假记录"  }).inject(tr);
+//        var td = new Element("td", { "colspan":'2', "styles" : this.css.editTableHead, "text" : "직원 휴가 기록"  }).inject(tr);
 //
 //        var tr = new Element("tr").inject(table);
-//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "部门："  }).inject(tr);
+//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "부서:"  }).inject(tr);
 //        var td = new Element("td", { "styles" : this.css.editTableValue }).inject(tr);
 //        if( !this.isNew && !this.isEdited  ){
 //            td.set("text",  d.unitName  )
@@ -363,7 +363,7 @@ MWF.xApplication.Attendance.SelfHoliday.Form = new Class({
 //        }
 //
 //        var tr = new Element("tr").inject(table);
-//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "员工姓名："  }).inject(tr);
+//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "직원 이름:"  }).inject(tr);
 //        var td = new Element("td", { "styles" : this.css.editTableValue  }).inject(tr);
 //        if( !this.isNew && !this.isEdited  ){
 //            td.set("text",  d.employeeName  )
@@ -380,7 +380,7 @@ MWF.xApplication.Attendance.SelfHoliday.Form = new Class({
 //        }
 //
 //        var tr = new Element("tr").inject(table);
-//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "休假类型："  }).inject(tr);
+//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "휴가 유형:"  }).inject(tr);
 //        var td = new Element("td", { "styles" : this.css.editTableValue  }).inject(tr);
 //        if( !this.isNew && !this.isEdited  ){
 //            td.set("text",  d.leaveType  )
@@ -389,13 +389,13 @@ MWF.xApplication.Attendance.SelfHoliday.Form = new Class({
 //                "name" : "leaveType",
 //                "type" : "select",
 //                "value" : d.leaveType,
-//                "selectValue" : "带薪年休假,带薪病假,带薪福利假,扣薪事假,其他".split(",")
+//                "selectValue" : "유급 연차,유급 병가,유급 복지 휴가,무급 개인 휴가,기타".split(",")
 //            }, true, this.app );
 //            this.leaveType.load();
 //        }
 //
 //        var tr = new Element("tr").inject(table);
-//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "开始时间："  }).inject(tr);
+//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "시작 시간:"  }).inject(tr);
 //        var td = new Element("td", { "styles" : this.css.editTableValue }).inject(tr);
 //        if( !this.isNew && !this.isEdited  ){
 //            td.set("text",  d.startTime  )
@@ -412,7 +412,7 @@ MWF.xApplication.Attendance.SelfHoliday.Form = new Class({
 //        }
 //
 //        var tr = new Element("tr").inject(table);
-//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "结束时间："  }).inject(tr);
+//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "종료 시간:"  }).inject(tr);
 //        var td = new Element("td", { "styles" : this.css.editTableValue} ).inject(tr);
 //        if( !this.isNew && !this.isEdited  ){
 //            td.set("text",  d.endTime  )
@@ -429,7 +429,7 @@ MWF.xApplication.Attendance.SelfHoliday.Form = new Class({
 //        }
 //
 //        var tr = new Element("tr").inject(table);
-//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "休假天数："  }).inject(tr);
+//        var td = new Element("td", {  "styles" : this.css.editTableTitle, "text" : "휴가 일수:"  }).inject(tr);
 //        var td = new Element("td", { "styles" : this.css.editTableValue}).inject(tr);
 //        if( !this.isNew && !this.isEdited  ){
 //            td.set("text",  d.leaveDayNumber  )
@@ -568,11 +568,11 @@ MWF.xApplication.Attendance.SelfHoliday.Form = new Class({
 //    selectPeople: function(el, type, value ){
 //        var title
 //        if( type == "unit" ){
-//            title = "选择部门"
+//            title = "부서 선택"
 //        }else if( type == "topUnit" ){
-//            title = "选择公司"
+//            title = "회사 선택"
 //        }else{
-//            title = "选择个人"
+//            title = "개인 선택"
 //        }
 //        var options = {
 //            "type": type,

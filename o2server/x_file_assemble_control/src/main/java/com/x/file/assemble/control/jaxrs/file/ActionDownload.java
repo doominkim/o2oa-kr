@@ -43,7 +43,7 @@ class ActionDownload extends StandardJaxrsAction {
 					wo = new Wo(bs, this.contentType(false, file.getName()),
 							this.contentDisposition(false, file.getName()), fastETag);
 					/**
-					 * 对10M以下的文件进行缓存
+					 * 10M 이하 파일 캐시
 					 */
 					if (bs.length < (1024 * 1024 * 10)) {
 						CacheManager.put(cacheCategory, cacheKey, wo);

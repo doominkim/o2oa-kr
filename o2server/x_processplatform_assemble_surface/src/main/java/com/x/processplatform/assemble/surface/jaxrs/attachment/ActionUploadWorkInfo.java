@@ -142,10 +142,10 @@ class ActionUploadWorkInfo extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("待转换html.")
+		@FieldDescribe("변환할 html.")
 		private String workHtml;
 
-		@FieldDescribe("转pdf页面宽度，默认A4.")
+		@FieldDescribe("pdf 변환 페이지 너비, 기본값 A4.")
 		private Float pageWidth;
 
 		public String getWorkHtml() {

@@ -58,28 +58,28 @@ public class ActionListWithFilter extends BaseAction {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				business = new Business(emc);
 				attendanceWorkDayConfigFactory = business.getAttendanceWorkDayConfigFactory();
-				// 获取所有应用列表
+				// 모든 앱 목록 조회
 				if ( StringUtils.isNotEmpty( q_Year )) {
 					if ( StringUtils.isNotEmpty( q_Month )) {
-						// 根据年份月份获取所有节假日配置列表
-						logger.debug(effectivePerson, ">>>>>>>>>>根据年份月份获取所有节假日配置列表");
+						// 연도·월로 모든 공휴일 설정 목록 조회
+						logger.debug(effectivePerson, ">>>>>>>>>>연도·월로 모든 공휴일 설정 목록 조회");
 						ids = attendanceWorkDayConfigFactory.listByYearAndMonth(q_Year, q_Month);
 					}
 					if ( StringUtils.isNotEmpty( q_Name )) {
-						// 根据年份名称获取所有节假日配置列表
-						logger.debug(effectivePerson, ">>>>>>>>>>根据年份名称获取所有节假日配置列表");
+						// 연도 이름으로 모든 공휴일 설정 목록 조회
+						logger.debug(effectivePerson, ">>>>>>>>>>연도 이름으로 모든 공휴일 설정 목록 조회");
 						ids = attendanceWorkDayConfigFactory.listByYearAndName(q_Year, q_Name);
 					}
 				} else {
 					if ( StringUtils.isNotEmpty( q_Name )) {
-						// 根据名称获取所有节假日配置列表
-						logger.debug(effectivePerson, ">>>>>>>>>>根据名称获取所有节假日配置列表");
+						// 이름으로 모든 공휴일 설정 목록 조회
+						logger.debug(effectivePerson, ">>>>>>>>>>이름으로 모든 공휴일 설정 목록 조회");
 						ids = attendanceWorkDayConfigFactory.listByName(q_Name);
 					}
 				}
-				// 查询ID IN ids 的所有应用信息列表
+				// ID IN ids 인 모든 앱 정보 목록 조회
 				attendanceWorkDayConfigList = attendanceWorkDayConfigFactory.list(ids);
-				// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 				wraps = Wo.copier.copy(attendanceWorkDayConfigList);
 			} catch (Throwable th) {
 				th.printStackTrace();
@@ -92,13 +92,13 @@ public class ActionListWithFilter extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String q_Name = null;
 
-		@FieldDescribe("年")
+		@FieldDescribe("연")
 		private String q_Year = null;
 
-		@FieldDescribe("月")
+		@FieldDescribe("월")
 		private String q_Month = null;
 
 		public String getQ_Name() {

@@ -41,7 +41,7 @@ class ActionListWithGroupObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("群组")
+		@FieldDescribe("그룹")
 		private List<String> groupList = new ArrayList<>();
 
 		public List<String> getGroupList() {
@@ -77,7 +77,7 @@ class ActionListWithGroupObject extends BaseAction {
 			}
 			identityIds.addAll(o.getIdentityList());
 		}
-		/* 先解析组织 */
+		/* 먼저 조직 해석 */
 		List<Identity> identities = new ArrayList<>();
 		unitIds = ListTools.trim(unitIds, true, true);
 		if (ListTools.isNotEmpty(unitIds)) {
@@ -85,7 +85,7 @@ class ActionListWithGroupObject extends BaseAction {
 					business.entityManagerContainer().fetchIn(Identity.class, Identity.unit_FIELDNAME, unitIds));
 		}
 
-		/* 再把人全部解析出来,同时判断是否已经在组织中已经出现了 */
+		/* 다음으로 사용자를 모두 해석하면서 이미 조직에 나타났는지 확인 */
 		personIds = ListTools.trim(personIds, true, true);
 		List<String> existPersonIds = ListTools.extractProperty(identities, Identity.person_FIELDNAME, String.class,
 				true, true);
@@ -95,7 +95,7 @@ class ActionListWithGroupObject extends BaseAction {
 			}
 		}
 
-		/* 最后把身份解析处理 */
+		/* 마지막으로 신분 해석 처리 */
 		identities.addAll(business.identity().pick(identityIds));
 
 		identities = ListTools.trim(identities, true, true);

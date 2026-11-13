@@ -1,4 +1,4 @@
-//用法，z在 cms / 流程表单 / 门户中插入会议应用
+//사용법: cms / 프로세스 양식 / 포털에 회의 앱 삽입
 //MWF.xApplication.Meeting = MWF.xApplication.Meeting || {};
 //MWF.xApplication.Meeting.options = MWF.xApplication.Meeting.options || {};
 //MWF.xDesktop.requireApp("Meeting", "MainInContainer", null, false);

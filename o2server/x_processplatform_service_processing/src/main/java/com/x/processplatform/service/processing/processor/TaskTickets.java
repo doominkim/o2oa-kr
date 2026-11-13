@@ -39,7 +39,7 @@ import com.x.processplatform.service.processing.Business;
 import com.x.processplatform.service.processing.processor.manual.TaskIdentity;
 
 /**
- * 在Manual环节计算所有的待办人的Identity
+ * Manual 단계에서 모든 결재 대기자의 Identity 계산
  * 
  * @author Rui
  *
@@ -52,33 +52,33 @@ public class TaskTickets {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TaskTickets.class);
 
-	/* 计算manual节点中所有的待办，全部翻译成Identity */
+	/* manual 노드의 모든 결재 대기를 계산하여 모두 Identity로 변환 */
 	public static Tickets translate(AeiObjects aeiObjects, Manual manual) throws Exception {
 		List<EmpowerableIdentity> identities = new ArrayList<>();
 		List<String> units = new ArrayList<>();
 		List<String> groups = new ArrayList<>();
-		// 指定的身份
+		// 지정 신분
 		if (ListTools.isNotEmpty(manual.getTaskIdentityList())) {
 			identities.addAll(manual.getTaskIdentityList().stream().map(o -> new EmpowerableIdentity(false, o))
 					.collect(Collectors.toList()));
 		}
-		// 流程角色
+		// 프로세스 역할
 		if ((null != manual.getTaskParticipant()) && StringUtils.isNotBlank(manual.getTaskParticipant().getType())) {
 			identities.addAll(participant(aeiObjects, manual).stream().map(o -> new EmpowerableIdentity(false, o))
 					.collect(Collectors.toList()));
 		}
-		// 选择了职务
+		// 직무 선택
 		identities.addAll(duty(aeiObjects, manual).stream().map(o -> new EmpowerableIdentity(false, o))
 				.collect(Collectors.toList()));
-		// 指定data数据路径值
+		// data 데이터 경로 값 지정
 		data(identities, units, groups, aeiObjects.getData(), manual);
-		// 使用脚本计算
+		// 스크립트로 계산
 		script(identities, units, groups, aeiObjects, manual);
-		// 指定处理组织
+		// 처리 조직 지정
 		if (ListTools.isNotEmpty(manual.getTaskUnitList())) {
 			units.addAll(manual.getTaskUnitList());
 		}
-		// 指定处理群组
+		// 처리 그룹 지정
 		if (ListTools.isNotEmpty(manual.getTaskGroupList())) {
 			groups.addAll(manual.getTaskGroupList());
 		}
@@ -102,7 +102,7 @@ public class TaskTickets {
 	}
 
 	/**
-	 * 转换成Tickets,进行授权和检查
+	 * Tickets로 변환하여 위임 및 검사 수행
 	 * 
 	 * @param aeiObjects
 	 * @param manual
@@ -148,7 +148,7 @@ public class TaskTickets {
 	}
 
 	/**
-	 * 执行授权
+	 * 위임 실행
 	 * 
 	 * @param aeiObjects
 	 * @param identities
@@ -171,7 +171,7 @@ public class TaskTickets {
 		}
 	}
 
-	/* 取到指定职务的identity */
+	/* 지정 직무의 identity 조회 */
 	private static List<String> duty(AeiObjects aeiObjects, Manual manual) throws Exception {
 		List<String> list = new ArrayList<>();
 		if (StringUtils.isNotEmpty(manual.getTaskDuty())) {
@@ -227,7 +227,7 @@ public class TaskTickets {
 		return list;
 	}
 
-	/* 取到script指定的identity */
+	/* script로 지정된 identity 조회 */
 	private static List<String> script(List<EmpowerableIdentity> identities, List<String> units, List<String> groups,
 			AeiObjects aeiObjects, Manual manual) throws Exception {
 		List<String> list = new ArrayList<>();
@@ -241,8 +241,8 @@ public class TaskTickets {
 	}
 
 	/**
-	 * 取得通过路径指定的组织专用标识,这里的值可能通过前台选择通过data传递进来,
-	 * 在前台选择的值中可能包含ignoreEmpower,表示选择人员的时候强制忽略授权.
+	 * 경로로 지정된 조직 전용 식별자 조회, 이 값은 프런트에서 선택해 data로 전달될 수 있음,
+	 * 프런트에서 선택한 값에 ignoreEmpower가 포함될 수 있으며, 사용자 선택 시 위임을 강제로 무시함을 의미.
 	 * 
 	 * @param taskIdentities
 	 * @param units

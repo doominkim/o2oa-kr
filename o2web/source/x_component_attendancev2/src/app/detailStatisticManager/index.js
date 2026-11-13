@@ -14,14 +14,14 @@ export default content({
   bind() {
     return {
       lp,
-      // 搜索表单
+      // 검색 양식
       form: {
         filterList: [],
         startDate: '',
         endDate: '',
         recursive: true
       },
-      units: [], // 控制组织选择的范围
+      units: [], // 조직 선택 범위 제어
       filterList: [],
       statisticList: [],
       tableHeaderList:[] // detail 
@@ -30,13 +30,13 @@ export default content({
   },
   beforeRender() {
     const today = new Date();
-    // 计算本周第一天的日期
+    // 이번 주 첫째 날 날짜 계산
     const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 1));
-    // 计算本周最后一天的日期
+    // 이번 주 마지막 날 날짜 계산
     const lastDayOfWeek = new Date(today.setDate(firstDayOfWeek.getDate() + 6));
     this.bind.form.startDate = formatDate(firstDayOfWeek);
     this.bind.form.endDate = formatDate(lastDayOfWeek);
-    // 当前用户的选择范围
+    // 현재 사용자의 선택 범위
     if (content.myDutyList && content.myDutyList.length > 0) {
       let units = [];
       for (let i = 0; i < content.myDutyList.length; i++) {
@@ -50,25 +50,25 @@ export default content({
   },
   // yyyy-MM-dd 
   _toDate(dateString) {
-    var dateParts = dateString.split("-"); // 将字符串拆分为年、月和日部分
-    var year = parseInt(dateParts[0], 10); // 将年份部分解析为整数
-    var month = parseInt(dateParts[1], 10) - 1; // 将月份部分解析为整数（月份从0开始）
-    var day = parseInt(dateParts[2], 10); // 将日部分解析为整数
-    return new Date(year, month, day); // 创建Date对象
+    var dateParts = dateString.split("-"); // 문자열을 연, 월, 일로 분리
+    var year = parseInt(dateParts[0], 10); // 연도 부분을 정수로 변환
+    var month = parseInt(dateParts[1], 10) - 1; // 월 부분을 정수로 변환(월은 0부터 시작)
+    var day = parseInt(dateParts[2], 10); // 일 부분을 정수로 변환
+    return new Date(year, month, day); // Date 객체 생성
   },
-  // 间隔天数
+  // 간격 일수
   _dateDiffInDays(date1, date2) {
     const timeDiff = date2.getTime() - date1.getTime();
     const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
-    return Math.abs(daysDiff); // 如果需要考虑日期的顺序，请移除 Math.abs
+    return Math.abs(daysDiff); // 날짜 순서를 고려해야 하면 Math.abs 제거
   },
-  // 日期列表
+  // 날짜 목록
   _dateRangeToStringList(startDate, endDate) {
     const dateList = [];
     let currentDate = new Date(startDate);
     while (currentDate <= endDate) {
       dateList.push(formatDate(currentDate));
-      currentDate.setDate(currentDate.getDate() + 1); // 增加一天
+      currentDate.setDate(currentDate.getDate() + 1); // 하루 추가
     }
     return dateList;
   },
@@ -137,7 +137,7 @@ export default content({
       this.$topParent.openRecordListVm({bind: { recordList:  recordList }})
     }
   },
-  // 是否有 detail
+  // detail 존재 여부
   checkDateDetail(date, staticItem) {
     const list = staticItem.detailList || [];
     for (let index = 0; index < list.length; index++) {
@@ -198,18 +198,18 @@ export default content({
     }
     return span;
   },
-  // 格式化用户姓名
+  // 사용자 이름 포맷
   formatName(person) {
     if (person && person.indexOf("@") > -1) {
       return person.split("@")[0];
     }
     return person;
   },
-  // 格式化工作时长
+  // 근무 시간 포맷
   formatWorkTimeDuration(workTime) {
     return convertMinutesToHoursAndMinutes(workTime);
   },
-  // 导出 
+  // 내보내기 
   statisticExport() {
     if (this.validateExportData()) {
       this.exportExcel();

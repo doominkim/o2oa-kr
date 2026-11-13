@@ -69,7 +69,7 @@ class ActionList extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("分类")
+		@FieldDescribe("분류")
 		private List<String> categoryList = new ArrayList<>();
 
 		public List<String> getCategoryList() {
@@ -84,10 +84,10 @@ class ActionList extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("分类")
+		@FieldDescribe("분류")
 		private String category;
 
-		@FieldDescribe("模块")
+		@FieldDescribe("모듈")
 		private List<WrapModule> moduleList;
 
 		public String getCategory() {

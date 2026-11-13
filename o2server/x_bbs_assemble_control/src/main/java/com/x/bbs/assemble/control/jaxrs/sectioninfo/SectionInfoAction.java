@@ -28,18 +28,18 @@ import com.x.bbs.assemble.control.jaxrs.sectioninfo.exception.ExceptionForumIdEm
 import com.x.bbs.assemble.control.jaxrs.sectioninfo.exception.ExceptionSectionIdEmpty;
 
 @Path("section")
-@JaxrsDescribe("版块查询服务")
+@JaxrsDescribe("게시판 조회 서비스")
 public class SectionInfoAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(SectionInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "根据论坛ID获取所有版块的信息列表.", action = ActionViewWithForum.class)
+	@JaxrsMethodDescribe(value = "포럼 ID로 전체 게시판 정보 목록 조회.", action = ActionViewWithForum.class)
 	@GET
 	@Path("viewforum/{forumId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void viewWithForum(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("论坛信息ID") @PathParam("forumId") String forumId) {
+			@JaxrsParameterDescribe("포럼 정보 ID") @PathParam("forumId") String forumId) {
 		ActionResult<List<ActionViewWithForum.Wo>> result = new ActionResult<>();
 		Boolean check = true;
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -55,7 +55,7 @@ public class SectionInfoAction extends StandardJaxrsAction {
 				result = new ActionViewWithForum().execute(request, effectivePerson, forumId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据主版块ID查询所有的子版块信息列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "상위 섹션 ID로 하위 섹션 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -63,14 +63,14 @@ public class SectionInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据主版块ID查询所有的子版块信息列表.", action = ActionListSubSectionByMainSectionId.class)
+	@JaxrsMethodDescribe(value = "상위 게시판 ID로 전체 하위 게시판 정보 목록 조회.", action = ActionListSubSectionByMainSectionId.class)
 	@GET
 	@Path("viewsub/{sectionId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSubSectionByMainSectionId(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主版块信息ID") @PathParam("sectionId") String sectionId) {
+			@JaxrsParameterDescribe("상위 게시판 정보 ID") @PathParam("sectionId") String sectionId) {
 		ActionResult<List<ActionListSubSectionByMainSectionId.Wo>> result = new ActionResult<>();
 		Boolean check = true;
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -86,7 +86,7 @@ public class SectionInfoAction extends StandardJaxrsAction {
 				result = new ActionListSubSectionByMainSectionId().execute(request, effectivePerson, sectionId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据主版块ID查询所有的子版块信息列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "상위 섹션 ID로 하위 섹션 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -94,13 +94,13 @@ public class SectionInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据指定ID获取版块信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 ID로 게시판 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("版块信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("게시판 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -117,7 +117,7 @@ public class SectionInfoAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据指定ID获取版块信息时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "지정한 ID의 섹션 정보를 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -125,7 +125,7 @@ public class SectionInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "从应用市场同步所有的应用名称，存入论坛板块应用市场字段subjectTypeList.", action = ActionSynApplicationsFromMarket.class)
+	@JaxrsMethodDescribe(value = "앱 마켓에서 모든 앱 이름을 동기화하여 포럼 게시판 앱 마켓 필드 subjectTypeList에 저장.", action = ActionSynApplicationsFromMarket.class)
 	@GET
 	@Path("syn")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -137,7 +137,7 @@ public class SectionInfoAction extends StandardJaxrsAction {
 				result = new ActionSynApplicationsFromMarket().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据版块名称获取版块信息时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "섹션 이름으로 섹션 정보를 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

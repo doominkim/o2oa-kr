@@ -49,7 +49,7 @@ class ActionCountWithPerson extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("已办数量")
+		@FieldDescribe("처리 완료 수")
 		private Long count = 0L;
 
 		public Long getCount() {

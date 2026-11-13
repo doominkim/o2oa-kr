@@ -24,7 +24,7 @@ Describe.joinValue = function(o, split) {
 Describe.getUrlParam = function(name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
   var r = window.location.search.substr(1).match(reg);
-  if (r != null) return unescape(r[2]); return null; //返回参数值
+  if (r != null) return unescape(r[2]); return null; //반환 파라미터 값
 }
 
 Describe.prototype = {
@@ -35,7 +35,7 @@ Describe.prototype = {
     $.getJSON(url+'?rd=' + Math.random(), function(json) {
       Describe.json = json;
       $.each(json.tables, function(ji, j) {
-        str += '<li xtype="menu" ' + 'style="margin-top: 30px;font-size:14px;font-weight:bold;"title="' +'" ><a id ="' + j.tableName + '_' + j.moduleName + '" href="#">' + "表:" +j.tableName + ' </a><span style="font-style:italic">(类:' + j.moduleName+ ')</span>';
+        str += '<li xtype="menu" ' + 'style="margin-top: 30px;font-size:14px;font-weight:bold;"title="' +'" ><a id ="' + j.tableName + '_' + j.moduleName + '" href="#">' + "테이블:" +j.tableName + ' </a><span style="font-style:italic">(클래스:' + j.moduleName+ ')</span>';
         str += '</li>'
       });
       str += '</ul>';
@@ -47,12 +47,12 @@ Describe.prototype = {
               $('#result').html('');
               var txt = "";
               txt += '<table style="table-layout:word-wrap:break-word;word-break:break-all;">';
-              txt += '<tr style="height:28px"><td width ="5%"><b>序号</b></td><td width ="20%"><b>列名</b></td><td style="word-wrap:break-word;word-break:break-all;width:20%"><b>类型</b></td><td width ="10%"><b>长度</b></td><td width ="*"><b>用途</b></td></tr>';
+              txt += '<tr style="height:28px"><td width ="5%"><b>번호</b></td><td width ="20%"><b>열 이름</b></td><td style="word-wrap:break-word;word-break:break-all;width:20%"><b>유형</b></td><td width ="10%"><b>길이</b></td><td width ="*"><b>용도</b></td></tr>';
               $.each(m.columnProperty, function(ci, c) {
                 if(c.type == "ContainerTable"){
                   txt += '<tr><td>'+(ci+1)+'</td><td>'+c.name+'</td><td >'+c.type+'</td><td>'+c.length+'</td><td>'+c.remark+ "("+ c.containerTableProperty.name+')</td><td>'
                   txt +='</td></tr>';
-                  txt += '<tr><td></td><td colspan="4"><table style="width: 600px;font-style:italic"><tr><td width ="5%"><b>序号</b></td><td width ="30%"><b>列名</b></td><td width ="20%"><b>类型</b></td><td width ="*"><b>用途</b></td></tr>';
+                  txt += '<tr><td></td><td colspan="4"><table style="width: 600px;font-style:italic"><tr><td width ="5%"><b>번호</b></td><td width ="30%"><b>열 이름</b></td><td width ="20%"><b>유형</b></td><td width ="*"><b>용도</b></td></tr>';
                   $.each(c.containerTableProperty.containerTableColumnProperty, function(cti, ct) {
                     txt += '<tr><td>'+(cti+1)+'</td><td>'+ct.name+'</td><td>'+ct.type+'</td><td>'+ct.remark+'</td></tr>';
                   });

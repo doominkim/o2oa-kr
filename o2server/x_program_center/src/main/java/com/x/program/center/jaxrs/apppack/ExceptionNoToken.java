@@ -11,6 +11,6 @@ public class ExceptionNoToken extends LanguagePromptException {
     private static final long serialVersionUID = -4443630173583290883L;
 
     ExceptionNoToken() {
-        super("没有token，无法请求app打包服务器！");
+        super("token이 없어 app 패키징 서버에 요청할 수 없습니다!");
     }
 }

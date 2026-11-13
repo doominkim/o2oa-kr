@@ -7,6 +7,6 @@ class ExceptionViewQueryByIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionViewQueryByIdEmpty( Throwable e, String id ) {
-		super( "系统根据视图ID获取视图时发生异常。ID：{}", id, e );
+		super( "뷰 ID로 뷰를 가져오는 중 오류가 발생했습니다. ID: {}", id, e );
 	}
 }

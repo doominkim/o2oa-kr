@@ -8,7 +8,7 @@ MWF.xApplication.Selector.PersonWithController = new Class({
         this.className = "PersonWithController";
     },
     loadSelectItems: function(addToNext, lastExcludeCount ){
-        //lastExcludeCount 参数：表示本次加载是为了补足上次load的时候被排除的数量
+        //lastExcludeCount 파라미터: 이번 로드가 지난 load 때 제외된 수량을 보충하기 위한 것임을 의미
         this.page = !this.page ? 1 : this.page + 1;
         if (!this.isItemLoaded){
             if (!this.loaddingItems){
@@ -27,12 +27,12 @@ MWF.xApplication.Selector.PersonWithController = new Class({
                         }.bind(this));
                         this.loaddingItems = false;
 
-                        if( lastExcludeCount ){ //如果是因为上次load的时候被排除而加载的
-                            if( count - lastExcludeCount - excludedCount < 0 ){ //如果本次load的数量还不够补足排除的数量，需要再次load
-                                excludedCount = lastExcludeCount + excludedCount - count; //把不足的数量作为再次load的参数
+                        if( lastExcludeCount ){ //지난 load 때 제외되어 로드하는 경우
+                            if( count - lastExcludeCount - excludedCount < 0 ){ //이번 load 수량이 제외된 수량을 보충하기에 부족하면 다시 load 필요
+                                excludedCount = lastExcludeCount + excludedCount - count; //부족한 수량을 다음 load의 파라미터로 사용
                                 this.loadItemsQueue++;
                             }
-                        }else if( excludedCount > 0  ){ //把排除的数量作为再次load的参数
+                        }else if( excludedCount > 0  ){ //제외된 수량을 다음 load의 파라미터로 사용
                             this.loadItemsQueue++;
                         }
                         if (json.data.length<count){

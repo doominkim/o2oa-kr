@@ -39,7 +39,7 @@ public class MergeFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的merge */
+	/** 양식을 사용하는 merge 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Merge.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

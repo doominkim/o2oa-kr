@@ -43,7 +43,7 @@ MWF.xApplication.process.Work.LP={
 	"openWorkError": "No tienes permiso para ver este documento o ha sido eliminado.",
 	"rollbackConfirmTitle": "Confirmación",
 	"rollbackConfirmContent": "¿Está seguro de que desea volver el flujo de trabajo al estado “{log}”? (El retorno del flujo de trabajo borrará toda la información posterior a este estado)",
-	"rollbackSuccess": "回溯成功",
+	"rollbackSuccess": "되돌리기 성공",
 	"recoverFileConfirmTitle": "Confirmación",
 	"recoverFileConfirmContent": "¿Está seguro de que desea recuperar el archivo a la versión “{att}”? (Después de la recuperación, los archivos temporales guardados serán eliminados y no podrán ser recuperados nuevamente)",
 	"notRecoverFileConfirmTitle": "Confirmación",

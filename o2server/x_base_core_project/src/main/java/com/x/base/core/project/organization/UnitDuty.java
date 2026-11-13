@@ -7,13 +7,13 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class UnitDuty extends GsonPropertyObject {
 
-	@FieldDescribe("个人属性名称")
+	@FieldDescribe("개인 속성 이름")
 	private String name;
 
-	@FieldDescribe("组织")
+	@FieldDescribe("조직")
 	private String unit;
 
-	@FieldDescribe("身份对象")
+	@FieldDescribe("신분 객체")
 	private List<Identity> identityList;
 
 	public String getName() {

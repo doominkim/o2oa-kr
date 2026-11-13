@@ -24,7 +24,7 @@ class ActionManageDeleteSingleWork extends BaseAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActionManageDeleteSingleWork.class);
 
-	/* 为了和后面的全部删除对应,所以返回的是数组 */
+	/* 뒤의 전체 삭제와 대응하기 위해 배열로 반환 */
 	ActionResult<List<Wo>> execute(EffectivePerson effectivePerson, String id) throws Exception {
 
 		LOGGER.debug("execute:{}, id:{}.", effectivePerson::getDistinguishedName, () -> id);
@@ -37,10 +37,10 @@ class ActionManageDeleteSingleWork extends BaseAction {
 			if (null == work) {
 				throw new ExceptionWorkNotExist(id);
 			}
-			/* Process 也可能为空 */
+			/* Process 도 비어 있을 수 있음 */
 			Process process = business.process().pick(work.getProcess());
 			Application application = business.application().pick(work.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (!business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process)) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}

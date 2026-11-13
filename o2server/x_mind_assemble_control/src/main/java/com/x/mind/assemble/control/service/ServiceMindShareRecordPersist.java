@@ -14,14 +14,14 @@ import com.x.mind.entity.MindBaseInfo;
 import com.x.mind.entity.MindShareRecord;
 
 /**
- * 脑图信息持久化操作服务类：保存、更新、删除
+ * 마인드맵 정보 영속화 작업 서비스 클래스: 저장, 수정, 삭제
  * @author O2LEE
  *
  */
 class ServiceMindShareRecordPersist{
 	
 	/**
-	 * 保存文件分享信息
+	 * 파일 공유 정보 저장
 	 * @param emc 
 	 * @param mindBaseInfo 
 	 * @param mindShareRecords
@@ -32,18 +32,18 @@ class ServiceMindShareRecordPersist{
 			Business business = new Business(emc);
 			Boolean exists = false;
 
-			//先确认一下分享信息是否已经存在了，根据fileId, target, targetType
+			//먼저 공유 정보가 이미 있는지 확인. 기준은 fileId, target, targetType
 			for( MindShareRecord ｍindShareRecord :mindShareRecords ) {
 				exists = false;
 				
-				//判断当前这个分享信息是否已经存在
+				//현재 공유 정보가 이미 있는지 판단
 				exists = business.mindShareRecordFactory().exists( ｍindShareRecord );
 				
 				mindBaseInfo = emc.find( mindBaseInfo.getId(), MindBaseInfo.class );
 				if( !exists ) {
 					emc.beginTransaction( MindBaseInfo.class );
 					emc.beginTransaction( MindShareRecord.class );
-					//添加查看权限，并且添加分享信息
+					//조회 권한 추가 및 공유 정보 추가
 					if( mindBaseInfo != null ) {
 						mindBaseInfo.setShared( true );
 						//PERSON | UNIT | GROUP 
@@ -70,9 +70,9 @@ class ServiceMindShareRecordPersist{
 							}
 						}
 						
-						//添加分享信息
+						//공유 정보 추가
 						emc.persist( ｍindShareRecord, CheckPersistType.all );
-						//修改文件的分享标识
+						//파일의 공유 표시 수정
 						emc.check( mindBaseInfo, CheckPersistType.all );						
 					}
 				}
@@ -82,7 +82,7 @@ class ServiceMindShareRecordPersist{
 	}
 
 	/**
-	 * 根据脑图分享信息ID删除脑图分享信息
+	 * 마인드맵 공유 정보 ID로 마인드맵 공유 정보 삭제
 	 * 
 	 * @param shareRecordId
 	 * @throws Exception 
@@ -97,12 +97,12 @@ class ServiceMindShareRecordPersist{
 		if( mindShareRecord == null ) {
 			throw new Exception("mindShareRecord{ \"id\": \""+shareRecordId+"\" } is not exists!")  ;
 		}
-		//先删除一个MindShareRecord
+		//먼저 MindShareRecord 하나 삭제
 		emc.beginTransaction( MindShareRecord.class );
 		emc.remove( mindShareRecord, CheckRemoveType.all );
 		emc.commit();
 		
-		//修改脑图的相关信息
+		//마인드맵 관련 정보 수정
 		MindBaseInfo mindBaseInfo = emc.find( mindShareRecord.getFileId(), MindBaseInfo.class);
 		emc.beginTransaction( MindBaseInfo.class );
 		//PERSON | UNIT | GROUP 
@@ -129,7 +129,7 @@ class ServiceMindShareRecordPersist{
 			}
 		}
 		
-		//看看这个文件是否还有分享记录，如果没有了，就把分享标识改为false
+		//이 파일에 공유 기록이 남아 있는지 확인해 없으면 공유 표시를 false로 변경
 		List<String> shareRecordIds= business.mindShareRecordFactory().listIdsWithMindId( mindShareRecord.getFileId() );
 		if( ListTools.isEmpty( shareRecordIds )) {
 			mindBaseInfo.setShared( false );

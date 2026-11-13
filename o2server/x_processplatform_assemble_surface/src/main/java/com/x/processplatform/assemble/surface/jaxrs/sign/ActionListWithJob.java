@@ -88,9 +88,9 @@ class ActionListWithJob extends BaseAction {
 		static WrapCopier<DocSign, Wo> copier = WrapCopierFactory.wo(DocSign.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("输入框列表.")
+		@FieldDescribe("입력 상자 목록.")
 		private List<String> inputList = new ArrayList<>();
-		@FieldDescribe("涂鸦列表.")
+		@FieldDescribe("손글씨 목록.")
 		private List<String> scrawlList = new ArrayList<>();
 
 		public List<String> getInputList() {

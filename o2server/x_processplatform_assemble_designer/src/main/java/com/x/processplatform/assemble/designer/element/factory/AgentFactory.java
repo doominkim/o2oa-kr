@@ -39,7 +39,7 @@ public class AgentFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的agent */
+	/** 양식을 사용하는 agent 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Agent.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -88,14 +88,14 @@ public class ActionListMobileWithFilter extends BaseAction {
 			if ( StringUtils.isNotEmpty( wrapIn.getEndDate() )) {
 				try {
 					datetime = dateOperation.getDateFromString(wrapIn.getEndDate());
-					wrapIn.setEndDate(dateOperation.getDateStringFromDate(datetime, "YYYY-MM-DD")); // 结束日期
+					wrapIn.setEndDate(dateOperation.getDateStringFromDate(datetime, "YYYY-MM-DD")); // 종료 날짜
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAttendanceDetailProcess(e,
-							"查询结束日期格式异常，格式：yyyy-mm-dd.日期：" + wrapIn.getEndDate());
+							"조회 종료 날짜 형식이 올바르지 않습니다. 형식: yyyy-mm-dd. 날짜:" + wrapIn.getEndDate());
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
-					// 错误的格式 清空 没有endDate 只查询startDate当天数据
+					// 잘못된 형식은 비움, endDate 없으면 startDate 당일 데이터만 조회
 					if ( StringUtils.isNotEmpty( wrapIn.getEndDate() )) {
 						wrapIn.setEndDate(null);
 					}
@@ -105,17 +105,17 @@ public class ActionListMobileWithFilter extends BaseAction {
 			if ( StringUtils.isNotEmpty( wrapIn.getStartDate() )) {
 				try {
 					datetime = dateOperation.getDateFromString(wrapIn.getStartDate());
-					wrapIn.setStartDate(dateOperation.getDateStringFromDate(datetime, "YYYY-MM-DD")); // 开始日期
+					wrapIn.setStartDate(dateOperation.getDateStringFromDate(datetime, "YYYY-MM-DD")); // 시작 날짜
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAttendanceDetailProcess(e,
-							"查询开始日期格式异常，格式：yyyy-mm-dd.日期：" + wrapIn.getStartDate());
+							"조회 시작 날짜 형식이 올바르지 않습니다. 형식: yyyy-mm-dd. 날짜:" + wrapIn.getStartDate());
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}
 			}
 		}
-		// 查询的最大条目数
+		// 조회 최대 항목 수
 		selectTotal = page * count;
 		if (check) {
 			if (selectTotal > 0) {
@@ -126,7 +126,7 @@ public class ActionListMobileWithFilter extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAttendanceDetailProcess(e,
-							"根据条件查询员工手机打卡信息条目数时发生异常." + "EmpNo:" + wrapIn.getEmpNo() + ", EmpName:"
+							"조건으로 직원 모바일 체크 정보 건수를 조회하는 중 오류가 발생했습니다." + "EmpNo:" + wrapIn.getEmpNo() + ", EmpName:"
 									+ wrapIn.getEmpName() + ", SignDescription:" + wrapIn.getSignDescription()
 									+ ", StartDate:" + wrapIn.getStartDate() + ", EndDate:" + wrapIn.getEndDate());
 					result.error(exception);
@@ -143,7 +143,7 @@ public class ActionListMobileWithFilter extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAttendanceDetailProcess(e,
-							"根据条件查询员工手机打卡信息列表时发生异常." + "EmpNo:" + wrapIn.getEmpNo() + ", EmpName:" + wrapIn.getEmpName()
+							"조건으로 직원 모바일 체크 정보 목록을 조회하는 중 오류가 발생했습니다." + "EmpNo:" + wrapIn.getEmpNo() + ", EmpName:" + wrapIn.getEmpName()
 									+ ", SignDescription:" + wrapIn.getSignDescription() + ", StartDate:"
 									+ wrapIn.getStartDate() + ", EndDate:" + wrapIn.getEndDate());
 					result.error(exception);
@@ -157,7 +157,7 @@ public class ActionListMobileWithFilter extends BaseAction {
 					allResultWrap = Wo.copier.copy(attendanceDetailMobileList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工手机打卡信息为输出对象时发生异常.");
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 모바일 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}
@@ -180,19 +180,19 @@ public class ActionListMobileWithFilter extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("员工号，根据员工号查询记录")
+		@FieldDescribe("사번, 사번으로 기록 조회")
 		private String empNo;
 
-		@FieldDescribe("员工姓名，根据员工姓名查询记录.")
+		@FieldDescribe("직원 이름, 직원 이름으로 기록 조회.")
 		private String empName;
 
-		@FieldDescribe("开始日期：yyyy-mm-dd.")
+		@FieldDescribe("시작 날짜: yyyy-mm-dd.")
 		private String startDate;
 
-		@FieldDescribe("结束日期：yyyy-mm-dd,如果开始日期填写，结束日期不填写就是只查询开始日期那一天")
+		@FieldDescribe("종료 날짜: yyyy-mm-dd, 시작 날짜만 입력하고 종료 날짜를 비우면 시작 날짜 하루만 조회")
 		private String endDate;
 
-		@FieldDescribe("打卡说明:上班打卡，下班打卡.")
+		@FieldDescribe("출퇴근 기록 설명: 출근 기록, 퇴근 기록.")
 		private String signDescription;
 
 		public String getEmpNo() {

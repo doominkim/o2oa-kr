@@ -95,7 +95,7 @@ public class TaskIdentities extends ArrayList<TaskIdentity> {
     }
 
     /**
-     * 经过授权判断后可能存在重复的人,比如b授权c 选择处理人a,b,c,d 那么如果不去重会导致b,c都没过滤掉
+     * 위임 판단 후 중복된 사용자가 있을 수 있음, 예: b가 c에게 위임하고 처리자로 a, b, c, d를 선택하면 중복 제거하지 않을 경우 b, c가 모두 걸러지지 않음
      * 
      * @return
      */

@@ -36,7 +36,7 @@ import com.x.program.center.Business;
 public class CreateActivityUnique extends AbstractJob {
 
 	/**
-	 * 升级更新,补充activity的unique值
+	 * 업그레이드 업데이트, activity의 unique 값 보충
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(CreateActivityUnique.class);
 
@@ -69,7 +69,7 @@ public class CreateActivityUnique extends AbstractJob {
 				t.setUnique(JpaObject.createId());
 			}
 			emc.commit();
-			LOGGER.info("更新活动 {} 的unique值, 数量:{}", clazz.getName(), os.size());
+			LOGGER.info("활동 {} 의 unique 값 갱신, 수량:{}", clazz.getName(), os.size());
 		}
 	}
 }

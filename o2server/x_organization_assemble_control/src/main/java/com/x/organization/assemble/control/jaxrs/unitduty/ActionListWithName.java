@@ -52,10 +52,10 @@ class ActionListWithName extends BaseAction {
 
 		private static final long serialVersionUID = -127291000673692614L;
 
-		@FieldDescribe("组织对象")
+		@FieldDescribe("조직 객체")
 		private WoUnit woUnit;
 
-		@FieldDescribe("身份对象")
+		@FieldDescribe("신분 객체")
 		private List<WoIdentity> woIdentityList = new ArrayList<>();
 
 		static WrapCopier<UnitDuty, Wo> copier = WrapCopierFactory.wo(UnitDuty.class, Wo.class, null,

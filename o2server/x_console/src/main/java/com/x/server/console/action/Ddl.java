@@ -22,7 +22,7 @@ public class Ddl {
 
 	private static Logger logger = LoggerFactory.getLogger(Ddl.class);
 
-	/* 初始化完成 */
+	/* 초기화 완료 */
 	@SuppressWarnings("unchecked")
 	public boolean execute(String type) throws Exception {
 

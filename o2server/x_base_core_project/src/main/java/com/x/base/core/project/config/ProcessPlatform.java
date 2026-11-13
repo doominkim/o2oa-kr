@@ -124,76 +124,76 @@ public class ProcessPlatform extends ConfigObject {
 		return StringUtils.isEmpty(docToWordDefaultSite) ? DEFAULT_DOCTOWORDDEFAULTSITE : docToWordDefaultSite;
 	}
 
-	@FieldDescribe("维护身份,当工作发生意外错误,无法找到对应的处理人情况下,先尝试将工作分配给创建身份,如果创建身份也不可获取,那么分配给指定人员,默认情况下这个值为空.")
+	@FieldDescribe("유지보수 신분, 업무 문서에 예기치 않은 오류가 발생해 처리자를 찾을 수 없는 경우 먼저 생성 신분에 업무 문서를 할당하고, 생성 신분도 조회할 수 없으면 지정 사용자에게 할당, 기본값은 비어 있음.")
 	private String maintenanceIdentity;
 
-	@FieldDescribe("表单历史版本保留数量,0为不保留.")
+	@FieldDescribe("양식 이력 버전 보관 개수, 0은 보관 안 함.")
 	private Integer formVersionCount;
 
-	@FieldDescribe("流程历史版本保留数量,0为不保留.")
+	@FieldDescribe("프로세스 이력 버전 보관 개수, 0은 보관 안 함.")
 	private Integer processVersionCount;
 
-	@FieldDescribe("脚本历史版本保留数量,0为不保留.")
+	@FieldDescribe("스크립트 이력 버전 보관 개수, 0은 보관 안 함.")
 	private Integer scriptVersionCount;
 
-	@FieldDescribe("HTML版式公文转换成Word文件方式,local,cloud.")
+	@FieldDescribe("HTML 서식 공문을 Word 파일로 변환하는 방식, local, cloud.")
 	private String docToWordType;
 
-	@FieldDescribe("HTML版式公文转换成Word文件缺省文件名.")
+	@FieldDescribe("HTML 서식 공문을 Word 파일로 변환 시 기본 파일명.")
 	private String docToWordDefaultFileName;
 
-	@FieldDescribe("HTML版式公文转换成Word文件缺省site.")
+	@FieldDescribe("HTML 서식 공문을 Word 파일로 변환 시 기본 site.")
 	private String docToWordDefaultSite;
 
-	@FieldDescribe("执行器数量")
+	@FieldDescribe("실행기 개수")
 	private Integer executorCount;
 
-	@FieldDescribe("执行器队列繁忙阈值")
+	@FieldDescribe("실행기 대기열 혼잡 임계값")
 	private Integer executorQueueBusyThreshold;
 
-	@FieldDescribe("催办任务设置,发现即将过期时发送提醒消息.")
+	@FieldDescribe("독촉 작업 설정, 만료 임박 발견 시 알림 메시지 발송.")
 	private Urge urge;
 
-	@FieldDescribe("将已经过了截至时间的待办标记过期.")
+	@FieldDescribe("마감 시간이 지난 결재 대기를 만료로 표시.")
 	private Expire expire;
 
-	@FieldDescribe("延时任务设置,定时触发延时任务,当超过延时时间后继续流转.")
+	@FieldDescribe("지연 작업 설정, 지연 작업을 정기적으로 실행해 지연 시간이 지나면 계속 진행.")
 	private TouchDelay touchDelay;
 
-	@FieldDescribe("合并任务设置,定时触发合并任务,将已完成工作的Data从Item表中提取合并到WorkCompleted的Data字段中,默认工作完成后2年开始进行合并.")
+	@FieldDescribe("병합 작업 설정, 병합 작업을 정기적으로 실행해 완료된 업무 문서의 Data를 Item 테이블에서 추출하여 WorkCompleted의 Data 필드로 병합, 기본값은 업무 문서 완료 2년 후 병합 시작.")
 	private Merge merge;
 
-	@FieldDescribe("将已完成工作的Data从Item表中提取合并到WorkCompleted的Data字段中.")
+	@FieldDescribe("완료된 업무 문서의 Data를 Item 테이블에서 추출하여 WorkCompleted의 Data 필드로 병합.")
 	private MergeItem mergeItem;
 
-	@FieldDescribe("清除草稿状态的工作.")
+	@FieldDescribe("초안 상태의 업무 문서 삭제.")
 	private DeleteDraft deleteDraft;
 
-	@FieldDescribe("超时工作路由设置.")
+	@FieldDescribe("시간 초과 업무 문서 라우팅 설정.")
 	private PassExpired passExpired;
 
-	@FieldDescribe("触发长时间未处理的工作.")
+	@FieldDescribe("장시간 미처리 업무 문서 트리거.")
 	private TouchDetained touchDetained;
 
-	@FieldDescribe("记录长期滞留工作,待办,待阅设置.")
+	@FieldDescribe("장기 체류 업무 문서, 결재 대기, 열람 대기 기록 설정.")
 	private LogLongDetained logLongDetained;
 
-	@FieldDescribe("提醒设置,设置提醒间隔.")
+	@FieldDescribe("알림 설정, 알림 간격 설정.")
 	private Press press;
 
-	@FieldDescribe("同步到自建表设置.")
+	@FieldDescribe("사용자 정의 테이블 동기화 설정.")
 	private UpdateTable updateTable;
 
-	@FieldDescribe("权限交接定时配置.")
+	@FieldDescribe("권한 인계 정기 실행 설정.")
 	private HandoverConfig handoverConfig;
 
-	@FieldDescribe("事件扩充.")
+	@FieldDescribe("이벤트 확장.")
 	private ExtensionEvents extensionEvents;
 
-	@FieldDescribe("是否保存工作处理信号内容,默认false.")
+	@FieldDescribe("업무 문서 처리 신호 내용 저장 여부, 기본값 false.")
 	private Boolean processingSignalPersistEnable;
 
-	@FieldDescribe("异步超时.")
+	@FieldDescribe("비동기 시간 초과.")
 	private Integer asynchronousTimeout;
 
 	public Integer getAsynchronousTimeout() {
@@ -203,7 +203,7 @@ public class ProcessPlatform extends ConfigObject {
 		return asynchronousTimeout;
 	}
 
-	@FieldDescribe("流转超时")
+	@FieldDescribe("진행 시간 초과")
 	private Integer processingTimeout;
 
 	public Integer getProcessingTimeout() {
@@ -297,10 +297,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "30 0/10 8-18 * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式.")
+		@FieldDescribe("정기 실행 cron 표현식.")
 		private String cron = DEFAULT_CRON;
 
 		public String getCron() {
@@ -329,10 +329,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "45 0/15 8-18 * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
 		public String getCron() {
@@ -361,10 +361,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "5 0/5 * * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
 		public String getCron() {
@@ -405,16 +405,16 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final Integer DEFAULT_BATCHSIZE = 100;
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
-		@FieldDescribe("期限,已完成工作结束间隔指定时间进行merge,默认两年后进行merge")
+		@FieldDescribe("기한, 완료된 업무 문서 종료 후 지정 시간 간격으로 merge 수행, 기본값은 2년 후 merge")
 		private Integer thresholdDays = DEFAULT_THRESHOLDDAYS;
 
-		@FieldDescribe("批量大小.")
+		@FieldDescribe("배치 크기.")
 		private Integer batchSize = DEFAULT_BATCHSIZE;
 
 		public Integer getBatchSize() {
@@ -456,10 +456,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "30 */10 * * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
 		public String getCron() {
@@ -490,13 +490,13 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final Integer DEFAULT_THRESHOLDMINUTES = 60 * 24;
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
-		@FieldDescribe("当工作滞留设定时间后,将尝试触发工作流转,可以自动处理由于人员变动的引起的工作滞留,默认24*60分钟.")
+		@FieldDescribe("업무 문서가 설정 시간 이상 체류하면 업무 문서 진행을 시도, 사용자 변동으로 인한 업무 문서 체류를 자동 처리 가능, 기본값 24*60분.")
 		private Integer thresholdMinutes = DEFAULT_THRESHOLDMINUTES;
 
 		public Integer getThresholdMinutes() {
@@ -531,13 +531,13 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final Integer DEFAULT_THRESHOLDMINUTES = 60 * 24 * 10;
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
-		@FieldDescribe("设定阈值,如果超过这个时间认为是可以删除的草稿,默认为10天.")
+		@FieldDescribe("임계값 설정, 이 시간을 초과하면 삭제 가능한 초안으로 간주, 기본값 10일.")
 		private Integer thresholdMinutes = DEFAULT_THRESHOLDMINUTES;
 
 		public Integer getThresholdMinutes() {
@@ -570,10 +570,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final Boolean DEFAULT_ENABLE = true;
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
 		public Boolean getEnable() {
@@ -607,19 +607,19 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final Integer DEFAULT_WORKTHRESHOLDMINUTES = 60 * 24 * 10;
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
-		@FieldDescribe("设定待办滞留阈值,.")
+		@FieldDescribe("결재 대기 체류 임계값 설정,.")
 		private Integer taskThresholdMinutes = DEFAULT_TASKTHRESHOLDMINUTES;
 
-		@FieldDescribe("设定待阅滞留阈值,.")
+		@FieldDescribe("열람 대기 체류 임계값 설정,.")
 		private Integer readThresholdMinutes = DEFAULT_READTHRESHOLDMINUTES;
 
-		@FieldDescribe("设定工作滞留阈值,.")
+		@FieldDescribe("업무 문서 체류 임계값 설정,.")
 		private Integer workThresholdMinutes = DEFAULT_WORKTHRESHOLDMINUTES;
 
 		public Integer getTaskThresholdMinutes() {
@@ -663,10 +663,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final Integer DEFAULT_COUNT = 3;
 
-		@FieldDescribe("提醒间隔(分钟)")
+		@FieldDescribe("알림 간격(분)")
 		private Integer intervalMinutes = DEFAULT_INTERVALMINUTES;
 
-		@FieldDescribe("提醒数量限制.")
+		@FieldDescribe("알림 개수 제한.")
 		private Integer count = DEFAULT_COUNT;
 
 		public Integer getIntervalMinutes() {
@@ -681,21 +681,21 @@ public class ProcessPlatform extends ConfigObject {
 
 	public static class ExtensionEvents {
 
-		@FieldDescribe("工作附件上传.")
+		@FieldDescribe("업무 문서 첨부파일 업로드.")
 		private WorkExtensionEvents workAttachmentUploadEvents = new WorkExtensionEvents();
-		@FieldDescribe("工作附件下载.")
+		@FieldDescribe("업무 문서 첨부파일 다운로드.")
 		private WorkExtensionEvents workAttachmentDownloadEvents = new WorkExtensionEvents();
-		@FieldDescribe("工作版式文件转word.")
+		@FieldDescribe("업무 문서 서식 파일을 word로 변환.")
 		private WorkExtensionEvents workDocToWordEvents = new WorkExtensionEvents();
-		@FieldDescribe("工作版式文件转OFD.")
+		@FieldDescribe("업무 문서 서식 파일을 OFD로 변환.")
 		private WorkExtensionEvents workDocToOfdEvents = new WorkExtensionEvents();
-		@FieldDescribe("已完成工作附件上传.")
+		@FieldDescribe("완료된 업무 문서 첨부파일 업로드.")
 		private WorkCompletedExtensionEvents workCompletedAttachmentUploadEvents = new WorkCompletedExtensionEvents();
-		@FieldDescribe("已完成工作附件下载.")
+		@FieldDescribe("완료된 업무 문서 첨부파일 다운로드.")
 		private WorkCompletedExtensionEvents workCompletedAttachmentDownloadEvents = new WorkCompletedExtensionEvents();
-		@FieldDescribe("已完成工作版式文件转word.")
+		@FieldDescribe("완료된 업무 문서 서식 파일을 word로 변환.")
 		private WorkCompletedExtensionEvents workCompletedDocToWordEvents = new WorkCompletedExtensionEvents();
-		@FieldDescribe("已完成工作版式文件转OFD.")
+		@FieldDescribe("완료된 업무 문서 서식 파일을 OFD로 변환.")
 		private WorkCompletedExtensionEvents workCompletedDocToOfdEvents = new WorkCompletedExtensionEvents();
 
 		public WorkExtensionEvents getWorkAttachmentUploadEvents() {
@@ -833,7 +833,7 @@ public class ProcessPlatform extends ConfigObject {
 
 	/**
 	 *
-	 * 查找优先级 流程-> 应用 -> 默认设置(流程和应用为空)
+	 * 조회 우선순위 프로세스-> 앱 -> 기본 설정(프로세스와 앱이 비어 있음)
 	 *
 	 */
 	public static class WorkCompletedExtensionEvents extends ArrayList<WorkCompletedExtensionEvent> {
@@ -905,10 +905,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "20 20 * * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式.")
+		@FieldDescribe("정기 실행 cron 표현식.")
 		private String cron = DEFAULT_CRON;
 
 		public String getCron() {
@@ -937,10 +937,10 @@ public class ProcessPlatform extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "0 0/5 * * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式.")
+		@FieldDescribe("정기 실행 cron 표현식.")
 		private String cron = DEFAULT_CRON;
 
 		public String getCron() {

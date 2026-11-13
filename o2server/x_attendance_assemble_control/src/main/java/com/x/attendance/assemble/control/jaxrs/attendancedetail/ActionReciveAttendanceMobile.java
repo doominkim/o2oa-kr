@@ -44,9 +44,9 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 		String signDate = null;
 		String signTime = null;
 		
-		// 检查配置 是否禁用旧版考勤
+		// 설정 확인: 구버전 근태 비활성화 여부
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			AttendanceV2Config config = null; // 配置对象
+			AttendanceV2Config config = null; // 설정 객체
 			List<AttendanceV2Config> configs = emc.listAll(AttendanceV2Config.class);
 			if (configs != null && !configs.isEmpty()) {
 					config = configs.get(0);
@@ -58,7 +58,7 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 
 		try {
 			wrapIn = this.convertToWrapIn( jsonElement, Wi.class );
-			//1000000000000L = Sun Sep 09 2001 09:46:40 GMT+0800 (中国标准时间)
+			//1000000000000L = Sun Sep 09 2001 09:46:40 GMT+0800 (중국 표준시)
 			if( wrapIn.getCheckin_time() > 1000000000000L  ){
 				now = new Date( wrapIn.getCheckin_time() );
 			}else{
@@ -76,8 +76,8 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 				signDate = dateOperation.getDateStringFromDate( now, "YYYY-MM-DD");
 				signTime = dateOperation.getDateStringFromDate( now, "HH:mm:ss");
 
-				attendanceDetailMobile.setRecordDateString( signDate ); //打卡日期
-				attendanceDetailMobile.setSignTime( signTime ); //打卡时间
+				attendanceDetailMobile.setRecordDateString( signDate ); //체크 날짜
+				attendanceDetailMobile.setSignTime( signTime ); //체크 시간
 				attendanceDetailMobile.setCheckin_time( now.getTime() );
 				attendanceDetailMobile.setRecordDate( now );
 			} catch (Exception e) {
@@ -112,7 +112,7 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 			}
 		}
 		if( check ){
-			//是否在范围外打卡，默认否
+			//범위 밖 기록 여부, 기본값 아니요
 			if( wrapIn.getIsExternal() ){
 				attendanceDetailMobile.setIsExternal(true);
 			}else{
@@ -139,23 +139,23 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 					}
 				}
 			}else{
-				//人员不存在
+				//사용자가 존재하지 않습니다
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(
-						"考勤人员不存在.DistinguishedName:" + distinguishedName );
+						"근태 대상자가 없습니다. DistinguishedName:" + distinguishedName );
 				result.error(exception);
 			}
 		}
 
-		//计算当前打卡的checking_type
-		//先查询该员工所有的考勤数据
+		//현재 기록의 checking_type 계산
+		//먼저 해당 직원의 모든 근태 데이터 조회
 		if (check) {
 			try {
 				attendanceDetailMobileList = attendanceDetailServiceAdv.listAttendanceDetailMobile( attendanceDetailMobile.getEmpName(), signDate );
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(e,
-						"根据条件查询员工手机打卡信息列表时发生异常.DistinguishedName:" + attendanceDetailMobile.getEmpName() + ",Date:" + signDate);
+						"조건으로 직원 모바일 체크 정보 목록을 조회하는 중 오류가 발생했습니다. DistinguishedName:" + attendanceDetailMobile.getEmpName() + ",Date:" + signDate);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -167,29 +167,29 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 					wraps = WoMobileRecord.copier.copy(attendanceDetailMobileList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工手机打卡信息为输出对象时发生异常.");
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 모바일 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}
 			}
 		}
-		//根据最后一次打卡信息，计算下一次打卡的信息
+		//마지막 출퇴근 기록 정보로 다음 기록 정보 계산
 		WoSignFeature woSignFeature = null;
 		if (check
 				&& !StringUtils.equalsAnyIgnoreCase("xadmin", effectivePerson.getName())
 				&& !StringUtils.equalsAnyIgnoreCase("cipher", effectivePerson.getName())) {
 			AttendanceScheduleSetting scheduleSetting = null;
-			//打卡策略：1-两次打卡（上午上班，下午下班） 2-三次打卡（上午上班，下午下班加中午一次共三次） 3-四次打卡（上午下午都打上班下班卡）
+			//기록 정책: 1-2회 기록(오전 출근, 오후 퇴근) 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회) 3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 			scheduleSetting = attendanceScheduleSettingServiceAdv.getAttendanceScheduleSettingWithPerson( attendanceDetailMobile.getEmpName(), effectivePerson.getDebugger() );
 			if( scheduleSetting != null ){
 				if( scheduleSetting.getSignProxy() == 3 ){
-					//3-四次打卡（上午下午都打上班下班卡）
+					//3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 					woSignFeature = getWoSignFeatureWithProxy3(wraps, scheduleSetting);
 				}else if( scheduleSetting.getSignProxy() == 2 ){
-					//2-三次打卡（上午上班，下午下班加中午一次共三次）
+					//2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회)
 					woSignFeature = getWoSignFeatureWithProxy2(wraps, scheduleSetting);
 				}else{
-					//1-两次打卡（上午上班，下午下班）
+					//1-2회 기록(오전 출근, 오후 퇴근)
 					woSignFeature = getWoSignFeatureWithProxy1(wraps, scheduleSetting);
 				}
 			}
@@ -215,14 +215,14 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 				result.setData( new Wo( attendanceDetailMobile.getId() ) );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统在保存员工手机打卡信息时发生异常." );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "직원 모바일 체크 정보 저장 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, currentPerson, request, null);
 			}
 		}
 
 		if( check ){
-			//对该员工的所有移动考勤数据进行一个整合，并且立即send到分析队列
+			//해당 직원의 모든 모바일 근태 데이터를 통합해 즉시 분석 대기열로 send
 			attendanceDetailServiceAdv.pushToDetail( attendanceDetailMobile.getEmpName(), attendanceDetailMobile.getRecordDateString(), effectivePerson.getDebugger() );
 		}
 		return result;
@@ -230,40 +230,40 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 	
 	public static class Wi {
 		
-		@FieldDescribe( "Id, 可以为空，如果ID重复，则为更新原有数据." )
+		@FieldDescribe( "Id, 비어 있어도 됨, ID가 중복이면 기존 데이터 수정." )
 		private String id;
 		
-//		@FieldDescribe( "员工号, 可以为空，如果为空则与empName相同." )
+//		@FieldDescribe( "사번, 비어 있어도 됨, 비어 있으면 empName과 동일." )
 		private String empNo;
 
-		@FieldDescribe( "员工标识, 可以为空但不能错误：DistinguishedName，如果为空则取当前登录人员." )
+		@FieldDescribe( "직원 식별자, 비어 있어도 되지만 틀리면 안 됨: DistinguishedName, 비어 있으면 현재 로그인 사용자 사용." )
 		private String empName;
 
-//		@FieldDescribe( "打卡记录日期字符串：yyyy-mm-dd, 必须填写." )
+//		@FieldDescribe( "출퇴근 기록 날짜 문자열: yyyy-mm-dd, 필수 입력." )
 		private String recordDateString;
 
-		@FieldDescribe("打卡类型。字符串，目前有：上午上班打卡，上午下班打卡，下午上班打卡，下午下班打卡，外出打卡，午间打卡")
+		@FieldDescribe("기록 유형. 문자열, 현재: 오전 출근 기록, 오전 퇴근 기록, 오후 출근 기록, 오후 퇴근 기록, 외출 기록, 정오 기록")
 		private String checkin_type;
 
-		@FieldDescribe("打卡时间，可以为空，为空则取服务器当前时间。Unix时间戳")
+		@FieldDescribe("기록 시간, 비어 있어도 됨, 비어 있으면 서버 현재 시간 사용. Unix 타임스탬프")
 		private long checkin_time;
 
-//		@FieldDescribe( "打卡时间: hh24:mi:ss, 必须填写." )
+//		@FieldDescribe( "기록 시간: hh24:mi:ss, 필수 입력." )
 		private String signTime;
 
-//		@FieldDescribe( "打卡说明:上班打卡，下班打卡, 可以为空." )
+//		@FieldDescribe( "출퇴근 기록 설명: 출근 기록, 퇴근 기록, 비어 있어도 됨." )
 		private String signDescription;
 
 		@FieldDescribe( "其他说明备注, 可以为空." )
 		private String description;
 
-		@FieldDescribe( "打卡地点描述, 可以为空." )
+		@FieldDescribe( "기록 장소 설명, 비어 있어도 됨." )
 		private String recordAddress = "未知";
 		
-		@FieldDescribe( "经度, 可以为空." )
+		@FieldDescribe( "경도, 비어 있어도 됨." )
 		private String longitude;
 
-		@FieldDescribe( "纬度, 可以为空." )
+		@FieldDescribe( "위도, 비어 있어도 됨." )
 		private String latitude;
 
 		@FieldDescribe( "操作设备类别：手机品牌|PAD|PC|其他, 可以为空." )
@@ -272,10 +272,10 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 		@FieldDescribe( "操作设备类别：Mac|Windows|IOS|Android|其他, 可以为空." )
 		private String optSystemName = "其他";
 
-		@FieldDescribe( "工作地点描述, 可以为空." )
+		@FieldDescribe( "근무지 설명, 비어 있어도 됨." )
 		private String workAddress = "";
 
-		@FieldDescribe("是否范围外打卡")
+		@FieldDescribe("범위 밖 기록 여부")
 		private Boolean isExternal = false;
 
 		public String getRecordDateString() {

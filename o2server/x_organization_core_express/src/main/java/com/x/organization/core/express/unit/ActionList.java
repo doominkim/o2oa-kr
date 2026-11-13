@@ -21,10 +21,10 @@ class ActionList extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList = new ArrayList<>();
 
-		@FieldDescribe("是否需要根据名称查找，默认false")
+		@FieldDescribe("이름으로 조회할지 여부, 기본값 false")
 		private Boolean useNameFind = false;
 
 		public List<String> getUnitList() {

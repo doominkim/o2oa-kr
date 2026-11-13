@@ -12,14 +12,14 @@ MWF.xApplication.Attendance.MyIndex = new Class({
         "style": "default"
     },
     statusColor : {
-        "normal" : "#4A90E2", //蓝色，正常
-        "levelAsked":"#2BC497", //绿色，请假
-        "late":"#F5A623", //黄色，迟到
-        //"leaveEarly":"#fe8d03", //橙色，早退
-        "noSign":"#FF8080", //粉红色,未签到
-        "appealSuccess" : "#4FB2E3", //黄绿色，申诉通过
-        //"lackOfTime" : "#dec674",//工时不足人次
-        "abNormalDuty" : "#8B572A"//异常打卡人次
+        "normal" : "#4A90E2", //파란색, 정상
+        "levelAsked":"#2BC497", //초록색, 휴가
+        "late":"#F5A623", //노란색, 지각
+        //"leaveEarly":"#fe8d03", //주황색, 조퇴
+        "noSign":"#FF8080", //분홍색, 미체크
+        "appealSuccess" : "#4FB2E3", //연두색, 이의 신청 승인
+        //"lackOfTime" : "#dec674",//근무 시간 부족 인원수
+        "abNormalDuty" : "#8B572A"//비정상 체크 인원 횟수
     },
     initialize: function(node, app, actions, options){
         this.setOptions(options);
@@ -43,7 +43,7 @@ MWF.xApplication.Attendance.MyIndex = new Class({
 
         this.todayDate = this.today.format( this.lp.dateFormatDay );
         this.todayHloidayName = "";
-        this.todayIsWorkDay = false; //是否调修工作日
+        this.todayIsWorkDay = false; //근무일 조정 여부
 
         this.userName = layout.desktop.session.user.distinguishedName;
     },
@@ -583,7 +583,7 @@ MWF.xApplication.Attendance.MyIndex = new Class({
         //this.reloadContent();
     },
     listHolidayFilter : function( callback, name,year,month ){
-        /*{'q_Year':'2016','q_Name':'五一劳动节','q_Month':'03'}*/
+        /*{'q_Year':'2016','q_Name':'근로자의 날','q_Month':'03'}*/
         var filter = {};
         if( name )filter.q_Name = name;
         if( year )filter.q_Year = year;
@@ -817,7 +817,7 @@ MWF.xApplication.Attendance.MyIndex = new Class({
         }.bind(this))
     },
     listDetailFilterUser :function( callback, name, year, month ){
-        //{'q_empName':'林玲','q_year':'2016','q_month':'03'}
+        //{'q_empName':'임영희','q_year':'2016','q_month':'03'}
         var filter = {};
         if( name )filter.q_empName = name;
         if( year )filter.cycleYear = year;
@@ -919,7 +919,7 @@ MWF.xApplication.Attendance.MyIndex = new Class({
                 totals.noSign = totals.noSign + 0.5
             }else if( this.isLate(d,"am")) {
                 events.push({
-                    text: this.lp.late + '，' + this.lp.signTime + '：' + d.onDutyTime, //+ "迟到时长" + d.lateTimeDuration,
+                    text: this.lp.late + '，' + this.lp.signTime + '：' + d.onDutyTime, //+ "지각 시간" + d.lateTimeDuration,
                     start: d.recordDateString,
                     backgroundColor: this.statusColor.late
                 });
@@ -947,7 +947,7 @@ MWF.xApplication.Attendance.MyIndex = new Class({
                 totals.appealSuccess = totals.appealSuccess + 0.5;
             //}else if( this.isLeaveEarlier(d,"pm")) {
             //    events.push({
-            //        text: '早退，打卡时间：' + d.offDutyTime, // + "早退时长" + d.leaveEarlierTimeDuration,
+            //        text: '조퇴, 체크 시간: ' + d.offDutyTime, // + "조퇴 시간" + d.leaveEarlierTimeDuration,
             //        start: d.recordDateString,
             //        backgroundColor: this.statusColor.leaveEarly
             //    })
@@ -997,19 +997,19 @@ MWF.xApplication.Attendance.MyIndex = new Class({
     },
     isAskForLevel : function( d , ap ){
         if( ap == "am" ){
-            //d.selfHolidayDayTime == "全天" || d.selfHolidayDayTime == "上午"
+            //d.selfHolidayDayTime == "종일" || d.selfHolidayDayTime == "오전"
             return  d.isGetSelfHolidays && ( ["全天","上午",this.app.lp.wholeDay, this.app.lp.am ].contains(d.selfHolidayDayTime) )
         }else{
-            // return  d.isGetSelfHolidays && ( d.selfHolidayDayTime == "全天" || d.selfHolidayDayTime == "下午" )
+            // return  d.isGetSelfHolidays && ( d.selfHolidayDayTime == "종일" || d.selfHolidayDayTime == "오후" )
             return  d.isGetSelfHolidays && ( ["全天","下午",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.selfHolidayDayTime ) )
         }
     },
     isAbsent : function(d , ap ){
         if( ap == "am" ){
-            // return  d.isAbsent && ( d.absentDayTime == "全天" || d.absentDayTime == "上午" )
+            // return  d.isAbsent && ( d.absentDayTime == "종일" || d.absentDayTime == "오전" )
             return  d.isAbsent && ["全天","上午",this.app.lp.wholeDay, this.app.lp.am ].contains(d.absentDayTime);
         }else{
-            // return  d.isAbsent && ( d.absentDayTime == "全天" || d.absentDayTime == "下午" )
+            // return  d.isAbsent && ( d.absentDayTime == "종일" || d.absentDayTime == "오후" )
             return  d.isAbsent && ["全天","下午",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.absentDayTime);
         }
     },
@@ -1027,7 +1027,7 @@ MWF.xApplication.Attendance.MyIndex = new Class({
     },
     isAbnormalDuty : function(d , ap ){
         if( ap == "am" ){
-            // return  d.isAbnormalDuty && ( d.abnormalDutyDayTime == "全天" || d.abnormalDutyDayTime == "上午" )
+            // return  d.isAbnormalDuty && ( d.abnormalDutyDayTime == "종일" || d.abnormalDutyDayTime == "오전" )
             return  d.isAbnormalDuty && ["全天","上午",this.app.lp.wholeDay, this.app.lp.am ].contains(d.abnormalDutyDayTime)
         }else{
             return  d.isAbnormalDuty && ["全天","下午",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.abnormalDutyDayTime);

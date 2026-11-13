@@ -27,48 +27,48 @@ public class AttendanceStatisticServiceAdv {
 //	private AttendanceStatisticalCycleService attendanceStatisticalCycleService = new AttendanceStatisticalCycleService();
 
 	/**
-	 * 根据统计年份月份列表来对每个月的数据进行统计
+	 * 통계 연월 목록에 따라 월별 데이터 통계
 	 */
 	public void doStatistic( Boolean debugger ) {
-		logger.debug( debugger, ">>>>>>>>>>>系统正准备开始进行数据统计......" );
+		logger.debug( debugger, ">>>>>>>>>>>시스템 데이터 통계 시작 준비 중......" );
 //		AttendanceStatisticalCycle attendanceStatisticalCycle  = null;
 //		List<AttendanceWorkDayConfig> workDayConfigList = null;
 		List<AttendanceStatisticRequireLog> attendanceStatisticRequireLogList = null;
 //		Map<String, Map<String, List<AttendanceStatisticalCycle>>> statisticalCycleMap = null;
 		
-//		try {//先查询所有的法定节假日和工作日配置列表
+//		try {//먼저 모든 법정 공휴일 및 근무일 설정 목록 조회
 //			workDayConfigList = attendanceWorkDayConfigService.getAllWorkDayConfigWithCache(debugger);
 //		} catch ( Exception e ) {
-//			logger.warn("【统计】系统在查询当月有打卡记录的员工姓名列表时发生异常！" );
+//			logger.warn("[통계] 시스템이 당월 출퇴근 기록이 있는 직원 이름 목록을 조회하는 중 예외가 발생했습니다!" );
 //			logger.error(e);
 //		}
 //
-//		try{//查询所有的考勤统计周期信息，并且组织成MAP
+//		try{//모든 근태 통계 주기 정보를 조회하여 MAP으로 구성
 //			statisticalCycleMap = attendanceStatisticalCycleService.getAllStatisticalCycleMapWithCache(debugger);
 //		}catch(Exception e){
-//			logger.warn( "【统计】系统在查询并且组织所有的考勤统计周期信息时发生异常。" );
+//			logger.warn( "[통계] 시스템이 모든 근태 통계 주기 정보를 조회 및 구성하는 중 예외가 발생했습니다." );
 //			logger.error(e);
 //		}
 		
-		//先处理所有的统计错误
+		//먼저 모든 통계 오류 처리
 		try {
-			logger.debug( debugger, ">>>>>>>>>>>准备处理恢复的统计错误信息, 所有错误统计将会重新计算......" );
+			logger.debug( debugger, ">>>>>>>>>>>복구된 통계 오류 정보 처리 준비, 모든 오류 통계를 다시 계산합니다......" );
 			attendanceStatisticRequireLogService.resetStatisticError();
 		} catch (Exception e) {
-			logger.warn("【统计】系统在重置统计错误信息时发生异常！" );
+			logger.warn("[통계] 통계 오류 정보 재설정 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		
 		
-		//统计类型:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
-		//统计处理状态：WAITING|PROCESSING|COMPLETE|ERROR
-		//1  员工每月统计
-		//  1.1  先查询需要员工月度统计的统计需求有多少  AttendanceStatisticRequireLog
-		logger.debug( debugger, ">>>>>>>>>>>系统准备统计[员工每月统计]......" );
+		//통계 유형:PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
+		//통계 처리 상태: WAITING|PROCESSING|COMPLETE|ERROR
+		//1  직원 월별 통계
+		//  1.1  직원 월별 통계가 필요한 통계 요청 수를 먼저 조회  AttendanceStatisticRequireLog
+		logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [직원 월별 통계]......" );
 		try {
 			attendanceStatisticRequireLogList = attendanceStatisticRequireLogService.listByStatisticTypeAndStatus( "PERSON_PER_MONTH", "WAITING" );
 		} catch (Exception e) {
-			logger.warn("【统计】系统在查询员工月度统计需求列表时发生异常！" );
+			logger.warn("[통계] 시스템이 직원 월별 통계 요청 목록을 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		
@@ -78,24 +78,24 @@ public class AttendanceStatisticServiceAdv {
 		
 		if( attendanceStatisticRequireLogList != null && !attendanceStatisticRequireLogList.isEmpty() ){
 			for( AttendanceStatisticRequireLog log : attendanceStatisticRequireLogList ){
-				//统计考勤数据，发送到执行队列
+				//근태 데이터 통계 후 실행 큐로 전송
 				try {
 //					ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
-//				logger.debug( debugger, ">>>>>>>>>>>系统准备统计[员工每月统计]， 员工：" + log.getStatisticKey() + ", 统计月份:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
+//				logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [직원 월별 통계], 직원: " + log.getStatisticKey() + ", 통계 월:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
 //				try {
 //					attendanceStatisticalCycle = attendanceStatisticalCycleService.getStatisticCycleByEmployee( log, statisticalCycleMap, debugger );
 //				} catch (Exception e) {
-//					logger.warn("【统计】系统在根据统计需求记录信息查询统计周期信息时发生异常！" );
+//					logger.warn("[통계] 시스템이 통계 요청 기록 정보로 통계 주기 정보를 조회하는 중 예외가 발생했습니다!" );
 //					logger.error(e);
 //				}
 //				if( attendanceStatisticalCycle != null ){
 //					try{
 //						attendanceStatisticService.statisticEmployeeAttendanceForMonth( log, attendanceStatisticalCycle, workDayConfigList, statisticalCycleMap);
 //					}catch(Exception e){
-//						logger.warn( "【统计】系统在根据需求进行员工月度打卡记录分析结果统计时发生异常。" );
+//						logger.warn( "[통계] 시스템이 요청에 따라 직원 월별 출퇴근 기록 분석 결과를 통계하는 중 예외가 발생했습니다." );
 //						logger.error(e);
 //					}
 //				}
@@ -103,114 +103,114 @@ public class AttendanceStatisticServiceAdv {
 		}
 		
 		
-		//2  组织每月统计
-		//  2.1 先查询需要组织月度统计的统计需求有多少  AttendanceStatisticRequireLog
-		logger.debug( debugger, ">>>>>>>>>>>系统准备统计[组织每月统计]......" );
+		//2  조직 월별 통계
+		//  2.1 조직 월별 통계가 필요한 통계 요청 수를 먼저 조회  AttendanceStatisticRequireLog
+		logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [조직 월별 통계]......" );
 		try {
 			attendanceStatisticRequireLogList = attendanceStatisticRequireLogService.listByStatisticTypeAndStatus( "UNIT_PER_MONTH", "WAITING" );
 		} catch (Exception e) {
-			logger.warn("【统计】系统在查询组织月度统计需求列表时发生异常！" );
+			logger.warn("[통계] 시스템이 조직 월별 통계 요청 목록을 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		if( attendanceStatisticRequireLogList != null && !attendanceStatisticRequireLogList.isEmpty() ){
 			for( AttendanceStatisticRequireLog log : attendanceStatisticRequireLogList ){
-				//统计考勤数据，发送到执行队列
+				//근태 데이터 통계 후 실행 큐로 전송
 				try {
 //					ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
-//				logger.debug( debugger, ">>>>>>>>>>>系统准备统计[组织每月统计]， 组织：" + log.getStatisticKey() + ", 统计月份:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
+//				logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [조직 월별 통계], 조직: " + log.getStatisticKey() + ", 통계 월:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
 //				try{
 //					attendanceStatisticService.statisticUnitAttendanceForMonth( log, workDayConfigList, statisticalCycleMap );
 //				}catch(Exception e){
-//					logger.warn( "【统计】系统在根据需求进行员工月度打卡记录分析结果统计时发生异常。" );
+//					logger.warn( "[통계] 시스템이 요청에 따라 직원 월별 출퇴근 기록 분석 결과를 통계하는 중 예외가 발생했습니다." );
 //					logger.error(e);
 //				}
 			}
 		}		
 		
-		//3  顶层组织每月统计
-		//  3.1 先查询需要顶层组织月度统计的统计需求有多少  AttendanceStatisticRequireLog
-		logger.debug( debugger, ">>>>>>>>>>>系统准备统计[顶层组织每月统计]......" );
+		//3  최상위 조직 월별 통계
+		//  3.1 최상위 조직 월별 통계가 필요한 통계 요청 수를 먼저 조회  AttendanceStatisticRequireLog
+		logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [최상위 조직 월별 통계]......" );
 		try {
 			attendanceStatisticRequireLogList = attendanceStatisticRequireLogService.listByStatisticTypeAndStatus( "TOPUNIT_PER_MONTH", "WAITING" );
 		} catch (Exception e) {
-			logger.warn("【统计】系统在查询顶层组织月度统计需求列表时发生异常！" );
+			logger.warn("[통계] 시스템이 최상위 조직 월별 통계 요청 목록을 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		if( attendanceStatisticRequireLogList != null && !attendanceStatisticRequireLogList.isEmpty() ){
 			for( AttendanceStatisticRequireLog log : attendanceStatisticRequireLogList ){
-				//统计考勤数据，发送到执行队列
+				//근태 데이터 통계 후 실행 큐로 전송
 				try {
 //					ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
-//				logger.debug( debugger, ">>>>>>>>>>>系统准备统计[顶层组织每月统计]， 顶层组织：" + log.getStatisticKey() + ", 统计月份:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
+//				logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [최상위 조직 월별 통계], 최상위 조직: " + log.getStatisticKey() + ", 통계 월:" + log.getStatisticYear() + "-" +log.getStatisticMonth() );
 //				try{
 //					attendanceStatisticService.statisticTopUnitAttendanceForMonth( log, workDayConfigList, statisticalCycleMap);
 //				}catch(Exception e){
-//					logger.warn( "【统计】系统在根据需求进行员工月度打卡记录分析结果统计时发生异常。" );
+//					logger.warn( "[통계] 시스템이 요청에 따라 직원 월별 출퇴근 기록 분석 결과를 통계하는 중 예외가 발생했습니다." );
 //					logger.error(e);
 //				}
 			}
 		}		
 		
-		//4  组织每日统计
-		//  4.1 先查询需要组织每日统计的统计需求有多少  AttendanceStatisticRequireLog
-		logger.debug( debugger, ">>>>>>>>>>>系统准备统计[组织每日统计]......" );
+		//4  조직 일별 통계
+		//  4.1 조직 일별 통계가 필요한 통계 요청 수를 먼저 조회  AttendanceStatisticRequireLog
+		logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [조직 일별 통계]......" );
 		try {
 			attendanceStatisticRequireLogList = attendanceStatisticRequireLogService.listByStatisticTypeAndStatus( "UNIT_PER_DAY", "WAITING" );
 		} catch (Exception e) {
-			logger.warn("【统计】系统在查询组织每日统计需求列表时发生异常！" );
+			logger.warn("[통계] 시스템이 조직 일별 통계 요청 목록을 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		if( attendanceStatisticRequireLogList != null && !attendanceStatisticRequireLogList.isEmpty() ){
 			for( AttendanceStatisticRequireLog log : attendanceStatisticRequireLogList ){
-				//统计考勤数据，发送到执行队列
+				//근태 데이터 통계 후 실행 큐로 전송
 				try {
 //					ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
-//				logger.debug( debugger, ">>>>>>>>>>>系统准备统计[组织每月统计]， 组织：" + log.getStatisticKey() + ", 统计日期:" + log.getStatisticDay() );
+//				logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [조직 월별 통계], 조직: " + log.getStatisticKey() + ", 통계 일자:" + log.getStatisticDay() );
 //				try{
 //					attendanceStatisticService.statisticUnitAttendanceForDay( log, workDayConfigList, statisticalCycleMap, debugger );
 //				}catch(Exception e){
-//					logger.warn( "【统计】系统在根据需求进行组织每日打卡记录分析结果统计时发生异常。" );
+//					logger.warn( "[통계] 시스템이 요청에 따라 조직 일별 출퇴근 기록 분석 결과를 통계하는 중 예외가 발생했습니다." );
 //					logger.error(e);
 //				}
 			}
 		}
 		
-		//5  顶层组织每日统计
-		//  5.1 先查询需要顶层组织每日统计的统计需求有多少  AttendanceStatisticRequireLog
-		logger.debug( debugger, ">>>>>>>>>>>系统准备统计[顶层组织每日统计]......" );
+		//5  최상위 조직 일별 통계
+		//  5.1 최상위 조직 일별 통계가 필요한 통계 요청 수를 먼저 조회  AttendanceStatisticRequireLog
+		logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [최상위 조직 일별 통계]......" );
 		try {
 			attendanceStatisticRequireLogList = attendanceStatisticRequireLogService.listByStatisticTypeAndStatus( "TOPUNIT_PER_DAY", "WAITING" );
 		} catch (Exception e) {
-			logger.warn("【统计】系统在查询顶层组织每日统计需求列表时发生异常！" );
+			logger.warn("[통계] 시스템이 최상위 조직 일별 통계 요청 목록을 조회하는 중 예외가 발생했습니다!" );
 			logger.error(e);
 		}
 		if( attendanceStatisticRequireLogList != null && !attendanceStatisticRequireLogList.isEmpty() ){
 			for( AttendanceStatisticRequireLog log : attendanceStatisticRequireLogList ){
-				//统计考勤数据，发送到执行队列
+				//근태 데이터 통계 후 실행 큐로 전송
 				try {
 //					ThisApplication.detailStatisticQueue.send( log.getId() );
 				} catch ( Exception e1 ) {
 					e1.printStackTrace();
 				}
-//				logger.debug( debugger, ">>>>>>>>>>>系统准备统计[顶层组织每月统计]， 顶层组织：" + log.getStatisticKey() + ", 统计日期:" + log.getStatisticDay() );
+//				logger.debug( debugger, ">>>>>>>>>>>시스템 통계 준비 [최상위 조직 월별 통계], 최상위 조직: " + log.getStatisticKey() + ", 통계 일자:" + log.getStatisticDay() );
 //				try{
 //					attendanceStatisticService.statisticTopUnitAttendanceForDay( log, workDayConfigList, statisticalCycleMap );
 //				}catch(Exception e){
-//					logger.warn( "【统计】系统在根据需求进行顶层组织每日打卡记录分析结果统计时发生异常。" );
+//					logger.warn( "[통계] 시스템이 요청에 따라 최상위 조직 일별 출퇴근 기록 분석 결과를 통계하는 중 예외가 발생했습니다." );
 //					logger.error(e);
 //				}
 			}
 		}
-		logger.debug( debugger, ">>>>>>>>>>>系统数据统计运行完成." );
+		logger.debug( debugger, ">>>>>>>>>>>시스템 데이터 통계 실행 완료." );
 	}
 
 	public List<String> listPersonForMonthByUserYearAndMonth(String name, String year, String month) throws Exception {
@@ -237,7 +237,7 @@ public class AttendanceStatisticServiceAdv {
 		}
 	}
 	
-	//排除不需要的组织和人员
+	//불필요한 조직과 사용자 제외
 	public List<String> listPersonForMonthByUnitYearMonthAndUn(List<String> unitNameList,List<String> unUnitNameList,List<String> personNameList, String year, String month) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			return attendanceStatisticService.listPersonForMonthByUnitYearMonthAndUn( emc, unitNameList,unUnitNameList,personNameList, year, month);
@@ -271,7 +271,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员缺勤人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 결근 건수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -287,7 +287,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员请假人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 휴가 건수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -303,7 +303,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员迟到次数总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 지각 횟수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -319,7 +319,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员早退人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 조퇴 건수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -335,7 +335,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员签到人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 출근 체크 건수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -351,7 +351,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员签退人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 퇴근 체크 건수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -367,7 +367,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员异常打卡次数总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 비정상 체크 횟수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -383,7 +383,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员工时不足人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 근무시간 부족 건수 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month
@@ -399,7 +399,7 @@ public class AttendanceStatisticServiceAdv {
 	}
 
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员出勤人天总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 출근 인일 합계 통계
 	 * @param unitNameList
 	 * @param year
 	 * @param month

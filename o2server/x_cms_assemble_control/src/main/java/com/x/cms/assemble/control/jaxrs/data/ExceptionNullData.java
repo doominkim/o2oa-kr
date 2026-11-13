@@ -7,6 +7,6 @@ class ExceptionNullData extends LanguagePromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionNullData() {
-		super("更新的数据不能为null.");
+		super("수정할 데이터는 null일 수 없습니다.");
 	}
 }

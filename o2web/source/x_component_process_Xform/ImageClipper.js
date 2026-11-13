@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class ImageClipper 图片编辑组件。
- * @o2cn 图片编辑组件
+/** @class ImageClipper 이미지 편집 컴포넌트.
+ * @o2cn 이미지 편집 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var imageClipper = this.form.get("name"); //获取组件
- * //方法2
- * var imageClipper = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var imageClipper = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var imageClipper = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -29,9 +29,9 @@ MWF.xApplication.process.Xform.ImageClipper = MWF.APPImageClipper =  new Class(
         this.fieldModuleLoaded = false;
     },
     /**
-     * @summary 重新加载组件。会执行postLoad事件。
+     * @summary 컴포넌트 다시 로드. postLoad 이벤트가 실행됨.
      * @example
-     * this.form.get("fieldId").reload(); //重新加载事件
+     * this.form.get("fieldId").reload(); //다시 로드
      */
     reload: function(){
         this.node.empty();
@@ -158,22 +158,22 @@ MWF.xApplication.process.Xform.ImageClipper = MWF.APPImageClipper =  new Class(
         return {"value": [value], "text": [value]};
     },
     /**
-     * @summary 判断组件值是否为空.
+     * @summary 컴포넌트 값이 비어 있는지 판단.
      * @example
      * if( this.form.get('fieldId').isEmpty() ){
-     *     this.form.notice('请上传图片', 'warn');
+     *     this.form.notice('이미지를 업로드하십시오', 'warn');
      * }
-     * @return {Boolean} 值是否为空.
+     * @return {Boolean} 값이 비어 있는지 여부.
      */
     isEmpty : function(){
         return !this.getData();
     },
     /**
-     * 获取上传的图片ID。
-     * @summary 获取上传的图片ID。
+     * 업로드한 이미지 ID 조회.
+     * @summary 업로드한 이미지 ID 조회.
      * @example
-     * var id = this.form.get('fieldId').getData(); //获取上传的图片id
-     * var url = MWF.xDesktop.getImageSrc( id ); //获取图片的url
+     * var id = this.form.get('fieldId').getData(); //업로드한 이미지 id 조회
+     * var url = MWF.xDesktop.getImageSrc( id ); //이미지 url 조회
      */
     getData: function( data ){
         return this._getBusinessData() || "";
@@ -424,23 +424,23 @@ MWF.xApplication.process.Xform.ImageClipper = MWF.APPImageClipper =  new Class(
                 //     "max-width" : "100%"
                 // });
 
-                // 处理图片加载成功
+                // 이미지 로드 성공 처리
                 const handleLoad = () => {
                     img.removeEventListener('load', handleLoad);
                     img.removeEventListener('error', handleError);
                     parseImg();
                 };
 
-                // 处理图片加载失败（关键：补充error监听）
+                // 이미지 로드 실패 처리(핵심: error 리스너 추가)
                 const handleError = () => {
                     img.removeEventListener('load', handleLoad);
                     img.removeEventListener('error', handleError);
                     reject(new Error(`이미지 로드 실패: ${img.src}`));
                 };
 
-                // 图片已加载完成
+                // 이미지 로드 완료
                 if (img.complete) {
-                    // 检查加载状态（避免缓存的失败图片）
+                    // 로드 상태 확인(캐시된 실패 이미지 방지)
                     if (img.naturalWidth === 0) {
                         reject(new Error(`이미지 로드 오류: ${img.src}`));
                     } else {

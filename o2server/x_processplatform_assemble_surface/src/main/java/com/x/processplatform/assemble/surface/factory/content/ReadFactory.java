@@ -142,7 +142,7 @@ public class ReadFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 统计指定人员的待阅数量
+	 * 지정 사용자의 열람 대기 수 집계
 	 */
 	public Long countWithPerson(String person) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Read.class);
@@ -155,7 +155,7 @@ public class ReadFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 统计指定人员在指定应用的待阅数量
+	 * 지정 앱에서 지정 사용자의 열람 대기 수 집계
 	 */
 	public Long countWithPersonApplication(String person, String application) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Read.class);
@@ -187,7 +187,7 @@ public class ReadFactory extends AbstractFactory {
 		cq.select(root.get(Read_.id)).where(p);
 		return em.createQuery(cq).getResultList();
 	}
-//	/* read是否允许处理 */
+//	/* read 처리 허용 여부 */
 //	public Boolean allowProcessing(EffectivePerson effectivePerson, Read read) throws Exception {
 //		Business business = this.business();
 //		if (StringUtils.equals(effectivePerson.getDistinguishedName(), read.getPerson())) {

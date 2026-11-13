@@ -25,25 +25,25 @@ export default content({
         exceptionAlertDateNumber: 1,
         exceptionAlertTime: "09:30",
         appealMaxTimes: '0',
-        detailStatisticCronString: "0 0 3 * * ?", //默认凌晨 3 点
-        closeOldAttendance: true, // 是否关闭旧考勤
-        aliFaceControlEnable: false, // 阿里云人脸扩展是否启用
-        faceDetectionEnable: false, // 打卡前是否启用人脸比对
+        detailStatisticCronString: "0 0 3 * * ?", //기본값 새벽 3시
+        closeOldAttendance: true, // 기존 근태 비활성화 여부
+        aliFaceControlEnable: false, // Alibaba Cloud 얼굴 인식 확장 사용 여부
+        faceDetectionEnable: false, // 출퇴근 체크 전 얼굴 인식 사용 여부
         properties: {
-          checkInAlertOnDutyBeforeMinutes: 10, // 默认上班前 10 分钟
-          checkInAlertOffDutyAfterMinutes: 10, // 默认下班后 10 分钟 
-          statisticUnitDutyNameList:[], // 考勤统计管理员的职务名称
-          statisticUnitDutyNameListInput: "", // 考勤统计管理员的职务名称输入框
-          fieldWorkExecuteScript: "", // 外勤自动发起脚本
+          checkInAlertOnDutyBeforeMinutes: 10, // 기본값 출근 10분 전
+          checkInAlertOffDutyAfterMinutes: 10, // 기본값 퇴근 10분 후 
+          statisticUnitDutyNameList:[], // 근태 통계 관리자 직책명
+          statisticUnitDutyNameListInput: "", // 근태 통계 관리자 직책명 입력란
+          fieldWorkExecuteScript: "", // 외근 자동 시작 스크립트
         }
       },
       holidayList: [],
       workDayList: [],
       processSelector: {
         selectorTitle: lp.config.appealProcessTypeProcessLabel,
-        value: [], // 流程对象列表
+        value: [], // 프로세스 객체 목록
         showValue: "",
-        placeholder: lp.config.appealProcessTypeProcessPlaceholder, // 没有数据的时候显示的内容
+        placeholder: lp.config.appealProcessTypeProcessPlaceholder, // 데이터가 없을 때 표시할 내용
       },
     };
   },
@@ -51,13 +51,13 @@ export default content({
     await this.loadConfig();
   },
   afterRender() {
-    this.loadDetailStatisticCronClick();// 表达式绑定 click 事件
+    this.loadDetailStatisticCronClick();// 표현식으로 click 이벤트 바인딩
   },
-  // o time picker 控件使用
+  // o time picker 컨트롤 사용
   setTimeValue(key, value) {
     setJSONValue(key, value, this.bind);
   },
-  // 获取配置对象
+  // 설정 객체 조회
   async loadConfig() {
     const json = await configAction("get");
     if (json) {
@@ -85,7 +85,7 @@ export default content({
         this.bind.workDayList = json.workDayList;
       }
       if (!json.detailStatisticCronString) {
-        this.bind.form.detailStatisticCronString = "0 0 3 * * ?"; //默认凌晨 3 点
+        this.bind.form.detailStatisticCronString = "0 0 3 * * ?"; //기본값 새벽 3시
       }
       if (typeof json.appealEnable == "undefined") {
         this.bind.form.appealEnable = false;
@@ -105,7 +105,7 @@ export default content({
     }
     console.debug('load', this.bind.form);
   },
-  // 保存
+  // 저장
   async submit() {
     const form = this.bind.form;
     form.holidayList = this.bind.holidayList;
@@ -153,7 +153,7 @@ export default content({
       }
     }
     if (form.properties.statisticUnitDutyNameListInput) {
-      // 这里拆分代码 兼容下中英文的逗号
+      // 여기서 코드 분리, 한글·영문 쉼표 모두 호환
       form.properties.statisticUnitDutyNameListInput = form.properties.statisticUnitDutyNameListInput.replace(/，/g, ",");
       form.properties.statisticUnitDutyNameList = form.properties.statisticUnitDutyNameListInput.split(",").map(item => item.trim()).filter(item => item.length > 0);
     }
@@ -164,7 +164,7 @@ export default content({
     this.loadConfig();
   },
 
-  // 节假日日期选择器
+  // 공휴일 날짜 선택기
   loadHolidayDateSelector() {
     MWF.require(
       "MWF.widget.Calendar",
@@ -201,7 +201,7 @@ export default content({
       }.bind(this)
     );
   },
-  //   删除一个节假日
+  //   공휴일 하나 삭제
   deleteHolidayDateSelector(value) {
     let i = -1;
     for (let index = 0; index < this.bind.holidayList.length; index++) {
@@ -215,7 +215,7 @@ export default content({
       this.bind.holidayList.splice(i, 1);
     }
   },
-  // 工作日日期选择器
+  // 근무일 날짜 선택기
   loadWorkdayDateSelector() {
     MWF.require(
       "MWF.widget.Calendar",
@@ -252,7 +252,7 @@ export default content({
       }.bind(this)
     );
   },
-  //   删除一个工作日
+  //   근무일 하나 삭제
   deleteWorkdayDateSelector(value) {
     let i = -1;
     for (let index = 0; index < this.bind.workDayList.length; index++) {
@@ -269,7 +269,7 @@ export default content({
   clickToAliface() {
     layout.openApplication(null, 'aliface')
   },
-  // 是否启用补卡申请
+  // 출퇴근 보정 신청 사용 여부
   clickEnableAppeal() {
     this.bind.form.appealEnable = !this.bind.form.appealEnable;
   },
@@ -306,7 +306,7 @@ export default content({
         index++
       ) {
         const element = this.bind.processSelector.value[index];
-        newShowValue.push(element["name"]); // name字段
+        newShowValue.push(element["name"]); // name 필드
       }
       this.bind.processSelector.showValue = newShowValue.join(", ");
     }
@@ -322,7 +322,7 @@ export default content({
         {
           style: "design",
           position: {
-            //node 固定的位置
+            //node 고정 위치
             x: "right",
             y: "auto",
           },

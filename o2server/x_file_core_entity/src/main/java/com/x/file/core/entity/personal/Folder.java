@@ -23,7 +23,7 @@ import com.x.file.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Folder", description = "云文件个人文件夹.")
+@Schema(name = "Folder", description = "클라우드 파일 개인 폴더.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Personal.Folder.table, uniqueConstraints = {
@@ -44,42 +44,42 @@ public class Folder extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
-		/* 如果为顶层，那么将上级目录设置为空 */
+		/* 최상위이면 상위 디렉터리를 비움 */
 		this.superior = StringUtils.trimToEmpty(this.superior);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("分类名称.")
+	@FieldDescribe("분류 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true, citationNotExists =
-	/* 同一个用户同一个目录下不能有重名 */
+	/* 같은 사용자의 같은 디렉터리 내 이름 중복 불가 */
 	@CitationNotExist(fields = { "name", "id" }, type = Folder.class, equals = {
 			@Equal(property = "person", field = "person"), @Equal(property = "superior", field = "superior") }))
 	private String name;
 
 	public static final String superior_FIELDNAME = "superior";
-	@FieldDescribe("上级分类ID,为空代表顶级分类。")
+	@FieldDescribe("상위 분류 ID, 비어 있으면 최상위 분류.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + superior_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + superior_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationExists =
-	/* 上级目录必须存在,且不能为自己 */
+	/* 상위 디렉터리가 반드시 존재해야 하며 자기 자신일 수 없음 */
 	@CitationExist(type = Folder.class, equals = @Equal(property = "person", field = "person")))
 	private String superior;
 

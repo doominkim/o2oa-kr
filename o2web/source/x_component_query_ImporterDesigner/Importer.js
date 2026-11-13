@@ -671,7 +671,7 @@ MWF.xApplication.query.ImporterDesigner.Importer = new Class({
             if( col !== column && (col.json[name] === "true" || col.json[name] === true) ){
                 col.json[name] = false;
                 if(col.property){
-                    var radios = col.property.propertyContent.getElements("input[name$='"+name+"']"); //$匹配结尾
+                    var radios = col.property.propertyContent.getElements("input[name$='"+name+"']"); //$는 끝과 일치
                     radios.each(function (r) {
                         if (r.value === "true") r.set("checked", false);
                         if (r.value === "false") r.set("checked", true);
@@ -1027,7 +1027,7 @@ MWF.xApplication.query.ImporterDesigner.Importer.Column = new Class({
     index2ColumnName : function( index ){
         if( typeOf(index) !== "number" )return null;
         if (index < 0) return null;
-        var num = 65;// A的Unicode码
+        var num = 65;// A의 Unicode 코드
         var colName = "";
         do {
             if (colName.length > 0)index--;

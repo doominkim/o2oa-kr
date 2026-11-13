@@ -40,7 +40,7 @@ class ActionListPrev extends BaseAction {
 				result.setCount(co.getCount());
 			} else {
 				String id = EMPTY_SYMBOL;
-				/** 如果不是空位标志位 */
+				/** 비어 있지 않으면 플래그 설정 */
 				if (!StringUtils.equals(EMPTY_SYMBOL, flag)) {
 					Person o = business.person().pick(flag);
 					if (null == o) {

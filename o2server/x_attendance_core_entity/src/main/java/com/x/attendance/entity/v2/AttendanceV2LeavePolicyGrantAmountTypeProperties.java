@@ -7,7 +7,7 @@ public class AttendanceV2LeavePolicyGrantAmountTypeProperties extends JsonProper
 
     private static final long serialVersionUID = -4872177863446165403L;
 
-    @FieldDescribe("额度发放脚本.")
+    @FieldDescribe("한도 지급 스크립트.")
     private String grantScript;
 
     public String getGrantScript() {

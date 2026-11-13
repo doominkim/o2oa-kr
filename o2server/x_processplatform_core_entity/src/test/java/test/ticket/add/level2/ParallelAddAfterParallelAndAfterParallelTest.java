@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddAfterParallelAndAfterParallelTest {
 
-	@DisplayName("B后加签EFG,EFG并行处理，F后加签IJK，IJK并行处理,即并行-后加签并行-后加签并行")
+	@DisplayName("B 뒤에 EFG 추가 결재, EFG 병렬 처리, F 뒤에 IJK 추가 결재, IJK 병렬 처리, 즉 병렬-후 추가 결재 병렬-후 추가 결재 병렬")
 	@Test
 	@Order(1)
 	void test01() {

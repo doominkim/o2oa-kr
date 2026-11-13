@@ -1,4 +1,4 @@
-<!-- 表单 -->
+<!-- 양식 -->
 <div style="height: 100%;">
     <div class="o2-form">
         <div class="o2-form-header">
@@ -18,7 +18,7 @@
                 oo-prop="{'selectorTitle': $.lp.groupForm.assistAdminList, 'label':$.lp.groupForm.assistAdminList, 'placeholder': $.lp.groupForm.assistAdminListPlaceholder, 'value': $.form.assistAdminList, 'types': ['identity']}"
                 oo-model="form.assistAdminList"></o-org-person-selector>
             
-           <!-- 类型选择 -->
+           <!-- 유형 선택 -->
            <div class="margin-top">
                 <div class="form-item-line-label" >
                     <span class="required">*</span>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <!-- 考勤时间 固定班制 选择班次和打卡日子 -->
+            <!-- 근태 시간: 고정 근무제, 교대조와 출퇴근 체크 요일 선택 -->
             <div class="margin-top" oo-if=" $.form.checkType == '1' ">
                 <div class="form-item-line">
                     <div class="form-item-line-label" >
@@ -59,7 +59,7 @@
                         <th>{{$.lp.groupForm.tableThShift}}</th>
                         <th style="width: 20%;">{{$.lp.operate}}</th>
                     </thead>
-                    <!-- 周一 -->
+                    <!-- 월요일 -->
                     <tr style="background-color: transparent;">
                         <td>
                             <div class="o2-icon-14" @click="this.changeWorkDayChecked('monday')">
@@ -73,7 +73,7 @@
                                 @click="this.openShiftSelect('monday')">{{$.lp.groupForm.shiftChange}}</span>
                         </td>
                     </tr>
-                    <!-- 周二 -->
+                    <!-- 화요일 -->
                     <tr style="background-color: transparent;">
                         <td>
                             <div class="o2-icon-14" @click="this.changeWorkDayChecked('tuesday')">
@@ -87,7 +87,7 @@
                                 @click="this.openShiftSelect('tuesday')">{{$.lp.groupForm.shiftChange}}</span>
                         </td>
                     </tr>
-                    <!-- 周三 -->
+                    <!-- 수요일 -->
                     <tr style="background-color: transparent;">
                         <td>
                             <div class="o2-icon-14" @click="this.changeWorkDayChecked('wednesday')">
@@ -101,7 +101,7 @@
                                 @click="this.openShiftSelect('wednesday')">{{$.lp.groupForm.shiftChange}}</span>
                         </td>
                     </tr>
-                    <!-- 周四 -->
+                    <!-- 목요일 -->
                     <tr style="background-color: transparent;">
                         <td>
                             <div class="o2-icon-14" @click="this.changeWorkDayChecked('thursday')">
@@ -115,7 +115,7 @@
                                 @click="this.openShiftSelect('thursday')">{{$.lp.groupForm.shiftChange}}</span>
                         </td>
                     </tr>
-                    <!-- 周五 -->
+                    <!-- 금요일 -->
                     <tr style="background-color: transparent;">
                         <td>
                             <div class="o2-icon-14" @click="this.changeWorkDayChecked('friday')">
@@ -129,7 +129,7 @@
                                 @click="this.openShiftSelect('friday')">{{$.lp.groupForm.shiftChange}}</span>
                         </td>
                     </tr>
-                    <!-- 周六 -->
+                    <!-- 토요일 -->
                     <tr style="background-color: transparent;">
                         <td>
                             <div class="o2-icon-14" @click="this.changeWorkDayChecked('saturday')">
@@ -143,7 +143,7 @@
                                 @click="this.openShiftSelect('saturday')">{{$.lp.groupForm.shiftChange}}</span>
                         </td>
                     </tr>
-                    <!-- 周日 -->
+                    <!-- 일요일 -->
                     <tr style="background-color: transparent;">
                         <td>
                             <div class="o2-icon-14" @click="this.changeWorkDayChecked('sunday')">
@@ -159,7 +159,7 @@
                     </tr>
                 </table>
             </div>
-            <!-- 考勤时间 自由工时的时候 选择打卡日子 -->
+            <!-- 근태 시간: 자율 근무제일 때 출퇴근 체크 요일 선택 -->
             <div class="margin-top" oo-if=" $.form.checkType == '2' ">
                 <div class="form-item-line-label" >
                     <span class="required">*</span>
@@ -173,7 +173,7 @@
                     
                 </div>
             </div>
-            <!-- 考勤时间 排班制的时候进行排班管理 -->
+            <!-- 근태 시간: 교대 근무제일 때 교대 편성 관리 -->
             <div class="margin-top" oo-if=" $.form.checkType == '3' ">
                 <div class="form-item-line-label" >
                     <span class="required">*</span>
@@ -183,7 +183,7 @@
                     </div>
                 </div>
             </div>
-            <!-- 工作场所 -->
+            <!-- 근무지 -->
             <div class="margin-top">
                 <div class="form-item-line-label" >
                     {{$.lp.groupForm.workPlace}}
@@ -220,7 +220,7 @@
                     </table>
                 </div>
             </div>
-            <!-- 外勤打卡 -->
+            <!-- 외근 체크 -->
             <div class="form-item-line margin-top">
                 <div class="form-item-line-label" >
                     {{$.lp.groupForm.fieldWork}}
@@ -253,7 +253,7 @@
                     </div>
                 </div>
             </div>
-            <!-- 必须打卡的日期 -->
+            <!-- 필수 출퇴근 체크 날짜 -->
             <div class="  margin-top">
                 <div class="o-input-item-label" >
                     {{$.lp.groupForm.requiredCheckInDate}}
@@ -291,7 +291,7 @@
                     </table>
                 </div>
             </div>
-            <!-- 无需打卡的日期 -->
+            <!-- 출퇴근 체크 불필요 날짜 -->
             <div class="  margin-top ">
                 <div class="o-input-item-label" >
                     {{$.lp.groupForm.noNeedCheckInDate}}
@@ -308,7 +308,7 @@
                             <th>{{$.lp.groupForm.requiredCheckInDateThCycle}}</th>
                             <th  >{{$.lp.operate}}</th>
                         </thead>
-                        <!-- 周一 -->
+                        <!-- 월요일 -->
                         <tr oo-each="$.noNeedCheckInDateForTableList" oo-item="rDate" style="background-color: transparent;">
                             <td>
                                 {{rDate.value.date}}
@@ -337,9 +337,9 @@
         </div>
     </div>
 
-    <!-- 班次选择器 -->
+    <!-- 교대조 선택기 -->
     <select-shift oo-prop="$.shiftSelector" oo-if="$.shiftSelectorOpen" ></select-shift>
-    <!-- 工作场所选择器 -->
+    <!-- 근무지 선택기 -->
     <address-selector oo-prop="$.workPlaceSelector" oo-if="$.workPlaceSelectorOpen"></address-selector>
     <div id="scheduleFom"></div>
 </div>

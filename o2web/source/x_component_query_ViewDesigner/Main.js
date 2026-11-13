@@ -406,8 +406,8 @@ MWF.xApplication.query.ViewDesigner.Main = new Class({
                     var isLetterA = /^[a-zA-Z0-9]/.test(av);
                     var isLetterB = /^[a-zA-Z0-9]/.test(bv);
 
-                    if (isLetterA && !isLetterB) return isDesc ? 1 : -1; // a是字母，b不是，a排在前面
-                    if (!isLetterA && isLetterB) return isDesc ? -1 : 1;  // a不是字母，b是，b排在前面
+                    if (isLetterA && !isLetterB) return isDesc ? 1 : -1; // a는 문자이고 b는 아니면 a를 앞에 배치
+                    if (!isLetterA && isLetterB) return isDesc ? -1 : 1;  // a는 문자가 아니고 b는 문자이면 b를 앞에 배치
 
                     return isDesc ?  bv.localeCompare(av) : av.localeCompare(bv);
                 }
@@ -519,7 +519,7 @@ MWF.xApplication.query.ViewDesigner.Main = new Class({
         }.bind(this), null, false);
     },
 
-    //列示所有视图列表
+    //모든 뷰 목록 조회
     createListViewItem: function(view, isNew){
         var _self = this;
         var listViewItem = new Element("div", {"styles": this.css.listViewItem}).inject(this.viewListAreaNode, (isNew) ? "top": "bottom");
@@ -545,7 +545,7 @@ MWF.xApplication.query.ViewDesigner.Main = new Class({
         this.itemArray.push(itemObj);
         this.checkShow(itemObj);
     },
-    //打开视图
+    //뷰 열기
     loadViewByData: function(node, e){
         var view = node.retrieve("view");
         if (!view.isNewView){
@@ -1087,7 +1087,7 @@ MWF.xApplication.query.ViewDesigner.View.NewNameForm = new Class({
                 data.query = queryData.id;
                 data.queryName = queryData.name;
             }else{
-                //data.query 和 data.queryName 还是传进来的值
+                //data.query와 data.queryName은 전달된 값 그대로
             }
             this.fireEvent("save", [data , function(){
                 this.close();

@@ -7,6 +7,6 @@ class ExceptionErrorRouteName extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionErrorRouteName(String routeName) {
-		super("路由选择错误:{}.", routeName);
+		super("처리 선택 오류: {}.", routeName);
 	}
 }

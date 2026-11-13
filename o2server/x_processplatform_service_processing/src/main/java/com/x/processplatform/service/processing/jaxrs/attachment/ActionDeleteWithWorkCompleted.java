@@ -20,7 +20,7 @@ import com.x.processplatform.service.processing.ProcessPlatformKeyClassifyExecut
 import com.x.processplatform.service.processing.ThisApplication;
 
 /*
- * 删除已完成工作的附件
+ * 완료된 업무 문서의 첨부파일 삭제
  */
 class ActionDeleteWithWorkCompleted extends BaseAction {
 
@@ -55,7 +55,7 @@ class ActionDeleteWithWorkCompleted extends BaseAction {
 					}
 					StorageMapping mapping = ThisApplication.context().storageMappings().get(Attachment.class,
 							attachment.getStorage());
-					// 如果没有存储器,跳过
+					// 저장소가 없으면 건너뜀
 					if (null != mapping) {
 						attachment.deleteContent(mapping);
 					}

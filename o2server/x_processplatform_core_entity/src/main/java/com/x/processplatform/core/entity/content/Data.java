@@ -206,9 +206,9 @@ public class Data extends ListOrderedMap<String, Object> {
 		private Date activityArrivedTime;
 		private String manualTaskIdentityText;
 		private String completedType;
-		/** 来自workCompleted的结束时间 */
+		/** workCompleted의 종료 시간 */
 		private Date completedTime;
-		/** 来自workCompleted的结束时间月份 */
+		/** workCompleted의 종료 시간 월 */
 		private String completedTimeMonth;
 		private Date updateTime;
 
@@ -485,7 +485,7 @@ public class Data extends ListOrderedMap<String, Object> {
 
 	}
 
-	/* 除了默认的数据之外不保有数据 */
+	/* 기본 데이터 외에는 데이터를 보유하지 않음 */
 	public Boolean emptySet() {
 		return this.keyList().stream().filter(
 				o -> (!StringUtils.equals(WORK_PROPERTY, o)) && (!StringUtils.equals(ATTACHMENTLIST_PROPERTY, o)))
@@ -499,7 +499,7 @@ public class Data extends ListOrderedMap<String, Object> {
 	}
 
 	@Override
-	/* 需要重载,前端toString需要这个方法. */
+	/* 재정의 필요, 프런트엔드 toString에 이 메서드 필요. */
 	public String toString() {
 		return XGsonBuilder.toJson(this);
 	}

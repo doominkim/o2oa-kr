@@ -37,7 +37,7 @@ import java.util.Map;
 public class SSLHttpClientUtil {
     private static final Logger logger = LoggerFactory.getLogger(SSLHttpClientUtil.class);
 
-    /** keystore类型JKS*/
+    /** keystore 유형 JKS*/
     private static final String KEY_STORE_TYPE_JKS = "JKS";
     private CloseableHttpClient httpClient;
     /**
@@ -49,10 +49,10 @@ public class SSLHttpClientUtil {
         InputStream instream = new FileInputStream(p12FilePath);
 
         try {
-            //密钥库口令
+            //키 저장소 비밀번호
             keyStore.load(instream, password.toCharArray());
         } catch (CertificateException e) {
-            logger.warn("加载客户端端可信任证书出错了");
+            logger.warn("클라이언트 신뢰 인증서 로드 오류");
             logger.error(e);
         } finally {
             try {
@@ -61,7 +61,7 @@ public class SSLHttpClientUtil {
             }
         }
         SSLContext sslcontext = SSLContexts.custom()
-                //忽略掉对服务器端证书的校验
+                //서버 인증서 검증 무시
                 .loadTrustMaterial(new TrustStrategy() {
                     @Override
                     public boolean isTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
@@ -83,35 +83,35 @@ public class SSLHttpClientUtil {
     }
 
     /**
-     * 发送post请求
+     * post 요청 전송
      *
      * @param url
      * @param map
      * @throws Exception
      */
     public String post(String url, Map<String, Object> map) throws Exception {
-        // 声明POST请求
+        // POST 요청 선언
         HttpPost httpPost = new HttpPost(url);
-        // 判断map不为空
+        // map이 비어 있지 않은지 판단
         if (null != map) {
-            // 声明存放参数的List集合
+            // 파라미터를 담을 List 선언
             List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-            // 遍历map，设置参数到list中
+            // map을 순회하며 파라미터를 list에 설정
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 params.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
             }
-            // 创建form表单对象
+            // form 양식 객체 생성
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(params, "utf-8");
             formEntity.setContentType("Content-Type:application/json");
-            // 把表单对象设置到httpPost中
+            // 양식 객체를 httpPost에 설정
             httpPost.setEntity(formEntity);
         }
-        // 使用HttpClient发起请求，返回response
+        // HttpClient로 요청을 보내고 response 반환
         CloseableHttpResponse response = this.httpClient.execute(httpPost);
-        // 获取实体
+        // 엔티티 조회
         HttpEntity entity = response.getEntity();
-        // 将实体装成字符串
+        // 엔티티를 문자열로 변환
         String res = EntityUtils.toString(entity, Charset.defaultCharset());
         EntityUtils.consume(entity);
         return res;
@@ -119,7 +119,7 @@ public class SSLHttpClientUtil {
 
 
     /**
-     * 发送POST请求
+     * POST 요청 전송
      *
      * @param url
      * @param map
@@ -129,13 +129,13 @@ public class SSLHttpClientUtil {
     public String get(String url, Map<String, Object> map,Map<String,String> headers) throws Exception {
         String params = null;
         if (null != map) {
-            // 声明存放参数的List集合
+            // 파라미터를 담을 List 선언
             List<NameValuePair> list = new ArrayList<NameValuePair>();
-            // 遍历map，设置参数到list中
+            // map을 순회하며 파라미터를 list에 설정
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 list.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
             }
-            // 转化参数
+            // 파라미터 변환
             params = EntityUtils.toString(new UrlEncodedFormEntity(list, "utf-8"));
         }
         url += StringUtils.isNotBlank(params) ? ("?" + params) : "";
@@ -145,11 +145,11 @@ public class SSLHttpClientUtil {
                 httpGet.setHeader(entity.getKey(), entity.getValue());
             }
         }
-        // 使用HttpClient发起请求，返回response
+        // HttpClient로 요청을 보내고 response 반환
         CloseableHttpResponse response = httpClient.execute(httpGet);
-        // 获取实体
+        // 엔티티 조회
         HttpEntity entity = response.getEntity();
-        // 将实体装成字符串
+        // 엔티티를 문자열로 변환
         String res = EntityUtils.toString(entity, Charset.defaultCharset());
         EntityUtils.consume(entity);
         response.close();
@@ -157,7 +157,7 @@ public class SSLHttpClientUtil {
     }
 
     /**
-     * 发送POST请求（JSON参数）
+     * POST 요청 전송(JSON 파라미터)
      *
      * @param url
      * @param json
@@ -165,9 +165,9 @@ public class SSLHttpClientUtil {
      * @throws IOException
      */
     public String post(String url, String json,Map<String,String> headers) throws IOException {
-        // 声明POST请求
+        // POST 요청 선언
         HttpPost httpPost = new HttpPost(url);
-        // 表示客户端发送给服务器端的数据格式
+        // 클라이언트가 서버로 보내는 데이터 형식
         httpPost.setHeader("Content-Type", "application/json;charset=UTF-8");
         httpPost.setHeader("Accept", "application/json");
         StringEntity param = new StringEntity(json, ContentType.APPLICATION_JSON);
@@ -179,7 +179,7 @@ public class SSLHttpClientUtil {
         }
         CloseableHttpResponse resp = this.httpClient.execute(httpPost);
         HttpEntity entity = resp.getEntity();
-        // 将实体装成字符串
+        // 엔티티를 문자열로 변환
         String res = EntityUtils.toString(entity, Charset.defaultCharset());
         EntityUtils.consume(entity);
         resp.close();

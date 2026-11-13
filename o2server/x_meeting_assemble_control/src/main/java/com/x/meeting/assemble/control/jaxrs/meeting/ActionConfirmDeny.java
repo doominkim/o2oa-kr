@@ -34,7 +34,7 @@ class ActionConfirmDeny extends BaseAction {
 			// if (!business.room().checkIdle(meeting.getRoom(), meeting.getStartTime(),
 			// meeting.getCompletedTime(),
 			// meeting.getId())) {
-			// throw new ExceptionRoomNotAvailable("会议室:" + room.getName() + ", 已经预约.");
+			// throw new ExceptionRoomNotAvailable("회의실:" + room.getName() + ", 이미 예약되었습니다.");
 			// }
 			meeting.setConfirmStatus(ConfirmStatus.deny);
 			emc.check(meeting, CheckPersistType.all);

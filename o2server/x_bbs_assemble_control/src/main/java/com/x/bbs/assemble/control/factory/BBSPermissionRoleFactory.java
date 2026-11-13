@@ -19,11 +19,11 @@ import com.x.bbs.entity.BBSPermissionRole;
 import com.x.bbs.entity.BBSPermissionRole_;
 
 /**
- * 类   名：BBSPermissionRoleFactory<br/>
- * 实体类：BBSPermissionRole<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-08-10 17:17:26
+ * 클래스명: BBSPermissionRoleFactory<br/>
+ * 엔티티 클래스: BBSPermissionRole<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-08-10 17:17:26
 **/
 public class BBSPermissionRoleFactory extends AbstractFactory {
 
@@ -31,12 +31,12 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSPermissionRole实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSPermissionRole 엔티티 정보 객체 조회" )
 	public BBSPermissionRole get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSPermissionRole.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSPermissionRole实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSPermissionRole 엔티티 정보 목록 조회" )
 	public List<BBSPermissionRole> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSPermissionRole>();
@@ -49,7 +49,7 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "列示全部的BBSPermissionRole实体信息列表" )
+	//@MethodDescribe( "전체 BBSPermissionRole 엔티티 정보 목록 조회" )
 	public List<BBSPermissionRole> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSPermissionRole.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -57,7 +57,7 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		return em.createQuery( cq ).setMaxResults( 1000 ).getResultList();
 	}
 
-	//@MethodDescribe( "根据角色编码列示该角色包含的所有BBSPermissionRole实体信息ID列表" )
+	//@MethodDescribe( "역할 코드로 해당 역할의 전체 BBSPermissionRole 엔티티 정보 ID 목록 조회" )
 	public List<String> listPermissionByRoleCode(String roleCode) throws Exception {
 		if( roleCode == null || roleCode.isEmpty() ){
 			throw new Exception("roleCode is null!");
@@ -71,7 +71,7 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 
-	//@MethodDescribe( "根据角色编码和权限编码判断角色和权限的绑定信息对象是否存在" )
+	//@MethodDescribe( "역할 코드와 권한 코드로 역할-권한 연결 정보 객체 존재 여부 판단" )
 	public boolean exsistPermissionRole( String roleCode, String permissionCode ) throws Exception {
 		if( roleCode == null || roleCode.isEmpty() ){
 			throw new Exception("roleCode is null!");
@@ -94,7 +94,7 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		}
 	}
 	
-	//@MethodDescribe( "根据角色编码和权限编码查询角色和权限的绑定信息对象" )
+	//@MethodDescribe( "역할 코드와 권한 코드로 역할-권한 연결 정보 객체 조회" )
 	public BBSPermissionRole getByRoleAndPermission(String roleCode, String permissionCode) throws Exception {
 		if( roleCode == null || roleCode.isEmpty() ){
 			throw new Exception("roleCode is null!");
@@ -117,7 +117,7 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		}
 	}
 		
-	//@MethodDescribe( "根据角色ID列表列示权限ID信息列表" )
+	//@MethodDescribe( "역할 ID 목록으로 권한 ID 정보 목록 조회" )
 	public List<String> listPermissionCodesByRoleCodes(List<String> roleCodes) throws Exception {
 		if( roleCodes == null || roleCodes.isEmpty() ){
 			throw new Exception("roleCodes is null!");
@@ -131,7 +131,7 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 
-	//@MethodDescribe( "根据权限编码列示BBSPermissionRole实体信息列表" )
+	//@MethodDescribe( "권한 코드로 BBSPermissionRole 엔티티 정보 목록 조회" )
 	public List<BBSPermissionRole> listByPermissionCode(String permissionCode) throws Exception {
 		if( permissionCode == null || permissionCode.isEmpty() ){
 			throw new Exception("permissionCode is null!");
@@ -144,7 +144,7 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).getResultList();
 	}
 	
-	//@MethodDescribe( "根据指定的权限编码列表查询权限信息对象列表" )
+	//@MethodDescribe( "지정 권한 코드 목록으로 권한 정보 객체 목록 조회" )
 	public List<BBSPermissionRole> listPermissionByCodes( List<String> permissionCodes ) throws Exception {
 		if( permissionCodes == null || permissionCodes.isEmpty() ){
 			throw new Exception( "permissionCodes is null!" );
@@ -171,9 +171,9 @@ public class BBSPermissionRoleFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据版块信息ID查询所有的权限角色关联信息
+	 * 게시판 정보 ID로 전체 권한-역할 연결 정보 조회
 	 * @param sectionId
-	 * @param  queryMainSectionId 是否查询主版块ID
+	 * @param  queryMainSectionId 주 게시판 ID 조회 여부
 	 * @return
 	 * @throws Exception 
 	 */

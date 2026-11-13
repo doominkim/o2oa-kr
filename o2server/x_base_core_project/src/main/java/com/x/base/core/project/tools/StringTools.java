@@ -37,15 +37,15 @@ public class StringTools {
 		// nothing
 	}
 
-	// 空代码判断正则表达式
+	// 빈 코드 판단 정규식
 	private static final Pattern EMPTY_SCRIPT_CODE_REGEX = Pattern.compile("/\\*[^*]*(?:\\*(?!/)[^*]*)*\\*/|//.*");
 
-	// 脚本文本
+	// 스크립트 텍스트
 	public static final Pattern SCRIPTTEXT_REGEX = Pattern.compile("^\\((.+?)\\)$");
 	/** 한국 휴대폰 번호: 010-1234-5678, 01012345678, +82-10-1234-5678 */
 	public static final Pattern MOBILE_REGEX = Pattern.compile(
 			"(^01[016789]-?\\d{3,4}-?\\d{4}$)|(^(\\+|00)?82-?1[016789]-?\\d{3,4}-?\\d{4}$)");
-	/** 中文,英文,数字,-,.· 【】（） */
+	/** 한글,영문,숫자,-,.· 【】() */
 //    public static final Pattern SIMPLY_REGEX = Pattern
 //            .compile("^[\u4e00-\u9fa5a-zA-Z0-9\\_\\(\\)\\-\\ \\.\\ \\·\\【\\】\\（\\）]*$");
 	public static final Pattern SIMPLY_REGEX = Pattern
@@ -146,7 +146,7 @@ public class StringTools {
 	}
 
 	/**
-	 * 截断超长文件名,尽量保留后缀
+	 * 너무 긴 파일명 자르기, 가능하면 확장자 유지
 	 *
 	 * @param str
 	 * @param len
@@ -582,13 +582,13 @@ public class StringTools {
 	}
 
 	/**
-	 * 文本搜索
+	 * 텍스트 검색
 	 *
-	 * @param keyword        搜索关键字
-	 * @param content        文本
-	 * @param caseSensitive  大小写敏感
-	 * @param matchWholeWord 是否全字匹配
-	 * @param matchRegExp    正则表达式搜索
+	 * @param keyword        검색 키워드
+	 * @param content        텍스트
+	 * @param caseSensitive  대소문자 구분
+	 * @param matchWholeWord 단어 단위 일치 여부
+	 * @param matchRegExp    정규식 검색
 	 * @return
 	 */
 	public static boolean matchKeyword(String keyword, String content, Boolean caseSensitive, Boolean matchWholeWord,
@@ -620,7 +620,7 @@ public class StringTools {
 	}
 
 	/**
-	 * 检查去除注释后是否有有效的代码.
+	 * 주석 제거 후 유효한 코드가 있는지 확인.
 	 * 
 	 * @param script
 	 * @return

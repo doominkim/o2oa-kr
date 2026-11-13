@@ -29,7 +29,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Component", description = "组件内容.")
+@Schema(name = "Component", description = "컴포넌트 내용.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Component.table, uniqueConstraints = {
@@ -55,68 +55,68 @@ public class Component extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		// nothing
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String NAME_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称,不可重名.")
-	@Schema(description = "名称,不可重名.")
+	@FieldDescribe("이름, 중복 불가.")
+	@Schema(description = "이름, 중복 불가.")
 	@Column(length = length_255B, name = ColumnNamePrefix + NAME_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + NAME_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true, citationNotExists = {
-			/* 验证不可重名 */
+			/* 이름 중복 검증 */
 			@CitationNotExist(fields = "name", type = Component.class) })
 	private String name;
 
 	public static final String TITLE_FIELDNAME = "title";
-	@FieldDescribe("标题.")
-	@Schema(description = "标题.")
+	@FieldDescribe("제목.")
+	@Schema(description = "제목.")
 	@Column(length = length_255B, name = ColumnNamePrefix + TITLE_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	private String title;
 
 	public static final String VISIBLE_FIELDNAME = "visible";
-	@FieldDescribe("是否是可见的应用.")
-	@Schema(description = "是否是可见的应用.")
+	@FieldDescribe("표시되는 앱 여부.")
+	@Schema(description = "표시되는 앱 여부.")
 	@Column(name = ColumnNamePrefix + VISIBLE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean visible;
 
 	public static final String ORDERNUMBER_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
-	@Schema(description = "排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
+	@Schema(description = "정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + ORDERNUMBER_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + ORDERNUMBER_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String PATH_FIELDNAME = "path";
-	@FieldDescribe("应用路径.")
-	@Schema(description = "应用路径.")
+	@FieldDescribe("앱 경로.")
+	@Schema(description = "앱 경로.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + PATH_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String path;
 
 	public static final String ICONPATH_FIELDNAME = "iconPath";
-	@FieldDescribe("图标位置.")
-	@Schema(description = "图标位置.")
+	@FieldDescribe("아이콘 위치.")
+	@Schema(description = "아이콘 위치.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + ICONPATH_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String iconPath;
 
 	public static final String ALLOWLIST_FIELDNAME = "allowList";
-	@FieldDescribe("可访问人员.")
-	@Schema(description = "可访问人员.")
+	@FieldDescribe("접근 가능 사용자.")
+	@Schema(description = "접근 가능 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -128,8 +128,8 @@ public class Component extends SliceJpaObject {
 	private List<String> allowList = new ArrayList<>();
 
 	public static final String DENYLIST_FIELDNAME = "denyList";
-	@FieldDescribe("拒绝访问人员.")
-	@Schema(description = "拒绝访问人员.")
+	@FieldDescribe("접근 거부 사용자.")
+	@Schema(description = "접근 거부 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -141,8 +141,8 @@ public class Component extends SliceJpaObject {
 	private List<String> denyList = new ArrayList<>();
 
 	public static final String TYPE_FIELDNAME = "type";
-	@FieldDescribe("类型:system|custom")
-	@Schema(description = "类型:system|custom")
+	@FieldDescribe("유형:system|custom")
+	@Schema(description = "유형:system|custom")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + TYPE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;

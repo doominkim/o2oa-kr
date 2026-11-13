@@ -21,7 +21,7 @@ class ActionListNameWithIdentity extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private List<String> identityList = new ArrayList<>();
 
 		public List<String> getIdentityList() {
@@ -36,7 +36,7 @@ class ActionListNameWithIdentity extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("组织职务名称")
+		@FieldDescribe("조직 직무 이름")
 		private List<String> nameList = new ArrayList<>();
 
 		public List<String> getNameList() {

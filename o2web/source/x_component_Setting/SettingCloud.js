@@ -4,10 +4,10 @@ MWF.xApplication.Setting.CloudConnectDocument = new Class({
     load: function(){
         this.node = new Element("div", {"styles": {"overflow": "hidden", "padding-bottom": "80px"}}).inject(this.contentAreaNode);
         
-        // 第一步 O2云连接检查
+        // 1단계 O2 클라우드 연결 확인
         this.firstStepTitleName = new Element("div", {"styles": this.explorer.css.explorerContentTitleNode}).inject(this.node);
         this.firstStepTitleName.set("text", this.lp.mobile_connect_first_cloud_check);
-        // 查询是否已经连接登录到O2云
+        // O2 클라우드 연결 로그인 여부 조회
         var o2CloudConnected = false;
         this.actions.collectValidate(function(json){
             o2CloudConnected = json.data.value;
@@ -17,7 +17,7 @@ MWF.xApplication.Setting.CloudConnectDocument = new Class({
         this.firstStepSubTitle = new Element("div", {"styles": this.explorer.css.explorerContentTitleSubNode}).inject(this.node);
         this.firstStepSubTitle.set("html", o2CloudConnected ? this.lp.mobile_connect_first_cloud_check_connected : this.lp.mobile_connect_first_cloud_check_disconnected);
         
-        // 第二步 外网连接配置
+        // 2단계 외부망 연결 설정
         this.titleName = new Element("div", {"styles": this.explorer.css.explorerContentTitleNode}).inject(this.node);
         this.titleName.set("text", this.lp.mobile_connect_connectSetting);
 
@@ -54,12 +54,12 @@ MWF.xApplication.Setting.CloudConnectDocument = new Class({
             "icon": "server.png"
         });
 
-        // 第三步 检查连接用的二维码
+        // 3단계 연결 확인용 QR 코드
         this.thirdStepTitleName = new Element("div", {"styles": this.explorer.css.explorerContentTitleNode}).inject(this.node);
         this.thirdStepTitleName.set("text", this.lp.mobile_connect_third_mobile_connect_check);
         this.thirdStepSubTitle = new Element("div", {"styles": this.explorer.css.explorerContentTitleSubNode}).inject(this.node);
         this.thirdStepSubTitle.set("html", this.lp.mobile_connect_third_mobile_connect_check_info);
-        // 生成二维码按钮
+        // QR 코드 생성 버튼
         this.thirdStepQrcodeNode = new Element("div", {"styles": this.css.explorerContentItemQrcodeNode}).inject(this.node);
 
         this.thirdStepQrcodeGenerateButton = new Element("div", {"styles": this.css.explorerContentItemButton, "html": this.lp.mobile_connect_third_mobile_connect_check_generate_button}).inject(this.thirdStepQrcodeNode);
@@ -69,7 +69,7 @@ MWF.xApplication.Setting.CloudConnectDocument = new Class({
     showQrcode: function() {
         o2.Actions.load("x_program_center").CollectAction.mobileCheckConnect(function(json){
             this.thirdStepQrcodeNode.empty();
-            // 生成二维码
+            // QR 코드 생성
             new Element("img", {
                 src: "data:image/png;base64," + json.data.qrcode
             }).inject(this.thirdStepQrcodeNode);

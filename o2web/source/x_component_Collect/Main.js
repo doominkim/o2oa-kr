@@ -61,7 +61,7 @@ MWF.xApplication.Collect.Main = new Class({
     },
     loadContent: function(){
         this.titleAreaNode = new Element("div", {"styles": this.css.titleAreaNode}).inject(this.outBox);
-        // 返回按钮
+        // 뒤로 버튼
         this.backNode = new Element("div", {"styles": this.css.backNode}).inject(this.titleAreaNode);
         new Element("img", {"styles": this.css.backNodeImg, "src": "../x_component_Collect/$Main/default/icon/icon_back.png"}).inject(this.backNode);
         new Element("div", {"styles": this.css.backNodeText, "text": this.lp.backUp}).inject(this.backNode);
@@ -70,7 +70,7 @@ MWF.xApplication.Collect.Main = new Class({
         // this.closeNode.addEvent("click", function(){this.close();}.bind(this));
 
         this.titleNode = new Element("div", {"styles": this.css.titleNode, "text": this.lp.title}).inject(this.outBox);
-        // 内容
+        // 내용
         this.node = new Element("div", {"styles": this.css.node}).inject(this.outBox);
             // this.setNodeResize();
         this.node.addEvent("selectstart", function(e){e.target.setStyle("-webkit-user-select", "none")}.bind(this));

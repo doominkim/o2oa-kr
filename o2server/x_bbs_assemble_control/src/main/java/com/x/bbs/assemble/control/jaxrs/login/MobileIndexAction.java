@@ -24,18 +24,18 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.bbs.assemble.control.jaxrs.foruminfo.exception.ExceptionForumInfoProcess;
 
 @Path("mobile")
-@JaxrsDescribe("手机APP论坛首页信息内容查询")
+@JaxrsDescribe("모바일 APP 포럼 홈 정보 내용 조회")
 public class MobileIndexAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(MobileIndexAction.class);
 
 	/**
-	 * 手机用户访问论坛信息，首页所有的信息整合在一起 匿名用户可以访问
+	 * 모바일 사용자 포럼 정보 접근, 홈의 모든 정보를 통합 익명 사용자 접근 가능
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "获取登录者可以访问到的所有ForumInfo的信息列表.", action = ActionMobileIndex.class)
+	@JaxrsMethodDescribe(value = "로그인 사용자가 접근 가능한 전체 ForumInfo 정보 목록 조회.", action = ActionMobileIndex.class)
 	@GET
 	@Path("view/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,7 +51,7 @@ public class MobileIndexAction extends StandardJaxrsAction {
 				result = new ActionMobileIndex().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "获取所有ForumInfo的信息列表时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "전체 ForumInfo 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

@@ -82,7 +82,7 @@ class ActionManageListNextWithFilter extends BaseAction {
 
 			result = this.standardListNext(Wo.copier, id, count, JpaObject.sequence_FIELDNAME, equals, null, likes, ins,
 					null, null, null, null, true, DESC);
-			/* 添加权限 */
+			/* 권한 추가 */
 			if (null != result.getData()) {
 				for (Wo wo : result.getData()) {
 					Work o = emc.find(wo.getId(), Work.class);
@@ -97,27 +97,27 @@ class ActionManageListNextWithFilter extends BaseAction {
 
 		private static final long serialVersionUID = -5622078876162107245L;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程数据：true|false(默认不查找)")
+		@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true|false(기본 조회 안 함)")
 		private Boolean relateEditionProcess = false;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("启动月份")
+		@FieldDescribe("시작 월")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("活动名称")
+		@FieldDescribe("활동 이름")
 		private List<String> activityNameList;
 
-		@FieldDescribe("工作状态")
+		@FieldDescribe("업무 문서 상태")
 		@FieldTypeDescribe(fieldType = "enum", fieldValue = "start|processing|hanging", fieldTypeName = "com.x.processplatform.core.entity.content.WorkStatus")
 
 		private List<WorkStatus> workStatusList;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
 		public List<String> getProcessList() {
@@ -185,10 +185,10 @@ class ActionManageListNextWithFilter extends BaseAction {
 		static WrapCopier<Work, Wo> copier = WrapCopierFactory.wo(Work.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		public Long getRank() {

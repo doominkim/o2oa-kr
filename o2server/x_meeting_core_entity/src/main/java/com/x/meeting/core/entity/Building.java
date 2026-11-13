@@ -22,7 +22,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Building", description = "会议管理建筑.")
+@Schema(name = "Building", description = "회의 관리 건물.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Building.table, uniqueConstraints = {
@@ -43,45 +43,45 @@ public class Building extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.pinyin = StringUtils.lowerCase(PinyinHelper.convertToPinyinString(name, "", PinyinFormat.WITHOUT_TONE));
 		this.pinyinInitial = StringUtils.lowerCase(PinyinHelper.getShortPinyin(name));
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String pinyin_FIELDNAME = "pinyin";
-	@FieldDescribe("name拼音.")
+	@FieldDescribe("name 병음.")
 	@Index(name = TABLE + "_pinyin")
 	@Column(length = JpaObject.length_255B, name = "xpinyin")
 	@CheckPersist(allowEmpty = true)
 	private String pinyin;
 
 	public static final String pinyinInitial_FIELDNAME = "pinyinInitial";
-	@FieldDescribe("name拼音首字母.")
+	@FieldDescribe("name 병음 첫 글자.")
 	@Column(length = JpaObject.length_255B, name = "xpinyinInitial")
 	@Index(name = TABLE + "_pinyinInitial")
 	@CheckPersist(allowEmpty = true)
 	private String pinyinInitial;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称,不可重名.")
+	@FieldDescribe("이름, 중복 불가.")
 	@Column(length = JpaObject.length_255B, name = "xname")
 	@Index(name = TABLE + "_name")
 	@CheckPersist(allowEmpty = false, simplyString = true, citationNotExists =
-	/* 验证不可重名 */
+	/* 이름 중복 검증 */
 	@CitationNotExist(fields = { "name", "id" }, type = Building.class))
 	private String name;
 
 	public static final String address_FIELDNAME = "address";
-	@FieldDescribe("地点.")
+	@FieldDescribe("장소.")
 	@Column(length = JpaObject.length_255B, name = "xaddress")
 	@Index(name = TABLE + "_address")
 	@CheckPersist(allowEmpty = true, simplyString = true)

@@ -97,16 +97,16 @@ class ActionListFilterPaging extends BaseAction {
 
         private static final long serialVersionUID = -2991229948693512630L;
 
-        @FieldDescribe("名称")
+        @FieldDescribe("이름")
         private String name;
 
-        @FieldDescribe("工号")
+        @FieldDescribe("사번")
         private String employee;
 
-        @FieldDescribe("唯一标识")
+        @FieldDescribe("고유 식별자")
         private String unique;
 
-        @FieldDescribe("手机号.")
+        @FieldDescribe("휴대폰 번호.")
         private String mobile;
 
         public String getName() {

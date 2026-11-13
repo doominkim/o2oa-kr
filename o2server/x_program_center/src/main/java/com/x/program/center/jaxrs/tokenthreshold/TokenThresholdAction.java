@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("tokenthreshold")
-@JaxrsDescribe("令牌过期")
+@JaxrsDescribe("토큰 만료")
 public class TokenThresholdAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(TokenThresholdAction.class);
 
-	@JaxrsMethodDescribe(value = "接收消息,更新node节点上的过期tokenThreshold消息.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "메시지 수신, node 노드의 만료 tokenThreshold 메시지 갱신.", action = ActionUpdate.class)
 	@POST
 	@Path("update")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

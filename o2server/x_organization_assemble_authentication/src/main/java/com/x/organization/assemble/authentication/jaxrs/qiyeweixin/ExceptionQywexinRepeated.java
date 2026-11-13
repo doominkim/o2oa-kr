@@ -7,6 +7,6 @@ class ExceptionQywexinRepeated extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionQywexinRepeated(String userId) {
-		super("查询到重复的企业微信userid. {} " ,userId);
+		super("중복된 WeCom userid가 조회되었습니다. {} " ,userId);
 	}
 }

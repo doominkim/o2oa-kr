@@ -30,24 +30,24 @@
     "description": MWF.APPPD.LP.serial.unitAttribute[1]
 },
 //  "company": {
-//    "text": "公司",
+//    "text": "회사",
 //    "content": "",
-//    "description": "拟稿人所在公司名称"
+//    "description": "기안자 소속 회사명"
 //  },
 //  "department": {
-//    "text": "部门",
+//    "text": "부서",
 //    "content": "",
-//    "description": "拟稿人所在部门"
+//    "description": "기안자 소속 부서"
 //  },
 //  "companyAttribute": {
-//    "text": "公司属性",
+//    "text": "회사 속성",
 //    "content": "",
-//    "description": "拟稿人所在公司的属性"
+//    "description": "기안자 소속 회사의 속성"
 //  },
 //  "departmentAttribute": {
-//    "text": "部门属性",
+//    "text": "부서 속성",
 //    "content": "",
-//    "description": "拟稿人所在部门的属性"
+//    "description": "기안자 소속 부서의 속성"
 //  },
   "script": {
     "text": MWF.APPPD.LP.serial.script[0],

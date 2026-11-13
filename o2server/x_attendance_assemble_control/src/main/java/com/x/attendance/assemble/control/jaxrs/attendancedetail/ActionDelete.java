@@ -20,20 +20,20 @@ public class ActionDelete extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			AttendanceDetail attendanceDetail = emc.find(id, AttendanceDetail.class);
 			if ( null == attendanceDetail ) {
 				Exception exception = new ExceptionDetailNotExists(id);
 				result.error(exception);
 			} else {
-				// 进行数据库持久化操作
+				// 데이터베이스 영속화 작업 수행
 				emc.beginTransaction(AttendanceDetail.class);
 				emc.remove(attendanceDetail, CheckRemoveType.all);
 				emc.commit();
 				result.setData( new Wo(id) );
 			}
 		} catch (Exception e) {
-			Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在删除员工打卡信息时发生异常。ID:" + id);
+			Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보 삭제 중 오류가 발생했습니다. ID:" + id);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}

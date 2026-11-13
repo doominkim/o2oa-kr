@@ -19,11 +19,11 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 共享文件记录信息表
+ * 공유 파일 기록 정보 테이블
  * 
  * @author O2LEE
  */
-@Schema(name = "MindShareRecord", description = "脑图共享文件记录信息.")
+@Schema(name = "MindShareRecord", description = "마인드맵 공유 파일 기록 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.MindShareRecord.table, uniqueConstraints = {
@@ -44,7 +44,7 @@ public class MindShareRecord extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -53,33 +53,33 @@ public class MindShareRecord extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String fileId_FIELDNAME = "fileId";
-	@FieldDescribe("文件ID")
+	@FieldDescribe("파일 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + fileId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fileId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String fileId = "";
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件名称")
+	@FieldDescribe("파일 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name = "";
 
 	public static final String fileType_FIELDNAME = "fileType";
-	@FieldDescribe("文件类型：MIND | FOLDER")
+	@FieldDescribe("파일 유형: MIND | FOLDER")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + fileType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fileType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -93,21 +93,21 @@ public class MindShareRecord extends SliceJpaObject {
 	private String shareType = "分享";
 
 	public static final String source_FIELDNAME = "source";
-	@FieldDescribe("发送者")
+	@FieldDescribe("발신자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + source_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + source_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String source = "";
 
 	public static final String target_FIELDNAME = "target";
-	@FieldDescribe("目标用户")
+	@FieldDescribe("대상 사용자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + target_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + target_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String target = "";
 
 	public static final String targetType_FIELDNAME = "targetType";
-	@FieldDescribe("目标类型：PERSON | UNIT | GROUP | ROLE")
+	@FieldDescribe("대상 유형: PERSON | UNIT | GROUP | ROLE")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + targetType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

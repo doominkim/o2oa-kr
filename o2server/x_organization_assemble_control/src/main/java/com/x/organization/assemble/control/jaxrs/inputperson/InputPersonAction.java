@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("inputperson")
-@JaxrsDescribe("导入人员")
+@JaxrsDescribe("사용자 가져오기")
 public class InputPersonAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(InputPersonAction.class);
 
-	@JaxrsMethodDescribe(value = "上传Excel导入人员.", action = ActionInputAll.class)
+	@JaxrsMethodDescribe(value = "Excel 업로드로 사용자 가져오기.", action = ActionInputAll.class)
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void input(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("Excel文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("Excel 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionInputAll.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,7 +50,7 @@ public class InputPersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取导入人员模版.", action = ActionTemplate.class)
+	@JaxrsMethodDescribe(value = "사용자 가져오기 템플릿 조회.", action = ActionTemplate.class)
 	@GET
 	@Path("template")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -66,12 +66,12 @@ public class InputPersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取导入人员结果.", action = ActionGetResult.class)
+	@JaxrsMethodDescribe(value = "사용자 가져오기 결과 조회.", action = ActionGetResult.class)
 	@GET
 	@Path("result/flag/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getResult(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("导入文件返回的结果标记") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("가져오기 파일 반환 결과 표시") @PathParam("flag") String flag) {
 		ActionResult<ActionGetResult.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -83,7 +83,7 @@ public class InputPersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "清空人员组织数据.", action = ActionWipeAll.class)
+	@JaxrsMethodDescribe(value = "사용자 조직 데이터 비우기.", action = ActionWipeAll.class)
 	@GET
 	@Path("wipe")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

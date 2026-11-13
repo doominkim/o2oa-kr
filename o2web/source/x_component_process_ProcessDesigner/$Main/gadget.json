@@ -26,7 +26,7 @@
   },
 //  "condition": {
 //    "icon": "condition24.png",
-//    "text": "条件活动",
+//    "text": "조건 활동",
 //    "className": "Condition"
 //  },
   "split": {
@@ -71,7 +71,7 @@
   },
 //  "message": {
 //    "icon": "message24.png",
-//    "text": "消息",
+//    "text": "메시지",
 //    "className": "Message"
 //  },
   "agent": {

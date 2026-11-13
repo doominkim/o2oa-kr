@@ -7,6 +7,6 @@ class ExceptionFieldName extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionFieldName(String name) {
-		super("字段名不可用:{}.", name);
+		super("사용할 수 없는 필드 이름: {}.", name);
 	}
 }

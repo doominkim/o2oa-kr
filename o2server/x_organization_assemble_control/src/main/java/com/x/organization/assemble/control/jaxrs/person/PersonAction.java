@@ -32,18 +32,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("person")
-@JaxrsDescribe("个人操作")
+@JaxrsDescribe("개인 조작")
 public class PersonAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(PersonAction.class);
 
-    @JaxrsMethodDescribe(value = "获取个人,附带身份,身份所在的组织,个人所在群组,个人拥有角色.", action = ActionGet.class)
+    @JaxrsMethodDescribe(value = "개인 조회, 신분·신분 소속 조직·소속 그룹·보유 역할 포함.", action = ActionGet.class)
     @GET
     @Path("{flag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -55,7 +55,7 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "创建个人.", action = ActionCreate.class)
+    @JaxrsMethodDescribe(value = "개인 생성.", action = ActionCreate.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -72,13 +72,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "更新个人.", action = ActionEdit.class)
+    @JaxrsMethodDescribe(value = "개인 수정.", action = ActionEdit.class)
     @PUT
     @Path("{flag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
         ActionResult<ActionEdit.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -90,13 +90,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "更新个人mockputtopost.", action = ActionEdit.class)
+    @JaxrsMethodDescribe(value = "개인 수정 mockputtopost.", action = ActionEdit.class)
     @POST
     @Path("{flag}/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void editMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
         ActionResult<ActionEdit.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -108,13 +108,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "删除个人.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "개인 삭제.", action = ActionDelete.class)
     @DELETE
     @Path("{flag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -126,13 +126,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "删除个人mockdeletetoget.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "개인 삭제 mockdeletetoget.", action = ActionDelete.class)
     @GET
     @Path("{flag}/mockdeletetoget")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -144,13 +144,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "删除个人关联信息（身份、角色等），但保留人员（企业离退休人员需要能登录平台但不能做业务处理）.", action = ActionReserveDelete.class)
+    @JaxrsMethodDescribe(value = "개인 연관 정보(신분, 역할 등) 삭제, 사용자는 유지(퇴직자는 플랫폼 로그인은 가능하나 업무 처리는 불가).", action = ActionReserveDelete.class)
     @DELETE
     @Path("{flag}/reserve")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void reserveDelete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionReserveDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -162,14 +162,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "删除个人关联信息（身份、角色等），但保留人员（企业离退休人员需要能登录平台但不能做业务处理）.", action = ActionReserveDelete.class)
+    @JaxrsMethodDescribe(value = "개인 연관 정보(신분, 역할 등) 삭제, 사용자는 유지(퇴직자는 플랫폼 로그인은 가능하나 업무 처리는 불가).", action = ActionReserveDelete.class)
     @GET
     @Path("{flag}/reserve/mockdeletetoget")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void reserveDeleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionReserveDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -181,14 +181,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示个人,下一页.", action = ActionListNext.class)
+    @JaxrsMethodDescribe(value = "개인 목록, 다음 페이지.", action = ActionListNext.class)
     @GET
     @Path("list/{flag}/next/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
         ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -200,14 +200,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "列示个人,上一页.", action = ActionListPrev.class)
+    @JaxrsMethodDescribe(value = "개인 목록, 이전 페이지.", action = ActionListPrev.class)
     @GET
     @Path("list/{flag}/prev/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
         ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -219,14 +219,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据给定的群组,列示直接个人成员.", action = ActionListSubDirectWithGroup.class)
+    @JaxrsMethodDescribe(value = "지정 그룹의 직접 개인 멤버 목록.", action = ActionListSubDirectWithGroup.class)
     @GET
     @Path("list/group/{groupFlag}/sub/direct")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listSubDirectWithGroup(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("群组标识") @PathParam("groupFlag") String groupFlag) {
+            @JaxrsParameterDescribe("그룹 식별자") @PathParam("groupFlag") String groupFlag) {
         ActionResult<List<ActionListSubDirectWithGroup.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -238,14 +238,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根根据给定的群组,列示嵌套的个人成员.", action = ActionListSubNestedWithGroup.class)
+    @JaxrsMethodDescribe(value = "지정 그룹의 중첩 개인 멤버 목록.", action = ActionListSubNestedWithGroup.class)
     @GET
     @Path("list/group/{groupFlag}/sub/nested")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listSubNestedWithGroup(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("群组标识") @PathParam("groupFlag") String groupFlag) {
+            @JaxrsParameterDescribe("그룹 식별자") @PathParam("groupFlag") String groupFlag) {
         ActionResult<List<ActionListSubNestedWithGroup.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -257,13 +257,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根根据给定的角色,列示个人成员.", action = ActionListWithRole.class)
+    @JaxrsMethodDescribe(value = "지정 역할의 개인 멤버 목록.", action = ActionListWithRole.class)
     @GET
     @Path("list/role/{roleFlag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listWithRole(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("角色标识") @PathParam("roleFlag") String roleFlag) {
+            @JaxrsParameterDescribe("역할 식별자") @PathParam("roleFlag") String roleFlag) {
         ActionResult<List<ActionListWithRole.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -275,7 +275,7 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取拼音首字母开始的个人.", action = ActionListPinyinInitial.class)
+    @JaxrsMethodDescribe(value = "병음 첫 글자로 시작하는 개인 조회.", action = ActionListPinyinInitial.class)
     @PUT
     @Path("list/pinyininitial")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -293,7 +293,7 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "获取拼音首字母开始的个人mockputtopost.", action = ActionListPinyinInitial.class)
+    @JaxrsMethodDescribe(value = "병음 첫 글자로 시작하는 개인 조회 mockputtopost.", action = ActionListPinyinInitial.class)
     @POST
     @Path("list/pinyininitial/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -312,7 +312,7 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据名称进行模糊查询.", action = ActionListLike.class)
+    @JaxrsMethodDescribe(value = "이름으로 부분 일치 검색.", action = ActionListLike.class)
     @PUT
     @Path("list/like")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -330,7 +330,7 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据名称进行模糊查询mockputtopost.", action = ActionListLike.class)
+    @JaxrsMethodDescribe(value = "이름으로 퍼지 검색 mockputtopost.", action = ActionListLike.class)
     @POST
     @Path("list/like/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -348,7 +348,7 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据拼音或者首字母进行模糊查询.", action = ActionListLikePinyin.class)
+    @JaxrsMethodDescribe(value = "병음 또는 첫 글자로 부분 일치 검색.", action = ActionListLikePinyin.class)
     @PUT
     @Path("list/like/pinyin")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -366,7 +366,7 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "根据拼音或者首字母进行模糊查询mockputtopost.", action = ActionListLikePinyin.class)
+    @JaxrsMethodDescribe(value = "병음 또는 첫 글자로 퍼지 검색 mockputtopost.", action = ActionListLikePinyin.class)
     @POST
     @Path("list/like/pinyin/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -385,13 +385,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "更新指定个人的密码.", action = ActionSetPassword.class)
+    @JaxrsMethodDescribe(value = "지정 개인 비밀번호 변경.", action = ActionSetPassword.class)
     @PUT
     @Path("{flag}/set/password")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void setPassword(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("个人标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("개인 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
         ActionResult<ActionSetPassword.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -403,14 +403,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "更新指定个人的密码mockputtopost.", action = ActionSetPassword.class)
+    @JaxrsMethodDescribe(value = "지정 개인 비밀번호 변경 mockputtopost.", action = ActionSetPassword.class)
     @POST
     @Path("{flag}/set/password/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void setPasswordMockPutToPost(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("个人标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("개인 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
         ActionResult<ActionSetPassword.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -422,13 +422,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "重置个人的密码.", action = ActionResetPassword.class)
+    @JaxrsMethodDescribe(value = "개인 비밀번호 초기화.", action = ActionResetPassword.class)
     @GET
     @Path("{flag}/reset/password")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void resetPassword(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("个人标识") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("개인 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionResetPassword.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -440,13 +440,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "校验password密码等级.", action = ActionCheckPassword.class)
+    @JaxrsMethodDescribe(value = "password 비밀번호 등급 검증.", action = ActionCheckPassword.class)
     @GET
     @Path("check/password/{password}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void checkPassword(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("校验密码") @PathParam("password") String password) {
+            @JaxrsParameterDescribe("비밀번호 검증") @PathParam("password") String password) {
         ActionResult<ActionCheckPassword.Wo> result = new ActionResult<>();
         try {
             result = new ActionCheckPassword().execute(password);
@@ -457,12 +457,12 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取个人头像.", action = ActionGetIcon.class)
+    @JaxrsMethodDescribe(value = "개인 프로필 사진 조회.", action = ActionGetIcon.class)
     @GET
     @Path("{flag}/icon")
     @Consumes(MediaType.APPLICATION_JSON)
     public void getIconWithPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("个人标识或者身份标志") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("개인 식별자 또는 신분 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionGetIcon.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -474,15 +474,15 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "设置个人的头像.", action = ActionSetIcon.class)
+    @JaxrsMethodDescribe(value = "개인 프로필 사진 설정.", action = ActionSetIcon.class)
     @PUT
     @Path("{flag}/icon")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     public void setIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("个人标识") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("개인 식별자") @PathParam("flag") String flag,
             @FormDataParam(FILE_FIELD) final byte[] bytes,
-            @JaxrsParameterDescribe("头像文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+            @JaxrsParameterDescribe("프로필 사진 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionSetIcon.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -494,15 +494,15 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "设置个人的头像mockputtopost.", action = ActionSetIcon.class)
+    @JaxrsMethodDescribe(value = "개인 프로필 사진 설정 mockputtopost.", action = ActionSetIcon.class)
     @POST
     @Path("{flag}/icon/mockputtopost")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     public void setIconMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("个人标识") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("개인 식별자") @PathParam("flag") String flag,
             @FormDataParam(FILE_FIELD) final byte[] bytes,
-            @JaxrsParameterDescribe("头像文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+            @JaxrsParameterDescribe("프로필 사진 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionSetIcon.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -514,13 +514,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "锁定用户.", action = ActionDoLock.class)
+    @JaxrsMethodDescribe(value = "사용자 잠금.", action = ActionDoLock.class)
     @POST
     @Path("lock/{flag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void lockPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                             @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+                             @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
         ActionResult<ActionDoLock.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -532,13 +532,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getDefaultActionResultResponse(result));
     }
 
-    @JaxrsMethodDescribe(value = "用户解锁，用于管理员解锁登录多次失败被锁定的用户.", action = ActionUnlock.class)
+    @JaxrsMethodDescribe(value = "사용자 잠금 해제, 관리자가 로그인 여러 번 실패로 잠긴 사용자를 해제할 때 사용.", action = ActionUnlock.class)
     @GET
     @Path("unlock/{flag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void unlockPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionUnlock.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -550,15 +550,15 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getDefaultActionResultResponse(result));
     }
 
-    @JaxrsMethodDescribe(value = "设置用户密码到期时间，用于管理员设置用户的密码到期时间.", action = ActionSetPasswordExpiredTime.class)
+    @JaxrsMethodDescribe(value = "사용자 비밀번호 만료 시간 설정, 관리자가 사용자 비밀번호 만료 시간을 설정할 때 사용.", action = ActionSetPasswordExpiredTime.class)
     @GET
     @Path("{flag}/set/password/expired/time/{date}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void setPasswordExpiredTime(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("过期时间") @PathParam("date") String date) {
+            @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("만료 시간") @PathParam("date") String date) {
         ActionResult<ActionSetPasswordExpiredTime.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -570,13 +570,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getDefaultActionResultResponse(result));
     }
 
-    @JaxrsMethodDescribe(value = "禁用用户.", action = ActionDoBan.class)
+    @JaxrsMethodDescribe(value = "사용자 비활성화.", action = ActionDoBan.class)
     @POST
     @Path("ban/{flag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void banPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                           @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+                           @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
         ActionResult<ActionDoBan.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -588,13 +588,13 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getDefaultActionResultResponse(result));
     }
 
-    @JaxrsMethodDescribe(value = "用户解禁.", action = ActionUnban.class)
+    @JaxrsMethodDescribe(value = "사용자 비활성화 해제.", action = ActionUnban.class)
     @POST
     @Path("unban/{flag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void unbanPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                             @JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+                             @JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
         ActionResult<ActionUnban.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -606,14 +606,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getDefaultActionResultResponse(result));
     }
 
-    @JaxrsMethodDescribe(value = "分页查询用户信息.", action = ActionListFilterPaging.class)
+    @JaxrsMethodDescribe(value = "사용자 정보 페이지 조회.", action = ActionListFilterPaging.class)
     @POST
     @Path("list/filter/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listFilterPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-                                 @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+                                 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+                                 @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListFilterPaging.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -625,14 +625,14 @@ public class PersonAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "分页查询删除(注销)用户信息.", action = ActionListDeletePaging.class)
+    @JaxrsMethodDescribe(value = "삭제(탈퇴) 사용자 정보 페이지 조회.", action = ActionListDeletePaging.class)
     @POST
     @Path("list/delete/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listDeletePaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-                                 @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+                                 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+                                 @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListDeletePaging.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

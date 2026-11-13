@@ -27,7 +27,7 @@ public class ActionSynApplicationsFromMarket extends BaseAction {
 	
 	private static  Logger logger = LoggerFactory.getLogger( ActionSynApplicationsFromMarket.class );
 
-	//从应用市场同步所有的应用名称，存入论坛板块"应用市场"字段subjectTypeList
+	//앱 마켓에서 모든 앱 이름을 동기화하여 포럼 게시판 "앱 마켓" 필드 subjectTypeList에 저장
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wrap = null;

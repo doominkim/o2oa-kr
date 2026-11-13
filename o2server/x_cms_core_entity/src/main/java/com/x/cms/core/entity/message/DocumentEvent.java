@@ -20,7 +20,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "DocumentEvent", description = "文档处理事件.")
+@Schema(name = "DocumentEvent", description = "문서 처리 이벤트.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Message.DocumentEvent.TABLE, uniqueConstraints = {
@@ -46,12 +46,12 @@ public class DocumentEvent extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
-    /* 以上为 JpaObject 默认字段 */
+    /* 위는 JpaObject 기본 필드 */
 
     @Override
     public void onPersist() throws Exception {
@@ -99,24 +99,24 @@ public class DocumentEvent extends SliceJpaObject {
     }
 
     public static final String DOCUMENT_FIELDNAME = "document";
-    @Schema(description = "文档标识.")
-    @FieldDescribe("文档标识.")
+    @Schema(description = "문서 식별자.")
+    @FieldDescribe("문서 식별자.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + DOCUMENT_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + DOCUMENT_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String document;
 
     public static final String TYPE_FIELDNAME = "type";
-    @Schema(description = "工作事件类型.")
-    @FieldDescribe("工作事件类型.")
+    @Schema(description = "업무 이벤트 유형.")
+    @FieldDescribe("업무 이벤트 유형.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + TYPE_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + TYPE_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String type;
 
     public static final String APPINFO_FIELDNAME = "appInfo";
-    @Schema(description = "栏目标识.")
-    @FieldDescribe("栏目标识.")
+    @Schema(description = "게시판 식별자.")
+    @FieldDescribe("게시판 식별자.")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + APPINFO_FIELDNAME)
     @Index(name = TABLE + IndexNameMiddle + APPINFO_FIELDNAME)
     @CheckPersist(allowEmpty = false)

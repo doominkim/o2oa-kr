@@ -173,7 +173,7 @@ MWF.xApplication.process.Work.Main = new Class({
     },
     loadWorkByWork: function(id){
 	    debugger;
-        //var getWorkLogMothed = "getWorkLog";    //以前使用worklog，现在改成record了
+        //var getWorkLogMothed = "getWorkLog";    //이전에는 worklog를 사용, 현재는 record로 변경
         //var getWorkLogMothed = (this.options.worklogType.toLowerCase()==="worklog") ? "getWorkLog" : "getRecordLog";
         var loadFormFlag = false;
         var loadWorkFlag = false;
@@ -254,7 +254,7 @@ MWF.xApplication.process.Work.Main = new Class({
                     loadFormFlag = true;
                     check();
                 }else{
-                    //临时查看效果
+                    //임시로 효과 확인
                     // if (formId=="4f8b4fde-d963-468c-b6c9-9e7b919f0bd0"){
                     //     o2.JSON.get("../x_desktop/res/form/4f8b4fde-d963-468c-b6c9-9e7b919f0bd0.json", function(formJson){
                     //         json_form = formJson;
@@ -651,7 +651,7 @@ MWF.xApplication.process.Work.Main = new Class({
     },
     getCurrentTaskData: function(data){
         if (data.activity && data.activity.hasOwnProperty('processingTaskOnceUnderSamePerson') && !data.activity.processingTaskOnceUnderSamePerson){
-            //不进行待办合并处理，需要用户选择一个身份后继续
+            //결재 대기 병합 처리를 하지 않음, 사용자가 신분을 선택한 뒤 계속
             var _self = this;
             var task = (this.options.taskId) ?  this.taskList.find(function(t){
                 return t.id === _self.options.taskId;
@@ -664,7 +664,7 @@ MWF.xApplication.process.Work.Main = new Class({
             });
             return (taskList.length && taskList.length===1) ? taskList[0] : taskList;
         }else{
-            //进行待办合并处理
+            //결재 대기 병합 처리
             if ( this.taskList && (data.currentTaskIndex || data.currentTaskIndex===0) && data.currentTaskIndex != -1){
                 if( this.taskList[data.currentTaskIndex] ){
                     this.options.taskId = this.taskList[data.currentTaskIndex].id;

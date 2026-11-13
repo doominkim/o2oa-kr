@@ -533,8 +533,8 @@ MWF.xApplication.ForumDocument.Main = new Class({
 	saveSubject  : function(ev){
 		var _self = this;
 		var data = this.form.getResult(true, ",", true, false, true);
-		if( !data ){ //校验没通过
-			// 校验投票
+		if( !data ){ //검증 실패
+			// 투표 검증
 			var typeCategory = this.form.getItem("typeCategory");
 			if( typeCategory.getValue() == this.lp.vote || typeCategory.getValue() == "投票"){
 				this.vote.getVoteInfor()
@@ -2274,7 +2274,7 @@ MWF.xApplication.ForumDocument.ReplyDocument = new Class({
 			}.bind(IM));
 		}
 	},
-	createReply : function(itemNode, ev ){ // 对回复进行回复
+	createReply : function(itemNode, ev ){ // 답글에 답글 달기
 		if( this.app.access.isAnonymousDynamic() ){
 			this.app.openLoginForm( function(){ this.app.reload() }.bind(this) );
 		}else{
@@ -2290,7 +2290,7 @@ MWF.xApplication.ForumDocument.ReplyDocument = new Class({
 			form.create()
 		}
 	},
-	editReply : function(itemNode, ev ){	//编辑当前回复
+	editReply : function(itemNode, ev ){	//현재 답글 편집
 		var form = new MWF.xApplication.ForumDocument.ReplyForm(this, this.data, {
 			toMain : (this.data.parentId && this.data.parentId!="") ? false : true,
 			onPostOk : function( id ){

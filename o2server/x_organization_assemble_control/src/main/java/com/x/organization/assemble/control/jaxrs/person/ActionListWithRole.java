@@ -49,7 +49,7 @@ class ActionListWithRole extends BaseAction {
 		List<Person> os = business.person().pick(ids);
 		List<Wo> wos = Wo.copier.copy(os);
 		wos = business.person().sort(wos);
-		/** 产生头像 */
+		/** 프로필 사진 생성 */
 		// this.updateIcon(wos);
 		return wos;
 	}

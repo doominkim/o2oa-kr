@@ -14,14 +14,14 @@ import com.x.mind.entity.MindContentInfo;
 import com.x.mind.entity.MindRecycleInfo;
 
 /**
- * 脑图信息查询操作服务类：查询
+ * 마인드맵 정보 조회 작업 서비스 클래스: 조회
  * @author O2LEE
  *
  */
 class ServiceMindInfoQuery{
 
 	/**
-	 * 根据指定的ID列表获取脑图基本信息列表
+	 * 지정 ID 목록으로 마인드맵 기본 정보 목록 조회
 	 * @param emc
 	 * @param ids
 	 * @return
@@ -33,7 +33,7 @@ class ServiceMindInfoQuery{
 	}
 	
 	/**
-	 * 根据ID获取指定的脑图基础信息对象
+	 * ID로 지정 마인드맵 기본 정보 객체 조회
 	 * @param emc
 	 * @param id
 	 * @return
@@ -45,7 +45,7 @@ class ServiceMindInfoQuery{
 	}
 	
 	/**
-	 * 根据ID获取指定的脑图详细内容信息对象
+	 * ID로 지정 마인드맵 상세 내용 정보 객체 조회
 	 * @param emc
 	 * @param id
 	 * @return
@@ -56,7 +56,7 @@ class ServiceMindInfoQuery{
 	}
 	
 	/**
-	 * 根据ID获取指定脑图的详细内容
+	 * ID로 지정 마인드맵의 상세 내용 조회
 	 * @param emc
 	 * @param id
 	 * @return
@@ -71,7 +71,7 @@ class ServiceMindInfoQuery{
 	}
 
 	/**
-	 * 根据目录ID获取目录下的所有脑图信息ID列表
+	 * 디렉터리 ID로 디렉터리의 모든 마인드맵 정보 ID 목록 조회
 	 * @param emc
 	 * @param folderId
 	 * @return
@@ -83,7 +83,7 @@ class ServiceMindInfoQuery{
 	}
 
 	/**
-	 * 查询脑图， 下一页
+	 * 마인드맵 조회, 다음 페이지
 	 * @param emc
 	 * @param id
 	 * @param count
@@ -113,21 +113,21 @@ class ServiceMindInfoQuery{
 		if( orderType == null || orderType.isEmpty() ){
 			orderType = "DESC";
 		}
-		//查询出ID对应的记录相应的排序列数据值
+		//ID에 해당하는 기록의 정렬 열 데이터 값 조회
 		if( StringUtils.isNotEmpty(id) && !StringUtils.equalsIgnoreCase( id, StandardJaxrsAction.EMPTY_SYMBOL ) ){
 			entity = emc.find( id, MindBaseInfo.class );
 			if( entity != null ){
-				if( "folderId".equals( orderField  )){//文件夹
+				if( "folderId".equals( orderField  )){//폴더
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "folder_sequence" );
-				}else if( "createTime".equals( orderField  )){//创建时间
+				}else if( "createTime".equals( orderField  )){//생성 시간
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "createTime" );
-				}else if( "updateTime".equals( orderField  )){//创建时间
+				}else if( "updateTime".equals( orderField  )){//생성 시간
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "updateTime" );
-				}else if( "shared".equals( orderField  )){//是否已分享
+				}else if( "shared".equals( orderField  )){//공유 여부
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "shared_sequence" );
-				}else if( "creator".equals( orderField  )){//创建者
+				}else if( "creator".equals( orderField  )){//작성자
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "creator_sequence" );
-				}else if( "creatorUnit".equals( orderField  )){//创建者所属组织
+				}else if( "creatorUnit".equals( orderField  )){//생성자 소속 조직
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "creatorUnit_sequence" );
 				}else if(  JpaObject.sequence_FIELDNAME.equals( orderField  )){//sequence
 					sequenceFieldValue = PropertyUtils.getProperty( entity,  JpaObject.sequence_FIELDNAME );
@@ -149,19 +149,19 @@ class ServiceMindInfoQuery{
 		if( orderType == null || orderType.isEmpty() ){
 			orderType = "DESC";
 		}
-		//查询出ID对应的记录相应的排序列数据值
+		//ID에 해당하는 기록의 정렬 열 데이터 값 조회
 		if( StringUtils.isNotEmpty(id) && !StringUtils.equalsIgnoreCase( id, StandardJaxrsAction.EMPTY_SYMBOL ) ){
 			entity = emc.find( id, MindRecycleInfo.class );
 			if( entity != null ){
-				if( "folderId".equals( orderField  )){//文件夹
+				if( "folderId".equals( orderField  )){//폴더
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "folder_sequence" );
-				}else if( "createTime".equals( orderField  )){//创建时间
+				}else if( "createTime".equals( orderField  )){//생성 시간
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "createTime" );
-				}else if( "shared".equals( orderField  )){//是否已分享
+				}else if( "shared".equals( orderField  )){//공유 여부
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "shared_sequence" );
-				}else if( "creator".equals( orderField  )){//创建者
+				}else if( "creator".equals( orderField  )){//작성자
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "creator_sequence" );
-				}else if( "creatorUnit".equals( orderField  )){//创建者所属组织
+				}else if( "creatorUnit".equals( orderField  )){//생성자 소속 조직
 					sequenceFieldValue = PropertyUtils.getProperty( entity, "creatorUnit_sequence" );
 				}else if(  JpaObject.sequence_FIELDNAME.equals( orderField  )){//sequence
 					sequenceFieldValue = PropertyUtils.getProperty( entity,  JpaObject.sequence_FIELDNAME );

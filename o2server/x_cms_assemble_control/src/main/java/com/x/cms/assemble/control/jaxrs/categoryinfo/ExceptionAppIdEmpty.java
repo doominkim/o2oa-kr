@@ -7,6 +7,6 @@ class ExceptionAppIdEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionAppIdEmpty() {
-		super("分类信息中“所属应用栏目ID”不能为空。" );
+		super("분류 정보의 “소속 앱 게시판 ID”는 비워 둘 수 없습니다." );
 	}
 }

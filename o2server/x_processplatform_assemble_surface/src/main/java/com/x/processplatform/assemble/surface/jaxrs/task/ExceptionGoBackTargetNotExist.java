@@ -7,7 +7,7 @@ class ExceptionGoBackTargetNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = 3674258561301135294L;
 
 	ExceptionGoBackTargetNotExist(String activity) {
-		super("回退目标活动不存在, activity: {}.", activity);
+		super("반송 대상 단계가 없습니다, activity: {}.", activity);
 	}
 
 }

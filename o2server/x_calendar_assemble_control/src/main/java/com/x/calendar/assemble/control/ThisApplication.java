@@ -32,9 +32,9 @@ public class ThisApplication {
 		try {
 			CacheManager.init(context.clazz().getSimpleName());
 			MessageConnector.start(context());
-			// 每30秒检查一次需要推送的消息
+			// 30초마다 푸시할 메시지 확인
 			context.schedule(AlarmTrigger.class, "0/30 * * * * ?");
-			// 每两小时检查一次comment信息的引用情况，删除多余的不必要的数据
+			// 2시간마다 comment 정보의 참조 상태를 확인하고 불필요한 데이터 삭제
 			context.schedule(CheckEventComment.class, "4 4 */2 * * ?");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class ThisApplication {
 	}
 
 	/**
-	 * 判断用户是否有Calendar系统管理权限 1、系统管理员Manager或者xadmin 2、拥有CalendarManager角色的人员
+	 * 사용자의 Calendar 시스템 관리 권한 여부 판단 1. 시스템 관리자 Manager 또는 xadmin 2. CalendarManager 역할을 가진 사용자
 	 * 
 	 * @param effectivePerson
 	 * @return
@@ -69,7 +69,7 @@ public class ThisApplication {
 	}
 
 	/**
-	 * 判断用户是否拥有指定日历的管理权限
+	 * 사용자가 지정한 캘린더의 관리 권한을 가졌는지 판단
 	 * 
 	 * @param effectivePerson
 	 * @param calendar
@@ -80,7 +80,7 @@ public class ThisApplication {
 			return true;
 		}
 		if (calendar != null) {
-			// 判断管理权限
+			// 관리 권한 판단
 			if (calendar.getCreateor().equalsIgnoreCase(effectivePerson.getDistinguishedName())) {
 				return true;
 			}
@@ -93,7 +93,7 @@ public class ThisApplication {
 	}
 
 	/**
-	 * 判断用户是否拥有指定日历的日程事件发布权限
+	 * 사용자가 지정한 캘린더의 일정 이벤트 게시 권한을 가졌는지 판단
 	 * 
 	 * @param effectivePerson
 	 * @param calendar
@@ -108,7 +108,7 @@ public class ThisApplication {
 			if (BooleanUtils.isTrue(isCalendarManager(effectivePerson, calendar))) {
 				return true;
 			}
-			// 判断发布权限
+			// 게시 권한 판단
 			String personName = effectivePerson.getDistinguishedName();
 			if (ListTools.isNotEmpty(calendar.getPublishablePersonList())
 					&& calendar.getPublishablePersonList().contains(personName)) {
@@ -137,7 +137,7 @@ public class ThisApplication {
 	}
 
 	/**
-	 * 判断用户是否拥有指定日历的日程事件发布权限
+	 * 사용자가 지정한 캘린더의 일정 이벤트 게시 권한을 가졌는지 판단
 	 * 
 	 * @param effectivePerson
 	 * @param calendar
@@ -155,7 +155,7 @@ public class ThisApplication {
 				return true;
 			}
 			UserManagerService userManagerService = new UserManagerService();
-			// 判断发布权限
+			// 게시 권한 판단
 			String personName = effectivePerson.getDistinguishedName();
 			unitNames = userManagerService.listUnitNamesWithPerson(personName);
 			groupNames = userManagerService.listGroupNamesByPerson(personName);
@@ -186,7 +186,7 @@ public class ThisApplication {
 	}
 
 	/**
-	 * 判断用户是否拥有指定日程事件的管理权限
+	 * 사용자가 지정한 일정 이벤트의 관리 권한을 가졌는지 판단
 	 * 
 	 * @param effectivePerson
 	 * @param event
@@ -205,11 +205,11 @@ public class ThisApplication {
 			String personName = effectivePerson.getDistinguishedName();
 			unitNames = userManagerService.listUnitNamesWithPerson(personName);
 			groupNames = userManagerService.listGroupNamesByPerson(personName);
-			// 判断日历的发布权限
+			// 캘린더 게시 권한 판단
 			if (BooleanUtils.isTrue(isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar))) {
 				return true;
 			}
-			// 判断事件的管理权限
+			// 이벤트 관리 권한 판단
 			if (ListTools.isNotEmpty(event.getManageablePersonList())
 					&& calendar.getManageablePersonList().contains(personName)) {
 				return true;

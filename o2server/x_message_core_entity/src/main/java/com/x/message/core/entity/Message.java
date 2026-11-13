@@ -23,7 +23,7 @@ import org.apache.openjpa.persistence.Persistent;
 import org.apache.openjpa.persistence.jdbc.Index;
 import org.apache.openjpa.persistence.jdbc.Strategy;
 
-@Schema(name = "Message", description = "消息消息对象.")
+@Schema(name = "Message", description = "메시지 객체.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Message.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class Message extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -66,54 +66,54 @@ public class Message extends SliceJpaObject {
 	}
 
 	public static final String TITLE_FIELDNAME = "title";
-	@FieldDescribe("通知标题.")
+	@FieldDescribe("알림 제목.")
 	@Column(length = 500, name = ColumnNamePrefix + TITLE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String BODY_FIELDNAME = "body";
-	@FieldDescribe("内容.")
+	@FieldDescribe("내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = length_10M, name = ColumnNamePrefix + BODY_FIELDNAME)
 	private String body;
 
 	public static final String TYPE_FIELDNAME = "type";
-	@FieldDescribe("消息类型.")
+	@FieldDescribe("메시지 유형.")
 	@Column(length = length_255B, name = ColumnNamePrefix + TYPE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + TYPE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String CONSUMER_FIELDNAME = "consumer";
-	@FieldDescribe("消费者.")
+	@FieldDescribe("소비자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + CONSUMER_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + CONSUMER_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String consumer;
 
 	public static final String PERSON_FIELDNAME = "person";
-	@FieldDescribe("通知对象.")
+	@FieldDescribe("알림 대상.")
 	@Column(length = length_255B, name = ColumnNamePrefix + PERSON_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + PERSON_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String person;
 
 	public static final String CONSUMED_FIELDNAME = "consumed";
-	@FieldDescribe("是否已经消费掉.")
+	@FieldDescribe("소비 완료 여부.")
 	@Column(name = ColumnNamePrefix + CONSUMED_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean consumed;
 
 	public static final String INSTANT_FIELDNAME = "instant";
-	@FieldDescribe("主体消息id.")
+	@FieldDescribe("주 메시지 id.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + INSTANT_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + INSTANT_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String instant;
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

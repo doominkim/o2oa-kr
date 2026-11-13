@@ -13,7 +13,7 @@ public class WoMaxAgeFastETag extends GsonPropertyObject {
 	private Integer maxAge = null;
 
 	/**
-	 * 设置了maxAge才会生效
+	 * maxAge를 설정해야 적용됨
 	 */
 	private Date lastModified = null;
 

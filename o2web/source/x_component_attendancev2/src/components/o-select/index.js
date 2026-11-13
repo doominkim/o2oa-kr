@@ -11,14 +11,14 @@ export default content({
         return {
             lp,
             showClear: false,
-            result: {}, // 选中的值
-            showValue: "", // 显示
-            itemList: [], // 下拉列表，里面是对象
-            itemValueKey: "value", // 选项对应存储值的字段名
-            itemNameKey: "name", // 选项对应存储显示名称的字段名
+            result: {}, // 선택된 값
+            showValue: "", // 표시
+            itemList: [], // 드롭다운 목록, 객체 포함
+            itemValueKey: "value", // 옵션 저장 값 필드명
+            itemNameKey: "name", // 옵션 표시 이름 필드명
         };
     },
-    // 组件事件
+    // 컴포넌트 이벤트
     afterRender() {
       this.selectorDom = this.dom.querySelector(".o-select-list");
       let bindDom = this.dom.querySelector(".input");
@@ -32,9 +32,9 @@ export default content({
         this.selectorDom.hide();
         this.$parent.dom.removeEventListener('mousedown', this.hideEvent);
     },
-    // 选择器关闭
+    // 선택기 닫기
     selectoOutHide(e) {
-      // 计算下拉框的范围，范围外点击隐藏
+      // 드롭다운 범위 계산, 범위 밖 클릭 시 숨김
         const eCoor = this.selectorDom.getBoundingClientRect();
         const elementCoords =  {
           width: this.selectorDom.clientWidth,
@@ -49,7 +49,7 @@ export default content({
           this.selectorHide();
         }
     },
-    // 添加选择器关闭时间
+    // 선택기 닫기 이벤트 추가
     addCloseEventToParent() {
       this.hideEvent = this.selectoOutHide.bind(this);
       this.$parent.dom.addEventListener('mousedown', this.hideEvent );
@@ -65,14 +65,14 @@ export default content({
         this.clearValue();
       }
     },
-    // 显示内容
+    // 표시 내용
     showValueFun() {
       if (this.bind.result && this.bind.result[this.bind.itemNameKey]) {
         return this.bind.result[this.bind.itemNameKey];
       }
       return lp.components.selectPlaceholder
     },
-    // 选择
+    // 선택
     changeSelect(item) {
       this.bind.result = item;
       this.bind.showValue = this.showValueFun();

@@ -95,9 +95,9 @@ class ActionFindWorkWorkCompleted extends BaseAction {
 
 		private static final long serialVersionUID = 8586585135373549163L;
 
-		@FieldDescribe("属于job的work")
+		@FieldDescribe("job에 속한 work")
 		private List<WoWork> workList = new ArrayList<>();
-		@FieldDescribe("属于job的workCompleted")
+		@FieldDescribe("job에 속한 workCompleted")
 		private List<WoWorkCompleted> workCompletedList = new ArrayList<>();
 
 		public List<WoWork> getWorkList() {

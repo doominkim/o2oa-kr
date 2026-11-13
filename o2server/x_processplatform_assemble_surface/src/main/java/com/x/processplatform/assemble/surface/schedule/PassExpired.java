@@ -60,13 +60,13 @@ public class PassExpired extends AbstractJob {
 					if (!targets.isEmpty()) {
 						sequence = targets.get(targets.size() - 1).getSequence();
 						for (Task task : targets) {
-							LOGGER.print("执行超时工作默认路由流转:{}, id:{}.", task.getTitle(), task.getId());
+							LOGGER.print("시간 초과 업무 문서 기본 경로 진행 실행: {}, id: {}.", task.getTitle(), task.getId());
 							this.execute(task);
 							count.incrementAndGet();
 						}
 					}
 				} while (!targets.isEmpty());
-				LOGGER.print("完成{}个超时工作默认路由流转, 耗时:{}.", count.intValue(), stamp.consumingMilliseconds());
+				LOGGER.print("시간 초과 업무 문서 {}건 기본 경로 진행 완료, 소요 시간: {}.", count.intValue(), stamp.consumingMilliseconds());
 			}
 		} catch (Exception e) {
 			throw new JobExecutionException(e);

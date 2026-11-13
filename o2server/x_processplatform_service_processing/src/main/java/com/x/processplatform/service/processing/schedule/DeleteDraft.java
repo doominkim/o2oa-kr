@@ -96,7 +96,7 @@ public class DeleteDraft extends AbstractJob {
 					}
 				}
 			} while (!works.isEmpty());
-			logger.print("删除{}个处于拟稿环节的停滞工作, 删除{}个草稿. 耗时:{}.", workCount.intValue(), draftCount.intValue(),
+			logger.print("기안 단계에 정체된 업무 문서 {}개 삭제, 초안 {}개 삭제. 소요 시간:{}.", workCount.intValue(), draftCount.intValue(),
 					stamp.consumingMilliseconds());
 		} catch (Exception e) {
 			throw new JobExecutionException(e);

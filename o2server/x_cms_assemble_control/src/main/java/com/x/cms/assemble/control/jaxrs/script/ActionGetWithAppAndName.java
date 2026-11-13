@@ -49,7 +49,7 @@ class ActionGetWithAppAndName extends BaseAction {
 					throw new Exception("[getWithAppWithName]script not existed with name or alias : " + name + ".");
 				}
 
-				// 将查询结果放进缓存里
+				// 조회 결과를 캐시에 저장
 				CacheManager.put(cacheCategory, cacheKey, wrap );
 				result.setData(wrap);
 			} catch (Throwable th) {

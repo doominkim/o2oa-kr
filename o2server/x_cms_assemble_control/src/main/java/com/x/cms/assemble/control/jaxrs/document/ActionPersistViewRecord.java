@@ -50,7 +50,7 @@ public class ActionPersistViewRecord extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("阅读记录列表")
+		@FieldDescribe("열람 기록 목록")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "Module", fieldValue = "{\"person\": \"阅读人员\", \"viewTime\": \"阅读时间（格式：2020-08-08）\"}")
 		private List<ViewRecordWi> recordList;
 

@@ -155,7 +155,7 @@ MWF.xApplication.AI.Main = new Class({
 
         this.chatNode.addEventListener('paste', function (e) {
             const clipboardData = e.clipboardData || window.clipboardData;
-            // 检查是否包含图片
+            // 이미지 포함 여부 확인
             const items = clipboardData.items;
             let hasImage = false;
 
@@ -167,7 +167,7 @@ MWF.xApplication.AI.Main = new Class({
             }
 
             if (hasImage) {
-                e.preventDefault(); // 阻止默认粘贴行为
+                e.preventDefault(); // 기본 붙여넣기 동작 차단
                 this.addAtt("paste",clipboardData);
             }
         }.bind(this));
@@ -198,10 +198,10 @@ MWF.xApplication.AI.Main = new Class({
         }.bind(this));
     },
     categorizeDates: function (jsonArray) {
-        const now = new Date(); // 当前时间
-        const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); // 今天开始的时间戳
-        const sevenDaysAgo = todayStart - 7 * 24 * 60 * 60 * 1000; // 7天前的时间戳（不包括今天）
-        const thirtyDaysAgo = todayStart - 30 * 24 * 60 * 60 * 1000; // 30天前的时间戳（不包括今天）
+        const now = new Date(); // 현재 시간
+        const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); // 오늘 시작 시각의 타임스탬프
+        const sevenDaysAgo = todayStart - 7 * 24 * 60 * 60 * 1000; // 7일 전 타임스탬프(오늘 제외)
+        const thirtyDaysAgo = todayStart - 30 * 24 * 60 * 60 * 1000; // 30일 전 타임스탬프(오늘 제외)
         let categories = {
             today: [],
             lastSevenDays: [],
@@ -690,7 +690,7 @@ MWF.xApplication.AI.Main = new Class({
 
         el.getFirst().inject(this.chatListNode);
 
-        // 添加滚动监听
+        // 스크롤 리스너 추가
         const chatList = this.chatListWrapNode;
         chatList.scrollTop = chatList.scrollHeight;
         chatList.addEvent('scroll', function () {

@@ -17,7 +17,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddAfterQueueAndAfterSingleTest {
 
-	@DisplayName("B后加签EFG,EFG串行处理，E后加签IJK，IJK单人处理,即并行-后加签串行-后加签单人,IJK任意处理到ACF,F处理到ACG")
+	@DisplayName("B 뒤에 EFG 추가 결재, EFG 순차 처리, E 뒤에 IJK 추가 결재, IJK 단일 처리, 즉 병렬-후 추가 결재 순차-후 추가 결재 단일, IJK 임의 처리 후 ACF로, F 처리 후 ACG로")
 	@Test
 	@Order(1)
 	void test01() {
@@ -55,7 +55,7 @@ class ParallelAddAfterQueueAndAfterSingleTest {
 	}
 
 
-	@DisplayName("B后加签EFG,EFG串行处理，E后加签IJK，IJK单人处理,即并行-后加签串行-后加签单人,AC先处理,IJK任意处理到F,F处理到G")
+	@DisplayName("B후 추가결재EFG,EFG순차 처리,E후 추가결재IJK,IJK단일 처리,즉 병렬-후 추가결재순차-후 추가결재단일,AC 먼저 처리,IJK 임의 처리 후 F,F 처리 후 G")
 	@Test
 	@Order(2)
 	void test02() {
@@ -93,7 +93,7 @@ class ParallelAddAfterQueueAndAfterSingleTest {
 	}
 
 
-	@DisplayName("B后加签EFG,EFG串行处理，E后加签IJK，IJK单人处理,即并行-后加签串行-后加签单人,混合处理,IJK任意处理到F,F处理到G")
+	@DisplayName("B후 추가결재EFG,EFG순차 처리,E후 추가결재IJK,IJK단일 처리,즉 병렬-후 추가결재순차-후 추가결재단일,혼합 처리,IJK 임의 처리 후 F,F 처리 후 G")
 	@Test
 	@Order(3)
 	void test03() {

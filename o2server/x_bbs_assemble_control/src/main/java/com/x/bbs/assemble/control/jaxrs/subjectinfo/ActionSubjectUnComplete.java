@@ -58,7 +58,7 @@ public class ActionSubjectUnComplete extends BaseAction {
 				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectOperation( e, "用户在取消主题完成时发生异常！" );
+				Exception exception = new ExceptionSubjectOperation( e, "주제 완료를 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

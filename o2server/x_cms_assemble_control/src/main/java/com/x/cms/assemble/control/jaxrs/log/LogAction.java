@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("log")
-@JaxrsDescribe("操作日志信息管理")
+@JaxrsDescribe("작업 로그 정보 관리")
 public class LogAction extends StandardJaxrsAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( ActionListByLevel.class );
 
-	@JaxrsMethodDescribe(value = "获取指定操作对象级别的操作日志信息列表.", action = ActionListByLevel.class)
+	@JaxrsMethodDescribe(value = "지정 작업 대상 수준의 작업 로그 정보 목록 조회.", action = ActionListByLevel.class)
 	@GET
 	@Path("list/level/{operationLevel}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listLogByOperationLevel( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("操作级别") @PathParam("operationLevel") String operationLevel) {
+			@JaxrsParameterDescribe("작업 수준") @PathParam("operationLevel") String operationLevel) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByLevel.Wo>> result = new ActionResult<>();
 		try {
@@ -51,13 +51,13 @@ public class LogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定栏目的操作日志信息列表.", action = ActionListByAppId.class)
+	@JaxrsMethodDescribe(value = "지정 게시판의 작업 로그 정보 목록 조회.", action = ActionListByAppId.class)
 	@GET
 	@Path("list/app/{appId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listLogByAppId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("栏目ID") @PathParam("appId") String appId) {
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("appId") String appId) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByAppId.Wo>> result = new ActionResult<>();
 		try {
@@ -70,13 +70,13 @@ public class LogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定分类的操作日志信息列表.", action = ActionListByCategory.class)
+	@JaxrsMethodDescribe(value = "지정 분류의 작업 로그 정보 목록 조회.", action = ActionListByCategory.class)
 	@GET
 	@Path("list/category/{categoryId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listLogByCategoryId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分类ID") @PathParam("categoryId") String categoryId) {
+			@JaxrsParameterDescribe("분류ID") @PathParam("categoryId") String categoryId) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByCategory.Wo>> result = new ActionResult<>();
 		try {
@@ -89,13 +89,13 @@ public class LogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定文档的操作日志信息列表.", action = ActionListByDocument.class)
+	@JaxrsMethodDescribe(value = "지정 문서의 작업 로그 정보 목록 조회.", action = ActionListByDocument.class)
 	@GET
 	@Path("list/document/{documentId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listLogByDocumentId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档ID") @PathParam("documentId") String documentId) {
+			@JaxrsParameterDescribe("문서ID") @PathParam("documentId") String documentId) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByDocument.Wo>> result = new ActionResult<>();
 		try {
@@ -108,13 +108,13 @@ public class LogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取操作日志信息对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 작업 로그 정보 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日志ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("로그 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -127,14 +127,14 @@ public class LogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示符合过滤条件的操作日志,下一页.", action = ActionListNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 작업 로그 목록, 다음 페이지.", action = ActionListNextWithFilter.class)
 	@POST
 	@Path("filter/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithFilter( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
 			JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListNextWithFilter.Wo>> result = new ActionResult<>();
@@ -142,21 +142,21 @@ public class LogAction extends StandardJaxrsAction {
 			result = new ActionListNextWithFilter().execute( request, effectivePerson, id, count, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在查询所有CMS表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "전체 CMS 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示符合过滤条件的操作日志,上一页.", action = ActionListPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 맞는 작업 로그 목록, 이전 페이지.", action = ActionListPrevWithFilter.class)
 	@POST
 	@Path("filter/list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithFilter( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("最后一条信息ID，如果是第一页，则可以用(0)代替") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("마지막 정보 ID, 첫 페이지면 (0)으로 대체 가능") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
 			JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListPrevWithFilter.Wo>> result = new ActionResult<>();
@@ -164,21 +164,21 @@ public class LogAction extends StandardJaxrsAction {
 			result = new ActionListPrevWithFilter().execute( request, effectivePerson, id, count, jsonElement );
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionServiceLogic( e, "系统在查询所有CMS表单时发生异常。" );
+			Exception exception = new ExceptionServiceLogic( e, "전체 CMS 양식을 조회하는 중 오류가 발생했습니다." );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "按条件对日志分页显示.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "조건별 로그 페이지 표시.", action = ActionListPaging.class)
 	@POST
 	@Path("list/filter/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listFilterPaging(@Suspended final AsyncResponse asyncResponse,
-									   @Context HttpServletRequest request, @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-									   @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+									   @Context HttpServletRequest request, @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+									   @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -20,21 +20,21 @@ public class AesException extends Exception {
 	private static String getMessage(int code) {
 		switch (code) {
 		case ValidateSignatureError:
-			return "签名验证错误";
+			return "서명 검증 오류";
 		case ParseXmlError:
-			return "xml解析失败";
+			return "xml 파싱 실패";
 		case ComputeSignatureError:
-			return "sha加密生成签名失败";
+			return "sha 암호화로 서명 생성 실패";
 		case IllegalAesKey:
-			return "SymmetricKey非法";
+			return "SymmetricKey가 올바르지 않습니다";
 		case ValidateCorpidError:
-			return "corpid校验失败";
+			return "corpid 검증 실패";
 		case EncryptAESError:
-			return "aes加密失败";
+			return "aes 암호화 실패";
 		case DecryptAESError:
-			return "aes解密失败";
+			return "aes 복호화 실패";
 		case IllegalBuffer:
-			return "解密后得到的buffer非法";
+			return "복호화한 buffer가 올바르지 않습니다";
 		default:
 			return null;
 		}

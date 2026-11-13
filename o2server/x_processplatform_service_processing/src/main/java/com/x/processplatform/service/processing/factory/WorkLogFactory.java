@@ -39,7 +39,7 @@ public class WorkLogFactory extends AbstractFactory {
 //		return em.createQuery(cq).getResultList();
 //	}
 
-	/* 从一个节点到另一个节点可能有多条 */
+	/* 한 노드에서 다른 노드로 가는 경로가 여러 개일 수 있음 */
 //	public List<String> listWithFromActivityTokenWithConnected(String fromActivityToken) throws Exception {
 //		EntityManager em = this.entityManagerContainer().get(WorkLog.class);
 //		CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -133,7 +133,7 @@ MWF.xApplication.process.FormDesigner.Module.Datagrid = MWF.FCDatagrid = new Cla
 	_getDroppableNodes: function(){
 		var nodes = [this.form.node].concat(this.form.moduleElementNodeList, this.form.moduleContainerNodeList, this.form.moduleComponentNodeList);
 		this.form.moduleList.each( function(module){
-			//数据网格不能往数据模板里拖
+			//데이터 그리드는 데이터 템플릿 안으로 끌어 넣을 수 없음
 			if( module.moduleName === "datatemplate" ){
 				var subDoms = this.form.getModuleNodes(module.node);
 				nodes.erase( module.node );
@@ -381,9 +381,9 @@ MWF.xApplication.process.FormDesigner.Module.Datagrid = MWF.FCDatagrid = new Cla
 		}.bind(this);
 
 		if( name === "impexpType" ){
-			//允许导入
+			//가져오기 허용
 			var importenable  = this.json.impexpType === "impexp" || this.json.impexpType === "imp";
-			//允许导出
+			//내보내기 허용
 			var exportenable  = this.json.impexpType === "impexp" || this.json.impexpType === "exp";
 
 			if( this.impexpNode )this.impexpNode.destroy();

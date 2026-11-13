@@ -14,14 +14,14 @@ import com.x.cms.core.entity.CmsBatchOperation;
 import com.x.cms.core.entity.Document;
 
 /**
- * 对批处理操作信息持久化服务类利用Service完成事务控制
+ * 일괄 처리 작업 정보 영속화 서비스 클래스, Service로 트랜잭션 제어
  *
  */
 public class CmsBatchOperationPersistService {
 
 	CmsBatchOperationService cmsBatchOperationService = new CmsBatchOperationService();
 	/**
-	 * 保存批处理信息对象
+	 * 일괄 처리 정보 객체 저장
 	 * @param cmsBatchOperation
 	 * @return
 	 * @throws Exception
@@ -47,19 +47,19 @@ public class CmsBatchOperationPersistService {
 			emc.persist( cmsBatchOperation, CheckPersistType.all );
 			emc.commit();
 		}
-		//将批量操作信息压入队列
+		//일괄 작업 정보를 큐에 추가
 		ThisApplication.queueBatchOperation.send( cmsBatchOperation );
 		return cmsBatchOperation;
 	}
 
 	/**
-	 * 保存批处理信息对象
+	 * 일괄 처리 정보 객체 저장
 	 *
-	 * @param objType 对象类别
-	 * @param optType 操作类别
-	 * @param bundle 绑定的ID
-	 * @param oldInfo 原来的信息
-	 * @param description 操作类别
+	 * @param objType 객체 유형
+	 * @param optType 작업 유형
+	 * @param bundle 연결 ID
+	 * @param oldInfo 기존 정보
+	 * @param description 작업 유형
 	 * @return
 	 * @throws Exception
 	 */
@@ -89,12 +89,12 @@ public class CmsBatchOperationPersistService {
 			emc.persist( cmsBatchOperation, CheckPersistType.all );
 			emc.commit();
 		}
-		//将批量操作信息压入队列
+		//일괄 작업 정보를 큐에 추가
 		ThisApplication.queueDocumentOperation.send( cmsBatchOperation );
 	}
 
 	/**
-	 * 删除批处理信息对象
+	 * 일괄 처리 정보 객체 삭제
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -149,8 +149,8 @@ public class CmsBatchOperationPersistService {
 	}
 
 	/**
-	 * 检查是否存在未review的Document
-	 * 比如因为更新导致文档Review未生成，文档无法被看到的情况
+	 * review되지 않은 Document 존재 여부 검사
+	 * 예: 갱신으로 문서 Review가 생성되지 않아 문서가 보이지 않는 경우
 	 */
 	public void checkDocumentReviewStatus() {
 		DocumentInfoService documentInfoService = new DocumentInfoService();
@@ -170,8 +170,8 @@ public class CmsBatchOperationPersistService {
 	}
 
 	/**
-	 * 检查文档是否设置为IsTop，如果isTop为空，则设置为false，避免空值
-	 * @param defaultIsTop 需要设置的默认的值
+	 * 문서가 IsTop으로 설정되었는지 검사, isTop이 비어 있으면 false로 설정해 null 방지
+	 * @param defaultIsTop 설정할 기본값
 	 */
     public void checkDocumentIsTop( boolean defaultIsTop ) throws Exception {
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {

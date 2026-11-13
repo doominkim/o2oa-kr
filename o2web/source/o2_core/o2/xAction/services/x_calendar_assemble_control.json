@@ -24,13 +24,13 @@
   "updateSingleEvent": {"uri": "/jaxrs/event/update/single/{eventId}","method": "PUT"},
 
 
-//  calendarIds:日历账号ID
-//  eventType:信息类别: CALENDAR | EVENT
-//  source:信息来源: PERSONAL| LEADER | UNIT | MEETTING | BUSINESS_TRIP | HOLIDAY
-//  key:事件标题 或者 备注信息 模糊搜索
-//  startTime:查询开始时间
-//  endTime:查询结束时间
-//  createPerson:创建者
+//  calendarIds:캘린더 계정 ID
+//  eventType:정보 유형: CALENDAR | EVENT
+//  source:정보 출처: PERSONAL| LEADER | UNIT | MEETTING | BUSINESS_TRIP | HOLIDAY
+//  key:이벤트 제목 또는 비고 정보 유사 검색
+//  startTime:조회 시작 시간
+//  endTime:조회 종료 시간
+//  createPerson:작성자
   "listEventWithFilter": {"uri": "/jaxrs/event/list/filter","method": "PUT"},
 
   "getRFC": {"uri": "/jaxrs/event/rfc/{id}"} //,

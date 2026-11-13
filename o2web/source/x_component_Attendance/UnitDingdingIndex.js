@@ -13,12 +13,12 @@ MWF.xApplication.Attendance.UnitDingdingIndex = new Class({
     },
     loadData : function( callback, unit, year, month, async ){
         this.statusColor = {
-            "resultNormal" : "#4A90E2", //绿色，正常
-            "leaveEarlyTimes":"#AC71E3", //蓝色，早退
-            "lateTimes":"#F5A623", //黄色，迟到
-            "seriousLateTimes" : "#c45f17",//严重迟到
-            "notSignedCount":"#FF8080", //粉红色,未签到
-            "absenteeismTimes" : "#8B572A"//矿工
+            "resultNormal" : "#4A90E2", //초록색, 정상
+            "leaveEarlyTimes":"#AC71E3", //파란색, 조퇴
+            "lateTimes":"#F5A623", //노란색, 지각
+            "seriousLateTimes" : "#c45f17",//심각한 지각
+            "notSignedCount":"#FF8080", //분홍색, 미체크
+            "absenteeismTimes" : "#8B572A"//무단결근
         };
         if( !unit  )unit = this.unit;
         if( !year )year = this.year;

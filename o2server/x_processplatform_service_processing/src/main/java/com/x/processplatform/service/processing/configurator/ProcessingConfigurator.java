@@ -6,7 +6,7 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 import com.x.processplatform.core.entity.element.ActivityType;
 
 /**
- * 指示器用于指示各个Activity之间的差异,这样运行时可以统一用同样的代码进行运行
+ * 각 Activity 간 차이를 나타내는 지시자, 실행 시 동일한 코드로 통일해 실행 가능
  *
  * @author Rui
  *

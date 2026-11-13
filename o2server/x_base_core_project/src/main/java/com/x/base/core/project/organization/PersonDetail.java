@@ -14,25 +14,25 @@ public class PersonDetail extends GsonPropertyObject {
 
     private static final long serialVersionUID = -1577868963290077559L;
 
-    @FieldDescribe("用户")
+    @FieldDescribe("사용자")
     private String distinguishedName = "";
 
-    @FieldDescribe("身份")
+    @FieldDescribe("신분")
     private List<String> identityList = new ArrayList<>();
 
-    @FieldDescribe("组织")
+    @FieldDescribe("조직")
     private List<String> unitList = new ArrayList<>();
 
-    @FieldDescribe("组织职务")
+    @FieldDescribe("조직 직무")
     private List<String> unitDutyList = new ArrayList<>();
 
-    @FieldDescribe("群组")
+    @FieldDescribe("그룹")
     private List<String> groupList = new ArrayList<>();
 
-    @FieldDescribe("角色")
+    @FieldDescribe("역할")
     private List<String> roleList = new ArrayList<>();
 
-    @FieldDescribe("人员属性")
+    @FieldDescribe("사용자 속성")
     private List<String> personAttributeList = new ArrayList<>();
 
     public boolean containsAny(Object... values) {

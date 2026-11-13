@@ -27,7 +27,7 @@ MWF.xApplication.cms.FormDesigner.Module.Image = MWF.CMSFCImage = new Class({
 			if (value){
 				if (typeOf(value)==="object"){
 					var url;
-					if( value.application ){ //兼容之前的版本，都是从流程中获取的
+					if( value.application ){ //이전 버전 호환: 모두 프로세스에서 가져옴
 						url = MWF.xDesktop.getProcessFileUr(value.id, value.application);
 					}else{
 						url = MWF.xDesktop.getCMSFileUr(value.id, value.appId);

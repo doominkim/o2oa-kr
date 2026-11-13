@@ -28,9 +28,9 @@ import org.apache.openjpa.persistence.jdbc.ElementColumn;
 import org.apache.openjpa.persistence.jdbc.ElementIndex;
 import org.apache.openjpa.persistence.jdbc.Strategy;
 
-// 定义 假期额度发放规则。
+// 휴가 한도 지급 규칙 정의.
 @Entity
-@Schema(name = "AttendanceV2LeavePolicy", description = "假期额度规则.")
+@Schema(name = "AttendanceV2LeavePolicy", description = "휴가 한도 규칙.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.AttendanceV2LeavePolicy.table)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -61,22 +61,22 @@ public class AttendanceV2LeavePolicy extends SliceJpaObject {
     public void onPersist() throws Exception {}
 
     public static final String leaveTypeId_FIELDNAME = "leaveTypeId";
-    @FieldDescribe("假期类型ID")
+    @FieldDescribe("휴가 유형 ID")
     @Column(length = JpaObject.length_id, name = ColumnNamePrefix + leaveTypeId_FIELDNAME)
     private String leaveTypeId;
 
     public static final String policyName_FIELDNAME = "policyName";
-    @FieldDescribe("规则名称")
+    @FieldDescribe("규칙 이름")
     @Column(length = JpaObject.length_96B, name = ColumnNamePrefix + policyName_FIELDNAME)
     private String policyName;
 
      public static final String grantScopeType_FIELDNAME = "grantScopeType";
-    @FieldDescribe("发放范围 ALL: 全员  DEPARTMENT: 指定员工/部门")
+    @FieldDescribe("지급 범위 ALL: 전체  DEPARTMENT: 지정 직원/부서")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + grantScopeType_FIELDNAME)
     private String grantScopeType;
 
     public static final String grantScopeList_FIELDNAME = "grantScopeList";
-	@FieldDescribe("grantScopeType=DEPARTMENT， 发放范围人员、组织.")
+	@FieldDescribe("grantScopeType=DEPARTMENT, 지급 범위 사용자·조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = PersistenceProperties.AttendanceV2LeavePolicy.table + ContainerTableNameMiddle
@@ -87,7 +87,7 @@ public class AttendanceV2LeavePolicy extends SliceJpaObject {
 
 
     public static final String grantExcludeList_FIELDNAME = "grantExcludeList";
-    @FieldDescribe("grantScopeType=DEPARTMENT， 发放排除人员.")
+    @FieldDescribe("grantScopeType=DEPARTMENT, 지급 제외 사용자.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = PersistenceProperties.AttendanceV2LeavePolicy.table + ContainerTableNameMiddle
@@ -97,77 +97,77 @@ public class AttendanceV2LeavePolicy extends SliceJpaObject {
     private List<String> grantExcludeList;
 
 //    public static final String grantType_FIELDNAME = "grantType";
-//    @FieldDescribe("发放方式： YEARLY/MONTHLY/ONE_TIME")
+//    @FieldDescribe("지급 방식: YEARLY/MONTHLY/ONE_TIME")
 //    @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + grantType_FIELDNAME)
 //    private String grantType;
 //
 //    public static final String grantTypeValue_FIELDNAME = "grantTypeValue";
-//    @FieldDescribe("发放方式日期规则配置： Y:01-01/MS:1,ME:1/ONE_TIME")
+//    @FieldDescribe("지급 방식 날짜 규칙 설정: Y:01-01/MS:1,ME:1/ONE_TIME")
 //    @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + grantTypeValue_FIELDNAME)
 //    private String grantTypeValue;
 
-    @FieldDescribe("定时任务corn表达式")
+    @FieldDescribe("예약 작업 corn 표현식")
     @Column(  length = JpaObject.length_64B, name = ColumnNamePrefix + "grantCron")
     private String grantCron;
 
-    @FieldDescribe("上次定时任务执行的时间")
+    @FieldDescribe("마지막 예약 작업 실행 시간")
     @Column(name = ColumnNamePrefix + "grantLastExecuteTime")
     private Date grantLastExecuteTime;
    
     public static final String grantAmount_FIELDNAME = "grantAmount";
-    @FieldDescribe("发放额度")
+    @FieldDescribe("지급 한도")
     @Column(name = ColumnNamePrefix + grantAmount_FIELDNAME)
     private Double grantAmount = 0.0;
 
-    @FieldDescribe("发放额度类型是否为脚本执行, true: 脚本执行, false: 使用grantAmount字段的值")
+    @FieldDescribe("지급 한도 유형의 스크립트 실행 여부, true: 스크립트 실행, false: grantAmount 필드 값 사용")
     @Column(name = ColumnNamePrefix + "grantAmountTypeUseScript")
     private Boolean grantAmountTypeUseScript = false;
     
-	@FieldDescribe("发放额度规则配置，执行脚本")
+	@FieldDescribe("지급 한도 규칙 설정, 실행 스크립트")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + "grantAmountProperties")
 	private AttendanceV2LeavePolicyGrantAmountTypeProperties grantAmountProperties;
 
     public static final String expireType_FIELDNAME = "expireType";
-    @FieldDescribe("过期类型 THIS_YEAR / NEXT_YEAR / AFTER_GRANT")
+    @FieldDescribe("만료 유형 THIS_YEAR / NEXT_YEAR / AFTER_GRANT")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + expireType_FIELDNAME)
     private String expireType;
 
     public static final String expireMonthDay_FIELDNAME = "expireMonthDay";
-    @FieldDescribe("当 expireType = THIS_YEAR 或 NEXT_YEAR 时使用,表示几月几日过期，例如 \"12-31\"、\"03-31\"")
+    @FieldDescribe("expireType = THIS_YEAR 또는 NEXT_YEAR일 때 사용, 몇 월 며칠에 만료되는지 표시, 예: \"12-31\", \"03-31\"")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + expireMonthDay_FIELDNAME)
     private String expireMonthDay;
 
     public static final String expireValue_FIELDNAME = "expireValue";
-    @FieldDescribe("当 expireType = AFTER_GRANT 使用，表示发放后多少天过期，例如 365")
+    @FieldDescribe("expireType = AFTER_GRANT일 때 사용, 지급 후 며칠 뒤 만료되는지 표시, 예: 365")
     @Column(name = ColumnNamePrefix + expireValue_FIELDNAME)
     private Integer expireValue;
 
     public static final String carryForward_FIELDNAME = "carryForward";
-    @FieldDescribe("是否允许结转")
+    @FieldDescribe("이월 허용 여부")
     @Column(name = ColumnNamePrefix + carryForward_FIELDNAME)
     private Boolean carryForward = false;
 
     public static final String maxCarryForward_FIELDNAME = "maxCarryForward";
-    @FieldDescribe("最大结转额度")
+    @FieldDescribe("최대 이월 한도")
     @Column(name = ColumnNamePrefix + maxCarryForward_FIELDNAME)
     private Double maxCarryForward = 0.0;
 
     public static final String policyVersion_FIELDNAME = "policyVersion";
-    @FieldDescribe("规则版本")
+    @FieldDescribe("규칙 버전")
     @Column(name = ColumnNamePrefix + policyVersion_FIELDNAME)
     private Integer policyVersion = 1;
 
     public static final String active_FIELDNAME = "active";
-    @FieldDescribe("状态 ENABLED/DISABLED")
+    @FieldDescribe("상태 ENABLED/DISABLED")
     @Column(name = ColumnNamePrefix + active_FIELDNAME)
     private Boolean active = true;
 
 
 
 
-    @FieldDescribe("额度发放执行脚本.")
+    @FieldDescribe("한도 지급 실행 스크립트.")
     @Transient
     private String grantScript;
 

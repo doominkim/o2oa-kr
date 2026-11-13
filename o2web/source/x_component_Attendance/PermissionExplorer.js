@@ -223,7 +223,7 @@ MWF.xApplication.Attendance.PermissionExplorer.Permission = new Class({
 //            "name" : "role",
 //            "type" : "select",
 //            "value" : this.data.role || "DEPT",
-//            "selectText" : ["公司管理员","部门管理员"],
+//            "selectText" : ["회사 관리자","부서 관리자"],
 //            "selectValue" : ["COMPANY","DEPT"],
 //            "style" : {"text-align":"left"}
 //        }, true, this.app );
@@ -342,7 +342,7 @@ MWF.xApplication.Attendance.PermissionExplorer.Permission = new Class({
 //    selecePerson: function(){
 //        var options = {
 //            "type": "person",
-//            "title": "设置管理员",
+//            "title": "관리자 설정",
 //            "count" : "1",
 //            "values": [this.data.personName] || [],
 //            "onComplete": function(items){
@@ -358,7 +358,7 @@ MWF.xApplication.Attendance.PermissionExplorer.Permission = new Class({
 //    selectUnit: function( u ){
 //        var options = {
 //            "type": u=="COMPANY" ? "topUnit" : "unit",
-//            "title": u=="COMPANY" ? "选择公司":"选择部门",
+//            "title": u=="COMPANY" ? "회사 선택":"부서 선택",
 //            "count" : "1",
 //            "values": [this.data.unit] || [],
 //            "onComplete": function(items){

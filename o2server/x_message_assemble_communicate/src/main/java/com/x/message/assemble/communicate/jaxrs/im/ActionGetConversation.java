@@ -48,13 +48,13 @@ public class ActionGetConversation extends BaseAction {
 	public static class Wo extends IMConversation {
 
 		private static final long serialVersionUID = -1795342785531291824L;
-		@FieldDescribe("是否置顶.")
+		@FieldDescribe("상단 고정 여부.")
 		private Boolean isTop = false;
 
-		@FieldDescribe("未读数量.")
+		@FieldDescribe("읽지 않은 수.")
 		private Long unreadNumber;
 
-		@FieldDescribe("最后一条消息.")
+		@FieldDescribe("마지막 메시지.")
 		private WoMsg lastMessage;
 
 		static WrapCopier<IMConversation, Wo> copier = WrapCopierFactory.wo(IMConversation.class, Wo.class, null,

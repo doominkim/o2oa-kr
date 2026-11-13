@@ -152,14 +152,14 @@ class ActionChangePassword extends BaseAction {
 
         private static final long serialVersionUID = -8627814779546541124L;
 
-        @FieldDescribe("用户标识.")
-        @Schema(description = "用户标识.")
+        @FieldDescribe("사용자 식별자.")
+        @Schema(description = "사용자 식별자.")
         private String credential;
-        @FieldDescribe("原密码.")
-        @Schema(description = "原密码.")
+        @FieldDescribe("기존 비밀번호.")
+        @Schema(description = "기존 비밀번호.")
         private String oldPassword;
-        @FieldDescribe("新密码.")
-        @Schema(description = "新密码.")
+        @FieldDescribe("새 비밀번호.")
+        @Schema(description = "새 비밀번호.")
         private String newPassword;
 
         public String getCredential() {

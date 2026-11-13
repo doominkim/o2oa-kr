@@ -6,7 +6,7 @@ import com.x.base.core.project.schedule.AbstractJob;
 import com.x.cms.assemble.control.service.CmsBatchOperationPersistService;
 
 /**
- * 检查是否有未执行的批处理任务
+ * 실행되지 않은 배치 처리 작업이 있는지 확인
  *
  */
 public class Timertask_InitOperationRunning extends AbstractJob {

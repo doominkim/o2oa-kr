@@ -30,12 +30,12 @@ import com.x.base.core.project.logger.LoggerFactory;
 
 
 @Path("viewfieldconfig")
-@JaxrsDescribe("列表列信息配置")
+@JaxrsDescribe("목록 열 정보 설정")
 public class ViewFieldConfigAction extends StandardJaxrsAction{
 
 	private static  Logger logger = LoggerFactory.getLogger( ViewFieldConfigAction.class );
 
-	@JaxrsMethodDescribe(value = "获取全部的展示列配置信息列表.", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "전체 표시 열 설정 정보 목록 조회.", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -53,13 +53,13 @@ public class ViewFieldConfigAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定列表的全部展示列配置信息列表.", action = ActionListByViewId.class)
+	@JaxrsMethodDescribe(value = "지정 목록의 전체 표시 열 설정 정보 목록 조회.", action = ActionListByViewId.class)
 	@GET
 	@Path("list/view/{viewId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listViewFieldConfigByViewId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列表ID") @PathParam("viewId")String viewId ) {
+			@JaxrsParameterDescribe("목록 ID") @PathParam("viewId")String viewId ) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<List<ActionListByViewId.Wo>> result = new ActionResult<>();
 		try {
@@ -72,13 +72,13 @@ public class ViewFieldConfigAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取列表列信息配置对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 목록 열 정보 설정 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列配置ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("열 설정 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -91,7 +91,7 @@ public class ViewFieldConfigAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建列表列信息配置对象.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "목록 열 정보 설정 객체 생성.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -113,13 +113,13 @@ public class ViewFieldConfigAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新列表列信息配置对象.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "목록 열 정보 설정 객체 갱신.", action = ActionSave.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void put( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列配置ID") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("열 설정 ID") @PathParam("id") String id, JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -136,13 +136,13 @@ public class ViewFieldConfigAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新列表列信息配置对象.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "목록 열 정보 설정 객체 갱신.", action = ActionSave.class)
 	@POST
 	@Path("{id}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void putMockPutToPost( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("列配置ID") @PathParam("id") String id, JsonElement jsonElement) {
+					 @JaxrsParameterDescribe("열 설정 ID") @PathParam("id") String id, JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -159,13 +159,13 @@ public class ViewFieldConfigAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除列表列信息配置对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 목록 열 정보 설정 객체 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列配置ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("열 설정 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		try {
@@ -178,13 +178,13 @@ public class ViewFieldConfigAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除列表列信息配置对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 목록 열 정보 설정 객체 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						@JaxrsParameterDescribe("列配置ID") @PathParam("id") String id) {
+						@JaxrsParameterDescribe("열 설정 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson( request );
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		try {

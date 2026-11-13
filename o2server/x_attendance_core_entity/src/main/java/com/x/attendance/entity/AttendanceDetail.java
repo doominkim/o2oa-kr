@@ -26,7 +26,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceDetail", description = "考勤信息.")
+@Schema(name = "AttendanceDetail", description = "근태 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceDetail.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceDetail.table
@@ -49,7 +49,7 @@ public class AttendanceDetail extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -59,214 +59,214 @@ public class AttendanceDetail extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
     public static final String empNo_FIELDNAME = "empNo";
-    @FieldDescribe("员工号")
+    @FieldDescribe("사번")
     @Column(length = JpaObject.length_96B, name = ColumnNamePrefix + empNo_FIELDNAME)
 
     private String empNo;
 
     public static final String empName_FIELDNAME = "empName";
-    @FieldDescribe("员工姓名distinguishedName")
+    @FieldDescribe("직원 이름 distinguishedName")
     @Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
             + empName_FIELDNAME)
 
     private String empName;
 
     public static final String topUnitName_FIELDNAME = "topUnitName";
-    @FieldDescribe("顶层组织名称distinguishedName")
+    @FieldDescribe("최상위 조직 이름 distinguishedName")
     @Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
             + topUnitName_FIELDNAME)
 
     private String topUnitName;
 
     public static final String unitName_FIELDNAME = "unitName";
-    @FieldDescribe("组织名称distinguishedName")
+    @FieldDescribe("조직 이름 distinguishedName")
     @Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
             + unitName_FIELDNAME)
 
     private String unitName;
 
     public static final String recordDate_FIELDNAME = "recordDate";
-    @FieldDescribe("打卡记录日期")
+    @FieldDescribe("체크 기록 날짜")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = ColumnNamePrefix + recordDate_FIELDNAME)
 
     private Date recordDate;
 
     public static final String yearString_FIELDNAME = "yearString";
-    @FieldDescribe("打卡记录年份")
+    @FieldDescribe("출퇴근 기록 연도")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + yearString_FIELDNAME)
 
     private String yearString;
 
     public static final String monthString_FIELDNAME = "monthString";
-    @FieldDescribe("打卡记录月份")
+    @FieldDescribe("출퇴근 기록 월")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + monthString_FIELDNAME)
 
     private String monthString;
 
     public static final String recordDateString_FIELDNAME = "recordDateString";
-    @FieldDescribe("打卡记录日期字符串")
+    @FieldDescribe("출퇴근 기록 일자 문자열")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + recordDateString_FIELDNAME)
 
     private String recordDateString;
 
     public static final String cycleYear_FIELDNAME = "cycleYear";
-    @FieldDescribe("统计周期年份")
+    @FieldDescribe("통계 주기 연도")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + cycleYear_FIELDNAME)
 
     private String cycleYear;
 
     public static final String cycleMonth_FIELDNAME = "cycleMonth";
-    @FieldDescribe("统计周期月份")
+    @FieldDescribe("통계 주기 월")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + cycleMonth_FIELDNAME)
 
     private String cycleMonth;
 
     public static final String selfHolidayDayTime_FIELDNAME = "selfHolidayDayTime";
-    @FieldDescribe("请假时段:上午|下午|全天")
+    @FieldDescribe("휴가 시간대:오전|오후|종일")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + selfHolidayDayTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String selfHolidayDayTime = "无";
 
     public static final String absentDayTime_FIELDNAME = "absentDayTime";
-    @FieldDescribe("缺勤时段:上午|下午|全天")
+    @FieldDescribe("결근 시간대:오전|오후|종일")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + absentDayTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String absentDayTime = "无";
 
     public static final String abnormalDutyDayTime_FIELDNAME = "abnormalDutyDayTime";
-    @FieldDescribe("异常打卡时段:上午|下午|全天")
+    @FieldDescribe("출퇴근 기록 이상 시간대:오전|오후|종일")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + abnormalDutyDayTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String abnormalDutyDayTime = "无";
 
     public static final String getSelfHolidayDays_FIELDNAME = "getSelfHolidayDays";
-    @FieldDescribe("休假天数: 0|0.5|1")
+    @FieldDescribe("휴가 일수: 0|0.5|1")
     @Column(name = ColumnNamePrefix + getSelfHolidayDays_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private Double getSelfHolidayDays = 0.0;
 
     public static final String onWorkTime_FIELDNAME = "onWorkTime";
-    @FieldDescribe("上班时间")
+    @FieldDescribe("출근 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + onWorkTime_FIELDNAME)
 
     private String onWorkTime;
 
     public static final String offWorkTime_FIELDNAME = "offWorkTime";
-    @FieldDescribe("下班时间")
+    @FieldDescribe("퇴근 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + offWorkTime_FIELDNAME)
 
     private String offWorkTime;
 
     public static final String middayRestStartTime_FIELDNAME = "middayRestStartTime";
-    @FieldDescribe("午休开始时间")
+    @FieldDescribe("점심 휴식 시작 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + middayRestStartTime_FIELDNAME)
 
     private String middayRestStartTime;
 
     public static final String middayRestEndTime_FIELDNAME = "middayRestEndTime";
-    @FieldDescribe("午休结束时间")
+    @FieldDescribe("점심 휴식 종료 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + middayRestEndTime_FIELDNAME)
 
     private String middayRestEndTime;
 
     public static final String onDutyTime_FIELDNAME = "onDutyTime";
-    @FieldDescribe("上班打卡签到时间")
+    @FieldDescribe("출근 기록 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + onDutyTime_FIELDNAME)
 
     private String onDutyTime;
 
     public static final String morningOffDutyTime_FIELDNAME = "morningOffDutyTime";
-    @FieldDescribe("上班下午打卡签退时间")
+    @FieldDescribe("오후 퇴근 기록 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + morningOffDutyTime_FIELDNAME)
 
     private String morningOffDutyTime;
 
     public static final String afternoonOnDutyTime_FIELDNAME = "afternoonOnDutyTime";
-    @FieldDescribe("下午上班打卡签到时间")
+    @FieldDescribe("오후 출근 기록 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + afternoonOnDutyTime_FIELDNAME)
 
     private String afternoonOnDutyTime;
 
     public static final String offDutyTime_FIELDNAME = "offDutyTime";
-    @FieldDescribe("下班打卡签退时间")
+    @FieldDescribe("퇴근 기록 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + offDutyTime_FIELDNAME)
 
     private String offDutyTime;
 
     public static final String lateTimeDuration_FIELDNAME = "lateTimeDuration";
-    @FieldDescribe("迟到时长")
+    @FieldDescribe("지각 시간")
     @Column(name = ColumnNamePrefix + lateTimeDuration_FIELDNAME)
     private Long lateTimeDuration = 0L;
 
     public static final String leaveEarlierTimeDuration_FIELDNAME = "leaveEarlierTimeDuration";
-    @FieldDescribe("早退时长")
+    @FieldDescribe("조퇴 시간")
     @Column(name = ColumnNamePrefix + leaveEarlierTimeDuration_FIELDNAME)
     private Long leaveEarlierTimeDuration = 0L;
 
     public static final String workOvertimeTimeDuration_FIELDNAME = "workOvertimeTimeDuration";
-    @FieldDescribe("加班时长")
+    @FieldDescribe("초과 근무 시간")
     @Column(name = ColumnNamePrefix + workOvertimeTimeDuration_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private Long workOvertimeTimeDuration = 0L;
 
     public static final String workTimeDuration_FIELDNAME = "workTimeDuration";
-    @FieldDescribe("出勤时长")
+    @FieldDescribe("출근 시간")
     @Column(name = ColumnNamePrefix + workTimeDuration_FIELDNAME)
     private Long workTimeDuration = 0L;
 
     public static final String attendance_FIELDNAME = "attendance";
-    @FieldDescribe("出勤天数（0|0.5|1）")
+    @FieldDescribe("출근 일수(0|0.5|1)")
     @Column(name = ColumnNamePrefix + attendance_FIELDNAME)
     private Double attendance = 1.0;
 
     public static final String absence_FIELDNAME = "absence";
-    @FieldDescribe("缺勤天数（0|0.5|1）")
+    @FieldDescribe("결근 일수(0|0.5|1)")
     @Column(name = ColumnNamePrefix + absence_FIELDNAME)
     private Double absence = 0.0;
 
     public static final String recordStatus_FIELDNAME = "recordStatus";
-    @FieldDescribe("记录状态：0-未分析 1-已分析")
+    @FieldDescribe("기록 상태: 0-미분석 1-분석 완료")
     @Column(name = ColumnNamePrefix + recordStatus_FIELDNAME)
     private Integer recordStatus = 0;
 
     public static final String batchName_FIELDNAME = "batchName";
-    @FieldDescribe("导入批次号:导入文件的ID")
+    @FieldDescribe("가져오기 배치 번호: 가져온 파일의 ID")
     @Column(length = JpaObject.length_96B, name = ColumnNamePrefix + batchName_FIELDNAME)
 
     private String batchName;
 
     public static final String description_FIELDNAME = "description";
-    @FieldDescribe("说明备注")
+    @FieldDescribe("비고")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 
     private String description;
 
     public static final String appealStatus_FIELDNAME = "appealStatus";
-    @FieldDescribe("申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过")
+    @FieldDescribe("소명 상태: 0-미소명, 1-소명 중, -1-소명 반려, 9-소명 승인")
     @Column(name = ColumnNamePrefix + appealStatus_FIELDNAME)
     private Integer appealStatus = 0;
 
     public static final String appealReason_FIELDNAME = "appealReason";
-    @FieldDescribe("申诉原因")
+    @FieldDescribe("이의 신청 사유")
     @Column(length = JpaObject.length_64B, name = ColumnNamePrefix + appealReason_FIELDNAME)
 
     private String appealReason;
 
     public static final String appealProcessor_FIELDNAME = "appealProcessor";
-    @FieldDescribe("申诉处理人")
+    @FieldDescribe("이의 신청 처리자")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + appealProcessor_FIELDNAME)
 
     private String appealProcessor;
@@ -274,91 +274,91 @@ public class AttendanceDetail extends SliceJpaObject {
     public static final String appealDescription_FIELDNAME = "appealDescription";
     @Lob
     @Basic(fetch = FetchType.EAGER)
-    @FieldDescribe("申诉具体说明")
+    @FieldDescribe("이의 신청 상세 설명")
     @Column(length = JpaObject.length_2K, name = ColumnNamePrefix + appealDescription_FIELDNAME)
 
     private String appealDescription;
 
     public static final String isHoliday_FIELDNAME = "isHoliday";
-    @FieldDescribe("是否法定节假日")
+    @FieldDescribe("법정 공휴일 여부")
     @Column(name = ColumnNamePrefix + isHoliday_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private Boolean isHoliday = false;
 
     public static final String isWorkday_FIELDNAME = "isWorkday";
-    @FieldDescribe("是否调休工作日")
+    @FieldDescribe("대체 근무일 여부")
     @Column(name = ColumnNamePrefix + isWorkday_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private Boolean isWorkday = false;
 
     public static final String isGetSelfHolidays_FIELDNAME = "isGetSelfHolidays";
-    @FieldDescribe("是否休假")
+    @FieldDescribe("휴가 여부")
     @Column(name = ColumnNamePrefix + isGetSelfHolidays_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private Boolean isGetSelfHolidays = false;
 
     public static final String leaveType_FIELDNAME = "leaveType";
-    @FieldDescribe("休假类型")
+    @FieldDescribe("휴가 유형")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + leaveType_FIELDNAME)
 
     private String leaveType;
 
     public static final String isAbsent_FIELDNAME = "isAbsent";
-    @FieldDescribe("是否缺勤")
+    @FieldDescribe("결근 여부")
     @Column(name = ColumnNamePrefix + isAbsent_FIELDNAME)
     private Boolean isAbsent = false;
 
     public static final String isAbnormalDuty_FIELDNAME = "isAbnormalDuty";
-    @FieldDescribe("是否异常打卡")
+    @FieldDescribe("출퇴근 기록 이상 여부")
     @Column(name = ColumnNamePrefix + isAbnormalDuty_FIELDNAME)
     private Boolean isAbnormalDuty = false;
 
     public static final String isLackOfTime_FIELDNAME = "isLackOfTime";
-    @FieldDescribe("是否工时不足")
+    @FieldDescribe("근무 시간 부족 여부")
     @Column(name = ColumnNamePrefix + isLackOfTime_FIELDNAME)
     private Boolean isLackOfTime = false;
 
     public static final String isWorkOvertime_FIELDNAME = "isWorkOvertime";
-    @FieldDescribe("是否加班")
+    @FieldDescribe("초과 근무 여부")
     @Column(name = ColumnNamePrefix + isWorkOvertime_FIELDNAME)
     private Boolean isWorkOvertime = false;
 
     public static final String isLeaveEarlier_FIELDNAME = "isLeaveEarlier";
-    @FieldDescribe("是否早退")
+    @FieldDescribe("조퇴 여부")
     @Column(name = ColumnNamePrefix + isLeaveEarlier_FIELDNAME)
     private Boolean isLeaveEarlier = false;
 
     public static final String isLate_FIELDNAME = "isLate";
-    @FieldDescribe("是否迟到")
+    @FieldDescribe("지각 여부")
     @Column(name = ColumnNamePrefix + isLate_FIELDNAME)
     private Boolean isLate = false;
 
     public static final String isWeekend_FIELDNAME = "isWeekend";
-    @FieldDescribe("是否周末")
+    @FieldDescribe("주말 여부")
     @Column(name = ColumnNamePrefix + isWeekend_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private Boolean isWeekend = false;
 
     public static final String archiveTime_FIELDNAME = "archiveTime";
-    @FieldDescribe("记录归档时间")
+    @FieldDescribe("기록 보관 시간")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + archiveTime_FIELDNAME)
 
     private String archiveTime;
 
     public static final String isExternal_FIELDNAME = "isExternal";
-    @FieldDescribe("是否范围外打卡")
+    @FieldDescribe("범위 밖 기록 여부")
     @Column(name = ColumnNamePrefix + isExternal_FIELDNAME)
 
     private Boolean isExternal = false;
 
     public static final String recordAddress_FIELDNAME = "recordAddress";
-    @FieldDescribe("打卡地址")
+    @FieldDescribe("출퇴근 기록 주소")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + recordAddress_FIELDNAME)
 
     private String recordAddress;
 
     public static final String optMachineType_FIELDNAME = "optMachineType";
-    @FieldDescribe("设备信息")
+    @FieldDescribe("기기 정보")
     @Column(length = JpaObject.length_255B, name = ColumnNamePrefix + optMachineType_FIELDNAME)
 
     private String optMachineType;
@@ -396,7 +396,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取是否工时不足
+     * 근무 시간 부족 여부 조회
      *
      * @return
      */
@@ -405,7 +405,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置是否工时不足
+     * 근무 시간 부족 여부 설정
      *
      * @param isLackOfTime
      */
@@ -414,7 +414,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工号（String）
+     * 직원 번호 조회(String)
      *
      * @return
      */
@@ -423,7 +423,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工号（String）
+     * 직원 번호 설정(String)
      *
      * @param empNo
      */
@@ -432,7 +432,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工姓名（String）
+     * 직원 이름 조회(String)
      *
      * @return
      */
@@ -444,7 +444,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工姓名（String）
+     * 직원 이름 설정(String)
      *
      * @param empName
      */
@@ -456,7 +456,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工是否已经迟到（Integer）
+     * 직원 지각 여부 조회(Integer)
      *
      * @return
      */
@@ -465,7 +465,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工是否已经迟到（Integer）
+     * 직원 지각 여부 설정(Integer)
      *
      * @param isLate
      */
@@ -474,7 +474,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工是否早退（Integer）
+     * 직원 조퇴 여부 조회(Integer)
      *
      * @return
      */
@@ -483,7 +483,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工是否早退（Integer）
+     * 직원 조퇴 여부 설정(Integer)
      *
      * @param isLeaveEarlier
      */
@@ -492,7 +492,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工员工打卡记录日期（String）
+     * 직원 출퇴근 기록 일자 조회(String)
      *
      * @return
      */
@@ -501,7 +501,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工员工打卡记录日期（String）
+     * 직원 출퇴근 기록 일자 설정(String)
      *
      * @param recordDateString
      */
@@ -510,7 +510,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工员工打卡记录日期（Date）
+     * 직원 출퇴근 기록 일자 조회(Date)
      *
      * @return
      */
@@ -519,7 +519,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工员工打卡记录日期（Date）
+     * 직원 출퇴근 기록 일자 설정(Date)
      *
      * @param recordDate
      */
@@ -528,7 +528,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录导入批次号-导入文件ID（String）
+     * 직원 출퇴근 기록 가져오기 배치 번호 - 가져온 파일 ID 조회(String)
      *
      * @return
      */
@@ -537,7 +537,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡记录导入批次号-导入文件ID（String）
+     * 직원 출퇴근 기록 가져오기 배치 번호 - 가져온 파일 ID 설정(String)
      *
      * @param batchName
      */
@@ -546,7 +546,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工标准上班时间（String）
+     * 직원 표준 출근 시간 조회(String)
      *
      * @return
      */
@@ -555,7 +555,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工标准上班时间（String）
+     * 직원 표준 출근 시간 설정(String)
      *
      * @param onWorkTime
      */
@@ -564,7 +564,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工标准下班时间（String）
+     * 직원 표준 퇴근 시간 조회(String)
      *
      * @return
      */
@@ -573,7 +573,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工标准下班时间（String）
+     * 직원 표준 퇴근 시간 설정(String)
      *
      * @param offWorkTime
      */
@@ -582,7 +582,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工迟到时长（Long）
+     * 직원 지각 시간 조회(Long)
      *
      * @return
      */
@@ -591,7 +591,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工迟到时长（Long）
+     * 직원 지각 시간 설정(Long)
      *
      * @param lateTimeDuration
      */
@@ -600,7 +600,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工早退时长（Long）
+     * 직원 조퇴 시간 조회(Long)
      *
      * @return
      */
@@ -609,7 +609,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工早退时长（Long）
+     * 직원 조퇴 시간 설정(Long)
      *
      * @param leaveEarlierTimeDuration
      */
@@ -618,7 +618,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工是否缺勤（Integer）
+     * 직원 결근 여부 조회(Integer)
      *
      * @return
      */
@@ -627,7 +627,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工是否缺勤（Integer）
+     * 직원 결근 여부 설정(Integer)
      *
      * @param isAbsent
      */
@@ -636,7 +636,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工是否加班（Integer）
+     * 직원 초과 근무 여부 조회(Integer)
      *
      * @return
      */
@@ -645,7 +645,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工是否加班（Integer）
+     * 직원 초과 근무 여부 설정(Integer)
      *
      * @param isWorkOvertime
      */
@@ -654,7 +654,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工加班时长（Long）
+     * 직원 초과근무 시간 조회(Long)
      *
      * @return
      */
@@ -663,7 +663,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工加班时长（Long）
+     * 직원 초과근무 시간 설정(Long)
      *
      * @param workOvertimeTimeDuration
      */
@@ -672,7 +672,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取当天是否为法定节假日（Integer）
+     * 당일 법정 공휴일 여부 조회(Integer)
      *
      * @return
      */
@@ -681,7 +681,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置当天是否为法定节假日（Integer）
+     * 당일 법정 공휴일 여부 설정(Integer)
      *
      * @param isHoliday
      */
@@ -690,7 +690,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工出勤时长（分钟）（Long）
+     * 직원 출근 시간(분) 조회(Long)
      *
      * @return
      */
@@ -699,7 +699,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工出勤时长（分钟）（Long）
+     * 직원 출근 시간(분) 설정(Long)
      *
      * @param workTimeDuration
      */
@@ -708,7 +708,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工出勤天数（0，0.5，1）（Double）
+     * 직원 출근 일수(0, 0.5, 1) 조회(Double)
      *
      * @return
      */
@@ -717,7 +717,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工出勤天数（0，0.5，1）（Double）
+     * 직원 출근 일수(0, 0.5, 1) 설정(Double)
      *
      * @param attendance
      */
@@ -726,7 +726,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工上班打卡时间（String）
+     * 직원 출근 체크 시간 조회(String)
      *
      * @return
      */
@@ -735,7 +735,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工上班打卡时间（String）
+     * 직원 출근 체크 시간 설정(String)
      *
      * @param onDutyTime
      */
@@ -744,7 +744,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工下班打卡时间（String）
+     * 직원 퇴근 체크 시간 조회(String)
      *
      * @return
      */
@@ -753,7 +753,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工下班打卡时间（String）
+     * 직원 퇴근 체크 시간 설정(String)
      *
      * @param offDutyTime
      */
@@ -762,7 +762,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录分析状态：0-未分析 1-已分析 -1-分析有错误（String）
+     * 직원 출퇴근 기록 분석 상태 조회: 0-미분석 1-분석 완료 -1-분석 오류(String)
      *
      * @return
      */
@@ -771,7 +771,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡记录分析状态：0-未分析 1-已分析 -1-分析有错误（String）
+     * 직원 출퇴근 기록 분석 상태 설정: 0-미분석 1-분석 완료 -1-분석 오류(String)
      *
      * @param recordStatus
      */
@@ -780,7 +780,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡当天是否调休的工作日（String）
+     * 직원 출퇴근 체크 당일 대체 근무일 여부 조회(String)
      *
      * @return
      */
@@ -789,7 +789,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡当天是否调休的工作日（String）
+     * 직원 출퇴근 체크 당일 대체 근무일 여부 설정(String)
      *
      * @param isWorkday
      */
@@ -798,7 +798,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡当天是否周末（String）
+     * 직원 출퇴근 체크 당일 주말 여부 조회(String)
      *
      * @return
      */
@@ -807,7 +807,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡当天是否周末（String）
+     * 직원 출퇴근 체크 당일 주말 여부 설정(String)
      *
      * @param isWeekend
      */
@@ -816,7 +816,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录分析处理说明：系统分析时自动填写（String）
+     * 직원 출퇴근 기록 분석 처리 설명 조회: 시스템 분석 시 자동 입력(String)
      *
      * @return
      */
@@ -825,7 +825,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡记录分析处理说明：系统分析时自动填写（String）
+     * 직원 출퇴근 기록 분석 처리 설명 설정: 시스템 분석 시 자동 입력(String)
      *
      * @param description
      */
@@ -834,7 +834,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工所属顶层组织名称（String）
+     * 직원 소속 최상위 조직 이름 조회(String)
      *
      * @return
      */
@@ -843,7 +843,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工所属顶层组织名称（String）
+     * 직원 소속 최상위 조직 이름 설정(String)
      *
      * @param topUnitName
      */
@@ -852,7 +852,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工所属组织名称（String）
+     * 직원 소속 조직 이름 조회(String)
      *
      * @return
      */
@@ -861,7 +861,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工所属组织名称（String）
+     * 직원 소속 조직 이름 설정(String)
      *
      * @param unitName
      */
@@ -870,7 +870,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录所在年份（String）
+     * 직원 출퇴근 기록 연도 조회(String)
      *
      * @return
      */
@@ -879,7 +879,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡记录所在年份（String）
+     * 직원 출퇴근 기록 연도 설정(String)
      *
      * @param yearString
      */
@@ -888,7 +888,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录所在月份（String）
+     * 직원 출퇴근 기록 월 조회(String)
      *
      * @return
      */
@@ -897,7 +897,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡记录所在月份（String）
+     * 직원 출퇴근 기록 월 설정(String)
      *
      * @param monthString
      */
@@ -906,7 +906,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工是否处于休假中（Integer）
+     * 직원 휴가 중 여부 조회(Integer)
      *
      * @return
      */
@@ -915,7 +915,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工是否处于休假中（Integer）
+     * 직원 휴가 중 여부 설정(Integer)
      *
      * @param isGetSelfHolidays
      */
@@ -932,7 +932,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取休假时段：无，上午，下午，全天（String）
+     * 휴가 시간대 조회: 없음, 오전, 오후, 종일(String)
      *
      * @return
      */
@@ -941,7 +941,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置休假时段：无，上午，下午，全天（String）
+     * 휴가 시간대 설정: 없음, 오전, 오후, 종일(String)
      *
      * @param selfHolidayDayTime
      */
@@ -950,7 +950,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工休假天数：0,0.5,1（String）
+     * 직원 휴가 일수 조회: 0,0.5,1(String)
      *
      * @return
      */
@@ -959,7 +959,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工休假天数：0,0.5,1（String）
+     * 직원 휴가 일수 설정: 0,0.5,1(String)
      *
      * @param getSelfHolidayDays
      */
@@ -968,7 +968,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工缺勤天数：0,0.5,1（String）
+     * 직원 결근 일수 조회: 0,0.5,1(String)
      *
      * @return
      */
@@ -977,7 +977,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工缺勤天数：0,0.5,1（String）
+     * 직원 결근 일수 설정: 0,0.5,1(String)
      *
      * @param absence
      */
@@ -986,7 +986,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录分析结果申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过
+     * 직원 출퇴근 기록 분석 결과 이의 신청 상태 조회:0-미신청, 1-신청 중, -1-신청 반려, 9-신청 승인
      *
      * @return
      */
@@ -995,7 +995,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录分析结果申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过
+     * 직원 출퇴근 기록 분석 결과 이의 신청 상태 조회:0-미신청, 1-신청 중, -1-신청 반려, 9-신청 승인
      *
      * @param appealStatus
      */
@@ -1004,7 +1004,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录分析结果申诉简要理由（String）
+     * 직원 출퇴근 기록 분석 결과 이의 신청 간단 사유 조회(String)
      *
      * @return
      */
@@ -1013,7 +1013,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡记录分析结果申诉简要理由（String）
+     * 직원 출퇴근 기록 분석 결과 이의 신청 간단 사유 설정(String)
      *
      * @param appealReason
      */
@@ -1022,7 +1022,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡记录分析结果申诉详细理由（String）
+     * 직원 출퇴근 기록 분석 결과 이의 신청 상세 사유 조회(String)
      *
      * @return
      */
@@ -1031,7 +1031,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡记录分析结果申诉详细理由（String）
+     * 직원 출퇴근 기록 분석 결과 이의 신청 상세 사유 설정(String)
      *
      * @param appealDescription
      */
@@ -1040,7 +1040,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工缺勤时段：无，上午，下午，全天（String）
+     * 직원 결근 시간대 조회: 없음, 오전, 오후, 종일(String)
      *
      * @return
      */
@@ -1049,7 +1049,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工缺勤时段：无，上午，下午，全天（String）
+     * 직원 결근 시간대 설정: 없음, 오전, 오후, 종일(String)
      *
      * @param absentDayTime
      */
@@ -1058,7 +1058,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工打卡异常时段：无，上午，下午，全天（String）
+     * 직원 출퇴근 기록 이상 시간대 조회: 없음, 오전, 오후, 종일(String)
      *
      * @return
      */
@@ -1067,7 +1067,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工打卡异常时段：无，上午，下午，全天（String）
+     * 직원 출퇴근 기록 이상 시간대 설정: 없음, 오전, 오후, 종일(String)
      *
      * @param abnormalDutyDayTime
      */
@@ -1076,7 +1076,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 获取员工是否打卡异常（Integer）
+     * 직원 출퇴근 기록 이상 여부 조회(Integer)
      *
      * @return
      */
@@ -1085,7 +1085,7 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 设置员工是否打卡异常（Integer）
+     * 직원 출퇴근 기록 이상 여부 설정(Integer)
      *
      * @param isAbnormalDuty
      */
@@ -1230,40 +1230,40 @@ public class AttendanceDetail extends SliceJpaObject {
     }
 
     /**
-     * 清除对该条数据信息的分析结果
+     * 해당 데이터의 분석 결과 삭제
      */
     public void refresh() {
-        this.recordStatus = 0; // 记录分析状态
-        this.cycleYear = "1999"; // 统计年份
-        this.cycleMonth = "01"; // 统计月份
+        this.recordStatus = 0; // 기록 분석 상태
+        this.cycleYear = "1999"; // 통계 연도
+        this.cycleMonth = "01"; // 통계 월
 
-        this.isLackOfTime = false; // 是否工时不足
-        this.isAbnormalDuty = false; // 是否异常打卡
-        this.isAbsent = false; // 是否缺勤
-        this.isLate = false; // 是否迟到
-        this.isLeaveEarlier = false; // 是否早退
-        this.isWorkOvertime = false; // 是否加班
+        this.isLackOfTime = false; // 근무 시간 부족 여부
+        this.isAbnormalDuty = false; // 출퇴근 기록 이상 여부
+        this.isAbsent = false; // 결근 여부
+        this.isLate = false; // 지각 여부
+        this.isLeaveEarlier = false; // 조퇴 여부
+        this.isWorkOvertime = false; // 초과 근무 여부
 
-        this.isWorkday = false; // 是否调休工作日
-        this.isHoliday = false; // 是否节假日
-        this.isWeekend = false; // 是否周末
-        this.isGetSelfHolidays = false; // 是否休假
+        this.isWorkday = false; // 대체 근무일 여부
+        this.isHoliday = false; // 공휴일 여부
+        this.isWeekend = false; // 주말 여부
+        this.isGetSelfHolidays = false; // 휴가 여부
 
-        this.absence = 0.0; // 缺勤天数
-        this.attendance = 1.0; // 出勤天数
-        this.lateTimeDuration = 0L; // 迟到时长（分钟）
-        this.leaveEarlierTimeDuration = 0L; // 早退时长（分钟）
+        this.absence = 0.0; // 결근 일수
+        this.attendance = 1.0; // 출근 일수
+        this.lateTimeDuration = 0L; // 지각 시간(분)
+        this.leaveEarlierTimeDuration = 0L; // 조퇴 시간(분)
 
-        this.workOvertimeTimeDuration = 0L; // 加班时长（分钟）
-        this.workTimeDuration = 0L; // 工作时长（分钟）
+        this.workOvertimeTimeDuration = 0L; // 초과 근무 시간(분)
+        this.workTimeDuration = 0L; // 근무 시간(분)
 
-        this.appealDescription = ""; // 申诉详情
-        this.appealReason = ""; // 申诉原因
-        this.appealStatus = 0; // 申诉状态
+        this.appealDescription = ""; // 이의 신청 상세
+        this.appealReason = ""; // 이의 신청 사유
+        this.appealStatus = 0; // 이의 신청 상태
         this.appealProcessor = "";
 
-        this.absentDayTime = "无"; // 缺勤时段：无，上午，下午，全天
-        this.selfHolidayDayTime = "无"; // 休假时段：无，上午，下午，全天
-        this.abnormalDutyDayTime = "无"; // 异常打卡时段：无，上午，下午，全天
+        this.absentDayTime = "无"; // 결근 시간대: 없음, 오전, 오후, 종일
+        this.selfHolidayDayTime = "无"; // 휴가 시간대: 없음, 오전, 오후, 종일
+        this.abnormalDutyDayTime = "无"; // 출퇴근 기록 이상 시간대: 없음, 오전, 오후, 종일
     }
 }

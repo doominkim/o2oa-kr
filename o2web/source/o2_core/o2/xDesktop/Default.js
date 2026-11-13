@@ -381,7 +381,7 @@ o2.xDesktop.Default = new Class({
     },
 
     loadDefaultPage: function(){
-        //默认载入首页
+        //기본으로 첫 페이지 로드
         var app;
         if (layout.config.indexPage && layout.config.indexPage.enable && layout.config.indexPage.portal){
             appId = "portal.Portal"+layout.config.indexPage.portal;

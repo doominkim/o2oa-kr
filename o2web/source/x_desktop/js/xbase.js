@@ -374,7 +374,7 @@ o2.xDesktop.requireApp = function (module, clazz, callback, async) {
 })(layout);
 
 o2.addReady(function () {
-    //兼容方法
+    //호환 메서드
     Element.implement({
         "makeLnk": function (options) { }
     });
@@ -406,7 +406,7 @@ o2.addReady(function () {
         }
     };
 
-    //异步载入必要模块
+    //필요한 모듈 비동기 로드
     layout.config = null;
     var configLoaded = false;
     var lpLoaded = false;
@@ -457,7 +457,7 @@ o2.addReady(function () {
 
     var _load = function () {
         var _loadApp = function (json) {
-            //用户已经登录
+            //사용자 로그인 완료
             layout.user = json.data;
             layout.session = {};
             layout.session.user = json.data;
@@ -509,14 +509,14 @@ o2.addReady(function () {
                 _loadContent();
             })(layout);
         };
-        //先判断用户是否登录
+        //먼저 사용자 로그인 여부 확인
         o2.Actions.get("x_organization_assemble_authentication").getAuthentication(function (json) {
-            //已经登录
+            //이미 로그인됨
             _loadProgressBar();
             _loadApp(json);
         }.bind(this), function (json) {
             _loadProgressBar();
-            //允许匿名访问
+            //익명 접근 허용
             if (layout.anonymous) {
                 _loadProgressBar(true);
                 _loadApp({
@@ -526,8 +526,8 @@ o2.addReady(function () {
                     }
                 });
             } else {
-                //用户未经登录
-                //打开登录页面
+                //사용자 미로그인
+                //로그인 페이지 열기
                 var _loadResource = function (callback) {
                     var isLoadedA = false;
                     var isLoadedB = false;

@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class TinyMCEEditor HTML编辑器。
- * @o2cn TinyMCEEditor编辑器
+/** @class TinyMCEEditor HTML 편집기.
+ * @o2cn TinyMCEEditor 편집기
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var tinyMCEEditor = this.form.get("name"); //获取组件
- * //方法2
- * var tinyMCEEditor = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var tinyMCEEditor = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var tinyMCEEditor = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -18,9 +18,9 @@ MWF.xApplication.process.Xform.TinyMCEEditor = MWF.APPTinyMCEEditor = new Class(
         Extends: MWF.APP$Module,
         options: {
             /**
-             * 组件异步加载后触发.
+             * 컴포넌트 비동기 로드 후 발생.
              * @event MWF.xApplication.process.Xform.TinyMCEEditor#afterLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "moduleEvents": ["queryLoad", "load", "postLoad", "afterLoad"]
         },
@@ -65,9 +65,9 @@ MWF.xApplication.process.Xform.TinyMCEEditor = MWF.APPTinyMCEEditor = new Class(
                     this.fireEvent("afterLoad");
                     this.fieldModuleLoaded = true;
                 }else if (layout.mobile) {
-                    this.loadLazyImage(function () { //图片懒加载
+                    this.loadLazyImage(function () { //이미지 지연 로딩
                         var images = this.node.getElements("img");
-                        //移动端设置图片宽度为100%
+                        //모바일에서 이미지 너비를 100%로 설정
                         images.each(function (img) {
                             if (img.hasClass("lozad")) {
                                 img.setStyles({
@@ -84,9 +84,9 @@ MWF.xApplication.process.Xform.TinyMCEEditor = MWF.APPTinyMCEEditor = new Class(
                         this.fieldModuleLoaded = true;
                     }.bind(this))
                 } else {
-                    this.loadLazyImage(function () { //图片懒加载
+                    this.loadLazyImage(function () { //이미지 지연 로딩
                         if (this.json.enablePreview !== "n") {
-                            this.loadImageViewer(); //PC端点击显示大图
+                            this.loadImageViewer(); //PC에서 클릭 시 큰 이미지 표시
                             this.fireEvent("afterLoad");
                             this.fieldModuleLoaded = true;
                         }
@@ -164,23 +164,23 @@ MWF.xApplication.process.Xform.TinyMCEEditor = MWF.APPTinyMCEEditor = new Class(
                     "max-width" : "100%"
                 });
 
-                // 处理图片加载成功
+                // 이미지 로드 성공 처리
                 const handleLoad = () => {
                     img.removeEventListener('load', handleLoad);
                     img.removeEventListener('error', handleError);
                     parseImg();
                 };
 
-                // 处理图片加载失败（关键：补充error监听）
+                // 이미지 로드 실패 처리(핵심: error 리스너 추가)
                 const handleError = () => {
                     img.removeEventListener('load', handleLoad);
                     img.removeEventListener('error', handleError);
                     reject(new Error(`이미지 로드 실패: ${img.src}`));
                 };
 
-                // 图片已加载完成
+                // 이미지 로드 완료
                 if (img.complete) {
-                    // 检查加载状态（避免缓存的失败图片）
+                    // 로드 상태 확인(캐시된 실패 이미지 방지)
                     if (img.naturalWidth === 0) {
                         reject(new Error(`이미지 로드 오류: ${img.src}`));
                     } else {
@@ -313,7 +313,7 @@ MWF.xApplication.process.Xform.TinyMCEEditor = MWF.APPTinyMCEEditor = new Class(
             var data = this._getBusinessData();
         },
         // /**
-        //  * @summary 重置组件的值为默认值或置空。
+        //  * @summary 컴포넌트 값을 기본값으로 재설정하거나 비움.
         //  *  @example
         //  * this.form.get('fieldId').resetData();
         //  */
@@ -321,43 +321,43 @@ MWF.xApplication.process.Xform.TinyMCEEditor = MWF.APPTinyMCEEditor = new Class(
             this.setData(this._getBusinessData());
         },
         /**
-         * @summary 判断组件值是否为空.
+         * @summary 컴포넌트 값이 비어 있는지 판단.
          * @example
          * if( this.form.get('fieldId').isEmpty() ){
-         *     this.form.notice('HTML编辑器不能为空', 'warn');
+         *     this.form.notice('HTML 편집기는 비워 둘 수 없습니다', 'warn');
          * }
-         * @return {Boolean} 值是否为空.
+         * @return {Boolean} 값이 비어 있는지 여부.
          */
         isEmpty: function () {
             return !this.getData().trim();
         },
         /**
-         * 当表单上没有对应组件的时候，可以使用this.data[fieldId]获取值，但是this.form.get('fieldId')无法获取到组件。
-         * @summary 获取组件值。
+         * 양식에 해당 컴포넌트가 없을 때 this.data[fieldId]로 값을 조회할 수 있으나, this.form.get('fieldId')로는 컴포넌트를 조회할 수 없음.
+         * @summary 컴포넌트 값 가져오기.
          * @example
          * var data = this.form.get('fieldId').getData();
          * @example
-         *  //如果无法确定表单上是否有组件，需要判断
+         *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
          *  var data;
-         *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+         *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
          *      data = this.form.get('fieldId').getData();
          *  }else{
-         *      data = this.data['fieldId']; //直接从数据中获取字段值
+         *      data = this.data['fieldId']; //데이터에서 필드 값을 직접 가져오기
          *  }
-         * @return 组件的数据.
+         * @return 컴포넌트 데이터.
          */
         getData: function () {
             return (this.editor && this.editor.getContent) ? this.editor.getContent() : this._getBusinessData();
         },
         /**
-         * 当表单上没有对应组件的时候，可以使用this.data[fieldId] = data赋值。
-         * @summary 为组件赋值。
+         * 양식에 해당 컴포넌트가 없으면 this.data[fieldId] = data로 값을 설정할 수 있음.
+         * @summary 컴포넌트에 값 할당.
          * @param data{String} .
          * @example
-         *  this.form.get("fieldId").setData("test"); //赋文本值
+         *  this.form.get("fieldId").setData("test"); //텍스트 값 할당
          * @example
-         *  //如果无法确定表单上是否有组件，需要判断
-         *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+         *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
+         *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
          *      this.form.get('fieldId').setData( data );
          *  }else{
          *      this.data['fieldId'] = data;
@@ -525,7 +525,7 @@ MWF.xApplication.process.Xform.TinyMCEEditor = MWF.APPTinyMCEEditor = new Class(
             return this.getData();
         },
         setExcelData: function(data){
-            if( typeOf(data) === "string" )data = data.replace(/&#10;/g,"<br>"); //excel字段换行是 &#10
+            if( typeOf(data) === "string" )data = data.replace(/&#10;/g,"<br>"); //excel 필드 줄바꿈은 &#10
             this.excelData = data;
             this.setData(data, true);
         },

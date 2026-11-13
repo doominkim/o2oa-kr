@@ -15,7 +15,7 @@ import com.x.cms.core.entity.Document;
 import com.x.cms.core.entity.query.DocumentNotify;
 
 /**
- * 文档发送消息通知
+ * 문서 메시지 알림 발송
  * @author sword
  */
 public class ActionNotify extends BaseAction {
@@ -32,7 +32,7 @@ public class ActionNotify extends BaseAction {
 			throw new ExceptionEntityNotExist(id);
 		}
 		if(!Document.DOC_STATUS_PUBLISH.equals(document.getDocStatus())){
-			throw new IllegalStateException("文档未发布");
+			throw new IllegalStateException("게시되지 않은 게시글입니다");
 		}
 		wi.setDocumentId(id);
 

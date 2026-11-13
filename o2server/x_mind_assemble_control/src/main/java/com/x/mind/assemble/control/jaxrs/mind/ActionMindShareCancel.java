@@ -14,7 +14,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindShareRecordNotEx
 import com.x.mind.entity.MindShareRecord;
 
 /**
- * 根据指定的分享记录取消脑图分享
+ * 지정 공유 기록으로 마인드맵 공유 취소
  * @author O2LEE
  *
  */
@@ -39,7 +39,7 @@ public class ActionMindShareCancel extends BaseAction {
 				}
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e,  "系统在根据ID查询脑图分享记录信息时发生异常。", shareRecordId );
+				Exception exception = new ExceptionMindQuery( e,  "ID로 마인드맵 공유 기록을 조회하는 중 오류가 발생했습니다.", shareRecordId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

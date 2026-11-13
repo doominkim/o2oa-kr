@@ -9,12 +9,12 @@ public class ActionCaptchaWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 7575159869222880938L;
 
-	@FieldDescribe("标识.")
-	@Schema(description = "标识.")
+	@FieldDescribe("식별자.")
+	@Schema(description = "식별자.")
 	private String id;
 
-	@FieldDescribe("base64图片值.")
-	@Schema(description = "base64图片值.")
+	@FieldDescribe("base64 이미지 값.")
+	@Schema(description = "base64 이미지 값.")
 	private String image;
 
 	public String getId() {

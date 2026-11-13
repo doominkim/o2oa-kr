@@ -26,7 +26,7 @@ public class ActionGet extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2CheckInRecord record = emc.find(id, AttendanceV2CheckInRecord.class);
             if (record == null) {
-                throw new ExceptionNotExistObject("打卡记录（" + id+"）");
+                throw new ExceptionNotExistObject("체크 기록(" + id+"）");
             }
             result.setData( Wo.copier.copy(record));
         }

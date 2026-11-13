@@ -52,10 +52,10 @@ class ActionListSummaryWithApplicationCategory extends BaseAction {
 		static WrapCopier<Application, Wo> copier = WrapCopierFactory.wo(Application.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("流程对象")
+		@FieldDescribe("프로세스 객체")
 		private List<WoProcess> processList = new ArrayList<>();
 
-		@FieldDescribe("表单对象")
+		@FieldDescribe("양식 객체")
 		private List<WoForm> formList = new ArrayList<>();
 
 		public List<WoProcess> getProcessList() {

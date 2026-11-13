@@ -17,7 +17,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceWorkPlace", description = "考勤工作场所配置.")
+@Schema(name = "AttendanceWorkPlace", description = "근태 근무지 설정.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceWorkPlace.table, uniqueConstraints = {
@@ -38,7 +38,7 @@ public class AttendanceWorkPlace extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -47,58 +47,58 @@ public class AttendanceWorkPlace extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String placeName_FIELDNAME = "placeName";
-	@FieldDescribe("场所名称")
+	@FieldDescribe("장소 이름")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ placeName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String placeName = "";
 
 	public static final String placeAlias_FIELDNAME = "placeAlias";
-	@FieldDescribe("场所别名")
+	@FieldDescribe("근무지 별칭")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ placeAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String placeAlias = "";
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("创建人")
+	@FieldDescribe("생성자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator = "";
 
 	public static final String longitude_FIELDNAME = "longitude";
-	@FieldDescribe("经度")
+	@FieldDescribe("경도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + longitude_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String longitude = null;
 
 	public static final String latitude_FIELDNAME = "latitude";
-	@FieldDescribe("纬度")
+	@FieldDescribe("위도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + latitude_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String latitude = null;
 
 	public static final String errorRange_FIELDNAME = "errorRange";
-	@FieldDescribe("误差范围")
+	@FieldDescribe("오차 범위")
 	@Column(name = ColumnNamePrefix + errorRange_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer errorRange = 200;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明备注")
+	@FieldDescribe("비고")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = null;

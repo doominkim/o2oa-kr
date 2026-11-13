@@ -7,7 +7,7 @@ import com.x.cms.assemble.control.service.CmsBatchOperationPersistService;
 import com.x.cms.assemble.control.service.DocumentPersistService;
 
 /**
- * 重新计算所有文档的权限信息
+ * 모든 문서의 권한 정보 재계산
  *
  */
 public class Timertask_RefreshAllDocumentReviews extends AbstractJob {

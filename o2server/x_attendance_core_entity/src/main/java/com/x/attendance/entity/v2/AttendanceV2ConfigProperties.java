@@ -11,17 +11,17 @@ public class AttendanceV2ConfigProperties extends JsonProperties {
 
     final List<String> defaultList = Collections.singletonList("考勤管理员");
 
-    @FieldDescribe("假期管理默认数据是否已经初始化.")
+    @FieldDescribe("휴가 관리 기본 데이터 초기화 여부.")
     private Boolean leaveTypeInitialized = false;
-    @FieldDescribe("下班后提醒分钟数.")
+    @FieldDescribe("퇴근 후 알림 분 수.")
     private Integer checkInAlertOffDutyAfterMinutes = 10;
-    @FieldDescribe("上班前提醒分钟数.")
+    @FieldDescribe("출근 전 알림 분 수.")
     private Integer checkInAlertOnDutyBeforeMinutes = 10;
-    @FieldDescribe("是否开启中国节假日数据同步")
+    @FieldDescribe("중국 공휴일 데이터 동기화 사용 여부")
     private Boolean chineseHolidaySyncEnable = true;
     @FieldDescribe("考勤管理员职务名称")
     private List<String> statisticUnitDutyNameList =  defaultList;
-    @FieldDescribe("外勤打卡执行脚本")
+    @FieldDescribe("외근 체크 실행 스크립트")
     private String fieldWorkExecuteScript;
 
 

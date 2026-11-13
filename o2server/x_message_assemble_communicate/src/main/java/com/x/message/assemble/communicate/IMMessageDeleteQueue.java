@@ -19,25 +19,25 @@ public class IMMessageDeleteQueue extends AbstractQueue<IMMsg> {
     @Override
     protected void execute(IMMsg imMsg) throws Exception {
         if (StringUtils.isEmpty(imMsg.getId())) {
-            LOGGER.warn("没有传入 id， 无法删除消息");
+            LOGGER.warn("id가 전달되지 않아 메시지를 삭제할 수 없습니다");
             return;
         }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("开始删除消息， id {}", imMsg.getId());
+            LOGGER.debug("메시지 삭제 시작, id {}", imMsg.getId());
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
             IMMsg message = emc.find(imMsg.getId(), IMMsg.class);
             if (null == message) {
-                LOGGER.info("没有找到消息对象 {}", imMsg.getId());
+                LOGGER.info("메시지 객체를 찾을 수 없음 {}", imMsg.getId());
                 return;
             }
-            // 删除收藏的消息
+            // 즐겨찾기한 메시지 삭제
             List<IMMsgCollection> collections = business.imConversationFactory()
                     .listCollectionByPersonAndMsgId(null, message.getId());
             if (null != collections && !collections.isEmpty()) {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("有相关联的收藏消息数据一起删除， collections {}",
+                    LOGGER.debug("연관된 즐겨찾기 메시지 데이터도 함께 삭제, collections {}",
                             collections.size());
                 }
                 for (IMMsgCollection collection : collections) {
@@ -46,22 +46,22 @@ public class IMMessageDeleteQueue extends AbstractQueue<IMMsg> {
                     emc.commit();
                 }
             }
-            // 删除消息对应的文件 如果有
+            // 메시지에 해당하는 파일 삭제(있는 경우)
             String fileId = message.getBodyFileId();
-            // 先删除消息本身
+            // 먼저 메시지 자체를 삭제
             emc.beginTransaction(IMMsg.class);
             emc.remove(message);
             emc.commit();
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("删除消息完成， id {}", message.toString());
+                LOGGER.debug("메시지 삭제 완료, id {}", message.toString());
             }
-            if (StringUtils.isNotEmpty(fileId)) { // 消息是带文件的 删除对应的文件和数据
+            if (StringUtils.isNotEmpty(fileId)) { // 파일이 포함된 메시지. 해당 파일과 데이터 삭제
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("消息是带文件的 查询是否是空闲文件对象， fileId {}", fileId);
+                    LOGGER.debug("파일이 포함된 메시지. 유휴 파일 객체인지 조회, fileId {}", fileId);
                 }
-                // 先查询是否还有更多的关联这个文件的消息
+                // 먼저 이 파일과 연관된 다른 메시지가 있는지 조회
                 List<IMMsg> list = business.imConversationFactory().listMessageByFileId(fileId);
-                if (null == list || list.isEmpty()) { // 没有关联数据 删除文件对象
+                if (null == list || list.isEmpty()) { // 연관 데이터 없음. 파일 객체 삭제
                     IMMsgFile file = emc.find(fileId, IMMsgFile.class);
                     if (null != file) {
                         StorageMapping mapping = ThisApplication.context().storageMappings()
@@ -73,7 +73,7 @@ public class IMMessageDeleteQueue extends AbstractQueue<IMMsg> {
                         emc.delete(IMMsgFile.class, file.getId());
                         emc.commit();
                         if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug(" 删除对应的文件和数据， fileId {}", fileId);
+                            LOGGER.debug(" 해당 파일과 데이터 삭제, fileId {}", fileId);
                         }
                     }
                 }

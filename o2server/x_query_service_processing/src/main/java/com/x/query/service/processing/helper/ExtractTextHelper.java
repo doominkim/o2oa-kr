@@ -117,8 +117,8 @@ public class ExtractTextHelper {
 			synchronized (ExtractTextHelper.class) {
 				if (null == tesseract) {
 					tesseract = new Tesseract();
-					tesseract.setDatapath(Config.base() + "/commons/tess4j/tessdata");// 设置训练库的位置
-					tesseract.setLanguage(Config.query().getTessLanguage());// 中文识别
+					tesseract.setDatapath(Config.base() + "/commons/tess4j/tessdata");// 학습 라이브러리 위치 설정
+					tesseract.setLanguage(Config.query().getTessLanguage());// 중국어 인식
 				}
 			}
 		}

@@ -7,6 +7,6 @@ public class ExceptionRoleInfoNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionRoleInfoNotExists( String id ) {
-		super("指定ID的BBS角色不存在.ID:" + id );
+		super("지정한 ID의 BBS 역할이 없습니다. ID:" + id );
 	}
 }

@@ -82,7 +82,7 @@ MWF.xApplication.Setting.MobileModuleDocument = new Class({
             "options": options
         });
 
-        //移动端简易模式
+        //모바일 간편 모드
         var simpleModeTitle = this.lp.mobile_module_simple_mode;
         var simpleModeInfor = this.lp.mobile_module_simple_mode_infor;
         new MWF.xApplication.Setting.Document.Check(this.explorer, this.node, {
@@ -91,16 +91,16 @@ MWF.xApplication.Setting.MobileModuleDocument = new Class({
             "value": this.explorer.nativeData.simpleMode
         });
 
-        // app通讯录权限视图
+        // app 주소록 권한 뷰
         var contactPermissionViewTitle = this.lp.mobile_module_contact_permission_view;
         var contactPermissionViewInfor = this.lp.mobile_module_contact_permission_view_infor;
         new MWF.xApplication.Setting.Document.Input(this.explorer, this.node, {
             "lp": { "title": contactPermissionViewTitle, "infor": contactPermissionViewInfor, "action": this.lp.mobile_module_contact_permission_view_action},
             "data": { "key": "nativeData", "valueKey": "contactPermissionView", "notEmpty": false },
-            "value": this.explorer.nativeData.contactPermissionView || "addressPowerView" // 默认视图名 addressPowerView
+            "value": this.explorer.nativeData.contactPermissionView || "addressPowerView" // 기본 뷰 이름 addressPowerView
         });
 
-        //显示系统通知
+        //시스템 알림 표시
         var systemMessageSwitchTitle = this.lp.mobile_module_system_message_switch;
         var systemMessageSwitchInfor = this.lp.mobile_module_system_message_switch_infor;
         new MWF.xApplication.Setting.Document.Check(this.explorer, this.node, {
@@ -121,7 +121,7 @@ MWF.xApplication.Setting.MobileModuleDocument = new Class({
     }
 });
 
-// app在线打包功能
+// app 온라인 패키징 기능
 MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
     Extends: MWF.xApplication.Setting.Document,
     load: function () {
@@ -132,25 +132,25 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             this.checkConnectAppPackServer();
         }.bind(this));
     },
-    // 检查app打包服务器连接情况，包括是否已经登录O2云
+    // app 패키징 서버 연결 상태 확인, O2 클라우드 로그인 여부 포함
     checkConnectAppPackServer: function () {
         o2.Actions.load("x_program_center").AppPackAction.connect(function(json){
             if (json && json.data) {
                 var data = json.data
-                if (data.status === 1001) { // 成功 获取token
+                if (data.status === 1001) { // 성공 시 token 조회
                     this.token = data.token;
                     this.packServerUrl = data.packServerUrl;
                     this.apppackErrorMsgNode.setStyles({
                         "display": "none"
                     });
                     this.loadAppPackInfo();
-                } else if (data.status === 1) { // o2云未连接 o2云未启用
+                } else if (data.status === 1) { // o2 클라우드 미연결 o2 클라우드 미사용
                     this.showErrorMsg(this.lp.mobile_apppack_message_o2cloud_not_enable);
                     // this.app.notice(this.lp.mobile_apppack_message_o2cloud_not_enable, "error", this.contentAreaNode);
-                } else if (data.status === 2) { // o2云未登录
+                } else if (data.status === 2) { // o2 클라우드 미로그인
                     // this.app.notice(this.lp.mobile_apppack_message_o2cloud_not_login, "error", this.contentAreaNode);
                     this.showErrorMsg(this.lp.mobile_apppack_message_o2cloud_not_login);
-                } else if (data.status === 3) { // 打包服务器未认证通过
+                } else if (data.status === 3) { // 패키징 서버 인증 실패
                     // this.app.notice(this.lp.mobile_apppack_message_apppack_server_login_fail, "error", this.contentAreaNode);
                     this.showErrorMsg(this.lp.mobile_apppack_message_apppack_server_login_fail);
                 }
@@ -160,7 +160,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             }
         }.bind(this));
     },
-    // 加载最近一次打包信息 
+    // 최근 패키징 정보 로드 
     loadAppPackInfo: function () {
         this.showLoading();
         o2.Actions.load("x_program_center").AppPackAction.packInfo(this.token, function(json){
@@ -192,14 +192,14 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             this.packLoadingNode = null;
         }
     },
-    // 显示错误信息
+    // 오류 정보 표시
     showErrorMsg: function(msg) {
         this.apppackErrorMsgNode.set("text", msg);
         this.apppackErrorMsgNode.setStyles({
             "display": ""
         });
     },
-    // 显示提交表单
+    // 제출 양식 표시
     showForm: function() {
         this.apppackShowBodyNode.setStyles({
             "display": "none"
@@ -213,7 +213,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             }.bind(this)
         })
     },
-    // 显示打包详情
+    // 패키징 상세 표시
     showPackInfoDetail: function () {
         if (this.packInfo) {
             this.apppackAppNameShowNode.set("text", this.packInfo.appName);
@@ -301,37 +301,37 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             this.apppackStatusShowNode.set("text", status);
             
             if (this.packInfo.apkPath && this.packInfo.packStatus === "2") {
-                // 显示发布区域
+                // 게시 영역 표시
                 this.apppackPublishShowNode.setStyles({ "display": ""});
-                if (!this.packInfo.appFile) { // 还未发布到本地
-                    this.apppackPublishBtnNode.setStyles({ "display": ""}); //显示发布按钮
+                if (!this.packInfo.appFile) { // 아직 로컬에 게시되지 않음
+                    this.apppackPublishBtnNode.setStyles({ "display": ""}); //게시 버튼 표시
                     this.apppackPublishBtnNode.addEvents({
                         "click": function(e) {
                             this.publishAPK2Local();
                         }.bind(this)
                     });
                     this.apppackPublishStatusInfoNode.set("text", "");
-                    // 弹出发布提示
+                    // 게시 안내 팝업
                     this.confirm(this.lp.alert, this.lp.mobile_apppack_message_confirm_publish, function() {
                         this.publishAPK2Local();
                     }.bind(this));
-                } else if (this.packInfo.appFile.status === 0) { // 发布中
-                    this.apppackPublishBtnNode.setStyles({ "display": "none"}); //隐藏发布按钮
+                } else if (this.packInfo.appFile.status === 0) { // 게시 중
+                    this.apppackPublishBtnNode.setStyles({ "display": "none"}); //게시 버튼 숨김
 
                     this.apppackPublishStatusInfoNode.set("text", this.lp.mobile_apppack_publish_status_doing);
-                } else if (this.packInfo.appFile.status === 1) { // 发布完成
-                    this.apppackPublishBtnNode.setStyles({ "display": "none"}); //隐藏发布按钮
+                } else if (this.packInfo.appFile.status === 1) { // 게시 완료
+                    this.apppackPublishBtnNode.setStyles({ "display": "none"}); //게시 버튼 숨김
 
                     this.apppackPublishStatusInfoNode.set("text",  this.lp.mobile_apppack_publish_status_completed);
-                     // 发布完成，显示下载按钮
+                     // 게시 완료, 다운로드 버튼 표시
                     var url = o2.Actions.getHost("x_program_center") + "/x_program_center/jaxrs/apppack/pack/info/file/download/" + this.packInfo.appFile.id ;
                     url = o2.filterUrl(url);
                     this.apppackDownloadLinkNode.set("href", url);
                     this.apppackDownloadShowNode.setStyles({
                         "display": ""
                     });
-                } else if (this.packInfo.appFile.status === 2) { // 发布失败
-                    this.apppackPublishBtnNode.setStyles({ "display": ""}); //显示发布按钮
+                } else if (this.packInfo.appFile.status === 2) { // 게시 실패
+                    this.apppackPublishBtnNode.setStyles({ "display": ""}); //게시 버튼 표시
 
                     this.apppackPublishStatusInfoNode.set("text", this.lp.mobile_apppack_publish_status_fail);
                     this.apppackPublishBtnNode.addEvents({
@@ -356,7 +356,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             
         }
     },
-    // 发布打包好的apk到本地
+    // 패키징된 apk를 로컬에 게시
     publishAPK2Local: function() {
         if (this.packInfo) {
             var url = o2.Actions.getHost("") 
@@ -373,7 +373,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             o2.Actions.load("x_program_center").AppPackAction.publishApk(data, function(json){
                 this.hiddenLoading();
                 if (json.data && json.data.value) {
-                    // 提交成功 获取最新打包对象信息
+                    // 제출 성공 시 최신 패키징 객체 정보 조회
                     this.loadAppPackInfo();
                 }else {
                     this.app.notice(json.message, "error", this.contentAreaNode);
@@ -387,17 +387,17 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             console.log("패키징 정보가 없어 배포할 수 없습니다");
         }
     },
-    // 重新输入 提交表单
+    // 다시 입력 양식 제출
     reInput: function () {
-        // 填充内容
+        // 내용 채우기
         if (this.packInfo) {
             this.apppackProtocolInputNode.set("value", this.packInfo.o2ServerProtocol);
             this.apppackHostInputNode.set("value", this.packInfo.o2ServerHost);
             this.apppackPortInputNode.set("value", this.packInfo.o2ServerPort);
             this.apppackContextInputNode.set("value", this.packInfo.o2ServerContext);
             this.apppackAppNameInputNode.set("value", this.packInfo.appName);
-            this.apppackAppVersionNameInputNode.set("value", ""); // 重新填写 版本号清空
-            this.apppackAppBuildNoInputNode.set("value", ""); // 重新填写 版本号清空
+            this.apppackAppVersionNameInputNode.set("value", ""); // 다시 작성 버전 번호 초기화
+            this.apppackAppBuildNoInputNode.set("value", ""); // 다시 작성 버전 번호 초기화
             this.apppackUrlMappingInputNode.set("value", this.packInfo.urlMapping);
             var isPackAppIdOuter = false;
             if (this.packInfo.isPackAppIdOuter && this.packInfo.isPackAppIdOuter === "2") {
@@ -412,11 +412,11 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
         }
         this.showForm();
     },
-    // 获取本地配置的proxy地址
+    // 로컬에 설정된 proxy 주소 조회
     loadConfigProxy: function () {
         o2.Actions.load("x_program_center").ConfigAction.getProxy(function(json){
             this.hiddenLoading();
-            // 填充
+            // 채우기
             if (json && json.data) {
                 var data = json.data
                 if (data.httpProtocol) {
@@ -441,7 +441,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             this.showForm();
         }.bind(this))
     },
-    // 直接用原有资料重新打包
+    // 기존 자료로 바로 다시 패키징
     reSubmitPack: function() {
         this.confirm(this.lp.alert, this.lp.mobile_apppack_message_alert_submit, function() {
             this.showLoading();
@@ -449,7 +449,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
                 console.log(json)
                 this.hiddenLoading();
                 if (json.data && json.data.value) {
-                    // 提交成功 获取最新打包对象信息
+                    // 제출 성공 시 최신 패키징 객체 정보 조회
                     this.loadAppPackInfo();
                 } else {
                     this.app.notice(json.message, "error", this.contentAreaNode);
@@ -461,7 +461,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
             }.bind(this));
         }.bind(this));
     },
-    // 提交打包
+    // 패키징 제출
     submitPack: function () {
        
         var appName = this.apppackAppNameInputNode.get("value");
@@ -544,7 +544,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
                 console.log(json)
                 this.hiddenLoading();
                 if (json.data && json.data.value) {
-                    // 提交成功 获取最新打包对象信息
+                    // 제출 성공 시 최신 패키징 객체 정보 조회
                     this.loadAppPackInfo();
                 } else {
                     this.app.notice(json.message, "error", this.contentAreaNode);
@@ -557,7 +557,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
         }.bind(this));
         
     },
-    //确认
+    //확인
     confirm: function (title, text, okCallback) {
         var width = 600;
         var height = 110;
@@ -595,7 +595,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
 });
 
 
-// 微信菜单
+// 위챗 메뉴
 MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
     Extends: MWF.xApplication.Setting.Document,
     load: function () {
@@ -610,12 +610,12 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
         }.bind(this));
     },
     initMenuData: function() {
-         //处理数据
+         //데이터 처리
         // var list = this.explorer.mpweixinListData;
         if (!this.menuList) {
             this.menuList = this.explorer.mpweixinListData || [];
         }
-        //去除 subscribe
+        //subscribe 제거
         var subscribe = null;
         for (let index = 0; index < this.menuList.length; index++) {
             const element = this.menuList[index];
@@ -627,7 +627,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             this.menuList.erase(subscribe);
         }
     },
-    //发布菜单 点击事件
+    //메뉴 게시 클릭 이벤트
     loadPublishBtn: function() {
         this.mpwxPublishBtnNode.addEvents({
             "click": function(){
@@ -641,13 +641,13 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             }.bind(this)
         });
     },
-    // 关注回复消息
+    // 팔로우 응답 메시지
     subscribeEvent: function() {
         if (this.explorer.mpweixinSubscribe) {
             this.mpweixinSubscribe = this.explorer.mpweixinSubscribe;
-            if (this.mpweixinSubscribe.name && this.mpweixinSubscribe.name !== "") { //已经存在 name肯定不为空
+            if (this.mpweixinSubscribe.name && this.mpweixinSubscribe.name !== "") { //이미 존재하므로 name은 반드시 비어 있지 않음
                 this.mpwxMenuSubscribeInputNode.set("value", this.mpweixinSubscribe.content || "");
-            } else { // 新的 没有数据
+            } else { // 새 항목 데이터 없음
                 this.mpweixinSubscribe = {
                     id: "mock_new",
                     name: "subscribe",
@@ -661,7 +661,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
                 type: "subscribe"
             };
         }
-        //保存事件
+        //저장 이벤트
         this.mpwxSaveSubscribeBtnNode.addEvents({
             "click": function(){
                 this.saveSubscribeMenu();
@@ -675,16 +675,16 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             return;
         }
         this.mpweixinSubscribe.content = content;
-        //新建的菜单 click类型需要设置key 
+        //새로 만든 메뉴 click 유형은 key 설정 필요 
         if (this.mpweixinSubscribe.id.startsWith('mock_')) {
-            delete this.mpweixinSubscribe.id; //新增要删除id
+            delete this.mpweixinSubscribe.id; //삭제할 id 추가
         }
-        //写入数据 远程写入 还有 上级数组中
-        if (!this.mpweixinSubscribe.id) { //新增
+        //데이터 기록 원격 기록 및 상위 배열에도 기록
+        if (!this.mpweixinSubscribe.id) { //신규
             o2.Actions.load("x_program_center").MPWeixinAction.menuAdd(this.mpweixinSubscribe,function (json) {
                 this.app.notice(this.lp.mobile_mpweixin_menu_save_success, "success", this.contentAreaNode);
             }.bind(this));
-        }else { // 更新
+        }else { // 수정
             o2.Actions.load("x_program_center").MPWeixinAction.menuUpdate(this.mpweixinSubscribe.id, this.mpweixinSubscribe,function (json) {
                 this.app.notice(this.lp.mobile_mpweixin_menu_save_success, "success", this.contentAreaNode);
             }.bind(this));
@@ -692,13 +692,13 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
     },
     loadMenu: function () {
         this.mpwxMenuListNode.empty();
-        // 生成菜单
+        // 메뉴 생성
         if (this.menuList && this.menuList.length > 0) {
             if (!this.showSubId) {
-                this.showSubId = this.menuList[0].id;//初始化 showSubId 表示哪个子菜单是显示的
+                this.showSubId = this.menuList[0].id;//showSubId 초기화: 표시 중인 하위 메뉴를 의미
             }
             if (!this.currentMenuId) {
-                this.currentMenuId = this.menuList[0].id;//初始化 currentMenuId 表示当前选中的菜单ID
+                this.currentMenuId = this.menuList[0].id;//currentMenuId 초기화: 현재 선택된 메뉴 ID를 의미
             }
             for (let index = 0; index < this.menuList.length; index++) {
                 const element = this.menuList[index];
@@ -707,24 +707,24 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
         }
         this.firstLevelAddButton();
     },
-    //第一层级的新建按钮
+    //첫 번째 레벨 새로 만들기 버튼
     firstLevelAddButton: function () {
         var addLi = new Element("li", { "class": "js_addMenuBox pre_menu_item grid_item no_extra" }).inject(this.mpwxMenuListNode);
         new Element("a", { "class": "pre_menu_link js_addL1Btn", "href": "javascript:void(0);" }).inject(addLi);
         new Element("i", { "class": "icon14_menu_add" }).inject(addLi);
-        //点击事件
+        //클릭 이벤트
         addLi.addEvents({
             "click": function () {
                 this.createNewFirstMenuMock();
             }.bind(this)
         });
     },
-    // 第一层级 菜单 UI
+    // 첫 번째 레벨 메뉴 UI
     // <li class="jsMenu pre_menu_item grid_item jslevel1 ui-sortable ui-sortable-disabled size1of3  current selected" id="menu_0">
     //     <a href="javascript:void(0);" class="pre_menu_link" draggable="false">
     //     <i class="icon_menu_dot js_icon_menu_dot dn" style="display: none;"></i>
     //     <i class="icon20_common sort_gray"></i>
-    //     <span class="js_l1Title">菜单名称</span>
+    //     <span class="js_l1Title">메뉴 이름</span>
     // </a>
     // <div class="sub_pre_menu_box js_l2TitleBox" >
     //     <ul class="sub_pre_menu_list">
@@ -732,13 +732,13 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
     //     <a href="javascript:void(0);" class="jsSubView" draggable="false">
     //         <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
     //             <i class="icon20_common sort_gray"></i>
-    //             <span class="js_l2Title">子菜单名称单名称</span>
+    //             <span class="js_l2Title">하위 메뉴 이름</span>
     //         </span>
     //     </a>
     // </li>
-    //     <li id="1618290787255_subMenu_menu_0_0" class="jslevel2 current"><a href="javascript:void(0);" class="jsSubView" draggable="false"><span class="sub_pre_menu_inner js_sub_pre_menu_inner"><i class="icon20_common sort_gray"></i><span class="js_l2Title">子菜单名称</span></span></a></li>
+    //     <li id="1618290787255_subMenu_menu_0_0" class="jslevel2 current"><a href="javascript:void(0);" class="jsSubView" draggable="false"><span class="sub_pre_menu_inner js_sub_pre_menu_inner"><i class="icon20_common sort_gray"></i><span class="js_l2Title">하위 메뉴 이름</span></span></a></li>
     //     <li class="js_addMenuBox">
-    //     <a href="javascript:void(0);" class="jsSubView js_addL2Btn" title="最多添加5个子菜单" draggable="false">
+    //     <a href="javascript:void(0);" class="jsSubView js_addL2Btn" title="하위 메뉴는 최대 5개까지 추가 가능" draggable="false">
     //     <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
     //     <i class="icon14_menu_add"></i></span></a>
     // </li>
@@ -762,14 +762,14 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
                 this.clickMenu(menu.id, menu);
             }.bind(this)
         });
-        //子菜单
+        //하위 메뉴
         var subDiv = new Element("div", { "class": "sub_pre_menu_box js_l2TitleBox" }).inject(menuLi);
         var subUl = new Element("ul", { "class": "sub_pre_menu_list" }).inject(subDiv);
         if (!sub_button || sub_button.length < 5) {
-            this.secondLevelAddButton(menu, subUl); //新增按钮放上面
+            this.secondLevelAddButton(menu, subUl); //추가 버튼을 위에 배치
         }
         if (sub_button && sub_button.length > 0) {
-            // 子菜单是倒叙的
+            // 하위 메뉴는 역순
             sub_button.sort(function (a, b) {
                 var x = a.order.toLowerCase();
                 var y = b.order.toLowerCase();
@@ -795,7 +795,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
         }
 
     },
-    // 子菜单 新建按钮
+    // 하위 메뉴 새로 만들기 버튼
     secondLevelAddButton: function (parentMenu, parentNode) {
         var addLi = new Element("li", { "class": "js_addMenuBox" }).inject(parentNode);
         var addA = new Element("a", { "class": "jsSubView js_addL2Btn", "href": "javascript:void(0);" }).inject(addLi);
@@ -809,7 +809,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             }.bind(this)
         });
     },
-    // 子菜单 UI
+    // 하위 메뉴 UI
     secondLevelMenu: function (menu, parentNode, parentMenu) {
         var menuClass = "jslevel2";
         if (this.currentMenuId && this.currentMenuId === menu.id) {
@@ -828,10 +828,10 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             }.bind(this)
         });
     },
-    //右边区域 装载
+    //오른쪽 영역 로드
     menuRightBoxCreate: function (menu) {
         this.mpwxMenuFormHeaderNode.empty();
-        // 头部
+        // 헤더
         new Element("h4", { "class": "global_info", "text": menu.name }).inject(this.mpwxMenuFormHeaderNode);
         var deleteNode = new Element("div", { "class": "global_extra" }).inject(this.mpwxMenuFormHeaderNode);
         var deleteA = new Element("a", { "href": "javascript:void(0);", "text": this.lp.mobile_mpweixin_menu_deleteBtnName_label }).inject(deleteNode);
@@ -843,20 +843,20 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             }.bind(this)
         })
 
-        // 表单页面
+        // 양식 페이지
         new MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm(this, this.mpwxMenuFormNode, menu);
     },
-    //点击菜单执行
+    //메뉴 클릭 시 실행
     clickMenu: function (showSubId, menu) {
-        this.showSubId = showSubId; //showSubId 表示哪个子菜单是显示的
-        this.currentMenuId = menu.id;//currentMenuId 表示当前选中的菜单ID
+        this.showSubId = showSubId; //showSubId: 표시 중인 하위 메뉴를 의미
+        this.currentMenuId = menu.id;//currentMenuId: 현재 선택된 메뉴 ID를 의미
         this.menuRightBoxCreate(menu);
         this.loadMenu();
     },
-    //创建子菜单
+    //하위 메뉴 생성
     createNewSubMenuMock: function (parent) {
         let sub = parent.sub_button;
-        //最多可创建5个
+        //최대 5개까지 생성 가능
         if (sub && sub.length >= 5 ) {
             this.app.notice(this.lp.mobile_mpweixin_menu_msg_sub_max_len, "error", this.contentAreaNode);
             return;
@@ -865,10 +865,10 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             this.app.notice(this.lp.mobile_mpweixin_menu_msg_parent_no_save, "error", this.contentAreaNode);
             return;
         }
-        // 排序号生成 
+        // 정렬 번호 생성 
         let order = "000001";
         if (sub && sub.length > 0) {
-            let bigestOrder = sub[0].order;//第一条 因为上面已经排序过了 所以第一条是最大的
+            let bigestOrder = sub[0].order;//첫 번째 항목 위에서 이미 정렬했으므로 첫 번째 항목이 가장 큼
             const intOrder = parseInt(bigestOrder);
             if (!isNaN(intOrder)) {
                 let o = intOrder + 1;
@@ -879,14 +879,14 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
                 order = os;
             }
         }
-        // id mock_开头 正式保存的时候知道是新增的 可以清除 后台生成id
+        // id가 mock_로 시작 정식 저장 시 신규임을 알 수 있어 제거하고 백엔드에서 id 생성
         let body = {
             "id": "mock_" + o2.uuid(),
             "name": this.lp.mobile_mpweixin_menu_default_new_name,
             "parentId": parent.id,
-            "type": "click", //默认文字消息
+            "type": "click", //기본 텍스트 메시지
             "order": order,
-            "o2Level": "2" // 2第二层级菜单
+            "o2Level": "2" // 2 두 번째 레벨 메뉴
         };
         if (sub) {
             parent.sub_button.push(body);
@@ -901,17 +901,17 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
         }
         this.clickMenu(parent.id, body);
     },
-    // 创建第一层菜单
+    // 첫 번째 레벨 메뉴 생성
     createNewFirstMenuMock: function() {
-        //最多可创建3个
+        //최대 3개까지 생성 가능
         if (this.menuList && this.menuList.length >=3 ) {
             this.app.notice(this.lp.mobile_mpweixin_menu_msg_first_max_len, "error", this.contentAreaNode);
             return;
         }
-        // 排序号生成 
+        // 정렬 번호 생성 
         let order = "000001";
         if (this.menuList && this.menuList.length > 0) {
-            let bigestOrder = this.menuList[this.menuList.length-1].order;//最后一条是最大的号码
+            let bigestOrder = this.menuList[this.menuList.length-1].order;//마지막 항목이 가장 큰 번호
             console.log("가장 큰 order " + bigestOrder);
             const intOrder = parseInt(bigestOrder);
             if (!isNaN(intOrder)) {
@@ -924,13 +924,13 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             }
             console.log("가장 큰 order " + intOrder);
         }
-        // id mock_开头 正式保存的时候知道是新增的 可以清除 后台生成id
+        // id가 mock_로 시작 정식 저장 시 신규임을 알 수 있어 제거하고 백엔드에서 id 생성
         let body = {
             "id": "mock_" + o2.uuid(),
             "name": this.lp.mobile_mpweixin_menu_default_new_name,
-            "type": "click", //默认文字消息
+            "type": "click", //기본 텍스트 메시지
             "order": order,
-            "o2Level": "1" // 1第一层级菜单
+            "o2Level": "1" // 1 첫 번째 레벨 메뉴
         };
         if (this.menuList) {
             this.menuList.push(body);
@@ -939,7 +939,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
         }
         this.clickMenu(body.id, body);
     },
-    // 更新list中的数据对象
+    // list 안의 데이터 객체 갱신
     setMenuData(menu) {
         if (this.menuList && this.menuList.length > 0) {
             for (let index = 0; index < this.menuList.length; index++) {
@@ -966,7 +966,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             this.loadMenu();
         }
     },
-    // 删除数据
+    // 데이터 삭제
     deleteAction: function(menu) {
         if (menu.id) {
             if (menu.id.startsWith("mock_")) {
@@ -975,7 +975,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             }else {
                 this.confirm(this.lp.alert, this.lp.mobile_mpweixin_menu_delete_alert_msg, function () {
                     o2.Actions.load("x_program_center").MPWeixinAction.menuDelete(menu.id,function (json) {
-                        //刷新数据
+                        //데이터 새로 고침
                         this.removeDataUI(menu);
                         this.app.notice(this.lp.mobile_mpweixin_menu_delete_success, "success", this.contentAreaNode);
                     }.bind(this));
@@ -983,7 +983,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             }
         }
     },
-    // 删除数据后更新ui
+    // 데이터 삭제 후 ui 갱신
     removeDataUI: function(menu) {
         this.mpwxMenuFormHeaderNode.empty();
         this.mpwxMenuFormNode.empty();
@@ -1016,7 +1016,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
             this.loadMenu();
         }         
     },
-    //确认
+    //확인
     confirm: function (title, text, okCallback) {
         var width = 600;
         var height = 110;
@@ -1053,7 +1053,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
     }
 });
 
-//菜单表单功能
+//메뉴 양식 기능
 MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
     Implements: [Options, Events],
     initialize: function (menuApp, contentAreaNode, menu, options) {
@@ -1072,7 +1072,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         this.contentAreaNode.empty();
         this.nameInputCreate();
         this.orderInputCreate();
-        if (this.menu.sub_button && this.menu.sub_button.length > 0) { //父菜单 如果存在子菜单就不需要编辑类型
+        if (this.menu.sub_button && this.menu.sub_button.length > 0) { //상위 메뉴 하위 메뉴가 있으면 유형 편집 불필요
             this.haSubMenus = true;
         } else {
             this.haSubMenus = false;
@@ -1080,7 +1080,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         }
         this.saveButtonCreate();
     },
-    //菜单名称
+    //메뉴 이름
     nameInputCreate: function () {
         this.nameInputBoxNode = new Element("div", { "class": "frm_control_group js_setNameBox" }).inject(this.contentAreaNode);
         var labelNode = new Element("label", { "class": "frm_label" }).inject(this.nameInputBoxNode);
@@ -1088,7 +1088,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         var inputNode = new Element("div", { "class": "frm_controls" }).inject(this.nameInputBoxNode);
         var spanNode = new Element("span", { "class": "frm_input_box with_counter counter_in append" }).inject(inputNode);
         this.nameInputNode = new Element("input", { "class": "frm_input js_menu_name", "type": "text", "value": this.menu.name }).inject(spanNode);
-        //事件？
+        //이벤트?
         var nameTips = this.lp.mobile_mpweixin_menu_form_name_tips_4
         if (this.menu.o2Level && this.menu.o2Level === "1"){
             nameTips = this.lp.mobile_mpweixin_menu_form_name_tips_4 
@@ -1098,7 +1098,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         this.nameInputTipsNode = new Element("p", { "class": "frm_tips js_titleNolTips", "text": nameTips }).inject(inputNode);
         this.nameInputErrorTipsNode = new Element("p", { "class": "frm_msg fail js_titleEorTips dn", "text": this.lp.mobile_mpweixin_menu_form_name_error }).inject(inputNode);
     },
-    //菜单排序号
+    //메뉴 정렬 번호
     orderInputCreate: function () {
         this.orderInputBoxNode = new Element("div", { "class": "frm_control_group js_setNameBox" }).inject(this.contentAreaNode);
         var labelNode = new Element("label", { "class": "frm_label" }).inject(this.orderInputBoxNode);
@@ -1106,17 +1106,17 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         var inputNode = new Element("div", { "class": "frm_controls" }).inject(this.orderInputBoxNode);
         var spanNode = new Element("span", { "class": "frm_input_box with_counter counter_in append" }).inject(inputNode);
         this.orderInputNode = new Element("input", { "class": "frm_input js_menu_name", "type": "text", "value": this.menu.order }).inject(spanNode);
-        //事件？
+        //이벤트?
         this.orderInputTipsNode = new Element("p", { "class": "frm_tips js_titleNolTips", "text": this.lp.mobile_mpweixin_menu_form_order_tips }).inject(inputNode);
         this.orderInputErrorTipsNode = new Element("p", { "class": "frm_msg fail js_titleEorTips dn", "text": this.lp.mobile_mpweixin_menu_form_order_error }).inject(inputNode);
     },
-    //菜单类型 
+    //메뉴 유형 
     typeRadioCreate: function () {
         this.typeRadioBoxNode = new Element("div", { "class": "frm_control_group" }).inject(this.contentAreaNode);
         var labelNode = new Element("label", { "class": "frm_label" }).inject(this.typeRadioBoxNode);
         new Element("strong", { "class": "title js_menuContent", "text": this.lp.mobile_mpweixin_menu_form_radio_label }).inject(labelNode);
         var groupNode = new Element("div", { "class": "frm_controls frm_vertical_pt" }).inject(this.typeRadioBoxNode);
-        //消息类型
+        //메시지 유형
         this.msgTypeRadioBoxNode = new Element("label", { "class": "frm_radio_label js_radio_sendMsg" }).inject(groupNode);
         new Element("i", { "class": "icon_radio" }).inject(this.msgTypeRadioBoxNode);
         new Element("span", { "class": "lbl_content", "text": this.lp.mobile_mpweixin_menu_form_radio_type_msg }).inject(this.msgTypeRadioBoxNode);
@@ -1126,7 +1126,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
                 this.changeMenuType("click")
             }.bind(this)
         });
-        //网页类型
+        //웹 페이지 유형
         this.urlTypeRadioBoxNode = new Element("label", { "class": "frm_radio_label js_radio_sendMsg" }).inject(groupNode);
         new Element("i", { "class": "icon_radio" }).inject(this.urlTypeRadioBoxNode);
         new Element("span", { "class": "lbl_content", "text": this.lp.mobile_mpweixin_menu_form_radio_type_url }).inject(this.urlTypeRadioBoxNode);
@@ -1136,7 +1136,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
                 this.changeMenuType("view")
             }.bind(this)
         });
-        //小程序
+        //미니 프로그램
         this.miniprogramTypeRadioBoxNode = new Element("label", { "class": "frm_radio_label js_radio_sendMsg" }).inject(groupNode);
         new Element("i", { "class": "icon_radio" }).inject(this.miniprogramTypeRadioBoxNode);
         new Element("span", { "class": "lbl_content", "text": this.lp.mobile_mpweixin_menu_form_radio_type_miniprogram }).inject(this.miniprogramTypeRadioBoxNode);
@@ -1146,14 +1146,14 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
                 this.changeMenuType("miniprogram")
             }.bind(this)
         });
-        // 3个类型的具体内容
+        // 3개 유형의 구체적 내용
         this.typeContentCreate();
 
         this.changeMenuType(this.menu.type)
     },
-    //保存按钮
+    //저장 버튼
     saveButtonCreate: function () {
-        //<span id="pubBt" class="btn btn_input btn_primary"><button>保存并发布</button></span>
+        //<span id="pubBt" class="btn btn_input btn_primary"><button>저장 및 게시</button></span>
         var buttonDiv = new Element("div", { "class": "btn-box" }).inject(this.contentAreaNode);
         this.submitButtonNode = new Element("span", { "class": "btn btn_input btn_primary" }).inject(buttonDiv);
         new Element("button", { "text": this.lp.save }).inject(this.submitButtonNode);
@@ -1169,7 +1169,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         this.urlContentCreate(outContentNode);
         this.miniprogramContentCreate(outContentNode);
     },
-    //文字消息
+    //텍스트 메시지
     msgContentCreate: function (outContentNode) {
         this.msgTypeContentNode = new Element("div", { "class": "menu_content dn" }).inject(outContentNode);
         new Element("p", { "class": "menu_content_tips tips_global js_url_tips", "text": this.lp.mobile_mpweixin_menu_form_type_msg_tips }).inject(this.msgTypeContentNode);
@@ -1179,7 +1179,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         var spanNode = new Element("span", { "class": "frm_textarea_box with_counter counter_in append" }).inject(inputNode);
         this.msgTypeContentInputNode = new Element("textarea", { "class": "frm_textarea js_menu_name", "value": this.menu.content }).inject(spanNode);
     },
-    // 网页链接
+    // 웹 링크
     urlContentCreate: function (outContentNode) {
         this.urlTypeContentNode = new Element("div", { "class": "menu_content dn" }).inject(outContentNode);
         new Element("p", { "class": "menu_content_tips tips_global js_url_tips", "text": this.lp.mobile_mpweixin_menu_form_type_url_tips }).inject(this.urlTypeContentNode);
@@ -1189,24 +1189,24 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         var spanNode = new Element("span", { "class": "frm_input_box with_counter counter_in append" }).inject(inputNode);
         this.urlTypeContentInputNode = new Element("input", { "class": "frm_input js_menu_name", "type": "text", "value": this.menu.url }).inject(spanNode);
     },
-    // 小程序
+    // 미니 프로그램
     miniprogramContentCreate: function (outContentNode) {
         this.miniprogramTypeContentNode = new Element("div", { "class": "menu_content dn" }).inject(outContentNode);
         new Element("p", { "class": "menu_content_tips tips_global js_url_tips", "text": this.lp.mobile_mpweixin_menu_form_type_miniprogram_tips }).inject(this.miniprogramTypeContentNode);
-        // 小程序id
+        // 미니 프로그램 id
         var inputOutNode = new Element("div", { "class": "frm_control_group js_setNameBox" }).inject(this.miniprogramTypeContentNode);
         new Element("label", { "class": "frm_label", "text": this.lp.mobile_mpweixin_menu_form_type_miniprogram_appid_label }).inject(inputOutNode);
         var inputNode = new Element("div", { "class": "frm_controls" }).inject(inputOutNode);
         var spanNode = new Element("span", { "class": "frm_input_box with_counter counter_in append" }).inject(inputNode);
         this.miniprogramTypeAppIdContentInputNode = new Element("input", { "class": "frm_input js_menu_name", "type": "text", "value": this.menu.appid , "placeholder": this.lp.mobile_mpweixin_menu_form_type_miniprogram_appid_placeholder }).inject(spanNode);
 
-        // 小程序路径
+        // 미니 프로그램 경로
         var inputPathOutNode = new Element("div", { "class": "frm_control_group js_setNameBox" }).inject(this.miniprogramTypeContentNode);
         new Element("label", { "class": "frm_label", "text": this.lp.mobile_mpweixin_menu_form_type_miniprogram_path_label }).inject(inputPathOutNode);
         var inputPathNode = new Element("div", { "class": "frm_controls" }).inject(inputPathOutNode);
         var spanPathNode = new Element("span", { "class": "frm_input_box with_counter counter_in append" }).inject(inputPathNode);
         this.miniprogramTypePathContentInputNode = new Element("input", { "class": "frm_input js_menu_name", "type": "text", "value": this.menu.pagepath , "placeholder": this.lp.mobile_mpweixin_menu_form_type_miniprogram_path_placeholder }).inject(spanPathNode);
-        // 备用网页
+        // 예비 웹 페이지
          var inputUrlOutNode = new Element("div", { "class": "frm_control_group js_setNameBox" }).inject(this.miniprogramTypeContentNode);
          new Element("label", { "class": "frm_label", "text": this.lp.mobile_mpweixin_menu_form_type_miniprogram_url_label }).inject(inputUrlOutNode);
          var inputUrlNode = new Element("div", { "class": "frm_controls" }).inject(inputUrlOutNode);
@@ -1247,7 +1247,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
             this.miniprogramTypeContentNode.addClass("dn");
         }
     },
-    //提交菜单数据
+    //메뉴 데이터 제출
     submitAction: function() {
         var name = this.nameInputNode.get("value");
         if (!name || name === "") {
@@ -1270,7 +1270,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
             this.app.notice(this.lp.mobile_mpweixin_menu_form_order_error_empty, "error", this.menuApp.contentAreaNode);
             return;
         }
-        //数字
+        //숫자
         var reg = /^[\d]+$/;
         var s = reg.test(order);
         if (s === false) {
@@ -1283,23 +1283,23 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         }
         this.menu.name = name;
         this.menu.order = order;
-        //父菜单 只需要name和order
+        //상위 메뉴 name과 order만 필요
         if (this.haSubMenus && this.haSubMenus === true) {
             console.log("하위 메뉴가 있습니다");
         }else {
             var type = this.menu.type;
-            if (type === "view") { //网页
+            if (type === "view") { //웹 페이지
                 var url = this.urlTypeContentInputNode.get("value");
                 if (!url || url === "") {
                     this.app.notice(this.lp.mobile_mpweixin_menu_form_type_url_error_empty, "error", this.menuApp.contentAreaNode);
                     return;
                 }
                 this.menu.url = url;
-                //新建的菜单删除id
+                //새로 만든 메뉴의 삭제 id
                 if (this.menu.id.startsWith('mock_')) {
-                    delete this.menu.id; //新增要删除id
+                    delete this.menu.id; //삭제할 id 추가
                 }
-            } else if (type === "miniprogram") { //小程序
+            } else if (type === "miniprogram") { //미니 프로그램
                 var appid = this.miniprogramTypeAppIdContentInputNode.get("value");
                 if (!appid || appid === "") {
                     this.app.notice(this.lp.mobile_mpweixin_menu_form_type_miniprogram_appid_error_empty, "error", this.menuApp.contentAreaNode);
@@ -1318,32 +1318,32 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
                 this.menu.appid = appid;
                 this.menu.pagepath = path;
                 this.menu.url = url;
-                //新建的菜单删除id
+                //새로 만든 메뉴의 삭제 id
                 if (this.menu.id.startsWith('mock_')) {
-                    delete this.menu.id; //新增要删除id
+                    delete this.menu.id; //삭제할 id 추가
                 }
-            } else { //消息
+            } else { //메시지
                 var content = this.msgTypeContentInputNode.get("value");
                 if (!content || content === "") {
                     this.app.notice(this.lp.mobile_mpweixin_menu_form_type_msg_error_empty, "error", this.menuApp.contentAreaNode);
                     return;
                 }
                 this.menu.content = content;
-                //新建的菜单 click类型需要设置key 
+                //새로 만든 메뉴 click 유형은 key 설정 필요 
                 if (this.menu.id.startsWith('mock_')) {
                     this.menu.key = this.menu.id;
-                    delete this.menu.id; //新增要删除id
+                    delete this.menu.id; //삭제할 id 추가
                 }
             }
         }
-        //写入数据 远程写入 还有 上级数组中
-        if (!this.menu.id) { //新增
+        //데이터 기록 원격 기록 및 상위 배열에도 기록
+        if (!this.menu.id) { //신규
             o2.Actions.load("x_program_center").MPWeixinAction.menuAdd(this.menu,function (json) {
-                this.menu.id = json.data.id;//更新id
+                this.menu.id = json.data.id;//id 갱신
                 this.menuApp.setMenuData(this.menu);
                 this.app.notice(this.lp.mobile_mpweixin_menu_save_success, "success", this.menuApp.contentAreaNode);
             }.bind(this));
-        }else { // 更新
+        }else { // 수정
             o2.Actions.load("x_program_center").MPWeixinAction.menuUpdate(this.menu.id, this.menu,function (json) {
                 this.menuApp.setMenuData(this.menu);
                 this.app.notice(this.lp.mobile_mpweixin_menu_save_success, "success", this.menuApp.contentAreaNode);

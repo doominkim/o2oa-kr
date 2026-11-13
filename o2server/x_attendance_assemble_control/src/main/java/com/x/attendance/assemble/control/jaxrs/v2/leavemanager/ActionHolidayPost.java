@@ -47,10 +47,10 @@ public class ActionHolidayPost extends BaseAction {
 
     static AttendanceV2Holiday buildHoliday(Wi wi) throws Exception {
         if (StringUtils.isBlank(wi.getDateString()) || DateTools.parseDate(wi.getDateString()) == null) {
-            throw new ExceptionWithMessage("日期不能为空，格式为 yyyy-MM-dd");
+            throw new ExceptionWithMessage("날짜는 비워 둘 수 없습니다. 형식: yyyy-MM-dd");
         }
         if (wi.getOffDay() == null) {
-            throw new ExceptionEmptyParameter("是否放假日");
+            throw new ExceptionEmptyParameter("휴무일 여부");
         }
         AttendanceV2Holiday holiday = Wi.copier.copy(wi);
         Date date = DateTools.parseDate(wi.getDateString());
@@ -61,7 +61,7 @@ public class ActionHolidayPost extends BaseAction {
 
     static void validateDateNotExists(List<AttendanceV2Holiday> holidays) throws Exception {
         if (holidays != null && !holidays.isEmpty()) {
-            throw new ExceptionWithMessage("当前日期的节假日数据已存在");
+            throw new ExceptionWithMessage("현재 날짜의 휴일 데이터가 이미 있습니다");
         }
     }
 

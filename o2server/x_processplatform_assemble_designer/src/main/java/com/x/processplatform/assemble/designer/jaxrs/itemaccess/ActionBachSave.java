@@ -102,7 +102,7 @@ class ActionBachSave extends BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("权限对象列表，对象内容参照单个保存.")
+        @FieldDescribe("권한 객체 목록, 객체 내용은 단건 저장 참조.")
         private List<WiItemAccess> itemAccessList;
 
         public List<WiItemAccess> getItemAccessList() {

@@ -7,6 +7,6 @@ class ExceptionShareNameExist extends PromptException {
 	private static final long serialVersionUID = 7750207007061165350L;
 
 	ExceptionShareNameExist(String person, String name) {
-		super("用户:{},分享的文件:{}已经存在.", person, name);
+		super("사용자: {}, 공유한 파일: {}이(가) 이미 있습니다.", person, name);
 	}
 }

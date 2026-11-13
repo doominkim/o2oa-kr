@@ -45,7 +45,7 @@ public class SslTools {
 	}
 
 	/**
-	 * 忽略HTTPS请求的SSL证书，必须在openConnection之前调用
+	 * HTTPS 요청의 SSL 인증서 무시, openConnection 전에 호출해야 함
 	 * 
 	 * @throws Exception
 	 */

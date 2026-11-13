@@ -30,7 +30,7 @@ public class BaseAction extends StandardJaxrsAction {
 	protected BBSOperationRecordService operationRecordService = new BBSOperationRecordService();
 
 	protected void checkUserPermission(BindObject bindObject) throws Exception {
-		// 把wrapIn.getBindObject()解析成人员列表，对每一个人员进行权限分析
+		// wrapIn.getBindObject()를 사용자 목록으로 파싱하여 각 사용자별 권한 분석
 		List<String> userNames = new ArrayList<>();
 		if (bindObject != null) {
 			if ("组织".equals(bindObject.getObjectType())) {
@@ -46,7 +46,7 @@ public class BaseAction extends StandardJaxrsAction {
 					throw e;
 				}
 			} else {
-				// 当它是人员
+				// 사용자인 경우
 				userNames.add(bindObject.getObjectName());
 			}
 		}
@@ -66,7 +66,7 @@ public class BaseAction extends StandardJaxrsAction {
 
 		roleAndPermission = new RoleAndPermission();
 		roleAndPermission.setPerson(userName);
-		// 检查该员的角色和权限信息
+		// 해당 사용자의 역할과 권한 정보 확인
 		try {
 			roleCodes = roleInfoService.listAllRoleCodesForUser(userName);
 			roleAndPermission.setRoleInfoList(roleCodes);
@@ -90,7 +90,7 @@ public class BaseAction extends StandardJaxrsAction {
 			logger.warn("system translate object to json got an exception.");
 			logger.error(e);
 		}
-		try {// 从数据库中查询出人员信息，进行信息更新
+		try {// 데이터베이스에서 사용자 정보를 조회하여 정보 갱신
 			userInfoService.updatePermission(userName, permissionContent);
 		} catch (Exception e) {
 			logger.warn("system save user info got an exception. username:" + userName);

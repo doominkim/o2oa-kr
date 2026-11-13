@@ -23,7 +23,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * Excel 工具类(兼容xls和xlsx)
+ * Excel 유틸리티 클래스(xls, xlsx 호환)
  *
  * @author qijian
  * @version 1.0.0
@@ -36,12 +36,12 @@ public class ExcelUtils {
     private static final DateFormat FORMAT = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     /**
-     * 输出数据到自定义模版的Excel输出流
+     * 사용자 정의 템플릿 Excel 출력 스트림으로 데이터 출력
      *
-     * @param excelTemplate 自定义模版文件
-     * @param data 数据
-     * @param outputStream Excel输出流
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param excelTemplate 사용자 정의 템플릿 파일
+     * @param data 데이터
+     * @param outputStream Excel 출력 스트림
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static void writeDataToTemplateOutputStream(File excelTemplate, List<List<Object>> data, OutputStream outputStream) throws IOException {
         Workbook book = ExcelUtils.getWorkbookFromExcel(excelTemplate);
@@ -56,11 +56,11 @@ public class ExcelUtils {
     }
 
     /**
-     * 从Excel文件获取Workbook对象
+     * Excel 파일에서 Workbook 객체 조회
      *
-     * @param excelTemplateBytes Excel文件
-     * @return Workbook对象
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param excelTemplateBytes Excel 파일
+     * @return Workbook 객체
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static Workbook getWorkbookFromExcel(byte[] excelTemplateBytes) throws IOException {
         try (
@@ -71,11 +71,11 @@ public class ExcelUtils {
     }
 
     /**
-     * 从Excel文件获取Workbook对象
+     * Excel 파일에서 Workbook 객체 조회
      *
-     * @param excelFile Excel文件
-     * @return Workbook对象
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param excelFile Excel 파일
+     * @return Workbook 객체
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static Workbook getWorkbookFromExcel(File excelFile) throws IOException {
         try (
@@ -91,18 +91,18 @@ public class ExcelUtils {
             }
 
             else {
-                throw new IOException("文件类型错误");
+                throw new IOException("파일 형식 오류");
             }
         }
     }
 
     /**
-     * 把Workbook对象内容输出到Excel文件
+     * Workbook 객체 내용을 Excel 파일로 출력
      *
-     * @param book Workbook对象
-     * @param file Excel文件
-     * @throws FileNotFoundException 找不到文件异常，文件已创建，实际不存在该异常
-     * @throws IOException 输入输出异常
+     * @param book Workbook 객체
+     * @param file Excel 파일
+     * @throws FileNotFoundException 파일을 찾을 수 없음 예외(파일이 이미 생성되므로 실제로는 발생하지 않음)
+     * @throws IOException 입출력 예외
      */
     public static void writeWorkbookToFile(Workbook book, File file) throws FileNotFoundException, IOException {
         if (!file.exists()) {
@@ -119,18 +119,18 @@ public class ExcelUtils {
     }
 
     /**
-     * 把Workbook对象输出到Excel输出流
+     * Workbook 객체를 Excel 출력 스트림으로 출력
      *
-     * @param book Workbook对象
-     * @param outputStream Excel输出流
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param book Workbook 객체
+     * @param outputStream Excel 출력 스트림
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static void writeWorkbookToOutputStream(Workbook book, OutputStream outputStream) throws IOException {
         book.write(outputStream);
     }
 
     /**
-     * 输出数据到Workbook对象中
+     * Workbook 객체에 데이터 출력
      * @param sheetDataList List<SheetData>
      * @param book Workbook
      */
@@ -176,12 +176,12 @@ public class ExcelUtils {
     }
 
     /**
-     * 输出数据到Workbook对象中指定页码
+     * Workbook 객체의 지정 페이지에 데이터 출력
      *
-     * @param title 标题，写在第一行，可传null
-     * @param data 数据
-     * @param book Workbook对象
-     * @param page 输出数据到Workbook指定页码的页面数
+     * @param title 제목(첫 행에 기록, null 가능)
+     * @param data 데이터
+     * @param book Workbook 객체
+     * @param page 데이터를 출력할 Workbook 페이지 번호
      */
     public static void writeDataToWorkbook(List<String> title, List<List<Object>> data, Workbook book, int page) {
         Sheet sheet = book.getSheetAt(page);
@@ -189,7 +189,7 @@ public class ExcelUtils {
         Row row = null;
         Cell cell = null;
 
-        // 设置表头
+        // 헤더 설정
         if (null != title && !title.isEmpty()) {
             row = sheet.getRow(0);
             if (null == row) {
@@ -228,11 +228,11 @@ public class ExcelUtils {
     }
 
     /**
-     * 读取Excel文件第一页
+     * Excel 파일 첫 페이지 읽기
      *
-     * @param pathname 文件路径名
-     * @return 第一页数据集合
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param pathname 파일 경로명
+     * @return 첫 페이지 데이터 목록
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static List<List<Object>> readExcelFirstSheet(String pathname) throws IOException {
         File file = new File(pathname);
@@ -241,11 +241,11 @@ public class ExcelUtils {
     }
 
     /**
-     * 读取Excel文件第一页
+     * Excel 파일 첫 페이지 읽기
      *
-     * @param file Excel文件
-     * @return 第一页数据集合
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param file Excel 파일
+     * @return 첫 페이지 데이터 목록
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static List<List<Object>> readExcelFirstSheet(File file) throws IOException {
         try (
@@ -261,18 +261,18 @@ public class ExcelUtils {
             }
 
             else {
-                throw new IOException("文件类型错误");
+                throw new IOException("파일 형식 오류");
             }
         }
 
     }
 
     /**
-     * 读取xls格式Excel文件第一页
+     * xls 형식 Excel 파일 첫 페이지 읽기
      *
-     * @param inputStream Excel文件输入流
-     * @return 第一页数据集合
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param inputStream Excel 파일 입력 스트림
+     * @return 첫 페이지 데이터 목록
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static List<List<Object>> readXlsFirstSheet(InputStream inputStream) throws IOException {
         Workbook workbook = new HSSFWorkbook(inputStream);
@@ -280,11 +280,11 @@ public class ExcelUtils {
     }
 
     /**
-     * 读取xlsx格式Excel文件第一页
+     * xlsx 형식 Excel 파일 첫 페이지 읽기
      *
-     * @param inputStream Excel文件输入流
-     * @return 第一页数据集合
-     * @throws IOException 错误时抛出异常，由调用者处理
+     * @param inputStream Excel 파일 입력 스트림
+     * @return 첫 페이지 데이터 목록
+     * @throws IOException 오류 시 예외 발생, 호출자가 처리
      */
     public static List<List<Object>> readXlsxFirstSheet(InputStream inputStream) throws IOException {
         Workbook workbook = new XSSFWorkbook(inputStream);
@@ -292,22 +292,22 @@ public class ExcelUtils {
     }
 
     /**
-     * 读取Workbook第一页
+     * Workbook 첫 페이지 읽기
      *
-     * @param book Workbook对象
-     * @return 第一页数据集合
+     * @param book Workbook 객체
+     * @return 첫 페이지 데이터 목록
      */
     public static List<List<Object>> readExcelFirstSheet(Workbook book) {
         return readExcel(book, 0, 0);
     }
 
     /**
-     * 读取指定页面的Excel
+     * 지정 페이지의 Excel 읽기
      *
-     * @param book Workbook对象
-     * @param page 页码
-     * @param startRow 起始行
-     * @return 指定页面数据集合
+     * @param book Workbook 객체
+     * @param page 페이지 번호
+     * @param startRow 시작 행
+     * @return 지정 페이지 데이터 목록
      */
     public static List<List<Object>> readExcel(Workbook book, int page, int startRow) {
         List<List<Object>> list = new ArrayList<>();
@@ -331,10 +331,10 @@ public class ExcelUtils {
     }
 
     /**
-     * 解析单元格中的值
+     * 셀 값 파싱
      *
-     * @param cell 单元格
-     * @return 单元格内的值
+     * @param cell 셀
+     * @return 셀 값
      */
     private static Object getValue(Cell cell) {
         if (null != cell) {
@@ -363,10 +363,10 @@ public class ExcelUtils {
     }
 
     /**
-     * 设置单元格值
+     * 셀 값 설정
      *
-     * @param cell 单元格
-     * @param value 值
+     * @param cell 셀
+     * @param value 값
      */
     private static void setValue(Cell cell, Object value) {
         if (null == cell) {

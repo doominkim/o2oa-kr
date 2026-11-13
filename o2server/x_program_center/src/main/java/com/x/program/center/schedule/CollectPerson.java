@@ -55,10 +55,10 @@ public class CollectPerson extends BaseAction {
 									.getValue();
 							req.setCenterProxyHost(centerServer.getProxyHost());
 							if (StringUtils.isEmpty(req.getCenterProxyHost())) {
-								/* 如果没有设置地址,那么使用远程得到的服务器地址 */
+								/* 주소를 설정하지 않았으면 원격에서 받은 서버 주소 사용 */
 								if (Host.ip(Config.node()) && (!Host.isRollback(Config.node()))
 										&& (!Host.innerIp(Config.node()))) {
-									/* 如果不是外网地址也不是回环地址,那么说明是一个公网地址 */
+									/* 외부망 주소도 루프백 주소도 아니면 공인 주소임 */
 									req.setCenterProxyHost(Config.node());
 								} else {
 									ActionResponse respIp = ConnectionAction
@@ -81,14 +81,14 @@ public class CollectPerson extends BaseAction {
 												null, req);
 								response.getData(WrapOutBoolean.class);
 							} catch (Exception e) {
-								LOGGER.warn("与云服务器连接错误:{}." + e.getMessage());
+								LOGGER.warn("클라우드 서버 연결 오류:{}." + e.getMessage());
 							}
 						} else {
-							LOGGER.debug("无法登录到云服务器.");
+							LOGGER.debug("클라우드 서버에 로그인할 수 없습니다.");
 						}
 					}
 				} else {
-					LOGGER.debug("系统没有启用O2云服务器连接.");
+					LOGGER.debug("시스템에서 O2 클라우드 서버 연결을 사용하지 않습니다.");
 				}
 			} catch (Exception e) {
 				LOGGER.error(e);

@@ -124,7 +124,7 @@ public class TableBuilder {
 				columnElement.setRemark(strFieldDescribe);
 				jaxrsClass.getColumn().add(columnElement);
 			}else {
-				//关联表
+				//연관 테이블
 				 if(null != containerTable) {
 					 ColumnProperty	columnElement  = new ColumnProperty();
 					 columnElement.setName(field.getName());

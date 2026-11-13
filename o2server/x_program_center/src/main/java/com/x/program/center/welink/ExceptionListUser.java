@@ -7,6 +7,6 @@ class ExceptionListUser extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionListUser(String retCode, String retMessage) {
-		super("WeLink获取组织成员失败,错误代码:{},错误消息:{}.", retCode, retMessage);
+		super("WeLink에서 조직 구성원을 가져오지 못했습니다, 오류 코드: {}, 오류 메시지: {}.", retCode, retMessage);
 	}
 }

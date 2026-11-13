@@ -2,8 +2,8 @@ package com.x.message.assemble.communicate.message;
 
 
 /**
- * 文本卡片消息
- * 用于可以打开的工作消息发送
+ * 텍스트 카드 메시지
+ * 열 수 있는 업무 메시지 발송용
  */
 public class QiyeweixinTextCardMessage extends QiyeweixinBaseMessage {
 
@@ -16,10 +16,10 @@ public class QiyeweixinTextCardMessage extends QiyeweixinBaseMessage {
 	 *    "msgtype" : "textcard",
 	 *    "agentid" : 1,
 	 *    "textcard" : {
-	 *             "title" : "领奖通知",
-	 *             "description" : "<div class=\"gray\">2016年9月26日</div> <div class=\"normal\">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class=\"highlight\">请于2016年10月10日前联系行政同事领取</div>",
+	 *             "title" : "경품 수령 안내",
+	 *             "description" : "<div class=\"gray\">2016년 9월 26일</div> <div class=\"normal\">iPhone 7 1대에 당첨되신 것을 축하합니다. 수령 코드: xxxx</div><div class=\"highlight\">2016년 10월 10일 전까지 총무 담당자에게 연락하여 수령하세요</div>",
 	 *             "url" : "URL",
-	 *                         "btntxt":"更多"
+	 *                         "btntxt":"더 보기"
 	 *    },
 	 *    "enable_id_trans": 0,
 	 *    "enable_duplicate_check": 0,

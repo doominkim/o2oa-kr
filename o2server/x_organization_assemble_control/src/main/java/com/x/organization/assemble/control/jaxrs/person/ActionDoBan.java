@@ -141,7 +141,7 @@ class ActionDoBan extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("禁用原因.")
+		@FieldDescribe("비활성화 사유.")
 		private String desc;
 
 		public String getDesc() {

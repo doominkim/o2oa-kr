@@ -9,8 +9,8 @@ public class ActionManageOpinionWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6949145106671370447L;
 
-	@FieldDescribe("待阅意见.")
-	@Schema(description = "待阅意见.")
+	@FieldDescribe("열람 대기 의견.")
+	@Schema(description = "열람 대기 의견.")
 	private String opinion;
 
 	public String getOpinion() {

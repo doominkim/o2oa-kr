@@ -67,7 +67,7 @@ public class ActionListWhatICanPublish extends BaseAction {
 						ids = categoryInfoServiceAdv.listIdsByAppId(appId);
 					} catch (Exception e) {
 						check = false;
-						Exception exception = new ExceptionCategoryInfoProcess(e, "根据应用栏目ID查询分类信息对象时发生异常。AppId:" + appId);
+						Exception exception = new ExceptionCategoryInfoProcess(e, "게시판 ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. AppId:" + appId);
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -82,7 +82,7 @@ public class ActionListWhatICanPublish extends BaseAction {
 						} catch (Exception e) {
 							check = false;
 							Exception exception = new ExceptionCategoryInfoProcess(e,
-									"系统在检查用户是否是平台管理员时发生异常。Name:" + effectivePerson.getDistinguishedName());
+									"사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + effectivePerson.getDistinguishedName());
 							result.error(exception);
 							logger.error(e, effectivePerson, request, null);
 						}
@@ -96,7 +96,7 @@ public class ActionListWhatICanPublish extends BaseAction {
 						categoryInfoList = categoryInfoServiceAdv.list(ids);
 					} catch (Exception e) {
 						check = false;
-						Exception exception = new ExceptionCategoryInfoProcess(e, "根据ID列表查询分类信息对象时发生异常。");
+						Exception exception = new ExceptionCategoryInfoProcess(e, "ID 목록으로 분류 정보 객체를 조회하는 중 오류가 발생했습니다.");
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -114,7 +114,7 @@ public class ActionListWhatICanPublish extends BaseAction {
 						result.setData(wos);
 					} catch (Exception e) {
 						check = false;
-						Exception exception = new ExceptionCategoryInfoProcess(e, "将查询出来的分类信息对象转换为可输出的数据信息时发生异常。");
+						Exception exception = new ExceptionCategoryInfoProcess(e, "조회한 분류 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다.");
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -133,7 +133,7 @@ public class ActionListWhatICanPublish extends BaseAction {
 
 		static WrapCopier<CategoryInfo, Wo> copier = WrapCopierFactory.wo( CategoryInfo.class, Wo.class, null, ListTools.toList(JpaObject.FieldsInvisible));
 
-		@FieldDescribe("扩展信息JSON内容")
+		@FieldDescribe("확장 정보 JSON 내용")
 		private String extContent = null;
 
 		public String getExtContent() {

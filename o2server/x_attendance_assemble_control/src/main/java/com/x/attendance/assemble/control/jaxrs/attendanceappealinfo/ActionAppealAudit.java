@@ -53,7 +53,7 @@ public class ActionAppealAudit extends BaseAction {
         if (check) {
             if (wrapIn.getIds() == null || wrapIn.getIds().isEmpty()) {
                 check = false;
-                Exception exception = new ExceptionAttendanceAppealProcess("需要审核的申诉ID为空！");
+                Exception exception = new ExceptionAttendanceAppealProcess("심사할 이의 신청 ID가 비어 있습니다!");
                 result.error(exception);
             } else {
                 ids = wrapIn.getIds();
@@ -87,7 +87,7 @@ public class ActionAppealAudit extends BaseAction {
                     processWo.setSuccess(false);
                     processWo.setTitle("제목 없음");
                     processWo.setDiscription("근태 소명 정보 조회 중 오류가 발생했습니다!");
-                    Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询考勤申诉信息数据时发生异常。ID:" + id);
+                    Exception exception = new ExceptionAttendanceAppealProcess(e, "ID로 근태 이의 신청 데이터를 조회하는 중 오류가 발생했습니다. ID:" + id);
                     result.error(exception);
                     LOGGER.error(e, effectivePerson, request, null);
                 }
@@ -109,7 +109,7 @@ public class ActionAppealAudit extends BaseAction {
                         processWo.setSuccess(false);
                         processWo.setDiscription("소명자 조직 조회 중 오류가 발생했습니다! " + effectivePerson.getDistinguishedName());
                         Exception exception = new ExceptionAttendanceAppealProcess(e,
-                                "系统根据员工姓名查询组织信息时发生异常！name:" + effectivePerson.getDistinguishedName());
+                                "직원 이름으로 조직 정보를 조회하는 중 오류가 발생했습니다! name:" + effectivePerson.getDistinguishedName());
                         result.error(exception);
                         LOGGER.error(e, effectivePerson, request, null);
                     }
@@ -120,9 +120,9 @@ public class ActionAppealAudit extends BaseAction {
                                 topUnitName, effectivePerson.getDistinguishedName(), // processorName
                                 now, // processTime
                                 wrapIn.getOpinion1(), // opinion
-                                wrapIn.getStatus() // status审批状态:0-待处理，1-审批通过，-1-审批不能过，2-需要下一次审批
+                                wrapIn.getStatus() // status 승인 상태: 0-처리 대기, 1-승인, -1-반려, 2-다음 승인 필요
                         );
-                        // 2023-04-10 更新几个字段内容
+                        // 2023-04-10 일부 필드 내용 수정
                         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
                             AttendanceAppealInfo appealInfo = emc.find(attendanceAppealInfo.getId(),
                                     AttendanceAppealInfo.class);
@@ -174,13 +174,13 @@ public class ActionAppealAudit extends BaseAction {
 
         public static List<String> Excludes = new ArrayList<String>(JpaObject.FieldsUnmodify);
 
-        @FieldDescribe("需要复核的ID列表")
+        @FieldDescribe("재검토할 ID 목록")
         private List<String> ids = null;
 
-        @FieldDescribe("审批意见")
+        @FieldDescribe("승인 의견")
         private String opinion1;
 
-        @FieldDescribe("申诉人的身份，考勤人员身份：如果考勤人员属于多个组织，可以选择一个身份进行申诉信息绑定.")
+        @FieldDescribe("이의 신청자 신분, 근태 대상자 신분: 근태 대상자가 여러 조직에 속하면 신분 하나를 골라 이의 신청 정보에 연결할 수 있음.")
         private String identity = null;
 
         public String getIdentity() {

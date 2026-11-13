@@ -71,24 +71,24 @@ class ActionListPrevCreatorWithCurrentFilter extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("启动月份")
+		@FieldDescribe("시작 월")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("活动名称")
+		@FieldDescribe("활동 이름")
 		private List<String> activityNameList;
 
-		@FieldDescribe("工作状态")
+		@FieldDescribe("업무 문서 상태")
 		@FieldTypeDescribe(fieldType = "enum", fieldValue = "start|processing|hanging", fieldTypeName = "com.x.processplatform.core.entity.content.WorkStatus")
 
 		private List<WorkStatus> workStatusList;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
 		public List<String> getProcessList() {
@@ -148,7 +148,7 @@ class ActionListPrevCreatorWithCurrentFilter extends BaseAction {
 		static WrapCopier<Work, Wo> copier = WrapCopierFactory.wo(Work.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

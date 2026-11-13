@@ -72,7 +72,7 @@ MWF.xApplication.cms.Index.Starter = new Class({
         }
     },
     _load: function(){
-        if( this.categoryData && this.isIgnoreTitle() && this.identityList.length == 1 ) { //信息需要输入标题，数据不需要输入标题
+        if( this.categoryData && this.isIgnoreTitle() && this.identityList.length == 1 ) { //정보는 제목 입력 필요, 데이터는 제목 입력 불필요
             this.okStart();
         }else{
             this.createMarkNode();
@@ -207,7 +207,7 @@ MWF.xApplication.cms.Index.Starter = new Class({
         //}.bind(this));
     },
     isIgnoreTitle : function(){
-        return this.categoryData && this.categoryData.documentType != this.lp.documentTypeInfor; //"信息"
+        return this.categoryData && this.categoryData.documentType != this.lp.documentTypeInfor; //"정보"
     },
     checkSubject: function(){
         if( this.categoryData &&  this.subjectInput ){
@@ -332,7 +332,7 @@ MWF.xApplication.cms.Index.Starter = new Class({
             this.departmentSelArea.setStyle("border-color", "red");
             this.app.notice(this.lp.selectStartId, "error");
         }else{
-            if( this.isIgnoreTitle() )data.title = this.lp.untitled; //"无标题";
+            if( this.isIgnoreTitle() )data.title = this.lp.untitled; //"제목 없음";
             if( this.areaNode ){
                 this.mask = new MWF.widget.Mask({"style": "desktop"});
                 this.mask.loadNode(this.areaNode);
@@ -384,7 +384,7 @@ MWF.xApplication.cms.Index.Starter = new Class({
             this.departmentSelArea.setStyle("border-color", "red");
             this.app.notice(this.lp.selectStartId, "error");
         }else{
-            if( this.isIgnoreTitle() )title = this.lp.untitled; //"无标题";
+            if( this.isIgnoreTitle() )title = this.lp.untitled; //"제목 없음";
             var workData = {
                 cmsDocument : {
                     "isNewDocument" : true,

@@ -23,10 +23,10 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 内容管理日志信息表
+ * 콘텐츠 관리 로그 정보 테이블
  *
  */
-@Schema(name = "DocumentViewRecord", description = "内容管理日志信息.")
+@Schema(name = "DocumentViewRecord", description = "콘텐츠 관리 로그 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.DocumentViewRecord.table, uniqueConstraints = {
@@ -47,7 +47,7 @@ public class DocumentViewRecord extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -56,82 +56,82 @@ public class DocumentViewRecord extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("栏目ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appId;
 
 	public static final String appName_FIELDNAME = "appName";
-	@FieldDescribe("栏目名称")
+	@FieldDescribe("게시판 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + appName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appName;
 
 	public static final String categoryId_FIELDNAME = "categoryId";
-	@FieldDescribe("分类ID")
+	@FieldDescribe("분류ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + categoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryId;
 
 	public static final String categoryName_FIELDNAME = "categoryName";
-	@FieldDescribe("分类名称")
+	@FieldDescribe("분류 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + categoryName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryName;
 
 	public static final String documentId_FIELDNAME = "documentId";
-	@FieldDescribe("文档ID")
+	@FieldDescribe("문서ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + documentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + documentId_FIELDNAME)
 	private String documentId;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("文档标题")
+	@FieldDescribe("문서 제목")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + title_FIELDNAME)
 	private String title;
 
 	public static final String viewerName_FIELDNAME = "viewerName";
-	@FieldDescribe("访问者姓名")
+	@FieldDescribe("방문자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + viewerName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	@Index(name = TABLE + IndexNameMiddle + viewerName_FIELDNAME)
 	private String viewerName;
 
 	public static final String viewerUnitName_FIELDNAME = "viewerUnitName";
-	@FieldDescribe("访问者所属组织名称")
+	@FieldDescribe("방문자 소속 조직 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + viewerUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String viewerUnitName;
 
 	public static final String viewerTopUnitName_FIELDNAME = "viewerTopUnitName";
-	@FieldDescribe("访问者所属顶层组织名称")
+	@FieldDescribe("방문자 소속 최상위 조직 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + viewerTopUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String viewerTopUnitName;
 
 	public static final String viewCount_FIELDNAME = "viewCount";
-	@FieldDescribe("访问次数")
+	@FieldDescribe("방문 횟수")
 	@Column(name = ColumnNamePrefix + viewCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer viewCount;
 
 	public static final String lastViewTime_FIELDNAME = "lastViewTime";
-	@FieldDescribe("最后访问时间.")
+	@FieldDescribe("마지막 방문 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + lastViewTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastViewTime_FIELDNAME)

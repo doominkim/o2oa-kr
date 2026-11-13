@@ -4,7 +4,7 @@
   </div>
   <div class="my-attendance-body">
     <div class="my-statistic-box my-statistic-block">
-      <!-- 统计周期 -->
+      <!-- 통계 주기 -->
       <div class="my-statistic-block-first">
         <div class="row-box">
           <div class="o2-icon-16" @click="this.clickToPreMonth()"><i class="o2icon-icon_arrow_left"></i></div>
@@ -15,7 +15,7 @@
           {{$.lp.myStatistic.title}}{{$.cycleDate}}</div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 出勤 -->
+      <!-- 출근 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.averageWorkTimeDuration}}</div>
         <div class="row-box margin-top">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 出勤 -->
+      <!-- 출근 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{ $.statistic.workTimeDuration }}</div>
         <div class="row-box  margin-top">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 出勤 -->
+      <!-- 출근 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.attendance}}</div>
         <div class="row-box  margin-top">
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 缺卡 -->
+      <!-- 체크 누락 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.absenceTimes}}</div>
         <div class="row-box  margin-top">
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 迟到 -->
+      <!-- 지각 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.lateTimes}}</div>
         <div class="row-box  margin-top">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 早退 -->
+      <!-- 조퇴 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.leaveEarlierTimes}}</div>
         <div class="row-box  margin-top">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 请假 -->
+      <!-- 휴가 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.leaveDays}}</div>
         <div class="row-box margin-top">
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 旷工 -->
+      <!-- 무단결근 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.absenteeismDays}}</div>
         <div class="row-box  margin-top">
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="my-statistic-block-divider"></div>
-      <!-- 外勤 -->
+      <!-- 외근 -->
       <div class="my-statistic-block-item">
         <div class="statistic-number">{{$.statistic.fieldWorkTimes}}</div>
         <div class="row-box  margin-top">

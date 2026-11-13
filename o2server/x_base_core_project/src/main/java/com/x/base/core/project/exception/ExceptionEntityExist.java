@@ -10,7 +10,7 @@ public class ExceptionEntityExist extends LanguagePromptException {
 
 	private static final long serialVersionUID = -7099690129755484583L;
 
-	public static String defaultMessage = "标识为:{} 的 {} 对象已存在.";
+	public static String defaultMessage = "식별자: {} 인 {} 객체가 이미 있습니다.";
 
 	public ExceptionEntityExist(String flag, JpaObject jpa) {
 		super(defaultMessage, flag, (null == jpa) ? null : jpa.nameOfEntity());
@@ -30,7 +30,7 @@ public class ExceptionEntityExist extends LanguagePromptException {
 	}
 
 	public <T extends JpaObject> ExceptionEntityExist(String flag) {
-		super("标识为:{} 的对象已存在.", flag);
+		super("식별자: {} 인 객체가 이미 있습니다.", flag);
 		this.setLanguageKey(this.getClass().getName()+"_1");
 	}
 

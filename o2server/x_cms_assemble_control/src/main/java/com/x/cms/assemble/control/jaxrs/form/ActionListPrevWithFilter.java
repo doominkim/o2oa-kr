@@ -93,19 +93,19 @@ public class ActionListPrevWithFilter extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("用于过滤条件的栏目ID列表.")
+		@FieldDescribe("필터 조건용 게시판 ID 목록.")
 		private List<String> appIdList;
 
-		@FieldDescribe("用于过滤条件的分类ID列表.")
+		@FieldDescribe("필터 조건용 분류 ID 목록.")
 		private List<String> categoryIdList;
 
-		@FieldDescribe("用于过滤条件的创建者列表.")
+		@FieldDescribe("필터 조건용 작성자 목록.")
 		private List<String> creatorList;
 
-		@FieldDescribe("用于过滤条件的文档状态列表.")
+		@FieldDescribe("필터 조건용 문서 상태 목록.")
 		private List<String> statusList;
 
-		@FieldDescribe("用于标题搜索的关键字.")
+		@FieldDescribe("제목 검색용 키워드.")
 		private String key;
 
 		public List<String> getAppIdList() {

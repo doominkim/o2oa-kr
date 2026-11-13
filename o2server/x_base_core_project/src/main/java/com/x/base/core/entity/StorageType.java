@@ -1,7 +1,7 @@
 package com.x.base.core.entity;
 
 /**
- * 附件存储类型
+ * 첨부파일 스토리지 유형
  * @author sword
  */
 

@@ -28,19 +28,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("picture")
-@JaxrsDescribe("图片操作")
+@JaxrsDescribe("이미지 작업")
 public class PictureAction extends StandardJaxrsAction {
     private static Logger logger = LoggerFactory.getLogger(PictureAction.class);
 
-    @JaxrsMethodDescribe(value = "将图片转为base64编码，并且进行尺寸转换.", action = ActionUploadAndEncode.class)
+    @JaxrsMethodDescribe(value = "이미지를 base64로 인코딩하고 크기 변환.", action = ActionUploadAndEncode.class)
     @POST
     @Path("encode/base64/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public void pictureEncode(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("尺寸大小") @PathParam("size") Integer size,
-            @JaxrsParameterDescribe("文件内容") @FormDataParam(FILE_FIELD) final byte[] bytes,
+            @JaxrsParameterDescribe("크기") @PathParam("size") Integer size,
+            @JaxrsParameterDescribe("파일 내용") @FormDataParam(FILE_FIELD) final byte[] bytes,
             @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<WrapOutString> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -53,15 +53,15 @@ public class PictureAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "更新版块图标.", action = ActionSectionIconUpdate.class)
+    @JaxrsMethodDescribe(value = "게시판 아이콘 갱신.", action = ActionSectionIconUpdate.class)
     @POST
     @Path("section/{id}/icon")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public void sectionIconUpdate(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("版块ID") @PathParam("id") String id,
-            @JaxrsParameterDescribe("文件内容") @FormDataParam(FILE_FIELD) final byte[] bytes,
+            @JaxrsParameterDescribe("게시판 ID") @PathParam("id") String id,
+            @JaxrsParameterDescribe("파일 내용") @FormDataParam(FILE_FIELD) final byte[] bytes,
             @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<WrapOutId> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);

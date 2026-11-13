@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  * |------------------------------------------------------------------------------|
- * | O2OA 活力办公 创意无限    o2.js                                                 |
+ * | O2OA 활력 있는 업무 무한한 창의    o2.js                                                 |
  * |------------------------------------------------------------------------------|
  * | Distributed under the AGPL license:                                          |
  * |------------------------------------------------------------------------------|
@@ -104,18 +104,18 @@ if (!window.o2) {
         }
 
         /**
-         * @summary 平台全局对象，在前端(浏览器/移动端H5页面）可用。<br/>
+         * @summary 플랫폼 전역 객체로, 프런트엔드(브라우저/모바일 H5 페이지)에서 사용할 수 있습니다.<br/>
          * @namespace o2
-         * @o2cn 平台全局对象
+         * @o2cn 플랫폼 전역 객체
          * @o2category web
          */
         this.o2 = window.o2 || {};
         /**
-         * @summary 平台版本信息。
+         * @summary 플랫폼 버전 정보.
          * @member {Object} version
          * @memberOf o2
          * @o2syntax
-         * //获取版本号
+         * //버전 번호 가져오기
          * var v = o2.version.v;
          */
         this.o2.version = {
@@ -126,11 +126,11 @@ if (!window.o2) {
         };
 
         /**
-         * @summary 平台运行环境。
+         * @summary 플랫폼 실행 환경.
          * @member {Object} session
          * @memberOf o2
-         * @property {Boolean}  isDebugger   是否是调试模式
-         * @property {Boolean}  isMobile   是否是移动端环境
+         * @property {Boolean}  isDebugger   디버그 모드 여부
+         * @property {Boolean}  isMobile   모바일 환경 여부
          * @o2syntax
          * var debuggerMode = o2.session.isDebugger;
          * var ismobile = o2.session.isMobile;
@@ -141,7 +141,7 @@ if (!window.o2) {
         };
 
         /**
-         * @summary 语言环境名称。
+         * @summary 언어 환경 이름.
          * @member {String} language
          * @memberOf o2
          * @o2syntax
@@ -174,7 +174,7 @@ if (!window.o2) {
             }
         };
         /**
-         * @summary 使平台进入调试模式。
+         * @summary 플랫폼을 디버그 모드로 전환합니다.
          * @function debug
          * @memberOf o2
          * @o2syntax
@@ -225,29 +225,29 @@ if (!window.o2) {
             return typeof item;
         };
         /**
-         * @summary 判断一个任意参数的类型。
+         * @summary 임의 매개변수의 유형을 판단합니다.
          * @function typeOf
          * @memberOf o2
-         * @param {Object} [obj] 要检查的对象
-         * @return {String} 对象的类型，返回值：
-         * <pre><code class="language-js">'element' - 如果obj是一个DOM Element对象.
-         * 'elements' - 如果obj是一个Elements实例.
-         * 'textnode' - 如果obj是一个DOM text节点.
-         * 'whitespace' - 如果obj是一个DOM whitespace 节点.
-         * 'arguments' - 如果obj是一个arguments对象.
-         * 'array' - 如果obj是一个array数组.
-         * 'object' - 如果obj是一个object对象.
-         * 'string' - 如果obj是一个string.
-         * 'number' - 如果obj是一个数字number.
-         * 'date' - 如果obj是一个日期date.
-         * 'boolean' - 如果obj是一个布尔值boolean.
-         * 'function' - 如果obj是一个function.
-         * 'regexp' - 如果obj是一个正则表达式.
-         * 'collection' - 如果obj是一个原生HTML elements collection, 如childNodes or getElementsByTagName获取的对象.
-         * 'window' - 如果obj是window对象.
-         * 'document' - 如果obj是document对象.
-         * 'domevent' - 如果obj是一个event.
-         * 'null' - 如果obj是undefined, null, NaN 或者 none.
+         * @param {Object} [obj] 검사할 객체
+         * @return {String} 객체 유형, 반환값:
+         * <pre><code class="language-js">'element' - obj가 DOM Element 객체인 경우.
+         * 'elements' - obj가 Elements 인스턴스인 경우.
+         * 'textnode' - obj가 DOM text 노드인 경우.
+         * 'whitespace' - obj가 DOM whitespace 노드인 경우.
+         * 'arguments' - obj가 arguments 객체인 경우.
+         * 'array' - obj가 array 배열인 경우.
+         * 'object' - obj가 object 객체인 경우.
+         * 'string' - obj가 string인 경우.
+         * 'number' - obj가 숫자 number인 경우.
+         * 'date' - obj가 날짜 date인 경우.
+         * 'boolean' - obj가 불리언 값 boolean인 경우.
+         * 'function' - obj가 function인 경우.
+         * 'regexp' - obj가 정규 표현식인 경우.
+         * 'collection' - obj가 네이티브 HTML elements collection인 경우(예: childNodes 또는 getElementsByTagName으로 얻은 객체).
+         * 'window' - obj가 window 객체인 경우.
+         * 'document' - obj가 document 객체인 경우.
+         * 'domevent' - obj가 event인 경우.
+         * 'null' - obj가 undefined, null, NaN 또는 none인 경우.
          * </code></pre>
          * @o2syntax
          * o2.typeOf(obj);
@@ -332,7 +332,7 @@ if (!window.o2) {
             return tl + tm + thv + csar + csl + n;
         };
         /**
-         * @summary 生成一个唯一的uuid。
+         * @summary 고유한 uuid 생성.
          * @function uuid
          * @memberOf o2
          * @o2syntax
@@ -449,22 +449,22 @@ if (!window.o2) {
             return url;
         };
         /**
-         * @summary 解析平台内的url，如果配置了反向代理的路径转发，平台内的url需要通过filterUrl解析后，才能得到正确的url。
-         * @see {@link https://www.o2oa.net/search.html?q=urlmapping|基于nginx快速集群部署-上下文分发}
+         * @summary 플랫폼 내 url 해석. 리버스 프록시 경로 포워딩을 설정한 경우 플랫폼 내 url은 filterUrl로 해석해야 올바른 url을 얻을 수 있음.
+         * @see {@link https://www.o2oa.net/search.html?q=urlmapping|nginx 기반 빠른 클러스터 배포-컨텍스트 분배}
          * @function filterUrl
          * @memberOf o2
-         * @param {String} [url] 要解析的url
-         * @return {String} 解析后的url
+         * @param {String} [url] 해석할 url
+         * @return {String} 해석된 url
          * @o2syntax
          * var url = o2.filterUrl(url);
          * @example
          * <caption>
-         *    当我们配置了按路径转发后，在portal.json中配置了urlMapping如：
+         *    경로 기반 포워딩을 설정한 뒤 portal.json에 urlMapping을 다음과 같이 설정한 경우:
          *    <pre><code class="language-js">"urlMapping": {
          *      "qmx.o2oa.net:20020": "qmx.o2oa.net/dev/app",
          *      "qmx.o2oa.net:20030": "qmx.o2oa.net/dev/center"
          * },</code></pre>
-         *    在获取平台内部的url时，如附件的下载地址，需要通过filterUrl解析。
+         *    플랫폼 내부 url(예: 첨부파일 다운로드 주소)을 얻을 때는 filterUrl로 해석해야 함.
          * </caption>
          * var attachmentUrl = "http://qmx.o2oa.net:20020/x_processplatform_assemble_surface/jaxrs/attachment/{attid}/work/{workid}";
          * var url = o2.filterUrl(attachmentUrl);
@@ -694,34 +694,34 @@ if (!window.o2) {
 
         };
         /**
-         * @summary 引入外部javascript文件。
+         * @summary 외부 javascript 파일 불러오기.
          * @function load
          * @memberOf o2
-         * @param {String|Array} [urls] 要载入的js文件url，或要载入多个js问价的urls数组。
-         * @param {Object|Function} [options|callback] 载入js文件的配置参数，或者载入成功后的回调。
-         * <pre><code class="language-js">options参数格式如下：
+         * @param {String|Array} [urls] 불러올 js 파일 url 또는 여러 js 파일의 urls 배열.
+         * @param {Object|Function} [options|callback] js 파일 불러오기 설정 매개변수 또는 불러오기 성공 후 콜백.
+         * <pre><code class="language-js">options 매개변수 형식은 다음과 같음:
          * {
-         *      "noCache":  是否使用缓存，默认true,
-         *      "reload":   如果相同路径的js文件已经加载了，是否重新载入,默认为：false
-         *      "sequence": 当urls参数为数组时，多个脚本文件是否按数组顺序依次载入,默认为false
-         *      "type":     载入脚本的类型,默认为"text/javascript"
-         *      "baseUrl":  要载入脚本的url的base路径,默认""
-         *      "doc":      要在哪个document对象中载入脚本文件，默认为当前document
+         *      "noCache":  캐시 사용 여부, 기본값 true,
+         *      "reload":   같은 경로의 js 파일이 이미 로드된 경우 다시 불러올지 여부, 기본값: false
+         *      "sequence": urls 매개변수가 배열일 때 여러 스크립트 파일을 배열 순서대로 불러올지 여부, 기본값 false
+         *      "type":     불러올 스크립트 유형, 기본값 "text/javascript"
+         *      "baseUrl":  불러올 스크립트 url의 base 경로, 기본값 ""
+         *      "doc":      스크립트 파일을 불러올 document 객체, 기본값은 현재 document
          * }
          * </code></pre>
-         * @param {Function} [callback] 可选参数，载入成功后的回调方法。
+         * @param {Function} [callback] 선택 매개변수. 불러오기 성공 후 콜백 메서드.
          * @o2syntax
          * o2.load(urls, options, callback);
          * @example
-         * //载入jsfile1.js和js/jsfile2.js两个文件，它们是按顺序载入的
+         * //jsfile1.js와 js/jsfile2.js 두 파일을 순서대로 불러옴
          * o2.load(["js/jsfile1.js", "js/jsfile2.js"], function(){
-         *     //js文件已经载入
+         *     //js 파일 불러오기 완료
          * });
          *
-         * //载入jsfile1.js和js/jsfile2.js两个文件，它们是同时载入的
-         * //并且无论是否已经加载过，都需要重新加载，并且要按顺序加载
+         * //jsfile1.js와 js/jsfile2.js 두 파일을 동시에 불러옴
+         * //이미 로드되었는지와 관계없이 다시, 순서대로 불러와야 함
          * o2.load(["js/jsfile1.js", "js/jsfile2.js"], {"reload": true, "sequence": true}, function(){
-         *     //js文件已经载入
+         *     //js 파일 불러오기 완료
          * });
          */
         this.o2.load = _load;
@@ -934,70 +934,70 @@ if (!window.o2) {
         };
 
         /**
-         * @summary 引入外部css资源。
+         * @summary 외부 css 리소스 불러오기.
          * @function loadCss
          * @memberOf o2
-         * @param {String|Array} [urls] 要载入的css文件url，或要载入多个css文件的urls数组。
-         * @param {Object|Function} [options|callback] 载入css文件的配置参数，或者载入成功后的回调。
-         * <pre><code class="language-js">options参数格式如下：
+         * @param {String|Array} [urls] 불러올 css 파일 url 또는 여러 css 파일의 urls 배열.
+         * @param {Object|Function} [options|callback] css 파일 불러오기 설정 매개변수 또는 불러오기 성공 후 콜백.
+         * <pre><code class="language-js">options 매개변수 형식은 다음과 같음:
          * {
-         *      "noCache":  是否使用缓存，默认true,
-         *      "reload":   如果相同路径的css文件已经引入了，是否重新载入,默认为：false
-         *      "sequence": 当urls参数为数组时，多个css文件是否按数组顺序依次载入,默认为false
-         *      "dom":      dom element对象，表示css在这个element生效，默认是null，表示对整个document生效
+         *      "noCache":  캐시 사용 여부, 기본값 true,
+         *      "reload":   같은 경로의 css 파일이 이미 불러와진 경우 다시 불러올지 여부, 기본값: false
+         *      "sequence": urls 매개변수가 배열일 때 여러 css 파일을 배열 순서대로 불러올지 여부, 기본값 false
+         *      "dom":      dom element 객체. 이 element에서 css가 적용됨을 의미하며, 기본값 null은 document 전체에 적용됨을 의미
          * }
          * </code></pre>
-         * @param {Function} [callback] 可选参数，载入成功后的回调方法。
+         * @param {Function} [callback] 선택 매개변수. 불러오기 성공 후 콜백 메서드.
          * @o2syntax
          * o2.loadCss(urls, options, callback);
          * @o2syntax
          * Element.loadCss(urls, options, callback);
          * @example
-         * //载入style1.css和style2.css两个文件，作用于document
+         * //style1.css와 style2.css 두 파일을 불러와 document에 적용
          * o2.loadCss(["../css/style1.css", "../css/style2.css"], function(){
-         *     //css文件已经载入
+         *     //css 파일 불러오기 완료
          * });
          *
-         * //载入style1.css和style2.css两个文件，作用于id为content的dom对象
+         * //style1.css와 style2.css 두 파일을 불러와 id가 content인 dom 객체에 적용
          * o2.loadCss(["../css/style1.css", "../css/style2.css"], {"dom": document.getELementById("content")}, function(){
-         *     //css文件已经载入
+         *     //css 파일 불러오기 완료
          * });
-         * //在Dom对象上载入style1.css和style2.css两个css
+         * //Dom 객체에 style1.css와 style2.css 두 css 불러오기
          * var node = document.getElementById("mydiv");
          * node.loadCss(["../css/style1.css", "../css/style2.css"], function(){
-         *     //css文件已经载入
+         *     //css 파일 불러오기 완료
          * });
          */
         this.o2.loadCss = _loadCss;
 
         /**
-         * @summary 引入文本css资源。
+         * @summary 텍스트 css 리소스 불러오기.
          * @function loadCssText
          * @memberOf o2
-         * @param {String} [cssText] 要载入的css文本内容。
-         * @param {Object|Function} [options|callback] 载入css文件的配置参数，或者载入成功后的回调。
-         * <pre><code class="language-js">options参数格式如下：
+         * @param {String} [cssText] 불러올 css 텍스트 내용.
+         * @param {Object|Function} [options|callback] css 파일 불러오기 설정 매개변수 또는 불러오기 성공 후 콜백.
+         * <pre><code class="language-js">options 매개변수 형식은 다음과 같음:
          * {
-         *      "dom":      dom element对象，表示css在这个element生效，默认是null，表示对整个document生效
+         *      "dom":      dom element 객체. 이 element에서 css가 적용됨을 의미하며, 기본값 null은 document 전체에 적용됨을 의미
          * }
          * </code></pre>
-         * @param {Function} [callback] 可选参数，载入成功后的回调方法。
+         * @param {Function} [callback] 선택 매개변수. 불러오기 성공 후 콜백 메서드.
          * @o2syntax
          * o2.loadCssText(cssText, options, callback);
          * @o2syntax
          * Element.loadCssText(cssText, options, callback);
          * @see o2.loadCss
          * @example
-         * //引入css文本，作用于id为content的dom对象
+         * //css 텍스트를 불러와 id가 content인 dom 객체에 적용
          * var csstext = ".myclass{color:#ff0000}"
          * o2.loadCssText(csstext, {"dom": document.getELementById("content")}, function(){
-         *     //css已经载入
+         *     //css 불러오기 완료
          * });
-         * //引入css文本，作用于id为content的dom对象
+         * //css 텍스트를 불러와 id가 content인 dom 객체에 적용
          * var csstext = ".myclass{color:#ff0000}"
          * var node = document.getELementById("content");
          * node.loadCssText(csstext, function(){
-         *     //css已经载入
+         *     //css 불러오기 완료
          * });
          */
         this.o2.loadCssText = _loadCssText;
@@ -1014,20 +1014,20 @@ if (!window.o2) {
             return _loadCssText(cssText, op, cb);
         };
         /**
-         * @summary 移除通过o2.loadCss方法引入css资源。
+         * @summary o2.loadCss 메서드로 불러온 css 리소스를 제거합니다.
          * @function removeCss
          * @memberOf o2
-         * @param {String|Array} [urls] 要移除的的css文本url，必须与引入时所使用的url相同。
+         * @param {String|Array} [urls] 제거할 css 텍스트 url. 불러올 때 사용한 url과 같아야 합니다.
          * @o2syntax
          * o2.removeCss(urls);
          * @example
-         * //载入style1.css和style2.css两个文件，作用于id为content的dom对象
+         * //style1.css와 style2.css 두 파일을 불러와 id가 content인 dom 객체에 적용
          * o2.load(["../css/style1.css", "../css/style2.css"], {"dom": document.getELementById("content")}, function(){
-         *     //css文件已经载入
+         *     //css 파일 불러오기 완료
          * });
          *
-         * //移除style1.css和style2.css两个文件
-         * //引入时使用了"../css/style1.css"字符串作为路径，移除时也要使用相同的字符串
+         * //style1.css와 style2.css 두 파일 제거
+         * //불러올 때 "../css/style1.css" 문자열을 경로로 사용했으므로 제거할 때도 같은 문자열을 사용해야 함
          * o2.removeCss(["../css/style1.css", "../css/style2.css"])
          */
         this.o2.removeCss = _removeCss;
@@ -1215,179 +1215,179 @@ if (!window.o2) {
         };
 
         /**
-         * @summary 引入外部html模板资源，并将html内容渲染到指定dom对象的某个位置。
+         * @summary 외부 html 템플릿 리소스를 불러와 html 내용을 지정한 dom 객체의 특정 위치에 렌더링합니다.
          * @function loadHtml
          * @memberOf o2
-         * @param {String|Array} [urls] 要载入的html文件url，或要载入多个html文件的urls数组。
-         * @param {Object|Function} [options|callback] 载入html文件的配置参数，或者载入成功后的回调。
-         * <pre><code class="language-js">options参数格式如下：
+         * @param {String|Array} [urls] 불러올 html 파일 url 또는 여러 html 파일의 urls 배열.
+         * @param {Object|Function} [options|callback] html 파일 로드 설정 매개변수 또는 로드 성공 후 콜백.
+         * <pre><code class="language-js">options 매개변수 형식은 다음과 같음:
          * {
-         *       "noCache":  是否使用缓存，默认true,
-         *       "reload":   如果相同路径的html文件已经引入了，是否重新载入,默认为：false
-         *       "sequence": 当urls参数为数组时，多个html文件是否按数组顺序依次载入,默认为false
-         *       "dom": 引入html后，要将html内容渲染到的目标dom对象（具体位置由position参数确定）,
-         *       "position": 渲染到的目标dom对象的位置，可以是以下值：'beforebegin' 'afterbegin' 'beforeend'（默认） 'afterend'
-         *       "module": Object，与此html模板关联的对象。（在下面的例子中详细介绍）
-         *       "bind": Json，与此html模板关联的Json对象。（在下面的例子中详细介绍）
-         *       "evalScripts": html模板中通过&lt;script&gt;引入或内嵌的javascript，是否要执行。默认为false
-         *       "baseUrl": html模板中引用连接的baseUrl，默认为空
+         *       "noCache":  캐시 사용 여부, 기본값 true,
+         *       "reload":   같은 경로의 html 파일을 이미 불러온 경우 다시 불러올지 여부, 기본값: false
+         *       "sequence": urls 매개변수가 배열일 때 여러 html 파일을 배열 순서대로 불러올지 여부, 기본값 false
+         *       "dom": html을 불러온 후 html 내용을 렌더링할 대상 dom 객체(구체적 위치는 position 매개변수로 결정),
+         *       "position": 렌더링할 대상 dom 객체의 위치, 다음 값 중 하나: 'beforebegin' 'afterbegin' 'beforeend'(기본값) 'afterend'
+         *       "module": Object, 이 html 템플릿과 연결된 객체.(아래 예제에서 자세히 설명)
+         *       "bind": Json, 이 html 템플릿과 연결된 Json 객체.(아래 예제에서 자세히 설명)
+         *       "evalScripts": html 템플릿에서 &lt;script&gt;로 불러오거나 내장한 javascript의 실행 여부. 기본값 false
+         *       "baseUrl": html 템플릿에서 참조하는 링크의 baseUrl, 기본값은 빈 값
          * }
          * </code></pre>
-         * @param {Function} [callback] 可选参数，载入成功后的回调方法。
+         * @param {Function} [callback] 선택 매개변수. 불러오기 성공 후 콜백 메서드.
          * @o2syntax
          * o2.loadHtml(urls, options, callback);
          * @o2syntax
          * Element.loadHtml(urls, options, callback);
          * @example
-         * <caption><b>样例1: </b>引入一个html模板文件，并插入到id为content的dom对象的最后</caption>
-         * //引入一个html模板文件，并插入到id为content的dom对象的最后
+         * <caption><b>예제1: </b>html 템플릿 파일을 불러와 id가 content인 dom 객체의 끝에 삽입</caption>
+         * //html 템플릿 파일을 불러와 id가 content인 dom 객체의 끝에 삽입
          * var node = document.getELementById("content");
          * o2.loadHtml("../html/template.html", {"dom": node}, function(){
-         *     //html文件已经载入
+         *     //html 파일 로드 완료
          * });
          *
-         * //或者使用Element.loadHtml方法
+         * //또는 Element.loadHtml 메서드 사용
          * var node = document.getELementById("content");
          * node.loadHtml("../html/template.html", function(){
-         *     //html文件已经载入
+         *     //html 파일 로드 완료
          * });
          *
          * @example
          * <caption>
-         *    <b>样例2: </b>本例中我们使用一个html模板来渲染展现已有的数据。我们将一个json对象绑定到要载入的模板，通过{{$.xxx}}来展现json数据。<br>
-         *    html模板内容如下：
+         *    <b>예제2: </b>이 예제에서는 html 템플릿으로 기존 데이터를 렌더링해 표시합니다. 불러올 템플릿에 json 객체를 바인딩하고 {{$.xxx}}로 json 데이터를 표시합니다.<br>
+         *    html 템플릿 내용은 다음과 같습니다:
          *    <pre><code class="language-js">&lt;div&gt;{{$.title}}&lt;/div&gt;
          * &lt;div&gt;{{$.description}}&lt;/div&gt;</code></pre>
-         *    然后通过以下代码来载入html模板：
+         *    그다음 다음 코드로 html 템플릿을 불러옵니다:
          * </caption>
          * var json = {
-         *     "title": "这是标题",
-         *     "description": "描述内容"
+         *     "title": "제목입니다",
+         *     "description": "설명 내용"
          * };
          * var node = document.getELementById("content");
          * o2.loadHtml("../html/template.html", {"dom": node, "bind": json}, function(){
-         *     //html文件已经载入
-         *     //载入后，node对象的html如下：
+         *     //html 파일 로드 완료
+         *     //불러온 후 node 객체의 html은 다음과 같습니다:
          *     //<div>
          *     //   ......
-         *     //   <div>这是标题</div>;
-         *     //   <div>描述内容</div>
+         *     //   <div>제목입니다</div>;
+         *     //   <div>설명 내용</div>
          *     //</div>
          * });
          * @example
          * <caption>
-         *    <b>样例3: </b>本例中我们除了使用一个html模板来渲染展现已有的json数据，还给已有模块绑定上html模板中的一个dom对象，并监听html模板中的指定元素的事件。<br>
-         *    html模板内容如下：
+         *    <b>예제3: </b>이 예제에서는 html 템플릿으로 기존 json 데이터를 렌더링해 표시하는 것 외에, 기존 모듈에 html 템플릿의 dom 객체를 바인딩하고 html 템플릿의 지정 요소 이벤트를 수신합니다.<br>
+         *    html 템플릿 내용은 다음과 같습니다:
          *    <pre><code class="language-js">&lt;div&gt;{{$.title}}&lt;/div&gt;
          * &lt;div&gt;{{$.description}}&lt;/div&gt;
          * &lt;div data-o2-element="myElement"&gt;&lt;/div&gt;
-         * &lt;button data-o2-events="click:clickMe:{{$.info}};mouseover:overMe;mouseout:outMe"&gt;绑定了事件的按钮&lt;/button&gt;
+         * &lt;button data-o2-events="click:clickMe:{{$.info}};mouseover:overMe;mouseout:outMe"&gt;이벤트가 바인딩된 버튼&lt;/button&gt;
          * </code></pre>
-         *    然后通过以下代码来载入html模板：
+         *    그다음 다음 코드로 html 템플릿을 불러옵니다:
          * </caption>
-         * //json数据
+         * //json 데이터
          * var json = {
-         *     "title": "这是标题",
-         *     "description": "描述内容",
-         *     "info": "按钮点击后的信息"
+         *     "title": "제목입니다",
+         *     "description": "설명 내용",
+         *     "info": "버튼 클릭 후 정보"
          * };
-         * //业务模块
+         * //업무 모듈
          * var module = {
-         *     //当button按钮被点击时，会调用此方法
+         *     //button 버튼을 클릭하면 이 메서드가 호출됨
          *     clickMe: function(info, e){
          *         this.myElement.insertAdjacentText("afterbegin", "button clicked " + info);
          *     },
-         *     //当鼠标移动到button按钮时，会调用此方法
+         *     //마우스가 button 버튼 위로 이동하면 이 메서드가 호출됨
          *     overMe: function(e){
          *         console.log("button over");
-         *         console.log(e);  //MouseEvent对象
+         *         console.log(e);  //MouseEvent 객체
          *     },
-         *     //当鼠标移出button按钮时，会调用此方法
+         *     //마우스가 button 버튼을 벗어나면 이 메서드가 호출됨
          *     outMe: function(e){
          *         console.log("button out");
-         *         console.log(e);  //MouseEvent对象
+         *         console.log(e);  //MouseEvent 객체
          *     }
          * };
          *
          * var node = document.getELementById("content");
          * node.loadHtml("../html/template.html", {"bind": json, "module": module}, function(){
-         *     //html文件已经载入
-         *     //载入后，node对象的html如下：
+         *     //html 파일 로드 완료
+         *     //불러온 후 node 객체의 html은 다음과 같습니다:
          *     //<div>
          *     //   ......
-         *     //   <div>这是标题</div>;
-         *     //   <div>描述内容</div>
+         *     //   <div>제목입니다</div>;
+         *     //   <div>설명 내용</div>
          *     //   <div data-o2-element="myElement"></div>
-         *     //   <button>绑定了事件的按钮</button>
+         *     //   <button>이벤트가 바인딩된 버튼</button>
          *     //</div>
-         *     console.log(module.myElement);   //Dom对象：<div data-o2-element="myElement"></div>
-         *                                      //html模板中的div对象，被绑定到了module对象的myElement属性上
+         *     console.log(module.myElement);   //Dom 객체: <div data-o2-element="myElement"></div>
+         *                                      //html 템플릿의 div 객체가 module 객체의 myElement 속성에 바인딩됨
          *
          * });
          * @example
          * <caption>
-         *    <b>样例4: </b>本例中演示了html模板中each和if的用法。<br>
-         *    html模板内容如下：
+         *    <b>예제4: </b>이 예제는 html 템플릿에서 each와 if의 사용법을 보여 줍니다.<br>
+         *    html 템플릿 내용은 다음과 같습니다:
          *    <pre><code class="language-js">&lt;div&gt;
          *    {{each $.items}}
          *        &lt;div&gt;{{$.title}}&lt;/div&gt;
          *        &lt;div&gt;{{$.description}}&lt;/div&gt;
-         *        {{if $.title=="这是标题2"}}
-         *             &lt;div&gt;这是标题2的个性化内容&lt;/div&gt;
+         *        {{if $.title=="제목입니다2"}}
+         *             &lt;div&gt;제목2의 개별 내용입니다&lt;/div&gt;
          *        {{end if}}
-         *        &lt;button data-o2-events="click:clickMe:{{$.info}}"&gt;绑定了事件的按钮&lt;/button&gt;
+         *        &lt;button data-o2-events="click:clickMe:{{$.info}}"&gt;이벤트가 바인딩된 버튼&lt;/button&gt;
          *        &lt;hr&gt;
          *    {{end each}}
          * &lt;/div&gt;</code></pre>
-         *    然后通过以下代码来载入html模板：
+         *    그다음 다음 코드로 html 템플릿을 불러옵니다:
          * </caption>
-         * //json数据
+         * //json 데이터
          * var json = {
          *       "items": [{
-         *           "title": "这是标题1",
-         *           "description": "描述内容1",
-         *           "info": "按钮点击后的信息1"
+         *           "title": "제목입니다1",
+         *           "description": "설명 내용1",
+         *           "info": "버튼 클릭 후 정보1"
          *       },{
-         *           "title": "这是标题2",
-         *           "description": "描述内容2",
-         *           "info": "按钮点击后的信息2"
+         *           "title": "제목입니다2",
+         *           "description": "설명 내용2",
+         *           "info": "버튼 클릭 후 정보2"
          *       },{
-         *           "title": "这是标题3",
-         *           "description": "描述内容3",
-         *           "info": "按钮点击后的信息3"
+         *           "title": "제목입니다3",
+         *           "description": "설명 내용3",
+         *           "info": "버튼 클릭 후 정보3"
          *       }]
          * };
-         * //业务模块
+         * //업무 모듈
          * var module = {
-         *     //当button按钮被点击时，会调用此方法
+         *     //button 버튼을 클릭하면 이 메서드가 호출됨
          *     clickMe: function(info, e){
          *         alert(info);
          *     }
          * };
          * var node = document.getELementById("content");
          * node.loadHtml("../html/template.html", {"bind": json, "module": module}, function(){
-         *     //html文件已经载入
-         *     //载入后，node对象的html如下：
+         *     //html 파일 로드 완료
+         *     //불러온 후 node 객체의 html은 다음과 같습니다:
          *     //<div>
-         *     //   <div>这是标题1</div>;
-         *     //   <div>描述内容1</div>
-         *     //   <button>绑定了事件的按钮</button>
+         *     //   <div>제목입니다1</div>;
+         *     //   <div>설명 내용1</div>
+         *     //   <button>이벤트가 바인딩된 버튼</button>
          *     //   <hr>
          *     //</div>
          *     //<div>
-         *     //   <div>这是标题2</div>;
-         *     //   <div>描述内容2</div>
-         *     //   <div>描这是标题2的个性化内容</div>
-         *     //   <button>绑定了事件的按钮</button>
+         *     //   <div>제목입니다2</div>;
+         *     //   <div>설명 내용2</div>
+         *     //   <div>제목2의 개별 내용입니다</div>
+         *     //   <button>이벤트가 바인딩된 버튼</button>
          *     //   <hr>
          *     //</div>
          *     //<div>
-         *     //   <div>这是标题3</div>;
-         *     //   <div>描述内容3</div>
-         *     //   <button>绑定了事件的按钮</button>
+         *     //   <div>제목입니다3</div>;
+         *     //   <div>설명 내용3</div>
+         *     //   <button>이벤트가 바인딩된 버튼</button>
          *     //   <hr>
          *     //</div>
-         *     //当点击按钮时，会alert对应的items的info数据
+         *     //버튼을 클릭하면 해당 items의 info 데이터를 alert
          * });
          */
         this.o2.loadHtml = _loadHtml;
@@ -1399,22 +1399,22 @@ if (!window.o2) {
         };
 
         /**
-         * @summary 解析html文本内容，并将html内容渲染到指定dom对象的某个位置，与loadHtml相同，只是传入html内容，而不是获取html的url。
+         * @summary html 텍스트 내용을 해석해 지정한 dom 객체의 특정 위치에 렌더링합니다. loadHtml과 같지만 html의 url이 아닌 html 내용을 전달합니다.
          * @function loadHtmlText
          * @memberOf o2
-         * @param {String} [html] 要解析的html文本内容。
-         * @param {Object} [options] 载入html文件的配置参数。
-         * <pre><code class="language-js">options参数格式如下：
+         * @param {String} [html] 해석할 html 텍스트 내용.
+         * @param {Object} [options] html 파일 로드 설정 매개변수.
+         * <pre><code class="language-js">options 매개변수 형식은 다음과 같음:
          * {
-         *       "noCache":  是否使用缓存，默认true,
-         *       "reload":   如果相同路径的html文件已经引入了，是否重新载入,默认为：false
-         *       "sequence": 当urls参数为数组时，多个html文件是否按数组顺序依次载入,默认为false
-         *       "dom": 引入html后，要将html内容渲染到的目标dom对象（具体位置由position参数确定）,
-         *       "position": 渲染到的目标dom对象的位置，可以是以下值：'beforebegin' 'afterbegin' 'beforeend'（默认） 'afterend'
-         *       "module": Object，与此html模板关联的对象。（在下面的例子中详细介绍）
-         *       "bind": Json，与此html模板关联的Json对象。（在下面的例子中详细介绍）
-         *       "evalScripts": html模板中通过&lt;script&gt;引入或内嵌的javascript，是否要执行。默认为false
-         *       "baseUrl": html模板中引用连接的baseUrl，默认为空
+         *       "noCache":  캐시 사용 여부, 기본값 true,
+         *       "reload":   같은 경로의 html 파일을 이미 불러온 경우 다시 불러올지 여부, 기본값: false
+         *       "sequence": urls 매개변수가 배열일 때 여러 html 파일을 배열 순서대로 불러올지 여부, 기본값 false
+         *       "dom": html을 불러온 후 html 내용을 렌더링할 대상 dom 객체(구체적 위치는 position 매개변수로 결정),
+         *       "position": 렌더링할 대상 dom 객체의 위치, 다음 값 중 하나: 'beforebegin' 'afterbegin' 'beforeend'(기본값) 'afterend'
+         *       "module": Object, 이 html 템플릿과 연결된 객체.(아래 예제에서 자세히 설명)
+         *       "bind": Json, 이 html 템플릿과 연결된 Json 객체.(아래 예제에서 자세히 설명)
+         *       "evalScripts": html 템플릿에서 &lt;script&gt;로 불러오거나 내장한 javascript의 실행 여부. 기본값 false
+         *       "baseUrl": html 템플릿에서 참조하는 링크의 baseUrl, 기본값은 빈 값
          * }
          * </code></pre>
          * @o2syntax
@@ -1424,11 +1424,11 @@ if (!window.o2) {
          * @see o2.loadHtml
          * @example
          * var html = "<div>{{$.title}}</div>"
-         * var json = {"title": "标题"};
+         * var json = {"title": "제목"};
          * var node = document.getELementById("content");
          * o2.loadHtmlText(html, {"dom": node, "bind": json});
          *
-         * //获
+         * //가져오기
          * node.loadHtmlText(html, {"bind": json});
          */
         this.o2.loadHtmlText = this.o2.injectHtml = function (html, options) {
@@ -1476,32 +1476,32 @@ if (!window.o2) {
             }
         };
         /**
-         * @summary 同时载入js文件、css文件和html模板文件，相当于同时调用了o2.load, o2.loadCss 和 o2.loadHtml。
+         * @summary js 파일, css 파일, html 템플릿 파일을 동시에 불러옵니다. o2.load, o2.loadCss, o2.loadHtml을 동시에 호출한 것과 같습니다.
          * @function loadAll
          * @memberOf o2
-         * @param {Object} [modules] 要解析的html文本内容。
-         * <pre><code class="language-js">modules参数格式如下：
+         * @param {Object} [modules] 해석할 html 텍스트 내용.
+         * <pre><code class="language-js">modules 매개변수 형식은 다음과 같습니다:
          * {
-         *       "js": {String|Array} 要载入的js文件url，或要载入多个js文件的urls数组。
-         *       "css": {String|Array} 要载入的css文件url，或要载入多个css文件的urls数组。
-         *       "html": {String|Array} 要载入的html文件url，或要载入多个html文件的urls数组。
+         *       "js": {String|Array} 불러올 js 파일 url 또는 여러 js 파일의 urls 배열.
+         *       "css": {String|Array} 불러올 css 파일 url 또는 여러 css 파일의 urls 배열.
+         *       "html": {String|Array} 불러올 html 파일 url 또는 여러 html 파일의 urls 배열.
          * }
          * </code></pre>
-         * @param {Object} [options] 载入html文件的配置参数。
-         * <pre><code class="language-js">options参数格式如下：
+         * @param {Object} [options] html 파일 로드 설정 매개변수.
+         * <pre><code class="language-js">options 매개변수 형식은 다음과 같음:
          * {
-         *       "noCache":  是否使用缓存，默认true,
-         *       "reload":   如果相同路径的html文件已经引入了，是否重新载入,默认为：false
-         *       "sequence": 当urls参数为数组时，多个html文件是否按数组顺序依次载入,默认为false
-         *       "dom": 引入html后，要将html内容渲染到的目标dom对象（具体位置由position参数确定）,
-         *       "position": 渲染到的目标dom对象的位置，可以是以下值：'beforebegin' 'afterbegin' 'beforeend'（默认） 'afterend'
-         *       "module": Object，与此html模板关联的对象。（在下面的例子中详细介绍）
-         *       "bind": Json，与此html模板关联的Json对象。（在下面的例子中详细介绍）
-         *       "evalScripts": html模板中通过&lt;script&gt;引入或内嵌的javascript，是否要执行。默认为false
-         *       "baseUrl": html模板中引用连接的baseUrl，默认为空
+         *       "noCache":  캐시 사용 여부, 기본값 true,
+         *       "reload":   같은 경로의 html 파일을 이미 불러온 경우 다시 불러올지 여부, 기본값: false
+         *       "sequence": urls 매개변수가 배열일 때 여러 html 파일을 배열 순서대로 불러올지 여부, 기본값 false
+         *       "dom": html을 불러온 후 html 내용을 렌더링할 대상 dom 객체(구체적 위치는 position 매개변수로 결정),
+         *       "position": 렌더링할 대상 dom 객체의 위치, 다음 값 중 하나: 'beforebegin' 'afterbegin' 'beforeend'(기본값) 'afterend'
+         *       "module": Object, 이 html 템플릿과 연결된 객체.(아래 예제에서 자세히 설명)
+         *       "bind": Json, 이 html 템플릿과 연결된 Json 객체.(아래 예제에서 자세히 설명)
+         *       "evalScripts": html 템플릿에서 &lt;script&gt;로 불러오거나 내장한 javascript의 실행 여부. 기본값 false
+         *       "baseUrl": html 템플릿에서 참조하는 링크의 baseUrl, 기본값은 빈 값
          * }
          * </code></pre>
-         * @param {Function} [callback] 可选参数，载入成功后的回调方法。
+         * @param {Function} [callback] 선택 매개변수. 불러오기 성공 후 콜백 메서드.
          * @o2syntax
          * o2.loadAll(modules, options, callback);
          * @o2syntax
@@ -1511,14 +1511,14 @@ if (!window.o2) {
          * @see o2.loadHtml
          * @example
          * var html = "<div>{{$.title}}</div>"
-         * var json = {"title": "标题"};
+         * var json = {"title": "제목"};
          * var node = document.getELementById("content");
          * o2.loadAll({
          *     "js": ["file1.js", "file2.js"],
          *     "css": ["style.css"],
          *     "html": "template.html",
          * }, {"dom": node, "bind": json}, function(){
-         *     //载入完成后的回调
+         *     //로드 완료 후 콜백
          * });
          */
         this.o2.loadAll = _loadAll;
@@ -1588,14 +1588,14 @@ if (!window.o2) {
 
                 //if statement begin
                 if (fullMatch.search(/\{\{if\s+/i) !== -1) {
-                    //找到对应的end if
+                    //해당 end if 찾기
                     var condition = fullMatch.replace(/^\{\{if\s*/i, "");
                     condition = condition.replace(/\s*\}\}$/i, "");
                     var flag = _jsonText(json, condition, "boolean");
 
                     var tmpStr = v.substring(rex.lastIndex, v.length);
                     var endIfIndex = _getIfBlockEnd(tmpStr);
-                    if (flag) { //if 为 true
+                    if (flag) { //if가 true
                         var parseStr = _parseHtml(tmpStr.substring(0, endIfIndex.codeIndex), json);
                         var vLeft = v.substring(0, match.index);
                         var vRight = v.substring(rex.lastIndex + endIfIndex.lastIndex, v.length);
@@ -1694,7 +1694,7 @@ if (!window.o2) {
 
     /** ***** BEGIN LICENSE BLOCK *****
      * |------------------------------------------------------------------------------|
-     * | O2OA 活力办公 创意无限    o2.core.js                                            |
+     * | O2OA 활력 오피스 무한한 창의    o2.core.js                                            |
      * |------------------------------------------------------------------------------|
      * | Distributed under the AGPL license:                                          |
      * |------------------------------------------------------------------------------|
@@ -2566,37 +2566,37 @@ if (!window.o2) {
             return arr;
         }
         /**
-         * @summary 从服务器获取当前时间。
+         * @summary 서버에서 현재 시간 조회.
          * @function getDateFromServer
          * @memberOf o2
-         * @param {Boolean|Function} [async|callback] 可选，如果传入true或一个Function：表示异步调用此方法，传入的function为回调方法。如果省略此参数或传入false，则为同步方法
-         * @return {Date|Promise} 同步调用时，返回获取到的时间Date；异步调用时，返回Promise。
+         * @param {Boolean|Function} [async|callback] 선택. true 또는 Function을 전달하면 이 메서드를 비동기로 호출하며, 전달한 function은 콜백 메서드임. 생략하거나 false를 전달하면 동기 메서드
+         * @return {Date|Promise} 동기 호출 시 조회한 시간 Date 반환, 비동기 호출 시 Promise 반환.
          * @o2syntax
          * o2.getDateFromServer(async);
          * @o2syntax
          * Date.getFromServer(async);
          * @example
-         * //同步获取服务器时间
+         * //서버 시간 동기 조회
          * var d = o2.getDateFromServer();
-         * //或者
+         * //또는
          * var d = Date.getFromServer();
          *
-         * //通过回调方法异步获取服务器时间
+         * //콜백 메서드로 서버 시간 비동기 조회
          * o2.getDateFromServer(function(d){
-         *     console.log(d);  //从服务器获取的当前时间
+         *     console.log(d);  //서버에서 조회한 현재 시간
          * });
-         * //或者
+         * //또는
          * Date.getFromServer(function(d){
-         *     console.log(d);  //从服务器获取的当前时间
+         *     console.log(d);  //서버에서 조회한 현재 시간
          * });
          *
-         * //通过Promise异步获取服务器时间
+         * //Promise로 서버 시간 비동기 조회
          * o2.getDateFromServer(true).then((d)=>{
-         *     console.log(d);  //从服务器获取的当前时间
+         *     console.log(d);  //서버에서 조회한 현재 시간
          * });
-         * //或者
+         * //또는
          * Date.getFromServer(true).then((d)=>{
-         *     console.log(d);  //从服务器获取的当前时间
+         *     console.log(d);  //서버에서 조회한 현재 시간
          * });
          */
         this.o2.getDateFromServer = Date.getFromServer = function (async) {
@@ -2671,7 +2671,7 @@ if (!window.o2) {
 
     /** ***** BEGIN LICENSE BLOCK *****
      * |------------------------------------------------------------------------------|
-     * | O2OA 活力办公 创意无限    o2.more.js                                          |
+     * | O2OA 활기찬 업무 무한한 창의    o2.more.js                                          |
      * |------------------------------------------------------------------------------|
      * | Distributed under the AGPL license:                                          |
      * |------------------------------------------------------------------------------|
@@ -2865,14 +2865,14 @@ if (!window.o2) {
         };
 
         /**
-         * @summary 对页面进行缩放。
+         * @summary 페이지 확대/축소.
          * @function zoom
          * @memberOf o2
-         * @param {Number} [scale] 缩放的比例。1表示原始大小
+         * @param {Number} [scale] 확대/축소 비율. 1은 원래 크기
          * @o2syntax
          * o2.zoom(scale);
          * @example
-         * //将页面放大到150%大小
+         * //페이지를 150% 크기로 확대
          * o2.zoom(1.5);
          */
         o2.zoom = function (scale) {
@@ -2895,7 +2895,7 @@ if (!window.o2) {
 
         };
 
-        //去除html文本中的script标签和事件处理函数
+        //html 텍스트에서 script 태그와 이벤트 처리 함수 제거
         o2.sanitizeHTML = function (html) {
             const template = document.createElement('template');
             template.innerHTML = html;
@@ -3418,20 +3418,20 @@ if (!window.o2) {
                 return position;
             },
             isDisplayNone: function() {
-                // 获取元素的计算样式
+                // 요소의 계산된 스타일 조회
                 const computedStyle = window.getComputedStyle(this);
 
-                // 如果 display 为 'none'，则该元素不可见
+                // display가 'none'이면 해당 요소는 보이지 않음
                 if (computedStyle.display === 'none') {
                     return true;
                 }
 
-                // 递归检查父元素
+                // 부모 요소 재귀 검사
                 const parent = this.parentElement;
                 if (parent) {
                     return parent.isDisplayNone();
                 }
-                // 如果所有父元素都没有 display: 'none'，则返回 false
+                // 모든 부모 요소에 display: 'none'이 없으면 false 반환
                 return false;
             }
         });
@@ -3500,10 +3500,10 @@ if (!window.o2) {
             });
         }
 
-        // 第三方扩展用的函数
+        // 서드파티 확장용 함수
         o2.thirdparty =  o2.thirdparty || {};
 
-        // 是否手机端
+        // 모바일 여부
         o2.thirdparty.isMobile = function(){
             return /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i.test(navigator.userAgent.toLowerCase());
         }
@@ -3512,19 +3512,19 @@ if (!window.o2) {
         }
 
         if (o2.thirdparty.isMobile()) {
-            // 手机端钉钉
+            // 모바일 DingTalk
             o2.thirdparty.isDingdingMobile = function() {
                 var isDingding = /dingtalk/i.test(navigator.userAgent.toLowerCase())
                 return isDingding && o2.thirdparty.isMobile();
             }
-            //手机端企业微信
+            //모바일 WeCom
             o2.thirdparty.isQywxMobile = function() {
-                var isComWx = /wxwork/i.test(navigator.userAgent); // 是否企业微信
+                var isComWx = /wxwork/i.test(navigator.userAgent); // WeCom 여부
                 return (isComWx && o2.thirdparty.isMobile());
             }
-             //手机端微信
+             //모바일 WeChat
             o2.thirdparty.isWeiXinMobile = function() {
-                var isWx = /micromessenger/i.test(navigator.userAgent); // 是否微信
+                var isWx = /micromessenger/i.test(navigator.userAgent); // WeChat 여부
                 return (isWx && o2.thirdparty.isMobile());
             }
             o2.thirdparty.isDingdingPC = alwaysFalse;
@@ -3534,26 +3534,26 @@ if (!window.o2) {
             o2.thirdparty.isDingdingMobile = alwaysFalse;
             o2.thirdparty.isQywxMobile = alwaysFalse;
             o2.thirdparty.isWeiXinMobile = alwaysFalse;
-            // pc端钉钉
+            // PC DingTalk
             o2.thirdparty.isDingdingPC = function() {
                 var isDingding = /dingtalk/i.test(navigator.userAgent.toLowerCase())
                 return isDingding && !o2.thirdparty.isMobile();
             }
-            //PC端企业微信
+            //PC WeCom
             o2.thirdparty.isQywxPC = function() {
-                var isComWx = /wxwork/i.test(navigator.userAgent); // 是否企业微信
+                var isComWx = /wxwork/i.test(navigator.userAgent); // WeCom 여부
                 return (isComWx && !o2.thirdparty.isMobile());
             }
-            //PC端微信
+            //PC WeChat
             o2.thirdparty.isWeiXinPC = function() {
-                var isWx = /micromessenger/i.test(navigator.userAgent); // 是否微信
+                var isWx = /micromessenger/i.test(navigator.userAgent); // WeChat 여부
                 return (isWx && !o2.thirdparty.isMobile());
             }
         }
 
         o2.isMediaMobile = function(media){
             const mediaQuery = window.matchMedia(media || 'only screen and (max-width: 767px)');
-            // 检查是否满足媒体查询条件
+            // 미디어 쿼리 조건 충족 여부 검사
             // return mediaQuery.matches || layout.mobile || o2.thirdparty.isMobile();
             return mediaQuery.matches;
         }
@@ -3718,15 +3718,15 @@ if (!window.o2) {
 
 
         /**
-         * 如果需要根据一个迭代器，渲染浏览器界面，推荐调用此方法。为防止卡顿，将渲染动作放入 requestAnimationFrame 回调种植进行。
-         * 需要提供一个回调函数，执行渲染。在下一次重绘之前，调用用户提供的回调函数。
+         * 반복자를 기반으로 브라우저 화면을 렌더링해야 할 때 이 메서드 호출을 권장함. 끊김을 막기 위해 렌더링 동작을 requestAnimationFrame 콜백에서 수행함.
+         * 렌더링을 수행할 콜백 함수를 제공해야 함. 다음 리페인트 전에 사용자가 제공한 콜백 함수를 호출함.
          *
-         * @param iterator {Iterator} 一个迭代器，对于dom对象的操作，是根据这个迭代器中的数据的。
-         * @param callback {Function} 回调函数，它接收两个参数：value，index，分别为当前迭代的值和索引（0 开始），每次迭代都会调用此函数，一般来说在此函数中进行dom修改。
-         * @param firstFrameSize {Number} 第一次调用时的迭代次数。默认100.
-         * @param time {Number} 一个数值表示没帧运行的毫秒数，操作这个数字，就不再迭代了，等待下一个 requestAnimationFrame 回调。默认 13
+         * @param iterator {Iterator} 반복자. dom 객체 조작은 이 반복자의 데이터를 기반으로 함.
+         * @param callback {Function} 콜백 함수. value, index 두 인자를 받으며 각각 현재 반복 값과 인덱스(0부터 시작)임. 매 반복마다 호출되며 일반적으로 이 함수에서 dom을 수정함.
+         * @param firstFrameSize {Number} 첫 호출 시 반복 횟수. 기본값 100.
+         * @param time {Number} 프레임당 실행 밀리초. 이 값을 넘으면 반복을 멈추고 다음 requestAnimationFrame 콜백을 기다림. 기본값 13
          *
-         * @return {Promise} 执行完成后兑现
+         * @return {Promise} 실행 완료 후 이행
          */
         o2.nextFrame = function(iterator, callback, firstFrameSize = 500, time = 15) {
             if (typeof iterator[Symbol.iterator] === 'function') {

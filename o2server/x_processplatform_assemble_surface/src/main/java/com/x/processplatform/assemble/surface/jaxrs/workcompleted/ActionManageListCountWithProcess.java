@@ -22,7 +22,7 @@ import com.x.processplatform.core.entity.element.Application;
 import com.x.processplatform.core.entity.element.Process;
 
 /**
- * 在管理界面下列示按Process分类的数量,不需要权限
+ * 관리 화면에서 Process별 분류 수량 목록 조회, 권한 불필요
  */
 class ActionManageListCountWithProcess extends BaseAction {
 

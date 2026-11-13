@@ -7,6 +7,6 @@ import com.x.base.core.project.exception.LanguagePromptException;
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	 ExceptionInvalidName(String name) {
-		super("用户名错误,不能为空,不能使用保留字串,且不能使用特殊字符:{}.", name);
+		super("사용자 이름 오류: 비워 둘 수 없고, 예약어나 특수 문자를 사용할 수 없습니다: {}.", name);
 	}
 }

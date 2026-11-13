@@ -46,7 +46,7 @@ class ActionListLoginAfter extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("截至登录日期")
+		@FieldDescribe("로그인 기준 일자")
 		private Date date;
 
 		public Date getDate() {

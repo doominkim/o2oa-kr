@@ -26,7 +26,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.query.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Entry", description = "数据中心神经网络条目.")
+@Schema(name = "Entry", description = "데이터 센터 신경망 항목.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Neural.Entry.table, uniqueConstraints = {
@@ -48,51 +48,51 @@ public class Entry extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String TYPE_VALIDATION = "validation";
 	public static final String TYPE_LEARN = "learn";
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("类型,test或者learn")
+	@FieldDescribe("유형, test 또는 learn")
 	@Column(length = length_32B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String type;
 
 	public static final String bundle_FIELDNAME = "bundle";
-	@FieldDescribe("通用数据标识,cms为doucment.getId(),processPlatform为workCompletedId")
+	@FieldDescribe("공통 데이터 식별자, cms는 doucment.getId(), processPlatform은 workCompletedId")
 	@Column(length = length_255B, name = ColumnNamePrefix + bundle_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + bundle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String bundle;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	@Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String model_FIELDNAME = "model";
-	@FieldDescribe("模型")
+	@FieldDescribe("모델")
 	@Column(length = length_id, name = ColumnNamePrefix + model_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + model_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String model;
 
 	public static final String inValueLabelList_FIELDNAME = "inValueLabelList";
-	@FieldDescribe("输入标签")
+	@FieldDescribe("입력 레이블")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name =  ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -104,7 +104,7 @@ public class Entry extends SliceJpaObject {
 	private List<Integer> inValueLabelList;
 
 	public static final String outValueLabelList_FIELDNAME = "outValueLabelList";
-	@FieldDescribe("结果标签")
+	@FieldDescribe("결과 레이블")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name =  ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -116,14 +116,14 @@ public class Entry extends SliceJpaObject {
 	private List<Integer> outValueLabelList;
 
 	public static final String inValueCount_FIELDNAME = "inValueCount";
-	@FieldDescribe("输入值数量")
+	@FieldDescribe("입력값 개수")
 	@Column(name = ColumnNamePrefix + inValueCount_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + inValueCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer inValueCount;
 
 	public static final String outValueCount_FIELDNAME = "outValueCount";
-	@FieldDescribe("输出值数量")
+	@FieldDescribe("출력값 개수")
 	@Column(name = ColumnNamePrefix + outValueCount_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + outValueCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

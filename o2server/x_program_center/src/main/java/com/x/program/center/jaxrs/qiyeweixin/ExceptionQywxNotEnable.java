@@ -10,6 +10,6 @@ public class ExceptionQywxNotEnable extends LanguagePromptException {
 
 
     ExceptionQywxNotEnable() {
-        super("企业微信消息没有启用.");
+        super("WeCom 메시지가 사용 설정되어 있지 않습니다.");
     }
 }

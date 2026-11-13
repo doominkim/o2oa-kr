@@ -7,11 +7,11 @@ import com.x.mind.entity.MindIconInfo;
 
 
 /**
- * 类   名：MindIconInfoFactory<br/>
- * 实体类：MindIconInfo<br/>
- * 作   者：O2LEE<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-11-15 17:17:26 
+ * 클래스 이름: MindIconInfoFactory<br/>
+ * 엔티티 클래스: MindIconInfo<br/>
+ * 작성자: O2LEE<br/>
+ * 소속: O2 Team<br/>
+ * 일시: 2016-11-15 17:17:26 
 **/
 public class MindIconInfoFactory extends AbstractFactory {
 
@@ -20,7 +20,7 @@ public class MindIconInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的脑图信息的缩略图
+	 * 지정 Id의 마인드맵 썸네일 조회
 	 * @param id
 	 * @return
 	 * @throws Exception

@@ -52,7 +52,7 @@ public class ActionManageOpinion extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("意见")
+		@FieldDescribe("의견")
 		private String opinion;
 
 		public String getOpinion() {

@@ -174,7 +174,7 @@
   "addData": {"uri": "/jaxrs/data/document/{id}", "method": "POST"},
   "updateData": {"uri": "/jaxrs/data/document/{id}", "method": "PUT"},
 
-  //attachment为文档中的附件
+  //attachment는 문서 내 첨부파일
   "listAttachment" : {"uri":"/jaxrs/fileinfo/list/document/{documentid}"},
   "listAttachmentByAnonymous" : {"uri":"/jaxrs/anonymous/fileinfo/list/document/{documentId}"},
   "getAttachment": {"uri": "/jaxrs/fileinfo/{id}/document/{documentid}"},
@@ -191,18 +191,18 @@
   "getAttachmentStream": {"uri": "/jaxrs/fileinfo/download/document/{id}/stream", "method": "GET"},
   "getAttachmentStreamByAnonymous": {"uri": "/jaxrs/anonymous/fileinfo/download/document/{id}/stream", "method": "GET"},
 
-  //获取互联网URL指向的图片的base64编码[Jaxrs],必填, 需要获取的图片URL地址
-  //  url- 必填, 需要获取的图片URL地址
-  //  size - 转换图片压缩, size为最大宽高限制, 如 size=64 为 64*64
-  //  注意,如果附件本身不是图片格式,则系统不会进行编码,并且给出异常, 扩展名限制:BMP、JPG、JPEG、PNG、GIF、TIFF
-  //  访问文件无权限限制
+  //인터넷 URL이 가리키는 이미지의 base64 인코딩 조회[Jaxrs], 필수, 조회할 이미지 URL 주소
+  //  url- 필수, 조회할 이미지 URL 주소
+  //  size - 이미지 압축 변환, size는 최대 가로세로 제한, 예: size=64 이면 64*64
+  //  주의: 첨부파일 자체가 이미지 형식이 아니면 시스템은 인코딩하지 않고 예외를 발생시킴, 확장자 제한:BMP, JPG, JPEG, PNG, GIF, TIFF
+  //  파일 접근 권한 제한 없음
   "getInternetImageBaseBase64" : {"uri":"/jaxrs/image/encode/base64", "method": "POST"},
-  //上传一个图片,直接转换为一个base64编码[Servlet]
+  //이미지 하나를 업로드해 바로 base64 인코딩으로 변환[Servlet]
   "convertLocalImageToBase64": {"uri": "/servlet/image/encode/base64/size/{size}", "method": "POST", "enctype": "formData"},
-  //将用户已经上传的图片附件直接转换为一个base64编码[Jaxrs]
+  //사용자가 이미 업로드한 이미지 첨부파일을 바로 base64 인코딩으로 변환[Jaxrs]
   "getSubjectAttachmentBase64" : {"uri":"/jaxrs/fileinfo/{id}/binary/base64/{size}"},
 
-  //file为CMS平台的附件
+  //file은 CMS 플랫폼의 첨부파일
   "listFile" : {"uri":"/jaxrs/file/list/appInfo/{applicationFlag}"},
   "getFile": {"uri": "/jaxrs/file/{id}"},
   "addFile": {"uri": "/jaxrs/file", "method": "POST"},
@@ -221,14 +221,14 @@
 
 
   //id                   -- ID
-  //  documentId           --文档ID
-  //  description          --信息说明（size:255）
-  //  base64               --图片Base64编码后的文本（size:1MB）
+  //  documentId           --문서 ID
+  //  description          --정보 설명(size:255)
+  //  base64               --이미지를 Base64로 인코딩한 텍스트(size:1MB)
   "saveImage" : {"uri" : "/jaxrs/document/pic", "method": "POST" },
   "getImage" : {"uri":"/jaxrs/document/pic/{id}"},
   "listImage" :{"uri":"/jaxrs/document/pic/doc/{documentid}"},
   "removeImage" : {"uri":"/jaxrs/document/pic/{id}","method": "DELETE"},
-  //4、获取指定文档的ID获取文档大图的base64编码，如果有多个则获取第一个，如果没有则返回“0”
+  //4. 지정 문서 ID로 문서 대표 이미지의 base64 인코딩 조회, 여러 개면 첫 번째를 조회하고 없으면 “0” 반환
   "getImageByDocument" : {"uri":"/servlet/document/{documentid}/mainpic", "method": "PUT"},
 
   "getReadedCount" : {"uri":"/jaxrs/document/{id}/view/count"},
@@ -266,7 +266,7 @@
   //{  docIds : docIds, dataChanges : dataChanges }
   "batchModifyData" :  {"uri":"/jaxrs/document/batch/data/modify","method":"PUT"}, //데이터 일괄 수정
 
-  //评论
+  //댓글
   "listCommentNextWithFilter" : {"uri":"/jaxrs/comment/list/{id}/next/{count}","method":"PUT"},
   "listCommentPageWithFilter" : {"uri":"/jaxrs/comment/list/{page}/size/{size}","method":"PUT"},
   "listCommentPrevWithFilter" : {"uri":"/jaxrs/comment/list/{id}/prev/{count}","method":"PUT"},

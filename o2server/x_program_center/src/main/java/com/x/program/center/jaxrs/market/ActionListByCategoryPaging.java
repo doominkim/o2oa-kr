@@ -83,7 +83,7 @@ class ActionListByCategoryPaging extends BaseAction {
 
 	public static class Wo extends Application2 {
 
-		@FieldDescribe("已安装的版本，空表示未安装")
+		@FieldDescribe("설치된 버전, 비어 있으면 미설치")
 		private String installedVersion;
 
 		public String getInstalledVersion() {

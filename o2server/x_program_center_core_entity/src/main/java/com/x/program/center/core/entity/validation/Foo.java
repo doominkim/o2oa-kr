@@ -48,7 +48,7 @@ public class Foo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -69,42 +69,42 @@ public class Foo extends SliceJpaObject {
 	}
 
 	public static final String NAME_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + NAME_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + NAME_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String name;
 
 	public static final String S1_FIELDNAME = "s1";
-	@FieldDescribe("String值1.")
+	@FieldDescribe("String 값1.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + S1_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + S1_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String s1;
 
 	public static final String S2_FIELDNAME = "s2";
-	@FieldDescribe("String值2.")
+	@FieldDescribe("String 값2.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + S2_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + S2_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String s2;
 
 	public static final String S3_FIELDNAME = "s3";
-	@FieldDescribe("String值3.")
+	@FieldDescribe("String 값3.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + S3_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + S3_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String s3;
 
 	public static final String S4_FIELDNAME = "s4";
-	@FieldDescribe("String值4.")
+	@FieldDescribe("String 값4.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + S4_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + S4_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String s4;
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

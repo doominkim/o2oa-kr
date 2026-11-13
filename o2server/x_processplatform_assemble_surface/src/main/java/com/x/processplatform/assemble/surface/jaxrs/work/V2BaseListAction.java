@@ -63,116 +63,116 @@ class V2BaseListAction extends V2Base {
 			return true;
 		}
 
-		@FieldDescribe("任务标识.")
-		@Schema(description = "任务标识.")
+		@FieldDescribe("작업 식별자.")
+		@Schema(description = "작업 식별자.")
 		private List<String> jobList = new ArrayList<>();
 
-		@FieldDescribe("待办标识.")
-		@Schema(description = "待办标识.")
+		@FieldDescribe("결재 대기 식별자.")
+		@Schema(description = "결재 대기 식별자.")
 		private List<String> idList = new ArrayList<>();
 
-		@FieldDescribe("应用标识.")
-		@Schema(description = "应用标识.")
+		@FieldDescribe("앱 식별자.")
+		@Schema(description = "앱 식별자.")
 		private List<String> applicationList = new ArrayList<>();
 
-		@FieldDescribe("应用名称.")
-		@Schema(description = "应用名称.")
+		@FieldDescribe("앱 이름.")
+		@Schema(description = "앱 이름.")
 		private List<String> applicationNameList = new ArrayList<>();
 
-		@FieldDescribe("应用别名.")
-		@Schema(description = "应用别名.")
+		@FieldDescribe("앱 별칭.")
+		@Schema(description = "앱 별칭.")
 		private List<String> applicationAliasList = new ArrayList<>();
 
-		@FieldDescribe("流程标识.")
-		@Schema(description = "流程标识.")
+		@FieldDescribe("프로세스 식별자.")
+		@Schema(description = "프로세스 식별자.")
 		private List<String> processList = new ArrayList<>();
 
-		@FieldDescribe("流程名称.")
-		@Schema(description = "流程名称.")
+		@FieldDescribe("프로세스 이름.")
+		@Schema(description = "프로세스 이름.")
 		private List<String> processNameList = new ArrayList<>();
 
-		@FieldDescribe("流程别名.")
-		@Schema(description = "流程别名.")
+		@FieldDescribe("프로세스 별칭.")
+		@Schema(description = "프로세스 별칭.")
 		private List<String> processAliasList = new ArrayList<>();
 
-		@FieldDescribe("活动标识.")
-		@Schema(description = "活动标识.")
+		@FieldDescribe("활동 식별자.")
+		@Schema(description = "활동 식별자.")
 		private List<String> activityList = new ArrayList<>();
 
-		@FieldDescribe("活动名称.")
-		@Schema(description = "活动名称.")
+		@FieldDescribe("활동 이름.")
+		@Schema(description = "활동 이름.")
 		private List<String> activityNameList = new ArrayList<>();
 
-		@FieldDescribe("活动别名.")
-		@Schema(description = "活动别名.")
+		@FieldDescribe("활동 별칭.")
+		@Schema(description = "활동 별칭.")
 		private List<String> activityAliasList = new ArrayList<>();
 
-		@FieldDescribe("开始时间,格式为:yyyy-MM-dd HH:mm:ss.")
-		@Schema(description = "开始时间,格式为:yyyy-MM-dd HH:mm:ss.")
+		@FieldDescribe("시작 시간, 형식:yyyy-MM-dd HH:mm:ss.")
+		@Schema(description = "시작 시간, 형식:yyyy-MM-dd HH:mm:ss.")
 		private String startTime;
 
-		@FieldDescribe("结束时间,格式为:yyyy-MM-dd HH:mm:ss.")
-		@Schema(description = "结束时间,格式为:yyyy-MM-dd HH:mm:ss.")
+		@FieldDescribe("종료 시간, 형식:yyyy-MM-dd HH:mm:ss.")
+		@Schema(description = "종료 시간, 형식:yyyy-MM-dd HH:mm:ss.")
 		private String endTime;
 
-		@FieldDescribe("创建工作人员.")
-		@Schema(description = "创建工作人员.")
+		@FieldDescribe("업무 문서 생성 사용자.")
+		@Schema(description = "업무 문서 생성 사용자.")
 		private List<String> creatorPersonList = new ArrayList<>();
 
-		@FieldDescribe("创建工作人员身份.")
-		@Schema(description = "创建工作人员身份.")
+		@FieldDescribe("업무 문서 생성 사용자 신분.")
+		@Schema(description = "업무 문서 생성 사용자 신분.")
 		private List<String> creatorIdentityList = new ArrayList<>();
 
-		@FieldDescribe("创建工作身份所属组织.")
-		@Schema(description = "创建工作身份所属组织.")
+		@FieldDescribe("업무 문서 생성 신분의 소속 조직.")
+		@Schema(description = "업무 문서 생성 신분의 소속 조직.")
 		private List<String> creatorUnitList = new ArrayList<>();
 
-		@FieldDescribe("开始年月,格式为文本格式 yyyy-MM.")
-		@Schema(description = "开始年月,格式为文本格式 yyyy-MM.")
+		@FieldDescribe("시작 연월, 텍스트 형식 yyyy-MM.")
+		@Schema(description = "시작 연월, 텍스트 형식 yyyy-MM.")
 		private List<String> startTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("搜索关键字,搜索范围为:标题,文号,创建人,创建部门.")
-		@Schema(description = "搜索关键字,搜索范围为:标题,文号,创建人,创建部门.")
+		@FieldDescribe("검색 키워드, 검색 범위:제목, 문서번호, 생성자, 생성 부서.")
+		@Schema(description = "검색 키워드, 검색 범위:제목, 문서번호, 생성자, 생성 부서.")
 		private String key;
 
-		@FieldDescribe("业务数据String值01.")
-		@Schema(description = "业务数据String值01.")
+		@FieldDescribe("업무 데이터 String 값01.")
+		@Schema(description = "업무 데이터 String 값01.")
 		private List<String> stringValue01List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值02.")
-		@Schema(description = "业务数据String值02.")
+		@FieldDescribe("업무 데이터 String 값02.")
+		@Schema(description = "업무 데이터 String 값02.")
 		private List<String> stringValue02List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值03.")
-		@Schema(description = "业务数据String值03.")
+		@FieldDescribe("업무 데이터 String 값03.")
+		@Schema(description = "업무 데이터 String 값03.")
 		private List<String> stringValue03List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值04.")
-		@Schema(description = "业务数据String值04.")
+		@FieldDescribe("업무 데이터 String 값04.")
+		@Schema(description = "업무 데이터 String 값04.")
 		private List<String> stringValue04List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值05.")
-		@Schema(description = "业务数据String值05.")
+		@FieldDescribe("업무 데이터 String 값05.")
+		@Schema(description = "업무 데이터 String 값05.")
 		private List<String> stringValue05List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值06.")
-		@Schema(description = "业务数据String值06.")
+		@FieldDescribe("업무 데이터 String 값06.")
+		@Schema(description = "업무 데이터 String 값06.")
 		private List<String> stringValue06List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值07.")
-		@Schema(description = "业务数据String值07.")
+		@FieldDescribe("업무 데이터 String 값07.")
+		@Schema(description = "업무 데이터 String 값07.")
 		private List<String> stringValue07List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值08.")
-		@Schema(description = "业务数据String值08.")
+		@FieldDescribe("업무 데이터 String 값08.")
+		@Schema(description = "업무 데이터 String 값08.")
 		private List<String> stringValue08List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值09.")
-		@Schema(description = "业务数据String值09.")
+		@FieldDescribe("업무 데이터 String 값09.")
+		@Schema(description = "업무 데이터 String 값09.")
 		private List<String> stringValue09List = new ArrayList<>();
 
-		@FieldDescribe("业务数据String值10.")
-		@Schema(description = "业务数据String值10.")
+		@FieldDescribe("업무 데이터 String 값10.")
+		@Schema(description = "업무 데이터 String 값10.")
 		private List<String> stringValue10List = new ArrayList<>();
 
 		public List<String> getStringValue01List() {

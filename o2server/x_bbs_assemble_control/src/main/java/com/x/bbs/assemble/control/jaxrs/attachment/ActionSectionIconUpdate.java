@@ -42,7 +42,7 @@ public class ActionSectionIconUpdate extends BaseAction {
 		if( check ){
 			if( StringUtils.isEmpty(sectionId) ){
 				check = false;
-				Exception exception = new ExceptionURLParameterGet( new Exception("未获取到版块ID") );
+				Exception exception = new ExceptionURLParameterGet( new Exception("섹션 ID를 가져오지 못했습니다") );
 				result.error( exception );
 			}
 		}
@@ -52,7 +52,7 @@ public class ActionSectionIconUpdate extends BaseAction {
 				sectionInfo = sectionInfoService.get(sectionId);
 				if (sectionInfo == null) {
 					check = false;
-					result.error(new Exception("版块信息不存在，无法继续进行图标更新操作！ID：" + sectionId));
+					result.error(new Exception("섹션 정보가 없어 아이콘을 갱신할 수 없습니다! ID:" + sectionId));
 				}
 			} catch (Exception e) {
 				check = false;
@@ -88,7 +88,7 @@ public class ActionSectionIconUpdate extends BaseAction {
 					result.setData( wrap );
 				} else {
 					check = false;
-					result.error(new Exception("版块信息不存在，无法保存版块图信息！ID：" + sectionId));
+					result.error(new Exception("섹션 정보가 없어 섹션 이미지를 저장할 수 없습니다! ID:" + sectionId));
 				}
 			} catch (Exception e) {
 				check = false;

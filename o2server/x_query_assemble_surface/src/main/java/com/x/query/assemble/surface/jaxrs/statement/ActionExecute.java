@@ -46,7 +46,7 @@ class ActionExecute extends BaseAction {
             if (!business.executable(effectivePerson, statement)) {
                 throw new ExceptionAccessDenied(effectivePerson, statement);
             }
-            //兼容旧版本jsonElement本身即为parameter参数内容
+            //이전 버전 호환: jsonElement 자체가 parameter 매개변수 내용
             JsonObject runTimeJson = jsonElement.getAsJsonObject();
             if (!runTimeJson.has(Runtime.parameter_FIELDNAME)){
                 JsonObject rtJson = new JsonObject();

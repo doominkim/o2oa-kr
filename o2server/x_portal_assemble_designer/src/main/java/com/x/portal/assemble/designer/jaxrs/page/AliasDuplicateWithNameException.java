@@ -7,6 +7,6 @@ class AliasDuplicateWithNameException extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	AliasDuplicateWithNameException(String name) {
-		super("别名与名称重复: {}.", name);
+		super("별칭이 이름과 중복됩니다: {}.", name);
 	}
 }

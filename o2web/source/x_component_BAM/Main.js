@@ -43,7 +43,7 @@ MWF.xApplication.BAM.Main = new Class({
         this.monthlyNode = new Element("div", {"styles": this.css.monthlyNode});
         this.summaryPage = this.tab.addTab(this.summaryNode, this.lp.summaryTitle);
 
-        // 临时隐藏按月统计，等待查询效率提升后再开放。
+        // 월별 통계 임시 숨김, 조회 효율 개선 후 다시 공개.
         // this.monthlyPage = this.tab.addTab(this.monthlyNode, this.lp.monthlyTitle);
         // this.monthlyPage.addEvent("show", function(){
         //     this.clearMonthly();

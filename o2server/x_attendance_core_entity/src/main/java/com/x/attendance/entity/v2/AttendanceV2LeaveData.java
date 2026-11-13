@@ -15,7 +15,7 @@ import java.util.Date;
  * Created by fancyLou on 2023/3/2.
  * Copyright © 2023 O2. All rights reserved.
  */
-@Schema(name = "AttendanceV2LeaveData", description = "外出数据表.")
+@Schema(name = "AttendanceV2LeaveData", description = "외출 데이터 테이블.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2LeaveData.table, indexes = {
@@ -44,7 +44,7 @@ public class AttendanceV2LeaveData extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -53,57 +53,57 @@ public class AttendanceV2LeaveData extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
 
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("用户标识")
+    @FieldDescribe("사용자 식별자")
     @Column(length = length_96B, name = ColumnNamePrefix + person_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String person;
 
     public static final String leaveType_FIELDNAME = "leaveType";
-    @FieldDescribe("外出类型:出差|培训|其他")
+    @FieldDescribe("외출 유형:출장|교육|기타")
     @Column( length = JpaObject.length_32B, name = ColumnNamePrefix + leaveType_FIELDNAME )
     @CheckPersist(allowEmpty = false)
     private String leaveType;
 
     public static final String startTime_FIELDNAME = "startTime";
-    @FieldDescribe("开始时间：yyyy-MM-dd HH:mm:ss")
+    @FieldDescribe("시작 시간: yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     @Column( name = ColumnNamePrefix + startTime_FIELDNAME )
     @CheckPersist(allowEmpty = false)
     private Date startTime;
 
     public static final String endTime_FIELDNAME = "endTime";
-    @FieldDescribe("结束时间：yyyy-MM-dd HH:mm:ss")
+    @FieldDescribe("종료 시간: yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     @Column( name = ColumnNamePrefix + endTime_FIELDNAME )
     @CheckPersist(allowEmpty = false)
     private Date endTime;
 
     public static final String leaveDayNumber_FIELDNAME = "leaveDayNumber";
-    @FieldDescribe("外出天数")
+    @FieldDescribe("외출 일수")
     @Column( name = ColumnNamePrefix + leaveDayNumber_FIELDNAME )
     private Double leaveDayNumber = 0.0;
 
     public static final String description_FIELDNAME = "description";
-    @FieldDescribe("外出说明")
+    @FieldDescribe("외출 설명")
     @Column(name = ColumnNamePrefix + description_FIELDNAME )
     private String description;
 
     public static final String jobId_FIELDNAME = "jobId";
-    @FieldDescribe("外出的jobId.")
+    @FieldDescribe("외출의 jobId.")
     @Column( length = JpaObject.length_id, name = ColumnNamePrefix + jobId_FIELDNAME)
     private String jobId;
 

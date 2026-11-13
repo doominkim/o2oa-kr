@@ -7,7 +7,7 @@ public class AttachmentProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 2981030575785426818L;
 
-	@FieldDescribe("标题.")
+	@FieldDescribe("제목.")
 	private String name;
 
 	public String getName() {

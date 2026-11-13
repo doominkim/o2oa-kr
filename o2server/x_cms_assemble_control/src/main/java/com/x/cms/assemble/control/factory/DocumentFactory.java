@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 /**
- * 文档信息基础功能服务类
+ * 문서 정보 기본 기능 서비스 클래스
  *
  * @author O2LEE
  */
@@ -36,7 +36,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的Document信息对象
+	 * 지정한 Id의 Document 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -46,7 +46,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的Document的sequence值
+	 * 지정한 Id의 Document sequence 값 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -62,7 +62,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 列示全部的Document信息列表
+	 * 전체 Document 정보 목록 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -76,7 +76,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据应用ID列示所有的Document信息列表
+	 * 앱 ID로 모든 Document 정보 목록 조회
 	 * @param appId
 	 * @param documentType
 	 * @param maxCount
@@ -115,7 +115,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据指定分类里的文档ID，支持按指定列排序
+	 * 지정한 분류의 문서 ID 조회, 지정한 열 기준 정렬 지원
 	 * @param categoryId
 	 * @param orderField
 	 * @param orderType
@@ -225,7 +225,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询符合条件的文档信息，根据上一条的sequnce查询指定数量的信息
+	 * 조건에 맞는 문서 정보 조회, 이전 항목의 sequnce 기준으로 지정한 수만큼 조회
 	 * @param maxCount
 	 * @param sequenceFieldValue
 	 * @param orderField
@@ -266,7 +266,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询符合条件的文档信息，根据上一条的sequnce查询指定数量的信息
+	 * 조건에 맞는 문서 정보 조회, 이전 항목의 sequnce 기준으로 지정한 수만큼 조회
 	 * @param maxCount
 	 * @param sequenceFieldValue
 	 * @param orderField
@@ -307,7 +307,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询指定数量的符合条件的文档信息列表
+	 * 조건에 맞는 문서 정보 목록을 지정한 수만큼 조회
 	 * @param orderField
 	 * @param orderType
 	 * @param queryFilter
@@ -335,7 +335,7 @@ public class DocumentFactory extends AbstractFactory {
 		}
 
 		if( !Document.isFieldInSequence(orderField)) {
-			//如果是没有做sequence的列，很可能排序值不唯一，比如有多个文档有相同的值，所以使用多一列排序列来确定每次查询的顺序
+			//sequence가 없는 열은 정렬 값이 고유하지 않을 수 있으므로(예: 여러 문서가 같은 값을 가짐) 정렬 열을 하나 더 사용해 매 조회 순서를 확정
 			orderWithField = CriteriaBuilderTools.getOrder( cb, root, Document_.class, Document.id_FIELDNAME, orderType );
 			if( orderWithField != null ){
 				orders.add( orderWithField );
@@ -455,7 +455,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件分页查询符合条件的文档信息列表
+	 * 조건에 맞는 문서 정보 목록 페이지 조회
 	 * @param orderField
 	 * @param orderType
 	 * @param queryFilter
@@ -541,7 +541,7 @@ public class DocumentFactory extends AbstractFactory {
 		}
 		cq.multiselect(selections).where(p);
 
-		//排序，添加排序列，先按是否置顶，再按指定字段，最后按照序列号
+		//정렬: 정렬 열 추가, 상단 고정 여부, 지정 필드, 마지막으로 일련번호 순
 		List<Order> orders = new ArrayList<>();
 		Order isTopOrder = CriteriaBuilderTools.getOrder( cb, root, Document_.class, Document.isTop_FIELDNAME, "desc" );
 		if( isTopOrder != null ){
@@ -575,7 +575,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件统计文档数目
+	 * 조건에 따른 문서 수 집계
 	 * @param personName
 	 * @param queryFilter
 	 * @return
@@ -655,7 +655,7 @@ public class DocumentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询所有isTop属性为空的文档ID列表
+	 * isTop 속성이 비어 있는 모든 문서 ID 목록 조회
 	 * @return
 	 * @throws Exception
 	 */

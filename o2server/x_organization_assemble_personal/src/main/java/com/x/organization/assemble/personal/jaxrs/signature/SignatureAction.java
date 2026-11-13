@@ -26,19 +26,19 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("signature")
-@JaxrsDescribe("个信化签名管理")
+@JaxrsDescribe("개인화 서명 관리")
 public class SignatureAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(SignatureAction.class);
 
-	@JaxrsMethodDescribe(value = "上传个信化签名.", action = ActionUpload.class)
+	@JaxrsMethodDescribe(value = "개인화 서명 업로드.", action = ActionUpload.class)
 	@POST
 	@Path("upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void upload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("签名信息") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("서명 정보") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionUpload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,13 +50,13 @@ public class SignatureAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除个信化签名.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "개인화 서명 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("delete/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -68,7 +68,7 @@ public class SignatureAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户的个性化签名.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 개인화 서명 목록.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -85,13 +85,13 @@ public class SignatureAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定用户的个性化签名.", action = ActionManagerList.class)
+	@JaxrsMethodDescribe(value = "지정 사용자의 개인화 서명 목록.", action = ActionManagerList.class)
 	@GET
 	@Path("list/person/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("人员") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("사용자") @PathParam("flag") String flag) {
 		ActionResult<List<ActionManagerList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

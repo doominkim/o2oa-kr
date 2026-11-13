@@ -5,11 +5,11 @@ import com.x.bbs.assemble.control.Business;
 import com.x.bbs.entity.BBSSubjectVoteResult;
 
 /**
- * 类   名：BBSSubjectVoteResultFactory<br/>
- * 实体类：BBSSubjectVoteResult<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSSubjectVoteResultFactory<br/>
+ * 엔티티 클래스: BBSSubjectVoteResult<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
 **/
 public class BBSSubjectVoteResultFactory extends AbstractFactory {
 
@@ -17,12 +17,12 @@ public class BBSSubjectVoteResultFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSSubjectVoteResult实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSSubjectVoteResult 엔티티 정보 객체 조회" )
 	public BBSSubjectVoteResult get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSSubjectVoteResult.class );
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSSubjectVoteResult实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSSubjectVoteResult 엔티티 정보 객체 조회" )
 	public String getStatisticResult( String id ) throws Exception {
 		if( id == null || id.isEmpty() ){
 			return null;

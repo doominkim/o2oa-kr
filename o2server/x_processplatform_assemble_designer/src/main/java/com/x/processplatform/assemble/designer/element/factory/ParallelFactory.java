@@ -39,7 +39,7 @@ public class ParallelFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的parallel */
+	/** 양식을 사용하는 parallel 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Parallel.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

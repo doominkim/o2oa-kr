@@ -70,7 +70,7 @@ class ActionCreate extends BaseAction {
                         Invoice.name_FIELDNAME, Invoice.length_FIELDNAME, Invoice.storage_FIELDNAME,
                         Invoice.deepPath_FIELDNAME, Invoice.extension_FIELDNAME, Invoice.person_FIELDNAME));
 
-        @FieldDescribe("已上传的文件ID，通过uploadForCreate接口上传.")
+        @FieldDescribe("업로드한 파일 ID, uploadForCreate 인터페이스로 업로드.")
         private String fileId;
 
         public String getFileId() {

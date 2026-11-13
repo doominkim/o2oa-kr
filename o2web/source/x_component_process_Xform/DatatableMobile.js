@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class DatatableMobile 数据表格组件（移动端）。表格形式的多行数据编辑组件。
- * @o2cn 数据表格移动端
+/** @class DatatableMobile 데이터 표 컴포넌트(모바일). 표 형식의 다중 행 데이터 편집 컴포넌트.
+ * @o2cn 데이터 표 모바일
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var datatable = this.form.get("name"); //获取组件
- * //方法2
- * var datatable = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var datatable = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var datatable = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.DatatablePC
  * @o2category FormComponents
  * @since v6.2
@@ -66,7 +66,7 @@ MWF.xApplication.process.Xform.DatatableMobile = MWF.APPDatatableMobile = new Cl
 				if (json){
 					// var module = this.form._loadModule(json, th);
 					// this.form.modules.push(module);
-					// if( json.isShow === false )th.hide(); //隐藏列
+					// if( json.isShow === false )th.hide(); //숨김 열
 					if((json.total === "number") || (json.total === "count"))this.totalFlag = true;
 				}
 			}.bind(this));
@@ -98,10 +98,10 @@ MWF.xApplication.process.Xform.DatatableMobile = MWF.APPDatatableMobile = new Cl
 				if (json){
 					// var module = this.form._loadModule(json, td);
 					// this.form.modules.push(module);
-					if( json.cellType === "sequence" )td.addClass("mwf_sequence"); //序号列
+					if( json.cellType === "sequence" )td.addClass("mwf_sequence"); //순번 열
 
 					if( thjson?.isShow === false ){
-						td.hide(); //隐藏列
+						td.hide(); //숨김 열
 					}else{
 						if ((idx%2)===0 && this.json.zebraColor){
 							td.setStyle("background-color", this.json.zebraColor);
@@ -229,7 +229,7 @@ MWF.xApplication.process.Xform.DatatableMobile = MWF.APPDatatableMobile = new Cl
 						datatd.setStyles(this.json.amountStyles);
 
 						if( json.isShow === false ){
-							tr.hide(); //隐藏列
+							tr.hide(); //숨김 열
 						}else{
 							if ((idx%2)===0 && this.json.zebraColor){
 								datatd.setStyle("background-color", this.json.zebraColor);
@@ -254,10 +254,10 @@ MWF.xApplication.process.Xform.DatatableMobile = MWF.APPDatatableMobile = new Cl
 			tds.each(function(td, index){
 				var json = this.form._getDomjson(td);
 				if (json){
-					//总计列
+					//합계 열
 					var tColumn = this.totalColumns.find(function(a){ return  a.index === index });
 					if(tColumn){
-						var moduleNodes = this.form._getModuleNodes(td); //获取总计列内的填写组件
+						var moduleNodes = this.form._getModuleNodes(td); //합계 열 안의 입력 컴포넌트 가져오기
 						if( moduleNodes.length > 0 ){
 							tColumn.moduleJson = this.form._getDomjson(moduleNodes[0]);
 							if(tColumn.type === "number")this.totalNumberModuleIds.push( tColumn.moduleJson.id );
@@ -572,7 +572,7 @@ MWF.xApplication.process.Xform.DatatableMobile.SectionLine =  new Class({
 					datatd.setStyles(this.datatable.json.sectionAmountStyles || {});
 
 					if( json.isShow === false ){
-						tr.hide(); //隐藏列
+						tr.hide(); //숨김 열
 					}else{
 						if ((idx%2)===0 && this.datatable.json.zebraColor){
 							datatd.setStyle("background-color", this.datatable.json.zebraColor);
@@ -597,10 +597,10 @@ MWF.xApplication.process.Xform.DatatableMobile.SectionLine =  new Class({
 		tds.each(function(td, index){
 			var json = this.form._getDomjson(td);
 			if (json){
-				//总计列
+				//합계 열
 				var tColumn = this.totalColumns.find(function(a){ return  a.index === index });
 				if(tColumn){
-					var moduleNodes = this.form._getModuleNodes(td); //获取总计列内的填写组件
+					var moduleNodes = this.form._getModuleNodes(td); //합계 열 안의 입력 컴포넌트 가져오기
 					if( moduleNodes.length > 0 ){
 						tColumn.moduleJson = this.form._getDomjson(moduleNodes[0]);
 						if(tColumn.type === "number")this.totalNumberModuleIds.push( tColumn.moduleJson.id );
@@ -643,7 +643,7 @@ MWF.xApplication.process.Xform.DatatableMobile.Line =  new Class({
 		// }
 	},
 	createActions: function () {
-		//不允许编辑，直接返回
+		//편집 불가, 바로 반환
 
 		var editActionTd = this.node.getElement(".mwf_editaction");
 		if(!this.options.isEditable){
@@ -655,10 +655,10 @@ MWF.xApplication.process.Xform.DatatableMobile.Line =  new Class({
 
 		if( this.datatable.sortable )this.createMoveAction(editActionTd);
 
-		if(this.datatable.multiEditMode){ //多行编辑模式
+		if(this.datatable.multiEditMode){ //다중 행 편집 모드
 			if(this.options.isDeleteable)this.createDelAction(editActionTd);
 			if(this.options.isAddable)this.createAddAction(editActionTd);
-		}else{ //单行编辑模式
+		}else{ //단일 행 편집 모드
 			if(this.options.isDeleteable)this.createDelAction(editActionTd);
 			if(this.options.isEditable){
 				this.createEditAction(editActionTd);

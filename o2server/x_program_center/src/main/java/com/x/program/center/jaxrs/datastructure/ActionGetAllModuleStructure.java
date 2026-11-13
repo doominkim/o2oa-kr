@@ -15,7 +15,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 获取所有应用的实体依赖以及数据表依赖
+ * 모든 앱의 엔티티 의존성 및 데이터 테이블 의존성 조회
  */
 class ActionGetAllModuleStructure extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(ActionGetAllModuleStructure.class);
@@ -25,7 +25,7 @@ class ActionGetAllModuleStructure extends BaseAction {
 		List<Wo> wos = new ArrayList<>();
 		Wo wo = null;
 
-		// 遍历所有的模块
+		// 모든 모듈 순회
 		for (String className : OFFICIAL_MODULE_SORTED_TEMPLATE) {
 			wo = getEntityStructure(className);
 			wos.add(wo);
@@ -35,7 +35,7 @@ class ActionGetAllModuleStructure extends BaseAction {
 	}
 
 	/**
-	 * 获取指定模块的实体依赖信息
+	 * 지정 모듈의 엔티티 의존성 정보 조회
 	 * 
 	 * @param className
 	 * @return
@@ -75,7 +75,7 @@ class ActionGetAllModuleStructure extends BaseAction {
 	}
 
 	/**
-	 * 获取指定实体对应的表名信息
+	 * 지정 엔티티에 대응하는 테이블 이름 정보 조회
 	 * 
 	 * @param containerEntity
 	 * @return
@@ -96,7 +96,7 @@ class ActionGetAllModuleStructure extends BaseAction {
 				woTable.setTableName(result.toString());
 			}
 		} catch (ClassNotFoundException | NoSuchMethodException e) {
-			logger.info("无法解析实体类" + containerEntity + ",请检查类依赖情况。");
+			logger.info("엔티티 클래스를 해석할 수 없습니다" + containerEntity + ", 클래스 의존성을 확인하십시오.");
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
@@ -107,10 +107,10 @@ class ActionGetAllModuleStructure extends BaseAction {
 
 	public static class Wo {
 
-		@FieldDescribe("应用模块名称")
+		@FieldDescribe("앱 모듈 이름")
 		private String moduleName;
 
-		@FieldDescribe("数据库表信息")
+		@FieldDescribe("데이터베이스 테이블 정보")
 		private List<WoTable> tables;
 
 		public String getModuleName() {
@@ -132,10 +132,10 @@ class ActionGetAllModuleStructure extends BaseAction {
 
 	public static class WoTable {
 
-		@FieldDescribe("数据库表名")
+		@FieldDescribe("데이터베이스 테이블 이름")
 		private String tableName;
 
-		@FieldDescribe("实体类名")
+		@FieldDescribe("엔티티 클래스 이름")
 		private String entityName;
 
 		public String getEntityName() {

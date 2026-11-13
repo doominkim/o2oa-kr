@@ -161,7 +161,7 @@ public class JarTools {
 			for (File o : source.listFiles()) {
 				write(o, "", jos);
 			}
-			/* 这样可以避免flush,会导致少最后的2K数据 */
+			/* 이렇게 하면 flush로 인해 마지막 2K 데이터가 누락되는 것을 방지 */
 			jos.close();
 			return baos.toByteArray();
 		} catch (Exception e) {
@@ -213,7 +213,7 @@ public class JarTools {
 			for (File o : files) {
 				write(o, "", jos);
 			}
-			/* 这样可以避免flush,会导致少最后的2K数据 */
+			/* 이렇게 하면 flush로 인해 마지막 2K 데이터가 누락되는 것을 방지 */
 			jos.close();
 			return baos.toByteArray();
 		} catch (Exception e) {
@@ -229,7 +229,7 @@ public class JarTools {
 			for (File o : files) {
 				write(o, "", jos);
 			}
-			/* 这样可以避免flush,会导致少最后的2K数据 */
+			/* 이렇게 하면 flush로 인해 마지막 2K 데이터가 누락되는 것을 방지 */
 			jos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -246,7 +246,7 @@ public class JarTools {
 			} else {
 				try (FileInputStream fis = new FileInputStream(file)) {
 					String name = parentPath + file.getName();
-					/* 必须，否则打出来的包无法部署在Tomcat上 */
+					/* 필수, 그렇지 않으면 빌드한 패키지를 Tomcat에 배포할 수 없음 */
 					name = StringUtils.replace(name, "\\", "/");
 					JarEntry entry = new JarEntry(name);
 					entry.setMethod(JarEntry.DEFLATED);

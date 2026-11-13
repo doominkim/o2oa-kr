@@ -12,6 +12,6 @@ public class ExceptionAllocateStorageMapping extends LanguagePromptException {
     private static final long serialVersionUID = -2318434030336784474L;
 
     ExceptionAllocateStorageMapping() {
-        super("无法分派存储器");
+        super("스토리지를 할당할 수 없습니다");
     }
 }

@@ -21,12 +21,12 @@ public class PdfRegularInvoiceTools {
     private PdfRegularInvoiceTools(){}
 
     /**
-     * 带密码区发票解析
-     * @param allText 发票内容
-     * @param pageWidth 发票页宽
-     * @param doc 发票pdf文档
-     * @param firstPage 发票第一页
-     * @param invoice 发票对象
+     * 암호 영역이 있는 세금계산서 파싱
+     * @param allText 세금계산서 내용
+     * @param pageWidth 세금계산서 페이지 너비
+     * @param doc 세금계산서 pdf 문서
+     * @param firstPage 세금계산서 첫 페이지
+     * @param invoice 세금계산서 객체
      */
     public static void getRegularInvoice(String allText, int pageWidth, PDDocument doc,
             PDPage firstPage, Invoice invoice) throws IOException {

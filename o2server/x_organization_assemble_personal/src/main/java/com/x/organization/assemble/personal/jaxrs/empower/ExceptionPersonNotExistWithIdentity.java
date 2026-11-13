@@ -7,7 +7,7 @@ class ExceptionPersonNotExistWithIdentity extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionPersonNotExistWithIdentity(String identity) {
-		super("无法定位 {} 的人员.", identity);
+		super("{}의 사용자를 찾을 수 없습니다.", identity);
 	}
 
 }

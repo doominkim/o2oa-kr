@@ -33,17 +33,17 @@ public class ActionStatisticWithFilter extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             StatisticWi wi = this.convertToWrapIn(jsonElement, StatisticWi.class);
             if (StringUtils.isEmpty(wi.getFilter()) && (wi.getFilterList() == null || wi.getFilterList().isEmpty())) {
-                throw new ExceptionEmptyParameter("过滤人员或组织");
+                throw new ExceptionEmptyParameter("필터 인원 또는 조직");
             }
             if (StringUtils.isEmpty(wi.getStartDate())) {
-                throw new ExceptionEmptyParameter("开始日期");
+                throw new ExceptionEmptyParameter("시작 날짜");
             }
             if (StringUtils.isEmpty(wi.getEndDate())) {
-                throw new ExceptionEmptyParameter("结束日期");
+                throw new ExceptionEmptyParameter("종료 날짜");
             }
 
-            Date startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 检查格式
-            Date endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 检查格式
+            Date startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 형식 검사
+            Date endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 형식 검사
             if (startDate.after(endDate)) {
                 throw new ExceptionDateEndBeforeStartError();
             }
@@ -58,9 +58,9 @@ public class ActionStatisticWithFilter extends BaseAction {
             }
             
             if (userList.isEmpty()) {
-                throw new ExceptionWithMessage("当前查询条件没有找到人员信息！");
+                throw new ExceptionWithMessage("현재 조회 조건으로 인원 정보를 찾을 수 없습니다!");
             }
-            // 根据人员循环查询 并统计数据
+            // 사용자별로 반복 조회해 데이터 통계
             List<StatisticWo> wos = new ArrayList<>();
             statisticDetail(wi, userList, business, wos);
             result.setData(wos);

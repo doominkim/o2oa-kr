@@ -9,13 +9,13 @@ public class RouteProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -7792270726211126577L;
 
-	@FieldDescribe("是否启用异步返回.默认为false")
+	@FieldDescribe("비동기 반환 사용 여부. 기본값 false")
 	private Boolean asyncSupported = false;
 
-	@FieldDescribe("选择优先路由时是否直接执行路由(一票否决),默认null.")
+	@FieldDescribe("우선 경로 선택 시 경로 직접 실행 여부(일표 부결), 기본값 null.")
 	private Boolean soleDirect;
 
-	@FieldDescribe("默认选中的路由.")
+	@FieldDescribe("기본 선택 경로.")
 	private Boolean defaultSelected;
 
 	public Boolean getAsyncSupported() {

@@ -68,9 +68,9 @@ public class ManualProcessor extends AbstractManualProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Manual manual) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.manualArrive(aeiObjects.getWork().getActivityToken(), manual));
-		// 根据manual计算出来的活动处理人
+		// manual로 계산된 활동 처리자
 		ManualTaskIdentityMatrix manualTaskIdentityMatrix = aeiObjects.getWork().getManualTaskIdentityMatrix();
 		if ((null != manualTaskIdentityMatrix) && (!manualTaskIdentityMatrix.isEmpty())) {
 			return arrivingMatrix(aeiObjects, manual);
@@ -79,7 +79,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 		if ((null == tickets) || tickets.isEmpty()) {
 			tickets = calculateTaskDistinguishedName(aeiObjects, manual);
 		}
-		// 启用同类工作相同活动节点合并,如果有合并的工作,那么直接返回这个工作.
+		// 같은 종류 업무 문서의 동일 활동 노드 병합 사용, 병합된 업무 문서가 있으면 그 업무 문서를 바로 반환.
 		// Optional<Work> mergeWork = this.arrivingMergeSameJob(aeiObjects, manual,
 		// manualTaskIdentityMatrix);
 		Optional<Work> mergeWork = this.arrivingMergeSameJob(aeiObjects, manual, tickets);
@@ -95,7 +95,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 
 	protected Work arrivingMatrix(AeiObjects aeiObjects, Manual manual) throws Exception {
 		ManualTaskIdentityMatrix manualTaskIdentityMatrix = aeiObjects.getWork().getManualTaskIdentityMatrix();
-		// 启用同类工作相同活动节点合并,如果有合并的工作,那么直接返回这个工作.
+		// 같은 종류 업무 문서의 동일 활동 노드 병합 사용, 병합된 업무 문서가 있으면 그 업무 문서를 바로 반환.
 		Optional<Work> mergeWork = this.arrivingMergeSameJob(aeiObjects, manual, manualTaskIdentityMatrix);
 		if (mergeWork.isPresent()) {
 			return mergeWork.get();
@@ -182,13 +182,13 @@ public class ManualProcessor extends AbstractManualProcessor {
 
 	@Deprecated(since = "8.2", forRemoval = true)
 	private void arrivingPassSame(AeiObjects aeiObjects, ManualTaskIdentityMatrix matrix) throws Exception {
-		// 查找是否有passSameTarget设置
+		// passSameTarget 설정 여부 조회
 		if (BooleanUtils.isTrue(aeiObjects.getProcessingAttributes().ifForceJoinAtArrive())) {
 			return;
 		}
 		Optional<Route> route = aeiObjects.getRoutes().stream().filter(o -> BooleanUtils.isTrue(o.getPassSameTarget()))
 				.findFirst();
-		// 如果有passSameTarget,有到达ArriveWorkLog,不是调度到这个节点的
+		// passSameTarget이 있고, 도착 ArriveWorkLog가 있으며, 스케줄링으로 이 노드에 온 것이 아닌 경우
 		if (route.isPresent() && (null != aeiObjects.getArriveWorkLog(aeiObjects.getWork()))) {
 			Optional<WorkLog> optional = findPassSameTargetWorkLog(aeiObjects);
 			if (optional.isEmpty()) {
@@ -215,13 +215,13 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	private void arrivingPassSame(AeiObjects aeiObjects, Tickets tickets) throws Exception {
-		// 查找是否有passSameTarget设置
+		// passSameTarget 설정 여부 조회
 		if (BooleanUtils.isTrue(aeiObjects.getProcessingAttributes().ifForceJoinAtArrive())) {
 			return;
 		}
 		Optional<Route> route = aeiObjects.getRoutes().stream().filter(o -> BooleanUtils.isTrue(o.getPassSameTarget()))
 				.findFirst();
-		// 如果有passSameTarget,有到达ArriveWorkLog,不是调度到这个节点的
+		// passSameTarget이 있고, 도착 ArriveWorkLog가 있으며, 스케줄링으로 이 노드에 온 것이 아닌 경우
 		if (route.isPresent() && (null != aeiObjects.getArriveWorkLog(aeiObjects.getWork()))) {
 			Optional<WorkLog> optional = findPassSameTargetWorkLog(aeiObjects);
 			if (optional.isEmpty()) {
@@ -267,9 +267,9 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 计算处理人
+	 * 처리자 계산
 	 * 
-	 * @TODO 后续 要去掉 TaskIdentities 对象
+	 * @TODO 추후 TaskIdentities 객체 제거 예정
 	 * @param aeiObjects
 	 * @param manual
 	 * @return
@@ -277,7 +277,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	 */
 	private Tickets calculateTaskDistinguishedName(AeiObjects aeiObjects, Manual manual) throws Exception {
 		Tickets tickets = new Tickets();
-		// 计算退回的结果
+		// 반려 결과 계산
 		Route route = aeiObjects.business().element().get(aeiObjects.getWork().getDestinationRoute(), Route.class);
 		if ((null != route) && (StringUtils.equals(route.getType(), Route.TYPE_BACK))) {
 			tickets = calculateRouteTypeBackDistinguishedName(aeiObjects, manual);
@@ -291,10 +291,10 @@ public class ManualProcessor extends AbstractManualProcessor {
 		return tickets;
 	}
 
-	// 计算处理人
+	// 처리자 계산
 	private List<String> calculateTaskIdentities(AeiObjects aeiObjects, Manual manual) throws Exception {
 		TaskIdentities taskIdentities = new TaskIdentities();
-		// 先计算强制处理人
+		// 강제 처리자 우선 계산
 //		if (!aeiObjects.getWork().getProperties().getManualForceTaskIdentityList().isEmpty()) {
 //			List<String> identities = new ArrayList<>();
 //			identities.addAll(aeiObjects.getWork().getProperties().getManualForceTaskIdentityList());
@@ -303,7 +303,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 //				taskIdentities.addIdentities(identities);
 //			}
 //		}
-		// 计算退回的结果
+		// 반려 결과 계산
 		if (taskIdentities.isEmpty()) {
 			Route route = aeiObjects.business().element().get(aeiObjects.getWork().getDestinationRoute(), Route.class);
 			if ((null != route) && (StringUtils.equals(route.getType(), Route.TYPE_BACK))) {
@@ -313,7 +313,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 		if (taskIdentities.isEmpty()) {
 			taskIdentities = TranslateTaskIdentityTools.translate(aeiObjects, manual);
 			this.ifTaskIdentitiesEmptyForceToCreatorOrMaintenance(aeiObjects, manual, taskIdentities);
-			// 处理授权
+			// 위임 처리
 		}
 		this.writeToEmpowerMap(aeiObjects, taskIdentities);
 		return taskIdentities.identities();
@@ -388,7 +388,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 如果没能计算到活动处理人,先判断人员活动是否有设置人员,如果有那么先返回工作创建者,再按照流程维护人,应用维护人,工作创建者,平台维护人顺序查找处理人
+	 * 활동 처리자를 계산하지 못하면 먼저 사용자 활동에 사용자가 설정되어 있는지 판단, 있으면 업무 문서 작성자를 먼저 반환하고, 이후 프로세스 관리자, 앱 관리자, 업무 문서 작성자, 플랫폼 관리자 순으로 처리자 조회
 	 * 
 	 * @param aeiObjects
 	 * @param manual
@@ -426,7 +426,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 如果没能计算到活动处理人,先判断人员活动是否有设置人员,如果有那么先返回工作创建者,再按照流程维护人,应用维护人,工作创建者,平台维护人顺序查找处理人
+	 * 활동 처리자를 계산하지 못하면 먼저 사용자 활동에 사용자가 설정되어 있는지 판단, 있으면 업무 문서 작성자를 먼저 반환하고, 이후 프로세스 관리자, 앱 관리자, 업무 문서 작성자, 플랫폼 관리자 순으로 처리자 조회
 	 * 
 	 * @param aeiObjects
 	 * @param manual
@@ -467,17 +467,17 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 判读是否在活动中制定了处理人,这里没有对脚本的注解和空行进行判断
+	 * 활동에 처리자가 지정되었는지 판단, 여기서는 스크립트의 주석과 빈 줄을 판단하지 않음
 	 * 
 	 * @param manual
 	 * @return
 	 */
 	private boolean ifManualAssignTaskIdentity(Manual manual) {
-		/* 指定了的身份 */
+		/* 지정된 신분 */
 		if (ListTools.isNotEmpty(manual.getTaskIdentityList())) {
 			return true;
 		}
-		/* 指定了流程参与者 */
+		/* 지정된 프로세스 참여자 */
 		if ((null != manual.getTaskParticipant()) && (StringUtils.equalsAnyIgnoreCase(
 				manual.getTaskParticipant().getType(), ManualProperties.Participant.TYPE_CREATOR,
 				ManualProperties.Participant.TYPE_MAINTENANCE)
@@ -487,32 +487,32 @@ public class ManualProcessor extends AbstractManualProcessor {
 						&& (!manual.getTaskParticipant().getData().getAsJsonArray().isEmpty())))) {
 			return true;
 		}
-		/* 选择了职务 */
+		/* 직무 선택 */
 		if (StringUtils.isNotBlank(manual.getTaskDuty())) {
 			return true;
 		}
-		/* 指定data数据路径值 */
+		/* data 데이터 경로 값 지정 */
 		if (ListTools.isNotEmpty(manual.getTaskDataPathList())) {
 			return true;
 		}
-		/* 使用脚本计算 */
+		/* 스크립트로 계산 */
 		if (StringUtils.isNotEmpty(manual.getTaskScript())) {
 			return true;
 		} else if (StringTools.ifScriptHasEffectiveCode(manual.getTaskScriptText())) {
 			return true;
 		}
-		/* 指定处理组织 */
+		/* 처리 조직 지정 */
 		if (ListTools.isNotEmpty(manual.getTaskUnitList())) {
 			return true;
 		}
-		/* 指定处理群组 */
+		/* 처리 그룹 지정 */
 		return (ListTools.isNotEmpty(manual.getTaskGroupList()));
 	}
 
 	private void writeToEmpowerMap(AeiObjects aeiObjects, TaskIdentities taskIdentities) throws Exception {
-		// 先清空EmpowerMap
+		// EmpowerMap 먼저 비우기
 		aeiObjects.getWork().setManualEmpowerMap(new LinkedHashMap<>());
-		// 更新授权,通过surface创建且workThroughManual=false 代表是草稿,那么不需要授权.
+		// 위임 업데이트, surface로 생성되고 workThroughManual=false이면 초안이므로 위임 불필요.
 		if (!(StringUtils.equals(aeiObjects.getWork().getWorkCreateType(), Work.WORKCREATETYPE_SURFACE)
 				&& BooleanUtils.isFalse(aeiObjects.getWork().getWorkThroughManual()))) {
 			List<String> values = taskIdentities.identities();
@@ -541,7 +541,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 		list.addAll(tree.parents(workLog));
 		LOGGER.debug("pass same target rollback parents:{}.", list::toString);
 		for (WorkLog o : list) {
-			// choice, agent, invoke, service, delay, embed, split, parallel 继续向上查找manual
+			// choice, agent, invoke, service, delay, embed, split, parallel은 계속 상위로 manual 조회
 			ActivityType activityType = o.getFromActivityType();
 			if (Objects.equals(ActivityType.begin, activityType) || Objects.equals(ActivityType.cancel, activityType)
 					|| Objects.equals(ActivityType.end, activityType)
@@ -569,7 +569,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 		if ((null == tickets) || tickets.isEmpty()) {
 			tickets = calculateTaskDistinguishedName(aeiObjects, manual);
 		}
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.manualExecute(aeiObjects.getWork().getActivityToken(), manual,
 						Objects.toString(manual.getManualMode(), ""),
@@ -577,7 +577,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 		// aeiObjects.empower();
 		List<Work> results = new ArrayList<>();
 		// checkValidTickets(aeiObjects, tickets);
-		// 由于退回存在空名称的路由
+		// 반려로 인해 이름이 빈 라우팅이 존재함
 		List<TaskCompleted> taskCompleteds = aeiObjects
 				.getJoinInquireTaskCompletedsWithActivityToken(aeiObjects.getWork().getActivityToken());
 		executingCompletedIdentityInTaskCompleteds(aeiObjects, manual, tickets, taskCompleteds);
@@ -590,14 +590,14 @@ public class ManualProcessor extends AbstractManualProcessor {
 			uncompletedTicketToRead(aeiObjects, manual, tickets);
 		} else {
 			if (tickets.bubble().isEmpty()) {
-				// 在添加分支的情况下需要在这里重新计算
+				// 분기를 추가한 경우 여기서 다시 계산 필요
 				tickets = calculateTaskDistinguishedName(aeiObjects, manual);
 			}
 			if (tickets.bubble().isEmpty()) {
 				throw new ExceptionEmptyTicket(aeiObjects.getWork().getTitle(), aeiObjects.getWork().getId(),
 						aeiObjects.getWork().getActivity(), aeiObjects.getWork().getActivityName());
 			}
-			// 计算优先路由
+			// 우선 라우팅 계산
 			if (soleDirect(aeiObjects, taskCompleteds)) {
 				tickets.list(null, null, null).stream().forEach(o -> o.enable(false));
 				List<Task> tasks = aeiObjects.getTasks().stream().filter(t -> StringUtils
@@ -608,21 +608,21 @@ public class ManualProcessor extends AbstractManualProcessor {
 			} else {
 				task(aeiObjects, manual, tickets);
 			}
-			// 可能在处理过程中删除了所有的待办,比如有优先路由
+			// 처리 중 모든 결재 대기가 삭제되었을 수 있음, 예: 우선 라우팅이 있는 경우
 			if (tickets.bubble().isEmpty()) {
 				results.add(aeiObjects.getWork());
 			}
 		}
 		aeiObjects.getWork().setTickets(tickets);
 		if (!results.isEmpty()) {
-			// work将要离开,将tickets记录到workLog
+			// work가 곧 떠나므로 tickets를 workLog에 기록
 			addTicketsToWorkLog(aeiObjects, tickets);
 		}
 		return results;
 	}
 
 	/**
-	 * 将tickets记录到workLog
+	 * tickets를 workLog에 기록
 	 * 
 	 * @param aeiObjects
 	 * @param tickets
@@ -653,11 +653,11 @@ public class ManualProcessor extends AbstractManualProcessor {
 		ManualTaskIdentityMatrix matrix = aeiObjects.getWork().getManualTaskIdentityMatrix();
 //		List<TaskCompleted> taskCompleteds = aeiObjects.getJoinInquireTaskCompletedsRouteNameAvailableWithActivityToken(
 //				aeiObjects.getWork().getActivityToken());
-		// 由于退回存在空名称的路由
+		// 반려로 인해 이름이 빈 라우팅이 존재함
 		List<TaskCompleted> taskCompleteds = aeiObjects
 				.getJoinInquireTaskCompletedsWithActivityToken(aeiObjects.getWork().getActivityToken());
 		executingCompletedIdentityInTaskCompleteds(aeiObjects, manual, matrix, taskCompleteds);
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.manualExecute(aeiObjects.getWork().getActivityToken(), manual,
 				Objects.toString(manual.getManualMode(), ""), matrix.flat()));
 		if (matrix.isEmpty() && (!taskCompleteds.isEmpty())) {
@@ -670,7 +670,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 			// aeiObjects.business().organization().identity().listObject(null)
 		} else {
 			if (matrix.isEmpty()) {
-				// 在添加分支的情况下需要在这里重新计算matrix
+				// 분기를 추가한 경우 여기서 matrix 재계산 필요
 				matrix = manual.identitiesToManualTaskIdentityMatrix(calculateTaskIdentities(aeiObjects, manual));
 			}
 			switch (manual.getManualMode()) {
@@ -685,7 +685,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 			default:
 				this.single(aeiObjects, manual, matrix, taskCompleteds);
 			}
-			// 可能在处理过程中删除了所有的待办,比如有优先路由
+			// 처리 중 모든 결재 대기가 삭제되었을 수 있음, 예: 우선 라우팅이 있는 경우
 			if (matrix.isEmpty()) {
 				results.add(aeiObjects.getWork());
 			}
@@ -695,7 +695,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 将已办人员从办理身份矩阵中剔除,如果选择了'同一处理人不同身份待办合并处理一次',按人员再剔除一遍
+	 * 처리 완료 사용자를 처리 신분 매트릭스에서 제외, '동일 처리자의 다른 신분 결재 대기를 한 번에 합쳐 처리'를 선택한 경우 사용자 기준으로 한 번 더 제외
 	 * 
 	 * @param aeiObjects
 	 * @param manual
@@ -708,7 +708,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 		if (!matrix.isEmpty()) {
 			List<String> identities = matrix.flat();
 			taskCompleteds.stream().forEach(o -> identities.removeAll(matrix.completed(o.getIdentity())));
-			// 如果选择了'同一处理人不同身份待办合并处理一次',按人员再剔除一遍
+			// '동일 처리자의 다른 신분 결재 대기를 한 번에 합쳐 처리'를 선택한 경우 사용자 기준으로 한 번 더 제외
 			if (BooleanUtils.isNotFalse(manual.getProcessingTaskOnceUnderSamePerson()) && (!identities.isEmpty())) {
 				List<String> people = ListTools.extractProperty(taskCompleteds, TaskCompleted.person_FIELDNAME,
 						String.class, true, true);
@@ -723,7 +723,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 
 	private void executingCompletedIdentityInTaskCompleteds(AeiObjects aeiObjects, Manual manual, Tickets tickets,
 			List<TaskCompleted> taskCompleteds) {
-		// 如果选择了'同一处理人不同身份待办合并处理一次',按人员再剔除一遍
+		// '동일 처리자의 다른 신분 결재 대기를 한 번에 합쳐 처리'를 선택한 경우 사용자 기준으로 한 번 더 제외
 		Map<String, List<Ticket>> personTicketMap = tickets.bubble().stream().map(o -> {
 			String person = "";
 			try {
@@ -734,7 +734,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 			return Pair.<String, Ticket>of(person, o);
 		}).collect(Collectors.groupingBy(Pair::first)).entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,
 				o -> o.getValue().stream().map(Pair::second).collect(Collectors.toList())));
-		// 标识人员不存在的待办为valid =false
+		// 사용자가 없는 결재 대기를 valid =false로 표시
 		personTicketMap.entrySet().stream().filter(o -> StringUtils.isBlank(o.getKey()))
 				.forEach(o -> o.getValue().forEach(t -> t.valid(false)));
 		if (BooleanUtils.isNotFalse(manual.getProcessingTaskOnceUnderSamePerson())) {
@@ -773,14 +773,14 @@ public class ManualProcessor extends AbstractManualProcessor {
 
 	@Override
 	protected void executingCommitted(AeiObjects aeiObjects, Manual manual, List<Work> works) throws Exception {
-		// Manual Work 还没有处理完 发生了停留,出发了停留事件
+		// Manual Work 처리가 아직 끝나지 않아 체류 발생, 체류 이벤트 트리거
 		if ((ListTools.isEmpty(works)) && (!aeiObjects.getCreateTasks().isEmpty())) {
 			boolean hasManualStayScript = this.hasManualStayScript(manual);
 			boolean processHasManualStayScript = this.hasManualStayScript(aeiObjects.getProcess());
 			if (hasManualStayScript || processHasManualStayScript) {
 				GraalvmScriptingFactory.Bindings bindings = aeiObjects.bindings();
 				WorkContext workContext = (WorkContext) bindings.get(GraalvmScriptingFactory.BINDING_NAME_WORKCONTEXT);
-				// 只有一条待办绑定到task
+				// 결재 대기가 하나뿐이면 task에 바인딩
 				if (aeiObjects.getCreateTasks().size() == 1) {
 					workContext.bindTask(aeiObjects.getCreateTasks().get(0));
 				}
@@ -794,7 +794,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 							.eval(aeiObjects.business().element().getCompiledScript(aeiObjects.getApplication().getId(),
 									aeiObjects.getActivity(), Business.EVENT_MANUALSTAY), bindings);
 				}
-				// 解除绑定
+				// 바인딩 해제
 				workContext.bindTask(null);
 			}
 		}
@@ -802,44 +802,44 @@ public class ManualProcessor extends AbstractManualProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Manual manual) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.manualInquire(aeiObjects.getWork().getActivityToken(), manual));
 		List<Route> results = new ArrayList<>();
-		// 执行回退路由
+		// 반려 라우팅 실행
 		Optional<Route> optional = inquiringFromGoBackStore(aeiObjects);
 		if (optional.isPresent()) {
 			markJumpAtWorkLog(aeiObjects, aeiObjects.getWork().getGoBackStore());
-			// 设置处理人
+			// 처리자 설정
 			aeiObjects.getWork().setTickets(aeiObjects.getWork().getGoBackStore().getTickets());
-			// 清理掉goBackStore
+			// goBackStore 정리
 			aeiObjects.getWork().setGoBackStore(null);
-			// 清理掉退回到的activityToken标志
+			// 반려 대상 activityToken 표시 정리
 			aeiObjects.getWork().setGoBackActivityToken(null);
 			return optional;
 		}
 //		ManualTaskIdentityMatrix matrix = aeiObjects.getWork().getManualTaskIdentityMatrix();
 //		Tickets tickets = aeiObjects.getWork().getTickets();
-		// 执行强制路由
+		// 강제 라우팅 실행
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
 				&& BooleanUtils.isTrue(aeiObjects.getWork().getForceRouteEnable())) {
-// 8.2版本以前没有使用destinationActivity作为强制路由,如果这里不单独判断,老版本的数据会原地转圈,在同一环节再次进入,重新生成activityToken,现象就是所有待办会重新生成.
+// 8.2 이전 버전은 destinationActivity를 강제 라우팅으로 사용하지 않았음, 여기서 별도로 판단하지 않으면 구버전 데이터가 제자리에서 맴돌며 같은 단계에 다시 진입해 activityToken을 재생성하고, 그 결과 모든 결재 대기가 재생성됨.
 			Activity activity = aeiObjects.business().element()
 					.getActivity(aeiObjects.getWork().getDestinationActivity());
 			if (null != activity) {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				results.add(route);
 				return Optional.of(route);
 			}
 		}
-//		// workTrigger触发可能导致当前没有任何待办
+//		// workTrigger 트리거로 현재 결재 대기가 하나도 없을 수 있음
 //		if (aeiObjects.getTaskCompleteds().stream()
 //				.filter(o -> StringUtils.equalsIgnoreCase(aeiObjects.getWork().getActivityToken(),
 //						o.getActivityToken()))
@@ -847,26 +847,26 @@ public class ManualProcessor extends AbstractManualProcessor {
 //				&& ((null == matrix || matrix.isEmpty()) && (null == tickets || tickets.bubble().isEmpty()))) {
 //			return Optional.empty();
 //		}
-		// 执行正常路由
+		// 정상 라우팅 실행
 		if (aeiObjects.getRoutes().size() == 1) {
-			// 仅有单条路由
+			// 라우팅이 하나뿐
 			results.add(aeiObjects.getRoutes().get(0));
 		} else if (aeiObjects.getRoutes().size() > 1) {
-			// 存在多条路由
+			// 라우팅이 여러 개 존재
 			optional = inquiringFromTaskCompleted(aeiObjects, manual, results);
 			if (optional.isPresent()) {
 				results.add(optional.get());
 			} else {
-				// 无法找到合适的路由那么默认选择走第一条
+				// 적합한 라우팅을 찾지 못하면 기본으로 첫 번째 선택
 				results.add(aeiObjects.getRoutes().get(0));
 			}
 		}
 		if (!results.isEmpty()) {
-			// 清理掉指定的处理人
+			// 지정된 처리자 정리
 			aeiObjects.getWork().setTickets(new Tickets());
-			// 清理掉goBackStore
+			// goBackStore 정리
 			aeiObjects.getWork().setGoBackStore(null);
-			// 清理掉退回到的activityToken标志
+			// 반려 대상 activityToken 표시 정리
 			aeiObjects.getWork().setGoBackActivityToken(null);
 		}
 		return results.stream().findFirst();
@@ -896,7 +896,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 如果work中有goBackStore那么从goBackStore中创建一个临时路由作为返回值
+	 * work에 goBackStore가 있으면 goBackStore에서 임시 라우팅을 생성해 반환값으로 사용
 	 * 
 	 * @param aeiObjects
 	 * @throws Exception
@@ -916,15 +916,15 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 判断的逻辑如下:
-	 * 1.是否有用户选择了"直接返回优先路由(soleDirect)",同时判断该值是否在路由列表中(可能修改路由名称),如果有就直接返回该值.
-	 * 2.是否有用户选择了"优先路由(sole)",同时判断该值是否在路由列表中(可能修改路由名称),如果有就直接返回该值.
-	 * 3.如果没有soleDirect或者sole被选择,那么根据活动类型进行判断,如果是并行活动(parallel)那么选择最多的路由决策,如果有多个路由决策同样数量,那么选择时间上最晚的那组,如果是single(单人),queue(串行),grab(抢办)那么最后的路由决策作为返回值(需要判断是否在路由列表中).
+	 * 판단 로직은 다음과 같음:
+	 * 1. 사용자가 "우선 라우팅 바로 반환(soleDirect)"을 선택했는지 확인하고, 그 값이 라우팅 목록에 있는지도 판단(라우팅 이름이 수정되었을 수 있음), 있으면 그 값을 바로 반환.
+	 * 2. 사용자가 "우선 라우팅(sole)"을 선택했는지 확인하고, 그 값이 라우팅 목록에 있는지도 판단(라우팅 이름이 수정되었을 수 있음), 있으면 그 값을 바로 반환.
+	 * 3. soleDirect나 sole이 선택되지 않았으면 활동 유형으로 판단, 병렬 활동(parallel)이면 가장 많이 선택된 라우팅 결정을 선택하고, 같은 수의 라우팅 결정이 여러 개면 시간상 가장 늦은 그룹을 선택, single(단일), queue(순차), grab(선점)이면 마지막 라우팅 결정을 반환값으로 함(라우팅 목록에 있는지 판단 필요).
 	 * 
-	 * @param taskCompleteds 按创建时间正序排列好的已办
-	 * @param manual         人工活动节点
-	 * @param routes         离开活动节点的路由列表
-	 * @return 路由名称
+	 * @param taskCompleteds 생성 시간 오름차순으로 정렬된 처리 완료
+	 * @param manual         수동 활동 노드
+	 * @param routes         활동 노드를 떠나는 라우팅 목록
+	 * @return 라우팅 이름
 	 * @throws Exception
 	 */
 	private String choiceRouteName(List<TaskCompleted> taskCompleteds, List<Route> routes, Manual manual)
@@ -943,7 +943,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 判断是否有选择了直接返回优先路由的路由决策被选择,如果有就直接返回该路由名称,这里的遍历顺序需要保持正序,先选择先执行.
+	 * 우선 라우팅 바로 반환을 선택한 라우팅 결정이 있는지 판단, 있으면 그 라우팅 이름을 바로 반환, 여기서 순회 순서는 오름차순을 유지해야 하며 먼저 선택한 것을 먼저 실행.
 	 * 
 	 * @param list
 	 * @param routes
@@ -955,7 +955,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 判断是否有选择了优先路由的路由决策被选择,如果有就直接返回该路由名称,这里的遍历顺序需要保持正序,先选择先执行.
+	 * 우선 라우팅을 선택한 라우팅 결정이 있는지 판단, 있으면 그 라우팅 이름을 바로 반환, 여기서 순회 순서는 오름차순을 유지해야 하며 먼저 선택한 것을 먼저 실행.
 	 * 
 	 * @param list
 	 * @param routes
@@ -975,7 +975,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 已办中获取数量最多的路由决策,如果有组路由决策数量一样多,那么选择时间上最后被选择的路由决策,获取后需要进行判断是否在routes列表中
+	 * 처리 완료 중 가장 많은 라우팅 결정 조회, 같은 수의 라우팅 결정 그룹이 있으면 시간상 마지막에 선택된 라우팅 결정을 선택, 조회 후 routes 목록에 있는지 판단 필요
 	 * 
 	 * @param list
 	 * @param routes
@@ -1003,7 +1003,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	@Deprecated(since = "8.2", forRemoval = true)
 	private void single(AeiObjects aeiObjects, Manual manual, ManualTaskIdentityMatrix matrix,
 			List<TaskCompleted> taskCompleteds) throws Exception {
-		// 是否有优先路由
+		// 우선 라우팅 여부
 		if (soleDirect(aeiObjects, taskCompleteds)) {
 			matrix.clear();
 			List<Task> tasks = aeiObjects.getTasks().stream().filter(
@@ -1019,7 +1019,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	@Deprecated
 	private void single(AeiObjects aeiObjects, Manual manual, Tickets tickets, List<TaskCompleted> taskCompleteds)
 			throws Exception {
-		// 是否有优先路由
+		// 우선 라우팅 여부
 		if (soleDirect(aeiObjects, taskCompleteds)) {
 			tickets.bubble().stream().forEach(o -> o.enable(false));
 			List<Task> tasks = aeiObjects.getTasks().stream().filter(
@@ -1035,7 +1035,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	@Deprecated(since = "8.2", forRemoval = true)
 	private void parallel(AeiObjects aeiObjects, Manual manual, ManualTaskIdentityMatrix matrix,
 			List<TaskCompleted> taskCompleteds) throws Exception {
-		// 是否有优先路由
+		// 우선 라우팅 여부
 		if (soleDirect(aeiObjects, taskCompleteds)) {
 			matrix.clear();
 			List<Task> tasks = aeiObjects.getTasks().stream().filter(
@@ -1051,7 +1051,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	@Deprecated
 	private void parallel(AeiObjects aeiObjects, Manual manual, Tickets tickets, List<TaskCompleted> taskCompleteds)
 			throws Exception {
-		// 是否有优先路由
+		// 우선 라우팅 여부
 		if (soleDirect(aeiObjects, taskCompleteds)) {
 			tickets.bubble().stream().forEach(o -> o.enable(false));
 			List<Task> tasks = aeiObjects.getTasks().stream().filter(
@@ -1095,7 +1095,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 	}
 
 	/**
-	 * 存在优先路由,如果有人选择了优先路由那么直接流转.需要判断是否启用了soleDirect,允许存在多个优先路由
+	 * 우선 라우팅 존재, 누군가 우선 라우팅을 선택했으면 바로 진행. soleDirect 사용 여부 판단 필요, 우선 라우팅 여러 개 허용
 	 * 
 	 * @param aeiObjects
 	 * @param taskCompleteds
@@ -1122,12 +1122,12 @@ public class ManualProcessor extends AbstractManualProcessor {
 		aeiObjects.getTasks().stream().filter(t -> StringUtils.equalsIgnoreCase(t.getActivityToken(), activityToken))
 				.forEach(t -> {
 					if (!identities.contains(t.getIdentity())) {
-						// 不在处理身份中
+						// 처리 신분에 없음
 						LOGGER.warn("delete a task whose identity does not match, id:{}, identity:{}.", t::getId,
 								t::getIdentity);
 						aeiObjects.deleteTask(t);
 					} else if (!SetUtils.isEqualSet(routeNameSet, new HashSet<>(t.getRouteNameList()))) {
-						// 路由名称发生变化.
+						// 라우팅 이름 변경됨.
 						LOGGER.warn(
 								"update a task whose route name does not match, id:{}, route name:{}, expected route name:{}.",
 								t::getId, () -> StringUtils.join(t.getRouteNameList()),
@@ -1146,7 +1146,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 			try {
 				Task task = Tasks.createTask(aeiObjects, manual, o);
 				aeiObjects.createTask(task);
-				// 将用户可能已经存在的同一环节已办全部标记为不参与流转
+				// 사용자에게 이미 존재할 수 있는 같은 단계의 처리 완료를 모두 진행 미참여로 표시
 				aeiObjects.getJoinInquireTaskCompletedsWithActivityToken(task.getActivityToken()).stream()
 						.filter(p -> StringUtils.equalsIgnoreCase(p.getPerson(), task.getPerson())).forEach(tc -> {
 							tc.setJoinInquire(false);
@@ -1166,12 +1166,12 @@ public class ManualProcessor extends AbstractManualProcessor {
 		aeiObjects.getTasks().stream().filter(t -> StringUtils.equalsIgnoreCase(t.getActivityToken(), activityToken))
 				.forEach(t -> {
 					if (!labels.contains(t.getLabel())) {
-						// 不在处理身份中
+						// 처리 신분에 없음
 						LOGGER.warn("delete a task whose identity does not match, id:{}, distinguishedName:{}.",
 								t::getId, t::getDistinguishedName);
 						aeiObjects.deleteTask(t);
 					} else if (!SetUtils.isEqualSet(routeNameSet, new HashSet<>(t.getRouteNameList()))) {
-						// 路由名称发生变化.
+						// 라우팅 이름 변경됨.
 						LOGGER.warn(
 								"update a task whose route name does not match, id:{}, route name:{}, expected route name:{}.",
 								t::getId, () -> StringUtils.join(t.getRouteNameList()),
@@ -1192,7 +1192,7 @@ public class ManualProcessor extends AbstractManualProcessor {
 				if (opt.isPresent()) {
 					Task task = Tasks.createTask(aeiObjects, manual, opt.get());
 					aeiObjects.createTask(task);
-					// 将用户可能已经存在的同一环节已办全部标记为不参与流转
+					// 사용자에게 이미 존재할 수 있는 같은 단계의 처리 완료를 모두 진행 미참여로 표시
 					aeiObjects.getJoinInquireTaskCompletedsWithActivityToken(task.getActivityToken()).stream()
 							.filter(p -> StringUtils.equalsIgnoreCase(p.getPerson(), task.getPerson())).forEach(tc -> {
 								tc.setJoinInquire(false);

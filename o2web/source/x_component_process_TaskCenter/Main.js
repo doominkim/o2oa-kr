@@ -541,7 +541,7 @@ MWF.xApplication.process.TaskCenter.Main = new Class({
     },
 
 
-    //@todo 起草 搜索 筛选 。。。
+    //@todo 기안 검색 필터 ...
     showStartProcessArea: function(){
         if (!this.processStarter) this.processStarter = new MWF.xApplication.process.TaskCenter.Starter(this);
         this.processStarter.load();

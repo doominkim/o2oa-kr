@@ -7,7 +7,7 @@ class ExceptionNoTaskCompletedToRetract extends LanguagePromptException {
 	private static final long serialVersionUID = -7038279889683420366L;
 
 	ExceptionNoTaskCompletedToRetract(String workId, String workLogId) {
-		super("无法撤回工作 {} , 无法找到工作日志 {} 匹配的处理人.", workId, workLogId);
+		super("문서 {}을(를) 회수할 수 없습니다. 문서 로그 {}에 해당하는 처리자를 찾을 수 없습니다.", workId, workLogId);
 	}
 
 }

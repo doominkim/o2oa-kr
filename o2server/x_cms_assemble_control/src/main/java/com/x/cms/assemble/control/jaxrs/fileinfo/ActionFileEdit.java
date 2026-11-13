@@ -20,7 +20,7 @@ import com.x.cms.core.entity.Document;
 import com.x.cms.core.entity.FileInfo;
 
 /**
- * 对附件的访问权限进行调整
+ * 첨부파일 접근 권한 조정
  * 
  * @author O2LEE
  *
@@ -45,7 +45,7 @@ class ActionFileEdit extends BaseAction {
 			wi = this.convertToWrapIn(jsonElement, Wi.class);
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionFileInfoProcess(e, "系统在将JSON信息转换为对象时发生异常。");
+			Exception exception = new ExceptionFileInfoProcess(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다.");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -60,7 +60,7 @@ class ActionFileEdit extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionFileInfoProcess(e, "文档信息获取操作时发生异常。Id:" + docId);
+				Exception exception = new ExceptionFileInfoProcess(e, "게시글 정보를 가져오는 중 오류가 발생했습니다. Id:" + docId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -76,7 +76,7 @@ class ActionFileEdit extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionFileInfoProcess(e, "系统在根据ID查询分类信息时发生异常！ID：" + doc.getCategoryId());
+				Exception exception = new ExceptionFileInfoProcess(e, "ID로 분류 정보를 조회하는 중 오류가 발생했습니다! ID: " + doc.getCategoryId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -93,7 +93,7 @@ class ActionFileEdit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionFileInfoProcess(e,
-						"系统在根据ID查询应用栏目信息时发生异常！ID：" + categoryInfo.getAppId());
+						"ID로 게시판 정보를 조회하는 중 오류가 발생했습니다! ID: " + categoryInfo.getAppId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -109,7 +109,7 @@ class ActionFileEdit extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionFileInfoProcess(e, "系统在文档附件操作权限时发生异常！ID：" + doc.getId());
+				Exception exception = new ExceptionFileInfoProcess(e, "게시글 첨부파일 작업 권한을 확인하는 중 오류가 발생했습니다! ID: " + doc.getId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -126,7 +126,7 @@ class ActionFileEdit extends BaseAction {
 				CacheManager.notify(Document.class);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionFileInfoProcess(e, "系统在更新文档附件信息时发生异常！ID：" + wi.getId());
+				Exception exception = new ExceptionFileInfoProcess(e, "게시글 첨부파일 정보를 수정하는 중 오류가 발생했습니다! ID: " + wi.getId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

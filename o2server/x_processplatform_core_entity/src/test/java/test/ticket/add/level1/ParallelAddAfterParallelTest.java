@@ -23,7 +23,7 @@ class ParallelAddAfterParallelTest {
 	private static final List<String> p2 = Arrays.asList("E${LE}", "F${LF}", "G${LG}");
 	private static final List<String> p3 = Arrays.asList("I${LI}", "J${LJ}", "K${LK}");
 
-	@DisplayName("B后加签EFG,EFG并行处理")
+	@DisplayName("B 뒤에 EFG 추가 결재, EFG 병렬 처리")
 	@Test
 	@Order(1)
 	void test01() {

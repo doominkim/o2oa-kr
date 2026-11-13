@@ -126,18 +126,18 @@ public class Organization {
 		return distinguishedName;
 	}
 
-	/** 根据个人身份获取组织 */
-	/** 表示获取第几层的组织 */
+	/** 개인 신분으로 조직 조회 */
+	/** 몇 번째 계층의 조직을 조회할지 표시 */
 	public String listSupUnit(String name, Integer nested) throws Exception {
 		return this.unit().getWithIdentityWithLevel(name, nested);
 	}
 
-	/** 字符串 表示获取指定类型的组织 */
+	/** 지정 유형의 조직을 조회함을 나타내는 문자열 */
 	public String listSupUnit(String name, String nested) throws Exception {
 		return this.unit().getWithIdentityWithType(name, nested);
 	}
 
-	/** 直接获取所在的组织 */
+	/** 소속 조직 직접 조회 */
 	public String listSupUnit(String name) throws Exception {
 		return this.unit().getWithIdentity(name);
 	}

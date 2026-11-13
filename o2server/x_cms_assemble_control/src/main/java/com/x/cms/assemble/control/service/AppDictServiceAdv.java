@@ -8,8 +8,8 @@ import com.x.base.core.project.tools.ListTools;
 import com.x.cms.core.entity.element.AppDict;
 
 /**
- * 对栏目信息进行管理的服务类（高级）
- * 高级服务器可以利用Service完成事务控制
+ * 게시판 정보 관리 서비스 클래스(고급)
+ * 고급 서비스는 Service로 트랜잭션 제어 가능
  * 
  * @author O2LEE
  */
@@ -18,7 +18,7 @@ public class AppDictServiceAdv {
 	private AppDictService appDictService = new AppDictService();
 
 	/**
-	 * 根据栏目 ID获取所有的数据字典信息ID列表
+	 * 게시판 ID로 모든 데이터 사전 정보 ID 목록 조회
 	 * 
 	 * @param appId
 	 * @return
@@ -33,7 +33,7 @@ public class AppDictServiceAdv {
 	}
 
     /**
-     * 根据栏目 ID获取所有的数据字典信息列表
+     * 게시판 ID로 모든 데이터 사전 정보 목록 조회
      *
      * @param appId
      * @return

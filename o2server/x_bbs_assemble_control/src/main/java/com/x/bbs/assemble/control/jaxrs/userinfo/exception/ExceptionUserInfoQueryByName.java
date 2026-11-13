@@ -7,6 +7,6 @@ public class ExceptionUserInfoQueryByName extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionUserInfoQueryByName( Throwable e, String name ) {
-		super("根据指定姓名查询BBS用户信息时发生异常.Name:" + name, e );
+		super("지정한 이름의 BBS 사용자 정보를 조회하는 중 오류가 발생했습니다. Name:" + name, e );
 	}
 }

@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Eldate 基于Element UI的日期选择组件。
- * @o2cn 日期选择
+/** @class Eldate Element UI 기반 날짜 선택 컴포넌트.
+ * @o2cn 날짜 선택
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|Element UI DatePicker 日期选择器}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|Element UI DatePicker 날짜 선택기}
  */
 MWF.xApplication.process.Xform.Eldate = MWF.APPEldate =  new Class(
     /** @lends MWF.xApplication.process.Xform.Eldate# */
@@ -21,19 +21,19 @@ MWF.xApplication.process.Xform.Eldate = MWF.APPEldate =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 当 input 失去焦点时触发。this.event[0]指向组件实例
+         * input이 포커스를 잃을 때 발생. this.event[0]은 컴포넌트 인스턴스
          * @event MWF.xApplication.process.Xform.Eldate#blur
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|日期选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|날짜 선택 컴포넌트의 Events 장}
          */
         /**
-         * 当 input 获得焦点时触发。this.event[0]指向组件实例
+         * input이 포커스를 얻을 때 발생. this.event[0]은 컴포넌트 인스턴스
          * @event MWF.xApplication.process.Xform.Eldate#focus
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|日期选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|날짜 선택 컴포넌트의 Events 장}
          */
         /**
-         * 用户确认选定的值时触发。this.event[0]为组件绑定值；格式与绑定值一致，可受 value-format 控制
+         * 사용자가 선택 값을 확인할 때 발생. this.event[0]은 컴포넌트 바인딩 값이며, 형식은 바인딩 값과 같고 value-format으로 제어 가능
          * @event MWF.xApplication.process.Xform.Eldate#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|日期选择组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/date-picker|날짜 선택 컴포넌트의 Events 장}
          */
         "elEvents": ["focus", "blur", "change"]
     },
@@ -183,16 +183,16 @@ MWF.xApplication.process.Xform.Eldate = MWF.APPEldate =  new Class(
         },
         formatDate: function (date, format) {
             var o = {
-                'M+': date.getMonth() + 1, // 月份
-                'd+': date.getDate(), // 日
-                'h+': date.getHours() % 12 === 0 ? 12 : date.getHours() % 12, // 小时
-                'H+': date.getHours(), // 小时
-                'm+': date.getMinutes(), // 分
-                's+': date.getSeconds(), // 秒
-                'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
+                'M+': date.getMonth() + 1, // 월
+                'd+': date.getDate(), // 일
+                'h+': date.getHours() % 12 === 0 ? 12 : date.getHours() % 12, // 시간
+                'H+': date.getHours(), // 시간
+                'm+': date.getMinutes(), // 분
+                's+': date.getSeconds(), // 초
+                'q+': Math.floor((date.getMonth() + 3) / 3), // 분기
                 d: date.getDay(),
-                S: date.getMilliseconds(), // 毫秒
-                a: date.getHours() < 12 ? 'am' : 'pm', // 上午/下午
+                S: date.getMilliseconds(), // 밀리초
+                a: date.getHours() < 12 ? 'am' : 'pm', // 오전/오후
                 A: date.getHours() < 12 ? 'AM' : 'PM' // AM/PM
             };
             if (/(y+)/.test(format)) {

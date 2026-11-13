@@ -24,7 +24,7 @@ class ActionShield extends BaseAction {
 			if (null == share) {
 				throw new ExceptionAttachmentNotExist(id);
 			}
-			/* 判断当前用户是否有权限访问该文件 */
+			/* 현재 사용자의 해당 파일 접근 권한 여부 판단 */
 			if (!"password".equals(share.getShareType())) {
 				if(!effectivePerson.isManager() && !StringUtils.equals(effectivePerson.getDistinguishedName(), share.getPerson())) {
 					if (!hasPermission(business, effectivePerson, share)) {

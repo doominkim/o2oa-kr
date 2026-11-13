@@ -41,7 +41,7 @@ class ActionSearch extends BaseAction {
 		if (StringUtils.isBlank(wi.getKeyword())) {
 			throw new ExceptionFieldEmpty("keyword");
 		}
-		logger.debug("{}搜索设计：{}的关键字：{}", effectivePerson.getDistinguishedName(), wi.getModuleList(), wi.getKeyword());
+		logger.debug("{} 설계 검색: {}의 키워드: {}", effectivePerson.getDistinguishedName(), wi.getModuleList(), wi.getKeyword());
 		if (ListTools.isNotEmpty(wi.getModuleList())) {
 			result.setData(search(wi, effectivePerson));
 		} else {
@@ -120,7 +120,7 @@ class ActionSearch extends BaseAction {
 				List<WrapDesigner> designerList = ThisApplication.context().applications()
 						.postQuery(applicationClass, Applications.joinQueryUri("designer", "search"), wiDesigner)
 						.getDataAsList(WrapDesigner.class);
-				logger.debug("设计搜索关联{}的匹配设计个数：{}", moduleType, designerList.size());
+				logger.debug("설계 검색 연관 {}의 일치 설계 개수: {}", moduleType, designerList.size());
 				getSearchRes(wi, designerList);
 				swList = designerList;
 			} catch (Exception e) {
@@ -156,17 +156,17 @@ class ActionSearch extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 		private static final long serialVersionUID = 4015406081411685640L;
 
-		@FieldDescribe("搜索关键字.")
+		@FieldDescribe("검색 키워드.")
 		private String keyword;
-		@FieldDescribe("搜索设计类型：script|form|page|widget|process|view|table|stat|statement")
+		@FieldDescribe("검색 설계 유형: script|form|page|widget|process|view|table|stat|statement")
 		private List<String> designerTypes;
-		@FieldDescribe("是否区分大小写.")
+		@FieldDescribe("대소문자 구분 여부.")
 		private Boolean caseSensitive;
-		@FieldDescribe("是否全字匹配.")
+		@FieldDescribe("전체 단어 일치 여부.")
 		private Boolean matchWholeWord;
-		@FieldDescribe("是否正则表达式匹配.")
+		@FieldDescribe("정규식 일치 여부.")
 		private Boolean matchRegExp;
-		@FieldDescribe("限制查询的模块列表(模块类型：processPlatform|cms|portal|query|service)<br/>\r\n")
+		@FieldDescribe("조회 제한 모듈 목록(모듈 유형: processPlatform|cms|portal|query|service)<br/>\r\n")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "Module", fieldValue = "{\"moduleType\": \"processPlatform\", \"moduleAppList\": [{\"appId\":\"\", \"designerList\": [{\"designerType\":\"process\", \"designerIdList\": []}]}]}")
 		private List<Module> moduleList;
 
@@ -220,9 +220,9 @@ class ActionSearch extends BaseAction {
 	}
 
 	public static class Module extends GsonPropertyObject {
-		@FieldDescribe("模块的应用列表.")
+		@FieldDescribe("모듈의 앱 목록.")
 		private List<WiDesigner.ModuleApp> moduleAppList = new ArrayList<>();
-		@FieldDescribe("模块类型.")
+		@FieldDescribe("모듈 유형.")
 		private String moduleType;
 
 		public List<WiDesigner.ModuleApp> getModuleAppList() {

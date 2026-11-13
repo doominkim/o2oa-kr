@@ -60,7 +60,7 @@ class ActionListToCurrentPersonPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("匹配关键字")
+		@FieldDescribe("매칭 키워드")
 		private String key;
 
 		public String getKey() {

@@ -4,7 +4,7 @@ import com.x.base.core.entity.JpaObject;
 
 public enum AvailableMode {
 	/**
-	 * 启动方式:authenticated 认证过的用户, assign 指定人员, none 无人可以启动
+	 * 시작 방식: authenticated 인증된 사용자, assign 지정 사용자, none 아무도 시작 불가
 	 */
 	authenticated, assign, none;
 

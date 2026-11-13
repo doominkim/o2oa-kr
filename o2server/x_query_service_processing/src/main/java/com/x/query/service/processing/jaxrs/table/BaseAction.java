@@ -118,7 +118,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 						propertyUtilsBean.setProperty(t, field.getName(), bundle);
 					}
 				} catch (Exception e) {
-					LOGGER.warn("设置对象:{} 的属性:{} 值异常：{}", cls.getSimpleName(), field.getName(), e.getMessage());
+					LOGGER.warn("객체:{}의 속성:{} 값 설정 예외: {}", cls.getSimpleName(), field.getName(), e.getMessage());
 					e.printStackTrace();
 				}
 			}

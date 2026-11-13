@@ -22,7 +22,7 @@ import com.x.cms.core.entity.DocumentCommentInfo;
 import com.x.cms.core.express.tools.filter.QueryFilter;
 
 /**
- * 文档评论分页查询
+ * 문서 댓글 페이지 조회
  * @author sword
  */
 public class ActionListPageWithFilter extends BaseAction {
@@ -70,7 +70,7 @@ public class ActionListPageWithFilter extends BaseAction {
 				result.setCount( resultObject.getTotal() );
 				result.setData( resultObject.getWos() );
 			} catch (Exception e) {
-				logger.warn("系统查询评论信息列表时发生异常!");
+				logger.warn("시스템에서 댓글 정보 목록 조회 중 예외가 발생했습니다!");
 				result.error(e);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -89,10 +89,10 @@ public class ActionListPageWithFilter extends BaseAction {
 
 		private Long rank;
 
-		@FieldDescribe("内容")
+		@FieldDescribe("내용")
 		private String content = "";
 
-		@FieldDescribe( "评论是否已被当前用户点赞." )
+		@FieldDescribe( "현재 사용자의 댓글 좋아요 여부." )
 		private Boolean isCommend = false;
 
 		public String getContent() {

@@ -41,7 +41,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 
 	@Override
 	protected void execute(String id) throws Exception {
-		logger.print("开始执行流程数据映射process：{}", id);
+		logger.print("프로세스 데이터 매핑 실행 시작 process: {}", id);
 		Process process = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			process = emc.find(id, Process.class);
@@ -57,9 +57,9 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 					List<Projection> projections = XGsonBuilder.instance().fromJson(process.getProjection(),
 							new TypeToken<List<Projection>>() {
 							}.getType());
-					logger.print("开始执行流转中工作数据映射process：{}", id);
+					logger.print("진행 중 업무 문서 데이터 매핑 실행 시작 process: {}", id);
 					this.work(process, projections);
-					logger.print("开始执行已完成工作数据映射process：{}", id);
+					logger.print("완료된 업무 문서 데이터 매핑 실행 시작 process: {}", id);
 					this.workCompleted(process, projections);
 				}
 			}
@@ -67,7 +67,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			logger.error(e);
 		}
 
-		logger.print("完成流程数据映射process：{}", id);
+		logger.print("프로세스 데이터 매핑 완료 process: {}", id);
 	}
 
 	private void work(Process process, final List<Projection> projections) throws Exception {
@@ -77,7 +77,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			jobList = business.work().listJobWithProcess(process.getId());
 		}
 		if (ListTools.isNotEmpty(jobList)) {
-			logger.print("流转中工作需要执行数据映射个数：{}", jobList.size());
+			logger.print("진행 중 업무 문서 데이터 매핑 대상 수: {}", jobList.size());
 			for (List<String> partJobs : ListTools.batch(jobList, 10)) {
 				List<CompletableFuture<Void>> futures = new TreeList<>();
 				for (String job : partJobs) {
@@ -85,7 +85,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 						try {
 							this.workProjection(job, process.getId(), projections);
 						} catch (Exception e) {
-							logger.warn("流程{}的工作job={}数据映射异常：{}", process.getId(), job, e.getMessage());
+							logger.warn("프로세스 {}의 업무 문서 job={} 데이터 매핑 예외: {}", process.getId(), job, e.getMessage());
 							logger.error(e);
 						}
 					}, ThisApplication.forkJoinPool());
@@ -95,7 +95,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 					try {
 						future.get(300, TimeUnit.SECONDS);
 					} catch (Exception e) {
-						logger.warn("允许流程数据映射任务异常：{}", e.getMessage());
+						logger.warn("프로세스 데이터 매핑 작업 실행 예외: {}", e.getMessage());
 					}
 				}
 				futures.clear();
@@ -148,7 +148,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			workComList = business.workCompleted().listWithProcess(process.getId());
 		}
 		if (ListTools.isNotEmpty(workComList)) {
-			logger.print("已完成工作需要执行数据映射个数：{}", workComList.size());
+			logger.print("완료된 업무 문서 데이터 매핑 대상 수: {}", workComList.size());
 			for (List<String> partWorkComList : ListTools.batch(workComList, 10)) {
 				List<CompletableFuture<Void>> futures = new TreeList<>();
 				for (String workCompletedId : partWorkComList) {
@@ -156,7 +156,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 						try {
 							this.workCompletedProjection(workCompletedId, projections);
 						} catch (Exception e) {
-							logger.warn("流程{}的工作workCompletedId={}数据映射异常：{}", process.getId(), workCompletedId,
+							logger.warn("프로세스 {}의 업무 문서 workCompletedId={} 데이터 매핑 예외: {}", process.getId(), workCompletedId,
 									e.getMessage());
 							logger.error(e);
 						}
@@ -167,7 +167,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 					try {
 						future.get(300, TimeUnit.SECONDS);
 					} catch (Exception e) {
-						logger.warn("允许流程数据映射任务异常：{}", e.getMessage());
+						logger.warn("프로세스 데이터 매핑 작업 실행 예외: {}", e.getMessage());
 					}
 				}
 				futures.clear();
@@ -221,7 +221,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			if (jsonElement.isJsonObject()) {
 				return XGsonBuilder.convert(jsonElement, Data.class);
 			} else {
-				// 如果不是Object强制返回一个Map对象
+				// Object가 아니면 Map 객체를 강제로 반환
 				return new Data();
 			}
 		}
@@ -240,7 +240,7 @@ public class ProjectionExecuteQueue extends AbstractQueue<String> {
 			if (jsonElement.isJsonObject()) {
 				return XGsonBuilder.convert(jsonElement, Data.class);
 			} else {
-				// 如果不是Object强制返回一个Map对象
+				// Object가 아니면 Map 객체를 강제로 반환
 				return new Data();
 			}
 		}

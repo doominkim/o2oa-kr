@@ -65,13 +65,13 @@ class ActionManageListCountWithProcess extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("流程标识")
+		@FieldDescribe("프로세스 식별자")
 		private String value;
 
-		@FieldDescribe("流程名称")
+		@FieldDescribe("프로세스 이름")
 		private String name;
 
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Long count;
 
 		public Wo(String value, Long count){

@@ -115,7 +115,7 @@ MWF.xApplication.portal.PageDesigner.Module.Page = MWF.PCPage = new Class({
 		this.container.set("html", this.html);
 		this.loadStylesList(function(){
 			var formStyleType = this.json.formStyleType;
-			if( typeOf( formStyleType ) === "object" && formStyleType.type === "script"  ){ //如果是自定义表单样式
+			if( typeOf( formStyleType ) === "object" && formStyleType.type === "script"  ){ //사용자 정의 양식 스타일인 경우
 				this.loadCustomTemplateStyles( formStyleType, function ( templateStyles ) {
 					this._load( templateStyles );
 				}.bind(this));
@@ -1163,7 +1163,7 @@ MWF.xApplication.portal.PageDesigner.Module.Page = MWF.PCPage = new Class({
 		if ( name=="formStyleType" ){
 
 			var loadOldTemplateStyle = function () {
-				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //如果原来是自定义表单样式
+				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //기존이 사용자 정의 양식 스타일인 경우
 					this.loadCustomTemplateStyles( oldValue , function (oldTemplateStyles) {
 						this.switchTemplateStyles( oldTemplateStyles );
 					}.bind(this))
@@ -1260,11 +1260,11 @@ MWF.xApplication.portal.PageDesigner.Module.Page = MWF.PCPage = new Class({
 		if (styleNode) styleNode.destroy();
 		if (cssText){
 
-			//删除注释
+			//주석 삭제
 			//cssText = cssText.replace(/\/\*[\s\S]*?\*\/\n|([^:]|^)\/\/.*\n$/g, '').replace(/\\n/, '');
 
-			cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 移除多行注释
-				.replace(/\\n/g, '');             // 移除\n
+			cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 여러 줄 주석 제거
+				.replace(/\\n/g, '');             // \n 제거
 
 			cssText = this.parseCSS(cssText);
 			var rex = new RegExp("(.+)(?=\\{)", "g");
@@ -1389,7 +1389,7 @@ MWF.xApplication.portal.PageDesigner.Module.Page = MWF.PCPage = new Class({
 		// }
 		return {"fieldConflict": fieldConflict, "elementConflict": elementConflict};
 	},
-//脚本附签上的脚本编辑器
+//스크립트 탭의 스크립트 편집기
 	addScriptJsEditor: function (propertyName, jsEditor) {
 		if( !this.scriptJsEditors )this.scriptJsEditors = {};
 		this.scriptJsEditors[propertyName] = jsEditor;

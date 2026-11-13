@@ -26,7 +26,7 @@ public class GroupEntryTools {
 			// m.put("list", o);
 			result.add(m);
 		}
-		/* 分类值再进行一次排序 */
+		/* 분류 값을 한 번 더 정렬 */
 		if (!Objects.equals(OrderType.original, groupEntry.getOrderType())) {
 			result = result.stream().sorted((e1, e2) -> compareWith(e1, e2, groupEntry)).collect(Collectors.toList());
 			// .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,

@@ -32,7 +32,7 @@ class ActionListNextWithApplication extends BaseAction {
 			equals.put("application", application.getId());
 			ActionResult<List<Wo>> result = this.standardListNext(Wo.copier, id, count, JpaObject.sequence_FIELDNAME,
 					equals, null, null, null, null, null, null, null, true, DESC);
-			/* 添加权限 */
+			/* 권한 추가 */
 			if (null != result.getData()) {
 				for (Wo wo : result.getData()) {
 					WorkCompleted o = emc.find(wo.getId(), WorkCompleted.class);

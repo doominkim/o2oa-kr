@@ -108,7 +108,7 @@ class ActionCopyToWorkCompletedSoft extends BaseAction {
 
 		private static final long serialVersionUID = 5985047915141241981L;
 
-		@FieldDescribe("附件对象")
+		@FieldDescribe("첨부파일 객체")
 		private List<WiAttachment> attachmentList = new ArrayList<>();
 
 		public List<WiAttachment> getAttachmentList() {

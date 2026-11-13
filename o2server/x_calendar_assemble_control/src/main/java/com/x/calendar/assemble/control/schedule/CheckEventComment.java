@@ -17,7 +17,7 @@ import com.x.calendar.assemble.control.service.Calendar_EventCommentQueryService
 import com.x.calendar.core.entity.Calendar_EventComment;
 
 /**
- * 定期检查是否存在没有被任何event或者event_master引用的EventComment记录，如果有，则需要进行删除
+ * event 또는 event_master에서 참조되지 않는 EventComment 레코드가 있는지 주기적으로 확인하고, 있으면 삭제
  * 
  * @author O2LEE
  *
@@ -51,7 +51,7 @@ public class CheckEventComment extends AbstractJob {
 	}
 
 	/**
-	 * 根据commentId，删除指定的备注信息
+	 * commentId로 지정 비고 정보 삭제
 	 * @param commentId
 	 */
 	private void removeEventComment(String commentId ) throws Exception {
@@ -63,7 +63,7 @@ public class CheckEventComment extends AbstractJob {
 			quote = true;
 		}
 		if( !quote ){
-			//没有引用，直接
+			//참조 없음, 바로
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				Calendar_EventComment entity = emc.find( commentId, Calendar_EventComment.class );
 				if( entity != null ){
@@ -76,7 +76,7 @@ public class CheckEventComment extends AbstractJob {
 	}
 
 	/**
-	 * 检查该ID是否有事件引用到
+	 * 해당 ID를 참조하는 이벤트가 있는지 확인
 	 * 
 	 * @param commentId
 	 * @return

@@ -39,7 +39,7 @@ class ActionManageFilterAttribute extends BaseAction {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
 			Wo wo = new Wo();
-			/* 因为是work,application不可能为空 */
+			/* work이므로 application은 비어 있을 수 없음 */
 			Application application = business.application().pick(applicationFlag);
 			if (null == application) {
 				throw new ExceptionApplicationNotExist(applicationFlag);
@@ -56,23 +56,23 @@ class ActionManageFilterAttribute extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("可选择的流程")
+		@FieldDescribe("선택 가능한 프로세스")
 		private List<NameValueCountPair> processList = new ArrayList<>();
 
-		// @FieldDescribe("可选择的顶层组织")
+		// @FieldDescribe("선택 가능한 최상위 조직")
 		// private List<NameValueCountPair> creatorTopUnitList = new
 		// ArrayList<>();
 
-		@FieldDescribe("可选择的组织")
+		@FieldDescribe("선택 가능한 조직")
 		private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-		@FieldDescribe("可选择的开始月份")
+		@FieldDescribe("선택 가능한 시작 월")
 		private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("可选择的活动节点")
+		@FieldDescribe("선택 가능한 활동 노드")
 		private List<NameValueCountPair> activityNameList = new ArrayList<>();
 
-		@FieldDescribe("可选择的工作状态")
+		@FieldDescribe("선택 가능한 업무 문서 상태")
 		@FieldTypeDescribe(fieldType = "class", fieldValue = "{name='',value='',count=0}", fieldTypeName = "com.x.base.core.project.bean.NameValueCountPair")
 
 		private List<NameValueCountPair> workStatusList = new ArrayList<>();

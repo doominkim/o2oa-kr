@@ -38,7 +38,7 @@ class ActionListPaging extends BaseAction {
         if (BooleanUtils.isNotTrue(aiConfig.getO2AiEnable())
                 || StringUtils.isBlank(aiConfig.getO2AiToken()) && StringUtils.isBlank(
                 aiConfig.getO2AiBaseUrl())) {
-            throw new ExceptionCustom("请启用o2 AI智能体，并设置相关参数.");
+            throw new ExceptionCustom("o2 AI 에이전트를 활성화하고 관련 매개변수를 설정하십시오.");
         }
         page = this.adjustPage(page);
         size = this.adjustSize(size);
@@ -54,7 +54,7 @@ class ActionListPaging extends BaseAction {
     }
 
     public static class Wi extends GsonPropertyObject{
-        @FieldDescribe("搜索关键字.")
+        @FieldDescribe("검색 키워드.")
         private String search;
 
         public String getSearch() {

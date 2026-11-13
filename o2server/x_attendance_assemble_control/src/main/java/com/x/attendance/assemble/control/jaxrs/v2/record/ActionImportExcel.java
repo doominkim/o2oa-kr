@@ -43,7 +43,7 @@ public class ActionImportExcel extends BaseAction {
             throws Exception {
         lock.lock();
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("开始导入打卡记录数据！！！！！！");
+            LOGGER.debug("체크 기록 데이터 가져오기 시작!!!!!!");
         }
         try (InputStream is = new ByteArrayInputStream(bytes);
              XSSFWorkbook workbook = new XSSFWorkbook(is);
@@ -53,15 +53,15 @@ public class ActionImportExcel extends BaseAction {
             if (!business.isManager(effectivePerson)) {
                 throw new ExceptionAccessDenied(effectivePerson);
             }
-            Sheet sheet = workbook.getSheetAt(0); // 第一个sheet
-            // 固定模版
-            int firstRow = sheet.getFirstRowNum() + 1; // 第一行是标题跳过
+            Sheet sheet = workbook.getSheetAt(0); // 첫 번째 sheet
+            // 고정 템플릿
+            int firstRow = sheet.getFirstRowNum() + 1; // 첫 행은 제목이므로 건너뜀
             int lastRow = sheet.getLastRowNum();
-            // count 一下 错误条数
+            // 오류 건수 count
             int errorRowNumber = 0;
             for (int i = firstRow; i <= lastRow; i++) {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("处理行数：" + i + " ========================================");
+                    LOGGER.debug("처리 행 수: " + i + " ========================================");
                 }
                 Row row = sheet.getRow(i);
                 try {
@@ -76,7 +76,7 @@ public class ActionImportExcel extends BaseAction {
                     thisWi.setOffDutyTime3(AttendanceV2Helper.getExcelCellDateFormat(row.getCell(7), DateTools.format_HHmm));
                     ActionPostDailyRecord.Wo result = ThisApplication.context().applications().postQuery(x_attendance_assemble_control.class, "v2/record/import/daily", thisWi).getData(ActionPostDailyRecord.Wo.class);
                     if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("处理结果，{}", result.toString());
+                        LOGGER.debug("처리 결과, {}", result.toString());
                     }
                 } catch (Exception e) {
                     AttendanceV2Helper.setExcelCellError(row, e.getLocalizedMessage(), 8);
@@ -84,7 +84,7 @@ public class ActionImportExcel extends BaseAction {
                 }
             }
             ActionResult<Wo> result = new ActionResult<>();
-            // 存储 excel 文件
+            // excel 파일 저장
             String name = "attendance_record_data_input_" + DateTools.format(new Date(), DateTools.formatCompact_yyyyMMddHHmmss) + ".xlsx";
             workbook.write(os);
             StorageMapping gfMapping = ThisApplication.context().storageMappings().random(GeneralFile.class);
@@ -102,7 +102,7 @@ public class ActionImportExcel extends BaseAction {
         } finally {
             lock.unlock();
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("导入结束！！！！！！");
+                LOGGER.debug("가져오기 종료!!!!!!");
             }
         }
     }
@@ -110,9 +110,9 @@ public class ActionImportExcel extends BaseAction {
     public static class Wo extends GsonPropertyObject {
 
         private static final long serialVersionUID = 6022979308455360363L;
-        @FieldDescribe("返回的结果标识，下载结果文件使用")
+        @FieldDescribe("반환 결과 식별자, 결과 파일 다운로드에 사용")
         private String flag;
-        @FieldDescribe("异常错误数据条目数")
+        @FieldDescribe("오류 데이터 건수")
         private int errorRows;
 
         public int getErrorRows() {

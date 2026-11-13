@@ -23,11 +23,11 @@ import com.x.bbs.assemble.control.jaxrs.foruminfo.exception.ExceptionForumInfoPr
 import com.x.bbs.assemble.control.service.bean.RoleAndPermission;
 
 @Path("logout")
-@JaxrsDescribe("登出服务")
+@JaxrsDescribe("로그아웃 서비스")
 public class LogoutAction extends StandardJaxrsAction {
 	private static Logger logger = LoggerFactory.getLogger(LogoutAction.class);
 
-	@JaxrsMethodDescribe(value = "退出系统.", action = ActionLogout.class)
+	@JaxrsMethodDescribe(value = "시스템 로그아웃.", action = ActionLogout.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -41,7 +41,7 @@ public class LogoutAction extends StandardJaxrsAction {
 				result = new ActionLogout().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "获取所有ForumInfo的信息列表时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "전체 ForumInfo 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

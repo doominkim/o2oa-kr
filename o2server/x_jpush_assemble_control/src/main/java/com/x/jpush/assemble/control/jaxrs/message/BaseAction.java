@@ -5,6 +5,6 @@ import com.x.base.core.project.jaxrs.StandardJaxrsAction;
 public class BaseAction extends StandardJaxrsAction {
 
 
-    protected final String androidChannelId = "o2oa_work"; // 默认的 Android 渠道ID
+    protected final String androidChannelId = "o2oa_work"; // 기본 Android 채널 ID
 
 }

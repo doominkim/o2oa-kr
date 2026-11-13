@@ -237,7 +237,7 @@ public class MeetingFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-//	@MethodDescribe("列示所有首字母开始的Building.")
+//	@MethodDescribe("모든 첫 글자로 시작하는 Building 목록 조회.")
 	public List<String> listPinyinInitial(String key) throws Exception {
 		String str = key.replaceAll("_", "\\\\_");
 		str = str.replaceAll("%", "\\\\%");
@@ -251,7 +251,7 @@ public class MeetingFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	//@MethodDescribe("进行模糊查询.")
+	//@MethodDescribe("부분 일치 검색.")
 	public List<String> listLike(String key) throws Exception {
 		String str = key.replaceAll("_", "\\\\_");
 		str = str.replaceAll("%", "\\\\%");
@@ -267,7 +267,7 @@ public class MeetingFactory extends AbstractFactory {
 		return em.createQuery(cq).setMaxResults(200).getResultList();
 	}
 
-	//@MethodDescribe("根据拼音进行模糊查询.")
+	//@MethodDescribe("병음으로 부분 일치 검색.")
 	public List<String> listLikePinyin(String key) throws Exception {
 		String str = key.replaceAll("_", "\\\\_");
 		str = str.replaceAll("%", "\\\\%");

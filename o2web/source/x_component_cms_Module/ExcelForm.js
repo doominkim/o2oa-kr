@@ -51,7 +51,7 @@ MWF.xApplication.cms.Module.ImportForm = new Class({
             style : "cms",
             hasColon : true,
             itemTemplate: {
-                url: { text : this.lp.downloadTemplate }, //"下载模板"
+                url: { text : this.lp.downloadTemplate }, //"템플릿 다운로드"
                 file: { type : "button", value : this.lp.selectExcelFile ,text : this.lp.selectFile, event :{
                     click : function(){
                         this.selectFile();
@@ -102,7 +102,7 @@ MWF.xApplication.cms.Module.ImportForm = new Class({
     },
     ok: function( callback ){
         if( !this.formData ){
-            this.app.notice( this.lp.selectExcelFileNotice, "error" ); //"请先选择Excel文件"
+            this.app.notice( this.lp.selectExcelFileNotice, "error" ); //"먼저 Excel 파일을 선택하십시오"
         }else{
             this.action.importDocumentFormExcel(this.data.id, function () {
                 this.formData = null;

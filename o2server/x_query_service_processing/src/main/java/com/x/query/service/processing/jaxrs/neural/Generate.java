@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  * |------------------------------------------------------------------------------|
- * | O2OA 活力办公 创意无限    o2.js                                                 |
+ * | O2OA 활력 있는 업무 무한한 창의    o2.js                                                 |
  * |------------------------------------------------------------------------------|
  * | Distributed under the AGPL license:                                          |
  * |------------------------------------------------------------------------------|
@@ -108,7 +108,7 @@ public class Generate {
 			TimeStamp stamp = new TimeStamp();
 			Business business = new Business(emc);
 			Model model = refreshModel(business, modelId);
-			logger.info("神经网络多层感知机 ({}) 生成条目开始.", model.getName());
+			logger.info("신경망 다층 퍼셉트론 ({}) 항목 생성 시작.", model.getName());
 			if (StringUtils.equals(Model.STATUS_GENERATING, model.getStatus())) {
 				throw new ExceptionGenerate(model.getName());
 			}
@@ -118,9 +118,9 @@ public class Generate {
 			if (ListTools.isEmpty(bundles)) {
 				throw new ExceptionBundleEmpty(model.getName());
 			}
-			/* 用于测试的bundle */
+			/* 테스트용 bundle */
 			List<String> validationBundles = ListTools.randomWithRate(bundles, validationRate);
-			/* 用于学习的bandle */
+			/* 학습용 bandle */
 			List<String> learnBundles = ListUtils.subtract(bundles, validationBundles);
 			emc.beginTransaction(Model.class);
 			model.setStatus(Model.STATUS_GENERATING);
@@ -128,7 +128,7 @@ public class Generate {
 			model.setValidationEntryCount(0);
 			model.setLearnEntryCount(0);
 			emc.commit();
-			/* 准备运算,清空数据 */
+			/* 연산 준비, 데이터 초기화 */
 			this.clean(business, model);
 			String text = model.getOutValueScriptText();
 			GraalvmScriptingFactory.Bindings bindings = new GraalvmScriptingFactory.Bindings();
@@ -201,7 +201,7 @@ public class Generate {
 			model.setValidationEntryCount(testEntryCount);
 			emc.check(model, CheckPersistType.all);
 			emc.commit();
-			logger.info("神经网络多层感知机 ({}) 完成条目生成, 耗时: {}.", model.getName(), stamp.consumingMilliseconds());
+			logger.info("신경망 다층 퍼셉트론 ({}) 항목 생성 완료, 소요 시간: {}.", model.getName(), stamp.consumingMilliseconds());
 		} finally {
 			generatingModel = "";
 			stop = false;
@@ -214,14 +214,14 @@ public class Generate {
 			business.entityManagerContainer().beginTransaction(Model.class);
 			model.setStatus("");
 			business.entityManagerContainer().commit();
-			logger.info("神经网络多层感知机 ({}) 项目条目生成过程被取消.", model.getName());
+			logger.info("신경망 다층 퍼셉트론 ({}) 항목 생성 과정 취소.", model.getName());
 			return true;
 		} else {
 			business.entityManagerContainer().beginTransaction(Model.class);
 			model.setStatus(Model.STATUS_GENERATING);
 			int percent = (int) (Math.ceil(i * 100.0 / bundles.size()));
 			model.setGeneratingPercent(percent);
-			logger.info("神经网络多层感知机 ({}) 条目生成进度 {}%, 共计: {} 个条目.", model.getName(), percent, bundles.size());
+			logger.info("신경망 다층 퍼셉트론 ({}) 항목 생성 진행률 {}%, 총 {}개 항목.", model.getName(), percent, bundles.size());
 			business.entityManagerContainer().commit();
 			return false;
 		}
@@ -371,7 +371,7 @@ public class Generate {
 		Long cleanInText = this.cleanInText(business, model.getId());
 		Long cleanOutText = this.cleanOutText(business, model.getId());
 		Long cleanEntryCount = this.cleanEntry(business, model.getId());
-		logger.print("神经网络多层感知机 ({}) 清理训练数据集, entry: {}, inText: {}, outText: {}.", model.getName(), cleanEntryCount,
+		logger.print("신경망 다층 퍼셉트론 ({}) 학습 데이터셋 정리, entry: {}, inText: {}, outText: {}.", model.getName(), cleanEntryCount,
 				cleanInText, cleanOutText);
 	}
 
@@ -411,10 +411,10 @@ public class Generate {
 	private void convert(Business business, DataItemConverter<Item> converter, Source outValueCompiledScript,
 			Source inValueCompiledScript, Source attachmentCompiledScript, LanguageProcessingHelper lph, Model model,
 			WorkCompleted workCompleted, TreeSet<String> inValue, TreeSet<String> outValue) throws Exception {
-		logger.debug("神经网络多层感知机 ({}) 正在生成条目: {}.", model.getName(), workCompleted.getTitle());
+		logger.debug("신경망 다층 퍼셉트론 ({}) 항목 생성 중: {}.", model.getName(), workCompleted.getTitle());
 		List<Item> items = business.entityManagerContainer().listEqualAndEqual(Item.class, Item.itemCategory_FIELDNAME,
 				ItemCategory.pp, Item.bundle_FIELDNAME, workCompleted.getJob());
-		/* 先计算output,在后面可以在data的text先把output替换掉 */
+		/* output을 먼저 계산해 뒤에서 data의 text에서 output을 먼저 치환할 수 있게 함 */
 		Data data = XGsonBuilder.convert(converter.assemble(items), Data.class);
 		GraalvmScriptingFactory.Bindings bindings = new GraalvmScriptingFactory.Bindings()
 				.putMember(GraalvmScriptingFactory.BINDING_NAME_DATA, data);
@@ -426,7 +426,7 @@ public class Generate {
 		text.append(dataText);
 		List<Attachment> attachmentObjects = business.entityManagerContainer().listEqual(Attachment.class,
 				Attachment.job_FIELDNAME, workCompleted.getJob());
-		/* 把不需要的附件过滤掉 */
+		/* 불필요한 첨부파일 제외 */
 		if (null != attachmentCompiledScript) {
 			List<String> attachments = ListTools.extractProperty(attachmentObjects, Attachment.name_FIELDNAME,
 					String.class, true, true);
@@ -444,7 +444,7 @@ public class Generate {
 //							Config.processPlatform().getDocToWordDefaultSite())) {
 //				continue;
 //			}
-			// 文件小于10M
+			// 파일 10M 미만
 			if (att.getLength() < BaseAction.MAX_ATTACHMENT_BYTE_LENGTH) {
 				StorageMapping mapping = ThisApplication.context().storageMappings().get(Attachment.class,
 						att.getStorage());

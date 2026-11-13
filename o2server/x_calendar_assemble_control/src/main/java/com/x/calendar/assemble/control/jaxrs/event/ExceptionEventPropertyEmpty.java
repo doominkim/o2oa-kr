@@ -7,6 +7,6 @@ class ExceptionEventPropertyEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionEventPropertyEmpty( String title ) {
-		super("事件["+ title +"]属性为空，数据操作异常。");
+		super("일정 ["+ title +"] 속성이 비어 있어 데이터를 처리할 수 없습니다.");
 	}
 }

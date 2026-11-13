@@ -41,7 +41,7 @@ public class BeginFactory extends AbstractFactory {
 		return list.isEmpty() ? null : list.get(0);
 	}
 
-	/** 查找使用表单的begin */
+	/** 양식을 사용하는 begin 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Begin.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

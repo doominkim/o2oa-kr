@@ -7,6 +7,6 @@ class ExceptionUnitNotExistOrNotUniqueUnitId extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionUnitNotExistOrNotUniqueUnitId(String flag) {
-		super("组织:{}, 不存在，或者组织uuid不唯一.", flag);
+		super("조직: {}이(가) 없거나 조직 uuid가 고유하지 않습니다.", flag);
 	}
 }

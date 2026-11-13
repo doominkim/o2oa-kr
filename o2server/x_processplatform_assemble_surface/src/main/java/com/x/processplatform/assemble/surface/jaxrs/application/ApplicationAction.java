@@ -36,15 +36,15 @@ public class ApplicationAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationAction.class);
 	private static final String OPERATIONID_PREFIX = "ApplicationAction::";
 
-	@Operation(summary = "获取指定的应用信息,并附带其操作权限.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "지정 앱 정보와 작업 권한 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGet.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "获取指定的应用信息,并附带其操作权限.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 앱 정보와 작업 권한 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -56,10 +56,10 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取可见的应用,同时判断应用下有启动的流程.", operationId = OPERATIONID_PREFIX + "listWithPerson", responses = {
+	@Operation(summary = "볼 수 있는 앱 조회, 앱에 시작 가능한 프로세스가 있는지 함께 판단.", operationId = OPERATIONID_PREFIX + "listWithPerson", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithPerson.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "获取可见的应用,同时判断应用下有启动的流程.", action = ActionListWithPerson.class)
+	@JaxrsMethodDescribe(value = "볼 수 있는 앱 조회, 앱에 시작 가능한 프로세스가 있는지 함께 판단.", action = ActionListWithPerson.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -76,7 +76,7 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定范围内的可见的应用,如果不指定则所有,同时判断应用下有启动的流程.", action = ActionListRangeWithPerson.class)
+	@JaxrsMethodDescribe(value = "지정 범위 내 볼 수 있는 앱 조회, 지정하지 않으면 전체, 앱에 시작 가능한 프로세스가 있는지 함께 판단.", action = ActionListRangeWithPerson.class)
 	@POST
 	@Path("list/range")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -94,16 +94,16 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取可见的应用,同时判断应用下有启动的流程,并进行流程的名称匹配.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "볼 수 있는 앱 조회, 앱에 시작 가능한 프로세스가 있는지 판단하고 프로세스 이름 매칭 수행.", operationId = OPERATIONID_PREFIX
 			+ "listWithPersonLike", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithPersonLike.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "获取可见的应用,同时判断应用下有启动的流程,并进行流程的名称匹配.", action = ActionListWithPersonLike.class)
+	@JaxrsMethodDescribe(value = "볼 수 있는 앱 조회, 앱에 시작 가능한 프로세스가 있는지 판단하고 프로세스 이름 매칭 수행.", action = ActionListWithPersonLike.class)
 	@GET
 	@Path("list/key/{key}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPersonLike(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("关键字") @PathParam("key") String key) {
+			@JaxrsParameterDescribe("키워드") @PathParam("key") String key) {
 		ActionResult<List<ActionListWithPersonLike.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -115,10 +115,10 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据当前用户所有可见的Application,并绑定其启动的Process.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "현재 사용자가 볼 수 있는 모든 Application을 조회하고 시작 가능한 Process를 연결.", operationId = OPERATIONID_PREFIX
 			+ "listWithPersonComplex", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithPersonComplex.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据当前用户所有可见的Application,并绑定其启动的Process.", action = ActionListWithPersonComplex.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 볼 수 있는 모든 Application을 조회하고 시작 가능한 Process를 연결.", action = ActionListWithPersonComplex.class)
 	@GET
 	@Path("list/complex")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -136,17 +136,17 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据当前用户所有可见的Application,并绑定其可启动终端的Process.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "현재 사용자가 볼 수 있는 모든 Application을 조회하고 단말에서 시작 가능한 Process를 연결.", operationId = OPERATIONID_PREFIX
 			+ "listWithPersonAndTerminal", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithPersonAndTerminal.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据当前用户所有可见的Application,并绑定其可启动终端的Process.", action = ActionListWithPersonAndTerminal.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 볼 수 있는 모든 Application을 조회하고 단말에서 시작 가능한 Process를 연결.", action = ActionListWithPersonAndTerminal.class)
 	@GET
 	@Path("list/terminal/{terminal}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPersonAndTerminal(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("流程启动终端：client(pc端可启动)、mobile(手机端可启动)") @PathParam("terminal") String terminal) {
+			@JaxrsParameterDescribe("프로세스 시작 단말: client(PC에서 시작 가능), mobile(모바일에서 시작 가능)") @PathParam("terminal") String terminal) {
 		ActionResult<List<ActionListWithPersonAndTerminal.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -158,16 +158,16 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据传入用户，获取可见的Application,并绑定其启动的Process.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "전달된 사용자 기준으로 볼 수 있는 Application을 조회하고 시작 가능한 Process를 연결.", operationId = OPERATIONID_PREFIX
 			+ "manageListWithPersonComplex", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionManageListWithPersonComplex.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据传入用户，获取可见的Application,并绑定其启动的Process.", action = ActionManageListWithPersonComplex.class)
+	@JaxrsMethodDescribe(value = "전달된 사용자 기준으로 볼 수 있는 Application을 조회하고 시작 가능한 Process를 연결.", action = ActionManageListWithPersonComplex.class)
 	@GET
 	@Path("list/complex/manage/{person}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void manageListWithPersonComplex(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("用户") @PathParam("person") String person) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("사용자") @PathParam("person") String person) {
 		ActionResult<List<ActionManageListWithPersonComplex.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -179,16 +179,16 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "仅获取指定Application的Icon,没有权限限制.", operationId = OPERATIONID_PREFIX + "getIcon", responses = {
+	@Operation(summary = "지정 Application의 Icon만 조회, 권한 제한 없음.", operationId = OPERATIONID_PREFIX + "getIcon", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionManageListWithPersonComplex.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "仅获取指定Application的Icon,没有权限限制.", action = ActionGetIcon.class)
+	@JaxrsMethodDescribe(value = "지정 Application의 Icon만 조회, 권한 제한 없음.", action = ActionGetIcon.class)
 	@GET
 	@Path("{flag}/icon")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -200,15 +200,15 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "校验当前用户是否是指定应用的管理员.", operationId = OPERATIONID_PREFIX + "isManager", responses = {
+	@Operation(summary = "현재 사용자가 지정 앱의 관리자인지 확인.", operationId = OPERATIONID_PREFIX + "isManager", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionIsManager.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "校验当前用户是否是指定应用的管理员.", action = ActionIsManager.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 지정 앱의 관리자인지 확인.", action = ActionIsManager.class)
 	@GET
 	@Path("{flag}/is/manager")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void isManager(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionIsManager.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -220,16 +220,16 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据应用标识删除流程实例数据.", operationId = OPERATIONID_PREFIX + "deleteWorkOrWorkCompleted", responses = {
+	@Operation(summary = "앱 식별자로 프로세스 인스턴스 데이터 삭제.", operationId = OPERATIONID_PREFIX + "deleteWorkOrWorkCompleted", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionDeleteWorkOrWorkCompleted.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "根据应用标识删除流程实例数据", action = ActionDeleteWorkOrWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "앱 식별자로 프로세스 인스턴스 데이터 삭제", action = ActionDeleteWorkOrWorkCompleted.class)
 	@DELETE
 	@Path("{flag}/{onlyRemoveNotCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWorkOrWorkCompleted(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-										  @JaxrsParameterDescribe("应用标识") @PathParam("flag") String flag,
-										  @JaxrsParameterDescribe("仅删除流转中Work") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
+										  @JaxrsParameterDescribe("앱 식별자") @PathParam("flag") String flag,
+										  @JaxrsParameterDescribe("진행 중인 Work만 삭제") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
 		ActionResult<ActionDeleteWorkOrWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

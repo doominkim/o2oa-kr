@@ -37,16 +37,16 @@ public class JobAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JobAction.class);
 	private static final String OPERATIONID_PREFIX = "JobAction::";
 
-	@Operation(summary = "根据任务标识查找属于这个工作和已完成工作.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "작업 식별자로 해당 업무 문서와 완료된 업무 문서 조회.", operationId = OPERATIONID_PREFIX
 			+ "findWorkWorkCompleted", responses = { @ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionFindWorkWorkCompleted.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "根据任务标识查找属于这个工作和已完成工作.", action = ActionFindWorkWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "작업 식별자로 해당 업무 문서와 완료된 업무 문서 조회.", action = ActionFindWorkWorkCompleted.class)
 	@GET
 	@Path("{job}/find/work/workcompleted")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void findWorkWorkCompleted(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job) {
 		ActionResult<ActionFindWorkWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -58,16 +58,16 @@ public class JobAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据问号查找工作或已完成工作,并返回最新创建的一个工作或已完成工作.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "문서 번호로 업무 문서 또는 완료된 업무 문서를 찾아 가장 최근에 생성된 하나를 반환.", operationId = OPERATIONID_PREFIX
 			+ "latestWorkWorkCompletedWithSerial", responses = {
 					@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGet.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "根据问号查找工作或已完成工作,并返回最新创建的一个工作或已完成工作.", action = ActionLatestWorkWorkCompletedWithSerial.class)
+	@JaxrsMethodDescribe(value = "문서 번호로 업무 문서 또는 완료된 업무 문서를 찾아 가장 최근에 생성된 하나를 반환.", action = ActionLatestWorkWorkCompletedWithSerial.class)
 	@GET
 	@Path("latest/work/workcompleted/serial/{serial}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void latestWorkWorkCompletedWithSerial(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("编号") @PathParam("serial") String serial) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("번호") @PathParam("serial") String serial) {
 		ActionResult<ActionLatestWorkWorkCompletedWithSerial.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -79,13 +79,13 @@ public class JobAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据给定的任务标识立即执行字段映射.", action = V2Projection.class)
+	@JaxrsMethodDescribe(value = "지정 작업 식별자로 필드 매핑 즉시 실행.", action = V2Projection.class)
 	@GET
 	@Path("v2/{job}/projection")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void v2Projection(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("식별자") @PathParam("job") String job) {
 		ActionResult<V2Projection.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -97,14 +97,14 @@ public class JobAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "返回指定job是否allowVisit.", action = ActionAllowVisitWithPerson.class)
+	@JaxrsMethodDescribe(value = "지정 job의 allowVisit 여부 반환.", action = ActionAllowVisitWithPerson.class)
 	@GET
 	@Path("{job}/allow/visit/person/{person}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void allowVisitWithPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("job") String job,
-			@JaxrsParameterDescribe("标识") @PathParam("person") String person) {
+			@JaxrsParameterDescribe("식별자") @PathParam("job") String job,
+			@JaxrsParameterDescribe("식별자") @PathParam("person") String person) {
 		ActionResult<ActionAllowVisitWithPerson.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

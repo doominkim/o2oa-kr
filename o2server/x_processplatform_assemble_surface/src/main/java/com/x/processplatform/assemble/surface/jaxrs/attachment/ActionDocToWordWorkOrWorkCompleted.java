@@ -207,7 +207,7 @@ class ActionDocToWordWorkOrWorkCompleted extends BaseAction {
 				attachment.setPerson(person);
 				attachment.setLastUpdatePerson(person);
 				attachment.setSite(wi.getSite());
-				// 用于判断目录的值
+				// 디렉터리 값 판단용
 				attachment.setWorkCreateTime(work.getCreateTime());
 				attachment.setApplication(work.getApplication());
 				attachment.setProcess(work.getProcess());
@@ -261,7 +261,7 @@ class ActionDocToWordWorkOrWorkCompleted extends BaseAction {
 				attachment.setPerson(person);
 				attachment.setLastUpdatePerson(person);
 				attachment.setSite(wi.getSite());
-				// 用于判断目录的值
+				// 디렉터리 값 판단용
 				attachment.setWorkCreateTime(workCompleted.getCreateTime());
 				attachment.setApplication(workCompleted.getApplication());
 				attachment.setProcess(workCompleted.getProcess());

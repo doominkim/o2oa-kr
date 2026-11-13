@@ -7,13 +7,13 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class PersonAttribute extends GsonPropertyObject {
 
-	@FieldDescribe("个人属性名称")
+	@FieldDescribe("개인 속성 이름")
 	private String name;
 
-	@FieldDescribe("个人")
+	@FieldDescribe("개인")
 	private String person;
 
-	@FieldDescribe("属性值")
+	@FieldDescribe("속성 값")
 	private List<String> attributeList;
 
 	public String getName() {

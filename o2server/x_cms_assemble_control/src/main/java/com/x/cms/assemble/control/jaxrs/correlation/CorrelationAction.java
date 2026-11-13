@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("correlation")
-@JaxrsDescribe("关联内容.")
+@JaxrsDescribe("관련 콘텐츠.")
 public class CorrelationAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CorrelationAction.class);
 
-	@JaxrsMethodDescribe(value = "根据文档标识列示关联内容.", action = ActionListWithDocument.class)
+	@JaxrsMethodDescribe(value = "문서 식별자로 관련 콘텐츠 목록 조회.", action = ActionListWithDocument.class)
 	@GET
 	@Path("list/doc/{docId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档标识") @PathParam("docId") String docId) {
+			@JaxrsParameterDescribe("문서 식별자") @PathParam("docId") String docId) {
 		ActionResult<List<ActionListWithDocument.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,14 +50,14 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据文档标识关联内容框标识列示关联内容.", action = ActionListWithDocumentWithSite.class)
+	@JaxrsMethodDescribe(value = "문서 식별자와 관련 콘텐츠 상자 식별자로 관련 콘텐츠 목록 조회.", action = ActionListWithDocumentWithSite.class)
 	@GET
 	@Path("list/doc/{docId}/site/{site}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithDocumentWithSite(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档标识") @PathParam("docId") String docId,
-			@JaxrsParameterDescribe("关联内容框标识") @PathParam("site") String site) {
+			@JaxrsParameterDescribe("문서 식별자") @PathParam("docId") String docId,
+			@JaxrsParameterDescribe("관련 콘텐츠 상자 식별자") @PathParam("site") String site) {
 		ActionResult<List<ActionListWithDocumentWithSite.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,13 +69,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据文档标识创建关联内容.", action = ActionCreateWithDocument.class)
+	@JaxrsMethodDescribe(value = "문서 식별자로 관련 콘텐츠 생성.", action = ActionCreateWithDocument.class)
 	@POST
 	@Path("doc/{docId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档标识") @PathParam("docId") String docId, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("문서 식별자") @PathParam("docId") String docId, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,13 +87,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "替换文档指定site的关联文档数据.", action = ActionUpdateWithDocument.class)
+	@JaxrsMethodDescribe(value = "문서 지정 site의 관련 문서 데이터 교체.", action = ActionUpdateWithDocument.class)
 	@POST
 	@Path("update/doc/{docId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档标识") @PathParam("docId") String docId, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("문서 식별자") @PathParam("docId") String docId, JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -105,13 +105,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除关联内容.", action = ActionDeleteWithDocument.class)
+	@JaxrsMethodDescribe(value = "관련 콘텐츠 삭제.", action = ActionDeleteWithDocument.class)
 	@POST
 	@Path("doc/{docId}/delete")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithDocument(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文档标识") @PathParam("docId") String docId, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("문서 식별자") @PathParam("docId") String docId, JsonElement jsonElement) {
 		ActionResult<ActionDeleteWithDocument.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

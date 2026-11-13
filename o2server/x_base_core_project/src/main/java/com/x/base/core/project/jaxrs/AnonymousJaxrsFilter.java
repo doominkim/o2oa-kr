@@ -17,7 +17,7 @@ import com.x.base.core.project.http.HttpToken;
 import com.x.base.core.project.http.TokenType;
 
 /**
- * 判断当前用户，如果当前用户没有登陆也可以访问
+ * 현재 사용자 판단, 로그인하지 않아도 접근 가능
  */
 public abstract class AnonymousJaxrsFilter extends TokenFilter {
 
@@ -32,7 +32,7 @@ public abstract class AnonymousJaxrsFilter extends TokenFilter {
 				HttpToken httpToken = new HttpToken();
 				EffectivePerson effectivePerson = httpToken.who(request, response, Config.token().getCipher());
 				if (!TokenType.anonymous.equals(effectivePerson.getTokenType())) {
-					/** 需要自己标志500 */
+					/** 500 표시를 직접 해야 함 */
 					response.setStatus(500);
 					response.setHeader("Content-Type", "application/json;charset=UTF-8");
 					response.getWriter().write(FilterTools.APPLICATION_NOT_ANONYMOUS_JSON);

@@ -11,7 +11,7 @@ import com.x.hotpic.entity.HotPictureInfo;
 public class HotPictureInfoService {
 	
 	/**
-	 * 向数据库保存HotPictureInfo对象
+	 * HotPictureInfo 객체를 데이터베이스에 저장
 	 * @param _hotPictureInfo
 	 */
 	public HotPictureInfo save( EntityManagerContainer emc, HotPictureInfo _hotPictureInfo ) throws Exception {

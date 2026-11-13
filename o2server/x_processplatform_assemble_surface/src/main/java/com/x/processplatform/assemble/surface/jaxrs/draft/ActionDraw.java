@@ -56,7 +56,7 @@ class ActionDraw extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson, application);
 			}
 			Work work = this.mockWork(application, process, person, identity, unit, wi.getTitle());
-			// 设置id值与workid相同.save可以判断
+			// id 값을 workid와 동일하게 설정.save에서 판단 가능
 			work.setId("");
 			String form = this.findForm(business, process);
 			if (StringUtils.isEmpty(form)) {
@@ -83,12 +83,12 @@ class ActionDraw extends BaseAction {
 
 		private static final long serialVersionUID = 8693897765699829238L;
 
-		@FieldDescribe("工作.")
-		@Schema(description = "工作.")
+		@FieldDescribe("업무 문서.")
+		@Schema(description = "업무 문서.")
 		private WoWork work;
 
-		@FieldDescribe("业务数据.")
-		@Schema(description = "业务数据.")
+		@FieldDescribe("업무 데이터.")
+		@Schema(description = "업무 데이터.")
 		private Data data = new Data();
 
 		public WoWork getWork() {

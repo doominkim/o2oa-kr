@@ -7,6 +7,6 @@ class ExceptionPersonCardNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionPersonCardNotExist(String flag) {
-		super("通讯录设置配置, 不存在.", flag);
+		super("주소록 설정이 없습니다.", flag);
 	}
 }

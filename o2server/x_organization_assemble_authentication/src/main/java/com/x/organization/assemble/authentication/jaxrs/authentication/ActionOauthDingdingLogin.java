@@ -38,10 +38,10 @@ public class ActionOauthDingdingLogin extends BaseAction {
 			ActionResult<ActionOauthDingdingLogin.Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
 
-			// 请求钉钉用户信息地址
+			// DingTalk 사용자 정보 요청 주소
 			String url = Config.dingding().getOapiAddress() + "/sns/getuserinfo_bycode";
 
-			// 请求参数 签名
+			// 요청 파라미터 서명
 			String timestamp = new Date().getTime() + "";
 			Mac mac = Mac.getInstance("HmacSHA256");
 			String appSecret = Config.dingding().getScanLoginAppSecret();
@@ -55,7 +55,7 @@ public class ActionOauthDingdingLogin extends BaseAction {
 			JsonElement jsonElement = getDingJsonData(str);
 			JsonObject userInfo = jsonElement.getAsJsonObject().get("user_info").getAsJsonObject();
 			String unionid = userInfo.get("unionid").getAsString();
-			// 通过unionid获取用户userId
+			// unionid로 사용자 userId 조회
 			// https://oapi.dingtalk.com/user/getUseridByUnionid?access_token=ACCESS_TOKEN&unionid=xxx
 			String getDingUserIdUrl = Config.dingding().getOapiAddress() + "/user/getUseridByUnionid?access_token="
 					+ Config.dingding().corpAccessToken() + "&unionid=" + unionid;
@@ -79,7 +79,7 @@ public class ActionOauthDingdingLogin extends BaseAction {
 	}
 
 	private JsonElement getDingJsonData(String dingUserBackString) throws ExceptionOauthDingdingErrorInfo {
-		LOGGER.info("钉钉获取用户 return:{}", dingUserBackString);
+		LOGGER.info("DingTalk 사용자 조회 return:{}", dingUserBackString);
 		JsonElement dingBackJsonElement = gson.fromJson(dingUserBackString, JsonElement.class);
 		int errCode2 = dingBackJsonElement.getAsJsonObject().get("errcode").getAsInt();
 		String errMsg2 = dingBackJsonElement.getAsJsonObject().get("errmsg").getAsString();
@@ -89,7 +89,7 @@ public class ActionOauthDingdingLogin extends BaseAction {
 		return dingBackJsonElement;
 	}
 
-	// encoding参数使用utf-8
+	// encoding 파라미터는 utf-8 사용
 	private String urlEncode(String value, String encoding) {
 		if (value == null) {
 			return "";

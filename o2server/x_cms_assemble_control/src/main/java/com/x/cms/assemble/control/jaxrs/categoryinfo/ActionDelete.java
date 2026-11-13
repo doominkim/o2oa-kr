@@ -22,7 +22,7 @@ import com.x.cms.core.entity.CategoryInfo;
 import com.x.cms.core.entity.element.ViewCategory;
 
 /**
- * 删除分类
+ * 분류 삭제
  * @author sword
  */
 public class ActionDelete extends BaseAction {
@@ -57,7 +57,7 @@ public class ActionDelete extends BaseAction {
 		wo.setId( categoryInfo.getId() );
 		result.setData( wo );
 
-		//增加删除栏目批量操作（对分类和文档）的信息
+		//게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 		new CmsBatchOperationPersistService().addOperation(
 				CmsBatchOperationProcessService.OPT_OBJ_CATEGORY,
 				CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "删除分类：ID=" + id );

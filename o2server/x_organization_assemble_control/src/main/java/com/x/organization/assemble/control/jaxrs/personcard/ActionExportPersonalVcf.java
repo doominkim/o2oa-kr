@@ -19,7 +19,7 @@ import com.x.organization.core.entity.PersonCard;
 class ActionExportPersonalVcf extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ActionExportPersonalVcf.class);
-	//导出通讯录vcf
+	//주소록 vcf 내보내기
 	ActionResult<Wo> exportPersonalVcf(EffectivePerson effectivePerson, String idList) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();

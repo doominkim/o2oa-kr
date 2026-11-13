@@ -44,11 +44,11 @@ MWF.xApplication.Template.Explorer.ComplexView = new Class({
         "scrollType" : "xApp_TaskList",
         "checkboxEnable" : true,
         "pagingEnable" : false,
-        "documentSortable" : false, //item可以拖动排序，和 onSortCompleted 结合使用
+        "documentSortable" : false, //item 드래그 정렬 가능, onSortCompleted와 함께 사용
         "documentKeyWord" : null,
         "noItemText": null,
         "pagingPar" : {
-            position : [ "top" , "bottom" ], //分页条，上下
+            position : [ "top" , "bottom" ], //페이지 막대, 위아래
             countPerPage : 0,
             visiblePages : 10,
             currentPage : 1,
@@ -120,7 +120,7 @@ MWF.xApplication.Template.Explorer.ComplexView = new Class({
         }
         this.getContentTemplateNode();
         this.createViewNode();
-        this.initSortData(); //点击列排序
+        this.initSortData(); //열 클릭 시 정렬
         this.createViewHead();
         this.createViewBody();
         this._postLoad();
@@ -346,8 +346,8 @@ MWF.xApplication.Template.Explorer.ComplexView = new Class({
 
         this.template.items.each(function (item) {
             if( !item.head )return;
-            ////如果设置了权限，那么options里需要有 对应的设置项才会展现
-            // 比如 item.access == isAdmin 那么 this.options.isAdmin要为true才展现
+            ////권한을 설정하면 options에 해당 설정 항목이 있어야 표시
+            // 예: item.access == isAdmin이면 this.options.isAdmin이 true여야 표시
             if (item.access && !this.options[item.access])return;
             if( item.condition && !this.getConditionResult(item.condition))return;
             if (item.head.access && !this.options[item.head.access])return;
@@ -506,11 +506,11 @@ MWF.xApplication.Template.Explorer.ComplexView = new Class({
                 var itemNum = currentItem % countPerPage;
                 this.loadPagingElementList( countPerPage , pageNum, currentItem );
             }else{
-                this.loadPagingElementList( countPerPage , this.options.pagingPar.currentPage ); //使用分页的方式
+                this.loadPagingElementList( countPerPage , this.options.pagingPar.currentPage ); //페이지 나누기 방식 사용
             }
         }else{
             countPerPage = this.options.pagingPar.countPerPage;
-            this.loadScrollElementList( countPerPage ); //滚动条下拉取下一页
+            this.loadScrollElementList( countPerPage ); //스크롤을 내려 다음 페이지 조회
         }
     },
     loadScrollElementList : function( count ){
@@ -1001,13 +1001,13 @@ MWF.xApplication.Template.Explorer.ComplexDocument = new Class({
                     var afunction = attrsArr[i].split("^^")[1];
                     if( afunction.substr(0, "function".length) == "function" ){
                         eval("var fun = " + afunction );
-                        attrs[ aname ] = fun.call(this, this.data);  //字符串变对象或function，方法1
+                        attrs[ aname ] = fun.call(this, this.data);  //문자열을 객체 또는 function으로 변환, 방법 1
                     }else{
                         attrs[ aname ] = afunction;
                     }
                 }
             }else{
-                //字符串变对象或function，方法2
+                //문자열을 객체 또는 function으로 변환, 방법 2
                 eval( "var attrs = " + attr );
             }
         }
@@ -1027,10 +1027,10 @@ MWF.xApplication.Template.Explorer.ComplexDocument = new Class({
                 for(var i=0;i<eventsArr.length;i++){
                     var ename = eventsArr[i].split("^^")[0];
                     var efunction = eventsArr[i].split("^^")[1];
-                    events[ ename ] = eval( "(function(){ return "+ efunction +" })()" );  //字符串变对象或function，方法1
+                    events[ ename ] = eval( "(function(){ return "+ efunction +" })()" );  //문자열을 객체 또는 function으로 변환, 방법 1
                 }
             }else{
-                //字符串变对象或function，方法2
+                //문자열을 객체 또는 function으로 변환, 방법 2
                 eval( "var events = " + events );
             }
         }

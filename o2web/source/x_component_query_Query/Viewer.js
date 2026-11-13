@@ -5,20 +5,20 @@ MWF.require("o2.widget.Paging", null, false);
 MWF.require("MWF.xScript.Macro", null, false);
 MWF.xDesktop.requireApp("query.Query", "lp."+o2.language, null, false);
 MWF.xDesktop.requireApp("Template", "utils.ExcelUtilsV2", null, false);
-/** @classdesc View 数据中心的视图。本章节的脚本上下文请看<b>{@link module:queryView|queryView}。</b>
+/** @classdesc View 데이터 센터의 뷰. 이 장의 스크립트 컨텍스트는 <b>{@link module:queryView|queryView}</b>
  * @class
- * @o2cn 视图
+ * @o2cn 뷰
  * @o2category QueryView
  * @o2range {QueryView}
  * @hideconstructor
  * @example
- * //在视图的事件中获取该类
+ * //뷰 이벤트에서 이 클래스 조회
  * var view = this.target;
  * @example
- * //在视图的条目中，操作条组件中，分页事件中获取该类
+ * //뷰 항목, 작업 표시줄 컴포넌트, 페이지 이벤트에서 이 클래스 조회
  * var view = this.target.view;
  * @example
- * //调用api进行提示
+ * //api 호출로 알림
  * this.queryView.notice("this is my information", "info");
  * */
 MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
@@ -41,78 +41,78 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             "lazy": false,
             "moduleEvents": [
                 /**
-                 * 加载前触发。可通过this.target获取当前对象。
+                 * 로드 전 발생. this.target으로 현재 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#queryLoad
                  */
                 "queryLoad",
                 /**
-                 * 视图界面和当前页数据加载后执行。需注意，翻页也会执行本事件。可通过this.target获取当前对象。
+                 * 뷰 화면과 현재 페이지 데이터 로드 후 실행. 페이지 이동 시에도 실행됨. this.target으로 현재 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#postLoad
                  */
                 "postLoad",
                 /**
-                 * 加载当前页数据后，渲染界面前执行，翻页后也会执行本事件。可通过this.target获取当前对象。
+                 * 현재 페이지 데이터 로드 후 화면 렌더링 전에 실행, 페이지 이동 후에도 실행됨. this.target으로 현재 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#postLoadPageData
                  */
                 "postLoadPageData",
                 /**
-                 * 渲染当前页内容后执行，翻页后也会执行本事件。可通过this.target获取当前对象。
+                 * 현재 페이지 내용 렌더링 후 실행, 페이지 이동 후에도 실행됨. this.target으로 현재 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#postLoadPage
                  */
                 "postLoadPage",
                 /**
-                 * 选择行后执行。可通过this.target获取视图对象，通过this.event获取行对象。
+                 * 행 선택 후 실행. this.target으로 뷰 객체, this.event로 행 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#selectRow
                  */
                 "selectRow",
                 /**
-                 * 取消选择行后执行。可通过this.target获取视图对象，通过this.event获取行对象。
+                 * 행 선택 해제 후 실행. this.target으로 뷰 객체, this.event로 행 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#unselectRow
                  */
                 "unselectRow",
 
                 /**
-                 * 加载每行之前执行（非分类行）。可通过this.target获取视图对象，通过this.event获取行对象。
+                 * 각 행(분류 행 제외) 로드 전 실행. this.target으로 뷰 객체, this.event로 행 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#queryLoadItemRow
                  */
                 "queryLoadItemRow",
                 /**
-                 * 加载每行之后执行（非分类行）。可通过this.target获取视图对象，通过this.event获取行对象。
+                 * 각 행(분류 행 제외) 로드 후 실행. this.target으로 뷰 객체, this.event로 행 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#postLoadItemRow
                  */
                 "postLoadItemRow",
                 /**
-                 * 加载分类行之前执行。可通过this.target获取视图对象，通过this.event获取行对象。
+                 * 분류 행 로드 전 실행. this.target으로 뷰 객체, this.event로 행 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#queryLoadCategoryRow
                  */
                 "queryLoadCategoryRow",
                 /**
-                 * 加载分类行后执行。可通过this.target获取视图对象，通过this.event获取行对象。
+                 * 분류 행 로드 후 실행. this.target으로 뷰 객체, this.event로 행 객체 조회 가능.
                  * @event MWF.xApplication.query.Query.Viewer#postLoadCategoryRow
                  */
                 "postLoadCategoryRow",
 
                 /**
-                 * 导出查询Excel的事件，这个时候导出数据已经准备好，this.target可获得查询视图对象。this.event如下：
+                 * 쿼리 Excel 내보내기 이벤트. 이때 내보낼 데이터는 준비되어 있으며 this.target으로 쿼리 뷰 객체 조회 가능. this.event는 다음과 같음:
                  * <pre><code class='language-js'>{
-                 *       headText: headText, //文本，表格头部文本
-                 *       headStyle: headStyle, //对象，表格头部样式
-                 *       titleStyle: titleStyle, //对象，表格标题样式
-                 *       contentStyle: contentStyle, //对象，表格内容样式
-                 *       data : data, //对象数组，导出的数据，第一个数组为标题。修改后导出的excel内容也会修改。
-                 *       colWidthArray : colWidthArr, //数组，每列的宽度
-                 *       title : excelName //字符串，导出的文件名
+                 *       headText: headText, //텍스트, 표 머리글 텍스트
+                 *       headStyle: headStyle, //객체, 표 머리글 스타일
+                 *       titleStyle: titleStyle, //객체, 표 제목 스타일
+                 *       contentStyle: contentStyle, //객체, 표 내용 스타일
+                 *       data : data, //객체 배열, 내보낼 데이터. 첫 번째 배열은 제목. 수정하면 내보내는 excel 내용도 바뀜.
+                 *       colWidthArray : colWidthArr, //배열, 열별 너비
+                 *       title : excelName //문자열, 내보낼 파일명
                  * }</code></pre>
                  * @event MWF.xApplication.query.Query.Viewer#export
                  */
                 "export",
 
                 /**
-                 * 导出查询Excel，产生每行后执行的事件，this.target可获得查询视图对象，可以通过this.event获取下列内容
+                 * 쿼리 Excel 내보내기에서 행마다 생성 후 실행되는 이벤트. this.target으로 쿼리 뷰 객체를, this.event로 다음 내용을 조회 가능
                  * <pre><code class='language-js'>{
-                 *       data : data, //对象，当前行导出的数据。修改后导出的excel内容也会修改。
-                 *       index : 1, //数字，导出的行号，从1开始
-                 *       source : source //对象，从后台获取的源数据
+                 *       data : data, //객체, 현재 행의 내보낼 데이터. 수정하면 내보내는 excel 내용도 바뀜.
+                 *       index : 1, //숫자, 내보낼 행 번호, 1부터 시작
+                 *       source : source //객체, 서버에서 가져온 원본 데이터
                  * }</code></pre>
                  * @event MWF.xApplication.query.Query.Viewer#exportRow
                  */
@@ -126,10 +126,10 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             // "actionRoot": "x_query_assemble_surface"
         },
         initialize: function(container, json, options, app, parentMacro){
-            //本类有三种事件，
-            //一种是通过 options 传进来的事件，包括 loadView、openDocument、select、unselect
-            //一种是用户配置的 事件， 在this.options.moduleEvents 中定义的作为类事件
-            //还有一种也是用户配置的事件，不在this.options.moduleEvents 中定义的作为 this.node 的DOM事件
+            //이 클래스에는 세 가지 이벤트가 있음.
+            //하나는 options로 전달되는 이벤트로 loadView, openDocument, select, unselect 포함
+            //하나는 사용자가 설정한 이벤트로, this.options.moduleEvents에 정의된 것은 클래스 이벤트
+            //또 하나도 사용자가 설정한 이벤트로, this.options.moduleEvents에 정의되지 않은 것은 this.node의 DOM 이벤트
 
             this.setOptions(options);
 
@@ -149,16 +149,16 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             this.originalJson = Object.clone(json);
 
             /**
-             * @summary 视图的详细配置信息，比如条目的选择类型等.
+             * @summary 뷰의 상세 설정 정보(항목 선택 유형 등).
              * @member {Object}
              * @example
-             *  //可以在视图脚本中获取视图基本信息（视图事件中）
-             * var json = this.target.viewJson; //视图配置信息
-             * var name = json.selectList; //视图的列配置
+             *  //뷰 스크립트(뷰 이벤트)에서 뷰 기본 정보 조회 가능
+             * var json = this.target.viewJson; //뷰 설정 정보
+             * var name = json.selectList; //뷰 열 설정
              * @example
-             *  //可以在视图的组件中获取视图基本信息(在视图的操作条组件中，分页事件中)
-             * var json = this.target.view.viewJson; //视图配置信息
-             * var name = json.selectList; //视图的列配置
+             *  //뷰의 컴포넌트(뷰 작업 표시줄 컴포넌트, 페이지 이벤트)에서 뷰 기본 정보 조회 가능
+             * var json = this.target.view.viewJson; //뷰 설정 정보
+             * var name = json.selectList; //뷰 열 설정
              */
             this.viewJson = null;
             this.filterItems = [];
@@ -166,22 +166,22 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             this.searchStatus = "none"; //none, custom, default
 
             /**
-             * @summary 视图当前页的所有行对象数组.
+             * @summary 뷰 현재 페이지의 모든 행 객체 배열.
              * @member {Array}
              * @example
-             * //获取视图当前页的所有行对象数组
+             * //뷰 현재 페이지의 모든 행 객체 배열 조회
              * var itemList = this.target.items;
              */
             this.items = [];
 
             /**
-             * @summary 视图选中行的对象数组.
+             * @summary 뷰에서 선택한 행의 객체 배열.
              * @member {Array}
              * @example
-             * //获取视图选中行的对象数组
+             * //뷰에서 선택한 행의 객체 배열 조회
              * var itemList = this.target.selectedItems;
              * itemList.each(function(item){
-             *      //取消选中
+             *      //선택 해제
              *     item.unSelected()
              * })
              */
@@ -254,39 +254,39 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
         },
         loadLayout: function(){
             /**
-             * @summary 视图的节点，mootools封装过的Dom对象，可以直接使用原生的js和moootools方法访问和操作该对象。
+             * @summary 뷰 노드. mootools로 래핑된 Dom 객체로, 네이티브 js와 mootools 메서드로 직접 접근·조작 가능.
              * @see https://mootools.net/core/docs/1.6.0/Element/Element
              * @member {Element}
              * @example
-             *  //可以在视图脚本中获取视图的Dom
+             *  //뷰 스크립트에서 뷰의 Dom 조회 가능
              * var node = this.target.node;
              * @example
-             *  //可以在视图的组件中获取视图的Dom(在视图的操作条组件中，分页事件中)
+             *  //뷰의 컴포넌트(뷰 작업 표시줄 컴포넌트, 페이지 이벤트)에서 뷰의 Dom 조회 가능
              * var node = this.target.view.node;
              */
             this.node = new Element("div.form-content-view", {"styles": this.css.node, mwftype: "view"}).inject(this.container);
 
             //if (this.options.export) this.exportAreaNode = new Element("div", {"styles": this.css.exportAreaNode}).inject(this.node);
             /**
-             * @summary 搜索界面容器
+             * @summary 검색 화면 컨테이너
              * @member {Element}
              */
             this.searchAreaNode = new Element("div.searchAreaNode", {"styles": this.css.searchAreaNode}).inject(this.node);
 
             /**
-             * @summary 操作组件容器
+             * @summary 작업 컴포넌트 컨테이너
              * @member {Element}
              */
             this.actionbarAreaNode =  new Element("div.actionbarAreaNode", {"styles": this.css.actionbarAreaNode}).inject(this.node);
 
             /**
-             * @summary 表头和条目容器，
+             * @summary 헤더와 항목 컨테이너,
              * @member {Element}
              */
             this.viewAreaNode = new Element("div.viewAreaNode", {"styles": this.css.viewAreaNode}).inject(this.node);
             // this.viewPageNode = new Element("div", {"styles": this.css.viewPageNode}).inject(this.node);
             /**
-             * @summary 分页组件容器，
+             * @summary 페이지 컴포넌트 컨테이너,
              * @member {Element}
              */
             this.viewPageAreaNode = new Element("div.viewPageAreaNode", {"styles": this.css.viewPageAreaNode}).inject(this.node);
@@ -414,14 +414,14 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                     return;
                 }
                 /**
-                 * @summary 视图的操作条对象.
+                 * @summary 뷰의 작업 표시줄 객체.
                  * @member {Object}
                  * @example
                  * var actionbar = this.target.actionbar;
                  */
                 this.actionbar = new MWF.xApplication.query.Query.Viewer.Actionbar(this.actionbarAreaNode, this.viewJson.actionbarList[0], this, {});
                 this.actionbar.load();
-            }else{ //兼容以前的ExportNode
+            }else{ //기존 ExportNode 호환
                 this.createExportNode();
             }
         },
@@ -496,7 +496,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                 }
 
 
-                //序号
+                //번호
                 if (this.viewJson.isSequence==="yes"){
                     this.sequenceTitleCell = new Element("td", {
                         "styles": viewTitleCellNode,
@@ -795,7 +795,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                     // json = JSON.parse(jsonStr);
                 }
                 /**
-                 * @summary 视图的分页组件对象.
+                 * @summary 뷰의 페이지 컴포넌트 객체.
                  * @member {Object}
                  * @example
                  * var paging = this.target.paging;
@@ -863,7 +863,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                     this.exportExcelEnd = null;
 
                     this.loadCurrentPageData(data, function () {
-                        this.fireEvent("postLoad"); //用户配置的事件
+                        this.fireEvent("postLoad"); //사용자 설정 이벤트
                         this.lookuping = false;
                         if(callback)callback(this);
                     }.bind(this), ()=>{
@@ -882,8 +882,8 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                             this.loadingAreaNode.destroy();
                             this.loadingAreaNode = null;
                         }
-                        this.fireEvent("loadView"); //options 传入的事件
-                        this.fireEvent("postLoad"); //用户配置的事件
+                        this.fireEvent("loadView"); //options 전달된 이벤트
+                        this.fireEvent("postLoad"); //사용자 설정 이벤트
                         this.lookuping = false;
                         if(callback)callback(this);
                     });
@@ -892,7 +892,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                     // if (this.bundleItems.length){
                     //     if( this.noDataTextNode )this.noDataTextNode.destroy();
                     //     this.loadCurrentPageData( function () {
-                    //         this.fireEvent("postLoad"); //用户配置的事件
+                    //         this.fireEvent("postLoad"); //사용자 설정 이벤트
                     //         this.lookuping = false;
                     //         if(callback)callback(this);
                     //     }.bind(this));
@@ -913,8 +913,8 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                     //         this.loadingAreaNode.destroy();
                     //         this.loadingAreaNode = null;
                     //     }
-                    //     this.fireEvent("loadView"); //options 传入的事件
-                    //     this.fireEvent("postLoad"); //用户配置的事件
+                    //     this.fireEvent("loadView"); //options로 전달된 이벤트
+                    //     this.fireEvent("postLoad"); //사용자 설정 이벤트
                     //     this.lookuping = false;
                     //     if(callback)callback(this);
                     // }
@@ -958,7 +958,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
         loadCurrentPageData: function(data, callback, noDocument ){
             this.loadSearchFilterItemAreaNode(data);
 
-            //是否需要在翻页的时候清空之前的items ?
+            //페이지 이동 시 이전 items를 비워야 하는지?
 
             if( this.pageloading )return;
             this.pageloading = true;
@@ -1019,7 +1019,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
 
                     this.pageloading = false;
 
-                    this.fireEvent("loadView"); //options 传入的事件
+                    this.fireEvent("loadView"); //options 전달된 이벤트
                     this.fireEvent("postLoadPage");
 
                     if(callback)callback();
@@ -1052,7 +1052,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
 
             //     this.pageloading = false;
 
-            //     this.fireEvent("loadView"); //options 传入的事件
+            //     this.fireEvent("loadView"); //options로 전달된 이벤트
             //     this.fireEvent("postLoadPage");
 
             //     if(callback)callback();
@@ -1142,12 +1142,12 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
 
         // openCms: function(e, data){
         //     var options = {"documentId": data.bundle};
-        //     this.fireEvent("openDocument", [options, this]); //options 传入的事件
+        //     this.fireEvent("openDocument", [options, this]); //options로 전달된 이벤트
         //     layout.desktop.openApplication(e, "cms.Document", options);
         // },
         // openWorkAndCompleted: function(e, data){
         //     var options = {"jobId": data.bundle};
-        //     this.fireEvent("openDocument", [options, this]); //options 传入的事件
+        //     this.fireEvent("openDocument", [options, this]); //options로 전달된 이벤트
         //     layout.desktop.openApplication(e, "process.Work", options);
         // },
         loadDataMobile: function(){
@@ -1331,9 +1331,9 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             this.node.setStyle("display", "none");
         },
         /**
-         * @summary 刷新视图。
-         *  @param {Function} [callback] - 可选，刷新视图后的回调.
-         *  @param {Boolean} [keepSelected] - 可选，是否保留选择结果.
+         * @summary 뷰 새로 고침.
+         *  @param {Function} [callback] - 선택 사항, 뷰 새로 고침 후 콜백.
+         *  @param {Boolean} [keepSelected] - 선택 사항, 선택 결과 유지 여부.
          *  @example
          *  this.target.reload();
          */
@@ -1457,7 +1457,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             }.bind(this))
         },
 
-        //搜索相关开始
+        //검색 관련 시작
         createSearchNode: function(){
             if( this.viewJson.searchbarHidden === true ){
                 return;
@@ -1938,7 +1938,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                 this.fulltextSearchInput.setAttribute('placeholder', this.lp.searchNavPlaceholder);
                 this.fulltextSearchInput.setAttribute('type', 'search');
                 this.fulltextSearchInput.setAttribute('label-style', 'width: 6rem; min-width:4.3em; max-width:9em');
-                // if (!o2.isMediaMobile()) this.fulltextSearchInput.setAttribute('label', '搜索');
+                // if (!o2.isMediaMobile()) this.fulltextSearchInput.setAttribute('label', '검색');
                 this.viewFulltextSearchAreaNode.appendChild(this.fulltextSearchInput);
 
                 this.fulltextSearchButton = new Element("oo-button");
@@ -2463,13 +2463,13 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             filter.destroy();
             this.searchCustomView()
         },
-        //搜索相关结束
+        //검색 관련 끝
 
-        //api 使用 开始
+        //api 사용 시작
 
         /**
-         * @summary 如果当前视图是嵌入在表单或者页面中，使用该方法获取表单或页面的上下文。
-         * @see {@link module:queryView.getParentEnvironment|详情查看 this.queryViewer.getParentEnvironment}
+         * @summary 현재 뷰가 양식 또는 페이지에 포함된 경우 이 메서드로 양식이나 페이지의 컨텍스트 조회.
+         * @see {@link module:queryView.getParentEnvironment|자세한 내용은 this.queryViewer.getParentEnvironment 참고}
          * @return {Object}
          * @example
          *  this.target.getParentEnvironment();
@@ -2478,8 +2478,8 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             return this.parentMacro ? this.parentMacro.environment : null;
         },
         /**
-         * @summary 获取视图的配置信息。
-         * @see {@link module:queryView.getViewInfor|详情查看 this.queryViewer.getViewInfor}
+         * @summary 뷰 설정 정보 조회.
+         * @see {@link module:queryView.getViewInfor|자세한 내용은 this.queryViewer.getViewInfor 참고}
          * @return {Object}
          * @example
          *  this.target.getViewInfor();
@@ -2488,8 +2488,8 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             return this.json;
         },
         /**
-         * @summary 获取视图当前页的基本信息。
-         * @see {@link module:queryView.getPageInfor|详情查看 this.queryViewer.getPageInfor}
+         * @summary 뷰 현재 페이지의 기본 정보 조회.
+         * @see {@link module:queryView.getPageInfor|자세한 내용은 this.queryViewer.getPageInfor 참고}
          * @return {Object}
          * @example
          *  this.target.getPageInfor();
@@ -2502,8 +2502,8 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             };
         },
         /**
-         * @summary 获取当前页的数据。
-         * @see {@link module:queryView.getPageData|详情查看 this.queryViewer.getPageData}
+         * @summary 현재 페이지 데이터 조회.
+         * @see {@link module:queryView.getPageData|자세한 내용은 this.queryViewer.getPageData 참고}
          * @return {Object}
          * @example
          *  this.target.getPageData();
@@ -2512,12 +2512,12 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             return this.gridJson;
         },
         /**
-         * @summary 跳转到指定的页面。
-         * @see {@link module:queryView.toPage|详情查看 this.queryViewer.toPage}
-         * @param {Number} pageNumber 需要跳转的页码
-         * @param {Function} callback 跳转的页面数据加载完成以后的回调方法。
+         * @summary 지정한 페이지로 이동.
+         * @see {@link module:queryView.toPage|자세한 내용은 this.queryViewer.toPage 참고}
+         * @param {Number} pageNumber 이동할 페이지 번호
+         * @param {Function} callback 이동한 페이지 데이터 로드 완료 후 콜백 메서드.
          * @example
-         *  //　跳转到第2页并且获取该页的数据。
+         *  //　2페이지로 이동하고 해당 페이지 데이터 조회.
          *  this.target.toPage( 2, function(){
          *      var data = this.target.getPageData();
          *  }.bind(this) )
@@ -2527,19 +2527,19 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             this.loadCurrentPageData( callback );
         },
         /**
-         * 获取选中的条目的数据。
+         * 선택된 항목의 데이터를 조회합니다.
          * @method getSelectedData
-         * @see {@link module:queryView.getSelectedData|详情查看 this.queryViewer.getSelectedData}
+         * @see {@link module:queryView.getSelectedData|자세한 내용은 this.queryViewer.getSelectedData 참고}
          * @memberOf module:queryView
          * @static
-         * @return {Object[]} 选中的条目的数据。
-         * <div>格式如下：</div>
+         * @return {Object[]} 선택된 항목의 데이터.
+         * <div>형식은 다음과 같음:</div>
          * <pre><code class='language-js'>
          * [
          {
-         "bundle": "099ed3c9-dfbc-4094-a8b7-5bfd6c5f7070", //cms 的 documentId, process 的 jobId
-         "data": {  //视图中配置的数据
-         "title": "考勤管理-配置-统计周期设置", //列名称及列值
+         "bundle": "099ed3c9-dfbc-4094-a8b7-5bfd6c5f7070", //cms의 documentId, process의 jobId
+         "data": {  //뷰에 설정된 데이터
+         "title": "근태 관리-설정-통계 주기 설정", //열 이름 및 열 값
          "time": "2018-08-25 11:29:45"
          }
          },
@@ -2761,11 +2761,11 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
         },
 
         /**
-         * @summary 设置视图的过滤条件，该方法不能修改视图中默认的过滤条件（在开发视图的时候添加的过滤条件），而是在这上面新增。
-         * @see {@link module:queryView.setFilter|详情查看 this.queryViewer.setFilter}
-         * @param {(ViewFilter[]|ViewFilter|Null)} [filter] 过滤条件
-         * @param {Function} [callback] 过滤完成并重新加载数据后的回调方法。
-         * @param {Boolean} [keepSelected] 可选,是否保留选择结果
+         * @summary 뷰 필터 조건 설정. 이 메서드는 뷰의 기본 필터 조건(뷰 개발 시 추가한 필터 조건)을 수정하지 않고 그 위에 추가함.
+         * @see {@link module:queryView.setFilter|자세한 내용은 this.queryViewer.setFilter 참고}
+         * @param {(ViewFilter[]|ViewFilter|Null)} [filter] 필터 조건
+         * @param {Function} [callback] 필터링 후 데이터를 다시 로드한 뒤 콜백 메서드.
+         * @param {Boolean} [keepSelected] 선택 사항, 선택 결과 유지 여부
          */
         setFilter : function( filter, callback, keepSelected ){
             if( this.lookuping || this.pageloading )return;
@@ -2779,10 +2779,10 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             }
         },
         /**
-         * @summary 把当前视图切换成另外一个视图。
-         * @see {@link module:queryView.switchView|详情查看 this.queryViewer.switchView}
-         * @param {(ViewFilter[]|ViewFilter|Null)} [filter] 过滤条件
-         * @param {Object} options 需要跳转的参数配置
+         * @summary 현재 뷰를 다른 뷰로 전환.
+         * @see {@link module:queryView.switchView|자세한 내용은 this.queryViewer.switchView 참고}
+         * @param {(ViewFilter[]|ViewFilter|Null)} [filter] 필터 조건
+         * @param {Object} options 이동할 매개변수 설정
          */
         switchView : function( json ){
             // json = {
@@ -2895,7 +2895,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             return dialog;
         },
 
-        //api 使用 结束
+        //api 사용 끝
 
         loadObserver: function(){
             if( this.io ){
@@ -2908,7 +2908,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                     entries.forEach(function (entry) {
                         if (entry.intersectionRatio > 0 || entry.isIntersecting) {
                             var item = entry.target.retrieve("item");
-                            if( item && !item.loading && !item.loaded){ //已经加载完成
+                            if( item && !item.loading && !item.loaded){ //로드 완료됨
                                 item.active();
                             }
                             observer.unobserve(entry.target);
@@ -3027,14 +3027,14 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
     });
 
 
-/** @classdesc ViewerItem 数据中心的视图条目。本章节的脚本上下文请看<b>{@link module:queryView|queryView}。</b>
+/** @classdesc ViewerItem 데이터 센터의 뷰 항목. 이 장의 스크립트 컨텍스트는 <b>{@link module:queryView|queryView}</b>
  * @class
- * @o2cn 视图条目（行）
+ * @o2cn 뷰 항목(행)
  * @o2category QueryView
  * @o2range {QueryView}
  * @hideconstructor
  * @example
- * //在视图中获取行
+ * //뷰에서 행 조회
  * var item = this.target.items[0];
  */
 MWF.xApplication.query.Query.Viewer.Item = new Class(
@@ -3042,46 +3042,46 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
     {
         initialize: function(view, data, prev, i, category, lazy){
             /**
-             * 加载对应列的每个单元格后触发。可通过this.target获取以下对象：
+             * 해당 열의 각 셀 로드 후 발생. this.target으로 다음 객체 조회 가능:
              * <pre><code class='language-js'>{
-             *  "json ": {}, //当前行配置
-             *  "data": "",  //当前单元格数据，可能是字符串、数组、布尔值。
-             *  "node": td, //当前单元格
-             *  "view": view, //当前视图对象
-             *  "row": {} //当前行的平台类对象
+             *  "json ": {}, //현재 행 설정
+             *  "data": "",  //현재 셀 데이터. 문자열, 배열, 불리언일 수 있음.
+             *  "node": td, //현재 셀
+             *  "view": view, //현재 뷰 객체
+             *  "row": {} //현재 행의 플랫폼 클래스 객체
              * }</code></pre>
              * @event MWF.xApplication.query.Query.Viewer.Item#loadContent
              */
             /**
-             * 加载对应列的每个单元格后触发。可通过this.target获取以下对象：
+             * 해당 열의 각 셀 로드 후 발생. this.target으로 다음 객체 조회 가능:
              * <pre><code class='language-js'>{
-             *  "json ": {}, //当前行配置
-             *  "data": "",  //当前单元格数据，可能是字符串、数组、布尔值。
-             *  "node": td, //当前单元格
-             *  "view": view, //当前视图对象
-             *  "row": {} //当前行的平台类对象
+             *  "json ": {}, //현재 행 설정
+             *  "data": "",  //현재 셀 데이터. 문자열, 배열, 불리언일 수 있음.
+             *  "node": td, //현재 셀
+             *  "view": view, //현재 뷰 객체
+             *  "row": {} //현재 행의 플랫폼 클래스 객체
              * }</code></pre>
              * @event MWF.xApplication.query.Query.Viewer.Item#click
              */
 
             /**
-             * @summary 行所属视图.
+             * @summary 행이 속한 뷰.
              * @member {Object}
              */
             this.view = view;
             /**
-             * @summary 行数据.
+             * @summary 행 데이터.
              * @member {Object}
              */
             this.data = data;
             this.css = this.view.css;
             /**
-             * @summary 行是否被选中.
+             * @summary 행 선택 여부.
              * @member {Boolean}
              */
             this.isSelected = false;
             /**
-             * @summary 如果视图有分类，获取分类对象。
+             * @summary 뷰에 분류가 있으면 분류 객체 조회.
              * @member {Object}
              */
             this.category = category;
@@ -3174,7 +3174,7 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
             }
             //}
 
-            //序号
+            //번호
             var sequence = 1+this.view.json.pageSize*(this.view.currentPage-1)+this.idx;
             this.data["$sequence"] = sequence;
             if (this.view.viewJson.isSequence==="yes"){
@@ -3239,7 +3239,7 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
                 this.placeholderTd = null;
             }
 
-            //默认选中
+            //기본 선택
             this._checkSelected();
             // var selectedFlag;
             // var defaultSelectedScript = this.view.json.defaultSelectedScript || this.view.viewJson.defaultSelectedScript;
@@ -3258,7 +3258,7 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
             //             break;
             //     }
             // }
-            // //判断是不是在selectedItems中，用户手工选择
+            // //selectedItems에 있는지(사용자가 직접 선택했는지) 판단
             // if( !this.isSelected && this.view.selectedItems.length ){
             //     for(var i=0; i<this.view.selectedItems.length; i++){
             //         if( this.view.selectedItems[i].data.bundle === this.data.bundle ){
@@ -3310,7 +3310,7 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
                         break;
                 }
             }
-            //判断是不是在selectedItems中，用户手工选择
+            //selectedItems에 있는지(사용자가 직접 선택했는지) 판단
             if( !this.isSelected && this.view.selectedItems.length ){
                 for(var i=0; i<this.view.selectedItems.length; i++){
                     if( this.view.selectedItems[i].data.bundle === this.data.bundle ){
@@ -3375,12 +3375,12 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
         },
         openCms: function(e){
             var options = {"documentId": this.data.bundle};
-            this.view.fireEvent("openDocument", [options, this]); //options 传入的事件
+            this.view.fireEvent("openDocument", [options, this]); //options 전달된 이벤트
             layout.desktop.openApplication(e, "cms.Document", options);
         },
         openWorkAndCompleted: function(e){
             var options = {"jobId": this.data.bundle};
-            this.view.fireEvent("openDocument", [options, this]); //options 传入的事件
+            this.view.fireEvent("openDocument", [options, this]); //options 전달된 이벤트
             layout.desktop.openApplication(e, "process.Work", options);
 
             // MWF.Actions.get("x_processplatform_assemble_surface").listWorkByJob(this.data.bundle, function(json){
@@ -3503,12 +3503,12 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
         },
         openWork: function(id, e){
             var options = {"workId": id};
-            this.view.fireEvent("openDocument", [options, this]); //options 传入的事件
+            this.view.fireEvent("openDocument", [options, this]); //options 전달된 이벤트
             layout.desktop.openApplication(e, "process.Work", options);
         },
         openWorkCompleted: function(id, e){
             var options = {"workCompletedId": id};
-            this.view.fireEvent("openDocument", [options, this]); //options 传入的事件
+            this.view.fireEvent("openDocument", [options, this]); //options 전달된 이벤트
             layout.desktop.openApplication(e, "process.Work", options);
         },
 
@@ -3568,7 +3568,7 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
         },
 
         /**
-         * @summary 选中（多选）。
+         * @summary 선택(다중 선택).
          * @example
          *  item = this.target.items[0];
          *  item.selected();
@@ -3604,11 +3604,11 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
                 "selected": true,
                 "item": this,
                 "data": this.data
-            }]); //options 传入的事件
+            }]); //options 전달된 이벤트
         },
 
         /**
-         * @summary 取消选中（多选）。
+         * @summary 선택 해제(다중 선택).
          * @example
          *  item = this.target.items[0];
          *  item.unSelected();
@@ -3656,12 +3656,12 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
                     "selected": false,
                     "item": this,
                     "data": this.data
-                }]); //options 传入的事件
+                }]); //options 전달된 이벤트
             }
         },
 
         /**
-         * @summary 选中（单选）。
+         * @summary 선택(단일 선택).
          * @example
          *  item = this.target.items[0];
          *  item.selectedSingle();
@@ -3689,11 +3689,11 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
                 "selected": true,
                 "item": this,
                 "data": this.data
-            }]); //options 传入的事件
+            }]); //options 전달된 이벤트
         },
 
         /**
-         * @summary 取消选中（单选）。
+         * @summary 선택 해제(단일 선택).
          * @example
          *  item = this.target.items[0];
          *  item.unSelectedSingle();
@@ -3730,7 +3730,7 @@ MWF.xApplication.query.Query.Viewer.Item = new Class(
                 "selected": false,
                 "item": this,
                 "data": this.data
-            }]); //options 传入的事件
+            }]); //options 전달된 이벤트
         }
     });
 
@@ -3738,22 +3738,22 @@ MWF.xApplication.query.Query.Viewer.MobileItem = new Class({
     Extends: MWF.xApplication.query.Query.Viewer.Item,
     initialize: function(view, data, prev, i, category){
         /**
-         * @summary 行所属视图.
+         * @summary 행이 속한 뷰.
          * @member {Object}
          */
         this.view = view;
         /**
-         * @summary 行数据.
+         * @summary 행 데이터.
          * @member {Object}
          */
         this.data = data;
         /**
-         * @summary 行是否被选中.
+         * @summary 행 선택 여부.
          * @member {Boolean}
          */
         this.isSelected = false;
         /**
-         * @summary 如果视图有分类，获取分类对象。
+         * @summary 뷰에 분류가 있으면 분류 객체 조회.
          * @member {Object}
          */
         this.category = category;
@@ -3841,7 +3841,7 @@ MWF.xApplication.query.Query.Viewer.MobileItem = new Class({
             "selected": true,
             "item": this,
             "data": this.data
-        }]); //options 传入的事件
+        }]); //options 전달된 이벤트
     },
     unSelected: function( from, isFire ){
         for(var i=0; i<this.view.selectedItems.length; i++){
@@ -3860,7 +3860,7 @@ MWF.xApplication.query.Query.Viewer.MobileItem = new Class({
                 "selected": false,
                 "item": this,
                 "data": this.data
-            }]); //options 传入的事件
+            }]); //options 전달된 이벤트
         }
     },
 
@@ -3874,7 +3874,7 @@ MWF.xApplication.query.Query.Viewer.MobileItem = new Class({
             "selected": true,
             "item": this,
             "data": this.data
-        }]); //options 传入的事件
+        }]); //options 전달된 이벤트
     },
     unSelectedSingle: function(){
         this.view.selectedItems = [];
@@ -3886,7 +3886,7 @@ MWF.xApplication.query.Query.Viewer.MobileItem = new Class({
             "selected": false,
             "item": this,
             "data": this.data
-        }]); //options 传入的事件
+        }]); //options 전달된 이벤트
     },
     setOpenWork:function (node){
         const clickColumn = this.view.viewJson.selectList.find((col)=>{ return !!col.clickCode });
@@ -4253,13 +4253,13 @@ MWF.xApplication.query.Query.Viewer.Filter = new Class({
     }
 });
 
-/** @class Actionbar 视图操作条组件。
- * @o2cn 视图操作条
+/** @class Actionbar 뷰 작업 표시줄 컴포넌트.
+ * @o2cn 뷰 작업 표시줄
  * @example
- * //可以在视图中获取该组件
- * var actionbar = this.target.actionbar; //在视图中获取操作条
- * //方法2
- * var actionbar = this.target; //在操作条和操作本身的事件脚本中获取
+ * //뷰에서 이 컴포넌트 조회 가능
+ * var actionbar = this.target.actionbar; //뷰에서 작업 표시줄 조회
+ * //방법 2
+ * var actionbar = this.target; //작업 막대와 작업 자체의 이벤트 스크립트에서 가져오기
  * @o2category QueryView
  * @o2range {QueryView}
  * @hideconstructor
@@ -4272,22 +4272,22 @@ MWF.xApplication.query.Query.Viewer.Actionbar = new Class(
             "style" : "default",
             "moduleEvents": [
                 /**
-                 * 视图操作条加载前触发。
+                 * 뷰 작업 표시줄 로드 전 발생.
                  * @event MWF.xApplication.query.Query.Viewer.Actionbar#queryLoad
                  */
                 "queryLoad",
                 /**
-                 * 视图加载时触发。
+                 * 뷰 로드 시 발생.
                  * @event MWF.xApplication.query.Query.Viewer.Actionbar#load
                  */
                 "load",
                 /**
-                 * 视图操作条加载后事件.由于加载过程中有异步处理，这个时候操作条有可能还未生成。
+                 * 뷰 작업 표시줄 로드 후 이벤트. 로드 중 비동기 처리가 있어 이때 작업 표시줄이 아직 생성되지 않았을 수 있음.
                  * @event MWF.xApplication.query.Query.Viewer.Actionbar#postLoad
                  */
                 "postLoad",
                 /**
-                 * 视图操作条加载后事件。这个时候操作条已生成。
+                 * 뷰 작업 표시줄 로드 후 이벤트. 이때 작업 표시줄이 생성되어 있음.
                  * @event MWF.xApplication.query.Query.Viewer.Actionbar#afterLoad
                  */
                 "afterLoad"
@@ -4295,25 +4295,25 @@ MWF.xApplication.query.Query.Viewer.Actionbar = new Class(
         },
         initialize: function(node, json, form, options){
             /**
-             * @summary 操作条组件容器.
+             * @summary 작업 표시줄 컴포넌트 컨테이너.
              * @member {Element}
              */
             this.node = $(node);
             this.node.store("module", this);
             /**
-             * @summary 操作条组件配置数据.
+             * @summary 작업 표시줄 컴포넌트 설정 데이터.
              * @member {Object}
              */
             this.json = json;
             this.form = form;
             /**
-             * @summary 操作条组件所属视图.
+             * @summary 작업 표시줄 컴포넌트가 속한 뷰.
              * @member {Object}
              */
             this.view = form;
         },
         /**
-         * @summary 隐藏操作条。
+         * @summary 작업 표시줄 숨기기.
          */
         hide: function(){
             var dsp = this.node.getStyle("display");
@@ -4321,7 +4321,7 @@ MWF.xApplication.query.Query.Viewer.Actionbar = new Class(
             this.node.setStyle("display", "none");
         },
         /**
-         * @summary 显示操作条。
+         * @summary 작업 표시줄 표시.
          */
         show: function(){
             var dsp = this.node.retrieve("mwf_display", dsp);
@@ -4617,13 +4617,13 @@ MWF.xApplication.query.Query.Viewer.Actionbar = new Class(
         }
     });
 
-/** @class Actionbar 视图分页组件。
- * @o2cn 视图分页组件
+/** @class Actionbar 뷰 페이지 컴포넌트.
+ * @o2cn 뷰 페이지 컴포넌트
  * @example
- * //可以在视图中获取该组件
- * var actionbar = this.target.paging; //在视图中获取操作条
- * //方法2
- * var actionbar = this.target; //在分页组件本身的事件脚本中获取
+ * //뷰에서 이 컴포넌트 조회 가능
+ * var actionbar = this.target.paging; //뷰에서 작업 표시줄 조회
+ * //방법 2
+ * var actionbar = this.target; //페이지 컴포넌트 자체 이벤트 스크립트에서 조회
  * @o2category QueryView
  * @o2range {QueryView}
  * @hideconstructor
@@ -4637,27 +4637,27 @@ MWF.xApplication.query.Query.Viewer.Paging = new Class(
             "useMainColor": false,
             "moduleEvents": [
                 /**
-                 * 分页加载前触发。
+                 * 페이지 로드 전 발생.
                  * @event MWF.xApplication.query.Query.Viewer.Paging#queryLoad
                  */
                 "queryLoad",
                 /**
-                 * 分页加载时触发。
+                 * 페이지 로드 시 발생.
                  * @event MWF.xApplication.query.Query.Viewer.Paging#load
                  */
                 "load",
                 /**
-                 * 分页加载后事件.由于加载过程中有异步处理，这个时候分页组件有可能还未生成。
+                 * 페이지 로드 후 이벤트. 로드 중 비동기 처리가 있어 이때 페이지 컴포넌트가 아직 생성되지 않았을 수 있음.
                  * @event MWF.xApplication.query.Query.Viewer.Paging#postLoad
                  */
                 "postLoad",
                 /**
-                 * 分页加载后事件。这个时候分页界面已生成。
+                 * 페이지 로드 후 이벤트. 이때 페이지 화면이 생성되어 있음.
                  * @event MWF.xApplication.query.Query.Viewer.Paging#afterLoad
                  */
                 "afterLoad",
                 /**
-                 * 跳页或者分页后执行。
+                 * 페이지 이동 또는 페이지 전환 후 실행.
                  * @event MWF.xApplication.query.Query.Viewer.Paging#jump
                  */
                 "jump"
@@ -4666,25 +4666,25 @@ MWF.xApplication.query.Query.Viewer.Paging = new Class(
         initialize: function(node, json, form, options){
             this.setOptions(options);
             /**
-             * @summary 分页组件容器.
+             * @summary 페이지 컴포넌트 컨테이너.
              * @member {Element}
              */
             this.node = $(node);
             this.node.store("module", this);
             /**
-             * @summary 分页组件所属视图.
+             * @summary 페이지 컴포넌트가 속한 뷰.
              * @member {Object}
              */
             this.json = json;
             this.form = form;
             /**
-             * @summary 分页所属视图.
+             * @summary 페이지가 속한 뷰.
              * @member {Object}
              */
             this.view = form;
         },
         /**
-         * @summary 隐藏分页。
+         * @summary 페이지 숨기기.
          */
         hide: function(){
             var dsp = this.node.getStyle("display");
@@ -4692,7 +4692,7 @@ MWF.xApplication.query.Query.Viewer.Paging = new Class(
             this.node.setStyle("display", "none");
         },
         /**
-         * @summary 显示分页。
+         * @summary 페이지 표시.
          */
         show: function(){
             var dsp = this.node.retrieve("mwf_display", dsp);
@@ -5161,7 +5161,7 @@ MWF.xApplication.query.Query.Viewer.Exporter = new Class({
                         dataArray.push( text );
                         switch (c.total){
                             case 'number':
-                                if( parseFloat(text).toString() !== "NaN" ) { //可以转成数字
+                                if( parseFloat(text).toString() !== "NaN" ) { //숫자로 변환 가능
                                     totalArray[columnIndex] = totalArray[columnIndex].plus(text);
                                 }
                                 break;
@@ -5172,7 +5172,7 @@ MWF.xApplication.query.Query.Viewer.Exporter = new Class({
                         columnIndex++;
                     }
                 }.bind(this));
-                //exportRow事件
+                //exportRow 이벤트
                 var argu = {"index":rowIndex, "source": d, "data":dataArray};
                 this.viewer?.fireEvent("exportRow", [argu]);
                 this.fireEvent("exportRow", [argu]);
@@ -5208,7 +5208,7 @@ MWF.xApplication.query.Query.Viewer.Exporter = new Class({
             var contentStyle = contentStyleScript ? this.Macro.exec(contentStyleScript, this) : null;
 
 
-            //export事件
+            //export 이벤트
             var arg = {
                 headText: headText,
                 headStyle: headStyle,
@@ -5236,7 +5236,7 @@ MWF.xApplication.query.Query.Viewer.Exporter = new Class({
                 numberIndexArray: numberIndexArray,
                 offsetRowIndex: 0,
                 offsetColumnIndex: 0,
-                startAddress: '' //如 H12
+                startAddress: '' //예: H12
             };
             if(arg.headStyle)options.headStyle = arg.headStyle;
             if(arg.columnTitleStyle)options.columnTitleStyle = arg.titleStyle;

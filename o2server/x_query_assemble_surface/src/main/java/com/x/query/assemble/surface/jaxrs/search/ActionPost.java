@@ -108,7 +108,7 @@ class ActionPost extends BaseAction {
 			BooleanQuery.Builder qb = new BooleanQuery.Builder();
 			if (ListTools.isNotEmpty(readers)) {
 				Query permissionFilter = termInSet(Indexs.FIELD_READERS, readers);
-				qb.add(permissionFilter, BooleanClause.Occur.FILTER); // 不计分
+				qb.add(permissionFilter, BooleanClause.Occur.FILTER); // 점수 미반영
 			}
 			for (Query q : filterQueries) {
 				qb.add(q, Occur.FILTER);
@@ -119,15 +119,15 @@ class ActionPost extends BaseAction {
 			Query itemQuery = this.itemQuery(wi.getQuery());
 			Query recencyQuery = this.recencyQuery();
 
-			// 1) 关键词子查询：至少一个字段要命中
+			// 1) 키워드 하위 쿼리: 최소 한 필드는 일치해야 함
 			BooleanQuery.Builder keywordShoulds = new BooleanQuery.Builder();
 			keywordShoulds.add(bodyQuery, BooleanClause.Occur.SHOULD);
 			keywordShoulds.add(attachmentQuery, BooleanClause.Occur.SHOULD);
 			keywordShoulds.add(itemQuery, BooleanClause.Occur.SHOULD);
 			keywordShoulds.setMinimumNumberShouldMatch(1);
 
-			qb.add(keywordShoulds.build(), BooleanClause.Occur.MUST); // 👈 必须至少有一个关键词命中
-			qb.add(recencyQuery, BooleanClause.Occur.SHOULD); // 👈 只加分，不影响是否命中
+			qb.add(keywordShoulds.build(), BooleanClause.Occur.MUST); // 👈 최소 한 개의 키워드가 일치해야 함
+			qb.add(recencyQuery, BooleanClause.Occur.SHOULD); // 👈 가산점만 부여, 일치 여부에는 영향 없음
 
 			BooleanQuery query = qb.build();
 
@@ -225,7 +225,7 @@ class ActionPost extends BaseAction {
 					Map<String, Object> map = DISPLAY_FIELDS.stream().map(f -> Pair.of(f, document.getField(f)))
 							.filter(param -> null != param.second()).map(indexFieldValue)
 							.collect(Collectors.toMap(Pair::first, Pair::second));
-					// 高亮 null 安全
+					// 하이라이트 null 안전
 					String body = document.get(Indexs.FIELD_BODY);
 					if (StringUtils.isNotBlank(body)) {
 						String[] frags = highlighter.getBestFragments(analyzer, Indexs.FIELD_BODY, body,
@@ -244,7 +244,7 @@ class ActionPost extends BaseAction {
 
 	private Query recencyQuery() {
 		long now = System.currentTimeMillis();
-		long pivot = TimeUnit.DAYS.toMillis(7); // “半衰期”：与 now 相差 7 天时拿到一半加分
+		long pivot = TimeUnit.DAYS.toMillis(7); // “반감기”: now와 7일 차이일 때 가산점 절반
 		return LongPoint.newDistanceFeatureQuery(Indexs.FIELD_UPDATETIME, 5f, now, pivot);
 	}
 
@@ -318,7 +318,7 @@ class ActionPost extends BaseAction {
 
 		private static final long serialVersionUID = 2713214284346563286L;
 
-		@FieldDescribe("排序")
+		@FieldDescribe("정렬")
 		private Sort sort;
 
 		public Sort getSort() {

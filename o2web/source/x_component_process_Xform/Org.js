@@ -1,20 +1,20 @@
 MWF.xDesktop.requireApp("process.Xform", "$Input", null, false);
 MWF.xDesktop.requireApp("Selector", "package", null, false);
 MWF.require("MWF.widget.O2Identity", null, false);
-/** @class Org 人员组织组件。
- * @o2cn 人员组织组件
+/** @class Org 사용자 조직 컴포넌트.
+ * @o2cn 사용자 조직 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  *
- * var data = field.getData(); //获取值
- * field.setData(value); //设置值
- * field.hide(); //隐藏字段
- * var id = field.json.id; //获取字段标识
- * var flag = field.isEmpty(); //字段是否为空
+ * var data = field.getData(); //값 조회
+ * field.setData(value); //값 설정
+ * field.hide(); //필드 숨기기
+ * var id = field.json.id; //필드 식별자 조회
+ * var flag = field.isEmpty(); //필드가 비어 있는지 여부
  * @extends MWF.xApplication.process.Xform.$Input
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -27,107 +27,107 @@ MWF.xApplication.process.Xform.Org = MWF.APPOrg =  new Class(
     Extends: MWF.APP$Input,
     options: {
         /**
-         * 组件加载前触发。当前组件的queryLoad事件还没有在form里注册，通过this.form.get("fieldId")不能获取到当前组件，需要用this.target获取当前组件。
+         * 컴포넌트 로드 전 발생. 현재 컴포넌트의 queryLoad 이벤트 시점에는 form에 등록되지 않아 this.form.get("fieldId")로 가져올 수 없으며, this.target으로 현재 컴포넌트를 가져와야 함.
          * @event MWF.xApplication.process.Xform.Org#queryLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 组件加载时触发.
+         * 컴포넌트 로드 시 발생.
          * @event MWF.xApplication.process.Xform.Org#load
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 组件加载后触发.
+         * 컴포넌트 로드 후 발생.
          * @event MWF.xApplication.process.Xform.Org#postLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 当组件值改变时触发。
+         * 컴포넌트 값이 변경될 때 발생.
          * @event MWF.xApplication.process.Xform.Org#change
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 当组件不允许输入（使用人员选择框）时，完成选择人员，并且给组件赋值后执行。
+         * 컴포넌트 입력이 허용되지 않을 때(사용자 선택 상자 사용) 사용자 선택을 완료하고 컴포넌트에 값을 설정한 후 실행.
          * @event MWF.xApplication.process.Xform.Org#select
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "change", "select", "removeItem"],
         /**
-         * 人员选择框事件：加载前执行。this.target指向人员选择框。
+         * 사용자 선택 상자 이벤트: 로드 전 실행. this.target은 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#queryLoadSelector
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：加载后执行，由于选择项为异步加载，此时选择项并未加载完成。this.target指向人员选择框。
+         * 사용자 선택 상자 이벤트: 로드 후 실행, 선택 항목은 비동기로 로드되므로 이 시점에는 아직 로드되지 않음. this.target은 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#postLoadSelector
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：加载选择框容器节点前执行。this.target指向人员选择框。
+         * 사용자 선택 상자 이벤트: 선택 상자 컨테이너 노드 로드 전 실행. this.target은 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#queryLoadCategory
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：加载选择框容器节点后执行。this.target指向人员选择框。
+         * 사용자 선택 상자 이벤트: 선택 상자 컨테이너 노드 로드 후 실행. this.target은 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#postLoadContent
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
 
         /**
-         * 人员选择框事件：加载分类前执行。this.target指向分类，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 분류 로드 전 실행. this.target은 분류, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#queryLoadCategory
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：加载分类后执行。this.target指向分类，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 분류 로드 후 실행. this.target은 분류, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#postLoadCategory
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：选择分类后执行。this.target指向分类，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 분류 선택 후 실행. this.target은 분류, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#selectCategory
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：取消选择分类后执行。this.target指向分类，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 분류 선택 해제 후 실행. this.target은 분류, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#unselectCategory
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：展开分类后执行。this.target指向分类，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 분류 펼친 후 실행. this.target은 분류, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#expand
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：折叠分类后执行。this.target指向分类，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 분류 접은 후 실행. this.target은 분류, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#collapse
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
 
         /**
-         * 人员选择框事件：加载选择项前执行。this.target指向选择项，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 선택 항목 로드 전 실행. this.target은 선택 항목, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#queryLoadItem
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：加载选择项后执行。this.target指向选择项，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 선택 항목 로드 후 실행. this.target은 선택 항목, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#postLoadItem
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：选择选择项后执行。this.target指向选择项，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 선택 항목 선택 후 실행. this.target은 선택 항목, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#selectItem
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：取消选择选择项后执行。this.target指向选择项，this.target.selector指向人员选择框。
+         * 사용자 선택 상자 이벤트: 선택 항목 선택 해제 후 실행. this.target은 선택 항목, this.target.selector는 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#unselectItem
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 人员选择框事件：在人员选择框点取消时执行。this.target指向人员选择框。
+         * 사용자 선택 상자 이벤트: 사용자 선택 상자에서 취소 클릭 시 실행. this.target은 사용자 선택 상자를 가리킴.
          * @event MWF.xApplication.process.Xform.Org#close
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "selectorEvents" : ["queryLoadSelector","postLoadSelector","queryLoadContent","postLoadContent","queryLoadCategory","postLoadCategory",
             "selectCategory", "unselectCategory","queryLoadItem","postLoadItem","selectItem", "unselectItem","change","expand","collapse","cancel"],
@@ -175,7 +175,7 @@ MWF.xApplication.process.Xform.Org = MWF.APPOrg =  new Class(
         if (!v || !v.length){
             if (this.json.description){
                 var size, w;
-                if( this.node.offsetParent === null ){ //隐藏
+                if( this.node.offsetParent === null ){ //숨김
                     size = { y: 26 }
                 }else{
                     size = this.node.getFirst().getSize();
@@ -562,7 +562,7 @@ MWF.xApplication.process.Xform.Org = MWF.APPOrg =  new Class(
                 "onCancel": this.selectOnCancel.bind(this),
                 // "onLoad": this.selectOnLoad.bind(this),
                 "onLoad": function(){
-                    //this 为 selector
+                    //this는 selector
                     _self.selectOnLoad(this, this.selector );
                 },
                 "onClose": this.selectOnClose.bind(this)
@@ -577,7 +577,7 @@ MWF.xApplication.process.Xform.Org = MWF.APPOrg =  new Class(
                 "onCancel": this.selectOnCancel.bind(this),
                 // "onLoad": this.selectOnLoad.bind(this),
                 "onLoad": function(){
-                    //this 为 selector
+                    //this는 selector
                     _self.selectOnLoad(this)
                 },
                 "onClose": this.selectOnClose.bind(this)
@@ -684,26 +684,26 @@ MWF.xApplication.process.Xform.Org = MWF.APPOrg =  new Class(
     },
 
     /**
-     * @summary 弹出选择界面.
+     * @summary 선택 화면 띄우기.
      * @example
      * this.form.get('org').clickSelect();
      */
     clickSelect: function( ev ){
         if (this.isReadonly())return;
         if( layout.mobile ){
-            setTimeout( function(){ //如果有输入法界面，这个时候页面的计算不对，所以等100毫秒
+            setTimeout( function(){ //입력기 화면이 있으면 이때 페이지 계산이 맞지 않으므로 100밀리초 대기
                 var options = this.getOptions();
                 if(options){
                     if( this.selector && this.selector.loading ) {
                     }else if( this.selector && this.selector.selector && this.selector.selector.active ){
                     }else{
                         /**
-                         * @summary 人员选择框package的对象
+                         * @summary 사용자 선택 상자 package 객체
                          * @member {o2.O2Selector}
                          * @example
-                         *  //可以在脚本中获取该组件
-                         * var selector = this.form.get("fieldId").selector.selector; //获取人员选择框对象
-                         * var options = selector.options; //获取人员选择框的选项
+                         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+                         * var selector = this.form.get("fieldId").selector.selector; //사용자 선택 상자 객체 가져오기
+                         * var options = selector.options; //사용자 선택 상자 옵션 가져오기
                          */
                         this.selector = new MWF.O2Selector(this.form.app.content, options);
                     }
@@ -1694,7 +1694,7 @@ MWF.APPOrg.EmpowerChecker = new Class({
 
         var that = this;
 
-        //处理json
+        //json 처리
         var subItemList = [];
         // var empowerMap = {};
 
@@ -1830,8 +1830,8 @@ MWF.APPOrg.EmpowerChecker = new Class({
                     "type" : "ok",
                     "text": MWF.LP.process.button.ok,
                     "action": function(d, e){
-                        //this.replaceEmpowerIdentity( orginData, callback ); //直接替换已授权的人，已废弃
-                        this.setIgnoreEmpowerFlag( orginData, callback ); //然后设置忽略的人的标志
+                        //this.replaceEmpowerIdentity( orginData, callback ); //위임된 사용자를 직접 대체, 폐기됨
+                        this.setIgnoreEmpowerFlag( orginData, callback ); //이후 무시할 사용자 표시 설정
                         dlg.close();
                     }.bind(this)
                 },

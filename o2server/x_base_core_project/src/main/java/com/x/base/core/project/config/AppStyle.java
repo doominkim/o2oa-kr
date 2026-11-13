@@ -39,7 +39,7 @@ public class AppStyle extends ConfigObject {
 		this.systemMessageCanClick = true;
 		this.needGray = false;
 		this.appExitAlert = "";
-		this.contactPermissionView = "addressPowerView"; // 默认视图名 addressPowerView 可到应用市场下载通讯录应用查看
+		this.contactPermissionView = "addressPowerView"; // 기본 뷰 이름 addressPowerView, 앱 마켓에서 주소록 앱을 내려받아 확인 가능
 		this.speechScript = "";
 		this.promotionPageScript = "";
 
@@ -124,54 +124,54 @@ public class AppStyle extends ConfigObject {
 		return this.nativeAppList;
 	}
 
-	@FieldDescribe("首页展现类型,default是移动端原来的首页,portal是门户.")
+	@FieldDescribe("홈 화면 표시 유형, default는 모바일 기존 홈, portal은 포털.")
 	private String indexType;
 
-	@FieldDescribe("门户首页.")
+	@FieldDescribe("포털 홈.")
 	private String indexPortal;
 
-	@FieldDescribe("移动端简易模式")
+	@FieldDescribe("모바일 간편 모드")
 	private Boolean simpleMode;
 
-	@FieldDescribe("首页居中，首页居中页面个数将不可配置")
+	@FieldDescribe("홈 가운데 정렬, 홈 가운데 정렬 페이지 수는 설정할 수 없음")
 	private Boolean indexCentered;
 
-	@FieldDescribe("移动端页面")
+	@FieldDescribe("모바일 페이지")
 	private TreeSet<String> appIndexPages;
 
-	@FieldDescribe(("移动App消息列表中是否显示系统通知"))
+	@FieldDescribe(("모바일 앱 메시지 목록에 시스템 알림 표시 여부"))
 	private Boolean systemMessageSwitch;
-	@FieldDescribe(("移动App系统通知是否可点击打开"))
+	@FieldDescribe(("모바일 앱 시스템 알림 클릭하여 열기 가능 여부"))
 	private Boolean systemMessageCanClick;
 	
-	@FieldDescribe(("是否需要全局黑白"))
+	@FieldDescribe(("전역 흑백 필요 여부"))
 	private Boolean needGray;
 
-	@FieldDescribe("app退出提示")
+	@FieldDescribe("앱 종료 안내")
 	private String appExitAlert;
 
-	@FieldDescribe("移动App通讯录权限视图")
+	@FieldDescribe("모바일 앱 주소록 권한 뷰")
 	private String contactPermissionView;
 
-	@FieldDescribe("导航设置")
+	@FieldDescribe("내비게이션 설정")
 	private TreeSet<NativeApp> nativeAppList = new TreeSet<>();
 
-	@FieldDescribe("图片设置.")
+	@FieldDescribe("이미지 설정.")
 	private TreeSet<Image> images = new TreeSet<>();
 
-	@FieldDescribe("首页办公中心，流程过滤条件.")
+	@FieldDescribe("홈 업무 센터, 프로세스 필터 조건.")
 	private List<String> processFilterList = new ArrayList<>();
 
-	@FieldDescribe("首页信息中心，分类过滤条件.")
+	@FieldDescribe("홈 정보 센터, 분류 필터 조건.")
 	private List<String> cmsCategoryFilterList = new ArrayList<>();
 
-	@FieldDescribe("语音助手 invoke 脚本")
+	@FieldDescribe("음성 비서 invoke 스크립트")
 	private String speechScript;
 
-	@FieldDescribe("推广页 invoke 脚本")
+	@FieldDescribe("홍보 페이지 invoke 스크립트")
 	private String promotionPageScript;
 
-	@FieldDescribe("扩展参数")
+	@FieldDescribe("확장 파라미터")
 	private JsonObject extendParam;
 
 	public JsonObject getExtendParam() {
@@ -299,7 +299,7 @@ public class AppStyle extends ConfigObject {
 
 	public static class Image extends GsonPropertyObject implements Comparable<Image> {
 
-		// 启动页和关于页面的logo图片
+		// 시작 페이지와 정보 페이지의 logo 이미지
 		public static Image launch_logo() {
 			Image o = new Image();
 			o.setName(name_launch_logo);
@@ -307,7 +307,7 @@ public class AppStyle extends ConfigObject {
 			return o;
 		}
 
-		// 登录页面logo图片
+		// 로그인 페이지 logo 이미지
 		public static Image login_avatar() {
 			Image o = new Image();
 			o.setName(name_login_avatar);
@@ -315,7 +315,7 @@ public class AppStyle extends ConfigObject {
 			return o;
 		}
 
-		// 底部菜单主页未选中logo图片
+		// 하단 메뉴 홈 미선택 logo 이미지
 		public static Image index_bottom_menu_logo_blur() {
 			Image o = new Image();
 			o.setName(name_index_bottom_menu_logo_blur);
@@ -323,7 +323,7 @@ public class AppStyle extends ConfigObject {
 			return o;
 		}
 
-		// 底部菜单主页选中logo图片
+		// 하단 메뉴 홈 선택 logo 이미지
 		public static Image index_bottom_menu_logo_focus() {
 			Image o = new Image();
 			o.setName(name_index_bottom_menu_logo_focus);
@@ -331,7 +331,7 @@ public class AppStyle extends ConfigObject {
 			return o;
 		}
 
-		// 流程默认logo图片
+		// 프로세스 기본 logo 이미지
 		public static Image process_default() {
 			Image o = new Image();
 			o.setName(name_process_default);
@@ -339,14 +339,14 @@ public class AppStyle extends ConfigObject {
 			return o;
 		}
 
-		// 设置页面logo图片
+		// 설정 페이지 logo 이미지
 		public static Image setup_about_logo() {
 			Image o = new Image();
 			o.setName(name_setup_about_logo);
 			o.setPath(default_setup_about_logo_path);
 			return o;
 		}
-		// 应用页面顶部图片
+		// 앱 페이지 상단 이미지
 		public static Image application_top() {
 			Image o = new Image();
 			o.setName(name_application_top);
@@ -401,7 +401,7 @@ public class AppStyle extends ConfigObject {
  
 		private String name;
 		private String value;
-		private String path; // 图片相对路径 pic1.png , 移动端前端使用的时候 需要拼接  web 服务器地址，如：http://127.0.0.1/pic1.png
+		private String path; // 이미지 상대 경로 pic1.png , 모바일 프론트에서 사용할 때 web 서버 주소를 붙여야 함, 예: http://127.0.0.1/pic1.png
 
 
 

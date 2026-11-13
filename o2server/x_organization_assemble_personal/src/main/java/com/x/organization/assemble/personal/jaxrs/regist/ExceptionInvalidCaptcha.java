@@ -7,6 +7,6 @@ class ExceptionInvalidCaptcha extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionInvalidCaptcha() {
-		super("图片验证码错误.");
+		super("이미지 인증 코드가 올바르지 않습니다.");
 	}
 }

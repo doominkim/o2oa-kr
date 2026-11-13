@@ -35,21 +35,21 @@ public class AttendanceDetailService {
 	}
 
 	/**
-	 * 根据员工和日期标识，补充不存在的打卡数据信息
+	 * 직원과 날짜 식별자로 존재하지 않는 체크 데이터 정보 보충
 	 * @param emc
 	 * @param dayList
 	 * @param attendanceEmployeeConfig
 	 */
 	public synchronized void checkAndReplenish( EntityManagerContainer emc, List<String> dayList, AttendanceEmployeeConfig attendanceEmployeeConfig ) {
 		if( dayList == null || dayList.isEmpty() ){
-			logger.warn( "考勤统计周期内的日期列表为空，无法进行数据补充." );
+			logger.warn( "근태 통계 주기 안의 날짜 목록이 비어 있어 데이터를 보충할 수 없습니다." );
 			return;
 		}
-		if( attendanceEmployeeConfig == null){//不要补录入职以前的数据
-			logger.warn( "员工信息配置信息为空，无法补录数据。" );
+		if( attendanceEmployeeConfig == null){//입사 이전 데이터는 보충하지 않음
+			logger.warn( "직원 정보 설정이 비어 있어 데이터를 보충할 수 없습니다." );
 			return;
 		}
-		logger.info( "开始核对和补充员工["+attendanceEmployeeConfig.getEmployeeName()+"]的打卡数据数据......" );
+		logger.info( "직원["+attendanceEmployeeConfig.getEmployeeName()+"]의 체크 데이터 확인 및 보충 시작......" );
 		DateOperation dateOperation = new DateOperation();
 		Business business = null;
 		List<String> ids = null;
@@ -57,7 +57,7 @@ public class AttendanceDetailService {
 		for( String day : dayList ){
 			try {
 				/*if( dateOperation.getDateFromString(day).before( dateOperation.getDateFromString( attendanceEmployeeConfig.getEmpInTopUnitTime() )) ){
-					logger.warn( "不需要补录员工["+attendanceEmployeeConfig.getEmployeeName()+"]入职前的打卡数据。" );
+					logger.warn( "직원["+attendanceEmployeeConfig.getEmployeeName()+"]의 입사 전 체크 데이터는 보충할 필요가 없습니다." );
 					continue;
 				}*/
 				if( dateOperation.getDateFromString( day ).before(dateOperation.getDateFromString(dateOperation.getNowDate()))){
@@ -65,7 +65,7 @@ public class AttendanceDetailService {
 					ids = business.getAttendanceDetailFactory().listByEmployeeNameAndDate( attendanceEmployeeConfig.getEmployeeName(), day );
 					if( ids == null || ids.isEmpty() ){
 						emc.beginTransaction( AttendanceDetail.class );
-						//需要补一条打卡数据
+						//체크 데이터 한 건 보충 필요
 						attendanceDetail = new AttendanceDetail();
 						attendanceDetail.setTopUnitName(attendanceEmployeeConfig.getTopUnitName());
 						attendanceDetail.setUnitName(attendanceEmployeeConfig.getUnitName());
@@ -80,7 +80,7 @@ public class AttendanceDetailService {
 						emc.beginTransaction( AttendanceDetail.class );
 						emc.persist( attendanceDetail );
 						emc.commit();
-						logger.info("员工["+attendanceEmployeeConfig.getEmployeeName()+"]在["+day+"]不存在打卡数据，成功补录一条数据。");
+						logger.info("직원["+attendanceEmployeeConfig.getEmployeeName()+"]의 ["+day+"]에 체크 데이터가 없어 한 건을 보충했습니다.");
 					}else{
 						for(String id :ids){
 							AttendanceDetail detail = this.get(emc, id );
@@ -94,10 +94,10 @@ public class AttendanceDetailService {
 						}
 					}
 				}else {
-					logger.warn( "员工["+attendanceEmployeeConfig.getEmployeeName()+"]的打卡数据数据["+day+"], 目前还不能补录." );
+					logger.warn( "직원["+attendanceEmployeeConfig.getEmployeeName()+"]의 체크 데이터["+day+"]는 아직 보충할 수 없습니다." );
 				}
 			} catch (Exception e) {
-				logger.warn("系统在核对以及补充员工["+attendanceEmployeeConfig.getEmployeeName()+"]在["+day+"]不存在打卡数据时发生异常！" );
+				logger.warn("시스템이 직원["+attendanceEmployeeConfig.getEmployeeName()+"]의 ["+day+"]의 존재하지 않는 출퇴근 데이터를 확인 및 보충하는 중 예외가 발생했습니다!" );
 				logger.error(e);
 			}
 		}
@@ -119,7 +119,7 @@ public class AttendanceDetailService {
 		return business.getAttendanceDetailFactory().listDetailByCycleYearAndMonthWithOutStatus( user, year, month );
 	}
 	
-	//根据人员和打卡日期查找打卡记录  
+	//사용자와 출퇴근 날짜로 출퇴근 기록 조회  
 	public List<String> listDetailByNameAndDate( EntityManagerContainer emc, String user, String datestr )  throws Exception {
 		Business business =  new Business( emc );
 		return business.getAttendanceDetailFactory().listDetailByNameAndDate( user, datestr );
@@ -157,7 +157,7 @@ public class AttendanceDetailService {
 	 * 
 	 * @param emc
 	 * @param detailId
-	 * @param status 申诉状态:0-未申诉，1-申诉中，-1-申诉未通过，9-申诉通过
+	 * @param status 소명 상태: 0-미소명, 1-소명 중, -1-소명 반려, 9-소명 승인
 	 * @param autoCommit
 	 * @throws Exception
 	 */
@@ -175,14 +175,14 @@ public class AttendanceDetailService {
 			}
 			attendanceDetail.setAppealStatus( status );
 			if(status == 9){
-				//若申述通过则更新Detail状态，使得Detail为正常打卡
+				//소명이 승인되면 Detail 상태를 갱신하여 Detail을 정상 체크로 만듦
 				attendanceDetail.setIsGetSelfHolidays(false);
 				attendanceDetail.setIsLate(false);
 				attendanceDetail.setIsAbsent(false);
 				attendanceDetail.setIsAbnormalDuty(false);
 				attendanceDetail.setIsLackOfTime(false);
 				attendanceDetail.setIsLeaveEarlier(false);
-				//并对该条考勤数据发起统计请求
+				//그리고 해당 근태 데이터에 대해 통계 요청을 발생
 				attendanceDetailAnalyseService.recordStatisticRequireLog(attendanceDetail,true);
 			}
 			emc.check( attendanceDetail, CheckPersistType.all );
@@ -220,7 +220,7 @@ public class AttendanceDetailService {
 		AttendanceDetail attendanceDetail_old = null;
 		Business business = new Business( emc );
 		
-		//如果不存在，则看看该员工当天的打卡信息是否已经存在？
+		//없으면 해당 직원의 당일 체크 정보가 이미 있는지 확인
 		ids = business.getAttendanceDetailFactory().listByEmployeeNameAndDate( attendanceDetail.getEmpName(), attendanceDetail.getRecordDateString() );
 		if( ids != null && !ids.isEmpty() ){
 			attendanceDetailList = business.getAttendanceDetailFactory().list(ids);
@@ -230,7 +230,7 @@ public class AttendanceDetailService {
 		}
 		
 		if( attendanceDetail_old != null ){
-			//需要进行数据更新			
+			//데이터 갱신 필요			
 			attendanceDetail_old.refresh();
 			attendanceDetail_old.setEmpName( attendanceDetail.getEmpName() );
 			attendanceDetail_old.setEmpNo( attendanceDetail.getEmpNo() );
@@ -256,7 +256,7 @@ public class AttendanceDetailService {
 			emc.commit();
 			attendanceDetail = attendanceDetail_old;
 		}else{
-			//需要新增打卡信息数据
+			//체크 정보 데이터 추가 필요
 			if( attendanceDetail.getId() == null ) {
 				attendanceDetail.setId( AttendanceDetail.createId() );
 			}
@@ -276,7 +276,7 @@ public class AttendanceDetailService {
 		AttendanceDetail attendanceDetail_old = null;
 		Business business = new Business( emc );
 		
-		//如果不存在，则看看该员工当天的打卡信息是否已经存在？
+		//없으면 해당 직원의 당일 체크 정보가 이미 있는지 확인
 		ids = business.getAttendanceDetailFactory().listByEmployeeNameAndDate( attendanceDetail.getEmpName(), attendanceDetail.getRecordDateString() );
 		if( ids != null && !ids.isEmpty() ){
 			attendanceDetailList = business.getAttendanceDetailFactory().list(ids);
@@ -286,7 +286,7 @@ public class AttendanceDetailService {
 		}
 		
 		if( attendanceDetail_old != null ){
-			//需要进行数据更新			
+			//데이터 갱신 필요			
 			attendanceDetail_old.refresh();
 			attendanceDetail_old.setEmpName( attendanceDetail.getEmpName() );
 			attendanceDetail_old.setEmpNo( attendanceDetail.getEmpNo() );
@@ -313,7 +313,7 @@ public class AttendanceDetailService {
 			emc.commit();
 			attendanceDetail = attendanceDetail_old;
 		}else{
-			//需要新增打卡信息数据
+			//체크 정보 데이터 추가 필요
 			if( attendanceDetail.getId() == null ) {
 				attendanceDetail.setId( AttendanceDetail.createId() );
 			}
@@ -334,9 +334,9 @@ public class AttendanceDetailService {
 		List<AttendanceDetailMobile> attendanceDetailMobileList = null;
 		AttendanceDetailMobile attendanceDetailMobile_old = null;
 		Business business = new Business( emc );
-		//先看看同一个ID是否存在
+		//먼저 같은 ID가 있는지 확인
 		attendanceDetailMobile_old = emc.find( attendanceDetailMobile.getId(), AttendanceDetailMobile.class );
-		//如果不存在，则看看该员工当天的打卡信息是否已经存在？
+		//없으면 해당 직원의 당일 체크 정보가 이미 있는지 확인
 		if( attendanceDetailMobile_old == null ){
 			ids = business.getAttendanceDetailMobileFactory().listByEmployeeNameDateAndTime( attendanceDetailMobile.getEmpName(), attendanceDetailMobile.getRecordDateString(), attendanceDetailMobile.getSignTime() );
 			if( ids != null && !ids.isEmpty() ){
@@ -347,14 +347,14 @@ public class AttendanceDetailService {
 			}
 		}
 		if( attendanceDetailMobile_old != null ){
-			//需要进行数据更新
+			//데이터 갱신 필요
 			emc.beginTransaction( AttendanceDetailMobile.class );
 			attendanceDetailMobile.copyTo( attendanceDetailMobile_old, JpaObject.FieldsUnmodify );
 			attendanceDetailMobile_old.setRecordStatus( 0 );
 			emc.check( attendanceDetailMobile_old, CheckPersistType.all);	
 			emc.commit();
 		}else{
-			//需要新增打卡信息数据
+			//체크 정보 데이터 추가 필요
 			emc.beginTransaction( AttendanceDetailMobile.class );
 			emc.persist( attendanceDetailMobile, CheckPersistType.all);	
 			emc.commit();
@@ -388,7 +388,7 @@ public class AttendanceDetailService {
     }
 
 	/**
-	 * 查询在指定截止日期前已经打过卡的人员
+	 * 지정 마감일 이전에 이미 출퇴근 체크한 사용자 조회
 	 * @param deadline
 	 * @param type:all#onDuty#offDuty#morningOffDuty#afternoonOnDuty
 	 * @return

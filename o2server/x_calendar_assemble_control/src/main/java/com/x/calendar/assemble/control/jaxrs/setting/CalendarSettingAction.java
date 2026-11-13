@@ -28,13 +28,13 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("setting")
-@JaxrsDescribe("系统设置信息管理服务")
+@JaxrsDescribe("시스템 설정 정보 관리 서비스")
 public class CalendarSettingAction extends StandardJaxrsAction {
 
 //	private StandardJaxrsActionProxy proxy = new StandardJaxrsActionProxy(ThisApplication.context());
 	private static Logger logger = LoggerFactory.getLogger(CalendarSettingAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有系统配置信息列表", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "모든 시스템 설정 정보 목록 조회", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -50,7 +50,7 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 				result = new ActionListAll().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionSettingInfoProcess(e, "获取所有系统配置信息列表时发生异常！");
+				Exception exception = new ExceptionSettingInfoProcess(e, "전체 시스템 설정 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -58,13 +58,13 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取系统配置信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 시스템 설정 정보 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("系统配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("시스템 설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -74,7 +74,7 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionSettingInfoProcess(e, "根据ID获取系统配置信息时发生异常！");
+				Exception exception = new ExceptionSettingInfoProcess(e, "ID로 시스템 설정을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -82,13 +82,13 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据Code获取系统配置信息", action = ActionGetWithCode.class)
+	@JaxrsMethodDescribe(value = "Code로 시스템 설정 정보 조회", action = ActionGetWithCode.class)
 	@GET
 	@Path("code/{code}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithCode(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("系统配置信息编码") @PathParam("code") String code) {
+			@JaxrsParameterDescribe("시스템 설정 정보 코드") @PathParam("code") String code) {
 		ActionResult<ActionGetWithCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -98,7 +98,7 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 				result = new ActionGetWithCode().execute(request, effectivePerson, code);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionSettingInfoProcess(e, "根据Code获取系统配置信息时发生异常！");
+				Exception exception = new ExceptionSettingInfoProcess(e, "Code로 시스템 설정을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -106,7 +106,7 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "判断当前用户是否有管理员权限", action = ActionIsManager.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 관리자 권한 여부 판단", action = ActionIsManager.class)
 	@GET
 	@Path("ismanager")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -121,7 +121,7 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 				result = new ActionIsManager().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionSettingInfoProcess(e, "判断当前用户是否有管理员权限时发生异常！");
+				Exception exception = new ExceptionSettingInfoProcess(e, "현재 사용자의 관리자 권한을 확인하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -129,12 +129,12 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "新建或者更新系统配置信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "시스템 설정 정보 생성 또는 수정", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void save(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("配置信息") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("설정 정보") JsonElement jsonElement) {
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -144,7 +144,7 @@ public class CalendarSettingAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionSettingInfoProcess(e, "新建或者更新系统配置信息时发生异常！");
+				Exception exception = new ExceptionSettingInfoProcess(e, "시스템 설정을 생성 또는 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

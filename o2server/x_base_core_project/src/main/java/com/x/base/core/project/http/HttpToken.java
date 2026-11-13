@@ -50,7 +50,7 @@ public class HttpToken {
 		effectivePerson.setRemoteAddress(HttpToken.remoteAddress(request));
 		effectivePerson.setUserAgent(this.userAgent(request));
 		effectivePerson.setUri(request.getRequestURI());
-		// 加入调试标记
+		// 디버그 표시 추가
 		Object debugger = request.getHeader(HttpToken.X_DEBUGGER);
 		effectivePerson.setDebugger((null != debugger) && BooleanUtils.toBoolean(Objects.toString(debugger)));
 		// this.setAttribute(request, effectivePerson);
@@ -65,7 +65,7 @@ public class HttpToken {
 		effectivePerson.setRemoteAddress(HttpToken.remoteAddress(request));
 		effectivePerson.setUserAgent(this.userAgent(request));
 		effectivePerson.setUri(request.getRequestURI());
-		// 加入调试标记
+		// 디버그 표시 추가
 		Object debugger = request.getHeader(HttpToken.X_DEBUGGER);
 		effectivePerson.setDebugger((null != debugger) && BooleanUtils.toBoolean(Objects.toString(debugger)));
 		effectivePerson.setToken(token);
@@ -75,7 +75,7 @@ public class HttpToken {
 
 	public EffectivePerson who(String token, String key, String address) {
 		if (StringUtils.length(token) < 16) {
-			/* token应该是8的倍数有可能前台会输入null空值等可以通过这个过滤掉 */
+			/* token은 8의 배수여야 함, 프런트에서 null 빈 값 등을 입력할 수 있어 이로 걸러냄 */
 			return EffectivePerson.anonymous();
 		}
 		try {
@@ -89,7 +89,7 @@ public class HttpToken {
 			Pattern pattern = Pattern.compile(REGULAREXPRESSION_TOKEN, Pattern.CASE_INSENSITIVE);
 			Matcher matcher = pattern.matcher(plain);
 			if (!matcher.find()) {
-				// 不报错,跳过错误,将用户设置为anonymous
+				// 오류를 내지 않고 건너뛰며 사용자를 anonymous로 설정
 				LOGGER.warn("token format error:{}, remote address:{}.", plain, address);
 				return EffectivePerson.anonymous();
 			}
@@ -102,7 +102,7 @@ public class HttpToken {
 			if (TokenType.user.equals(tokenType) || TokenType.manager.equals(tokenType)
 					|| TokenType.systemManager.equals(tokenType) || TokenType.auditManager.equals(tokenType)
 					|| TokenType.securityManager.equals(tokenType)) {
-				// 启用安全删除
+				// 안전 삭제 사용
 				if (BooleanUtils.isTrue(Config.person().getEnableSafeLogout())) {
 					String user = URLDecoder.decode(userName, StandardCharsets.UTF_8.name());
 					Date threshold = Config.resource_node_tokenThresholds().get(user);
@@ -115,14 +115,14 @@ public class HttpToken {
 				int expiredMinutes = CLIENT_APP.equals(client) ? Config.person().getAppTokenExpiredMinutes()
 						: Config.person().getTokenExpiredMinutes();
 				if (diff > (60000L * expiredMinutes)) {
-					// 不报错,跳过错误,将用户设置为anonymous
+					// 오류를 내지 않고 건너뛰며 사용자를 anonymous로 설정
 					LOGGER.warn("token expired, user:{}, token:{}, remote address:{}.",
 							URLDecoder.decode(userName, StandardCharsets.UTF_8.name()), plain, address);
 					return EffectivePerson.anonymous();
 				}
 			}
 			if (TokenType.cipher.equals(tokenType) && (diff > (60000 * 20))) {
-				// 不报错,跳过错误,将用户设置为anonymous
+				// 오류를 내지 않고 건너뛰며 사용자를 anonymous로 설정
 				return EffectivePerson.anonymous();
 			}
 			return new EffectivePerson(URLDecoder.decode(userName, StandardCharsets.UTF_8.name()), tokenType, client,
@@ -226,8 +226,8 @@ public class HttpToken {
 
 		if (StringUtils.isEmpty(token)) {
 			String value = request.getHeader(X_AUTHORIZATION);
-			// 如果使用oauth bearer 通过此传递认证信息.需要进行判断,格式为 Bearer xxxxxxx
-			// wps格式为WPS-2:xxxx
+			// oauth bearer 사용 시 이를 통해 인증 정보 전달. 판단 필요, 형식은 Bearer xxxxxxx
+			// wps 형식은 WPS-2:xxxx
 			if (!StringUtils.contains(value, " ") && !StringUtils.contains(value, ":")) {
 				token = value;
 			}

@@ -33,7 +33,7 @@ public class ReviewAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ReviewAction.class);
 
-	@JaxrsMethodDescribe(value = "获取当前人员的参阅数量按应用分类.", action = ActionCountWithPerson.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 참조 열람 수 조회, 앱별 분류.", action = ActionCountWithPerson.class)
 	@POST
 	@Path("count/application")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,13 +51,13 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取人员的参阅数量,没有权限限制.", action = ActionCountWithPerson.class)
+	@JaxrsMethodDescribe(value = "사용자의 참조 열람 수 조회, 권한 제한 없음.", action = ActionCountWithPerson.class)
 	@POST
 	@Path("count/person/{credential}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void countWithPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("个人标识") @PathParam("credential") String credential, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("개인 식별자") @PathParam("credential") String credential, JsonElement jsonElement) {
 		ActionResult<ActionCountWithPerson.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,7 +69,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据workId创建一个review.", action = ActionCreateWithWork.class)
+	@JaxrsMethodDescribe(value = "workId로 review 생성.", action = ActionCreateWithWork.class)
 	@POST
 	@Path("create/work")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -87,7 +87,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据workCompleted创建一个review.", action = ActionCreateWithWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "workCompleted로 review 생성.", action = ActionCreateWithWorkCompleted.class)
 	@POST
 	@Path("create/workcompleted")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -105,7 +105,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取可用与filter的分类值", action = ActionFilterAttribute.class)
+	@JaxrsMethodDescribe(value = "filter에 사용 가능한 분류 값 조회", action = ActionFilterAttribute.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -123,13 +123,13 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取参阅内容,", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "참조 열람 내용 조회,", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("参阅标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("참조 열람 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -141,14 +141,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据工作或完成工作标识获取参阅.", action = ActionGetWithWorkOrWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "업무 문서 또는 완료된 업무 문서 식별자로 참조 열람 조회.", action = ActionGetWithWorkOrWorkCompleted.class)
 	@GET
 	@Path("workorworkcompleted/{workOrWorkCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithWorkOrWorkCompleted(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作或完成工作标识") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
+			@JaxrsParameterDescribe("업무 문서 또는 완료된 업무 문서 식별자") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
 		ActionResult<ActionGetWithWorkOrWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -160,14 +160,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "管理删除参阅.", action = ActionManageDelete.class)
+	@JaxrsMethodDescribe(value = "관리자 참조 열람 삭제.", action = ActionManageDelete.class)
 	@DELETE
 	@Path("{id}/application/{applicationFlag}/manage")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void manageDelete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("参阅标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("참조 열람 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<ActionManageDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -185,8 +185,8 @@ public class ReviewAction extends StandardJaxrsAction {
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void manageDeleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("参阅标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("참조 열람 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<ActionManageDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -198,14 +198,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户创建的工作的参阅,分页.", action = V2ListCreatePaging.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 생성한 업무 문서의 참조 열람 목록, 페이지.", action = V2ListCreatePaging.class)
 	@POST
 	@Path("v2/list/create/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2ListCreatePaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<V2ListCreatePaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -217,14 +217,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户创建的工作的参阅,下一页.", action = V2ListCreateNext.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 생성한 업무 문서의 참조 열람 목록, 다음 페이지.", action = V2ListCreateNext.class)
 	@POST
 	@Path("v2/list/create/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2ListCreateNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("参阅标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("참조 열람 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<V2ListCreateNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -236,14 +236,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户创建的工作的参阅,上一页.", action = V2ListCreatePrev.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 생성한 업무 문서의 참조 열람 목록, 이전 페이지.", action = V2ListCreatePrev.class)
 	@POST
 	@Path("v2/list/create/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2ListCreatePrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("参阅标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("참조 열람 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<V2ListCreatePrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -255,14 +255,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户的参阅,分页.", action = V2ListPaging.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 참조 열람 목록, 페이지.", action = V2ListPaging.class)
 	@POST
 	@Path("v2/list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2ListPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<V2ListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -274,14 +274,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户的参阅,下一页.", action = V2ListNext.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 참조 열람 목록, 다음 페이지.", action = V2ListNext.class)
 	@POST
 	@Path("v2/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2ListNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("参阅标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("참조 열람 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<V2ListNext.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -293,14 +293,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户的参阅,上一页.", action = V2ListPrev.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 참조 열람 목록, 이전 페이지.", action = V2ListPrev.class)
 	@POST
 	@Path("v2/list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2ListPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("参阅标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("참조 열람 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<V2ListPrev.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -312,7 +312,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "列示参阅.", action = V2List.class)
+	@JaxrsMethodDescribe(value = "참조 열람 목록.", action = V2List.class)
 	@POST
 	@Path("v2/list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -330,7 +330,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "统计参阅数量.", action = V2Count.class)
+	@JaxrsMethodDescribe(value = "참조 열람 수 통계.", action = V2Count.class)
 	@POST
 	@Path("v2/count")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -348,14 +348,14 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "管理员分页查询参阅.", action = V2ManageListPaging.class)
+	@JaxrsMethodDescribe(value = "관리자 참조 열람 페이지 조회.", action = V2ManageListPaging.class)
 	@POST
 	@Path("v2/list/paging/{page}/size/{size}/manage")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2ManageListPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<V2ManageListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -367,13 +367,13 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据job获取参阅.", action = ActionListWithJob.class)
+	@JaxrsMethodDescribe(value = "job으로 참조 열람 조회.", action = ActionListWithJob.class)
 	@GET
 	@Path("list/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job) {
 		ActionResult<List<ActionListWithJob.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -385,7 +385,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "搜索.", action = V2Search.class)
+	@JaxrsMethodDescribe(value = "검색.", action = V2Search.class)
 	@POST
 	@Path("v2/search")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -403,7 +403,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取可用与过滤的我有权限的文档分类项.", action = ActionFilterEntry.class)
+	@JaxrsMethodDescribe(value = "필터에 사용 가능한 권한 보유 문서 분류 항목 조회.", action = ActionFilterEntry.class)
 	@GET
 	@Path("filter/entry")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -420,7 +420,7 @@ public class ReviewAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取可用与过滤的我创建文档分类项.", action = ActionFilterCreateEntry.class)
+	@JaxrsMethodDescribe(value = "필터에 사용 가능한 내가 생성한 문서 분류 항목 조회.", action = ActionFilterCreateEntry.class)
 	@GET
 	@Path("filter/create/entry")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

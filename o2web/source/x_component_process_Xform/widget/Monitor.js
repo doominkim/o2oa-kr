@@ -96,12 +96,12 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
         if( this.isUserScalableEnabled() )return;
         const MIN_SCALE = 0.4;
         const MAX_SCALE = 4;
-        //手势缩放
-        // 获取目标元素
+        //제스처 확대/축소
+        // 대상 요소 조회
         var div = this.paperInNode;
         var container = div.getParent();
 
-        // 初始化变量
+        // 변수 초기화
         var initialDistance = 0;
         var currentScale = 1;
         var startScrollLeft = 0;
@@ -112,7 +112,7 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
         var containerOffsetX = 0;
         var containerOffsetY = 0;
 
-        // 处理触摸开始事件
+        // 터치 시작 이벤트 처리
         div.addEventListener('touchstart', (e) => {
             if (e.touches.length === 2) {
 
@@ -120,7 +120,7 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
                 containerOffsetX = coords.left;
                 containerOffsetY = coords.top;
 
-                // 计算初始两点距离
+                // 초기 두 점 거리 계산
                 var touch1 = e.touches[0];
                 var touch2 = e.touches[1];
                 initialDistance = Math.hypot(
@@ -128,27 +128,27 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
                     touch2.clientY - touch1.clientY
                 );
 
-                // 记录初始滚动位置
+                // 초기 스크롤 위치 기록
                 startScrollLeft = container.scrollLeft;
                 startScrollTop = container.scrollTop;
 
-                // 计算中心点相对于div的位置
+                // div 기준 중심점 위치 계산
                 var centerX = (touch1.clientX + touch2.clientX) / 2;
                 var centerY = (touch1.clientY + touch2.clientY) / 2;
 
-                // 转换为相对于div内容的坐标
+                // div 콘텐츠 기준 좌표로 변환
                 startCenterX = centerX + startScrollLeft - containerOffsetX;
                 startCenterY = centerY + startScrollTop - containerOffsetY;
 
-                // 阻止默认行为防止页面滚动
+                // 페이지 스크롤 방지를 위해 기본 동작 차단
                 e.preventDefault();
             }
         });
 
-        // 处理触摸移动事件
+        // 터치 이동 이벤트 처리
         div.addEventListener('touchmove', (e) => {
             if (e.touches.length === 2) {
-                // 计算当前两点距离
+                // 현재 두 점 거리 계산
                 var touch1 = e.touches[0];
                 var touch2 = e.touches[1];
                 var currentDistance = Math.hypot(
@@ -156,38 +156,38 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
                     touch2.clientY - touch1.clientY
                 );
 
-                // 计算缩放比例
+                // 확대/축소 비율 계산
                 var newScale = currentDistance / initialDistance * currentScale;
 
                 newScale = Math.max( MIN_SCALE, Math.min(newScale, MAX_SCALE));
 
-                // 应用缩放
+                // 확대/축소 적용
                 div.style.transform = `scale(${newScale})`;
                 div.style.transformOrigin = 'left top';
 
-                // 计算新的中心点位置
+                // 새 중심점 위치 계산
                 var centerX = (touch1.clientX + touch2.clientX) / 2;
                 var centerY = (touch1.clientY + touch2.clientY) / 2;
 
-                // 计算新的滚动位置以保持中心点不变
+                // 중심점 유지를 위한 새 스크롤 위치 계산
                 var scaleChange = newScale / currentScale;
 
                 var newScrollLeft = startCenterX * scaleChange - (centerX - containerOffsetX);
                 var newScrollTop = startCenterY * scaleChange - (centerY - containerOffsetY);
 
-                // 应用滚动位置
+                // 스크롤 위치 적용
                 container.scrollLeft = newScrollLeft;
                 container.scrollTop = newScrollTop;
 
-                // 阻止默认行为防止页面滚动
+                // 페이지 스크롤 방지를 위해 기본 동작 차단
                 e.preventDefault();
             }
         });
 
-        // 处理触摸结束事件
+        // 터치 종료 이벤트 처리
         div.addEventListener('touchend', () => {
             if (div.style.transform) {
-                // 更新当前缩放比例
+                // 현재 확대/축소 비율 갱신
                 var match = div.style.transform.match(/scale\(([^)]+)\)/);
                 if (match) {
                     currentScale = parseFloat(match[1]);
@@ -196,12 +196,12 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
         });
     },
     isUserScalableEnabled: function () {
-        //html是否默认启用缩放
+        //html 기본 확대/축소 사용 여부
         try {
-            // 获取viewport meta标签
+            // viewport meta 태그 조회
             var metaViewport = document.querySelector('meta[name="viewport"]');
 
-            // 如果没有viewport meta标签，返回默认状态
+            // viewport meta 태그가 없으면 기본 상태 반환
             if (!metaViewport) {
                 return true;
             }
@@ -209,13 +209,13 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
             var content = metaViewport.getAttribute('content') || '';
             var params = new URLSearchParams(content.replace(/,/g, '&'));
 
-            // 检查user-scalable参数
+            // user-scalable 매개변수 확인
             if (params.has('user-scalable')) {
                 var value = params.get('user-scalable').toLowerCase();
                 return value === 'yes' || value === '1';
             }
 
-            // 检查minimum-scale和maximum-scale参数
+            // minimum-scale, maximum-scale 매개변수 확인
             if (params.has('minimum-scale') && params.has('maximum-scale')) {
                 var minScale = parseFloat(params.get('minimum-scale'));
                 var maxScale = parseFloat(params.get('maximum-scale'));
@@ -364,7 +364,7 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
     },
 
     ensureRectIsVisible: function(activity) {
-        // 获取矩形的位置和尺寸
+        // 사각형 위치와 크기 조회
         var rectTop = activity.point.y;
         var rectLeft = activity.point.x;
         var rectHeight = activity.height;
@@ -374,28 +374,28 @@ MWF.xApplication.process.Xform.widget.Monitor = new Class({
 
         var scrollParent = this.paperNode;
 
-        // 获取父滚动区域的尺寸和滚动位置
+        // 상위 스크롤 영역의 크기와 스크롤 위치 조회
         var scrollSize = scrollParent.getSize();
         var scrollTop = scrollParent.scrollTop;
         var scrollLeft = scrollParent.scrollLeft;
         var scrollBottom = scrollSize.y + scrollTop;
         var scrollRight = scrollSize.x + scrollLeft;
 
-        // 检查是否需要垂直滚动
+        // 세로 스크롤 필요 여부 확인
         if (rectTop < scrollTop) {
-            // 矩形顶部在视口上方，需要向上滚动
+            // 사각형 상단이 뷰포트 위에 있어 위로 스크롤 필요
             scrollParent.scrollTop = rectTop;
         } else if (rectBottom > scrollBottom) {
-            // 矩形底部在视口下方，需要向下滚动
+            // 사각형 하단이 뷰포트 아래에 있어 아래로 스크롤 필요
             scrollParent.scrollTop = rectBottom - scrollSize.y;
         }
 
-        // 检查是否需要水平滚动
+        // 가로 스크롤 필요 여부 확인
         if (rectLeft < scrollLeft) {
-            // 矩形左侧在视口左方，需要向左滚动
+            // 사각형 왼쪽이 뷰포트 왼쪽에 있어 왼쪽으로 스크롤 필요
             scrollParent.scrollLeft = rectLeft;
         } else if (rectRight > scrollRight) {
-            // 矩形右侧在视口右方，需要向右滚动
+            // 사각형 오른쪽이 뷰포트 오른쪽에 있어 오른쪽으로 스크롤 필요
             scrollParent.scrollLeft = rectRight - scrollSize.x;
         }
     },

@@ -26,7 +26,7 @@ import com.x.message.core.entity.Message;
 import com.x.organization.core.entity.Person;
 
 /**
- * 发送微信公众号模版消息 Created by fancyLou on 3/11/21. Copyright © 2021 O2. All rights
+ * 위챗 공식 계정 템플릿 메시지 발송 Created by fancyLou on 3/11/21. Copyright © 2021 O2. All rights
  * reserved.
  */
 public class MpweixinConsumeQueue extends AbstractQueue<Message> {
@@ -35,7 +35,7 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 
 	private static final Gson gson = XGsonBuilder.instance();
 
-	// creatorPerson 创建人 activityName 当前节点 processName 流程名称 startTime 开始时间 title 标题
+	// creatorPerson 작성자 activityName 현재 노드 processName 프로세스 이름 startTime 시작 시간 title 제목
 
 	@Override
 	protected void execute(Message message) throws Exception {
@@ -57,12 +57,12 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 					wxMessage.setTemplate_id(tempId);
 					wxMessage.setTopcolor("#fb4747");
 					wxMessage.setData(data);
-					LOGGER.debug("发送的消息对象:{}.", wxMessage::toString);
+					LOGGER.debug("발송한 메시지 객체:{}.", wxMessage::toString);
 					String url = Mpweixin.default_apiAddress + "/cgi-bin/message/template/send?access_token="
 							+ Config.mpweixin().accessToken();
 					WeixinResponse response = HttpConnection.postAsObject(url, null, wxMessage.toString(),
 							WeixinResponse.class);
-					LOGGER.debug("返回:{}.", response);
+					LOGGER.debug("반환:{}.", response);
 					if (response.getErrcode() != 0) {
 						ExceptionQiyeweixinMessage e = new ExceptionQiyeweixinMessage(response.getErrcode(),
 								response.getErrmsg());
@@ -71,20 +71,20 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 						success(message.getId());
 					}
 				} else {
-					LOGGER.warn("没有绑定微信公众号:{}.", message::getPerson);
+					LOGGER.warn("위챗 공식 계정이 연동되지 않음:{}.", message::getPerson);
 				}
 			} else {
-				LOGGER.warn("没有找到用户.");
+				LOGGER.warn("사용자를 찾을 수 없습니다.");
 			}
 
 		} else {
-			LOGGER.warn("配置文件配置条件不足.");
+			LOGGER.warn("설정 파일의 설정 조건이 부족합니다.");
 		}
 
 	}
 
 	/**
-	 * 判断打开地址
+	 * 열기 주소 판단
 	 *
 	 * @param message
 	 * @return
@@ -102,7 +102,7 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 	private Map<String, WeixinTempMessageFieldObj> concreteData(Message message, JsonObject object,
 			List<MPweixinMessageTemp> list) {
 		Map<String, WeixinTempMessageFieldObj> data = new HashMap<>();
-		// 固定字段 first
+		// 고정 필드 first
 		WeixinTempMessageFieldObj wobj = new WeixinTempMessageFieldObj();
 		if (object.get("temp_first") != null) {
 			String temp_first = object.get("temp_first").getAsString();
@@ -111,22 +111,22 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 			wobj.setValue(message.getTitle());
 		}
 		data.put("first", wobj);
-		// 动态字段 keyword
+		// 동적 필드 keyword
 		for (int i = 0; i < list.size(); i++) {
 			MPweixinMessageTemp filed = list.get(i);
 			String name = filed.getName();
 			String tempName = filed.getTempName();
 			String value = object.get(name).getAsString();
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("解析出的结果 name：{}, value:{}, tempName:{}.", name, value, tempName);
+				LOGGER.debug("파싱 결과 name:{}, value:{}, tempName:{}.", name, value, tempName);
 			}
-			if ("title".equalsIgnoreCase(name)) { // 工作标题为空就用消息的标题
+			if ("title".equalsIgnoreCase(name)) { // 업무 문서 제목이 비어 있으면 메시지 제목 사용
 				if (StringUtils.isEmpty(value)) {
 					value = "제목 없음";
 				}
 			} else {
 				if ("creatorPerson".equalsIgnoreCase(name) && StringUtils.isNotEmpty(value)) {
-					value = value.split("@")[0]; // 截取姓名
+					value = value.split("@")[0]; // 이름 추출
 				}
 				if (StringUtils.isEmpty(value)) {
 					value = "unknown";
@@ -137,7 +137,7 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 			obj.setColor("#173177");
 			data.put(tempName, obj);
 		}
-		// 固定字段 remark
+		// 고정 필드 remark
 		WeixinTempMessageFieldObj robj = new WeixinTempMessageFieldObj();
 		if (object.get("temp_remark") != null) {
 			String temp_remark = object.get("temp_remark").getAsString();
@@ -153,14 +153,14 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 		Person person;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
-			// openid 查询用户
+			// openid로 사용자 조회
 			person = business.message().getPersonWithCredential(credential);
 		}
 		return person;
 	}
 
 	/**
-	 * 标志消息消费成功
+	 * 메시지 소비 성공 표시
 	 * 
 	 * @param id
 	 * @throws Exception
@@ -180,7 +180,7 @@ public class MpweixinConsumeQueue extends AbstractQueue<Message> {
 		try {
 			String o2oaUrl = Config.mpweixin().getWorkUrl();
 			if (StringUtils.isEmpty(o2oaUrl)) {
-				LOGGER.error(new Exception("没有获取到workUrl参数无法"));
+				LOGGER.error(new Exception("workUrl 파라미터를 가져오지 못해 불가"));
 				return null;
 			}
 			String workUrl = "workmobilewithaction.html?workid=" + workId;

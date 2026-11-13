@@ -7,6 +7,6 @@ public class ExceptionForumCanNotCreateSection extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionForumCanNotCreateSection( String name ) {
-		super("在论坛分区内不允许用户创建版块信息！Forum:" + name );
+		super("이 포럼 분류에서는 사용자가 섹션을 만들 수 없습니다! Forum:" + name );
 	}
 }

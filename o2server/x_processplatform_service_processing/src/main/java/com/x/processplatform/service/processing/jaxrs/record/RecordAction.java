@@ -26,18 +26,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("record")
-@JaxrsDescribe("记录")
+@JaxrsDescribe("기록")
 public class RecordAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(RecordAction.class);
 
-	@JaxrsMethodDescribe(value = "根据job标识创建记录.", action = ActionCreateWithJob.class)
+	@JaxrsMethodDescribe(value = "job 식별자로 기록 생성.", action = ActionCreateWithJob.class)
 	@POST
 	@Path("job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作") @PathParam("job") String job, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("문서") @PathParam("job") String job, JsonElement jsonElement) {
 		ActionResult<ActionCreateWithJob.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,13 +49,13 @@ public class RecordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "编辑记录.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "기록 편집.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -67,13 +67,13 @@ public class RecordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除记录.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "기록 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -85,7 +85,7 @@ public class RecordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建工作流转的记录.", action = ActionWorkProcessing.class)
+	@JaxrsMethodDescribe(value = "업무 문서 흐름 기록 생성.", action = ActionWorkProcessing.class)
 	@POST
 	@Path("work/processing")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -103,7 +103,7 @@ public class RecordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建终止工作的流转记录.", action = ActionWorkTerminate.class)
+	@JaxrsMethodDescribe(value = "종료된 업무 문서의 흐름 기록 생성.", action = ActionWorkTerminate.class)
 	@POST
 	@Path("work/terminate")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -121,7 +121,7 @@ public class RecordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建待办流转的记录.", action = ActionTaskProcessing.class)
+	@JaxrsMethodDescribe(value = "결재 대기 흐름 기록 생성.", action = ActionTaskProcessing.class)
 	@POST
 	@Path("task/processing")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

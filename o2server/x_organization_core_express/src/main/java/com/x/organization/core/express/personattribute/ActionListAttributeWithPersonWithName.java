@@ -25,10 +25,10 @@ class ActionListAttributeWithPersonWithName extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private String person;
 
-		@FieldDescribe("个人属性名称")
+		@FieldDescribe("개인 속성 이름")
 		private String name;
 
 		public String getPerson() {

@@ -85,7 +85,7 @@ class ActionListWithQuery extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("是否允许作为视图嵌入到表单.")
+        @FieldDescribe("뷰로서 양식에 삽입 허용 여부.")
         private Boolean viewEnable;
 
         public Boolean getViewEnable() {

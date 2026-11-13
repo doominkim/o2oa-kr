@@ -16,7 +16,7 @@ public class StorageServer extends ConfigObject {
 	private static final Integer default_port = 20040;
 	private static final String default_passivePorts = "29000-30000";
 	private static final String default_prefix = "";
-	/** 2的八次方最大的质数 */
+	/** 2의 8제곱 이하 최대 소수 */
 	private static final String default_name = "251";
 	private static final Boolean default_deepPath = false;
 
@@ -34,21 +34,21 @@ public class StorageServer extends ConfigObject {
 		this.deepPath = default_deepPath;
 	}
 
-	@FieldDescribe("是否启用,对于二进制流文件,比如附件,图片等存储在单独的文件服务器中,可以支持多种文件服务器,默认情况下使用ftp服务器作为文件服务器,每个节点可以启动一个文件服务器以提供高性能.")
+	@FieldDescribe("사용 여부, 첨부파일, 이미지 등 바이너리 스트림 파일을 별도 파일 서버에 저장, 여러 종류의 파일 서버 지원, 기본적으로 ftp 서버를 파일 서버로 사용, 각 노드에서 파일 서버를 하나씩 시작해 고성능 제공 가능.")
 	private Boolean enable;
-	@FieldDescribe("ftp服务器端口,此端口可以不对外开放,仅有ApplicationServer进行访问,并不直接对用户提供服务.")
+	@FieldDescribe("ftp 서버 포트, 이 포트는 외부에 개방하지 않아도 되며 ApplicationServer만 접근하고 사용자에게 직접 서비스를 제공하지 않음.")
 	private Integer port;
-	@FieldDescribe("是否启用ssl传输加密,如果启用将使用config/keystore文件作为密钥文件.使用config/token.json文件中的sslKeyStorePassword字段为密钥密码,sslKeyManagerPassword为管理密码.")
+	@FieldDescribe("ssl 전송 암호화 사용 여부, 사용 시 config/keystore 파일을 키 파일로 사용. config/token.json 파일의 sslKeyStorePassword 필드를 키 비밀번호로, sslKeyManagerPassword를 관리 비밀번호로 사용.")
 	private Boolean sslEnable;
-	@FieldDescribe("名称,多个节点中不能重名,默认为251.")
+	@FieldDescribe("이름, 여러 노드 간 중복 불가, 기본값 251.")
 	private String name;
-//	@FieldDescribe("二进制流文件是分多个账号分段存储的,可以单独设置每个分类的存储配置,一般不需要设置.")
+//	@FieldDescribe("바이너리 스트림 파일은 여러 계정에 분할 저장되며, 분류별 저장 설정을 개별 지정 가능, 일반적으로 설정 불필요.")
 //	private CopyOnWriteArrayList<Account> accounts;
-	@FieldDescribe("ftp传输有主动和被动之分,如果使用了被动传输,设置被动端口范围,默认为29000-30000.")
+	@FieldDescribe("ftp 전송은 능동과 수동으로 구분, 수동 전송 사용 시 수동 포트 범위 설정, 기본값 29000-30000.")
 	private String passivePorts;
-	@FieldDescribe("路径前缀.")
+	@FieldDescribe("경로 접두사.")
 	private String prefix;
-	@FieldDescribe("使用更深的路径")
+	@FieldDescribe("더 깊은 경로 사용")
 	private Boolean deepPath;
 
 	public List<Account> getCalculatedAccounts() throws Exception {

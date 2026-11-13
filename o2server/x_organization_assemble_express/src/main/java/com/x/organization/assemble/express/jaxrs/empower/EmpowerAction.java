@@ -24,12 +24,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("empower")
-@JaxrsDescribe("授权接口")
+@JaxrsDescribe("권한 위임 API")
 public class EmpowerAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmpowerAction.class);
 
-	@JaxrsMethodDescribe(value = "查找指定人员的委托办理.", action = ActionListWithIdentityObject.class)
+	@JaxrsMethodDescribe(value = "지정 사용자의 위임 처리 조회.", action = ActionListWithIdentityObject.class)
 	@POST
 	@Path("list/identity/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

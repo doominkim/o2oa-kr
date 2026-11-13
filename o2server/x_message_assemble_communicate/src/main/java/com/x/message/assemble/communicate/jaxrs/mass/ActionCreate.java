@@ -63,7 +63,7 @@ class ActionCreate extends BaseAction {
 			mass.setCreatorPerson(effectivePerson.getDistinguishedName());
 			List<String> people = business.organization().person().list(mass.getPersonList());
 			people.addAll(business.organization().person().listWithIdentity(mass.getIdentityList()));
-			/* 群组包含直接成员和递归成员 */
+			/* 그룹은 직접 구성원과 재귀 구성원 포함 */
 			people.addAll(business.organization().person().listWithUnitSubDirect(mass.getUnitList()));
 			people.addAll(business.organization().person().listWithUnitSubNested(mass.getUnitList()));
 			people.addAll(business.organization().person().listWithGroup(mass.getGroupList()));

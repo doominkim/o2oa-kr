@@ -48,7 +48,7 @@ class BaseAction extends StandardJaxrsAction {
 		return range;
 	}
 
-	/** 统计 */
+	/** 통계 */
 	protected Long countStartTask(Business business, DateRange dateRange, String applicationId, String processId,
 			String activityId, String unit, String person) throws Exception {
 		List<String> units = new ArrayList<>();

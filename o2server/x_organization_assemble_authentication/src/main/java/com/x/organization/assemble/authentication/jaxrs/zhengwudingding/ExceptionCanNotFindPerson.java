@@ -7,6 +7,6 @@ class ExceptionCanNotFindPerson extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionCanNotFindPerson(String userId) {
-		super("无法绑定政务钉钉用户:{}.", userId);
+		super("정부용 DingTalk 사용자와 연결할 수 없습니다: {}.", userId);
 	}
 }

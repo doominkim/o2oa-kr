@@ -61,108 +61,108 @@ MWF.xScript.CMSEnvironment = function(ev){
 
     //workContext
     /**
-     * 您可以通过documentContext获取内容管理实例相关的对象数据。
+     * documentContext로 콘텐츠 관리 인스턴스 관련 객체 데이터를 조회할 수 있습니다.
      * @module documentContext
-     * @o2cn 内容管理实例
+     * @o2cn 콘텐츠 관리 인스턴스
      * @o2category web
      * @o2range {CMS}
      * @o2ordernumber 30
      * @example
-     * //您可以在内容管理表单中，通过this来获取当前实例的documentContext对象，如下：
+     * //콘텐츠 관리 양식에서 this로 현재 인스턴스의 documentContext 객체를 조회할 수 있습니다. 예:
      * var context = this.documentContext;
      */
     this.documentContext = {
         // * @o2ActionOut x_cms_assemble_control.WoDocument|ignoreNoDescr=true|example=Document
         /**
-         * 获取当前内容管理实例的文档对象：document对象。
+         * 현재 콘텐츠 관리 인스턴스의 문서 객체(document 객체) 조회.
          * @method getDocument
          * @static
-         * @return {Document} 文档对象.
+         * @return {Document} 문서 객체.
          * <pre><code class='language-js'>{
-         * 	    "id": "3359aedd-c2d8-4d8c-b8b0-02507da1b3f4",		//数据库主键,自动生成.
-         * 	    "summary": " ",		//文档摘要
-         * 		"title": "航天科工外部董事调研组到培训中心调研",		//文档标题
-         * 		"documentType": "信息",		//文档类型，跟随分类类型，信息 | 数据
-         * 		"appId": "c295f34c-9ce1-4122-b795-820267e32b68",		//栏目ID
-         * 		"appName": "通知公告",		//栏目名称
-         * 		"appAlias": " ",		//栏目别名
-         * 		"categoryId": "33fb19f0-0670-464d-875c-32fb86148f7a",		//分类ID
-         * 		"categoryName": "通知公告",		//分类名称
-         * 		"categoryAlias": "通知公告-通知公告",		//分类别名
-         * 		"form": "dddefed4-4411-4e4e-b982-cdd4cd083443",		//绑定的表单模板ID
-         * 		"formName": "通知公告编辑表单",		//绑定的表单模板名称
-         * 		"importBatchName": " ",		//文件导入的批次号：一般是分类ID+时间缀
-         * 		"readFormId": "d6f1f596-fcb7-4a87-baaf-7f6cdafe3cec",		//绑定的阅读表单模板ID
-         * 		"readFormName": "通知公告阅读表单",		//绑定的阅读表单模板名称
-         * 		"creatorPerson": "李义@liyi@P",		//创建人，可能为空，如果由系统创建。
-         * 		"creatorIdentity": "李义@469d1601-c4a5-46ae-b7bf-4da9af07b6fa@I",		//创建人Identity，可能为空，如果由系统创建。
-         * 		"creatorUnitName": "浙江兰德纵横@a706f5f0-4a3b-4785-8e1d-0a944bfad4eb@U",		//创建人组织，可能为空，如果由系统创建。
-         * 		"creatorTopUnitName": "浙江兰德纵横@a706f5f0-4a3b-4785-8e1d-0a944bfad4eb@U",		//创建人顶层组织，可能为空，如果由系统创建。
-         * 		"docStatus": "published",		//文档状态: waitPublished | published | draft | checking | error
-         * 		"description": " ",		//说明备注，可以填写说明信息，如导入信息检验失败原因等
-         * 		"viewCount": 1,		//文档被查看次数
-         * 		"commendCount": 1,		//文档被赞次数
-         * 		"commentCount": 1,		//文档评论次数
-         * 		"publishTime": "2018-01-04 14:17:16",		//文档发布时间
-         * 		"modifyTime": "2022-09-01 17:05:47",		//文档修改时间
-         * 		"isTop": true,		//是否置顶
-         * 		"hasIndexPic": true,		//是否含有首页图片
-         * 		"reviewed": true,		//是否已经更新review信息.
-         * 		"sequenceTitle": " ",		//用于标题排序的sequence
-         * 		"sequenceAppAlias": " ",		//用于栏目别名排序的sequence
-         * 		"sequenceCategoryAlias": " ",		//用于分类别名排序的sequence
-         * 		"sequenceCreatorPerson": " ",		//用于创建者排序的sequence
-         * 		"sequenceCreatorUnitName": " ",		//用于创建者组织排序的sequence
+         * 	    "id": "3359aedd-c2d8-4d8c-b8b0-02507da1b3f4",		//데이터베이스 기본 키, 자동 생성.
+         * 	    "summary": " ",		//문서 요약
+         * 		"title": "외부 이사 조사단 교육 센터 방문 조사",		//문서 제목
+         * 		"documentType": "정보",		//문서 유형, 분류 유형을 따름, 정보 | 데이터
+         * 		"appId": "c295f34c-9ce1-4122-b795-820267e32b68",		//게시판 ID
+         * 		"appName": "공지사항",		//게시판 이름
+         * 		"appAlias": " ",		//게시판 별칭
+         * 		"categoryId": "33fb19f0-0670-464d-875c-32fb86148f7a",		//분류 ID
+         * 		"categoryName": "공지사항",		//분류 이름
+         * 		"categoryAlias": "공지사항-공지사항",		//분류 별칭
+         * 		"form": "dddefed4-4411-4e4e-b982-cdd4cd083443",		//바인딩된 양식 템플릿 ID
+         * 		"formName": "공지사항 편집 양식",		//바인딩된 양식 템플릿 이름
+         * 		"importBatchName": " ",		//파일 가져오기 배치 번호: 보통 분류 ID+타임스탬프
+         * 		"readFormId": "d6f1f596-fcb7-4a87-baaf-7f6cdafe3cec",		//바인딩된 열람 양식 템플릿 ID
+         * 		"readFormName": "공지사항 열람 양식",		//바인딩된 열람 양식 템플릿 이름
+         * 		"creatorPerson": "김철수@liyi@P",		//작성자, 시스템이 생성한 경우 비어 있을 수 있음.
+         * 		"creatorIdentity": "김철수@469d1601-c4a5-46ae-b7bf-4da9af07b6fa@I",		//작성자 Identity, 시스템이 생성한 경우 비어 있을 수 있음.
+         * 		"creatorUnitName": "인디고@a706f5f0-4a3b-4785-8e1d-0a944bfad4eb@U",		//작성자 조직, 시스템이 생성한 경우 비어 있을 수 있음.
+         * 		"creatorTopUnitName": "인디고@a706f5f0-4a3b-4785-8e1d-0a944bfad4eb@U",		//작성자 최상위 조직, 시스템이 생성한 경우 비어 있을 수 있음.
+         * 		"docStatus": "published",		//문서 상태: waitPublished | published | draft | checking | error
+         * 		"description": " ",		//설명 비고, 가져오기 정보 검증 실패 원인 등 설명 정보 입력 가능
+         * 		"viewCount": 1,		//문서 조회 수
+         * 		"commendCount": 1,		//문서 추천 수
+         * 		"commentCount": 1,		//문서 댓글 수
+         * 		"publishTime": "2018-01-04 14:17:16",		//문서 게시 시간
+         * 		"modifyTime": "2022-09-01 17:05:47",		//문서 수정 시간
+         * 		"isTop": true,		//상단 고정 여부
+         * 		"hasIndexPic": true,		//대표 이미지 포함 여부
+         * 		"reviewed": true,		//review 정보 업데이트 여부.
+         * 		"sequenceTitle": " ",		//제목 정렬용 sequence
+         * 		"sequenceAppAlias": " ",		//게시판 별칭 정렬용 sequence
+         * 		"sequenceCategoryAlias": " ",		//분류 별칭 정렬용 sequence
+         * 		"sequenceCreatorPerson": " ",		//작성자 정렬용 sequence
+         * 		"sequenceCreatorUnitName": " ",		//작성자 조직 정렬용 sequence
          * 		"readPersonList": [
-         * 			"张三@zhangsan@P"
-         * 			"所有人"
-         * 		],		//阅读人员
+         * 			"홍길동@zhangsan@P"
+         * 			"모든 사람"
+         * 		],		//열람 사용자
          * 		"readUnitList": [
-         * 		],		//阅读组织
+         * 		],		//열람 조직
          * 		"readGroupList": [
-         * 		],		//阅读群组
+         * 		],		//열람 그룹
          * 		"authorPersonList": [
-         * 			"张三@zhangsan@P"
-         * 		],		//作者人员
+         * 			"홍길동@zhangsan@P"
+         * 		],		//작성 사용자
          * 		"authorUnitList": [
-         * 		],		//作者组织
+         * 		],		//작성 조직
          * 		"authorGroupList": [
-         * 		],		//作者群组
+         * 		],		//작성 그룹
          * 		"remindPersonList": [
          * 			" "
-         * 		],		//发布提醒人员
+         * 		],		//게시 알림 사용자
          * 		"remindUnitList": [
          * 			" "
-         * 		],		//发布提醒组织
+         * 		],		//게시 알림 조직
          * 		"remindGroupList": [
          * 			" "
-         * 		],		//发布提醒群组
+         * 		],		//게시 알림 그룹
          * 		"managerList": [
-         * 			"张三@zhangsan@P"
-         * 		],		//管理者
+         * 			"홍길동@zhangsan@P"
+         * 		],		//관리자
          * 		"pictureList": [
-         * 		],		//首页图片列表
-         * 		"distributeFactor": 1,		//分布式存储标识位.
-         * 		"createTime": "2022-09-01 17:05:47",		//创建时间,自动生成,索引创建在约束中.
-         * 		"updateTime": "2022-09-01 17:05:47",		//修改时间,自动生成,索引创建在约束中.
-         * 		"sequence": " ",		//列表序号,由创建时间以及ID组成.在保存时自动生成,索引创建在约束中.
-         *      "stringValue01": "", //业务数据String值01.
-         *      "stringValue02": "", //业务数据String值02.
-         *      "stringValue03": "", //业务数据String值03.
-         *      "stringValue04": "", //业务数据String值04.
-         *      "stringValue05": "", //业务数据String值05.
-         *      "stringValue06": "", //业务数据String值06.
-         *      "stringValue07": "", //业务数据String值07.
-         *      "stringValue08": "", //业务数据String值08.
-         *      "stringValue09": "", //业务数据String值09.
-         *      "stringValue10": "", //业务数据String值10.
-         *      "longValue01": "", //业务数据Long值01.
-         *      "longValue02": "", //业务数据Long值02.
-         *      "doubleValue01": "", //业务数据double值01.
-         *      "doubleValue02": "", //业务数据double值02.
-         *      "dateTimeValue01": "", //业务数据dateTime值01.
-         *      "dateTimeValue02": "", //业务数据dateTime值02.
-         *      "dateTimeValue03": "", //业务数据dateTime值03.
+         * 		],		//대표 이미지 목록
+         * 		"distributeFactor": 1,		//분산 저장 식별 비트.
+         * 		"createTime": "2022-09-01 17:05:47",		//생성 시간, 자동 생성, 인덱스는 제약 조건에서 생성.
+         * 		"updateTime": "2022-09-01 17:05:47",		//수정 시간, 자동 생성, 인덱스는 제약 조건에서 생성.
+         * 		"sequence": " ",		//목록 순번, 생성 시간과 ID로 구성. 저장 시 자동 생성, 인덱스는 제약 조건에서 생성.
+         *      "stringValue01": "", //업무 데이터 String 값 01.
+         *      "stringValue02": "", //업무 데이터 String 값 02.
+         *      "stringValue03": "", //업무 데이터 String 값 03.
+         *      "stringValue04": "", //업무 데이터 String 값 04.
+         *      "stringValue05": "", //업무 데이터 String 값 05.
+         *      "stringValue06": "", //업무 데이터 String 값 06.
+         *      "stringValue07": "", //업무 데이터 String 값 07.
+         *      "stringValue08": "", //업무 데이터 String 값 08.
+         *      "stringValue09": "", //업무 데이터 String 값 09.
+         *      "stringValue10": "", //업무 데이터 String 값 10.
+         *      "longValue01": "", //업무 데이터 Long 값 01.
+         *      "longValue02": "", //업무 데이터 Long 값 02.
+         *      "doubleValue01": "", //업무 데이터 double 값 01.
+         *      "doubleValue02": "", //업무 데이터 double 값 02.
+         *      "dateTimeValue01": "", //업무 데이터 dateTime 값 01.
+         *      "dateTimeValue02": "", //업무 데이터 dateTime 값 02.
+         *      "dateTimeValue03": "", //업무 데이터 dateTime 값 03.
          * 	}
          *</code></pre>
          * @o2syntax
@@ -170,27 +170,27 @@ MWF.xScript.CMSEnvironment = function(ev){
          */
         "getDocument": function(){return ev.document },
         /**
-         * 获取当前人对文档的权限。
+         * 현재 사용자의 문서 권한 조회.
          * @method getControl
          * @static
-         * @return {DocumentControl} 当前人对文档所拥有的权限.
+         * @return {DocumentControl} 현재 사용자가 문서에 대해 가진 권한.
          * <pre><code class='language-js'>{
-         *    "allowRead": true,              //是否允许阅读文档
-         *    "allowPublishDocument": true,   //是否允许发布文档
-         *    "allowSave": true,              //是否允许保存文档
-         *    "allowPopularDocument": true,   //是否允许设置为热点
-         *    "allowEditDocument": true,      //是否允许编辑文档
-         *    "allowDeleteDocument": true     //是否允许删除文档
+         *    "allowRead": true,              //문서 열람 허용 여부
+         *    "allowPublishDocument": true,   //문서 게시 허용 여부
+         *    "allowSave": true,              //문서 저장 허용 여부
+         *    "allowPopularDocument": true,   //인기 문서 설정 허용 여부
+         *    "allowEditDocument": true,      //문서 편집 허용 여부
+         *    "allowDeleteDocument": true     //문서 삭제 허용 여부
          * }</code></pre>
          * @o2syntax
          * var control = this.documentContext.getControl();
          */
         "getControl": function(){return ev.control;},
         /**
-         * 获取当前文档的附件对象列表。
+         * 현재 문서의 첨부파일 객체 목록 조회.
          * @method getAttachmentList
          * @static
-         * @return {DocumentFileInfo[]} 当前文档的附件对象列表.
+         * @return {DocumentFileInfo[]} 현재 문서의 첨부파일 객체 목록.
          * @o2ActionOut x_cms_assemble_control.FileInfoAction.get|example=Attachment|ignoreProps=[properties]
          * @o2syntax
          * var attachmentList = this.documentContext.getAttachmentList();
@@ -232,8 +232,8 @@ MWF.xScript.CMSEnvironment = function(ev){
         }
     };
     this.org = {
-        //群组***************
-        //获取群组--返回群组的对象数组
+        //그룹***************
+        //그룹 조회--그룹 객체 배열 반환
         getGroup: function(name, async){
             getOrgActions();
             var data = {"groupList": getNameFlag(name)};
@@ -254,8 +254,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             // orgActions.listGroup(data, function(json){v = json.data;}, null, false);
             // return (v && v.length===1) ? v[0] : v;
         },
-        //查询下级群组--返回群组的对象数组
-        //nested  布尔  true嵌套下级；false直接下级；默认false；
+        //하위 그룹 조회--그룹 객체 배열 반환
+        //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
         listSubGroup: function(name, nested, async){
             getOrgActions();
             var data = {"groupList": getNameFlag(name)};
@@ -287,8 +287,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             // }
             // return v;
         },
-        //查询上级群组--返回群组的对象数组
-        //nested  布尔  true嵌套上级；false直接上级；默认false；
+        //상위 그룹 조회--그룹 객체 배열 반환
+        //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
         listSupGroup:function(name, nested, async){
             getOrgActions();
             var data = {"groupList": getNameFlag(name)};
@@ -315,7 +315,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             // }
             // return v;
         },
-        //人员所在群组（嵌套）--返回群组的对象数组
+        //사용자 소속 그룹(중첩)--그룹 객체 배열 반환
         listGroupWithPerson:function(name, async){
             getOrgActions();
             var data = {"personList": getNameFlag(name)};
@@ -333,7 +333,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             // orgActions.listGroupWithPerson(data, function(json){v = json.data;}, null, false);
             // return v;
         },
-        //身份所在群组（嵌套）--返回群组的对象数组
+        //신분 소속 그룹(중첩)--그룹 객체 배열 반환
         listGroupWithIdentity:function(identity, async){
             getOrgActions();
             var data = {"identityList": getNameFlag(identity)};
@@ -348,7 +348,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listGroupWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //群组是否拥有角色--返回true, false
+        //그룹의 역할 보유 여부--true, false 반환
         groupHasRole: function(name, role, async){
             getOrgActions();
             nameFlag = (typeOf(name)==="object") ? (name.distinguishedName || name.id || name.unique || name.name) : name;
@@ -369,8 +369,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             // return v;
         },
 
-        //角色***************
-        //获取角色--返回角色的对象数组
+        //역할***************
+        //역할 조회--역할 객체 배열 반환
         getRole: function(name, async){
             getOrgActions();
             var data = {"roleList": getNameFlag(name)};
@@ -390,7 +390,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             // orgActions.listRole(data, function(json){v = json.data;}, null, false);
             // return (v && v.length===1) ? v[0] : v;
         },
-        //人员所有角色（嵌套）--返回角色的对象数组
+        //사용자의 모든 역할(중첩)--역할 객체 배열 반환
         listRoleWithPerson:function(name, async){
             getOrgActions();
             var data = {"personList": getNameFlag(name)};
@@ -409,8 +409,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             // return v;
         },
 
-        //人员***************
-        //人员是否拥有角色--返回true, false
+        //사용자***************
+        //사용자의 역할 보유 여부--true, false 반환
         personHasRole: function(name, role, async){
             getOrgActions();
             nameFlag = (typeOf(name)==="object") ? (name.distinguishedName || name.id || name.unique || name.name) : name;
@@ -430,7 +430,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             // orgActions.personHasRole(data, function(json){v = json.data.value;}, null, false);
             // return v;
         },
-        //获取人员,附带身份,身份所在的组织,个人所在群组,个人拥有角色.
+        //사용자 조회, 신분, 신분 소속 조직, 개인 소속 그룹, 개인 보유 역할 포함.
         getPersonData: function(name, async){
             getOrgActions();
             var v = null;
@@ -442,7 +442,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.getPerson(null, cb, null, !!async, {"flag": name});
             return (!!async) ? promise : v;
         },
-        //获取人员--返回人员的对象数组
+        //사용자 조회--사용자 객체 배열 반환
         getPerson: function(name, async, findCN){
             getOrgActions();
             var data = {"personList": getNameFlag(name)};
@@ -463,8 +463,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             // orgActions.listPerson(data, function(json){v = json.data;}, null, false);
             // return (v && v.length===1) ? v[0] : v;
         },
-        //查询下级人员--返回人员的对象数组
-        //nested  布尔  true嵌套下级；false直接下级；默认false；
+        //하위 사용자 조회--사용자 객체 배열 반환
+        //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
         listSubPerson: function(name, nested, async){
             getOrgActions();
             var data = {"personList": getNameFlag(name)};
@@ -484,8 +484,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             }
             return (!!async) ? promise : v;
         },
-        //查询上级人员--返回人员的对象数组
-        //nested  布尔  true嵌套上级；false直接上级；默认false；
+        //상위 사용자 조회--사용자 객체 배열 반환
+        //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
         listSupPerson: function(name, nested, async){
             getOrgActions();
             var data = {"personList": getNameFlag(name)};
@@ -504,7 +504,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             }
             return (!!async) ? promise : v;
         },
-        //获取群组的所有人员--返回人员的对象数组
+        //그룹의 모든 사용자 조회--사용자 객체 배열 반환
         listPersonWithGroup: function(name, async){
             getOrgActions();
             var data = {"groupList": getNameFlag(name)};
@@ -519,7 +519,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listPersonWithGroup(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取角色的所有人员--返回人员的对象数组
+        //역할의 모든 사용자 조회--사용자 객체 배열 반환
         listPersonWithRole: function(name, async){
             getOrgActions();
             var data = {"roleList": getNameFlag(name)};
@@ -534,7 +534,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             promise = orgActions.listPersonWithRole(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取身份的所有人员--返回人员的对象数组
+        //신분의 모든 사용자 조회--사용자 객체 배열 반환
         listPersonWithIdentity: function(name, async){
             getOrgActions();
             var data = {"identityList": getNameFlag(name)};
@@ -548,7 +548,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listPersonWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取身份的所有人员--返回人员的对象数组或人员对象
+        //신분의 모든 사용자 조회--사용자 객체 배열 또는 사용자 객체 반환
         getPersonWithIdentity: function(name, async){
             getOrgActions();
             var data = {"identityList": getNameFlag(name)};
@@ -563,8 +563,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listPersonWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //查询组织成员的人员--返回人员的对象数组
-        //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+        //조직 구성원 사용자 조회--사용자 객체 배열 반환
+        //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
         listPersonWithUnit: function(name, nested, async){
             getOrgActions();
             var data = {"unitList": getNameFlag(name)};
@@ -583,9 +583,9 @@ MWF.xScript.CMSEnvironment = function(ev){
             }
             return (!!async) ? promise : v;
         },
-        //根据属性查询人员--返回人员的对象数组
-        //name  string 属性名
-        //value  string 属性值
+        //속성으로 사용자 조회--사용자 객체 배열 반환
+        //name  string 속성 이름
+        //value  string 속성 값
         listPersonWithAttribute: function(name, value, async){
             getOrgActions();
             var data = {"name": name, "attribute": value};
@@ -599,9 +599,9 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listPersonWithAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //根据属性查询人员--返回人员的全称数组
-        //name  string 属性名
-        //value  string 属性值
+        //속성으로 사용자 조회--사용자 전체 이름 배열 반환
+        //name  string 속성 이름
+        //value  string 속성 값
         listPersonNameWithAttribute: function(name, value, async){
             getOrgActions();
             var data = {"name": name, "attribute": value};
@@ -616,8 +616,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             return (!!async) ? promise : v;
         },
 
-        //人员属性************
-        //添加人员属性值(在属性中添加values值，如果没有此属性，则创建一个)
+        //사용자 속성************
+        //사용자 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
         appendPersonAttribute: function(person, attr, values, success, failure, async){
             getOrgActions();
             var personFlag = (typeOf(person)==="object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -640,7 +640,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             //
             // orgActions.appendPersonAttribute(data, cb, null, !!async);
         },
-        //设置人员属性值(将属性值修改为values，如果没有此属性，则创建一个)
+        //사용자 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
         setPersonAttribute: function(person, attr, values, success, failure, async){
             getOrgActions();
             var personFlag = (typeOf(person)==="object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -663,7 +663,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             //
             // orgActions.setPersonAttribute(data, cb, null, !!async);
         },
-        //获取人员属性值
+        //사용자 속성 값 조회
         getPersonAttribute: function(person, attr, async){
             getOrgActions();
             var personFlag = (typeOf(person)==="object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -678,7 +678,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.getPersonAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员所有属性的名称
+        //사용자의 모든 속성 이름 목록
         listPersonAttributeName: function(name, async){
             getOrgActions();
             var data = {"personList":getNameFlag(name)};
@@ -692,7 +692,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listPersonAttributeName(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员的所有属性
+        //사용자의 모든 속성 목록
         listPersonAllAttribute: function(name, async){
             getOrgActions();
             var data = {"personList":getNameFlag(name)};
@@ -707,8 +707,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             return (!!async) ? promise : v;
         },
 
-        //身份**********
-        //获取身份
+        //신분**********
+        //신분 조회
         getIdentity: function(name, async){
             getOrgActions();
             var data = {"identityList":getNameFlag(name)};
@@ -723,7 +723,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员的身份
+        //사용자의 신분 목록
         listIdentityWithPerson: function(name, async, findCN){
             getOrgActions();
             var data = {"personList":getNameFlag(name)};
@@ -740,8 +740,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listIdentityWithPerson(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //查询组织成员身份--返回身份的对象数组
-        //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+        //조직 구성원 신분 조회--신분 객체 배열 반환
+        //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
         listIdentityWithUnit: function(name, nested, async){
             getOrgActions();
             var data = {"unitList": getNameFlag(name)};
@@ -772,8 +772,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             return (!!async) ? promise : v;
         },
 
-        //组织**********
-        //获取组织
+        //조직**********
+        //조직 조회
         getUnit: function(name, async, findCN){
             getOrgActions();
             var data = {"unitList":getNameFlag(name)};
@@ -791,8 +791,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listUnit(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //查询组织的下级--返回组织的对象数组
-        //nested  布尔  true嵌套下级；false直接下级；默认false；
+        //조직의 하위 조회--조직 객체 배열 반환
+        //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
         listSubUnit: function(name, nested, async){
             getOrgActions();
             var data = {"unitList": getNameFlag(name)};
@@ -811,9 +811,9 @@ MWF.xScript.CMSEnvironment = function(ev){
             }
             return (!!async) ? promise : v;
         },
-        //查询组织的上级--返回组织的对象数组
-        //nested  布尔  true嵌套上级；false直接上级；默认false；
-        //async 布尔 true异步请求
+        //조직의 상위 조회--조직 객체 배열 반환
+        //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
+        //async 불리언 true 비동기 요청
         listSupUnit: function(name, nested, async){
             getOrgActions();
             var data = {"unitList": getNameFlag(name)};
@@ -900,10 +900,10 @@ MWF.xScript.CMSEnvironment = function(ev){
             }
         },
 
-        //根据个人身份获取组织
-        //flag 数字    表示获取第几层的组织
-        //     字符串  表示获取指定类型的组织
-        //     空     表示获取直接所在的组织
+        //개인 신분으로 조직 조회
+        //flag 숫자    몇 번째 단계의 조직을 조회할지 나타냄
+        //     문자열  지정 유형의 조직 조회를 나타냄
+        //     비어 있음     직접 소속 조직 조회를 나타냄
         getUnitByIdentity: function(name, flag, async){
             getOrgActions();
             var getUnitMethod = "current";
@@ -966,7 +966,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             }
             return (!!async) ? promise : v;
         },
-        //列出身份所在组织的所有上级组织
+        //신분 소속 조직의 모든 상위 조직 목록
         listAllSupUnitWithIdentity: function(name, async){
             getOrgActions();
             var data = {"identityList":getNameFlag(name)};
@@ -980,7 +980,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listUnitSupNestedWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取人员所在的所有组织
+        //사용자가 소속된 모든 조직 조회
         listUnitWithPerson: function(name, async){
             getOrgActions();
             var data = {"personList":getNameFlag(name)};
@@ -994,7 +994,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listUnitWithPerson(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出人员所在组织的所有上级组织
+        //사용자 소속 조직의 모든 상위 조직 목록
         listAllSupUnitWithPerson: function(name, async){
             getOrgActions();
             var data = {"personList":getNameFlag(name)};
@@ -1008,7 +1008,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listUnitSupNestedWithPerson(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //根据组织属性，获取所有符合的组织
+        //조직 속성으로 일치하는 모든 조직 조회
         listUnitWithAttribute: function(name, attribute, async){
             getOrgActions();
             var data = {"name":name,"attribute":attribute};
@@ -1022,7 +1022,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             promise = orgActions.listUnitWithAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //根据组织职务，获取所有符合的组织
+        //조직 직무로 일치하는 모든 조직 조회
         listUnitWithDuty: function(name, id, async){
             getOrgActions();
             var data = {"name":name,"identity":(typeOf(id)==="object") ? (id.distinguishedName || id.id || id.unique || id.name) : id};
@@ -1037,8 +1037,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             return (!!async) ? promise : v;
         },
 
-        //组织职务***********
-        //获取指定的组织职务的身份
+        //조직 직무***********
+        //지정 조직 직무의 신분 조회
         getDuty: function(duty, id, async){
             getOrgActions();
             var data = {"name":duty,"unit":(typeOf(id)==="object") ? (id.distinguishedName || id.id || id.unique || id.name) : id};
@@ -1053,7 +1053,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.getDuty(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取身份的所有职务名称
+        //신분의 모든 직무 이름 조회
         listDutyNameWithIdentity: function(name, async){
             getOrgActions();
             var data = {"identityList":getNameFlag(name)};
@@ -1067,7 +1067,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listDutyNameWithIdentity(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取组织的所有职务名称
+        //조직의 모든 직무 이름 조회
         listDutyNameWithUnit: function(name, async){
             getOrgActions();
             var data = {"unitList":getNameFlag(name)};
@@ -1081,7 +1081,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listDutyNameWithUnit(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //获取组织的所有职务
+        //조직의 모든 직무 조회
         listUnitAllDuty: function(name, async){
             getOrgActions();
             var data = {"unitList":getNameFlag(name)};
@@ -1095,7 +1095,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listUnitAllDuty(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出顶层组织
+        //최상위 조직 목록
         listTopUnit: function(async){
             var action = MWF.Actions.get("x_organization_assemble_control");
             var v = null;
@@ -1109,8 +1109,8 @@ MWF.xScript.CMSEnvironment = function(ev){
             return (!!async) ? promise : v;
         },
 
-        //组织属性**************
-        //添加组织属性值(在属性中添加values值，如果没有此属性，则创建一个)
+        //조직 속성**************
+        //조직 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
         appendUnitAttribute: function(unit, attr, values, success, failure, async){
             getOrgActions();
             var unitFlag = (typeOf(unit)==="object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -1143,7 +1143,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             //     if (failure) failure(xhr, text, error);
             // }, false);
         },
-        //设置组织属性值(将属性值修改为values，如果没有此属性，则创建一个)
+        //조직 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
         setUnitAttribute: function(unit, attr, values, success, failure, async){
             getOrgActions();
             var unitFlag = (typeOf(unit)==="object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -1175,7 +1175,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             //     if (failure) failure(xhr, text, error);
             // }, false);
         },
-        //获取组织属性值
+        //조직 속성 값 조회
         getUnitAttribute: function(unit, attr, async){
             getOrgActions();
             var unitFlag = (typeOf(unit)==="object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -1190,7 +1190,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.getUnitAttribute(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出组织所有属性的名称
+        //조직의 모든 속성 이름 목록
         listUnitAttributeName: function(name, async){
             getOrgActions();
             var data = {"unitList":getNameFlag(name)};
@@ -1204,7 +1204,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             var promise = orgActions.listUnitAttributeName(data, cb, null, !!async);
             return (!!async) ? promise : v;
         },
-        //列出组织的所有属性
+        //조직의 모든 속성 목록
         listUnitAllAttribute: function(name, async){
             getOrgActions();
             var data = {"unitList":getNameFlag(name)};
@@ -1641,7 +1641,7 @@ MWF.xScript.CMSEnvironment = function(ev){
         parseParameter : function( obj, format ){
             if( typeOf(obj) !== "object" )return {};
             var parameter = {};
-            //传入的参数
+            //전달된 매개변수
             for( var p in obj ){
                 var value = obj[p];
                 if( typeOf( value ) === "date" ){
@@ -1827,13 +1827,13 @@ MWF.xScript.CMSEnvironment = function(ev){
     //};
 
 
-    //include 引用脚本
+    //include 스크립트 참조
     //optionsOrName : {
-    //  type : "", 默认为cms, 可以为 portal  process  cms
-    //  application : "", 门户/流程/CMS的名称/别名/id, 默认为当前应用
-    //  name : "" // 脚本名称/别名/id
+    //  type : "", 기본값 cms, portal  process  cms 가능
+    //  application : "", 포털/프로세스/CMS의 이름/별칭/id, 기본값은 현재 앱
+    //  name : "" // 스크립트 이름/별칭/id
     //}
-    //或者name: "" // 脚本名称/别名/id
+    //또는 name: "" // 스크립트 이름/별칭/id
     // if( !window.includedScripts ){
     //     var includedScripts = window.includedScripts = [];
     // }else{
@@ -1879,7 +1879,7 @@ MWF.xScript.CMSEnvironment = function(ev){
     }
 
 
-    //缓存名称、别名、id
+    //캐시 이름, 별칭, id
     var _parseScriptImportList = function (json, type){
         var includedScripts = [];
         var importedList = json.data.importedList || [];
@@ -1922,7 +1922,7 @@ MWF.xScript.CMSEnvironment = function(ev){
             key = type + "-" + name;
         }
 
-        //js 加载过就不重新加载了
+        //js는 이미 로드했으면 다시 로드하지 않음
         if (includedScripts.indexOf( key )> -1){
             if (callback) callback.apply(this);
             return;
@@ -2065,10 +2065,10 @@ MWF.xScript.CMSEnvironment = function(ev){
         }
     }
 
-    //如果前端事件有异步调用，想要在异步调用结束后继续运行页面加载，
-    //可在调用前执行 var resolve = this.wait();
-    //在异步调用结束后 执行 resolve.cb()；
-    //目前只有表单的queryload事件支持此方法。
+    //프런트엔드 이벤트에 비동기 호출이 있고, 비동기 호출이 끝난 뒤 페이지 로드를 계속하려면,
+    //호출 전에 var resolve = this.wait(); 실행
+    //비동기 호출이 끝난 뒤 resolve.cb(); 실행
+    //현재는 양식의 queryload 이벤트만 이 방법을 지원함.
     this.wait = function(){
         resolve = {};
         var setResolve = function(callback){
@@ -2077,9 +2077,9 @@ MWF.xScript.CMSEnvironment = function(ev){
         this.target.event_resolve = setResolve;
         return resolve;
     };
-    //和this.wait配合使用，
-    //如果没有异步，则resolve.cb方法不存在，
-    //所以在回调中中使用this.goon();使表单继续加载
+    //this.wait와 함께 사용,
+    //비동기가 없으면 resolve.cb 메서드가 없으므로,
+    //콜백에서 this.goon();을 사용해 양식 로드를 계속함
     this.goon = function(){
         this.target.event_resolve = null;
     };
@@ -2088,7 +2088,7 @@ MWF.xScript.CMSEnvironment = function(ev){
         return this.Actions.load('x_program_center').InvokeAction.execute(name, data);
     }
 
-    //仅前台对象-----------------------------------------
+    //프런트엔드 객체 전용-----------------------------------------
     //form
     this.form = {
         "getInfor": function(){return ev.formInfor;},
@@ -2116,7 +2116,7 @@ MWF.xScript.CMSEnvironment = function(ev){
         "close": function(){_form.closeDocument();},
 
         /**
-         * @summary 根据表单中所有组件的校验设置和表单的“发布校验”脚本进行校验。<b>（仅内容管理表单中可用）</b>
+         * @summary 양식 내 모든 컴포넌트의 검증 설정과 양식의 “게시 검증” 스크립트로 검증.<b>(콘텐츠 관리 양식에서만 사용 가능)</b>
          * @method verifyPublish
          * @static
          * @o2syntax
@@ -2127,9 +2127,9 @@ MWF.xScript.CMSEnvironment = function(ev){
          *  }
          *  @example
          *  this.form.verifyPublish().then(flag=>{
-         *      //如果表单内包含异步校验则，用这种方式获取校验结果
+         *      //양식에 비동기 검증이 포함되어 있으면 이 방식으로 검증 결과를 얻음
          *  })
-         *  @return {Boolean|Pormise} 是否通过校验，如果表单内包含异步校验则，返回的是Promise
+         *  @return {Boolean|Pormise} 검증 통과 여부, 양식에 비동기 검증이 포함되어 있으면 Promise를 반환
          */
         "verifyPublish": function(isSave){
             const formValidated = _form.formValidation(isSave ? "" : "publish");
@@ -2156,18 +2156,18 @@ MWF.xScript.CMSEnvironment = function(ev){
             //return !(!_form.formValidation(isSave ? "" : "publish") || !_form[isSave ? 'formSaveValidation' : 'formPublishValidation']());
         },
 
-        /**发布当前文档。<b>（仅内容管理表单中可用）</b>
+        /**현재 문서를 게시.<b>(콘텐츠 관리 양식에서만 사용 가능)</b>
          * @method publish
          * @memberOf module:form
-         * @param {Function} callback - 发布后的回调方法，如果接收的参数<b>为空</b>表示校验未通过，如果参数<b>不为空</b>为发布后的回调
+         * @param {Function} callback - 게시 후 콜백 메서드, 받은 매개변수가 <b>비어 있으면</b> 검증 실패, 매개변수가 <b>비어 있지 않으면</b> 게시 후 콜백
          * @o2syntax
          * this.form.publish( callback );
          * @sample
          * this.form.publish( function(json){
          *     if( !json ){
-         *         //校验未通过
+         *         //검증 실패
          *     }else{
-         *         //校验通过，json.data.id 为文档id
+         *         //검증 통과, json.data.id는 문서 id
          *     }
          * });
          */
@@ -2220,12 +2220,12 @@ MWF.xScript.CMSEnvironment = function(ev){
             return new MWF.O2Selector(container, options, delayLoad);
         },
         "addEvent": function(e, f){_form.addEvent(e, f);},
-        /**分享当前文档到IM聊天会话中
+        /**현재 문서를 IM 채팅 대화에 공유
          * @method shareToIMChat
          * @static
          *
          * @example
-         //不带参数
+         //매개변수 없음
          this.form.shareToIMChat();
          */
         "shareToIMChat": function(){
@@ -2671,7 +2671,7 @@ MWF.xScript.CMSEnvironment = function(ev){
     this.Table = MWF.xScript.createTable();
 
 
-    //兼容流程拷贝过来的表单
+    //프로세스에서 복사해 온 양식과 호환
     var _fitWorkContextList = function(callback, error){
         var cb = (callback && o2.typeOf(callback)==="function") ? callback : null;
         var list = [];
@@ -3195,8 +3195,8 @@ if( !MWF.xScript.addDictToCache )MWF.xScript.addDictToCache = function ( options
         for( var j=0; j<dictFlagList.length; j++ ){
             var k = dictFlagList[j] + type + appFlagList[i] + enableAnonymous;
             if( !MWF.xScript.dictLoaded[k] ){
-                MWF.xScript.dictLoaded[k] = cache; //指向同一个对象
-                // MWF.xScript.dictLoaded[k][path] = json; //指向不同的对象
+                MWF.xScript.dictLoaded[k] = cache; //같은 객체를 가리킴
+                // MWF.xScript.dictLoaded[k][path] = json; //서로 다른 객체를 가리킴
             }else if( i===0 && j===0 ){
                 MWF.xScript.setDictToCache( k, path ,json );
                 var arr = path.split(/\./g);
@@ -3339,12 +3339,12 @@ if( !MWF.xScript.deleteDictToCache )MWF.xScript.deleteDictToCache = function(key
 
 if( !MWF.xScript.createCMSDict )MWF.xScript.createCMSDict = function(application, appType){
     //optionsOrName : {
-    //  type : "", //默认为process, 可以为  process  cms
-    //  application : "", //流程/CMS的名称/别名/id, 默认为当前应用
-    //  name : "", // 数据字典名称/别名/id
-    //  anonymous : false //允许在未登录的情况下读取CMS的数据字典， 该参数名也可以是 enableAnonymous
+    //  type : "", //기본값 process, process  cms 가능
+    //  application : "", //프로세스/CMS의 이름/별칭/id, 기본값은 현재 앱
+    //  name : "", // 데이터 사전 이름/별칭/id
+    //  anonymous : false //로그인하지 않은 상태에서 CMS 데이터 사전 읽기 허용, 이 매개변수 이름은 enableAnonymous도 가능
     //}
-    //或者name: "" // 数据字典名称/别名/id
+    //또는 name: "" // 데이터 사전 이름/별칭/id
     return function(optionsOrName){
         var options = optionsOrName;
         if( typeOf( options ) == "string" ){

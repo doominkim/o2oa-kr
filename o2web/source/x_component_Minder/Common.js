@@ -9,17 +9,17 @@ MWF.require("MWF.widget.O2Identity", null, false);
 MWF.xApplication.Minder.FolderSelector = new Class({
     Extends: MTooltips,
     options : {
-        style : "", //如果有style，就加载 style/css.wcss
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "left", //x轴上left center right,  auto 系统自动计算
-            y : "auto" //y 轴上top middle bottom, auto 系统自动计算
+        style : "", //style이 있으면 style/css.wcss 로드
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "left", //x축 left center right, auto는 시스템이 자동 계산
+            y : "auto" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
-        event : "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-        hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-        displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
+        event : "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+        hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+        displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
         hasArrow : false,
-        overflow : "scroll", //弹出框高宽超过container的时候怎么处理，hidden 表示超过的隐藏，scroll 表示超过的时候显示滚动条
+        overflow : "scroll", //팝업 높이·너비가 container를 초과할 때 처리 방식, hidden은 초과분 숨김, scroll은 초과 시 스크롤바 표시
         nodeStyles : {
             "font-size" : "12px",
             "position" : "absolute",
@@ -765,12 +765,12 @@ MWF.xApplication.Minder.Toolbar = new Class({
             },
             //import : {
             //    action : "import",
-            //    text : "导入",
+            //    text : "가져오기",
             //    icon : "import"
             //},
             //export : {
             //    action : "export",
-            //    text : "导出",
+            //    text : "내보내기",
             //    icon : "export"
             //},
             recycle : {
@@ -1284,16 +1284,16 @@ MWF.xApplication.Minder.Document = new Class({
 MWF.xApplication.Minder.ShareTooltip = new Class({
     Extends: MTooltips,
     options : {
-        style : "", //如果有style，就加载 style/css.wcss
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "auto", //x轴上left center right,  auto 系统自动计算
-            y : "auto" //y 轴上top middle bottom, auto 系统自动计算
+        style : "", //style이 있으면 style/css.wcss 로드
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "auto", //x축 left center right, auto는 시스템이 자동 계산
+            y : "auto" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
-        event : "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-        hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-        displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
-        overflow : "scroll" //弹出框高宽超过container的时候怎么处理，hidden 表示超过的隐藏，scroll 表示超过的时候显示滚动条
+        event : "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+        hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+        displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+        overflow : "scroll" //팝업 높이·너비가 container를 초과할 때 처리 방식, hidden은 초과분 숨김, scroll은 초과 시 스크롤바 표시
     },
     _getHtml : function(  ){
         var data = this.data;

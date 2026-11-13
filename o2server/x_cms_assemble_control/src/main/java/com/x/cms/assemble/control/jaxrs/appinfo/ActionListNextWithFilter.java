@@ -77,13 +77,13 @@ public class ActionListNextWithFilter extends BaseAction {
 
 	public class Wi {
 
-		@FieldDescribe("作为过滤条件的CMS应用ID, 可多个, String数组.")
+		@FieldDescribe("필터 조건으로 쓰는 CMS 앱 ID, 여러 개 가능, String 배열.")
 		private List<String> appIdList;
 
-		@FieldDescribe("作为过滤条件的创建者姓名, 可多个, String数组.")
+		@FieldDescribe("필터 조건으로 쓰는 작성자 이름, 여러 개 가능, String 배열.")
 		private List<String> creatorList;
 
-		@FieldDescribe("作为过滤条件的CMS应用关键字, 通常是应用名称, String, 模糊查询.")
+		@FieldDescribe("필터 조건으로 쓰는 CMS 앱 키워드, 보통 앱 이름, String, 유사 검색.")
 		private String key;
 
 		@FieldDescribe("文档类型：全部 | 信息 | 数据")

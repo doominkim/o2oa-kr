@@ -7,7 +7,7 @@ class ExceptionQueryAccessDenied extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionQueryAccessDenied(String person, String name, String id) {
-		super("用户:{} 访问查询:{}, id: {}, 权限不足.", person, name, id);
+		super("사용자: {}의 조회: {}, id: {} 접근 권한이 부족합니다.", person, name, id);
 	}
 
 }

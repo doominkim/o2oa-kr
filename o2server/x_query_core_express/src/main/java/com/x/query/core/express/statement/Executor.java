@@ -59,7 +59,7 @@ public class Executor {
 
     private static Object executeDataSql(Runtime runtime, ExecuteTarget executeTarget, boolean isOld) throws Exception {
         checkDeleteInsertUpdateDml(executeTarget.getParsedStatement());
-        // 原生SQL直接交给数据库执行,执行前必须做文件读写和函数白名单检查
+        // 네이티브 SQL은 데이터베이스에 바로 전달해 실행하므로 실행 전 파일 읽기·쓰기 및 함수 화이트리스트 검사 필수
         SqlSafetyChecker.check(executeTarget.getSql());
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             EntityManager em = emc.get(DynamicBaseEntity.class);
@@ -162,7 +162,7 @@ public class Executor {
     }
 
     /**
-     * 在8.0.0以上版本jpql的输出值通过jsqlparser转换成字段属性该方法通过fv字段进行判断
+     * 8.0.0 이상 버전에서 jpql 출력값은 jsqlparser로 필드 속성으로 변환하며, 이 메서드는 fv 필드로 판단
      *
      * @param select Select
      * @param list List
@@ -212,13 +212,13 @@ public class Executor {
     }
 
     /**
-     * 简化名称,考虑一下情况<br>
+     * 이름 단순화, 다음 경우를 고려<br>
      * x.id
      * (x.id)
      * ((x.id))
      *
-     * @param name 名称
-     * @return 简化名称
+     * @param name 이름
+     * @return 단순화한 이름
      */
     private static String simplifyName(String name) {
         name = StringUtils.trimToEmpty(name);
@@ -244,7 +244,7 @@ public class Executor {
 
     private static Long executeCountSql(ExecuteTarget executeTarget, boolean isOld) throws Exception {
         checkDeleteInsertUpdateDml(executeTarget.getParsedStatement());
-        // count语句的SQL同样可以指定为任意内容,执行前必须做文件读写和函数白名单检查
+        // count 문 SQL도 임의 내용으로 지정할 수 있으므로 실행 전 파일 읽기·쓰기 및 함수 화이트리스트 검사 필수
         SqlSafetyChecker.check(executeTarget.getSql());
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             EntityManager em = emc.get(DynamicBaseEntity.class);
@@ -279,7 +279,7 @@ public class Executor {
     }
 
     /**
-     * jpql不支持insert,进行单独判断,然后判断checkDeleteInsertUpdateDml
+     * jpql은 insert를 지원하지 않으므로 별도 판단 후 checkDeleteInsertUpdateDml 판단
      *
      * @param statement Statement
      */
@@ -293,7 +293,7 @@ public class Executor {
     }
 
     /**
-     * 检查配置文件是否允许执行 delete,insert,update语句
+     * 설정 파일이 delete, insert, update 문 실행을 허용하는지 검사
      *
      * @param statement Statement
      */

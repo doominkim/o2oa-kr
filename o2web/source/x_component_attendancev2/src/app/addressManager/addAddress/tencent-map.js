@@ -12,7 +12,7 @@ const template = `
   </div>
 `;
 
-// 腾讯地图组件
+// 텐센트 지도 컴포넌트
 export default content({
   template,
   autoUpdate: true,
@@ -22,19 +22,19 @@ export default content({
       form: {
         longitude: "",
         latitude: "",
-        status: "a", // a 新增 ，u 更新， v 查看
+        status: "a", // a 신규, u 업데이트, v 조회
         isView: false,
       },
-      isMax: false, // 地图放大
+      isMax: false, // 지도 확대
     };
   },
   afterRender() {
     this.loadTencentMap();
   },
-  // 加载地图api等资源
+  // 지도 api 등 리소스 로드
   async loadTencentMap() {
     if (!window.TencentMapApiLoaded) {
-      const config = await getPublicData("attendanceMapConfig"); // 地图配置
+      const config = await getPublicData("attendanceMapConfig"); // 지도 설정
       let accountkey = "OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77";
       if (config && config.txMapAccountKey) {
         accountkey = config.txMapAccountKey;
@@ -58,7 +58,7 @@ export default content({
       this.initDefaultNumberMapView();
     }
   },
-  // 查看工作场所 使用参数中的位置
+  // 근무지 조회 시 인수의 위치 사용
   loadMapView() {
     const point = this.createLatLng(
       this.bind.form.longitude,
@@ -66,7 +66,7 @@ export default content({
     );
     this.createMap(point);
   },
-  // 默认打开地图 一个固定值
+  // 기본으로 여는 지도 위치(고정값)
   initDefaultNumberMapView() {
     const point = this.createLatLng(120.135431, 30.27412);
     this.createMap(point);
@@ -74,7 +74,7 @@ export default content({
   createLatLng(lng, lat) {
     return new TMap.LatLng(Number(lat), Number(lng));
   },
-  // 加载腾讯地图
+  // 텐센트 지도 로드
   createMap(point) {
     console.debug("Tencent 지도 생성 시작!", point);
     this.mapNode = this.dom.querySelector(".bd-map");
@@ -111,7 +111,7 @@ export default content({
       this.bind.form.latitude = latitude;
     });
   },
-  // 添加位置点
+  // 위치 지점 추가
   addMarkPoint(point, placeName) {
     const geometry = {
       id: "workplace",
@@ -130,7 +130,7 @@ export default content({
       });
     }
   },
-  // 地图放大缩小
+  // 지도 확대·축소
   mapMaxOrMini() {
     this.bind.isMax = !this.bind.isMax;
   },

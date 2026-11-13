@@ -24,7 +24,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindQuery;
 import com.x.mind.entity.MindBaseInfo;
 
 /**
- * 查询所有我收到的分享文件信息
+ * 내가 받은 모든 공유 파일 정보 조회
  * @author O2LEE
  *
  */
@@ -59,13 +59,13 @@ public class ActionMyReciveMindNextWithFilter extends BaseAction {
 			}
 		}
 		
-		//先查询在mindIds_inFolder的过滤下，获取我所有的组织和群组
+		//먼저 mindIds_inFolder 필터로 내 모든 조직과 그룹 조회
 		if( check ){
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(effectivePerson.getDistinguishedName());
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e,  "系统在查询用户所属的所有组织名称列表时发生异常。", effectivePerson.getDistinguishedName() );
+				Exception exception = new ExceptionMindQuery( e,  "사용자가 속한 모든 조직 이름 목록을 조회하는 중 오류가 발생했습니다.", effectivePerson.getDistinguishedName() );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -76,14 +76,14 @@ public class ActionMyReciveMindNextWithFilter extends BaseAction {
 				groupNames = userManagerService.listGroupNamesByPerson(effectivePerson.getDistinguishedName());
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e,  "系统在查询用户所属的所有组织名称列表时发生异常。", effectivePerson.getDistinguishedName() );
+				Exception exception = new ExceptionMindQuery( e,  "사용자가 속한 모든 조직 이름 목록을 조회하는 중 오류가 발생했습니다.", effectivePerson.getDistinguishedName() );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 				
 		if( check ){
-			//先查询在mindIds_inFolder的过滤下，我所有共享给其他用户的脑图文件ID
+			//먼저 mindIds_inFolder 필터로 내가 다른 사용자에게 공유한 모든 마인드맵 파일 ID 조회
 			if( StringUtils.isNotEmpty( source )) {
 				try {
 					List<String> targetList = new ArrayList<>();
@@ -97,7 +97,7 @@ public class ActionMyReciveMindNextWithFilter extends BaseAction {
 					mindIds_recived = mindInfoService.listSharedMindIdsFromRecord( source, targetList, null );
 				}catch( Exception e ) {
 					check = false;
-					Exception exception = new ExceptionMindQuery( e,  "系统在查询用户共享给其他人的脑图信息时发生异常。", effectivePerson.getDistinguishedName() );
+					Exception exception = new ExceptionMindQuery( e,  "사용자가 다른 사람에게 공유한 마인드맵 정보를 조회하는 중 오류가 발생했습니다.", effectivePerson.getDistinguishedName() );
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -115,7 +115,7 @@ public class ActionMyReciveMindNextWithFilter extends BaseAction {
 				}
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e, "系统根据ID列表查询脑图信息时发生异常！" );
+				Exception exception = new ExceptionMindQuery( e, "ID 목록으로 마인드맵 정보를 조회하는 중 오류가 발생했습니다!" );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -125,16 +125,16 @@ public class ActionMyReciveMindNextWithFilter extends BaseAction {
 	
 	public static class Wi{
 		
-		@FieldDescribe( "分享者" )
+		@FieldDescribe( "공유자" )
 		private String source = null;
 		
-		@FieldDescribe( "关键字" )
+		@FieldDescribe( "키워드" )
 		private String key = null;
 
-		@FieldDescribe( "排序列：默认为sequence" )
+		@FieldDescribe( "정렬 열: 기본값 sequence" )
 		private String orderField =  JpaObject.sequence_FIELDNAME ;
 		
-		@FieldDescribe( "排序方式：DESC|ASC， 默认为DESC" )
+		@FieldDescribe( "정렬 방식: DESC|ASC, 기본값 DESC" )
 		private String orderType = "DESC";
 		
 		public String getSource() {

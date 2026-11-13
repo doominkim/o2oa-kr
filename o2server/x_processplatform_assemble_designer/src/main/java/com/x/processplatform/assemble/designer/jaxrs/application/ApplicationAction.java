@@ -32,12 +32,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("application")
-@JaxrsDescribe("应用")
+@JaxrsDescribe("앱")
 public class ApplicationAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ApplicationAction.class);
 
-	@JaxrsMethodDescribe(value = "列示所有应用，同时附带流程简要信息和表单简要信息.返回值按名称进行排序", action = ActionListSummary.class)
+	@JaxrsMethodDescribe(value = "모든 앱 목록, 프로세스 요약 정보와 양식 요약 정보 포함. 이름순 정렬하여 반환", action = ActionListSummary.class)
 	@GET
 	@Path("list/summary")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -54,13 +54,13 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取单个应用信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "단일 앱 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -72,7 +72,7 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有应用", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 앱 목록", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -89,14 +89,14 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据应用分类获取应用,应用分类不为null.", action = ActionListWithApplicationCategory.class)
+	@JaxrsMethodDescribe(value = "앱 분류로 앱 조회, 앱 분류는 null 불가.", action = ActionListWithApplicationCategory.class)
 	@GET
 	@Path("list/applicationcategory/{applicationCategory}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithApplicationCategory(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用分类") @PathParam("applicationCategory") String applicationCategory) {
+			@JaxrsParameterDescribe("앱 분류") @PathParam("applicationCategory") String applicationCategory) {
 		ActionResult<List<ActionListWithApplicationCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -108,14 +108,14 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据应用分类获取应用的简要信息,不包含流程表单,应用分类不为null.", action = ActionListSummaryWithApplicationCategory.class)
+	@JaxrsMethodDescribe(value = "앱 분류로 앱 요약 정보 조회, 프로세스·양식 미포함, 앱 분류는 null 불가.", action = ActionListSummaryWithApplicationCategory.class)
 	@GET
 	@Path("list/summary/applicationcategory/{applicationCategory}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSummaryWithApplicationCategory(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用分类") @PathParam("applicationCategory") String applicationCategory) {
+			@JaxrsParameterDescribe("앱 분류") @PathParam("applicationCategory") String applicationCategory) {
 		ActionResult<List<ActionListSummaryWithApplicationCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -127,7 +127,7 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建应用.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "앱 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -144,13 +144,13 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新应用.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "앱 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -162,13 +162,13 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "设置应用权限.", action = ActionEditPermission.class)
+	@JaxrsMethodDescribe(value = "앱 권한 설정.", action = ActionEditPermission.class)
 	@POST
 	@Path("{id}/permission")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updatePermission(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								 @JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+								 @JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditPermission.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -180,14 +180,14 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新应用图标.", action = ActionSetIcon.class)
+	@JaxrsMethodDescribe(value = "앱 아이콘 갱신.", action = ActionSetIcon.class)
 	@PUT
 	@Path("{id}/icon")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void setIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("id") String id, @FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("头像文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("id") String id, @FormDataParam(FILE_FIELD) final byte[] bytes,
+			@JaxrsParameterDescribe("프로필 사진 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionSetIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -199,14 +199,14 @@ public class ApplicationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除应用,将同时删除所有相关内容.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "앱 삭제, 관련 콘텐츠 모두 함께 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}/{onlyRemoveNotCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("是否仅删除在流转中的Work") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("진행 중인 Work만 삭제할지 여부") @PathParam("onlyRemoveNotCompleted") boolean onlyRemoveNotCompleted) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

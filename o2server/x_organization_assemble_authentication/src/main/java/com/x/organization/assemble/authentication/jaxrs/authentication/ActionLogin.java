@@ -49,7 +49,7 @@ class ActionLogin extends BaseAction {
                 }
                 wo = this.manager(request, response, wi.getCredential(), Wo.class);
             } else {
-                // 普通用户登录,也有可能拥有管理员角色.增加相同标识(name允许重复)的认证
+                // 일반 사용자 로그인. 관리자 역할을 가질 수도 있음. 같은 식별자(name 중복 허용)의 인증 추가
                 List<String> people = this.listWithCredential(business, wi.getCredential());
                 Person person = null;
                 if (people.isEmpty()) {

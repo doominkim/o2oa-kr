@@ -13,10 +13,10 @@ public class WoContentType extends GsonPropertyObject {
 		this.contentType = contentType;
 	}
 
-	@FieldDescribe("地址.")
+	@FieldDescribe("주소.")
 	private String contentType;
 
-	@FieldDescribe("内容.")
+	@FieldDescribe("내용.")
 	private Object body;
 
 	public String getContentType() {

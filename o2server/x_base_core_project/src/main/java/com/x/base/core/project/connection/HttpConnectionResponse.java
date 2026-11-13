@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * HttpConnection对象
+ * HttpConnection 객체
  *
  * @author ray
  *

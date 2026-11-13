@@ -79,13 +79,13 @@
                 </td>
             </tr>
             <!--<tr>-->
-            <!--<td class="editTableTitle">部　　门:</td>-->
+            <!--<td class="editTableTitle">부서:</td>-->
             <!--<td class="editTableValue">-->
             <!--<div class="MWFPersonDepartment" name="departmentValue" type="department"></div>-->
             <!--</td>-->
             <!--</tr>-->
             <!--<tr>-->
-            <!--<td class="editTableTitle">公　　司:</td>-->
+            <!--<td class="editTableTitle">회사:</td>-->
             <!--<td class="editTableValue">-->
             <!--<div class="MWFPersonCompany" name="companyValue" type="company"></div>-->
             <!--</td>-->
@@ -156,7 +156,7 @@
         </table>
 
         <div id="text{$.pid}expandSubEnable" style="border-bottom: 1px solid #999; ">
-            <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过选择表单数据指定选择范围</div>-->
+            <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">양식 데이터 선택으로 선택 범위 지정</div>-->
             <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
                 <tr>
                     <td class="editTableTitle">하위 펼치기:</td>
@@ -169,7 +169,7 @@
         </div>
 
         <div id="text{$.pid}rangeScriptValue" style="border-bottom: 1px solid #999; display: text{($.range=='unit')?'block':'none'}; ">
-            <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过选择表单数据指定选择范围</div>-->
+            <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">양식 데이터 선택으로 선택 범위 지정</div>-->
             <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
                 <tr>
                     <td class="editTableTitle">조직 선택:</td>
@@ -181,7 +181,7 @@
                 </tr>
             </table>
 
-            <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过编写脚本指定选择范围</div>-->
+            <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">스크립트 작성으로 선택 범위 지정</div>-->
             <div class="MWFFormulaArea" name="rangeKey" title="스크립트 (S)"></div>
         </div>
 
@@ -234,10 +234,10 @@
             </table>
         </div>
     </div>
-    <!--<div title="区段" class="MWFTab">-->
+    <!--<div title="구간" class="MWFTab">-->
     <!--<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
     <!--<tr>-->
-    <!--<td class="editTableTitle">启用区段:</td>-->
+    <!--<td class="editTableTitle">구간 사용:</td>-->
     <!--<td class="editTableValue">-->
     <!--<input onclick="if (this.checked){ $('text{$.id}sectionByEditArea').setStyle('display', 'block')}" type="radio" name="section" value="yes" text{($.section=='yes')?'checked':''}/>예-->
     <!--<input onclick="if (this.checked){ $('text{$.id}sectionByEditArea').setStyle('display', 'none')}" type="radio" name="section" value="no" text{($.section!='yes')?'checked':''}/>아니요-->
@@ -248,22 +248,22 @@
     <!--<div id="text{$.id}sectionByEditArea" style="display: text{($.section=='yes')?'block':'none'};">-->
     <!--<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
     <!--<tr>-->
-    <!--<td class="editTableTitle">区段依据:</td>-->
+    <!--<td class="editTableTitle">구간 기준:</td>-->
     <!--<td class="editTableValue">-->
-    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'none');}" name="sectionBy" text{(($.sectionBy=='person') || ($.sectionBy!='department' && $.sectionBy!='activity' && $.sectionBy!='script'))?'checked':''} type="radio" value="person"/>处理人<br/>-->
-    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'none');}"  name="sectionBy" text{($.sectionBy=='department')?'checked':''} type="radio" value="department"/>处理部门<br/>-->
-    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'none');}"  name="sectionBy" text{($.sectionBy=='activity')?'checked':''} type="radio" value="activity"/>活动ID<br/>-->
-    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'block');}"  name="sectionBy" text{($.sectionBy=='script')?'checked':''} type="radio" value="script"/>脚本<br/>-->
+    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'none');}" name="sectionBy" text{(($.sectionBy=='person') || ($.sectionBy!='department' && $.sectionBy!='activity' && $.sectionBy!='script'))?'checked':''} type="radio" value="person"/>처리자<br/>-->
+    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'none');}"  name="sectionBy" text{($.sectionBy=='department')?'checked':''} type="radio" value="department"/>처리 부서<br/>-->
+    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'none');}"  name="sectionBy" text{($.sectionBy=='activity')?'checked':''} type="radio" value="activity"/>활동 ID<br/>-->
+    <!--<input class="editTableRadio" onclick="if (this.checked){ $('text{$.id}sectionByScriptEditArea').setStyle('display', 'block');}"  name="sectionBy" text{($.sectionBy=='script')?'checked':''} type="radio" value="script"/>스크립트<br/>-->
     <!--</td>-->
     <!--</tr>-->
     <!--</table>-->
     <!--<div id="text{$.id}sectionByScriptEditArea" style="display: text{($.sectionBy=='script')?'block':'none'};">-->
-    <!--<div class="MWFScriptArea" name="sectionByScript" title="区段依据 (S)"></div>-->
+    <!--<div class="MWFScriptArea" name="sectionByScript" title="구간 기준 (S)"></div>-->
     <!--</div>-->
     <!--</div>-->
     <!--</div>-->
     <div title="{{$.lp.power}}"  class="MWFTab">
-        <!-- 可阅读配置 -->
+        <!-- 열람 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.readConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.readConfigInfo}}</div>
         
@@ -324,7 +324,7 @@
             </table>
         </div>
         
-        <!-- 可编辑配置 -->
+        <!-- 편집 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.editConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.editConfigInfo}}</div>
 

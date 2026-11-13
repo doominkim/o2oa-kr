@@ -19,11 +19,11 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 脑图文件夹（分类）信息表
+ * 마인드맵 폴더(분류) 정보 테이블
  * 
  * @author O2LEE
  */
-@Schema(name = "MindFolderInfo", description = "脑图文件夹.")
+@Schema(name = "MindFolderInfo", description = "마인드맵 폴더.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.MindFolderInfo.table, uniqueConstraints = {
@@ -44,7 +44,7 @@ public class MindFolderInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -53,54 +53,54 @@ public class MindFolderInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	// public static String[] FLA GS = new String[] { "id" };
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("目录名称")
+	@FieldDescribe("디렉터리 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String name = "";
 
 	public static final String parentId_FIELDNAME = "parentId";
-	@FieldDescribe("上级目录Id，默认为‘0’ ")
+	@FieldDescribe("상위 디렉터리 Id, 기본값 ‘0’ ")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + parentId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + parentId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String parentId = "";
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("编号，默认为1")
+	@FieldDescribe("번호, 기본값 1")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer orderNumber = 0;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("备注信息")
+	@FieldDescribe("비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = "";
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("自动生成，创建者")
+	@FieldDescribe("자동 생성, 생성자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creator_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator = "";
 
 	public static final String creatorUnit_FIELDNAME = "creatorUnit";
-	@FieldDescribe("自动生成，创建者所属组织")
+	@FieldDescribe("자동 생성, 생성자 소속 조직")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creatorUnit_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creatorUnit = "";

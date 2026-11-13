@@ -52,14 +52,14 @@ public class ActionEraseDocumentWithAppInfo extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess( e, "根据指定ID查询应用栏目信息对象时发生异常。ID:" + id );
+				Exception exception = new ExceptionAppInfoProcess( e, "지정한 ID의 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
 		}
 
 		if ( check ) {
-			//查询栏目下的文档数量
+			//게시판의 문서 수 조회
 			Long count = documentServiceAdv.countByAppId( id );
 			List<String> idsForDelete = null;
 			List<String> allFileInfoIds = null;	
@@ -78,7 +78,7 @@ public class ActionEraseDocumentWithAppInfo extends BaseAction {
 				try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 					Business business = new Business( emc );
 					
-					//循环清除分类下所有的文档信息
+					//분류의 모든 문서 정보를 반복 삭제
 					while( count > 0 && currentWhileCount<=whileCount ) {
 						logger.info("search document with appId for max count '"+queryMaxCount+"' document ids.");
 						idsForDelete = documentServiceAdv.listIdsByAppId( id, null, queryMaxCount );
@@ -92,11 +92,11 @@ public class ActionEraseDocumentWithAppInfo extends BaseAction {
 									if( document != null ){
 										logger.info("system try to delete document. title: '"+document.getTitle()+"'" );
 									}
-									//删除与该文档有关的所有数据Item信息
+									//해당 문서와 관련된 모든 데이터 Item 정보 삭제
 									documentDataHelper = new DocumentDataHelper( emc, document );
 									documentDataHelper.remove();
 									
-									//删除文档的附件信息
+									//문서의 첨부파일 정보 삭제
 									allFileInfoIds = business.getFileInfoFactory().listAllByDocument( docId );
 									if( ListTools.isNotEmpty( allFileInfoIds ) ){
 										for( String fileInfoId : allFileInfoIds ){
@@ -110,18 +110,18 @@ public class ActionEraseDocumentWithAppInfo extends BaseAction {
 											emc.remove( fileInfo, CheckRemoveType.all );
 										}
 									}
-									//删除文档信息
+									//문서 정보 삭제
 									if( document != null ){
 										emc.remove( document, CheckRemoveType.all  );
 									}
 								}catch( Exception e ) {
 										e.printStackTrace();
 								}
-								//先提交事务
+								//먼저 트랜잭션 커밋
 								emc.commit();
 
 								try {
-									//删除该文档对应的所有Review信息
+									//해당 문서의 모든 Review 정보 삭제
 									emc.beginTransaction( Review.class );
 									Review review = null;
 									List<String> reviewIds = business.reviewFactory().listByDocument( docId, 2000 );

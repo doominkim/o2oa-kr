@@ -21,7 +21,7 @@ class ActionGet extends BaseAction {
 			if (null == attachment) {
 				throw new ExceptionAttachmentNotExist(id);
 			}
-			/* 判断文件的所有者是否是当前用户 */
+			/* 파일 소유자가 현재 사용자인지 판단 */
 			if (!StringUtils.equals(effectivePerson.getDistinguishedName(), attachment.getPerson())) {
 				throw new ExceptionAttachmentAccessDenied(effectivePerson, attachment);
 			}
@@ -39,7 +39,7 @@ class ActionGet extends BaseAction {
 		static WrapCopier<Attachment, Wo> copier = WrapCopierFactory.wo(Attachment.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("文件类型")
+		@FieldDescribe("파일 유형")
 		private String contentType;
 
 		public String getContentType() {

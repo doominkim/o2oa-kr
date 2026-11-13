@@ -1,6 +1,6 @@
 if (!layout.isReady) {
     o2.addReady(function () {
-        //兼容方法
+        //호환 메서드
         if (window.Element) {
             Element.implement({
                 "makeLnk": function (options) {
@@ -84,7 +84,7 @@ if (!layout.isReady) {
 
         var _load = function () {
             var _loadApp = function (json) {
-                //用户已经登录
+                //사용자 로그인 완료
                 if (json) {
                     layout.user = json.data;
                     layout.session = layout.session || {};
@@ -100,27 +100,27 @@ if (!layout.isReady) {
                 }
             };
 
-            // 是否ip
+            // ip 여부
             var _isIp = function (ip) {
                 var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
                 return reg.test(ip);
             };
 
 
-            //修改支持x-token
+            //x-token 지원 수정
             var uri = new URI(window.location.href);
             var options = uri.get("data");
             if (options[o2.tokenName]) {
-                // 删除
+                // 삭제
                 // Cookie.dispose(o2.tokenName);
-                // // 写入
-                // var host = window.location.hostname; // 域名
+                // // 쓰기
+                // var host = window.location.hostname; // 도메인
                 // var domain = null;
                 // if (_isIp(host)) {
                 //     domain = host;
                 // } else {
                 //     if (host.indexOf(".") > 0) {
-                //         domain = host.substring(host.indexOf(".")); // 上级域名 如 .o2oa.net
+                //         domain = host.substring(host.indexOf(".")); // 상위 도메인 예: .o2oa.net
                 //     }
                 // }
                 // if (domain) {
@@ -195,7 +195,7 @@ if (!layout.isReady) {
             });
 
             layout.sessionPromise.then(function (data) {
-                //已经登录
+                //이미 로그인됨
                 // layout.user = data;
                 // layout.session = layout.session || {};
                 // layout.session.user = data;
@@ -215,7 +215,7 @@ if (!layout.isReady) {
                 // });
                 // _loadApp();
             }, function () {
-                //允许匿名访问
+                //익명 접근 허용
                 if (layout.anonymous) {
                     var data = { name: "anonymous", roleList: [] };
                     layout.user = data;
@@ -250,10 +250,10 @@ if (!layout.isReady) {
             };
 
             layout.openLoginQywx = function () {
-                //console.log("开始login。。。。。。。。。。。。。");
+                //console.log("login 시작...");
                 var uri = locate.href.toURI();
 
-                //console.log("执行单点。。。。。。。。。。");
+                //console.log("SSO 실행...");
                 var action = new MWF.xDesktop.Actions.RestActions("", "x_organization_assemble_authentication", "");
                 action.getActions = function (actionCallback) {
                     this.actions = { "sso": { "uri": "/jaxrs/qiyeweixin/code/{code}", "method": "GET" } };
@@ -264,9 +264,9 @@ if (!layout.isReady) {
                     "async": true,
                     "parameter": { "code": uri.getData("code") },
                     "success": function (json) {
-                        //console.log("单点成功。");
+                        //console.log("SSO 성공.");
                         //console.log(json);
-                        //基础数据。。。。
+                        //기본 데이터...
                         layout.session.user = json.data;
                         //
                         _load();
@@ -283,7 +283,7 @@ if (!layout.isReady) {
             };
         };
 
-        //异步载入必要模块
+        //필요한 모듈 비동기 로드
         layout.config = null;
         var configLoaded = false;
         var lpLoaded = false;
@@ -412,22 +412,22 @@ if (!layout.isReady) {
 
         });
         
-        //每分钟检测token过期时间
+        //매분 token 만료 시간 확인
         window.setInterval(function () {
             var tokenExpiresTime = localStorage.getItem("o2LayoutSessionTokenExpires");
             if (tokenExpiresTime) {
                 var now = new Date().getTime();
                 var n = tokenExpiresTime - now;
                 if (n > 0 && n <= 1000 * 60 * 3.2) {
-                    //过期时间小于1分钟，重新获取token
+                    //만료 시간이 1분 미만이면 token 재발급
                     MWF.xDesktop.notice("notice", { x: "right", y: "top" }, o2.LP.desktop.login.tokenWillExpire, null, null, { delayClose: 40000 });
                 }
             }
         }, 1000 * 30);
 
         layout.addReady(() => {
-            //判断是否在微信内置浏览器，钉钉内置浏览器中打开，O2OA APP内置浏览器中打开
-            //如果是，给body加上相应的class
+            //WeChat 내장 브라우저, DingTalk 내장 브라우저, O2OA APP 내장 브라우저에서 열렸는지 판단
+            //해당하면 body에 해당 class 추가
             if (o2.thirdparty.isWeiXinMobile() || o2.thirdparty.isQywxMobile() || o2.thirdparty.isDingdingMobile() || window.o2android || window.flutter_inappwebview) {
                 document.body.addClass("o2_thirdparty_mobile_browser");
             }

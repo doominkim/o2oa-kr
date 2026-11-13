@@ -21,21 +21,21 @@ export default content({
       form: {
         longitude: "",
         latitude: "",
-        status: "a", // a 新增 ，u 更新， v 查看
+        status: "a", // a 신규, u 업데이트, v 조회
         isView: false,
       },
-      isMax: false, // 地图放大
+      isMax: false, // 지도 확대
     };
   },
 
   afterRender() {
     this.loadBDMap();
   },
-  // 加载地图api等资源
+  // 지도 api 등 리소스 로드
   async loadBDMap() {
-    this.iconUrl = "../x_component_attendancev2/$Main/default/us_mk_icon.png"; //图标样式，发布时候修改为绝对路径
+    this.iconUrl = "../x_component_attendancev2/$Main/default/us_mk_icon.png"; //아이콘 스타일, 배포 시 절대 경로로 수정
     if (!window.BDMapV2ApiLoaded) {
-      const config = await getPublicData("attendanceMapConfig"); // 地图配置
+      const config = await getPublicData("attendanceMapConfig"); // 지도 설정
       let accountkey = "sM5P4Xq9zsXGlco6RAq2CRDtwjR78WQB";
       if (config && config.baiduAccountKey) {
         accountkey = config.baiduAccountKey;
@@ -65,7 +65,7 @@ export default content({
   loadViewOrLocation() {
     if (this.bind.form.status !== 'a') {
       this.loadMapView();
-    } else { // 新增的时候 定位
+    } else { // 신규 등록 시 위치 찾기
       this.location();
     }
   },
@@ -76,7 +76,7 @@ export default content({
     );
     this.createMap(point);
   },
-  // 初始化地图
+  // 지도 초기화
   location() {
     console.debug("위치 확인 시작!");
     const geolocation = new BMap.Geolocation();
@@ -100,17 +100,17 @@ export default content({
       }
     );
   },
-  // 加载百度地图
+  // 바이두 지도 로드
   createMap(point) {
     console.debug("지도 생성 시작!");
     this.mapNode = this.dom.querySelector(".bd-map");
     if (this.mapNode) {
       console.debug("지도 렌더링", point);
       if (!this.map) {
-        this.map = new BMap.Map(this.mapNode); // 创建Map实例
+        this.map = new BMap.Map(this.mapNode); // Map 인스턴스 생성
       }
-      this.map.centerAndZoom(point, 15); // 初始化地图,设置中心点坐标和地图级别
-      this.map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+      this.map.centerAndZoom(point, 15); // 지도 초기화, 중심점 좌표와 지도 레벨 설정
+      this.map.enableScrollWheelZoom(true); //마우스 휠 확대/축소 활성화
       this.addControls();
       if (!this.bind.form.isView) {
         this.addMapClick();
@@ -120,22 +120,22 @@ export default content({
       }
     }
   },
-  // 添加地图控件
+  // 지도 컨트롤 추가
   addControls() {
-    //向地图中添加缩放控件
+    //지도에 확대/축소 컨트롤 추가
     var ctrl_nav = new BMap.NavigationControl({
       anchor: BMAP_ANCHOR_TOP_RIGHT,
       type: BMAP_NAVIGATION_CONTROL_LARGE,
     });
     this.map.addControl(ctrl_nav);
-    // 添加地区选择器
+    // 지역 선택기 추가
     this.map.addControl(
       new BMap.CityListControl({
         anchor: BMAP_ANCHOR_TOP_LEFT,
         offset: new BMap.Size(10, 20),
-        // 切换城市之间事件
+        // 도시 전환 전 이벤트
         onChangeBefore: function () {},
-        // 切换城市之后事件
+        // 도시 전환 후 이벤트
         onChangeAfter: function () {},
       })
     );
@@ -148,9 +148,9 @@ export default content({
       this.bind.form.latitude = e.point.lat;
     });
   },
-  // 添加位置点
+  // 위치 지점 추가
   addMarkPoint(point, placeName) {
-    this.map.clearOverlays(); // 先清除
+    this.map.clearOverlays(); // 먼저 지움
     const mIcon = new BMap.Icon(this.iconUrl, new BMap.Size(23, 25), {
       anchor: new BMap.Size(9, 25),
       imageOffset: new BMap.Size(-46, -21),
@@ -167,7 +167,7 @@ export default content({
     }
     this.map.addOverlay(marker);
   },
-  // 地图放大缩小
+  // 지도 확대·축소
   mapMaxOrMini() {
     this.bind.isMax = !this.bind.isMax;
   },

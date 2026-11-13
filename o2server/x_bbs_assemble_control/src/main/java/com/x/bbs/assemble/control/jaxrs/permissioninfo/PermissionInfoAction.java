@@ -29,12 +29,12 @@ import com.x.bbs.assemble.control.jaxrs.permissioninfo.exception.ExceptionSubjec
  * @author sword
  */
 @Path("permission")
-@JaxrsDescribe("权限查询服务")
+@JaxrsDescribe("권한 조회 서비스")
 public class PermissionInfoAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PermissionInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "查询当前用户的操作权限.", action = ActionGetUserPermission.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 작업 권한 조회.", action = ActionGetUserPermission.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -51,14 +51,14 @@ public class PermissionInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询用户在指定板块中的所有操作权限.", action = ActionGetSectionOperationPermission.class)
+	@JaxrsMethodDescribe(value = "사용자의 지정 게시판 내 전체 작업 권한 조회.", action = ActionGetSectionOperationPermission.class)
 	@GET
 	@Path("section/{sectionId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getSectionOperationPermissoin(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("版块ID") @PathParam("sectionId") String sectionId) {
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("sectionId") String sectionId) {
 		ActionResult<ActionGetSectionOperationPermission.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -70,14 +70,14 @@ public class PermissionInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询用户对指定主题的所有操作权限.", action = ActionGetSubjectOperationPermissoin.class)
+	@JaxrsMethodDescribe(value = "사용자의 지정 주제에 대한 전체 작업 권한 조회.", action = ActionGetSubjectOperationPermissoin.class)
 	@GET
 	@Path("subject/{subjectId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getSubjectOperationPermissoin(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴ID") @PathParam("subjectId") String subjectId) {
+			@JaxrsParameterDescribe("주 게시글 ID") @PathParam("subjectId") String subjectId) {
 		ActionResult<ActionGetSubjectOperationPermissoin.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -93,7 +93,7 @@ public class PermissionInfoAction extends StandardJaxrsAction {
 				result = new ActionGetSubjectOperationPermissoin().execute(request, effectivePerson, subjectId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionConfigSettingProcess(e, "查询用户对指定主题的所有操作权限时发生异常！");
+				Exception exception = new ExceptionConfigSettingProcess(e, "지정한 주제에 대한 사용자의 전체 작업 권한을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -101,13 +101,13 @@ public class PermissionInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询用户对指定主题的所有操作权限.", action = ActionCheckSubjectPublishable.class)
+	@JaxrsMethodDescribe(value = "사용자의 지정 주제에 대한 전체 작업 권한 조회.", action = ActionCheckSubjectPublishable.class)
 	@GET
 	@Path("subjectPublishable/{sectionId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void subjectPublishable(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("版块ID") @PathParam("sectionId") String sectionId) {
+			@JaxrsParameterDescribe("게시판 ID") @PathParam("sectionId") String sectionId) {
 		ActionResult<ActionCheckSubjectPublishable.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -119,13 +119,13 @@ public class PermissionInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询用户是否可以对指定主题进行回复.", action = ActionCheckReplyPublishable.class)
+	@JaxrsMethodDescribe(value = "사용자의 지정 주제 답글 가능 여부 조회.", action = ActionCheckReplyPublishable.class)
 	@GET
 	@Path("replyPublishable/{subjectId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void replyPublishable(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴ID") @PathParam("subjectId") String subjectId) {
+			@JaxrsParameterDescribe("주 게시글 ID") @PathParam("subjectId") String subjectId) {
 		ActionResult<ActionCheckReplyPublishable.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -142,7 +142,7 @@ public class PermissionInfoAction extends StandardJaxrsAction {
 				result = new ActionCheckReplyPublishable().execute(request, effectivePerson, subjectId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionConfigSettingProcess(e, "查询用户是否可以对指定主题进行回复时发生异常！");
+				Exception exception = new ExceptionConfigSettingProcess(e, "사용자가 지정한 주제에 댓글을 달 수 있는지 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

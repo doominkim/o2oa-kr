@@ -226,12 +226,12 @@ abstract class BaseAction extends StandardJaxrsAction {
 
     private Work findWorkMergeTo(Business business, Work work) throws Exception {
         List<Work> works = business.entityManagerContainer().listEqual(Work.class, Work.job_FIELDNAME, work.getJob());
-        // 查找同级
+        // 동일 레벨 조회
         Work merge = works.stream()
                 .filter(o -> (o != work) && StringUtils.equalsIgnoreCase(work.getSplitToken(), o.getSplitToken()))
                 .sorted(Comparator.comparing(Work::getCreateTime, Comparator.nullsLast(Comparator.reverseOrder())))
                 .findFirst().orElse(null);
-        // 找不到同级那么开始早更深层次的文档
+        // 동일 레벨을 찾지 못하면 더 깊은 레벨의 문서 조회 시작
         if (null == merge) {
             merge = works.stream().filter(o -> ((o != work) && BooleanUtils.isTrue(o.getSplitting())
                     && o.getSplitTokenList().contains(work.getSplitToken()))).sorted((o1, o2) -> {
@@ -242,7 +242,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                         return compare;
                     }).findFirst().orElse(null);
         }
-        // 最后找除去本身之外最新的工作
+        // 마지막으로 자기 자신을 제외한 최신 업무 문서 조회
         if (null == merge) {
             merge = works.stream().filter(o -> o != work)
                     .sorted(Comparator.comparing(Work::getCreateTime, Comparator.nullsLast(Comparator.reverseOrder())))

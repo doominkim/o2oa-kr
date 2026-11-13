@@ -41,12 +41,12 @@ class ActionDownload extends BaseAction {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
 			Wo wo = null;
-			/** 确定是否要用application/octet-stream输出 */
+			/** application/octet-stream으로 출력할지 결정 */
 			Share share = emc.find(shareId, Share.class);
 			if (null == share) {
 				throw new ExceptionAttachmentNotExist(shareId);
 			}
-			/* 判断当前用户是否有权限访问该文件 */
+			/* 현재 사용자의 해당 파일 접근 권한 여부 판단 */
 			if(!effectivePerson.isManager() && !StringUtils.equals(effectivePerson.getDistinguishedName(), share.getPerson())) {
 				if (!Share.SHARE_TYPE_PASSWORD.equals(share.getShareType())) {
 					if (!hasPermission(business, effectivePerson, share)) {
@@ -98,7 +98,7 @@ class ActionDownload extends BaseAction {
 							originFile.readContent(mapping, output);
 							output.flush();
 						} catch (Exception e) {
-							logger.warn("{}附件下载异常：{}", attachment.getName(), e.getMessage());
+							logger.warn("{} 첨부파일 다운로드 오류: {}", attachment.getName(), e.getMessage());
 						}
 					};
 					String fastETag = attachment.getId()+attachment.getUpdateTime().getTime();

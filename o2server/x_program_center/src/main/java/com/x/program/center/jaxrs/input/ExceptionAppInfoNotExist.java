@@ -7,6 +7,6 @@ class ExceptionAppInfoNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionAppInfoNotExist(String flag) {
-		super("应用名称:{}不存在。", flag);
+		super("앱 이름: {}이(가) 없습니다.", flag);
 	}
 }

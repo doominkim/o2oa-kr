@@ -39,7 +39,7 @@ public class ActionGetWithCode extends BaseAction {
 			wi = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionConfigSettingInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+			Exception exception = new ExceptionConfigSettingInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -69,7 +69,7 @@ public class ActionGetWithCode extends BaseAction {
 							result.error( exception );
 						}
 					} catch (Exception e) {
-						Exception exception = new ExceptionConfigSettingInfoProcess( e, "系统在根据编码获取BBS系统设置信息时发生异常！Code:" + code );
+						Exception exception = new ExceptionConfigSettingInfoProcess( e, "코드로 BBS 시스템 설정을 가져오는 중 오류가 발생했습니다! Code:" + code );
 						result.error( exception );
 						logger.error( e, effectivePerson, request, null);
 					}

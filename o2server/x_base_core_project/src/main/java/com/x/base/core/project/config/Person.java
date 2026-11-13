@@ -85,85 +85,85 @@ public class Person extends ConfigObject {
 
 	public static final Integer MAX_PASSWORDPERIOD = 365 * 10;
 
-	@FieldDescribe("是否启用用户名密码登录,默认值:true.")
+	@FieldDescribe("사용자 이름·비밀번호 로그인 사용 여부, 기본값:true.")
 	private Boolean userPwdLogin;
 
-	@FieldDescribe("是否启用图片验证码登录,默认值:false.")
+	@FieldDescribe("이미지 인증 코드 로그인 사용 여부, 기본값:false.")
 	private Boolean captchaLogin;
 
-	@FieldDescribe("是否启用短信验证码登录,默认值:true.")
+	@FieldDescribe("문자 인증 코드 로그인 사용 여부, 기본값:true.")
 	private Boolean codeLogin;
 
-	@FieldDescribe("是否启用扫描二维码登录,默认值:false.")
+	@FieldDescribe("QR 코드 스캔 로그인 사용 여부, 기본값:false.")
 	private Boolean bindLogin;
 
-	@FieldDescribe("是否启用刷脸登录,默认值:false.")
+	@FieldDescribe("얼굴 인식 로그인 사용 여부, 기본값:false.")
 	private Boolean faceLogin;
 
-	@FieldDescribe("是否启用双因素认证登录,默认值:false.")
+	@FieldDescribe("2단계 인증 로그인 사용 여부, 기본값:false.")
 	private Boolean twoFactorLogin;
 
-	@FieldDescribe("是否启用首次登陆修改密码,默认值:true")
+	@FieldDescribe("최초 로그인 시 비밀번호 변경 사용 여부, 기본값:true")
 	private Boolean firstLoginModifyPwd;
 
-	@FieldDescribe("注册初始密码,使用()调用脚本生成初始密码,默认为:" + DEFAULT_PASSWORD)
+	@FieldDescribe("가입 초기 비밀번호, ()로 스크립트를 호출해 초기 비밀번호 생성, 기본값:" + DEFAULT_PASSWORD)
 	private String password;
 
-	@FieldDescribe("密码过期时间(天),0表示永不过期,默认值:0.")
+	@FieldDescribe("비밀번호 만료 기간(일), 0은 만료 없음, 기본값:0.")
 	private Integer passwordPeriod;
 
-	@FieldDescribe("密码校验正则表达式,默认6位以上,包含数字和字母.")
+	@FieldDescribe("비밀번호 검증 정규식, 기본값은 6자 이상, 숫자와 영문 포함.")
 	private String passwordRegex;
 
-	@FieldDescribe("密码校验不通过的提示信息.")
+	@FieldDescribe("비밀번호 검증 실패 시 안내 메시지.")
 	private String passwordRegexHint;
 
-	@FieldDescribe("是否允许用户自注册,disable:不允许,captcha通过验证码注册,code:通过短信注册,默认值:disable")
+	@FieldDescribe("사용자 자체 가입 허용 여부, disable:허용 안 함, captcha:인증 코드로 가입, code:문자 메시지로 가입, 기본값:disable")
 	private String register;
 
-	@FieldDescribe("是否启用超级管理员权限,默认值:true")
+	@FieldDescribe("슈퍼 관리자 권한 사용 여부, 기본값:true")
 	private Boolean superPermission;
 
-	@FieldDescribe("手机号码校验正则表达式,()表示脚本内容,默认值:(^(\\+)?0{0,2}852\\d{8}$)|(^(\\+)?0{0,2}853\\d{8}$)|(^(\\+)?0{0,2}886\\d{9}$)|(^1(3|4|5|7|8|9)\\d{9}$)")
+	@FieldDescribe("휴대폰 번호 검증 정규식, ()는 스크립트 내용, 기본값:(^(\\+)?0{0,2}852\\d{8}$)|(^(\\+)?0{0,2}853\\d{8}$)|(^(\\+)?0{0,2}886\\d{9}$)|(^1(3|4|5|7|8|9)\\d{9}$)")
 	private String mobileRegex;
 
-	@FieldDescribe("登录限制时间(分钟)")
+	@FieldDescribe("로그인 제한 시간(분)")
 	private Integer failureInterval;
 
-	@FieldDescribe("尝试登录次数")
+	@FieldDescribe("로그인 시도 횟수")
 	private Integer failureCount;
 
-	@FieldDescribe("PC或h5端平台认证token时长,分钟")
+	@FieldDescribe("PC 또는 h5 플랫폼 인증 token 유효 시간, 분")
 	private Integer tokenExpiredMinutes;
 
-	@FieldDescribe("app端平台认证token时长,分钟")
+	@FieldDescribe("app 플랫폼 인증 token 유효 시간, 분")
 	private Integer appTokenExpiredMinutes;
 
-	@FieldDescribe("保存token的cookie是否启用httpOnly")
+	@FieldDescribe("token을 저장하는 cookie의 httpOnly 사용 여부")
 	private Boolean tokenCookieHttpOnly;
 
-	@FieldDescribe("保存token的cookie是否启用secure，表示仅在https协议才会传输此cookie")
+	@FieldDescribe("token을 저장하는 cookie의 secure 사용 여부, https 프로토콜에서만 이 cookie를 전송함을 의미")
 	private Boolean tokenCookieSecure;
 
-	@FieldDescribe("使用识别用户的token名称,可自定义,默认为:" + DEFAULT_TOKENNAME + ".")
+	@FieldDescribe("사용자 식별에 사용하는 token 이름, 사용자 정의 가능, 기본값:" + DEFAULT_TOKENNAME + ".")
 	private String tokenName;
 
-	@FieldDescribe("人员组织排序是否为升序，true为升序(默认)，false为降序")
+	@FieldDescribe("사용자 조직 정렬 오름차순 여부, true는 오름차순(기본값), false는 내림차순")
 	private Boolean personUnitOrderByAsc;
 
-	@FieldDescribe("平台语言：zh-CN(中文，默认)、en(英语)")
+	@FieldDescribe("플랫폼 언어:zh-CN(중국어, 기본값), en(영어)")
 	private String language;
 
-	@FieldDescribe("是否启用安全注销.")
+	@FieldDescribe("보안 로그아웃 사용 여부.")
 	private Boolean enableSafeLogout;
 
-	@FieldDescribe("加密方式,支持国密:SM4,AES")
+	@FieldDescribe("암호화 방식, 국가 암호 지원:SM4,AES")
 	private String encryptType;
 
-	@FieldDescribe("是否启用超级管理员（xadmin）账户.")
+	@FieldDescribe("슈퍼 관리자(xadmin) 계정 사용 여부.")
 	private Boolean xadminEnable;
 
-	@FieldDescribe("是否启用用户信息中用户名称和手机号加密存储.")
+	@FieldDescribe("사용자 정보 중 사용자 이름과 휴대폰 번호 암호화 저장 사용 여부.")
 	private Boolean personEncryptEnable;
 
 	public String getEncryptType() {

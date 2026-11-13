@@ -7,7 +7,7 @@ class ExceptionIdExist extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionIdExist(String str) {
-		super("标识已存在:{}.", str);
+		super("식별자가 이미 있습니다: {}.", str);
 	}
 
 }

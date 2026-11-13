@@ -7,6 +7,6 @@ class ExceptionRetractNoneTaskCompleted extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionRetractNoneTaskCompleted(String title, String id) {
-		super("工作已经过处理无法召回, 工作:{}, id:{}.", title, id);
+		super("문서가 이미 처리되어 회수할 수 없습니다, 문서: {}, id: {}.", title, id);
 	}
 }

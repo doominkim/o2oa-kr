@@ -59,7 +59,7 @@ class ActionRegist extends BaseAction {
 			Config.collect().setPassword(password);
 			Config.collect().save();
 			this.configFlush(effectivePerson);
-			// 人员和应用市场同步
+			// 사용자 및 앱 마켓 동기화
 			ThisApplication.context().scheduleLocal(CollectPerson.class);
 		}
 		result.setData(wo);
@@ -70,11 +70,11 @@ class ActionRegist extends BaseAction {
 
 		static WrapCopier<Wi, Collect> copier = WrapCopierFactory.wi(Wi.class, Collect.class, null, null);
 
-		@FieldDescribe("手机号码")
+		@FieldDescribe("휴대폰 번호")
 		private String mobile;
-		@FieldDescribe("验证码")
+		@FieldDescribe("인증 코드")
 		private String codeAnswer;
-		@FieldDescribe("邮件地址")
+		@FieldDescribe("이메일 주소")
 		private String mail;
 
 		public String getMobile() {

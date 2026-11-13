@@ -24,7 +24,7 @@ public class ActionWriteImConfig extends BaseAction {
 
 		LOGGER.debug("execute:{}.", effectivePerson::getDistinguishedName);
 		if (!effectivePerson.isManager()) {
-			throw new ExceptionConversationCheckError("没有权限");
+			throw new ExceptionConversationCheckError("권한이 없습니다");
 		}
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();
@@ -90,25 +90,25 @@ public class ActionWriteImConfig extends BaseAction {
 	}
 
 	/**
-	 * IM的配置文件，这个配置文件默认写入到 web.json key=imConfig
+	 * IM 설정 파일. 이 설정 파일은 기본적으로 web.json key=imConfig에 기록됨
 	 */
 	static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = -8090262801050845005L;
 		
-		@FieldDescribe("是否开启清空聊天记录的功能.")
+		@FieldDescribe("채팅 기록 비우기 기능 사용 여부.")
 		private Boolean enableClearMsg;
-		@FieldDescribe("是否开启撤回聊天消息的功能.")
+		@FieldDescribe("채팅 메시지 회수 기능 사용 여부.")
 		private Boolean enableRevokeMsg;
-		@FieldDescribe("撤回时效（分钟数）")
+		@FieldDescribe("회수 시효(분)")
 		private Integer revokeOutMinute;
-		@FieldDescribe("会话检查脚本.")
+		@FieldDescribe("대화 검사 스크립트.")
 		private String conversationCheckInvoke;
-		@FieldDescribe("是否使用onlyOffice预览文件(需要先安装onlyOffice扩展应用).")
+		@FieldDescribe("onlyOffice로 파일 미리보기 사용 여부(onlyOffice 확장 앱 설치 필요).")
 		private Boolean enableOnlyOfficePreview;
-		@FieldDescribe("是否开启群成员自主退出的功能.")
+		@FieldDescribe("그룹 구성원 자율 나가기 기능 사용 여부.")
 		private Boolean enableGroupMemberQuitSelf;
-		@FieldDescribe("是否显示所有顶级单位.")
+		@FieldDescribe("모든 최상위 단위 표시 여부.")
 		private Boolean showAllTopUnit;
 
 
@@ -179,19 +179,19 @@ public class ActionWriteImConfig extends BaseAction {
 
 		private static final long serialVersionUID = -2114718746836340460L;
 
-		@FieldDescribe("执行时间")
+		@FieldDescribe("실행 시간")
 		private String time;
 
-		@FieldDescribe("执行结果")
+		@FieldDescribe("실행 결과")
 		private String status;
 
-		@FieldDescribe("执行消息")
+		@FieldDescribe("실행 메시지")
 		private String message;
 
-		@FieldDescribe("config文件内容")
+		@FieldDescribe("config 파일 내용")
 		private String fileContent;
 
-		@FieldDescribe("是否Sample")
+		@FieldDescribe("Sample 여부")
 		private boolean isSample;
 
 		public String getTime() {

@@ -7,6 +7,6 @@ class ExceptionEmptyApplication extends PromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionEmptyApplication() {
-		super("应用不能为空.");
+		super("앱은 비워 둘 수 없습니다.");
 	}
 }

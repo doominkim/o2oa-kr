@@ -39,7 +39,7 @@ public class EntityClassLoaderTools {
 	}
 
 	
-	// 一个内存泄漏点就等于没有内存泄漏点 from chengjian
+	// 메모리 누수 지점 하나는 메모리 누수 지점이 없는 것과 같음 from chengjian
 	private static URLClassLoader getStoreClassLoader() throws IOException, URISyntaxException {
 		if (null == storeClassLoader) {
 			synchronized (EntityClassLoaderTools.class) {

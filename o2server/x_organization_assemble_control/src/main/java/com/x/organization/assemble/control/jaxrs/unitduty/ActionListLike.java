@@ -51,9 +51,9 @@ class ActionListLike extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("搜索关键字")
+		@FieldDescribe("검색 키워드")
 		private String key;
-		@FieldDescribe("搜索组织范围,为空则不限定")
+		@FieldDescribe("검색 조직 범위, 비어 있으면 제한 없음")
 		private List<String> unitList = new ArrayList<>();
 
 		public String getKey() {

@@ -157,7 +157,7 @@ public class UnitFactory extends AbstractFactory {
 		return superior.getId();
 	}
 
-	/** 递归的上级组织,从底层到顶层 */
+	/** 재귀 상위 조직, 하위에서 최상위 순 */
 	public List<String> listSupNested(String id) throws Exception {
 		List<String> list = new ArrayList<>();
 		this.supNested(id, list);
@@ -192,7 +192,7 @@ public class UnitFactory extends AbstractFactory {
 		}
 	}
 
-	/** 递归的上级组织,从底层到顶层 */
+	/** 재귀 상위 조직, 하위에서 최상위 순 */
 	public List<Unit> listSupNestedObject(Unit unit) throws Exception {
 		List<Unit> list = new ArrayList<>();
 		if (unit == null) {
@@ -221,7 +221,7 @@ public class UnitFactory extends AbstractFactory {
 		os.addAll(this.listSubNestedObject(unit));
 		for (Unit o : os) {
 			List<Unit> list = this.listSupNestedObject(o);
-			// 级别从1开始
+			// 레벨은 1부터 시작
 			o.setLevel(list.size() + 1);
 			List<String> names = ListTools.extractProperty(list, Unit.name_FIELDNAME, String.class, false, false);
 			List<Integer> levelOrderNumbers = ListTools.extractProperty(list, Unit.orderNumber_FIELDNAME, Integer.class,
@@ -232,7 +232,7 @@ public class UnitFactory extends AbstractFactory {
 			List<String> levelOrderNumberStrings = new ArrayList<>();
 			final String format = "%010d";
 			for (Integer i : levelOrderNumbers) {
-				// 不支持<0排序
+				// <0 정렬 미지원
 				levelOrderNumberStrings.add(String.format(format, (NumberTools.nullOrLessThan(i, 0) ? 0 : i)));
 			}
 			o.setLevelOrderNumber(StringUtils.join(levelOrderNumberStrings, PersistenceProperties.Unit.levelNameSplit));

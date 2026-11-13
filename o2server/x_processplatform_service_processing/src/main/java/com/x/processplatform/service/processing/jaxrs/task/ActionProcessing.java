@@ -173,7 +173,7 @@ class ActionProcessing extends BaseAction {
 			Wo wo = new Wo();
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				Business business = new Business(emc);
-				// 生成默认的Wi,用于生成默认的processType
+				// 기본 Wi 생성, 기본 processType 생성용
 				if (null == wi.getProcessingType()) {
 					wi.setProcessingType(TaskCompleted.PROCESSINGTYPE_TASK);
 				}
@@ -187,20 +187,20 @@ class ActionProcessing extends BaseAction {
 				if (StringUtils.isNotEmpty(wi.getOpinion())) {
 					task.setOpinion(wi.getOpinion());
 				}
-				// 执行办前脚本
+				// 처리 전 스크립트 실행
 				callManualBeforeTaskScript(business, task);
-				// 将待办转为已办
+				// 결재 대기를 처리 완료로 전환
 				emc.beginTransaction(TaskCompleted.class);
 				emc.beginTransaction(Task.class);
-				// 将所有前面的已办lastest标记false
+				// 이전의 모든 처리 완료 lastest를 false로 표시
 				emc.listEqualAndEqual(TaskCompleted.class, TaskCompleted.job_FIELDNAME, task.getJob(),
 						TaskCompleted.person_FIELDNAME, task.getPerson()).forEach(o -> o.setLatest(false));
 				TaskCompleted taskCompleted = concreteTaskCompleted(business, task);
 				emc.persist(taskCompleted, CheckPersistType.all);
 				emc.remove(task, CheckRemoveType.all);
-				// 去掉处理同一处理人不同身份待办合并处理一次processingTaskOnceUnderSamePerson(business, task);
+				// 동일 처리자의 다른 신분 결재 대기 일괄 1회 처리 제거 processingTaskOnceUnderSamePerson(business, task);
 				emc.commit();
-				// 待办执行后脚本,不能修改数据.
+				// 결재 대기 실행 후 스크립트, 데이터 수정 불가.
 				callManualAfterTaskScript(business, taskCompleted);
 				MessageFactory.task_to_taskCompleted(taskCompleted);
 				wo.setId(taskCompleted.getId());
@@ -209,7 +209,7 @@ class ActionProcessing extends BaseAction {
 			return result;
 		}
 
-//		// 处理同一处理人不同身份待办合并处理一次
+//		// 동일 처리자의 다른 신분 결재 대기를 한 번에 합쳐 처리
 //		private void processingTaskOnceUnderSamePerson(Business business, Task task) throws Exception {
 //			List<Task> tasks = business.entityManagerContainer().listEqualAndEqualAndNotEqual(Task.class,
 //					Task.activityToken_FIELDNAME, task.getActivityToken(), Task.person_FIELDNAME, task.getPerson(),

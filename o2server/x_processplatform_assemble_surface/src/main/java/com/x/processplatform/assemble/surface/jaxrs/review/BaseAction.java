@@ -27,31 +27,31 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 	public static abstract class FilterWi extends GsonPropertyObject {
 
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private List<String> applicationList;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
-		@FieldDescribe("创建用户")
+		@FieldDescribe("생성 사용자")
 		private List<String> creatorPersonList;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("开始时间")
+		@FieldDescribe("시작 시간")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("结束时间")
+		@FieldDescribe("종료 시간")
 		private List<String> completedTimeMonthList;
 
-		@FieldDescribe("是否已经结束")
+		@FieldDescribe("종료 여부")
 		private Boolean completed;
 
 		public Boolean getCompleted() {
@@ -62,7 +62,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			this.completed = completed;
 		}
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
 		public List<String> getApplicationList() {

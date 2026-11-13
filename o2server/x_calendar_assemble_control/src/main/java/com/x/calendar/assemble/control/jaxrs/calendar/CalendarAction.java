@@ -28,12 +28,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("calendar")
-@JaxrsDescribe("日历信息管理服务")
+@JaxrsDescribe("캘린더 정보 관리 서비스")
 public class CalendarAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(CalendarAction.class);
 
-	@JaxrsMethodDescribe(value = "获取我能访问到的所有日历信息列表", action = ActionListMyCalendar.class)
+	@JaxrsMethodDescribe(value = "내가 접근할 수 있는 모든 캘린더 정보 목록 조회", action = ActionListMyCalendar.class)
 	@GET
 	@Path("list/my")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -44,33 +44,33 @@ public class CalendarAction extends StandardJaxrsAction {
 		try {
 			result = new ActionListMyCalendar().execute(request, effectivePerson);
 		} catch (Exception e) {
-			Exception exception = new ExceptionCalendarInfoProcess(e, "获取我能访问到的所有日历信息列表时发生异常！");
+			Exception exception = new ExceptionCalendarInfoProcess(e, "내가 접근할 수 있는 캘린더 목록을 가져오는 중 오류가 발생했습니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定用户能访问到的日历信息", action = ActionManagerListWithPerson.class)
+	@JaxrsMethodDescribe(value = "지정한 사용자가 접근할 수 있는 캘린더 정보 조회", action = ActionManagerListWithPerson.class)
 	@GET
 	@Path("manager/list/with/person/{person}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerListWithPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("指定用户") @PathParam("person") String person) {
+			@JaxrsParameterDescribe("지정한 사용자") @PathParam("person") String person) {
 		ActionResult<ActionManagerListWithPerson.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
 			result = new ActionManagerListWithPerson().execute(request, effectivePerson, person);
 		} catch (Exception e) {
-			Exception exception = new ExceptionCalendarInfoProcess(e, "获取指定用户能访问到的所有日历信息列表时发生异常！");
+			Exception exception = new ExceptionCalendarInfoProcess(e, "지정한 사용자가 접근할 수 있는 캘린더 목록을 가져오는 중 오류가 발생했습니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取所有公开的日历信息列表", action = ActionListPublicCalendar.class)
+	@JaxrsMethodDescribe(value = "모든 공개 캘린더 정보 목록 조회", action = ActionListPublicCalendar.class)
 	@GET
 	@Path("list/public")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -81,20 +81,20 @@ public class CalendarAction extends StandardJaxrsAction {
 		try {
 			result = new ActionListPublicCalendar().execute(request, effectivePerson);
 		} catch (Exception e) {
-			Exception exception = new ExceptionCalendarInfoProcess(e, "获取所有公开的日历信息列表时发生异常！");
+			Exception exception = new ExceptionCalendarInfoProcess(e, "공개 캘린더 목록을 가져오는 중 오류가 발생했습니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取日历信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 캘린더 정보 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("캘린더 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -104,7 +104,7 @@ public class CalendarAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "根据ID获取日历信息时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "ID로 캘린더 정보를 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -112,13 +112,13 @@ public class CalendarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据条件查询日历信息列表", action = ActionListWithCondition.class)
+	@JaxrsMethodDescribe(value = "조건으로 캘린더 정보 목록 조회", action = ActionListWithCondition.class)
 	@PUT
 	@Path("list/filter")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFilter(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询条件") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("조회 조건") JsonElement jsonElement) {
 		ActionResult<List<ActionListWithCondition.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -130,7 +130,7 @@ public class CalendarAction extends StandardJaxrsAction {
 //						effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "根据条件查询日历信息列表时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "조건으로 캘린더 목록을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -138,7 +138,7 @@ public class CalendarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "判断当前用户是否有管理员权限", action = ActionIsManager.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 관리자 권한 여부 판단", action = ActionIsManager.class)
 	@GET
 	@Path("ismanager")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -154,7 +154,7 @@ public class CalendarAction extends StandardJaxrsAction {
 //				result = ((ActionIsManager) proxy.getProxy(ActionIsManager.class)).execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "判断当前用户是否有管理员权限时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "현재 사용자의 관리자 권한을 확인하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -162,13 +162,13 @@ public class CalendarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "关注一个公开的日历信息", action = ActionFollowCalendar.class)
+	@JaxrsMethodDescribe(value = "공개 캘린더 정보 구독", action = ActionFollowCalendar.class)
 	@GET
 	@Path("follow/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void followCalendar(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("캘린더 정보 ID") @PathParam("id") String id) {
 		ActionResult<WrapOutBoolean> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -180,7 +180,7 @@ public class CalendarAction extends StandardJaxrsAction {
 //						effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "关注一个公开的日历信息时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "공개 캘린더를 구독하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -188,13 +188,13 @@ public class CalendarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "取消关注一个公开的日历信息", action = ActionFollowCalendarCancel.class)
+	@JaxrsMethodDescribe(value = "공개 캘린더 정보 구독 취소", action = ActionFollowCalendarCancel.class)
 	@GET
 	@Path("follow/{id}/cancel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void followCalendarCancel(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("캘린더 정보 ID") @PathParam("id") String id) {
 		ActionResult<WrapOutBoolean> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -206,7 +206,7 @@ public class CalendarAction extends StandardJaxrsAction {
 //						.execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "取消关注一个公开的日历信息时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "공개 캘린더 구독을 취소하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -214,13 +214,13 @@ public class CalendarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "判断当前用户是否对指定的日历有管理员权限", action = ActionIsCalendarManager.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 지정한 캘린더에 관리자 권한을 가졌는지 판단", action = ActionIsCalendarManager.class)
 	@GET
 	@Path("ismanager/calendar/{accountId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void isCalendarManager(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("指定的日历ID") String accountId) {
+			@JaxrsParameterDescribe("지정한 캘린더 ID") String accountId) {
 		ActionResult<WrapOutBoolean> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -232,7 +232,7 @@ public class CalendarAction extends StandardJaxrsAction {
 //						effectivePerson, accountId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "判断当前用户是否对指定的日历有管理员权限时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "현재 사용자가 지정한 캘린더의 관리자 권한을 가졌는지 확인하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -240,12 +240,12 @@ public class CalendarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "新建或者更新日历信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "캘린더 정보 생성 또는 갱신", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void save(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历信息") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("캘린더 정보") JsonElement jsonElement) {
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -256,7 +256,7 @@ public class CalendarAction extends StandardJaxrsAction {
 //				result = ((ActionSave) proxy.getProxy(ActionSave.class)).execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "新建或者更新日历信息时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "캘린더 정보를 새로 만들거나 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -264,13 +264,13 @@ public class CalendarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除日历信息及所有事件", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 캘린더 정보 및 모든 이벤트 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void destory(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("캘린더 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -281,7 +281,7 @@ public class CalendarAction extends StandardJaxrsAction {
 //				result = ((ActionDelete) proxy.getProxy(ActionDelete.class)).execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionCalendarInfoProcess(e, "根据ID删除日历信息及所有事件时发生异常！");
+				Exception exception = new ExceptionCalendarInfoProcess(e, "ID로 캘린더와 모든 일정을 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

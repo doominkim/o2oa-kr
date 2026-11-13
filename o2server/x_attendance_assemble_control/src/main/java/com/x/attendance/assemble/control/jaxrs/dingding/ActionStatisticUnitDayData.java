@@ -25,7 +25,7 @@ public class ActionStatisticUnitDayData extends BaseAction {
         if (StringUtils.isEmpty(year) || StringUtils.isEmpty(month) || StringUtils.isEmpty(day)) {
             throw new ExceptionSearchArgEmpty();
         }
-        logger.info("开始执行全部部门考勤信息统计 year:"+year+", month:"+month);
+        logger.info("전체 부서 근태 정보 통계 실행 시작 year:"+year+", month:"+month);
         Date date = DateTools.parse(year+"-"+month+"-"+day);
 //        ThisApplication.unitStatisticQueue.send(date);
         result.setData(new WrapBoolean(true));

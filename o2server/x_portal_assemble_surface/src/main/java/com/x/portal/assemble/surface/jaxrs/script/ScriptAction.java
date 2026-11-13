@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("script")
-@JaxrsDescribe("脚本")
+@JaxrsDescribe("스크립트")
 public class ScriptAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ScriptAction.class);
 
-	@JaxrsMethodDescribe(value = "获取Script内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "Script 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,14 +50,14 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Script内容,并递归附带应用脚本.", action = ActionGetImported.class)
+	@JaxrsMethodDescribe(value = "Script 내용 조회, 앱 스크립트 재귀 포함.", action = ActionGetImported.class)
 	@GET
 	@Path("portal/{portal}/name/{name}/imported")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getImported(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("门户标识") @PathParam("portal") String portal) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name,
+			@JaxrsParameterDescribe("포털 식별자") @PathParam("portal") String portal) {
 		ActionResult<ActionGetImported.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,14 +69,14 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "在指定的Portal下根据flag获取Script.", action = ActionFlag.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에서 flag로 Script 조회.", action = ActionFlag.class)
 	@POST
 	@Path("portal/{portal}/name/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void flag(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("门户标识") @PathParam("portal") String portal, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name,
+			@JaxrsParameterDescribe("포털 식별자") @PathParam("portal") String portal, JsonElement jsonElement) {
 		ActionResult<ActionFlag.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -88,13 +88,13 @@ public class ScriptAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的Script.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 Script 목록.", action = ActionList.class)
 	@GET
 	@Path("list/portal/{portal}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void list(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("门户标识") @PathParam("portal") String portal) {
+			@JaxrsParameterDescribe("포털 식별자") @PathParam("portal") String portal) {
 		ActionResult<List<ActionList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

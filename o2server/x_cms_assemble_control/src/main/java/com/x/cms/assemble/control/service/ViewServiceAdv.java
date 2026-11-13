@@ -11,8 +11,8 @@ import com.x.cms.core.entity.element.View;
 import com.x.cms.core.entity.element.ViewFieldConfig;
 
 /**
- * 对列表视图信息进行管理的服务类（高级）
- * 高级服务器可以利用Service完成事务控制
+ * 목록 뷰 정보 관리 서비스 클래스(고급)
+ * 고급 서비스는 Service로 트랜잭션 제어 가능
  * 
  * @author O2LEE
  */

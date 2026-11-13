@@ -22,7 +22,7 @@ import com.x.organization.core.entity.Unit;
 
 class ActionHasIdentity extends BaseAction {
 
-	/*** 校验身份是否是指定组织的成员 */
+	/*** 신분이 지정 조직의 구성원인지 확인 */
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
@@ -44,13 +44,13 @@ class ActionHasIdentity extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("*身份")
+		@FieldDescribe("*신분")
 		private String identity;
 
-		@FieldDescribe("*组织")
+		@FieldDescribe("*조직")
 		private String unit;
 
-		@FieldDescribe("*是否递归查找组织(true|false)")
+		@FieldDescribe("*조직 재귀 조회 여부(true|false)")
 		private Boolean recursive = true;
 
 		public String getIdentity() {

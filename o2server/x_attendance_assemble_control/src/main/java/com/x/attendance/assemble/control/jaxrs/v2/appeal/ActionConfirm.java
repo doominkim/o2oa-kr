@@ -23,7 +23,7 @@ import com.x.base.core.project.organization.Person;
 import com.x.base.core.project.tools.DateTools;
 
 /**
- * 考勤信息确认，锁定指定日期范围内待处理和审批中的申诉数据.
+ * 근태 정보 확인, 지정 날짜 범위 내 대기 중·결재 중인 이의 신청 데이터 잠금.
  */
 public class ActionConfirm extends BaseAction {
 
@@ -47,7 +47,7 @@ public class ActionConfirm extends BaseAction {
             if (business.isManager(effectivePerson) && StringUtils.isNotEmpty(wi.getPerson())) {
                 Person target = business.organization().person().getObject(wi.getPerson(), true);
                 if (target == null) {
-                    throw new ExceptionNotExistObject("人员 " + wi.getPerson());
+                    throw new ExceptionNotExistObject("인원 " + wi.getPerson());
                 }
                 person = target.getDistinguishedName();
             }
@@ -76,13 +76,13 @@ public class ActionConfirm extends BaseAction {
 
         private static final long serialVersionUID = 1327123598236996393L;
 
-        @FieldDescribe("开始日期，格式：yyyy-MM-dd")
+        @FieldDescribe("시작일, 형식: yyyy-MM-dd")
         private String startDate;
 
-        @FieldDescribe("结束日期，格式：yyyy-MM-dd")
+        @FieldDescribe("종료일, 형식: yyyy-MM-dd")
         private String endDate;
 
-        @FieldDescribe("人员标识，管理员可传入")
+        @FieldDescribe("사용자 식별자, 관리자가 전달 가능")
         private String person;
 
         public String getStartDate() {

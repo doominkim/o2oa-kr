@@ -82,7 +82,7 @@ public class AttendanceScheduleSettingService {
 	public AttendanceScheduleSetting getAttendanceScheduleSettingWithPerson( String personName, Boolean debugger ) throws Exception {
 		topUnit = "";
 		UserManagerService userManagerService = new UserManagerService();
-		//先根据考勤人员配置去计算组织及顶级组织，如果没有符合条件的再按personName的人员组织计算
+		//먼저 근태 사용자 설정으로 조직 및 최상위 조직을 계산하고, 조건에 맞는 것이 없으면 personName의 사용자 조직으로 계산
 		//String unitName = userManagerService.getUnitNameWithPersonName( personName );
 		String unitName = this.getUnitByconfig(userManagerService,personName);
 		if(StringUtils.isEmpty(unitName)){
@@ -90,7 +90,7 @@ public class AttendanceScheduleSettingService {
 		}
 		AttendanceScheduleSetting attendanceScheduleSetting = getAttendanceScheduleSettingWithUnitName( unitName );
 		if( attendanceScheduleSetting == null ) {
-			//如果没有找到，那么应该为该人员所属的组织创建一个新的排班配置
+			//찾지 못하면 해당 사용자가 속한 조직에 새 근무 편성 설정을 생성해야 함
 			String topUnitName = topUnit;
 			if(StringUtils.isEmpty(topUnit)){
 				topUnitName = userManagerService.getTopUnitNameWithUnitName( unitName );
@@ -105,7 +105,7 @@ public class AttendanceScheduleSettingService {
 		String unitName = detail.getUnitName();
 		AttendanceScheduleSetting attendanceScheduleSetting = getAttendanceScheduleSettingWithUnitName( unitName );
 		if( attendanceScheduleSetting == null ) {
-			//如果没有找到，那么应该为该人员所属的组织创建一个新的排班配置
+			//찾지 못하면 해당 사용자가 속한 조직에 새 근무 편성 설정을 생성해야 함
 			String topUnitName = detail.getTopUnitName();
 			attendanceScheduleSetting = createNewScheduleSetting( unitName, topUnitName, debugger );
 		}
@@ -120,7 +120,7 @@ public class AttendanceScheduleSettingService {
 		String superUnitName = null;
 		List<String> ids = null;
 		List<AttendanceScheduleSetting> attendanceScheduleSettingList = null;
-		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {//查询排班设计
+		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {//근무 편성 설계 조회
 			ids = new Business(emc).getAttendanceScheduleSettingFactory().listByUnitName( unitName );
 			if( ids !=null && ids.size() > 0){
 				attendanceScheduleSettingList = new Business(emc).getAttendanceScheduleSettingFactory().list(ids);

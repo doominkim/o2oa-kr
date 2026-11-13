@@ -1,6 +1,6 @@
 [
 //  {
-//    "title": "选择器配置",
+//    "title": "선택기 설정",
 //    "id": "1.1",
 //    "action": "selectConfig",
 //    "icon": "query_select.png",
@@ -8,7 +8,7 @@
 //    "sub": []
 //  },
 //  {
-//    "title": "菜单配置",
+//    "title": "메뉴 설정",
 //    "id": "1.1",
 //    "action": "menuConfig",
 //    "icon": "portal_menu.png",
@@ -57,7 +57,7 @@
     "sub": []
   },
 //  {
-//    "title": "展示配置",
+//    "title": "표시 설정",
 //    "id": "1.1",
 //    "action": "revealConfig",
 //    "icon": "portal_reveal.png",

@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.element.Application;
 import com.x.processplatform.core.entity.element.Process;
 
 /**
- * 在应用管理界面下获取一个WorkCompleted的内容,.同时需要添加一个permission. 权限:需要至少process的管理权限.
+ * 앱 관리 화면에서 WorkCompleted 내용 조회, 동시에 permission 추가 필요. 권한: 최소 process 관리 권한 필요.
  */
 class ActionManageGet extends BaseAction {
 
@@ -32,12 +32,12 @@ class ActionManageGet extends BaseAction {
 			}
 			Process process = business.process().pick(workCompleted.getProcess());
 			Application application = business.application().pick(workCompleted.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (!business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process)) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 			Wo wo = Wo.copier.copy(workCompleted);
-			/* 添加权限 */
+			/* 권한 추가 */
 			wo.setControl(new WorkCompletedControlBuilder(effectivePerson, business, workCompleted).enableAll().build());
 			result.setData(wo);
 			return result;
@@ -51,7 +51,7 @@ class ActionManageGet extends BaseAction {
 		static WrapCopier<WorkCompleted, Wo> copier = WrapCopierFactory.wo(WorkCompleted.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("权限对象")
+		@FieldDescribe("권한 객체")
 		private Control control;
 
 		public Control getControl() {

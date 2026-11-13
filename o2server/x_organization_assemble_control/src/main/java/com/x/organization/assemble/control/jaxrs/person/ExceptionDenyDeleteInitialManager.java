@@ -7,6 +7,6 @@ class ExceptionDenyDeleteInitialManager extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionDenyDeleteInitialManager() {
-		super("不能删除初始管理员.");
+		super("초기 관리자는 삭제할 수 없습니다.");
 	}
 }

@@ -11,7 +11,7 @@ public abstract class Activity extends SliceJpaObject {
 
 	private static final long serialVersionUID = 4981905102396583697L;
 
-	@FieldDescribe("节点类型.")
+	@FieldDescribe("노드 유형.")
 	@Transient
 	private ActivityType type;
 
@@ -123,12 +123,12 @@ public abstract class Activity extends SliceJpaObject {
 
 	public abstract void setOpinionGroup(String opinionGroup);
 
-	// 是否允许调度
+	// 스케줄링 허용 여부
 	public abstract Boolean getAllowReroute();
 
 	public abstract void setAllowReroute(Boolean allowReroute);
 
-	// 是否允许调度到此节点
+	// 이 노드로의 스케줄링 허용 여부
 	public abstract Boolean getAllowRerouteTo();
 
 	public abstract void setAllowRerouteTo(Boolean allowReroute);

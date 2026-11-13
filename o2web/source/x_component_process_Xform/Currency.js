@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "Number", null, false);
-/** @class Currency 货币输入组件。
- * @o2cn 货币输入组件
+/** @class Currency 통화 입력 컴포넌트.
+ * @o2cn 통화 입력 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("name"); //获取组件
- * //方法2
- * var field = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var field = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.Number
  * @o2category FormComponents
  * @o2range {Process|CMS}

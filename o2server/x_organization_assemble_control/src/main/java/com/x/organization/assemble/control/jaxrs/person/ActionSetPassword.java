@@ -27,7 +27,7 @@ class ActionSetPassword extends BaseAction {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
 			Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
-			// 排除xadmin
+			// xadmin 제외
 			if (Config.token().isInitialManager(flag)) {
 				throw new ExceptionDenyChangeInitialManagerPassword();
 			} else {

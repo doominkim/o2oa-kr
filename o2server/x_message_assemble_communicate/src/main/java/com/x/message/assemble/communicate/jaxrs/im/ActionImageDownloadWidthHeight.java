@@ -42,7 +42,7 @@ public class ActionImageDownloadWidthHeight extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Wo wo = null;
-			/** 确定是否要用application/octet-stream输出 */
+			/** application/octet-stream으로 출력할지 결정 */
 			IMMsgFile file = emc.find(id, IMMsgFile.class);
 			if (null == file) {
 				throw new ExceptionFileNotExist(id);
@@ -93,12 +93,12 @@ public class ActionImageDownloadWidthHeight extends BaseAction {
 							CacheManager.put(cacheCategory, cacheKey, wo);
 							result.setData(wo);
 						}
-					} catch (Exception ex) { // 图片转化异常的情况 直接返回整个文件
-						LOGGER.warn("图片转化异常", ex);
+					} catch (Exception ex) { // 이미지 변환 예외 시 파일 전체를 그대로 반환
+						LOGGER.warn("이미지 변환 예외", ex);
 						byte[] bs = os.toByteArray();
 						wo = new Wo(bs, this.contentType(false, file.getName()),
 								this.contentDisposition(false, file.getName()));
-						// 对10M以下的文件进行缓存
+						// 10M 이하 파일 캐시
 						if (bs.length < (1024 * 1024 * 10)) {
 							CacheManager.put(cacheCategory, cacheKey, wo);
 						}
@@ -106,7 +106,7 @@ public class ActionImageDownloadWidthHeight extends BaseAction {
 					}
 				} catch (Exception e) {
 					if (e.getMessage() != null && e.getMessage().contains("existed")) {
-						LOGGER.warn("原始附件{}-{}不存在，删除记录！", file.getId(), file.getName());
+						LOGGER.warn("원본 첨부파일 {}-{}이(가) 존재하지 않아 기록을 삭제합니다!", file.getId(), file.getName());
 						emc.beginTransaction(IMMsgFile.class);
 						emc.delete(IMMsgFile.class, file.getId());
 						emc.commit();

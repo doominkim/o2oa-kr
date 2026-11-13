@@ -33,7 +33,7 @@ public class HstService {
     public static final String FIND_USER_API = "/api/v1/user/list";
 
     /**
-     * 创建好视通在线会议
+     * 하오스퉁 온라인 회의 생성
      * @param meeting
      * @param config
      * @return
@@ -53,7 +53,7 @@ public class HstService {
             List<NameValuePair> header = new ArrayList<>();
             header.add(new NameValuePair("Authorization", token));
             String res = HttpConnection.postAsString(url, header, XGsonBuilder.toJson(map));
-            LOGGER.info("创建好视通会议：{}，返回：{}", meeting.getSubject(), res);
+            LOGGER.info("하오스퉁 회의 생성: {}, 반환: {}", meeting.getSubject(), res);
             if(StringUtils.isNotBlank(res)){
                 ResObj resObj = XGsonBuilder.instance().fromJson(res, ResObj.class);
                 if(SUCCESS_CODE.equals(resObj.getCode())){
@@ -78,9 +78,9 @@ public class HstService {
     }
 
     /**
-     * 好视通会议用户授权
-     * 授权者名单格式：’用户名,权限值‘ 或 ’会议室ID,权限值‘ 多个用‘#’号隔开， 例：
-     * paul,0#Mike,1#king,2 ;权限值定义：2 参会人 3 管理员，4初始管理员；权限值为0时，表示取消该用户会议室权限；会议ID为0时，则授予全部会议室。
+     * 하오스퉁 회의 사용자 권한 부여
+     * 권한 부여 대상 명단 형식: ‘사용자명,권한값’ 또는 ‘회의실ID,권한값’, 여러 개는 ‘#’로 구분, 예:
+     * paul,0#Mike,1#king,2 ; 권한값 정의: 2 참석자 3 관리자, 4 초기 관리자; 권한값이 0이면 해당 사용자의 회의실 권한 취소; 회의 ID가 0이면 전체 회의실에 권한 부여.
      * @param meeting
      * @param config
      * @return
@@ -140,7 +140,7 @@ public class HstService {
             List<NameValuePair> header = new ArrayList<>();
             header.add(new NameValuePair("Authorization", token));
             String res = HttpConnection.postAsString(url, header, XGsonBuilder.toJson(map));
-            LOGGER.info("好视通会议用户授权 request:{}-----resp:{}",XGsonBuilder.toJson(map), res);
+            LOGGER.info("하오스퉁 회의 사용자 권한 부여 request:{}-----resp:{}",XGsonBuilder.toJson(map), res);
             if(StringUtils.isNotBlank(res)){
                 ResObj resObj = XGsonBuilder.instance().fromJson(res, ResObj.class);
                 if(SUCCESS_CODE.equals(resObj.getCode())){
@@ -154,7 +154,7 @@ public class HstService {
     }
 
     /**
-     * 修改会议时间
+     * 회의 시간 수정
      * @param meeting
      * @param config
      * @return
@@ -181,7 +181,7 @@ public class HstService {
             header.add(new NameValuePair("Authorization", token));
             String res = HttpConnection.postAsString(url, header, XGsonBuilder.toJson(map));
             if(StringUtils.isNotBlank(res)){
-                LOGGER.info("修改会议预约时间 request:{}-----resp:{}",XGsonBuilder.toJson(map), res);
+                LOGGER.info("회의 예약 시간 수정 request:{}-----resp:{}",XGsonBuilder.toJson(map), res);
                 ResObj resObj = XGsonBuilder.instance().fromJson(res, ResObj.class);
                 if(SUCCESS_CODE.equals(resObj.getCode())){
                     return true;
@@ -194,7 +194,7 @@ public class HstService {
     }
 
     /**
-     * 取消会议
+     * 회의 취소
      * @param meeting
      * @param config
      * @return
@@ -212,7 +212,7 @@ public class HstService {
             header.add(new NameValuePair("Authorization", token));
             String res = HttpConnection.postAsString(url, header, XGsonBuilder.toJson(map));
             if(StringUtils.isNotBlank(res)){
-                LOGGER.info("取消会议:{}-----返回:{}",meeting.getRoomId(), res);
+                LOGGER.info("회의 취소:{}-----반환:{}",meeting.getRoomId(), res);
                 ResObj resObj = XGsonBuilder.instance().fromJson(res, ResObj.class);
                 if(SUCCESS_CODE.equals(resObj.getCode())){
                     return true;
@@ -242,7 +242,7 @@ public class HstService {
                         return true;
                     }
                 }else{
-                    LOGGER.warn("查询用户：{},失败：{}", userId, res);
+                    LOGGER.warn("사용자 조회: {}, 실패: {}", userId, res);
                 }
             }
         } catch (Exception e) {

@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class QueueAddBeforeQueueTest {
 
-	@DisplayName("A前加签EFG,FEG串行处理")
+	@DisplayName("A 앞에 EFG 추가 결재, FEG 순차 처리")
 	@Test
 	@Order(1)
 	void test01() {

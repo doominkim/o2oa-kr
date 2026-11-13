@@ -12,15 +12,15 @@ import com.x.base.core.project.tools.ListTools;
 import com.x.mind.assemble.control.Business;
 
 /**
- * 组织人员角色相关信息的服务类
+ * 조직·사용자·역할 관련 정보 서비스 클래스
  * 
  * @author O2LEE
  */
 public class UserManagerService {
 	
 	/**
-	 * 根据员工姓名获取组织名称
-	 * 如果用户有多个身份，则取组织级别最大的组织名称
+	 * 직원 이름으로 조직 이름 조회
+	 * 사용자 신분이 여러 개이면 조직 등급이 가장 높은 조직 이름 사용
 	 * 
 	 * @param personName
 	 * @return
@@ -51,7 +51,7 @@ public class UserManagerService {
 	}
 	
 	/**
-	 * 根据身份名称获取身份所属的组织名称
+	 * 신분 이름으로 신분이 속한 조직 이름 조회
 	 * 
 	 * @param identity
 	 * @return
@@ -63,7 +63,7 @@ public class UserManagerService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			unitName = business.organization().unit().getWithIdentity( identity );
-			if ( unitName == null ) {// 该根据身份无法查询到组织信息
+			if ( unitName == null ) {// 해당 신분으로 조직 정보를 조회할 수 없음
 				return null;
 			} else {
 				return unitName;
@@ -76,7 +76,7 @@ public class UserManagerService {
 	}
 	
 	/**
-	 * 根据身份名称获取身份所属的顶层组织名称
+	 * 신분 이름으로 신분이 속한 최상위 조직 이름 조회
 	 * 
 	 * @param identity
 	 * @return
@@ -101,7 +101,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据人员姓名获取人员所属的顶层组织名称，如果人员有多个身份，则取组织等级最大的身份
+	 * 사용자 이름으로 사용자가 속한 최상위 조직 이름 조회, 사용자 신분이 여러 개이면 조직 등급이 가장 높은 신분 사용
 	 * @param personName
 	 * @return
 	 * @throws Exception
@@ -112,7 +112,7 @@ public class UserManagerService {
 		Business business = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			//兼容一下传过来的perosnName有可能是个人，有可能是身份
+			//전달된 perosnName이 개인일 수도, 신분일 수도 있으므로 호환 처리
 			personName = business.organization().person().get( personName );
 			identity = getIdentityWithPerson( personName );
 			if( identity != null && !identity.isEmpty() ){
@@ -125,7 +125,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据个人姓名，根据个人姓名获取所有身份中组织等级最高的一个身份
+	 * 개인 이름으로 모든 신분 중 조직 등급이 가장 높은 신분 조회
 	 * 
 	 * @param personName
 	 * @return
@@ -140,7 +140,7 @@ public class UserManagerService {
 		Business business = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			//兼容一下传过来的perosnName有可能是个人，有可能是身份
+			//전달된 perosnName이 개인일 수도, 신분일 수도 있으므로 호환 처리
 			personName = business.organization().person().get( personName );
 			identities = business.organization().identity().listWithPerson( personName );
 			if( identities != null && !identities.isEmpty() ) {
@@ -160,7 +160,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 查询当前用户是否有指定的身份信息
+	 * 현재 사용자에게 지정 신분 정보가 있는지 조회
 	 * @param personName
 	 * @param loginIdentity
 	 * @return
@@ -185,7 +185,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据用户的身份查询用户的姓名
+	 * 사용자 신분으로 사용자 이름 조회
 	 * @param identity
 	 * @return
 	 * @throws Exception 
@@ -204,7 +204,7 @@ public class UserManagerService {
 	}	
 
 	/**
-	 * 根据用户唯一标识来获取用户对象
+	 * 사용자 고유 식별자로 사용자 객체 조회
 	 * @param flag
 	 * @return
 	 * @throws Exception
@@ -223,7 +223,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 判断用户是否有指定的平台角色，比如CMS系统管理员
+	 * 사용자에게 지정 플랫폼 역할(예: CMS 시스템 관리자)이 있는지 판단
 	 * @param personName
 	 * @param roleName
 	 * @return
@@ -288,7 +288,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据用户的身份查询用户的姓名
+	 * 사용자 신분으로 사용자 이름 조회
 	 * 
 	 * @param identity
 	 * @return
@@ -311,7 +311,7 @@ public class UserManagerService {
 
 
 	/**
-	 * 获取人员所属的所有组织名称列表
+	 * 사용자가 속한 모든 조직 이름 목록 조회
 	 * @param personName
 	 * @return
 	 * @throws Exception
@@ -331,7 +331,7 @@ public class UserManagerService {
 	}
 	
 	/**
-	 * 根据用户姓名查询用户所有的身份信息
+	 * 사용자 이름으로 사용자의 모든 신분 정보 조회
 	 * 
 	 * @param userName
 	 * @return
@@ -353,7 +353,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 列示人员所拥有的所有角色信息
+	 * 사용자가 가진 모든 역할 정보 나열
 	 * @param personName
 	 * @return
 	 * @throws Exception
@@ -377,7 +377,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 列示人员所拥有的所有群组信息
+	 * 사용자가 가진 모든 그룹 정보 나열
 	 * @param personName
 	 * @return
 	 * @throws Exception
@@ -412,7 +412,7 @@ public class UserManagerService {
 					identityName = identityNames.get(0);
 				}
 			}else {
-				//判断传入的身份是否合法
+				//전달된 신분이 유효한지 판단
 				identityName = this.findIdentity( identityNames, identity );
 				if ( null == identity || identity.isEmpty() ) {
 					throw new Exception("identity is invalid!identity:" + identity );
@@ -449,7 +449,7 @@ public class UserManagerService {
 		List<String> identities = null;
 		List<String> dutyNames = null;
 		
-		//选查询个人涉及的所有组织角色以及群组编码
+		//먼저 개인과 관련된 모든 조직·역할 및 그룹 코드 조회
 		groupNames = listGroupNamesByPerson( personName );
 		roleNames = listRoleNamesByPerson( personName );
 		unitNames = listUnitNamesWithPerson( personName );
@@ -458,7 +458,7 @@ public class UserManagerService {
 		
 		queryObjectNames.add( personName );
 		
-		//将三个列表合为一个，再进行分类权限查询
+		//세 목록을 하나로 합친 뒤 분류 권한 조회
 		if( identities != null && !identities.isEmpty() ) {
 			for( String identity : identities ) {
 				if( !queryObjectNames.contains( identity )) {
@@ -508,7 +508,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 获取指定组织指定职务所涉及的身份列表
+	 * 지정 조직의 지정 직무에 해당하는 신분 목록 조회
 	 * 
 	 * @param unit
 	 * @param dutyName
@@ -526,7 +526,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 获取指定组织指定职务所涉及的身份列表
+	 * 지정 조직의 지정 직무에 해당하는 신분 목록 조회
 	 * 
 	 * @param unit
 	 * @param dutyNames

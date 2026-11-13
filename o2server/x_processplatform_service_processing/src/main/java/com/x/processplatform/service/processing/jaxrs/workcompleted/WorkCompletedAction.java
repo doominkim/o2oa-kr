@@ -26,18 +26,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("workcompleted")
-@JaxrsDescribe("完成工作")
+@JaxrsDescribe("완료된 업무 문서")
 public class WorkCompletedAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(WorkCompletedAction.class);
 
-	@JaxrsMethodDescribe(value = "回滚指定的完成工作到指定的workLog.", action = ActionRollback.class)
+	@JaxrsMethodDescribe(value = "지정 완료 업무 문서를 지정 workLog로 롤백.", action = ActionRollback.class)
 	@PUT
 	@Path("{flag}/rollback")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rollback(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("完成工作") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("완료된 업무 문서") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionRollback.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -49,13 +49,13 @@ public class WorkCompletedAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "指定的已完成工作进行合并.", action = ActionMerge.class)
+	@JaxrsMethodDescribe(value = "지정 완료 업무 문서 병합.", action = ActionMerge.class)
 	@GET
 	@Path("{flag}/merge")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void merge(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("完成工作") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("완료된 업무 문서") @PathParam("flag") String flag) {
 		ActionResult<ActionMerge.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,9 +71,9 @@ public class WorkCompletedAction extends StandardJaxrsAction {
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("process/{processFlag}")
-	@JaxrsMethodDescribe(value = "创建已完成工作.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "완료 문서 생성.", action = ActionCreate.class)
 	public void create(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("流程标识") @PathParam("processFlag") String processFlag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("프로세스 식별자") @PathParam("processFlag") String processFlag, JsonElement jsonElement) {
 		ActionResult<ActionCreate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,7 +89,7 @@ public class WorkCompletedAction extends StandardJaxrsAction {
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("shift/time")
-	@JaxrsMethodDescribe(value = "调整创建时间", action = ActionShiftTime.class)
+	@JaxrsMethodDescribe(value = "생성 시간 조정", action = ActionShiftTime.class)
 	public void shiftTime(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			JsonElement jsonElement) {
 		ActionResult<ActionShiftTime.Wo> result = new ActionResult<>();

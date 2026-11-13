@@ -24,12 +24,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("unitattribute")
-@JaxrsDescribe("组织属性接口")
+@JaxrsDescribe("조직 속성 API")
 public class UnitAttributeAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(UnitAttributeAction.class);
 
-	@JaxrsMethodDescribe(value = "根据组织和组织属性名称添加值.", action = ActionAppendWithUnitWithName.class)
+	@JaxrsMethodDescribe(value = "조직과 조직 속성 이름으로 값 추가.", action = ActionAppendWithUnitWithName.class)
 	@POST
 	@Path("append/unit/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class UnitAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织和组织属性名称获取值.", action = ActionListAttributeWithUnitWithName.class)
+	@JaxrsMethodDescribe(value = "조직과 조직 속성 이름으로 값 조회.", action = ActionListAttributeWithUnitWithName.class)
 	@POST
 	@Path("list/attribute/unit/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class UnitAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的组织属性名称.", action = ActionListNameWithUnit.class)
+	@JaxrsMethodDescribe(value = "조직의 조직 속성 이름 일괄 조회.", action = ActionListNameWithUnit.class)
 	@POST
 	@Path("list/name/unit")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -83,7 +83,7 @@ public class UnitAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据组织和组织属性名称设置值.", action = ActionSetWithUnitWithName.class)
+	@JaxrsMethodDescribe(value = "조직과 조직 속성 이름으로 값 설정.", action = ActionSetWithUnitWithName.class)
 	@POST
 	@Path("set/unit/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -101,7 +101,7 @@ public class UnitAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织的组织属性对象.", action = ActionListWithUnitObject.class)
+	@JaxrsMethodDescribe(value = "조직의 조직 속성 객체 조회.", action = ActionListWithUnitObject.class)
 	@POST
 	@Path("list/unit/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

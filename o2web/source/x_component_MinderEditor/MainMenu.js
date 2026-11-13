@@ -313,7 +313,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
         //     "styles" : this.css.rightActionArea
         // }).inject( this.rightContentNode );
 
-        // this.createActionNode( actionArea, "import", "打开本地文件", "上传本地脑图文件，并用脑图编辑", function(){
+        // this.createActionNode( actionArea, "import", "로컬 파일 열기", "로컬 마인드맵 파일을 업로드해 마인드맵으로 편집", function(){
         //     this.app.openSaveAsDialog();
         //     this.hide();
         // }.bind(this) );
@@ -516,7 +516,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
                 //}).inject( this.listArea );
                 //
                 //new Element("div.listItemTextNode", {
-                //    "text" : d.source.split("@")[0] + "于" + d.createTime + "分享给" + d.target.split("@")[0],
+                //    "text" : d.source.split("@")[0] + "님이 " + d.createTime + "에 공유함: " + d.target.split("@")[0],
                 //    "styles" : this.css.listItemTextNode
                 //}).inject( listItemNode );
                 //

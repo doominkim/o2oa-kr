@@ -28,7 +28,7 @@ public class Filter extends GsonPropertyObject {
 
 	public static final String FORMAT_TIMEVALUE = "timeValue";
 
-	/* 用于customFilterEntry */
+	/* customFilterEntry용 */
 	public String title;
 
 	public String value;

@@ -38,12 +38,12 @@ import net.fortuna.ical4j.model.parameter.Value;
 import net.fortuna.ical4j.model.property.ExDate;
 
 /**
- * 日程事件信息
+ * 일정 이벤트 정보
  * 
  * @author O2LEE
  *
  */
-@Schema(name = "Calendar_Event", description = "日程事件信息.")
+@Schema(name = "Calendar_Event", description = "일정 이벤트 정보.")
 @SuppressWarnings("rawtypes")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
@@ -66,26 +66,26 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 	public void onPersist() throws Exception {
 
 	}
 
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 构造方法区
+	 * ===== 생성자 영역
 	 * =============================================================================
 	 * =====
 	 */
@@ -122,57 +122,57 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String calendarId_FIELDNAME = "calendarId";
-	@FieldDescribe("日历账号ID")
+	@FieldDescribe("캘린더 계정 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + calendarId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + calendarId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String calendarId = null;
 
 	public static final String repeatMasterId_FIELDNAME = "repeatMasterId";
-	@FieldDescribe("重复日程宿主ID")
+	@FieldDescribe("반복 일정 호스트 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + repeatMasterId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + repeatMasterId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String repeatMasterId = null;
 
 	public static final String eventType_FIELDNAME = "eventType";
-	@FieldDescribe("信息类别: CAL_EVENT | TASK_EVENT")
+	@FieldDescribe("정보 유형: CAL_EVENT | TASK_EVENT")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + eventType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + eventType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String eventType = "CAL_EVENT";
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("事件标题")
+	@FieldDescribe("이벤트 제목")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String title = null;
 
 	public static final String color_FIELDNAME = "color";
-	@FieldDescribe("显示颜色")
+	@FieldDescribe("표시 색상")
 	@Column(length = JpaObject.length_8B, name = ColumnNamePrefix + color_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String color = "#1462be";
 
 	public static final String comment_FIELDNAME = "comment";
-	@FieldDescribe("备注信息")
+	@FieldDescribe("비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + comment_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String comment = null;
 
 	public static final String commentId_FIELDNAME = "commentId";
-	@FieldDescribe("备注LOB信息")
+	@FieldDescribe("비고 LOB 정보")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + commentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String commentId = null;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("事件开始时间")
+	@FieldDescribe("이벤트 시작 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + startTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTime_FIELDNAME)
@@ -180,14 +180,14 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	private Date startTime = null;
 
 	public static final String startTimeStr_FIELDNAME = "startTimeStr";
-	@FieldDescribe("事件开始时间(yyyy-MM-dd HH:mm:ss)")
+	@FieldDescribe("이벤트 시작 시간(yyyy-MM-dd HH:mm:ss)")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + startTimeStr_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTimeStr_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String startTimeStr = null;
 
 	public static final String endTime_FIELDNAME = "endTime";
-	@FieldDescribe("事件结束时间")
+	@FieldDescribe("이벤트 종료 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + endTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + endTime_FIELDNAME)
@@ -195,140 +195,140 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	private Date endTime = null;
 
 	public static final String endTimeStr_FIELDNAME = "endTimeStr";
-	@FieldDescribe("事件结束时间(yyyy-MM-dd HH:mm:ss)")
+	@FieldDescribe("이벤트 종료 시간(yyyy-MM-dd HH:mm:ss)")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + endTimeStr_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + endTimeStr_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String endTimeStr = null;
 
 	public static final String locationName_FIELDNAME = "locationName";
-	@FieldDescribe("地点说明")
+	@FieldDescribe("장소 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + locationName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String locationName = null;
 
 	public static final String longitude_FIELDNAME = "longitude";
-	@FieldDescribe("经度")
+	@FieldDescribe("경도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + longitude_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String longitude = null;
 
 	public static final String latitude_FIELDNAME = "latitude";
-	@FieldDescribe("纬度")
+	@FieldDescribe("위도")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + latitude_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String latitude = null;
 
 	public static final String recurrenceRule_FIELDNAME = "recurrenceRule";
-	@FieldDescribe("重复日期表达式RecurrenceRule")
+	@FieldDescribe("반복 날짜 표현식 RecurrenceRule")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + recurrenceRule_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String recurrenceRule = null;
 
 	public static final String recurrenceExc_FIELDNAME = "recurrenceExc";
-	@FieldDescribe("排除日期表达式RecurrenceExc")
+	@FieldDescribe("제외 날짜 표현식 RecurrenceExc")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + recurrenceExc_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String recurrenceExc = null;
 
 	public static final String alarm_FIELDNAME = "alarm";
-	@FieldDescribe("是否提醒")
+	@FieldDescribe("알림 여부")
 	@Column(name = ColumnNamePrefix + alarm_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean alarm = false;
 
 	public static final String alarmTime_FIELDNAME = "alarmTime";
-	@FieldDescribe("当前事件提醒时间")
+	@FieldDescribe("현재 이벤트 알림 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + alarmTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date alarmTime = null;
 
 	public static final String alarmAlready_FIELDNAME = "alarmAlready";
-	@FieldDescribe("是否已经提醒过了")
+	@FieldDescribe("이미 알림 여부")
 	@Column(name = ColumnNamePrefix + alarmAlready_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean alarmAlready = false;
 
 	public static final String valarmTime_config_FIELDNAME = "valarmTime_config";
-	@FieldDescribe("提醒提配置：天, 时, 分, 秒（负数为提前）")
+	@FieldDescribe("알림 설정: 일, 시, 분, 초(음수는 사전 알림)")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + valarmTime_config_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarmTime_config = "0,0,0,0";
 
 	public static final String valarm_mailto_FIELDNAME = "valarm_mailto";
-	@FieldDescribe("提交Email地址，为空则不邮件提醒")
+	@FieldDescribe("알림 Email 주소, 비어 있으면 메일 알림 안 함")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + valarm_mailto_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarm_mailto = null;
 
 	public static final String valarm_Summary_FIELDNAME = "valarm_Summary";
-	@FieldDescribe("提醒显示标题")
+	@FieldDescribe("알림 표시 제목")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + valarm_Summary_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarm_Summary = null;
 
 	public static final String valarm_description_FIELDNAME = "valarm_description";
-	@FieldDescribe("提醒备注信息")
+	@FieldDescribe("알림 비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + valarm_description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String valarm_description = null;
 
 	public static final String isAllDayEvent_FIELDNAME = "isAllDayEvent";
-	@FieldDescribe("是否为全天事件")
+	@FieldDescribe("종일 이벤트 여부")
 	@Column(name = ColumnNamePrefix + isAllDayEvent_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isAllDayEvent = false;
 
 	public static final String daysOfDuration_FIELDNAME = "daysOfDuration";
-	@FieldDescribe("事件持续天数：0、1或者N天")
+	@FieldDescribe("이벤트 지속 일수: 0, 1 또는 N일")
 	@Column(name = ColumnNamePrefix + daysOfDuration_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + daysOfDuration_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer daysOfDuration = 0;
 
 	public static final String isPublic_FIELDNAME = "isPublic";
-	@FieldDescribe("是否公开的事件")
+	@FieldDescribe("공개 이벤트 여부")
 	@Column(name = ColumnNamePrefix + isPublic_FIELDNAME)
 	private Boolean isPublic = false;
 
 	public static final String source_FIELDNAME = "source";
-	@FieldDescribe("信息来源: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
+	@FieldDescribe("정보 출처: PERSONAL| LEADER | UNIT | MEETING | BUSINESS_TRIP | HOLIDAY")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + source_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + source_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String source = "PERSONAL";
 
 	public static final String bundle_FIELDNAME = "bundle";
-	@FieldDescribe("绑定来源数据标识")
+	@FieldDescribe("바인딩 출처 데이터 식별자")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + bundle_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + bundle_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String bundle;
 
 	public static final String createPerson_FIELDNAME = "createPerson";
-	@FieldDescribe("创建者")
+	@FieldDescribe("작성자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + createPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + createPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String createPerson = null;
 
 	public static final String updatePerson_FIELDNAME = "updatePerson";
-	@FieldDescribe("最后更新者")
+	@FieldDescribe("최종 수정자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + updatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + updatePerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String updatePerson = null;
 
 	public static final String targetType_FIELDNAME = "targetType";
-	@FieldDescribe("参与者类型：PERSON | UNIT | GROUP")
+	@FieldDescribe("참여자 유형: PERSON | UNIT | GROUP")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + targetType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String targetType = "PERSON";
 
 	public static final String participants_FIELDNAME = "participants";
-	@FieldDescribe("参与者列表")
+	@FieldDescribe("참여자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + participants_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -340,7 +340,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	private List<String> participants = null;
 
 	public static final String manageablePersonList_FIELDNAME = "manageablePersonList";
-	@FieldDescribe("可管理人员列表")
+	@FieldDescribe("관리 가능 사용자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -353,7 +353,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	private List<String> manageablePersonList;
 
 	public static final String viewablePersonList_FIELDNAME = "viewablePersonList";
-	@FieldDescribe("可见人员列表")
+	@FieldDescribe("열람 가능 사용자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -366,7 +366,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	private List<String> viewablePersonList;
 
 	public static final String viewableUnitList_FIELDNAME = "viewableUnitList";
-	@FieldDescribe("可见组织列表")
+	@FieldDescribe("열람 가능 조직 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -379,7 +379,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	private List<String> viewableUnitList;
 
 	public static final String viewableGroupList_FIELDNAME = "viewableGroupList";
-	@FieldDescribe("可见群组列表")
+	@FieldDescribe("열람 가능 그룹 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -731,7 +731,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	public void setCommentId(String commentId) { this.commentId = commentId; }
 
 	/**
-	 * 是否是在一天内结束的日程或者事件
+	 * 하루 안에 끝나는 일정 또는 이벤트인지 여부
 	 * 
 	 * @return
 	 */
@@ -745,7 +745,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	}
 
 	/**
-	 * 是否为今天的日程或者事件
+	 * 오늘의 일정 또는 이벤트인지 여부
 	 * 
 	 * @return
 	 */
@@ -760,7 +760,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	}
 
 	/**
-	 * 克隆一个新的日程或者事件对象 Calendar_Record
+	 * 새 일정 또는 이벤트 객체 복제 Calendar_Record
 	 */
 	@Override
 	public Calendar_Event clone() {
@@ -774,7 +774,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	}
 
 	/**
-	 * 判断事件是否在指定的时间范围之内 Check if the event recurs within the given period
+	 * 이벤트가 지정 시간 범위 내에 있는지 판단 Check if the event recurs within the given period
 	 * @param periodStart
 	 * @param periodEnd
 	 * @return
@@ -785,7 +785,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	}
 
 	/**
-	 * 获取日程事件在指定时间范围内的执行时间列表
+	 * 지정 시간 범위 내 일정 이벤트의 실행 시간 목록 조회
 	 * 
 	 * @param periodStart
 	 * @param periodEnd
@@ -831,7 +831,7 @@ public class Calendar_Event extends SliceJpaObject implements Cloneable, Compara
 	}
 
 	/**
-	 * 日程事件对比，排序使用
+	 * 일정 이벤트 비교, 정렬용
 	 */
 	@Override
 	public int compareTo(final Object o1) {

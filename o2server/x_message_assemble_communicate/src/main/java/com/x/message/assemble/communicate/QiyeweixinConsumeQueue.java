@@ -50,12 +50,12 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 	private QiyeweixinBaseMessage generateMessage(Message message, Business business) throws Exception {
 		String content = message.getTitle();
 		String workUrl = getOpenUrl(message);
-		// 有超链接的发送卡片消息 目前支持 内容管理和流程
+		// 하이퍼링크가 있으면 카드 메시지 발송. 현재 콘텐츠 관리와 프로세스 지원
 		if (needTransferLink(message.getType()) && StringUtils.isNotEmpty(workUrl)) {
 			QiyeweixinTextCardMessage cardMessage = new QiyeweixinTextCardMessage();
 			cardMessage.setAgentid(Long.parseLong(Config.qiyeweixin().getAgentId(), 10));
 			cardMessage.setTouser(business.organization().person().getObject(message.getPerson()).getQiyeweixinId());
-			// 内容管理
+			// 콘텐츠 관리
 			if (MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType())
 					|| MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType())) {
 				String categoryName = DingdingConsumeQueue.OuterMessageHelper.getPropertiesFromBody("categoryName", message.getBody());
@@ -73,17 +73,17 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 			cardMessage.getTextcard().setDescription(message.getTitle());
 			cardMessage.getTextcard().setUrl(workUrl);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("微信卡片消息：{}", cardMessage::toString);
+				LOGGER.debug("위챗 카드 메시지:{}", cardMessage::toString);
 			}
 			return cardMessage;
 
-		} else { // 其他是普通文本消息
+		} else { // 그 외는 일반 텍스트 메시지
 			QiyeweixinTextMessage textMessage = new QiyeweixinTextMessage();
 			textMessage.setAgentid(Long.parseLong(Config.qiyeweixin().getAgentId(), 10));
 			textMessage.setTouser(business.organization().person().getObject(message.getPerson()).getQiyeweixinId());
 			textMessage.getText().setContent(content);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("微信文本消息：{}", textMessage::toString);
+				LOGGER.debug("위챗 텍스트 메시지:{}", textMessage::toString);
 			}
 			return textMessage;
 		}
@@ -93,25 +93,25 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 
 
 	/**
-	 * 判断打开地址
+	 * 열기 주소 판단
 	 *
 	 * @param message
 	 * @return
 	 */
 	private String getOpenUrl(Message message) {
 		String openUrl = "";
-		// cms 文档
+		// cms 문서
 		if (MessageConnector.TYPE_CMS_PUBLISH.equals(message.getType())
 				|| MessageConnector.TYPE_CMS_PUBLISH_TO_CREATOR.equals(message.getType())) {
 			openUrl = getQywxOpenCMSDocumentUrl(message.getBody());
-		} else { // 流程工作相关的
+		} else { // 프로세스 업무 문서 관련
 			openUrl = getQywxOpenWorkUrl(message.getBody());
 		}
 		return openUrl;
 	}
 
 	/**
-	 * 文档打开的url
+	 * 문서를 여는 url
 	 *
 	 * @param messageBody
 	 * @return
@@ -127,7 +127,7 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 				return null;
 			}
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("o2oa 地址：{}" , o2oaUrl);
+				LOGGER.debug("o2oa 주소:{}" , o2oaUrl);
 			}
 			o2oaUrl = URLEncoder.encode(o2oaUrl, DefaultCharset.name);
 			if (LOGGER.isDebugEnabled()) {
@@ -148,7 +148,7 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 	}
 
 	/**
-	 * 生成单点登录和打开工作的地址
+	 * SSO 및 업무 문서 열기 주소 생성
 	 * 
 	 * @param messageBody
 	 * @return
@@ -161,7 +161,7 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 			String corpId = Config.qiyeweixin().getCorpId();
 			String agentId = Config.qiyeweixin().getAgentId();
 			if (StringUtils.isEmpty(o2oaUrl) || StringUtils.isEmpty(corpId) || StringUtils.isEmpty(agentId)) {
-				LOGGER.warn("workurl corpid agentid 可能为空！");
+				LOGGER.warn("workurl corpid agentid가 비어 있을 수 있습니다!");
 				return null;
 			}
 			if (StringUtils.isNotEmpty(openPage)) {
@@ -177,11 +177,11 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 				workUrl = URLEncoder.encode(workUrl, DefaultCharset.name);
 				o2oaUrl = o2oaUrl + "qiyeweixinsso.html?redirect=" + workUrl;
 			} else {
-				LOGGER.warn("没有 work 或者 openPageUrl 无法生成地址！");
+				LOGGER.warn("work 또는 openPageUrl이 없어 주소를 생성할 수 없습니다!");
 				return null;
 			}
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("o2oa 地址：{}", o2oaUrl);
+				LOGGER.debug("o2oa 주소:{}", o2oaUrl);
 			}
 			o2oaUrl = URLEncoder.encode(o2oaUrl, DefaultCharset.name);
 			String oauthUrl = Config.qiyeweixin().getOauth2Address();
@@ -201,9 +201,9 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 
 
 	/**
-	 * 是否需要把企业微信消息转成超链接消息 根据是否配置了企业微信应用链接、是否是工作消息（目前只支持工作消息）
+	 * 위챗 워크 메시지를 하이퍼링크 메시지로 변환할지 여부. 위챗 워크 앱 링크 설정 여부, 업무 메시지 여부에 따라 결정(현재 업무 메시지만 지원)
 	 * 
-	 * @param messageType 消息类型 判断是否是工作消息
+	 * @param messageType 메시지 유형. 업무 메시지 여부 판단
 	 * @return
 	 */
 	private boolean needTransferLink(String messageType) {
@@ -226,7 +226,7 @@ public class QiyeweixinConsumeQueue extends AbstractQueue<Message> {
 		 * <code>	 {
 		 * "errcode" : 0,
 		 * "errmsg" : "ok",
-		 * "invaliduser" : "userid1|userid2", // 不区分大小写，返回的列表都统一转为小写
+		 * "invaliduser" : "userid1|userid2", // 대소문자 구분 없음, 반환 목록은 모두 소문자로 변환
 		 * "invalidparty" : "partyid1|partyid2",
 		 * "invalidtag":"tagid1|tagid2"
 		 * }

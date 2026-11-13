@@ -29,7 +29,7 @@ class ActionDelete extends BaseAction {
 			if (null == recycle) {
 				throw new ExceptionAttachmentNotExist(id);
 			}
-			/* 判断当前用户是否有权限访问该文件 */
+			/* 현재 사용자의 해당 파일 접근 권한 여부 판단 */
 			boolean flag = !business.controlAble(effectivePerson) && !StringUtils.equals(effectivePerson.getDistinguishedName(), recycle.getPerson());
 			if(flag) {
 				throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());

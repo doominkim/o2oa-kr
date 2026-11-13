@@ -48,10 +48,10 @@ class ActionReference extends BaseAction {
 			Wo wo = new Wo();
 			wo.setRead(WoRead.copier.copy(read));
 			wo.setWorkList(this.listWork(business, read));
-			/** 装载所有的workLog */
+			/** 모든 workLog 로드 */
 			wo.setWorkLogList(this.listWorkLog(business, read));
-			/** 装载后续的work */
-			/** 装载可能的workCompleted */
+			/** 후속 work 로드 */
+			/** 가능한 workCompleted 로드 */
 			wo.setWorkCompletedList(this.listWorkCompleted(business, read));
 			result.setData(wo);
 		}
@@ -63,16 +63,16 @@ class ActionReference extends BaseAction {
 
 		private static final long serialVersionUID = -6025765113539684358L;
 
-		@FieldDescribe("待阅")
+		@FieldDescribe("열람 대기")
 		private WoRead read;
 
-		@FieldDescribe("工作日志")
+		@FieldDescribe("업무 로그")
 		private List<WoWorkLog> workLogList;
 
-		@FieldDescribe("工作")
+		@FieldDescribe("문서")
 		private List<WoWork> workList;
 
-		@FieldDescribe("已完成工作")
+		@FieldDescribe("완료된 업무 문서")
 		private List<WoWorkCompleted> workCompletedList;
 
 		public WoRead getRead() {
@@ -219,7 +219,7 @@ class ActionReference extends BaseAction {
 		if (!workLog.getConnected()) {
 			referenceWorkLogTask(business, wo);
 		} else {
-			/* 已经完成的不会有待办，返回一个空数组 */
+			/* 이미 완료된 것은 결재 대기가 없으므로 빈 배열 반환 */
 			wo.setTaskList(new ArrayList<WoTask>());
 		}
 		referenceWorkLogTaskCompleted(business, wo);
@@ -240,7 +240,7 @@ class ActionReference extends BaseAction {
 		os = os.stream()
 				.sorted(Comparator.comparing(TaskCompleted::getCompletedTime, Comparator.nullsLast(Date::compareTo)))
 				.collect(Collectors.toList());
-		/** 补充召回 */
+		/** 회수 보완 */
 		List<WoTaskCompleted> wos = WoTaskCompleted.copier.copy(os);
 		List<WoTaskCompleted> list = new ArrayList<>();
 		for (WoTaskCompleted o : wos) {
@@ -248,8 +248,8 @@ class ActionReference extends BaseAction {
 			// if (o.getProcessingType().equals(ProcessingType.retract)) {
 			// WoTaskCompleted retract = new WoTaskCompleted();
 			// o.copyTo(retract);
-			// retract.setRouteName("撤回");
-			// retract.setOpinion("撤回");
+			// retract.setRouteName("회수");
+			// retract.setOpinion("회수");
 			// retract.setStartTime(retract.getRetractTime());
 			// retract.setCompletedTime(retract.getRetractTime());
 			// list.add(retract);

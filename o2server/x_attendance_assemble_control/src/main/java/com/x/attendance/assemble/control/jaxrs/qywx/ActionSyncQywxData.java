@@ -37,7 +37,7 @@ public class ActionSyncQywxData extends BaseAction {
                 if ((gap / (1000 * 60 * 60 * 24)) > 6) {
                     throw new MoreThanSevenDayException();
                 }
-                Date wxTo = DateTools.parse(dateTo + " 23:59:59");//企业微信和钉钉查询时间不一样
+                Date wxTo = DateTools.parse(dateTo + " 23:59:59");//WeCom과 DingTalk의 조회 시간이 다름
                 DingdingQywxSyncRecord record = new DingdingQywxSyncRecord();
                 record.setDateFrom(from.getTime());
                 record.setDateTo(wxTo.getTime());
@@ -47,7 +47,7 @@ public class ActionSyncQywxData extends BaseAction {
                 emc.beginTransaction(DingdingQywxSyncRecord.class);
                 emc.persist(record);
                 emc.commit();
-                //企业微信的处理队列
+                //WeCom 처리 대기열
 //                ThisApplication.qywxQueue.send(record);
                 result.setData(new WrapBoolean(true));
             } else {

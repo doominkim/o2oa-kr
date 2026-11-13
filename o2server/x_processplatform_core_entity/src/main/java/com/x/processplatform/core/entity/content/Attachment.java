@@ -44,7 +44,7 @@ import com.x.processplatform.core.entity.element.ActivityType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Attachment", description = "流程平台附件.")
+@Schema(name = "Attachment", description = "프로세스 플랫폼 첨부파일.")
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Content.Attachment.table, uniqueConstraints = {
@@ -68,12 +68,12 @@ public class Attachment extends StorageObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -119,7 +119,7 @@ public class Attachment extends StorageObject {
 		this.setPerson(person);
 		this.setLastUpdatePerson(person);
 		this.setSite(site);
-		/** 用于判断目录的值 */
+		/** 디렉터리 값 판단용 */
 		this.setWorkCreateTime(work.getCreateTime() != null ? work.getCreateTime() : new Date());
 		this.setApplication(work.getApplication());
 		this.setProcess(work.getProcess());
@@ -137,7 +137,7 @@ public class Attachment extends StorageObject {
 		this.setPerson(person);
 		this.setLastUpdatePerson(person);
 		this.setSite(site);
-		/** 用于判断目录的值 */
+		/** 디렉터리 값 판단용 */
 		this.setWorkCreateTime(work.getStartTime() != null ? work.getStartTime() : new Date());
 		this.setApplication(work.getApplication());
 		this.setProcess(work.getProcess());
@@ -146,7 +146,7 @@ public class Attachment extends StorageObject {
 		this.setActivityName(work.getActivityName());
 	}
 
-	/** 更新运行方法 */
+	/** 실행 메서드 업데이트 */
 
 	@Override
 	public String path() {
@@ -268,7 +268,7 @@ public class Attachment extends StorageObject {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件名称,带扩展名的文件名.")
+	@FieldDescribe("파일 이름, 확장자를 포함한 파일명.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
@@ -276,68 +276,68 @@ public class Attachment extends StorageObject {
 	private String name;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名。")
+	@FieldDescribe("확장자.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = true, fileNameString = true)
 	private String extension;
 
 	public static final String storage_FIELDNAME = "storage";
-	@FieldDescribe("关联的存储名称.")
+	@FieldDescribe("연결된 저장소 이름.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	private String storage;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + length_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long length;
 
 	public static final String workCreateTime_FIELDNAME = "workCreateTime";
-	@FieldDescribe("关联的Work创建时间，用于分类目录。")
+	@FieldDescribe("연관 Work 생성 시간, 분류 디렉터리에 사용.")
 	@Column(name = ColumnNamePrefix + workCreateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + workCreateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date workCreateTime;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用ID.")
+	@FieldDescribe("앱 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("任务.")
+	@FieldDescribe("작업.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("文件所有者")
+	@FieldDescribe("파일 소유자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后更新人员")
+	@FieldDescribe("최종 수정 사용자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ lastUpdatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdatePerson_FIELDNAME)
@@ -345,14 +345,14 @@ public class Attachment extends StorageObject {
 	private String lastUpdatePerson;
 
 	public static final String activity_FIELDNAME = "activity";
-	@FieldDescribe("活动标识,可以为空,在给已完成工作添加附件时值为空.")
+	@FieldDescribe("활동 식별자, 비어 있을 수 있음, 완료된 업무 문서에 첨부파일 추가 시 비어 있음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activity;
 
 	public static final String activityName_FIELDNAME = "activityName";
-	@FieldDescribe("活动名称.")
+	@FieldDescribe("활동 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ activityName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityName_FIELDNAME)
@@ -360,7 +360,7 @@ public class Attachment extends StorageObject {
 	private String activityName;
 
 	public static final String activityType_FIELDNAME = "activityType";
-	@FieldDescribe("活动类型.")
+	@FieldDescribe("활동 유형.")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + activityType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityType_FIELDNAME)
@@ -368,46 +368,46 @@ public class Attachment extends StorageObject {
 	private ActivityType activityType;
 
 	public static final String activityToken_FIELDNAME = "activityToken";
-	@FieldDescribe("活动Token.")
+	@FieldDescribe("활동 Token.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activityToken_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityToken_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityToken;
 
 	public static final String completed_FIELDNAME = "completed";
-	@FieldDescribe("整个job是否已经完成.")
+	@FieldDescribe("전체 job 완료 여부.")
 	@Column(name = ColumnNamePrefix + completed_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean completed;
 
 	public static final String workCompleted_FIELDNAME = "workCompleted";
-	@FieldDescribe("工作ID.")
+	@FieldDescribe("업무 문서 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + workCompleted_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + workCompleted_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String workCompleted;
 
 	public static final String work_FIELDNAME = "work";
-	@FieldDescribe("已完成工作ID.")
+	@FieldDescribe("완료된 업무 문서 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + work_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + work_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String work;
 
 	public static final String site_FIELDNAME = "site";
-	@FieldDescribe("附件框分类.")
+	@FieldDescribe("첨부파일 상자 분류.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + site_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String site;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("根据流文件判断的文件类型.")
+	@FieldDescribe("스트림 파일로 판단한 파일 유형.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String type;
 
 	public static final String text_FIELDNAME = "text";
-	@FieldDescribe("文本.")
+	@FieldDescribe("텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_100M, name = ColumnNamePrefix + text_FIELDNAME)
@@ -415,7 +415,7 @@ public class Attachment extends StorageObject {
 	private String text;
 
 	public static final String readIdentityList_FIELDNAME = "readIdentityList";
-	@FieldDescribe("可以访问的身份.")
+	@FieldDescribe("접근 가능한 신분.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readIdentityList_FIELDNAME
@@ -427,7 +427,7 @@ public class Attachment extends StorageObject {
 	private List<String> readIdentityList;
 
 	public static final String readUnitList_FIELDNAME = "readUnitList";
-	@FieldDescribe("可以访问的组织.")
+	@FieldDescribe("접근 가능한 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readUnitList_FIELDNAME
@@ -439,7 +439,7 @@ public class Attachment extends StorageObject {
 	private List<String> readUnitList;
 
 	public static final String editIdentityList_FIELDNAME = "editIdentityList";
-	@FieldDescribe("可以修改的用户.")
+	@FieldDescribe("수정 가능한 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ editIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + editIdentityList_FIELDNAME
@@ -451,7 +451,7 @@ public class Attachment extends StorageObject {
 	private List<String> editIdentityList;
 
 	public static final String editUnitList_FIELDNAME = "editUnitList";
-	@FieldDescribe("可以修改的组织.")
+	@FieldDescribe("수정 가능한 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ editUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + editUnitList_FIELDNAME
@@ -463,7 +463,7 @@ public class Attachment extends StorageObject {
 	private List<String> editUnitList;
 
 	public static final String controllerIdentityList_FIELDNAME = "controllerIdentityList";
-	@FieldDescribe("可以管理的用户.")
+	@FieldDescribe("관리 가능한 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ controllerIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -475,7 +475,7 @@ public class Attachment extends StorageObject {
 	private List<String> controllerIdentityList;
 
 	public static final String controllerUnitList_FIELDNAME = "controllerUnitList";
-	@FieldDescribe("可以管理的组织.")
+	@FieldDescribe("관리 가능한 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ controllerUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -487,19 +487,19 @@ public class Attachment extends StorageObject {
 	private List<String> controllerUnitList;
 
 	public static final String deepPath_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
 	private Boolean deepPath;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String divisionList_FIELDNAME = "divisionList";
-	@FieldDescribe("分组.")
+	@FieldDescribe("그룹.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ divisionList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + divisionList_FIELDNAME
@@ -511,32 +511,32 @@ public class Attachment extends StorageObject {
 	private List<String> divisionList;
 
 	public static final String fromJob_FIELDNAME = "fromJob";
-	@FieldDescribe("附件拷贝来源任务，仅soft拷贝模式存储.")
+	@FieldDescribe("첨부파일 복사 원본 작업, soft 복사 모드에서만 저장.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + fromJob_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromJob;
 
 	public static final String fromId_FIELDNAME = "fromId";
-	@FieldDescribe("附件拷贝来源附件ID，仅soft拷贝模式存储.")
+	@FieldDescribe("첨부파일 복사 원본 첨부파일 ID, soft 복사 모드에서만 저장.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + fromId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fromId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromId;
 
 	public static final String fromPath_FIELDNAME = "fromPath";
-	@FieldDescribe("附件拷贝来源存储路径，仅soft拷贝模式存储.")
+	@FieldDescribe("첨부파일 복사 원본 저장 경로, soft 복사 모드에서만 저장.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + fromPath_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromPath;
 
 	public static final String businessId_FIELDNAME = "businessId";
-	@FieldDescribe("附件业务ID，需要和job一起来确定唯一的ID.")
+	@FieldDescribe("첨부파일 업무 ID, job과 함께 고유 ID 결정 필요.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + businessId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String businessId;
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)
@@ -544,7 +544,7 @@ public class Attachment extends StorageObject {
 	private AttachmentProperties properties;
 
 	public static final String stringValue01_FIELDNAME = "stringValue01";
-	@FieldDescribe("预留数据String值01.")
+	@FieldDescribe("예비 데이터 String 값 01.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -552,7 +552,7 @@ public class Attachment extends StorageObject {
 	private String stringValue01;
 
 	public static final String stringValue02_FIELDNAME = "stringValue02";
-	@FieldDescribe("预留数据String值02.")
+	@FieldDescribe("예비 데이터 String 값 02.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -560,7 +560,7 @@ public class Attachment extends StorageObject {
 	private String stringValue02;
 
 	public static final String stringValue03_FIELDNAME = "stringValue03";
-	@FieldDescribe("预留数据String值03.")
+	@FieldDescribe("예비 데이터 String 값 03.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue03_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue03_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -568,7 +568,7 @@ public class Attachment extends StorageObject {
 	private String stringValue03;
 
 	public static final String OBJECTSECURITYCLEARANCE_FIELDNAME = "objectSecurityClearance";
-	@FieldDescribe("客体密级标识.")
+	@FieldDescribe("객체 보안 등급 식별자.")
 	@Column(name = ColumnNamePrefix + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

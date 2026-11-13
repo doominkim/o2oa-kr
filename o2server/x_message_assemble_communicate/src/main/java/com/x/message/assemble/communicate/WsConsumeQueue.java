@@ -41,7 +41,7 @@ public class WsConsumeQueue extends AbstractQueue<Message> {
 			ws.setDescription(opt.get().getDescription());
 		}
 		boolean result = false;
-		/* 跳过第一条待办的提醒 */
+		/* 첫 번째 결재 대기 알림 건너뛰기 */
 		if (StringUtils.equalsIgnoreCase(ws.getType(), MessageConnector.TYPE_TASK_CREATE)
 				&& BooleanUtils.isTrue(XGsonBuilder.extractBoolean(jsonElement, TASK_FIRST))
 				&& StringUtils.equals(XGsonBuilder.extractString(jsonElement, WORKCREATETYPE), SURFACE)) {

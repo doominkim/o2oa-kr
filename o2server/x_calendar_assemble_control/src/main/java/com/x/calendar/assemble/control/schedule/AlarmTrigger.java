@@ -18,7 +18,7 @@ import com.x.calendar.assemble.control.service.Calendar_EventServiceAdv;
 import com.x.calendar.core.entity.Calendar_Event;
 
 /**
- * 查询需要提醒的日程或者事件，并且按要求发送提醒消息
+ * 알림이 필요한 일정 또는 이벤트를 조회하고 요구에 따라 알림 메시지 발송
  * 
  * @author O2LEE
  *
@@ -41,14 +41,14 @@ public class AlarmTrigger extends AbstractJob {
 	}
 
 	/**
-	 * 执行日程事件提醒 1、查询需要提醒的日程事件ID列表 2、发送消息
+	 * 일정 이벤트 알림 실행 1. 알림이 필요한 일정 이벤트 ID 목록 조회 2. 메시지 발송
 	 * 
 	 * @param business
 	 * @return
 	 * @throws Exception
 	 */
 	private boolean alarm(Business business) throws Exception {
-		// 1、查询需要提醒的日程事件ID列表 当前时间已经到达或者超过提醒时间，并且提醒标识为未提醒（false）
+		// 1. 알림이 필요한 일정 이벤트 ID 목록 조회: 현재 시간이 알림 시간에 도달했거나 지났고, 알림 표시가 미알림(false)인 것
 		List<String> ids = null;
 		Calendar_Event calendar_Event = null;
 		try {

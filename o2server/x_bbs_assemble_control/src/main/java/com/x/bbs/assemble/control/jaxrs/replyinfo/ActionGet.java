@@ -43,7 +43,7 @@ public class ActionGet extends BaseAction {
 				replyInfo = replyInfoService.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess( e, "根据指定ID查询回复信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionReplyInfoProcess( e, "지정한 ID로 댓글 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -54,7 +54,7 @@ public class ActionGet extends BaseAction {
 					wrap = Wo.copier.copy( replyInfo );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionReplyInfoProcess( e, "将查询结果转换成可以输出的数据信息时发生异常。" );
+					Exception exception = new ExceptionReplyInfoProcess( e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -84,10 +84,10 @@ public class ActionGet extends BaseAction {
 
 		public static WrapCopier< BBSReplyInfo, Wo > copier = WrapCopierFactory.wo( BBSReplyInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe( "创建人姓名" )
+		@FieldDescribe( "작성자 이름" )
 		private String creatorNameShort = "";
 
-		@FieldDescribe( "审核人姓名" )
+		@FieldDescribe( "심사자 이름" )
 		private String auditorNameShort = "";
 
 		public String getCreatorNameShort() {

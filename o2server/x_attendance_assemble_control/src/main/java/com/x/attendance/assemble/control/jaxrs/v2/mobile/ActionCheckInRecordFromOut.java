@@ -27,7 +27,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 来自外部的打卡记录，比如门禁系统 有可能同一个人一天有很多条数据进入，需要判断更新哪条考勤记录
+ * 외부 출처 체크 기록, 예: 출입 통제 시스템은 한 사람이 하루에 여러 건 들어올 수 있어 어느 근태 기록을 업데이트할지 판단 필요
  */
 public class ActionCheckInRecordFromOut extends BaseAction {
 
@@ -42,14 +42,14 @@ public class ActionCheckInRecordFromOut extends BaseAction {
             }
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getPerson())) {
-                throw new ExceptionEmptyParameter("用户标识");
+                throw new ExceptionEmptyParameter("사용자 식별자");
             }
             if (wi.getCheckInTime() == null) {
-                throw new ExceptionEmptyParameter("打卡时间");
+                throw new ExceptionEmptyParameter("체크 시간");
             }
             Person p = business.organization().person().getObject(wi.getPerson());
             if (p == null || StringUtils.isEmpty(p.getDistinguishedName())) {
-                throw new ExceptionNotExistObject("人员：" + wi.getPerson());
+                throw new ExceptionNotExistObject("인원: " + wi.getPerson());
             }
             Date checkInDate = null;
             try {
@@ -57,29 +57,29 @@ public class ActionCheckInRecordFromOut extends BaseAction {
             } catch (Exception ignore) {
             }
             if (checkInDate == null) {
-                throw new ExceptionWithMessage("日期格式不正确！");
+                throw new ExceptionWithMessage("날짜 형식이 올바르지 않습니다!");
             }
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("打卡日期：" + checkInDate);
+                LOGGER.debug("체크 날짜: " + checkInDate);
             }
             if (!isToday(checkInDate)) {
-                throw new ExceptionWithMessage("打卡日期"+DateTools.format(checkInDate)+"不是今天！");
+                throw new ExceptionWithMessage("체크 날짜"+DateTools.format(checkInDate)+"오늘이 아닙니다!");
             }
             WoGroupShift woGroupShift = business.getAttendanceV2ManagerFactory()
                     .getGroupShiftByPersonDate(p.getDistinguishedName(),
                             DateTools.format(checkInDate, DateTools.format_yyyyMMdd));
             if (woGroupShift == null || woGroupShift.getGroup() == null) {
-                throw new ExceptionNotExistObject("考勤组信息");
+                throw new ExceptionNotExistObject("근태 그룹 정보");
             }
 
-            // 同一人员同一天的预打卡生成串行化，其他人员可以并行处理。
+            // 같은 사용자·같은 날의 사전 체크 생성은 직렬화하고 다른 사용자는 병렬 처리 가능.
             String checkInDateString = DateTools.format(checkInDate, DateTools.format_yyyyMMdd);
             List<AttendanceV2CheckInRecord> recordList = executeWithCheckLock(
                     "pre:" + p.getDistinguishedName() + ":" + checkInDateString,
                     new CallableImpl(p.getDistinguishedName(), woGroupShift.getGroup(),
                             woGroupShift.getShift(), checkInDate));
             if (recordList == null || recordList.isEmpty()) {
-                throw new ExceptionNotExistObject("打卡记录");
+                throw new ExceptionNotExistObject("체크 기록");
             }
             AttendanceV2CheckInRecord record = recordList.stream()
                     .filter(r -> AttendanceV2CheckInRecord.CHECKIN_RESULT_PreCheckIn.equals(
@@ -97,7 +97,7 @@ public class ActionCheckInRecordFromOut extends BaseAction {
                 AttendanceV2CheckInRecord back = executeWithCheckLock("check:" + record.getId(),
                         new CheckInCallableImpl(checkInDate, record.getId(), CheckInWi.fromOutside(wi)));
                 if (BooleanUtils.isTrue(wi.getGenerateErrorInfo())) {
-                    // 异常数据
+                    // 이상 데이터
                     generateAppealInfo(back, woGroupShift.getGroup().getFieldWorkMarkError(), emc,
                             business);
                 }
@@ -107,7 +107,7 @@ public class ActionCheckInRecordFromOut extends BaseAction {
                 }
                 wo.setValue(true);
             } else {
-                LOGGER.warn("没有找到打卡记录！");
+                LOGGER.warn("체크 기록을 찾을 수 없습니다!");
                 wo.setValue(false);
             }
             result.setData(wo);
@@ -131,13 +131,13 @@ public class ActionCheckInRecordFromOut extends BaseAction {
 
 
         private static final long serialVersionUID = 3470655254449767419L;
-        @FieldDescribe("用户唯一标识")
+        @FieldDescribe("사용자 고유 식별자")
         private String person;
-        @FieldDescribe("打卡时间(Unix 时间戳)")
+        @FieldDescribe("체크 시간(Unix 타임스탬프)")
         private Long checkInTime;
-        @FieldDescribe("来源， 比如门禁系统")
+        @FieldDescribe("출처, 예: 출입 통제 시스템")
         private String source;
-        @FieldDescribe("是否生成异常数据")
+        @FieldDescribe("이상 데이터 생성 여부")
         private Boolean generateErrorInfo;
 
 

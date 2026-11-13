@@ -23,12 +23,12 @@ import com.x.bbs.assemble.control.jaxrs.foruminfo.exception.ExceptionForumInfoPr
 import com.x.bbs.assemble.control.service.bean.RoleAndPermission;
 
 @Path("login")
-@JaxrsDescribe("登入信息服务")
+@JaxrsDescribe("로그인 정보 서비스")
 public class LoginAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(LoginAction.class);
 
-	@JaxrsMethodDescribe(value = "用户进入系统，获取并且更新用户权限角色信息.", action = ActionLogin.class)
+	@JaxrsMethodDescribe(value = "사용자 시스템 진입, 사용자 권한 역할 정보 조회 및 갱신.", action = ActionLogin.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -42,7 +42,7 @@ public class LoginAction extends StandardJaxrsAction {
 				result = new ActionLogin().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionForumInfoProcess(e, "获取所有ForumInfo的信息列表时发生异常！");
+				Exception exception = new ExceptionForumInfoProcess(e, "전체 ForumInfo 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

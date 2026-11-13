@@ -1,10 +1,10 @@
 /*
- DOMElement管理类
+ DOMElement 관리 클래스
  var item = new MDomItem( containerNode, {
      name : "demo",
      type : "checkbox",
      selectValue: [opt1,opt2,opt3]
-     selectText : function( callback , options ){ //异步方法的写法，需要一个callback，并且把该option值传给callback执行,这个function不能bind
+     selectText : function( callback , options ){ //비동기 메서드 작성법, callback이 필요하며 이 option 값을 callback에 넘겨 실행, 이 function은 bind하면 안 됨
          this.app.actions.XXX( id, function( json ){
          var optText = [];
          ....
@@ -14,17 +14,17 @@
  value : function(){ var val = .... ; return val; }
  } , null, app, css);
  item.load();
- 外部方法：
- get( textOrValue ) 参数"text"或"value" 获取文本或值
- getValue() 获取值
- getText() 获取文本
- getModifiedValue() 获取修改过的值，如果没有修改过返回null
- getModifiedText() 获取修改过的文本，如果没有修改过返回null
- setValue() 设置对象的值
- resetType( type ) 修改类型
- resetItemOptions( selectValue[, selectText ]) 修改可选项，selectValue可项值,selectText可选文本
- dispose() 清空对象
- verify( isShowWarning ) 参数isShowWarning,校验不通过的是否提示用户。根据isShowWarning参数和options的notEmpty、warningType、validRule属性校验对象，返回boolean
+ 외부 메서드:
+ get( textOrValue ) 파라미터 "text" 또는 "value"로 텍스트 또는 값 조회
+ getValue() 값 조회
+ getText() 텍스트 조회
+ getModifiedValue() 수정된 값 조회, 수정되지 않았으면 null 반환
+ getModifiedText() 수정된 텍스트 조회, 수정되지 않았으면 null 반환
+ setValue() 객체 값 설정
+ resetType( type ) 유형 변경
+ resetItemOptions( selectValue[, selectText ]) 선택 항목 변경, selectValue는 선택 값, selectText는 선택 텍스트
+ dispose() 객체 비우기
+ verify( isShowWarning ) 파라미터 isShowWarning: 검증 실패 시 사용자에게 알릴지 여부. isShowWarning 파라미터와 options의 notEmpty, warningType, validRule 속성으로 객체를 검증하고 boolean 반환
  */
 
 //MWF.xDesktop.requireApp("Template", "lp." + MWF.language, null, false);
@@ -60,77 +60,77 @@ var MDomItem_ClassType = {
 var MDomItem = new Class({
     Implements: [Options, Events],
     options: {
-        name: "",		//生成的对象的name属性
+        name: "",		//생성된 객체의 name 속성
 
-        value: "",		//对象的值
-        text: "",		//对应的中文名称
-        type: "",  //可以为 text,innertext, radio,checkbox,select,multiselect,img,button,hidden,rtf,imageClipper, org, mSelector
+        value: "",		//객체의 값
+        text: "",		//대응하는 한국어 이름
+        type: "",  //text,innertext, radio,checkbox,select,multiselect,img,button,hidden,rtf,imageClipper, org, mSelector 가능
 
         isEdited: true,
 
-        tType: "", //type 为text时候有效，可以为 number,date,time, datetime,person、unit、identity,如果是组织混合选择用数组,如["person"、"unit"、"identity"]
+        tType: "", //type이 text일 때 유효, number,date,time, datetime,person, unit, identity 가능, 조직 혼합 선택이면 배열 사용, 예: ["person", "unit", "identity"]
 
-        orgType: "", //person、unit、identity, process， duty,如果是混合选择用数组，如["person"、"unit"、"identity"]
-        unitType: "", //如果orgType包含unit，则可以指定组织类型
-        count: 1, //如果是多选，多选的上限值，0表示无限制，默认为1,
-        units: [], //orgType 为 identity、unit时的，部门选择范围
-        groups: [], //orgType 为 person 时的选择访问
-        exclude: [], //选择时的排除项目
-        expandSubEnable: true, //orgType 为 identity、unit时是否展开下级选择范围
-        orgStyle: "", //显示类型，比如default, xform 等
+        orgType: "", //person, unit, identity, process, duty, 혼합 선택이면 배열 사용, 예: ["person", "unit", "identity"]
+        unitType: "", //orgType에 unit이 포함되면 조직 유형 지정 가능
+        count: 1, //다중 선택이면 다중 선택 상한값, 0은 제한 없음, 기본값 1,
+        units: [], //orgType이 identity, unit일 때의 부서 선택 범위
+        groups: [], //orgType이 person일 때의 선택 범위
+        exclude: [], //선택 시 제외 항목
+        expandSubEnable: true, //orgType이 identity, unit일 때 하위 선택 범위 펼치기 여부
+        orgStyle: "", //표시 유형, 예: default, xform 등
 
-        unsetDefaultEvent: false, //tType 或 orgType 有值时，是否取消默认事件
+        unsetDefaultEvent: false, //tType 또는 orgType에 값이 있을 때 기본 이벤트 취소 여부
 
-        //可以传入json 如 ：  { change : function(){alert("change " + this.name );}, click : function(){alert("click " + this.name)  } }
-        //或 字符串  ：                  "{ change : function(){alert('change ' + this.name );}, click : function(){alert('click ' + this.name)  } }"
-        //或字符串：                     "change^^function(){alert('change ' + this.name );##click^^function(obj){alert('click ' + this.name);}"
-        event: null,	//需要绑定的事件
+        //json 전달 가능, 예:  { change : function(){alert("change " + this.name );}, click : function(){alert("click " + this.name)  } }
+        //또는 문자열:                  "{ change : function(){alert('change ' + this.name );}, click : function(){alert('click ' + this.name)  } }"
+        //또는 문자열:                     "change^^function(){alert('change ' + this.name );##click^^function(obj){alert('click ' + this.name);}"
+        event: null,	//바인딩할 이벤트
 
-        selectValue: "",	//选择性控件的可选值
-        selectText: "",	//选择型控件的可选文本
-        defaultValue: "",	//默认值
-        className: "",		//类
-        style: {},			//样式
-        attr: {},	//其他参数， 比如 " {readonly : true, size : '20' }"
+        selectValue: "",	//선택형 컨트롤의 선택 값
+        selectText: "",	//선택형 컨트롤의 선택 텍스트
+        defaultValue: "",	//기본값
+        className: "",		//클래스
+        style: {},			//스타일
+        attr: {},	//기타 파라미터, 예: " {readonly : true, size : '20' }"
 
-        notEmpty: false, //是否允许为空，默认允许
-        defaultValueAsEmpty: false, //检查空值时，默认值是否为空，并且获取值得时候，如果是默认值，返回空值
-        emptyTip: null, //为空时的提示，可以不设置
+        notEmpty: false, //빈 값 허용 여부, 기본 허용
+        defaultValueAsEmpty: false, //빈 값 확인 시 기본값을 빈 값으로 볼지 여부, 값을 조회할 때 기본값이면 빈 값 반환
+        emptyTip: null, //빈 값일 때의 안내, 설정하지 않아도 됨
 
-        disable: false, //为false,则load失效;
+        disable: false, //false이면 load 무효;
 
-        //alert 或者 batch 或者 single，单个提醒或者批量提醒
+        //alert 또는 batch 또는 single, 단건 알림 또는 일괄 알림
         warningType: "batch",
 
         validImmediately: false,
 
-        //可以传入校验类型或自定义方法，如
+        //검증 유형 또는 사용자 정의 메서드 전달 가능, 예
         //{email : true , url : true, date : true, dateISO : true, number : true, digits : true,
         // maxlength:5, minlength:10, rangelength:[5,10], max:5, min:10 ,range:[5,10], extension: ["xls","xlsx"],fun : function(){ return true }
         // }
         validRule: null,
 
-        //validMessage和validRule对应，出错时提示的信息，如 {email : "请输入正确格式的电子邮件", fun : "请输入正确的密码"}，如果不设置，默认如下：
-        // {  email: "请输入正确格式的电子邮件",
-        // url: "请输入合法的网址",
-        // date: "请输入合法的日期",
-        // dateISO: "请输入合法的日期 (ISO).",
-        // number: "请输入合法的数字",
-        // digits: "只能输入整数",
-        // maxlength: this.format("请输入一个 长度最多是 {0} 的字符串"),
-        // minlength: this.format("请输入一个 长度最少是 {0} 的字符串"),
-        // rangelength: this.format("请输入 一个长度介于 {0} 和 {1} 之间的字符串"),
-        // range: this.format("请输入一个介于 {0} 和 {1} 之间的值"),
-        // max: this.format("请输入一个最大为{0} 的值"),
-        // min: this.format("请输入一个最小为{0} 的值"),
-        // fun : "请输入正确的"+ this.options.text
+        //validMessage는 validRule에 대응하며 오류 시 표시할 메시지, 예 {email : "올바른 형식의 이메일을 입력하십시오", fun : "올바른 비밀번호를 입력하십시오"}, 설정하지 않으면 기본값은 다음과 같음:
+        // {  email: "올바른 형식의 이메일을 입력하십시오",
+        // url: "올바른 웹 주소를 입력하십시오",
+        // date: "올바른 날짜를 입력하십시오",
+        // dateISO: "올바른 날짜를 입력하십시오 (ISO).",
+        // number: "올바른 숫자를 입력하십시오",
+        // digits: "정수만 입력할 수 있습니다",
+        // maxlength: this.format("최대 {0}자까지 입력하십시오"),
+        // minlength: this.format("최소 {0}자 이상 입력하십시오"),
+        // rangelength: this.format("{0}자에서 {1}자 사이로 입력하십시오"),
+        // range: this.format("{0}에서 {1} 사이의 값을 입력하십시오"),
+        // max: this.format("{0} 이하의 값을 입력하십시오"),
+        // min: this.format("{0} 이상의 값을 입력하십시오"),
+        // fun : "올바른 값을 입력하십시오: "+ this.options.text
         // }
         validMessage: null,
 
-        RTFConfig: null, //CKEditor 的设置项
-        mSelectorOptions: null, //自定义下拉组件设置项
-        calendarOptions: null, //日期选择器的设置项
-        orgWidgetOptions: null, //org组件的选项
+        RTFConfig: null, //CKEditor 설정 항목
+        mSelectorOptions: null, //사용자 정의 드롭다운 컴포넌트 설정 항목
+        calendarOptions: null, //날짜 선택기 설정 항목
+        orgWidgetOptions: null, //org 컴포넌트 옵션
         orgOptions: null
     },
     initialize: function (container, options, parent, app, css) {
@@ -145,15 +145,15 @@ var MDomItem = new Class({
             this._loadCss();
         }
 
-        //for(var o in options ){	//允许使用 function 来计算设置, on开头的属性被留作 fireEvent
+        //for(var o in options ){	//function으로 설정 계산 허용, on으로 시작하는 속성은 fireEvent용으로 예약
         //    if( o !== "validRule" && o!=="validMessage" && o.substr(0,2)!=="on" && typeOf( options[o] )=== "function" ){
         //        options[o] = options[o].call();
         //    }
         //}
         //this.setOptions(options);
 
-        this.valSeparator = /,|;|\^\^|\|/; //如果是多值对象，作为用户选择的多个值的分隔符
-        this.mElement = this.container;	//容器
+        this.valSeparator = /,|;|\^\^|\|/; //다중 값 객체이면 사용자가 선택한 여러 값의 구분자
+        this.mElement = this.container;	//컨테이너
         this.node = this.container;
         this.items = [];
         this.optionFuns = {};
@@ -170,7 +170,7 @@ var MDomItem = new Class({
             this.optionsReady = true;
             this.setOptions(options);
             if(isSync){
-                if (this.loadFunctionCalled) { //如果外部程序已经执行过load，但是由于options没有设置完成而中断，需要再调用一下load
+                if (this.loadFunctionCalled) { //외부 프로그램이 이미 load를 실행했지만 options 설정이 끝나지 않아 중단되었다면 load를 다시 호출해야 함
                     this.load();
                 }
             }
@@ -216,35 +216,35 @@ var MDomItem = new Class({
             }
         }
     },
-    // setOptionList : function( options ){  //目的是使用options里的function异步方法通过 function(callback){ ...获取value; callback( value );  } 来回调设置option
+    // setOptionList : function( options ){  //options의 function 비동기 메서드로 function(callback){ ...value 조회; callback( value );  } 형태의 콜백으로 option을 설정하기 위함
     //     var callbackNameList = [];
-    //     for(var o in options ){	//允许使用 function 来计算设置, on开头的属性被留作 fireEvent
+    //     for(var o in options ){	//function으로 설정 계산 허용, on으로 시작하는 속성은 fireEvent용으로 예약
     //         if( o !== "validRule" && o!=="validMessage" && o.substr(0,2)!=="on" && typeOf( options[o] )== "function" ){
     //             var fun = options[o];
-    //             if( fun.length && /\(\s*([\s\S]*?)\s*\)/.exec(fun)[1].split(/\s*,\s*/)[0] == "callback" ){ //如果有行参(fun.length!==0),并且第一形参是callback，注意，funciont不能bind(this),否则不能判断
+    //             if( fun.length && /\(\s*([\s\S]*?)\s*\)/.exec(fun)[1].split(/\s*,\s*/)[0] == "callback" ){ //형식 파라미터가 있고(fun.length!==0) 첫 번째 형식 파라미터가 callback인 경우, 주의: funciont는 bind(this)하면 안 됨, 그렇지 않으면 판단 불가
     //                 callbackNameList.push( o );
     //             }else{
-    //                 options[o] = fun( options, this ); //执行fun
+    //                 options[o] = fun( options, this ); //fun 실행
     //             }
     //         }
     //     }
-    //     this.setFunOption( options, callbackNameList, true ); //递归执行回调设置options
+    //     this.setFunOption( options, callbackNameList, true ); //콜백을 재귀 실행하여 options 설정
     // },
     // setFunOption : function( options, callbackNameList, isFirst ){
     //     this.optionsReady = false;
     //     if( callbackNameList.length == 0 ){
     //         this.setOptions( options );
     //         this.optionsReady = true;
-    //         if( this.loadFunctionCalled ){ //如果外部程序已经执行过load，但是由于options没有设置完成而中断，需要再调用一下load
+    //         if( this.loadFunctionCalled ){ //외부 프로그램이 이미 load를 실행했지만 options 설정이 끝나지 않아 중단되었다면 load를 다시 호출해야 함
     //             this.load();
     //         }
     //     }else{
-    //         if( isFirst )options = Object.merge( {}, options ); //避免外部程序对options的修改
-    //         var name = callbackNameList.shift(); //返回第一个元素，然后在callbackNameList删除第一元素
-    //         var fun = options[name];  //对应的参数，是一个function
-    //         fun( function( val ){  //执行function
-    //             options[name] = val; //在回调内部给option赋值
-    //             this.setFunOption( options, callbackNameList, false );  //继续执行下一个回调
+    //         if( isFirst )options = Object.merge( {}, options ); //외부 프로그램의 options 수정 방지
+    //         var name = callbackNameList.shift(); //첫 번째 요소를 반환하고 callbackNameList에서 첫 번째 요소 삭제
+    //         var fun = options[name];  //대응하는 파라미터, function임
+    //         fun( function( val ){  //function 실행
+    //             options[name] = val; //콜백 내부에서 option에 값 할당
+    //             this.setFunOption( options, callbackNameList, false );  //다음 콜백 계속 실행
     //         }.bind(this), options );
     //     }
     // },
@@ -262,7 +262,7 @@ var MDomItem = new Class({
         this.load();
     },
     load: function () {
-        if (!this.optionsReady) { //如果options没有设置完成
+        if (!this.optionsReady) { //options 설정이 끝나지 않은 경우
             this.loadFunctionCalled = true;
             return;
         }
@@ -303,7 +303,7 @@ var MDomItem = new Class({
     },
     getLabelLength: function (label){
         if (label && label.length < 4) {
-            if (/^[\u4e00-\u9fa5]+$/.test(label)) { //全汉字
+            if (/^[\u4e00-\u9fa5]+$/.test(label)) { //전체 한자
                 return label.length;
             }
         }
@@ -354,7 +354,7 @@ var MDomItem = new Class({
         }
         return this.container;
     },
-    get: function (vort) {	//value 和 text
+    get: function (vort) {	//value와 text
         if (this.options.disable) {
             return {
                 text: "",
@@ -835,7 +835,7 @@ MDomItem.Util = {
         }
     },
     _selectCustom: function (container, options, callback) {
-        MWF.xDesktop.requireApp("Template", "Selector.Custom", null, false); //加载资源
+        MWF.xDesktop.requireApp("Template", "Selector.Custom", null, false); //리소스 로드
 
         var opt = {
             "title": options.title,
@@ -844,18 +844,18 @@ MDomItem.Util = {
             "expand": typeOf(options.expand) === "boolean" ? options.expand : true,
             "exclude": options.exclude || [],
             "expandSubEnable": typeOf(options.expandSubEnable) === "boolean" ? options.expandSubEnable : true,
-            "hasLetter": false, //是否点击字母搜索
-            "hasTop": false, //可选、已选的标题
-            // "level1Indent": 0, //第一层的缩进
-            // "indent": 36, //第二层及以上的缩进
-            "selectAllEnable": true, //是否允许多选，如果分类可以被选中，blue_flat样式下失效
-            "width": "700px", //选中框宽度
-            "height": "550px", //选中框高度
-            "category": true, //按分类选择
-            "noSelectedContainer": false, //是否隐藏右侧已选区域
-            "categorySelectable": false, //分类是否可以被选择，如果可以被选择那么执行的是item的事件
-            "uniqueFlag": "id", //项目匹配（是否选中）关键字
-            "defaultExpandLevel": 1, //默认展开项目，0表示折叠所有分类
+            "hasLetter": false, //문자 클릭 검색 여부
+            "hasTop": false, //선택 가능, 선택됨 제목
+            // "level1Indent": 0, //첫 번째 레벨 들여쓰기
+            // "indent": 36, //두 번째 레벨 이상의 들여쓰기
+            "selectAllEnable": true, //다중 선택 허용 여부, 분류를 선택할 수 있으면 blue_flat 스타일에서는 무효
+            "width": "700px", //선택 상자 너비
+            "height": "550px", //선택 상자 높이
+            "category": true, //분류별 선택
+            "noSelectedContainer": false, //오른쪽 선택 영역 숨김 여부
+            "categorySelectable": false, //분류 선택 가능 여부, 선택 가능하면 item의 이벤트 실행
+            "uniqueFlag": "id", //항목 매칭(선택 여부) 키워드
+            "defaultExpandLevel": 1, //기본 펼침 항목, 0은 모든 분류 접기
             "onComplete": function (array) {
                 if (callback) callback(array);
             }.bind(this)
@@ -931,10 +931,10 @@ MDomItem.Util = {
                 for (var i = 0; i < eventsArr.length; i++) {
                     var ename = eventsArr[i].split("^^")[0];
                     var efunction = eventsArr[i].split("^^")[1];
-                    events[ename] = eval("(function(){ return " + efunction + " })()");  //字符串变对象或function，方法1
+                    events[ename] = eval("(function(){ return " + efunction + " })()");  //문자열을 객체 또는 function으로 변환, 방법 1
                 }
             } else {
-                //字符串变对象或function，方法2
+                //문자열을 객체 또는 function으로 변환, 방법 2
                 eval("var events = " + events);
             }
         }
@@ -945,21 +945,21 @@ MDomItem.Util = {
         if (typeOf(events) === "object") {
 
             for (var e in events) {
-                //jquery的写法
+                //jquery 방식
                 //item.bind( e, { fun : events[e] }, function( event ){
-                //this 是触发事件的对象，self是当前jDomItem对象
+                //this는 이벤트를 발생시킨 객체, self는 현재 jDomItem 객체
                 //event.data.fun.call( this, _self );
                 //})
 
-                //方法固定，把参数作为this指正传给方法，需要在方法体里通过this获取参数
+                //메서드 고정, 파라미터를 this 포인터로 메서드에 전달하므로 메서드 본문에서 this로 파라미터 조회 필요
                 //item.addEvent( e, events[e].bind({"item": item, "_self":_self}));
 
-                //参数固定，把方法传入到function中，可以在回调方法中直接获取，和jquery的写法一样
+                //파라미터 고정, 메서드를 function에 전달하여 콜백 메서드에서 바로 조회 가능, jquery 방식과 동일
                 item.addEvent(e, function (ev) {
                     this.fun.call(ev ? ev.target : null, obj.module || obj, ev);
                 }.bind({fun: events[e]}));
 
-                //不一定行
+                //동작하지 않을 수 있음
                 //item.addEvent( e, (function(){
                 //	return function(){
                 //		events[e].call(item,_self);
@@ -971,7 +971,7 @@ MDomItem.Util = {
             //                if( type && (e==="dblclick" || e==="click") ){
             //                    if( jQuery.inArray( type , this.unsetClassType) === -1 ){
             //                        if( !item.attr("title") || item.attr("title") === "" ){
-            //                            item.attr( "title", e==="dblclick" ? "双击选择"+this.options.text : "单击选择"+this.options.text );
+            //                            item.attr( "title", e==="dblclick" ? "더블클릭하여 선택: "+this.options.text : "클릭하여 선택: "+this.options.text );
             //                        }
             //                        item.removeClass("inputtext").addClass("inputclick");
             //                        break;
@@ -1055,7 +1055,7 @@ MDomItem.Text = new Class({
         if (parent) item.inject(parent);
         this.items.push(item);
     },
-    get: function (vort) {	//value 和 text 或 空
+    get: function (vort) {	//value와 text 또는 빈 값
         if (this.options.disable) {
             return (vort === "value" || vort === "text") ? null : {
                 value: null,
@@ -2650,7 +2650,7 @@ MDomItem.MSelector = new Class({
             "trigger": "delay", //immediately
             "isSetSelectedValue": true,
             "inputEnable": false,
-            "isCreateReadNode": false, //适应给MDomItem的做法
+            "isCreateReadNode": false, //MDomItem 방식에 맞춤
 
             "textField": "",
             "valueField": "",
@@ -2967,22 +2967,22 @@ MDomItem.Rtf = new Class({
                     a: function(element) {
                         var href = element.attributes.href;
                         if (href) {
-                            // 正则匹配：以javascript:开头（不区分大小写）
+                            // 정규식 매칭: javascript:로 시작(대소문자 구분 없음)
                             var jsProtocolReg = /^javascript:/i;
                             if (jsProtocolReg.test(href)) {
-                                delete element.attributes.href; // 移除危险href属性
-                                // 若需更严格，可直接移除<a>标签：element.remove();
+                                delete element.attributes.href; // 위험한 href 속성 제거
+                                // 더 엄격하게 하려면 <a> 태그를 바로 제거: element.remove();
                             }
                         }
                     }
                 });
 
-                // 额外处理：源码模式下的内容过滤（可选，增强防护）
+                // 추가 처리: 소스 모드에서의 내용 필터링(선택, 방어 강화)
                 e.editor.on('beforeSetData', function(evt) {
                     evt.data.dataValue = evt.data.dataValue.replace(
                         /<a\s+[^>]*href\s*=\s*(["']?)javascript:.*?\1[^>]*>/gi,
                         function(match) {
-                            // 移除href属性或修改标签内容
+                            // href 속성 제거 또는 태그 내용 수정
                             return match.replace(/href\s*=\s*(["']?)javascript:.*?\1/gi, '');
                         }
                     );
@@ -3464,8 +3464,8 @@ MDomItem.Org = new Class({
         }.bind(this));
     },
     removeOrgItem: function (widget, ev) {
-        //this 是 MWF.widget.O2Identity 之类的对象
-        var _self = this.field; //这个才是MDomItem 对象
+        //this는 MWF.widget.O2Identity 같은 객체
+        var _self = this.field; //이것이 MDomItem 객체
         var dn = widget.data.distinguishedName || widget.data.name;
         var data = [];
         var index;
@@ -3653,7 +3653,7 @@ MDomItem.OOInput = new Class({
                 const o = {
                     valueMissing: this.getErrorText()
                 };
-                //通过 e.detail 获取 验证有效性状态对象：ValidityState
+                //e.detail로 유효성 상태 객체 ValidityState 조회
                 for (const k in o){
                     if (e.detail[k]){
                         if (o[k]){

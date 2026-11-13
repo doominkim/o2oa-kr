@@ -148,7 +148,7 @@
 //                em = business.entityManagerContainer().get(cls);
 //            }
 //            jpql = joinSql(jpql, wi, business);
-//            LOGGER.info("执行的sql：{}", jpql::toString);
+//            LOGGER.info("실행한 sql: {}", jpql::toString);
 //            Query query;
 //            String upJpql = jpql.toUpperCase();
 //            if (upJpql.indexOf(JOIN_KEY) > -1 && upJpql.indexOf(JOIN_ON_KEY) > -1) {
@@ -203,7 +203,7 @@
 //                jpql = statement.getCountData();
 //            }
 //            jpql = joinSql(jpql, wi, business);
-//            LOGGER.info("执行的sql：{}", jpql::toString);
+//            LOGGER.info("실행한 sql: {}", jpql::toString);
 //            Query query;
 //            String upJpql = jpql.toUpperCase();
 //            if (upJpql.indexOf(JOIN_KEY) > -1 && upJpql.indexOf(JOIN_ON_KEY) > -1) {
@@ -389,12 +389,12 @@
 //    }
 //
 //    public static class Wi extends GsonPropertyObject {
-//        @FieldDescribe("过滤")
-//        @FieldTypeDescribe(fieldType = "class", fieldTypeName = "com.x.query.core.express.plan.FilterEntry", fieldValue = "{\"logic\": \"and\", \"path\": \"o.name\", \"comparison\": \"equals\", \"value\": \"name\", \"formatType\": \"textValue\"}", fieldSample = "{\"logic\":\"逻辑运算:and\",\"path\":\"data数据的路径:o.title\",\"comparison\":\"比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo\","
-//                + "\"value\":\"7月\",\"formatType\":\"textValue|numberValue|dateTimeValue|booleanValue\"}")
+//        @FieldDescribe("필터")
+//        @FieldTypeDescribe(fieldType = "class", fieldTypeName = "com.x.query.core.express.plan.FilterEntry", fieldValue = "{\"logic\": \"and\", \"path\": \"o.name\", \"comparison\": \"equals\", \"value\": \"name\", \"formatType\": \"textValue\"}", fieldSample = "{\"logic\":\"논리 연산:and\",\"path\":\"data 데이터 경로:o.title\",\"comparison\":\"비교 연산자:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo\","
+//                + "\"value\":\"7월\",\"formatType\":\"textValue|numberValue|dateTimeValue|booleanValue\"}")
 //        private List<FilterEntry> filterList = new TreeList<>();
 //
-//        @FieldDescribe("参数")
+//        @FieldDescribe("매개변수")
 //        private JsonElement parameter;
 //
 //        public List<FilterEntry> getFilterList() {

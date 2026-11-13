@@ -26,13 +26,13 @@ public class ReadCompletedAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ActionDelete.class);
 
-	@JaxrsMethodDescribe(value = "删除已阅.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "열람 완료 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("待阅标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("열람 대기 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

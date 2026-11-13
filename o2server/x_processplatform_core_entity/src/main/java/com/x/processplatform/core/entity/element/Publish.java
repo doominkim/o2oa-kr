@@ -24,7 +24,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Schema(name = "Publish", description = "流程平台数据发布.")
+@Schema(name = "Publish", description = "프로세스 플랫폼 데이터 게시.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Publish.table, uniqueConstraints = {
@@ -50,12 +50,12 @@ public class Publish extends Activity {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -113,50 +113,50 @@ public class Publish extends Activity {
 		this.getProperties().setCustomData(customData);
 	}
 
-	@FieldDescribe("分组")
+	@FieldDescribe("그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + group_FIELDNAME)
 	private String group;
 
-	@FieldDescribe("意见分组")
+	@FieldDescribe("의견 그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + opinionGroup_FIELDNAME)
 	private String opinionGroup;
 
-	@FieldDescribe("节点名称.")
+	@FieldDescribe("노드 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String name;
 
 	@Flag
-	@FieldDescribe("节点别名.")
+	@FieldDescribe("노드 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String alias;
 
-	@FieldDescribe("节点唯一标识")
+	@FieldDescribe("노드 고유 식별자")
 	@Column(length = length_64B, name = ColumnNamePrefix + unique_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String unique = createId();
 
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	@IdReference(Process.class)
-	@FieldDescribe("流程标识,不为空.")
+	@FieldDescribe("프로세스 식별자, 비어 있을 수 없음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
-	@FieldDescribe("节点位置.")
+	@FieldDescribe("노드 위치.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + position_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String position;
 
-	@FieldDescribe("前端自定内容.")
+	@FieldDescribe("프런트엔드 사용자 정의 내용.")
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + extension_FIELDNAME)
 	@Basic(fetch = FetchType.EAGER)
 	@Lob
@@ -164,13 +164,13 @@ public class Publish extends Activity {
 	private String extension;
 
 	@IdReference(Form.class)
-	@FieldDescribe("节点使用的表单.")
+	@FieldDescribe("노드에서 사용하는 양식.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + form_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + form_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String form;
 
-	@FieldDescribe("待阅人名称,存储 Identity,多值.")
+	@FieldDescribe("열람 대기자 이름, Identity 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readIdentityList_FIELDNAME
@@ -181,7 +181,7 @@ public class Publish extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readIdentityList;
 
-	@FieldDescribe("待阅组织名称,存储unit,多值.")
+	@FieldDescribe("열람 대기 조직 이름, unit 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readUnitList_FIELDNAME
@@ -192,7 +192,7 @@ public class Publish extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readUnitList;
 
-	@FieldDescribe("待阅群组名称,存储group,多值.")
+	@FieldDescribe("열람 대기 그룹 이름, group 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readGroupList_FIELDNAME
@@ -204,26 +204,26 @@ public class Publish extends Activity {
 	private List<String> readGroupList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("待阅人脚本.")
+	@FieldDescribe("열람 대기자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + readScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readScript;
 
-	@FieldDescribe("待阅人脚本文本.")
+	@FieldDescribe("열람 대기자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + readScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readScriptText;
 
-	@FieldDescribe("待阅角色定义内容.")
+	@FieldDescribe("열람 대기 역할 정의 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + readDuty_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readDuty;
 
-	@FieldDescribe("活动待阅人员data数据路径.")
+	@FieldDescribe("활동 열람 대기 사용자 data 데이터 경로.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ readDataPathList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + readDataPathList_FIELDNAME
@@ -234,7 +234,7 @@ public class Publish extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> readDataPathList;
 
-	@FieldDescribe("参与人名称,多值.")
+	@FieldDescribe("참여자 이름, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -245,7 +245,7 @@ public class Publish extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> reviewIdentityList;
 
-	@FieldDescribe("参与人组织名称,多值.")
+	@FieldDescribe("참여자 조직 이름, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + reviewUnitList_FIELDNAME
@@ -256,7 +256,7 @@ public class Publish extends Activity {
 	@CheckPersist(allowEmpty = true)
 	private List<String> reviewUnitList;
 
-	@FieldDescribe("参与人群组名称,存储group,多值.")
+	@FieldDescribe("참여자 그룹 이름, group 저장, 다중 값.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + reviewGroupList_FIELDNAME
@@ -268,26 +268,26 @@ public class Publish extends Activity {
 	private List<String> reviewGroupList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("参与人脚本.")
+	@FieldDescribe("참여자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + reviewScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewScript;
 
-	@FieldDescribe("参与人脚本文本.")
+	@FieldDescribe("참여자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + reviewScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewScriptText;
 
-	@FieldDescribe("参阅角色定义内容.")
+	@FieldDescribe("참조 열람 역할 정의 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + reviewDuty_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String reviewDuty;
 
-	@FieldDescribe("参阅人员data数据路径.")
+	@FieldDescribe("참조 열람 사용자 data 데이터 경로.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ reviewDataPathList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -299,12 +299,12 @@ public class Publish extends Activity {
 	private List<String> reviewDataPathList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动到达前事件脚本.")
+	@FieldDescribe("활동 도착 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeArriveScript;
 
-	@FieldDescribe("活动到达前事件脚本文本.")
+	@FieldDescribe("활동 도착 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeArriveScriptText_FIELDNAME)
@@ -312,12 +312,12 @@ public class Publish extends Activity {
 	private String beforeArriveScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动到达后事件脚本.")
+	@FieldDescribe("활동 도착 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterArriveScript;
 
-	@FieldDescribe("活动到达后事件脚本文本.")
+	@FieldDescribe("활동 도착 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterArriveScriptText_FIELDNAME)
@@ -325,12 +325,12 @@ public class Publish extends Activity {
 	private String afterArriveScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动执行前事件脚本.")
+	@FieldDescribe("활동 실행 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeExecuteScript;
 
-	@FieldDescribe("活动执行前事件脚本文本.")
+	@FieldDescribe("활동 실행 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeExecuteScriptText_FIELDNAME)
@@ -338,12 +338,12 @@ public class Publish extends Activity {
 	private String beforeExecuteScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("活动执行后事件脚本.")
+	@FieldDescribe("활동 실행 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterExecuteScript;
 
-	@FieldDescribe("活动执行后事件脚本文本.")
+	@FieldDescribe("활동 실행 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterExecuteScriptText_FIELDNAME)
@@ -351,12 +351,12 @@ public class Publish extends Activity {
 	private String afterExecuteScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("路由查询前事件脚本.")
+	@FieldDescribe("경로 조회 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeInquireScript;
 
-	@FieldDescribe("路由查询前事件脚本文本.")
+	@FieldDescribe("경로 조회 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeInquireScriptText_FIELDNAME)
@@ -364,80 +364,80 @@ public class Publish extends Activity {
 	private String beforeInquireScriptText;
 
 	@IdReference(Script.class)
-	@FieldDescribe("路由查询后事件脚本.")
+	@FieldDescribe("경로 조회 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterInquireScript;
 
-	@FieldDescribe("路由查询后事件脚本文本.")
+	@FieldDescribe("경로 조회 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterInquireScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterInquireScriptText;
 
-	@FieldDescribe("允许调度")
+	@FieldDescribe("스케줄링 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowReroute_FIELDNAME)
 	private Boolean allowReroute;
 
-	@FieldDescribe("允许调度到此节点")
+	@FieldDescribe("이 노드로의 스케줄링 허용")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + allowRerouteTo_FIELDNAME)
 	private Boolean allowRerouteTo;
 
 	public static final String route_FIELDNAME = "route";
 	@IdReference(Route.class)
-	@FieldDescribe("出口路由.")
+	@FieldDescribe("출구 경로.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + route_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String route;
 
 	public static final String publishTarget_FIELDNAME = "publishTarget";
-	@FieldDescribe("发布目标：cms|table")
+	@FieldDescribe("게시 대상: cms|table")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + publishTarget_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String publishTarget;
 
 	public static final String categorySelectType_FIELDNAME = "categorySelectType";
-	@FieldDescribe("内容管理分类来源：categoryId|dataPath")
+	@FieldDescribe("콘텐츠 관리 분류 출처: categoryId|dataPath")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + categorySelectType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categorySelectType;
 
 	public static final String categoryId_FIELDNAME = "categoryId";
-	@FieldDescribe("内容管理分类ID")
+	@FieldDescribe("콘텐츠 관리 분류 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + categoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryId;
 
 	public static final String categoryIdDataPath_FIELDNAME = "categoryIdDataPath";
-	@FieldDescribe("内容管理分类ID数据路径")
+	@FieldDescribe("콘텐츠 관리 분류 ID 데이터 경로")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + categoryIdDataPath_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryIdDataPath;
 
 	public static final String useProcessForm_FIELDNAME = "useProcessForm";
-	@FieldDescribe("是否使用流程表.")
+	@FieldDescribe("프로세스 테이블 사용 여부.")
 	@Column(name = ColumnNamePrefix + useProcessForm_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean useProcessForm;
 
 	public static final String inheritAttachment_FIELDNAME = "inheritAttachment";
-	@FieldDescribe("是否拷贝附件.")
+	@FieldDescribe("첨부파일 복사 여부.")
 	@Column(name = ColumnNamePrefix + inheritAttachment_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean inheritAttachment;
 
 	public static final String cmsCreatorIdentity_FIELDNAME = "cmsCreatorIdentity";
-	@FieldDescribe("内容管理文档创建者身份.")
+	@FieldDescribe("콘텐츠 관리 문서 작성자 신분.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ cmsCreatorIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cmsCreatorIdentity;
 
 	public static final String publishCmsCreatorType_FIELDNAME = "publishCmsCreatorType";
-	@FieldDescribe("内容管理文档创建者来源类型:creator, identity, lastIdentity")
+	@FieldDescribe("콘텐츠 관리 문서 작성자 출처 유형: creator, identity, lastIdentity")
 	@Enumerated(EnumType.STRING)
 	@Column(length = PublishCmsCreatorType.length, name = ColumnNamePrefix + publishCmsCreatorType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -445,13 +445,13 @@ public class Publish extends Activity {
 
 	public static final String cmsCreatorScript_FIELDNAME = "cmsCreatorScript";
 	@IdReference(Script.class)
-	@FieldDescribe("内容管理文档创建者脚本.")
+	@FieldDescribe("콘텐츠 관리 문서 작성자 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + cmsCreatorScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cmsCreatorScript;
 
 	public static final String cmsCreatorScriptText_FIELDNAME = "cmsCreatorScriptText";
-	@FieldDescribe("内容管理文档创建者脚本文本.")
+	@FieldDescribe("콘텐츠 관리 문서 작성자 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + cmsCreatorScriptText_FIELDNAME)
@@ -459,62 +459,62 @@ public class Publish extends Activity {
 	private String cmsCreatorScriptText;
 
 	public static final String titleDataPath_FIELDNAME = "titleDataPath";
-	@FieldDescribe("内容管理文档标题数据路径")
+	@FieldDescribe("콘텐츠 관리 문서 제목 데이터 경로")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + titleDataPath_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String titleDataPath;
 
 	public static final String readerDataPathList_FIELDNAME = "readerDataPathList";
-	@FieldDescribe("内容管理文档读者数据路径(多值逗号隔开)")
+	@FieldDescribe("콘텐츠 관리 문서 독자 데이터 경로(다중 값 쉼표 구분)")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + readerDataPathList_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readerDataPathList;
 
 	public static final String authorDataPathList_FIELDNAME = "authorDataPathList";
-	@FieldDescribe("内容管理文档作者数据路径(多值逗号隔开)")
+	@FieldDescribe("콘텐츠 관리 문서 작성자 데이터 경로(다중 값 쉼표 구분)")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + authorDataPathList_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String authorDataPathList;
 
 	public static final String pictureDataPathList_FIELDNAME = "pictureDataPathList";
-	@FieldDescribe("内容管理文档首页图片数据路径(多值逗号隔开)")
+	@FieldDescribe("콘텐츠 관리 문서 대표 이미지 데이터 경로(다중 값 쉼표 구분)")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + pictureDataPathList_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String pictureDataPathList;
 
 	public static final String notifyDataPathList_FIELDNAME = "notifyDataPathList";
-	@FieldDescribe("内容管理文档消息推送范围数据路径(多值逗号隔开)")
+	@FieldDescribe("콘텐츠 관리 문서 메시지 푸시 범위 데이터 경로(다중 값 쉼표 구분)")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + notifyDataPathList_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String notifyDataPathList;
 
 	public static final String targetAssignDataScript_FIELDNAME = "targetAssignDataScript";
 	@IdReference(Script.class)
-	@FieldDescribe("内容管理数据脚本.")
+	@FieldDescribe("콘텐츠 관리 데이터 스크립트.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ targetAssignDataScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String targetAssignDataScript;
 
 	public static final String targetAssignDataScriptText_FIELDNAME = "targetAssignDataScriptText";
-	@FieldDescribe("内容管理数据脚本文本.")
+	@FieldDescribe("콘텐츠 관리 데이터 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + targetAssignDataScriptText_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String targetAssignDataScriptText;
 
-	@FieldDescribe("发布的数据表")
+	@FieldDescribe("게시할 데이터 테이블")
 	@Transient
 	private List<PublishTable> publishTableList;
 
 	@IdReference(Script.class)
-	@FieldDescribe("生成displayLog脚本.")
+	@FieldDescribe("displayLog 생성 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + displayLogScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String displayLogScript;
 
-	@FieldDescribe("生成displayLog脚本文本.")
+	@FieldDescribe("displayLog 생성 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + displayLogScriptText_FIELDNAME)
@@ -522,12 +522,12 @@ public class Publish extends Activity {
 	private String displayLogScriptText;
 
 	public static final String edition_FIELDNAME = "edition";
-	@FieldDescribe("版本编码.")
+	@FieldDescribe("버전 코드.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + edition_FIELDNAME)
 	private String edition;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)

@@ -35,13 +35,13 @@ public class RouteAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(RouteAction.class);
 
-	@JaxrsMethodDescribe(value = "获取路由.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "경로 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -53,7 +53,7 @@ public class RouteAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量获取路由.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "경로 일괄 조회.", action = ActionList.class)
 	@PUT
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -89,13 +89,13 @@ public class RouteAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取选择人员配置.", action = ActionGetSelectConfig.class)
+	@JaxrsMethodDescribe(value = "사용자 선택 설정 조회.", action = ActionGetSelectConfig.class)
 	@GET
 	@Path("{id}/selectconfig")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getSelectConfig(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("任务标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("작업 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGetSelectConfig.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

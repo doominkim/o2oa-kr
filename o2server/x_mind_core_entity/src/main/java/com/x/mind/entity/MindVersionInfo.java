@@ -23,11 +23,11 @@ import com.x.base.core.project.tools.DateTools;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 脑图版本信息表
+ * 마인드맵 버전 정보 테이블
  * 
  * @author O2LEE
  */
-@Schema(name = "MindVersionInfo", description = "脑图版本信息.")
+@Schema(name = "MindVersionInfo", description = "마인드맵 버전 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.MindVersionInfo.table, uniqueConstraints = {
@@ -48,7 +48,7 @@ public class MindVersionInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -61,62 +61,62 @@ public class MindVersionInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String mindId_FIELDNAME = "mindId";
-	@FieldDescribe("脑图文件ID")
+	@FieldDescribe("마인드맵 파일 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + mindId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mindId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String mindId = "";
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("脑图名称")
+	@FieldDescribe("마인드맵 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name = "";
 
 	public static final String folderId_FIELDNAME = "folderId";
-	@FieldDescribe("所属目录")
+	@FieldDescribe("소속 디렉터리")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + folderId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String folderId = "";
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("备注信息")
+	@FieldDescribe("비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = "";
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("自动生成，创建者")
+	@FieldDescribe("자동 생성, 생성자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator = "";
 
 	public static final String creatorUnit_FIELDNAME = "creatorUnit";
-	@FieldDescribe("自动生成，创建者所属组织")
+	@FieldDescribe("자동 생성, 생성자 소속 조직")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creatorUnit_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creatorUnit = "";
 
 	public static final String fileVersion_FIELDNAME = "fileVersion";
-	@FieldDescribe("自动生成，版本号")
+	@FieldDescribe("자동 생성, 버전 번호")
 	@Column(name = ColumnNamePrefix + fileVersion_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer fileVersion = 1;
 
 	public static final String shared_FIELDNAME = "shared";
-	@FieldDescribe("自动生成，是否已经分享")
+	@FieldDescribe("자동 생성, 공유 여부")
 	@Column(name = "xshared")
 	private Boolean shared = false;
 

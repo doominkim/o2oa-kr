@@ -12,44 +12,44 @@ public class ActionListMyPagingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -4432862273663133127L;
 
-	@FieldDescribe("应用标识.")
-	@Schema(description = "应用标识.")
+	@FieldDescribe("앱 식별자.")
+	@Schema(description = "앱 식별자.")
 	private List<String> applicationList = new ArrayList<>();
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList = new ArrayList<>();
 
-	@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false")
-	@Schema(description = "是否查找同版本流程数据：true(默认查找)|false")
+	@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false")
+	@Schema(description = "동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false")
 	private Boolean relateEditionProcess = true;
 
-	@FieldDescribe("开始时间, 格式: yyyy-MM-dd HH:mm:ss")
-	@Schema(description = "开始时间, 格式: yyyy-MM-dd HH:mm:ss")
+	@FieldDescribe("시작 시간, 형식: yyyy-MM-dd HH:mm:ss")
+	@Schema(description = "시작 시간, 형식: yyyy-MM-dd HH:mm:ss")
 	private String startTime;
 
-	@FieldDescribe("结束时间, 格式: yyyy-MM-dd HH:mm:ss")
-	@Schema(description = "结束时间, 格式: yyyy-MM-dd HH:mm:ss")
+	@FieldDescribe("종료 시간, 형식: yyyy-MM-dd HH:mm:ss")
+	@Schema(description = "종료 시간, 형식: yyyy-MM-dd HH:mm:ss")
 	private String endTime;
 
-	@FieldDescribe("启动月份, 格式: yyyy-MM.")
-	@Schema(description = "启动月份, 格式: yyyy-MM.")
+	@FieldDescribe("시작 월, 형식: yyyy-MM.")
+	@Schema(description = "시작 월, 형식: yyyy-MM.")
 	private List<String> startTimeMonthList = new ArrayList<>();
 
-	@FieldDescribe("活动名称.")
-	@Schema(description = "活动名称.")
+	@FieldDescribe("활동 이름.")
+	@Schema(description = "활동 이름.")
 	private List<String> activityNameList = new ArrayList<>();
 
-	@FieldDescribe("是否已经经过人工节点,用于判断是否是草稿.在到达环节进行判断.")
-	@Schema(description = "是否已经经过人工节点,用于判断是否是草稿.在到达环节进行判断.")
+	@FieldDescribe("수동 노드 통과 여부, 초안 여부 판단에 사용. 도착 단계에서 판단.")
+	@Schema(description = "수동 노드 통과 여부, 초안 여부 판단에 사용. 도착 단계에서 판단.")
 	private Boolean workThroughManual;
 
-	@FieldDescribe("当前工作是否经过保存修改的操作,用于判断是否是默认生成的未经修改的.")
-	@Schema(description = "当前工作是否经过保存修改的操作,用于判断是否是默认生成的未经修改的.")
+	@FieldDescribe("현재 업무 문서의 저장 수정 작업 여부, 기본 생성 후 수정되지 않은 것인지 판단에 사용.")
+	@Schema(description = "현재 업무 문서의 저장 수정 작업 여부, 기본 생성 후 수정되지 않은 것인지 판단에 사용.")
 	private Boolean dataChanged;
 
-	@FieldDescribe("关键字.")
-	@Schema(description = "关键字.")
+	@FieldDescribe("키워드.")
+	@Schema(description = "키워드.")
 	private String key;
 
 	public List<String> getApplicationList() {

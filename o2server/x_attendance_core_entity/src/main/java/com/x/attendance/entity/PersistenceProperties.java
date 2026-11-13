@@ -117,7 +117,7 @@ public final class PersistenceProperties extends AbstractPersistenceProperties {
     }
 
 
-    //////////////V2版本///////////////////////////////
+    //////////////V2 버전///////////////////////////////
 
     public static class AttendanceV2Shift {
         public static final String table = "ATTEND_V2_SHIFT";

@@ -64,7 +64,7 @@ class ActionCreateWithWorkCompleted extends BaseAction {
 					if (null == workCompleted) {
 						throw new ExceptionEntityNotExist(workCompletedId, WorkCompleted.class);
 					}
-					/* 取workLog补充WorkCompleted不足字段 */
+					/* workLog로 WorkCompleted의 부족한 필드 보충 */
 					List<WorkLog> workLogs = emc.listEqual(WorkLog.class, WorkLog.JOB_FIELDNAME,
 							workCompleted.getJob());
 					workLogs = workLogs.stream()

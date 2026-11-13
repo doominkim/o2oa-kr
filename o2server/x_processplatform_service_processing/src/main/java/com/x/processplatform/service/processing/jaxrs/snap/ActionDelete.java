@@ -58,7 +58,7 @@ class ActionDelete extends BaseAction {
 					throw new ExceptionEntityNotExist(id, Snap.class);
 				}
 				emc.beginTransaction(Snap.class);
-				// work和workCompleted都没有这个job,说明snap的时候已经删除所有关联,如果有Attachment,是因为无法收到json中遗留在attachment表中的内容,所以需要删除.
+				// work와 workCompleted 모두 이 job이 없으면 snap 시점에 모든 연관이 이미 삭제된 것이며, Attachment가 있다면 json으로 받지 못하고 attachment 테이블에 남은 내용이므로 삭제 필요.
 				if ((0 == emc.countEqual(Work.class, Work.job_FIELDNAME, snap.getJob()))
 						&& (0 == emc.countEqual(WorkCompleted.class, WorkCompleted.job_FIELDNAME, snap.getJob()))) {
 					emc.beginTransaction(Attachment.class);

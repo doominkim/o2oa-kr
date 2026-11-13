@@ -2,111 +2,111 @@
 //  {
 //    "name": "ControlPanel",
 //    "path": "ControlPanel",
-//    "title": "控制面板",
+//    "title": "제어판",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "Setting",
 //    "path": "Setting",
-//    "title": "系统设置",
+//    "title": "시스템 설정",
 //    "iconPath": "appicon.png",
 //    "allowList": ["xadmin", "Manager"]
 //  },
 //  {
 //    "name": "AppMarket",
 //    "path": "AppMarket",
-//    "title": "应用市场",
+//    "title": "앱 마켓",
 //    "iconPath": "appicon.png",
 //    "allowList": ["xadmin", "Manager"]
 //  },
 //  {
 //    "name": "Deployment",
 //    "path": "Deployment",
-//    "title": "部署管理",
+//    "title": "배포 관리",
 //    "iconPath": "appicon.png",
 //    "allowList": ["xadmin", "Manager"]
 //  },
 //  {
 //    "name": "Org",
 //    "path": "Org",
-//    "title": "组织管理",
+//    "title": "조직 관리",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "Profile",
 //    "path": "Profile",
-//    "title": "个人设置",
+//    "title": "개인 설정",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "BAM",
 //    "path": "BAM",
-//    "title": "流程监控",
+//    "title": "프로세스 모니터링",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "DesignCenter",
 //    "path": "DesignCenter",
-//    "title": "设计中心",
+//    "title": "디자인 센터",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "ApplicationExplorer",
 //    "path": "process.ApplicationExplorer",
-//    "title": "流程管理平台",
+//    "title": "프로세스 관리 플랫폼",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "PortalExplorer",
 //    "path": "portal.PortalExplorer",
-//    "title": "门户管理平台",
+//    "title": "포털 관리 플랫폼",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "cmsManager",
 //    "path": "cms.Column",
-//    "title": "内容管理平台",
+//    "title": "콘텐츠 관리 플랫폼",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "DataExplorer",
 //    "path": "query.QueryExplorer",
-//    "title": "数据中心平台",
+//    "title": "데이터 센터 플랫폼",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "service.ServiceManager",
 //    "path": "service.ServiceManager",
-//    "title": "服务管理",
+//    "title": "서비스 관리",
 //    "iconPath": "appicon.png"
 //  },
 //
 //  {
 //    "name": "AppCenter",
 //    "path": "AppCenter",
-//    "title": "应用导出",
+//    "title": "앱 내보내기",
 //    "iconPath": "appicon.png"
 //  },
 //  {
 //    "name": "TaskCenter",
 //    "path": "process.TaskCenter",
-//    "title": "办公中心",
+//    "title": "업무 센터",
 //    "iconPath": "appicon.png",
 //    "widgetName": "TaskWidget",
-//    "widgetTitle": "待办列表",
+//    "widgetTitle": "결재 대기 목록",
 //    "widgetIconPath": "widgeticon.png"
 //  },
 //  {
 //    "name": "cms",
 //    "path": "cms.Index",
-//    "title": "信息平台",
+//    "title": "정보 플랫폼",
 //    "iconPath": "appicon.png"
 //  },
 //
 //  {
 //    "name": "File",
 //    "path": "File",
-//    "title": "云文件",
+//    "title": "클라우드 파일",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
@@ -114,35 +114,35 @@
 //  {
 //    "name": "Note",
 //    "path": "Note",
-//    "title": "便签",
+//    "title": "메모",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
 //  {
 //    "name": "Meeting",
 //    "path": "Meeting",
-//    "title": "会议管理",
+//    "title": "회의 관리",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
 //  {
 //    "name": "Attendance",
 //    "path": "Attendance",
-//    "title": "考勤管理",
+//    "title": "근태 관리",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
 //  {
 //    "name": "Forum",
 //    "path": "Forum",
-//    "title": "论坛",
+//    "title": "포럼",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
 //  {
 //    "name": "HotArticle",
 //    "path": "HotArticle",
-//    "title": "热点",
+//    "title": "핫이슈",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
@@ -156,28 +156,28 @@
 //  {
 //    "name": "ExeManager",
 //    "path": "ExeManager",
-//    "title": "执行力管理",
+//    "title": "실행력 관리",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
 //  {
 //    "name": "OnlineMeeting",
 //    "path": "OnlineMeeting",
-//    "title": "网络会议",
+//    "title": "온라인 회의",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
 //  {
 //    "name": "Minder",
 //    "path": "Minder",
-//    "title": "脑图编辑器",
+//    "title": "마인드맵 편집기",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  },
 //  {
 //    "name": "Calendar",
 //    "path": "Calendar",
-//    "title": "日程安排",
+//    "title": "일정 관리",
 //    "iconPath": "appicon.png",
 //    "visible": true
 //  }

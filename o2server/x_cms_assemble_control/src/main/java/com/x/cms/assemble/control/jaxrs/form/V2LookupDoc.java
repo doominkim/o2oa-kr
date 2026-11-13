@@ -128,7 +128,7 @@ class V2LookupDoc extends BaseAction {
 				}
 				if (StringUtils.isNotBlank(document.getPpFormId())) {
 					this.ppForm = business.process().form().pick(document.getPpFormId());
-					LOGGER.info("通过流程ID：{}获取表单：{}", this.ppForm == null ? "" : this.ppForm.getName());
+					LOGGER.info("프로세스 ID: {}로 양식 조회: {}", this.ppForm == null ? "" : this.ppForm.getName());
 				}
 			}
 		}

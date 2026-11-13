@@ -86,16 +86,16 @@ class ActionManagerListPaging extends BaseAction {
 
 		private static final long serialVersionUID = 8080533324548774421L;
 
-		@FieldDescribe("授权人.")
-		@Schema(description = "授权人.")
+		@FieldDescribe("위임자.")
+		@Schema(description = "위임자.")
 		private String fromPerson;
 
-		@FieldDescribe("(授权创建时间)开始时间, 格式为: yyyy-MM-dd HH:mm:ss")
-		@Schema(description = "(授权创建时间)开始时间, 格式为: yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("(위임 생성 시각)시작 시각, 형식: yyyy-MM-dd HH:mm:ss")
+		@Schema(description = "(위임 생성 시각)시작 시각, 형식: yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("(授权创建时间)结束时间, 格式为: yyyy-MM-dd HH:mm:ss")
-		@Schema(description = "(授权创建时间)结束时间, 格式为: yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("(위임 생성 시각)종료 시각, 형식: yyyy-MM-dd HH:mm:ss")
+		@Schema(description = "(위임 생성 시각)종료 시각, 형식: yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
 		public String getFromPerson() {

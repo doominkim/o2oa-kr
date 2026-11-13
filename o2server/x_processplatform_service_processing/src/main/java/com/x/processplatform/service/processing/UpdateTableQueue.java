@@ -67,14 +67,14 @@ public class UpdateTableQueue extends AbstractQueue<String> {
 				success(id);
 			} else {
 				failure(id);
-				LOGGER.warn("更新到自建表失败:{}.", () -> id);
+				LOGGER.warn("자체 테이블 업데이트 실패:{}.", () -> id);
 			}
 		}
 		return false;
 	}
 
 	private boolean push(Event event) {
-		LOGGER.debug("更新到自建表:{}, bundle:{}.", event::getTarget, event::getJob);
+		LOGGER.debug("자체 테이블 업데이트:{}, bundle:{}.", event::getTarget, event::getJob);
 		JsonElement jsonElement = null;
 		try {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
@@ -187,7 +187,7 @@ public class UpdateTableQueue extends AbstractQueue<String> {
 			list.addAll(em.createQuery(cq.select(root.get(Event_.id)).where(p)).setMaxResults(100).getResultList());
 		}
 		if (!list.isEmpty()) {
-			LOGGER.info("查找到 {} 条处理失败的同步到自建表事件.", list::size);
+			LOGGER.info("처리 실패한 자체 테이블 동기화 이벤트 {}건 조회.", list::size);
 		}
 		return list;
 	}
@@ -215,7 +215,7 @@ public class UpdateTableQueue extends AbstractQueue<String> {
 			}
 		}
 		if (!list.isEmpty()) {
-			LOGGER.info("删除 {} 条超期的同步到自建表事件.", list::size);
+			LOGGER.info("기한이 지난 자체 테이블 동기화 이벤트 {}건 삭제.", list::size);
 		}
 	}
 

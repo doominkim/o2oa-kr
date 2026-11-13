@@ -11,7 +11,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.organization.core.express.Organization;
 
 /**
- * 应用业务服务类
+ * 앱 업무 서비스 클래스
  * @author sword
  */
 public class Business {
@@ -19,7 +19,7 @@ public class Business {
 	private static final Logger logger = LoggerFactory.getLogger(Business.class);
 
 	/**
-	 * 自定义应用配置文件名称，根据实际配置修改，文件要求为json格式
+	 * 사용자 정의 앱 설정 파일 이름, 실제 설정에 맞게 수정, 파일은 json 형식이어야 함
 	 */
 	public static final String CUSTOM_CONFIG_NAME = "o2oa_ai";
 
@@ -34,7 +34,7 @@ public class Business {
 	}
 
 	/**
-	 * 获取配置
+	 * 설정 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -52,7 +52,7 @@ public class Business {
 	}
 
 	/**
-	 * 组织架构管理相关的工厂服务类
+	 * 조직 구조 관리 관련 팩토리 서비스 클래스
 	 */
 	private Organization organization;
 

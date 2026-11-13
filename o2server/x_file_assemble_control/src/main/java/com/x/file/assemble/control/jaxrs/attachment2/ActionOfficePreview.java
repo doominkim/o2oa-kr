@@ -26,7 +26,7 @@ class ActionOfficePreview extends StandardJaxrsAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Wo wo = null;
-			/** 确定是否要用application/octet-stream输出 */
+			/** application/octet-stream으로 출력할지 결정 */
 			Attachment2 attachment = emc.find(id, Attachment2.class);
 			if (null == attachment) {
 				throw new ExceptionAttachmentNotExist(id);
@@ -64,7 +64,7 @@ class ActionOfficePreview extends StandardJaxrsAction {
 						wo = new Wo(cbs, this.contentType(false, attachment.getName()+type),
 								this.contentDisposition(false, attachment.getName()+type));
 						/**
-						 * 对10M以下的文件进行缓存
+						 * 10M 이하 파일 캐시
 						 */
 						if (bs.length < (1024 * 1024 * 10)) {
 							CacheManager.put(cacheCategory, cacheKey, wo);

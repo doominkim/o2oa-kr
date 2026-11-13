@@ -380,15 +380,15 @@ export default content({
     this.clickOpenPolicyLoading = true;
     this.queryPolicyForLeaveType(typeId);
   },
-  // 获取规则配置
+  // 규칙 설정 조회
   async queryPolicyForLeaveType(typeId) {
     const list = await leaveManagerAction("policyListWithTypeId", typeId)
     if (list && list.length > 0) {
       const id = list[0].id;
-      // 修改配置
+      // 설정 수정
       this.$topParent.openLeaveTypePolicyForm({ bind: { updateId: id } });
     } else {
-      // 新增配置
+      // 설정 추가
       this.$topParent.openLeaveTypePolicyForm({ bind: { form: { leaveTypeId: typeId } } });
     }
     this.clickOpenPolicyLoading = false;

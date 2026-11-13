@@ -5,7 +5,7 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public class Department extends GsonPropertyObject {
 	//
 	// "id": 2,
-	// "name": "广州研发中心",
+	// "name": "광저우 연구개발센터",
 	// "parentid": 1,
 	// "order": 10
 

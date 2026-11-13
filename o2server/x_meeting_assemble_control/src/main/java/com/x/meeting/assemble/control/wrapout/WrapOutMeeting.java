@@ -12,11 +12,11 @@ public class WrapOutMeeting extends Meeting {
 	private static final long serialVersionUID = -969148596991975992L;
 	public static List<String> Excludes = new ArrayList<>(JpaObject.FieldsInvisible);
 
-	@FieldDescribe("会议状态")
+	@FieldDescribe("회의 상태")
 	private String status;
-	/* 我申请的 */
+	/* 내가 신청한 */
 	private Boolean myApply;
-	/* 等待我确认的 */
+	/* 내 확인 대기 */
 	private Boolean myWaitConfirm;
 
 	private Boolean myWaitAccept;
@@ -30,7 +30,7 @@ public class WrapOutMeeting extends Meeting {
 	private WrapOutRoom woRoom;
 
 	private List<WrapOutAttachment> attachmentList;
-	/* 会议室地址 */
+	/* 회의실 주소 */
 	private String roomAddress;
 
 	public String getRoomAddress() {

@@ -17,7 +17,7 @@ MWF.xApplication.Homepage.CalendarContent  = new Class({
             //     this.fireEvent("load");
             // }.bind(this));
 
-            // //是否需要定时自动刷新 @todo
+            // //정기 자동 새로고침 필요 여부 @todo
             // this.startProcessAction.addEvent("click", this.startProcess.bind(this));
 
             //this.moreInforAction.addEvent("click", this.moreInfor.bind(this));

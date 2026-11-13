@@ -82,7 +82,7 @@ public class Config {
 	public static final String PATH_CONFIG_ZHENGWUDINGDING = "config/zhengwuDingding.json";
 	public static final String PATH_CONFIG_QIYEWEIXIN = "config/qiyeweixin.json";
 	public static final String PATH_CONFIG_MPWEIXIN = "config/mpweixin.json";
-	public static final String PATH_CONFIG_MPWEIXIN2 = "config/mMweixin.json"; // 容错
+	public static final String PATH_CONFIG_MPWEIXIN2 = "config/mMweixin.json"; // 오류 허용
 	public static final String PATH_CONFIG_BINDLOGO = "config/bindLogo.png";
 	public static final String PATH_COMMONS_INITIALSCRIPTTEXT = "commons/initialScriptText.js";
 	public static final String PATH_COMMONS_INITIALSERVICESCRIPTTEXT = "commons/initialServiceScriptText.js";
@@ -477,8 +477,8 @@ public class Config {
 	}
 
 	/**
-	 * 重置Config对象,不更新externalDataSources,externalStorageSources.
-	 * 部分对象不能直接刷新,会导致已有链接断开.
+	 * Config 객체 초기화, externalDataSources, externalStorageSources는 갱신하지 않음.
+	 * 일부 객체는 바로 새로 고칠 수 없음, 기존 연결이 끊어질 수 있음.
 	 */
 	public static synchronized void flush() {
 		Config newInstance = new Config();
@@ -491,7 +491,7 @@ public class Config {
 	}
 
 	/**
-	 * 重新生成Config对象,销毁所有配置对象.
+	 * Config 객체 재생성, 모든 설정 객체 폐기.
 	 */
 	public static synchronized void regenerate() {
 		INSTANCE = null;
@@ -556,14 +556,14 @@ public class Config {
 				Node o = Node.defaultInstance();
 				nodes.put(node(), o);
 			}
-			/* 20191009兼容centerServer */
+			/* 20191009 centerServer 호환 */
 			CenterServer c = BaseTools.readConfigObject(PATH_CONFIG_CENTERSERVER, CenterServer.class);
 			if (null != c) {
 				for (Node n : nodes.values()) {
 					n.setCenter(c);
 				}
 			}
-			/* 20191009兼容centerServer end */
+			/* 20191009 centerServer 호환 end */
 			instance().nodes = nodes;
 		}
 		return instance().nodes;
@@ -706,7 +706,7 @@ public class Config {
 	}
 
 	/**
-	 * dumpRestoreData配置不考虑进行缓存,每次直接取值
+	 * dumpRestoreData 설정은 캐시하지 않고 매번 직접 값을 가져옴
 	 *
 	 * @return
 	 * @throws Exception
@@ -752,23 +752,23 @@ public class Config {
 	public static synchronized MimeTypes mimeTypes() throws Exception {
 		if (null == instance().mimeTypes) {
 			MimeTypes mimeTypes = new MimeTypes();
-			/* 添加o2自定义格式 */
+			/* o2 사용자 정의 형식 추가 */
 			mimeTypes.addMimeMapping("wcss", "application/json");
-			/* TXT和HTML文件以utf-8输出，解决在线打开乱码问题 */
+			/* TXT와 HTML 파일은 utf-8로 출력하여 온라인 열기 시 글자 깨짐 문제 해결 */
 			mimeTypes.addMimeMapping("txt", "text/plain; charset=UTF-8");
 			mimeTypes.addMimeMapping("html", "text/html; charset=UTF-8");
-			/* 添加默认格式 */
+			/* 기본 형식 추가 */
 			mimeTypes.addMimeMapping("", "application/octet-stream");
-			/* 添加新版office格式 */
+			/* 신규 office 형식 추가 */
 			mimeTypes.addMimeMapping("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 			mimeTypes.addMimeMapping("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 			mimeTypes.addMimeMapping("pptx",
 					"application/vnd.openxmlformats-officedocument.presentationml.presentation");
-			/* 名片 */
+			/* 명함 */
 			mimeTypes.addMimeMapping("vcf", "text/x-vcard");
-			/* ofd文件 */
+			/* ofd 파일 */
 			mimeTypes.addMimeMapping("ofd", "application/ofd");
-			/* 流媒体都改为stream输出，不支持浏览器在线播放，如需在线播放请用第三方插件 */
+			/* 스트리밍 미디어는 모두 stream 출력으로 변경, 브라우저 온라인 재생 미지원, 온라인 재생이 필요하면 서드파티 플러그인 사용 */
 			mimeTypes.addMimeMapping("mov", MediaType.APPLICATION_OCTET_STREAM);
 			mimeTypes.addMimeMapping("movie", MediaType.APPLICATION_OCTET_STREAM);
 			mimeTypes.addMimeMapping("mp2", MediaType.APPLICATION_OCTET_STREAM);
@@ -999,7 +999,7 @@ public class Config {
 	public static synchronized Mpweixin mpweixin() throws Exception {
 		if (null == instance().mPweixin) {
 			Mpweixin obj = BaseTools.readConfigObject(PATH_CONFIG_MPWEIXIN, Mpweixin.class);
-			if (obj == null) { // 容错 因为生成的配置文件名称有大小写问题
+			if (obj == null) { // 오류 허용 - 생성된 설정 파일 이름에 대소문자 문제가 있기 때문
 				obj = BaseTools.readConfigObject(PATH_CONFIG_MPWEIXIN2, Mpweixin.class);
 			}
 			if (null == obj) {
@@ -1107,7 +1107,7 @@ public class Config {
 			if (null == obj) {
 				obj = Portal.defaultInstance();
 			}
-			// 兼容7.2之前person.json设置登录页配置
+			// 7.2 이전 person.json의 로그인 페이지 설정 호환
 			if (null == obj.getLoginPage() || (BooleanUtils.isFalse(obj.getLoginPage().getEnable())
 					&& StringUtils.isBlank(obj.getLoginPage().getPortal()))) {
 				JsonObject personJsonObject = BaseTools.readConfigObject(PATH_CONFIG_PERSON, JsonObject.class);
@@ -1520,7 +1520,7 @@ public class Config {
 	}
 
 	/**
-	 * 创建层级目录,将IOException转换为UncheckedIOException
+	 * 계층 디렉터리 생성, IOException을 UncheckedIOException으로 변환
 	 *
 	 * @param path
 	 */

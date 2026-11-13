@@ -34,9 +34,9 @@ public class ActionGet extends BaseAction {
 				Business business = new Business(emc);
 				ViewFieldConfig viewFieldConfig = business.getViewFieldConfigFactory().get(id);
 				if ( null == viewFieldConfig ) {
-					throw new Exception("需要查询的列表展现列信息不存在，请联系管理员。ID:" + id );
+					throw new Exception("조회할 목록 표시 열 정보가 없습니다. 관리자에게 문의하세요. ID:" + id );
 				}
-				//如果信息存在，则需要向客户端返回信息，先将查询出来的JPA对象COPY到一个普通JAVA对象里，再进行返回
+				//정보가 있으면 클라이언트에 반환해야 하므로, 조회한 JPA 객체를 일반 JAVA 객체로 COPY한 뒤 반환
 				wrap = Wo.copier.copy( viewFieldConfig );
 
 				CacheManager.put(cacheCategory, cacheKey, wrap );

@@ -56,14 +56,14 @@ abstract class BaseAction extends StandardJaxrsAction {
 		// return XGsonBuilder.convert(jsonElement, Data.class);
 	}
 
-	// 将data中的Title 和 serial 字段同步到work中
+	// data의 Title과 serial 필드를 work에 동기화
 	void updateTitleSerial(Business business, Work work, JsonElement jsonElement) throws Exception {
 		String title = XGsonBuilder.extractString(jsonElement, Work.title_FIELDNAME);
 		if (null == title) {
 			title = XGsonBuilder.extractString(jsonElement, subject_path);
 		}
 		String serial = XGsonBuilder.extractString(jsonElement, Work.serial_FIELDNAME);
-		// 如果有数据就将数据覆盖到work task taskCompleted read readCompleted review 中
+		// 데이터가 있으면 work task taskCompleted read readCompleted review에 데이터를 덮어씀
 		if (((null != title) && (!Objects.equals(title, work.getTitle())))
 				|| ((null != serial) && (!Objects.equals(serial, work.getSerial())))) {
 			business.entityManagerContainer().beginTransaction(Work.class);
@@ -121,7 +121,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 					o.setSerial(serial);
 				}
 			}
-			/** 这里必须先提交掉,不然后面的获取会得到不一致的状态 */
+			/** 여기서 반드시 먼저 커밋해야 하며, 그렇지 않으면 이후 조회 시 상태가 일치하지 않음 */
 			/**
 			 * <openjpa-2.4.3-SNAPSHOT-r422266:1777109 nonfatal user error>
 			 * org.apache.openjpa.persistence.InvalidStateException: Opera tion attempted on
@@ -156,10 +156,10 @@ abstract class BaseAction extends StandardJaxrsAction {
 				this.fill(_o, work);
 				business.entityManagerContainer().persist(_o);
 			}
-			// 标记数据已经被修改
+			// 데이터 수정됨 표시
 			business.entityManagerContainer().beginTransaction(Work.class);
 			work.setDataChanged(true);
-			// 基于前面的原因,这里进行单独提交
+			// 위 이유로 여기서 별도로 커밋
 			business.entityManagerContainer().commit();
 		}
 	}
@@ -190,7 +190,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 				this.fill(_o, workCompleted);
 				business.entityManagerContainer().persist(_o);
 			}
-			/** 基于前面的原因,这里进行单独提交 */
+			/** 위 이유로 여기서 별도로 커밋 */
 			business.entityManagerContainer().commit();
 
 		}
@@ -224,9 +224,9 @@ abstract class BaseAction extends StandardJaxrsAction {
 		DataItemConverter<Item> converter = new DataItemConverter<>(Item.class);
 		business.entityManagerContainer().beginTransaction(Item.class);
 		if ((null != cursor) && cursor.getItemType().equals(ItemType.a)) {
-			/* 向数组里面添加一个成员对象 */
+			/* 배열에 멤버 객체 하나 추가 */
 			Integer index = business.item().getArrayLastIndexWithJobWithPath(work.getJob(), paths);
-			/* 新的路径开始 */
+			/* 새 경로 시작 */
 			String[] ps = new String[paths.length + 1];
 			for (int i = 0; i < paths.length; i++) {
 				ps[i] = paths[i];
@@ -238,7 +238,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 				business.entityManagerContainer().persist(o);
 			}
 		} else if ((cursor == null) && parent.getItemType().equals(ItemType.o)) {
-			/* 向parent对象添加一个属性值 */
+			/* parent 객체에 속성 값 추가 */
 			List<Item> adds = converter.disassemble(jsonElement, paths);
 			for (Item o : adds) {
 				this.fill(o, work);
@@ -248,7 +248,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			throw new Exception("unexpected post data with work" + work + ".path:" + StringUtils.join(paths, ".")
 					+ "json:" + jsonElement);
 		}
-		/* 标记数据已经被修改 */
+		/* 데이터 수정됨 표시 */
 		business.entityManagerContainer().beginTransaction(Work.class);
 		work.setDataChanged(true);
 	}
@@ -272,20 +272,20 @@ abstract class BaseAction extends StandardJaxrsAction {
 				}
 			}
 		}
-		/* 标记数据已经被修改 */
+		/* 데이터 수정됨 표시 */
 		business.entityManagerContainer().beginTransaction(Work.class);
 		work.setDataChanged(true);
 	}
 
 	void fill(Item o, Work work) {
-		/** 将DateItem与Work放在同一个分区 */
+		/** DateItem과 Work를 같은 파티션에 배치 */
 		o.setDistributeFactor(work.getDistributeFactor());
 		o.setBundle(work.getJob());
 		o.setItemCategory(ItemCategory.pp);
 	}
 
 	void fill(Item o, WorkCompleted workCompleted) {
-		/** 将DateItem与Work放在同一个分区 */
+		/** DateItem과 Work를 같은 파티션에 배치 */
 		o.setDistributeFactor(workCompleted.getDistributeFactor());
 		o.setBundle(workCompleted.getJob());
 		o.setItemCategory(ItemCategory.pp);

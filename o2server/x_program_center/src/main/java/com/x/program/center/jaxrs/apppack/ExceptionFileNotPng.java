@@ -10,5 +10,5 @@ public class ExceptionFileNotPng extends LanguagePromptException {
 
     private static final long serialVersionUID = -8045803301464102031L;
 
-    ExceptionFileNotPng(){ super("Logo图片只支持png格式！"); }
+    ExceptionFileNotPng(){ super("Logo 이미지는 png 형식만 지원합니다!"); }
 }

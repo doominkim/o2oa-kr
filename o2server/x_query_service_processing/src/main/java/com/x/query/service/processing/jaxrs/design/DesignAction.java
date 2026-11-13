@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("design")
-@JaxrsDescribe("全平台设计")
+@JaxrsDescribe("전체 플랫폼 설계")
 public class DesignAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(DesignAction.class);
 
-	@JaxrsMethodDescribe(value = "全平台设计搜索.", action = ActionSearch.class)
+	@JaxrsMethodDescribe(value = "전체 플랫폼 설계 검색.", action = ActionSearch.class)
 	@POST
 	@Path("search")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -30,7 +30,7 @@ public class ActionAppInfoExport extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(ActionAppInfoExport.class);
 
 	/**
-	 * 实现栏目设计导出功能 1、栏目信息 2、所有分类信息 3、所有的表单设计 4、视图（列表和数据视图）设计 5、数据字典设计 6、脚本信息
+	 * 게시판 설계 내보내기 기능 구현 1. 게시판 정보 2. 모든 분류 정보 3. 모든 양식 설계 4. 뷰(목록 및 데이터 뷰) 설계 5. 데이터 사전 설계 6. 스크립트 정보
 	 *
 	 * @param request
 	 * @param effectivePerson
@@ -50,7 +50,7 @@ public class ActionAppInfoExport extends BaseAction {
 			Exception exception = new ExceptionAppInfoIdEmpty();
 			result.error(exception);
 		}
-		// 尝试查询栏目信息，判断栏目信息是否存在
+		// 게시판 정보 조회 시도, 게시판 정보 존재 여부 확인
 		if (check) {
 			try {
 				appInfo = appInfoServiceAdv.get(appInfoId);
@@ -61,7 +61,7 @@ public class ActionAppInfoExport extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess(e, "根据指定ID查询应用栏目信息对象时发生异常。ID:" + appInfoId);
+				Exception exception = new ExceptionAppInfoProcess(e, "지정한 ID의 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + appInfoId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -71,13 +71,13 @@ public class ActionAppInfoExport extends BaseAction {
 			try {
 				wo = Wo.copier.copy(appInfo);
 			} catch (Exception e) {
-				Exception exception = new ExceptionAppInfoProcess(e, "将查询出来的应用栏目信息对象转换为可输出的数据信息时发生异常。");
+				Exception exception = new ExceptionAppInfoProcess(e, "조회한 게시판 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 开始查询所有的分类列表
+		// 모든 분류 목록 조회 시작
 		if (check) {
 			List<CategoryInfo> categoryList = null;
 			try {
@@ -87,13 +87,13 @@ public class ActionAppInfoExport extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess(e, "系统根据栏目ID查询所有的分类信息ID列表时发生异常。ID:" + appInfoId);
+				Exception exception = new ExceptionAppInfoProcess(e, "게시판 ID로 전체 분류 ID 목록을 조회하는 중 오류가 발생했습니다. ID:" + appInfoId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 开始查询所有的表单列表
+		// 모든 양식 목록 조회 시작
 		if (check) {
 			List<Form> formList = null;
 			try {
@@ -103,13 +103,13 @@ public class ActionAppInfoExport extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess(e, "系统根据栏目ID查询所有的表单信息ID列表时发生异常。ID:" + appInfoId);
+				Exception exception = new ExceptionAppInfoProcess(e, "게시판 ID로 전체 양식 ID 목록을 조회하는 중 오류가 발생했습니다. ID:" + appInfoId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 开始查询所有的脚本列表
+		// 모든 스크립트 목록 조회 시작
 		if (check) {
 			List<Script> scriptList = null;
 			try {
@@ -119,7 +119,7 @@ public class ActionAppInfoExport extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess(e, "系统根据栏目ID查询所有的脚本信息列表时发生异常。ID:" + appInfoId);
+				Exception exception = new ExceptionAppInfoProcess(e, "게시판 ID로 전체 스크립트 목록을 조회하는 중 오류가 발생했습니다. ID:" + appInfoId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -130,7 +130,7 @@ public class ActionAppInfoExport extends BaseAction {
 	}
 
 	/**
-	 * 1、栏目信息 2、所有分类信息 3、所有的表单设计 4、视图（列表和数据视图）设计 5、数据字典设计 6、脚本信息
+	 * 1. 게시판 정보 2. 모든 분류 정보 3. 모든 양식 설계 4. 뷰(목록 및 데이터 뷰) 설계 5. 데이터 사전 설계 6. 스크립트 정보
 	 */
 	public static class Wo extends AppInfo {
 
@@ -141,19 +141,19 @@ public class ActionAppInfoExport extends BaseAction {
 		public static final WrapCopier<AppInfo, Wo> copier = WrapCopierFactory.wo(AppInfo.class, Wo.class, null,
 				Wo.excludes);
 
-		@FieldDescribe("栏目内所有的分类信息列表")
+		@FieldDescribe("게시판 내 모든 분류 정보 목록")
 		private List<WoCategory> categories = null;
 
-		@FieldDescribe("栏目内所有的表单信息列表")
+		@FieldDescribe("게시판 내 모든 양식 정보 목록")
 		private List<WoForm> forms = null;
 
-		@FieldDescribe("栏目内所有的列表视图信息列表")
+		@FieldDescribe("게시판 내 모든 목록 뷰 정보 목록")
 		private List<WoView> views = null;
 
-		@FieldDescribe("栏目内所有的脚本信息列表")
+		@FieldDescribe("게시판 내 모든 스크립트 정보 목록")
 		private List<WoScript> scripts = null;
 
-		@FieldDescribe("栏目内所有的数据字典信息列表")
+		@FieldDescribe("게시판 내 모든 데이터 사전 정보 목록")
 		private List<WoAppDict> dicts = null;
 
 		public List<WoCategory> getCategories() {
@@ -198,7 +198,7 @@ public class ActionAppInfoExport extends BaseAction {
 	}
 
 	/**
-	 * 用于输出的分类信息对象
+	 * 출력용 분류 정보 객체
 	 */
 	public static class WoCategory extends CategoryInfo {
 
@@ -212,7 +212,7 @@ public class ActionAppInfoExport extends BaseAction {
 	}
 
 	/**
-	 * 用于输出的表单信息对象
+	 * 출력용 양식 정보 객체
 	 */
 	public static class WoForm extends Form {
 
@@ -226,7 +226,7 @@ public class ActionAppInfoExport extends BaseAction {
 	}
 
 	/**
-	 * 用于输出的列表视图信息对象
+	 * 출력용 목록 뷰 정보 객체
 	 */
 	public static class WoView extends View {
 
@@ -237,10 +237,10 @@ public class ActionAppInfoExport extends BaseAction {
 		public static final WrapCopier<View, WoView> copier = WrapCopierFactory.wo(View.class, WoView.class, null,
 				WoView.excludes);
 
-		@FieldDescribe("列表视图内所有的列表列信息")
+		@FieldDescribe("목록 뷰의 모든 목록 열 정보")
 		private List<ViewFieldConfig> fields = null;
 
-		@FieldDescribe("列表视图所有的分类关联关系")
+		@FieldDescribe("목록 뷰의 모든 분류 연결 관계")
 		private List<ViewCategory> viewCatagories = null;
 
 		public List<ViewFieldConfig> getFields() {
@@ -261,7 +261,7 @@ public class ActionAppInfoExport extends BaseAction {
 	}
 
 	/**
-	 * 用于输出的数据字典信息对象
+	 * 출력용 데이터 사전 정보 객체
 	 */
 	public static class WoScript extends Script {
 
@@ -275,7 +275,7 @@ public class ActionAppInfoExport extends BaseAction {
 	}
 
 	/**
-	 * 用于输出的数据字典信息对象
+	 * 출력용 데이터 사전 정보 객체
 	 */
 	public static class WoAppDict extends AppDict {
 
@@ -286,12 +286,12 @@ public class ActionAppInfoExport extends BaseAction {
 		public static final WrapCopier<Script, WoScript> copier = WrapCopierFactory.wo(Script.class, WoScript.class,
 				null, WoScript.excludes);
 
-		@FieldDescribe("数据字典中所有的对象列表")
+		@FieldDescribe("데이터 사전의 모든 객체 목록")
 		private List<WoAppDictItem> items = null;
 	}
 
 	/**
-	 * 用于输出的数据字典信息对象
+	 * 출력용 데이터 사전 정보 객체
 	 */
 	public static class WoAppDictItem extends AppDictItem {
 

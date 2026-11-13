@@ -46,7 +46,7 @@ class BaseAction extends StandardJaxrsAction {
 
 	static class WoPersonAttributeAbstract extends GsonPropertyObject {
 
-		@FieldDescribe("个人属性")
+		@FieldDescribe("사용자 속성")
 		private List<String> personAttributeList = new ArrayList<>();
 
 		public List<String> getPersonAttributeList() {

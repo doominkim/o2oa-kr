@@ -16,17 +16,17 @@ public class DomainTools {
 	}
 
 	/**
-	 * 获取url的域名部分，注意：域名部分包括端口号。
+	 * url의 도메인 부분 조회, 주의: 도메인 부분에 포트 번호 포함.
 	 * 
 	 * @param url
 	 * @return
 	 */
 	public static final String getDomain(String url) {
-		// 0. 参数检验
+		// 0. 파라미터 검사
 		if (url == null)
 			return null;
 
-		// 1. 剔出域名
+		// 1. 도메인 추출
 		String domain;
 
 		int l = 0;
@@ -61,11 +61,11 @@ public class DomainTools {
 	}
 
 	public static final String getDomainWithProtocal(String url) {
-		// 0. 参数检验
+		// 0. 파라미터 검사
 		if (url == null)
 			return null;
 
-		// 1. 剔出域名
+		// 1. 도메인 추출
 		String domain;
 
 		int l = 0;
@@ -107,11 +107,11 @@ public class DomainTools {
 	}
 
 	/**
-	 * 判定一个字符串是否为URL，并返回归一化后的URL字符串。 归一化规则：1.以http://打头; 2.端口号为80时，要省略; 3.
-	 * 纯域名时，要加"/"作结尾
+	 * 문자열이 URL인지 판정하고 정규화된 URL 문자열 반환. 정규화 규칙: 1.http://로 시작; 2.포트가 80이면 생략; 3.
+	 * 순수 도메인이면 "/"로 끝맺음
 	 * 
-	 * @param query 检查字符串
-	 * @return 当结果为URL时，返回归一化的结果，否则返回null。
+	 * @param query 검사 문자열
+	 * @return 결과가 URL이면 정규화 결과, 아니면 null 반환.
 	 */
 	private static final String[] traditionalUrlPostfix = { ".com", ".biz", ".pro", ".aero", ".coop", ".museum",
 			".mobi", ".edu", ".gov", ".info", ".mil", ".name", ".net", ".org", ".jobs", ".travel", ".mil", ".arpa",
@@ -153,8 +153,8 @@ public class DomainTools {
 			".ve", ".vg", ".vn", ".vu", ".wf", ".ws", ".ye", ".yu", ".za", ".zm", ".zr", ".zw"
 
 	};
-	// A C－科研机构； COM－工、商、金融等专业； EDU－教育机构； GOV－政府部门； NET－互
-	// 联网络、接入网络的信息中心和运行中心； ORG
+	// A C-연구 기관; COM-공업, 상업, 금융 등 전문 분야; EDU-교육 기관; GOV-정부 부처; NET-인
+	// 터넷, 접속망의 정보 센터와 운영 센터; ORG
 	private static final String[] fixupPostfix = new String[] { ".cn", ".bj", ".id", ".co", ".il", ".co", ".jp", ".co",
 			".kr", ".co", ".nr", ".co", ".uk", ".co", ".uz", ".co", ".cn", ".ac", ".cn", ".com", ".cn", ".edu", ".cn",
 			".gov", ".cn", ".net", ".cn", ".org", ".cn", ".sh", ".cn", ".tj", ".cn", ".cq", ".cn", ".he", ".cn", ".sx",
@@ -165,11 +165,11 @@ public class DomainTools {
 	public static HashMap<String, HashMap<String, Object>> urlPostfixMap = new HashMap<String, HashMap<String, Object>>();
 	public static HashMap<String, String> regionalUrlPostfixMap = new HashMap<String, String>();
 	public static HashMap<String, String> traditionalUrlPostfixMap = new HashMap<String, String>();
-	// 所有顶级域名列表(不带前边的.)
+	// 전체 최상위 도메인 목록(앞의 . 제외)
 	public static HashMap<String, HashMap<String, Object>> urlPostfixMap_noDot = new HashMap<String, HashMap<String, Object>>();
-	// 最初定义的几组业务相关的顶级域名列表(不带前边的.)
+	// 처음 정의된 업무 관련 최상위 도메인 목록(앞의 . 제외)
 	public static HashMap<String, String> regionalUrlPostfixMap_noDot = new HashMap<String, String>();
-	// 后来加入的国家级顶级域名列表(不带前边的.)
+	// 나중에 추가된 국가 최상위 도메인 목록(앞의 . 제외)
 	public static HashMap<String, String> traditionalUrlPostfixMap_noDot = new HashMap<String, String>();
 
 	static {
@@ -234,11 +234,11 @@ public class DomainTools {
 	public static final String URL_DOMAIN_SEPERATOR = ".";
 
 	/**
-	 * 判定一个字符串是否为URL，并返回归一化后的URL字符串。 归一化规则：1.以http://打头; 2.端口号为80时，要省略; 3.
-	 * 纯域名时，要加"/"作结尾
+	 * 문자열이 URL인지 판정하고 정규화된 URL 문자열 반환. 정규화 규칙: 1.http://로 시작; 2.포트가 80이면 생략; 3.
+	 * 순수 도메인이면 "/"로 끝맺음
 	 * 
-	 * @param query 检查字符串
-	 * @return 当结果为URL时，返回归一化的结果，否则返回null。
+	 * @param query 검사 문자열
+	 * @return 결과가 URL이면 정규화 결과, 아니면 null 반환.
 	 */
 	public static final String getLookupUrl(String query) {
 		String temp = query.trim();
@@ -259,7 +259,7 @@ public class DomainTools {
 		int idxColon = temp.indexOf(':');
 
 		int port = 80;
-		if (idxSlash < 0) { // 纯域名
+		if (idxSlash < 0) { // 순수 도메인
 			if (idxColon > 0) {
 				try {
 					port = Integer.parseInt(temp.substring(idxColon + 1));
@@ -270,7 +270,7 @@ public class DomainTools {
 			} else
 				domain = temp;
 			filePath = URL_PATH_SEPERATOR;
-		} else { // 域名＋目录
+		} else { // 도메인+디렉터리
 			if (idxColon > 0 && idxColon < idxSlash) {
 				try {
 					port = Integer.parseInt(temp.substring(idxColon + 1, idxSlash));
@@ -283,14 +283,14 @@ public class DomainTools {
 			}
 			filePath = temp.substring(idxSlash);
 		}
-		// 判断 port 是否在合法范围内
+		// port가 유효 범위인지 판단
 		if (port <= 0 || port > 65535) {
 			return null;
 		}
-		// 判断域名部分是否合法
+		// 도메인 부분 유효성 판단
 
 		domain = validateDomain(domain);
-		// 确定为URL
+		// URL로 확정
 		if (domain != null) {
 
 			String result;
@@ -309,7 +309,7 @@ public class DomainTools {
 			return false;
 
 		boolean isValid = false;
-		// 判断一：xxx.xxx.xxx.xxx形式的IP地址
+		// 판단 1: xxx.xxx.xxx.xxx 형식 IP 주소
 		try {
 			StringTokenizer token = new StringTokenizer(domain, URL_DOMAIN_SEPERATOR);
 			int i;
@@ -320,7 +320,7 @@ public class DomainTools {
 			}
 			if (i == 4) {
 				if (!token.hasMoreTokens()) {
-					// 验证成功
+					// 검증 성공
 					isValid = true;
 				}
 			}
@@ -332,17 +332,17 @@ public class DomainTools {
 	}
 
 	/**
-	 * 检验域名部分是否符合RFC规范
+	 * 도메인 부분이 RFC 규격에 맞는지 검사
 	 * 
 	 * @param domain
-	 * @return 如果返回null，说明参数不是域名，否则就返回domain自身
+	 * @return null이면 파라미터가 도메인이 아님, 아니면 domain 자체 반환
 	 * 
 	 */
 	public static final String validateDomain(String domain) {
 		if (domain == null)
 			return null;
 
-		// 判断零：不含非法字符
+		// 판단 0: 유효하지 않은 문자 없음
 		for (int i = 0; i < domain.length(); i++) {
 
 			char c = domain.charAt(i);
@@ -350,7 +350,7 @@ public class DomainTools {
 			if (c > 0x7f) {
 				return null;
 			} else if (!isLetterOrDigit(c)) {
-				// 域名不能包含符号, 但可以包含'.'或'-'或'_',且不能以这三个符号打头或结尾
+				// 도메인은 기호를 포함할 수 없으나 '.' 또는 '-' 또는 '_'는 포함 가능하며, 이 세 기호로 시작하거나 끝날 수 없음
 				if ((c == '.' && i != 0 && i != domain.length() - 1)
 						|| ((c == '-' || c == '_') && i != 0 && i != domain.length() - 1)) {
 					continue;
@@ -366,10 +366,10 @@ public class DomainTools {
 				isValid = true;
 				break;
 			}
-			// 否则判断是否满足其他的形式
+			// 아니면 다른 형식 충족 여부 판단
 			{
 				isValid = true;
-				// 判断二.1：xx.xxxx.com形式的域名(判断字符组成的合法性)
+				// 판단 2.1: xx.xxxx.com 형식 도메인(문자 구성 유효성 판단)
 				StringTokenizer token = new StringTokenizer(domain, URL_DOMAIN_SEPERATOR);
 				while (token.hasMoreTokens()) {
 					String tok = token.nextToken();
@@ -381,11 +381,11 @@ public class DomainTools {
 				}
 				if (isValid && domain.indexOf("..") >= 0)
 					isValid = false;
-				// 不满足域名形式，跳出
+				// 도메인 형식 불충족, 탈출
 				if (!isValid)
 					break; // do .. while(false);
 			}
-			// 判断二：xx.xxxx.com形式的域名(根据后缀判断)
+			// 판단 2: xx.xxxx.com 형식 도메인(접미사로 판단)
 			{
 				isValid = false;
 				domain = domain.toLowerCase();
@@ -394,7 +394,7 @@ public class DomainTools {
 					String postfix = domain.substring(p);
 					if (urlPostfixMap.containsKey(postfix)) {
 						isValid = true;
-						// 验证成功，跳出不再执行其他的模板判断
+						// 검증 성공, 탈출하여 다른 템플릿 판단 미실행
 						break; // do .. while(false);
 					}
 				} catch (IndexOutOfBoundsException e) {
@@ -402,7 +402,7 @@ public class DomainTools {
 			}
 		} while (false);
 
-		// 确定为URL
+		// URL로 확정
 		if (isValid) {
 			return domain;
 		} else {
@@ -411,9 +411,9 @@ public class DomainTools {
 	}
 
 	/**
-	 * 判断URL是不是域名形式的URL
+	 * URL이 도메인 형식 URL인지 판단
 	 * 
-	 * @param url url必须是符合本类中的URL归一化函数规则的URL
+	 * @param url url은 이 클래스의 URL 정규화 함수 규칙에 맞는 URL이어야 함
 	 * @return
 	 */
 	public static final boolean isDomain(String url) {
@@ -430,12 +430,12 @@ public class DomainTools {
 	}
 
 	/**
-	 * 找出url的一级域名 一级域名的格式: [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{顶级域名} 或
-	 * [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{域名商提供的域名}.{顶级域名}
+	 * url의 1차 도메인 찾기, 1차 도메인 형식: [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{최상위 도메인} 또는
+	 * [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{도메인 업체 제공 도메인}.{최상위 도메인}
 	 * 
-	 * @param url url必须是符合本类中的URL归一化函数规则的URL
-	 * @return 如果参数不是一个url返回null, 否则返回对应的顶级域名串,如:
-	 *         "http://www.sogou.com.cn/"返回值是"sogou.com.cn"
+	 * @param url url은 이 클래스의 URL 정규화 함수 규칙에 맞는 URL이어야 함
+	 * @return 파라미터가 url이 아니면 null, 아니면 해당 최상위 도메인 문자열 반환, 예:
+	 *         "http://www.sogou.com.cn/"의 반환값은 "sogou.com.cn"
 	 */
 	@SuppressWarnings("rawtypes")
 	public static final String getMainDomain(String url) {
@@ -451,10 +451,10 @@ public class DomainTools {
 		do {
 			last = domain.lastIndexOf('.', lastDot - 1);
 
-			// 前边已经没有'.'了
+			// 앞에 더 이상 '.'가 없음
 			if (last < 0)
 				break;
-			// 已经没有第n+1级域名了
+			// n+1차 도메인이 더 이상 없음
 			if (map == null)
 				break;
 
@@ -467,7 +467,7 @@ public class DomainTools {
 			lastDot = last;
 		} while (true);
 		if (lastDot == domain.length()) {
-			return null; // 没有顶级域名
+			return null; // 최상위 도메인 없음
 		} else {
 			if (last < 0) { // xxx.com.cn
 				return domain;
@@ -478,10 +478,10 @@ public class DomainTools {
 	}
 
 	/**
-	 * 检查url是否为不以www开头的一级域名 一级域名的格式: [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{任意顶级域名} 或
-	 * [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{传统顶级域名}.{地区顶级域名}
+	 * url이 www로 시작하지 않는 1차 도메인인지 검사, 1차 도메인 형식: [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{임의 최상위 도메인} 또는
+	 * [a-z0-9]([a-z0-9\-]*[a-z0-9])?\.{전통 최상위 도메인}.{지역 최상위 도메인}
 	 * 
-	 * @param url url必须是符合本类中的URL归一化函数规则的URL
+	 * @param url url은 이 클래스의 URL 정규화 함수 규칙에 맞는 URL이어야 함
 	 * @return
 	 */
 	public static final boolean isNonWWW(String url) {
@@ -497,11 +497,11 @@ public class DomainTools {
 	}
 
 	/**
-	 * 从URL串中获取QueryString串
+	 * URL 문자열에서 QueryString 문자열 조회
 	 * 
-	 * @param url 完整的URL串，包括协议头、域名部分等
-	 * @return null 如果url参数为null，或url中不含'?'字符
-	 *         否则根据RFC标准,返回第一个'?'以后，第一个'#'中间的部分作为QueryString串
+	 * @param url 프로토콜 헤더, 도메인 부분 등을 포함한 전체 URL 문자열
+	 * @return url 파라미터가 null이거나 url에 '?' 문자가 없으면 null
+	 *         아니면 RFC 표준에 따라 첫 '?' 이후 첫 '#' 사이 부분을 QueryString 문자열로 반환
 	 */
 	public static final String getQueryString(String url) {
 		if (url == null)
@@ -547,26 +547,26 @@ public class DomainTools {
 //	}
 
 	/**
-	 * 通用url解码，将%xx等编码的字符串直接转成对应的byte，不考虑具体编码
+	 * 범용 url 디코딩, %xx 등으로 인코딩된 문자열을 해당 byte로 바로 변환, 구체 인코딩 미고려
 	 * 
 	 * @see genericUrlDecode(String url, byte[]buff, int flag)
-	 * @param url  被解码的url.
-	 * @param buff 用于存放解码后数据的缓存
-	 * @return >=0 解析成功，buff中数据的长度 -1 参数有问题，url为空 -2 参数有问题，buff空间不足 -3 未知问题 -4
-	 *         确认编码为GBK
+	 * @param url  디코딩할 url.
+	 * @param buff 디코딩된 데이터를 저장할 버퍼
+	 * @return >=0 파싱 성공, buff 내 데이터 길이 -1 파라미터 문제, url이 비어 있음 -2 파라미터 문제, buff 공간 부족 -3 알 수 없는 문제 -4
+	 *         GBK 인코딩으로 확인
 	 */
 	public static final int genericUrlDecode(String url, byte[] buff) {
 		return genericUrlDecode(url, buff, 0);
 	}
 
 	/**
-	 * 通用url解码，将%xx直接转成对应的byte，不考虑具体编码 支持%FF，%uFFFF，四种编码方法。注意，这里指的编码同"GBK"不同，不要混淆
+	 * 범용 url 디코딩, %xx를 해당 byte로 바로 변환, 구체 인코딩 미고려, %FF,%uFFFF 네 가지 인코딩 방식 지원. 주의: 여기서 말하는 인코딩은 "GBK"와 달라 혼동하지 말 것
 	 * 
-	 * @param url  被解码的url.
-	 * @param buff 用于存放解码后数据的缓存
-	 * @param flag 格式扩展参数， 0表示仅针对url编码处理 第一位为1，表示需要处理apache格式的编码
-	 * @return >=0 解析成功，buff中数据的长度 -1 参数有问题，url为空 -2 参数有问题，buff空间不足 -3 未知问题 -4
-	 *         确认编码为GBK
+	 * @param url  디코딩할 url.
+	 * @param buff 디코딩된 데이터를 저장할 버퍼
+	 * @param flag 형식 확장 파라미터, 0은 url 인코딩만 처리, 첫 비트가 1이면 apache 형식 인코딩 처리 필요
+	 * @return >=0 파싱 성공, buff 내 데이터 길이 -1 파라미터 문제, url이 비어 있음 -2 파라미터 문제, buff 공간 부족 -3 알 수 없는 문제 -4
+	 *         GBK 인코딩으로 확인
 	 */
 	public static final int genericUrlDecode(String url1, byte[] buff, int flag) {
 		if (url1 == null || buff == null) {
@@ -575,9 +575,9 @@ public class DomainTools {
 		byte[] data = url1.getBytes();
 		byte[] bb = buff;
 		int idx = 0;
-		for (int i = 0; i < data.length; i++) { // 已知的做了编码的字符串必定超过3个字符
-			if (data[i] == '%') { // 处理%FF和%uFFFF的情况
-				if (checkMultiHexChar(data, i + 1, 2)) { // 处理%ff格式
+		for (int i = 0; i < data.length; i++) { // 인코딩된 것으로 알려진 문자열은 반드시 3자를 초과
+			if (data[i] == '%') { // %FF와 %uFFFF의 경우 처리
+				if (checkMultiHexChar(data, i + 1, 2)) { // %ff 형식 처리
 					try {
 						int a = Integer.parseInt(new String(data, i + 1, 2), 16);
 						if (!tryPut(bb, idx, (byte) a))
@@ -587,15 +587,15 @@ public class DomainTools {
 					} catch (Exception e) {
 						return -3;
 					}
-				} else if (i + 1 < data.length && data[i + 1] == 'u') { // 处理%uFFFF格式
+				} else if (i + 1 < data.length && data[i + 1] == 'u') { // %uFFFF 형식 처리
 					if (checkMultiHexChar(data, i + 2, 4)) {
-						// 可以确认为gbk编码
+						// gbk 인코딩으로 확인 가능
 						return -4;
 					}
 				}
 			} else if ((flag & 1) == 1) {
-				// 为apache格式解析预留的扩展
-				if (data[i] == '\\' && i + 1 < data.length && data[i + 1] == 'x') { // 处理\xFF格式
+				// apache 형식 파싱을 위한 확장 예약
+				if (data[i] == '\\' && i + 1 < data.length && data[i + 1] == 'x') { // \xFF 형식 처리
 					if (checkMultiHexChar(data, i + 2, 2)) {
 						try {
 							int a = Integer.parseInt(new String(data, i + 2, 2), 16);
@@ -609,7 +609,7 @@ public class DomainTools {
 					}
 				}
 			} else {
-				// 放入其他字符
+				// 기타 문자 넣기
 				if (!tryPut(bb, idx, (byte) data[i]))
 					return -2;
 				idx++;
@@ -620,11 +620,11 @@ public class DomainTools {
 	}
 
 	/**
-	 * 根据一串byte码流判断可能的字符编码 依赖于jchardet包，根据其提供的probe机制判断对应的编码类型，有一定的误判率
-	 * 码流必须是按照一种统一的规则来编码的，码流的数据越多，判定的正确性越高
+	 * byte 스트림으로 가능한 문자 인코딩 판단, jchardet 패키지의 probe 메커니즘으로 인코딩 유형을 판단하며 일정한 오판율 있음
+	 * 스트림은 하나의 통일된 규칙으로 인코딩되어야 하며, 데이터가 많을수록 판정 정확도가 높음
 	 * 
-	 * @param s 待判定的码流
-	 * @return 可能的编码类型数组，"UTF-8", "GBK", "UTF-16"等等. 如果参数有问题，返回值为null
+	 * @param s 판정할 스트림
+	 * @return 가능한 인코딩 유형 배열, "UTF-8", "GBK", "UTF-16" 등. 파라미터에 문제가 있으면 null 반환
 	 */
 //	public static final String[] probeAllCharsets(byte[] s) {
 //		if( s == null || s.length == 0 ) return null;
@@ -663,10 +663,10 @@ public class DomainTools {
 //	}
 
 	/**
-	 * 判断字符串可能的编码类型
+	 * 문자열의 가능한 인코딩 유형 판단
 	 * 
-	 * @param line 经过编码的字符串，一般应该是url参数
-	 * @return 可能的编码类型"GBK"，"UTF-8"等，如果出现错误，返回值是null
+	 * @param line 인코딩된 문자열, 보통 url 파라미터
+	 * @return 가능한 인코딩 유형 "GBK", "UTF-8" 등, 오류 시 null 반환
 	 */
 //	public static final String probeCharset(String line){
 //		String dft = null;
@@ -694,9 +694,9 @@ public class DomainTools {
 //				System.out.println("charset diff:exception "+line);
 //			}
 //		} else if( n == -1 ){
-//			// 参数有问题
+//			// 파라미터 문제
 //			ret = dft;
-//		} else if( n == -2 ){ // 空间不足，重试
+//		} else if( n == -2 ){ // 공간 부족, 재시도
 //			buff = new byte[line.length()*4];
 //			n = genericUrlDecode(line, buff);
 //			if( n < 0 ){
@@ -704,9 +704,9 @@ public class DomainTools {
 //			} else {
 //				ret = probeCharset(buff, 0, n);
 //			}
-//		} else if( n == -4 ){ // n == -4 编码类型确认为GBK
+//		} else if( n == -4 ){ // n == -4 인코딩 유형을 GBK로 확인
 //			ret = "GBK";
-//		} else {// n == -3 未知错误
+//		} else {// n == -3 알 수 없는 오류
 //			ret = dft;
 //		}
 //		return ret;
@@ -771,12 +771,12 @@ public class DomainTools {
 //		return total == 0 ? 1 : (sum)/total;
 //	}
 	/**
-	 * 判定一段码流对应的编码类型
+	 * 스트림 구간의 인코딩 유형 판정
 	 * 
-	 * @param buff  原始码流，数据量越大越准确，但是性能也随之下降
-	 * @param start 起始位置
-	 * @param limit 码流的长度
-	 * @return null 参数有误，或者判定失败
+	 * @param buff  원본 스트림, 데이터가 많을수록 정확하지만 성능도 저하
+	 * @param start 시작 위치
+	 * @param limit 스트림 길이
+	 * @return null 파라미터 오류 또는 판정 실패
 	 */
 //	public static final String probeCharset(byte[] bb, int start, int limit){
 //
@@ -792,14 +792,14 @@ public class DomainTools {
 //				return "GBK";
 //			else if( cs.equals("UTF-8") ){
 //				// fixup
-//				// 发现chardet包对“一”等字的识别有明显的问题
+//				// chardet 패키지가 “일” 등 일부 글자 인식에 뚜렷한 문제가 있음
 //				{
 //					try{
 //						String str = new String( bb, start, limit, cs);
-//						if (str != null && str.contains("中國")){
+//						if (str != null && str.contains("한국")){
 //							return "UTF-8";
 //						}
-//						if (str != null && str.contains("豬v")){
+//						if (str != null && str.contains("돼지v")){
 //							return "GBK";
 //						}
 //						if(count(str) > 0.5){
@@ -841,7 +841,7 @@ public class DomainTools {
 //				return "GBK";
 //			else if( cs.equals("UTF-8") ){
 //				// fixup
-//				// 发现chardet包对“一”等字的识别有明显的问题
+//				// chardet 패키지가 “일” 등 일부 글자 인식에 뚜렷한 문제가 있음
 //				{
 //					try{
 //						String str = new String( bb, start, limit, cs);
@@ -854,7 +854,7 @@ public class DomainTools {
 //							str = new String( bb, start, limit, "GBK");
 //							float cnt2 = count2(str);  
 //							if (cnt2+0.1 < cnt){
-//								//gbk的可能性比utf8高，但如果chardet没有判断出gbk，则仍然用utf8
+//								//gbk 가능성이 utf8보다 높지만, chardet가 gbk로 판단하지 않으면 utf8 사용
 //								maybeSET = "UTF-8";
 //								continue;
 //							}else if (cnt2 == 0.0 && cnt > 0.0){
@@ -877,11 +877,11 @@ public class DomainTools {
 //	}
 
 	/**
-	 * 从url参数，或者带参数的url中截取一个特定的参数，考虑了"#"锚标的情况
+	 * url 파라미터 또는 파라미터 포함 url에서 특정 파라미터 추출, "#" 앵커 경우 고려
 	 * 
-	 * @param url   原始字符串
-	 * @param param 需要找的参数
-	 * @return 找到的对应参数 null 参数不存在，或者参数非法
+	 * @param url   원본 문자열
+	 * @param param 찾을 파라미터
+	 * @return 찾은 해당 파라미터, null은 파라미터가 없거나 유효하지 않음
 	 */
 	public static final String getParameter(String url, String param) {
 		if (url == null || param == null)
@@ -910,11 +910,11 @@ public class DomainTools {
 				left = idx;
 			}
 		}
-		// 未找到
+		// 찾지 못함
 		if (left < 0)
 			return null;
 		left += key.length();
-		// 处理#锚标
+		// # 앵커 처리
 		if (left >= right)
 			return null;
 

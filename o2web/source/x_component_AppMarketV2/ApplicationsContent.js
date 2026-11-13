@@ -118,16 +118,16 @@ MWF.xApplication.AppMarketV2.ApplicationsContent.Applications= new Class({
     loadApplications: function(){
         this.emptyLoadContent();
         if (this.collectToken=="" || this.collectUrl==""){
-            //先登录collcect
+            //먼저 collcect 로그인
             debugger
-            this.actions.CollectAction.login(//平台封装好的方法
-                function( json ){ //服务调用成功的回调函数, json为服务传回的数据
+            this.actions.CollectAction.login(//플랫폼이 제공하는 메서드
+                function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
                     if (json.type && json.type=="success"){
-                        data = json.data; //为变量data赋值
+                        data = json.data; //변수 data에 값 할당
                         this.collectUrl = data.collectUrl;
                         this.collectToken = data.collectToken;
                     }
-                }.bind(this),null,false //同步执行
+                }.bind(this),null,false //동기 실행
             );
         }
         this.actions.MarketAction.listPaging(this.page, this.pageSize, this.content.querydata,function(json){
@@ -192,14 +192,14 @@ MWF.xApplication.AppMarketV2.ApplicationsContent.Applications= new Class({
             }.bind(this)
         });
         res.send();*/
-        this.actions.CollectAction.bbs(//平台封装好的方法
-            function( json ){ //服务调用成功的回调函数, json为服务传回的数据
+        this.actions.CollectAction.bbs(//플랫폼이 제공하는 메서드
+            function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
                 if (json.type && json.type=="success"){debugger;
-                    data = json.data; //为变量data赋值
+                    data = json.data; //변수 data에 값 할당
                     this.bbsUrlPath = data.bbsUrlPath;
                     this.bbsUrl = data.bbsUrl;
                 }
-            }.bind(this),null,false //同步执行
+            }.bind(this),null,false //동기 실행
         );
     },
     loadCommentsGrade: function(appdata,callback){
@@ -278,7 +278,7 @@ MWF.xApplication.AppMarketV2.ApplicationsContent.Applications= new Class({
         }.bind(this));
     },
     loadCertainApplication: function(appsdiv, d, i,rowappnum,rowappmargin){
-        //app 排列 begin
+        //app 정렬 begin
         debugger;
         //var gradeData = this.loadCommentsGrade(d);
         this.loadCommentsGrade(d,function( gradeData ){
@@ -295,7 +295,7 @@ MWF.xApplication.AppMarketV2.ApplicationsContent.Applications= new Class({
             var applicationinfo = new Element("div",{"class":"o2_appmarket_application_info"}).inject(applicationdiv);
             var applicationinfo_name = new Element("div",{"text":d.name,"class":"o2_appmarket_application_info_name","title":d.name}).inject(applicationinfo);
             //var applicationinfo_recommend = new Element("div",{"text":d.recommend,"class":"o2_appmarket_application_info_recommend"}).inject(applicationinfo);
-            //推荐指数改为显示评星
+            //추천 지수를 별점으로 표시
             var applicationinfo_star = new Element("div",{"class":"o2_appmarket_application_info_recommend"}).inject(applicationinfo);
             var commentcount = 0;
             var grade = 0;
@@ -421,17 +421,17 @@ MWF.xApplication.AppMarketV2.ApplicationsContent.Applications= new Class({
     },
     numberFix:function(data,n){
         var numbers = '';
-        // 保留几位小数后面添加几个0
+        // 소수점 몇 자리 유지 후 0 추가
         for (var i = 0; i < n; i++) {
             numbers += '0';
         }
         var s = 1 + numbers;
-        // 如果是整数需要添加后面的0
+        // 정수이면 뒤에 0 추가 필요
         var spot = "." + numbers;
-        // Math.round四舍五入
-        //  parseFloat() 函数可解析一个字符串，并返回一个浮点数。
+        // Math.round 반올림
+        //  parseFloat() 함수는 문자열을 해석해 부동소수점 수를 반환.
         var value = Math.round(parseFloat(data) * s) / s;
-        // 从小数点后面进行分割
+        // 소수점 뒤에서 분할
         var d = value.toString().split(".");
         if (d.length == 1) {
             value = value.toString();

@@ -7,6 +7,6 @@ class ExceptionTypeCodeColumnEmpty extends PromptException {
 	private static final long serialVersionUID = -2139584911736169462L;
 
 	ExceptionTypeCodeColumnEmpty() {
-		super("级别编号列不能为空.");
+		super("등급 번호 열은 비워 둘 수 없습니다.");
 	}
 }

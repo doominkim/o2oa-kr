@@ -51,41 +51,41 @@ public class WorkControlBuilder {
 		this.work = work;
 	}
 
-	// 是否可以管理
+	// 관리 가능 여부
 	private boolean ifAllowManage = false;
-	// 是否可以看到
+	// 조회 가능 여부
 	private boolean ifAllowVisit = false;
-	// 是否可以直接流转
+	// 직접 진행 가능 여부
 	private boolean ifAllowProcessing = false;
-	// 是否可以处理待阅
+	// 열람 대기 처리 가능 여부
 	private boolean ifAllowReadProcessing = false;
-	// 是否可以保存数据
+	// 데이터 저장 가능 여부
 	private boolean ifAllowSave = false;
-	// 是否可以重置处理人
+	// 처리자 재설정 가능 여부
 	private boolean ifAllowReset = false;
-	// 是否可以加签
+	// 추가 결재자 지정 가능 여부
 	private boolean ifAllowAddTask = false;
-	// 是否可以调度
+	// 조정 가능 여부
 	private boolean ifAllowReroute = false;
-	// 是否可以删除
+	// 삭제 가능 여부
 	private boolean ifAllowDelete = false;
-	// 是否可以增加会签分支
+	// 합의 분기 추가 가능 여부
 	private boolean ifAllowAddSplit = false;
-	// 是否可以召回
+	// 회수 가능 여부
 	private boolean ifAllowRetract = false;
-	// 是否可以召回V3
+	// 회수 가능 여부 V3
 	private boolean ifAllowV3Retract = false;
-	// 是否可以回滚
+	// 롤백 가능 여부
 	private boolean ifAllowRollback = false;
-	// 是否可以提醒
+	// 알림 가능 여부
 	private boolean ifAllowPress = false;
-	// 是否可以待办挂起(暂停待办计时)
+	// 결재 대기 보류(결재 대기 시간 측정 일시정지) 가능 여부
 	private boolean ifAllowPause = false;
-	// 是否可以取消待办挂起(恢复待办计时)
+	// 결재 대기 보류 취소(결재 대기 시간 측정 재개) 가능 여부
 	private boolean ifAllowResume = false;
-	// 是否可以退回
+	// 반려 가능 여부
 	private boolean ifAllowGoBack = false;
-	// 是否可以终止
+	// 종료 가능 여부
 	private boolean ifAllowTerminate = false;
 
 	public WorkControlBuilder enableAllowManage() {
@@ -203,7 +203,7 @@ public class WorkControlBuilder {
 	private Boolean canManage = null;
 
 	/**
-	 * 判断是否可以对应用或者流程管理,额外判断是否review有permissionWrite标志
+	 * 앱 또는 프로세스 관리 가능 여부 판단, 추가로 review의 permissionWrite 표시 판단
 	 *
 	 * @return
 	 * @throws Exception
@@ -231,7 +231,7 @@ public class WorkControlBuilder {
 		return this.readable;
 	}
 
-	// 初始值必须是null,用于判断hasTaskWithWork是否已经经过计算
+	// 초깃값은 반드시 null이어야 하며, hasTaskWithWork 계산 여부 판단에 사용
 	private Optional<Task> hasTaskWithWork = null;
 
 	private Optional<Task> hasTaskWithWork() throws Exception {
@@ -428,7 +428,7 @@ public class WorkControlBuilder {
 	}
 
 	/**
-	 * 管理员可以删除,或者活动设置了可以删除&&有待办
+	 * 관리자는 삭제 가능, 또는 활동에 삭제 허용이 설정되고 && 결재 대기가 있는 경우
 	 *
 	 * @param control
 	 */
@@ -501,11 +501,11 @@ public class WorkControlBuilder {
 //	}
 
 	/**
-	 * 是否可以召回有三个判断点 1.活动环节设置允许召回 2.多人活动(串并行)中没有人已经处理过,也就是没有当前活动的已办
-	 * 3.回溯活动如果经过一些非人工环节那么也可以召回 4.送拆分后任一工作有处理过都不能召回
-	 * 5.流转经过合并环节则不能撤回.
+	 * 회수 가능 여부는 세 가지로 판단 1. 활동 단계에서 회수 허용 설정 2. 다중 인원 활동(순차·병렬)에서 아무도 처리하지 않음, 즉 현재 활동의 처리 완료가 없음
+	 * 3. 되짚은 활동이 일부 비인력 단계를 거쳤다면 회수 가능 4. 분할 후 어느 업무 문서라도 처리되었으면 회수 불가
+	 * 5. 병합 단계를 거쳐 진행된 경우 회수 불가.
 	 *
-	 * @param control 控制器
+	 * @param control 컨트롤러
 	 */
 	private void computeAllowRetract(Control control) {
 		try {
@@ -604,7 +604,7 @@ public class WorkControlBuilder {
 	}
 
 	/**
-	 * 条件为1.允许提醒,2.有已办,3.非只有当前人一条待办.
+	 * 조건: 1. 알림 허용, 2. 처리 완료 있음, 3. 현재 사용자의 결재 대기 한 건만 있는 경우가 아님.
 	 *
 	 * @param control
 	 */
@@ -626,7 +626,7 @@ public class WorkControlBuilder {
 					&& BooleanUtils.isTrue(
 							PropertyTools.getOrElse(activity(), Manual.allowPause_FIELDNAME, Boolean.class, false))
 					&& BooleanUtils.isTrue(control.getAllowSave())) {
-				// 如果已经处于挂起状态,那么允许恢复
+				// 이미 보류 상태이면 재개 허용
 				control.setAllowPause(!hasPauseTaskWithWork());
 			}
 		} catch (Exception e) {
@@ -640,7 +640,7 @@ public class WorkControlBuilder {
 			if (Objects.nonNull(activity())
 					&& PropertyTools.getOrElse(activity(), Manual.allowPause_FIELDNAME, Boolean.class, false)
 					&& control.getAllowSave()) {
-				// 如果已经处于挂起状态,那么允许恢复
+				// 이미 보류 상태이면 재개 허용
 				control.setAllowResume(hasPauseTaskWithWork());
 			}
 		} catch (Exception e) {
@@ -683,7 +683,7 @@ public class WorkControlBuilder {
 	}
 
 	/**
-	 * 在退回处理过程中如果有getGoBackStore说明下一步需要jump,那么禁用以下功能.
+	 * 반려 처리 중 getGoBackStore가 있으면 다음 단계에서 jump가 필요하므로 아래 기능 비활성화.
 	 *
 	 * @param wo
 	 * @param work

@@ -27,13 +27,13 @@ public class WorkCompletedControlBuilder {
 		this.workCompleted = workCompleted;
 	}
 
-	// 是否可以管理
+	// 관리 가능 여부
 	private boolean ifAllowManage = false;
-	// 是否可以看到
+	// 조회 가능 여부
 	private boolean ifAllowVisit = false;
-	// 是否可以处理待阅
+	// 열람 대기 처리 가능 여부
 	private boolean ifAllowReadProcessing = false;
-	// 是否可以回滚
+	// 롤백 가능 여부
 	private boolean ifAllowRollback = false;
 
 	public WorkCompletedControlBuilder enableAllowManage() {

@@ -83,7 +83,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 		File file = new File(dir, "config.json");
 		Gson gson = XGsonBuilder.instance();
 		LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-		// 三服务器合一运行不需要输出centers,否则需要输出centers
+		// 세 서버 통합 실행 시 centers 출력 불필요, 그 외에는 centers 출력 필요
 		if ((!Objects.equals(Config.currentNode().getWeb().getPort(), Config.currentNode().getApplication().getPort()))
 				|| (!Objects.equals(Config.currentNode().getWeb().getPort(),
 						Config.currentNode().getCenter().getPort()))) {
@@ -101,7 +101,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 				centers.add(center);
 			}
 		}
-		// 写入systemName
+		// systemName 기록
 		map.put("footer", Config.collect().getFooter());
 		map.put("title", Config.collect().getTitle());
 		map.put("version", Config.version());
@@ -132,7 +132,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 	}
 
 	/**
-	 * 是否启用安全注销
+	 * 보안 로그아웃 사용 여부
 	 *
 	 * @param map
 	 * @throws Exception
@@ -142,7 +142,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 	}
 
 	/**
-	 * 如果启用了rsa加密,输出public.key
+	 * rsa 암호화 사용 시 public.key 출력
 	 *
 	 * @param map
 	 * @throws Exception
@@ -153,7 +153,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 	}
 
 	/**
-	 * 平台TokenName
+	 * 플랫폼 TokenName
 	 *
 	 * @param map
 	 * @throws Exception
@@ -163,7 +163,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 	}
 
 	/**
-	 * 平台语言
+	 * 플랫폼 언어
 	 *
 	 * @param map
 	 * @throws Exception
@@ -174,7 +174,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 	}
 
 	/**
-	 * 是否启用webSocket链接
+	 * webSocket 연결 사용 여부
 	 *
 	 * @param map
 	 * @throws Exception
@@ -184,7 +184,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 	}
 
 	/**
-	 * 写入密码规则
+	 * 비밀번호 규칙 기록
 	 *
 	 * @param map
 	 * @throws Exception
@@ -195,7 +195,7 @@ public class WebServers extends ConcurrentSkipListMap<String, WebServer> {
 	}
 
 //	/**
-//	 * 写入是否启用了center和application的代理
+//	 * center 및 application 프록시 사용 여부 기록
 //	 *
 //	 * @param o
 //	 * @param webServer

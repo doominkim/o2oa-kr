@@ -16,7 +16,7 @@ import com.x.organization.core.entity.UnitAttribute_;
 
 abstract class BaseAction extends StandardJaxrsAction {
 
-	/** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+	/** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
 	protected boolean uniqueDuplicateWhenNotEmpty(Business business, UnitAttribute unitAttribute) throws Exception {
 		if (StringUtils.isNotEmpty(unitAttribute.getUnique())) {
 			if (business.entityManagerContainer().duplicateWithFlags(unitAttribute.getId(), UnitAttribute.class,
@@ -27,7 +27,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		return false;
 	}
 
-	/** 在同一个unit下名称不能重复 */
+	/** 같은 unit 아래에서 이름 중복 불가 */
 	protected boolean duplicateOnUnit(Business business, Unit unit, String name, UnitAttribute exclude)
 			throws Exception {
 		EntityManager em = business.entityManagerContainer().get(UnitAttribute.class);

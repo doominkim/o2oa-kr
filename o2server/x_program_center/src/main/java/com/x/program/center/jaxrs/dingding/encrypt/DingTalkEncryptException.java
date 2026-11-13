@@ -32,16 +32,16 @@ public class DingTalkEncryptException extends Exception {
     }
 
     static {
-        msgMap.put(0, "成功");
-        msgMap.put(900001, "加密明文文本非法");
-        msgMap.put(900002, "加密时间戳参数非法");
-        msgMap.put(900003, "加密随机字符串参数非法");
-        msgMap.put(900005, "签名不匹配");
-        msgMap.put(900006, "签名计算失败");
-        msgMap.put(900004, "不合法的aes key");
-        msgMap.put(900007, "计算加密文字错误");
-        msgMap.put(900008, "计算解密文字错误");
-        msgMap.put(900009, "计算解密文字长度不匹配");
-        msgMap.put(900010, "计算解密文字corpid不匹配");
+        msgMap.put(0, "성공");
+        msgMap.put(900001, "암호화할 평문이 올바르지 않습니다");
+        msgMap.put(900002, "암호화 타임스탬프 매개변수가 올바르지 않습니다");
+        msgMap.put(900003, "암호화 난수 문자열 매개변수가 올바르지 않습니다");
+        msgMap.put(900005, "서명이 일치하지 않습니다");
+        msgMap.put(900006, "서명 계산에 실패했습니다");
+        msgMap.put(900004, "올바르지 않은 aes key");
+        msgMap.put(900007, "암호문 계산 오류");
+        msgMap.put(900008, "복호문 계산 오류");
+        msgMap.put(900009, "복호문 길이가 일치하지 않습니다");
+        msgMap.put(900010, "복호문의 corpid가 일치하지 않습니다");
     }
 }

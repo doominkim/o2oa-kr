@@ -7,6 +7,6 @@ class ExceptionInvalidCodeAnswer extends LanguagePromptException {
 	private static final long serialVersionUID = -3287459468603291619L;
 
 	ExceptionInvalidCodeAnswer() {
-		super("短信验证码错误.");
+		super("SMS 인증 코드가 올바르지 않습니다.");
 	}
 }

@@ -9,7 +9,7 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public class ConfigObject extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5563957679735192940L;
-	@FieldDescribe("扩展设置.")
+	@FieldDescribe("확장 설정.")
 	private Map<String, Object> extension;
 
 	public void extension(Map<String, Object> extension) {

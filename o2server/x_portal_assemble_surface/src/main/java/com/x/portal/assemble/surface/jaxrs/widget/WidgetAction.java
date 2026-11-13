@@ -25,18 +25,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("widget")
-@JaxrsDescribe("部件")
+@JaxrsDescribe("위젯")
 public class WidgetAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(WidgetAction.class);
 
-	@JaxrsMethodDescribe(value = "获取部件内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "위젯 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -48,13 +48,13 @@ public class WidgetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取部件内容Mobile.", action = ActionGetMobile.class)
+	@JaxrsMethodDescribe(value = "위젯 내용 조회 Mobile.", action = ActionGetMobile.class)
 	@GET
 	@Path("{id}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGetMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -66,13 +66,13 @@ public class WidgetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的部件.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 위젯 목록.", action = ActionList.class)
 	@GET
 	@Path("list/portal/{portal}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void list(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("门户") @PathParam("portal") String portal) {
+			@JaxrsParameterDescribe("포털") @PathParam("portal") String portal) {
 		ActionResult<List<ActionList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -84,14 +84,14 @@ public class WidgetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的部件,其中Portal可以用name,alias和id标识,部件为在此Portal下的页面.", action = ActionGetWithPortal.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 위젯 목록, Portal은 name, alias, id로 식별, 위젯은 이 Portal의 페이지.", action = ActionGetWithPortal.class)
 	@GET
 	@Path("{flag}/portal/{portalFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithPortal(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("门户标识") @PathParam("portalFlag") String portalFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("포털 식별자") @PathParam("portalFlag") String portalFlag) {
 		ActionResult<ActionGetWithPortal.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -103,14 +103,14 @@ public class WidgetAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的部件,其中Portal可以用name,alias和id标识,部件为在此Portal下的页面Mobile.", action = ActionGetWithPortalMobile.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 위젯 목록, Portal은 name, alias, id로 식별, 위젯은 이 Portal의 페이지 Mobile.", action = ActionGetWithPortalMobile.class)
 	@GET
 	@Path("{flag}/portal/{portalFlag}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithPortalMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("门户标识") @PathParam("portalFlag") String portalFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("포털 식별자") @PathParam("portalFlag") String portalFlag) {
 		ActionResult<ActionGetWithPortalMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

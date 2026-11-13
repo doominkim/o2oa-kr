@@ -101,7 +101,7 @@ MWF.xApplication.query.TableDesigner.Table = new Class({
         this.checkToolbars();
     },
     editColumns: function(){
-        // 打开JSON编辑器批量修改字段列表
+        // JSON 편집기를 열어 필드 목록 일괄 수정
         var div = new Element("div", {
             "styles": {
                 "margin": "10px",
@@ -144,20 +144,20 @@ MWF.xApplication.query.TableDesigner.Table = new Class({
 
         var dlg = o2.DL.open(options);
 
-        // 加载JS编辑器并赋值当前字段列表
+        // JS 편집기 로드 후 현재 필드 목록 할당
         o2.require("o2.widget.JavascriptEditor", function(){
             dlg.editor = new o2.widget.JavascriptEditor(div, {
                 "option": {"mode": "json"}
             });
             dlg.editor.load(function(){
-                // 取出当前字段列表，格式化展示
+                // 현재 필드 목록을 꺼내 서식화해 표시
                 var fieldList = this.json.draftData.fieldList || [];
                 dlg.editor.editor.setValue(JSON.stringify(fieldList, null, "\t"));
             }.bind(this));
         }.bind(this), false);
     },
 
-    // 保存编辑后的字段列表
+    // 편집한 필드 목록 저장
     saveEditColumns: function(dlg){
         var str = dlg.editor.editor.getValue().trim();
         var lp = this.designer.lp;
@@ -169,7 +169,7 @@ MWF.xApplication.query.TableDesigner.Table = new Class({
         try {
             var newFieldList = JSON.parse(str);
 
-            // 基础校验
+            // 기본 검증
             if (!Array.isArray(newFieldList)) {
                 this.designer.notice(lp.mustBeArray, "error");
                 return;
@@ -198,33 +198,33 @@ MWF.xApplication.query.TableDesigner.Table = new Class({
                 var field = newFieldList[i];
                 var index = i + 1;
 
-                // 校验字段是对象
+                // 필드가 객체인지 검증
                 if (o2.typeOf(field) !== "object") {
                     this.designer.notice(lp.mustBeJson.replace('{index}', index), "error");
                     return;
                 }
-                // 校验必填 name
+                // 필수 name 검증
                 if (!field.name) {
                     this.designer.notice(lp.noName.replace('{index}', index), "error");
                     return;
                 }
-                // 校验必填 type
+                // 필수 type 검증
                 if (!field.type) {
                     this.designer.notice(lp.noType.replace('{index}', index).replace('{name}', field.name), "error");
                     return;
                 }
-                // 沿用你原生的字段名校验方法（字母开头、仅字母数字下划线、不能是关键字）
+                // 기존 네이티브 필드명 검증 방식 사용(문자로 시작, 문자·숫자·밑줄만, 예약어 불가)
                 if (!this.checkColumnName(field.name)) {
                     return;
                 }
-                // 校验字段名重复
+                // 필드명 중복 검증
                 if (nameMap[field.name]) {
                     this.designer.notice(lp.nameConflict.replace('{name}', field.name), "error");
                     return;
                 }
                 nameMap[field.name] = true;
 
-                // 3. 严格校验字段type是否在允许白名单内
+                // 3. 필드 type이 허용 목록에 있는지 엄격히 검증
                 if (!allowTypeList.contains(field.type)) {
                     this.designer.notice(
                         lp.errorType.replace('{index}', index).
@@ -236,10 +236,10 @@ MWF.xApplication.query.TableDesigner.Table = new Class({
                 }
             }
 
-            // 保存新的字段列表
+            // 새 필드 목록 저장
             this.json.draftData.fieldList = newFieldList;
 
-            // 刷新界面：清空原有列 → 重新加载 → 重新渲染
+            // 화면 새로 고침: 기존 열 비우기 → 다시 로드 → 다시 렌더링
             this.items.each(function(item){
                 item.destroy();
             });
@@ -450,7 +450,7 @@ MWF.xApplication.query.TableDesigner.Table = new Class({
         //     this.designer.notice(this.designer.lp.errorName, "error");
         //     return false;
         // }
-        //仅允许数字字母下划线
+        //숫자·문자·밑줄만 허용
         if(!(/^\w+$/).test(name)){
             this.designer.notice(this.designer.lp.errorName, "error");
             return false;
@@ -805,7 +805,7 @@ MWF.xApplication.query.TableDesigner.Table = new Class({
             var files = fileNode.files;
             if (files.length) {
                 var file = files.item(0);
-                //第三个参数是日期的列
+                //세 번째 인수는 날짜 열
                 ExcelUtils.import( file, function(json){
                     console.log(JSON.stringify(json));
 
@@ -1566,17 +1566,17 @@ MWF.xApplication.query.TableDesigner.Table.ExcelUtils = new Class({
     },
     _openDownloadDialog: function(url, saveName){
         /**
-         * 通用的打开下载对话框方法，没有测试过具体兼容性
-         * @param url 下载地址，也可以是一个blob对象，必选
-         * @param saveName 保存文件名，可选
+         * 다운로드 대화상자를 여는 공통 메서드, 구체적인 호환성은 테스트하지 않음
+         * @param url 다운로드 주소, blob 객체도 가능, 필수
+         * @param saveName 저장 파일 이름, 선택
          */
         if( Browser.name !== 'ie' ){
             if(typeof url == 'object' && url instanceof Blob){
-                url = URL.createObjectURL(url); // 创建blob地址
+                url = URL.createObjectURL(url); // blob 주소 생성
             }
             var aLink = document.createElement('a');
             aLink.href = url;
-            aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+            aLink.download = saveName || ''; // HTML5에 새로 추가된 속성으로 저장 파일 이름 지정, 확장자는 생략 가능, 주의: file:/// 모드에서는 적용되지 않음
             var event;
             if(window.MouseEvent && typeOf( window.MouseEvent ) == "function" ) event = new MouseEvent('click');
             else
@@ -1593,7 +1593,7 @@ MWF.xApplication.query.TableDesigner.Table.ExcelUtils = new Class({
         if (index < 0) {
             return null;
         }
-        var num = 65;// A的Unicode码
+        var num = 65;// A의 Unicode 코드
         var colName = "";
         do {
             if (colName.length > 0)index--;
@@ -1605,7 +1605,7 @@ MWF.xApplication.query.TableDesigner.Table.ExcelUtils = new Class({
     },
     export : function(array, fileName){
         this._loadResource( function(){
-            data = xlsxUtils.format2Sheet(array, 0, 0, null);//偏移3行按keyMap顺序转换
+            data = xlsxUtils.format2Sheet(array, 0, 0, null);//3행 오프셋 후 keyMap 순서로 변환
             var wb = xlsxUtils.format2WB(data, "sheet1", undefined);
             var wopts = { bookType: 'xlsx', bookSST: false, type: 'binary' };
             var dataInfo = wb.Sheets[wb.SheetNames[0]];
@@ -1620,7 +1620,7 @@ MWF.xApplication.query.TableDesigner.Table.ExcelUtils = new Class({
                 var di = dataInfo[at+"1"];
                 // di.v = v;
                 // di.t = "s";
-                di.s = {  //设置副标题样式
+                di.s = {  //부제목 스타일 설정
                     font: {
                         //name: 'Malgun Gothic',
                         sz: 12,
@@ -1652,8 +1652,8 @@ MWF.xApplication.query.TableDesigner.Table.ExcelUtils = new Class({
                     data = e.target.result;
                 }
                 workbook = XLSX.read(data, { type: 'binary' });
-                //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
-                //wb.Sheets[Sheet名]获取第一个Sheet的数据
+                //wb.SheetNames[0]은 Sheets 중 첫 번째 Sheet의 이름
+                //wb.Sheets[Sheet 이름]으로 첫 번째 Sheet의 데이터 조회
                 var sheet = workbook.SheetNames[0];
                 var jsonList = [];
                 for (var sheet in workbook.Sheets) {
@@ -1663,7 +1663,7 @@ MWF.xApplication.query.TableDesigner.Table.ExcelUtils = new Class({
                         var json = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
                         console.log(JSON.stringify(json));
                         jsonList.push(json);
-                        // break; // 如果只取第一张表，就取消注释这行
+                        // break; // 첫 번째 시트만 가져오려면 이 줄의 주석을 해제
                     }
                 }
                 if(callback)callback(jsonList);

@@ -8,6 +8,6 @@ public class ExceptionFileNameInvalid extends PromptException {
 	private static final long serialVersionUID = -283505161497831794L;
 
 	public ExceptionFileNameInvalid(String str) {
-		super("附件名称:{},不合规.", str);
+		super("첨부 파일 이름: {}, 규칙에 맞지 않습니다.", str);
 	}
 }

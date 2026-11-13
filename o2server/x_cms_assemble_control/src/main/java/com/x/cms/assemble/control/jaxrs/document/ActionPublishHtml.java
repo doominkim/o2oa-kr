@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 文档发送html文本到webServer下
+ * 문서 html 텍스트를 webServer로 발송
  * @author sword
  */
 public class ActionPublishHtml extends BaseAction {
@@ -112,7 +112,7 @@ public class ActionPublishHtml extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("html内容，发布为o2server/webServer/cms_publish/{id}.html")
+		@FieldDescribe("html 내용, o2server/webServer/cms_publish/{id}.html로 게시")
 		private String htmlContent;
 
 		public String getHtmlContent() {

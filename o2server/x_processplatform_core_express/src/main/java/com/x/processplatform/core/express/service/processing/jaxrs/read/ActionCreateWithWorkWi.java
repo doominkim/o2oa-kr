@@ -10,13 +10,13 @@ public class ActionCreateWithWorkWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 2870563598063634730L;
 
-	@FieldDescribe("身份标识.")
+	@FieldDescribe("신분 식별자.")
 	private List<String> identityList = new ArrayList<>();
 
-	@FieldDescribe("发送待阅通知.")
+	@FieldDescribe("열람 대기 알림 발송.")
 	private Boolean notify = false;
 
-	@FieldDescribe("发送人")
+	@FieldDescribe("발신자")
 	private String sender = "";
 
 	public List<String> getIdentityList() {

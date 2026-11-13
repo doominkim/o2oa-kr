@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("applications")
-@JaxrsDescribe("应用集合")
+@JaxrsDescribe("앱 컬렉션")
 public class ApplicationsAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ApplicationsAction.class);
 
-	@JaxrsMethodDescribe(value = "获取Applications对象", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "Applications 객체 조회", action = ActionGet.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

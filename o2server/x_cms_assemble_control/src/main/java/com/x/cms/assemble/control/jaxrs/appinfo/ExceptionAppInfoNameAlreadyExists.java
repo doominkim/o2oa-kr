@@ -7,6 +7,6 @@ class ExceptionAppInfoNameAlreadyExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionAppInfoNameAlreadyExists( String name ) {
-		super("应用名称已经被占用，无法继续保存数据。Name:{}", name );
+		super("앱 이름이 이미 사용 중이어서 저장할 수 없습니다. Name: {}", name );
 	}
 }

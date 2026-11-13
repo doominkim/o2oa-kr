@@ -95,9 +95,9 @@ public class ApplicationServerTools extends JettySeverTools {
 
         deployCustom(applicationServer, handlers, customNames);
 
-        // 将应用首先注册到本地,开机可以直接运行
+        // 앱을 먼저 로컬에 등록하여 기동 시 바로 실행 가능하도록 함
         new RegistApplicationsLocal().execute(server);
-        // 注册本地应用并推送到服务器
+        // 로컬 앱을 등록하고 서버로 푸시
         new RegistApplicationsEvent().execute(server);
         new UpdateApplicationsEvent().execute(server);
 

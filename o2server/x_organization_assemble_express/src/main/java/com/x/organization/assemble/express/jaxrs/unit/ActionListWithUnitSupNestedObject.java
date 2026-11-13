@@ -41,7 +41,7 @@ class ActionListWithUnitSupNestedObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList;
 
 		public List<String> getUnitList() {

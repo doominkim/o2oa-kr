@@ -140,7 +140,7 @@ MWFCalendar.EventForm = new Class({
     //         }else{
     //             repeat = repeat + this.lp.repeat;
     //         }
-    //         if( this.rRule.until && ( repeat !== "不重复" || repeat !== this.lp.notRepeat ) ){
+    //         if( this.rRule.until && ( repeat !== "반복 안 함" || repeat !== this.lp.notRepeat ) ){
     //             repeat += "  "+ this.lp.endDate +"："+this.rRule.until.format("%Y-%m-%d");
     //         }
     //     }else{
@@ -148,7 +148,7 @@ MWFCalendar.EventForm = new Class({
     //     }
     //
     //     var remind;
-    //     if( data.valarmTime_config ){ //天、时、分、秒
+    //     if( data.valarmTime_config ){ //일, 시, 분, 초
     //         if( data.valarmTime_config === "0,0,0,-5" ){
     //             remind = this.lp.remindWhenBegin;
     //         }else{
@@ -324,7 +324,7 @@ MWFCalendar.EventForm = new Class({
             data.repeatWeeks = this.rRule.byweekday.toString().split(",");
         }
 
-        if( data.valarmTime_config ){ //天、时、分、秒
+        if( data.valarmTime_config ){ //일, 시, 분, 초
             var valarmTime_configList = data.valarmTime_config.split(",");
             valarmTime_configList.each( function( v, i ){
                 var unit;
@@ -901,7 +901,7 @@ MWFCalendar.EventForm = new Class({
             if(this.view)this.view.reload();
             this.close();
         }.bind(this);
-        if( this.oldRecurrenceRule ) { //如果是原来是重复的
+        if( this.oldRecurrenceRule ) { //원래 반복 일정인 경우
             this.openDeleteOptionForm( function( saveOptions ){
                 if( saveOptions == "single" ){
                     this.app.actions.deleteSingleEvent(data.id, function(json){ postDelete(json); }.bind(this));
@@ -911,7 +911,7 @@ MWFCalendar.EventForm = new Class({
                     this.app.actions.deleteAllEventsWithRepeatMaster(data.id, function(json){ postDelete(json); }.bind(this));
                 }
             }.bind(this))
-        }else if( data.id ){ //编辑
+        }else if( data.id ){ //편집
             var text = this.app.lp.cancel_confirm.replace(/{name}/g, this.data.title);
             var confirm = MWF.xDesktop.confirm; //( this.app && this.app.confirm ) ? this.app.confirm : MWF.xDesktop.confirm;
             confirm("infor", e, this.app.lp.cancel_confirm_title, text, 380, 200, function(){
@@ -984,7 +984,7 @@ MWFCalendar.EventForm = new Class({
         }.bind(this);
 
         this.data = data;
-        if( this.oldRecurrenceRule ) { //如果是原来是重复的
+        if( this.oldRecurrenceRule ) { //원래 반복 일정인 경우
             this.openSaveOptionForm( function( saveOptions ){
                 if( saveOptions == "single" ){
                     this.app.actions.updateSingleEvent(data.id, this.data, function(json){ postSave(json); }.bind(this));
@@ -994,9 +994,9 @@ MWFCalendar.EventForm = new Class({
                     this.app.actions.updateAllEventsWithRepeatMaster(data.id, this.data, function(json){ postSave(json); }.bind(this));
                 }
             }.bind(this))
-        }else if( data.id ){ //编辑
+        }else if( data.id ){ //편집
             this.app.actions.updateSingleEvent(data.id, this.data, function(json){ postSave(json); }.bind(this));
-        }else{ //新增
+        }else{ //신규
             this.app.actions.addEvent(this.data, function(json){ postSave(json); }.bind(this));
         }
     },
@@ -1456,7 +1456,7 @@ MWFCalendar.SaveOptionDialog = new Class({
         var lp = MWF.xApplication.Calendar.LP;
         this.lp = { ok : lp.modifyConfirm, cancel : lp.cancel };
         var html = "<table width='80%' bordr='0' cellpadding='5' cellspacing='0' styles='formTable'>" +
-                //"<tr><td colspan='2' styles='formTableHead'>申诉处理单</td></tr>" +
+                //"<tr><td colspan='2' styles='formTableHead'>이의 신청 처리서</td></tr>" +
             "<tr><td styles='formTableTitle' lable='saveOption'></td>" +
             "<tr><td styles='formTableValue' item='saveOption'></td></tr>" +
             "</table>";
@@ -1520,7 +1520,7 @@ MWFCalendar.DeleteOptionDialog = new Class({
         this.lp = { ok : lp.deleteConfirm, cancel : lp.cancel };
 
         var html = "<table width='80%' bordr='0' cellpadding='5' cellspacing='0' styles='formTable'>" +
-                //"<tr><td colspan='2' styles='formTableHead'>申诉处理单</td></tr>" +
+                //"<tr><td colspan='2' styles='formTableHead'>이의 신청 처리서</td></tr>" +
             "<tr><td styles='formTableTitle' lable='saveOption'></td>" +
             "<tr><td styles='formTableValue' item='saveOption'></td></tr>" +
             "</table>";

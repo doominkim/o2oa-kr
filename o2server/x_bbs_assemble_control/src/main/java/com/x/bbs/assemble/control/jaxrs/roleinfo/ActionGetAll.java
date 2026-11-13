@@ -36,7 +36,7 @@ public class ActionGetAll extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "系统在获取所有BBS角色信息时发生异常." );
+				Exception exception = new ExceptionRoleInfoProcess( e, "전체 BBS 역할 정보를 가져오는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -49,7 +49,7 @@ public class ActionGetAll extends BaseAction {
 					result.setData(wraps);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionRoleInfoProcess( e, "系统在转换所有BBS角色信息为输出对象时发生异常." );
+					Exception exception = new ExceptionRoleInfoProcess( e, "전체 BBS 역할 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -86,7 +86,7 @@ public class ActionGetAll extends BaseAction {
 		
 		public static WrapCopier< BBSPermissionInfo, WoPermissionInfo > copier = WrapCopierFactory.wo( BBSPermissionInfo.class, WoPermissionInfo.class, null, JpaObject.FieldsInvisible);
 		
-		//论坛版块列表
+		//포럼 게시판 목록
 		private List<WoSectionInfo> sections = null;
 
 		public List<WoSectionInfo> getSections() {
@@ -104,7 +104,7 @@ public class ActionGetAll extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>();
 		
-		//版块的子版块信息列表
+		//게시판의 하위 게시판 정보 목록
 		private List<WoSectionInfo> subSections = null;
 
 		public List<WoSectionInfo> getSubSections() {

@@ -73,7 +73,7 @@ public class ActionQueryGetControl extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAppInfoProcess( e, "根据指定id查询应用栏目信息对象时发生异常。ID:" + id );
+					Exception exception = new ExceptionAppInfoProcess( e, "지정한 id로 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + id );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -168,13 +168,13 @@ public class ActionQueryGetControl extends BaseAction {
 	
 	public static class WoControl extends GsonPropertyObject {
 
-		@FieldDescribe("是否允许查看.")
+		@FieldDescribe("열람 허용 여부.")
 		private Boolean allowVisit = false;
 
-		@FieldDescribe("是否允许发布文档.")
+		@FieldDescribe("문서 발행 허용 여부.")
 		private Boolean allowPublish = false;
 
-		@FieldDescribe("是否允许管理：删除、编辑、创建分类.")
+		@FieldDescribe("관리 허용 여부: 분류 삭제·편집·생성.")
 		private Boolean allowManage = false;
 
 		public Boolean getAllowVisit() {

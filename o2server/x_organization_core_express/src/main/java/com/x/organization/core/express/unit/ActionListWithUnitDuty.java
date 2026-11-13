@@ -18,9 +18,9 @@ class ActionListWithUnitDuty extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织职务名称")
+		@FieldDescribe("조직 직무 이름")
 		private String name;
-		@FieldDescribe("组织职务身份")
+		@FieldDescribe("조직 직무 신분")
 		private String identity;
 
 		public String getName() {

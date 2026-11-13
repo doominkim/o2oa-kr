@@ -17,7 +17,7 @@ import com.x.cms.core.entity.Log;
 import com.x.cms.core.entity.Log_;
 
 /**
- * 日志管理管理表基础功能服务类
+ * 로그 관리 테이블 기본 기능 서비스 클래스
  * 
  * @author O2LEE
  */
@@ -32,7 +32,7 @@ public class LogFactory extends AbstractFactory {
 	 * @return Log
 	 * @throws Exception
 	 */
-	//@MethodDescribe("获取指定Id的Log日志管理信息对象")
+	//@MethodDescribe("지정한 Id의 Log 로그 관리 정보 객체 조회")
 	public Log get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, Log.class, ExceptionWhen.none );
 	}
@@ -41,7 +41,7 @@ public class LogFactory extends AbstractFactory {
 	 * @return List：String
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示全部的Log日志管理信息ID列表")
+	//@MethodDescribe("전체 Log 로그 관리 정보 ID 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( Log.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -53,11 +53,11 @@ public class LogFactory extends AbstractFactory {
 	
 	/**
 	 * 
-	 * @param ids 需要查询的ID列表
+	 * @param ids 조회할 ID 목록
 	 * @return List：Log
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定Id的Log日志管理信息列表")
+	//@MethodDescribe("지정한 Id의 Log 로그 관리 정보 목록 조회")
 //	public List<Log> list(List<String> ids) throws Exception {
 //		EntityManager em = this.entityManagerContainer().get( Log.class );
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -68,7 +68,7 @@ public class LogFactory extends AbstractFactory {
 //	}
 
 	/**
-	 * 列示指定对象的Log日志管理信息ID列表
+	 * 지정한 객체의 Log 로그 관리 정보 ID 목록 조회
 	 * @param appId
 	 * @param categoryId
 	 * @param documentId
@@ -76,7 +76,7 @@ public class LogFactory extends AbstractFactory {
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定对象的Log日志管理信息ID列表")
+	//@MethodDescribe("지정한 객체의 Log 로그 관리 정보 ID 목록 조회")
 	public List<String> listByObject( String appId, String categoryId, String documentId, String fileId) throws Exception {
 		if( appId == null && categoryId == null && documentId == null && fileId == null ){
 			return new ArrayList<String>();
@@ -115,12 +115,12 @@ public class LogFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定操作级别的Log日志管理信息ID列表
+	 * 지정한 작업 수준의 Log 로그 관리 정보 ID 목록 조회
 	 * @param operationType
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定操作类型的Log日志管理信息ID列表")
+	//@MethodDescribe("지정한 작업 유형의 Log 로그 관리 정보 ID 목록 조회")
 	public List<String> listByOperationLevel(String operationLevel ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( Log.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -132,12 +132,12 @@ public class LogFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定操作类型的Log日志管理信息ID列表
+	 * 지정한 작업 유형의 Log 로그 관리 정보 ID 목록 조회
 	 * @param operationType
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定操作用户的Log日志管理信息ID列表")
+	//@MethodDescribe("지정한 작업 사용자의 Log 로그 관리 정보 ID 목록 조회")
 	public List<String> listByOperationUser(String operatorUid, String operationType ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( Log.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -39,7 +39,7 @@ class ActionUpdate extends BaseAction {
 					emc.check(dict, CheckPersistType.all);
 					update(business, dict, wi.getData());
 					emc.commit();
-					// 这个Action是更新ApplicationDict需要刷新缓存
+					// 이 Action은 ApplicationDict를 업데이트하므로 캐시 갱신 필요
 					CacheManager.notify(ApplicationDict.class);
 					Wo wo = new Wo();
 					wo.setId(dict.getId());
@@ -63,7 +63,7 @@ class ActionUpdate extends BaseAction {
 
 		private static final long serialVersionUID = 6419951244780354684L;
 
-		@FieldDescribe("写入数据")
+		@FieldDescribe("데이터 쓰기")
 		private JsonElement data;
 
 		public JsonElement getData() {

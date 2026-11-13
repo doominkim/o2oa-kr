@@ -35,7 +35,7 @@ import com.x.organization.core.entity.UnitDuty_;
 
 class ActionPersonCode extends BaseAction {
 
-	//组织里管理_个人生成二维码。
+	//조직 관리_개인 QR 코드 생성.
 	ActionResult<Wo> personcode(EffectivePerson effectivePerson, String flag) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
@@ -120,8 +120,8 @@ class ActionPersonCode extends BaseAction {
 			if(personCard.getIconMdpi()!=null && !personCard.getIconMdpi().equals("")){
 				//byte[] buffer = new BASE64Decoder().decodeBuffer(personCard.getIconMdpi());  
 				byte[] buffer = Base64.decodeBase64(personCard.getIconMdpi());
-				ByteArrayInputStream in = new ByteArrayInputStream(buffer);    //将b作为输入流；
-				logoFile = ImageIO.read(in);     //将in作为输入流，读取图片存入image中，而这里in可以为ByteArrayInputStream();
+				ByteArrayInputStream in = new ByteArrayInputStream(buffer);    //b를 입력 스트림으로 사용;
+				logoFile = ImageIO.read(in);     //in을 입력 스트림으로 사용, 이미지를 읽어 image에 저장, 여기서 in은 ByteArrayInputStream() 가능;
 			}
 			Wo wo = new Wo(CodeUtil.drawLogoQRCodeByte(logoFile, QrCodeFile, content, ""), this.contentType(false, fname), this.contentDisposition(false, fname));
 			result.setData(wo);

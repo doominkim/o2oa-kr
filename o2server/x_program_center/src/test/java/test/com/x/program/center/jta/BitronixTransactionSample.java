@@ -17,10 +17,10 @@
 //		conf.setServerId("jvm-1");
 //		conf.setLogPart1Filename("/data/Temp/part1.btm");
 //		conf.setLogPart2Filename("/data/Temp/part2.btm");
-//		// 1. 导入Bitronix相关依赖
+//		// 1. Bitronix 관련 의존성 가져오기
 //		// ...
 //
-//		// 2. 配置两个数据源，一个为主库，一个为从库
+//		// 2. 데이터 소스 두 개 설정, 하나는 주 DB, 하나는 보조 DB
 //		DataSource masterDataSource = createDataSource("mysql1",
 //				"jdbc:mysql://172.16.98.230:4006/test_ray?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8",
 //				"admin", "password");
@@ -28,20 +28,20 @@
 //				"jdbc:mysql://172.16.98.230:4006/test_ray_55?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8",
 //				"admin", "password");
 //
-//		// 3. 配置Bitronix事务管理器
+//		// 3. Bitronix 트랜잭션 관리자 설정
 //		TransactionManagerServices.getTransactionManager().begin();
 //		BitronixTransaction utx = (BitronixTransaction) TransactionManagerServices.getTransactionManager()
 //				.getTransaction();
-//		// 4. 使用事务管理器管理事务
+//		// 4. 트랜잭션 관리자로 트랜잭션 관리
 //		try {
-//			// 在主库中执行操作
+//			// 주 DB에서 작업 실행
 //			PreparedStatement stmt1 = masterDataSource.getConnection()
 //					.prepareStatement("INSERT INTO CTE_CODE (xid, xanswer,xmobile) VALUES (?,?,?)");
-//			// 在从库中执行操作
+//			// 보조 DB에서 작업 실행
 //			PreparedStatement stmt2 = slaveDataSource.getConnection()
 //					.prepareStatement("INSERT INTO CTE_CODE (xid, xanswer,xmobile) VALUES (?,?,?)");
 //
-//			// 设置要插入的数据
+//			// 삽입할 데이터 설정
 //			stmt1.setString(1, "123");
 //			stmt1.setString(2, "123");
 //			stmt1.setString(3, "123");

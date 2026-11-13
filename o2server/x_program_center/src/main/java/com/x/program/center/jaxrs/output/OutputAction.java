@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("output")
-@JaxrsDescribe("导出服务")
+@JaxrsDescribe("서비스 내보내기")
 public class OutputAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(OutputAction.class);
 
-	@JaxrsMethodDescribe(value = "选择服务结构.", action = ActionSelect.class)
+	@JaxrsMethodDescribe(value = "서비스 구조 선택.", action = ActionSelect.class)
 	@PUT
 	@Path("{appInfoFlag}/select")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("栏目标识") @PathParam("appInfoFlag") String appInfoFlag,
+			@JaxrsParameterDescribe("게시판 식별자") @PathParam("appInfoFlag") String appInfoFlag,
 			JsonElement jsonElement) {
 		ActionResult<ActionSelect.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -51,12 +51,12 @@ public class OutputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "以文件方式导出服务.", action = ActionSelectFile.class)
+	@JaxrsMethodDescribe(value = "파일로 서비스 내보내기.", action = ActionSelectFile.class)
 	@GET
 	@Path("{flag}/select/file")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void selectOutput(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							 @JaxrsParameterDescribe("输出文件标识") @PathParam("flag") String flag) {
+							 @JaxrsParameterDescribe("출력 파일 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionSelectFile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -68,7 +68,7 @@ public class OutputAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查看所有服务.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 서비스 조회.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

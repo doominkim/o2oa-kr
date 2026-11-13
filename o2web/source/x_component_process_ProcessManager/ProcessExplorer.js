@@ -107,7 +107,7 @@ MWF.xApplication.process.ProcessManager.ProcessExplorer = new Class({
                 "<div style='color: red; float: right;'>" + ((d1 <= d2) ? "" : lp.copynew) + "</div></div>";
 //                html += "<>"
             this.app.dlg("inofr", null, this.app.lp.copyConfirmTitle, {"html": html}, 500, 290, [
-                data.lastUpdateTime !== someItem.lastUpdateTime ? { //更新时间不同看作来之不同的服务器，否则就是同一个流程
+                data.lastUpdateTime !== someItem.lastUpdateTime ? { //업데이트 시간이 다르면 다른 서버에서 온 것으로 보고, 아니면 같은 프로세스로 봄
                     "text": lp.copyConfirm_overwrite,
                     "action": function () {
                         _self.saveItemAsUpdate(someItem, data, success, failure);

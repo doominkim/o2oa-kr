@@ -33,7 +33,7 @@ MWF.xApplication.process.Xform.OOFiles = MWF.APPOOFiles = new Class({
         const size = this.json.attachmentSize?.toInt() || 0;
         if (max) this.node.setAttribute('size', size);
 
-        //为oo-files对象提供 upload 和 remove 方法。
+        //oo-files 객체에 upload와 remove 메서드 제공.
         Object.defineProperties(this.node, {
             uploadFile: {
                 value: (file, fileNode) => {
@@ -139,16 +139,16 @@ MWF.xApplication.process.Xform.OOFiles = MWF.APPOOFiles = new Class({
     },
 
     _uploadFileToServer: function (file, node) {
-        //先判断是流程还是内容管理
+        //먼저 프로세스인지 콘텐츠 관리인지 판단
         if (this._fileInProcess()) {
-            //流程
+            //프로세스
             return this._uploadFileToProcess(file, node);
         }
         if (this._fileInCms()) {
-            //内容管理
+            //콘텐츠 관리
             return this._uploadFileToCms(file, node);
         }
-        //都不是，可能是门户
+        //둘 다 아니면 포털일 수 있음
         return Promise.resolve();
     },
     _uploadFileToProcess: function (file, node) {
@@ -264,7 +264,7 @@ MWF.xApplication.process.Xform.OOFiles = MWF.APPOOFiles = new Class({
 
         debugger;
         if (!this.json.fileSite) this.json.fileSite = this.json.id;
-        //如果有设置 site，循环所有附件，将匹配site的附件添加进来。
+        //site가 설정되어 있으면 모든 첨부파일을 순회하여 site와 일치하는 첨부파일을 추가.
         if (this.json.fileSite){
             this._checkRestfulActions();
             const siteList = this.json.fileSite.split(/.*,.*/g);

@@ -28,7 +28,7 @@ public class ActionDeleteMenu extends BaseAction {
             if (menu == null) {
                 throw new ExceptionNotExist();
             }
-            //同时删除下级菜单
+            //하위 메뉴도 함께 삭제
             List<MPWeixinMenu> list = emc.listEqual(MPWeixinMenu.class,  MPWeixinMenu.parentId_FIELDNAME, menu.getId());
             emc.beginTransaction(MPWeixinMenu.class);
             if (list != null && !list.isEmpty()) {

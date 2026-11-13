@@ -14,7 +14,7 @@ onMounted(() => {
   loadConfig()
 })
 
-// im配置文件
+// im 설정 파일
 const imConfigRef = ref({
   enableClearMsg: false,
   enableRevokeMsg: false,
@@ -24,7 +24,7 @@ const imConfigRef = ref({
   revokeOutMinute: 2,
   conversationCheckInvoke: '',
 })
-// im配置文件
+// im 설정 파일
 const loadConfig = async () => {
   imConfigRef.value = {
     enableClearMsg: imConfigInstance.enableClearMsg,
@@ -44,7 +44,7 @@ const loadConfig = async () => {
   revokeOutMinute.value = imConfigRef.value.revokeOutMinute ?? 2
   conversationCheckInvoke.value = imConfigRef.value.conversationCheckInvoke ?? ''
 }
-// 清除消息
+// 메시지 지우기
 const enableGroupMemberQuitSelf = ref(false)
 const changeEnableGroupMemberQuitSelf = (e) => {
   if (e && e.target) {
@@ -53,7 +53,7 @@ const changeEnableGroupMemberQuitSelf = (e) => {
     saveConfig(imConfigRef.value)
   }
 }
-// 清除消息
+// 메시지 지우기
 const enableClearMsg = ref(false)
 const changeEnableClearMsg = (e) => {
   if (e && e.target) {
@@ -62,7 +62,7 @@ const changeEnableClearMsg = (e) => {
     saveConfig(imConfigRef.value)
   }
 }
-// 撤回
+// 회수
 const enableRevokeMsg = ref(false)
 const changeEnableRevokeMsg = (e) => {
   if (e && e.target) {
@@ -71,7 +71,7 @@ const changeEnableRevokeMsg = (e) => {
     saveConfig(imConfigRef.value)
   }
 }
-// onlyOffice 预览
+// onlyOffice 미리보기
 const enableOnlyOfficePreview = ref(false)
 const changeEnableOnlyOfficePreview = (e) => {
   if (e && e.target) {
@@ -80,7 +80,7 @@ const changeEnableOnlyOfficePreview = (e) => {
     saveConfig(imConfigRef.value)
   }
 }
-// 是否显示所有顶级单位
+// 모든 최상위 조직 표시 여부
 const showAllTopUnit = ref(false)
 const changeShowAllTopUnit = (e) => {
   if (e && e.target) {
@@ -89,7 +89,7 @@ const changeShowAllTopUnit = (e) => {
     saveConfig(imConfigRef.value)
   }
 }
-// 撤回时限
+// 회수 시한
 const revokeOutMinute = ref(2)
 const inputRevokeOutMinute = (e) => {
   if (e.keyCode === 13) {
@@ -99,7 +99,7 @@ const inputRevokeOutMinute = (e) => {
     saveConfig(imConfigRef.value)
   }
 }
-// 会话检查脚本
+// 대화 검사 스크립트
 const conversationCheckInvoke = ref('')
 const inputConversationCheckInvoke = (e) => {
   if (e.keyCode === 13) {
@@ -110,7 +110,7 @@ const inputConversationCheckInvoke = (e) => {
   }
 }
 
-// 保存配置文件
+// 설정 파일 저장
 const saveConfig = async (config) => {
   console.debug('save config==== > ', config)
   const res = await imAction('config', config)

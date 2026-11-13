@@ -36,7 +36,7 @@ class ActionCreateMcp extends BaseAction {
         if (BooleanUtils.isNotTrue(aiConfig.getO2AiEnable())
                 || StringUtils.isBlank(aiConfig.getO2AiToken()) && StringUtils.isBlank(
                 aiConfig.getO2AiBaseUrl())) {
-            throw new ExceptionCustom("请启用o2 AI智能体，并设置相关参数.");
+            throw new ExceptionCustom("o2 AI 에이전트를 활성화하고 관련 매개변수를 설정하십시오.");
         }
         Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
         if (StringUtils.isEmpty(wi.getName())) {

@@ -243,11 +243,11 @@
 						}"/>{{$.lp.noSort}}
 						<!--<input class="editTableRadio" name="sortTypeInCategory" text{( $.sortTypeInCategory=='script')?'checked':''} type="radio" value="script" onclick="if (this.checked){-->
 						<!--$('text{$.pid}sortInCategoryScript').setStyle('display', 'block');-->
-						<!--}"/>脚本-->
+						<!--}"/>스크립트-->
 					</td>
 				</tr>
 			</table>
-			<!--<div class="MWFScriptArea" name="sortInCategoryScript" title="分类内排序脚本(S)" collapse="true" style="display: text{($.sortTypeInCategory && $.sortTypeInCategory=='script') ?'block':'none'}"></div>-->
+			<!--<div class="MWFScriptArea" name="sortInCategoryScript" title="분류 내 정렬 스크립트(S)" collapse="true" style="display: text{($.sortTypeInCategory && $.sortTypeInCategory=='script') ?'block':'none'}"></div>-->
 		</div>
 
 		<div title="{{$.lp.categoryTable}}"  id="text{$.pid}tableStyleArea" style="display: text{($.category && $.category!=='none') ?'block':'none'}">
@@ -292,7 +292,7 @@
 		</div>
 	</div>
 	<div title="{{$.lp.power}}"  class="MWFTab">
-        <!-- 可阅读配置 -->
+        <!-- 열람 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.readConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.readConfigInfo}}</div>
         

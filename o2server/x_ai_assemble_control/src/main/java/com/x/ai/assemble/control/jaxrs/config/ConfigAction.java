@@ -28,11 +28,11 @@ import javax.ws.rs.core.MediaType;
  * @author sword
  */
 @Path("config")
-@JaxrsDescribe("参数配置")
+@JaxrsDescribe("매개변수 설정")
 public class ConfigAction extends StandardJaxrsAction {
 	private static final Logger logger = LoggerFactory.getLogger(ConfigAction.class);
 
-    @JaxrsMethodDescribe(value = "获取配置信息", action =ActionGetConfig.class)
+    @JaxrsMethodDescribe(value = "설정 정보 조회", action =ActionGetConfig.class)
  	@GET
  	@Path("get")
  	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -48,7 +48,7 @@ public class ConfigAction extends StandardJaxrsAction {
  		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
  	}
 
-	@JaxrsMethodDescribe(value = "获取基础配置信息", action =ActionGetBaseConfig.class)
+	@JaxrsMethodDescribe(value = "기본 설정 정보 조회", action =ActionGetBaseConfig.class)
 	@GET
 	@Path("base/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class ConfigAction extends StandardJaxrsAction {
 	}
 
 
-    @JaxrsMethodDescribe(value = "保存配置数据", action = ActionUpdateConfig.class)
+    @JaxrsMethodDescribe(value = "설정 데이터 저장", action = ActionUpdateConfig.class)
 	@POST
 	@Path("save")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -82,14 +82,14 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示大模型.", action = ActionListModelPaging.class)
+	@JaxrsMethodDescribe(value = "대형 모델 페이지 목록.", action = ActionListModelPaging.class)
 	@GET
 	@Path("list/model/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listModelPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListModelPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -101,7 +101,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建模型配置", action = ActionCreateModel.class)
+	@JaxrsMethodDescribe(value = "모델 설정 생성", action = ActionCreateModel.class)
 	@POST
 	@Path("create/model")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -118,13 +118,13 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新模型配置", action = ActionUpdateModel.class)
+	@JaxrsMethodDescribe(value = "모델 설정 수정", action = ActionUpdateModel.class)
 	@POST
 	@Path("update/model/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void updateModel(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionUpdateModel.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -136,13 +136,13 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取模型配置", action = ActionGetModel.class)
+	@JaxrsMethodDescribe(value = "모델 설정 조회", action = ActionGetModel.class)
 	@GET
 	@Path("get/model/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void getModel(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetModel.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -154,13 +154,13 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定的模型配置", action = ActionDeleteModel.class)
+	@JaxrsMethodDescribe(value = "지정한 모델 설정 삭제", action = ActionDeleteModel.class)
 	@GET
 	@Path("delete/model/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void deleteModel(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDeleteModel.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -172,14 +172,14 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示mcp配置.", action = ActionListMcpPaging.class)
+	@JaxrsMethodDescribe(value = "mcp 설정 페이지 목록.", action = ActionListMcpPaging.class)
 	@GET
 	@Path("list/mcp/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listMcpConfigPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListMcpPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -191,7 +191,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建MCP配置", action = ActionCreateMcp.class)
+	@JaxrsMethodDescribe(value = "MCP 설정 생성", action = ActionCreateMcp.class)
 	@POST
 	@Path("create/mcp")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -208,13 +208,13 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新MCP配置", action = ActionUpdateMcp.class)
+	@JaxrsMethodDescribe(value = "MCP 설정 수정", action = ActionUpdateMcp.class)
 	@POST
 	@Path("update/mcp/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void updateMcpConfig(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionUpdateMcp.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -226,13 +226,13 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取MCP配置", action = ActionGetMcp.class)
+	@JaxrsMethodDescribe(value = "MCP 설정 조회", action = ActionGetMcp.class)
 	@GET
 	@Path("get/mcp/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void getMcpConfig(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetMcp.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -244,13 +244,13 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取MCP扩展配置", action = ActionGetMcpExt.class)
+	@JaxrsMethodDescribe(value = "MCP 확장 설정 조회", action = ActionGetMcpExt.class)
 	@GET
 	@Path("get/mcp/ext/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void getMcpExt(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetMcpExt.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -262,13 +262,13 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定的MCP配置", action = ActionDeleteMcp.class)
+	@JaxrsMethodDescribe(value = "지정한 MCP 설정 삭제", action = ActionDeleteMcp.class)
 	@GET
 	@Path("delete/mcp/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void deleteMcpConfig(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDeleteMcp.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -280,7 +280,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取启用的模型列表", action = ActionListEnableModel.class)
+	@JaxrsMethodDescribe(value = "사용 중인 모델 목록 조회", action = ActionListEnableModel.class)
 	@GET
 	@Path("list/enable/model")
 	@Consumes(MediaType.APPLICATION_JSON)

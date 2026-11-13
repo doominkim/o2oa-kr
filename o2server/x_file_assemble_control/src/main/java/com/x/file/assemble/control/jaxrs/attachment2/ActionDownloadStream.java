@@ -25,7 +25,7 @@ class ActionDownloadStream extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Wo wo = null;
-			/** 确定是否要用application/octet-stream输出 */
+			/** application/octet-stream으로 출력할지 결정 */
 			Attachment2 attachment = emc.find(id, Attachment2.class);
 			if (null == attachment) {
 				throw new ExceptionAttachmentNotExist(id);
@@ -47,7 +47,7 @@ class ActionDownloadStream extends BaseAction {
 					originFile.readContent(mapping, output);
 					output.flush();
 				} catch (Exception e) {
-					logger.warn("{}附件下载异常：{}", attachment.getName(), e.getMessage());
+					logger.warn("{} 첨부파일 다운로드 오류: {}", attachment.getName(), e.getMessage());
 				}
 			};
 			String fastETag = attachment.getId()+attachment.getUpdateTime().getTime();

@@ -66,7 +66,7 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -127291000673692614L;
 
-		@FieldDescribe("组织对象")
+		@FieldDescribe("조직 객체")
 		private WoUnit woUnit;
 
 		static WrapCopier<UnitAttribute, Wo> copier = WrapCopierFactory.wo(UnitAttribute.class, Wo.class, null,

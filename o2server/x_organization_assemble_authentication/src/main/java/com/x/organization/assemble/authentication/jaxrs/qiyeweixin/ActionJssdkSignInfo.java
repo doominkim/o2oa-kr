@@ -42,25 +42,25 @@ public class ActionJssdkSignInfo extends BaseAction {
       }
       long timestamp = new Date().getTime();
       String jsticket = "";
-      // 不知道这两个 ticket  有啥区别 默认用getJsapiTicket()
+      // 두 ticket의 차이를 알 수 없어 기본으로 getJsapiTicket() 사용
       if (wi.getJsticketType() != null && "app".equals(wi.getJsticketType())) {
         jsticket = Config.qiyeweixin().getAppJsapiTicket();
           if (logger.isDebugEnabled()) {
-              logger.debug("应用的 jsticket: "+jsticket);
+              logger.debug("앱의 jsticket: "+jsticket);
           }
       } else {
         jsticket = Config.qiyeweixin().getJsapiTicket();
           if (logger.isDebugEnabled()) {
-              logger.debug("企业的 jsticket: "+jsticket);
+              logger.debug("기업의 jsticket: "+jsticket);
           }
       }
       String corpId = Config.qiyeweixin().getCorpId();
       String agentId = Config.qiyeweixin().getAgentId();
       if (logger.isDebugEnabled()) {
-        logger.debug("参数 jsticket： "+jsticket + " noncestr:  "+noncestr + " timestamp: "+ timestamp + " url: " +wi.getUrl() + " " + corpId + " " + agentId);
+        logger.debug("매개변수 jsticket: "+jsticket + " noncestr:  "+noncestr + " timestamp: "+ timestamp + " url: " +wi.getUrl() + " " + corpId + " " + agentId);
       }
       String signStr = sha1(jsticket, noncestr, timestamp, wi.getUrl());
-      logger.info("加密结果 "+ signStr);  
+      logger.info("암호화 결과 "+ signStr);  
       Wo wo = new Wo();
       wo.setAgentid(agentId);
       wo.setCorpid(corpId);
@@ -72,7 +72,7 @@ public class ActionJssdkSignInfo extends BaseAction {
 
     }
 
-    // sha1  加密后转成字符串
+    // sha1 암호화 후 문자열로 변환
     private String bytesToHex(byte[] digest) {
       StringBuffer hexstr = new StringBuffer();
       String shaHex = "";
@@ -86,11 +86,11 @@ public class ActionJssdkSignInfo extends BaseAction {
       return hexstr.toString();
     }
 
-    // sha1 加密
+    // sha1 암호화
     private String sha1(String jsticket,String noncestr, Long timestamp, String url) throws Exception {
       String str = "jsapi_ticket="+jsticket+"&noncestr="+noncestr+"&timestamp="+timestamp+"&url="+url;
       if (logger.isDebugEnabled()) {
-         logger.debug("sha1 加密  原字符串 " + str);
+         logger.debug("sha1 암호화 원본 문자열 " + str);
       }
       MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
       sha1.reset();
@@ -104,14 +104,14 @@ public class ActionJssdkSignInfo extends BaseAction {
     public static class Wi extends GsonPropertyObject {
 
         private static final long serialVersionUID = -1860237519725394442L;
-        // 不包含#及其后面部分
-        @FieldDescribe("签名地址，当前使用企业微信jssdk的 url，必传")
+        // # 및 그 뒷부분 미포함
+        @FieldDescribe("서명 주소, 현재 기업 위챗 jssdk를 사용하는 url, 필수")
         private String url;
 
-        @FieldDescribe("随机字符串，可不传")
+        @FieldDescribe("임의 문자열, 생략 가능")
         private String nonceStr;
 
-        // 如果  jsticketType == "app"
+        // 만약 jsticketType == "app"
         private String jsticketType;
 
 

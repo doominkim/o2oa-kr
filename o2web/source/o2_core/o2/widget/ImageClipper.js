@@ -8,28 +8,28 @@ o2.widget.ImageClipper = o2.ImageClipper = new Class({
 		"path": o2.session.path+"/widget/$ImageClipper/",
 		"imageUrl" : "",
 
-		"action" : null, //上传服务，可选，如果不设置，使用公共图片服务
-		"method": "", //使用action 的方法
-		"parameter": {}, //action 时的url参数
+		"action" : null, //업로드 서비스, 선택. 설정하지 않으면 공용 이미지 서비스 사용
+		"method": "", //action의 메서드 사용
+		"parameter": {}, //action 사용 시 url 매개변수
 
-		"data": null, //formdata 的data， H5有效
-		"reference": "",  //使用公共图片服务上传时的参数
-		"referenceType" : "", //使用公共图片服务上传时的参数, 目前支持 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument
+		"data": null, //formdata의 data, H5에서 유효
+		"reference": "",  //공용 이미지 서비스로 업로드할 때의 매개변수
+		"referenceType" : "", //공용 이미지 서비스로 업로드할 때의 매개변수, 현재 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument 지원
 		"description" : "",
 
-		"aspectRatio" : 1, //生成图片的宽高比, 0 表示不限制
-		"resultMaxSize" : 800, //生成图片的最大宽或高
+		"aspectRatio" : 1, //생성 이미지의 가로세로 비율, 0은 제한 없음
+		"resultMaxSize" : 800, //생성 이미지의 최대 너비 또는 높이
 
-		"editorSize" : 340, //H5有效,图形容器
-		"frameMinSize" : 30, //H5有效, 选择框的最小宽度
-		"previewerSize" : 260, //H5有效, 预览区域大小
+		"editorSize" : 340, //H5에서 유효, 그래픽 컨테이너
+		"frameMinSize" : 30, //H5에서 유효, 선택 상자의 최소 너비
+		"previewerSize" : 260, //H5에서 유효, 미리보기 영역 크기
 
-		"showPreviewer" : true,	//H5有效
-		"fromLocalEnable" : true,  //H5有效，本地图片
-		"fromFileEnable" : true, //H5有效，云文件图片
-		"resetEnable" : false, //H5有效
-		"uploadSourceEnable" : true, //H5有效
-		"downloadSourceEnable": true //H5有效
+		"showPreviewer" : true,	//H5에서 유효
+		"fromLocalEnable" : true,  //H5에서 유효, 로컬 이미지
+		"fromFileEnable" : true, //H5에서 유효, 클라우드 파일 이미지
+		"resetEnable" : false, //H5에서 유효
+		"uploadSourceEnable" : true, //H5에서 유효
+		"downloadSourceEnable": true //H5에서 유효
 	},
 	initialize: function(node, options){
 		this.node = node;
@@ -69,17 +69,17 @@ o2.widget.ImageClipper = o2.ImageClipper = new Class({
 	},
 	_openDownloadDialog: function(url, saveName){
 		/**
-		 * 通用的打开下载对话框方法，没有测试过具体兼容性
-		 * @param url 下载地址，也可以是一个blob对象，必选
-		 * @param saveName 保存文件名，可选
+		 * 다운로드 대화상자를 여는 공통 메서드, 구체적인 호환성은 테스트하지 않음
+		 * @param url 다운로드 주소, blob 객체도 가능, 필수
+		 * @param saveName 저장 파일 이름, 선택
 		 */
 		if( Browser.name !== 'ie' ){
 			if(typeof url == 'object' && url instanceof Blob){
-				url = URL.createObjectURL(url); // 创建blob地址
+				url = URL.createObjectURL(url); // blob 주소 생성
 			}
 			var aLink = document.createElement('a');
 			aLink.href = url;
-			aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+			aLink.download = saveName || ''; // HTML5에 새로 추가된 속성으로 저장 파일 이름 지정, 확장자는 생략 가능, 주의: file:/// 모드에서는 적용되지 않음
 			var event;
 			if(window.MouseEvent && typeOf( window.MouseEvent ) == "function" ) event = new MouseEvent('click');
 			else
@@ -129,7 +129,7 @@ o2.widget.ImageClipper = o2.ImageClipper = new Class({
 			return true;
 		}else{
 			this.available = false;
-			//this.container.set("html", "<p>您的浏览器不支持以下特性:</p><ul><li>canvas</li><li>Blob</li><li>Uint8Array</li><li>FormData</li><li>atob</li></ul>");
+			//this.container.set("html", "<p>사용 중인 브라우저가 다음 기능을 지원하지 않습니다:</p><ul><li>canvas</li><li>Blob</li><li>Uint8Array</li><li>FormData</li><li>atob</li></ul>");
 			return false;
 		}
 	}
@@ -142,16 +142,16 @@ o2.widget.FlashImageClipper = new Class({
 		"path": o2.session.path+"/widget/$ImageClipper/",
 		"imageUrl" : "",
 
-		"action" : null, //可选，如果不设置，使用公共图片服务
-		"method": "", //使用action 的方法
-		"parameter": {}, //action 时的url参数
+		"action" : null, //선택. 설정하지 않으면 공용 이미지 서비스 사용
+		"method": "", //action의 메서드 사용
+		"parameter": {}, //action 사용 시 url 매개변수
 
-		"reference": "",  //使用公共图片服务上传时的参数
-		"referenceType" : "", //使用公共图片服务上传时的参数, 目前支持 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument
+		"reference": "",  //공용 이미지 서비스로 업로드할 때의 매개변수
+		"referenceType" : "", //공용 이미지 서비스로 업로드할 때의 매개변수, 현재 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument 지원
 		"description" : "",
 
-		"aspectRatio" : 1, //生成图片的宽高比, 0 表示不限制
-		"resultMaxSize" : 800 //生成图片的最大宽或高
+		"aspectRatio" : 1, //생성 이미지의 가로세로 비율, 0은 제한 없음
+		"resultMaxSize" : 800 //생성 이미지의 최대 너비 또는 높이
 	},
 	initialize: function(node, options, parent){
 		this.container = node;
@@ -196,7 +196,7 @@ o2.widget.FlashImageClipper = new Class({
 
 					case '-1':
 						this.isUploading = false;
-						//alert("您已取消!");
+						//alert("취소했습니다!");
 						//cancel();
 
 						break;
@@ -244,9 +244,9 @@ o2.widget.FlashImageClipper = new Class({
 				"imgUrl": imageUrl,
 				"tip" : this.options.description,
 				"aspectRatio" : this.options.aspectRatio,
-				"reqContentDisposition" : "", //"" 或者 formData
-				"imageUploadKey" : "thumb.jpg", //reqContentDisposition 为 formdata 时候有效，文件名称
-				"imageSrcUploadKey" : "src.jpg", //reqContentDisposition 为 formdata 时候有效，文件名称
+				"reqContentDisposition" : "", //"" 또는 formData
+				"imageUploadKey" : "thumb.jpg", //reqContentDisposition이 formdata일 때 유효, 파일 이름
+				"imageSrcUploadKey" : "src.jpg", //reqContentDisposition이 formdata일 때 유효, 파일 이름
 				"showZoom" : false,
 				"showSaveBtns" : false,
 				"showTurn" : false,
@@ -256,7 +256,7 @@ o2.widget.FlashImageClipper = new Class({
 				"showBrow":true,
 				"showCame":false,
 				"pSize":"300|300|"+previewerWidth+"|"+previewerHeight, //|80|40|40|20"//,
-				"uploadUrl": this.uploadUrl  //+encodeURI("<计算的值>")+"?shortname=<计算的值>?filepath=<计算的值>?sizes=160|80|40?imgnames=face.jpg|face_medium.jpg|face_small.jpg"	//sizes 几张图片的比例
+				"uploadUrl": this.uploadUrl  //+encodeURI("<계산된 값>")+"?shortname=<계산된 값>?filepath=<계산된 값>?sizes=160|80|40?imgnames=face.jpg|face_medium.jpg|face_small.jpg"	//sizes 여러 이미지의 비율
 			}, {
 				menu: "false",
 				scale: "noScale",
@@ -286,7 +286,7 @@ o2.widget.FlashImageClipper = new Class({
 				if(callback)callback(url);
 			}.bind(this));
 		}else{
-			//公共图片服务
+			//공용 이미지 서비스
 			var addressObj = layout.serviceAddressList["x_file_assemble_control"];
 			var defaultPort = layout.config.app_protocol==='https' ? "443" : "80";
 			if (addressObj){
@@ -306,7 +306,7 @@ o2.widget.FlashImageClipper = new Class({
 	uploadImage: function(  success, failure  ){
 		this.uploadSuccess = success;
 		if( this.swf ){
-			this.swf.ref["jscall_updateAvatar"](); //JsCallAs是flash里addCallback的函数
+			this.swf.ref["jscall_updateAvatar"](); //JsCallAs는 flash의 addCallback 함수
 		}
 	},
 	getFormData : function(){
@@ -333,26 +333,26 @@ o2.widget.HTML5ImageClipper = new Class({
 		"path": o2.session.path+"/widget/$ImageClipper/",
 		"imageUrl" : "",
 
-		"editorSize" : 340, //图形容器
-		"aspectRatio" : 1, //生成图片的宽高比, 0 表示不限制
-		"frameMinSize" : 30, //选择框的最小宽度
-		"previewerSize" : 260, //预览区域大小
-		"resultMaxSize" : 800, //生成图片的最大宽或高
+		"editorSize" : 340, //그래픽 컨테이너
+		"aspectRatio" : 1, //생성 이미지의 가로세로 비율, 0은 제한 없음
+		"frameMinSize" : 30, //선택 상자의 최소 너비
+		"previewerSize" : 260, //미리보기 영역 크기
+		"resultMaxSize" : 800, //생성 이미지의 최대 너비 또는 높이
 
-		"action" : null, //可选，如果不设置，使用公共图片服务
-		"method": "", //使用action 的方法
-		"parameter": {}, //action 时的url参数
+		"action" : null, //선택. 설정하지 않으면 공용 이미지 서비스 사용
+		"method": "", //action의 메서드 사용
+		"parameter": {}, //action 사용 시 url 매개변수
 
-		"data": null, //formdata 的data
-		"reference": "",  //使用公共图片服务上传时的参数
-		"referenceType" : "", //使用公共图片服务上传时的参数, 目前支持 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument
+		"data": null, //formdata의 data
+		"reference": "",  //공용 이미지 서비스로 업로드할 때의 매개변수
+		"referenceType" : "", //공용 이미지 서비스로 업로드할 때의 매개변수, 현재 processPlatformJob, processPlatformForm, portalPage, cmsDocument, forumDocument 지원
 
-		"uploadSourceEnable" : true, //是否允许上传原图
+		"uploadSourceEnable" : true, //원본 이미지 업로드 허용 여부
 		"downloadSourceEnable": true,
 
 		"showPreviewer" : true,
-		"fromLocalEnable" : true,  //本地图片
-		"fromFileEnable" : true, //云文件图片
+		"fromLocalEnable" : true,  //로컬 이미지
+		"fromFileEnable" : true, //클라우드 파일 이미지
 		"resetEnable" : false,
 		"description" : ""
 	},
@@ -406,10 +406,10 @@ o2.widget.HTML5ImageClipper = new Class({
 					}.bind(this)
 				});
 			}else{
-				//公共图片上传服务
+				//공용 이미지 업로드 서비스
 				var maxSize = this.options.resultMaxSize;
 				if( this.uploadSourceInput && this.uploadSourceInput.get("checked") ){
-					maxSize = 0; //上传原图
+					maxSize = 0; //원본 이미지 업로드
 				}
 				o2.xDesktop.uploadImageByScale(
 					this.options.reference,
@@ -460,7 +460,7 @@ o2.widget.HTML5ImageClipper = new Class({
 			return true;
 		}else{
 			this.available = false;
-			//this.container.set("html", "<p>您的浏览器不支持以下特性:</p><ul><li>canvas</li><li>Blob</li><li>Uint8Array</li><li>FormData</li><li>atob</li></ul>");
+			//this.container.set("html", "<p>사용 중인 브라우저가 다음 기능을 지원하지 않습니다:</p><ul><li>canvas</li><li>Blob</li><li>Uint8Array</li><li>FormData</li><li>atob</li></ul>");
 			return false;
 		}
 	},
@@ -1091,12 +1091,12 @@ o2.widget.HTML5ImageClipper = new Class({
 	},
 	base64ToBlob : function( base64 ){
 		if( base64.substr( 0, 10 ) == 'data:image' ){
-			var bytes=window.atob(base64.split(',')[1]);        //去掉url的头，并转换为byte
+			var bytes=window.atob(base64.split(',')[1]);        //url의 헤더를 제거하고 byte로 변환
 		}else{
 			var bytes=window.atob(base64)
 		}
 
-		//处理异常,将ascii码小于0的转换为大于0
+		//예외 처리, ascii 코드가 0보다 작은 값을 0보다 크게 변환
 		var ab = new ArrayBuffer(bytes.length);
 		var ia = new Uint8Array(ab);
 		for (var i = 0; i < bytes.length; i++) {

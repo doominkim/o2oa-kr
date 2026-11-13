@@ -11,8 +11,8 @@ public class ActionFetchWithJobWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -8049393171576534852L;
 
-	@FieldDescribe("查询路径.")
-	@Schema(description = "查询路径.")
+	@FieldDescribe("조회 경로.")
+	@Schema(description = "조회 경로.")
 	private List<String> pathList;
 
 	public List<String> getPathList() {

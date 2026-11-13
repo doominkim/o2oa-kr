@@ -21,15 +21,15 @@ public class WrapProcessPlatform extends Application {
 			.wi(WrapProcessPlatform.class, Application.class, null, ListTools.toList(FieldsUnmodifyExcludeId,
 					creatorPerson_FIELDNAME, lastUpdatePerson_FIELDNAME, lastUpdateTime_FIELDNAME), false);
 
-	@FieldDescribe("导出的流程")
+	@FieldDescribe("내보낸 프로세스")
 	private List<WrapProcess> processList = new ArrayList<>();
-	@FieldDescribe("导出的表单")
+	@FieldDescribe("내보낸 양식")
 	private List<WrapForm> formList = new ArrayList<>();
-	@FieldDescribe("导出的数据字典")
+	@FieldDescribe("내보낸 데이터 사전")
 	private List<WrapApplicationDict> applicationDictList = new ArrayList<>();
-	@FieldDescribe("导出的脚本")
+	@FieldDescribe("내보낸 스크립트")
 	private List<WrapScript> scriptList = new ArrayList<>();
-	@FieldDescribe("导出的文件")
+	@FieldDescribe("내보낸 파일")
 	private List<WrapFile> fileList = new ArrayList<>();
 
 	public List<String> listFormId() throws Exception {

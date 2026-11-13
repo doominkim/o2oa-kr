@@ -28,7 +28,7 @@ import com.x.cms.core.entity.AppInfo;
 import com.x.cms.core.entity.element.*;
 
 /**
- * 保存表单
+ * 양식 저장
  * @author sword
  */
 public class ActionSave extends BaseAction {
@@ -92,7 +92,7 @@ public class ActionSave extends BaseAction {
 			CacheManager.notify(View.class);
 			CacheManager.notify(ViewFieldConfig.class);
 			CacheManager.notify(ViewCategory.class);
-			// 保存历史版本
+			// 이력 버전 저장
 			ThisApplication.formVersionQueue.send(new FormVersion(wo.getId(), jsonElement, effectivePerson.getDistinguishedName()));
 		}
 
@@ -112,16 +112,16 @@ public class ActionSave extends BaseAction {
 		public static final WrapCopier<Wi, Form> copier = WrapCopierFactory.wi(Wi.class, Form.class, null,
 				JpaObject.FieldsUnmodify);
 
-		@FieldDescribe("关联表单")
+		@FieldDescribe("연결 양식")
 		private List<String> relatedFormList = new ArrayList<>();
 
-		@FieldDescribe("移动端关联表单")
+		@FieldDescribe("모바일 연결 양식")
 		private List<String> mobileRelatedFormList = new ArrayList<>();
 
-		@FieldDescribe("关联脚本.")
+		@FieldDescribe("연결 스크립트.")
 		private Map<String, String> relatedScriptMap = new LinkedHashMap<>();
 
-		@FieldDescribe("移动端关联脚本.")
+		@FieldDescribe("모바일 연결 스크립트.")
 		private Map<String, String> mobileRelatedScriptMap = new LinkedHashMap<>();
 
 		public List<String> getRelatedFormList() {

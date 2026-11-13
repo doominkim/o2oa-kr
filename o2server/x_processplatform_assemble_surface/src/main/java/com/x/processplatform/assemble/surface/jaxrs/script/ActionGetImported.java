@@ -74,19 +74,19 @@ class ActionGetImported extends BaseAction {
 
         private static final long serialVersionUID = -7633183122160854183L;
 
-        @FieldDescribe("脚本内容")
+        @FieldDescribe("스크립트 내용")
         private String text;
 
-        @FieldDescribe("应用脚本")
+        @FieldDescribe("앱 스크립트")
         private List<String> importedList;
 
-        @FieldDescribe("脚本所属应用.")
+        @FieldDescribe("스크립트 소속 앱.")
         private String application;
 
-        @FieldDescribe("应用名称.")
+        @FieldDescribe("앱 이름.")
         private String appName;
 
-        @FieldDescribe("应用别名.")
+        @FieldDescribe("앱 별칭.")
         private String appAlias;
 
         public List<String> getImportedList() {

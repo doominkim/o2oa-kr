@@ -35,7 +35,7 @@ public class MessageBodyReaderImpl<T> implements MessageBodyReader<T> {
 			// UTF-8 only
 			return gson.fromJson(new InputStreamReader(stream, "UTF-8"), type);
 		} catch (Exception e) {
-			// 此方法在JAXRS方法之前运行,无法捕获违例
+			// 이 메서드는 JAXRS 메서드 전에 실행되어 예외를 잡을 수 없음
 			e.printStackTrace();
 			return null;
 		}

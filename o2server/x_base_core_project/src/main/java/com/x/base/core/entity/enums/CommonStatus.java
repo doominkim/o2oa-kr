@@ -1,7 +1,7 @@
 package com.x.base.core.entity.enums;
 
 /**
- * 通用状态枚举类
+ * 공통 상태 열거형 클래스
  */
 public enum CommonStatus {
 

@@ -8,7 +8,7 @@ public class PersonExtendProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 8347025256346636346L;
 
-	@FieldDescribe("扩展数据.")
+	@FieldDescribe("확장 데이터.")
 	private JsonElement extend;
 
 	public JsonElement getExtend() {

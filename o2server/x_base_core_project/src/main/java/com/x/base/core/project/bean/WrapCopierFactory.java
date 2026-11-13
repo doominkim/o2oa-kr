@@ -76,7 +76,7 @@ public class WrapCopierFactory {
 		}
 	}
 
-	// 需要erase的属性也必须在orig中有,否则新增加的属性将直接被擦除
+	// erase할 속성도 orig에 있어야 함, 그렇지 않으면 새로 추가된 속성이 바로 지워짐
 	private static <T, W> boolean accessible(Class<T> origClass, Class<W> destClass, String name) {
 		try {
 			Field origField = FieldUtils.getField(origClass, name, true);

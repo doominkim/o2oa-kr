@@ -110,7 +110,7 @@ o2.addReady(function () {
 
     var _load = function () {
         var _loadApp = function (data) {
-            //用户已经登录
+            //사용자 로그인 완료
             if (data){
                 layout.user = data;
                 layout.session = layout.session || {};
@@ -130,7 +130,7 @@ o2.addReady(function () {
         _loadApp(data);
     };
 
-    //异步载入必要模块
+    //필요한 모듈 비동기 로드
     layout.config = null;
     var configLoaded = false;
     var lpLoaded = false;

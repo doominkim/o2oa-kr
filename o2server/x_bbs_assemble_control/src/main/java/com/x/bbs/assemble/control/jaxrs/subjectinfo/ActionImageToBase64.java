@@ -73,7 +73,7 @@ public class ActionImageToBase64 extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectInfoProcess(e, "根据指定ID查询附件信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionSubjectInfoProcess(e, "지정한 ID로 첨부 파일 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(exception, effectivePerson, request, null);
 			}
@@ -97,7 +97,7 @@ public class ActionImageToBase64 extends BaseAction {
 				fileInfo.readContent(mapping, output_for_ftp);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectInfoProcess(e, "从文件存储服务器中获取文件流时发生异常.ID:" + id);
+				Exception exception = new ExceptionSubjectInfoProcess(e, "파일 저장 서버에서 파일 스트림을 가져오는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(exception, effectivePerson, request, null);
 			}
@@ -109,7 +109,7 @@ public class ActionImageToBase64 extends BaseAction {
 					image = ImageIO.read(input);
 				} catch (IOException e) {
 					check = false;
-					Exception exception = new ExceptionSubjectInfoProcess(e, "从文件存储服务器中获取文件流时发生异常.ID:" + id);
+					Exception exception = new ExceptionSubjectInfoProcess(e, "파일 저장 서버에서 파일 스트림을 가져오는 중 오류가 발생했습니다. ID:" + id);
 					result.error(exception);
 					logger.error(exception, effectivePerson, request, null);
 				}

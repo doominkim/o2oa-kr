@@ -29,19 +29,19 @@ import com.x.base.core.project.logger.LoggerFactory;
  */
 
 @Path("welink")
-@JaxrsDescribe("WeLink单点登录")
+@JaxrsDescribe("WeLink SSO 로그인")
 public class WeLinkAction extends StandardJaxrsAction {
 
 
     private static Logger logger = LoggerFactory.getLogger(WeLinkAction.class);
 
-    @JaxrsMethodDescribe(value = "WeLink单点登录.", action = ActionLogin.class)
+    @JaxrsMethodDescribe(value = "WeLink SSO 로그인.", action = ActionLogin.class)
     @GET
     @Path("code/{code}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void getLogin(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                         @Context HttpServletResponse response, @JaxrsParameterDescribe("登录code") @PathParam("code") String code) {
+                         @Context HttpServletResponse response, @JaxrsParameterDescribe("로그인 code") @PathParam("code") String code) {
         ActionResult<ActionLogin.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

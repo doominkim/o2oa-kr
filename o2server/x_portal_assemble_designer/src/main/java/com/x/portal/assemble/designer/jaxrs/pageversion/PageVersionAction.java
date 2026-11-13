@@ -23,18 +23,18 @@ import java.util.List;
  * @author sword
  */
 @Path("pageversion")
-@JaxrsDescribe("页面版本")
+@JaxrsDescribe("페이지 버전")
 public class PageVersionAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PageVersionAction.class);
 
-	@JaxrsMethodDescribe(value = "根据页面id获取历史版本列表.", action = ActionListWithScript.class)
+	@JaxrsMethodDescribe(value = "페이지 id로 이력 버전 목록 조회.", action = ActionListWithScript.class)
 	@GET
 	@Path("list/page/{pageId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPage(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("page标识") @PathParam("pageId") String pageId) {
+			@JaxrsParameterDescribe("page 식별자") @PathParam("pageId") String pageId) {
 		ActionResult<List<ActionListWithScript.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -46,13 +46,13 @@ public class PageVersionAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取页面历史版本内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "페이지 이력 버전 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

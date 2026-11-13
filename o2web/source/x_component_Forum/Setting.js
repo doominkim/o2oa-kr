@@ -1021,7 +1021,7 @@ MWF.xApplication.Forum.Setting.SectionSettingView = new Class({
                 this.reload();
             }.bind(this)
         });
-        //this.app.access.hasSectionAdminAuthority( documentData , function( flag ){  只有分区管理员可以对分区以下的板块进行增删改，版主不能
+        //this.app.access.hasSectionAdminAuthority( documentData , function( flag ){  구역 관리자만 구역 아래 게시판을 추가·삭제·수정할 수 있으며 게시판 관리자는 불가
         this.app.access.hasForumAdminAuthority( documentData.forumId , function( flag ){
             flag ?  form.edit() : form.open();
         } )

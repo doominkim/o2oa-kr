@@ -18,7 +18,7 @@ public class ActionCheckMPWeixin extends BaseAction {
     private static Logger logger = LoggerFactory.getLogger(ActionCheckMPWeixin.class);
 
     ActionResult<Wo> execute(String signature, Long timestamp, String nonce, String echostr)  throws Exception {
-        logger.info("微信公众号接收到验证消息,signature:{}, timestamp:{}, nonce:{}, echostr:{}.", signature, timestamp, nonce, echostr);
+        logger.info("위챗 공식 계정 검증 메시지 수신,signature:{}, timestamp:{}, nonce:{}, echostr:{}.", signature, timestamp, nonce, echostr);
         ActionResult<Wo> result = new ActionResult<>();
         Wo wo = new Wo();
         String token = Config.mpweixin().getToken();
@@ -29,7 +29,7 @@ public class ActionCheckMPWeixin extends BaseAction {
     }
 
     /**
-     * 公众号 开发者配置验证
+     * 공식 계정 개발자 설정 검증
      * @param signature
      * @param timestamp
      * @param nonce
@@ -42,14 +42,14 @@ public class ActionCheckMPWeixin extends BaseAction {
 
         String[] array = new String[] { token, timestamp+"", nonce };
         StringBuffer sb = new StringBuffer();
-        // 字符串排序
+        // 문자열 정렬
         Arrays.sort(array);
         for (int i = 0; i < 3; i++) {
             sb.append(array[i]);
         }
         String str = sb.toString();
         String hexstr = SHA1.sha1(str);
-        logger.info("我们的 {}, 传入的 {}", hexstr, signature);
+        logger.info("우리 값 {}, 전달된 값 {}", hexstr, signature);
         if (signature.equalsIgnoreCase(hexstr)){
             return echostr;
         }

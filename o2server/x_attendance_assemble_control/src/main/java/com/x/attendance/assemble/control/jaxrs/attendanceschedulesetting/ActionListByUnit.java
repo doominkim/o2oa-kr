@@ -39,7 +39,7 @@ public class ActionListByUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceScheduleProcess(e,
-						"系统根据组织名称查询指定组织排班信息列表时发生异常.Name:" + name);
+						"조직 이름으로 조직 근무 편성 목록을 조회하는 중 오류가 발생했습니다. Name:" + name);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -49,7 +49,7 @@ public class ActionListByUnit extends BaseAction {
 				attendanceScheduleSettingList = attendanceScheduleSettingServiceAdv.list(ids);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceScheduleProcess(e, "系统根据ID列表查询指定组织排班信息列表时发生异常.");
+				Exception exception = new ExceptionAttendanceScheduleProcess(e, "ID 목록으로 조직 근무 편성 목록을 조회하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -60,7 +60,7 @@ public class ActionListByUnit extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceScheduleProcess(e,
-						"将所有查询出来的有状态的导入文件对象转换为可以输出的过滤过属性的对象时发生异常.");
+						"조회된 가져오기 파일 객체를 출력용 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

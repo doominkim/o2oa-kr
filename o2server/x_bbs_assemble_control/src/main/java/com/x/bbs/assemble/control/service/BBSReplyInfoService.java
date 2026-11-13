@@ -22,7 +22,7 @@ import com.x.bbs.entity.BBSSubjectInfo;
 import com.x.bbs.entity.BBSUserInfo;
 
 /**
- * 论坛信息管理服务类
+ * 포럼 정보 관리 서비스 클래스
  * @author LIYI
  *
  */
@@ -31,7 +31,7 @@ public class BBSReplyInfoService {
 	private static  Logger logger = LoggerFactory.getLogger( BBSReplyInfoService.class );
 
 	/**
-	 * 根据传入的ID从数据库查询BBSReplyInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSReplyInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -48,7 +48,7 @@ public class BBSReplyInfoService {
 	}
 
 	/**
-	 * 向数据库保存BBSReplyInfo对象
+	 * 데이터베이스에 BBSReplyInfo 객체 저장
 	 * @param _bBSReplyInfo
 	 */
 	public BBSReplyInfo save( BBSReplyInfo _bBSReplyInfo ) throws Exception {
@@ -83,11 +83,11 @@ public class BBSReplyInfoService {
 			emc.beginTransaction( BBSSectionInfo.class );
 			emc.beginTransaction( BBSForumInfo.class );
 			if( _bBSReplyInfo_tmp == null ){
-				//创建一个新的记录
+				//새 레코드 생성
 				_bBSReplyInfo.setOrderNumber( ( maxOrderNumber + 1 ) );
 				emc.persist( _bBSReplyInfo, CheckPersistType.all);
 			}else{
-				//更新一条记录
+				//레코드 수정
 				_bBSReplyInfo.setCreateTime( _bBSReplyInfo_tmp.getCreateTime() );
 				_bBSReplyInfo.copyTo( _bBSReplyInfo_tmp, JpaObject.FieldsUnmodify  );
 				emc.check( _bBSReplyInfo_tmp, CheckPersistType.all );
@@ -118,7 +118,7 @@ public class BBSReplyInfoService {
 
 			emc.commit();
 
-			//个人回复数增加1
+			//개인 답글 수 1 증가
 			BBSUserInfoService userInfoService = new BBSUserInfoService();
 			BBSUserInfo userInfo = userInfoService.getByUserName( _bBSReplyInfo.getCreatorName());
 			userInfo.setReplyCount(userInfo.getReplyCount() + 1);
@@ -133,7 +133,7 @@ public class BBSReplyInfoService {
 	}
 
 	/**
-	 * 根据ID从数据库中删除BBSReplyInfo对象
+	 * ID로 데이터베이스에서 BBSReplyInfo 객체 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -147,7 +147,7 @@ public class BBSReplyInfoService {
 			return;
 		}
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			replyInfo = emc.find( id, BBSReplyInfo.class );
 			if ( null == replyInfo ) {
 				throw new Exception( "object is not exist {'id':'"+ id +"'}" );
@@ -165,7 +165,7 @@ public class BBSReplyInfoService {
 				if( _subjectInfo != null ){
 					if( _subjectInfo.getReplyTotal() > 0 ){
 						_subjectInfo.setReplyTotal( _subjectInfo.getReplyTotal() - 1 );
-						//如果当前删除的回复，是主贴采纳的解决方案，那么需要把主贴采纳的解决方案置空
+						//현재 삭제하는 답글이 원글에서 채택한 해결책이면 원글의 채택 해결책을 비움
 						if( StringUtils.isNotEmpty( _subjectInfo.getAcceptReplyId() ) &&
 							StringUtils.equals( _subjectInfo.getAcceptReplyId(), id )){
 							_subjectInfo.setAcceptReplyId( null );
@@ -266,7 +266,7 @@ public class BBSReplyInfoService {
 	}
 
 	/**
-	 * 根据回复ID，查询二级回复列表
+	 * 답글 ID로 2단계 답글 목록 조회
 	 * @param replyId
 	 * @return
 	 */

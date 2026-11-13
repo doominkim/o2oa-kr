@@ -29,16 +29,16 @@ public class ActionMyControl extends BaseAction {
         Wo wo = new Wo();
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
-            if (business.isManager(person)) { // 管理员直接返回 不需要查询个人信息
+            if (business.isManager(person)) { // 관리자는 바로 반환, 개인 정보 조회 불필요
                 wo.setAdmin(true);
                 result.setData(wo);
                 return result;
             }
             AttendanceV2Config config = this.getConfig(emc);
-            // 已配置的职务
+            // 설정된 직무
             List<String> dutyNameList = config.getProperties().getStatisticUnitDutyNameList();
             if (dutyNameList != null && !dutyNameList.isEmpty()) {
-                // 查询个人信息 判断是否有[对应配置的]职务
+                // 개인 정보를 조회해 [설정된] 직무가 있는지 판단
                 String encodePerson = URLEncoder.encode(person.getDistinguishedName(),
                         DefaultCharset.name);
                 WoPerson p = ThisApplication.context().applications()
@@ -61,7 +61,7 @@ public class ActionMyControl extends BaseAction {
                     }
                 }
             }
-            // 查询考勤组 协助管理员
+            // 근태 그룹 보조 관리자 조회
             wo.setAssistAdmin(business.getAttendanceV2ManagerFactory()
                     .isAssistAdmin(person.getDistinguishedName()));
             result.setData(wo);
@@ -83,13 +83,13 @@ public class ActionMyControl extends BaseAction {
     public static class Wo extends GsonPropertyObject {
 
         private static final long serialVersionUID = 6260606941234950656L;
-        @FieldDescribe("是否管理员或考勤管理员")
+        @FieldDescribe("관리자 또는 근태 관리자 여부")
         private Boolean admin;
-        @FieldDescribe("是否有[考勤管理员]职务")
+        @FieldDescribe("[근태 관리자] 직무 보유 여부")
         private Boolean readAdmin;
-        @FieldDescribe("考勤管理员职务列表")
+        @FieldDescribe("근태 관리자 직무 목록")
         private List<WoUnitDuty> unitDutyList;
-        @FieldDescribe("是否考勤组协助管理员")
+        @FieldDescribe("근태 그룹 보조 관리자 여부")
         private Boolean assistAdmin;
 
         public Boolean getAdmin() {
@@ -139,14 +139,14 @@ public class ActionMyControl extends BaseAction {
         private static final long serialVersionUID = 8887183560643765452L;
 
 
-        @FieldDescribe("职务名称")
+        @FieldDescribe("직무 이름")
         private String name;
-        @FieldDescribe("唯一标识")
+        @FieldDescribe("고유 식별자")
         private String unique;
-        @FieldDescribe("识别名")
+        @FieldDescribe("식별 이름")
         private String distinguishedName;
 
-        @FieldDescribe("组织对象")
+        @FieldDescribe("조직 객체")
         private WoUnit woUnit;
 
 
@@ -190,10 +190,10 @@ public class ActionMyControl extends BaseAction {
         private static final long serialVersionUID = -6779245805216952773L;
 
 
-        @FieldDescribe("组织对象")
+        @FieldDescribe("조직 객체")
         private WoUnit woUnit;
 
-        @FieldDescribe("组织职务对象")
+        @FieldDescribe("조직 직무 객체")
         private List<WoUnitDuty> woUnitDutyList;
 
         public WoUnit getWoUnit() {
@@ -218,7 +218,7 @@ public class ActionMyControl extends BaseAction {
 
         private static final long serialVersionUID = -6787590791993664117L;
 
-        @FieldDescribe("身份对象")
+        @FieldDescribe("신분 객체")
         private List<WoIdentity> woIdentityList;
 
         public List<WoIdentity> getWoIdentityList() {

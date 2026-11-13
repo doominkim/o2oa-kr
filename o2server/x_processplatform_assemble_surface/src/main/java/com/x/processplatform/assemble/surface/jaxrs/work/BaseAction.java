@@ -115,7 +115,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 			if (jsonElement.isJsonObject()) {
 				return gson.fromJson(jsonElement, Data.class);
 			} else {
-				/* 如果不是Object强制返回一个Map对象 */
+				/* Object가 아니면 Map 객체를 강제로 반환 */
 				return new Data();
 			}
 		}
@@ -146,43 +146,43 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -6205312408256274367L;
 
-		@FieldDescribe("活动节点")
+		@FieldDescribe("활동 노드")
 		private WoActivity activity;
 
-		@FieldDescribe("工作")
+		@FieldDescribe("문서")
 		private WoWork work;
 
-		@FieldDescribe("工作日志对象")
+		@FieldDescribe("업무 로그 객체")
 		private List<WoWorkLog> workLogList = new ArrayList<>();
 
-		@FieldDescribe("业务数据")
+		@FieldDescribe("업무 데이터")
 		private Data data;
 
-		@FieldDescribe("附件对象")
+		@FieldDescribe("첨부파일 객체")
 		private List<WoAttachment> attachmentList = new ArrayList<>();
 
-		@FieldDescribe("待办对象")
+		@FieldDescribe("결재 대기 객체")
 		private List<WoTask> taskList = new ArrayList<>();
 
-		@FieldDescribe("待办对象")
+		@FieldDescribe("결재 대기 객체")
 		private List<WoTaskCompleted> taskCompletedList = new ArrayList<>();
 
-		@FieldDescribe("待阅对象")
+		@FieldDescribe("열람 대기 객체")
 		private List<WoRead> readList = new ArrayList<>();
 
-		@FieldDescribe("已阅对象")
+		@FieldDescribe("열람 완료 객체")
 		private List<WoReadCompleted> readCompletedList = new ArrayList<>();
 
-		@FieldDescribe("当前待办索引")
+		@FieldDescribe("현재 결재 대기 인덱스")
 		private Integer currentTaskIndex = -1;
 
-		@FieldDescribe("当前待阅索引")
+		@FieldDescribe("현재 열람 대기 인덱스")
 		private Integer currentReadIndex = -1;
 
-		@FieldDescribe("权限对象")
+		@FieldDescribe("권한 객체")
 		private Control control;
 
-		@FieldDescribe("表单对象")
+		@FieldDescribe("양식 객체")
 		private WoForm form;
 
 		public WoActivity getActivity() {
@@ -496,7 +496,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 	}
 
-	// 启动工作时查找有没有此人创建的工作并且没有流转的
+	// 업무 문서 시작 시 이 사용자가 생성하고 진행되지 않은 업무 문서가 있는지 조회
 	protected String latest(Business business, Process process, String identity) throws Exception {
 		EntityManagerContainer emc = business.entityManagerContainer();
 		List<Task> tasks = emc.fetchEqualAndEqual(Task.class, ListTools.toList(Task.job_FIELDNAME),
@@ -517,7 +517,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 				.sorted(Comparator.comparing(Work::getUpdateTime, Comparator.nullsFirst(Date::compareTo)).reversed())
 				.findFirst().orElse(null);
 		if (null != work) {
-			// 在同时判断data是否没有数据
+			// 동시에 data에 데이터가 없는지 판단
 			Data data = this.loadData(business, work);
 			List<String> keys = new ArrayList<>(data.keyList());
 			keys.remove(Data.WORK_PROPERTY);

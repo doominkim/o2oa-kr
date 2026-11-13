@@ -9,11 +9,11 @@ import java.util.List;
  * @date 2026/08/28 13:48
  **/
 public class SheetData extends GsonPropertyObject {
-    @FieldDescribe("sheet名称")
+    @FieldDescribe("sheet 이름")
     private String sheetName;
-    @FieldDescribe("开始行,从第0行开始")
+    @FieldDescribe("시작 행(0행부터 시작)")
     private Integer startRow;
-    @FieldDescribe("数据列表")
+    @FieldDescribe("데이터 목록")
     private List<List<String>> dataList;
 
     public String getSheetName() {

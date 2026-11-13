@@ -21,11 +21,11 @@ import com.x.bbs.entity.BBSReplyInfo;
 import com.x.bbs.entity.BBSReplyInfo_;
 
 /**
- * 类   名：BBSReplyInfoFactory<br/>
- * 实体类：BBSReplyInfo<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSReplyInfoFactory<br/>
+ * 엔티티 클래스: BBSReplyInfo<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
 **/
 public class BBSReplyInfoFactory extends AbstractFactory {
 
@@ -33,12 +33,12 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe( "获取指定Id的BBSReplyInfo实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSReplyInfo 엔티티 정보 객체 조회" )
 	public BBSReplyInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSReplyInfo.class, ExceptionWhen.none );
 	}
 
-	//@MethodDescribe( "列示指定Id的BBSReplyInfo实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSReplyInfo 엔티티 정보 목록 조회" )
 	public List<BBSReplyInfo> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSReplyInfo>();
@@ -54,7 +54,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 	/**
 	 *
 	 * @param subjectId
-	 * @param showSubReply 是否平级显示所有的的回复, 如果为false则只显示第一层
+	 * @param showSubReply 모든 답글을 같은 수준으로 표시할지 여부, false면 첫 단계만 표시
 	 * @return
 	 * @throws Exception
 	 */
@@ -75,7 +75,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块信息查询版块内主题数量，包括子版块内的主题数量" )
+	//@MethodDescribe( "게시판 정보로 게시판 내 주제 수 조회, 하위 게시판 내 주제 수 포함" )
 	public Long countBySectionId( String sectionId ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSReplyInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -87,7 +87,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块信息查询论坛内主题数量" )
+	//@MethodDescribe( "게시판 정보로 포럼 내 주제 수 조회" )
 	public Long countByForumId(String forumId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSReplyInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -99,9 +99,9 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 *根据主题ID获取该主题所有的回复信息对象列表
+	 *주제 ID로 해당 주제의 전체 답글 정보 객체 목록 조회
 	 * @param subjectId
-	 * @param showSubReply 是否平级显示所有的的回复, 如果为false则只显示第一层
+	 * @param showSubReply 모든 답글을 같은 수준으로 표시할지 여부, false면 첫 단계만 표시
 	 * @param maxCount
 	 * @return
 	 * @throws Exception
@@ -132,7 +132,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		}
 	}
 
-	//@MethodDescribe( "根据主题ID获取该主题最大的回复编号（楼层）" )
+	//@MethodDescribe( "주제 ID로 해당 주제의 최대 답글 번호(층) 조회" )
 	public Integer getMaxOrderNumber( String subjectId ) throws Exception {
 		if( subjectId == null ){
 			throw new Exception( "subjectId can not null." );
@@ -152,7 +152,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		}
 	}
 
-	//@MethodDescribe( "根据指定用户姓名、论坛ID，主版块ID， 版块ID查询符合条件的所有回复的数量" )
+	//@MethodDescribe( "지정 사용자 이름, 포럼 ID, 주 게시판 ID, 게시판 ID로 조건에 맞는 전체 답글 수 조회" )
 	public Long countReplyForPage( String creatorName, String forumId, String mainSectionId, String sectionId, String subjectId ) throws Exception {
 		Boolean allFilterNull = true;
 		if( StringUtils.isNotEmpty( creatorName ) ){
@@ -197,7 +197,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据指定用户姓名、论坛ID，主版块ID， 版块ID查询符合条件的所有回复对象列表" )
+	//@MethodDescribe( "지정 사용자 이름, 포럼 ID, 주 게시판 ID, 게시판 ID로 조건에 맞는 전체 답글 객체 목록 조회" )
 	public List<BBSReplyInfo> listReplyForPage( String creatorName, String forumId, String mainSectionId, String sectionId, String subjectId, String orderType, Integer maxCount ) throws Exception {
 		Boolean allFilterNull = true;
 		if( StringUtils.isNotEmpty( creatorName ) ){
@@ -249,7 +249,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( maxCount ).getResultList();
 	}
 
-	//@MethodDescribe( "（今日）根据指定用户姓名、论坛ID，主版块ID， 版块ID查询符合条件的所有回复的数量" )
+	//@MethodDescribe( "(오늘) 지정 사용자 이름, 포럼 ID, 주 게시판 ID, 게시판 ID로 조건에 맞는 전체 답글 수 조회" )
 	public Long countReplyForTodayByUserName( String creatorName, String forumId, String mainSectionId, String sectionId, String subjectId ) throws Exception {
 		Boolean allFilterNull = true;
 		if( StringUtils.isNotEmpty( creatorName ) ){
@@ -295,7 +295,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "（今日）根据指定用户姓名、论坛ID，主版块ID， 版块ID查询符合条件的所有回复对象列表" )
+	//@MethodDescribe( "(오늘) 지정 사용자 이름, 포럼 ID, 주 게시판 ID, 게시판 ID로 조건에 맞는 전체 답글 객체 목록 조회" )
 	public List<BBSReplyInfo> listReplyForTodayByUserName( String creatorName, String forumId, String mainSectionId, String sectionId, String subjectId, Integer maxCount ) throws Exception {
 		Boolean allFilterNull = true;
 		if( StringUtils.isNotEmpty( creatorName ) ){
@@ -375,11 +375,11 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询指定的版块内时间范围内发表的回帖数量
+	 * 지정 게시판에서 기간 내 작성된 답글 수 조회
 	 * @param sectionId
 	 * @param todayStartTime
 	 * @param todayEndTime
-	 * @param queryMainSection  是否也查询主版块是sectionId的数据
+	 * @param queryMainSection  주 게시판이 sectionId인 데이터도 조회할지 여부
 	 * @return
 	 * @throws Exception
 	 */
@@ -422,7 +422,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据回复ID，查询二级回复列表，状态：无审核|审核通过
+	 * 답글 ID로 2단계 답글 목록 조회, 상태: 심사 없음|심사 통과
 	 *
 	 * @param replyId
 	 * @return
@@ -449,7 +449,7 @@ public class BBSReplyInfoFactory extends AbstractFactory {
     }
 
 	/**
-	 * 根据回复ID，查询二级回复列表，状态：无审核|审核通过
+	 * 답글 ID로 2단계 답글 목록 조회, 상태: 심사 없음|심사 통과
 	 *
 	 * @param replyId
 	 * @return

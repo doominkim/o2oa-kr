@@ -15,7 +15,7 @@ import com.x.attendance.entity.AttendanceWorkPlace;
 import com.x.attendance.entity.AttendanceWorkPlace_;
 import com.x.base.core.project.exception.ExceptionWhen;
 /**
- * 工作场所信息服务类
+ * 근무지 정보 서비스 클래스
  */
 public class AttendanceWorkPlaceFactory extends AbstractFactory {
 	
@@ -23,12 +23,12 @@ public class AttendanceWorkPlaceFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的AttendanceWorkPlace应用信息对象")
+	//@MethodDescribe("지정 Id의 AttendanceWorkPlace 앱 정보 객체 조회")
 	public AttendanceWorkPlace get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceWorkPlace.class, ExceptionWhen.none);
 	}
 	
-//	@MethodDescribe("列示全部的AttendanceWorkPlace应用信息列表")
+//	@MethodDescribe("전체 AttendanceWorkPlace 앱 정보 목록 조회")
 	@SuppressWarnings("unused")
 	public List<AttendanceWorkPlace> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceWorkPlace.class);
@@ -38,7 +38,7 @@ public class AttendanceWorkPlaceFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceWorkPlace应用信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceWorkPlace 앱 정보 목록 조회")
 	public List<AttendanceWorkPlace> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<AttendanceWorkPlace>();

@@ -16,14 +16,14 @@ import com.x.calendar.core.entity.Calendar_EventRepeatMaster;
 
 
 /**
- * 日历账户信息服务类
+ * 캘린더 계정 정보 서비스 클래스
  * @author O2LEE
  *
  */
 public class CalendarService {
 
 	/**
-	 * 获取所有的日历账户信息
+	 * 모든 캘린더 계정 정보 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -33,7 +33,7 @@ public class CalendarService {
 	}
 
 	/**
-	 * 根据ID删除指定的日历账户信息
+	 * ID로 지정 캘린더 계정 정보 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -52,7 +52,7 @@ public class CalendarService {
 			emc.beginTransaction( Calendar_Event.class );
 			emc.beginTransaction( Calendar_EventRepeatMaster.class );
 			
-			//删除所有的日历记录信息Calendar_Event
+			//모든 캘린더 레코드 정보 Calendar_Event 삭제
 			List<Calendar_Event> eventList = null;
 			ids = business.calendar_EventFactory().listWithCalendarId(id);
 			if( ListTools.isNotEmpty( ids )) {
@@ -64,7 +64,7 @@ public class CalendarService {
 				}
 			}
 			
-			//删除所有的重复主要依据信息Calendar_EventRepeatMaster
+			//모든 반복 주체 정보 Calendar_EventRepeatMaster 삭제
 			List<Calendar_EventRepeatMaster> repeatedMasterList = null;
 			ids = business.calendar_EventRepeatMasterFactory().listWithCalendarId(id);
 			if( ListTools.isNotEmpty( ids )) {
@@ -76,14 +76,14 @@ public class CalendarService {
 				}
 			}
 			
-			//删除日历信息
+			//캘린더 정보 삭제
 			emc.remove( calendar, CheckRemoveType.all );
 			emc.commit();
 		}
 	}
 
 	/**
-	 * 创建日历账户信息
+	 * 캘린더 계정 정보 생성
 	 * @param calendar
 	 * @return
 	 * @throws Exception
@@ -102,7 +102,7 @@ public class CalendarService {
 	}
 	
 	/**
-	 * 更新日历账户信息
+	 * 캘린더 계정 정보 수정
 	 * @param calendar
 	 * @return
 	 * @throws Exception
@@ -139,7 +139,7 @@ public class CalendarService {
 	}
 
 	/**
-	 * 查询用户创建的日历
+	 * 사용자가 생성한 캘린더 조회
 	 * @param emc
 	 * @param personName
 	 * @return
@@ -151,7 +151,7 @@ public class CalendarService {
 	}
 	
 	/**
-	 * 根据条件查询指定的日历信息ID列表
+	 * 조건으로 지정한 캘린더 정보 ID 목록 조회
 	 * @param emc
 	 * @param name
 	 * @param type
@@ -168,10 +168,10 @@ public class CalendarService {
 			 List<String> inFilterCalendarIds, String personName, List<String> unitNames, List<String> groupNames ) throws Exception {
 		Business business =  new Business( emc );
 
-		//同步，避免前端的连续调用导致多条个人日历
+		//동기화, 프론트엔드 연속 호출로 개인 캘린더가 여러 개 생기는 것 방지
 		List<String> ids = business.calendarFactory().listMyCalender( personName );
 		if( ListTools.isEmpty( ids ) ) {
-			//创建一个自己的默认日历
+			//본인 기본 캘린더 생성
 			Calendar calendar = new Calendar();
 			calendar.setSource( "PERSON" );
 			calendar.setCreateor( "SYSTEM" );
@@ -198,7 +198,7 @@ public class CalendarService {
 	}
 
 	/**
-	 * 同步方法，避免前端的连续调用导致多条个人日历信息
+	 * 동기화 메서드, 프론트엔드 연속 호출로 개인 캘린더 정보가 여러 개 생기는 것 방지
 	 * @param emc
 	 * @param personName
 	 * @param calendar
@@ -215,7 +215,7 @@ public class CalendarService {
 	}
 
 	/**
-	 * 将一个字符串添加到一个List里
+	 * 문자열을 List에 추가
 	 * @param distinguishedName
 	 * @param manageablePersonList
 	 */
@@ -241,7 +241,7 @@ public class CalendarService {
 	}
 
 	/**
-	 * 关注一个日历
+	 * 캘린더 구독
 	 * @param emc
 	 * @param distinguishedName
 	 * @param id
@@ -261,7 +261,7 @@ public class CalendarService {
 	}
 	
 	/**
-	 * 取消关注一个日历
+	 * 캘린더 구독 취소
 	 * @param emc
 	 * @param distinguishedName
 	 * @param id

@@ -40,7 +40,7 @@ public class ActionFileDownload extends BaseAction {
 					file.readContent(mapping, output);
 					output.flush();
 				} catch (Exception e) {
-					LOGGER.warn("{}附件下载异常：{}", file.getName(), e.getMessage());
+					LOGGER.warn("{} 첨부파일 다운로드 오류: {}", file.getName(), e.getMessage());
 				}
 			};
 			String fastETag = file.getId()+file.getUpdateTime().getTime();

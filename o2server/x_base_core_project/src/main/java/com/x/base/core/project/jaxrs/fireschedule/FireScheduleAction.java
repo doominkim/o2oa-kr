@@ -35,14 +35,14 @@ public class FireScheduleAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FireScheduleAction.class);
 
-	@Operation(summary = "接受x_program_center发送过来的运行定时任务指令.", operationId = OPERATIONID_PREFIX + "execute", responses = {
+	@Operation(summary = "x_program_center가 보낸 예약 작업 실행 지시 수신.", operationId = OPERATIONID_PREFIX + "execute", responses = {
 			@ApiResponse(content = @Content(schema = @Schema(implementation = ActionExecute.Wo.class))) })
-	@JaxrsMethodDescribe(value = "接受x_program_center发送过来的运行定时任务指令.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "x_program_center가 보낸 예약 작업 실행 지시 수신.", action = ActionExecute.class)
 	@GET
 	@Path("classname/{className}")
 	public void execute(@Suspended final AsyncResponse asyncResponse, @Context ServletContext servletContext,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("运行类") @PathParam("className") String className) throws Exception {
+			@JaxrsParameterDescribe("실행 클래스") @PathParam("className") String className) throws Exception {
 		ActionResult<ActionExecute.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

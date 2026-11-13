@@ -24,7 +24,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceAppealInfo", description = "考勤申诉信息.")
+@Schema(name = "AttendanceAppealInfo", description = "근태 이의 신청 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceAppealInfo.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceAppealInfo.table
@@ -47,7 +47,7 @@ public class AttendanceAppealInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -56,177 +56,177 @@ public class AttendanceAppealInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String detailId_FIELDNAME = "detailId";
-	@FieldDescribe("申诉的打卡记录ID.")
+	@FieldDescribe("이의 신청 출퇴근 기록 ID.")
 	@Column( length = JpaObject.length_id, name = ColumnNamePrefix + detailId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String detailId;
 
 	public static final String empName_FIELDNAME = "empName";
-	@FieldDescribe("申诉员工标识:distinguishedName")
+	@FieldDescribe("이의 신청 직원 식별자:distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + empName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String empName;
 
 	public static final String topUnitName_FIELDNAME = "topUnitName";
-	@FieldDescribe("员工所属顶层组织distinguishedName")
+	@FieldDescribe("직원 소속 최상위 조직 distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + topUnitName_FIELDNAME)
 	private String topUnitName;
 
 	public static final String unitName_FIELDNAME = "unitName";
-	@FieldDescribe("员工所属组织名称distinguishedName")
+	@FieldDescribe("직원 소속 조직 이름 distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + unitName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String unitName;
 
 	public static final String recordDate_FIELDNAME = "recordDate";
-	@FieldDescribe("记录日期")
+	@FieldDescribe("기록 일자")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column( name = ColumnNamePrefix + recordDate_FIELDNAME)
 	private Date recordDate;
 
 	public static final String yearString_FIELDNAME = "yearString";
-	@FieldDescribe("申诉年份")
+	@FieldDescribe("이의 신청 연도")
 	@Column( length = JpaObject.length_16B, name = ColumnNamePrefix + yearString_FIELDNAME)
 	private String yearString;
 
 	public static final String monthString_FIELDNAME = "monthString";
-	@FieldDescribe("申诉月份")
+	@FieldDescribe("이의 신청 월")
 	@Column( length = JpaObject.length_16B, name = ColumnNamePrefix + monthString_FIELDNAME)
 	private String monthString;
 
 	public static final String appealDateString_FIELDNAME = "appealDateString";
-	@FieldDescribe("申诉日期字符串")
+	@FieldDescribe("이의 신청 일자 문자열")
 	@Column( length = JpaObject.length_32B, name = ColumnNamePrefix + appealDateString_FIELDNAME)
 	private String appealDateString;
 
 	public static final String recordDateString_FIELDNAME = "recordDateString";
-	@FieldDescribe("记录日期字符串")
+	@FieldDescribe("기록 일자 문자열")
 	@Column( length = JpaObject.length_32B, name = ColumnNamePrefix + recordDateString_FIELDNAME)
 	private String recordDateString;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("申诉开始时间")
+	@FieldDescribe("이의 신청 시작 시간")
 	@Column( length = JpaObject.length_32B, name = ColumnNamePrefix + startTime_FIELDNAME)
 	private String startTime;
 
 	public static final String endTime_FIELDNAME = "endTime";
-	@FieldDescribe("申诉结束时间")
+	@FieldDescribe("이의 신청 종료 시간")
 	@Column( length = JpaObject.length_32B, name = ColumnNamePrefix + endTime_FIELDNAME)
 	private String endTime;
 
 	public static final String appealReason_FIELDNAME = "appealReason";
-	@FieldDescribe("申诉原因简述（60个汉字）")
+	@FieldDescribe("이의 신청 사유 요약(60자)")
 	@Column( length = JpaObject.length_255B, name = ColumnNamePrefix + appealReason_FIELDNAME)
 	private String appealReason;
 
 	public static final String selfHolidayType_FIELDNAME = "selfHolidayType";
-	@FieldDescribe("请假类型")
+	@FieldDescribe("휴가 유형")
 	@Column( length = JpaObject.length_64B, name = ColumnNamePrefix + selfHolidayType_FIELDNAME)
 	private String selfHolidayType;
 
 	public static final String address_FIELDNAME = "address";
-	@FieldDescribe("地址")
+	@FieldDescribe("주소")
 	@Column( length = JpaObject.length_255B, name = ColumnNamePrefix + address_FIELDNAME )
 	private String address;
 
 	public static final String reason_FIELDNAME = "reason";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("申诉详细事由")
+	@FieldDescribe("이의 신청 상세 사유")
 	@Column( length = JpaObject.length_2K, name = ColumnNamePrefix + reason_FIELDNAME)
 	private String reason;
 
 	public static final String appealDescription_FIELDNAME = "appealDescription";
 	@Lob
-	@FieldDescribe("申诉详细说明")
+	@FieldDescribe("이의 신청 상세 설명")
 	@Column( length = JpaObject.length_2K, name = ColumnNamePrefix + appealDescription_FIELDNAME)
 	private String appealDescription;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("审批状态:0-待处理，1-审批通过，-1-审批不能过，2-需要下一次审批")
+	@FieldDescribe("승인 상태: 0-처리 대기, 1-승인, -1-반려, 2-다음 승인 필요")
 	@Column( name = ColumnNamePrefix + status_FIELDNAME)
 	private Integer status = 0;
 
 	public static final String currentProcessor_FIELDNAME = "currentProcessor";
-	@FieldDescribe("当前审核人")
+	@FieldDescribe("현재 심사자")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + currentProcessor_FIELDNAME)
 	private String currentProcessor;
 
 	public static final String archiveTime_FIELDNAME = "archiveTime";
-	@FieldDescribe("归档时间字符串")
+	@FieldDescribe("보관 시간 문자열")
 	@Column( length = JpaObject.length_32B, name = ColumnNamePrefix + archiveTime_FIELDNAME )
 	private String archiveTime;
 
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processPerson1_FIELDNAME = "processPerson1";
-////	@FieldDescribe("审批人一")
+////	@FieldDescribe("승인자 1")
 //	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + processPerson1_FIELDNAME)
 //	private String processPerson1;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processPersonUnit1_FIELDNAME = "processPersonUnit1";
-////	@FieldDescribe("审批人组织一")
+////	@FieldDescribe("승인자 조직 1")
 //	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + processPersonUnit1_FIELDNAME)
 //	private String processPersonUnit1;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processPersonTopUnit1_FIELDNAME = "processPersonTopUnit1";
-////	@FieldDescribe("审批人顶层组织一")
+////	@FieldDescribe("승인자 최상위 조직 1")
 //	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + processPersonTopUnit1_FIELDNAME)
 //	private String processPersonTopUnit1;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String opinion1_FIELDNAME = "opinion1";
-////	@FieldDescribe("审批意见一")
+////	@FieldDescribe("승인 의견 1")
 //	@Column( length = JpaObject.length_255B, name = ColumnNamePrefix + opinion1_FIELDNAME )
 //	private String opinion1;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processTime1_FIELDNAME = "processTime1";
-////	@FieldDescribe("审批日期一")
+////	@FieldDescribe("승인 일자 1")
 //	@Temporal(TemporalType.TIMESTAMP)
 //	@Column( name = ColumnNamePrefix + processTime1_FIELDNAME)
 //	private Date processTime1;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processPerson2_FIELDNAME = "processPerson2";
-////	@FieldDescribe("审批人二")
+////	@FieldDescribe("승인자 2")
 //	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + processPerson2_FIELDNAME)
 //	private String processPerson2;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processPersonUnit2_FIELDNAME = "processPersonUnit2";
-////	@FieldDescribe("审批人组织二")
+////	@FieldDescribe("승인자 조직 2")
 //	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + processPersonUnit2_FIELDNAME )
 //	private String processPersonUnit2;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processPersonTopUnit2_FIELDNAME = "processPersonTopUnit2";
-////	@FieldDescribe("审批人顶层组织二")
+////	@FieldDescribe("승인자 최상위 조직 2")
 //	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + processPersonTopUnit2_FIELDNAME )
 //	private String processPersonTopUnit2;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String opinion2_FIELDNAME = "opinion2";
-////	@FieldDescribe("审批意见二")
+////	@FieldDescribe("승인 의견 2")
 //	@Column( length = JpaObject.length_255B, name = ColumnNamePrefix + opinion2_FIELDNAME )
 //	private String opinion2;
 //
-//	//2020-05-15 新版本取消此属性，审批信息在AttendanceAppealAuditInfo里记录
+//	//2020-05-15 새 버전에서 이 속성 폐지, 승인 정보는 AttendanceAppealAuditInfo에 기록
 //	public static final String processTime2_FIELDNAME = "processTime2";
-////	@FieldDescribe("审批日期二")
+////	@FieldDescribe("승인 일자 2")
 //	@Temporal(TemporalType.TIMESTAMP)
 //	@Column( name = ColumnNamePrefix + processTime2_FIELDNAME )
 //	private Date processTime2;

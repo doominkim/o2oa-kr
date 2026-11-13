@@ -26,10 +26,10 @@ class ActionListWithPersonObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private List<String> personList = new ArrayList<>();
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList = new ArrayList<>();
 
 		public List<String> getPersonList() {

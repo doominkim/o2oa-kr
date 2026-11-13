@@ -26,18 +26,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("qiyeweixin")
-@JaxrsDescribe("企业微信单点登录")
+@JaxrsDescribe("기업 위챗 SSO 로그인")
 public class QiyeweixinAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(QiyeweixinAction.class);
 
-    @JaxrsMethodDescribe(value = "企业微信点单登录.", action = ActionGetLogin.class)
+    @JaxrsMethodDescribe(value = "기업 위챗 SSO 로그인.", action = ActionGetLogin.class)
     @GET
     @Path("code/{code}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void getLogin(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @Context HttpServletResponse response, @JaxrsParameterDescribe("码") @PathParam("code") String code) {
+            @Context HttpServletResponse response, @JaxrsParameterDescribe("코드") @PathParam("code") String code) {
         ActionResult<ActionGetLogin.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -49,14 +49,14 @@ public class QiyeweixinAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "企业微信获取用户详细信息.", action = ActionLoginAndGetPrivateInfo.class)
+    @JaxrsMethodDescribe(value = "기업 위챗 사용자 상세 정보 조회.", action = ActionLoginAndGetPrivateInfo.class)
     @GET
     @Path("update/person/detail/{code}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void updatePersonInfoFromQywx(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @Context HttpServletResponse response, @JaxrsParameterDescribe("码") @PathParam("code") String code) {
+            @Context HttpServletResponse response, @JaxrsParameterDescribe("코드") @PathParam("code") String code) {
         ActionResult<ActionLoginAndGetPrivateInfo.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -70,7 +70,7 @@ public class QiyeweixinAction extends StandardJaxrsAction {
 
 
 
-	@JaxrsMethodDescribe(value = "企业微信获取jssdk签名信息.", action = ActionJssdkSignInfo.class)
+	@JaxrsMethodDescribe(value = "기업 위챗 jssdk 서명 정보 조회.", action = ActionJssdkSignInfo.class)
 	@POST
 	@Path("info/sign")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

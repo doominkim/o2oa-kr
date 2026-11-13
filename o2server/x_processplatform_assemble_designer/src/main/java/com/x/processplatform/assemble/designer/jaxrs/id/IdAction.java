@@ -24,18 +24,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("id")
-@JaxrsDescribe("标识")
+@JaxrsDescribe("식별자")
 public class IdAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(IdAction.class);
 
-	@JaxrsMethodDescribe(value = "创建用于ID值的UUID", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID 값용 UUID 생성", action = ActionGet.class)
 	@GET
 	@Path("{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionGet.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

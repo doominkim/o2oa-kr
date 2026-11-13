@@ -1,7 +1,7 @@
 
 /**
- * 微信公众号单点登录
- * 目前这个页面有两个功能 一个是绑定账号 一个是单点登录
+ * 위챗 공식계정 SSO 로그인
+ * 현재 이 페이지에는 계정 연동과 단일 로그인 두 가지 기능이 있음
  */
 layout.addReady(function(){
     (function(layout){
@@ -11,13 +11,13 @@ layout.addReady(function(){
  
         var _bindWeixin2User = function (redirect) {
             var uri = href.toURI();
-            var code = uri.getData("code"); //微信code
+            var code = uri.getData("code"); //WeChat code
             if (code) {
                 o2.Actions.load("x_organization_assemble_authentication").MPweixinAction.bindWithCode(code, function (json) {
-                    //绑定成功
+                    //연동되었습니다
                     // var box = new Element("div", { "style": "text-align: center;" }).inject($("appContent"));
-                    // new Element("h2", { "text": "绑定成功！" }).inject(box);
-                    // o2.api.page.notice("绑定成功！", "success");
+                    // new Element("h2", { "text": "연동되었습니다!" }).inject(box);
+                    // o2.api.page.notice("연동되었습니다!", "success");
                     _redirectTo(redirect);
                 }, function (err) {
                     console.error(err);
@@ -38,12 +38,12 @@ layout.addReady(function(){
         
         ///////////////////////////
         var uri = href.toURI();
-        var redirect = uri.getData("redirect"); //登录成功后跳转地址
-        var code = uri.getData("code"); //微信code
+        var redirect = uri.getData("redirect"); //로그인 성공 후 이동할 주소
+        var code = uri.getData("code"); //WeChat code
         console.log("code：" + code)
-        var type = uri.getData("type"); // bind 是绑定
+        var type = uri.getData("type"); // bind는 연동
         console.log("type：" + type)
-        if (type && type === "bind") { // 绑定要登录
+        if (type && type === "bind") { // 연동하려면 로그인 필요
             if (layout.session && layout.session.user){
                 _bindWeixin2User(redirect);
             }else{
@@ -53,7 +53,7 @@ layout.addReady(function(){
                     },function(){});
                 }
             }
-        } else { //code 单点登录
+        } else { //code는 단일 로그인
             o2.Actions.load("x_organization_assemble_authentication").MPweixinAction.loginWithCode(code, function (json) {
                 layout.session.user = json.data;
                 _redirectTo(redirect);

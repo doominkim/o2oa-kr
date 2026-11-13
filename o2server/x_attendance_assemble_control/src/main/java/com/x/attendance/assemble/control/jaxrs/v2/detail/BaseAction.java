@@ -24,7 +24,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 
     /**
-     * 统计数据
+     * 통계 데이터
      *
      * @param wi
      * @param userList
@@ -33,7 +33,7 @@ abstract class BaseAction extends StandardJaxrsAction {
      * @throws Exception
      */
     protected void statisticDetail(StatisticWi wi, List<String> userList, Business business, List<StatisticWo> wos) throws Exception {
-        List<String> newList = userList.stream().distinct().collect(Collectors.toList()); // 去重
+        List<String> newList = userList.stream().distinct().collect(Collectors.toList()); // 중복 제거
         for (String person : newList) {
             StatisticWo wo = new StatisticWo();
             wo.setUserId(person); //
@@ -53,7 +53,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                 int appealNums = 0;
                 for (AttendanceV2Detail attendanceV2Detail : list) {
                      if (BooleanUtils.isTrue(attendanceV2Detail.getWorkDay())) {
-                         workDayCount += 1; //工作日加1
+                         workDayCount += 1; //근무일 1 증가
                      }
                     if (attendanceV2Detail.getWorkTimeDuration() != null && attendanceV2Detail.getWorkTimeDuration() > 0) {
                         workTimeDuration += attendanceV2Detail.getWorkTimeDuration();
@@ -85,10 +85,10 @@ abstract class BaseAction extends StandardJaxrsAction {
                     if (attendanceV2Detail.getLeaveDays() != null && attendanceV2Detail.getLeaveDays() > 0) {
                         leaveDays += attendanceV2Detail.getLeaveDays();
                     }
-                    // 查询打卡记录 计算申诉数据
+                    // 출퇴근 기록 조회, 이의 신청 데이터 계산
                     List<AttendanceV2CheckInRecord> recordList = business.getAttendanceV2ManagerFactory().listRecordWithPersonAndDate(person, attendanceV2Detail.getRecordDateString());
                     appealNums += (int) recordList.stream().filter((r) -> StringUtils.isNotEmpty(r.getAppealId())).count();
-                    // 前端展现用的
+                    // 프론트 표시용
                     DetailWo detailWo = DetailWo.copier.copy(attendanceV2Detail);
                     List<RecordWo> recordWos = RecordWo.copier.copy(recordList);
                     for (RecordWo recordWo : recordWos) {
@@ -116,7 +116,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                     detailWo.setRecordList(recordWos);
                     detailWos.add(detailWo);
                 }
-                // 根据出勤天数平均 不是工作日
+                // 출근 일수 기준 평균, 근무일 아님
                 if (attendance > 0) {
                     DecimalFormat df = new DecimalFormat("0.0");
                     wo.setAverageWorkTimeDuration(df.format(((float) workTimeDuration.intValue() / attendance) / 60));

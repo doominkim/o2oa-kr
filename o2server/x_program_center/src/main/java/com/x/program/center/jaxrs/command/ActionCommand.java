@@ -26,7 +26,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.Crypto;
 import org.apache.commons.lang3.BooleanUtils;
 
-/*执行服务器命令*/
+/*서버 명령 실행*/
 public class ActionCommand extends BaseAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(ActionCommand.class);
@@ -44,7 +44,7 @@ public class ActionCommand extends BaseAction {
 		String logInfo = "{} executeCommand {} on node {}";
 		if (nodeName.equals("*")) {
 			Nodes nodes = Config.nodes();
-			// 先其他服务器再当前服务器
+			// 다른 서버 먼저, 이후 현재 서버
 			for (String node : nodes.keySet()) {
 				if (!node.equalsIgnoreCase(Config.node())) {
 					logger.info(logInfo, effectivePerson.getDistinguishedName(), ctl,
@@ -94,11 +94,11 @@ public class ActionCommand extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("命令名称")
+		@FieldDescribe("명령 이름")
 		private String ctl;
-		@FieldDescribe("服务器地址(*代表多台应用服务器)")
+		@FieldDescribe("서버 주소(*는 여러 앱 서버를 의미)")
 		private String nodeName;
-		@FieldDescribe("服务端口")
+		@FieldDescribe("서비스 포트")
 		private String nodePort;
 
 		public String getCtl() {
@@ -128,11 +128,11 @@ public class ActionCommand extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("执行时间")
+		@FieldDescribe("실행 시간")
 		private String time;
-		@FieldDescribe("执行结束")
+		@FieldDescribe("실행 종료")
 		private String status;
-		@FieldDescribe("执行服务器")
+		@FieldDescribe("실행 서버")
 		private String node;
 
 		public String getTime() {

@@ -88,17 +88,17 @@ public class ActionQueryListNextWithFilter extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在判断用户是否是管理时发生异常。");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 관리자인지 확인하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		if( check ) {
-			//查询是否已读，需要使用相应的ID进行IN操作，效率有一些低
+			//열람 여부 조회, 해당 ID로 IN 연산을 해야 해서 효율이 다소 낮음
 			List<String> readDocIds = null;
-			if( "READ".equalsIgnoreCase( wi.getReadFlag() )) { //只查询阅读过的
-				//查询出该用户所有已经阅读过的文档ID列表
+			if( "READ".equalsIgnoreCase( wi.getReadFlag() )) { //열람한 것만 조회
+				//해당 사용자가 열람한 모든 문서ID 목록 조회
 				try {
 					readDocIds = documentViewRecordServiceAdv.listDocIdsByPerson( personName, 2000 );
 					if( ListTools.isEmpty( readDocIds )) {
@@ -112,12 +112,12 @@ public class ActionQueryListNextWithFilter extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "系统在查询用户已经阅读过的文档ID列表时发生异常。");
+					Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 읽은 게시글 ID 목록을 조회하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
-			}else if("UNREAD".equalsIgnoreCase( wi.getReadFlag() )) { //只查询未阅读过的
-				//查询出该用户所有已经阅读过的文档ID列表
+			}else if("UNREAD".equalsIgnoreCase( wi.getReadFlag() )) { //열람하지 않은 것만 조회
+				//해당 사용자가 열람한 모든 문서ID 목록 조회
 				try {
 					readDocIds = documentViewRecordServiceAdv.listDocIdsByPerson( personName, 2000 );
 					if( ListTools.isNotEmpty( readDocIds )) {
@@ -129,43 +129,43 @@ public class ActionQueryListNextWithFilter extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "系统在查询用户已经阅读过的文档ID列表时发生异常。");
+					Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 읽은 게시글 ID 목록을 조회하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
 			}
 		}
 
-		if (check) { // 从Review表中查询符合条件的对象总数
+		if (check) { // Review 테이블에서 조건에 맞는 객체 총수 조회
 			try {
-				if( isManager ) { //直接从Document忽略权限查询
+				if( isManager ) { //Document에서 권한을 무시하고 직접 조회
 					total = documentQueryService.countWithConditionOutofPermission( queryFilter );
 				}else {
 					total = documentQueryService.countWithConditionInReview( personName, queryFilter );
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在获取用户可查询到的文档数据条目数量时发生异常。");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 조회할 수 있는 게시글 수를 가져오는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		if (check) {
-			//document和Review除了sequence还有5个排序列支持title, appAlias, categoryAlias, categoryName, creatorUnitName的分页查询
-			//除了sequence和title, appAlias, categoryAlias, categoryName, creatorUnitName之外，其他的列排序全部在内存进行分页
+			//document와 Review는 sequence 외에 title, appAlias, categoryAlias, categoryName, creatorUnitName 5개 정렬 열의 페이지 조회를 지원
+			//sequence와 title, appAlias, categoryAlias, categoryName, creatorUnitName 외의 다른 열 정렬은 모두 메모리에서 페이지 처리
 			try {
 				if( isManager ) {
-					//判断排序列是不是已经在Document表里做了sequence索引列，如果是，则只需要从document表查询 即可。
-					if( Document.isFieldInSequence( wi.getOrderField()) ) { //直接从Document忽略权限查询
+					//정렬 열이 Document 테이블에 sequence 인덱스 열로 되어 있는지 판단, 그렇다면 document 테이블에서만 조회하면 됨.
+					if( Document.isFieldInSequence( wi.getOrderField()) ) { //Document에서 권한을 무시하고 직접 조회
 						searchResultList = documentQueryService.listNextWithConditionOutofPermission( id, count, wi.getOrderField(), wi.getOrderType(), queryFilter );
 					}else {
-						//根据人员权限查询出2000条文档的完整信息，然后对某属性进行排序，在内存中进行分页
+						//사용자 권한으로 문서 2000건의 전체 정보를 조회한 뒤 특정 속성으로 정렬하고 메모리에서 페이지 처리
 						documentList = documentQueryService.listNextWithConditionOutofPermission( wi.getOrderField(), wi.getOrderType(), queryFilter, 2000 );
-						//循环分页，查询传入的ID所在的位置，向后再查询N条
+						//반복 페이지 처리, 전달된 ID의 위치를 찾아 이후 N건 조회
 						if( ListTools.isNotEmpty( documentList )) {
 							Boolean add2List = false;
-							//放一页到searchResultList中进行返回
+							//한 페이지를 searchResultList에 넣어 반환
 							for( Document document : documentList ) {
 								if( StringUtils.isEmpty( id ) || document.getId().equalsIgnoreCase( id ) ) {
 									add2List = true;
@@ -176,15 +176,15 @@ public class ActionQueryListNextWithFilter extends BaseAction {
 						}
 					}
 				}else {
-					if( Document.isFieldInSequence(wi.getOrderField()) ) { // 从Review表中查询符合条件的对象，并且转换为Document对象列表
+					if( Document.isFieldInSequence(wi.getOrderField()) ) { // Review 테이블에서 조건에 맞는 객체를 조회해 Document 객체 목록으로 변환
 						searchResultList = documentQueryService.listNextWithConditionInReview( id, count, wi.getOrderField(), wi.getOrderType(), personName, queryFilter );
 					}else {
 						reviewList =  documentQueryService.listNextWithConditionInReview( wi.getOrderField(), wi.getOrderType(), personName, queryFilter, 2000 );
-						//循环分页，查询传入的ID所在的位置，向后再查询N条，转换为Document放到searchResultList
+						//반복 페이지 처리, 전달된 ID의 위치를 찾아 이후 N건 조회, Document로 변환해 searchResultList에 넣음
 						searchResultList = new ArrayList<>();
 						if( ListTools.isNotEmpty( reviewList )) {
 							Boolean add2List = false;
-							//放一页到searchResultList中进行返回
+							//한 페이지를 searchResultList에 넣어 반환
 							for( Review review : reviewList ) {
 								if( StringUtils.isEmpty( id ) || review.getDocId().equalsIgnoreCase( id ) ) {
 									add2List = true;
@@ -201,7 +201,7 @@ public class ActionQueryListNextWithFilter extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在根据用户可访问的文档ID列表对文档进行分页查询时发生异常。");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 접근할 수 있는 게시글 ID 목록으로 페이지 조회하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -224,7 +224,7 @@ public class ActionQueryListNextWithFilter extends BaseAction {
 								wo.setCreatorTopUnitNameShort( wo.getCreatorTopUnitName().split( "@" )[0]);
 							}
 							if( wi.getNeedData() ) {
-								//需要组装数据
+								//데이터 조립 필요
 								wo.setData( documentQueryService.getDocumentData( document ) );
 							}
 						} catch (Exception e) {

@@ -11,7 +11,7 @@ public class EmpowerLogFactory {
 
 	private AbstractContext context;
 
-	/** 创建委托记录 */
+	/** 위임 기록 생성 */
 	public boolean log(EmpowerLog empowerLog) throws Exception {
 		return ActionLog.execute(context, empowerLog);
 	}

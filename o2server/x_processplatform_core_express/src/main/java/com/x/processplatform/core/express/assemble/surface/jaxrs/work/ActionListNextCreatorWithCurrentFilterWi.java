@@ -12,28 +12,28 @@ public class ActionListNextCreatorWithCurrentFilterWi extends GsonPropertyObject
 
 	private static final long serialVersionUID = -5667997938739822509L;
 
-	@FieldDescribe("流程标识.")
-	@Schema(description = "流程标识.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private List<String> processList;
 
-	@FieldDescribe("创建工作人员身份所属组织.")
-	@Schema(description = "创建工作人员身份所属组织.")
+	@FieldDescribe("업무 문서 생성 사용자 신분 소속 조직.")
+	@Schema(description = "업무 문서 생성 사용자 신분 소속 조직.")
 	private List<String> creatorUnitList;
 
-	@FieldDescribe("创建工作启动月份,格式为: yyyy-MM.")
-	@Schema(description = "创建工作启动月份,格式为: yyyy-MM.")
+	@FieldDescribe("업무 문서 생성 시작 월, 형식: yyyy-MM.")
+	@Schema(description = "업무 문서 생성 시작 월, 형식: yyyy-MM.")
 	private List<String> startTimeMonthList;
 
-	@FieldDescribe("活动名称.")
-	@Schema(description = "活动名称.")
+	@FieldDescribe("활동 이름.")
+	@Schema(description = "활동 이름.")
 	private List<String> activityNameList;
 
-	@FieldDescribe("工作状态.")
-	@Schema(description = "工作状态.")
+	@FieldDescribe("업무 문서 상태.")
+	@Schema(description = "업무 문서 상태.")
 	private List<WorkStatus> workStatusList;
 
-	@FieldDescribe("关键字.")
-	@Schema(description = "关键字.")
+	@FieldDescribe("키워드.")
+	@Schema(description = "키워드.")
 	private String key;
 
 	public List<String> getProcessList() {

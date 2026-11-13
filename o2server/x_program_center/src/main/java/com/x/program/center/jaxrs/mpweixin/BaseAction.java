@@ -14,16 +14,16 @@ import com.x.program.center.core.entity.MPWeixinMenu;
 
 abstract class BaseAction extends StandardJaxrsAction {
 
-    public static final String WX_MSG_RECEIVE_TYPE_EVENT = "event"; //公众号接收到的消息类型 事件 主要是菜单点击和订阅取消订阅
-    public static final String WX_MSG_RECEIVE_TYPE_TEXT = "text"; //公众号接收到的消息类型 文本
+    public static final String WX_MSG_RECEIVE_TYPE_EVENT = "event"; //공식 계정 수신 메시지 유형: 이벤트(주로 메뉴 클릭과 구독·구독 취소)
+    public static final String WX_MSG_RECEIVE_TYPE_TEXT = "text"; //공식 계정 수신 메시지 유형: 텍스트
 
 
 
-    public static final String WX_MSG_RECEIVE_EVENT_SUBSCRIBE = "subscribe"; //关注事件
-    public static final String WX_MSG_RECEIVE_EVENT_UNSUBSCRIBE = "unsubscribe"; //取消关注事件
-    public static final String WX_MSG_RECEIVE_EVENT_LOCATION = "LOCATION"; //上报地理位置事件
-    public static final String WX_MSG_RECEIVE_EVENT_CLICK = "CLICK"; //自定义菜单事件
-    public static final String WX_MSG_RECEIVE_EVENT_VIEW = "VIEW"; //点击菜单跳转链接时的事件推送
+    public static final String WX_MSG_RECEIVE_EVENT_SUBSCRIBE = "subscribe"; //팔로우 이벤트
+    public static final String WX_MSG_RECEIVE_EVENT_UNSUBSCRIBE = "unsubscribe"; //팔로우 취소 이벤트
+    public static final String WX_MSG_RECEIVE_EVENT_LOCATION = "LOCATION"; //위치 보고 이벤트
+    public static final String WX_MSG_RECEIVE_EVENT_CLICK = "CLICK"; //사용자 정의 메뉴 이벤트
+    public static final String WX_MSG_RECEIVE_EVENT_VIEW = "VIEW"; //메뉴 링크 이동 클릭 시 이벤트 푸시
 
 
     public static final String WX_MSG_BACK_MEDIA_KEY_IMAGE = "media:image:";

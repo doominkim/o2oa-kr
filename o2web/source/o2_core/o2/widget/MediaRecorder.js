@@ -41,7 +41,7 @@ o2.widget.MediaRecorder = o2.MediaRecorder = new Class({
 	//checkDevice : function( callback ){
 	//	var flag;
 	//	if( o2.MediaRecorder.hasActiveInstance() ){
-	//		o2.xDesktop.confirm("warn", null, "设备已经被占用", "设备已经被占用,是否释放被占用的设备？", 350, 120, function () {
+	//		o2.xDesktop.confirm("warn", null, "장치가 이미 사용 중입니다", "장치가 이미 사용 중입니다. 사용 중인 장치를 해제하시겠습니까?", 350, 120, function () {
 	//			o2.MediaRecorder.stopActiveInstance();
 	//			this.close();
 	//			callback();

@@ -30,7 +30,7 @@ public class FileRemoveQueue extends AbstractQueue<Map<String, String>> {
 		String referenceTypeString = map.get(REFERENCETYPE);
 		ReferenceType referenceType = EnumUtils.getEnum(ReferenceType.class, referenceTypeString);
 		if (StringUtils.isEmpty(reference) || (null == referenceType)) {
-			logger.warn("接收到无效的删除文件请求, referenceType: {}, reference: {}.", referenceTypeString, reference);
+			logger.warn("잘못된 파일 삭제 요청 수신, referenceType: {}, reference: {}.", referenceTypeString, reference);
 		} else {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				Business business = new Business(emc);

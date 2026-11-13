@@ -23,18 +23,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("form")
-@JaxrsDescribe("表单")
+@JaxrsDescribe("양식")
 public class FormAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FormAction.class);
 
-	@JaxrsMethodDescribe(value = "按活动节点查找合适的显示表单.", action = ActionSuitableActivity.class)
+	@JaxrsMethodDescribe(value = "활동 노드별 적합한 표시 양식 조회.", action = ActionSuitableActivity.class)
 	@GET
 	@Path("suitable/activity/{activityId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void suitableActivity(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("activityId") String activityId) {
+			@JaxrsParameterDescribe("식별자") @PathParam("activityId") String activityId) {
 		ActionResult<ActionSuitableActivity.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

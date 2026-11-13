@@ -294,9 +294,9 @@ public class ListTools {
 
 	/**
 	 *
-	 * @param list     原始字符串List
-	 * @param includes 需要包含的字符串List,可以使用*在结尾作为通配符
-	 * @param excludes 需要剔除的字符串List,可以使用*在结尾作为通配符
+	 * @param list     원본 문자열 List
+	 * @param includes 포함할 문자열 List, 끝에 *를 와일드카드로 사용 가능
+	 * @param excludes 제외할 문자열 List, 끝에 *를 와일드카드로 사용 가능
 	 * @return
 	 */
 	public static List<String> includesExcludesWildcard(List<String> list, List<String> includes,
@@ -388,14 +388,14 @@ public class ListTools {
 	}
 
 	/*
-	 * 将数组按指定的分类值进行分类
+	 * 배열을 지정한 분류 값으로 분류
 	 */
 	public static <T, W> List<T> groupStick(List<T> sourceList, List<W> groupList, String sourceProperty,
 			String groupProperty, String stickProperty) {
 		if (isEmpty(sourceList) || isEmpty(groupList)) {
 			return sourceList;
 		}
-		/* 不过滤的情况下 null 值导致 element cannot be mapped to a null key */
+		/* 필터링하지 않으면 null 값 때문에 element cannot be mapped to a null key 발생 */
 		Map<Object, List<W>> map = groupList.stream().filter(o -> {
 			try {
 				return (null != PropertyUtils.getProperty(o, groupProperty));
@@ -489,7 +489,7 @@ public class ListTools {
 	}
 
 	/**
-	 * 判断两个字符串集合是否内容一致
+	 * 두 문자열 집합의 내용이 같은지 판단
 	 *
 	 * @param list1
 	 * @param list2
@@ -519,7 +519,7 @@ public class ListTools {
 		return true;
 	}
 
-	/* 判断是否是List对象 */
+	/* List 객체인지 판단 */
 	public static boolean isList(Object obj) {
 		if (null == obj) {
 			return true;
@@ -545,7 +545,7 @@ public class ListTools {
 		}
 	}
 
-	/* 根据属性进行配对 */
+	/* 속성으로 짝 맞춤 */
 	public static <T, W> Map<T, W> pairWithProperty(List<T> ts, String tProperty, List<W> ws, String wProperty)
 			throws Exception {
 		Map<T, W> map = new LinkedHashMap<>();

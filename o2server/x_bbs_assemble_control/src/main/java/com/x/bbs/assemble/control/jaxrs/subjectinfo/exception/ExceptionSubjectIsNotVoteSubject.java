@@ -7,6 +7,6 @@ public class ExceptionSubjectIsNotVoteSubject extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjectIsNotVoteSubject( String id ) {
-		super( "主题并不是投票主题，无法进行投票操作。ID:" + id );
+		super( "투표 주제가 아니므로 투표할 수 없습니다. ID:" + id );
 	}
 }

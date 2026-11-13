@@ -7,6 +7,6 @@ class ExceptionImportViewIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionImportViewIdEmpty() {
-		super("分类信息未绑定导入的列表，无法进行导入操作。" );
+		super("분류에 가져오기 목록이 연결되지 않아 가져올 수 없습니다." );
 	}
 }

@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 保存栏目配置支持信息
+ * 게시판 설정 지원 정보 저장
  * @author sword
  */
 public class ActionSaveConfig extends BaseAction {
@@ -44,7 +44,7 @@ public class ActionSaveConfig extends BaseAction {
 		wo.setId( appInfoConfig.getId() );
 		result.setData( wo );
 
-		// 更新缓存
+		// 캐시 갱신
 		CacheManager.notify( AppInfo.class );
 		return result;
 	}

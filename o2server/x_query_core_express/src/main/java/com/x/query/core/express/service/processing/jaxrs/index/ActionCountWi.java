@@ -9,12 +9,12 @@ public class ActionCountWi extends GsonPropertyObject {
 
     private static final long serialVersionUID = 1360655000630283661L;
 
-    @FieldDescribe("分类.")
-    @Schema(description = "分类.")
+    @FieldDescribe("분류.")
+    @Schema(description = "분류.")
     private String category;
 
-    @FieldDescribe("标识.")
-    @Schema(description = "标识.")
+    @FieldDescribe("식별자.")
+    @Schema(description = "식별자.")
     private String key;
 
     public String getCategory() {

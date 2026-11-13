@@ -7,6 +7,6 @@ class ExceptionMessageProcess extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionMessageProcess( Throwable e, String message ) {
-		super("系统进行日历事件消息息处理时发生异常！message:" + message, e );
+		super("일정 메시지를 처리하는 중 오류가 발생했습니다! message:" + message, e );
 	}
 }

@@ -12,7 +12,7 @@ import com.x.mind.assemble.control.service.UserManagerService;
 import com.x.mind.entity.MindBaseInfo;
 
 /**
- * 脑图分享之后，向所有的被分享者推送消息通知
+ * 마인드맵 공유 후 모든 공유 대상자에게 메시지 알림 발송
  */
 public class QueueShareNotify extends AbstractQueue<MindBaseInfo> {
 	
@@ -32,7 +32,7 @@ public class QueueShareNotify extends AbstractQueue<MindBaseInfo> {
 	}
 
 	/**
-	 * 根据指定的推送配置计算需要接收通知的人员列表
+	 * 지정 푸시 설정에 따라 알림을 받을 사용자 목록 계산
 	 * @param mindBaseInfo
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public class QueueShareNotify extends AbstractQueue<MindBaseInfo> {
 		List<String> units = mindBaseInfo.getShareUnitList();
 		List<String> persons = mindBaseInfo.getSharePersonList();
 
-		//回复消息通知类别：一共3位，第1位是否通知分区管理员ForumManagerList，第2位是否通知版主ModeratorNames，第3位是否通知发贴人，0-不通知|1-通知
+		//답글 메시지 알림 유형: 총 3자리, 1번째는 구역 관리자 ForumManagerList 알림 여부, 2번째는 게시판 관리자 ModeratorNames 알림 여부, 3번째는 작성자 알림 여부, 0-알림 안 함|1-알림
 		if( ListTools.isNotEmpty( groups )) {
 			List<String> pl_ = userManagerService.listPersonListWithGroups( groups );
 			if( ListTools.isNotEmpty( pl_ )) {

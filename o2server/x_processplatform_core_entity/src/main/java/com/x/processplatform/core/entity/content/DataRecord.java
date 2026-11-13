@@ -15,7 +15,7 @@ import org.apache.openjpa.persistence.jdbc.Strategy;
 import javax.persistence.*;
 import java.util.List;
 
-@Schema(name = "DataRecord", description = "流程平台业务数据变更记录.")
+@Schema(name = "DataRecord", description = "프로세스 플랫폼 업무 데이터 변경 기록.")
 @Entity
 @ContainerEntity(dumpSize = 100, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.DataRecord.table, uniqueConstraints = {
@@ -51,7 +51,7 @@ public class DataRecord extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -88,40 +88,40 @@ public class DataRecord extends SliceJpaObject {
 	}
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("工单标识")
+	@FieldDescribe("업무 문서 식별자")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String path_FIELDNAME = "path";
-	@FieldDescribe("字段")
+	@FieldDescribe("필드")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + path_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + path_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String path;
 
 	public static final String updateNum_FIELDNAME = "updateNum";
-	@FieldDescribe("变更次数.")
+	@FieldDescribe("변경 횟수.")
 	@Column(name = ColumnNamePrefix + updateNum_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer updateNum;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -129,7 +129,7 @@ public class DataRecord extends SliceJpaObject {
 	private DataRecordProperties properties;
 
 	public static final String dataRecordItemList_FIELDNAME = "dataRecordItemList";
-	@FieldDescribe("字段变更记录.")
+	@FieldDescribe("필드 변경 기록.")
 	@Transient
 	private List<DataRecordItem> dataRecordItemList;
 

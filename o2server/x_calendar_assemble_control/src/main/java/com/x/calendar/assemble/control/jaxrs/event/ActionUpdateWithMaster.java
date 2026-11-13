@@ -24,10 +24,10 @@ import com.x.calendar.core.entity.Calendar;
 import com.x.calendar.core.entity.Calendar_Event;
 
 /**
- * 更新所有重复日程事件
- * 1、更新当前日程事件对应的重复主体信息 RepeatMaster信息
- * 2、删除该RepeatMaster已经生成的所有日程事件
- * 3、删除该事件重复主体信息中所有的已经生成的月份信息
+ * 모든 반복 일정 이벤트 수정
+ * 1. 현재 일정 이벤트에 대응하는 반복 주체 정보 RepeatMaster 정보 수정
+ * 2. 해당 RepeatMaster로 이미 생성된 모든 일정 이벤트 삭제
+ * 3. 해당 이벤트 반복 주체 정보에서 이미 생성된 모든 월 정보 삭제
  * @author O2LEE
  *
  */
@@ -71,7 +71,7 @@ public class ActionUpdateWithMaster extends BaseAction {
 				calendar_Event = calendar_EventServiceAdv.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历记录信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 기록 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -96,7 +96,7 @@ public class ActionUpdateWithMaster extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + calendar_Event.getCalendarId() );
+					Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + calendar_Event.getCalendarId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -104,21 +104,21 @@ public class ActionUpdateWithMaster extends BaseAction {
 		}
 		
 		if( check && !ThisApplication.isCalendarSystemManager(effectivePerson) ) {
-			//判断用户权限
+			//사용자 권한 판단
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(personName);
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 				if( calendar != null ) {
 					if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
-							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//没权限
+							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 						check = false;
-						Exception exception = new ExceptionInsufficientPermissions( "您没有权限从日历中删除日程事件.日历:" + calendar.getName() );
+						Exception exception = new ExceptionInsufficientPermissions( "이 캘린더에서 일정을 삭제할 권한이 없습니다. 캘린더:" + calendar.getName() );
 						result.error( exception );
 					}
 				}				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -127,7 +127,7 @@ public class ActionUpdateWithMaster extends BaseAction {
 		if( check ){
 			if( StringUtils.isEmpty( calendar_Event.getRepeatMasterId() ) ) {
 				check = false;
-				Exception exception = new ExceptionEventPropertyEmpty("重复事件主体ID(repeatMasterId)");
+				Exception exception = new ExceptionEventPropertyEmpty("반복 일정 기준 ID(repeatMasterId)");
 				result.error( exception );
 			}
 		}
@@ -135,7 +135,7 @@ public class ActionUpdateWithMaster extends BaseAction {
 		if( check ){
 			if( StringUtils.isEmpty( calendar_Event.getRecurrenceRule() ) ) {
 				check = false;
-				Exception exception = new ExceptionEventPropertyEmpty("重复规则(recurrenceRule)");
+				Exception exception = new ExceptionEventPropertyEmpty("반복 규칙(recurrenceRule)");
 				result.error( exception );
 			}
 		}
@@ -147,7 +147,7 @@ public class ActionUpdateWithMaster extends BaseAction {
 				new_Event.setRepeatMasterId( calendar_Event.getRepeatMasterId() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统将用户传入的数据转换为日历事件信息对象时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자가 입력한 데이터를 일정 정보 객체로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -168,7 +168,7 @@ public class ActionUpdateWithMaster extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "更新所有重复的日程信息时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "모든 반복 일정을 수정하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

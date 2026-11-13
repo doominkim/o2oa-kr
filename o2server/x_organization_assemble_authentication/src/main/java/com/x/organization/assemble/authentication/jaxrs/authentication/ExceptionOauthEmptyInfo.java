@@ -6,7 +6,7 @@ class ExceptionOauthEmptyInfo extends LanguagePromptException {
 
 	private static final long serialVersionUID = 4132300948670472899L;
 
-	public static String defaultMessage = "请求信息返回值为空.";
+	public static String defaultMessage = "요청 정보 응답값이 비어 있습니다.";
 
 	ExceptionOauthEmptyInfo() {
 		super(defaultMessage);

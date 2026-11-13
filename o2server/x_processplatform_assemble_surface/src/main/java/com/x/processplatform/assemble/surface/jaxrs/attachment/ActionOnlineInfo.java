@@ -81,31 +81,31 @@ class ActionOnlineInfo extends BaseAction {
 
 		private static final long serialVersionUID = -4628551310520612780L;
 
-		@FieldDescribe("附件ID.")
+		@FieldDescribe("첨부파일ID.")
 		private String id;
-		@FieldDescribe("任务.")
+		@FieldDescribe("작업.")
 		private String job;
-		@FieldDescribe("附件名称.")
+		@FieldDescribe("첨부파일 이름.")
 		private String name;
-		@FieldDescribe("扩展名.")
+		@FieldDescribe("확장자.")
 		private String extension;
-		@FieldDescribe("附件大小.")
+		@FieldDescribe("첨부파일 크기.")
 		private Long length;
-		@FieldDescribe("创建用户ID.")
+		@FieldDescribe("생성 사용자ID.")
 		private String ownerId;
-		@FieldDescribe("创建用户名称.")
+		@FieldDescribe("생성 사용자 이름.")
 		private String ownerName;
-		@FieldDescribe("当前用户ID.")
+		@FieldDescribe("현재 사용자ID.")
 		private String userId;
-		@FieldDescribe("当前用户名称.")
+		@FieldDescribe("현재 사용자 이름.")
 		private String userName;
-		@FieldDescribe("创建时间.")
+		@FieldDescribe("생성 시간.")
 		private Date createTime;
-		@FieldDescribe("最后更新时间.")
+		@FieldDescribe("최종 수정 시간.")
 		private Date lastUpdateTime;
-		@FieldDescribe("当前用户是否可编辑.")
+		@FieldDescribe("현재 사용자 편집 가능 여부.")
 		private Boolean canEdit = false;
-		@FieldDescribe("当前用户是否可阅读.")
+		@FieldDescribe("현재 사용자 열람 가능 여부.")
 		private Boolean canRead = false;
 
 		public String getId() {

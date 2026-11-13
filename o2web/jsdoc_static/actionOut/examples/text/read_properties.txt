@@ -1,5 +1,5 @@
     {
 		"serialVersionUID": 1,
-		"title": " ",		//标题
-		"opinion": " ",		//意见
+		"title": " ",		//제목
+		"opinion": " ",		//의견
 	}

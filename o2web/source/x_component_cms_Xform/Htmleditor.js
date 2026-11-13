@@ -50,11 +50,11 @@ MWF.xApplication.cms.Xform.Htmleditor = MWF.CMSHtmleditor = new Class({
     // },
     // replaceAttr: function(src_str, tag, attr, val) {
     //     if(src_str.indexOf(attr) > 0) {
-    //         //包含attr属性,替换attr
+    //         //attr 속성이 있으면 attr 교체
     //         var sub_reg = new RegExp(attr + '=[\'\"]([^"]*)[\'\"]', 'gi');
     //         return src_str.replace(sub_reg, attr +'=' + val);
     //     }else{
-    //         //不包含attr属性,添加attr
+    //         //attr 속성이 없으면 attr 추가
     //         return src_str.substr(0, tag.length + 1) + ' ' + attr + '=' + val + ' ' + src_str.substr(tag.length + 2, src_str.length);
     //     }
     // },
@@ -183,7 +183,7 @@ MWF.xApplication.cms.Xform.Htmleditor = MWF.CMSHtmleditor = new Class({
     //        _self.selector_doc = new MWF.xApplication.cms.Xform.Attachment( document.body , {}, _self.form, {})
     //        _self.selector_doc.loadAttachmentSelecter({
     //            "style" : "cms",
-    //            "title": "选择本文档图片",
+    //            "title": "이 문서의 이미지 선택",
     //            "listStyle": "preview",
     //            "toBase64" : true,
     //            "selectType" : "images"
@@ -200,7 +200,7 @@ MWF.xApplication.cms.Xform.Htmleditor = MWF.CMSHtmleditor = new Class({
     //        //_self.form.app.content
     //        _self.selector_cloud = new MWF.xApplication.File.FileSelector( document.body ,{
     //            "style" : "default",
-    //            "title": "选择云文件图片",
+    //            "title": "클라우드 파일 이미지 선택",
     //            "toBase64" : true,
     //            "listStyle": "preview",
     //            "selectType" : "images",

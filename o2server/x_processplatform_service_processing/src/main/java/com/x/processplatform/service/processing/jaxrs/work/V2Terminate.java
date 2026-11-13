@@ -84,30 +84,30 @@ class V2Terminate extends BaseAction {
 				aeiObjects.getCreateWorkCompleteds().add(workCompleted);
 				aeiObjects.getTasks().forEach(o -> aeiObjects.getDeleteTasks().add(o));
 				aeiObjects.getTaskCompleteds().forEach(o -> {
-					// 已办的完成时间是不需要更新的
+					// 처리 완료의 완료 시간은 업데이트할 필요 없음
 					o.setCompleted(true);
 					o.setWorkCompleted(workCompleted.getId());
-					// 重新赋值映射字段
+					// 매핑 필드 재할당
 					o.copyProjectionFields(workCompleted);
-					// 加入到更新队列保证事务开启
+					// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 					aeiObjects.getUpdateTaskCompleteds().add(o);
 				});
 				aeiObjects.getReads().forEach(o -> {
-					// 待阅的完成时间是不需要更新的
+					// 열람 대기의 완료 시간은 업데이트할 필요 없음
 					o.setCompleted(true);
 					o.setWorkCompleted(workCompleted.getId());
-					// 重新赋值映射字段
+					// 매핑 필드 재할당
 					o.copyProjectionFields(workCompleted);
-					// 加入到更新队列保证事务开启
+					// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 					aeiObjects.getUpdateReads().add(o);
 				});
 				aeiObjects.getReadCompleteds().forEach(o -> {
-					// 已阅的完成时间是不需要更新的
+					// 열람 완료의 완료 시간은 업데이트할 필요 없음
 					o.setCompleted(true);
 					o.setWorkCompleted(workCompleted.getId());
-					// 重新赋值映射字段
+					// 매핑 필드 재할당
 					o.copyProjectionFields(workCompleted);
-					// 加入到更新队列保证事务开启
+					// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 					aeiObjects.getUpdateReadCompleteds().add(o);
 				});
 				aeiObjects.getRecords().forEach(o -> {
@@ -120,9 +120,9 @@ class V2Terminate extends BaseAction {
 					o.setWorkCompleted(workCompleted.getId());
 					o.setCompletedTime(workCompleted.getCompletedTime());
 					o.setCompletedTimeMonth(workCompleted.getCompletedTimeMonth());
-					// 重新赋值映射字段
+					// 매핑 필드 재할당
 					o.copyProjectionFields(workCompleted);
-					// 加入到更新队列保证事务开启
+					// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 					aeiObjects.getUpdateReviews().add(o);
 				});
 				aeiObjects.getWorkLogs().forEach(o -> {
@@ -132,9 +132,9 @@ class V2Terminate extends BaseAction {
 					o.setSplitValue("");
 					o.setCompleted(true);
 					o.setWorkCompleted(workCompleted.getId());
-					// 加入到更新队列保证事务开启
+					// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 					aeiObjects.getUpdateWorkLogs().add(o);
-					// 删除未连接的WorkLogd0431924-849f-4bf6-81b2-bfe997e62b7f
+					// 연결되지 않은 WorkLog 삭제 d0431924-849f-4bf6-81b2-bfe997e62b7f
 					if (BooleanUtils.isNotTrue(o.getConnected())) {
 						aeiObjects.getDeleteWorkLogs().add(o);
 					}
@@ -142,14 +142,14 @@ class V2Terminate extends BaseAction {
 				aeiObjects.getAttachments().forEach(o -> {
 					o.setCompleted(true);
 					o.setWorkCompleted(workCompleted.getId());
-					// 加入到更新队列保证事务开启
+					// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 					aeiObjects.getUpdateAttachments().add(o);
 				});
-				// 已workCompleted数据为准进行更新
+				// workCompleted 데이터를 기준으로 업데이트
 				aeiObjects.getData().setWork(workCompleted);
 				aeiObjects.getData().setAttachmentList(aeiObjects.getAttachments());
 				aeiObjects.getDeleteWorks().addAll(aeiObjects.getWorks());
-				// 删除快照
+				// 스냅샷 삭제
 				aeiObjects.getDeleteSnaps().addAll(aeiObjects.getSnaps());
 				aeiObjects.getDeleteWorks().addAll(aeiObjects.getWorks());
 				aeiObjects.commit();

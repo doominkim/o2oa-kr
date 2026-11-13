@@ -28,14 +28,14 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("folder")
-@JaxrsDescribe("脑图目录信息管理服务")
+@JaxrsDescribe("마인드맵 디렉터리 정보 관리 서비스")
 public class MindFolderInfoAction extends BaseAction {
 
 	// private StandardJaxrsActionProxy proxy = new
 	// StandardJaxrsActionProxy(ThisApplication.context());
 	private Logger logger = LoggerFactory.getLogger(MindFolderInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "保存(创建或者更新)一个目录信息", action = ActionFolderSave.class)
+	@JaxrsMethodDescribe(value = "디렉터리 정보 저장(생성 또는 수정)", action = ActionFolderSave.class)
 	@POST
 	@Path("save")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -53,13 +53,13 @@ public class MindFolderInfoAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "将指定的脑图和文件夹移动到指定的文件夹内", action = ActionMoveToFolder.class)
+	@JaxrsMethodDescribe(value = "지정 마인드맵과 폴더를 지정 폴더로 이동", action = ActionMoveToFolder.class)
 	@PUT
 	@Path("move/{folderId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void moveMindAndFolder(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件夹ID") @PathParam("folderId") String folderId, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("폴더 ID") @PathParam("folderId") String folderId, JsonElement jsonElement) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionMoveToFolder.Wo> result = new ActionResult<>();
 		try {
@@ -71,7 +71,7 @@ public class MindFolderInfoAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列出用户自己的个人脑图文件夹（所有文件夹，按上下级树型组织信息）", action = ActionListMyFolder.class)
+	@JaxrsMethodDescribe(value = "사용자 본인의 개인 마인드맵 폴더 목록(모든 폴더, 상하위 트리 구조)", action = ActionListMyFolder.class)
 	@GET
 	@Path("tree/my")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -88,13 +88,13 @@ public class MindFolderInfoAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除一个目录，如果目录是非空目录，则无法删除）", action = ActionFolderDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 디렉터리 삭제. 비어 있지 않은 디렉터리는 삭제할 수 없음)", action = ActionFolderDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void folderDelete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件夹ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("폴더 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionFolderDelete.Wo> result = new ActionResult<>();
 		try {
@@ -106,13 +106,13 @@ public class MindFolderInfoAction extends BaseAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID强制删除一个目录，包括下级目录以及文件", action = ActionFolderDeleteForce.class)
+	@JaxrsMethodDescribe(value = "ID로 디렉터리 강제 삭제(하위 디렉터리와 파일 포함)", action = ActionFolderDeleteForce.class)
 	@DELETE
 	@Path("{id}/force")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void folderDeleteForce(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件夹ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("폴더 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionFolderDeleteForce.Wo> result = new ActionResult<>();
 		try {

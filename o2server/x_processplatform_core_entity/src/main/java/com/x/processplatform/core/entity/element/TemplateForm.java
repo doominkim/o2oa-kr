@@ -24,7 +24,7 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "TemplateForm", description = "流程平台表单模板.")
+@Schema(name = "TemplateForm", description = "프로세스 플랫폼 양식 템플릿.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.TemplateForm.table, uniqueConstraints = {
@@ -46,12 +46,12 @@ public class TemplateForm extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		if (StringUtils.isEmpty(this.category)) {
@@ -59,10 +59,10 @@ public class TemplateForm extends SliceJpaObject {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* flag标志位 */
-	/* Entity 默认字段结束 */
+	/* flag 플래그 비트 */
+	/* Entity 기본 필드 끝 */
 
 	public String getDataOrMobileData() {
 		if (StringUtils.isNotEmpty(this.getData())) {
@@ -83,33 +83,33 @@ public class TemplateForm extends SliceJpaObject {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true)
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("表单别名.")
+	@FieldDescribe("양식 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String alias;
 
 	public static final String category_FIELDNAME = "category";
-	@FieldDescribe("模版分类.")
+	@FieldDescribe("템플릿 분류.")
 	@Column(length = length_255B, name = ColumnNamePrefix + category_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + category_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	private String category;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("icon Base64编码后的文本.")
+	@FieldDescribe("icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + icon_FIELDNAME)
@@ -117,7 +117,7 @@ public class TemplateForm extends SliceJpaObject {
 	private String icon;
 
 	public static final String outline_FIELDNAME = "outline";
-	@FieldDescribe("缩略图.")
+	@FieldDescribe("썸네일.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + outline_FIELDNAME)
@@ -125,7 +125,7 @@ public class TemplateForm extends SliceJpaObject {
 	private String outline;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("文本内容.")
+	@FieldDescribe("텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	// @Persistent(fetch = FetchType.EAGER)
@@ -134,7 +134,7 @@ public class TemplateForm extends SliceJpaObject {
 	private String data;
 
 	public static final String mobileData_FIELDNAME = "mobileData";
-	@FieldDescribe("移动端文本内容.")
+	@FieldDescribe("모바일 텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + mobileData_FIELDNAME)

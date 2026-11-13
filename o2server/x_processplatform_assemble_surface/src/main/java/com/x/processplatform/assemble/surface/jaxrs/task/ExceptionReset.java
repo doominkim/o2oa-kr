@@ -7,7 +7,7 @@ class ExceptionReset extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionReset(String id) {
-		super("任务: {} 重置处理人失败.", id);
+		super("작업: {} 처리자 재지정에 실패했습니다.", id);
 	}
 
 }

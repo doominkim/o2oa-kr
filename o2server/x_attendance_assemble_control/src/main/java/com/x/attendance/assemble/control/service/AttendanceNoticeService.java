@@ -7,7 +7,7 @@ import com.x.attendance.entity.AttendanceAppealInfo;
 public class AttendanceNoticeService {
 
 	/**
-	 * 申诉通过，通知发起人
+	 * 신청 승인, 신청자에게 알림
 	 * 
 	 * @param business
 	 * @param attendanceDetail
@@ -18,7 +18,7 @@ public class AttendanceNoticeService {
 			throws Exception {
 		if (attendanceAppealInfo != null) {
 			String targetName = attendanceAppealInfo.getEmpName();
-//			String messageContent = "您好，[" + attendanceAppealInfo.getRecordDateString() + "]考勤结果的申诉已经通过审核。";
+//			String messageContent = "안녕하세요. [" + attendanceAppealInfo.getRecordDateString() + "] 근태 결과 이의 신청이 승인되었습니다.";
 			if (StringUtils.isNotEmpty( targetName )) {
 				String[] array = targetName.split(",");
 				for (String name : array) {
@@ -35,7 +35,7 @@ public class AttendanceNoticeService {
 	}
 
 	/**
-	 * 申诉不通过，通知发起人
+	 * 신청 반려, 신청자에게 알림
 	 * 
 	 * @param business
 	 * @param meeting
@@ -46,7 +46,7 @@ public class AttendanceNoticeService {
 			throws Exception {
 		if (attendanceAppealInfo != null) {
 			String targetName = attendanceAppealInfo.getEmpName();
-//			String messageContent = "您好，[" + attendanceAppealInfo.getRecordDateString() + "]考勤结果的申诉未通过审核。";
+//			String messageContent = "안녕하세요. [" + attendanceAppealInfo.getRecordDateString() + "] 근태 결과 이의 신청이 반려되었습니다.";
 			if ( StringUtils.isNotEmpty( targetName )) {
 				String[] array = targetName.split(",");
 				for (String name : array) {
@@ -63,7 +63,7 @@ public class AttendanceNoticeService {
 	}
 
 	/**
-	 * 收到一份需要处理的申诉-处理人1
+	 * 처리할 이의 신청 접수 - 처리자1
 	 * 
 	 * @param business
 	 * @param attendanceDetail
@@ -72,7 +72,7 @@ public class AttendanceNoticeService {
 	public void notifyAttendanceAppealProcessness1Message(AttendanceAppealInfo attendanceAppealInfo) throws Exception {
 		if (attendanceAppealInfo != null) {
 			String targetName = attendanceAppealInfo.getCurrentProcessor();
-//			String messageContent = "您收到了" + attendanceAppealInfo.getEmpName() + "的考勤结果申诉，申诉类型为[" + attendanceAppealInfo.getAppealReason() + "]，请您审核！";
+//			String messageContent = "신청자 " + attendanceAppealInfo.getEmpName() + "의 근태 결과 이의 신청이 접수되었습니다. 신청 유형은 [" + attendanceAppealInfo.getAppealReason() + "]입니다. 검토해 주십시오!";
 			if ( StringUtils.isNotEmpty( targetName )) {
 				String[] array = targetName.split(",");
 				for (String name : array) {
@@ -89,7 +89,7 @@ public class AttendanceNoticeService {
 	}
 
 	/**
-	 * 收到一份需要处理的申诉-处理人2
+	 * 처리할 이의 신청 접수 - 처리자2
 	 * 
 	 * @param business
 	 * @param attendanceDetail
@@ -98,7 +98,7 @@ public class AttendanceNoticeService {
 	public void notifyAttendanceAppealProcessness2Message(AttendanceAppealInfo attendanceAppealInfo) throws Exception {
 		if (attendanceAppealInfo != null) {
 			String targetName = attendanceAppealInfo.getCurrentProcessor();
-//			String messageContent = "您收到了" + attendanceAppealInfo.getEmpName() + "的考勤结果申诉，申诉类型为[" + attendanceAppealInfo.getAppealReason() + "]，请您复核！";
+//			String messageContent = "신청자 " + attendanceAppealInfo.getEmpName() + "의 근태 결과 이의 신청이 접수되었습니다. 신청 유형은 [" + attendanceAppealInfo.getAppealReason() + "]입니다. 재검토해 주십시오!";
 			if ( StringUtils.isNotEmpty( targetName )) {
 				String[] array = targetName.split(",");
 				for (String name : array) {

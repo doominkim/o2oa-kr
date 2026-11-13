@@ -34,16 +34,16 @@ class ActionManageGet extends BaseAction {
 			if (null == work) {
 				throw new ExceptionWorkNotExist(id);
 			}
-			/* Process 也可能为空 */
+			/* Process 도 비어 있을 수 있음 */
 			Process process = business.process().pick(work.getProcess());
 			Application application = business.application().pick(work.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (BooleanUtils
 					.isNotTrue(business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process))) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 			Wo wo = Wo.copier.copy(work);
-			/* 添加权限 */
+			/* 권한 추가 */
 			wo.setControl(new WorkControlBuilder(effectivePerson, business, work).enableAll().build());
 			result.setData(wo);
 			return result;

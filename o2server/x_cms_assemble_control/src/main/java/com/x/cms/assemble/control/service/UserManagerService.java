@@ -20,7 +20,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 组织人员角色相关信息的服务类
+ * 조직·사용자·역할 관련 정보 서비스 클래스
  *
  * @author O2LEE
  */
@@ -29,7 +29,7 @@ public class UserManagerService {
 	private static Logger logger = LoggerFactory.getLogger(UserManagerService.class);
 
 	/**
-	 * 根据人员名称获取人员
+	 * 사용자 이름으로 사용자 조회
 	 *
 	 * @param personName
 	 * @return
@@ -50,7 +50,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据员工姓名获取组织名称 如果用户有多个身份，则取组织级别最大的组织名称
+	 * 직원 이름으로 조직 이름 조회 사용자 신분이 여럿이면 조직 등급이 가장 높은 조직 이름 사용
 	 *
 	 * @param personName
 	 * @return
@@ -86,7 +86,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据身份名称获取身份所属的组织名称
+	 * 신분 이름으로 신분이 속한 조직 이름 조회
 	 *
 	 * @param identity
 	 * @return
@@ -107,7 +107,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据人员姓名获取人员所属的一级组织名称，如果人员有多个身份，则取组织等级最大的身份
+	 * 사용자 이름으로 사용자가 속한 1단계 조직 이름 조회, 사용자 신분이 여럿이면 조직 등급이 가장 높은 신분 사용
 	 *
 	 * @param personName
 	 * @return
@@ -119,7 +119,7 @@ public class UserManagerService {
 		Business business = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			// 兼容一下传过来的perosnName有可能是个人，有可能是身份
+			// 전달된 perosnName이 개인일 수도, 신분일 수도 있으므로 호환 처리
 			if( StringUtils.isNotEmpty( personName )){
 				if (personName.endsWith("@P") && personName.split("@").length == 2) {
 					personName = business.organization().person().get(personName.split("@")[0]);
@@ -138,7 +138,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据身份名称获取身份所属的顶层组织名称
+	 * 신분 이름으로 신분이 속한 최상위 조직 이름 조회
 	 *
 	 * @param identity
 	 * @return
@@ -156,7 +156,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据个人姓名，根据个人姓名获取主身份
+	 * 개인 이름으로 주 신분 조회
 	 *
 	 * @param personName
 	 * @return
@@ -195,7 +195,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据用户的身份查询用户的姓名
+	 * 사용자 신분으로 사용자 이름 조회
 	 *
 	 * @param identity
 	 * @return
@@ -217,7 +217,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 获取人员所属的所有组织名称列表
+	 * 사용자가 속한 모든 조직 이름 목록 조회
 	 *
 	 * @param personName
 	 * @return
@@ -245,7 +245,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据用户姓名查询用户所有的身份信息
+	 * 사용자 이름으로 사용자의 모든 신분 정보 조회
 	 *
 	 * @param personName
 	 * @return
@@ -274,7 +274,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 列示人员所拥有的所有角色信息
+	 * 사용자가 가진 모든 역할 정보 나열
 	 *
 	 * @param personName
 	 * @return
@@ -306,7 +306,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 列示人员所拥有的所有群组信息
+	 * 사용자가 가진 모든 그룹 정보 나열
 	 *
 	 * @param personName
 	 * @return
@@ -338,7 +338,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 判断用户是否有指定的平台角色，比如CMS系统管理员
+	 * 사용자에게 지정 플랫폼 역할(예: CMS 시스템 관리자)이 있는지 판단
 	 *
 	 * @param personName
 	 * @param roleName
@@ -364,7 +364,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 判断指定人员是否是管理员 1、xadmin 2、拥有manager角色 3、拥有CMSManager@CMSManagerSystemRole@R角色
+	 * 지정 사용자가 관리자인지 판단 1. xadmin 2. manager 역할 보유 3. CMSManager@CMSManagerSystemRole@R 역할 보유
 	 *
 	 * @param effectivePerson
 	 * @return
@@ -396,7 +396,7 @@ public class UserManagerService {
 					identityName = identityNames.get(0);
 				}
 			} else {
-				// 判断传入的身份是否合法
+				// 전달된 신분이 유효한지 판단
 				identityName = this.findIdentity(identityNames, identity);
 				if (StringUtils.isEmpty(identity)) {
 					identityName = identityNames.get(0);
@@ -426,8 +426,8 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据人员、组织、群组查询人员信息
-	 * 参数name必须为xx@xx@x格式
+	 * 사용자, 조직, 그룹으로 사용자 정보 조회
+	 * 매개변수 name은 xx@xx@x 형식이어야 합니다
 	 * @param name
 	 * @return
 	 */
@@ -447,7 +447,7 @@ public class UserManagerService {
 				Business business = new Business(null);
 				return business.organization().person().listWithUnitSubNested(name);
 			} catch (Exception e) {
-				logger.warn("根据组织【{}】查询人员异常：{}", name,e.getMessage());
+				logger.warn("조직【{}】으로 사용자 조회 예외: {}", name,e.getMessage());
 			}
 		}
 		matcher = PersistenceProperties.Identity.distinguishedName_pattern.matcher(name);
@@ -460,7 +460,7 @@ public class UserManagerService {
 				}
 				return list;
 			} catch (Exception e) {
-				logger.warn("根据组织【{}】查询人员异常：{}", name,e.getMessage());
+				logger.warn("조직【{}】으로 사용자 조회 예외: {}", name,e.getMessage());
 			}
 		}
 		matcher = PersistenceProperties.Group.distinguishedName_pattern.matcher(name);
@@ -469,15 +469,15 @@ public class UserManagerService {
 				Business business = new Business(null);
 				return business.organization().person().listWithGroup( name );
 			} catch (Exception e) {
-				logger.warn("根据组织【{}】查询人员异常：{}", name,e.getMessage());
+				logger.warn("조직【{}】으로 사용자 조회 예외: {}", name,e.getMessage());
 			}
 		}
 		return list;
 	}
 
 	/**
-	 * 根据组织名称，查询组织内所有的人员标识，包括下级组织<br/>
-	 * 2020-06-12 改为使用唯一标识查询<br/>
+	 * 조직 이름으로 조직 내 모든 사용자 식별자 조회, 하위 조직 포함<br/>
+	 * 2020-06-12 고유 식별자로 조회하도록 변경<br/>
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -489,7 +489,7 @@ public class UserManagerService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 
-			//2020-06-12 unitName可能有3段，可能有2段，统一使用中间的唯一标识来进行查询
+			//2020-06-12 unitName은 3단 또는 2단일 수 있으므로 일관되게 가운데 고유 식별자로 조회
 			String unique = getUniqueWithName( unitName );
 
 			return business.organization().person().listWithUnitSubNested( unique );
@@ -499,11 +499,11 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 获取组织对象的唯一标识<br/>
+	 * 조직 객체의 고유 식별자 조회<br/>
 	 *<br/>
-	 * 组织对象标识一般会有3段，如 综合部@1304-73504398-13419-0347@U, 张三@293041-9305983-04258-0943@P<br/>
-	 * 文档权限里也会存在2段，因为第一段经常会变，如组织：行政综合部@1304-73504398-13419-0347@U<br/>
-	 * 所以查询的时候最好只用中间的唯一标识来查询<br/>
+	 * 조직 객체 식별자는 보통 3단으로, 예: 종합부@1304-73504398-13419-0347@U, 홍길동@293041-9305983-04258-0943@P<br/>
+	 * 문서 권한에도 2단이 있음, 첫 단이 자주 바뀌기 때문, 예: 조직: 행정종합부@1304-73504398-13419-0347@U<br/>
+	 * 따라서 조회 시 가운데 고유 식별자만 사용하는 것이 좋음<br/>
 	 * @param orgObjectName
 	 * @return
 	 */
@@ -522,8 +522,8 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据群组名称，查询群组内所有的人员标识<br/>
-	 * 2020-06-12 改为使用唯一标识查询<br/>
+	 * 그룹 이름으로 그룹 내 모든 사용자 식별자 조회<br/>
+	 * 2020-06-12 고유 식별자로 조회하도록 변경<br/>
 	 *
 	 * @param groupName
 	 * @return
@@ -536,7 +536,7 @@ public class UserManagerService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 
-			//2020-06-12 unitName可能有3段，可能有2段，统一使用中间的唯一标识来进行查询
+			//2020-06-12 unitName은 3단 또는 2단일 수 있으므로 일관되게 가운데 고유 식별자로 조회
 			String unique = getUniqueWithName( groupName );
 
 			return business.organization().person().listWithGroup( unique );
@@ -546,8 +546,8 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据角色名称，查询角色成员内所有的人员标识<br/>
-	 * 2020-06-12 改为使用唯一标识查询<br/>
+	 * 역할 이름으로 역할 구성원 내 모든 사용자 식별자 조회<br/>
+	 * 2020-06-12 고유 식별자로 조회하도록 변경<br/>
 	 * @param role
 	 * @return
 	 * @throws Exception
@@ -559,7 +559,7 @@ public class UserManagerService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 
-			//2020-06-12 unitName可能有3段，可能有2段，统一使用中间的唯一标识来进行查询
+			//2020-06-12 unitName은 3단 또는 2단일 수 있으므로 일관되게 가운데 고유 식별자로 조회
 			String unique = getUniqueWithName( role );
 
 			return business.organization().person().listWithRole( unique );
@@ -569,7 +569,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 查询系统内所有顶级组织的数量
+	 * 시스템 내 모든 최상위 조직 수 조회
 	 *
 	 * @return
 	 * @throws Exception
@@ -588,7 +588,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 判断指定组织是否是顶级组织
+	 * 지정 조직이 최상위 조직인지 판단
 	 *
 	 * @param unitName
 	 * @return
@@ -619,19 +619,19 @@ public class UserManagerService {
 			return true;
 		}
 		UserManagerService userManagerService = new UserManagerService();
-		//Manager管理员
+		//Manager 관리자
 		if( userManagerService.isHasPlatformRole( person.getDistinguishedName(), ThisApplication.ROLE_Manager )){
 			return true;
 		}
-		//CMS管理员
+		//CMS 관리자
 		if( userManagerService.isHasPlatformRole( person.getDistinguishedName(), ThisApplication.ROLE_CMSManager )){
 			return true;
 		}
 
-		//查询用户是否为该栏目的管理者
+		//사용자가 해당 게시판의 관리자인지 조회
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			AppInfo appInfo = emc.find( appId, AppInfo.class );
-			//是管理员
+			//관리자임
 			if( ListTools.isNotEmpty(appInfo.getManageablePersonList()) && ListTools.contains( appInfo.getManageablePersonList(), person.getDistinguishedName() )){
 				return true;
 			}
@@ -661,14 +661,14 @@ public class UserManagerService {
 	}
 
 	public boolean hasAppInfoManagerPermission( EffectivePerson person ) throws Exception {
-		//系统管理员
+		//시스템 관리자
 		if( person.isManager() || person.isCipher() ){
 			return true;
 		}
 		if( StringUtils.equalsIgnoreCase("xadmin", person.getName() ) || StringUtils.equalsIgnoreCase("xadmin", person.getDistinguishedName() ) ){
 			return true;
 		}
-		//CMS管理员
+		//CMS 관리자
 		UserManagerService userManagerService = new UserManagerService();
 		if( userManagerService.isHasPlatformRole( person.getDistinguishedName(), ThisApplication.ROLE_CMSManager )){
 			return true;

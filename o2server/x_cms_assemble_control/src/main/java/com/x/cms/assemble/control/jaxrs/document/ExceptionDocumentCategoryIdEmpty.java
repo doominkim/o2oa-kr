@@ -7,6 +7,6 @@ class ExceptionDocumentCategoryIdEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionDocumentCategoryIdEmpty() {
-		super("文档所属分类ID为空，无法进行操作。" );
+		super("게시글 분류 ID가 비어 있어 작업할 수 없습니다." );
 	}
 }

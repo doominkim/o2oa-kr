@@ -19,10 +19,10 @@ class ActionGetWithIdentityWithType extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private String identity;
 
-		@FieldDescribe("组织类型")
+		@FieldDescribe("조직 유형")
 		private String type;
 
 		public String getIdentity() {
@@ -45,7 +45,7 @@ class ActionGetWithIdentityWithType extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private String unit;
 
 		public String getUnit() {

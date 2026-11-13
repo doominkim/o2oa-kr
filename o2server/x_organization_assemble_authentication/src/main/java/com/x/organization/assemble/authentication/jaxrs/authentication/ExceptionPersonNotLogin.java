@@ -6,7 +6,7 @@ class ExceptionPersonNotLogin extends LanguagePromptException {
 
 	private static final long serialVersionUID = -6124481323896411121L;
 
-	public static String defaultMessage = "用户未登录.";
+	public static String defaultMessage = "로그인하지 않았습니다.";
 
 	ExceptionPersonNotLogin() {
 		super(defaultMessage);

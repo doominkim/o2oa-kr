@@ -6,7 +6,7 @@ import com.x.base.core.project.schedule.AbstractJob;
 import com.x.cms.assemble.control.service.CmsBatchOperationPersistService;
 
 /**
- * 检查文档是否已经review过了
+ * 문서가 이미 review되었는지 확인
  *
  */
 public class Timertask_CheckDocumentReviewStatus extends AbstractJob {

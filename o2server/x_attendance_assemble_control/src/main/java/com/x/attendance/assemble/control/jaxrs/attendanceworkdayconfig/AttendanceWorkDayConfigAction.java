@@ -30,12 +30,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("attendanceworkdayconfig")
-@JaxrsDescribe("节假日工作日配置信息管理服务（已弃用）")
+@JaxrsDescribe("공휴일·근무일 설정 정보 관리 서비스(사용 중단)")
 public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceWorkDayConfigAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有节假日配置列表信息", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "모든 공휴일 설정 목록 정보 조회", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,7 +51,7 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 				result = new ActionListAll().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "获取所有节假日配置列表信息时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "전체 휴일 설정 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -59,7 +59,7 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据条件获取节假日配置列表", action = ActionListWithFilter.class)
+	@JaxrsMethodDescribe(value = "조건으로 공휴일 설정 목록 조회", action = ActionListWithFilter.class)
 	@PUT
 	@Path("filter")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -75,7 +75,7 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 				result = new ActionListWithFilter().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "新建或者更新考勤统计需求信息发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "근태 통계 요청을 생성 또는 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -83,13 +83,13 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取节假日配置信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 공휴일 설정 정보 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("节假日配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("공휴일 설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -99,7 +99,7 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "根据ID获取考勤统计需求信息时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "ID로 근태 통계 요청을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -107,7 +107,7 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "新建或者更新节假日配置信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "공휴일 설정 정보 생성 또는 수정", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -122,7 +122,7 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "新建或者更新考勤统计需求信息发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "근태 통계 요청을 생성 또는 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -130,13 +130,13 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除节假日配置信息", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 공휴일 설정 정보 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("节假日配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("공휴일 설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -146,7 +146,7 @@ public class AttendanceWorkDayConfigAction extends StandardJaxrsAction {
 				result = new ActionDelete().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceProcess(e, "根据ID删除考勤统计需求信息时发生异常！");
+				Exception exception = new ExceptionAttendanceProcess(e, "ID로 근태 통계 요청을 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

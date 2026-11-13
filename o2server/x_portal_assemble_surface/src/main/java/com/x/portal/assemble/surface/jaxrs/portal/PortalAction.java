@@ -32,22 +32,22 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 门户应用管理
+ * 포털 앱 관리
  * @author sword
  */
 @Path("portal")
-@JaxrsDescribe("门户")
+@JaxrsDescribe("포털")
 public class PortalAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PortalAction.class);
 
-	@JaxrsMethodDescribe(value = "获取单个的Portal.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "단일 Portal 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -59,12 +59,12 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Portal的图标.", action = ActionIcon.class)
+	@JaxrsMethodDescribe(value = "Portal 아이콘 조회.", action = ActionIcon.class)
 	@GET
 	@Path("{id}/icon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void icon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -76,13 +76,13 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Portal的图标Base64编码.", action = ActionIconBase64.class)
+	@JaxrsMethodDescribe(value = "Portal 아이콘 Base64 인코딩 조회.", action = ActionIconBase64.class)
 	@GET
 	@Path("{id}/icon/base64")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void iconBase64(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionIconBase64.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -94,7 +94,7 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户PC端所有可见的Portal.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 PC에서 표시 가능한 모든 Portal 목록.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -111,7 +111,7 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户mobile端所有可见的Portal.", action = ActionListMobile.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 mobile에서 표시 가능한 모든 Portal 목록.", action = ActionListMobile.class)
 	@GET
 	@Path("list/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -128,13 +128,13 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Portal的角标数量(根据Portal的角标脚本计算得出).", action = ActionGetCornerMark.class)
+	@JaxrsMethodDescribe(value = "Portal의 배지 수 조회(Portal 배지 스크립트로 계산).", action = ActionGetCornerMark.class)
 	@GET
 	@Path("{flag}/corner/mark")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getCornerMark(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+					@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetCornerMark.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

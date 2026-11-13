@@ -57,20 +57,20 @@ public class SyncOrganization {
 
 	public PullResult execute(Business business) throws Exception {
 		if (!BooleanUtils.isTrue(Config.qiyeweixin().getEnable())) {
-			logger.print("没有启用企业微信配置，请检查企业微信配置文件！");
+			logger.print("기업 위챗 설정이 활성화되지 않았습니다. 기업 위챗 설정 파일을 확인하십시오!");
 			return new PullResult();
 		}
-		// 配置启用就进行用户绑定
+		// 설정이 활성화되면 사용자 바인딩 수행
 		if (BooleanUtils.isTrue(Config.qiyeweixin().getBindEnable())) {
 			return bindO2OAUserAndQywxUser(business);
 		}
-		// 默认同步
+		// 기본 동기화
 		return pullFromQywx(business);
 	}
 
-	// 把企业微信那边的用户 userid 绑定到 O2OA 的 person 表中的 qywxId 字段中
+	// 기업 위챗 측 사용자 userid 를 O2OA 의 person 테이블 qywxId 필드에 바인딩
 	private PullResult bindO2OAUserAndQywxUser(Business business) throws Exception {
-		logger.print("开始与企业微信进行人员 userid 的绑定.");
+		logger.print("기업 위챗과 사용자 userid 바인딩 시작.");
 		PullResult result = new PullResult();
 		String accessToken = Config.qiyeweixin().syncAccessToken();
 		logger.print("accessToken：" + accessToken);
@@ -81,16 +81,16 @@ public class SyncOrganization {
 		CacheManager.notify(Person.class);
 		result.end();
 		if (!result.getBindPersonList().isEmpty()) {
-			logger.print("绑定用户企业微信 userid ({}):{}.", result.getBindPersonList().size(),
+			logger.print("사용자 기업 위챗 userid 바인딩 ({}):{}.", result.getBindPersonList().size(),
 					StringUtils.join(result.getBindPersonList(), ","));
 		}
-		logger.print("结束企业微信人员 userid 绑定的任务.");
+		logger.print("기업 위챗 사용자 userid 바인딩 작업 종료.");
 		return result;
 	}
 
-	// 同步企业微信组织用户
+	// 기업 위챗 조직 사용자 동기화
 	private PullResult pullFromQywx(Business business) throws Exception {
-		logger.print("开始与企业微信同步人员组织,方向:拉入.");
+		logger.print("기업 위챗과 사용자 조직 동기화 시작, 방향:가져오기.");
 		PullResult result = new PullResult();
 		String accessToken = Config.qiyeweixin().syncAccessToken();
 		logger.print("accessToken：" + accessToken);
@@ -100,10 +100,10 @@ public class SyncOrganization {
 		List<Identity> identities = new ArrayList<>();
 		QiyeweixinFactory factory = new QiyeweixinFactory(accessToken);
 		for (Department root : factory.roots()) {
-			logger.print("开始同步企业微信组织的信息:{}", XGsonBuilder.toJson(root));
+			logger.print("기업 위챗 조직 정보 동기화 시작:{}", XGsonBuilder.toJson(root));
 			this.check(business, result, units, people, personAttributes, identities, accessToken, factory, null, root);
 		}
-		logger.print("开始清理本地用户组织信息");
+		logger.print("로컬 사용자 조직 정보 정리 시작");
 		this.clean(business, result, units, people, identities);
 		CacheManager.notify(Person.class);
 		CacheManager.notify(PersonAttribute.class);
@@ -113,42 +113,42 @@ public class SyncOrganization {
 		CacheManager.notify(Identity.class);
 		result.end();
 		if (!result.getCreateUnitList().isEmpty()) {
-			logger.print("创建组织({}):{}.", result.getCreateUnitList().size(),
+			logger.print("조직 생성({}):{}.", result.getCreateUnitList().size(),
 					StringUtils.join(result.getCreateUnitList(), ","));
 		}
 		if (!result.getUpdateUnitList().isEmpty()) {
-			logger.print("修改组织({}):{}.", result.getUpdateUnitList().size(),
+			logger.print("조직 수정({}):{}.", result.getUpdateUnitList().size(),
 					StringUtils.join(result.getUpdateUnitList(), ","));
 		}
 		if (!result.getRemoveUnitList().isEmpty()) {
-			logger.print("删除组织({}):{}.", result.getRemoveUnitList().size(),
+			logger.print("조직 삭제({}):{}.", result.getRemoveUnitList().size(),
 					StringUtils.join(result.getRemoveUnitList(), ","));
 		}
 		if (!result.getCreatePersonList().isEmpty()) {
-			logger.print("创建个人({}):{}.", result.getCreatePersonList().size(),
+			logger.print("개인 생성({}):{}.", result.getCreatePersonList().size(),
 					StringUtils.join(result.getCreatePersonList(), ","));
 		}
 		if (!result.getUpdatePersonList().isEmpty()) {
-			logger.print("修改个人({}):{}.", result.getUpdatePersonList().size(),
+			logger.print("개인 수정({}):{}.", result.getUpdatePersonList().size(),
 					StringUtils.join(result.getUpdatePersonList(), ","));
 		}
 		if (!result.getRemovePersonList().isEmpty()) {
-			logger.print("删除个人({}):{}.", result.getRemovePersonList().size(),
+			logger.print("개인 삭제({}):{}.", result.getRemovePersonList().size(),
 					StringUtils.join(result.getRemovePersonList(), ","));
 		}
 		if (!result.getCreateIdentityList().isEmpty()) {
-			logger.print("创建身份({}):{}.", result.getCreateIdentityList().size(),
+			logger.print("신분 생성({}):{}.", result.getCreateIdentityList().size(),
 					StringUtils.join(result.getCreateIdentityList(), ","));
 		}
 		if (!result.getUpdateIdentityList().isEmpty()) {
-			logger.print("修改身份({}):{}.", result.getUpdateIdentityList().size(),
+			logger.print("신분 수정({}):{}.", result.getUpdateIdentityList().size(),
 					StringUtils.join(result.getUpdateIdentityList(), ","));
 		}
 		if (!result.getRemoveIdentityList().isEmpty()) {
-			logger.print("删除身份({}):{}.", result.getRemoveIdentityList().size(),
+			logger.print("신분 삭제({}):{}.", result.getRemoveIdentityList().size(),
 					StringUtils.join(result.getRemoveIdentityList(), ","));
 		}
-		logger.print("结束企业微信同步人员组织同步.");
+		logger.print("기업 위챗 사용자 조직 동기화 종료.");
 		return result;
 	}
 
@@ -160,7 +160,7 @@ public class SyncOrganization {
 		for (User o : factory.listUser(org)) {
             Pair<Person, Boolean> pair = this.checkPerson(business, result, accessToken, o);
             Person person = pair.first();
-			/* 如果人员没有手机号,那么就先跳过这个人 */
+			/* 사용자에게 휴대폰 번호가 없으면 이 사용자는 건너뜀 */
 			if (null != person) {
 				people.add(person);
 				Identity identity = this.checkIdentity(business, result, person, unit, o, org.getId().equals(o.getMain_department()), BooleanUtils.isTrue(pair.second()));
@@ -182,12 +182,12 @@ public class SyncOrganization {
 		Unit unit = business.unit().getWithQiyeweixinIdObject(Objects.toString(org.getId()));
 		if (null != unit) {
 			if ((null == sup) && (StringUtils.isNotEmpty(unit.getSuperior()))) {
-				/* 不是一个顶层组织所以只能删除重建 */
+				/* 최상위 조직이 아니므로 삭제 후 재생성만 가능 */
 				removeUnit(business, result, unit);
 				unit = null;
 			}
 			if ((null != sup) && (!StringUtils.equals(sup.getId(), unit.getSuperior()))) {
-				/* 指定的上级部门和预期不符 */
+				/* 지정한 상위 부서가 예상과 다름 */
 				removeUnit(business, result, unit);
 				unit = null;
 			}
@@ -196,7 +196,7 @@ public class SyncOrganization {
 			unit = this.createUnit(business, result, sup, org);
 		} else {
 			if (!StringUtils.equals(unit.getQiyeweixinHash(), DigestUtils.sha256Hex(XGsonBuilder.toJson(org)))) {
-				logger.print("组织【{}】的hash值变化，更新组织====", org.getName());
+				logger.print("조직【{}】의 hash 값 변경, 조직 갱신====", org.getName());
 				unit = this.updateUnit(business, result, unit, org);
 			}
 		}
@@ -241,7 +241,7 @@ public class SyncOrganization {
 	}
 
 	private void removeUnit(Business business, PullResult result, Unit unit) throws Exception {
-		logger.print("正在删除组织{}.", unit.getDistinguishedName());
+		logger.print("조직 {} 삭제 중.", unit.getDistinguishedName());
 		List<Unit> os = new ArrayList<>();
 		os.add(unit);
 		os.addAll(business.unit().listSubNestedObject(unit));
@@ -254,9 +254,9 @@ public class SyncOrganization {
 	}
 
 	private void removeSingleUnit(Business business, PullResult result, Unit unit) throws Exception {
-		logger.print("正在尝试删除单个组织{}.", unit.getDistinguishedName());
+		logger.print("단일 조직 {} 삭제 시도 중.", unit.getDistinguishedName());
 		EntityManagerContainer emc = business.entityManagerContainer();
-		// 检查一下，该组织是否已经被删除过了
+		// 해당 조직이 이미 삭제되었는지 확인
 		unit = emc.find(unit.getId(), Unit.class);
 		if (unit != null) {
 			emc.beginTransaction(UnitAttribute.class);
@@ -356,7 +356,7 @@ public class SyncOrganization {
 			person.setMail(user.getEmail());
 			person.setOfficePhone(user.getTelephone());
 			person.setGenderType(Objects.equals("1", user.getGender()) ? GenderType.m : GenderType.f);
-			/* 新增人员需要增加密码 */
+			/* 신규 사용자는 비밀번호 추가 필요 */
 			business.person().setPassword(person, this.initPassword(business, person));
 			emc.persist(person, CheckPersistType.all);
 			result.getCreatePersonList().add(person.getDistinguishedName());
@@ -588,7 +588,7 @@ public class SyncOrganization {
 			List<Identity> identities) throws Exception {
 		EntityManagerContainer emc = business.entityManagerContainer();
 		List<Identity> allIdentities = this.listIdentity(business);
-		/* 删除身份 */
+		/* 신분 삭제 */
 		for (Identity identity : ListUtils.subtract(allIdentities, identities)) {
 			Person person = emc.find(identity.getPerson(), Person.class);
 			if (null == person || StringUtils.isNotEmpty(person.getQiyeweixinId())) {
@@ -606,7 +606,7 @@ public class SyncOrganization {
 				emc.commit();
 			}
 		}
-		/* 组织单独方法删除 */
+		/* 조직 개별 메서드로 삭제 */
 		List<Unit> allUnit = this.listUnit(business);
 		List<Unit> removeUnits = ListUtils.subtract(allUnit, units).stream()
 				.sorted(Comparator.comparing(Unit::getLevel, Comparator.nullsLast(Integer::compareTo)).reversed())
@@ -615,9 +615,9 @@ public class SyncOrganization {
 			this.removeSingleUnit(business, result, unit);
 		}
 		List<Person> allPeople = this.listPerson(business);
-		/* 删除个人 */
+		/* 개인 삭제 */
 		for (Person person : ListUtils.subtract(allPeople, people)) {
-			logger.print("删除用户：{}", person.getDistinguishedName());
+			logger.print("사용자 삭제: {}", person.getDistinguishedName());
 			this.removePerson(business, result, person);
 		}
 	}

@@ -1629,7 +1629,7 @@ MWF.xApplication.process.FormDesigner.Main = new Class({
             //     }.bind(this));
             // }
 
-            // @todo 预先整理表单样式
+            // @todo 양식 스타일 사전 정리
             // var loadedPcForm = !this.pcForm;
             // var loadedMobileForm = !this.mobileForm;
             // var checkLoad = function(){

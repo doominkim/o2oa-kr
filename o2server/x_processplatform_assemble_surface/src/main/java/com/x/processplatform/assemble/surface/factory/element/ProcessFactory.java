@@ -57,10 +57,10 @@ public class ProcessFactory extends ElementFactory {
     }
 
     /**
-     * 在启动方法中根据应用和流程标识找到流程,需要考虑如果启用版本管理,那么流程名是重复的
+     * 시작 메서드에서 앱과 프로세스 식별자로 프로세스를 찾으며, 버전 관리가 사용 중이면 프로세스 이름이 중복될 수 있음을 고려해야 함
      *
      * @param application
-     * @param flag        流程ID、流程名称
+     * @param flag        프로세스 ID, 프로세스 이름
      * @return
      * @throws Exception
      */
@@ -116,7 +116,7 @@ public class ProcessFactory extends ElementFactory {
         return o;
     }
 
-    // 获取Application下的所有流程
+    // Application의 모든 프로세스 조회
     public List<String> listWithApplication(Application application) throws Exception {
         EntityManager em = this.entityManagerContainer().get(Process.class);
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -129,7 +129,7 @@ public class ProcessFactory extends ElementFactory {
         return em.createQuery(cq).getResultList().stream().distinct().collect(Collectors.toList());
     }
 
-    /* 获取用户可启动的流程，如果applicationId 为空则取到所有可启动流程 */
+    /* 사용자가 시작할 수 있는 프로세스 조회, applicationId가 비어 있으면 시작 가능한 모든 프로세스 조회 */
     public List<String> listStartableWithApplication(EffectivePerson effectivePerson,
             List<String> identities, List<String> units, List<String> groups,
             List<String> roles, Application application, String terminal)
@@ -163,7 +163,7 @@ public class ProcessFactory extends ElementFactory {
         p = cb.and(p, cb.equal(root.get(Process_.application), application.getId()));
         p = cb.and(p, cb.or(cb.isTrue(root.get(Process_.editionEnable)),
                 cb.isNull(root.get(Process_.editionEnable))));
-        // 如果限定了终端,对终端进行判断
+        // 단말이 제한되어 있으면 단말 판단
         if (StringUtils.isNotEmpty(terminal)) {
             p = cb.and(p, cb.or(cb.equal(root.get(Process_.startableTerminal),
                             Process.STARTABLETERMINAL_ALL),
@@ -240,7 +240,7 @@ public class ProcessFactory extends ElementFactory {
         return list;
     }
 
-    /* 根据processList获取同版本的所有流程或者仅获取processList的流程 */
+    /* processList로 같은 버전의 모든 프로세스 또는 processList의 프로세스만 조회 */
     public List<Process> listObjectWithProcess(List<String> processList, boolean includeEdition)
             throws Exception {
         EntityManager em = this.entityManagerContainer().get(Process.class);
@@ -266,7 +266,7 @@ public class ProcessFactory extends ElementFactory {
         return em.createQuery(cq).getResultList();
     }
 
-    /* 根据processList获取同版本的所有流程 */
+    /* processList로 같은 버전의 모든 프로세스 조회 */
     public List<String> listEditionProcess(List<String> processList) throws Exception {
         EntityManager em = this.entityManagerContainer().get(Process.class);
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -290,7 +290,7 @@ public class ProcessFactory extends ElementFactory {
     }
 
     /**
-     * 判断用户是否可以启动此流程
+     * 사용자가 이 프로세스를 시작할 수 있는지 판단
      *
      * @param effectivePerson
      * @param identities

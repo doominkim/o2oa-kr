@@ -7,7 +7,7 @@ class ExceptionConfirmPasswordEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionConfirmPasswordEmpty() {
-		super("确认密码不能为空.");
+		super("비밀번호 확인은 비워 둘 수 없습니다.");
 	}
 
 }

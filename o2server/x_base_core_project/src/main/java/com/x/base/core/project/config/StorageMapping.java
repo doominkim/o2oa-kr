@@ -34,7 +34,7 @@ public class StorageMapping extends GsonPropertyObject {
 
 	}
 
-	/* 默认是false */
+	/* 기본값은 false */
 	public Boolean getDeepPath() {
 		return BooleanUtils.isTrue(this.deepPath);
 	}

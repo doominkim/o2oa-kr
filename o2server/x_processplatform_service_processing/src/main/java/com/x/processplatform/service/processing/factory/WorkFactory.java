@@ -50,7 +50,7 @@ public class WorkFactory extends AbstractFactory {
 	// }
 
 	/*
-	 * 查找activityToken的Work，处于某一个ActivityToken的Work理论上只能有一个，但是在按值拆分的过程中可能临时产生多个
+	 * activityToken의 Work 조회. 하나의 ActivityToken에 있는 Work는 이론상 하나뿐이지만, 값 기준 분할 과정에서 일시적으로 여러 개 생길 수 있음
 	 */
 //	public List<String> listWithActivityToken(String activityToken) throws Exception {
 //		EntityManager em = this.entityManagerContainer().get(Work.class);
@@ -72,7 +72,7 @@ public class WorkFactory extends AbstractFactory {
 //		return em.createQuery(cq).getResultList();
 //	}
 
-//	/* 添加一个hint */
+//	/* hint 추가 */
 //	public void addHint(Work work, String hint) {
 //		if (ListTools.isEmpty(work.getHintList())) {
 //			work.setHintList(new ArrayList<String>());
@@ -80,6 +80,6 @@ public class WorkFactory extends AbstractFactory {
 //		work.getHintList().add(DateTools.format(new Date()) + ":[" + work.getActivityName() + "]" + hint);
 //	}
 
-	/* 扩充的方法 */
+	/* 확장 메서드 */
 
 }

@@ -42,7 +42,7 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
 
     @Override
     protected void execute(DingdingQywxSyncRecord record) throws Exception {
-        logger.info("开始执行企业微信打卡数据同步，from:" + record.getDateFrom() + ", to:"+record.getDateTo());
+        logger.info("WeCom 출퇴근 데이터 동기화 시작, from:" + record.getDateFrom() + ", to:"+record.getDateTo());
         if (DingdingQywxSyncRecord.syncType_qywx.equals(record.getType())) {
             try {
                 qywxSync(record);
@@ -56,24 +56,24 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
 
     private void qywxSync(DingdingQywxSyncRecord record) throws Exception{
         Application app = ThisApplication.context().applications().randomWithWeight(x_organization_assemble_control.class.getName());
-        //开始分页查询人员
+        //사용자 페이지 조회 시작
         boolean hasNextPerson = true;
         int personPageSize = 50;
-        //开始时间和结束时间
+        //시작 시간과 종료 시간
         Date fromDate = new Date();
         fromDate.setTime(record.getDateFrom());
         Date toDate =new Date();
         toDate.setTime(record.getDateTo());
-        //先删除
+        //먼저 삭제
         deleteQywxAttendance(fromDate, toDate);
-        //人员查询地址
+        //사용자 조회 주소
         String uri = "person/list/(0)/next/50";
         String qywxuri = Config.qiyeweixin().getApiAddress() + "/cgi-bin/checkin/getcheckindata?access_token="+ Config.qiyeweixin().attendanceAccessToken();
         int saveNumber = 0;
         while (hasNextPerson) {
             List<Person> list = ThisApplication.context().applications().getQuery(false, app, uri).getDataAsList(Person.class);
             if (list != null && list.size() > 0) {
-                //钉钉用户id
+                //DingTalk 사용자 id
                 List<String> qywxUsers = list.stream().filter(person -> StringUtils.isNotEmpty(person.getQiyeweixinId()))
                         .map(Person::getQiyeweixinId).collect(Collectors.toList());
 
@@ -82,43 +82,43 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
                     post.setStarttime(DateTools.toUnixTimeStamp(fromDate.getTime()));
                     post.setEndtime(DateTools.toUnixTimeStamp(toDate.getTime()));
                     post.setUseridlist(qywxUsers);
-                    post.setOpencheckindatatype(3);//全部打卡信息
-                    logger.info("企业微信 post ：" + post.toString());
+                    post.setOpencheckindatatype(3);//전체 출퇴근 정보
+                    logger.info("WeCom post :" + post.toString());
                     QywxResult result = HttpConnection.postAsObject(qywxuri, null, post.toString(), QywxResult.class);
-                    logger.info("返回结果："+result.toString());
+                    logger.info("반환 결과:"+result.toString());
                     if (result.errcode == 0) {
                         List<QywxResultItem> resultList = result.getCheckindata();
                         saveQywxAttendance(resultList, list);
                         saveNumber += resultList.size();
                     } else {
-                        //请求结果异常 结束
+                        //요청 결과 이상, 종료
                         throw new ExceptionDingDingRequest(result.errmsg);
                     }
 
                 }
 
-                //是否还有更多用户
+                //사용자가 더 있는지 여부
                 if (list.size() < personPageSize) {
-                    logger.info("同步钉钉考勤 没有更多用户了，结束！");
+                    logger.info("DingTalk 근태 동기화: 더 이상 사용자가 없어 종료!");
                     hasNextPerson = false;
                     updateSyncRecord(record, null);
                 } else {
-                    //还有更多用户继续查询
+                    //사용자가 더 있어 계속 조회
                     uri = "person/list/" + list.get(list.size() - 1).getDistinguishedName() + "/next/50";
                 }
             } else {
-                //没有用户查询到结束
-                logger.info("同步钉钉考勤 查询不到用户了，结束！");
+                //조회된 사용자가 없어 종료
+                logger.info("DingTalk 근태 동기화: 조회되는 사용자가 없어 종료!");
                 hasNextPerson = false;
                 updateSyncRecord(record, null);
             }
         }
-        logger.info("结束 插入："+saveNumber+" 条");
+        logger.info("종료, 삽입:"+saveNumber+" 건");
 
         boolean hasNextDate = true;
         Date statisticDate = fromDate;
         while (hasNextDate) {
-            logger.info("发起企业微信考勤数据统计， date:"+ DateTools.format(statisticDate));
+            logger.info("WeCom 근태 데이터 통계 시작, date:"+ DateTools.format(statisticDate));
             // ThisApplication.personQywxStatisticQueue.send(statisticDate);
             // ThisApplication.unitQywxStatisticQueue.send(statisticDate);
             if (!isSameDay(statisticDate, toDate)) {
@@ -127,7 +127,7 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
                 hasNextDate = false;
             }
         }
-        logger.info("发起数据统计程序 完成！");
+        logger.info("데이터 통계 프로그램 시작 완료!");
 
     }
 
@@ -151,7 +151,7 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
                         long timestamp = DateTools.toTimestamp(detail.getCheckin_time());
                         detail.setCheckin_time_date(new Date(timestamp));
                     }
-                    //添加o2组织和用户
+                    //o2 조직과 사용자 추가
                     Optional<Person> first = personList.stream().filter(p -> item.userid.equals(p.getQiyeweixinId())).findFirst();
                     if (first.isPresent()) {
                         Person person = first.get();
@@ -159,7 +159,7 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
                         detail.setO2Unit(unit);
                         detail.setO2User(person.getDistinguishedName());
                     }
-                    //设置正常的类型
+                    //정상 유형 설정
                     if (StringUtils.isEmpty(detail.getException_type())){
                         detail.setException_type(AttendanceQywxDetail.EXCEPTION_TYPE_NORMAL);
                     }
@@ -191,7 +191,7 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
 
     private void deleteQywxAttendance(Date fromDate, Date toDate) throws Exception {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-            //先删除 再同步
+            //먼저 삭제 후 동기화
             EntityManager em = emc.get(AttendanceQywxDetail.class);
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<AttendanceQywxDetail> query = cb.createQuery(AttendanceQywxDetail.class);
@@ -199,17 +199,17 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
             Predicate p = cb.between(root.get(AttendanceQywxDetail_.checkin_time_date), fromDate, toDate);
             query.select(root).where(p);
             List<AttendanceQywxDetail> detailList = em.createQuery(query).getResultList();
-            //先删除
-            logger.info("删除");
+            //먼저 삭제
+            logger.info("삭제");
             if (detailList != null) {
-                logger.info("删除 list:"+detailList.size());
+                logger.info("삭제 list:"+detailList.size());
                 emc.beginTransaction(AttendanceQywxDetail.class);
                 for (int i = 0; i < detailList.size(); i++) {
                     emc.remove(detailList.get(i));
                 }
                 emc.commit();
             }
-            logger.info("删除结束");
+            logger.info("삭제 종료");
         }
     }
 
@@ -238,7 +238,7 @@ public class QueueQywxAttendanceSync extends AbstractQueue<DingdingQywxSyncRecor
         //   "useridlist": ["james","paul"]
         //}
 
-        //打卡类型。1：上下班打卡；2：外出打卡；3：全部打卡
+        //출퇴근 유형. 1: 출퇴근 체크; 2: 외근 체크; 3: 전체 체크
         private int opencheckindatatype;
         private long starttime;
         private long endtime;

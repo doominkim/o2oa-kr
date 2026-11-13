@@ -30,14 +30,14 @@ public class ActionPostCreate extends BaseAction {
 	@Schema(name = "com.x.general.assemble.control.jaxrs.qrcode.ActionPostCreate$Wi")
 	public class Wi extends GsonPropertyObject {
 		private static final long serialVersionUID = -670631145209495465L;
-		@FieldDescribe("转换文本.")
-		@Schema(description = "转换文本.")
+		@FieldDescribe("변환 텍스트.")
+		@Schema(description = "변환 텍스트.")
 		private String text;
-		@FieldDescribe("图像宽度,默认200.")
-		@Schema(description = "图像宽度,默认200.")
+		@FieldDescribe("이미지 너비, 기본값 200.")
+		@Schema(description = "이미지 너비, 기본값 200.")
 		private Integer width;
-		@FieldDescribe("图像高度,默认200.")
-		@Schema(description = "图像高度,默认200.")
+		@FieldDescribe("이미지 높이, 기본값 200.")
+		@Schema(description = "이미지 높이, 기본값 200.")
 		private Integer height;
 
 		public String getText() {

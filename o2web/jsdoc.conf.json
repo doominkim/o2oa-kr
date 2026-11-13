@@ -1,23 +1,23 @@
 {
-    "opts": {    //命令行参数，在配置文件中配置了就不要敲命令了
-        "encoding": "utf8",               //文件编码utf8
-        "destination": "./o2web/api/",          //输出目标文件夹
-        "recurse": true,                 //是否递归抽取sorce/include配置的文件夹
-        "template" : "./node_modules/@o2oa/tidy-jsdoc-o2", //模板路径
-        "prism-theme": "prism-custom", //模板中的代码块样式主题
-        "readme" : "./o2web/jsdoc_static/home/README.md" //首页
-        //"tutorials": "./o2web/tutorials" //如果有教程，对应教程目录
+    "opts": {    //명령줄 매개변수, 설정 파일에 설정했으면 명령을 입력하지 않아도 됨
+        "encoding": "utf8",               //파일 인코딩 utf8
+        "destination": "./o2web/api/",          //출력 대상 폴더
+        "recurse": true,                 //sorce/include에 설정한 폴더를 재귀적으로 추출할지 여부
+        "template" : "./node_modules/@o2oa/tidy-jsdoc-o2", //템플릿 경로
+        "prism-theme": "prism-custom", //템플릿의 코드 블록 스타일 테마
+        "readme" : "./o2web/jsdoc_static/home/README.md" //첫 페이지
+        //"tutorials": "./o2web/tutorials" //튜토리얼이 있으면 해당 튜토리얼 디렉터리
     },
 
     "tags": {
-        "allowUnknownTags": true, //允许jsdoc中未命名的标签
-        "dictionaries": [   //标签库
+        "allowUnknownTags": true, //jsdoc에서 이름 없는 태그 허용
+        "dictionaries": [   //태그 라이브러리
             "jsdoc",
             "closure"
         ]
     },
     "source": {
-        "include": [ //需要抽取文档的源文件夹，顺序和搜索结果的顺序有关,
+        "include": [ //문서를 추출할 소스 폴더, 순서는 검색 결과 순서와 관련 있음,
             "./o2web/source/o2_core/o2.js",
             "./o2web/source/x_desktop/js/o2m.api.js",
             "./o2web/source/o2_core/o2/xScript",
@@ -29,18 +29,18 @@
             "./o2web/source/x_desktop/ssr/commonScript.js"
 
         ],
-        "includePattern": ".+\\.js(doc|x)?$", //抽取的源文件名称正则表达式
-        "excludePattern": "(^|\\/|\\\\)_" //排除的源文件正则表达式
+        "includePattern": ".+\\.js(doc|x)?$", //추출할 소스 파일 이름 정규식
+        "excludePattern": "(^|\\/|\\\\)_" //제외할 소스 파일 정규식
     },
-    "plugins": [ //启用插件
-        "plugins/markdown", //把markdown转成html
-        "plugins/summarize" //为每个doclet生成摘要
+    "plugins": [ //플러그인 사용
+        "plugins/markdown", //markdown을 html로 변환
+        "plugins/summarize" //doclet마다 요약 생성
     ],
-    "templates": {  //模板参数
-        "cleverLinks": false, //@link标签是否呈现为纯文本
+    "templates": {  //템플릿 매개변수
+        "cleverLinks": false, //@link 태그를 일반 텍스트로 표시할지 여부
         "monospaceLinks": false,
         "default": {
-            "staticFiles": { //静态文件目录
+            "staticFiles": { //정적 파일 디렉터리
                 "include": [
                     "./o2web/jsdoc_static"
                 ]
@@ -48,9 +48,9 @@
         }
     },
     "metadata": {
-        "title": "O2OA API", //最终生成的文档中标题
-        "title_prefix" : "O2OA API", //html title标题前缀
-        "title_suffix" : " | O2OA开发平台" //标题后缀
+        "title": "O2OA API", //최종 생성 문서의 제목
+        "title_prefix" : "O2OA API", //html title 제목 접두사
+        "title_suffix" : " | O2OA 개발 플랫폼" //제목 접미사
     },
     "o2" : {
         "actionOutPath" : "./o2server/{actionRoot}/src/main/webapp/describe/jsdoc/{actionName}.json",
@@ -63,7 +63,7 @@
         "enable" : true,
         "results_title" : "<span class='search-results-count'></span> results matching <span class='search-query'></span>",
         "no_results_title" : "No results matching '<span class='search-query'></span>'",
-        "placeholder" : "输入关键字搜索"
+        "placeholder" : "검색어 입력"
     }
 }
-//执行命令: jsdoc -c ./o2web/jsdoc.conf.json -q version=v5.3.5
+//명령 실행: jsdoc -c ./o2web/jsdoc.conf.json -q version=v5.3.5

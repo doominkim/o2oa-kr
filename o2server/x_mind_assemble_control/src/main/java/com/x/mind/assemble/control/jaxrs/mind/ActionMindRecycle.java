@@ -14,7 +14,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindQuery;
 import com.x.mind.entity.MindBaseInfo;
 
 /**
- * 将脑图信息放入回收站
+ * 마인드맵 정보를 휴지통으로 이동
  * @author O2LEE
  *
  */
@@ -34,7 +34,7 @@ public class ActionMindRecycle extends BaseAction {
 				mindBaseInfo = mindInfoService.getMindBaseInfo( mindId );
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e,  "系统在根据ID查询脑图信息时发生异常。", mindId );
+				Exception exception = new ExceptionMindQuery( e,  "ID로 마인드맵 정보를 조회하는 중 오류가 발생했습니다.", mindId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

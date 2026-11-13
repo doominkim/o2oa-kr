@@ -34,7 +34,7 @@ class ActionListNext extends BaseAction {
 			} else {
 
 				String id = EMPTY_SYMBOL;
-				/** 如果不是空位标志位 */
+				/** 비어 있지 않으면 플래그 설정 */
 				if (!StringUtils.equals(EMPTY_SYMBOL, flag)) {
 					UnitDuty o = business.unitDuty().pick(flag);
 					if (null == o) {
@@ -82,7 +82,7 @@ class ActionListNext extends BaseAction {
 
 		private static final long serialVersionUID = -127291000673692614L;
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		static WrapCopier<UnitDuty, Wo> copier = WrapCopierFactory.wo(UnitDuty.class, Wo.class, null,

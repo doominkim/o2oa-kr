@@ -29,20 +29,20 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("event")
-@JaxrsDescribe("日历事件信息管理服务")
+@JaxrsDescribe("캘린더 이벤트 정보 관리 서비스")
 public class Calendar_EventAction extends StandardJaxrsAction {
 
 	// private StandardJaxrsActionProxy proxy = new
 	// StandardJaxrsActionProxy(ThisApplication.context());
 	private static Logger logger = LoggerFactory.getLogger(Calendar_EventAction.class);
 
-	@JaxrsMethodDescribe(value = "根据ID获取日历事件信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 캘린더 이벤트 정보 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -52,7 +52,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "根据ID获取日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "ID로 일정 정보를 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -60,13 +60,13 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取日历事件信息的RFC内容", action = ActionGetRFCContent.class)
+	@JaxrsMethodDescribe(value = "ID로 캘린더 이벤트 정보의 RFC 내용 조회", action = ActionGetRFCContent.class)
 	@GET
 	@Path("rfc/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getRFC(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGetRFCContent.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -76,7 +76,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionGetRFCContent().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "根据ID获取日历事件信息的RFC内容时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "ID로 일정 정보의 RFC 내용을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -84,13 +84,13 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据事件ID删除指定的日历事件信息", action = ActionDestroySingleEventWithId.class)
+	@JaxrsMethodDescribe(value = "이벤트 ID로 지정 캘린더 이벤트 정보 삭제", action = ActionDestroySingleEventWithId.class)
 	@DELETE
 	@Path("single/{eventId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void destorySingleEvent(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息ID") @PathParam("eventId") String eventId) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("eventId") String eventId) {
 		ActionResult<ActionDestroySingleEventWithId.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -100,7 +100,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionDestroySingleEventWithId().execute(request, effectivePerson, eventId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "根据ID删除日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "ID로 일정 정보를 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -108,14 +108,14 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据指定事件ID删除所有的重复日历事件信息", action = ActionDestroyWithMaster.class)
+	@JaxrsMethodDescribe(value = "지정 이벤트 ID로 모든 반복 캘린더 이벤트 정보 삭제", action = ActionDestroyWithMaster.class)
 	@DELETE
 	@Path("all/{eventId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void destoryAllEventsWithRepeatMaster(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息ID") @PathParam("eventId") String eventId) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("eventId") String eventId) {
 		ActionResult<ActionDestroyWithMaster.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -125,7 +125,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionDestroyWithMaster().execute(request, effectivePerson, eventId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "根据指定事件ID删除所有的重复日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "지정한 일정 ID의 모든 반복 일정을 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -133,13 +133,13 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除重复日程事件中指定事件开始后续所有的日程事件信息", action = ActionDestroyAfterEventId.class)
+	@JaxrsMethodDescribe(value = "반복 일정 이벤트 중 지정 이벤트부터 이후의 모든 일정 이벤트 정보 삭제", action = ActionDestroyAfterEventId.class)
 	@DELETE
 	@Path("after/{eventId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void destoryAfterEvent(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息ID") @PathParam("eventId") String eventId) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("eventId") String eventId) {
 		ActionResult<ActionDestroyAfterEventId.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -149,7 +149,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionDestroyAfterEventId().execute(request, effectivePerson, eventId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "删除重复日程事件中指定事件开始后续所有的日程事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "반복 일정에서 지정한 일정 이후의 모든 일정을 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -157,13 +157,13 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据条件查询日历事件信息列表", action = ActionListWithCondition.class)
+	@JaxrsMethodDescribe(value = "조건에 따라 캘린더 이벤트 정보 목록 조회", action = ActionListWithCondition.class)
 	@PUT
 	@Path("list/filter")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFilter(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询条件") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("조회 조건") JsonElement jsonElement) {
 		ActionResult<ActionListWithCondition.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -173,7 +173,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionListWithCondition().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "根据条件查询日历事件信息列表！");
+				Exception exception = new ExceptionEventProcess(e, "조건으로 일정 목록을 조회합니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -181,13 +181,13 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据条件查询日历事件信息列表(返回简单列表)", action = ActionSimpleListWithCondition.class)
+	@JaxrsMethodDescribe(value = "조건에 따라 캘린더 이벤트 정보 목록 조회(단순 목록 반환)", action = ActionSimpleListWithCondition.class)
 	@PUT
 	@Path("list/filter/sample")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFilterSample(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询条件") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("조회 조건") JsonElement jsonElement) {
 		ActionResult<List<ActionSimpleListWithCondition.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -197,7 +197,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionSimpleListWithCondition().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "根据条件查询日历事件信息列表！");
+				Exception exception = new ExceptionEventProcess(e, "조건으로 일정 목록을 조회합니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -205,32 +205,32 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "管理员根据条件查询日历事件信息列表(返回简单列表)", action = ActionSimpleListWithConditionManager.class)
+	@JaxrsMethodDescribe(value = "관리자가 조건에 따라 캘린더 이벤트 정보 목록 조회(단순 목록 반환)", action = ActionSimpleListWithConditionManager.class)
 	@POST
 	@Path("list/filter/sample/manager")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFilterSampleManager(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询条件") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("조회 조건") JsonElement jsonElement) {
 		ActionResult<List<ActionSimpleListWithConditionManager.Wo>> result;
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
 			result = new ActionSimpleListWithConditionManager().execute(request, effectivePerson, jsonElement);
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionEventProcess(e, "根据条件查询日历事件信息列表！");
+			Exception exception = new ExceptionEventProcess(e, "조건으로 일정 목록을 조회합니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建一个新的日历事件信息", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "새 캘린더 이벤트 정보 생성", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void create(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("日历事件信息") JsonElement jsonElement) {
+					   @JaxrsParameterDescribe("캘린더 이벤트 정보") JsonElement jsonElement) {
 		ActionResult<ActionCreate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -240,7 +240,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionCreate().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "新建或者更新日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "일정 정보를 새로 만들거나 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -248,13 +248,13 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "管理员创建一个新的日历事件信息", action = ActionManageCreate.class)
+	@JaxrsMethodDescribe(value = "관리자가 새 캘린더 이벤트 정보 생성", action = ActionManageCreate.class)
 	@Path("manage")
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void manageCreate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("日历事件信息") JsonElement jsonElement) {
+					   @JaxrsParameterDescribe("캘린더 이벤트 정보") JsonElement jsonElement) {
 		ActionResult<ActionManageCreate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -264,7 +264,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionManageCreate().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "新建或者更新日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "일정 정보를 새로 만들거나 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -272,15 +272,15 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新事件所有的重复日程事件", action = ActionUpdateWithMaster.class)
+	@JaxrsMethodDescribe(value = "이벤트의 모든 반복 일정 이벤트 수정", action = ActionUpdateWithMaster.class)
 	@Path("update/all/{eventId}")
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateAllEventsWithRepeatMaster(
-			@JaxrsParameterDescribe("日历事件信息ID") @PathParam("eventId") String eventId,
+			@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("eventId") String eventId,
 			@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보") JsonElement jsonElement) {
 		ActionResult<ActionUpdateWithMaster.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -290,7 +290,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionUpdateWithMaster().execute(request, effectivePerson, eventId, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "更新日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "일정 정보를 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -298,14 +298,14 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新重复日程事件中指定事件开始后续所有的日程事件信息", action = ActionUpdateAfterEventId.class)
+	@JaxrsMethodDescribe(value = "반복 일정 이벤트 중 지정 이벤트부터 이후의 모든 일정 이벤트 정보 수정", action = ActionUpdateAfterEventId.class)
 	@Path("update/after/{eventId}")
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateAfterEvent(@JaxrsParameterDescribe("日历事件信息ID") @PathParam("eventId") String eventId,
+	public void updateAfterEvent(@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("eventId") String eventId,
 			@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보") JsonElement jsonElement) {
 		ActionResult<ActionUpdateAfterEventId.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -315,7 +315,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionUpdateAfterEventId().execute(request, effectivePerson, eventId, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "更新日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "일정 정보를 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -323,14 +323,14 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据事件ID更新单个日程事件信息", action = ActionUpdateSingleEventWithId.class)
+	@JaxrsMethodDescribe(value = "이벤트 ID로 단일 일정 이벤트 정보 수정", action = ActionUpdateSingleEventWithId.class)
 	@Path("update/single/{eventId}")
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateSingleEvent(@JaxrsParameterDescribe("日历事件信息ID") @PathParam("eventId") String eventId,
+	public void updateSingleEvent(@JaxrsParameterDescribe("캘린더 이벤트 정보 ID") @PathParam("eventId") String eventId,
 			@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("日历事件信息") JsonElement jsonElement) {
+			@JaxrsParameterDescribe("캘린더 이벤트 정보") JsonElement jsonElement) {
 		ActionResult<ActionUpdateSingleEventWithId.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -340,7 +340,7 @@ public class Calendar_EventAction extends StandardJaxrsAction {
 				result = new ActionUpdateSingleEventWithId().execute(request, effectivePerson, eventId, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionEventProcess(e, "更新日历事件信息时发生异常！");
+				Exception exception = new ExceptionEventProcess(e, "일정 정보를 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

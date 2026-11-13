@@ -175,7 +175,7 @@ class ActionSelect extends BaseAction {
 	public static class Wo extends WrapProcessPlatform {
 
 		private static final long serialVersionUID = -1130848016754973977L;
-		@FieldDescribe("返回标识")
+		@FieldDescribe("반환 식별자")
 		private String flag;
 
 		public String getFlag() {

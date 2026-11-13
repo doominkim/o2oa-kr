@@ -78,7 +78,7 @@ public class ActionUploadFile extends BaseAction {
 			result.setData(wo);
 
 		}
-		LOGGER.info("消息模块异步上传附件：{}, 大小：{}", wo.getFileName(), (file.length() / 1024)+"k");
+		LOGGER.info("메시지 모듈 비동기 첨부파일 업로드:{}, 크기:{}", wo.getFileName(), (file.length() / 1024)+"k");
 		CompletableFuture.runAsync(() -> {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				IMMsgFile imMsgFile = emc.find(wo.getId(), IMMsgFile.class);
@@ -86,7 +86,7 @@ public class ActionUploadFile extends BaseAction {
 				emc.beginTransaction(IMMsgFile.class);
 				emc.commit();
 			} catch (Exception e) {
-				LOGGER.warn("im附件上传异常：");
+				LOGGER.warn("im 첨부파일 업로드 예외:");
 				LOGGER.error(e);
 			}
 		});
@@ -98,10 +98,10 @@ public class ActionUploadFile extends BaseAction {
 
 		private static final long serialVersionUID = 2329781058340372108L;
 
-		@FieldDescribe("文件扩展名")
+		@FieldDescribe("파일 확장자")
 		private String fileExtension;
 
-		@FieldDescribe("文件名")
+		@FieldDescribe("파일 이름")
 		private String fileName;
 
 		public String getFileExtension() {

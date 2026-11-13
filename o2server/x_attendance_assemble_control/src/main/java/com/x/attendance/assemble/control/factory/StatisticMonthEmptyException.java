@@ -7,6 +7,6 @@ class StatisticMonthEmptyException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	StatisticMonthEmptyException() {
-		super("统计月份不能为空.");
+		super("통계 월은 비워 둘 수 없습니다.");
 	}
 }

@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("zhengwudingding")
-@JaxrsDescribe("政务钉钉接口")
+@JaxrsDescribe("정무 딩톡 인터페이스")
 public class ZhengwuDingdingAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ZhengwuDingdingAction.class);
 
-	@JaxrsMethodDescribe(value = "发送一个拉入同步请求.", action = ActionSyncOrganizationCallback.class)
+	@JaxrsMethodDescribe(value = "풀 동기화 요청 전송.", action = ActionSyncOrganizationCallback.class)
 	@POST
 	@Path("sync/organization/callback")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -46,7 +46,7 @@ public class ZhengwuDingdingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "立即同步.", action = ActionPullSync.class)
+	@JaxrsMethodDescribe(value = "즉시 동기화.", action = ActionPullSync.class)
 	@GET
 	@Path("pull/sync")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -63,7 +63,7 @@ public class ZhengwuDingdingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即同步.", action = ActionGetRegistCallback.class)
+	@JaxrsMethodDescribe(value = "즉시 동기화.", action = ActionGetRegistCallback.class)
 	@GET
 	@Path("regist/callback")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

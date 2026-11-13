@@ -12,28 +12,28 @@ import com.x.base.core.project.schedule.AbstractJob;
 
 public abstract class AbstractContext {
 
-	// Applications资源
+	// Applications 리소스
 	protected Applications applications = new Applications();
 
 	protected static final String INITPARAMETER_PORJECT = "project";
 
 	public static final String SERVLETCONTEXT_ATTRIBUTE_APPLICATION = "application";
 
-	// 应用类
+	// 앱 클래스
 	protected Class<?> clazz;
 
 	public Class<?> clazz() {
 		return this.clazz;
 	}
 
-	// 模块指示类
+	// 모듈 표시 클래스
 	protected Module module;
 
 	public Module module() {
 		return this.module;
 	}
 
-	// 从servletContext中抽取context
+	// servletContext에서 context 추출
 	public static AbstractContext fromServletContext(ServletContext servletContext) throws IllegalStateException {
 		Object o = servletContext.getAttribute(AbstractContext.class.getName());
 		if (null == o) {

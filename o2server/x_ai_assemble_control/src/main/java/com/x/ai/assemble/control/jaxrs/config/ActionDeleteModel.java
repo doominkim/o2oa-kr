@@ -37,7 +37,7 @@ class ActionDeleteModel extends BaseAction {
 				throw new ExceptionEntityNotExist(id, AiModel.class);
 			}
 			if(BooleanUtils.isTrue(aiModel.getAsDefault())){
-				throw new ExceptionCustom("不能删除启用的模型.");
+				throw new ExceptionCustom("활성화된 모델은 삭제할 수 없습니다.");
 			}
 			emc.beginTransaction(AiModel.class);
 			emc.remove(aiModel);

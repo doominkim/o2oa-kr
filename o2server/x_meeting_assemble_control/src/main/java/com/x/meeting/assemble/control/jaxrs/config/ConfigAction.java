@@ -19,12 +19,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("config")
-@JaxrsDescribe("会议管理配置")
+@JaxrsDescribe("회의 관리 설정")
 public class ConfigAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ConfigAction.class);
 
-	@JaxrsMethodDescribe(value = "获取会议系统配置。", action = ActionGetConfig.class)
+	@JaxrsMethodDescribe(value = "회의 시스템 설정 조회.", action = ActionGetConfig.class)
 	@GET
 	@Path("system/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -41,7 +41,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取会议系统配置(管理员)。", action = ActionGetConfigManage.class)
+	@JaxrsMethodDescribe(value = "회의 시스템 설정 조회(관리자).", action = ActionGetConfigManage.class)
 	@GET
 	@Path("system/config/manage")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -58,7 +58,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "保存会议系统配置.", action = ActionSaveConfig.class)
+	@JaxrsMethodDescribe(value = "회의 시스템 설정 저장.", action = ActionSaveConfig.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

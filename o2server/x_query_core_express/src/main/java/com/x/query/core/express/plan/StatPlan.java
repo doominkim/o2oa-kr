@@ -61,7 +61,7 @@ public class StatPlan extends GsonPropertyObject {
 		} else {
 			this.findPlan(plans);
 		}
-		// 添加运行时状态
+		// 런타임 상태 추가
 		plans.values().forEach(o -> o.init(runtime, threadPool));
 		plans.values().forEach(o -> {
 			try {
@@ -153,7 +153,7 @@ public class StatPlan extends GsonPropertyObject {
 				if (null != view) {
 					if (StringUtils.equals((view.getType()), View.TYPE_CMS)) {
 						CmsPlan cmsPlan = gson.fromJson(view.getData(), CmsPlan.class);
-						// 非分类视图或者分类视图都可以
+						// 비분류 뷰와 분류 뷰 모두 가능
 						List<SelectEntry> uselessSelectList = new ArrayList<>();
 						cmsPlan.selectList.stream().forEachOrdered(s -> {
 							if (!StringUtils.equals(s.column, o.column)) {
@@ -166,7 +166,7 @@ public class StatPlan extends GsonPropertyObject {
 						ProcessPlatformPlan processPlatformPlan = gson.fromJson(view.getData(),
 								ProcessPlatformPlan.class);
 						this.setProcessEdition(processPlatformPlan);
-						// 非分类视图或者分类视图都可以
+						// 비분류 뷰와 분류 뷰 모두 가능
 						List<SelectEntry> uselessSelectList = new ArrayList<>();
 						processPlatformPlan.selectList.stream().forEachOrdered(s -> {
 							if (!StringUtils.equals(s.column, o.column)) {
@@ -226,7 +226,7 @@ public class StatPlan extends GsonPropertyObject {
 	private CalculateGroupTable mergeGroup(Map<String, Plan> plans) throws Exception {
 		CalculateGroupTable table = new CalculateGroupTable();
 		final List<Object> keys = new ArrayList<>();
-		/* 计算group值 */
+		/* group 값 계산 */
 		for (Entry<String, Plan> en : plans.entrySet()) {
 			LOGGER.debug("merge group plan:{}.", () -> en.getValue());
 			if ((null != en.getValue()) && (null != en.getValue().groupGrid)) {
@@ -250,7 +250,7 @@ public class StatPlan extends GsonPropertyObject {
 				}
 			}
 		}
-		/* 填充初始数值 */
+		/* 초기 수치 채우기 */
 		keys.stream().distinct().forEach(o -> {
 			CalculateGroupRow row = new CalculateGroupRow();
 			row.group = o;
@@ -268,7 +268,7 @@ public class StatPlan extends GsonPropertyObject {
 		for (Entry<String, Plan> en : plans.entrySet()) {
 			if ((null != en.getValue().group) && BooleanUtils.isTrue(en.getValue().group.available())) {
 				en.getValue().selectList.stream().forEach(o -> {
-					// 分类统计只能统计分类视图
+					// 분류 통계는 분류 뷰만 집계 가능
 					if (!StringUtils.equals(o.column, en.getValue().group.column)) {
 						CalculateEntry calculateEntry = calculate.find(en.getKey());
 						if (null != calculateEntry) {
@@ -282,7 +282,7 @@ public class StatPlan extends GsonPropertyObject {
 										r.list.stream().forEach(c -> {
 											values.add(c.getAsDouble(o.column));
 										});
-										// 如果有添加的分类值,有可能取得的是null
+										// 추가된 분류 값이 있으면 null을 얻을 수 있음
 										if (StringUtils.equals(calculateEntry.calculateType, Plan.CALCULATE_AVERAGE)) {
 											if (StringUtils.equals(calculateEntry.formatType,
 													CalculateEntry.FORMATTYPE_NUMBER)) {
@@ -322,9 +322,9 @@ public class StatPlan extends GsonPropertyObject {
 		}
 		if (StringUtils.equalsIgnoreCase(SelectEntry.ORDER_DESC, calculate.orderType)
 				|| StringUtils.equalsIgnoreCase(SelectEntry.ORDER_ASC, calculate.orderType)) {
-			// 需要进行排序如果为空则对标题进行排序
+			// 정렬 필요, 비어 있으면 제목으로 정렬
 			if (StringUtils.isEmpty(calculate.orderColumn)) {
-				// 按分类值进行排序
+				// 분류 값으로 정렬
 				if (StringUtils.equalsIgnoreCase(SelectEntry.ORDER_ASC, calculate.orderType)) {
 					table.sort(new GroupComparator());
 				} else {
@@ -353,7 +353,7 @@ public class StatPlan extends GsonPropertyObject {
 		}
 		for (Entry<String, Plan> en : plans.entrySet()) {
 //			if ((null == en.getValue().group) || (!en.getValue().group.available())) {
-//				// 分类视图非分类统计
+//				// 분류 뷰 비분류 통계
 //				en.getValue().selectList.stream().forEach(o -> {
 //					List<Double> values = new ArrayList<>();
 //					CalculateEntry calculateEntry = calculate.find(en.getKey());
@@ -390,7 +390,7 @@ public class StatPlan extends GsonPropertyObject {
 //					}
 //				});
 //			} else if ((null != en.getValue()) && (null != en.getValue().grid)) {
-			// 非分类视图非分类统计
+			// 비분류 뷰 비분류 통계
 			en.getValue().selectList.stream().forEach(o -> {
 				List<Double> values = new ArrayList<>();
 				CalculateEntry calculateEntry = calculate.find(en.getKey());

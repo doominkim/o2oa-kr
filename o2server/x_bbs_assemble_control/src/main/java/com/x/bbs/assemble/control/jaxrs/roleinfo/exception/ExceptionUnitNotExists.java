@@ -7,6 +7,6 @@ public class ExceptionUnitNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionUnitNotExists( String unitName ) {
-		super("组织信息不存在！Unit:" + unitName );
+		super("조직 정보가 없습니다! Unit:" + unitName );
 	}
 }

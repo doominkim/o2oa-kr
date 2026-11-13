@@ -38,7 +38,7 @@ public class ActionImageChangeSize extends BaseAction {
 		
 		if (check) {
 			try {
-				// 校验文件和文档是正存在
+				// 파일과 문서 존재 여부 검사
 				try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 					fileInfo = emc.find(fileId, FileInfo.class);
 					if (null == fileInfo) {

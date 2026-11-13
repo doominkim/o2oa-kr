@@ -12,7 +12,7 @@ MWF.xApplication.process.FormDesigner.Module.Opinion = MWF.FCOpinion = new Class
 	_getDroppableNodes: function(){
 		var nodes = [this.form.node].concat(this.form.moduleElementNodeList, this.form.moduleContainerNodeList, this.form.moduleComponentNodeList);
 		this.form.moduleList.each( function(module){
-			//意见不能往数据模板里拖
+			//의견은 데이터 템플릿으로 끌어 넣을 수 없음
 			if( module.moduleName === "datatemplate" ){
 				var subDoms = this.form.getModuleNodes(module.node);
 				nodes.erase( module.node );

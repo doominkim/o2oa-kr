@@ -27,7 +27,7 @@ class ActionOauthLogin extends BaseAction {
 	ActionResult<Wo> execute(HttpServletRequest request, HttpServletResponse response, String name, String code,
 			String redirectUri) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
-		// 获取oauthClient对象
+		// oauthClient 객체 조회
 		OauthClient oauthClient = oauthClient(name);
 		Map<String, Object> param = oauthCreateParam(oauthClient, code, redirectUri);
 		oauthToken(oauthClient, param);
@@ -39,7 +39,7 @@ class ActionOauthLogin extends BaseAction {
 			credential = ((Double)val).longValue()+"";
 		}
 		oauthCheckCredential(credential);
-		LOGGER.info("单点应用：{} 的用户ID：{} 进行oauth认证.", name, credential);
+		LOGGER.info("SSO 앱: {}의 사용자 ID: {} oauth 인증 진행.", name, credential);
 		Wo wo;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);

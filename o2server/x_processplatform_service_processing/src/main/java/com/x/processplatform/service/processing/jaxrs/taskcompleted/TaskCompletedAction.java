@@ -26,19 +26,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("taskcompleted")
-@JaxrsDescribe("已办")
+@JaxrsDescribe("처리 완료")
 public class TaskCompletedAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(TaskCompletedAction.class);
 
-	@JaxrsMethodDescribe(value = "提醒.", action = ActionPress.class)
+	@JaxrsMethodDescribe(value = "알림.", action = ActionPress.class)
 	@GET
 	@Path("{id}/press/work/{work}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void press(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("工作") @PathParam("work") String work) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("문서") @PathParam("work") String work) {
 		ActionResult<ActionPress.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,13 +50,13 @@ public class TaskCompletedAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除已办.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "결재 완료 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -68,7 +68,7 @@ public class TaskCompletedAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新已办中的下一处理人记录值.", action = ActionUpdateNextTaskIdentity.class)
+	@JaxrsMethodDescribe(value = "처리 완료의 다음 처리자 기록값 업데이트.", action = ActionUpdateNextTaskIdentity.class)
 	@PUT
 	@Path("next/task/identity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

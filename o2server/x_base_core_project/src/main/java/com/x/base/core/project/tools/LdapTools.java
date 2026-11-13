@@ -17,7 +17,7 @@ import org.ldaptive.*;
 import org.ldaptive.auth.*;
 
 /**
- * ldap工具
+ * ldap 도구
  * @author sword
  */
 public class LdapTools {
@@ -45,7 +45,7 @@ public class LdapTools {
             ctx = new InitialDirContext(env);
             result = true;
         } catch (AuthenticationException e) {
-            logger.debug("ldap认证失败");
+            logger.debug("ldap 인증 실패");
         } catch (Exception e) {
             logger.error(e);
         } finally {
@@ -61,7 +61,7 @@ public class LdapTools {
     }
 
     public static boolean auth(String uid, String password){
-        logger.info("用户{}进行ldap认证", uid);
+        logger.info("사용자 {} ldap 인증 수행", uid);
         boolean result = false;
         try {
             String url = Config.token().getLdapAuth().getLdapUrl();

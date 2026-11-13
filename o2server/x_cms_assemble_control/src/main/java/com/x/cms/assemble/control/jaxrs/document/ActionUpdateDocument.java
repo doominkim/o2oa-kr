@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 更新文档
+ * 문서 수정
  *
  */
 public class ActionUpdateDocument extends BaseAction {
@@ -96,18 +96,18 @@ public class ActionUpdateDocument extends BaseAction {
 	}
 
 	public static class Wi {
-		@FieldDescribe("文档业务数据，覆盖业务数据，为空则不更新，数据格式为json对象，如：{\"subject\":\"修改标题\"}.")
+		@FieldDescribe("문서 업무 데이터, 업무 데이터 덮어쓰기, 비어 있으면 수정하지 않음, 데이터 형식은 json 객체, 예: {\"subject\":\"제목 수정\"}.")
 		private JsonElement data;
 
-		@FieldDescribe("文档权限列表，替换权限，为空则不操作.")
+		@FieldDescribe("문서 권한 목록, 권한 교체, 비어 있으면 처리하지 않음.")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "PermissionInfo", fieldValue = "{'permission':'权限类别：读者|作者|管理','permissionObjectType':'使用者类别：所有人|组织|人员|群组','permissionObjectCode':'使用者编码：所有人|组织编码|人员UID|群组编码','permissionObjectName':'使用者名称：所有人|组织名称|人员名称|群组名称'}")
 		private List<PermissionInfo> permissionList;
 
-		@FieldDescribe("关联文档列表，替换文档指定site的关联文档数据，为空则不操作.")
+		@FieldDescribe("관련 문서 목록, 문서 지정 site의 관련 문서 데이터를 교체, 비어 있으면 처리하지 않음.")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "TargetWi", fieldValue = "{'site':'关联内容框标识','targetList':[{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','view':'来源视图'}]}")
 		private List<SiteTargetWi> correlationTargetList;
 
-		@FieldDescribe("附件列表，替换文档指定site的附件列表，先删再增，为空则不操作.")
+		@FieldDescribe("첨부파일 목록, 문서 지정 site의 첨부파일 목록 교체, 먼저 삭제 후 추가, 비어 있으면 처리하지 않음.")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiSiteFileInfo", fieldValue = "{'site':'附件框分类','fileInfoList':[{'id':'附件id','name':'附件名称'}],'type':'附件来源(cms或processPlatform)'}")
 		private List<WiSiteFileInfo> siteFileInfoList;
 

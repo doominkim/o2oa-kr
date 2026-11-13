@@ -14,7 +14,7 @@ MWF.xApplication.process.FormDesigner.Module.Elslider = MWF.FCElslider = new Cla
 		this.moduleName = "elslider";
 	},
 	_createElementHtml: function(){
-		//var html = "<el-input placeholder=\"请输入内容\"></el-input>";
+		//var html = "<el-input placeholder=\"내용을 입력하십시오\"></el-input>";
 		var html = "<el-slider";
 		html += " v-model=\"tmpValue\"";
 		// if (this.json.max) html += " max=\""+this.json.max+"\"";

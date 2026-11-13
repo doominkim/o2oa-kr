@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class DatagridMobile 数据网格组件（移动端）。从v6.2开始建议用数据表格(Datatable)代替。
- * @o2cn 数据网格移动端（过时）
+/** @class DatagridMobile 데이터 그리드 컴포넌트(모바일). v6.2부터 데이터 표(Datatable) 사용 권장.
+ * @o2cn 데이터 그리드 모바일(구버전)
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var datagrid = this.form.get("name"); //获取组件
- * //方法2
- * var datagrid = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var datagrid = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var datagrid = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @deprecated
@@ -21,29 +21,29 @@ MWF.xApplication.process.Xform.DatagridMobile = new Class(
     isEdit: false,
     options: {
         /**
-         * 当前条目编辑完成时触发。通过this.event可以获取对应的table。
+         * 현재 항목 편집이 완료될 때 발생. this.event로 해당 table을 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.DatagridMobile#completeLineEdit
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 添加条目时触发。通过this.event可以获取对应的table。
+         * 항목 추가 시 발생. this.event로 해당 table을 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.DatagridMobile#addLine
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 删除条目前触发。通过this.event可以获取对应的table。
+         * 항목 삭제 전에 발생. this.event로 해당 table을 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.DatagridMobile#deleteLine
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 删除条目后触发。
+         * 항목 삭제 후 발생.
          * @event MWF.xApplication.process.Xform.DatagridMobile#afterDeleteLine
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 编辑条目时触发。
+         * 항목 편집 시 발생.
          * @event MWF.xApplication.process.Xform.DatagridMobile#editLine
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["queryLoad","postLoad","load","completeLineEdit", "addLine", "deleteLine", "afterDeleteLine","editLine"]
     },
@@ -246,7 +246,7 @@ MWF.xApplication.process.Xform.DatagridMobile = new Class(
                     break;
                 case "Textarea":
                     var reg = new RegExp("\n","g");
-                    var reg2 = new RegExp("\u003c","g"); //尖括号转义，否则内容会截断
+                    var reg2 = new RegExp("\u003c","g"); //꺾쇠괄호 이스케이프, 그렇지 않으면 내용이 잘림
                     var reg3 = new RegExp("\u003e","g");
                     value = value.replace(reg2,"&lt").replace(reg3,"&gt").replace(reg,"<br/>");
                     break;
@@ -1455,39 +1455,39 @@ MWF.xApplication.process.Xform.DatagridMobile = new Class(
         }
     },
     // /**
-    //  * @summary 重置数据网格的值为默认值或置空。
+    //  * @summary 데이터 그리드 값을 기본값으로 재설정하거나 비움.
     //  *  @example
     //  * this.form.get('fieldId').resetData();
     //  */
     resetData: function(){
         this.setData(this._getValue());
     },
-    /**当参数为Promise的时候，请查看文档: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|使用Promise处理表单异步}<br/>
-     * 当表单上没有对应组件的时候，可以使用this.data[fieldId] = data赋值。
-     * @summary 为数据网格赋值。
-     * @param data{DatagridData|Promise|Array} 必选，数组或Promise.
+    /**매개변수가 Promise인 경우 문서 참고: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|Promise로 양식 비동기 처리}<br/>
+     * 양식에 해당 컴포넌트가 없으면 this.data[fieldId] = data로 값을 설정할 수 있음.
+     * @summary 데이터 그리드에 값 설정.
+     * @param data{DatagridData|Promise|Array} 필수, 배열 또는 Promise.
      * @example
-     *  this.form.get("fieldId").setData([]); //赋空值
+     *  this.form.get("fieldId").setData([]); //빈 값 설정
      * @example
-     *  //如果无法确定表单上是否有组件，需要判断
-     *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+     *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
+     *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
      *      this.form.get('fieldId').setData( data );
      *  }else{
      *      this.data['fieldId'] = data;
      *  }
      *@example
-     *  //使用Promise
+     *  //Promise 사용
      *  var field = this.form.get("fieldId");
-     *  var promise = new Promise(function(resolve, reject){ //发起异步请求
+     *  var promise = new Promise(function(resolve, reject){ //비동기 요청 시작
      *    var oReq = new XMLHttpRequest();
-     *    oReq.addEventListener("load", function(){ //绑定load事件
+     *    oReq.addEventListener("load", function(){ //load 이벤트 바인딩
      *      resolve(oReq.responseText);
      *    });
-     *    oReq.open("GET", "/data.json"); //假设数据存放在data.json
+     *    oReq.open("GET", "/data.json"); //데이터가 data.json에 있다고 가정
      *    oReq.send();
      *  });
      *  promise.then( function(){
-     *    var data = field.getData(); //此时由于异步请求已经执行完毕，getData方法获得data.json的值
+     *    var data = field.getData(); //이 시점에는 비동기 요청이 이미 완료되어 getData 메서드로 data.json의 값을 얻음
      * })
      *  field.setData( promise );
      */
@@ -1617,22 +1617,22 @@ MWF.xApplication.process.Xform.DatagridMobile = new Class(
 
     },
     /**
-     * @summary 获取总计数据.
+     * @summary 합계 데이터 조회.
      * @example
      * var totalObject = this.form.get('fieldId').getTotal();
-     * @return {Object} 总计数据
+     * @return {Object} 합계 데이터
      */
     getTotal: function(){
         this._loadTotal();
         return this.totalResaults;
     },
     /**
-     * @summary 判断数据网格是否为空.
+     * @summary 데이터 그리드가 비어 있는지 판단.
      * @example
      * if( this.form.get('fieldId').isEmpty() ){
-     *     this.form.notice('至少需要添加一条数据', 'warn');
+     *     this.form.notice('최소 한 건의 데이터를 추가해야 합니다', 'warn');
      * }
-     * @return {Boolean} 是否为空
+     * @return {Boolean} 비어 있는지 여부
      */
     isEmpty: function(){
         var data = this.getData();
@@ -1644,37 +1644,37 @@ MWF.xApplication.process.Xform.DatagridMobile = new Class(
         return false;
     },
     /**
-     * 在脚本中使用 this.data[fieldId] 也可以获取组件值。
-     * 区别如下：<br/>
-     * 1、当使用Promise的时候<br/>
-     * 使用异步函数生成器（Promise）为组件赋值的时候，用getData方法立即获取数据，可能返回修改前的值，当Promise执行完成以后，会返回修改后的值。<br/>
-     * this.data[fieldId] 立即获取数据，可能获取到异步函数生成器，当Promise执行完成以后，会返回修改后的值。<br/>
-     * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|具体差异请查看链接}<br/>
-     * 2、当表单上没有对应组件的时候，可以使用this.data[fieldId]获取值，但是this.form.get('fieldId')无法获取到组件。
-     * @summary 获取数据网格数据.
+     * 스크립트에서 this.data[fieldId]로도 컴포넌트 값을 가져올 수 있음.
+     * 차이는 다음과 같음:<br/>
+     * 1. Promise를 사용하는 경우<br/>
+     * 비동기 함수 생성기(Promise)로 컴포넌트에 값을 할당할 때 getData 메서드로 즉시 가져오면 수정 전 값이 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+     * this.data[fieldId]로 즉시 가져오면 비동기 함수 생성기가 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+     * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|자세한 차이는 링크 참고}<br/>
+     * 2. 양식에 해당 컴포넌트가 없을 때는 this.data[fieldId]로 값을 가져올 수 있지만, this.form.get('fieldId')로는 컴포넌트를 가져올 수 없음.
+     * @summary 데이터 그리드 데이터 조회.
      * @example
      * var data = this.form.get('fieldId').getData();
      *@example
-     *  //如果无法确定表单上是否有组件，需要判断
+     *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
      *  var data;
-     *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+     *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
      *      data = this.form.get('fieldId').getData();
      *  }else{
-     *      data = this.data['fieldId']; //直接从数据中获取字段值
+     *      data = this.data['fieldId']; //데이터에서 필드 값을 직접 가져오기
      *  }
      *  @example
-     *  //使用Promise
+     *  //Promise 사용
      *  var field = this.form.get("fieldId");
-     *  var promise = new Promise(function(resolve, reject){ //发起异步请求
+     *  var promise = new Promise(function(resolve, reject){ //비동기 요청 시작
      *    var oReq = new XMLHttpRequest();
-     *    oReq.addEventListener("load", function(){ //绑定load事件
+     *    oReq.addEventListener("load", function(){ //load 이벤트 바인딩
      *      resolve(oReq.responseText);
      *    });
-     *    oReq.open("GET", "/data.json"); //假设数据存放在data.json
+     *    oReq.open("GET", "/data.json"); //데이터가 data.json에 있다고 가정
      *    oReq.send();
      *  });
      *  promise.then( function(){
-     *    var data = field.getData(); //此时由于异步请求已经执行完毕，getData方法获得data.json的值
+     *    var data = field.getData(); //이 시점에는 비동기 요청이 이미 완료되어 getData 메서드로 data.json의 값을 얻음
      * })
      *  field.setData( promise );
      * @return {DatagridData}

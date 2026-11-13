@@ -60,9 +60,9 @@ public class ActionBind extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("设备号deviceName")
+		@FieldDescribe("기기 번호 deviceName")
 		private String deviceName;
-		@FieldDescribe("设备类型deviceType：ios|android|hmos")
+		@FieldDescribe("기기 유형 deviceType: ios|android|hmos")
 		private String deviceType;
 
 		public String getDeviceName() {

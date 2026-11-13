@@ -12,7 +12,7 @@ public class Exit {
 
 		try (RandomAccessFile file = new RandomAccessFile(getBasePath() + "/command.swap", "rw");
 				FileChannel fileChannel = file.getChannel()) {
-			FileLock lock = fileChannel.lock();// 锁定整个文件
+			FileLock lock = fileChannel.lock();// 파일 전체 잠금
 			file.setLength(0);
 			file.write("exit".getBytes(StandardCharsets.UTF_8));
 			lock.release();

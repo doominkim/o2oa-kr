@@ -23,7 +23,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.base.core.project.tools.StringTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "PromptErrorLog", description = "服务管理提示错误.")
+@Schema(name = "PromptErrorLog", description = "서비스 관리 안내 오류.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.PromptErrorLog.TABLE, uniqueConstraints = {
@@ -45,19 +45,19 @@ public class PromptErrorLog extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		if (null == this.collected) {
 			this.collected = false;
 		}
 		this.version = StringTools.utf8SubString(this.version, JpaObject.length_32B);
-		/** 不主动去修改时间 */
+		/** 시간을 임의로 수정하지 않음 */
 		// if (null == this.occurTime) {
 		// this.occurTime = new Date();
 		// }
@@ -77,27 +77,27 @@ public class PromptErrorLog extends SliceJpaObject {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 	public static final String collected_FIELDNAME = "collected";
-	@FieldDescribe("是否提交到collect服务器.")
+	@FieldDescribe("collect 서버 제출 여부.")
 	@Column(name = ColumnNamePrefix + collected_FIELDNAME)
 	private Boolean collected;
 
 	public static final String version_FIELDNAME = "version";
-	@FieldDescribe("服务器版本.")
+	@FieldDescribe("서버 버전.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + version_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String version;
 
 	public static final String occurTime_FIELDNAME = "occurTime";
-	@FieldDescribe("错误发生时间.")
+	@FieldDescribe("오류 발생 시간.")
 	@Column(name = ColumnNamePrefix + occurTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + occurTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date occurTime;
 
 	public static final String exceptionClass_FIELDNAME = "exceptionClass";
-	@FieldDescribe("错误的类名.")
+	@FieldDescribe("오류 클래스명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + exceptionClass_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + exceptionClass_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -118,62 +118,62 @@ public class PromptErrorLog extends SliceJpaObject {
 	private String person;
 
 	public static final String message_FIELDNAME = "message";
-	@FieldDescribe("错误消息.")
+	@FieldDescribe("오류 메시지.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_2K, name = ColumnNamePrefix + message_FIELDNAME)
 	private String message;
 
 	public static final String stackTrace_FIELDNAME = "stackTrace";
-	@FieldDescribe("错误堆栈.")
+	@FieldDescribe("오류 스택.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + stackTrace_FIELDNAME)
 	private String stackTrace;
 
 	public static final String requestUrl_FIELDNAME = "requestUrl";
-	@FieldDescribe("请求的url.")
+	@FieldDescribe("요청 url.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_2K, name = ColumnNamePrefix + requestUrl_FIELDNAME)
 	private String requestUrl;
 
 	public static final String requestHead_FIELDNAME = "requestHead";
-	@FieldDescribe("请求的Head,用;进行分割.")
+	@FieldDescribe("요청 Head, ;로 구분.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_2K, name = ColumnNamePrefix + requestHead_FIELDNAME)
 	private String requestHead;
 
 	public static final String requestMethod_FIELDNAME = "requestMethod";
-	@FieldDescribe("请求方式.")
+	@FieldDescribe("요청 방식.")
 	@Column(length = JpaObject.length_8B, name = ColumnNamePrefix + requestMethod_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String requestMethod;
 
 	public static final String requestRemoteAddr_FIELDNAME = "requestRemoteAddr";
-	@FieldDescribe("远程访问地址.")
+	@FieldDescribe("원격 접근 주소.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + requestRemoteAddr_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + requestRemoteAddr_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String requestRemoteAddr;
 
 	public static final String requestRemoteHost_FIELDNAME = "requestRemoteHost";
-	@FieldDescribe("远程访问主机.")
+	@FieldDescribe("원격 접근 호스트.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + requestRemoteHost_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + requestRemoteHost_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String requestRemoteHost;
 
 	public static final String requestBody_FIELDNAME = "requestBody";
-	@FieldDescribe("请求体.")
+	@FieldDescribe("요청 본문.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + requestBody_FIELDNAME)
 	private String requestBody;
 
 	public static final String requestBodyLength_FIELDNAME = "requestBodyLength";
-	@FieldDescribe("请求长度.")
+	@FieldDescribe("요청 길이.")
 	@Column(name = ColumnNamePrefix + requestBodyLength_FIELDNAME)
 	private Long requestBodyLength;
 

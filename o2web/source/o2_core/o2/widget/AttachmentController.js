@@ -392,7 +392,7 @@ o2.widget.AttachmentController = o2.widget.ATTER  = new Class({
             this.topNode.setStyle( "zoom",  zoom*100+"%" );
         }
     },
-    getDecimals: function(v){ //截取两位小数
+    getDecimals: function(v){ //소수점 둘째 자리까지 자르기
         var decimals = 4;
 
         var p = Math.pow(10,decimals);
@@ -1340,7 +1340,7 @@ o2.widget.AttachmentController = o2.widget.ATTER  = new Class({
 
     openAttachment: function(e, node, attachment){
         if( !this.options.dblclick ){
-            if( !this.options.isDownload || this.options.isDownload === "hidden" )return; //兼容以前的配置
+            if( !this.options.isDownload || this.options.isDownload === "hidden" )return; //이전 설정과 호환
         }
         if (attachment){
             if (this.module) this.module.openAttachment(e, node, attachment);
@@ -1919,7 +1919,7 @@ o2.widget.AttachmentController.Attachment = new Class({
     },
     openAttachment: function(e){
 	    if( !this.controller.options.dblclick ){
-            if (!this.controller.options.isDownload || this.controller.options.isDownload === "hidden") return; //兼容以前的配置
+            if (!this.controller.options.isDownload || this.controller.options.isDownload === "hidden") return; //이전 설정과 호환
         }
         if (this.controller.module) this.controller.module.openAttachment(e, null, [this]);
     },

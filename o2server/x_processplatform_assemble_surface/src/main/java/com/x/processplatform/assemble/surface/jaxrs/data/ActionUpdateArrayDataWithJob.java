@@ -72,7 +72,7 @@ class ActionUpdateArrayDataWithJob extends BaseAction {
 		JsonElement data = this.getData(business, job);
 		JsonElement oldData = XGsonBuilder.extract(data, wi.getPath());
 		if(oldData!=null && !oldData.isJsonArray()){
-			throw new ExceptionCustom("指定的path路径数据不是数组对象");
+			throw new ExceptionCustom("지정한 path 경로의 데이터가 배열 객체가 아닙니다");
 		}
 		JsonArray arrayData = oldData == null ? new JsonArray() : oldData.getAsJsonArray();
 		switch (wi.getMethod()) {
@@ -86,7 +86,7 @@ class ActionUpdateArrayDataWithJob extends BaseAction {
 			arrayData = JsonArrayOperator.move(arrayData, wi.getIndex(), wi.getToIndex());
 			break;
 		default:
-			throw new ExceptionCustom("操作类型不匹配：" + wi.getMethod());
+			throw new ExceptionCustom("작업 유형이 일치하지 않습니다: " + wi.getMethod());
 		}
 		JsonObject newData = new JsonObject();
 		this.addJsonToPath(newData, data, wi.getPath(), arrayData);
@@ -100,15 +100,15 @@ class ActionUpdateArrayDataWithJob extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("数组操作方法：add|delete|move")
+		@FieldDescribe("배열 조작 방법: add|delete|move")
 		private String method;
-		@FieldDescribe("新增的数组下标或删除的数组下标或者移动的起始下标")
+		@FieldDescribe("추가할 배열 인덱스, 삭제할 배열 인덱스 또는 이동 시작 인덱스")
 		private Integer index;
-		@FieldDescribe("移动的目标下标")
+		@FieldDescribe("이동 대상 인덱스")
 		private Integer toIndex;
-		@FieldDescribe("数据对象在业务数据中的path路径，如datatable.data")
+		@FieldDescribe("업무 데이터에서 데이터 객체의 path 경로, 예: datatable.data")
 		private String path;
-		@FieldDescribe("json数据对象")
+		@FieldDescribe("json 데이터 객체")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "JsonElement", fieldValue = "{}")
 		private JsonElement data;
 

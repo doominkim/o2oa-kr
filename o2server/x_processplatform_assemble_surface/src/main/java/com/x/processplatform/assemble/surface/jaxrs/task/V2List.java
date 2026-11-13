@@ -62,12 +62,12 @@ class V2List extends V2Base {
 	@Schema(name = "com.x.processplatform.assemble.surface.jaxrs.task.V2List$Wi")
 	public static class Wi extends RelateFilterWi {
 
-		@FieldDescribe("任务标识.")
-		@Schema(description = "任务标识.")
+		@FieldDescribe("작업 식별자.")
+		@Schema(description = "작업 식별자.")
 		private List<String> jobList = new ArrayList<>();
 
-		@FieldDescribe("待办标识.")
-		@Schema(description = "待办标识.")
+		@FieldDescribe("결재 대기 식별자.")
+		@Schema(description = "결재 대기 식별자.")
 		private List<String> idList = new ArrayList<>();
 
 		public List<String> getJobList() {

@@ -1,5 +1,5 @@
 /**
- * 对企业微信发送给企业后台的消息加解密示例代码.
+ * 기업 위챗이 기업 백엔드로 보내는 메시지 암복호화 예제 코드.
  * 
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
@@ -21,14 +21,14 @@ import org.xml.sax.InputSource;
 /**
  * XMLParse class
  *
- * 提供提取消息格式中的密文及生成回复消息格式的接口.
+ * 메시지 형식에서 암호문 추출 및 회신 메시지 형식 생성 인터페이스 제공.
  */
 class XMLParse {
 
 	/**
-	 * 提取出xml数据包中的加密消息
-	 * @param xmltext 待提取的xml字符串
-	 * @return 提取出的加密消息字符串
+	 * xml 데이터 패킷에서 암호화 메시지 추출
+	 * @param xmltext 추출할 xml 문자열
+	 * @return 추출한 암호화 메시지 문자열
 	 * @throws AesException 
 	 */
 	public static Object[] extract(String xmltext) throws AesException     {
@@ -57,12 +57,12 @@ class XMLParse {
 	}
 
 	/**
-	 * 生成xml消息
-	 * @param encrypt 加密后的消息密文
-	 * @param signature 安全签名
-	 * @param timestamp 时间戳
-	 * @param nonce 随机字符串
-	 * @return 生成的xml字符串
+	 * xml 메시지 생성
+	 * @param encrypt 암호화된 메시지 암호문
+	 * @param signature 보안 서명
+	 * @param timestamp 타임스탬프
+	 * @param nonce 랜덤 문자열
+	 * @return 생성된 xml 문자열
 	 */
 	public static String generate(String encrypt, String signature, String timestamp, String nonce) {
 

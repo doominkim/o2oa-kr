@@ -26,12 +26,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("attendanceimportfileinfo")
-@JaxrsDescribe("导入文件信息管理服务（已弃用）")
+@JaxrsDescribe("가져오기 파일 정보 관리 서비스(사용 중단)")
 public class AttendanceImportFileInfoAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceImportFileInfoAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有已经上传成功的文件列表", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "업로드에 성공한 모든 파일 목록 조회", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class AttendanceImportFileInfoAction extends StandardJaxrsAction {
 				result = new ActionListAll().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceImportFileProcess(e, "获取所有已经上传成功的文件时发生异常！");
+				Exception exception = new ExceptionAttendanceImportFileProcess(e, "업로드된 전체 파일을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -55,13 +55,13 @@ public class AttendanceImportFileInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取已经上传成功的文件信息", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "ID로 업로드에 성공한 파일 정보 조회", action = ActionListAll.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("导入文件信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("가져오기 파일 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -71,7 +71,7 @@ public class AttendanceImportFileInfoAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceImportFileProcess(e, "根据ID获取已经上传成功的文件信息时发生异常！");
+				Exception exception = new ExceptionAttendanceImportFileProcess(e, "ID로 업로드된 파일 정보를 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -79,13 +79,13 @@ public class AttendanceImportFileInfoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除已经上传成功的文件以及文件信息", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 업로드에 성공한 파일 및 파일 정보 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("导入文件信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("가져오기 파일 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -95,7 +95,7 @@ public class AttendanceImportFileInfoAction extends StandardJaxrsAction {
 				result = new ActionDelete().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceImportFileProcess(e, "根据ID删除已经上传成功的文件以及文件信息时发生异常！");
+				Exception exception = new ExceptionAttendanceImportFileProcess(e, "ID로 업로드된 파일과 파일 정보를 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

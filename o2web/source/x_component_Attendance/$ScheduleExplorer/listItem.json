@@ -58,7 +58,7 @@
   },
 
 //  {
-//    "title" : "早退起算时间",
+//    "title" : "조퇴 기준 시간",
 //    "headStyles" : "normalThNode",
 //    "contentStyles" : "normalTdNode",
 //    "item" : "leaveEarlyStartTime",

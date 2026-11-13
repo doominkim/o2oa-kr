@@ -110,25 +110,25 @@
                 </td>
             </tr>
             <!--<tr>-->
-                <!--<td class="editTableTitle">群　　组:</td>-->
+                <!--<td class="editTableTitle">그룹:</td>-->
                 <!--<td class="editTableValue">-->
                     <!--<div class="MWFPersonGroup" name="groupValue" type="group"></div>-->
                 <!--</td>-->
             <!--</tr>-->
             <!--<tr>-->
-            <!--<td class="editTableTitle">部　　门:</td>-->
+            <!--<td class="editTableTitle">부서:</td>-->
             <!--<td class="editTableValue">-->
             <!--<div class="MWFPersonDepartment" name="departmentValue" type="department"></div>-->
             <!--</td>-->
             <!--</tr>-->
             <!--<tr>-->
-            <!--<td class="editTableTitle">公　　司:</td>-->
+            <!--<td class="editTableTitle">회사:</td>-->
             <!--<td class="editTableValue">-->
             <!--<div class="MWFPersonCompany" name="companyValue" type="company"></div>-->
             <!--</td>-->
             <!--</tr>-->
             <!--<tr>-->
-            <!--<td class="editTableTitle">职　　位:</td>-->
+            <!--<td class="editTableTitle">직위:</td>-->
             <!--<td class="editTableValue">-->
             <!--<div class="MWFDutySelector" name="dutyValue"></div>-->
             <!--</td>-->
@@ -262,7 +262,7 @@
                     </table>
 
                     <div id="text{$.pid}identityExpandSubEnable" style="border-bottom: 1px solid #999; ">
-                        <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过选择表单数据指定选择范围</div>-->
+                        <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">양식 데이터 선택으로 선택 범위 지정</div>-->
                         <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
                             <tr>
                                 <td class="editTableTitle">{{$.lp.expandNext}}:</td>
@@ -275,7 +275,7 @@
                     </div>
 
                     <div id="text{$.pid}identityRangeScriptValue" style="border-bottom: 1px solid #999; display: text{($.identityRange=='unit')?'block':'none'}; ">
-                        <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过选择表单数据指定选择范围</div>-->
+                        <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">양식 데이터 선택으로 선택 범위 지정</div>-->
                         <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
                             <tr>
                                 <td class="editTableTitle">{{$.lp.selectUnit}}:</td>
@@ -287,7 +287,7 @@
                             </tr>
                         </table>
 
-                        <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过编写脚本指定选择范围</div>-->
+                        <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">스크립트 작성으로 선택 범위 지정</div>-->
                         <div class="MWFFormulaArea" name="identityRangeKey" title="{{$.lp.script}} (S)"></div>
                     </div>
                 </div>
@@ -351,7 +351,7 @@
 
 
             <div id="text{$.pid}unitProperties" title="{{$.lp.unit}}" class="MWFTab" data-group="selectType" style="display: text{($.selectType.indexOf('unit')!=-1)?'block':'none'};">
-                <!--<div style="float: left">组织类型：</div><div class="MWFFormUnitTypeSelector" name="selectUnitType" style="float: left"></div>-->
+                <!--<div style="float: left">조직 유형: </div><div class="MWFFormUnitTypeSelector" name="selectUnitType" style="float: left"></div>-->
                 <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
                     <tr>
                         <td class="editTableTitle">{{$.lp.selectCount}}:</td>
@@ -415,7 +415,7 @@
                 </table>
 
                 <div id="text{$.pid}unitExpandSubEnable">
-                    <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过选择表单数据指定选择范围</div>-->
+                    <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">양식 데이터 선택으로 선택 범위 지정</div>-->
                     <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
                         <tr>
                             <td class="editTableTitle">{{$.lp.expandNext}}:</td>
@@ -450,7 +450,7 @@
                 <div style="border-bottom: 1px solid #999;"></div>
 
                 <div id="text{$.pid}unitRangeScriptValue" style="border-bottom: 1px solid #999; display: text{($.unitRange=='unit')?'block':'none'}; ">
-                    <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过选择表单数据指定选择范围</div>-->
+                    <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">양식 데이터 선택으로 선택 범위 지정</div>-->
                     <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
                         <tr>
                             <td class="editTableTitle">{{$.lp.selectUnit}}:</td>
@@ -462,7 +462,7 @@
                         </tr>
                     </table>
 
-                    <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">通过编写脚本指定选择范围</div>-->
+                    <!--<div style="height: 24px; line-height:24px; background-color: #EEE; padding: 0px 6px; border-top: 1px solid #999">스크립트 작성으로 선택 범위 지정</div>-->
                     <div class="MWFFormulaArea" name="unitRangeKey" title="{{$.lp.script}} (S)"></div>
                 </div>
             </div>

@@ -56,11 +56,11 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -3416878548938205004L;
 
-		@FieldDescribe("附件数量")
+		@FieldDescribe("첨부파일 수")
 		private Long attachmentCount;
-		@FieldDescribe("字节数")
+		@FieldDescribe("바이트 수")
 		private Long size;
-		@FieldDescribe("目录数量")
+		@FieldDescribe("디렉터리 수")
 		private Long folderCount;
 
 		public Long getAttachmentCount() {

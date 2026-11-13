@@ -28,7 +28,7 @@ public class ReviewService {
 	private UserManagerService userManagerService = new UserManagerService();
 	private static Logger logger = LoggerFactory.getLogger( ReviewService.class );
 	/**
-	 * 根据权限和条件查询符合要求的可见的所有Review总数
+	 * 권한과 조건에 맞는 열람 가능한 모든 Review 총수 조회
 	 * @param emc
 	 * @param personName
 	 * @param queryFilter
@@ -41,7 +41,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 根据权限和条件查询符合条件的可见的文档Review信息列表
+	 * 권한과 조건에 맞는 열람 가능한 문서 Review 정보 목록 조회
 	 * @param emc
 	 * @param pageSize
 	 * @param docSequence
@@ -59,7 +59,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 根据权限和条件查询符合条件的可见的文档Review信息列表
+	 * 권한과 조건에 맞는 열람 가능한 문서 Review 정보 목록 조회
 	 * @param emc
 	 * @param pageSize
 	 * @param docSequence
@@ -77,7 +77,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 根据条件查询指定条数符合条件的文档信息Review列表
+	 * 조건에 맞는 문서 정보 Review 목록을 지정한 건수만큼 조회
 	 * @param emc
 	 * @param orderField
 	 * @param orderType
@@ -104,7 +104,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 根据指定文档的权限信息重置或者刷新所有的Review信息
+	 * 지정 문서의 권한 정보로 모든 Review 정보 초기화 또는 새로 고침
 	 * @param emc
 	 * @param docId
 	 * @throws Exception
@@ -119,7 +119,7 @@ public class ReviewService {
 
 			if( DocumentStatus.DRAFT.getValue().equals( document.getDocStatus() ) ) {
 				logger.debug( "refreshDocumentReview -> refresh review for draft document: " + document.getTitle() );
-				//草稿只有拟稿人可以看见
+				//초안은 기안자만 볼 수 있음
 				List<String> persons = new ArrayList<>();
 				persons.add( document.getCreatorPerson() );
 				logger.debug( "refreshDocumentReview -> there are "+ persons.size() +" permission in this document: " + document.getTitle() );
@@ -131,12 +131,12 @@ public class ReviewService {
 				if(persons.contains("*")){
 					fullRead = true;
 				}
-				//将文档新的权限与数据库中的权限进行比对，新建或者更新
+				//문서의 새 권한을 데이터베이스의 권한과 비교하여 생성 또는 갱신
 				logger.debug( "refreshDocumentReview -> there are "+ persons.size() +" permission in this document: " + document.getTitle() );
 				refreshDocumentReview( emc, document, persons );
 			}else if( DocumentStatus.ARCHIVED.getValue().equals( document.getDocStatus() ) ) {
 				logger.debug( "refreshDocumentReview -> refresh review for archived document: " + document.getTitle() );
-				//归档的文档应该只有管理员和拟稿人能看见
+				//보관된 문서는 관리자와 기안자만 볼 수 있어야 함
 				List<String> persons = listPublishAndManagePersons( appInfo, categoryInfo, document );
 				logger.debug( "refreshDocumentReview -> there are "+ persons.size() +" permission in this document: " + document.getTitle() );
 				refreshDocumentReview( emc, document, persons );
@@ -149,7 +149,7 @@ public class ReviewService {
 
 	private List<String> listPublishAndManagePersons(AppInfo appInfo, CategoryInfo categoryInfo, Document document) throws Exception {
 		List<String> persons = new ArrayList<>();
-		persons.add( document.getCreatorPerson() ); //创建者
+		persons.add( document.getCreatorPerson() ); //작성자
 		persons = addListToList( persons, categoryInfo.getPublishablePersonList() );
 		persons = addPermissionObj( persons, categoryInfo.getPublishableUnitList() );
 		persons = addPermissionObj( persons, categoryInfo.getPublishableGroupList() );
@@ -166,7 +166,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将一个文档涉及到的所有权限转换为人员，如果是数据文档，就设置为全员可见
+	 * 문서에 관련된 모든 권한을 사용자로 변환, 데이터 문서이면 전원 열람으로 설정
 	 * @param appInfo
 	 * @param categoryInfo
 	 * @param document
@@ -180,7 +180,7 @@ public class ReviewService {
 		Boolean appInfoHasPermissionControl = appInfoPermissionExists(appInfo);
 
 		if( "数据".equals( document.getDocumentType() )) {
-			//数据默认在Review全部设置为全员可见，由栏目和分类来控制可见权限
+			//데이터는 기본적으로 Review에서 모두 전원 열람으로 설정하고 게시판과 분류로 열람 권한 제어
 			permissionObjs.add( "*" );
 			return permissionObjs;
 		}
@@ -191,39 +191,39 @@ public class ReviewService {
 					logger.debug("栏目没有阅读权限限制，分类没有阅读权限限制，文档没有阅读权限限制。文档所有人可见：*");
 					permissionObjs.add( "*" );
 				}else {
-					logger.debug("栏目没有阅读权限限制，分类没有阅读权限限制，文档有阅读权限限制。文档可见范围以文档的权限为主");
+					logger.debug("게시판 열람 권한 제한 없음, 분류 열람 권한 제한 없음, 문서 열람 권한 제한 있음. 문서 열람 범위는 문서 권한 기준");
 					addDocumentAllPermission( permissionObjs, document, appInfo, categoryInfo);
 				}
-			}else {//分类有权限
+			}else {//분류 권한 있음
 				if( !documentHasPermissionControl ) {
-					logger.debug("栏目没有阅读权限限制，分类有阅读权限限制，文档没有阅读权限限制。文档可见范围以分类权限为主");
+					logger.debug("게시판 열람 권한 제한 없음, 분류 열람 권한 제한 있음, 문서 열람 권한 제한 없음. 문서 열람 범위는 분류 권한 기준");
 					addCategoryAllPermission( permissionObjs, document, categoryInfo, appInfo );
 				}else {
-					logger.debug("栏目没有阅读权限限制，分类有阅读权限限制，文档有阅读权限限制。文档可见范围以文档权限为主");
+					logger.debug("게시판 열람 권한 제한 없음, 분류 열람 권한 제한 있음, 문서 열람 권한 제한 있음. 문서 열람 범위는 문서 권한 기준");
 					addDocumentAllPermission( permissionObjs, document, appInfo, categoryInfo);
 				}
 			}
-		}else {//栏目有权限
+		}else {//게시판 권한 있음
 			if( !categoryHasPermissionControl ) {
 				if( !documentHasPermissionControl ) {
-					logger.debug("栏目有阅读权限限制，分类没有阅读权限限制，文档没有阅读权限限制。文档可见范围以栏目的权限为主");
+					logger.debug("게시판 열람 권한 제한 있음, 분류 열람 권한 제한 없음, 문서 열람 권한 제한 없음. 문서 열람 범위는 게시판 권한 기준");
 					addAppInfoAllPermission( permissionObjs, document, categoryInfo, appInfo );
 				}else {
-					logger.debug("栏目有阅读权限限制，分类没有阅读权限限制，文档有阅读权限限制。文档可见范围以文档的权限为主");
+					logger.debug("게시판 열람 권한 제한 있음, 분류 열람 권한 제한 없음, 문서 열람 권한 제한 있음. 문서 열람 범위는 문서 권한 기준");
 					addDocumentAllPermission( permissionObjs, document, appInfo, categoryInfo);
 				}
-			}else {//分类有权限
+			}else {//분류 권한 있음
 				if( !documentHasPermissionControl ) {
-					logger.debug("栏目有阅读权限限制，分类有阅读权限限制，文档没有阅读权限限制。文档可见范围以分类权限为主");
+					logger.debug("게시판 열람 권한 제한 있음, 분류 열람 권한 제한 있음, 문서 열람 권한 제한 없음. 문서 열람 범위는 분류 권한 기준");
 					addCategoryAllPermission( permissionObjs, document, categoryInfo, appInfo);
 				}else {
-					logger.debug("栏目有阅读权限限制，分类有阅读权限限制，文档有阅读权限限制。文档可见范围以文档权限为主");
+					logger.debug("게시판 열람 권한 제한 있음, 분류 열람 권한 제한 있음, 문서 열람 권한 제한 있음. 문서 열람 범위는 문서 권한 기준");
 					addDocumentAllPermission( permissionObjs, document, appInfo, categoryInfo);
 				}
 			}
 		}
 		if( permissionObjs.contains("*")) {
-			//如果是全员可见，那么只需要保留一个权限记录即可
+			//전원 열람이면 권한 기록 하나만 보존하면 됨
 			permissionObjs.clear();
 			logger.debug(">>>>>>>Document all person can read. document has read permission *， clean all other permissions. ");
 			permissionObjs.add( "*" );
@@ -232,7 +232,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 判断文档是否存在访问权限控制
+	 * 문서에 접근 권한 제어가 있는지 판단
 	 * @param document
 	 * @return
 	 */
@@ -261,7 +261,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 判断分类是否存在访问权限控制
+	 * 분류에 접근 권한 제어가 있는지 판단
 	 * @param categoryInfo
 	 * @return
 	 */
@@ -284,7 +284,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 判断栏目是否存在访问权限控制
+	 * 게시판에 접근 권한 제어가 있는지 판단
 	 * @param appInfo
 	 * @return
 	 */
@@ -307,7 +307,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将栏目所有的权限全部添加到权限列表里
+	 * 게시판의 모든 권한을 권한 목록에 추가
 	 * @param permissionObjs
 	 * @param appInfo
 	 * @return
@@ -363,7 +363,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将分类所有的权限全部添加到权限列表里
+	 * 분류의 모든 권한을 권한 목록에 추가
 	 * @param permissionObjs
 	 * @param categoryInfo
 	 * @return
@@ -419,7 +419,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将文档内所有的权限全部添加到权限列表里
+	 * 문서 내 모든 권한을 권한 목록에 추가
 	 * @param permissionObjs
 	 * @param document
 	 * @return
@@ -444,16 +444,16 @@ public class ReviewService {
 		if( !permissionObjs.contains( document.getCreatorPerson() )) {
 			permissionObjs.add( document.getCreatorPerson() );
 		}
-		if( ListTools.isNotEmpty( document.getAuthorPersonList() ) ) {//文档编辑者
+		if( ListTools.isNotEmpty( document.getAuthorPersonList() ) ) {//문서 편집자
 			addPermissionObj( permissionObjs, document.getAuthorPersonList() );
 		}
-		if( ListTools.isNotEmpty( document.getAuthorUnitList() ) ) {//文档编辑者-组织
+		if( ListTools.isNotEmpty( document.getAuthorUnitList() ) ) {//문서 편집자-조직
 			addPermissionObj( permissionObjs, document.getAuthorUnitList() );
 		}
-		if( ListTools.isNotEmpty( document.getAuthorGroupList() ) ) {//文档编辑者-群组
+		if( ListTools.isNotEmpty( document.getAuthorGroupList() ) ) {//문서 편집자-그룹
 			addPermissionObj( permissionObjs, document.getAuthorUnitList() );
 		}
-		if( ListTools.isNotEmpty( document.getManagerList())) { //文档管理员
+		if( ListTools.isNotEmpty( document.getManagerList())) { //문서 관리자
 			addPermissionObj( permissionObjs, document.getManagerList() );
 		}
 		if( ListTools.isNotEmpty( categoryInfo.getManageablePersonList())) {
@@ -478,7 +478,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将指定的权限名称拆解人员，添加到permissionObjs，并且返回
+	 * 지정 권한 이름을 사용자로 분해하여 permissionObjs에 추가하고 반환
 	 * @param permissionObjs
 	 * @param objNames
 	 * @return
@@ -496,7 +496,7 @@ public class ReviewService {
 			for( String objName : objNames ) {
 				if(StringUtils.isNotEmpty(objName)){
 					if( objName.trim().endsWith( "@P" ) ) {
-						//直接加入人员
+						//사용자 직접 추가
 						array = objName.split("@");
 						if( array.length == 2){
 							person = userManagerService.getPerson(array[0]);
@@ -505,8 +505,8 @@ public class ReviewService {
 							}
 						}
 						addStringToList( permissionObjs, objName );
-					}else if( objName.trim().endsWith( "@I" ) ) {//将Identity转换为人员
-						//从身份到人员
+					}else if( objName.trim().endsWith( "@I" ) ) {//Identity를 사용자로 변환
+						//신분에서 사용자로
 						array = objName.split("@");
 						if( array.length == 2){
 							result = userManagerService.getPersonNameWithIdentity(array[0]);
@@ -514,16 +514,16 @@ public class ReviewService {
 							result = userManagerService.getPersonNameWithIdentity( objName );
 						}
 						addStringToList( permissionObjs, result );
-					}else if( objName.trim().endsWith( "@U" ) ) {//将组织拆解为人员
-						//判断一下，如果不是顶层组织，就或者顶层组织不唯一，才将组织解析为人员
+					}else if( objName.trim().endsWith( "@U" ) ) {//조직을 사용자로 분해
+						//최상위 조직이 아니거나 최상위 조직이 유일하지 않을 때만 조직을 사용자로 해석
 						if( !userManagerService.isTopUnit( objName ) || userManagerService.countTopUnit() > 1 ) {
 							persons = userManagerService.listPersonWithUnit( objName );
 							permissionObjs = addListToList( permissionObjs, persons );
 						}else {
-							//如果是顶层组织，并且顶层组织只有一个
+							//최상위 조직이고 최상위 조직이 하나뿐이면
 							addStringToList( permissionObjs, "*" );
 						}
-					}else if( objName.trim().endsWith( "@G" ) ) {//将群组拆解为人员
+					}else if( objName.trim().endsWith( "@G" ) ) {//그룹을 사용자로 분해
 						persons = userManagerService.listPersonWithGroup( objName );
 						permissionObjs = addListToList( permissionObjs, persons );
 					}else if( objName.trim().endsWith( "@R" ) ) {
@@ -539,7 +539,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将字符串添加到集合里，去重
+	 * 문자열을 집합에 추가, 중복 제거
 	 * @param list
 	 * @param string
 	 * @return list
@@ -555,7 +555,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将字符串列表添加到集合里，去重
+	 * 문자열 목록을 집합에 추가, 중복 제거
 	 * @param list
 	 * @param list2
 	 * @return list
@@ -577,7 +577,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 将指定文档的Review刷新为指定的人员可见
+	 * 지정 문서의 Review를 지정 사용자 열람으로 새로 고침
 	 * @param emc
 	 * @param document
 	 * @param permissionPersons
@@ -587,10 +587,10 @@ public class ReviewService {
 		Business business = new Business(emc);
 		Set<String> permissionSet = new HashSet<>(permissionPersons);
 		permissionPersons.clear();
-		//先检查该文档是否存在Review信息
+		//먼저 해당 문서의 Review 정보 존재 여부 확인
 		List<String> oldReviewIds = business.reviewFactory().listByDocument( document.getId(), null );
 
-		//先删除原来所有的Review信息
+		//먼저 기존 Review 정보 모두 삭제
 		if( ListTools.isNotEmpty( oldReviewIds )) {
 			emc.beginTransaction( Review.class );
 			int i = 0;
@@ -610,7 +610,7 @@ public class ReviewService {
 			emc.commit();
 		}
 
-		//再添加新的Review信息
+		//새 Review 정보 추가
 		if( permissionSet.size() > 0) {
 			emc.beginTransaction( Review.class );
 			Person personObj = null;
@@ -618,7 +618,7 @@ public class ReviewService {
 			int i = 0;
 			for( String person : permissionSet ) {
 				if( !person.equalsIgnoreCase( "*" )) {
-					//检查一下个人是否存在，防止姓名或者唯一标识变更过了导致文档权限不正确
+					//개인이 존재하는지 확인, 이름이나 고유 식별자 변경으로 문서 권한이 잘못되는 것 방지
 					personObj = userManagerService.getPerson( person );
 					if( personObj != null ) {
 						personName = personObj.getDistinguishedName();
@@ -627,7 +627,7 @@ public class ReviewService {
 					personName = "*";
 				}
 				if( StringUtils.isNotEmpty( personName )) {
-					//查询一下，数据库里， 是否有相同的数据，如果有，就不再添加了
+					//데이터베이스에 동일한 데이터가 있는지 조회, 있으면 추가하지 않음
 					oldReviewIds = business.reviewFactory().listByDocumentAndPerson( document.getId(), personName );
 					if( ListTools.isEmpty( oldReviewIds )) {
 						Review review = createReviewWithDocument( document, personName );
@@ -647,7 +647,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 给集合去重复
+	 * 집합 중복 제거
 	 * @param permissionPersons
 	 * @return
 	 */
@@ -665,7 +665,7 @@ public class ReviewService {
 
 	/**
 	 *
-	 * 根据栏目，分类，文档信息以及可见权限来组织一个Review对象
+	 * 게시판, 분류, 문서 정보와 열람 권한으로 Review 객체 구성
 	 * @param document
 	 * @param person
 	 * @return
@@ -712,7 +712,7 @@ public class ReviewService {
 	}
 
 	/**
-	 * 根据指定文档删除所有的Review信息
+	 * 지정 문서의 모든 Review 정보 삭제
 	 * @param emc
 	 * @param docId
 	 * @throws Exception
@@ -721,7 +721,7 @@ public class ReviewService {
 		Business business = new Business(emc);
 		Integer maxQueryCount = 1000;
 		Long count = business.reviewFactory().countByDocuemnt(docId);
-		Long maxTimes = count/maxQueryCount + 1 + 1; //多补偿一次
+		Long maxTimes = count/maxQueryCount + 1 + 1; //한 번 더 보정
 		List<Review> reviewList = null;
 		List<String> ids = null;
 		for( int i = 0 ; i <= maxTimes; i++ ) {

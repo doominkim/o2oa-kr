@@ -32,7 +32,7 @@ class ActionUpdateWithWork extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		Work work = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 防止提交空数据清空data
+			// 빈 데이터 제출로 data가 비워지는 것을 방지
 			if (null == jsonElement || (!jsonElement.isJsonObject())) {
 				throw new ExceptionNotJsonObject();
 			}

@@ -7,6 +7,6 @@ class ExceptionNotFoundTaskOrTaskCompleted extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionNotFoundTaskOrTaskCompleted(String flag) {
-		super("无法找到待办或者已办,标识:{}.", flag);
+		super("결재 대기 또는 결재 완료를 찾을 수 없습니다, 식별자: {}.", flag);
 	}
 }

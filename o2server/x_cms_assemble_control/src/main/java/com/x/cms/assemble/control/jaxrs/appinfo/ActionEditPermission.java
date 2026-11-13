@@ -20,7 +20,7 @@ import com.x.cms.assemble.control.service.LogService;
 import com.x.cms.core.entity.AppInfo;
 
 /**
- * 修改栏目权限
+ * 게시판 권한 수정
  * @author sword
  */
 public class ActionEditPermission extends BaseAction {

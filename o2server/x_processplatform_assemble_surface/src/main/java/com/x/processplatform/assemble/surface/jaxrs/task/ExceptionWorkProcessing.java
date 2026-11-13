@@ -7,7 +7,7 @@ class ExceptionWorkProcessing extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionWorkProcessing(String id) {
-		super("工作 {} 处理失败.", id);
+		super("문서 {} 처리에 실패했습니다.", id);
 	}
 
 }

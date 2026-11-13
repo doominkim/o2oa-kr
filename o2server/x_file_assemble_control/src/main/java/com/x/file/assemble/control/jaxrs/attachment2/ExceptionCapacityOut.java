@@ -7,7 +7,7 @@ class ExceptionCapacityOut extends PromptException {
 	private static final long serialVersionUID = 5186249956453089454L;
 
 	ExceptionCapacityOut(long curCapacity, long limitCapacity) {
-		super("超过文件存储容量，当前将使用: {}M，限制使用：{}M", curCapacity, limitCapacity);
+		super("저장 용량을 초과했습니다. 사용 예정: {}M, 한도: {}M", curCapacity, limitCapacity);
 	}
 
 }

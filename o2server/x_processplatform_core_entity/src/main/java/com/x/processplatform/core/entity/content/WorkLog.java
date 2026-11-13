@@ -39,7 +39,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "WorkLog", description = "流程平台工作日志.")
+@Schema(name = "WorkLog", description = "프로세스 플랫폼 업무 로그.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.WorkLog.table, uniqueConstraints = {
@@ -61,13 +61,13 @@ public class WorkLog extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("工作日志标识.")
-	@Schema(description = "工作日志标识.")
+	@FieldDescribe("업무 로그 식별자.")
+	@Schema(description = "업무 로그 식별자.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	// 以上为 JpaObject 默认字段
+	// 위는 JpaObject 기본 필드
 
 	public void onPersist() throws Exception {
 		// nothing
@@ -87,9 +87,9 @@ public class WorkLog extends SliceJpaObject {
 
 	public static List<WorkLog> downTo(List<WorkLog> workLogs, List<WorkLog> arrivedWorkLogs,
 			ActivityType activityType) {
-		Set<WorkLog> all = new HashSet<>(workLogs); // 使用 HashSet 提高查找性能
-		Set<WorkLog> set = new HashSet<>(); // 使用 HashSet 避免重复
-		Set<WorkLog> loop = new HashSet<>(arrivedWorkLogs); // 使用 HashSet 避免重复
+		Set<WorkLog> all = new HashSet<>(workLogs); // HashSet으로 검색 성능 향상
+		Set<WorkLog> set = new HashSet<>(); // HashSet 사용으로 중복 방지
+		Set<WorkLog> loop = new HashSet<>(arrivedWorkLogs); // HashSet 사용으로 중복 방지
 		while (!loop.isEmpty()) {
 			Set<WorkLog> next = new HashSet<>();
 			for (WorkLog o : loop) {
@@ -102,10 +102,10 @@ public class WorkLog extends SliceJpaObject {
 							}
 						});
 			}
-			all.removeAll(next); // 更新 all
-			loop = next; // 更新 loop 为下一轮的过滤条件
+			all.removeAll(next); // all 갱신
+			loop = next; // loop를 다음 회차 필터 조건으로 갱신
 		}
-		return new ArrayList<>(set); // 返回结果列表
+		return new ArrayList<>(set); // 결과 목록 반환
 	}
 
 	public static WorkLog createFromWork(Work work, Activity activity, String token, Date date) throws Exception {
@@ -146,8 +146,8 @@ public class WorkLog extends SliceJpaObject {
 
 	public static final String SPLITVALUELIST_FIELDNAME = "splitValueList";
 	@Transient
-	@FieldDescribe("拆分值列表.")
-	@Schema(description = "拆分值列表.")
+	@FieldDescribe("분할 값 목록.")
+	@Schema(description = "분할 값 목록.")
 	private List<String> splitValueList;
 
 	public List<String> getSplitValueList() {
@@ -164,8 +164,8 @@ public class WorkLog extends SliceJpaObject {
 
 	public static final String SPLITTOKENLIST_FIELDNAME = "splitTokenList";
 	@Transient
-	@FieldDescribe("拆分标识列表.")
-	@Schema(description = "拆分标识列表.")
+	@FieldDescribe("분할 식별자 목록.")
+	@Schema(description = "분할 식별자 목록.")
 	private List<String> splitTokenList;
 
 	public List<String> getSplitTokenList() {
@@ -179,7 +179,7 @@ public class WorkLog extends SliceJpaObject {
 
 	public static final String GOBACKFROMACTIVITYTYPE_FIELDNAME = "goBackFromActivityType";
 	@Transient
-	@FieldDescribe("退回发起活动环节类型.")
+	@FieldDescribe("반려를 시작한 활동 단계 유형.")
 	private ActivityType goBackFromActivityType;
 
 	public ActivityType getGoBackFromActivityType() {
@@ -196,7 +196,7 @@ public class WorkLog extends SliceJpaObject {
 
 	public static final String GOBACKFROMACTIVITY_FIELDNAME = "goBackFromActivity";
 	@Transient
-	@FieldDescribe("退回发起活动环节标识.")
+	@FieldDescribe("반려를 시작한 활동 단계 식별자.")
 	private String goBackFromActivity;
 
 	public String getGoBackFromActivity() {
@@ -213,7 +213,7 @@ public class WorkLog extends SliceJpaObject {
 
 	public static final String GOBACKFROMACTIVITYTOKEN_FIELDNAME = "goBackFromActivityToken";
 	@Transient
-	@FieldDescribe("退回发起活动环节令牌.")
+	@FieldDescribe("반려를 시작한 활동 단계 토큰.")
 	private String goBackFromActivityToken;
 
 	public String getGoBackFromActivityToken() {
@@ -230,7 +230,7 @@ public class WorkLog extends SliceJpaObject {
 
 	public static final String TICKETS_FIELDNAME = "tickets";
 	@Transient
-	@FieldDescribe("退回发起活动环节令牌.")
+	@FieldDescribe("반려를 시작한 활동 단계 토큰.")
 	private Tickets tickets;
 
 	public Tickets getTickets() {
@@ -257,47 +257,47 @@ public class WorkLog extends SliceJpaObject {
 	}
 
 	public static final String JOB_FIELDNAME = "job";
-	@FieldDescribe("任务标识.")
-	@Schema(description = "任务标识.")
+	@FieldDescribe("작업 식별자.")
+	@Schema(description = "작업 식별자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + JOB_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + JOB_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String WORK_FIELDNAME = "work";
-	@FieldDescribe("工作标识.")
-	@Schema(description = "工作标识.")
+	@FieldDescribe("업무 문서 식별자.")
+	@Schema(description = "업무 문서 식별자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + WORK_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + WORK_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String work;
 
 	public static final String WORKCOMPLETED_FIELDNAME = "workCompleted";
-	@FieldDescribe("已完成工作标识.")
-	@Schema(description = "已完成工作标识.")
+	@FieldDescribe("완료된 업무 문서 식별자.")
+	@Schema(description = "완료된 업무 문서 식별자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + WORKCOMPLETED_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + WORKCOMPLETED_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String workCompleted;
 
 	public static final String COMPLETED_FIELDNAME = "completed";
-	// 必填
-	@FieldDescribe("工作是否已经完成.")
-	@Schema(description = "工作是否已经完成.")
+	// 필수
+	@FieldDescribe("업무 문서 완료 여부.")
+	@Schema(description = "업무 문서 완료 여부.")
 	@Column(name = ColumnNamePrefix + COMPLETED_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean completed;
 
 	public static final String FROMACTIVITY_FIELDNAME = "fromActivity";
-	@FieldDescribe("开始活动标识.")
-	@Schema(description = "开始活动标识.")
+	@FieldDescribe("시작 활동 식별자.")
+	@Schema(description = "시작 활동 식별자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + FROMACTIVITY_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + FROMACTIVITY_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String fromActivity;
 
 	public static final String FROMACTIVITYTYPE_FIELDNAME = "fromActivityType";
-	@FieldDescribe("开始活动类型.")
+	@FieldDescribe("시작 활동 유형.")
 	@Index(name = TABLE + IndexNameMiddle + FROMACTIVITYTYPE_FIELDNAME)
 	@Enumerated(EnumType.STRING)
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + FROMACTIVITYTYPE_FIELDNAME)
@@ -305,53 +305,53 @@ public class WorkLog extends SliceJpaObject {
 	private ActivityType fromActivityType;
 
 	public static final String FROMACTIVITYNAME_FIELDNAME = "fromActivityName";
-	@FieldDescribe("开始活动名称.")
+	@FieldDescribe("시작 활동 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ FROMACTIVITYNAME_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromActivityName;
 
 	public static final String FROMACTIVITYALIAS_FIELDNAME = "fromActivityAlias";
-	@FieldDescribe("开始活动别名.")
+	@FieldDescribe("시작 활동 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + FROMACTIVITYALIAS_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromActivityAlias;
 
 	public static final String FROMACTIVITYTOKEN_FIELDNAME = "fromActivityToken";
-	@FieldDescribe("开始节点Token")
+	@FieldDescribe("시작 노드 Token")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + FROMACTIVITYTOKEN_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + FROMACTIVITYTOKEN_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String fromActivityToken;
 
 	public static final String FROMGROUP_FIELDNAME = "fromGroup";
-	@FieldDescribe("开始分组")
+	@FieldDescribe("시작 그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + FROMGROUP_FIELDNAME)
 	private String fromGroup;
 
 	public static final String FROMOPINIONGROUP_FIELDNAME = "fromOpinionGroup";
-	@FieldDescribe("开始意见分组")
+	@FieldDescribe("시작 의견 그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + FROMOPINIONGROUP_FIELDNAME)
 	private String fromOpinionGroup;
 
 	public static final String FROMTIME_FIELDNAME = "fromTime";
-	@FieldDescribe("开始时间.")
+	@FieldDescribe("시작 시간.")
 	@Column(name = ColumnNamePrefix + FROMTIME_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + FROMTIME_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date fromTime;
 
 	public static final String ARRIVEDACTIVITY_FIELDNAME = "arrivedActivity";
-	@FieldDescribe("结束活动Id，可能为空，如果是未Connected的流程记录")
+	@FieldDescribe("종료 활동 Id, 비어 있을 수 있음, Connected되지 않은 프로세스 기록인 경우")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + ARRIVEDACTIVITY_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + ARRIVEDACTIVITY_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String arrivedActivity;
 
 	public static final String ARRIVEDACTIVITYTYPE_FIELDNAME = "arrivedActivityType";
-	@FieldDescribe("结束活动类型.")
+	@FieldDescribe("종료 활동 유형.")
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + ARRIVEDACTIVITYTYPE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + ARRIVEDACTIVITYTYPE_FIELDNAME)
 	@Enumerated(EnumType.STRING)
@@ -359,91 +359,91 @@ public class WorkLog extends SliceJpaObject {
 	private ActivityType arrivedActivityType;
 
 	public static final String ARRIVEDACTIVITYNAME_FIELDNAME = "arrivedActivityName";
-	@FieldDescribe("结束活动名称.")
+	@FieldDescribe("종료 활동 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ ARRIVEDACTIVITYNAME_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String arrivedActivityName;
 
 	public static final String ARRIVEDACTIVITYALIAS_FIELDNAME = "arrivedActivityAlias";
-	@FieldDescribe("结束活动别名.")
+	@FieldDescribe("종료 활동 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + ARRIVEDACTIVITYALIAS_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String arrivedActivityAlias;
 
 	public static final String ARRIVEDACTIVITYTOKEN_FIELDNAME = "arrivedActivityToken";
-	@FieldDescribe("结束活动Token.")
+	@FieldDescribe("종료 활동 Token.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + ARRIVEDACTIVITYTOKEN_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + ARRIVEDACTIVITYTOKEN_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String arrivedActivityToken;
 
 	public static final String ARRIVEDGROUP_FIELDNAME = "arrivedGroup";
-	@FieldDescribe("到达分组")
+	@FieldDescribe("도착 그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + ARRIVEDGROUP_FIELDNAME)
 	private String arrivedGroup;
 
 	public static final String ARRIVEDOPINIONGROUP_FIELDNAME = "arrivedOpinionGroup";
-	@FieldDescribe("到达意见分组")
+	@FieldDescribe("도착 의견 그룹")
 	@CheckPersist(allowEmpty = true)
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + ARRIVEDOPINIONGROUP_FIELDNAME)
 	private String arrivedOpinionGroup;
 
 	public static final String ARRIVEDTIME_FIELDNAME = "arrivedTime";
-	@FieldDescribe("完成时间.")
+	@FieldDescribe("완료 시간.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + ARRIVEDTIME_FIELDNAME)
 	private Date arrivedTime;
 
 	public static final String APPLICATION_FIELDNAME = "application";
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + APPLICATION_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String APPLICATIONNAME_FIELDNAME = "applicationName";
-	@FieldDescribe("应用名称.")
+	@FieldDescribe("앱 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ APPLICATIONNAME_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String applicationName;
 
 	public static final String APPLICATIONALIAS_FIELDNAME = "applicationAlias";
-	@FieldDescribe("应用别名.")
+	@FieldDescribe("앱 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ APPLICATIONALIAS_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String applicationAlias;
 
 	public static final String PROCESS_FIELDNAME = "process";
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + PROCESS_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String PROCESSNAME_FIELDNAME = "processName";
-	@FieldDescribe("流程名称.")
+	@FieldDescribe("프로세스 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ PROCESSNAME_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processName;
 
 	public static final String PROCESSALIAS_FIELDNAME = "processAlias";
-	@FieldDescribe("流程别名.")
+	@FieldDescribe("프로세스 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ PROCESSALIAS_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processAlias;
 
 	public static final String ROUTE_FIELDNAME = "route";
-	@FieldDescribe("到达节点使用的route ID.")
+	@FieldDescribe("도착 노드에서 사용한 route ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + ROUTE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String route;
 
 	public static final String ROUTENAME_FIELDNAME = "routeName";
-	@FieldDescribe("到达节点使用Route Name.")
+	@FieldDescribe("도착 노드에서 사용한 Route Name.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ ROUTENAME_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + ROUTENAME_FIELDNAME)
@@ -451,54 +451,54 @@ public class WorkLog extends SliceJpaObject {
 	private String routeName;
 
 	public static final String CONNECTED_FIELDNAME = "connected";
-	@FieldDescribe("是否已经完整填写了From和Arrived.")
+	@FieldDescribe("From과 Arrived 완전 입력 여부.")
 	@Column(name = ColumnNamePrefix + CONNECTED_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean connected;
 
 	public static final String DURATION_FIELDNAME = "duration";
-	@FieldDescribe("工作时长(分钟数).")
+	@FieldDescribe("업무 소요 시간(분).")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + DURATION_FIELDNAME)
 	private Long duration;
 
-	// 不需要索引
+	// 인덱스 불필요
 	public static final String SPLITTING_FIELDNAME = "splitting";
-	@FieldDescribe("是否是拆分中的工作,用于回溯时候将值改回去。")
+	@FieldDescribe("분할 중인 업무 문서 여부, 되돌릴 때 값을 원래대로 바꾸는 데 사용.")
 	@Column(name = ColumnNamePrefix + SPLITTING_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean splitting;
 
-	// 不需要索引
+	// 인덱스 불필요
 	public static final String SPLITTOKEN_FIELDNAME = "splitToken";
-	@FieldDescribe("拆分工作令牌,用于回溯时候将值改回去。")
+	@FieldDescribe("분할 업무 문서 토큰, 되돌릴 때 값을 원래대로 바꾸는 데 사용.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + SPLITTOKEN_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String splitToken;
 
-	// 不需要索引
+	// 인덱스 불필요
 	public static final String SPLITVALUE_FIELDNAME = "splitValue";
-	@FieldDescribe("拆分值,用于回溯时候将值改回去。")
+	@FieldDescribe("분할 값, 되돌릴 때 값을 원래대로 바꾸는 데 사용.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + SPLITVALUE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String splitValue;
 
 	public static final String SPLITWORK_FIELDNAME = "splitWork";
-	@FieldDescribe("拆分自工作")
+	@FieldDescribe("분할 원 업무 문서")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + SPLITWORK_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + SPLITWORK_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String splitWork;
 
 	public static final String TYPE_FIELDNAME = "type";
-	@FieldDescribe("类型,与ProcessingAttributes的type对应.")
+	@FieldDescribe("유형, ProcessingAttributes의 type에 대응.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + TYPE_FIELDNAME)
 	@Index(name = TABLE + TYPE_FIELDNAME + SPLITWORK_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String type;
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

@@ -5,14 +5,14 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public   class DingdingBaseMessage extends GsonPropertyObject {
 
 	/**
-	 * agent_id Number 必须 1234 企业开发者可在应用设置页面获取。ISV开发者可通过企业基本信息接口获取 userid_list
-	 * String 可选(userid_list,dept_id_list, to_all_user必须有一个不能为空) zhangsan,lisi
-	 * 接收者的用户userid列表，最大列表长度：20 dept_id_list String 可选 123,456 接收者的部门id列表，最大列表长度：20,
-	 * 接收者是部门id下(包括子部门下的所有用户) to_all_user Boolean 可选 false 是否发送给企业全部用户(ISV不能设置true)
-	 * msg Json 必须 {"msgtype":"text","text":{"content":"消息内容"}} msg markdown 消息格式
-	 * {"msgtype":"markdown","markdown":{"title":"消息内容",
-	 * "text":"[这是一个链接](http://o2oa.net)"}}
-	 * 消息内容，具体见“消息类型与数据格式”。最长不超过2048个字节。重复消息内容当日只能接收一次。
+	 * agent_id Number 필수 1234 기업 개발자는 앱 설정 페이지에서 확인 가능. ISV 개발자는 기업 기본 정보 인터페이스로 조회 가능 userid_list
+	 * String 선택(userid_list,dept_id_list, to_all_user 중 하나는 비어 있으면 안 됨) zhangsan,lisi
+	 * 수신자 userid 목록, 최대 목록 길이: 20 dept_id_list String 선택 123,456 수신자 부서 id 목록, 최대 목록 길이: 20,
+	 * 수신자는 부서 id 하위(하위 부서의 모든 사용자 포함) to_all_user Boolean 선택 false 기업 전체 사용자에게 발송 여부(ISV는 true 설정 불가)
+	 * msg Json 필수 {"msgtype":"text","text":{"content":"메시지 내용"}} msg markdown 메시지 형식
+	 * {"msgtype":"markdown","markdown":{"title":"메시지 내용",
+	 * "text":"[이것은 링크입니다](http://o2oa.net)"}}
+	 * 메시지 내용. 자세한 내용은 「메시지 유형과 데이터 형식」 참조. 최대 2048바이트. 동일한 메시지 내용은 당일 한 번만 수신 가능.
 	 */
 
 	private Long agent_id = 0L;
@@ -27,7 +27,7 @@ public   class DingdingBaseMessage extends GsonPropertyObject {
 		// {
 		// "msgtype": "text",
 		// "text": {
-		// "content": "张三的请假申请"
+		// "content": "홍길동의 휴가 신청"
 		// }
 		// }
 		private String msgtype = "text";
@@ -74,8 +74,8 @@ public   class DingdingBaseMessage extends GsonPropertyObject {
 	}
 
 	public static class Markdown {
-		private String title = "";// 消息头 文字
-		private String text = "";// markdown格式的消息
+		private String title = "";// 메시지 헤더 텍스트
+		private String text = "";// markdown 형식 메시지
 
 		public String getTitle() {
 			return title;

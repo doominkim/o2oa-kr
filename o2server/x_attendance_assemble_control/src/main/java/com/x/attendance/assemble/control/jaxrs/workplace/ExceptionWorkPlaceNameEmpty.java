@@ -7,6 +7,6 @@ public class ExceptionWorkPlaceNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionWorkPlaceNameEmpty() {
-		super("工作场所名称不允许为空，无法进行数据保存。");
+		super("근무 장소 이름이 비어 있어 데이터를 저장할 수 없습니다.");
 	}
 }

@@ -40,7 +40,7 @@ window.O2ProcessorMobile = new Class({
 
     },
     initConstant: function () {
-        this.DefaultDecisionOpinionName = "其它"; //默认的决策组，如果当前节点有决策组，但是某些决策没有落在决策组中，那么使用默认决策组
+        this.DefaultDecisionOpinionName = "기타"; //기본 결정 그룹. 현재 노드에 결정 그룹이 있지만 일부 결정이 결정 그룹에 속하지 않으면 기본 결정 그룹 사용
     },
     load: function ( defaultRoute ) {
         this.defaultRoute = defaultRoute || "";
@@ -49,10 +49,10 @@ window.O2ProcessorMobile = new Class({
         }else if (this.status === "closed" ) {
             this.node.show();
 
-            //强制刷新路由
+            //경로 강제 새로 고침
             //this.refreshRoute();
 
-            // this.positionSeted = false; //重新设置位置
+            // this.positionSeted = false; //위치 다시 설정
             // this.setSize( this.getCurrentRouteOrgList().length );
             var currentRoute = this.selectedRoute ? this.selectedRoute.retrieve("route") : "";
             if( currentRoute )this.showOrgsByRoute(currentRoute);
@@ -122,7 +122,7 @@ window.O2ProcessorMobile = new Class({
         if(this.routeSelectorArea)this.routeSelectorArea.empty();
 
         var orgLength = this.getMaxOrgLength();
-        if (orgLength === 0) { //流程选人数量为0
+        if (orgLength === 0) { //프로세스 사용자 선택 수가 0
             if (this.orgsTile) {
                 this.orgsTile.destroy();
                 this.orgsTile = null;
@@ -133,9 +133,9 @@ window.O2ProcessorMobile = new Class({
             }
         }
 
-        if (this.hasDecisionOpinion) { //有决策组
+        if (this.hasDecisionOpinion) { //결정 그룹 있음
             this.setRouteGroupList();
-        } else {  //没有决策组
+        } else {  //결정 그룹 없음
             if (this.routeGroupTitle) {
                 this.routeGroupTitle.destroy();
                 this.routeGroupTitle = null;
@@ -155,7 +155,7 @@ window.O2ProcessorMobile = new Class({
         this.getRouteGroupList();
 
         var orgLength = this.getMaxOrgLength();
-        if (orgLength === 0) { //流程选人数量为0
+        if (orgLength === 0) { //프로세스 사용자 선택 수가 0
             if (this.orgsTile) {
                 this.orgsTile.destroy();
                 this.orgsTile = null;
@@ -166,11 +166,11 @@ window.O2ProcessorMobile = new Class({
             }
         }
 
-        this.setOpinion(); //意见
+        this.setOpinion(); //의견
 
-        if (this.hasDecisionOpinion) { //有决策组
+        if (this.hasDecisionOpinion) { //결정 그룹 있음
             this.setRouteGroupList();
-        } else {  //没有决策组
+        } else {  //결정 그룹 없음
             if (this.routeGroupTitle) {
                 this.routeGroupTitle.destroy();
                 this.routeGroupTitle = null;
@@ -245,14 +245,14 @@ window.O2ProcessorMobile = new Class({
         var item = this.macro.form.get(name);
         return item ? item.getData() : null;
     },
-    getRouteConfigList: function () { //获取当前待办的所有路由设置
+    getRouteConfigList: function () { //현재 결재 대기의 모든 경로 설정 조회
         if(this.routeConfigList)return this.routeConfigList;
         if (this.form && this.form.businessData && this.form.businessData.task && this.form.businessData.task.routeNameDisable){
             this.routeConfigList = [{
                 "id": o2.uuid(),
                 "asyncSupported": false,
                 "soleDirect": false,
-                "name": "继续流转",
+                "name": "계속 진행",
                 "alias": "",
                 "selectConfigList": []
             }];
@@ -284,7 +284,7 @@ window.O2ProcessorMobile = new Class({
         }
         return this.routeConfigList;
     },
-    getRouteConfig: function (routeId) { //根据某个ID获取路由设置
+    getRouteConfig: function (routeId) { //ID로 경로 설정 조회
         var routeList = this.getRouteConfigList();
         for (var i = 0; i < routeList.length; i++) {
             if (routeList[i].id === routeId) {
@@ -292,7 +292,7 @@ window.O2ProcessorMobile = new Class({
             }
         }
     },
-    getMaxOrgLength: function () { //获取当前待办下可能的最多选人组件个数
+    getMaxOrgLength: function () { //현재 결재 대기에서 가능한 최대 사용자 선택 컴포넌트 수 조회
         var routeList = this.getRouteConfigList();
         var length = 0;
         routeList.each(function (route) {
@@ -300,7 +300,7 @@ window.O2ProcessorMobile = new Class({
         }.bind(this));
         return length;
     },
-    getOrgConfig: function (routeId) { //获取人员选择配置
+    getOrgConfig: function (routeId) { //사용자 선택 설정 조회
         var routeList = this.getRouteConfigList();
         for (var i = 0; i < routeList.length; i++) {
             if (routeList[i].id === routeId) {
@@ -319,13 +319,13 @@ window.O2ProcessorMobile = new Class({
         return list;
     },
     isOrgHidden: function (d) {
-        if (d.hiddenScript && d.hiddenScript.code) { //如果隐藏路由，返回
+        if (d.hiddenScript && d.hiddenScript.code) { //경로를 숨기면 반환
             var hidden = this.form.Macro.exec(d.hiddenScript.code, this);
             if (hidden && hidden.toString() === "true") return true;
         }
         return false;
     },
-    getCurrentRouteSelectorList: function () {  //获取当前路由的人员选择器对象
+    getCurrentRouteSelectorList: function () {  //현재 경로의 사용자 선택기 객체 조회
         var selectorList = [];
         var currentRoute = this.selectedRoute ? this.selectedRoute.retrieve("route") : "";
         var orgList = this.orgItemsObject[currentRoute];
@@ -337,13 +337,13 @@ window.O2ProcessorMobile = new Class({
         }.bind(this))
         return selectorList;
     },
-    getCurrentRouteOrgList: function () { //获取当前路由的org对象
+    getCurrentRouteOrgList: function () { //현재 경로의 org 객체 조회
         if( !this.orgItemsObject )return [];
         var currentRoute = this.selectedRoute ? this.selectedRoute.retrieve("route") : "";
         var orgList = this.orgItemsObject[currentRoute];
         return orgList || [];
     },
-    getSelectorSelectedData: function (filedName) {  //获取人员选择器选择的值
+    getSelectorSelectedData: function (filedName) {  //사용자 선택기에서 선택한 값 조회
         var data = [];
         var orgList = this.getCurrentRouteOrgList();
         for (var i = 0; i < orgList.length; i++) {
@@ -399,8 +399,8 @@ window.O2ProcessorMobile = new Class({
         if (this.orgsArea) this.orgsArea.hide();
     },
 
-    /*决策和决策组相关      开始*/
-    getRouteGroupList: function () {  //获取决策组并格式化成对象
+    /*결정 및 결정 그룹 관련      시작*/
+    getRouteGroupList: function () {  //결정 그룹을 조회해 객체로 변환
         if (this.routeGroupObject) return this.routeGroupObject;
         this.routeGroupObject = {};
         this.routeGroupNameList = [];
@@ -408,17 +408,17 @@ window.O2ProcessorMobile = new Class({
         var routeList = this.getRouteConfigList();
         routeList.each(function (route, i) {
 
-            if (route.hiddenScriptText && this.form && this.form.Macro) { //如果隐藏路由，返回
+            if (route.hiddenScriptText && this.form && this.form.Macro) { //경로를 숨기면 반환
                 if (this.form.Macro.exec(route.hiddenScriptText, this).toString() === "true") return;
             }
 
-            if (route.displayNameScriptText && this.form && this.form.Macro) { //如果有显示名称公式
+            if (route.displayNameScriptText && this.form && this.form.Macro) { //표시 이름 수식이 있는 경우
                 route.displayName = this.form.Macro.exec(route.displayNameScriptText, this);
             } else {
                 route.displayName = route.name;
             }
 
-            if (route.decisionOpinion) { //决策组名称
+            if (route.decisionOpinion) { //결정 그룹 이름
                 this.hasDecisionOpinion = true;
                 var decisionOpinionList = route.decisionOpinion.split("#");
                 decisionOpinionList.each(function (decisionOption) {
@@ -451,13 +451,13 @@ window.O2ProcessorMobile = new Class({
         }
         return obj;
     },
-    setRouteGroupList: function () {  //排序并创建决策组DOM对象
+    setRouteGroupList: function () {  //정렬 후 결정 그룹 DOM 객체 생성
         var _self = this;
 
         this.routeGroupNodeMap = {};
         this.routeGroupNodeList = [];
 
-        //根据决策组的排序号进行排序
+        //결정 그룹 정렬 번호로 정렬
         var keys = this.routeGroupNameList;
         keys.sort(function (a, b) {
             var aIdx = parseInt(this.splitByStartNumber(a).order || "9999999");
@@ -496,7 +496,7 @@ window.O2ProcessorMobile = new Class({
                 }
             });
 
-            if (keys.length === 1) {  //如果决策组只有1个，则默认选中
+            if (keys.length === 1) {  //결정 그룹이 1개뿐이면 기본 선택
                 this.selectRouteGroup(routeGroupNode);
                 flag = false;
             }else if( matchRoutes.length === 0 && this.defaultRoute ){
@@ -529,7 +529,7 @@ window.O2ProcessorMobile = new Class({
             node.setStyles(this.css.routeGroupNode);
         }
     },
-    selectRouteGroup: function (node) {  //选中决策组执行...
+    selectRouteGroup: function (node) {  //결정 그룹 선택 시 실행...
         if (this.selectedRouteGroup) {
             if (this.selectedRouteGroup.get("text") != node.get("text")) {
                 this.selectedRouteGroup.setStyles(this.css.routeGroupNode);
@@ -554,7 +554,7 @@ window.O2ProcessorMobile = new Class({
         }
         this.routeGroupArea.setStyle("background-color", "#FFF");
     },
-    setRouteList: function (routeList) { //创建决策对象
+    setRouteList: function (routeList) { //결정 객체 생성
         var _self = this;
         this.routeSelectorArea.empty();
         this.selectedRoute = null;
@@ -566,7 +566,7 @@ window.O2ProcessorMobile = new Class({
         var isSelectedDefault = false;
 
         routeList = routeList.filter(function (route, i) {
-            if (route.hiddenScriptText && this.form && this.form.Macro) {  //如果隐藏路由，返回
+            if (route.hiddenScriptText && this.form && this.form.Macro) {  //경로를 숨기면 반환
                 if (this.form.Macro.exec(route.hiddenScriptText, this).toString() === "true") return false;
             }
             return true;
@@ -574,7 +574,7 @@ window.O2ProcessorMobile = new Class({
 
         routeList.each(function (route, i) {
             var routeName = route.name;
-            if (route.displayNameScriptText && this.form && this.form.Macro) { //如果有显示名称公式
+            if (route.displayNameScriptText && this.form && this.form.Macro) { //표시 이름 수식이 있는 경우
                 routeName = this.form.Macro.exec(route.displayNameScriptText, this);
             }
             var routeNode = new Element("div", {
@@ -603,7 +603,7 @@ window.O2ProcessorMobile = new Class({
                 this.selectRoute(routeNode);
                 isSelected = true;
                 isSelectedDefault = true;
-            }else if ( !isSelectedDefault && (routeList.length == 1 || route.sole )) { //sole表示优先路由
+            }else if ( !isSelectedDefault && (routeList.length == 1 || route.sole )) { //sole은 우선 경로
                 this.selectRoute(routeNode);
                 isSelected = true;
             }
@@ -693,7 +693,7 @@ window.O2ProcessorMobile = new Class({
         }
 
     },
-    /*决策和决策组相关      结束*/
+    /*결정 및 결정 그룹 관련      끝*/
 
     setOpinion: function () {
         if (!this.inputTextarea) return;
@@ -774,7 +774,7 @@ window.O2ProcessorMobile = new Class({
         //var size = (this.options.mediaNode || this.node).getSize();
         //var y = size.y;
         //var x = size.x;
-        //兼容以前的默认高宽
+        //이전 기본 너비·높이와 호환
 
         var bodySize = $(document.body).getSize();
         var x = bodySize.x;
@@ -876,7 +876,7 @@ window.O2ProcessorMobile = new Class({
             MWF.xDesktop.notice(
                 "error",
                 {"x": "center", "y": "top"},
-                "请先选择决策组",
+                "먼저 결정 그룹을 선택하십시오",
                 this.routeGroupArea,
                 null,  //{"x": 0, "y": 30}
                 {"closeOnBoxClick": true, "closeOnBodyClick": true, "fixed": true, "delayClose": 6000}
@@ -892,7 +892,7 @@ window.O2ProcessorMobile = new Class({
                 move: false,
                 target: this.routeSelectorArea,
                 delayClose: 6000,
-                content: "请先选择决策"
+                content: "먼저 결정을 선택하십시오"
             });
             return false;
         }
@@ -915,7 +915,7 @@ window.O2ProcessorMobile = new Class({
                     move: false,
                     target: this.inputTextarea,
                     delayClose: 6000,
-                    content: "请填写意见"
+                    content: "의견을 입력하십시오"
                 });
                 return false;
             }
@@ -935,14 +935,14 @@ window.O2ProcessorMobile = new Class({
                     });
                     return false;
                 } else {
-                    //"路由校验失败"
+                    //"경로 검증에 실패했습니다"
                     new mBox.Notice({
                         type: "error",
                         position: {"x": "center", "y": "top"},
                         move: false,
                         target: this.node,
                         delayClose: 6000,
-                        content: "路由校验失败"
+                        content: "경로 검증에 실패했습니다"
                     });
                     return false;
                 }
@@ -970,7 +970,7 @@ window.O2ProcessorMobile = new Class({
                     move: false,
                     target: this.orgsArea,
                     delayClose: 6000,
-                    content: "没有配置转交人，请联系管理员" //"没有配置转交人，请联系管理员"
+                    content: "전달 대상자가 설정되지 않았습니다. 관리자에게 문의하십시오" //"전달 대상자가 설정되지 않았습니다. 관리자에게 문의하십시오"
                 });
                 return false;
             } else {
@@ -991,7 +991,7 @@ window.O2ProcessorMobile = new Class({
                     move: false,
                     target: this.orgsArea,
                     delayClose: 6000,
-                    content: "请选择转交人"
+                    content: "전달 대상자를 선택하십시오"
                 });
                 return;
             }
@@ -1011,11 +1011,11 @@ window.O2ProcessorMobile = new Class({
                     );
                     return false;
                 } else {
-                    //"路由校验失败"
+                    //"경로 검증에 실패했습니다"
                     MWF.xDesktop.notice(
                         "error",
                         {"x": "center", "y": "center"},
-                        "路由校验失败",
+                        "경로 검증에 실패했습니다",
                         this.node,
                         {"x": 0, "y": 30},
                         {"closeOnBoxClick": true, "closeOnBodyClick": true, "fixed": true, "delayClose": 6000}
@@ -1285,7 +1285,7 @@ window.O2ProcessorMobile = new Class({
 
         var empowerNode = new Element("div.empowerNode", {"styles": this.css.empowerNode});
         var empowerTitleNode = new Element("div", {
-            text: "下列人员对工作进行了授权，选择后文件将发送给被授权人，取消选择后文件将发送给授权者本人",
+            text: "다음 사용자가 업무를 위임했습니다. 선택하면 문서가 위임받은 사람에게, 선택을 해제하면 위임한 본인에게 전송됩니다",
             styles: this.css.empowerTitleNode
         }).inject(empowerNode);
 
@@ -1359,7 +1359,7 @@ window.O2ProcessorMobile = new Class({
             "style": this.css.mask
         });
         this.empowerDlg = o2.DL.open({
-            "title": "授权人员替换选择",
+            "title": "위임 사용자 대체 선택",
             "style": this.form.json.dialogStyle || "user",
             "isResize": false,
             "content": empowerNode,
@@ -1370,7 +1370,7 @@ window.O2ProcessorMobile = new Class({
             "buttonList": [
                 {
                     "type": "ok",
-                    "text": "确定",
+                    "text": "확인",
                     "action": function (d, e) {
                         //if (this.empowerDlg) this.empowerDlg.okButton.click();
 
@@ -1387,7 +1387,7 @@ window.O2ProcessorMobile = new Class({
                 },
                 {
                     "type": "cancel",
-                    "text": "取消",
+                    "text": "취소",
                     "action": function () {
                         this.node.getParent().unmask();
                         this.empowerDlg.close();
@@ -1551,7 +1551,7 @@ O2ProcessorMobile.Org = new Class({
         this.setOptions(options);
     },
     load : function(){
-        setTimeout( function(){ //如果有输入法界面，这个时候页面的计算不对，所以等100毫秒
+        setTimeout( function(){ //입력기 화면이 있으면 이때 페이지 계산이 맞지 않으므로 100밀리초 대기
             var options = this.getOptions();
             if(options){
                 //this.selector = new MWF.O2Selector(this.container, options);
@@ -1591,13 +1591,13 @@ O2ProcessorMobile.Org = new Class({
             identityOpt = this.identityOptions.getOptions();
             if (this.json.identityRange!=="all"){
                 if ( !identityOpt.noUnit && (!identityOpt.units || !identityOpt.units.length) ){
-                    this.form.notice("无法确定身份的选择范围", "error", this.node);
+                    this.form.notice("신분 선택 범위를 확인할 수 없습니다", "error", this.node);
                     return false;
                 }
             }
             if ( !identityOpt.noUnit && this.json.dutyRange && this.json.dutyRange!=="all"){
                 if (!identityOpt.dutys || !identityOpt.dutys.length){
-                    this.form.notice("无法确定职务的选择范围", "error", this.node);
+                    this.form.notice("직무 선택 범위를 확인할 수 없습니다", "error", this.node);
                     return false;
                 }
             }
@@ -1614,7 +1614,7 @@ O2ProcessorMobile.Org = new Class({
             unitOpt = this.unitOptions.getOptions();
             if (this.json.unitRange!=="all"){
                 if ( !unitOpt.units || !unitOpt.units.length){
-                    this.form.notice("无法确定组织的选择范围", "error", this.node);
+                    this.form.notice("조직 선택 범위를 확인할 수 없습니다", "error", this.node);
                     return false;
                 }
             }
@@ -1686,7 +1686,7 @@ O2ProcessorMobile.Org = new Class({
                 {
                     "type": this.selectTypeList[0],
                     "onLoad": function(){
-                        //this 为 selector
+                        //this는 selector
                         _self.selectOnLoad(this, this.selector )
                     }
                     //"onComplete": function(items){
@@ -1704,7 +1704,7 @@ O2ProcessorMobile.Org = new Class({
                 "type" : "",
                 "types" : this.selectTypeList,
                 "onLoad": function(){
-                    //this 为 selector
+                    //this는 selector
                     _self.selectOnLoad(this)
                 }
                 //"onComplete": function(items){
@@ -1762,7 +1762,7 @@ O2ProcessorMobile.Org = new Class({
         }.bind(this));
         return options;
     },
-    selectOnComplete: function(items){ //移动端才执行
+    selectOnComplete: function(items){ //모바일에서만 실행
         var array = [];
         items.each(function(item){
             array.push(item.data);
@@ -1787,7 +1787,7 @@ O2ProcessorMobile.Org = new Class({
             this.fireEvent("select", [items, values]);
         }.bind(this))
     },
-    selectOnCancel: function(){ //移动端才执行
+    selectOnCancel: function(){ //모바일에서만 실행
         //this.validation();
     },
     selectOnLoad: function( selector ){
@@ -2306,18 +2306,18 @@ O2ProcessorMobile.Org = new Class({
         if( this.json.validationCount && typeOf( this.json.validationCount.toInt() ) === "number" ){
             if( data.length < this.json.validationCount.toInt() ){
                 //if( this.json.validationCount.toInt() === 1 ){
-                //    flag = "请选择"
+                //    flag = "선택하십시오"
                 //}else{
-                //    flag = "请至少选择"+this.json.validationCount+"项"
+                //    flag = "최소 "+this.json.validationCount+"개 항목을 선택하십시오"
                 //}
-                flag = "请至少选择"+this.json.validationCount+"项"
+                flag = "최소 "+this.json.validationCount+"개 항목을 선택하십시오"
             }
         }
 
         if( flag === true ){
             if ( this.json.validation && this.json.validation.code){
                 flag = this.form.Macro.exec(this.json.validation.code, this);
-                if (!flag) flag = "数据校验未通过";
+                if (!flag) flag = "데이터 검증에 실패했습니다";
             }
         }
 

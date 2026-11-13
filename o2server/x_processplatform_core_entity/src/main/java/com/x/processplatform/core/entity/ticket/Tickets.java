@@ -125,7 +125,7 @@ public class Tickets implements Serializable {
 	}
 
 	/**
-	 * 加签,对targets进行在相同level已有的进行去重.
+	 * 추가 결재, targets 중 같은 level에 이미 있는 항목 중복 제거.
 	 * 
 	 * @param label
 	 * @param targets
@@ -192,7 +192,7 @@ public class Tickets implements Serializable {
 	}
 
 	/**
-	 * 重置处理人,,对targets进行在相同level已有的进行去重.
+	 * 처리자 재설정, targets 중 같은 level에 이미 있는 항목 중복 제거.
 	 * 
 	 * @param ticket
 	 * @param targets
@@ -239,7 +239,7 @@ public class Tickets implements Serializable {
 	}
 
 	/**
-	 * 根据distinguishedName禁用ticket
+	 * distinguishedName으로 ticket 비활성화
 	 * 
 	 * @param list
 	 * @return
@@ -258,10 +258,10 @@ public class Tickets implements Serializable {
 	}
 
 	/**
-	 * 列示sibling
+	 * sibling 나열
 	 * 
 	 * @param ticket
-	 * @param selfInclude 是否包含第一个参数对象ticket,false则排除.
+	 * @param selfInclude 첫 번째 매개변수 객체 ticket 포함 여부, false면 제외.
 	 * @return
 	 */
 	protected List<Ticket> listSibling(Ticket ticket, boolean selfInclude) {

@@ -27,13 +27,13 @@ import com.x.base.core.project.logger.LoggerFactory;
  * Copyright © 2020 O2. All rights reserved.
  */
 @Path("welink")
-@JaxrsDescribe("WeLink接口")
+@JaxrsDescribe("WeLink 인터페이스")
 public class WeLinkAction extends StandardJaxrsAction {
 
 
     private static Logger logger = LoggerFactory.getLogger(WeLinkAction.class);
 
-    @JaxrsMethodDescribe(value = "发送一个拉入同步请求.", action = ActionSyncOrgnaizationCallback.class)
+    @JaxrsMethodDescribe(value = "풀 동기화 요청 전송.", action = ActionSyncOrgnaizationCallback.class)
     @POST
     @Path("request/pull/sync")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,7 +51,7 @@ public class WeLinkAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "立即同步.", action = ActionPullSync.class)
+    @JaxrsMethodDescribe(value = "즉시 동기화.", action = ActionPullSync.class)
     @GET
     @Path("pull/sync")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

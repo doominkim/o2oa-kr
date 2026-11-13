@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * 附件信息修改
+ * 첨부파일 정보 수정
  * @author O2LEE
  *
  */

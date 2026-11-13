@@ -64,11 +64,11 @@ class ActionListReferenceType extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String name;
-		@FieldDescribe("值")
+		@FieldDescribe("값")
 		private String value;
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Long count;
 
 		public String getName() {

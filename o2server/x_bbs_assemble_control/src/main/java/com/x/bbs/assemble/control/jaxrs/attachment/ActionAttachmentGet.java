@@ -41,7 +41,7 @@ public class ActionAttachmentGet extends BaseAction {
 				attachmentInfo = subjectInfoServiceAdv.getAttachment(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectInfoProcess(e, "根据指定ID查询附件信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionSubjectInfoProcess(e, "지정한 ID로 첨부 파일 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(exception, effectivePerson, request, null);
 			}
@@ -54,7 +54,7 @@ public class ActionAttachmentGet extends BaseAction {
 					result.setData(wrap);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSubjectInfoProcess( e, "将查询结果转换为可以输出的数据信息时发生异常." );
+					Exception exception = new ExceptionSubjectInfoProcess( e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error(exception);
 					logger.error(exception, effectivePerson, request, null);
 				}

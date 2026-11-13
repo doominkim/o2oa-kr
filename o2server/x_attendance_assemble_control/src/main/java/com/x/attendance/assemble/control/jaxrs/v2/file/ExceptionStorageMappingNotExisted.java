@@ -7,6 +7,6 @@ class ExceptionStorageMappingNotExisted extends PromptException {
 	private static final long serialVersionUID = -8266649477355289556L;
 
 	ExceptionStorageMappingNotExisted(String name) {
-		super("存储器: " + name + " 不存在.");
+		super("스토리지: " + name + " 이(가) 없습니다.");
 	}
 }

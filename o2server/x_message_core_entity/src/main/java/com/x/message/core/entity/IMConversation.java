@@ -31,9 +31,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 /**
- * 聊天 会话对象
+ * 채팅 대화 객체
  */
-@Schema(name = "IMConversation", description = "消息聊天.")
+@Schema(name = "IMConversation", description = "메시지 채팅.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.IMConversation.table, uniqueConstraints = {
@@ -62,32 +62,32 @@ public class IMConversation extends SliceJpaObject  {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
 
-    //会话类型 single 单人会话、 group 群聊
+    //대화 유형 single 1:1 대화, group 그룹 채팅
     public static final String CONVERSATION_TYPE_SINGLE = "single";
     public static final String CONVERSATION_TYPE_GROUP = "group";
 
     public static final String type_FIELDNAME = "type";
-    @FieldDescribe("会话类型 单人 、 群.")
+    @FieldDescribe("대화 유형 1:1, 그룹.")
     @Column(length = length_255B, name = ColumnNamePrefix + type_FIELDNAME)
     @CheckPersist(allowEmpty = false)
-    private String type; //会话类型 单人 、 群
+    private String type; //대화 유형 1:1, 그룹
 
 
     public static final String title_FIELDNAME = "title";
-    @FieldDescribe("会话标题 人名、群名")
+    @FieldDescribe("대화 제목 이름, 그룹명")
     @Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
     @CheckPersist(allowEmpty = false)
-    private String title; //会话标题 人名、群名
+    private String title; //대화 제목 이름, 그룹명
 
 
     public static final String personList_FIELDNAME = "personList";
-    @FieldDescribe("会话对象、群成员.")
+    @FieldDescribe("대화 대상, 그룹 구성원.")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -97,20 +97,20 @@ public class IMConversation extends SliceJpaObject  {
     private List<String> personList;
 
     public static final String adminPerson_FIELDNAME = "adminPerson";
-    @FieldDescribe("管理员，群会话需要管理员")
+    @FieldDescribe("관리자. 그룹 대화에는 관리자 필요")
     @Column(length = length_255B, name = ColumnNamePrefix + adminPerson_FIELDNAME)
     @CheckPersist(allowEmpty = true)
-    private String adminPerson; //管理员
+    private String adminPerson; //관리자
 
     public static final String note_FIELDNAME = "note";
-    @FieldDescribe("群公告")
+    @FieldDescribe("그룹 공지")
     @Column(length = length_2K, name = ColumnNamePrefix + note_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String note;
 
 
     public static final String lastMessageTime_FIELDNAME = "lastMessageTime";
-    @FieldDescribe("会话最后一条消息时间")
+    @FieldDescribe("대화 마지막 메시지 시간")
     @Column(name = ColumnNamePrefix + lastMessageTime_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private Date lastMessageTime;
@@ -119,31 +119,31 @@ public class IMConversation extends SliceJpaObject  {
 
 
     public static final String businessId_FIELDNAME = "businessId";
-    @FieldDescribe("业务对象Id. （流程的jobId）")
+    @FieldDescribe("업무 객체 Id. (프로세스의 jobId)")
     @Column(length = length_128B, name = ColumnNamePrefix + businessId_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String businessId;
 
     public static final String businessBody_FIELDNAME = "businessBody";
-    @FieldDescribe("业务对象内容.")
+    @FieldDescribe("업무 객체 내용.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = length_10M, name = ColumnNamePrefix + businessBody_FIELDNAME)
     private String businessBody;
 
-    //业务类型 process 流程
+    //업무 유형 process 프로세스
     public static final String CONVERSATION_BUSINESS_TYPE_PROCESS = "process";
     public static final String CONVERSATION_BUSINESS_TYPE_CMS = "cms";
 
     public static final String businessType_FIELDNAME = "businessType";
-    @FieldDescribe("业务类型. process")
+    @FieldDescribe("업무 유형. process")
     @Column(length = length_16B, name = ColumnNamePrefix + businessType_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private String businessType;
 
 
     public static final String icon_FIELDNAME = "groupIcon";
-    @FieldDescribe("群聊头像.")
+    @FieldDescribe("그룹 채팅 프로필 이미지.")
     @Lob
     @Basic(fetch = FetchType.EAGER)
     @Column(length = JpaObject.length_128K, name = ColumnNamePrefix + icon_FIELDNAME)

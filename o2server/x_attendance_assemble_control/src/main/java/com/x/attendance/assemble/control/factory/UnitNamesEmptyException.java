@@ -7,6 +7,6 @@ class UnitNamesEmptyException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	UnitNamesEmptyException() {
-		super("组织名称列表不能为空.");
+		super("조직 이름 목록은 비워 둘 수 없습니다.");
 	}
 }

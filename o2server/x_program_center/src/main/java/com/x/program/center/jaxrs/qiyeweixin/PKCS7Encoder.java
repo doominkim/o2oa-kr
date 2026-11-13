@@ -1,5 +1,5 @@
 /**
- * 对企业微信发送给企业后台的消息加解密示例代码.
+ * 기업 위챗이 기업 백엔드로 보내는 메시지 암복호화 예제 코드.
  * 
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
@@ -12,25 +12,25 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 
 /**
- * 提供基于PKCS7算法的加解密接口.
+ * PKCS7 알고리즘 기반 암복호화 인터페이스 제공.
  */
 class PKCS7Encoder {
 	static Charset CHARSET = Charset.forName("utf-8");
 	static int BLOCK_SIZE = 32;
 
 	/**
-	 * 获得对明文进行补位填充的字节.
+	 * 평문 패딩용 바이트 조회.
 	 * 
-	 * @param count 需要进行填充补位操作的明文字节个数
-	 * @return 补齐用的字节数组
+	 * @param count 패딩이 필요한 평문 바이트 수
+	 * @return 패딩용 바이트 배열
 	 */
 	static byte[] encode(int count) {
-		// 计算需要填充的位数
+		// 패딩할 자릿수 계산
 		int amountToPad = BLOCK_SIZE - (count % BLOCK_SIZE);
 		if (amountToPad == 0) {
 			amountToPad = BLOCK_SIZE;
 		}
-		// 获得补位所用的字符
+		// 패딩용 문자 조회
 		char padChr = chr(amountToPad);
 		String tmp = new String();
 		for (int index = 0; index < amountToPad; index++) {
@@ -40,10 +40,10 @@ class PKCS7Encoder {
 	}
 
 	/**
-	 * 删除解密后明文的补位字符
+	 * 복호화된 평문의 패딩 문자 제거
 	 * 
-	 * @param decrypted 解密后的明文
-	 * @return 删除补位字符后的明文
+	 * @param decrypted 복호화된 평문
+	 * @return 패딩 문자를 제거한 평문
 	 */
 	static byte[] decode(byte[] decrypted) {
 		int pad = (int) decrypted[decrypted.length - 1];
@@ -54,10 +54,10 @@ class PKCS7Encoder {
 	}
 
 	/**
-	 * 将数字转化成ASCII码对应的字符，用于对明文进行补码
+	 * 숫자를 ASCII 코드 문자로 변환, 평문 패딩에 사용
 	 * 
-	 * @param a 需要转化的数字
-	 * @return 转化得到的字符
+	 * @param a 변환할 숫자
+	 * @return 변환된 문자
 	 */
 	static char chr(int a) {
 		byte target = (byte) (a & 0xFF);

@@ -7,6 +7,6 @@ public class ExceptionBeginNotFound extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionBeginNotFound() {
-		super("没有找到开始节点.");
+		super("시작 노드를 찾을 수 없습니다.");
 	}
 }

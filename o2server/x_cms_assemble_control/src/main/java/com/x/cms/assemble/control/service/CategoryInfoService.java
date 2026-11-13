@@ -58,7 +58,7 @@ public class CategoryInfoService {
 	}
 
 	/**
-	 * 根据需要过滤的栏目列表和信息类型以及返回最大条目数量列示栏目信息ID列表
+	 * 필터링할 게시판 목록, 정보 유형, 최대 반환 건수에 따라 게시판 정보 ID 목록 조회
 	 * @param appIds
 	 * @param documentType
 	 * @param maxCount
@@ -147,7 +147,7 @@ public class CategoryInfoService {
 
 		if( appInfo == null ){ throw new Exception("应用栏目信息不存在！"); }
 
-		//补全默认列表名称
+		//기본 목록 이름 보충
 		if ( StringUtils.isNotEmpty( object.getDefaultViewId() ) ) {
 			View view = emc.find( object.getDefaultViewId(), View.class );
 			if (view != null) {
@@ -263,7 +263,7 @@ public class CategoryInfoService {
 //		appInfo = emc.find( temp_categoryInfo.getAppId(), AppInfo.class );
 //
 //		if( appInfo == null ){
-//			throw new Exception("应用栏目信息不存在！");
+//			throw new Exception("앱 게시판 정보가 존재하지 않습니다!");
 //		}
 //
 //		if( categoryInfo == null ){
@@ -274,8 +274,8 @@ public class CategoryInfoService {
 //			if( StringUtils.isEmpty( categoryInfo.getDocumentType() ) ) {
 //				categoryInfo.setDocumentType( appInfo.getDocumentType() );
 //			}
-//			if( !"信息".equals(categoryInfo.getDocumentType()) && !"数据".equals( categoryInfo.getDocumentType() )) {
-//				categoryInfo.setDocumentType( "信息" );
+//			if( !"정보".equals(categoryInfo.getDocumentType()) && !"데이터".equals( categoryInfo.getDocumentType() )) {
+//				categoryInfo.setDocumentType( "정보" );
 //			}
 //			if( categoryInfo.getCreateTime() == null ) {
 //				categoryInfo.setCreateTime(new Date());
@@ -295,24 +295,24 @@ public class CategoryInfoService {
 //			if( StringUtils.isEmpty( categoryInfo.getDocumentType() ) ) {
 //				categoryInfo.setDocumentType( appInfo.getDocumentType() );
 //			}
-//			if( !"信息".equals(categoryInfo.getDocumentType()) && !"数据".equals( categoryInfo.getDocumentType() )) {
-//				categoryInfo.setDocumentType( "信息" );
+//			if( !"정보".equals(categoryInfo.getDocumentType()) && !"데이터".equals( categoryInfo.getDocumentType() )) {
+//				categoryInfo.setDocumentType( "정보" );
 //			}
 //
-//			//查询是否修改了名称，如果修改了名称，那么所有的文档相应的名称也都需要修改过来
+//			//이름 변경 여부 조회, 변경했으면 모든 문서의 해당 이름도 변경해야 함
 //			if( !oldCategoryName.equals( categoryInfo.getCategoryName() )){
-//				//对该目录下所有的文档的栏目名称和分类别名进行调整
+//				//해당 디렉터리 아래 모든 문서의 게시판 이름과 분류 별칭 조정
 //				docCount = business.getDocumentFactory().countByCategoryId( categoryInfo.getId() );
 //				if( docCount > 0 ) {
 //					totalWhileCount = (int) (docCount/queryMaxCount) + 1;
 //					if( totalWhileCount > 0 ) {
 //						while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {
-//							//查询1000个文档进行操作
+//							//문서 1000건 조회 후 처리
 //							document_ids = business.getDocumentFactory().listByCategoryId( categoryInfo.getId(), queryMaxCount );
 //							changeDocumentInfoWithCategory( emc, document_ids, categoryInfo );
-//							//当前循环次数+1
+//							//현재 반복 횟수 +1
 //							currenteWhileCount ++;
-//							//重新查询剩余的文档数量
+//							//남은 문서 수 다시 조회
 //							docCount = business.getDocumentFactory().countByCategoryId( categoryInfo.getId() );
 //						}
 //					}
@@ -445,20 +445,20 @@ public class CategoryInfoService {
 			}
 		}
 
-		//还有文档以及文档权限需要删除
+		//문서 및 문서 권한도 삭제해야 함
 		docCount = business.getDocumentFactory().countByCategoryId( id );
 		if( docCount > 0 ) {
 			totalWhileCount = (int) (docCount/queryMaxCount) + 1;
 			if( totalWhileCount > 0 ) {
 				while( docCount > 0 && currenteWhileCount <= totalWhileCount ) {
-					//查询1000个文档进行操作
+					//문서 1000건 조회 후 처리
 					ids = business.getDocumentFactory().listByCategoryId( id, queryMaxCount );
 					if( ids != null && !ids.isEmpty()  ){
 						for( String del_id : ids ){
 							document = emc.find( del_id, Document.class );
 							if( document != null ){
 								try {
-									//删除与该文档有关的所有数据信息
+									//해당 문서와 관련된 모든 데이터 정보 삭제
 									dataItems = business.itemFactory().listWithDocmentWithPath( del_id );
 									if ((!dataItems.isEmpty())) {
 										emc.beginTransaction( Item.class );
@@ -470,7 +470,7 @@ public class CategoryInfoService {
 									e.printStackTrace();
 								}
 
-								//检查是否需要删除热点图片
+								//핫 이미지 삭제 필요 여부 확인
 								try {
 									ThisApplication.queueDocumentDelete.send( document.getId() );
 								} catch ( Exception e1 ) {
@@ -483,9 +483,9 @@ public class CategoryInfoService {
 							}
 						}
 					}
-					//当前循环次数+1
+					//현재 반복 횟수 +1
 					currenteWhileCount ++;
-					//重新查询剩余的文档数量
+					//남은 문서 수 다시 조회
 					docCount = business.getDocumentFactory().countByCategoryId( id );
 				}
 			}
@@ -529,7 +529,7 @@ public class CategoryInfoService {
 	}
 
 	/**
-	 * 查询所有用户都可以发布的分类ID列表
+	 * 모든 사용자가 발행할 수 있는 분류 ID 목록 조회
 	 * @param emc
 	 * @param inAppInfoIds
 	 * @param inCategoryIds
@@ -545,7 +545,7 @@ public class CategoryInfoService {
 	}
 
 	/**
-	 * 查询所有用户都可以查看的分类ID列表
+	 * 모든 사용자가 볼 수 있는 분류 ID 목록 조회
 	 * @param emc
 	 * @param inAppInfoIds
 	 * @param inCategoryIds
@@ -561,7 +561,7 @@ public class CategoryInfoService {
 	}
 
 	/**
-	 * 根据权限查询用户可以发布文档的分类ID列表(根据权限，不包含未配置发布权限的全员可发布的分类)
+	 * 권한에 따라 사용자가 문서를 게시할 수 있는 분류 ID 목록 조회(권한 기준, 게시 권한 미설정으로 전원 게시 가능한 분류 제외)
 	 * @param emc
 	 * @param personName
 	 * @param unitNames
@@ -582,7 +582,7 @@ public class CategoryInfoService {
 	}
 
 	/**
-	 * 根据权限查询用户可以访问文档的分类ID列表(根据权限，不包含未配置访问权限的全员可见的分类)
+	 * 권한에 따라 사용자가 문서에 접근할 수 있는 분류 ID 목록 조회(권한 기준, 접근 권한 미설정으로 전원 열람 가능한 분류 제외)
 	 * @param emc
 	 * @param personName
 	 * @param unitNames
@@ -603,7 +603,7 @@ public class CategoryInfoService {
 	}
 
 	/**
-	 * 查询用户可以管理的分类列表
+	 * 사용자가 관리할 수 있는 분류 목록 조회
 	 * @param emc
 	 * @param personName
 	 * @param unitNames

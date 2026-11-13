@@ -30,18 +30,18 @@ import com.x.base.core.project.logger.LoggerFactory;
  * Copyright © 2021 O2. All rights reserved.
  */
 @Path("mpweixin")
-@JaxrsDescribe("微信公众号单点登录")
+@JaxrsDescribe("위챗 공식계정 SSO 로그인")
 public class MPweixinAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(MPweixinAction.class);
 
-    @JaxrsMethodDescribe(value = "微信公众号code登录.", action = ActionLoginWithCode.class)
+    @JaxrsMethodDescribe(value = "위챗 공식계정 code 로그인.", action = ActionLoginWithCode.class)
     @GET
     @Path("login/code/{code}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void loginWithCode(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @Context HttpServletResponse response, @JaxrsParameterDescribe("码") @PathParam("code") String code) {
+            @Context HttpServletResponse response, @JaxrsParameterDescribe("코드") @PathParam("code") String code) {
 
         ActionResult<ActionLoginWithCode.Wo> result = new ActionResult<>();
         try {
@@ -54,13 +54,13 @@ public class MPweixinAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "绑定微信公众号openid到当前登录用户.", action = ActionBindOpenId.class)
+    @JaxrsMethodDescribe(value = "위챗 공식계정 openid를 현재 로그인 사용자에 바인딩.", action = ActionBindOpenId.class)
     @GET
     @Path("bind/openid/{openid}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void bindOpenId(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @Context HttpServletResponse response, @JaxrsParameterDescribe("微信公众号用户的openId") @PathParam("openid") String openid) {
+            @Context HttpServletResponse response, @JaxrsParameterDescribe("위챗 공식계정 사용자의 openId") @PathParam("openid") String openid) {
 
         ActionResult<ActionBindOpenId.Wo> result = new ActionResult<>();
         try {
@@ -73,13 +73,13 @@ public class MPweixinAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "绑定微信公众号openid到当前登录用户.", action = ActionBindWithCode.class)
+    @JaxrsMethodDescribe(value = "위챗 공식계정 openid를 현재 로그인 사용자에 바인딩.", action = ActionBindWithCode.class)
     @GET
     @Path("bind/code/{code}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void bindWithCode(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @Context HttpServletResponse response, @JaxrsParameterDescribe("码") @PathParam("code") String code) {
+            @Context HttpServletResponse response, @JaxrsParameterDescribe("코드") @PathParam("code") String code) {
 
         ActionResult<ActionBindWithCode.Wo> result = new ActionResult<>();
         try {
@@ -92,13 +92,13 @@ public class MPweixinAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "测试发送模版消息", action = ActionTestSendTempMessage.class)
+    @JaxrsMethodDescribe(value = "템플릿 메시지 발송 테스트", action = ActionTestSendTempMessage.class)
     @POST
     @Path("menu/test/send/to/{person}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void testSendMessage(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @Context HttpServletResponse response, @JaxrsParameterDescribe("人员") @PathParam("person") String person,
+            @Context HttpServletResponse response, @JaxrsParameterDescribe("사용자") @PathParam("person") String person,
             JsonElement jsonElement) {
 
         ActionResult<ActionTestSendTempMessage.Wo> result = new ActionResult<>();

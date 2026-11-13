@@ -99,10 +99,10 @@ class ActionCreateWithWork extends BaseAction {
 
 		private static final long serialVersionUID = -3102009396497823348L;
 
-		@FieldDescribe("工作标识")
+		@FieldDescribe("업무 문서 식별자")
 		private String work;
 
-		@FieldDescribe("人员列表")
+		@FieldDescribe("사용자 목록")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getPersonList() {

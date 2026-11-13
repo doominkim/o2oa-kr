@@ -12,13 +12,13 @@ public class V2RerouteWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6729193803512068864L;
 
-	@FieldDescribe("活动节点")
+	@FieldDescribe("활동 노드")
 	private String activity;
 
-	@FieldDescribe("是否合并所有的work")
+	@FieldDescribe("모든 work 병합 여부")
 	private Boolean mergeWork;
 
-	@FieldDescribe("人工活动强制处理人")
+	@FieldDescribe("수동 활동 강제 처리자")
 	private List<String> distinguishedNameList = new ArrayList<>();
 
 	public Boolean getMergeWork() {

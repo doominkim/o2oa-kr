@@ -58,7 +58,7 @@ MWF.xApplication.cms.FormDesigner.Module.Form = MWF.CMSFCForm = new Class({
 		this.selectedModules = [];
 	},
 
-	// 移动端表单加载工具栏
+	// 모바일 양식 툴바 로드
 	loadMobileActionToos: function() {
 		// if (this.options.mode==="Mobile"){
 		// 	if (!this.json.defaultTools){
@@ -455,7 +455,7 @@ MWF.xApplication.cms.FormDesigner.Module.Form = MWF.CMSFCForm = new Class({
 		if ( name=="formStyleType" ){
 
 			var loadOldTemplateStyle = function () {
-				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //如果原来是自定义表单样式
+				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //기존이 사용자 정의 양식 스타일인 경우
 					this.loadCustomTemplateStyles( oldValue , function (oldTemplateStyles) {
 						this.switchTemplateStyles( oldTemplateStyles );
 					}.bind(this))

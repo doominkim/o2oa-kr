@@ -40,7 +40,7 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -2420181761746203761L;
 
-		/** 不输出data数据,单独处理 */
+		/** data 데이터는 출력하지 않고 별도 처리 */
 		static WrapCopier<ImportModel, Wo> copier = WrapCopierFactory.wo(ImportModel.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 	}

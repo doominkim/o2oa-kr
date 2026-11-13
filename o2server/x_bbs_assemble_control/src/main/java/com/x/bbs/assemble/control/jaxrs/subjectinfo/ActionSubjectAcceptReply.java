@@ -56,7 +56,7 @@ public class ActionSubjectAcceptReply extends BaseAction {
 				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectOperation(e, "用户确认主题回复时发生异常。");
+				Exception exception = new ExceptionSubjectOperation(e, "주제 댓글을 채택하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

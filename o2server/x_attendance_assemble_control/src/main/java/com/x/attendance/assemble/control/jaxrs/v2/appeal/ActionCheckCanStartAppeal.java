@@ -30,7 +30,7 @@ public class ActionCheckCanStartAppeal extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2AppealInfo info = emc.find(id, AttendanceV2AppealInfo.class);
             if (info == null) {
-                throw new ExceptionNotExistObject("数据不存在，" + id);
+                throw new ExceptionNotExistObject("데이터가 없습니다, " + id);
             }
             if (!person.getDistinguishedName().equals(info.getUserId())) {
                 throw new ExceptionPersonNotEqual();
@@ -46,19 +46,19 @@ public class ActionCheckCanStartAppeal extends BaseAction {
             } else {
                 config = new AttendanceV2Config();
             }
-            // 申诉功能开关查询
+            // 이의 신청 기능 스위치 조회
             if (BooleanUtils.isNotTrue(config.getAppealEnable())) {
                 throw new ExceptionAppealNotEnable();
             }
-            // 申诉次数限制查询
-            if (config.getAppealMaxTimes() > 0) { // 大于0才算有限制
+            // 이의 신청 횟수 제한 조회
+            if (config.getAppealMaxTimes() > 0) { // 0보다 커야 제한 있음
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(info.getRecordDate()); // 当前申诉数据的日期
+                calendar.setTime(info.getRecordDate()); // 현재 이의 신청 데이터의 날짜
                 calendar.set(Calendar.DAY_OF_MONTH, 1);
-                Date beginDate = calendar.getTime(); // 计算所在月的开始日期
+                Date beginDate = calendar.getTime(); // 해당 월의 시작일 계산
                 calendar.set(Calendar.DAY_OF_MONTH,
                         calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-                Date endDate = calendar.getTime(); // 计算所在月的结束日期
+                Date endDate = calendar.getTime(); // 해당 월의 종료일 계산
                 Business business = new Business(emc);
                 List<AttendanceV2AppealInfo> appealInfoList = business.getAttendanceV2ManagerFactory()
                         .listAppealInfoByDateNotInit(beginDate, endDate,

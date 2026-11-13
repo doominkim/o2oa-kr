@@ -72,7 +72,7 @@
     "width" : "8%"
   },
 //  {
-//    "title" : "早退次数",
+//    "title" : "조퇴 횟수",
 //    "headStyles" : "normalThNode",
 //    "contentStyles" : "normalTdNode",
 //    "item" : "leaveEarlyTimes",
@@ -97,14 +97,14 @@
   }
 //  {
 //    "access" : "admin",
-//    "title" : "操作",
+//    "title" : "작업",
 //    "headStyles" : "normalThNode",
 //    "contentStyles" : "normalTdNode",
 //    "item" : "actions",
 //    "name" : "actions",
 //    "width" : "10%",
 //    "sub" : [{
-//      "title" : "删除文件",
+//      "title" : "파일 삭제",
 //      "action" : "remove",
 //      "styles" : "actionDeleteNode",
 //      "overStyles" : "actionDeleteNode_over",

@@ -98,34 +98,34 @@ class ActionRefer extends BaseAction {
 
 		private static final long serialVersionUID = 6231785082740620916L;
 
-		@FieldDescribe("待办列表")
+		@FieldDescribe("결재 대기 목록")
 		private List<WoTask> taskList = new ArrayList<>();
 
-		@FieldDescribe("已办列表")
+		@FieldDescribe("처리 완료 목록")
 		private List<WoTaskCompleted> taskCompletedList = new ArrayList<>();
 
-		@FieldDescribe("待阅列表")
+		@FieldDescribe("열람 대기 목록")
 		private List<Read> readList = new ArrayList<>();
 
-		@FieldDescribe("已阅列表")
+		@FieldDescribe("열람 완료 목록")
 		private List<ReadCompleted> readCompletedList = new ArrayList<>();
 
-		@FieldDescribe("待阅列表")
+		@FieldDescribe("열람 대기 목록")
 		private List<Review> reviewList = new ArrayList<>();
 
-		@FieldDescribe("是否有待办")
+		@FieldDescribe("결재 대기 여부")
 		private Boolean hasTask = false;
 
-		@FieldDescribe("是否有已办")
+		@FieldDescribe("처리 완료 여부")
 		private Boolean hasTaskCompleted = false;
 
-		@FieldDescribe("是否有待阅")
+		@FieldDescribe("열람 대기 여부")
 		private Boolean hasRead = false;
 
-		@FieldDescribe("是否有已阅")
+		@FieldDescribe("열람 완료 여부")
 		private Boolean hasReadCompleted = false;
 
-		@FieldDescribe("是否有待阅")
+		@FieldDescribe("열람 대기 여부")
 		private Boolean hasReview = false;
 
 		public Boolean getHasTask() {

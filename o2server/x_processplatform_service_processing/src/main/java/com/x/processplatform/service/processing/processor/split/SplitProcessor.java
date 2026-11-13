@@ -32,7 +32,7 @@ public class SplitProcessor extends AbstractSplitProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Split split) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.splitArrive(aeiObjects.getWork().getActivityToken(), split));
 		return aeiObjects.getWork();
 	}
@@ -50,14 +50,14 @@ public class SplitProcessor extends AbstractSplitProcessor {
 			throw new ExceptionSplitEmptySplitValue(split.getName(), aeiObjects.getWork().getTitle(),
 					aeiObjects.getWork().getId(), aeiObjects.getWork().getJob());
 		}
-		// 标志拆分状态
+		// 분할 상태 표시
 		aeiObjects.getWork().setSplitting(true);
 		aeiObjects.getWork().setSplitToken(StringTools.uniqueToken());
 		aeiObjects.getWork().getSplitTokenList().add(aeiObjects.getWork().getSplitToken());
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.splitExecute(aeiObjects.getWork().getActivityToken(), split, splitValues));
-		// 先将当前文档标志拆分值
+		// 현재 문서에 먼저 분할 값 표시
 		aeiObjects.getWork().setSplitValue(splitValues.get(0));
 		List<String> values = aeiObjects.getWork().getSplitValueList();
 		values.add(splitValues.get(0));
@@ -77,7 +77,7 @@ public class SplitProcessor extends AbstractSplitProcessor {
 			mainWorkLog.setSplitValue(splitValues.get(0));
 			mainWorkLog.setSplitValueList(aeiObjects.getWork().getSplitValueList());
 			aeiObjects.getUpdateWorkLogs().add(mainWorkLog);
-			// 产生后续的拆分文档并标记拆分值
+			// 후속 분할 문서를 생성하고 분할 값 표시
 			for (int i = 1; i < splitValues.size(); i++) {
 				Work splitWork = splitWork(aeiObjects, aeiObjects.getWork().getSplitToken(), splitValues.get(i));
 				aeiObjects.getCreateWorks().add(splitWork);
@@ -104,7 +104,7 @@ public class SplitProcessor extends AbstractSplitProcessor {
 	private Work splitWork(AeiObjects aeiObjects, String token, String value)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		Work splitWork = new Work(aeiObjects.getWork());
-		// 替work换拆分值
+		// work 분할 값 교체
 		splitWork.setSplitValue(value);
 		List<String> values = splitWork.getSplitValueList();
 		ListTools.set(values, -1, value);
@@ -122,7 +122,7 @@ public class SplitProcessor extends AbstractSplitProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Split split) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.splitInquire(aeiObjects.getWork().getActivityToken(), split));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
@@ -133,9 +133,9 @@ public class SplitProcessor extends AbstractSplitProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

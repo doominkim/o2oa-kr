@@ -13,26 +13,26 @@ public class ActionFilterAttributeWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 1632781666272985480L;
 
-	@FieldDescribe("可选应用标识.")
-	@Schema(description = "可选应用标识.")
+	@FieldDescribe("선택 가능한 앱 식별자.")
+	@Schema(description = "선택 가능한 앱 식별자.")
 	private List<NameValueCountPair> applicationList = new ArrayList<>();
-	@FieldDescribe("可选流程标识.")
-	@Schema(description = "可选流程标识.")
+	@FieldDescribe("선택 가능한 프로세스 식별자.")
+	@Schema(description = "선택 가능한 프로세스 식별자.")
 	private List<NameValueCountPair> processList = new ArrayList<>();
-	@FieldDescribe("可选组织标识.")
-	@Schema(description = "可选组织标识.")
+	@FieldDescribe("선택 가능한 조직 식별자.")
+	@Schema(description = "선택 가능한 조직 식별자.")
 	private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
-	@FieldDescribe("可选创建时间范围.")
-	@Schema(description = "可选创建时间范围.")
+	@FieldDescribe("선택 가능한 생성 시간 범위.")
+	@Schema(description = "선택 가능한 생성 시간 범위.")
 	private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
-	@FieldDescribe("可选结束时间范围.")
-	@Schema(description = "可选结束时间范围.")
+	@FieldDescribe("선택 가능한 종료 시간 범위.")
+	@Schema(description = "선택 가능한 종료 시간 범위.")
 	private List<NameValueCountPair> completedTimeMonthList = new ArrayList<>();
-	@FieldDescribe("可选活动范围.")
-	@Schema(description = "可选活动范围.")
+	@FieldDescribe("선택 가능한 활동 범위.")
+	@Schema(description = "선택 가능한 활동 범위.")
 	private List<NameValueCountPair> activityNameList = new ArrayList<>();
-	@FieldDescribe("可选择的完成状态.")
-	@Schema(description = "可选择的完成状态.")
+	@FieldDescribe("선택 가능한 완료 상태.")
+	@Schema(description = "선택 가능한 완료 상태.")
 	private List<NameValueCountPair> completedList = new ArrayList<>();
 
 	public List<NameValueCountPair> getApplicationList() {

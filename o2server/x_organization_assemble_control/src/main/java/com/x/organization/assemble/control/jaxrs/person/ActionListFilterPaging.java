@@ -98,7 +98,7 @@ class ActionListFilterPaging extends BaseAction {
 					conUnitList.addAll(business.unit().listSubNested(unit.getId()));
 				}
 			}
-			logger.info("{} 管理组织总数：{}",  effectivePerson.getDistinguishedName(), conUnitList.size());
+			logger.info("{} 관리 조직 총수:{}",  effectivePerson.getDistinguishedName(), conUnitList.size());
 		}
 		return conUnitList;
 	}
@@ -243,11 +243,11 @@ class ActionListFilterPaging extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("搜索关键字")
+		@FieldDescribe("검색 키워드")
 		private String key;
-		@FieldDescribe("状态：0|正常、1|锁定、2|禁用.")
+		@FieldDescribe("상태: 0|정상, 1|잠금, 2|비활성화.")
 		private String status;
-		@FieldDescribe("是否依据组织管理员管理权限展现")
+		@FieldDescribe("조직 관리자 관리 권한에 따라 표시할지 여부")
 		private Boolean controller;
 
 		public String getKey() {

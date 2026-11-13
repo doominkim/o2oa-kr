@@ -46,17 +46,17 @@ public class ActionConversationCreate extends BaseAction {
                 list.add(effectivePerson.getDistinguishedName());
                 conversation.setPersonList(list);
             }
-            // 成员数量判断
+            // 구성원 수 판단
             if ((conversation.getType().equals(CONVERSATION_TYPE_SINGLE)
                  && conversation.getPersonList().size() != 2)) {
                 throw new ExceptionGroupConversationEmptyMember();
             }
-            // 如果有业务 id 就不限制成员人数
+            // 업무 id가 있으면 구성원 수 제한 없음
             if (conversation.getType().equals(CONVERSATION_TYPE_GROUP) && StringUtils.isEmpty(conversation.getBusinessId()) && conversation.getPersonList().size() < 3) {
                 throw new ExceptionGroupConversationEmptyMember();
             }
 
-            // 单聊 判断会话是否存在
+            // 1:1 채팅. 대화 존재 여부 판단
             if (conversation.getType().equals(CONVERSATION_TYPE_SINGLE)) {
                 Business business = new Business(emc);
                 List<IMConversation> list = business.imConversationFactory()
@@ -72,11 +72,11 @@ public class ActionConversationCreate extends BaseAction {
                     }
                 }
             }
-            // 群聊添加管理员
+            // 그룹 채팅에 관리자 추가
             if (conversation.getType().equals(CONVERSATION_TYPE_GROUP)) {
                 conversation.setAdminPerson(effectivePerson.getDistinguishedName());
             }
-            // 处理标题
+            // 제목 처리
             if (StringUtils.isEmpty(conversation.getTitle())) {
                 String title = "";
                 if (conversation.getType().equals(CONVERSATION_TYPE_SINGLE)) {
@@ -104,21 +104,21 @@ public class ActionConversationCreate extends BaseAction {
                 conversation.setTitle(title);
             }
 
-            // 如果配置了脚本了 需要进行校验 成功才能创建会话
+            // 스크립트가 설정되어 있으면 검증 필요. 성공해야 대화 생성 가능
             ConversationInvokeValue value = checkConversationInvoke(effectivePerson, "create",
                     conversation.getType(), conversation.getPersonList(), null, null, null);
             if (BooleanUtils.isFalse(value.getResult())) {
-                LOGGER.warn("没有通过脚本校验, {} ", value.toString());
+                LOGGER.warn("스크립트 검증을 통과하지 못함, {} ", value.toString());
                 throw new ExceptionConversationCheckError(
-                        value.getMsg() == null ? "脚本校验不通过" : value.getMsg());
+                        value.getMsg() == null ? "스크립트 검증에 실패했습니다" : value.getMsg());
             }
 
             emc.beginTransaction(IMConversation.class);
             emc.persist(conversation, CheckPersistType.all);
             emc.commit();
-            // 生成 icon
+            // icon 생성
             generateConversationIcon(conversation.getId());
-            // 必须同时创建 IMConversationExt
+            // IMConversationExt를 반드시 함께 생성
             for (int i = 0; i < conversation.getPersonList().size(); i++) {
                 String person = conversation.getPersonList().get(i);
                 IMConversationExt conversationExt = new IMConversationExt();

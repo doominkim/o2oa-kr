@@ -33,7 +33,7 @@ import com.x.processplatform.core.entity.content.Review_;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 可用于选择的过滤值
+ * 선택 가능한 필터 값
  *
  * @author zhour
  *
@@ -64,19 +64,19 @@ class ActionFilterAttribute extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("可选择的应用")
+		@FieldDescribe("선택 가능한 앱")
 		private List<NameValueCountPair> applicationList = new ArrayList<>();
 
-		@FieldDescribe("可选择的流程")
+		@FieldDescribe("선택 가능한 프로세스")
 		private List<NameValueCountPair> processList = new ArrayList<>();
 
-		@FieldDescribe("可选择的组织")
+		@FieldDescribe("선택 가능한 조직")
 		private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-		@FieldDescribe("可选择的开始月份")
+		@FieldDescribe("선택 가능한 시작 월")
 		private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("限制结束月份范围")
+		@FieldDescribe("종료 월 범위 제한")
 		private List<NameValueCountPair> completedTimeMonthList = new ArrayList<>();
 
 		public List<NameValueCountPair> getApplicationList() {

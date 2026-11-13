@@ -80,7 +80,7 @@ class ActionPostScriptNested extends BaseAction {
 	
 	public class Wi extends GsonPropertyObject {
 		
-		@FieldDescribe("导入的脚本ID.")
+		@FieldDescribe("가져온 스크립트 ID.")
 		private List<String> importedList;
 
 		public List<String> getImportedList() {

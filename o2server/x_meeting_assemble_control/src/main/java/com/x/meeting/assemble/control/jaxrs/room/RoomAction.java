@@ -32,12 +32,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("room")
-@JaxrsDescribe("会议室")
+@JaxrsDescribe("회의실")
 public class RoomAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(RoomAction.class);
 
-	@JaxrsMethodDescribe(value = "列示所有的会议室.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 회의실 목록 조회.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -54,13 +54,13 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定的会议室.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 회의실 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议室标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의실 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -72,7 +72,7 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建Room.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "Room 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -89,13 +89,13 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新Room.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "Room 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议室标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("회의실 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -107,13 +107,13 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除Room.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "Room 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("会议室标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("회의실 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -125,13 +125,13 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取拼音首字母开始的.", action = ActionListPinyinInitial.class)
+	@JaxrsMethodDescribe(value = "병음 첫 글자로 시작하는 항목 조회.", action = ActionListPinyinInitial.class)
 	@GET
 	@Path("list/pinyininitial/{key}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPinyinInitial(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("拼音首字母") @PathParam("key") String key) {
+			@JaxrsParameterDescribe("병음 첫 글자") @PathParam("key") String key) {
 		ActionResult<List<ActionListPinyinInitial.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,13 +143,13 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据名称进行模糊查询.", action = ActionListLike.class)
+	@JaxrsMethodDescribe(value = "이름으로 부분 일치 검색.", action = ActionListLike.class)
 	@GET
 	@Path("list/like/{key}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listLike(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("拼音首字母") @PathParam("key") String key) {
+			@JaxrsParameterDescribe("병음 첫 글자") @PathParam("key") String key) {
 		ActionResult<List<ActionListLike.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -161,13 +161,13 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据拼音或者首字母进行模糊查询.", action = ActionListLike.class)
+	@JaxrsMethodDescribe(value = "병음 또는 첫 글자로 부분 일치 검색.", action = ActionListLike.class)
 	@GET
 	@Path("list/like/pinyin/{key}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listLikePinyin(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("拼音首字母") @PathParam("key") String key) {
+			@JaxrsParameterDescribe("병음 첫 글자") @PathParam("key") String key) {
 		ActionResult<List<ActionListLike.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -179,14 +179,14 @@ public class RoomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置会议室照片.", action = ActionSetPhoto.class)
+	@JaxrsMethodDescribe(value = "회의실 사진 설정.", action = ActionSetPhoto.class)
 	@POST
 	@Path("{id}/photo")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void setPhoto(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, @FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("Excel文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, @FormDataParam(FILE_FIELD) final byte[] bytes,
+			@JaxrsParameterDescribe("Excel 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionSetPhoto.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

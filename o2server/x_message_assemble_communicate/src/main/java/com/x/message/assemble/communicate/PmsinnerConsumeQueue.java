@@ -39,11 +39,11 @@ public class PmsinnerConsumeQueue extends AbstractQueue<Message> {
 				innerMessage.setJsonExtras(jsonExtras);
 			}
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("发送消息到PMS， 消息：{}",   innerMessage.toString());
+				LOGGER.debug("PMS로 메시지 발송, 메시지:{}",   innerMessage.toString());
 			}
 			WrapBoolean wrapBoolean = ThisApplication.context().applications()
 					.postQuery(false, app, "message/send", innerMessage).getData(WrapBoolean.class);
-			// 单独发送推送消息用，没有存message对象 所以没有id，不需要更新
+			// 푸시 메시지 단독 발송용. message 객체를 저장하지 않아 id가 없으므로 업데이트 불필요
 			if (StringUtils.isEmpty(message.getId())) {
 				return;
 			}
@@ -62,7 +62,7 @@ public class PmsinnerConsumeQueue extends AbstractQueue<Message> {
 
 	private BaseMessageExtra extra(Message message) {
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Message 消息：{}",   message.toString());
+			LOGGER.debug("Message 메시지:{}",   message.toString());
 		}
 		switch (message.getType()) {
 			case MessageConnector.TYPE_TASK_CREATE:
@@ -171,7 +171,7 @@ public class PmsinnerConsumeQueue extends AbstractQueue<Message> {
 			return extra;
 		}
 
-		private String type; // 消息类型
+		private String type; // 메시지 유형
 
 
 		public String getType() {

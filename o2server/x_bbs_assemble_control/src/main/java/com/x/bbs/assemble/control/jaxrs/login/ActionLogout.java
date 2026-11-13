@@ -11,7 +11,7 @@ import com.x.bbs.assemble.control.service.BBSUserInfoService;
 import com.x.bbs.assemble.control.service.bean.RoleAndPermission;
 
 /**
- * 手机用户访问论坛信息，首页所有的信息整合在一起 匿名用户可以访问
+ * 모바일 사용자 포럼 정보 접근, 홈의 모든 정보를 통합 익명 사용자 접근 가능
  * 
  * @param request
  * @return

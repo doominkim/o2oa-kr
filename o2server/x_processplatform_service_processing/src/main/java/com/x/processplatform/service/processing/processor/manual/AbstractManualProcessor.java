@@ -18,7 +18,7 @@ import com.x.processplatform.service.processing.processor.AbstractProcessor;
 import com.x.processplatform.service.processing.processor.AeiObjects;
 
 /***
- * Manual活动基础功能
+ * Manual 활동 기본 기능
  */
 abstract class AbstractManualProcessor extends AbstractProcessor {
 
@@ -31,7 +31,7 @@ abstract class AbstractManualProcessor extends AbstractProcessor {
 	@Override
 	protected Work arriveProcessing(AeiObjects aeiObjects) throws Exception {
 		Manual manual = (Manual) aeiObjects.getActivity();
-		/** 更新data中的work和attachment */
+		/** data의 work와 attachment 업데이트 */
 		aeiObjects.getData().setWork(aeiObjects.getWork());
 		aeiObjects.getData().setAttachmentList(aeiObjects.getAttachments());
 		return arriving(aeiObjects, manual);

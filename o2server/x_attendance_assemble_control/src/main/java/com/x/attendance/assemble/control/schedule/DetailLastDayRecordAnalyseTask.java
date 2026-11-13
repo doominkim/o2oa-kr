@@ -16,8 +16,8 @@ import com.x.base.core.project.schedule.AbstractJob;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 每天凌晨分析前一天未签退的打卡数据
- * 有一些用户是经常会忘记签退，没有最终的下班打卡数据
+ * 매일 새벽 전날 퇴근 체크하지 않은 출퇴근 데이터 분석
+ * 일부 사용자는 퇴근 체크를 자주 잊어 최종 퇴근 기록 데이터가 없음
  */
 public class DetailLastDayRecordAnalyseTask extends AbstractJob {
 
@@ -30,7 +30,7 @@ public class DetailLastDayRecordAnalyseTask extends AbstractJob {
 		List<String> ids = null;
 		DateOperation dateOperation = new DateOperation();
 
-		//获取前一天的日期，后面需要查询前一天所有没有签退的打卡数据
+		//전날 날짜를 구함, 이후 전날 퇴근 체크하지 않은 모든 출퇴근 데이터를 조회해야 함
 		String date = dateOperation.getDayAdd( new Date(), -1 );
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ids = attendanceDetailServiceAdv.listRecordWithDateAndNoOffDuty( date  );
@@ -38,7 +38,7 @@ public class DetailLastDayRecordAnalyseTask extends AbstractJob {
 			logger.error(new QueryMobileDetailWithStatusException(0));
 		}
 		if(ListTools.isNotEmpty( ids )){
-			logger.debug( date + "有 " + ids.size() + "条考勤打卡数据需要重新分析。");
+			logger.debug( date + "총 " + ids.size() + "건의 근태 출퇴근 데이터를 다시 분석해야 합니다.");
 			for( String id : ids ){
 				try {
 //					ThisApplication.detailAnalyseQueue.send( id );

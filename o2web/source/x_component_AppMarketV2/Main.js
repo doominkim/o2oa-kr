@@ -41,21 +41,21 @@ MWF.xApplication.AppMarketV2.Main = new Class({
 			this.content.loadHtml(this.viewPath, {"bind": {"lp": this.lp}, "module": this}, function(){
 				if (!this.options.isRefresh){
 					this.maxSize(function(){
-						//检查是否在云服务器上已注册
-						this.actions.CollectAction.login(//平台封装好的方法
-							function( json ){ //服务调用成功的回调函数, json为服务传回的数据
+						//클라우드 서버에 등록되었는지 확인
+						this.actions.CollectAction.login(//플랫폼이 제공하는 메서드
+							function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
 								if (json.type && json.type=="success"){
 									this.loadApp(callback);
 								}
 							}.bind(this),
-							function( json ){ //服务调用成功的回调函数, json为服务传回的数据
+							function( json ){ //서비스 호출 성공 콜백 함수, json은 서비스가 반환한 데이터
 								errtype = JSON.parse(json.response).type;
 								if (errtype && errtype=="error"){
-									//o2.xDesktop.notice("error", {x: "right", y:"top"}, JSON.parse(json.response).message+"请至系统配置——云服务配置——连接配置注册并连接到O2云");
+									//o2.xDesktop.notice("error", {x: "right", y:"top"}, JSON.parse(json.response).message+"시스템 설정 - 클라우드 서비스 설정 - 연결 설정에서 등록 후 O2 클라우드에 연결하십시오");
 									this.loadCloudConnectTip(callback);
 								}
 							}.bind(this)
-							,false //同步执行
+							,false //동기 실행
 						);
 
 					}.bind(this));

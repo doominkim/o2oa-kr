@@ -55,7 +55,7 @@ public class ActionSubjectCompleted extends BaseAction {
 				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectOperation(e, "用户完成主题时发生异常！");
+				Exception exception = new ExceptionSubjectOperation(e, "주제를 완료 처리하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

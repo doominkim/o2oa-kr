@@ -31,11 +31,11 @@ import com.x.base.core.project.tools.DateTools;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 脑图信息表
+ * 마인드맵 정보 테이블
  * 
  * @author O2LEE
  */
-@Schema(name = "MindBaseInfo", description = "脑图信息.")
+@Schema(name = "MindBaseInfo", description = "마인드맵 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.MindBaseInfo.table, uniqueConstraints = {
@@ -56,7 +56,7 @@ public class MindBaseInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -86,72 +86,72 @@ public class MindBaseInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	// public static String[] FLA GS = new String[] { "id" };
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("脑图名称")
+	@FieldDescribe("마인드맵 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name = "";
 
 	public static final String folderId_FIELDNAME = "folderId";
-	@FieldDescribe("所属目录ID")
+	@FieldDescribe("소속 디렉터리 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + folderId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + folderId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String folderId = "";
 	
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("缩略图信息")
+	@FieldDescribe("썸네일 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + icon_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String icon = "";
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("备注信息")
+	@FieldDescribe("비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = "";
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("自动生成，创建者")
+	@FieldDescribe("자동 생성, 생성자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creator_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator = "";
 
 	public static final String creatorUnit_FIELDNAME = "creatorUnit";
-	@FieldDescribe("自动生成，创建者所属组织")
+	@FieldDescribe("자동 생성, 생성자 소속 조직")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creatorUnit_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creatorUnit = "";
 
 	public static final String shared_FIELDNAME = "shared";
-	@FieldDescribe("自动生成，是否已经分享")
+	@FieldDescribe("자동 생성, 공유 여부")
 	@Column(name = ColumnNamePrefix + shared_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean shared = false;
 
 	public static final String cooperative_FIELDNAME = "cooperative";
-	@FieldDescribe("自动生成，是否协作模式")
+	@FieldDescribe("자동 생성, 협업 모드 여부")
 	@Column(name = ColumnNamePrefix + cooperative_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean cooperative = false;
 
 	public static final String sharePersonList_FIELDNAME = "sharePersonList";
-	@FieldDescribe("共享人员")
+	@FieldDescribe("공유 사용자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name =  ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + sharePersonList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -163,7 +163,7 @@ public class MindBaseInfo extends SliceJpaObject {
 	private List<String> sharePersonList;
 
 	public static final String shareUnitList_FIELDNAME = "shareUnitList";
-	@FieldDescribe("共享组织")
+	@FieldDescribe("공유 조직")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name =  ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + shareUnitList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -175,7 +175,7 @@ public class MindBaseInfo extends SliceJpaObject {
 	private List<String> shareUnitList;
 
 	public static final String shareGroupList_FIELDNAME = "shareGroupList";
-	@FieldDescribe("共享群组")
+	@FieldDescribe("공유 그룹")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name =  ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + shareGroupList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -187,7 +187,7 @@ public class MindBaseInfo extends SliceJpaObject {
 	private List<String> shareGroupList;
 
 	public static final String editorList_FIELDNAME = "editorList";
-	@FieldDescribe("可编辑人员")
+	@FieldDescribe("편집 가능 사용자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name =  ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + editorList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -199,42 +199,42 @@ public class MindBaseInfo extends SliceJpaObject {
 	private List<String> editorList;
 
 	public static final String shared_sequence_FIELDNAME = "shared_sequence";
-	@FieldDescribe("自动生成，shared列表序号.")
+	@FieldDescribe("자동 생성, shared 목록 순번.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + shared_sequence_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + shared_sequence_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String shared_sequence;
 
 	public static final String folder_sequence_FIELDNAME = "folder_sequence";
-	@FieldDescribe("自动生成，folder列表序号")
+	@FieldDescribe("자동 생성, folder 목록 순번")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + folder_sequence_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + folder_sequence_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String folder_sequence;
 
 	public static final String creator_sequence_FIELDNAME = "creator_sequence";
-	@FieldDescribe("自动生成，creator列表序号.")
+	@FieldDescribe("자동 생성, creator 목록 순번.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creator_sequence_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creator_sequence_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator_sequence;
 
 	public static final String creatorUnit_sequence_FIELDNAME = "creatorUnit_sequence";
-	@FieldDescribe("自动生成，creatorUnit列表序号.")
+	@FieldDescribe("자동 생성, creatorUnit 목록 순번.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creatorUnit_sequence_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorUnit_sequence_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creatorUnit_sequence;
 
 	public static final String cooperative_sequence_FIELDNAME = "cooperative_sequence";
-	@FieldDescribe("自动生成，cooperative列表序号.")
+	@FieldDescribe("자동 생성, cooperative 목록 순번.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + cooperative_sequence_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + cooperative_sequence_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String cooperative_sequence;
 
 	public static final String fileVersion_sequence_FIELDNAME = "fileVersion";
-	@FieldDescribe("自动生成，版本号")
+	@FieldDescribe("자동 생성, 버전 번호")
 	@Column(name = ColumnNamePrefix + fileVersion_sequence_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

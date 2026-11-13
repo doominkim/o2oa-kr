@@ -24,7 +24,7 @@ import com.x.base.core.project.tools.StringTools;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "WarnLog", description = "服务管理警告.")
+@Schema(name = "WarnLog", description = "서비스 관리 경고.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.WarnLog.TABLE, uniqueConstraints = {
@@ -46,12 +46,12 @@ public class WarnLog extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		if (null == this.collected) {
@@ -60,7 +60,7 @@ public class WarnLog extends SliceJpaObject {
 		if (StringTools.utf8Length(this.version) > JpaObject.length_32B) {
 			this.version = StringTools.utf8SubString(this.version, JpaObject.length_32B);
 		}
-		/** 不主动去修改时间 */
+		/** 시간을 임의로 수정하지 않음 */
 		// if (null == this.occurTime) {
 		// this.occurTime = new Date();
 		// }
@@ -72,21 +72,21 @@ public class WarnLog extends SliceJpaObject {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String collected_FIELDNAME = "collected";
-	@FieldDescribe("是否提交到collect服务器.")
+	@FieldDescribe("collect 서버 제출 여부.")
 	@Column(name = ColumnNamePrefix + collected_FIELDNAME)
 	private Boolean collected;
 
 	public static final String version_FIELDNAME = "version";
-	@FieldDescribe("服务器版本.")
+	@FieldDescribe("서버 버전.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + version_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String version;
 
 	public static final String occurTime_FIELDNAME = "occurTime";
-	@FieldDescribe("错误发生时间.")
+	@FieldDescribe("오류 발생 시간.")
 	@Column(name = ColumnNamePrefix + occurTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + occurTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -100,7 +100,7 @@ public class WarnLog extends SliceJpaObject {
 	private String loggerName;
 
 	public static final String message_FIELDNAME = "message";
-	@FieldDescribe("错误消息.")
+	@FieldDescribe("오류 메시지.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_2K, name = ColumnNamePrefix + message_FIELDNAME)

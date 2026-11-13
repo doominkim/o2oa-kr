@@ -16,9 +16,9 @@
 //	 */
 //	public static void main(String[] args) {
 //		try{	
-//			//System.out.println( "开始写入excel2003...." );
+//			//System.out.println( "excel2003 쓰기 시작...." );
 //			writeExcel( "tes2003.xls" );
-//			//System.out.println( "写完xcel2003" );
+//			//System.out.println( "xcel2003 쓰기 완료" );
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
@@ -26,34 +26,34 @@
 //	
 //	
 //	/**
-//	 * 写入excel并填充内容,一个sheet只能写65536行以下，超出会报异常，写入时建议使用AbstractExcel2007Writer
+//	 * excel을 쓰고 내용 채우기, sheet 하나에 65536행 미만만 가능하며 초과 시 예외 발생, 쓰기 시 AbstractExcel2007Writer 사용 권장
 //	 * @param fileName
 //	 * @throws IOException
 //	 */
 //	@SuppressWarnings("resource")
 //	public static void writeExcel(String fileName) throws IOException{
 //			
-//			// 创建excel2003对象
+//			// excel2003 객체 생성
 //			Workbook wb = new HSSFWorkbook();
 //			
-//			// 设置文件放置路径和文件名
+//			// 파일 저장 경로와 파일명 설정
 //		    FileOutputStream fileOut = new FileOutputStream(fileName);
-//		    // 创建新的表单
+//		    // 새 시트 생성
 //		    Sheet sheet = wb.createSheet( "newsheet" );
-//		    // 创建新行
+//		    // 새 행 생성
 //		    for(int i=0;i<20000;i++){
 //			    Row row = sheet.createRow(i);
-//			    // 创建单元格
+//			    // 셀 생성
 //			    Cell cell = row.createCell(0);
-//			    // 设置单元格值
+//			    // 셀 값 설정
 //			    cell.setCellValue(1);
 //			    row.createCell(1).setCellValue(1+i);
 //			    row.createCell(2).setCellValue(true);
 //			    row.createCell(3).setCellValue(0.43d);
 //			    row.createCell(4).setCellValue('d');
 //			    row.createCell(5).setCellValue( "" );
-//			    row.createCell(6).setCellValue( "第七列"+i);
-//			    row.createCell(7).setCellValue( "第八列"+i);
+//			    row.createCell(6).setCellValue( "일곱째 열"+i);
+//			    row.createCell(7).setCellValue( "여덟째 열"+i);
 //		    }
 //		    wb.write(fileOut);
 //		    fileOut.close();

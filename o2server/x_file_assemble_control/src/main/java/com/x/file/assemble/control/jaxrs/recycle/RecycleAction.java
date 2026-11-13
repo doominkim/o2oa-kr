@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("recycle")
-@JaxrsDescribe("回收站")
+@JaxrsDescribe("휴지통")
 public class RecycleAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(RecycleAction.class);
 
-	@JaxrsMethodDescribe(value = "获取回收站的文件对象。", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "휴지통의 파일 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+					@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -50,13 +50,13 @@ public class RecycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除回收站的文件.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "휴지통의 파일 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}/delete")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+					   @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -68,7 +68,7 @@ public class RecycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "清空回收站的文件.", action = ActionEmpty.class)
+	@JaxrsMethodDescribe(value = "휴지통의 파일 비우기.", action = ActionEmpty.class)
 	@DELETE
 	@Path("empty")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -85,7 +85,7 @@ public class RecycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取回收站所有文件.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "휴지통의 모든 파일 조회.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -102,13 +102,13 @@ public class RecycleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "从回收站恢复数据", action = ActionResume.class)
+	@JaxrsMethodDescribe(value = "휴지통에서 데이터 복원", action = ActionResume.class)
 	@POST
 	@Path("{id}/resume")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void resume(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("共享文件ID") @PathParam("id") String id) {
+					@JaxrsParameterDescribe("공유 파일 ID") @PathParam("id") String id) {
 		ActionResult<ActionResume.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

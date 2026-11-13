@@ -19,7 +19,7 @@ import com.x.bbs.assemble.control.service.BBSUserInfoService;
 import com.x.bbs.assemble.control.service.bean.RoleAndPermission;
 
 /**
- * 定时代理，对所有用户的发贴，回贴量以及权限进行分析统计并且记录。
+ * 정기 에이전트, 모든 사용자의 게시글·답글 수와 권한을 분석·통계하여 기록.
  * 
  * @author LIYI
  *
@@ -42,11 +42,11 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 	}
 
 	/**
-	 * 执行定时代理的业务逻辑
+	 * 정기 에이전트 업무 로직 실행
 	 */
 	private void process() {
 		List<String> operationUserNames = null;
-		// 1、在BBS_OPERATIONRECORD表里查询参与BBS系统的所有人员姓名列表
+		// 1. BBS_OPERATIONRECORD 테이블에서 BBS 시스템 참여 사용자 이름 목록 조회
 		try {
 			operationUserNames = operationRecordService.distinctAllOperationUserNames();
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.error(e);
 		}
 		if ( ListTools.isNotEmpty( operationUserNames )) {
-			// 2、遍历所有的人员，分别进行统计
+			// 2. 모든 사용자를 순회하며 각각 통계
 			operationUserNames.forEach(u -> {
 				statisticSubjectReplyCountForUser(u);
 			});
@@ -69,18 +69,18 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 		RoleAndPermission roleAndPermission = null;
 		List<String> roleCodes = null;
 		List<String> permissionCodes = null;
-		Long subjectCount = 0L; // 人员发贴量
-		Long replyCount = 0L; // 人员回贴量
-		Long subjectCountToday = 0L; // 今日发贴量
-		Long replyCountToday = 0L;// 今日回贴量
-		Long creamCount = 0L;// 精华贴数量
-		Long originalCount = 0L;// 原创贴数量
-		Long fansCount = 0L; // 粉丝数
-		Long popularity = 0L; // 人气
-		Long credit = 0L;// 积分
-		String permissionContent = ""; // 权限角色内容
+		Long subjectCount = 0L; // 사용자 게시글 수
+		Long replyCount = 0L; // 사용자 답글 수
+		Long subjectCountToday = 0L; // 오늘 게시글 수
+		Long replyCountToday = 0L;// 오늘 답글 수
+		Long creamCount = 0L;// 우수 게시글 수
+		Long originalCount = 0L;// 원작 게시글 수
+		Long fansCount = 0L; // 팬 수
+		Long popularity = 0L; // 인기
+		Long credit = 0L;// 포인트
+		String permissionContent = ""; // 권한 역할 내용
 
-		// 统计人员发贴量
+		// 사용자 게시글 수 통계
 		try {
 			subjectCount = subjectInfoService.countSubjectByUserName(userName);
 		} catch (Exception e) {
@@ -88,7 +88,7 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.error(e);
 		}
 
-		// 人员回贴量
+		// 사용자 답글 수
 		try {
 			replyCount = replyInfoService.countReplyByUserName(userName);
 		} catch (Exception e) {
@@ -96,7 +96,7 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.error(e);
 		}
 
-		// 今日发贴量
+		// 오늘 게시글 수
 		try {
 			subjectCountToday = subjectInfoService.countSubjectForTodayByUserName(userName);
 		} catch (Exception e) {
@@ -104,7 +104,7 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.error(e);
 		}
 
-		// 今日回贴量
+		// 오늘 답글 수
 		try {
 			replyCountToday = replyInfoService.countReplyForTodayByUserName(userName);
 		} catch (Exception e) {
@@ -112,7 +112,7 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.error(e);
 		}
 
-		// 精华贴数量
+		// 우수 게시글 수
 		try {
 			creamCount = subjectInfoService.countCreamSubjectByUserName(userName);
 		} catch (Exception e) {
@@ -120,7 +120,7 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.error(e);
 		}
 
-		// 原创贴数量
+		// 원작 게시글 수
 		try {
 			originalCount = subjectInfoService.countOriginalSubjectByUserName(userName);
 		} catch (Exception e) {
@@ -128,10 +128,10 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.error(e);
 		}
 
-		// 粉丝数
-		// 人气
-		// 积分
-		// 权限角色内容
+		// 팬 수
+		// 인기
+		// 포인트
+		// 권한 역할 내용
 		gson = XGsonBuilder.instance();
 		roleAndPermission = new RoleAndPermission();
 		roleAndPermission.setPerson(userName);
@@ -157,7 +157,7 @@ public class UserSubjectReplyPermissionStatisticTask extends AbstractJob {
 			logger.warn("system translate object to json got an exception.");
 			logger.error(e);
 		}
-		// 从数据库中查询出人员信息，进行信息更新
+		// 데이터베이스에서 사용자 정보를 조회하여 정보 갱신
 		try {
 			userInfoService.save(userName, subjectCount, replyCount, subjectCountToday, replyCountToday, creamCount,
 					originalCount, fansCount, popularity, credit, permissionContent);

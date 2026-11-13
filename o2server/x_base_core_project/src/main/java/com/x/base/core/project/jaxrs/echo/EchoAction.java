@@ -33,9 +33,9 @@ public class EchoAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EchoAction.class);
 
-	@Operation(summary = "获取应答.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "응답 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = @Content(schema = @Schema(implementation = ActionGet.Wo.class))) })
-	@JaxrsMethodDescribe(value = "获取应答.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "응답 조회.", action = ActionGet.class)
 	@GET
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context ServletContext servletContext,
 			@Context HttpServletRequest request) {

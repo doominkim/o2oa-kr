@@ -51,7 +51,7 @@ public class MissionExternalDataSources implements Mission {
 			Config.resource_commandQueue().add("ctl -regenerateConfig");
 			Config.resource_commandQueue().add("ctl -initResourceFactory");
 			Config.regenerate();
-			// 命令队列是用多线程运行的,后续如果有ctl -initResourceFactory对目录有操作,可能导致重复删除目录冲突.
+			// 명령 큐는 멀티스레드로 실행되므로, 이후 ctl -initResourceFactory가 디렉터리를 조작하면 디렉터리 중복 삭제 충돌이 발생할 수 있음.
 			Thread.sleep(5000);
 			messages.msg("success");
 		} catch (InterruptedException ie) {

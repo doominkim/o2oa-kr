@@ -18,16 +18,16 @@ import com.x.calendar.core.entity.Calendar_EventRepeatMaster;
 
 
 /**
- * 日历重复信息主体记录信息服务类
+ * 캘린더 반복 정보 주체 레코드 정보 서비스 클래스
  *
  */
 public class Calendar_EventRepeatMasterService {
 
 	/**
-	 * 根据ID彻底删除指定的日历重复信息主体记录信息
+	 * ID로 지정 캘린더 반복 정보 주체 레코드 정보 영구 삭제
 	 * @param emc
 	 * @param repeatMasterId
-	 * @param excludeIds 排除EventID列表
+	 * @param excludeIds 제외할 EventID 목록
 	 * @throws Exception
 	 */
 	public void destoryWithMasterId( EntityManagerContainer emc, String repeatMasterId, List<String> excludeIds ) throws Exception {
@@ -59,7 +59,7 @@ public class Calendar_EventRepeatMasterService {
 	}
 
 	/**
-	 * 创建日历重复信息主体记录信息
+	 * 캘린더 반복 정보 주체 레코드 정보 생성
 	 * @param emc
 	 * @param calendar_EventRepeatMaster
 	 * @param autoTransaction
@@ -92,7 +92,7 @@ public class Calendar_EventRepeatMasterService {
 	}
 
 	/**
-	 * 更新日历重复信息主体记录信息
+	 * 캘린더 반복 정보 주체 레코드 정보 수정
 	 * @param emc
 	 * @param calendar_EventRepeatMaster
 	 * @param autoTransaction
@@ -126,7 +126,7 @@ public class Calendar_EventRepeatMasterService {
 	}
 
 	/**
-	 * 根据条件查询指定的日历信息ID列表
+	 * 조건으로 지정한 캘린더 정보 ID 목록 조회
 	 * @param emc
 	 * @param title
 	 * @param type
@@ -156,7 +156,7 @@ public class Calendar_EventRepeatMasterService {
 	}
 
 	/**
-	 * 检查该repeatMaster下所有的记录是不是全都是已经删除了，如果没有有效的记录的话，就全部删除掉
+	 * 해당 repeatMaster 아래 모든 레코드가 삭제되었는지 확인, 유효한 레코드가 없으면 모두 삭제
 	 * @param emc
 	 * @param repeatMasterId
 	 * @throws Exception 
@@ -165,7 +165,7 @@ public class Calendar_EventRepeatMasterService {
 		Business business =  new Business( emc );
 		long count = business.calendar_EventFactory().countWithRepeatMaster( repeatMasterId );
 		if( count == 0 ) {
-			//删除repeatMaster
+			//repeatMaster 삭제
 			Calendar_EventRepeatMaster calendar_EventRepeatMaster = emc.find( repeatMasterId, Calendar_EventRepeatMaster.class );
 			emc.beginTransaction( Calendar_EventRepeatMaster.class );
 			emc.remove( calendar_EventRepeatMaster, CheckRemoveType.all );
@@ -174,7 +174,7 @@ public class Calendar_EventRepeatMasterService {
 	}
 
 	/**
-	 * 根据条件和时间范围查询需要进行事件生成的重复主体ID列表,  时间根据已经生成过的日期来判断
+	 * 조건과 시간 범위에 따라 이벤트 생성이 필요한 반복 주체 ID 목록 조회,  시간은 이미 생성된 날짜로 판단
 	 * @param emc
 	 * @param calendarIds
 	 * @param eventType
@@ -191,7 +191,7 @@ public class Calendar_EventRepeatMasterService {
 		Business business =  new Business( emc );
 		List<String> result = new ArrayList<>();
 		List<String> ids = null;
-		//两个时间之间的月份查出来，看看这些月份是否需要生成日历事件
+		//두 시간 사이의 월을 구해, 해당 월에 캘린더 이벤트 생성이 필요한지 확인
 		List<String> needCreateMonths = new DateOperation().listMonthsBetweenDate(startTime, endTime);
 		if( ListTools.isNotEmpty( needCreateMonths ) ) {
 			for(String createMonth : needCreateMonths) {
@@ -210,7 +210,7 @@ public class Calendar_EventRepeatMasterService {
 	}
 
 	/**
-	 * 根据条件和时间范围查询需要进行事件生成的重复主体ID列表,  时间根据已经生成过的日期来判断
+	 * 조건과 시간 범위에 따라 이벤트 생성이 필요한 반복 주체 ID 목록 조회,  시간은 이미 생성된 날짜로 판단
 	 * @param emc
 	 * @param calendarIds
 	 * @param eventType

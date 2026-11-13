@@ -20,7 +20,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 列示指定用户能访问到的日历信息
+ * 지정한 사용자가 접근할 수 있는 캘린더 정보 조회
  *
  * @author O2LEE
  *
@@ -64,19 +64,19 @@ public class ActionManagerListWithPerson extends BaseAction {
 				woCalendar.setManageable(ThisApplication.isCalendarManager(effectivePerson, calendar));
 				woCalendar.setPublishable(
 						ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar));
-				// 将所有的日历分为三类，放在三个不同的LIST里
-				// 组织日历
+				// 모든 캘린더를 세 종류로 나눠 서로 다른 세 LIST에 저장
+				// 조직 캘린더
 				if (ListTools.isNotEmpty(calendar.getFollowers())
 						&& calendar.getFollowers().contains(effectivePerson.getDistinguishedName())) {
-					// 我关注的日历
+					// 내가 구독한 캘린더
 					wo.addFollowCalendar(woCalendar);
 				} else {
-					// 个人或者组织日历
+					// 개인 또는 조직 캘린더
 					if ("UNIT".equalsIgnoreCase(calendar.getType())) {
-						// 组织日历
+						// 조직 캘린더
 						wo.addUnitCalendar(woCalendar);
 					} else {
-						// 个人日历
+						// 개인 캘린더
 //							Boolean isMineCalendar = calendar.getCreateor().equalsIgnoreCase( effectivePerson.getDistinguishedName() );
 						Boolean isSystemCreate = StringUtils.equalsAnyIgnoreCase("SYSTEM", calendar.getCreateor());
 						if (isSystemCreate) {
@@ -85,7 +85,7 @@ public class ActionManagerListWithPerson extends BaseAction {
 								wo.addMyCalendar(woCalendar);
 								existsSystemDefaultCalendar = true;
 							} else {
-								// 多了一个系统日历，删除当前这个日历
+								// 시스템 캘린더가 하나 더 있으므로 현재 캘린더 삭제
 								calendarServiceAdv.destory(calendar.getId());
 							}
 						} else {
@@ -101,13 +101,13 @@ public class ActionManagerListWithPerson extends BaseAction {
 
 	public static class Wo {
 
-		@FieldDescribe("我创建的个人日历列表.")
+		@FieldDescribe("내가 만든 개인 캘린더 목록.")
 		private List<WoCalendar> myCalendars = new ArrayList<>();
 
-		@FieldDescribe("可见的组织日历列表.")
+		@FieldDescribe("볼 수 있는 조직 캘린더 목록.")
 		private List<WoCalendar> unitCalendars = new ArrayList<>();
 
-		@FieldDescribe("关注的日历列表.")
+		@FieldDescribe("구독한 캘린더 목록.")
 		private List<WoCalendar> followCalendars = new ArrayList<>();
 
 		public List<WoCalendar> getMyCalendars() {
@@ -178,10 +178,10 @@ public class ActionManagerListWithPerson extends BaseAction {
 
 		}
 
-		@FieldDescribe("用户是否可以对该日历进行管理.")
+		@FieldDescribe("사용자의 해당 캘린더 관리 가능 여부.")
 		private Boolean manageable = false;
 
-		@FieldDescribe("用户是否可以在该日历中发布日程事件.")
+		@FieldDescribe("사용자의 해당 캘린더 일정 이벤트 게시 가능 여부.")
 		private Boolean publishable = false;
 
 		public static WrapCopier<Calendar, WoCalendar> copier = WrapCopierFactory.wo(Calendar.class, WoCalendar.class,

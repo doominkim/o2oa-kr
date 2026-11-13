@@ -39,7 +39,7 @@ public class SplitFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的split */
+	/** 양식을 사용하는 split 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Split.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

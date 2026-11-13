@@ -17,7 +17,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "DingdingQywxSyncRecord", description = "考勤钉钉企业微信同步日志.")
+@Schema(name = "DingdingQywxSyncRecord", description = "근태 DingTalk·WeCom 동기화 로그.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.DingdingQywxSyncRecord.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.DingdingQywxSyncRecord.table
@@ -43,40 +43,40 @@ public class DingdingQywxSyncRecord extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("同步开始时间")
+	@FieldDescribe("동기화 시작 시간")
 	@Column(name = ColumnNamePrefix + startTime_FIELDNAME)
 	private Date startTime;
 
 	public static final String endTime_FIELDNAME = "endTime";
-	@FieldDescribe("同步结束时间")
+	@FieldDescribe("동기화 종료 시간")
 	@Column(name = ColumnNamePrefix + endTime_FIELDNAME)
 	private Date endTime;
 
 	public static final String syncType_qywx = "qywx";
 	public static final String syncType_dingding = "dingding";
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("同步类型，qywx（企业微信同步） ， dingding(钉钉同步)")
+	@FieldDescribe("동기화 유형, qywx(WeCom 동기화), dingding(DingTalk 동기화)")
 	@Column(length = length_32B, name = ColumnNamePrefix + type_FIELDNAME)
 	private String type;
 
 	public static final String dateFrom_FIELDNAME = "dateFrom";
-	@FieldDescribe("同步打卡记录的开始时间")
+	@FieldDescribe("출퇴근 기록 동기화 시작 시간")
 	@Column(name = ColumnNamePrefix + dateFrom_FIELDNAME)
 	private long dateFrom;
 
 	public static final String dateTo_FIELDNAME = "dateTo";
-	@FieldDescribe("同步打卡记录的结束时间， 起始与结束工作日最多相隔7天")
+	@FieldDescribe("출퇴근 기록 동기화 종료 시간, 시작과 종료 근무일은 최대 7일 간격")
 	@Column(name = ColumnNamePrefix + dateTo_FIELDNAME)
 	private long dateTo;
 
@@ -84,12 +84,12 @@ public class DingdingQywxSyncRecord extends SliceJpaObject {
 	public static final String status_end = "end";
 	public static final String status_error = "error";
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("同步状态，loading（正在进行） ， end（结束） , error（执行异常）")
+	@FieldDescribe("동기화 상태, loading(진행 중), end(종료), error(실행 오류)")
 	@Column(length = length_32B, name = ColumnNamePrefix + status_FIELDNAME)
 	private String status;
 
 	public static final String exceptionMessage_FIELDNAME = "exceptionMessage";
-	@FieldDescribe("异常信息")
+	@FieldDescribe("예외 정보")
 	@Column(length = length_255B, name = ColumnNamePrefix + exceptionMessage_FIELDNAME)
 	private String exceptionMessage;
 

@@ -48,7 +48,7 @@ class ActionListWithIdentitySupNested extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private List<String> identityList = new ArrayList<>();
 
 		public List<String> getIdentityList() {

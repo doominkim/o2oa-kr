@@ -6,7 +6,7 @@ class ExceptionOauthEmptyToken extends LanguagePromptException {
 
 	private static final long serialVersionUID = 4132300948670472899L;
 
-	public static String defaultMessage = "请求令牌返回值为空.";
+	public static String defaultMessage = "토큰 요청 응답값이 비어 있습니다.";
 
 	ExceptionOauthEmptyToken() {
 		super(defaultMessage);

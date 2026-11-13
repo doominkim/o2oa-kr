@@ -9,8 +9,8 @@ public class WrapBoolean extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 19308077998975323L;
 
-	@FieldDescribe("布尔值.")
-	@Schema(description = "布尔值.")
+	@FieldDescribe("불리언 값.")
+	@Schema(description = "불리언 값.")
 	private Boolean value;
 
 	public WrapBoolean() {

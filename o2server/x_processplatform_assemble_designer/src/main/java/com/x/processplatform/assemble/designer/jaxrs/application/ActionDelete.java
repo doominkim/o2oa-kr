@@ -77,7 +77,7 @@ class ActionDelete extends BaseAction {
 			if (!business.editable(effectivePerson, application)) {
 				throw new ExceptionInsufficientPermission(effectivePerson.getDistinguishedName());
 			}
-			/** 先删除content内容,删除内容的时候在方法内进行批量删除,在方法内部进行beginTransaction和commit */
+			/** 먼저 content 내용 삭제, 메서드 내에서 일괄 삭제하며 beginTransaction과 commit 수행 */
 			this.deleteTask(business, application);
 			this.deleteTaskCompleted(business, application, onlyRemoveNotCompleted);
 			this.deleteRead(business, application);
@@ -93,10 +93,10 @@ class ActionDelete extends BaseAction {
 				this.deleteWorkCompleted(business, application);
 			}
 			this.deleteWorkLog(business, application, onlyRemoveNotCompleted);
-			/** 删除数据字典和数据字典数据 */
+			/** 데이터 사전 및 데이터 사전 데이터 삭제 */
 			this.deleteApplicationDictItem(business, application);
 			this.deleteApplicationDict(business, application);
-			/** 再删除设计,开启事务进行统一删除 */
+			/** 다음으로 설계 삭제, 트랜잭션을 열어 일괄 삭제 */
 			emc.beginTransaction(Application.class);
 			emc.beginTransaction(Process.class);
 			emc.beginTransaction(Agent.class);
@@ -123,9 +123,9 @@ class ActionDelete extends BaseAction {
 
 			this.deleteItemAccess(business, application);
 			for (String str : business.process().listWithApplication(id, false)) {
-				/** 流程 1种 */
+				/** 프로세스 1종 */
 				Process process = emc.find(str, Process.class);
-				/** 流程Activity 14种 */
+				/** 프로세스 Activity 14종 */
 				this.deleteAgent(business, process);
 				this.deleteBegin(business, process);
 				this.deleteCancel(business, process);
@@ -140,17 +140,17 @@ class ActionDelete extends BaseAction {
 				this.deletePublish(business, process);
 				this.deleteService(business, process);
 				this.deleteSplit(business, process);
-				/** 路由 1种 */
+				/** 라우트 1종 */
 				this.deleteRoute(business, process);
 				emc.remove(process);
 			}
-			/** 应用内容 6种 */
+			/** 앱 콘텐츠 6종 */
 			this.deleteFormField(business, application);
 			this.deleteForm(business, application);
 			this.deleteScript(business, application);
 			this.deleteFile(business, application);
 			this.deleteSerialNumber(business, application);
-			/** 应用本体 1种 */
+			/** 앱 본체 1종 */
 			emc.remove(application);
 			emc.commit();
 			CacheManager.notify(Application.class);
@@ -365,7 +365,7 @@ class ActionDelete extends BaseAction {
 		List<String> ids = onlyRemoveNotCompleted
 				? business.attachment().listWithApplicationWithCompleted(application.getId(), false)
 				: business.attachment().listWithApplication(application.getId());
-		/** 附件需要单独处理删除 */
+		/** 첨부파일은 별도로 삭제 처리 필요 */
 		EntityManagerContainer emc = business.entityManagerContainer();
 		for (List<String> list : ListTools.batch(ids, 1000)) {
 			emc.beginTransaction(Attachment.class);

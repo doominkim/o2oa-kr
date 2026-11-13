@@ -53,7 +53,7 @@ public class Urge extends AbstractJob {
 					}
 				}
 			} while (!targets.isEmpty());
-			LOGGER.info("完成{}个待办的催办, 耗时:{}.", count.intValue(), stamp.consumingMilliseconds());
+			LOGGER.info("결재 대기 {}개 독촉 완료, 소요 시간:{}.", count.intValue(), stamp.consumingMilliseconds());
 		} catch (Exception e) {
 			throw new JobExecutionException(e);
 		}

@@ -32,7 +32,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 	}
 
 	/**
-	 * 将所有的周期配置组织成一个Map便于查询操作
+	 * 조회 편의를 위해 모든 주기 설정을 Map으로 구성
 	 * @param debugger
 	 * @return
 	 * @throws Exception
@@ -49,7 +49,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 	
 	
 	/**
-	 * 根据打卡信息明细，周期配置Map,查询适合打卡信息使用的统计周期配置，如果没有则新建一条
+	 * 출퇴근 기록 상세와 주기 설정 Map으로 출퇴근 기록에 맞는 통계 주기 설정 조회, 없으면 새로 생성
 	 * @param detail
 	 * @param topUnitAttendanceStatisticalCycleMap
 	 * @return
@@ -59,14 +59,14 @@ public class AttendanceStatisticalCycleServiceAdv {
 		List<AttendanceStatisticalCycle> unitCycles = null;
 		Map<String, List<AttendanceStatisticalCycle>> unitAttendanceStatisticalCycleMap = null;
 		String topUnitName = null, unitName = null;
-		logger.info("根据打卡信息明细，周期配置Map,查询适合打卡信息使用的统计周期配置，如果没有则新建一条。");
-		//从Map里查询与顶层组织和组织相应的周期配置信息
+		logger.info("출퇴근 기록 상세와 주기 설정 Map으로 출퇴근 기록에 맞는 통계 주기 설정 조회, 없으면 새로 생성.");
+		//Map에서 최상위 조직과 조직에 해당하는 주기 설정 정보 조회
 		if( topUnitAttendanceStatisticalCycleMap != null ){
-			//如果总体的Map不为空
+			//전체 Map이 비어 있지 않으면
 			unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( detail.getTopUnitName() );
 			if( unitAttendanceStatisticalCycleMap != null ){
 				topUnitName = detail.getTopUnitName();
-				//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+				//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 				unitCycles = unitAttendanceStatisticalCycleMap.get(detail.getUnitName());
 				if( unitCycles != null){
 					unitName = detail.getUnitName();
@@ -75,11 +75,11 @@ public class AttendanceStatisticalCycleServiceAdv {
 					unitName = "*";
 				}
 			}else{
-				//找顶层组织为*的Map看看是否存在
+				//최상위 조직이 *인 Map이 있는지 확인
 				unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( "*" );
 				topUnitName = "*";
 				if( unitAttendanceStatisticalCycleMap != null ){
-					//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+					//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 					unitCycles = unitAttendanceStatisticalCycleMap.get(detail.getUnitName());
 					if( unitCycles != null){
 						unitName = detail.getUnitName();
@@ -96,21 +96,21 @@ public class AttendanceStatisticalCycleServiceAdv {
 			unitName = "*";
 		}
 		if( unitCycles != null && unitCycles.size() > 0 ){
-			//根据打卡明细的统计周期年份月份来查询
+			//출퇴근 기록 상세의 통계 주기 연월로 조회
 			for( AttendanceStatisticalCycle attendanceStatisticalCycle : unitCycles ){
 				if( detail.getCycleYear().equals(attendanceStatisticalCycle.getCycleYear())
 					&& detail.getCycleMonth().equals(attendanceStatisticalCycle.getCycleMonth())
 				){
-					logger.info( "查询到适用的统计周期配置信息，返回查询结果......" );
+					logger.info( "적용할 통계 주기 설정 정보를 찾아 조회 결과 반환......" );
 					return attendanceStatisticalCycle;
 				}
 			}
 		}else{
-			logger.info("根据顶层组织["+topUnitName+"]和组织["+unitName+"]未获取到任何周期数据，需要创建新的统计周期数据......1");
+			logger.info("최상위 조직 ["+topUnitName+"]과 조직 ["+unitName+"]의 주기 데이터를 찾지 못해 새 통계 주기 데이터를 생성해야 합니다......1");
 		}
-		logger.info( "没有查询到适用的统计周期配置信息......" );
-		//如果程序到此仍未返回结果，说明未找到合适的配置记录，那么新建一条
-		//说明没有找到任何相关的配置，那么新创建一条配置
+		logger.info( "적용할 통계 주기 설정 정보를 찾지 못함......" );
+		//여기까지 결과가 반환되지 않았다면 적합한 설정 레코드가 없으므로 새로 생성
+		//관련 설정을 찾지 못했으므로 새 설정 생성
 		DateOperation dateOperation = new DateOperation();
 		String cycleMonth = dateOperation.getMonth( detail.getRecordDate() );
 		if( Integer.parseInt(cycleMonth) < 10 ){
@@ -127,7 +127,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 		attendanceStatisticalCycle.setCycleEndDate(dateOperation.getLastDateInMonth(detail.getRecordDate()));
 		attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(detail.getRecordDate()));
 		attendanceStatisticalCycle.setDescription("시스템 자동 생성");
-		//先把对象放到Map里
+		//먼저 객체를 Map에 넣음
 		if( topUnitAttendanceStatisticalCycleMap == null ){
 			topUnitAttendanceStatisticalCycleMap = new HashMap<String, Map<String, List<AttendanceStatisticalCycle>>>();
 		}
@@ -142,21 +142,21 @@ public class AttendanceStatisticalCycleServiceAdv {
 			unitAttendanceStatisticalCycleMap.put( unitName, unitCycles);
 		}
 		putDistinctCycleInList( attendanceStatisticalCycle, unitCycles, debugger );		
-		logger.info("准备保存新创建的统计周期信息......");
+		logger.info("새로 생성한 통계 주기 정보 저장 준비......");
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 			emc.beginTransaction(AttendanceStatisticalCycle.class);
 			emc.persist( attendanceStatisticalCycle, CheckPersistType.all);
 			emc.commit();
 		}catch(Exception e){
-			logger.info("系统在保存新的统计周期信息时发生异常！" );
+			logger.info("시스템이 새 통계 주기 정보를 저장하는 중 예외가 발생했습니다!" );
 			throw e;
 		}
 		return attendanceStatisticalCycle;
 	}
 	
 	/**
-	 * 根据顶层组织，组织，年月获取一个统计周期配置
-	 * 如果不存在，则新建一个周期配置
+	 * 최상위 조직, 조직, 연월로 통계 주기 설정 조회
+	 * 없으면 새 주기 설정 생성
 	 * 
 	 * @param q_topUnitName
 	 * @param q_unitName
@@ -175,53 +175,53 @@ public class AttendanceStatisticalCycleServiceAdv {
 			cycleMonth = "0"+Integer.parseInt(cycleMonth);
 		}
 
-		//从Map里查询与顶层组织和组织相应的周期配置信息
+		//Map에서 최상위 조직과 조직에 해당하는 주기 설정 정보 조회
 		if( topUnitAttendanceStatisticalCycleMap != null ){
-			//如果总体的Map不为空
+			//전체 Map이 비어 있지 않으면
 			unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( q_topUnitName );
 			if( unitAttendanceStatisticalCycleMap != null ){
 				topUnitName = q_topUnitName;
-				logger.info("0>>>>>>>>>>查询到顶层组织[" + topUnitName + "]的统计周期配置");
-				//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+				logger.info("0>>>>>>>>>>최상위 조직 [" + topUnitName + "]의 통계 주기 설정");
+				//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 				unitCycles = unitAttendanceStatisticalCycleMap.get( q_unitName );
 				if( unitCycles != null){
 					unitName = q_unitName;
-					logger.debug( debugger, "1>>>>>>>>>>查询到组织["+unitName+"]的统计周期配置");
+					logger.debug( debugger, "1>>>>>>>>>>조직 ["+unitName+"]의 통계 주기 설정");
 				}else{
-					logger.debug( debugger, "2>>>>>>>>>>未查询到组织["+unitName+"]的统计周期配置， 组织设置为*");
+					logger.debug( debugger, "2>>>>>>>>>>조직 ["+unitName+"]의 통계 주기 설정, 조직은 *로 설정");
 					unitName = "*";
 					unitCycles = unitAttendanceStatisticalCycleMap.get("*");
 				}
 			}else{
-				logger.debug( debugger, "3>>>>>>>>>>未查询到顶层组织["+q_topUnitName+"]的统计周期配置，顶层组织设置为*");
-				//找顶层组织为*的Map看看是否存在
+				logger.debug( debugger, "3>>>>>>>>>>최상위 조직 ["+q_topUnitName+"]의 통계 주기 설정 없음, 최상위 조직은 *로 설정");
+				//최상위 조직이 *인 Map이 있는지 확인
 				unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( "*" );
 				topUnitName = "*";
 				if( unitAttendanceStatisticalCycleMap != null ){
-					logger.debug( debugger, "4>>>>>>>>>>查询到顶层组织[*]的统计周期配置，再查询组织为[*]的配置列表");
-					//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+					logger.debug( debugger, "4>>>>>>>>>>최상위 조직 [*]의 통계 주기 설정을 찾아 조직이 [*]인 설정 목록을 재조회");
+					//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 					unitCycles = unitAttendanceStatisticalCycleMap.get( q_unitName );
 					if( unitCycles != null){
-						logger.debug( debugger, "5>>>>>>>>>>查询到顶层组织[*]组织["+unitName+"]的统计周期配置");
+						logger.debug( debugger, "5>>>>>>>>>>최상위 조직 [*] 조직 ["+unitName+"]의 통계 주기 설정");
 						unitName = q_unitName;
 					}else{
-						logger.debug( debugger, "6>>>>>>>>>>未查询到顶层组织[*]组织["+unitName+"]的统计周期配置， 组织设置为*,查询组织[*]的配置");
+						logger.debug( debugger, "6>>>>>>>>>>최상위 조직 [*] 조직 ["+unitName+"]의 통계 주기 설정, 조직은 *로 설정, 조직 [*]의 설정 조회");
 						unitName = "*";
 						unitCycles = unitAttendanceStatisticalCycleMap.get("*");
 					}
 				}else{
-					logger.debug( debugger, "7>>>>>>>>>>未查询到顶层组织[*]的统计周期配置，顶层组织设置为*，系统中没有任何配置");
+					logger.debug( debugger, "7>>>>>>>>>>최상위 조직 [*]의 통계 주기 설정 없음, 최상위 조직은 *로 설정, 시스템에 설정이 전혀 없음");
 					unitName = "*";
 				}
 			}
 		}else{
-			logger.debug( debugger, "8>>>>>>>>>>统计周期配置为空，顶层组织为*组织为*，系统中没有任何配置");
+			logger.debug( debugger, "8>>>>>>>>>>통계 주기 설정 없음, 최상위 조직 *, 조직 *, 시스템에 설정이 전혀 없음");
 			topUnitName = "*";
 			unitName = "*";
 		}
 		if( unitCycles != null && unitCycles.size() > 0 ){
-			//logger.debug( "周期列表信息条数：" + unitCycles.size() );
-			//说明配置信息里有配置，看看配置信息里的数据是否满足打卡信息需要的周期
+			//logger.debug( "주기 목록 정보 건수: " + unitCycles.size() );
+			//설정 정보가 있으므로 설정 데이터가 출퇴근 기록에 필요한 주기를 충족하는지 확인
 			for( AttendanceStatisticalCycle attendanceStatisticalCycle : unitCycles ){
 				if( attendanceStatisticalCycle.getCycleYear().equals(cycleYear) &&
 						attendanceStatisticalCycle.getCycleMonth().equals(cycleMonth)
@@ -231,12 +231,12 @@ public class AttendanceStatisticalCycleServiceAdv {
 				}
 			}
 		}else{
-			logger.info("根据顶层组织["+topUnitName+"]和组织["+unitName+"]未获取到任何周期数据，需要创建新的统计周期数据......2");
+			logger.info("최상위 조직 ["+topUnitName+"]과 조직 ["+unitName+"]의 주기 데이터를 찾지 못해 새 통계 주기 데이터를 생성해야 합니다......2");
 		}
 
 		if( !hasConfig ){
-			logger.debug( debugger, ">>>>>>>>>>未查询到合适的周期，根据打卡信息创建一条自然月的周期");
-			//说明没有找到任何相关的配置，那么新创建一条配置
+			logger.debug( debugger, ">>>>>>>>>>적합한 주기를 찾지 못해 출퇴근 기록 정보로 자연월 주기 생성");
+			//관련 설정을 찾지 못했으므로 새 설정 생성
 			DateOperation dateOperation = new DateOperation();
 			Date day = dateOperation.getDateFromString( cycleYear + "-" + cycleMonth + "-01");
 
@@ -251,7 +251,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 			attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(day));
 			attendanceStatisticalCycle.setDescription("시스템 자동 생성");
 
-			//先把对象放到Map里
+			//먼저 객체를 Map에 넣음
 			if( topUnitAttendanceStatisticalCycleMap == null ){
 				topUnitAttendanceStatisticalCycleMap = new HashMap<String, Map<String, List<AttendanceStatisticalCycle>>>();
 			}
@@ -266,13 +266,13 @@ public class AttendanceStatisticalCycleServiceAdv {
 				unitAttendanceStatisticalCycleMap.put( unitName, unitCycles);
 			}
 			putDistinctCycleInList( attendanceStatisticalCycle, unitCycles, debugger);
-			/*logger.info(  ">>>>>>>>>>准备保存新创建的统计周期信息......");
+			/*logger.info(  ">>>>>>>>>>새로 생성한 통계 주기 정보 저장 준비......");
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				emc.beginTransaction(AttendanceStatisticalCycle.class);
 				emc.persist( attendanceStatisticalCycle, CheckPersistType.all);
 				emc.commit();
 			}catch(Exception e){
-				logger.info(  ">>>>>>>>>>系统在保存新的统计周期信息时发生异常！");
+				logger.info(  ">>>>>>>>>>시스템이 새 통계 주기 정보를 저장하는 중 예외가 발생했습니다!");
 				throw e;
 			}*/
 			return attendanceStatisticalCycle;
@@ -281,8 +281,8 @@ public class AttendanceStatisticalCycleServiceAdv {
 	}
 
 	/**
-	 * 根据考勤人员配置，年月获取一个统计周期配置
-	 * 如果不存在，则新建一个周期配置
+	 * 근태 사용자 설정, 연월로 통계 주기 설정 조회
+	 * 없으면 새 주기 설정 생성
 	 * @param cycleYear
 	 * @param cycleMonth
 	 * @param topUnitAttendanceStatisticalCycleMap
@@ -301,53 +301,53 @@ public class AttendanceStatisticalCycleServiceAdv {
 			cycleMonth = "0"+Integer.parseInt(cycleMonth);
 		}
 		logger.debug( debugger, "getAttendanceDetailStatisticCycleByConfig-----q_topUnitName="+q_topUnitName+"---q_unitName="+q_unitName);
-		//从Map里查询与顶层组织和组织相应的周期配置信息
+		//Map에서 최상위 조직과 조직에 해당하는 주기 설정 정보 조회
 		if( topUnitAttendanceStatisticalCycleMap != null ){
-			//如果总体的Map不为空
+			//전체 Map이 비어 있지 않으면
 			unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( q_topUnitName );
 			if( unitAttendanceStatisticalCycleMap != null ){
 				topUnitName = q_topUnitName;
-				logger.debug( debugger, ">>>>>>>>>>查询到顶层组织[" + topUnitName + "]的统计周期配置");
-				//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+				logger.debug( debugger, ">>>>>>>>>>최상위 조직 [" + topUnitName + "]의 통계 주기 설정");
+				//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 				unitCycles = unitAttendanceStatisticalCycleMap.get( q_unitName );
 				if( unitCycles != null){
 					unitName = q_unitName;
-					logger.debug( debugger,  ">>>>>>>>>>查询到组织["+unitName+"]的统计周期配置");
+					logger.debug( debugger,  ">>>>>>>>>>조직 ["+unitName+"]의 통계 주기 설정");
 				}else{
-					logger.debug( debugger, ">>>>>>>>>>未查询到组织["+unitName+"]的统计周期配置， 组织设置为*");
+					logger.debug( debugger, ">>>>>>>>>>조직 ["+unitName+"]의 통계 주기 설정, 조직은 *로 설정");
 					unitName = "*";
 					unitCycles = unitAttendanceStatisticalCycleMap.get("*");
 				}
 			}else{
-				logger.info( "3>>>>>>>>>>未查询到顶层组织["+q_topUnitName+"]的统计周期配置，顶层组织设置为*");
-				//找顶层组织为*的Map看看是否存在
+				logger.info( "3>>>>>>>>>>최상위 조직 ["+q_topUnitName+"]의 통계 주기 설정 없음, 최상위 조직은 *로 설정");
+				//최상위 조직이 *인 Map이 있는지 확인
 				unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( "*" );
 				topUnitName = q_topUnitName;
 				if( unitAttendanceStatisticalCycleMap != null ){
-					logger.debug( debugger, ">>>>>>>>>>查询到顶层组织["+q_topUnitName+"]的统计周期配置，再查询组织为[*]的配置列表");
-					//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+					logger.debug( debugger, ">>>>>>>>>>최상위 조직 ["+q_topUnitName+"]의 통계 주기 설정, 조직이 [*]인 설정 목록 재조회");
+					//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 					unitCycles = unitAttendanceStatisticalCycleMap.get( q_unitName );
 					if( unitCycles != null){
-						logger.debug( debugger, ">>>>>>>>>>查询到顶层组织[*]组织["+unitName+"]的统计周期配置");
+						logger.debug( debugger, ">>>>>>>>>>최상위 조직 [*] 조직 ["+unitName+"]의 통계 주기 설정");
 						unitName = q_unitName;
 					}else{
-						logger.debug( debugger, ">>>>>>>>>>未查询到顶层组织[*]组织["+unitName+"]的统计周期配置， 组织设置为*,查询组织[*]的配置");
+						logger.debug( debugger, ">>>>>>>>>>최상위 조직 [*] 조직 ["+unitName+"]의 통계 주기 설정, 조직은 *로 설정, 조직 [*]의 설정 조회");
 						unitName = "*";
 						unitCycles = unitAttendanceStatisticalCycleMap.get("*");
 					}
 				}else{
-					logger.debug( debugger, ">>>>>>>>>>未查询到顶层组织[*]的统计周期配置，顶层组织设置为*，系统中没有任何配置");
+					logger.debug( debugger, ">>>>>>>>>>최상위 조직 [*]의 통계 주기 설정 없음, 최상위 조직은 *로 설정, 시스템에 설정이 전혀 없음");
 					unitName = "*";
 				}
 			}
 		}else{
-			logger.debug( debugger, ">>>>>>>>>>统计周期配置为空，顶层组织为*组织为*，系统中没有任何配置");
+			logger.debug( debugger, ">>>>>>>>>>통계 주기 설정 없음, 최상위 조직 *, 조직 *, 시스템에 설정이 전혀 없음");
 			topUnitName = q_topUnitName;
 			unitName = "*";
 		}
 		if( unitCycles != null && unitCycles.size() > 0 ){
-			//logger.debug( "周期列表信息条数：" + unitCycles.size() );
-			//说明配置信息里有配置，看看配置信息里的数据是否满足打卡信息需要的周期
+			//logger.debug( "주기 목록 정보 건수: " + unitCycles.size() );
+			//설정 정보가 있으므로 설정 데이터가 출퇴근 기록에 필요한 주기를 충족하는지 확인
 			for( AttendanceStatisticalCycle attendanceStatisticalCycle : unitCycles ){
 				if( attendanceStatisticalCycle.getCycleYear().equals(cycleYear) &&
 						attendanceStatisticalCycle.getCycleMonth().equals(cycleMonth)
@@ -357,12 +357,12 @@ public class AttendanceStatisticalCycleServiceAdv {
 				}
 			}
 		}else{
-			logger.info("根据顶层组织["+topUnitName+"]和组织["+unitName+"]未获取到任何周期数据，需要创建新的统计周期数据......2");
+			logger.info("최상위 조직 ["+topUnitName+"]과 조직 ["+unitName+"]의 주기 데이터를 찾지 못해 새 통계 주기 데이터를 생성해야 합니다......2");
 		}
 
 		if( !hasConfig ){
-			logger.debug( debugger, ">>>>>>>>>>未查询到合适的周期，根据打卡信息创建一条自然月的周期");
-			//说明没有找到任何相关的配置，那么新创建一条配置
+			logger.debug( debugger, ">>>>>>>>>>적합한 주기를 찾지 못해 출퇴근 기록 정보로 자연월 주기 생성");
+			//관련 설정을 찾지 못했으므로 새 설정 생성
 			DateOperation dateOperation = new DateOperation();
 			Date day = dateOperation.getDateFromString( cycleYear + "-" + cycleMonth + "-01");
 
@@ -377,7 +377,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 			attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(day));
 			attendanceStatisticalCycle.setDescription("시스템 자동 생성");
 
-			//先把对象放到Map里
+			//먼저 객체를 Map에 넣음
 			if( topUnitAttendanceStatisticalCycleMap == null ){
 				topUnitAttendanceStatisticalCycleMap = new HashMap<String, Map<String, List<AttendanceStatisticalCycle>>>();
 			}
@@ -392,13 +392,13 @@ public class AttendanceStatisticalCycleServiceAdv {
 				unitAttendanceStatisticalCycleMap.put( unitName, unitCycles);
 			}
 			putDistinctCycleInList( attendanceStatisticalCycle, unitCycles, debugger);
-			/*logger.info(  ">>>>>>>>>>准备保存新创建的统计周期信息......");
+			/*logger.info(  ">>>>>>>>>>새로 생성한 통계 주기 정보 저장 준비......");
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				emc.beginTransaction(AttendanceStatisticalCycle.class);
 				emc.persist( attendanceStatisticalCycle, CheckPersistType.all);
 				emc.commit();
 			}catch(Exception e){
-				logger.info(  ">>>>>>>>>>系统在保存新的统计周期信息时发生异常！");
+				logger.info(  ">>>>>>>>>>시스템이 새 통계 주기 정보를 저장하는 중 예외가 발생했습니다!");
 				throw e;
 			}*/
 			return attendanceStatisticalCycle;
@@ -408,7 +408,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 
 
 	/**
-	 * 根据顶层组织，组织，年月获取一个统计周期配置 如果不存在，则新建一个周期配置
+	 * 최상위 조직, 조직, 연월로 통계 주기 설정 조회, 없으면 새 주기 설정 생성
 	 * @param employeeName
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -429,59 +429,59 @@ public class AttendanceStatisticalCycleServiceAdv {
 			cycleMonth = "0"+Integer.parseInt(cycleMonth);
 		}
 		
-		//从Map里查询与顶层组织和组织相应的周期配置信息
+		//Map에서 최상위 조직과 조직에 해당하는 주기 설정 정보 조회
 		if( topUnitAttendanceStatisticalCycleMap != null ){
-			//需要查询用户的身份
+			//사용자 신분 조회 필요
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				identities = userManagerService.listIdentitiesWithPerson( employeeName );
-				if (identities == null || identities.size() == 0) {//该员工目前没有分配身份
+				if (identities == null || identities.size() == 0) {//해당 직원에게 현재 할당된 신분 없음
 					throw new Exception("can not get identity of person:" + employeeName + ".");
 				}
 			}catch(Exception e){
-				logger.warn("系统在查询员工["+employeeName+"]在系统中存在的身份时发生异常！");
+				logger.warn("시스템이 직원 ["+employeeName+"]의 시스템 내 신분을 조회하는 중 예외가 발생했습니다!");
 				throw e;
 			}
 			
 			if( identities != null && identities.size() > 0 ){
 				for( String identity : identities ){
-					logger.debug( debugger, ">>>>>>>>>>身份：" + identity );
+					logger.debug( debugger, ">>>>>>>>>>신분:" + identity );
 					unitName = userManagerService.getUnitNameWithIdentity( identity );
 					if( unitName != null ){
 						topUnitName = userManagerService.getTopUnitNameByIdentity( identity );
-						//如果总体的Map不为空
+						//전체 Map이 비어 있지 않으면
 						unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( topUnitName );
 						if( unitAttendanceStatisticalCycleMap != null ){
-							logger.debug( debugger, ">>>>>>>>>>查询到顶层组织[" + topUnitName + "]的统计周期配置");
-							//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+							logger.debug( debugger, ">>>>>>>>>>최상위 조직 [" + topUnitName + "]의 통계 주기 설정");
+							//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 							unitCycles = unitAttendanceStatisticalCycleMap.get( unitName );
 							if( unitCycles == null){
-								logger.debug( debugger, ">>>>>>>>>>未查询到组织["+unitName+"]的统计周期配置， 组织设置为*");
+								logger.debug( debugger, ">>>>>>>>>>조직 ["+unitName+"]의 통계 주기 설정, 조직은 *로 설정");
 								unitName = "*";
 								unitCycles = unitAttendanceStatisticalCycleMap.get("*");
 							}
 						}else{
-							logger.debug( debugger, ">>>>>>>>>>没有顶层组织["+topUnitName+"]的统计周期配置，顶层组织设置为*");
-							//找顶层组织为*的Map看看是否存在
+							logger.debug( debugger, ">>>>>>>>>>최상위 조직 ["+topUnitName+"]의 통계 주기 설정 없음, 최상위 조직은 *로 설정");
+							//최상위 조직이 *인 Map이 있는지 확인
 							unitAttendanceStatisticalCycleMap = topUnitAttendanceStatisticalCycleMap.get( "*" );
 							topUnitName = "*";
 							if( unitAttendanceStatisticalCycleMap != null ){
-								logger.debug( debugger, ">>>>>>>>>>查询到顶层组织[*]的统计周期配置，再查询组织为[*]的配置列表");
-								//存在当前顶层组织的配置信息，再根据组织查询组织的配置列表是否存在[topUnit - unit]
+								logger.debug( debugger, ">>>>>>>>>>최상위 조직 [*]의 통계 주기 설정을 찾아 조직이 [*]인 설정 목록을 재조회");
+								//현재 최상위 조직의 설정 정보가 있으므로 조직으로 조직 설정 목록 존재 여부 재조회 [topUnit - unit]
 								unitCycles = unitAttendanceStatisticalCycleMap.get( unitName );
 								if( unitCycles == null){
-									//logger.debug("未查询到顶层组织[*]组织["+detail.getUnitName()+"]的统计周期配置， 组织设置为*,查询组织[*]的配置");
+									//logger.debug("최상위 조직 [*] 조직 ["+detail.getUnitName()+"]의 통계 주기 설정 없음, 조직은 *로 설정, 조직 [*]의 설정 조회");
 									unitName = "*";
 									unitCycles = unitAttendanceStatisticalCycleMap.get("*");
 								}
 							}else{
-								logger.debug( debugger, ">>>>>>>>>>未查询到顶层组织[*]的统计周期配置，顶层组织设置为*，系统中没有任何配置");
+								logger.debug( debugger, ">>>>>>>>>>최상위 조직 [*]의 통계 주기 설정 없음, 최상위 조직은 *로 설정, 시스템에 설정이 전혀 없음");
 								unitName = "*";
 							}
 						}
 					}					
 					if( unitCycles != null && unitCycles.size() > 0 ){
-						logger.debug( debugger, ">>>>>>>>>>周期列表信息条数：" + unitCycles.size() );
-						//说明配置信息里有配置，看看配置信息里的数据是否满足打卡信息需要的周期
+						logger.debug( debugger, ">>>>>>>>>>주기 목록 정보 건수:" + unitCycles.size() );
+						//설정 정보가 있으므로 설정 데이터가 출퇴근 기록에 필요한 주기를 충족하는지 확인
 						for( AttendanceStatisticalCycle attendanceStatisticalCycle : unitCycles ){
 							if( attendanceStatisticalCycle.getCycleYear().equals(cycleYear) && attendanceStatisticalCycle.getCycleMonth().equals(cycleMonth)){
 								hasConfig = true;
@@ -493,14 +493,14 @@ public class AttendanceStatisticalCycleServiceAdv {
 				}
 			}
 		}else{
-			logger.debug( debugger, ">>>>>>>>>>统计周期配置为空，顶层组织为*组织为*，系统中没有任何配置");
+			logger.debug( debugger, ">>>>>>>>>>통계 주기 설정 없음, 최상위 조직 *, 조직 *, 시스템에 설정이 전혀 없음");
 			topUnitName = "*";
 			unitName = "*";
 		}
 		
 		if( !hasConfig ){
-			logger.debug( debugger, ">>>>>>>>>>未查询到合适的周期，根据打卡信息创建一条自然月的周期");
-			//说明没有找到任何相关的配置，那么新创建一条配置
+			logger.debug( debugger, ">>>>>>>>>>적합한 주기를 찾지 못해 출퇴근 기록 정보로 자연월 주기 생성");
+			//관련 설정을 찾지 못했으므로 새 설정 생성
 			DateOperation dateOperation = new DateOperation();
 			Date day = dateOperation.getDateFromString( cycleYear + "-" + cycleMonth + "-01");
 			
@@ -515,7 +515,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 			attendanceStatisticalCycle.setCycleEndDateString(dateOperation.getLastDateStringInMonth(day));
 			attendanceStatisticalCycle.setDescription("시스템 자동 생성");
 			
-			//先把对象放到Map里
+			//먼저 객체를 Map에 넣음
 			if( topUnitAttendanceStatisticalCycleMap == null ){
 				topUnitAttendanceStatisticalCycleMap = new HashMap<String, Map<String, List<AttendanceStatisticalCycle>>>();
 			}
@@ -530,13 +530,13 @@ public class AttendanceStatisticalCycleServiceAdv {
 				unitAttendanceStatisticalCycleMap.put( unitName, unitCycles);
 			}
 			putDistinctCycleInList( attendanceStatisticalCycle, unitCycles, debugger);			
-			logger.debug( debugger, ">>>>>>>>>>准备保存新创建的统计周期信息......");
+			logger.debug( debugger, ">>>>>>>>>>새로 생성한 통계 주기 정보 저장 준비......");
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				emc.beginTransaction(AttendanceStatisticalCycle.class);
 				emc.persist( attendanceStatisticalCycle, CheckPersistType.all);
 				emc.commit();
 			}catch(Exception e){
-				logger.warn("系统在保存新的统计周期信息时发生异常！");
+				logger.warn("시스템이 새 통계 주기 정보를 저장하는 중 예외가 발생했습니다!");
 				throw e;
 			}
 			return attendanceStatisticalCycle;
@@ -545,7 +545,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 	}
 
 	/**
-	 * 将单个对象放到一个List里，并且去重复
+	 * 단일 객체를 List에 넣고 중복 제거
 	 * @param cycle
 	 * @param unitCycles
 	 * @param debugger
@@ -555,22 +555,22 @@ public class AttendanceStatisticalCycleServiceAdv {
 		if( unitCycles == null ){
 			unitCycles = new ArrayList<AttendanceStatisticalCycle>();
 		}
-		logger.debug( debugger, ">>>>>>>>>>查询：topUnitName="+cycle.getTopUnitName()+", unitName="+cycle.getUnitName()+", cycleYear="+cycle.getCycleYear()+", cycleMonth="+ cycle.getCycleMonth() );
+		logger.debug( debugger, ">>>>>>>>>>조회: topUnitName="+cycle.getTopUnitName()+", unitName="+cycle.getUnitName()+", cycleYear="+cycle.getCycleYear()+", cycleMonth="+ cycle.getCycleMonth() );
 		for( AttendanceStatisticalCycle attendanceStatisticalCycle : unitCycles ){
-			logger.debug( debugger, ">>>>>>>>>>遍历：topUnitName="+attendanceStatisticalCycle.getTopUnitName()+", unitName="+attendanceStatisticalCycle.getUnitName()+", cycleYear="+attendanceStatisticalCycle.getCycleYear()+", cycleMonth="+ attendanceStatisticalCycle.getCycleMonth() );
+			logger.debug( debugger, ">>>>>>>>>>순회: topUnitName="+attendanceStatisticalCycle.getTopUnitName()+", unitName="+attendanceStatisticalCycle.getUnitName()+", cycleYear="+attendanceStatisticalCycle.getCycleYear()+", cycleMonth="+ attendanceStatisticalCycle.getCycleMonth() );
 			if( attendanceStatisticalCycle.getTopUnitName().equals(cycle.getTopUnitName())
 					&& attendanceStatisticalCycle.getUnitName().equals(cycle.getUnitName())
 					&& attendanceStatisticalCycle.getCycleYear().equals(cycle.getCycleYear())
 					&& attendanceStatisticalCycle.getCycleMonth().equals(cycle.getCycleMonth())
 					
 			){
-				//对象已经存在， 不用添加，直接返回原有List
-				logger.debug( debugger, ">>>>>>>>>>查询成功，对象已经存在！");
+				//객체가 이미 존재하므로 추가하지 않고 기존 List 반환
+				logger.debug( debugger, ">>>>>>>>>>조회 성공, 객체가 이미 존재합니다!");
 				return unitCycles;
 			}
 		}
-		logger.debug( debugger, ">>>>>>>>>>添加：topUnitName="+cycle.getTopUnitName()+", unitName="+cycle.getUnitName()+", cycleYear="+cycle.getCycleYear()+", cycleMonth="+ cycle.getCycleMonth() );
-		//如果循环完了，证明不存在，要添加一个对象
+		logger.debug( debugger, ">>>>>>>>>>추가: topUnitName="+cycle.getTopUnitName()+", unitName="+cycle.getUnitName()+", cycleYear="+cycle.getCycleYear()+", cycleMonth="+ cycle.getCycleMonth() );
+		//반복이 끝났으면 존재하지 않으므로 객체 추가
 		unitCycles.add( cycle );
 		return unitCycles;
 	}
@@ -580,7 +580,7 @@ public class AttendanceStatisticalCycleServiceAdv {
     }
 
 	/**
-	 * 根据顶层组织，组织，年月获取一个统计周期配置 如果不存在，则新建一个周期配置
+	 * 최상위 조직, 조직, 연월로 통계 주기 설정 조회, 없으면 새 주기 설정 생성
 	 * @param attendanceStatisticRequireLog
 	 * @param topUnitAttendanceStatisticalCycleMap
 	 * @param debugger
@@ -607,14 +607,14 @@ public class AttendanceStatisticalCycleServiceAdv {
 									&& attendanceStatisticalCycle.getCycleMonth().equals(cycle.getCycleMonth())
 
 							){
-								//对象已经存在，不再保存
+								//객체가 이미 존재하므로 저장하지 않음
 								hasCofig = true;
-								logger.info( ">>>>>>>>>>查询成功，对象已经存在！");
+								logger.info( ">>>>>>>>>>조회 성공, 객체가 이미 존재합니다!");
 							}
 						}
 					}
 				} catch ( Exception e ) {
-					logger.info( "未查询到考勤统计周期信息.......");
+					logger.info( "근태 통계 주기 정보를 찾을 수 없습니다.......");
 				}
 				if(!hasCofig){
 					this.saveAttendanceStatisticCycle(cycle);
@@ -624,12 +624,12 @@ public class AttendanceStatisticalCycleServiceAdv {
 	}
 	public void saveAttendanceStatisticCycle(AttendanceStatisticalCycle cycle){
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			logger.info( "saveAttendanceStatisticCycle>>>>>>>>>>准备保存新创建的统计周期信息......");
+			logger.info( "saveAttendanceStatisticCycle>>>>>>>>>>새로 생성한 통계 주기 정보 저장 준비......");
 			emc.beginTransaction(AttendanceStatisticalCycle.class);
 			emc.persist( cycle, CheckPersistType.all);
 			emc.commit();
 		}catch ( Exception e ) {
-			logger.info( "保存新创建的统计周期信息出错.......");
+			logger.info( "새로 생성한 통계 주기 정보 저장 오류.......");
 		}
 	}
 }

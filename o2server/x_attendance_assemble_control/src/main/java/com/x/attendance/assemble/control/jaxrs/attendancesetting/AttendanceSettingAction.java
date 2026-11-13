@@ -28,12 +28,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("attendancesetting")
-@JaxrsDescribe("系统配置信息管理服务（已弃用）")
+@JaxrsDescribe("시스템 설정 정보 관리 서비스(사용 중단)")
 public class AttendanceSettingAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceSettingAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有系统配置信息列表", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "모든 시스템 설정 정보 목록 조회", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -49,7 +49,7 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 				result = new ActionListAll().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有系统配置信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 시스템 설정 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -57,13 +57,13 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取系统配置信息", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 시스템 설정 정보 조회", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("系统配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("시스템 설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -73,7 +73,7 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 				result = new ActionGet().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "根据ID获取系统配置信息时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "ID로 시스템 설정을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -81,13 +81,13 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据Code获取系统配置信息", action = ActionGetWithCode.class)
+	@JaxrsMethodDescribe(value = "Code로 시스템 설정 정보 조회", action = ActionGetWithCode.class)
 	@GET
 	@Path("code/{code}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithCode(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("系统配置信息编码") @PathParam("code") String code) {
+			@JaxrsParameterDescribe("시스템 설정 정보 코드") @PathParam("code") String code) {
 		ActionResult<ActionGetWithCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -97,7 +97,7 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 				result = new ActionGetWithCode().execute(request, effectivePerson, code);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "根据Code获取系统配置信息时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "Code로 시스템 설정을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -105,7 +105,7 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "新建或者更新系统配置信息", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "시스템 설정 정보 생성 또는 수정", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -120,7 +120,7 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "新建或者更新系统配置信息时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "시스템 설정을 생성 또는 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -128,13 +128,13 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除系统配置信息", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 시스템 설정 정보 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("系统配置信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("시스템 설정 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -144,7 +144,7 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 				result = new ActionDelete().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "根据ID删除系统配置信息时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "ID로 시스템 설정을 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -152,7 +152,7 @@ public class AttendanceSettingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "是否启用钉钉考勤或企业微信考勤", action = ActionEnableType.class)
+	@JaxrsMethodDescribe(value = "DingTalk 근태 또는 WeCom 근태 사용 여부", action = ActionEnableType.class)
 	@GET
 	@Path("enable/type")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

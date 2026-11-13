@@ -66,7 +66,7 @@ public class State extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -111,12 +111,12 @@ public class State extends SliceJpaObject {
     }
 
     public static final String LATESTIDLIST_FIELDNAME = "latestIdList";
-    @FieldDescribe("最后更新对象标识.")
+    @FieldDescribe("최종 업데이트 객체 식별자.")
     @Transient
     private List<String> latestIdList;
 
     public static final String LATESTUPDATETIME_FIELDNAME = "latestUpdateTime";
-    @FieldDescribe("最后更新对象时间.")
+    @FieldDescribe("최종 업데이트 객체 시간.")
     @Column(name = ColumnNamePrefix + LATESTUPDATETIME_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     @Temporal(TemporalType.TIMESTAMP)
@@ -124,32 +124,32 @@ public class State extends SliceJpaObject {
 
     public static final String TYPE_FIELDNAME = "type";
     @Flag
-    @FieldDescribe("类型.")
+    @FieldDescribe("유형.")
     @Column(length = length_32B, name = ColumnNamePrefix + TYPE_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String type;
 
     public static final String NODE_FIELDNAME = "node";
     @Flag
-    @FieldDescribe("节点.")
+    @FieldDescribe("노드.")
     @Column(length = length_255B, name = ColumnNamePrefix + NODE_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String node;
 
     public static final String FREQ_FIELDNAME = "freq";
-    @FieldDescribe("频率.")
+    @FieldDescribe("빈도.")
     @Column(length = length_8B, name = ColumnNamePrefix + FREQ_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String freq;
 
     public static final String MODE_FIELDNAME = "mode";
-    @FieldDescribe("模式.")
+    @FieldDescribe("스키마.")
     @Column(length = length_16B, name = ColumnNamePrefix + MODE_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String mode;
 
     public static final String PROPERTIES_FIELDNAME = "properties";
-    @FieldDescribe("属性对象存储字段.")
+    @FieldDescribe("속성 객체 저장 필드.")
     @Persistent(fetch = FetchType.EAGER)
     @Strategy(JsonPropertiesValueHandler)
     @Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

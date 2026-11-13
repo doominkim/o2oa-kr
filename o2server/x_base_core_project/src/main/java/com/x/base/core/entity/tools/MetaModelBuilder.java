@@ -78,7 +78,7 @@ public class MetaModelBuilder {
 		List<File> cp = new ArrayList<>();
 
 		cp.add(outputdir);
-		// 需要引入x_base_core_project才可以进行编译,在x_base_core_project模块中直接使用target/classes
+		// x_base_core_project를 포함해야 컴파일 가능, x_base_core_project 모듈에서 target/classes를 직접 사용
 		cp.add(new File(Config.class.getProtectionDomain().getCodeSource().getLocation().getFile()));
 
 		ClassLoader cl = MetaModelBuilder.class.getClassLoader();

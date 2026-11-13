@@ -37,7 +37,7 @@ public class Clean extends AbstractJob {
 			Business business = new Business(emc);
 			Long instantCount = this.clearInstant(business);
 			Long messageCount = this.clearMessage(business);
-			LOGGER.info("清理过期的消息内容,其中主体消息: {} 条, 消息: {} 条, 耗时: {}.", () -> instantCount, () -> messageCount,
+			LOGGER.info("만료된 메시지 내용 정리. 주체 메시지: {} 건, 메시지: {} 건, 소요 시간: {}.", () -> instantCount, () -> messageCount,
 					stamp::consumingMilliseconds);
 		} catch (Exception e) {
 			LOGGER.error(e);

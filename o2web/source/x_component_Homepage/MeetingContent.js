@@ -12,7 +12,7 @@ MWF.xApplication.Homepage.MeetingContent  = new Class({
                 this.fireEvent("load");
             }.bind(this));
 
-            // //是否需要定时自动刷新 @todo
+            // //정기 자동 새로고침 필요 여부 @todo
             // this.startProcessAction.addEvent("click", this.startProcess.bind(this));
 
             //this.moreInforAction.addEvent("click", this.moreInfor.bind(this));
@@ -145,7 +145,7 @@ MWF.xApplication.Homepage.MeetingContent.MeetingInvited = new Class({
             locationNode.set("html", this.app.lp.meetingNumber+": <span style='color: #999999'>"+d.roomId+"<a>");
         }
 
-        if (!d.myAccept && !d.myReject){    //等待接受
+        if (!d.myAccept && !d.myReject){    //수락 대기
             var acceptNode = new Element("div.o2_homepage_meeting_item_action_accept", {"text": this.app.lp.accept}).inject(actionArea);
             var rejectNode = new Element("div.o2_homepage_meeting_item_action_reject", {"text": this.app.lp.reject}).inject(actionArea);
 
@@ -160,9 +160,9 @@ MWF.xApplication.Homepage.MeetingContent.MeetingInvited = new Class({
                 this.rejectInvitedConfirm(d, rejectNode, e);
             }.bind(this));
 
-        }else if (d.myAccept){              //已经参加
+        }else if (d.myAccept){              //참석함
             new Element("div.o2_homepage_meeting_item_action_accepted", {"text": this.app.lp.accepted}).inject(actionArea);
-        }else if (d.myReject){              //拒绝参加
+        }else if (d.myReject){              //참석 거절
             new Element("div.o2_homepage_meeting_item_action_rejected", {"text": this.app.lp.rejected}).inject(actionArea);
         }
         return row;

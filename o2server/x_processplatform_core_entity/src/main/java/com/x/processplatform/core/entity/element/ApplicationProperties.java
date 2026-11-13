@@ -9,13 +9,13 @@ public class ApplicationProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 8342746214747017734L;
 
-	@FieldDescribe("应用默认表单")
+	@FieldDescribe("앱 기본 양식")
 	private String defaultForm;
 
-	@FieldDescribe("流程维护身份,如果无法找到处理身份默认的流程处理身份.")
+	@FieldDescribe("프로세스 관리 신분, 처리 신분을 찾을 수 없을 때의 기본 프로세스 처리 신분.")
 	private String maintenanceIdentity;
 
-	@FieldDescribe("当前应用下所以流程的流程实例维护者列表")
+	@FieldDescribe("현재 앱의 모든 프로세스 인스턴스 관리자 목록")
 	private List<String> maintainerList;
 
 	public String getMaintenanceIdentity() {

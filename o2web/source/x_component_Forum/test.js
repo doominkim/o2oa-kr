@@ -1,8 +1,8 @@
 this.org = {
-    //群组***************
+    //그룹***************
 
-    //查询下级群组--返回群组的对象数组
-    //nested  布尔  true嵌套下级；false直接下级；默认false；
+    //하위 그룹 조회--그룹 객체 배열 반환
+    //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
     listSubGroup: function(name, nested){
         getOrgActions();
         var data = {"groupList": getNameFlag(name)};
@@ -14,8 +14,8 @@ this.org = {
         }
         return v;
     },
-    //查询上级群组--返回群组的对象数组
-    //nested  布尔  true嵌套上级；false直接上级；默认false；
+    //상위 그룹 조회--그룹 객체 배열 반환
+    //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
     listSupGroup:function(name, nested){
         getOrgActions();
         var data = {"groupList": getNameFlag(name)};
@@ -27,7 +27,7 @@ this.org = {
         }
         return v;
     },
-    //人员所在群组（嵌套）--返回群组的对象数组
+    //사용자 소속 그룹(중첩)--그룹 객체 배열 반환
     listGroupWithPerson:function(name){
         getOrgActions();
         var data = {"personList": getNameFlag(name)};
@@ -35,7 +35,7 @@ this.org = {
         orgActions.listGroupWithPerson(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //群组是否拥有角色--返回true, false
+    //그룹의 역할 보유 여부--true, false 반환
     groupHasRole: function(name, role){
         getOrgActions();
         nameFlag = (typeOf(name)==="object") ? (name.distinguishedName || name.id || name.unique || name.name) : name;
@@ -45,8 +45,8 @@ this.org = {
         return v;
     },
 
-    //角色***************
-    //获取角色--返回角色的对象数组
+    //역할***************
+    //역할 조회--역할 객체 배열 반환
     getRole: function(name){
         getOrgActions();
         var data = {"roleList": getNameFlag(name)};
@@ -54,7 +54,7 @@ this.org = {
         orgActions.listRole(data, function(json){v = json.data;}, null, false);
         return (v && v.length===1) ? v[0] : v;
     },
-    //人员所有角色（嵌套）--返回角色的对象数组
+    //사용자의 모든 역할(중첩)--역할 객체 배열 반환
     listRoleWithPerson:function(name){
         getOrgActions();
         var data = {"personList": getNameFlag(name)};
@@ -63,8 +63,8 @@ this.org = {
         return v;
     },
 
-    //人员***************
-    //人员是否拥有角色--返回true, false
+    //사용자***************
+    //사용자의 역할 보유 여부--true, false 반환
     personHasRole: function(name, role){
         getOrgActions();
         nameFlag = (typeOf(name)==="object") ? (name.distinguishedName || name.id || name.unique || name.name) : name;
@@ -75,8 +75,8 @@ this.org = {
     },
 
 
-    //查询下级人员--返回人员的对象数组
-    //nested  布尔  true嵌套下级；false直接下级；默认false；
+    //하위 사용자 조회--사용자 객체 배열 반환
+    //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
     listSubPerson: function(name, nested){
         getOrgActions();
         var data = {"personList": getNameFlag(name)};
@@ -88,8 +88,8 @@ this.org = {
         }
         return v;
     },
-    //查询上级人员--返回人员的对象数组
-    //nested  布尔  true嵌套上级；false直接上级；默认false；
+    //상위 사용자 조회--사용자 객체 배열 반환
+    //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
     listSupPerson: function(name, nested){
         getOrgActions();
         var data = {"personList": getNameFlag(name)};
@@ -101,7 +101,7 @@ this.org = {
         }
         return v;
     },
-    //获取群组的所有人员--返回人员的对象数组
+    //그룹의 모든 사용자 조회--사용자 객체 배열 반환
     listPersonWithGroup: function(name){
         getOrgActions();
         var data = {"groupList": getNameFlag(name)};
@@ -109,7 +109,7 @@ this.org = {
         orgActions.listPersonWithGroup(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //获取角色的所有人员--返回人员的对象数组
+    //역할의 모든 사용자 조회--사용자 객체 배열 반환
     listPersonWithRole: function(name){
         getOrgActions();
         var data = {"roleList": getNameFlag(name)};
@@ -117,7 +117,7 @@ this.org = {
         orgActions.listPersonWithRole(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //获取身份的所有人员--返回人员的对象数组
+    //신분의 모든 사용자 조회--사용자 객체 배열 반환
     listPersonWithIdentity: function(name){
         getOrgActions();
         var data = {"identityList": getNameFlag(name)};
@@ -125,7 +125,7 @@ this.org = {
         orgActions.listPersonWithIdentity(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //获取身份的所有人员--返回人员的对象数组或人员对象
+    //신분의 모든 사용자 조회--사용자 객체 배열 또는 사용자 객체 반환
     getPersonWithIdentity: function(name){
         getOrgActions();
         var data = {"identityList": getNameFlag(name)};
@@ -133,8 +133,8 @@ this.org = {
         orgActions.listPersonWithIdentity(data, function(json){v = json.data;}, null, false);
         return (v && v.length===1) ? v[0] : v;
     },
-    //查询组织成员的人员--返回人员的对象数组
-    //nested  布尔  true嵌套的所有成员；false直接成员；默认false；
+    //조직 구성원 사용자 조회--사용자 객체 배열 반환
+    //nested  불리언  true 중첩된 모든 구성원; false 직접 구성원; 기본값 false;
     listPersonWithUnit: function(name, nested){
         getOrgActions();
         var data = {"unitList": getNameFlag(name)};
@@ -147,8 +147,8 @@ this.org = {
         return v;
     },
 
-    //人员属性************
-    //添加人员属性值(在属性中添加values值，如果没有此属性，则创建一个)
+    //사용자 속성************
+    //사용자 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
     appendPersonAttribute: function(person, attr, values){
         getOrgActions();
         var personFlag = (typeOf(person)==="object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -163,7 +163,7 @@ this.org = {
             if (failure) failure(xhr, text, error);
         }, false);
     },
-    //设置人员属性值(将属性值修改为values，如果没有此属性，则创建一个)
+    //사용자 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
     setPersonAttribute: function(person, attr, values){
         getOrgActions();
         var personFlag = (typeOf(person)==="object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -178,7 +178,7 @@ this.org = {
             if (failure) failure(xhr, text, error);
         }, false);
     },
-    //获取人员属性值
+    //사용자 속성 값 조회
     getPersonAttribute: function(person, attr){
         getOrgActions();
         var personFlag = (typeOf(person)==="object") ? (person.distinguishedName || person.id || person.unique || person.name) : person;
@@ -187,7 +187,7 @@ this.org = {
         orgActions.getPersonAttribute(data, function(json){v = json.data.attributeList;}, null, false);
         return v;
     },
-    //列出人员所有属性的名称
+    //사용자의 모든 속성 이름 목록
     listPersonAttributeName: function(name){
         getOrgActions();
         var data = {"personList":getNameFlag(name)};
@@ -195,7 +195,7 @@ this.org = {
         orgActions.listPersonAttributeName(data, function(json){v = json.data.nameList;}, null, false);
         return v;
     },
-    //列出人员的所有属性
+    //사용자의 모든 속성 목록
     listPersonAllAttribute: function(name){
         getOrgActions();
         var data = {"personList":getNameFlag(name)};
@@ -206,8 +206,8 @@ this.org = {
 
 
 
-    //组织**********
-    //获取组织
+    //조직**********
+    //조직 조회
     getUnit: function(name){
         getOrgActions();
         var data = {"unitList":getNameFlag(name)};
@@ -215,8 +215,8 @@ this.org = {
         orgActions.listUnit(data, function(json){v = json.data;}, null, false);
         return (v && v.length===1) ? v[0] : v;
     },
-    //查询组织的下级--返回组织的对象数组
-    //nested  布尔  true嵌套下级；false直接下级；默认false；
+    //조직의 하위 조회--조직 객체 배열 반환
+    //nested  불리언  true 중첩 하위; false 직접 하위; 기본값 false;
     listSubUnit: function(name, nested){
         getOrgActions();
         var data = {"unitList": getNameFlag(name)};
@@ -228,8 +228,8 @@ this.org = {
         }
         return v;
     },
-    //查询组织的上级--返回组织的对象数组
-    //nested  布尔  true嵌套上级；false直接上级；默认false；
+    //조직의 상위 조회--조직 객체 배열 반환
+    //nested  불리언  true 중첩 상위; false 직접 상위; 기본값 false;
     listSupUnit: function(name, nested){
         getOrgActions();
         var data = {"unitList": getNameFlag(name)};
@@ -241,10 +241,10 @@ this.org = {
         }
         return v;
     },
-    //根据个人身份获取组织
-    //flag 数字    表示获取第几层的组织
-    //     字符串  表示获取指定类型的组织
-    //     空     表示获取直接所在的组织
+    //개인 신분으로 조직 조회
+    //flag 숫자    몇 번째 단계의 조직을 조회할지 나타냄
+    //     문자열  지정 유형의 조직 조회를 나타냄
+    //     비어 있음     직접 소속 조직 조회를 나타냄
     getUnitByIdentity: function(name, flag){
         getOrgActions();
         var getUnitMethod = "current";
@@ -269,7 +269,7 @@ this.org = {
         }
         return v;
     },
-    //列出身份所在组织的所有上级组织
+    //신분 소속 조직의 모든 상위 조직 목록
     listAllSupUnitWithIdentity: function(name){
         getOrgActions();
         var data = {"identityList":getNameFlag(name)};
@@ -277,7 +277,7 @@ this.org = {
         orgActions.listUnitSupNestedWithIdentity(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //获取人员所在的所有组织
+    //사용자가 소속된 모든 조직 조회
     listUnitWithPerson: function(name){
         getOrgActions();
         var data = {"personList":getNameFlag(name)};
@@ -285,7 +285,7 @@ this.org = {
         orgActions.listUnitWithPerson(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //列出人员所在组织的所有上级组织
+    //사용자 소속 조직의 모든 상위 조직 목록
     listAllSupUnitWithPerson: function(name){
         getOrgActions();
         var data = {"personList":getNameFlag(name)};
@@ -293,7 +293,7 @@ this.org = {
         orgActions.listUnitSupNestedWithPerson(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //根据组织属性，获取所有符合的组织
+    //조직 속성으로 일치하는 모든 조직 조회
     listUnitWithAttribute: function(name, attribute){
         getOrgActions();
         var data = {"name":name,"attribute":attribute};
@@ -301,7 +301,7 @@ this.org = {
         orgActions.listUnitWithAttribute(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //根据组织职务，获取所有符合的组织
+    //조직 직무로 일치하는 모든 조직 조회
     listUnitWithDuty: function(name, id){
         getOrgActions();
         var data = {"name":name,"identity":(typeOf(id)==="object") ? (id.distinguishedName || id.id || id.unique || id.name) : id};
@@ -310,8 +310,8 @@ this.org = {
         return v;
     },
 
-    //组织职务***********
-    //获取指定的组织职务的身份
+    //조직 직무***********
+    //지정 조직 직무의 신분 조회
     getDuty: function(duty, id){
         getOrgActions();
         var data = {"name":duty,"unit":(typeOf(id)==="object") ? (id.distinguishedName || id.id || id.unique || id.name) : id};
@@ -319,7 +319,7 @@ this.org = {
         orgActions.getDuty(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //获取身份的所有职务名称
+    //신분의 모든 직무 이름 조회
     listDutyNameWithIdentity: function(name){
         getOrgActions();
         var data = {"identityList":getNameFlag(name)};
@@ -327,7 +327,7 @@ this.org = {
         orgActions.listDutyNameWithIdentity(data, function(json){v = json.data.nameList;}, null, false);
         return v;
     },
-    //获取组织的所有职务名称
+    //조직의 모든 직무 이름 조회
     listDutyNameWithUnit: function(name){
         getOrgActions();
         var data = {"unitList":getNameFlag(name)};
@@ -335,7 +335,7 @@ this.org = {
         orgActions.listDutyNameWithUnit(data, function(json){v = json.data.nameList;}, null, false);
         return v;
     },
-    //获取组织的所有职务
+    //조직의 모든 직무 조회
     listUnitAllDuty: function(name){
         getOrgActions();
         var data = {"unitList":getNameFlag(name)};
@@ -343,7 +343,7 @@ this.org = {
         orgActions.listUnitAllDuty(data, function(json){v = json.data;}, null, false);
         return v;
     },
-    //列出顶层组织
+    //최상위 조직 목록
     listTopUnit: function(){
         var action = MWF.Actions.get("x_organization_assemble_control");
         var v = null;
@@ -353,8 +353,8 @@ this.org = {
         return v;
     },
 
-    //组织属性**************
-    //添加组织属性值(在属性中添加values值，如果没有此属性，则创建一个)
+    //조직 속성**************
+    //조직 속성 값 추가(속성에 values 값 추가, 해당 속성이 없으면 생성)
     appendUnitAttribute: function(unit, attr, values){
         getOrgActions();
         var unitFlag = (typeOf(unit)==="object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -369,7 +369,7 @@ this.org = {
             if (failure) failure(xhr, text, error);
         }, false);
     },
-    //设置组织属性值(将属性值修改为values，如果没有此属性，则创建一个)
+    //조직 속성 값 설정(속성 값을 values로 변경, 해당 속성이 없으면 생성)
     setUnitAttribute: function(unit, attr, values){
         getOrgActions();
         var unitFlag = (typeOf(unit)==="object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -384,7 +384,7 @@ this.org = {
             if (failure) failure(xhr, text, error);
         }, false);
     },
-    //获取组织属性值
+    //조직 속성 값 조회
     getUnitAttribute: function(unit, attr){
         getOrgActions();
         var unitFlag = (typeOf(unit)==="object") ? (unit.distinguishedName || unit.id || unit.unique || unit.name) : unit;
@@ -393,7 +393,7 @@ this.org = {
         orgActions.getUnitAttribute(data, function(json){v = json.data.attributeList;}, null, false);
         return v;
     },
-    //列出组织所有属性的名称
+    //조직의 모든 속성 이름 목록
     listUnitAttributeName: function(name){
         getOrgActions();
         var data = {"unitList":getNameFlag(name)};
@@ -401,7 +401,7 @@ this.org = {
         orgActions.listUnitAttributeName(data, function(json){v = json.data.nameList;}, null, false);
         return v;
     },
-    //列出组织的所有属性
+    //조직의 모든 속성 목록
     listUnitAllAttribute: function(name){
         getOrgActions();
         var data = {"unitList":getNameFlag(name)};

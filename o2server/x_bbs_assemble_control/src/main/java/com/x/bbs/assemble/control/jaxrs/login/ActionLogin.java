@@ -15,7 +15,7 @@ import com.x.bbs.assemble.control.jaxrs.login.exception.ExceptionUserLogin;
 import com.x.bbs.assemble.control.service.bean.RoleAndPermission;
 
 /**
- * 手机用户访问论坛信息，首页所有的信息整合在一起 匿名用户可以访问
+ * 모바일 사용자 포럼 정보 접근, 홈의 모든 정보를 통합 익명 사용자 접근 가능
  *
  * @return
  */
@@ -44,7 +44,7 @@ public class ActionLogin extends BaseAction {
 						logger.error(e, effectivePerson, request, null);
 					}
 				}else{
-					Exception exception = new ExceptionUserLogin("系统不允许匿名访问社区资源。");
+					Exception exception = new ExceptionUserLogin("커뮤니티 리소스에 대한 익명 접근이 허용되지 않습니다.");
 					result.error(exception);
 				}
 			} else {

@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Table 表格组件。
- * @o2cn 表格
+/** @class Table 표 컴포넌트.
+ * @o2cn 표
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var table = this.form.get("fieldId"); //获取组件
- * //方法2
- * var table = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var table = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var table = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -23,12 +23,12 @@ MWF.xApplication.process.Xform.Table = MWF.APPTable =  new Class(
         }
 
         /**
-         * @summary table，DOM对象
+         * @summary table, DOM 객체
          * @member {Element} table
          * @memberOf MWF.xApplication.process.Xform.Table#
          * @example
-         *  //可以在脚本中获取该组件
-         * var table = this.form.get("fieldId").table; //获取组件对象
+         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+         * var table = this.form.get("fieldId").table; //컴포넌트 객체 가져오기
          */
         if (!this.table) this.table = this.node.getElement("table");
 		//var tds = this.node.getElements("td");
@@ -114,13 +114,13 @@ MWF.xApplication.process.Xform.Table = MWF.APPTable =  new Class(
         }
     }
 });
-/** @class Table$Td 单元格组件。
+/** @class Table$Td 셀 컴포넌트.
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var td = this.form.get("fieldId"); //获取组件
- * //方法2
- * var td = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var td = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var td = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @hideconstructor
@@ -182,7 +182,7 @@ MWF.xApplication.process.Xform.Table$Td = MWF.APPTable$Td =  new Class({
            
         }.bind(this));
 
-        //table的 _loadBorderStyle 会忽略当前单元格的边框
+        //table의 _loadBorderStyle은 현재 셀의 테두리를 무시
         Object.each(this.json.recoveryStyles || {}, function(value, key){
             if( key.indexOf("border") === 0 ){
                 this.node.setStyle(key, value);

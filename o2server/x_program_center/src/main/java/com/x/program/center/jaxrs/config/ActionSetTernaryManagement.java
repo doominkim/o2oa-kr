@@ -13,7 +13,7 @@ import com.x.base.core.project.http.EffectivePerson;
 import com.x.base.core.project.jaxrs.WrapBoolean;
 
 /**
- * 三元管理配置
+ * 3권 분립 관리 설정
  * 
  * @author sword
  */
@@ -117,16 +117,16 @@ public class ActionSetTernaryManagement extends BaseAction {
 
 		private static final long serialVersionUID = -5015449132270026780L;
 
-		@FieldDescribe("是否启用三元管理.")
+		@FieldDescribe("3권 분립 관리 사용 여부.")
 		private Boolean enable;
 
-		@FieldDescribe("系统管理员账号密码.")
+		@FieldDescribe("시스템 관리자 계정 비밀번호.")
 		private String systemManagerPassword;
 
-		@FieldDescribe("安全管理员账号密码.")
+		@FieldDescribe("보안 관리자 계정 비밀번호.")
 		private String securityManagerPassword;
 
-		@FieldDescribe("安全审计员账号密码.")
+		@FieldDescribe("보안 감사자 계정 비밀번호.")
 		private String auditManagerPassword;
 
 		public Boolean getEnable() {

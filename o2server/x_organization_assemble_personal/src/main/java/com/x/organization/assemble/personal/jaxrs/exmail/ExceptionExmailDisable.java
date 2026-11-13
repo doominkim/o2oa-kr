@@ -12,6 +12,6 @@ class ExceptionExmailDisable extends LanguagePromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionExmailDisable() {
-		super("没有启用腾讯企业邮.");
+		super("Tencent 기업 메일이 사용 설정되어 있지 않습니다.");
 	}
 }

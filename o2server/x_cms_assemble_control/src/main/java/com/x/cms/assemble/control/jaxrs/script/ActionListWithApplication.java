@@ -46,7 +46,7 @@ class ActionListWithApplication extends BaseAction {
 					wrap = Wo.copier.copy(o);
 					wraps.add( wrap );
 				}
-				// 将查询结果放进缓存里
+				// 조회 결과를 캐시에 저장
 				CacheManager.put(cacheCategory, cacheKey, wraps );
 				result.setData(wraps);
 			} catch (Throwable th) {

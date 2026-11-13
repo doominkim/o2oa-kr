@@ -7,6 +7,6 @@ class ExceptionSettingInfoProcess extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionSettingInfoProcess( Throwable e, String message ) {
-		super("用户在进行设置信息处理时发生异常！message:" + message, e );
+		super("설정 정보를 처리하는 중 오류가 발생했습니다! message:" + message, e );
 	}
 }

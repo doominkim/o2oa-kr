@@ -17,7 +17,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddAfterSingleAndAfterQueueTest {
 
-	@DisplayName("B后加签EFG,EFG单人处理，E后加签IJK，IJK串行处理,即并行-后加签单人-后加签串行")
+	@DisplayName("B후 추가결재EFG,EFG단일 처리,E후 추가결재IJK,IJK순차 처리,즉 병렬-후 추가결재단일-후 추가결재순차")
 	@Test
 	@Order(1)
 	void test01() {

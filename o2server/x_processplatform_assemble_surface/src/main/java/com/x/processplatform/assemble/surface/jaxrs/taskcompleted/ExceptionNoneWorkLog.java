@@ -7,6 +7,6 @@ class ExceptionNoneWorkLog extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionNoneWorkLog() {
-		super("无法找到工作日志.");
+		super("문서 로그를 찾을 수 없습니다.");
 	}
 }

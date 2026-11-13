@@ -137,7 +137,7 @@ MWF.xApplication.process.Xform.widget.DocumentHistory = new Class({
                 }
             }
         }else{
-            // 不做动画效果，不需要处理工具条
+            // 애니메이션 없음, 도구 모음 처리 불필요
         }
     },
     createHistoryListNode: function(){

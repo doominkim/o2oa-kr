@@ -48,8 +48,8 @@ class ActionUpdateContentCallback extends BaseAction {
 				throw new ExceptionStorageNotExistCallback(callback, attachment.getStorage());
 			}
 			attachment.setLastUpdatePerson(effectivePerson.getDistinguishedName());
-			/** 禁止不带扩展名的文件上传 */
-			/** 文件名编码转换 */
+			/** 확장자 없는 파일 업로드 금지 */
+			/** 파일명 인코딩 변환 */
 			String fileName = new String(disposition.getFileName().getBytes(DefaultCharset.charset_iso_8859_1),
 					DefaultCharset.charset);
 			fileName = FilenameUtils.getName(fileName);
@@ -57,7 +57,7 @@ class ActionUpdateContentCallback extends BaseAction {
 			if (StringUtils.isEmpty(FilenameUtils.getExtension(fileName))) {
 				throw new ExceptionEmptyExtensionCallback(callback, fileName);
 			}
-			/** 不允许不同的扩展名上传 */
+			/** 다른 확장자로 업로드 불가 */
 			if (!Objects.equals(StringUtils.lowerCase(FilenameUtils.getExtension(fileName)),
 					attachment.getExtension())) {
 				throw new ExceptionExtensionNotMatchCallback(callback, fileName, attachment.getExtension());
@@ -67,7 +67,7 @@ class ActionUpdateContentCallback extends BaseAction {
 			attachment.updateContent(mapping, bytes, Config.general().getStorageEncrypt());
 			emc.check(attachment, CheckPersistType.all);
 			emc.commit();
-			/** 通知所有的共享和共享编辑人员 */
+			/** 모든 공유 및 공유 편집 사용자에게 알림 */
 			List<String> people = new ArrayList<>();
 			people = ListUtils.union(attachment.getShareList(), attachment.getEditorList());
 			people.add(attachment.getPerson());

@@ -55,7 +55,7 @@ class ActionEdit extends BaseAction {
 			for (ApplicationDictItem o : adds) {
 				o.setItemCategory(ItemCategory.service_dict);
 				o.setBundle(dict.getId());
-				/** 将数据字典和数据存放在同一个分区 */
+				/** 데이터 사전과 데이터를 같은 파티션에 저장 */
 				o.setDistributeFactor(dict.getDistributeFactor());
 				o.setApplication(ApplicationDict.PROJECT_SERVICE);
 				emc.persist(o, CheckPersistType.all);
@@ -79,7 +79,7 @@ class ActionEdit extends BaseAction {
 		static WrapCopier<Wi, ApplicationDict> copier = WrapCopierFactory.wi(Wi.class, ApplicationDict.class, null,
 				ListTools.toList(JpaObject.FieldsUnmodify, ApplicationDict.project_FIELDNAME, ApplicationDict.application_FIELDNAME));
 
-		@FieldDescribe("字典数据(json格式).")
+		@FieldDescribe("사전 데이터(json 형식).")
 		private JsonElement data;
 
 		public JsonElement getData() {

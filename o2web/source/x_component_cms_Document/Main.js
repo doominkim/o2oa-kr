@@ -20,11 +20,11 @@ MWF.xApplication.cms.Document.Main = new Class({
         "saveOnClose" : null,
         "postPublish" : null,
         "postDelete" : null,
-        "forceFormId" : null, //不管编辑还是阅读都用此表单打开，优先使用
-        "printFormId" : null, //打印表单，不管编辑还是阅读都用此表单打开，仅此于forceFormId
-        "readFormId" : null, //强制的阅读表单，优先于表单的readFormId
-        "editFormId" : null, //强制的编辑表单，优先于表单的formId
-        "useProcessForm": false //表单ID参数是流程的
+        "forceFormId" : null, //편집·열람 모두 이 양식으로 열림, 우선 사용
+        "printFormId" : null, //인쇄 양식, 편집·열람 모두 이 양식으로 열림, forceFormId 다음 순위
+        "readFormId" : null, //강제 열람 양식, 양식의 readFormId보다 우선
+        "editFormId" : null, //강제 편집 양식, 양식의 formId보다 우선
+        "useProcessForm": false //양식 ID 매개변수가 프로세스의 것임
     },
     onQueryLoad: function(){
         if (!this.options.title && !layout.mobile) this.setOptions({"title": MWF.xApplication.cms.Document.LP.title})
@@ -45,7 +45,7 @@ MWF.xApplication.cms.Document.Main = new Class({
             this.options.useProcessForm = this.status.useProcessForm;
         }
 
-        //兼容之前的 formEditId 和 formId
+        //이전 formEditId 및 formId 호환
         if( this.options.formId && !this.options.readFormId )this.options.readFormId = this.options.formId;
         if( this.options.formEditId && !this.options.editFormId )this.options.editFormId = this.options.formEditId;
 
@@ -137,27 +137,27 @@ MWF.xApplication.cms.Document.Main = new Class({
         this.json_document = null;
         this.json_form = null;
 
-        //只读或者匿名查看
+        //읽기 전용 또는 익명 조회
         var readonly = this.options.readonly !== false || this.options.anonymousAccess || this.options.anonymous;
 
         var formId = "";
-        if( this.options.forceFormId ) { //有确定的id
+        if( this.options.forceFormId ) { //확정된 id 있음
             formId = this.options.forceFormId;
-        }else if( this.options.printFormId ){ //有确定的id
+        }else if( this.options.printFormId ){ //확정된 id 있음
             formId = this.options.printFormId;
-        }else if( readonly && this.options.readFormId ){ //只读，并且有只读表单id
+        }else if( readonly && this.options.readFormId ){ //읽기 전용이며 읽기 전용 양식 id 있음
             formId = this.options.readFormId;
         }
 
         if( formId ){
             this.useProcessForm = this.options.useProcessForm;
-            //编辑状态要先获取document再判断有没有权限编辑
+            //편집 상태는 먼저 document를 가져온 뒤 편집 권한 여부 판단
             if( this.options.readonly !== false || this.options.anonymousAccess || this.options.anonymous ){
                 this.getFormV2(formId, null, false);
             }
             this.getDocumentV2();
         }else{
-            if( readonly ){ //只读情况，不需要判断是否有阅读权限
+            if( readonly ){ //읽기 전용이면 열람 권한 판단 불필요
                 this.lookupFormV2( true );
             }
             this.getDocumentV2();
@@ -232,7 +232,7 @@ MWF.xApplication.cms.Document.Main = new Class({
                     if( this.categoryFormWaitingDocument ){
                         this.getFormByCategory();
                     }else{
-                        //编辑状态要先获取document再判断有没有权限编辑
+                        //편집 상태는 먼저 document를 가져온 뒤 편집 권한 여부 판단
                         var toLoadForm = !(this.options.readonly !== false || this.options.anonymousAccess || this.options.anonymous );
                         // var toLoadForm = this.options.readonly !== true && !this.options.anonymousAccess;
                         this.checkLoad( toLoadForm );
@@ -304,7 +304,7 @@ MWF.xApplication.cms.Document.Main = new Class({
             }.bind(this),
 
             function(error){
-                //没有表单，重新获取分类表单
+                //양식이 없으면 분류 양식을 다시 조회
                 if( ignoreFromCategory ){
                     this.errorLoadingV2( error , "form" );
                 }else if( this.document && this.document.categoryId ){
@@ -335,7 +335,7 @@ MWF.xApplication.cms.Document.Main = new Class({
             }.bind(this),
 
             function(error){
-                //没有表单，重新获取分类表单
+                //양식이 없으면 분류 양식을 다시 조회
                 if( ignoreFromCategory ){
                     this.errorLoadingV2( error , "form" );
                 }else if( this.document && this.document.categoryId ){
@@ -427,20 +427,20 @@ MWF.xApplication.cms.Document.Main = new Class({
             this.isAdmin = true;
         }
 
-        //文档创建人
+        //문서 작성자
         if( data.isCreator || this.desktop.session.user.distinguishedName==this.document.creatorPerson ){
             this.options.isControl = true;
         }
 
-        //作者权限
+        //작성자 권한
         if( data.isEditor ){
             this.options.isControl = true;
         }
 
-        if( this.options.readonly ){ //强制只读
+        if( this.options.readonly ){ //강제 읽기 전용
             this.readonly = true;
         }else{
-            if(this.options.isControl && this.document.docStatus != "archived"){ //有编辑权限并且不是归档状态
+            if(this.options.isControl && this.document.docStatus != "archived"){ //편집 권한이 있고 보관 상태가 아님
                 this.readonly = false;
             }else{
                 this.readonly = true;
@@ -569,7 +569,7 @@ MWF.xApplication.cms.Document.Main = new Class({
                     "originalData" : Object.clone( this.data ),
                     "document": this.document,
                     "extend" : this.extend,
-                    "work": this.data.$work || {}, //兼用流程发布到内容管理
+                    "work": this.data.$work || {}, //프로세스에서 콘텐츠 관리로 게시 겸용
                     "control": this.control,
                     "attachmentList": this.attachmentList,
                     "formInfor": this.formInfor,

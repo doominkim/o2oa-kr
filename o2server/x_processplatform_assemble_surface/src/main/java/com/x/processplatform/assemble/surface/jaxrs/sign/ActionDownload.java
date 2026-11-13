@@ -29,7 +29,7 @@ class ActionDownload extends BaseAction {
 				throw new ExceptionEntityNotExist(scrawlId, DocSignScrawl.class);
 			}
 			if (StringUtils.isBlank(signScrawl.getStorage())) {
-				throw new IllegalStateException(scrawlId + "附件不存在！");
+				throw new IllegalStateException(scrawlId + "첨부 파일이 없습니다!");
 			}
 			if (BooleanUtils.isNotTrue(new JobControlBuilder(effectivePerson, business, signScrawl.getJob())
 					.enableAllowVisit().build().getAllowVisit())) {

@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Elinput 基于Element UI的评分组件。
- * @o2cn 评分组件
+/** @class Elinput Element UI 기반 평점 컴포넌트.
+ * @o2cn 평점 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/rate|Element UI Rate 评分}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/rate|Element UI Rate 평점}
  */
 MWF.xApplication.process.Xform.Elrate = MWF.APPElrate =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elrate# */
@@ -21,9 +21,9 @@ MWF.xApplication.process.Xform.Elrate = MWF.APPElrate =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 分值改变时触发	。this.event[0]为改变后的分值
+         * 점수가 변경될 때 발생	. this.event[0]은 변경된 점수
          * @event MWF.xApplication.process.Xform.Elrate#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/rate|评分组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/rate|평점 컴포넌트의 Events 장}
          */
         "elEvents": ["change"]
     },

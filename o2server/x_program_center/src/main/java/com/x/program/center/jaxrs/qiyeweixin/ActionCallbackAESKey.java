@@ -26,7 +26,7 @@ public class ActionCallbackAESKey extends BaseAction {
 		}
         ActionResult<Wo> result = new ActionResult<Wo>();
         String encodingAesKey = Base64.encodeBase64String(UUID.randomUUID().toString().replaceAll("-","").getBytes());
-        logger.info("生成企业微信回调用的 AESKey "+ encodingAesKey);
+        logger.info("기업 위챗 콜백용 AESKey 생성 "+ encodingAesKey);
         if (encodingAesKey.contains("=")) {
             encodingAesKey = encodingAesKey.substring(0, encodingAesKey.lastIndexOf("="));
         }

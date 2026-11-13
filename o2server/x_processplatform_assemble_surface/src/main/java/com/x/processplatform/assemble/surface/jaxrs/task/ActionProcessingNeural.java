@@ -83,7 +83,7 @@ class ActionProcessingNeural extends BaseAction {
 			Map<String, Object> requestAttributes = new HashMap<String, Object>();
 			ThisApplication.context().applications().putQuery(x_processplatform_service_processing.class,
 					"task/" + URLEncoder.encode(task.getId(), DefaultCharset.name) + "/processing", requestAttributes);
-			/** 流程处理完毕,开始组装返回信息 */
+			/** 프로세스 처리 완료, 반환 정보 조립 시작 */
 			Wo wo = new Wo();
 			wo.setWorkLogList(this.referenceWorkLog(business, task));
 			wo.setRouteName(routeName);
@@ -134,13 +134,13 @@ class ActionProcessingNeural extends BaseAction {
 
 	private String neural(Business business, Process process, Task task) throws Exception {
 		if (task.getRouteNameList().size() == 1) {
-			/** 如果只有一条路由就不用判断了 */
+			/** 경로가 하나뿐이면 판단할 필요 없음 */
 			task.setRouteName(task.getRouteNameList().get(0));
 			return task.getRouteName();
 		}
 		List<String> fields = this.listNumberFormField(business, process);
 		if (fields.isEmpty()) {
-			/** 如果没有可以用于分析的数据,那么返回第一条路由 */
+			/** 분석에 사용할 데이터가 없으면 첫 번째 경로 반환 */
 			task.setRouteName(task.getRouteNameList().get(0));
 			return task.getRouteName();
 		} else {
@@ -148,7 +148,7 @@ class ActionProcessingNeural extends BaseAction {
 			List<TaskCompleted> taskCompleteds = listTaskCompleted(business, task.getActivity(), task.getPerson());
 			for (TaskCompleted o : taskCompleteds) {
 				if (ListTools.contains(task.getRouteNameList(), o.getRouteName())) {
-					/** 包含有需要的决策 */
+					/** 필요한 결정 포함 */
 					Data data = this.loadData(business, o.getJob());
 					double[] input = new double[fields.size()];
 					for (int i = 0; i < fields.size(); i++) {
@@ -174,7 +174,7 @@ class ActionProcessingNeural extends BaseAction {
 					fields.size() * 2, task.getRouteNameList().size());
 			perceptron.getLearningRule().setMaxIterations(100);
 			perceptron.learn(trainingSet);
-			/** 输入当前值 */
+			/** 현재 값 입력 */
 			Data data = this.loadData(business, task.getJob());
 			double[] input = new double[fields.size()];
 			for (int i = 0; i < fields.size(); i++) {
@@ -189,7 +189,7 @@ class ActionProcessingNeural extends BaseAction {
 			if (index < 0) {
 				index = 0;
 			}
-			/* 重新设置路由 */
+			/* 경로 재설정 */
 			task.setRouteName(task.getRouteNameList().get(index));
 			return task.getRouteName();
 		}
@@ -307,10 +307,10 @@ class ActionProcessingNeural extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("决策")
+		@FieldDescribe("결정")
 		private String routeName;
 
-		@FieldDescribe("返回工作记录")
+		@FieldDescribe("업무 문서 기록 반환")
 		List<WoWorkLog> workLogList = new ArrayList<>();
 
 		public String getRouteName() {
@@ -379,7 +379,7 @@ class ActionProcessingNeural extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("神经网络类型")
+		@FieldDescribe("신경망 유형")
 		private String type;
 
 		public String getType() {

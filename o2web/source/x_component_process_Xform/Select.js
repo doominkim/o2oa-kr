@@ -1,19 +1,19 @@
 MWF.xDesktop.requireApp("process.Xform", "$Selector", null, false);
-/** @class Select 下拉选择组件。
- * 在8.1之后，支持从数据字典、视图和查询获取可选项。获取过程为异步。
- * @o2cn 下拉选择
+/** @class Select 드롭다운 선택 컴포넌트.
+ * 8.1 이후 데이터 사전, 뷰, 쿼리에서 선택 항목을 가져올 수 있음. 가져오기는 비동기로 진행됨.
+ * @o2cn 드롭다운 선택
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  *
- * var data = field.getData(); //获取值
- * field.setData("字符串值"); //设置值
- * field.hide(); //隐藏字段
- * var id = field.json.id; //获取字段标识
- * var flag = field.isEmpty(); //字段是否为空
+ * var data = field.getData(); //값 조회
+ * field.setData("문자열 값"); //값 설정
+ * field.hide(); //필드 숨기기
+ * var id = field.json.id; //필드 식별자 조회
+ * var flag = field.isEmpty(); //필드가 비어 있는지 여부
  * @extends MWF.xApplication.process.Xform.$Selector
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -27,9 +27,9 @@ MWF.xApplication.process.Xform.Select = MWF.APPSelect =  new Class(
 	iconStyle: "selectIcon",
 
 		/**
-		 * 值改变时触发。可以通过this.event获取修改后的选择项（Dom对象）。
+		 * 값이 변경될 때 발생. this.event로 변경된 선택 항목(Dom 객체)을 가져올 수 있음.
 		 * @event MWF.xApplication.process.Xform.Select#change
-		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+		 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 		 */
 
 	/**
@@ -47,9 +47,9 @@ MWF.xApplication.process.Xform.Select = MWF.APPSelect =  new Class(
 		this.nodeHtml = this.node.get("html");
     },
 	/**
-	 * @summary 重新加载组件。会执行postLoad事件。
+	 * @summary 컴포넌트 다시 로드. postLoad 이벤트가 실행됨.
 	 * @example
-	 * this.form.get("fieldId").reload(); //重新加载事件
+	 * this.form.get("fieldId").reload(); //다시 로드
 	 */
 	reload: function(){
 		if (this.areaNode){
@@ -387,10 +387,10 @@ MWF.xApplication.process.Xform.Select = MWF.APPSelect =  new Class(
 	},
 
 	/**
-	 * @summary 获取选中项的text。
-	 * @return {String} 返回选中项的text
+	 * @summary 선택 항목의 text 조회.
+	 * @return {String} 선택 항목의 text 반환
 	 * @example
-	 * var text = this.form.get('fieldId').getText(); //获取选中项的文本
+	 * var text = this.form.get('fieldId').getText(); //선택 항목의 텍스트 가져오기
 	 */
 	getText: function(){
 		var d = this.getTextData();
@@ -506,7 +506,7 @@ MWF.xApplication.process.Xform.Select = MWF.APPSelect =  new Class(
 		});
 	},
 	setExcelData: function(d, type){
-		var value = d.replace(/&#10;/g,""); //换行符&#10;
+		var value = d.replace(/&#10;/g,""); //줄바꿈 문자&#10;
 		this.excelData = value;
 		if( type === "value" ){
 			this.setData(value, true);

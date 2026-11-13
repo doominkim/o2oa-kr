@@ -7,6 +7,6 @@ class ExceptionInvalidUnit extends PromptException {
 	private static final long serialVersionUID = 6647381353782082070L;
 
 	ExceptionInvalidUnit(String unit) {
-		super("指定的组织不存在:{}.", unit);
+		super("지정한 조직이 없습니다: {}.", unit);
 	}
 }

@@ -7,6 +7,6 @@ class ExceptionCalendarTargetInvalid extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCalendarTargetInvalid( String name ) {
-		super("操作传入的日历目标者标识'"+name+"'不合法，需要为人员标识或者组织标识.");
+		super("캘린더 대상 식별자 '"+name+"'이(가) 올바르지 않습니다. 사용자 식별자 또는 조직 식별자여야 합니다.");
 	}
 }

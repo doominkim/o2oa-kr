@@ -10,16 +10,16 @@ public class ActionDrawWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -7496462800015649736L;
 
-	@FieldDescribe("标题.")
-	@Schema(description = "标题.")
+	@FieldDescribe("제목.")
+	@Schema(description = "제목.")
 	private String title;
 
-	@FieldDescribe("启动人员身份.")
-	@Schema(description = "启动人员身份.")
+	@FieldDescribe("시작 사용자 신분.")
+	@Schema(description = "시작 사용자 신분.")
 	private String identity;
 
-	@FieldDescribe("业务数据.")
-	@Schema(description = "业务数据.")
+	@FieldDescribe("업무 데이터.")
+	@Schema(description = "업무 데이터.")
 	private Data data;
 
 	public String getIdentity() {

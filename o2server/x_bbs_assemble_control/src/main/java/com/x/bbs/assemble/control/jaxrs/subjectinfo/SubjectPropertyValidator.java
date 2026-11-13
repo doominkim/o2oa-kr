@@ -19,19 +19,19 @@ public class SubjectPropertyValidator{
 	public static Boolean baseValidate( HttpServletRequest request, Wi wrapIn ) throws Exception {
 		wrapIn.setHostIp(request.getRemoteHost());
 		if ( wrapIn.getTitle() == null ) {
-			Exception exception = new ExceptionSubjectPropertyEmpty("主题标题");
+			Exception exception = new ExceptionSubjectPropertyEmpty("주제 제목");
 			throw exception;
 		}
 		if (wrapIn.getType() == null) {
-			Exception exception = new ExceptionSubjectPropertyEmpty("主题类别");
+			Exception exception = new ExceptionSubjectPropertyEmpty("주제 유형");
 			throw exception;
 		}
 		if ( wrapIn.getContent() == null ) {
-			Exception exception = new ExceptionSubjectPropertyEmpty("主题内容");
+			Exception exception = new ExceptionSubjectPropertyEmpty("주제 내용");
 			throw exception;
 		}
 		if (wrapIn.getSectionId() == null || wrapIn.getSectionId().isEmpty()) {
-			Exception exception = new ExceptionSubjectPropertyEmpty("所属版块ID");
+			Exception exception = new ExceptionSubjectPropertyEmpty("소속 섹션 ID");
 			throw exception;
 		}
 		return true;
@@ -49,7 +49,7 @@ public class SubjectPropertyValidator{
 		if ( sectionInfo.getTypeCategory() == null || sectionInfo.getTypeCategory().isEmpty() ) {
 			Exception exception = new ExceptionSectionTypeCategoryEmpty(wrapIn.getSectionId());
 			throw exception;
-		} else { // 判断TypeCategory是否合法
+		} else { // TypeCategory 유효성 판단
 			String[] categories = sectionInfo.getTypeCategory().split("\\|");
 			Boolean categoryValid = false;
 			if (categories != null && categories.length > 0) {
@@ -80,7 +80,7 @@ public class SubjectPropertyValidator{
 			Exception exception = new ExceptionSectionSubjectTypeEmpty(wrapIn.getSectionId());
 			throw exception;
 		} else {
-			// 判断Type是否合法
+			// Type 유효성 판단
 			String[] types = null;
 			List<String> subjectTypeList = sectionInfo.getSubjectTypeList();
 			if(ListTools.isNotEmpty(subjectTypeList)){

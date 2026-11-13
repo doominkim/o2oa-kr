@@ -4,13 +4,13 @@
     </div>
     <div class="form">
          
-        <!-- 补卡申请配置 -->
+        <!-- 출퇴근 보정 신청 설정 -->
         <div class="margin-top">
             <div class="form-item-label">
                 {{$.lp.config.appealConfig}}
             </div>
             <div class="form-item-content margin-top padding-bottom">
-                <!-- 是否启用补卡申请 -->
+                <!-- 출퇴근 보정 신청 사용 여부 -->
                 <div class="margin-top margin-left flex" @click="clickEnableAppeal">
                     <div class="o2-icon-14">
                         <i class="{{ $.form.appealEnable ? 'o2icon-icon__ok2_click_b primary_color' : 'o2icon-icon_quan'}}"></i>
@@ -18,7 +18,7 @@
                     <label style="margin-left: 8px;">{{$.lp.config.appealEnableLabel}}</label>
                 </div>
                 <div class="margin-top margin-left" oo-if="$.form.appealEnable">
-                    <!-- 自定义流程 -->
+                    <!-- 사용자 정의 프로세스 -->
                     <o-selector-process oo-prop="$.processSelector" ></o-selector-process>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 {{$.lp.config.checkInAlert}}
             </div>
             <div class="form-item-content margin-top padding-bottom">
-                <!-- 打卡提醒 -->
+                <!-- 출퇴근 체크 알림 -->
                 <div class="margin-top margin-left flex" @click="clickCheckInAlertEnable">
                     <div class="o2-icon-14">
                         <i class="{{ $.form.checkInAlertEnable ? 'o2icon-icon__ok2_click_b primary_color' : 'o2icon-icon_quan'}}"></i>
@@ -47,7 +47,7 @@
                         분 후에 알림 메시지를 받습니다. 출퇴근 체크를 잊지 마세요)
                     </label>
                 </div>
-                <!-- 异常打卡提醒 -->
+                <!-- 비정상 출퇴근 체크 알림 -->
                 <div class="margin-top margin-left flex" @click="clickExceptionAlertEnable">
                     <div class="o2-icon-14">
                         <i class="{{ $.form.exceptionAlertEnable ? 'o2icon-icon__ok2_click_b primary_color' : 'o2icon-icon_quan'}}"></i>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <!-- 统计管理员 职务配置 -->
+        <!-- 통계 관리자 직책 설정 -->
         <div class="margin-top">
             <div class="form-item-label">
                 {{$.lp.config.statisticUnitDutyName}}
@@ -73,7 +73,7 @@
                     <input class="config-text-input" oo-model="form.properties.statisticUnitDutyNameListInput" name="statisticUnitDutyNameListInput" type="text">
             </div>
         </div>
-        <!-- 外勤打卡自动脚本配置 -->
+        <!-- 외근 출퇴근 체크 자동 스크립트 설정 -->
         <div class="margin-top">
             <div class="form-item-label">
                 {{$.lp.config.fieldWorkAutoScript}}
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <!-- 定时器配置 -->
+        <!-- 타이머 설정 -->
         <!-- <div class="margin-top">
             <div class="form-item-label">
                 {{$.lp.config.detailStatisticCron}}
@@ -96,7 +96,7 @@
         </div> -->
 
 
-        <!-- 人脸比对功能 -->
+        <!-- 얼굴 인식 기능 -->
         <div class="margin-top" oo-if="$.form.aliFaceControlEnable">
             <div class="form-item-label">
                 {{$.lp.config.faceDetectionLabel}}

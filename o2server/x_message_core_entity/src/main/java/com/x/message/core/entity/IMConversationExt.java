@@ -19,9 +19,9 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 会话的扩展对象 每个人一个，保存当前用户的会话扩展属性
+ * 대화 확장 객체. 사용자별로 하나씩 두며 현재 사용자의 대화 확장 속성을 저장
  */
-@Schema(name = "IMConversationExt", description = "消息会话扩展.")
+@Schema(name = "IMConversationExt", description = "메시지 대화 확장.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.IMConversationExt.table, indexes = {
@@ -50,42 +50,42 @@ public class IMConversationExt extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
     public static final String conversationId_FIELDNAME = "conversationId";
-    @FieldDescribe("会话id， 关联的会话.")
+    @FieldDescribe("대화 id, 연결된 대화.")
     @Column(length = length_64B, name = ColumnNamePrefix + conversationId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String conversationId;
 
     public static final String person_FIELDNAME = "person";
-    @FieldDescribe("所属人员")
+    @FieldDescribe("소속 사용자")
     @Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String person;
 
     public static final String isTop_FIELDNAME = "isTop";
-    @FieldDescribe("是否置顶.")
+    @FieldDescribe("상단 고정 여부.")
     @CheckPersist(allowEmpty = false)
     @Column(name = ColumnNamePrefix + isTop_FIELDNAME)
     private Boolean isTop = false;
 
     public static final String lastReadTime_FIELDNAME = "lastReadTime";
-    @FieldDescribe("最后阅读时间")
+    @FieldDescribe("마지막 읽은 시간")
     @Column(name = ColumnNamePrefix + lastReadTime_FIELDNAME)
     @CheckPersist(allowEmpty = true)
     private Date lastReadTime;
 
     public static final String lastDeleteTime_FIELDNAME = "lastDeleteTime";
-    @FieldDescribe("当前用户把会话删除的时间")
+    @FieldDescribe("현재 사용자가 대화를 삭제한 시간")
     @Column(name = ColumnNamePrefix + lastDeleteTime_FIELDNAME)
     private Date lastDeleteTime;
 
     public static final String isDeleted_FIELDNAME = "isDeleted";
-    @FieldDescribe("是否删除，个人删除后不显示到会话列表，如果会话中有新的聊天消息会重置为true.")
+    @FieldDescribe("삭제 여부. 개인이 삭제하면 대화 목록에 표시되지 않으며, 대화에 새 채팅 메시지가 있으면 true로 재설정됨.")
     @Column(name = ColumnNamePrefix + isDeleted_FIELDNAME)
     private Boolean isDeleted = false;
 

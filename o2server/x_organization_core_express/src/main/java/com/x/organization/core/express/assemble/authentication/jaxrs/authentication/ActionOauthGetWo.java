@@ -9,28 +9,28 @@ public class ActionOauthGetWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 4777997438663875200L;
 
-	@FieldDescribe("名称.")
-	@Schema(description = "名称.")
+	@FieldDescribe("이름.")
+	@Schema(description = "이름.")
 	private String name;
 
-	@FieldDescribe("跳转地址.")
-	@Schema(description = "跳转地址.")
+	@FieldDescribe("리디렉션 주소.")
+	@Schema(description = "리디렉션 주소.")
 	private String redirectUri;
 
-	@FieldDescribe("认证地址.")
-	@Schema(description = "认证地址.")
+	@FieldDescribe("인증 주소.")
+	@Schema(description = "인증 주소.")
 	private String authAddress;
 
-	@FieldDescribe("认证方法类型.")
-	@Schema(description = "认证方法类型.")
+	@FieldDescribe("인증 방식 유형.")
+	@Schema(description = "인증 방식 유형.")
 	private String authMethod;
 
-	@FieldDescribe("认证参数.")
-	@Schema(description = "认证参数.")
+	@FieldDescribe("인증 매개변수.")
+	@Schema(description = "인증 매개변수.")
 	private String authParameter;
 
-	@FieldDescribe("图标.")
-	@Schema(description = "图标.")
+	@FieldDescribe("아이콘.")
+	@Schema(description = "아이콘.")
 	private String icon;
 
 	public String getIcon() {

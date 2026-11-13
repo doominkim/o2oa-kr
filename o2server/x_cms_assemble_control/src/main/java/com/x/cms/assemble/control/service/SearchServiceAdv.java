@@ -11,8 +11,8 @@ import com.x.cms.assemble.control.jaxrs.search.TopUnitNameFilter;
 import com.x.cms.assemble.control.jaxrs.search.UnitNameFilter;
 
 /**
- * 数据查询的服务类（高级）
- * 高级服务器可以利用Service完成事务控制
+ * 데이터 조회 서비스 클래스(고급)
+ * 고급 서비스는 Service로 트랜잭션 제어 가능
  * 
  * @author O2LEE
  */

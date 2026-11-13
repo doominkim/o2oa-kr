@@ -7,6 +7,6 @@ public class ExceptionCloseOldAttendance extends PromptException {
   private static final long serialVersionUID = 82779070886073828L;
   
   public ExceptionCloseOldAttendance() {
-    super("旧版考勤已经关闭，请使用新考勤");
+    super("구버전 근태는 종료되었습니다. 새 근태를 사용하십시오");
   }
 }

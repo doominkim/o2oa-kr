@@ -75,10 +75,10 @@ class ActionListCategory extends BaseAction {
             this.count = count;
         }
 
-        @FieldDescribe("分类")
+        @FieldDescribe("분류")
         private String category;
 
-        @FieldDescribe("数量")
+        @FieldDescribe("수량")
         private Long count;
 
         public Long getCount() {

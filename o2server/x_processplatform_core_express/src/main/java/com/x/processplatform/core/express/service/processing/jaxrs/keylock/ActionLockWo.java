@@ -9,12 +9,12 @@ public class ActionLockWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 1864818073446091726L;
 
-	@FieldDescribe("是否成功.")
-	@Schema(description = "是否成功.")
+	@FieldDescribe("성공 여부.")
+	@Schema(description = "성공 여부.")
 	private Boolean success;
 
-	@FieldDescribe("锁定人员.")
-	@Schema(description = "锁定人员.")
+	@FieldDescribe("잠금 사용자.")
+	@Schema(description = "잠금 사용자.")
 	private String person;
 
 	public Boolean getSuccess() {

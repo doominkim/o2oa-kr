@@ -51,7 +51,7 @@ public class Expire extends AbstractJob {
 				if (!targets.isEmpty()) {
 					sequence = targets.get(targets.size() - 1).getSequence();
 					for (Task task : targets) {
-						// 如果是挂起状态那么就不再进行标志过期
+						// 보류 상태이면 만료 표시를 하지 않음
 						if (BooleanUtils.isNotTrue(task.getPause())) {
 							expire(task);
 							count.incrementAndGet();
@@ -61,7 +61,7 @@ public class Expire extends AbstractJob {
 					}
 				}
 			} while (!targets.isEmpty());
-			LOGGER.info("标识{}个过期待办, {}个待办处于挂起状态, 耗时:{}.", count.intValue(), pause.intValue(),
+			LOGGER.info("만료 결재 대기 {}건 표시, 결재 대기 {}건 보류 상태, 소요 시간: {}.", count.intValue(), pause.intValue(),
 					stamp.consumingMilliseconds());
 		} catch (Exception e) {
 			throw new JobExecutionException(e);

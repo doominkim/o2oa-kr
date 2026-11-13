@@ -7,6 +7,6 @@ class ExceptionPersonBanned extends PromptException {
 	private static final long serialVersionUID = 1638670949491210510L;
 
 	ExceptionPersonBanned(String name) {
-		super("用户:{}已被禁用.", name);
+		super("사용자: {}은(는) 사용이 중지되었습니다.", name);
 	}
 }

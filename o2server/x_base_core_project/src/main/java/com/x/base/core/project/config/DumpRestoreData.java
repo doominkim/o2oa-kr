@@ -40,31 +40,31 @@ public class DumpRestoreData extends ConfigObject {
         this.restoreOverride = RESTOREOVERRIDE_CLEAN;
     }
 
-    @FieldDescribe("导出导入包含对象,可以使用通配符*,如仅导出待办数据:com.x.processplatform.core.entity.content.Task.")
+    @FieldDescribe("내보내기/가져오기 포함 객체, 와일드카드 * 사용 가능, 예: 결재 대기 데이터만 내보내기: com.x.processplatform.core.entity.content.Task.")
     private List<String> includes;
 
-    @FieldDescribe("导出导入排除对象,可以使用通配符*,如不导出流程实例数据com.x.processplatform.core.entity.content.*")
+    @FieldDescribe("내보내기/가져오기 제외 객체, 와일드카드 * 사용 가능, 예: 프로세스 인스턴스 데이터 제외 com.x.processplatform.core.entity.content.*")
     private List<String> excludes;
 
-    @FieldDescribe("导出数据模式,lite|full,默认使用lite")
+    @FieldDescribe("데이터 내보내기 모드, lite|full, 기본값 lite")
     private String mode;
 
-    @FieldDescribe("无法获取storage是否升起错误.")
+    @FieldDescribe("storage를 조회할 수 없을 때 오류 발생 여부.")
     private Boolean exceptionInvalidStorage;
 
-    @FieldDescribe("是否同时导入导出storage中存储的文件.")
+    @FieldDescribe("storage에 저장된 파일도 함께 가져오기/내보내기 여부.")
     private Boolean attachStorage;
 
-    @FieldDescribe("是否进行重新分布.")
+    @FieldDescribe("재분배 여부.")
     private Boolean redistributeStorage;
 
-    @FieldDescribe("使用并行导出,默认true")
+    @FieldDescribe("병렬 내보내기 사용, 기본값 true")
     private Boolean parallel;
 
-    @FieldDescribe("数据导入方式,clean:清空重新导入,skipExisted:如果有相同id的数据跳过.默认方式为clean.")
+    @FieldDescribe("데이터 가져오기 방식, clean: 비우고 다시 가져오기, skipExisted: 같은 id 데이터가 있으면 건너뜀. 기본 방식은 clean.")
     private String restoreOverride;
 
-    @FieldDescribe("对于com.x.query.core.entity.Item的itemCategory进行单独过滤,可选值pp, cms, bbs, pp_dict.")
+    @FieldDescribe("com.x.query.core.entity.Item의 itemCategory를 별도 필터링, 가능한 값 pp, cms, bbs, pp_dict.")
     private String itemCategory;
 
     public Boolean getParallel() {

@@ -35,7 +35,7 @@ public class ActionListPersonAttendance extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (wi == null || wi.getFilterList() == null || wi.getFilterList().isEmpty()) {
-                throw new ExceptionEmptyParameter("过滤人员或组织");
+                throw new ExceptionEmptyParameter("필터 인원 또는 조직");
             }
             Business business = new Business(emc);
             List<String> userList = new ArrayList<>();
@@ -43,7 +43,7 @@ public class ActionListPersonAttendance extends BaseAction {
                 analysisPerson(userList, f, business);
             }
             if (userList.isEmpty()) {
-                throw new ExceptionWithMessage("当前查询条件没有找到人员信息！");
+                throw new ExceptionWithMessage("현재 조회 조건으로 인원 정보를 찾을 수 없습니다!");
             }
             String queryDate = wi.getQueryDate();
             if (StringUtils.isEmpty(queryDate)) {
@@ -79,7 +79,7 @@ public class ActionListPersonAttendance extends BaseAction {
         if (StringUtils.isEmpty(filter)) {
             return;
         }
-        if (filter.endsWith("@U")) { // 组织转化成人员列表 不递归
+        if (filter.endsWith("@U")) { // 조직을 사용자 목록으로 변환(비재귀)
             List<String> users = business.organization().person().listWithUnitSubDirect(filter);
             if (users != null && !users.isEmpty()) {
                 userList.addAll(users);
@@ -122,13 +122,13 @@ public class ActionListPersonAttendance extends BaseAction {
 
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("人员标识")
+        @FieldDescribe("인원 식별자")
         private String person;
 
-        @FieldDescribe("考勤统计")
+        @FieldDescribe("근태 통계")
         private AttendanceV2Detail detail;
 
-        @FieldDescribe("打卡记录")
+        @FieldDescribe("체크 기록")
         private List<RecordWo> recordList;
 
         public String getPerson() {
@@ -159,10 +159,10 @@ public class ActionListPersonAttendance extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("过滤人员或组织，组织只支持单层: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 단일 계층만 지원: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
 
-        @FieldDescribe("查询日期 yyyy-MM-dd")
+        @FieldDescribe("조회 날짜 yyyy-MM-dd")
         private String queryDate;
 
         public List<String> getFilterList() {

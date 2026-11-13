@@ -19,7 +19,7 @@ import java.util.List;
  * Created by fancyLou on 2023/2/21. Copyright © 2023 O2. All rights reserved.
  */
 
-@Schema(name = "AttendanceV2Detail", description = "考勤每日详细信息.")
+@Schema(name = "AttendanceV2Detail", description = "근태 일별 상세 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2Detail.table, uniqueConstraints = {
@@ -50,7 +50,7 @@ public class AttendanceV2Detail extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -59,122 +59,122 @@ public class AttendanceV2Detail extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
 
 
     public static final String userId_FIELDNAME = "userId";
-    @FieldDescribe("用户标识")
+    @FieldDescribe("사용자 식별자")
     @Column(length = length_96B, name = ColumnNamePrefix + userId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String userId;
 
     public static final String yearString_FIELDNAME = "yearString";
-    @FieldDescribe("记录年份")
+    @FieldDescribe("기록 연도")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + yearString_FIELDNAME)
     private String yearString;
 
     public static final String monthString_FIELDNAME = "monthString";
-    @FieldDescribe("记录月份")
+    @FieldDescribe("기록 월")
     @Column(length = JpaObject.length_16B, name = ColumnNamePrefix + monthString_FIELDNAME)
     private String monthString;
 
     public static final String recordDateString_FIELDNAME = "recordDateString";
-    @FieldDescribe("记录日期")
+    @FieldDescribe("기록 일자")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + recordDateString_FIELDNAME)
     private String recordDateString;
 
     public static final String recordDay_FIELDNAME = "recordDay";
-    @FieldDescribe("记录日期的周几，0-6")
+    @FieldDescribe("기록 날짜의 요일, 0-6")
     @Column(length = JpaObject.length_4B, name = ColumnNamePrefix + recordDay_FIELDNAME)
     private String recordDay;
 
 
     public static final String isWorkday_FIELDNAME = "workDay";
-    @FieldDescribe("是否工作日")
+    @FieldDescribe("근무일 여부")
     @Column(name = ColumnNamePrefix + isWorkday_FIELDNAME)
     private Boolean workDay = false;
 
 
-    //////// 统计相关
+    //////// 통계 관련
     public static final String lateTimeDuration_FIELDNAME = "lateTimeDuration";
-    @FieldDescribe("迟到时长(分钟)")
+    @FieldDescribe("지각 시간(분)")
     @Column(name = ColumnNamePrefix + lateTimeDuration_FIELDNAME)
     private Long lateTimeDuration = 0L;
 
     public static final String leaveEarlierTimeDuration_FIELDNAME = "leaveEarlierTimeDuration";
-    @FieldDescribe("早退时长(分钟)")
+    @FieldDescribe("조퇴 시간(분)")
     @Column(name = ColumnNamePrefix + leaveEarlierTimeDuration_FIELDNAME)
     private Long leaveEarlierTimeDuration = 0L;
 
 //    public static final String workOvertimeTimeDuration_FIELDNAME = "workOvertimeTimeDuration";
-//    @FieldDescribe("加班时长(分钟)")
+//    @FieldDescribe("초과근무 시간(분)")
 //    @Column(name = ColumnNamePrefix + workOvertimeTimeDuration_FIELDNAME)
 //    private Long workOvertimeTimeDuration = 0L;
 
     public static final String workTimeDuration_FIELDNAME = "workTimeDuration";
-    @FieldDescribe("工作时长(分钟)")
+    @FieldDescribe("근무 시간(분)")
     @Column(name = ColumnNamePrefix + workTimeDuration_FIELDNAME)
     private Long workTimeDuration = 0L;
 
     public static final String attendance_FIELDNAME = "attendance";
-    @FieldDescribe("出勤天数")
+    @FieldDescribe("출근 일수")
     @Column(name = ColumnNamePrefix + attendance_FIELDNAME)
     private Integer attendance = 0;
 
     public static final String rest_FIELDNAME = "rest";
-    @FieldDescribe("休息天数")
+    @FieldDescribe("휴무 일수")
     @Column(name = ColumnNamePrefix + rest_FIELDNAME)
     private Integer rest = 0;
 
     public static final String absenteeismDays_FIELDNAME = "absenteeismDays";
-    @FieldDescribe("旷工天数")
+    @FieldDescribe("무단결근 일수")
     @Column(name = ColumnNamePrefix + absenteeismDays_FIELDNAME)
     private Integer absenteeismDays = 0;
 
     public static final String leaveDays_FIELDNAME = "leaveDays";
-    @FieldDescribe("请假天数")
+    @FieldDescribe("휴가 일수")
     @Column(name = ColumnNamePrefix + leaveDays_FIELDNAME)
     private Integer leaveDays = 0;
 
     public static final String lateTimes_FIELDNAME = "lateTimes";
-    @FieldDescribe("迟到次数")
+    @FieldDescribe("지각 횟수")
     @Column(name = ColumnNamePrefix + lateTimes_FIELDNAME)
     private Integer lateTimes = 0;
 
     public static final String leaveEarlierTimes_FIELDNAME = "leaveEarlierTimes";
-    @FieldDescribe("早退次数")
+    @FieldDescribe("조퇴 횟수")
     @Column(name = ColumnNamePrefix + leaveEarlierTimes_FIELDNAME)
     private Integer leaveEarlierTimes = 0;
 
     public static final String onDutyAbsenceTimes_FIELDNAME = "onDutyAbsenceTimes";
-    @FieldDescribe("上班缺卡次数")
+    @FieldDescribe("출근 체크 누락 횟수")
     @Column(name = ColumnNamePrefix + onDutyAbsenceTimes_FIELDNAME)
     private Integer onDutyAbsenceTimes = 0;
 
     public static final String offDutyAbsenceTimes_FIELDNAME = "offDutyAbsenceTimes";
-    @FieldDescribe("下班缺卡次数")
+    @FieldDescribe("퇴근 체크 누락 횟수")
     @Column(name = ColumnNamePrefix + offDutyAbsenceTimes_FIELDNAME)
     private Integer offDutyAbsenceTimes = 0;
 
     public static final String fieldWorkTimes_FIELDNAME = "fieldWorkTimes";
-    @FieldDescribe("外勤打卡次数")
+    @FieldDescribe("외근 체크 횟수")
     @Column(name = ColumnNamePrefix + fieldWorkTimes_FIELDNAME)
     private Integer fieldWorkTimes = 0;
 
 
-    ///// 关联
+    ///// 연관
     public static final String recordIdList_FIELDNAME = "recordIdList";
-    @FieldDescribe("考勤记录id列表")
+    @FieldDescribe("근태 기록 id 목록")
     @PersistentCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = ORDERCOLUMNCOLUMN)
     @ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -185,23 +185,23 @@ public class AttendanceV2Detail extends SliceJpaObject {
     private List<String> recordIdList;
 
     public static final String groupId_FIELDNAME = "groupId";
-    @FieldDescribe("考勤组id.")
+    @FieldDescribe("근태 그룹 id.")
     @Column(length = length_64B, name = ColumnNamePrefix + groupId_FIELDNAME)
     private String groupId;
 
     public static final String groupName_FIELDNAME = "groupName";
-    @FieldDescribe("考勤组名称")
+    @FieldDescribe("근태 그룹 이름")
     @Column(name = ColumnNamePrefix
                    + groupName_FIELDNAME)
     private String groupName;
 
     public static final String shiftId_FIELDNAME = "shiftId";
-    @FieldDescribe("班次id.")
+    @FieldDescribe("근무 id.")
     @Column(length = length_64B, name = ColumnNamePrefix + shiftId_FIELDNAME)
     private String shiftId;
 
     public static final String shiftName_FIELDNAME = "shiftName";
-    @FieldDescribe("班次名称，休息日")
+    @FieldDescribe("근무 이름, 휴무일")
     @Column(name = ColumnNamePrefix
                    + shiftName_FIELDNAME)
     private String shiftName;

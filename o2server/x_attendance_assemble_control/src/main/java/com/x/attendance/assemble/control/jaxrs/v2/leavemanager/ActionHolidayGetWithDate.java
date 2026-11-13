@@ -22,7 +22,7 @@ public class ActionHolidayGetWithDate extends BaseAction {
 
     ActionResult<Wo> execute(String dateString) throws Exception {
         if (StringUtils.isBlank(dateString) || DateTools.parseDate(dateString) == null) {
-            throw new ExceptionWithMessage("日期不能为空，格式为 yyyy-MM-dd");
+            throw new ExceptionWithMessage("날짜는 비워 둘 수 없습니다. 형식: yyyy-MM-dd");
         }
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             ActionResult<Wo> result = new ActionResult<>();
@@ -32,7 +32,7 @@ public class ActionHolidayGetWithDate extends BaseAction {
                     AttendanceV2Holiday.dateString_FIELDNAME, dateString);
             if (list == null || list.isEmpty()) {
                 wo.setResult(RESULT_NOT_FOUND);
-                // 没有查询到节假日配置数据， 判断是否周末
+                // 공휴일 설정 데이터가 조회되지 않아 주말 여부 판단
                 try {
                     Date d = DateTools.parse(dateString, DateTools.format_yyyyMMdd);
                     int day = DateTools.dayForWeekAttendanceV2(d);
@@ -44,7 +44,7 @@ public class ActionHolidayGetWithDate extends BaseAction {
                         wo.setOffDay(false);
                     }
                 } catch (Exception e) {
-                    // 日期格式不正确，无法判断是否周末，默认设置为工作日
+                    // 날짜 형식이 올바르지 않아 주말 여부를 판단할 수 없어 기본값 근무일로 설정
                     wo.setWorkDay(true);
                     wo.setOffDay(false);
                 }
@@ -68,22 +68,22 @@ public class ActionHolidayGetWithDate extends BaseAction {
 
         private static final long serialVersionUID = -6467264123471364646L;
 
-        @FieldDescribe("查询日期，格式 yyyy-MM-dd")
+        @FieldDescribe("조회 날짜, 형식 yyyy-MM-dd")
         private String dateString;
 
-        @FieldDescribe("判断结果：WORKDAY 工作日，OFFDAY 放假日，NOT_FOUND 未找到")
+        @FieldDescribe("판정 결과: WORKDAY 근무일, OFFDAY 휴일, NOT_FOUND 찾지 못함")
         private String result;
 
-        @FieldDescribe("节假日名称")
+        @FieldDescribe("공휴일 이름")
         private String name;
 
-        @FieldDescribe("是否工作日")
+        @FieldDescribe("근무일 여부")
         private Boolean workDay;
 
-        @FieldDescribe("是否放假日")
+        @FieldDescribe("휴무일 여부")
         private Boolean offDay;
 
-        @FieldDescribe("节假日数据")
+        @FieldDescribe("휴일 데이터")
         private AttendanceV2Holiday holiday;
 
         public String getDateString() {

@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp("process.Xform", "$Selector", null, false);
 MWF.require("MWF.widget.UUID", null, false);
-/** @class Calendar 多选按钮组件。
- * @o2cn 多选按钮
+/** @class Calendar 다중 선택 버튼 컴포넌트.
+ * @o2cn 다중 선택 버튼
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  * @extends MWF.xApplication.process.Xform.$Selector
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -19,14 +19,14 @@ MWF.xApplication.process.Xform.Checkbox = MWF.APPCheckbox =  new Class(
         Implements: [Events],
         Extends: MWF.APP$Selector,
         /**
-         * 组件加载后触发。如果选项加载为异步，则异步处理完成后触发此事件
+         * 컴포넌트 로드 후 발생. 선택 항목 로드가 비동기이면 비동기 처리 완료 후 이 이벤트 발생
          * @event MWF.xApplication.process.Xform.Checkbox#load
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 值改变时触发。可以通过this.event获取修改后的选择项（Dom对象）。
+         * 값이 변경될 때 발생. this.event로 변경된 선택 항목(Dom 객체)을 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.Checkbox#change
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         loadDescription: function(){},
         _loadNode: function(){
@@ -90,7 +90,7 @@ MWF.xApplication.process.Xform.Checkbox = MWF.APPCheckbox =  new Class(
                 }else{
                     var textsPerLine = [];
                     texts.each(function(t, i){
-                        if( i % countPerLine === 0){ //如果需要换行了
+                        if( i % countPerLine === 0){ //줄바꿈이 필요한 경우
                             if( div && textsPerLine.length )div.set("text", textsPerLine.join(",") +",");
                             textsPerLine = [];
                             div = new Element("div").inject( node );
@@ -317,10 +317,10 @@ MWF.xApplication.process.Xform.Checkbox = MWF.APPCheckbox =  new Class(
             return {"value": value, "text": text};
         },
         /**
-         * @summary 获取选中项的text，如果未选中返回空数组。
-         * @return {Array} 返回选中项的text数组
+         * @summary 선택 항목의 text 조회. 선택하지 않았으면 빈 배열 반환.
+         * @return {Array} 선택 항목의 text 배열 반환
          * @example
-         * var array = this.form.get('fieldId').getText(); //获取选中项的数组
+         * var array = this.form.get('fieldId').getText(); //선택 항목 배열 가져오기
          */
         getText: function(){
             var texts = this.getTextData().text;
@@ -369,17 +369,17 @@ MWF.xApplication.process.Xform.Checkbox = MWF.APPCheckbox =  new Class(
         resetData: function(){
             this.setData(this.getValue());
         },
-        /**当参数为Promise的时候，请查看文档: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|使用Promise处理表单异步}
-         * @summary 为字段赋值，并且使值对应的选项选中。
+        /**매개변수가 Promise인 경우 문서 참고: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|Promise로 양식 비동기 처리}
+         * @summary 필드에 값을 설정하고 값에 해당하는 옵션을 선택.
          *  @param data{String|Promise} .
-         *  @param fireChange{boolean} 可选，是否触发change事件，默认false.
+         *  @param fireChange{boolean} 선택, change 이벤트 발생 여부, 기본값 false.
          *  @example
-         *  this.form.get("fieldId").setData("test"); //赋文本值
+         *  this.form.get("fieldId").setData("test"); //텍스트 값 할당
          *  @example
-         *  //使用Promise
+         *  //Promise 사용
          *  var field = this.form.get("fieldId");
-         *  var dict = new this.Dict("test"); //test为数据字典名称
-         *  var promise = dict.get("tools", true); //异步使用数据字典的get方法时返回Promise，参数true表示异步
+         *  var dict = new this.Dict("test"); //test는 데이터 사전 이름
+         *  var promise = dict.get("tools", true); //데이터 사전 get 메서드를 비동기로 사용하면 Promise 반환, 인자 true는 비동기를 의미
          *  field.setData( promise );
          */
         setData: function(data, fireChange){

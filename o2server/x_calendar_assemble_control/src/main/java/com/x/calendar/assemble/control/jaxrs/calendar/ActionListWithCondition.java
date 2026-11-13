@@ -19,7 +19,7 @@ import com.x.calendar.assemble.control.ThisApplication;
 import com.x.calendar.core.entity.Calendar;
 
 /**
- * 根据条件和权限列示能访问到的符合条件的日历信息
+ * 조건과 권한에 따라 접근 가능한 조건에 맞는 캘린더 정보 조회
  * @author O2LEE
  *
  */
@@ -45,7 +45,7 @@ public class ActionListWithCondition extends BaseAction {
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}			
@@ -65,7 +65,7 @@ public class ActionListWithCondition extends BaseAction {
 //			manager = ThisApplication.isCalendarSystemManager(effectivePerson);
 //		} catch (Exception e) {
 //			check = false;
-//			Exception exception = new ExceptionCalendarInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+//			Exception exception = new ExceptionCalendarInfoProcess(e, "시스템이 사용자의 플랫폼 관리자 여부를 확인하는 중 예외가 발생했습니다. Name:" + personName);
 //			result.error(exception);
 //			logger.error(e, effectivePerson, request, null);
 //		}
@@ -76,16 +76,16 @@ public class ActionListWithCondition extends BaseAction {
 						unitNames, groupNames );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据条件查询指定的日历信息ID列表时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "조건에 맞는 캘린더 ID 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
-//			if( manager) { //不带权限
+//			if( manager) { //권한 미적용
 //				try {
 //					ids = calendarServiceAdv.listWithCondition( wi.getName(), wi.getType(), wi.getSource(), wi.getCreateor(), null );
 //				} catch (Exception e) {
 //					check = false;
-//					Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据条件查询指定的日历信息ID列表（忽略权限）时发生异常." );
+//					Exception exception = new ExceptionCalendarInfoProcess( e, "시스템이 조건으로 지정한 캘린더 정보 ID 목록(권한 무시)을 조회하는 중 예외가 발생했습니다." );
 //					result.error( exception );
 //					logger.error( e, effectivePerson, request, null);
 //				}
@@ -107,7 +107,7 @@ public class ActionListWithCondition extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionCalendarInfoProcess( e, "将所有查询到的日历信息对象转换为可以输出的信息时发生异常." );
+					Exception exception = new ExceptionCalendarInfoProcess( e, "조회한 캘린더 정보를 출력 정보로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -119,16 +119,16 @@ public class ActionListWithCondition extends BaseAction {
 	
 	public static class Wi{
 		
-		@FieldDescribe( "日历名称" )
+		@FieldDescribe( "캘린더 이름" )
 		private String name = null;
 		
-		@FieldDescribe( "日历类型" )
+		@FieldDescribe( "캘린더 유형" )
 		private String type = null; 
 		
-		@FieldDescribe( "日历来源" )
+		@FieldDescribe( "캘린더 출처" )
 		private String source = null; 
 		
-		@FieldDescribe( "创建者" )
+		@FieldDescribe( "작성자" )
 		private String createor = null;
 
 		public String getName() {
@@ -163,10 +163,10 @@ public class ActionListWithCondition extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>();
 		
-		@FieldDescribe("用户是否可以对该日历进行管理.")
+		@FieldDescribe("사용자의 해당 캘린더 관리 가능 여부.")
 		private Boolean manageable = false;
 		
-		@FieldDescribe("用户是否可以在该日历中发布日程事件.")
+		@FieldDescribe("사용자의 해당 캘린더 일정 이벤트 게시 가능 여부.")
 		private Boolean publishable = false;
 		
 		public static WrapCopier<Calendar, Wo> copier = WrapCopierFactory.wo( Calendar.class, Wo.class, null,Wo.Excludes);

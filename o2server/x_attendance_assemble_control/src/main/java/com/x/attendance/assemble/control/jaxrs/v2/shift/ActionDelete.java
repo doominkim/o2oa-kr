@@ -37,7 +37,7 @@ public class ActionDelete extends BaseAction {
             }
             AttendanceV2Shift shift = emc.find(id, AttendanceV2Shift.class);
             if (shift == null) {
-                throw new ExceptionNotExistObject(id+"班次");
+                throw new ExceptionNotExistObject(id+"근무조");
             }
             List<AttendanceV2Group> groupList = business.getAttendanceV2ManagerFactory().listGroupWithShiftId(id);
             if (groupList != null && !groupList.isEmpty()) {
@@ -46,7 +46,7 @@ public class ActionDelete extends BaseAction {
             emc.beginTransaction(AttendanceV2Shift.class);
             emc.delete(AttendanceV2Shift.class, shift.getId());
             emc.commit();
-            CacheManager.notify(AttendanceV2Shift.class);// 清除缓存
+            CacheManager.notify(AttendanceV2Shift.class);// 캐시 삭제
             Wo wo = new Wo();
             wo.setValue(true);
             result.setData(wo);

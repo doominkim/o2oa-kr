@@ -12,32 +12,32 @@ public class ActionFilterAttributeFilterWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5679380543688586107L;
 
-	@FieldDescribe("限制应用标识.")
-	@Schema(description = "限制应用标识.")
+	@FieldDescribe("앱 식별자 제한.")
+	@Schema(description = "앱 식별자 제한.")
 	private List<String> applicationList = new ArrayList<>();
 
-	@FieldDescribe("限制流程标识.")
-	@Schema(description = "限制流程标识.")
+	@FieldDescribe("프로세스 식별자 제한.")
+	@Schema(description = "프로세스 식별자 제한.")
 	private List<String> processList = new ArrayList<>();
 
-	@FieldDescribe("限制创建组织范围.")
-	@Schema(description = "限制创建组织范围.")
+	@FieldDescribe("생성 조직 범위 제한.")
+	@Schema(description = "생성 조직 범위 제한.")
 	private List<String> creatorUnitList = new ArrayList<>();
 
-	@FieldDescribe("限制创建月份范围.")
-	@Schema(description = "限制创建月份范围.")
+	@FieldDescribe("생성 월 범위 제한.")
+	@Schema(description = "생성 월 범위 제한.")
 	private List<String> startTimeMonthList = new ArrayList<>();
 
-	@FieldDescribe("限制结束月份范围.")
-	@Schema(description = "限制结束月份范围.")
+	@FieldDescribe("종료 월 범위 제한.")
+	@Schema(description = "종료 월 범위 제한.")
 	private List<String> completedTimeMonthList = new ArrayList<>();
 
-	@FieldDescribe("限制活动名称范围.")
-	@Schema(description = "限制活动名称范围.")
+	@FieldDescribe("활동 이름 범위 제한.")
+	@Schema(description = "활동 이름 범위 제한.")
 	private List<String> activityNameList = new ArrayList<>();
 
-	@FieldDescribe("可选择的完成状态.")
-	@Schema(description = "可选择的完成状态.")
+	@FieldDescribe("선택 가능한 완료 상태.")
+	@Schema(description = "선택 가능한 완료 상태.")
 	private List<Boolean> completedList = new ArrayList<>();
 
 	public List<String> getApplicationList() {

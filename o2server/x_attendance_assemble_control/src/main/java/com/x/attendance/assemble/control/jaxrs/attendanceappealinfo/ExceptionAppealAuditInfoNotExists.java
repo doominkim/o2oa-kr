@@ -7,6 +7,6 @@ class ExceptionAppealAuditInfoNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionAppealAuditInfoNotExists(String id ) {
-		super("员工打卡申诉审批信息不存在！ID:" + id );
+		super("직원 체크 이의 신청 결재 정보가 없습니다! ID:" + id );
 	}
 }

@@ -7,6 +7,6 @@ class ExceptionGetInitialManagerToken extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionGetInitialManagerToken() {
-		super("不能通过oauth获取初始管理员的token.");
+		super("oauth로 초기 관리자의 token을 가져올 수 없습니다.");
 	}
 }

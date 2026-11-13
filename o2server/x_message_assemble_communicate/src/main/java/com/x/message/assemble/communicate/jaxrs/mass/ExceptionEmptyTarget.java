@@ -7,6 +7,6 @@ class ExceptionEmptyTarget extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionEmptyTarget() {
-		super("发送对象不能为空.");
+		super("받는 대상은 비워 둘 수 없습니다.");
 	}
 }

@@ -82,7 +82,7 @@ MWF.xApplication.query.QueryManager.Main = new Class({
         }.bind(this));
     },
     clearContent: function(){
-        //暂时没有启用---------------------
+        //아직 사용하지 않음---------------------
         if (this.selectConfiguratorContent){
             if (this.selectConfigurator) delete this.selectConfigurator;
             this.selectConfiguratorContent.destroy();
@@ -450,7 +450,7 @@ MWF.xApplication.query.QueryManager.QueryProperty = new Class({
         this.nameInput = new MWF.xApplication.query.QueryManager.Input(this.propertyContentNode.getElement("#formApplicationName"), this.data.name, this.app.css.formInput);
         this.aliasInput = new MWF.xApplication.query.QueryManager.Input(this.propertyContentNode.getElement("#formApplicationAlias"), this.data.alias, this.app.css.formInput);
         this.descriptionInput = new MWF.xApplication.query.QueryManager.Input(this.propertyContentNode.getElement("#formApplicationDescription"), this.data.description, this.app.css.formInput);
-        //2019年11月15日--ji 接口是queryCategory字段
+        //2019-11-15--ji 인터페이스는 queryCategory 필드
         //this.typeInput = new MWF.xApplication.query.QueryManager.Input(this.propertyContentNode.getElement("#formApplicationType"), this.data.applicationCategory, this.app.css.formInput);
         this.typeInput = new MWF.xApplication.query.QueryManager.Input(this.propertyContentNode.getElement("#formApplicationType"), this.data.queryCategory, this.app.css.formInput);
         // this.firstPageInput = new MWF.xApplication.query.QueryManager.Select(this.propertyContentNode.getElement("#formApplicationFirstPage"), this.data.firstPage, this.app.css.formInput, function(){
@@ -490,7 +490,7 @@ MWF.xApplication.query.QueryManager.QueryProperty = new Class({
         this.data.name = this.nameInput.input.get("value");
         this.data.alias = this.aliasInput.input.get("value");
         this.data.description = this.descriptionInput.input.get("value");
-        //2019年11月15日--ji 接口是queryCategory字段
+        //2019-11-15--ji 인터페이스는 queryCategory 필드
         //this.data.applicationCategory = this.typeInput.input.get("value");
         this.data.queryCategory = this.typeInput.input.get("value");
         //this.data.firstPage = this.firstPageInput.input.get("value");

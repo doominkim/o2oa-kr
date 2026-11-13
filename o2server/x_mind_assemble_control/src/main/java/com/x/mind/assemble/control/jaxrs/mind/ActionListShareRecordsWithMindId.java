@@ -18,7 +18,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindWrapOutConvert;
 import com.x.mind.entity.MindShareRecord;
 
 /**
- * 查询脑图分享信息
+ * 마인드맵 공유 정보 조회
  * @author O2LEE
  *
  */
@@ -38,7 +38,7 @@ public class ActionListShareRecordsWithMindId extends BaseAction {
 				ids = mindInfoService.listShareRecordWithMindId(mindId);
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindShareRecordsQuery( e, "系统在根据ID查询指定的脑图分享信息时发生异常。",  mindId );
+				Exception exception = new ExceptionMindShareRecordsQuery( e, "ID로 지정한 마인드맵 공유 정보를 조회하는 중 오류가 발생했습니다.",  mindId );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -51,7 +51,7 @@ public class ActionListShareRecordsWithMindId extends BaseAction {
 				}
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e, "系统在根据ID查询指定的脑图分享信息时发生异常。" );
+				Exception exception = new ExceptionMindQuery( e, "ID로 지정한 마인드맵 공유 정보를 조회하는 중 오류가 발생했습니다." );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -63,7 +63,7 @@ public class ActionListShareRecordsWithMindId extends BaseAction {
 					wraps = Wo.copier.copy(mindShareRecords);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionMindWrapOutConvert( e, "将数据库实体对象转换为输出对象时发生异常！" );
+					Exception exception = new ExceptionMindWrapOutConvert( e, "데이터베이스 엔터티를 출력 객체로 변환하는 중 오류가 발생했습니다!" );
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}

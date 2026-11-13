@@ -280,8 +280,8 @@ O2CMSComment.getDateDiff = function (publishTime ) {
     var now = new Date().getTime();
     var diffValue = now - dateTimeStamp;
     if (diffValue < 0) {
-        //若日期不符则弹出窗口告之
-        //alert("结束日期不能小于开始日期！");
+        //날짜가 맞지 않으면 팝업으로 알림
+        //alert("종료 날짜는 시작 날짜보다 이전일 수 없습니다!");
     }
     var yesterday = new Date().decrement('day', 1);
     var beforYesterday = new Date().decrement('day', 2);
@@ -298,8 +298,8 @@ O2CMSComment.getDateDiff = function (publishTime ) {
     } else if (yearC > 1) {
         result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
     } else if (monthC >= 1) {
-        //result= parseInt(monthC) + "个月前";
-        // s.getFullYear()+"年";
+        //result= parseInt(monthC) + "개월 전";
+        // s.getFullYear()+"년";
         result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
     } else if (weekC >= 1) {
         result = MWF.xApplication.cms.Xform.LP.severalWeekAgo.replace("{count}", parseInt(weekC));
@@ -502,9 +502,9 @@ O2CMSComment.Document = new Class({
 
         var contentNode = itemNode.getElement("[item='content']");
         if( layout.mobile ){
-            this.loadLazyImage(contentNode, this.data.content, function () { //图片懒加载
+            this.loadLazyImage(contentNode, this.data.content, function () { //이미지 지연 로딩
                 var images = contentNode.getElements("img");
-                //移动端设置图片宽度为100%
+                //모바일에서 이미지 너비를 100%로 설정
                 images.each( function( img ){
                     if( img.hasClass("lozad") ){
                         img.setStyles({
@@ -585,7 +585,7 @@ O2CMSComment.Document = new Class({
             }.bind(IM));
         }
     },
-    createComment : function(itemNode, ev ){ // 对回复进行回复
+    createComment : function(itemNode, ev ){ // 답글에 답글 달기
         if( this.app.access.isAnonymousDynamic() ){
             this.app.openLoginForm( function(){ this.app.reload() }.bind(this) );
         }else{
@@ -601,7 +601,7 @@ O2CMSComment.Document = new Class({
             form.create()
         }
     },
-    editComment : function(itemNode, ev ){	//编辑当前回复
+    editComment : function(itemNode, ev ){	//현재 답글 편집
         var form = new O2CMSComment.Form(this, this.data, {
             documentId : this.explorer.options.documentId,
             toMain : (this.data.parentId && this.data.parentId!="") ? false : true,

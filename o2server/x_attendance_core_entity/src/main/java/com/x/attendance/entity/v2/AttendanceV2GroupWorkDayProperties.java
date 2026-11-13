@@ -14,29 +14,29 @@ import java.util.Date;
  */
 public class AttendanceV2GroupWorkDayProperties extends JsonProperties {
 
-    @FieldDescribe("周日")
+    @FieldDescribe("일요일")
     private AttendanceV2GroupWorkDay sunday;
-    @FieldDescribe("周一")
+    @FieldDescribe("월요일")
     private AttendanceV2GroupWorkDay monday;
-    @FieldDescribe("周二")
+    @FieldDescribe("화요일")
     private AttendanceV2GroupWorkDay tuesday;
-    @FieldDescribe("周三")
+    @FieldDescribe("수요일")
     private AttendanceV2GroupWorkDay wednesday;
-    @FieldDescribe("周四")
+    @FieldDescribe("목요일")
     private AttendanceV2GroupWorkDay thursday;
-    @FieldDescribe("周五")
+    @FieldDescribe("금요일")
     private AttendanceV2GroupWorkDay friday;
-    @FieldDescribe("周六")
+    @FieldDescribe("토요일")
     private AttendanceV2GroupWorkDay saturday;
 
 
     /**
-     * 根据日期 获取班次id
+     * 날짜로 근무 id 조회
      * @param date
      * @return
      */
     public String shiftIdWithDate(Date date) {
-        // 周几
+        // 요일
         try {
             AttendanceV2GroupWorkDay workDay = null;
             int day = DateTools.dayForWeekAttendanceV2(date);
@@ -71,8 +71,8 @@ public class AttendanceV2GroupWorkDayProperties extends JsonProperties {
     }
 
     /**
-     * 判断是否有数据
-     * 有选中并且选中的日子有配置班次
+     * 데이터 존재 여부 판단
+     * 선택되어 있고 선택한 날짜에 근무가 설정되어 있음
      * @return
      */
     public boolean validateNotEmpty() {
@@ -175,11 +175,11 @@ public class AttendanceV2GroupWorkDayProperties extends JsonProperties {
 
     public static class AttendanceV2GroupWorkDay extends GsonPropertyObject {
 
-        @FieldDescribe("是否需要打卡")
+        @FieldDescribe("체크 필요 여부")
         private boolean checked; //
-        @FieldDescribe("班次id")
+        @FieldDescribe("근무 id")
         private String shiftId; //
-        @FieldDescribe("班次对象") // ，不存储，返回前端的时候提供
+        @FieldDescribe("근무조 객체") // , 저장하지 않고 프런트엔드 반환 시 제공
         private AttendanceV2Shift shift;
 
 

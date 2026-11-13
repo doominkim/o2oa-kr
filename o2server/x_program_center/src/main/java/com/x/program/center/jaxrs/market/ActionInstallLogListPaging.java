@@ -76,19 +76,19 @@ class ActionInstallLogListPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String name;
 
-		@FieldDescribe("分类")
+		@FieldDescribe("분류")
 		private String category;
 
-		@FieldDescribe("状态:1(正常)|0(失效)")
+		@FieldDescribe("상태:1(정상)|0(무효)")
 		private String status;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
 		public String getName() {

@@ -50,12 +50,12 @@ public class MergeItemPlan extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -67,54 +67,54 @@ public class MergeItemPlan extends SliceJpaObject {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态")
+	@FieldDescribe("상태")
 	@Column(length = length_32B, name = ColumnNamePrefix + status_FIELDNAME)
 	private String status = STATUS_MERGING;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后更新者")
+	@FieldDescribe("최종 수정자")
 	@CheckPersist(allowEmpty = false)
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	private String lastUpdatePerson;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("应用的最后修改时间。")
+	@FieldDescribe("앱 최종 수정 시간.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	private Date lastUpdateTime;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用标识")
+	@FieldDescribe("앱 식별자")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	private String application;
 
 	public static final String applicationName_FIELDNAME = "applicationName";
-	@FieldDescribe("应用名称")
+	@FieldDescribe("앱 이름")
 	@Column(length = length_255B, name = ColumnNamePrefix + applicationName_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String applicationName;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程标识")
+	@FieldDescribe("프로세스 식별자")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	private String process;
 
 	public static final String processName_FIELDNAME = "processName";
-	@FieldDescribe("流程名称")
+	@FieldDescribe("프로세스 이름")
 	@Column(length = length_255B, name = ColumnNamePrefix + processName_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String processName;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("开始时间")
+	@FieldDescribe("시작 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + startTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTime_FIELDNAME)
@@ -122,7 +122,7 @@ public class MergeItemPlan extends SliceJpaObject {
 	private Date startTime;
 
 	public static final String completedTime_FIELDNAME = "completedTime";
-	@FieldDescribe("结束时间")
+	@FieldDescribe("종료 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + completedTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + completedTime_FIELDNAME)
@@ -130,17 +130,17 @@ public class MergeItemPlan extends SliceJpaObject {
 	private Date completedTime;
 
 	public static final String count_FIELDNAME = "count";
-	@FieldDescribe("数量")
+	@FieldDescribe("수량")
 	@Column(name = ColumnNamePrefix + count_FIELDNAME)
 	private Long count;
 
 	public static final String estimatedCount_FIELDNAME = "estimatedCount";
-	@FieldDescribe("估计数量")
+	@FieldDescribe("예상 수량")
 	@Column(name = ColumnNamePrefix + estimatedCount_FIELDNAME)
 	private Long estimatedCount;
 
 	public static final String enable_FIELDNAME = "enable";
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	@Column(name = ColumnNamePrefix + enable_FIELDNAME)
 	private Boolean enable = DEFAULT_ENABLE;
 

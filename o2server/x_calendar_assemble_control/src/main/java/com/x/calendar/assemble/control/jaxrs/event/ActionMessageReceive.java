@@ -63,7 +63,7 @@ public class ActionMessageReceive extends BaseAction {
 							wo.setValue( true );
 						} catch (Exception e) {
 							check = false;
-							exception = new ExceptionMessageProcess( e, "处理消息信息时发生异常." );
+							exception = new ExceptionMessageProcess( e, "메시지를 처리하는 중 오류가 발생했습니다." );
 							result.error( exception );
 							logger.error( e, effectivePerson, request, null);
 						}
@@ -79,7 +79,7 @@ public class ActionMessageReceive extends BaseAction {
 	}
 
 	/**
-	 * 删除日历事件
+	 * 캘린더 이벤트 삭제
 	 * @param message
 	 * @return
 	 * @throws Exception
@@ -87,14 +87,14 @@ public class ActionMessageReceive extends BaseAction {
 	private List<String> deleteCalendarEvent( Wi message ) throws Exception {
 		WiMeeting wiMeeting = gson.fromJson( message.getBody(), WiMeeting.class );
 		if( StringUtils.isNotEmpty( wiMeeting.getId() ) ) {
-			//根据bundle来删除
+			//bundle 기준으로 삭제
 			return calendar_EventServiceAdv.destoryWithBundle( wiMeeting.getId() );
 		}
 		return null;
 	}
 	
 	/**
-	 * 将消息对象转换为一个日程事件对象
+	 * 메시지 객체를 일정 이벤트 객체로 변환
 	 * @param message
 	 * @return
 	 * @throws Exception 
@@ -127,16 +127,16 @@ public class ActionMessageReceive extends BaseAction {
 	
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("消息类型：meeting_invite | meeting_delete | meeting_accept | meeting_reject")
+		@FieldDescribe("메시지 유형: meeting_invite | meeting_delete | meeting_accept | meeting_reject")
 		private String type;
 
-		@FieldDescribe("接收者")
+		@FieldDescribe("수신자")
 		private String person;
 
-		@FieldDescribe("消息提醒标题")
+		@FieldDescribe("메시지 알림 제목")
 		private String title;
 
-		@FieldDescribe("消息内容")
+		@FieldDescribe("메시지 내용")
 		private JsonElement body;
 
 		public String getType() {
@@ -178,37 +178,37 @@ public class ActionMessageReceive extends BaseAction {
 		
 		public static WrapCopier< Wi, WiMeeting > copier =  WrapCopierFactory.wi( Wi.class, WiMeeting.class, null, null );	
 		
-		@FieldDescribe("数据库主键,自动生成.")
+		@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 		private String id = null;
 		
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String subject;
 
-		@FieldDescribe("说明")
+		@FieldDescribe("설명")
 		private String description;
 
-		@FieldDescribe("所属楼层.")
+		@FieldDescribe("소속 층.")
 		private String room;
 		
-		@FieldDescribe("开始时间.")
+		@FieldDescribe("시작 시간.")
 		private Date startTime;
 
-		@FieldDescribe("结束时间.")
+		@FieldDescribe("종료 시간.")
 		private Date completedTime;
 
-		@FieldDescribe("邀请人员.")
+		@FieldDescribe("초대 사용자.")
 		private List<String> invitePersonList;
 
-		@FieldDescribe("接受人员.")
+		@FieldDescribe("수락 사용자.")
 		private List<String> acceptPersonList;
 
-		@FieldDescribe("拒绝人员.")
+		@FieldDescribe("거절 사용자.")
 		private List<String> rejectPersonList;
 
-		@FieldDescribe("会议申请人")
+		@FieldDescribe("회의 신청자")
 		private String applicant;
 
-		@FieldDescribe("备注.")
+		@FieldDescribe("비고.")
 		private String memo;
 
 		public String getId() {

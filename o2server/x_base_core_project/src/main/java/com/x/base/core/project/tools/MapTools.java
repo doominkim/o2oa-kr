@@ -184,7 +184,7 @@ public class MapTools {
 	}
 
 	/**
-	 * 将Map转换为String
+	 * Map을 String으로 변환
 	 * @param map
 	 * @return
 	 */

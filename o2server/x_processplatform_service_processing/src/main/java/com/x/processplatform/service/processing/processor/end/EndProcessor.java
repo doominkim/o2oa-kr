@@ -43,7 +43,7 @@ public class EndProcessor extends AbstractEndProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, End end) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.endArrive(aeiObjects.getWork().getActivityToken(), end));
 		return aeiObjects.getWork();
 	}
@@ -55,7 +55,7 @@ public class EndProcessor extends AbstractEndProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, End end) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.endExecute(aeiObjects.getWork().getActivityToken(), end));
 		List<Work> results = new ArrayList<>();
 		Work other = aeiObjects.getWorks().stream().filter(o -> o != aeiObjects.getWork())
@@ -79,30 +79,30 @@ public class EndProcessor extends AbstractEndProcessor {
 			aeiObjects.getCreateWorkCompleteds().add(workCompleted);
 			aeiObjects.getTasks().forEach(o -> aeiObjects.getDeleteTasks().add(o));
 			aeiObjects.getTaskCompleteds().forEach(o -> {
-				// 已办的完成时间是不需要更新的
+				// 처리 완료의 완료 시간은 업데이트할 필요 없음
 				o.setCompleted(true);
 				o.setWorkCompleted(workCompleted.getId());
-				// 重新赋值映射字段
+				// 매핑 필드 재할당
 				o.copyProjectionFields(workCompleted);
-				// 加入到更新队列保证事务开启
+				// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 				aeiObjects.getUpdateTaskCompleteds().add(o);
 			});
 			aeiObjects.getReads().forEach(o -> {
-				// 待阅的完成时间是不需要更新的
+				// 열람 대기의 완료 시간은 업데이트할 필요 없음
 				o.setCompleted(true);
 				o.setWorkCompleted(workCompleted.getId());
-				// 重新赋值映射字段
+				// 매핑 필드 재할당
 				o.copyProjectionFields(workCompleted);
-				// 加入到更新队列保证事务开启
+				// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 				aeiObjects.getUpdateReads().add(o);
 			});
 			aeiObjects.getReadCompleteds().forEach(o -> {
-				// 已阅的完成时间是不需要更新的
+				// 열람 완료의 완료 시간은 업데이트할 필요 없음
 				o.setCompleted(true);
 				o.setWorkCompleted(workCompleted.getId());
-				// 重新赋值映射字段
+				// 매핑 필드 재할당
 				o.copyProjectionFields(workCompleted);
-				// 加入到更新队列保证事务开启
+				// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 				aeiObjects.getUpdateReadCompleteds().add(o);
 			});
 			aeiObjects.getRecords().forEach(o -> {
@@ -115,9 +115,9 @@ public class EndProcessor extends AbstractEndProcessor {
 				o.setWorkCompleted(workCompleted.getId());
 				o.setCompletedTime(workCompleted.getCompletedTime());
 				o.setCompletedTimeMonth(workCompleted.getCompletedTimeMonth());
-				// 重新赋值映射字段
+				// 매핑 필드 재할당
 				o.copyProjectionFields(workCompleted);
-				// 加入到更新队列保证事务开启
+				// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 				aeiObjects.getUpdateReviews().add(o);
 			});
 			aeiObjects.getWorkLogs().forEach(o -> {
@@ -127,9 +127,9 @@ public class EndProcessor extends AbstractEndProcessor {
 				o.setSplitValue("");
 				o.setCompleted(true);
 				o.setWorkCompleted(workCompleted.getId());
-				// 加入到更新队列保证事务开启
+				// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 				aeiObjects.getUpdateWorkLogs().add(o);
-				// 删除未连接的WorkLogd0431924-849f-4bf6-81b2-bfe997e62b7f
+				// 연결되지 않은 WorkLog 삭제 d0431924-849f-4bf6-81b2-bfe997e62b7f
 				if (BooleanUtils.isNotTrue(o.getConnected())) {
 					aeiObjects.getDeleteWorkLogs().add(o);
 				}
@@ -137,17 +137,17 @@ public class EndProcessor extends AbstractEndProcessor {
 			aeiObjects.getAttachments().forEach(o -> {
 				o.setCompleted(true);
 				o.setWorkCompleted(workCompleted.getId());
-				// 加入到更新队列保证事务开启
+				// 트랜잭션 시작 보장을 위해 업데이트 큐에 추가
 				aeiObjects.getUpdateAttachments().add(o);
 			});
-			// 已workCompleted数据为准进行更新
+			// workCompleted 데이터를 기준으로 업데이트
 			aeiObjects.getData().setWork(workCompleted);
 			aeiObjects.getData().setAttachmentList(aeiObjects.getAttachments());
 			aeiObjects.getDeleteWorks().addAll(aeiObjects.getWorks());
-			// 删除快照
+			// 스냅샷 삭제
 			aeiObjects.getDeleteSnaps().addAll(aeiObjects.getSnaps());
 		}
-		// 需要返回work,否则事件无法执行.
+		// work를 반환해야 함, 그렇지 않으면 이벤트 실행 불가.
 		results.add(aeiObjects.getWork());
 		return results;
 	}
@@ -160,7 +160,7 @@ public class EndProcessor extends AbstractEndProcessor {
 					aeiObjects.getProcess(), Business.EVENT_PROCESSAFTEREND);
 			GraalvmScriptingFactory.eval(source, aeiObjects.bindings());
 		}
-		// 回写到父Work
+		// 상위 Work에 다시 기록
 		tryUpdateParentWork(aeiObjects);
 		addUpdateTableEvent(aeiObjects);
 	}
@@ -219,7 +219,7 @@ public class EndProcessor extends AbstractEndProcessor {
 	}
 
 	private void updateParentWork(AeiObjects aeiObjects, Work parent, Embed embed) throws Exception {
-		// 先把状态值注入,这样脚本执行时可以取得到值.
+		// 상태값을 먼저 주입해 스크립트 실행 시 값을 가져올 수 있게 함.
 		parent.setEmbedCompleted(ActivityType.end.toString());
 		AeiObjects parentAeiObjects = new AeiObjects(aeiObjects.business(), parent, embed,
 				aeiObjects.getProcessingAttributes());
@@ -259,7 +259,7 @@ public class EndProcessor extends AbstractEndProcessor {
 	}
 
 	/**
-	 * 触发在等待状态的父文档
+	 * 대기 상태의 상위 문서 트리거
 	 *
 	 * @param workId
 	 */
@@ -278,7 +278,7 @@ public class EndProcessor extends AbstractEndProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, End end) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.endInquire(aeiObjects.getWork().getActivityToken(), end));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
@@ -289,9 +289,9 @@ public class EndProcessor extends AbstractEndProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}
@@ -304,7 +304,7 @@ public class EndProcessor extends AbstractEndProcessor {
 		// nothing
 	}
 
-	/* 根据work和data创建最终保存的workCompleted */
+	/* work와 data를 기준으로 최종 저장할 workCompleted 생성 */
 	private WorkCompleted createWorkCompleted(Work work, End end) throws Exception {
 		Date completedTime = new Date();
 		Long duration = Config.workTime().betweenMinutes(work.getStartTime(), completedTime);

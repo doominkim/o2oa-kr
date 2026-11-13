@@ -7,6 +7,6 @@ class ExceptionAttendanceSettingProcess extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionAttendanceSettingProcess(Throwable e, String message ) {
-		super("用户在进行系统配置信息处理时发生异常！message:" + message, e );
+		super("시스템 설정 처리 중 오류가 발생했습니다! message:" + message, e );
 	}
 }

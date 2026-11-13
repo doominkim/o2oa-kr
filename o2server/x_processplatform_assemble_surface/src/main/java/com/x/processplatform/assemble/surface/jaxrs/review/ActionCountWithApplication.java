@@ -26,7 +26,7 @@ import com.x.processplatform.core.entity.content.Review;
 import com.x.processplatform.core.entity.content.Review_;
 
 /**
- * 按应用统计当前用户可见的review数量
+ * 앱별 현재 사용자가 볼 수 있는 review 수 통계
  * 
  * @author zhour
  *
@@ -72,10 +72,10 @@ class ActionCountWithApplication extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("总数量")
+		@FieldDescribe("총 수량")
 		private Long total;
 
-		@FieldDescribe("分类数量")
+		@FieldDescribe("분류 수량")
 		private List<NameValueCountPair> list = new ArrayList<>();
 
 		public Long getTotal() {

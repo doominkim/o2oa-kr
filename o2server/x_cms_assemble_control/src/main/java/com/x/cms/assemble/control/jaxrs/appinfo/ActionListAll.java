@@ -36,7 +36,7 @@ public class ActionListAll extends BaseAction {
 				appInfoList = appInfoServiceAdv.listAll( null, "全部");
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess( e, "查询所有应用栏目信息对象时发生异常" );
+				Exception exception = new ExceptionAppInfoProcess( e, "전체 게시판 정보 객체를 조회하는 중 오류가 발생했습니다" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -48,7 +48,7 @@ public class ActionListAll extends BaseAction {
 						CacheManager.put(cacheCategory, cacheKey, wos);
 						result.setData( wos );
 					} catch (Exception e) {
-						Exception exception = new ExceptionAppInfoProcess( e, "将查询出来的应用栏目信息对象转换为可输出的数据信息时发生异常。" );
+						Exception exception = new ExceptionAppInfoProcess( e, "조회한 게시판 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다." );
 						result.error( exception );
 						logger.error( e, effectivePerson, request, null);
 					}

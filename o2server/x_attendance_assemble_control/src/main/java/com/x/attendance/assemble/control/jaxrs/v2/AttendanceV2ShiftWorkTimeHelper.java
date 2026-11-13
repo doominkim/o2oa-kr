@@ -12,7 +12,7 @@ import com.x.attendance.entity.v2.AttendanceV2ShiftCheckTimeProperties;
 import com.x.base.core.project.tools.DateTools;
 
 /**
- * 班次工作时间计算，休息时间段不计入工作时长。
+ * 교대 근무 시간 계산, 휴식 시간대는 근무 시간에 포함하지 않음.
  */
 public class AttendanceV2ShiftWorkTimeHelper {
 

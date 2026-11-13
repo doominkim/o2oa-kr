@@ -45,9 +45,9 @@ class ActionListCategory extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("类别")
+		@FieldDescribe("유형")
 		private String name;
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Long count;
 
 		public String getName() {

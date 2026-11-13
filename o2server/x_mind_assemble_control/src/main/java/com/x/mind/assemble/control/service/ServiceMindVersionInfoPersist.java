@@ -17,14 +17,14 @@ import com.x.mind.entity.MindVersionContent;
 import com.x.mind.entity.MindVersionInfo;
 
 /**
- * 脑图信息持久化操作服务类：保存、更新、删除
+ * 마인드맵 정보 영속화 작업 서비스 클래스: 저장, 수정, 삭제
  * @author O2LEE
  *
  */
 class ServiceMindVersionInfoPersist{
 	
 	/**
-	 * 保存一个新版本的脑图信息
+	 * 새 버전의 마인드맵 정보 저장
 	 * @param emc
 	 * @param _mindBaseInfo
 	 * @param content
@@ -33,13 +33,13 @@ class ServiceMindVersionInfoPersist{
 	 */
 	MindVersionInfo createFromMind(EntityManagerContainer emc,  MindBaseInfo _mindBaseInfo, String content, int maxVersionCount ) throws Exception {
 		if( StringUtils.isEmpty(_mindBaseInfo.getId()) ){
-			throw new Exception("脑图的ID为空，无法保存新的版本信息！");
+			throw new Exception("마인드맵 ID가 비어 있어 새 버전 정보를 저장할 수 없습니다!");
 		}
 		MindVersionInfo mindVersionInfo = null;
 		MindVersionContent mindVersionContent = null;
 		Business business = new Business(emc);
 		
-		//先创建一个新的历史版本信息
+		//먼저 새 이전 버전 정보 생성
 		mindVersionInfo = new MindVersionInfo();
 		mindVersionInfo.setId(MindVersionInfo.createId());
 		mindVersionInfo.setMindId( _mindBaseInfo.getId() );
@@ -55,7 +55,7 @@ class ServiceMindVersionInfoPersist{
 		mindVersionContent.setContent(content);
 		mindVersionContent.setId(mindVersionInfo.getId());
 		
-		//保存版本信息
+		//버전 정보 저장
 		emc.beginTransaction( MindBaseInfo.class );
 		emc.beginTransaction( MindVersionInfo.class );
 		emc.beginTransaction( MindVersionContent.class );
@@ -63,15 +63,15 @@ class ServiceMindVersionInfoPersist{
 		emc.persist( mindVersionInfo, CheckPersistType.all);
 		emc.persist( mindVersionContent, CheckPersistType.all);
 		
-		//版本号+1
+		//버전 번호+1
 		_mindBaseInfo = emc.find( _mindBaseInfo.getId() , MindBaseInfo.class );
 		_mindBaseInfo.setFileVersion( _mindBaseInfo.getFileVersion() + 1 );
 		emc.check( _mindBaseInfo, CheckPersistType.all);
 		
-		//提交后再判断是否需要删除一个最老的
+		//커밋 후 가장 오래된 버전 삭제 필요 여부 판단
 		emc.commit();
 		
-		//查询一下当前脑图已经有多少个版本了
+		//현재 마인드맵의 버전 수 조회
 		Long  count = business.mindVersionInfoFactory().countMindVersionWithMindId( _mindBaseInfo.getId() );
 		if( count > maxVersionCount ) {
 			System.out.println(">>>>>>>>>>版本数量超过"+ maxVersionCount +"个了，删除最早的一个版本。");
@@ -81,7 +81,7 @@ class ServiceMindVersionInfoPersist{
 	}
 
 	/**
-	 * 根据脑图ID, 删除一个最老（旧）的版本
+	 * 마인드맵 ID로 가장 오래된 버전 하나 삭제
 	 * @param id
 	 * @throws Exception 
 	 */
@@ -103,15 +103,15 @@ class ServiceMindVersionInfoPersist{
 	}
 
 	/**
-	 * 根据脑图ID删除脑图信息
-	 * 基础信息、详细内容以及分享的信息
+	 * 마인드맵 ID로 마인드맵 정보 삭제
+	 * 기본 정보, 상세 내용 및 공유 정보
 	 * @param mindId
 	 * @throws Exception 
 	 */
 	public Boolean delete(EntityManagerContainer emc, String mindId) throws Exception {
 		Business business = new Business(emc);
 		
-		//先根据ID删除一个脑图
+		//먼저 ID로 마인드맵 삭제
 		MindBaseInfo mindBaseInfo = emc.find( mindId, MindBaseInfo.class);
 		MindContentInfo mindContentInfo = emc.find( mindId, MindContentInfo.class);
 		List<MindShareRecord>mindShareInfos = null;
@@ -130,21 +130,21 @@ class ServiceMindVersionInfoPersist{
 		emc.beginTransaction( MindShareRecord.class );
 		emc.beginTransaction( MindVersionInfo.class );
 		
-		//删除分享表里的脑图信息
+		//공유 테이블의 마인드맵 정보 삭제
 		if(ListTools.isNotEmpty( mindShareInfos )) {
 			for( MindShareRecord mindShareInfo : mindShareInfos) {
 				emc.remove( mindShareInfo, CheckRemoveType.all );
 			}
 		}
-		//删除回收站里的脑图信息
+		//휴지통의 마인드맵 정보 삭제
 		if( mindRecycleInfo != null ) {
 			emc.remove( mindRecycleInfo, CheckRemoveType.all );
 		}
-		//删除脑图基础信息表信息
+		//마인드맵 기본 정보 테이블 정보 삭제
 		if( mindBaseInfo != null ) {
 			emc.remove( mindBaseInfo, CheckRemoveType.all );
 		}
-		//删除详细信息表信息
+		//상세 정보 테이블 정보 삭제
 		if( mindContentInfo != null ) {
 			emc.remove( mindBaseInfo, CheckRemoveType.all );
 		}

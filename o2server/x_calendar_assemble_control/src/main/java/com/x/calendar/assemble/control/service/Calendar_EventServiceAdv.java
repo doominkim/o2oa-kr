@@ -49,7 +49,7 @@ import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.validate.ValidationException;
 
 /**
- * 日程日历信息服务类
+ * 일정 캘린더 정보 서비스 클래스
  * 
  * @author O2LEE
  *
@@ -69,7 +69,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 根据ID获取指定日历记录信息
+	 * ID로 지정 캘린더 레코드 정보 조회
 	 * 
 	 * @param id
 	 * @return
@@ -84,8 +84,8 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 保存日历记录信息 2019-11-11
-	 * 添加逻辑，适应超长的备注信息，如果备注信息超长，则将信息存储到Comment表中，并且在event和eventmaster里存储引用的ID
+	 * 캘린더 레코드 정보 저장 2019-11-11
+	 * 긴 비고 정보 대응 로직 추가, 비고 정보가 너무 길면 Comment 테이블에 저장하고 event와 eventmaster에 참조 ID 저장
 	 * 
 	 * @param calendar_event
 	 * @param effectivePerson
@@ -98,7 +98,7 @@ public class Calendar_EventServiceAdv {
 			calendar_event.setId(Calendar_Event.createId());
 		}
 
-		// 对日历信息进行权限设置，至少自己创建的日历自己可以管理 ，可以发布，可以查看
+		// 캘린더 정보 권한 설정, 최소한 본인이 생성한 캘린더는 본인이 관리·게시·열람 가능
 		addStringToList(effectivePerson.getDistinguishedName(), calendar_event.getParticipants());
 		addStringToList(effectivePerson.getDistinguishedName(), calendar_event.getManageablePersonList());
 		addStringToList(effectivePerson.getDistinguishedName(), calendar_event.getViewablePersonList());
@@ -114,7 +114,7 @@ public class Calendar_EventServiceAdv {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			calendar_EventComment = calendar_EventService.createNewEventComment(emc, calendar_event);
 
-			// 修改Comment信息
+			// Comment 정보 수정
 			if (calendar_EventComment != null) {
 				calendar_event.setComment("{#CLOB#}");
 				calendar_event.setCommentId(calendar_EventComment.getId());
@@ -122,7 +122,7 @@ public class Calendar_EventServiceAdv {
 				calendar_event.setCommentId(null);
 			}
 
-			// 如果是复重的日程，保存为重复信息主体，否则，保存为普通日程信息
+			// 반복 일정이면 반복 정보 주체로 저장, 아니면 일반 일정 정보로 저장
 			if (StringUtils.isNotEmpty(calendar_event.getRecurrenceRule())) {
 				Calendar_EventRepeatMaster calendar_EventRepeatMaster = composeEventRepeatMasterWithEvent(
 						calendar_event);
@@ -135,7 +135,7 @@ public class Calendar_EventServiceAdv {
 				calendar_event.setId(Calendar_Event.createId());
 			}
 			emc.beginTransaction(Calendar_Event.class);
-			// 保存日程信息
+			// 일정 정보 저장
 			calendar_event = calendar_EventService.create(emc, calendar_event, false);
 			emc.commit();
 		} catch (Exception e) {
@@ -145,7 +145,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 保存日历记录信息
+	 * 캘린더 레코드 정보 저장
 	 * 
 	 * @param calendar_event
 	 * @return
@@ -157,7 +157,7 @@ public class Calendar_EventServiceAdv {
 			calendar_event.setId(Calendar_Event.createId());
 		}
 		String personName = calendar_event.getCreatePerson();
-		// 对日历信息进行权限设置，至少自己创建的日历自己可以管理 ，可以发布，可以查看
+		// 캘린더 정보 권한 설정, 최소한 본인이 생성한 캘린더는 본인이 관리·게시·열람 가능
 		addStringToList(personName, calendar_event.getParticipants());
 		addStringToList(personName, calendar_event.getManageablePersonList());
 		addStringToList(personName, calendar_event.getViewablePersonList());
@@ -175,7 +175,7 @@ public class Calendar_EventServiceAdv {
 			}
 			Calendar_EventComment calendar_EventComment = calendar_EventService.createNewEventComment(emc,
 					calendar_event);
-			// 修改Comment信息
+			// Comment 정보 수정
 			if (calendar_EventComment != null) {
 				calendar_event.setComment("{#CLOB#}");
 				calendar_event.setCommentId(calendar_EventComment.getId());
@@ -183,7 +183,7 @@ public class Calendar_EventServiceAdv {
 				calendar_event.setCommentId(null);
 			}
 			emc.beginTransaction(Calendar_Event.class);
-			// 保存日程信息
+			// 일정 정보 저장
 			calendar_event = calendar_EventService.create(emc, calendar_event, false);
 			emc.commit();
 		} catch (Exception e) {
@@ -193,10 +193,10 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 更新所有重复日程事件(一定是重复日程)
+	 * 모든 반복 일정 이벤트 수정(반드시 반복 일정)
 	 * 
-	 * 1、更新当前日程事件对应的重复主体信息 RepeatMaster信息 删除该事件重复主体信息中所有的已经生成的月份信息
-	 * 2、删除该RepeatMaster已经生成的所有日程事件
+	 * 1. 현재 일정 이벤트에 대응하는 반복 주체 정보 RepeatMaster 정보 수정 후 해당 이벤트 반복 주체 정보에서 이미 생성된 모든 월 정보 삭제
+	 * 2. 해당 RepeatMaster로 이미 생성된 모든 일정 이벤트 삭제
 	 * 
 	 * @param repeatMasterId
 	 * @param calendar_event
@@ -223,7 +223,7 @@ public class Calendar_EventServiceAdv {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 
 			business = new Business(emc);
-			// 1、更新当前日程事件对应的重复主体信息 RepeatMaster信息
+			// 1. 현재 일정 이벤트에 대응하는 반복 주체 정보 RepeatMaster 정보 수정
 			calendar_EventRepeatMaster = emc.find(repeatMasterId, Calendar_EventRepeatMaster.class);
 			if (calendar_EventRepeatMaster == null) {
 				throw new Exception(
@@ -232,7 +232,7 @@ public class Calendar_EventServiceAdv {
 
 			calendar_EventRepeatMaster = copyEventPropertyToMaster(calendar_event, calendar_EventRepeatMaster);
 
-			// 对日历事件重复信息主体进行权限设置，至少自己创建的日历自己可以管理 ，可以发布，可以查看
+			// 캘린더 이벤트 반복 정보 주체 권한 설정, 최소한 본인이 생성한 캘린더는 본인이 관리·게시·열람 가능
 			addStringToList(effectivePerson.getDistinguishedName(), calendar_EventRepeatMaster.getParticipants());
 			addStringToList(effectivePerson.getDistinguishedName(),
 					calendar_EventRepeatMaster.getManageablePersonList());
@@ -246,7 +246,7 @@ public class Calendar_EventServiceAdv {
 			}
 			calendar_EventRepeatMaster.setCreatedMonthList(new ArrayList<>());
 
-			// 判断事件的备注信息是否超长，如果已经存在则需要更新一下
+			// 이벤트 비고 정보가 너무 긴지 확인, 이미 있으면 수정 필요
 			Calendar_EventComment calendar_EventComment = calendar_EventService.createOrUpdateEventComment(emc,
 					calendar_event);
 			if (calendar_EventComment != null) {
@@ -259,7 +259,7 @@ public class Calendar_EventServiceAdv {
 			emc.beginTransaction(Calendar_EventRepeatMaster.class);
 			emc.check(calendar_EventRepeatMaster, CheckPersistType.all);
 
-			// 2、删除该RepeatMaster已经生成的所有日程事件，等待重新生成
+			// 2. 해당 RepeatMaster로 이미 생성된 모든 일정 이벤트 삭제, 재생성 대기
 			eventIds = business.calendar_EventFactory().listWithRepeatMaster(repeatMasterId, null, null);
 			if (ListTools.isNotEmpty(eventIds)) {
 				count = eventIds.size();
@@ -279,12 +279,12 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 更新重复日程事件中某一事件开始后续所有的日程事件信息(一定是重复日程)
+	 * 반복 일정 이벤트 중 특정 이벤트부터 이후의 모든 일정 이벤트 정보 수정(반드시 반복 일정)
 	 * 
-	 * 1、删除当前事件以及该重复事件主体信息已经生成的在该ID事件后续所有已经生成的日程事件信息
-	 * 2、删除该事件重复主体信息中相应的已经生成的月份信息（已经删除所有指定月份以及以后所有的月份）
-	 * 3、更新日程事件重复信息主体，将截止日期改为指定ID所在的日期的前一天的23:59:59
-	 * 4、新增一个新的日程重复主体，从指定ID日程所在的日期开始，信息及重复规则更新为最新的信息
+	 * 1. 현재 이벤트 및 해당 반복 이벤트 주체 정보로 이미 생성된, 해당 ID 이벤트 이후의 모든 생성된 일정 이벤트 정보 삭제
+	 * 2. 해당 이벤트 반복 주체 정보에서 이미 생성된 해당 월 정보 삭제(지정된 월 및 이후 모든 월 삭제)
+	 * 3. 일정 이벤트 반복 정보 주체 수정, 종료일을 지정 ID 날짜의 전날 23:59:59로 변경
+	 * 4. 새 일정 반복 주체 추가, 지정 ID 일정 날짜부터 시작하며 정보와 반복 규칙을 최신 정보로 갱신
 	 * 
 	 * @param repeatMasterId
 	 * @param calendar_event
@@ -317,7 +317,7 @@ public class Calendar_EventServiceAdv {
 			business = new Business(emc);
 
 			// -----------------------------------------------------------------------------------------------------------------//
-			// 1、删除当前事件以及该重复事件主体信息已经生成的该ID事件后续时间内所有已经生成的日程事件信息
+			// 1. 현재 이벤트 및 해당 반복 이벤트 주체 정보로 이미 생성된, 해당 ID 이벤트 이후 시간의 모든 생성된 일정 이벤트 정보 삭제
 			eventIds = business.calendar_EventFactory().listWithRepeatMaster(repeatMasterId,
 					calendar_event.getStartTime(), null);
 			if (ListTools.isNotEmpty(eventIds)) {
@@ -332,14 +332,14 @@ public class Calendar_EventServiceAdv {
 			}
 
 			// -----------------------------------------------------------------------------------------------------------------//
-			// 2、删除该事件重复主体信息中相应的已经生成的月份信息（已经删除所有指定月份以及以后所有的月份）
-			// 3、更新日程事件重复信息主体，将截止日期改为指定ID所在的日期的前一天的23:59:59
+			// 2. 해당 이벤트 반복 주체 정보에서 이미 생성된 해당 월 정보 삭제(지정된 월 및 이후 모든 월 삭제)
+			// 3. 일정 이벤트 반복 정보 주체 수정, 종료일을 지정 ID 날짜의 전날 23:59:59로 변경
 			calendar_EventRepeatMaster = emc.find(repeatMasterId, Calendar_EventRepeatMaster.class);
 			if (calendar_EventRepeatMaster == null) {
 				throw new Exception(
 						"calendar repeat master not exists, calendar can not save! MasterID:" + repeatMasterId);
 			}
-			// 事件权限保障：对日历事件重复信息主体进行权限设置，保证至少自己创建的日历自己可以管理 ，可以发布，可以查看
+			// 이벤트 권한 보장: 캘린더 이벤트 반복 정보 주체 권한 설정, 최소한 본인이 생성한 캘린더는 본인이 관리·게시·열람 가능하도록 보장
 			addStringToList(effectivePerson.getDistinguishedName(), calendar_EventRepeatMaster.getParticipants());
 			addStringToList(effectivePerson.getDistinguishedName(),
 					calendar_EventRepeatMaster.getManageablePersonList());
@@ -350,13 +350,13 @@ public class Calendar_EventServiceAdv {
 			if (StringUtils.isEmpty(calendar_EventRepeatMaster.getUpdatePerson())) {
 				calendar_EventRepeatMaster.setUpdatePerson(effectivePerson.getDistinguishedName());
 			}
-			// 删除事件当月和之后的所有已经生成的月份信息记录，便于后续再次重新生成
+			// 이벤트 당월 및 이후 이미 생성된 모든 월 정보 레코드 삭제, 이후 재생성 용이
 			if (ListTools.isNotEmpty(calendar_EventRepeatMaster.getCreatedMonthList())) {
 				eventYearAndMonth = dateOperation.getYearAndMonth(calendar_event.getStartTime());
 				if (StringUtils.isNotEmpty(eventYearAndMonth)) {
 					eventMonth = dateOperation.format_year_month.parse(eventYearAndMonth);
 					for (String yearAndMonth : calendar_EventRepeatMaster.getCreatedMonthList()) {
-						// 判断是否在eventYearAndMonth之前，在则添加到createdMonthList，否删除不添加
+						// eventYearAndMonth 이전인지 판단, 이전이면 createdMonthList에 추가, 아니면 삭제하고 추가 안 함
 						createdMonth = dateOperation.format_year_month.parse(yearAndMonth);
 						if (eventMonth.getTime() >= createdMonth.getTime()) {
 							createdMonthList.add(yearAndMonth);
@@ -365,7 +365,7 @@ public class Calendar_EventServiceAdv {
 				}
 			}
 			calendar_EventRepeatMaster.setCreatedMonthList(createdMonthList);
-			// 将截止日期改为指定ID所在的日期的前一天的23:59:59
+			// 종료일을 지정 ID 날짜의 전날 23:59:59로 변경
 			Date repeatEndTime = dateOperation
 					.getEndTimeInDay(dateOperation.getDayAddDate(calendar_event.getStartTime(), -1));
 			RRule rule = new RRule(calendar_EventRepeatMaster.getRecurrenceRule());
@@ -379,7 +379,7 @@ public class Calendar_EventServiceAdv {
 			calendar_EventRepeatMaster_new = copyEventPropertyToMaster(calendar_event, calendar_EventRepeatMaster_new);
 			calendar_EventRepeatMaster_new.setRecurrenceStartTime(calendar_event.getStartTime());
 
-			// 处理新的calendar_EventRepeatMaster_new的备注信息，原来的calendar_EventRepeatMaster不动
+			// 새 calendar_EventRepeatMaster_new의 비고 정보 처리, 기존 calendar_EventRepeatMaster는 유지
 			Calendar_EventComment calendar_EventComment = calendar_EventService.createNewEventComment(emc,
 					calendar_event);
 			if (calendar_EventComment != null) {
@@ -401,7 +401,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 更新单个日历事件记录信息
+	 * 단일 캘린더 이벤트 레코드 정보 수정
 	 * 
 	 * @param calendar_event
 	 * @param effectivePerson
@@ -411,7 +411,7 @@ public class Calendar_EventServiceAdv {
 	public Calendar_Event updateSingleEvent(Calendar_Event calendar_event, EffectivePerson effectivePerson)
 			throws Exception {
 
-		// 对日历信息进行权限设置，至少自己创建的日历自己可以管理 ，可以发布，可以查看
+		// 캘린더 정보 권한 설정, 최소한 본인이 생성한 캘린더는 본인이 관리·게시·열람 가능
 		addStringToList(effectivePerson.getDistinguishedName(), calendar_event.getParticipants());
 		addStringToList(effectivePerson.getDistinguishedName(), calendar_event.getManageablePersonList());
 		addStringToList(effectivePerson.getDistinguishedName(), calendar_event.getViewablePersonList());
@@ -432,8 +432,8 @@ public class Calendar_EventServiceAdv {
 			if (StringUtils.isEmpty(calendar_event.getId())) {
 				old_event.setId(Calendar_Event.createId());
 			}
-			// 检查日程备注信息的长度，如果超长，则需要新建一个Calendar_EventComment记录
-			// 如果超长，则创建一个新的则需要新建一个Calendar_EventComment记录
+			// 일정 비고 정보 길이 확인, 너무 길면 새 Calendar_EventComment 레코드 생성 필요
+			// 너무 길면 새 Calendar_EventComment 레코드 생성 필요
 			Calendar_EventComment calendar_EventComment = calendar_EventService.createNewEventComment(emc,
 					calendar_event);
 			if (calendar_EventComment != null) {
@@ -445,7 +445,7 @@ public class Calendar_EventServiceAdv {
 
 			emc.beginTransaction(Calendar_Event.class);
 			if (StringUtils.isEmpty(old_event.getRepeatMasterId())) {
-				// 原来不是重复的日程，修改后复重的日程，保存为重复信息主体
+				// 기존에 반복 일정이 아니었으나 수정 후 반복 일정이면 반복 정보 주체로 저장
 				if (StringUtils.isNotEmpty(calendar_event.getRecurrenceRule())) {
 					Calendar_EventRepeatMaster calendar_EventRepeatMaster = composeEventRepeatMasterWithEvent(
 							calendar_event);
@@ -455,7 +455,7 @@ public class Calendar_EventServiceAdv {
 				}
 			} else {
 				if (StringUtils.isEmpty(calendar_event.getRecurrenceRule())) {
-					// 原来是重复的，现在不重复了，需要把repeatMaster删除，还有已经生成的所有event
+					// 기존에 반복이었으나 이제 반복이 아니면 repeatMaster와 이미 생성된 모든 event 삭제 필요
 					if (StringUtils.isNotEmpty(old_event.getRepeatMasterId())) {
 						ArrayList arrayList = new ArrayList<>();
 						arrayList.add(old_event.getId());
@@ -465,7 +465,7 @@ public class Calendar_EventServiceAdv {
 				}
 			}
 
-			// 保存日程信息
+			// 일정 정보 저장
 			calendar_event = calendar_EventService.update(emc, old_event, false);
 			emc.commit();
 		} catch (Exception e) {
@@ -475,7 +475,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 将一个字符串添加到一个List里
+	 * 문자열을 List에 추가
 	 * 
 	 * @param distinguishedName
 	 * @param manageablePersonList
@@ -502,7 +502,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 根据条件查询指定的日历记录信息ID列表
+	 * 조건에 따라 지정 캘린더 레코드 정보 ID 목록 조회
 	 * 
 	 * @param key
 	 * @param eventType
@@ -527,14 +527,14 @@ public class Calendar_EventServiceAdv {
 			endTime = new Date();
 		}
 		if (startTime.after(endTime)) {
-			// 换个位置
+			// 위치 변경
 			Date tmp = startTime;
 			startTime = endTime;
 			endTime = tmp;
 		}
 
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 两个时间之间的月份查出来，看看这些月份是否需要生成日历事件
+			// 두 시간 사이의 월을 구해, 해당 월에 캘린더 이벤트 생성이 필요한지 확인
 			List<String> needCreateMonths = new DateOperation().listMonthsBetweenDate(startTime, endTime);
 
 			if (ListTools.isNotEmpty(needCreateMonths)) {
@@ -542,7 +542,7 @@ public class Calendar_EventServiceAdv {
 				List<String> repeatMasterIds_month = null;
 
 				for (String createMonth : needCreateMonths) {
-					// 先看看有没有需要生成的日历重复主体
+					// 먼저 생성이 필요한 캘린더 반복 주체가 있는지 확인
 					repeatMasterIds_month = calendar_EventRepeatMasterService.listNeedRepeatMaster(emc, calendarIds,
 							eventType, createMonth, personName, unitNames, groupNames);
 					if (ListTools.isNotEmpty(repeatMasterIds_month)) {
@@ -550,13 +550,13 @@ public class Calendar_EventServiceAdv {
 					}
 				}
 				if (ListTools.isNotEmpty(repeatMasterIds)) {
-					// 根据日期范围为指定的日期重复主体生成日历事件信息
+					// 날짜 범위에 따라 지정 반복 주체의 캘린더 이벤트 정보 생성
 					calendar_EventService.createCalendarWithMaster(emc, repeatMasterIds, startTime, endTime,
 							needCreateMonths);
 				}
 			}
 
-			// 最后从日历事件信息表里按条件进行数据查询返回
+			// 마지막으로 캘린더 이벤트 정보 테이블에서 조건에 따라 데이터 조회 후 반환
 			return calendar_EventService.listWithCondition(emc, key, eventType, source, createPerson, calendarIds,
 					personName, unitNames, groupNames, startTime, endTime);
 		} catch (Exception e) {
@@ -565,7 +565,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 根据条件查询指定的日历记录信息ID列表
+	 * 조건에 따라 지정 캘린더 레코드 정보 ID 목록 조회
 	 * 
 	 * @param inFilterCalendarIds
 	 * @param personName
@@ -587,7 +587,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 根据重复主体以及日期范围查询指定的日历记录信息ID列表
+	 * 반복 주체 및 날짜 범위에 따라 지정 캘린더 레코드 정보 ID 목록 조회
 	 * 
 	 * @param repeatMasterId
 	 * @param startTime
@@ -604,7 +604,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 根据ID彻底删除指定的日历记录信息
+	 * ID로 지정 캘린더 레코드 정보 영구 삭제
 	 * 
 	 * @param id
 	 * @throws Exception
@@ -626,10 +626,10 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 删除重复日程事件中某一事件开始后续所有的日程事件信息(一定是重复日程)
+	 * 반복 일정 이벤트 중 특정 이벤트부터 이후의 모든 일정 이벤트 정보 삭제(반드시 반복 일정)
 	 * 
-	 * 1、删除当前事件以及该重复事件主体信息已经生成的该ID事件后续时间内所有已经生成的日程事件信息
-	 * 2、更新日程事件重复信息主体，将截止日期改为指定ID所在的日期的前一天的23:59:59
+	 * 1. 현재 이벤트 및 해당 반복 이벤트 주체 정보로 이미 생성된, 해당 ID 이벤트 이후 시간의 모든 생성된 일정 이벤트 정보 삭제
+	 * 2. 일정 이벤트 반복 정보 주체 수정, 종료일을 지정 ID 날짜의 전날 23:59:59로 변경
 	 * 
 	 * @param repeatMasterId
 	 * @param calendar_event
@@ -656,7 +656,7 @@ public class Calendar_EventServiceAdv {
 			calendar_EventRepeatMaster = emc.find(calendar_event.getRepeatMasterId(), Calendar_EventRepeatMaster.class);
 
 			// -----------------------------------------------------------------------------------------------------------------
-			// 1、删除当前事件以及该重复事件主体信息已经生成的该ID事件后续时间内所有已经生成的日程事件信息
+			// 1. 현재 이벤트 및 해당 반복 이벤트 주체 정보로 이미 생성된, 해당 ID 이벤트 이후 시간의 모든 생성된 일정 이벤트 정보 삭제
 			eventIds = business.calendar_EventFactory().listWithRepeatMaster(repeatMasterId,
 					calendar_event.getStartTime(), null);
 			if (ListTools.isNotEmpty(eventIds)) {
@@ -670,7 +670,7 @@ public class Calendar_EventServiceAdv {
 				}
 			}
 
-			// 将截止日期改为指定ID所在的日期的前一天的23:59:59
+			// 종료일을 지정 ID 날짜의 전날 23:59:59로 변경
 			Date repeatEndTime = dateOperation
 					.getEndTimeInDay(dateOperation.getDayAddDate(calendar_event.getStartTime(), -1));
 			RRule rule = new RRule(calendar_EventRepeatMaster.getRecurrenceRule());
@@ -688,13 +688,13 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 将一个日程事件对象转换为一个iCal4j的Calendar对象
+	 * 일정 이벤트 객체를 iCal4j의 Calendar 객체로 변환
 	 * 
 	 * @param o2_calendar_event
 	 * @return
 	 */
 	public Calendar parseToiCal(Calendar_Event o2_calendar_event) {
-		// 创建日历
+		// 캘린더 생성
 		Calendar calendar = null;
 		try {
 			calendar = new Calendar();
@@ -702,7 +702,7 @@ public class Calendar_EventServiceAdv {
 			calendar.getProperties().add(Version.VERSION_2_0);
 			calendar.getProperties().add(CalScale.GREGORIAN);
 
-			// 时间主题
+			// 이벤트 제목
 			String summary = null;
 			if (StringUtils.isNotEmpty(o2_calendar_event.getTitle())) {
 				summary = o2_calendar_event.getTitle();
@@ -718,13 +718,13 @@ public class Calendar_EventServiceAdv {
 				throw new Exception("event end time is null!");
 			}
 
-			// 开始时间
+			// 시작 시간
 			DateTime start = new DateTime(o2_calendar_event.getStartTime().getTime());
-			// 开始时间转换为UTC时间（UTC ＋ 时区差 ＝ 本地时间 ）
+			// 시작 시간을 UTC 시간으로 변환(UTC + 시차 = 현지 시간)
 			start.setUtc(true);
-			// 结束时间
+			// 종료 시간
 			DateTime end = new DateTime(o2_calendar_event.getEndTime().getTime());
-			// 结束时间设置成UTC时间（UTC ＋ 时区差 ＝ 本地时间 ）
+			// 종료 시간을 UTC 시간으로 설정(UTC + 시차 = 현지 시간)
 			end.setUtc(true);
 
 			VEvent event = new VEvent(start, end, summary);
@@ -732,23 +732,23 @@ public class Calendar_EventServiceAdv {
 				event.getProperties().add(new Location(o2_calendar_event.getLocationName()));
 			}
 
-			// 生成唯一标示
+			// 고유 식별자 생성
 			event.getProperties().add(new Uid(o2_calendar_event.getId()));
 
-			// 创建一个时区（TimeZone）
+			// 시간대(TimeZone) 생성
 			TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
 			TimeZone timezone = registry.getTimeZone("Asia/Shanghai");
 			VTimeZone tz = timezone.getVTimeZone();
-			// 添加时区信息
+			// 시간대 정보 추가
 			event.getProperties().add(tz.getTimeZoneId());
 
-			// 添加备注信息
+			// 비고 정보 추가
 			if (StringUtils.isNotEmpty(o2_calendar_event.getComment())) {
 				Comment comment = new Comment(o2_calendar_event.getComment());
 				event.getProperties().add(comment);
 			}
 
-			// 添加参与者
+			// 참여자 추가
 			if (ListTools.isNotEmpty(o2_calendar_event.getParticipants())) {
 				Attendee attendee = null;
 				for (String participant : o2_calendar_event.getParticipants()) {
@@ -759,14 +759,14 @@ public class Calendar_EventServiceAdv {
 				}
 			}
 
-			// 重复事件 START------------------------------------------------------------
+			// 반복 이벤트 START------------------------------------------------------------
 			if (StringUtils.isNotEmpty(o2_calendar_event.getRecurrenceRule())) {
 				RRule rule = new RRule(o2_calendar_event.getRecurrenceRule());
 				event.getProperties().add(rule);
 			}
-			// 重复事件 END------------------------------------------------------------
+			// 반복 이벤트 END------------------------------------------------------------
 
-			// 提醒,提前10分钟
+			// 알림, 10분 전
 			if (StringUtils.isNotEmpty(o2_calendar_event.getValarmTime_config())) {
 				String[] time_config = o2_calendar_event.getValarmTime_config().split(",");
 				VAlarm valarm = null;
@@ -790,13 +790,13 @@ public class Calendar_EventServiceAdv {
 					if (StringUtils.isNotEmpty(o2_calendar_event.getValarm_description())) {
 						valarm.getProperties().add(new Description(o2_calendar_event.getValarm_description()));
 					}
-					// 将VAlarm加入VEvent
+					// VAlarm을 VEvent에 추가
 					event.getAlarms().add(valarm);
 				}
 			}
-			// 添加事件
+			// 이벤트 추가
 			calendar.getComponents().add(event);
-			// 验证
+			// 검증
 			calendar.validate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -805,7 +805,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 验证一个日历是否符合ICAL要求
+	 * 캘린더가 ICAL 요구 사항에 맞는지 검증
 	 * 
 	 * @param o2_calendar_event
 	 * @throws ValidationException
@@ -818,7 +818,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 将一个日程事件写为一个ical文件
+	 * 일정 이벤트를 ical 파일로 작성
 	 * 
 	 * @param o2_calendar_event
 	 * @param path
@@ -833,7 +833,7 @@ public class Calendar_EventServiceAdv {
 //	}
 
 	/**
-	 * 将一个日程事件写为一个ical文件
+	 * 일정 이벤트를 ical 파일로 작성
 	 * 
 	 * @param o2_calendar_event
 	 * @param out
@@ -847,7 +847,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 获取一个日程事件转换为ICAL后的内容信息
+	 * 일정 이벤트를 ICAL로 변환한 내용 정보 조회
 	 * 
 	 * @param o2_calendar_event
 	 * @throws ValidationException
@@ -863,7 +863,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 查询需要提醒的日程事件ID列表
+	 * 알림이 필요한 일정 이벤트 ID 목록 조회
 	 * 
 	 * @param date
 	 * @return
@@ -879,7 +879,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 根据calendar_event信息更新一个新的重复主体
+	 * calendar_event 정보로 새 반복 주체 갱신
 	 * 
 	 * @param calendar_event
 	 * @return
@@ -894,7 +894,7 @@ public class Calendar_EventServiceAdv {
 			Date recurrenceStartTime_new = null;
 			Date startTime_new = null;
 
-			// 修改一下开始时间的时分秒
+			// 시작 시간의 시분초 수정
 			String newRecurrenceStartTime_str = dateOperation.getDate(recurrenceStartTime, "yyyy-MM-dd") + " "
 					+ dateOperation.getDate(startTime_event, "HH:mm:ss");
 			String newStartTime_str = dateOperation.getDate(startTime_event, "yyyy-MM-dd") + " "
@@ -957,7 +957,7 @@ public class Calendar_EventServiceAdv {
 	}
 
 	/**
-	 * 根据commentId获取Calendar_EventComment信息
+	 * commentId로 Calendar_EventComment 정보 조회
 	 * 
 	 * @param commentId
 	 * @return

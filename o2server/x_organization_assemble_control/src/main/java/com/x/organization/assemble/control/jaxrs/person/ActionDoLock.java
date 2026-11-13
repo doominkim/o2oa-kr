@@ -66,10 +66,10 @@ class ActionDoLock extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("到期日期.")
+		@FieldDescribe("만료 일자.")
 		private Date lockExpiredTime;
 
-		@FieldDescribe("锁定原因.")
+		@FieldDescribe("잠금 사유.")
 		private String desc;
 
 		public Date getLockExpiredTime() {

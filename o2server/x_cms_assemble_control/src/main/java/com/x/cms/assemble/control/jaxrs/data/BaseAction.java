@@ -48,7 +48,7 @@ public class BaseAction extends StandardJaxrsAction {
 		return jsonElement;
 	}
 
-	/** 将data中的Title字段同步到document中 */
+	/** data의 Title 필드를 document에 동기화 */
 	void updateTitleSerialObjectSecurityClearance(Business business, Document document, JsonElement jsonElement)
 			throws Exception {
 		String title = XGsonBuilder.extractString(jsonElement, title_path);
@@ -97,14 +97,14 @@ public class BaseAction extends StandardJaxrsAction {
 							XGsonBuilder.convert(jsonElement, Data.class));
 				}
 			} catch (Exception e) {
-				LOGGER.warn("{}文档数据映射失败：{}", document.getId(), e.getMessage());
+				LOGGER.warn("{}문서 데이터 매핑 실패: {}", document.getId(), e.getMessage());
 			}
 			if (DocumentStatus.isEndStatus(document.getDocStatus())) {
 				business.entityManagerContainer().beginTransaction(DocumentEvent.class);
 				DocumentEvent documentEvent = DocumentEvent.updateEventInstance(document);
 				business.entityManagerContainer().persist(documentEvent);
 			}
-			/* 基于前面的原因,这里进行单独提交 */
+			/* 위 이유로 여기서 별도로 커밋 */
 			business.entityManagerContainer().commit();
 		}
 	}
@@ -140,9 +140,9 @@ public class BaseAction extends StandardJaxrsAction {
 		DataItemConverter<Item> converter = new DataItemConverter<>(Item.class);
 		business.entityManagerContainer().beginTransaction(Item.class);
 		if ((null != cursor) && cursor.getItemType().equals(ItemType.a)) {
-			/* 向数组里面添加一个成员对象 */
+			/* 배열에 멤버 객체 하나 추가 */
 			Integer index = business.itemFactory().getArrayLastIndexWithDocmentWithPath(document.getId(), paths);
-			/* 新的路径开始 */
+			/* 새 경로 시작 */
 			String[] ps = new String[paths.length + 1];
 			for (int i = 0; i < paths.length; i++) {
 				ps[i] = paths[i];
@@ -154,7 +154,7 @@ public class BaseAction extends StandardJaxrsAction {
 				business.entityManagerContainer().persist(o);
 			}
 		} else if ((cursor == null) && parent.getItemType().equals(ItemType.o)) {
-			/* 向parent对象添加一个属性值 */
+			/* parent 객체에 속성 값 추가 */
 			List<Item> adds = converter.disassemble(jsonElement, paths);
 			for (Item o : adds) {
 				this.fill(o, document);
@@ -189,7 +189,7 @@ public class BaseAction extends StandardJaxrsAction {
 	}
 
 	void fill(Item o, Document document) {
-		/** 将DateItem与Document放在同一个分区 */
+		/** DateItem과 Document를 같은 파티션에 배치 */
 		o.setDistributeFactor(document.getDistributeFactor());
 		o.setBundle(document.getId());
 		o.setItemCategory(ItemCategory.cms);

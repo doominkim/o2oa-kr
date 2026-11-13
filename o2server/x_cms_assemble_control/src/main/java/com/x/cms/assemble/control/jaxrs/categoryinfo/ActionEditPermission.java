@@ -22,7 +22,7 @@ import com.x.cms.core.entity.AppInfo;
 import com.x.cms.core.entity.CategoryInfo;
 
 /**
- * 修改分类权限
+ * 분류 권한 수정
  * @author sword
  */
 public class ActionEditPermission extends BaseAction {

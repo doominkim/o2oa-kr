@@ -26,7 +26,7 @@ public class ActionGet extends BaseAction {
 				attendanceWorkPlace = attendanceWorkPlaceServiceAdv.get(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionWorkPlaceProcess(e, "系统根据ID查询工作场所对象信息时发生异常。ID:" + id);
+				Exception exception = new ExceptionWorkPlaceProcess(e, "ID로 근무 장소 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -37,7 +37,7 @@ public class ActionGet extends BaseAction {
 					wrap = Wo.copier.copy(attendanceWorkPlace);
 					result.setData(wrap);
 				} catch (Exception e) {
-					Exception exception = new ExceptionWorkPlaceProcess(e, "系统将查询结果转换为可输出的数据信息时发生异常。");
+					Exception exception = new ExceptionWorkPlaceProcess(e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}

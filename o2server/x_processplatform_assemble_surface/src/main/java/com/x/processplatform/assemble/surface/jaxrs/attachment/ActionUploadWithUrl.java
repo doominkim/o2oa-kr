@@ -170,7 +170,7 @@ class ActionUploadWithUrl extends BaseAction {
 		attachment.setPerson(person);
 		attachment.setLastUpdatePerson(person);
 		attachment.setSite(site);
-		// 用于判断目录的值
+		// 디렉터리 값 판단용
 		attachment.setWorkCreateTime(work.getCreateTime());
 		attachment.setApplication(work.getApplication());
 		attachment.setProcess(work.getProcess());
@@ -189,7 +189,7 @@ class ActionUploadWithUrl extends BaseAction {
 		attachment.setPerson(person);
 		attachment.setLastUpdatePerson(person);
 		attachment.setSite(site);
-		// 用于判断目录的值
+		// 디렉터리 값 판단용
 		attachment.setWorkCreateTime(workCompleted.getStartTime());
 		attachment.setApplication(workCompleted.getApplication());
 		attachment.setProcess(workCompleted.getProcess());
@@ -207,7 +207,7 @@ class ActionUploadWithUrl extends BaseAction {
 		attachment.setPerson(effectivePerson.getDistinguishedName());
 		attachment.setLastUpdatePerson(effectivePerson.getDistinguishedName());
 		attachment.setSite(site);
-		/** 用于判断目录的值 */
+		/** 디렉터리 값 판단용 */
 		attachment.setWorkCreateTime(draft.getCreateTime());
 		attachment.setApplication(draft.getApplication());
 		attachment.setProcess(draft.getProcess());
@@ -224,7 +224,7 @@ class ActionUploadWithUrl extends BaseAction {
 
 		private static final long serialVersionUID = -861366251609881667L;
 
-		@FieldDescribe("是否根据名字和site覆盖文件.")
+		@FieldDescribe("이름과 site 기준으로 파일 덮어쓰기 여부.")
 		private Boolean coverWithNameAndSite = false;
 
 		public Boolean getCoverWithNameAndSite() {

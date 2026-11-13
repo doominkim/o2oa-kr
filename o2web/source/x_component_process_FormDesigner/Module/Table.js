@@ -234,7 +234,7 @@ MWF.xApplication.process.FormDesigner.Module.Table = MWF.FCTable = new Class({
 		}
 	},
 	isSelectedCellsInWholeRow: function(){
-		//判断选中的单元格是否是整行的。
+		//선택한 셀이 행 전체인지 판단.
 		var trs = [], cells = [];
 
 		var selectedNodes = this.form.selectedModules.map(function (module){
@@ -654,7 +654,7 @@ MWF.xApplication.process.FormDesigner.Module.Table = MWF.FCTable = new Class({
 
 		if (this.json.recoveryStyles) Object.each(this.json.recoveryStyles, function(value, key){
 			if ((value.indexOf("x_processplatform_assemble_surface")!=-1 || value.indexOf("x_portal_assemble_surface")!=-1)){
-				//需要运行时处理
+				//런타임 처리 필요
 			}else{
 				var reg = /^border\w*/ig;
 				if (!key.test(reg)){

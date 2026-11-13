@@ -17,9 +17,9 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 数据指处理，比如修改栏目名称引起的所有分类 和文档别名需要修改
+ * 데이터 후처리, 예: 게시판 이름 변경으로 인해 모든 분류와 문서 별칭을 수정해야 하는 경우
  */
-@Schema(name = "CmsBatchOperation", description = "内容管理数据指处理.")
+@Schema(name = "CmsBatchOperation", description = "콘텐츠 관리 데이터 후처리.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.CmsBatchOperation.table, uniqueConstraints = {
@@ -34,7 +34,7 @@ public class CmsBatchOperation extends SliceJpaObject {
 	@SuppressWarnings("unused")
 	private static final String TABLE = PersistenceProperties.CmsBatchOperation.table;
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 	public void onPersist() throws Exception {
 
 	}
@@ -47,55 +47,55 @@ public class CmsBatchOperation extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String optType_FIELDNAME = "optType";
-	@FieldDescribe("操作类别")
+	@FieldDescribe("작업 유형")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + optType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String optType;
 
 	public static final String objType_FIELDNAME = "objType";
-	@FieldDescribe("对象类别")
+	@FieldDescribe("객체 유형")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + objType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String objType;
 
 	public static final String bundle_FIELDNAME = "bundle";
-	@FieldDescribe("绑定的ID")
+	@FieldDescribe("바인딩된 ID")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + bundle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String bundle;
 
 	public static final String oldInfo_FIELDNAME = "oldInfo";
-	@FieldDescribe("旧的信息：修改标题、名称时使用")
+	@FieldDescribe("이전 정보: 제목, 이름 수정 시 사용")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + oldInfo_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String oldInfo;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明备注")
+	@FieldDescribe("비고")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String errorCount_FIELDNAME = "errorCount";
-	@FieldDescribe("执行错误次数")
+	@FieldDescribe("실행 오류 횟수")
 	@Column(name = ColumnNamePrefix + errorCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer errorCount;
 
 	public static final String isRunning_FIELDNAME = "isRunning";
-	@FieldDescribe("是否正在执行中")
+	@FieldDescribe("실행 중 여부")
 	@Column(name = ColumnNamePrefix + isRunning_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean isRunning;

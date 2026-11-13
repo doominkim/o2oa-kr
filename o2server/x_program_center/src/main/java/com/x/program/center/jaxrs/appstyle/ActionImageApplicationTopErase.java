@@ -20,7 +20,7 @@ class ActionImageApplicationTopErase extends BaseAction {
 		if (!effectivePerson.isManager()) {
 			throw new ExceptionAccessDenied(effectivePerson.getName());
 		}
-		// 由于getImages设置了检查,所以只能对images进行处理
+		// getImages에 검사가 설정되어 있어 images만 처리 가능
 		Set<Image> images = Config.appStyle().getImages();
 		images = images.stream().filter(img -> (!StringUtils.equals(img.getName(), Image.name_application_top)))
 				.collect(Collectors.toSet());

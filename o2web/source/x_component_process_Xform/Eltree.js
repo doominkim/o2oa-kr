@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Eltree 基于Element UI的树形控件。
- * @o2cn 树形控件
+/** @class Eltree Element UI 기반 트리 컨트롤.
+ * @o2cn 트리 컨트롤
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|Element UI Tree 树形控件}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|Element UI Tree 트리 컨트롤}
  */
 MWF.xApplication.process.Xform.Eltree = MWF.APPEltree =  new Class(
     /** @lends MWF.xApplication.process.Xform.Eltree# */
@@ -21,87 +21,87 @@ MWF.xApplication.process.Xform.Eltree = MWF.APPEltree =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 节点被点击时的回调。this.event[0]指向传递给 data 属性的数组中该节点所对应的对象；
-         * this.event[1]为节点对应的 Node；this.event[2]为节点组件本身
+         * 노드 클릭 시 콜백. this.event[0]은 data 속성에 전달된 배열에서 해당 노드에 대응하는 객체;
+         * this.event[1]은 노드에 대응하는 Node; this.event[2]는 노드 컴포넌트 자체
          * @event MWF.xApplication.process.Xform.Eltree#node-click
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 当某一节点被鼠标右键点击时会触发该事件。this.event[0]指向Event；
-         * this.event[1]为传递给 data 属性的数组中该节点所对应的对象；this.event[2]为节点对应的 Node;
-         * this.event[3]为节点组件本身
+         * 노드를 마우스 오른쪽 버튼으로 클릭할 때 발생. this.event[0]은 Event;
+         * this.event[1]은 data 속성에 전달된 배열에서 해당 노드에 대응하는 객체; this.event[2]는 노드에 대응하는 Node;
+         * this.event[3]은 노드 컴포넌트 자체
          * @event MWF.xApplication.process.Xform.Eltree#node-contextmenu
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 节点选中状态发生变化时的回调。this.event[0]为传递给 data 属性的数组中该节点所对应的对象；
-         * this.event[1]为节点本身是否被选中；this.event[2]为节点的子树中是否有被选中的节点
+         * 노드 선택 상태가 변경될 때 콜백. this.event[0]은 data 속성에 전달된 배열에서 해당 노드에 대응하는 객체;
+         * this.event[1]은 노드 자체의 선택 여부; this.event[2]는 노드의 하위 트리에 선택된 노드가 있는지 여부
          * @event MWF.xApplication.process.Xform.Eltree#check-change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 当复选框被点击的时候触发。this.event[0]为传递给 data 属性的数组中该节点所对应的对象；
-         * this.event[1]为树目前的选中状态对象，包含 checkedNodes、checkedKeys、halfCheckedNodes、halfCheckedKeys 四个属性
+         * 체크박스를 클릭할 때 발생. this.event[0]은 data 속성에 전달된 배열에서 해당 노드에 대응하는 객체;
+         * this.event[1]은 트리의 현재 선택 상태 객체로, checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys 네 속성 포함
          * @event MWF.xApplication.process.Xform.Eltree#check
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 当前选中节点变化时触发的事件。this.event[0]为当前节点的数据；
-         * this.event[1]为当前节点的 Node 对象
+         * 현재 선택 노드가 변경될 때 발생하는 이벤트. this.event[0]은 현재 노드의 데이터;
+         * this.event[1]은 현재 노드의 Node 객체
          * * @event MWF.xApplication.process.Xform.Eltree#current-change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 节点被展开时触发的事件。this.event[0]为传递给 data 属性的数组中该节点所对应的对象；
-         * this.event[1]为节点对应的 Node；this.event[2]为节点组件本身
+         * 노드가 펼쳐질 때 발생하는 이벤트. this.event[0]은 data 속성에 전달된 배열에서 해당 노드에 대응하는 객체;
+         * this.event[1]은 노드에 대응하는 Node; this.event[2]는 노드 컴포넌트 자체
          * * @event MWF.xApplication.process.Xform.Eltree#node-expand
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 节点被关闭时触发的事件。this.event[0]为传递给 data 属性的数组中该节点所对应的对象；
-         * this.event[1]为节点对应的 Node；this.event[2]为节点组件本身
+         * 노드가 닫힐 때 발생하는 이벤트. this.event[0]은 data 속성에 전달된 배열에서 해당 노드에 대응하는 객체;
+         * this.event[1]은 노드에 대응하는 Node; this.event[2]는 노드 컴포넌트 자체
          * * @event MWF.xApplication.process.Xform.Eltree#node-collapse
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 节点开始拖拽时触发的事件。this.event[0]为被拖拽节点对应的 Node；
-         * this.event[1]为Event
+         * 노드 드래그 시작 시 발생하는 이벤트. this.event[0]은 드래그되는 노드에 대응하는 Node;
+         * this.event[1]은 Event
          * * @event MWF.xApplication.process.Xform.Eltree#node-drag-start
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 拖拽进入其他节点时触发的事件。this.event[0]为被拖拽节点对应的 Node；
-         * this.event[1]为所进入节点对应的 Node；this.event[2]为event
+         * 드래그가 다른 노드에 진입할 때 발생하는 이벤트. this.event[0]은 드래그되는 노드에 대응하는 Node;
+         * this.event[1]은 진입한 노드에 대응하는 Node; this.event[2]는 event
          * * @event MWF.xApplication.process.Xform.Eltree#node-drag-enter
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 拖拽离开某个节点时触发的事件。this.event[0]为被拖拽节点对应的 Node；
-         * this.event[1]为所进入节点对应的 Node；this.event[2]为event
+         * 드래그가 어떤 노드를 벗어날 때 발생하는 이벤트. this.event[0]은 드래그되는 노드에 대응하는 Node;
+         * this.event[1]은 진입한 노드에 대응하는 Node; this.event[2]는 event
          * * @event MWF.xApplication.process.Xform.Eltree#node-drag-leave
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 在拖拽节点时触发的事件（类似浏览器的 mouseover 事件）	。this.event[0]为被拖拽节点对应的 Node；
-         * this.event[1]为所进入节点对应的 Node；this.event[2]为event
+         * 노드를 드래그하는 중 발생하는 이벤트(브라우저의 mouseover 이벤트와 유사)	. this.event[0]은 드래그되는 노드에 대응하는 Node;
+         * this.event[1]은 진입한 노드에 대응하는 Node; this.event[2]는 event
          * * @event MWF.xApplication.process.Xform.Eltree#node-drag-over
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 拖拽结束时（可能未成功）触发的事件。this.event[0]为被拖拽节点对应的 Node；
-         * this.event[1]为结束拖拽时最后进入的节点（可能为空）；
-         * this.event[2]为被拖拽节点的放置位置（before、after、inner）
-         * this.event[3]为event
+         * 드래그 종료 시(성공하지 않았을 수 있음) 발생하는 이벤트. this.event[0]은 드래그되는 노드에 대응하는 Node;
+         * this.event[1]은 드래그 종료 시 마지막으로 진입한 노드(비어 있을 수 있음);
+         * this.event[2]는 드래그되는 노드의 놓인 위치(before, after, inner)
+         * this.event[3]은 event
          * @event MWF.xApplication.process.Xform.Eltree#node-drag-end
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         /**
-         * 拖拽成功完成时触发的事件。this.event[0]为被拖拽节点对应的 Node；
-         * this.event[1]为结束拖拽时最后进入的节点；
-         * this.event[2]为被拖拽节点的放置位置（before、after、inner）
-         * this.event[3]为event
+         * 드래그가 성공적으로 완료될 때 발생하는 이벤트. this.event[0]은 드래그되는 노드에 대응하는 Node;
+         * this.event[1]은 드래그 종료 시 마지막으로 진입한 노드;
+         * this.event[2]는 드래그되는 노드의 놓인 위치(before, after, inner)
+         * this.event[3]은 event
          * @event MWF.xApplication.process.Xform.Eltree#node-drop
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|树组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/tree|트리 컴포넌트의 Events 장}
          */
         "elEvents": ["node-click", "node-contextmenu", "check-change", "check", "current-change","node-expand",
             "node-collapse","node-drag-start","node-drag-enter","node-drag-leave","node-drag-over","node-drag-end","node-drop"]
@@ -242,7 +242,7 @@ MWF.xApplication.process.Xform.Eltree = MWF.APPEltree =  new Class(
      parseData: function ( data ) {
         if( !data )data = this.json.data;
         var config = {};
-         //label和children转成defaultOptions的数组
+         //label과 children을 defaultOptions 배열로 변환
          if( this.json.defaultProps ){
              var p = this.json.defaultProps;
              if( p.children !== "children" && o2.typeOf(p.children)==="string") config.children = p.children;
@@ -250,7 +250,7 @@ MWF.xApplication.process.Xform.Eltree = MWF.APPEltree =  new Class(
              if( p.disabled !== "disabled" && o2.typeOf(p.disabled)==="string")config.disabled = p.disabled;
              if( p.label !== "isLeaf" && o2.typeOf(p.isLeaf)==="string")config.isLeaf = p.isLeaf;
          }
-        //把id转成成node-key,
+        //id를 node-key로 변환,
         if( this.json.nodeKey && this.json.nodeKey !== "id" )config.id = this.json.nodeKey;
         if( Object.keys(config).length > 0 ){
             this._parseData(data, config);

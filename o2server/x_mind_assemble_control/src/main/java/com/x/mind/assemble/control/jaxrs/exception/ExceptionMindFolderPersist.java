@@ -7,6 +7,6 @@ public class ExceptionMindFolderPersist extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionMindFolderPersist( Throwable e, String message ) {
-		super("脑图文件夹信息持久化时发生异常。MESSAGE:" + message, e );
+		super("마인드맵 폴더 정보 저장 중 오류가 발생했습니다. MESSAGE:" + message, e );
 	}
 }

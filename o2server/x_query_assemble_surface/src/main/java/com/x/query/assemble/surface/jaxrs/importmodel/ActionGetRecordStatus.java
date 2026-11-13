@@ -39,19 +39,19 @@ class ActionGetRecordStatus extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("当前状态.")
+		@FieldDescribe("현재 상태.")
 		private String status;
 
-		@FieldDescribe("总数量.")
+		@FieldDescribe("총 수량.")
 		private Integer count;
 
-		@FieldDescribe("已执行数量.")
+		@FieldDescribe("실행된 수량.")
 		private Long executeCount;
 
-		@FieldDescribe("失败数量.")
+		@FieldDescribe("실패 수량.")
 		private Long failCount;
 
-		@FieldDescribe("导入结果描述.")
+		@FieldDescribe("가져오기 결과 설명.")
 		private String distribution;
 
 		public String getStatus() {

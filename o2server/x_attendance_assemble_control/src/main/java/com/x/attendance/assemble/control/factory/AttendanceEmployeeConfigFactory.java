@@ -15,7 +15,7 @@ import com.x.attendance.entity.AttendanceEmployeeConfig;
 import com.x.attendance.entity.AttendanceEmployeeConfig_;
 import com.x.base.core.project.exception.ExceptionWhen;
 /**
- * 员工考勤需求配置服务器
+ * 직원 근태 요구 설정 서비스
  */
 public class AttendanceEmployeeConfigFactory extends AbstractFactory {
 	
@@ -23,12 +23,12 @@ public class AttendanceEmployeeConfigFactory extends AbstractFactory {
 		super(business);
 	}
 
-//	@MethodDescribe("获取指定Id的AttendanceEmployeeConfig信息对象")
+//	@MethodDescribe("지정 Id의 AttendanceEmployeeConfig 정보 객체 조회")
 	public AttendanceEmployeeConfig get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceEmployeeConfig.class, ExceptionWhen.none);
 	}
 	
-	//@MethodDescribe("列示全部的AttendanceEmployeeConfig信息列表")
+	//@MethodDescribe("전체 AttendanceEmployeeConfig 정보 목록 조회")
 	@SuppressWarnings("unused")
 	public List<AttendanceEmployeeConfig> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceEmployeeConfig.class);
@@ -38,7 +38,7 @@ public class AttendanceEmployeeConfigFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceEmployeeConfig信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceEmployeeConfig 정보 목록 조회")
 	public List<AttendanceEmployeeConfig> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<AttendanceEmployeeConfig>();
@@ -51,7 +51,7 @@ public class AttendanceEmployeeConfigFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("根据配置类别列示AttendanceEmployeeConfig信息列表")
+	//@MethodDescribe("설정 분류로 AttendanceEmployeeConfig 정보 목록 조회")
 	public List<String> listByConfigType( String configType ) throws Exception {
 		if( configType == null || configType.isEmpty()){
 			return new ArrayList<String>();

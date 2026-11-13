@@ -1,15 +1,15 @@
 import {Notice} from "@o2oa/ui";
 
-/**消息提醒框
+/**메시지 알림 상자
  * @Object notice
  */
 const notice = {
-    /**显示错误消息
+    /**오류 메시지 표시
      * @method error
-     * @param {String} title 错误标题
-     * @param {String} text  错误描述
-     * @param {Object} options  消息框显示参数
-     * @param {boolean} normal 是否使用默认样式
+     * @param {String} title 오류 제목
+     * @param {String} text  오류 설명
+     * @param {Object} options  메시지 상자 표시 파라미터
+     * @param {boolean} normal 기본 스타일 사용 여부
      */
     error: (title, text, options= {}, normal)=>{
         const normalStyle =  {skin: 'default', location: 'topRight', marginTop: 10, duration: 5000};
@@ -24,43 +24,43 @@ const notice = {
         throw e;
     },
 
-    /**显示消息
+    /**메시지 표시
      * @method msg
-     * @param {String} title 消息标题
-     * @param {String} text  消息描述
-     * @param {String} type  消息类型 error success info warn
-     * @param {Object} options 消息框显示参数
+     * @param {String} title 메시지 제목
+     * @param {String} text  메시지 설명
+     * @param {String} type  메시지 유형 error success info warn
+     * @param {Object} options 메시지 상자 표시 파라미터
      */
     msg: (title, text, type, options = {})=>{
         const opts = Object.assign({  title, text, duration: 5000, type, location: 'topRight', marginTop: 10}, options);
         new Notice(opts);
     },
 
-    /**显示成功消息
+    /**성공 메시지 표시
      * @method msg
-     * @param {String} title 消息标题
-     * @param {String} text  消息描述
-     * @param {Object} options 消息框显示参数
+     * @param {String} title 메시지 제목
+     * @param {String} text  메시지 설명
+     * @param {Object} options 메시지 상자 표시 파라미터
      */
     success:  (title, text, options= {} )=>{
         notice.msg(title, text, 'success', options);
     },
 
-    /**显示普通消息
+    /**일반 메시지 표시
      * @method msg
-     * @param {String} title 消息标题
-     * @param {String} text  消息描述
-     * @param {Object} options 消息框显示参数
+     * @param {String} title 메시지 제목
+     * @param {String} text  메시지 설명
+     * @param {Object} options 메시지 상자 표시 파라미터
      */
     info:  (title, text, options = {})=>{
         notice.msg(title, text, 'info', options);
     },
 
-    /**显示警告消息
+    /**경고 메시지 표시
      * @method msg
-     * @param {String} title 消息标题
-     * @param {String} text  消息描述
-     * @param {Object} options 消息框显示参数
+     * @param {String} title 메시지 제목
+     * @param {String} text  메시지 설명
+     * @param {Object} options 메시지 상자 표시 파라미터
      */
     warn:  (title, text, options = {})=>{
         notice.msg(title, text, 'warn', options);

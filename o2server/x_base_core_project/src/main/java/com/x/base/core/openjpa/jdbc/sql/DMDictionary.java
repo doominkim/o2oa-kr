@@ -27,16 +27,16 @@ public class DMDictionary extends DBDictionary {
 	public boolean uniqueIdentifierAsVarbinary = true;
 
 	/**
-	 * 达梦 INTEGER/INT JDBC 元数据通常返回 COLUMN_SIZE = 10， 但 OpenJPA 映射侧固定整数列通常 size = 0。
+	 * 다몽 INTEGER/INT JDBC 메타데이터는 보통 COLUMN_SIZE = 10을 반환하지만 OpenJPA 매핑 측 고정 정수 열은 보통 size = 0.
 	 *
-	 * 开启后，在读取数据库元数据后把固定整数列 size 归一化为 0。
+	 * 활성화하면 데이터베이스 메타데이터를 읽은 후 고정 정수 열 size를 0으로 정규화.
 	 */
 	public boolean normalizeFixedIntegerSize = true;
 
 	/**
-	 * 达梦 JDBC 元数据可能把列名返回为 "xorderColumn"， 而 OpenJPA 映射侧是 xorderColumn。
+	 * 다몽 JDBC 메타데이터는 열 이름을 "xorderColumn"으로 반환할 수 있지만 OpenJPA 매핑 측은 xorderColumn.
 	 *
-	 * 开启后，只在 schema metadata 反射路径上去掉外层定界符。
+	 * 활성화하면 schema metadata 리플렉션 경로에서만 바깥 구분자를 제거.
 	 */
 	public boolean normalizeMetadataIdentifierDelimiters = true;
 
@@ -120,8 +120,8 @@ public class DMDictionary extends DBDictionary {
 				.addAll(Arrays.asList(new String[] { "IMAGE", "TEXT", "DATETIME", "LONGVARBINARY", "LONGVARCHAR" }));
 
 		/*
-		 * 达梦固定整数/布尔类型： 1. 生成 DDL 时不要追加长度。 2. 配合 newColumn(...) 消除 Existing size 10 vs
-		 * Given size 0 的伪差异。
+		 * 다몽 고정 정수/불리언 유형: 1. DDL 생성 시 길이를 붙이지 않음. 2. newColumn(...)과 함께 Existing size 10 vs
+		 * Given size 0의 가짜 차이 제거.
 		 */
 		this.fixedSizeTypeNameSet.addAll(Arrays.asList(
 				new String[] { "INT", "INTEGER", "BIGINT", "SMALLINT", "TINYINT", "BYTE", "BIT", "BOOL", "BOOLEAN" }));
@@ -159,13 +159,13 @@ public class DMDictionary extends DBDictionary {
 	}
 
 	/**
-	 * OpenJPA 从数据库 metadata 名称转换为 DBIdentifier 时会走这里。
+	 * OpenJPA가 데이터베이스 metadata 이름을 DBIdentifier로 변환할 때 여기를 거침.
 	 *
-	 * 达梦 JDBC metadata 有时返回： "xorderColumn" ""xorderColumn""
+	 * 다몽 JDBC metadata는 때때로 "xorderColumn" ""xorderColumn"" 반환
 	 *
-	 * OpenJPA 映射侧通常是： xorderColumn
+	 * OpenJPA 매핑 측은 보통 xorderColumn
 	 *
-	 * 如果不清理，schema compare 会认为两者不兼容。
+	 * 정리하지 않으면 schema compare에서 둘이 호환되지 않는다고 판단함.
 	 */
 	@Override
 	public DBIdentifier fromDBName(String name, DBIdentifierType type) {
@@ -181,9 +181,9 @@ public class DMDictionary extends DBDictionary {
 	}
 
 	/**
-	 * OpenJPA 读取 DatabaseMetaData.getColumns(...) 结果时会创建 Column。
+	 * OpenJPA가 DatabaseMetaData.getColumns(...) 결과를 읽을 때 Column을 생성함.
 	 *
-	 * 在这里统一修复： 1. 列名/表名/schema/typeName 外层双引号。 2. 达梦 INT/INTEGER/BIGINT 等固定整数类型
+	 * 여기서 일괄 수정: 1. 열 이름/테이블 이름/schema/typeName 바깥 큰따옴표. 2. 다몽 INT/INTEGER/BIGINT 등 고정 정수 유형
 	 * size。
 	 */
 	@Override
@@ -208,7 +208,7 @@ public class DMDictionary extends DBDictionary {
 		String typeName = normalizedTypeName(col);
 
 		/*
-		 * 达梦驱动如果把 INT/BOOL 等报成其他兼容类型， 这里统一成 JDBC 标准类型，便于 OpenJPA 做类型比较。
+		 * 다몽 드라이버가 INT/BOOL 등을 다른 호환 유형으로 보고하면 여기서 JDBC 표준 유형으로 통일하여 OpenJPA의 유형 비교를 쉽게 함.
 		 */
 		if ("INT".equals(typeName) || "INTEGER".equals(typeName)) {
 			col.setType(Types.INTEGER);
@@ -224,13 +224,13 @@ public class DMDictionary extends DBDictionary {
 
 		if (this.normalizeFixedIntegerSize && isFixedIntegerColumn(col, typeName)) {
 			/*
-			 * 关键修复：
+			 * 핵심 수정:
 			 *
-			 * 达梦 metadata: INTEGER / INT Size 10
+			 * 다몽 metadata: INTEGER / INT Size 10
 			 *
 			 * OpenJPA mapping: INTEGER / INT Size 0
 			 *
-			 * 归一化后避免： Existing column Size: 10 Given column Size: 0
+			 * 정규화 후 방지: Existing column Size: 10 Given column Size: 0
 			 */
 			col.setSize(0);
 			col.setDecimalDigits(0);
@@ -250,8 +250,8 @@ public class DMDictionary extends DBDictionary {
 		}
 
 		/*
-		 * 即使文本看起来一样，但 DBIdentifier 自身处于 delimited 状态， 也重建为非 delimited，避免 schema compare
-		 * 时把 "x" 和 x 当成不同。
+		 * 텍스트가 같아 보여도 DBIdentifier 자체가 delimited 상태이면 비 delimited로 재구성하여 schema compare
+		 * 시 "x"와 x를 다르게 취급하는 것을 방지.
 		 */
 		if (!cleaned.equals(name) || id.isDelimited()) {
 			DBIdentifier normalized = DBIdentifier.newIdentifier(cleaned, id.getType(), false);
@@ -263,9 +263,9 @@ public class DMDictionary extends DBDictionary {
 	}
 
 	/**
-	 * 清理 JDBC metadata 返回的标识符外层定界符。
+	 * JDBC metadata가 반환한 식별자의 바깥 구분자 정리.
 	 *
-	 * 支持： "x" -> x ""x"" -> x "X"."T" -> X.T `x` -> x [x] -> x
+	 * 지원: "x" -> x ""x"" -> x "X"."T" -> X.T `x` -> x [x] -> x
 	 */
 	private String stripMetadataIdentifierDelimiters(String name) {
 		if (name == null) {
@@ -342,7 +342,7 @@ public class DMDictionary extends DBDictionary {
 
 		if (name == null && col != null) {
 			/*
-			 * getTypeName() 在 OpenJPA 3.x 标记为 deprecated， 但作为 fallback 使用可以提高兼容性。
+			 * getTypeName()은 OpenJPA 3.x에서 deprecated로 표시되었지만 fallback으로 사용하면 호환성을 높일 수 있음.
 			 */
 			name = col.getTypeName();
 		}

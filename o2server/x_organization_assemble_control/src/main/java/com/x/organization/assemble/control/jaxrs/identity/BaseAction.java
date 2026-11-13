@@ -12,7 +12,7 @@ import com.x.organization.core.entity.Unit;
 
 abstract class BaseAction extends StandardJaxrsAction {
 
-	/** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+	/** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
 	protected boolean uniqueDuplicateWhenNotEmpty(Business business, Identity identity) throws Exception {
 		if (StringUtils.isNotEmpty(identity.getUnique())) {
 			if (business.entityManagerContainer().duplicateWithFlags(identity.getId(), Identity.class,

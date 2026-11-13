@@ -48,13 +48,13 @@ public class ActionListCategoryInfoManagers extends BaseAction {
 
 public static class Wo{
 		
-		@FieldDescribe("人员列表")
+		@FieldDescribe("사용자 목록")
 		private List<String> personList;
 		
-		@FieldDescribe("组织列表")
+		@FieldDescribe("조직 목록")
 		private List<String> unitList;
 		
-		@FieldDescribe("群组列表")
+		@FieldDescribe("그룹 목록")
 		private List<String> groupList;
 
 		public List<String> getPersonList() {

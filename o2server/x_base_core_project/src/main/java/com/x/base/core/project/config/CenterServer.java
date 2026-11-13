@@ -32,19 +32,19 @@ public class CenterServer extends ConfigObject {
 		return o;
 	}
 
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	private Boolean enable;
-	@FieldDescribe("center节点顺序,顺序排列0,1,2...")
+	@FieldDescribe("center 노드 순서, 0,1,2... 순으로 배열")
 	private Integer order;
-	@FieldDescribe("是否启用ssl传输加密,如果启用将使用config/keystore文件作为密钥文件.使用config/token.json文件中的sslKeyStorePassword字段为密钥密码,sslKeyManagerPassword为管理密码.")
+	@FieldDescribe("ssl 전송 암호화 사용 여부, 사용 시 config/keystore 파일을 키 파일로 사용. config/token.json 파일의 sslKeyStorePassword 필드를 키 비밀번호로, sslKeyManagerPassword를 관리 비밀번호로 사용.")
 	private Boolean sslEnable;
-	@FieldDescribe("端口,center服务器端口,默认20030")
+	@FieldDescribe("포트, center 서버 포트, 기본값 20030")
 	private Integer port;
-	@FieldDescribe("对外http访问协议,http/https")
+	@FieldDescribe("외부 http 접근 프로토콜, http/https")
 	private String httpProtocol;
-	@FieldDescribe("代理主机,当服务器是通过apache/nginx等代理服务器映射到公网或者通过路由器做端口映射,在这样的情况下需要设置此地址以标明公网访问地址.")
+	@FieldDescribe("프록시 호스트, 서버가 apache/nginx 등 프록시 서버를 통해 공인망에 매핑되거나 라우터로 포트 매핑된 경우 공인망 접근 주소를 나타내기 위해 이 주소를 설정해야 함.")
 	private String proxyHost;
-	@FieldDescribe("代理端口,当服务器是通过apache/nginx等代理服务器映射到公网或者通过路由器做端口映射,在这样的情况下需要设置此地址以标明公网访问端口.")
+	@FieldDescribe("프록시 포트, 서버가 apache/nginx 등 프록시 서버를 통해 공인망에 매핑되거나 라우터로 포트 매핑된 경우 공인망 접근 포트를 나타내기 위해 이 주소를 설정해야 함.")
 	private Integer proxyPort;
 
 	public Boolean getEnable() {

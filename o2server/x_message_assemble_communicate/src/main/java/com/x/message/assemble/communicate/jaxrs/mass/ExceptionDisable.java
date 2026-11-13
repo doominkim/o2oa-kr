@@ -7,6 +7,6 @@ class ExceptionDisable extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionDisable() {
-		super("华为WeLink, 企业微信, 钉钉, 政务钉钉都没有启用.");
+		super("Huawei WeLink, WeCom, DingTalk, 정부용 DingTalk이 모두 사용 설정되어 있지 않습니다.");
 	}
 }

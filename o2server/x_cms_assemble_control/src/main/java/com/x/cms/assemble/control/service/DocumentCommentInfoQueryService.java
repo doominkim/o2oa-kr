@@ -14,7 +14,7 @@ import com.x.cms.core.entity.DocumentCommentInfo;
 import com.x.cms.core.express.tools.filter.QueryFilter;
 
 /**
- * 对评论信息查询的服务
+ * 댓글 정보 조회 서비스
  * 
  * @author O2LEE
  */
@@ -23,7 +23,7 @@ public class DocumentCommentInfoQueryService {
 	private DocumentCommentInfoService documentCommentInfoService = new DocumentCommentInfoService();
 	
 	/**
-	 * 根据评论的标识查询评论信息
+	 * 댓글 식별자로 댓글 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -56,7 +56,7 @@ public class DocumentCommentInfoQueryService {
 	}
 	
 	/**
-	 * 根据ID列表查询评论信息列表
+	 * ID 목록으로 댓글 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -73,7 +73,7 @@ public class DocumentCommentInfoQueryService {
 	}
 	
 	/**
-	 * 根据过滤条件查询符合要求的评论信息数量
+	 * 필터 조건에 맞는 댓글 정보 수 조회
 	 * @param effectivePerson
 	 * @param queryFilter
 	 * @return
@@ -88,7 +88,7 @@ public class DocumentCommentInfoQueryService {
 	}
 
 	/**
-	 * 根据过滤条件查询符合要求的评论信息列表
+	 * 필터 조건에 맞는 댓글 정보 목록 조회
 	 * @param effectivePerson
 	 * @param pageSize
 	 * @param pageNum
@@ -133,7 +133,7 @@ public class DocumentCommentInfoQueryService {
 	}
 	
 	/**
-	 * 根据条件查询符合条件的评论信息ID，根据上一条的sequnce查询指定数量的信息
+	 * 조건에 맞는 댓글 정보 ID 조회, 이전 항목의 sequnce 기준으로 지정한 수만큼 조회
 	 * @param effectivePerson
 	 * @param pageSize
 	 * @param lastId

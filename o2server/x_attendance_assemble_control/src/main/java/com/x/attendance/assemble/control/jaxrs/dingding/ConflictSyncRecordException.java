@@ -8,6 +8,6 @@ public class ConflictSyncRecordException extends PromptException {
     private static final long serialVersionUID = 7077761236199564642L;
 
     public ConflictSyncRecordException() {
-        super("同步时间和历史有冲突！");
+        super("동기화 시간이 이력과 충돌합니다!");
     }
 }

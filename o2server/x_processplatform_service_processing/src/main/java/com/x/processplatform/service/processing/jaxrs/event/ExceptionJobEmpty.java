@@ -7,6 +7,6 @@ class ExceptionJobEmpty extends PromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionJobEmpty() {
-		super("job不能为空.");
+		super("job은 비워 둘 수 없습니다.");
 	}
 }

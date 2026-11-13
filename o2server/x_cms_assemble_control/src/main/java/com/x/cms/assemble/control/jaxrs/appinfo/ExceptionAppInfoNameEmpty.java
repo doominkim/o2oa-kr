@@ -7,6 +7,6 @@ class ExceptionAppInfoNameEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionAppInfoNameEmpty() {
-		super("应用栏目信息名称AppName为空，无法继续保存数据." );
+		super("게시판 이름 AppName이 비어 있어 저장할 수 없습니다." );
 	}
 }

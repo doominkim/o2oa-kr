@@ -7,7 +7,7 @@ class ExceptionPageNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -4908883340253465376L;
 
 	ExceptionPageNotExist(String id) {
-		super("指定的页面不存在:{}.", id);
+		super("지정한 페이지가 없습니다: {}.", id);
 	}
 
 }

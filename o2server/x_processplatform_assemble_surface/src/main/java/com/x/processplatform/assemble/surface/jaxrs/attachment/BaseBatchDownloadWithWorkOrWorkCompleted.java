@@ -95,7 +95,7 @@ class BaseBatchDownloadWithWorkOrWorkCompleted extends BaseAction {
 	}
 
 	/**
-	 * 下载附件并打包为zip
+	 * 첨부파일을 내려받아 zip으로 압축
 	 *
 	 * @param readableMap
 	 * @param os
@@ -105,7 +105,7 @@ class BaseBatchDownloadWithWorkOrWorkCompleted extends BaseAction {
 			throws Exception {
 		Map<String, Attachment> filePathMap = new HashMap<>();
 		List<String> emptyFolderList = new ArrayList<>();
-		/* 生成zip压缩文件内的目录结构 */
+		/* zip 압축 파일 내 디렉터리 구조 생성 */
 		if (readableMap != null) {
 			for(String key : readableMap.keySet()) {
 				String encodeKey = StringUtils.replaceEach(key, Business.FILENAME_SENSITIVES_KEY, Business.FILENAME_SENSITIVES_EMPTY);
@@ -135,7 +135,7 @@ class BaseBatchDownloadWithWorkOrWorkCompleted extends BaseAction {
 				}
 			}
 
-			// 往zip里添加空文件夹
+			// zip에 빈 폴더 추가
 			for (String emptyFolder : emptyFolderList) {
 				zos.putNextEntry(new ZipEntry(emptyFolder));
 			}

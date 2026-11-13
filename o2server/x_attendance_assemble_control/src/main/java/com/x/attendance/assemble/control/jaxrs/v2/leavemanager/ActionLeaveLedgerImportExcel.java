@@ -45,17 +45,17 @@ public class ActionLeaveLedgerImportExcel extends BaseAction {
     ActionResult<Wo> execute(EffectivePerson effectivePerson, String leaveTypeId, String grantPeriod, byte[] bytes,
             FormDataContentDisposition disposition) throws Exception {
         if (bytes == null || bytes.length == 0) {
-            throw new ExceptionEmptyParameter("Excel文件");
+            throw new ExceptionEmptyParameter("Excel 파일");
         }
         if (StringUtils.isBlank(leaveTypeId)) {
-            throw new ExceptionEmptyParameter("假期类型ID");
+            throw new ExceptionEmptyParameter("휴가 유형 ID");
         }
         if (StringUtils.isBlank(grantPeriod)) {
-            throw new ExceptionEmptyParameter("发放周期");
+            throw new ExceptionEmptyParameter("지급 주기");
         }
         LOCK.lock();
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("开始导入假期发放批次数据。");
+            LOGGER.debug("휴가 지급 배치 데이터 가져오기 시작.");
         }
         try (InputStream is = new ByteArrayInputStream(bytes);
                 XSSFWorkbook workbook = new XSSFWorkbook(is);
@@ -112,7 +112,7 @@ public class ActionLeaveLedgerImportExcel extends BaseAction {
         } finally {
             LOCK.unlock();
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("导入假期发放批次数据结束。");
+                LOGGER.debug("휴가 지급 배치 데이터 가져오기 종료.");
             }
         }
     }
@@ -121,22 +121,22 @@ public class ActionLeaveLedgerImportExcel extends BaseAction {
             String grantPeriod, Date now) throws Exception {
         String person = AttendanceV2Helper.getExcelCellStringValue(row.getCell(0));
         if (StringUtils.isBlank(person)) {
-            throw new ExceptionEmptyParameter("用户");
+            throw new ExceptionEmptyParameter("사용자");
         }
         Person mPerson = business.organization().person().getObject(person, true);
         if (mPerson == null) {
-            throw new ExceptionWithMessage("用户标识找不到对应的人员");
+            throw new ExceptionWithMessage("사용자 식별자에 해당하는 인원을 찾을 수 없습니다");
         }
 
         String grantAmountString = AttendanceV2Helper.getExcelCellStringValue(row.getCell(1));
         if (StringUtils.isBlank(grantAmountString)) {
-            throw new ExceptionEmptyParameter("发放额度");
+            throw new ExceptionEmptyParameter("지급 한도");
         }
         Double grantAmount = parseGrantAmount(grantAmountString);
 
         String expireTimeString = AttendanceV2Helper.getExcelCellDateFormat(row.getCell(2), DateTools.format_yyyyMMdd);
         if (StringUtils.isBlank(expireTimeString)) {
-            throw new ExceptionEmptyParameter("过期日期");
+            throw new ExceptionEmptyParameter("만료 날짜");
         }
         Date expireTime = parseExpireTime(expireTimeString);
 
@@ -157,7 +157,7 @@ public class ActionLeaveLedgerImportExcel extends BaseAction {
             }
             return grantAmount;
         } catch (Exception e) {
-            throw new ExceptionWithMessage("发放额度格式不正确");
+            throw new ExceptionWithMessage("지급 한도 형식이 올바르지 않습니다");
         }
     }
 
@@ -165,7 +165,7 @@ public class ActionLeaveLedgerImportExcel extends BaseAction {
         try {
             return DateTools.parse(expireTimeString, DateTools.format_yyyyMMdd);
         } catch (Exception e) {
-            throw new ExceptionWithMessage("过期日期格式不正确");
+            throw new ExceptionWithMessage("만료 날짜 형식이 올바르지 않습니다");
         }
     }
 
@@ -193,13 +193,13 @@ public class ActionLeaveLedgerImportExcel extends BaseAction {
 
         private static final long serialVersionUID = 8076084539055540316L;
 
-        @FieldDescribe("返回的结果标识，下载结果文件使用")
+        @FieldDescribe("반환 결과 식별자, 결과 파일 다운로드에 사용")
         private String flag;
 
-        @FieldDescribe("异常错误数据条目数")
+        @FieldDescribe("오류 데이터 건수")
         private int errorRows;
 
-        @FieldDescribe("成功导入数据条目数")
+        @FieldDescribe("가져오기 성공 데이터 건수")
         private int successRows;
 
         public String getFlag() {

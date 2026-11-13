@@ -36,7 +36,7 @@ public class ActionQueryCountViewTimes extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess( e, "系统在查询文档访问次数时发生异常。Id:" + id );
+				Exception exception = new ExceptionDocumentInfoProcess( e, "게시글 조회수를 조회하는 중 오류가 발생했습니다. Id:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

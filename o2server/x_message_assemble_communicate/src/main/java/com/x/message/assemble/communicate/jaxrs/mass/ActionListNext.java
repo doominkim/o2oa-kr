@@ -45,7 +45,7 @@ class ActionListNext extends BaseAction {
 		public static WrapCopier<Mass, Wo> copier = WrapCopierFactory.wo(Mass.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

@@ -35,37 +35,37 @@ public class Node extends ConfigObject {
 		return o;
 	}
 
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	private Boolean enable;
-	@FieldDescribe("节点顺序,节点选举顺序0,1,2...")
+	@FieldDescribe("노드 순서, 노드 선출 순서 0,1,2...")
 	private Integer order;
-	@FieldDescribe("Center服务器配置")
+	@FieldDescribe("Center 서버 설정")
 	private CenterServer center;
-	@FieldDescribe("Application服务器配置")
+	@FieldDescribe("Application 서버 설정")
 	private ApplicationServer application;
-	@FieldDescribe("Web服务器配置")
+	@FieldDescribe("Web 서버 설정")
 	private WebServer web;
-	@FieldDescribe("Data服务器配置")
+	@FieldDescribe("Data 서버 설정")
 	private DataServer data;
-	@FieldDescribe("Storage服务器配置")
+	@FieldDescribe("Storage 서버 설정")
 	private StorageServer storage;
-	@FieldDescribe("定时数据导出配置")
+	@FieldDescribe("정기 데이터 내보내기 설정")
 	private ScheduleDumpData dumpData;
-	@FieldDescribe("定时数据导入配置")
+	@FieldDescribe("정기 데이터 가져오기 설정")
 	private ScheduleRestoreData restoreData;
-	@FieldDescribe("定时执行java stack trace")
+	@FieldDescribe("정기 java stack trace 실행")
 	private ScheduleStackTrace stackTrace;
-	@FieldDescribe("是否启用节点代理")
+	@FieldDescribe("노드 프록시 사용 여부")
 	private Boolean nodeAgentEnable;
-	@FieldDescribe("是否启用节点端口")
+	@FieldDescribe("노드 포트 사용 여부")
 	private Integer nodeAgentPort;
-	@FieldDescribe("是否启用节点代理加密")
+	@FieldDescribe("노드 프록시 암호화 사용 여부")
 	private Boolean nodeAgentEncrypt;
-	@FieldDescribe("服务器控制台启动标识")
+	@FieldDescribe("서버 콘솔 시작 식별자")
 	private String banner;
-	@FieldDescribe("是否自动启动")
+	@FieldDescribe("자동 시작 여부")
 	private Boolean autoStart;
-	@FieldDescribe("是否启用节点上模块健康自检查,如果启用在提交到center之前将进行模块的健康检查.默认false")
+	@FieldDescribe("노드 모듈 상태 자체 점검 사용 여부, 사용 시 center에 제출하기 전에 모듈 상태 점검 수행. 기본값 false")
 	private Boolean selfHealthCheckEnable;
 
 //	public Integer getOrder() {
@@ -151,16 +151,16 @@ public class Node extends ConfigObject {
 			return CronTools.available(this.cron());
 		}
 
-		@FieldDescribe("是否启用,默认禁用.")
+		@FieldDescribe("사용 여부, 기본값은 사용 안 함.")
 		private Boolean enable = false;
 
-		@FieldDescribe("定时任务cron表达式,默认每天凌晨2点进行备份.")
+		@FieldDescribe("정기 작업 cron 표현식, 기본값은 매일 새벽 2시에 백업.")
 		private String cron = "";
 
-		@FieldDescribe("最大保留份数,超过将自动删除最久的数据.")
+		@FieldDescribe("최대 보관 개수, 초과 시 가장 오래된 데이터를 자동 삭제.")
 		private Integer size = 7;
 
-		@FieldDescribe("备份路径")
+		@FieldDescribe("백업 경로")
 		private String path = "";
 
 		public Boolean enable() {
@@ -193,13 +193,13 @@ public class Node extends ConfigObject {
 			return CronTools.available(this.cron) && StringUtils.isNotEmpty(this.path);
 		}
 
-		@FieldDescribe("是否启用.")
+		@FieldDescribe("사용 여부.")
 		private Boolean enable = false;
 
-		@FieldDescribe("定时任务cron表达式")
+		@FieldDescribe("정기 작업 cron 표현식")
 		private String cron = "";
 
-		@FieldDescribe("恢复路径")
+		@FieldDescribe("복원 경로")
 		private String path = "";
 
 		public Boolean enable() {
@@ -232,10 +232,10 @@ public class Node extends ConfigObject {
 			return new ScheduleStackTrace();
 		}
 
-		@FieldDescribe("是否启用.")
+		@FieldDescribe("사용 여부.")
 		private Boolean enable = false;
 
-		@FieldDescribe("运行jstack 间隔,默认20秒.")
+		@FieldDescribe("jstack 실행 간격, 기본값 20초.")
 		private Integer interval = DEFAULT_INTERVAL;
 
 		public Boolean getEnable() {

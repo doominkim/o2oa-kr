@@ -21,7 +21,7 @@ import com.x.cms.core.express.tools.CriteriaBuilderTools;
 import com.x.cms.core.express.tools.filter.QueryFilter;
 
 /**
- * 对CMS栏目、分类、文档进行权限过滤查询，在CMS应用中会直接引用
+ * CMS 게시판, 분류, 문서 권한 필터링 조회, CMS 앱에서 직접 참조
  *
  * @author O2LEE
  *
@@ -29,7 +29,7 @@ import com.x.cms.core.express.tools.filter.QueryFilter;
 public class CmsPermissionService {
 
 	/**
-	 * 根据条件获取用户有权限访问的所有文档ID列表
+	 * 조건에 따라 사용자가 접근 권한을 가진 모든 문서 ID 목록 조회
 	 * @param emc
 	 * @param queryFilter
 	 * @param maxResultCount
@@ -62,7 +62,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以访问到的所有栏目ID列表(包含全员可以访问的栏目)
+	 * 지정 사용자, 조직, 그룹이 접근할 수 있는 모든 게시판 ID 목록 조회(전원 접근 가능 게시판 포함)
 	 * @param emc
 	 * @param personName
 	 * @param isAnonymous
@@ -83,17 +83,17 @@ public class CmsPermissionService {
 
 		List<String> viewableAppInfoIds = new ArrayList<>();
 
-		//1、将所有未设置访问权限的栏目ID列表添加到viewAbleAppInfoIds中（全员可以访问的AppInfo)
+		//1. 접근 권한이 설정되지 않은 모든 게시판 ID 목록을 viewAbleAppInfoIds에 추가(전원 접근 가능 AppInfo)
 		viewableAppInfoIds = addResultToSourceList(this.listAllPeopleViewAppIds(emc, documentType, appType), viewableAppInfoIds);
-		//2、加入所有人都能发布的栏目
+		//2. 모든 사람이 게시 가능한 게시판 추가
 		viewableAppInfoIds = addResultToSourceList(this.listAllPeoplePublishAppIds( emc, documentType, appType ), viewableAppInfoIds);
 
 		if (!isAnonymous) {
-			// 2、将用户自己为管理员的所有栏目ID列表添加到viewAbleAppInfoIds中
+			// 2. 사용자가 관리자인 모든 게시판 ID 목록을 viewAbleAppInfoIds에 추가
 			viewableAppInfoIds = addResultToSourceList(this.listManageableAppIdsByPerson(emc, personName, unitNames,
 					groupNames, roleNames, null, null, null, documentType, maxCount), viewableAppInfoIds);
 
-			// 3、将用户自己以及用户所在的组织、群组，有权限访问的所有栏目ID列表添加到viewAbleAppInfoIds中
+			// 3. 사용자 본인 및 소속 조직, 그룹이 접근 권한을 가진 모든 게시판 ID 목록을 viewAbleAppInfoIds에 추가
 			addResultToSourceList(
 					this.listViewableAppIdsInPermission(emc, personName, unitNames, groupNames, documentType, maxCount),
 					viewableAppInfoIds);
@@ -109,7 +109,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以发布文档的所有栏目ID列表
+	 * 지정 사용자, 조직, 그룹이 문서를 게시할 수 있는 모든 게시판 ID 목록 조회
 	 *
 	 * @param personName
 	 * @param isAnonymous
@@ -125,15 +125,15 @@ public class CmsPermissionService {
 			String documentType, String appType, Integer maxCount) throws Exception {
 		List<String> publishableAppInfoIds = new ArrayList<>();
 
-		// 1、全员可发布的栏目 ，将所有未设置访问权限的栏目ID列表添加到viewAbleAppInfoIds中
+		// 1. 전원 게시 가능 게시판: 접근 권한이 설정되지 않은 모든 게시판 ID 목록을 viewAbleAppInfoIds에 추가
 		publishableAppInfoIds = addResultToSourceList( this.listAllPeoplePublishAppIds(emc, documentType, appType), publishableAppInfoIds);
 
 		if (!isAnonymous) {
-			// 2、用户可管理的栏目， 将用户自己为管理员的所有栏目ID列表添加到viewAbleAppInfoIds中
+			// 2. 사용자 관리 가능 게시판: 사용자가 관리자인 모든 게시판 ID 목록을 viewAbleAppInfoIds에 추가
 			publishableAppInfoIds = addResultToSourceList(this.listManageableAppIdsByPerson(emc, personName, unitNames,
 					groupNames, roleNames, null, null, null, documentType, maxCount), publishableAppInfoIds);
 
-			// 3、用户有发布权限设置的栏目， 将用户自己以及用户所在的组织、群组，有权限访问的所有栏目ID列表添加到viewAbleAppInfoIds中
+			// 3. 사용자 게시 권한이 설정된 게시판: 사용자 본인 및 소속 조직, 그룹이 접근 권한을 가진 모든 게시판 ID 목록을 viewAbleAppInfoIds에 추가
 			addResultToSourceList(this.listPublishableAppIdsInPermission(emc, personName, unitNames, groupNames, roleNames,
 					documentType, maxCount), publishableAppInfoIds);
 		}
@@ -150,7 +150,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 根据excludAppInfoIds排除不需要的数据
+	 * excludAppInfoIds로 불필요한 데이터 제외
 	 *
 	 * @param sourceList
 	 * @param excludAppInfoIds
@@ -172,7 +172,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询指定用户可以管理的所有栏目ID列表( with List copy )
+	 * 지정 사용자가 관리할 수 있는 모든 게시판 ID 목록 조회( with List copy )
 	 *
 	 * @param emc
 	 * @param personName
@@ -252,7 +252,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以访问到的所有分类ID列表（包含全员可以访问的分类） 所获得到的分类列表可能会大于可访问的栏目列表
+	 * 지정한 사용자, 조직, 그룹이 접근 가능한 모든 분류 ID 목록 조회(전원 접근 가능 분류 포함), 얻은 분류 목록은 접근 가능한 게시판 목록보다 클 수 있음
 	 * @param emc
 	 * @param personName
 	 * @param isAnonymous
@@ -274,7 +274,7 @@ public class CmsPermissionService {
 			Boolean manager) throws Exception {
 		List<String> viewableCategoryInfoIds = new ArrayList<>();
 		List<String> allViewableAppIds = null;
-		// 查询我可以访问到的所有栏目ID列表
+		// 내가 접근 가능한 모든 게시판 ID 목록 조회
 		if (manager) {
 			allViewableAppIds = this.listAllAppIds(emc, inAppInfoIds, null, documentType, maxCount);
 		} else {
@@ -286,24 +286,24 @@ public class CmsPermissionService {
 			}
 		}
 
-		// 在所有我能访问到的栏目范围内，查询所有的全员可见分类ID列表
+		// 내가 접근 가능한 모든 게시판 범위 내에서 전원 열람 가능 분류 ID 목록 조회
 		viewableCategoryInfoIds = addResultToSourceList(this.listAllPeopleViewCategoryIds(emc, allViewableAppIds,
 				inCategoryInfoIds, excludCategoryInfoIds, documentType, maxCount), viewableCategoryInfoIds);
 
 		if (!isAnonymous) {
-			// 在所有我能访问到的栏目范围内，查询所有我可见的分类ID列表（包含有发布权限的分类，不检测全员可见标识）
+			// 내가 접근 가능한 모든 게시판 범위 내에서 내가 볼 수 있는 분류 ID 목록 조회(게시 권한 있는 분류 포함, 전원 열람 식별자 미검사)
 			viewableCategoryInfoIds = addResultToSourceList(
 					this.listViewableCategoryIdsInPermission(emc, personName, unitNames, groupNames, inAppInfoIds,
 							inCategoryInfoIds, excludCategoryInfoIds, documentType, maxCount, manager),
 					viewableCategoryInfoIds);
 
-			// 查询所有我有权限发布的分类（可以不在可以访问到的所有栏目ID列表中）
+			// 내가 게시 권한을 가진 모든 분류 조회(접근 가능한 게시판 ID 목록에 없어도 됨)
 			viewableCategoryInfoIds = addResultToSourceList(
 					this.listPublishableCategoryIdsInPermission(emc, personName, unitNames, groupNames, inAppInfoIds,
 							inCategoryInfoIds, excludCategoryInfoIds, documentType, maxCount),
 					viewableCategoryInfoIds);
 
-			// 查询所有我有权限管理的分类（可以不在可以访问到的所有栏目ID列表中）
+			// 내가 관리 권한을 가진 모든 분류 조회(접근 가능한 게시판 ID 목록에 없어도 됨)
 			viewableCategoryInfoIds = addResultToSourceList(this.listManageableCategoryIdsByPerson(emc, personName,
 					unitNames, groupNames, inAppInfoIds, documentType, maxCount, manager), viewableCategoryInfoIds);
 		}
@@ -323,15 +323,15 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以发布文档的所有分类ID列表（包含全员可以发布文档的分类） 所获得到的分类列表可能会大于可访问的栏目列表
+	 * 지정 사용자, 조직, 그룹이 문서를 게시할 수 있는 모든 분류 ID 목록 조회(전원 게시 가능 분류 포함) 얻은 분류 목록이 접근 가능한 게시판 목록보다 클 수 있음
 	 *
 	 * @param personName
 	 * @param isAnonymous
 	 * @param unitNames
 	 * @param groupNames
-	 * @param inAppInfoIds          - 过滤栏目ID
-	 * @param inCategoryInfoIds     - 过滤分类ID
-	 * @param excludCategoryInfoIds - 排队分类ID
+	 * @param inAppInfoIds          - 필터 게시판 ID
+	 * @param inCategoryInfoIds     - 필터 분류 ID
+	 * @param excludCategoryInfoIds - 제외 분류 ID
 	 * @return
 	 * @throws Exception
 	 */
@@ -342,25 +342,25 @@ public class CmsPermissionService {
 		List<String> publishableCategoryInfoIds = new ArrayList<>();
 		List<String> allPublishableAppIds = null;
 
-		// 查询我可以发布文档的所有栏目ID列表（单从栏目信息层面判断，不涉及分类，未设置发布者，或者有发布者权限）
+		// 내가 문서를 게시할 수 있는 모든 게시판 ID 목록 조회(게시판 정보 기준으로만 판단, 분류 무관, 게시자 미설정 또는 게시자 권한 보유)
 		allPublishableAppIds = this.listPublishableAppIdByPerson(emc, personName, isAnonymous, unitNames, groupNames, roleNames,
 				inAppInfoIds, null, documentType, appType, maxCount);
 		if (ListTools.isEmpty(allPublishableAppIds)) {
 			allPublishableAppIds.add("无可发布栏目ID");
 		}
-		// 在所有我能直接发布文档到的栏目范围内，查询所有的全员可见分类ID列表
+		// 내가 직접 문서를 게시할 수 있는 게시판 범위 내에서 전원 열람 가능 분류 ID 목록 조회
 		publishableCategoryInfoIds = addResultToSourceList(this.listAllPeoplePublishCategoryIds(emc,
 				allPublishableAppIds, inCategoryInfoIds, excludCategoryInfoIds, documentType, maxCount),
 				publishableCategoryInfoIds);
 
 		if (!isAnonymous) {
-			// 在指定的栏目范围内（inAppInfoIds），查询所有我可以发布文档的分类ID列表（包含有发布权限的分类，不检测全员可发布标识）
+			// 지정한 게시판 범위(inAppInfoIds) 내에서 내가 문서를 게시할 수 있는 분류 ID 목록 조회(게시 권한 있는 분류 포함, 전원 게시 식별자 미검사)
 			publishableCategoryInfoIds = addResultToSourceList(
 					this.listPublishableCategoryIdsInPermission(emc, personName, unitNames, groupNames, inAppInfoIds,
 							inCategoryInfoIds, excludCategoryInfoIds, documentType, maxCount),
 					publishableCategoryInfoIds);
 
-			// 在指定的栏目范围内（inAppInfoIds），查询我可以管理的分类ID列表
+			// 지정한 게시판 범위(inAppInfoIds) 내에서 내가 관리할 수 있는 분류 ID 목록 조회
 			publishableCategoryInfoIds = addResultToSourceList(this.listManageableCategoryIdsByPerson(emc, personName,
 					unitNames, groupNames, inAppInfoIds, documentType, maxCount, manager), publishableCategoryInfoIds);
 		}
@@ -375,7 +375,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询指定用户可以管理的所有分类ID列表( with List copy )
+	 * 지정 사용자가 관리할 수 있는 모든 분류 ID 목록 조회( with List copy )
 	 *
 	 * @param emc
 	 * @param personName
@@ -432,7 +432,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询用户有权限访问的所有分类ID列表（ 不检测allPeopleView和allPeoplePublish, with List copy ）
+	 * 사용자가 접근 권한을 가진 모든 분류 ID 목록 조회( allPeopleView와 allPeoplePublish 미검사, with List copy )
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -454,15 +454,15 @@ public class CmsPermissionService {
 		Root<CategoryInfo> root = cq.from(CategoryInfo.class);
 
 		Predicate p = null;
-		// 限定栏目范围
+		// 게시판 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, root.get(CategoryInfo.appId_FIELDNAME).in(inAppInfoIds));
 		}
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inCategoryInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, root.get(CategoryInfo.id_FIELDNAME).in(inCategoryInfoIds));
 		}
-		// 排除指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludCategoryInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.not(root.get(CategoryInfo.id_FIELDNAME).in(excludCategoryInfoIds)));
@@ -475,7 +475,7 @@ public class CmsPermissionService {
 
 		Predicate p_permission = null;
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = CriteriaBuilderTools.predicate_or(cb, p_permission,
 					cb.isMember(personName, root.get(CategoryInfo.manageablePersonList_FIELDNAME)));
 			p_permission = CriteriaBuilderTools.predicate_or(cb, p_permission,
@@ -502,7 +502,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询用户有权限访问的所有分类ID列表（ 不检测allPeopleView和allPeoplePublish, with List copy ）
+	 * 사용자가 접근 권한을 가진 모든 분류 ID 목록 조회( allPeopleView와 allPeoplePublish 미검사, with List copy )
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -525,15 +525,15 @@ public class CmsPermissionService {
 		Root<CategoryInfo> root = cq.from(CategoryInfo.class);
 
 		Predicate p = null;
-		// 限定栏目范围
+		// 게시판 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, root.get(CategoryInfo.appId_FIELDNAME).in(inAppInfoIds));
 		}
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inCategoryInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, root.get(CategoryInfo.id_FIELDNAME).in(inCategoryInfoIds));
 		}
-		// 排除指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludCategoryInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.not(root.get(CategoryInfo.id_FIELDNAME).in(excludCategoryInfoIds)));
@@ -546,7 +546,7 @@ public class CmsPermissionService {
 
 		Predicate p_permission = null;
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = CriteriaBuilderTools.predicate_or(cb, p_permission,
 					cb.isMember(personName, root.get(CategoryInfo.viewablePersonList_FIELDNAME)));
 			p_permission = CriteriaBuilderTools.predicate_or(cb, p_permission,
@@ -584,7 +584,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询用户有权限访问的所有栏目ID列表（ 不检测allPeopleView, with List copy ）
+	 * 사용자가 접근 권한을 가진 모든 게시판 ID 목록 조회( allPeopleView 미검사, with List copy )
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -599,7 +599,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询用户有权限访问的所有栏目ID列表（ 不检测allPeopleView, with List copy ）
+	 * 사용자가 접근 권한을 가진 모든 게시판 ID 목록 조회( allPeopleView 미검사, with List copy )
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -620,11 +620,11 @@ public class CmsPermissionService {
 		Root<AppInfo> root = cq.from(AppInfo.class);
 
 		Predicate p = null;
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, root.get(AppInfo.id_FIELDNAME).in(inAppInfoIds));
 		}
-		// 排队指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.not(root.get(AppInfo.id_FIELDNAME).in(excludAppInfoIds)));
 		}
@@ -636,10 +636,10 @@ public class CmsPermissionService {
 
 		Predicate p_permission = null;
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以看到
+			// 관리 가능한 게시판은 반드시 볼 수 있음
 			p_permission = CriteriaBuilderTools.predicate_or(cb, p_permission,
 					cb.isMember(personName, root.get(AppInfo.manageablePersonList_FIELDNAME)));
-			// 可发布的栏目，肯定可以看到
+			// 게시 가능한 게시판은 반드시 볼 수 있음
 			p_permission = CriteriaBuilderTools.predicate_or(cb, p_permission,
 					cb.isMember(personName, root.get(AppInfo.publishablePersonList_FIELDNAME)));
 			p_permission = CriteriaBuilderTools.predicate_or(cb, p_permission,
@@ -670,7 +670,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询用户有权限访问的所有栏目ID列表（ 不检测allPeopleView, with List copy ）
+	 * 사용자가 접근 권한을 가진 모든 게시판 ID 목록 조회( allPeopleView 미검사, with List copy )
 	 * @param emc
 	 * @param inAppInfoIds
 	 * @param excludAppInfoIds
@@ -689,11 +689,11 @@ public class CmsPermissionService {
 		Root<AppInfo> root = cq.from(AppInfo.class);
 
 		Predicate p = null;
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, root.get(AppInfo.id_FIELDNAME).in(inAppInfoIds));
 		}
-		// 排队指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.not(root.get(AppInfo.id_FIELDNAME).in(excludAppInfoIds)));
 		}
@@ -714,7 +714,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询用户有权限发布文档的所有栏目ID列表（ 不检测allPeoplePublish, with List copy ）
+	 * 사용자가 문서 게시 권한을 가진 모든 게시판 ID 목록 조회( allPeoplePublish 미검사, with List copy )
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -729,7 +729,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询用户有权限发布文档的所有栏目ID列表（ 不检测allPeopleView, with List copy ）
+	 * 사용자가 문서 게시 권한을 가진 모든 게시판 ID 목록 조회( allPeopleView 미검사, with List copy )
 	 *
 	 * @param personName
 	 * @param unitNames
@@ -750,11 +750,11 @@ public class CmsPermissionService {
 		Root<AppInfo> root = cq.from(AppInfo.class);
 
 		Predicate p = null;
-		// 限定范围
+		// 범위 한정
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.and(p, root.get(AppInfo.id_FIELDNAME).in(inAppInfoIds)));
 		}
-		// 排除指定的ID列表
+		// 지정한 ID 목록 제외
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.not(root.get(AppInfo.id_FIELDNAME).in(excludAppInfoIds)));
 		}
@@ -766,7 +766,7 @@ public class CmsPermissionService {
 
 		Predicate p_permission = null;
 		if (StringUtils.isNotEmpty(personName)) {
-			// 可以管理的栏目，肯定可以发布信息
+			// 관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.isMember(personName, root.get(AppInfo.manageablePersonList_FIELDNAME));
 			p_permission = cb.or(p_permission,
 					cb.isMember(personName, root.get(AppInfo.publishablePersonList_FIELDNAME)));
@@ -793,7 +793,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 将一个List追加到SourceList里
+	 * List 하나를 SourceList에 추가
 	 *
 	 * @param result
 	 * @param sourceList
@@ -810,7 +810,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询所有未设置可见权限的AppInfo的ID列表( with List copy ) 全员可发布的栏目也包含在内：判断allPeopleView or
+	 * 열람 권한이 설정되지 않은 모든 AppInfo의 ID 목록 조회( with List copy ) 전체 사용자가 발행 가능한 게시판도 포함: allPeopleView or 확인
 	 * allPeoplePublish
 	 *
 	 * @return
@@ -841,7 +841,7 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询所有未设置发布权限的AppInfo的ID列表( with List copy ) 判断 allPeoplePublish
+	 * 게시 권한이 설정되지 않은 모든 AppInfo의 ID 목록 조회( with List copy ) allPeoplePublish 판단
 	 *
 	 * @param emc
 	 * @return
@@ -871,11 +871,11 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询所有用户都可以访问的分类ID列表(检测allPeopleView和allPeoplePublish)
+	 * 모든 사용자가 접근 가능한 분류 ID 목록 조회(allPeopleView와 allPeoplePublish 검사)
 	 *
-	 * @param inAppInfoIds      - 过滤栏目ID列表
-	 * @param inCategoryIds     - 过滤分类ID列表
-	 * @param excludCategoryIds - 排队分类ID列表
+	 * @param inAppInfoIds      - 필터 게시판 ID 목록
+	 * @param inCategoryIds     - 필터 분류 ID 목록
+	 * @param excludCategoryIds - 제외 분류 ID 목록
 	 * @return
 	 * @throws Exception
 	 */
@@ -922,11 +922,11 @@ public class CmsPermissionService {
 	}
 
 	/**
-	 * 查询所有用户都可以发布的分类ID列表(检测allPeoplePublish)
+	 * 모든 사용자가 게시 가능한 분류 ID 목록 조회(allPeoplePublish 검사)
 	 *
-	 * @param inAppInfoIds      - 过滤栏目ID列表
-	 * @param inCategoryIds     - 过滤分类ID列表
-	 * @param excludCategoryIds - 排队分类ID列表
+	 * @param inAppInfoIds      - 필터 게시판 ID 목록
+	 * @param inCategoryIds     - 필터 분류 ID 목록
+	 * @param excludCategoryIds - 제외 분류 ID 목록
 	 * @return
 	 * @throws Exception
 	 */

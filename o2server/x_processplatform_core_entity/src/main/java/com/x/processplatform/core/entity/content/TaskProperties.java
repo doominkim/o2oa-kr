@@ -15,40 +15,40 @@ public class TaskProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 5628694071505848771L;
 
-	@FieldDescribe("上一人工环节处理人.")
+	@FieldDescribe("이전 수동 단계 처리자.")
 	private String prevTaskIdentity;
 
-	@FieldDescribe("上一人工环节处理人列表.")
+	@FieldDescribe("이전 수동 단계 처리자 목록.")
 	private List<String> prevTaskIdentityList;
 
-	@FieldDescribe("标题.")
+	@FieldDescribe("제목.")
 	private String title;
 
-	@FieldDescribe("意见.")
+	@FieldDescribe("의견.")
 	private String opinion;
 
-	@FieldDescribe("上一人工环节待办对象列表.")
+	@FieldDescribe("이전 수동 단계 결재 대기 객체 목록.")
 	private List<PrevTask> prevTaskList;
 
-	@FieldDescribe("上一人工环节最近待办对象.")
+	@FieldDescribe("이전 수동 단계 최근 결재 대기 객체.")
 	private PrevTask prevTask;
 
-	@FieldDescribe("待办计时暂停工作时间时长(分钟).")
+	@FieldDescribe("결재 대기 시간 측정 일시 중지 근무 시간 길이(분).")
 	private Date pauseStartTime;
 
-	@FieldDescribe("待办计时暂停工作时间时长(分钟).")
+	@FieldDescribe("결재 대기 시간 측정 일시 중지 근무 시간 길이(분).")
 	private Integer pauseWorkTimeMinutes;
 
-	@FieldDescribe("待办计时暂停自然时间时长(分钟).")
+	@FieldDescribe("결재 대기 시간 측정 일시 중지 자연 시간 길이(분).")
 	private Integer pauseMinutes;
 
-	@FieldDescribe("待办是否禁用routeName,退回待办如果设置way=jump将直接跳转,则无需routeName.")
+	@FieldDescribe("결재 대기의 routeName 비활성 여부, 반려 결재 대기에서 way=jump로 설정하면 바로 이동하므로 routeName 불필요.")
 	private Boolean routeNameDisable;
 
-	@FieldDescribe("Ticket创建方式,create,reset,add.")
+	@FieldDescribe("Ticket 생성 방식, create, reset, add.")
 	private String act;
 
-	@FieldDescribe("操作人员,在加签中记录执行加签的人")
+	@FieldDescribe("작업자, 추가 결재에서 추가 결재를 실행한 사람 기록")
 	private String actPerson;
 
 	public String getActPerson() {

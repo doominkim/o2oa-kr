@@ -14,7 +14,7 @@ import com.x.cms.core.entity.Document;
 import com.x.query.core.entity.Item;
 
 /**
- * Document被访问时，需要将总的访问量更新到item的document中，便于视图使用，在队列里异步修改
+ * Document 조회 시 총 조회수를 item의 document에 반영해야 함(뷰에서 사용), 큐에서 비동기로 수정
  */
 public class QueueDocumentViewCountUpdate extends AbstractQueue<Document> {
 	
@@ -33,7 +33,7 @@ public class QueueDocumentViewCountUpdate extends AbstractQueue<Document> {
 			}
 			jsonElement = gson.toJsonTree( document );
 			
-			/** 更新DataItem数据. */
+			/** DataItem 데이터 갱신. */
 			updateData( new Business(emc), document, jsonElement, "$document" );
 		}
 	}
@@ -59,7 +59,7 @@ public class QueueDocumentViewCountUpdate extends AbstractQueue<Document> {
 	}
 	
 	void fill(Item o, Document document) {
-		/** 将DateItem与Document放在同一个分区 */
+		/** DateItem과 Document를 같은 파티션에 배치 */
 		o.setDistributeFactor(document.getDistributeFactor());
 		o.setBundle(document.getId());
 		o.setItemCategory(ItemCategory.cms);

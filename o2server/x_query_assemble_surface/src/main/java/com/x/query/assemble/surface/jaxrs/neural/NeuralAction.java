@@ -24,19 +24,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("neural")
-@JaxrsDescribe("神经网络多层感知机")
+@JaxrsDescribe("신경망 다층 퍼셉트론")
 public class NeuralAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(NeuralAction.class);
 
-	@JaxrsMethodDescribe(value = "神经网络计算.", action = ActionListCalculate.class)
+	@JaxrsMethodDescribe(value = "신경망 계산.", action = ActionListCalculate.class)
 	@GET
 	@Path("list/calculate/model/{modelFlag}/work/{workId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listCalculate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("项目标识") @PathParam("modelFlag") String modelFlag,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId) {
+			@JaxrsParameterDescribe("프로젝트 식별자") @PathParam("modelFlag") String modelFlag,
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId) {
 		ActionResult<List<ActionListCalculate.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

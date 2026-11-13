@@ -27,7 +27,7 @@ public class FileInfoFactory extends AbstractFactory {
 	 * @return FileInfo
 	 * @throws Exception
 	 */
-	//@MethodDescribe("获取指定Id的FileInfo文件附件信息对象")
+	//@MethodDescribe("지정한 Id의 FileInfo 첨부파일 정보 객체 조회")
 	public FileInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, FileInfo.class, ExceptionWhen.none );
 	}
@@ -36,7 +36,7 @@ public class FileInfoFactory extends AbstractFactory {
 	 * @return List：String
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示全部的FileInfo文件附件信息ID列表")
+	//@MethodDescribe("전체 FileInfo 첨부파일 정보 ID 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( FileInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -48,11 +48,11 @@ public class FileInfoFactory extends AbstractFactory {
 
 	/**
 	 *
-	 * @param ids 需要查询的ID列表
+	 * @param ids 조회할 ID 목록
 	 * @return List：FileInfo
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定Id的FileInfo文件附件信息ID列表")
+	//@MethodDescribe("지정한 Id의 FileInfo 첨부파일 정보 ID 목록 조회")
 //	public List<FileInfo> list(List<String> ids) throws Exception {
 //		EntityManager em = this.entityManagerContainer().get( FileInfo.class );
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -63,15 +63,15 @@ public class FileInfoFactory extends AbstractFactory {
 //	}
 
 	/**
-	 * 列示指定文档的所有附件以及文件信息ID列表
-	 * @param doucmentId 指定的文档ID
+	 * 지정한 문서의 모든 첨부파일 및 파일 정보 ID 목록 조회
+	 * @param doucmentId 지정한 문서 ID
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定文档的所有附件以及文件信息ID列表")
+	//@MethodDescribe("지정한 문서의 모든 첨부파일 및 파일 정보 ID 목록 조회")
 	public List<String> listAllByDocument( String doucmentId ) throws Exception {
 		if( StringUtils.isEmpty(doucmentId) ){
-			throw new Exception("内容管理listByDocument方法不接受document为空的查询操作！");
+			throw new Exception("게시판 listByDocument 메서드는 document가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( FileInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -83,15 +83,15 @@ public class FileInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 列示指定文档的所有附件信息ID列表
-	 * @param doucmentId 指定的文档ID
+	 * 지정한 문서의 모든 첨부파일 정보 ID 목록 조회
+	 * @param doucmentId 지정한 문서 ID
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定文档的所有附件信息ID列表")
+	//@MethodDescribe("지정한 문서의 모든 첨부파일 정보 ID 목록 조회")
 	public List<String> listAttachmentByDocument( String doucmentId ) throws Exception {
 		if( StringUtils.isEmpty(doucmentId) ){
-			throw new Exception("内容管理listByDocument方法不接受document为空的查询操作！");
+			throw new Exception("게시판 listByDocument 메서드는 document가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( FileInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -104,15 +104,15 @@ public class FileInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 列示指定文档的所有云文件图片信息ID列表
-	 * @param documentId 指定的文档ID
+	 * 지정한 문서의 모든 클라우드 파일 이미지 정보 ID 목록 조회
+	 * @param documentId 지정한 문서 ID
 	 * @return
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定文档的所有云文件图片信息ID列表")
+	//@MethodDescribe("지정한 문서의 모든 클라우드 파일 이미지 정보 ID 목록 조회")
 	public List<String> listCloudPictureByDocument(String documentId) throws Exception {
 		if( StringUtils.isEmpty(documentId) ){
-			throw new Exception("内容管理listByDocument方法不接受document为空的查询操作！");
+			throw new Exception("게시판 listByDocument 메서드는 document가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( FileInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();

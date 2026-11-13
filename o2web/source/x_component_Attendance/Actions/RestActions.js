@@ -299,17 +299,17 @@ MWF.xApplication.Attendance.Actions.RestActions = new Class({
         this.action.invoke({"name": "listStaticMonthPersonByUnitNested", "parameter": {"name":unit, "year": year,"month":month },"success": success,"failure": failure});
     },
 
-    //根据公司查询公司下所有部门的统计数据信息：
+    //회사 기준으로 회사 하위 전체 부서의 통계 데이터 정보 조회:
     //"listUnitDateStaticByTopUnit" : {"uri":"/jaxrs/statisticshow/unit/day/topUnit/{name}/{date}"},
     listUnitDateStaticByTopUnit: function(topUnit, date, success, failure){
         this.action.invoke({"name": "listUnitDateStaticByTopUnit", "parameter": {"name":topUnit,"date": date },"success": success,"failure": failure});
     },
-    //根据公司查询公司下所有部门的统计数据信息：
+    //회사 기준으로 회사 하위 전체 부서의 통계 데이터 정보 조회:
     //"listUnitMonthStaticByTopUnit" : {"uri":"/jaxrs/statisticshow/unit/topUnit/{name}/{year}/{month}"},
     listUnitMonthStaticByTopUnit: function(topUnit, year, month, success, failure, async ){
         this.action.invoke({"name": "listUnitMonthStaticByTopUnit", "parameter": {"name":topUnit,"year": year,"month":month  },"success": success,"failure": failure,"async": async });
     },
-    //根据部门查询部门下所有员工的统计数据信息：
+    //부서 기준으로 부서 하위 전체 직원의 통계 데이터 정보 조회:
     //"listPersonMonthStaticByUnit" : {"uri":"/jaxrs/statisticshow/persons/unit/subnested/{name}/{year}/{month}"},
     listPersonMonthStaticByUnit: function(unit, year, month, success, failure, async ){
         this.action.invoke({"name": "listPersonMonthStaticByUnit", "parameter": {"name":unit,"year": year,"month":month  },"success": success,"failure": failure,"async": async });

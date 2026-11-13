@@ -58,7 +58,7 @@ public class ActionSubjectUnAcceptReply extends BaseAction {
 				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectOperation( e, "用户在取消确认主题回帖信息时发生异常！" );
+				Exception exception = new ExceptionSubjectOperation( e, "주제 댓글 채택을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

@@ -467,7 +467,7 @@ MWFCalendarMonthView.Calendar = new Class({
             }
         }
     },
-    getUserfulYIndex : function( weekIndex, dayNumbersOfWeek ){ //获取指定周的y轴上的占用情况
+    getUserfulYIndex : function( weekIndex, dayNumbersOfWeek ){ //지정한 주의 y축 점유 상황 조회
         var yIndex = 0;
         var flag = true;
         var weekUsed = this.usedYIndex[weekIndex];

@@ -12,26 +12,26 @@ public class AttendanceV2LeavePolicyGrantAmountTypeTenureLeaveRule extends JsonP
 
     public AttendanceV2LeavePolicyGrantAmountTypeTenureLeaveRule(Double minYears, Double maxYears, Double amount) {
         if (minYears == null && maxYears == null) {
-            throw new IllegalArgumentException("minYears 和 maxYears 不能同时为 null");
+            throw new IllegalArgumentException("minYears와 maxYears를 동시에 null로 둘 수 없습니다");
         }
         if (minYears != null && maxYears != null && minYears >= maxYears) {
-            throw new IllegalArgumentException("minYears 必须小于 maxYears");
+            throw new IllegalArgumentException("minYears는 maxYears보다 작아야 합니다");
         }
         if (amount == null || amount < 0) {
-            throw new IllegalArgumentException("amount 必须为非负数");
+            throw new IllegalArgumentException("amount는 음수가 아니어야 합니다");
         }
         this.minYears = minYears;
         this.maxYears = maxYears;
         this.amount = amount;
     }
 
-    @FieldDescribe("最小司龄（包含）, null 表示无下限")
+    @FieldDescribe("최소 근속 연수(포함), null은 하한 없음")
     private Double minYears;
 
-    @FieldDescribe("最大司龄（不包含），null 表示无上限")
+    @FieldDescribe("최대 근속 연수(미포함), null은 상한 없음")
     private Double maxYears;
 
-    @FieldDescribe("发放额度")
+    @FieldDescribe("지급 한도")
     private Double amount;
 
     public boolean match(double years) {

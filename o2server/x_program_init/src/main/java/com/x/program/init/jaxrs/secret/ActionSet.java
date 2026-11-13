@@ -38,7 +38,7 @@ class ActionSet extends BaseAction {
 
 		private static final long serialVersionUID = -5726130517002102825L;
 
-		@FieldDescribe("口令.")
+		@FieldDescribe("비밀번호.")
 		private String secret;
 
 		public String getSecret() {

@@ -45,7 +45,7 @@ public class ActionSubjectSave extends BaseAction {
 		Wi wrapIn = this.convertToWrapIn(jsonElement, Wi.class);
 		SubjectPropertyValidator.baseValidate(request, wrapIn);
 
-		// 查询版块信息是否存在
+		// 게시판 정보 존재 여부 조회
 		BBSSectionInfo sectionInfo = sectionInfoServiceAdv.get(wrapIn.getSectionId());
 		if(sectionInfo == null){
 			throw new ExceptionEntityNotExist(wrapIn.getSectionId(), BBSSectionInfo.class);
@@ -64,7 +64,7 @@ public class ActionSubjectSave extends BaseAction {
 		}
 
 		if (TYPE_CATEGORY.equals(wrapIn.getTypeCategory())) {
-			// 如果是投票贴，判断投票选项是否存在
+			// 투표 글이면 투표 선택지 존재 여부 판단
 			if (ListTools.isEmpty(wrapIn.getOptionGroups())) {
 				throw  new ExceptionVoteOptionEmpty();
 			}

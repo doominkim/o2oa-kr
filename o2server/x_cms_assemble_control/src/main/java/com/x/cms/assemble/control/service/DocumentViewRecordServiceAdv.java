@@ -20,8 +20,8 @@ import com.x.cms.core.express.tools.DateOperation;
 
 
 /**
- * 对文档访问记录信息进行管理的服务类（高级）
- * 高级服务器可以利用Service完成事务控制
+ * 문서 접근 기록 정보 관리 서비스 클래스(고급)
+ * 고급 서비스는 Service로 트랜잭션 제어 가능
  *
  * @author O2LEE
  */
@@ -79,7 +79,7 @@ public class DocumentViewRecordServiceAdv {
 	}
 
 	/**
-	 * TODO:记录访问日志，一个用户一篇文档只保留一条记录，更新访问次数和最后访问时间
+	 * TODO: 접근 로그 기록, 사용자당 문서 하나에 한 건만 보존하고 접근 횟수와 마지막 접근 시간 갱신
 	 *
 	 * @param docId
 	 * @param personName
@@ -115,7 +115,7 @@ public class DocumentViewRecordServiceAdv {
 						documentViewRecord.setViewCount( documentViewRecord.getViewCount() + 1 );
 						emc.check( documentViewRecord, CheckPersistType.all );
 					}else{
-						//删除多余的日志数据
+						//불필요한 로그 데이터 삭제
 						emc.remove( documentViewRecord, CheckRemoveType.all );
 					}
 				}
@@ -180,7 +180,7 @@ public class DocumentViewRecordServiceAdv {
 						documentViewRecord.setViewCount( documentViewRecord.getViewCount() + 1 );
 						emc.check( documentViewRecord, CheckPersistType.all );
 					}else{
-						//删除多余的日志数据
+						//불필요한 로그 데이터 삭제
 						emc.remove( documentViewRecord, CheckRemoveType.all );
 					}
 				}
@@ -253,19 +253,19 @@ public class DocumentViewRecordServiceAdv {
 	}
 
 	/**
-	 * 对文档访问日志信息进行清理
-	 * @param stay_yeanumr_viewRecord 日志保留年份
-	 * @param stay_count_viewRecord 日志保留条目数
+	 * 문서 접근 로그 정보 정리
+	 * @param stay_yeanumr_viewRecord 로그 보존 연수
+	 * @param stay_count_viewRecord 로그 보존 항목 수
 	 * @throws Exception
 	 */
 	public void clean( Integer stay_yeanumr_viewRecord, Integer stay_count_viewRecord ) throws Exception {
-		//先按时间清理
+		//먼저 시간 기준으로 정리
 		cleanWithStayYearNumber( stay_yeanumr_viewRecord );
 		cleanWithMaxCount( stay_count_viewRecord );
 	}
 
 	/**
-	 * 按最大保留条目数进行清理
+	 * 최대 보존 항목 수 기준으로 정리
 	 * @param stay_count_viewRecord
 	 * @throws Exception
 	 */
@@ -279,14 +279,14 @@ public class DocumentViewRecordServiceAdv {
 			business = new Business( emc );
 			total = business.getLogFactory().getTotal();
 			if( total > stay_count_viewRecord ) {
-				//将记录条目数减到stay_count_operationLog的60%
+				//기록 항목 수를 stay_count_operationLog의 60%로 축소
 				ids = business.getLogFactory().getRecordIdsWithCount( Integer.parseInt(( stay_count_viewRecord * 0.6 )+""));
 			}
 			if( ids != null && !ids.isEmpty() ) {
-				//取最后一个，以确定最早可以保留下来的创建时间
+				//마지막 항목을 가져와 보존 가능한 가장 이른 생성 시간 결정
 				last_id = ids.get( (ids.size() -1) );
 				log = emc.find( last_id, Log.class );
-				//根据时间进行清理，说明这个时间以前的数据都不能保留了
+				//시간 기준으로 정리, 이 시간 이전 데이터는 보존 불가
 				cleanWithDate( log.getCreateTime() );
 			}
 		} catch ( Exception e ) {
@@ -295,7 +295,7 @@ public class DocumentViewRecordServiceAdv {
 	}
 
 	/**
-	 * 按保留年份对日志进行清理
+	 * 보존 연수 기준으로 로그 정리
 	 * @param stay_yeanumr_viewRecord
 	 * @throws Exception
 	 */
@@ -303,7 +303,7 @@ public class DocumentViewRecordServiceAdv {
 		if( stay_yeanumr_viewRecord == null ) {
 			throw new Exception("stay_yeanumr_viewRecord is null!");
 		}
-		//1、计算三年期限的时间点，三年前的1月1日, 最好再加一年
+		//1. 3년 기한 시점 계산, 3년 전 1월 1일, 1년을 더 더하는 것이 좋음
 		Integer year = DateOperation.getYearNumber( new Date() );
 		Date limitDate = DateOperation.getDateFromString( ( year-4 ) + "-01-01 00:00:00");
 		cleanWithDate( limitDate );
@@ -311,7 +311,7 @@ public class DocumentViewRecordServiceAdv {
 
 
 	/**
-	 * 按保留年份对日志进行清理
+	 * 보존 연수 기준으로 로그 정리
 	 * @param overTime
 	 * @throws Exception
 	 */
@@ -341,7 +341,7 @@ public class DocumentViewRecordServiceAdv {
 	}
 
 	/**
-	 * 根据指定ID列表查询已读文档ID列表
+	 * 지정한 ID 목록으로 읽은 문서 ID 목록 조회
 	 * @param ids
 	 * @param effectivePerson
 	 * @return

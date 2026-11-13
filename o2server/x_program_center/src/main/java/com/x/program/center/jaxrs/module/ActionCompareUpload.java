@@ -94,22 +94,22 @@ class ActionCompareUpload extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("标识")
+		@FieldDescribe("식별자")
 		private String flag;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		List<JsonElement> processPlatformList = new ArrayList<>();
 
-		@FieldDescribe("门户")
+		@FieldDescribe("포털")
 		List<JsonElement> portalList = new ArrayList<>();
 
-		@FieldDescribe("内容管理")
+		@FieldDescribe("콘텐츠 관리")
 		List<JsonElement> cmsList = new ArrayList<>();
 
-		@FieldDescribe("统计")
+		@FieldDescribe("통계")
 		List<JsonElement> queryList = new ArrayList<>();
 
-		@FieldDescribe("服务")
+		@FieldDescribe("서비스")
 		List<JsonElement> serviceModuleList = new ArrayList<>();
 
 		public List<JsonElement> getProcessPlatformList() {

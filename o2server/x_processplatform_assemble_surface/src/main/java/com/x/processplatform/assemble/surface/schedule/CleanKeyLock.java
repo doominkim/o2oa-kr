@@ -39,7 +39,7 @@ public class CleanKeyLock extends AbstractJob {
 					}
 				}
 			} while (!targets.isEmpty());
-			logger.debug("定时清理值锁定:{}条.", count);
+			logger.debug("값 잠금 정기 정리: {}건.", count);
 		} catch (Exception e) {
 			throw new JobExecutionException(e);
 		}

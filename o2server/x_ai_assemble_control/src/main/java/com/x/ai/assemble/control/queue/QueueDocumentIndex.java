@@ -31,7 +31,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Document变更标题时也需要更新一下热点图片里的数据
+ * Document 제목 변경 시 인기 이미지의 데이터도 함께 업데이트해야 함
  *
  */
 public class QueueDocumentIndex extends AbstractQueue<String> {

@@ -31,12 +31,12 @@ import com.x.bbs.assemble.control.jaxrs.sectioninfo.exception.ExceptionForumIdEm
 import com.x.bbs.assemble.control.jaxrs.sectioninfo.exception.ExceptionSectionIdEmpty;
 
 @Path("user/section")
-@JaxrsDescribe("版块管理服务")
+@JaxrsDescribe("게시판 관리 서비스")
 public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(SectionInfoManagerUserAction.class);
 
-	@JaxrsMethodDescribe(value = "获取所有版块的信息列表.", action = ActionAllSections.class)
+	@JaxrsMethodDescribe(value = "전체 게시판 정보 목록 조회.", action = ActionAllSections.class)
 	@GET
 	@Path("all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -50,7 +50,7 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionAllSections().execute(request, effectivePerson);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "获取所有版块的信息列表时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "전체 섹션 정보 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -58,13 +58,13 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据论坛ID获取所有主版块的信息列表(管理).", action = ActionListWithForum.class)
+	@JaxrsMethodDescribe(value = "포럼 ID로 전체 상위 게시판 정보 목록 조회(관리).", action = ActionListWithForum.class)
 	@GET
 	@Path("forum/{forumId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithForum(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("论坛信息ID") @PathParam("forumId") String forumId) {
+			@JaxrsParameterDescribe("포럼 정보 ID") @PathParam("forumId") String forumId) {
 		ActionResult<List<ActionListWithForum.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -80,7 +80,7 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionListWithForum().execute(request, effectivePerson, forumId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据论坛ID获取所有主版块的信息列表(管理)时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "포럼 ID로 전체 상위 섹션 목록(관리)을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -88,14 +88,14 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据主版块ID查询所有的子版块信息列表(管理).", action = ActionAllListSubSectionByMainSectionId.class)
+	@JaxrsMethodDescribe(value = "상위 게시판 ID로 전체 하위 게시판 정보 목록 조회(관리).", action = ActionAllListSubSectionByMainSectionId.class)
 	@GET
 	@Path("sub/{sectionId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listAllSubSectionByMainSectionId(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主版块信息ID") @PathParam("sectionId") String sectionId) {
+			@JaxrsParameterDescribe("상위 게시판 정보 ID") @PathParam("sectionId") String sectionId) {
 		ActionResult<List<ActionAllListSubSectionByMainSectionId.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -111,7 +111,7 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionAllListSubSectionByMainSectionId().execute(request, effectivePerson, sectionId);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "根据主版块ID查询所有的子版块信息列表(管理)时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "상위 섹션 ID로 하위 섹션 목록(관리)을 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -119,7 +119,7 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建新的版块信息或者更新版块信息.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "새 게시판 정보 생성 또는 게시판 정보 수정.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -134,7 +134,7 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "创建新的版块信息或者更新版块信息时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "섹션 정보를 새로 만들거나 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -142,40 +142,40 @@ public class SectionInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除指定的版块信息，如果版块里有贴子，则不允许删除.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 게시판 정보 삭제, 게시판에 게시글이 있으면 삭제 불가.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("版块信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("게시판 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
 			result = new ActionDelete().execute(request, effectivePerson, id);
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionRoleInfoProcess(e, "根据ID删除指定的版块信息时发生异常！");
+			Exception exception = new ExceptionRoleInfoProcess(e, "ID로 섹션 정보를 삭제하는 중 오류가 발생했습니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除指定的版块信息，如果版块里有贴子，则全部删除.", action = ActionDeleteForce.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 게시판 정보 삭제, 게시판에 게시글이 있으면 모두 삭제.", action = ActionDeleteForce.class)
 	@DELETE
 	@Path("force/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteForce(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("版块信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("게시판 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDeleteForce.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
 			result = new ActionDeleteForce().execute(request, effectivePerson, id);
 		} catch (Exception e) {
 			result = new ActionResult<>();
-			Exception exception = new ExceptionRoleInfoProcess(e, "根据ID删除指定的版块信息时发生异常！");
+			Exception exception = new ExceptionRoleInfoProcess(e, "ID로 섹션 정보를 삭제하는 중 오류가 발생했습니다!");
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}

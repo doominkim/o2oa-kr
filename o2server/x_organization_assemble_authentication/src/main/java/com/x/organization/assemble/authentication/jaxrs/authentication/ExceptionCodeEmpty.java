@@ -6,7 +6,7 @@ class ExceptionCodeEmpty extends LanguagePromptException {
 
 	private static final long serialVersionUID = 1859164370743532895L;
 
-	public static String defaultMessage = "短信验证码不可为空.";
+	public static String defaultMessage = "SMS 인증 코드는 비워 둘 수 없습니다.";
 
 	ExceptionCodeEmpty() {
 		super(defaultMessage);

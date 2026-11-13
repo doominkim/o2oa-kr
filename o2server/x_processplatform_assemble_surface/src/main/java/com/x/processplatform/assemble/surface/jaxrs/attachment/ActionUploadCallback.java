@@ -28,13 +28,13 @@ class ActionUploadCallback extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo<WoObject>> result = new ActionResult<>();
 			Business business = new Business(emc);
-			/* 后面要重新保存 */
+			/* 뒤에서 다시 저장해야 함 */
 			Work work = emc.find(workId, Work.class);
-			/** 判断work是否存在 */
+			/** work 존재 여부 판단 */
 			if (null == work) {
 				throw new ExceptionWorkNotExistCallback(callback, workId);
 			}
-			/** 统计待办数量判断用户是否可以上传附件 */
+			/** 결재 대기 수를 집계해 사용자의 첨부파일 업로드 가능 여부 판단 */
 			Control control = new WorkControlBuilder(effectivePerson, business, work).enableAllowProcessing().build();
 			if (BooleanUtils.isNotTrue(control.getAllowProcessing())) {
 				throw new ExceptionWorkAccessDeniedCallback(callback, effectivePerson.getDistinguishedName(),
@@ -43,9 +43,9 @@ class ActionUploadCallback extends BaseAction {
 			if (StringUtils.isEmpty(fileName)) {
 				fileName = this.fileName(disposition);
 			}
-			/* 调整可能的附件名称 */
+			/* 가능한 첨부파일 이름 조정 */
 			fileName = this.adjustFileName(business, work.getJob(), fileName);
-			/** 禁止不带扩展名的文件上传 */
+			/** 확장자 없는 파일 업로드 금지 */
 			// if (StringUtils.isEmpty(fileName)) {
 			// throw new ExceptionEmptyExtension(fileName);
 			// }
@@ -74,7 +74,7 @@ class ActionUploadCallback extends BaseAction {
 		attachment.setPerson(effectivePerson.getDistinguishedName());
 		attachment.setLastUpdatePerson(effectivePerson.getDistinguishedName());
 		attachment.setSite(site);
-		/** 用于判断目录的值 */
+		/** 디렉터리 값 판단용 */
 		attachment.setWorkCreateTime(work.getCreateTime());
 		attachment.setApplication(work.getApplication());
 		attachment.setProcess(work.getProcess());

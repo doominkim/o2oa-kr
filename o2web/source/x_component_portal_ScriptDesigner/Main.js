@@ -288,8 +288,8 @@ MWF.xApplication.portal.ScriptDesigner.Main = new Class({
                     var isLetterA = /^[a-zA-Z0-9]/.test(av);
                     var isLetterB = /^[a-zA-Z0-9]/.test(bv);
 
-                    if (isLetterA && !isLetterB) return isDesc ? 1 : -1; // a是字母，b不是，a排在前面
-                    if (!isLetterA && isLetterB) return isDesc ? -1 : 1;  // a不是字母，b是，b排在前面
+                    if (isLetterA && !isLetterB) return isDesc ? 1 : -1; // a는 문자이고 b는 아니면 a를 앞에 배치
+                    if (!isLetterA && isLetterB) return isDesc ? -1 : 1;  // a는 문자가 아니고 b는 문자이면 b를 앞에 배치
 
                     return isDesc ?  bv.localeCompare(av) : av.localeCompare(bv);
                 }

@@ -43,7 +43,7 @@ public class ActionCipherDeleteCMS extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 		
-		@FieldDescribe("记录id")
+		@FieldDescribe("레코드 id")
 		private String value;
 
 		public String getValue() {

@@ -31,12 +31,12 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的StatisticUnitForMonth信息对象")
+	//@MethodDescribe("지정 Id의 StatisticUnitForMonth 정보 객체 조회")
 	public StatisticUnitForMonth get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, StatisticUnitForMonth.class, ExceptionWhen.none);
 	}
 	
-	//@MethodDescribe("列示全部的StatisticUnitForMonth信息列表")
+	//@MethodDescribe("전체 StatisticUnitForMonth 정보 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(StatisticUnitForMonth.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -46,7 +46,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的StatisticUnitForMonth信息列表")
+	//@MethodDescribe("지정 Id의 StatisticUnitForMonth 정보 목록 조회")
 	public List<StatisticUnitForMonth> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<StatisticUnitForMonth>();
@@ -111,7 +111,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询下一页的信息数据
+	 * 다음 페이지 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -121,13 +121,13 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<StatisticUnitForMonth> listIdsNextWithFilter( String id, Integer count, Object sequence, WrapInFilterStatisticUnitForMonth wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( StatisticUnitForMonth.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<StatisticUnitForMonth> cq = cb.createQuery(StatisticUnitForMonth.class);
 		Root<StatisticUnitForMonth> root = cq.from(StatisticUnitForMonth.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -163,7 +163,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}	
 	
 	/**
-	 * 查询上一页的文档信息数据
+	 * 이전 페이지 문서 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -173,13 +173,13 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<StatisticUnitForMonth> listIdsPrevWithFilter( String id, Integer count, Object sequence, WrapInFilterStatisticUnitForMonth wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( StatisticUnitForMonth.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<StatisticUnitForMonth> cq = cb.createQuery(StatisticUnitForMonth.class);
 		Root<StatisticUnitForMonth> root = cq.from(StatisticUnitForMonth.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -215,13 +215,13 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询符合的文档信息总数
+	 * 조건에 맞는 문서 정보 총수 조회
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
 	public long getCountWithFilter( WrapInFilterStatisticUnitForMonth wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( StatisticUnitForMonth.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -244,7 +244,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员迟到次数总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 지각 횟수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -258,7 +258,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.lateCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -274,7 +274,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员异常打卡次数总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 비정상 체크 횟수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -288,7 +288,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.abNormalDutyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -304,7 +304,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员工时不足人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 근무시간 부족 건수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -318,7 +318,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.lackOfTimeCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -334,7 +334,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员早退人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 조퇴 건수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -348,7 +348,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.leaveEarlyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -364,7 +364,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员签退人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 퇴근 체크 건수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -378,7 +378,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.offDutyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -394,7 +394,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员签到人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 출근 체크 건수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -408,7 +408,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.onDutyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -424,7 +424,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员出勤人天总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 출근 인일 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -438,7 +438,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.onDutyEmployeeCount ) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -455,7 +455,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员请假人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 휴가 건수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -469,7 +469,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.onSelfHolidayCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -486,7 +486,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据组织名称，统计年月，统计顶层组织所有人员缺勤人次总和
+	 * 조직 이름, 통계 연월로 최상위 조직 모든 사용자 결근 건수 합계 통계
 	 * @param unitName
 	 * @return
 	 * @throws Exception
@@ -500,7 +500,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.absenceDayCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );		
 		if( sYear == null || sYear.isEmpty() ){
@@ -518,7 +518,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员数量
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 수 통계
 	 * @return
 	 * @throws Exception
 	 */
@@ -531,7 +531,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.lateCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.unitName).in( unitName );
 		if( sYear == null || sYear.isEmpty() ){
@@ -548,7 +548,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员出勤人天数总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 출근 인일수 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -564,7 +564,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.onDutyEmployeeCount ) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){
@@ -581,7 +581,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员异常打卡次数总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 이상 출퇴근 기록 횟수 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -597,7 +597,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.abNormalDutyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){
@@ -613,7 +613,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员工时不足次数总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 근무시간 부족 횟수 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -629,7 +629,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.lackOfTimeCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){
@@ -645,7 +645,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员早退人次总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 조퇴 인원 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -661,7 +661,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.leaveEarlyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){
@@ -677,7 +677,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员签退人次总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 퇴근 체크 인원 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -693,7 +693,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.offDutyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){
@@ -709,7 +709,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员签到人次总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 출근 체크 인원 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -725,7 +725,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.onDutyCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){
@@ -741,7 +741,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员请假人次总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 휴가 인원 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -757,7 +757,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.onSelfHolidayCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){
@@ -773,7 +773,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	/**
-	 * 根据顶层组织名称，统计年月，统计顶层组织所有人员缺勤人天总和
+	 * 최상위 조직명, 통계 연월로 최상위 조직 전체 사용자 결근 인일 합계 통계
 	 * @param topUnitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -789,7 +789,7 @@ public class StatisticUnitForMonthFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		Root<StatisticUnitForMonth> root = cq.from( StatisticUnitForMonth.class);		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(StatisticUnitForMonth_.absenceDayCount) ) );		
 		Predicate p = root.get(StatisticUnitForMonth_.topUnitName).in( topUnitNames );
 		if( cycleYear == null || cycleYear.isEmpty() ){

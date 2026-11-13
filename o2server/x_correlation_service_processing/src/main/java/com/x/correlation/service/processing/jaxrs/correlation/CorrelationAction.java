@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("correlation")
-@JaxrsDescribe("关联内容.")
+@JaxrsDescribe("관련 콘텐츠.")
 public class CorrelationAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CorrelationAction.class);
 
-	@JaxrsMethodDescribe(value = "指定流程平台工作或已完成工作创建关联内容.", action = ActionCreateTypeProcessPlatform.class)
+	@JaxrsMethodDescribe(value = "지정한 프로세스 플랫폼 업무 문서 또는 완료된 업무 문서에 연관 콘텐츠 생성.", action = ActionCreateTypeProcessPlatform.class)
 	@POST
 	@Path("type/processplatform/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createTypeProcessPlatform(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("流程平台任务标识") @PathParam("job") String job,
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("프로세스 플랫폼 작업 식별자") @PathParam("job") String job,
 			JsonElement jsonElement) {
 		ActionResult<ActionCreateTypeProcessPlatform.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -51,13 +51,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "指定内容管理文档创建关联内容.", action = ActionCreateTypeCms.class)
+	@JaxrsMethodDescribe(value = "지정한 콘텐츠 관리 문서에 연관 콘텐츠 생성.", action = ActionCreateTypeCms.class)
 	@POST
 	@Path("type/cms/document/{document}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createTypeCms(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("内容管理文档标识") @PathParam("document") String document, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("콘텐츠 관리 문서 식별자") @PathParam("document") String document, JsonElement jsonElement) {
 		ActionResult<ActionCreateTypeCms.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,13 +69,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "替换指定流程工作的关联内容.", action = ActionUpdateTypeProcessPlatform.class)
+	@JaxrsMethodDescribe(value = "지정한 프로세스 업무 문서의 연관 콘텐츠 교체.", action = ActionUpdateTypeProcessPlatform.class)
 	@POST
 	@Path("update/type/processplatform/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateTypeProcessPlatform(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("流程平台任务标识") @PathParam("job") String job,
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("프로세스 플랫폼 작업 식별자") @PathParam("job") String job,
 			JsonElement jsonElement) {
 		ActionResult<ActionUpdateTypeProcessPlatform.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -88,13 +88,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "替换指定内容管理文档的关联内容.", action = ActionUpdateTypeCms.class)
+	@JaxrsMethodDescribe(value = "지정한 콘텐츠 관리 문서의 연관 콘텐츠 교체.", action = ActionUpdateTypeCms.class)
 	@POST
 	@Path("update/type/cms/document/{document}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateTypeCms(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("内容管理文档标识") @PathParam("document") String document, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("콘텐츠 관리 문서 식별자") @PathParam("document") String document, JsonElement jsonElement) {
 		ActionResult<ActionUpdateTypeCms.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,13 +106,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据id删除多个流程平台关联内容.", action = ActionDeleteTypeProcessPlatform.class)
+	@JaxrsMethodDescribe(value = "id로 여러 프로세스 플랫폼 연관 콘텐츠 삭제.", action = ActionDeleteTypeProcessPlatform.class)
 	@POST
 	@Path("delete/type/processplatform/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteTypeProcessPlatform(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("流程平台任务标识") @PathParam("job") String job,
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("프로세스 플랫폼 작업 식별자") @PathParam("job") String job,
 			JsonElement jsonElement) {
 		ActionResult<ActionDeleteTypeProcessPlatform.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -125,13 +125,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据id删除多个内容管理关联内容.", action = ActionDeleteTypeCms.class)
+	@JaxrsMethodDescribe(value = "id로 여러 콘텐츠 관리 연관 콘텐츠 삭제.", action = ActionDeleteTypeCms.class)
 	@POST
 	@Path("delete/type/cms/document/{document}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteTypeCms(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("流程平台任务标识") @PathParam("document") String document, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("프로세스 플랫폼 작업 식별자") @PathParam("document") String document, JsonElement jsonElement) {
 		ActionResult<ActionDeleteTypeCms.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,7 +143,7 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "判断流程平台指定job的任务是否通过被关联具有阅读权限.", action = ActionReadableTypeProcessPlatform.class)
+	@JaxrsMethodDescribe(value = "프로세스 플랫폼 지정 job의 작업이 연관을 통해 읽기 권한을 가지는지 판단.", action = ActionReadableTypeProcessPlatform.class)
 	@POST
 	@Path("readable/type/processplatform")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -161,7 +161,7 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "判断内容平台指定document的任务是否通过被关联具有阅读权限.", action = ActionReadableTypeCms.class)
+	@JaxrsMethodDescribe(value = "콘텐츠 플랫폼 지정 document의 작업이 연관을 통해 읽기 권한을 가지는지 판단.", action = ActionReadableTypeCms.class)
 	@POST
 	@Path("readable/type/cms")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -179,13 +179,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示流程平台指定job标识的关联内容.", action = ActionListTypeProcessPlatform.class)
+	@JaxrsMethodDescribe(value = "프로세스 플랫폼 지정 job 식별자의 연관 콘텐츠 목록.", action = ActionListTypeProcessPlatform.class)
 	@GET
 	@Path("list/type/processplatform/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listTypeProcessPlatform(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("任务标识") @PathParam("job") String job) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job) {
 		ActionResult<List<ActionListTypeProcessPlatform.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -197,14 +197,14 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示流程平台指定job标识指定关联内容框标识的关联内容.", action = ActionListTypeProcessPlatformWithSite.class)
+	@JaxrsMethodDescribe(value = "프로세스 플랫폼 지정 job 식별자, 지정 연관 콘텐츠 박스 식별자의 연관 콘텐츠 목록.", action = ActionListTypeProcessPlatformWithSite.class)
 	@GET
 	@Path("list/type/processplatform/job/{job}/site/{site}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listTypeProcessPlatformWithSite(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("任务标识") @PathParam("job") String job,
-			@JaxrsParameterDescribe("关联内容框标识") @PathParam("site") String site) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("작업 식별자") @PathParam("job") String job,
+			@JaxrsParameterDescribe("관련 콘텐츠 상자 식별자") @PathParam("site") String site) {
 		ActionResult<List<ActionListTypeProcessPlatformWithSite.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -216,13 +216,13 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示内容管理指定document标识的关联内容.", action = ActionListTypeCms.class)
+	@JaxrsMethodDescribe(value = "콘텐츠 관리 지정 document 식별자의 연관 콘텐츠 목록.", action = ActionListTypeCms.class)
 	@GET
 	@Path("list/type/cms/document/{document}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listTypeCms(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("内容管理文档标识") @PathParam("document") String document) {
+			@JaxrsParameterDescribe("콘텐츠 관리 문서 식별자") @PathParam("document") String document) {
 		ActionResult<List<ActionListTypeCms.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -234,14 +234,14 @@ public class CorrelationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示内容管理指定document标识指定关联内容框标识的关联内容.", action = ActionListTypeCmsWithSite.class)
+	@JaxrsMethodDescribe(value = "콘텐츠 관리 지정 document 식별자, 지정 연관 콘텐츠 박스 식별자의 연관 콘텐츠 목록.", action = ActionListTypeCmsWithSite.class)
 	@GET
 	@Path("list/type/cms/document/{document}/site/{site}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listTypeCmsWithSite(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("内容管理文档标识") @PathParam("document") String document,
-			@JaxrsParameterDescribe("关联内容框标识") @PathParam("site") String site) {
+			@JaxrsParameterDescribe("콘텐츠 관리 문서 식별자") @PathParam("document") String document,
+			@JaxrsParameterDescribe("관련 콘텐츠 상자 식별자") @PathParam("site") String site) {
 		ActionResult<List<ActionListTypeCmsWithSite.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

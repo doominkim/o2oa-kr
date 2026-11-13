@@ -413,7 +413,7 @@ o2.widget.ScriptEditor = new Class({
 			var multiCommentIndex = scriptCheckNode.nodeValue.indexOf("/*");
 
 			if (lineCommentIndex!=-1 && multiCommentIndex==-1){
-				//发现单行注释//符号，没有发现/*符号
+				//한 줄 주석 // 기호를 발견했고 /* 기호는 발견하지 못함
 				currentRange.setStart(scriptCheckNode, lineCommentIndex);
 				currentRange.setEnd(scriptCheckNode, scriptCheckNode.nodeValue.length);
 				this.createFormatFont(currentRange, color, "comment");
@@ -465,7 +465,7 @@ o2.widget.ScriptEditor = new Class({
 		var selection = this.editWindow.getSelection();
 		var textNode = selection.focusNode;
 		if (textNode.nodeType!=3){
-			//不需要
+			//불필요
 			textNode = null;
 		}else{
 			var pNode = textNode.parentElement;
@@ -475,8 +475,8 @@ o2.widget.ScriptEditor = new Class({
 						
 						
 						
-						//判断“//”符号，输入在//之前，插入点和输入内容移动到font之前， 并判断输入格式。
-						//输入后无“//”， 删除整个font。并完整检查原font中的格式
+						//“//” 기호 판단. 입력이 // 앞이면 삽입점과 입력 내용을 font 앞으로 이동하고 입력 형식 판단.
+						//입력 후 “//”가 없으면 font 전체를 삭제하고 원래 font의 형식을 전체 검사
 						var text = pNode.firstChild.nodeValue;
 						var idx = text.injdexOf("//");
 						if (idx!=-1){
@@ -502,22 +502,22 @@ o2.widget.ScriptEditor = new Class({
 						}
 						
 					case "comment_multi":
-						//先判断“/*”符号，输入在/*之前，插入点和输入内容移动到font之前， 并判断输入格式。
-						//输入后无“/*”， 删除整个font，以及相关联的font。
-						//输入后形成“*/”符号， 将font终点移到此处，并删除相关联的之后的font。
-						//对删除font部分进行完整的格式检查。
+						//먼저 “/*” 기호 판단. 입력이 /* 앞이면 삽입점과 입력 내용을 font 앞으로 이동하고 입력 형식 판단.
+						//입력 후 “/*”가 없으면 font 전체와 연관된 font를 삭제.
+						//입력 후 “*/” 기호가 생기면 font 끝점을 이곳으로 옮기고 이후의 연관된 font를 삭제.
+						//삭제된 font 부분의 형식을 전체 검사.
 						
 					case "string": 
-						//判断“"”或“'”符号，输入在 符号 之前，插入点和输入内容移动到font之前， 并判断输入格式。
-						//判断“"”或“'”符号，输入在 符号 之后，插入点和输入内容移动到font之后， 并判断输入格式。
-						//插入后无“"”或“'”符号，删除整个font， 对删除font部分进行完整的格式检查
+						//“"” 또는 “'” 기호 판단. 입력이 기호 앞이면 삽입점과 입력 내용을 font 앞으로 이동하고 입력 형식 판단.
+						//“"” 또는 “'” 기호 판단. 입력이 기호 뒤이면 삽입점과 입력 내용을 font 뒤로 이동하고 입력 형식 판단.
+						//삽입 후 “"” 또는 “'” 기호가 없으면 font 전체를 삭제하고 삭제된 font 부분의 형식을 전체 검사
 						
 						
 					case "number": 
-						//判断font中的内容是否还是数字，如果不是，删除font， 对删除font部分进行完整的格式检查
+						//font의 내용이 여전히 숫자인지 판단. 아니면 font를 삭제하고 삭제된 font 부분의 형식을 전체 검사
 						
 					case "keyword":
-						//判断font中的内容是否还是关键字，如果不是，删除font， 对删除font部分进行完整的格式检查
+						//font의 내용이 여전히 키워드인지 판단. 아니면 font를 삭제하고 삭제된 font 부분의 형식을 전체 검사
 						
 				}
 				

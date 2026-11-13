@@ -94,7 +94,7 @@ public class MappingExecuteQueue extends AbstractQueue<String> {
 			if (jsonElement.isJsonObject()) {
 				return XGsonBuilder.convert(jsonElement, Data.class);
 			} else {
-				/* 如果不是Object强制返回一个Map对象 */
+				/* Object가 아니면 Map 객체를 강제로 반환 */
 				return new Data();
 			}
 		}

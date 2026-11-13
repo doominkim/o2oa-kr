@@ -2,7 +2,7 @@ import {dom, exec} from "@o2oa/util";
 import {lp} from "@o2oa/component";
 import {EventName} from "./eventBus.js";
 
-// 防抖
+// 디바운스
 const debounce = (fn, delay = 300) => {
     let timer = null
     return (...args) => {
@@ -14,7 +14,7 @@ const debounce = (fn, delay = 300) => {
 }
 
 /**
- * 是否是正确的 url
+ * 올바른 url인지 여부
  * @param input
  * @returns {boolean}
  */
@@ -28,7 +28,7 @@ const isHttpUrl = (input) => {
 }
 
 /**
- * 是否包含 url
+ * url 포함 여부
  * @param text
  * @returns {boolean}
  */
@@ -37,7 +37,7 @@ const containsUrl = (text) => {
     return urlRegex.test(text);
 }
 /**
- * 超链接转化成 markdown 格式
+ * 하이퍼링크를 markdown 형식으로 변환
  * @param text
  * @returns {*}
  */
@@ -49,7 +49,7 @@ const convertUrlToMarkdown = (text) => {
 }
 
 /**
- * 判断当前消息是否需要处理点击事件
+ * 현재 메시지가 클릭 이벤트 처리가 필요한지 판단
  * @param msg
  * @returns {boolean}
  */
@@ -63,8 +63,8 @@ const needClickMsg = (msg) => {
 }
 
 /**
- * 是否为空
- * 数字0也是不为空
+ * 비어 있는지 여부
+ * 숫자 0도 비어 있지 않음
  * @param {*} data
  * @returns
  */
@@ -83,7 +83,7 @@ function isEmpty(data) {
 }
 
 /**
- * 是否整数 包含正负
+ * 정수 여부(양수·음수 포함)
  * @param {*} inputData
  * @returns
  */
@@ -92,30 +92,30 @@ function isInt(inputData) {
 }
 
 /**
- * 是否负整数 包含0
+ * 음의 정수 여부(0 포함)
  * @param {*} inputData
  * @returns
  */
 function isNegativeInt(inputData) {
-    const regNeg = /^\-[1-9][0-9]*$/; // 负整数
+    const regNeg = /^\-[1-9][0-9]*$/; // 음의 정수
     return regNeg.test(inputData);
 }
 
 /**
- * 是否正整数
+ * 양의 정수 여부
  * @param {*} inputData
  * @returns
  */
 function isPositiveInt(inputData) {
-    const regPos = /^\d+$/; // 正整数
+    const regPos = /^\d+$/; // 양의 정수
     return regPos.test(inputData);
 }
 
 /**
- * 换取多语言文字
- * @param {*} lp 语言包
- * @param {*} key 文字的key值，多层用.隔开，如 form.name
- * @param {*} options 变量替换对象，如{name: 'abc'}, 会把 form.name里面的 {name} 替换成 abc
+ * 다국어 텍스트 변환
+ * @param {*} lp 언어 팩
+ * @param {*} key 텍스트의 key 값, 여러 단계는 .으로 구분, 예: form.name
+ * @param {*} options 변수 치환 객체, 예: {name: 'abc'}, form.name 안의 {name}을 abc로 치환
  * @returns
  */
 function lpFormat(lp, key, options) {
@@ -131,11 +131,11 @@ function lpFormat(lp, key, options) {
 
 //
 /**
- * 给对象设置值，也可以是数组
- * 比如 key='a.b' v=1 就会给data对象的a属性下的b属性设置值为1 或者 key='0.b' v=1 会给data数组的第一个对象中的b属性设置值为1
- * @param {*} key 多层用.分割
- * @param {*} v  存储的值
- * @param {*} data 存储对象
+ * 객체에 값 설정, 배열도 가능
+ * 예: key='a.b' v=1이면 data 객체의 a 속성 아래 b 속성 값을 1로 설정, key='0.b' v=1이면 data 배열 첫 번째 객체의 b 속성 값을 1로 설정
+ * @param {*} key 여러 단계는 .으로 구분
+ * @param {*} v  저장할 값
+ * @param {*} data 저장 대상 객체
  * @returns
  */
 function setJSONValue(key, v, data) {
@@ -152,16 +152,16 @@ function setJSONValue(key, v, data) {
         } else {
             let nexId = idList[i + 1];
             if (o2.typeOf(nexId) === "number") {
-                //下一个ID是数字
+                //다음 ID가 숫자
                 if (!data[id] && o2.typeOf(data[id]) !== "array") {
                     data[id] = [];
                 }
                 if (nexId > data[id].length) {
-                    //超过了最大下标，丢弃
+                    //최대 인덱스 초과, 버림
                     return;
                 }
             } else {
-                //下一个ID是字符串
+                //다음 ID가 문자열
                 if (!data[id] || o2.typeOf(data[id]) !== "object") {
                     data[id] = {};
                 }
@@ -171,7 +171,7 @@ function setJSONValue(key, v, data) {
     }
 }
 
-// 格式化日期为  YYYY-MM
+// 날짜를  YYYY-MM 형식으로 변환
 const formatMonth = (date) => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -193,7 +193,7 @@ const toDate = (str) => {
     )
 }
 
-// 格式化日期为 YYYY-MM-DD 格式
+// 날짜를 YYYY-MM-DD 형식으로 변환
 const ymd = (date) => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -202,7 +202,7 @@ const ymd = (date) => {
     const dStr = d > 9 ? `${d}` : `0${d}`
     return `${year}-${monthStr}-${dStr}`
 }
-// 格式化日期为 YYYY-MM-DD HH:mm:ss 格式
+// 날짜를 YYYY-MM-DD HH:mm:ss 형식으로 변환
 const ymdhms = (date) => {
     const hour = `${date.getHours() > 9 ? '' + date.getHours() : '0' + date.getHours()}`
     const m = `${date.getMinutes() > 9 ? '' + date.getMinutes() : '0' + date.getMinutes()}`
@@ -210,7 +210,7 @@ const ymdhms = (date) => {
     return `${ymd(date)} ${hour}:${m}:${s}`
 }
 
-// 会话列表显示时间
+// 대화 목록 표시 시간
 const friendlyTime = (date) => {
     let input
     if (typeof date === 'string') {
@@ -267,7 +267,7 @@ const friendlyTime = (date) => {
 }
 
 
-// 消息列表显示时间
+// 메시지 목록 표시 시간
 const chatMsgShowTimeFormat = (date) => {
     let input
     if (typeof date === 'string') {
@@ -316,10 +316,10 @@ const chatMsgShowTimeFormat = (date) => {
     }
 }
 
-// 格式化分钟数为 xx小时xx分钟
+// 분 수를 xx시간xx분 형식으로 변환
 const convertMinutesToHoursAndMinutes = (minutes) => {
-    const hours = Math.floor(minutes / 60); // 取得小时数
-    const remainingMinutes = Math.floor(minutes % 60); // 取得剩余的分钟数
+    const hours = Math.floor(minutes / 60); // 시간 수 계산
+    const remainingMinutes = Math.floor(minutes % 60); // 남은 분 수 계산
     let result = "";
 
     if (hours > 0) {
@@ -334,9 +334,9 @@ const convertMinutesToHoursAndMinutes = (minutes) => {
 };
 
 /**
- * 数组转化为二维数组
- * @param {*} arr 一维数组
- * @param {*} subSize 子数组长度
+ * 배열을 2차원 배열로 변환
+ * @param {*} arr 1차원 배열
+ * @param {*} subSize 하위 배열 길이
  * @returns
  */
 const convertTo2DArray = (arr, subSize) => {
@@ -348,9 +348,9 @@ const convertTo2DArray = (arr, subSize) => {
 }
 
 // /**
-//  * loading 展示
-//  * @param {*} component 组件本身
-//  * @param newText loading 文字 可为空
+//  * loading 표시
+//  * @param {*} component 컴포넌트 자체
+//  * @param newText loading 텍스트, 비워 둘 수 있음
 //  */
 // const showLoading = async (component, newText) => {
 //   const loading = (await import(`../components/o-loading/index.js`)).default;
@@ -361,9 +361,9 @@ const convertTo2DArray = (arr, subSize) => {
 //   component.loadingVm = await loading.generate(document.body, {bind: bind}, component);
 // }
 // /**
-//  * 关闭 loading
-//  * 需要和 showLoading 一起使用
-//  * @param {*} component 组件本身
+//  * loading 닫기
+//  * showLoading과 함께 사용해야 함
+//  * @param {*} component 컴포넌트 자체
 //  */
 // const hideLoading = async (component) => {
 //   if (component.loadingVm) {
@@ -383,7 +383,7 @@ const formatPersonName = (person) => {
     return person;
 }
 /**
- * 获取传入日期所在的月份所有日期
+ * 전달된 날짜가 속한 달의 모든 날짜 가져오기
  * @param {Date} inputDate
  * @returns []
  */
@@ -392,8 +392,8 @@ const getAllDatesInMonth = (inputDate) => {
     const currentDate = new Date(inputDate);
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    // 确定月份的第一天
-    // 从第一天开始，递增日期直到月份变化
+    // 해당 월의 첫날 확정
+    // 첫날부터 월이 바뀔 때까지 날짜 증가
     let currentDateInMonth = new Date(year, month, 1);
     while (currentDateInMonth.getMonth() === month) {
         result.push(new Date(currentDateInMonth));
@@ -402,7 +402,7 @@ const getAllDatesInMonth = (inputDate) => {
     return result;
 }
 /**
- * localStorage 存储
+ * localStorage 저장
  * @param {*} key
  * @param {*} item
  */
@@ -410,21 +410,21 @@ const storageSet = (key, item) => {
     localStorage.setItem(key, JSON.stringify(item));
 }
 /**
- * localStorage 获取存储数据
+ * localStorage 저장 데이터 가져오기
  * @param {*} key
  * @returns
  */
 const storageGet = (key) => {
     const item = localStorage.getItem(key);
-    // 使用JSON.parse将字符串还原为JavaScript对象
+    // JSON.parse로 문자열을 JavaScript 객체로 복원
     return JSON.parse(item);
 }
 
 /**
- * 替换字符串特定内容
- * @param {*} originalString 原字符串
- * @param {*} searchString  被替换的内容
- * @param {*} replacement 替换成的内容
+ * 문자열의 특정 내용 치환
+ * @param {*} originalString 원본 문자열
+ * @param {*} searchString  치환될 내용
+ * @param {*} replacement 치환할 내용
  * @returns
  */
 const replaceCustomString = (originalString, searchString, replacement) => {
@@ -432,8 +432,8 @@ const replaceCustomString = (originalString, searchString, replacement) => {
 }
 
 /**
- * 根据传入的数字个数，生成Excel列名数组，如：A,B,C,....,AA,AB,AC,....
- * @param len 数量
+ * 전달된 숫자 개수에 따라 Excel 열 이름 배열 생성, 예: A,B,C,....,AA,AB,AC,....
+ * @param len 개수
  * @returns {*[]}
  */
 const generateExcelColumnNames = (len) => {
@@ -452,17 +452,17 @@ const generateExcelColumnNames = (len) => {
 }
 
 /**
- * 选择单个文件功能，并触发回调函数
- * @param callback 回调函数，返回选中的文件
+ * 단일 파일 선택 기능, 콜백 함수 호출
+ * @param callback 콜백 함수, 선택한 파일 반환
  */
 const chooseSingleFile = (callback) => {
     const input = document.createElement('input');
     input.type = 'file';
     input.style.display = 'none';
-    // 添加 change 事件监听器，接收上传的文件
+    // change 이벤트 리스너 추가, 업로드된 파일 수신
     input.addEventListener('change', (event) => {
         const files = event.target.files;
-        // 处理上传的文件
+        // 업로드된 파일 처리
         if (files && files.length > 0) {
             const file = files[0]
             if (callback) {
@@ -478,7 +478,7 @@ let _contextMenuNode
 let _closeContextMenuClickEvent
 /**
  *
- * @param options { callback, menuList: [{text: "名称", id: "菜单 id"}], // 菜单列表， top, left, target : 绑定对象, bodyDom: 绑定对象所在的 body 元素 }
+ * @param options { callback, menuList: [{text: "이름", id: "메뉴 id"}], // 메뉴 목록, top, left, target : 바인딩 대상, bodyDom: 바인딩 대상이 있는 body 요소 }
  */
 const createContextMenu = (options) => {
     const callback = options.callback
@@ -497,12 +497,12 @@ const createContextMenu = (options) => {
             const rect = target.getBoundingClientRect()
             const width = rect.width;
             const height = rect.height;
-            top = rect.top + height / 2;    // 元素中点位置
-            left = rect.left + width / 2;  // 元素到页面左边的距离
+            top = rect.top + height / 2;    // 요소 중심 위치
+            left = rect.left + width / 2;  // 요소에서 페이지 왼쪽까지의 거리
         }
     }
     const bodyDom = options.bodyDom ? options.bodyDom : document.body;
-    // 创建菜单
+    // 메뉴 생성
     _contextMenuNode = dom('div.chat-menu-list', {
         style: 'position: fixed; z-index: 999; top: ' + top + 'px;  left: ' + left + 'px;'
     })
@@ -511,17 +511,17 @@ const createContextMenu = (options) => {
         const menu = menuList[i]
         const liNode = dom('li', {text: menu.text})
         _contextMenuNode.insertAdjacentElement('beforeend', liNode)
-        liNode.dataset.menu = JSON.stringify(menu) // 绑定数据
+        liNode.dataset.menu = JSON.stringify(menu) // 데이터 바인딩
         liNode.addEventListener('click', (event) => {
             event.preventDefault()
-            // 获取绑定的数据
+            // 바인딩된 데이터 가져오기
             const menu = JSON.parse(event.target.dataset.menu)
             console.debug('=====> 메뉴 클릭', menu)
             callback(menu)
             closeContextMenu()
         })
     }
-    // 绑定关闭事件
+    // 닫기 이벤트 바인딩
     _closeContextMenuClickEvent = (event) => {
         event.preventDefault()
         closeContextMenu()
@@ -539,7 +539,7 @@ const closeContextMenu = () => {
 }
 
 /**
- * 会话选择器
+ * 대화 선택기
  * @returns {Promise<unknown>}
  */
 const conversationPicker = async (eventBus) => {
@@ -622,7 +622,7 @@ const fileExtIcon = (ext) => {
 }
 
 
-// 检测浏览器是否支持WebP
+// 브라우저의 WebP 지원 여부 확인
 const canUseWebP = () => {
     const elem = document.createElement('canvas');
     if (elem.getContext && elem.getContext('2d')) {

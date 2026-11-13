@@ -76,17 +76,17 @@ public class ItemAccessFactory extends AbstractFactory {
     }
 
     /**
-     * 删除业务数据中不可读的字段
-     * 可读的规则：
-     * 1、没有配置字段的访问权限
-     * 2、有配置字段的编辑权限：当前用户在可编辑配置中但不在不可编辑配置中则用户有可读权限
-     * 3、有配置字段的只读权限：当前用户不在不可读配置中且用户在可读配置中或者可读权限未配置则用户有可读权限
-     * @param data 业务数据
-     * @param processId 流程ID
-     * @param appId 应用ID
-     * @param activity 活动唯一ID
-     * @param effectivePerson 当前用户
-     * @throws Exception 异常
+     * 업무 데이터에서 읽을 수 없는 필드 삭제
+     * 읽기 가능 규칙:
+     * 1. 필드 접근 권한이 설정되지 않음
+     * 2. 필드 편집 권한이 설정됨: 현재 사용자가 편집 가능 설정에 있고 편집 불가 설정에 없으면 읽기 권한 있음
+     * 3. 필드 읽기 전용 권한이 설정됨: 현재 사용자가 읽기 불가 설정에 없고, 읽기 가능 설정에 있거나 읽기 권한이 설정되지 않았으면 읽기 권한 있음
+     * @param data 업무 데이터
+     * @param processId 프로세스 ID
+     * @param appId 앱 ID
+     * @param activity 활동 고유 ID
+     * @param effectivePerson 현재 사용자
+     * @throws Exception 예외
      */
     public void convert(JsonElement data, String processId, String appId, String activity,
             EffectivePerson effectivePerson) throws Exception {
@@ -116,18 +116,18 @@ public class ItemAccessFactory extends AbstractFactory {
     }
 
     /**
-     * 保存业务数据的时候对不可编辑的字段用源数据覆盖
-     * 可编辑的规则：
-     * 1、没有配置字段的访问权限
-     * 2、有配置字段的编辑权限：当前用户在可编辑配置中但不在不可编辑配置中则用户有可编辑权限
-     * 3、当没有配置可编辑权限时，判断用户是否有可读权限，如果不可读则没有编辑权限，如果可读则有可编辑权限
-     * @param data 业务数据
-     * @param job 工作的job
-     * @param processId 流程ID
-     * @param appId 应用ID
-     * @param activity 活动唯一ID
-     * @param effectivePerson 当前用户
-     * @throws Exception 异常
+     * 업무 데이터 저장 시 편집 불가 필드는 원본 데이터로 덮어씀
+     * 편집 가능 규칙:
+     * 1. 필드 접근 권한이 설정되지 않음
+     * 2. 필드 편집 권한이 설정됨: 현재 사용자가 편집 가능 설정에 있고 편집 불가 설정에 없으면 편집 권한 있음
+     * 3. 편집 권한이 설정되지 않으면 사용자의 읽기 권한을 판단해, 읽을 수 없으면 편집 권한 없음, 읽을 수 있으면 편집 권한 있음
+     * @param data 업무 데이터
+     * @param job 업무 문서의 job
+     * @param processId 프로세스 ID
+     * @param appId 앱 ID
+     * @param activity 활동 고유 ID
+     * @param effectivePerson 현재 사용자
+     * @throws Exception 예외
      */
     public void editConvert(JsonElement data, String job, String processId, String appId, String activity,
             EffectivePerson effectivePerson) throws Exception {

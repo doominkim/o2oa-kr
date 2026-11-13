@@ -26,7 +26,7 @@ public class ActionCallbackAESKey extends BaseAction {
 		}
         ActionResult<Wo> result = new ActionResult<Wo>();
         String encodingAesKey = Base64.encodeBase64String(UUID.randomUUID().toString().replaceAll("-","").getBytes());
-        logger.info("生成钉钉回调用的 AESKey "+ encodingAesKey);
+        logger.info("DingTalk 콜백용 AESKey 생성 "+ encodingAesKey);
         if (encodingAesKey.contains("=")) {
             encodingAesKey = encodingAesKey.substring(0, encodingAesKey.lastIndexOf("="));
         }

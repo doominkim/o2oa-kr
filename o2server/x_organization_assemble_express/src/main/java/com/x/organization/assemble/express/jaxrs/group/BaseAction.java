@@ -20,7 +20,7 @@ class BaseAction extends StandardJaxrsAction {
 
 	static class WoGroupAbstract extends GsonPropertyObject {
 
-		@FieldDescribe("群组识别名")
+		@FieldDescribe("그룹 식별 이름")
 		private List<String> groupList = new ArrayList<>();
 
 		public List<String> getGroupList() {

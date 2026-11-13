@@ -29,7 +29,7 @@ function clickIdentity(identity) {
     </div>
 
     <div v-show="node.expanded" class="org-children">
-      <!-- 人员 -->
+      <!-- 사용자 -->
       <div
           v-for="p in node.persons"
           :key="p.id"
@@ -40,7 +40,7 @@ function clickIdentity(identity) {
         <span class="name">{{ p.name }}</span>
       </div>
 
-      <!-- 子组织 -->
+      <!-- 하위 조직 -->
       <OrgNodeView
           v-for="child in node.children"
           :key="child.unique"

@@ -10,16 +10,16 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public class PageProperties extends JsonProperties {
 
-	@FieldDescribe("关联Widget.")
+	@FieldDescribe("연결 Widget.")
 	private List<String> relatedWidgetList = new ArrayList<String>();
 
-	@FieldDescribe("移动端关联Widget.")
+	@FieldDescribe("모바일 연결 Widget.")
 	private List<String> mobileRelatedWidgetList = new ArrayList<String>();
 
-	@FieldDescribe("关联脚本.")
+	@FieldDescribe("연결 스크립트.")
 	private Map<String, String> relatedScriptMap = new LinkedHashMap<String, String>();
 
-	@FieldDescribe("移动端关联脚本.")
+	@FieldDescribe("모바일 연결 스크립트.")
 	private Map<String, String> mobileRelatedScriptMap = new LinkedHashMap<String, String>();
 
 	public List<String> getRelatedWidgetList() {

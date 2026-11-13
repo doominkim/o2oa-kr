@@ -154,7 +154,7 @@ MWF.xApplication.Setting.LP={
 	},
 	"mobile_style_imgs_defaultTitle": "Confirm default image",
 	"mobile_style_imgs_defaultInfor": "Are you sure you want to replace {name} with the default image?",
-	"mpweixin": "公众号",
+	"mpweixin": "공식 계정",
 	"publishMpweixin": "Publicar en cuenta de WeChat",
 	"subscribeMpweixin": "Respuesta de seguimiento",
 	"subscribeMpweixin_desc": "Mensaje automático enviado cuando hay nuevos usuarios que siguen la cuenta",

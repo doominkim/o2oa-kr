@@ -1,14 +1,14 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 //MWF.xDesktop.requireApp("process.Xform", "widget.View", null, false);
 
-/** @class Stat 统计组件。
- * @o2cn 统计组件
+/** @class Stat 통계 컴포넌트.
+ * @o2cn 통계 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var stat = this.form.get("fieldId"); //获取组件
- * //方法2
- * var stat = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var stat = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var stat = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -20,14 +20,14 @@ MWF.xApplication.process.Xform.Stat = MWF.APPStat =  new Class(
 	Extends: MWF.APP$Module,
     options: {
         /**
-         * 组件异步加载完成触发.
+         * 컴포넌트 비동기 로드 완료 시 발생.
          * @event MWF.xApplication.process.Xform.Stat#loadStat
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 图表加载完成触发.
+         * 차트 로드 완료 시 발생.
          * @event MWF.xApplication.process.Xform.Stat#afterLoadStat
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "loadStat", "loadChart"]
     },
@@ -66,11 +66,11 @@ MWF.xApplication.process.Xform.Stat = MWF.APPStat =  new Class(
 	    if ( viewJson.application && viewJson.statName ){
             MWF.xDesktop.requireApp("query.Query", "Statistician", function(){
                 /**
-                 * @summary Statistician组件，平台使用该组件执行统计的逻辑
+                 * @summary Statistician 컴포넌트, 플랫폼이 이 컴포넌트로 통계 로직을 실행
                  * @member {MWF.xApplication.query.Query.Statistician}
                  * @example
-                 *  //可以在脚本中获取该组件
-                 * var field = this.form.get("fieldId").stat; //获取组件对象
+                 *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+                 * var field = this.form.get("fieldId").stat; //컴포넌트 객체 가져오기
                  */
                 this.stat = new MWF.xApplication.query.Query.Statistician(this.form.app, this.node, viewJson, {
                     "resizeNode": (this.node.getStyle("height").toString().toLowerCase()!=="auto" && this.node.getStyle("height").toInt()>0),
@@ -102,22 +102,22 @@ MWF.xApplication.process.Xform.Stat = MWF.APPStat =  new Class(
     },
 
     /**
-     * @summary 重新加载统计。
-     *  @param json {Object} 加载选项
+     * @summary 통계 다시 로드.
+     *  @param json {Object} 로드 옵션
      *  <pre><code class='language-js'>[{
-     *     "application": "",   //数据中心应用名称
-     *     "statName": "",         //统计名称
-     *     "isChart": true, //是否显示图表
-     *     "isLegend": true, //是否显示图例
-     *     "isTable": true, //是否显示表格
-     *     "isRowToColumn": true, //是否显示行列转换
+     *     "application": "",   //데이터 센터 앱 이름
+     *     "statName": "",         //통계 이름
+     *     "isChart": true, //차트 표시 여부
+     *     "isLegend": true, //범례 표시 여부
+     *     "isTable": true, //표 표시 여부
+     *     "isRowToColumn": true, //행열 전환 표시 여부
      * }]</code></pre>
      *  @example
      *  this.form.get("fieldId").reloadStat({
-     *      "application": "数据中心应用名称",
-     *      "statName": "统计名称"
+     *      "application": "데이터 센터 앱 이름",
+     *      "statName": "통계 이름"
      *  });
-     *  @return {Boolean} 是否通过校验
+     *  @return {Boolean} 검증 통과 여부
      */
     reloadStat: function(json){
         var viewJson = Object.merge(this.getDefaultJson(), json || {});
@@ -130,11 +130,11 @@ MWF.xApplication.process.Xform.Stat = MWF.APPStat =  new Class(
         }
     },
     /**
-     * @summary 获取统计数据。
-     *  @return {Ojbect} 统计数据.
+     * @summary 통계 데이터 가져오기.
+     *  @return {Ojbect} 통계 데이터.
      *  @example
      *  var data = this.form.get("fieldId").getData();
-     *  @return {Boolean} 是否通过校验
+     *  @return {Boolean} 검증 통과 여부
      */
     getData: function(){
         if (!this.stat) return null;

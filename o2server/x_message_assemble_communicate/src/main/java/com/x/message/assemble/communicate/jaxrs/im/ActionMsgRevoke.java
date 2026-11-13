@@ -36,33 +36,33 @@ public class ActionMsgRevoke extends BaseAction {
                 throw new ExceptionConversationNotExist();
             }
             ActionResult<ActionImConfig.Wo> config = new ActionImConfig().execute(effectivePerson);
-            // 没有配置 或者 没有开启撤回
+            // 설정 없음 또는 회수 미사용
             if (config == null || BooleanUtils.isFalse(config.getData().getEnableRevokeMsg())) {
                 throw new ExceptionMsgRevokeNoPermission();
             }
-            // 群组 管理员可以撤回
+            // 그룹은 관리자가 회수 가능
             if (conversation.getType().equals(IMConversation.CONVERSATION_TYPE_GROUP)
                 && !effectivePerson.getDistinguishedName().equals(conversation.getAdminPerson())
                 && !effectivePerson.getDistinguishedName().equals(imMsg.getCreatePerson())) {
                 throw new ExceptionMsgRevokeNoPermission();
             }
 
-            // 群组 个人 如果是自己发送的消息 都可以撤回
+            // 그룹, 개인 모두 자신이 보낸 메시지는 회수 가능
             if (conversation.getType().equals(IMConversation.CONVERSATION_TYPE_SINGLE)
                 && !effectivePerson.getDistinguishedName().equals(imMsg.getCreatePerson())) {
                 throw new ExceptionMsgRevokeNoPermission();
             }
-            // 撤回时间超过配置时间
+            // 회수 시간이 설정 시간을 초과했습니다
             Date create = imMsg.getCreateTime();
             if (new Date().getTime() - create.getTime()
                 > config.getData().getRevokeOutMinute() * 60 * 1000) {
                 throw new ExceptionMsgRevokeOutOfTime();
             }
 
-            // 删除消息
+            // 메시지 삭제
             ThisApplication.imMessageDeleteQueue.send(imMsg);
 
-            // 发送ws消息
+            // ws 메시지 발송
             sendWsMessage(conversation, imMsg, MessageConnector.TYPE_IM_REVOKE, effectivePerson);
 
             Wo wo = new Wo();

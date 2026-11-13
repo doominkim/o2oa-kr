@@ -71,7 +71,7 @@ public class DocumentDataHelper {
 			if (jsonElement.isJsonObject()) {
 				return gson.fromJson(jsonElement, Data.class);
 			} else {
-				/* 如果不是Object强制返回一个Map对象 */
+				/* Object가 아니면 Map 객체를 강제로 반환 */
 				return new Data();
 			}
 		}
@@ -81,25 +81,25 @@ public class DocumentDataHelper {
 	public void update( JsonElement jsonElement ) throws Exception {
 		if (jsonElement.isJsonNull()) {
 			// throw new Exception("can not update data null.");
-			/** 如果是空数据就不更新,避免数据被清空 */
+			/** 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지 */
 			return;
 		}
 		if (jsonElement.isJsonPrimitive()) {
 			// throw new Exception("can not update data primitive.");
-			/** 如果是空数据就不更新,避免数据被清空 */
+			/** 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지 */
 			return;
 		}
 		if (jsonElement.isJsonObject()) {
 			if (jsonElement.getAsJsonObject().size() == 0) {
 				// throw new Exception("can not update data object size ==0.");
-				/** 如果是空数据就不更新,避免数据被清空 */
+				/** 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지 */
 				return;
 			}
 		}
 		if (jsonElement.isJsonArray()) {
 			if (jsonElement.getAsJsonArray().size() == 0) {
 				// throw new Exception("can not update data array size ==0.");
-				/** 如果是空数据就不更新,避免数据被清空 */
+				/** 빈 데이터면 갱신하지 않음, 데이터가 비워지는 것을 방지 */
 				return;
 			}
 		}

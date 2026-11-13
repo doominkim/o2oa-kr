@@ -9,12 +9,12 @@ public class ActionCaptchaRSAPublicKeyWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 8305484005167999793L;
 
-	@FieldDescribe("RSA公钥.")
-	@Schema(description = "RSA公钥.")
+	@FieldDescribe("RSA 공개 키.")
+	@Schema(description = "RSA 공개 키.")
 	private String publicKey;
 
-	@FieldDescribe("是否启用rsa加密.")
-	@Schema(description = "是否启用rsa加密.")
+	@FieldDescribe("RSA 암호화 사용 여부.")
+	@Schema(description = "RSA 암호화 사용 여부.")
 	private Boolean rsaEnable;
 
 	public Boolean getRsaEnable() {

@@ -21,10 +21,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.openjpa.persistence.jdbc.Index;
 
 /**
- * AI模型配置
+ * AI 모델 설정
  * @author sword
  */
-@Schema(name = "AiModel", description = "AI模型配置.")
+@Schema(name = "AiModel", description = "AI 모델 설정.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AiModel.table, uniqueConstraints = {
@@ -50,7 +50,7 @@ public class AiModel extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -75,89 +75,89 @@ public class AiModel extends SliceJpaObject {
 	}
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("模型名称.")
+	@FieldDescribe("모델 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME, unique = true)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("模型服务商：ali(阿里云)|deepSeek|openAi(本地模型).")
+	@FieldDescribe("모델 서비스 제공자: ali(알리클라우드)|deepSeek|openAi(로컬 모델).")
 	@Column(length = length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String model_FIELDNAME = "model";
-	@FieldDescribe("模型版本.")
+	@FieldDescribe("모델 버전.")
 	@Column(length = length_255B, name = ColumnNamePrefix + model_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String model;
 
 	public static final String completionUrl_FIELDNAME = "completionUrl";
-	@FieldDescribe("模型服务地址.")
+	@FieldDescribe("모델 서비스 주소.")
 	@Column(length = 500, name = ColumnNamePrefix + completionUrl_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String completionUrl;
 
 	public static final String apiKey_FIELDNAME = "apiKey";
-	@FieldDescribe("模型秘钥.")
+	@FieldDescribe("모델 비밀키.")
 	@Column(length = length_255B, name = ColumnNamePrefix + apiKey_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String apiKey;
 
 	public static final String enable_FIELDNAME = "enable";
-	@FieldDescribe("是否启用.")
+	@FieldDescribe("사용 여부.")
 	@Column(name = ColumnNamePrefix + enable_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean enable;
 
 	public static final String asDefault_FIELDNAME = "asDefault";
-	@FieldDescribe("是否为默认服务模型.")
+	@FieldDescribe("기본 서비스 모델 여부.")
 	@Column(name = ColumnNamePrefix + asDefault_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean asDefault;
 
 	public static final String desc_FIELDNAME = "desc";
-	@FieldDescribe("模型描述.")
+	@FieldDescribe("모델 설명.")
 	@Column(length = 500, name = ColumnNamePrefix + desc_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String desc;
 
 	public static final String proxyEnable_FIELDNAME = "proxyEnable";
-	@FieldDescribe("是否启用代理.")
+	@FieldDescribe("프록시 사용 여부.")
 	@Column(name = ColumnNamePrefix + proxyEnable_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean proxyEnable;
 
 	public static final String proxyHost_FIELDNAME = "proxyHost";
-	@FieldDescribe("代理主机.")
+	@FieldDescribe("프록시 호스트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + proxyHost_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String proxyHost;
 
 	public static final String proxyPort_FIELDNAME = "proxyPort";
-	@FieldDescribe("代理端口.")
+	@FieldDescribe("프록시 포트.")
 	@Column(name = ColumnNamePrefix + proxyPort_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer proxyPort;
 
 	public static final String proxyUser_FIELDNAME = "proxyUser";
-	@FieldDescribe("代理认证用户.")
+	@FieldDescribe("프록시 인증 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + proxyUser_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String proxyUser;
 
 	public static final String proxyPass_FIELDNAME = "proxyPass";
-	@FieldDescribe("代理认证密码.")
+	@FieldDescribe("프록시 인증 비밀번호.")
 	@Column(length = length_255B, name = ColumnNamePrefix + proxyPass_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String proxyPass;
 
-	@FieldDescribe("创建时间.")
+	@FieldDescribe("생성 시간.")
 	@Transient
 	private Date createDateTime;
 
-	@FieldDescribe("修改时间.")
+	@FieldDescribe("수정 시간.")
 	@Transient
 	private Date updateDateTime;
 

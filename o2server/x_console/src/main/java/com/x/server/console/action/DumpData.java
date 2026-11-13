@@ -161,7 +161,7 @@ public class DumpData {
 			CriteriaBuilder cb = em.getCriteriaBuilder();
 			CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 			Root<T> root = cq.from(cls);
-			// count(*) 可能导致全表扫描
+			// count(*)는 전체 테이블 스캔을 일으킬 수 있음
 			cq.select(cb.count(root.get(JpaObject.id_FIELDNAME)));
 			return em.createQuery(cq).getSingleResult();
 		}
@@ -189,7 +189,7 @@ public class DumpData {
 
 		private <T> void dump(Class<T> cls, EntityManager em, StorageMappings storageMappings, boolean attachStorage,
 				long total) throws Exception {
-			// 创建最终存储文件的目录
+			// 최종 저장 파일 디렉터리 생성
 			Path directory = dir.resolve(cls.getName());
 			Files.createDirectories(directory);
 			PathUtils.cleanDirectory(directory);
@@ -202,7 +202,7 @@ public class DumpData {
 			int btach = (int) Math.ceil((total + 0.0) / containerEntity.dumpSize());
 			do {
 				list = list(em, cls, id, containerEntity.dumpSize());
-				// 检查已经存在重复的id
+				// 이미 존재하는 중복 id 확인
 				list = list.stream().filter(o -> {
 					String objId;
 					try {

@@ -128,10 +128,10 @@ MWF.xApplication.cms.Index.Newer = new Class({
     load : function(){
         this.initData();
         this.identityList = this.getIdentities();
-        if( !this.categoryData ) { //如果未限定分类
+        if( !this.categoryData ) { //분류를 한정하지 않은 경우
             this._load();
             this.fireEvent("postLoad");
-        }else if(this.categoryData.workflowAppId && this.categoryData.workflowFlag ){ //发起审批流程
+        }else if(this.categoryData.workflowAppId && this.categoryData.workflowFlag ){ //결재 프로세스 시작
             this._load();
             this.fireEvent( "postLoad" );
         }else if( this.options.ignoreDrafted ){
@@ -160,7 +160,7 @@ MWF.xApplication.cms.Index.Newer = new Class({
     },
     _load : function(){
         debugger;
-        if( this.categoryData && this.isIgnoreTitle() && this.identityList.length == 1 ) { //信息需要输入标题，数据不需要输入标题
+        if( this.categoryData && this.isIgnoreTitle() && this.identityList.length == 1 ) { //정보는 제목 입력 필요, 데이터는 제목 입력 불필요
             this.okStart();
         }else{
             this.isNew = true;
@@ -662,7 +662,7 @@ MWF.xApplication.cms.Index.Newer = new Class({
             this.departmentSelArea.setStyle("border-color", "red");
             this.app.notice(this.lp.selectStartId, "error");
         }else{
-            if( this.isIgnoreTitle() && !title )title = this.lp.untitled; //"无标题";
+            if( this.isIgnoreTitle() && !title )title = this.lp.untitled; //"제목 없음";
             var workData;
             if( this.options.documentData ){
                 workData = Object.clone(this.options.documentData);
@@ -876,18 +876,18 @@ MWF.xApplication.cms.Index.Newer.CategorySel = new Class({
         if (this.areaNode) this.areaNode.fade("out");
     },
     _setMobileSearchEvent: function(searchInput, clearSearch){
-        let isComposing = false; // 标记是否处于输入法输入中
+        let isComposing = false; // 입력기(IME) 입력 중 여부 표시
 
-        //输入法开始输入事件
+        //입력기 입력 시작 이벤트
         searchInput.addEventListener('compositionstart', () => { isComposing = true; });
 
-        //输入法结束输入事件
+        //입력기 입력 종료 이벤트
         searchInput.addEventListener('compositionend', (e) => {
             isComposing = false;
             this.searchCategory();
         });
 
-        //常规的input事件
+        //일반 input 이벤트
         searchInput.addEventListener('input', (e) => {
             !isComposing && this.searchCategory();
         });

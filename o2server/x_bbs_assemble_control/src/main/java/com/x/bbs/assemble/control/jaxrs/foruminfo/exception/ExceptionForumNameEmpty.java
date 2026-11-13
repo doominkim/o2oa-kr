@@ -7,6 +7,6 @@ public class ExceptionForumNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionForumNameEmpty() {
-		super("论坛分区名称forumName为空， 无法进行查询." );
+		super("포럼 분류 이름 forumName이 비어 있어 조회할 수 없습니다." );
 	}
 }

@@ -49,7 +49,7 @@ class ActionGetEncrypt extends BaseAction {
 
 		private static final long serialVersionUID = 1541377202197787268L;
 
-		@FieldDescribe("令牌")
+		@FieldDescribe("토큰")
 		private String token;
 
 		public String getToken() {

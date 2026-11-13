@@ -7,10 +7,10 @@ public class ReadProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -5728063809256333446L;
 
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	private String title;
 
-	@FieldDescribe("意见")
+	@FieldDescribe("의견")
 	private String opinion;
 
 	public String getTitle() {

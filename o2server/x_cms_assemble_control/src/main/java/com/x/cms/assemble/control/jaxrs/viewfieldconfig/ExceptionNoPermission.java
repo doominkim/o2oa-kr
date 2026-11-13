@@ -7,6 +7,6 @@ class ExceptionNoPermission extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionNoPermission( String personName ) {
-		super( "用户:{} 没有内容管理展示列配置信息信息操作的权限！", personName );
+		super( "사용자 {}에게 게시판 표시 열 설정을 작업할 권한이 없습니다!", personName );
 	}
 }

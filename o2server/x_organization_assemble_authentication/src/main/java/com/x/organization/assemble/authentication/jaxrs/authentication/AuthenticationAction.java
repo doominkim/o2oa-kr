@@ -32,12 +32,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("authentication")
-@JaxrsDescribe("认证")
+@JaxrsDescribe("인증")
 public class AuthenticationAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationAction.class);
 
-	@JaxrsMethodDescribe(value = "获取当前可用的登录模式.", action = ActionMode.class)
+	@JaxrsMethodDescribe(value = "현재 사용 가능한 로그인 모드 조회.", action = ActionMode.class)
 	@GET
 	@Path("mode")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -54,7 +54,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "用户登录.credential=xxxx,password=xxxx", action = ActionLogin.class)
+	@JaxrsMethodDescribe(value = "사용자 로그인.credential=xxxx,password=xxxx", action = ActionLogin.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -68,12 +68,12 @@ public class AuthenticationAction extends StandardJaxrsAction {
 			LOGGER.error(e, effectivePerson, request, null);
 			result.error(e);
 		}
-		// 擦除密码
+		// 비밀번호 삭제
 		erasePassword(jsonElement);
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "用户注销.", action = ActionLogout.class)
+	@JaxrsMethodDescribe(value = "사용자 로그아웃.", action = ActionLogout.class)
 	@DELETE
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "用户注销 MockDeleteToGet.", action = ActionLogout.class)
+	@JaxrsMethodDescribe(value = "사용자 로그아웃 MockDeleteToGet.", action = ActionLogout.class)
 	@GET
 	@Path("mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -108,7 +108,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前用户,如果是未登录用户返回anonymous", action = ActionWho.class)
+	@JaxrsMethodDescribe(value = "현재 사용자 조회. 로그인하지 않은 사용자면 anonymous 반환", action = ActionWho.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -124,7 +124,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "用户登录.credential=xxxx,password=xxxx,使用图片验证码验证.", action = ActionCaptchaLogin.class)
+	@JaxrsMethodDescribe(value = "사용자 로그인.credential=xxxx,password=xxxx, 이미지 인증 코드로 검증.", action = ActionCaptchaLogin.class)
 	@POST
 	@Path("captcha")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -139,12 +139,12 @@ public class AuthenticationAction extends StandardJaxrsAction {
 			LOGGER.error(e, effectivePerson, request, null);
 			result.error(e);
 		}
-		// 擦除密码
+		// 비밀번호 삭제
 		erasePassword(jsonElement);
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "双因素登录认证.", action = ActionTwoFactoryLogin.class)
+	@JaxrsMethodDescribe(value = "2단계 로그인 인증.", action = ActionTwoFactoryLogin.class)
 	@POST
 	@Path("two/factory/login")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -159,19 +159,19 @@ public class AuthenticationAction extends StandardJaxrsAction {
 			LOGGER.error(e, effectivePerson, request, null);
 			result.error(e);
 		}
-		// 擦除密码
+		// 비밀번호 삭제
 		erasePassword(jsonElement);
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取图片验证码.", action = ActionCaptcha.class)
+	@JaxrsMethodDescribe(value = "이미지 인증 코드 조회.", action = ActionCaptcha.class)
 	@GET
 	@Path("captcha/width/{width}/height/{height}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void captcha(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("图片验证码宽度") @PathParam("width") Integer width,
-			@JaxrsParameterDescribe("图片验证码高度") @PathParam("height") Integer height) {
+			@JaxrsParameterDescribe("이미지 인증 코드 너비") @PathParam("width") Integer width,
+			@JaxrsParameterDescribe("이미지 인증 코드 높이") @PathParam("height") Integer height) {
 		ActionResult<ActionCaptcha.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -183,7 +183,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取公钥publicKey", action = ActionCaptchaRSAPublicKey.class)
+	@JaxrsMethodDescribe(value = "공개 키 publicKey 조회", action = ActionCaptchaRSAPublicKey.class)
 	@GET
 	@Path("captchaRSAPublicKey")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -201,7 +201,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "用户登录.credential=xxxx,codeAnswer=xxxx,使用短信验证码登录.", action = ActionCodeLogin.class)
+	@JaxrsMethodDescribe(value = "사용자 로그인.credential=xxxx,codeAnswer=xxxx, SMS 인증 코드로 로그인.", action = ActionCodeLogin.class)
 	@POST
 	@Path("code")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -219,13 +219,13 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取短信验证码.", action = ActionCode.class)
+	@JaxrsMethodDescribe(value = "SMS 인증 코드 조회.", action = ActionCode.class)
 	@GET
 	@Path("code/credential/{credential}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void code(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("凭证") @PathParam("credential") String credential) {
+			@JaxrsParameterDescribe("자격 증명") @PathParam("credential") String credential) {
 		ActionResult<ActionCode.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -237,7 +237,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取登录二维码.", action = ActionBind.class)
+	@JaxrsMethodDescribe(value = "로그인 QR 코드 조회.", action = ActionBind.class)
 	@GET
 	@Path("bind")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -254,13 +254,13 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "通过二维码进行登录.", action = ActionBindLogin.class)
+	@JaxrsMethodDescribe(value = "QR 코드로 로그인.", action = ActionBindLogin.class)
 	@GET
 	@Path("bind/meta/{meta}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void bindLogin(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@Context HttpServletResponse response, @JaxrsParameterDescribe("认证序列号") @PathParam("meta") String meta) {
+			@Context HttpServletResponse response, @JaxrsParameterDescribe("인증 일련번호") @PathParam("meta") String meta) {
 		ActionResult<ActionBindLogin.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -272,13 +272,13 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "二维码用户录入.", action = ActionBindMeta.class)
+	@JaxrsMethodDescribe(value = "QR 코드 사용자 입력.", action = ActionBindMeta.class)
 	@POST
 	@Path("bind/meta/{meta}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void bindMeta(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("认证序列号") @PathParam("meta") String meta) {
+			@JaxrsParameterDescribe("인증 일련번호") @PathParam("meta") String meta) {
 		ActionResult<ActionBindMeta.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -290,7 +290,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "oauth登录认证地址", action = ActionOauthList.class)
+	@JaxrsMethodDescribe(value = "oauth 로그인 인증 주소", action = ActionOauthList.class)
 	@GET
 	@Path("oauth/list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -307,7 +307,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "企业微信oauth登录认证配置", action = ActionOauthQiyeweixinConfig.class)
+	@JaxrsMethodDescribe(value = "WeCom oauth 로그인 인증 설정", action = ActionOauthQiyeweixinConfig.class)
 	@GET
 	@Path("oauth/qywx/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -325,7 +325,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "钉钉oauth登录认证配置", action = ActionOauthDingdingConfig.class)
+	@JaxrsMethodDescribe(value = "DingTalk oauth 로그인 인증 설정", action = ActionOauthDingdingConfig.class)
 	@GET
 	@Path("oauth/dingding/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -342,13 +342,13 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "oauth登录认证地址", action = ActionOauthGet.class)
+	@JaxrsMethodDescribe(value = "oauth 로그인 인증 주소", action = ActionOauthGet.class)
 	@GET
 	@Path("oauth/name/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void oauth(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("oauthClient名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("oauthClient 이름") @PathParam("name") String name) {
 		ActionResult<ActionOauthGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -360,14 +360,14 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "oauth登录认证", action = ActionOauthLogin.class)
+	@JaxrsMethodDescribe(value = "oauth 로그인 인증", action = ActionOauthLogin.class)
 	@GET
 	@Path("oauth/login/name/{name}/code/{code}/redirecturi/{redirectUri}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void oauthLogin(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@Context HttpServletResponse response,
-			@JaxrsParameterDescribe("oauthClient名称") @PathParam("name") String name,
+			@JaxrsParameterDescribe("oauthClient 이름") @PathParam("name") String name,
 			@JaxrsParameterDescribe("code") @PathParam("code") String code,
 			@JaxrsParameterDescribe("redirectUri") @PathParam("redirectUri") String redirectUri) {
 		ActionResult<ActionOauthLogin.Wo> result = new ActionResult<>();
@@ -381,7 +381,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "企业微信oauth登录, 扫码登录", action = ActionOauthQiyeweixinLogin.class)
+	@JaxrsMethodDescribe(value = "WeCom oauth 로그인, QR 코드 로그인", action = ActionOauthQiyeweixinLogin.class)
 	@GET
 	@Path("oauth/login/qywx/code/{code}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -399,7 +399,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "钉钉oauth登录, 扫码登录", action = ActionOauthDingdingLogin.class)
+	@JaxrsMethodDescribe(value = "DingTalk oauth 로그인, QR 코드 로그인", action = ActionOauthDingdingLogin.class)
 	@GET
 	@Path("oauth/login/dingding/code/{code}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -417,14 +417,14 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "oauth账户绑定.", action = ActionOauthBind.class)
+	@JaxrsMethodDescribe(value = "oauth 계정 연결.", action = ActionOauthBind.class)
 	@GET
 	@Path("oauth/bind/name/{name}/code/{code}/redirecturi/{redirectUri}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void oauthBind(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@Context HttpServletResponse response,
-			@JaxrsParameterDescribe("oauthClient名称") @PathParam("name") String name,
+			@JaxrsParameterDescribe("oauthClient 이름") @PathParam("name") String name,
 			@JaxrsParameterDescribe("code") @PathParam("code") String code,
 			@JaxrsParameterDescribe("redirectUri") @PathParam("redirectUri") String redirectUri) {
 		ActionResult<ActionOauthBind.Wo> result = new ActionResult<>();
@@ -438,7 +438,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "切换当前用户,需要系统管理员权限.", action = ActionSwitchUser.class)
+	@JaxrsMethodDescribe(value = "현재 사용자 전환. 시스템 관리자 권한 필요.", action = ActionSwitchUser.class)
 	@PUT
 	@Path("switchuser")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -456,7 +456,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "切换当前用户,需要系统管理员权限 MockPutToPost.", action = ActionSwitchUser.class)
+	@JaxrsMethodDescribe(value = "현재 사용자 전환. 시스템 관리자 권한 필요 MockPutToPost.", action = ActionSwitchUser.class)
 	@POST
 	@Path("switchuser/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -474,7 +474,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "安全注销用户,该用户所有session全部过期.", action = ActionSafeLogout.class)
+	@JaxrsMethodDescribe(value = "사용자 안전 로그아웃. 해당 사용자의 모든 session 만료.", action = ActionSafeLogout.class)
 	@GET
 	@Path("safe/logout")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -492,7 +492,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "校验平台认证的token.", action = ActionCheckToken.class)
+	@JaxrsMethodDescribe(value = "플랫폼 인증 token 검증.", action = ActionCheckToken.class)
 	@POST
 	@Path("check/token")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -511,7 +511,7 @@ public class AuthenticationAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 由于有日志记录功能,需要将jsonElement中的password进行擦除.
+	 * 로그 기록 기능이 있으므로 jsonElement의 password를 지워야 함.
 	 *
 	 * @param jsonElement
 	 */

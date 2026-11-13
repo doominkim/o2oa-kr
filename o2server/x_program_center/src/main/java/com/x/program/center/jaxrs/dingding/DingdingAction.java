@@ -31,12 +31,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("dingding")
-@JaxrsDescribe("钉钉接口")
+@JaxrsDescribe("DingTalk 인터페이스")
 public class DingdingAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(DingdingAction.class);
 
-	@JaxrsMethodDescribe(value = "发送一个拉入同步请求.", action = ActionSyncOrgnaizationCallback.class)
+	@JaxrsMethodDescribe(value = "풀 동기화 요청 전송.", action = ActionSyncOrgnaizationCallback.class)
 	@POST
 	@Path("request/pull/sync")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -54,7 +54,7 @@ public class DingdingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "立即同步.", action = ActionPullSync.class)
+	@JaxrsMethodDescribe(value = "즉시 동기화.", action = ActionPullSync.class)
 	@GET
 	@Path("pull/sync")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -71,7 +71,7 @@ public class DingdingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "随机生成一个钉钉回调的EncodingAESKey.", action = ActionCallbackAESKey.class)
+	@JaxrsMethodDescribe(value = "DingTalk 콜백용 EncodingAESKey 무작위 생성.", action = ActionCallbackAESKey.class)
 	@GET
 	@Path("get/callback/aes")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -89,14 +89,14 @@ public class DingdingAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "到钉钉注册回调地址", action = ActionSyncOrganizationCallbackUrlRegister.class)
+	@JaxrsMethodDescribe(value = "DingTalk에 콜백 주소 등록", action = ActionSyncOrganizationCallbackUrlRegister.class)
 	@GET
 	@Path("sync/organization/register/callback/{enable}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void registerSyncOrgCallbackUrl(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("注册回调地址还是更新") @PathParam("enable") boolean enable) {
+			@JaxrsParameterDescribe("콜백 주소 등록 또는 업데이트") @PathParam("enable") boolean enable) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionSyncOrganizationCallbackUrlRegister.Wo> result = new ActionResult<>();
 		try {
@@ -109,7 +109,7 @@ public class DingdingAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 钉钉回调用的post接口 需要返回固定格式的json字符串
+	 * DingTalk 콜백용 post 인터페이스, 고정 형식의 json 문자열을 반환해야 함
 	 * 
 	 * @param asyncResponse
 	 * @param request
@@ -118,7 +118,7 @@ public class DingdingAction extends StandardJaxrsAction {
 	 * @param nonce
 	 * @param jsonElement
 	 */
-	@JaxrsMethodDescribe(value = "接收钉钉通讯录变更回调的接口", action = ActionSyncOrganizationCallbackPost.class)
+	@JaxrsMethodDescribe(value = "DingTalk 주소록 변경 콜백 수신 인터페이스", action = ActionSyncOrganizationCallbackPost.class)
 	@POST
 	@Path("sync/organization/callback")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

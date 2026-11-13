@@ -22,13 +22,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("describe")
-@JaxrsDescribe(value = "工程业务信息.", scope = DescribeScope.system)
+@JaxrsDescribe(value = "프로젝트 업무 정보.", scope = DescribeScope.system)
 public class DescribeAction extends StandardJaxrsAction {
 
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DescribeAction.class);
 
-	@JaxrsMethodDescribe(value = "工程业务信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "프로젝트 업무 정보.", action = ActionGet.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

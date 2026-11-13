@@ -31,7 +31,7 @@ class ActionCreate extends BaseAction {
             ActionResult<Wo> result = new ActionResult<>();
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             Business business = new Business(emc);
-            // 这里的角色多一个 RoleDefinition.ProcessPlatformCreator
+            // 여기서 역할이 하나 더 있음: RoleDefinition.ProcessPlatformCreator
             if ((effectivePerson.isNotManager()) && (!business.organization().person().hasRole(effectivePerson,
                     OrganizationDefinition.Manager, OrganizationDefinition.ProcessPlatformManager,
                     OrganizationDefinition.ProcessPlatformCreator))) {
@@ -46,7 +46,7 @@ class ActionCreate extends BaseAction {
             application.setCreatorPerson(effectivePerson.getDistinguishedName());
             application.setLastUpdatePerson(effectivePerson.getDistinguishedName());
             application.setLastUpdateTime(new Date());
-            // 如果是管理员就不加入到管理者
+            // 관리자면 관리자 목록에 추가하지 않음
             if (!effectivePerson.isManager()) {
                 application.setControllerList(
                         ListTools.add(application.getControllerList(), true, true,

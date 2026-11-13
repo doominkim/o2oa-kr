@@ -7,7 +7,7 @@ public class ActionPostEncryptWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -8195894624223752270L;
 
-	@FieldDescribe("用于登录的加密字串")
+	@FieldDescribe("로그인용 암호화 문자열")
 	private String token;
 
 	public String getToken() {

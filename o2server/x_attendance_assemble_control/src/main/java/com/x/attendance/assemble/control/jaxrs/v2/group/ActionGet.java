@@ -28,10 +28,10 @@ public class ActionGet extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2Group group = emc.find(id, AttendanceV2Group.class);
             if (group == null) {
-                throw new ExceptionNotExistObject(id+"考勤组");
+                throw new ExceptionNotExistObject(id+"근태 그룹");
             }
             Wo wo = Wo.copier.copy(group);
-            // 班次对象返回
+            // 교대 객체 반환
             if (group.getWorkDateProperties() != null && AttendanceV2Group.CHECKTYPE_Fixed.equals( group.getCheckType())) {
                 AttendanceV2GroupWorkDayProperties properties = group.getWorkDateProperties();
                 setPropertiesShiftData(new Business(emc), properties);

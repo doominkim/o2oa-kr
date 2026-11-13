@@ -18,9 +18,9 @@ import com.x.cms.core.express.tools.filter.QueryFilter;
 class DocumentCommentInfoService {
 
 	/**
-	 * 根据评论信息的标识查询评论信息的信息
+	 * 댓글 정보 식별자로 댓글 정보 조회
 	 * @param emc
-	 * @param id  主要是ID
+	 * @param id  주로 ID
 	 * @return
 	 * @throws Exception
 	 */
@@ -35,7 +35,7 @@ class DocumentCommentInfoService {
 	}
 
 	/**
-	 * 根据过滤条件查询符合要求的评论信息信息数量
+	 * 필터 조건에 맞는 댓글 정보 수 조회
 	 * @param emc
 	 * @param queryFilter
 	 * @return
@@ -47,7 +47,7 @@ class DocumentCommentInfoService {
 	}
 
 	/**
-	 * 根据过滤条件查询符合要求的评论信息信息列表
+	 * 필터 조건에 맞는 댓글 정보 목록 조회
 	 * @param emc
 	 * @param maxCount
 	 * @param orderField
@@ -62,7 +62,7 @@ class DocumentCommentInfoService {
 	}
 
 	/**
-	 * 根据条件查询符合条件的评论信息信息ID，根据上一条的sequnce查询指定数量的信息
+	 * 조건에 맞는 댓글 정보 ID 조회, 이전 항목의 sequnce 기준으로 지정 개수만큼 조회
 	 * @param emc
 	 * @param maxCount
 	 * @param sequnce
@@ -78,7 +78,7 @@ class DocumentCommentInfoService {
 	}
 
 	/**
-	 * 向数据库持久化评论信息信息
+	 * 댓글 정보를 데이터베이스에 영속화
 	 * @param emc
 	 * @param object
 	 * @param content
@@ -103,7 +103,7 @@ class DocumentCommentInfoService {
 
 		Integer maxOrder = 0;
 
-		if( documentCommentInfo == null ){ // 保存一个新的对象
+		if( documentCommentInfo == null ){ // 새 객체 저장
 			maxOrder = business.documentCommentInfoFactory().getMaxOrder( object.getDocumentId() );
 			if( maxOrder == null ) {
 				maxOrder = 0;
@@ -115,13 +115,13 @@ class DocumentCommentInfoService {
 			}
 			documentCommentInfo.setOrderNumber( maxOrder + 1 );
 			emc.persist( documentCommentInfo, CheckPersistType.all);
-			//document 评论数加1
+			//document 댓글 수 1 증가
 			if( document != null ) {
 				emc.beginTransaction( Document.class );
 				document.addCommentCount(1);
 				emc.check( document, CheckPersistType.all );
 			}
-		}else{ //对象已经存在，更新对象信息
+		}else{ //객체가 이미 존재하므로 객체 정보 갱신
 			Integer orderNumber = documentCommentInfo.getOrderNumber();
 			if(StringUtils.isNotEmpty( documentCommentInfo.getCreatorName() )) {
 				object.setCreatorName(documentCommentInfo.getCreatorName());
@@ -131,12 +131,12 @@ class DocumentCommentInfoService {
 			emc.check( documentCommentInfo, CheckPersistType.all );
 		}
 
-		if( documentCommentContent == null ){ // 保存一个新的评论内容对象
+		if( documentCommentContent == null ){ // 새 댓글 내용 객체 저장
 			documentCommentContent = new DocumentCommentContent();
 			documentCommentContent.setId( documentCommentInfo.getId() );
 			documentCommentContent.setContent( content );
 			emc.persist( documentCommentContent, CheckPersistType.all);
-		}else{ //对象已经存在，更新评论内容对象信息
+		}else{ //객체가 이미 존재하므로 댓글 내용 객체 정보 갱신
 			documentCommentContent.setContent( content );
 			emc.check( documentCommentContent, CheckPersistType.all );
 		}
@@ -146,7 +146,7 @@ class DocumentCommentInfoService {
 	}
 
 	/**
-	 * 根据评论信息标识删除评论信息信息
+	 * 댓글 정보 식별자로 댓글 정보 삭제
 	 * @param emc
 	 * @param id
 	 * @throws Exception

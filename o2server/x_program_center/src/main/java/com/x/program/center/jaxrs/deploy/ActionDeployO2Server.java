@@ -36,7 +36,7 @@ public class ActionDeployO2Server extends BaseAction {
         if (StringUtils.isBlank(fileName)) {
             fileName = this.fileName(filePart.getFormDataContentDisposition());
         }
-        LOGGER.info("{}操作升级产品:{}.", effectivePerson.getDistinguishedName(), fileName);
+        LOGGER.info("{} 제품 업그레이드 작업:{}.", effectivePerson.getDistinguishedName(), fileName);
         String ext = FilenameUtils.getExtension(fileName);
         if (!StringTools.isFileName(fileName) || StringUtils.isBlank(ext) || !set.contains(ext)) {
             throw new ExceptionIllegalFile(fileName);

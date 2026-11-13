@@ -54,11 +54,11 @@ class ActionSelect extends BaseAction {
 
 			WrapCms wrapAppInfo = this.get(business, appInfo, wi);
 
-			//2020年1月16日 O2LEE 查询栏目信息对应的配置支持信息JSON以字符串形式放到WrapCms对象中输出 ---->start
+			//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON을 문자열로 WrapCms 객체에 담아 출력 ---->start
 			if( wrapAppInfo != null ){
 				wrapAppInfo.setConfig( business.appInfoConfigFactory().getContent( appInfo.getId() ) );
 			}
-			//2020年1月16日 O2LEE 查询每个栏目信息对应的配置支持信息JSON以字符串形式放到WrapCms对象中输出 ---->end
+			//2020년 1월 16일 O2LEE 각 게시판 정보에 대응하는 설정 지원 정보 JSON을 문자열로 WrapCms 객체에 담아 출력 ---->end
 
 			OutputCacheObject outputCacheObject = new OutputCacheObject();
 			outputCacheObject.setName(appInfo.getAppName());
@@ -81,12 +81,12 @@ class ActionSelect extends BaseAction {
 		wo.setAppDictList(this.listAppDict(business, appInfo, wi));
 		wo.setFileList(WrapFile.outCopier.copy(business.entityManagerContainer().list(File.class, wi.listFileId())));
 
-		//添加CategoryExt信息导出内容逻辑
+		//CategoryExt 정보 내보내기 로직 추가
 		if( ListTools.isNotEmpty( wo.getCategoryInfoList() )){
 //			CategoryExt categoryExt = null;
 //			WrapCategoryExt wrapCategoryExt = null;
 			for( WrapCategoryInfo wrapCategoryInfo : wo.getCategoryInfoList() ){
-				//查询Category对应的CategoryExt
+				//Category에 대응하는 CategoryExt 조회
 				wrapCategoryInfo.setCategoryExt( WrapCategoryExt.outCopier.copy( business.entityManagerContainer().find( wrapCategoryInfo.getId(), CategoryExt.class )));
 			}
 		}
@@ -129,7 +129,7 @@ class ActionSelect extends BaseAction {
 	public static class Wo extends WrapCms {
 
 		private static final long serialVersionUID = -1130848016754973977L;
-		@FieldDescribe("返回标识")
+		@FieldDescribe("반환 식별자")
 		private String flag;
 
 		public String getFlag() {

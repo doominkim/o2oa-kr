@@ -77,7 +77,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionWorkPlaceProcess(e, "系统将用户传入的数据转换为一个工作场所对象信息时发生异常。");
+				Exception exception = new ExceptionWorkPlaceProcess(e, "사용자가 전달한 데이터를 근무 장소 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -87,7 +87,7 @@ public class ActionSave extends BaseAction {
 				attendanceWorkPlace = attendanceWorkPlaceServiceAdv.save(attendanceWorkPlace);
 				result.setData(new Wo(attendanceWorkPlace.getId()));
 			} catch (Exception e) {
-				Exception exception = new ExceptionWorkPlaceProcess(e, "工作场所名称不允许为空，无法进行数据保存。");
+				Exception exception = new ExceptionWorkPlaceProcess(e, "근무 장소 이름이 비어 있어 데이터를 저장할 수 없습니다.");
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}

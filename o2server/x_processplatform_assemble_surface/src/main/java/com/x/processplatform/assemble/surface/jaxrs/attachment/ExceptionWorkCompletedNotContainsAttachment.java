@@ -8,7 +8,7 @@ class ExceptionWorkCompletedNotContainsAttachment extends LanguagePromptExceptio
 
 	ExceptionWorkCompletedNotContainsAttachment(String title, String workCompletedId, String attachmentName,
 			String attachmentId) {
-		super("已完成工作 title:{} id:{}, 没有查找到附件 name:{} id:{}.", title, workCompletedId,
+		super("완료된 문서 title: {} id: {}에서 첨부 파일 name: {} id: {}을(를) 찾을 수 없습니다.", title, workCompletedId,
 				attachmentName, attachmentId);
 	}
 

@@ -7,7 +7,7 @@ class ExceptionDeployFail extends PromptException {
 	private static final long serialVersionUID = -5285650034988505084L;
 
 	public ExceptionDeployFail() {
-		super("部署失败.");
+		super("배포에 실패했습니다.");
 	}
 
 }

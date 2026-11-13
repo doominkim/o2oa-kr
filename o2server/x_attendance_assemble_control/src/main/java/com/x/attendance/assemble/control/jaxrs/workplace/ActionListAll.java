@@ -30,7 +30,7 @@ public class ActionListAll extends BaseAction {
 				attendanceWorkPlaceList = attendanceWorkPlaceServiceAdv.listAll();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionWorkPlaceProcess(e, "系统在查询所有的工作场所信息对象时发生异常。");
+				Exception exception = new ExceptionWorkPlaceProcess(e, "전체 근무 장소 정보를 조회하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -40,7 +40,7 @@ public class ActionListAll extends BaseAction {
 				try {
 					wraps = Wo.copier.copy(attendanceWorkPlaceList);
 				} catch (Exception e) {
-					Exception exception = new ExceptionWorkPlaceProcess(e, "系统将查询结果转换为可输出的数据信息时发生异常。");
+					Exception exception = new ExceptionWorkPlaceProcess(e, "조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}

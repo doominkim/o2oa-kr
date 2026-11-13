@@ -1,14 +1,14 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 MWF.xDesktop.requireApp("cms.Xform", "widget.Log", null, false);
-/** @class CMSLog 文档查看日志组件。
- * @o2cn 文档查看日志组件
+/** @class CMSLog 문서 열람 로그 컴포넌트.
+ * @o2cn 문서 열람 로그 컴포넌트
  * @alias CMSLog
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var log = this.form.get("name"); //获取组件
- * //方法2
- * var log = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var log = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var log = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {CMS}
@@ -27,12 +27,12 @@ MWF.xApplication.cms.Xform.Log = MWF.CMSLog =  new Class(
         }
         
         /**
-         * @summary log组件使用this.log实现功能
+         * @summary log 컴포넌트는 this.log로 기능 구현
          * @member {MWF.xApplication.cms.Xform.widget.Log}
          * @example
-         *  //可以在脚本中获取该组件
-         * var field = this.form.get("fieldId"); //获取组件对象
-         * var items = field.log.items; //获取日志的行对象
+         *  //스크립트에서 이 컴포넌트를 가져올 수 있음
+         * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+         * var items = field.log.items; //로그 행 객체 조회
          */
         this.log = new MWF.xApplication.cms.Xform.widget.Log( this.form.app, this.node, {
             "documentId" : this.form.businessData.document.id,

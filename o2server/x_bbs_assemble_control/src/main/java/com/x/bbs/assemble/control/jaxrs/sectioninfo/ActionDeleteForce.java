@@ -49,7 +49,7 @@ public class ActionDeleteForce extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "根据指定ID查询版块信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionSectionInfoProcess(e, "지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -59,15 +59,15 @@ public class ActionDeleteForce extends BaseAction {
 				forumInfo = forumInfoServiceAdv.get( sectionInfo.getForumId() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + sectionInfo.getForumId());
+				Exception exception = new ExceptionSectionInfoProcess(e, "ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + sectionInfo.getForumId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 		
-		// 判断用户是否有权限进行版块删除：1、系统管理员 2、论坛设置的管理员	
+		// 사용자의 게시판 삭제 권한 판단: 1. 시스템 관리자 2. 포럼에 설정된 관리자	
 		if ( check ) {
-			if ( !ThisApplication.isForumManager( effectivePerson, forumInfo ) ) {//无权限进行版块删除操作
+			if ( !ThisApplication.isForumManager( effectivePerson, forumInfo ) ) {//게시판 삭제 권한이 없습니다
 				check = false;
 				String forumName = "없거나 삭제된 포럼";
 				if( forumInfo != null ) {
@@ -91,7 +91,7 @@ public class ActionDeleteForce extends BaseAction {
 				operationRecordService.sectionOperation(effectivePerson.getDistinguishedName(), sectionInfo, "DELETE", hostIp, hostName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "根据指定ID删除版块信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionSectionInfoProcess(e, "지정한 ID의 섹션 정보를 삭제하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

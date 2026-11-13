@@ -92,7 +92,7 @@ public class JpaObjectTools {
 	}
 
 	/**
-	 * 将entity对象detach
+	 * entity 객체 detach
 	 * 
 	 * @param em
 	 * @param objects
@@ -108,7 +108,7 @@ public class JpaObjectTools {
 	}
 
 	/**
-	 * 将entity对象detach
+	 * entity 객체 detach
 	 * 
 	 * @param em
 	 * @param objects

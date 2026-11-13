@@ -23,24 +23,24 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("export")
-@JaxrsDescribe("信息发布栏目导出服务")
+@JaxrsDescribe("정보 발행 게시판 내보내기 서비스")
 public class AppInfoExportAction extends StandardJaxrsAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(AppInfoExportAction.class);
 
-    @JaxrsMethodDescribe(value = "根据ID导出栏目信息对象所有设计.", action = ActionAppInfoExport.class)
+    @JaxrsMethodDescribe(value = "ID로 게시판 정보 객체의 모든 설계 내보내기.", action = ActionAppInfoExport.class)
     @GET
     @Path("appInfo/{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void exportAppInfo( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("栏目ID") @PathParam("id") String id) {
+    public void exportAppInfo( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("게시판 ID") @PathParam("id") String id) {
         EffectivePerson effectivePerson = this.effectivePerson(request);
         ActionResult<ActionAppInfoExport.Wo> result = new ActionResult<>();
         try {
             result = new ActionAppInfoExport().execute( request, effectivePerson, id );
         } catch (Exception e) {
             result = new ActionResult<>();
-            Exception exception = new ExceptionAppInfoProcess(e, "根据指定ID导出栏目信息对象时发生异常。ID:" + id );
+            Exception exception = new ExceptionAppInfoProcess(e, "지정한 ID의 게시판 정보 객체를 내보내는 중 오류가 발생했습니다. ID:" + id );
             result.error(exception);
             logger.error(e, effectivePerson, request, null);
         }

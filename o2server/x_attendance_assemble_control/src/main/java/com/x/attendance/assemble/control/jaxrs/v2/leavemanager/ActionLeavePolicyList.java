@@ -44,7 +44,7 @@ public class ActionLeavePolicyList extends BaseAction {
                 Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("假期类型")
+        @FieldDescribe("휴가 유형")
         private AttendanceV2LeaveType leaveType;
 
         public AttendanceV2LeaveType getLeaveType() {

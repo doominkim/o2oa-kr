@@ -13,7 +13,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 绑定公众号openid 到当前登录用户
+ * 공식 계정 openid를 현재 로그인 사용자에 연결
  * Created by fancyLou on 3/8/21.
  * Copyright © 2021 O2. All rights reserved.
  */

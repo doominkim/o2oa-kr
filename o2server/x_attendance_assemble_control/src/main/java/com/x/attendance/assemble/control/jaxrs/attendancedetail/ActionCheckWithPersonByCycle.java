@@ -26,7 +26,7 @@ public class ActionCheckWithPersonByCycle extends BaseAction {
 	private static  Logger logger = LoggerFactory.getLogger( ActionCheckWithPersonByCycle.class );
 	
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String cycleYear, String cycleMonth ) throws Exception {
-		logger.info( ">>>>>>>>>>系统尝试对统计周期[" + cycleYear + "-" + cycleMonth + "]的打卡数据核对......");
+		logger.info( ">>>>>>>>>>시스템이 통계 주기[" + cycleYear + "-" + cycleMonth + "]의 출퇴근 데이터 대조 시도......");
 		ActionResult<Wo> result = new ActionResult<>();
 		EffectivePerson currentPerson = this.effectivePerson(request);
 		Map<String, Map<String, List<AttendanceStatisticalCycle>>> topUnitAttendanceStatisticalCycleMap = null;
@@ -37,15 +37,15 @@ public class ActionCheckWithPersonByCycle extends BaseAction {
 		
 		if( statusSystemImportOpt.getProcessing() ) {
 			check = false;
-			Exception exception = new ExceptionAttendanceDetailProcess( "考勤数据处理器正在处理数据中，请稍候再试......" );
+			Exception exception = new ExceptionAttendanceDetailProcess( "근태 데이터 처리기가 데이터를 처리 중입니다. 잠시 후 다시 시도하십시오......" );
 			result.error(exception);
 		}
 		
 		if (check) {
-			//查询系统是否正在进行数据操作
+			//시스템이 데이터 작업 중인지 조회
 			if( statusSystemImportOpt.getProcessing() ) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( "系统正在进行数据处理，请稍候再进行数据操作." );
+				Exception exception = new ExceptionAttendanceDetailProcess( "데이터를 처리 중입니다. 잠시 후 다시 작업하십시오." );
 				result.error( exception );
 			}else {
 				statusSystemImportOpt.setProcessing( true );
@@ -72,7 +72,7 @@ public class ActionCheckWithPersonByCycle extends BaseAction {
 			try {
 				attendanceEmployeeConfigList = attendanceEmployeeConfigServiceAdv.listByConfigType( "REQUIRED" );
 				if( ListTools.isEmpty( attendanceEmployeeConfigList ) ) {
-					//如果没有配置任何需要考勤的人员，那么就是全员需要考勤
+					//근태 대상 사용자 설정이 없으면 전원이 근태 대상
 					attendanceEmployeeConfigList = new ArrayList<>();
 					AttendanceEmployeeConfig config = null;
 					String identity = null;
@@ -104,7 +104,7 @@ public class ActionCheckWithPersonByCycle extends BaseAction {
 						}
 					}
 				}else{
-					//将现有考勤人员配置解析到人
+					//기존 근태 사용자 설정을 사용자 단위로 해석
 					unitConfigList = new ArrayList<>();
 					for(AttendanceEmployeeConfig attendanceEmployeeConfig : attendanceEmployeeConfigList){
 						if(StringUtils.isNotEmpty(attendanceEmployeeConfig.getEmployeeName())){
@@ -122,7 +122,7 @@ public class ActionCheckWithPersonByCycle extends BaseAction {
 								}
 							}
 						}else if(StringUtils.isNotEmpty(attendanceEmployeeConfig.getTopUnitName())){
-							//将公司的人员添加
+							//회사 사용자 추가
 							AttendanceEmployeeConfig newEmployeeConfig = null;
 							String identity = null;
 							Unit unit = null;
@@ -152,18 +152,18 @@ public class ActionCheckWithPersonByCycle extends BaseAction {
 				}
 			} catch ( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统在查询需要考勤的人员配置列表时发生异常." );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "근태 대상자 설정 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, currentPerson, request, null );
 			}
 		}
 		
 		if (check) {
-			try {// 查询所有的统计周期配置，组织成Map
+			try {// 모든 통계 주기 설정을 조회해 Map으로 구성
 				topUnitAttendanceStatisticalCycleMap = attendanceStatisticCycleServiceAdv.getCycleMapFormAllCycles( effectivePerson.getDebugger() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统在查询并且组织所有的统计周期时发生异常." );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "모든 통계 기간을 조회·구성하는 중 오류가 발생했습니다." );
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -175,7 +175,7 @@ public class ActionCheckWithPersonByCycle extends BaseAction {
 			}else{
 				emconfigList.addAll(attendanceEmployeeConfigList);
 			}
-			//由于检查统计周期是用的多线程，造成多份重复无法控制，改为提前检查统计周期
+			//통계 주기 검사를 멀티스레드로 하여 통제 불가한 중복이 생기므로 통계 주기를 미리 검사하도록 변경
 			for(AttendanceEmployeeConfig attendanceEmployeeConfig : emconfigList){
 				/*AttendanceStatisticalCycle attendanceStatisticalCycle = attendanceStatisticCycleServiceAdv.getAttendanceDetailStatisticCycle(
 						attendanceEmployeeConfig.getTopUnitName(),

@@ -68,19 +68,19 @@ class ActionListPaging extends BaseAction {
 
 		private static final long serialVersionUID = -1713805760437845242L;
 
-		@FieldDescribe("用于过滤条件的栏目ID列表.")
+		@FieldDescribe("필터 조건용 게시판 ID 목록.")
 		private List<String> appIdList;
 
-		@FieldDescribe("用于过滤条件的分类ID列表.")
+		@FieldDescribe("필터 조건용 분류 ID 목록.")
 		private List<String> categoryIdList;
 
-		@FieldDescribe("用于过滤条件的操作者列表.")
+		@FieldDescribe("필터 조건용 작업자 목록.")
 		private List<String> operatorList;
 
-		@FieldDescribe("用于过滤条件的操作列别.")
+		@FieldDescribe("필터 조건용 작업 유형.")
 		private String operationType;
 
-		@FieldDescribe("用于标题搜索的关键字.")
+		@FieldDescribe("제목 검색용 키워드.")
 		private String key;
 
 		public List<String> getAppIdList() {

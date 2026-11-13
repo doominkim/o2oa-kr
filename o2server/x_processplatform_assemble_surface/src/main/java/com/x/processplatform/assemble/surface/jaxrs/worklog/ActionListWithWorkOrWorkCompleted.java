@@ -96,7 +96,7 @@ class ActionListWithWorkOrWorkCompleted extends BaseAction {
 				if (null != node) {
 					Nodes nodes = node.downNextManual();
 					if (nodes.isEmpty()) {
-						// 如果没有找到后面的人工节点,那么有多种可能,有一种是已经删除,工作合并到其他分支了,那么找其他分支的下一步
+						// 뒤의 수동 노드를 찾지 못한 경우 여러 가능성이 있음, 그중 하나는 이미 삭제되어 업무 문서가 다른 분기로 병합된 경우이므로 다른 분기의 다음 단계를 찾음
 						WorkLog otherWorkLog = workLogs.stream()
 								.filter(g -> (g != o)
 										&& StringUtils.equals(g.getArrivedActivity(), o.getArrivedActivity())
@@ -124,7 +124,7 @@ class ActionListWithWorkOrWorkCompleted extends BaseAction {
 						}
 					}
 				}
-				// 下一环节处理人可能是重复处理导致重复的,去重
+				// 다음 단계 처리자가 중복 처리로 중복될 수 있어 중복 제거
 				wo.setNextTaskIdentityList(ListTools.trim(wo.getNextTaskIdentityList(), true, true));
 				wo.setNextTaskCompletedIdentityList(ListTools.trim(wo.getNextTaskCompletedIdentityList(), true, true));
 				wos.add(wo);

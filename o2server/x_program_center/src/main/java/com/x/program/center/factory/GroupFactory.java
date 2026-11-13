@@ -20,7 +20,7 @@ public class GroupFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定身份直接所在的群组
+	 * 지정 신분이 직접 속한 그룹 조회
 	 * @param identity
 	 * @return
 	 * @throws Exception
@@ -36,7 +36,7 @@ public class GroupFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定身份直接所在的群组对象
+	 * 지정 신분이 직접 속한 그룹 객체 조회
 	 * @param identity
 	 * @return
 	 * @throws Exception
@@ -47,7 +47,7 @@ public class GroupFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定用户直接所在的群组
+	 * 지정 사용자가 직접 속한 그룹 조회
 	 * @param personId
 	 * @return
 	 * @throws Exception
@@ -63,7 +63,7 @@ public class GroupFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定用户直接所在的群组对象
+	 * 지정 사용자가 직접 속한 그룹 객체 조회
 	 * @param personId
 	 * @return
 	 * @throws Exception

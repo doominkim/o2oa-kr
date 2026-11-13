@@ -1,5 +1,5 @@
 /**
- * 对公众平台发送给公众账号的消息加解密示例代码.
+ * 공식 플랫폼이 공식 계정에 보내는 메시지 암복호화 예제 코드.
  * 
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
@@ -7,9 +7,9 @@
 // ------------------------------------------------------------------------
 
 /**
- * 针对org.apache.commons.codec.binary.Base64，
- * 需要导入架包commons-codec-1.9（或commons-codec-1.8等其他版本）
- * 官方下载地址：http://commons.apache.org/proper/commons-codec/download_codec.cgi
+ * org.apache.commons.codec.binary.Base64 대상,
+ * commons-codec-1.9(또는 commons-codec-1.8 등 다른 버전) 라이브러리 가져오기 필요
+ * 공식 다운로드 주소: http://commons.apache.org/proper/commons-codec/download_codec.cgi
  */
 package com.x.organization.assemble.personal.jaxrs.exmail;
 
@@ -27,18 +27,18 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author ray 提供接收和推送给公众平台消息的加解密接口(UTF8编码的字符串).
+ * @author ray 공중 플랫폼 메시지 수신·전송용 암복호화 인터페이스 제공(UTF8 인코딩 문자열).
  *         <ol>
- *         <li>第三方回复加密消息给公众平台</li>
- *         <li>第三方收到公众平台发送的消息，验证消息的安全性，并对消息进行解密。</li>
+ *         <li>서드파티가 공중 플랫폼에 암호화 메시지 회신</li>
+ *         <li>서드파티가 공중 플랫폼이 보낸 메시지를 받아 보안성을 검증하고 복호화.</li>
  *         </ol>
- *         说明：异常java.security.InvalidKeyException:illegal Key Size的解决方案
+ *         설명: java.security.InvalidKeyException:illegal Key Size 예외 해결 방법
  *         <ol>
- *         <li>在官方网站下载JCE无限制权限策略文件（JDK7的下载地址：
+ *         <li>공식 사이트에서 JCE 무제한 권한 정책 파일 다운로드(JDK7 다운로드 주소:
  *         http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html</li>
- *         <li>下载后解压，可以看到local_policy.jar和US_export_policy.jar以及readme.txt</li>
- *         <li>如果安装了JRE，将两个jar文件放到%JRE_HOME%\lib\security目录下覆盖原来的文件</li>
- *         <li>如果安装了JDK，将两个jar文件放到%JDK_HOME%\jre\lib\security目录下覆盖原来文件</li>
+ *         <li>다운로드 후 압축을 풀면 local_policy.jar, US_export_policy.jar, readme.txt 확인 가능</li>
+ *         <li>JRE가 설치된 경우 두 jar 파일을 %JRE_HOME%\lib\security 디렉터리에 넣어 기존 파일 덮어쓰기</li>
+ *         <li>JDK가 설치된 경우 두 jar 파일을 %JDK_HOME%\jre\lib\security 디렉터리에 넣어 기존 파일 덮어쓰기</li>
  *         </ol>
  */
 public class WXBizMsgCrypt {
@@ -50,13 +50,13 @@ public class WXBizMsgCrypt {
 	String corpId;
 
 	/**
-	 * 构造函数
+	 * 생성자
 	 * 
-	 * @param token          公众平台上，开发者设置的token
-	 * @param encodingAesKey 公众平台上，开发者设置的EncodingAESKey
-	 * @param corpId         企业的corpid
+	 * @param token          공중 플랫폼에서 개발자가 설정한 token
+	 * @param encodingAesKey 공중 플랫폼에서 개발자가 설정한 EncodingAESKey
+	 * @param corpId         기업의 corpid
 	 * 
-	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
+	 * @throws AesException 실행 실패, 해당 예외의 오류 코드와 상세 오류 정보 확인
 	 */
 	public WXBizMsgCrypt(String token, String encodingAesKey, String corpId) throws AesException {
 		if (encodingAesKey.length() != 43) {
@@ -67,13 +67,13 @@ public class WXBizMsgCrypt {
 		this.corpId = corpId;
 		// aesKey = Base64.decodeBase64(encodingAesKey + "=");
 		/**
-		 * 默认的方法 aesKey = Base64.decodeBase64(encodingAesKey + "="); 实际运行有报错
+		 * 기본 방식 aesKey = Base64.decodeBase64(encodingAesKey + "="); 실제 실행 시 오류 발생
 		 */
 		java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
 		aesKey = decoder.decode(encodingAesKey);
 	}
 
-	// 生成4个字节的网络字节序
+	// 4바이트 네트워크 바이트 순서 생성
 	byte[] getNetworkBytesOrder(int sourceNumber) {
 		byte[] orderBytes = new byte[4];
 		orderBytes[3] = (byte) (sourceNumber & 0xFF);
@@ -83,7 +83,7 @@ public class WXBizMsgCrypt {
 		return orderBytes;
 	}
 
-	// 还原4个字节的网络字节序
+	// 4바이트 네트워크 바이트 순서 복원
 	int recoverNetworkBytesOrder(byte[] orderBytes) {
 		int sourceNumber = 0;
 		for (int i = 0; i < 4; i++) {
@@ -93,7 +93,7 @@ public class WXBizMsgCrypt {
 		return sourceNumber;
 	}
 
-	// 随机生成16位字符串
+	// 16자리 문자열 랜덤 생성
 	String getRandomStr() {
 		String base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 //		Random random = new Random();
@@ -106,11 +106,11 @@ public class WXBizMsgCrypt {
 	}
 
 	/**
-	 * 对明文进行加密.
+	 * 평문 암호화.
 	 * 
-	 * @param text 需要加密的明文
-	 * @return 加密后base64编码的字符串
-	 * @throws AesException aes加密失败
+	 * @param text 암호화할 평문
+	 * @return 암호화 후 base64로 인코딩된 문자열
+	 * @throws AesException aes 암호화 실패
 	 */
 	String encrypt(String randomStr, String text) throws AesException {
 		ByteGroup byteCollector = new ByteGroup();
@@ -125,24 +125,24 @@ public class WXBizMsgCrypt {
 		byteCollector.addBytes(textBytes);
 		byteCollector.addBytes(corpidBytes);
 
-		// ... + pad: 使用自定义的填充方式对明文进行补位填充
+		// ... + pad: 사용자 정의 패딩 방식으로 평문 패딩
 		byte[] padBytes = PKCS7Encoder.encode(byteCollector.size());
 		byteCollector.addBytes(padBytes);
 
-		// 获得最终的字节流, 未加密
+		// 최종 바이트 스트림 획득, 미암호화
 		byte[] unencrypted = byteCollector.toBytes();
 
 		try {
-			// 设置加密模式为AES的CBC模式
+			// 암호화 모드를 AES의 CBC 모드로 설정
 			Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
 			SecretKeySpec keySpec = new SecretKeySpec(aesKey, "AES");
 			IvParameterSpec iv = new IvParameterSpec(aesKey, 0, 16);
 			cipher.init(Cipher.ENCRYPT_MODE, keySpec, iv);
 
-			// 加密
+			// 암호화
 			byte[] encrypted = cipher.doFinal(unencrypted);
 
-			// 使用BASE64对加密后的字符串进行编码
+			// 암호화된 문자열을 BASE64로 인코딩
 			String base64Encrypted = base64.encodeToString(encrypted);
 
 			return base64Encrypted;
@@ -153,25 +153,25 @@ public class WXBizMsgCrypt {
 	}
 
 	/**
-	 * 对密文进行解密.
+	 * 암호문 복호화.
 	 * 
-	 * @param text 需要解密的密文
-	 * @return 解密得到的明文
-	 * @throws AesException aes解密失败
+	 * @param text 복호화할 암호문
+	 * @return 복호화된 평문
+	 * @throws AesException aes 복호화 실패
 	 */
 	String decrypt(String text) throws AesException {
 		byte[] original;
 		try {
-			// 设置解密模式为AES的CBC模式
+			// 복호화 모드를 AES의 CBC 모드로 설정
 			Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
 			SecretKeySpec key_spec = new SecretKeySpec(aesKey, "AES");
 			IvParameterSpec iv = new IvParameterSpec(Arrays.copyOfRange(aesKey, 0, 16));
 			cipher.init(Cipher.DECRYPT_MODE, key_spec, iv);
 
-			// 使用BASE64对密文进行解码
+			// BASE64로 암호문 디코딩
 			byte[] encrypted = Base64.decodeBase64(text);
 
-			// 解密
+			// 복호화
 			original = cipher.doFinal(encrypted);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,10 +180,10 @@ public class WXBizMsgCrypt {
 
 		String xmlContent, from_corpid;
 		try {
-			// 去除补位字符
+			// 패딩 문자 제거
 			byte[] bytes = PKCS7Encoder.decode(original);
 
-			// 分离16位随机字符串,网络字节序和corpId
+			// 16자리 랜덤 문자열, 네트워크 바이트 순서와 corpId 분리
 			byte[] networkOrder = Arrays.copyOfRange(bytes, 16, 20);
 
 			int xmlLength = recoverNetworkBytesOrder(networkOrder);
@@ -195,7 +195,7 @@ public class WXBizMsgCrypt {
 			throw new AesException(AesException.IllegalBuffer);
 		}
 
-		// corpid不相同的情况
+		// corpid가 다른 경우
 		if (!from_corpid.equals(corpId)) {
 			throw new AesException(AesException.ValidateCorpidError);
 		}
@@ -204,84 +204,84 @@ public class WXBizMsgCrypt {
 	}
 
 	/**
-	 * 将公众平台回复用户的消息加密打包.
+	 * 공중 플랫폼이 사용자에게 회신하는 메시지 암호화 패키징.
 	 * <ol>
-	 * <li>对要发送的消息进行AES-CBC加密</li>
-	 * <li>生成安全签名</li>
-	 * <li>将消息密文和安全签名打包成xml格式</li>
+	 * <li>전송할 메시지를 AES-CBC로 암호화</li>
+	 * <li>보안 서명 생성</li>
+	 * <li>메시지 암호문과 보안 서명을 xml 형식으로 패키징</li>
 	 * </ol>
 	 * 
-	 * @param replyMsg  公众平台待回复用户的消息，xml格式的字符串
-	 * @param timeStamp 时间戳，可以自己生成，也可以用URL参数的timestamp
-	 * @param nonce     随机串，可以自己生成，也可以用URL参数的nonce
+	 * @param replyMsg  공중 플랫폼이 사용자에게 회신할 메시지, xml 형식 문자열
+	 * @param timeStamp 타임스탬프, 직접 생성하거나 URL 파라미터의 timestamp 사용 가능
+	 * @param nonce     랜덤 문자열, 직접 생성하거나 URL 파라미터의 nonce 사용 가능
 	 * 
-	 * @return 加密后的可以直接回复用户的密文，包括msg_signature, timestamp, nonce, encrypt的xml格式的字符串
-	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
+	 * @return 사용자에게 바로 회신 가능한 암호화된 암호문, msg_signature, timestamp, nonce, encrypt를 포함한 xml 형식 문자열
+	 * @throws AesException 실행 실패, 해당 예외의 오류 코드와 상세 오류 정보 확인
 	 */
 	public String EncryptMsg(String replyMsg, String timeStamp, String nonce) throws AesException {
-		// 加密
+		// 암호화
 		String encrypt = encrypt(getRandomStr(), replyMsg);
 
-		// 生成安全签名
+		// 보안 서명 생성
 		if (StringUtils.isEmpty(timeStamp)) {
 			timeStamp = Long.toString(System.currentTimeMillis());
 		}
 
 		String signature = SHA1.getSHA1(token, timeStamp, nonce, encrypt);
 
-		// System.out.println("发送给平台的签名是: " + signature[1].toString());
-		// 生成发送的xml
+		// System.out.println("플랫폼으로 전송하는 서명: " + signature[1].toString());
+		// 전송할 xml 생성
 		String result = XMLParse.generate(encrypt, signature, timeStamp, nonce);
 		return result;
 	}
 
 	/**
-	 * 检验消息的真实性，并且获取解密后的明文.
+	 * 메시지 진위 검증 및 복호화된 평문 획득.
 	 * <ol>
-	 * <li>利用收到的密文生成安全签名，进行签名验证</li>
-	 * <li>若验证通过，则提取xml中的加密消息</li>
-	 * <li>对消息进行解密</li>
+	 * <li>수신한 암호문으로 보안 서명을 생성해 서명 검증</li>
+	 * <li>검증 통과 시 xml의 암호화 메시지 추출</li>
+	 * <li>메시지 복호화</li>
 	 * </ol>
 	 * 
-	 * @param msgSignature 签名串，对应URL参数的msg_signature
-	 * @param timeStamp    时间戳，对应URL参数的timestamp
-	 * @param nonce        随机串，对应URL参数的nonce
-	 * @param postData     密文，对应POST请求的数据
+	 * @param msgSignature 서명 문자열, URL 파라미터 msg_signature에 대응
+	 * @param timeStamp    타임스탬프, URL 파라미터 timestamp에 대응
+	 * @param nonce        랜덤 문자열, URL 파라미터 nonce에 대응
+	 * @param postData     암호문, POST 요청 데이터에 대응
 	 * 
-	 * @return 解密后的原文
-	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
+	 * @return 복호화된 원문
+	 * @throws AesException 실행 실패, 해당 예외의 오류 코드와 상세 오류 정보 확인
 	 */
 	public String DecryptMsg(String msgSignature, String timeStamp, String nonce, String postData) throws AesException {
 
-		// 密钥，公众账号的app secret
-		// 提取密文
+		// 키, 공식 계정의 app secret
+		// 암호문 추출
 		Object[] encrypt = XMLParse.extract(postData);
 
-		// 验证安全签名
+		// 보안 서명 검증
 		String signature = SHA1.getSHA1(token, timeStamp, nonce, encrypt[1].toString());
 
-		// 和URL中的签名比较是否相等
-		// System.out.println("第三方收到URL中的签名：" + msg_sign);
-		// System.out.println("第三方校验签名：" + signature);
+		// URL의 서명과 일치 여부 비교
+		// System.out.println("서드파티가 받은 URL의 서명: " + msg_sign);
+		// System.out.println("서드파티 서명 검증: " + signature);
 		if (!signature.equals(msgSignature)) {
 			throw new AesException(AesException.ValidateSignatureError);
 		}
 
-		// 解密
+		// 복호화
 		String result = decrypt(encrypt[1].toString());
 		return result;
 	}
 
 	/**
-	 * 验证URL
+	 * URL 검증
 	 * 
-	 * @param msgSignature 签名串，对应URL参数的msg_signature
-	 * @param timeStamp    时间戳，对应URL参数的timestamp
-	 * @param nonce        随机串，对应URL参数的nonce
-	 * @param echoStr      随机串，对应URL参数的echostr
+	 * @param msgSignature 서명 문자열, URL 파라미터 msg_signature에 대응
+	 * @param timeStamp    타임스탬프, URL 파라미터 timestamp에 대응
+	 * @param nonce        랜덤 문자열, URL 파라미터 nonce에 대응
+	 * @param echoStr      랜덤 문자열, URL 파라미터 echostr에 대응
 	 * 
-	 * @return 解密之后的echostr
-	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
+	 * @return 복호화된 echostr
+	 * @throws AesException 실행 실패, 해당 예외의 오류 코드와 상세 오류 정보 확인
 	 */
 	public String VerifyURL(String msgSignature, String timeStamp, String nonce, String echoStr) throws AesException {
 		String signature = SHA1.getSHA1(token, timeStamp, nonce, echoStr);

@@ -38,7 +38,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 保存文档
+ * 문서 저장
  *
  * @author O2LEE
  *
@@ -89,7 +89,7 @@ public class ActionPersistSaveDocument extends BaseAction {
 			throw new ExceptionAccessDenied(effectivePerson, document);
 		}
 
-		// 查询分类设置的编辑表单
+		// 분류에 설정된 편집 양식 조회
 		if (StringUtils.isEmpty(categoryInfo.getFormId())) {
 			throw new ExceptionCategoryFormIdEmpty();
 		}
@@ -117,7 +117,7 @@ public class ActionPersistSaveDocument extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionDocumentInfoProcess(e,
-							"系统在根据ID查询阅读表单时发生异常！ID：" + categoryInfo.getReadFormId());
+							"ID로 읽기 양식을 조회하는 중 오류가 발생했습니다! ID: " + categoryInfo.getReadFormId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -151,7 +151,7 @@ public class ActionPersistSaveDocument extends BaseAction {
 						document.setCreatorUnitName(effectivePerson.getDistinguishedName());
 						document.setCreatorTopUnitName(effectivePerson.getDistinguishedName());
 					} else {
-						// 尝试一下根据当前用户获取用户的第一个身份
+						// 현재 사용자로 사용자의 첫 번째 신분 조회 시도
 						document.setCreatorIdentity(
 								userManagerService.getMajorIdentityWithPerson(effectivePerson.getDistinguishedName()));
 					}
@@ -203,7 +203,7 @@ public class ActionPersistSaveDocument extends BaseAction {
 				wo.setId(document.getId());
 				result.setData(wo);
 
-				// 检查是否需要删除热点图片
+				// 핫 이미지 삭제 필요 여부 확인
 				try {
 					ThisApplication.queueDocumentUpdate.send(document);
 				} catch (Exception e1) {
@@ -211,13 +211,13 @@ public class ActionPersistSaveDocument extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在创建文档信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글을 만드는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 从流程管理中复制所有的附件到CMS
+		// 프로세스 관리의 모든 첨부파일을 CMS로 복사
 		if (check) {
 			if (wi.getWf_attachmentIds() != null && wi.getWf_attachmentIds().length > 0) {
 				FileInfo fileInfo = null;
@@ -257,14 +257,14 @@ public class ActionPersistSaveDocument extends BaseAction {
 		}
 
 		if (check) {
-			try {// 将读者以及作者信息持久化到数据库中
+			try {// 독자 및 작성자 정보를 데이터베이스에 저장
 				if (oldDocument == null || wi.getReaderList() != null || wi.getAuthorList() != null) {
 					documentPersistService.refreshDocumentPermission(document.getId(), wi.getReaderList(),
 							wi.getAuthorList());
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在核对文档访问管理权限信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 접근·관리 권한을 확인하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -308,70 +308,70 @@ public class ActionPersistSaveDocument extends BaseAction {
 
 	public static class Wi {
 
-		@FieldDescribe("ID，非必填，更新时必填写，不然就是新增文档")
+		@FieldDescribe("ID, 선택 사항, 수정 시 필수, 없으면 새 문서 추가")
 		private String id;
 
-		@FieldDescribe("文档标题，<font style='color:red'>必填</font>")
+		@FieldDescribe("문서 제목, <font style='color:red'>필수</font>")
 		private String title;
 
-		@FieldDescribe("客体密级标识")
+		@FieldDescribe("객체 보안 등급 식별자")
 		private Integer objectSecurityClearance;
 
-		@FieldDescribe("分类ID，<font style='color:red'>必填</font>")
+		@FieldDescribe("분류ID, <font style='color:red'>필수</font>")
 		private String categoryId;
 
-		@FieldDescribe("文档操作者身份，如果不传入则取登录者信息。")
+		@FieldDescribe("문서 조작자 신분, 전달하지 않으면 로그인 사용자 정보를 사용합니다.")
 		private String identity = null;
 
-		@FieldDescribe("文档摘要，非必填")
+		@FieldDescribe("문서 요약, 선택 사항")
 		private String summary;
 
-		@FieldDescribe("文档状态: published | draft | waitPublish，非必填，默认为draft")
+		@FieldDescribe("문서 상태: published | draft | waitPublish, 선택 사항, 기본값 draft")
 		private String docStatus = "draft";
 
-		@FieldDescribe("文档发布时间")
+		@FieldDescribe("문서 게시 시간")
 		private Date publishTime;
 
-		@FieldDescribe("首页图片列表，非必填")
+		@FieldDescribe("대표 이미지 목록, 선택 사항")
 		private List<String> pictureList = null;
 
-		@FieldDescribe("数据的路径列表，非必填")
+		@FieldDescribe("데이터 경로 목록, 선택 사항")
 		private String[] dataPaths = null;
 
-		@FieldDescribe("启动流程的JobId，非必填")
+		@FieldDescribe("프로세스를 시작한 JobId, 선택 사항")
 		private String wf_jobId = null;
 
-		@FieldDescribe("启动流程的WorkId，非必填")
+		@FieldDescribe("프로세스를 시작한 WorkId, 선택 사항")
 		private String wf_workId = null;
 
-		@FieldDescribe("启动流程的附件列表，非必填")
+		@FieldDescribe("프로세스를 시작한 첨부파일 목록, 선택 사항")
 		private String[] wf_attachmentIds = null;
 
-		@FieldDescribe("文档数据，非必填")
+		@FieldDescribe("문서 데이터, 선택 사항")
 		private JsonElement docData = null;
 
-		@FieldDescribe("文档读者，非必填：{'permission':'读者', 'permissionObjectType':'组织', 'permissionObjectCode':'组织全称', 'permissionObjectName':'组织全称'}")
+		@FieldDescribe("문서 독자, 선택 사항: {'permission':'독자', 'permissionObjectType':'조직', 'permissionObjectCode':'조직 전체 이름', 'permissionObjectName':'조직 전체 이름'}")
 		private List<PermissionInfo> readerList = null;
 
-		@FieldDescribe("文档编辑者，非必填：{'permission':'读者', 'permissionObjectType':'组织', 'permissionObjectCode':'组织全称', 'permissionObjectName':'组织全称'}")
+		@FieldDescribe("문서 편집자, 선택 사항: {'permission':'독자', 'permissionObjectType':'조직', 'permissionObjectCode':'조직 전체 이름', 'permissionObjectName':'조직 전체 이름'}")
 		private List<PermissionInfo> authorList = null;
 
-		@FieldDescribe("定时发布文档消息提醒对象(参数同消息发布接口对象).")
+		@FieldDescribe("예약 게시 문서 메시지 알림 대상(파라미터는 메시지 게시 인터페이스 객체와 동일).")
 		private DocumentNotify documentNotify;
 
-		@FieldDescribe("图片列表，非必填")
+		@FieldDescribe("이미지 목록, 선택 사항")
 		private List<String> cloudPictures = null;
 
-		@FieldDescribe("不修改权限（跳过权限设置，保留原来的设置），非必填")
+		@FieldDescribe("권한 수정 안 함(권한 설정을 건너뛰고 기존 설정 유지), 선택 사항")
 		private Boolean skipPermission = false;
 
-		@FieldDescribe("业务数据String值01.")
+		@FieldDescribe("업무 데이터 String 값01.")
 		private String stringValue01;
 
-		@FieldDescribe("业务数据String值02.")
+		@FieldDescribe("업무 데이터 String 값02.")
 		private String stringValue02;
 
-		@FieldDescribe("业务数据String值03.")
+		@FieldDescribe("업무 데이터 String 값03.")
 		private String stringValue03;
 
 		private String importBatchName;

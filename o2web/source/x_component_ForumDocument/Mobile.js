@@ -376,7 +376,7 @@ MWF.xApplication.ForumDocument.Mobile.ReplyDocument = new Class({
         //    userIcon.src = "data:image/png;base64,"+json.data.icon;
         //}.bind(this) );
     },
-    createReply : function(itemNode, ev ){ // 对回复进行回复
+    createReply : function(itemNode, ev ){ // 답글에 답글 달기
         // var ua = navigator.userAgent.toLowerCase();
         // if (/iphone|ipad|ipod/.test(ua)) {
         //     window.webkit.messageHandlers.ReplyAction.postMessage({body:this.data.id});

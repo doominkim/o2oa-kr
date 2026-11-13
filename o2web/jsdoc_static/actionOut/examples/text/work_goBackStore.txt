@@ -1,11 +1,11 @@
 {
-        "manualTaskIdentityMatrix": { //回退相关后续处理人
+        "manualTaskIdentityMatrix": { //반려 관련 후속 처리자
             "matrix": [
                 [
-                    "张三@zhangsan@I"
+                    "홍길동@zhangsan@I"
                 ]
             ]
         },
-        "activity": "db1f894f-86c8-4b73-8f08-c2dd00a075a1", //回退的活动
-        "ActivityType": "manual" //回退的活动类型
+        "activity": "db1f894f-86c8-4b73-8f08-c2dd00a075a1", //반려된 활동
+        "ActivityType": "manual" //반려된 활동 유형
     }

@@ -27,19 +27,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("image")
-@JaxrsDescribe("附件信息管理")
+@JaxrsDescribe("첨부파일 정보 관리")
 public class ImageAction extends StandardJaxrsAction{
 
 	private static  Logger logger = LoggerFactory.getLogger( ImageAction.class );
 	
-	@JaxrsMethodDescribe(value = "将上传的图片传为base64.", action = ActionImageBase64Encode.class)
+	@JaxrsMethodDescribe(value = "업로드한 이미지를 base64로 변환.", action = ActionImageBase64Encode.class)
 	@POST
 	@Path("encode/base64/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public void imageEncode(@Suspended final AsyncResponse asyncResponse, 
 			@Context HttpServletRequest request, 
-			@JaxrsParameterDescribe("尺寸大小") @PathParam("size") Integer size,
+			@JaxrsParameterDescribe("크기") @PathParam("size") Integer size,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
 			@FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<WrapOutString> result = new ActionResult<>();
@@ -53,16 +53,16 @@ public class ImageAction extends StandardJaxrsAction{
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 	
-	@JaxrsMethodDescribe(value = "修改指定图片附件的尺寸大小.", action = ActionImageChangeSize.class)
+	@JaxrsMethodDescribe(value = "지정 이미지 첨부파일 크기 조정.", action = ActionImageChangeSize.class)
 	@POST
 	@Path("resize/id/{id}/width/{width}/height/{height}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public void imageChangeSize(@Suspended final AsyncResponse asyncResponse, 
 			@Context HttpServletRequest request, 
-			@JaxrsParameterDescribe("图片附件ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("最大宽度") @PathParam("width") Integer width,
-			@JaxrsParameterDescribe("最大高度") @PathParam("height") Integer height ) {
+			@JaxrsParameterDescribe("이미지 첨부파일 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("최대 너비") @PathParam("width") Integer width,
+			@JaxrsParameterDescribe("최대 높이") @PathParam("height") Integer height ) {
 		ActionResult<ActionImageChangeSize.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

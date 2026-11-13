@@ -7,6 +7,6 @@ class ExceptionConversationTypeError extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionConversationTypeError() {
-		super("会话类型不能为空或类型不正确.");
+		super("대화방 유형이 비어 있거나 올바르지 않습니다.");
 	}
 }

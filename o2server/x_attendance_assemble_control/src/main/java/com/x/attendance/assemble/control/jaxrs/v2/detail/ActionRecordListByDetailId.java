@@ -68,9 +68,9 @@ public class ActionRecordListByDetailId  extends BaseAction {
     public static class WoRecord extends AttendanceV2CheckInRecord {
         private static final long serialVersionUID = -4639650669016226001L;
 
-        @FieldDescribe("外出记录")
+        @FieldDescribe("외출 기록")
         private AttendanceV2LeaveData leaveData;
-        @FieldDescribe("请假记录")
+        @FieldDescribe("휴가 기록")
         private AttendanceV2LeaveRequest leaveRequest;
 
         static WrapCopier<AttendanceV2CheckInRecord, WoRecord> copier = WrapCopierFactory.wo(AttendanceV2CheckInRecord.class, WoRecord.class, null,

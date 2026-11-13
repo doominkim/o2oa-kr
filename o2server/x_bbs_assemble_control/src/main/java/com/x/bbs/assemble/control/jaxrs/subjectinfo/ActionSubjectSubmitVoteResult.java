@@ -40,7 +40,7 @@ public class ActionSubjectSubmitVoteResult extends BaseAction {
 			wrapIn.setHostIp(request.getRemoteHost());
 			if ( wrapIn.getId() == null ) {
 				check = false;
-				Exception exception = new ExceptionSubjectPropertyEmpty("主题ID");
+				Exception exception = new ExceptionSubjectPropertyEmpty("주제 ID");
 				result.error(exception);
 			}
 			if ( wrapIn.getOptionGroups() == null || wrapIn.getOptionGroups().isEmpty() ) {

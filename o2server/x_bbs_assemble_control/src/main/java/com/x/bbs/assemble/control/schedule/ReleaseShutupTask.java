@@ -19,7 +19,7 @@ import java.util.List;
 
 
 /**
- * 定时处理解除禁用任务
+ * 정기 발언 금지 해제 처리 작업
  * @author LJ
  */
 public class ReleaseShutupTask extends AbstractJob {
@@ -29,16 +29,16 @@ public class ReleaseShutupTask extends AbstractJob {
 	@Override
 	public void schedule(JobExecutionContext jobExecutionContext) {
 		try {
-			logger.info("开始定时处理解除禁用任务=======");
+			logger.info("정기 발언 금지 해제 처리 작업 시작=======");
 			List<String> list = this.getReleaseShutupList();
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				emc.beginTransaction(BBSShutup.class);
 				emc.delete(BBSShutup.class, list);
 				emc.commit();
 			}
-			logger.info("完成定时处理解除禁用任务=======");
+			logger.info("정기 발언 금지 해제 처리 작업 완료=======");
 		} catch (Exception e) {
-			logger.warn("定时处理解除禁用任务异常：{}.", e.getMessage());
+			logger.warn("정기 발언 금지 해제 처리 작업 예외: {}.", e.getMessage());
 			logger.error(e);
 		}
 	}

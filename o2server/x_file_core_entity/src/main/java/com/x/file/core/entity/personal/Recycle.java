@@ -26,10 +26,10 @@ import com.x.file.core.entity.PersistenceProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 回收站
+ * 휴지통
  * @author sword
  */
-@Schema(name = "Recycle", description = "云文件个人回收站.")
+@Schema(name = "Recycle", description = "클라우드 파일 개인 휴지통.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Personal.Recycle.table, uniqueConstraints = {
@@ -53,20 +53,20 @@ public class Recycle extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
-		/* 如果扩展名为空去掉null */
+		/* 확장자가 비어 있으면 null 제거 */
 		this.extension = StringUtils.trimToEmpty(extension);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public Recycle() {
 
@@ -89,14 +89,14 @@ public class Recycle extends SliceJpaObject {
 	}
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("删除的文件或目录名称.")
+	@FieldDescribe("삭제한 파일 또는 디렉터리 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true, citationNotExists =
@@ -105,7 +105,7 @@ public class Recycle extends SliceJpaObject {
 	private String name;
 
 	public static final String fileId_FIELDNAME = "fileId";
-	@FieldDescribe("文件或目录id.")
+	@FieldDescribe("파일 또는 디렉터리 id.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + fileId_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true, citationNotExists =
 	@CitationNotExist(fields = { "fileId", "id" }, type = Recycle.class, equals = {
@@ -113,26 +113,26 @@ public class Recycle extends SliceJpaObject {
 	private String fileId;
 
 	public static final String fileType_FIELDNAME = "fileType";
-	@FieldDescribe("删除的文件类型:文件(attachment)|目录(folder).")
+	@FieldDescribe("삭제한 파일 유형: 파일(attachment)|디렉터리(folder).")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + fileType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String fileType;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+	@FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String extension;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Index(name = TABLE + IndexNameMiddle + length_FIELDNAME)
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String validTime_FIELDNAME = "validTime";
-	@FieldDescribe("保存到时间")
+	@FieldDescribe("보관 기한")
 	@Column(name = ColumnNamePrefix + validTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + validTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

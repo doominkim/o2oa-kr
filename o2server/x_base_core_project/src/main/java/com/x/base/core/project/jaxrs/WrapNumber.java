@@ -13,7 +13,7 @@ public class WrapNumber extends GsonPropertyObject {
 		this.value = o;
 	}
 
-	@FieldDescribe("数字值")
+	@FieldDescribe("숫자 값")
 	private Number value;
 
 	public Number getValue() {

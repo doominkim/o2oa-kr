@@ -65,8 +65,8 @@ public class DataItemConverter<T extends DataItem> {
     }
 
     /**
-     * 对root进行检查<br>
-     * 1.检查是否使用了纯数字作为key
+     * root 검사<br>
+     * 1. 순수 숫자를 key로 사용했는지 검사
      *
      * @param jsonElement
      * @throws RunningException
@@ -100,18 +100,18 @@ public class DataItemConverter<T extends DataItem> {
 
         List<T> list = this.disassemble(root, paths, new ArrayList<>());
         /**
-         * 20170905 通过 javascripting 转换的Map将 array -> {0:"xxxxx"}
-         * 的格式,变成了一个对象而非array,所以这里需要进行单独的判断,把用数字下标的Map强制设置为List
+         * 20170905 javascripting으로 변환된 Map이 array -> {0:"xxxxx"}
+         * 형식으로 배열이 아닌 객체가 되므로 별도 판단이 필요함, 숫자 인덱스를 사용하는 Map을 강제로 List로 설정
          */
-        // fixme 使用 ListIterator 替代后面的for循环。 消除List::get的使用
+        // fixme ListIterator로 뒤의 for 루프를 대체하여 List::get 사용 제거
 //        for (int i = 0; i < (list.size() - 1); i++) {
-//            /** 因为要取下一个,循环不用取最后一个数. */
+//            /** 다음 항목을 가져와야 하므로 루프에서 마지막 수는 가져오지 않음. */
 //            T t = list.get(i);
 //            if (t.getItemType() == ItemType.o) {
 //                T next = list.get(i + 1);
-//                // 是一个数字的值,说明是数组中的一个
+//                // 숫자 값이면 배열의 한 요소임
 //                if (StringUtils.isNumeric(next.paths().get(next.paths().size() - 1))) {
-//                    // 说明上一个T应该是一个Array
+//                    // 이전 T가 Array여야 함을 의미
 //                    t.setItemType(ItemType.a);
 //                }
 //            }
@@ -122,12 +122,12 @@ public class DataItemConverter<T extends DataItem> {
             T t = iterator.next();
             if (t.getItemType() == ItemType.o && iterator.hasNext()) {
                 T next = iterator.next();
-                // 是一个数字的值,说明是数组中的一个
+                // 숫자 값이면 배열의 한 요소임
                 if (next.paths().size() > t.paths().size() && StringUtils.isNumeric(next.paths().get(next.paths().size() - 1))) {
-                    // 说明上一个T应该是一个Array
+                    // 이전 T가 Array여야 함을 의미
                     t.setItemType(ItemType.a);
                 }
-                // 回到上一个元素
+                // 이전 요소로 돌아감
                 iterator.previous();
             }
         }
@@ -208,7 +208,7 @@ public class DataItemConverter<T extends DataItem> {
     }
 
     /**
-     * 将8层以上的对象或者Array直接以jsonElement的toString进行保存,不再进行递归解析
+     * 8단계 이상의 객체나 Array는 jsonElement의 toString으로 바로 저장하고 더 이상 재귀 파싱하지 않음
      *
      * @param t
      * @param root
@@ -251,14 +251,14 @@ public class DataItemConverter<T extends DataItem> {
                 if (o.isJsonObject()) {
                     o = o.getAsJsonObject().get(path);
                 } else {
-                    // 无法正确定位位置,结束本条内容组装,直接返回
+                    // 위치를 정확히 찾을 수 없어 이 항목 조립을 종료하고 바로 반환
                     return root;
                 }
             } else {
                 if (o.isJsonArray()) {
                     o = o.getAsJsonArray().get(Integer.parseInt(path));
                 } else {
-                    // 无法正确定位位置,结束本条内容组装,直接返回
+                    // 위치를 정확히 찾을 수 없어 이 항목 조립을 종료하고 바로 반환
                     return root;
                 }
             }
@@ -268,14 +268,14 @@ public class DataItemConverter<T extends DataItem> {
     }
 
     /**
-     * 将子元素加入到父元素中
+     * 자식 요소를 부모 요소에 추가
      *
      * @param parent
      * @param name
      * @param sub
      */
     private void attachToParent(JsonElement parent, String name, JsonElement sub) {
-        // 如果字段名不幸设置为存数字这里需要进行特别的判断
+        // 필드명이 숫자로만 설정된 경우 여기서 특별히 판단해야 함
         if (!StringUtils.isNumeric(name)) {
             if (parent.isJsonObject()) {
                 parent.getAsJsonObject().add(name, sub);
@@ -286,7 +286,7 @@ public class DataItemConverter<T extends DataItem> {
     }
 
     /**
-     * 将T转换成一个独立的jsonElement
+     * T를 독립된 jsonElement로 변환
      *
      * @param t
      * @return
@@ -429,8 +429,8 @@ public class DataItemConverter<T extends DataItem> {
 //    }
 
     /**
-     * 此方法在item数据较大(>20000) 时由于双重循环导致运行时间较长( > 5000ms) 改为新的使用hashMap实现.<br>
-     * Thanks 李舟<lizhou@mochasoft.com.cn>
+     * 이 메서드는 item 데이터가 클 때(>20000) 이중 루프로 실행 시간이 길어져(> 5000ms) hashMap을 사용하는 새 구현으로 변경.<br>
+     * Thanks 이주<lizhou@mochasoft.com.cn>
      **/
     public List<T> subtract(List<T> l1, List<T> l2) {
         List<T> result = new ArrayList<>();
@@ -508,7 +508,7 @@ public class DataItemConverter<T extends DataItem> {
     }
 
     /**
-     * 提取DataItem纯文本辅助类
+     * DataItem 순수 텍스트 추출 보조 클래스
      *
      * @author ray
      *
@@ -556,7 +556,7 @@ public class DataItemConverter<T extends DataItem> {
         };
 
         /**
-         * 提取DataItem中的文本,拼接成String
+         * DataItem의 텍스트를 추출하여 String으로 연결
          *
          * @param items
          * @param escapeNumber

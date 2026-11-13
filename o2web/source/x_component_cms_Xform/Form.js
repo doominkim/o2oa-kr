@@ -9,17 +9,17 @@ MWF.require("MWF.widget.O2Identity", null, false);
 
 MWF.xDesktop.requireApp("cms.Xform", "Package", null, false);
 
-/** @class CMSForm 内容管理表单。
- * @o2cn 内容管理表单
+/** @class CMSForm 콘텐츠 관리 양식.
+ * @o2cn 콘텐츠 관리 양식
  * @o2category FormComponents
  * @o2range {CMS}
  * @alias CMSForm
  * @example
- * //可以在脚本中获取表单
- * //方法1：
- * var form = this.form.getApp().appForm; //获取表单
- * //方法2
- * var form = this.target; //在表单本身的事件脚本中获取
+ * //스크립트에서 양식을 가져올 수 있음
+ * //방법 1:
+ * var form = this.form.getApp().appForm; //양식 조회
+ * //방법 2
+ * var form = this.target; //양식 자체 이벤트 스크립트에서 조회
  * @hideconstructor
  */
 MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
@@ -36,118 +36,118 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             "showAttachment": true,
             "moduleEvents": [
                 /**
-                 * 表单加载前触发。表单html已经就位。
+                 * 양식 로드 전 발생. 양식 html이 준비된 상태.
                  * @event CMSForm#queryLoad
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "queryLoad",
                 /**
-                 * 表单加载前触发。数据(businessData)已经就绪。
+                 * 양식 로드 전 발생. 데이터(businessData)가 준비된 상태.
                  * @event CMSForm#beforeLoad
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "beforeLoad",
                 /**
-                 * 表单的所有组件加载前触发，此时表单的样式和js head已经加载。
+                 * 양식의 모든 컴포넌트 로드 전 발생. 이때 양식 스타일과 js head는 로드된 상태.
                  * @event CMSForm#beforeModulesLoad
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "beforeModulesLoad",
                 /**
-                 * 表单加载后触发。
+                 * 양식 로드 후 발생.
                  * @event CMSForm#postLoad
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "postLoad",
                 /**
-                 * 表单的所有组件加载后触发。
+                 * 양식의 모든 컴포넌트 로드 후 발생.
                  * @event CMSForm#afterModulesLoad
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "afterModulesLoad",
                 /**
-                 * 表单加载后触发。
+                 * 양식 로드 후 발생.
                  * @event CMSForm#afterLoad
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "afterLoad",
                 /**
-                 * 保存前触发。
+                 * 저장 전 발생.
                  * @event CMSForm#beforeSave
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "beforeSave",
                 /**
-                 * 数据已经整理完成，但还未保存到后台时触发。this.event指向整理完成的数据
+                 * 데이터 정리가 완료되었지만 아직 백그라운드에 저장하지 않았을 때 발생. this.event는 정리된 데이터를 가리킴
                  * @event CMSForm#postSave
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "postSave",
                 /**
-                 * 数据保存到后台后触发。
+                 * 데이터를 백그라운드에 저장한 후 발생.
                  * @event CMSForm#afterSave
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "afterSave",
                 /**
-                 * 关闭前触发。
+                 * 닫기 전 발생.
                  * @event CMSForm#beforeClose
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "beforeClose",
                 /**
-                 * 发布前触发。
+                 * 발행 전 발생.
                  * @event CMSForm#beforePublish
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "beforePublish",
                 /**
-                 * 数据已经整理完成，但还未调用服务发布触发。this.event指向整理完成的数据
+                 * 데이터 정리가 완료되었지만 아직 발행 서비스를 호출하지 않았을 때 발생. this.event는 정리된 데이터를 가리킴
                  * @event CMSForm#postPublish
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "postPublish",
                 /**
-                 * 执行后台服务发布后触发。
+                 * 백그라운드 발행 서비스 실행 후 발생.
                  * @event CMSForm#afterPublish
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "afterPublish",
                 /**
-                 * 定时发布前触发。
+                 * 예약 발행 전 발생.
                  * @event CMSForm#beforeWaitPublish
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "beforeWaitPublish",
                 /**
-                 * 数据已经整理完成，但还未调用定时发布服务前触发。this.event指向整理完成的数据
+                 * 데이터 정리가 완료되었지만 아직 예약 발행 서비스를 호출하지 않았을 때 발생. this.event는 정리된 데이터를 가리킴
                  * @event CMSForm#postWaitPublish
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "postWaitPublish",
                 /**
-                 * 执行后台定时发布服务后触发。
+                 * 백그라운드 예약 발행 서비스 실행 후 발생.
                  * @event CMSForm#afterPublish
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "afterWaitPublish",
                 /**
-                 * 删除前触发。
+                 * 삭제 전 발생.
                  * @event CMSForm#beforeDelete
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "beforeDelete",
                 /**
-                 * 删除后触发。
+                 * 삭제 후 발생.
                  * @event CMSForm#afterDelete
-                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+                 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
                  */
                 "afterDelete",
                 "resize"
             ]
         },
         /**
-         * @summary 获取表单的所有数据.
+         * @summary 양식의 모든 데이터 조회.
          * @method getData
          * @memberof CMSForm
          * @example
@@ -158,11 +158,11 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             this.setOptions(options);
 
             /**
-             * @summary 表单容器
+             * @summary 양식 컨테이너
              * @see https://mootools.net/core/docs/1.6.0/Element/Element
              * @member {Element}
              * @example
-             *  //可以在脚本中获取表单容器
+             *  //스크립트에서 양식 컨테이너를 가져올 수 있음
              * var formContainer = this.form.getApp().appForm.container;
              */
             this.container = $(node);
@@ -170,12 +170,12 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             this.data = data;
 
             /**
-             * @summary 表单的配置信息，比如表单名称等等.
+             * @summary 양식 설정 정보(양식 이름 등).
              * @member {Object}
              * @example
-             *  //可以在脚本中获取表单配置信息
-             * var json = this.form.getApp().appForm.json; //表单配置信息
-             * var name = json.name; //表单名称
+             *  //스크립트에서 양식 설정 정보를 가져올 수 있음
+             * var json = this.form.getApp().appForm.json; //양식 설정 정보
+             * var name = json.name; //양식 이름
              */
             this.json = data.json;
             this.html = data.html;
@@ -185,18 +185,18 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             this._loadCss();
 
             /**
-             * @summary 表单中的所有组件数组.
+             * @summary 양식의 모든 컴포넌트 배열.
              * @member {Array}
              * @example
-             * //下面的样例对表单组件进行循环，并且判断是输入类型的组件
-             * var modules = this.form.getApp().appForm.modules; //获取所有表单组件
-             * for( var i=0; i<modules.length; i++ ){ //循环处理组件
-             *   //获取组件的类型
+             * //다음 예시는 양식 컴포넌트를 순회하며 입력 유형 컴포넌트인지 판단
+             * var modules = this.form.getApp().appForm.modules; //모든 양식 컴포넌트 조회
+             * for( var i=0; i<modules.length; i++ ){ //컴포넌트 순회 처리
+             *   //컴포넌트 유형 조회
             var moduleName = module.json.moduleName;
             if( !moduleName ){
                 moduleName = typeOf(module.json.type) === "string" ? module.json.type.toLowerCase() : "";
             }
-            if( ["calendar","combox","number","textfield"].contains( moduleName )){ //输入类型框
+            if( ["calendar","combox","number","textfield"].contains( moduleName )){ //입력 유형 필드
                 //do something
              }
              * }
@@ -204,14 +204,14 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             this.modules = [];
 
             /**
-             * 该对象的key是组件标识，value是组件对象，可以使用该对象根据组件标识获取组件。<br/>
-             * 需要注意的是，在子表单中嵌入不绑定数据的组件（比如div,common,button等等），系统允许重名。<br/>
-             * 在打开表单的时候，系统会根据重名情况，自动在组件的标识后跟上 "_1", "_2"。
-             * @summary 表单中的所有组件对象.
+             * 이 객체의 key는 컴포넌트 식별자, value는 컴포넌트 객체로, 컴포넌트 식별자로 컴포넌트를 조회할 수 있음.<br/>
+             * 주의: 하위 양식에 데이터를 바인딩하지 않는 컴포넌트(div, common, button 등)를 넣으면 시스템이 중복 이름을 허용함.<br/>
+             * 양식을 열 때 시스템이 중복 상황에 따라 컴포넌트 식별자 뒤에 자동으로 "_1", "_2"를 붙임.
+             * @summary 양식의 모든 컴포넌트 객체.
              * @member {Object}
              * @example
-             * var moduleAll = this.form.getApp().appForm.all; //获取组件对象
-             * var subjectField = moduleAll["subject"] //获取名称为subject的组件
+             * var moduleAll = this.form.getApp().appForm.all; //컴포넌트 객체 조회
+             * var subjectField = moduleAll["subject"] //이름이 subject인 컴포넌트 조회
              */
             this.all = {};
             this.allForName = {};
@@ -442,7 +442,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     });
                 }.bind(this));
             }
-            // 移动端表单 展现底部工具栏
+            // 모바일 양식 하단 도구 모음 표시
             debugger;
             if (this.json.mode === "Mobile" || layout.mobile) {
                 var node = document.body.getElement(".o2_form_mobile_actions");
@@ -500,7 +500,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             //}.bind(this), 300000);
         },
 
-        // 默认的移动端底部工具栏
+        // 기본 모바일 하단 도구 모음
         _loadMobileDefaultTools: function (callback) {
             if (this.json.multiTools) {
             if (callback) callback();
@@ -513,7 +513,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             }.bind(this));
         }
         },
-        // 移动端生成底部工具栏
+        // 모바일 하단 도구 모음 생성
         _loadMobileActions: function (node, callback) {
             var tools = [];
 
@@ -568,7 +568,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 if (callback) callback();
             }.bind(this));
         },
-        // 检查默认按钮是否显示
+        // 기본 버튼 표시 여부 확인
         _checkDefaultMobileActionItem: function (tool, readonly, noCondition) {
             var flag = true;
             if (tool.control) {
@@ -584,13 +584,13 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             }else{
                 if (!tool.edit) flag = false;
             }
-            // 移动端禁用 关闭和打印
+            // 모바일에서 닫기와 인쇄 비활성화
             if (tool.id === "action_close" || tool.id === "action_print" || tool.id === "action_popular") {
                 flag = false;
             }
             return flag;
         },
-        // 检查自定义按钮是否显示
+        // 사용자 정의 버튼 표시 여부 확인
         _checkCustomMobileActionItem: function (tool, readonly) {
             var flag = true;
             if (readonly) {
@@ -610,7 +610,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             }
             return flag;
         },
-        // 创建默认样式的底部工具栏
+        // 기본 스타일의 하단 도구 모음 생성
         _createMobileActions: function (node, tools) {
             node.show();
             var count = tools.length;
@@ -667,7 +667,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 this._setMobileBottonStyle(action);
             }
         },
-        // 更多按钮
+        // 더보기 버튼
         _loadMoreMobileActions: function (tools, n, node) {
             document.body.mask({
                 "id": "cms_toolbar_mask_id",
@@ -696,7 +696,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     var action = new Element("div", { "styles": this.css.html5ActionOtherButton, "text": tool.text }).inject(this.actionMoreArea);
                     action.store("tool", tool);
                     action.addEvent("click", function (e) {
-                        //隐藏更多菜单
+                        //더보기 메뉴 숨기기
                         var mask = document.id("cms_toolbar_mask_id");
                         mask.destroy();
                         this.actionMoreArea.setStyle("display", "none");
@@ -733,12 +733,12 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             });
         },
 
-        // 钉钉企业微信样式的按钮
+        // DingTalk·WeCom 스타일 버튼
         _createMobileActionsDingdingStyle: function (node, tools) {
             node.show();
             var count = tools.length;
             if (count <= 2) {
-                //左边 间隔
+                //왼쪽 간격
                 var dingdingSplitLeft = new Element("div", { "styles": this.css.html5ActionButtonDingdingSplit, "text": " " }).inject(node);
                 var splitSize = dingdingSplitLeft.getSize();
                 var size = document.body.getSize();
@@ -770,7 +770,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                             }
                         }.bind(this);
                         if (tool.text === "继续流转" || tool.id === "action_processWork") {
-                            //输入法激活的时候，需要一段时间等待输入法关闭
+                            //입력기가 활성화되면 입력기가 닫힐 때까지 잠시 대기 필요
                             window.setTimeout(clickFun, 100)
                         } else {
                             clickFun();
@@ -779,7 +779,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     new Element("div", { "styles": this.css.html5ActionButtonDingdingSplit, "text": " " }).inject(node);
                 }.bind(this));
             } else {
-                //左边 间隔
+                //왼쪽 간격
                 var dingdingSplitLeft = new Element("div", { "styles": this.css.html5ActionButtonDingdingSplit, "text": " " }).inject(node);
                 var splitSize = dingdingSplitLeft.getSize();
                 var size = document.body.getSize();
@@ -877,7 +877,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     if( o2.typeOf(tool.properties) === "object" && Object.keys(tool.properties).length )action.set(tool.properties);
                     action.store("tool", tool);
                     action.addEvent("click", function (e) {
-                        //隐藏更多菜单
+                        //더보기 메뉴 숨기기
                         //var mask = document.id("cms_toolbar_mask_id");
                         //mask.destroy();
                         //this.actionMoreArea.setStyle("display", "none");
@@ -889,7 +889,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                         } else {
                             if (this[t.action]) this[t.action](e);
                         }
-                        // 关闭
+                        // 닫기
                         if (this.actionMoreArea) {
                             this.actionMoreArea.setStyle("display", "none");
                             document.body.unmask();
@@ -945,7 +945,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 if (!this.options.showAttachment && json && json.type == "Attachment") {
                     return;
                 }
-                //移动端去掉操作栏
+                //모바일에서 작업 표시줄 제거
                 if (layout.mobile && json && json.type === "Actionbar") {
                     node.hide();
                     return;
@@ -964,11 +964,11 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             if (moduleType === "Subform" || json.moduleName === "subform") this.subformCount++;
 
 
-            //流程组件返回
+            //프로세스 컴포넌트 반환
             if( ( json.type === "Log" && json.logType ) || ["Sidebar","Monitor","ReadLog"].contains(json.type) ){
                 node.empty();
                 return;
-            }else if( this.options.useProcessForm && json.type === "Actionbar" ){ //使用流程表单，组件是操作条
+            }else if( this.options.useProcessForm && json.type === "Actionbar" ){ //프로세스 양식 사용, 컴포넌트는 작업 표시줄
                 json.type = "ProcessActionbar"
             }
 
@@ -1017,7 +1017,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     var type;
                     switch (flag.toLowerCase()) {
                         case "i":
-                            type = "人员"; //"身份";
+                            type = "人员"; //"신분";
                             break;
                         case "p":
                             type = "人员";
@@ -1094,7 +1094,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     cloudPictures = cloudPictures.concat(module.getImageIds());
                 }
             });
-            if (data.processOwnerList && typeOf(data.processOwnerList) == "array") { //如果是流程中发布的
+            if (data.processOwnerList && typeOf(data.processOwnerList) == "array") { //프로세스에서 발행한 경우
                 var owner = { personValue: [] };
                 data.processOwnerList.each(function (p) {
                     owner.personValue.push({
@@ -1269,7 +1269,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 //}.bind(this), null, this.businessData.document.id, data, !sync );
             }.bind(this), null, !sync);
         },
-        // 重新加载阅读表单
+        // 읽기 양식 다시 로드
         _reloadReadForm: function() {
             if (this.app.inBrowser) {
                 this.fireEvent("reloadReadForm");
@@ -1429,7 +1429,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 this.fireEvent("afterWaitPublish", [this, json.data]);
                 if (this.app) if (this.app.fireEvent) this.app.fireEvent("afterWaitPublish",[this, json.data]);
                 this.saving = false;
-                // if (callback) callback(); // 传进来不是function
+                // if (callback) callback(); // 전달된 값이 function이 아님
                 if (layout.mobile) {
                     // this.app.content.unmask();
                     this.closeWindowOnMobile();
@@ -1550,7 +1550,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     this.businessData.originalData = copyData;
                     this.fireEvent("afterPublish", [this, json.data]);
                     if (this.app) if (this.app.fireEvent) this.app.fireEvent("afterPublish",[this, json.data]);
-                    if (o2.typeOf(callback) === "function") callback(json); // 传进来不是function
+                    if (o2.typeOf(callback) === "function") callback(json); // 전달된 값이 function이 아님
                     this.saving = false;
                     if (layout.mobile) {
                         document.body.unmask();
@@ -1565,7 +1565,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                         }
                         this.options.saveOnClose = false;
 
-                        //如果是嵌入，不关闭
+                        //임베드된 경우 닫지 않음
                         if( this.app.embeded ){
 
                         }else if( layout.inBrowser ){
@@ -1639,7 +1639,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     return o2.typeOf(range) === "string" ? range : range.distinguishedName
                 }).unique();
                 if( rangeList.length === 0 ){
-                    if( this.json.blankToAllNotify !== "no" ){ //通知所有人
+                    if( this.json.blankToAllNotify !== "no" ){ //모든 사람에게 알림
                         sendOptions = {
                             documentId: this.businessData.document.id,
                             notifyByDocumentReadPerson: true,
@@ -1701,7 +1701,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         },
 
         /**
-         * @summary 弹出删除文档确认框.
+         * @summary 문서 삭제 확인 창 표시.
          * @method deleteDocument
          * @memberof CMSForm
          * @example
@@ -1754,7 +1754,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         },
 
         /**
-         * @summary 编辑文档.
+         * @summary 문서 편집.
          * @method editDocument
          * @memberof CMSForm
          * @example
@@ -1789,9 +1789,9 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             }
         },
 
-        //2019-11-29 移动端 开启编辑模式
+        //2019-11-29 모바일 편집 모드 켜기
         /**
-         * @summary 移动端开启编辑模式.
+         * @summary 모바일에서 편집 모드 켜기.
          * @method editDocumentForMobile
          * @memberof CMSForm
          * @example
@@ -1805,7 +1805,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         },
 
         /**
-         * @summary 弹出设置热点的界面.
+         * @summary 핫스팟 설정 화면 표시.
          * @method setPopularDocument
          * @memberof CMSForm
          * @example
@@ -1836,11 +1836,11 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         },
 
         /**
-         * @summary 将新上传的附件在指定的附件组件中展现.
+         * @summary 새로 업로드한 첨부파일을 지정한 첨부파일 컴포넌트에 표시.
          * @method uploadedAttachment
          * @memberof CMSForm
-         * @param {String} site - 附件组件的标识
-         * @param {String} id - 新上传的附件id
+         * @param {String} site - 첨부파일 컴포넌트 식별자
+         * @param {String} id - 새로 업로드한 첨부파일 id
          * @example
          * this.form.getApp().appForm.uploadedAttachment(site, id);
          */
@@ -1925,7 +1925,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         },
 
         /**
-         * @summary 弹出文档置顶对话框，操作后使当前文档在列式服务中排在前面.
+         * @summary 문서 상단 고정 대화상자 표시. 실행 후 현재 문서가 목록 서비스에서 앞쪽에 배치됨.
          * @method setTop
          * @memberof CMSForm
          * @example
@@ -1957,7 +1957,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
 
 
         /**
-         * @summary 弹出文档取消置顶对话框.
+         * @summary 문서 상단 고정 해제 대화상자 표시.
          * @method cancelTop
          * @memberof CMSForm
          * @example
@@ -1988,7 +1988,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             });
         },
         /**
-         * @summary 一键下载表单和附件.
+         * @summary 양식과 첨부파일 일괄 다운로드.
          * @method downloadAll
          * @memberof CMSForm
          * @example
@@ -2040,9 +2040,9 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 window.open(downloadUrl);
             }.bind(this));
         },
-        // 分享到IM聊天
+        // IM 채팅으로 공유
         shareToIMChat: function() {
-            // app端 分享到聊天
+            // 앱에서 채팅으로 공유
             if (window.o2android && window.o2android.postMessage) {
                 var body = {
                     type: "shareToIM",
@@ -2052,8 +2052,8 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 this._shareToIMOnPc()
             }
         },
-        // override _shareToIM 给shareToIMChat函数使用
-        // 把当前文档分享到聊天会话中
+        // override _shareToIM shareToIMChat 함수에서 사용
+        // 현재 문서를 채팅 대화로 공유
         _shareToIMOnPc: async function () {
             const document = this.businessData.document
             if (!document) {
@@ -2064,20 +2064,20 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
             const jsonBody = {
                 type: 'cms',
                 title: document.title,
-                docId: document.id, // cms 文档id
-                appId: document.appId, // cms 应用id
-                appName: document.appName, // cms 应用名称
-                appAlias: document.appAlias, // cms 应用别名
-                categoryId: document.categoryId, // cms 分类id
-                categoryName: document.categoryName, // cms 分类名称
-                categoryAlias: document.categoryAlias, // cms 分类别名
+                docId: document.id, // cms 문서 id
+                appId: document.appId, // cms 앱 id
+                appName: document.appName, // cms 앱 이름
+                appAlias: document.appAlias, // cms 앱 별칭
+                categoryId: document.categoryId, // cms 분류 id
+                categoryName: document.categoryName, // cms 분류 이름
+                categoryAlias: document.categoryAlias, // cms 분류 별칭
                 body: JSON.stringify(document)
             };
             console.log('전송할 메시지 본문', jsonBody)
             this._imSendMessage(jsonBody);
         },
         /**
-         * 移动端处理关闭
+         * 모바일 닫기 처리
          */
         closeWindowOnMobile: function () {
             if (window.o2android && window.o2android.postMessage) {
@@ -2090,9 +2090,9 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 window.o2android.closeDocumentWindow("");
             } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.closeDocumentWindow) {
                 window.webkit.messageHandlers.closeDocumentWindow.postMessage("");
-            } else if (window.wx && window.__wxjs_environment === 'miniprogram') { //微信小程序 关闭页面
+            } else if (window.wx && window.__wxjs_environment === 'miniprogram') { //위챗 미니프로그램 페이지 닫기
                 wx.miniProgram.navigateBack({ delta: 1 });
-            } else if (window.uni && window.uni.navigateBack) { // uniapp 关闭页面
+            } else if (window.uni && window.uni.navigateBack) { // uniapp 페이지 닫기
                 window.uni.navigateBack();
             } else if (this.json.afterProcessAction === "redirect" && this.json.afterProcessRedirectScript && this.json.afterProcessRedirectScript.code) {
                 var url = this.Macro.exec(this.json.afterProcessRedirectScript.code, this);
@@ -2118,7 +2118,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 // }
             }
         },
-        // //列式流程log
+        // //목록형 프로세스 log
         // listWorkLog: function ( callback ) {
         //     if( !this.businessData.data.$work || !this.businessData.data.$work.job ){
         //         callback([]);
@@ -2130,7 +2130,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         //         return;
         //     }
         //
-        //     //只获取一次。把callback存起来，等异步调用完成后一次性执行callback
+        //     //한 번만 조회. callback을 저장해 두었다가 비동기 호출 완료 후 한꺼번에 실행
         //     if( !this.worklogCallbackList )this.worklogCallbackList = [];
         //     Promise.resolve( o2.Actions.load("x_processplatform_assemble_surface").WorkLogAction.listWithJob( this.businessData.data.$work.job )).then(function(json){
         //         this.workLogList = json.data;
@@ -2141,7 +2141,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         //     }.bind(this));
         //     this.worklogCallbackList.push( callback );
         // },
-        // //列式流程record
+        // //목록형 프로세스 record
         // listWorkRecord: function ( callback ) {
         //     if( !this.businessData.data.$work || !this.businessData.data.$work.job ){
         //         callback([]);
@@ -2153,7 +2153,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         //         return;
         //     }
         //
-        //     //只获取一次。把callback存起来，等异步调用完成后一次性执行callback
+        //     //한 번만 조회. callback을 저장해 두었다가 비동기 호출 완료 후 한꺼번에 실행
         //     if( !this.workRecordCallbackList )this.workRecordCallbackList = [];
         //     Promise.resolve( o2.Actions.load("x_processplatform_assemble_surface").RecordAction.listWithJob( this.businessData.data.$work.job )).then(function(json){
         //         this.workRecordList = json.data;

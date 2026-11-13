@@ -19,7 +19,7 @@ import com.x.bbs.entity.BBSRoleInfo;
 import com.x.bbs.entity.BBSUserRole;
 
 /**
- * 论坛信息管理服务类
+ * 포럼 정보 관리 서비스 클래스
  * @author LIYI
  *
  */
@@ -27,7 +27,7 @@ public class BBSForumInfoService {
 	private static  Logger logger = LoggerFactory.getLogger( BBSForumInfoService.class );
 	private UserManagerService userManagerService = new UserManagerService();
 	/**
-	 * 向数据库保存BBSForumInfo对象
+	 * 데이터베이스에 BBSForumInfo 객체 저장
 	 * @param wrapIn
 	 */
 	public BBSForumInfo save( EntityManagerContainer emc, BBSForumInfo _bBSForumInfo ) throws Exception {
@@ -40,12 +40,12 @@ public class BBSForumInfoService {
 		}
 		_bBSForumInfo_tmp = emc.find( _bBSForumInfo.getId(), BBSForumInfo.class );
 		if( _bBSForumInfo_tmp == null ){
-			//创建一个新的记录
+			//새 레코드 생성
 			emc.beginTransaction( BBSForumInfo.class );
 			emc.persist( _bBSForumInfo, CheckPersistType.all);	
 			emc.commit();
 		}else{
-			//更新一条记录
+			//레코드 수정
 			_bBSForumInfo.copyTo( _bBSForumInfo_tmp, JpaObject.FieldsUnmodify  );
 			if( StringUtils.isEmpty( _bBSForumInfo_tmp.getReplyMessageNotifyType() )){
 				_bBSForumInfo.setReplyMessageNotifyType("0,0,0");
@@ -58,7 +58,7 @@ public class BBSForumInfoService {
 	}
 	
 	/**
-	 * 根据ID从数据库中删除BBSForumInfo对象
+	 * ID로 데이터베이스에서 BBSForumInfo 객체 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -72,7 +72,7 @@ public class BBSForumInfoService {
 			throw new Exception( "id is null, system can not delete any object." );
 		}
 		business = new Business( emc );
-		//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+		//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 		bBSForumInfo = emc.find( id, BBSForumInfo.class );
 		emc.beginTransaction( BBSForumInfo.class );
 		emc.beginTransaction( BBSPermissionRole.class );
@@ -103,9 +103,9 @@ public class BBSForumInfoService {
 	}
 
 	/**
-	 * 根据权限查询所有我能访问到的论坛信息列表
-	 * 1、所有全员可访问的论坛信息
-	 * 2、所有我有权限访问的论坛信息
+	 * 권한에 따라 접근 가능한 모든 포럼 정보 목록 조회
+	 * 1. 전 직원 접근 가능한 모든 포럼 정보
+	 * 2. 내가 접근 권한을 가진 모든 포럼 정보
 	 * 
 	 * @return
 	 * @throws Exception 
@@ -172,7 +172,7 @@ public class BBSForumInfoService {
 					userRole_new.setForumId( forumInfo.getId() );
 					userRole_new.setObjectName( name );
 					userRole_new.setUniqueId( name );
-					userRole_new.setObjectType( "人员" ); //人员|组织|群组
+					userRole_new.setObjectType( "人员" ); //사용자|조직|그룹
 					userRole_new.setRoleCode( roleInfo.getRoleCode() );
 					userRole_new.setRoleId( roleInfo.getId() );
 					userRole_new.setRoleName( roleInfo.getRoleName() );

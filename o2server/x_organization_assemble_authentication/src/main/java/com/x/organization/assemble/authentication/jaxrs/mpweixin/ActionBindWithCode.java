@@ -17,7 +17,7 @@ import com.x.organization.assemble.authentication.Business;
 import com.x.organization.core.entity.Person;
 
 /**
- * 绑定公众号openid 到当前登录用户
+ * 공식 계정 openid를 현재 로그인 사용자에 연결
  * Created by fancyLou on 3/8/21.
  * Copyright © 2021 O2. All rights reserved.
  */
@@ -39,7 +39,7 @@ public class ActionBindWithCode extends BaseAction {
             if (resp == null) {
                 throw new ExceptionGetAccessTokenFail();
             }
-            logger.info("获取到用户openid accessToken ，" + resp.toString());
+            logger.info("사용자 openid accessToken 획득," + resp.toString());
             String dn = effectivePerson.getDistinguishedName();
             Business business = new Business(emc);
             String personId = business.person().getWithCredential(dn);

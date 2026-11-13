@@ -19,7 +19,7 @@ import com.x.bbs.entity.BBSSubjectContent;
 import com.x.bbs.entity.BBSSubjectInfo;
 
 /**
- * 论坛信息管理服务类
+ * 포럼 정보 관리 서비스 클래스
  * @author LIYI
  *
  */
@@ -39,7 +39,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据传入的ID从数据库查询BBSSubjectInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSubjectInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -56,7 +56,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据传入的ID从数据库查询BBSSubjectInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSubjectInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -73,7 +73,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据传入的ID从数据库查询BBSSubjectInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSSubjectInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -90,7 +90,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 向数据库保存BBSSubjectInfo对象
+	 * 데이터베이스에 BBSSubjectInfo 객체 저장
 	 * @param _bBSSubjectInfo
 	 * @param content
 	 * @return
@@ -111,13 +111,13 @@ public class BBSSubjectInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据ID从数据库中删除BBSSubjectInfo对象
-	 * 删除主题后，要对一系列的数据进行操作：
-	 * 1、所有的回贴删除，记录回贴数量n
-	 * 2、版块主题数量-1，如果有主版块，主版块主题数量-1
-	 * 3、论坛主题数量-1
-	 * 4、版块回复数量-n，如果有主版块，主版块回复数量-n
-	 * 5、论坛回复数量-n
+	 * ID로 데이터베이스에서 BBSSubjectInfo 객체 삭제
+	 * 주제 삭제 후 일련의 데이터 처리 필요:
+	 * 1. 모든 답글 삭제, 답글 수 n 기록
+	 * 2. 게시판 주제 수 -1, 상위 게시판이 있으면 상위 게시판 주제 수 -1
+	 * 3. 포럼 주제 수 -1
+	 * 4. 게시판 답글 수 -n, 상위 게시판이 있으면 상위 게시판 답글 수 -n
+	 * 5. 포럼 답글 수 -n
 	 * @param subjectId
 	 * @throws Exception
 	 */
@@ -155,8 +155,8 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 根据版块信息，查询所有需要展现的所有置顶主题列表
-	 * 包括：全局置顶贴, 当前论坛置顶贴, 当前版块置顶贴和主版块的置顶贴
+	 * 게시판 정보로 표시할 모든 상단 고정 주제 목록 조회
+	 * 포함: 전체 상단 고정글, 현재 포럼 상단 고정글, 현재 게시판 상단 고정글, 상위 게시판 상단 고정글
 	 * @param sectionInfo
 	 * @return
 	 * @throws Exception 
@@ -173,8 +173,8 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 根据版块信息和主题类别，查询所有需要展现的所有置顶主题列表
-	 * 包括：全局置顶贴, 当前论坛置顶贴, 当前版块置顶贴和主版块的置顶贴
+	 * 게시판 정보와 주제 유형으로 표시할 모든 상단 고정 주제 목록 조회
+	 * 포함: 전체 상단 고정글, 현재 포럼 상단 고정글, 현재 게시판 상단 고정글, 상위 게시판 상단 고정글
 	 * @param sectionInfo
 	 * @return
 	 * @throws Exception
@@ -213,7 +213,7 @@ public class BBSSubjectInfoServiceAdv {
 	}	
 	
 	/**
-	 * 精华贴设置
+	 * 우수글 설정
 	 * @param subjectId
 	 * @param isCream
 	 * @param setterName
@@ -243,7 +243,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 	
 	/**
-	 * 全局置顶设置
+	 * 전체 상단 고정 설정
 	 * @param subjectId
 	 * @param topToBBS
 	 * @param setterName
@@ -262,7 +262,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 论坛置顶设置
+	 * 포럼 상단 고정 설정
 	 * @param subjectId
 	 * @param topToForum
 	 * @param name
@@ -281,7 +281,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 版块置顶设置
+	 * 게시판 상단 고정 설정
 	 * @param subjectId
 	 * @param topToSection
 	 * @param name
@@ -300,7 +300,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 主版块置顶设置
+	 * 상위 게시판 상단 고정 설정
 	 * @param subjectId
 	 * @param topToMainSection
 	 * @param name
@@ -319,7 +319,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 设置原创主题
+	 * 원본 주제 설정
 	 * @param subjectId
 	 * @param isOriginalSubject
 	 * @param name
@@ -437,7 +437,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 根据指定的主题ID，查询上一个主题的信息
+	 * 지정한 주제 ID로 이전 주제 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception 
@@ -604,7 +604,7 @@ public class BBSSubjectInfoServiceAdv {
 	}
 
 	/**
-	 * 版块和论坛可见性要是所有人可见才能显示到首页
+	 * 게시판과 포럼이 모든 사람에게 공개되어야 첫 페이지에 표시 가능
 	 * @param count
 	 * @return
 	 * @throws Exception
@@ -822,7 +822,7 @@ public class BBSSubjectInfoServiceAdv {
 			emc.beginTransaction( BBSSubjectInfo.class );
 			
 			if( subjectInfo.getForumId().equalsIgnoreCase( sectionInfo_new.getForumId() )) {
-				//说明跨ForumInfo了
+				//ForumInfo를 넘어갔다는 의미
 				forumInfo_old = emc.find( subjectInfo.getForumId(), BBSForumInfo.class );
 				forumInfo_new = emc.find( sectionInfo_new.getForumId(), BBSForumInfo.class );
 			}
@@ -839,17 +839,17 @@ public class BBSSubjectInfoServiceAdv {
 			subjectInfo.setMainSectionId( sectionInfo_new.getMainSectionId() );
 			subjectInfo.setMainSectionName( sectionInfo_new.getMainSectionName() );
 			
-			//贴子的回复数量
+			//게시글의 답글 수
 			Long replyTotal = subjectInfo.getReplyTotal();
 			
-			//调整版块的回复数量
+			//게시판의 답글 수 조정
 			if( sectionInfo_old != null ) {
 				sectionInfo_old.setReplyTotal( sectionInfo_old.getReplyTotal() - replyTotal );
 				if( sectionInfo_old.getReplyTotal() < 0 ) {
 					sectionInfo_old.setReplyTotal( 0L );
 				}
 				
-				//调整版块的主贴数量
+				//게시판의 주제글 수 조정
 				sectionInfo_old.setSubjectTotal( sectionInfo_old.getSubjectTotal() - 1 );
 				if( sectionInfo_old.getSubjectTotal() < 0 ) {
 					sectionInfo_old.setSubjectTotal( 0L );
@@ -860,8 +860,8 @@ public class BBSSubjectInfoServiceAdv {
 				sectionInfo_new.setSubjectTotal( sectionInfo_new.getSubjectTotal() + 1 );
 			}						
 			
-			//如果调整的版块是子版块
-			//调整主版块回复数量
+			//조정할 게시판이 하위 게시판인 경우
+			//상위 게시판 답글 수 조정
 			if( mainSection_old != null && sectionInfo_old != null ) {
 				if( !mainSection_old.getId().equalsIgnoreCase( sectionInfo_old.getId() )) {
 					mainSection_old.setReplyTotal( mainSection_old.getReplyTotal() - replyTotal );
@@ -869,7 +869,7 @@ public class BBSSubjectInfoServiceAdv {
 						sectionInfo_old.setReplyTotal( 0L );
 					}
 				}
-				//调整主版块主贴数量
+				//상위 게시판 주제글 수 조정
 				if( !mainSection_old.getId().equalsIgnoreCase( sectionInfo_old.getId() )) {
 					mainSection_old.setSubjectTotal( mainSection_old.getSubjectTotal() - 1 );
 					if( sectionInfo_old.getSubjectTotal() < 0 ) {
@@ -886,15 +886,15 @@ public class BBSSubjectInfoServiceAdv {
 				}
 			}			
 			
-			//跨ForumInfo了
+			//ForumInfo를 넘어감
 			if( forumInfo_old != null &&  forumInfo_new != null ) {
-				//调整论坛回复数量
+				//포럼 답글 수 조정
 				forumInfo_old.setReplyTotal( forumInfo_old.getReplyTotal() - replyTotal );
 				forumInfo_new.setReplyTotal( forumInfo_new.getReplyTotal() + replyTotal );
 				if( forumInfo_old.getReplyTotal() < 0 ) {
 					forumInfo_old.setReplyTotal( 0L );
 				}
-				//调整论坛主贴数量
+				//포럼 주제글 수 조정
 				forumInfo_old.setSubjectTotal( forumInfo_old.getSubjectTotal() - 1 );
 				forumInfo_new.setSubjectTotal( forumInfo_new.getSubjectTotal() + 1 );
 				if( forumInfo_old.getSubjectTotal() < 0 ) {

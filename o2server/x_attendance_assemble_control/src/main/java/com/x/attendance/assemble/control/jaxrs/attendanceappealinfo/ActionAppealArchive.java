@@ -17,21 +17,21 @@ public class ActionAppealArchive extends BaseAction {
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String id ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 
-		if ( StringUtils.isNotEmpty( id )) { // 归档指定的考勤申诉记录
+		if ( StringUtils.isNotEmpty( id )) { // 지정 근태 이의 신청 기록 보관
 			try {
 				attendanceAppealInfoServiceAdv.archive(id);
 				result.setData(new Wo(id));
 			} catch (Exception e) {
 				result.error(e);
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "归档考勤打卡申诉信息时发生异常。ID:" + id);
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "근태 체크 이의 신청 정보 보관 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
-		} else { // 归档所有的考勤申诉记录
+		} else { // 모든 근태 이의 신청 기록 보관
 			try {
 				attendanceAppealInfoServiceAdv.archiveAll();
 			} catch (Exception e) {
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "归档全部考勤申诉信息数据时发生异常");
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "전체 근태 이의 신청 데이터 보관 중 오류가 발생했습니다");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

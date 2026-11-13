@@ -44,7 +44,7 @@ public class ActionDeleteCollectionMsgs extends BaseAction {
 
         private static final long serialVersionUID = 112857560004007558L;
 
-        @FieldDescribe("收藏消息id列表")
+        @FieldDescribe("즐겨찾기 메시지 id 목록")
         private List<String> msgIdList;
 
         public List<String> getMsgIdList() {

@@ -3,10 +3,10 @@
         "id": "acc8a5ec-8e76-4a3a-9a0e-f8d4d9001c42",
         "pinyin": "shuxingyi",
         "pinyinInitial": "sxy",
-        "description": "属性描述",
-        "name": "属性一",
+        "description": "속성 설명",
+        "name": "속성1",
         "unique": "acc8a5ec-8e76-4a3a-9a0e-f8d4d9001c42",
-        "distinguishedName": "属性一@acc8a5ec-8e76-4a3a-9a0e-f8d4d9001c42@PA",
+        "distinguishedName": "속성1@acc8a5ec-8e76-4a3a-9a0e-f8d4d9001c42@PA",
         "person": "97941ea3-e3eb-4db7-aaf6-1263b048d909",
         "orderNumber": 24943622,
         "attributeList": [

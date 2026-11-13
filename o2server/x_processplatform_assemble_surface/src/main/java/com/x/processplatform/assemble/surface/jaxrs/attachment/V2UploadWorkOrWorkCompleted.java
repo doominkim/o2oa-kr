@@ -129,7 +129,7 @@ class V2UploadWorkOrWorkCompleted extends BaseAction {
 			business.entityManagerContainer().check(attachment, CheckPersistType.all);
 			business.entityManagerContainer().commit();
 		} else {
-			// 用于标识状态的结束节点
+			// 상태 표시용 종료 노드
 			Process process = business.process().pick(workCompleted.getProcess());
 			if (null == process) {
 				throw new ExceptionEntityNotExist(workCompleted.getProcess(), Process.class);

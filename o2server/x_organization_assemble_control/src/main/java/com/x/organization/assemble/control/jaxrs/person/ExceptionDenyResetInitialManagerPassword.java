@@ -7,6 +7,6 @@ class ExceptionDenyResetInitialManagerPassword extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionDenyResetInitialManagerPassword() {
-		super("无法重置初始管理员密码.");
+		super("초기 관리자 비밀번호는 재설정할 수 없습니다.");
 	}
 }

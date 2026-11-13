@@ -7,6 +7,6 @@ class ExceptionDenyUpdateDefaultRole extends PromptException {
 	private static final long serialVersionUID = 5167597034206987929L;
 
 	ExceptionDenyUpdateDefaultRole(String name) {
-		super("不能修改系统默认角色名称:{}.", name);
+		super("시스템 기본 역할의 이름은 변경할 수 없습니다: {}.", name);
 	}
 }

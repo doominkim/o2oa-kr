@@ -28,19 +28,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("stat")
-@JaxrsDescribe("统计")
+@JaxrsDescribe("통계")
 public class StatAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(StatAction.class);
 
-    @JaxrsMethodDescribe(value = "根据查询获取统计对象.", action = ActionGetWithQuery.class)
+    @JaxrsMethodDescribe(value = "쿼리 기준 통계 객체 조회.", action = ActionGetWithQuery.class)
     @GET
     @Path("flag/{flag}/query/{queryFlag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void getWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("统计标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag) {
+            @JaxrsParameterDescribe("통계 식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag) {
         ActionResult<ActionGetWithQuery.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -52,13 +52,13 @@ public class StatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据查询列示统计对象.", action = ActionListWithQuery.class)
+    @JaxrsMethodDescribe(value = "쿼리 기준 통계 객체 목록.", action = ActionListWithQuery.class)
     @GET
     @Path("list/query/{queryFlag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag) {
+            @JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag) {
         ActionResult<List<ActionListWithQuery.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -70,13 +70,13 @@ public class StatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取统计内容.", action = ActionGet.class)
+    @JaxrsMethodDescribe(value = "통계 내용 조회.", action = ActionGet.class)
     @GET
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
         ActionResult<ActionGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -88,13 +88,13 @@ public class StatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "执行统计", action = ActionExecute.class)
+    @JaxrsMethodDescribe(value = "통계 실행", action = ActionExecute.class)
     @PUT
     @Path("{id}/execute")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void execute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
         ActionResult<ActionExecute.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -106,13 +106,13 @@ public class StatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "执行统计MockPutToPost", action = ActionExecute.class)
+    @JaxrsMethodDescribe(value = "통계 실행 MockPutToPost", action = ActionExecute.class)
     @POST
     @Path("{id}/execute/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void executeMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("视图标识") @PathParam("id") String id, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("뷰 식별자") @PathParam("id") String id, JsonElement jsonElement) {
         ActionResult<ActionExecute.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -124,14 +124,14 @@ public class StatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "执行指定查询和统计名的统计", action = ActionExecuteWithQuery.class)
+    @JaxrsMethodDescribe(value = "지정 쿼리와 통계 이름의 통계 실행", action = ActionExecuteWithQuery.class)
     @PUT
     @Path("flag/{flag}/query/{queryFlag}/execute")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void executeWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
         ActionResult<ActionExecuteWithQuery.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -143,15 +143,15 @@ public class StatAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "执行指定查询和统计名的统计MockPutToPost", action = ActionExecuteWithQuery.class)
+    @JaxrsMethodDescribe(value = "지정 쿼리와 통계 이름의 통계 실행 MockPutToPost", action = ActionExecuteWithQuery.class)
     @POST
     @Path("flag/{flag}/query/{queryFlag}/execute/mockputtopost")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void executeWithQueryMockPutToPost(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("视图标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("뷰 식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
         ActionResult<ActionExecuteWithQuery.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

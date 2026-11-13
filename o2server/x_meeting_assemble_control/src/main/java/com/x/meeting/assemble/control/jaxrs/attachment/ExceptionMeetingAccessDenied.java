@@ -8,7 +8,7 @@ class ExceptionMeetingAccessDenied extends PromptException {
 	private static final long serialVersionUID = 7237855733312562652L;
 
 	ExceptionMeetingAccessDenied(EffectivePerson effectivePerson, String name) {
-		super("用户: {} 访问会议:{} 权限不足..", effectivePerson.getName(), name);
+		super("사용자: {}에게 회의: {}에 접근할 권한이 없습니다..", effectivePerson.getName(), name);
 
 	}
 }

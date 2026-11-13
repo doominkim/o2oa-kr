@@ -9,6 +9,6 @@ import com.x.base.core.project.exception.PromptException;
 class ExceptionSearchArgEmpty extends PromptException {
 
     public ExceptionSearchArgEmpty() {
-        super("传入参数不正确！");
+        super("전달된 매개변수가 올바르지 않습니다!");
     }
 }

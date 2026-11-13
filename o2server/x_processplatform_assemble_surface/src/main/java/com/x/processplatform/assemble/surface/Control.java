@@ -6,49 +6,49 @@ public class Control extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -4033469981088793137L;
 
-	// 是否可以管理
+	// 관리 가능 여부
 	private Boolean allowManage;
-	// 是否可以看到
+	// 조회 가능 여부
 	private Boolean allowVisit;
-	// 是否可以直接流转
+	// 직접 진행 가능 여부
 	private Boolean allowProcessing;
-	// 是否可以处理待阅
+	// 열람 대기 처리 가능 여부
 	private Boolean allowReadProcessing;
-	// 是否可以保存数据
+	// 데이터 저장 가능 여부
 	private Boolean allowSave;
-	// 是否可以重置处理人
+	// 처리자 재설정 가능 여부
 	private Boolean allowReset;
-	// 是否可以加签
+	// 추가 결재자 지정 가능 여부
 	private Boolean allowAddTask;
-	// 是否可以调度
+	// 조정 가능 여부
 	private Boolean allowReroute;
-	// 是否可以删除
+	// 삭제 가능 여부
 	private Boolean allowDelete;
-	// 是否可以增加会签分支
+	// 합의 분기 추가 가능 여부
 	private Boolean allowAddSplit;
-	// 是否可以召回
+	// 회수 가능 여부
 	private Boolean allowRetract;
-	// 是否可以召回V3
+	// 회수 가능 여부 V3
 	private Boolean allowV3Retract;
-	// 是否可以回滚
+	// 롤백 가능 여부
 	private Boolean allowRollback;
-	// 是否可以提醒
+	// 알림 가능 여부
 	private Boolean allowPress;
-	// 是否可以待办挂起(暂停待办计时)
+	// 결재 대기 보류(결재 대기 시간 측정 일시정지) 가능 여부
 	private Boolean allowPause;
-	// 是否可以取消待办挂起(恢复待办计时)
+	// 결재 대기 보류 취소(결재 대기 시간 측정 재개) 가능 여부
 	private Boolean allowResume;
-	// 是否可以退回
+	// 반려 가능 여부
 	private Boolean allowGoBack;
-	// 是否可以终止
+	// 종료 가능 여부
 	private Boolean allowTerminate;
 
 	/**
-	 * 权限必须要查的，下面两个字段不用二次查询 工作标题
+	 * 권한은 반드시 조회하며, 아래 두 필드는 재조회하지 않음 업무 문서 제목
 	 */
 	private String workTitle;
 	private String creatorPerson;
-	// 工作的job
+	// 업무 문서의 job
 	private String workJob;
 
 	public Boolean getAllowManage() {

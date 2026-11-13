@@ -23,7 +23,7 @@ import com.x.organization.core.entity.Unit;
 
 class ActionList extends BaseAction {
 
-	/* 批量获取组织信息 */
+	/* 조직 정보 일괄 조회 */
 	ActionResult<List<Wo>> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<List<Wo>> result = new ActionResult<>();
@@ -45,7 +45,7 @@ class ActionList extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织标识")
+		@FieldDescribe("조직 식별자")
 		private List<String> unitList = new ArrayList<>();
 
 		public List<String> getUnitList() {
@@ -62,10 +62,10 @@ class ActionList extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,

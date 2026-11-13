@@ -75,7 +75,7 @@ MWF.xApplication.Common.Widget = new Class({
         this.desktop.openApplication(e, this.options.appName);
     },
 
-    //widget事件
+    //widget 이벤트
     onQueryLoad: function () { },
     onQueryLoadWidget: function () { },
     onLoadWidget: function () { },

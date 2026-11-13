@@ -20,10 +20,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.openjpa.persistence.jdbc.Index;
 
 /**
- * 门户平台应用
+ * 포털 플랫폼 앱
  * @author sword
  */
-@Schema(name = "Portal", description = "门户.")
+@Schema(name = "Portal", description = "포털.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Portal.table, uniqueConstraints = {
@@ -47,12 +47,12 @@ public class Portal extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -68,12 +68,12 @@ public class Portal extends SliceJpaObject {
 		this.cornerMarkScriptText = this.getProperties().getCornerMarkScriptText();
 	}
 
-	/* flag标志位 */
-	/* Entity 默认字段结束 */
+	/* flag 플래그 비트 */
+	/* Entity 기본 필드 끝 */
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true, citationNotExists =
@@ -82,7 +82,7 @@ public class Portal extends SliceJpaObject {
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true, citationNotExists =
@@ -90,13 +90,13 @@ public class Portal extends SliceJpaObject {
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String availableIdentityList_FIELDNAME = "availableIdentityList";
-	@FieldDescribe("可访问的身份.")
+	@FieldDescribe("접근 가능한 신분.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -108,7 +108,7 @@ public class Portal extends SliceJpaObject {
 	private List<String> availableIdentityList;
 
 	public static final String availableUnitList_FIELDNAME = "availableUnitList";
-	@FieldDescribe("可访问的组织.")
+	@FieldDescribe("접근 가능한 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -120,7 +120,7 @@ public class Portal extends SliceJpaObject {
 	private List<String> availableUnitList;
 
 	public static final String availableGroupList_FIELDNAME = "availableGroupList";
-	@FieldDescribe("可访问的群组.")
+	@FieldDescribe("접근 가능한 그룹.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -132,14 +132,14 @@ public class Portal extends SliceJpaObject {
 	private List<String> availableGroupList;
 
 	public static final String portalCategory_FIELDNAME = "portalCategory";
-	@FieldDescribe("应用分类.")
+	@FieldDescribe("앱 분류.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + portalCategory_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + portalCategory_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = true)
 	private String portalCategory;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("icon Base64编码后的文本.")
+	@FieldDescribe("icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + icon_FIELDNAME)
@@ -147,13 +147,13 @@ public class Portal extends SliceJpaObject {
 	private String icon;
 
 	public static final String firstPage_FIELDNAME = "firstPage";
-	@FieldDescribe("默认首页.")
+	@FieldDescribe("기본 홈 페이지.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + firstPage_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String firstPage;
 
 	public static final String controllerList_FIELDNAME = "controllerList";
-	@FieldDescribe("应用管理者。")
+	@FieldDescribe("앱 관리자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + controllerList_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -164,40 +164,40 @@ public class Portal extends SliceJpaObject {
 	private List<String> controllerList;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("应用的创建者。")
+	@FieldDescribe("앱 생성자.")
 	@CheckPersist(allowEmpty = false)
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorPerson_FIELDNAME)
 	private String creatorPerson;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("应用的最后修改时间。")
+	@FieldDescribe("앱 최종 수정 시간.")
 	@CheckPersist(allowEmpty = false)
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	private Date lastUpdateTime;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("应用的最后修改者")
+	@FieldDescribe("앱 최종 수정자")
 	@CheckPersist(allowEmpty = false)
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdatePerson_FIELDNAME)
 	private String lastUpdatePerson;
 
 	public static final String pcClient_FIELDNAME = "pcClient";
-	@FieldDescribe("是否在pc终端显示.")
+	@FieldDescribe("pc 단말 표시 여부.")
 	@Column(name = ColumnNamePrefix + pcClient_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean pcClient;
 
 	public static final String mobileClient_FIELDNAME = "mobileClient";
-	@FieldDescribe("是否在移动设备显示.")
+	@FieldDescribe("모바일 기기 표시 여부.")
 	@Column(name = ColumnNamePrefix + mobileClient_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean mobileClient;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -205,15 +205,15 @@ public class Portal extends SliceJpaObject {
 	private PortalProperties properties;
 
 	/**
-	 * 以下为非持久化属性，定义在PortalProperties中
+	 * 이하 비영속 속성, PortalProperties에 정의
 	 */
 	public static final String cornerMarkScript_FIELDNAME = "cornerMarkScript";
-	@FieldDescribe("角标关联门户脚本.")
+	@FieldDescribe("배지 연결 포털 스크립트.")
 	@Transient
 	private String cornerMarkScript;
 
 	public static final String cornerMarkScriptText_FIELDNAME = "cornerMarkScriptText";
-	@FieldDescribe("角标脚本文本.")
+	@FieldDescribe("배지 스크립트 텍스트.")
 	@Transient
 	private String cornerMarkScriptText;
 

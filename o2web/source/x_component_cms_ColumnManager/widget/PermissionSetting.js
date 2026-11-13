@@ -2,7 +2,7 @@ MWF.xApplication.cms.ColumnManager = MWF.xApplication.cms.ColumnManager || {};
 MWF.xApplication.cms.ColumnManager.PermissionSetting = new Class({
     Implements: [Options],
     options : {
-        objectId : "", //对象或分类的ID
+        objectId : "", //객체 또는 분류의 ID
         objectType : "APPINFO", //CATEGORY
         permission : "VIEW" //PUBLISH
     },

@@ -7,6 +7,6 @@ class ExceptionPersonHasNoIdenitity extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionPersonHasNoIdenitity( String name ) {
-		super("员工未设置身份信息，请检查员工所在组织是否正常！name:" + name );
+		super("직원에게 소속 정보가 설정되지 않았습니다. 직원의 조직이 정상인지 확인하십시오! name:" + name );
 	}
 }

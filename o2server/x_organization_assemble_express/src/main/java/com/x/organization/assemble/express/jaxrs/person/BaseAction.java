@@ -35,7 +35,7 @@ class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -7127921596529046623L;
 
-		@FieldDescribe("个人识别名")
+		@FieldDescribe("사용자 식별 이름")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getPersonList() {
@@ -52,7 +52,7 @@ class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -9040303659095981652L;
 
-		@FieldDescribe("身份人员匹配对")
+		@FieldDescribe("신분-사용자 매칭 쌍")
 		private List<IdentityPersonPair> identityPersonPairList = new ArrayList<>();
 
 		public List<IdentityPersonPair> getIdentityPersonPairList() {

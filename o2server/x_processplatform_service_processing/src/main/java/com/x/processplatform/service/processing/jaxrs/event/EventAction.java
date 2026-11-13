@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("event")
-@JaxrsDescribe("事件")
+@JaxrsDescribe("이벤트")
 public class EventAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EventAction.class);
 
-	@JaxrsMethodDescribe(value = "添加更新到自建表事件.", action = ActionAddUpdateTable.class)
+	@JaxrsMethodDescribe(value = "자체 테이블 업데이트 이벤트 추가.", action = ActionAddUpdateTable.class)
 	@POST
 	@Path("add/update/table")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

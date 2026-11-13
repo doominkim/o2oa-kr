@@ -52,7 +52,7 @@ class ActionDeleteWorkOrWorkCompleted extends BaseAction {
 				list.add(editionProcess);
 			}
 			for (Process process : list) {
-				/* 先删除content内容 */
+				/* 먼저 content 내용 삭제 */
 				this.deleteDraft(business, process);
 				this.deleteTask(business, process);
 				this.deleteTaskCompleted(business, process, onlyRemoveNotCompleted);

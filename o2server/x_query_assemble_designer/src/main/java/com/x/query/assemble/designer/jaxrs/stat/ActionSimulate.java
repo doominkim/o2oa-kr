@@ -28,12 +28,12 @@ class ActionSimulate extends BaseAction {
 
 		LOGGER.debug("execute:{}, id:{}.", effectivePerson::getDistinguishedName, () -> id);
 
-		// 前台通过wrapIn将Query的可选择部分FilterEntryList和WhereEntry进行输入
+		// 프런트에서 wrapIn으로 Query의 선택 가능 부분 FilterEntryList와 WhereEntry를 입력
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
 			Business business = new Business(emc);
-			/** 有可能前台不传任何参数 */
+			/** 프런트에서 매개변수를 전혀 보내지 않을 수 있음 */
 			if (null == wi) {
 				wi = new Wi();
 			}

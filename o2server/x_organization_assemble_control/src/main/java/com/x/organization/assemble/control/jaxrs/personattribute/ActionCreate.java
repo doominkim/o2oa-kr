@@ -37,7 +37,7 @@ class ActionCreate extends BaseAction {
 				throw new ExceptionNameEmpty();
 			}
 			PersonAttribute o = Wi.copier.copy(wi);
-			/** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+			/** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
 			if (this.uniqueDuplicateWhenNotEmpty(business, o)) {
 				throw new ExceptionDuplicateUnique(o.getName(), o.getUnique());
 			}

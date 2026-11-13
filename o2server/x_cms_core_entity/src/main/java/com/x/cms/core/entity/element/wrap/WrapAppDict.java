@@ -17,7 +17,7 @@ public class WrapAppDict extends AppDict {
 	public static WrapCopier<WrapAppDict, AppDict> inCopier = WrapCopierFactory
 			.wi(WrapAppDict.class, AppDict.class, null, JpaObject.FieldsUnmodifyExcludeId);
 
-	@FieldDescribe("数据字典数据")
+	@FieldDescribe("데이터 사전 데이터")
 	private JsonElement data;
 
 	public JsonElement getData() {

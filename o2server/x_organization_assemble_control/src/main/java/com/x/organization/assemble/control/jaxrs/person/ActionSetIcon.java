@@ -38,7 +38,7 @@ class ActionSetIcon extends BaseAction {
 			if (!business.editable(effectivePerson, person)) {
 				throw new ExceptionDenyEditPerson(effectivePerson, person.getName());
 			}
-			// 从内存中pick出来的无法作为实体保存
+			// 메모리에서 pick한 것은 엔티티로 저장 불가
 			person = emc.find(person.getId(), Person.class);
 			try (ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -69,7 +69,7 @@ class ActionSetIcon extends BaseAction {
 				wo.setValue(true);
 				result.setData(wo);
 			}
-			/* 通知x_collect_service_transmit同步数据到collect */
+			/* x_collect_service_transmit에 collect로 데이터 동기화 알림 */
 			business.instrument().collect().person();
 			return result;
 		}

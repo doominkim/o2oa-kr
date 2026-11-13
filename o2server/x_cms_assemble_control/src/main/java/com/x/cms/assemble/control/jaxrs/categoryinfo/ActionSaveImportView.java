@@ -18,7 +18,7 @@ import com.x.cms.core.entity.CategoryInfo;
 import com.x.query.core.entity.View;
 
 /**
- * 单独更新分类绑定的导入列表ID
+ * 분류에 연결된 가져오기 목록 ID만 별도 갱신
  * @author O2LEE
  *
  */
@@ -50,7 +50,7 @@ public class ActionSaveImportView extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess( e, "根据ID查询分类信息对象时发生异常。ID:" + categoryId );
+				Exception exception = new ExceptionCategoryInfoProcess( e, "ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + categoryId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -61,7 +61,7 @@ public class ActionSaveImportView extends BaseAction {
 		} catch (Exception e) {
 			check = false;
 			Exception exception = new ExceptionCategoryInfoProcess(e,
-					"系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+					"JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -88,7 +88,7 @@ public class ActionSaveImportView extends BaseAction {
 //					}
 //				} catch (Exception e) {
 //					check = false;
-//					Exception exception = new ExceptionCategoryInfoProcess( e, "根据ID查询数据视图信息对象时发生异常。VIEWID:" + wi.getViewId() );
+//					Exception exception = new ExceptionCategoryInfoProcess( e, "ID로 데이터 뷰 정보 객체를 조회하는 중 예외가 발생했습니다. VIEWID:" + wi.getViewId() );
 //					result.error( exception );
 //					logger.error( e, effectivePerson, request, null);
 //				}
@@ -107,7 +107,7 @@ public class ActionSaveImportView extends BaseAction {
 				result.setData(wo);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess( e, "为分类信息绑定导入列表ID时发生异常。category ID:" + categoryId + ", bind view ID:" + view.getId() );
+				Exception exception = new ExceptionCategoryInfoProcess( e, "분류에 가져오기 목록 ID를 연결하는 중 오류가 발생했습니다. category ID:" + categoryId + ", bind view ID:" + view.getId() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -117,10 +117,10 @@ public class ActionSaveImportView extends BaseAction {
 	}
 	public static class Wi {
 
-		@FieldDescribe("数据视图应用ID")
+		@FieldDescribe("데이터 뷰 앱 ID")
 		private String viewAppId = null;
 		
-		@FieldDescribe("数据视图ID")
+		@FieldDescribe("데이터 뷰 ID")
 		private String viewId = null;
 
 		public String getViewAppId() {

@@ -16,7 +16,7 @@ public   class WrapNumberList extends GsonPropertyObject {
 		this.valueList = new ArrayList<Number>(collection);
 	}
 
-	@FieldDescribe("数值多值.")
+	@FieldDescribe("숫자 다중 값.")
 	private List<Number> valueList = new ArrayList<>();
 
 	public List<Number> getValueList() {

@@ -33,7 +33,7 @@ public class ActionLeaveAccountSearch extends BaseAction {
             ActionResult<Wo> result = new ActionResult<>();
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if ((wi.getFilterList() == null || wi.getFilterList().isEmpty())) {
-                logger.warn("查询条件不完整，查询条件：{0}", wi);
+                logger.warn("조회 조건이 불완전합니다. 조회 조건: {0}", wi);
                 return result;
             }
             List<String> userList = new ArrayList<>();
@@ -44,10 +44,10 @@ public class ActionLeaveAccountSearch extends BaseAction {
                 }
             }
             if (userList.isEmpty()) {
-                logger.warn("没有找到人员信息，查询条件：{0}", "userList=[]");
+                logger.warn("사용자 정보를 찾을 수 없습니다. 조회 조건: {0}", "userList=[]");
                 return result;
             }
-            // userList 去重
+            // userList 중복 제거
             java.util.Set<String> set = new java.util.HashSet<>(userList);
             List<String> distinctUserList = new ArrayList<>(set);
             List<AttendanceV2LeaveAccount> accounts = findAccountsWithPersonAndType(distinctUserList,
@@ -64,7 +64,7 @@ public class ActionLeaveAccountSearch extends BaseAction {
         }
     }
 
-    // 根据人员和假期类型查询余额账户 分页查询
+    // 사용자와 휴가 유형으로 잔여 계정 페이지 조회
     private List<AttendanceV2LeaveAccount> findAccountsWithPersonAndType(List<String> userList,
             EntityManagerContainer emc)
             throws Exception {
@@ -77,7 +77,7 @@ public class ActionLeaveAccountSearch extends BaseAction {
         return em.createQuery(cq).getResultList();
     }
 
-    // 根据人员和假期类型查询余额账户数量
+    // 사용자와 휴가 유형으로 잔여 계정 수 조회
     private Long countAccountsWithPersonAndType(List<String> userList, List<String> leaveTypeList,
             EntityManagerContainer emc) throws Exception {
         EntityManager em = emc.get(AttendanceV2LeaveAccount.class);
@@ -90,7 +90,7 @@ public class ActionLeaveAccountSearch extends BaseAction {
         return em.createQuery(cq).getSingleResult();
     }
 
-    // 根据假期类型ID列表查询假期类型列表
+    // 휴가 유형 ID 목록으로 휴가 유형 목록 조회
     private List<AttendanceV2LeaveType> getLeaveTypeList(List<String> idList,
             EntityManagerContainer emc)
             throws Exception {
@@ -107,13 +107,13 @@ public class ActionLeaveAccountSearch extends BaseAction {
 
         private static final long serialVersionUID = 5802792521103850683L;
 
-        @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
 
-        @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+        @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
         private Boolean recursive;
 
-//        @FieldDescribe("过滤的假期类型ID列表")
+//        @FieldDescribe("필터링할 휴가 유형 ID 목록")
 //        private List<String> leaveTypeList;
 
         public List<String> getFilterList() {
@@ -146,11 +146,11 @@ public class ActionLeaveAccountSearch extends BaseAction {
 
         private static final long serialVersionUID = -987683927054761311L;
 
-        @FieldDescribe("余额账户列表")
+        @FieldDescribe("잔여 계정 목록")
         private List<AttendanceV2LeaveAccount> accountList;
-        @FieldDescribe("人员列表")
+        @FieldDescribe("사용자 목록")
         private List<String> personList;
-        @FieldDescribe("假期类型列表")
+        @FieldDescribe("휴가 유형 목록")
         private List<AttendanceV2LeaveType> leaveTypeList;
 
         public List<AttendanceV2LeaveAccount> getAccountList() {

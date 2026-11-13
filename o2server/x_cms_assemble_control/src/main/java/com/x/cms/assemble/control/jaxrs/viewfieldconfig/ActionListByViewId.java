@@ -34,16 +34,16 @@ public class ActionListByViewId extends BaseAction {
 		} else {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				Business business = new Business(emc);
-				//如判断用户是否有查看所有展示列配置信息的权限，如果没权限不允许继续操作
+				//사용자가 모든 표시 열 설정 정보를 볼 권한이 있는지 판단, 권한이 없으면 작업 계속 불가
 				if (!business.viewEditAvailable( effectivePerson )) {
-					throw new Exception("person{name:" + effectivePerson.getDistinguishedName() + "} 用户没有查询全部展示列配置信息的权限！");
+					throw new Exception("person{name:" + effectivePerson.getDistinguishedName() + "} 사용자에게 전체 표시 열 정보를 조회할 권한이 없습니다!");
 				}
-				//如果有权限，继续操作
+				//권한이 있으면 작업 계속
 				ViewFieldConfigFactory viewFieldConfigFactory = business.getViewFieldConfigFactory();
-				List<String> ids = viewFieldConfigFactory.listByViewId( viewId );//获取指定应用的所有展示列配置信息列表
-				List<ViewFieldConfig> viewFieldConfigList = emc.list( ViewFieldConfig.class, ids );//查询ID IN ids 的所有展示列配置信息信息列表
+				List<String> ids = viewFieldConfigFactory.listByViewId( viewId );//지정 앱의 모든 표시 열 설정 정보 목록 조회
+				List<ViewFieldConfig> viewFieldConfigList = emc.list( ViewFieldConfig.class, ids );//ID IN ids인 모든 표시 열 설정 정보 목록 조회
 
-				wraps = Wo.copier.copy( viewFieldConfigList );//将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				wraps = Wo.copier.copy( viewFieldConfigList );//조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 
 				CacheManager.put(cacheCategory, cacheKey, wraps );
 				result.setData(wraps);

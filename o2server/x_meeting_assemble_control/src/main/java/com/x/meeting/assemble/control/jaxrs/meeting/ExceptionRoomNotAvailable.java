@@ -7,6 +7,6 @@ public class ExceptionRoomNotAvailable extends PromptException {
 	private static final long serialVersionUID = -6884859406782731288L;
 
 	public ExceptionRoomNotAvailable(String flag) {
-		super("会议室 {}, 不可用.", flag);
+		super("회의실 {}을(를) 사용할 수 없습니다.", flag);
 	}
 }

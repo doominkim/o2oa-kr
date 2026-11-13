@@ -7,6 +7,6 @@ class ExceptionQueryNotExistForCover extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionQueryNotExistForCover(String id, String name, String alias) {
-		super("无法查找到用于覆盖的应用, id:{}, name:{}, alias:{}.", id, name, alias);
+		super("덮어쓸 앱을 찾을 수 없습니다. id: {}, name: {}, alias: {}.", id, name, alias);
 	}
 }

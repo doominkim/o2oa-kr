@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("editor")
-@JaxrsDescribe("编辑")
+@JaxrsDescribe("편집")
 public class EditorAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(EditorAction.class);
 
-	@JaxrsMethodDescribe(value = "获取他人共享给我编辑的文件.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "다른 사용자가 나에게 편집 공유한 파일 조회.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

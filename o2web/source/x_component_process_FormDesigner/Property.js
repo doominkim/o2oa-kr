@@ -107,7 +107,7 @@ MWF.xApplication.process.FormDesigner.Property = MWF.FCProperty = new Class({
                     this.loadingCount = 0;
                     this.loadedCount = 0;
                     this.ready = false;
-                    if (this.module.hasOwnProperty("isPropertyLoaded")) { //ElementUI需要判断isPropertyLoaded为true的时候才会setEditStyle
+                    if (this.module.hasOwnProperty("isPropertyLoaded")) { //ElementUI는 isPropertyLoaded가 true일 때만 setEditStyle 수행
                         this.module.isPropertyLoaded = false;
                     }
 
@@ -2389,12 +2389,12 @@ MWF.xApplication.process.FormDesigner.Property = MWF.FCProperty = new Class({
             processActivityNodes.each(function(node){
                 const appName = this.form.designer.options.name;
                 if (["portal.WidgetDesigner", "portal.PageDesigner"].includes(appName)) {
-                    //如果是门户设计器，则不加载活动选择器
-                    //因为门户设计器没有活动，只有页面
+                    //포털 디자이너이면 활동 선택기를 로드하지 않음
+                    //포털 디자이너에는 활동이 없고 페이지만 있기 때문
 
                     node.textContent = "포털에는 활동이 없습니다";
                 }else if (["cms.FormDesigner"].includes(appName)){
-                    //如果是CMS设计器，只有已发布或未发布
+                    //CMS 디자이너이면 발행됨 또는 미발행만 있음
                     var property = this;
                     var jsondata = node.get("name");
                     var name = this.data.pid+jsondata;
@@ -2424,7 +2424,7 @@ MWF.xApplication.process.FormDesigner.Property = MWF.FCProperty = new Class({
                     
 
                 }else{
-                    //如果是流程设计器，则加载活动选择器
+                    //프로세스 디자이너이면 활동 선택기 로드
                     var d = this.data[node.get("name")];
                     var data = d || [];
                     new MWF.xApplication.process.ProcessDesigner.widget.PersonSelector(node, this.form.designer, {
@@ -3234,7 +3234,7 @@ MWF.xApplication.process.FormDesigner.Property = MWF.FCProperty = new Class({
                 return node.get("title") !== MWF.xApplication.process.FormDesigner.LP.propertyTemplate.section;
             })
         }
-        var groupObject = {};  //data-group 属性可以表示不同的分组
+        var groupObject = {};  //data-group 속성으로 서로 다른 그룹을 표시할 수 있음
         if (tabNodes.length){
             tabNodes.each( function(node){
                 var group = node.get("data-group") || "default";
@@ -3443,9 +3443,9 @@ MWF.xApplication.process.FormDesigner.Property = MWF.FCProperty = new Class({
 			// if (value==="true") value = true;
 			//var oldValue = this.data[name];
 			this.changeJsonDate(names, value);
-            //由于加载property的时候，会自动setRadioValue，这时候就不要检查历史了notCheckHistory
+            //property 로드 시 자동으로 setRadioValue를 하므로 이때는 이력을 검사하지 않음 notCheckHistory
             var historyNotSetEditStyle = false;
-            //但是ElementUI有isPropertyLoaded判断，这个时候又需要setEditStyle了。
+            //하지만 ElementUI는 isPropertyLoaded 판단이 있어 이때 다시 setEditStyle이 필요함.
             if( this.module && this.module.vm )historyNotSetEditStyle = false;
             this.changeData(name, input, oldValue, notCheckHistory, historyNotSetEditStyle);
 		}

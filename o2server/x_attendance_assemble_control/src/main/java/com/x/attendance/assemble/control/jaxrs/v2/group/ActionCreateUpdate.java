@@ -38,10 +38,10 @@ public class ActionCreateUpdate extends BaseAction {
             Business business = new Business(emc);
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getGroupName())) {
-                throw new ExceptionEmptyParameter("考勤组名称");
+                throw new ExceptionEmptyParameter("근태 그룹 이름");
             }
             if(!business.isManager(effectivePerson)){
-                 // 协助管理员只能修改 
+                 // 보조 관리자는 수정만 가능 
                  if(StringUtils.isEmpty(wi.getId())) {
                     throw new ExceptionAccessDenied(effectivePerson);
                 } else {
@@ -51,51 +51,51 @@ public class ActionCreateUpdate extends BaseAction {
                     }
                 }
             }
-            // 校验
-            // 名称不能相同
+            // 검증
+            // 이름은 중복될 수 없습니다
             List<AttendanceV2Group> checkNameGroup = emc.listEqual(AttendanceV2Group.class, AttendanceV2Group.groupName_FIELDNAME, wi.getGroupName());
             if (checkNameGroup != null && !checkNameGroup.isEmpty()) {
                 for (AttendanceV2Group attendanceV2Group : checkNameGroup) {
                     if (attendanceV2Group.getGroupName().equals(wi.getGroupName()) && !attendanceV2Group.getId().equals(wi.getId())) {
-                        throw new ExceptionCannotRepetitive("考勤组名称");
+                        throw new ExceptionCannotRepetitive("근태 그룹 이름");
                     }
                 }
             }
             if (wi.getParticipateList() == null || wi.getParticipateList().isEmpty()) {
-                throw new ExceptionEmptyParameter("考勤打卡人员、组织");
+                throw new ExceptionEmptyParameter("근태 체크 인원·조직");
             }
             List<String> trueList = AttendanceV2Helper.calTruePersonFromMixList(emc, business, wi.getId(), wi.getParticipateList(), wi.getUnParticipateList());
             if (trueList == null || trueList.isEmpty()) {
-                throw new ExceptionEmptyParameter("考勤打卡人员、组织");
+                throw new ExceptionEmptyParameter("근태 체크 인원·조직");
             }
             wi.setTrueParticipantList(trueList);
 
-            // 正常保存 需要更多校验
+            // 정상 저장, 추가 검증 필요
             if (!(wi.getStatus() != null && wi.getStatus() == AttendanceV2Group.status_auto)) {
-                // 固定班制
+                // 고정 근무제
                 if (AttendanceV2Group.CHECKTYPE_Fixed.equals(wi.getCheckType())) {
                     if (wi.getWorkDateProperties() == null || !wi.getWorkDateProperties().validateNotEmpty()) {
-                        throw new ExceptionEmptyParameter("考勤工作日设置");
+                        throw new ExceptionEmptyParameter("근태 근무일 설정");
                     }
                 } else if (AttendanceV2Group.CHECKTYPE_Arrangement.equals(wi.getCheckType())) { 
-                    // 排班制 暂时没有更多校验
-                } else if (AttendanceV2Group.CHECKTYPE_Free.equals(wi.getCheckType())) { // 自由班制
+                    // 교대 편성제, 현재 추가 검증 없음
+                } else if (AttendanceV2Group.CHECKTYPE_Free.equals(wi.getCheckType())) { // 자율 근무제
                     if (StringUtils.isEmpty(wi.getWorkDateList())) {
-                        throw new ExceptionEmptyParameter("考勤工作日设置");
+                        throw new ExceptionEmptyParameter("근태 근무일 설정");
                     }
                 } else {
-                    throw new ExceptionEmptyParameter("打卡类型");
+                    throw new ExceptionEmptyParameter("체크 유형");
                 }
 //                if (wi.getWorkPlaceIdList() == null || wi.getWorkPlaceIdList().isEmpty()) {
-//                    throw new ExceptionEmptyParameter("工作场所列表");
+//                    throw new ExceptionEmptyParameter("근무지 목록");
 //                }
             }
            
-            // 新增或更新
+            // 신규 또는 수정
             AttendanceV2Group group = emc.find(wi.getId(), AttendanceV2Group.class);
-            if (group == null) { // 新增
+            if (group == null) { // 신규
                 group = Wi.copier.copy(wi);
-            } else { // 修改
+            } else { // 수정
                 Wi.copier.copy(wi, group);
             }
             group.setOperator(effectivePerson.getDistinguishedName());
@@ -122,8 +122,8 @@ public class ActionCreateUpdate extends BaseAction {
 
         private static final long serialVersionUID = 2307399114926768280L;
 
-        @FieldDescribe("真实的考勤打卡的人员列表.")
-        private List<String> trueParticipantList; // 前端排班使用
+        @FieldDescribe("실제 근태 체크 사용자 목록.")
+        private List<String> trueParticipantList; // 프론트 교대 편성용
 
         public List<String> getTrueParticipantList() {
             return trueParticipantList;

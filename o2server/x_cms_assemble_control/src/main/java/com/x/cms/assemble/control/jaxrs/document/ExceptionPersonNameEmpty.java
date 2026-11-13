@@ -7,6 +7,6 @@ class ExceptionPersonNameEmpty extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionPersonNameEmpty() {
-		super("文档编辑表单信息ID为空，无法进行查询操作。" );
+		super("게시글 편집 양식 ID가 비어 있어 조회할 수 없습니다." );
 	}
 }

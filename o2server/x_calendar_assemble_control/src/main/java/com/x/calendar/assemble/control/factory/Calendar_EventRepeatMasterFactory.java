@@ -21,7 +21,7 @@ import com.x.calendar.core.tools.CriteriaBuilderTools;
 
 
 /**
- * 日历任务记录信息表功能服务类
+ * 캘린더 작업 기록 정보 테이블 기능 서비스 클래스
  * @author O2LEE
  */
 public class Calendar_EventRepeatMasterFactory extends AbstractFactory {
@@ -31,7 +31,7 @@ public class Calendar_EventRepeatMasterFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的日历任务记录信息对象
+	 * 지정한 Id의 캘린더 작업 기록 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -41,7 +41,7 @@ public class Calendar_EventRepeatMasterFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的日历任务记录信息列表
+	 * 지정한 Id의 캘린더 작업 기록 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -72,7 +72,7 @@ public class Calendar_EventRepeatMasterFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询指定的日历信息ID列表
+	 * 조건으로 지정한 캘린더 정보 ID 목록 조회
 	 * @param title
 	 * @param eventType
 	 * @param source
@@ -134,7 +134,7 @@ public class Calendar_EventRepeatMasterFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询需要生成日历事件的重复主体信息ID列表
+	 * 캘린더 이벤트를 생성해야 하는 반복 주체 정보 ID 목록 조회
 	 * @param calendarIds
 	 * @param eventType
 	 * @param createMonth

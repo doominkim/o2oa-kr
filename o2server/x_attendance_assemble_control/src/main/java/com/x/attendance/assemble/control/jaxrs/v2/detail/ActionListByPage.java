@@ -42,7 +42,7 @@ public class ActionListByPage extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (wi == null || StringUtils.isEmpty(wi.getStartDate()) || StringUtils.isEmpty(wi.getEndDate())) {
-                throw new ExceptionEmptyParameter("日期");
+                throw new ExceptionEmptyParameter("날짜");
             }
             ActionResult<List<Wo>> result = new ActionResult<>();
             Business business = new Business(emc);
@@ -56,7 +56,7 @@ public class ActionListByPage extends BaseAction {
                 }
                 userList = new ArrayList<>(new LinkedHashSet<>(userList));
                 if (userList.isEmpty()) {
-                    throw new ExceptionWithMessage("当前查询条件没有找到人员信息！");
+                    throw new ExceptionWithMessage("현재 조회 조건으로 인원 정보를 찾을 수 없습니다!");
                 }
             }
             List<AttendanceV2Detail> list = business.getAttendanceV2ManagerFactory().listDetailByPage(adjustPage,
@@ -106,18 +106,18 @@ public class ActionListByPage extends BaseAction {
         private static final long serialVersionUID = 5957606815096636450L;
 
 
-        @FieldDescribe("用户标识")
+        @FieldDescribe("사용자 식별자")
         private String userId;
 
-        @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+        @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
         private List<String> filterList;
 
-        @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+        @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
         private Boolean recursive;
 
-        @FieldDescribe("开始日期")
+        @FieldDescribe("시작 날짜")
         private String startDate;
-        @FieldDescribe("结束日期")
+        @FieldDescribe("종료 날짜")
         private String endDate;
 
 
@@ -166,7 +166,7 @@ public class ActionListByPage extends BaseAction {
         static WrapCopier<AttendanceV2Detail, Wo> copier = WrapCopierFactory.wo(AttendanceV2Detail.class, Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("打卡记录")
+        @FieldDescribe("체크 기록")
         private List<WoRecord> recordList;
 
         public List<WoRecord> getRecordList() {
@@ -179,9 +179,9 @@ public class ActionListByPage extends BaseAction {
     }
 
     public static class WoRecord extends AttendanceV2CheckInRecord {
-        @FieldDescribe("外出记录")
+        @FieldDescribe("외출 기록")
         private AttendanceV2LeaveData leaveData;
-        @FieldDescribe("请假记录")
+        @FieldDescribe("휴가 기록")
         private AttendanceV2LeaveRequest leaveRequest;
 
         static WrapCopier<AttendanceV2CheckInRecord, WoRecord> copier = WrapCopierFactory.wo(AttendanceV2CheckInRecord.class, WoRecord.class, null,

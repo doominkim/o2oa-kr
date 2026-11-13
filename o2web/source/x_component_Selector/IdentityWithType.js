@@ -12,11 +12,11 @@ MWF.xApplication.Selector.IdentityWithType = new Class({
         "zIndex": 1000,
         "expand": false,
         "noUnit" : false,
-        "include" : [], //增加的可选项
-        "exclude" : [], //排除的可选项
-        "resultType" : "", //可以设置成个人，那么结果返回个人
-        "expandSubEnable" : true, //是否允许展开下一层,
-        "selectAllEnable" : true,  //分类是否允许全选下一层
+        "include" : [], //추가 선택 항목
+        "exclude" : [], //제외 선택 항목
+        "resultType" : "", //개인으로 설정 가능, 그러면 결과로 개인을 반환
+        "expandSubEnable" : true, //다음 레벨 펼치기 허용 여부,
+        "selectAllEnable" : true,  //분류에서 다음 레벨 전체 선택 허용 여부
         "unitType": "",
     },
     setInitTitle: function(){
@@ -31,7 +31,7 @@ MWF.xApplication.Selector.IdentityWithType = new Class({
     },
     loadSelectItems : function(){
         this.itemsMap = {};
-        // this.selectedItemsMap = {}; //所有已选项按dn或id
+        // this.selectedItemsMap = {}; //선택된 모든 항목(dn 또는 id 기준)
 
         if( this.options.disabled ){
             this.afterLoadSelectItem();
@@ -121,13 +121,13 @@ MWF.xApplication.Selector.IdentityWithType = new Class({
         var action = filterType === "key" ? "listIdentityByKey" : "listIdentityByPinyin";
         if ( this.options.units.length ){
             key = this.getLikeKey( key, this.options.units );
-            this.orgAction[action](function(json){ //搜若units内的组织
+            this.orgAction[action](function(json){ //units 내 조직 검색
                 this.includeObject.listByFilter( filterType, key, function( array ){
                     json.data = array.concat( json.data || [] );
                     if (callback) callback.apply(this, [json]);
                 }.bind(this));
             }.bind(this), failure, key);
-        }else{  //搜索所有人
+        }else{  //전체 사용자 검색
             this.orgAction[action](function(json){
                 if (callback) callback.apply(this, [json]);
             }.bind(this), failure, key);
@@ -375,7 +375,7 @@ MWF.xApplication.Selector.IdentityWithType.Filter = new Class({
     options: {
         "style": "default",
         "units": [],
-        "resultType" : "" //可以设置成个人，那么结果返回个人
+        "resultType" : "" //개인으로 설정 가능, 그러면 결과로 개인을 반환
     },
     initialize: function(value, options){
         this.setOptions(options);

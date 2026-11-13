@@ -1,79 +1,79 @@
 /**
- * 数据网格数据结构.
+ * 데이터 그리드 데이터 구조.
  * @typedef {Object} DatagridData
- * @property {Array} data - 数据网格列表数据
- * @property {Object} total - 统计数据
+ * @property {Array} data - 데이터 그리드 목록 데이터
+ * @property {Object} total - 통계 데이터
  * @example
  * 	{
-	  "data": [ //数据网格条目
+	  "data": [ //데이터 그리드 항목
 		{
-		  "datagrid_datagrid$Title": { //数据网格第1列title标识
-			"org_20": {  //数据网格第1列字段标识，人员组件单个对象，存的是对象
-			  "distinguishedName": "张三@bf007525-99a3-4178-a474-32865bdddec8@I",
+		  "datagrid_datagrid$Title": { //데이터 그리드 1열 title 식별자
+			"org_20": {  //데이터 그리드 1열 필드 식별자, 사용자 컴포넌트 단일 객체로 객체를 저장
+			  "distinguishedName": "홍길동@bf007525-99a3-4178-a474-32865bdddec8@I",
 			  "id": "bf007525-99a3-4178-a474-32865bdddec8",
-			  "name": "张三",
+			  "name": "홍길동",
 			  "person": "0c828550-d8ab-479e-9880-09a59332f1ed",
 			  "unit": "9e6ce205-86f6-4d84-96e1-83147567aa8d",
-			  "unitLevelName": "兰德纵横/市场营销部",
-			  "unitName": "市场营销部"
+			  "unitLevelName": "란더종횡/마케팅부",
+			  "unitName": "마케팅부"
 			}
 		  },
-		  "datagrid_datagrid$Title1": { //数据网格第2列title标识
-			"org_21": [{  //数据网格第2列字段标识，人员组件多个对象，存的是数组
-			  "distinguishedName": "张三@bf007525-99a3-4178-a474-32865bdddec8@I",
+		  "datagrid_datagrid$Title1": { //데이터 그리드 2열 title 식별자
+			"org_21": [{  //데이터 그리드 2열 필드 식별자, 사용자 컴포넌트 다중 객체로 배열을 저장
+			  "distinguishedName": "홍길동@bf007525-99a3-4178-a474-32865bdddec8@I",
 			  "id": "bf007525-99a3-4178-a474-32865bdddec8",
-			  "name": "张三",
+			  "name": "홍길동",
 			  "person": "0c828550-d8ab-479e-9880-09a59332f1ed",
 			  "unit": "9e6ce205-86f6-4d84-96e1-83147567aa8d",
-			  "unitLevelName": "兰德纵横/市场营销部",
-			  "unitName": "市场营销部"
+			  "unitLevelName": "란더종횡/마케팅부",
+			  "unitName": "마케팅부"
 			},{
-			  "distinguishedName": "李四@bf007525-99a3-4178-a474-32865bdddec8@I",
+			  "distinguishedName": "김철수@bf007525-99a3-4178-a474-32865bdddec8@I",
 			  "id": "bf007525-99a3-4178-a474-32865bdddec8",
-			  "name": "李四",
+			  "name": "김철수",
 			  "person": "0c828550-d8ab-479e-9880-09a59332f1ed",
 			  "unit": "9e6ce205-86f6-4d84-96e1-83147567aa8d",
-			  "unitLevelName": "兰德纵横/市场营销部",
-			  "unitName": "市场营销部"
+			  "unitLevelName": "란더종횡/마케팅부",
+			  "unitName": "마케팅부"
 			}]
 		  },
-		  "datagrid_datagrid$Title_2": { //数据网格第2列title标识
-			"number": "111" //数据网格第3列字段标识和值
+		  "datagrid_datagrid$Title_2": { //데이터 그리드 2열 title 식별자
+			"number": "111" //데이터 그리드 3열 필드 식별자와 값
 		  },
-		  "datagrid_datagrid$Title_3": { //数据网格第3列title标识
-			"textfield_2": "杭州" //数据网格第4列字段标识和值
+		  "datagrid_datagrid$Title_3": { //데이터 그리드 3열 title 식별자
+			"textfield_2": "항저우" //데이터 그리드 4열 필드 식별자와 값
 		  },
-		  "datagrid_datagrid$Title_4": { //数据网格第4列title标识
-			"attachment_1": [  //数据网格第5列字段标识
+		  "datagrid_datagrid$Title_4": { //데이터 그리드 4열 title 식별자
+			"attachment_1": [  //데이터 그리드 5열 필드 식별자
 			  {
-				"activityName": "拟稿",
+				"activityName": "기안",
 				"extension": "jpg",
 				"id": "9514758e-9e28-4bfe-87d7-824f2811f173",
 				"lastUpdateTime": "2020-12-09 21:48:03",
 				"length": 452863.0,
 				"name": "111.jpg",
-				"person": "李四@lisi@P"
+				"person": "김철수@lisi@P"
 			  }
 			]
 		  }
 		},
 		...
 	  ],
-	  "total": {  //统计数据，列title设置了总计
-		"datagrid_datagrid$Title_2": "333", //总计列2
-		"datagrid_datagrid$Title_3": "2" //总计列3
+	  "total": {  //통계 데이터, 열 title에 합계를 설정한 경우
+		"datagrid_datagrid$Title_2": "333", //합계 열2
+		"datagrid_datagrid$Title_3": "2" //합계 열3
 	  }
 	}
  */
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class DatagridPC 数据网格组件（PC端）。从v6.2开始建议用数据表格(Datatable)代替。
- * @o2cn 数据网格PC端（过时）
+/** @class DatagridPC 데이터 그리드 컴포넌트(PC). v6.2부터 데이터 표(Datatable) 사용 권장.
+ * @o2cn 데이터 그리드 PC(구버전)
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var datagrid = this.form.get("name"); //获取组件
- * //方法2
- * var datagrid = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var datagrid = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var datagrid = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -87,74 +87,74 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 		isEdit: false,
 		options: {
 			/**
-			 * 当前条目编辑完成时触发。通过this.event可以获取对应的tr。
+			 * 현재 항목 편집이 완료될 때 발생. this.event로 해당 tr을 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#completeLineEdit
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 添加条目时触发。通过this.event可以获取对应的tr。
+			 * 항목 추가 시 발생. this.event로 해당 tr을 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#addLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 删除条目前触发。通过this.event可以获取对应的tr。
+			 * 항목 삭제 전에 발생. this.event로 해당 tr을 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#deleteLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 删除条目后触发。
+			 * 항목 삭제 후 발생.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#afterDeleteLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 编辑条目时触发。
+			 * 항목 편집 시 발생.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#editLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 导出excel的时候触发，this.event指向导出的数据，您可以通过修改this.event来修改数据。
+			 * excel 내보내기 시 발생. this.event는 내보낼 데이터를 가리키며, this.event를 수정해 데이터를 변경할 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#export
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 * @example
-			 * <caption>this.event数据格式如下：</caption>
+			 * <caption>this.event 데이터 형식은 다음과 같음:</caption>
 			 * {
 			 *  	data : [
-			 *   		["姓名","性别","学历","专业","出生日期","毕业日期"], //标题
-			 *  		[ "张三","男","大学本科","计算机","2001-1-2","2019-9-2" ], //第一行数据
-			 *  		[ "李四","男","大学专科","数学","1998-1-2","2018-9-2" ]  //第二行数据
-			 * 	], //导出的数据
-			 *     colWidthArray : [100, 50, 100, 200, 150, 150], //每列宽度
-			 *     title : "xxxx" //导出的excel文件标题
+			 *   		["이름","성별","학력","전공","생년월일","졸업일"], //제목
+			 *  		[ "홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ], //첫 번째 행 데이터
+			 *  		[ "김철수","남","전문대학","수학","1998-1-2","2018-9-2" ]  //두 번째 행 데이터
+			 * 	], //내보낼 데이터
+			 *     colWidthArray : [100, 50, 100, 200, 150, 150], //열별 너비
+			 *     title : "xxxx" //내보낼 excel 파일 제목
 			 * }
 			 */
 			/**
-			 * 在导入excel，进行数据校验后触发，this.event指向导入的数据。
+			 * excel 가져오기에서 데이터 검증 후 발생. this.event는 가져온 데이터를 가리킴.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#validImport
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 * @example
-			 * <caption>this.event数据格式如下：</caption>
+			 * <caption>this.event 데이터 형식은 다음과 같음:</caption>
 			 * {
 			 *  	data : [
 			 *  	   {
-			 *  	 	"姓名" : "张三",
-			 *  	 	"性别" : "男",
-			 *  	 	"学历" ： "大学本科",
-			 *  	    "专业" : "计算机",
-			 *  	    "出生日期" : "aa01-1-2",
-			 *  	 	"毕业日期" : "2019-9-2",
+			 *  	 	"이름" : "홍길동",
+			 *  	 	"성별" : "남",
+			 *  	 	"학력" : "대학교 학사",
+			 *  	    "전공" : "컴퓨터",
+			 *  	    "생년월일" : "aa01-1-2",
+			 *  	 	"졸업일" : "2019-9-2",
 			 *  	 	"errorTextList" : [
-			 *  	 	    "第5列：aa01-1-2不是正确的日期格式。"
-			 *  	 	] //校验出的错误信息，如果该行数据正确，则无该字段
+			 *  	 	    "5열: aa01-1-2는 올바른 날짜 형식이 아닙니다."
+			 *  	 	] //검증에서 발견된 오류 정보, 해당 행 데이터가 올바르면 이 필드가 없음
 			 *  	 }
 			 *  	 ...
-			 *     ], //导入的数据
-			 *     "validted" : true  //是否校验通过，可以在本事件中修改该参数，确定是否强制导入
+			 *     ], //가져온 데이터
+			 *     "validted" : true  //검증 통과 여부, 이 이벤트에서 수정해 강제 가져오기 여부를 결정할 수 있음
 			 * }
 			 */
 			/**
-			 * 在导入excel，数据校验成功将要设置回数据网格的时候触发，this.event指向整理过的导入数据，格式见{@link DatagridData}。
+			 * excel 가져오기에서 데이터 검증에 성공해 데이터 그리드에 다시 설정하려 할 때 발생. this.event는 정리된 가져오기 데이터를 가리키며, 형식은 {@link DatagridData} 참고.
 			 * @event MWF.xApplication.process.Xform.DatagridPC#import
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			"moduleEvents": ["queryLoad","postLoad","load","completeLineEdit", "addLine", "deleteLine", "afterDeleteLine","editLine", "export", "import", "validImport"]
 		},
@@ -203,9 +203,9 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 			this.deleteable = this.json.deleteable !== "no";
 			this.addable = this.json.addable !== "no";
 
-			//允许导入
+			//가져오기 허용
 			this.importenable  = this.editable && (this.json.impexpType === "impexp" || this.json.impexpType === "imp");
-			//允许导出
+			//내보내기 허용
 			this.exportenable  = this.json.impexpType === "impexp" || this.json.impexpType === "exp";
 
 			this.gridData = this._getValue();
@@ -420,7 +420,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 						break;
 					case "Textarea":
 						var reg = new RegExp("\n","g");
-						var reg2 = new RegExp("\u003c","g"); //尖括号转义，否则内容会截断
+						var reg2 = new RegExp("\u003c","g"); //꺾쇠괄호 이스케이프, 그렇지 않으면 내용이 잘림
 						var reg3 = new RegExp("\u003e","g");
 						value = value.replace(reg2,"&lt").replace(reg3,"&gt").replace(reg,"<br/>");
 						break;
@@ -1433,39 +1433,39 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 			}
 		},
 		// /**
-		//  * @summary 重置数据网格的值为默认值或置空。
+		//  * @summary 데이터 그리드 값을 기본값으로 재설정하거나 비움.
 		//  *  @example
 		//  * this.form.get('fieldId').resetData();
 		//  */
 		resetData: function(){
 			this.setData(this._getValue());
 		},
-		/**当参数为Promise的时候，请查看文档: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|使用Promise处理表单异步}<br/>
-		 * 当表单上没有对应组件的时候，可以使用this.data[fieldId] = data赋值。
-		 * @summary 为数据网格赋值。
-		 * @param data{DatagridData|Promise|Array} 必选，数组或Promise.
+		/**매개변수가 Promise인 경우 문서 참고: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|Promise로 양식 비동기 처리}<br/>
+		 * 양식에 해당 컴포넌트가 없으면 this.data[fieldId] = data로 값을 설정할 수 있음.
+		 * @summary 데이터 그리드에 값 설정.
+		 * @param data{DatagridData|Promise|Array} 필수, 배열 또는 Promise.
 		 * @example
-		 *  this.form.get("fieldId").setData([]); //赋空值
+		 *  this.form.get("fieldId").setData([]); //빈 값 설정
 		 * @example
-		 *  //如果无法确定表单上是否有组件，需要判断
-		 *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+		 *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
+		 *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
 		 *      this.form.get('fieldId').setData( data );
 		 *  }else{
 		 *      this.data['fieldId'] = data;
 		 *  }
 		 *@example
-		 *  //使用Promise
+		 *  //Promise 사용
 		 *  var field = this.form.get("fieldId");
-		 *  var promise = new Promise(function(resolve, reject){ //发起异步请求
+		 *  var promise = new Promise(function(resolve, reject){ //비동기 요청 시작
 		 *    var oReq = new XMLHttpRequest();
-		 *    oReq.addEventListener("load", function(){ //绑定load事件
+		 *    oReq.addEventListener("load", function(){ //load 이벤트 바인딩
 		 *      resolve(oReq.responseText);
 		 *    });
-		 *    oReq.open("GET", "/data.json"); //假设数据存放在data.json
+		 *    oReq.open("GET", "/data.json"); //데이터가 data.json에 있다고 가정
 		 *    oReq.send();
 		 *  });
 		 *  promise.then( function(){
-		 *    var data = field.getData(); //此时由于异步请求已经执行完毕，getData方法获得data.json的值
+		 *    var data = field.getData(); //이 시점에는 비동기 요청이 이미 완료되어 getData 메서드로 data.json의 값을 얻음
 		 * })
 		 *  field.setData( promise );
 		 */
@@ -1509,7 +1509,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 			this.gridData = data;
 
 			// if (this.isEdit) this._completeLineEdit();
-			if( this.isEdit ){ //如果有在编辑的，取消编辑行
+			if( this.isEdit ){ //편집 중인 행이 있으면 편집 취소
 				if (this.currentEditLine) {
 					this.currentEditLine.setStyle("display", "table-row");
 				}
@@ -1551,22 +1551,22 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 			}
 		},
 		/**
-		 * @summary 获取总计数据.
+		 * @summary 합계 데이터 조회.
 		 * @example
 		 * var totalObject = this.form.get('fieldId').getTotal();
-		 * @return {Object} 总计数据
+		 * @return {Object} 합계 데이터
 		 */
 		getTotal: function(){
 			this._loadTotal();
 			return this.totalResaults;
 		},
 		/**
-		 * @summary 判断数据网格是否为空.
+		 * @summary 데이터 그리드가 비어 있는지 판단.
 		 * @example
 		 * if( this.form.get('fieldId').isEmpty() ){
-		 *     this.form.notice('至少需要添加一条数据', 'warn');
+		 *     this.form.notice('최소 한 건의 데이터를 추가해야 합니다', 'warn');
 		 * }
-		 * @return {Boolean} 是否为空
+		 * @return {Boolean} 비어 있는지 여부
 		 */
 		isEmpty: function(){
 			var data = this.getData();
@@ -1579,37 +1579,37 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 		},
 
 		/**
-		 * 在脚本中使用 this.data[fieldId] 也可以获取组件值。
-		 * 区别如下：<br/>
-		 * 1、当使用Promise的时候<br/>
-		 * 使用异步函数生成器（Promise）为组件赋值的时候，用getData方法立即获取数据，可能返回修改前的值，当Promise执行完成以后，会返回修改后的值。<br/>
-		 * this.data[fieldId] 立即获取数据，可能获取到异步函数生成器，当Promise执行完成以后，会返回修改后的值。<br/>
-		 * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|具体差异请查看链接}<br/>
-		 * 2、当表单上没有对应组件的时候，可以使用this.data[fieldId]获取值，但是this.form.get('fieldId')无法获取到组件。
-		 * @summary 获取数据网格数据.
+		 * 스크립트에서 this.data[fieldId]로도 컴포넌트 값을 가져올 수 있음.
+		 * 차이는 다음과 같음:<br/>
+		 * 1. Promise를 사용하는 경우<br/>
+		 * 비동기 함수 생성기(Promise)로 컴포넌트에 값을 할당할 때 getData 메서드로 즉시 가져오면 수정 전 값이 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+		 * this.data[fieldId]로 즉시 가져오면 비동기 함수 생성기가 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+		 * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|자세한 차이는 링크 참고}<br/>
+		 * 2. 양식에 해당 컴포넌트가 없을 때는 this.data[fieldId]로 값을 가져올 수 있지만, this.form.get('fieldId')로는 컴포넌트를 가져올 수 없음.
+		 * @summary 데이터 그리드 데이터 조회.
 		 * @example
 		 * var data = this.form.get('fieldId').getData();
 		 *@example
-		 *  //如果无法确定表单上是否有组件，需要判断
+		 *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
 		 *  var data;
-		 *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+		 *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
 		 *      data = this.form.get('fieldId').getData();
 		 *  }else{
-		 *      data = this.data['fieldId']; //直接从数据中获取字段值
+		 *      data = this.data['fieldId']; //데이터에서 필드 값을 직접 가져오기
 		 *  }
 		 *  @example
-		 *  //使用Promise
+		 *  //Promise 사용
 		 *  var field = this.form.get("fieldId");
-		 *  var promise = new Promise(function(resolve, reject){ //发起异步请求
+		 *  var promise = new Promise(function(resolve, reject){ //비동기 요청 시작
 		 *    var oReq = new XMLHttpRequest();
-		 *    oReq.addEventListener("load", function(){ //绑定load事件
+		 *    oReq.addEventListener("load", function(){ //load 이벤트 바인딩
 		 *      resolve(oReq.responseText);
 		 *    });
-		 *    oReq.open("GET", "/data.json"); //假设数据存放在data.json
+		 *    oReq.open("GET", "/data.json"); //데이터가 data.json에 있다고 가정
 		 *    oReq.send();
 		 *  });
 		 *  promise.then( function(){
-		 *    var data = field.getData(); //此时由于异步请求已经执行完毕，getData方法获得data.json的值
+		 *    var data = field.getData(); //이 시점에는 비동기 요청이 이미 완료되어 getData 메서드로 data.json의 값을 얻음
 		 * })
 		 *  field.setData( promise );
 		 * @return {DatagridData}
@@ -1808,17 +1808,17 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 
 
 		isAvaliableImpExpColumn : function(thJson, module, type){
-			if (thJson && ( thJson.isShow === false || thJson.isImpExp === false ))return false; //隐藏列，不允许导入导出
-			if (module && (module.json.type == "sequence" || module.json.cellType == "sequence") )return false; //序号列
-			if (module && ["Image","Button","ImageClipper","Attachment","AttachmentDg","Label"].contains(module.json.type) )return false; //图片，附件,Label列不导入导出
-			// if (type==="import" && module && ["Label"].contains(module.json.type))return false; //Label 不导入
+			if (thJson && ( thJson.isShow === false || thJson.isImpExp === false ))return false; //숨김 열, 가져오기/내보내기 불가
+			if (module && (module.json.type == "sequence" || module.json.cellType == "sequence") )return false; //순번 열
+			if (module && ["Image","Button","ImageClipper","Attachment","AttachmentDg","Label"].contains(module.json.type) )return false; //이미지, 첨부파일, Label 열은 가져오기/내보내기 안 함
+			// if (type==="import" && module && ["Label"].contains(module.json.type))return false; //Label은 가져오기 안 함
 			return true;
 		},
 		getExportColWidthArray : function(){
 			var titleThs = this.titleTr.getElements("th");
 			var colWidthArr = [];
 			titleThs.each(function(th, index){
-				if ( this.editable && (index===0 || index === titleThs.length-1) )return; //第一列操作列和最后一列排序列
+				if ( this.editable && (index===0 || index === titleThs.length-1) )return; //첫 번째 열은 작업 열, 마지막 열은 정렬 열
 
 				var thJson = this.form._getDomjson( th );
 				var module = this.editModules[this.editable ? (index-1) : index];
@@ -1844,10 +1844,10 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 		},
 		getExportDateIndexArray : function(){
 			var titleThs = this.titleTr.getElements("th");
-			var dateIndexArr = []; //日期格式列下标
+			var dateIndexArr = []; //날짜 형식 열 인덱스
 			var idx=0;
 			titleThs.each(function(th, index){
-				if ( this.editable && (index===0 || index === titleThs.length-1) )return; //第一列操作列和最后一列排序列
+				if ( this.editable && (index===0 || index === titleThs.length-1) )return; //첫 번째 열은 작업 열, 마지막 열은 정렬 열
 				var thJson = this.form._getDomjson( th );
 				var module = this.editModules[this.editable ? (index-1) : index];
 				if ( this.isAvaliableImpExpColumn( thJson, module ) ) {
@@ -1863,7 +1863,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 			var titleThs = this.titleTr.getElements("th");
 			var titleArr = [];
 			titleThs.each(function(th, index){
-				if ( this.editable && (index===0 || index === titleThs.length-1) )return; //第一列操作列和最后一列排序列
+				if ( this.editable && (index===0 || index === titleThs.length-1) )return; //첫 번째 열은 작업 열, 마지막 열은 정렬 열
 				var thJson = this.form._getDomjson( th );
 				var module = this.editModules[this.editable ? (index-1) : index];
 				if ( this.isAvaliableImpExpColumn( thJson, module, type ) ) {
@@ -1881,11 +1881,11 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 
 			var titleArr = this.getExportTitleArray();
 			var colWidthArr = this.getExportColWidthArray();
-			var dateIndexArr = this.getExportDateIndexArray(); //日期格式列下标
+			var dateIndexArr = this.getExportDateIndexArray(); //날짜 형식 열 인덱스
 
 			// var idx=0;
 			// titleThs.each(function(th, index){
-			// 	if ( this.editable && (index===0 || index === titleThs.length-1) )return; //第一列操作列和最后一列排序列
+			// 	if ( this.editable && (index===0 || index === titleThs.length-1) )return; //첫 번째 열은 작업 열, 마지막 열은 정렬 열
 			//
 			// 	var thJson = this.form._getDomjson( th );
 			// 	var module = this.editModules[this.editable ? (index-1) : index];
@@ -1916,7 +1916,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 					var array = [];
 
 					titleThs.each(function(th, index){
-						if ( this.editable && (index===0 || index === titleThs.length-1) )return; //第一列操作列和最后一列排序列
+						if ( this.editable && (index===0 || index === titleThs.length-1) )return; //첫 번째 열은 작업 열, 마지막 열은 정렬 열
 
 						var module = this.editModules[ this.editable ? (index-1) : index];
 						var thJson = this.form._getDomjson( th );
@@ -1927,7 +1927,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 							var text = "";
 
 							if( cellData ) {
-								if (typeOf(cellData) !== "array") { //序号
+								if (typeOf(cellData) !== "array") { //번호
 									for (key in cellData) {
 										var value = cellData[key];
 										if (module && ["Org", "Reader", "Author", "Personfield", "Orgfield"].contains(module.json.type)) {
@@ -1993,13 +1993,13 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 		importFromExcel : function () {
 			var columnList = [];
 
-			var dateColArray = []; //日期列
+			var dateColArray = []; //날짜 열
 			var titleThs = this.titleTr.getElements("th");
 
 			var idx = 1;
 			var orgTitleList = [];
 			titleThs.each(function(th, index){
-				if (this.editable && (index===0 || index === titleThs.length-1 ))return; //第一列操作列和最后一列排序列
+				if (this.editable && (index===0 || index === titleThs.length-1 ))return; //첫 번째 열은 작업 열, 마지막 열은 정렬 열
 				var module = this.editModules[this.editable ? (index-1) : index];
 				var thJson = this.form._getDomjson( th );
 				if ( this.isAvaliableImpExpColumn( thJson, module, "import" )){
@@ -2067,7 +2067,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 							if( !d ){
 								value = [];
 							}else{
-								var arr = d.split(/\s*,\s*/g ); //空格,空格
+								var arr = d.split(/\s*,\s*/g ); //공백,공백
 								// if( arr.length === 0 ){
 								// 	value = this.getImportOrgData( d );
 								// }else{
@@ -2081,11 +2081,11 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 							break;
 						case "Combox":
 						case "Address":
-							arr = d.split(/\s*,\s*/g ); //空格,空格
+							arr = d.split(/\s*,\s*/g ); //공백,공백
 							value = arr; //arr.length === 1  ? arr[0] : arr;
 							break;
 						case "Checkbox":
-							arr = d.split(/\s*,\s*/g ); //空格,空格
+							arr = d.split(/\s*,\s*/g ); //공백,공백
 							var options = module.getOptionsObj();
 							arr.each( function( a, i ){
 								var idx = options.textList.indexOf( a );
@@ -2095,16 +2095,16 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 							break;
 						case "Radio":
 						case "Select":
-							value = d.replace(/&#10;/g,""); //换行符&#10;
+							value = d.replace(/&#10;/g,""); //줄바꿈 문자&#10;
 							var options = module.getOptionsObj();
 							var idx = options.textList.indexOf( value );
 							value = idx > -1 ? options.valueList[ idx ] : "";
 							break;
 						case "Textarea":
-							value = d.replace(/&#10;/g,"\n"); //换行符&#10;
+							value = d.replace(/&#10;/g,"\n"); //줄바꿈 문자&#10;
 							break;
 						case "Calendar":
-							value = d.replace(/&#10;/g,""); //换行符&#10;
+							value = d.replace(/&#10;/g,""); //줄바꿈 문자&#10;
 							if( value ){
 								var format;
 								if (!module.json.format){
@@ -2120,7 +2120,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 							}
 							break;
 						default:
-							value = d.replace(/&#10;/g,""); //换行符&#10;
+							value = d.replace(/&#10;/g,""); //줄바꿈 문자&#10;
 							break;
 					}
 
@@ -2177,7 +2177,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 
 				htmlArray.push( "<tr>" );
 				columnList.each( function (obj, i) {
-					htmlArray.push( "<td style='"+contentStyle+"'>"+ ( lineData[ obj.text ] || '' ).replace(/&#10;/g,"<br/>") +"</td>" ); //换行符&#10;
+					htmlArray.push( "<td style='"+contentStyle+"'>"+ ( lineData[ obj.text ] || '' ).replace(/&#10;/g,"<br/>") +"</td>" ); //줄바꿈 문자&#10;
 				});
 				htmlArray.push( "<td style='"+contentStyle+"'>"+( lineData.errorTextList ? lineData.errorTextList.join("<br/>") : "" )+"</td>" );
 				htmlArray.push( "</tr>" );
@@ -2221,7 +2221,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 			var colWidthArr = this.getExportColWidthArray();
 			colWidthArr.push( 220 );
 
-			var dateIndexArr = this.getExportDateIndexArray(); //日期格式列下标
+			var dateIndexArr = this.getExportDateIndexArray(); //날짜 형식 열 인덱스
 
 			var titleArr = this.getExportTitleArray("import");
 			titleArr.push( MWF.xApplication.process.Xform.LP.validationInfor );
@@ -2293,7 +2293,7 @@ MWF.xApplication.process.Xform.DatagridPC = new Class(
 							case "Author":
 							case "Personfield":
 							case "Orgfield":
-								var arr = d.split(/\s*,\s*/g ); //空格,空格
+								var arr = d.split(/\s*,\s*/g ); //공백,공백
 								arr.each( function(d, idx){
 									var obj = this.getImportOrgData( d );
 									if( obj.errorText ){

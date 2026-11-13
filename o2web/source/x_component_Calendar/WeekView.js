@@ -241,7 +241,7 @@ MWFCalendarWeekView.Calendar = new Class({
         this.prevWeekNode =  new Element("div.ooicon-arrow_back", {"styles": this.css.calendarPrevWeekNode}).inject(this.titleNode);
 
         // var text = this.baseDate.format(this.app.lp.dateFormatMonth)
-        //     + "，第" + this.view.getWeekNumber( this.baseDate  ) + "周";
+        //     + ", " + this.view.getWeekNumber( this.baseDate  ) + "주차";
         var month = this.baseDate.format(this.app.lp.dateFormatMonth);
         var week = this.view.getWeekNumber( this.baseDate );
         var text = this.app.lp.weeklyViewTitle.replace("{month}", month ).replace("{week}",week);
@@ -1392,7 +1392,7 @@ MWFCalendarWeekView.Calendar.Day = new Class({
     getTimeRange: function( bDate1,  eDate1 ){
         var bDate = typeOf(bDate1) == "string" ? Date.parse(bDate1) : bDate1;
         var eDate = typeOf(eDate1) == "string" ? Date.parse(eDate1) : eDate1;
-        if( eDate <= this.startTime ){ //比当天天12点更晚
+        if( eDate <= this.startTime ){ //당일 12시보다 늦음
             return null;
         }
         if( this.endTime <= bDate ){
@@ -1678,7 +1678,7 @@ MWFCalendarWeekView.WeekCalendar = new Class({
 
         var tmpDate = firstDate.clone();
         for (var i=day-1; i>=0; i--){
-            if( i % 8 == 0 ){ //设置周数
+            if( i % 8 == 0 ){ //주차 설정
                 var week = this.getWeekNumber( tmpDate );
                 tds[i].set("text", week);
                 tds[i].setStyles(this.css.week);
@@ -1696,7 +1696,7 @@ MWFCalendarWeekView.WeekCalendar = new Class({
 
         for (var i=day; i<tds.length; i++){
 
-            if( i % 8 == 0 ){ //设置周数
+            if( i % 8 == 0 ){ //주차 설정
                 var week = this.getWeekNumber( firstDate );
                 tds[i].set("text", week );
                 //tds[i].addClass("gray_"+this.options.style);

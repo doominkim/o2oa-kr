@@ -22,7 +22,7 @@ import com.x.cms.core.express.tools.filter.QueryFilter;
 
 
 /**
- * 文档评论基础功能服务类
+ * 문서 댓글 기본 기능 서비스 클래스
  * 
  * @author O2LEE
  */
@@ -94,7 +94,7 @@ public class DocumentCommentInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据条件查询符合条件的评论信息数量
+	 * 조건에 맞는 댓글 정보 수 조회
 	 * @param queryFilter
 	 * @return
 	 * @throws Exception
@@ -110,7 +110,7 @@ public class DocumentCommentInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据条件查询符合条件的评论信息ID
+	 * 조건에 맞는 댓글 정보 ID 조회
 	 * @param maxCount
 	 * @param orderField
 	 * @param orderType
@@ -132,7 +132,7 @@ public class DocumentCommentInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据条件查询符合条件的评论信息ID，根据上一条的sequnce查询指定数量的信息
+	 * 조건에 맞는 댓글 정보 ID 조회, 이전 항목의 sequnce 기준으로 지정한 수만큼 조회
 	 * @param maxCount
 	 * @param sequenceFieldValue
 	 * @param orderField

@@ -7,6 +7,6 @@ class ExceptionProcessEnabled extends LanguagePromptException {
 	private static final long serialVersionUID = 3768001625178470667L;
 
 	ExceptionProcessEnabled(String flag) {
-		super("流程: {} 存在多个版本，且当前版本处于启用状态，请启用其他版本后再删除.", flag);
+		super("프로세스: {}에 여러 버전이 있고 현재 버전이 사용 중입니다. 다른 버전을 사용 설정한 뒤 삭제하세요.", flag);
 	}
 }

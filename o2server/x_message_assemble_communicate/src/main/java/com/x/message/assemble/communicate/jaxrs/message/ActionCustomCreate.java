@@ -55,16 +55,16 @@ class ActionCustomCreate extends BaseAction {
 		static WrapCopier<Wi, MessageConnector.Wrap> copier = WrapCopierFactory.wi(Wi.class,
 				MessageConnector.Wrap.class, null, JpaObject.FieldsUnmodify);
 
-		@FieldDescribe("类型")
+		@FieldDescribe("유형")
 		private String type;
 
-		@FieldDescribe("人员")
+		@FieldDescribe("사용자")
 		private String person;
 
-		@FieldDescribe("标题")
+		@FieldDescribe("제목")
 		private String title;
 
-		@FieldDescribe("推送内容")
+		@FieldDescribe("콘텐츠 푸시")
 		private JsonElement body;
 
 		public String getType() {

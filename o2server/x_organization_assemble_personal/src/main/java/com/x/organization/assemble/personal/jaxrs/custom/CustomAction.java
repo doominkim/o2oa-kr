@@ -41,15 +41,15 @@ public class CustomAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "CustomAction::";
 
-	@Operation(summary = "根据当前的访问用户获取Custom数据.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "현재 접근 사용자 기준으로 Custom 데이터 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = String.class)) }) })
-	@JaxrsMethodDescribe(value = "根据当前的访问用户获取Custom数据.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "현재 접근 사용자 기준으로 Custom 데이터 조회.", action = ActionGet.class)
 	@GET
 	@Path("{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<String> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -61,16 +61,16 @@ public class CustomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取指定用户的Custom数据.", operationId = OPERATIONID_PREFIX + "managerGet", responses = {
+	@Operation(summary = "지정 사용자의 Custom 데이터 조회.", operationId = OPERATIONID_PREFIX + "managerGet", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = String.class)) }) })
-	@JaxrsMethodDescribe(value = "获取指定用户的Custom数据.", action = ActionManagerGet.class)
+	@JaxrsMethodDescribe(value = "지정 사용자의 Custom 데이터 조회.", action = ActionManagerGet.class)
 	@GET
 	@Path("manager/person/{person}/name/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户") @PathParam("person") String person,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("사용자") @PathParam("person") String person,
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<String> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -82,17 +82,17 @@ public class CustomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "获取指定用户的Custom数据.", operationId = OPERATIONID_PREFIX + "update", responses = {
+	@Operation(summary = "지정 사용자의 Custom 데이터 조회.", operationId = OPERATIONID_PREFIX + "update", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionEdit.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = String.class)) }))
-	@JaxrsMethodDescribe(value = "更新指定名称的Custom.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Custom 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name, String wi) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name, String wi) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -104,17 +104,17 @@ public class CustomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "更新指定名称的Custom数据(Mock put to post).", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "지정 이름의 Custom 데이터 수정(Mock put to post).", operationId = OPERATIONID_PREFIX
 			+ "updateMockPutToPost", responses = { @ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionEdit.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = String.class)) }))
-	@JaxrsMethodDescribe(value = "更新指定名称的Custom数据(Mock put to post).", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Custom 데이터 수정(Mock put to post).", action = ActionEdit.class)
 	@POST
 	@Path("{name}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateMockPutToPost(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name, String wi) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name, String wi) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -126,18 +126,18 @@ public class CustomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "管理员更新指定用户指定名称的Custom数据.", operationId = OPERATIONID_PREFIX + "managerUpdate", responses = {
+	@Operation(summary = "관리자가 지정 사용자의 지정 이름 Custom 데이터 수정.", operationId = OPERATIONID_PREFIX + "managerUpdate", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionManagerEdit.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = String.class)) }))
-	@JaxrsMethodDescribe(value = "管理员更新指定用户指定名称的Custom数据.", action = ActionManagerEdit.class)
+	@JaxrsMethodDescribe(value = "관리자가 지정 사용자의 지정 이름 Custom 데이터 수정.", action = ActionManagerEdit.class)
 	@PUT
 	@Path("manager/person/{person}/name/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerUpdate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("用户") @PathParam("person") String person,
-			@JaxrsParameterDescribe("定义名称") @PathParam("name") String name, String wi) {
+			@JaxrsParameterDescribe("사용자") @PathParam("person") String person,
+			@JaxrsParameterDescribe("정의 이름") @PathParam("name") String name, String wi) {
 		ActionResult<ActionManagerEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -149,18 +149,18 @@ public class CustomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "管理员更新指定用户指定名称的Custom数据(Mock put to post).", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "관리자가 지정 사용자의 지정 이름 Custom 데이터 수정(Mock put to post).", operationId = OPERATIONID_PREFIX
 			+ "managerUpdateMockPutToPost", responses = { @ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionManagerEdit.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = String.class)) }))
-	@JaxrsMethodDescribe(value = "管理员更新指定用户指定名称的Custom数据(Mock put to post).", action = ActionManagerEdit.class)
+	@JaxrsMethodDescribe(value = "관리자가 지정 사용자의 지정 이름 Custom 데이터 수정(Mock put to post).", action = ActionManagerEdit.class)
 	@POST
 	@Path("manager/person/{person}/name/{name}/mockputtopost")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void managerUpdateMockPutToPost(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("用户") @PathParam("person") String person,
-			@JaxrsParameterDescribe("定义名称") @PathParam("name") String name, String wi) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("사용자") @PathParam("person") String person,
+			@JaxrsParameterDescribe("정의 이름") @PathParam("name") String name, String wi) {
 		ActionResult<ActionManagerEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -172,15 +172,15 @@ public class CustomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "删除指定名称的Custom数据.", operationId = OPERATIONID_PREFIX + "delete", responses = {
+	@Operation(summary = "지정 이름의 Custom 데이터 삭제.", operationId = OPERATIONID_PREFIX + "delete", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionDelete.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "删除指定名称的Custom数据.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Custom 데이터 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -192,16 +192,16 @@ public class CustomAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "删除指定名称的Custom数据(Mock delete to get).", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "지정 이름의 Custom 데이터 삭제(Mock delete to get).", operationId = OPERATIONID_PREFIX
 			+ "deleteMockDeleteToGet", responses = {
 					@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionDelete.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "删除指定名称的Custom数据(Mock delete to get).", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정 이름의 Custom 데이터 삭제(Mock delete to get).", action = ActionDelete.class)
 	@GET
 	@Path("{name}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("名称") @PathParam("name") String name) {
+			@JaxrsParameterDescribe("이름") @PathParam("name") String name) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

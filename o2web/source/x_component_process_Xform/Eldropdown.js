@@ -1,17 +1,17 @@
 o2.xDesktop.requireApp("process.Xform", "$Elinput", null, false);
-/** @class Eldropdown 基于Element UI的下拉菜单组件。本组件不往后台存数据。
- * @o2cn 下拉菜单
+/** @class Eldropdown Element UI 기반 드롭다운 메뉴 컴포넌트. 이 컴포넌트는 서버에 데이터를 저장하지 않음.
+ * @o2cn 드롭다운 메뉴
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|Element UI Dropdown 下拉菜单}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|Element UI Dropdown 드롭다운 메뉴}
  */
 MWF.xApplication.process.Xform.Eldropdown = MWF.APPEldropdown =  new Class(
     /** @lends MWF.xApplication.process.Xform.Eldropdown# */
@@ -21,19 +21,19 @@ MWF.xApplication.process.Xform.Eldropdown = MWF.APPEldropdown =  new Class(
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * split-button 为 true 时，点击左侧按钮的回调
+         * split-button이 true일 때 왼쪽 버튼 클릭 콜백
          * @event MWF.xApplication.process.Xform.Eldropdown#click
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|下拉菜单组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|드롭다운 메뉴 컴포넌트의 Events 장}
          */
         /**
-         * 点击菜单项触发的事件回调。this.event[0]指向dropdown-item 的指令（选项的command值）
+         * 메뉴 항목 클릭 시 발생하는 이벤트 콜백. this.event[0]은 dropdown-item의 명령(항목의 command 값)
          * @event MWF.xApplication.process.Xform.Eldropdown#focus
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|下拉菜单组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|드롭다운 메뉴 컴포넌트의 Events 장}
          */
         /**
-         * 下拉框出现/隐藏时触发。出现则this.event[0]为 true，隐藏则this.event[0]为 false
+         * 드롭다운이 표시/숨김될 때 발생. 표시되면 this.event[0]은 true, 숨겨지면 this.event[0]은 false
          * @event MWF.xApplication.process.Xform.Eldropdown#change
-         * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|下拉菜单组件的Events章节}
+         * @see {@link https://element.eleme.cn/#/zh-CN/component/dropdown|드롭다운 메뉴 컴포넌트의 Events 장}
          */
         "elEvents": ["click", "command", "visible-change"]
     },

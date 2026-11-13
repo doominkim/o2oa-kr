@@ -69,7 +69,7 @@ class ActionDeleteDraft extends BaseAction {
 				if ((null != work) && checkCanDelete(business, work)) {
 					cascadeDeleteWorkBeginButNotCommit(business, work);
 					emc.commit();
-					LOGGER.info("删除长期处于草稿状态的工作, id:{}, title:{}, sequence:{}", work::getId, work::getTitle,
+					LOGGER.info("장기간 초안 상태인 업무 문서 삭제, id:{}, title:{}, sequence:{}", work::getId, work::getTitle,
 							work::getSequence);
 					wo.setId(work.getId());
 				}

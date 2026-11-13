@@ -7,6 +7,6 @@ class ExceptionEntityClass extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionEntityClass(String className) {
-		super("无法获取指定类型:{}.", className);
+		super("지정한 유형을 가져올 수 없습니다: {}.", className);
 	}
 }

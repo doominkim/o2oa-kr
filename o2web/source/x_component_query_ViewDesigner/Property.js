@@ -533,9 +533,9 @@ MWF.xApplication.query.ViewDesigner.Property = MWF.FVProperty = new Class({
     },
     _getPathValue: function(object, path, defaultValue = undefined) {
         if (!object || !path) return defaultValue;
-        // 把 a[0].b['xx-yy'] 转成数组key列表
+        // a[0].b['xx-yy']를 배열 key 목록으로 변환
         const keys = String(path)
-            .replace(/\[(['"]?)(.*?)\1\]/g, '.$2') // [] 转 .
+            .replace(/\[(['"]?)(.*?)\1\]/g, '.$2') // []를 .으로 변환
             .split('.')
             .filter(k => k !== '');
 

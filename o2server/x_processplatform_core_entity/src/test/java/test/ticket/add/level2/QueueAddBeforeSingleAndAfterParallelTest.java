@@ -19,7 +19,7 @@ class QueueAddBeforeSingleAndAfterParallelTest {
 
  
 
-	@DisplayName("A前加签EFG,EFG单人处理,F后加签IJK,IJK并行处理，即串行-前加签单人-后加签并行")
+	@DisplayName("A전 추가결재EFG,EFG단일 처리,F후 추가결재IJK,IJK병렬 처리,즉 순차-전 추가결재단일-후 추가결재병렬")
 	@Test
 	@Order(1)
 	void test01() {

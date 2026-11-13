@@ -92,7 +92,7 @@ MWF.xApplication.query.TableDesigner.Main = new Class({
         }.bind(this), null, false);
     },
 
-    //列示所有数据表列表
+    //모든 데이터 테이블 목록 조회
     createListViewItem: function(table, isNew){
         var _self = this;
         var listTableItem = new Element("div", {"styles": this.css.listViewItem}).inject(this.viewListAreaNode, (isNew) ? "top": "bottom");
@@ -118,7 +118,7 @@ MWF.xApplication.query.TableDesigner.Main = new Class({
         this.itemArray.push(itemObj);
         this.checkShow(itemObj);
     },
-    //打开数据表
+    //데이터 테이블 열기
     loadTableByData: function(node, e){
         var table = node.retrieve("table");
         if (!table.isNewTable){

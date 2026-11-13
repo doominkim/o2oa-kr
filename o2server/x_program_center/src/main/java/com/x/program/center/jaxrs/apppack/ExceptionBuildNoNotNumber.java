@@ -10,5 +10,5 @@ public class ExceptionBuildNoNotNumber extends LanguagePromptException {
 
     private static final long serialVersionUID = -8045803301464102031L;
 
-    ExceptionBuildNoNotNumber(){ super("版本编号必须是数字！"); }
+    ExceptionBuildNoNotNumber(){ super("빌드 번호는 숫자여야 합니다!"); }
 }

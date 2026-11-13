@@ -30,7 +30,7 @@ class ActionListWithCategory extends BaseAction {
 			List<Wo> wos = Wo.copier.copy(os);
 			wos = business.templateFormFactory().sort(wos);
 			Control control = new Control();
-			/** 检查管理员和流程管理员删除的权限 */
+			/** 관리자 및 프로세스 관리자의 삭제 권한 검사 */
 			if (effectivePerson.isManager() || business.organization().person().hasRole(effectivePerson, OrganizationDefinition.CMSManager)) {
 				control.setAllowDelete(true);
 			} else {
@@ -48,7 +48,7 @@ class ActionListWithCategory extends BaseAction {
 
 		private static final long serialVersionUID = 2475165883507548650L;
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		static WrapCopier<TemplateForm, Wo> copier = WrapCopierFactory.wo(TemplateForm.class, Wo.class, null,

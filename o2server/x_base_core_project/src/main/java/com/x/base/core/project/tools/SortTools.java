@@ -164,7 +164,7 @@ public class SortTools {
 		});
 	}
 
-	/* 按模板给出的顺序进行排序,不在模板中的排在最前 */
+	/* 템플릿 순서대로 정렬, 템플릿에 없는 항목은 맨 앞에 배치 */
 	public static <T> List<T> orderWithTemplateNotFoundFirst(List<T> list, List<T> template) {
 		if ((null == list) || template == list) {
 			return list;
@@ -184,7 +184,7 @@ public class SortTools {
 		})).collect(Collectors.toList());
 	}
 
-	/* 按模板给出的顺序进行排序,不在模板中的排在最后 */
+	/* 템플릿 순서대로 정렬, 템플릿에 없는 항목은 맨 뒤에 배치 */
 	public static <T> List<T> orderWithTemplateNotFoundLast(List<T> list, List<T> template) {
 		if ((null == list) || template == list) {
 			return list;

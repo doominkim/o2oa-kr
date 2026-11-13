@@ -40,11 +40,11 @@ public class WsAction extends StandardJaxrsAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(WsAction.class);
     private static final String OPERATIONID_PREFIX = "WsAction::";
 
-    @Operation(summary = "发送webSocket消息.", operationId = OPERATIONID_PREFIX + "create", responses = {
+    @Operation(summary = "webSocket 메시지 발송.", operationId = OPERATIONID_PREFIX + "create", responses = {
             @ApiResponse(content = {
                     @Content(schema = @Schema(implementation = ActionCreate.Wo.class)) }) }, requestBody = @RequestBody(content = {
                             @Content(schema = @Schema(implementation = ActionCreate.Wi.class)) }))
-    @JaxrsMethodDescribe(value = "发送webSocket消息.", action = ActionCreate.class)
+    @JaxrsMethodDescribe(value = "webSocket 메시지 발송.", action = ActionCreate.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -61,10 +61,10 @@ public class WsAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @Operation(summary = "在线用户数量.", operationId = OPERATIONID_PREFIX + "countPerson", responses = {
+    @Operation(summary = "온라인 사용자 수.", operationId = OPERATIONID_PREFIX + "countPerson", responses = {
             @ApiResponse(content = {
                     @Content(schema = @Schema(implementation = ActionCountPerson.Wo.class)) }) })
-    @JaxrsMethodDescribe(value = "在线用户数量.", action = ActionCountPerson.class)
+    @JaxrsMethodDescribe(value = "온라인 사용자 수.", action = ActionCountPerson.class)
     @GET
     @Path("count/person")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -82,10 +82,10 @@ public class WsAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @Operation(summary = "列示当前节点用户.", operationId = OPERATIONID_PREFIX + "listPersonCurrentNode", responses = {
+    @Operation(summary = "현재 노드 사용자 나열.", operationId = OPERATIONID_PREFIX + "listPersonCurrentNode", responses = {
             @ApiResponse(content = {
                     @Content(array = @ArraySchema(schema = @Schema(implementation = ActionListPersonCurrentNode.Wo.class))) }) })
-    @JaxrsMethodDescribe(value = "列示当前节点用户.", action = ActionListPersonCurrentNode.class)
+    @JaxrsMethodDescribe(value = "현재 노드 사용자 나열.", action = ActionListPersonCurrentNode.class)
     @GET
     @Path("list/person/current/node")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -103,10 +103,10 @@ public class WsAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @Operation(summary = "列示用户.", operationId = OPERATIONID_PREFIX + "listPerson", responses = {
+    @Operation(summary = "사용자 나열.", operationId = OPERATIONID_PREFIX + "listPerson", responses = {
             @ApiResponse(content = {
                     @Content(array = @ArraySchema(schema = @Schema(implementation = ActionListPerson.Wo.class))) }) })
-    @JaxrsMethodDescribe(value = "列示用户.", action = ActionListPerson.class)
+    @JaxrsMethodDescribe(value = "사용자 나열.", action = ActionListPerson.class)
     @GET
     @Path("list/person")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

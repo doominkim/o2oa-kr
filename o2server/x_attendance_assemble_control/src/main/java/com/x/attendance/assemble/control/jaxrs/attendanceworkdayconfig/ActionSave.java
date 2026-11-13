@@ -29,7 +29,7 @@ public class ActionSave extends BaseAction {
 			JsonElement jsonElement) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wrapIn = null;
-		// 获取到当前用户信息
+		// 현재 사용자 정보 조회
 		EffectivePerson currentPerson = this.effectivePerson(request);
 		DateOperation dateOperation = new DateOperation();
 		Boolean check = true;
@@ -49,10 +49,10 @@ public class ActionSave extends BaseAction {
 				AttendanceWorkDayConfig attendanceWorkDayConfig = new AttendanceWorkDayConfig();
 				if (wrapIn != null && wrapIn.getId() != null && wrapIn.getId().length() > 10) {
 					if (wrapIn.getId() != null && wrapIn.getId().length() > 10) {
-						// 根据ID查询信息是否存在，如果存在就update，如果不存在就create
+						// ID로 정보 존재 여부를 조회해 있으면 update, 없으면 create
 						_attendanceWorkDayConfig = emc.find(wrapIn.getId(), AttendanceWorkDayConfig.class);
 						if (_attendanceWorkDayConfig != null) {
-							// 更新
+							// 수정
 							emc.beginTransaction(AttendanceWorkDayConfig.class);
 							Wi.copier.copy(wrapIn, _attendanceWorkDayConfig);
 							try {
@@ -64,14 +64,14 @@ public class ActionSave extends BaseAction {
 								result.setData(new Wo(_attendanceWorkDayConfig.getId()));
 							} catch (Exception e) {
 								Exception exception = new ExceptionWorkDayConfigProcess(e,
-										"系统在格式化节假日配置的日期时发生异常.Date:" + _attendanceWorkDayConfig.getConfigDate());
+										"휴일 설정의 날짜를 변환하는 중 오류가 발생했습니다. Date:" + _attendanceWorkDayConfig.getConfigDate());
 								result.error(exception);
 								logger.error(e, currentPerson, request, null);
 							}
 						} else {
 							emc.beginTransaction(AttendanceWorkDayConfig.class);
 							Wi.copier.copy(wrapIn, attendanceWorkDayConfig);
-							attendanceWorkDayConfig.setId(wrapIn.getId());// 使用参数传入的ID作为记录的ID
+							attendanceWorkDayConfig.setId(wrapIn.getId());// 매개변수로 전달된 ID를 레코드 ID로 사용
 							try {
 								date = dateOperation.getDateFromString(attendanceWorkDayConfig.getConfigDate());
 								attendanceWorkDayConfig.setConfigYear(dateOperation.getYear(date));
@@ -81,13 +81,13 @@ public class ActionSave extends BaseAction {
 								result.setData(new Wo(attendanceWorkDayConfig.getId()));
 							} catch (Exception e) {
 								Exception exception = new ExceptionWorkDayConfigProcess(e,
-										"系统在格式化节假日配置的日期时发生异常.Date:" + attendanceWorkDayConfig.getConfigDate());
+										"휴일 설정의 날짜를 변환하는 중 오류가 발생했습니다. Date:" + attendanceWorkDayConfig.getConfigDate());
 								result.error(exception);
 								logger.error(e, currentPerson, request, null);
 							}
 						}
 					} else {
-						// 没有传入指定的ID
+						// 지정한 ID가 전달되지 않았습니다
 						emc.beginTransaction(AttendanceWorkDayConfig.class);
 						Wi.copier.copy(wrapIn, attendanceWorkDayConfig);
 						try {
@@ -102,14 +102,14 @@ public class ActionSave extends BaseAction {
 							result.setData(new Wo(attendanceWorkDayConfig.getId()));
 						} catch (Exception e) {
 							Exception exception = new ExceptionWorkDayConfigProcess(e,
-									"系统在格式化节假日配置的日期时发生异常.Date:" + attendanceWorkDayConfig.getConfigDate());
+									"휴일 설정의 날짜를 변환하는 중 오류가 발생했습니다. Date:" + attendanceWorkDayConfig.getConfigDate());
 							result.error(exception);
 							logger.error(e, currentPerson, request, null);
 						}
 					}
 				}
 			} catch (Exception e) {
-				Exception exception = new ExceptionWorkDayConfigProcess(e, "系统保存节假日工作日配置信息对象时发生异常.");
+				Exception exception = new ExceptionWorkDayConfigProcess(e, "휴일·근무일 설정 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}

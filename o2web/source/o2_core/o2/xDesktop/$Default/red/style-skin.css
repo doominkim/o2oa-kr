@@ -218,7 +218,7 @@
 .MWF_calendar_current {
     color: #D94141 !important;
 }
-/*个人设置---begin*/
+/*개인 설정---begin*/
 .formTableArea table .selectNode:hover {
     background:url(../o2_core/o2/xDesktop/$Default/red/icons/icon_jia.png) center center no-repeat !important
 }
@@ -250,4 +250,4 @@
 div:hover>.o2_profile_emPower_Btntext{
     color: #D94141 !important;
 }
-/*个人设置---end*/
+/*개인 설정---end*/

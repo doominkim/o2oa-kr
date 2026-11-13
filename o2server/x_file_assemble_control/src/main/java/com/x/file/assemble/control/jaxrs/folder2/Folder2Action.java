@@ -30,18 +30,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("folder2")
-@JaxrsDescribe("目录")
+@JaxrsDescribe("디렉터리")
 public class Folder2Action extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(Folder2Action.class);
 
-	@JaxrsMethodDescribe(value = "获取文件夹对象。只能由Folder的所有者进行操作,并返回文件夹的下文件的数量和总字节。", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "폴더 객체 조회. Folder 소유자만 작업할 수 있으며, 폴더 아래 파일 수와 총 바이트 수를 반환.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -53,7 +53,7 @@ public class Folder2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建文件夹.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "폴더 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -70,13 +70,13 @@ public class Folder2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新文件夹,不能重名", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "폴더 갱신, 이름 중복 불가", action = ActionUpdate.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void put(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -88,13 +88,13 @@ public class Folder2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除分类,同时删除所有下属的文件和文件夹.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "분류를 삭제하고 하위의 모든 파일과 폴더도 함께 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,7 +106,7 @@ public class Folder2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员顶层文件夹。", action = ActionListTop.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 최상위 폴더 조회.", action = ActionListTop.class)
 	@GET
 	@Path("list/top")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -123,13 +123,13 @@ public class Folder2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员指定文件夹下的直属文件夹。", action = ActionListWithFolder.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 지정 폴더 아래 직속 폴더 조회.", action = ActionListWithFolder.class)
 	@GET
 	@Path("list/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFolder(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<List<ActionListWithFolder.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -141,12 +141,12 @@ public class Folder2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取文件夹所有附件并打包为zip,输出头信息", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "폴더의 모든 첨부파일을 zip으로 압축, 헤더 정보 출력", action = ActionDownload.class)
 	@GET
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						 @JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+						 @JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -158,13 +158,13 @@ public class Folder2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "打包所有指定的附件或目录下的附件,输出头信息", action = ActionBatchDownload.class)
+	@JaxrsMethodDescribe(value = "지정한 모든 첨부파일 또는 디렉터리 내 첨부파일을 압축, 헤더 정보 출력", action = ActionBatchDownload.class)
 	@GET
 	@Path("batch/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void batchDownload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							   @JaxrsParameterDescribe("附件ID列表") @QueryParam("attIds") List<String> attIds,
-							   @JaxrsParameterDescribe("目录ID列表") @QueryParam("folderIds") List<String> folderIds) {
+							   @JaxrsParameterDescribe("첨부파일 ID 목록") @QueryParam("attIds") List<String> attIds,
+							   @JaxrsParameterDescribe("디렉터리 ID 목록") @QueryParam("folderIds") List<String> folderIds) {
 		ActionResult<ActionBatchDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

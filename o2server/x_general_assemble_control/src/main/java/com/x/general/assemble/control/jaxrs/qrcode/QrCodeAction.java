@@ -37,16 +37,16 @@ public class QrCodeAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(QrCodeAction.class);
 	private static final String OPERATIONID_PREFIX = "QrCodeAction::";
 
-	@Operation(summary = "GET方法生成二维码图像.", operationId = OPERATIONID_PREFIX + "getCreate", responses = {
+	@Operation(summary = "GET 방식으로 QR 코드 이미지 생성.", operationId = OPERATIONID_PREFIX + "getCreate", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGetCreate.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "GET方法生成二维码图像.", action = ActionGetCreate.class)
+	@JaxrsMethodDescribe(value = "GET 방식으로 QR 코드 이미지 생성.", action = ActionGetCreate.class)
 	@GET
 	@Path("width/{width}/height/{height}/text/{text}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getCreate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("宽") @PathParam("width") Integer width,
-			@JaxrsParameterDescribe("高") @PathParam("height") Integer height,
-			@JaxrsParameterDescribe("文本") @PathParam("text") String text) {
+			@JaxrsParameterDescribe("너비") @PathParam("width") Integer width,
+			@JaxrsParameterDescribe("높이") @PathParam("height") Integer height,
+			@JaxrsParameterDescribe("텍스트") @PathParam("text") String text) {
 		ActionResult<ActionGetCreate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -58,11 +58,11 @@ public class QrCodeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "POST方法生成二维码图像.", operationId = OPERATIONID_PREFIX + "postCreate", responses = {
+	@Operation(summary = "POST 방식으로 QR 코드 이미지 생성.", operationId = OPERATIONID_PREFIX + "postCreate", responses = {
 			@ApiResponse(content = {
 					@Content(schema = @Schema(implementation = ActionPostCreate.Wo.class)) }) }, requestBody = @RequestBody(content = {
 							@Content(schema = @Schema(implementation = ActionPostCreate.Wi.class)) }))
-	@JaxrsMethodDescribe(value = "POST方法生成二维码图像,返回base64.", action = ActionPostCreate.class)
+	@JaxrsMethodDescribe(value = "POST 방식으로 QR 코드 이미지 생성, base64 반환.", action = ActionPostCreate.class)
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

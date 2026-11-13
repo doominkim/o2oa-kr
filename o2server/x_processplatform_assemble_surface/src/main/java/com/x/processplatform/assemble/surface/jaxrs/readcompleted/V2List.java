@@ -66,12 +66,12 @@ class V2List extends V2Base {
 
 		private static final long serialVersionUID = 6156652409095161653L;
 
-		@FieldDescribe("任务标识.")
-		@Schema(description = "任务标识.")
+		@FieldDescribe("작업 식별자.")
+		@Schema(description = "작업 식별자.")
 		private List<String> jobList = new ArrayList<>();
 
-		@FieldDescribe("已阅标识.")
-		@Schema(description = "已阅标识.")
+		@FieldDescribe("열람 완료 식별자.")
+		@Schema(description = "열람 완료 식별자.")
 		private List<String> idList = new ArrayList<>();
 
 		public List<String> getJobList() {

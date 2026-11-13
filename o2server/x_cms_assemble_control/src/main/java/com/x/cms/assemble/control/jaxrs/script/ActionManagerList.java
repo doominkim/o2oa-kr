@@ -67,15 +67,15 @@ class ActionManagerList extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("搜索关键字.")
+		@FieldDescribe("검색 키워드.")
 		private String keyword;
-		@FieldDescribe("是否区分大小写.")
+		@FieldDescribe("대소문자 구분 여부.")
 		private Boolean caseSensitive;
-		@FieldDescribe("是否全字匹配.")
+		@FieldDescribe("전체 단어 일치 여부.")
 		private Boolean matchWholeWord;
-		@FieldDescribe("是否正则表达式匹配.")
+		@FieldDescribe("정규식 일치 여부.")
 		private Boolean matchRegExp;
-		@FieldDescribe("应用ID列表.")
+		@FieldDescribe("앱 ID 목록.")
 		private List<String> appIdList = new ArrayList<>();
 
 		public String getKeyword() {
@@ -126,7 +126,7 @@ class ActionManagerList extends BaseAction {
 		static WrapCopier<Script, Wo> copier = WrapCopierFactory.wo(Script.class, Wo.class,
 				JpaObject.singularAttributeField(Script.class, true, false), null);
 
-		@FieldDescribe("应用名称.")
+		@FieldDescribe("앱 이름.")
 		private String appName;
 
 		public String getAppName() {

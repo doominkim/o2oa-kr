@@ -22,13 +22,13 @@ class ActionCategory extends ActionBase {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("应用分类")
+		@FieldDescribe("앱 분류")
 		private List<WoApplication> application = new ArrayList<>();
 
-		@FieldDescribe("分类流程")
+		@FieldDescribe("분류 프로세스")
 		private List<WoProcess> process = new ArrayList<>();
 
-		@FieldDescribe("活动分类")
+		@FieldDescribe("활동 분류")
 		private List<WoActivity> activity = new ArrayList<>();
 
 		public List<WoApplication> getApplication() {
@@ -59,46 +59,46 @@ class ActionCategory extends ActionBase {
 
 	public static class WoApplication extends GsonPropertyObject {
 
-		@FieldDescribe("应用名称")
+		@FieldDescribe("앱 이름")
 		private String name;
 
-		@FieldDescribe("应用标识")
+		@FieldDescribe("앱 식별자")
 		private String value;
 
-		@FieldDescribe("待办数量")
+		@FieldDescribe("결재 대기 수")
 		private Long taskCount;
 
-		@FieldDescribe("超时待办数量")
+		@FieldDescribe("기한 초과 결재 대기 수")
 		private Long taskExpiredCount;
 
-		@FieldDescribe("待办总时长")
+		@FieldDescribe("결재 대기 총 소요 시간")
 		private Long taskDuration;
 
-		@FieldDescribe("已完成待办数量")
+		@FieldDescribe("완료된 결재 대기 수")
 		private Long taskCompletedCount;
 
-		@FieldDescribe("已完成超时待办数量")
+		@FieldDescribe("완료된 기한 초과 결재 대기 수")
 		private Long taskCompletedExpiredCount;
 
-		@FieldDescribe("已完成待办总时长")
+		@FieldDescribe("완료된 결재 대기 총 소요 시간")
 		private Long taskCompletedDuration;
 
-		@FieldDescribe("工作数量")
+		@FieldDescribe("업무 문서 수")
 		private Long workCount;
 
-		@FieldDescribe("超时工作数量")
+		@FieldDescribe("기한 초과 업무 문서 수")
 		private Long workExpiredCount;
 
-		@FieldDescribe("工作总时长")
+		@FieldDescribe("업무 문서 총 소요 시간")
 		private Long workDuration;
 
-		@FieldDescribe("已完成工作数量")
+		@FieldDescribe("완료된 업무 문서 수")
 		private Long workCompletedCount;
 
-		@FieldDescribe("已完成超时工作数量")
+		@FieldDescribe("완료된 기한 초과 업무 문서 수")
 		private Long workCompletedExpiredCount;
 
-		@FieldDescribe("已完成工作总时长")
+		@FieldDescribe("완료된 업무 문서 총 소요 시간")
 		private Long workCompletedDuration;
 
 		public String getName() {
@@ -217,52 +217,52 @@ class ActionCategory extends ActionBase {
 
 	public static class WoProcess extends GsonPropertyObject {
 
-		@FieldDescribe("流程名称")
+		@FieldDescribe("프로세스 이름")
 		private String name;
 
-		@FieldDescribe("流程标识")
+		@FieldDescribe("프로세스 식별자")
 		private String value;
 
-		@FieldDescribe("应用名称")
+		@FieldDescribe("앱 이름")
 		private String applicationName;
 
-		@FieldDescribe("应用标识")
+		@FieldDescribe("앱 식별자")
 		private String applicationValue;
 
-		@FieldDescribe("待办数量")
+		@FieldDescribe("결재 대기 수")
 		private Long taskCount;
 
-		@FieldDescribe("超时待办数量")
+		@FieldDescribe("기한 초과 결재 대기 수")
 		private Long taskExpiredCount;
 
-		@FieldDescribe("待办总耗时")
+		@FieldDescribe("결재 대기 총 소요 시간")
 		private Long taskDuration;
 
-		@FieldDescribe("已办数量")
+		@FieldDescribe("처리 완료 수")
 		private Long taskCompletedCount;
 
-		@FieldDescribe("超时已办数量")
+		@FieldDescribe("기한 초과 처리 완료 수")
 		private Long taskCompletedExpiredCount;
 
-		@FieldDescribe("已办总耗时")
+		@FieldDescribe("처리 완료 총 소요 시간")
 		private Long taskCompletedDuration;
 
-		@FieldDescribe("工作数量")
+		@FieldDescribe("업무 문서 수")
 		private Long workCount;
 
-		@FieldDescribe("超时工作数量")
+		@FieldDescribe("기한 초과 업무 문서 수")
 		private Long workExpiredCount;
 
-		@FieldDescribe("工作总耗时")
+		@FieldDescribe("업무 문서 총 소요 시간")
 		private Long workDuration;
 
-		@FieldDescribe("已完成工作数量")
+		@FieldDescribe("완료된 업무 문서 수")
 		private Long workCompletedCount;
 
-		@FieldDescribe("超时已完成工作数量")
+		@FieldDescribe("기한 초과 완료 업무 문서 수")
 		private Long workCompletedExpiredCount;
 
-		@FieldDescribe("已完成工作总耗时")
+		@FieldDescribe("완료된 업무 문서 총 소요 시간")
 		private Long workCompletedDuration;
 
 		public String getName() {
@@ -396,58 +396,58 @@ class ActionCategory extends ActionBase {
 	}
 
 	public static class WoActivity extends GsonPropertyObject {
-		@FieldDescribe("流程名称")
+		@FieldDescribe("프로세스 이름")
 		private String name;
 
-		@FieldDescribe("流程标识")
+		@FieldDescribe("프로세스 식별자")
 		private String value;
 
-		@FieldDescribe("应用名称")
+		@FieldDescribe("앱 이름")
 		private String applicationName;
 
-		@FieldDescribe("应用标识")
+		@FieldDescribe("앱 식별자")
 		private String applicationValue;
 
-		@FieldDescribe("流程名称")
+		@FieldDescribe("프로세스 이름")
 		private String processName;
 
-		@FieldDescribe("流程标识")
+		@FieldDescribe("프로세스 식별자")
 		private String processValue;
 
-		@FieldDescribe("待办数量")
+		@FieldDescribe("결재 대기 수")
 		private Long taskCount;
 
-		@FieldDescribe("超时待办数量")
+		@FieldDescribe("기한 초과 결재 대기 수")
 		private Long taskExpiredCount;
 
-		@FieldDescribe("待办总耗时")
+		@FieldDescribe("결재 대기 총 소요 시간")
 		private Long taskDuration;
 
-		@FieldDescribe("已办数量")
+		@FieldDescribe("처리 완료 수")
 		private Long taskCompletedCount;
 
-		@FieldDescribe("超时已办数量")
+		@FieldDescribe("기한 초과 처리 완료 수")
 		private Long taskCompletedExpiredCount;
 
-		@FieldDescribe("已办总耗时")
+		@FieldDescribe("처리 완료 총 소요 시간")
 		private Long taskCompletedDuration;
 
-		@FieldDescribe("工作数量")
+		@FieldDescribe("업무 문서 수")
 		private Long workCount;
 
-		@FieldDescribe("超时工作数量")
+		@FieldDescribe("기한 초과 업무 문서 수")
 		private Long workExpiredCount;
 
-		@FieldDescribe("工作总耗时")
+		@FieldDescribe("업무 문서 총 소요 시간")
 		private Long workDuration;
 
-		// @FieldDescribe("已完成工作数量")
+		// @FieldDescribe("완료된 업무 문서 수")
 		// private Long workCompletedCount;
 		//
-		// @FieldDescribe("超时已完成工作数量")
+		// @FieldDescribe("기한 초과 완료 업무 문서 수")
 		// private Long workCompletedExpiredCount;
 		//
-		// @FieldDescribe("已完成工作总耗时")
+		// @FieldDescribe("완료된 업무 문서 총 소요 시간")
 		// private Long workCompletedDuration;
 
 		public String getName() {

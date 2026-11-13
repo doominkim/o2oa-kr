@@ -61,9 +61,9 @@ class ActionUpdate extends BaseAction {
 				LOGGER.debug("filename:{}, file type:{}.", attachment.getName(), attachment.getType());
 				emc.commit();
 			} else {
-				// 后面要重新保存
+				// 뒤에서 다시 저장해야 함
 				Work work = emc.find(workId, Work.class);
-				// 判断work是否存在
+				// work 존재 여부 판단
 				if (null == work) {
 					throw new ExceptionEntityNotExist(workId, Work.class);
 				}
@@ -71,7 +71,7 @@ class ActionUpdate extends BaseAction {
 				if (null == attachment) {
 					throw new ExceptionEntityNotExist(id, Attachment.class);
 				}
-				// 天谷印章扩展
+				// 톈구 인장 확장
 				if (StringUtils.isNotEmpty(extraParam)) {
 					WiExtraParam wiExtraParam = gson.fromJson(extraParam, WiExtraParam.class);
 					if (StringUtils.isNotEmpty(wiExtraParam.getFileName())) {
@@ -85,7 +85,7 @@ class ActionUpdate extends BaseAction {
 				if (!fileName.equalsIgnoreCase(attachment.getName())) {
 					fileName = this.adjustFileName(business, work.getJob(), fileName);
 				}
-				// 统计待办数量判断用户是否可以上传附件
+				// 결재 대기 수를 집계해 사용자의 첨부파일 업로드 가능 여부 판단
 				Control control = new WorkControlBuilder(effectivePerson, business, work).enableAllowSave().build();
 				if (BooleanUtils.isNotTrue(control.getAllowSave())) {
 					throw new ExceptionAccessDenied(effectivePerson, work);

@@ -26,7 +26,7 @@ public class ActionGet extends BaseAction {
 		if (check) {
 			if (id == null || id.isEmpty() || "(0)".equals(id)) {
 				check = false;
-				result.error(new Exception("传入的id为空，或者不合法，无法查询数据。"));
+				result.error(new Exception("전달된 id가 비어 있거나 올바르지 않아 데이터를 조회할 수 없습니다."));
 			}
 		}
 		if (check) {
@@ -34,7 +34,7 @@ public class ActionGet extends BaseAction {
 				attendanceAppealInfo = attendanceAppealInfoServiceAdv.get(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在根据ID查询考勤打卡记录数据时发生异常。ID:" + id);
+				Exception exception = new ExceptionAttendanceAppealProcess(e, "ID로 근태 체크 기록 데이터를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -50,7 +50,7 @@ public class ActionGet extends BaseAction {
 					result.setData(wrap);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceAppealProcess(e, "系统在转换申诉信息为输出对象时发生异常!");
+					Exception exception = new ExceptionAttendanceAppealProcess(e, "이의 신청 정보를 출력 객체로 변환하는 중 오류가 발생했습니다!");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -66,7 +66,7 @@ public class ActionGet extends BaseAction {
 		public static WrapCopier<AttendanceAppealInfo, Wo> copier = WrapCopierFactory.wo(AttendanceAppealInfo.class,
 				Wo.class, null, JpaObject.FieldsInvisible);
 
-		@FieldDescribe("考勤申诉审核内容")
+		@FieldDescribe("근태 이의 신청 심사 내용")
 		private WoAttendanceAppealAuditInfo appealAuditInfo = null;
 
 		public WoAttendanceAppealAuditInfo getAppealAuditInfo() {

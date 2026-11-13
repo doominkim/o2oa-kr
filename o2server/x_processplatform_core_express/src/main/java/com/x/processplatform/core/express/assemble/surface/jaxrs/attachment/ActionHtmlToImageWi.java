@@ -9,32 +9,32 @@ public class ActionHtmlToImageWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 8371465627589051014L;
 
-	@FieldDescribe("*待转换html.")
-	@Schema(description = "*待转换html.")
+	@FieldDescribe("*변환할 html.")
+	@Schema(description = "*변환할 html.")
 	private String workHtml;
-	@FieldDescribe("图片标题")
-	@Schema(description = "图片标题")
+	@FieldDescribe("이미지 제목")
+	@Schema(description = "이미지 제목")
 	private String title;
-	@FieldDescribe("html正文宽度，允许为空.")
-	@Schema(description = "html正文宽度，允许为空.")
+	@FieldDescribe("html 본문 너비, 비워 둘 수 있음.")
+	@Schema(description = "html 본문 너비, 비워 둘 수 있음.")
 	private Double htmlWidth;
-	@FieldDescribe("html正文高度，允许为空.")
-	@Schema(description = "html正文高度，允许为空.")
+	@FieldDescribe("html 본문 높이, 비워 둘 수 있음.")
+	@Schema(description = "html 본문 높이, 비워 둘 수 있음.")
 	private Double htmlHeight;
-	@FieldDescribe("html的X轴开始位置，允许为空.")
-	@Schema(description = "html的X轴开始位置，允许为空.")
+	@FieldDescribe("html의 X축 시작 위치, 비워 둘 수 있음.")
+	@Schema(description = "html의 X축 시작 위치, 비워 둘 수 있음.")
 	private Double startX;
-	@FieldDescribe("html的Y轴开始位置，允许为空.")
-	@Schema(description = "html的Y轴开始位置，允许为空.")
+	@FieldDescribe("html의 Y축 시작 위치, 비워 둘 수 있음.")
+	@Schema(description = "html의 Y축 시작 위치, 비워 둘 수 있음.")
 	private Double startY;
-	@FieldDescribe("背景是否透明，默认为false.")
-	@Schema(description = "背景是否透明，默认为false.")
+	@FieldDescribe("배경 투명 여부, 기본값 false.")
+	@Schema(description = "배경 투명 여부, 기본값 false.")
 	private Boolean omitBackground;
-	@FieldDescribe("工作标识，把图片保存到工单的附件中，非必填")
-	@Schema(description = "工作标识，把图片保存到工单的附件中，非必填")
+	@FieldDescribe("업무 문서 식별자, 이미지를 업무 문서의 첨부파일로 저장, 선택 항목")
+	@Schema(description = "업무 문서 식별자, 이미지를 업무 문서의 첨부파일로 저장, 선택 항목")
 	private String workId;
-	@FieldDescribe("位置，工作标识不为空的时候必填")
-	@Schema(description = "位置，工作标识不为空的时候必填")
+	@FieldDescribe("위치, 업무 문서 식별자가 있을 때 필수")
+	@Schema(description = "위치, 업무 문서 식별자가 있을 때 필수")
 	private String site;
 
 	public String getWorkHtml() {

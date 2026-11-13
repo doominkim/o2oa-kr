@@ -312,7 +312,7 @@ MWF.xApplication.ForumCategory.Main = new Class({
         view.load();
 
         //
-        //if (d.indexListStyle == "经典") {
+        //if (d.indexListStyle == "클래식") {
         //    var view = new MWF.xApplication.ForumCategory.Main.ListView(categoryNode, this, this, {
         //        templateUrl: this.path + "listItemList.json",
         //        categoryId: d.id
@@ -320,7 +320,7 @@ MWF.xApplication.ForumCategory.Main = new Class({
         //        lp: this.lp
         //    })
         //    view.load();
-        //} else if (d.indexListStyle == "图片矩形") {
+        //} else if (d.indexListStyle == "이미지 사각형") {
         //    var view = new MWF.xApplication.ForumCategory.Main.ImageView(categoryNode, this, this, {
         //        templateUrl: this.path + "listItemImage.json",
         //        categoryId: d.id

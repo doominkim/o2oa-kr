@@ -14,40 +14,40 @@ export default content({
         return {
             lp,
             person: {},
-             // 打卡按钮
+             // 출퇴근 체크 버튼
              checkInCycle: {
-                allowFieldWork: false, // 是否允许外勤
-                requiredFieldWorkRemarks: true, // 外勤是否必须打卡
-                canCheckIn: false, // 是否可打卡
-                title: lp.mobile.menu.checkIn, // 打卡按钮名称
-                time: "", // 当前时间显示
+                allowFieldWork: false, // 외근 허용 여부
+                requiredFieldWorkRemarks: true, // 외근 시 출퇴근 체크 필수 여부
+                canCheckIn: false, // 출퇴근 체크 가능 여부
+                title: lp.mobile.menu.checkIn, // 출퇴근 체크 버튼 이름
+                time: "", // 현재 시간 표시
             },
-            // 位置信息
+            // 위치 정보
             location: {
-                status: false, // 是否定位成功
-                title: lp.mobile.locationIng, // 显示地址
-                address: "", // 定位地址
-                // 定位的经纬度
+                status: false, // 위치 확인 성공 여부
+                title: lp.mobile.locationIng, // 주소 표시
+                address: "", // 위치 주소
+                // 위치 경위도
                 lnglat: {}, 
-                isNotFieldWork: false, //当是否范围内打卡
+                isNotFieldWork: false, //범위 내 출퇴근 체크 여부
             },
             bdKey: "Qac4WmBvHXiC87z3HjtRrbotCE3sC9Zg",
-            // 打卡工作场所
+            // 출퇴근 체크 근무지
             workPlaceList:[], 
-            recordItemList: [], // 打卡记录和对象列表
-            nextCheckInRecord: null, // 下一个打卡对象
+            recordItemList: [], // 출퇴근 체크 기록과 객체 목록
+            nextCheckInRecord: null, // 다음 출퇴근 체크 대상
         };
     },
     afterRender() {
         this.startTickTime();
-        // 用户信息
+        // 사용자 정보
         this.getCurrentPerson();
-        // 定位信息
+        // 위치 정보
         this.loadBDMap();
-        // 打卡数据查询
+        // 출퇴근 체크 데이터 조회
         this.getPreCheckData();
     },
-    // 当前用户信息
+    // 현재 사용자 정보
     getCurrentPerson() {
         if (layout.session && layout.session.user) {
             this.bind.person.name = layout.session.user.name;
@@ -62,10 +62,10 @@ export default content({
             this.bind.person.iconUrl = url;
         }
     },
-    // 显示打卡按钮上的当前时间
+    // 출퇴근 체크 버튼에 현재 시간 표시
     startTickTime() {
         this.tickTime();
-        //TODO 啥时候删除 ？？？？
+        //TODO 언제 삭제? ????
         this.tickTimeInterval = setInterval(() => {
             this.tickTime();
         }, 1000);
@@ -74,7 +74,7 @@ export default content({
         const date = new Date();
         this.bind.checkInCycle.time = `${date.getHours() > 9 ? date.getHours() : '0'+date.getHours()}:${date.getMinutes() > 9 ? date.getMinutes() : '0'+date.getMinutes()}:${date.getSeconds() > 9 ? date.getSeconds() : '0'+date.getSeconds()}`;
     },
-    // 加载地图api等资源 因为后面计算距离啥的要用
+    // 지도 api 등 리소스 로드, 이후 거리 계산 등에 필요
     async loadBDMap() {
         const bdKey = await getPublicData("baiduAccountKey");
         const accountkey = bdKey || "sM5P4Xq9zsXGlco6RAq2CRDtwjR78WQB";
@@ -92,12 +92,12 @@ export default content({
             this.location();
         }
     },
-    // 定位
+    // 위치 확인
     location() {
         window.bMapV2ApiLoaded = true;
         var self = this;
         const geolocation = new BMap.Geolocation();
-        // 开启SDK辅助定位 app webview 支持
+        // SDK 보조 위치 확인 사용, app webview 지원
         // geolocation.enableSDKLocation();
         geolocation.getCurrentPosition(function(r){
             console.debug("위치 확인 결과", r);
@@ -123,11 +123,11 @@ export default content({
         //         this.bind.location.title = lp.mobile.locationError;
         //     }
         // } else {
-        //     console.error("没有定位！。。。");
+        //     console.error("위치 정보가 없습니다!...");
         //     this.bind.location.title = lp.mobile.locationError;
         // }
     },
-    // 接收gps定位地址
+    // gps 위치 주소 수신
     callGpsLocation(position) {
         console.debug("GPS 위치 정보", position);
         if (position && position.coords) {
@@ -145,7 +145,7 @@ export default content({
             this.bind.location.title = lp.mobile.locationError;
         }
     },
-    // 转化百度坐标
+    // Baidu 좌표 변환
     translateBMapPointSuccess(data) {
         console.debug("Baidu 좌표 변환 결과", data);
         if (data.status === 0 && data.points && data.points[0]) {
@@ -158,7 +158,7 @@ export default content({
             this.bind.location.title = lp.mobile.locationError; 
         }
     },
-    // 百度查询地址
+    // Baidu 주소 조회
     async getGeoAddress(point) {
         console.debug("위치 상세 주소 조회 시작")
         const gc = new BMap.Geocoder();
@@ -170,7 +170,7 @@ export default content({
             this._calDistance();
         });
     },
-    // 查询打卡数据
+    // 체크 데이터 조회
     async getPreCheckData() {
         const preCheckData = await mobileAction("preCheckIn");
         if (preCheckData) {
@@ -181,7 +181,7 @@ export default content({
             this._calDistance();
             if (this.bind.checkInCycle.canCheckIn) {
                 const recordItemList = preCheckData.checkItemList || [];
-                // 查找下一条要打卡的数据
+                // 다음 출퇴근 체크 대상 데이터 찾기
                 const nextList = recordItemList.filter(r=> r.checkInResult === 'PreCheckIn');
                 if (nextList != null && nextList.length > 0) {
                     this.bind.nextCheckInRecord = nextList[0];
@@ -190,9 +190,9 @@ export default content({
                 } else {
                     this.bind.nextCheckInRecord = null;
                     this.bind.checkInCycle.title = lp.mobile.menu.checkIn;
-                    this.bind.checkInCycle.canCheckIn = false; // 没有可打卡的数据
+                    this.bind.checkInCycle.canCheckIn = false; // 출퇴근 체크 가능한 데이터 없음
                 }
-                // 处理打卡信息列表
+                // 출퇴근 체크 정보 목록 처리
                 for (let i = 0; i < recordItemList.length; i++) {
                     const item = recordItemList[i];
                     let isRecord = false;
@@ -206,17 +206,17 @@ export default content({
                         recordTime = lpFormat(lp, 'mobile.checkInWithTime', {time: signTime});
                     }
                     item.recordTime = recordTime;
-                    item.isRecord = isRecord; // 是否已经打卡
+                    item.isRecord = isRecord; // 출퇴근 체크 완료 여부
                     item.checkInTypeString =  (item.checkInType === 'OnDuty') ? lp.onDuty : lp.offDuty;
                     let preDutyTime = item.preDutyTime || '';
                     if (isEmpty(item.shiftId)) {
-                      preDutyTime = ''; // 如果没有班次信息 表示 自由工时 或者 休息日 不显示 打卡时间
+                      preDutyTime = ''; // 교대조 정보가 없으면 자율 근무제 또는 휴무일이므로 출퇴근 체크 시간 미표시
                     }
                     item.preDutyTime = preDutyTime;
-                    // 处理是否是最后一个已经打卡的记录
+                    // 마지막으로 체크 완료된 기록인지 처리
                     if (item.checkInResult !== 'PreCheckIn') {
-                        if (i == recordItemList.length-1) { // 最后一条
-                            item.isLastRecord = true; // 最后一条已经打卡的记录
+                        if (i == recordItemList.length-1) { // 마지막 항목
+                            item.isLastRecord = true; // 마지막으로 체크 완료된 기록
                         } else {
                             const nextItem = recordItemList[i+1];
                             if (nextItem.checkInResult === 'PreCheckIn') {
@@ -233,10 +233,10 @@ export default content({
         }
     },
     
-    // 计算距离
+    // 거리 계산
     _calDistance() {
         if (this.bind.location.status && this.bind.workPlaceList.length > 0) {
-            // 开始计算是否在打卡范围内
+            // 출퇴근 체크 범위 내인지 계산 시작
             if (!this.map) {
                 this.map = new BMap.Map(".bmap"); 
             }
@@ -257,11 +257,11 @@ export default content({
             console.log(this.bind);
         }
     },
-    // 更新打卡
+    // 체크 업데이트
     updateCheckIn(record) {
         if (record && record.isLastRecord) {
             if (this.bind.location.isNotFieldWork) {
-                // 正常打卡
+                // 정상 출퇴근 체크
                 console.log('정상 체크!');
                 this.checkInPost(record, this.bind.location.workPlace.id, false, null);
             } else {
@@ -270,11 +270,11 @@ export default content({
             }
         }
     },
-    // 点击打卡
+    // 출퇴근 체크 클릭
     actionCheckIn() {
         if (this.bind.checkInCycle.canCheckIn) {
             if (this.bind.location.isNotFieldWork) {
-                // 正常打卡
+                // 정상 출퇴근 체크
                 console.log('정상 체크!');
                 this.checkInPost(this.bind.nextCheckInRecord, this.bind.location.workPlace.id, false, null);
             } else {
@@ -283,7 +283,7 @@ export default content({
             }
         }
     },
-    // 外勤打卡
+    // 외근 체크
     outSide(record) {
         if (!record) {
             console.error("잘못된 데이터입니다!");
@@ -293,7 +293,7 @@ export default content({
             o2.api.page.notice(lp.mobile.outsideNotAllow, "error");
             return;
         }
-        // 必须填写外勤说明
+        // 외근 설명을 반드시 입력해야 합니다
         if (this.bind.checkInCycle.requiredFieldWorkRemarks) {
             var _self = this;
             o2.DL.open({
@@ -307,7 +307,7 @@ export default content({
                         "text": lp.positive,
                         "class":"comment_dlg_button_ok",
                         "action": function(){
-                            const value = this.node.getElement("input").value; //this指向对话框对象
+                            const value = this.node.getElement("input").value; //this는 대화상자 객체를 가리킴
                             if( !value ){
                                 o2.api.page.notice(lp.mobile.outsideRemarkPlaceholder, "error");
                             }else{
@@ -327,7 +327,7 @@ export default content({
             this.checkInPost(record, null, true, null);
         }
     },
-    // 提交打卡数据
+    // 출퇴근 체크 데이터 제출
     async checkInPost(record, workPlaceId, isOutside, signDesc) {
         const post = {
             recordId: record.id,

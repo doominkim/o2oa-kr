@@ -22,7 +22,7 @@ public class SearchFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("查询用户可见的指定状态下的文件涉及的组织名称列表")
+	//@MethodDescribe("사용자에게 보이는 지정 상태 문서와 관련된 조직 이름 목록 조회")
 	public List<String> listDistinctUnitNameFromDocument( List<String> appids, String docStatus, String categoryId ) throws Exception {
 		if( appids == null ){
 			return null;
@@ -41,7 +41,7 @@ public class SearchFactory extends AbstractFactory {
 		return em.createQuery( cq.where( p )).setMaxResults(500).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-//	@MethodDescribe("查询用户可见的指定状态下的文件涉及的顶层组织列表量")
+//	@MethodDescribe("사용자에게 보이는 지정 상태 문서와 관련된 최상위 조직 목록 조회")
 	public List<String> listDistinctTopUnitNameFromDocument( List<String> appids, String docStatus, String categoryId ) throws Exception {
 		if( appids == null ){
 			return null;
@@ -60,7 +60,7 @@ public class SearchFactory extends AbstractFactory {
 		return em.createQuery( cq.where( p )).setMaxResults(500).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("查询用户可见的指定状态下的文件涉及的栏目ID列表量")
+	//@MethodDescribe("사용자에게 보이는 지정 상태 문서와 관련된 게시판 ID 목록 조회")
 	public List<String> listDistinctAppInfoFromDocument( List<String> appids, String docStatus, String categoryId ) throws Exception {
 		if( appids == null ){
 			return null;
@@ -79,7 +79,7 @@ public class SearchFactory extends AbstractFactory {
 		return em.createQuery( cq.where( p )).setMaxResults(500).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("查询用户可见的指定状态下的文件涉及的分类ID列表")
+	//@MethodDescribe("사용자에게 보이는 지정 상태 문서와 관련된 분류 ID 목록 조회")
 	public List<String> listDistinctCategoryFromDocument( List<String> appids, String docStatus, String categoryId ) throws Exception {
 		if( appids == null ){
 			return null;
@@ -98,7 +98,7 @@ public class SearchFactory extends AbstractFactory {
 		return em.createQuery( cq.where( p )).setMaxResults(500).getResultList().stream().distinct().collect(Collectors.toList());
 	}
 	
-	//@MethodDescribe("根据categoryId查询该应用栏目下的所有文档数量")
+	//@MethodDescribe("categoryId로 해당 앱 게시판의 모든 문서 수 조회")
 	public Long getUnitDocumentCount( List<String> appids, String creatorUnitName, String docStatus, String targetCategoryId) throws Exception {
 		if( creatorUnitName == null ){
 			return null;
@@ -118,7 +118,7 @@ public class SearchFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 	
-	//@MethodDescribe("根据categoryId查询该应用栏目下的所有文档数量")
+	//@MethodDescribe("categoryId로 해당 앱 게시판의 모든 문서 수 조회")
 	public Long getTopUnitDocumentCount( List<String> appids, String creatorTopUnitName, String docStatus, String targetCategoryId) throws Exception {
 		if( creatorTopUnitName == null ){
 			return null;
@@ -138,7 +138,7 @@ public class SearchFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 	
-	//@MethodDescribe("根据appId查询该应用栏目下的所有文档数量")
+	//@MethodDescribe("appId로 해당 앱 게시판의 모든 문서 수 조회")
 	public Long getAppInfoDocumentCount( String appId, String docStatus, String targetCategoryId) throws Exception {
 		if( appId == null ){
 			return null;
@@ -160,7 +160,7 @@ public class SearchFactory extends AbstractFactory {
 		return em.createQuery(cq).getSingleResult();
 	}
 	
-	//@MethodDescribe("根据categoryId查询该应用栏目下的所有文档数量")
+	//@MethodDescribe("categoryId로 해당 앱 게시판의 모든 문서 수 조회")
 	public Long getCategoryInfoDocumentCount( List<String> appids, String categoryId, String docStatus ) throws Exception {
 		if( categoryId == null ){
 			return null;

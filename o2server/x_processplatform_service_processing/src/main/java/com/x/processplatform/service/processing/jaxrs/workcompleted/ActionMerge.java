@@ -125,7 +125,7 @@ class ActionMerge extends BaseAction {
 							deleteRecord(business, records), deleteRead(business, reads),
 							deleteDocumentVersion(business, documentVersions)).get();
 					emc.commit();
-					LOGGER.print("已完成工作合并, id: {}, title:{}, sequence:{}.", workCompleted.getId(),
+					LOGGER.print("완료된 업무 문서 병합, id: {}, title:{}, sequence:{}.", workCompleted.getId(),
 							workCompleted.getTitle(), workCompleted.getSequence());
 				}
 			} catch (InterruptedException e) {

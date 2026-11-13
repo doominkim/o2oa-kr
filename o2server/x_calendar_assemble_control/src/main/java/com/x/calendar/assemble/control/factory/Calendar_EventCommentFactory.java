@@ -23,7 +23,7 @@ import com.x.calendar.core.entity.Calendar_Event_;
 
 
 /**
- * 日历备注信息信息表功能服务类
+ * 캘린더 비고 정보 테이블 기능 서비스 클래스
  * @author O2LEE
  */
 public class Calendar_EventCommentFactory extends AbstractFactory {
@@ -33,7 +33,7 @@ public class Calendar_EventCommentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的日历备注信息信息对象
+	 * 지정한 Id의 캘린더 비고 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -43,7 +43,7 @@ public class Calendar_EventCommentFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的日历备注信息信息列表
+	 * 지정한 Id의 캘린더 비고 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -87,7 +87,7 @@ public class Calendar_EventCommentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询检查时间早于now的maxCount条记录的ID列表
+	 * 확인 시간이 now보다 이른 maxCount건의 ID 목록 조회
 	 * @param now
 	 * @param maxCount
 	 * @return

@@ -325,9 +325,9 @@ MWF.xApplication.Attendance.ScheduleExplorer.Schedule = new Class({
 //            "</tr>" +
 //            "<tr>"+
 //            "<td style='; text-align: left;font-size:14px;padding-bottom: 5px'>"+
-//            (!this.isNew && !this.isEdited  ? "" :("<input type='button' id='selTopUnit' " +"style='margin-right:5px'"+ " value='选择公司'/>")) +
-//            (!this.isNew && !this.isEdited  ? "" :("<input type='button' id='selUnit' " + " value='选择部门'/>")) +
-//            //"注：不选择" + lp.unit + "则为默认排班"+
+//            (!this.isNew && !this.isEdited  ? "" :("<input type='button' id='selTopUnit' " +"style='margin-right:5px'"+ " value='회사 선택'/>")) +
+//            (!this.isNew && !this.isEdited  ? "" :("<input type='button' id='selUnit' " + " value='부서 선택'/>")) +
+//            //"참고: " + lp.unit + "을(를) 선택하지 않으면 기본 근무 일정이 적용됩니다"+
 //            "</td>"+
 //            "</tr>" +
 //            "<tr>" +
@@ -499,7 +499,7 @@ MWF.xApplication.Attendance.ScheduleExplorer.Schedule = new Class({
 //                //    this.app.processConfig();
 //            }.bind(this));
 //        }else{
-//            this.app.notice( "请选择上班打卡时间、下班打卡时间和迟到起算时间", "error");
+//            this.app.notice( "출근 체크 시간, 퇴근 체크 시간, 지각 기준 시간을 선택하십시오", "error");
 //        }
 //    },
 //    selectCalendar : function( calendarNode ){
@@ -516,7 +516,7 @@ MWF.xApplication.Attendance.ScheduleExplorer.Schedule = new Class({
 //    selectUnit: function(el, type ){
 //        var options = {
 //            "type": type == "d" ? "unit" : "topUnit",
-//            "title": type == "d" ? "选择部门" : "选择公司",
+//            "title": type == "d" ? "부서 선택" : "회사 선택",
 //            "values": this.data.unit || [],
 //            "count" : "1",
 //            "onComplete": function(items){

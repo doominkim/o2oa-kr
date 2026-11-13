@@ -6,16 +6,16 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public class MessageWo {
 
-    @FieldDescribe("主贴ID或者回复ID")
+    @FieldDescribe("원글 ID 또는 답글 ID")
     private String id;
 
-    @FieldDescribe("标题：主题或者回复的标题")
+    @FieldDescribe("제목: 주제 또는 답글의 제목")
     private String title;
 
-    @FieldDescribe("操作者")
+    @FieldDescribe("작업자")
     private String createPerson;
 
-    @FieldDescribe("操作时间")
+    @FieldDescribe("작업 시간")
     private Date createTime;
 
     public String getId() {

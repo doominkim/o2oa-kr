@@ -67,13 +67,13 @@ public class ActionDelete extends BaseAction {
 					}
 					emc.commit();
 					if (!works.isEmpty()) {
-						// 创建Work删除事件
+						// Work 삭제 이벤트 생성
 						emc.beginTransaction(WorkEvent.class);
 						emc.persist(WorkEvent.deleteEventInstance(works.get(0)), CheckPersistType.all);
 						emc.commit();
 					}
 					if (!workCompleteds.isEmpty()) {
-						// 创建WorkCompleted删除事件
+						// WorkCompleted 삭제 이벤트 생성
 						emc.beginTransaction(WorkCompletedEvent.class);
 						emc.persist(WorkCompletedEvent.deleteEventInstance(workCompleteds.get(0)),
 								CheckPersistType.all);

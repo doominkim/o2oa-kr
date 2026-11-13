@@ -11,38 +11,38 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 public class ManualProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -8141148907781411801L;
-	@FieldDescribe("活动自定义数据")
+	@FieldDescribe("활동 사용자 정의 데이터")
 	private JsonElement customData;
 
-	@FieldDescribe("是否允许加签")
+	@FieldDescribe("추가 결재 허용 여부")
 	private Boolean allowAddTask;
 
-	@FieldDescribe("默认加签方式")
+	@FieldDescribe("기본 결재자 추가 방식")
 	private String defaultAddTaskType;
 
-	@FieldDescribe("默认处理方式")
+	@FieldDescribe("기본 처리 방식")
 	private String defaultAddTaskMode;
 
-	@FieldDescribe("同一处理人不同身份待办合并处理一次.")
+	@FieldDescribe("동일 처리자의 다른 신분 결재 대기를 한 번에 병합 처리.")
 	private Boolean processingTaskOnceUnderSamePerson;
 
-	@FieldDescribe("是否允许退回.")
+	@FieldDescribe("반송 허용 여부.")
 	private Boolean allowGoBack;
 
 	// @since 8.2
-	@FieldDescribe("是否允许终止.")
+	@FieldDescribe("종료 허용 여부.")
 	private Boolean allowTerminate;
 
-	@FieldDescribe("回退配置.")
+	@FieldDescribe("반송 설정.")
 	private GoBackConfig goBackConfig;
 
-	@FieldDescribe("人工环节工作流转后执行脚本.")
+	@FieldDescribe("수동 단계 업무 문서 진행 후 실행 스크립트.")
 	private String manualAfterProcessingScript;
 
-	@FieldDescribe("人工环节工作流转后执行脚本文本.")
+	@FieldDescribe("수동 단계 업무 문서 진행 후 실행 스크립트 텍스트.")
 	private String manualAfterProcessingScriptText;
 
-	@FieldDescribe("流程参与者作为待办人设置.")
+	@FieldDescribe("프로세스 참여자를 결재 대기자로 설정.")
 	private Participant taskParticipant;
 
 	public String getDefaultAddTaskType() {
@@ -149,13 +149,13 @@ public class ManualProperties extends JsonProperties {
 		public static final String WAY_CUSTOM = "custom";
 		public static final String WAY_DEFAULT = "default";
 
-		@FieldDescribe("类型,prev:退回上一环节,any:任意环节,define:配置.")
+		@FieldDescribe("유형, prev: 이전 단계로 반송, any: 임의 단계, define: 설정.")
 		private String type;
 
-		@FieldDescribe("路由方式,step:正常流转,jump:跳转到退回发起的环节,custom:用户指定.")
+		@FieldDescribe("경로 방식, step: 정상 진행, jump: 반송을 시작한 단계로 이동, custom: 사용자 지정.")
 		private String way;
 
-		@FieldDescribe("在人工环节并行模式下有多条待办时是否允许退回,此配置仅针对人工环节并行模式.")
+		@FieldDescribe("수동 단계 병렬 모드에서 결재 대기가 여러 건일 때 반송 허용 여부, 이 설정은 수동 단계 병렬 모드에만 적용.")
 		private Boolean multiTaskEnable;
 
 		public Boolean getMultiTaskEnable() {
@@ -228,10 +228,10 @@ public class ManualProperties extends JsonProperties {
 		public static final String TYPE_ACTIVITY = "activity";
 		public static final String TYPE_MAINTENANCE = "maintenance";
 
-		@FieldDescribe("creator:work创建者,activity:流程环节已办身份(参与流转),maintenance:流程维护身份.空值和其他值则忽略.")
+		@FieldDescribe("creator: work 생성자, activity: 프로세스 단계 처리 완료 신분(진행 참여), maintenance: 프로세스 관리 신분. 빈 값 및 기타 값은 무시.")
 		private String type;
 
-		@FieldDescribe("type=activity,data为活动环节id(数组).")
+		@FieldDescribe("type=activity, data는 활동 단계 id(배열).")
 		private JsonElement data;
 
 		public String getType() {

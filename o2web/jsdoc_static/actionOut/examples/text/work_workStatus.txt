@@ -1,1 +1,1 @@
-"processing",		//可选值:start,processing,hanging
+"processing",		//가능한 값:start,processing,hanging

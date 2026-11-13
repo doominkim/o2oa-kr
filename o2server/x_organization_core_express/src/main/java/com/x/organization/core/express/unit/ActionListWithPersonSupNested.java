@@ -21,7 +21,7 @@ class ActionListWithPersonSupNested extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getPersonList() {

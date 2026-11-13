@@ -33,16 +33,16 @@ public class ActionScheduleListFilter extends BaseAction {
             throw new ExceptionEmptyParameter("groupId");
         }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("排班数据查询  groupId {} month {} date {} person {}", wi.getGroupId(), wi.getGroupId(), wi.getDate(), wi.getPerson());
+            LOGGER.debug("교대 편성 데이터 조회  groupId {} month {} date {} person {}", wi.getGroupId(), wi.getGroupId(), wi.getDate(), wi.getPerson());
         }
         if (StringUtils.isNotEmpty(wi.getMonth())) {
             if (!AttendanceV2Helper.isValidMonthString(wi.getMonth())) {
-                throw new ExceptionWithMessage("月份格式不正确！");
+                throw new ExceptionWithMessage("월 형식이 올바르지 않습니다!");
             }
         }
         if (StringUtils.isNotEmpty(wi.getDate())) {
             if (!AttendanceV2Helper.isValidDateString(wi.getDate())) {
-                throw new ExceptionWithMessage("日期格式不正确！");
+                throw new ExceptionWithMessage("날짜 형식이 올바르지 않습니다!");
             }
         }
         ActionResult<List<ScheduleWo>> result = new ActionResult<>();
@@ -99,15 +99,15 @@ public class ActionScheduleListFilter extends BaseAction {
 
         private static final long serialVersionUID = 4244599472824062438L;
 
-        @FieldDescribe("考勤组 id")
+        @FieldDescribe("근태 그룹 id")
         private String groupId;
 
-        @FieldDescribe("月份: yyyy-MM")
+        @FieldDescribe("월: yyyy-MM")
         private String month;
 
-        @FieldDescribe("日期: yyyy-MM-dd")
+        @FieldDescribe("날짜: yyyy-MM-dd")
         private String date;
-        @FieldDescribe("人员的全称")
+        @FieldDescribe("사용자 전체 이름")
         private String person;
 
         public String getGroupId() {

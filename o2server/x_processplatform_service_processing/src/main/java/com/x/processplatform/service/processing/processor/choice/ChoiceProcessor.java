@@ -27,7 +27,7 @@ public class ChoiceProcessor extends AbstractChoiceProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Choice choice) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.choiceArrive(aeiObjects.getWork().getActivityToken(), choice));
 		return aeiObjects.getWork();
 	}
@@ -39,7 +39,7 @@ public class ChoiceProcessor extends AbstractChoiceProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Choice choice) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.choiceExecute(aeiObjects.getWork().getActivityToken(), choice));
 		List<Work> results = new ArrayList<>();
@@ -54,7 +54,7 @@ public class ChoiceProcessor extends AbstractChoiceProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Choice choice) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.choiceInquire(aeiObjects.getWork().getActivityToken(), choice));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
@@ -66,14 +66,14 @@ public class ChoiceProcessor extends AbstractChoiceProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}
 		}
-		// 多条路由进行判断
+		// 다중 라우팅 판단
 		for (Route o : aeiObjects.getRoutes()) {
 			Source source = aeiObjects.business().element().getCompiledScript(aeiObjects.getWork().getApplication(), o,
 					Business.EVENT_ROUTE);

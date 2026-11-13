@@ -27,19 +27,19 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("v2/file")
-@JaxrsDescribe("打卡记录附件")
+@JaxrsDescribe("출퇴근 기록 첨부파일")
 public class FileAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileAction.class);
 
-	@JaxrsMethodDescribe(value = "上传外勤打卡拍照附件.", action = ActionUpload.class)
+	@JaxrsMethodDescribe(value = "외근 체크 사진 첨부파일 업로드.", action = ActionUpload.class)
 	@POST
 	@Path("upload")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_OCTET_STREAM })
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void upload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("上传外勤打卡拍照附件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("외근 체크 사진 첨부파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionUpload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -51,13 +51,13 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载外勤打卡拍照附件.", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "외근 체크 사진 첨부파일 다운로드.", action = ActionDownload.class)
 	@GET
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("是否以流模式下载") @QueryParam("stream") Boolean stream) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("스트림 모드 다운로드 여부") @QueryParam("stream") Boolean stream) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

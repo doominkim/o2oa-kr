@@ -2,37 +2,37 @@
   "getId" : {"uri":"/jaxrs/uuid/random"},
   "login" : {"uri":"/jaxrs/login","method":"POST"},
   "logout" : {"uri":"/jaxrs/logout","method":"POST"},
-  //启动流程
+  //프로세스 시작
   "startWork": {"uri": "/jaxrs/work/process/{processId}", "method": "POST"},
-  //已阅
+  //열람 완료
   "setReaded": {"uri": "/jaxrs/read/{id}/processing", "method": "POST"},
-  //考核绑定
+  //평가 바인딩
   "bindCheck": {"uri": "/jaxrs/okrworkbaseinfo/appraise/{id}/wf_workid/{wid}"},
-  //找到已完成id
+  //완료된 id 찾기
   "findProcessCompleteId":{"uri":"/jaxrs/job/{job}/find/work/workcompleted"},
-  //发送短信
+  //문자 메시지 발송
   "smsSend":{"uri":"/jaxrs/okrtask/sms/send/{workId}", "method": "PUT"},
-  //与考核流程同步数据
+  //평가 프로세스와 데이터 동기화
   "syncStatus": {"uri": "/jaxrs/okrworkappraise", "method": "POST"},
 
-  //根据人员获取部门
+  //사용자로 부서 조회
   "listDepartmentByPerson": {"uri": "/jaxrs/department/list/person/{name}"},
-  //根据人员获取所在公司
+  //사용자로 소속 회사 조회
   "listCompanyByPerson": {"uri": "/jaxrs/company/list/person/{name}"},
-  //获取公司的一级部门
+  //회사의 1단계 부서 조회
   "listDepartmentByCompany": {"uri": "/jaxrs/department/list/company/{companyName}/top"},
 
-  //根据身份获取人员
+  //신분으로 사용자 조회
   "getPersonByIdentity": {"uri": "/jaxrs/person/identity/{name}"},
-  //根据人员获取身份
+  //사용자로 신분 조회
   "listIdentityByPerson": {"uri": "/jaxrs/identity/list/person/{name}"},
-  //获取人员
+  //사용자 조회
   "getPerson": {"uri": "/jaxrs/person/{name}"},
   "getPersonIcon": {"uri": "/jaxrs/person/{flag}/icon"},
   "getDepartmentGather" : {"uri":"/jaxrs/okrtask/unit/reportTaskCollect/{id}","method":"GET"},
 
 
-  ///////////////////////////////////////////////新的组织//////////////////////////////////
+  ///////////////////////////////////////////////새 조직//////////////////////////////////
   //data: {"personList": []}
   "listIdentityWithPerson": {"uri": "/jaxrs/identity/list/person/object", "method": "POST"}, //사용자의 소속 객체 조회
   //data: {"identityList":[]}
@@ -40,9 +40,9 @@
   //data: {"identityList":[]}
   "listWithIdentityObject": {"uri": "/jaxrs/person/list/identity/object", "method": "POST"}, //소속에 해당하는 사용자 조회
 
-  //data:{"name":"部门正值","unit":"xxxx@0458bd06-00c7-448a-9ca1-f9178d4b2234@U"}
+  //data:{"name":"부서장","unit":"xxxx@0458bd06-00c7-448a-9ca1-f9178d4b2234@U"}
   "getUnitDuty":{"uri":"/jaxrs/unitduty/list/identity/unit/name","method":"POST"},
-  ///////////////////////////////////////////////新的组织////////////////////////////////////////////
+  ///////////////////////////////////////////////새 조직////////////////////////////////////////////
 
 
   "getMyStat": {"uri":"/jaxrs/okrworkbaseinfo/statistic/my"},
@@ -113,7 +113,7 @@
   "getChatListNext" :{"uri" : "/jaxrs/okrworkchat/filter/list/{id}/next/{count}", "method": "PUT"},
   "getChatListPrev" :{"uri" : "/jaxrs/okrworkchat/filter/list/{id}/prev/{count}", "method": "PUT"},
 
-  //工作汇报
+  //업무 보고
   "workReportDrafter":{"uri": "/jaxrs/okrworkreportbaseinfo/draft/{workId}", "method": "GET"},
   "getWorkReport" : {"uri":"/jaxrs/okrworkreportbaseinfo/{id}","method":"GET"},
   "saveWorkReport" :{"uri":"/jaxrs/okrworkreportbaseinfo","method":"POST"},
@@ -128,12 +128,12 @@
   "getWorkReportDonePrev" : {"uri" : "/jaxrs/okrworkreportbaseinfo/process/list/{id}/prev/{count}", "method": "PUT"},
   "getWorkReportOpinion" : {"uri":"/jaxrs/okrworkreportbaseinfo/process","method":"PUT"},
   "getWorkReportArchiveNext" : {"uri" : "/jaxrs/okrworkreportbaseinfo/archive/list/{id}/next/{count}", "method": "PUT"},
-  //系统设置
+  //시스템 설정
   "deleteConfig" : {"uri":"/jaxrs/okrconfigsystem/{id}","method": "DELETE"},
   "saveConfig" : {"uri" : "/jaxrs/okrconfigsystem","method" : "POST"},
   "getConfig" : {"uri" : "/jaxrs/okrconfigsystem/{id}","method":"GET"},
   "listConfigAll" : {"uri" : "/jaxrs/okrconfigsystem/all"},
-  //根据当前人员获取可能替代的身份
+  //현재 사용자로 대체 가능한 신분 조회
   "listMyRelief": {"uri": "/jaxrs/okrconfigsecretary/list/my"},
   "deleteSecretary" : {"uri":"/jaxrs/okrconfigsecretary/{id}","method": "DELETE"},
   "saveSecretary" : {"uri" : "/jaxrs/okrconfigsecretary","method" : "POST"},
@@ -167,59 +167,59 @@
 
 
   //*****************tidy*******************************
-  //*******************中心工作*******************
-  //创建中心工作权限
+  //*******************중점 업무*******************
+  //중점 업무 생성 권한
   "createCenterWorkAuthorization" : {"uri" : "/jaxrs/okrconfigsystem/allowed/deploy","method":"GET"},
-  //获取中心工作内容
+  //중점 업무 내용 조회
   "getCenterWorkInfo" : {"uri":"/jaxrs/okrcenterworkinfo/{id}","method":"GET"},
-  //中心工作保存
+  //중점 업무 저장
   "saveCenterWork" : {"uri" : "/jaxrs/okrcenterworkinfo", "method": "POST"},
-  //中心工作部署
+  //중점 업무 배포
   "deployCenterWork" : {"uri" : "/jaxrs/okrcenterworkinfo/deploy/{centerId}", "method" : "GET"},
 
-  //*******************中心工作*******************
-  //*******************具体工作*******************
-  //具体工作信息
+  //*******************중점 업무*******************
+  //*******************세부 업무*******************
+  //세부 업무 정보
   "getBaseWorkInfo" : {"uri" : "/jaxrs/okrworkbaseinfo/view/{id}","method":"GET"},
-  //获取全部具体工作
+  //전체 세부 업무 조회
   "getBaseWorkListAllNext" : {"uri" : "/jaxrs/okrworkbaseinfo/filter/list/{id}/next/{count}", "method": "PUT"},
   "getBaseWorkListAllPrev" : {"uri" : "/jaxrs/okrworkbaseinfo/filter/list/{id}/prev/{count}", "method": "PUT"},
-  //在部署界面获取全部自己部署的工作
+  //배포 화면에서 본인이 배포한 전체 업무 조회
   "getMyDeployWork" : {"uri":"/jaxrs/okrworkbaseinfo/deploy/form/center/{id}","method":"GET"},
-  //在部署界面获取全部自己相关的工作
+  //배포 화면에서 본인 관련 전체 업무 조회
   "getMyRelativeWork" : {"uri":"/jaxrs/okrworkbaseinfo/process/form/center/{id}","method":"GET"},
-  //具体工作归档
+  //세부 업무 보관
   "archiveBaseWork" : {"uri":"/jaxrs/okrworkbaseinfo/archive/{id}","method":"GET"},
-  //修改具体工作进展
+  //세부 업무 진행 상황 수정
   "progressBaseWork":{"uri":"/jaxrs/okrworkbaseinfo/progress/{id}/{percent}","method":"GET"},
-  //*******************具体工作*******************
-  //*******************工作汇报*******************
+  //*******************세부 업무*******************
+  //*******************업무 보고*******************
 
 
-  //*******************工作汇报*******************
-  //*******************主页*******************
+  //*******************업무 보고*******************
+  //*******************홈*******************
 
-  //*******************主页*******************
+  //*******************홈*******************
 
-  //*******************统计*******************
-  //获取时间段内的统计信息
+  //*******************통계*******************
+  //기간 내 통계 정보 조회
   "getStatType" : {"uri" : "/jaxrs/streportstatus/filter/list", "method": "PUT"},
-  //获取时间段内所有汇报周期列表
+  //기간 내 전체 보고 주기 목록 조회
   "getStatDateList" : {"uri" : "/jaxrs/streportcontent/date/list", "method": "PUT"},
-  //获取单个时间的统计信息
+  //단일 시점 통계 정보 조회
   "getStatDate" : {"uri" : "/jaxrs/streportcontent/filter/list", "method": "PUT"},
-  //导出单个时间得EXCEL
+  //단일 시점 EXCEL 내보내기
   "exportByCenterWork" : {"uri" : "/jaxrs/streportcontent/export", "method": "PUT"},
-  //导出按部门
+  //부서별 내보내기
   "exportByDeptWork" : {"uri" : "/jaxrs/streportstatus/export", "method": "PUT"},
 
   //
   "statisticreportstatus":{"uri":"/jaxrs/export/statisticreportstatus/{flag}/stream","method":"GET"},
-  //*******************统计*******************
+  //*******************통계*******************
 
-  //*******************脑图*******************
+  //*******************마인드맵*******************
   "getUserMind" : {"uri" : "/jaxrs/mind/center/{id}","method": "GET"},
-  //*******************脑图*******************
+  //*******************마인드맵*******************
 
   //******************tidy******************************
 

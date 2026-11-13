@@ -17,7 +17,7 @@ import com.x.calendar.assemble.control.ThisApplication;
 import com.x.calendar.core.entity.Calendar;
 
 /**
- * 列示所有公开的日历信息
+ * 모든 공개 캘린더 정보 조회
  * 
  * @author O2LEE
  *
@@ -42,7 +42,7 @@ public class ActionListPublicCalendar extends BaseAction {
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}			
@@ -53,7 +53,7 @@ public class ActionListPublicCalendar extends BaseAction {
 				ids = calendarServiceAdv.listPublicCalendar();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统查询所有公开的日历信息ID列表时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "공개 캘린더 ID 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -75,7 +75,7 @@ public class ActionListPublicCalendar extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionCalendarInfoProcess( e, "将所有查询到的日历信息对象转换为可以输出的信息时发生异常." );
+					Exception exception = new ExceptionCalendarInfoProcess( e, "조회한 캘린더 정보를 출력 정보로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -92,13 +92,13 @@ public class ActionListPublicCalendar extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>();
 		
-		@FieldDescribe("用户是否可以对该日历进行管理.")
+		@FieldDescribe("사용자의 해당 캘린더 관리 가능 여부.")
 		private Boolean manageable = false;
 		
-		@FieldDescribe("用户是否可以在该日历中发布日程事件.")
+		@FieldDescribe("사용자의 해당 캘린더 일정 이벤트 게시 가능 여부.")
 		private Boolean publishable = false;
 		
-		@FieldDescribe("用户是否已经关注.")
+		@FieldDescribe("사용자 구독 여부.")
 		private Boolean followed = false;
 		
 		public static WrapCopier<Calendar, Wo> copier = WrapCopierFactory.wo( Calendar.class, Wo.class, null,Wo.Excludes);

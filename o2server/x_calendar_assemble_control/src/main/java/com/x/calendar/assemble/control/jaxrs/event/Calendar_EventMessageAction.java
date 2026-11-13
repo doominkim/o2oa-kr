@@ -21,14 +21,14 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("message")
-@JaxrsDescribe("消息处理")
+@JaxrsDescribe("메시지 처리")
 public class Calendar_EventMessageAction extends BaseAction {
 
 	// private StandardJaxrsActionProxy proxy = new
 	// StandardJaxrsActionProxy(ThisApplication.context());
 	private static Logger logger = LoggerFactory.getLogger(Calendar_EventMessageAction.class);
 
-	@JaxrsMethodDescribe(value = "接收日历消息", action = ActionMessageReceive.class)
+	@JaxrsMethodDescribe(value = "캘린더 메시지 수신", action = ActionMessageReceive.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

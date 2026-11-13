@@ -15,7 +15,7 @@ import com.x.attendance.entity.AttendanceSetting;
 import com.x.attendance.entity.AttendanceSetting_;
 import com.x.base.core.project.exception.ExceptionWhen;
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
  */
 public class AttendanceSettingFactory extends AbstractFactory {
 	
@@ -23,12 +23,12 @@ public class AttendanceSettingFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的AttendanceSetting应用信息对象")
+	//@MethodDescribe("지정 Id의 AttendanceSetting 앱 정보 객체 조회")
 	public AttendanceSetting get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceSetting.class, ExceptionWhen.none);
 	}
 	
-	//@MethodDescribe("列示全部的AttendanceSetting应用信息列表")
+	//@MethodDescribe("전체 AttendanceSetting 앱 정보 목록 조회")
 	@SuppressWarnings("unused")
 	public List<AttendanceSetting> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceSetting.class);
@@ -38,7 +38,7 @@ public class AttendanceSettingFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceSetting应用信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceSetting 앱 정보 목록 조회")
 	public List<AttendanceSetting> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<AttendanceSetting>();
@@ -51,7 +51,7 @@ public class AttendanceSettingFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("根据CODE列示指定Id的AttendanceSetting应用信息列表")
+	//@MethodDescribe("CODE로 지정 Id의 AttendanceSetting 앱 정보 목록 조회")
 	public List<String> listIdsByCode(String code) throws Exception {
 		if( code == null || code.isEmpty() ){
 			return null;

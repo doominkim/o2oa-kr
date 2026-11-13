@@ -128,7 +128,7 @@ MWF.xApplication.portal.PageDesigner.Module.Widget = MWF.PCWidget = new Class({
     _getDroppableNodes: function(){
         var nodes = [this.form.node].concat(this.form.moduleElementNodeList, this.form.moduleContainerNodeList, this.form.moduleComponentNodeList);
         this.form.moduleList.each( function(module){
-            //部件不能往数据模板里拖
+            //위젯은 데이터 템플릿 안으로 끌어 넣을 수 없음
             if( module.moduleName === "datatemplate" ){
                 var subDoms = this.form.getModuleNodes(module.node);
                 nodes.erase( module.node );

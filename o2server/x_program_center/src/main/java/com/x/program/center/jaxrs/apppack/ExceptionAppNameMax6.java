@@ -10,5 +10,5 @@ public class ExceptionAppNameMax6 extends LanguagePromptException {
 
     private static final long serialVersionUID = -8045803301464102031L;
 
-    ExceptionAppNameMax6(){ super("App名称长度最多6个字！"); }
+    ExceptionAppNameMax6(){ super("App 이름은 최대 6자입니다!"); }
 }

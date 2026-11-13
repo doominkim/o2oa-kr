@@ -81,7 +81,7 @@ class ActionEdit extends BaseAction {
 			updateSplit(business, wrap.getSplitList(), process);
 			emc.commit();
 			cacheNotify();
-			// 保存历史版本
+			// 이력 버전 저장
 			ThisApplication.processVersionQueue.send(new ProcessVersion(process.getId(), jsonElement, effectivePerson.getDistinguishedName()));
 			Wo wo = new Wo();
 			wo.setId(process.getId());
@@ -109,7 +109,7 @@ class ActionEdit extends BaseAction {
 	}
 
 	private void updateEdition(Process oldProcess, Process process) {
-		// 更新流程时保持流程的版本信息不变，但当不存在版本信息则添加版本信息
+		// 프로세스 수정 시 버전 정보는 유지하되, 버전 정보가 없으면 추가
 		if (StringUtils.isEmpty(oldProcess.getEdition())) {
 			process.setEdition(process.getId());
 			process.setEditionEnable(true);

@@ -45,10 +45,10 @@ class ActionCreate extends BaseAction {
 			script.setLastUpdateTime(new Date());
 			emc.persist(script, CheckPersistType.all);
 			emc.commit();
-			// 清除所有的Script缓存
+			// 모든 Script 캐시 삭제
 			CacheManager.notify(Script.class);
 
-			// 记录日志
+			// 로그 기록
 			emc.beginTransaction(Log.class);
 			logService.log(emc, effectivePerson.getDistinguishedName(), script.getName(), script.getAppId(), "", "", script.getId(), "SCRIPT", "新增");
 			emc.commit();
@@ -56,7 +56,7 @@ class ActionCreate extends BaseAction {
 			Wo wo = new Wo();
 			wo.setId( script.getId() );
 			result.setData(wo);
-			// 保存历史版本
+			// 이력 버전 저장
 			ThisApplication.scriptVersionQueue.send(new ScriptVersion(wo.getId(), jsonElement, effectivePerson.getDistinguishedName()));
 		}
 		return result;
@@ -64,34 +64,34 @@ class ActionCreate extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("创建时间.")
+		@FieldDescribe("생성 시간.")
 		private Date createTime;
 
-		@FieldDescribe("更新时间.")
+		@FieldDescribe("갱신 시간.")
 		private Date updateTime;
 
 		@FieldDescribe("ID.")
 		private String id;
 
-		@FieldDescribe("脚本名称.")
+		@FieldDescribe("스크립트 이름.")
 		private String name;
 
-		@FieldDescribe("脚本别名.")
+		@FieldDescribe("스크립트 별칭.")
 		private String alias;
 
-		@FieldDescribe("脚本说明.")
+		@FieldDescribe("스크립트 설명.")
 		private String description;
 
-		@FieldDescribe("是否验证成功.")
+		@FieldDescribe("검증 성공 여부.")
 		private Boolean validated;
 
-		@FieldDescribe("所属栏目ID.")
+		@FieldDescribe("소속 게시판 ID.")
 		private String appId;
 
-		@FieldDescribe("脚本内容.")
+		@FieldDescribe("스크립트 내용.")
 		private String text;
 
-		@FieldDescribe("依赖的脚本ID列表.")
+		@FieldDescribe("의존 스크립트 ID 목록.")
 		private List<String> dependScriptList;
 
 		public Date getCreateTime() {

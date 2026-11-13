@@ -32,7 +32,7 @@ public class ActionAddMenu extends BaseAction {
                 throw new ExceptionNotEmpty("name");
             }
             String type = menu.getType();
-            if (StringUtils.isNotBlank(type)) { //type 为空，是空菜单，一般作为父菜单用的
+            if (StringUtils.isNotBlank(type)) { //type 이 비어 있으면 빈 메뉴, 보통 상위 메뉴로 사용
                 if ("click".equals(type)) {
                     if (StringUtils.isBlank(menu.getKey())) {
                         throw new ExceptionNotEmpty("key");
@@ -54,7 +54,7 @@ public class ActionAddMenu extends BaseAction {
                     if (StringUtils.isBlank(menu.getPagepath())) {
                         throw new ExceptionNotEmpty("pagepath");
                     }
-                } else if(WX_MSG_RECEIVE_EVENT_SUBSCRIBE.equals(type)) { //关注事件 添加了之后会发送文本消息
+                } else if(WX_MSG_RECEIVE_EVENT_SUBSCRIBE.equals(type)) { //팔로우 이벤트 추가 후 텍스트 메시지 발송
                     menu.setKey(WX_MSG_RECEIVE_EVENT_SUBSCRIBE);
                     if (StringUtils.isBlank(menu.getContent())) {
                         throw new ExceptionNotEmpty("content");

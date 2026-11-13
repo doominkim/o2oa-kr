@@ -94,7 +94,7 @@ class ActionExecute extends BaseAction {
 		Agent agent;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
-			/* 判断当前用户是否有权限访问 */
+			/* 현재 사용자의 접근 권한 여부 판단 */
 			if (!business.serviceControlAble(effectivePerson)) {
 				throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());
 			}

@@ -33,7 +33,7 @@ class ActionListOnDayByRoomID extends BaseAction {
 			calendar.set(Calendar.SECOND, 0);
 			calendar.set(Calendar.MILLISECOND, 0);
 			Date start = calendar.getTime();
-			/** 一天内 */
+			/** 하루 이내 */
 			calendar.add(Calendar.DAY_OF_MONTH, 1);
 			calendar.add(Calendar.MILLISECOND, -1);
 			Date end = calendar.getTime();

@@ -26,12 +26,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("code")
-@JaxrsDescribe("验证码")
+@JaxrsDescribe("인증 코드")
 public class CodeAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(CodeAction.class);
 
-	@JaxrsMethodDescribe(value = "列示所有Code对象.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 Code 객체 나열.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -48,13 +48,13 @@ public class CodeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建一个code验证码.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "code 인증 코드 생성.", action = ActionCreate.class)
 	@GET
 	@Path("create/mobile/{mobile}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void create(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("手机号") @PathParam("mobile") String mobile) {
+			@JaxrsParameterDescribe("휴대폰 번호") @PathParam("mobile") String mobile) {
 		ActionResult<ActionCreate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -66,14 +66,14 @@ public class CodeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "验证一个code验证码.", action = ActionValidate.class)
+	@JaxrsMethodDescribe(value = "code 인증 코드 검증.", action = ActionValidate.class)
 	@GET
 	@Path("validate/mobile/{mobile}/answer/{answer}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void validate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("手机号") @PathParam("mobile") String mobile,
-			@JaxrsParameterDescribe("验证码") @PathParam("answer") String answer) {
+			@JaxrsParameterDescribe("휴대폰 번호") @PathParam("mobile") String mobile,
+			@JaxrsParameterDescribe("인증 코드") @PathParam("answer") String answer) {
 		ActionResult<ActionValidate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -85,14 +85,14 @@ public class CodeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "级联验证code验证码", action = ActionValidateCascade.class)
+	@JaxrsMethodDescribe(value = "code 인증 코드 연쇄 검증", action = ActionValidateCascade.class)
 	@GET
 	@Path("validate/mobile/{mobile}/answer/{answer}/cascade")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void validateCascade(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("手机号") @PathParam("mobile") String mobile,
-			@JaxrsParameterDescribe("验证码") @PathParam("answer") String answer) {
+			@JaxrsParameterDescribe("휴대폰 번호") @PathParam("mobile") String mobile,
+			@JaxrsParameterDescribe("인증 코드") @PathParam("answer") String answer) {
 		ActionResult<ActionValidateCascade.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -104,14 +104,14 @@ public class CodeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示Code对象.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "Code 객체 페이지 나열.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-						   @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+						   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+						   @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -58,7 +58,7 @@ public class WrapCopier<T, W> {
 	}
 
 	private void copyFields(T orig, W dest) {
-		// properties 的值会再次覆盖
+		// properties 값이 다시 덮어씀
 		if (copyFields.contains(JpaObject.PROPERTIES_FIELDNAME)) {
 			try {
 				Object o = propertyUtilsBean.getProperty(orig, JpaObject.PROPERTIES_FIELDNAME);
@@ -69,7 +69,7 @@ public class WrapCopier<T, W> {
 		}
 		copyFields.stream().forEach(f -> {
 			try {
-				// openjpa在访问主键(getId()会执行pcGetId())会发起一个锁定所以在这里对id(xid column)进行单独的处理
+				// openjpa는 기본 키에 접근할 때(getId()가 pcGetId() 실행) 잠금을 발생시키므로 여기서 id(xid column)를 별도 처리
 				if (StringUtils.equals(f, JpaObject.id_FIELDNAME)) {
 					Field field = FieldUtils.getField(orig.getClass(), f, true);
 					if (null != field) {

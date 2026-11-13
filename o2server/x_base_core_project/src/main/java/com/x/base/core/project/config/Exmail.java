@@ -15,31 +15,31 @@ import com.x.base.core.project.gson.XGsonBuilder;
 import com.x.base.core.project.tools.DefaultCharset;
 
 /**
- * 回调要求本地网络端口更换到80、 443、 8080 这三个端口再试，核实使用其它端口会被限制不能连接
+ * 콜백은 로컬 네트워크 포트를 80, 443, 8080 세 포트 중 하나로 바꿔 다시 시도해야 함, 다른 포트는 연결이 제한되는 것으로 확인됨
  */
 public class Exmail extends ConfigObject {
 
-	@FieldDescribe("是否启用.")
+	@FieldDescribe("사용 여부.")
 	private Boolean enable;
-	@FieldDescribe("腾讯企业邮corpId")
+	@FieldDescribe("텐센트 기업 메일 corpId")
 	private String corpId;
-	@FieldDescribe("新邮件提醒secret")
+	@FieldDescribe("새 메일 알림 secret")
 	private String newRemindSecret;
-	@FieldDescribe("单点登录secret")
+	@FieldDescribe("싱글 사인온 secret")
 	private String ssoSecret;
-	@FieldDescribe("corpAccessToken获取地址")
+	@FieldDescribe("corpAccessToken 조회 주소")
 	private String corpAccessTokenAddress;
-	@FieldDescribe("新邮件数量获取地址")
+	@FieldDescribe("새 메일 수 조회 주소")
 	private String newCountAddress;
-	@FieldDescribe("单点登录获取地址")
+	@FieldDescribe("싱글 사인온 조회 주소")
 	private String ssoAddress;
-	@FieldDescribe("回调token")
+	@FieldDescribe("콜백 token")
 	private String token;
-	@FieldDescribe("回调encodingAesKey")
+	@FieldDescribe("콜백 encodingAesKey")
 	private String encodingAesKey;
-	@FieldDescribe("存储邮件数量个人属性值.")
+	@FieldDescribe("메일 수 저장 개인 속성 값.")
 	private String personAttributeNewCountName;
-	@FieldDescribe("存储邮件标题个人属性值.")
+	@FieldDescribe("메일 제목 저장 개인 속성 값.")
 	private String personAttributeTitleName;
 
 	public static Exmail defaultInstance() {

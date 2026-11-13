@@ -1,7 +1,7 @@
 import {o2} from '@o2oa/component';
 
 /**
- * 查询公共配置
+ * 공통 설정 조회
  * @param {*} name
  * @returns
  */
@@ -11,7 +11,7 @@ function getPublicData(name) {
     });
 }
 /**
- * 设置公共配置
+ * 공통 설정 지정
  * @param {*} name
  * @param {*} value
  * @returns
@@ -23,7 +23,7 @@ function putPublicData(name, value) {
 }
 
 /**
- * 调用后端api 只返回data
+ * 백엔드 api 호출, data만 반환
  * @param {*} content
  * @param {*} action
  * @param {*} method
@@ -36,7 +36,7 @@ async function doAction(content, action, method, ...args) {
     return json.data;
 }
 /**
- * 调用后端api 返回整个response对象
+ * 백엔드 api 호출, response 객체 전체 반환
  * @param {*} content
  * @param {*} action
  * @param {*} method
@@ -49,7 +49,7 @@ async function doActionBackResult(content, action, method, ...args) {
 }
 
 /**
- * 组织管理 人员 API
+ * 조직 관리 사용자 API
  * x_organization_assemble_control
  * @param {*} method
  * @param  {...any} args
@@ -60,7 +60,7 @@ function personAction(method, ...args) {
 }
 
 /**
- * 个人 API PersonAction
+ * 개인 API PersonAction
  * x_organization_assemble_personal
  * @param {*} method
  * @param  {...any} args
@@ -113,7 +113,7 @@ function orgExpressUnitAction(method, ...args) {
 }
 
 /**
- * 聊聊 API
+ * 채팅 API
  * @param {*} method
  * @param  {...any} args
  * @returns
@@ -123,12 +123,12 @@ function imAction(method, ...args) {
 }
 
 /**
- * 聊聊上传 Promise
+ * 채팅 업로드 Promise
  * @param conversationId
  * @param type
  * @param formData
- * @param file 文件对象
- * @param progressCallback 进度返回函数
+ * @param file 파일 객체
+ * @param progressCallback 진행 상황 반환 함수
  * @returns {Promise<unknown>}
  */
 function imUploadFile(conversationId, type, formData, file, progressCallback) {
@@ -138,48 +138,48 @@ function imUploadFile(conversationId, type, formData, file, progressCallback) {
             module: {
                 addFormDataMessage: (file) => {
                     console.log('진행률 표시줄 생성', file);
-                    //返回一个对象，用于处理进度条
+                    //진행 막대 처리용 객체 반환
                     return {
-                        //在上传完成，失败或取消时，清除进度条
+                        //업로드 완료, 실패 또는 취소 시 진행 막대 제거
                         clearMessageProgress: () => {
                             console.log('진행률 표시줄 제거', file);
                         },
-                        //更新进度条
+                        //진행 막대 업데이트
                         updateProgress: (progress) => {
                             console.log('진행률 표시줄 업데이트', file, progress);
                             if (progressCallback) {
                                 progressCallback(progress)
                             }
                         },
-                        //更新进度条标题
+                        //진행 막대 제목 업데이트
                         setMessageTitle: (title) => {
                             console.log('진행률 표시줄 제목 업데이트', file, title);
                         },
-                        //更新进度条文本
+                        //진행 막대 텍스트 업데이트
                         setMessageText: (text) => {
                             console.log('진행률 표시줄 텍스트 업데이트', file, text);
                         },
-                        //开始上传
+                        //업로드 시작
                         transferStart: () => {
                             console.log('업로드 시작', file);
                         },
 
-                        //上传失败
+                        //업로드 실패
                         transferFailed: () => {
                             console.log('업로드 실패', file);
                         },
 
-                        //上传取消
+                        //업로드 취소
                         transferCanceled: () => {
                             console.log('업로드 취소', file);
                         },
 
-                        //上传完成
+                        //업로드 완료
                         transferComplete: () => {
                             console.log('업로드 완료', file);
                         },
 
-                        //这个data为了兼容，防止代码报错，实际上并没有用到
+                        //이 data는 호환성을 위해 코드 오류를 막는 용도이며 실제로는 사용되지 않음
                         data: {id: ''},
                     };
                 },
@@ -219,8 +219,8 @@ function imUploadFile(conversationId, type, formData, file, progressCallback) {
 }
 
 /**
- * 获取头像 url
- * 默认是群聊头像
+ * 아바타 url 가져오기
+ * 기본은 그룹 채팅 아바타
  * @param person
  * @returns {*}
  */
@@ -230,7 +230,7 @@ function getAvatarUrl(person) {
 }
 
 /**
- * 会话头像 url
+ * 대화 아바타 url
  * @param conversationId
  * @returns {string}
  */
@@ -242,7 +242,7 @@ function conversationIconUrl(conversationId) {
     return url;
 }
 
-//图片 根据大小 url
+//크기별 이미지 url
 const getImFileUrlWithWH = (id, width, height) => {
     const action = o2.Actions.get('x_message_assemble_communicate').action;
     let url = action.getAddress() + action.actions.imgFileDownloadWithWH.uri;
@@ -251,7 +251,7 @@ const getImFileUrlWithWH = (id, width, height) => {
     url = url.replace('{height}', encodeURIComponent(height));
     return url;
 };
-//file 下载的url
+//file 다운로드 url
 const getImFileDownloadUrl = (id) => {
     var action = o2.Actions.get('x_message_assemble_communicate').action;
     var url = action.getAddress() + action.actions.imgFileDownload.uri;
@@ -259,7 +259,7 @@ const getImFileDownloadUrl = (id) => {
     return url;
 };
 
-//百度地图打开地址
+//바이두 지도로 주소 열기
 const getBaiduMapUrl = (lat, longt, address, content) => {
     return (
         'https://api.map.baidu.com/marker?location=' +

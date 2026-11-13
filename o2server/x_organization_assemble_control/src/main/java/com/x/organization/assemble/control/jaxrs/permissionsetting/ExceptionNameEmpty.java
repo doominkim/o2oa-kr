@@ -7,6 +7,6 @@ class ExceptionNameEmpty extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionNameEmpty() {
-		super("姓名不能为空.");
+		super("이름은 비워 둘 수 없습니다.");
 	}
 }

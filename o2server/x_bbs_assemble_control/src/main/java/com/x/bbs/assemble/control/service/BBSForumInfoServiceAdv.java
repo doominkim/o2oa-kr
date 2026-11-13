@@ -16,7 +16,7 @@ import com.x.bbs.entity.BBSRoleInfo;
 import com.x.bbs.entity.BBSUserRole;
 
 /**
- * 论坛信息管理服务类
+ * 포럼 정보 관리 서비스 클래스
  * @author LIYI
  *
  */
@@ -25,7 +25,7 @@ public class BBSForumInfoServiceAdv {
 	private BBSForumInfoService forumInfoService = new BBSForumInfoService();
 	
 	/**
-	 * 根据传入的ID从数据库查询BBSForumInfo对象
+	 * 전달된 ID로 데이터베이스에서 BBSForumInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -42,7 +42,7 @@ public class BBSForumInfoServiceAdv {
 	}
 	
 	/**
-	 * 向数据库保存BBSForumInfo对象
+	 * 데이터베이스에 BBSForumInfo 객체 저장
 	 * @param wrapIn
 	 */
 	public BBSForumInfo save( BBSForumInfo _bBSForumInfo ) throws Exception {
@@ -57,7 +57,7 @@ public class BBSForumInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据ID从数据库中删除BBSForumInfo对象
+	 * ID로 데이터베이스에서 BBSForumInfo 객체 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -76,14 +76,14 @@ public class BBSForumInfoServiceAdv {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			
-			//删除和该论坛有关的一切，主要是权限，贴子和版块都被删除过了
+			//해당 포럼 관련 모든 항목 삭제, 주로 권한이며 게시글과 게시판은 이미 삭제됨
 			emc.beginTransaction( BBSForumInfo.class );
 			emc.beginTransaction( BBSUserRole.class );
 			emc.beginTransaction( BBSPermissionInfo.class );
 			emc.beginTransaction( BBSPermissionRole.class );
 			emc.beginTransaction( BBSRoleInfo.class );
 			
-			//删除论坛所有的用户与角色信息关联信息
+			//포럼의 모든 사용자-역할 연결 정보 삭제
 			ids = business.userRoleFactory().listByForumId( forumId );
 			if( ListTools.isNotEmpty( ids )) {
 				userRoleList = business.userRoleFactory().list( ids );
@@ -94,7 +94,7 @@ public class BBSForumInfoServiceAdv {
 				}
 			}
 			
-			//删除权限角色关联信息
+			//권한-역할 연결 정보 삭제
 			ids = business.permissionRoleFactory().listByForumId( forumId );
 			if( ListTools.isNotEmpty( ids )) {
 				permissionRoleList = business.permissionRoleFactory().list( ids );
@@ -105,7 +105,7 @@ public class BBSForumInfoServiceAdv {
 				}
 			}
 			
-			//删除论坛所有的角色信息
+			//포럼의 모든 역할 정보 삭제
 			ids = business.roleInfoFactory().listRoleByForumId(forumId);
 			if( ListTools.isNotEmpty( ids )) {
 				roleInfoList = business.roleInfoFactory().list( ids );
@@ -116,7 +116,7 @@ public class BBSForumInfoServiceAdv {
 				}
 			}
 			
-			//删除所有的权限信息
+			//모든 권한 정보 삭제
 			ids = business.permissionInfoFactory().listPermissionByForumId(forumId);
 			if( ListTools.isNotEmpty( ids )) {
 				permissionInfoList = business.permissionInfoFactory().list( ids );
@@ -146,9 +146,9 @@ public class BBSForumInfoServiceAdv {
 	}
 
 	/**
-	 * 根据权限查询所有我能访问到的论坛信息列表
-	 * 1、所有全员可访问的论坛信息
-	 * 2、所有我有权限访问的论坛信息
+	 * 권한에 따라 접근 가능한 모든 포럼 정보 목록 조회
+	 * 1. 전 직원 접근 가능한 모든 포럼 정보
+	 * 2. 내가 접근 권한을 가진 모든 포럼 정보
 	 * 
 	 * @return
 	 * @throws Exception 

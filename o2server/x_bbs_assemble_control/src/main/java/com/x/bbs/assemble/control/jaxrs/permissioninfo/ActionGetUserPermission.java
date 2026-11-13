@@ -22,7 +22,7 @@ import com.x.bbs.entity.BBSSectionInfo;
 import com.x.bbs.entity.enums.BbsRoleEnum;
 
 /**
- * 查询用户的权限
+ * 사용자 권한 조회
  * @author sword
  */
 public class ActionGetUserPermission extends BaseAction {
@@ -85,19 +85,19 @@ public class ActionGetUserPermission extends BaseAction {
 
 	public static class Wo{
 
-		@FieldDescribe( "是否是BBS管理员." )
+		@FieldDescribe( "BBS 관리자 여부." )
 		private Boolean bbsAdmin = false;
 
-		@FieldDescribe( "是否是分区管理员." )
+		@FieldDescribe( "구역 관리자 여부." )
 		private Boolean bbsForumAdmin = false;
 
-		@FieldDescribe( "是否是板块管理员." )
+		@FieldDescribe( "게시판 관리자 여부." )
 		private Boolean bbsSectionAdmin = false;
 
-		@FieldDescribe( "可管理的分区." )
+		@FieldDescribe( "관리 가능한 구역." )
 		private List<String> forumList = new ArrayList();
 
-		@FieldDescribe( "可管理的板块." )
+		@FieldDescribe( "관리 가능한 게시판." )
 		private List<String> sectionList = new ArrayList();
 
 		public Boolean getBbsAdmin() {

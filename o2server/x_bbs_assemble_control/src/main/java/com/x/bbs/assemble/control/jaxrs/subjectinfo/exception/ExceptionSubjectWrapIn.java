@@ -7,6 +7,6 @@ public class ExceptionSubjectWrapIn extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjectWrapIn( Throwable e ) {
-		super("系统将用户传入的数据转换为主题信息对象时发生异常.", e );
+		super("사용자가 입력한 데이터를 주제 정보 객체로 변환하는 중 오류가 발생했습니다.", e );
 	}
 }

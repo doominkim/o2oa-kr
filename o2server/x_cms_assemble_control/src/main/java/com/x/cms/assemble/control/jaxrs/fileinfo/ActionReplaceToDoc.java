@@ -141,7 +141,7 @@ class ActionReplaceToDoc extends BaseAction {
 
         private static final long serialVersionUID = 4382689061793305054L;
 
-        @FieldDescribe("替换文档指定site的附件列表，先删再增，为空则不操作.")
+        @FieldDescribe("문서 지정 site의 첨부파일 목록 교체, 먼저 삭제 후 추가, 비어 있으면 처리하지 않음.")
         @FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiFileReplaceInfo", fieldValue = "[{'site':'附件框分类','fileInfoList':[{'id':'附件id','name':'附件名称'}]},'type':'附件来源(cms或processPlatform)']}]")
         private List<WiSiteFileInfo> siteFileInfoList;
 

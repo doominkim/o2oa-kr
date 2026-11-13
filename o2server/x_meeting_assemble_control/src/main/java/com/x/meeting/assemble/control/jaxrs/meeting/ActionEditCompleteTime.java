@@ -60,10 +60,10 @@ class ActionEditCompleteTime extends BaseAction {
 
 	public static class Wi  {
 		
-		@FieldDescribe("所属楼层.")
+		@FieldDescribe("소속 층.")
 		private String room;
 		
-		@FieldDescribe("结束时间.")
+		@FieldDescribe("종료 시간.")
 		private Date completedTime;
 
 		public String getRoom() {

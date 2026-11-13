@@ -46,11 +46,11 @@ import com.x.processplatform.service.processing.Processing;
 import com.x.processplatform.service.processing.ThisApplication;
 
 /**
- * 创建处于start状态的work 此方法不需要进入队列运行
+ * start 상태의 work 생성, 이 메서드는 큐에 넣어 실행할 필요 없음
  *
  * @author Rui
  *
- *         此方法不需要推入线程池运行
+ *         이 메서드는 스레드 풀에 넣어 실행할 필요 없음
  */
 class ActionAssignCreate extends BaseAction {
 
@@ -75,7 +75,7 @@ class ActionAssignCreate extends BaseAction {
 			Begin begin = business.element().getBeginWithProcess(process.getId());
 			work = create(application, process, begin);
 			updateWork(business, work, wi);
-			// 通过赋值调用的是不能被作为草稿删除的
+			// 할당으로 호출된 것은 초안으로 삭제할 수 없음
 			work.setDataChanged(true);
 			updateAttachment(business, effectivePerson, work, begin, wi);
 			emc.beginTransaction(Work.class);
@@ -104,7 +104,7 @@ class ActionAssignCreate extends BaseAction {
 		if (ListTools.isNotEmpty(wi.getAttachmentList())) {
 			EntityManagerContainer emc = business.entityManagerContainer();
 			emc.beginTransaction(Attachment.class);
-			// 这个attachmentList要手动初始化
+			// 이 attachmentList는 수동 초기화 필요
 			for (WiAttachment o : wi.getAttachmentList()) {
 				StorageMapping fromMapping = ThisApplication.context().storageMappings().get(Attachment.class,
 						o.getStorage());
@@ -214,7 +214,7 @@ class ActionAssignCreate extends BaseAction {
 	private Work create(Application application, Process process, Begin begin) {
 		Date now = new Date();
 		Work work = new Work();
-		// 标识工作数据未修改
+		// 업무 문서 데이터 미수정 표시
 		work.setDataChanged(false);
 		work.setWorkThroughManual(false);
 		work.setWorkCreateType(Work.WORKCREATETYPE_ASSIGN);

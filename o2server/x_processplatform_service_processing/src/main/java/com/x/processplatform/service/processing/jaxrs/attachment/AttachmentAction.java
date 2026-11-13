@@ -28,18 +28,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("attachment")
-@JaxrsDescribe("附件操作")
+@JaxrsDescribe("첨부파일 작업")
 public class AttachmentAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AttachmentAction.class);
 
-	@JaxrsMethodDescribe(value = "更新附件信息.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "첨부파일 정보 업데이트.", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -51,13 +51,13 @@ public class AttachmentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新附件文本.", action = ActionEditText.class)
+	@JaxrsMethodDescribe(value = "첨부파일 텍스트 업데이트.", action = ActionEditText.class)
 	@PUT
 	@Path("edit/{id}/text")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void exitText(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditText.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -69,13 +69,13 @@ public class AttachmentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定附件.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정 첨부파일 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -87,14 +87,14 @@ public class AttachmentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定work下的附件.", action = ActionDeleteWithWork.class)
+	@JaxrsMethodDescribe(value = "지정 work의 첨부파일 삭제.", action = ActionDeleteWithWork.class)
 	@DELETE
 	@Path("{id}/work/{workId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId) {
 		ActionResult<ActionDeleteWithWork.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,14 +106,14 @@ public class AttachmentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定work下的附件.", action = ActionDeleteWithWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "지정 work의 첨부파일 삭제.", action = ActionDeleteWithWorkCompleted.class)
 	@DELETE
 	@Path("{id}/workcompleted/{workCompletedId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteWithWorkCompleted(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workCompletedId") String workCompletedId) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workCompletedId") String workCompletedId) {
 		ActionResult<ActionDeleteWithWorkCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -125,13 +125,13 @@ public class AttachmentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "由指定的工作拷贝附件.", action = ActionCopyToWork.class)
+	@JaxrsMethodDescribe(value = "지정 업무 문서에서 첨부파일 복사.", action = ActionCopyToWork.class)
 	@POST
 	@Path("copy/work/{workId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void copyToWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId, JsonElement jsonElement) {
 		ActionResult<List<ActionCopyToWork.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,13 +143,13 @@ public class AttachmentAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "由指定的工作拷贝附件.", action = ActionCopyToWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "지정 업무 문서에서 첨부파일 복사.", action = ActionCopyToWorkCompleted.class)
 	@POST
 	@Path("copy/workcompleted/{workCompletedId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void copyToWorkCompleted(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						   @JaxrsParameterDescribe("工作标识") @PathParam("workCompletedId") String workCompletedId, JsonElement jsonElement) {
+						   @JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workCompletedId") String workCompletedId, JsonElement jsonElement) {
 		ActionResult<List<ActionCopyToWorkCompleted.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

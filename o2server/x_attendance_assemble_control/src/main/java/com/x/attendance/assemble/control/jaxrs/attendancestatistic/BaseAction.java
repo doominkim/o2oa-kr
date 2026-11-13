@@ -23,7 +23,7 @@ public class BaseAction extends StandardJaxrsAction {
 	protected AttendanceStatisticServiceAdv attendanceStatisticServiceAdv = new AttendanceStatisticServiceAdv();
 	protected AttendanceEmployeeConfigServiceAdv attendanceEmployeeConfigServiceAdv = new AttendanceEmployeeConfigServiceAdv();
 	
-	// 根据组织递归查询下级组织
+	// 조직 기준으로 하위 조직 재귀 조회
 	protected List<String> getUnitNameList( String unitName, List<String> unitNameList ) throws Exception {
 		if (unitNameList == null) {
 			unitNameList = new ArrayList<String>();
@@ -31,10 +31,10 @@ public class BaseAction extends StandardJaxrsAction {
 		if ( StringUtils.isNotEmpty( unitName ) && !unitNameList.contains(unitName.trim())) {
 			unitNameList.add(unitName.trim());
 
-			// 查询该组织的下级组织
+			// 해당 조직의 하위 조직 조회
 			List<String> unitList = null;
 			try {
-				// 对查询的unit进行解析，如果有下级组织的，全部解析出来
+				// 조회한 unit을 분석해 하위 조직이 있으면 모두 풀어냄
 				unitList = userManagerService.listSubUnitNameWithParent( unitName );
 			} catch (Exception e) {
 				throw e;
@@ -48,7 +48,7 @@ public class BaseAction extends StandardJaxrsAction {
 		return unitNameList;
 	}
 
-	// 根据顶层组织递归查询下级顶层组织经及顶层组织的顶级组织
+	// 최상위 조직으로 하위 최상위 조직 및 최상위 조직의 최고 조직 재귀 조회
 	protected List<String> getTopUnitNameList( String topUnitName, List<String> unitNameList, Boolean debugger )
 			throws Exception {
 		if (unitNameList == null) {
@@ -57,13 +57,13 @@ public class BaseAction extends StandardJaxrsAction {
 		if ( StringUtils.isNotEmpty( topUnitName ) && !unitNameList.contains(topUnitName.trim())) {
 			unitNameList.add( topUnitName.trim() );
 
-			// 查询该组织的下级组织
+			// 해당 조직의 하위 조직 조회
 			List<String> unitList = null;
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();) {
-				// 查询所有的Top组织
+				// 모든 Top 조직 조회
 				unitList = userManagerService.listSubUnitNameWithParent(topUnitName);
 				if ( unitList != null && unitList.size() > 0 ) {
-					logger.debug( debugger, ">>>>>>>>>>根据顶层组织名称["+topUnitName+"]查询到"+unitList.size()+"个顶级组织。");
+					logger.debug( debugger, ">>>>>>>>>>최상위 조직 이름["+topUnitName+"]으로 조회된"+unitList.size()+"개의 최상위 조직.");
 					for ( String unit : unitList) {
 						if (unitNameList.contains( unit )) {
 							unitNameList.add( unit );
@@ -71,7 +71,7 @@ public class BaseAction extends StandardJaxrsAction {
 						getUnitNameList( unit, unitNameList );
 					}
 				} else {
-					logger.debug( debugger, ">>>>>>>>>>根据顶层组织名称["+topUnitName+"]未查询到任何顶级组织。");
+					logger.debug( debugger, ">>>>>>>>>>최상위 조직 이름["+topUnitName+"]으로 조회된 최상위 조직이 없습니다.");
 				}
 			} catch (Exception e) {
 				throw e;
@@ -81,8 +81,8 @@ public class BaseAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 根据List<String> topUnitNameList, List<String> unitNameList
-	 * 查询所有符合查询范围所组织以及下级组织名称列表
+	 * List<String> topUnitNameList, List<String> unitNameList 기준
+	 * 조회 범위에 맞는 모든 조직 및 하위 조직 이름 목록 조회
 	 * 
 	 * @param topUnitNameList
 	 * @param unitNameList
@@ -95,15 +95,15 @@ public class BaseAction extends StandardJaxrsAction {
 		if (unitNameList == null) {
 			unitNameList = new ArrayList<String>();
 		}
-		// 先查询顶层组织所有的下属组织，全部加入List中
-		// 对查询的unit进行解析，如果有下级组织的，全部解析出来
+		// 먼저 최상위 조직의 모든 하위 조직을 조회해 List에 모두 추가
+		// 조회한 unit을 분석해 하위 조직이 있으면 모두 풀어냄
 		if (topUnitNameList != null && topUnitNameList.size() > 0) {
 			for (String topUnitName : topUnitNameList) {
-				// 再递归查询所有的下级顶层组织以及所有组织
+				// 모든 하위 최상위 조직과 모든 조직을 재귀 조회
 				getTopUnitNameList(topUnitName, unitNameList, debugger );
 			}
 		}
-		// 对查询的unit进行解析，如果有下级组织的，全部解析出来
+		// 조회한 unit을 분석해 하위 조직이 있으면 모두 풀어냄
 		if (unitNameList != null && unitNameList.size() > 0) {
 			for (String unitName : unitNameList) {
 				getUnitNameList(unitName, unitNameList);
@@ -113,7 +113,7 @@ public class BaseAction extends StandardJaxrsAction {
 	}
 	
 	/**
-	 * 获取不需要考勤的组织
+	 * 근태 제외 조직 조회
 	 * @return
 	 * @throws Exception 
 	 */
@@ -144,7 +144,7 @@ public class BaseAction extends StandardJaxrsAction {
 	}
 	
 	/**
-	 * 获取不需要考勤的人员
+	 * 근태 제외 사용자 조회
 	 * @return
 	 * @throws Exception 
 	 */

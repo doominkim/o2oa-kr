@@ -51,7 +51,7 @@ class ActionCreate extends BaseAction {
 	}
 
 	/**
-	 * 新建导入
+	 * 새로 가져오기
 	 * @param business
 	 * @param wi
 	 * @return
@@ -65,7 +65,7 @@ class ActionCreate extends BaseAction {
 			throw new ExceptionAppInfoExist(wi.getId());
 		}
 
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->start
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->start
 		AppInfoConfig appInfoConfig = business.entityManagerContainer().find(wi.getId(), AppInfoConfig.class);
 		if (null == appInfoConfig) {
 			appInfoConfig = new AppInfoConfig();
@@ -73,7 +73,7 @@ class ActionCreate extends BaseAction {
 			appInfoConfig.setConfig( wi.getConfig() );
 			persistObjects.add( appInfoConfig );
 		}
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->end
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->end
 
 		appInfo = WrapCms.inCopier.copy(wi);
 		appInfo.setAppName(this.idleAppInfoName(business, appInfo.getAppName(), appInfo.getId()));
@@ -121,7 +121,7 @@ class ActionCreate extends BaseAction {
 			List<AppDictItem> list = converter.disassemble(_o.getData());
 			for (AppDictItem o : list) {
 				o.setBundle(obj.getId());
-				/** 将数据字典和数据存放在同一个分区 */
+				/** 데이터 사전과 데이터를 같은 파티션에 저장 */
 				o.setDistributeFactor(obj.getDistributeFactor());
 				o.setAppId(obj.getAppId());
 				persistObjects.add(o);
@@ -136,7 +136,7 @@ class ActionCreate extends BaseAction {
 			wrapCategoryInfo.setAppId(appInfo.getId());
 			persistObjects.add( WrapCategoryInfo.inCopier.copy( wrapCategoryInfo ) );
 
-			//添加对CategoryExt的解析和持久化
+			//CategoryExt 파싱 및 영속화 추가
 			wrapCategoryExt = wrapCategoryInfo.getCategoryExt();
 			if( wrapCategoryExt != null ){
 				if (null != business.entityManagerContainer().find( wrapCategoryExt.getId(), CategoryExt.class )) {
@@ -155,16 +155,16 @@ class ActionCreate extends BaseAction {
 		business.entityManagerContainer().beginTransaction(AppDictItem.class);
 		business.entityManagerContainer().beginTransaction(CategoryInfo.class);
 		business.entityManagerContainer().beginTransaction(CategoryExt.class);
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->start
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->start
 		business.entityManagerContainer().beginTransaction(AppInfoConfig.class);
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->end
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->end
 
 		for (JpaObject o : persistObjects) {
 			business.entityManagerContainer().persist(o);
 		}
 		business.entityManagerContainer().commit();
 
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->start
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->start
 		CacheManager.notify(CategoryInfo.class);
 		CacheManager.notify(AppDictItem.class);
 		CacheManager.notify(AppDict.class);
@@ -172,7 +172,7 @@ class ActionCreate extends BaseAction {
 		CacheManager.notify(Script.class);
 		CacheManager.notify(AppInfo.class);
 		CacheManager.notify(AppInfoConfig.class);
-		//2020年1月16日 O2LEE 保存栏目信息对应的配置支持信息JSON ---->end
+		//2020년 1월 16일 O2LEE 게시판 정보에 대응하는 설정 지원 정보 JSON 저장 ---->end
 
 		return appInfo;
 	}

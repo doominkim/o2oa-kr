@@ -93,7 +93,7 @@ public class UpdateFile extends ActionBase {
 		if (dir_config.exists()) {
 			FileUtils.forceDelete(dir_config);
 		}
-		// 非windows设置解压文件权限
+		// windows가 아니면 압축 해제 파일 권한 설정
 		if (!SystemUtils.IS_OS_WINDOWS) {
 			Set<PosixFilePermission> permissions = PosixFilePermissions.fromString("rwxrwxrwx");
 			Files.walk(dir.toPath()).forEach(p -> {

@@ -25,18 +25,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("page")
-@JaxrsDescribe("页面")
+@JaxrsDescribe("페이지")
 public class PageAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PageAction.class);
 
-	@JaxrsMethodDescribe(value = "获取Page内容.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "Page 내용 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -48,13 +48,13 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Page内容Mobile.", action = ActionGetMobile.class)
+	@JaxrsMethodDescribe(value = "Page 내용 조회 Mobile.", action = ActionGetMobile.class)
 	@GET
 	@Path("{id}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGetMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -66,13 +66,13 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的Page.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 Page 목록.", action = ActionList.class)
 	@GET
 	@Path("list/portal/{portal}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void list(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("门户") @PathParam("portal") String portal) {
+			@JaxrsParameterDescribe("포털") @PathParam("portal") String portal) {
 		ActionResult<List<ActionList.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -84,14 +84,14 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的Page,其中Portal可以用name,alias和id标识,Page为在此Portal下的页面.", action = ActionGetWithPortal.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 Page 목록, Portal은 name, alias, id로 식별, Page는 이 Portal의 페이지.", action = ActionGetWithPortal.class)
 	@GET
 	@Path("{flag}/portal/{portalFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithPortal(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("门户标识") @PathParam("portalFlag") String portalFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("포털 식별자") @PathParam("portalFlag") String portalFlag) {
 		ActionResult<ActionGetWithPortal.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -103,14 +103,14 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的Page,其中Portal可以用name,alias和id标识,Page为在此Portal下的页面Mobile.", action = ActionGetWithPortalMobile.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 Page 목록, Portal은 name, alias, id로 식별, Page는 이 Portal의 페이지 Mobile.", action = ActionGetWithPortalMobile.class)
 	@GET
 	@Path("{flag}/portal/{portalFlag}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithPortalMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("门户标识") @PathParam("portalFlag") String portalFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("포털 식별자") @PathParam("portalFlag") String portalFlag) {
 		ActionResult<ActionGetWithPortalMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -122,13 +122,13 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取Page.", action = V2Get.class)
+	@JaxrsMethodDescribe(value = "Page 조회.", action = V2Get.class)
 	@GET
 	@Path("v2/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2Get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					  @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+					  @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<V2Get.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -140,13 +140,13 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取PageMobile.", action = V2GetMobile.class)
+	@JaxrsMethodDescribe(value = "PageMobile 조회.", action = V2GetMobile.class)
 	@GET
 	@Path("v2/{id}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2GetMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+							@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<V2GetMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -158,14 +158,14 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的Page,其中Portal可以用name,alias和id标识,Page为在此Portal下的页面.", action = V2GetWithPortal.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 Page 목록, Portal은 name, alias, id로 식별, Page는 이 Portal의 페이지.", action = V2GetWithPortal.class)
 	@GET
 	@Path("v2/{flag}/portal/{portalFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2GetWithPortal(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							  @JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-							  @JaxrsParameterDescribe("门户标识") @PathParam("portalFlag") String portalFlag) {
+							  @JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+							  @JaxrsParameterDescribe("포털 식별자") @PathParam("portalFlag") String portalFlag) {
 		ActionResult<V2GetWithPortal.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -177,14 +177,14 @@ public class PageAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示属于指定Portal的Page,其中Portal可以用name,alias和id标识,Page为在此Portal下的页面Mobile.", action = V2GetWithPortalMobile.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal에 속한 Page 목록, Portal은 name, alias, id로 식별, Page는 이 Portal의 페이지 Mobile.", action = V2GetWithPortalMobile.class)
 	@GET
 	@Path("v2/{flag}/portal/{portalFlag}/mobile")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void V2GetWithPortalMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-									@JaxrsParameterDescribe("门户标识") @PathParam("portalFlag") String portalFlag) {
+									@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+									@JaxrsParameterDescribe("포털 식별자") @PathParam("portalFlag") String portalFlag) {
 		ActionResult<V2GetWithPortalMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

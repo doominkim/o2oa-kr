@@ -21,7 +21,7 @@ abstract class BaseAction extends StandardJaxrsAction {
   public static class ScheduleValueWo extends GsonPropertyObject {
 
     private static final long serialVersionUID = 4498053097789932291L;
-    @FieldDescribe("排班数据，key 是人员 DN， value 是AttendanceV2GroupSchedule 对象列表.")
+    @FieldDescribe("교대 편성 데이터, key는 사용자 DN, value는 AttendanceV2GroupSchedule 객체 목록.")
     private Map<String, List<ScheduleWo>> scheduleValue;
 
     public Map<String, List<ScheduleWo>> getScheduleValue() {
@@ -42,7 +42,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         AttendanceV2GroupSchedule.class, ScheduleWo.class, null,
         JpaObject.FieldsInvisible);
 
-    @FieldDescribe("考勤组的班次对象")
+    @FieldDescribe("근태 그룹의 교대 객체")
     private AttendanceV2Shift shift;
 
     public AttendanceV2Shift getShift() {

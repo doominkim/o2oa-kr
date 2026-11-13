@@ -23,13 +23,13 @@ class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -4901521017475819615L;
 
-		@FieldDescribe("http协议")
+		@FieldDescribe("http 프로토콜")
 		private String httpProtocol;
 
-		@FieldDescribe("center服务器")
+		@FieldDescribe("center 서버")
 		private Center center;
 
-		@FieldDescribe("web服务器")
+		@FieldDescribe("web 서버")
 		private Web web;
 
 		private List<Application> applicationList;

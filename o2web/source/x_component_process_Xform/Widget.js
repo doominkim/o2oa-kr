@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Widget 门户的部件组件。
- * @o2cn 部件
+/** @class Widget 포털 위젯 컴포넌트.
+ * @o2cn 위젯
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var widget = this.form.get("fieldId"); //获取组件
- * //方法2
- * var widget = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var widget = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var widget = this.target; //컴포넌트 자체 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Portal}
@@ -18,29 +18,29 @@ MWF.xApplication.process.Xform.Widget = MWF.APPWidget =  new Class(
     Extends: MWF.APP$Module,
     options: {
         /**
-         * 部件的设计已经获取到，但还没有插入html及生成内部组件。
+         * 위젯 설계를 가져왔으나 아직 html 삽입 및 내부 컴포넌트 생성 전.
          * @event MWF.xApplication.process.Xform.Widget#beforeModulesLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 部件的设计已经获取到，已经插入html，组件json已经获取到，但未生成内部组件。
+         * 위젯 설계를 가져와 html을 삽입했고 컴포넌트 json도 가져왔으나 내부 컴포넌트는 아직 생성 전.
          * * @example
-         * //获取部件所有组件id
+         * //위젯의 모든 컴포넌트 id 가져오기
          * var moduleIdList = Object.keys(this.target.widgetData.json.moduleList);
          * @event MWF.xApplication.process.Xform.Widget#modulesLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 部件内部组件加载完成。
+         * 위젯 내부 컴포넌트 로드 완료.
          * @example
-         * //获取部件所有组件id
+         * //위젯의 모든 컴포넌트 id 가져오기
          * var moduleIdList = Object.keys(this.target.widgetData.json.moduleList);
-         * //获取部件所有组件
+         * //위젯의 모든 컴포넌트 가져오기
          * var moduleList = moduleIdList.map(function(id){
-         *     return this.form.get(id, widgetId); //widgetId为当前部件ID，布局组件有可能id冲突，通过widgetId来确定当前部件的组件
+         *     return this.form.get(id, widgetId); //widgetId는 현재 위젯 ID, 레이아웃 컴포넌트는 id가 충돌할 수 있어 widgetId로 현재 위젯의 컴포넌트를 특정
          * }.bind(this))
          * @event MWF.xApplication.process.Xform.Widget#afterModulesLoad
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "beforeModulesLoad", "modulesLoad", "afterModulesLoad"]
     },
@@ -66,8 +66,8 @@ MWF.xApplication.process.Xform.Widget = MWF.APPWidget =  new Class(
         }
     },
     /**
-     * @summary 当部件被设置为延迟加载，通过active方法激活
-     * @param {Function} callback 激活后的回调方法，另外已经激活过该方法还会被执行。
+     * @summary 위젯이 지연 로드로 설정된 경우 active 메서드로 활성화
+     * @param {Function} callback 활성화 후 콜백 메서드, 이미 활성화된 경우에도 실행됨.
      * @example
      * var widget = this.form.get("fieldId");
      * widget.active(function(){
@@ -82,8 +82,8 @@ MWF.xApplication.process.Xform.Widget = MWF.APPWidget =  new Class(
         }
     },
     /**
-     * @summary 重新加载部件
-     * @param callback {Function} 刷新后的回调.
+     * @summary 위젯 다시 로드
+     * @param callback {Function} 새로 고침 후 콜백.
      * @example
      * this.form.get("fieldId").reload()
      */
@@ -153,11 +153,11 @@ MWF.xApplication.process.Xform.Widget = MWF.APPWidget =  new Class(
 
             var cssText = this.widgetData.json.css.code;
 
-            //删除注释
+            //주석 삭제
             //cssText = cssText.replace(/\/\*[\s\S]*?\*\/\n|([^:]|^)\/\/.*\n$/g, '').replace(/\\n/, '');
 
-            cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 移除多行注释
-                .replace(/\\n/g, '');             // 移除\n
+            cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 여러 줄 주석 제거
+                .replace(/\\n/g, '');             // \n 제거
 
             cssText = this.form.parseCSS(cssText);
 
@@ -393,8 +393,8 @@ MWF.xApplication.process.Xform.Widget = MWF.APPWidget =  new Class(
         }
     },
     /**
-     * @summary 获取设计部件时设置的参数
-     * @return 设置的参数
+     * @summary 위젯 설계 시 설정한 파라미터 가져오기
+     * @return 설정된 인자
      * @example
      * var param = this.form.get("fieldId").getPageParamenters()
      */

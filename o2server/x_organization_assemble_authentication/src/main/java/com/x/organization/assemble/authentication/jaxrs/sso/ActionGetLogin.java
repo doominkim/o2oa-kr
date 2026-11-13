@@ -117,10 +117,10 @@ class ActionGetLogin extends BaseAction {
 
         static WrapCopier<Person, Wo> copier = WrapCopierFactory.wo(Person.class, Wo.class, null, Excludes);
 
-        @FieldDescribe("令牌")
+        @FieldDescribe("토큰")
         private String token;
 
-        @FieldDescribe("角色")
+        @FieldDescribe("역할")
         private List<String> roleList;
 
         public String getToken() {

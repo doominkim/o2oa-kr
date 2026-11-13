@@ -11,8 +11,8 @@ MWF.xApplication.Selector.PanFile = new Class({
         "hasLetter": false,
         "expand": false,
         "forceSearchInItem" : false,
-        "allowPersonFile": true, //显示个人文件
-        "allowUnitFile": true //显示企业文件
+        "allowPersonFile": true, //개인 파일 표시
+        "allowUnitFile": true //기업 파일 표시
     },
     setInitTitle: function(){
         this.setOptions({"title": MWF.xApplication.Selector.LP.selectPanFile});

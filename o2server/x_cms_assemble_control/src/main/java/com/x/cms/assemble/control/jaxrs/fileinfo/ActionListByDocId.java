@@ -64,8 +64,8 @@ public class ActionListByDocId extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 			FileInfoFactory fileInfoFactory = business.getFileInfoFactory();
-			List<String> ids = fileInfoFactory.listAttachmentByDocument(docId);// 获取指定文档的所有附件列表
-			List<FileInfo> fileInfoList = emc.list(FileInfo.class, ids);// 查询ID IN ids 的所有文件或者附件信息列表
+			List<String> ids = fileInfoFactory.listAttachmentByDocument(docId);// 지정 문서의 전체 첨부파일 목록 조회
+			List<FileInfo> fileInfoList = emc.list(FileInfo.class, ids);// ID IN ids인 모든 파일 또는 첨부파일 정보 목록 조회
 			List<String> identities = business.organization().identity().listWithPerson(effectivePerson);
 			List<String> units = business.organization().unit().listWithPerson(effectivePerson);
 			List<Wo> wos = new ArrayList<>();

@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Label 文本组件。
- * @o2cn 文本组件
+/** @class Label 텍스트 컴포넌트.
+ * @o2cn 텍스트 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var label = this.form.get("name"); //获取组件
- * //方法2
- * var label = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var label = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var label = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -76,16 +76,16 @@ MWF.xApplication.process.Xform.Label = MWF.APPLabel =  new Class(
             //this.node.set("text", value || "");
         }
     },
-    /**当参数为Promise的时候，请参考文档: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|使用Promise处理表单异步}<br/>
-     * @summary 为组件设置文本，该文本不会被保存到后台。
+    /**인자가 Promise일 때는 문서 참고: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|Promise로 양식 비동기 처리}<br/>
+     * @summary 컴포넌트에 텍스트 설정, 이 텍스트는 서버에 저장되지 않음.
      * @param text{String|Promise} .
      * @example
-     *  this.form.get("fieldId").setText("test"); //赋文本值
+     *  this.form.get("fieldId").setText("test"); //텍스트 값 설정
      * @example
-     *  //使用Promise
+     *  //Promise 사용
      *  var field = this.form.get("fieldId");
-     *  var dict = new this.Dict("test"); //test为数据字典名称
-     *  var promise = dict.get("tools", true); //异步使用数据字典的get方法时返回Promise，参数true表示异步
+     *  var dict = new this.Dict("test"); //test는 데이터 사전 이름
+     *  var promise = dict.get("tools", true); //데이터 사전 get 메서드를 비동기로 사용하면 Promise 반환, 인자 true는 비동기를 의미
      *  field.setText( promise );
      */
     setText: function(text){

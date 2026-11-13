@@ -1101,7 +1101,7 @@ MWF.xApplication.process.Xform.AttachmentController = new Class({
                 att.data.objectSecurityClearance = security.toInt();
 
                 o2.Actions.get("x_processplatform_assemble_surface").configAttachment(att.data.id, this.module.form.businessData.work.id, att.data, function () {
-                    //刷新附件权限，以后要加一个刷新附件的功能
+                    //첨부파일 권한 새로고침, 추후 첨부파일 새로고침 기능 추가 필요
                     o2.Actions.load("x_processplatform_assemble_surface").AttachmentAction.getWithWorkOrWorkCompleted(att.data.id, this.module.form.businessData.work.id, function (json) {
                         var attachment = this.getAttachmentById( att.data.id );
                         if( attachment ){
@@ -1176,7 +1176,7 @@ MWF.xApplication.process.Xform.AttachmentController = new Class({
                 att.data.controllerIdentityList = controllerIdentityList;
 
                 o2.Actions.get("x_processplatform_assemble_surface").configAttachment(att.data.id, this.module.form.businessData.work.id, att.data, function () {
-                    //刷新附件权限，以后要加一个刷新附件的功能
+                    //첨부파일 권한 새로고침, 추후 첨부파일 새로고침 기능 추가 필요
                     o2.Actions.load("x_processplatform_assemble_surface").AttachmentAction.getWithWorkOrWorkCompleted(att.data.id, this.module.form.businessData.work.id, function (json) {
                         var attachment = this.getAttachmentById( att.data.id );
                         if( attachment ){
@@ -1530,14 +1530,14 @@ MWF.xApplication.process.Xform.AttachmentController = new Class({
 });
 
 
-/** @class Attachment 附件组件。
- * @o2cn 附件
+/** @class Attachment 첨부파일 컴포넌트.
+ * @o2cn 첨부파일
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var attachment = this.form.get("name"); //获取组件
- * //方法2
- * var attachment = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var attachment = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var attachment = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -1553,160 +1553,160 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
          * @ignore
          */
         "moduleEvents": [
-            /**附件组件（this.target）加载前触发。
+            /**첨부파일 컴포넌트(this.target) 로드 전 발생.
              * @event MWF.xApplication.process.Xform.Attachment#queryLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "queryLoad",
 
-            /**附件容器（this.target.attachmentController）初始化之前触发，可以通过this.event获取附件容器的选项。
+            /**첨부파일 컨테이너(this.target.attachmentController) 초기화 전 발생, this.event로 첨부파일 컨테이너 옵션을 가져올 수 있음.
              * @event MWF.xApplication.process.Xform.Attachment#queryLoadController
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "queryLoadController",
 
-            /**附件容器（this.target.attachmentController）初始化之后，加载之前触发。
+            /**첨부파일 컨테이너(this.target.attachmentController) 초기화 후 로드 전 발생.
              * @event MWF.xApplication.process.Xform.Attachment#loadController
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "loadController",
 
-            /**附件容器（this.target.attachmentController）加载之后触发，但这时还未加载具体的附件。
+            /**첨부파일 컨테이너(this.target.attachmentController) 로드 후 발생, 이 시점에는 개별 첨부파일이 아직 로드되지 않음.
              * @event MWF.xApplication.process.Xform.Attachment#postLoadController
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "postLoadController",
 
             /**
-             * 附件组件（this.target）加载完成后触发。这时候附件容器和每个附件都已加载完成。
+             * 첨부파일 컴포넌트(this.target) 로드 완료 후 발생. 이 시점에는 첨부파일 컨테이너와 각 첨부파일이 모두 로드됨.
              * @event MWF.xApplication.process.Xform.Attachment#load
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "load",
 
             /**
-             * 附件组件（this.target）加载完成后触发。这时候附件容器和每个附件都已加载完成。
+             * 첨부파일 컴포넌트(this.target) 로드 완료 후 발생. 이 시점에는 첨부파일 컨테이너와 각 첨부파일이 모두 로드됨.
              * @event MWF.xApplication.process.Xform.Attachment#afterLoad
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "afterLoad",
 
             /**
-             * 加载每个附件前触发。本事件中可以通过this.event获取加载的附件对象
+             * 각 첨부파일 로드 전 발생. 이 이벤트에서 this.event로 로드할 첨부파일 객체를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#beforeLoadAttachment
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "beforeLoadAttachment",
 
             /**
-             * 加载每个附件后触发。本事件中可以通过this.event获取加载的附件对象
+             * 각 첨부파일 로드 후 발생. 이 이벤트에서 this.event로 로드한 첨부파일 객체를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#loadAttachment
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "loadAttachment",
 
             /**
-             * 附件上传前触发。本事件中可以通过this.event获取上传的文件数组
+             * 첨부파일 업로드 전 발생. 이 이벤트에서 this.event로 업로드할 파일 배열을 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#beforeUpload
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "beforeUpload",
 
             /**
-             * 每个附件上传后触发。本事件中可以通过this.event获取上传附件的数据
+             * 각 첨부파일 업로드 후 발생. 이 이벤트에서 this.event로 업로드한 첨부파일 데이터를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#upload
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "upload",
 
             /**
-             * 多选的附件上传完成后触发。this.event为本次上传的所有附件
+             * 여러 첨부파일 업로드 완료 후 발생. this.event는 이번에 업로드한 모든 첨부파일
              * @event MWF.xApplication.process.Xform.Attachment#afterUpload
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "afterUpload",
 
             /**
-             * 附件替换前触发。本事件中可以通过this.event获取上传的文件数组
+             * 첨부파일 교체 전 발생. 이 이벤트에서 this.event로 업로드할 파일 배열을 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#beforeReplace
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "beforeReplace",
 
             /**
-             * 每个附件替换后触发。本事件中可以通过this.event获取上传附件的数据
+             * 각 첨부파일 교체 후 발생. 이 이벤트에서 this.event로 업로드한 첨부파일 데이터를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#replace
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "replace",
 
             /**
-             * 多选的附件替换完成后触发。this.event为当前附件组件的附件列表
+             * 여러 첨부파일 교체 완료 후 발생. this.event는 현재 첨부파일 컴포넌트의 첨부파일 목록
              * @event MWF.xApplication.process.Xform.Attachment#afterReplace
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "afterReplace",
 
             /**
-             * 从网盘拷贝之前触发。本事件中可以通过this.event获取拷贝的附件数组
+             * 네트워크 드라이브에서 복사하기 전에 발생. 이 이벤트에서 this.event로 복사할 첨부파일 배열을 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#copy
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "copy",
 
             /**
-             * 从网盘拷贝后触发。this.event为本次拷贝的附件对象
+             * 네트워크 드라이브에서 복사한 후 발생. this.event는 이번에 복사한 첨부파일 객체
              * @event MWF.xApplication.process.Xform.Attachment#afterUpload
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "afterCopy",
 
             /**
-             * 删除附件前触发。本事件中可以通过this.event获取被删附件的数据
+             * 첨부파일 삭제 전에 발생. 이 이벤트에서 this.event로 삭제되는 첨부파일 데이터를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#delete
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "delete",
 
             /**
-             * 删除附件后触发。本事件中可以通过this.event获取被删附件的数据
+             * 첨부파일 삭제 후에 발생. 이 이벤트에서 this.event로 삭제된 첨부파일 데이터를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#afterDelete
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "afterDelete",
 
             /**
-             * 附件有变化的时候会被触发，包括上传、替换、删除、排序
+             * 첨부파일이 변경될 때 발생(업로드, 교체, 삭제, 정렬 포함)
              * @event MWF.xApplication.process.Xform.Attachment#change
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "change",
 
             /**
-             * 下载附件后触发。本事件中可以通过this.event获取被下载附件对象
+             * 첨부파일 다운로드 후 발생. 이 이벤트에서 this.event로 다운로드한 첨부파일 객체를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#download
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "download",
 
             /**
-             * 打开附件后触发。本事件中可以通过this.event获取被打开附件对象
+             * 첨부파일을 연 후 발생. 이 이벤트에서 this.event로 연 첨부파일 객체를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#open
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "open",
 
             /**
-             * 选中附件后触发。本事件中可以通过this.event获取被选中的附件对象
+             * 첨부파일 선택 후 발생. 이 이벤트에서 this.event로 선택된 첨부파일 객체를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#select
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "select",
 
             /**
-             * 取消选中附件后触发。本事件中可以通过this.event获取被取消选中的附件对象
+             * 첨부파일 선택 해제 후 발생. 이 이벤트에서 this.event로 선택 해제된 첨부파일 객체를 가져올 수 있음
              * @event MWF.xApplication.process.Xform.Attachment#unselect
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "unselect"
         ]
@@ -1734,14 +1734,14 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
 
 
     },
-    /** @summary 重新加载附件。会触发queryLoadController、loadController和postLoadController事件。
+    /** @summary 첨부파일 다시 로드. queryLoadController, loadController, postLoadController 이벤트가 발생함.
      * @memberof MWF.xApplication.process.Xform.Attachment
-     * @param refresh {Boolean} 是否重新从后台获取附件列表.
-     * @param callback {Function} 刷新后的回调.
+     * @param refresh {Boolean} 서버에서 첨부파일 목록을 다시 가져올지 여부.
+     * @param callback {Function} 새로 고침 후 콜백.
      * @example
-     *  this.form.get("fieldId").reload(); //重新加载
+     *  this.form.get("fieldId").reload(); //다시 로드
      * @example
-     *  this.form.get("fieldId").reload( true ); //重新从后台获取附件并重新加载
+     *  this.form.get("fieldId").reload( true ); //서버에서 첨부파일을 다시 가져와 다시 로드
      */
     reload: function( refresh, callback ){
         debugger;
@@ -1836,12 +1836,12 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
         this.fireEvent("queryLoadController", [options]);
 
         /**
-         * @summary 附件容器.
+         * @summary 첨부파일 컨테이너.
          * @member {MWF.xApplication.process.Xform.AttachmentController}
          * @example
-         * var attachmentController = this.form.get("fieldId").attachmentController; //获取附件容器
-         * var attachmentList = attachmentController.attachments; //获取所有的附件
-         * var attachmentData = attachmentList[0].data; //获取第一个附件的数据
+         * var attachmentController = this.form.get("fieldId").attachmentController; //첨부파일 컨테이너 가져오기
+         * var attachmentList = attachmentController.attachments; //모든 첨부파일 가져오기
+         * var attachmentData = attachmentList[0].data; //첫 번째 첨부파일 데이터 가져오기
          */
 
         this.attachmentController = new MWF.xApplication.process.Xform.AttachmentController(this.node, this, options);
@@ -1930,10 +1930,10 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
         }
     },
     /**
-     * @summary 获取当前组件所有附件的标题.如果没有附件返回null
+     * @summary 현재 컴포넌트의 모든 첨부파일 제목 조회. 첨부파일이 없으면 null 반환
      * @example
      * var getAttachmentNames = this.form.get("name").getData();
-     * @return {StringArray|Null} 附件标题.
+     * @return {StringArray|Null} 첨부파일 제목.
      */
     getData: function () {
         return (this.attachmentController) ? this.attachmentController.getAttachmentNames() : null;
@@ -2049,7 +2049,7 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
             true,
             accept,
             size,
-            function (o) { //错误的回调
+            function (o) { //오류 콜백
                 if (o.messageId && this.attachmentController.messageItemList) {
                     var message = this.attachmentController.messageItemList[o.messageId];
                     if( message && message.node )message.node.destroy();
@@ -2403,7 +2403,7 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
             true,
             accept,
             size,
-            function (o) { //错误的回调
+            function (o) { //오류 콜백
                 if (o.messageId && this.attachmentController.messageItemList) {
                     var message = this.attachmentController.messageItemList[o.messageId];
                     if( message && message.node )message.node.destroy();
@@ -2469,7 +2469,7 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
             return true;
         }
     },
-    //小程序文件是否支持打开
+    //미니프로그램 파일 열기 지원 여부
     checkMiniProgramFile: function(ext) {
         var exts = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "pdf"];
         for(var i = 0; i < exts.length; i++){
@@ -2672,21 +2672,21 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
         return data;
     },
     /**
-     * @summary 为组件重新设置附件，该附件必须已经上传。
+     * @summary 컴포넌트에 첨부파일을 다시 설정. 해당 첨부파일은 이미 업로드되어 있어야 함.
      *  @param data {Array}.
      *  <pre><code class='language-js'>[{
-     *     "id": "56c4e86f-a4c8-4cc2-a150-1a0d2c5febcb",   //附件ID
-     *     "name": "133203a2-92e6-4653-9954-161b72ddb7f9.png", //附件名称
-     *     "extension": "png",                             //附件扩展名
-     *     "length": 43864,                                //附件大小
-     *     "person": "xx@huqi@P",                          //附件上传人
-     *     "lastUpdateTime": "2018-09-27 15:50:34",        //最后的修改时间
-     *     "lastUpdatePerson": "xx@huqi@P",                //最后的修改人
-     *     "activity": "e31ad938-c495-45a6-8d77-b8a9b61a165b", //附件上传的活动ID
-     *     "activityName": "申请人",                           //附件上传的活动名称
-     *     "activityType": "manual",                           //附件上传的活动类型
-     *     "site": "$mediaOpinion",                        //附件存储位置（一般用于区分附件在哪个表单元素中显示）
-     *     "type": "image/png",                             //附件类型（contentType）
+     *     "id": "56c4e86f-a4c8-4cc2-a150-1a0d2c5febcb",   //첨부파일 ID
+     *     "name": "133203a2-92e6-4653-9954-161b72ddb7f9.png", //첨부파일 이름
+     *     "extension": "png",                             //첨부파일 확장자
+     *     "length": 43864,                                //첨부파일 크기
+     *     "person": "xx@huqi@P",                          //첨부파일 업로드한 사람
+     *     "lastUpdateTime": "2018-09-27 15:50:34",        //최종 수정 시간
+     *     "lastUpdatePerson": "xx@huqi@P",                //최종 수정자
+     *     "activity": "e31ad938-c495-45a6-8d77-b8a9b61a165b", //첨부파일을 업로드한 활동 ID
+     *     "activityName": "신청자",                           //첨부파일을 업로드한 활동 이름
+     *     "activityType": "manual",                           //첨부파일을 업로드한 활동 유형
+     *     "site": "$mediaOpinion",                        //첨부파일 저장 위치(일반적으로 첨부파일이 어느 양식 요소에 표시되는지 구분하는 데 사용)
+     *     "type": "image/png",                             //첨부파일 유형(contentType)
      *     "control": {}
      * }]</code></pre>
      */
@@ -2863,7 +2863,7 @@ MWF.xApplication.process.Xform.AttachmenPreview = new Class({
 
         var extension = this.att.data.extension;
         if(extension === "ofd"){
-            //ofd预览暂时屏蔽ie，等兼容性改好了开启
+            //ofd 미리보기는 일시적으로 ie에서 차단, 호환성 수정 후 활성화
             if(Browser.name!=="ie"){
                 this.previewOfd();
             }
@@ -2906,7 +2906,7 @@ MWF.xApplication.process.Xform.AttachmenPreview = new Class({
         }
     },
     previewZip: function () {
-        //zip压缩包预览
+        //zip 압축 파일 미리보기
         var _self = this;
         var zipViewNode = new Element("div",{"text":"loadding..."});
         o2.load(["../o2_lib/jszip/jszip.min.js", "../o2_lib/jszip/jszip-utils.min.js"], function () {

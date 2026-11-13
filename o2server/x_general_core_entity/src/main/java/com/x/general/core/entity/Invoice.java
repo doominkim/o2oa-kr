@@ -28,7 +28,7 @@ import org.apache.openjpa.persistence.Persistent;
 import org.apache.openjpa.persistence.jdbc.Index;
 import org.apache.openjpa.persistence.jdbc.Strategy;
 
-@Schema(name = "Invoice", description = "电子发票.")
+@Schema(name = "Invoice", description = "전자 세금계산서.")
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Invoice.table, uniqueConstraints = {
@@ -55,7 +55,7 @@ public class Invoice extends StorageObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -166,208 +166,208 @@ public class Invoice extends StorageObject {
 	}
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("上传用户.")
+	@FieldDescribe("업로드 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("发票文件名称.")
+	@FieldDescribe("세금계산서 파일 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String name;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+	@FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true)
 	private String extension;
 
 	public static final String storage_FIELDNAME = "storage";
-	@FieldDescribe("存储器的名称,也就是多个存放节点的名字.")
+	@FieldDescribe("스토리지 이름, 즉 여러 저장 노드의 이름.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + storage_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	private String storage;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String deepPath_FIELDNAME = "deepPath";
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + deepPath_FIELDNAME)
 	private Boolean deepPath;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("发票抬头.")
+	@FieldDescribe("세금계산서 명의.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String code_FIELDNAME = "code";
-	@FieldDescribe("发票代码.")
+	@FieldDescribe("세금계산서 코드.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + code_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String code;
 
 	public static final String number_FIELDNAME = "number";
-	@FieldDescribe("发票号码.")
+	@FieldDescribe("세금계산서 번호.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + number_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String number;
 
 	public static final String date_FIELDNAME = "date";
-	@FieldDescribe("开票日期，发票上的日期.")
+	@FieldDescribe("발행일(세금계산서상의 날짜).")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + date_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String date;
 
 	public static final String invoiceDate_FIELDNAME = "invoiceDate";
-	@FieldDescribe("开票日期，时间格式")
+	@FieldDescribe("발행일(시간 형식)")
 	@Column(name = ColumnNamePrefix + invoiceDate_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date invoiceDate;
 
 	public static final String amount_FIELDNAME = "amount";
-	@FieldDescribe("未税金额.")
+	@FieldDescribe("세전 금액.")
 	@Column(name = ColumnNamePrefix + amount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double amount;
 
 	public static final String taxAmount_FIELDNAME = "taxAmount";
-	@FieldDescribe("税费.")
+	@FieldDescribe("세액.")
 	@Column(name = ColumnNamePrefix + taxAmount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double taxAmount;
 
 	public static final String totalAmountString_FIELDNAME = "totalAmountString";
-	@FieldDescribe("总金额(大写).")
+	@FieldDescribe("총금액(한글 표기).")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + totalAmountString_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String totalAmountString;
 
 	public static final String totalAmount_FIELDNAME = "totalAmount";
-	@FieldDescribe("总金额.")
+	@FieldDescribe("총금액.")
 	@Column(name = ColumnNamePrefix + totalAmount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double totalAmount;
 
 	public static final String buyerName_FIELDNAME = "buyerName";
-	@FieldDescribe("购买方名称.")
+	@FieldDescribe("구매자 이름.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + buyerName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String buyerName;
 
 	public static final String buyerCode_FIELDNAME = "buyerCode";
-	@FieldDescribe("购买方纳税人识别号.")
+	@FieldDescribe("구매자 납세자 식별번호.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + buyerCode_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String buyerCode;
 
 	public static final String buyerAddress_FIELDNAME = "buyerAddress";
-	@FieldDescribe("购买方地址.")
+	@FieldDescribe("구매자 주소.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + buyerAddress_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String buyerAddress;
 
 	public static final String buyerAccount_FIELDNAME = "buyerAccount";
-	@FieldDescribe("购买方开户行及账号.")
+	@FieldDescribe("구매자 거래 은행 및 계좌번호.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + buyerAccount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String buyerAccount;
 
 	public static final String sellerName_FIELDNAME = "sellerName";
-	@FieldDescribe("销售方名称.")
+	@FieldDescribe("판매자 이름.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sellerName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sellerName;
 
 	public static final String sellerCode_FIELDNAME = "sellerCode";
-	@FieldDescribe("销售方纳税人识别号.")
+	@FieldDescribe("판매자 납세자 식별번호.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + sellerCode_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sellerCode;
 
 	public static final String sellerAddress_FIELDNAME = "sellerAddress";
-	@FieldDescribe("销售方地址.")
+	@FieldDescribe("판매자 주소.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sellerAddress_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sellerAddress;
 
 	public static final String sellerAccount_FIELDNAME = "sellerAccount";
-	@FieldDescribe("销售方开户行及账号.")
+	@FieldDescribe("판매자 거래 은행 및 계좌번호.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sellerAccount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sellerAccount;
 
 	public static final String drawer_FIELDNAME = "drawer";
-	@FieldDescribe("开票人.")
+	@FieldDescribe("발행자.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + drawer_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String drawer;
 
 	public static final String rider_FIELDNAME = "rider";
-	@FieldDescribe("乘车人.")
+	@FieldDescribe("승차자.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + rider_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String rider;
 
 	public static final String startStation_FIELDNAME = "startStation";
-	@FieldDescribe("起点站.")
+	@FieldDescribe("출발역.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + startStation_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String startStation;
 
 	public static final String endStation_FIELDNAME = "endStation";
-	@FieldDescribe("终点站.")
+	@FieldDescribe("도착역.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + endStation_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String endStation;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("发票类型.")
+	@FieldDescribe("세금계산서 유형.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String type;
 
 	public static final String detail_FIELDNAME = "detail";
-	@FieldDescribe("开票项目.")
+	@FieldDescribe("발행 항목.")
 	@Column(length = 500, name = ColumnNamePrefix + detail_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String detail;
 
 	public static final String remark_FIELDNAME = "remark";
-	@FieldDescribe("备注.")
+	@FieldDescribe("비고.")
 	@Column(length = 500, name = ColumnNamePrefix + remark_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String remark;
 
 	public static final String applyStatus_FIELDNAME = "applyStatus";
-	@FieldDescribe("报销状态.")
+	@FieldDescribe("정산 상태.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + applyStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String applyStatus;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + properties_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private InvoiceProperties properties;
 
-	@FieldDescribe("明细记录.")
+	@FieldDescribe("상세 기록.")
 	@Transient
 	private List<InvoiceDetail> detailList;
 

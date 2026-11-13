@@ -8,6 +8,6 @@ public class ExceptionDateEndBeforeStartError extends PromptException {
 	private static final long serialVersionUID = 5464536178018732958L;
 
 	public ExceptionDateEndBeforeStartError() {
-		super(  "开始日期不能大于结束日期。");
+		super(  "시작 날짜는 종료 날짜보다 늦을 수 없습니다.");
 	}
 }

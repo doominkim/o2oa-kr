@@ -71,13 +71,13 @@ public class ActionQueryListDocumentData extends BaseAction {
 	}
 
 	public static class Wo extends GsonPropertyObject {
-		@FieldDescribe( "文档ID." )
+		@FieldDescribe( "문서ID." )
 		private String docId;
 
-		@FieldDescribe( "作为输出的CMS文档数据对象." )
+		@FieldDescribe( "출력용 CMS 문서 데이터 객체." )
 		private WoDocument document;
 
-		@FieldDescribe( "文档所有数据信息." )
+		@FieldDescribe( "문서 전체 데이터 정보." )
 		private Data data;
 
 		public String getDocId() {
@@ -117,7 +117,7 @@ public class ActionQueryListDocumentData extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe( "文档id" )
+		@FieldDescribe( "문서id" )
 		private List<String> docIds = new ArrayList<>();
 
 		public List<String> getDocIds() {

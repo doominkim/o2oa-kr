@@ -20,7 +20,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceV2GroupScheduleConfig", description = "考勤组排班配置数据.")
+@Schema(name = "AttendanceV2GroupScheduleConfig", description = "근태 그룹 근무 배정 설정 데이터.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2GroupScheduleConfig.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceV2GroupScheduleConfig.table
@@ -42,7 +42,7 @@ public class AttendanceV2GroupScheduleConfig  extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -51,27 +51,27 @@ public class AttendanceV2GroupScheduleConfig  extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String groupId_FIELDNAME = "groupId";
-	@FieldDescribe("考勤组id.")
+	@FieldDescribe("근태 그룹 id.")
 	@Column(length = length_64B, name = ColumnNamePrefix + groupId_FIELDNAME)
   @CheckPersist(allowEmpty = false)
 	private String groupId;
  
 
   public static final String scheduleConfigJson_FIELDNAME = "scheduleConfigJson";
-  @FieldDescribe("配置 json 字符串")
+  @FieldDescribe("설정 json 문자열")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
   @Column(length = JpaObject.length_128K, name = ColumnNamePrefix + scheduleConfigJson_FIELDNAME)

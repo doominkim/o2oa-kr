@@ -24,11 +24,11 @@ import com.x.bbs.entity.BBSSubjectInfo;
 import com.x.bbs.entity.BBSSubjectInfo_;
 
 /**
- * 类   名：BBSSubjectInfoFactory<br/>
- * 实体类：BBSSubjectInfo<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSSubjectInfoFactory<br/>
+ * 엔티티 클래스: BBSSubjectInfo<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
 **/
 public class BBSSubjectInfoFactory extends AbstractFactory {
 
@@ -36,12 +36,12 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe( "获取指定Id的BBSSubjectInfo实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSSubjectInfo 엔티티 정보 객체 조회" )
 	public BBSSubjectInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSSubjectInfo.class, ExceptionWhen.none );
 	}
 
-	//@MethodDescribe( "列示指定Id的BBSSubjectInfo实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSSubjectInfo 엔티티 정보 목록 조회" )
 	public List<BBSSubjectInfo> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSSubjectInfo>();
@@ -54,7 +54,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块信息查询所有需要展现的所有置顶主题列表" )
+	//@MethodDescribe( "게시판 정보로 표시할 전체 상단 고정 주제 목록 조회" )
 	public List<String> listAllTopSubject( String forumId, String mainSectionId, String sectionId, String creatorName, Date startTime , Date endTime  ) throws Exception {
 		if( forumId == null || forumId.isEmpty() ){
 			throw new Exception( "forumId is null!" );
@@ -89,7 +89,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 			top_or = top_toforum_or;
 		}
 
-		if( StringUtils.isNotEmpty( mainSectionId ) ){//在指定的主版块中的所有置顶主题
+		if( StringUtils.isNotEmpty( mainSectionId ) ){//지정 주 게시판의 전체 상단 고정 주제
 			top_tomainsection_or = cb.equal( root.get( BBSSubjectInfo_.mainSectionId ), mainSectionId );
 			top_tomainsection_or = cb.and( top_tomainsection_or, cb.isTrue( root.get( BBSSubjectInfo_.topToMainSection )) );
 			if( top_or != null ){
@@ -99,7 +99,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 			}
 		}
 
-		if( StringUtils.isNotEmpty( sectionId ) ){//在指定的版块中的所有置顶主题
+		if( StringUtils.isNotEmpty( sectionId ) ){//지정 게시판의 전체 상단 고정 주제
 			top_tosection_or = cb.equal( root.get( BBSSubjectInfo_.sectionId ), sectionId );
 			top_tosection_or = cb.and( top_tosection_or, cb.isTrue( root.get( BBSSubjectInfo_.topToSection )) );
 			if( top_or != null ){
@@ -117,7 +117,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块信息查询所有需要展现的所有置顶主题列表" )
+	//@MethodDescribe( "게시판 정보로 표시할 전체 상단 고정 주제 목록 조회" )
 	public List<String> listTopSubjectByType( String forumId, String mainSectionId, String sectionId,String subjectType, String creatorName, Date startTime , Date endTime  ) throws Exception {
 		if( forumId == null || forumId.isEmpty() ){
 			throw new Exception( "forumId is null!" );
@@ -156,7 +156,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 			top_or = top_toforum_or;
 		}
 
-		if( StringUtils.isNotEmpty( mainSectionId ) ){//在指定的主版块中的所有置顶主题
+		if( StringUtils.isNotEmpty( mainSectionId ) ){//지정 주 게시판의 전체 상단 고정 주제
 			top_tomainsection_or = cb.equal( root.get( BBSSubjectInfo_.mainSectionId ), mainSectionId );
 			top_tomainsection_or = cb.and( top_tomainsection_or, cb.isTrue( root.get( BBSSubjectInfo_.topToMainSection )) );
 			if( top_or != null ){
@@ -166,7 +166,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 			}
 		}
 
-		if( StringUtils.isNotEmpty( sectionId ) ){//在指定的版块中的所有置顶主题
+		if( StringUtils.isNotEmpty( sectionId ) ){//지정 게시판의 전체 상단 고정 주제
 			top_tosection_or = cb.equal( root.get( BBSSubjectInfo_.sectionId ), sectionId );
 			top_tosection_or = cb.and( top_tosection_or, cb.isTrue( root.get( BBSSubjectInfo_.topToSection )) );
 			if( top_or != null ){
@@ -184,7 +184,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块信息查询论坛内主题数量" )
+	//@MethodDescribe( "게시판 정보로 포럼 내 주제 수 조회" )
 	public Long countByForumId( String forumId, Boolean withTopSubject ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -202,7 +202,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块信息查询论坛内主题列表" )
+	//@MethodDescribe( "게시판 정보로 포럼 내 주제 목록 조회" )
 	public List<BBSSubjectInfo> listByForumId( String forumId, Boolean withTopSubject ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -219,7 +219,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块信息查询版块内主题数量，包括子版块内的主题数量" )
+	//@MethodDescribe( "게시판 정보로 게시판 내 주제 수 조회, 하위 게시판 내 주제 수 포함" )
 	public Long countByMainAndSubSectionId( String sectionId, Boolean withTopSubject ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -240,7 +240,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块ID查询所有主题列表，包括子版块内的主题" )
+	//@MethodDescribe( "게시판 ID로 전체 주제 목록 조회, 하위 게시판 내 주제 포함" )
 	public List<BBSSubjectInfo> listByMainAndSubSectionId( String sectionId, Boolean withTopSubject ) throws Exception {
 		if( sectionId == null || sectionId.isEmpty() ){
 			throw new Exception( "sectionId is null!" );
@@ -264,9 +264,9 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据版块ID查询所有主题ID列表，包括子版块内的主题
+	 * 게시판 ID로 전체 주제 ID 목록 조회, 하위 게시판 내 주제 포함
 	 * @param sectionId
-	 * @param withTopSubject 是否包括置顶主题
+	 * @param withTopSubject 상단 고정 주제 포함 여부
 	 * @return
 	 * @throws Exception
 	 */
@@ -293,7 +293,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块ID查询所有主题数量，不包括子版块内的主题" )
+	//@MethodDescribe( "게시판 ID로 전체 주제 수 조회, 하위 게시판 내 주제 제외" )
 	public Long countSubjectIdsBySection( String sectionId ) throws Exception {
 		if( sectionId == null || sectionId.isEmpty() ){
 			throw new Exception( "sectionId is null!" );
@@ -307,7 +307,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块ID查询所有主题列表，不包括子版块内的主题" )
+	//@MethodDescribe( "게시판 ID로 전체 주제 목록 조회, 하위 게시판 내 주제 제외" )
 	public List<BBSSubjectInfo> listSubjectBySection( String sectionId ) throws Exception {
 		if( sectionId == null || sectionId.isEmpty() ){
 			throw new Exception( "sectionId is null!" );
@@ -321,7 +321,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(100).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块ID查询所有主题列表，不包括子版块内的主题" )
+	//@MethodDescribe( "게시판 ID로 전체 주제 목록 조회, 하위 게시판 내 주제 제외" )
 	public List<String> listSubjectIdsBySection( String sectionId, Integer maxResults ) throws Exception {
 		if( sectionId == null || sectionId.isEmpty() ){
 			throw new Exception( "sectionId is null!" );
@@ -339,7 +339,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		}
 	}
 
-	//@MethodDescribe( "根据版块ID, 主版块ID，版块ID，创建者姓名查询符合要求所有主题列表，不包括子版块内的主题数量" )
+	//@MethodDescribe( "게시판 ID, 주 게시판 ID, 게시판 ID, 작성자 이름으로 조건에 맞는 전체 주제 목록 조회, 하위 게시판 내 주제 수 제외" )
 	public Long countSubjectInSectionForPage(String searchTitle, String forumId, String mainSectionId, String sectionId, String creatorName, Boolean needPicture, Boolean isTopSubject, List<String> viewSectionIds , Date startTime , Date endTime) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSSubjectInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -396,7 +396,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块名称，标题类别, 主版块ID，版块ID，创建者姓名查询符合要求所有主题列表，不包括子版块内的主题数量" )
+	//@MethodDescribe( "게시판 이름, 제목 유형, 주 게시판 ID, 게시판 ID, 작성자 이름으로 조건에 맞는 전체 주제 목록 조회, 하위 게시판 내 주제 수 제외" )
 	public Long countSubjectWithSubjectTypeSectionForPage(String sectionName,String subjectType, String searchTitle, String forumId, String mainSectionId, String sectionId, String creatorName, Boolean needPicture, Boolean isTopSubject, List<String> viewSectionIds , Date startTime , Date endTime) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSSubjectInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -460,7 +460,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据版块ID, 主版块ID，版块ID，创建者姓名查询符合要求所有主题列表，不包括子版块内的主题" )
+	//@MethodDescribe( "게시판 ID, 주 게시판 ID, 게시판 ID, 작성자 이름으로 조건에 맞는 전체 주제 목록 조회, 하위 게시판 내 주제 제외" )
 	public List<BBSSubjectInfo> listSubjectInSectionForPage( String searchTitle, String forumId, String mainSectionId, String sectionId, String creatorName, Boolean needPicture, Boolean isTopSubject, Integer maxRecordCount, List<String> viewSectionIds, Date startTime , Date endTime) throws Exception {
 		if( maxRecordCount == null ){
 			throw new Exception( "maxRecordCount is null." );
@@ -511,7 +511,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( maxRecordCount ).getResultList();
 	}
 
-	//@MethodDescribe( "根据版块名称,主题类别,根据版块ID, 主版块ID，版块ID，创建者姓名查询符合要求所有主题列表，不包括子版块内的主题" )
+	//@MethodDescribe( "게시판 이름, 주제 유형, 게시판 ID, 주 게시판 ID, 게시판 ID, 작성자 이름으로 조건에 맞는 전체 주제 목록 조회, 하위 게시판 내 주제 제외" )
 	public List<BBSSubjectInfo> listSubjectWithSubjectTypeForPage(String sectionName,String subjectType, String searchTitle, String forumId, String mainSectionId, String sectionId, String creatorName, Boolean needPicture, Boolean isTopSubject, Integer maxRecordCount, List<String> viewSectionIds, Date startTime , Date endTime) throws Exception {
 		if( maxRecordCount == null ){
 			throw new Exception( "maxRecordCount is null." );
@@ -569,7 +569,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( maxRecordCount ).getResultList();
 	}
 
-	//@MethodDescribe( "根据指定的主题ID获取上一个主题的ID，根据最新回帖时间排序" )
+	//@MethodDescribe( "지정 주제 ID의 이전 주제 ID 조회, 최신 답글 시간순 정렬" )
 	public List<BBSSubjectInfo> listLastSubject( Date latestReplyTime ) throws Exception {
 		if( latestReplyTime == null ){
 			throw new Exception( "latestReplyTime is null!" );
@@ -583,7 +583,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(1).getResultList();
 	}
 
-	//@MethodDescribe( "根据最后回帖时间，查询是否还有更早的回帖，数量查询" )
+	//@MethodDescribe( "마지막 답글 시간 기준으로 더 이른 답글이 있는지 수량 조회" )
 	public Long countLastSubject( Date latestReplyTime ) throws Exception {
 		if( latestReplyTime == null ){
 			throw new Exception( "latestReplyTime is null!" );
@@ -597,7 +597,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据指定的主题ID获取下一个主题的ID，根据最新回帖时间排序" )
+	//@MethodDescribe( "지정 주제 ID의 다음 주제 ID 조회, 최신 답글 시간순 정렬" )
 	public List<BBSSubjectInfo> listNextSubject( Date latestReplyTime ) throws Exception {
 		if( latestReplyTime == null ){
 			throw new Exception( "latestReplyTime is null!" );
@@ -611,7 +611,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults(1).getResultList();
 	}
 
-	//@MethodDescribe( "根据最后回帖时间，查询是否还有更晚的回帖，数量查询" )
+	//@MethodDescribe( "마지막 답글 시간 기준으로 더 늦은 답글이 있는지 수량 조회" )
 	public Long countNextSubject( Date latestReplyTime ) throws Exception {
 		if( latestReplyTime == null ){
 			throw new Exception( "latestReplyTime is null!" );
@@ -625,7 +625,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据论坛ID，主版块ID，版块ID查询指定用户发表的主题数量" )
+	//@MethodDescribe( "포럼 ID, 주 게시판 ID, 게시판 ID로 지정 사용자가 작성한 주제 수 조회" )
 	public Long countUserSubjectForPage( String searchTitle, String forumId, String mainSectionId, String sectionId, Boolean needPicture, Boolean withTopSubject, String creatorName ) throws Exception {
 		if( creatorName == null || creatorName.isEmpty() ){
 			throw new Exception( "creatorName can not null." );
@@ -661,7 +661,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据论坛ID，主版块ID，版块ID查询指定用户发表的主题列表， 分页" )
+	//@MethodDescribe( "포럼 ID, 주 게시판 ID, 게시판 ID로 지정 사용자가 작성한 주제 목록 조회, 페이징" )
 	public List<BBSSubjectInfo> listUserSubjectForPage( String searchTitle, String forumId, String mainSectionId, String sectionId, Boolean needPicture, Boolean withTopSubject, Integer maxRecordCount, String creatorName ) throws Exception {
 		if( creatorName == null || creatorName.isEmpty() ){
 			throw new Exception( "creatorName can not null." );
@@ -700,7 +700,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( maxRecordCount ).getResultList();
 	}
 
-	//@MethodDescribe( "查询指定用户今天发表的主题数量" )
+	//@MethodDescribe( "지정 사용자가 오늘 작성한 주제 수 조회" )
 	public Long countSubjectForTodayByUserName( String userName ) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
@@ -715,7 +715,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "查询指定用户发表的精华主题数量" )
+	//@MethodDescribe( "지정 사용자가 작성한 우수 주제 수 조회" )
 	public Long countCreamSubjectByUserName( String userName ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -729,7 +729,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "查询指定用户发表的原创主题数量" )
+	//@MethodDescribe( "지정 사용자가 작성한 원본 주제 수 조회" )
 	public Long countOriginalSubjectByUserName( String userName ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -743,7 +743,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "查询指定版块中当天发表的主题数量" )
+	//@MethodDescribe( "지정 게시판에서 당일 작성된 주제 수 조회" )
 	public Long countSubjectForTodayBySectionId( String sectionId ) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
@@ -760,7 +760,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "查询指定信封中当天发表的主题数量" )
+	//@MethodDescribe( "지정 범위에서 당일 작성된 주제 수 조회" )
 	public Long countForTodayByForumId( String forumId ) throws Exception {
 		DateOperation dateOperation = new DateOperation();
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
@@ -775,7 +775,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据指定的论坛ID列表，主版块ID列表，版块ID列表查询推荐到BBS首页的主题列表" )
+	//@MethodDescribe( "지정 포럼 ID 목록, 주 게시판 ID 목록, 게시판 ID 목록으로 BBS 홈에 추천된 주제 목록 조회" )
 	public List<BBSSubjectInfo> listRecommendedSubjectForBBSIndex( List<String> forumIds, List<String> mainSectionIds, List<String> sectionIds, Integer count ) throws Exception {
 		if( count == null ){
 			count = 10;
@@ -798,7 +798,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( count ).getResultList();
 	}
 
-	//@MethodDescribe( "根据指定的论坛ID列表，主版块ID列表，版块ID列表查询推荐到论坛首页的主题列表" )
+	//@MethodDescribe( "지정 포럼 ID 목록, 주 게시판 ID 목록, 게시판 ID 목록으로 포럼 홈에 추천된 주제 목록 조회" )
 	public List<BBSSubjectInfo> listRecommendedSubjectForForumIndex( List<String> forumIds, List<String> mainSectionIds, List<String> sectionIds, Integer count) throws Exception {
 		if( count == null ){
 			count = 10;
@@ -821,7 +821,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( count ).getResultList();
 	}
 
-	//@MethodDescribe( "根据指定的版块ID列表搜索符合条件的主题数量" )
+	//@MethodDescribe( "지정 게시판 ID 목록으로 조건에 맞는 주제 수 검색" )
 	public Long countSubjectSearchInSectionForPage( String searchContent, List<String> viewSectionIds ) throws Exception {
 		if( searchContent == null || searchContent.isEmpty() ){
 			throw new Exception( "searchContent can not null." );
@@ -843,7 +843,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据指定的版块ID列表搜索符合条件的主题列表，分页" )
+	//@MethodDescribe( "지정 게시판 ID 목록으로 조건에 맞는 주제 목록 검색, 페이징" )
 	public List<BBSSubjectInfo> listSubjectSearchInSectionForPage( String searchContent, List<String> viewSectionIds, Integer count ) throws Exception {
 		if( searchContent == null || searchContent.isEmpty() ){
 			throw new Exception( "searchContent can not null." );
@@ -865,7 +865,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( count ).getResultList();
 	}
 
-	//@MethodDescribe( "根据指定的版块ID、主版块ID、版块ID和指定的人员查询精华主题数量" )
+	//@MethodDescribe( "지정 게시판 ID, 주 게시판 ID, 게시판 ID와 지정 사용자로 우수 주제 수 조회" )
 	public Long countCreamedSubjectInSectionForPage( String forumId, String mainSectionId, String sectionId, String creatorName ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -888,7 +888,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据指定的版块ID、主版块ID、版块ID和指定的人员查询精华主题列表，分页" )
+	//@MethodDescribe( "지정 게시판 ID, 주 게시판 ID, 게시판 ID와 지정 사용자로 우수 주제 목록 조회, 페이징" )
 	public List<BBSSubjectInfo> listCreamedSubjectInSectionForPage( String forumId, String mainSectionId, String sectionId, String creatorName, Integer count ) throws Exception {
 		if( count == null ){
 			count = 10;
@@ -914,7 +914,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).setMaxResults( count ).getResultList();
 	}
 
-	//@MethodDescribe( "根据指定的版块ID、主版块ID、版块ID和指定的人员查询推荐到BBS首页的主题数量" )
+	//@MethodDescribe( "지정 게시판 ID, 주 게시판 ID, 게시판 ID와 지정 사용자로 BBS 홈에 추천된 주제 수 조회" )
 	public Long countRecommendedSubjectInSectionForPage( String searchForumId, String searchMainSectionId, String searchSectionId, String creatorName ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( BBSSubjectInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -937,7 +937,7 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe( "根据指定的版块ID、主版块ID、版块ID和指定的人员查询推荐到BBS首页的主题列表" )
+	//@MethodDescribe( "지정 게시판 ID, 주 게시판 ID, 게시판 ID와 지정 사용자로 BBS 홈에 추천된 주제 목록 조회" )
 	public List<BBSSubjectInfo> listRecommendedSubjectInSectionForPage( String searchForumId, String searchMainSectionId,
 			String searchSectionId, String creatorName, Integer count) throws Exception {
 		if( count == null ){
@@ -977,11 +977,11 @@ public class BBSSubjectInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询指定的版块内时间范围内发表的主题数量
+	 * 지정 게시판에서 기간 내 작성된 주제 수 조회
 	 * @param sectionId
 	 * @param todayStartTime
 	 * @param todayEndTime
-	 * @param queryMainSection  是否也查询主版块是sectionId的数据
+	 * @param queryMainSection  주 게시판이 sectionId인 데이터도 조회할지 여부
 	 * @return
 	 * @throws Exception
 	 */

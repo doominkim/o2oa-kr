@@ -52,7 +52,7 @@ class ActionEdit extends BaseAction {
 						application.getName(), application.getId());
 			}
 
-			// 先删除FormField
+			// 먼저 FormField 삭제
 			List<String> formFieldIds = business.formField().listWithForm(form.getId());
 			emc.beginTransaction(FormField.class);
 			for (FormField o : emc.list(FormField.class, formFieldIds)) {
@@ -64,7 +64,7 @@ class ActionEdit extends BaseAction {
 				o.setForm(form.getId());
 				emc.persist(o, CheckPersistType.all);
 			}
-			// 如果当前应用没有设置默认表单或者表单不存在,那么将当前表单设置为默认表单
+			// 현재 앱에 기본 양식이 없거나 양식이 존재하지 않으면 현재 양식을 기본 양식으로 설정
 			if (StringUtils.isEmpty(application.getDefaultForm())
 					|| (null == emc.find(application.getDefaultForm(), Form.class))) {
 				emc.beginTransaction(Application.class);
@@ -83,7 +83,7 @@ class ActionEdit extends BaseAction {
 			emc.check(form, CheckPersistType.all);
 			emc.commit();
 			CacheManager.notify(Form.class);
-			// 保存历史版本
+			// 이력 버전 저장
 			ThisApplication.formVersionQueue
 					.send(new FormVersion(form.getId(), jsonElement, effectivePerson.getDistinguishedName()));
 			Wo wo = new Wo();
@@ -103,19 +103,19 @@ class ActionEdit extends BaseAction {
 		static WrapCopier<Wi, Form> copier = WrapCopierFactory.wi(Wi.class, Form.class, null, ListTools
 				.toList(JpaObject.FieldsUnmodify, Form.lastUpdatePerson_FIELDNAME, Form.lastUpdateTime_FIELDNAME));
 
-		@FieldDescribe("字段")
+		@FieldDescribe("필드")
 		private List<WiFormField> formFieldList = new ArrayList<>();
 
-		@FieldDescribe("关联表单")
+		@FieldDescribe("연결 양식")
 		private List<String> relatedFormList = new ArrayList<>();
 
-		@FieldDescribe("移动端关联表单")
+		@FieldDescribe("모바일 연결 양식")
 		private List<String> mobileRelatedFormList = new ArrayList<>();
 
-		@FieldDescribe("关联脚本.")
+		@FieldDescribe("연결 스크립트.")
 		private Map<String, String> relatedScriptMap = new LinkedHashMap<>();
 
-		@FieldDescribe("移动端关联脚本.")
+		@FieldDescribe("모바일 연결 스크립트.")
 		private Map<String, String> mobileRelatedScriptMap = new LinkedHashMap<>();
 
 		public List<WiFormField> getFormFieldList() {

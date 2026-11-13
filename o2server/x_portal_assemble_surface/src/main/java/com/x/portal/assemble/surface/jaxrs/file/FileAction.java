@@ -25,18 +25,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("file")
-@JaxrsDescribe("文件操作")
+@JaxrsDescribe("파일 작업")
 public class FileAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(FileAction.class);
 
-	@JaxrsMethodDescribe(value = "列示指定站点的下所有可见的文件.", action = ActionListWithPortal.class)
+	@JaxrsMethodDescribe(value = "지정한 사이트의 표시 가능한 모든 파일 목록.", action = ActionListWithPortal.class)
 	@GET
 	@Path("list/portal/{portalFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPortal(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("portalFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("portalFlag") String applicationFlag) {
 		ActionResult<List<ActionListWithPortal.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -48,13 +48,13 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "访问文件内容.义stream格式下载", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "파일 내용 접근. stream 형식으로 다운로드", action = ActionDownload.class)
 	@GET
 	@Path("{flag}/portal/{portalFlag}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("应用标识") @PathParam("portalFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("portalFlag") String applicationFlag) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -66,12 +66,12 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "访问文件内容.义stream格式下载", action = ActionDownloadV2.class)
+	@JaxrsMethodDescribe(value = "파일 내용 접근. stream 형식으로 다운로드", action = ActionDownloadV2.class)
 	@GET
 	@Path("{flag}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void downloadV2(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						 @JaxrsParameterDescribe("文件标识(文件id、文件别名或者文件短url编码)") @PathParam("flag") String flag) {
+						 @JaxrsParameterDescribe("파일 식별자(파일 id, 파일 별칭 또는 파일 단축 url 코드)") @PathParam("flag") String flag) {
 		ActionResult<ActionDownloadV2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -83,13 +83,13 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "访问文件内容.", action = ActionContent.class)
+	@JaxrsMethodDescribe(value = "파일 내용 접근.", action = ActionContent.class)
 	@GET
 	@Path("{flag}/portal/{portalFlag}/content")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void content(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("应用标识") @PathParam("portalFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("portalFlag") String applicationFlag) {
 		ActionResult<ActionContent.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -101,12 +101,12 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "访问文件内容.", action = ActionContentV2.class)
+	@JaxrsMethodDescribe(value = "파일 내용 접근.", action = ActionContentV2.class)
 	@GET
 	@Path("{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void contentV2(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						@JaxrsParameterDescribe("文件标识(文件id、文件别名或者文件短url编码)") @PathParam("flag") String flag) {
+						@JaxrsParameterDescribe("파일 식별자(파일 id, 파일 별칭 또는 파일 단축 url 코드)") @PathParam("flag") String flag) {
 		ActionResult<ActionContentV2.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

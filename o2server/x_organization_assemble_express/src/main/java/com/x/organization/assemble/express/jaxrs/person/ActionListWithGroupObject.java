@@ -41,7 +41,7 @@ class ActionListWithGroupObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("群组")
+		@FieldDescribe("그룹")
 		private List<String> groupList = new ArrayList<>();
 
 		public List<String> getGroupList() {

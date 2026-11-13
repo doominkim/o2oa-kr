@@ -21,9 +21,9 @@ import com.x.calendar.core.entity.Calendar;
 import com.x.calendar.core.entity.Calendar_Event;
 
 /**
- * 删除重复日程事件中某一事件开始后续所有的日程事件信息
+ * 반복 일정 이벤트 중 특정 이벤트부터 이후의 모든 일정 이벤트 정보 삭제
  * 
- * 1、删除当前事件以及该重复事件主体信息已经生成的该ID事件后续时间内所有已经生成的日程事件信息
+ * 1. 현재 이벤트 및 해당 반복 이벤트 주체 정보로 이미 생성된, 해당 ID 이벤트 이후 시간의 모든 생성된 일정 이벤트 정보 삭제
  * 
  * @author O2LEE
  *
@@ -59,7 +59,7 @@ public class ActionDestroyAfterEventId extends BaseAction {
 				calendar_Event = calendar_EventServiceAdv.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历记录信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 기록 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -84,7 +84,7 @@ public class ActionDestroyAfterEventId extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + calendar_Event.getCalendarId() );
+					Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + calendar_Event.getCalendarId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -92,13 +92,13 @@ public class ActionDestroyAfterEventId extends BaseAction {
 		}
 		
 		if( check && !ThisApplication.isCalendarSystemManager(effectivePerson) ) {
-			//判断用户权限
+			//사용자 권한 판단
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(personName);
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 				if( calendar != null ) {
 					if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
-							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//没权限
+							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 						check = false;
 						Exception exception = new ExceptionInsufficientPermissions( "您没有权限从日历中删除日程事件.日历:" + calendar.getName() );
 						result.error( exception );
@@ -106,7 +106,7 @@ public class ActionDestroyAfterEventId extends BaseAction {
 				}				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -127,7 +127,7 @@ public class ActionDestroyAfterEventId extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "删除日程信息时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "일정 정보를 삭제하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

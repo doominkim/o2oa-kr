@@ -32,10 +32,10 @@ public class ServiceProcessor extends AbstractServiceProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Service service) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.serviceArrive(aeiObjects.getWork().getActivityToken(), service));
-		// 清空上一次调用值
+		// 이전 호출 값 비우기
 		aeiObjects.getWork().setServiceValue(new LinkedHashMap<>());
 		return aeiObjects.getWork();
 	}
@@ -47,12 +47,12 @@ public class ServiceProcessor extends AbstractServiceProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Service service) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.parallelExecute(aeiObjects.getWork().getActivityToken(), service));
 		List<Work> results = new ArrayList<>();
 		boolean passThrough = false;
-		// 判断是否已经在getServiceValue中有值了,否则会在到达后直接运行.
+		// getServiceValue에 이미 값이 있는지 판단, 그렇지 않으면 도착 후 바로 실행됨.
 		if (!aeiObjects.getWork().getServiceValue().isEmpty()) {
 			LOGGER.debug("work:{}, serviceValue:{}.", () -> aeiObjects.getWork().getId(),
 					() -> this.gson.toJson(aeiObjects.getWork().getServiceValue()));
@@ -79,7 +79,7 @@ public class ServiceProcessor extends AbstractServiceProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Service service) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes()
 				.push(Signal.parallelInquire(aeiObjects.getWork().getActivityToken(), service));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
@@ -91,9 +91,9 @@ public class ServiceProcessor extends AbstractServiceProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

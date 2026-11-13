@@ -6,7 +6,7 @@ MWF.xDesktop.requireApp("MinderEditor", "RuntimeInCommon", null, false);
 MWF.xDesktop.requireApp("MinderEditor", "WidgetInCommon", null, false);
 MWF.xDesktop.requireApp("MinderEditor", "Commands", null, false);
 MWF.xDesktop.requireApp("MinderEditor", "LeftToolbar", null, false);
-//脑图，数据样式如下：
+//마인드맵, 데이터 형식은 다음과 같음:
 //{
 //    "root": {
 //    "data": {
@@ -74,8 +74,8 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
         "template" : [],
         "theme" : [],
 
-        //dataMode参数，restful  通过MWF.xApplication.Minder.Actions.RestActions获取数据，
-        //outer 打开应用的时候直接设置数据
+        //dataMode 매개변수, restful은 MWF.xApplication.Minder.Actions.RestActions로 데이터 조회,
+        //outer는 앱을 열 때 데이터를 직접 설정
         "dataMode" : "restful"
 
 
@@ -247,7 +247,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
     loadKityMinder: function (data) {
         var _self = this;
         this.isMovingCenter = true;
-        // 创建 km 实例
+        // km 인스턴스 생성
         /* global kityminder */
         debugger;
         var km = this.minder = new kityminder.Minder();
@@ -368,7 +368,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
     },
     _moveToCenter: function () {
         if (this.options.align != "center")return;
-        //图形居中
+        //도형 가운데 정렬
         var minderView = this.minder.getRenderContainer().getRenderBox('screen'); //.getBoundaryBox();
         var containerView = this.contentNode.getCoordinates();
 
@@ -381,7 +381,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
         var template = this.minder.queryCommandValue("template");
 
         var left, top, isCamera = false;
-        if (minderView.width > containerView.width) {  //如果图形宽度大于容器宽度
+        if (minderView.width > containerView.width) {  //도형 너비가 컨테이너 너비보다 크면
             if (template == "fish-bone" || rootChildrenLength < 2) {
                 left = 50;
             } else {
@@ -390,7 +390,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
         } else {
             left = parseInt(( containerView.width - minderView.width ) / 2 + rootClientLeft + 50);
         }
-        if (minderView.height > containerView.height) {  //如果图形高度大于容器高度
+        if (minderView.height > containerView.height) {  //도형 높이가 컨테이너 높이보다 크면
             if (rootClientTop > containerView.height) {
                 if (template == "fish-bone") {
                     top = containerView.height - rootView.height
@@ -803,24 +803,24 @@ MWF.xApplication.MinderEditor.Converter = new Class({
             var matrix;
             if (width && height) {
                 if ((width > coordinates.x) && (height > coordinates.y)) {
-                    //如果宽度比指定宽度小，设置偏移量
+                    //너비가 지정 너비보다 작으면 오프셋 설정
                     if (width > coordinates.x) {
                         offsetLeft += ( width - coordinates.x ) / 2;
                         contentWidth = width;
                     }
-                    //如果高度比指定高度小，设置偏移量
+                    //높이가 지정 높이보다 작으면 오프셋 설정
                     if (height > coordinates.y) {
                         offsetTop += ( height - coordinates.y ) / 2;
                         contentHeight = height;
                     }
                 }
 
-                //如果宽度比指定宽度大，进行缩小
+                //너비가 지정 너비보다 크면 축소
                 var xRatio, yRatio, ox, oy, zoom;
                 if (width < coordinates.x) {
                     xRatio = width / coordinates.x;
                 }
-                //如果高度比指定高度大，进行缩小
+                //높이가 지정 높이보다 크면 축소
                 if (height < coordinates.y) {
                     yRatio = height / coordinates.y;
                 }
@@ -940,14 +940,14 @@ MWF.xApplication.MinderEditor.PreviewConverter = new Class({
         this.draw();
     },
     initPreViewer: function(){
-        // 画布，渲染缩略图
+        // 캔버스, 썸네일 렌더링
         this.paper = new kity.Paper( this.previewer );
 
-        // 用两个路径来挥之节点和连线的缩略图
+        // 두 개의 경로로 노드와 연결선의 썸네일 그리기
         this.nodeThumb = this.paper.put(new kity.Path());
         this.connectionThumb = this.paper.put(new kity.Path());
         /**
-         * 增加一个对天盘图情况缩略图的处理,
+         * 원형 레이아웃 마인드맵의 썸네일 처리 추가,
          * @Editor: Naixor line 104~129
          * @Date: 2015.11.3
          */
@@ -1043,24 +1043,24 @@ MWF.xApplication.MinderEditor.PreviewConverter = new Class({
             var matrix;
             if (width && height) {
                 if ((width > coordinates.x) && (height > coordinates.y)) {
-                    //如果宽度比指定宽度小，设置偏移量
+                    //너비가 지정 너비보다 작으면 오프셋 설정
                     if (width > coordinates.x) {
                         offsetLeft += ( width - coordinates.x ) / 2;
                         contentWidth = width;
                     }
-                    //如果高度比指定高度小，设置偏移量
+                    //높이가 지정 높이보다 작으면 오프셋 설정
                     if (height > coordinates.y) {
                         offsetTop += ( height - coordinates.y ) / 2;
                         contentHeight = height;
                     }
                 }
 
-                //如果宽度比指定宽度大，进行缩小
+                //너비가 지정 너비보다 크면 축소
                 var xRatio, yRatio, ox, oy, zoom;
                 if (width < coordinates.x) {
                     xRatio = width / coordinates.x;
                 }
-                //如果高度比指定高度大，进行缩小
+                //높이가 지정 높이보다 크면 축소
                 if (height < coordinates.y) {
                     yRatio = height / coordinates.y;
                 }

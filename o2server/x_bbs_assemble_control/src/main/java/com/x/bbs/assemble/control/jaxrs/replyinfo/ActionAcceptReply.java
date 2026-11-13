@@ -61,12 +61,12 @@ public class ActionAcceptReply extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据指定ID查询回复信息时发生异常.ID:" + wrapIn.getId());
+				Exception exception = new ExceptionReplyInfoProcess(e, "지정한 ID로 댓글 정보를 조회하는 중 오류가 발생했습니다. ID:" + wrapIn.getId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
-		// 查询关联的主题信息是否存在
+		// 연관 주제 정보 존재 여부 조회
 		if (check) {
 			try {
 				subjectInfo = subjectInfoService.get(replyInfo.getSubjectId());
@@ -83,7 +83,7 @@ public class ActionAcceptReply extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据指定ID查询主题信息时发生异常.ID:" + wrapIn.getSubjectId());
+				Exception exception = new ExceptionReplyInfoProcess(e, "지정한 ID로 주제 정보를 조회하는 중 오류가 발생했습니다. ID:" + wrapIn.getSubjectId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

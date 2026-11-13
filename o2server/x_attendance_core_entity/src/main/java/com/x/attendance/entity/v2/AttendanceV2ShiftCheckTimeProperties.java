@@ -17,7 +17,7 @@ public class AttendanceV2ShiftCheckTimeProperties extends JsonProperties {
 
 
     private static final long serialVersionUID = 6450503259865573434L;
-    @FieldDescribe("班次上下班打卡时间")
+    @FieldDescribe("근무조 출퇴근 체크 시간")
     private List<AttendanceV2ShiftCheckTime> timeList;
 
 

@@ -32,7 +32,7 @@ class ActionListOnMonth extends BaseAction {
 			calendar.set(Calendar.SECOND, 0);
 			calendar.set(Calendar.MILLISECOND, 0);
 			Date start = calendar.getTime();
-			/** 一个月内 */
+			/** 한 달 이내 */
 			calendar.add(Calendar.MONTH, 1);
 			calendar.add(Calendar.MILLISECOND, -1);
 			Date end = calendar.getTime();

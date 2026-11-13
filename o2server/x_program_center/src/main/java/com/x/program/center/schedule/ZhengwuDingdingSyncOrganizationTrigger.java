@@ -11,7 +11,7 @@ public class ZhengwuDingdingSyncOrganizationTrigger extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ZhengwuDingdingSyncOrganizationTrigger.class);
 
-	/* 向列表发送一个同步信号 */
+	/* 목록에 동기화 신호 전송 */
 	@Override
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		try {

@@ -52,7 +52,7 @@ public class ActionPersistDeleteWithBatch extends BaseAction {
 									CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT, 
 									CmsBatchOperationProcessService.OPT_TYPE_DELETE,  document.getId(),  document.getId(), "文档删除：ID=" +  document.getId() );
 							
-							//检查是否需要删除热点图片
+							//핫 이미지 삭제 필요 여부 확인
 							try {
 								ThisApplication.queueDocumentDelete.send( document.getId() );
 							} catch ( Exception e1 ) {

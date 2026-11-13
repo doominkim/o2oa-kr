@@ -17,7 +17,7 @@ import com.x.cms.core.entity.DocumentViewRecord;
 import com.x.cms.core.entity.DocumentViewRecord_;
 
 /**
- * 文档权限基础功能服务类
+ * 문서 권한 기본 기능 서비스 클래스
  *
  * @author O2LEE
  */
@@ -27,7 +27,7 @@ public class DocumentViewRecordFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("列示指定Id的DocumentViewRecord信息列表")
+	//@MethodDescribe("지정한 Id의 DocumentViewRecord 정보 목록 조회")
 	public List<DocumentViewRecord> list( List<String> ids ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( DocumentViewRecord.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -37,7 +37,7 @@ public class DocumentViewRecordFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe("根据文档ID列示指定Id的DocumentViewRecord信息列表")
+	//@MethodDescribe("문서 ID로 지정한 Id의 DocumentViewRecord 정보 목록 조회")
 	public List<String> listByDocument( String docId ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( DocumentViewRecord.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -49,7 +49,7 @@ public class DocumentViewRecordFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).setMaxResults(50).getResultList();
 	}
 
-	//@MethodDescribe("根据访问者姓名列示指定Id的DocumentViewRecord信息列表")
+	//@MethodDescribe("방문자 이름으로 지정한 Id의 DocumentViewRecord 정보 목록 조회")
 	public List<String> listByPerson( String personName, Integer maxCount ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( DocumentViewRecord.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -71,7 +71,7 @@ public class DocumentViewRecordFactory extends AbstractFactory {
 		return em.createQuery( cq.where(p) ).setMaxResults( maxCount ).getResultList();
 	}
 
-	//@MethodDescribe("根据访问者姓名和文档ID列示指定Id的DocumentViewRecord信息列表")
+	//@MethodDescribe("방문자 이름과 문서 ID로 지정한 Id의 DocumentViewRecord 정보 목록 조회")
 	public List<String> listByDocAndPerson( String documentId, String personName ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( DocumentViewRecord.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -84,7 +84,7 @@ public class DocumentViewRecordFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据文档ID，计算该文档所有的访问次数
+	 * 문서 ID로 해당 문서의 전체 조회 수 계산
 	 * @param id
 	 * @return
 	 */
@@ -175,7 +175,7 @@ public class DocumentViewRecordFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据指定ID列表查询已读文档ID列表
+	 * 지정한 ID 목록으로 읽은 문서 ID 목록 조회
 	 * @param ids
 	 * @param distinguishedName
 	 * @return
@@ -193,7 +193,7 @@ public class DocumentViewRecordFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据指定分类ID列表查询已读文档ID列表
+	 * 지정한 분류 ID 목록으로 읽은 문서 ID 목록 조회
 	 * @param categoryIds
 	 * @param distinguishedName
 	 * @return

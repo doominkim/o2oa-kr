@@ -7,6 +7,6 @@ public class ExceptionInvalidCredential extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionInvalidCredential() {
-		super("不正确的用户标识.");
+		super("사용자 식별자가 올바르지 않습니다.");
 	}
 }

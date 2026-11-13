@@ -7,6 +7,6 @@ class ExceptionConfigNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionConfigNotExists( String id ) {
-		super("指定的人员考勤配置数据不存在.ID:" + id );
+		super("지정한 인원 근태 설정 데이터가 없습니다. ID:" + id );
 	}
 }

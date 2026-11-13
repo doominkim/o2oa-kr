@@ -36,10 +36,10 @@ public class ActionGet extends BaseAction {
 				Business business = new Business(emc);
 				View view = business.getViewFactory().flag( flag );
 				if ( null == view ) {
-					throw new Exception("需要查询的列表信息不存在，请联系管理员。ID:" + flag );
+					throw new Exception("조회할 목록 정보가 없습니다. 관리자에게 문의하세요. ID:" + flag );
 				}
 				wrap = Wo.copier.copy( view );
-				//根据FormId补充FormName
+				//FormId로 FormName 보충
 				if(StringUtils.isNotEmpty( wrap.getFormId() )) {
 					wrap.setFormName( formServiceAdv.getNameWithId( wrap.getFormId() ) );
 				}
@@ -57,7 +57,7 @@ public class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -5076990764713538973L;
 
-		@FieldDescribe("绑定的表单名称.")
+		@FieldDescribe("연결된 양식 이름.")
 		private String formName = null;
 
 		public static final WrapCopier<View, Wo> copier = WrapCopierFactory.wo( View.class, Wo.class, null,JpaObject.FieldsInvisible);

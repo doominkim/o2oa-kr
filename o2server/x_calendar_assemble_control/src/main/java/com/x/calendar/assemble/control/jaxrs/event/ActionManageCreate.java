@@ -47,7 +47,7 @@ public class ActionManageCreate extends BaseAction {
 			wi = this.convertToWrapIn( jsonElement, Wi.class );
 			if( wi == null ) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( "需要保存的事件数据为空！" );
+				Exception exception = new ExceptionEventProcess( "저장할 일정 데이터가 비어 있습니다!" );
 				result.error( exception );
 			}
 		} catch (Exception e ) {
@@ -67,7 +67,7 @@ public class ActionManageCreate extends BaseAction {
 			ids = calendarServiceAdv.listWithCondition(personName, null, null);
 			calendarId = ids.get(0);
 		}
-		logger.info("日历id为={}",calendarId);
+		logger.info("캘린더 id={}",calendarId);
 		if( check ){
 			try {
 				calendar = calendarServiceAdv.get( calendarId );
@@ -78,26 +78,26 @@ public class ActionManageCreate extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + calendarId );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + calendarId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
 		}
 		
 		if( check && !ThisApplication.isCalendarSystemManager(effectivePerson) ) {
-			//判断用户权限
+			//사용자 권한 판단
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(personName);
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 				if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
-						|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//没权限
+						|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 					check = false;
-					Exception exception = new ExceptionInsufficientPermissions( "您没有权限在日历中创建日程事件.日历:" + calendar.getName() );
+					Exception exception = new ExceptionInsufficientPermissions( "이 캘린더에 일정을 만들 권한이 없습니다. 캘린더:" + calendar.getName() );
 					result.error( exception );
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -114,7 +114,7 @@ public class ActionManageCreate extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统将用户传入的数据转换为日历事件信息对象时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자가 입력한 데이터를 일정 정보 객체로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -134,7 +134,7 @@ public class ActionManageCreate extends BaseAction {
 				result.setData( new Wo( calendar_Event.getId() ) );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "保存日程信息时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "일정 정보를 저장하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

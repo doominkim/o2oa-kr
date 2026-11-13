@@ -25,7 +25,7 @@ import com.x.processplatform.service.processing.WorkContext;
 import com.x.processplatform.service.processing.processor.AeiObjects;
 
 /**
- * 此方法不会修改数据,使用noblocking方式执行.
+ * 이 메서드는 데이터를 수정하지 않으므로 noblocking 방식으로 실행.
  */
 class ActionManualAfterProcessing extends BaseAction {
 
@@ -70,7 +70,7 @@ class ActionManualAfterProcessing extends BaseAction {
 	}
 
 	/**
-	 * 获取work,如果没有(删除,完成)那么取同一job的work,如果还没有,那么取workCompleted转换成work
+	 * work 조회, 없으면(삭제, 완료) 같은 job의 work를 조회하고, 그래도 없으면 workCompleted를 work로 변환
 	 * 
 	 * @param business
 	 * @param task

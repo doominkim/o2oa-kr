@@ -45,10 +45,10 @@ class ActionWriteCompletion extends BaseAction {
 
     public static class Wi {
 
-        @FieldDescribe("对话ID.")
+        @FieldDescribe("대화 ID.")
         private String id;
 
-        @FieldDescribe("对话扩展参数，json对象.")
+        @FieldDescribe("대화 확장 매개변수, json 객체.")
         private Map<String, Object> extra;
 
         public String getId() {

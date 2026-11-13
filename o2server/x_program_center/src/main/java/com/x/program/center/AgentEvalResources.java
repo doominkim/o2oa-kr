@@ -4,7 +4,7 @@ import com.x.base.core.project.script.AbstractResources;
 import com.x.organization.core.express.Organization;
 
 /**
- * 用于在脚本执行中注入对象
+ * 스크립트 실행 중 객체 주입용
  */
 public class AgentEvalResources extends AbstractResources {
 	private Organization organization;

@@ -37,7 +37,7 @@ class ActionDelete extends BaseAction {
 				emc.remove(statement, CheckRemoveType.all);
 			}
 			emc.commit();
-			/* 有级联关系,先删除statement */
+			/* 연쇄 관계가 있으므로 statement 먼저 삭제 */
 			emc.beginTransaction(Table.class);
 			emc.remove(table);
 			emc.commit();

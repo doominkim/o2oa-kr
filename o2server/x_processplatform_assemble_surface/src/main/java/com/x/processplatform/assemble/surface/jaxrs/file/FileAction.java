@@ -39,16 +39,16 @@ public class FileAction extends StandardJaxrsAction {
 	private static final Logger logger = LoggerFactory.getLogger(FileAction.class);
 	private static final String OPERATIONID_PREFIX = "FileAction::";
 
-	@Operation(summary = "列示指定应用标识下所有可见的文件.", operationId = OPERATIONID_PREFIX + "listWithApplication", responses = {
+	@Operation(summary = "지정 앱 식별자 아래의 모든 표시 가능한 파일 목록.", operationId = OPERATIONID_PREFIX + "listWithApplication", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithApplication.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示指定应用标识下所有可见的文件.", action = ActionListWithApplication.class)
+	@JaxrsMethodDescribe(value = "지정 앱 식별자 아래의 모든 표시 가능한 파일 목록.", action = ActionListWithApplication.class)
 	@GET
 	@Path("list/application/{applicationFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithApplication(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("applicationFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<List<ActionListWithApplication.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -60,16 +60,16 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据应用标识和文件标识访问文件内容,设定使用流输出.", operationId = OPERATIONID_PREFIX + "download", responses = {
+	@Operation(summary = "앱 식별자와 파일 식별자로 파일 내용 접근, 스트림 출력 사용.", operationId = OPERATIONID_PREFIX + "download", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionDownload.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据应用标识和文件标识访问文件内容,设定使用流输出.", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "앱 식별자와 파일 식별자로 파일 내용 접근, 스트림 출력 사용.", action = ActionDownload.class)
 	@GET
 	@Path("{flag}/application/{applicationFlag}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -81,16 +81,16 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据应用标识和文件标识访问文件内容.", operationId = OPERATIONID_PREFIX + "content", responses = {
+	@Operation(summary = "앱 식별자와 파일 식별자로 파일 내용 접근.", operationId = OPERATIONID_PREFIX + "content", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionContent.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据应用标识和文件标识访问文件内容.", action = ActionContent.class)
+	@JaxrsMethodDescribe(value = "앱 식별자와 파일 식별자로 파일 내용 접근.", action = ActionContent.class)
 	@GET
 	@Path("{flag}/application/{applicationFlag}/content")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void content(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<ActionContent.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

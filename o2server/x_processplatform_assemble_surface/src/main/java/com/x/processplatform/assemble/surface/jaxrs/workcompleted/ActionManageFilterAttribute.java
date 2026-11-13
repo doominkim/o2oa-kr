@@ -25,7 +25,7 @@ import com.x.processplatform.core.entity.element.Application;
 import com.x.processplatform.core.entity.element.Process;
 
 /**
- * 在一个应用的管理状态下列示可用于filter的所有值. 权限:不需要权限
+ * 앱 관리 상태에서 filter에 사용 가능한 모든 값 목록 조회. 권한: 권한 불필요
  */
 class ActionManageFilterAttribute extends BaseAction {
 
@@ -46,13 +46,13 @@ class ActionManageFilterAttribute extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("可选择的流程")
+		@FieldDescribe("선택 가능한 프로세스")
 		private List<NameValueCountPair> processList = new ArrayList<>();
 
-		@FieldDescribe("可选择的开始月份")
+		@FieldDescribe("선택 가능한 시작 월")
 		private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
-		@FieldDescribe("可选择的结束月份")
+		@FieldDescribe("선택 가능한 종료 월")
 		private List<NameValueCountPair> completedTimeMonthList = new ArrayList<>();
 
 		public List<NameValueCountPair> getProcessList() {

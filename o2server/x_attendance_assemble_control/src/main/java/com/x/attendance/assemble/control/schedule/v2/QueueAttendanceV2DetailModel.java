@@ -23,11 +23,11 @@ public class QueueAttendanceV2DetailModel extends GsonPropertyObject {
         this.allowToday = allowToday;
     }
 
-    private String person; // 人员DN
+    private String person; // 인원 DN
 
-    private String date; // 要处理的日期 如：2021-01-01
+    private String date; // 처리할 날짜 예: 2021-01-01
 
-    private Boolean allowToday; // 是否允许处理今天的数据
+    private Boolean allowToday; // 오늘 데이터 처리 허용 여부
 
 
     public String getPerson() {

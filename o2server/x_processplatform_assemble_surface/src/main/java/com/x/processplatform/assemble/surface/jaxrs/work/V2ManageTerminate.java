@@ -34,7 +34,7 @@ class V2ManageTerminate extends BaseAction {
 			if (null == work) {
 				throw new ExceptionEntityNotExist(id, Work.class);
 			}
-			// 判断条件和V2Manage不同,仅判断是否有管理权限.
+			// 판단 조건은 V2Manage와 다름, 관리 권한 여부만 판단.
 			Control control = new WorkControlBuilder(effectivePerson, business, work).enableAllowManage().build();
 			if (BooleanUtils.isNotTrue(control.getAllowManage())) {
 				throw new ExceptionAccessDenied(effectivePerson);

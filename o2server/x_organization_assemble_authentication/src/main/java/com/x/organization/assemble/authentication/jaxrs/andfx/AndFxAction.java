@@ -20,19 +20,19 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("andfx")
-@JaxrsDescribe("移动办公单点登录")
+@JaxrsDescribe("모바일 오피스 SSO")
 public class AndFxAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AndFxAction.class);
 
-	@JaxrsMethodDescribe(value = "移动办公MOA点单登录.", action = ActionMoaLogin.class)
+	@JaxrsMethodDescribe(value = "모바일 오피스 MOA SSO 로그인.", action = ActionMoaLogin.class)
 	@GET
 	@Path("moa/sso/token/{token}/enter/{enterId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void moaSso(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@Context HttpServletResponse response, @JaxrsParameterDescribe("单点票据") @PathParam("token") String token,
-					   @JaxrsParameterDescribe("企业ID") @PathParam("enterId") String enterId) {
+			@Context HttpServletResponse response, @JaxrsParameterDescribe("SSO 티켓") @PathParam("token") String token,
+					   @JaxrsParameterDescribe("기업 ID") @PathParam("enterId") String enterId) {
 		ActionResult<ActionMoaLogin.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

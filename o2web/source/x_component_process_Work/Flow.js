@@ -15,7 +15,7 @@ MWF.xApplication.process.Work.Flow  = MWF.ProcessFlow = new Class({
         processOptions: {},
         mainColorEnable: true,
         isQuickSelect : true,
-        zIndex: 20001 //比正文编辑器痕迹窗口多1
+        zIndex: 20001 //본문 편집기 변경 이력 창보다 1 큼
     },
     initialize: function (container, task, options, form) {
         this.setOptions(options);
@@ -310,11 +310,11 @@ MWF.xApplication.process.Work.Flow  = MWF.ProcessFlow = new Class({
         var routeList = this.getRouteConfigList();
         routeList.each(function (route, i) {
 
-            if (route.hiddenScriptText && this.form && this.form.Macro) { //如果隐藏路由，返回
+            if (route.hiddenScriptText && this.form && this.form.Macro) { //경로가 숨김이면 반환
                 if (this.form.Macro.exec(route.hiddenScriptText, this).toString() === "true") return;
             }
 
-            if (route.displayNameScriptText && this.form && this.form.Macro) { //如果有显示名称公式
+            if (route.displayNameScriptText && this.form && this.form.Macro) { //표시 이름 수식이 있으면
                 route.displayName = this.form.Macro.exec(route.displayNameScriptText, this);
             } else {
                 route.displayName = route.name;
@@ -414,7 +414,7 @@ MWF.xApplication.process.Work.Flow  = MWF.ProcessFlow = new Class({
         }
     },
     isOrgHidden: function (d) {
-        if (d.hiddenScript && d.hiddenScript.code) { //如果隐藏路由，返回
+        if (d.hiddenScript && d.hiddenScript.code) { //경로가 숨김이면 반환
             var hidden = this.form.Macro.exec(d.hiddenScript.code, this);
             if (hidden && hidden.toString() === "true") return true;
         }
@@ -424,7 +424,7 @@ MWF.xApplication.process.Work.Flow  = MWF.ProcessFlow = new Class({
         var routeList = this.getRouteConfigList();
         var length = 0;
         routeList.each(function (route) {
-            if (route.hiddenScriptText) { //如果隐藏路由，返回
+            if (route.hiddenScriptText) { //경로가 숨김이면 반환
                 if (this.form.Macro.exec(route.hiddenScriptText, this).toString() === "true") return;
             }
             length = Math.max(length, this.getVisableOrgConfig( route.id ).length);
@@ -566,8 +566,8 @@ MWF.ProcessFlow.Reset = new Class({
             "height": MWF.ProcessFlow_ORG_HEIGHT,
             "count": this.businessData.activity.resetCount || 0,
             "embedded": true,
-            "hasLetter": false, //字母
-            "hasTop": true //可选、已选的标题
+            "hasLetter": false, //문자
+            "hasTop": true //선택 가능, 선택됨 제목
         };
         if (this.form.json.selectorStyle) {
             defaultOpt = Object.merge(Object.clone(this.form.json.selectorStyle), defaultOpt);
@@ -646,7 +646,7 @@ MWF.ProcessFlow.AddTask = new Class({
                 text: this.lp.parallel,
                 value: "parallel"
             }],
-            value: this.quickData.mode || this.businessData.activity.defaultAddTaskMode || "single" //默认为单人
+            value: this.quickData.mode || this.businessData.activity.defaultAddTaskMode || "single" //기본값은 단일 사용자
         });
         this.mode.load();
 
@@ -654,7 +654,7 @@ MWF.ProcessFlow.AddTask = new Class({
         if( this.quickData.routeId ){
             position = (this.quickData.routeId === "before") ? "true" : "false";
         }else{
-            position = this.businessData.activity.defaultAddTaskType === 'before' ? 'true' : "false"; //默认为后加签
+            position = this.businessData.activity.defaultAddTaskType === 'before' ? 'true' : "false"; //기본값은 사후 추가 결재
         }
         this.position = new MWF.ProcessFlow.widget.Radio(this.positionArea, this.flow, {
             optionList: [{
@@ -704,8 +704,8 @@ MWF.ProcessFlow.AddTask = new Class({
         this.fireEvent("submit", [names, opinion, mode, before, routeName, this.opinion.getValue()]);
     },
     setQuickData: function( data ){
-        if(this.position)this.position.setValue( data.routeId === "before" ? "true" : null ); //前后加签存在 routeId
-        if(this.mode)this.mode.setValue( data.routeGroup || null ); //单人、并行、串行存在 routeGroup
+        if(this.position)this.position.setValue( data.routeId === "before" ? "true" : null ); //사전·사후 추가 결재에는 routeId 존재
+        if(this.mode)this.mode.setValue( data.routeGroup || null ); //단일·병렬·직렬에는 routeGroup 존재
         if(this.opinion)this.opinion.setValue( data.opinion || "" );
         if(this.selector && this.selector.selector)this.selector.selector.setValues( data.organizations ? (data.organizations.default || []) : [] );
     },
@@ -789,7 +789,7 @@ MWF.ProcessFlow.GoBack = new Class({
                 text: this.lp.goBackActivityWayJump,
                 value: "jump"
             }],
-            value: "step", //默认为单人
+            value: "step", //기본값은 단일 사용자
             onLoad: function () {
                 this.container.getElement(".o2flow-radio-area").setStyle("display","flex");
                 this.container.getElements(".o2flow-radio").setStyles({
@@ -1076,7 +1076,7 @@ MWF.ProcessFlow.Processor = new Class({
                 defaultRoute = route.id;
                 this.options.defaultRoute = "";
                 isSelectedDefault = true;
-            }else if ( !isSelectedDefault && (visibleRouteConfigList.length === 1 || route.sole )) { //sole表示优先路由
+            }else if ( !isSelectedDefault && (visibleRouteConfigList.length === 1 || route.sole )) { //sole은 우선 경로를 의미
                 defaultRoute = route.id;
             }
         }.bind(this));
@@ -1228,7 +1228,7 @@ MWF.ProcessFlow.Processor = new Class({
                         this.flow.noticeError( validation, this.node );
                         return false;
                     } else {
-                        //"路由校验失败"
+                        //"경로 검증에 실패했습니다."
                         this.flow.noticeError(
                             MWF.xApplication.process.Work.LP.routeValidFailure,
                             this.node
@@ -1428,7 +1428,7 @@ MWF.ProcessFlow.Processor.OrgList = new Class({
         this.orgMap[json.id] = org;
     },
     clearAllOrgs: function () {
-        //清空组织所选人
+        //조직에서 선택한 사람 비우기
         Object.values(this.orgMap).each(function (org) {
             org.setDataToOriginal();
         })
@@ -1668,10 +1668,10 @@ MWF.ProcessFlow.Processor.Org = new Class({
             "width": "auto",
             "height": MWF.ProcessFlow_ORG_HEIGHT,
             "embedded": true,
-            "hasLetter": false, //字母
-            "hasTop": true, //可选、已选的标题
-            "level1Indent" : 0, //第一级的缩进
-            "indent" : 0 //后续的缩进
+            "hasLetter": false, //문자
+            "hasTop": true, //선택 가능, 선택됨 제목
+            "level1Indent" : 0, //첫 번째 레벨 들여쓰기
+            "indent" : 0 //이후 레벨 들여쓰기
         };
     },
     getOptionEvents: function(){
@@ -1787,7 +1787,7 @@ MWF.ProcessFlow.Processor.Org = new Class({
                 {
                     "type": this.selectTypeList[0],
                     "onLoad": function () {
-                        //this 为 selector
+                        //this는 selector
                         _self.selectOnLoad(this, this.selector)
                     }
                 },
@@ -1800,7 +1800,7 @@ MWF.ProcessFlow.Processor.Org = new Class({
                 "type": "",
                 "types": this.selectTypeList,
                 "onLoad": function () {
-                    //this 为 selector
+                    //this는 selector
                     _self.selectOnLoad(this)
                 }
             };
@@ -2441,7 +2441,7 @@ MWF.ProcessFlow.Processor.Org = new Class({
         var flag = true;
         if (this.json.validationCount && typeOf(this.json.validationCount.toInt()) === "number") {
             if (data.length < this.json.validationCount.toInt()) {
-                //"请至少选择" + this.json.validationCount + "项"
+                //"최소 " + this.json.validationCount + "개 항목을 선택하세요."
                 flag = MWF.xApplication.process.Xform.LP.selectItemCountNotice.replace("{count}", this.json.validationCount);
             }
         }
@@ -2743,9 +2743,9 @@ MWF.ProcessFlow.widget.QuickSelect = new Class({
         }.bind(this));
     },
     getText: function( d ){
-        //选择[送办理]，意见：请办理，处理人：张三、李四、张三、李四、张三、李四、张三、李四、张三、李四、张三、李四、张三、李四
-        //选择[前加签]，意见：请处理，加签人：赵六
-        //保留待办，意见：请处理，重置给：王五
+        //[처리 요청] 선택, 의견: 처리 바랍니다, 처리자: 홍길동, 김철수, 홍길동, 김철수, 홍길동, 김철수, 홍길동, 김철수, 홍길동, 김철수, 홍길동, 김철수, 홍길동, 김철수
+        //[사전 추가 결재] 선택, 의견: 처리 바랍니다, 추가 결재자: 박영희
+        //결재 대기 유지, 의견: 처리 바랍니다, 재지정 대상: 이민수
         var text, orgtexts = [], lp = this.flow.lp;
         switch (d.action) {
             case "process":
@@ -2792,10 +2792,10 @@ MWF.ProcessFlow.widget.QuickSelect = new Class({
         };
         // routeId: "",
         // routeName: "",
-        // routeGroup:决策组.
-        // keepTask:是否保留待办.
-        // opinion:意见.
-        // organizations:人员组织列表.
+        // routeGroup:결정 그룹.
+        // keepTask:결재 대기 유지 여부.
+        // opinion:의견.
+        // organizations:사용자 조직 목록.
         var quickData = {};
         switch ( this.flow.currentAction ) {
             case "process":
@@ -2936,7 +2936,7 @@ MWF.ProcessFlow.widget.Opinion = new Class({
     createHandwriting: function () {
         this.handwritingMask.inject( this.flow.node );
         this.handwritingNode.show().inject(this.flow.node, "after");
-        //兼容以前的默认高宽
+        //이전 기본 높이·너비와 호환
         var x = 600;
         var y = 320;
 
@@ -2973,9 +2973,9 @@ MWF.ProcessFlow.widget.Opinion = new Class({
                 "save", "|",
                 "undo",
                 "redo", "|",
-                "eraser", //橡皮
-                "input", //输入法
-                "pen", "|", //笔画
+                "eraser", //지우개
+                "input", //입력기
+                "pen", "|", //획
                 "eraserRadius",
                 "size",
                 "color",

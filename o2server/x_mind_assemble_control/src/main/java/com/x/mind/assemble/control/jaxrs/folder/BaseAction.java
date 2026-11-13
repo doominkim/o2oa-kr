@@ -7,17 +7,17 @@ import com.x.mind.assemble.control.service.UserManagerService;
 
 public class BaseAction extends StandardJaxrsAction{
 	/**
-	 * 脑图文件夹信息操作服务
+	 * 마인드맵 폴더 정보 작업 서비스
 	 */
 	protected MindFolderInfoService mindFolderInfoService = new MindFolderInfoService();
 	
 	/**
-	 * 脑图信息操作服务
+	 * 마인드맵 정보 작업 서비스
 	 */
 	protected MindInfoService mindInfoService = new MindInfoService();
 	
 	/**
-	 * 用户信息管理服务
+	 * 사용자 정보 관리 서비스
 	 */
 	protected UserManagerService userManagerService = new UserManagerService();
 	

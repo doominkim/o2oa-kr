@@ -39,9 +39,9 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 内部请求 获取用户某一天的考勤组班次情况
+     * 내부 요청: 사용자의 특정 일자 근태 그룹 근무 교대 현황 조회
      * 
-     * @param person 人员 dn
+     * @param person 사용자 dn
      * @param date   yyyy-MM-dd
      * @return
      * @throws Exception
@@ -54,7 +54,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 缓存对象
+     * 캐시 객체
      * 
      * @param <T>
      * @param flag
@@ -82,13 +82,13 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询考勤组列表
-     * 分页查询需要
+     * 근태 그룹 목록 조회
+     * 페이지 조회용
      * 
      * @param adjustPage
      * @param adjustPageSize
-     * @param assistAdmin    协助管理员
-     * @param name           可以为空
+     * @param assistAdmin    보조 관리자
+     * @param name           비어 있어도 됨
      * @return
      * @throws Exception
      */
@@ -111,11 +111,11 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询考勤组总数
-     * 分页查询需要
+     * 근태 그룹 총수 조회
+     * 페이지 조회용
      * 
-     * @param name        可以为空
-     * @param assistAdmin 协助管理员
+     * @param name        비어 있어도 됨
+     * @param assistAdmin 보조 관리자
      * @return
      * @throws Exception
      */
@@ -135,12 +135,12 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询班次列表
-     * 分页查询需要
+     * 근무 교대 목록 조회
+     * 페이지 조회용
      * 
      * @param adjustPage
      * @param adjustPageSize
-     * @param name           可以为空
+     * @param name           비어 있어도 됨
      * @return
      * @throws Exception
      */
@@ -161,10 +161,10 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询班次总数
-     * 分页查询需要
+     * 근무 교대 총수 조회
+     * 페이지 조회용
      * 
-     * @param name 可以为空
+     * @param name 비어 있어도 됨
      * @return
      * @throws Exception
      */
@@ -181,7 +181,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 根据班次id，查询使用到这个班次的所有考勤组
+     * 근무 교대 id로 해당 교대를 사용하는 모든 근태 그룹 조회
      * 
      * @param shiftId
      * @return
@@ -197,7 +197,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 根据工作场所id，查询使用到这个工作场所的所有考勤组
+     * 근무지 id로 해당 근무지를 사용하는 모든 근태 그룹 조회
      * 
      * @param workPlaceId
      * @return
@@ -213,7 +213,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询用户所属的考勤组
+     * 사용자가 속한 근태 그룹 조회
      * 
      * @param person distinguishName
      * @return
@@ -229,7 +229,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询用户是否是某个考勤组的协助管理员
+     * 사용자가 특정 근태 그룹의 보조 관리자인지 조회
      * @param person
      * @return
      * @throws Exception
@@ -245,7 +245,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询打卡记录
+     * 출퇴근 기록 조회
      * 
      * @param person distinguishName
      * @param date   yyyy-MM-dd
@@ -265,8 +265,8 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询打卡记录
-     * 分页查询需要
+     * 출퇴근 기록 조회
+     * 페이지 조회용
      * 
      * @param adjustPage
      * @param adjustPageSize
@@ -284,13 +284,13 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询打卡记录
-     * 分页查询需要
+     * 출퇴근 기록 조회
+     * 페이지 조회용
      *
      * @param adjustPage
      * @param adjustPageSize
      * @param userId
-     * @param userList       过滤人员列表，可以为空
+     * @param userList       필터링할 사용자 목록, 비어 있어도 됨
      * @param startDate      Date
      * @param endDate        Date
      * @return
@@ -315,10 +315,10 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询打卡记录
-     * 分页查询需要
+     * 출퇴근 기록 조회
+     * 페이지 조회용
      * 
-     * @param userId    可以为空
+     * @param userId    비어 있어도 됨
      * @param startDate Date
      * @param endDate   Date
      * @return
@@ -330,11 +330,11 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询打卡记录
-     * 分页查询需要
+     * 출퇴근 기록 조회
+     * 페이지 조회용
      *
-     * @param userId    可以为空
-     * @param userList  过滤人员列表，可以为空
+     * @param userId    비어 있어도 됨
+     * @param userList  필터링할 사용자 목록, 비어 있어도 됨
      * @param startDate Date
      * @param endDate   Date
      * @return
@@ -417,7 +417,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 根据人员和日期 查询考勤详细
+     * 사용자와 날짜로 근태 상세 조회
      * 
      * @param person
      * @param date
@@ -435,7 +435,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 根据人员和开始结束日期 查询考勤详细
+     * 사용자와 시작·종료 날짜로 근태 상세 조회
      * 
      * @param person
      * @param startDate
@@ -457,12 +457,12 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询考勤详细列表
-     * 分页查询需要
+     * 근태 상세 목록 조회
+     * 페이지 조회용
      * 
      * @param adjustPage
      * @param adjustPageSize
-     * @param userId         可以为空
+     * @param userId         비어 있어도 됨
      * @param startDate
      * @param endDate
      * @return
@@ -474,13 +474,13 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询考勤详细列表
-     * 分页查询需要
+     * 근태 상세 목록 조회
+     * 페이지 조회용
      *
      * @param adjustPage
      * @param adjustPageSize
-     * @param userId         可以为空
-     * @param userList       过滤人员列表，可以为空
+     * @param userId         비어 있어도 됨
+     * @param userList       필터링할 사용자 목록, 비어 있어도 됨
      * @param startDate
      * @param endDate
      * @return
@@ -507,10 +507,10 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询考勤组总数
-     * 分页查询需要
+     * 근태 그룹 총수 조회
+     * 페이지 조회용
      * 
-     * @param userId    可以为空
+     * @param userId    비어 있어도 됨
      * @param startDate
      * @param endDate
      * @return
@@ -521,11 +521,11 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询考勤组总数
-     * 分页查询需要
+     * 근태 그룹 총수 조회
+     * 페이지 조회용
      *
-     * @param userId    可以为空
-     * @param userList  过滤人员列表，可以为空
+     * @param userId    비어 있어도 됨
+     * @param userList  필터링할 사용자 목록, 비어 있어도 됨
      * @param startDate
      * @param endDate
      * @return
@@ -548,9 +548,9 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询申诉记录 根据打卡记录的id
+     * 출퇴근 기록 id로 이의 신청 기록 조회
      * 
-     * @param recordId 打卡记录的id
+     * @param recordId 출퇴근 기록 id
      * @return
      * @throws Exception
      */
@@ -564,9 +564,9 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询申诉记录 根据日期查询出所有的申诉记录
+     * 날짜로 모든 이의 신청 기록 조회
      * 
-     * @param recordDateString 日期
+     * @param recordDateString 날짜
      * @return
      * @throws Exception
      */
@@ -580,12 +580,12 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询指定人员指定日期范围和状态的申诉记录.
+     * 지정 사용자의 지정 날짜 범위·상태의 이의 신청 기록 조회.
      *
-     * @param person    人员 dn
-     * @param startDate 开始日期 yyyy-MM-dd
-     * @param endDate   结束日期 yyyy-MM-dd
-     * @param statuses  申诉状态
+     * @param person    사용자 dn
+     * @param startDate 시작 날짜 yyyy-MM-dd
+     * @param endDate   종료 날짜 yyyy-MM-dd
+     * @param statuses  이의 신청 상태
      * @return
      * @throws Exception
      */
@@ -606,9 +606,9 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询申诉记录
-     * 分页查询需要
-     * startDate 和 endDate 必须同时有值
+     * 이의 신청 기록 조회
+     * 페이지 조회용
+     * startDate 와 endDate 는 함께 값이 있어야 함
      * 
      * @param adjustPage
      * @param adjustPageSize
@@ -660,8 +660,8 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询申诉记录总数
-     * 分页查询需要
+     * 이의 신청 기록 총수 조회
+     * 페이지 조회용
      * 
      * @param users
      * @return
@@ -694,12 +694,12 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 根据日期查询申诉记录
-     * 计算申诉次数用的，不包含 init 和 admin 处理的
+     * 날짜로 이의 신청 기록 조회
+     * 이의 신청 횟수 계산용, init 및 admin 처리 건 제외
      * 
-     * @param startDate 开始日期
-     * @param endDate   结束日期
-     * @param userId    可选
+     * @param startDate 시작 날짜
+     * @param endDate   종료 날짜
+     * @param userId    선택
      * @return
      * @throws Exception
      */
@@ -720,7 +720,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 比传入的时间更小 未发送的消息数据
+     * 전달된 시간보다 이전의 미발송 메시지 데이터
      * 
      * @param date
      * @return
@@ -738,7 +738,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 个人配置
+     * 개인 설정
      * 
      * @param person
      * @return
@@ -754,10 +754,10 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询人员打卡时间是否在外出数据中
+     * 사용자의 출퇴근 기록 시간이 외출 데이터에 포함되는지 조회
      * 
-     * @param person     人员
-     * @param recordTime 打卡时间
+     * @param person     사용자
+     * @param recordTime 출퇴근 기록 시간
      * @return
      * @throws Exception
      */
@@ -773,7 +773,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询人员打卡时间是否在请假数据中
+     * 사용자의 출퇴근 기록 시간이 휴가 데이터에 포함되는지 조회
      * @param person
      * @param recordTime
      * @return
@@ -792,8 +792,8 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询请假数据
-     * 分页查询需要
+     * 휴가 데이터 조회
+     * 페이지 조회용
      * 
      * @param adjustPage
      * @param adjustPageSize
@@ -819,8 +819,8 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询请假数据
-     * 分页查询需要
+     * 휴가 데이터 조회
+     * 페이지 조회용
      * 
      * @param person
      * @return
@@ -859,12 +859,12 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询 排班数据
+     * 근무 배정 데이터 조회
      * 
-     * @param groupId 必填 考勤组 id
-     * @param month   月份字段 yyyy-MM
-     * @param day     时间字段 yyyy-MM-dd
-     * @param person  人员 dn
+     * @param groupId 필수 근태 그룹 id
+     * @param month   월 필드 yyyy-MM
+     * @param day     날짜 필드 yyyy-MM-dd
+     * @param person  사용자 dn
      * @return
      * @throws Exception
      */
@@ -893,7 +893,7 @@ public class AttendanceV2ManagerFactory extends AbstractFactory {
     }
 
     /**
-     * 查询排班配置数据
+     * 근무 배정 설정 데이터 조회
      * @param groupId
      * @return
      * @throws Exception

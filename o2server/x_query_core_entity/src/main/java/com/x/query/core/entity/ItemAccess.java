@@ -24,7 +24,7 @@ import org.apache.openjpa.persistence.Persistent;
 import org.apache.openjpa.persistence.jdbc.Index;
 import org.apache.openjpa.persistence.jdbc.Strategy;
 
-@Schema(name = "ItemAccess", description = "业务字段访问权限配置.")
+@Schema(name = "ItemAccess", description = "업무 필드 접근 권한 설정.")
 @Entity
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.ItemAccess.table, uniqueConstraints = {
@@ -46,12 +46,12 @@ public class ItemAccess extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		// nothing
@@ -73,27 +73,27 @@ public class ItemAccess extends SliceJpaObject {
 	}
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("应用ID.")
+	@FieldDescribe("앱 ID.")
 	@Column(length = length_255B, name = ColumnNamePrefix + appId_FIELDNAME)
 	@Index(name = TABLE + ColumnNamePrefix + appId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String appId;
 
 	public static final String itemCategoryId_FIELDNAME = "itemCategoryId";
-	@FieldDescribe("流程ID或者内容管理分类ID.")
+	@FieldDescribe("프로세스 ID 또는 콘텐츠 관리 분류 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + itemCategoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String itemCategoryId;
 
 	public static final String itemCategory_FIELDNAME = "itemCategory";
-	@FieldDescribe("字段所属业务：流程为pp，内容管理为cms.")
+	@FieldDescribe("필드 소속 업무: 프로세스는 pp, 콘텐츠 관리는 cms.")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ItemCategory.length, name = ColumnNamePrefix + itemCategory_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private ItemCategory itemCategory;
 
 	public static final String path_FIELDNAME = "path";
-	@FieldDescribe("字段路径.")
+	@FieldDescribe("필드 경로.")
 	@Column(length = length_255B, name = ColumnNamePrefix + path_FIELDNAME)
 	@Index(name = TABLE + ColumnNamePrefix + path_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -132,8 +132,8 @@ public class ItemAccess extends SliceJpaObject {
 	}
 
 	public static final String properties_FIELDNAME = "properties";
-	@Schema(description = "属性存储字段.")
-	@FieldDescribe("属性存储字段.")
+	@Schema(description = "속성 저장 필드.")
+	@FieldDescribe("속성 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -151,45 +151,45 @@ public class ItemAccess extends SliceJpaObject {
 		this.properties = properties;
 	}
 
-	@FieldDescribe("扩展信息.")
+	@FieldDescribe("확장 정보.")
 	@Transient
 	private String extension;
 
-	@FieldDescribe("可查看对象DN列表：人员、组织、群组、角色.")
+	@FieldDescribe("조회 가능 대상 DN 목록: 사용자, 조직, 그룹, 역할.")
 	@Transient
 	private List<String> readerList;
 
-	@FieldDescribe("不可查看对象DN列表：人员、组织、群组、角色.")
+	@FieldDescribe("조회 불가 대상 DN 목록: 사용자, 조직, 그룹, 역할.")
 	@Transient
 	private List<String> excludeReaderList;
 
-	@FieldDescribe("可查看流程活动列表.")
+	@FieldDescribe("조회 가능 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
 			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
 	@Transient
 	private List<ItemAccessActivity> readActivityList;
 
-	@FieldDescribe("不可查看流程活动列表.")
+	@FieldDescribe("조회 불가 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
 			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
 	@Transient
 	private List<ItemAccessActivity> excludeReadActivityList;
 
-	@FieldDescribe("可编辑对象DN列表：人员、组织、群组、角色.")
+	@FieldDescribe("편집 가능 대상 DN 목록: 사용자, 조직, 그룹, 역할.")
 	@Transient
 	private List<String> editorList;
 
-	@FieldDescribe("不可编辑对象DN列表：人员、组织、群组、角色.")
+	@FieldDescribe("편집 불가 대상 DN 목록: 사용자, 조직, 그룹, 역할.")
 	@Transient
 	private List<String> excludeEditorList;
 
-	@FieldDescribe("可编辑流程活动列表.")
+	@FieldDescribe("편집 가능 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
 			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
 	@Transient
 	private List<ItemAccessActivity> editActivityList;
 
-	@FieldDescribe("不可编辑流程活动列表.")
+	@FieldDescribe("편집 불가 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
 			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
 	@Transient

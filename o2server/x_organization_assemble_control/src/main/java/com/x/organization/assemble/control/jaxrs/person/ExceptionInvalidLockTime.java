@@ -7,6 +7,6 @@ class ExceptionInvalidLockTime extends PromptException {
 	private static final long serialVersionUID = -551429161489167527L;
 
 	ExceptionInvalidLockTime() {
-		super("锁定到期时间必须大于当前时间.");
+		super("잠금 만료 시간은 현재 시간보다 늦어야 합니다.");
 	}
 }

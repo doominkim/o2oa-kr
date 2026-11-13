@@ -1,7 +1,7 @@
 package com.x.cms.common.image.maincolor;
 
 /**
- * 定义RGB像素点
+ * RGB 픽셀 점 정의
  *
  */
 public class Point {

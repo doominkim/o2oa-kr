@@ -26,7 +26,7 @@ public class ActionDeleteGroupConversation extends BaseAction {
 
     ActionResult<Wo> execute(EffectivePerson effectivePerson, String conversationId) throws Exception {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("删除群聊 person:{}, conversationId:{}.", effectivePerson.getDistinguishedName(), conversationId);
+            LOGGER.debug("그룹 채팅 삭제 person:{}, conversationId:{}.", effectivePerson.getDistinguishedName(), conversationId);
         }
         ActionResult<Wo> result = new ActionResult<>();
         if (StringUtils.isEmpty(conversationId)) {
@@ -38,30 +38,30 @@ public class ActionDeleteGroupConversation extends BaseAction {
             if (conversation == null) {
                 throw new ExceptionConversationNotExist();
             }
-            // 判断权限 群聊只有管理员能删除 单聊不能删除
+            // 권한 판단. 그룹 채팅은 관리자만 삭제 가능, 1:1 채팅은 삭제 불가
             if (conversation.getType().equals(IMConversation.CONVERSATION_TYPE_SINGLE) || (conversation.getType().equals(IMConversation.CONVERSATION_TYPE_GROUP)
                     && !effectivePerson.getDistinguishedName().equals(conversation.getAdminPerson()))) {
                 throw new ExceptionConvDeleteNoPermission();
             }
 
             Business business = new Business(emc);
-            // 然后删除会话扩展对象
+            // 이어서 대화 확장 객체 삭제
             List<String> extIds = business.imConversationFactory().listAllConversationExtIdsWithConversationId(conversationId);
             if (extIds == null || extIds.isEmpty()) {
-                LOGGER.info("没有会话扩展，无需清空！ conversationId:" + conversationId);
+                LOGGER.info("대화 확장이 없어 비울 필요가 없습니다! conversationId:" + conversationId);
             } else {
                 emc.beginTransaction(IMConversationExt.class);
                 emc.delete(IMConversationExt.class, extIds);
                 emc.commit();
-                LOGGER.info("成功删除会话扩展！conversationId:" + conversationId + " ext size：" + extIds.size() + " person："
+                LOGGER.info("대화 확장 삭제 성공! conversationId:" + conversationId + " ext size：" + extIds.size() + " person："
                         + effectivePerson.getDistinguishedName());
             }
-            // 最后删除会话对象
+            // 마지막으로 대화 객체 삭제
             emc.beginTransaction(IMConversation.class);
             emc.delete(IMConversation.class, conversation.getId());
             emc.commit();
-            LOGGER.info("删除群聊成功==============================================");
-            // 发送消息
+            LOGGER.info("그룹 채팅 삭제 성공==============================================");
+            // 메시지 발송
             sendConversationMsg(conversation.getPersonList(), conversation, MessageConnector.TYPE_IM_CONVERSATION_DELETE);
 
             Wo wo = new Wo();

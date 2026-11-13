@@ -36,13 +36,13 @@ public class SignAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(SignAction.class);
 
-	@JaxrsMethodDescribe(value = "获取签批信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "서명 결재 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -54,13 +54,13 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据task获取签批信息.", action = ActionGetByTask.class)
+	@JaxrsMethodDescribe(value = "task로 서명 결재 정보 조회.", action = ActionGetByTask.class)
 	@GET
 	@Path("task/{taskId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getByTask(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("任务ID") @PathParam("taskId") String taskId) {
+					@JaxrsParameterDescribe("작업 ID") @PathParam("taskId") String taskId) {
 		ActionResult<ActionGetByTask.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -72,13 +72,13 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据工作的job获取签批列表.", action = ActionListWithJob.class)
+	@JaxrsMethodDescribe(value = "업무 문서의 job으로 서명 결재 목록 조회.", action = ActionListWithJob.class)
 	@GET
 	@Path("list/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							@JaxrsParameterDescribe("工作的job") @PathParam("job") String job) {
+							@JaxrsParameterDescribe("업무 문서의 job") @PathParam("job") String job) {
 		ActionResult<List<ActionListWithJob.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -90,13 +90,13 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除签批", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "서명 결재 삭제", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -108,13 +108,13 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除签批", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "서명 결재 삭제", action = ActionDelete.class)
 	@GET
 	@Path("{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockGet2Delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -126,13 +126,13 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据task删除签批", action = ActionDeleteByTask.class)
+	@JaxrsMethodDescribe(value = "task로 서명 결재 삭제", action = ActionDeleteByTask.class)
 	@DELETE
 	@Path("task/{taskId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteByTask(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("待办标识") @PathParam("taskId") String taskId) {
+					   @JaxrsParameterDescribe("결재 대기 식별자") @PathParam("taskId") String taskId) {
 		ActionResult<ActionDeleteByTask.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -144,13 +144,13 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据task删除签批mockdeletetoget", action = ActionDeleteByTask.class)
+	@JaxrsMethodDescribe(value = "task로 서명 결재 삭제mockdeletetoget", action = ActionDeleteByTask.class)
 	@GET
 	@Path("task/{taskId}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteByTaskMockGet2Delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						@JaxrsParameterDescribe("待办标识") @PathParam("taskId") String taskId) {
+						@JaxrsParameterDescribe("결재 대기 식별자") @PathParam("taskId") String taskId) {
 		ActionResult<ActionDeleteByTask.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -162,13 +162,13 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "保存签批.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "서명 결재 저장.", action = ActionSave.class)
 	@POST
 	@Path("save/task/{taskId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void save(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					 @JaxrsParameterDescribe("待办ID") @PathParam("taskId") String taskId, JsonElement jsonElement) {
+					 @JaxrsParameterDescribe("결재 대기 ID") @PathParam("taskId") String taskId, JsonElement jsonElement) {
 		ActionResult<ActionSave.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -180,12 +180,12 @@ public class SignAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载签批涂鸦附件", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "서명 결재 손글씨 첨부파일 다운로드", action = ActionDownload.class)
 	@GET
 	@Path("download/{scrawlId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						 @JaxrsParameterDescribe("签批涂鸦附件标志") @PathParam("scrawlId") String scrawlId) {
+						 @JaxrsParameterDescribe("서명 결재 손글씨 첨부파일 식별자") @PathParam("scrawlId") String scrawlId) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -8,7 +8,7 @@ import com.x.base.core.container.EntityManagerContainer;
 import com.x.base.core.container.factory.EntityManagerContainerFactory;
 
 /**
- * 文档点赞信息查询管理的服务类
+ * 문서 좋아요 정보 조회 관리 서비스 클래스
  * 
  * @author O2LEE
  */

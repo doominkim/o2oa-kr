@@ -13,19 +13,19 @@ public class PublishTable extends JsonProperties {
 	public static final String TABLE_DATA_BY_SCRIPT = "script";
 	public static final String TABLE_DATA_BY_PATH = "dataPath";
 
-	@FieldDescribe("数据表名称")
+	@FieldDescribe("데이터 테이블 이름")
 	private String tableName;
 
-	@FieldDescribe("获取数据方式")
+	@FieldDescribe("데이터 조회 방식")
 	private String queryTableDataBy;
 
-	@FieldDescribe("数据路径")
+	@FieldDescribe("데이터 경로")
 	private String queryTableDataPath;
 
-	@FieldDescribe("数据脚本.")
+	@FieldDescribe("데이터 스크립트.")
 	private String targetAssignDataScript;
 
-	@FieldDescribe("数据脚本文本.")
+	@FieldDescribe("데이터 스크립트 텍스트.")
 	private String targetAssignDataScriptText;
 
 	public String getTableName() {

@@ -49,7 +49,7 @@ public class ActionDestroySingleEventWithId extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历事件信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 일정 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -66,7 +66,7 @@ public class ActionDestroySingleEventWithId extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + calendar_event.getCalendarId() );
+					Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + calendar_event.getCalendarId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -74,13 +74,13 @@ public class ActionDestroySingleEventWithId extends BaseAction {
 		}
 		
 		if( check && !ThisApplication.isCalendarSystemManager(effectivePerson) ) {
-			//判断用户权限
+			//사용자 권한 판단
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(personName);
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 				if( calendar != null ) {
 					if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
-							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//没权限
+							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 						check = false;
 						Exception exception = new ExceptionInsufficientPermissions( "您没有权限从日历中删除日程事件.日历:" + calendar.getName() );
 						result.error( exception );
@@ -88,7 +88,7 @@ public class ActionDestroySingleEventWithId extends BaseAction {
 				}				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -102,7 +102,7 @@ public class ActionDestroySingleEventWithId extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID删除指定日历事件信息时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "ID로 일정 정보를 삭제하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

@@ -34,13 +34,13 @@ public class ActionGetSectionOperationPermission extends BaseAction {
 		if (roleAndPermission == null) {
 			roleAndPermission = new RoleAndPermission();
 		}
-		// 判断主题发布权限
+		// 주제 게시 권한 판단
 		wrap.setSubjectPublishAble(sectionInfoService.hasPublishPermission(sectionInfo, effectivePerson, roleAndPermission.getPermissionInfoList()));
 
-		// 判断版块主题回复权限
+		// 게시판 주제 답글 권한 판단
 		if ("所有人".equals(sectionInfo.getReplyPublishAble())) {
 			wrap.setReplyPublishAble(true);
-		} else {// 判断权限
+		} else {// 권한 판단
 			checkUserPermission = "SECTION_REPLY_PUBLISH_" + sectionInfo.getId();
 			hasPermission = checkUserPermission(checkUserPermission, roleAndPermission.getPermissionInfoList());
 			if (hasPermission) {
@@ -114,7 +114,7 @@ public class ActionGetSectionOperationPermission extends BaseAction {
 			wrap.setSectionPermissoinManageAble(true);
 			wrap.setSectionConfigManageAble(true);
 		}
-		//是否是管理员
+		//관리자 여부
 		Business business = new Business(null);
 		Boolean userBBSManager = business.isManager(effectivePerson);
 		if(userBBSManager) {
@@ -139,40 +139,40 @@ public class ActionGetSectionOperationPermission extends BaseAction {
 
 	public static class Wo{
 
-		@FieldDescribe( "对应权限SECTION_SUBJECT_PUBLISH:用户是否可以在版块中发布主题." )
+		@FieldDescribe( "대응 권한 SECTION_SUBJECT_PUBLISH: 사용자가 게시판에 주제를 게시할 수 있는지 여부." )
 		private Boolean subjectPublishAble = false;
 
-		@FieldDescribe( "对应权限SECTION_SUBJECT_AUDIT:用户是否可以审核在版块中发布的主题." )
+		@FieldDescribe( "대응 권한 SECTION_SUBJECT_AUDIT: 사용자가 게시판에 게시된 주제를 심사할 수 있는지 여부." )
 		private Boolean subjectAuditAble = false;
 
-		@FieldDescribe( "对应权限SECTION_SUBJECT_MANAGEMENT:用户是否可以在版块中对已发布主题进行删除等管理操作." )
+		@FieldDescribe( "대응 권한 SECTION_SUBJECT_MANAGEMENT: 사용자가 게시판에서 게시된 주제에 삭제 등 관리 작업을 할 수 있는지 여부." )
 		private Boolean subjectManageAble = false;
 
-		@FieldDescribe( "对应权限SECTION_SUBJECT_RECOMMEND:用户是否可以在版块中对主题进行推荐操作." )
+		@FieldDescribe( "대응 권한 SECTION_SUBJECT_RECOMMEND: 사용자가 게시판에서 주제를 추천할 수 있는지 여부." )
 		private Boolean subjectRecommendAble = false;
 
-		@FieldDescribe( "对应权限SECTION_SUBJECT_STICK:用户是否可以在版块中对主题进行置顶操作." )
+		@FieldDescribe( "대응 권한 SECTION_SUBJECT_STICK: 사용자가 게시판에서 주제를 상단 고정할 수 있는지 여부." )
 		private Boolean subjectStickAble = false;
 
-		@FieldDescribe( "对应权限SECTION_SUBJECT_CREAM:用户是否可以在版块中对指定主题进行精华主题设置操作." )
+		@FieldDescribe( "대응 권한 SECTION_SUBJECT_CREAM: 사용자가 게시판에서 지정 주제를 우수 주제로 설정할 수 있는지 여부." )
 		private Boolean subjectCreamAble = false;
 
-		@FieldDescribe( "对应权限SECTION_REPLY_PUBLISH:用户是否可以审核在版块中的所有回复内容." )
+		@FieldDescribe( "대응 권한 SECTION_REPLY_PUBLISH: 사용자가 게시판의 모든 답글 내용을 심사할 수 있는지 여부." )
 		private Boolean replyPublishAble = false;
 
-		@FieldDescribe( "对应权限SECTION_REPLY_AUDIT:用户是否可以在版块中对回复进行审核." )
+		@FieldDescribe( "대응 권한 SECTION_REPLY_AUDIT: 사용자가 게시판에서 답글을 심사할 수 있는지 여부." )
 		private Boolean replyAuditAble = false;
 
-		@FieldDescribe( "对应权限SECTION_REPLY_MANAGEMENT:用户是否可以在版块中对回复进行查询或者删除." )
+		@FieldDescribe( "대응 권한 SECTION_REPLY_MANAGEMENT: 사용자가 게시판에서 답글을 조회하거나 삭제할 수 있는지 여부." )
 		private Boolean replyManageAble = false;
 
-		@FieldDescribe( "对应权限SECTION_SECTION_MANAGER:用户是否可以在版块中对子版块进行创建和删除等操作." )
+		@FieldDescribe( "대응 권한 SECTION_SECTION_MANAGER: 사용자가 게시판에서 하위 게시판 생성·삭제 등을 할 수 있는지 여부." )
 		private Boolean sectionManageAble = false;
 
-		@FieldDescribe( "对应权限SECTION_PERMISSION_MANAGEMENT:用户是否可以对论坛用户进行版块的权限管理." )
+		@FieldDescribe( "대응 권한 SECTION_PERMISSION_MANAGEMENT: 사용자가 포럼 사용자의 게시판 권한을 관리할 수 있는지 여부." )
 		private Boolean sectionPermissoinManageAble = false;
 
-		@FieldDescribe( "对应权限SECTION_CONFIG_MANAGEMENT:用户是否可以对版块进行系统参数配置修改." )
+		@FieldDescribe( "대응 권한 SECTION_CONFIG_MANAGEMENT: 사용자가 게시판 시스템 파라미터 설정을 수정할 수 있는지 여부." )
 		private Boolean sectionConfigManageAble = false;
 
 		public Boolean getSubjectPublishAble() {

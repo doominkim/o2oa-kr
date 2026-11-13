@@ -31,18 +31,18 @@ import com.x.bbs.assemble.control.jaxrs.roleinfo.exception.ExceptionRoleInfoProc
 import com.x.bbs.assemble.control.jaxrs.subjectinfo.exception.ExceptionSubjectIdEmpty;
 
 @Path("user/subject")
-@JaxrsDescribe("主贴管理服务")
+@JaxrsDescribe("원글 관리 서비스")
 public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( SubjectInfoManagerUserAction.class );
 
-	@JaxrsMethodDescribe( value = "根据指定ID获取主题具体信息.", action = ActionSubjectGet.class )
+	@JaxrsMethodDescribe( value = "지정 ID로 주제 상세 정보 조회.", action = ActionSubjectGet.class )
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -59,7 +59,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectGet().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "根据指定ID获取主题具体信息时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "지정한 ID의 주제 상세 정보를 가져오는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -67,13 +67,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "设置为精华主题.", action = ActionSubjectSetCream.class )
+	@JaxrsMethodDescribe( value = "우수 주제로 설정.", action = ActionSubjectSetCream.class )
 	@GET
 	@Path("setCream/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void setCream( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectSetCream.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -89,7 +89,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectSetCream().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "设置精华主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "추천 게시물로 지정하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -97,13 +97,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消精华主题.", action = ActionSubjectNonCream.class )
+	@JaxrsMethodDescribe( value = "우수 주제 취소.", action = ActionSubjectNonCream.class )
 	@GET
 	@Path("nonCream/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nonCream( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectNonCream.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -120,7 +120,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectNonCream().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "锁定主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "주제를 잠그는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -128,13 +128,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "设置为原创主题.", action = ActionSubjectSetOriginal.class )
+	@JaxrsMethodDescribe( value = "원작 주제로 설정.", action = ActionSubjectSetOriginal.class )
 	@GET
 	@Path("setOriginal/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void setOriginal( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectSetOriginal.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -150,7 +150,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectSetOriginal().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "设置为原创主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "원본 게시물로 지정하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -158,13 +158,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消原创主题.", action = ActionSubjectNonOriginal.class )
+	@JaxrsMethodDescribe( value = "원작 주제 취소.", action = ActionSubjectNonOriginal.class )
 	@GET
 	@Path("nonOriginal/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nonOriginal( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectNonOriginal.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -181,7 +181,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectNonOriginal().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消原创主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "원본 게시물 지정을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -189,13 +189,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "锁定主题: 状态修改为'启用', 属性stopReply = false.", action = ActionSubjectUnLock.class )
+	@JaxrsMethodDescribe( value = "주제 잠금: 상태를 '사용'으로 변경, 속성 stopReply = false.", action = ActionSubjectUnLock.class )
 	@GET
 	@Path("unlock/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void unlock( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectUnLock.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -211,7 +211,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectUnLock().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "锁定主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "주제를 잠그는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -219,13 +219,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "锁定主题: 状态修改为'已锁定', 属性stopReply = true", action = ActionSubjectLock.class )
+	@JaxrsMethodDescribe( value = "주제 잠금: 상태를 '잠김'으로 변경, 속성 stopReply = true", action = ActionSubjectLock.class )
 	@GET
 	@Path("lock/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void lock( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectLock.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -241,7 +241,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectLock().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "锁定主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "주제를 잠그는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -249,13 +249,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消完成主题: 属性isCompleted = false.", action = ActionSubjectUnComplete.class )
+	@JaxrsMethodDescribe( value = "주제 완료 취소: 속성 isCompleted = false.", action = ActionSubjectUnComplete.class )
 	@GET
 	@Path("uncomplete/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void unComplete( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectUnComplete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -271,7 +271,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectUnComplete().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消完成主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "주제 완료를 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -279,13 +279,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "完成主题: 属性isCompleted = true", action = ActionSubjectCompleted.class )
+	@JaxrsMethodDescribe( value = "주제 완료: 속성 isCompleted = true", action = ActionSubjectCompleted.class )
 	@GET
 	@Path("complete/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void complete( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectCompleted.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -301,7 +301,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectCompleted().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "完成主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "주제를 완료 처리하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -309,13 +309,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消问题贴采纳回复", action = ActionSubjectUnAcceptReply.class )
+	@JaxrsMethodDescribe( value = "질문 글 답글 채택 취소", action = ActionSubjectUnAcceptReply.class )
 	@GET
 	@Path("unacceptreply/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void unAcceptReply( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectUnAcceptReply.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -331,7 +331,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectUnAcceptReply().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消问题贴采纳回复时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "질문 게시물의 댓글 채택을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -339,14 +339,14 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "问题贴采纳回复", action = ActionSubjectAcceptReply.class )
+	@JaxrsMethodDescribe( value = "질문 글 답글 채택", action = ActionSubjectAcceptReply.class )
 	@GET
 	@Path("acceptreply/{id}/{replyId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void acceptReply( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("回帖信息ID") @PathParam("replyId") String replyId ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("답글 정보 ID") @PathParam("replyId") String replyId ) {
 		ActionResult<ActionSubjectAcceptReply.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -362,7 +362,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectAcceptReply().execute( request, effectivePerson, id, replyId );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "问题贴采纳回复时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "질문 게시물의 댓글을 채택하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -370,13 +370,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "版块置顶", action = ActionSubjectTopToSection.class )
+	@JaxrsMethodDescribe( value = "게시판 상단 고정", action = ActionSubjectTopToSection.class )
 	@GET
 	@Path("topToSection/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void topToSection( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectTopToSection.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -392,7 +392,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectTopToSection().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "版块置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "섹션 상단 고정 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -400,13 +400,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消版块置顶", action = ActionSubjectNonTopToSection.class )
+	@JaxrsMethodDescribe( value = "게시판 상단 고정 취소", action = ActionSubjectNonTopToSection.class )
 	@GET
 	@Path("nonTopToSection/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nonTopToSection( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectNonTopToSection.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -423,7 +423,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectNonTopToSection().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消版块置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "섹션 상단 고정을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -431,13 +431,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "主版块置顶", action = ActionSubjectTopToMainSection.class )
+	@JaxrsMethodDescribe( value = "상위 게시판 상단 고정", action = ActionSubjectTopToMainSection.class )
 	@GET
 	@Path("topToMainSection/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void topToMainSection( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectTopToMainSection.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -453,7 +453,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectTopToMainSection().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "主版块置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "상위 섹션 상단 고정 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -461,13 +461,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消主版块置顶", action = ActionSubjectNonTopToMainSection.class )
+	@JaxrsMethodDescribe( value = "상위 게시판 상단 고정 취소", action = ActionSubjectNonTopToMainSection.class )
 	@GET
 	@Path("nonTopToMainSection/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nonTopToMainSection( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectNonTopToMainSection.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -484,7 +484,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectNonTopToMainSection().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消主版块置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "상위 섹션 상단 고정을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -492,13 +492,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "论坛置顶", action = ActionSubjectTopToForum.class )
+	@JaxrsMethodDescribe( value = "포럼 상단 고정", action = ActionSubjectTopToForum.class )
 	@GET
 	@Path("topToForum/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void topToForum( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectTopToForum.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -515,7 +515,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectTopToForum().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "全局置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "전체 상단 고정 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -523,13 +523,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消论坛置顶.", action = ActionSubjectNonTopToForum.class )
+	@JaxrsMethodDescribe( value = "포럼 상단 고정 취소.", action = ActionSubjectNonTopToForum.class )
 	@GET
 	@Path("nonTopToForum/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nonTopToForum( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectNonTopToForum.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -546,7 +546,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectNonTopToForum().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消论坛置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "포럼 상단 고정을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -554,13 +554,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "全局置顶.", action = ActionSubjectTopToBBS.class )
+	@JaxrsMethodDescribe( value = "전체 상단 고정.", action = ActionSubjectTopToBBS.class )
 	@GET
 	@Path("topToBBS/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void topToBBS( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectTopToBBS.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -576,7 +576,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectTopToBBS().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "全局置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "전체 상단 고정 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -584,13 +584,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "推荐到BBS首页.", action = ActionSubjectSetRecommendToBBSIndex.class )
+	@JaxrsMethodDescribe( value = "BBS 홈에 추천.", action = ActionSubjectSetRecommendToBBSIndex.class )
 	@GET
 	@Path("setRecommendToBBSIndex/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void setRecommendToBBSIndex( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectSetRecommendToBBSIndex.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -606,7 +606,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectSetRecommendToBBSIndex().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "推荐到BBS首页时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "BBS 홈에 추천하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -614,13 +614,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消推荐到BBS首页.", action = ActionSubjectNonRecommendToBBSIndex.class )
+	@JaxrsMethodDescribe( value = "BBS 홈 추천 취소.", action = ActionSubjectNonRecommendToBBSIndex.class )
 	@GET
 	@Path("nonRecommendToBBSIndex/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nonRecommendToBBSIndex( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectNonRecommendToBBSIndex.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -637,7 +637,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectNonRecommendToBBSIndex().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消推荐到BBS首页时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "BBS 홈 추천을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -645,13 +645,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "取消全局置顶.", action = ActionSubjectNonTopToBBS.class )
+	@JaxrsMethodDescribe( value = "전체 상단 고정 취소.", action = ActionSubjectNonTopToBBS.class )
 	@GET
 	@Path("nonTopToBBS/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void nonTopToBBS( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id ) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id ) {
 		ActionResult<ActionSubjectNonTopToBBS.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -668,7 +668,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectNonTopToBBS().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "取消全局置顶时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "전체 상단 고정을 취소하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -676,7 +676,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "创建新的主题信息或者更新主题信息.", action = ActionSubjectSave.class )
+	@JaxrsMethodDescribe( value = "새 주제 정보 생성 또는 주제 정보 수정.", action = ActionSubjectSave.class )
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -696,13 +696,13 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "根据ID删除指定的主题信息.", action = ActionSubjectDelete.class )
+	@JaxrsMethodDescribe( value = "ID로 지정 주제 정보 삭제.", action = ActionSubjectDelete.class )
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("主贴信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("원글 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionSubjectDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -718,7 +718,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectDelete().execute( request, effectivePerson, id );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "完成主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "주제를 완료 처리하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -726,7 +726,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "将指定ID的主贴转移到其他的版块中.", action = ActionSubjectChangeSection.class )
+	@JaxrsMethodDescribe( value = "지정 ID의 원글을 다른 게시판으로 이동.", action = ActionSubjectChangeSection.class )
 	@PUT
 	@Path("change/section")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -740,7 +740,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectChangeSection().execute( request, effectivePerson, jsonElement );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "将指定ID的主贴转移到其他的版块中时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "지정한 ID의 게시물을 다른 섹션으로 옮기는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -748,14 +748,14 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "列示投票记录.", action = ActionVoteRecordListMyForPage.class )
+	@JaxrsMethodDescribe( value = "투표 기록 목록.", action = ActionVoteRecordListMyForPage.class )
 	@PUT
 	@Path("voterecord/list/page/{page}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listVoteRecordForPage( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("显示页码") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页显示条目数量") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("표시 페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
 			JsonElement jsonElement ) {
 		ActionResult<List<ActionVoteRecordListMyForPage.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -766,7 +766,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionVoteRecordListMyForPage().execute( request, effectivePerson, page, count, jsonElement );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "列示主题投票记录时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "주제 투표 기록을 조회하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -774,7 +774,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "提交投票信息.", action = ActionSubjectSubmitVoteResult.class )
+	@JaxrsMethodDescribe( value = "투표 정보 제출.", action = ActionSubjectSubmitVoteResult.class )
 	@Path("vote/submit")
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -789,7 +789,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectSubmitVoteResult().execute( request, effectivePerson, jsonElement );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "用户提交投票结果时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "투표 결과를 제출하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -797,14 +797,14 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe( value = "列示我发布的主题.", action = ActionSubjectListMyForPage.class )
+	@JaxrsMethodDescribe( value = "내가 게시한 주제 목록.", action = ActionSubjectListMyForPage.class )
 	@PUT
 	@Path("my/list/page/{page}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listMySubjectForPage( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("显示页码") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页显示条目数量") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("표시 페이지 번호") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
 			JsonElement jsonElement ) {
 		ActionResult<List<ActionSubjectListMyForPage.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -815,7 +815,7 @@ public class SubjectInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSubjectListMyForPage().execute( request, effectivePerson, page, count, jsonElement );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess( e, "列示我发布的主题时发生异常！" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "내가 작성한 주제를 조회하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

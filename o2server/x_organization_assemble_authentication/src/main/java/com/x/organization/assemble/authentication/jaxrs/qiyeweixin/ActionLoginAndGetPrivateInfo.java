@@ -72,7 +72,7 @@ public class ActionLoginAndGetPrivateInfo extends BaseAction {
             }
             String userId = resp.getUserid();
             if (StringUtils.isEmpty(userId)) {
-                logger.info("userId为空，无法单点登录！！！");
+                logger.info("userId가 비어 있어 SSO 로그인할 수 없습니다!!!");
                 throw new ExceptionQywxResponse(resp.getErrcode(), resp.getErrmsg());
             }
 
@@ -107,7 +107,7 @@ public class ActionLoginAndGetPrivateInfo extends BaseAction {
         @Override
         public void run() {
             if (userinfo != null) {
-                logger.info("开始从企业微信查询用户详细信息进行更新，{}.", userinfo.toString());
+                logger.info("기업 위챗에서 사용자 상세 정보 조회 후 업데이트 시작, {}.", userinfo.toString());
             }
             try {
                 if (userinfo != null && StringUtils.isNotEmpty(userinfo.getUser_ticket())) {
@@ -127,11 +127,11 @@ public class ActionLoginAndGetPrivateInfo extends BaseAction {
                         throw new ExceptionQywxResponse(errCode, errMsg);
                     }
                     if (logger.isDebugEnabled()) {
-                        logger.debug("获取到企业微信用户详细信息： {}.", resp.toString());
+                        logger.debug("기업 위챗 사용자 상세 정보 획득: {}.", resp.toString());
                     }
                     String userId = resp.getUserid();
                     if (StringUtils.isEmpty(userId)) {
-                        logger.info("userId为空，查询到对象！！！");
+                        logger.info("userId가 비어 있어 객체를 조회했습니다!!!");
                         throw new ExceptionQywxResponse(resp.getErrcode(), resp.getErrmsg());
                     }
                     try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
@@ -151,7 +151,7 @@ public class ActionLoginAndGetPrivateInfo extends BaseAction {
                         person.setGenderType(Objects.equals("1", resp.getGender()) ? GenderType.m : GenderType.f);
                         if (StringUtils.isNotEmpty(resp.getAvatar())) {
                             if (logger.isDebugEnabled()) {
-                                logger.debug("下载微信头像的url： {}.", resp.getAvatar());
+                                logger.debug("위챗 프로필 사진 다운로드 url: {}.", resp.getAvatar());
                             }
                             byte[] bytes = ConnectionAction.getBinary(resp.getAvatar(), null);
                             if (bytes != null && bytes.length > 0) {
@@ -182,11 +182,11 @@ public class ActionLoginAndGetPrivateInfo extends BaseAction {
                         emc.commit();
                         CacheManager.notify(Person.class);
                         if (logger.isDebugEnabled()) {
-                            logger.debug("更新用户信息成功，perso：{}", person.toString());
+                            logger.debug("사용자 정보 업데이트 성공, perso: {}", person.toString());
                         }
                     }
                 } else {
-                    logger.info("没有获取到用户认证后的 user_ticket 无法获取用户敏感信息！！！");
+                    logger.info("인증 후 user_ticket을 받지 못해 사용자 민감 정보를 가져올 수 없습니다!!!");
                 }
             }catch (Exception e) {
                 logger.error(e);
@@ -307,7 +307,7 @@ public class ActionLoginAndGetPrivateInfo extends BaseAction {
          *    "mobile": "13800000000",
          *    "email": "zhangsan@gzdev.com",
          *    "biz_mail":"zhangsan@qyycs2.wecom.work",
-         *    "address": "广州市海珠区新港中路"
+         *    "address": "광저우시 하이주구 신강중로"
          * }
          * </code>
          */

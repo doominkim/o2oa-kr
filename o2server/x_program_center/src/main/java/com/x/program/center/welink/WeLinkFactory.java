@@ -57,21 +57,21 @@ public class WeLinkFactory {
     }
 
     private void orgs() throws Exception {
-        OrgListResp root = this.orgs("0", "0", 1); //跟目录不能递归
+        OrgListResp root = this.orgs("0", "0", 1); //루트 디렉터리는 재귀 불가
         if (root.getDepartmentInfo()!=null && !root.getDepartmentInfo().isEmpty()) {
             for (int i = 0; i < root.getDepartmentInfo().size(); i++) {
                 Department department = root.getDepartmentInfo().get(i);
                 this.orgs.add(department);
                 int offset = 1;
                 int totalCount = 0;
-                this.recursiveOrgs(department.getDeptCode(), offset, totalCount); //递归查询有所的组织
+                this.recursiveOrgs(department.getDeptCode(), offset, totalCount); //모든 조직 재귀 조회
             }
         }
     }
 
     private void recursiveOrgs(String deptCode, int offset, int totalCount) throws Exception {
         logger.info("recursiveOrgs deptCode:"+deptCode+"， offset："+offset+" ，totalCount："+totalCount);
-        OrgListResp subDepts = this.orgs(deptCode, "1", offset); //递归查询有所的组织
+        OrgListResp subDepts = this.orgs(deptCode, "1", offset); //모든 조직 재귀 조회
         if (!subDepts.getCode().equals("0") && !subDepts.getCode().equals("47009") && !subDepts.getCode().equals("47012")) {
             throw new ExceptionListOrg(subDepts.getCode(), subDepts.getMessage());
         }
@@ -86,16 +86,16 @@ public class WeLinkFactory {
     }
 
     /**
-     * 组织
-     * @param deptCode 父组织id  顶级的父是0
-     * @param recursiveflag 是否递归 0不递归 1递归
+     * 조직
+     * @param deptCode 상위 조직 id  최상위의 상위는 0
+     * @param recursiveflag 재귀 여부 0 재귀 안 함 1 재귀
      * @return
      * @throws Exception
      */
     private OrgListResp orgs(String deptCode, String recursiveflag, Integer offset) throws Exception {
         String address = Config.weLink().getOapiAddress() + "/contact/v3/departments/list?recursiveflag="+recursiveflag+"&deptCode="+deptCode+"&offset="+offset;
         //deptCode
-        //recursiveflag 0 ：查询下级部门信息 1 ：查询递归获取所有子部门
+        //recursiveflag 0 : 하위 부서 정보 조회 1 : 모든 하위 부서 재귀 조회
         List<NameValuePair> heads = new ArrayList<>();
         heads.add(new NameValuePair(WeLink.WeLink_Auth_Head_Key, this.accessToken));
         OrgListResp resp = HttpConnection.getAsObject(address, heads, OrgListResp.class);
@@ -111,7 +111,7 @@ public class WeLinkFactory {
         this.usersPages(deptCode, pageNo);
     }
 
-    //分页查询
+    //페이지 조회
     private void usersPages(String deptCode, int pageNo) throws Exception {
         UserListResp resp = this.users(deptCode, pageNo);
         if (resp.getData() != null && !resp.getData().isEmpty()) {
@@ -125,9 +125,9 @@ public class WeLinkFactory {
     }
 
     /**
-     * 查询用户
-     * @param deptCode 所属组织id
-     * @param pageNo 页码
+     * 조회 사용자
+     * @param deptCode 소속 조직 id
+     * @param pageNo 페이지 번호
      * @return
      * @throws Exception
      */
@@ -151,11 +151,11 @@ public class WeLinkFactory {
         //  "totalCount": 327,
         //  "departmentInfo": []
         //}
-        private String code; //数据正常返回“0”，如果发生错误，会返回对应的错误码。
+        private String code; //정상이면 “0” 반환, 오류 발생 시 해당 오류 코드 반환.
         private String message;
         private Long offset;
         private Long limit;
-        private Long totalCount; //当前部门下所有部门数，如果当前部门为0级，仅能获取下一级的所有部门。
+        private Long totalCount; //현재 부서 아래 전체 부서 수, 현재 부서가 0단계면 바로 아래 단계의 부서만 조회 가능.
         private List<Department> departmentInfo;
 
         public String getCode() {
@@ -217,11 +217,11 @@ public class WeLinkFactory {
         //    "total": 2,
         //    "data": []
         //}
-        private String code; //数据正常返回“0”，如果发生错误，会返回对应的错误码。
+        private String code; //정상이면 “0” 반환, 오류 발생 시 해당 오류 코드 반환.
         private String message;
-        private Long pageNo; //当前页码
-        private Long pages; //总共页数
-        private Long total; //总用户数
+        private Long pageNo; //현재 페이지 번호
+        private Long pages; //전체 페이지 수
+        private Long total; //전체 사용자 수
         private List<User> data;
 
 

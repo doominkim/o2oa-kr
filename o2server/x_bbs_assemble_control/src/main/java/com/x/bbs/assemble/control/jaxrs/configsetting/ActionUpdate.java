@@ -39,7 +39,7 @@ public class ActionUpdate extends BaseAction {
 		} catch (Exception e) {
 			check = false;
 			Exception exception = new ExceptionConfigSettingInfoProcess(e,
-					"系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+					"JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -49,7 +49,7 @@ public class ActionUpdate extends BaseAction {
 				if (!userManagerService.isHasPlatformRole( effectivePerson.getDistinguishedName(),
 						ThisApplication.BBSMANAGER ) && !effectivePerson.isManager()) {
 					check = false;
-					logger.warn("用户没有BBSManager角色，并且也不是系统管理员！USER：" + effectivePerson.getDistinguishedName());
+					logger.warn("사용자에게 BBSManager 역할이 없고 시스템 관리자도 아닙니다! USER:" + effectivePerson.getDistinguishedName());
 					Exception exception = new ExceptionInsufficientPermissions(effectivePerson.getDistinguishedName(),
 							ThisApplication.BBSMANAGER);
 					result.error(exception);
@@ -88,7 +88,7 @@ public class ActionUpdate extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionConfigSettingInfoProcess(e,
-						"系统在根据编码获取BBS系统设置信息时发生异常！Code:" + wrapIn.getConfigCode());
+						"코드로 BBS 시스템 설정을 가져오는 중 오류가 발생했습니다! Code:" + wrapIn.getConfigCode());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -99,7 +99,7 @@ public class ActionUpdate extends BaseAction {
 				configSetting = configSettingService.update(configSetting);
 			} catch (Exception e) {
 				Exception exception = new ExceptionConfigSettingInfoProcess(e,
-						"根据ID更新BBS系统设置信息时发生异常.ID:" + wrapIn.getId());
+						"ID로 BBS 시스템 설정을 수정하는 중 오류가 발생했습니다. ID:" + wrapIn.getId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -110,7 +110,7 @@ public class ActionUpdate extends BaseAction {
 					wrap = Wo.copier.copy(configSetting);
 					result.setData(wrap);
 				} catch (Exception e) {
-					Exception exception = new ExceptionConfigSettingInfoProcess(e, "系统在转换所有BBS系统设置信息为输出对象时发生异常.");
+					Exception exception = new ExceptionConfigSettingInfoProcess(e, "전체 BBS 시스템 설정을 출력 객체로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}

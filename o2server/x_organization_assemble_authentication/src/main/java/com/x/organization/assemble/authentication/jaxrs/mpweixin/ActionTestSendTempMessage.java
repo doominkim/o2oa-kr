@@ -24,7 +24,7 @@ import com.x.organization.assemble.authentication.Business;
 import com.x.organization.core.entity.Person;
 
 /**
- * 测试发送模版消息
+ * 템플릿 메시지 발송 테스트
  * Created by fancyLou on 3/11/21.
  * Copyright © 2021 O2. All rights reserved.
  */
@@ -33,11 +33,11 @@ public class ActionTestSendTempMessage extends BaseAction  {
     private static Logger logger = LoggerFactory.getLogger(ActionTestSendTempMessage.class);
 
     ActionResult<Wo> execute(String personid, JsonElement jsonElement) throws Exception {
-        logger.info("发送测试消息，person："+personid);
+        logger.info("테스트 메시지 발송, person:"+personid);
         ActionResult<Wo> result = new ActionResult<Wo>();
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
-            // openid 查询用户
+            // openid로 사용자 조회
             String personId = business.person().getWithCredential(personid);
             if (StringUtils.isEmpty(personId)) {
                 throw new ExceptionPersonNotExist();
@@ -67,7 +67,7 @@ public class ActionTestSendTempMessage extends BaseAction  {
                 String name = filed.getName();
                 String tempName = filed.getTempName();
                 String value = object.get(name).getAsString();
-                logger.info("解析出的结果 name："+name + " value:"+value + "  放入tempName："+tempName);
+                logger.info("파싱 결과 name:"+name + " value:"+value + "  tempName에 넣음:"+tempName);
                 WeixinTempMessageFieldObj obj = new WeixinTempMessageFieldObj();
                 obj.setValue(value);
                 obj.setColor("#173177");
@@ -80,11 +80,11 @@ public class ActionTestSendTempMessage extends BaseAction  {
             message.setTemplate_id(tempId);
             message.setTopcolor("#fb4747");
             message.setData(data);
-            logger.info("发送的消息对象：" + message.toString());
+            logger.info("발송할 메시지 객체:" + message.toString());
             String url = Mpweixin.default_apiAddress + "/cgi-bin/message/template/send?access_token="+ Config.mpweixin().accessToken();
             logger.info("send url:" +url);
             String response = HttpConnection.postAsString(url, null, message.toString());
-            logger.info("返回："+response);
+            logger.info("반환:"+response);
         }
 
         Wo wo = new Wo();

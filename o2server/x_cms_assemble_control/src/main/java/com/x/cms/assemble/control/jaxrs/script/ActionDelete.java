@@ -30,10 +30,10 @@ class ActionDelete extends BaseAction {
 			emc.beginTransaction(Script.class);
 			emc.remove(script, CheckRemoveType.all);
 			emc.commit();
-			// 清除所有的Script缓存
+			// 모든 Script 캐시 삭제
 			CacheManager.notify(Script.class);
 
-			// 记录日志
+			// 로그 기록
 			emc.beginTransaction(Log.class);
 			logService.log(emc, effectivePerson.getDistinguishedName(), script.getName(), script.getAppId(), "", "", script.getId(), "SCRIPT", "删除");
 			emc.commit();

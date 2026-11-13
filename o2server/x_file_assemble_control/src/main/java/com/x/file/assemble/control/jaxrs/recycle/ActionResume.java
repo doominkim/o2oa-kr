@@ -29,7 +29,7 @@ class ActionResume extends BaseAction {
 			if (null == recycle) {
 				throw new ExceptionAttachmentNotExist(id);
 			}
-			/* 判断当前用户是否有权限访问该文件 */
+			/* 현재 사용자의 해당 파일 접근 권한 여부 판단 */
 			if(!effectivePerson.isManager() && !StringUtils.equals(effectivePerson.getDistinguishedName(), recycle.getPerson())) {
 				throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());
 			}

@@ -78,10 +78,10 @@ abstract class BaseAction extends StandardJaxrsAction {
 		DataItemConverter<AppDictItem> converter = new DataItemConverter<>(AppDictItem.class);
 		emc.beginTransaction(AppDictItem.class);
 		if ((null != cursor) && cursor.getItemType().equals(ItemType.a)) {
-			/* 向数组里面添加一个成员对象 */
+			/* 배열에 멤버 객체 하나 추가 */
 			Integer index = business.getAppDictItemFactory()
 					.getArrayLastIndexWithAppDictWithPath(appDict.getId(), paths);
-			/* 新的路径开始 */
+			/* 새 경로 시작 */
 			String[] ps = new String[paths.length + 1];
 			for (int i = 0; i < paths.length; i++) {
 				ps[i] = paths[i];
@@ -96,7 +96,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 				emc.persist(o);
 			}
 		} else if ((cursor == null) && parent.getItemType().equals(ItemType.o)) {
-			/* 向parent对象添加一个属性值 */
+			/* parent 객체에 속성 값 추가 */
 			List<AppDictItem> adds = converter.disassemble(jsonElement, paths);
 			for (AppDictItem o : adds) {
 				o.setBundle(appDict.getId());

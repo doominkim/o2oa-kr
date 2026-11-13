@@ -57,7 +57,7 @@ class ActionGetLogin extends BaseAction {
 			}
 			String userId = resp.getUserId();
 			if (StringUtils.isEmpty(userId)) {
-				logger.info("userId为空，无法单点登录！！！");
+				logger.info("userId가 비어 있어 SSO 로그인할 수 없습니다!!!");
 				throw new ExceptionQywxResponse(resp.getErrcode(), resp.getErrmsg());
 			}
 			Business business = new Business(emc);

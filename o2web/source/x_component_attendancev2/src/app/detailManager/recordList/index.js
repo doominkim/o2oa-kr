@@ -81,7 +81,7 @@ export default content({
   fieldWorkFormatOut(record) {
     return fieldWorkFormat(record);
   },
-  // 关闭当前窗口
+  // 현재 창 닫기
   close() {
     this.$parent.closeFormVm();
   },

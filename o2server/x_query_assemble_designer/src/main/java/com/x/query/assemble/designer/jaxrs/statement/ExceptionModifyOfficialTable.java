@@ -7,6 +7,6 @@ class ExceptionModifyOfficialTable extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionModifyOfficialTable() {
-		super("不能修改系统表.");
+		super("시스템 테이블은 수정할 수 없습니다.");
 	}
 }

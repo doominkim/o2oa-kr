@@ -50,9 +50,9 @@ class ActionUpload extends BaseAction {
 			if (null == mapping) {
 				throw new ExceptionAllocateStorageMaaping();
 			}
-			/** 由于这里需要根据craeteTime创建path,先进行赋值,再进行校验,最后保存 */
-			/** 禁止不带扩展名的文件上传 */
-			/** 文件名编码转换 */
+			/** createTime으로 path를 생성해야 하므로 먼저 값을 할당하고 검증한 뒤 저장 */
+			/** 확장자 없는 파일 업로드 금지 */
+			/** 파일명 인코딩 변환 */
 			fileName = new String(disposition.getFileName().getBytes(DefaultCharset.charset_iso_8859_1),
 					DefaultCharset.charset);
 			fileName = FilenameUtils.getName(fileName);
@@ -61,7 +61,7 @@ class ActionUpload extends BaseAction {
 				throw new ExceptionEmptyExtension(fileName);
 			}
 			FileTools.verifyConstraint(bytes.length, fileName, null);
-			/* 先保存原图 */
+			/* 원본 이미지 먼저 저장 */
 			file = new File(mapping.getName(), fileName, effectivePerson.getDistinguishedName(), type, reference);
 			emc.check(file, CheckPersistType.all);
 			file.saveContent(mapping, in, fileName);
@@ -72,21 +72,21 @@ class ActionUpload extends BaseAction {
 
 		}
 
-         /*保存压缩图*/
+         /*압축 이미지 저장*/
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
 				ByteArrayInputStream in = new ByteArrayInputStream(bytes)) {
 			if ((scale > 0) && ArrayUtils.contains(IMAGE_EXTENSIONS_COMPRESS, file.getExtension())) {
 				String fileNameThumbnail = fileName.substring(0, fileName.lastIndexOf(".")) + "_t" + "."+ file.getExtension();
 				File fileThumbnail = new File(mapping.getName(), fileNameThumbnail,effectivePerson.getDistinguishedName(), type, reference);
-				/** 如果是需要压缩的附件 */
+				/** 압축이 필요한 첨부파일인 경우 */
 				try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 					BufferedImage image = ImageIO.read(in);
 					if (image.getWidth() > scale) {
-						/** 图像的实际大小比scale大的要进行压缩 */
+						/** 이미지 실제 크기가 scale보다 크면 압축 */
 						BufferedImage scalrImage = Scalr.resize(image, Method.QUALITY, Mode.FIT_TO_WIDTH, scale);
 						ImageIO.write(scalrImage, fileThumbnail.getExtension(), baos);
 					} else {
-						/** 图像的实际大小比scale小,保存原图不进行压缩 */
+						/** 이미지 실제 크기가 scale보다 작으면 압축하지 않고 원본 저장 */
 						ImageIO.write(image, fileThumbnail.getExtension(), baos);
 					}
 					try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray())) {
@@ -100,7 +100,7 @@ class ActionUpload extends BaseAction {
 				}
 
 			} else {
-				//不进行压缩,保存原图id
+				//압축하지 않고 원본 이미지 id 저장
 				wo.setId(file.getId());
 			}
 		}
@@ -120,10 +120,10 @@ class ActionUpload extends BaseAction {
 			this.id = id;
 		}
 
-		@FieldDescribe("缩略图id")
+		@FieldDescribe("썸네일 id")
 		private String id;
 
-		@FieldDescribe("原图id")
+		@FieldDescribe("원본 이미지 id")
 		private String origId;
 
 		public String getId() {

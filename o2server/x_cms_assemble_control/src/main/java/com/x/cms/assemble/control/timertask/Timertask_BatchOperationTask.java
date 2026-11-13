@@ -18,7 +18,7 @@ import com.x.cms.assemble.control.service.DocumentInfoService;
 import com.x.cms.core.entity.CmsBatchOperation;
 
 /**
- * 定时代理: 定期执行批处理，或者将批处理信息压入处理队列并且待久化（如果队列是空的话）
+ * 예약 에이전트: 주기적으로 배치 처리를 실행하거나, 배치 처리 정보를 처리 큐에 넣고 영속화(큐가 비어 있는 경우)
  *
  */
 public class Timertask_BatchOperationTask extends AbstractJob {
@@ -50,7 +50,7 @@ public class Timertask_BatchOperationTask extends AbstractJob {
 			} else {
 				logger.info(
 						"Timertask_BatchOperationTask -> not found any cms batch operation, try to check unreview document in database.");
-				// 如果队列里已经没有任务了，那么检查一下是否还有未revieiw的文档，添加到队列
+				// 큐에 작업이 더 없으면 review되지 않은 문서가 있는지 확인하여 큐에 추가
 				DocumentInfoService documentInfoService = new DocumentInfoService();
 				try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 					List<String> ids = documentInfoService.listUnReviewIds(emc, 1000, 5);
@@ -64,7 +64,7 @@ public class Timertask_BatchOperationTask extends AbstractJob {
 						}
 					} else {
 						logger.debug("Timertask_BatchOperationTask -> not found any unreview document in database.");
-						// 也没有需要review的文档了，那么检查一下最近变更过的身份，组织，群组，人员等信息
+						// review할 문서도 없으면 최근 변경된 신분, 조직, 그룹, 사용자 등 정보 확인
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

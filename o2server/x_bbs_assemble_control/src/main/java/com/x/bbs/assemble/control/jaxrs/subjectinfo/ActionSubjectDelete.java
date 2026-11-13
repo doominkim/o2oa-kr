@@ -34,7 +34,7 @@ public class ActionSubjectDelete extends BaseAction {
 				result.error(exception);
 			}
 		}
-		// 判断主题信息是否存在
+		// 주제 정보 존재 여부 판단
 		if (check) {
 			try {
 				subjectInfo = subjectInfoServiceAdv.get(id);
@@ -53,18 +53,18 @@ public class ActionSubjectDelete extends BaseAction {
 			}
 		}
 		try {
-			subjectInfoServiceAdv.delete(id);// 删除主题同时要将所有的回复内容全部删除			
+			subjectInfoServiceAdv.delete(id);// 주제 삭제 시 모든 답글 내용도 함께 삭제			
 			wo.setId( id );
 
 			CacheManager.notify( BBSSubjectInfo.class );
 			CacheManager.notify( BBSSectionInfo.class );
 			CacheManager.notify( BBSForumInfo.class );
 			
-			// 记录操作日志
+			// 작업 로그 기록
 			operationRecordService.subjectOperation(effectivePerson.getDistinguishedName(), subjectInfo, "DELETE", hostIp, hostName);
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionSubjectInfoProcess(e, "根据指定ID删除主题信息时发生异常.ID:" + id);
+			Exception exception = new ExceptionSubjectInfoProcess(e, "지정한 ID의 주제를 삭제하는 중 오류가 발생했습니다. ID:" + id);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}

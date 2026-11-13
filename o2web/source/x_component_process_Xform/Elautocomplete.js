@@ -9,14 +9,14 @@ if( !o2.APP$ElSelector ){
     Object.assign(o2.APP$ElSelector.prototype, o2.APP$Selector.prototype);
 }
 
-/** @class Elautocomplete 基于Element UI的自动完成输入框组件。
- * @o2cn 自动完成输入框
+/** @class Elautocomplete Element UI 기반 자동 완성 입력 상자 컴포넌트.
+ * @o2cn 자동 완성 입력 상자
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var input = this.form.get("name"); //获取组件
- * //方法2
- * var input = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var input = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var input = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -30,28 +30,28 @@ MWF.xApplication.process.Xform.Elautocomplete = MWF.APPElautocomplete =  new Cla
     options: {
         "moduleEvents": ["load", "queryLoad", "postLoad"],
         /**
-         * 当 input失去焦点且值有修改是触发，或点击建议面板的选项后且值有修改时触发。this.event[0]为组件值
+         * input이 포커스를 잃고 값이 변경되었을 때, 또는 제안 패널의 항목을 클릭해 값이 변경되었을 때 발생. this.event[0]은 컴포넌트 값
          * @event MWF.xApplication.process.Xform.Elautocomplete#change
-         * @see {@link https://element.eleme.io/#/zh-CN/component/input#dai-shu-ru-jian-yi|input组件的带输入建议章节}
+         * @see {@link https://element.eleme.io/#/zh-CN/component/input#dai-shu-ru-jian-yi|input 컴포넌트의 입력 제안 장}
          */
         /**
-         * 点击建议面板的选项后时触发。this.event[0]为选中的选项
+         * 제안 패널의 항목을 클릭한 후 발생. this.event[0]은 선택된 항목
          * @event MWF.xApplication.process.Xform.Elautocomplete#select
-         * @see {@link https://element.eleme.io/#/zh-CN/component/input#input-methods|input组件的Input Method章节}
+         * @see {@link https://element.eleme.io/#/zh-CN/component/input#input-methods|input 컴포넌트의 Input Method 장}
          */
         "elEvents": ["select", "change"]
     },
     /**
-     * @summary 组件的配置信息，同时也是Vue组件的data。
+     * @summary 컴포넌트 설정 정보이자 Vue 컴포넌트의 data.
      * @member MWF.xApplication.process.Xform.Elautocomplete#json {JsonObject}
      * @example
-     *  //可以在脚本中获取此对象，下面两行代码是等价的，它们获取的是同一个对象
-     * var json = this.form.get("elinput").json;       //获取组件的json对象
-     * var json = this.form.get("elinput").vm.$data;   //获取Vue组件的data数据，
+     *  //스크립트에서 이 객체를 가져올 수 있으며, 아래 두 줄의 코드는 동일한 객체를 가져옴
+     * var json = this.form.get("elinput").json;       //컴포넌트의 json 객체 가져오기
+     * var json = this.form.get("elinput").vm.$data;   //Vue 컴포넌트의 data 데이터 가져오기,
      *
-     * //通过json对象操作Element组件
-     * json.size = "mini";      //改变输入框大小
-     * json.disabled = true;     //设置输入框为禁用
+     * //json 객체로 Element 컴포넌트 조작
+     * json.size = "mini";      //입력 상자 크기 변경
+     * json.disabled = true;     //입력 상자를 비활성화로 설정
      */
     _appendVueData: function(){
         this.form.Macro.environment.data.check(this.json.id);

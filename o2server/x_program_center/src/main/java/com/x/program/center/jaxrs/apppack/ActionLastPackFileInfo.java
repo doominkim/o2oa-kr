@@ -20,7 +20,7 @@ import com.x.program.center.core.entity.AppPackApkFile;
 import com.x.program.center.core.entity.AppPackApkFile_;
 
 /**
- * 最新发布的app下载包
+ * 최신 배포 app 다운로드 패키지
  * Created by fancyLou on 11/29/21.
  * Copyright © 2021 O2. All rights reserved.
  */
@@ -44,7 +44,7 @@ public class ActionLastPackFileInfo extends BaseAction  {
                 Wo wo = Wo.copier.copy(file);
                 result.setData(wo);
             } else {
-                logger.info("没有找到最新的打包发布数据");
+                logger.info("최신 패키징 배포 데이터를 찾을 수 없습니다");
 //                throw new ExceptionFileNotExist(null);
             }
         }

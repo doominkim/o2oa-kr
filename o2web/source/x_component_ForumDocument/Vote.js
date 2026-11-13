@@ -93,7 +93,7 @@ MWF.xApplication.ForumDocument.Vote = new Class({
         if( this.data.votePersonVisible && this.data.votePerson!=0 ){
             //var showPersonNode = new Element("span", {
             //    styles : this.showPersonNode,
-            //    text : "查看投票参与人"
+            //    text : "투표 참여자 보기"
             //}).inject( inforNode );
             //showPersonNode.addEvents({
             //    "click" : function(){ this.showVotePerson(); }.bind(this)
@@ -676,7 +676,7 @@ MWF.xApplication.ForumDocument.Vote = new Class({
             result.optionGroups.push( g );
         }
         if( !flag ){
-            //this.app.notice("请至少选择一组投票再提交","error");
+            //this.app.notice("투표 항목을 하나 이상 선택한 후 제출하십시오","error");
             if( this.data.voteOptionGroupList.length >= 1 ){
                 this.app.notice( this.lp.notSelectGroupNotice ,"error");
             }else{
@@ -712,20 +712,20 @@ MWF.xApplication.ForumDocument.Vote = new Class({
         form.edit();
     },
     diffTime : function(startDate,endDate) {
-        var diff=endDate.getTime() - startDate.getTime();//时间差的毫秒数
+        var diff=endDate.getTime() - startDate.getTime();//시간 차이(밀리초)
 
-        //计算出相差天数
+        //차이 일수 계산
         var days=Math.floor(diff/(24*3600*1000));
 
-        //计算出小时数
-        var leave1=diff%(24*3600*1000);    //计算天数后剩余的毫秒数
+        //시간 수 계산
+        var leave1=diff%(24*3600*1000);    //일수 계산 후 남은 밀리초
         var hours=Math.floor(leave1/(3600*1000));
-        //计算相差分钟数
-        var leave2=leave1%(3600*1000);        //计算小时数后剩余的毫秒数
+        //차이 분 수 계산
+        var leave2=leave1%(3600*1000);        //시간 계산 후 남은 밀리초
         var minutes=Math.floor(leave2/(60*1000));
 
-        //计算相差秒数
-        var leave3=leave2%(60*1000);      //计算分钟数后剩余的毫秒数
+        //차이 초 수 계산
+        var leave3=leave2%(60*1000);      //분 계산 후 남은 밀리초
         var seconds=Math.round(leave3/1000);
 
         var returnStr = seconds + this.lp.second;

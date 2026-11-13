@@ -37,7 +37,7 @@ class ActionBuildQuery extends BaseAction {
 					throw new ExceptionEntityNotExist(queryId, Query.class);
 				}
 			}
-			// 兼容老版本的jar,删除统一的一个jar
+			// 이전 버전 jar 호환, 통합된 jar 하나 삭제
 			File jar = new File(Config.dir_dynamic_jars(true), DynamicEntity.JAR_NAME + Business.DOT_JAR);
 			if (jar.exists()) {
 				List<Query> queryList = emc.fetchAll(Query.class);

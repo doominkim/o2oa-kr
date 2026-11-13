@@ -10,7 +10,7 @@ import com.x.base.core.container.factory.EntityManagerContainerFactory;
 import com.x.calendar.core.entity.Calendar_EventComment;
 
 /**
- * 日程日历备注信息服务类
+ * 일정 캘린더 비고 정보 서비스 클래스
  * @author O2LEE
  *
  */
@@ -26,7 +26,7 @@ public class Calendar_EventCommentQueryService {
 	}
 
 	/**
-	 * 根据ID获取指定日历记录备注信息
+	 * ID로 지정 캘린더 레코드 비고 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -40,7 +40,7 @@ public class Calendar_EventCommentQueryService {
 	}
 
 	/**
-	 * 查询在事件信息中，commentId被引用的次数
+	 * 이벤트 정보에서 commentId가 참조된 횟수 조회
 	 * @param commentId
 	 * @return
 	 * @throws Exception
@@ -57,7 +57,7 @@ public class Calendar_EventCommentQueryService {
 	}
 
 	/**
-	 * 查询在事件循环主体信息中，commentId被引用的次数
+	 * 이벤트 반복 주체 정보에서 commentId가 참조된 횟수 조회
 	 * @param commentId
 	 * @return
 	 * @throws Exception
@@ -74,7 +74,7 @@ public class Calendar_EventCommentQueryService {
 	}
 
 	/**
-	 * 查询更新时间早于传入时间的前N条信息ID
+	 * 수정 시간이 전달된 시간보다 이른 상위 N개 정보 ID 조회
 	 * @param now
 	 * @param maxCount
 	 * @return

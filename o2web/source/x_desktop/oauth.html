@@ -45,7 +45,7 @@
                     if (redirect) r = r + "&redirect=" + redirect;
                     r = o2.filterUrl(r);
                     var action = MWF.Actions.get("x_organization_assemble_authentication");
-                    //企业微信单点登录
+                    //기업 위챗 SSO 로그인
                     if (layout.isQywx()) {
                         action["loginOauthQywxServer"](code, function () {
                             if (redirect) {
@@ -86,7 +86,7 @@
                 };
                 layout.loadOauth = function () {
                     var action = MWF.Actions.get("x_organization_assemble_authentication");
-                    //企业微信单点登录
+                    //기업 위챗 SSO 로그인
                     if (layout.isQywx()) {
                         action.qywxOauthServer(function (json) {
                             var qywxConfig = json.data || {};
@@ -106,7 +106,7 @@
 
                             window.location = url;
                         }.bind(this));
-                    } else if (layout.isDingding()) { //钉钉单点登录
+                    } else if (layout.isDingding()) { //DingTalk SSO 로그인
                         action.dingdingOauthServer(function (json) {
                             var dingdingConfig = json.data || {};
                             var oapiAddress = dingdingConfig.oapiAddress || "https://oapi.dingtalk.com";

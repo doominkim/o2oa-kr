@@ -25,7 +25,7 @@ public class QueueDingdingUnitStatistic extends AbstractQueue<Date> {
 
     @Override
     protected void execute(Date date) throws Exception {
-        logger.info("开始执行组织钉钉考勤统计，time:"+DateTools.format(date));
+        logger.info("조직 DingTalk 근태 통계 시작, time:"+DateTools.format(date));
         try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Business business = new Business(emc);
             saveStatisticUnitForDay(business, emc, date);
@@ -35,7 +35,7 @@ public class QueueDingdingUnitStatistic extends AbstractQueue<Date> {
 
 
     /**
-     * 单位 日统计
+     * 조직 일별 통계
      * @param business
      * @param emc
      * @param date
@@ -94,7 +94,7 @@ public class QueueDingdingUnitStatistic extends AbstractQueue<Date> {
     }
 
     /**
-     * 单位月统计
+     * 조직 월별 통계
      * @param business
      * @param emc
      * @param units

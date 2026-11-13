@@ -31,7 +31,7 @@ import com.x.cms.core.entity.element.ViewCategory;
 import com.x.cms.core.entity.element.ViewFieldConfig;
 
 /**
- * 栏目保存
+ * 게시판 저장
  * @author sword
  */
 public class ActionSave extends BaseAction {
@@ -87,7 +87,7 @@ public class ActionSave extends BaseAction {
 					identityName = userManagerService.getPersonIdentity( effectivePerson.getDistinguishedName(), identityName );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAppInfoProcess( e, "系统获取人员身份名称时发生异常，指定身份：" + identityName );
+					Exception exception = new ExceptionAppInfoProcess( e, "사용자 소속 이름을 가져오는 중 오류가 발생했습니다. 지정 소속: " + identityName );
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -147,13 +147,13 @@ public class ActionSave extends BaseAction {
 				if( old_appInfo != null ) {
 					if( !old_appInfo.getAppName().equalsIgnoreCase( appInfo.getAppName() ) ||
 						 !old_appInfo.getAppAlias().equalsIgnoreCase( appInfo.getAppAlias() )	) {
-						//修改了栏目名称或者别名，增加删除栏目批量操作（对分类和文档）的信息
+						//게시판 이름 또는 별칭이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 						new CmsBatchOperationPersistService().addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_APPINFO,
 								CmsBatchOperationProcessService.OPT_TYPE_UPDATENAME,  appInfo.getId(), old_appInfo.getAppName(), "更新栏目名称：ID=" + appInfo.getId() );
 					}
 					if(  permissionQueryService.hasDiffrentViewPermissionInAppInfo( old_appInfo, appInfo )) {
-							//修改了栏目名称或者别名，增加删除栏目批量操作（对分类和文档）的信息
+							//게시판 이름 또는 별칭이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 							new CmsBatchOperationPersistService().addOperation(
 									CmsBatchOperationProcessService.OPT_OBJ_APPINFO,
 									CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  appInfo.getId(), appInfo.getAppName(), "变更栏目可见权限：ID=" + appInfo.getId() );
@@ -163,7 +163,7 @@ public class ActionSave extends BaseAction {
 					new LogService().log(null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), appInfo.getId(), "", "", "", "APPINFO", "新增");
 				}
 
-				// 更新缓存
+				// 캐시 갱신
 				CacheManager.notify(AppInfo.class);
 				CacheManager.notify(AppDict.class);
 				CacheManager.notify(AppDictItem.class);
@@ -184,7 +184,7 @@ public class ActionSave extends BaseAction {
 
 		private static final long serialVersionUID = -6314932919066148113L;
 
-		@FieldDescribe("指定用于操作的身份，可选参数")
+		@FieldDescribe("작업에 사용할 신분 지정, 선택 매개변수")
 		private String identity = null;
 
 		@FieldDescribe("栏目配置支持信息，JSON")

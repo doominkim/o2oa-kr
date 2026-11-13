@@ -128,16 +128,16 @@ Popmenu.STATE_IDLE = "idle";
 MWF.xApplication.MinderEditor.NodePopMenu = new Class({
     Extends: MTooltips,
     options : {
-        axis: "x",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "auto", //x轴上left center right,  auto 系统自动计算
-            y : "bottom" //y 轴上top middle bottom, auto 系统自动计算
+        axis: "x",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "auto", //x축 left center right, auto는 시스템이 자동 계산
+            y : "bottom" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
         priorityOfAuto :{
-            x : [ "right", "left" ], //当position x 为 auto 时候的优先级
-            y : [ "bottom", "middle", "top" ] //当position y 为 auto 时候的优先级
+            x : [ "right", "left" ], //position x가 auto일 때의 우선순위
+            y : [ "bottom", "middle", "top" ] //position y가 auto일 때의 우선순위
         },
-        event : "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+        event : "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
         hasArrow : false,
         isAutoHide : false
     },
@@ -185,18 +185,18 @@ MWF.xApplication.MinderEditor.NodePopMenu = new Class({
         this.commands.selectOptions = {
             //"style" : "minderPopmenu",
             "tooltipsOptions": {
-                axis: "x",      //箭头在x轴还是y轴上展现
-                position : { //node 固定的位置
-                    x : "auto", //x轴上left center right,  auto 系统自动计算
-                    y : "auto" //y 轴上top middle bottom, auto 系统自动计算
+                axis: "x",      //화살표를 x축에 표시할지 y축에 표시할지
+                position : { //node 고정 위치
+                    x : "auto", //x축 left center right, auto는 시스템이 자동 계산
+                    y : "auto" //y축 top middle bottom, auto는 시스템이 자동 계산
                 },
                 priorityOfAuto :{
-                    x : [ "right", "left" ], //当position x 为 auto 时候的优先级
-                    y : [ "bottom" ] //当position y 为 auto 时候的优先级
+                    x : [ "right", "left" ], //position x가 auto일 때의 우선순위
+                    y : [ "bottom" ] //position y가 auto일 때의 우선순위
                 },
-                event : "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-                hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-                displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
+                event : "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+                hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+                displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
                 "onQueryLoad": function (tooltips) {
                     if (tooltips.selector.command && this.commands.commands) {
                         tooltips.disable = this.commands.commands[tooltips.selector.command].disable();
@@ -208,7 +208,7 @@ MWF.xApplication.MinderEditor.NodePopMenu = new Class({
                 "onHide": function (tooltips) {
                     if (this.commands.activeTooltip == tooltips)this.commands.activeTooltip = null;
                 }.bind(this),
-                event: "mouseenter" //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+                event: "mouseenter" //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
             }
         };
 
@@ -262,7 +262,7 @@ MWF.xApplication.MinderEditor.NodePopMenu = new Class({
             this.setDisableStye( node, keyNode, command )
         }
 
-        var title = (command.title || "");  //+ ( command.key ? (" 快捷键:" + command.key) : "" );
+        var title = (command.title || "");  //+ ( command.key ? (" 단축키:" + command.key) : "" );
         node.set("title", title);
 
         node.addEvents({

@@ -13,7 +13,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.calendar.core.entity.Calendar;
 
 /**
- * 关注一个公开的日历（非公开的日历不允许被关注）
+ * 공개 캘린더 구독(비공개 캘린더는 구독 불가)
  * 
  * @author O2LEE
  *
@@ -47,13 +47,13 @@ public class ActionFollowCalendar extends BaseAction {
 				}else {
 					if( !calendar.getIsPublic() ) {
 						check = false;
-						Exception exception = new ExceptionCalendarInfoProcess( "日历信息未公开，不允许被关注！" );
+						Exception exception = new ExceptionCalendarInfoProcess( "공개되지 않은 캘린더는 구독할 수 없습니다!" );
 						result.error( exception );
 					}
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -66,7 +66,7 @@ public class ActionFollowCalendar extends BaseAction {
 					( StringUtils.equalsAnyIgnoreCase( calendar.getCreateor(), "SYSTEM" ) )
 			){
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( "不需要关注自己的日历.ID:" + id );
+				Exception exception = new ExceptionCalendarInfoProcess( "자신의 캘린더는 구독할 필요가 없습니다. ID:" + id );
 				result.error( exception );
 			}
 		}
@@ -76,7 +76,7 @@ public class ActionFollowCalendar extends BaseAction {
 				check = calendarServiceAdv.follow( effectivePerson, id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "系统根据ID关注指定日历信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "ID로 캘린더를 구독하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

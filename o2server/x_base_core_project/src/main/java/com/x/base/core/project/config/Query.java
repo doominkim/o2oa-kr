@@ -26,11 +26,11 @@ public class Query extends ConfigObject {
     }
 
     @Deprecated(forRemoval = true)
-    @FieldDescribe("抽取图像中的文本.")
+    @FieldDescribe("이미지에서 텍스트 추출.")
     private Boolean extractImage = false;
 
     @Deprecated(forRemoval = true)
-    @FieldDescribe("查询批次大小.")
+    @FieldDescribe("조회 배치 크기.")
     private Integer planQueryBatchSize = DEFAULT_PLANQUERYBATCHSIZE;
 
     public static final Boolean DEFAULT_EXTRACTOFFICE = true;
@@ -43,13 +43,13 @@ public class Query extends ConfigObject {
     public static final Boolean DEFAULT_STATEMENTUPDATEENABLE = false;
     public static final Boolean DEFAULT_STATEMENTINSERTENABLE = false;
 
-    @FieldDescribe("statement语句是否允许执行delete.")
+    @FieldDescribe("statement 구문의 delete 실행 허용 여부.")
     private Boolean statementDeleteEnable = DEFAULT_STATEMENTDELETEENABLE;
 
-    @FieldDescribe("statement语句是否允许执行update.")
+    @FieldDescribe("statement 구문의 update 실행 허용 여부.")
     private Boolean statementUpdateEnable = DEFAULT_STATEMENTUPDATEENABLE;
 
-    @FieldDescribe("statement语句是否允许执行insert.")
+    @FieldDescribe("statement 구문의 insert 실행 허용 여부.")
     private Boolean statementInsertEnable = DEFAULT_STATEMENTINSERTENABLE;
 
     public Boolean getStatementDeleteEnable() {
@@ -90,11 +90,11 @@ public class Query extends ConfigObject {
         this.tessLanguage = tessLanguage;
     }
 
-    @FieldDescribe("tess使用语言.")
+    @FieldDescribe("tess 사용 언어.")
     private String tessLanguage = "chi_sim";
 
-    @FieldDescribe("检索配置.")
-    @Schema(description = "检索配置.")
+    @FieldDescribe("검색 설정.")
+    @Schema(description = "검색 설정.")
     private Index index;
 
     public Index index() {
@@ -272,261 +272,261 @@ public class Query extends ConfigObject {
         public static final String DEFAULT_CREATORPERSONUNKNOWN = UNKNOWN;
         public static final String DEFAULT_CREATORPERSONCIPHER = "系统服务";
 
-        @FieldDescribe("是否启用.")
-        @Schema(description = "是否启用.")
+        @FieldDescribe("사용 여부.")
+        @Schema(description = "사용 여부.")
         private Boolean enable;
 
-        @FieldDescribe("索引模式:localDirectory(本地文件系统),sharedDirectory(共享文件系统目录).")
-        @Schema(description = "索引模式:localDirectory(本地文件系统),sharedDirectory(共享文件系统目录).")
+        @FieldDescribe("인덱스 모드:localDirectory(로컬 파일 시스템), sharedDirectory(공유 파일 시스템 디렉터리).")
+        @Schema(description = "인덱스 모드:localDirectory(로컬 파일 시스템), sharedDirectory(공유 파일 시스템 디렉터리).")
         private String mode;
 
-        @FieldDescribe("共享文件系统目录.")
-        @Schema(description = "共享文件系统目录.")
+        @FieldDescribe("공유 파일 시스템 디렉터리.")
+        @Schema(description = "공유 파일 시스템 디렉터리.")
         private String sharedDirectoryPath;
 
-        @FieldDescribe("索引分段数量.")
-        @Schema(description = "索引分段数量.")
+        @FieldDescribe("인덱스 세그먼트 수.")
+        @Schema(description = "인덱스 세그먼트 수.")
         private Integer maxSegments;
 
-        @FieldDescribe("是否启用优化索引.")
-        @Schema(description = "是否启用优化索引.")
+        @FieldDescribe("인덱스 최적화 사용 여부.")
+        @Schema(description = "인덱스 최적화 사용 여부.")
         private Boolean optimizeIndexEnable;
 
-        @FieldDescribe("优化索引定时配置, 默认值:" + DEFAULT_OPTIMIZEINDEXCRON)
-        @Schema(description = "优化索引定时配置, 默认值:" + DEFAULT_OPTIMIZEINDEXCRON)
+        @FieldDescribe("인덱스 최적화 정기 실행 설정, 기본값:" + DEFAULT_OPTIMIZEINDEXCRON)
+        @Schema(description = "인덱스 최적화 정기 실행 설정, 기본값:" + DEFAULT_OPTIMIZEINDEXCRON)
         private String optimizeIndexCron;
 
-        @FieldDescribe("业务数据最大文本长度阈值,超过此阈值将忽略写入到索引.")
-        @Schema(description = "业务数据最大文本长度阈值,超过此阈值将忽略写入到索引.")
+        @FieldDescribe("업무 데이터 최대 텍스트 길이 임계값, 초과 시 인덱스 기록 생략.")
+        @Schema(description = "업무 데이터 최대 텍스트 길이 임계값, 초과 시 인덱스 기록 생략.")
         private Integer dataStringThreshold;
 
-        @FieldDescribe("摘要长度.")
-        @Schema(description = "摘要长度.")
+        @FieldDescribe("요약 길이.")
+        @Schema(description = "요약 길이.")
         private Integer summaryLength;
 
-        @FieldDescribe("附件索引阈值(兆),超过此值的附件不进行索引.")
-        @Schema(description = "附件索引阈值(兆),超过此值的附件不进行索引.")
+        @FieldDescribe("첨부파일 인덱스 임계값(MB), 초과하는 첨부파일은 인덱싱하지 않음.")
+        @Schema(description = "첨부파일 인덱스 임계값(MB), 초과하는 첨부파일은 인덱싱하지 않음.")
         private Integer attachmentMaxSize;
 
-        @FieldDescribe("是否对流转中工作的附件进行索引.")
-        @Schema(description = "是否对流转中工作的附件进行索引.")
+        @FieldDescribe("진행 중인 업무 문서의 첨부파일 인덱싱 여부.")
+        @Schema(description = "진행 중인 업무 문서의 첨부파일 인덱싱 여부.")
         private Boolean workIndexAttachment;
 
-        @FieldDescribe("是否对已完成工作的附件进行索引.")
-        @Schema(description = "是否对已完成工作的附件进行索引.")
+        @FieldDescribe("완료된 업무 문서의 첨부파일 인덱싱 여부.")
+        @Schema(description = "완료된 업무 문서의 첨부파일 인덱싱 여부.")
         private Boolean workCompletedIndexAttachment;
 
-        @FieldDescribe("是否对内容管理文档的附件进行索引.")
-        @Schema(description = "是否对内容管理文档的附件进行索引.")
+        @FieldDescribe("콘텐츠 관리 문서의 첨부파일 인덱싱 여부.")
+        @Schema(description = "콘텐츠 관리 문서의 첨부파일 인덱싱 여부.")
         private Boolean documentIndexAttachment;
 
-        @FieldDescribe("是否启用流转中工作低频索引.")
-        @Schema(description = "是否启用流转中工作低频索引.")
+        @FieldDescribe("진행 중 업무 문서 저빈도 인덱스 사용 여부.")
+        @Schema(description = "진행 중 업무 문서 저빈도 인덱스 사용 여부.")
         private Boolean lowFreqWorkEnable;
 
-        @FieldDescribe("流转中工作低频索引定时配置, 默认值:" + DEFAULT_LOWFREQWORKCRON)
-        @Schema(description = "流转中工作低频索引定时配置, 默认值:" + DEFAULT_LOWFREQWORKCRON)
+        @FieldDescribe("진행 중 업무 문서 저빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_LOWFREQWORKCRON)
+        @Schema(description = "진행 중 업무 문서 저빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_LOWFREQWORKCRON)
         private String lowFreqWorkCron;
 
-        @FieldDescribe("流转中工作低频索引批量获取大小.")
-        @Schema(description = "流转中工作低频索引批量获取大小.")
+        @FieldDescribe("진행 중 업무 문서 저빈도 인덱스 일괄 조회 크기.")
+        @Schema(description = "진행 중 업무 문서 저빈도 인덱스 일괄 조회 크기.")
         private Integer lowFreqWorkBatchSize;
 
-        @FieldDescribe("流转中工作低频索单次最大处理数量.")
-        @Schema(description = "流转中工作低频索单次最大处理数量.")
+        @FieldDescribe("진행 중 업무 문서 저빈도 인덱스 1회 최대 처리 개수.")
+        @Schema(description = "진행 중 업무 문서 저빈도 인덱스 1회 최대 처리 개수.")
         private Integer lowFreqWorkMaxCount;
 
-        @FieldDescribe("流转中工作低频索单次最大处理时长(分钟).")
-        @Schema(description = "流转中工作低频索单次最大处理时长(分钟).")
+        @FieldDescribe("진행 중 업무 문서 저빈도 인덱스 1회 최대 처리 시간(분).")
+        @Schema(description = "진행 중 업무 문서 저빈도 인덱스 1회 최대 처리 시간(분).")
         private Integer lowFreqWorkMaxMinutes;
 
-        @FieldDescribe("是否启用已完成工作低频索引.")
-        @Schema(description = "是否启用已完成工作低频索引.")
+        @FieldDescribe("완료된 업무 문서 저빈도 인덱스 사용 여부.")
+        @Schema(description = "완료된 업무 문서 저빈도 인덱스 사용 여부.")
         private Boolean lowFreqWorkCompletedEnable;
 
-        @FieldDescribe("已完成工作低频索引定时配置, 默认值:" + DEFAULT_LOWFREQWORKCOMPLETEDCRON)
-        @Schema(description = "已完成工作低频索引定时配置, 默认值:" + DEFAULT_LOWFREQWORKCOMPLETEDCRON)
+        @FieldDescribe("완료된 업무 문서 저빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_LOWFREQWORKCOMPLETEDCRON)
+        @Schema(description = "완료된 업무 문서 저빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_LOWFREQWORKCOMPLETEDCRON)
         private String lowFreqWorkCompletedCron;
 
-        @FieldDescribe("已完成工作低频索引批量获取大小.")
-        @Schema(description = "已完成工作低频索引批量获取大小.")
+        @FieldDescribe("완료된 업무 문서 저빈도 인덱스 일괄 조회 크기.")
+        @Schema(description = "완료된 업무 문서 저빈도 인덱스 일괄 조회 크기.")
         private Integer lowFreqWorkCompletedBatchSize;
 
-        @FieldDescribe("已完成工作低频索引单次最大处理数量.")
-        @Schema(description = "已完成工作低频索引单次最大处理数量.")
+        @FieldDescribe("완료된 업무 문서 저빈도 인덱스 1회 최대 처리 개수.")
+        @Schema(description = "완료된 업무 문서 저빈도 인덱스 1회 최대 처리 개수.")
         private Integer lowFreqWorkCompletedMaxCount;
 
-        @FieldDescribe("已完成工作低频索引单次最大处理时长(分钟).")
-        @Schema(description = "已完成工作低频索引单次最大处理时长(分钟).")
+        @FieldDescribe("완료된 업무 문서 저빈도 인덱스 1회 최대 처리 시간(분).")
+        @Schema(description = "완료된 업무 문서 저빈도 인덱스 1회 최대 처리 시간(분).")
         private Integer lowFreqWorkCompletedMaxMinutes;
 
-        @FieldDescribe("是否启用内容管理文档低频索引.")
-        @Schema(description = "是否启用内容管理文档低频索引.")
+        @FieldDescribe("콘텐츠 관리 문서 저빈도 인덱스 사용 여부.")
+        @Schema(description = "콘텐츠 관리 문서 저빈도 인덱스 사용 여부.")
         private Boolean lowFreqDocumentEnable;
 
-        @FieldDescribe("内容管理文档低频索引定时配置, 默认值:" + DEFAULT_LOWFREQDOCUMENTCRON)
-        @Schema(description = "内容管理文档低频索引定时配置, 默认值:" + DEFAULT_LOWFREQDOCUMENTCRON)
+        @FieldDescribe("콘텐츠 관리 문서 저빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_LOWFREQDOCUMENTCRON)
+        @Schema(description = "콘텐츠 관리 문서 저빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_LOWFREQDOCUMENTCRON)
         private String lowFreqDocumentCron;
 
-        @FieldDescribe("内容管理文档低频索引批量获取大小.")
-        @Schema(description = "内容管理文档低频索引批量获取大小.")
+        @FieldDescribe("콘텐츠 관리 문서 저빈도 인덱스 일괄 조회 크기.")
+        @Schema(description = "콘텐츠 관리 문서 저빈도 인덱스 일괄 조회 크기.")
         private Integer lowFreqDocumentBatchSize;
 
-        @FieldDescribe("内容管理文档低频索引单次最大处理数量.")
-        @Schema(description = "内容管理文档低频索引单次最大处理数量.")
+        @FieldDescribe("콘텐츠 관리 문서 저빈도 인덱스 1회 최대 처리 개수.")
+        @Schema(description = "콘텐츠 관리 문서 저빈도 인덱스 1회 최대 처리 개수.")
         private Integer lowFreqDocumentMaxCount;
 
-        @FieldDescribe("内容管理文档低频索引单次最大处理时长(分钟).")
-        @Schema(description = "内容管理文档低频索引单次最大处理时长(分钟).")
+        @FieldDescribe("콘텐츠 관리 문서 저빈도 인덱스 1회 최대 처리 시간(분).")
+        @Schema(description = "콘텐츠 관리 문서 저빈도 인덱스 1회 최대 처리 시간(분).")
         private Integer lowFreqDocumentMaxMinutes;
 
-        @FieldDescribe("是否启用流转中工作高频索引.")
-        @Schema(description = "是否启用流转中工作高频索引.")
+        @FieldDescribe("진행 중 업무 문서 고빈도 인덱스 사용 여부.")
+        @Schema(description = "진행 중 업무 문서 고빈도 인덱스 사용 여부.")
         private Boolean highFreqWorkEnable;
 
-        @FieldDescribe("流转中工作高频索引定时配置, 默认值:" + DEFAULT_HIGHFREQWORKCRON)
-        @Schema(description = "流转中工作高频索引定时配置, 默认值:" + DEFAULT_HIGHFREQWORKCRON)
+        @FieldDescribe("진행 중 업무 문서 고빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_HIGHFREQWORKCRON)
+        @Schema(description = "진행 중 업무 문서 고빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_HIGHFREQWORKCRON)
         private String highFreqWorkCron;
 
-        @FieldDescribe("流转中工作高频索引批量获取大小.")
-        @Schema(description = "流转中工作高频索引批量获取大小.")
+        @FieldDescribe("진행 중 업무 문서 고빈도 인덱스 일괄 조회 크기.")
+        @Schema(description = "진행 중 업무 문서 고빈도 인덱스 일괄 조회 크기.")
         private Integer highFreqWorkBatchSize;
 
-        @FieldDescribe("流转中工作高频索引单次最大处理数量.")
-        @Schema(description = "流转中工作高频索引单次最大处理数量.")
+        @FieldDescribe("진행 중 업무 문서 고빈도 인덱스 1회 최대 처리 개수.")
+        @Schema(description = "진행 중 업무 문서 고빈도 인덱스 1회 최대 처리 개수.")
         private Integer highFreqWorkMaxCount;
 
-        @FieldDescribe("流转中工作高频索引单次最大处理时长(分钟).")
-        @Schema(description = "流转中工作高频索引单次最大处理时长(分钟).")
+        @FieldDescribe("진행 중 업무 문서 고빈도 인덱스 1회 최대 처리 시간(분).")
+        @Schema(description = "진행 중 업무 문서 고빈도 인덱스 1회 최대 처리 시간(분).")
         private Integer highFreqWorkMaxMinutes;
 
-        @FieldDescribe("是否启用已完成工作高频索引.")
-        @Schema(description = "是否启用已完成工作高频索引.")
+        @FieldDescribe("완료된 업무 문서 고빈도 인덱스 사용 여부.")
+        @Schema(description = "완료된 업무 문서 고빈도 인덱스 사용 여부.")
         private Boolean highFreqWorkCompletedEnable;
 
-        @FieldDescribe("已完成工作高频索引定时配置, 默认值:" + DEFAULT_HIGHFREQWORKCOMPLETEDCRON)
-        @Schema(description = "已完成工作高频索引定时配置, 默认值:" + DEFAULT_HIGHFREQWORKCOMPLETEDCRON)
+        @FieldDescribe("완료된 업무 문서 고빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_HIGHFREQWORKCOMPLETEDCRON)
+        @Schema(description = "완료된 업무 문서 고빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_HIGHFREQWORKCOMPLETEDCRON)
         private String highFreqWorkCompletedCron;
 
-        @FieldDescribe("已完成工作高频索引批量获取大小.")
-        @Schema(description = "已完成工作高频索引批量获取大小.")
+        @FieldDescribe("완료된 업무 문서 고빈도 인덱스 일괄 조회 크기.")
+        @Schema(description = "완료된 업무 문서 고빈도 인덱스 일괄 조회 크기.")
         private Integer highFreqWorkCompletedBatchSize;
 
-        @FieldDescribe("已完成工作高频索引单次最大处理数量.")
-        @Schema(description = "已完成工作高频索引单次最大处理数量.")
+        @FieldDescribe("완료된 업무 문서 고빈도 인덱스 1회 최대 처리 개수.")
+        @Schema(description = "완료된 업무 문서 고빈도 인덱스 1회 최대 처리 개수.")
         private Integer highFreqWorkCompletedMaxCount;
 
-        @FieldDescribe("已完成工作高频索引单次最大处理时长(分钟).")
-        @Schema(description = "已完成工作高频索引单次最大处理时长(分钟).")
+        @FieldDescribe("완료된 업무 문서 고빈도 인덱스 1회 최대 처리 시간(분).")
+        @Schema(description = "완료된 업무 문서 고빈도 인덱스 1회 최대 처리 시간(분).")
         private Integer highFreqWorkCompletedMaxMinutes;
 
-        @FieldDescribe("是否启用内容管理文档高频索引.")
-        @Schema(description = "是否启用内容管理文档高频索引.")
+        @FieldDescribe("콘텐츠 관리 문서 고빈도 인덱스 사용 여부.")
+        @Schema(description = "콘텐츠 관리 문서 고빈도 인덱스 사용 여부.")
         private Boolean highFreqDocumentEnable;
 
-        @FieldDescribe("内容管理文档高频索引定时配置, 默认值:" + DEFAULT_HIGHFREQDOCUMENTCRON)
-        @Schema(description = "内容管理文档高频索引定时配置, 默认值:" + DEFAULT_HIGHFREQDOCUMENTCRON)
+        @FieldDescribe("콘텐츠 관리 문서 고빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_HIGHFREQDOCUMENTCRON)
+        @Schema(description = "콘텐츠 관리 문서 고빈도 인덱스 정기 실행 설정, 기본값:" + DEFAULT_HIGHFREQDOCUMENTCRON)
         private String highFreqDocumentCron;
 
-        @FieldDescribe("内容管理文档高频索引批量获取大小.")
-        @Schema(description = "内容管理文档高频索引批量获取大小.")
+        @FieldDescribe("콘텐츠 관리 문서 고빈도 인덱스 일괄 조회 크기.")
+        @Schema(description = "콘텐츠 관리 문서 고빈도 인덱스 일괄 조회 크기.")
         private Integer highFreqDocumentBatchSize;
 
-        @FieldDescribe("内容管理文档高频索引单次最大处理数量.")
-        @Schema(description = "内容管理文档高频索引单次最大处理数量.")
+        @FieldDescribe("콘텐츠 관리 문서 고빈도 인덱스 1회 최대 처리 개수.")
+        @Schema(description = "콘텐츠 관리 문서 고빈도 인덱스 1회 최대 처리 개수.")
         private Integer highFreqDocumentMaxCount;
 
-        @FieldDescribe("内容管理文档高频索引单次最大处理时长(分钟).")
-        @Schema(description = "内容管理文档高频索引单次最大处理时长(分钟).")
+        @FieldDescribe("콘텐츠 관리 문서 고빈도 인덱스 1회 최대 처리 시간(분).")
+        @Schema(description = "콘텐츠 관리 문서 고빈도 인덱스 1회 최대 처리 시간(분).")
         private Integer highFreqDocumentMaxMinutes;
 
-        @FieldDescribe("检索内容清理阈值(天).")
-        @Schema(description = "检索内容清理阈值(天).")
+        @FieldDescribe("검색 콘텐츠 정리 임계값(일).")
+        @Schema(description = "검색 콘텐츠 정리 임계값(일).")
         private Integer cleanupThresholdDays;
 
-        @FieldDescribe("是否启用搜索.")
-        @Schema(description = "是否启用搜索.")
+        @FieldDescribe("검색 사용 여부.")
+        @Schema(description = "검색 사용 여부.")
         private Boolean searchEnable;
 
-        @FieldDescribe("搜索标题加权.")
-        @Schema(description = "搜索标题加权.")
+        @FieldDescribe("검색 제목 가중치.")
+        @Schema(description = "검색 제목 가중치.")
         private Float searchTitleBoost;
 
-        @FieldDescribe("搜索摘要加权.")
-        @Schema(description = "搜索摘要加权.")
+        @FieldDescribe("검색 요약 가중치.")
+        @Schema(description = "검색 요약 가중치.")
         private Float searchSummaryBoost;
 
-        @FieldDescribe("搜索内容加权.")
-        @Schema(description = "搜索内容加权.")
+        @FieldDescribe("검색 내용 가중치.")
+        @Schema(description = "검색 내용 가중치.")
         private Float searchBodyBoost;
 
-        @FieldDescribe("搜索附件加权.")
-        @Schema(description = "搜索附件加权.")
+        @FieldDescribe("검색 첨부파일 가중치.")
+        @Schema(description = "검색 첨부파일 가중치.")
         private Float searchAttachmentBoost;
 
-        @FieldDescribe("搜索分页大小.")
-        @Schema(description = "搜索分页大小.")
+        @FieldDescribe("검색 페이지 크기.")
+        @Schema(description = "검색 페이지 크기.")
         private Integer searchPageSize;
 
-        @FieldDescribe("搜索最大分页大小.")
-        @Schema(description = "搜索最大分页大小.")
+        @FieldDescribe("검색 최대 페이지 크기.")
+        @Schema(description = "검색 최대 페이지 크기.")
         private Integer searchMaxPageSize;
 
-        @FieldDescribe("搜索最大命中数量.")
-        @Schema(description = "搜索最大命中数量.")
+        @FieldDescribe("검색 최대 적중 개수.")
+        @Schema(description = "검색 최대 적중 개수.")
         private Integer searchMaxHits;
 
-        @FieldDescribe("维度最大分组数量.")
-        @Schema(description = "维度最大分组数量.")
+        @FieldDescribe("차원 최대 그룹 수.")
+        @Schema(description = "차원 최대 그룹 수.")
         private Integer facetMaxGroups;
 
-        @FieldDescribe("维度分组排序方式:keyAsc(依据分组值升序排序),keyDesc(依据分组值奖序排序),countAsc(依据分组数量升序排序),countDesc(依据分组数量降序排序).")
-        @Schema(description = "流转中工作低频索引定时配置.")
+        @FieldDescribe("차원 그룹 정렬 방식:keyAsc(그룹 값 기준 오름차순 정렬), keyDesc(그룹 값 기준 내림차순 정렬), countAsc(그룹 개수 기준 오름차순 정렬), countDesc(그룹 개수 기준 내림차순 정렬).")
+        @Schema(description = "진행 중 업무 문서 저빈도 인덱스 정기 실행 설정.")
         private String facetGroupOrder;
 
-        @FieldDescribe("高亮返回片段长度.")
-        @Schema(description = "高亮返回片段长度.")
+        @FieldDescribe("하이라이트 반환 조각 길이.")
+        @Schema(description = "하이라이트 반환 조각 길이.")
         private Integer highlightFragmentSize;
-        @FieldDescribe("高亮返回片段数量.")
-        @Schema(description = "高亮返回片段数量.")
+        @FieldDescribe("하이라이트 반환 조각 개수.")
+        @Schema(description = "하이라이트 반환 조각 개수.")
         private Integer highlightFragmentCount;
-        @FieldDescribe("高亮前缀,默认<em>.")
-        @Schema(description = "高亮前缀,默认<em>.")
+        @FieldDescribe("하이라이트 접두사, 기본값 <em>.")
+        @Schema(description = "하이라이트 접두사, 기본값 <em>.")
         private String highlightPre;
-        @FieldDescribe("高亮后缀,默认</em>.")
-        @Schema(description = "高亮后缀,默认</em>.")
+        @FieldDescribe("하이라이트 접미사, 기본값 </em>.")
+        @Schema(description = "하이라이트 접미사, 기본값 </em>.")
         private String highlightPost;
 
-        @FieldDescribe("相似检索返回文档数量.")
-        @Schema(description = "相似检索返回文档数量.")
+        @FieldDescribe("유사 검색 반환 문서 개수.")
+        @Schema(description = "유사 검색 반환 문서 개수.")
         private Integer moreLikeThisSize;
 
-        @FieldDescribe("相似检索最大返回文档数量.")
-        @Schema(description = "相似检索最大返回文档数量.")
+        @FieldDescribe("유사 검색 최대 반환 문서 개수.")
+        @Schema(description = "유사 검색 최대 반환 문서 개수.")
         private Integer moreLikeThisMaxSize;
 
-        @FieldDescribe("相似检索中检索项最小出现多少次即作为有效检索项.")
-        @Schema(description = "相似检索中检索项最小出现多少次即作为有效检索项.")
+        @FieldDescribe("유사 검색에서 검색어가 최소 몇 번 나타나야 유효 검색어로 간주하는지.")
+        @Schema(description = "유사 검색에서 검색어가 최소 몇 번 나타나야 유효 검색어로 간주하는지.")
         private Integer moreLikeThisMinTermFreq;
 
-        @FieldDescribe("相似检索中检索项最小出现在多少个文档中即作为有效检索项.")
-        @Schema(description = "相似检索中检索项最小出现在多少个文档中即作为有效检索项.")
+        @FieldDescribe("유사 검색에서 검색어가 최소 몇 개 문서에 나타나야 유효 검색어로 간주하는지.")
+        @Schema(description = "유사 검색에서 검색어가 최소 몇 개 문서에 나타나야 유효 검색어로 간주하는지.")
         private Integer moreLikeThisMinDocFreq;
 
-        @FieldDescribe("相似检索得分阈值,低于此分数则忽略.")
-        @Schema(description = "相似检索得分阈值,低于此分数则忽略.")
+        @FieldDescribe("유사 검색 점수 임계값, 이 점수보다 낮으면 무시.")
+        @Schema(description = "유사 검색 점수 임계값, 이 점수보다 낮으면 무시.")
         private Float moreLikeThisScoreThreshold;
 
-        @FieldDescribe("creatorUnit为空的默认值.")
-        @Schema(description = "creatorUnit为空的默认值.")
+        @FieldDescribe("creatorUnit이 비어 있을 때의 기본값.")
+        @Schema(description = "creatorUnit이 비어 있을 때의 기본값.")
         private String creatorUnitUnknown;
 
-        @FieldDescribe("creatorPerson为空的默认值.")
-        @Schema(description = "creatorPerson为空的默认值.")
+        @FieldDescribe("creatorPerson이 비어 있을 때의 기본값.")
+        @Schema(description = "creatorPerson이 비어 있을 때의 기본값.")
         private String creatorPersonUnknown;
 
-        @FieldDescribe("creatorPerson值为cipher时的替换值.")
-        @Schema(description = "creatorPerson值为cipher时的替换值.")
+        @FieldDescribe("creatorPerson 값이 cipher일 때의 대체 값.")
+        @Schema(description = "creatorPerson 값이 cipher일 때의 대체 값.")
         private String creatorPersonCipher;
 
         public Boolean getEnable() {

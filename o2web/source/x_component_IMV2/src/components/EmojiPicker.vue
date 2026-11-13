@@ -29,7 +29,7 @@ const loadEmojiJson = () => {
         if (!response.ok) {
           console.error('네트워크 응답 오류, emoji.json 읽기 오류');
         }
-        return response.json(); // 解析为 JSON
+        return response.json(); // JSON으로 파싱
       })
       .then(data => {
         emojiData.value = data

@@ -7,6 +7,6 @@ class ExceptionDingdingMessage extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionDingdingMessage(Integer retCode, String retMessage) {
-		super("发送钉钉消息失败,错误代码:{},错误消息:{}.", retCode, retMessage);
+		super("DingTalk 메시지 전송에 실패했습니다. 오류 코드: {}, 오류 메시지: {}.", retCode, retMessage);
 	}
 }

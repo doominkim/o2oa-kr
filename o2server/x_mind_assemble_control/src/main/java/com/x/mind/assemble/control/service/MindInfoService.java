@@ -17,7 +17,7 @@ import com.x.mind.entity.MindVersionContent;
 import com.x.mind.entity.MindVersionInfo;
 
 /**
- * 脑图信息服务类
+ * 마인드맵 정보 서비스 클래스
  * @author O2LEE
  *
  */
@@ -30,7 +30,7 @@ public class MindInfoService{
 	private ServiceMindShareRecordPersist serviceMindShareRecordPersist = new ServiceMindShareRecordPersist();
 	private DateOperation dssateOperation = new DateOperation();
 	/**
-	 * 根据指定的目录ID查询目录下所有的脑图信息ID列表
+	 * 지정 디렉터리 ID로 디렉터리의 모든 마인드맵 정보 ID 목록 조회
 	 * @param person
 	 * @return
 	 * @throws Exception 
@@ -44,7 +44,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据指定的ID查询脑图信息
+	 * 지정 ID로 마인드맵 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -58,7 +58,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据脑图ID获取脑图缩略图Base64编码信息
+	 * 마인드맵 ID로 마인드맵 썸네일 Base64 인코딩 정보 조회
 	 * @param mindId
 	 * @return
 	 * @throws Exception
@@ -72,7 +72,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据ID获取回收站脑图信息
+	 * ID로 휴지통 마인드맵 정보 조회
 	 * @param recycleId
 	 * @return
 	 * @throws Exception 
@@ -86,7 +86,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据指定的ID列表查询脑图信息列表
+	 * 지정 ID 목록으로 마인드맵 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -100,7 +100,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 保存一个脑图信息
+	 * 마인드맵 정보 저장
 	 * @param _mindBaseInfo
 	 * @param content
 	 * @return
@@ -109,28 +109,28 @@ public class MindInfoService{
 	public MindBaseInfo save( MindBaseInfo _mindBaseInfo, String content, int maxVersionCount ) throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			
-			//保存脑图信息
+			//마인드맵 정보 저장
 			MindBaseInfo mindBaseInfo = serviceMindInfoPersist.save( emc, _mindBaseInfo,  content);
 			
 			String mindId = mindBaseInfo.getId();
-			//在脑图进行保存的时候，需要根据已经存在的版本情况来确定是否需要新添加一个新的版本
+			//마인드맵 저장 시 기존 버전 상황에 따라 새 버전 추가 여부 결정
 			MindVersionInfo mindVersionInfo = null;
-			//查询最新的个版本的情况
+			//최신 버전 상황 조회
 			mindVersionInfo = serviceMindVersionInfoQuery.getLatestVersionWithMind( emc, mindId );
 			if( mindVersionInfo != null ) {
-				//如果存在版本，那么对比一下版本信息
-				//10分钟之类，对比数据大小改变程度超过20%的改变，则创建新版本，否则，不用创建新版本，
+				//버전이 있으면 버전 정보 비교
+				//10분 이내에 데이터 크기가 20% 넘게 바뀌면 새 버전을 만들고, 그렇지 않으면 만들지 않음,
 				long diff_min = dssateOperation.getDiff( mindVersionInfo.getUpdateTime(), mindBaseInfo.getUpdateTime() );
 				if( diff_min < 10 ) {
 					MindContentInfo mindContentInfo = serviceMindInfoQuery.getMindContentInfo(emc,  mindId );
 					MindVersionContent mindVersionContent = serviceMindVersionInfoQuery.getMindVersionContentInfo(emc, mindVersionInfo.getId() );
-					//对比数据量的大小，如果超过20%的变化，那么新创建一个新版本
+					//데이터 크기를 비교해 20% 넘게 바뀌면 새 버전 생성
 					if( dataDiff( mindContentInfo.getContent(), mindVersionContent.getContent() ) > 0.2 ) {
-						//超过10分钟创建一个新版本
+						//10분이 지나면 새 버전 생성
 						serviceMindVersionInfoPersist.createFromMind( emc, _mindBaseInfo, content, maxVersionCount );
 					}
 				}else {
-					//超过10分钟创建一个新版本
+					//10분이 지나면 새 버전 생성
 					serviceMindVersionInfoPersist.createFromMind( emc, _mindBaseInfo, content, maxVersionCount );
 				}
 			}else {
@@ -161,7 +161,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 查询脑图， 下一页
+	 * 마인드맵 조회, 다음 페이지
 	 * @param id
 	 * @param count
 	 * @param name
@@ -196,7 +196,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 查询回收站脑图， 下一页
+	 * 휴지통 마인드맵 조회, 다음 페이지
 	 * @param id
 	 * @param count
 	 * @param name
@@ -226,7 +226,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 根据ID获取脑图的内容
+	 * ID로 마인드맵 내용 조회
 	 * @param id
 	 * @return
 	 * @throws Exception 
@@ -240,7 +240,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 查询某个目录下的脑图数量
+	 * 특정 디렉터리의 마인드맵 수 조회
 	 * @param folderId
 	 * @return
 	 * @throws Exception 
@@ -254,8 +254,8 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 根据脑图ID删除脑图信息
-	 * 基础信息、详细内容以及分享的信息
+	 * 마인드맵 ID로 마인드맵 정보 삭제
+	 * 기본 정보, 상세 내용 및 공유 정보
 	 * @param mindId
 	 * @return 
 	 * @throws Exception 
@@ -269,8 +269,8 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据脑图ID将脑图信息放入回收站
-	 * 基础信息、以及分享的信息
+	 * 마인드맵 ID로 마인드맵 정보를 휴지통으로 이동
+	 * 기본 정보 및 공유 정보
 	 * @param mindId
 	 * @return 
 	 * @return 
@@ -285,8 +285,8 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 根据ID从回收站还原脑图信息
-	 * 基础信息、以及分享的信息
+	 * ID로 휴지통에서 마인드맵 정보 복원
+	 * 기본 정보 및 공유 정보
 	 * @param recycleId
 	 * @return 
 	 * @throws Exception 
@@ -300,7 +300,7 @@ public class MindInfoService{
 	}	
 	
 	/**
-	 * 更新脑图的缩略图
+	 * 마인드맵 썸네일 수정
 	 * @param mindId
 	 * @param base64
 	 * @throws Exception 
@@ -325,7 +325,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据脑图ID获取脑图缩略图Base64编码内容
+	 * 마인드맵 ID로 마인드맵 썸네일 Base64 인코딩 내용 조회
 	 * @param mindId
 	 * @return
 	 * @throws Exception
@@ -343,7 +343,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据脑图ID获取该脑图所有的版本，只保留10个
+	 * 마인드맵 ID로 모든 버전 조회(10개만 유지)
 	 * @param id
 	 * @return
 	 * @throws Exception 
@@ -357,7 +357,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 根据ID列表获取脑图版本信息列表
+	 * ID 목록으로 마인드맵 버전 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception 
@@ -371,7 +371,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 根据指定ID获取脑图版本信息对象
+	 * 지정 ID로 마인드맵 버전 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception 
@@ -385,7 +385,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 根据指定的ID，获取指定脑图版本的详细内容
+	 * 지정 ID로 지정 마인드맵 버전의 상세 내용 조회
 	 * @param id
 	 * @return
 	 * @throws Exception 
@@ -399,7 +399,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 分享脑图信息到指定的人员组织
+	 * 마인드맵 정보를 지정 사용자·조직에 공유
 	 * @param mindBaseInfo 
 	 * @param mindShareRecords
 	 * @throws Exception 
@@ -413,7 +413,7 @@ public class MindInfoService{
 	}
 	
 	/**
-	 * 根据脑图ID，获取脑图分享记录
+	 * 마인드맵 ID로 마인드맵 공유 기록 조회
 	 * @param mindId 
 	 * @throws Exception 
 	 */
@@ -426,7 +426,7 @@ public class MindInfoService{
 	}
 
 	/**
-	 * 取消分享
+	 * 공유 취소
 	 * @param shareRecordId
 	 * @throws Exception
 	 */

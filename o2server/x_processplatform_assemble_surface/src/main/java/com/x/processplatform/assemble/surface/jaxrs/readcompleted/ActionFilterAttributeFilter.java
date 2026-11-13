@@ -97,7 +97,7 @@ class ActionFilterAttributeFilter extends BaseAction {
 		if (ListTools.isNotEmpty(wi.getActivityNameList())) {
 			p = cb.and(p, root.get(ReadCompleted_.activityName).in(wi.getActivityNameList()));
 		}
-		// completed对象按单值处理
+		// completed 객체를 단일 값으로 처리
 		if (ListTools.isNotEmpty(wi.getCompletedList())) {
 			boolean value = BooleanUtils.isTrue(wi.getCompletedList().get(0));
 			if (value) {

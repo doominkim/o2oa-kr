@@ -7,7 +7,7 @@ class ExceptionTypeApplicationExist extends LanguagePromptException {
 	private static final long serialVersionUID = -3885997486474873786L;
 
 	ExceptionTypeApplicationExist(String identity, String application) {
-		super("身份 {} 在指定应用 {} 的授权已经存在.", identity, application);
+		super("소속 {}의 지정 앱 {} 권한 위임이 이미 있습니다.", identity, application);
 	}
 
 }

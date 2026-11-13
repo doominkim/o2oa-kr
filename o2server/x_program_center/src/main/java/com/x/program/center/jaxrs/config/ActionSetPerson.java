@@ -16,7 +16,7 @@ import com.x.base.core.project.http.EffectivePerson;
 import com.x.base.core.project.jaxrs.WrapBoolean;
 
 /**
- * config/person.json配置修改
+ * config/person.json 설정 수정
  * @author sword
  */
 public class ActionSetPerson extends BaseAction {

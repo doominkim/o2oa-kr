@@ -28,7 +28,7 @@ import com.x.base.core.project.tools.Crypto;
 import com.x.base.core.project.tools.DefaultCharset;
 
 /**
- * 三元管理配置
+ * 3권 분립 관리 설정
  * 
  * @author sword
  */
@@ -319,7 +319,7 @@ public class TernaryManagement extends ConfigObject {
 
 	}
 
-	@FieldDescribe("是否启用三元管理.")
+	@FieldDescribe("3권 분립 관리 사용 여부.")
 	private Boolean enable;
 
 	@FieldDescribe("系统管理员账号密码.")
@@ -331,19 +331,19 @@ public class TernaryManagement extends ConfigObject {
 	@FieldDescribe("安全审计员账号密码.")
 	private String auditManagerPassword;
 
-	@FieldDescribe("启用密级标识.")
+	@FieldDescribe("보안 등급 표시 사용.")
 	private Boolean securityClearanceEnable;
 
-	@FieldDescribe("系统密级标识.")
+	@FieldDescribe("시스템 보안 등급 표시.")
 	private Integer systemSecurityClearance;
 
-	@FieldDescribe("默认主体密级标识.")
+	@FieldDescribe("기본 주체 보안 등급 표시.")
 	private Integer defaultSubjectSecurityClearance;
 
-	@FieldDescribe("主体密级标识配置.")
+	@FieldDescribe("주체 보안 등급 표시 설정.")
 	private Map<String, Integer> subjectSecurityClearance;
 
-	@FieldDescribe("客体密级标识配置.")
+	@FieldDescribe("객체 보안 등급 표시 설정.")
 	private Map<String, Integer> objectSecurityClearance;
 
 	public Boolean getSecurityClearanceEnable() {

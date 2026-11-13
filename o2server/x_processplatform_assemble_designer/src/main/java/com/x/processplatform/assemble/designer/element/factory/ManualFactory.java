@@ -39,7 +39,7 @@ public class ManualFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的manual */
+	/** 양식을 사용하는 manual 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Manual.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

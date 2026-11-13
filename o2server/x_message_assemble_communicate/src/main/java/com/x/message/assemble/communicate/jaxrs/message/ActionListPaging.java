@@ -84,19 +84,19 @@ class ActionListPaging extends BaseAction {
 
 		private static final long serialVersionUID = -8335537395971819377L;
 
-		@FieldDescribe("用户")
+		@FieldDescribe("사용자")
 		private String person;
 
-		@FieldDescribe("消息类型.")
+		@FieldDescribe("메시지 유형.")
 		private String type;
 
-		@FieldDescribe("消费者")
+		@FieldDescribe("소비자")
 		private String consume;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
 		public String getPerson() {

@@ -21,10 +21,10 @@ class ActionHasRole extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("个人")
+		@FieldDescribe("개인")
 		private String person;
 
-		@FieldDescribe("角色")
+		@FieldDescribe("역할")
 		private List<String> roleList = new ArrayList<>();
 
 		public String getPerson() {

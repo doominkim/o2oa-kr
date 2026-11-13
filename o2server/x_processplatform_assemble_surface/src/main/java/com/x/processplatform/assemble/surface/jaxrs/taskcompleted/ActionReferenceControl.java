@@ -60,10 +60,10 @@ class ActionReferenceControl extends BaseAction {
 		static WrapCopier<TaskCompleted, Wo> copier = WrapCopierFactory.wo(TaskCompleted.class, Wo.class,
 				JpaObject.singularAttributeField(TaskCompleted.class, true, true), null);
 
-		@FieldDescribe("工作对象")
+		@FieldDescribe("업무 문서 객체")
 		private List<WoWork> workList = new ArrayList<>();
 
-		@FieldDescribe("已完成工作对象")
+		@FieldDescribe("완료된 업무 문서 객체")
 		private List<WoWorkCompleted> workCompletedList = new ArrayList<>();
 
 		public List<WoWork> getWorkList() {
@@ -88,7 +88,7 @@ class ActionReferenceControl extends BaseAction {
 
 		private static final long serialVersionUID = -5668264661685818057L;
 
-		@FieldDescribe("权限对象")
+		@FieldDescribe("권한 객체")
 		private Control control;
 
 		static WrapCopier<Work, WoWork> copier = WrapCopierFactory.wo(Work.class, WoWork.class,
@@ -111,7 +111,7 @@ class ActionReferenceControl extends BaseAction {
 		static WrapCopier<WorkCompleted, WoWorkCompleted> copier = WrapCopierFactory.wo(WorkCompleted.class,
 				WoWorkCompleted.class, JpaObject.singularAttributeField(WorkCompleted.class, true, true), null);
 
-		@FieldDescribe("权限对象")
+		@FieldDescribe("권한 객체")
 		private Control control;
 
 		public Control getControl() {

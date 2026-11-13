@@ -8,6 +8,6 @@ public class ExceptionOverAppealMaxTimes extends PromptException {
 	private static final long serialVersionUID = -4426607453693973422L;
 
 	public ExceptionOverAppealMaxTimes() {
-		super(  "已超过本月最多申诉次数.");
+		super(  "이번 달 최대 이의 신청 횟수를 초과했습니다.");
 	}
 }

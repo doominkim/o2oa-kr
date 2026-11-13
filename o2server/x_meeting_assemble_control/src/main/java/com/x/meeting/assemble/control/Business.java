@@ -119,7 +119,7 @@ public class Business {
 		if (this.buildingEditAvailable(effectivePerson)) {
 			return true;
 		}
-		/* 房间审核员 */
+		/* 회의실 심사자 */
 		if (StringUtils.equals(effectivePerson.getDistinguishedName(), room.getAuditor())) {
 			return true;
 		}
@@ -136,11 +136,11 @@ public class Business {
 	}
 
 	public Boolean meetingAuditAvailable(EffectivePerson effectivePerson, Meeting meeting) throws Exception {
-		/* 审核者 */
+		/* 심사자 */
 		if (StringUtils.equals(effectivePerson.getDistinguishedName(), meeting.getAuditor())) {
 			return true;
 		}
-		/* 管理员 */
+		/* 관리자 */
 		if (this.isManager(effectivePerson)) {
 			return true;
 		}
@@ -158,11 +158,11 @@ public class Business {
 	}
 
 	public Boolean meetingEditAvailable(EffectivePerson effectivePerson, Meeting meeting) throws Exception {
-		/* 申请者 */
+		/* 신청자 */
 		if (StringUtils.equals(effectivePerson.getDistinguishedName(), meeting.getApplicant())) {
 			return true;
 		}
-		/* 审核者 */
+		/* 심사자 */
 		if (this.meetingAuditAvailable(effectivePerson, meeting)) {
 			return true;
 		}
@@ -183,7 +183,7 @@ public class Business {
 		if (this.meetingEditAvailable(effectivePerson, meeting)) {
 			return true;
 		}
-		/* 受邀参加会议 */
+		/* 회의 초대받음 */
 		if (null != meeting.getInvitePersonList()) {
 			if (meeting.getInvitePersonList().contains(effectivePerson.getDistinguishedName())) {
 				return true;

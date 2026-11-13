@@ -48,7 +48,7 @@ class ActionListWithPortal extends BaseAction {
 		static WrapCopier<File, Wo> copier = WrapCopierFactory.wo(File.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible, File.data_FIELDNAME));
 
-		@FieldDescribe("文件访问地址.")
+		@FieldDescribe("파일 접근 주소.")
 		private String fileUri;
 
 		public String getFileUri() {

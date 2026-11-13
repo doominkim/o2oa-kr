@@ -40,24 +40,24 @@ public class WoField extends GsonPropertyObject {
                 && Objects.equals(name, other.name);
     }
 
-    @FieldDescribe("字段标识.")
-    @Schema(description = "字段标识.")
+    @FieldDescribe("필드 식별자.")
+    @Schema(description = "필드 식별자.")
     private String field;
 
-    @FieldDescribe("字段名称.")
-    @Schema(description = "字段名称.")
+    @FieldDescribe("필드 이름.")
+    @Schema(description = "필드 이름.")
     private String name;
 
-    @FieldDescribe("字段类型.")
-    @Schema(description = "字段类型.")
+    @FieldDescribe("필드 유형.")
+    @Schema(description = "필드 유형.")
     private String fieldType;
 
-    @FieldDescribe("下限值.")
-    @Schema(description = "下限值.")
+    @FieldDescribe("하한값.")
+    @Schema(description = "하한값.")
     private Object min;
 
-    @FieldDescribe("上限值.")
-    @Schema(description = "上限值.")
+    @FieldDescribe("상한값.")
+    @Schema(description = "상한값.")
     private Object max;
 
     public String getField() {

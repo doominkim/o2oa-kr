@@ -154,7 +154,7 @@ public class Describe {
 			jaxrsMethod.setIns(this.jaxrsInField(wiClass));
 		} else {
 			if (StringUtils.equals("POST", jaxrsMethod.getType()) || StringUtils.equals("PUT", jaxrsMethod.getType())) {
-				/** 如果没有定义Wi对象,那么有可能使用的是jsonElement对象 */
+				/** Wi 객체가 정의되지 않았으면 jsonElement 객체를 사용하는 것일 수 있음 */
 				if (ArrayUtils.contains(method.getParameterTypes(), JsonElement.class)) {
 					jaxrsMethod.setUseJsonElementParameter(true);
 				} else {
@@ -211,14 +211,14 @@ public class Describe {
 		FormDataParam formDataParam = parameter.getAnnotation(FormDataParam.class);
 		if (StringUtils.equalsIgnoreCase("file", formDataParam.value())) {
 			if (parameter.getType() == FormDataContentDisposition.class) {
-				/** 单独处理附件 */
+				/** 첨부파일 별도 처리 */
 				JaxrsFormParameter o = new JaxrsFormParameter();
 				o.setType("File");
 				o.setName(formDataParam.value());
 				if (null != jaxrsParameterDescribe) {
 					o.setDescription(jaxrsParameterDescribe.value());
 				} else {
-					logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+					logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 							formDataParam.value());
 					o.setDescription("");
 				}
@@ -231,7 +231,7 @@ public class Describe {
 			if (null != jaxrsParameterDescribe) {
 				o.setDescription(jaxrsParameterDescribe.value());
 			} else {
-				logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+				logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 						formDataParam.value());
 				o.setDescription("");
 			}
@@ -249,7 +249,7 @@ public class Describe {
 		if (null != jaxrsParameterDescribe) {
 			o.setDescription(jaxrsParameterDescribe.value());
 		} else {
-			logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+			logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 					formParam.value());
 			o.setDescription("");
 		}
@@ -263,7 +263,7 @@ public class Describe {
 		if (null != jaxrsParameterDescribe) {
 			o.setDescription(jaxrsParameterDescribe.value());
 		} else {
-			logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+			logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 					queryParam.value());
 			o.setDescription("");
 		}
@@ -280,7 +280,7 @@ public class Describe {
 		if (null != jaxrsParameterDescribe) {
 			o.setDescription(jaxrsParameterDescribe.value());
 		} else {
-			logger.print("类: {}, 方法: {} ,未设置参数 {} 的JaxrsParameterDescribe.", clz.getName(), method.getName(),
+			logger.print("클래스: {}, 메서드: {} , 파라미터 {}의 JaxrsParameterDescribe가 설정되지 않음.", clz.getName(), method.getName(),
 					pathParam.value());
 			o.setDescription("");
 		}
@@ -336,7 +336,7 @@ public class Describe {
 						jaxrsField.setIsBaseType(true);
 					}
 				} else {
-					// O2LEE，String[]未被判断为collection导致组织的JSON格式不符合wrapIn要求
+					// O2LEE, String[]이 collection으로 판단되지 않아 조직 JSON 형식이 wrapIn 요구 사항에 맞지 않음
 					if (StringUtils.equalsAnyIgnoreCase("String[]", jaxrsField.getType())) {
 						jaxrsField.setIsCollection(true);
 					} else {
@@ -425,7 +425,7 @@ public class Describe {
 		}
 	}
 
-	/** 判断字段是否在Wi中但是没有在Entity类中说明是Wi新增字段,需要进行描述 */
+	/** 필드가 Wi에는 있지만 Entity 클래스에 없으면 Wi에 새로 추가된 필드이므로 설명이 필요함 */
 	private Boolean inWiNotInEntity(String field, Class<?> clz) {
 		try {
 			Object o = FieldUtils.readStaticField(clz, "copier", true);

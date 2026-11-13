@@ -312,19 +312,19 @@ function uploadAppStyleImage(name, formdata, file, callback) {
 function listDumpData() {
     return doAction('x_program_center', 'ConfigAction', 'listDumpData');
 }
-// app打包Action
+// app 패키징 Action
 function doAppPackAction(method, ...args) {
     return doAction('x_program_center', 'AppPackAction', method, ...args);
 }
-// 微信菜单Action
+// WeChat 메뉴 Action
 function doMPWeixinMenuAction(method, ...args) {
     return doAction('x_program_center', 'MPWeixinAction', method, ...args);
 }
-//  流程服务
+//  프로세스 서비스
 function processAction(method, ...args) {
     return doAction('x_processplatform_assemble_surface', 'ProcessAction', method, ...args);
 }
-// cms 分类服务
+// cms 분류 서비스
 function categoryInfoAction(method, ...args) {
     return doAction('x_cms_assemble_control', 'CategoryInfoAction', method, ...args);
 }

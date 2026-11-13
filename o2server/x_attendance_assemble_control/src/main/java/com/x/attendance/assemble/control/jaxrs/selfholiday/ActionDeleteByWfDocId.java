@@ -34,7 +34,7 @@ public class ActionDeleteByWfDocId extends BaseAction {
 		
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			ids = business.getAttendanceSelfHolidayFactory().listIdsWithBatchFlag(wfDocId);
 			if ( ListTools.isNotEmpty( ids ) ) {
 				attendanceSelfHolidays = business.getAttendanceSelfHolidayFactory().list(ids);
@@ -45,12 +45,12 @@ public class ActionDeleteByWfDocId extends BaseAction {
 						emc.remove(attendanceSelfHoliday, CheckRemoveType.all);
 						emc.commit();
 
-						//清除缓存
+						//캐시 삭제
 						CacheManager.notify( AttendanceSelfHoliday.class );
 
 						logger.debug( effectivePerson, ">>>>>>>>>>System delete attendanceSelfHoliday success......");
 
-						// 应该只需要重新分析该用户在请假期间已经存在的打卡数据即可
+						// 해당 사용자의 휴가 기간 내 기존 출퇴근 데이터만 다시 분석하면 됨
 						ids = attendanceDetailAnalyseServiceAdv.listAnalyseAttendanceDetailIds(
 								attendanceSelfHoliday.getEmployeeName(), attendanceSelfHoliday.getStartTime(),
 								attendanceSelfHoliday.getEndTime(), effectivePerson.getDebugger() );
@@ -59,7 +59,7 @@ public class ActionDeleteByWfDocId extends BaseAction {
 //						}
 						if( ListTools.isNotEmpty( ids ) ){
 							for( String id : ids ){
-								try { //分析保存好的考勤数据
+								try { //저장된 근태 데이터 분석
 //									ThisApplication.detailAnalyseQueue.send( id );
 								} catch ( Exception e1 ) {
 									e1.printStackTrace();
@@ -70,7 +70,7 @@ public class ActionDeleteByWfDocId extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			Exception exception = new ExceptionSelfHolidayProcess( e, "系统在根据流程ID删除同步的员工请假记录信息时发生异常.DocId：" + wfDocId );
+			Exception exception = new ExceptionSelfHolidayProcess( e, "결재 ID로 동기화된 직원 휴가 기록을 삭제하는 중 오류가 발생했습니다. DocId:" + wfDocId );
 			result.error(exception);
 			logger.error(e, currentPerson, request, null);
 		}

@@ -29,7 +29,7 @@ import com.x.processplatform.core.entity.element.ActivityType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Snap", description = "流程平台快照.")
+@Schema(name = "Snap", description = "프로세스 플랫폼 스냅숏.")
 @Entity
 @ContainerEntity(dumpSize = 2, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.Snap.table, uniqueConstraints = {
@@ -61,12 +61,12 @@ public class Snap extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	// 更新运行方法
+	// 실행 메서드 업데이트
 	public void onPersist() throws Exception {
 		if (StringTools.utf8Length(this.getProperties().getTitle()) > length_255B) {
 			this.title = StringTools.utf8SubString(this.getProperties().getTitle(), length_255B - 3) + "...";
@@ -145,122 +145,122 @@ public class Snap extends SliceJpaObject {
 	}
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("类型.")
+	@FieldDescribe("유형.")
 	@Column(length = length_32B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("快照创建人.")
+	@FieldDescribe("스냅숏 생성자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String person;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("标题.")
+	@FieldDescribe("제목.")
 	@Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("任务.")
+	@FieldDescribe("작업.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String applicationName_FIELDNAME = "applicationName";
-	@FieldDescribe("应用名称.")
+	@FieldDescribe("앱 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + applicationName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + applicationName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String applicationName;
 
 	public static final String applicationAlias_FIELDNAME = "applicationAlias";
-	@FieldDescribe("应用别名.")
+	@FieldDescribe("앱 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + applicationAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String applicationAlias;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String processName_FIELDNAME = "processName";
-	@FieldDescribe("流程名称.")
+	@FieldDescribe("프로세스 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + processName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + processName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processName;
 
 	public static final String processAlias_FIELDNAME = "processAlias";
-	@FieldDescribe("流程别名.")
+	@FieldDescribe("프로세스 별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + processAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processAlias;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建人，可能为空，如果由系统创建.")
+	@FieldDescribe("생성자, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorPerson;
 
 	public static final String creatorIdentity_FIELDNAME = "creatorIdentity";
-	@FieldDescribe("创建人Identity,可能为空,如果由系统创建.")
+	@FieldDescribe("생성자 Identity, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorIdentity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorIdentity;
 
 	public static final String creatorUnit_FIELDNAME = "creatorUnit";
-	@FieldDescribe("创建人组织,可能为空,如果由系统创建。")
+	@FieldDescribe("생성자 조직, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorUnit_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorUnit_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorUnit;
 
 	public static final String activity_FIELDNAME = "activity";
-	@FieldDescribe("活动ID,针对已完成工作添加待阅字段为空.")
+	@FieldDescribe("활동 ID, 완료된 업무 문서에 열람 대기 추가 시 필드가 비어 있음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activity;
 
 	public static final String activityName_FIELDNAME = "activityName";
-	@FieldDescribe("活动名称,针对已完成工作添加待阅字段为空.")
+	@FieldDescribe("활동 이름, 완료된 업무 문서에 열람 대기 추가 시 필드가 비어 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityName;
 
 	public static final String activityAlias_FIELDNAME = "activityAlias";
-	@FieldDescribe("活动别名,针对已完成工作添加待阅字段为空.")
+	@FieldDescribe("활동 별칭, 완료된 업무 문서에 열람 대기 추가 시 필드가 비어 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityAlias;
 
 	public static final String activityDescription_FIELDNAME = "activityDescription";
-	@FieldDescribe("活动说明,针对已完成工作添加待阅字段为空.")
+	@FieldDescribe("활동 설명, 완료된 업무 문서에 열람 대기 추가 시 필드가 비어 있음.")
 	@Column(length = length_255B, name = ColumnNamePrefix + activityDescription_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityDescription;
 
 	public static final String activityType_FIELDNAME = "activityType";
-	@FieldDescribe("活动类型,针对已完成工作添加待阅字段为空.")
+	@FieldDescribe("활동 유형, 완료된 업무 문서에 열람 대기 추가 시 필드가 비어 있음.")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + activityType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + activityType_FIELDNAME)
@@ -268,19 +268,19 @@ public class Snap extends SliceJpaObject {
 	private ActivityType activityType;
 
 	public static final String activityToken_FIELDNAME = "activityToken";
-	@FieldDescribe("活动Token,针对已完成工作添加待阅字段为空.")
+	@FieldDescribe("활동 Token, 완료된 업무 문서에 열람 대기 추가 시 필드가 비어 있음.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + activityToken_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String activityToken;
 
 	public static final String startTime_FIELDNAME = "startTime";
-	@FieldDescribe("流程启动时间.")
+	@FieldDescribe("프로세스 시작 시간.")
 	@Column(name = ColumnNamePrefix + startTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startTime_FIELDNAME)
 	private Date startTime;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)

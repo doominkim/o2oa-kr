@@ -35,14 +35,14 @@
         <script>layout.mobile = true;</script>
         <script text="text/javascript">
 
-            // 根据ua判断当前环境 加载各种jssdk
+            // ua로 현재 환경을 판단해 각종 jssdk 로드
             var u = navigator.userAgent.toLocaleLowerCase();
-            if (/uni-app/i.test(u)) { // uniapp开发的app
+            if (/uni-app/i.test(u)) { // uniapp으로 개발한 app
                 var script = document.createElement("script");
                 script.type = "text/javascript";
                 script.src = "../o2_lib/uniapp/uni.webview.1.5.2.js";
                 document.body.appendChild(script);
-            }else if (/dingtalk/i.test(u)) { // 钉钉
+            }else if (/dingtalk/i.test(u)) { // DingTalk
                 
             }
         </script>

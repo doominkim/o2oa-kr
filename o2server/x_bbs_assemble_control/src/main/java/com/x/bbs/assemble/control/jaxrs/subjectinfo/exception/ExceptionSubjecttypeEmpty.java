@@ -7,6 +7,6 @@ public class ExceptionSubjecttypeEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjecttypeEmpty() {
-		super("主题类别为空， 无法进行查询." );
+		super("주제 유형이 비어 있어 조회할 수 없습니다." );
 	}
 }

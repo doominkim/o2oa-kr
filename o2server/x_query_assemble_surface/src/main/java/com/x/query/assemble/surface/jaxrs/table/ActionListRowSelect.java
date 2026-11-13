@@ -76,11 +76,11 @@ class ActionListRowSelect extends BaseAction {
 
 		private static final long serialVersionUID = 5494319398614663331L;
 
-		@FieldDescribe("查询条件，格式为jpql语法,o.name='zhangsan'，允许为空")
+		@FieldDescribe("쿼리 조건, jpql 문법 형식, o.name='zhangsan', 비워 둘 수 있음")
 		private String where;
-		@FieldDescribe("排序条件，格式为：o.updateTime desc，允许为空")
+		@FieldDescribe("정렬 조건, 형식: o.updateTime desc, 비워 둘 수 있음")
 		private String orderBy;
-		@FieldDescribe("返回结果集数量,允许为空")
+		@FieldDescribe("반환 결과 수, 비워 둘 수 있음")
 		private Integer size;
 
 		public String getWhere() {

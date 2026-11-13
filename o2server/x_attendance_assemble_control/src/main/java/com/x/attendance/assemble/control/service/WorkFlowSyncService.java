@@ -40,16 +40,16 @@ public class WorkFlowSyncService {
 
 	public static class WoWorkOrCompletedComplex extends GsonPropertyObject {
 
-		@FieldDescribe("活动节点")
+		@FieldDescribe("활동 노드")
 		private WoActivity activity;
 
-		@FieldDescribe("工作")
+		@FieldDescribe("문서")
 		private WoWork work;
 
-		@FieldDescribe("待办对象列表")
+		@FieldDescribe("결재 대기 객체 목록")
 		private List<WoTask> taskList = new ArrayList<>();
 
-		@FieldDescribe("工作日志对象")
+		@FieldDescribe("업무 로그 객체")
 		private List<WoWorkLog> workLogList = new ArrayList<>();
 
 		public WoActivity getActivity() {

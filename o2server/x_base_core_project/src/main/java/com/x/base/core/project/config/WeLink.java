@@ -15,31 +15,31 @@ import com.x.base.core.project.gson.XGsonBuilder;
  */
 public class WeLink extends ConfigObject {
 
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	private Boolean enable;
 
-	@FieldDescribe("WeLink应用的client_id")
+	@FieldDescribe("WeLink 앱의 client_id")
 	private String clientId;
 
-	@FieldDescribe("WeLink应用的client_secret")
+	@FieldDescribe("WeLink 앱의 client_secret")
 	private String clientSecret;
 
-	@FieldDescribe("回调信号触发同步检查,默认每10分钟运行一次,如果期间内有WeLink回调信号接收到,那么触发同步任务进行人员同步.")
+	@FieldDescribe("콜백 신호로 동기화 점검 트리거, 기본값은 10분마다 1회 실행, 해당 기간에 WeLink 콜백 신호를 수신하면 사용자 동기화 작업 트리거.")
 	private String syncCron;
 
-	@FieldDescribe("强制拉入同步cron,默认在每天的8点和12点强制进行同步.")
+	@FieldDescribe("강제 동기화 cron, 기본값 매일 8시와 12시에 강제 동기화.")
 	private String forceSyncCron;
 
-	@FieldDescribe("WeLink api服务器地址")
+	@FieldDescribe("WeLink api 서버 주소")
 	private String oapiAddress;
 
-	@FieldDescribe("是否启用消息推送")
+	@FieldDescribe("메시지 푸시 사용 여부")
 	private Boolean messageEnable;
 
-	@FieldDescribe("WeLink消息打开工作的url地址，如：https://sample.o2oa.net/x_desktop/")
+	@FieldDescribe("WeLink 메시지에서 업무 문서를 여는 url 주소, 예:https://sample.o2oa.net/x_desktop/")
 	private String workUrl = "";
 
-	@FieldDescribe("WeLink消息处理完成后跳转到特定的门户页面的Id")
+	@FieldDescribe("WeLink 메시지 처리 완료 후 이동할 특정 포털 페이지의 Id")
 	private String messageRedirectPortal = "";
 
 	public static WeLink defaultInstance() {
@@ -135,7 +135,7 @@ public class WeLink extends ConfigObject {
 	}
 
 	/**
-	 * 获取WeLink AccessToken
+	 * WeLink AccessToken 조회
 	 * 
 	 * @return
 	 * @throws Exception
@@ -155,7 +155,7 @@ public class WeLink extends ConfigObject {
 				throw new ExceptionWeLinkAccessToken(resp.getCode(), resp.getMessage());
 			}
 			cachedAccessToken = resp.getAccess_token();
-			Integer second = resp.expires_in;// 过期时间 秒
+			Integer second = resp.expires_in;// 만료 시간 초
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.SECOND, (second - 300));
 			cachedAccessTokenDate = cal.getTime();

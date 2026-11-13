@@ -74,49 +74,49 @@ abstract class V2Base extends StandardJaxrsAction {
 			return true;
 		}
 
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private List<String> applicationList;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程数据：true(默认查找)|false")
+		@FieldDescribe("동일 버전 프로세스 데이터 조회 여부: true(기본 조회)|false")
 		private Boolean relateEditionProcess = true;
 
-		@FieldDescribe("开始时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("시작 시간yyyy-MM-dd HH:mm:ss")
 		private String startTime;
 
-		@FieldDescribe("结束时间yyyy-MM-dd HH:mm:ss")
+		@FieldDescribe("종료 시간yyyy-MM-dd HH:mm:ss")
 		private String endTime;
 
-		@FieldDescribe("活动名称")
+		@FieldDescribe("활동 이름")
 		private List<String> activityNameList;
 
-		@FieldDescribe("创建用户")
+		@FieldDescribe("생성 사용자")
 		private List<String> creatorPersonList;
 
-		@FieldDescribe("创建组织")
+		@FieldDescribe("생성 조직")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("开始时间")
+		@FieldDescribe("시작 시간")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("结束时间")
+		@FieldDescribe("종료 시간")
 		private List<String> completedTimeMonthList;
 
-		@FieldDescribe("已经结束的.")
+		@FieldDescribe("종료된 항목.")
 		private Boolean completed;
 
-		@FieldDescribe("尚未结束的")
+		@FieldDescribe("종료되지 않은 항목")
 		private Boolean notCompleted;
 
-		@FieldDescribe("同一Job,同一处理人最后一条已办.")
+		@FieldDescribe("동일 Job, 동일 처리자의 마지막 처리 완료.")
 		private Boolean latest;
 
-		@FieldDescribe("关键字")
+		@FieldDescribe("키워드")
 		private String key;
 
-		@FieldDescribe("标题")
+		@FieldDescribe("제목")
 		private String title;
 
 		public Boolean getNotCompleted() {
@@ -264,22 +264,22 @@ abstract class V2Base extends StandardJaxrsAction {
 			return true;
 		}
 
-		@FieldDescribe("是否关联work")
+		@FieldDescribe("work 연결 여부")
 		private Boolean relateWork;
 
-		@FieldDescribe("是否关联workCompleted")
+		@FieldDescribe("workCompleted 연결 여부")
 		private Boolean relateWorkCompleted;
 
-		@FieldDescribe("是否关联task")
+		@FieldDescribe("task 연결 여부")
 		private Boolean relateTask;
 
-		@FieldDescribe("是否关联read")
+		@FieldDescribe("read 연결 여부")
 		private Boolean relateRead;
 
-		@FieldDescribe("是否关联readCompleted")
+		@FieldDescribe("readCompleted 연결 여부")
 		private Boolean relateReadCompleted;
 
-		@FieldDescribe("是否关联review")
+		@FieldDescribe("review 연결 여부")
 		private Boolean relateReview;
 
 		public Boolean getRelateWork() {

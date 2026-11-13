@@ -27,9 +27,9 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
         ],
     },
 
-    //在load方法最后执行
+    //load 메서드 마지막에 실행
     _afterLoaded: function () {
-        //兼容移动端
+        //모바일 호환
         // if (!this.mobileEditable) this.node.addClass('datatable_readonly');
         // if (this.datatableMode === 'mobile_default' && this.mobileEditable) {
         // const buttonNode = new Element('oo-button.datatable_edit_button', {
@@ -87,13 +87,13 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
             e.stopPropagation();
         });
 
-        //编辑完成后的处理
+        //편집 완료 후 처리
         this.addEvent("completeLineEdit", (line)=>{
             const ths = this._getHeadThs();
             this._checkMobileTr(line.node, ths);
         });
 
-        //插入行后处理
+        //행 삽입 후 처리
         this.addEvent("addLine",(o)=>{
             const ths = this._getHeadThs();
             this._checkMobileTr(o.line.node, ths);
@@ -117,7 +117,7 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
             }
         })
         
-        //验证后处理
+        //검증 후 처리
         this.addEvent("validationLine",(line, flag)=>{
             if (!flag) {
                 if (!line.node.isIntoView()) line.node.scrollIntoView({behavior: 'smooth', block: "nearest", inline: "nearest"});
@@ -178,7 +178,7 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
     }, 
     
     _loadMobileActionNode: function(){
-        //添加操作按钮
+        //작업 버튼 추가
         const actionNode = new Element('div.mwf_mobile_actions');
         this.node.appendChild(actionNode);
         actionNode.addEventListener('click', (e)=>{
@@ -187,7 +187,7 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
         this.mobileActionNode = actionNode;
     },
     _loadMobileAddAction: function(){
-        //添加新增条目按钮
+        //새 항목 추가 버튼 추가
         if (this.addable){
             const addAction = new Element('oo-button.mwf_mobile_addAction', {type: 'light'});
             addAction.setAttribute('text', MWF.xApplication.process.Xform.LP.addLine);
@@ -199,7 +199,7 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
         }
     },
     _loadMobileOkAction: function(){
-        //添加编辑完成按钮
+        //편집 완료 버튼 추가
         const okAction = new Element('oo-button.mwf_mobile_okAction');
         okAction.setAttribute('text', MWF.xApplication.process.Xform.LP.editOk);
         this.mobileActionNode.appendChild(okAction);
@@ -237,9 +237,9 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
 
     loadDatatable: function () {
         if (o2.isMediaMobile()) {
-            //移动端模式，默认表格显示模式，不进行编辑，没有多行编辑等
+            //모바일 모드, 기본 표 표시 모드로 편집하지 않으며 다중 행 편집 등이 없음
             if (!this.node.hasClass('datatable_edit_mode')) {
-                //移动端默认模式
+                //모바일 기본 모드
                 this.mobileMultiEditMode = this.multiEditMode;
                 this.mobileEditable = this.editable;
                 this.multiEditMode = false;
@@ -247,14 +247,14 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
                 this.datatableMode = 'mobile_default';
                 this._loadDefaultDatatable();
             } else {
-                //移动端编辑模式
+                //모바일 편집 모드
                 this.datatableMode = 'mobile_edit';
                 this.multiEditMode = this.mobileMultiEditMode;
                 this.editable = this.mobileEditable;
 
                 this._loadDefaultDatatable(() => {
-                    //修改dom结构
-                    //创建标题栏
+                    //dom 구조 수정
+                    //제목 표시줄 생성
                     this._loadMobileTitle();
 
                     const trs = this.tBody.querySelectorAll('tr');
@@ -270,7 +270,7 @@ MWF.xApplication.process.Xform.DatatableV10 = MWF.APPDatatableV10 = new Class({
                 });
             }
         } else {
-            //PC端模式
+            //PC 모드
             this.datatableMode = 'pc';
             this._loadDefaultDatatable();
         }

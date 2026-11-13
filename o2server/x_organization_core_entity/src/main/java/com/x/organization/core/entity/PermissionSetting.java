@@ -27,7 +27,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "PermissionSetting", description = "组织权限设定.")
+@Schema(name = "PermissionSetting", description = "조직 권한 설정.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.PermissionSetting.table, uniqueConstraints = {
@@ -51,22 +51,22 @@ public class PermissionSetting extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* Entity 默认字段结束 */
+	/* Entity 기본 필드 끝 */
 
 	public static final String excludeUnit_FIELDNAME = "excludeUnit";
-	@FieldDescribe("不允许被查询单位.")
+	@FieldDescribe("조회 불허 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + excludeUnit_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -77,7 +77,7 @@ public class PermissionSetting extends SliceJpaObject {
 	private List<String> excludeUnit;
 
 	public static final String excludePerson_FIELDNAME = "excludePerson";
-	@FieldDescribe("不允许被查询个人.")
+	@FieldDescribe("조회 불허 개인.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + excludePerson_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -88,7 +88,7 @@ public class PermissionSetting extends SliceJpaObject {
 	private List<String> excludePerson;
 	
 	public static final String limitQueryOuter_FIELDNAME = "limitQueryOuter";
-	@FieldDescribe("限制查看外部门.")
+	@FieldDescribe("외부 부서 조회 제한.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + limitQueryOuter_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -99,7 +99,7 @@ public class PermissionSetting extends SliceJpaObject {
 	private List<String> limitQueryOuter;
 	
 	public static final String limitQueryAll_FIELDNAME = "limitQueryAll";
-	@FieldDescribe("限制查看所有人")
+	@FieldDescribe("전체 사용자 조회 제한")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + limitQueryAll_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -110,14 +110,14 @@ public class PermissionSetting extends SliceJpaObject {
 	private List<String> limitQueryAll;		
 	
 	public static final String explain_FIELDNAME = "explain";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + explain_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + explain_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String explain;
 	
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态.草稿,发布")
+	@FieldDescribe("상태. 초안, 게시")
 	@Column(length = length_255B, name = ColumnNamePrefix + status_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -125,7 +125,7 @@ public class PermissionSetting extends SliceJpaObject {
 	
 	public static final String extend1_FIELDNAME = "extend1";
 	@Flag
-	@FieldDescribe("extend1扩展字段.")
+	@FieldDescribe("extend1 확장 필드.")
 	@Column(length = length_255B, name = ColumnNamePrefix + extend1_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + extend1_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -133,7 +133,7 @@ public class PermissionSetting extends SliceJpaObject {
 
 	public static final String extend2_FIELDNAME = "extend2";
 	@Flag
-	@FieldDescribe("extend2扩展字段.")
+	@FieldDescribe("extend2 확장 필드.")
 	@Column(length = length_255B, name = ColumnNamePrefix + extend2_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + extend2_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -141,7 +141,7 @@ public class PermissionSetting extends SliceJpaObject {
 	
 	public static final String extend3_FIELDNAME = "extend3";
 	@Flag
-	@FieldDescribe("extend3扩展字段.")
+	@FieldDescribe("extend3 확장 필드.")
 	@Column(length = length_255B, name = ColumnNamePrefix + extend3_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + extend3_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

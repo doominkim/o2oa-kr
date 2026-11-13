@@ -21,7 +21,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "ViewFieldConfig", description = "内容管理视图字段配置.")
+@Schema(name = "ViewFieldConfig", description = "콘텐츠 관리 뷰 필드 설정.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.ViewFieldConfig.table, uniqueConstraints = {
@@ -42,7 +42,7 @@ public class ViewFieldConfig extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -52,7 +52,7 @@ public class ViewFieldConfig extends SliceJpaObject {
 	}
 
 	public static final String editor_FIELDNAME = "editor";
-	@FieldDescribe("最后的编辑者.")
+	@FieldDescribe("마지막 편집자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + editor_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String editor;
@@ -65,40 +65,40 @@ public class ViewFieldConfig extends SliceJpaObject {
 		this.editor = editor;
 	}
 
-	/* ==============================================以上为 JpaObject 默认字段 */
+	/* ==============================================위는 JpaObject 기본 필드 */
 
 	/*
-	 * =====================================更新运行方法
+	 * =====================================실행 메서드 업데이트
 	 * =======================================
 	 */
 
 	public static final String viewId_FIELDNAME = "viewId";
-	@FieldDescribe("列表ID.")
+	@FieldDescribe("목록 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + viewId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + viewId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String viewId;
 
 	public static final String fieldTitle_FIELDNAME = "fieldTitle";
-	@FieldDescribe("列标题.")
+	@FieldDescribe("열 제목.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + fieldTitle_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fieldTitle;
 
 	public static final String fieldName_FIELDNAME = "fieldName";
-	@FieldDescribe("列（属性）名称.")
+	@FieldDescribe("열(속성) 이름.")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + fieldName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fieldName;
 
 	public static final String showSequence_FIELDNAME = "showSequence";
-	@FieldDescribe("显示顺序")
+	@FieldDescribe("표시 순서")
 	@CheckPersist(allowEmpty = true)
 	@Column(name = ColumnNamePrefix + showSequence_FIELDNAME)
 	private Integer showSequence = 0;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;

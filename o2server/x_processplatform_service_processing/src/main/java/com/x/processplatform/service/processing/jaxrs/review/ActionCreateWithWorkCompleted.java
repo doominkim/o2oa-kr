@@ -102,10 +102,10 @@ class ActionCreateWithWorkCompleted extends BaseAction {
 
 		private static final long serialVersionUID = 8103324298350000501L;
 
-		@FieldDescribe("已完成工作标识")
+		@FieldDescribe("완료된 업무 문서 식별자")
 		private String workCompleted;
 
-		@FieldDescribe("人员列表")
+		@FieldDescribe("사용자 목록")
 		private List<String> personList = new ArrayList<>();
 
 		public String getWorkCompleted() {

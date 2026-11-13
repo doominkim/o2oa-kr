@@ -18,7 +18,7 @@ export default content({
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
      
     };
@@ -60,7 +60,7 @@ export default content({
   submit() {
     if (this.bind.shiftSelected && this.bind.shiftSelected.id) {
       //this.component.updateModel( this.bind.shiftSelected );
-      // 返回对象给父组件
+      // 부모 컴포넌트에 객체 반환
       if (this.$parent && this.$parent.setShiftData) {
         this.$parent.setShiftData(this.bind.shiftSelected);
       }

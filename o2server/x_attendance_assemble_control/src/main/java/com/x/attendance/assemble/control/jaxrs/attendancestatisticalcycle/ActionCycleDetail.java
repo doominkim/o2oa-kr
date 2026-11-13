@@ -47,7 +47,7 @@ public class ActionCycleDetail extends BaseAction {
 		}
 		if (check) {
 			try {
-				logger.info("++++++++尝试获取人员的顶级组织：personName:" + effectivePerson.getDistinguishedName() );
+				logger.info("++++++++사용자의 최상위 조직 조회 시도: personName:" + effectivePerson.getDistinguishedName() );
 				topUnitName = userManagerService.getTopUnitNameWithPersonName(effectivePerson.getDistinguishedName());
 				if ( StringUtils.isEmpty( topUnitName ) ) {
 					check = false;
@@ -89,7 +89,7 @@ public class ActionCycleDetail extends BaseAction {
 				allCycleMap = attendanceStatisticalCycleServiceAdv.getCycleMapFormAllCycles(effectivePerson.getDebugger());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionStatisticCycleProcess(e, "系统在查询并且组织所有的统计周期时发生异常.");
+				Exception exception = new ExceptionStatisticCycleProcess(e, "모든 통계 기간을 조회·구성하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -100,7 +100,7 @@ public class ActionCycleDetail extends BaseAction {
 						topUnitName, unitName, year, month, allCycleMap, effectivePerson.getDebugger());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionStatisticCycleProcess(e, "系统在根据员工的顶层组织和组织查询指定的统计周期时发生异常.TopUnit:"
+				Exception exception = new ExceptionStatisticCycleProcess(e, "직원의 최상위 조직과 조직으로 통계 기간을 조회하는 중 오류가 발생했습니다. TopUnit:"
 						+ topUnitName + ", Unit:" + unitName + ", CycleYear:" + year + ", CycleMonth:" + month);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
@@ -112,7 +112,7 @@ public class ActionCycleDetail extends BaseAction {
 					wrap = Wo.copier.copy(attendanceStatisticalCycle);
 					result.setData(wrap);
 				} catch (Exception e) {
-					Exception exception = new ExceptionStatisticCycleProcess(e, "系统将所有查询到的统计周期信息对象转换为可以输出的信息时发生异常.");
+					Exception exception = new ExceptionStatisticCycleProcess(e, "조회된 통계 기간 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}

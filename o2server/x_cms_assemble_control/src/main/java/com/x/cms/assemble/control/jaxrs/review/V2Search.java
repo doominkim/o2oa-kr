@@ -114,20 +114,20 @@ class V2Search extends V2Base {
 
 		private static final long serialVersionUID = 3627613954808043653L;
 
-		@FieldDescribe("搜索内容.")
-		@Schema(description = "搜索内容.")
+		@FieldDescribe("검색 내용.")
+		@Schema(description = "검색 내용.")
 		private String query;
 
-		@FieldDescribe("分页.")
-		@Schema(description = "分页.")
+		@FieldDescribe("페이지.")
+		@Schema(description = "페이지.")
 		private Integer page;
 
-		@FieldDescribe("数量.")
-		@Schema(description = "数量.")
+		@FieldDescribe("수량.")
+		@Schema(description = "수량.")
 		private Integer size;
 
-		@FieldDescribe("用户.")
-		@Schema(description = "用户.")
+		@FieldDescribe("사용자.")
+		@Schema(description = "사용자.")
 		private String person;
 
 		public String getQuery() {

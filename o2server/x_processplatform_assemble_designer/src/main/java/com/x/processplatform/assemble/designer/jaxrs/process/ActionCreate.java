@@ -102,7 +102,7 @@ class ActionCreate extends BaseAction {
             wo.setId(process.getId());
             result.setData(wo);
             MessageFactory.process_create(process);
-            // 保存历史版本
+            // 이력 버전 저장
             ThisApplication.processVersionQueue.send(new ProcessVersion(process.getId(), jsonElement, effectivePerson.getDistinguishedName()));
             return result;
         }

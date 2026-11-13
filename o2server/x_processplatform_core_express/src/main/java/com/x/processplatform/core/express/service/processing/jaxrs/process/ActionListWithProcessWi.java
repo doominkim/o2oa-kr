@@ -11,12 +11,12 @@ public class ActionListWithProcessWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6093458504525871536L;
 
-	@FieldDescribe("流程(多值逗号隔开).")
-	@Schema(description = "流程(多值逗号隔开).")
+	@FieldDescribe("프로세스(여러 값은 쉼표로 구분).")
+	@Schema(description = "프로세스(여러 값은 쉼표로 구분).")
 	private List<String> processList;
 
-	@FieldDescribe("是否同时查询同版本的流程(true|false).")
-	@Schema(description = "是否同时查询同版本的流程(true|false).")
+	@FieldDescribe("같은 버전 프로세스 동시 조회 여부(true|false).")
+	@Schema(description = "같은 버전 프로세스 동시 조회 여부(true|false).")
 	private boolean includeEdition;
 
 	public List<String> getProcessList() {

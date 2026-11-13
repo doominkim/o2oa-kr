@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("elementtool")
-@JaxrsDescribe("设计元素工具")
+@JaxrsDescribe("설계 요소 도구")
 public class ElementToolAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ElementToolAction.class);
 
-	@JaxrsMethodDescribe(value = "Form对象中的孤立对象,包括Form和FormField", action = ActionFormOrphan.class)
+	@JaxrsMethodDescribe(value = "Form 객체 중 고립 객체, Form과 FormField 포함", action = ActionFormOrphan.class)
 	@GET
 	@Path("form/orphan")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -43,7 +43,7 @@ public class ElementToolAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "Process对象中的孤立对象,包括Process的子元素", action = ActionProcessOrphan.class)
+	@JaxrsMethodDescribe(value = "Process 객체 중 고립 객체, Process 하위 요소 포함", action = ActionProcessOrphan.class)
 	@GET
 	@Path("process/orphan")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -60,7 +60,7 @@ public class ElementToolAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "Script对象中的孤立对象.", action = ActionScriptOrphan.class)
+	@JaxrsMethodDescribe(value = "Script 객체 중 고립 객체.", action = ActionScriptOrphan.class)
 	@GET
 	@Path("script/orphan")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -77,7 +77,7 @@ public class ElementToolAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "ApplicationDict对象中的孤立对象,包括item对象", action = ActionApplicationDictOrphan.class)
+	@JaxrsMethodDescribe(value = "ApplicationDict 객체 중 고립 객체, item 객체 포함", action = ActionApplicationDictOrphan.class)
 	@GET
 	@Path("applicationdict/orphan")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

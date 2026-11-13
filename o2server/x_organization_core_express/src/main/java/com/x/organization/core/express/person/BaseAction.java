@@ -15,7 +15,7 @@ abstract class BaseAction {
 	static class WoPersonListAbstract extends GsonPropertyObject {
 
 		private static final long serialVersionUID = -7355763734963073999L;
-		@FieldDescribe("个人识别名")
+		@FieldDescribe("사용자 식별 이름")
 		private List<String> personList = new ArrayList<>();
 
 		public List<String> getPersonList() {
@@ -32,7 +32,7 @@ abstract class BaseAction {
 
 		private static final long serialVersionUID = -1351857861060358701L;
 
-		@FieldDescribe("身份人员匹配对")
+		@FieldDescribe("신분-사용자 매칭 쌍")
 		private List<IdentityPersonPair> identityPersonPairList = new ArrayList<>();
 
 		public List<IdentityPersonPair> getIdentityPersonPairList() {

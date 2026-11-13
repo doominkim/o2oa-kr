@@ -19,7 +19,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "StatisticTopUnitForDay", description = "考勤顶层组织按天统计.")
+@Schema(name = "StatisticTopUnitForDay", description = "근태 최상위 조직 일별 통계.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.StatisticTopUnitForDay.table, uniqueConstraints = {
@@ -40,7 +40,7 @@ public class StatisticTopUnitForDay extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -56,89 +56,89 @@ public class StatisticTopUnitForDay extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String topUnitName_FIELDNAME = "topUnitName";
-	@FieldDescribe("顶层组织名称")
+	@FieldDescribe("최상위 조직명")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ topUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String topUnitName;
 
 	public static final String statisticYear_FIELDNAME = "statisticYear";
-	@FieldDescribe("统计年份")
+	@FieldDescribe("통계 연도")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + statisticYear_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String statisticYear;
 
 	public static final String statisticMonth_FIELDNAME = "statisticMonth";
-	@FieldDescribe("统计月份")
+	@FieldDescribe("통계 월")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + statisticMonth_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String statisticMonth;
 
 	public static final String statisticDate_FIELDNAME = "statisticDate";
-	@FieldDescribe("统计日期")
+	@FieldDescribe("통계 날짜")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + statisticDate_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String statisticDate;
 
 	public static final String employeeCount_FIELDNAME = "employeeCount";
-	@FieldDescribe("应出勤人数")
+	@FieldDescribe("출근 대상 인원")
 	@Column(name = ColumnNamePrefix + employeeCount_FIELDNAME)
 	private Double employeeCount;
 
 	public static final String onDutyEmployeeCount_FIELDNAME = "onDutyEmployeeCount";
-	@FieldDescribe("实际出勤人数")
+	@FieldDescribe("실제 출근 인원")
 	@Column(name = ColumnNamePrefix + onDutyEmployeeCount_FIELDNAME)
 	private Double onDutyEmployeeCount;
 
 	public static final String absenceDayCount_FIELDNAME = "absenceDayCount";
-	@FieldDescribe("缺勤人数")
+	@FieldDescribe("결근 인원")
 	@Column(name = ColumnNamePrefix + absenceDayCount_FIELDNAME)
 	private Double absenceDayCount;
 
 	public static final String onSelfHolidayEmployeeCount_FIELDNAME = "onSelfHolidayEmployeeCount";
-	@FieldDescribe("休假人数")
+	@FieldDescribe("휴가 인원")
 	@Column(name = ColumnNamePrefix + onSelfHolidayEmployeeCount_FIELDNAME)
 	private Double onSelfHolidayEmployeeCount;
 
 	public static final String onDutyCount_FIELDNAME = "onDutyCount";
-	@FieldDescribe("签到人数")
+	@FieldDescribe("출근 체크 인원")
 	@Column(name = ColumnNamePrefix + onDutyCount_FIELDNAME)
 	private Long onDutyCount;
 
 	public static final String offDutyCount_FIELDNAME = "offDutyCount";
-	@FieldDescribe("签退人数")
+	@FieldDescribe("퇴근 체크 인원")
 	@Column(name = ColumnNamePrefix + offDutyCount_FIELDNAME)
 	private Long offDutyCount;
 
 	public static final String lateCount_FIELDNAME = "lateCount";
-	@FieldDescribe("迟到人数")
+	@FieldDescribe("지각 인원")
 	@Column(name = ColumnNamePrefix + lateCount_FIELDNAME)
 	private Long lateCount;
 
 	public static final String leaveEarlyCount_FIELDNAME = "leaveEarlyCount";
-	@FieldDescribe("早退人数")
+	@FieldDescribe("조퇴 인원")
 	@Column(name = ColumnNamePrefix + leaveEarlyCount_FIELDNAME)
 	private Long leaveEarlyCount;
 
 	public static final String lackOfTimeCount_FIELDNAME = "lackOfTimeCount";
-	@FieldDescribe("工时不足人数")
+	@FieldDescribe("근무 시간 부족 인원")
 	@Column(name = ColumnNamePrefix + lackOfTimeCount_FIELDNAME)
 	private Long lackOfTimeCount;
 
 	public static final String abNormalDutyCount_FIELDNAME = "abNormalDutyCount";
-	@FieldDescribe("异常打卡人数")
+	@FieldDescribe("비정상 체크 인원")
 	@Column(name = ColumnNamePrefix + abNormalDutyCount_FIELDNAME)
 	private Long abNormalDutyCount;
 

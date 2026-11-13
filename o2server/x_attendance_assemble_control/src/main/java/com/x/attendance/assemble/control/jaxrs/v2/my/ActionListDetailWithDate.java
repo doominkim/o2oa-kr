@@ -39,13 +39,13 @@ public class ActionListDetailWithDate extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             if (StringUtils.isEmpty(wi.getStartDate())) {
-                throw new ExceptionEmptyParameter("开始日期");
+                throw new ExceptionEmptyParameter("시작 날짜");
             }
             if (StringUtils.isEmpty(wi.getEndDate())) {
-                throw new ExceptionEmptyParameter("结束日期");
+                throw new ExceptionEmptyParameter("종료 날짜");
             }
-            Date startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 检查格式
-            Date endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 检查格式
+            Date startDate = DateTools.parse(wi.getStartDate(), DateTools.format_yyyyMMdd); // 형식 검사
+            Date endDate = DateTools.parse(wi.getEndDate(), DateTools.format_yyyyMMdd); // 형식 검사
             if (startDate.after(endDate)) {
                 throw new ExceptionDateEndBeforeStartError();
             }
@@ -85,14 +85,14 @@ public class ActionListDetailWithDate extends BaseAction {
                                 recordList.add(woRecord);
                             }
                         }
-                        // 如果是休息日 只有在有打卡记录的时候才提供数据，否则是无效数据
+                        // 휴일이면 체크 기록이 있을 때만 데이터를 제공하고 그 외에는 무효 데이터
                         if (!detail.getWorkDay()) {
                             List<AttendanceV2CheckInRecord> signList = recordList.stream().filter((r) -> (!r.getCheckInResult().equals(AttendanceV2CheckInRecord.CHECKIN_RESULT_PreCheckIn) && !r.getCheckInResult().equals(AttendanceV2CheckInRecord.CHECKIN_RESULT_NotSigned)))
                                     .collect(Collectors.toList());
                             if (!signList.isEmpty()) {
 
                                 wo.setRecordList(recordList);
-                            } else { // 空数组前端好处理
+                            } else { // 빈 배열이 프런트엔드에서 처리하기 쉬움
                                 wo.setRecordList(new ArrayList<>());
                             }
                         } else {
@@ -111,9 +111,9 @@ public class ActionListDetailWithDate extends BaseAction {
     public static class Wi extends GsonPropertyObject {
 
         private static final long serialVersionUID = 6842439549150552191L;
-        @FieldDescribe("开始日期")
+        @FieldDescribe("시작 날짜")
         private String startDate;
-        @FieldDescribe("结束日期")
+        @FieldDescribe("종료 날짜")
         private String endDate;
 
 
@@ -140,7 +140,7 @@ public class ActionListDetailWithDate extends BaseAction {
         static WrapCopier<AttendanceV2Detail, Wo> copier = WrapCopierFactory.wo(AttendanceV2Detail.class, Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("打卡记录")
+        @FieldDescribe("체크 기록")
         private List<WoRecord> recordList;
 
         public List<WoRecord> getRecordList() {
@@ -153,11 +153,11 @@ public class ActionListDetailWithDate extends BaseAction {
     }
 
     public static class WoRecord extends AttendanceV2CheckInRecord {
-        @FieldDescribe("外出记录")
+        @FieldDescribe("외출 기록")
         private AttendanceV2LeaveData leaveData;
-        @FieldDescribe("请假记录")
+        @FieldDescribe("휴가 기록")
         private AttendanceV2LeaveRequest leaveRequest;
-        @FieldDescribe("申诉记录")
+        @FieldDescribe("이의 신청 기록")
         private AttendanceV2AppealInfo appealData;
 
         static WrapCopier<AttendanceV2CheckInRecord, WoRecord> copier = WrapCopierFactory.wo(AttendanceV2CheckInRecord.class, WoRecord.class, null,

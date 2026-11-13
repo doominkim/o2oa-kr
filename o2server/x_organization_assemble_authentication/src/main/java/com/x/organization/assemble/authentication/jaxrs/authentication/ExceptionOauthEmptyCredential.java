@@ -6,7 +6,7 @@ class ExceptionOauthEmptyCredential extends LanguagePromptException {
 
 	private static final long serialVersionUID = 4132300948670472899L;
 
-	public static String defaultMessage = "无法获取用户凭证.";
+	public static String defaultMessage = "사용자 자격 증명을 가져올 수 없습니다.";
 
 	ExceptionOauthEmptyCredential() {
 		super(defaultMessage);

@@ -21,7 +21,7 @@ import com.x.base.core.project.jaxrs.AnonymousCipherManagerUserJaxrsFilter;
 import com.x.bbs.assemble.control.ThisApplication;
 
 /**
- * web服务过滤器，匿名用户可以访问的服务
+ * web 서비스 필터, 익명 사용자가 접근 가능한 서비스
  */
 @WebFilter( urlPatterns = {
 		"/jaxrs/permission/*",

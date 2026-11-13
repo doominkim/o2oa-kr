@@ -7,7 +7,7 @@ public class ExceptionInputResultObject extends PromptException {
     private static final long serialVersionUID = 9085364457175859374L;
 
     ExceptionInputResultObject(String flag) {
-        super("对象不存在:{}.", flag);
+        super("객체가 없습니다: {}.", flag);
     }
 
 }

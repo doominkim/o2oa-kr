@@ -160,10 +160,10 @@ public class RegistApplicationsEvent implements Event {
 
 	public static class Resp {
 
-		@FieldDescribe("上下文根")
+		@FieldDescribe("컨텍스트 루트")
 		private String servletContextName;
 
-		@FieldDescribe("服务器时间")
+		@FieldDescribe("서버 시간")
 		private Date serverTime;
 
 		public String getServletContextName() {
@@ -188,10 +188,10 @@ public class RegistApplicationsEvent implements Event {
 
 		private static final long serialVersionUID = -2855209663719641934L;
 
-		@FieldDescribe("节点名")
+		@FieldDescribe("노드명")
 		private String node;
 
-		@FieldDescribe("服务器时间")
+		@FieldDescribe("서버 시간")
 		private Date serverTime;
 
 		public String getNode() {

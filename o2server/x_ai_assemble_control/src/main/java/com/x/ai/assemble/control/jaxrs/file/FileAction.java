@@ -29,18 +29,18 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("file")
-@JaxrsDescribe("chat附件")
+@JaxrsDescribe("chat 첨부파일")
 public class FileAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileAction.class);
 
-	@JaxrsMethodDescribe(value = "获取指定File.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정한 File 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -52,14 +52,14 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "上传图片或文件.", action = ActionUpload.class)
+	@JaxrsMethodDescribe(value = "이미지 또는 파일 업로드.", action = ActionUpload.class)
 	@POST
 	@Path("upload")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_OCTET_STREAM })
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void upload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("上传图片或文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("이미지 또는 파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionUpload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,7 +71,7 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "拷贝网盘、内容管理或者流程平台的附件并上传.", action = ActionCopyFile.class)
+	@JaxrsMethodDescribe(value = "네트워크 드라이브, 콘텐츠 관리 또는 프로세스 플랫폼의 첨부파일을 복사해 업로드.", action = ActionCopyFile.class)
 	@POST
 	@Path("copy/file")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -89,13 +89,13 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载文件.", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "파일 다운로드.", action = ActionDownload.class)
 	@GET
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("是否以流模式下载") @QueryParam("stream") Boolean stream) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("스트림 모드 다운로드 여부") @QueryParam("stream") Boolean stream) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -107,13 +107,13 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "压缩后下载文件.", action = ActionDownloadScale.class)
+	@JaxrsMethodDescribe(value = "압축 후 파일 다운로드.", action = ActionDownloadScale.class)
 	@GET
 	@Path("{id}/download/scale")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void downloadScale(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("是否以流模式下载") @QueryParam("stream") Boolean stream) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("스트림 모드 다운로드 여부") @QueryParam("stream") Boolean stream) {
 		ActionResult<ActionDownloadScale.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -125,14 +125,14 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查找文件.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "파일 페이지 조회.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size,
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size,
 			JsonElement jsonElement) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -145,13 +145,13 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除文件.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "파일 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("delete/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("파일 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -163,7 +163,7 @@ public class FileAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据id列表查找文件.", action = ActionListWithIds.class)
+	@JaxrsMethodDescribe(value = "id 목록으로 파일 조회.", action = ActionListWithIds.class)
 	@POST
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

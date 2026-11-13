@@ -28,7 +28,7 @@ public class ActionList extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(ActionList.class);
 
 	ActionResult<Wo> execute(HttpServletRequest request, EffectivePerson effectivePerson) throws Exception {
-		logger.debug("{}操作获取配置", effectivePerson::getDistinguishedName);
+		logger.debug("{} 설정 조회 작업", effectivePerson::getDistinguishedName);
 		ActionResult<Wo> result = new ActionResult<>();
 		File manifestFile = new File(Config.base(), "config/manifest.json");
 		if(!manifestFile.exists()){
@@ -64,13 +64,13 @@ public class ActionList extends BaseAction {
 
 		private static final long serialVersionUID = -1525143709803057966L;
 
-		@FieldDescribe("执行时间")
+		@FieldDescribe("실행 시간")
 		private String time;
 
-		@FieldDescribe("执行结果")
+		@FieldDescribe("실행 결과")
 		private String status;
 
-		@FieldDescribe("config文件列表")
+		@FieldDescribe("config 파일 목록")
 		private String config;
 
 		public String getTime() {

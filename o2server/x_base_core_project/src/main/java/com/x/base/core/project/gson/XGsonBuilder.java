@@ -347,11 +347,11 @@ public class XGsonBuilder {
 	}
 
 	/**
-	 * 合并from到to的指定path下，path可以多层，多层以.隔开
-	 * @param from 可以是JsonObject对象或JsonArray对象
-	 * @param to 必须是JsonObject对象
+	 * from을 to의 지정 path 아래로 병합, path는 여러 단계 가능하며 여러 단계는 .으로 구분
+	 * @param from JsonObject 객체 또는 JsonArray 객체 가능
+	 * @param to 반드시 JsonObject 객체
 	 * @param path
-	 * @return 返回新的json对象
+	 * @return 새 json 객체 반환
 	 * @throws Exception
 	 */
 	public static JsonElement cover(JsonElement from, JsonElement to, String path) throws Exception{
@@ -418,7 +418,7 @@ public class XGsonBuilder {
 	}
 
 	/**
-	 * 递归查找指定path下的元素，path只有一层则删除，path有多层则替换
+	 * 지정 path 아래 요소를 재귀 탐색, path가 한 단계면 삭제, 여러 단계면 대체
 	 * @param data
 	 * @param fromData
 	 * @param path
@@ -489,14 +489,14 @@ public class XGsonBuilder {
 						}
 					}
 				} catch (NumberFormatException e) {
-					// 当前部分不是数字，也不是通配符，无法处理数组
+					// 현재 부분이 숫자도 와일드카드도 아니어서 배열을 처리할 수 없음
 				}
 			}
 		}
 	}
 
 	/**
-	 * 递归查找指定path下的元素并删除
+	 * 지정 path 아래 요소를 재귀 탐색하여 삭제
 	 * @param data
 	 * @param path
 	 */
@@ -552,14 +552,14 @@ public class XGsonBuilder {
 						}
 					}
 				} catch (NumberFormatException e) {
-					// 当前部分不是数字，也不是通配符，无法处理数组
+					// 현재 부분이 숫자도 와일드카드도 아니어서 배열을 처리할 수 없음
 				}
 			}
 		}
 	}
 
 	 /**
-     * 将 JsonElement 对象拆分成六个 Map，分别存储字符串、数字、布尔、字符串列表、数字列表、布尔列表。
+     * JsonElement 객체를 문자열, 숫자, 불리언, 문자열 목록, 숫자 목록, 불리언 목록을 각각 저장하는 6개의 Map으로 분리.
      *
      * @param prefix
      * @param jsonElement

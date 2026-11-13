@@ -72,7 +72,7 @@
                         text: info
                     }).inject( $(area) );
                 };
-                // 测试连接认证服务器
+                // 인증 서버 연결 테스트
                 var _loadAuthApp = function(authApp, webServer) {
                     if (authApp && authApp.host && authApp.port) {
                         var protocal = "http://";
@@ -97,10 +97,10 @@
                         _showError("애플리케이션 서버를 가져오지 못했습니다!");
                     }
                 };
-                // 测试连接中心服务器
+                // 센터 서버 연결 테스트
                 var _loadCenter = function() {
                     o2.Actions.load("x_program_center").DistributeAction.assembleWithWebServer(hostname, function(json){
-                        // 中心服务器连接成功
+                        // 센터 서버 연결 성공
                         _showSuccess("중앙 서버에 연결했습니다", "centerArea");
 
                         if (json && json.type === "success") {
@@ -108,12 +108,12 @@
                                 _loadAuthApp(json.data.assembles.x_organization_assemble_authentication, json.data.webServer);
                                 _showJson(json);
                             } else {
-                                // 应用服务器获取不到
+                                // 앱 서버를 가져올 수 없음
                                 _showError("애플리케이션 서버를 가져오지 못했습니다!");
                                 _showJson(json);
                             }
                         } else {
-                            // 获取地址信息失败
+                            // 주소 정보 조회 실패
                             _showError("중앙 서버 주소 정보를 가져오지 못했습니다!");
                             _showJson(json);
                         }

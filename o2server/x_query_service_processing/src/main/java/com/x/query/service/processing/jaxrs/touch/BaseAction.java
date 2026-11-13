@@ -15,8 +15,8 @@ import com.x.query.service.processing.ThisApplication;
 abstract class BaseAction extends StandardJaxrsAction {
 
     /**
-     * 根据node节点名获取集群中的x_query_service_processing模块,如果node=(0)
-     * AbstractJaxrsAction.EMPTY_SYMBOL 取得所有节点.
+     * node 노드명으로 클러스터의 x_query_service_processing 모듈 조회, node=(0)
+     * AbstractJaxrsAction.EMPTY_SYMBOL이면 모든 노드 조회.
      * 
      * @param node
      * @return

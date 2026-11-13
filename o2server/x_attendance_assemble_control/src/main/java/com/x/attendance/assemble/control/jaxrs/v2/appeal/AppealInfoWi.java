@@ -8,19 +8,19 @@ public class AppealInfoWi extends GsonPropertyObject {
 
     private static final long serialVersionUID = 3800681861289573236L;
 
-    @FieldDescribe("申诉的打卡考勤记录ID")
+    @FieldDescribe("이의 신청한 출퇴근 근태 기록 ID")
     private String recordId;
-    @FieldDescribe("用户标识")
+    @FieldDescribe("사용자 식별자")
     private List<String> users;
-    @FieldDescribe("过滤人员或组织，组织默认递归: 用户或组织的DN，如xxx@xxx@P、xxx@xxx@U")
+    @FieldDescribe("사용자 또는 조직 필터, 조직은 기본 재귀: 사용자 또는 조직의 DN, 예: xxx@xxx@P, xxx@xxx@U")
     private List<String> filterList;
-    @FieldDescribe("过滤组织是否递归查询下级组织人员，默认true，false时仅查询当前组织直属人员")
+    @FieldDescribe("필터 조직의 하위 조직 사용자 재귀 조회 여부, 기본 true, false면 현재 조직 직속 사용자만 조회")
     private Boolean recursive;
-    @FieldDescribe("开始日期")
+    @FieldDescribe("시작 날짜")
     private String startDate;
-    @FieldDescribe("结束日期")
+    @FieldDescribe("종료 날짜")
     private String endDate;
-    @FieldDescribe("申诉状态:0-待处理，1-审批中（已发起流程），2-审批通过，3-审批不通过 4-管理员处理")
+    @FieldDescribe("이의 신청 상태:0-대기, 1-결재 중(프로세스 시작됨), 2-승인, 3-반려 4-관리자 처리")
     private String status;
 
     public boolean isStatusValid() {

@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Documenteditor 公文编辑器。
- * @o2cn 公文编辑器
+/** @class Documenteditor 공문 편집기.
+ * @o2cn 공문 편집기
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var documenteditor = this.form.get("fieldId"); //获取组件
- * //方法2
- * var documenteditor = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var documenteditor = this.form.get("fieldId"); //컴포넌트 조회
+ * //방법 2
+ * var documenteditor = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process}
@@ -18,9 +18,9 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
     Extends: MWF.APP$Module,
     options: {
         /**
-         * 当公文编辑器内容每次被渲染的时候都会触发。
+         * 공문 편집기 내용이 렌더링될 때마다 발생.
          * @event MWF.xApplication.process.Xform.Documenteditor#loadPage
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "beforeLoad", "postLoad", "afterLoad", "loadPage", "fullScreen", "returnScreen", "pagePosition"],
         "docPageHeight": 850.4,
@@ -64,7 +64,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         }
     },
     /**
-     * 激活公文编辑器编辑。设置了延迟加载的时候，可以通过这个方法来激活
+     * 공문 편집기 편집 활성화. 지연 로딩을 설정한 경우 이 메서드로 활성화 가능
      * @example
      * this.form.get("fieldId").active();
     */
@@ -296,27 +296,27 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         control.meetingRecord = this._getShow("meetingRecord", "meetingRecordEdit", "meetingRecordEditScript");
         return control;
     },
-    //份数 密级 紧急程度
+    //부수 비밀 등급 긴급 정도
     _loadCopiesSecretPriority: function(){
         this.layout_copiesSecretPriority = this.contentNode.getElement(".doc_layout_copiesSecretPriority");
         if (this.layout_copiesSecretPriority) this.layout_copiesSecretPriority.setStyles(this.css.doc_layout_copiesSecretPriority);
 
         /**
-         * @summary 份数的dom对象.
+         * @summary 부수의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_copies = this.contentNode.getElement(".doc_layout_copies");
         if (this.layout_copies) this.layout_copies.setStyles(this.css.doc_layout_copies);
 
         /**
-         * @summary 密级的dom对象.
+         * @summary 비밀 등급의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_secret = this.contentNode.getElement(".doc_layout_secret");
         if (this.layout_secret) this.layout_secret.setStyles(this.css.doc_layout_secret);
 
         /**
-         * @summary 紧急度的dom对象.
+         * @summary 긴급도의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_priority = this.contentNode.getElement(".doc_layout_priority");
@@ -326,16 +326,16 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
 
     },
 
-    //红头
+    //문서 머리
     _loadRedHeader: function(){
         /**
-         * @summary 红头的dom对象.
+         * @summary 레터헤드의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_redHeader = this.contentNode.getElement(".doc_layout_redHeader");
         if (this.layout_redHeader) this.layout_redHeader.setStyles(this.css.doc_layout_redHeader);
     },
-    //文号签发人（上行文）
+    //문서 번호 서명자(상행 문서)
     _loadFileNoUp: function(){
         this.layout_filenoArea = this.contentNode.getElement(".doc_layout_fileno_area");
         this.layout_fileNoUpTable = this.contentNode.getElement(".doc_layout_filenoup");
@@ -345,7 +345,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         if (td) td.setStyles(this.css.doc_layout_filenoup_fileno_td);
 
         /**
-         * @summary 文号的dom对象.
+         * @summary 문서 번호의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_fileno = this.contentNode.getElement(".doc_layout_filenoup_fileno");
@@ -364,7 +364,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         if (node) node.setStyles(this.css.doc_layout_filenoup_signerContent_td);
 
         /**
-         * @summary 签发人的dom对象.
+         * @summary 서명자의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_signer = this.contentNode.getElement(".doc_layout_filenoup_signerContent");
@@ -378,7 +378,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         }
     },
 
-    //文号
+    //문서 번호
     _loadFileNo: function(){
         this.layout_fileNoUpTable = this.contentNode.getElement(".doc_layout_filenoup");
         this.layout_filenoArea = this.contentNode.getElement(".doc_layout_fileno_area");
@@ -413,16 +413,16 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         }
     },
 
-    //红线
+    //붉은 선
     _loadRedLine: function(){
         this.layout_redLine = this.contentNode.getElement(".doc_layout_redline");
         if (this.layout_redLine) this.layout_redLine.setStyles(this.css.doc_layout_redline);
     },
 
-    //标题
+    //제목
     _loadSubject:function(){
         /**
-         * @summary 标题的dom对象.
+         * @summary 제목의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_subject = this.contentNode.getElement(".doc_layout_subject");
@@ -432,17 +432,17 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         }
     },
 
-    //主送
+    //수신처
     _loadMainSend: function(){
         /**
-         * @summary 主送的dom对象.
+         * @summary 수신처의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_mainSend = this.contentNode.getElement(".doc_layout_mainSend");
         if (this.layout_mainSend) this.layout_mainSend.setStyles(this.css.doc_layout_mainSend);
     },
 
-    //正文
+    //본문
     // _createFiletext: function(filetextNode, node, where){
     //     if (!filetextNode){
     //         var filetextNode = new Element("div.doc_layout_filetext").inject(node, where);
@@ -466,7 +466,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
     // },
     _loadFiletext: function(){
         /**
-         * @summary 正文区域的dom对象.
+         * @summary 본문 영역의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_filetext = this.contentNode.getElement(".doc_layout_filetext");
@@ -481,7 +481,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         // }
     },
 
-    //附件
+    //첨부파일
     _loadAttachment: function(){
         this.layout_attachmentTable = this.contentNode.getElement(".doc_layout_attachment");
         if (this.layout_attachmentTable) this.layout_attachmentTable.setStyles(this.css.doc_layout_attachment);
@@ -496,23 +496,23 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         if (node) node.setStyles(this.css.doc_layout_attachment_content_td);
 
         /**
-         * @summary 附件区域的dom对象.
+         * @summary 첨부파일 영역의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_attachment = this.contentNode.getElement(".doc_layout_attachment_content");
         if (this.layout_attachment) this.layout_attachment.setStyles(this.css.doc_layout_attachment_content);
     },
 
-    //发布单位
+    //발행 기관
     _loadIssuance: function(){
         this.layout_issuanceTable = this.contentNode.getElement(".doc_layout_issuance");
         /**
-         * @summary 发文单位的dom对象.
+         * @summary 발신 기관의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_issuanceUnit = this.contentNode.getElement(".doc_layout_issuanceUnit");
         /**
-         * @summary 发文时间的dom对象.
+         * @summary 발신 일시의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_issuanceDate = this.contentNode.getElement(".doc_layout_issuanceDate");
@@ -522,23 +522,23 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         if (this.layout_issuanceDate) this.layout_issuanceDate.setStyles(this.css.doc_layout_issuanceDate);
     },
 
-    //附注
+    //비고
     _loadAnnotation: function(){
         /**
-         * @summary 附注的dom对象.
+         * @summary 비고의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_annotation = this.contentNode.getElement(".doc_layout_annotation");
         if (this.layout_annotation) this.layout_annotation.setStyles(this.css.doc_layout_annotation);
     },
 
-    //附件文本
+    //첨부파일 텍스트
     _loadAttachmentText: function(){
         this.layout_attachmentText = this.contentNode.getElement(".doc_layout_attachment_text");
     },
 
 
-    //版记
+    //판기
     _loadEdition: function(){
         this.layout_editionArea = this.contentNode.getElement(".doc_layout_editionArea");
         this.layout_edition = this.contentNode.getElement(".doc_layout_edition");
@@ -558,7 +558,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         if (this.layout_copytoTitle) this.layout_copytoTitle.setStyles(this.css.doc_layout_edition_copyto_title);
 
         /**
-         * @summary 抄送的dom对象.
+         * @summary 참조의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_copytoContent = this.contentNode.getElement(".doc_layout_edition_copyto_content");
@@ -574,13 +574,13 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         var issuance_table = this.contentNode.getElement(".doc_layout_edition_issuance_table");
         if (issuance_table) issuance_table.setStyles(this.css.doc_layout_edition_issuance_table);
         /**
-         * @summary 印发单位的dom对象.
+         * @summary 인쇄 발행 기관의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_edition_issuance_unit = this.contentNode.getElement(".doc_layout_edition_issuance_unit");
         if (this.layout_edition_issuance_unit) this.layout_edition_issuance_unit.setStyles(this.css.doc_layout_edition_issuance_unit);
         /**
-         * @summary 印发时间的dom对象.
+         * @summary 인쇄 발행 일시의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_edition_issuance_date = this.contentNode.getElement(".doc_layout_edition_issuance_date");
@@ -588,7 +588,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
     },
     loadSeal: function(){
         /**
-         * @summary 模拟盖章的dom对象.
+         * @summary 모의 날인의 dom 객체.
          * @member {MWF.xApplication.process.Xform.Documenteditor}
          */
         this.layout_seals = this.contentNode.getElements(".doc_layout_seal");
@@ -605,12 +605,12 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         });
     },
 
-    /**对正文进行模拟盖章（模板中必须有class为“doc_layout_seal”的img对象）
-     * @summary 对正文进行模拟盖章，此方法只是进行模拟盖章，通过图片显示，并非专业盖章，不具备法律效应。
-     * * @param src{String} 盖章图片的url.
-     * @param position{integer} 要盖章的位置, 默认为0.
+    /**본문에 모의 날인(템플릿에 class가 「doc_layout_seal」인 img 객체가 있어야 함)
+     * @summary 본문에 모의 날인을 하며, 이 메서드는 이미지로 표시하는 모의 날인일 뿐 정식 날인이 아니므로 법적 효력이 없음.
+     * * @param src{String} 날인 이미지의 url.
+     * @param position{integer} 날인할 위치, 기본값 0.
      * @example
-     *  this.form.get("documenteditor").seal("../custom/img/seal.png", 0); //在第一个盖章位置进行模拟盖章
+     *  this.form.get("documenteditor").seal("../custom/img/seal.png", 0); //첫 번째 날인 위치에 모의 날인
      */
     seal: function(src, position){
         var p = position || 0;
@@ -687,10 +687,10 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
 
         this.loadSeal();
 
-        //会议纪要
+        //회의록
         this._loadMeeting();
 
-        //自定义
+        //사용자 정의
         this._loadCustom();
 
 
@@ -698,28 +698,28 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         this.reSetShow(control);
         this.reSetEdit();
 
-        // 份数:          this.layout_copies
-        // 密级:          this.layout_secret
-        // 紧急程度:       this.layout_priority
-        // 红头:          this.layout_redHeader
-        // 上行文编号签发：  this.layout_fileNoUpTable
-        // 文号:           this.layout_fileno
-        // 签发:           this.layout_signerTitle
-        // 签发人:         this.layout_signer
-        // 文号：          this.layout_fileno
-        // 红线：          this.layout_redLine
-        // 标题：          this.layout_subject
-        // 主送单位：       this.layout_mainSend
-        // 正文：          this.layout_filetexts
-        // 附件：          this.layout_attachmentTitle
-        // 附件：          this.layout_attachment
-        // 单位：          this.layout_issuanceUnit
-        // 签发时间：       this.layout_issuanceDate
-        // 附注：          this.layout_annotation
-        // 抄送：          this.layout_copytoTitle
-        // 抄送：          this.layout_copytoContent
-        // 版记单位         this.layout_edition_issuance_unit
-        // 版记日期         this.layout_edition_issuance_date
+        // 부수:          this.layout_copies
+        // 보안 등급:          this.layout_secret
+        // 긴급도:       this.layout_priority
+        // 머리글:          this.layout_redHeader
+        // 상신 문서 번호 서명:  this.layout_fileNoUpTable
+        // 문서 번호:           this.layout_fileno
+        // 서명:           this.layout_signerTitle
+        // 서명자:         this.layout_signer
+        // 문서 번호:          this.layout_fileno
+        // 붉은 선:          this.layout_redLine
+        // 제목:          this.layout_subject
+        // 수신처:       this.layout_mainSend
+        // 본문:          this.layout_filetexts
+        // 첨부파일:          this.layout_attachmentTitle
+        // 첨부파일:          this.layout_attachment
+        // 기관:          this.layout_issuanceUnit
+        // 서명 일시:       this.layout_issuanceDate
+        // 비고:          this.layout_annotation
+        // 참조:          this.layout_copytoTitle
+        // 참조:          this.layout_copytoContent
+        // 판기 기관         this.layout_edition_issuance_unit
+        // 판기 일자         this.layout_edition_issuance_date
     },
 
     reSetShow: function(control){
@@ -787,7 +787,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
 
                 if (table.hasClass("doc_layout_issuanceV2")){
                     if (unitWidth<=dateWidth){
-                        //日期右空四字，单位相对与日期居中
+                        //날짜는 오른쪽 네 글자 띄움, 기관은 날짜 기준 가운데 정렬
                         var flagTd = this.layout_issuanceUnit.getParent("td").getNext("td");
                         if (flagTd) flagTd.setStyle("width", "64pt");
                         flagTd = this.layout_issuanceDate.getParent("td").getNext("td");
@@ -815,10 +815,10 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
                     }
                 }else{
                     if (unitWidth <= dateWidth) {
-                        //日期右空四字，单位相对与日期居中
+                        //날짜는 오른쪽 네 글자 띄움, 기관은 날짜 기준 가운데 정렬
                         var flagTd = this.layout_issuanceDate.getParent("td").getNext("td");
                         if (flagTd) {
-                            var pt = 16*4;  //空四字
+                            var pt = 16*4;  //네 글자 띄움
                             flagTd.setStyle("width", "" + pt + "pt");
 
                             flagTd = this.layout_issuanceUnit.getParent("td").getNext("td");
@@ -860,7 +860,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             }
             if (!this.copyToOrder){
                 this.copyToOrder = "unknow"
-                if (this.layout_copytoContentTr && this.layout_copyto2ContentTr){   //需要知道顺序
+                if (this.layout_copytoContentTr && this.layout_copyto2ContentTr){   //순서를 알아야 함
                     if (this.layout_copytoContentTrP && this.layout_copyto2ContentTrP && this.layout_copytoContentTrP==this.layout_copyto2ContentTrP){
                         var n = this.layout_copytoContentTrP.getFirst();
                         while (n && n!=this.layout_copytoContentTr && n!=this.layout_copyto2ContentTr){
@@ -1062,7 +1062,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         // this.layout_annotation[m("annotation")]();
     },
     reSetEdit: function(control){
-        //未进行数据绑定时，可允许编辑
+        //데이터 바인딩을 하지 않은 경우 편집 허용
         if (!control) var control = this.getEditControl();
         if (this.layout_subject){
             if (!this.json.subjectValueData && this.json.subjectValueType=="data"){
@@ -1290,11 +1290,11 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             var editionData = {"category": this.json.id};
 
             if (!originaData || !originaData.filetext || !this.originaHistoryData){
-                //保存原始版本
+                //원본 버전 저장
                 this.originaHistoryData = {"data": this.data.filetext, "v": "6"};
                 editionData.data = JSON.stringify({"data": this.data.filetext, "v": "6"});
             }else if (originaData.filetext!=this.data.filetext){
-                //保存历史版本
+                //이력 버전 저장
                 var data = this.getFiletextText(this.data.filetext);
                 var earlyData = this.getFiletextText(originaData.filetext);
                 //var data = this.data.filetext;
@@ -1978,7 +1978,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         }
 
         // if (this.json.fullWidth=="y"){
-        //     html += "<span style='line-height: 26px; color: #999999; font-size: 12px'>已启用半角空格自动转换为全角空格，如需输入半角空格，请使用：SHIFT+空格</span>"
+        //     html += "<span style='line-height: 26px; color: #999999; font-size: 12px'>반각 공백을 전각 공백으로 자동 변환하도록 설정되어 있습니다. 반각 공백을 입력하려면 SHIFT+공백을 사용하십시오</span>"
         // }
         this.toolbarNode = new Element("div.o2-documentEditor-toolbar", {"styles": this.css.doc_toolbar_node}).inject(this.toolNode);
         this.toolbarNode.set("html", html);
@@ -2003,7 +2003,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             }.bind(this), 1000)
         }
 
-        //    取消双野功能 todo
+        //    양면 기능 취소 todo
         this.doublePageAction = new Element("div", {"styles": this.css.doc_toolbar_doublePage, "text": MWF.xApplication.process.Xform.LP.doublePage}).inject(this.toolbarNode);
         this.doublePageAction.addEvent("click", function(){
             if (this.options.pageShow!=="double"){
@@ -2246,8 +2246,8 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         },20)
 
     },
-    /**缩放文件内容
-     * @param scale{Number} 缩放的比率
+    /**파일 내용 확대/축소
+     * @param scale{Number} 확대/축소 비율
      * @example
      * this.form.get("fieldId").scaleTo(0.5);
     */
@@ -2601,7 +2601,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
 
             language: o2.language,
 
-            // format_tags: '标题一;标题二;标题三;标题四;正文', // entries is displayed in "Paragraph format"
+            // format_tags: '제목1;제목2;제목3;제목4;본문', // entries is displayed in "Paragraph format"
             format_tags: '제목1;제목2;본문(제목3,4)', // entries is displayed in "Paragraph format"
             'format_제목1': {
                 name: '제목 1(16pt 고딕)',
@@ -2619,16 +2619,16 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
                     'font-size': '16pt'
                 }
             },
-            // 'format_标题三': {
-            //     name: '标题三',
+            // 'format_제목3': {
+            //     name: '제목3',
             //     element: 'div',
             //     styles: {
             //         'font-family': 'AppleMyungjo, Batang, Noto Serif KR, serif',
             //         'font-size': '16pt'
             //     }
             // },
-            // 'format_标题四': {
-            //     name: '标题四',
+            // 'format_제목4': {
+            //     name: '제목4',
             //     element: 'div',
             //     styles: {
             //         'font-family': 'AppleMyungjo, Batang, Noto Serif KR, serif',
@@ -3197,7 +3197,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
                             }else{
                                 this.data[name] = v;
                             }
-                            //this.data[name] = (new Date(v).isValid()) ? Date.parse(v).format("％Y年％m月％d％日") : v;
+                            //this.data[name] = (new Date(v).isValid()) ? Date.parse(v).format("％Y년％m월％d％일") : v;
                             break;
                         case "mainSend":
                             this.data[name] = v + "：";
@@ -3253,7 +3253,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
                                 }else{
                                     return n;
                                 }
-                                //return () ? d.format("%Y年%m月%d日") : n;
+                                //return () ? d.format("%Y년%m월%d일") : n;
                             });
                             this.data[name] = tmpStrs.join("，");
                             break;
@@ -3359,7 +3359,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
                         }else{
                             this.data[name] = v;
                         }
-                        //this.data[name] = (d.isValid() && d.getFullYear()!=1970) ? d.format("%Y年%m月%d日") : v;
+                        //this.data[name] = (d.isValid() && d.getFullYear()!=1970) ? d.format("%Y년%m월%d일") : v;
                     }
                 }
                 break;
@@ -3442,8 +3442,8 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         var data = this._getBusinessData();
     },
 
-    /**重新计算公文编辑器的所有字段，当字段是脚本时可以使用该方法立即更新
-     * @summary 重新计算公文编辑器的所有字段
+    /**공문 편집기의 모든 필드를 다시 계산, 필드가 스크립트일 때 이 메서드로 즉시 갱신 가능
+     * @summary 공문 편집기의 모든 필드 다시 계산
      * @example
      * this.form.get("fieldId").reload();
      */
@@ -3477,11 +3477,11 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         }.bind(this));
     },
     /**
-     * @summary 判断公文编辑器的正文内容是否已经填写
-     * @return {Boolean} 是否为空
+     * @summary 공문 편집기의 본문 내용이 작성되었는지 판단
+     * @return {Boolean} 비어 있는지 여부
      * @example
      * if( this.form.get("fieldId").isEmpty() ){
-     *     this.form.notice('请填写正文内容')
+     *     this.form.notice('본문 내용을 입력하십시오')
      * }
      */
     isEmpty: function(){
@@ -3490,8 +3490,8 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         return !data.filetext || data.filetext===this.json.defaultValue.filetext;
     },
     /**
-    * @summary 获取公文编辑器数据
-     * @return {Object} 公文编辑器的数据
+    * @summary 공문 편집기 데이터 조회
+     * @return {Object} 공문 편집기 데이터
      * @example
      * var data = this.form.get("fieldId").getData();
     */
@@ -3645,11 +3645,11 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         return content;
     },
 
-    /**设置公文编辑器数据
+    /**공문 편집기 데이터 설정
      * @param {Object} data
      * @example
      * var data = this.form.get("fieldId").getData();
-     * data.filetext = "测试内容";
+     * data.filetext = "테스트 내용";
      * this.form.get("fieldId").setData(data);
     */
     setData: function(data, diffFiletext){
@@ -3787,7 +3787,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
 
                     if (table.hasClass("doc_layout_issuanceV2")){
                         if (unitWidth<=dateWidth){
-                            //日期右空四字，单位相对与日期居中
+                            //날짜는 오른쪽 네 글자 띄움, 기관은 날짜 기준 가운데 정렬
                             var flagTd = this.layout_issuanceUnit.getParent("td").getNext("td");
                             if (flagTd) flagTd.setStyle("width", "64pt");
                             flagTd = this.layout_issuanceDate.getParent("td").getNext("td");
@@ -3814,10 +3814,10 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
                         }
                     }else{
                         if (unitWidth<=dateWidth){
-                            //日期右空四字，单位相对与日期居中
+                            //날짜는 오른쪽 네 글자 띄움, 기관은 날짜 기준 가운데 정렬
                             var flagTd = this.layout_issuanceDate.getParent("td").getNext("td");
                             if (flagTd) {
-                                var pt = 16*4;  //空四字
+                                var pt = 16*4;  //네 글자 띄움
                                 flagTd.setStyle("width", "" + pt + "pt");
 
                                 flagTd = this.layout_issuanceUnit.getParent("td").getNext("td");
@@ -4040,7 +4040,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         }
         return node;
     },
-    /**将公文编辑器内容以html形式输出
+    /**공문 편집기 내용을 html 형식으로 출력
      * @return {String}
      * @example
      * var html = this.form.get("fieldId").getDocumentHtml();
@@ -4102,12 +4102,12 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         return "<html xmlns:v=\"urn:schemas-microsoft-com:vml\"><head><meta charset=\"UTF-8\" /></head><body>"+htmlStr+"</body></html>";
     },
     /**
-     * @summary 将公文编辑器转换成附件，转换的文件名和格式等信息与配置有关
-     * @param {Function} [callback] 转换后的回调方法，参数是附件数据.
-     * @param {string} [name] - 如果为空或者不传，转换的文件名和格式等信息与配置有关.
+     * @summary 공문 편집기를 첨부파일로 변환하며, 변환 파일명과 형식 등은 설정에 따름
+     * @param {Function} [callback] 변환 후 콜백 메서드, 인자는 첨부파일 데이터.
+     * @param {string} [name] - 비어 있거나 전달하지 않으면 변환 파일명과 형식 등은 설정에 따름.
      * @example
      * this.form.get("fieldId").toWord( function(attachmentData){
-     *     //attachmentData 转换后的附件数据
+     *     //attachmentData 변환된 첨부파일 데이터
      * })
     */
     toWord: function(callback, name, cb, notSave){

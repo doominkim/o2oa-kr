@@ -21,12 +21,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("adminlogin")
-@JaxrsDescribe("管理员登录")
+@JaxrsDescribe("관리자 로그인")
 public class AdminLoginAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AdminLoginAction.class);
 
-	@JaxrsMethodDescribe(value = "注销.", action = ActionLogout.class)
+	@JaxrsMethodDescribe(value = "로그아웃.", action = ActionLogout.class)
 	@DELETE
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

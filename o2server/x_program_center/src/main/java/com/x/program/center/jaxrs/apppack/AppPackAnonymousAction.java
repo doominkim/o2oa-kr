@@ -23,19 +23,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("apppackanony")
-@JaxrsDescribe("移动客户端在线打包服务")
+@JaxrsDescribe("모바일 클라이언트 온라인 패키징 서비스")
 public class AppPackAnonymousAction extends BaseAction  {
 
     private static Logger logger = LoggerFactory.getLogger(AppPackAnonymousAction.class);
 
 
 
-    @JaxrsMethodDescribe(value = "下载app包", action = ActionPackFileDownload.class)
+    @JaxrsMethodDescribe(value = "app 패키지 다운로드", action = ActionPackFileDownload.class)
     @GET
     @Path("pack/info/file/download/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                         @JaxrsParameterDescribe("app下载标识") @PathParam("id") String id) {
+                         @JaxrsParameterDescribe("app 다운로드 식별자") @PathParam("id") String id) {
         ActionResult<ActionPackFileDownload.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -48,7 +48,7 @@ public class AppPackAnonymousAction extends BaseAction  {
     }
 
 
-    @JaxrsMethodDescribe(value = "查询最新发布的app下载包.", action = ActionLastPackFileInfo.class)
+    @JaxrsMethodDescribe(value = "최신 배포 app 다운로드 패키지 조회.", action = ActionLastPackFileInfo.class)
     @GET
     @Path("pack/info/file/last")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

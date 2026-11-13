@@ -7,6 +7,6 @@ class ExceptionEmptySystemSecurityClearance extends PromptException {
 	private static final long serialVersionUID = 7237855733312562652L;
 
 	ExceptionEmptySystemSecurityClearance() {
-		super("系统密级标识不能为空.");
+		super("시스템 보안 등급 식별자는 비워 둘 수 없습니다.");
 	}
 }

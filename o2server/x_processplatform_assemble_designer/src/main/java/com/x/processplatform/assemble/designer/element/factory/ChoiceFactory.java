@@ -39,7 +39,7 @@ public class ChoiceFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的choice */
+	/** 양식을 사용하는 choice 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Choice.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

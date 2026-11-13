@@ -86,12 +86,12 @@ class ActionListNextCreatorWithCurrentFilter extends BaseAction {
 		static WrapCopier<Work, Wo> copier = WrapCopierFactory.wo(Work.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("排序号.")
-		@Schema(description = "排序号.")
+		@FieldDescribe("정렬 번호.")
+		@Schema(description = "정렬 번호.")
 		private Long rank;
 
-		@FieldDescribe("权限.")
-		@Schema(description = "权限.")
+		@FieldDescribe("권한.")
+		@Schema(description = "권한.")
 		private Control control;
 
 		public Long getRank() {

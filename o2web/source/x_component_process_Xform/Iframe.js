@@ -2,11 +2,11 @@ MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 /** @class Iframe HTML iframe。
  * @o2cn iframe
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var iframe = this.form.get("name"); //获取组件
- * //方法2
- * var iframe = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var iframe = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var iframe = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}

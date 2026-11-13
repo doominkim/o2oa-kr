@@ -32,7 +32,7 @@ class ActionEdit extends BaseAction {
 			}
 			emc.beginTransaction(Room.class);
 			Wi.copier.copy(wi, room);
-			/* 检查审核人 */
+			/* 심사자 확인 */
 			this.checkAuditor(business, room);
 			emc.check(room, CheckPersistType.all);
 			emc.commit();

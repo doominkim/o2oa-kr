@@ -7,14 +7,14 @@ import com.x.mind.assemble.control.Business;
 import com.x.mind.entity.MindShareRecord;
 
 /**
- * 脑图分享信息查询操作服务类：查询
+ * 마인드맵 공유 정보 조회 작업 서비스 클래스: 조회
  * @author O2LEE
  *
  */
 class ServiceMindShareRecordQuery{
 
 	/**
-	 * 根据指定的ID列表获取脑图基本信息列表
+	 * 지정 ID 목록으로 마인드맵 기본 정보 목록 조회
 	 * @param emc
 	 * @param ids
 	 * @return
@@ -25,7 +25,7 @@ class ServiceMindShareRecordQuery{
 		return business.mindShareRecordFactory().list(ids);
 	}
 	/**
-	 * 根据脑图ID，获取脑图分享记录Id列表
+	 * 마인드맵 ID로 마인드맵 공유 기록 Id 목록 조회
 	 * @param mindId
 	 * @throws Exception 
 	 */

@@ -30,18 +30,18 @@ import com.x.base.core.project.logger.LoggerFactory;
  * @author sword
  */
 @Path("person")
-@JaxrsDescribe("个人接口")
+@JaxrsDescribe("사용자 API")
 public class PersonAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PersonAction.class);
 
-	@JaxrsMethodDescribe(value = "获取个人,附带身份,身份所在的组织,个人所在群组,个人拥有角色.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "개인 조회, 신분·신분 소속 조직·소속 그룹·보유 역할 포함.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -53,13 +53,13 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取个人及关联身份,身份所属组织,身份所属职务,个人和身份所在群组,个人拥有角色的dn列表.", action = ActionGetAuthInfo.class)
+	@JaxrsMethodDescribe(value = "사용자와 연관 신분, 신분 소속 조직, 신분 소속 직무, 사용자와 신분이 속한 그룹, 사용자 보유 역할의 dn 목록 조회.", action = ActionGetAuthInfo.class)
 	@GET
 	@Path("auth/info/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getAuthInfo(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetAuthInfo.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,13 +71,13 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取个人昵称.", action = ActionGetNickName.class)
+	@JaxrsMethodDescribe(value = "사용자 닉네임 조회.", action = ActionGetNickName.class)
 	@GET
 	@Path("nick/name/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getNickName(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetNickName.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,13 +89,13 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取个人手机号码.", action = ActionGetMobile.class)
+	@JaxrsMethodDescribe(value = "사용자 휴대폰 번호 조회.", action = ActionGetMobile.class)
 	@GET
 	@Path("mobile/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getMobile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGetMobile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -107,7 +107,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "判断个人是否拥有指定角色中的一个或者多个", action = ActionHasRole.class)
+	@JaxrsMethodDescribe(value = "사용자가 지정 역할 중 하나 이상을 보유했는지 확인", action = ActionHasRole.class)
 	@POST
 	@Path("has/role")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -125,7 +125,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询个人", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "사용자 일괄 조회", action = ActionList.class)
 	@POST
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -143,7 +143,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询所有个人.", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "모든 사용자 조회.", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -160,7 +160,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询所有个人对象.", action = ActionListAllObject.class)
+	@JaxrsMethodDescribe(value = "모든 사용자 객체 조회.", action = ActionListAllObject.class)
 	@GET
 	@Path("list/all/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -177,7 +177,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询个人对象", action = ActionListObject.class)
+	@JaxrsMethodDescribe(value = "사용자 객체 일괄 조회", action = ActionListObject.class)
 	@POST
 	@Path("list/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -195,7 +195,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询截至日期之后登录的人员", action = ActionListLoginAfter.class)
+	@JaxrsMethodDescribe(value = "기준 일자 이후 로그인한 사용자 조회", action = ActionListLoginAfter.class)
 	@POST
 	@Path("list/login/after")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -213,7 +213,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询截至日期之后登录的人员对象", action = ActionListLoginAfterObject.class)
+	@JaxrsMethodDescribe(value = "기준 일자 이후 로그인한 사용자 객체 조회", action = ActionListLoginAfterObject.class)
 	@POST
 	@Path("list/login/after/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -231,7 +231,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询最近登录人员", action = ActionListLoginRecent.class)
+	@JaxrsMethodDescribe(value = "최근 로그인 사용자 조회", action = ActionListLoginRecent.class)
 	@POST
 	@Path("list/login/recent")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -249,7 +249,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询最近登录人员对象", action = ActionListLoginRecentObject.class)
+	@JaxrsMethodDescribe(value = "최근 로그인 사용자 객체 조회", action = ActionListLoginRecentObject.class)
 	@POST
 	@Path("list/login/recent/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -267,7 +267,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份对应的个人,以匹配对的格式返回.", action = ActionListPairIdentity.class)
+	@JaxrsMethodDescribe(value = "신분에 해당하는 사용자 일괄 조회, 매칭 쌍 형식으로 반환.", action = ActionListPairIdentity.class)
 	@POST
 	@Path("list/pair/identity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -285,7 +285,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组包含的个人,包含嵌套的个人.", action = ActionListWithGroup.class)
+	@JaxrsMethodDescribe(value = "그룹에 포함된 사용자 일괄 조회, 중첩 사용자 포함.", action = ActionListWithGroup.class)
 	@POST
 	@Path("list/group")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -303,7 +303,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组包含的个人,包含嵌套的个人对象.", action = ActionListWithGroupObject.class)
+	@JaxrsMethodDescribe(value = "그룹에 포함된 사용자 일괄 조회, 중첩 사용자 객체 포함.", action = ActionListWithGroupObject.class)
 	@POST
 	@Path("list/group/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -321,7 +321,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份对应的个人", action = ActionListWithIdentity.class)
+	@JaxrsMethodDescribe(value = "신분에 해당하는 사용자 일괄 조회", action = ActionListWithIdentity.class)
 	@POST
 	@Path("list/identity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -339,7 +339,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询身份对应的个人对象", action = ActionListWithIdentityObject.class)
+	@JaxrsMethodDescribe(value = "신분에 해당하는 사용자 객체 일괄 조회", action = ActionListWithIdentityObject.class)
 	@POST
 	@Path("list/identity/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -357,7 +357,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找拥有指定个人属性的个人", action = ActionListWithPersonAttribute.class)
+	@JaxrsMethodDescribe(value = "지정 사용자 속성을 가진 사용자 일괄 조회", action = ActionListWithPersonAttribute.class)
 	@POST
 	@Path("list/personattribute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -375,7 +375,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找拥有指定个人属性的个人对象", action = ActionListWithPersonAttributeObject.class)
+	@JaxrsMethodDescribe(value = "지정 사용자 속성을 가진 사용자 객체 일괄 조회", action = ActionListWithPersonAttributeObject.class)
 	@POST
 	@Path("list/personattribute/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -393,7 +393,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的直接下级", action = ActionListWithPersonSubDirect.class)
+	@JaxrsMethodDescribe(value = "사용자의 직속 하급자 일괄 조회", action = ActionListWithPersonSubDirect.class)
 	@POST
 	@Path("list/person/sub/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -411,7 +411,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的直接下级对象", action = ActionListWithPersonSubDirectObject.class)
+	@JaxrsMethodDescribe(value = "사용자의 직속 하급자 객체 일괄 조회", action = ActionListWithPersonSubDirectObject.class)
 	@POST
 	@Path("list/person/sub/direct/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -429,7 +429,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的递归下级", action = ActionListWithPersonSubNested.class)
+	@JaxrsMethodDescribe(value = "사용자의 재귀 하급자 일괄 조회", action = ActionListWithPersonSubNested.class)
 	@POST
 	@Path("list/person/sub/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -447,7 +447,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的递归下级对象", action = ActionListWithPersonSubNestedObject.class)
+	@JaxrsMethodDescribe(value = "사용자의 재귀 하급자 객체 일괄 조회", action = ActionListWithPersonSubNestedObject.class)
 	@POST
 	@Path("list/person/sub/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -465,7 +465,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的直接上级", action = ActionListWithPersonSupDirect.class)
+	@JaxrsMethodDescribe(value = "사용자의 직속 상급자 일괄 조회", action = ActionListWithPersonSupDirect.class)
 	@POST
 	@Path("list/person/sup/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -483,7 +483,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的直接上级", action = ActionListWithPersonSupDirectObject.class)
+	@JaxrsMethodDescribe(value = "사용자의 직속 상급자 일괄 조회", action = ActionListWithPersonSupDirectObject.class)
 	@POST
 	@Path("list/person/sup/direct/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -501,7 +501,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的递归逐级上级", action = ActionListWithPersonSupNested.class)
+	@JaxrsMethodDescribe(value = "사용자의 단계별 재귀 상급자 일괄 조회", action = ActionListWithPersonSupNested.class)
 	@POST
 	@Path("list/person/sup/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -519,7 +519,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查找个人的递归逐级上级对象", action = ActionListWithPersonSupNestedObject.class)
+	@JaxrsMethodDescribe(value = "사용자의 단계별 재귀 상급자 객체 일괄 조회", action = ActionListWithPersonSupNestedObject.class)
 	@POST
 	@Path("list/person/sup/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -537,7 +537,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询角色对应的个人", action = ActionListWithRole.class)
+	@JaxrsMethodDescribe(value = "역할에 해당하는 사용자 일괄 조회", action = ActionListWithRole.class)
 	@POST
 	@Path("list/role")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -555,7 +555,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询角色对应的个人对象", action = ActionListWithRoleObject.class)
+	@JaxrsMethodDescribe(value = "역할에 해당하는 사용자 객체 일괄 조회", action = ActionListWithRoleObject.class)
 	@POST
 	@Path("list/role/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -573,7 +573,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的直接成员对应的个人", action = ActionListWithUnitSubDirect.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 구성원에 해당하는 사용자 일괄 조회", action = ActionListWithUnitSubDirect.class)
 	@POST
 	@Path("list/unit/sub/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -591,7 +591,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询组织的直接成员对应的个人对象", action = ActionListWithUnitSubDirectObject.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 구성원에 해당하는 사용자 객체 일괄 조회", action = ActionListWithUnitSubDirectObject.class)
 	@POST
 	@Path("list/unit/sub/direct/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -609,7 +609,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量组织的嵌套成员对应的个人", action = ActionListWithUnitSubNested.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 구성원에 해당하는 사용자 일괄 조회", action = ActionListWithUnitSubNested.class)
 	@POST
 	@Path("list/unit/sub/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -627,7 +627,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量组织的嵌套成员对应的个人对象", action = ActionListWithUnitSubNestedObject.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 구성원에 해당하는 사용자 객체 일괄 조회", action = ActionListWithUnitSubNestedObject.class)
 	@POST
 	@Path("list/unit/sub/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -645,7 +645,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量组织的直接成员对应的个人,按关键字进行搜索.", action = ActionListWithUnitSubDirectLike.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 구성원에 해당하는 사용자 일괄 조회, 키워드로 검색.", action = ActionListWithUnitSubDirectLike.class)
 	@POST
 	@Path("list/unit/sub/direct/like")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -663,7 +663,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量组织的直接成员对应的个人对象,按关键字进行搜索.", action = ActionListWithUnitSubDirectLikeObject.class)
+	@JaxrsMethodDescribe(value = "조직의 직속 구성원에 해당하는 사용자 객체 일괄 조회, 키워드로 검색.", action = ActionListWithUnitSubDirectLikeObject.class)
 	@POST
 	@Path("list/unit/sub/direct/like/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -681,7 +681,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量组织的嵌套成员对应的个人,按关键字进行搜索.", action = ActionListWithUnitSubNestedLike.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 구성원에 해당하는 사용자 일괄 조회, 키워드로 검색.", action = ActionListWithUnitSubNestedLike.class)
 	@POST
 	@Path("list/unit/sub/nested/like")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -699,7 +699,7 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量组织的嵌套成员对应的个人对象,按关键字进行搜索.", action = ActionListWithUnitSubNestedLikeObject.class)
+	@JaxrsMethodDescribe(value = "조직의 중첩 구성원에 해당하는 사용자 객체 일괄 조회, 키워드로 검색.", action = ActionListWithUnitSubNestedLikeObject.class)
 	@POST
 	@Path("list/unit/sub/nested/like/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -717,14 +717,14 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查询用户信息.", action = ActionListFilterPaging.class)
+	@JaxrsMethodDescribe(value = "사용자 정보 페이지 조회.", action = ActionListFilterPaging.class)
 	@POST
 	@Path("list/filter/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listFilterPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionListFilterPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -736,13 +736,13 @@ public class PersonAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询人员信息,返回身份,组织,组织职务,群组,角色,个人属性.", action = ActionDetail.class)
+	@JaxrsMethodDescribe(value = "사용자 정보 조회, 신분, 조직, 조직 직무, 그룹, 역할, 사용자 속성 반환.", action = ActionDetail.class)
 	@POST
 	@Path("detail/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void detail(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("人员标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("인원 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionDetail.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

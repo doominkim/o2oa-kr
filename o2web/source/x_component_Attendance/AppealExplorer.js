@@ -61,7 +61,7 @@ MWF.xApplication.Attendance.AppealExplorer = new Class({
         }*/
         this.config = {};
         var v;
-        //需要判断申述类型listSetting2020年6月16日 by gee
+        //이의 신청 유형 listSetting 판단 필요 2020-06-16 by gee
         this.configSetting = new Object(null);
         this.actions.listSetting(function(json){
             var data = json.data;
@@ -502,7 +502,7 @@ MWF.xApplication.Attendance.AppealExplorer.Appeal = new Class({
                 startTime : {  text:lp.startTime, type : "innertext" },
                 endTime : {  text:lp.endTime, type : "innertext" },
                 appealDescription : { text: lp.appealDescriptoin , type : "innertext" }
-                //opinion1 : { text :"审批意见",type : "textarea" }
+                //opinion1 : { text :"결재 의견",type : "textarea" }
             }
         }, this.app,this.css);
         this.document.load();
@@ -560,7 +560,7 @@ MWF.xApplication.Attendance.AppealExplorer.Appeal = new Class({
         //if (data.opinion1 ){
             this.process( data );
         //}else{
-        //    this.app.notice( "请填写意见", "error");
+        //    this.app.notice( "의견을 입력하십시오", "error");
         //}
     },
     okCreate: function(e){

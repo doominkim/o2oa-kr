@@ -73,13 +73,13 @@ class ActionBundle extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("过滤")
+		@FieldDescribe("필터")
 		private List<FilterEntry> filterList = new TreeList<>();
 
-		@FieldDescribe("参数")
+		@FieldDescribe("파라미터")
 		private Map<String, String> parameter = new HashMap<>();
 
-		@FieldDescribe("数量")
+		@FieldDescribe("수량")
 		private Integer count = 0;
 
 		public List<FilterEntry> getFilterList() {
@@ -110,7 +110,7 @@ class ActionBundle extends BaseAction {
 
 	public static class Wo extends WrapStringList {
 
-		@FieldDescribe("访问execute秘钥串.")
+		@FieldDescribe("execute 접근 키 문자열.")
 		private String key;
 
 		public String getKey() {

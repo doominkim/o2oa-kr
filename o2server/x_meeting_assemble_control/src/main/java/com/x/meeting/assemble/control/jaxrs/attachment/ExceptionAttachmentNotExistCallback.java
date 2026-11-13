@@ -7,6 +7,6 @@ class ExceptionAttachmentNotExistCallback extends CallbackPromptException {
 	private static final long serialVersionUID = 7237855733312562652L;
 
 	ExceptionAttachmentNotExistCallback(String callbackName, String id) {
-		super(callbackName, "附件: {} 不存在.", id);
+		super(callbackName, "첨부파일: {}이(가) 없습니다.", id);
 	}
 }

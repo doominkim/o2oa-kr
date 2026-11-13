@@ -7,9 +7,9 @@ public class ActionPostLoginWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -3195426330909623942L;
 
-	@FieldDescribe("令牌")
+	@FieldDescribe("토큰")
 	private String token;
-	@FieldDescribe("客户标识")
+	@FieldDescribe("클라이언트 식별자")
 	private String client;
 
 	public String getToken() {

@@ -156,9 +156,9 @@ abstract class BaseAction extends StandardJaxrsAction {
                 List<String> list = new ArrayList<>();
                 boolean flag = ZipTools.toZip(file, out, list);
                 if (flag) {
-                    logger.info("开始部署[{}]的customApp", app.getName());
+                    logger.info("[{}]의 customApp 배포 시작", app.getName());
                     this.installDispatch(app.getId() + "-custom.zip", out.toByteArray(), InstallTypeEnum.CUSTOM.getValue());
-                    logger.info("完成部署[{}]的customApp，安装内容：{}", app.getName(), gson.toJson(list));
+                    logger.info("[{}]의 customApp 배포 완료, 설치 내용: {}", app.getName(), gson.toJson(list));
                     installData.setCustomList(list);
                 }
             }
@@ -170,14 +170,14 @@ abstract class BaseAction extends StandardJaxrsAction {
         if (subFiles != null && subFiles.length > 0) {
             List<WrapModule> moduleList = new ArrayList<>();
             for (File subFile : subFiles) {
-                logger.info("开始部署[{}]", subFile.getName());
+                logger.info("[{}] 배포 시작", subFile.getName());
                 String json = FileUtils.readFileToString(subFile, DefaultCharset.charset);
                 Gson gson = new Gson();
                 JsonElement jsonElement = gson.fromJson(json, JsonElement.class);
                 WrapModule module = this.convertToWrapIn(jsonElement, WrapModule.class);
                 this.installModule(module);
                 moduleList.add(module);
-                logger.info("完成部署[{}]", subFile.getName());
+                logger.info("[{}] 배포 완료", subFile.getName());
             }
             installData.setWrapModuleList(moduleList);
         }
@@ -191,9 +191,9 @@ abstract class BaseAction extends StandardJaxrsAction {
                 List<String> list = new ArrayList<>();
                 boolean flag = ZipTools.toZip(file, out, list);
                 if (flag) {
-                    logger.info("开始部署[{}]的web资源", app.getName());
+                    logger.info("[{}]의 web 리소스 배포 시작", app.getName());
                     Business.dispatch(false, app.getId() + "-web.zip", "", out.toByteArray());
-                    logger.info("完成部署[{}]的web资源", app.getName());
+                    logger.info("[{}]의 web 리소스 배포 완료", app.getName());
                     installData.setWebList(list);
                 }
             }
@@ -203,7 +203,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     private void deployConfig(File file, InstallData installData, Application2 app) throws Exception{
         File[] subFiles = file.listFiles(pathname -> pathname.getName().toLowerCase().endsWith(".json"));
         if (subFiles != null && subFiles.length > 0) {
-            logger.info("开始部署[{}]的config配置", app.getName());
+            logger.info("[{}]의 config 설정 배포 시작", app.getName());
             final List<String> list = new ArrayList<>();
             for (File subFile : subFiles) {
                 if(APP_CUSTOM_CONFIG.equalsIgnoreCase(subFile.getName())){
@@ -251,7 +251,7 @@ abstract class BaseAction extends StandardJaxrsAction {
             }
             this.configFlush();
             installData.setConfigList(list);
-            logger.info("完成部署[{}]的config配置", app.getName());
+            logger.info("[{}]의 config 설정 배포 완료", app.getName());
         }
     }
 
@@ -406,13 +406,13 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     public static class CustomConfig extends GsonPropertyObject {
-        @FieldDescribe("配置文件名称，名称后缀必须为.json的文件名.")
+        @FieldDescribe("설정 파일 이름, 확장자가 .json인 파일명이어야 함.")
         private String configName;
-        @FieldDescribe("目标参数路径(可以为空，多级用.隔开，如：aaa.bbb).")
+        @FieldDescribe("대상 파라미터 경로(비워 둘 수 있음, 다단계는 .으로 구분, 예: aaa.bbb).")
         private String path;
-        @FieldDescribe("replace(完全替换)|cover(覆盖).")
+        @FieldDescribe("replace(완전 교체)|cover(덮어쓰기).")
         private String operate;
-        @FieldDescribe("新的配置信息，必须是Json对象或者Json数组.")
+        @FieldDescribe("새 설정 정보, Json 객체 또는 Json 배열이어야 함.")
         private JsonElement data;
 
         public String getConfigName() {
@@ -492,86 +492,86 @@ abstract class BaseAction extends StandardJaxrsAction {
 
     public static class Application2 extends GsonPropertyObject {
 
-        @FieldDescribe("主键.")
+        @FieldDescribe("기본 키.")
         private String id;
 
-        @FieldDescribe("名称.必填")
+        @FieldDescribe("이름.필수")
         private String name;
 
-        @FieldDescribe("分类.必填")
+        @FieldDescribe("분류.필수")
         private String category;
 
-        @FieldDescribe("子分类.")
+        @FieldDescribe("하위 분류.")
         private String subCategory;
 
-        @FieldDescribe("版本.必填")
+        @FieldDescribe("버전.필수")
         private String version;
 
-        @FieldDescribe("价格.")
+        @FieldDescribe("가격.")
         private Double price;
 
-        @FieldDescribe("状态：draft|audit|publish|invalid.")
+        @FieldDescribe("상태: draft|audit|publish|invalid.")
         private String status;
 
-        @FieldDescribe("宣传图片url链接.")
+        @FieldDescribe("홍보 이미지 url 링크.")
         private String broadcastPic;
 
-        @FieldDescribe("封面图片url链接.")
+        @FieldDescribe("표지 이미지 url 링크.")
         private String indexPic;
 
-        @FieldDescribe("视频url链接.")
+        @FieldDescribe("동영상 url 링크.")
         private String video;
 
-        @FieldDescribe("依赖中间件(如：onlyOffice)")
+        @FieldDescribe("의존 미들웨어(예: onlyOffice)")
         private String middleware;
 
-        @FieldDescribe("适配O2的版本(向上兼容)")
+        @FieldDescribe("호환 O2 버전(상위 호환)")
         private String o2Version;
 
-        @FieldDescribe("配置文件配置地址(web端)")
+        @FieldDescribe("설정 파일 설정 주소(web)")
         private String configPath;
 
-        @FieldDescribe("描述.必填")
+        @FieldDescribe("설명.필수")
         private String describe;
 
-        @FieldDescribe("应用简介.必填")
+        @FieldDescribe("앱 소개.필수")
         private String abort;
 
-        @FieldDescribe("应用安装步骤.必填")
+        @FieldDescribe("앱 설치 단계.필수")
         private String installSteps;
 
-        @FieldDescribe("发布者.")
+        @FieldDescribe("게시자.")
         private String publisher;
 
-        @FieldDescribe("发布时间")
+        @FieldDescribe("게시 시간")
         private Date publishTime;
 
-        @FieldDescribe("排序号,升序排列,为空在最后")
+        @FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
         private Integer orderNumber;
 
-        @FieldDescribe("推荐指数")
+        @FieldDescribe("추천 지수")
         private Integer recommend;
 
-        @FieldDescribe("下载次数")
+        @FieldDescribe("다운로드 횟수")
         private Integer downloadCount;
 
-        @FieldDescribe("最后更新时间")
+        @FieldDescribe("최종 수정 시간")
         private Date lastUpdateTime;
 
-        @FieldDescribe("安装后是否需要重启")
+        @FieldDescribe("설치 후 재시작 필요 여부")
         private Boolean restart = false;
 
-        @FieldDescribe("是否是VIP应用")
+        @FieldDescribe("VIP 앱 여부")
         private Boolean vipApp = false;
 
-        @FieldDescribe("创建时间.")
+        @FieldDescribe("생성 시간.")
         private Date createTime;
 
-        @FieldDescribe("修改时间.")
+        @FieldDescribe("수정 시간.")
         private Date updateTime;
 
         /**
-         * 是否有下载安装权限
+         * 다운로드 설치 권한 여부
          */
         Boolean hasInstallPermission;
 

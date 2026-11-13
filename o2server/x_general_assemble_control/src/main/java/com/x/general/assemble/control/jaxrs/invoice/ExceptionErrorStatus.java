@@ -7,6 +7,6 @@ class ExceptionErrorStatus extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionErrorStatus() {
-		super("该票据已报销，不能删除.");
+		super("이미 정산된 영수증이라 삭제할 수 없습니다.");
 	}
 }

@@ -135,7 +135,7 @@ public class ActionVoteRecordListMyForPage extends BaseAction {
 
 		private Boolean needPicture = false;
 
-		private Boolean withTopSubject = null; // 是否包含置顶贴
+		private Boolean withTopSubject = null; // 상단 고정글 포함 여부
 
 		public static List<String> Excludes = new ArrayList<String>(JpaObject.FieldsUnmodify);
 

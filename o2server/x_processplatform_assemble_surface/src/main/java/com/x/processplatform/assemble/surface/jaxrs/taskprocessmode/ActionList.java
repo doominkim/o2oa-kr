@@ -27,9 +27,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 快速选择列表展示规则：
- * 依据当前人员、流程、流程节点列示
- * 分前加签、后加签、提交的决策、退回、重置，每一种都是最多三条，次数最多的排前面，次数一样的最新的排在前面，不重复显示。
+ * 빠른 선택 목록 표시 규칙:
+ * 현재 사용자, 프로세스, 프로세스 노드 기준 목록
+ * 사전 결재자 추가, 사후 결재자 추가, 제출 결정, 반려, 재설정으로 나뉘며 각각 최대 3건, 횟수가 많은 것이 앞, 횟수가 같으면 최신이 앞, 중복 표시하지 않음.
  * @author sword
  */
 class ActionList extends BaseAction {
@@ -105,10 +105,10 @@ class ActionList extends BaseAction {
 				ListTools.toList(JpaObject.FieldsInvisibleIncludeProperites,
 						TaskProcessMode.taskProcessModeItemList_FIELDNAME));
 
-		@FieldDescribe("项目最后更新时间.")
+		@FieldDescribe("프로젝트 마지막 업데이트 시간.")
 		private Date itemUpdateTime;
 
-		@FieldDescribe("项目最后更新时间.")
+		@FieldDescribe("프로젝트 마지막 업데이트 시간.")
 		private Integer itemHitCount;
 
 		public Date getItemUpdateTime() {

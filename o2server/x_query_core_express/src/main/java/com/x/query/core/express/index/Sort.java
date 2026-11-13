@@ -13,12 +13,12 @@ public class Sort extends GsonPropertyObject {
     public static final String ORDER_DESC = "desc";
     public static final String ORDER_ASC = "asc";
 
-    @FieldDescribe("字段.")
-    @Schema(description = "字段.")
+    @FieldDescribe("필드.")
+    @Schema(description = "필드.")
     String field;
 
-    @FieldDescribe("排序顺序,asc顺序,desc倒序.")
-    @Schema(description = "排序顺序,asc顺序,desc倒序.")
+    @FieldDescribe("정렬 순서, asc 오름차순, desc 내림차순.")
+    @Schema(description = "정렬 순서, asc 오름차순, desc 내림차순.")
     String order;
 
     public String getField() {

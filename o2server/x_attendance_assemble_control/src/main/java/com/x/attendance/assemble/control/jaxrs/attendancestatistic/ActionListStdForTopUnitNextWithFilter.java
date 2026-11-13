@@ -49,7 +49,7 @@ public class ActionListStdForTopUnitNextWithFilter extends BaseAction {
 				EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
 				Business business = new Business(emc);
 
-				// 查询出ID对应的记录的sequence
+				// ID에 해당하는 기록의 sequence 조회
 				Object sequence = null;
 				if (id == null || "(0)".equals(id) || id.isEmpty()) {
 				} else {
@@ -58,25 +58,25 @@ public class ActionListStdForTopUnitNextWithFilter extends BaseAction {
 					}
 				}
 
-				// 将下级组织的数据纳入组织统计数据查询范围
+				// 하위 조직 데이터를 조직 통계 데이터 조회 범위에 포함
 				List<String> unitNameList = getUnitNameList(wrapIn.getTopUnitName(), wrapIn.getUnitName(),
 						effectivePerson.getDebugger());
 				wrapIn.setUnitName(unitNameList);
-				// 从数据库中查询符合条件的一页数据对象
+				// 데이터베이스에서 조건에 맞는 한 페이지 데이터 객체 조회
 				statisticList = business.getStatisticTopUnitForDayFactory().listIdsNextWithFilter(id, count, sequence,
 						wrapIn);
 
-				// 从数据库中查询符合条件的对象总数
+				// 데이터베이스에서 조건에 맞는 객체 총수 조회
 				total = business.getStatisticTopUnitForDayFactory().getCountWithFilter(wrapIn);
 
-				// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 				wraps = Wo.copier.copy(statisticList);
 			} catch (Throwable th) {
 				th.printStackTrace();
 				result.error(th);
 			}
 		}
-		// 对查询的列表进行排序
+		// 조회 목록 정렬
 		result.setCount(total);
 		result.setData(wraps);
 		return result;

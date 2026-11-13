@@ -9,55 +9,55 @@ public class ProcessProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 1L;
 
-	@FieldDescribe("待办执行前脚本.")
+	@FieldDescribe("결재 대기 실행 전 스크립트.")
 	private String manualBeforeTaskScript;
 
-	@FieldDescribe("待办执行前脚本文本.")
+	@FieldDescribe("결재 대기 실행 전 스크립트 텍스트.")
 	private String manualBeforeTaskScriptText;
 
-	@FieldDescribe("待办执行后脚本.")
+	@FieldDescribe("결재 대기 실행 후 스크립트.")
 	private String manualAfterTaskScript;
 
-	@FieldDescribe("待办执行后脚本文本.")
+	@FieldDescribe("결재 대기 실행 후 스크립트 텍스트.")
 	private String manualAfterTaskScriptText;
 
-	@FieldDescribe("工作流转后执行脚本.")
+	@FieldDescribe("업무 문서 진행 후 실행 스크립트.")
 	private String manualAfterProcessingScript;
 
-	@FieldDescribe("工作流转后执行脚本文本.")
+	@FieldDescribe("업무 문서 진행 후 실행 스크립트 텍스트.")
 	private String manualAfterProcessingScriptText;
 
-	@FieldDescribe("人工活动有停留脚本.")
+	@FieldDescribe("수동 활동 체류 스크립트.")
 	private String manualStayScript;
 
-	@FieldDescribe("人工活动有停留脚本文本.")
+	@FieldDescribe("수동 활동 체류 스크립트 텍스트.")
 	private String manualStayScriptText;
 
-	@FieldDescribe("启用同步到自建表.")
+	@FieldDescribe("자체 테이블 동기화 사용.")
 	private Boolean updateTableEnable;
 
-	@FieldDescribe("同步到自建表.")
+	@FieldDescribe("자체 테이블로 동기화.")
 	private List<String> updateTableList;
 
-	@FieldDescribe("流程维护身份,如果无法找到处理身份默认的流程处理身份.")
+	@FieldDescribe("프로세스 관리 신분, 처리 신분을 찾을 수 없을 때의 기본 프로세스 처리 신분.")
 	private String maintenanceIdentity;
 
-	@FieldDescribe("数据脚本.")
+	@FieldDescribe("데이터 스크립트.")
 	private String targetAssignDataScript;
 
-	@FieldDescribe("数据脚本文本.")
+	@FieldDescribe("데이터 스크립트 텍스트.")
 	private String targetAssignDataScriptText;
 
-	@FieldDescribe("可编辑权限脚本,返回组织专用标识.")
+	@FieldDescribe("편집 권한 스크립트, 조직 전용 식별자 반환.")
 	private String permissionWriteScript;
 
-	@FieldDescribe("可编辑权限脚本文本,返回组织专用标识.")
+	@FieldDescribe("편집 권한 스크립트 텍스트, 조직 전용 식별자 반환.")
 	private String permissionWriteScriptText;
 
-	@FieldDescribe("需要记录数据变化的字段.")
+	@FieldDescribe("데이터 변경을 기록할 필드.")
 	private List<String> dataTraceFieldList;
 
-	@FieldDescribe("需要记录数据变化的字段配置方式：all|所有、custom|依据dataTraceFieldList配置的字段.")
+	@FieldDescribe("데이터 변경을 기록할 필드 설정 방식: all|전체, custom|dataTraceFieldList에 설정된 필드.")
 	private String dataTraceFieldType;
 
 	public String getPermissionWriteScript() {

@@ -132,7 +132,7 @@ public class IdentityFactory extends AbstractFactory {
 		return ListTools.extractProperty(list, JpaObject.DISTINGUISHEDNAME, String.class, true, true);
 	}
 
-	/* 取出指定人员的的主身份 */
+	/* 지정 사용자의 주 신분 조회 */
 	public List<Identity> listMajorOfPerson(Business business, List<String> people) throws Exception {
 		List<Identity> list = new ArrayList<>();
 		List<Identity> identities = business.entityManagerContainer().listIn(Identity.class, Identity.person_FIELDNAME,

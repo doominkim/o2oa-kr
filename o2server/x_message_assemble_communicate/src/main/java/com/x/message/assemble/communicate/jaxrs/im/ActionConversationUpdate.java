@@ -45,7 +45,7 @@ public class ActionConversationUpdate extends BaseAction {
             if (conversation == null) {
                 throw new ExceptionConversationNotExist();
             }
-            // 有成员变化的情况 所以所有老成员都要收到消息
+            // 구성원 변경이 있으므로 기존 구성원 모두 메시지를 받아야 함
             List<String> oldMembers = conversation.getPersonList();
             if (conversation.getType().equals(CONVERSATION_TYPE_SINGLE)) {
                 throw new ExceptionSingleConvNotUpdate();
@@ -73,17 +73,17 @@ public class ActionConversationUpdate extends BaseAction {
                     conversation.getType(), conversation.getPersonList(), oldMembers,
                     conversation.getTitle(), conversation.getNote());
             if (BooleanUtils.isFalse(value.getResult())) {
-                LOGGER.warn("没有通过脚本校验, {} ", value.toString());
+                LOGGER.warn("스크립트 검증을 통과하지 못함, {} ", value.toString());
                 throw new ExceptionConversationCheckError(
-                        value.getMsg() == null ? "脚本校验不通过" : value.getMsg());
+                        value.getMsg() == null ? "스크립트 검증에 실패했습니다" : value.getMsg());
             }
             Business business = new Business(emc);
             conversation.setUpdateTime(new Date());
             emc.check(conversation, CheckPersistType.all);
             emc.commit();
 
-            // 如果有成员变化 需要更新 IMConversationExt
-            // 计算新增的项
+            // 구성원 변경이 있으면 IMConversationExt 업데이트 필요
+            // 추가 항목 계산
             List<String> added = new ArrayList<>(conversation.getPersonList());
             added.removeAll(oldMembers);
             for (String person : added) {
@@ -97,7 +97,7 @@ public class ActionConversationUpdate extends BaseAction {
                 emc.persist(conversationExt, CheckPersistType.all);
                 emc.commit();
             }
-            // 计算删除的项
+            // 삭제 항목 계산
             List<String> removed = new ArrayList<>(oldMembers);
             removed.removeAll(conversation.getPersonList());
             for (String s : removed) {
@@ -108,11 +108,11 @@ public class ActionConversationUpdate extends BaseAction {
                     emc.commit();
                 }
             }
-            // 人员变化 重新生成头像
+            // 사용자 변경. 프로필 이미지 재생성
             if (!ListTools.isSameList(oldMembers, conversation.getPersonList())) {
                 generateConversationIcon(conversation.getId());
             }
-            // 发送消息
+            // 메시지 발송
             sendConversationMsg(oldMembers, conversation,
                     MessageConnector.TYPE_IM_CONVERSATION_UPDATE);
             ActionResult<Wo> result = new ActionResult<>();
@@ -128,13 +128,13 @@ public class ActionConversationUpdate extends BaseAction {
 
         @FieldDescribe("id")
         private String id;
-        @FieldDescribe("会话标题")
+        @FieldDescribe("대화 제목")
         private String title;
-        @FieldDescribe("会话公告")
+        @FieldDescribe("대화 공지")
         private String note;
-        @FieldDescribe("会话对象")
+        @FieldDescribe("대화 객체")
         private List<String> personList;
-        @FieldDescribe("会话管理员")
+        @FieldDescribe("대화 관리자")
         private String adminPerson;
 
         public String getId() {

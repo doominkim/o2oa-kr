@@ -45,7 +45,7 @@ import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Process", description = "流程平台流程.")
+@Schema(name = "Process", description = "프로세스 플랫폼 프로세스.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Process.table, uniqueConstraints = {
@@ -79,16 +79,16 @@ public class Process extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
-		/* 默认流程名称作为意见为'是' */
+		/* 기본 프로세스 이름을 의견으로 사용 여부 '예' */
 		if (this.routeNameAsOpinion == null) {
 			this.routeNameAsOpinion = true;
 		}
@@ -101,7 +101,7 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String PERMISSIONWRITESCRIPT_FIELDNAME = "permissionWriteScript";
-	@FieldDescribe("可编辑权限脚本,返回组织专用标识.")
+	@FieldDescribe("편집 권한 스크립트, 조직 전용 식별자 반환.")
 	@Transient
 	private String permissionWriteScript;
 
@@ -118,7 +118,7 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String PERMISSIONWRITESCRIPTTEXT_FIELDNAME = "permissionWriteScriptText";
-	@FieldDescribe("可编辑权限脚本文本,返回组织专用标识.")
+	@FieldDescribe("편집 권한 스크립트 텍스트, 조직 전용 식별자 반환.")
 	@Transient
 	private String permissionWriteScriptText;
 
@@ -134,7 +134,7 @@ public class Process extends SliceJpaObject {
 		this.getProperties().setPermissionWriteScriptText(permissionWriteScriptText);
 	}
 	public static final String MAINTENANCEIDENTITY_FIELDNAME = "maintenanceIdentity";
-	@FieldDescribe("流程维护身份,如果无法找到处理身份默认的流程处理身份.")
+	@FieldDescribe("프로세스 관리 신분, 처리 신분을 찾을 수 없을 때의 기본 프로세스 처리 신분.")
 	@Transient
 	private String maintenanceIdentity;
 
@@ -148,7 +148,7 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String UPDATETABLEENABLE_FIELDNAME = "updateTableEnable";
-	@FieldDescribe("启用同步到自建表.")
+	@FieldDescribe("자체 테이블 동기화 사용.")
 	@Transient
 	private Boolean updateTableEnable;
 
@@ -162,7 +162,7 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String UPDATETABLELIST_FIELDNAME = "updateTableList";
-	@FieldDescribe("同步到自建表.")
+	@FieldDescribe("자체 테이블로 동기화.")
 	@Transient
 	private List<String> updateTableList;
 
@@ -176,7 +176,7 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String dataTraceFieldType_FIELDNAME = "dataTraceFieldType";
-	@FieldDescribe("需要记录数据变化的字段配置方式：all|所有、custom|依据dataTraceFieldList配置的字段.")
+	@FieldDescribe("데이터 변경을 기록할 필드 설정 방식: all|전체, custom|dataTraceFieldList에 설정된 필드.")
 	@Transient
 	private String dataTraceFieldType;
 
@@ -190,7 +190,7 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String dataTraceFieldList_FIELDNAME = "dataTraceFieldList";
-	@FieldDescribe("需要记录数据变化的字段.")
+	@FieldDescribe("데이터 변경을 기록할 필드.")
 	@Transient
 	private List<String> dataTraceFieldList;
 
@@ -295,57 +295,57 @@ public class Process extends SliceJpaObject {
 
 	public static final String name_FIELDNAME = "name";
 	@RestrictFlag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false, citationNotExists =
-	/* 同一个应用下不可重名 */
+	/* 같은 앱 안에서 이름 중복 불가 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = Process.class, equals = @Equal(property = "application", field = "application"), notEquals = @NotEqual(property = "edition", field = "edition")))
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false, citationNotExists =
-	/* 同一个应用下不可重名 */
+	/* 같은 앱 안에서 이름 중복 불가 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = Process.class, equals = @Equal(property = "application", field = "application"), notEquals = @NotEqual(property = "edition", field = "edition")))
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("流程创建者.")
+	@FieldDescribe("프로세스 생성자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creatorPerson;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后的编辑者.")
+	@FieldDescribe("마지막 편집자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String lastUpdatePerson;
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后的编辑时间.")
+	@FieldDescribe("마지막 편집 시간.")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String application_FIELDNAME = "application";
 	@IdReference(Application.class)
-	@FieldDescribe("流程所属应用.")
+	@FieldDescribe("프로세스 소속 앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = @CitationExist(type = Application.class))
 	private String application;
 
 	public static final String controllerList_FIELDNAME = "controllerList";
-	@FieldDescribe("流程管理者.")
+	@FieldDescribe("프로세스 관리자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -357,7 +357,7 @@ public class Process extends SliceJpaObject {
 	private List<String> controllerList;
 
 	public static final String icon_FIELDNAME = "icon";
-	@FieldDescribe("icon Base64编码后的文本.")
+	@FieldDescribe("icon Base64 인코딩 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_128K, name = ColumnNamePrefix + icon_FIELDNAME)
@@ -366,14 +366,14 @@ public class Process extends SliceJpaObject {
 
 	public static final String afterBeginScript_FIELDNAME = "afterBeginScript";
 	@IdReference(Script.class)
-	/** 脚本可能使用名称,所以长度为255 */
-	@FieldDescribe("流程启动前事件脚本.")
+	/** 스크립트가 이름을 사용할 수 있으므로 길이는 255 */
+	@FieldDescribe("프로세스 시작 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterBeginScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterBeginScript;
 
 	public static final String afterBeginScriptText_FIELDNAME = "afterBeginScriptText";
-	@FieldDescribe("流程启动前事件脚本文本.")
+	@FieldDescribe("프로세스 시작 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterBeginScriptText_FIELDNAME)
@@ -382,14 +382,14 @@ public class Process extends SliceJpaObject {
 
 	public static final String afterEndScript_FIELDNAME = "afterEndScript";
 	@IdReference(Script.class)
-	/** 脚本可能使用名称,所以长度为255 */
-	@FieldDescribe("流程结束后事件脚本.")
+	/** 스크립트가 이름을 사용할 수 있으므로 길이는 255 */
+	@FieldDescribe("프로세스 종료 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterEndScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterEndScript;
 
 	public static final String afterEndScriptText_FIELDNAME = "afterEndScriptText";
-	@FieldDescribe("流程结束后事件脚本文本.")
+	@FieldDescribe("프로세스 종료 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterEndScriptText_FIELDNAME)
@@ -397,7 +397,7 @@ public class Process extends SliceJpaObject {
 	private String afterEndScriptText;
 
 	public static final String startableIdentityList_FIELDNAME = "startableIdentityList";
-	@FieldDescribe("在指定启动时候,允许新建Work的用户.")
+	@FieldDescribe("지정 시작 시 Work 생성을 허용할 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ startableIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -409,7 +409,7 @@ public class Process extends SliceJpaObject {
 	private List<String> startableIdentityList;
 
 	public static final String startableUnitList_FIELDNAME = "startableUnitList";
-	@FieldDescribe("在指定启动时候,允许新建Work的组织.")
+	@FieldDescribe("지정 시작 시 Work 생성을 허용할 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ startableUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -421,7 +421,7 @@ public class Process extends SliceJpaObject {
 	private List<String> startableUnitList;
 
 	public static final String startableGroupList_FIELDNAME = "startableGroupList";
-	@FieldDescribe("在指定启动时候,允许新建Work的群组.")
+	@FieldDescribe("지정 시작 시 Work 생성을 허용할 그룹.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ startableGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -433,7 +433,7 @@ public class Process extends SliceJpaObject {
 	private List<String> startableGroupList;
 
 	public static final String startableRoleList_FIELDNAME = "startableRoleList";
-	@FieldDescribe("在指定启动时候,允许新建Work的角色.")
+	@FieldDescribe("지정 시작 시 Work 생성을 허용할 역할.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ startableRoleList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -445,7 +445,7 @@ public class Process extends SliceJpaObject {
 	private List<String> startableRoleList;
 
 	public static final String serialTexture_FIELDNAME = "serialTexture";
-	@FieldDescribe("编号定义.")
+	@FieldDescribe("번호 정의.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + serialTexture_FIELDNAME)
@@ -455,56 +455,56 @@ public class Process extends SliceJpaObject {
 	public static final String serialActivity_FIELDNAME = "serialActivity";
 	@IdReference({ Agent.class, Begin.class, Cancel.class, Choice.class, Choice.class, Delay.class, Embed.class,
 			End.class, Invoke.class, Manual.class, Merge.class, Parallel.class, Service.class, Split.class })
-	@FieldDescribe("编号活动ID.")
+	@FieldDescribe("번호 활동 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + serialActivity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String serialActivity;
 
 	public static final String serialPhase_FIELDNAME = "serialPhase";
-	@FieldDescribe("编号活动阶段可以选择arrive或者inquire,默认情况下为空为arrive")
+	@FieldDescribe("번호 활동 단계는 arrive 또는 inquire 선택 가능, 기본은 비어 있으며 arrive")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + serialPhase_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String serialPhase;
 
 	public static final String expireType_FIELDNAME = "expireType";
-	@FieldDescribe("过期方式.可选值never,appoint,script")
+	@FieldDescribe("만료 방식. 선택 값 never, appoint, script")
 	@Enumerated(EnumType.STRING)
 	@Column(length = ExpireType.length, name = ColumnNamePrefix + expireType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private ExpireType expireType = ExpireType.never;
 
 	public static final String expireDay_FIELDNAME = "expireDay";
-	@FieldDescribe("过期日期.")
+	@FieldDescribe("만료 날짜.")
 	@Column(name = ColumnNamePrefix + expireDay_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer expireDay;
 
 	public static final String expireHour_FIELDNAME = "expireHour";
-	@FieldDescribe("过期小时.")
+	@FieldDescribe("만료 시간(시).")
 	@Column(name = ColumnNamePrefix + expireHour_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer expireHour;
 
 	public static final String expireWorkTime_FIELDNAME = "expireWorkTime";
-	@FieldDescribe("过期是否是工作时间.")
+	@FieldDescribe("만료 시간의 근무 시간 기준 여부.")
 	@Column(name = ColumnNamePrefix + expireWorkTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean expireWorkTime;
 
 	public static final String checkDraft_FIELDNAME = "checkDraft";
-	@FieldDescribe("是否进行无内容的草稿删除校验.")
+	@FieldDescribe("내용 없는 초안 삭제 검증 수행 여부.")
 	@Column(name = ColumnNamePrefix + checkDraft_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean checkDraft;
 
 	public static final String startableTerminal_FIELDNAME = "startableTerminal";
-	@FieldDescribe("可启动流程终端类型,可选值 client,mobile,all,none")
+	@FieldDescribe("프로세스를 시작할 수 있는 단말 유형, 선택 값 client, mobile, all, none")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + startableTerminal_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String startableTerminal;
 
 	public static final String projection_FIELDNAME = "projection";
-	@FieldDescribe("字段映射配置.")
+	@FieldDescribe("필드 매핑 설정.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + projection_FIELDNAME)
@@ -512,26 +512,26 @@ public class Process extends SliceJpaObject {
 	private String projection;
 
 	public static final String projectionFully_FIELDNAME = "projectionFully";
-	@FieldDescribe("执行完全映射,在每次流转时会将所有的工作,待办,已办,待阅,已阅,参阅执行全部字段映射,默认false")
+	@FieldDescribe("완전 매핑 실행, 진행할 때마다 모든 업무 문서, 결재 대기, 처리 완료, 열람 대기, 열람 완료, 참조 열람에 전체 필드 매핑 실행, 기본값 false")
 	@Column(name = ColumnNamePrefix + projectionFully_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean projectionFully;
 
 	public static final String routeNameAsOpinion_FIELDNAME = "routeNameAsOpinion";
-	@FieldDescribe("如果没有默认意见那么将路由名称作为默认意见.")
+	@FieldDescribe("기본 의견이 없으면 경로 이름을 기본 의견으로 사용.")
 	@Column(name = ColumnNamePrefix + routeNameAsOpinion_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean routeNameAsOpinion;
 
 	public static final String beforeArriveScript_FIELDNAME = "beforeArriveScript";
 	@IdReference(Script.class)
-	@FieldDescribe("统一活动到达前事件脚本.")
+	@FieldDescribe("통합 활동 도착 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeArriveScript;
 
 	public static final String beforeArriveScriptText_FIELDNAME = "beforeArriveScriptText";
-	@FieldDescribe("统一活动到达前事件脚本文本.")
+	@FieldDescribe("통합 활동 도착 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeArriveScriptText_FIELDNAME)
@@ -540,13 +540,13 @@ public class Process extends SliceJpaObject {
 
 	public static final String afterArriveScript_FIELDNAME = "afterArriveScript";
 	@IdReference(Script.class)
-	@FieldDescribe("统一活动到达后事件脚本.")
+	@FieldDescribe("통합 활동 도착 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterArriveScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterArriveScript;
 
 	public static final String afterArriveScriptText_FIELDNAME = "afterArriveScriptText";
-	@FieldDescribe("统一活动到达后事件脚本文本.")
+	@FieldDescribe("통합 활동 도착 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterArriveScriptText_FIELDNAME)
@@ -555,13 +555,13 @@ public class Process extends SliceJpaObject {
 
 	public static final String beforeExecuteScript_FIELDNAME = "beforeExecuteScript";
 	@IdReference(Script.class)
-	@FieldDescribe("统一活动执行前事件脚本.")
+	@FieldDescribe("통합 활동 실행 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeExecuteScript;
 
 	public static final String beforeExecuteScriptText_FIELDNAME = "beforeExecuteScriptText";
-	@FieldDescribe("统一活动执行前事件脚本文本.")
+	@FieldDescribe("통합 활동 실행 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeExecuteScriptText_FIELDNAME)
@@ -570,13 +570,13 @@ public class Process extends SliceJpaObject {
 
 	public static final String afterExecuteScript_FIELDNAME = "afterExecuteScript";
 	@IdReference(Script.class)
-	@FieldDescribe("统一活动执行后事件脚本.")
+	@FieldDescribe("통합 활동 실행 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterExecuteScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterExecuteScript;
 
 	public static final String afterExecuteScriptText_FIELDNAME = "afterExecuteScriptText";
-	@FieldDescribe("统一活动执行后事件脚本文本.")
+	@FieldDescribe("통합 활동 실행 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterExecuteScriptText_FIELDNAME)
@@ -585,13 +585,13 @@ public class Process extends SliceJpaObject {
 
 	public static final String beforeInquireScript_FIELDNAME = "beforeInquireScript";
 	@IdReference(Script.class)
-	@FieldDescribe("统一路由查询前事件脚本.")
+	@FieldDescribe("통합 경로 조회 전 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + beforeInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String beforeInquireScript;
 
 	public static final String beforeInquireScriptText_FIELDNAME = "beforeInquireScriptText";
-	@FieldDescribe("统一路由查询前事件脚本文本.")
+	@FieldDescribe("통합 경로 조회 전 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + beforeInquireScriptText_FIELDNAME)
@@ -600,13 +600,13 @@ public class Process extends SliceJpaObject {
 
 	public static final String afterInquireScript_FIELDNAME = "afterInquireScript";
 	@IdReference(Script.class)
-	@FieldDescribe("统一路由查询后事件脚本.")
+	@FieldDescribe("통합 경로 조회 후 이벤트 스크립트.")
 	@Column(length = length_255B, name = ColumnNamePrefix + afterInquireScript_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String afterInquireScript;
 
 	public static final String afterInquireScriptText_FIELDNAME = "afterInquireScriptText";
-	@FieldDescribe("统一路由查询后事件脚本文本.")
+	@FieldDescribe("통합 경로 조회 후 이벤트 스크립트 텍스트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + afterInquireScriptText_FIELDNAME)
@@ -614,42 +614,42 @@ public class Process extends SliceJpaObject {
 	private String afterInquireScriptText;
 
 	public static final String edition_FIELDNAME = "edition";
-	@FieldDescribe("版本编码,不同版本的流程编码需相同.")
+	@FieldDescribe("버전 코드, 버전이 다른 프로세스의 코드는 같아야 함.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + edition_FIELDNAME)
 	private String edition;
 
 	public static final String editionName_FIELDNAME = "editionName";
-	@FieldDescribe("版本名")
+	@FieldDescribe("버전 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + editionName_FIELDNAME)
 	private String editionName;
 
 	public static final String editionEnable_FIELDNAME = "editionEnable";
-	@FieldDescribe("启用版本")
+	@FieldDescribe("버전 사용")
 	@Column(name = ColumnNamePrefix + editionEnable_FIELDNAME)
 	private Boolean editionEnable;
 
 	public static final String editionNumber_FIELDNAME = "editionNumber";
-	@FieldDescribe("版本号")
+	@FieldDescribe("버전 번호")
 	@Column(name = ColumnNamePrefix + editionNumber_FIELDNAME)
 	private Double editionNumber;
 
 	public static final String editionDes_FIELDNAME = "editionDes";
-	@FieldDescribe("版本描述.")
+	@FieldDescribe("버전 설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + editionDes_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String editionDes;
 
 	public static final String defaultStartMode_FIELDNAME = "defaultStartMode";
-	@FieldDescribe("默认启动方式,draft,instance")
+	@FieldDescribe("기본 시작 방식, draft, instance")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + defaultStartMode_FIELDNAME)
 	private String defaultStartMode;
 
 	public static final String CATEGORY_FIELDNAME = "category";
-	@FieldDescribe("流程分类")
+	@FieldDescribe("프로세스 분류")
 	@Column(length = length_255B, name = ColumnNamePrefix + CATEGORY_FIELDNAME)
 	private String category;
 
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)
@@ -729,38 +729,38 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String MANUALBEFORETASKSCRIPT_FIELDNAME = "manualBeforeTaskScript";
-	@FieldDescribe("待办执行前脚本.")
+	@FieldDescribe("결재 대기 실행 전 스크립트.")
 	@Transient
 	private String manualBeforeTaskScript;
 
 	public static final String MANUALBEFORETASKSCRIPTTEXT_FIELDNAME = "manualBeforeTaskScriptText";
-	@FieldDescribe("待办执行前脚本文本.")
+	@FieldDescribe("결재 대기 실행 전 스크립트 텍스트.")
 	@Transient
 	private String manualBeforeTaskScriptText;
 
 	public static final String MANUALAFTERTASKSCRIPT_FIELDNAME = "manualAfterTaskScript";
-	@FieldDescribe("待办执行后脚本.")
+	@FieldDescribe("결재 대기 실행 후 스크립트.")
 	@Transient
 	private String manualAfterTaskScript;
 
 	public static final String MANUALAFTERTASKSCRIPTTEXT_FIELDNAME = "manualAfterTaskScriptText";
-	@FieldDescribe("待办执行后脚本文本.")
+	@FieldDescribe("결재 대기 실행 후 스크립트 텍스트.")
 	@Transient
 	private String manualAfterTaskScriptText;
 
 	public static final String MANUALSTAYSCRIPT_FIELDNAME = "manualStayScript";
-	@FieldDescribe("人工活动有停留脚本.")
+	@FieldDescribe("수동 활동 체류 스크립트.")
 	@Transient
 	private String manualStayScript;
 
 	public static final String MANUALSTAYSCRIPTTEXT_FIELDNAME = "manualStayScriptText";
-	@FieldDescribe("人工活动有停留脚本文本.")
+	@FieldDescribe("수동 활동 체류 스크립트 텍스트.")
 	@Transient
 	private String manualStayScriptText;
 
 	public static final String MANUALAFTERPROCESSINGSCRIPT_FIELDNAME = "manualAfterProcessingScript";
 	@Transient
-	@FieldDescribe("人工环节工作流转后执行脚本.")
+	@FieldDescribe("수동 단계 업무 문서 진행 후 실행 스크립트.")
 	// @since 8.1.0
 	private String manualAfterProcessingScript;
 
@@ -779,7 +779,7 @@ public class Process extends SliceJpaObject {
 
 	public static final String MANUALAFTERPROCESSINGSCRIPTTEXT_FIELDNAME = "manualAfterProcessingScriptText";
 	@Transient
-	@FieldDescribe("人工环节工作流转后执行脚本文本.")
+	@FieldDescribe("수동 단계 업무 문서 진행 후 실행 스크립트 텍스트.")
 	// @since 8.1.0
 	private String manualAfterProcessingScriptText;
 
@@ -797,16 +797,16 @@ public class Process extends SliceJpaObject {
 	}
 
 	public static final String TARGETASSIGNDATASCRIPT_FIELDNAME = "targetAssignDataScript";
-	@FieldDescribe("数据执行前脚本.")
+	@FieldDescribe("데이터 실행 전 스크립트.")
 	@Transient
 	private String targetAssignDataScript;
 
 	public static final String TARGETASSIGNDATASCRIPTTEXT_FIELDNAME = "targetAssignDataScriptText";
-	@FieldDescribe("数据执行前脚本文本.")
+	@FieldDescribe("데이터 실행 전 스크립트 텍스트.")
 	@Transient
 	private String targetAssignDataScriptText;
 
-	/* flag标志位 */
+	/* flag 플래그 비트 */
 
 	public String getName() {
 		return name;

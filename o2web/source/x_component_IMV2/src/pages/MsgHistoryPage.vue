@@ -18,7 +18,7 @@ onMounted(() => {
 onUnmounted(() => {
   console.debug('onUnmounted ====> MsgHistory')
 })
-// 消息列表
+// 메시지 목록
 const msgList = ref([])
 
 const loadMsgList = async () => {
@@ -29,13 +29,13 @@ const loadMsgList = async () => {
     msgList.value = res
   }
 }
-// 打开消息
+// 메시지 열기
 const clickOpenMsg = (msg) => {
   console.debug('open msg  ==== msgHistory', msg)
   if (!needClickMsg(msg)) {
     return;
   }
-  // 打开消息
+  // 메시지 열기
   eventBus.publish(EventName.openMsg, msg)
 }
 

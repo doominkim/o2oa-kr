@@ -70,7 +70,7 @@ class ActionUrge extends BaseAction {
 					throw new ExceptionEntityNotExist(WorkLog.class);
 				}
 				emc.beginTransaction(Task.class);
-				// 催办去掉产生record
+				// 독촉 시 record 생성 제거
 				// emc.beginTransaction(Record.class);
 				task.setUrged(true);
 				// Record rec = rec(workLog, task);
@@ -80,7 +80,7 @@ class ActionUrge extends BaseAction {
 				wo.setId(task.getId());
 				result.setData(wo);
 				MessageFactory.task_urge(task);
-				LOGGER.print("催办待办, person: {}, id: {}, title: {}, sequence:{}.", task.getPerson(), task.getId(),
+				LOGGER.print("결재 대기 독촉, person: {}, id: {}, title: {}, sequence:{}.", task.getPerson(), task.getId(),
 						task.getTitle(), task.getSequence());
 			} catch (Exception e) {
 				LOGGER.error(e);

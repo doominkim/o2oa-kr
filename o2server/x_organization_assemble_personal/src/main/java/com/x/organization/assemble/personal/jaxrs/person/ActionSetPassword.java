@@ -130,16 +130,16 @@ class ActionSetPassword extends BaseAction {
 
 		private static final long serialVersionUID = 1L;
 
-		@FieldDescribe("原密码")
+		@FieldDescribe("기존 비밀번호")
 		private String oldPassword;
 
-		@FieldDescribe("新密码")
+		@FieldDescribe("새 비밀번호")
 		private String newPassword;
 
-		@FieldDescribe("确认新密码")
+		@FieldDescribe("새 비밀번호 확인")
 		private String confirmPassword;
 
-		@FieldDescribe("是否启用加密,默认不加密,启用(y)。注意:使用加密先要在服务器运行 create encrypt key")
+		@FieldDescribe("암호화 사용 여부, 기본은 미암호화, 사용(y). 주의: 암호화를 사용하려면 먼저 서버에서 create encrypt key 실행")
 		private String isEncrypted;
 
 		public String getOldPassword() {

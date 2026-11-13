@@ -57,7 +57,7 @@ public class ActionQueryViewDocument extends BaseAction {
 			}
 		}
 
-		//只要不是管理员访问，则记录该文档的访问记录
+		//관리자 접근이 아니면 해당 문서의 접근 기록 저장
 		if (!OrganizationDefinition.isSystemUser(personName)) {
 			try {
 				Long viewCount = documentViewRecordServiceAdv.addViewRecord( id, personName );
@@ -67,7 +67,7 @@ public class ActionQueryViewDocument extends BaseAction {
 			}
 		}
 
-		//异步更新item里的访问量，便于视图统计
+		//뷰 통계를 위해 item의 조회수를 비동기 갱신
 		try {
 			ThisApplication.queueDocumentViewCountUpdate.send( result.getData().getDocument() );
 		} catch ( Exception e ) {
@@ -77,10 +77,10 @@ public class ActionQueryViewDocument extends BaseAction {
 	}
 
 	/**
-	 * 获取需要返回的文档信息对象
+	 * 반환할 문서 정보 객체 조회
 	 * @param id
 	 * @param effectivePerson
-	 * @param isManager 当前用户是否是系统管理或者CMS管理员
+	 * @param isManager 현재 사용자가 시스템 관리자 또는 CMS 관리자인지 여부
 	 * @return
 	 */
 	private ActionResult<Wo> getDocumentQueryResult( String id, EffectivePerson effectivePerson, boolean isManager ) throws Exception {
@@ -144,18 +144,18 @@ public class ActionQueryViewDocument extends BaseAction {
 
 		wo.setData( documentQueryService.getDocumentData( document ) );
 
-		//判断用户是否是文档的创建者，创建者是有权限编辑文档的
+		//사용자가 문서 작성자인지 판단, 작성자는 문서 편집 권한이 있음
 		if(!isAnonymous && wo.getDocument() != null && wo.getDocument().getCreatorPerson() != null && wo.getDocument().getCreatorPerson().equals( personName )) {
 			isCreator = true;
 			wo.setIsCreator( isCreator );
 		}
 
-		//判断用户是否是分类的管理者，分类管理者是有权限编辑文档的
+		//사용자가 분류 관리자인지 판단, 분류 관리자는 문서 편집 권한이 있음
 		if (!isAnonymous && BooleanUtils.isTrue(categoryInfoServiceAdv.isCategoryInfoManager( categoryInfo, personName, unitNames, groupNames ))) {
 			isCategoryAdmin = true;
 		}
 
-		//判断用户是否是栏目的管理者，栏目管理者是有权限编辑文档的
+		//사용자가 게시판 관리자인지 판단, 게시판 관리자는 문서 편집 권한이 있음
 		if (!isAnonymous && BooleanUtils.isTrue(appInfoServiceAdv.isAppInfoManager( appInfo, personName, unitNames, groupNames, roleNames ))) {
 			isAppAdmin = true;
 		}
@@ -195,22 +195,22 @@ public class ActionQueryViewDocument extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe( "作为输出的CMS文档数据对象." )
+		@FieldDescribe( "출력용 CMS 문서 데이터 객체." )
 		private WoDocument document;
 
-		@FieldDescribe( "作为输出的CMS文档操作日志." )
+		@FieldDescribe( "출력용 CMS 문서 조작 로그." )
 		private List<WoLog> documentLogList;
 
-		@FieldDescribe( "文档所有数据信息." )
+		@FieldDescribe( "문서 전체 데이터 정보." )
 		private Data data;
 
-		@FieldDescribe( "作为编辑的CMS文档表单." )
+		@FieldDescribe( "편집용 CMS 문서 양식." )
 		private WoForm form;
 
-		@FieldDescribe( "作为查看的CMS文档表单." )
+		@FieldDescribe( "조회용 CMS 문서 양식." )
 		private WoForm readForm;
 
-		@FieldDescribe( "文档是否已被当前用户点赞." )
+		@FieldDescribe( "현재 사용자의 문서 좋아요 여부." )
 		private Boolean isCommend = false;
 
 		private Boolean isAppAdmin = false;
@@ -316,7 +316,7 @@ public class ActionQueryViewDocument extends BaseAction {
 		public static final WrapCopier<Document, WoDocument> copier = WrapCopierFactory.wo( Document.class, WoDocument.class, null,JpaObject.FieldsInvisible);
 
 		/**
-		 * 只作显示用
+		 * 표시용으로만 사용
 		 */
 		private String creatorPersonShort = "";
 

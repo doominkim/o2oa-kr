@@ -25,22 +25,22 @@
                 </td>
             </tr>
             <!--<tr>-->
-                <!--<td class="editTableTitle">标题字段</td>-->
+                <!--<td class="editTableTitle">제목 필드</td>-->
                 <!--<td class="editTableValue">-->
                     <!--<select class="" name="titleField"></select>-->
                 <!--</td>-->
             <!--</tr>-->
 <!--            <tr>-->
-<!--                <td class="editTableTitle" rowspan="2">表单样式:</td>-->
+<!--                <td class="editTableTitle" rowspan="2">양식 스타일:</td>-->
 <!--                <td class="editTableValue">-->
 <!--                    <input type="radio" onclick="if (this.checked) {-->
 <!--                        $('text{$.pid}formStyleTypeTr').setStyle('display', '');-->
 <!--                        $('text{$.pid}formStyleTypeCustomTr').setStyle('display', 'none');-->
-<!--                    }" name="formStyleTypeRadio" value="default" text{(typeOf($.currentFormStyle)!='object' )?'checked':''}/>系统-->
+<!--                    }" name="formStyleTypeRadio" value="default" text{(typeOf($.currentFormStyle)!='object' )?'checked':''}/>시스템-->
 <!--                    <input type="radio" onclick="if (this.checked) {-->
 <!--                        $('text{$.pid}formStyleTypeTr').setStyle('display', 'none');-->
 <!--                        $('text{$.pid}formStyleTypeCustomTr').setStyle('display', '');-->
-<!--                    }" name="formStyleTypeRadio" value="custom" text{(typeOf($.currentFormStyle)=='object')?'checked':''}/>自定义-->
+<!--                    }" name="formStyleTypeRadio" value="custom" text{(typeOf($.currentFormStyle)=='object')?'checked':''}/>사용자 정의-->
 <!--                </td>-->
 <!--            </tr>-->
 <!--            <tr id="text{$.pid}formStyleTypeCustomTr" style="display: text{(typeOf($.currentFormStyle)=='object')?'':'none'}">-->
@@ -75,13 +75,13 @@
                 </td>
             </tr>
 <!--            <tr>-->
-<!--                <td class="editTableTitle">数据字典:</td>-->
+<!--                <td class="editTableTitle">데이터 사전:</td>-->
 <!--                <td class="editTableValue">-->
 <!--                    <div class="MWFDictionarySelect" name="dictionaries"></div>-->
 <!--                </td>-->
 <!--            </tr>-->
         </table>
-<!--        <div style="height:24px; text-align: center; line-height: 24px; background-color: #EEE; border-top: 1px solid #999;font-weight:bold;">预加载数据字典</div>-->
+<!--        <div style="height:24px; text-align: center; line-height: 24px; background-color: #EEE; border-top: 1px solid #999;font-weight:bold;">데이터 사전 미리 로드</div>-->
 
         <div style="height:24px; text-align: center; line-height: 24px; background-color: #EEE; border-top: 1px solid #999;font-weight:bold;">{{$.lp.preloadScript}}</div>
         <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
@@ -96,8 +96,8 @@
 <!--        <div class="MWFScriptIncluder" name="scripts"></div>-->
 
 
-		<!--<div class="MWFArraylist" name="cssLinks" title="CSS引用"></div>-->
-		<!--<div class="MWFArraylist" name="scriptSrc" title="JS引用"></div>-->
+		<!--<div class="MWFArraylist" name="cssLinks" title="CSS 참조"></div>-->
+		<!--<div class="MWFArraylist" name="scriptSrc" title="JS 참조"></div>-->
 
 		<div class="MWFMaplist" name="styles" title="{{$.lp.style}}"></div>
 		<div class="MWFMaplist" name="properties" title="{{$.lp.attribute}}"></div>

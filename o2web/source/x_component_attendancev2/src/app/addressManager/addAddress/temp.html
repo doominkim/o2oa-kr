@@ -1,4 +1,4 @@
-<!-- 表单 -->
+<!-- 양식 -->
 <div style="height: 100%;">
     <div class="o2-form">
         <div class="o2-form-header">
@@ -8,7 +8,7 @@
         <div class="o2-form-content">
             <div oo-if="!$.form.isView && $.form.positionType !== ''" style="font-size: 15px; color: #333333; line-height: 20px;text-align: right;"><i
                     class="o2icon-icon_tishi" style="color: #fb4747;margin-right: 5px;"></i>{{$.lp.workAddressForm.locationCoordinateInfo}}</div>
-            <!-- 地图 -->
+            <!-- 지도 -->
             <baidu-map :form="$.form" oo-if="$.form.positionType == 'baidu'" ></baidu-map>
             <amap :form="$.form" oo-if="$.form.positionType == 'amap'" ></amap> 
             <tencent-map :form="$.form" oo-if="$.form.positionType == 'tx'" ></tencent-map>

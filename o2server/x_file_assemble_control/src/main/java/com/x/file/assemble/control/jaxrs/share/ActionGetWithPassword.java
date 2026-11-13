@@ -53,7 +53,7 @@ class ActionGetWithPassword extends BaseAction {
 		static final WrapCopier<Share, Wo> copier = WrapCopierFactory.wo(Share.class, Wo.class, null,
 				FieldsInvisible2);
 
-		@FieldDescribe("文件类型")
+		@FieldDescribe("파일 유형")
 		private String contentType;
 
 		public String getContentType() {

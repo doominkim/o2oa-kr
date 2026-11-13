@@ -22,7 +22,7 @@ import com.x.mind.assemble.control.jaxrs.exception.ExceptionMindQuery;
 import com.x.mind.entity.MindRecycleInfo;
 
 /**
- * 查询所有回收站里的文件信息
+ * 휴지통의 모든 파일 정보 조회
  * @author O2LEE
  *
  */
@@ -59,7 +59,7 @@ public class ActionMyRecycleNextWithFilter extends BaseAction {
 				}
 			}catch( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionMindQuery( e, "系统根据ID列表查询脑图信息时发生异常！" );
+				Exception exception = new ExceptionMindQuery( e, "ID 목록으로 마인드맵 정보를 조회하는 중 오류가 발생했습니다!" );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -69,19 +69,19 @@ public class ActionMyRecycleNextWithFilter extends BaseAction {
 	
 	public static class Wi{
 		
-		@FieldDescribe( "文件原始目录" )
+		@FieldDescribe( "파일 원래 디렉터리" )
 		private String folderId = null;
 		
-		@FieldDescribe( "是否已分享" )
+		@FieldDescribe( "공유 여부" )
 		private Boolean shared = null;
 
-		@FieldDescribe( "关键字" )
+		@FieldDescribe( "키워드" )
 		private String key = null;
 		
-		@FieldDescribe( "排序列：默认为sequence" )
+		@FieldDescribe( "정렬 열: 기본값 sequence" )
 		private String orderField =  JpaObject.sequence_FIELDNAME ;
 		
-		@FieldDescribe( "排序方式：DESC|ASC， 默认为DESC" )
+		@FieldDescribe( "정렬 방식: DESC|ASC, 기본값 DESC" )
 		private String orderType = "DESC";
 
 		public Boolean getShared() {

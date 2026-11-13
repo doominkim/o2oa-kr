@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Selector", null, false);
-/** @class Combox 组合框组件。
- * @o2cn 组合框
+/** @class Combox 콤보 박스 컴포넌트.
+ * @o2cn 콤보 박스
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  * @extends MWF.xApplication.process.Xform.$Selector
  * @o2category FormComponents
  * @o2range {Process|CMS}
@@ -20,14 +20,14 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
 	iconStyle: "selectIcon",
     options: {
         /**
-         * 手工输入完成后触发。
+         * 직접 입력 완료 후 발생.
          * @event MWF.xApplication.process.Xform.Combox#commitInput
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         /**
-         * 值改变时触发。
+         * 값이 변경될 때 발생.
          * @event MWF.xApplication.process.Xform.Combox#change
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "commitInput", "change"]
     },
@@ -41,7 +41,7 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
         this.fieldModuleLoaded = false;
     },
     _loadUserInterface: function(){
-        if ( this.isSectionMergeRead() ) { //区段合并显示
+        if ( this.isSectionMergeRead() ) { //구간 병합 표시
             this._loadMergeReadNode();
         }else{
             if( this.isSectionMergeEdit() ){
@@ -64,9 +64,9 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
         }
     },
 	/**
-	 * @summary 重新加载组件。会执行postLoad事件。
+	 * @summary 컴포넌트 다시 로드. postLoad 이벤트가 실행됨.
 	 * @example
-	 * this.form.get("fieldId").reload(); //重新加载事件
+	 * this.form.get("fieldId").reload(); //다시 로드
 	 */
 	reload: function(){
 		if (this.areaNode){
@@ -212,18 +212,18 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
 		}
 	},
     /**
-     * @summary 获取选择项。
-     * @return {Array | Promise} 返回选择项数组或Promise，如：<pre><code class='language-js'>[
-     *  "女|female",
-     *  "男|male"
+     * @summary 선택 항목 가져오기.
+     * @return {Array | Promise} 선택 항목 배열 또는 Promise 반환, 예: <pre><code class='language-js'>[
+     *  "여|female",
+     *  "남|male"
      * ]</code></pre>
      * @example
      * this.form.get('fieldId').getOptions();
      * @example
-     * //异步
+     * //비동기
      * var opt = this.form.get('fieldId').getOptions();
      * Promise.resolve(opt).then(function(options){
-     *     //options为选择项数组
+     *     //options는 선택 항목 배열
      * })
      */
     getOptions: function(async, refresh){
@@ -290,14 +290,14 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
         return [];
     },
     /**
-     * 当表单上没有对应组件的时候，可以使用this.data[fieldId] = data赋值。
-     * @summary 为组件赋值。
+     * 양식에 해당 컴포넌트가 없으면 this.data[fieldId] = data로 값을 설정할 수 있음.
+     * @summary 컴포넌트에 값 할당.
      * @param value{String} .
      * @example
-     *  this.form.get("fieldId").setData("test"); //赋文本值
+     *  this.form.get("fieldId").setData("test"); //텍스트 값 할당
      * @example
-     *  //如果无法确定表单上是否有组件，需要判断
-     *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+     *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
+     *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
      *      this.form.get('fieldId').setData( data );
      *  }else{
      *      this.data['fieldId'] = data;
@@ -359,13 +359,13 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
         this.fieldModuleLoaded = true;
     },
     /**
-     * @summary 重新计算下拉选项.
-     * @param {Function} callback 回调方法
+     * @summary 드롭다운 옵션 다시 계산.
+     * @param {Function} callback 콜백 메서드
      * @example
      * this.form.get('fieldId').resetOption();
      * @example
      * this.form.get('fieldId').resetOption(function(){
-     *   //设置完成后的回调
+     *   //설정 완료 후 콜백
      * });
      */
     resetOption: function( callback ){
@@ -383,11 +383,11 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
         }
     },
     /**
-     * @summary 添加下拉选项.
-     * @param text  {String} 下拉选项文本
-     * @param value {String} 下拉选项值
+     * @summary 드롭다운 옵션 추가.
+     * @param text  {String} 드롭다운 옵션 텍스트
+     * @param value {String} 드롭다운 옵션 값
      * @example
-     * this.form.get('fieldId').addOption("秘密","level1");
+     * this.form.get('fieldId').addOption("비밀","level1");
      */
 	addOption: function(text, value){
         if (this.combox){
@@ -416,15 +416,15 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
         this.combox = null;
     },
     /**
-     * @summary 获取选中项的text。
-     * @return {Array|Promise} 返回选中项的text
+     * @summary 선택 항목의 text 조회.
+     * @return {Array|Promise} 선택 항목의 text 반환
      * @example
-     * var text = this.form.get('fieldId').getText(); //获取选中项的文本
+     * var text = this.form.get('fieldId').getText(); //선택 항목의 텍스트 가져오기
      * @example
-     * //如果选项是异步的，比如数据字典、视图、查询视图
-     * var p = this.form.get('fieldId').getText(); //获取选中项Promise
+     * //옵션이 비동기인 경우(예: 데이터 사전, 뷰, 조회 뷰)
+     * var p = this.form.get('fieldId').getText(); //선택 항목 Promise 가져오기
      * Promise.resolve(p).then(function(text){
-     *     //text 为选选中项的文本
+     *     //text는 선택 항목의 텍스트
      * })
      */
     getText: function(){
@@ -438,16 +438,16 @@ MWF.xApplication.process.Xform.Combox = MWF.APPCombox =  new Class(
         }
     },
     /**
-     * @summary 获取选中的值和文本.
+     * @summary 선택된 값과 텍스트 조회.
      * @example
      * var array = this.form.get('fieldId').getTextData();
      * @example
-     * //异步
+     * //비동기
      * var array = this.form.get('fieldId').getTextData();
      * Promise.resolve(array).then(function(arr){
-     *     //arr为选中项值和文本
+     *     //arr은 선택 항목의 값과 텍스트
      * })
-     * @return {Object|Promise} 返回选中项值和文本，格式为 { 'value' : [value], 'text' : [text] }.
+     * @return {Object|Promise} 선택 항목의 값과 텍스트 반환, 형식은 { 'value' : [value], 'text' : [text] }.
      */
     getTextData: function( value ){
 	    var v = value || this.getData();

@@ -7,6 +7,6 @@ class ExceptionIdentityNotExist extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionIdentityNotExist(String str) {
-		super("身份不存在:{}", str);
+		super("소속이 없습니다: {}", str);
 	}
 }

@@ -43,12 +43,12 @@ public class ActionManageProcessing extends BaseAction {
 			}
 			Process process = business.process().pick(read.getProcess());
 			Application application = business.application().pick(read.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (!business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process)) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 			emc.beginTransaction(Read.class);
-			/* 如果有新的流程意见那么覆盖原有流程意见 */
+			/* 새 프로세스 의견이 있으면 기존 의견을 덮어씀 */
 			if (StringUtils.isNotEmpty(wi.getOpinion())) {
 				read.setOpinion(wi.getOpinion());
 			}

@@ -30,13 +30,13 @@ public class BarAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BarAction.class);
 
-	@JaxrsMethodDescribe(value = "创建测试数据.", action = ActionCreateMass.class)
+	@JaxrsMethodDescribe(value = "테스트 데이터 생성.", action = ActionCreateMass.class)
 	@GET
 	@Path("create/mass/{from}/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createMass(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<ActionCreateMass.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -48,15 +48,15 @@ public class BarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询数据测试1.", action = ActionSelect1.class)
+	@JaxrsMethodDescribe(value = "데이터 조회 테스트1.", action = ActionSelect1.class)
 	@GET
 	@Path("select1/field/{field}/value/{value}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select1(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("字段") @PathParam("field") String field,
-			@JaxrsParameterDescribe("值") @PathParam("value") String value,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("필드") @PathParam("field") String field,
+			@JaxrsParameterDescribe("값") @PathParam("value") String value,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionSelect1.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -68,13 +68,13 @@ public class BarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询数据测试2.", action = ActionSelect2.class)
+	@JaxrsMethodDescribe(value = "데이터 조회 테스트2.", action = ActionSelect2.class)
 	@GET
 	@Path("select2/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select2(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionSelect2.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -86,15 +86,15 @@ public class BarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询数据测试3.", action = ActionSelect3.class)
+	@JaxrsMethodDescribe(value = "데이터 조회 테스트3.", action = ActionSelect3.class)
 	@GET
 	@Path("select3/field/{field}/value/{value}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select3(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("字段") @PathParam("field") String field,
-			@JaxrsParameterDescribe("值") @PathParam("value") String value,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("필드") @PathParam("field") String field,
+			@JaxrsParameterDescribe("값") @PathParam("value") String value,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<String>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,15 +106,15 @@ public class BarAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询数据测试4.", action = ActionSelect4.class)
+	@JaxrsMethodDescribe(value = "데이터 조회 테스트4.", action = ActionSelect4.class)
 	@GET
 	@Path("select4/field/{field}/value/{value}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void select4(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("字段") @PathParam("field") String field,
-			@JaxrsParameterDescribe("值") @PathParam("value") String value,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("필드") @PathParam("field") String field,
+			@JaxrsParameterDescribe("값") @PathParam("value") String value,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionSelect4.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

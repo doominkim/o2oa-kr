@@ -8,8 +8,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class ActionManageOpinionWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -962598264584773600L;
-	@FieldDescribe("办理意见.")
-	@Schema(description = "办理意见.")
+	@FieldDescribe("처리 의견.")
+	@Schema(description = "처리 의견.")
 	private String opinion;
 
 	public String getOpinion() {

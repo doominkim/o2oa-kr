@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("docpermission")
-@JaxrsDescribe("信息文档发布权限管理")
+@JaxrsDescribe("정보 문서 게시 권한 관리")
 public class PermissionForDocumentAction extends StandardJaxrsAction{
 
 	private static  Logger logger = LoggerFactory.getLogger( PermissionForDocumentAction.class );
 
-	@JaxrsMethodDescribe(value = "刷新信息文档发布权限.", action = ActionRefreshDocumentPermission.class)
+	@JaxrsMethodDescribe(value = "정보 문서 게시 권한 새로고침.", action = ActionRefreshDocumentPermission.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -41,7 +41,7 @@ public class PermissionForDocumentAction extends StandardJaxrsAction{
 				result = new ActionRefreshDocumentPermission().execute( request, effectivePerson, jsonElement );
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionServiceLogic( e, "系统在更新文档的访问和管理权限过程中发生异常！" );
+				Exception exception = new ExceptionServiceLogic( e, "게시글 접근·관리 권한을 수정하는 중 오류가 발생했습니다!" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

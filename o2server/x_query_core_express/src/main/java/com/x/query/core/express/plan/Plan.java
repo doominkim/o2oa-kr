@@ -111,9 +111,9 @@ public abstract class Plan extends GsonPropertyObject {
 
 	public List<FilterEntry> customFilterList = new TreeList<>();
 
-	public List<SelectEntry> orderList = new TreeList<>(); // 需要输出,前台也需要使用此值
+	public List<SelectEntry> orderList = new TreeList<>(); // 출력 필요, 프런트에서도 이 값을 사용함
 
-	public SelectEntry group = null; // 需要输出,前台也需要使用此值
+	public SelectEntry group = null; // 출력 필요, 프런트에서도 이 값을 사용함
 
 	public Table grid;
 
@@ -158,7 +158,7 @@ public abstract class Plan extends GsonPropertyObject {
 			groupRow.list = o;
 			groupRows.add(groupRow);
 		}
-		// 分类值再进行一次排序
+		// 분류 값을 한 번 더 정렬
 		groupRows = groupRows.stream().sorted((r1, r2) -> {
 			Object o1 = r1.group;
 			Object o2 = r2.group;
@@ -210,7 +210,7 @@ public abstract class Plan extends GsonPropertyObject {
 	abstract Map<String, Pair<List<ItemAccess>, String>> listBundleItemAccess(List<String> bundles) throws Exception;
 
 	/**
-	 * 获取可访问路径的文档列表
+	 * 접근 가능한 경로의 문서 목록 조회
 	 * @param bundles
 	 * @param viewMap
 	 * @param path
@@ -255,9 +255,9 @@ public abstract class Plan extends GsonPropertyObject {
 		return flag;
 	}
 
-	// 先获取所有记录对应的job值作为返回的结果集
+	// 먼저 모든 레코드에 대응하는 job 값을 반환 결과 집합으로 조회
 	public void access() throws Exception {
-		// 先进行字段调整
+		// 먼저 필드 조정
 		this.adjust();
 		this.group = this.findGroupSelectEntry();
 		this.orderList = this.listOrderSelectEntry();
@@ -349,12 +349,12 @@ public abstract class Plan extends GsonPropertyObject {
 	}
 
 	public List<String> fetchBundles() throws Exception {
-		// 先进行字段调整
+		// 먼저 필드 조정
 		this.adjust();
-		// 先获取所有记录对应的job值作为返回的结果集
+		// 먼저 모든 레코드에 대응하는 job 값을 반환 결과 집합으로 조회
 		List<String> bundles = this.listBundle();
 		this.group = this.findGroupSelectEntry();
-		// 支持前端指定排序
+		// 프런트 지정 정렬 지원
 		this.orderList = this.listOrderSelectEntry();
 		if ((null != this.runtime.count) && (this.runtime.count > 0) && (this.runtime.count < bundles.size())) {
 			bundles = bundles.subList(0, this.runtime.count);
@@ -455,7 +455,7 @@ public abstract class Plan extends GsonPropertyObject {
 			Row row = new Row(str);
 			for (SelectEntry entry : ListTools.trim(this.selectList, true, false)) {
 				if (BooleanUtils.isTrue(entry.available())) {
-					// 统一填充默认值
+					// 기본값 일괄 채우기
 					row.put(entry.getColumn(), Objects.toString(entry.defaultValue, ""));
 				}
 			}
@@ -525,7 +525,7 @@ public abstract class Plan extends GsonPropertyObject {
 			Predicate p = cb.isMember(root.get(Item_.bundle), cb.literal(bundles));
 			String[] paths = StringUtils.split(selectEntry.path, ".");
 			List<Order> ol = new ArrayList<>();
-			// oracle 将空字符串自动转换成null,需要同时判断null和空字符串
+			// oracle은 빈 문자열을 null로 자동 변환하므로 null과 빈 문자열을 함께 판단해야 함
 			if ((paths.length > 0) && StringUtils.isNotEmpty(paths[0])) {
 				p = cb.and(p, cb.equal(root.get(Item_.path0), paths[0]));
 			} else {

@@ -7,6 +7,6 @@ class ExceptionMenuNotExist extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionMenuNotExist(String flag) {
-		super("菜单: {} 不存在.", flag);
+		super("메뉴: {}이(가) 없습니다.", flag);
 	}
 }

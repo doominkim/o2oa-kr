@@ -6,13 +6,13 @@ o2.widget.AudioRecorder = new Class({
 	options: {
 		"style": "default",
         "config": {
-		    "sampleBits": 8,        //采样数位 8, 16
-            "sampleRate": 44100/6,  //采样率(1/6 44100)
-            "inputChannels": 1,     //输入通道数 1,2
-            "outputChannels": 1     //输出通道数 1,2
+		    "sampleBits": 8,        //샘플링 비트 수 8, 16
+            "sampleRate": 44100/6,  //샘플링 레이트(1/6 44100)
+            "inputChannels": 1,     //입력 채널 수 1,2
+            "outputChannels": 1     //출력 채널 수 1,2
         },
         "visible": true,
-        "visualize": true  //视觉效果
+        "visualize": true  //시각 효과
 	},
 	initialize: function(content, options){
 		this.setOptions(options);
@@ -212,25 +212,25 @@ o2.widget.AudioRecorder = new Class({
         if (!this.audioData){
             var _self = this;
             this.audioData = {
-                size: 0,         //录音文件长度
-                buffer: [],     //录音缓存
-                inputSampleRate: _self.context.sampleRate,    //输入采样率
-                inputSampleBits: 16,        //输入采样数位 8, 16
-                outputSampleRate: _self.options.config.sampleRate,    //输出采样率
-                outputSampleBits: _self.options.config.sampleBits,       //输出采样数位 8, 16
+                size: 0,         //녹음 파일 길이
+                buffer: [],     //녹음 버퍼
+                inputSampleRate: _self.context.sampleRate,    //입력 샘플링 레이트
+                inputSampleBits: 16,        //입력 샘플링 비트 수 8, 16
+                outputSampleRate: _self.options.config.sampleRate,    //출력 샘플링 레이트
+                outputSampleBits: _self.options.config.sampleBits,       //출력 샘플링 비트 수 8, 16
                 input: function (data) {
                     this.buffer.push(new Float32Array(data));
                     this.size += data.length;
                 },
-                compress: function () { //合并压缩
-                    //合并
+                compress: function () { //병합 압축
+                    //병합
                     var data = new Float32Array(this.size);
                     var offset = 0;
                     for (var i = 0; i < this.buffer.length; i++) {
                         data.set(this.buffer[i], offset);
                         offset += this.buffer[i].length;
                     }
-                    //压缩
+                    //압축
                     var compression = parseInt(this.inputSampleRate / this.outputSampleRate);
                     var length = data.length / compression;
                     var result = new Float32Array(length);
@@ -250,7 +250,7 @@ o2.widget.AudioRecorder = new Class({
                     var buffer = new ArrayBuffer(44 + dataLength);
                     var data = new DataView(buffer);
 
-                    var channelCount = 1;//单声道
+                    var channelCount = 1;//모노
                     var offset = 0;
 
                     var writeString = function (str) {
@@ -259,33 +259,33 @@ o2.widget.AudioRecorder = new Class({
                         }
                     };
 
-                    // 资源交换文件标识符
+                    // 리소스 교환 파일 식별자
                     writeString('RIFF'); offset += 4;
-                    // 下个地址开始到文件尾总字节数,即文件大小-8
+                    // 다음 주소부터 파일 끝까지 총 바이트 수, 즉 파일 크기-8
                     data.setUint32(offset, 36 + dataLength, true); offset += 4;
-                    // WAV文件标志
+                    // WAV 파일 표지
                     writeString('WAVE'); offset += 4;
-                    // 波形格式标志
+                    // 파형 포맷 표지
                     writeString('fmt '); offset += 4;
-                    // 过滤字节,一般为 0x10 = 16
+                    // 필터 바이트, 일반적으로 0x10 = 16
                     data.setUint32(offset, 16, true); offset += 4;
-                    // 格式类别 (PCM形式采样数据)
+                    // 포맷 종류 (PCM 형식 샘플 데이터)
                     data.setUint16(offset, 1, true); offset += 2;
-                    // 通道数
+                    // 채널 수
                     data.setUint16(offset, channelCount, true); offset += 2;
-                    // 采样率,每秒样本数,表示每个通道的播放速度
+                    // 샘플링 레이트, 초당 샘플 수, 각 채널의 재생 속도
                     data.setUint32(offset, sampleRate, true); offset += 4;
-                    // 波形数据传输率 (每秒平均字节数) 单声道×每秒数据位数×每样本数据位/8
+                    // 파형 데이터 전송률 (초당 평균 바이트 수) 모노×초당 데이터 비트 수×샘플당 데이터 비트/8
                     data.setUint32(offset, channelCount * sampleRate * (sampleBits / 8), true); offset += 4;
-                    // 快数据调整数 采样一次占用字节数 单声道×每样本的数据位数/8
+                    // 블록 데이터 정렬 수 샘플 1회당 바이트 수 모노×샘플당 데이터 비트 수/8
                     data.setUint16(offset, channelCount * (sampleBits / 8), true); offset += 2;
-                    // 每样本数据位数
+                    // 샘플당 데이터 비트 수
                     data.setUint16(offset, sampleBits, true); offset += 2;
-                    // 数据标识符
+                    // 데이터 식별자
                     writeString('data'); offset += 4;
-                    // 采样数据总数,即数据总大小-44
+                    // 샘플 데이터 총수, 즉 데이터 총 크기-44
                     data.setUint32(offset, dataLength, true); offset += 4;
-                    // 写入采样数据
+                    // 샘플 데이터 쓰기
                     if (sampleBits === 8) {
                         for (var i = 0; i < bytes.length; i++, offset++) {
                             var s = Math.max(-1, Math.min(1, bytes[i]));
@@ -307,19 +307,19 @@ o2.widget.AudioRecorder = new Class({
     },
     initAudio: function(stream){
         if (!this.context){
-            //创建一个音频环境对象
+            //오디오 컨텍스트 객체 생성
             this.context = new (window.AudioContext || window.webkitAudioContext)();
-            //将声音输入这个对像
+            //소리를 이 객체에 입력
             this.audioInput = this.context.createMediaStreamSource(stream);
 
-            //设置音量节点
+            //볼륨 노드 설정
             this.volume = this.context.createGain();
 
-            //创建缓存，用来缓存声音
+            //소리를 버퍼링할 버퍼 생성
             var bufferSize = 4096;
 
-            // 创建声音的缓存节点，createScriptProcessor方法的
-            // 第二个和第三个参数指的是输入和输出都是双声道。
+            // 소리 버퍼 노드 생성. createScriptProcessor 메서드의
+            // 두 번째와 세 번째 인자는 입력과 출력이 모두 스테레오임을 의미함.
             this.recorder = this.context.createScriptProcessor(bufferSize, this.options.config.inputChannels, this.options.config.outputChannels);
 
             //if (this.visualizeNode){
@@ -338,7 +338,7 @@ o2.widget.AudioRecorder = new Class({
     loadAudio: function(callback){
         if (navigator.getUserMedia) {
             navigator.getUserMedia(
-                { audio: true } //只启用音频
+                { audio: true } //오디오만 사용
                 , function (stream) {
                     if (callback) callback(stream);
                 }
@@ -347,27 +347,27 @@ o2.widget.AudioRecorder = new Class({
                         case 'PERMISSION_DENIED':
                         case 'PermissionDeniedError':
                             o2.xDesktop.notice("error", {"x": "right", "y": "top"}, o2.LP.widget.userRefuse, this.node);
-                            //this.throwError('用户拒绝提供信息。');
+                            //this.throwError('사용자가 정보 제공을 거부했습니다.');
                             break;
                         case 'NOT_SUPPORTED_ERROR':
                         case 'NotSupportedError':
                             o2.xDesktop.notice("error", {"x": "right", "y": "top"}, o2.LP.widget.explorerNotSupportDevice, this.node);
-                            //this.throwError('<a href="http://www.it165.net/edu/ewl/" target="_blank" class="keylink">浏览器</a>不支持硬件设备。');
+                            //this.throwError('<a href="http://www.it165.net/edu/ewl/" target="_blank" class="keylink">브라우저</a>가 하드웨어 장치를 지원하지 않습니다.');
                             break;
                         case 'MANDATORY_UNSATISFIED_ERROR':
                         case 'MandatoryUnsatisfiedError':
                             o2.xDesktop.notice("error", {"x": "right", "y": "top"}, o2.LP.widget.canNotFindDevice, this.node);
-                            //this.throwError('无法发现指定的硬件设备。');
+                            //this.throwError('지정한 하드웨어 장치를 찾을 수 없습니다.');
                             break;
                         default:
                             o2.xDesktop.notice("error", {"x": "right", "y": "top"}, o2.LP.widget.canNotOpenMicrophone + (error.code || error.name), this.node);
-                            //this.throwError('无法打开麦克风。异常信息:' + (error.code || error.name));
+                            //this.throwError('마이크를 열 수 없습니다. 오류 정보:' + (error.code || error.name));
                             break;
                     }
                 }.bind(this));
         } else {
             o2.xDesktop.notice("error", {"x": "right", "y": "top"}, o2.LP.widget.explorerNotSupportRecordVoice, this.node);
-            //this.throwError('当前<a href="http://www.it165.net/edu/ewl/" target="_blank" class="keylink">浏览器</a>不支持录音功能。'); return;
+            //this.throwError('현재 <a href="http://www.it165.net/edu/ewl/" target="_blank" class="keylink">브라우저</a>가 녹음 기능을 지원하지 않습니다.'); return;
         }
     },
     // throwError: function (message) {

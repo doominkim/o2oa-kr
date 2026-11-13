@@ -13,7 +13,7 @@ import com.x.cms.core.entity.Document;
 import com.x.cms.core.entity.DocumentCommend;
 
 /**
- * 文档点赞
+ * 문서 좋아요
  * @author sword
  */
 public class ActionPersistCommend extends BaseAction {
@@ -37,7 +37,7 @@ public class ActionPersistCommend extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "文档信息获取操作时发生异常。Id:" + id + ", Name:" + effectivePerson.getDistinguishedName());
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 정보를 가져오는 중 오류가 발생했습니다. Id:" + id + ", Name:" + effectivePerson.getDistinguishedName());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

@@ -36,7 +36,7 @@ class ActionCreate extends BaseAction {
                 throw new ExceptionNameEmpty();
             }
             if (StringUtils.isNotEmpty(wi.getSuperior())) {
-                /** 创建次级组织 */
+                /** 하위 조직 생성 */
                 Unit superior = business.unit().pick(wi.getSuperior());
                 if (null == superior) {
                     throw new ExceptionSuperiorNotExist(wi.getName(), wi.getSuperior());
@@ -46,7 +46,7 @@ class ActionCreate extends BaseAction {
                 }
                 unit.setSuperior(superior.getId());
             } else {
-                /** 创建顶层组织 */
+                /** 최상위 조직 생성 */
                 if (!business.editable(effectivePerson, unit)) {
                     throw new ExceptionDenyCreateTopUnit(effectivePerson, unit.getName());
                 }
@@ -54,14 +54,14 @@ class ActionCreate extends BaseAction {
             unit.setControllerList(ListTools.extractProperty(
                     business.person().pick(ListTools.trim(unit.getControllerList(), true, true)),
                     JpaObject.id_FIELDNAME, String.class, true, true));
-            /** 如果唯一标识不为空,要检查唯一标识是否唯一 */
+            /** 고유 식별자가 비어 있지 않으면 고유 여부 확인 */
             if (this.duplicateUniqueWhenNotEmpty(business, unit)) {
                 throw new ExceptionDuplicateUnique(unit.getName(), unit.getUnique());
             }
             if (this.checkNameInvalid(business, unit)) {
                 throw new ExceptionNameInvalid(unit.getName());
             }
-            /** 判断同一级别下name不重复 */
+            /** 같은 레벨에서 name 중복 여부 확인 */
             if (this.duplicateName(business, unit)) {
                 throw new ExceptionDuplicateName(unit.getName());
             }

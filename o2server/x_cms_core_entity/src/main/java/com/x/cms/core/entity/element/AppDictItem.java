@@ -37,7 +37,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AppDictItem", description = "内容管理字典条目.")
+@Schema(name = "AppDictItem", description = "콘텐츠 관리 사전 항목.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.AppDictItem.table, uniqueConstraints = {
@@ -58,12 +58,12 @@ public class AppDictItem extends DataItem {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.path0 = StringUtils.trimToEmpty(this.path0);
@@ -84,9 +84,9 @@ public class AppDictItem extends DataItem {
 		this.path7Location = NumberUtils.toInt(this.path7, -1);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* 修改过的 set get方法 */
+	/* 수정된 set get 메서드 */
 	@Column(length = DataItem.pathLength, name = ColumnNamePrefix + path0_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + path0_FIELDNAME)
 	private String path0 = "";
@@ -175,7 +175,7 @@ public class AppDictItem extends DataItem {
 	@CheckPersist(allowEmpty = false)
 	private ItemStringValueType itemStringValueType;
 
-	@FieldDescribe("数据标识")
+	@FieldDescribe("데이터 식별자")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + bundle_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + bundle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -214,7 +214,7 @@ public class AppDictItem extends DataItem {
 
 	public static final String application_FIELDNAME = "appId";
 	@IdReference(AppInfo.class)
-	@FieldDescribe("所属应用ID.")
+	@FieldDescribe("소속 앱 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + "_appId")
 	@CheckPersist(allowEmpty = false, citationExists = @CitationExist(type = AppInfo.class))

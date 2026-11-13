@@ -4,14 +4,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 
 /**
- * 数据查询语句构建辅助类
+ * 데이터 조회 쿼리 작성 보조 클래스
  * @author O2LEE
  *
  */
 public class CriteriaBuilderTools {
 	
 	/**
-	 * 或 or
+	 * 또는 or
 	 * @param criteriaBuilder
 	 * @param predicate
 	 * @param predicate_target
@@ -30,7 +30,7 @@ public class CriteriaBuilderTools {
 	}
 	
 	/**
-	 * 并且  and
+	 * 그리고  and
 	 * @param criteriaBuilder
 	 * @param predicate
 	 * @param predicate_target

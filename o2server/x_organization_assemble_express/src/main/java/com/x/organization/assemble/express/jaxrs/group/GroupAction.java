@@ -24,12 +24,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("group")
-@JaxrsDescribe("群组接口")
+@JaxrsDescribe("그룹 API")
 public class GroupAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(GroupAction.class);
 
-	@JaxrsMethodDescribe(value = "判断群组是否拥有指定角色中的一个或者多个", action = ActionHasRole.class)
+	@JaxrsMethodDescribe(value = "그룹이 지정 역할 중 하나 이상을 보유했는지 확인", action = ActionHasRole.class)
 	@POST
 	@Path("has/role")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "그룹 일괄 조회", action = ActionList.class)
 	@POST
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组对象", action = ActionListObject.class)
+	@JaxrsMethodDescribe(value = "그룹 객체 일괄 조회", action = ActionListObject.class)
 	@POST
 	@Path("list/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -83,7 +83,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询群组的直接下级群组.", action = ActionListWithGroupSubDirect.class)
+	@JaxrsMethodDescribe(value = "그룹의 직속 하위 그룹 조회.", action = ActionListWithGroupSubDirect.class)
 	@POST
 	@Path("list/group/sub/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -101,7 +101,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询群组的直接下级群组对象.", action = ActionListWithGroupSubDirectObject.class)
+	@JaxrsMethodDescribe(value = "그룹의 직속 하위 그룹 객체 조회.", action = ActionListWithGroupSubDirectObject.class)
 	@POST
 	@Path("list/group/sub/direct/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -119,7 +119,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询群组的嵌套下级群组.", action = ActionListWithGroupSubNested.class)
+	@JaxrsMethodDescribe(value = "그룹의 중첩 하위 그룹 조회.", action = ActionListWithGroupSubNested.class)
 	@POST
 	@Path("list/group/sub/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -137,7 +137,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "查询群组的嵌套下级群组对象.", action = ActionListWithGroupSubNestedObject.class)
+	@JaxrsMethodDescribe(value = "그룹의 중첩 하위 그룹 객체 조회.", action = ActionListWithGroupSubNestedObject.class)
 	@POST
 	@Path("list/group/sub/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -155,7 +155,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组的直接上级群组.", action = ActionListWithGroupSupDirect.class)
+	@JaxrsMethodDescribe(value = "그룹의 직속 상위 그룹 일괄 조회.", action = ActionListWithGroupSupDirect.class)
 	@POST
 	@Path("list/group/sup/direct")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -173,7 +173,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组的直接上级群组对象.", action = ActionListWithGroupSupDirectObject.class)
+	@JaxrsMethodDescribe(value = "그룹의 직속 상위 그룹 객체 일괄 조회.", action = ActionListWithGroupSupDirectObject.class)
 	@POST
 	@Path("list/group/sup/direct/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -191,7 +191,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组的嵌套上级群组.", action = ActionListWithGroupSupNested.class)
+	@JaxrsMethodDescribe(value = "그룹의 중첩 상위 그룹 일괄 조회.", action = ActionListWithGroupSupNested.class)
 	@POST
 	@Path("list/group/sup/nested")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -209,7 +209,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组的嵌套上级群组对象.", action = ActionListWithGroupSupNestedObject.class)
+	@JaxrsMethodDescribe(value = "그룹의 중첩 상위 그룹 객체 일괄 조회.", action = ActionListWithGroupSupNestedObject.class)
 	@POST
 	@Path("list/group/sup/nested/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -227,7 +227,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询人员所在的群组.", action = ActionListWithPerson.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 그룹 일괄 조회.", action = ActionListWithPerson.class)
 	@POST
 	@Path("list/person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -245,7 +245,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询人员所在的群组对象.", action = ActionListWithPersonObject.class)
+	@JaxrsMethodDescribe(value = "사용자가 속한 그룹 객체 일괄 조회.", action = ActionListWithPersonObject.class)
 	@POST
 	@Path("list/person/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -263,7 +263,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询人员身份所在的群组.", action = ActionListWithIdentity.class)
+	@JaxrsMethodDescribe(value = "사용자 신분이 속한 그룹 일괄 조회.", action = ActionListWithIdentity.class)
 	@POST
 	@Path("list/identity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -281,7 +281,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询人员身份所在的群组对象.", action = ActionListWithIdentityObject.class)
+	@JaxrsMethodDescribe(value = "사용자 신분이 속한 그룹 객체 일괄 조회.", action = ActionListWithIdentityObject.class)
 	@POST
 	@Path("list/identity/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -299,7 +299,7 @@ public class GroupAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "批量查询群组的嵌套下级群组信息-树形模式.", action = ActionListWithGroupTree.class)
+	@JaxrsMethodDescribe(value = "그룹의 중첩 하위 그룹 정보 일괄 조회-트리 모드.", action = ActionListWithGroupTree.class)
 	@POST
 	@Path("list/group/tree")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -31,7 +31,7 @@ public class LanguageProcessingHelper {
 			for (Term t : HanLP.segment(content)) {
 				Item item = new Item();
 				item.setLabel(t.nature.toString());
-				/* 去掉中文空格和空格 */
+				/* 전각 공백과 공백 제거 */
 				item.setValue(StringUtils.trimToEmpty(StringUtils.replace(t.word, "　", " ")));
 				if (!skip(item)) {
 					items.add(item);
@@ -39,7 +39,7 @@ public class LanguageProcessingHelper {
 			}
 		}
 		/*
-		 * b 区别词 c 连词 d 副词 e 叹词 f 方位词 h 前缀 k 后缀 o 拟声词 p 介词 q 量词 r 代词 u 组词 w 标点
+		 * b 구별사 c 접속사 d 부사 e 감탄사 f 방위사 h 접두사 k 접미사 o 의성어 p 개사 q 양사 r 대명사 u 조사 w 구두점
 		 */
 		items = items.stream()
 //				.filter(o -> (StringUtils.length(o.getValue()) > 1)

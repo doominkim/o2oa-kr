@@ -24,10 +24,10 @@ public class ActionRemoveBindAll extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Wi wi = convertToWrapIn(jsonElement, Wi.class);
 			if (StringUtils.isEmpty(wi.getPerson())) {
-				throw new ExceptionDeviceError("解绑设备时，人员信息不能为空！");
+				throw new ExceptionDeviceError("기기 연결을 해제할 때 사용자 정보는 비워 둘 수 없습니다!");
 			}
 			if (!effectivePerson.isManager()) {
-				throw new ExceptionDeviceError("没有权限");
+				throw new ExceptionDeviceError("권한이 없습니다");
 			}
 			ActionResult<Wo> result = new ActionResult<>();
 			Wo wraps = new Wo();
@@ -47,7 +47,7 @@ public class ActionRemoveBindAll extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("人员 DN")
+		@FieldDescribe("사용자 DN")
 		private String person;
 		public String getPerson() {
 			return person;

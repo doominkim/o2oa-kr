@@ -49,9 +49,9 @@
     /**
      * editormd
      * 
-     * @param   {String} id           编辑器的ID
-     * @param   {Object} options      配置选项 Key/Value
-     * @returns {Object} editormd     返回editormd对象
+     * @param   {String} id           에디터 ID
+     * @param   {Object} options      설정 옵션 Key/Value
+     * @returns {Object} editormd     editormd 객체 반환
      */
     
     var editormd         = function (id, options) {
@@ -346,12 +346,12 @@
         },
         
         /**
-         * 构造函数/实例初始化
+         * 생성자/인스턴스 초기화
          * Constructor / instance initialization
          * 
-         * @param   {String}   id            编辑器的ID
-         * @param   {Object}   [options={}]  配置选项 Key/Value
-         * @returns {editormd}               返回editormd的实例对象
+         * @param   {String}   id            에디터 ID
+         * @param   {Object}   [options={}]  설정 옵션 Key/Value
+         * @returns {editormd}               editormd 인스턴스 객체 반환
          */
         
         init : function (id, options) {
@@ -486,10 +486,10 @@
         },
         
         /**
-         * 所需组件加载队列
+         * 필요한 구성 요소 로딩 대기열
          * Required components loading queue
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         loadQueues : function() {
@@ -603,10 +603,10 @@
         },
         
         /**
-         * 设置 Editor.md 的整体主题，主要是工具栏
+         * Editor.md 전체 테마 설정, 주로 도구 모음
          * Setting Editor.md theme
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setTheme : function(theme) {
@@ -622,10 +622,10 @@
         },
         
         /**
-         * 设置 CodeMirror（编辑区）的主题
+         * CodeMirror(편집 영역) 테마 설정
          * Setting CodeMirror (Editor area) theme
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setEditorTheme : function(theme) {  
@@ -643,10 +643,10 @@
         },
         
         /**
-         * setEditorTheme() 的别名
+         * setEditorTheme()의 별칭
          * setEditorTheme() alias
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setCodeMirrorTheme : function (theme) {            
@@ -656,10 +656,10 @@
         },
         
         /**
-         * 设置 Editor.md 的主题
+         * Editor.md 테마 설정
          * Setting Editor.md theme
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setPreviewTheme : function(theme) {  
@@ -675,10 +675,10 @@
         },
         
         /**
-         * 配置和初始化CodeMirror组件
+         * CodeMirror 구성 요소 설정 및 초기화
          * CodeMirror initialization
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setCodeMirror : function() { 
@@ -745,7 +745,7 @@
         },
         
         /**
-         * 获取CodeMirror的配置选项
+         * CodeMirror 설정 옵션 조회
          * Get CodeMirror setting options
          * 
          * @returns {Mixed}                  return CodeMirror setting option value
@@ -756,10 +756,10 @@
         },
         
         /**
-         * 配置和重配置CodeMirror的选项
+         * CodeMirror 옵션 설정 및 재설정
          * CodeMirror setting options / resettings
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setCodeMirrorOption : function(key, value) {
@@ -770,10 +770,10 @@
         },
         
         /**
-         * 添加 CodeMirror 键盘快捷键
+         * CodeMirror 키보드 단축키 추가
          * Add CodeMirror keyboard shortcuts key map
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         addKeyMap : function(map, bottom) {
@@ -783,10 +783,10 @@
         },
         
         /**
-         * 移除 CodeMirror 键盘快捷键
+         * CodeMirror 키보드 단축키 제거
          * Remove CodeMirror keyboard shortcuts key map
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         removeKeyMap : function(map) {
@@ -796,11 +796,11 @@
         },
         
         /**
-         * 跳转到指定的行
+         * 지정한 줄로 이동
          * Goto CodeMirror line
          * 
          * @param   {String|Intiger}   line      line number or "first"|"last"
-         * @returns {editormd}                   返回editormd的实例对象
+         * @returns {editormd}                   editormd 인스턴스 객체 반환
          */
         
         gotoLine : function (line) {
@@ -880,7 +880,7 @@
         },
         
         /**
-         * 扩展当前实例对象，可同时设置多个或者只设置一个
+         * 현재 인스턴스 객체 확장, 여러 개 또는 하나만 동시에 설정 가능
          * Extend editormd instance object, can mutil setting.
          * 
          * @returns {editormd}                  this(editormd instance object.)
@@ -906,7 +906,7 @@
         },
         
         /**
-         * 设置或扩展当前实例对象，单个设置
+         * 현재 인스턴스 객체 설정 또는 확장, 단일 설정
          * Extend editormd instance object, one by one
          * 
          * @param   {String|Object}   key       option key
@@ -927,7 +927,7 @@
         },
         
         /**
-         * 重新配置
+         * 재설정
          * Resetting editor options
          * 
          * @param   {String|Object}   key       option key
@@ -955,11 +955,11 @@
         },
         
         /**
-         * 注册事件处理方法
+         * 이벤트 처리 메서드 등록
          * Bind editor event handle
          * 
          * @param   {String}     eventType      event type
-         * @param   {Function}   callback       回调函数
+         * @param   {Function}   callback       콜백 함수
          * @returns {editormd}                  this(editormd instance object.)
          */
         
@@ -975,7 +975,7 @@
         },
         
         /**
-         * 解除事件处理方法
+         * 이벤트 처리 메서드 해제
          * Unbind editor event handle
          * 
          * @param   {String}   eventType          event type
@@ -994,11 +994,11 @@
         },
         
         /**
-         * 显示工具栏
+         * 도구 모음 표시
          * Display toolbar
          * 
-         * @param   {Function} [callback=function(){}] 回调函数
-         * @returns {editormd}  返回editormd的实例对象
+         * @param   {Function} [callback=function(){}] 콜백 함수
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         showToolbar : function(callback) {
@@ -1024,10 +1024,10 @@
         },
         
         /**
-         * 隐藏工具栏
+         * 도구 모음 숨기기
          * Hide toolbar
          * 
-         * @param   {Function} [callback=function(){}] 回调函数
+         * @param   {Function} [callback=function(){}] 콜백 함수
          * @returns {editormd}                         this(editormd instance object.)
          */
         
@@ -1044,10 +1044,10 @@
         },
         
         /**
-         * 页面滚动时工具栏的固定定位
+         * 페이지 스크롤 시 도구 모음 고정 위치
          * Set toolbar in window scroll auto fixed position
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setToolbarAutoFixed : function(fixed) {
@@ -1098,10 +1098,10 @@
         },
         
         /**
-         * 配置和初始化工具栏
+         * 도구 모음 설정 및 초기화
          * Set toolbar and Initialization
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setToolbar : function() {
@@ -1200,12 +1200,12 @@
         },
         
         /**
-         * 工具栏图标事件处理对象序列
+         * 도구 모음 아이콘 이벤트 처리 객체 목록
          * Get toolbar icons event handlers
          * 
-         * @param   {Object}   cm    CodeMirror的实例对象
-         * @param   {String}   name  要获取的事件处理器名称
-         * @returns {Object}         返回处理对象序列
+         * @param   {Object}   cm    CodeMirror 인스턴스 객체
+         * @param   {String}   name  조회할 이벤트 처리기 이름
+         * @returns {Object}         처리 객체 목록 반환
          */
             
         dialogLockScreen : function() {
@@ -1227,10 +1227,10 @@
         },
         
         /**
-         * 工具栏图标事件处理器
+         * 도구 모음 아이콘 이벤트 처리기
          * Bind toolbar icons event handle
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         setToolbarHandler : function() {
@@ -1286,11 +1286,11 @@
         },
         
         /**
-         * 动态创建对话框
+         * 대화 상자 동적 생성
          * Creating custom dialogs
          * 
-         * @param   {Object} options  配置项键值对 Key/Value
-         * @returns {dialog}          返回创建的dialog的jQuery实例对象
+         * @param   {Object} options  설정 항목 키/값 쌍 Key/Value
+         * @returns {dialog}          생성된 dialog의 jQuery 인스턴스 객체 반환
          */
         
         createDialog : function(options) {            
@@ -1298,10 +1298,10 @@
         },
         
         /**
-         * 创建关于Editor.md的对话框
+         * Editor.md 정보 대화 상자 생성
          * Create about Editor.md dialog
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         createInfoDialog : function() {
@@ -1337,10 +1337,10 @@
         },
         
         /**
-         * 关于Editor.md对话居中定位
+         * Editor.md 정보 대화 상자 가운데 배치
          * Editor.md dialog position handle
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         infoDialogPosition : function() {
@@ -1361,10 +1361,10 @@
         },
         
         /**
-         * 显示关于Editor.md
+         * Editor.md 정보 표시
          * Display about Editor.md dialog
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         showInfoDialog : function() {
@@ -1396,10 +1396,10 @@
         },
         
         /**
-         * 隐藏关于Editor.md
+         * Editor.md 정보 숨기기
          * Hide about Editor.md dialog
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         hideInfoDialog : function() {            
@@ -1412,11 +1412,11 @@
         },
         
         /**
-         * 锁屏
+         * 화면 잠금
          * lock screen
          * 
-         * @param   {Boolean}    lock    Boolean 布尔值，是否锁屏
-         * @returns {editormd}           返回editormd的实例对象
+         * @param   {Boolean}    lock    Boolean 불리언 값, 화면 잠금 여부
+         * @returns {editormd}           editormd 인스턴스 객체 반환
          */
         
         lockScreen : function(lock) {
@@ -1427,10 +1427,10 @@
         },
         
         /**
-         * 编辑器界面重建，用于动态语言包或模块加载等
+         * 에디터 화면 재구성, 동적 언어 팩이나 모듈 로딩 등에 사용
          * Recreate editor
          * 
-         * @returns {editormd}  返回editormd的实例对象
+         * @returns {editormd}  editormd 인스턴스 객체 반환
          */
         
         recreate : function() {
@@ -1461,10 +1461,10 @@
         },
         
         /**
-         * 高亮预览HTML的pre代码部分
+         * 미리보기 HTML의 pre 코드 부분 강조 표시
          * highlight of preview codes
          * 
-         * @returns {editormd}             返回editormd的实例对象
+         * @returns {editormd}             editormd 인스턴스 객체 반환
          */
         
         previewCodeHighlight : function() {    
@@ -1485,10 +1485,10 @@
         },
         
         /**
-         * 解析TeX(KaTeX)科学公式
+         * TeX(KaTeX) 수식 해석
          * TeX(KaTeX) Renderer
          * 
-         * @returns {editormd}             返回editormd的实例对象
+         * @returns {editormd}             editormd 인스턴스 객체 반환
          */
         
         katexRender : function() {
@@ -1509,10 +1509,10 @@
         },
         
         /**
-         * 解析和渲染流程图及时序图
+         * 순서도 및 시퀀스 다이어그램 해석 및 렌더링
          * FlowChart and SequenceDiagram Renderer
          * 
-         * @returns {editormd}             返回editormd的实例对象
+         * @returns {editormd}             editormd 인스턴스 객체 반환
          */
         
         flowChartAndSequenceDiagramRender : function() {
@@ -1569,7 +1569,7 @@
         },
         
         /**
-         * 注册键盘快捷键处理
+         * 키보드 단축키 처리 등록
          * Register CodeMirror keyMaps (keyboard shortcuts).
          * 
          * @param   {Object}    keyMap      KeyMap key/value {"(Ctrl/Shift/Alt)-Key" : function(){}}
@@ -1653,7 +1653,7 @@
         },
         
         /**
-         * 绑定同步滚动
+         * 동기 스크롤 바인딩
          * 
          * @returns {editormd} return this
          */
@@ -1785,11 +1785,11 @@
         },
         
         /**
-         * 加载队列完成之后的显示处理
+         * 로딩 대기열 완료 후 표시 처리
          * Display handle of the module queues loaded after.
          * 
-         * @param   {Boolean}   recreate   是否为重建编辑器
-         * @returns {editormd}             返回editormd的实例对象
+         * @param   {Boolean}   recreate   에디터 재구성 여부
+         * @returns {editormd}             editormd 인스턴스 객체 반환
          */
         
         loadedDisplay : function(recreate) {
@@ -1809,7 +1809,7 @@
                 preview.show();
             }
             
-            editor.data("oldWidth", editor.width()).data("oldHeight", editor.height()); // 为了兼容Zepto
+            editor.data("oldWidth", editor.width()).data("oldHeight", editor.height()); // Zepto 호환을 위해
             
             this.resize();
             this.registerKeyMaps();
@@ -1831,11 +1831,11 @@
         },
         
         /**
-         * 设置编辑器的宽度
+         * 에디터 너비 설정
          * Set editor width
          * 
-         * @param   {Number|String} width  编辑器宽度值
-         * @returns {editormd}             返回editormd的实例对象
+         * @param   {Number|String} width  에디터 너비 값
+         * @returns {editormd}             editormd 인스턴스 객체 반환
          */
         
         width : function(width) {
@@ -1847,11 +1847,11 @@
         },
         
         /**
-         * 设置编辑器的高度
+         * 에디터 높이 설정
          * Set editor height
          * 
-         * @param   {Number|String} height  编辑器高度值
-         * @returns {editormd}              返回editormd的实例对象
+         * @param   {Number|String} height  에디터 높이 값
+         * @returns {editormd}              editormd 인스턴스 객체 반환
          */
         
         height : function(height) {
@@ -1863,12 +1863,12 @@
         },
         
         /**
-         * 调整编辑器的尺寸和布局
+         * 에디터 크기 및 레이아웃 조정
          * Resize editor layout
          * 
-         * @param   {Number|String} [width=null]  编辑器宽度值
-         * @param   {Number|String} [height=null] 编辑器高度值
-         * @returns {editormd}                    返回editormd的实例对象
+         * @param   {Number|String} [width=null]  에디터 너비 값
+         * @param   {Number|String} [height=null] 에디터 높이 값
+         * @returns {editormd}                    editormd 인스턴스 객체 반환
          */
         
         resize : function(width, height) {
@@ -1957,10 +1957,10 @@
         },
         
         /**
-         * 解析和保存Markdown代码
+         * Markdown 코드 해석 및 저장
          * Parse & Saving Markdown source code
          * 
-         * @returns {editormd}     返回editormd的实例对象
+         * @returns {editormd}     editormd 인스턴스 객체 반환
          */
         
         save : function() {
@@ -2008,7 +2008,7 @@
                 tables      : true,
                 breaks      : true,
                 pedantic    : false,
-                sanitize    : (settings.htmlDecode) ? false : true,  // 关闭忽略HTML标签，即开启识别HTML标签，默认为false
+                sanitize    : (settings.htmlDecode) ? false : true,  // HTML 태그 무시 끄기, 즉 HTML 태그 인식 켜기, 기본값 false
                 smartLists  : true,
                 smartypants : true
             };
@@ -2099,10 +2099,10 @@
         },
         
         /**
-         * 聚焦光标位置
+         * 커서 위치에 포커스
          * Focusing the cursor position
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         focus : function() {
@@ -2112,11 +2112,11 @@
         },
         
         /**
-         * 设置光标的位置
+         * 커서 위치 설정
          * Set cursor position
          * 
-         * @param   {Object}    cursor 要设置的光标位置键值对象，例：{line:1, ch:0}
-         * @returns {editormd}         返回editormd的实例对象
+         * @param   {Object}    cursor 설정할 커서 위치 키/값 객체, 예: {line:1, ch:0}
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         setCursor : function(cursor) {
@@ -2126,10 +2126,10 @@
         },
         
         /**
-         * 获取当前光标的位置
+         * 현재 커서 위치 조회
          * Get the current position of the cursor
          * 
-         * @returns {Cursor}         返回一个光标Cursor对象
+         * @returns {Cursor}         커서 Cursor 객체 반환
          */
         
         getCursor : function() {
@@ -2137,12 +2137,12 @@
         },
         
         /**
-         * 设置光标选中的范围
+         * 커서 선택 범위 설정
          * Set cursor selected ranges
          * 
-         * @param   {Object}    from   开始位置的光标键值对象，例：{line:1, ch:0}
-         * @param   {Object}    to     结束位置的光标键值对象，例：{line:1, ch:0}
-         * @returns {editormd}         返回editormd的实例对象
+         * @param   {Object}    from   시작 위치 커서 키/값 객체, 예: {line:1, ch:0}
+         * @param   {Object}    to     끝 위치 커서 키/값 객체, 예: {line:1, ch:0}
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         setSelection : function(from, to) {
@@ -2153,10 +2153,10 @@
         },
         
         /**
-         * 获取光标选中的文本
+         * 커서로 선택한 텍스트 조회
          * Get the texts from cursor selected
          * 
-         * @returns {String}         返回选中文本的字符串形式
+         * @returns {String}         선택한 텍스트를 문자열로 반환
          */
         
         getSelection : function() {
@@ -2164,7 +2164,7 @@
         },
         
         /**
-         * 设置光标选中的文本范围
+         * 커서로 선택한 텍스트 범위 설정
          * Set the cursor selection ranges
          * 
          * @param   {Array}    ranges  cursor selection ranges array
@@ -2178,7 +2178,7 @@
         },
         
         /**
-         * 获取光标选中的文本范围
+         * 커서로 선택한 텍스트 범위 조회
          * Get the cursor selection ranges
          * 
          * @returns {Array}         return selection ranges array
@@ -2189,11 +2189,11 @@
         },
         
         /**
-         * 替换当前光标选中的文本或在当前光标处插入新字符
+         * 현재 커서로 선택한 텍스트를 바꾸거나 현재 커서 위치에 새 문자 삽입
          * Replace the text at the current cursor selected or insert a new character at the current cursor position
          * 
-         * @param   {String}    value  要插入的字符值
-         * @returns {editormd}         返回editormd的实例对象
+         * @param   {String}    value  삽입할 문자 값
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         replaceSelection : function(value) {
@@ -2203,14 +2203,14 @@
         },
         
         /**
-         * 在当前光标处插入新字符
+         * 현재 커서 위치에 새 문자 삽입
          * Insert a new character at the current cursor position
          *
-         * 同replaceSelection()方法
+         * replaceSelection() 메서드와 동일
          * With the replaceSelection() method
          * 
-         * @param   {String}    value  要插入的字符值
-         * @returns {editormd}         返回editormd的实例对象
+         * @param   {String}    value  삽입할 문자 값
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         insertValue : function(value) {
@@ -2220,11 +2220,11 @@
         },
         
         /**
-         * 追加markdown
+         * markdown 추가
          * append Markdown to editor
          * 
-         * @param   {String}    md     要追加的markdown源文档
-         * @returns {editormd}         返回editormd的实例对象
+         * @param   {String}    md     추가할 markdown 원본 문서
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         appendMarkdown : function(md) {
@@ -2237,11 +2237,11 @@
         },
         
         /**
-         * 设置和传入编辑器的markdown源文档
+         * 에디터에 markdown 원본 문서 설정 및 전달
          * Set Markdown source document
          * 
-         * @param   {String}    md     要传入的markdown源文档
-         * @returns {editormd}         返回editormd的实例对象
+         * @param   {String}    md     전달할 markdown 원본 문서
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         setMarkdown : function(md) {
@@ -2251,10 +2251,10 @@
         },
         
         /**
-         * 获取编辑器的markdown源文档
+         * 에디터의 markdown 원본 문서 조회
          * Set Editor.md markdown/CodeMirror value
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         getMarkdown : function() {
@@ -2262,10 +2262,10 @@
         },
         
         /**
-         * 获取编辑器的源文档
+         * 에디터의 원본 문서 조회
          * Get CodeMirror value
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         getValue : function() {
@@ -2273,11 +2273,11 @@
         },
         
         /**
-         * 设置编辑器的源文档
+         * 에디터의 원본 문서 설정
          * Set CodeMirror value
          * 
          * @param   {String}     value   set code/value/string/text
-         * @returns {editormd}           返回editormd的实例对象
+         * @returns {editormd}           editormd 인스턴스 객체 반환
          */
         
         setValue : function(value) {
@@ -2287,10 +2287,10 @@
         },
         
         /**
-         * 清空编辑器
+         * 에디터 비우기
          * Empty CodeMirror editor container
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         clear : function() {
@@ -2300,10 +2300,10 @@
         },
         
         /**
-         * 获取解析后存放在Textarea的HTML源码
+         * 해석 후 Textarea에 저장된 HTML 소스 조회
          * Get parsed html code from Textarea
          * 
-         * @returns {String}               返回HTML源码
+         * @returns {String}               HTML 소스 반환
          */
         
         getHTML : function() {
@@ -2318,10 +2318,10 @@
         },
         
         /**
-         * getHTML()的别名
+         * getHTML()의 별칭
          * getHTML (alias)
          * 
-         * @returns {String}           Return html code 返回HTML源码
+         * @returns {String}           Return html code HTML 소스 반환
          */
         
         getTextareaSavedHTML : function() {
@@ -2329,10 +2329,10 @@
         },
         
         /**
-         * 获取预览窗口的HTML源码
+         * 미리보기 창의 HTML 소스 조회
          * Get html from preview container
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         getPreviewedHTML : function() {
@@ -2347,10 +2347,10 @@
         },
         
         /**
-         * 开启实时预览
+         * 실시간 미리보기 켜기
          * Enable real-time watching
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         watch : function(callback) {     
@@ -2391,10 +2391,10 @@
         },
         
         /**
-         * 关闭实时预览
+         * 실시간 미리보기 끄기
          * Disable real-time watching
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         unwatch : function(callback) {
@@ -2427,11 +2427,11 @@
         },
         
         /**
-         * 显示编辑器
+         * 에디터 표시
          * Show editor
          * 
-         * @param   {Function} [callback=function()] 回调函数
-         * @returns {editormd}                       返回editormd的实例对象
+         * @param   {Function} [callback=function()] 콜백 함수
+         * @returns {editormd}                       editormd 인스턴스 객체 반환
          */
         
         show : function(callback) {
@@ -2446,11 +2446,11 @@
         },
         
         /**
-         * 隐藏编辑器
+         * 에디터 숨기기
          * Hide editor
          * 
-         * @param   {Function} [callback=function()] 回调函数
-         * @returns {editormd}                       返回editormd的实例对象
+         * @param   {Function} [callback=function()] 콜백 함수
+         * @returns {editormd}                       editormd 인스턴스 객체 반환
          */
         
         hide : function(callback) {
@@ -2465,10 +2465,10 @@
         },
         
         /**
-         * 隐藏编辑器部分，只预览HTML
+         * 에디터 부분을 숨기고 HTML만 미리보기
          * Enter preview html state
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         previewing : function() {
@@ -2498,7 +2498,7 @@
                 }
             };
 
-            if (codeMirror.css("display") === "none") // 为了兼容Zepto，而不使用codeMirror.is(":hidden")
+            if (codeMirror.css("display") === "none") // Zepto 호환을 위해 codeMirror.is(":hidden")를 사용하지 않음
             {
                 this.state.preview = true;
 
@@ -2543,10 +2543,10 @@
         },
         
         /**
-         * 显示编辑器部分，退出只预览HTML
+         * 에디터 부분 표시, HTML 미리보기 전용 모드 종료
          * Exit preview html state
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         previewed : function() {
@@ -2594,10 +2594,10 @@
         },
         
         /**
-         * 编辑器全屏显示
+         * 에디터 전체 화면 표시
          * Fullscreen show
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         fullscreen : function() {
@@ -2651,10 +2651,10 @@
         },
         
         /**
-         * 编辑器退出全屏显示
+         * 에디터 전체 화면 표시 종료
          * Exit fullscreen state
          * 
-         * @returns {editormd}         返回editormd的实例对象
+         * @returns {editormd}         editormd 인스턴스 객체 반환
          */
         
         fullscreenExit : function() {
@@ -2685,12 +2685,12 @@
         },
         
         /**
-         * 加载并执行插件
+         * 플러그인 로드 및 실행
          * Load and execute the plugin
          * 
          * @param   {String}     name    plugin name / function name
          * @param   {String}     path    plugin load path
-         * @returns {editormd}           返回editormd的实例对象
+         * @returns {editormd}           editormd 인스턴스 객체 반환
          */
         
         executePlugin : function(name, path) {
@@ -2731,7 +2731,7 @@
         },
                 
         /**
-         * 搜索替换
+         * 검색 및 바꾸기
          * Search & replace
          * 
          * @param   {String}     command    CodeMirror serach commands, "find, fintNext, fintPrev, clearSearch, replace, replaceAll"
@@ -2771,7 +2771,7 @@
     editormd.fn.init.prototype = editormd.fn; 
    
     /**
-     * 锁屏
+     * 화면 잠금
      * lock screen when dialog opening
      * 
      * @returns {void}
@@ -2788,7 +2788,7 @@
     };
    
     /**
-     * 显示透明背景层
+     * 투명 배경 레이어 표시
      * Display mask layer when dialog opening
      * 
      * @param   {Object}     dialog    dialog jQuery object
@@ -3300,7 +3300,7 @@
     };
     
     /**
-     * 清除字符串两边的空格
+     * 문자열 양쪽 공백 제거
      * Clear the space of strings both sides.
      * 
      * @param   {String}    str            string
@@ -3314,7 +3314,7 @@
     editormd.trim = trim;
     
     /**
-     * 所有单词首字母大写
+     * 모든 단어의 첫 글자를 대문자로
      * Words first to uppercase
      * 
      * @param   {String}    str            string
@@ -3330,7 +3330,7 @@
     editormd.ucwords = editormd.wordsFirstUpperCase = ucwords;
     
     /**
-     * 字符串首字母大写
+     * 문자열 첫 글자를 대문자로
      * Only string first char to uppercase
      * 
      * @param   {String}    str            string
@@ -3376,11 +3376,11 @@
     };
 
     /**
-     * 自定义marked的解析器
+     * marked 사용자 정의 해석기
      * Custom Marked renderer rules
      * 
-     * @param   {Array}    markdownToC     传入用于接收TOC的数组
-     * @returns {Renderer} markedRenderer  返回marked的Renderer自定义对象
+     * @param   {Array}    markdownToC     TOC를 받을 배열 전달
+     * @returns {Renderer} markedRenderer  marked의 Renderer 사용자 정의 객체 반환
      */
 
     editormd.markedRenderer = function(markdownToC, options) {
@@ -3666,13 +3666,13 @@
     
     /**
      *
-     * 生成TOC(Table of Contents)
+     * TOC(Table of Contents) 생성
      * Creating ToC (Table of Contents)
      * 
-     * @param   {Array}    toc             从marked获取的TOC数组列表
-     * @param   {Element}  container       插入TOC的容器元素
-     * @param   {Integer}  startLevel      Hx 起始层级
-     * @returns {Object}   tocContainer    返回ToC列表容器层的jQuery对象元素
+     * @param   {Array}    toc             marked에서 가져온 TOC 배열 목록
+     * @param   {Element}  container       TOC를 삽입할 컨테이너 요소
+     * @param   {Integer}  startLevel      Hx 시작 단계
+     * @returns {Object}   tocContainer    ToC 목록 컨테이너 레이어의 jQuery 객체 요소 반환
      */
     
     editormd.markdownToCRenderer = function(toc, container, tocDropdown, startLevel) {
@@ -3734,10 +3734,10 @@
     
     /**
      *
-     * 生成TOC下拉菜单
+     * TOC 드롭다운 메뉴 생성
      * Creating ToC dropdown menu
      * 
-     * @param   {Object}   container       插入TOC的容器jQuery对象元素
+     * @param   {Object}   container       TOC를 삽입할 컨테이너 jQuery 객체 요소
      * @param   {String}   tocTitle        ToC title
      * @returns {Object}                   return toc-menu object
      */
@@ -3799,12 +3799,12 @@
     };
     
     /**
-     * 简单地过滤指定的HTML标签
+     * 지정한 HTML 태그를 간단히 필터링
      * Filter custom html tags
      * 
-     * @param   {String}   html          要过滤HTML
-     * @param   {String}   filters       要过滤的标签
-     * @returns {String}   html          返回过滤的HTML
+     * @param   {String}   html          필터링할 HTML
+     * @param   {String}   filters       필터링할 태그
+     * @returns {String}   html          필터링된 HTML 반환
      */
     
     editormd.filterHTMLTags = function(html, filters) {
@@ -3884,12 +3884,12 @@
     };
     
     /**
-     * 将Markdown文档解析为HTML用于前台显示
+     * Markdown 문서를 HTML로 해석해 화면에 표시
      * Parse Markdown to HTML for Font-end preview.
      * 
-     * @param   {String}   id            用于显示HTML的对象ID
-     * @param   {Object}   [options={}]  配置选项，可选
-     * @returns {Object}   div           返回jQuery对象元素
+     * @param   {String}   id            HTML을 표시할 객체 ID
+     * @param   {Object}   [options={}]  설정 옵션, 선택
+     * @returns {Object}   div           jQuery 객체 요소 반환
      */
     
     editormd.markdownToHTML = function(id, options) {
@@ -3952,7 +3952,7 @@
             tables      : true,
             breaks      : true,
             pedantic    : false,
-            sanitize    : (settings.htmlDecode) ? false : true, // 是否忽略HTML标签，即是否开启HTML标签解析，为了安全性，默认不开启
+            sanitize    : (settings.htmlDecode) ? false : true, // HTML 태그 무시 여부, 즉 HTML 태그 해석 사용 여부. 보안을 위해 기본값은 사용 안 함
             smartLists  : true,
             smartypants : true
         };
@@ -4077,12 +4077,12 @@
     };
     
     /**
-     * 动态加载Editor.md插件，但不立即执行
+     * Editor.md 플러그인을 동적으로 로드하되 바로 실행하지 않음
      * Load editor.md plugins
      * 
-     * @param {String}   fileName              插件文件路径
-     * @param {Function} [callback=function()] 加载成功后执行的回调函数
-     * @param {String}   [into="head"]         嵌入页面的位置
+     * @param {String}   fileName              플러그인 파일 경로
+     * @param {Function} [callback=function()] 로드 성공 후 실행할 콜백 함수
+     * @param {String}   [into="head"]         페이지에 삽입할 위치
      */
     
     editormd.loadPlugin = function(fileName, callback, into) {
@@ -4095,12 +4095,12 @@
     };
     
     /**
-     * 动态加载CSS文件的方法
+     * CSS 파일 동적 로드 메서드
      * Load css file method
      * 
-     * @param {String}   fileName              CSS文件名
-     * @param {Function} [callback=function()] 加载成功后执行的回调函数
-     * @param {String}   [into="head"]         嵌入页面的位置
+     * @param {String}   fileName              CSS 파일 이름
+     * @param {Function} [callback=function()] 로드 성공 후 실행할 콜백 함수
+     * @param {String}   [into="head"]         페이지에 삽입할 위치
      */
     
     editormd.loadCSS   = function(fileName, callback, into) {
@@ -4128,12 +4128,12 @@
     editormd.isIE8   = (editormd.isIE && navigator.appVersion.match(/8./i) == "8.");
 
     /**
-     * 动态加载JS文件的方法
+     * JS 파일 동적 로드 메서드
      * Load javascript file method
      * 
-     * @param {String}   fileName              JS文件名
-     * @param {Function} [callback=function()] 加载成功后执行的回调函数
-     * @param {String}   [into="head"]         嵌入页面的位置
+     * @param {String}   fileName              JS 파일 이름
+     * @param {Function} [callback=function()] 로드 성공 후 실행할 콜백 함수
+     * @param {String}   [into="head"]         페이지에 삽입할 위치
      */
 
     editormd.loadScript = function(fileName, callback, into) {
@@ -4176,7 +4176,7 @@
         }
     };
     
-    // 使用国外的CDN，加载速度有时会很慢，或者自定义URL
+    // 해외 CDN을 사용하면 로딩이 느릴 때가 있으므로, 사용자 정의 URL 사용 가능
     // You can custom KaTeX load url.
     editormd.katexURL  = {
         css : "//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min",
@@ -4186,10 +4186,10 @@
     editormd.kaTeXLoaded = false;
     
     /**
-     * 加载KaTeX文件
+     * KaTeX 파일 로드
      * load KaTeX files
      * 
-     * @param {Function} [callback=function()]  加载成功后执行的回调函数
+     * @param {Function} [callback=function()]  로드 성공 후 실행할 콜백 함수
      */
     
     editormd.loadKaTeX = function (callback) {
@@ -4199,10 +4199,10 @@
     };
         
     /**
-     * 锁屏
+     * 화면 잠금
      * lock screen
      * 
-     * @param   {Boolean}   lock   Boolean 布尔值，是否锁屏
+     * @param   {Boolean}   lock   Boolean 불리언 값, 화면 잠금 여부
      * @returns {void}
      */
     
@@ -4211,11 +4211,11 @@
     };
         
     /**
-     * 动态创建对话框
+     * 대화 상자 동적 생성
      * Creating custom dialogs
      * 
-     * @param   {Object} options 配置项键值对 Key/Value
-     * @returns {dialog} 返回创建的dialog的jQuery实例对象
+     * @param   {Object} options 설정 항목 키/값 쌍 Key/Value
+     * @returns {dialog} 생성된 dialog의 jQuery 인스턴스 객체 반환
      */
 
     editormd.createDialog = function(options) {
@@ -4457,12 +4457,12 @@
     };
     
     /**
-     * 鼠标和触摸事件的判断/选择方法
+     * 마우스 및 터치 이벤트 판단/선택 메서드
      * MouseEvent or TouchEvent type switch
      * 
-     * @param   {String} [mouseEventType="click"]    供选择的鼠标事件
-     * @param   {String} [touchEventType="touchend"] 供选择的触摸事件
-     * @returns {String} EventType                   返回事件类型名称
+     * @param   {String} [mouseEventType="click"]    선택할 마우스 이벤트
+     * @param   {String} [touchEventType="touchend"] 선택할 터치 이벤트
+     * @returns {String} EventType                   이벤트 유형 이름 반환
      */
     
     editormd.mouseOrTouch = function(mouseEventType, touchEventType) {
@@ -4480,11 +4480,11 @@
     };
     
     /**
-     * 日期时间的格式化方法
+     * 날짜·시간 서식 지정 메서드
      * Datetime format method
      * 
-     * @param   {String}   [format=""]  日期时间的格式，类似PHP的格式
-     * @returns {String}   datefmt      返回格式化后的日期时间字符串
+     * @param   {String}   [format=""]  날짜·시간 서식, PHP 서식과 유사
+     * @returns {String}   datefmt      서식이 적용된 날짜·시간 문자열 반환
      */
     
     editormd.dateFormat = function(format) {                

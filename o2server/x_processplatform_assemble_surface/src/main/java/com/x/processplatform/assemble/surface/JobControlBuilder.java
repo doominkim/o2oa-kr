@@ -20,11 +20,11 @@ public class JobControlBuilder {
 		this.jobOrWorkOrWorkCompleted = jobOrWorkOrWorkCompleted;
 	}
 
-	// 是否可以管理
+	// 관리 가능 여부
 	private boolean ifAllowManage = false;
-	// 是否可以看到
+	// 조회 가능 여부
 	private boolean ifAllowVisit = false;
-	// 是否可以保存
+	// 저장 가능 여부
 	private boolean ifAllowSave = false;
 
 	public JobControlBuilder enableAllowManage() {
@@ -94,7 +94,7 @@ public class JobControlBuilder {
 	}
 
 	/**
-	 * 在workCompleted中allowSave == allowManage
+	 * workCompleted에서는 allowSave == allowManage
 	 *
 	 * @param workCompleted
 	 * @return
@@ -108,7 +108,7 @@ public class JobControlBuilder {
 		if (ifAllowVisit) {
 			builder.enableAllowVisit();
 		}
-		// 在workCompleted中allowSave == allowManage
+		// workCompleted에서는 allowSave == allowManage
 		if (ifAllowSave) {
 			builder.enableAllowManage();
 		}

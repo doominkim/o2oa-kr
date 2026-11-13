@@ -6,6 +6,6 @@ class ExceptionCategoryInfoAccessDenied extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCategoryInfoAccessDenied() {
-		super("分类信息不允许匿名访问.");
+		super("분류 정보는 익명으로 접근할 수 없습니다.");
 	}
 }

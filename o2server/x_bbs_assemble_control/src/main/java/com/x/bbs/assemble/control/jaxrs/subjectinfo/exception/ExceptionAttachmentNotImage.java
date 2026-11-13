@@ -7,6 +7,6 @@ public class ExceptionAttachmentNotImage extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionAttachmentNotImage( String id ) {
-		super("文件并不是图片格式.ID:" + id );
+		super("파일이 이미지 형식이 아닙니다. ID:" + id );
 	}
 }

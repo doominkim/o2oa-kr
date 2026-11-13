@@ -114,7 +114,7 @@ class ActionWorkProcessing extends BaseAction {
 				Business business = new Business(emc);
 				rec = new Record(param.workLog);
 				rec.setType(param.recordType);
-				// 校验workCompleted,如果存在,那么说明工作已经完成,标识状态为已经完成.
+				// workCompleted 검사, 존재하면 업무 문서가 이미 완료된 것이므로 상태를 완료로 표시.
 				checkIfWorkAlreadyCompleted(business, rec, param.workLog.getJob());
 				rec.setIdentity(param.identity);
 				Identity identity = business.organization().identity().getObject(rec.getIdentity());
@@ -134,7 +134,7 @@ class ActionWorkProcessing extends BaseAction {
 				rec.setRouteName(param.routeName);
 				rec.setOpinion(param.opinion);
 				elapsed(rec);
-				// 已经存在的已办理人员.
+				// 이미 처리한 사용자.
 				List<String> identities = listJoinInquireTaskCompletedIdentityWithActivityToken(business,
 						param.workLog.getJob(), param.workLog.getFromActivityToken());
 				List<Task> tasks = listTaskWithSeriesOrActivityToken(business, param.workLog.getJob(),

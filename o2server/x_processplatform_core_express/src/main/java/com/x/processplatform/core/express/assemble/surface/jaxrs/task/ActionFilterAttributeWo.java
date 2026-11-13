@@ -13,24 +13,24 @@ public class ActionFilterAttributeWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5849987454215239891L;
 
-	@FieldDescribe("可选择的应用")
-	@Schema(description = "可选择的应用列表")
+	@FieldDescribe("선택 가능한 앱")
+	@Schema(description = "선택 가능한 앱 목록")
 	private List<NameValueCountPair> applicationList = new ArrayList<>();
 
-	@FieldDescribe("可选择的流程")
-	@Schema(description = "可选择的流程列表")
+	@FieldDescribe("선택 가능한 프로세스")
+	@Schema(description = "선택 가능한 프로세스 목록")
 	private List<NameValueCountPair> processList = new ArrayList<>();
 
-	@FieldDescribe("可选择的组织")
-	@Schema(description = "可选择的组织列表")
+	@FieldDescribe("선택 가능한 조직")
+	@Schema(description = "선택 가능한 조직 목록")
 	private List<NameValueCountPair> creatorUnitList = new ArrayList<>();
 
-	@FieldDescribe("可选择的开始月份")
-	@Schema(description = "可选择的开始月份列表")
+	@FieldDescribe("선택 가능한 시작 월")
+	@Schema(description = "선택 가능한 시작 월 목록")
 	private List<NameValueCountPair> startTimeMonthList = new ArrayList<>();
 
-	@FieldDescribe("可选择的活动节点")
-	@Schema(description = "可选择的活动节点列表")
+	@FieldDescribe("선택 가능한 활동 노드")
+	@Schema(description = "선택 가능한 활동 노드 목록")
 	private List<NameValueCountPair> activityNameList = new ArrayList<>();
 
 	public List<NameValueCountPair> getApplicationList() {

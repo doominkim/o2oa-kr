@@ -31,7 +31,7 @@ public class ActionListCheckInRecordWithDate extends BaseAction {
             Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
             String date = wi.getDate();
             if (StringUtils.isEmpty(date)) {
-                throw new ExceptionEmptyParameter("日期");
+                throw new ExceptionEmptyParameter("날짜");
             }
             DateTools.parse(date, DateTools.format_yyyyMMdd);
             WoDetail detail = new WoDetail();
@@ -73,7 +73,7 @@ public class ActionListCheckInRecordWithDate extends BaseAction {
 
         private static final long serialVersionUID = 2764109224722244861L;
 
-        @FieldDescribe("查询日期，格式 yyyy-MM-dd")
+        @FieldDescribe("조회 날짜, 형식 yyyy-MM-dd")
         private String date;
 
         public String getDate() {
@@ -90,10 +90,10 @@ public class ActionListCheckInRecordWithDate extends BaseAction {
 
         private static final long serialVersionUID = 2764109224722244861L;
 
-        @FieldDescribe("打卡记录")
+        @FieldDescribe("체크 기록")
         private List<Wo> recordList;
 
-        @FieldDescribe("考勤详细数据")
+        @FieldDescribe("근태 상세 데이터")
         private AttendanceV2Detail detail;
 
         public List<Wo> getRecordList() {
@@ -121,11 +121,11 @@ public class ActionListCheckInRecordWithDate extends BaseAction {
         static WrapCopier<AttendanceV2CheckInRecord, Wo> copier = WrapCopierFactory.wo(AttendanceV2CheckInRecord.class,
                 Wo.class, null, JpaObject.FieldsInvisible);
 
-        @FieldDescribe("外出记录")
+        @FieldDescribe("외출 기록")
         private AttendanceV2LeaveData leaveData;
-        @FieldDescribe("请假记录")
+        @FieldDescribe("휴가 기록")
         private AttendanceV2LeaveRequest leaveRequest;
-        @FieldDescribe("申诉记录")
+        @FieldDescribe("이의 신청 기록")
         private AttendanceV2AppealInfo appealData;
 
         public AttendanceV2LeaveData getLeaveData() {

@@ -28,19 +28,19 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("empowerlog")
-@JaxrsDescribe("授权日志操作")
+@JaxrsDescribe("위임 로그 작업")
 public class EmpowerLogAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmpowerLogAction.class);
 
-    @JaxrsMethodDescribe(value = "管理员列示授权日志对象,下一页.", action = ActionListNext.class)
+    @JaxrsMethodDescribe(value = "관리자 위임 로그 객체 목록, 다음 페이지.", action = ActionListNext.class)
     @GET
     @Path("list/{id}/next/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-            @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+            @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
         ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -52,14 +52,14 @@ public class EmpowerLogAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "管理员列示授权日志对象,上一页.", action = ActionListPrev.class)
+    @JaxrsMethodDescribe(value = "관리자 위임 로그 객체 목록, 이전 페이지.", action = ActionListPrev.class)
     @GET
     @Path("list/{id}/prev/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-            @JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+            @JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
         ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -71,14 +71,14 @@ public class EmpowerLogAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取当前人员的授权日志.", action = ActionListWithCurrentPersonPaging.class)
+    @JaxrsMethodDescribe(value = "현재 사용자의 위임 로그 조회.", action = ActionListWithCurrentPersonPaging.class)
     @POST
     @Path("list/currentperson/paging/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listWithCurrentPersonPaging(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListWithCurrentPersonPaging.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -90,14 +90,14 @@ public class EmpowerLogAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "获取当前人员的被授权日志.", action = ActionListToCurrentPersonPaging.class)
+    @JaxrsMethodDescribe(value = "현재 사용자의 위임받은 로그 조회.", action = ActionListToCurrentPersonPaging.class)
     @POST
     @Path("list/to/currentperson/paging/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listToCurrentPersonPaging(@Suspended final AsyncResponse asyncResponse,
-            @Context HttpServletRequest request, @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @Context HttpServletRequest request, @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListToCurrentPersonPaging.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -109,13 +109,13 @@ public class EmpowerLogAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
     }
 
-    @JaxrsMethodDescribe(value = "删除授权日志.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "위임 로그 삭제.", action = ActionDelete.class)
     @DELETE
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -127,13 +127,13 @@ public class EmpowerLogAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
     
-    @JaxrsMethodDescribe(value = "删除授权日志 MockDeleteToGet", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "위임 로그 삭제 MockDeleteToGet", action = ActionDelete.class)
     @GET
     @Path("{id}/mockdeletetoget")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -145,14 +145,14 @@ public class EmpowerLogAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "管理员根据条件查询授权日志.", action = ActionManagerListPaging.class)
+    @JaxrsMethodDescribe(value = "관리자가 조건으로 위임 로그 조회.", action = ActionManagerListPaging.class)
     @POST
     @Path("manager/list/paging/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void managerlistPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionManagerListPaging.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

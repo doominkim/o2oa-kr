@@ -71,12 +71,12 @@ class ActionHtmlToWord extends BaseAction {
 
 		private static final long serialVersionUID = -5654491825938383970L;
 
-		@FieldDescribe("转换文件名.")
-		@Schema(description = "转换文件名.")
+		@FieldDescribe("변환 파일명.")
+		@Schema(description = "변환 파일명.")
 		private String fileName;
 
-		@FieldDescribe("内容.")
-		@Schema(description = "内容.")
+		@FieldDescribe("내용.")
+		@Schema(description = "내용.")
 		private String content;
 
 		public String getFileName() {

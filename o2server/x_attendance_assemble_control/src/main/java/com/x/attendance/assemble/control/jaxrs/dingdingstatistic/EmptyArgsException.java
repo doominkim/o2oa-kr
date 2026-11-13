@@ -8,6 +8,6 @@ import com.x.base.core.project.exception.PromptException;
  */
 public class EmptyArgsException extends PromptException {
     public EmptyArgsException() {
-        super("传入参数不能为空！");
+        super("전달된 매개변수는 비워 둘 수 없습니다!");
     }
 }

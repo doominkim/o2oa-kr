@@ -25,7 +25,7 @@ public class ActionListWithWorkPlaceObject extends BaseAction {
 	protected ActionResult<List<Wo>> execute(JsonElement jsonElement) throws Exception {
 		Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
 		if (wi.getIdList() == null || wi.getIdList().isEmpty()) {
-			throw new ExceptionEmptyParameter("工作地点id");
+			throw new ExceptionEmptyParameter("근무 장소 id");
 		}
 		ActionResult<List<Wo>> result = new ActionResult<>();
 		List<Wo> wos = new ArrayList<>();
@@ -36,7 +36,7 @@ public class ActionListWithWorkPlaceObject extends BaseAction {
 					wos.add(Wo.copier.copy(workPlace));
 				}
 			}
-			// 用 createTime 降序排序
+			// createTime 내림차순 정렬
 			wos.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
 		}
 		result.setData(wos);
@@ -54,7 +54,7 @@ public class ActionListWithWorkPlaceObject extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = 3497915092528751450L;
-		@FieldDescribe("工作地点id")
+		@FieldDescribe("근무 장소 id")
 		private List<String> idList = new ArrayList<>();
 
 

@@ -1,14 +1,14 @@
 this.include({'type':'service', name:'o2ExcelUtilsV2'});
 this.include({'type':'service', name:'o2PathDataUtils'});
 MWF.xDesktop.requireApp("query.Query", "Importer", null, false);
-/** @classdesc Importer 数据中心的导入模型。
+/** @classdesc Importer 데이터 센터의 가져오기 모델.
  * @class
- * @o2cn 导入模型
+ * @o2cn 가져오기 모델
  * @o2category QueryImporter
  * @o2range {QueryImporter}
  * @hideconstructor
  * @example
- * //在导入模型的事件中获取该类
+ * //가져오기 모델 이벤트에서 이 클래스 조회
  * var view = this.target;
  * */
 MWF.QMultiImporter = new Class(
@@ -19,44 +19,44 @@ MWF.QMultiImporter = new Class(
             "style": "default"
         },
         initialize: function(container, json, options, app, parentMacro){
-            //json格式
-            // var json = {  //使用哪些导入模型
-            //         name: '合同信息', //下载的文件
-            //         importers: [{ //使用哪些导入模型
-            //             application: app, //导入模型所在应用
-            //             name: '项目基本信息', //导入模型名称
-            //             dataType: 'master', //第一主文档，多个master按顺序，第一个为第一主文档
-            //             matchKeys: ['subject'] //和数据库中匹配的字段，判断导入的文档是否已经存在，进一步执行修改还是新增操作。
+            //json 형식
+            // var json = {  //사용할 가져오기 모델
+            //         name: '계약 정보', //다운로드 파일
+            //         importers: [{ //사용할 가져오기 모델
+            //             application: app, //가져오기 모델이 속한 앱
+            //             name: '프로젝트 기본 정보', //가져오기 모델 이름
+            //             dataType: 'master', //첫 번째 주 문서. master가 여러 개면 순서대로, 첫 번째가 첫 번째 주 문서
+            //             matchKeys: ['subject'] //DB와 일치시킬 필드. 가져온 문서의 존재 여부를 판단해 수정 또는 신규 작업 수행.
             //         },
             //         {
-            //             application: app, //导入模型所在应用
-            //             name: '外包信息', //导入模型名称
-            //             dataType: 'master', //第二主文档
-            //             matchMasterKeys: [{ //和主文档的关联字段
-            //                 master: 'subject', //第一主文档的字段
-            //                 slave: 'subject', //本表的字段
-            //             }], //和主文档关联的字段名称
+            //             application: app, //가져오기 모델이 속한 앱
+            //             name: '외주 정보', //가져오기 모델 이름
+            //             dataType: 'master', //두 번째 주 문서
+            //             matchMasterKeys: [{ //주 문서와의 연결 필드
+            //                 master: 'subject', //첫 번째 주 문서의 필드
+            //                 slave: 'subject', //이 테이블의 필드
+            //             }], //주 문서와 연결된 필드명
             //         },
             //          {
             //             application: app,
-            //             name: '单一地区',
-            //             dataType: 'slave', //下层数据
-            //             keepOldDataKeys: ['textfield_9_0'], //dataType为slave时有效。如果有这个配置，则保留原有数据，否则置空。根据这个字段匹配导入的数据，匹配到的修改，否则新增。如果没有这个字段，则完全覆盖。
-            //             path: 'datatemplate_9_0', //数据路径，数据表格:id.data，数据模板写id
-            //             matchMasterKeys: [{ //和主文档的关联字段
-            //                 master: 'subject', //主文档的字段
-            //                 slave: 'subject', //本表的字段
-            //             }], //和主文档关联的字段名称
+            //             name: '단일 지역',
+            //             dataType: 'slave', //하위 데이터
+            //             keepOldDataKeys: ['textfield_9_0'], //dataType이 slave일 때 유효. 설정 시 기존 데이터 유지, 아니면 비움. 이 필드로 가져온 데이터를 매칭해 일치하면 수정, 아니면 신규. 이 필드가 없으면 전체 덮어쓰기.
+            //             path: 'datatemplate_9_0', //데이터 경로. 데이터 표: id.data, 데이터 템플릿: id
+            //             matchMasterKeys: [{ //주 문서와의 연결 필드
+            //                 master: 'subject', //주 문서의 필드
+            //                 slave: 'subject', //이 테이블의 필드
+            //             }], //주 문서와 연결된 필드명
             //         }, {
             //             application: app,
-            //             name: '付款信息',
-            //             dataType: 'slave', //下层数据
-            //             clearWithEmpty: false, //修改的时候，在主文档中有数据，是否要清空本表对应的字段
-            //             path: 'datatable_9.data', //数据路径，数据表格:id.data，数据模板写id
-            //             matchMasterKeys: [{ //和主文档的关联字段
-            //                 master: 'subject', //主文档的字段
-            //                 slave: 'subject', //本表的字段
-            //             }], //和主文档关联的字段名称
+            //             name: '지급 정보',
+            //             dataType: 'slave', //하위 데이터
+            //             clearWithEmpty: false, //수정 시 주 문서에 데이터가 있으면 이 테이블의 해당 필드를 비울지 여부
+            //             path: 'datatable_9.data', //데이터 경로. 데이터 표: id.data, 데이터 템플릿: id
+            //             matchMasterKeys: [{ //주 문서와의 연결 필드
+            //                 master: 'subject', //주 문서의 필드
+            //                 slave: 'subject', //이 테이블의 필드
+            //             }], //주 문서와 연결된 필드명
             //         }]
             //     };
 
@@ -165,7 +165,7 @@ MWF.QMultiImporter = new Class(
             return this.mainImporter;
         },
         getTargetType: function(){
-            //导入的类型，cms还是process
+            //가져오기 유형, cms 또는 process
             return this.getMainImporter().json.type;
         },
         getTarget: function(){
@@ -191,13 +191,13 @@ MWF.QMultiImporter = new Class(
         copyView: function(){
             // {
             //     "type": "cms",
-            //     "viewName": "合同档案",
+            //     "viewName": "계약 문서",
             //     "categoryList": [{
-            //         "name": "合同档案",
+            //         "name": "계약 문서",
             //         "id": "f4bc07cb-fefd-4eb0-9a1e-d7795f8d9816"
             //     }],
             //     "processList": [{
-            //         "name": "指标流程",
+            //         "name": "지표 프로세스",
             //         "alias": "",
             //         "id": "205d2d6d-8ed7-49e2-b788-1f35446a59da"
             //     }],
@@ -251,7 +251,7 @@ MWF.QMultiImporter = new Class(
         importFromExcel: function(){
             // var masters = this.json.importers.filter((importer)=>{return importer.dataType === 'master';});
             // if(masters.length > 1){
-            //     this.notice('导入失败，有两个以上导入模型同时为主数据模型，请联系管理员！', 'error');
+            //     this.notice('가져오기에 실패했습니다. 두 개 이상의 가져오기 모델이 동시에 주 데이터 모델로 설정되어 있습니다. 관리자에게 문의하십시오!', 'error');
             //     return;
             // }
 
@@ -417,7 +417,7 @@ MWF.QMultiImporter = new Class(
                             "statementName" : "o2ExcelMultipleImportDataLog",
                             "filter": [
                                 {
-                                    "path":"o.mainLogId", //查询语句格式为jpql使用o.title，为原生sql中使用xtitle
+                                    "path":"o.mainLogId", //쿼리 구문 형식은 jpql에서 o.title, 네이티브 sql에서 xtitle 사용
                                     "comparison":"equals",
                                     "value": this.log.id,
                                     "formatType":"textValue"
@@ -457,7 +457,7 @@ MWF.QMultiImporter = new Class(
                 }
             });
 
-            //处理主数据
+            //주 데이터 처리
             if(mainResult){
                 var r = mainResult.importer;
                 var masterData = r.getData();
@@ -494,7 +494,7 @@ MWF.QMultiImporter = new Class(
                 mainResult.masterData = masterData;
             }
 
-            //处理没有主数据的从数据
+            //주 데이터 없는 하위 데이터 처리
             resultList.forEach((result)=>{
                 if( result === mainResult ){
                     return;
@@ -605,7 +605,7 @@ MWF.QMultiImporter = new Class(
                     };
                 });
                 return o2.api.view.lookup(viewJson).then((data)=>{
-                    //data 为返回的数据。
+                    //data는 반환된 데이터입니다.
                     var map = {};
                     data.grid.forEach((row)=>{
                         var mapKey = matchKeys.map(key=>{
@@ -665,15 +665,15 @@ MWF.QMultiImporter = new Class(
             })
 
             // if(this.progressDialog)this.progressDialog.close();
-            //创建数据
-            //再次校验数据（计算的内容）
+            //데이터 생성
+            //데이터 재검증(계산된 내용)
             var date = new Date();
 
             this.parseData(resultList);
 
             this.parseOperation(resultList);
 
-            //总导入主文档数
+            //가져온 주 문서 총수
             this.totalCount = 0;
             resultList.forEach( (result)=>{
                 if( result.masterData ) {
@@ -700,7 +700,7 @@ MWF.QMultiImporter = new Class(
                     });
                 }
             }
-            //保存主数据
+            //주 데이터 저장
             resultList.forEach( (result)=>{
                 var p = this.matchDoc(result);
                 Promise.resolve(p).then(()=>{
@@ -742,7 +742,7 @@ MWF.QMultiImporter = new Class(
         },
         getErrorText: function (xhr) {
             var responseJSON = JSON.parse( (err.xhr || err).responseText || '' );
-            return responseJSON.message; //message为错误提示文本
+            return responseJSON.message; //message는 오류 안내 텍스트
         },
         getKeepOldDataConfigs: function(data){
             if(this.keepOldDataConfig)return this.keepOldDataConfig;
@@ -802,7 +802,7 @@ MWF.QMultiImporter = new Class(
             if( !operationPaths || !operationPaths.length ){
                 return [];
             }
-            //处理从数据中带操作的 $operation 包含覆盖/新增
+            //하위 데이터 중 $operation이 있는 항목 처리(덮어쓰기/신규 포함)
             var d = data.docData || data.data || data.srcData || data;
             return operationPaths.map( (operationPath)=>{
                 var pathData = this.getDataWithPath(d, operationPath) || [];
@@ -1134,7 +1134,7 @@ MWF.QMultiImporter = new Class(
             title = titleA.join(".");
             return title;
         },
-        //api 使用 开始
+        //api 사용 시작
 
         confirm: function (type, e, title, text, width, height, ok, cancel, callback, mask, style) {
             this.app.confirm(type, e, title, text, width, height, ok, cancel, callback, mask, style)
@@ -1145,7 +1145,7 @@ MWF.QMultiImporter = new Class(
         notice: function (content, type, target, where, offset, option) {
             this.app.notice(content, type, target, where, offset, option)
         }
-        //api 使用 结束
+        //api 사용 끝
     });
 
 MWF.QMultiImporter.Importer = new Class({
@@ -1343,7 +1343,7 @@ MWF.QMultiImporter.Importer = new Class({
 
         if(callback)callback();
     },
-    //**适配老版本，新版本中已修改 start
+    //**구버전 호환, 신버전에서 수정됨 start
     loadMacro: function (callback) {
         return new Promise((resolve) => {
             MWF.require("MWF.xScript.Macro", function () {
@@ -1410,7 +1410,7 @@ MWF.QMultiImporter.Importer = new Class({
                     this.json.data.columnList.each( function (columnJson, i) {
                         var d = lineData[ i ];
                         var text = typeOf(d) === "string" ? ( d || '' ).replace(/&#10;/g,"<br/>") : d;
-                        htmlArray.push( "<td style='"+contentStyle+"'>"+ o2.txt(text) +"</td>" ); //换行符&#10;
+                        htmlArray.push( "<td style='"+contentStyle+"'>"+ o2.txt(text) +"</td>" ); //줄바꿈 문자&#10;
                     });
                     htmlArray.push( "<td style='"+validContentStyles+"'>"+( row.errorTextList ? row.errorTextList.join("<br/>") : "" )+"</td>" );
                     htmlArray.push( "</tr>" );
@@ -1447,7 +1447,7 @@ MWF.QMultiImporter.Importer = new Class({
             return obj;
         }.bind(this));
     }
-    //**适配老版本，新版本中已修改 end
+    //**구버전 호환, 신버전에서 수정됨 end
 });
 
 
@@ -1565,7 +1565,7 @@ MWF.QMultiImporter.Row = new Class({
 
         return true;
     },
-    //适配老版本，新版本中已修改 start
+    //구버전 호환, 신버전에서 수정됨 start
     checkValid : function(){
 
         var lp = this.lp;
@@ -1824,7 +1824,7 @@ MWF.QMultiImporter.Row = new Class({
         }
         return "";
     }
-    //适配老版本，新版本中已修改 end
+    //구버전 호환, 신버전에서 수정됨 end
 });
 
 //MWF.xDesktop.requireApp("Template", "utils.ExcelUtilsV2", null, false);
@@ -1946,11 +1946,11 @@ MWF.QMultiImporter.ProgressBar = new Class({
         if( !this.currentDate )this.currentDate = new Date();
 
         var executeCount = log.successCount + log.failureCount;
-        if( log.totalCount > executeCount ){ //导入中
+        if( log.totalCount > executeCount ){ //가져오기 중
             //this.setMessageTitle( this.lp.importDataTitle );
             this.setMessageText( this.lp.importDataContent.replace( "{count}", log.totalCount ) );
             this.updateProgress( log );
-        }else{ //已经结束, 状态有 "导入成功","部分成功","导入失败"
+        }else{ //종료됨, 상태: "가져오기 성공","부분 성공","가져오기 실패"
             this.transferComplete( log );
             if( callback )callback( log );
         }
@@ -2025,7 +2025,7 @@ MWF.QMultiImporter.ProgressBar = new Class({
             this.setMessageTitle( lp.importPartSuccessTitle );
             var text = lp.importPartSuccessContent.replace("{total}",size).replace("{speed}",speed).replace("{errorCount}",log.failureCount).replace("{timeStr}",timeStr);
             this.setMessageText( text );
-        }else{ //导入失败
+        }else{ //가져오기 실패
             var size = log.totalCount;
             this.setMessageTitle( lp.importFailTitle );
             var text = lp.importFailContent.replace("{errorInfo}",log.distribution || "").replace("{total}",size).replace("{timeStr}",timeStr);

@@ -7,7 +7,7 @@ class ExceptionWorkOrWorkCompletedNotExist extends PromptException {
 	private static final long serialVersionUID = -7038279889683420366L;
 
 	ExceptionWorkOrWorkCompletedNotExist(String job) {
-		super("工作或者已完成工作不存在,job: {}.", job);
+		super("문서 또는 완료된 문서가 없습니다, job: {}.", job);
 	}
 
 }

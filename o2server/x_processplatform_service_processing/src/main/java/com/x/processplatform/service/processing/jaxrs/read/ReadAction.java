@@ -28,18 +28,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("read")
-@JaxrsDescribe("待阅操作")
+@JaxrsDescribe("열람 대기 작업")
 public class ReadAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReadAction.class);
 
-    @JaxrsMethodDescribe(value = "对工作添加待阅,选择是否重发通知", action = ActionCreateWithWork.class)
+    @JaxrsMethodDescribe(value = "업무 문서에 열람 대기 추가, 알림 재발송 여부 선택", action = ActionCreateWithWork.class)
     @POST
     @Path("work/{workId}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void createWithWork(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("工作标识") @PathParam("workId") String workId, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workId") String workId, JsonElement jsonElement) {
         ActionResult<List<ActionCreateWithWork.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -51,14 +51,14 @@ public class ReadAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据工作创建待阅.", action = ActionCreateWithWorkCompleted.class)
+    @JaxrsMethodDescribe(value = "업무 문서로 열람 대기 생성.", action = ActionCreateWithWorkCompleted.class)
     @POST
     @Path("workcompleted/{workCompletedId}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void createWithWorkCompleted(@Suspended final AsyncResponse asyncResponse,
             @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("工作标识") @PathParam("workCompletedId") String workCompletedId,
+            @JaxrsParameterDescribe("업무 문서 식별자") @PathParam("workCompletedId") String workCompletedId,
             JsonElement jsonElement) {
         ActionResult<List<ActionCreateWithWorkCompleted.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -71,13 +71,13 @@ public class ReadAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "处理待阅，生成已阅.", action = ActionProcessing.class)
+    @JaxrsMethodDescribe(value = "열람 대기 처리, 열람 완료 생성.", action = ActionProcessing.class)
     @PUT
     @Path("{id}/processing")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void processing(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("待阅标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("열람 대기 식별자") @PathParam("id") String id) {
         ActionResult<ActionProcessing.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -89,13 +89,13 @@ public class ReadAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "删除待阅.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "열람 대기 삭제.", action = ActionDelete.class)
     @DELETE
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("待阅标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("열람 대기 식별자") @PathParam("id") String id) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -107,13 +107,13 @@ public class ReadAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "重置处理人.", action = ActionReset.class)
+    @JaxrsMethodDescribe(value = "처리자 재설정.", action = ActionReset.class)
     @POST
     @Path("{id}/reset")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void reset(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
         ActionResult<ActionReset.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -125,13 +125,13 @@ public class ReadAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "待阅处理人替换.", action = ActionReplace.class)
+    @JaxrsMethodDescribe(value = "열람 대기 처리자 교체.", action = ActionReplace.class)
     @POST
     @Path("{id}/replace")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void replace(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                        @JaxrsParameterDescribe("待阅标识") @PathParam("id") String id, JsonElement jsonElement) {
+                        @JaxrsParameterDescribe("열람 대기 식별자") @PathParam("id") String id, JsonElement jsonElement) {
         ActionResult<ActionReplace.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

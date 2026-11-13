@@ -7,6 +7,6 @@ public class ExceptionSendMessageEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSendMessageEmpty() {
-		super("消息内容为空，无法进行发送消息.");
+		super("메시지 내용이 비어 있어 메시지를 보낼 수 없습니다.");
 	}
 }

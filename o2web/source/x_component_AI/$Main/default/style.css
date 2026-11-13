@@ -1227,7 +1227,7 @@
     height: 12rem;
     overflow: auto;
 }
-/* 媒体查询精准适配（可选但推荐）：针对小屏手机（768px以下）精细化调整 */
+/* 미디어 쿼리 정밀 대응(선택, 권장): 소형 휴대폰(768px 이하) 세부 조정 */
 @media (max-width: 768px) {
     .chat-hot-r{
         flex: 1;
@@ -1242,35 +1242,35 @@
 }
 
 
-/* 1. 默认状态：隐藏滚动条（宽度为0，无占用） */
+/* 1. 기본 상태: 스크롤바 숨김(너비 0, 공간 차지 없음) */
 .chat-hot-r::-webkit-scrollbar {
-    width: 0;        /* 垂直滚动条宽度设为0（隐藏） */
-    height: 0;       /* 水平滚动条高度设为0（隐藏），按需保留 */
-    transition: width 0.2s ease; /* 宽度过渡，显示/隐藏更顺滑 */
+    width: 0;        /* 세로 스크롤바 너비 0(숨김) */
+    height: 0;       /* 가로 스크롤바 높이 0(숨김), 필요 시 유지 */
+    transition: width 0.2s ease; /* 너비 전환, 표시/숨김을 더 부드럽게 */
 }
 
-/* 2. 鼠标悬停div时：显示滚动条+设置基础样式（细条+浅灰色） */
+/* 2. div에 마우스 올릴 때: 스크롤바 표시 + 기본 스타일(가는 막대 + 연회색) */
 .chat-hot-r:hover::-webkit-scrollbar {
-    width: 3px;      /* 滚动条宽度（细条，可调整：4-8px最佳） */
-    height: 3px;     /* 水平滚动条高度，按需调整 */
-    background-color: #f5f5f5; /* 滚动条轨道浅灰色（底色） */
-    border-radius: 3px; /* 轨道圆角，和宽度匹配更美观 */
+    width: 3px;      /* 스크롤바 너비(가는 막대, 조정 가능: 4-8px 권장) */
+    height: 3px;     /* 가로 스크롤바 높이, 필요 시 조정 */
+    background-color: #f5f5f5; /* 스크롤바 트랙 연회색(바탕색) */
+    border-radius: 3px; /* 트랙 둥근 모서리, 너비에 맞춰 더 보기 좋게 */
 }
 
-/* 3. 滚动条滑块（拖动的部分）：浅灰色+圆角+hover效果 */
+/* 3. 스크롤바 핸들(드래그 부분): 연회색 + 둥근 모서리 + hover 효과 */
 .chat-hot-r:hover::-webkit-scrollbar-thumb {
-    background-color: #dcdcdc; /* 滑块浅灰色（比轨道深一点，更醒目） */
-    border-radius: 3px;        /* 滑块圆角，和轨道一致 */
-    cursor: pointer;           /* 鼠标移上变手型，提升交互 */
+    background-color: #dcdcdc; /* 핸들 연회색(트랙보다 약간 진하게, 더 눈에 띄게) */
+    border-radius: 3px;        /* 핸들 둥근 모서리, 트랙과 동일 */
+    cursor: pointer;           /* 마우스 올리면 손 모양, 상호작용 개선 */
     transition: background-color 0.2s ease;
 }
 
-/* 滑块hover强化：颜色稍深，反馈更明显 */
+/* 핸들 hover 강화: 색을 약간 진하게, 피드백 강화 */
 .chat-hot-r:hover::-webkit-scrollbar-thumb:hover {
-    background-color: #c9c9c9; /* 浅灰色加深一点，不突兀 */
+    background-color: #c9c9c9; /* 연회색을 약간 진하게, 튀지 않게 */
 }
 
-/* 可选：滚动条角落（垂直+水平交汇区）样式，和轨道保持一致 */
+/* 선택: 스크롤바 모서리(세로+가로 교차 영역) 스타일, 트랙과 동일 */
 .chat-hot-r:hover::-webkit-scrollbar-corner {
     background-color: #f5f5f5;
     border-radius: 3px;
@@ -1479,20 +1479,20 @@
     height: 2.5rem;
 }
 
-/* 加载动画容器 */
+/* 로딩 애니메이션 컨테이너 */
 .loading-container {
     text-align: center;
 }
-/* 自定义spinner样式 */
+/* 사용자 정의 spinner 스타일 */
 .spinner {
     width: 20px;
     height: 20px;
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-top: 4px solid #007bff; /* 主颜色 */
+    border-top: 4px solid #007bff; /* 주 색상 */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
-/* 旋转动画 */
+/* 회전 애니메이션 */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -1544,7 +1544,7 @@
     width: 100%;
 }
 
-/* 当屏幕宽度小于或等于 768px 时，调整宽度为 80% */
+/* 화면 너비가 768px 이하일 때 너비를 80%로 조정 */
 @media (max-width: 768px) {
     .chat-att-item {
         width: 80%;
@@ -1663,11 +1663,11 @@
     color: #2c2c36;
     text-overflow: ellipsis;
     overflow: hidden;
-    display: -webkit-box;      /* 弹性盒模型 */
-    -webkit-box-orient: vertical; /* 子元素垂直排列 */
-    -webkit-line-clamp: 3;     /* 限制显示2行，可改3/4等 */
-    width: 100%;               /* 仍需设置宽度/最大宽度 */
-    /* 可选：行高配合，让多行布局更美观 */
+    display: -webkit-box;      /* 플렉스 박스 모델 */
+    -webkit-box-orient: vertical; /* 하위 요소 세로 배치 */
+    -webkit-line-clamp: 3;     /* 2줄로 표시 제한, 3/4 등으로 변경 가능 */
+    width: 100%;               /* 너비/최대 너비 설정 필요 */
+    /* 선택: 줄 높이를 맞춰 여러 줄 배치를 더 보기 좋게 */
     line-height: 1.5;
 }
 
@@ -1853,7 +1853,7 @@
     text-align: center;
     margin-right: 16em;
 }
-/*移动端*/
+/*모바일*/
 .m-layout {
     display: flex;
     flex-direction: column;
@@ -1880,9 +1880,9 @@
     flex: 1;
     display: flex;
     align-items: center;
-    white-space: nowrap;    /* 强制文本单行显示，不换行 */
-    overflow: hidden;       /* 隐藏超出容器的文本 */
-    text-overflow: ellipsis;/* 溢出部分显示省略号 */
+    white-space: nowrap;    /* 텍스트를 한 줄로 강제 표시, 줄바꿈 없음 */
+    overflow: hidden;       /* 컨테이너를 넘는 텍스트 숨김 */
+    text-overflow: ellipsis;/* 넘친 부분은 말줄임표로 표시 */
     padding: 0 0.5rem;
 }
 
@@ -1938,4 +1938,4 @@
     font-size: 1rem;
 }
 
-/*mcp样式**/
+/*mcp 스타일**/

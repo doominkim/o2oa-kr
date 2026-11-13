@@ -33,7 +33,7 @@ class ActionListPagingWithGroup extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(ActionListPagingWithGroup.class);
 	//SingularAttribute<JpaObject, Date> defaultOrder = PersonCard_.createTime; 
 
-	// 线索分页查询，具备多个字段的like查询(无权限控制)
+	// 단서 페이지 조회, 여러 필드 like 검색 지원(권한 제어 없음)
 	ActionResult<List<Wo>> Execute_Paging_groupType(EffectivePerson effectivePerson, Integer adjustPage, Integer adjustPageSize, JsonElement jsonElement)
 			throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
@@ -112,10 +112,10 @@ class ActionListPagingWithGroup extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe("匹配关键字")
+		@FieldDescribe("매칭 키워드")
 		private String key;
 		
-		@FieldDescribe("分组名称")
+		@FieldDescribe("분류 이름")
 		private String groupType;
 
 		public String getKey() {

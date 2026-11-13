@@ -7,6 +7,6 @@ class PortalInsufficientPermissionException extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	PortalInsufficientPermissionException(String person, String name, String id) {
-		super("用户: {} 没有足够的权限操作站点: {}, id:{}.", person, name, id);
+		super("사용자: {}에게 포털: {}, id: {}을(를) 다룰 권한이 부족합니다.", person, name, id);
 	}
 }

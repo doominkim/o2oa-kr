@@ -84,7 +84,7 @@ public class InitServerTools extends JettySeverTools {
 
 		InetAddress addr = InetAddress.getLocalHost();
 
-		LOGGER.print("请通过{}服务访问{}端口来初始化服务器密码,本机地址:{}, 访问地址:{}.",
+		LOGGER.print("{} 서비스로 {} 포트에 접속하여 서버 비밀번호를 초기화하십시오. 로컬 주소: {}, 접속 주소: {}.",
 				BooleanUtils.isTrue(applicationServer.getSslEnable()) ? "https" : "http", applicationServer.getPort(),
 				InetAddress.getLocalHost(), url(applicationServer, addr.getHostAddress()));
 		return server;
@@ -92,7 +92,7 @@ public class InitServerTools extends JettySeverTools {
 	}
 
 	/**
-	 * 计算可能的访问地址
+	 * 가능한 접속 주소 계산
 	 * 
 	 * @param applicationServer
 	 * @param host
@@ -142,7 +142,7 @@ public class InitServerTools extends JettySeverTools {
 
 	private static void cleanWorkDirectory() throws IOException, URISyntaxException {
 		try (Stream<Path> paths = Files.walk(Config.path_servers_initServer_work(true))) {
-			// 删除每个文件和子目录
+			// 각 파일과 하위 디렉터리 삭제
 			paths.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
 		}
 	}
@@ -182,9 +182,9 @@ public class InitServerTools extends JettySeverTools {
 		@Override
 		public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response)
 				throws IOException, ServletException {
-			// 设置Cache-Control头部字段
+			// Cache-Control 헤더 필드 설정
 			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-			// <code> baseRequest.setHandled(true)</code>;标记请求已经被处理
+			// <code> baseRequest.setHandled(true)</code>; 요청 처리 완료 표시
 		}
 
 	}

@@ -20,30 +20,30 @@ export default content({
       fTitle: lp.groupAdd,
       form: {
         groupName: "",
-        checkType: "1", // 1 固定班制 2 自由打卡 3 排班制
+        checkType: "1", // 1 고정 근무제 2 자율 출퇴근 3 교대 근무제
         participateList: [],
-        assistAdminList: [], // 协助管理员
+        assistAdminList: [], // 보조 관리자
         unParticipateList: [],
         workPlaceIdList: [],
-        allowFieldWork: false,  // 是否允许外勤打卡.
-        requiredFieldWorkRemarks: false, // 外勤打卡备注是否必填.
-        requiredFieldWorkPhoto: false, // 外勤打卡是否需要照片.
-        fieldWorkMarkError: false, // 外勤打卡是否作为异常数据处理.
-        requiredCheckInDateList: [], // 必须打卡的日期，如 2023-01-01.
-        noNeedCheckInDateList: [], // 无需打卡的日期，如 2023-01-01.
+        allowFieldWork: false,  // 외근 체크 허용 여부.
+        requiredFieldWorkRemarks: false, // 외근 체크 비고 필수 여부.
+        requiredFieldWorkPhoto: false, // 외근 출퇴근 체크 시 사진 필요 여부.
+        fieldWorkMarkError: false, // 외근 체크를 비정상 데이터로 처리할지 여부.
+        requiredCheckInDateList: [], // 필수 출퇴근 체크 날짜, 예: 2023-01-01.
+        noNeedCheckInDateList: [], // 출퇴근 체크 불필요 날짜, 예: 2023-01-01.
       },
-      // 班次选择器使用
+      // 교대조 선택기 사용
       shiftSelectorOpen: false,
       shiftSelector: {
-        key: "all", // 当前给那个地方选择班次
+        key: "all", // 현재 교대조를 선택할 위치
         shiftSelected: {},
       },
-      // 工作场所选择器使用
+      // 근무지 선택기 사용
       workPlaceSelectorOpen: false,
       workPlaceSelector: {
         workAddressSelected: []
       },
-      // 固定班制 选择班次和打卡日子
+      // 고정 근무제: 교대조와 출퇴근 체크 요일 선택
       workDay: {
         monday: {
           checked: true,
@@ -81,8 +81,8 @@ export default content({
           shiftSelected: {},
         },
       },
-      // 自由工时 选择打卡日子
-      workDateList: [], // 选中的days
+      // 자율 근무제: 출퇴근 체크 요일 선택
+      workDateList: [], // 선택된 days
       days: [
         {
           name: lp.day.Monday,
@@ -119,18 +119,18 @@ export default content({
         {name: lp.dateCycle.twoWeek, value: "twoWeek"}, 
         {name: lp.dateCycle.month, value: "month"}, 
       ],
-      requiredCheckInDateForTableList: [], // 必须打卡的日期, 里面存对象 date, shift, cycle
-      noNeedCheckInDateForTableList: [], // 无需打卡的日期，如, 里面存对象 date, cycle
+      requiredCheckInDateForTableList: [], // 필수 출퇴근 체크 날짜, 객체 date, shift, cycle 저장
+      noNeedCheckInDateForTableList: [], // 출퇴근 체크 불필요 날짜, 예: 객체 date, cycle 저장
     };
   },
-  // 先查询数据
+  // 먼저 데이터 조회
   async beforeRender() {
     if (this.bind.updateId) {
       const group = await groupAction("get", this.bind.updateId);
       if (group) {
         this.bind.form = group;
         if (group.workDateProperties) {
-          // 处理成前端使用的对象 
+          // 프론트엔드용 객체로 처리 
           const dayList = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
           for (let key of dayList) {
             if (group.workDateProperties[key]) {
@@ -152,23 +152,23 @@ export default content({
   },
   // 
   afterRender() {
-    if (this.bind.form && this.bind.form.id && this.bind.form.id !== "") { // 修改
+    if (this.bind.form && this.bind.form.id && this.bind.form.id !== "") { // 수정
       this.bind.fTitle = lp.groupUpdate;
-      // 回查工作场所对象
+      // 근무지 객체 역조회
       if (this.bind.form.workPlaceIdList && this.bind.form.workPlaceIdList.length > 0) {
         this.loadWorkPlaceObjectsByIds(this.bind.form.workPlaceIdList);
       }
-      // 日期列表分拆
+      // 날짜 목록 분리
       if (this.bind.form.workDateList) {
         const dateList = this.bind.form.workDateList.split(",");
         this.bind.workDateList= dateList || [];
       }
-      // 必须打卡日期前端数据转化
+      // 필수 출퇴근 체크 날짜 프론트엔드 데이터 변환
       this.dealRequiredCheckInDate();
-      // 无需打卡日期的前端数据转化
+      // 출퇴근 체크 불필요 날짜 프론트엔드 데이터 변환
       this.dealNoNeedCheckInDate();
     }
-    // 时间选择器
+    // 시간 선택기
     this.loadRequiredDateSelector();
     this.loadNoNeedDateSelector();
   },
@@ -207,7 +207,7 @@ export default content({
       };
     });
   },
-  // 选择工作日
+  // 근무일 선택
   changeWorkDayChecked(key) {
     if (key && this.bind.workDay[key]) {
       this.bind.workDay[key].checked = !this.bind.workDay[key].checked;
@@ -216,22 +216,22 @@ export default content({
       }
     }
   },
-  // 打开班次选择器 批量设置 已经选择的
+  // 교대조 선택기 열기, 이미 선택된 항목 일괄 설정
   openShiftSelect(key) {
     this.bind.shiftSelector.key = key || "all";
     this.bind.shiftSelectorOpen = true;
   },
-  // 班次选择器调用 返回选中的班次对象
+  // 교대조 선택기 호출, 선택된 교대조 객체 반환
   setShiftData(shift) {
     if (!shift) {
       return;
     }
-    // 新对象 清除绑定信息
+    // 새 객체, 바인딩 정보 초기화
     const newShift =  {
       id: shift.id,
       shiftName: shift.shiftName,
     };
-    // requiredCheckIn- 开头的key 表示在必需打卡日期的配置
+    // requiredCheckIn- 로 시작하는 key는 필수 출퇴근 체크 날짜 설정을 의미
     if (this.bind.shiftSelector.key.startsWith('requiredCheckIn-')) {
       const date = this.bind.shiftSelector.key.substring('requiredCheckIn-'.length);
       for (let index = 0; index < this.bind.requiredCheckInDateForTableList.length; index++) {
@@ -243,7 +243,7 @@ export default content({
       }
     } else if (this.bind.shiftSelector.key  === "all") {
       this.bind.shiftSelector.shiftSelected = newShift;
-      // 其它班次
+      // 기타 교대조
       for (let prop in this.bind.workDay) {
         if (this.bind.workDay[prop] && this.bind.workDay[prop].checked) {
           this.bind.workDay[prop].shiftSelected = newShift;
@@ -255,11 +255,11 @@ export default content({
       }
     }
   },
-  // 关闭班次选择器
+  // 교대조 선택기 닫기
   closeShiftSelect() {
     this.bind.shiftSelectorOpen = false;
   },
-  // 点击days的checkbox
+  // days의 checkbox 클릭
   selectDay(value) {
     if (value.value) {
       const index = this.bind.workDateList.indexOf(value.value);
@@ -275,19 +275,19 @@ export default content({
     this.bind.workPlaceSelector.workAddressSelected = list || [];
     
   },
-  // 切换考勤类型
+  // 근태 유형 전환
   clickChangeType(type) {
     this.bind.form.checkType = type;
   },
-  // 打开工作场所选择器
+  // 근무지 선택기 열기
   async openWorkPlaceSelector() {
     this.bind.workPlaceSelectorOpen = true;
   },
-  // 关闭工作场所选择器
+  // 근무지 선택기 닫기
   closeSelectWorkPlace() {
     this.bind.workPlaceSelectorOpen = false;
   },
-  // 工作场所
+  // 근무지
   deleteWorkPlace(value) {
     let i = -1;
     for (let index = 0; index < this.bind.workPlaceSelector.workAddressSelected.length; index++) {
@@ -301,22 +301,22 @@ export default content({
       this.bind.workPlaceSelector.workAddressSelected.splice(i, 1);
     }
   },
-  // 是否允许外勤
+  // 외근 허용 여부
   clickAllowFieldWork() {
     this.bind.form.allowFieldWork = !this.bind.form.allowFieldWork;
   },
-  // 外勤是否必填说明
+  // 외근 설명 필수 여부
   clickRequiredFieldWorkRemarks() {
     this.bind.form.requiredFieldWorkRemarks = !this.bind.form.requiredFieldWorkRemarks;
   },
   clickRequiredFieldWorkPhoto() {
     this.bind.form.requiredFieldWorkPhoto = !this.bind.form.requiredFieldWorkPhoto;
   },
-  // 外勤是否作为异常数据处理
+  // 외근을 이상 데이터로 처리할지 여부
   clickFieldWorkMarkError() {
     this.bind.form.fieldWorkMarkError = !this.bind.form.fieldWorkMarkError;
   },
-  // 必须打卡日期
+  // 필수 출퇴근 체크 날짜
   loadRequiredDateSelector() {
     MWF.require("MWF.widget.Calendar", function(){
       var defaultView = "day";
@@ -359,7 +359,7 @@ export default content({
       new MWF.widget.Calendar(bindDom, options);
     }.bind(this));
   },
-  // 必须打卡日期删除
+  // 필수 출퇴근 체크 날짜 삭제
   deleteRequiredDate(date) {
     let i = -1;
     for (let index = 0; index < this.bind.requiredCheckInDateForTableList.length; index++) {
@@ -393,7 +393,7 @@ export default content({
     }
     this.dom.querySelector("#o2-selector-"+date).hide();
   },
-  // 必须打卡的日期 修改周期
+  // 필수 출퇴근 체크 날짜 주기 수정
   chooseDateCycleItem2(e) {
     const id = e.target.id;
     const value = e.target.value;
@@ -450,7 +450,7 @@ export default content({
       new MWF.widget.Calendar(bindDom, options);
     }.bind(this));
   },
-   // 无需打卡日期 修改周期
+   // 출퇴근 체크 불필요 날짜 주기 수정
    noNeedDateChangeCycle(e) {
     const id = e.target.id;
     const value = e.target.value;
@@ -464,7 +464,7 @@ export default content({
       }
     }
   },
-  // 无需打卡日期删除
+  // 출퇴근 체크 불필요 날짜 삭제
   deleteNoNeedDateSelector(value) {
     let i = -1;
     for (let index = 0; index <  this.bind.noNeedCheckInDateForTableList.length; index++) {
@@ -478,7 +478,7 @@ export default content({
       this.bind.noNeedCheckInDateForTableList.splice(i, 1);
     }
   },
-  // 开始排班前 先保存数据
+  // 교대 편성 전 먼저 데이터 저장
   startSchedule() {
     this.submit((result)=>{
       console.log(result);
@@ -486,14 +486,14 @@ export default content({
     })
     
   },
-  // 打开排班窗口
+  // 교대 편성 창 열기
   async openScheduleWindow(data) {
     const bind = data || {};
     console.log(bind);
     const c = (await import('../schedule/index.js')).default;
     this.scheduleVm = await c.generate("#scheduleFom", bind, this);
   },
-  // 关闭当前窗口
+  // 현재 창 닫기
   close() {
     this.$topParent.publishEvent('group', {});
     this.$parent.closeFormVm();
@@ -501,17 +501,17 @@ export default content({
   async submit(callback) {
     debugger;
     const myForm = this.bind.form;
-    // 考勤组名称
+    // 근태 그룹 이름
     if (isEmpty(myForm.groupName)) {
       o2.api.page.notice(lp.groupForm.titleErrorNotEmpty, 'error');
       return ;
     }
-    // 考勤人员
+    // 근태 사용자
     if (myForm.participateList.length < 1) {
       o2.api.page.notice(lp.groupForm.participatesErrorNotEmtpy, 'error');
       return ;
     }
-    // 根据考勤类型判断
+    // 근태 유형에 따라 판단
     if (myForm.checkType === "1") {
         let flag = false;
         let isBreak = false;
@@ -550,20 +550,20 @@ export default content({
         myForm.workDateProperties = workDateProperties;
         myForm.shiftId = baseShiftId;
     } else if (myForm.checkType === "2") {
-        // 工作日期 day
+        // 근무 날짜 day
         if (this.bind.workDateList.length < 1) {
           o2.api.page.notice(lp.groupForm.timeErrorNotEmpty, 'error');
           return ;
         }
         myForm.workDateList = this.bind.workDateList.join(",");
     } else if (myForm.checkType === "3"){
-      // 排班校验
+      // 교대 편성 검증
     } else {
       o2.api.page.notice(lp.groupForm.checkTypeError, 'error');
       return;
     }
     
-    // 工作地址
+    // 근무 주소
     // if ( this.bind.workPlaceSelector.workAddressSelected.length < 1) {
     //   o2.api.page.notice(lp.groupForm.workPlaceErrorNotEmpty, 'error');
     //   return ;
@@ -574,8 +574,8 @@ export default content({
       workPlaceIdList.push(element.id);
     }
     myForm.workPlaceIdList = workPlaceIdList;
-    // 必须打卡的日期
-    if (myForm.checkType === "1") { // 固定班制 一定要配置班次
+    // 필수 출퇴근 체크 날짜
+    if (myForm.checkType === "1") { // 고정 근무제는 반드시 교대조 설정 필요
       const rCheckInDateList = this.bind.requiredCheckInDateForTableList.map((d) => {
         const date = d.date;
         const shiftId = (d.shift && d.shift.id) ? d.shift.id : "";
@@ -591,7 +591,7 @@ export default content({
         return;
       }
       myForm.requiredCheckInDateList = rCheckInDateList;
-    } else if (myForm.checkType === "2") { // 自由工时 不需要班次
+    } else if (myForm.checkType === "2") { // 자율 근무제는 교대조 불필요
       const rCheckInDateList = this.bind.requiredCheckInDateForTableList.map((d) => {
         const date = d.date;
         const shiftId =  "";
@@ -601,7 +601,7 @@ export default content({
       myForm.requiredCheckInDateList = rCheckInDateList;
      }
 
-    // 无需打卡的日期
+    // 출퇴근 체크 불필요 날짜
     const noNeedCheckInDateList = this.bind.noNeedCheckInDateForTableList.map((d) => {
       const date = d.date;
       const cycle = (d.cycle && d.cycle.value) ?  d.cycle.value :  "";

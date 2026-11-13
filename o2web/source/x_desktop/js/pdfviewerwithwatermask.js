@@ -1889,7 +1889,7 @@ var webViewerOpenFileViaURL;
     }
 
     if (file) {
-      // 使用pdf-lib 添加水印
+      // pdf-lib로 워터마크 추가
       const watermaskPdf = await addWatermask(file);
       PDFViewerApplication.open(watermaskPdf);
     }
@@ -15575,56 +15575,56 @@ function o2GetCanvasTextWidth(text, font) {
   return metrics.width;
 }
 
-// 添加水印
+// 워터마크 추가
 async function addWatermask(url) {
   const existingPdfBytes = await fetch(url, {credentials:'include'}).then(res => res.arrayBuffer())
   // const fontBuffer = await fetch(fontUrl).then(res => res.arrayBuffer())
   // const fontUrl = '../o2_lib/pdfjs/pdf-lib/Alibaba-PuHuiTi-Medium.ttf'
-  // const allPromise = [fetch(url, {credentials:'include'}).then(res => res.arrayBuffer()), fetch(fontUrl).then(res => res.arrayBuffer())] // 下载pdf文件 // 下载阿里普惠体
+  // const allPromise = [fetch(url, {credentials:'include'}).then(res => res.arrayBuffer()), fetch(fontUrl).then(res => res.arrayBuffer())] // pdf 파일 다운로드 // 알리 푸후이체 다운로드
   // const [existingPdfBytes, fontBuffer] = await Promise.all(allPromise)
 
-  // pdf可操作对象
+  // pdf 조작 가능 객체
   const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes)
-  // 读取当前用户 生成水印文字 这里读取的是手机号码, 如果是中文需要添加字体才行，参考15596，15597行
+  // 현재 사용자를 읽어 워터마크 문자 생성. 여기서는 휴대폰 번호를 읽음. 한글이면 글꼴을 추가해야 하며 15596, 15597행 참고
   let mask = ""
   if (layout && layout.session && layout.session.user) {
     mask = layout.session.user.mobile || "O2OA"
   }
-  // 加载字体 官方的字体 均不支持中文水印 但可以注入中文字体
+  // 글꼴 로드 공식 글꼴은 모두 한글 워터마크를 지원하지 않지만 한글 글꼴을 주입할 수 있음
   const helveticaFont = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica)
-  // 注入字体
-  // pdfDoc.registerFontkit(fontkit) // 字体注册工具
-  // const aliPuHuiTiFont = await pdfDoc.embedFont(fontBuffer) // 注入字体
+  // 글꼴 주입
+  // pdfDoc.registerFontkit(fontkit) // 글꼴 등록 도구
+  // const aliPuHuiTiFont = await pdfDoc.embedFont(fontBuffer) // 글꼴 주입
   const maskWidth = o2GetCanvasTextWidth(mask, '30px Microsoft YaHei')
-  // 获取每一页
+  // 각 페이지 조회
   const pages = pdfDoc.getPages()
-  // 遍历每一页的数据给每一页都添加水印
+  // 각 페이지 데이터를 순회하며 모든 페이지에 워터마크 추가
   pages.forEach(item => {
-    // 获取每一页的宽高
+    // 각 페이지의 너비·높이 조회
     const { width, height } = item.getSize()
-    // 对角线
+    // 대각선
     const diagonal = Math.ceil(Math.sqrt(width*width + height*height))
     let index = 0;
     let fromX;
-    // 以对角线的长度来做高度，这样可以保证竖屏和横屏整个屏幕都能布满水印
+    // 대각선 길이를 높이로 사용해 세로·가로 화면 모두 워터마크로 가득 채움
     for (let positionY = diagonal / 5; positionY <= diagonal; positionY += diagonal / 5) {
-        fromX = -width + (index++ % 2) * maskWidth; // 上下两行的X轴起始点不一样，错开显示
+        fromX = -width + (index++ % 2) * maskWidth; // 위아래 두 줄의 X축 시작점을 다르게 해 엇갈리게 표시
         for (let positionX = fromX; positionX < width; positionX += maskWidth * 4) {
             item.drawText(mask, {
-              // 出现的 x 轴坐标
+              // 표시할 x축 좌표
               x: positionX,
-              // 出现的 y 轴坐标
+              // 표시할 y축 좌표
               y: positionY,
-              // 字体大小
+              // 글꼴 크기
               size: 30,
-              // 字体
+              // 글꼴
               // font: aliPuHuiTiFont,
               font: helveticaFont,
-              // 颜色
+              // 색상
               color: PDFLib.rgb(0, 0, 0),
-              // 倾斜角度
+              // 기울기 각도
               rotate: PDFLib.degrees(-45),
-              // 透明度
+              // 투명도
               opacity: 0.2
             })
         }
@@ -15632,8 +15632,8 @@ async function addWatermask(url) {
   })
  
   
-  // 已经处理好的数据
+  // 처리 완료된 데이터
   const pdfBuffer = await pdfDoc.save()
-  // 返回出去
+  // 반환
   return pdfBuffer
 }

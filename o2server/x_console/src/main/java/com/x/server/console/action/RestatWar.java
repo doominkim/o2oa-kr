@@ -20,7 +20,7 @@ public class RestatWar {
 
 	private static Logger logger = LoggerFactory.getLogger(RestatWar.class);
 
-	/* 初始化完成 */
+	/* 초기화 완료 */
 	public boolean execute(String simpleName) throws Exception {
 		if (Servers.applicationServerIsRunning()) {
 			try {

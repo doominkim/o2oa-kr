@@ -29,7 +29,7 @@ public class ActionListAll extends BaseAction {
 				attendanceSettingList = attendanceSettingServiceAdv.listAll();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceSettingProcess( e, "系统查询所有考勤系统设置信息列表时发生异常." );
+				Exception exception = new ExceptionAttendanceSettingProcess( e, "전체 근태 시스템 설정 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -39,7 +39,7 @@ public class ActionListAll extends BaseAction {
 				wraps = Wo.copier.copy( attendanceSettingList );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceSettingProcess( e, "将所有查询到的考勤配置信息对象转换为可以输出的信息时发生异常." );
+				Exception exception = new ExceptionAttendanceSettingProcess( e, "조회된 근태 설정 객체를 출력용 정보로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

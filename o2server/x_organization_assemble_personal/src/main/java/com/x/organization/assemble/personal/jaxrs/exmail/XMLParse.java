@@ -1,5 +1,5 @@
 /**
- * 对公众平台发送给公众账号的消息加解密示例代码.
+ * 공식 플랫폼이 공식 계정에 보내는 메시지 암복호화 예제 코드.
  *
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
@@ -22,12 +22,12 @@ import org.xml.sax.InputSource;
 /**
  * @author ray XMLParse class
  *
- *         提供提取消息格式中的密文及生成回复消息格式的接口.
+ *         메시지 형식에서 암호문 추출 및 회신 메시지 형식 생성 인터페이스 제공.
  */
 class XMLParse {
 
 	/**
-	 * 修改过的extract类,result[2]是不存在的.
+	 * 수정된 extract 클래스, result[2]는 존재하지 않음.
 	 */
 	public static Object[] extract(String xmltext) throws AesException {
 		Object[] result = new Object[2];
@@ -55,13 +55,13 @@ class XMLParse {
 	}
 
 	/**
-	 * 生成xml消息
+	 * xml 메시지 생성
 	 *
-	 * @param encrypt   加密后的消息密文
-	 * @param signature 安全签名
-	 * @param timestamp 时间戳
-	 * @param nonce     随机字符串
-	 * @return 生成的xml字符串
+	 * @param encrypt   암호화된 메시지 암호문
+	 * @param signature 보안 서명
+	 * @param timestamp 타임스탬프
+	 * @param nonce     랜덤 문자열
+	 * @return 생성된 xml 문자열
 	 */
 	public static String generate(String encrypt, String signature, String timestamp, String nonce) {
 

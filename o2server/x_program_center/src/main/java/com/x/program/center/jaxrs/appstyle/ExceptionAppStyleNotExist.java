@@ -7,6 +7,6 @@ class ExceptionAppStyleNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionAppStyleNotExist(String str) {
-		super("移动客户端样式: {} 不存在.", str);
+		super("모바일 클라이언트 스타일: {}이(가) 없습니다.", str);
 	}
 }

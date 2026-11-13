@@ -179,7 +179,7 @@ MWF.xApplication.cms.ViewDesigner.View = new Class({
     clone : function( obj ){
         if (null == obj || "object" != typeof obj) return obj;
 
-        if ( typeof obj.length==='number'){ //数组
+        if ( typeof obj.length==='number'){ //배열
             //print( "array" );
             var copy = [];
             for (var i = 0, len = obj.length; i < len; ++i) {
@@ -1155,22 +1155,22 @@ MWF.xApplication.cms.ViewDesigner.View.Column = new Class({
             }
         }
     },
-    _dragIn : function(){   //移动时鼠标进入 
+    _dragIn : function(){   //이동 중 마우스 진입 
         this.resizeNode.setStyles( this.view.css.columnResizeNode_dragIn );
     },
-    _dragOut : function(){  //移动时鼠标移出
+    _dragOut : function(){  //이동 중 마우스 이탈
         this.resizeNode.setStyles( this.view.css.columnResizeNode );
     },
-    _dragDrop : function(){ //移动到该对象时鼠标松开
+    _dragDrop : function(){ //해당 객체로 이동 후 마우스 놓음
         this.resizeNode.setStyles( this.view.css.columnResizeNode );
     },
-    _dragComplete: function( toNode ){ //拖拽完成
+    _dragComplete: function( toNode ){ //드래그 완료
         this.node.inject(toNode,"after");
         this.setCurrent();
         if (this.moveNode) this.moveNode.destroy();
         this.moveNode = null;
     },
-    _dragCancel: function(){  //拖拽取消
+    _dragCancel: function(){  //드래그 취소
         if (this.moveNode) this.moveNode.destroy();
         this.moveNode = null;
     },
@@ -1303,7 +1303,7 @@ MWF.xApplication.cms.ViewDesigner.View.Column = new Class({
             }.bind(this), function(){
                 flag = false;
             }.bind(this), false );
-        }else{ //如果字段为空，且已经保存过，则删除
+        }else{ //필드가 비어 있고 이미 저장된 경우 삭제
             if( !this.data.isNew ){
                 this["delete"]( callback );
                 this.data.isNew = true;
@@ -1339,13 +1339,13 @@ MWF.xApplication.cms.ViewDesigner.View.HeadBar = new Class({
 
     },
 
-    _dragIn : function(){   //移动时鼠标进入
+    _dragIn : function(){   //이동 중 마우스 진입
         this.resizeNode.setStyles( this.view.css.headBarResizeNode_dragIn );
     },
-    _dragOut : function(){  //移动时鼠标移出
+    _dragOut : function(){  //이동 중 마우스 이탈
         this.resizeNode.setStyles( this.view.css.headBarResizeNode );
     },
-    _dragDrop : function(){ //移动到该对象时鼠标松开
+    _dragDrop : function(){ //해당 객체로 이동 후 마우스 놓음
         this.resizeNode.setStyles( this.view.css.headBarResizeNode );
     }
 });

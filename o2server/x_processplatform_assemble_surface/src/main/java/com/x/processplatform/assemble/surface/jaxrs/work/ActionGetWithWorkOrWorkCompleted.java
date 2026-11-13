@@ -107,7 +107,7 @@ class ActionGetWithWorkOrWorkCompleted extends BaseAction {
 					if (jsonElement.isJsonObject()) {
 						return gson.fromJson(jsonElement, Data.class);
 					} else {
-						// 如果不是Object强制返回一个Map对象
+						// Object가 아니면 Map 객체를 강제로 반환
 						return new Data();
 					}
 				}
@@ -139,7 +139,7 @@ class ActionGetWithWorkOrWorkCompleted extends BaseAction {
 						if (jsonElement.isJsonObject()) {
 							return gson.fromJson(jsonElement, Data.class);
 						} else {
-							// 如果不是Object强制返回一个Map对象
+							// Object가 아니면 Map 객체를 강제로 반환
 							return new Data();
 						}
 					}
@@ -201,20 +201,20 @@ class ActionGetWithWorkOrWorkCompleted extends BaseAction {
 	public static class Wo extends GsonPropertyObject {
 
 		private static final long serialVersionUID = -869684415398137301L;
-		/* work和workCompleted都有 */
+		/* work와 workCompleted 모두 있음 */
 		private JsonElement work;
-		/* work和workCompleted都有 */
+		/* work와 workCompleted 모두 있음 */
 		private Data data;
-		/* work和workCompleted都有 */
+		/* work와 workCompleted 모두 있음 */
 		private List<WoRead> readList;
-		/* work和workCompleted都有 */
+		/* work와 workCompleted 모두 있음 */
 		private Integer currentReadIndex = -1;
 
-		/* 只有work有 */
+		/* work만 있음 */
 		private WoActivity activity;
-		/* 只有work有 */
+		/* work만 있음 */
 		private List<WoTask> taskList;
-		/* 只有work有 */
+		/* work만 있음 */
 		private Integer currentTaskIndex = -1;
 
 		public JsonElement getWork() {

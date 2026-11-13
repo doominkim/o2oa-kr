@@ -11,7 +11,7 @@ import com.x.bbs.assemble.control.Business;
 import com.x.bbs.entity.BBSShutup;
 
 /**
- * 用户组织顶层组织信息管理服务类
+ * 사용자 조직 최상위 조직 정보 관리 서비스 클래스
  *
  * @author LIYI
  *
@@ -19,7 +19,7 @@ import com.x.bbs.entity.BBSShutup;
 public class UserManagerService {
 
 	/**
-	 * 根据用户唯一标识来获取用户对象
+	 * 사용자 고유 식별자로 사용자 객체 조회
 	 *
 	 * @param flag
 	 * @return
@@ -41,7 +41,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据员工姓名获取组织名称，多个身份只取第一个组织
+	 * 직원 이름으로 조직 이름 조회, 신분이 여러 개면 첫 번째 조직만 사용
 	 *
 	 * @param employeeName
 	 * @return
@@ -53,7 +53,7 @@ public class UserManagerService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			identities = business.organization().identity().listWithPerson( personName );
-			if ( identities == null || identities.size() == 0) {// 该员工目前没有分配身份
+			if ( identities == null || identities.size() == 0) {// 해당 직원에게 현재 할당된 신분 없음
 				return null;
 			} else {
 				return business.organization().unit().getWithIdentity( identities.get( 0 ) );
@@ -66,7 +66,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据员工身份获取组织名称
+	 * 직원 신분으로 조직 이름 조회
 	 *
 	 * @param employeeName
 	 * @return
@@ -119,7 +119,7 @@ public class UserManagerService {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
 			identities = business.organization().identity().listWithPerson( personName );
-			if ( identities == null || identities.size() == 0) {// 该员工目前没有分配身份
+			if ( identities == null || identities.size() == 0) {// 해당 직원에게 현재 할당된 신분 없음
 				throw new Exception("can not get identity of personName:" + personName + ".");
 			} else {
 				return business.organization().unit().getWithIdentityWithLevel( identities.get( 0 ), 1 );
@@ -131,7 +131,7 @@ public class UserManagerService {
 		}
 	}
 	/**
-	 * 根据身份名称获取顶层组织名称
+	 * 신분 이름으로 최상위 조직 이름 조회
 	 *
 	 * @param identity
 	 * @return
@@ -174,7 +174,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据组织名称获取所有下级组织名称列表
+	 * 조직 이름으로 모든 하위 조직 이름 목록 조회
 	 *
 	 * @param query_creatorUnitName
 	 * @return
@@ -193,7 +193,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 判断用户是否有指定的平台角色，比如BBS系统管理员
+	 * 사용자가 지정한 플랫폼 역할(예: BBS 시스템 관리자)을 가졌는지 판단
 	 *
 	 * @param name
 	 * @param roleName
@@ -285,7 +285,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 判断指定用户是否被禁用
+	 * 지정한 사용자의 사용 중지 여부 판단
 	 * @param person
 	 * @return
 	 * @throws Exception

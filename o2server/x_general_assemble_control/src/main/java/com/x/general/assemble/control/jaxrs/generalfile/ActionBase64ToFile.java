@@ -56,9 +56,9 @@ public class ActionBase64ToFile extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 		private static final long serialVersionUID = -670631145209495465L;
-		@FieldDescribe("base64文本.")
+		@FieldDescribe("base64 텍스트.")
 		private String content;
-		@FieldDescribe("转换文件名称，需带扩展名.")
+		@FieldDescribe("변환 파일 이름, 확장자 포함 필요.")
 		private String fileName;
 
 		public String getContent() {

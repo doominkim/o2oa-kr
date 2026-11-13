@@ -271,14 +271,14 @@ MWF.xApplication.MinderEditor.Template = new Class({
 MWF.xApplication.MinderEditor.Template.Tootips = new Class({
     Extends: MSelector.Tootips,
     options : {
-        axis: "x",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "center", //x轴上left center right,  auto 系统自动计算
-            y : "auto" //y 轴上top middle bottom, auto 系统自动计算
+        axis: "x",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "center", //x축 left center right, auto는 시스템이 자동 계산
+            y : "auto" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
-        event : "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-        hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-        displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
+        event : "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+        hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+        displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
         hasArrow : true
     },
     _customNode : function( node, contentNode ){
@@ -500,14 +500,14 @@ MWF.xApplication.MinderEditor.Theme = new Class({
 MWF.xApplication.MinderEditor.Theme.Tootips = new Class({
     Extends: MSelector.Tootips,
     options : {
-        axis: "x",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "center", //x轴上left center right,  auto 系统自动计算
-            y : "bottom" //y 轴上top middle bottom, auto 系统自动计算
+        axis: "x",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "center", //x축 left center right, auto는 시스템이 자동 계산
+            y : "bottom" //y축 top middle bottom, auto는 시스템이 자동 계산
         },
-        event : "mouseenter", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
-        hiddenDelay : 200, //ms  , 有target 且 事件类型为 mouseenter 时有效
-        displayDelay : 0,   //ms , 有target 且事件类型为 mouseenter 时有效
+        event : "mouseenter", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
+        hiddenDelay : 200, //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
+        displayDelay : 0,   //ms, target이 있고 이벤트 유형이 mouseenter일 때 유효
         hasArrow : true
     },
     _customNode : function( node, contentNode ){
@@ -594,13 +594,13 @@ MWF.xApplication.MinderEditor.NotePrviewer = new Class({
     Extends: MTooltips,
     options: {
         style : "default",
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "auto", //x 轴上left center right, auto 系统自动计算
-            y : "auto" //y轴上top middle bottom,  auto 系统自动计算
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "auto", //x축의 left center right, auto는 시스템 자동 계산
+            y : "auto" //y축의 top middle bottom,  auto는 시스템 자동 계산
         },
         overflow : "scroll",
-        //event : "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+        //event : "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
         nodeStyles : {
             "font-size" : "12px",
             "position" : "absolute",
@@ -617,9 +617,9 @@ MWF.xApplication.MinderEditor.NotePrviewer = new Class({
         }
     },
     initialize : function( editor, options ){
-        //可以传入target 或者 targetCoordinates，两种选一
-        //传入target,表示触发tooltip的节点，本类根据 this.options.event 自动绑定target的事件
-        //传入targetCoordinates，表示 出发tooltip的位置，本类不绑定触发事件
+        //target 또는 targetCoordinates 중 하나를 전달할 수 있음
+        //target 전달 시 tooltip을 트리거하는 노드를 의미하며, 이 클래스는 this.options.event에 따라 target 이벤트를 자동 바인딩
+        //targetCoordinates 전달 시 tooltip을 트리거하는 위치를 의미하며, 이 클래스는 트리거 이벤트를 바인딩하지 않음
         if( options ){
             this.setOptions(options);
         }
@@ -735,14 +735,14 @@ MWF.xApplication.MinderEditor.Help = new Class({
     Extends: MTooltips,
     options: {
         style : "default",
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "auto", //x 轴上left center right, auto 系统自动计算
-            y : "auto" //y轴上top middle bottom,  auto 系统自动计算
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "auto", //x축의 left center right, auto는 시스템 자동 계산
+            y : "auto" //y축의 top middle bottom,  auto는 시스템 자동 계산
         },
         overflow : "scroll",
         hasCloseAction : true,
-        event : "click" //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+        event : "click" //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
         //nodeStyles : {
         //    "font-size" : "12px",
         //    "position" : "absolute",
@@ -792,21 +792,21 @@ MWF.xApplication.MinderEditor.Preview = new Class({
         }
     },
     initPreViewer: function(){
-        // 画布，渲染缩略图
+        // 캔버스, 썸네일 렌더링
         var paper = this.paper = new kity.Paper( this.previewer );
 
-        // 用两个路径来挥之节点和连线的缩略图
+        // 두 개의 경로로 노드와 연결선의 썸네일 그리기
         this.nodeThumb = paper.put(new kity.Path());
         this.connectionThumb = paper.put(new kity.Path());
 
-        // 表示可视区域的矩形
+        // 표시 영역을 나타내는 사각형
         this.visibleRect = paper.put(new kity.Rect(100, 100).stroke('red', '1%'));
 
         this.contentView = new kity.Box();
         this.visibleView = new kity.Box();
 
         /**
-         * 增加一个对天盘图情况缩略图的处理,
+         * 원형 레이아웃 마인드맵의 썸네일 처리 추가,
          * @Editor: Naixor line 104~129
          * @Date: 2015.11.3
          */
@@ -1060,7 +1060,7 @@ MWF.xApplication.MinderEditor.SearchBar = new Class({
             return;
         }
 
-        // 当搜索不到节点时候默认的选项
+        // 노드를 찾지 못했을 때의 기본 옵션
         //this.curIndex = 0;
         this.resultNum = 0;
 

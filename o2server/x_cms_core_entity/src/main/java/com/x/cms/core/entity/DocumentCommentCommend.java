@@ -19,12 +19,12 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 文档评论点赞
+ * 문서 댓글 좋아요
  * 
  * @author O2LEE
  *
  */
-@Schema(name = "DocumentCommentCommend", description = "内容管理文档评论点赞.")
+@Schema(name = "DocumentCommentCommend", description = "콘텐츠 관리 문서 댓글 좋아요.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.DocumentCommentCommend.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class DocumentCommentCommend extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -54,33 +54,33 @@ public class DocumentCommentCommend extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String documentId_FIELDNAME = "documentId";
-	@FieldDescribe("文档ID")
+	@FieldDescribe("문서ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + documentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + documentId_FIELDNAME)
 	private String documentId;
 
 	public static final String commentId_FIELDNAME = "commentId";
-	@FieldDescribe("文档评论ID")
+	@FieldDescribe("문서 댓글 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + commentId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + documentId_FIELDNAME)
 	private String commentId;
 
 	public static final String commendPerson_FIELDNAME = "commendPerson";
-	@FieldDescribe("点赞者")
+	@FieldDescribe("좋아요 누른 사용자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + commendPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	@Index(name = TABLE + IndexNameMiddle + commendPerson_FIELDNAME)

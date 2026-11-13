@@ -160,7 +160,7 @@ o2.widget.JavascriptEditor = new Class({
                     },
                 });
 
-                //复制时需要清空MWF.clipboard.data，否则会误拷贝设计元素
+                //복사 시 MWF.clipboard.data를 비워야 함. 그렇지 않으면 디자인 요소가 잘못 복사됨
                 this.node.addEvent("keydown", function(e){ e.stopPropagation(); });
 
                 // this.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, function(e){
@@ -284,7 +284,7 @@ o2.widget.JavascriptEditor = new Class({
                     this.fireEvent("change");
                 }.bind(this));
 
-                //复制时需要清空MWF.clipboard.data，否则会误拷贝设计元素
+                //복사 시 MWF.clipboard.data를 비워야 함. 그렇지 않으면 디자인 요소가 잘못 복사됨
                 this.node.addEvent("keydown", function(e){ e.stopPropagation(); });
 
                 if( this.fontSize ){
@@ -362,7 +362,7 @@ o2.widget.JavascriptEditor = new Class({
     },
     registerCompletionAce: function(){
         if (!o2.widget.ace.registeredCompletion){
-            //添加自动完成列表
+            //자동 완성 목록 추가
             var exports = ace.require("ace/ext/language_tools");
             exports.addCompleter({
                 identifierRegexps: [

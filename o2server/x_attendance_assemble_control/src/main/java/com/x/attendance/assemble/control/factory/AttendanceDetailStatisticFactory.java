@@ -16,7 +16,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 打卡信息统计服务类，以打卡信息表为基础进行统计
+ * 출퇴근 정보 통계 서비스 클래스, 출퇴근 정보 테이블 기준 통계
  */
 public class AttendanceDetailStatisticFactory extends AbstractFactory {
 
@@ -27,7 +27,7 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据员工，年月，统计异常打卡次数
+	 * 직원, 연월 기준 비정상 체크 횟수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -56,13 +56,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，年月，统计工时不足次数
+	 * 직원, 연월 기준 근무시간 부족 횟수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -91,13 +91,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，年月，统计早退次数
+	 * 직원, 연월 기준 조퇴 횟수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -126,13 +126,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，年月，统计迟到次数
+	 * 직원, 연월 기준 지각 횟수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -161,13 +161,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，年月，统计签退次数
+	 * 직원, 연월 기준 퇴근 체크 횟수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -197,13 +197,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
 	/**
-	 * 根据员工，年月，统计次数 就是出勤天数
+	 * 직원, 연월 기준 횟수 통계, 즉 출근 일수
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -231,13 +231,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，年月，统计签退次数
+	 * 직원, 연월 기준 퇴근 체크 횟수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -267,13 +267,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，年月，统计请假天数
+	 * 직원, 연월 기준 휴가 일수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -289,14 +289,14 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		Root<AttendanceDetail> root = cq.from( AttendanceDetail.class);
-		// 不是周末，或者是周末但是调工作日了
+		// 주말이 아니거나, 주말이지만 근무일로 조정됨
 		Predicate p1 = cb.isFalse(root.get( AttendanceDetail_.isWeekend ));
 		p1 = cb.or( p1, cb.and(cb.isTrue(root.get( AttendanceDetail_.isWeekend )), cb.isTrue(root.get( AttendanceDetail_.isWorkday )) ));
 								
 		Predicate p = root.get( AttendanceDetail_.empName).in( employeeNames );
 		p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordStatus ), 1));
-		p = cb.and( p, cb.isFalse(root.get( AttendanceDetail_.isHoliday ))); //不是节假日
-		p = cb.and( p, p1 ); //不是周末并且未调休工作晶
+		p = cb.and( p, cb.isFalse(root.get( AttendanceDetail_.isHoliday ))); //공휴일 아님
+		p = cb.and( p, p1 ); //주말이 아니며 대체 근무일로 조정되지 않음
 		if( cycleYear == null || cycleYear.isEmpty() ){
 			logger.error( new CycleYearEmptyException() );
 		}else{
@@ -308,7 +308,7 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 			p = cb.and( p, cb.equal( root.get(AttendanceDetail_.cycleMonth), cycleMonth ));
 		}
 		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get( AttendanceDetail_.getSelfHolidayDays ) ) );	
 				
 		return em.createQuery(cq.where(p)).getSingleResult();
@@ -317,7 +317,7 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 	
 	
 	/**
-	 * 根据员工，年月，统计缺勤天数
+	 * 직원, 연월 기준 결근 일수 통계
 	 * @param employeeNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -347,13 +347,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get(AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(AttendanceDetail_.absence ) ) );	
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，年月，统计异常打卡次数
+	 * 조직, 연월 기준 비정상 체크 횟수 통계
 	 * @param unitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -382,13 +382,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，年月，统计工时不足次数
+	 * 조직, 연월 기준 근무시간 부족 횟수 통계
 	 * @param unitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -417,13 +417,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，年月，统计早退次数
+	 * 조직, 연월 기준 조퇴 횟수 통계
 	 * @param unitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -452,13 +452,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，年月，统计迟到次数
+	 * 조직, 연월 기준 지각 횟수 통계
 	 * @param unitNames
 	 * @param cycleYear
 	 * @param cycleMonth
@@ -487,13 +487,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.cycleMonth), cycleMonth));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，打卡日期，统计异常打卡次数
+	 * 조직, 출퇴근 날짜 기준 비정상 체크 횟수 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -516,13 +516,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，打卡日期，统计工时不足次数
+	 * 조직, 출퇴근 날짜 기준 근무시간 부족 횟수 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -545,13 +545,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，打卡日期，统计早退次数
+	 * 조직, 출퇴근 날짜 기준 조퇴 횟수 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -574,13 +574,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，打卡日期，统计迟到次数
+	 * 조직, 출퇴근 날짜 기준 지각 횟수 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -603,13 +603,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，打卡日期，统计缺勤天数
+	 * 직원, 출퇴근 날짜 기준 결근 일수 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -631,13 +631,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(AttendanceDetail_.absence ) ) );	
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据员工，打卡日期月，统计请假天数
+	 * 직원, 출퇴근 날짜·월 기준 휴가 일수 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -659,14 +659,14 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get( AttendanceDetail_.getSelfHolidayDays ) ) );	
 				
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，打卡日期，统计签退人数
+	 * 조직, 출퇴근 날짜 기준 퇴근 체크 인원 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -690,13 +690,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.unitName), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据组织，打卡日期，统计签到人数
+	 * 조직, 출퇴근 날짜 기준 출근 체크 인원 통계
 	 * @param unitNames
 	 * @param recordDate
 	 * @return
@@ -720,13 +720,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.unitName), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期，统计异常打卡次数
+	 * 최상위 조직, 출퇴근 날짜 기준 비정상 체크 횟수 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -749,13 +749,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期，统计工时不足次数
+	 * 최상위 조직, 출퇴근 날짜 기준 근무시간 부족 횟수 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -778,13 +778,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期，统计早退次数
+	 * 최상위 조직, 출퇴근 날짜 기준 조퇴 횟수 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -807,13 +807,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期，统计迟到次数
+	 * 최상위 조직, 출퇴근 날짜 기준 지각 횟수 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -836,13 +836,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期，统计缺勤天数
+	 * 최상위 조직, 출퇴근 날짜 기준 결근 일수 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -864,13 +864,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get(AttendanceDetail_.absence ) ) );	
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期月，统计请假天数
+	 * 최상위 조직, 출퇴근 날짜·월 기준 휴가 일수 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -892,14 +892,14 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString ), recordDate));
 		}		
-		//查询总数
+		//총수 조회
 		cq.select( cb.sum( root.get( AttendanceDetail_.getSelfHolidayDays ) ) );	
 				
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期，统计签到人数
+	 * 최상위 조직, 출퇴근 날짜 기준 출근 체크 인원 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -923,13 +923,13 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 	
 	/**
-	 * 根据顶层组织，打卡日期，统计签到人数
+	 * 최상위 조직, 출퇴근 날짜 기준 출근 체크 인원 통계
 	 * @param topUnitNames
 	 * @param recordDate
 	 * @return
@@ -953,7 +953,7 @@ public class AttendanceDetailStatisticFactory extends AbstractFactory {
 		}else{
 			p = cb.and( p, cb.equal( root.get( AttendanceDetail_.recordDateString), recordDate));
 		}
-		//查询总数
+		//총수 조회
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}

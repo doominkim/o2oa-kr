@@ -39,10 +39,10 @@ class ActionValidateCodeAnswer extends BaseAction {
 
 		private static final long serialVersionUID = -2372766347222201401L;
 
-		@FieldDescribe("手机号码")
+		@FieldDescribe("휴대폰 번호")
 		private String mobile;
 
-		@FieldDescribe("短信认证码")
+		@FieldDescribe("SMS 인증 코드")
 		private String codeAnswer;
 
 		public String getMobile() {

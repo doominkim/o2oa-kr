@@ -7,6 +7,6 @@ class ExceptionErrorExtract extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionErrorExtract(String msg) {
-		super("电子发票解析异常: {}.", msg);
+		super("전자 세금계산서 분석 오류: {}.", msg);
 	}
 }

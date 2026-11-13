@@ -13,24 +13,24 @@ public class ActionFilterAttributeFilterWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -3260796933524976316L;
 
-	@FieldDescribe("限制应用范围")
-	@Schema(description = "限制应用范围列表")
+	@FieldDescribe("앱 범위 제한")
+	@Schema(description = "앱 범위 제한 목록")
 	private List<String> applicationList = new ArrayList<>();
 
-	@FieldDescribe("限制流程范围")
-	@Schema(description = "限制流程范围列表")
+	@FieldDescribe("프로세스 범위 제한")
+	@Schema(description = "프로세스 범위 제한 목록")
 	private List<String> processList = new ArrayList<>();
 
-	@FieldDescribe("限制创建组织范围")
-	@Schema(description = "限制创建组织范围列表")
+	@FieldDescribe("생성 조직 범위 제한")
+	@Schema(description = "생성 조직 범위 제한 목록")
 	private List<String> creatorUnitList = new ArrayList<>();
 
-	@FieldDescribe("限制创建月份范围")
-	@Schema(description = "限制创建月份范围列表")
+	@FieldDescribe("생성 월 범위 제한")
+	@Schema(description = "생성 월 범위 제한 목록")
 	private List<String> startTimeMonthList = new ArrayList<>();
 
-	@FieldDescribe("限制活动名称范围")
-	@Schema(description = "限制活动名称范围列表")
+	@FieldDescribe("활동 이름 범위 제한")
+	@Schema(description = "활동 이름 범위 제한 목록")
 	private List<String> activityNameList = new ArrayList<>();
 
 	public List<String> getApplicationList() {

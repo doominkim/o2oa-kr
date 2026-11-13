@@ -19,19 +19,19 @@ public class WorkTime extends ConfigObject {
 		this.workdays = new String[] {};
 	}
 
-	@FieldDescribe("工作时间上午开始时间")
+	@FieldDescribe("근무 시간 오전 시작 시간")
 	private String amStart;
-	@FieldDescribe("工作时间上午结束时间")
+	@FieldDescribe("근무 시간 오전 종료 시간")
 	private String amEnd;
-	@FieldDescribe("工作时间下午开始时间")
+	@FieldDescribe("근무 시간 오후 시작 시간")
 	private String pmStart;
-	@FieldDescribe("工作时间下午结束时间")
+	@FieldDescribe("근무 시간 오후 종료 시간")
 	private String pmEnd;
-	@FieldDescribe("固定节假日,格式为[\"2019-01-01\",\"2019-05-01\"]")
+	@FieldDescribe("고정 공휴일, 형식은 [\"2019-01-01\",\"2019-05-01\"]")
 	private String[] holidays;
-	@FieldDescribe("固定工作时间,格式为[\"2019-01-01\",\"2019-05-01\"]")
+	@FieldDescribe("고정 근무일, 형식은 [\"2019-01-01\",\"2019-05-01\"]")
 	private String[] workdays;
-	@FieldDescribe("周末设定,默认格式为[1,7]其中1代表周日,7代表周六.")
+	@FieldDescribe("주말 설정, 기본 형식은 [1,7]이며 1은 일요일, 7은 토요일.")
 	private int[] weekends;
 
 	public String getAmStart() {

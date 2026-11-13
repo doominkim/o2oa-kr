@@ -61,7 +61,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 通用业务类
+ * 공통 비즈니스 클래스
  *
  * @author sword
  */
@@ -332,14 +332,14 @@ public class Business {
     }
 
     /**
-     * 判断用户是否管理员权限
+     * 사용자 관리자 권한 여부 판단
      *
      * @param person
      * @return
      * @throws Exception
      */
     public boolean isManager(EffectivePerson person) throws Exception {
-        // 如果用户的身份是平台的超级管理员，那么就是超级管理员权限
+        // 사용자 신분이 플랫폼 최고 관리자이면 최고 관리자 권한
         if (person.isManager()) {
             return true;
         } else {
@@ -350,14 +350,14 @@ public class Business {
     }
 
     /**
-     * 判断用户是否管理员权限
+     * 사용자 관리자 권한 여부 판단
      *
      * @param person
      * @return
      * @throws Exception
      */
     public boolean isCreatorManager(EffectivePerson person) throws Exception {
-        // 如果用户的身份是平台的超级管理员，那么就是超级管理员权限
+        // 사용자 신분이 플랫폼 최고 관리자이면 최고 관리자 권한
         if (person.isManager()) {
             return true;
         } else {
@@ -368,7 +368,7 @@ public class Business {
     }
 
     /**
-     * 是否是栏目管理员
+     * 게시판 관리자 여부
      *
      * @param person
      * @param appInfo
@@ -403,7 +403,7 @@ public class Business {
     }
 
     /**
-     * 是否是栏目创建管理员
+     * 게시판 생성 관리자 여부
      *
      * @param person
      * @param appInfo
@@ -419,7 +419,7 @@ public class Business {
     }
 
     /**
-     * 是否是文档的编辑者 文档不存在判断是否是分类或应用的发布者
+     * 문서 편집자 여부. 문서가 없으면 분류 또는 앱의 발행자인지 확인
      *
      * @param person
      * @param appInfo
@@ -531,7 +531,7 @@ public class Business {
     }
 
     /**
-     * 是否是文档的读者
+     * 문서 열람자 여부
      *
      * @param person
      * @return
@@ -570,7 +570,7 @@ public class Business {
     }
 
     /**
-     * 用户是否有足够的密级标识等级.
+     * 사용자의 보안 등급이 충분한지 여부.
      *
      * @param person
      * @param objectSecurityClearance
@@ -610,7 +610,7 @@ public class Business {
     }
 
     /**
-     * TODO (uncomplete)判断用户是否有权限进行：[表单模板管理]操作
+     * TODO (uncomplete) 사용자에게 [양식 템플릿 관리] 작업 권한이 있는지 확인
      *
      * @param person
      * @return
@@ -620,12 +620,12 @@ public class Business {
         if (isManager(person)) {
             return true;
         }
-        // 其他情况暂时全部不允许操作
+        // 그 외의 경우는 당분간 모두 작업 불허
         return true;
     }
 
     /**
-     * TODO (uncomplete)判断用户是否有权限进行：[视图配置管理]操作
+     * TODO (uncomplete) 사용자에게 [뷰 설정 관리] 작업 권한이 있는지 확인
      *
      * @param person
      * @return
@@ -635,7 +635,7 @@ public class Business {
         if (isManager(person)) {
             return true;
         }
-        // 其他情况暂时全部不允许操作
+        // 그 외의 경우는 당분간 모두 작업 불허
         return true;
     }
 
@@ -647,7 +647,7 @@ public class Business {
             return true;
         }
 
-        // 判断effectivePerson是不是该栏目的管理者：涉及 个人，组织和群组
+        // effectivePerson이 해당 게시판의 관리자인지 확인: 개인, 조직, 그룹 포함
         List<String> unitNameList = this.organization().unit()
                 .listWithPersonSupNested(effectivePerson.getDistinguishedName());
         List<String> groupList = this.organization().group()
@@ -691,7 +691,7 @@ public class Business {
             if (array.length == 3) {
                 target = sb.append(array[1]).append("@").append(array[2]).toString();
             } else if (array.length == 2) {
-                // 2段
+                // 2단계
                 target = sb.append(array[0]).append("@").append(array[1]).toString();
             } else {
                 target = array[0];
@@ -721,7 +721,7 @@ public class Business {
     }
 
     /**
-     * 下载附件并打包为zip
+     * 첨부파일을 내려받아 zip으로 압축
      *
      * @param attachmentList
      * @param os
@@ -732,7 +732,7 @@ public class Business {
             throws Exception {
         Map<String, FileInfo> filePathMap = new HashMap<>();
         List<String> emptyFolderList = new ArrayList<>();
-        /* 生成zip压缩文件内的目录结构 */
+        /* zip 압축 파일 내 디렉터리 구조 생성 */
         if (attachmentList != null) {
             for (FileInfo att : attachmentList) {
                 if (filePathMap.containsKey(att.getName())) {
@@ -762,7 +762,7 @@ public class Business {
                 }
             }
 
-            // 往zip里添加空文件夹
+            // zip에 빈 폴더 추가
             for (String emptyFolder : emptyFolderList) {
                 zos.putNextEntry(new ZipEntry(emptyFolder));
             }

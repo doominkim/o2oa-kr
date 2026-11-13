@@ -75,7 +75,7 @@ public class ActionQueryGetControl extends BaseAction {
 			CacheManager.put(cacheCategory, cacheKey, wo );
 		}
 
-		//不管是从缓存还是数据库查出来，都要重新进行处理权限判断
+		//캐시에서 조회하든 데이터베이스에서 조회하든 권한 판단을 다시 처리해야 함
 		List<String> unitNames = userManagerService.listUnitNamesWithPerson( personName );
 		List<String> groupNames = userManagerService.listGroupNamesByPerson( personName );
 		List<String> roleNames = userManagerService.listRoleNamesByPerson(personName);
@@ -93,7 +93,7 @@ public class ActionQueryGetControl extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "根据ID查询栏目信息对象时发生异常。ID:" + document.getAppId());
+				Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + document.getAppId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -109,13 +109,13 @@ public class ActionQueryGetControl extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "根据ID查询分类信息对象时发生异常。ID:" + document.getCategoryId());
+				Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + document.getCategoryId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		//判断用户是否是分类的管理者，分类管理者是有权限编辑文档的
+		//사용자가 분류 관리자인지 판단, 분류 관리자는 문서 편집 권한이 있음
 		if (check) {
 			try {
 				if ( categoryInfoServiceAdv.isCategoryInfoManager( categoryInfo, personName, unitNames, groupNames ) ) {
@@ -125,13 +125,13 @@ public class ActionQueryGetControl extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "判断用户是否是分类管理员时发生异常！user:" + personName);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 분류 관리자인지 확인하는 중 오류가 발생했습니다! user:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		//判断用户是否是栏目的管理者，栏目管理者是有权限编辑文档的
+		//사용자가 게시판 관리자인지 판단, 게시판 관리자는 문서 편집 권한이 있음
 		if (check) {
 			try {
 				if ( appInfoServiceAdv.isAppInfoManager( appInfo, personName, unitNames, groupNames, roleNames )) {
@@ -141,7 +141,7 @@ public class ActionQueryGetControl extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "判断用户是否是栏目管理员时发生异常！user:" + personName);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 게시판 관리자인지 확인하는 중 오류가 발생했습니다! user:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -152,7 +152,7 @@ public class ActionQueryGetControl extends BaseAction {
 				woControl.setAllowEdit(true);
 				woControl.setAllowDelete(true);
 			} else {
-				// 判断当前登录者是不是该文档的可编辑者
+				// 현재 로그인 사용자가 해당 문서의 편집자인지 판단
 				try {
 					if( ListTools.isNotEmpty( document.getAuthorPersonList() )) {
 						if ( document.getAuthorPersonList().contains( getShortTargetFlag(personName) )) {
@@ -174,7 +174,7 @@ public class ActionQueryGetControl extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "判断用户是否可编辑文档时发生异常！user:" + personName);
+					Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 게시글을 편집할 수 있는지 확인하는 중 오류가 발생했습니다! user:" + personName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -203,13 +203,13 @@ public class ActionQueryGetControl extends BaseAction {
 
 	public static class WoControl extends GsonPropertyObject {
 
-		@FieldDescribe("是否允许查看.")
+		@FieldDescribe("열람 허용 여부.")
 		private Boolean allowVisit = false;
 
-		@FieldDescribe("是否允许编辑.")
+		@FieldDescribe("편집 허용 여부.")
 		private Boolean allowEdit = false;
 
-		@FieldDescribe("是否允许删除.")
+		@FieldDescribe("삭제 허용 여부.")
 		private Boolean allowDelete = false;
 
 		public Boolean getAllowVisit() {

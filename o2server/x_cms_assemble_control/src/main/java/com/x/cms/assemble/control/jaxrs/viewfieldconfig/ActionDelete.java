@@ -28,18 +28,18 @@ public class ActionDelete extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 
-			// 先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			// 먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			ViewFieldConfig viewFieldConfig = business.getViewFieldConfigFactory().get(id);
 
 			if (null == viewFieldConfig) {
-				logger.warn("viewFieldConfig{id:" + id + "} 应用信息不存在.");
+				logger.warn("viewFieldConfig{id:" + id + "} 앱 정보가 없습니다.");
 			}
-			// 查询视图信息
+			// 뷰 정보 조회
 			View view = business.getViewFactory().get(viewFieldConfig.getViewId());
 			if (view == null) {
-				throw new Exception("view{'id':'" + viewFieldConfig.getViewId() + "'}不存在, 无法继续进行查询操作！");
+				throw new Exception("view{'id':'" + viewFieldConfig.getViewId() + "'}이(가) 없어 조회를 계속할 수 없습니다!");
 			}
-			// 进行数据库持久化操作
+			// 데이터베이스 영속화 작업 수행
 			emc.beginTransaction(ViewFieldConfig.class);
 			emc.beginTransaction(View.class);
 			if (null != viewFieldConfig) {
@@ -48,7 +48,7 @@ public class ActionDelete extends BaseAction {
 			deleteFieldConfigIdFromFieldConfigList(view, id);
 			emc.commit();
 
-			// 成功删除一个展示列配置信息信息
+			// 표시 열 설정 정보 1건 삭제 성공
 			logService.log(emc, effectivePerson.getDistinguishedName(), viewFieldConfig.getFieldName(), "", "", "",
 					viewFieldConfig.getId(), "VIEWFIELDCONFIG", "删除");
 
@@ -68,7 +68,7 @@ public class ActionDelete extends BaseAction {
 			if (view.getFieldConfigList() == null) {
 				view.setFieldConfigList(new ArrayList<String>());
 			}
-			// 看看是否已经包含分类ID
+			// 분류 ID가 이미 포함되어 있는지 확인
 			if (!view.getFieldConfigList().contains(viewFieldConfigId)) {
 				view.getFieldConfigList().remove(viewFieldConfigId);
 			} else {

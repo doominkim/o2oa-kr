@@ -19,12 +19,12 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 论坛权限信息表
+ * 포럼 권한 정보 테이블
  * 
  * @author LIYI
  */
 
-@Schema(name = "BBSPermissionInfo", description = "论坛权限信息.")
+@Schema(name = "BBSPermissionInfo", description = "포럼 권한 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSPermissionInfo.table, uniqueConstraints = {
@@ -66,7 +66,7 @@ public class BBSPermissionInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -75,53 +75,53 @@ public class BBSPermissionInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String forumId_FIELDNAME = "forumId";
-	@FieldDescribe("论坛ID")
+	@FieldDescribe("포럼 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + forumId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + forumId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumId = "";
 
 	public static final String forumName_FIELDNAME = "forumName";
-	@FieldDescribe("论坛名称")
+	@FieldDescribe("포럼 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + forumName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumName = "";
 
 	public static final String sectionId_FIELDNAME = "sectionId";
-	@FieldDescribe("版块ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + sectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sectionId = "";
 
 	public static final String sectionName_FIELDNAME = "sectionName";
-	@FieldDescribe("版块名称")
+	@FieldDescribe("게시판 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + sectionName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sectionName = "";
 
 	public static final String mainSectionId_FIELDNAME = "mainSectionId";
-	@FieldDescribe("主版块ID")
+	@FieldDescribe("상위 게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + mainSectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mainSectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String mainSectionId = "";
 
 	public static final String mainSectionName_FIELDNAME = "mainSectionName";
-	@FieldDescribe("主版块名称")
+	@FieldDescribe("상위 게시판 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + mainSectionName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String mainSectionName = "";
@@ -134,34 +134,34 @@ public class BBSPermissionInfo extends SliceJpaObject {
 	private String permissionType = "其他权限";
 
 	public static final String permissionFunction_FIELDNAME = "permissionFunction";
-	@FieldDescribe("权限功能：属于权限代码的一部分，描述权限的主要功能")
+	@FieldDescribe("권한 기능: 권한 코드의 일부로 권한의 주요 기능을 설명")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + permissionFunction_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + permissionFunction_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String permissionFunction = "其他权限";
 
 	public static final String permissionName_FIELDNAME = "permissionName";
-	@FieldDescribe("权限名称")
+	@FieldDescribe("권한 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + permissionName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + permissionName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String permissionName = "";
 
 	public static final String permissionCode_FIELDNAME = "permissionCode";
-	@FieldDescribe("权限代码")
+	@FieldDescribe("권한 코드")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + permissionCode_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + permissionCode_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String permissionCode = "";
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("权限说明")
+	@FieldDescribe("권한 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String description = "";
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer orderNumber = 1;

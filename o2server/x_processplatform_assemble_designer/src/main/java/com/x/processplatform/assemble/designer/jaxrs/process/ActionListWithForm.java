@@ -93,10 +93,10 @@ class ActionListWithForm extends BaseAction {
 
 		private static final long serialVersionUID = 3253225373830391713L;
 
-		@FieldDescribe("标识")
+		@FieldDescribe("식별자")
 		private String id;
 
-		@FieldDescribe("名称")
+		@FieldDescribe("이름")
 		private String name;
 
 		public String getId() {

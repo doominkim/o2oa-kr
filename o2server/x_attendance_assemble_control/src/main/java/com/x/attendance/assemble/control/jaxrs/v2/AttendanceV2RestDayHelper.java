@@ -20,7 +20,7 @@ public class AttendanceV2RestDayHelper {
     }
 
     /**
-     * 根据人员和日期列表查询休息日，规则与 v2/my/rest/date/check 保持一致。
+     * 사용자와 날짜 목록으로 휴일 조회, 규칙은 v2/my/rest/date/check와 동일.
      */
     public static List<String> listRestDate(Business business, String personDn, List<String> dateList) throws Exception {
         List<String> restDateList = new ArrayList<>();

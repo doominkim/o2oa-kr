@@ -17,54 +17,54 @@ public class WorkProperties extends JsonProperties {
 	private static final long serialVersionUID = -62236689373222398L;
 
 	@Deprecated(since = "8.2", forRemoval = true)
-	@FieldDescribe("强制待办处理人")
+	@FieldDescribe("강제 결재 대기 처리자")
 	private List<String> manualForceTaskIdentityList = new ArrayList<>();
 
 	@Deprecated(since = "8.2", forRemoval = true)
-	@FieldDescribe("授权对象")
+	@FieldDescribe("위임 대상")
 	private Map<String, String> manualEmpowerMap = new LinkedHashMap<>();
 
-	@FieldDescribe("服务回调值")
+	@FieldDescribe("서비스 콜백 값")
 	private Map<String, Object> serviceValue = new LinkedHashMap<>();
 
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	private String title;
 
-	@FieldDescribe("调用子流程后子流程结束将回写,用于标识子流程已经结束.")
+	@FieldDescribe("하위 프로세스 호출 후 하위 프로세스가 종료되면 회신 기록, 하위 프로세스 종료 여부 표시.")
 	private String embedCompleted;
 
-	@FieldDescribe("父工作,在当前工作是通过子流程调用时产生.")
+	@FieldDescribe("상위 업무 문서, 현재 업무 문서가 하위 프로세스 호출로 생성된 경우.")
 	private String parentWork;
 
-	@FieldDescribe("父工作Job,在当前工作是通过子流程调用时产生.")
+	@FieldDescribe("상위 업무 문서 Job, 현재 업무 문서가 하위 프로세스 호출로 생성된 경우.")
 	private String parentJob;
 
-	@FieldDescribe("Embed活动生成的Work的Job.")
+	@FieldDescribe("Embed 활동이 생성한 Work의 Job.")
 	private String embedTargetJob;
 
-	@FieldDescribe("拆分值列表")
+	@FieldDescribe("분할 값 목록")
 	private List<String> splitValueList = new ArrayList<>();
 
 	@Deprecated(since = "8.2", forRemoval = true)
-	@FieldDescribe("待办身份矩阵")
+	@FieldDescribe("결재 대기 신분 매트릭스")
 	private ManualTaskIdentityMatrix manualTaskIdentityMatrix = new ManualTaskIdentityMatrix();
 
-	@FieldDescribe("待办身份矩阵")
+	@FieldDescribe("결재 대기 신분 매트릭스")
 	private GoBackStore goBackStore;
 
-	@FieldDescribe("goBack进行跳转退回时使用的.")
+	@FieldDescribe("goBack으로 이동 반려 시 사용.")
 	private String goBackActivityToken;
 
-	@FieldDescribe("拆分值存储对象.")
+	@FieldDescribe("분할 값 저장 객체.")
 	private Map<String, String> splitTokenValueMap = new LinkedHashMap<>();
 
-	@FieldDescribe("待办凭证.")
+	@FieldDescribe("결재 대기 증빙.")
 	private Tickets tickets;
 
-	@FieldDescribe("强制路由.")
+	@FieldDescribe("강제 경로.")
 	private Boolean forceRouteEnable;
 
-	@FieldDescribe("当前处理人身份合并文本,用','分割,此字段仅用于显示当前工作的处理人,不索引.")
+	@FieldDescribe("현재 처리자 신분 병합 텍스트, ','로 구분, 이 필드는 현재 업무 문서의 처리자 표시에만 사용, 인덱스 없음.")
 	private String manualTaskIdentityText;
 
 	public String getManualTaskIdentityText() {
@@ -208,7 +208,7 @@ public class WorkProperties extends JsonProperties {
 	}
 
 	/**
-	 * work中存储的回退操作需要的数据
+	 * work에 저장된 회송 작업에 필요한 데이터
 	 * 
 	 * @author ray
 	 *

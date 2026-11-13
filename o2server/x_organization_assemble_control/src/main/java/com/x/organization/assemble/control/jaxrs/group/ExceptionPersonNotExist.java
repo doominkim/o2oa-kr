@@ -7,6 +7,6 @@ class ExceptionPersonNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionPersonNotExist(String name) {
-		super("个人: {} 不存在.", name);
+		super("개인: {}이(가) 없습니다.", name);
 	}
 }

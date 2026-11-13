@@ -7,6 +7,6 @@ class ExceptionCanNotFindTopUnitWithPerson extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionCanNotFindTopUnitWithPerson( String name ) {
-		super("未能根据个人信息查询到所属顶层组织名称.人员：" + name );
+		super("개인 정보로 상위 최상위 조직 이름을 찾을 수 없습니다. 인원:" + name );
 	}
 }

@@ -1130,7 +1130,7 @@ MWF.xApplication.cms.Column.PopupForm = new Class({
 
             var callback = function ( id ) {
                 this.app.restActions.getColumn( id, function (json) {
-                    //保存当前用户为管理员
+                    //현재 사용자를 관리자로 저장
                     if (this.isNew) {
                         // var data = {
                         //     personList : [ layout.desktop.session.user.distinguishedName || "xadmin" ],

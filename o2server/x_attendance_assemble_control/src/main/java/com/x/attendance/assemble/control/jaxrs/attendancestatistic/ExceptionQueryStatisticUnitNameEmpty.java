@@ -7,6 +7,6 @@ class ExceptionQueryStatisticUnitNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionQueryStatisticUnitNameEmpty() {
-		super("系统未获取到查询参数组织名称name，无法进行数据查询");
+		super("조회 매개변수인 조직 이름 name이 없어 데이터를 조회할 수 없습니다");
 	}
 }

@@ -20,13 +20,13 @@ public class ActionDelete extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
 
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			ViewCategory viewCategory = business.getViewCategoryFactory().get(id);
 			if (null == viewCategory) {
-				throw new Exception("view{id:" + id + "} 应用信息不存在.");
+				throw new Exception("view{id:" + id + "} 앱 정보가 없습니다.");
 			}
 
-			//进行数据库持久化操作
+			//데이터베이스 영속화 작업 수행
 			emc.beginTransaction( ViewCategory.class );
 			emc.remove( viewCategory, CheckRemoveType.all );
 			emc.commit();

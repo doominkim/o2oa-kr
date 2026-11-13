@@ -1,68 +1,68 @@
 /**
- * 数据表格数据结构.
+ * 데이터 표 데이터 구조.
  * @typedef {Array} DatatableData
  * @example
- { //数据表格数据条目
+ { //데이터 표 데이터 항목
   "data": [
     {
       "org": [{
-        "distinguishedName": "张三@bf007525-99a3-4178-a474-32865bdddec8@I",
+        "distinguishedName": "홍길동@bf007525-99a3-4178-a474-32865bdddec8@I",
         "id": "bf007525-99a3-4178-a474-32865bdddec8",
-        "name": "张三",
+        "name": "홍길동",
         "person": "0c828550-d8ab-479e-9880-09a59332f1ed",
         "unit": "9e6ce205-86f6-4d84-96e1-83147567aa8d",
-        "unitLevelName": "兰德纵横/市场营销部",
-        "unitName": "市场营销部"
+        "unitLevelName": "란더종횡/마케팅부",
+        "unitName": "마케팅부"
       }],
       "org_1": [{
-        "distinguishedName": "张三@bf007525-99a3-4178-a474-32865bdddec8@I",
+        "distinguishedName": "홍길동@bf007525-99a3-4178-a474-32865bdddec8@I",
         "id": "bf007525-99a3-4178-a474-32865bdddec8",
-        "name": "张三",
+        "name": "홍길동",
         "person": "0c828550-d8ab-479e-9880-09a59332f1ed",
         "unit": "9e6ce205-86f6-4d84-96e1-83147567aa8d",
-        "unitLevelName": "兰德纵横/市场营销部",
-        "unitName": "市场营销部"
+        "unitLevelName": "란더종횡/마케팅부",
+        "unitName": "마케팅부"
       }, {
-        "distinguishedName": "李四@bf007525-99a3-4178-a474-32865bdddec8@I",
+        "distinguishedName": "김철수@bf007525-99a3-4178-a474-32865bdddec8@I",
         "id": "bf007525-99a3-4178-a474-32865bdddec8",
-        "name": "李四",
+        "name": "김철수",
         "person": "0c828550-d8ab-479e-9880-09a59332f1ed",
         "unit": "9e6ce205-86f6-4d84-96e1-83147567aa8d",
-        "unitLevelName": "兰德纵横/市场营销部",
-        "unitName": "市场营销部"
+        "unitLevelName": "란더종횡/마케팅부",
+        "unitName": "마케팅부"
       }],
       "number": "111",
-      "textfield": "杭州",
+      "textfield": "항저우",
       "attachment": [
         {
-          "activityName": "拟稿",
+          "activityName": "기안",
           "extension": "jpg",
           "id": "9514758e-9e28-4bfe-87d7-824f2811f173",
  		  "businessId": "1234758e-9e28-4bfe-87d7-824f2811f173",
           "lastUpdateTime": "2020-12-09 21:48:03",
           "length": 452863.0,
           "name": "111.jpg",
-          "person": "李四@lisi@P"
+          "person": "김철수@lisi@P"
         }
       ]
     }
     ...
   ],
   "total": {
-    "number": 222, //总计采用字段id
+    "number": 222, //합계는 필드 id 사용
     "textfield": 2
   }
 }
  */
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class DatatablePC 数据表格组件。表格形式的多行数据编辑组件。
- * @o2cn 数据表格PC端
+/** @class DatatablePC 데이터 표 컴포넌트. 표 형식의 다중 행 데이터 편집 컴포넌트.
+ * @o2cn 데이터 표 PC
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var datatable = this.form.get("name"); //获取组件
- * //方法2
- * var datatable = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var datatable = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var datatable = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @since v6.2
@@ -77,123 +77,123 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		isEdit: false,
 		options: {
 			/**
-			 * 所有内容加载后执行（包括异步加载）。
+			 * 모든 내용 로드 후 실행(비동기 로드 포함).
 			 * @event MWF.xApplication.process.Xform.DatatablePC#afterLoad
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 每初始化一个条目，但未加载的时候触发，通过this.event可以获取条目对象。
+			 * 항목을 초기화했지만 아직 로드하지 않았을 때마다 발생. this.event로 항목 객체를 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#beforeLoadLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 每一个条目加载后时候触发，通过this.event可以获取条目对象。
+			 * 각 항목이 로드된 후 발생. this.event로 항목 객체를 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#afterLoadLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 数据表格改变时触发。通过this.event.lines可以获取修改的条目数组，this.event.type可以获得修改的类型。<br/>
+			 * 데이터 표가 변경될 때 발생. this.event.lines로 수정된 항목 배열을, this.event.type으로 수정 유형을 가져올 수 있음.<br/>
 			 * <table>
-			 *     <tr><th><b>this.event.type</b></th><th><b>触发类型</b></th><th><b>this.event.lines</b></th></tr>
-			 *     <tr><td>addline</td><td>添加一行</td><td>添加的行数组</td></tr>
-			 *     <tr><td>deleteline</td><td>删除一行</td><td>删除的行数组</td></tr>
-			 *     <tr><td>editcomplete</td><td>某行完成编辑（点击当前编辑行前面的√执行。同时编辑多行忽略）</td><td>编辑的行数组</td></tr>
-			 *     <tr><td>editmodule</td><td>字段值改变时（同时编辑多行触发此事件，每次编辑单行忽略）</td><td>this.event.lines为编辑的行数组<br/>this.event.module为修改的字段</td></tr>
-			 *     <tr><td>move</td><td>通过向上箭头调整行顺序</td><td>数据表格所有行</td></tr>
-			 *     <tr><td>import</td><td>导入数据后</td><td>数据表格所有行</td></tr>
+			 *     <tr><th><b>this.event.type</b></th><th><b>발생 유형</b></th><th><b>this.event.lines</b></th></tr>
+			 *     <tr><td>addline</td><td>행 추가</td><td>추가한 행 배열</td></tr>
+			 *     <tr><td>deleteline</td><td>행 삭제</td><td>삭제한 행 배열</td></tr>
+			 *     <tr><td>editcomplete</td><td>행 편집 완료(현재 편집 행 앞의 √를 클릭하면 실행. 여러 행 동시 편집 시 무시)</td><td>편집한 행 배열</td></tr>
+			 *     <tr><td>editmodule</td><td>필드 값 변경 시(여러 행 동시 편집 시 이 이벤트 발생, 단일 행 편집 시 무시)</td><td>this.event.lines는 편집한 행 배열<br/>this.event.module은 수정한 필드</td></tr>
+			 *     <tr><td>move</td><td>위쪽 화살표로 행 순서 조정</td><td>데이터 표의 모든 행</td></tr>
+			 *     <tr><td>import</td><td>데이터 가져오기 후</td><td>데이터 표의 모든 행</td></tr>
 			 * </table>
 			 * @event MWF.xApplication.process.Xform.DatatablePC#change
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 添加条目时触发。通过this.event.line可以获取对应的条目对象，this.event.ev可以获得事件触发的Event。
+			 * 항목 추가 시 발생. this.event.line으로 해당 항목 객체를, this.event.ev로 이벤트를 발생시킨 Event를 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#addLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 编辑条目时触发（同时编辑多行不触发此事件）。通过this.event可以获取对应的条目对象。
+			 * 항목 편집 시 발생(여러 행 동시 편집 시에는 발생하지 않음). this.event로 해당 항목 객체를 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#editLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 完成编辑条目时触发（点击当前编辑行前面的√执行。同时编辑多行不触发此事件）。通过this.event可以获取对应的条目对象。
+			 * 항목 편집 완료 시 발생(현재 편집 행 앞의 √를 클릭하면 실행. 여러 행 동시 편집 시에는 발생하지 않음). this.event로 해당 항목 객체를 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#completeLineEdit
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 取消编辑条目时触发（点击当前编辑行前面的 — 执行。同时编辑多行不触发此事件）。通过this.event可以获取对应的条目对象。
+			 * 항목 편집 취소 시 발생(현재 편집 행 앞의 — 를 클릭하면 실행. 여러 행 동시 편집 시에는 발생하지 않음). this.event로 해당 항목 객체를 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#cancelLineEdit
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 删除条目前触发。通过this.event可以获取对应的条目对象。
+			 * 항목 삭제 전에 발생. this.event로 해당 항목 객체를 가져올 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#deleteLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 删除条目后触发。
+			 * 항목 삭제 후 발생.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#afterDeleteLine
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 导出前触发。
+			 * 내보내기 전에 발생.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#beforeExport
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 导出excel的时候触发，this.event指向导出的数据，您可以通过修改this.event来修改数据。
+			 * excel 내보내기 시 발생. this.event는 내보낼 데이터를 가리키며, this.event를 수정해 데이터를 변경할 수 있음.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#export
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 * @example
-			 * <caption>this.event数据格式如下：</caption>
+			 * <caption>this.event 데이터 형식은 다음과 같음:</caption>
 			 * {
 			 *  	data : [
-			 *   		["姓名","性别","学历","专业","出生日期","毕业日期"], //标题
-			 *  		[ "张三","男","大学本科","计算机","2001-1-2","2019-9-2" ], //第一行数据
-			 *  		[ "李四","男","大学专科","数学","1998-1-2","2018-9-2" ]  //第二行数据
-			 * 	], //导出的数据
-			 *     colWidthArray : [100, 50, 100, 200, 150, 150], //每列宽度
-			 *     title : "xxxx" //导出的excel文件标题
+			 *   		["이름","성별","학력","전공","생년월일","졸업일"], //제목
+			 *  		[ "홍길동","남","대학교 학사","컴퓨터","2001-1-2","2019-9-2" ], //첫 번째 행 데이터
+			 *  		[ "김철수","남","전문대학","수학","1998-1-2","2018-9-2" ]  //두 번째 행 데이터
+			 * 	], //내보낼 데이터
+			 *     colWidthArray : [100, 50, 100, 200, 150, 150], //열별 너비
+			 *     title : "xxxx" //내보낼 excel 파일 제목
 			 * }
 			 */
 			/**
-			 * 在导入excel，进行数据校验后触发，this.event指向导入的数据。
+			 * excel 가져오기에서 데이터 검증 후 발생. this.event는 가져온 데이터를 가리킴.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#validImport
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 * @example
-			 * <caption>this.event数据格式如下：</caption>
+			 * <caption>this.event 데이터 형식은 다음과 같음:</caption>
 			 * {
 			 *  	data : [
 			 *  	   {
-			 *  	 	"姓名" : "张三",
-			 *  	 	"性别" : "男",
-			 *  	 	"学历" ： "大学本科",
-			 *  	    "专业" : "计算机",
-			 *  	    "出生日期" : "aa01-1-2",
-			 *  	 	"毕业日期" : "2019-9-2",
+			 *  	 	"이름" : "홍길동",
+			 *  	 	"성별" : "남",
+			 *  	 	"학력" : "대학교 학사",
+			 *  	    "전공" : "컴퓨터",
+			 *  	    "생년월일" : "aa01-1-2",
+			 *  	 	"졸업일" : "2019-9-2",
 			 *  	 	"errorTextList" : [
-			 *  	 	    "第5列：aa01-1-2不是正确的日期格式。"
-			 *  	 	] //校验出的错误信息，如果该行数据正确，则无该字段
+			 *  	 	    "5열: aa01-1-2는 올바른 날짜 형식이 아닙니다."
+			 *  	 	] //검증에서 발견된 오류 정보, 해당 행 데이터가 올바르면 이 필드가 없음
 			 *  	 }
 			 *  	 ...
-			 *     ], //导入的数据
-			 *     "validted" : true  //是否校验通过，可以在本事件中修改该参数，确定是否强制导入
+			 *     ], //가져온 데이터
+			 *     "validted" : true  //검증 통과 여부, 이 이벤트에서 수정해 강제 가져오기 여부를 결정할 수 있음
 			 * }
 			 */
 			/**
-			 * 导入前触发。
+			 * 가져오기 전에 발생.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#beforeImport
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 在导入excel，数据校验成功将要设置回数据表格的时候触发，this.event指向整理过的导入数据，格式见{@link DatatableData}。
+			 * excel 가져오기에서 데이터 검증에 성공해 데이터 표에 다시 설정하려 할 때 발생. this.event는 정리된 가져오기 데이터를 가리키며, 형식은 {@link DatatableData} 참고.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#import
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			/**
-			 * 在导入excel，数据设置回数据表格以后触发，this.event指向整理过的导入数据，格式见{@link DatatableData}。
+			 * excel 가져오기에서 데이터를 데이터 표에 다시 설정한 후 발생. this.event는 정리된 가져오기 데이터를 가리키며, 형식은 {@link DatatableData} 참고.
 			 * @event MWF.xApplication.process.Xform.DatatablePC#afterImport
-			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+			 * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
 			 */
 			"moduleEvents": ["queryLoad","postLoad","load", "afterLoad",
 				"beforeLoadLine", "afterLoadLine", "change", "addLine", "deleteLine", "afterDeleteLine", "editLine",
@@ -212,7 +212,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			this._loadModuleEvents();
             if (this.fireEvent("queryLoad")){
 				this._queryLoaded();
-                // if( this.isSectionMergeEdit() ){ //区段合并，删除区段值合并数据后编辑
+                // if( this.isSectionMergeEdit() ){ //구간 병합, 구간 값 병합 데이터 삭제 후 편집
                 //     if( this.json.mergeTypeEdit === "script" ){
                 //         this._loadMergeEditNodeByScript();
                 //     }else{
@@ -257,8 +257,8 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			//this._loadUserInterface();
 		},
 		_loadUserInterface: function(){
-			//区段合并后编辑
-			if( this.isSectionMergeEdit() ){ //区段合并，删除区段值合并数据后编辑
+			//구간 병합 후 편집
+			if( this.isSectionMergeEdit() ){ //구간 병합, 구간 값 병합 데이터 삭제 후 편집
 				if( this.json.mergeTypeEdit === "script" ){
 					this._loadMergeEditNodeByScript();
 				}else{
@@ -266,10 +266,10 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				}
 			}
 
-			//区段合并展现
+			//구간 병합 표시
 			this.isMergeRead = this.isSectionMergeRead();
 
-			//启用区段且显示所有区段
+			//구간 사용 및 모든 구간 표시
 			this.sectionBy = this._getSectionBy();
 			this.isShowAllSection = this.isAllSectionShow();
 
@@ -292,18 +292,18 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			this.addable = this.json.addable !== "no";
 			this.sortable = this.json.sortable !== "no";
 
-			//允许导入
+			//가져오기 허용
 			this.importenable  = this.editable && (this.json.impexpType === "impexp" || this.json.impexpType === "imp");
-			//允许导出
+			//내보내기 허용
 			this.exportenable  = this.isReadable && this.json.impexpType === "impexp" || this.json.impexpType === "exp";
 
-			//是否多行同时编辑
+			//여러 행 동시 편집 여부
 			this.multiEditMode = this.json.editMode === "multi";
 
-			//是否显示操作列
+			//작업 열 표시 여부
 			this.isOperationRowHidden = !this.deleteable && !this.addable && this.multiEditMode;
 
-			//是否有总计列
+			//합계 열 존재 여부
 			this.totalFlag = false;
 			this.totalColumns = [];
 			this.totalNumberModuleIds = [];
@@ -329,18 +329,18 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			this.loadDatatable();
 		},
 		/**
-		 * @summary 判断组件是否只读.
+		 * @summary 컴포넌트가 읽기 전용인지 판단.
 		 * @example
 		 * var readonly = this.form.get('datatable').isReadonly();
-		 * @return {Boolean} 是否只读.
+		 * @return {Boolean} 읽기 전용 여부.
 		 */
 		isReadonly : function(){
 			return !this.editable;
 		},
 		/*
-		 * @summary 重新加载数据表格。
+		 * @summary 데이터 표 다시 로드.
 		 * @example
-		 *  this.form.get("fieldId").reload(); //重新加载
+		 *  this.form.get("fieldId").reload(); //다시 로드
 		 */
 		reload: function(){
 			this._loadReadEditAbeld();
@@ -355,7 +355,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 
 			// this.editModules = [];
 
-			//是否有总计列
+			//합계 열 존재 여부
 			this.totalFlag = false;
 			this.totalColumns = [];
 			this.totalNumberModuleIds = [];
@@ -435,7 +435,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 
 					this.form.modules.push(module);
 					if( json.isShow === false ){
-						th.hide(); //隐藏列
+						th.hide(); //숨김 열
 					}else if( this.reloading && json.isShow === true){
 						th.setStyle("display", "");
 					}
@@ -445,7 +445,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 
 
 			if(this.editable){
-				var actionTh = new Element("th.mwf_addlineaction", {"styles": {"width": "46px"}}).inject(this.titleTr, "top"); //操作列
+				var actionTh = new Element("th.mwf_addlineaction", {"styles": {"width": "46px"}}).inject(this.titleTr, "top"); //작업 열
 				if(this.isOperationRowHidden){
 					actionTh.setStyle('display', 'none');
 				}
@@ -465,7 +465,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				}
 				var moveTh;
 				if( this.sortable ){
-					moveTh = new Element("th.mwf_moveaction", {"styles": this.form.css.gridMoveActionCell || {}}).inject(this.titleTr, "bottom"); //总计列
+					moveTh = new Element("th.mwf_moveaction", {"styles": this.form.css.gridMoveActionCell || {}}).inject(this.titleTr, "bottom"); //합계 열
 				}
 				if (this.json.border){
 					Array.each([actionTh,moveTh], function(th){
@@ -517,9 +517,9 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				if (json){
 					// var module = this.form._loadModule(json, td);
 					// this.form.modules.push(module);
-					if( json.cellType === "sequence" )td.addClass("mwf_sequence"); //序号列
+					if( json.cellType === "sequence" )td.addClass("mwf_sequence"); //순번 열
 					if( thjson?.isShow === false ){
-						td.hide(); //隐藏列
+						td.hide(); //숨김 열
 					}else if( this.reloading && (!thjson.isShow || thjson.isShow === true)){
 						td.setStyle("display", "");
 					}
@@ -527,7 +527,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			}.bind(this));
 
 			if(this.editable){
-				var eTd = new Element("td.mwf_editaction",{"styles": this.json.actionStyles || {}}).inject(this.templateNode, "top"); //操作列
+				var eTd = new Element("td.mwf_editaction",{"styles": this.json.actionStyles || {}}).inject(this.templateNode, "top"); //작업 열
 				if(this.isOperationRowHidden){
 					eTd.setStyle('display', 'none');
 				}
@@ -536,7 +536,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				if( this.sortable ){
 					mTd= new Element("td.mwf_moveaction", {"styles": this.form.css.gridMoveActionCell || {}}).inject(this.templateNode, "bottom");
 					this.columnCount = this.columnCount+1;
-				} //排序列
+				} //정렬 열
 				if (this.json.border){
 					Array.each([eTd,mTd], function(td){
 						if(td)td.setStyles({
@@ -594,7 +594,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				var json = this.form._getDomjson(th);
 				if (json){
 					if( json.isShow === false ){
-						td.hide(); //隐藏列
+						td.hide(); //숨김 열
 					}else if( this.reloading && json.isShow === true){
 						td.setStyle("display", "");
 					}
@@ -614,10 +614,10 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			tds.each(function(td, index){
 				var json = this.form._getDomjson(td);
 				if (json){
-					//总计列
+					//합계 열
 					var tColumn = this.totalColumns.find(function(a){ return  a.index === index });
 					if(tColumn){
-						var moduleNodes = this.form._getModuleNodes(td); //获取总计列内的填写组件
+						var moduleNodes = this.form._getModuleNodes(td); //합계 열 안의 입력 컴포넌트 가져오기
 						if( moduleNodes.length > 0 ){
 							tColumn.moduleJson = this.form._getDomjson(moduleNodes[0]);
 							if(tColumn.type === "number")this.totalNumberModuleIds.push( tColumn.moduleJson.id );
@@ -682,7 +682,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			var json = column.moduleJson;
 			if(!json)return;
 
-			var pointLength = 0; //小数点后的最大数位
+			var pointLength = 0; //소수점 이하 최대 자릿수
 			var tmpV;
 			if (column.type === "count"){
 				tmpV = data.data.length;
@@ -758,7 +758,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		},
 		formatDecimals: function( json, v ){
 			var str;
-			if (json.decimals && (json.decimals!=="*")) { //小数点数位
+			if (json.decimals && (json.decimals!=="*")) { //소수점 자릿수
 
 				var decimals = json.decimals.toInt();
 
@@ -804,7 +804,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		isShowSectionBy: function(){
 			return this.json.showSectionBy && this.isShowAllSection ;
 		},
-		isSectionData: function(){ //数据是否经过区段处理
+		isSectionData: function(){ //데이터 구간 처리 여부
 			var data = this.getBusinessDataById();
 			if( o2.typeOf( data ) === "object" ){
 				var keys = Object.keys(data);
@@ -820,13 +820,13 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			return false;
 		},
 		/**
-		 * @summary 当数据表格设置为区段合并展现、区段合并编辑时，可以使用本方法获取所有区段数据。
-		 * @return {Object} 对象.
+		 * @summary 데이터 표가 구간 병합 표시, 구간 병합 편집으로 설정된 경우 이 메서드로 모든 구간 데이터를 가져올 수 있음.
+		 * @return {Object} 객체.
 		 * @example
 		 * var data = this.form.get("fieldId").getAllSectionData();
-		 * //data格式如下：
+		 * //data 형식은 다음과 같음:
 		 * {
-		 *  	"3455b82a-399c-4ee4-b9b9-e70ae40fbaf1": { //区段1的key和data
+		 *  	"3455b82a-399c-4ee4-b9b9-e70ae40fbaf1": { //구간1의 key와 data
 		 *			"data": [
 		 *				{
 		 *					"good": "yf",
@@ -835,7 +835,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		 *				}
 		 *			]
 		 *		},
-		 *  	"83de86fc-60bc-4b4c-955c-1085915865a4": { //区段2的key和data
+		 *  	"83de86fc-60bc-4b4c-955c-1085915865a4": { //구간2의 key와 data
 		 *  		"data": [
 		 *  			{
 		 *  				"good": "yf",
@@ -866,7 +866,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			this.dataWithSectionBy = this.getAllSortedSectionData();
 			return flag ? this.getBusinessDataById() : bData;
 		},
-		getAllSortedSectionData: function(){ //获取合并排序后的数据
+		getAllSortedSectionData: function(){ //병합·정렬된 데이터 가져오기
 			var data = this.getBusinessDataById();
 			var array = [];
 			for( var key in data ){
@@ -889,7 +889,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			}
 			return array;
 		},
-		getSortedSectionData: function(){ //获取合并排序后的数据
+		getSortedSectionData: function(){ //병합·정렬된 데이터 가져오기
 			var data = this.getBusinessDataById();
 			var array = [];
 			for( var key in data ){
@@ -926,7 +926,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 						this.dataWithSectionKey = sortedData;
 					}
 					var data = [];
-					//把区段值放在每行的数据里
+					//구간 값을 각 행의 데이터에 넣음
 					sortedData.each(function(d){
 						( d.data.data || [] ).each(function( obj ){
 							if( o2.typeOf(obj) === "object" ){
@@ -1016,7 +1016,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		},
 
 		_loadDatatable: function(callback, operation){
-			//operation 可能为setLineData, addLine, insertLine, deleteLines, deleteLine, moveUpList
+			//operation은 setLineData, addLine, insertLine, deleteLines, deleteLine, moveUpList일 수 있음
 			var p = o2.promiseAll(this.data).then(function(v){
 				this.data = v;
 				if( this.isShowAllSection ){
@@ -1312,7 +1312,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				return false;
 			}
 
-			//使用数据驱动
+			//데이터 기반 사용
 			var data, index, line;
 			if( this.isShowAllSection ){
 				index = beforeLine.options.indexInSectionLine + 1;
@@ -1401,7 +1401,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 					line.saveArrayArgs = ['insertLine', index, null, changedData, this.sectionBy];
 				}
 			}else {
-				//使用数据驱动
+				//데이터 기반 사용
 				data = this.getInputData();
 				if (data.data.length < index) return null;
 				changedData = d || {};
@@ -1528,7 +1528,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			this.fireEvent("deleteLine", [line]);
 
 			var saveFlag = line.deleteAttachment();
-			//使用数据驱动
+			//데이터 기반 사용
 			var data;
 			if( line.sectionLine ){
 				var data = this.getBusinessDataById();
@@ -1713,18 +1713,18 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			if( !!checkResult ){
 				line.changeEditMode(true);
 				/**
-				 * 数据表格当前正在编辑的条目，当数据表格为“同时编辑多行”时无此属性。
+				 * 데이터 표에서 현재 편집 중인 항목. 데이터 표가 “여러 행 동시 편집”이면 이 속성이 없음.
 				 * @member {MWF.xApplication.process.Xform.DatatablePC.Line | MWF.xApplication.process.Xform.DatatableMobile.Line | Null}
 				 * @example
-				 * //获取数据表格“dt1”的正在编辑的条目。
+				 * //데이터 표 “dt1”에서 편집 중인 항목 가져오기.
 				 * var line = this.form.get("dt1").currentEditedLine;
-				 * //获取数据
+				 * //데이터 가져오기
 				 * var data = line.getData();
-				 * //设置数据
+				 * //데이터 설정
 				 * line.setData({"subject":"111"});
-				 * //获取subject字段的值
+				 * //subject 필드 값 가져오기
 				 * var data = line.get("subject").getData();
-				 * //设置subject字段的值
+				 * //subject 필드 값 설정
 				 * line.get("subject").setData("test1");
 				 */
 				this.currentEditedLine = line;
@@ -1746,7 +1746,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		_afterLoaded: function(){
 		},
 		// /**
-		//  * @summary 重置数据表格的值为默认值或置空。
+		//  * @summary 데이터 표 값을 기본값으로 재설정하거나 비움.
 		//  *  @example
 		//  * this.form.get('fieldId').resetData();
 		//  */
@@ -1755,33 +1755,33 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			var value = this.getValue();
 			this.setData( value , false, 'resetData' );
 		},
-		/**当参数为Promise的时候，请查看文档: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|使用Promise处理表单异步}<br/>
-		 * 当表单上没有对应组件的时候，可以使用this.data[fieldId] = data赋值。
-		 * @summary 为数据表格赋值，如果需要设置所有区段数据请使用setAllSectionData方法。
-		 * @param data{DatatableData|Promise} 必选，数组或Promise.
-		 * @param fireChange{boolean} 可选，是否触发change事件，默认false.
+		/**매개변수가 Promise인 경우 문서 참고: {@link  https://www.yuque.com/o2oa/ixsnyt/ws07m0|Promise로 양식 비동기 처리}<br/>
+		 * 양식에 해당 컴포넌트가 없으면 this.data[fieldId] = data로 값을 설정할 수 있음.
+		 * @summary 데이터 표에 값 설정. 모든 구간 데이터를 설정하려면 setAllSectionData 메서드 사용.
+		 * @param data{DatatableData|Promise} 필수, 배열 또는 Promise.
+		 * @param fireChange{boolean} 선택, change 이벤트 발생 여부, 기본값 false.
 		 * @example
-		 *  this.form.get("fieldId").setData({data:[]}); //赋空值
+		 *  this.form.get("fieldId").setData({data:[]}); //빈 값 설정
 		 * @example
-		 *  //如果无法确定表单上是否有组件，需要判断
-		 *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+		 *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
+		 *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
 		 *      this.form.get('fieldId').setData( data );
 		 *  }else{
 		 *      this.data['fieldId'] = data;
 		 *  }
 		 *@example
-		 *  //使用Promise
+		 *  //Promise 사용
 		 *  var field = this.form.get("fieldId");
-		 *  var promise = new Promise(function(resolve, reject){ //发起异步请求
+		 *  var promise = new Promise(function(resolve, reject){ //비동기 요청 시작
 		 *    var oReq = new XMLHttpRequest();
-		 *    oReq.addEventListener("load", function(){ //绑定load事件
+		 *    oReq.addEventListener("load", function(){ //load 이벤트 바인딩
 		 *      resolve(oReq.responseText);
 		 *    });
-		 *    oReq.open("GET", "/data.json"); //假设数据存放在data.json
+		 *    oReq.open("GET", "/data.json"); //데이터가 data.json에 있다고 가정
 		 *    oReq.send();
 		 *  });
 		 *  promise.then( function(){
-		 *    var data = field.getData(); //此时由于异步请求已经执行完毕，getData方法获得data.json的值
+		 *    var data = field.getData(); //이 시점에는 비동기 요청이 이미 완료되어 getData 메서드로 data.json의 값을 얻음
 		 * })
 		 *  field.setData( promise );
 		 */
@@ -1789,7 +1789,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			if (!data){
 				data = this._getValue();
 			}else{
-				//todo 计算total
+				//todo total 계산
 			}
 			this._setData(data, fireChange, operation);
 		},
@@ -1813,11 +1813,11 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		__setData: function(data, fireChange, operation){
             // if( typeOf( data ) === "object" && typeOf(data.data) === "array"  ){
 			if( this.isShowAllSection ){
-				//兼容外部对编辑当前区段的setData，内部的setData不走这里，直接走setAllSectionData
+				//외부에서 현재 구간 편집에 대한 setData 호환, 내부 setData는 여기를 거치지 않고 바로 setAllSectionData로 감
 				this._setEditedSectionData(data, fireChange, operation);
 				return;
 			}else if( this.isMergeRead ){
-				//合并且只读，不允许setData
+				//병합 및 읽기 전용, setData 불가
 				throw new Error("The data table is merged and read-only, you can use the 'setAllSectionData' method to set all section data");
 			}
 
@@ -1876,7 +1876,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			if(this.form.app.options.name !== 'process.Work' || this.form.isDraftWork() || !this.form.businessData.work.dataChanged){
 				return;
 			}
-			if( this.isMergeRead ){ //合并且只读，不处理
+			if( this.isMergeRead ){ //병합 및 읽기 전용, 처리하지 않음
 				return;
 			}
 			var method = ['insertLine','addLine'].contains(type) ? 'add' : type;
@@ -1932,14 +1932,14 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			);
 		},
 		/**
-		 * @summary 当数据表格设置为区段合并展现、区段合并编辑时，可以使用本方法设置所有区段数据。
-		 * @param data{Object} 必选，对象.
-		 * @param fireChange{boolean} 可选，是否触发change事件，默认false.
+		 * @summary 데이터 표가 구간 병합 표시, 구간 병합 편집으로 설정된 경우 이 메서드로 모든 구간 데이터를 설정할 수 있음.
+		 * @param data{Object} 필수, 객체.
+		 * @param fireChange{boolean} 선택, change 이벤트 발생 여부, 기본값 false.
 		 * @example
-		 *  this.form.get("fieldId").setAllSectionData({}); //赋空值
+		 *  this.form.get("fieldId").setAllSectionData({}); //빈 값 설정
 		 * @example
 		 *  this.data['fieldId'].setAllSectionData({
-		 *  	"3455b82a-399c-4ee4-b9b9-e70ae40fbaf1": { //区段1的key和data
+		 *  	"3455b82a-399c-4ee4-b9b9-e70ae40fbaf1": { //구간1의 key와 data
 		 *			"data": [
 		 *				{
 		 *					"good": "yf",
@@ -1948,7 +1948,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		 *				}
 		 *			]
 		 *		},
-		 *  	"83de86fc-60bc-4b4c-955c-1085915865a4": { //区段2的key和data
+		 *  	"83de86fc-60bc-4b4c-955c-1085915865a4": { //구간2의 key와 data
 		 *  		"data": [
 		 *  			{
 		 *  				"good": "yf",
@@ -1961,14 +1961,14 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 		 */
 		setAllSectionData: function(data, fireChange, operation){
 			// if( this.isSectionMergeEdit() ){
-			// 	//合并且编辑，不允许setAllSectionData
+			// 	//병합 및 편집, setAllSectionData 불가
 			// 	throw new Error("The data table is in merge editing state, you can use the 'setData' method to set the data");
 			// }
 
 			var old;
 			if(fireChange)old = Object.clone(this.getBusinessDataById() || {});
 
-			//删除并没有用，因为会对比数据提交，如果要清空可以给data.data = []; data.total = {}
+			//삭제해도 소용없음(데이터를 비교해 제출하기 때문). 비우려면 data.data = []; data.total = {}로 설정
 			// if( data && data.data )delete data.data;
 			// if( data && data.total )delete data.total;
 
@@ -2007,18 +2007,18 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			}.bind(this), operation);
 		},
 		checkMerge: function(data){
-			//区段合并后编辑
+			//구간 병합 후 편집
 			var isMergeEidt = this.isSectionMergeEdit();
-			if( isMergeEidt ){ //区段合并，删除区段值合并数据后编辑
+			if( isMergeEidt ){ //구간 병합, 구간 값 병합 데이터 삭제 후 편집
 				if( this.json.mergeTypeEdit === "script" ){
 					this._loadMergeEditNodeByScript();
 				}else{
 					this._loadMergeEditNodeByDefault();
 				}
 			}
-			//区段合并展现
+			//구간 병합 표시
 			this.isMergeRead = this.isSectionMergeRead();
-			//启用区段且显示所有区段
+			//구간 사용 및 모든 구간 표시
 			this.sectionBy = this._getSectionBy();
 			this.isShowAllSection = this.isAllSectionShow();
 
@@ -2106,12 +2106,12 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			}
 		},
 		/**
-		 * @summary 判断数据表格是否为空.
+		 * @summary 데이터 표가 비어 있는지 판단.
 		 * @example
 		 * if( this.form.get('fieldId').isEmpty() ){
-		 *     this.form.notice('至少需要添加一条数据', 'warn');
+		 *     this.form.notice('최소 한 건의 데이터를 추가해야 합니다', 'warn');
 		 * }
-		 * @return {Boolean} 是否为空
+		 * @return {Boolean} 비어 있는지 여부
 		 */
 		isEmpty: function(){
 			var data = this.getInputData();
@@ -2125,21 +2125,21 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			// }
 			return false;
 		},
-		//api 相关开始
+		//api 관련 시작
 		/**
-		 * 获取对应的条目。
-		 * @param {Number} index 条目序号，从零开始
-		 * @return {MWF.xApplication.process.Xform.DatatablePC.Line | Null} 对应的数据表格条目
+		 * 해당 항목 가져오기.
+		 * @param {Number} index 항목 순번, 0부터 시작
+		 * @return {MWF.xApplication.process.Xform.DatatablePC.Line | Null} 해당 데이터 표 항목
 		 * @example
-		 * //获取数据表格“dt1”的第一个条目。
+		 * //데이터 표 “dt1”의 첫 번째 항목 가져오기.
 		 * var line = this.form.get("dt1").getLine(0);
-		 * //获取第一行的数据
+		 * //첫 번째 행 데이터 가져오기
 		 * var data = line.getData();
-		 * //设置第一行的数据
+		 * //첫 번째 행 데이터 설정
 		 * line.setData({"subject":"111"});
-		 * //获取第一个条目subject字段的值
+		 * //첫 번째 항목의 subject 필드 값 가져오기
 		 * var data = line.get("subject").getData();
-		 * //设置subject字段的值
+		 * //subject 필드 값 설정
 		 * line.get("subject").setData("test1");
 		 */
 		getLine: function(index){
@@ -2147,9 +2147,9 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			return line || null;
 		},
 		/**
-		 * 在数据表格末尾添加条目。
-		 * @param {Object} [data] 添加条目的数据。
-		 * @return {MWF.xApplication.process.Xform.DatatablePC.Line} 添加的数据表格条目
+		 * 데이터 표 끝에 항목 추가.
+		 * @param {Object} [data] 추가할 항목 데이터.
+		 * @return {MWF.xApplication.process.Xform.DatatablePC.Line} 추가된 데이터 표 항목
 		 * @example
 		 * var line = this.form.get("dt1").addLine();
 		 */
@@ -2157,10 +2157,10 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			return this._addLine( null, null,  data );
 		},
 		/**
-		 * 在数据表格指定位置添加条目。
-		 * @param {Number} index 条目序号，从零开始，如果下标超过当前数据表格条目数，插入失败并返回null。
-		 * @param {Object} [data] 添加条目的数据。
-		 * @return {MWF.xApplication.process.Xform.DatatablePC.Line | Null} 插入的数据表格条目
+		 * 데이터 표의 지정 위치에 항목 추가.
+		 * @param {Number} index 항목 순번, 0부터 시작. 인덱스가 현재 데이터 표 항목 수를 넘으면 삽입에 실패하고 null 반환.
+		 * @param {Object} [data] 추가할 항목 데이터.
+		 * @return {MWF.xApplication.process.Xform.DatatablePC.Line | Null} 삽입된 데이터 표 항목
 		 * @example
 		 * var line = this.form.get("dt1").insertLine(0);
 		 */
@@ -2168,10 +2168,10 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			return this._insertLineByIndex(null,  index, data);
 		},
 		/**
-		 * 删除指定位置的条目。
-		 * @param {Number} index 条目序号，从零开始，如果下标超过当前数据表格条目数，删除失败。
+		 * 지정 위치의 항목 삭제.
+		 * @param {Number} index 항목 순번, 0부터 시작. 인덱스가 현재 데이터 표 항목 수를 넘으면 삭제 실패.
 		 * @example
-		 * //直接删除第一个条目
+		 * //첫 번째 항목 바로 삭제
 		 * this.form.get("dt1").deleteLine(0);
 		 */
 		deleteLine: function(index, ev){
@@ -2184,16 +2184,16 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			// }
 		},
 		/**
-		 * 获取对应表单组件，作用等同于get。
-		 * @param {Number} index 条目序号，从零开始
-		 * @param {String} id 组件标识
-		 * @return {FormComponent} 对应表单组件
+		 * 해당 양식 컴포넌트 가져오기, get과 동일.
+		 * @param {Number} index 항목 순번, 0부터 시작
+		 * @param {String} id 컴포넌트 식별자
+		 * @return {FormComponent} 해당 양식 컴포넌트
 		 * @example
-		 * //获取数据表格“dt1”的第一个条目的subject字段。
+		 * //데이터 표 “dt1”의 첫 번째 항목의 subject 필드 가져오기.
 		 * var module = this.form.get("dt1").getModule(0, "subject");
-		 * //获取subject字段的值
+		 * //subject 필드 값 가져오기
 		 * var data = module.getData();
-		 * //设置subject字段的值
+		 * //subject 필드 값 설정
 		 * module.setData("test1");
 		 */
 		getModule: function(index, id){
@@ -2202,55 +2202,55 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			return line.getModule(id);
 		},
 		/**
-		 * 获取对应表单组件，作用等同于getModule。
-		 * @param {Number} index 条目序号，从零开始
-		 * @param {String} id 组件标识
-		 * @return {FormComponent} 对应表单组件
+		 * 해당 양식 컴포넌트 가져오기, getModule과 동일.
+		 * @param {Number} index 항목 순번, 0부터 시작
+		 * @param {String} id 컴포넌트 식별자
+		 * @return {FormComponent} 해당 양식 컴포넌트
 		 * @example
-		 * //获取数据表格“dt1”的第一个条目的subject字段。
+		 * //데이터 표 “dt1”의 첫 번째 항목의 subject 필드 가져오기.
 		 * var module = this.form.get("dt1").get(0, "subject");
-		 * //获取subject字段的值
+		 * //subject 필드 값 가져오기
 		 * var data = module.getData();
-		 * //设置subject字段的值
+		 * //subject 필드 값 설정
 		 * module.setData("test1");
 		 */
 		get: function(index, id){
 			return this.getModule(index, id);
 		},
-		//api 相关
+		//api 관련
 
 		/**
-		 * 在脚本中使用 this.data[fieldId] 也可以获取组件值。
-		 * 区别如下：<br/>
-		 * 1、当使用Promise的时候<br/>
-		 * 使用异步函数生成器（Promise）为组件赋值的时候，用getData方法立即获取数据，可能返回修改前的值，当Promise执行完成以后，会返回修改后的值。<br/>
-		 * this.data[fieldId] 立即获取数据，可能获取到异步函数生成器，当Promise执行完成以后，会返回修改后的值。<br/>
-		 * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|具体差异请查看链接}<br/>
-		 * 2、当表单上没有对应组件的时候，可以使用this.data[fieldId]获取值，但是this.form.get('fieldId')无法获取到组件。
-		 * @summary 获取数据表格数据.
+		 * 스크립트에서 this.data[fieldId]로도 컴포넌트 값을 가져올 수 있음.
+		 * 차이는 다음과 같음:<br/>
+		 * 1. Promise를 사용하는 경우<br/>
+		 * 비동기 함수 생성기(Promise)로 컴포넌트에 값을 할당할 때 getData 메서드로 즉시 가져오면 수정 전 값이 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+		 * this.data[fieldId]로 즉시 가져오면 비동기 함수 생성기가 반환될 수 있으며, Promise 실행이 완료되면 수정 후 값이 반환됨.<br/>
+		 * {@link https://www.yuque.com/o2oa/ixsnyt/ws07m0#EggIl|자세한 차이는 링크 참고}<br/>
+		 * 2. 양식에 해당 컴포넌트가 없을 때는 this.data[fieldId]로 값을 가져올 수 있지만, this.form.get('fieldId')로는 컴포넌트를 가져올 수 없음.
+		 * @summary 데이터 표 데이터 조회.
 		 * @example
 		 * var data = this.form.get('fieldId').getData();
 		 *@example
-		 *  //如果无法确定表单上是否有组件，需要判断
+		 *  //양식에 컴포넌트가 있는지 확실하지 않으면 판단 필요
 		 *  var data;
-		 *  if( this.form.get('fieldId') ){ //判断表单是否有无对应组件
+		 *  if( this.form.get('fieldId') ){ //양식에 해당 컴포넌트가 있는지 판단
 		 *      data = this.form.get('fieldId').getData();
 		 *  }else{
-		 *      data = this.data['fieldId']; //直接从数据中获取字段值
+		 *      data = this.data['fieldId']; //데이터에서 필드 값을 직접 가져오기
 		 *  }
 		 *  @example
-		 *  //使用Promise
+		 *  //Promise 사용
 		 *  var field = this.form.get("fieldId");
-		 *  var promise = new Promise(function(resolve, reject){ //发起异步请求
+		 *  var promise = new Promise(function(resolve, reject){ //비동기 요청 시작
 		 *    var oReq = new XMLHttpRequest();
-		 *    oReq.addEventListener("load", function(){ //绑定load事件
+		 *    oReq.addEventListener("load", function(){ //load 이벤트 바인딩
 		 *      resolve(oReq.responseText);
 		 *    });
-		 *    oReq.open("GET", "/data.json"); //假设数据存放在data.json
+		 *    oReq.open("GET", "/data.json"); //데이터가 data.json에 있다고 가정
 		 *    oReq.send();
 		 *  });
 		 *  promise.then( function(){
-		 *    var data = field.getData(); //此时由于异步请求已经执行完毕，getData方法获得data.json的值
+		 *    var data = field.getData(); //이 시점에는 비동기 요청이 이미 완료되어 getData 메서드로 data.json의 값을 얻음
 		 * })
 		 *  field.setData( promise );
 		 * @return {DatatableData}
@@ -2295,7 +2295,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				return this._getBusinessData();
 			}
 		},
-		//区段依据
+		//구간 기준
 		_getSectionBy: function(){
 			if (this.json.section!=="yes"){
 				return "";
@@ -2523,14 +2523,14 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 			const isAsyncCheck = flag && typeof flag.then === "function";
 			const isSyncPass = String(flag) === "true";
 
-			// 同步校验不通过
+			// 동기 검증 실패
 			if (!isAsyncCheck && !isSyncPass) {
 				const errMsg = flag || MWF.xApplication.process.Xform.LP.lineNotValidation;
 				this.notValidationMode(errMsg);
 				return false;
 			}
 
-			// 异步校验处理
+			// 비동기 검증 처리
 			if (isAsyncCheck) {
 				return flag.then(f => {
 					const pass = String(f) === "true";
@@ -2542,7 +2542,7 @@ MWF.xApplication.process.Xform.DatatablePC = MWF.APPDatatablePC = new Class(
 				});
 			}
 
-			// 同步校验通过
+			// 동기 검증 통과
 			return true;
 		},
 		validation: function(routeName, opinion){
@@ -2728,11 +2728,11 @@ MWF.xApplication.process.Xform.DatatablePC.SectionLine =  new Class({
 	Implements: [Options, Events],
 	options: {
 		isNew: false,
-		isEdited: true, //是否正在编辑
-		isEditable: true, //能否被编辑
-		isDeleteable: true, //能否被删除
-		isAddable: true, //能否添加
-		isMergeRead: false, //合并阅读
+		isEdited: true, //편집 중 여부
+		isEditable: true, //편집 가능 여부
+		isDeleteable: true, //삭제 가능 여부
+		isAddable: true, //추가 가능 여부
+		isMergeRead: false, //병합 열람
 		index: 0,
 		indexText: "0"
 	},
@@ -2991,7 +2991,7 @@ MWF.xApplication.process.Xform.DatatablePC.SectionLine =  new Class({
 			var json = this.form._getDomjson(th);
 			if (json){
 				if( json.isShow === false ){
-					td.hide(); //隐藏列
+					td.hide(); //숨김 열
 				}else if( this.reloading && json.isShow === true){
 					td.setStyle("display", "");
 				}
@@ -3011,10 +3011,10 @@ MWF.xApplication.process.Xform.DatatablePC.SectionLine =  new Class({
 		tds.each(function(td, index){
 			var json = this.form._getDomjson(td);
 			if (json){
-				//总计列
+				//합계 열
 				var tColumn = this.totalColumns.find(function(a){ return  a.index === index });
 				if(tColumn){
-					var moduleNodes = this.form._getModuleNodes(td); //获取总计列内的填写组件
+					var moduleNodes = this.form._getModuleNodes(td); //합계 열 안의 입력 컴포넌트 가져오기
 					if( moduleNodes.length > 0 ){
 						tColumn.moduleJson = this.form._getDomjson(moduleNodes[0]);
 						if(tColumn.type === "number")this.totalNumberModuleIds.push( tColumn.moduleJson.id );
@@ -3091,11 +3091,11 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 	Implements: [Options, Events],
 	options: {
 		isNew: false,
-		isEdited : true, //是否正在编辑
-		isEditable : true, //能否被编辑
-		isDeleteable: true, //能否被删除
-		isAddable: true, //能否添加
-		isMergeRead: false, //合并阅读
+		isEdited : true, //편집 중 여부
+		isEditable : true, //편집 가능 여부
+		isDeleteable: true, //삭제 가능 여부
+		isAddable: true, //추가 가능 여부
+		isMergeRead: false, //병합 열람
 		index : 0,
 		indexText : "0",
 		indexInSectionLine: 0,
@@ -3183,7 +3183,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 			this.options.indexInSectionLineText = (indexInSectionLine.toInt()+1).toString();
 		}
 
-        //合并状态或拆分状态
+        //병합 상태 또는 분할 상태
         var sectionKey = this.options.sectionKey || this.datatable.sectionBy;
         this.modules.each(function (module) {
             var json = module.json;
@@ -3236,7 +3236,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 		this.node.set("html", this.datatable.templateHtml);
 		var moduleNodes = this.form._getModuleNodes(this.node, true);
 
-		//合并状态或拆分状态
+		//병합 상태 또는 분할 상태
 		var sectionKey = this.options.sectionKey || this.datatable.sectionBy;
 		moduleNodes.each(function (node) {
 			var mwfType = node.get("MWFtype");
@@ -3289,7 +3289,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 				json.inDatatable = true;
 				var module = this.form._loadModule(json, node, function () {
 					if( _self.options.isMergeRead ){
-						this.field = false; //不希望保存数据
+						this.field = false; //데이터 저장을 원하지 않음
 						this._getBusinessData = function(){
 							return _self.data[templateJsonId];
 						};
@@ -3299,7 +3299,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 					this.parentLine = _self;
 					this.parentDatatable = _self.datatable;
 
-					//只读方法值在页面加载的时候或者new的时候计算一下
+					//읽기 전용 메서드 값은 페이지 로드 시 또는 new 시점에 한 번 계산
 					if( this.json.compute === "show" ){
 						var needComputeShow = false;
 						if( _self.datatable.loading ) {
@@ -3309,7 +3309,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 						}
 						if( !needComputeShow ){
 							this.json.compute = "create"; //
-							if( this.options.moduleEvents && this.options.moduleEvents.length ){ //恢复compute
+							if( this.options.moduleEvents && this.options.moduleEvents.length ){ //compute 복원
 								var eventName = ( this.options.moduleEvents || [] ).contains("afterLoad") ? "afterLoad" : "load";
 								var resetCompute = function () {
 									this.json.compute = "show";
@@ -3370,7 +3370,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 							this.datatable.fireEvent("change", [{lines: [this], type: "editmodule", module: module}]);
 						}.bind(this))
 					}
-					//该字段是合集数值字段
+					//이 필드는 집계 숫자 필드
 					if(this.datatable.multiEditMode && this.isTotalNumberModule(templateJsonId)){
 						//module
 						module.addEvent("change", function(){
@@ -3404,7 +3404,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 		return this.getModule( templateJsonId );
 	},
 	getAttachmentSite: function(json, templateJsonId, sectionKey){
-		//确保site最长为64，否则后台会报错
+		//site 길이를 최대 64로 보장, 그렇지 않으면 서버에서 오류 발생
 
 		var index = this.options.index;
 
@@ -3494,16 +3494,16 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 		}
 	},
 	createActions: function () {
-		//不允许编辑，直接返回
+		//편집 불가, 바로 반환
 		if(!this.options.isEditable)return;
 
 		var editActionTd = this.node.getElement(".mwf_editaction");
 		var moveActionTd = this.node.getElement(".mwf_moveaction");
 
-		if(this.datatable.multiEditMode){ //多行编辑模式
+		if(this.datatable.multiEditMode){ //다중 행 편집 모드
 			if(this.options.isAddable)this.createAddAction(editActionTd);
 			if(this.options.isDeleteable)this.createDelAction(editActionTd);
-		}else{ //单行编辑模式
+		}else{ //단일 행 편집 모드
 			if(this.options.isAddable)this.createAddAction(editActionTd);
 			if(this.options.isDeleteable)this.createDelAction(editActionTd);
 			this.createCompleteAction(editActionTd);
@@ -3610,10 +3610,10 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 		this.load();
 		this.reloading = false;
 	},
-	clearSubModules: function () { //把module清除掉
+	clearSubModules: function () { //module 제거
 		for(var key in this.all){
 			var module = this.all[key];
-			//如果嵌套数据模板或者数据表格，还要清除掉下级
+			//데이터 템플릿이나 데이터 표가 중첩된 경우 하위도 제거
 			if(module.clearSubModules)module.clearSubModules();
 			this.form.modules.erase(module);
 			if (this.form.all[key]) delete this.form.all[key];
@@ -3691,22 +3691,22 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 			if (field.json.type === "sequence" || !field.validationMode) return;
 
 			field.validationMode();
-			// 同步校验失败标记
+			// 동기 검증 실패 표시
 			if (!field.validation()) {
 				syncFailed = true;
 			}
-			// 收集字段异步校验Promise
+			// 필드 비동기 검증 Promise 수집
 			if (field.moduleValidationAG) {
 				asyncPromiseList.push(field.moduleValidationAG);
 			}
 		});
 
-		// 任意字段同步校验失败，直接阻断
+		// 어느 필드든 동기 검증에 실패하면 바로 차단
 		if (syncFailed) return false;
-		// 无异步校验，同步全部通过
+		// 비동기 검증 없음, 동기 검증 모두 통과
 		if (asyncPromiseList.length === 0) return true;
 
-		// 合并字段异步校验
+		// 필드 비동기 검증 병합
 		return Promise.all(asyncPromiseList).then(arr => {
 			const hasError = arr.some(item => String(item) !== "true");
 			return !hasError;
@@ -3725,7 +3725,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 		const isAsyncCheck = flag && typeof flag.then === "function";
 		const isSyncPass = String(flag) === "true";
 
-		// 同步校验不通过
+		// 동기 검증 실패
 		if (!isAsyncCheck && !isSyncPass) {
 			this.notValidationMode(flag, !layout.mobile);
 			return false;
@@ -3747,7 +3747,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 		var node, tr, td;
 		if( this.form.json.errorStyle ){
 			if( this.form.json.errorStyle.type === "notice" ){
-				if( !this.form.errorNoticing ){ //如果是弹出
+				if( !this.form.errorNoticing ){ //팝업이면
 					this.form.errorNoticing = true;
 					this.form.notice(text, "error", this.node, null, null, {
 						onClose : function () {
@@ -3888,7 +3888,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 
 		if (typeof obj1 !== 'object' || typeof obj2 !== 'object') return false;
 
-		// 处理循环引用（避免无限递归）
+		// 순환 참조 처리(무한 재귀 방지)
 		if (cache.has(obj1)) return cache.get(obj1) === obj2;
 		cache.set(obj1, obj2);
 
@@ -3901,7 +3901,7 @@ MWF.xApplication.process.Xform.DatatablePC.Line =  new Class({
 		}
 
 		if (!Array.isArray(obj1) && !Array.isArray(obj2)) {
-			// 获取所有自有属性（不含原型链）
+			// 모든 자체 속성 가져오기(프로토타입 체인 제외)
 			const keys1 = Object.keys(obj1);
 			const keys2 = Object.keys(obj2);
 
@@ -3962,7 +3962,7 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterDatabale = new Class({
 
 		this.editable = true;
 
-		//是否多行同时编辑
+		//여러 행 동시 편집 여부
 		this.multiEditMode = true;
 
 		this.data = {"data": [], "total":{}};
@@ -4029,7 +4029,7 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterDatabale = new Class({
 	// _delLine: function(line){
 	// 	this.fireEvent("deleteLine", [line]);
 	//
-	// 	//使用数据驱动
+	// 	//데이터 기반 사용
 	// 	var data = this.data;
 	// 	data.data.splice(line.options.index, 1);
 	//
@@ -4052,14 +4052,14 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterDatabale = new Class({
 	}
 });
 
-//Excel导入时候创建的组件
+//Excel 가져오기 시 생성된 컴포넌트
 MWF.xApplication.process.Xform.DatatablePC.ImporterLine =  new Class({
 	Implements: [Options, Events],
 	options: {
 		isNew: true,
-		isEdited : true, //是否正在编辑
-		isEditable : true, //能否被编辑
-		isDeleteable: true, //能否被删除
+		isEdited : true, //편집 중 여부
+		isEditable : true, //편집 가능 여부
+		isDeleteable: true, //삭제 가능 여부
 	},
 	initialize: function (node, datatable, data, options) {
 
@@ -4092,7 +4092,7 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterLine =  new Class({
 		this.node.set("html", this.datatable.templateHtml);
 		var moduleNodes = this.form._getModuleNodes(this.node, true);
 
-		//合并状态或拆分状态
+		//병합 상태 또는 분할 상태
 		// var sectionKey = this.options.sectionKey || this.datatable.sectionBy;
 		moduleNodes.each(function (node) {
 			var mwfType = node.get("MWFtype");
@@ -4135,7 +4135,7 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterLine =  new Class({
 
 				var module = this.form._loadModule(json, node, function () {
 
-					// this.field = false; //不希望保存数据
+					// this.field = false; //데이터 저장을 원하지 않음
 					// this._getBusinessData = function(){
 					// 	return _self.data[templateJsonId];
 					// };
@@ -4145,7 +4145,7 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterLine =  new Class({
 					this.parentLine = _self;
 					this.parentDatatable = _self.datatable;
 
-					//只读方法值在页面加载的时候或者new的时候计算一下
+					//읽기 전용 메서드 값은 페이지 로드 시 또는 new 시점에 한 번 계산
 					if( this.json.compute === "show" ){
 						var needComputeShow = false;
 						if( _self.datatable.loading ) {
@@ -4155,7 +4155,7 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterLine =  new Class({
 						}
 						if( !needComputeShow ){
 							this.json.compute = "create"; //
-							if( this.options.moduleEvents && this.options.moduleEvents.length ){ //恢复compute
+							if( this.options.moduleEvents && this.options.moduleEvents.length ){ //compute 복원
 								var eventName = ( this.options.moduleEvents || [] ).contains("afterLoad") ? "afterLoad" : "load";
 								var resetCompute = function () {
 									this.json.compute = "show";
@@ -4195,10 +4195,10 @@ MWF.xApplication.process.Xform.DatatablePC.ImporterLine =  new Class({
 			}
 		}.bind(this));
 	},
-	clearSubModules: function () { //把module清除掉
+	clearSubModules: function () { //module 제거
 		for(var key in this.all){
 			var module = this.all[key];
-			//如果嵌套数据模板或者数据表格，还要清除掉下级
+			//데이터 템플릿이나 데이터 표가 중첩된 경우 하위도 제거
 			if(module.clearSubModules)module.clearSubModules();
 			this.form.modules.erase(module);
 			// if( this.form.businessData.data.hasOwnProperty(key) )delete this.form.businessData.data[key];
@@ -4279,7 +4279,7 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 	exportToExcel : function () {
 		MWF.require("MWF.widget.Mask", null, false);
 		this.mask = new MWF.widget.Mask({ "style": "desktop", "zIndex": 50000 });
-		// 适配移动端
+		// 모바일 대응
 		if (layout.mobile) {
 			this.mask.load();
 		} else {
@@ -4327,7 +4327,7 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 				arg.data || rstArr,
 				arg.title || excelName,
 				arg.colWidthArray || colWidthArr,
-				this.getDateIndexArray(),  //日期格式列下标
+				this.getDateIndexArray(),  //날짜 형식 열 인덱스
 				null,
 				function () {
 					if (this.mask) {
@@ -4350,7 +4350,7 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 
 			var mJson;
 			if(tds[index]){
-				var mNodes = this.form._getModuleNodes(tds[index]); //获取总计列内的填写组件
+				var mNodes = this.form._getModuleNodes(tds[index]); //합계 열 안의 입력 컴포넌트 가져오기
 				if( mNodes.length > 0 )mJson = this.form._getDomjson(mNodes[0]);
 			}
 
@@ -4479,11 +4479,11 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 	// 	return exportData;
 	// },
 	isAvaliableColumn : function(thJson, mJson){
-		if (thJson && ( thJson.isShow === false || thJson.isImpExp === false ))return false; //隐藏列，不允许导入导出
-		if (mJson && (mJson.type == "sequence" || mJson.cellType == "sequence") )return false; //序号列
+		if (thJson && ( thJson.isShow === false || thJson.isImpExp === false ))return false; //숨김 열, 가져오기/내보내기 불가
+		if (mJson && (mJson.type == "sequence" || mJson.cellType == "sequence") )return false; //순번 열
 		if (mJson && ["Image","Button","ImageClipper","WritingBoard","Attachment","AttachmentDg","Label",
-			"Elbutton","Elcarousel","Eldropdown","Elicon","Eltree"].contains(mJson.type) )return false; //图片，附件,Label列不导入导出
-		// if (type==="import" && module && ["Label"].contains(module.json.type))return false; //Label 不导入
+			"Elbutton","Elcarousel","Eldropdown","Elicon","Eltree"].contains(mJson.type) )return false; //이미지, 첨부파일, Label 열은 가져오기/내보내기 안 함
+		// if (type==="import" && module && ["Label"].contains(module.json.type))return false; //Label은 가져오기 안 함
 		return true;
 	},
 	getColWidthArray : function(){
@@ -4510,7 +4510,7 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 		return colWidthArr;
 	},
 	getDateIndexArray : function(){
-		var dateIndexArr = []; //日期格式列下标
+		var dateIndexArr = []; //날짜 형식 열 인덱스
 		var idx=0;
 		this.columnJsonList.each(function(c){
 			if ( c.available && c.mJson ) {
@@ -4545,7 +4545,7 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 	exportWithImportDataToExcel : function ( importedData ) {
 		MWF.require("MWF.widget.Mask", null, false);
 		this.mask = new MWF.widget.Mask({ "style": "desktop", "zIndex": 50000 });
-		// 适配移动端
+		// 모바일 대응
 		if (layout.mobile) {
 			this.mask.load();
 		} else {
@@ -4574,7 +4574,7 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 		}.bind(this));
 
 		var colWidthArr = this.getColWidthArray();
-		colWidthArr.push( 300 ); //提示信息
+		colWidthArr.push( 300 ); //안내 메시지
 
 		var excelName = this.getExcelName();
 
@@ -4590,7 +4590,7 @@ MWF.xApplication.process.Xform.DatatablePC.Exporter = new Class({
 		    arg.data || resultArr,
 		    arg.title || excelName,
 		    arg.colWidthArray || colWidthArr,
-		    this.getDateIndexArray(), //日期格式列下标
+		    this.getDateIndexArray(), //날짜 형식 열 인덱스
 			null,
 			function () {
 				if (this.mask) {
@@ -4621,25 +4621,25 @@ MWF.xApplication.process.Xform.DatatablePC.Importer = new Class({
 		this.columnJsonList = [];
 	},
 	isAvaliableColumn : function(thJson, mJson){
-		if (thJson && ( thJson.isShow === false || thJson.isImpExp === false ))return false; //隐藏列，不允许导入导出
-		if (mJson && (mJson.type == "sequence" || mJson.cellType == "sequence") )return false; //序号列
+		if (thJson && ( thJson.isShow === false || thJson.isImpExp === false ))return false; //숨김 열, 가져오기/내보내기 불가
+		if (mJson && (mJson.type == "sequence" || mJson.cellType == "sequence") )return false; //순번 열
 		if (mJson && ["Image","Button","ImageClipper","WritingBoard","Attachment","AttachmentDg","Label",
-			"Elbutton","Elbutton","Elcarousel","Eldropdown","Elicon","Eltree"].contains(mJson.type) )return false; //图片，附件,Label列不导入导出
-		// if (type==="import" && module && ["Label"].contains(module.json.type))return false; //Label 不导入
+			"Elbutton","Elbutton","Elcarousel","Eldropdown","Elicon","Eltree"].contains(mJson.type) )return false; //이미지, 첨부파일, Label 열은 가져오기/내보내기 안 함
+		// if (type==="import" && module && ["Label"].contains(module.json.type))return false; //Label은 가져오기 안 함
 		return true;
 	},
 	importFromExcel : function () {
 		this.datatable.fireEvent("beforeImport");
 
 		this.getColumnList();
-		var dateColArray = this.getDateIndexArray(); //日期列
+		var dateColArray = this.getDateIndexArray(); //날짜 열
 		var orgTitleArray = this.getOrgTitleArray();
 
 		this.excelUtil.upload( dateColArray, function (data) {
 
 			MWF.require("MWF.widget.Mask", null, false);
 			this.mask = new MWF.widget.Mask({ "style": "desktop", "zIndex": 50000 });
-			// 适配移动端
+			// 모바일 대응
 			if (layout.mobile) {
 				this.mask.load();
 			} else {
@@ -4706,7 +4706,7 @@ MWF.xApplication.process.Xform.DatatablePC.Importer = new Class({
 
 			var mJson;
 			if(tds[index]){
-				var mNodes = this.form._getModuleNodes(tds[index]); //获取总计列内的填写组件
+				var mNodes = this.form._getModuleNodes(tds[index]); //합계 열 안의 입력 컴포넌트 가져오기
 				if( mNodes.length > 0 )mJson = this.form._getDomjson(mNodes[0]);
 			}
 
@@ -4728,7 +4728,7 @@ MWF.xApplication.process.Xform.DatatablePC.Importer = new Class({
 		return this.columnJsonList;
 	},
 	getDateIndexArray : function(){
-		var dateIndexArr = []; //日期格式列下标
+		var dateIndexArr = []; //날짜 형식 열 인덱스
 		var idx=0;
 		this.columnJsonList.each(function(c){
 			if ( c.mJson && c.mJson.type === "Calendar" && (c.mJson.format === "%Y-%m-%d" || c.mJson.format === "%Y-%m-%d %H:%M:%S")) {
@@ -4782,7 +4782,7 @@ MWF.xApplication.process.Xform.DatatablePC.Importer = new Class({
 							}
 							break;
 						default:
-							value = d; //换行符&#10;
+							value = d; //줄바꿈 문자&#10;
 							break;
 					}
 				}
@@ -4855,7 +4855,7 @@ MWF.xApplication.process.Xform.DatatablePC.Importer = new Class({
 
 			htmlArray.push( "<tr>" );
 			this.columnJsonList.each( function (obj, i) {
-				htmlArray.push( "<td style='"+contentStyle+"'>"+ ( lineData[ obj.title ] || '' ).replace(/&#10;/g,"<br/>") +"</td>" ); //换行符&#10;
+				htmlArray.push( "<td style='"+contentStyle+"'>"+ ( lineData[ obj.title ] || '' ).replace(/&#10;/g,"<br/>") +"</td>" ); //줄바꿈 문자&#10;
 			});
 			htmlArray.push( "<td style='"+contentStyle+"'>"+( lineData.errorTextList ? lineData.errorTextList.join("<br/>") : "" )+"</td>" );
 			htmlArray.push( "</tr>" );

@@ -30,7 +30,7 @@ class ActionDelete extends BaseAction {
 				throw new ExceptionDenyEditPerson(effectivePerson, person.getName());
 			}
 			emc.beginTransaction(PersonAttribute.class);
-			/** 重新取出对象 */
+			/** 객체 다시 조회 */
 			o = emc.find(o.getId(), PersonAttribute.class);
 			emc.remove(o, CheckRemoveType.all);
 			emc.commit();

@@ -29,12 +29,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("importmodel")
-@JaxrsDescribe("数据导入")
+@JaxrsDescribe("데이터 가져오기")
 public class ImportModelAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ImportModelAction.class);
 
-	@JaxrsMethodDescribe(value = "生成唯一编码.", action = BaseAction.class)
+	@JaxrsMethodDescribe(value = "고유 코드 생성.", action = BaseAction.class)
 	@GET
 	@Path("uuid")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,14 +51,14 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据查询获取导入模型对象.", action = ActionGetWithQuery.class)
+	@JaxrsMethodDescribe(value = "쿼리 기준 가져오기 모델 객체 조회.", action = ActionGetWithQuery.class)
 	@GET
 	@Path("flag/{flag}/query/{queryFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("导入模型标识") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag) {
+			@JaxrsParameterDescribe("가져오기 모델 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag) {
 		ActionResult<ActionGetWithQuery.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -70,13 +70,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据查询列示导入模型对象.", action = ActionListWithQuery.class)
+	@JaxrsMethodDescribe(value = "쿼리 기준 가져오기 모델 객체 목록.", action = ActionListWithQuery.class)
 	@GET
 	@Path("list/query/{queryFlag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag) {
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag) {
 		ActionResult<List<ActionListWithQuery.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -88,13 +88,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取导入模型.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "가져오기 모델 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,13 +106,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取导入记录.", action = ActionGetRecord.class)
+	@JaxrsMethodDescribe(value = "가져오기 기록 조회.", action = ActionGetRecord.class)
 	@GET
 	@Path("record/{recordId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getRecord(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("导入记录标识") @PathParam("recordId") String recordId) {
+					@JaxrsParameterDescribe("가져오기 기록 식별자") @PathParam("recordId") String recordId) {
 		ActionResult<ActionGetRecord.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -124,13 +124,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "重新导入失败的记录(执行导入是异步过程，请关注记录的状态).", action = ActionReExecute.class)
+	@JaxrsMethodDescribe(value = "실패한 기록 다시 가져오기(가져오기는 비동기로 실행되므로 기록 상태를 확인).", action = ActionReExecute.class)
 	@GET
 	@Path("execute/record/{recordId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void reExecuteRecord(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						  @JaxrsParameterDescribe("导入记录标识") @PathParam("recordId") String recordId) {
+						  @JaxrsParameterDescribe("가져오기 기록 식별자") @PathParam("recordId") String recordId) {
 		ActionResult<ActionReExecute.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -142,13 +142,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取导入记录的执行状态.", action = ActionGetRecordStatus.class)
+	@JaxrsMethodDescribe(value = "가져오기 기록의 실행 상태 조회.", action = ActionGetRecordStatus.class)
 	@GET
 	@Path("record/{recordId}/status")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getRecordStatus(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						  @JaxrsParameterDescribe("导入记录标识") @PathParam("recordId") String recordId) {
+						  @JaxrsParameterDescribe("가져오기 기록 식별자") @PathParam("recordId") String recordId) {
 		ActionResult<ActionGetRecordStatus.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -160,13 +160,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行数据导入(执行导入是异步过程，请关注记录的状态)", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "데이터 가져오기 실행(가져오기는 비동기로 실행되므로 기록 상태를 확인)", action = ActionExecute.class)
 	@POST
 	@Path("{id}/execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void execute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("导入模型标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("가져오기 모델 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionExecute.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -178,14 +178,14 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导入记录分页查询.", action = ActionRecordListPaging.class)
+	@JaxrsMethodDescribe(value = "가져오기 기록 페이지 조회.", action = ActionRecordListPaging.class)
 	@POST
 	@Path("list/record/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void recordListPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-									 @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+									 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+									 @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionRecordListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -197,14 +197,14 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getDefaultActionResultResponse(result));
 	}
 
-	@JaxrsMethodDescribe(value = "导入记录明细分页查询.", action = ActionRecordItemListPaging.class)
+	@JaxrsMethodDescribe(value = "가져오기 기록 상세 페이지 조회.", action = ActionRecordItemListPaging.class)
 	@POST
 	@Path("list/record/item/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void recordItemListPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-									 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-									 @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+									 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+									 @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionRecordItemListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -216,13 +216,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getDefaultActionResultResponse(result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除导入记录.", action = ActionDeleteRecord.class)
+	@JaxrsMethodDescribe(value = "가져오기 기록 삭제.", action = ActionDeleteRecord.class)
 	@DELETE
 	@Path("record/{recordId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteRecord(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						  @JaxrsParameterDescribe("导入记录标识") @PathParam("recordId") String recordId) {
+						  @JaxrsParameterDescribe("가져오기 기록 식별자") @PathParam("recordId") String recordId) {
 		ActionResult<ActionDeleteRecord.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -234,13 +234,13 @@ public class ImportModelAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除导入记录mockdeletetoget.", action = ActionDeleteRecord.class)
+	@JaxrsMethodDescribe(value = "가져오기 기록 삭제 mockdeletetoget.", action = ActionDeleteRecord.class)
 	@GET
 	@Path("record/{recordId}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteRecordMockDeleteToGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							 @JaxrsParameterDescribe("导入记录标识") @PathParam("recordId") String recordId) {
+							 @JaxrsParameterDescribe("가져오기 기록 식별자") @PathParam("recordId") String recordId) {
 		ActionResult<ActionDeleteRecord.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

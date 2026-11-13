@@ -30,7 +30,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "BBSForumInfo", description = "论坛信息.")
+@Schema(name = "BBSForumInfo", description = "포럼 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSForumInfo.table, uniqueConstraints = {
@@ -51,7 +51,7 @@ public class BBSForumInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -61,26 +61,26 @@ public class BBSForumInfo extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String forumName_FIELDNAME = "forumName";
-	@FieldDescribe("论坛名称")
+	@FieldDescribe("포럼 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + forumName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumName = "";
 
 	public static final String forumManagerList_FIELDNAME = "forumManagerList";
-	@FieldDescribe("论坛管理员列表")
+	@FieldDescribe("포럼 관리자 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -94,7 +94,7 @@ public class BBSForumInfo extends SliceJpaObject {
 	public static final String forumNotice_FIELDNAME = "forumNotice";
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
-	@FieldDescribe("论坛公告")
+	@FieldDescribe("포럼 공지")
 	@Column(length = JpaObject.length_32K, name = ColumnNamePrefix + forumNotice_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String forumNotice = "";
@@ -107,7 +107,7 @@ public class BBSForumInfo extends SliceJpaObject {
 	private String forumVisible = "所有人";
 
 	public static final String visiblePermissionList_FIELDNAME = "visiblePermissionList";
-	@FieldDescribe("版块可见范围")
+	@FieldDescribe("게시판 공개 범위")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -127,7 +127,7 @@ public class BBSForumInfo extends SliceJpaObject {
 	private String subjectPublishAble = "所有人";
 
 	public static final String publishPermissionList_FIELDNAME = "publishPermissionList";
-	@FieldDescribe("可发布范围")
+	@FieldDescribe("게시 가능 범위")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -146,7 +146,7 @@ public class BBSForumInfo extends SliceJpaObject {
 	private String replyPublishAble = "所有人";
 
 	public static final String replyPermissionList_FIELDNAME = "replyPermissionList";
-	@FieldDescribe("可回复范围")
+	@FieldDescribe("답글 가능 범위")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -183,67 +183,67 @@ public class BBSForumInfo extends SliceJpaObject {
 	private String typeCategory = "信息|问题|投票";
 
 	public static final String indexRecommendable_FIELDNAME = "indexRecommendable";
-	@FieldDescribe("允许推荐到首页：true|false")
+	@FieldDescribe("첫 페이지 추천 허용: true|false")
 	@Column(name = ColumnNamePrefix + indexRecommendable_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean indexRecommendable = true;
 
 	public static final String subjectNeedAudit_FIELDNAME = "subjectNeedAudit";
-	@FieldDescribe("主题需要审核：true|false")
+	@FieldDescribe("주제 심사 필요: true|false")
 	@Column(name = ColumnNamePrefix + subjectNeedAudit_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean subjectNeedAudit = false;
 
 	public static final String replyNeedAudit_FIELDNAME = "replyNeedAudit";
-	@FieldDescribe("回复需要审核：true|false")
+	@FieldDescribe("답글 심사 필요: true|false")
 	@Column(name = ColumnNamePrefix + replyNeedAudit_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean replyNeedAudit = false;
 
 	public static final String sectionCreateAble_FIELDNAME = "sectionCreateAble";
-	@FieldDescribe("允许创建版块：true|false")
+	@FieldDescribe("게시판 생성 허용: true|false")
 	@Column(name = ColumnNamePrefix + sectionCreateAble_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean sectionCreateAble = true;
 
 	public static final String sectionTotal_FIELDNAME = "sectionTotal";
-	@FieldDescribe("版块数量")
+	@FieldDescribe("게시판 수")
 	@Column(name = ColumnNamePrefix + sectionTotal_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long sectionTotal = 0L;
 
 	public static final String subjectTotal_FIELDNAME = "subjectTotal";
-	@FieldDescribe("主题数量")
+	@FieldDescribe("주제 수")
 	@Column(name = ColumnNamePrefix + subjectTotal_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long subjectTotal = 0L;
 
 	public static final String replyTotal_FIELDNAME = "replyTotal";
-	@FieldDescribe("回复数量")
+	@FieldDescribe("답글 수")
 	@Column(name = ColumnNamePrefix + replyTotal_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long replyTotal = 0L;
 
 	public static final String subjectTotalToday_FIELDNAME = "subjectTotalToday";
-	@FieldDescribe("今日主题数量")
+	@FieldDescribe("오늘 주제 수")
 	@Column(name = ColumnNamePrefix + subjectTotalToday_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long subjectTotalToday = 0L;
 
 	public static final String replyTotalToday_FIELDNAME = "replyTotalToday";
-	@FieldDescribe("今日回复数量")
+	@FieldDescribe("오늘 답글 수")
 	@Column(name = ColumnNamePrefix + replyTotalToday_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long replyTotalToday = 0L;
 
 	public static final String creatorName_FIELDNAME = "creatorName";
-	@FieldDescribe("创建人姓名")
+	@FieldDescribe("작성자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creatorName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creatorName = "";
 
 	public static final String forumColor_FIELDNAME = "forumColor";
-	@FieldDescribe("主题顔色")
+	@FieldDescribe("주제 색상")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + forumColor_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumColor = "";
@@ -256,31 +256,31 @@ public class BBSForumInfo extends SliceJpaObject {
 	private String forumStatus = "启用";
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号")
+	@FieldDescribe("정렬 번호")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Integer orderNumber = 1;
 
 	public static final String replyMessageNotify_FIELDNAME = "replyMessageNotify";
-	@FieldDescribe("回复消息通知：true|false")
+	@FieldDescribe("답글 메시지 알림: true|false")
 	@Column(name = ColumnNamePrefix + replyMessageNotify_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean replyMessageNotify = false;
 
 	public static final String replyMessageNotifyType_FIELDNAME = "replyMessageNotifyType";
-	@FieldDescribe("回复消息通知类别：一共3位，第1位是否通知论坛分区管理员，第2位是否通知版主，第3位是否通知发贴人，0-不通知|1-通知")
+	@FieldDescribe("답글 메시지 알림 유형: 총 3자리, 1번째는 포럼 구역 관리자 알림 여부, 2번째는 게시판 관리자 알림 여부, 3번째는 작성자 알림 여부, 0-알림 안 함|1-알림")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + replyMessageNotifyType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String replyMessageNotifyType = "0,0,0";
 
 	public static final String subjectMessageNotify_FIELDNAME = "subjectMessageNotify";
-	@FieldDescribe("新主题发布消息通知：true|false")
+	@FieldDescribe("새 주제 게시 메시지 알림: true|false")
 	@Column(name = ColumnNamePrefix + subjectMessageNotify_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean subjectMessageNotify = false;
 
 	public static final String subjectMessageNotifyType_FIELDNAME = "subjectMessageNotifyType";
-	@FieldDescribe("新主题发布消息通知类别：一共2位，第1位是否通知论坛分区管理员，第2位是否通知版主，0-不通知|1-通知")
+	@FieldDescribe("새 주제 게시 메시지 알림 유형: 총 2자리, 1번째는 포럼 구역 관리자 알림 여부, 2번째는 게시판 관리자 알림 여부, 0-알림 안 함|1-알림")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + subjectMessageNotifyType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String subjectMessageNotifyType = "0,0";

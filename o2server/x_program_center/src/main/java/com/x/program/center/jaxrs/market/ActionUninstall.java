@@ -59,7 +59,7 @@ class ActionUninstall extends BaseAction {
 			if(!hasAuth(effectivePerson, installLog.getInstallPerson())){
 				throw new ExceptionAccessDenied(effectivePerson, app);
 			}
-			logger.print("{}发起卸载应用：{}", effectivePerson.getDistinguishedName(), app.getName());
+			logger.print("{}이(가) 앱 제거 시작: {}", effectivePerson.getDistinguishedName(), app.getName());
 			Wo wo = new Wo();
 			InstallData installData = gson.fromJson(installLog.getData(), InstallData.class);
 			List<WrapModule> moduleList = installData.getWrapModuleList();
@@ -91,7 +91,7 @@ class ActionUninstall extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			logger.warn("卸载流程平台应用异常：{}",e.getMessage());
+			logger.warn("프로세스 플랫폼 앱 제거 오류: {}",e.getMessage());
 		}
 		try {
 			if(module.getCmsList()!=null) {
@@ -102,7 +102,7 @@ class ActionUninstall extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			logger.warn("卸载CMS应用异常：{}",e.getMessage());
+			logger.warn("CMS 앱 제거 오류: {}",e.getMessage());
 		}
 		try {
 			if(module.getPortalList()!=null) {
@@ -113,7 +113,7 @@ class ActionUninstall extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			logger.warn("卸载门户应用异常：{}",e.getMessage());
+			logger.warn("포털 앱 제거 오류: {}",e.getMessage());
 		}
 		try {
 			if(module.getQueryList()!=null){
@@ -124,7 +124,7 @@ class ActionUninstall extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			logger.warn("卸载数据中心应用异常：{}",e.getMessage());
+			logger.warn("데이터 센터 앱 제거 오류: {}",e.getMessage());
 		}
 
 		try {
@@ -143,7 +143,7 @@ class ActionUninstall extends BaseAction {
 				}
 			}
 		} catch (Exception e) {
-			logger.warn("卸载服务模块异常：{}",e.getMessage());
+			logger.warn("서비스 모듈 제거 오류: {}",e.getMessage());
 		}
 
 	}

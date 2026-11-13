@@ -209,7 +209,7 @@ MWF.xApplication.cms.Xform.Attachment = MWF.CMSAttachment = new Class({
         MWF.require("MWF.widget.AttachmentSelector", function () {
             var options = {
                 //"style" : "cms",
-                "title": MWF.xApplication.cms.Xform.LP.selectAttachment, //"选择附件",
+                "title": MWF.xApplication.cms.Xform.LP.selectAttachment, //"첨부파일 선택",
                 "listStyle": "icon",
                 "selectType": "all",
                 "size": "max",
@@ -349,7 +349,7 @@ MWF.xApplication.cms.Xform.Attachment = MWF.CMSAttachment = new Class({
             true,
             accept,
             size,
-            function (o) { //错误的回调
+            function (o) { //오류 콜백
                 if (o.messageId && this.attachmentController.messageItemList) {
                     var message = this.attachmentController.messageItemList[o.messageId];
                     if( message && message.node )message.node.destroy();
@@ -528,7 +528,7 @@ MWF.xApplication.cms.Xform.Attachment = MWF.CMSAttachment = new Class({
                 this.fireEvent("beforeReplace", [files]);
                 return true;
             }.bind(this),
-             true, accept, size, function (o) { //错误的回调
+             true, accept, size, function (o) { //오류 콜백
                 if (o.messageId && this.attachmentController.messageItemList) {
                     var message = this.attachmentController.messageItemList[o.messageId];
                     if( message && message.node )message.node.destroy();
@@ -562,7 +562,7 @@ MWF.xApplication.cms.Xform.Attachment = MWF.CMSAttachment = new Class({
         // }.bind(this));
     },
 
-    //小程序文件是否支持打开
+    //미니프로그램 파일 열기 지원 여부
     checkMiniProgramFile: function(ext) {
         var exts = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "pdf"];
         for(var i = 0; i < exts.length; i++){
@@ -590,13 +590,13 @@ MWF.xApplication.cms.Xform.Attachment = MWF.CMSAttachment = new Class({
                     window.o2android.downloadAttachment(att.data.id);
                 } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.downloadAttachment) {
                     window.webkit.messageHandlers.downloadAttachment.postMessage({ "id": att.data.id, "site": this.json.id });
-                } else if (window.wx && window.__wxjs_environment === 'miniprogram' && this.checkMiniProgramFile(att.data.extension)) { //微信小程序
+                } else if (window.wx && window.__wxjs_environment === 'miniprogram' && this.checkMiniProgramFile(att.data.extension)) { //WeChat 미니프로그램
                     wx.miniProgram.navigateTo({
                         url: '../file/download?attId=' + att.data.id + '&type=cms&documentId=' + this.form.businessData.document.id
                     });
                 } else {
                     if (layout.mobile) {
-                        //移动端 企业微信 钉钉 用本地打开 防止弹出自带浏览器 无权限问题
+                        //모바일 WeCom·DingTalk에서 로컬로 열기, 기본 브라우저 팝업으로 인한 권한 없음 문제 방지
                         this.form.documentAction.getAttachmentUrl(att.data.id, this.form.businessData.document.id, function (url) {
                             var xtoken = layout.session.token;
                             window.location = o2.filterUrl(url + "?"+o2.tokenName+"=" + xtoken);
@@ -619,13 +619,13 @@ MWF.xApplication.cms.Xform.Attachment = MWF.CMSAttachment = new Class({
                     window.o2android.downloadAttachment(att.data.id);
                 } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.downloadAttachment) {
                     window.webkit.messageHandlers.downloadAttachment.postMessage({ "id": att.data.id, "site": this.json.id });
-                } else if (window.wx && window.__wxjs_environment === 'miniprogram' && this.checkMiniProgramFile(att.data.extension)) { //微信小程序
+                } else if (window.wx && window.__wxjs_environment === 'miniprogram' && this.checkMiniProgramFile(att.data.extension)) { //WeChat 미니프로그램
                     wx.miniProgram.navigateTo({
                         url: '../file/download?attId=' + att.data.id + '&type=cms&documentId=' + this.form.businessData.document.id
                     });
                 } else {
                     if (layout.mobile) {
-                        //移动端 企业微信 钉钉 用本地打开 防止弹出自带浏览器 无权限问题
+                        //모바일 WeCom·DingTalk에서 로컬로 열기, 기본 브라우저 팝업으로 인한 권한 없음 문제 방지
                         this.form.documentAction.getAttachmentUrl(att.data.id, this.form.businessData.document.id, function (url) {
                             var xtoken = layout.session.token;
                             window.location = o2.filterUrl(url + "?"+o2.tokenName+"=" + xtoken);

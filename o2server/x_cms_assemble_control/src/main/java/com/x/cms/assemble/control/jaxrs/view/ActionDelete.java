@@ -19,7 +19,7 @@ import com.x.cms.core.entity.element.ViewCategory;
 import com.x.cms.core.entity.element.ViewFieldConfig;
 
 /**
- * 删除列表配置
+ * 목록 설정 삭제
  * @author sword
  */
 public class ActionDelete extends BaseAction {
@@ -28,7 +28,7 @@ public class ActionDelete extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business(emc);
-			//先判断需要操作的应用信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 작업할 앱 정보 존재 여부를 ID로 조회하고, 없으면 작업을 계속할 수 없음
 			View view = business.getViewFactory().get(id);
 
 			AppInfo appInfo = appInfoServiceAdv.get(view.getAppId());
@@ -36,19 +36,19 @@ public class ActionDelete extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 
-			//查询视图关联的所有列配置
+			//뷰에 연결된 모든 열 설정 조회
 			List<String> fieldConfigIds = business.getViewFieldConfigFactory().listByViewId(id);
 			List<ViewFieldConfig> fieldConfigs = emc.list( ViewFieldConfig.class, fieldConfigIds);
-			//查询视图关联的所有分类关联配置
+			//뷰에 연결된 모든 분류 연결 설정 조회
 			List<String> viewCategoryIds = business.getViewCategoryFactory().listByViewId(id);
 			List<ViewCategory> viewCategorys = emc.list( ViewCategory.class, viewCategoryIds );
 
-			//进行数据库持久化操作
+			//데이터베이스 영속화 작업 수행
 			emc.beginTransaction( View.class );
 			emc.beginTransaction( ViewFieldConfig.class );
 			emc.beginTransaction( ViewCategory.class );
 
-			//删除所有的viewFieldConfig
+			//모든 viewFieldConfig 삭제
 			if( fieldConfigs != null && fieldConfigs.size() > 0 ){
 				for( ViewFieldConfig viewFieldConfig : fieldConfigs ){
 					emc.remove( viewFieldConfig, CheckRemoveType.all );

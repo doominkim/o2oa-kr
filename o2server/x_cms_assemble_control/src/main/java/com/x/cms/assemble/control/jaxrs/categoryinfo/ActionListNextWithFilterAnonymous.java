@@ -117,13 +117,13 @@ public class ActionListNextWithFilterAnonymous extends BaseAction {
 		@FieldDescribe("作为过滤条件的信息内容管理应用ID列表, 可多个, String数组.")
 		private List<String> appIdList;
 
-		@FieldDescribe("作为过滤条件的内容管理分类ID列表, 可多个, String数组.")
+		@FieldDescribe("필터 조건으로 쓰는 콘텐츠 관리 분류 ID 목록, 여러 개 가능, String 배열.")
 		private List<String> categoryIdList;
 
-		@FieldDescribe("作为过滤条件的创建者姓名列表, 可多个, String数组.")
+		@FieldDescribe("필터 조건으로 쓰는 작성자 이름 목록, 여러 개 가능, String 배열.")
 		private List<String> creatorList;
 
-		@FieldDescribe("作为过滤条件的内容管理应用关键字, 通常是应用名称, String, 模糊查询.")
+		@FieldDescribe("필터 조건으로 쓰는 콘텐츠 관리 앱 키워드, 보통 앱 이름, String, 유사 검색.")
 		private String key;
 
 		@FieldDescribe("文档类型：全部 | 信息 | 数据")

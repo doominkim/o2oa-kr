@@ -38,29 +38,29 @@
 
         <!--<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">-->
             <!--<tr>-->
-                <!--<td class="editTableTitle">当前<br/>处理人:</td>-->
+                <!--<td class="editTableTitle">현재<br/>처리자:</td>-->
                 <!--<td class="editTableValue">-->
-                    <!--<input class="editTableRadio" name="isTask" text{($.isTask=='true')?'checked':''} type="radio" value="true"/>显示-->
-                    <!--<input class="editTableRadio" name="isTask" text{($.isTask=='false')?'checked':''} type="radio" value="false"/>不显示-->
+                    <!--<input class="editTableRadio" name="isTask" text{($.isTask=='true')?'checked':''} type="radio" value="true"/>표시-->
+                    <!--<input class="editTableRadio" name="isTask" text{($.isTask=='false')?'checked':''} type="radio" value="false"/>표시 안 함-->
                 <!--</td>-->
             <!--</tr>-->
         <!--</table>-->
 		
 	</div>
-    <!--<div title="过滤" class="MWFTab">-->
-        <!--<div style="height:24px; line-height:24px; background-color:#EEE; padding-left:10px">活动过滤</div>-->
+    <!--<div title="필터" class="MWFTab">-->
+        <!--<div style="height:24px; line-height:24px; background-color:#EEE; padding-left:10px">활동 필터</div>-->
         <!--<div><textarea style="height:40px; width:98%; border:1px solid #DDD;" name="filterActivity">text{$.filterActivity}</textarea></div>-->
 
-        <!--<div style="height:24px; line-height:24px; background-color:#EEE; padding-left:10px; border-top:1px solid #999;">处理人过滤</div>-->
+        <!--<div style="height:24px; line-height:24px; background-color:#EEE; padding-left:10px; border-top:1px solid #999;">처리자 필터</div>-->
         <!--<div><textarea style="height: 40px; width:98%; border:1px solid #DDD;" name="filterPerson">text{$.filterPerson}</textarea></div>-->
 
-        <!--<div style="height:24px; line-height:24px; background-color:#EEE; padding-left:10px; border-top:1px solid #999;">路由过滤</div>-->
+        <!--<div style="height:24px; line-height:24px; background-color:#EEE; padding-left:10px; border-top:1px solid #999;">라우트 필터</div>-->
         <!--<div><textarea style="height: 40px; width:98%; border:1px solid #DDD;" name="filterRoute">text{$.filterRoute}</textarea></div>-->
 
-        <!--<div><div id="labelEditScriptValue" class="MWFScriptArea" name="filterScript" title="通过脚本过滤(S)"></div></div>-->
+        <!--<div><div id="labelEditScriptValue" class="MWFScriptArea" name="filterScript" title="스크립트로 필터(S)"></div></div>-->
     <!--</div>-->
 	<div title="{{$.lp.power}}"  class="MWFTab">
-        <!-- 可阅读配置 -->
+        <!-- 열람 가능 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.readConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.readConfigInfo}}</div>
         

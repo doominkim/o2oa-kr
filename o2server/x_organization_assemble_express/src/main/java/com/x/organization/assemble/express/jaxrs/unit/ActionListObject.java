@@ -47,13 +47,13 @@ class ActionListObject extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = 9140053706113645992L;
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private List<String> unitList = new ArrayList<>();
 
-		@FieldDescribe("是否需要根据名称查找，默认false")
+		@FieldDescribe("이름으로 조회할지 여부, 기본값 false")
 		private Boolean useNameFind = false;
 
-		@FieldDescribe("是否需要递归统计所有子级数据量，默认false")
+		@FieldDescribe("모든 하위 데이터 수 재귀 집계 여부, 기본값 false")
 		private Boolean countSubNested = false;
 
 		public List<String> getUnitList() {
@@ -85,31 +85,31 @@ class ActionListObject extends BaseAction {
 
 		private static final long serialVersionUID = -7913547275132005308L;
 
-		@FieldDescribe("匹配字段")
+		@FieldDescribe("일치 필드")
 		private String matchKey;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
-		@FieldDescribe("直接下级主身份数量")
+		@FieldDescribe("직속 하위 주 신분 수")
 		private Long subDirectMajorIdentityCount = 0L;
 
-		@FieldDescribe("直接下级职务数量")
+		@FieldDescribe("직속 하위 직무 수")
 		private Long subDirectDutyCount = 0L;
 
-		@FieldDescribe("所有子级组织数量")
+		@FieldDescribe("모든 하위 조직 수")
 		private Long subNestedUnitCount;
 
-		@FieldDescribe("所有子级身份数量")
+		@FieldDescribe("모든 하위 신분 수")
 		private Long subNestedIdentityCount;
 
-		@FieldDescribe("所有子级主身份数量")
+		@FieldDescribe("모든 하위 주 신분 수")
 		private Long subNestedMajorIdentityCount;
 
-		@FieldDescribe("所有子级职务数量")
+		@FieldDescribe("모든 하위 직무 수")
 		private Long subNestedDutyCount;
 
 		static WrapCopier<Unit, Wo> copier = WrapCopierFactory.wo(Unit.class, Wo.class, null,

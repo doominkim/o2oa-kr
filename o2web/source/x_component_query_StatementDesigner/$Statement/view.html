@@ -14,7 +14,7 @@
                 <td class="editTableValue"><input type="text" name="description" value="text{$.description}" class="editTableInput"/></td>
             </tr>
 <!--            <tr>-->
-<!--                <td class="editTableTitle">隐藏:</td>-->
+<!--                <td class="editTableTitle">숨기기:</td>-->
 <!--                <td class="editTableValue">-->
 <!--                    <input class="editTableRadio" name="display" text{($.display===false)?'checked':''} type="radio" value="false"/>{{$.lp.yes}}-->
 <!--                    <input class="editTableRadio" name="display" text{($.display!==false)?'checked':''} type="radio" value="true"/>{{$.lp.no}}-->
@@ -31,7 +31,7 @@
                 </td>
             </tr>
 <!--            <tr>-->
-<!--                <td class="editTableTitle">展开分类:</td>-->
+<!--                <td class="editTableTitle">분류 펼치기:</td>-->
 <!--                <td class="editTableValue">-->
 <!--                    <input class="editTableRadio" name="data.isExpand" text{($.data.isExpand==='yes')?'checked':''} type="radio" value="yes"/>{{$.lp.yes}}-->
 <!--                    <input class="editTableRadio" name="data.isExpand" text{($.data.isExpand!=='yes')?'checked':''} type="radio" value="no"/>{{$.lp.no}}-->
@@ -45,7 +45,7 @@
                 </td>
             </tr>
 <!--            <tr>-->
-<!--                <td class="editTableTitleNoWidth">最大行数:</td>-->
+<!--                <td class="editTableTitleNoWidth">최대 행 수:</td>-->
 <!--                <td class="editTableValue"><input type="number" name="count" value="text{$.count || 600}" class="editTableInput"/></td>-->
 <!--            </tr>-->
             <tr>
@@ -126,7 +126,7 @@
                 </td>
             </tr>
             <!--<tr>-->
-            <!--<td class="editTableTitle">最大行数:</td>-->
+            <!--<td class="editTableTitle">최대 행 수:</td>-->
             <!--<td class="editTableValue"><input type="text" name="max" value="text{$.max}" class="editTableInput"/></td>-->
             <!--</tr>-->
         </table>
@@ -137,12 +137,12 @@
 
 
 
-        <!--<div class="MWFApplicationSelect" title="选择应用"></div>-->
-        <!--<div class="MWFProcessSelect" title="选择流程"></div>-->
-        <!--<div class="MWFCompanySelect" title="选择公司"></div>-->
-        <!--<div class="MWFDepartmentSelect" title="选择部门"></div>-->
-        <!--<div class="MWFPersonSelect" title="选择人员"></div>-->
-        <!--<div class="MWFIdentitySelect" title="选择身份"></div>-->
+        <!--<div class="MWFApplicationSelect" title="앱 선택"></div>-->
+        <!--<div class="MWFProcessSelect" title="프로세스 선택"></div>-->
+        <!--<div class="MWFCompanySelect" title="회사 선택"></div>-->
+        <!--<div class="MWFDepartmentSelect" title="부서 선택"></div>-->
+        <!--<div class="MWFPersonSelect" title="사용자 선택"></div>-->
+        <!--<div class="MWFIdentitySelect" title="신분 선택"></div>-->
 
         <table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
             <tr>
@@ -212,7 +212,7 @@
                         <td class="editTableTitle">{{$.lp.select}}:</td>
                         <td class="editTableValue">
                             <select class="pathInputSelect_vf"></select>
-                            <!--                            <div style="line-height: 20px;color:#999;">注：选择路径后，需在选择的值前面加上"表别名."，如：o.</div>-->
+                            <!--                            <div style="line-height: 20px;color:#999;">참고: 경로 선택 후 선택한 값 앞에 "테이블 별칭."을 붙여야 합니다. 예: o.</div>-->
                         </td>
                     </tr>
                     <tr>
@@ -220,7 +220,7 @@
                         <td class="editTableValue"><input type="text" class="editTableInput titleInput_vf"/></td>
                     </tr>
 <!--                    <tr id="text{$.id}parameterInputSelectTr" style="display: none">-->
-<!--                        <td class="editTableTitle">选择参数:</td>-->
+<!--                        <td class="editTableTitle">매개변수 선택:</td>-->
 <!--                        <td class="editTableValue">-->
 <!--                            <select class="parameterInputSelect_vf"></select>-->
 <!--                        </td>-->

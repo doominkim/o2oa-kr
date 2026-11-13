@@ -43,7 +43,7 @@ MWF.PathDataHandler = new Class({
     delete: function(id, pathList, ...args){
         return this._execute('delete', id, pathList, ...args);
     },
-    _safeDynamicCall: function(methodName, args){ // 私有方法：动态调用安全封装
+    _safeDynamicCall: function(methodName, args){ // 비공개 메서드: 동적 호출 안전 래퍼
         if (typeof this.action[methodName] !== 'function') {
             var availableMethods = Object.keys(this.action).filter(k => typeof this.action[k] === 'function');
             throw new Error(`호출한 메서드가 없습니다: ${methodName} (사용 가능한 메서드: ${availableMethods.join(', ')})`);
@@ -54,7 +54,7 @@ MWF.PathDataHandler = new Class({
             throw new Error(`${methodName} 호출 실패: ${e.message}`);
         }
     },
-    // 私有方法：参数验证
+    // 비공개 메서드: 인수 검증
     _validateParameters: function (type, id, paths){
         if (typeof id !== 'string' || !id.trim()) {
             throw new Error('문서 ID는 유효한 문자열이어야 합니다');
@@ -69,13 +69,13 @@ MWF.PathDataHandler = new Class({
             if( typeof paths === "string" ){
                 paths = [paths];
             }
-            // 1. 基础验证
+            // 1. 기본 검증
             this._validateParameters(type, id, paths);
 
-            // 2. 参数标准化
-            paths = paths.map(p => p.toString()); // 确保所有路径元素都是字符串
+            // 2. 인수 표준화
+            paths = paths.map(p => p.toString()); // 모든 경로 요소가 문자열인지 보장
 
-            // 3. 路径深度验证
+            // 3. 경로 깊이 검증
             if (paths.length > 8) {
                 throw new Error(`경로 단계가 제한(8단계)을 초과했습니다. 현재: ${paths.length}`);
             }
@@ -86,7 +86,7 @@ MWF.PathDataHandler = new Class({
                 throw new Error(`지원하지 않는 작업 유형: ${type} (지원: ${Object.keys(this.methodMap).join(', ')})`);
             }
 
-            // 6. 动态方法处理
+            // 6. 동적 메서드 처리
             var hasPath = paths.length > 0;
 
             var pathMethod = this.options.type === 'cms' ?
@@ -95,12 +95,12 @@ MWF.PathDataHandler = new Class({
 
             var methodName = hasPath ? pathMethod : baseMethod;
 
-            // 7. 准备调用参数
+            // 7. 호출 인수 준비
             var callArgs = [id];
             if (hasPath) callArgs.push(...paths);
             callArgs.push(...args);
 
-            // 8. 安全调用
+            // 8. 안전 호출
             return this._safeDynamicCall(methodName, callArgs);
 
         } catch (error) {
@@ -113,7 +113,7 @@ MWF.PathDataHandler = new Class({
                     stack: error.stack
                 }
             });
-            throw error; // 重新抛出以保持调用栈
+            throw error; // 호출 스택 유지를 위해 다시 throw
         }
     }
 });

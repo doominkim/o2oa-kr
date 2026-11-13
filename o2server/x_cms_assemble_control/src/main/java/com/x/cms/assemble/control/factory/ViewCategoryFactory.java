@@ -17,7 +17,7 @@ import com.x.cms.core.entity.element.ViewCategory;
 import com.x.cms.core.entity.element.ViewCategory_;
 
 /**
- * 视图配置管理基础功能服务类
+ * 뷰 설정 관리 기본 기능 서비스 클래스
  * 
  * @author O2LEE
  */
@@ -28,22 +28,22 @@ public class ViewCategoryFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的ViewCategory信息对象
+	 * 지정한 Id의 ViewCategory 정보 객체 조회
 	 * @param id
 	 * @return ViewCategory
 	 * @throws Exception
 	 */
-	//@MethodDescribe("获取指定Id的ViewCategory信息对象")
+	//@MethodDescribe("지정한 Id의 ViewCategory 정보 객체 조회")
 	public ViewCategory get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, ViewCategory.class, ExceptionWhen.none );
 	}
 	
 	/**
-	 * 列示全部的ViewCategory信息ID列表
+	 * 전체 ViewCategory 정보 ID 목록 조회
 	 * @return List：String
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示全部的ViewCategory文件附件信息ID列表")
+	//@MethodDescribe("전체 ViewCategory 첨부파일 정보 ID 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( ViewCategory.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -54,12 +54,12 @@ public class ViewCategoryFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的ViewCategory信息ID列表
-	 * @param ids 需要查询的ID列表
+	 * 지정한 Id의 ViewCategory 정보 ID 목록 조회
+	 * @param ids 조회할 ID 목록
 	 * @return List：ViewCategory
 	 * @throws Exception
 	 */
-	//@MethodDescribe("列示指定Id的ViewCategory文件附件信息ID列表")
+	//@MethodDescribe("지정한 Id의 ViewCategory 첨부파일 정보 ID 목록 조회")
 //	public List<ViewCategory> list(List<String> ids) throws Exception {
 //		EntityManager em = this.entityManagerContainer().get( ViewCategory.class );
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -70,15 +70,15 @@ public class ViewCategoryFactory extends AbstractFactory {
 //	}
 	
 	/**
-	 * 列示指定分类的所有视图配置信息ID列表
-	 * @param id 指定的分类ID
+	 * 지정한 분류의 모든 뷰 설정 정보 ID 목록 조회
+	 * @param id 지정한 분류 ID
 	 * @return
 	 * @throws Exception 
 	 */
-//	@MethodDescribe("列示指定分类的所有视图分类关联配置信息ID列表")
+//	@MethodDescribe("지정한 분류의 모든 뷰-분류 연결 설정 정보 ID 목록 조회")
 	public List<String> listByCategoryId( String id ) throws Exception {		
 		if( StringUtils.isEmpty(id) ){
-			throw new Exception("内容管理listViewByCategoryId方法不接受id为空的查询操作！");
+			throw new Exception("게시판 listViewByCategoryId 메서드는 id가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( ViewCategory.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -90,15 +90,15 @@ public class ViewCategoryFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定视图在哪些分类中使用
-	 * @param id 指定的视图ID
+	 * 지정한 뷰가 사용되는 분류 조회
+	 * @param id 지정한 뷰 ID
 	 * @return
 	 * @throws Exception 
 	 */
-	//@MethodDescribe("列示指定视图的所有视图分类关联信息")
+	//@MethodDescribe("지정한 뷰의 모든 뷰-분류 연결 정보 조회")
 	public List<String> listByViewId( String id ) throws Exception {		
 		if( StringUtils.isEmpty(id) ){
-			throw new Exception("内容管理listCategoryByViewId方法不接受id为空的查询操作！");
+			throw new Exception("게시판 listCategoryByViewId 메서드는 id가 비어 있는 조회를 허용하지 않습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get( ViewCategory.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();

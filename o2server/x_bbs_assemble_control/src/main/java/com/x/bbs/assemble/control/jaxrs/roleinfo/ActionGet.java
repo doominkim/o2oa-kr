@@ -44,7 +44,7 @@ public class ActionGet extends BaseAction {
 				roleInfo = roleInfoService.get(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "系统在根据ID获取BBS角色信息时发生异常！ID:" + id );
+				Exception exception = new ExceptionRoleInfoProcess( e, "ID로 BBS 역할 정보를 가져오는 중 오류가 발생했습니다! ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -58,12 +58,12 @@ public class ActionGet extends BaseAction {
 			}
 		}
 		if (check) {
-			// 如果角色信息存在，然后再查询该角色所拥有的所有权限信息
+			// 역할 정보가 있으면 해당 역할이 가진 모든 권한 정보 조회
 			try {
 				permissionList = permissionInfoService.listPermissionByRoleCode(roleInfo.getRoleCode());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "系统在根据角色编码查询权限信息列表时发生异常！Code:" + roleInfo.getRoleCode() );
+				Exception exception = new ExceptionRoleInfoProcess( e, "역할 코드로 권한 목록을 조회하는 중 오류가 발생했습니다! Code:" + roleInfo.getRoleCode() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -75,7 +75,7 @@ public class ActionGet extends BaseAction {
 					permissionWraps = WoPermissionInfo.copier.copy(permissionList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionRoleInfoProcess( e, "系统在转换所有BBS权限信息为输出对象时发生异常." );
+					Exception exception = new ExceptionRoleInfoProcess( e, "전체 BBS 권한 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -89,7 +89,7 @@ public class ActionGet extends BaseAction {
 				result.setData(wrap);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "系统在转换所有BBS角色信息为输出对象时发生异常." );
+				Exception exception = new ExceptionRoleInfoProcess( e, "전체 BBS 역할 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -125,7 +125,7 @@ public class ActionGet extends BaseAction {
 		
 		public static WrapCopier< BBSPermissionInfo, WoPermissionInfo > copier = WrapCopierFactory.wo( BBSPermissionInfo.class, WoPermissionInfo.class, null, JpaObject.FieldsInvisible);
 		
-		//论坛版块列表
+		//포럼 게시판 목록
 		private List<WoSectionInfo> sections = null;
 
 		public List<WoSectionInfo> getSections() {
@@ -143,7 +143,7 @@ public class ActionGet extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>();
 		
-		//版块的子版块信息列表
+		//게시판의 하위 게시판 정보 목록
 		private List<WoSectionInfo> subSections = null;
 
 		public List<WoSectionInfo> getSubSections() {

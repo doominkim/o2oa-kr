@@ -56,7 +56,7 @@ public class ExecuteTargetBuilder {
 		this.runtime = runtime;
 	}
 
-	// 创建运行对象
+	// 실행 객체 생성
 	public Pair<ExecuteTarget, Optional<ExecuteTarget>> build() throws Exception {
 		if (StringUtils.equalsAnyIgnoreCase(statement.getFormat(), Statement.FORMAT_SQL, Statement.FORMAT_SQLSCRIPT)) {
 			return concreteExecuteTargetSql(context, effectivePerson, organization, statement, runtime);
@@ -65,7 +65,7 @@ public class ExecuteTargetBuilder {
 		}
 	}
 
-	// 创建 SQL 运行对象
+	// SQL 실행 객체 생성
 	private Pair<ExecuteTarget, Optional<ExecuteTarget>> concreteExecuteTargetSql(Context context,
 			EffectivePerson effectivePerson, Organization organization, Statement statement, Runtime runtime)
 			throws Exception {
@@ -92,7 +92,7 @@ public class ExecuteTargetBuilder {
 		return Pair.of(data, optionalCount);
 	}
 
-	// 创建 JPQL 运行对象
+	// JPQL 실행 객체 생성
 	private Pair<ExecuteTarget, Optional<ExecuteTarget>> concreteExecuteTargetJpql(Context context,
 			EffectivePerson effectivePerson, Organization organization, Statement statement, Runtime runtime)
 			throws Exception {
@@ -119,7 +119,7 @@ public class ExecuteTargetBuilder {
 		return Pair.of(data, optionalCount);
 	}
 
-	// 创建 SQL COUNT ASSIGN
+	// SQL COUNT ASSIGN 생성
 	private ExecuteTarget concreteExecuteTargetSqlCountAssign(Context context, EffectivePerson effectivePerson,
 			Organization organization, Statement statement, Runtime runtime, Map<String, Object> prevNamedParam)
 			throws Exception {
@@ -132,7 +132,7 @@ public class ExecuteTargetBuilder {
 		return new ExecuteTarget(effectivePerson, organization, sql, runtime, prevNamedParam);
 	}
 
-	// 创建 SQL COUNT AUTO
+	// SQL COUNT AUTO 생성
 	private Optional<ExecuteTarget> concreteExecuteTargetSqlCountAuto(EffectivePerson effectivePerson,
 			Organization organization, Runtime runtime, String sql, Map<String, Object> prevNamedParam)
 			throws Exception {
@@ -141,13 +141,13 @@ public class ExecuteTargetBuilder {
 		if (onlyAggregateFunction(plainSelect.getSelectItems())) {
 			return Optional.empty();
 		}
-		// 清除可能的orderby
+		// 가능한 orderby 제거
 		if (null != plainSelect.getOrderByElements()) {
 			plainSelect.getOrderByElements().clear();
 		}
 		plainSelect.getSelectItems().clear();
 		plainSelect.getSelectItems().add(new SelectExpressionItem(new Column(KEY_COUNTSQL)));
-		// 将在生成DATA语句中的参数对象PARAM传入避免重复计算
+		// DATA 문 생성 시의 매개변수 객체 PARAM을 전달해 중복 계산 방지
 		return Optional
 				.of(new ExecuteTarget(effectivePerson, organization, plainSelect.toString(), runtime, prevNamedParam));
 	}
@@ -179,7 +179,7 @@ public class ExecuteTargetBuilder {
 			return Optional.empty();
 		}
 		net.sf.jsqlparser.schema.Table table = (net.sf.jsqlparser.schema.Table) plainSelect.getFromItem();
-		// 清除可能的orderby
+		// 가능한 orderby 제거
 		if (null != plainSelect.getOrderByElements()) {
 			plainSelect.getOrderByElements().clear();
 		}

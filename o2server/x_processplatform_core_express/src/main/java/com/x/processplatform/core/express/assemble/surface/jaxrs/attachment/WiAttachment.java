@@ -23,19 +23,19 @@ public class WiAttachment extends GsonPropertyObject {
     public static WrapCopier<Attachment, WiAttachment> copier = WrapCopierFactory.wo(Attachment.class,
             WiAttachment.class, null,JpaObject.FieldsInvisible);
 
-    @FieldDescribe("附件标识.")
+    @FieldDescribe("첨부파일 식별자.")
     private String id;
 
-    @FieldDescribe("附件名称.")
+    @FieldDescribe("첨부파일 이름.")
     private String name;
 
-    @FieldDescribe("附件分类.")
+    @FieldDescribe("첨부파일 분류.")
     private String site;
 
-    @FieldDescribe("是否软拷贝，默认false，true表示不拷贝真实存储附件，只拷贝路径，共用附件，仅支持流程附件.")
+    @FieldDescribe("소프트 복사 여부, 기본값 false, true이면 실제 저장된 첨부파일을 복사하지 않고 경로만 복사하여 첨부파일을 공유함, 프로세스 첨부파일만 지원.")
     private Boolean isSoftCopy;
 
-    @FieldDescribe("附件来源(cms|内容管理附件、processPlatform|流程平台附件、pan|企业网盘附件，默认为processPlatform).")
+    @FieldDescribe("첨부파일 출처(cms|콘텐츠 관리 첨부파일, processPlatform|프로세스 플랫폼 첨부파일, pan|기업 네트워크 드라이브 첨부파일, 기본값 processPlatform).")
     private String copyFrom;
 
     public String getId() {

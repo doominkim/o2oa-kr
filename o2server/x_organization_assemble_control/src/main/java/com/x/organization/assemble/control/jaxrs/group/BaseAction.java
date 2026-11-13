@@ -14,7 +14,7 @@ import com.x.organization.core.entity.Group;
 
 public class BaseAction extends StandardJaxrsAction {
 
-	// 如果唯一标识不为空,要检查唯一标识是否唯一
+	// 고유 식별자가 비어 있지 않으면 고유 여부 확인
 	protected boolean uniqueDuplicateWhenNotEmpty(Business business, Group group) throws Exception {
 		if (StringUtils.isNotEmpty(group.getUnique())) {
 			if (business.entityManagerContainer().duplicateWithFlags(group.getId(), Group.class, group.getUnique())) {
@@ -27,7 +27,7 @@ public class BaseAction extends StandardJaxrsAction {
 	public static class WoGroupAbstract extends Group {
 
 		private static final long serialVersionUID = 5454920726133364605L;
-		@FieldDescribe("对群组的操作权限")
+		@FieldDescribe("그룹 조작 권한")
 		private Control control = new Control();
 
 		public Control getControl() {

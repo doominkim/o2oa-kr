@@ -34,16 +34,16 @@ public class ActionSyncOrganizationCallbackUrlRegister extends BaseAction {
             registerObject.setAes_key(Config.dingding().getEncodingAesKey());
             registerObject.setCall_back_tag(tags);
             registerObject.setToken(Config.dingding().getToken());
-            //获取center服务器地址信息
+            //center 서버 주소 정보 조회
             CenterServer centerServer = Config.currentNode().getCenter();
             Boolean sslEnable = centerServer.getSslEnable();
             String host = centerServer.getProxyHost();
             int port = centerServer.getProxyPort();
-            //回调地址
+            //콜백 주소
             String callbackUrl = getApplicationUrl(sslEnable, host, port) + "/x_program_center/jaxrs/dingding/sync/organization/callback";
             registerObject.setUrl(callbackUrl);
-            logger.info("注册回调地址 post对象：{}", registerObject.toString());
-            //钉钉回调地址注册 url post
+            logger.info("콜백 주소 등록 post 객체:{}", registerObject.toString());
+            //DingTalk 콜백 주소 등록 url post
             String address;
             if (enable) {
                 address = Config.dingding().getOapiAddress() + "/call_back/register_call_back?access_token=" + Config.dingding().corpAccessToken();

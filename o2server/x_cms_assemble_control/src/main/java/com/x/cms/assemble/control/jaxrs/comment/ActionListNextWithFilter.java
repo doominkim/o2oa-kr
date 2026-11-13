@@ -40,7 +40,7 @@ public class ActionListNextWithFilter extends BaseAction {
 			wrapIn = this.convertToWrapIn(jsonElement, Wi.class);
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionCommentQuery(e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+			Exception exception = new ExceptionCommentQuery(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -77,7 +77,7 @@ public class ActionListNextWithFilter extends BaseAction {
 					result.setData( resultObject.getWos() );
 				} catch (Exception e) {
 					check = false;
-					logger.warn("系统查询评论信息列表时发生异常!");
+					logger.warn("시스템에서 댓글 정보 목록 조회 중 예외가 발생했습니다!");
 					result.error(e);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -92,7 +92,7 @@ public class ActionListNextWithFilter extends BaseAction {
 
 		private Long rank;
 
-		@FieldDescribe("内容")
+		@FieldDescribe("내용")
 		private String content = "";
 
 		public String getContent() {

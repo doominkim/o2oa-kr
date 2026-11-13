@@ -24,10 +24,10 @@ import com.x.calendar.core.entity.Calendar;
 import com.x.calendar.core.entity.Calendar_Event;
 
 /**
- * 更新重复日程事件中某一事件开始后续所有的日程事件信息
- * 1、更新日程事件重复信息主体
- * 2、删除当前事件以及该重复事件主体信息已经生成的该ID事件后续时间内所有已经生成的日程事件信息
- * 3、删除该事件重复主体信息中相应的已经生成的月份信息（已经删除的有信息月份以及以后所有的月份）
+ * 반복 일정 이벤트 중 특정 이벤트부터 이후의 모든 일정 이벤트 정보 수정
+ * 1. 일정 이벤트 반복 정보 주체 수정
+ * 2. 현재 이벤트 및 해당 반복 이벤트 주체 정보로 이미 생성된, 해당 ID 이벤트 이후 시간의 모든 생성된 일정 이벤트 정보 삭제
+ * 3. 해당 이벤트 반복 주체 정보에서 이미 생성된 해당 월 정보 삭제(삭제된 정보가 있는 월 및 이후 모든 월)
  * @author O2LEE
  *
  */
@@ -70,7 +70,7 @@ public class ActionUpdateAfterEventId extends BaseAction {
 				calendar_Event = calendar_EventServiceAdv.get( id );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历记录信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 기록 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -95,7 +95,7 @@ public class ActionUpdateAfterEventId extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历信息时发生异常.ID:" + calendar_Event.getCalendarId() );
+					Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 정보를 조회하는 중 오류가 발생했습니다. ID:" + calendar_Event.getCalendarId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -103,21 +103,21 @@ public class ActionUpdateAfterEventId extends BaseAction {
 		}
 		
 		if( check && !ThisApplication.isCalendarSystemManager(effectivePerson) ) {
-			//判断用户权限
+			//사용자 권한 판단
 			try {
 				unitNames = userManagerService.listUnitNamesWithPerson(personName);
 				groupNames = userManagerService.listGroupNamesByPerson(personName);
 				if( calendar != null ) {
 					if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
-							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//没权限
+							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 						check = false;
-						Exception exception = new ExceptionInsufficientPermissions( "您没有权限从日历中删除日程事件.日历:" + calendar.getName() );
+						Exception exception = new ExceptionInsufficientPermissions( "이 캘린더에서 일정을 삭제할 권한이 없습니다. 캘린더:" + calendar.getName() );
 						result.error( exception );
 					}
 				}				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据用户查询组织和群组信息列表时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자의 조직 및 그룹 목록을 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -126,7 +126,7 @@ public class ActionUpdateAfterEventId extends BaseAction {
 		if( check ){
 			if( StringUtils.isEmpty( calendar_Event.getRepeatMasterId() ) ) {
 				check = false;
-				Exception exception = new ExceptionEventPropertyEmpty("重复事件主体ID(repeatMasterId)");
+				Exception exception = new ExceptionEventPropertyEmpty("반복 일정 기준 ID(repeatMasterId)");
 				result.error( exception );
 			}
 		}
@@ -134,7 +134,7 @@ public class ActionUpdateAfterEventId extends BaseAction {
 		if( check ){
 			if( StringUtils.isEmpty( calendar_Event.getRecurrenceRule() ) ) {
 				check = false;
-				Exception exception = new ExceptionEventPropertyEmpty("重复规则(recurrenceRule)");
+				Exception exception = new ExceptionEventPropertyEmpty("반복 규칙(recurrenceRule)");
 				result.error( exception );
 			}
 		}
@@ -146,7 +146,7 @@ public class ActionUpdateAfterEventId extends BaseAction {
 				new_Event.setRepeatMasterId( calendar_Event.getRepeatMasterId() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统将用户传入的数据转换为日历事件信息对象时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "사용자가 입력한 데이터를 일정 정보 객체로 변환하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -167,7 +167,7 @@ public class ActionUpdateAfterEventId extends BaseAction {
 				result.setData( wo );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "更新指定事件之后所有的日程信息时发生异常." );
+				Exception exception = new ExceptionEventProcess( e, "지정한 일정 이후의 모든 일정을 수정하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

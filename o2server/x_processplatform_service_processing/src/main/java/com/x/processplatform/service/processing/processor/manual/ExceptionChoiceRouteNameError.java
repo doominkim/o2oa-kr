@@ -11,7 +11,7 @@ class ExceptionChoiceRouteNameError extends RunningException {
 	private static final long serialVersionUID = 9085364457175859374L;
 
 	ExceptionChoiceRouteNameError(List<String> taskCompletedIds) {
-		super("路由选择错误,已办列表:{}.", StringUtils.join(taskCompletedIds, ","));
+		super("처리 선택 오류, 결재 완료 목록: {}.", StringUtils.join(taskCompletedIds, ","));
 	}
 
 }

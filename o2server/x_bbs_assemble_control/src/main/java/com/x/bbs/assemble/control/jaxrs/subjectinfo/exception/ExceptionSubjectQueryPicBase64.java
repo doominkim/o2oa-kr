@@ -7,6 +7,6 @@ public class ExceptionSubjectQueryPicBase64 extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjectQueryPicBase64( Throwable e, String id ) {
-		super("根据指定ID查询主题图片编码内容时发生异常.ID:" + id, e );
+		super("지정한 ID의 주제 이미지 인코딩 내용을 조회하는 중 오류가 발생했습니다. ID:" + id, e );
 	}
 }

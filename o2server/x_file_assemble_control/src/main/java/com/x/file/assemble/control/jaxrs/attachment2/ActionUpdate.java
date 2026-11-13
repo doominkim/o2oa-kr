@@ -28,7 +28,7 @@ class ActionUpdate extends BaseAction {
 			if (null == attachment) {
 				throw new ExceptionEntityNotExist(id, Attachment2.class);
 			}
-			/* 判断文件的所有者是否是当前用户 */
+			/* 파일 소유자가 현재 사용자인지 판단 */
 			if (!StringUtils.equals(effectivePerson.getDistinguishedName(), attachment.getPerson())) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}

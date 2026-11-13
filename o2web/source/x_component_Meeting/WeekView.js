@@ -244,7 +244,7 @@ MWF.xApplication.Meeting.WeekView.Calendar = new Class({
         this.prevWeekNode =  new Element("div.ooicon-arrow_back", {"styles": this.css.calendarPrevWeekNode}).inject(this.titleNode);
 
         // var text = this.baseDate.format(this.app.lp.dateFormatMonth)
-        //     + "，第" + this.view.getWeekNumber( this.baseDate  ) + "周";
+        //     + ", " + this.view.getWeekNumber( this.baseDate  ) + "주차";
 
         var month = this.baseDate.format(this.app.lp.dateFormatMonth);
         var week = this.view.getWeekNumber( this.baseDate  );
@@ -299,7 +299,7 @@ MWF.xApplication.Meeting.WeekView.Calendar = new Class({
     changeWeekPrev: function(){
         this.date.decrement("week", 1);
         this.baseDate = this.date;
-        // var text = this.baseDate.format(this.app.lp.dateFormatMonth) + "，第" + this.view.getWeekNumber( this.baseDate  ) + "周";
+        // var text = this.baseDate.format(this.app.lp.dateFormatMonth) + ", " + this.view.getWeekNumber( this.baseDate  ) + "주차";
 
         var month = this.baseDate.format(this.app.lp.dateFormatMonth);
         var week = this.view.getWeekNumber( this.baseDate  );
@@ -316,7 +316,7 @@ MWF.xApplication.Meeting.WeekView.Calendar = new Class({
         var week = this.view.getWeekNumber( this.baseDate  );
         var text = this.app.lp.weeklyViewTitle.replace("{month}", month ).replace("{week}",week);
 
-        // var text = this.baseDate.format(this.app.lp.dateFormatMonth) + "，第" + this.view.getWeekNumber( this.baseDate  ) + "周";
+        // var text = this.baseDate.format(this.app.lp.dateFormatMonth) + ", " + this.view.getWeekNumber( this.baseDate  ) + "주차";
         this.titleTextNode.set("text", text);
         this.reLoadCalendar();
     },
@@ -351,7 +351,7 @@ MWF.xApplication.Meeting.WeekView.Calendar = new Class({
         var week = this.view.getWeekNumber( this.baseDate  );
         var text = this.app.lp.weeklyViewTitle.replace("{month}", month ).replace("{week}",week);
 
-        // var text = this.baseDate.format(this.app.lp.dateFormatMonth) + "，第" + this.view.getWeekNumber( this.baseDate  ) + "周";
+        // var text = this.baseDate.format(this.app.lp.dateFormatMonth) + ", " + this.view.getWeekNumber( this.baseDate  ) + "주차";
         this.titleTextNode.set("text", text);
 
         this.reLoadCalendar();
@@ -1360,7 +1360,7 @@ MWF.xApplication.Meeting.WeekView.WeekCalendar = new Class({
 
         var tmpDate = firstDate.clone();
         for (var i=day-1; i>=0; i--){
-            if( i % 8 == 0 ){ //设置周数
+            if( i % 8 == 0 ){ //주차 설정
                 var week = this.getWeekNumber( tmpDate );
                 tds[i].set("text", week);
                 tds[i].setStyles(this.css.week);
@@ -1378,7 +1378,7 @@ MWF.xApplication.Meeting.WeekView.WeekCalendar = new Class({
 
         for (var i=day; i<tds.length; i++){
 
-            if( i % 8 == 0 ){ //设置周数
+            if( i % 8 == 0 ){ //주차 설정
                 var week = this.getWeekNumber( firstDate );
                 tds[i].set("text", week );
                 //tds[i].addClass("gray_"+this.options.style);

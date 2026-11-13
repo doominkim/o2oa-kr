@@ -15,15 +15,15 @@ import com.x.cms.core.express.tools.DateOperation;
 public class LogService {
 	
 	/**
-	 * 保存日志信息
-	 * @param person  处理人帐号
- 	 * @param description   日志描述
-	 * @param appId   应用ID
-	 * @param categoryId  分类ID
-	 * @param documentId  文档ID
-	 * @param fileId      文件附件ID
-	 * @param operationLevel  操作级别：应用|文件|分类|文档
-	 * @param operationType  操作类别：新增|更新|删除
+	 * 로그 정보 저장
+	 * @param person  처리자 계정
+ 	 * @param description   로그 설명
+	 * @param appId   앱 ID
+	 * @param categoryId  분류 ID
+	 * @param documentId  문서 ID
+	 * @param fileId      첨부파일 ID
+	 * @param operationLevel  작업 수준: 앱|파일|분류|문서
+	 * @param operationType  작업 유형: 추가|갱신|삭제
 	 * @return
 	 * @throws Exception 
 	 */
@@ -53,19 +53,19 @@ public class LogService {
 	}
 	
 	/**
-	 * 对操作日志信息进行清理
-	 * @param stay_yearnum_operationLog 日志保留年份
-	 * @param stay_count_operationLog 日志保留条目数
+	 * 작업 로그 정보 정리
+	 * @param stay_yearnum_operationLog 로그 보존 연수
+	 * @param stay_count_operationLog 로그 보존 항목 수
 	 * @throws Exception 
 	 */
 	public void clean( Integer stay_yearnum_operationLog, Integer stay_count_operationLog ) throws Exception {
-		//先按时间清理
+		//먼저 시간 기준으로 정리
 		cleanWithStayYearNumber( stay_yearnum_operationLog );
 		cleanWithMaxCount( stay_count_operationLog );
 	}
 
 	/**
-	 * 按最大保留条目数进行清理
+	 * 최대 보존 항목 수 기준으로 정리
 	 * @param stay_count_operationLog
 	 * @throws Exception 
 	 */
@@ -79,14 +79,14 @@ public class LogService {
 			business = new Business( emc );
 			total = business.getLogFactory().getTotal();
 			if( total > stay_count_operationLog ) {
-				//将记录条目数减到stay_count_operationLog的60%
+				//기록 항목 수를 stay_count_operationLog의 60%로 축소
 				ids = business.getLogFactory().getRecordIdsWithCount( (int)( stay_count_operationLog * 0.6 ));
 			}
 			if( ids != null && !ids.isEmpty() ) {
-				//取最后一个，以确定最早可以保留下来的创建时间
+				//마지막 항목을 가져와 보존 가능한 가장 이른 생성 시간 결정
 				last_id = ids.get( (ids.size() -1) );
 				log = emc.find( last_id, Log.class );
-				//根据时间进行清理，说明这个时间以前的数据都不能保留了
+				//시간 기준으로 정리, 이 시간 이전 데이터는 보존 불가
 				cleanWithDate( log.getCreateTime() );
 			}
 		} catch ( Exception e ) {
@@ -95,7 +95,7 @@ public class LogService {
 	}
 
 	/**
-	 * 按保留年份对日志进行清理
+	 * 보존 연수 기준으로 로그 정리
 	 * @param stay_yearnum_operationLog
 	 * @throws Exception 
 	 */
@@ -103,7 +103,7 @@ public class LogService {
 		if( stay_yearnum_operationLog == null ) {
 			throw new Exception("stay_yearnum_operationLog is null!");
 		}
-		//1、计算三年期限的时间点，三年前的1月1日, 最好再加一年
+		//1. 3년 기한 시점 계산, 3년 전 1월 1일, 1년을 더 더하는 것이 좋음
 		Integer year = DateOperation.getYearNumber( new Date() );
 		Date limitDate = DateOperation.getDateFromString( ( year-4 ) + "-01-01 00:00:00");
 		cleanWithDate( limitDate );
@@ -111,7 +111,7 @@ public class LogService {
 	
 	
 	/**
-	 * 按保留年份对日志进行清理
+	 * 보존 연수 기준으로 로그 정리
 	 * @param overTime
 	 * @throws Exception 
 	 */

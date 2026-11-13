@@ -2,30 +2,30 @@ package com.x.attendance.assemble.control.processor;
 
 public class ImportOptDefine{
 	/**
-	 * 从EXCEL里获取数据
+	 * EXCEL에서 데이터 가져오기
 	 */
 	public static String GETDATA = "GETDATA";
 	
 	/**
-	 * 校验EXCEL数据
+	 * EXCEL 데이터 검증
 	 */
 	public static String VALIDATE = "VALIDATE";
 
 	/**
-	 * 保存数据
+	 * 데이터 저장
 	 */
 	public static String SAVEDATA = "SAVEDATA";
 	/**
-	 * 补充数据
+	 * 데이터 보충
 	 */
 	public static String SUPPLEMENT = "SUPPLEMENT";
 	/**
-	 * 分析数据
+	 * 데이터 분석
 	 */
 	public static String ANALYSIS = "ANALYSIS";
 	
 	/**
-	 * 处理完成
+	 * 처리 완료
 	 */
 	public static String COMPLETED = "COMPLETED";
 	

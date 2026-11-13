@@ -99,8 +99,8 @@ public class CreateConfigSample {
 
 	/**
 	 * @author ray
-	 * @param dir 创建到的目录
-	 * @param cls 配置文件类
+	 * @param dir 생성할 디렉터리
+	 * @param cls 설정 파일 클래스
 	 * @throws NoSuchMethodException
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException

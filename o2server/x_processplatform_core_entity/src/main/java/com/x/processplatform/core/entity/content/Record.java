@@ -36,7 +36,7 @@ import com.x.processplatform.core.entity.element.ActivityType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Record", description = "流程平台记录.")
+@Schema(name = "Record", description = "프로세스 플랫폼 기록.")
 @Entity
 @ContainerEntity(dumpSize = 100, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.Record.table, uniqueConstraints = {
@@ -48,64 +48,64 @@ public class Record extends SliceJpaObject {
 
 	private static final long serialVersionUID = 8673378766635237050L;
 
-	// 正常流转
+	// 정상 진행
 	public static final String TYPE_CURRENTTASK = "currentTask";
 
-	// 正常流转
+	// 정상 진행
 	public static final String TYPE_TASK = "task";
 
-	// 转交流转
+	// 전달 진행
 	public static final String TYPE_APPENDTASK = "appendTask";
 
-	// 调度
+	// 조정
 	public static final String TYPE_REROUTE = "reroute";
 
-	// 撤回
+	// 회수
 	public static final String TYPE_RETRACT = "retract";
 
-	// 回滚
+	// 롤백
 	public static final String TYPE_ROLLBACK = "rollback";
 
-	// 重置
+	// 재설정
 	public static final String TYPE_RESET = "reset";
 
-	// 增加分支
+	// 분기 추가
 	public static final String TYPE_ADDSPLIT = "addSplit";
 
-	// 催办
+	// 독촉
 	public static final String TYPE_URGE = "urge";
 
-	// 超时
+	// 시간 초과
 	public static final String TYPE_EXPIRE = "expire";
 
-	// 待阅
+	// 열람 대기
 	public static final String TYPE_READ = "read";
 
-	// 授权
+	// 위임
 	public static final String TYPE_EMPOWER = "empower";
 
-	// 超时自动流转
+	// 시간 초과 자동 진행
 	public static final String TYPE_PASSEXPIRED = "passExpired";
 
-	// 外部调用流转
+	// 외부 호출 진행
 	public static final String TYPE_SERVICE = "service";
 
-	// 添加待办
+	// 결재 대기 추가
 	public static final String TYPE_TASKADD = "taskAdd";
 
-	// 退回
+	// 반려
 	public static final String TYPE_GOBACK = "goBack";
 
-	// 工作触发流转
+	// 업무 문서 트리거 진행
 	public static final String TYPE_WORKTRIGGERPROCESSING = "workTriggerProcessing";
 
-	// 待办触发流转
+	// 결재 대기 트리거 진행
 	public static final String TYPE_TASKTRIGGERPROCESSING = "taskTriggerProcessing";
 
-	// 终止工作
+	// 업무 문서 종료
 	public static final String TYPE_TERMINATE = "terminate";
 
-	// 定制意见
+	// 맞춤 의견
 	public static final String TYPE_CUSTOM = "custom";
 
 	private static final String TABLE = PersistenceProperties.Content.Record.table;
@@ -118,12 +118,12 @@ public class Record extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		switch (Objects.toString(this.type)) {
@@ -194,7 +194,7 @@ public class Record extends SliceJpaObject {
 	}
 
 	public static final String ROUTENAME_FIELDNAME = "routeName";
-	@FieldDescribe("路由名称.")
+	@FieldDescribe("경로 이름.")
 	@Transient
 	private String routeName;
 
@@ -212,7 +212,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String OPINION_FIELDNAME = "opinion";
 	@Transient
-	@FieldDescribe("意见.")
+	@FieldDescribe("의견.")
 	private String opinion;
 
 	public String getOpinion() {
@@ -229,7 +229,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String MEDIAOPINION_FIELDNAME = "mediaOpinion";
 	@Transient
-	@FieldDescribe("多媒体意见")
+	@FieldDescribe("멀티미디어 의견")
 	private String mediaOpinion;
 
 	public String getMediaOpinion() {
@@ -246,7 +246,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String EMPOWERFROMIDENTITY_FIELDNAME = "empowerFromIdentity";
 	@Transient
-	@FieldDescribe("授权自身份")
+	@FieldDescribe("위임 원 신분")
 	private String empowerFromIdentity;
 
 	public String getEmpowerFromIdentity() {
@@ -263,7 +263,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String NEXTMANUALLIST_FIELDNAME = "nextManualList";
 	@Transient
-	@FieldDescribe("后续人工环节")
+	@FieldDescribe("후속 수동 단계")
 	private List<NextManual> nextManualList = new ArrayList<>();
 
 	public List<NextManual> getNextManualList() {
@@ -280,7 +280,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String NEXTMANUALTASKIDENTITYLIST_FIELDNAME = "nextManualTaskIdentityList";
 	@Transient
-	@FieldDescribe("后续人工环节处理人")
+	@FieldDescribe("후속 수동 단계 처리자")
 	private List<String> nextManualTaskIdentityList = new ArrayList<>();
 
 	public List<String> getNextManualTaskIdentityList() {
@@ -297,7 +297,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String STARTTIME_FIELDNAME = "startTime";
 	@Transient
-	@FieldDescribe("开始时间.")
+	@FieldDescribe("시작 시간.")
 	private Date startTime;
 
 	public Date getStartTime() {
@@ -314,7 +314,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String PERSONORDERNUMBER_FIELDNAME = "personOrderNumber";
 	@Transient
-	@FieldDescribe("人员排序值")
+	@FieldDescribe("사용자 정렬 값")
 	private Integer personOrderNumber;
 
 	public Integer getPersonOrderNumber() {
@@ -331,7 +331,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String IDENTITYORDERNUMBER_FIELDNAME = "identityOrderNumber";
 	@Transient
-	@FieldDescribe("身份排序值")
+	@FieldDescribe("신분 정렬 값")
 	private Integer identityOrderNumber;
 
 	public Integer getIdentityOrderNumber() {
@@ -348,7 +348,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String UNITORDERNUMBER_FIELDNAME = "unitOrderNumber";
 	@Transient
-	@FieldDescribe("组织排序值")
+	@FieldDescribe("조직 정렬 값")
 	private Integer unitOrderNumber;
 
 	public Integer getUnitOrderNumber() {
@@ -365,7 +365,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String UNITLEVELNAME_FIELDNAME = "unitLevelName";
 	@Transient
-	@FieldDescribe("组织层级")
+	@FieldDescribe("조직 레벨")
 	private String unitLevelName;
 
 	public String getUnitLevelName() {
@@ -382,7 +382,7 @@ public class Record extends SliceJpaObject {
 
 	public static final String TASKCOMPLETED_FIELDNAME = "taskCompleted";
 	@Transient
-	@FieldDescribe("已办标识")
+	@FieldDescribe("처리 완료 식별자")
 	private String taskCompleted;
 
 	public String getTaskCompleted() {
@@ -399,7 +399,7 @@ public class Record extends SliceJpaObject {
 	
 	public static final String RETRACTTASKCOMPLETED_FIELDNAME = "retractTaskCompleted";
 	@Transient
-	@FieldDescribe("发起撤回的已办标识")
+	@FieldDescribe("회수를 시작한 처리 완료 식별자")
 	private String retractTaskCompleted;
 
 	public String getRetractTaskCompleted() {
@@ -426,63 +426,63 @@ public class Record extends SliceJpaObject {
 	}
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("应用.")
+	@FieldDescribe("앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String application;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("流程ID.")
+	@FieldDescribe("프로세스 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String process;
 
 	public static final String job_FIELDNAME = "job";
-	@FieldDescribe("任务标识")
+	@FieldDescribe("작업 식별자")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + job_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + job_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String job;
 
 	public static final String work_FIELDNAME = "work";
-	@FieldDescribe("工作")
+	@FieldDescribe("문서")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + work_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + work_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String work;
 
 	public static final String workCompleted_FIELDNAME = "workCompleted";
-	@FieldDescribe("已完成工作")
+	@FieldDescribe("완료된 업무 문서")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + workCompleted_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String workCompleted;
 
 	public static final String completed_FIELDNAME = "completed";
-	@FieldDescribe("工作是否已经完成.")
-	/* 必填值 */
+	@FieldDescribe("업무 문서 완료 여부.")
+	/* 필수 값 */
 	@Column(name = ColumnNamePrefix + completed_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean completed;
 
 	public static final String display_FIELDNAME = "display";
-	@FieldDescribe("是否显示.")
-	/* 必填值 */
+	@FieldDescribe("표시 여부.")
+	/* 필수 값 */
 	@Column(name = ColumnNamePrefix + display_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean display;
 
 	public static final String order_FIELDNAME = "order";
-	@FieldDescribe("显示排序.")
-	/* 必填值 */
+	@FieldDescribe("표시 순서.")
+	/* 필수 값 */
 	@Column(name = ColumnNamePrefix + order_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + order_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Long order;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent(fetch = FetchType.EAGER)
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -490,14 +490,14 @@ public class Record extends SliceJpaObject {
 	private RecordProperties properties;
 
 	public static final String fromActivity_FIELDNAME = "fromActivity";
-	@FieldDescribe("开始活动Id")
+	@FieldDescribe("시작 활동 Id")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + fromActivity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fromActivity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromActivity;
 
 	public static final String fromActivityType_FIELDNAME = "fromActivityType";
-	@FieldDescribe("开始活动类型.")
+	@FieldDescribe("시작 활동 유형.")
 	@Index(name = TABLE + IndexNameMiddle + fromActivityType_FIELDNAME)
 	@Enumerated(EnumType.STRING)
 	@Column(length = ActivityType.length, name = ColumnNamePrefix + fromActivityType_FIELDNAME)
@@ -505,7 +505,7 @@ public class Record extends SliceJpaObject {
 	private ActivityType fromActivityType;
 
 	public static final String fromActivityName_FIELDNAME = "fromActivityName";
-	@FieldDescribe("开始活动名称")
+	@FieldDescribe("시작 활동 이름")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ fromActivityName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fromActivityName_FIELDNAME)
@@ -513,21 +513,21 @@ public class Record extends SliceJpaObject {
 	private String fromActivityName;
 
 	public static final String fromActivityAlias_FIELDNAME = "fromActivityAlias";
-	@FieldDescribe("开始活动别名")
+	@FieldDescribe("시작 활동 별칭")
 	@Column(length = length_255B, name = ColumnNamePrefix + fromActivityAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fromActivityAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromActivityAlias;
 
 	public static final String fromActivityToken_FIELDNAME = "fromActivityToken";
-	@FieldDescribe("开始节点Token")
+	@FieldDescribe("시작 노드 Token")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + fromActivityToken_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fromActivityToken_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String fromActivityToken;
 
 	public static final String recordTime_FIELDNAME = "recordTime";
-	@FieldDescribe("记录时间.")
+	@FieldDescribe("기록 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + recordTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + recordTime_FIELDNAME)
@@ -535,28 +535,28 @@ public class Record extends SliceJpaObject {
 	private Date recordTime;
 
 	public static final String PERSON_FIELDNAME = "person";
-	@FieldDescribe("记录人员")
+	@FieldDescribe("기록 사용자")
 	@Column(length = length_255B, name = ColumnNamePrefix + PERSON_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + PERSON_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String person;
 
 	public static final String IDENTITY_FIELDNAME = "identity";
-	@FieldDescribe("记录身份")
+	@FieldDescribe("기록 신분")
 	@Column(length = length_255B, name = ColumnNamePrefix + IDENTITY_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + IDENTITY_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String identity;
 
 	public static final String UNIT_FIELDNAME = "unit";
-	@FieldDescribe("记录人员所在组织.")
+	@FieldDescribe("기록 사용자 소속 조직.")
 	@Column(length = length_255B, name = ColumnNamePrefix + UNIT_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + UNIT_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String unit;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("类型.")
+	@FieldDescribe("유형.")
 	@Column(length = length_64B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

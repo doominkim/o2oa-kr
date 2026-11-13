@@ -312,7 +312,7 @@ o2.widget.JavascriptEditor = new Class({
     },
     registerCompletionAce: function(){
         if (!o2.widget.ace.registeredCompletion){
-            //添加自动完成列表
+            //자동 완성 목록 추가
             var exports = ace.require("ace/ext/language_tools");
             exports.addCompleter({
                 identifierRegexps: [

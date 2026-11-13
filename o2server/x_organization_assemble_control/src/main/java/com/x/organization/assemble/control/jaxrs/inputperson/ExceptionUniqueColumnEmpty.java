@@ -7,6 +7,6 @@ class ExceptionUniqueColumnEmpty extends PromptException {
 	private static final long serialVersionUID = -2139584911736169462L;
 
 	ExceptionUniqueColumnEmpty() {
-		super("人员编号列不能为空.");
+		super("사용자 번호 열은 비워 둘 수 없습니다.");
 	}
 }

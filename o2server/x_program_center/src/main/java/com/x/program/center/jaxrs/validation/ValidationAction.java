@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("validation")
-@JaxrsDescribe("验证")
+@JaxrsDescribe("검증")
 public class ValidationAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ValidationAction.class);
 
-	@JaxrsMethodDescribe(value = "测试数据库对象存储.", action = ActionMeta.class)
+	@JaxrsMethodDescribe(value = "데이터베이스 객체 저장 테스트.", action = ActionMeta.class)
 	@GET
 	@Path("meta")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -45,7 +45,7 @@ public class ValidationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "脚本性能测试.", action = ActionScriptingBenchmark.class)
+	@JaxrsMethodDescribe(value = "스크립트 성능 테스트.", action = ActionScriptingBenchmark.class)
 	@GET
 	@Path("scripting/benchmark")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -62,13 +62,13 @@ public class ValidationAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "延时测试.", action = ActionTimeout.class)
+	@JaxrsMethodDescribe(value = "지연 테스트.", action = ActionTimeout.class)
 	@GET
 	@Path("timeout/{timeout}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void timeout(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("延时时间") @PathParam("timeout") Integer timeout) {
+			@JaxrsParameterDescribe("지연 시간") @PathParam("timeout") Integer timeout) {
 		ActionResult<ActionTimeout.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

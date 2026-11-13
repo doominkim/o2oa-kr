@@ -27,7 +27,7 @@ class ActionList extends BaseAction {
 			ActionResult<List<Wo>> result = new ActionResult<>();
 			Business business = new Business(emc);
 			List<String> ids = list(business, effectivePerson);
-			/* 由于有多值字段所以需要全部取出 */
+			/* 다중 값 필드가 있어 전체를 조회해야 함 */
 			List<Wo> wos = Wo.copier.copy(emc.list(Application.class, ids));
 			wos = business.application().sort(wos);
 			result.setData(wos);

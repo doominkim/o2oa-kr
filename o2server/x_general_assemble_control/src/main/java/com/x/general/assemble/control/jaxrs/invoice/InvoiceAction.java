@@ -30,17 +30,17 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("invoice")
-@JaxrsDescribe("电子发票服务.")
+@JaxrsDescribe("전자 영수증 서비스.")
 public class InvoiceAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceAction.class);
 
-	@JaxrsMethodDescribe(value = "获取发票信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "영수증 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("get/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("发票标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("영수증 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -52,13 +52,13 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载发票.", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "영수증 다운로드.", action = ActionDownload.class)
 	@GET
 	@Path("download/flag/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("*附件标志") @PathParam("flag") String flag,
-			@JaxrsParameterDescribe("是否直接下载(true|false)") @QueryParam("stream") Boolean stream) {
+			@JaxrsParameterDescribe("*첨부파일 식별자") @PathParam("flag") String flag,
+			@JaxrsParameterDescribe("바로 다운로드 여부(true|false)") @QueryParam("stream") Boolean stream) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -70,14 +70,14 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "上传电子发票文件，pdf格式.", action = ActionUpload.class)
+	@JaxrsMethodDescribe(value = "전자 영수증 파일 업로드, pdf 형식.", action = ActionUpload.class)
 	@POST
 	@Path("upload")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_OCTET_STREAM })
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void upload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("上传文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionUpload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,7 +89,7 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据url上传电子发票，pdf格式.", action = ActionUploadWithUrl.class)
+	@JaxrsMethodDescribe(value = "url로 전자 영수증 업로드, pdf 형식.", action = ActionUploadWithUrl.class)
 	@POST
 	@Path("upload/with/url")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -107,14 +107,14 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "手工上传电子发票.", action = ActionUploadTemp.class)
+	@JaxrsMethodDescribe(value = "전자 영수증 수동 업로드.", action = ActionUploadTemp.class)
 	@POST
 	@Path("upload/for/create")
 	@Consumes({ MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_OCTET_STREAM })
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void uploadForCreate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("上传文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionUploadTemp.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -126,7 +126,7 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "手工填写电子发票.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "전자 영수증 수동 입력.", action = ActionCreate.class)
 	@POST
 	@Path("create")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -144,13 +144,13 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定的电子发票.", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "지정 전자 영수증 갱신.", action = ActionUpdate.class)
 	@POST
 	@Path("update/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -162,13 +162,13 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新发票的报销状态为已报销.", action = ActionUpdateApplyStatus.class)
+	@JaxrsMethodDescribe(value = "영수증 정산 상태를 정산 완료로 갱신.", action = ActionUpdateApplyStatus.class)
 	@POST
 	@Path("update/apply/status/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateApplyStatus(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionUpdateApplyStatus.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -180,12 +180,12 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定发票.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정 영수증 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("delete/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("电子发票标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("전자 영수증 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -197,14 +197,14 @@ public class InvoiceAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页查询.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "페이지 조회.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

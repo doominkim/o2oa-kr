@@ -6,7 +6,7 @@ import com.x.cms.assemble.control.service.CmsBatchOperationProcessService;
 import com.x.cms.core.entity.CmsBatchOperation;
 
 /**
- * 处理文档权限
+ * 문서 권한 처리
  */
 public class QueueDocumentOperation extends AbstractQueue<CmsBatchOperation> {
 

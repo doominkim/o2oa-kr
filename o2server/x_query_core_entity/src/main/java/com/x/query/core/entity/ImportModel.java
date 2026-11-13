@@ -31,7 +31,7 @@ import com.x.base.core.entity.annotation.Flag;
 import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "ImportModel", description = "数据中心导入模型.")
+@Schema(name = "ImportModel", description = "데이터 센터 가져오기 모델.")
 @Entity
 @ContainerEntity(dumpSize = 10, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Import.ImportModel.table, uniqueConstraints = {
@@ -57,12 +57,12 @@ public class ImportModel extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -79,11 +79,11 @@ public class ImportModel extends SliceJpaObject {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* Entity 默认字段结束 */
+	/* Entity 기본 필드 끝 */
 
-	/* 为了和前台对应 */
+	/* 프런트와 대응하기 위함 */
 	public static final String TYPE_PROCESSPLATFORM = "process";
 
 	public static final String TYPE_CMS = "cms";
@@ -92,39 +92,39 @@ public class ImportModel extends SliceJpaObject {
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationNotExists =
-	/* 验证不可重名 */
+	/* 이름 중복 검증 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = ImportModel.class, equals = @Equal(field = "query", property = "query")))
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationNotExists =
-	/* 验证不可重名 */
+	/* 이름 중복 검증 */
 	@CitationNotExist(fields = { "name", "id",
 			"alias" }, type = ImportModel.class, equals = @Equal(field = "query", property = "query")))
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String query_FIELDNAME = "query";
-	@FieldDescribe("所属查询.")
+	@FieldDescribe("소속 쿼리.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + query_FIELDNAME)
 	@Index(name = TABLE + ColumnNamePrefix + query_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Query.class) })
 	private String query;
 
 	public static final String layout_FIELDNAME = "layout";
-	@FieldDescribe("显示布局.")
+	@FieldDescribe("표시 레이아웃.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + layout_FIELDNAME)
@@ -132,7 +132,7 @@ public class ImportModel extends SliceJpaObject {
 	private String layout;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("访问方案.")
+	@FieldDescribe("접근 방안.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
@@ -140,7 +140,7 @@ public class ImportModel extends SliceJpaObject {
 	private String data;
 
 	public static final String code_FIELDNAME = "code";
-	@FieldDescribe("前台运行脚本.")
+	@FieldDescribe("프런트 실행 스크립트.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_1M, name = ColumnNamePrefix + code_FIELDNAME)
@@ -148,24 +148,24 @@ public class ImportModel extends SliceJpaObject {
 	private String code;
 
 	public static final String enableValid_FIELDNAME = "enableValid";
-	@FieldDescribe("是否启用校验.")
+	@FieldDescribe("검증 사용 여부.")
 	@Column(name = ColumnNamePrefix + enableValid_FIELDNAME)
 	private Boolean enableValid;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("类型.")
+	@FieldDescribe("유형.")
 	@Column(length = length_32B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = false)
 	private String type;
 
 	public static final String processStatus_FIELDNAME = "processStatus";
-	@FieldDescribe("流程状态.")
+	@FieldDescribe("프로세스 상태.")
 	@Column(length = length_32B, name = ColumnNamePrefix + processStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String processStatus;
 
 	public static final String availableIdentityList_FIELDNAME = "availableIdentityList";
-	@FieldDescribe("允许使用的用户.")
+	@FieldDescribe("사용 허용 사용자.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableIdentityList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -177,7 +177,7 @@ public class ImportModel extends SliceJpaObject {
 	private List<String> availableIdentityList;
 
 	public static final String availableUnitList_FIELDNAME = "availableUnitList";
-	@FieldDescribe("允许使用的组织.")
+	@FieldDescribe("사용 허용 조직.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableUnitList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -189,7 +189,7 @@ public class ImportModel extends SliceJpaObject {
 	private List<String> availableUnitList;
 
 	public static final String availableGroupList_FIELDNAME = "availableGroupList";
-	@FieldDescribe("允许使用的群组.")
+	@FieldDescribe("사용 허용 그룹.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ availableGroupList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle
@@ -201,18 +201,18 @@ public class ImportModel extends SliceJpaObject {
 	private List<String> availableGroupList;
 
 	public static final String count_FIELDNAME = "count";
-	@FieldDescribe("最大导入数量.")
+	@FieldDescribe("최대 가져오기 수량.")
 	@Column(name = ColumnNamePrefix + count_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer count;
 
 	public static final String display_FIELDNAME = "display";
-	@FieldDescribe("是否前端可见.")
+	@FieldDescribe("프런트 표시 여부.")
 	@Column(name = ColumnNamePrefix + display_FIELDNAME)
 	private Boolean display;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,为空在最后")
+	@FieldDescribe("정렬 번호, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + orderNumber_FIELDNAME)
 	private Integer orderNumber;

@@ -157,7 +157,7 @@ class ActionZhengwuDingdingPerson extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("返回的结果标识")
+		@FieldDescribe("반환 결과 식별자")
 		private String flag;
 
 		public String getFlag() {

@@ -34,15 +34,15 @@ public class ActionSyncOrganizationCallbackPost extends BaseAction {
             Wi wi = this.convertToWrapIn(body, Wi.class);
             DingTalkEncryptor dingTalkEncryptor = new DingTalkEncryptor(Config.dingding().getToken(), Config.dingding().getEncodingAesKey(), Config.dingding().getCorpId());
             String plainText = dingTalkEncryptor.getDecryptMsg(signature, timestamp, nonce, wi.getEncrypt());
-            logger.info("解密后的结果：" + plainText);
+            logger.info("복호화 결과:" + plainText);
             DingtalkEvent event = gson.fromJson(plainText, DingtalkEvent.class);
-            if ("check_url".equals(event.getEventType())) { //检查回调地址
-                logger.info("检查url，无需处理");
+            if ("check_url".equals(event.getEventType())) { //콜백 주소 확인
+                logger.info("url 확인, 처리 불필요");
             } else if (tags.contains(event.getEventType())) {
-                logger.info("通讯录变更，添加定时任务的队列消息。");
+                logger.info("주소록 변경, 예약 작업 큐 메시지 추가.");
                 ThisApplication.dingdingSyncOrganizationCallbackRequest.add(new Object());
             } else {
-                logger.info("忽略的类型, {}", event.getEventType());
+                logger.info("무시한 유형, {}", event.getEventType());
             }
             return dingTalkEncryptor.getEncryptedMap("success", System.currentTimeMillis(), Utils.getRandomStr(8));
         }else {
@@ -53,7 +53,7 @@ public class ActionSyncOrganizationCallbackPost extends BaseAction {
 
 
     public static class Wi extends GsonPropertyObject {
-        @FieldDescribe("加密字符串")
+        @FieldDescribe("암호화 문자열")
         private String encrypt;
 
         public String getEncrypt() {
@@ -66,7 +66,7 @@ public class ActionSyncOrganizationCallbackPost extends BaseAction {
     }
 
     public static class DingtalkEvent extends GsonPropertyObject {
-        @FieldDescribe("事件类型")
+        @FieldDescribe("이벤트 유형")
         private String EventType;
 
         public String getEventType() {

@@ -39,7 +39,7 @@ import com.x.processplatform.core.express.service.processing.jaxrs.task.V2EditWi
 import com.x.processplatform.core.express.service.processing.jaxrs.work.ActionProcessingWo;
 
 /**
- * @since 8.2 tickets 加签
+ * @since 8.2 tickets 결재자 추가
  */
 public class V3Add extends BaseAction {
 
@@ -115,7 +115,7 @@ public class V3Add extends BaseAction {
 	}
 
 	/**
-	 * 检查传入的distinguishedNameList是否全部有效
+	 * 전달된 distinguishedNameList가 모두 유효한지 검사
 	 * 
 	 * @param list
 	 * @param validList

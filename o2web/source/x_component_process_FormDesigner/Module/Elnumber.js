@@ -14,7 +14,7 @@ MWF.xApplication.process.FormDesigner.Module.Elnumber = MWF.FCElnumber = new Cla
 		this.moduleName = "elnumber";
 	},
 	_createElementHtml: function(){
-		//var html = "<el-input placeholder=\"请输入内容\"></el-input>";
+		//var html = "<el-input placeholder=\"내용을 입력하십시오\"></el-input>";
 		var html = "<el-input-number";
 		// if (this.json.description) html += " placeholder=\""+this.json.description+"\"";
 		// if (this.json.max) html += " max=\""+this.json.max+"\"";

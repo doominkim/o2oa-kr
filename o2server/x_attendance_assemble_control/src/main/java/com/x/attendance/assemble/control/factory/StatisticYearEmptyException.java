@@ -7,6 +7,6 @@ class StatisticYearEmptyException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	StatisticYearEmptyException() {
-		super("统计年份不能为空.");
+		super("통계 연도는 비워 둘 수 없습니다.");
 	}
 }

@@ -34,7 +34,7 @@
                         <el-option v-for="portal in portalList" :key="portal.id" :value="portal.id"
                             :label="portal.name"></el-option>
                     </el-select>
-                    <!-- <el-input type="text" v-model="portal.pageId" placeholder="请输入页面名称" class="item_input" size="default" /> -->
+                    <!-- <el-input type="text" v-model="portal.pageId" placeholder="페이지 이름을 입력하십시오" class="item_input" size="default" /> -->
                     <el-input type="text" v-model="portal.portalParameters" placeholder="포털 매개변수를 입력하세요" class="item_input"
                         size="default" />
                     <el-switch v-model="portal.hiddenAppBar" active-text="제목 표시줄 숨기기">
@@ -118,7 +118,7 @@ onMounted(() => {
 })
 
 const chooseNative = (item) => {
-    item.id = pageItem.value.id // 不改id
+    item.id = pageItem.value.id // id 변경 안 함
     pageItem.value = item
 }
 

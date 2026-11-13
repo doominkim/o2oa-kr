@@ -12,9 +12,9 @@ import org.apache.openjpa.persistence.jdbc.Strategy;
 import javax.persistence.*;
 
 /**
- * 班次
+ * 근무조
  */
-@Schema(name = "AttendanceV2Shift", description = "班次.")
+@Schema(name = "AttendanceV2Shift", description = "근무조.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = com.x.attendance.entity.PersistenceProperties.AttendanceV2Shift.table, uniqueConstraints = {
@@ -36,7 +36,7 @@ public class AttendanceV2Shift extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -45,19 +45,19 @@ public class AttendanceV2Shift extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String shiftName_FIELDNAME = "shiftName";
-	@FieldDescribe("班次名称")
+	@FieldDescribe("근무조 이름")
 	@Column(name = ColumnNamePrefix
                    + shiftName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -65,7 +65,7 @@ public class AttendanceV2Shift extends SliceJpaObject {
 
 
 	public static final String operator_FIELDNAME = "operator";
-	@FieldDescribe("最后操作人")
+	@FieldDescribe("최종 처리자")
 	@Column(name = ColumnNamePrefix
                    + operator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -73,7 +73,7 @@ public class AttendanceV2Shift extends SliceJpaObject {
 
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@FieldDescribe("班次上下班打卡时间.")
+	@FieldDescribe("근무조 출퇴근 체크 시간.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)
@@ -81,37 +81,37 @@ public class AttendanceV2Shift extends SliceJpaObject {
 	private AttendanceV2ShiftCheckTimeProperties properties;
 
 	public static final String workTime_FIELDNAME = "workTime";
-	@FieldDescribe("工作时长分钟数.")
+	@FieldDescribe("근무 시간(분).")
 	@Column(name = ColumnNamePrefix + workTime_FIELDNAME)
-	private Integer workTime; // 工作时长分钟数，如 480
+	private Integer workTime; // 근무 시간(분), 예: 480
 
 	public static final String needLimitWorkTime_FIELDNAME = "needLimitWorkTime";
-	@FieldDescribe("工作时长不足是否记为早退.")
+	@FieldDescribe("근무 시간 부족 시 조퇴 처리 여부.")
 	@Column(name = ColumnNamePrefix + needLimitWorkTime_FIELDNAME)
 	private Boolean needLimitWorkTime = true;
 
 	public static final String seriousTardinessLateTime_FIELDNAME = "seriousTardinessLateMinutes";
-	@FieldDescribe("严重迟到分钟数.")
+	@FieldDescribe("심각 지각 분 수.")
 	@Column(name = ColumnNamePrefix + seriousTardinessLateTime_FIELDNAME)
-	private Integer seriousTardinessLateMinutes; // 严重迟到分钟数，如 30
+	private Integer seriousTardinessLateMinutes; // 심각 지각 분 수, 예: 30
 
 	public static final String absenteeismLateTime_FIELDNAME = "absenteeismLateMinutes";
-	@FieldDescribe("旷工迟到分钟数.")
+	@FieldDescribe("결근 처리 지각 분 수.")
 	@Column(name = ColumnNamePrefix + absenteeismLateTime_FIELDNAME)
-	private Integer absenteeismLateMinutes; // 旷工迟到分钟数，如 30
+	private Integer absenteeismLateMinutes; // 결근 처리 지각 분 수, 예: 30
 
 
 	public static final String lateAndEarlyOnTime_FIELDNAME = "lateAndEarlyOnTime";
-	@FieldDescribe("上班最多可晚时间")
+	@FieldDescribe("출근 최대 허용 지각 시간")
 	@Column(name = ColumnNamePrefix
                    + lateAndEarlyOnTime_FIELDNAME)
-	private String lateAndEarlyOnTime; // 上班最多可晚时间 上班晚到几分钟，下班须晚走几分钟。 如 30 表示30分钟
+	private String lateAndEarlyOnTime; // 출근 최대 허용 지각 시간 - 출근이 몇 분 늦으면 퇴근도 몇 분 늦게 해야 함. 예: 30은 30분
 
 	public static final String lateAndEarlyOffTime_FIELDNAME = "lateAndEarlyOffTime";
-	@FieldDescribe("下班最多可早走时间")
+	@FieldDescribe("퇴근 최대 허용 조기 퇴근 시간")
 	@Column(name = ColumnNamePrefix
                    + lateAndEarlyOffTime_FIELDNAME)
-	private String lateAndEarlyOffTime; // 下班最多可早走时间，上班早到几分钟，下班可早走几分钟 如 90 表示1小时30分钟
+	private String lateAndEarlyOffTime; // 퇴근 최대 허용 조기 퇴근 시간, 출근을 몇 분 일찍 하면 퇴근을 몇 분 일찍 할 수 있음. 예: 90은 1시간 30분
 
 
 	public String getOperator() {

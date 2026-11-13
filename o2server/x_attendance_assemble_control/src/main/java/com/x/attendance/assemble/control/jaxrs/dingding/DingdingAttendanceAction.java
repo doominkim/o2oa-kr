@@ -30,15 +30,15 @@ import com.x.base.core.project.logger.LoggerFactory;
 
 
 @Path("dingding")
-@JaxrsDescribe("钉钉打卡数据管理（已弃用）")
+@JaxrsDescribe("DingTalk 출퇴근 기록 데이터 관리(사용 중단)")
 public class DingdingAttendanceAction extends StandardJaxrsAction {
 
 
     private static final Logger logger = LoggerFactory.getLogger(DingdingAttendanceAction.class);
 
 
-    //删除所有打卡数据
-    @JaxrsMethodDescribe(value = "删除所有打卡数据", action = ActionDeleteAllData.class)
+    //모든 출퇴근 기록 데이터 삭제
+    @JaxrsMethodDescribe(value = "모든 출퇴근 기록 데이터 삭제", action = ActionDeleteAllData.class)
     @DELETE
     @Path("all")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -57,14 +57,14 @@ public class DingdingAttendanceAction extends StandardJaxrsAction {
 
 
     //
-    @JaxrsMethodDescribe(value = "同步钉钉考勤结果", action = ActionSyncData.class)
+    @JaxrsMethodDescribe(value = "DingTalk 근태 결과 동기화", action = ActionSyncData.class)
     @GET
     @Path("sync/from/{dateFrom}/to/{dateTo}/start")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void syncData(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                         @JaxrsParameterDescribe("开始时间: yyyy-MM-dd") @PathParam("dateFrom") String dateFrom,
-                         @JaxrsParameterDescribe("结束时间: yyyy-MM-dd") @PathParam("dateTo") String dateTo) {
+                         @JaxrsParameterDescribe("시작 시간: yyyy-MM-dd") @PathParam("dateFrom") String dateFrom,
+                         @JaxrsParameterDescribe("종료 시간: yyyy-MM-dd") @PathParam("dateTo") String dateTo) {
         ActionResult<WrapBoolean> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -76,7 +76,7 @@ public class DingdingAttendanceAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询钉钉同步记录信息", action = ActionListDingdingSyncRecord.class)
+    @JaxrsMethodDescribe(value = "DingTalk 동기화 기록 정보 조회", action = ActionListDingdingSyncRecord.class)
     @GET
     @Path("sync/list")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -93,14 +93,14 @@ public class DingdingAttendanceAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "查询钉钉打卡结果", action = ActionListDDAttendanceDetail.class)
+    @JaxrsMethodDescribe(value = "DingTalk 출퇴근 체크 결과 조회", action = ActionListDDAttendanceDetail.class)
     @PUT
     @Path("attendance/list/{id}/next/{count}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listNextDingdingAttendance(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                       @JaxrsParameterDescribe("最后一条数据ID") @PathParam("id") String id,
-                                       @JaxrsParameterDescribe("每页显示的条目数量") @PathParam("count") Integer count,
+                                       @JaxrsParameterDescribe("마지막 데이터 ID") @PathParam("id") String id,
+                                       @JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count,
                                        JsonElement jsonElement) {
         ActionResult<List<ActionListDDAttendanceDetail.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -115,14 +115,14 @@ public class DingdingAttendanceAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "钉钉考勤全部个人数据统计", action = ActionStatisticPersonMonthData.class)
+    @JaxrsMethodDescribe(value = "DingTalk 근태 전체 개인 데이터 통계", action = ActionStatisticPersonMonthData.class)
     @GET
     @Path("statistic/person/year/{year}/month/{month}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void statisticPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                         @JaxrsParameterDescribe("年份: yyyy") @PathParam("year") String year,
-                         @JaxrsParameterDescribe("月份: MM") @PathParam("month") String month) {
+                         @JaxrsParameterDescribe("연도: yyyy") @PathParam("year") String year,
+                         @JaxrsParameterDescribe("월: MM") @PathParam("month") String month) {
         ActionResult<WrapBoolean> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -135,15 +135,15 @@ public class DingdingAttendanceAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "钉钉考勤全部组织数据统计", action = ActionStatisticUnitDayData.class)
+    @JaxrsMethodDescribe(value = "DingTalk 근태 전체 조직 데이터 통계", action = ActionStatisticUnitDayData.class)
     @GET
     @Path("statistic/unit/year/{year}/month/{month}/day/{day}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void statisticUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                                @JaxrsParameterDescribe("年份: yyyy") @PathParam("year") String year,
-                                @JaxrsParameterDescribe("月份: MM") @PathParam("month") String month,
-                                @JaxrsParameterDescribe("日期: dd") @PathParam("day") String day) {
+                                @JaxrsParameterDescribe("연도: yyyy") @PathParam("year") String year,
+                                @JaxrsParameterDescribe("월: MM") @PathParam("month") String month,
+                                @JaxrsParameterDescribe("일: dd") @PathParam("day") String day) {
         ActionResult<WrapBoolean> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

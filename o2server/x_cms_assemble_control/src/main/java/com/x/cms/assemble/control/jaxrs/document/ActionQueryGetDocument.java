@@ -63,7 +63,7 @@ public class ActionQueryGetDocument extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "判断用户是否是系统管理员时发生异常！user:" + personName);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 시스템 관리자인지 확인하는 중 오류가 발생했습니다! user:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -90,14 +90,14 @@ public class ActionQueryGetDocument extends BaseAction {
 							wrapOutDocument = WoDocument.copier.copy(document);
 						} catch (Exception e) {
 							check = false;
-							Exception exception = new ExceptionDocumentInfoProcess(e, "将查询出来的文档信息对象转换为可输出的数据信息时发生异常。");
+							Exception exception = new ExceptionDocumentInfoProcess(e, "조회한 게시글 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다.");
 							result.error(exception);
 							logger.error(e, effectivePerson, request, null);
 						}
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "文档信息获取操作时发生异常。Id:" + id + ", Name:" + personName);
+					Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 정보를 가져오는 중 오류가 발생했습니다. Id:" + id + ", Name:" + personName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -127,7 +127,7 @@ public class ActionQueryGetDocument extends BaseAction {
 					} catch (Exception e) {
 						check = false;
 						Exception exception = new ExceptionDocumentInfoProcess(e,
-								"根据ID查询分类信息对象时发生异常。ID:" + document.getCategoryId());
+								"ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + document.getCategoryId());
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -140,14 +140,14 @@ public class ActionQueryGetDocument extends BaseAction {
 					} catch (Exception e) {
 						check = false;
 						Exception exception = new ExceptionDocumentInfoProcess(e,
-								"系统获取文档数据内容信息时发生异常。Id:" + document.getCategoryId());
+								"게시글 데이터 내용을 가져오는 중 오류가 발생했습니다. Id:" + document.getCategoryId());
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
 				}
 			}
 
-			//判断用户是否是文档的创建者，创建者是有权限编辑文档的
+			//사용자가 문서 작성자인지 판단, 작성자는 문서 편집 권한이 있음
 			if (check) {
 				if (wo.getDocument() != null && wo.getDocument().getCreatorPerson() != null && wo.getDocument().getCreatorPerson().equals(personName)) {
 					isCreator = true;
@@ -168,14 +168,14 @@ public class ActionQueryGetDocument extends BaseAction {
 				roleNames = userManagerService.listRoleNamesByPerson( personName );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "查询用户所有的组织和群组信息时发生异常！user:" + personName);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자의 전체 조직 및 그룹 정보를 조회하는 중 오류가 발생했습니다! user:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		/////////////////////////////////////////////////////////////
-		//不管是从缓存还是数据库查出来，都要重新进行处理权限判断
+		//캐시에서 조회하든 데이터베이스에서 조회하든 권한 판단을 다시 처리해야 함
 		/////////////////////////////////////////////////////////////
 
 		if (check) {
@@ -188,7 +188,7 @@ public class ActionQueryGetDocument extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "根据ID查询栏目信息对象时发生异常。ID:" + document.getAppId());
+				Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + document.getAppId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -203,13 +203,13 @@ public class ActionQueryGetDocument extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "根据ID查询分类信息对象时发生异常。ID:" + document.getCategoryId());
+				Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + document.getCategoryId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		//判断用户是否是分类的管理者，分类管理者是有权限编辑文档的
+		//사용자가 분류 관리자인지 판단, 분류 관리자는 문서 편집 권한이 있음
 		if (check) {
 			try {
 				if ( categoryInfoServiceAdv.isCategoryInfoManager( categoryInfo, personName, unitNames, groupNames ) ) {
@@ -218,13 +218,13 @@ public class ActionQueryGetDocument extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionDocumentInfoProcess(e,
-						"判断用户是否是分类管理员时发生异常！user:" + personName);
+						"사용자가 분류 관리자인지 확인하는 중 오류가 발생했습니다! user:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		//判断用户是否是栏目的管理者，栏目管理者是有权限编辑文档的
+		//사용자가 게시판 관리자인지 판단, 게시판 관리자는 문서 편집 권한이 있음
 		if (check) {
 			try {
 				if ( appInfoServiceAdv.isAppInfoManager( appInfo, personName, unitNames, groupNames, roleNames )) {
@@ -232,7 +232,7 @@ public class ActionQueryGetDocument extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "判断用户是否是栏目管理员时发生异常！user:" + personName);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 게시판 관리자인지 확인하는 중 오류가 발생했습니다! user:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -242,7 +242,7 @@ public class ActionQueryGetDocument extends BaseAction {
 			if (isManager || isAppAdmin || isCategoryAdmin || isCreator) {
 				isEditor = true;
 			} else {
-				// 判断当前登录者是不是该文档的可编辑者
+				// 현재 로그인 사용자가 해당 문서의 편집자인지 판단
 				try {
 					if( ListTools.isNotEmpty( document.getAuthorPersonList() )) {
 						if ( wrapOutDocument.getAuthorPersonList().contains( getShortTargetFlag(personName) )) {
@@ -261,7 +261,7 @@ public class ActionQueryGetDocument extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess(e, "判断用户是否可编辑文档时发生异常！user:" + personName);
+					Exception exception = new ExceptionDocumentInfoProcess(e, "사용자가 게시글을 편집할 수 있는지 확인하는 중 오류가 발생했습니다! user:" + personName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -279,19 +279,19 @@ public class ActionQueryGetDocument extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("作为输出的CMS文档数据对象.")
+		@FieldDescribe("출력용 CMS 문서 데이터 객체.")
 		private WoDocument document;
 
-		@FieldDescribe("作为输出的CMS文档操作日志.")
+		@FieldDescribe("출력용 CMS 문서 조작 로그.")
 		private List<WoLog> documentLogList;
 
-		@FieldDescribe("文档所有数据信息.")
+		@FieldDescribe("문서 전체 데이터 정보.")
 		private Data data;
 
-		@FieldDescribe("作为编辑的CMS文档表单.")
+		@FieldDescribe("편집용 CMS 문서 양식.")
 		private WoForm form;
 
-		@FieldDescribe("作为查看的CMS文档表单.")
+		@FieldDescribe("조회용 CMS 문서 양식.")
 		private WoForm readForm;
 
 		private Boolean isAppAdmin = false;
@@ -391,7 +391,7 @@ public class ActionQueryGetDocument extends BaseAction {
 				null, JpaObject.FieldsInvisible);
 
 		/**
-		 * 只作显示用
+		 * 표시용으로만 사용
 		 */
 		private String creatorPersonShort = "";
 

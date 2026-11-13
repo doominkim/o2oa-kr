@@ -9,10 +9,10 @@ public class V3RetractWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5176027793859273796L;
 
-	@FieldDescribe(" 已经完成工作标识")
+	@FieldDescribe(" 완료된 업무 문서 식별자")
 	private String taskCompleted;
 
-	@FieldDescribe("撤回待办标识")
+	@FieldDescribe("회수 결재 대기 식별자")
 	private List<String> retractTaskList;
 
 	public List<String> getRetractTaskList() {

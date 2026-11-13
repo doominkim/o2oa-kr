@@ -7,10 +7,10 @@ class ExceptionCalendarInfoProcess extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCalendarInfoProcess( Throwable e, String message ) {
-		super("用户在进行日历信息处理时发生异常！message:" + message, e );
+		super("캘린더 정보를 처리하는 중 오류가 발생했습니다! message:" + message, e );
 	}
 	
 	ExceptionCalendarInfoProcess( String message ) {
-		super("用户在进行日历信息处理时发生异常！message:" + message );
+		super("캘린더 정보를 처리하는 중 오류가 발생했습니다! message:" + message );
 	}
 }

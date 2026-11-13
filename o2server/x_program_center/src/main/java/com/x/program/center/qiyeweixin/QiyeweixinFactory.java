@@ -34,14 +34,14 @@ public class QiyeweixinFactory {
 		}
 		users = ListTools.trim(users, true, true);
 		logger.info("qi ye wei xin sync org num:{}, user num:{}", orgs.size(), users.size());
-		logger.info("qw打印一个用户信息:{}", users.get(0).toString());
+		logger.info("qw 사용자 정보 출력:{}", users.get(0).toString());
 	}
 
 	public List<User> getUsers() {
 		return this.users;
 	}
 
-	// 2023-03-14 新的api根据应用的权限来同步组织，组织不一定是根节点，根节点id==1的判断已经失效
+	// 2023-03-14 새 api는 앱 권한에 따라 조직 동기화, 조직이 반드시 루트 노드는 아니므로 루트 노드 id==1 판단은 더 이상 유효하지 않음
 	public List<Department> roots() {
 //		return orgs.stream().filter(o -> 1L == o.getId()).collect(Collectors.toList());
 		Set<Long> ids = orgs.stream().map(Department::getId).collect(Collectors.toSet());
@@ -69,7 +69,7 @@ public class QiyeweixinFactory {
 		if (resp.getErrcode() != 0) {
 			throw new ExceptionListUser(resp.getErrcode(), resp.getErrmsg());
 		}
-		// @Date 2022-09-29 因为企业微信api权限调整，无法读取用户手机号码，这里开始填充一个假的值
+		// @Date 2022-09-29 기업 위챗 api 권한 조정으로 사용자 휴대폰 번호를 읽을 수 없어 여기서 가짜 값 채움
 		List<User> userList = resp.getUserlist();
 		if (userList != null && !userList.isEmpty()) {
 			return userList.stream().peek(this::setDefaultMobileStr).collect(Collectors.toList());
@@ -81,10 +81,10 @@ public class QiyeweixinFactory {
 	private void setDefaultMobileStr(User user) {
 		if (user != null && StringUtils.isNotEmpty(user.getUserid()) && StringUtils.isEmpty(user.getMobile())) {
 			String userId = user.getUserid();
-			if (userId.length() < 11) { // 用户名太短的情况
+			if (userId.length() < 11) { // 사용자명이 너무 짧은 경우
 				userId = String.format("%11s", userId).replace(" ","0");
 			}
-			if (userId.length() > 32) { // 用户名超长的情况
+			if (userId.length() > 32) { // 사용자명이 너무 긴 경우
 				userId = userId.substring(userId.length() - 32);
 			}
 			user.setMobile(userId);
@@ -110,7 +110,7 @@ public class QiyeweixinFactory {
 		// "retMessage": "success",
 		// "retData": {
 		// "orgNumber": 100016000,
-		// "name": "互联网+事业部",
+		// "name": "인터넷+사업부",
 		// "type": 1,
 		// "parentId": 1,
 		// "fullName": "",

@@ -117,7 +117,7 @@ MWF.xApplication.process.FormDesigner.Module.Form = MWF.FCForm = new Class({
 		this.container.set("html", this.html);
 		this.loadStylesList(function(){
 			var formStyleType = this.json.formStyleType;
-			if( typeOf( formStyleType ) === "object" && formStyleType.type === "script"  ){ //如果是自定义表单样式
+			if( typeOf( formStyleType ) === "object" && formStyleType.type === "script"  ){ //사용자 정의 양식 스타일인 경우
 				this.loadCustomTemplateStyles( formStyleType, function ( templateStyles ) {
 					this._load( templateStyles );
 				}.bind(this))
@@ -146,7 +146,7 @@ MWF.xApplication.process.FormDesigner.Module.Form = MWF.FCForm = new Class({
 			}
 		}.bind(this));
 	},
-	// 移动端表单加载工具栏
+	// 모바일 양식 툴바 로드
 	loadMobileActionToos: function() {
 		// if (this.options.mode==="Mobile"){
 			if (!this.json.multiTools){
@@ -1095,7 +1095,7 @@ MWF.xApplication.process.FormDesigner.Module.Form = MWF.FCForm = new Class({
 
 		this._recoveryModuleData();
 
-		//@todo 预先整理表单样式
+		//@todo 양식 스타일 사전 정리
 		// var tmpFormNode = new Element("div", {
 		// 	"opacity": 0
 		// }).inject(this.designer.content);
@@ -1426,7 +1426,7 @@ MWF.xApplication.process.FormDesigner.Module.Form = MWF.FCForm = new Class({
         if ( name=="formStyleType" ){
 
 			var loadOldTemplateStyle = function () {
-				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //如果原来是自定义表单样式
+				if( typeOf(oldValue) === "object" && oldValue.type === "script" ){ //기존이 사용자 정의 양식 스타일인 경우
 					this.loadCustomTemplateStyles( oldValue , function (oldTemplateStyles) {
 						this.switchTemplateStyles( oldTemplateStyles );
 					}.bind(this))
@@ -1524,12 +1524,12 @@ MWF.xApplication.process.FormDesigner.Module.Form = MWF.FCForm = new Class({
         if (styleNode) styleNode.destroy();
         if (cssText){
 
-            //删除注释
+            //주석 삭제
             // cssText = cssText.replace(/\/\*[\s\S]*?\*\/\n|([^:]|^)\/\/.*\n$/g, '').replace(/\\n/, '');
 			//cssText = cssText.replace(/\/\*[\s\S]*?\*\/|(?<!:)\/\/.*/g, '').replace(/\\n/, '');
 
-			cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 移除注释
-				.replace(/\\n/g, '');             // 移除\n
+			cssText = cssText.replace(/\/\*[\s\S]*?\*\//g, '')  // 주석 제거
+				.replace(/\\n/g, '');             // \n 제거
 
             cssText = this.parseCSS(cssText);
             var rex = new RegExp("(.+)(?=\\{)", "g");
@@ -1724,7 +1724,7 @@ MWF.xApplication.process.FormDesigner.Module.Form = MWF.FCForm = new Class({
 		return object;
 	},
 
-	//脚本附签上的脚本编辑器
+	//스크립트 탭의 스크립트 편집기
 	addScriptJsEditor: function (propertyName, jsEditor) {
 		if( !this.scriptJsEditors )this.scriptJsEditors = {};
 		this.scriptJsEditors[propertyName] = jsEditor;

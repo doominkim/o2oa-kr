@@ -7,6 +7,6 @@ public class ExceptionForumIdEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionForumIdEmpty() {
-		super("论坛分区ID为空， 无法进行查询." );
+		super("포럼 분류 ID가 비어 있어 조회할 수 없습니다." );
 	}
 }

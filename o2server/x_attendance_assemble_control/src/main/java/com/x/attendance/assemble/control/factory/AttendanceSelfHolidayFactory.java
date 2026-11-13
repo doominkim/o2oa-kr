@@ -24,7 +24,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
  */
 public class AttendanceSelfHolidayFactory extends AbstractFactory {
 
@@ -34,12 +34,12 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
         super(business);
     }
 
-    // @MethodDescribe("获取指定Id的AttendanceSelfHoliday信息对象")
+    // @MethodDescribe("지정 Id의 AttendanceSelfHoliday 정보 객체 조회")
     public AttendanceSelfHoliday get(String id) throws Exception {
         return this.entityManagerContainer().find(id, AttendanceSelfHoliday.class, ExceptionWhen.none);
     }
 
-//@MethodDescribe("列示全部的AttendanceSelfHoliday信息列表")
+//@MethodDescribe("전체 AttendanceSelfHoliday 정보 목록 조회")
     public List<String> listAll() throws Exception {
         EntityManager em = this.entityManagerContainer().get(AttendanceSelfHoliday.class);
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -49,7 +49,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
         return em.createQuery(cq).getResultList();
     }
 
-//	@MethodDescribe("列示指定Id的AttendanceSelfHoliday信息列表")
+//	@MethodDescribe("지정 Id의 AttendanceSelfHoliday 정보 목록 조회")
     public List<AttendanceSelfHoliday> list(List<String> ids) throws Exception {
         if (ids == null || ids.size() == 0) {
             return new ArrayList<AttendanceSelfHoliday>();
@@ -87,7 +87,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
         return em.createQuery(cq.where(p)).getResultList();
     }
 
-    // @MethodDescribe("列示单个员工的AttendanceSelfHoliday信息列表")
+    // @MethodDescribe("직원 한 명의 AttendanceSelfHoliday 정보 목록 조회")
     public List<String> getByEmployeeName(String empName) throws Exception {
         EntityManager em = this.entityManagerContainer().get(AttendanceSelfHoliday.class);
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -98,7 +98,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
         return em.createQuery(cq.where(p)).getResultList();
     }
 
-    // @MethodDescribe("根据流程的文档ID列示员工的AttendanceSelfHoliday信息列表")
+    // @MethodDescribe("프로세스 문서 ID로 직원의 AttendanceSelfHoliday 정보 목록 조회")
 //	public List<String> getByWorkFlowDocId(String docId) throws Exception {
 //		EntityManager em = this.entityManagerContainer().get(AttendanceSelfHoliday.class);
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -121,7 +121,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
     }
 
     /**
-     * 查询下一页的信息数据
+     * 다음 페이지 정보 데이터 조회
      * 
      * @param id
      * @param count
@@ -133,9 +133,9 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
     @SuppressWarnings("unchecked")
     public List<AttendanceSelfHoliday> listIdsNextWithFilter(String id, Integer count, Object sequence,
             ActionListNextWithFilter.WrapIn wrapIn) throws Exception {
-        // 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+        // 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
         EntityManager em = this.entityManagerContainer().get(AttendanceSelfHoliday.class);
-        String order = wrapIn.getOrder();// 排序方式
+        String order = wrapIn.getOrder();// 정렬 방식
         List<Object> vs = new ArrayList<>();
         StringBuffer sql_stringBuffer = new StringBuffer();
 
@@ -185,7 +185,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
 
         Query query = em.createQuery(sql_stringBuffer.toString(), AttendanceSelfHoliday.class);
         // System.out.println("query=" +query.toString());
-        // 为查询设置所有的参数值
+        // 조회에 모든 매개변수 값 설정
         for (int i = 0; i < vs.size(); i++) {
             query.setParameter(i + 1, vs.get(i));
         }
@@ -193,7 +193,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
     }
 
     /**
-     * 查询上一页的文档信息数据
+     * 이전 페이지 문서 정보 데이터 조회
      * 
      * @param id
      * @param count
@@ -205,9 +205,9 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
     @SuppressWarnings("unchecked")
     public List<AttendanceSelfHoliday> listIdsPrevWithFilter(String id, Integer count, Object sequence,
             WrapInFilter wrapIn) throws Exception {
-        // 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+        // 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
         EntityManager em = this.entityManagerContainer().get(AttendanceSelfHoliday.class);
-        String order = wrapIn.getOrder();// 排序方式
+        String order = wrapIn.getOrder();// 정렬 방식
         List<Object> vs = new ArrayList<>();
         StringBuffer sql_stringBuffer = new StringBuffer();
         Integer index = 1;
@@ -246,7 +246,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
         }
 
         Query query = em.createQuery(sql_stringBuffer.toString(), AttendanceSelfHoliday.class);
-        // 为查询设置所有的参数值
+        // 조회에 모든 매개변수 값 설정
         for (int i = 0; i < vs.size(); i++) {
             query.setParameter(i + 1, vs.get(i));
         }
@@ -255,14 +255,14 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
     }
 
     /**
-     * 查询符合的文档信息总数
+     * 조건에 맞는 문서 정보 총수 조회
      * 
      * @param wrapIn
      * @return
      * @throws Exception
      */
     public long getCountWithFilter(WrapInFilter wrapIn) throws Exception {
-        // 先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+        // 이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
         EntityManager em = this.entityManagerContainer().get(AttendanceSelfHoliday.class);
         List<Object> vs = new ArrayList<>();
         StringBuffer sql_stringBuffer = new StringBuffer();
@@ -288,7 +288,7 @@ public class AttendanceSelfHolidayFactory extends AbstractFactory {
         }
 
         Query query = em.createQuery(sql_stringBuffer.toString(), AttendanceSelfHoliday.class);
-        // 为查询设置所有的参数值
+        // 조회에 모든 매개변수 값 설정
         for (int i = 0; i < vs.size(); i++) {
             query.setParameter(i + 1, vs.get(i));
         }

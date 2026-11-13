@@ -25,12 +25,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("externaldatasources")
-@JaxrsDescribe("外部数据源.")
+@JaxrsDescribe("외부 데이터 소스.")
 public class ExternalDataSourcesAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExternalDataSourcesAction.class);
 
-	@JaxrsMethodDescribe(value = "检查是否可以进行外部数据源设置.", action = ActionCheck.class)
+	@JaxrsMethodDescribe(value = "외부 데이터 소스 설정 가능 여부 확인.", action = ActionCheck.class)
 	@GET
 	@Path("check")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class ExternalDataSourcesAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示可用的外部数据源配置样例.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "사용 가능한 외부 데이터 소스 설정 예시 목록.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -64,7 +64,7 @@ public class ExternalDataSourcesAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置外部数据源.", action = ActionSet.class)
+	@JaxrsMethodDescribe(value = "외부 데이터 소스 설정.", action = ActionSet.class)
 	@POST
 	@Path("set")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -82,7 +82,7 @@ public class ExternalDataSourcesAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "测试外部数据源.", action = ActionValidate.class)
+	@JaxrsMethodDescribe(value = "외부 데이터 소스 테스트.", action = ActionValidate.class)
 	@POST
 	@Path("validate")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -100,7 +100,7 @@ public class ExternalDataSourcesAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "取消设置外部数据源.", action = ActionSetCancel.class)
+	@JaxrsMethodDescribe(value = "외부 데이터 소스 설정 취소.", action = ActionSetCancel.class)
 	@GET
 	@Path("set/cancel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

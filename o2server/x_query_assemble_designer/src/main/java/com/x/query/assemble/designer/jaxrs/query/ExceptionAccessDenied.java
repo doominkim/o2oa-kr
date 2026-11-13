@@ -7,7 +7,7 @@ class ExceptionAccessDenied extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionAccessDenied(String person) {
-		super("用户:{} 访问被拒绝.", person);
+		super("사용자: {}의 접근이 거부되었습니다.", person);
 	}
 
 }

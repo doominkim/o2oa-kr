@@ -95,14 +95,14 @@ abstract class BaseAction extends StandardJaxrsAction {
 		List<String> ids = onlyRemoveNotCompleted
 				? business.attachment().listWithProcessWithCompleted(process.getId(), false)
 				: business.attachment().listWithProcess(process.getId());
-		/** 附件需要单独处理删除 */
+		/** 첨부파일은 별도로 삭제 처리 필요 */
 		EntityManagerContainer emc = business.entityManagerContainer();
 		for (List<String> list : ListTools.batch(ids, 1000)) {
 			emc.beginTransaction(Attachment.class);
 			for (Attachment o : business.entityManagerContainer().list(Attachment.class, list)) {
 				StorageMapping mapping = ThisApplication.context().storageMappings().get(Attachment.class,
 						o.getStorage());
-				/** 如果找不到存储器就算了 */
+				/** 저장소를 찾지 못하면 무시 */
 				if (null != mapping) {
 					o.deleteContent(mapping);
 				}
@@ -172,7 +172,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		return null;
 	}
 
-	// @MethodDescribe("判断实体在Wrap对象列表中是否有同样id的对象.")
+	// @MethodDescribe("엔티티와 같은 id의 객체가 Wrap 객체 목록에 있는지 판단.")
 	<T> T jpaInWrapList(JpaObject jpa, List<T> list)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		for (T t : list) {

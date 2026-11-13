@@ -9,8 +9,8 @@ public class ActionUpdateContentWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -4802496811328343606L;
 
-	@FieldDescribe("文件名称,不带扩展名的文件名.")
-	@Schema(description = "文件名称,不带扩展名的文件名.")
+	@FieldDescribe("파일 이름, 확장자를 제외한 파일 이름.")
+	@Schema(description = "파일 이름, 확장자를 제외한 파일 이름.")
 	private String fileName;
 
 	public String getFileName() {

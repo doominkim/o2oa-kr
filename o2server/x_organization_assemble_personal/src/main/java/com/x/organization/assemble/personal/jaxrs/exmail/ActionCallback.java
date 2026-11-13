@@ -44,7 +44,7 @@ class ActionCallback extends BaseAction {
 		WXBizMsgCrypt crypt = new WXBizMsgCrypt(Config.exmail().getToken(), Config.exmail().getEncodingAesKey(),
 				Config.exmail().getCorpId());
 		String msg = crypt.DecryptMsg(msgSignature, timestamp, nonce, body);
-		LOGGER.debug("腾讯企业邮收到,msg_signature:{}, timestamp:{}, nonce:{}, body:{}, msg:{}.", msgSignature, timestamp,
+		LOGGER.debug("텐센트 기업 메일 수신, msg_signature:{}, timestamp:{}, nonce:{}, body:{}, msg:{}.", msgSignature, timestamp,
 				nonce, body, msg);
 		return msg;
 	}

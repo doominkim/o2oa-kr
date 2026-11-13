@@ -8,7 +8,7 @@ class ExceptionExpectedEmpty extends RunningException {
 	private static final long serialVersionUID = 9085364457175859374L;
 
 	ExceptionExpectedEmpty(String title, String id, String activityName, String activityId) {
-		super("预计的处理人为空, 标题:{}, 标识:{}, 活动:{}, 活动标识:{}, 记录的处理人:{}", title, id, activityName, activityId);
+		super("예상 처리자가 비어 있습니다, 제목: {}, 식별자: {}, 단계: {}, 단계 식별자: {}, 기록된 처리자: {}", title, id, activityName, activityId);
 	}
 
 }

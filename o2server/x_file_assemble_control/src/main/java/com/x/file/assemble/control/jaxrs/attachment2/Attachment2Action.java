@@ -36,18 +36,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("attachment2")
-@JaxrsDescribe("附件操作")
+@JaxrsDescribe("첨부파일 작업")
 public class Attachment2Action extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(Attachment2Action.class);
 
-	@JaxrsMethodDescribe(value = "获取文件Base64编码后的内容.", action = ActionGetBase64.class)
+	@JaxrsMethodDescribe(value = "파일의 Base64 인코딩 내용 조회.", action = ActionGetBase64.class)
 	@GET
 	@Path("{id}/binary/base64")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getBase64(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGetBase64.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -59,14 +59,14 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取图片缩放后的base64内容(png格式).scale(0-200)百分比缩放比例.", action = ActionGetImageScaleBase64.class)
+	@JaxrsMethodDescribe(value = "이미지 축소·확대 후 base64 내용 조회(png 형식). scale(0-200) 백분율 비율.", action = ActionGetImageScaleBase64.class)
 	@GET
 	@Path("{id}/image/scale/{scale}/binary/base64")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getImageScaleBase64(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("缩放比例") @PathParam("scale") Integer scale) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("축소·확대 비율") @PathParam("scale") Integer scale) {
 		ActionResult<ActionGetImageScaleBase64.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -78,15 +78,15 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取图片设定宽高后的base64内容(png格式).width(0-5000)像素,0代表不限制,height(0-5000)像素,0代表不限制.", action = ActionGetImageWidthHeightBase64.class)
+	@JaxrsMethodDescribe(value = "너비·높이를 지정한 이미지의 base64 내용 조회(png 형식). width(0-5000) 픽셀, 0은 제한 없음, height(0-5000) 픽셀, 0은 제한 없음.", action = ActionGetImageWidthHeightBase64.class)
 	@GET
 	@Path("{id}/image/width/{width}/height/{height}/binary/base64")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getImageWidthHeightBase64(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("宽度") @PathParam("width") Integer width,
-			@JaxrsParameterDescribe("高度") @PathParam("height") Integer height) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("너비") @PathParam("width") Integer width,
+			@JaxrsParameterDescribe("높이") @PathParam("height") Integer height) {
 		ActionResult<ActionGetImageWidthHeightBase64.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -98,15 +98,15 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "下载图片设定宽高后的(png格式).width(0-5000)像素,0代表不限制,height(0-5000)像素,0代表不限制.", action = ActionDownloadImageWidthHeight.class)
+	@JaxrsMethodDescribe(value = "너비·높이를 지정한 이미지 다운로드(png 형식). width(0-5000) 픽셀, 0은 제한 없음, height(0-5000) 픽셀, 0은 제한 없음.", action = ActionDownloadImageWidthHeight.class)
 	@GET
 	@Path("{id}/download/image/width/{width}/height/{height}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void downloadImageWidthHeight(@Suspended final AsyncResponse asyncResponse,
-										  @Context HttpServletRequest request, @JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-										  @JaxrsParameterDescribe("宽度") @PathParam("width") Integer width,
-										  @JaxrsParameterDescribe("高度") @PathParam("height") Integer height) {
+										  @Context HttpServletRequest request, @JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+										  @JaxrsParameterDescribe("너비") @PathParam("width") Integer width,
+										  @JaxrsParameterDescribe("높이") @PathParam("height") Integer height) {
 		ActionResult<ActionDownloadImageWidthHeight.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -118,13 +118,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定人员共享给我的文件.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 사용자가 나에게 공유한 파일 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+					@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -136,13 +136,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前用户或指定用户（管理员权限）使用容量.", action = ActionUseCapacity.class)
+	@JaxrsMethodDescribe(value = "현재 사용자 또는 지정 사용자(관리자 권한)의 사용 용량 조회.", action = ActionUseCapacity.class)
 	@GET
 	@Path("user/capacity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getUseCapacity(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("查询用户") @QueryParam("person") String person) {
+					@JaxrsParameterDescribe("조회 사용자") @QueryParam("person") String person) {
 		ActionResult<ActionUseCapacity.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -154,13 +154,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新Attachment", action = ActionUpdate.class)
+	@JaxrsMethodDescribe(value = "Attachment 갱신", action = ActionUpdate.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -172,13 +172,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除附件.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "첨부파일 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -190,7 +190,7 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员的顶层文件.", action = ActionListTop.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 최상위 파일 조회.", action = ActionListTop.class)
 	@GET
 	@Path("list/top")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -207,13 +207,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前人员在指定文件夹下的文件.", action = ActionListWithFolder.class)
+	@JaxrsMethodDescribe(value = "현재 사용자의 지정 폴더 내 파일 조회.", action = ActionListWithFolder.class)
 	@GET
 	@Path("list/folder/{folderId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFolder(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("目录标识") @PathParam("folderId") String folderId) {
+			@JaxrsParameterDescribe("디렉터리 식별자") @PathParam("folderId") String folderId) {
 		ActionResult<List<ActionListWithFolder.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -225,13 +225,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据文件名称查找当前用户的附件.", action = ActionListWithFilter.class)
+	@JaxrsMethodDescribe(value = "파일명으로 현재 사용자의 첨부파일 검색.", action = ActionListWithFilter.class)
 	@GET
 	@Path("list/filter/{name}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithFilter(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							   @JaxrsParameterDescribe("目录标识") @PathParam("name") String name) {
+							   @JaxrsParameterDescribe("디렉터리 식별자") @PathParam("name") String name) {
 		ActionResult<List<ActionListWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -243,13 +243,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据文件的md5值查找附件.", action = ActionCheckFileExist.class)
+	@JaxrsMethodDescribe(value = "파일 md5 값으로 첨부파일 검색.", action = ActionCheckFileExist.class)
 	@GET
 	@Path("exist/file/{fileMd5}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkFileExist(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							   @JaxrsParameterDescribe("附件md5值") @PathParam("fileMd5") String fileMd5) {
+							   @JaxrsParameterDescribe("첨부파일 md5 값") @PathParam("fileMd5") String fileMd5) {
 		ActionResult<ActionCheckFileExist.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -261,13 +261,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定人员共享给我的文件.", action = ActionListWithShare.class)
+	@JaxrsMethodDescribe(value = "지정 사용자가 나에게 공유한 파일 조회.", action = ActionListWithShare.class)
 	@GET
 	@Path("list/share/{owner}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithShare(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件所有人") @PathParam("owner") String owner) {
+			@JaxrsParameterDescribe("파일 소유자") @PathParam("owner") String owner) {
 		ActionResult<List<ActionListWithShare.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -279,13 +279,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定人员共享给我编辑的文件.", action = ActionListWithEditor.class)
+	@JaxrsMethodDescribe(value = "지정 사용자가 나에게 편집 공유한 파일 조회.", action = ActionListWithEditor.class)
 	@GET
 	@Path("list/editor/{owner}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithEditor(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("文件所有人") @PathParam("owner") String owner) {
+			@JaxrsParameterDescribe("파일 소유자") @PathParam("owner") String owner) {
 		ActionResult<List<ActionListWithEditor.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
@@ -297,13 +297,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取附件内容,输出头信息", action = ActionDownload.class)
+	@JaxrsMethodDescribe(value = "첨부파일 내용 조회, 헤더 정보 출력", action = ActionDownload.class)
 	@GET
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@Context HttpServletResponse response,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -315,13 +315,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取附件内容.不输出头信息", action = ActionDownloadStream.class)
+	@JaxrsMethodDescribe(value = "첨부파일 내용 조회. 헤더 정보 미출력", action = ActionDownloadStream.class)
 	@GET
 	@Path("{id}/download/stream")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void downloadStream(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@Context HttpServletResponse response,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id) {
 		ActionResult<ActionDownloadStream.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -333,14 +333,14 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	/** 为IOS访问单独增加的方法 */
-	@JaxrsMethodDescribe(value = "获取附件内容,输出头信息,,使用POST方法访问.", action = ActionDownload.class)
+	/** iOS 접근용으로 별도 추가한 메서드 */
+	@JaxrsMethodDescribe(value = "첨부파일 내용 조회, 헤더 정보 출력, POST 방식으로 접근.", action = ActionDownload.class)
 	@POST
 	@Path("{id}/download")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void postDownload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@Context HttpServletResponse response,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionDownload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -352,14 +352,14 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	/** 为IOS访问单独增加的方法 */
-	@JaxrsMethodDescribe(value = "获取附件内容.不输出头信息,使用POST方法访问.", action = ActionDownloadStream.class)
+	/** iOS 접근용으로 별도 추가한 메서드 */
+	@JaxrsMethodDescribe(value = "첨부파일 내용 조회. 헤더 정보 미출력, POST 방식으로 접근.", action = ActionDownloadStream.class)
 	@POST
 	@Path("{id}/download/stream")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void postDownloadStream(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@Context HttpServletResponse response,
-			@JaxrsParameterDescribe("附件标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionDownloadStream.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -371,16 +371,16 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建Attachment的内容", action = ActionUpload.class)
+	@JaxrsMethodDescribe(value = "Attachment 내용 생성", action = ActionUpload.class)
 	@POST
 	@Path("upload/folder/{folderId}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void upload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("目录") @PathParam("folderId") String folderId,
-			@JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("附件md5值") @FormDataParam("fileMd5") String fileMd5,
-			@JaxrsParameterDescribe("上传文件") @FormDataParam(FILE_FIELD) final FormDataBodyPart part) {
+			@JaxrsParameterDescribe("디렉터리") @PathParam("folderId") String folderId,
+			@JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("첨부파일 md5 값") @FormDataParam("fileMd5") String fileMd5,
+			@JaxrsParameterDescribe("파일 업로드") @FormDataParam(FILE_FIELD) final FormDataBodyPart part) {
 		ActionResult<ActionUpload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -392,14 +392,14 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "按附件类型分页显示.", action = ActionListFileTypePaging.class)
+	@JaxrsMethodDescribe(value = "첨부파일 유형별 페이지 표시.", action = ActionListFileTypePaging.class)
 	@POST
 	@Path("list/type/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listFileTypePaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								   @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-								   @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+								   @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+								   @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
 		ActionResult<List<ActionListFileTypePaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -411,13 +411,13 @@ public class Attachment2Action extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "预览文件,输出html或pdf文件头信息，支持word、ppt、excel、pdf类型文件", action = ActionOfficePreview.class)
+	@JaxrsMethodDescribe(value = "파일 미리보기, html 또는 pdf 파일 헤더 정보 출력, word·ppt·excel·pdf 유형 파일 지원", action = ActionOfficePreview.class)
 	@GET
 	@Path("{id}/office/preview/type/{type}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void officePreview(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							  @JaxrsParameterDescribe("附件标识") @PathParam("id") String id,
-							  @JaxrsParameterDescribe("输出文件类型：html|pdf") @PathParam("type") String type) {
+							  @JaxrsParameterDescribe("첨부파일 식별자") @PathParam("id") String id,
+							  @JaxrsParameterDescribe("출력 파일 유형: html|pdf") @PathParam("type") String type) {
 		ActionResult<ActionOfficePreview.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

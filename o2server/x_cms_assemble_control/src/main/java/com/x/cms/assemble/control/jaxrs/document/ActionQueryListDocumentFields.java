@@ -22,7 +22,7 @@ public class ActionQueryListDocumentFields extends BaseAction {
 
 	public static class Wi {
 		
-		@FieldDescribe( "需要查询是否已阅读过的文档ID列表." )
+		@FieldDescribe( "열람 여부를 조회할 문서ID 목록." )
 		private List<String> ids = null;
 
 		public List<String> getIds() {
@@ -36,7 +36,7 @@ public class ActionQueryListDocumentFields extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe( "文档对象可供列表使用的列名." )
+		@FieldDescribe( "목록에 사용할 수 있는 문서 객체의 열 이름." )
 		private List<String> fieldNames = null;
 
 		public List<String> getFieldNames() {

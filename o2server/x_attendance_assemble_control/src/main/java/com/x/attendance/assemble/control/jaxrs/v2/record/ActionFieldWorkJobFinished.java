@@ -26,7 +26,7 @@ public class ActionFieldWorkJobFinished extends BaseAction {
 
     ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement) throws Exception {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("外勤打卡审批回调 person:{},  ", effectivePerson.getDistinguishedName());
+            LOGGER.debug("외근 체크 결재 콜백 person:{},  ", effectivePerson.getDistinguishedName());
         }
         ActionResult<Wo> result = new ActionResult<>();
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
@@ -37,7 +37,7 @@ public class ActionFieldWorkJobFinished extends BaseAction {
             }
             AttendanceV2CheckInRecord record = emc.find(id, AttendanceV2CheckInRecord.class);
             if (record == null) {
-                throw new ExceptionNotExistObject("打卡记录（" + id + "）");
+                throw new ExceptionNotExistObject("체크 기록(" + id + "）");
             }
             String type = wi.getOptType();
             String type_field_work_job_finished = "finished";
@@ -73,16 +73,16 @@ public class ActionFieldWorkJobFinished extends BaseAction {
     }
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("打卡记录id")
+        @FieldDescribe("체크 기록 id")
         private String recordId;
 
-        @FieldDescribe("操作类型 finished/canceled")
+        @FieldDescribe("작업 유형 finished/canceled")
         private String optType;
 
-        @FieldDescribe("是否需要重置打卡时间")
+        @FieldDescribe("출퇴근 시간 초기화 필요 여부")
         private Boolean needResetTime;
 
-        @FieldDescribe("流程的jobId")
+        @FieldDescribe("프로세스 jobId")
         private String jobId;
 
         public String getRecordId() {

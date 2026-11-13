@@ -11,28 +11,28 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class Runtime extends GsonPropertyObject {
 
-	@FieldDescribe("当前用户")
+	@FieldDescribe("현재 사용자")
 	public String person = "";
 
-	@FieldDescribe("组织")
+	@FieldDescribe("조직")
 	public List<String> unitList = new TreeList<>();
 
-	@FieldDescribe("群组")
+	@FieldDescribe("그룹")
 	public List<String> groupList = new TreeList<>();
 
-	@FieldDescribe("角色")
+	@FieldDescribe("역할")
 	public List<String> roleList = new TreeList<>();
 
-	@FieldDescribe("所有群组")
+	@FieldDescribe("전체 그룹")
 	public List<String> unitAllList = new TreeList<>();
 
-	@FieldDescribe("身份")
+	@FieldDescribe("신분")
 	public List<String> identityList = new TreeList<>();
 
-	@FieldDescribe("参数")
+	@FieldDescribe("파라미터")
 	public Map<String, String> parameter = new HashMap<>();
 
-	@FieldDescribe("数量")
+	@FieldDescribe("수량")
 	public Integer count = 0;
 
 }

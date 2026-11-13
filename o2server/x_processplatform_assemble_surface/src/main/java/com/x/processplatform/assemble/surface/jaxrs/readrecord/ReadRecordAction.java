@@ -39,17 +39,17 @@ public class ReadRecordAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadRecordAction.class);
 	private static final String OPERATIONID_PREFIX = "ReadRecordAction::";
 
-	@Operation(summary = "根据工作或完成工作标识获取阅读记录.", operationId = OPERATIONID_PREFIX
+	@Operation(summary = "업무 문서 또는 완료된 업무 문서 식별자로 열람 기록 조회.", operationId = OPERATIONID_PREFIX
 			+ "listWithWorkOrWorkCompleted", responses = { @ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithWorkOrWorkCompleted.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据工作或完成工作标识获取阅读记录.", action = ActionListWithWorkOrWorkCompleted.class)
+	@JaxrsMethodDescribe(value = "업무 문서 또는 완료된 업무 문서 식별자로 열람 기록 조회.", action = ActionListWithWorkOrWorkCompleted.class)
 	@GET
 	@Path("list/workorworkcompleted/{workOrWorkCompleted}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithWorkOrWorkCompleted(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作或完成工作标识") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
+			@JaxrsParameterDescribe("업무 문서 또는 완료된 업무 문서 식별자") @PathParam("workOrWorkCompleted") String workOrWorkCompleted) {
 		ActionResult<List<ActionListWithWorkOrWorkCompleted.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -61,16 +61,16 @@ public class ReadRecordAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "根据任务标识获取阅读记录.", operationId = OPERATIONID_PREFIX + "listWithJob", responses = {
+	@Operation(summary = "작업 식별자로 열람 기록 조회.", operationId = OPERATIONID_PREFIX + "listWithJob", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListWithJob.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "根据任务标识获取阅读记录.", action = ActionListWithJob.class)
+	@JaxrsMethodDescribe(value = "작업 식별자로 열람 기록 조회.", action = ActionListWithJob.class)
 	@GET
 	@Path("list/job/{job}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithJob(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("工作的job") @PathParam("job") String job) {
+			@JaxrsParameterDescribe("업무 문서의 job") @PathParam("job") String job) {
 		ActionResult<List<ActionListWithJob.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

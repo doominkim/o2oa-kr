@@ -35,18 +35,18 @@ import com.x.base.core.project.logger.LoggerFactory;
  * @author sword
  */
 @Path("portal")
-@JaxrsDescribe("门户操作")
+@JaxrsDescribe("포털 작업")
 public class PortalAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PortalAction.class);
 
-	@JaxrsMethodDescribe(value = "获取单个Portal配置信息,检查是否有editable权限.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "단일 Portal 설정 정보 조회, editable 권한 확인.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -58,7 +58,7 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建新的Portal.需要对Portal模块的管理权限", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "새 Portal 생성. Portal 모듈 관리 권한 필요", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -75,13 +75,13 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定的Portal,需要对此portal的管理权限", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal 수정, 해당 portal 관리 권한 필요", action = ActionEdit.class)
 	@PUT
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void edit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -93,13 +93,13 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "设置门户应用权限.", action = ActionEditPermission.class)
+	@JaxrsMethodDescribe(value = "포털 앱 권한 설정.", action = ActionEditPermission.class)
 	@POST
 	@Path("{id}/permission")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updatePermission(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								 @JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+								 @JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditPermission.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -111,13 +111,13 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除指定的Portal,需要指定权限.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "지정한 Portal 삭제, 권한 필요.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -129,7 +129,7 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户可以管理的Portal.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 관리할 수 있는 Portal 목록.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -146,14 +146,14 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户在指定分类下可以管理的Portal.", action = ActionListWithPortalCategory.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 지정한 분류에서 관리할 수 있는 Portal 목록.", action = ActionListWithPortalCategory.class)
 	@GET
 	@Path("list/portalcategory/{portalCategory}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithPortalCategory(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("门户分类") @PathParam("portalCategory") String portalCategory) {
+			@JaxrsParameterDescribe("포털 분류") @PathParam("portalCategory") String portalCategory) {
 		ActionResult<List<ActionListWithPortalCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -165,7 +165,7 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户可以管理的Portal的简要信息包含page.", action = ActionListSummary.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 관리할 수 있는 Portal의 요약 정보(page 포함) 목록.", action = ActionListSummary.class)
 	@GET
 	@Path("list/summary")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -182,7 +182,7 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户可以管理的Portal的简要信息.", action = ActionListSummaryV2.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 관리할 수 있는 Portal의 요약 정보 목록.", action = ActionListSummaryV2.class)
 	@POST
 	@Path("list/summary/v2")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -200,14 +200,14 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示当前用户在指定分类下可以管理的Portal的简要信息包含page.", action = ActionListSummaryWithPortalCategory.class)
+	@JaxrsMethodDescribe(value = "현재 사용자가 지정한 분류에서 관리할 수 있는 Portal의 요약 정보(page 포함) 목록.", action = ActionListSummaryWithPortalCategory.class)
 	@GET
 	@Path("list/summary/portalcategory/{portalCategory}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listSummaryWithPortalCategory(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("门户分类") @PathParam("portalCategory") String portalCategory) {
+			@JaxrsParameterDescribe("포털 분류") @PathParam("portalCategory") String portalCategory) {
 		ActionResult<List<ActionListSummaryWithPortalCategory.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -219,14 +219,14 @@ public class PortalAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新Portal图标.", action = ActionSetIcon.class)
+	@JaxrsMethodDescribe(value = "Portal 아이콘 갱신.", action = ActionSetIcon.class)
 	@PUT
 	@Path("{id}/icon")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void setIcon(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, @FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("图标文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, @FormDataParam(FILE_FIELD) final byte[] bytes,
+			@JaxrsParameterDescribe("아이콘 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionSetIcon.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

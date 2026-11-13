@@ -18,7 +18,7 @@ import com.x.base.core.project.http.FilterTools;
 import com.x.base.core.project.http.HttpToken;
 
 /**
- * 必须由前台已经登陆的用户访问
+ * 프런트에서 이미 로그인한 사용자만 접근 가능
  * @author sword
  */
 public abstract class AnonymousCipherManagerUserJaxrsFilter extends TokenFilter {

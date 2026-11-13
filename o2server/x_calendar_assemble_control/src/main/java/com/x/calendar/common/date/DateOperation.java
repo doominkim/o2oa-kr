@@ -12,18 +12,18 @@ import com.x.base.core.project.logger.LoggerFactory;
 
 /**
  * 
- * @包 名 ：com.land.util.date
- * @文件名 ：DateUtil.java
- * @作 者 ：O2LEE
- * @单 位 ：浙江兰德纵横网络技术有限公司
- * @日 期 ：2013-06-07
+ * @패키지명: com.land.util.date
+ * @파일명: DateUtil.java
+ * @작성자: O2LEE
+ * @소속: 저장 란더종횡 네트워크기술 유한회사
+ * @날짜: 2013-06-07
  */
 public class DateOperation {
 
 	private Logger logger = LoggerFactory.getLogger(DateOperation.class);
 
 	/**
-	 * 根据样式得到格式化对象SimpleDateFormat
+	 * 패턴에 따라 SimpleDateFormat 포맷 객체 반환
 	 * 
 	 * @param date
 	 * @param style
@@ -35,7 +35,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的日期部分
+	 * 특정 날짜의 날짜 부분 반환
 	 * 
 	 * @param date
 	 * @return yyyy-MM-dd
@@ -45,7 +45,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的时间部分
+	 * 특정 날짜의 시간 부분 반환
 	 * 
 	 * @param date
 	 * @return HH:mm:ss
@@ -73,13 +73,13 @@ public class DateOperation {
 		} else if ("HH:mm:ss".equals(style.trim())) {
 			date = format2.parse(dateString);
 		} else {
-			throw new Exception("对不起，您输入的日期style系统无法识别，请检查您的参数输入！");
+			throw new Exception("죄송합니다. 입력하신 날짜 style을 인식할 수 없습니다. 매개변수를 확인하십시오!");
 		}
 		return date;
 	}
 
 	/**
-	 * 将字符串转换为日期格式 会尝试多种格式转换，转换成功后返回结果
+	 * 문자열을 날짜 형식으로 변환. 여러 형식으로 변환을 시도하고 성공하면 결과 반환
 	 * 
 	 * @param dateString
 	 * @return
@@ -157,13 +157,13 @@ public class DateOperation {
 		} else if ("HH:mm:ss".equals(style.trim())) {
 			dateString = format2.format(date);
 		} else {
-			throw new Exception("对不起，您输入的日期style系统无法识别，请检查您的参数输入！style=" + style);
+			throw new Exception("죄송합니다. 입력하신 날짜 style을 인식할 수 없습니다. 매개변수를 확인하십시오! style=" + style);
 		}
 		return dateString;
 	}
 
 	/**
-	 * 得到某日期加上或减去天数后的日期,day为负数时减去
+	 * 특정 날짜에 일수를 더하거나 뺀 날짜 반환, day가 음수이면 뺌
 	 * 
 	 * @param date
 	 * @param month
@@ -176,7 +176,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期加上或减去天数后的日期,day为负数时减去
+	 * 특정 날짜에 일수를 더하거나 뺀 날짜 반환, day가 음수이면 뺌
 	 * 
 	 * @param date
 	 * @param month
@@ -190,7 +190,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期加上或减去天数后的日期,day为负数时减去
+	 * 특정 날짜에 일수를 더하거나 뺀 날짜 반환, day가 음수이면 뺌
 	 * 
 	 * @param date
 	 * @param month
@@ -204,7 +204,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期加上或减去月份后的日期,month为负数时减去
+	 * 특정 날짜에 개월 수를 더하거나 뺀 날짜 반환, month가 음수이면 뺌
 	 * 
 	 * @param date
 	 * @param month
@@ -215,7 +215,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期加上或减去月份后的日期,month为负数时减去
+	 * 특정 날짜에 개월 수를 더하거나 뺀 날짜 반환, month가 음수이면 뺌
 	 * 
 	 * @param date
 	 * @param month
@@ -229,7 +229,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期加上或减去分钟后的日期,min为负数时减去
+	 * 특정 날짜에 분을 더하거나 뺀 날짜 반환, min이 음수이면 뺌
 	 * 
 	 * @param date
 	 * @param month
@@ -240,7 +240,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期加上或减去分钟后的日期,min为负数时减去
+	 * 특정 날짜에 분을 더하거나 뺀 날짜 반환, min이 음수이면 뺌
 	 * 
 	 * @param date
 	 * @param month
@@ -254,7 +254,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的日
+	 * 특정 날짜의 일 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -278,7 +278,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的月份
+	 * 특정 날짜의 월 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -292,7 +292,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的年份-月份：yyyy-MM
+	 * 특정 날짜의 연-월 구하기: yyyy-MM
 	 * 
 	 * @param Date date
 	 * @return
@@ -317,7 +317,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的年份
+	 * 특정 날짜의 연도 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -341,7 +341,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的小时
+	 * 특정 날짜의 시 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -355,7 +355,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的分钟
+	 * 특정 날짜의 분 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -365,7 +365,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某日期的秒
+	 * 특정 날짜의 초 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -375,7 +375,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某年有多少天
+	 * 특정 연도의 일수 반환
 	 * 
 	 * @param String date "yyyy-MM-dd"
 	 * @return
@@ -389,7 +389,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某年有多少天
+	 * 특정 연도의 일수 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -403,7 +403,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某年有多少天
+	 * 특정 연도의 일수 반환
 	 * 
 	 * @param String year "yyyy"
 	 * @return
@@ -417,7 +417,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某月有多少天
+	 * 특정 월의 일수 반환
 	 * 
 	 * @param String date "yyyy-MM-dd"
 	 * @return
@@ -431,7 +431,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某月有多少天
+	 * 특정 월의 일수 반환
 	 * 
 	 * @param String date "yyyy-MM"
 	 * @return
@@ -445,7 +445,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到某月有多少天
+	 * 특정 월의 일수 반환
 	 * 
 	 * @param Date date
 	 * @return
@@ -465,7 +465,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到当前的日期
+	 * 현재 날짜 반환
 	 * 
 	 * @return
 	 */
@@ -474,7 +474,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到当前的时间
+	 * 현재 시간 반환
 	 * 
 	 * @return
 	 */
@@ -483,7 +483,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到当前的时间 yyyyMMddHHmmss
+	 * 현재 시간 반환 yyyyMMddHHmmss
 	 * 
 	 * @return
 	 */
@@ -492,7 +492,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到当前的时间 yyyy-MM-dd HH:mm:ss
+	 * 현재 시간 반환 yyyy-MM-dd HH:mm:ss
 	 * 
 	 * @return
 	 */
@@ -501,7 +501,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 得到两个时间之前的分差
+	 * 두 시간 사이의 분 차이 반환
 	 * 
 	 * @param date1 yyyy-MM-dd HH:mm:ss
 	 * @param date2 yyyy-MM-dd HH:mm:ss
@@ -509,9 +509,9 @@ public class DateOperation {
 	 */
 	public long getDeff(String date1, String date2) {
 		long dayNumber = 0;
-		// 1小时=60分钟=3600秒=3600000
+		// 1시간=60분=3600초=3600000
 		long mins = 60L * 1000L;
-		// long day= 24L * 60L * 60L * 1000L;计算天数之差
+		// long day= 24L * 60L * 60L * 1000L;일수 차이 계산
 		SimpleDateFormat df = null;
 		if (date1.length() == 19) {
 			df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -527,14 +527,14 @@ public class DateOperation {
 			java.util.Date d2 = df.parse(date2);
 			dayNumber = (d2.getTime() - d1.getTime()) / mins;
 		} catch (Exception e) {
-			logger.warn("系统获取得到两个时间之前的分差发生异常");
+			logger.warn("시스템이 두 시간 사이의 분 차이를 구하는 중 예외 발생");
 			logger.error(e);
 		}
 		return dayNumber;
 	}
 
 	/**
-	 * 得到两个时间之前的分差
+	 * 두 시간 사이의 분 차이 반환
 	 * 
 	 * @param date1 yyyy-MM-dd HH:mm:ss
 	 * @param date2 yyyy-MM-dd HH:mm:ss
@@ -542,13 +542,13 @@ public class DateOperation {
 	 */
 	public long getDeff(Date date1, Date date2) {
 		long dayNumber = 0;
-		// 1小时=60分钟=3600秒=3600000
+		// 1시간=60분=3600초=3600000
 		long mins = 60L * 1000L;
-		// long day= 24L * 60L * 60L * 1000L;计算天数之差
+		// long day= 24L * 60L * 60L * 1000L;일수 차이 계산
 		try {
 			dayNumber = (date2.getTime() - date1.getTime()) / mins;
 		} catch (Exception e) {
-			logger.warn("系统获取得到两个时间之前的分差发生异常");
+			logger.warn("시스템이 두 시간 사이의 분 차이를 구하는 중 예외 발생");
 			logger.error(e);
 		}
 		return dayNumber;
@@ -556,7 +556,7 @@ public class DateOperation {
 
 	/**
 	 * 
-	 * 日期格式转换 从YYYY-MM-DD转换到YYYYMMDD
+	 * 날짜 형식 변환 YYYY-MM-DD에서 YYYYMMDD로
 	 * 
 	 * @param date
 	 * @throws ParseException
@@ -574,46 +574,46 @@ public class DateOperation {
 			try {
 				date = format1.parse("0000-00-00");
 			} catch (ParseException e1) {
-				logger.warn("系统日期格式转换发生异常");
+				logger.warn("시스템 날짜 형식 변환 중 예외 발생");
 				logger.error(e);
 			}
-			logger.warn("系统日期格式转换发生异常");
+			logger.warn("시스템 날짜 형식 변환 중 예외 발생");
 			logger.error(e);
 		}
 
 		return reslut;
 	}
 
-	/** 格式 yyyy-MM-dd */
+	/** 형식 yyyy-MM-dd */
 	public final SimpleDateFormat format_year_month = new SimpleDateFormat("yyyy-MM");
-	/** 格式 yyyy-MM-dd */
+	/** 형식 yyyy-MM-dd */
 	public final SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-	/** 格式 HH:mm:ss */
+	/** 형식 HH:mm:ss */
 	public final SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
-	/** 格式 yyyy-MM-dd HH:mm:ss */
+	/** 형식 yyyy-MM-dd HH:mm:ss */
 	public final SimpleDateFormat format3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public final SimpleDateFormat format3_1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	/** 格式 yyyy/MM/dd */
+	/** 형식 yyyy/MM/dd */
 	public final SimpleDateFormat format4 = new SimpleDateFormat("yyyy/MM/dd");
-	/** 格式 yyyyMMdd */
+	/** 형식 yyyyMMdd */
 	public final SimpleDateFormat format5 = new SimpleDateFormat("yyyyMMdd");
-	/** 格式 HHmmss */
+	/** 형식 HHmmss */
 	public final SimpleDateFormat format6 = new SimpleDateFormat("HHmmss");
-	/** 格式 yyyyMMddHHmmss */
+	/** 형식 yyyyMMddHHmmss */
 	public final SimpleDateFormat format7 = new SimpleDateFormat("yyyyMMddHHmmss");
-	/** 格式 yyyy */
+	/** 형식 yyyy */
 	public final SimpleDateFormat format8 = new SimpleDateFormat("yyyy");
-	/** 格式 MM */
+	/** 형식 MM */
 	public final SimpleDateFormat format9 = new SimpleDateFormat("MM");
-	/** 格式 dd */
+	/** 형식 dd */
 	public final SimpleDateFormat format10 = new SimpleDateFormat("dd");
-	/** 格式 HH */
+	/** 형식 HH */
 	public final SimpleDateFormat format11 = new SimpleDateFormat("HH");
-	/** 格式 mm */
+	/** 형식 mm */
 	public final SimpleDateFormat format12 = new SimpleDateFormat("mm");
-	/** 格式 ss */
+	/** 형식 ss */
 	public final SimpleDateFormat format13 = new SimpleDateFormat("ss");
-	/** 格式 ss */
+	/** 형식 ss */
 	public final SimpleDateFormat format14 = new SimpleDateFormat("yyyy-MM");
 
 	public String getStartOfWeek(String dateString) {
@@ -630,10 +630,10 @@ public class DateOperation {
 			cal.add(Calendar.DATE, -(tmp - 1));
 			return getDateFromDate(cal.getTime(), "yyyy-MM-dd") + " 00:00:00";
 		} catch (ParseException e) {
-			logger.warn("系统getStartOfWeek日期格式转换发生异常");
+			logger.warn("시스템 getStartOfWeek 날짜 형식 변환 중 예외 발생");
 			logger.error(e);
 		} catch (Exception e) {
-			logger.warn("系统getStartOfWeek发生异常");
+			logger.warn("시스템 getStartOfWeek 예외 발생");
 			logger.error(e);
 		}
 		return null;
@@ -648,17 +648,17 @@ public class DateOperation {
 			cal.add(Calendar.DATE, 6);
 			return getDateFromDate(cal.getTime(), "yyyy-MM-dd") + " 23:59:59";
 		} catch (ParseException e) {
-			logger.warn("系统getEndOfWeek日期格式转换发生异常");
+			logger.warn("시스템 getEndOfWeek 날짜 형식 변환 중 예외 발생");
 			logger.error(e);
 		} catch (Exception e) {
-			logger.warn("系统getEndOfWeek发生异常");
+			logger.warn("시스템 getEndOfWeek 예외 발생");
 			logger.error(e);
 		}
 		return null;
 	}
 
 	/**
-	 * 将时间格式转换为 **月**日**时**分的格式
+	 * 시간 형식을 **월**일**시**분 형식으로 변환
 	 * 
 	 * @param dateString
 	 * @param style
@@ -671,7 +671,7 @@ public class DateOperation {
 		try {
 			_date = getDateFromString(dateString, style);
 		} catch (Exception e) {
-			logger.warn("系统getDateCNString日期格式转换发生异常");
+			logger.warn("시스템 getDateCNString 날짜 형식 변환 중 예외 발생");
 			logger.error(e);
 		}
 		if (_date == null) {
@@ -696,7 +696,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 将时间格式转换为 **月**日**时**分**秒 的格式
+	 * 시간 형식을 **월**일**시**분**초 형식으로 변환
 	 * 
 	 * @param dateString
 	 * @param style
@@ -709,7 +709,7 @@ public class DateOperation {
 		try {
 			_date = getDateFromString(dateString, style);
 		} catch (Exception e) {
-			logger.warn("系统getDateCNString2日期格式转换发生异常");
+			logger.warn("시스템 getDateCNString2 날짜 형식 변환 중 예외 발생");
 			logger.error(e);
 		}
 		if (_date == null) {
@@ -737,7 +737,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 获取日期在一年中的周数 结果从1开始
+	 * 날짜의 연중 주차 조회, 결과는 1부터 시작
 	 * 
 	 * @param dateString yyyy-mm-dd
 	 * @return
@@ -747,21 +747,21 @@ public class DateOperation {
 			Date date = getDateFromString(dateString, "yyyy-MM-dd");
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
-			cal.setFirstDayOfWeek(2);// 设置每周的第一天是星期一
-			// 月份有问题(这里的月份开始计数为0)
-			// 本年的第几天,在计算时间间隔的时候有用
-			// System.out.println("一年中的天数:" + cal.get(Calendar.DAY_OF_YEAR));
-			// System.out.println("一年中的周数:" + cal.get(Calendar.WEEK_OF_YEAR));
-			// 即本月的第几周
-			// System.out.println("一月中的周数:" + cal.get(Calendar.WEEK_OF_MONTH));
-			// 即一周中的第几天(这里是以周日为第一天的)
-			// System.out.println("一周中的天数:" + cal.get(Calendar.DAY_OF_WEEK));
+			cal.setFirstDayOfWeek(2);// 매주 첫째 날을 월요일로 설정
+			// 월 주의(여기서 월은 0부터 계산)
+			// 연중 몇 번째 날, 시간 간격 계산 시 유용
+			// System.out.println("연중 일수:" + cal.get(Calendar.DAY_OF_YEAR));
+			// System.out.println("연중 주수:" + cal.get(Calendar.WEEK_OF_YEAR));
+			// 즉 이번 달의 몇 번째 주
+			// System.out.println("월중 주수:" + cal.get(Calendar.WEEK_OF_MONTH));
+			// 즉 주중 몇 번째 날(여기서는 일요일이 첫째 날)
+			// System.out.println("주중 일수:" + cal.get(Calendar.DAY_OF_WEEK));
 			return cal.get(Calendar.WEEK_OF_YEAR);
 		} catch (ParseException e) {
-			logger.warn("系统getWeekNumOfYear日期格式转换发生异常");
+			logger.warn("시스템 getWeekNumOfYear 날짜 형식 변환 중 예외 발생");
 			logger.error(e);
 		} catch (Exception e) {
-			logger.warn("系统getWeekNumOfYear发生异常");
+			logger.warn("시스템 getWeekNumOfYear 예외 발생");
 			logger.error(e);
 		}
 		return -1;
@@ -786,7 +786,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 计算两个日期或者时间之间的月份列表：yyyy-MM
+	 * 두 날짜 또는 시간 사이의 월 목록 계산: yyyy-MM
 	 * 
 	 * @param startTime
 	 * @param endTime
@@ -797,7 +797,7 @@ public class DateOperation {
 			maxTime = new Date();
 		}
 		ArrayList<String> result = new ArrayList<String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");// 格式化为年月
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");// 연월 형식으로 변환
 		Calendar min = Calendar.getInstance();
 		Calendar max = Calendar.getInstance();
 
@@ -828,7 +828,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 根据时间获取当天的开始时间 yyyy-MM-dd 00:00:00
+	 * 시간으로 당일 시작 시간 조회 yyyy-MM-dd 00:00:00
 	 * 
 	 * @param startTime
 	 * @return
@@ -842,7 +842,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 根据时间获取当天的开始时间 yyyy-MM-dd 00:00:00
+	 * 시간으로 당일 시작 시간 조회 yyyy-MM-dd 00:00:00
 	 * 
 	 * @param startTime
 	 * @return
@@ -856,7 +856,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 计算两个时间之间涉及的日期列表
+	 * 두 시간 사이에 걸친 날짜 목록 계산
 	 * 
 	 * @param startTime
 	 * @param endTime
@@ -867,7 +867,7 @@ public class DateOperation {
 			endTime = new Date();
 		}
 		ArrayList<String> result = new ArrayList<String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 格式化为年月日
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 연월일 형식으로 변환
 		Calendar min = Calendar.getInstance();
 		Calendar max = Calendar.getInstance();
 
@@ -888,7 +888,7 @@ public class DateOperation {
 	}
 
 	/**
-	 * 根据开始时间，和需要变动的时间来生成一个新的时间
+	 * 시작 시간과 변경할 시간으로 새 시간 생성
 	 * 
 	 * @param startTime
 	 * @param day

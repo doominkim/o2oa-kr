@@ -52,12 +52,12 @@ public class ActionLeaveRequestSearchWithDate extends BaseAction {
 
     private Date parseDate(String dateString) throws Exception {
         if (StringUtils.isBlank(dateString) || DateTools.parseDate(dateString) == null) {
-            throw new ExceptionWithMessage("日期不能为空，格式为 yyyy-MM-dd");
+            throw new ExceptionWithMessage("날짜는 비워 둘 수 없습니다. 형식: yyyy-MM-dd");
         }
         return DateTools.parse(dateString, DateTools.format_yyyyMMdd);
     }
 
-    // 查询和当天 [date, nextDate) 有交集的请假申请。
+    // 당일 [date, nextDate)와 겹치는 휴가 신청 조회.
     private List<AttendanceV2LeaveRequest> findRequestWithDate(Date date, Date nextDate, EntityManagerContainer emc)
             throws Exception {
         EntityManager em = emc.get(AttendanceV2LeaveRequest.class);
@@ -77,7 +77,7 @@ public class ActionLeaveRequestSearchWithDate extends BaseAction {
         static WrapCopier<AttendanceV2LeaveRequest, Wo> copier = WrapCopierFactory.wo(AttendanceV2LeaveRequest.class,
                 Wo.class, null, JpaObject.FieldsInvisible);
 
-        @FieldDescribe("假期类型")
+        @FieldDescribe("휴가 유형")
         private AttendanceV2LeaveType leaveType;
 
         public AttendanceV2LeaveType getLeaveType() {

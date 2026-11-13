@@ -21,7 +21,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("test")
-@JaxrsDescribe("测试")
+@JaxrsDescribe("테스트")
 public class TestAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TestAction.class);

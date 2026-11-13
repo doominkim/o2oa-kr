@@ -36,9 +36,9 @@ public class OfficeAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(OfficeAction.class);
 	private static final String OPERATIONID_PREFIX = "OfficeAction::";
 
-	@Operation(summary = "html转换word.", operationId = OPERATIONID_PREFIX + "htmlToWord", responses = {
+	@Operation(summary = "html을 word로 변환.", operationId = OPERATIONID_PREFIX + "htmlToWord", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionHtmlToWord.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "html转换word.", action = ActionHtmlToWord.class)
+	@JaxrsMethodDescribe(value = "html을 word로 변환.", action = ActionHtmlToWord.class)
 	@POST
 	@Path("html/to/word")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -56,14 +56,14 @@ public class OfficeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "html转换成word结果流文件.", operationId = OPERATIONID_PREFIX + "htmlToWordResult", responses = {
+	@Operation(summary = "html을 word로 변환한 결과 스트림 파일.", operationId = OPERATIONID_PREFIX + "htmlToWordResult", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionHtmlToWordResult.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "html转换成word结果流文件.", action = ActionHtmlToWordResult.class)
+	@JaxrsMethodDescribe(value = "html을 word로 변환한 결과 스트림 파일.", action = ActionHtmlToWordResult.class)
 	@GET
 	@Path("html/to/word/result/{flag}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void htmlToWordResult(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionHtmlToWordResult.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

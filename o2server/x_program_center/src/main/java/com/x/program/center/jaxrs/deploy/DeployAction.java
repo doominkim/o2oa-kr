@@ -27,25 +27,25 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("deploy")
-@JaxrsDescribe("部署")
+@JaxrsDescribe("배포")
 public class DeployAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(DeployAction.class);
 
-	@JaxrsMethodDescribe(value = "部署前端静态资源文件", action = ActionDeployWebRes.class)
+	@JaxrsMethodDescribe(value = "프런트엔드 정적 리소스 파일 배포", action = ActionDeployWebRes.class)
 	@POST
 	@Path("web/resource/as/new/{asNew}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void deployWebResource(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("覆盖类型：true删除原文件然后上传，false覆盖原文件") @PathParam("asNew") Boolean asNew,
-			@JaxrsParameterDescribe("附件存放目录(zip文件可以为空，其他不能为空)") @FormDataParam("filePath") String filePath,
-			@JaxrsParameterDescribe("标题") @FormDataParam("title") String title,
-			@JaxrsParameterDescribe("版本") @FormDataParam("version") String version,
-			@JaxrsParameterDescribe("更新升级描述") @FormDataParam("remark") String remark,
-			@JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("附件标识") @FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("上传zip文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("덮어쓰기 유형: true는 원본 파일 삭제 후 업로드, false는 원본 파일 덮어쓰기") @PathParam("asNew") Boolean asNew,
+			@JaxrsParameterDescribe("첨부파일 저장 디렉터리(zip 파일은 비워도 되며, 그 외는 비울 수 없음)") @FormDataParam("filePath") String filePath,
+			@JaxrsParameterDescribe("제목") @FormDataParam("title") String title,
+			@JaxrsParameterDescribe("버전") @FormDataParam("version") String version,
+			@JaxrsParameterDescribe("업그레이드 설명 업데이트") @FormDataParam("remark") String remark,
+			@JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("첨부파일 식별자") @FormDataParam(FILE_FIELD) final byte[] bytes,
+			@JaxrsParameterDescribe("zip 파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionDeployWebRes.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -64,18 +64,18 @@ public class DeployAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "部署服务端war包和jar包，包括平台的应用和自定义应用", action = ActionDeployServerRes.class)
+	@JaxrsMethodDescribe(value = "서버 war 패키지와 jar 패키지 배포(플랫폼 앱 및 사용자 정의 앱 포함)", action = ActionDeployServerRes.class)
 	@POST
 	@Path("server/resource")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void deployServerResource(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标题") @FormDataParam("title") String title,
-			@JaxrsParameterDescribe("版本") @FormDataParam("version") String version,
-			@JaxrsParameterDescribe("更新升级描述") @FormDataParam("remark") String remark,
-			@JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("文件内容") @FormDataParam(FILE_FIELD) byte[] bytes,
-			@JaxrsParameterDescribe("上传文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("제목") @FormDataParam("title") String title,
+			@JaxrsParameterDescribe("버전") @FormDataParam("version") String version,
+			@JaxrsParameterDescribe("업그레이드 설명 업데이트") @FormDataParam("remark") String remark,
+			@JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("파일 내용") @FormDataParam(FILE_FIELD) byte[] bytes,
+			@JaxrsParameterDescribe("파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionDeployServerRes.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -92,17 +92,17 @@ public class DeployAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "升级o2server", action = ActionDeployO2Server.class)
+	@JaxrsMethodDescribe(value = "o2server 업그레이드", action = ActionDeployO2Server.class)
 	@POST
 	@Path("server/o2")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void deployO2Server(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标题") @FormDataParam("title") String title,
-			@JaxrsParameterDescribe("版本") @FormDataParam("version") String version,
-			@JaxrsParameterDescribe("更新升级描述") @FormDataParam("remark") String remark,
-			@JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe("上传o2server升级包") @FormDataParam(FILE_FIELD) final FormDataBodyPart part) {
+			@JaxrsParameterDescribe("제목") @FormDataParam("title") String title,
+			@JaxrsParameterDescribe("버전") @FormDataParam("version") String version,
+			@JaxrsParameterDescribe("업그레이드 설명 업데이트") @FormDataParam("remark") String remark,
+			@JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe("o2server 업그레이드 패키지 업로드") @FormDataParam(FILE_FIELD) final FormDataBodyPart part) {
 		ActionResult<ActionDeployO2Server.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -119,14 +119,14 @@ public class DeployAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示部署日志信息.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "배포 로그 정보 페이지 나열.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+			@JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -138,13 +138,13 @@ public class DeployAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定部署日志.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 배포 로그 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

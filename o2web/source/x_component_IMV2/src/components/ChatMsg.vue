@@ -67,7 +67,7 @@ const fileUrl = (msgBody) => {
 const quoteDescRef = useTemplateRef('quoteDescRef');
 
 watch(quoteMessageBody, async () =>  {
-  await nextTick() // 等待DOM 更新完成
+  await nextTick() // DOM 업데이트 완료 대기
   const links = quoteDescRef.value?.querySelectorAll('a')
   if (links && links.length) {
     links.forEach(link => {

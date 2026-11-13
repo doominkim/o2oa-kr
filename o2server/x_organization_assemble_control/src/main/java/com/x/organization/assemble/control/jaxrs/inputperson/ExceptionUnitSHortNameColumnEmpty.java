@@ -7,6 +7,6 @@ class ExceptionUnitSHortNameColumnEmpty extends PromptException {
 	private static final long serialVersionUID = -2139584911736169462L;
 
 	ExceptionUnitSHortNameColumnEmpty() {
-		super("组织代字列不能为空.");
+		super("조직 약칭 열은 비워 둘 수 없습니다.");
 	}
 }

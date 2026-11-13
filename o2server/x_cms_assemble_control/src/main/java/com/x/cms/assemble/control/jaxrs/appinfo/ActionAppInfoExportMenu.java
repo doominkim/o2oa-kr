@@ -24,13 +24,13 @@ public class ActionAppInfoExportMenu extends BaseAction {
 	private static  Logger logger = LoggerFactory.getLogger( ActionAppInfoExportMenu.class );
 
     /**
-     * 实现栏目设计导入内容列表查询
-     * 1、所有分类信息列表
-     * 2、所有的表单信息列表
-     * 3、所有的视图（列表和数据视图）信息列表
-     * 4、所有的数据字典列表
-     * 5、所有的脚本信息列表
-     * 6、所有的分类视图关联信息
+     * 게시판 설계 가져오기 내용 목록 조회 구현
+     * 1. 모든 분류 정보 목록
+     * 2. 모든 양식 정보 목록
+     * 3. 모든 뷰(목록 및 데이터 뷰) 정보 목록
+     * 4. 모든 데이터 사전 목록
+     * 5. 모든 스크립트 정보 목록
+     * 6. 모든 분류-뷰 연결 정보
      *
      * @param request
      * @param effectivePerson
@@ -50,7 +50,7 @@ public class ActionAppInfoExportMenu extends BaseAction {
 			result.error( exception );
 		}
 
-        //尝试查询栏目信息，判断栏目信息是否存在
+        //게시판 정보 조회 시도, 게시판 정보 존재 여부 확인
         if( check ){
             try {
                 appInfo = appInfoServiceAdv.get( appInfoId );
@@ -61,13 +61,13 @@ public class ActionAppInfoExportMenu extends BaseAction {
                 }
             } catch (Exception e) {
                 check = false;
-                Exception exception = new ExceptionAppInfoProcess( e, "根据指定ID查询应用栏目信息对象时发生异常。ID:" + appInfoId );
+                Exception exception = new ExceptionAppInfoProcess( e, "지정한 ID의 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + appInfoId );
                 result.error( exception );
                 logger.error( e, effectivePerson, request, null);
             }
         }
 
-        //开始查询所有的分类列表
+        //모든 분류 목록 조회 시작
         if( check ){
             List<CategoryInfo> categoryList = null;
             try{
@@ -81,13 +81,13 @@ public class ActionAppInfoExportMenu extends BaseAction {
                 }
             }catch(Exception e){
                 check = false;
-                Exception exception = new ExceptionAppInfoProcess( e, "系统根据栏目ID查询所有的分类信息ID列表时发生异常。ID:" + appInfoId );
+                Exception exception = new ExceptionAppInfoProcess( e, "게시판 ID로 전체 분류 ID 목록을 조회하는 중 오류가 발생했습니다. ID:" + appInfoId );
                 result.error( exception );
                 logger.error( e, effectivePerson, request, null);
             }
         }
 
-        //开始查询所有的表单列表
+        //모든 양식 목록 조회 시작
         if( check ){
             List<Form> formList = null;
             try{
@@ -101,13 +101,13 @@ public class ActionAppInfoExportMenu extends BaseAction {
                 }
             }catch(Exception e){
                 check = false;
-                Exception exception = new ExceptionAppInfoProcess( e, "系统根据栏目ID查询所有的表单信息ID列表时发生异常。ID:" + appInfoId );
+                Exception exception = new ExceptionAppInfoProcess( e, "게시판 ID로 전체 양식 ID 목록을 조회하는 중 오류가 발생했습니다. ID:" + appInfoId );
                 result.error( exception );
                 logger.error( e, effectivePerson, request, null);
             }
         }
 
-        //开始查询所有的脚本列表
+        //모든 스크립트 목록 조회 시작
         if( check ){
             List<Script> scriptList = null;
             try{
@@ -121,13 +121,13 @@ public class ActionAppInfoExportMenu extends BaseAction {
                 }
             }catch(Exception e){
                 check = false;
-                Exception exception = new ExceptionAppInfoProcess( e, "系统根据栏目ID查询所有的脚本信息列表时发生异常。ID:" + appInfoId );
+                Exception exception = new ExceptionAppInfoProcess( e, "게시판 ID로 전체 스크립트 목록을 조회하는 중 오류가 발생했습니다. ID:" + appInfoId );
                 result.error( exception );
                 logger.error( e, effectivePerson, request, null);
             }
         }
 
-        //开始查询所有的数据字典列表
+        //모든 데이터 사전 목록 조회 시작
         if( check ){
             List<AppDict> dictList = null;
             try{
@@ -141,7 +141,7 @@ public class ActionAppInfoExportMenu extends BaseAction {
                 }
             }catch(Exception e){
                 check = false;
-                Exception exception = new ExceptionAppInfoProcess( e, "系统根据栏目ID查询所有的数据字典信息列表时发生异常。ID:" + appInfoId );
+                Exception exception = new ExceptionAppInfoProcess( e, "게시판 ID로 전체 데이터 사전 목록을 조회하는 중 오류가 발생했습니다. ID:" + appInfoId );
                 result.error( exception );
                 logger.error( e, effectivePerson, request, null);
             }
@@ -152,31 +152,31 @@ public class ActionAppInfoExportMenu extends BaseAction {
 	}
 
     /**
-     * 1、所有分类信息列表
-     * 2、所有的表单信息列表
-     * 3、所有的视图（列表和数据视图）信息列表
-     * 4、所有的数据字典列表
-     * 5、所有的脚本信息列表
-     * 6、所有的分类视图关联信息
+     * 1. 모든 분류 정보 목록
+     * 2. 모든 양식 정보 목록
+     * 3. 모든 뷰(목록 및 데이터 뷰) 정보 목록
+     * 4. 모든 데이터 사전 목록
+     * 5. 모든 스크립트 정보 목록
+     * 6. 모든 분류-뷰 연결 정보
      */
     public static class Wo  {
 
-        @FieldDescribe("栏目内所有的表单信息列表")
+        @FieldDescribe("게시판 내 모든 양식 정보 목록")
         private List<WoEntry> forms = null;
 
-        @FieldDescribe("栏目内所有的分类信息列表")
+        @FieldDescribe("게시판 내 모든 분류 정보 목록")
         private List<WoEntry> categories = null;
 
-        @FieldDescribe("栏目内所有的脚本信息列表")
+        @FieldDescribe("게시판 내 모든 스크립트 정보 목록")
         private List<WoEntry> scripts = null;
 
-        @FieldDescribe("栏目内所有的数据字典信息列表")
+        @FieldDescribe("게시판 내 모든 데이터 사전 정보 목록")
         private List<WoEntry> dicts = null;
 
-        @FieldDescribe("栏目内所有的列表视图信息列表")
+        @FieldDescribe("게시판 내 모든 목록 뷰 정보 목록")
         private List<WoEntry> views = null;
 
-        @FieldDescribe("栏目内所有的数据视力信息列表")
+        @FieldDescribe("게시판 내 모든 데이터 뷰 정보 목록")
         private List<WoEntry> queryViews = null;
 
         public List<WoEntry> getForms() {
@@ -230,10 +230,10 @@ public class ActionAppInfoExportMenu extends BaseAction {
 
     public static class WoEntry  {
 
-        @FieldDescribe("信息的名称")
+        @FieldDescribe("정보 이름")
         private String e_name = null;
 
-        @FieldDescribe("信息的ID")
+        @FieldDescribe("정보 ID")
         private String e_id = null;
 
         public WoEntry( String e_id, String e_name){

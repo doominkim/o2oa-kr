@@ -41,7 +41,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 从流程发布一个文档（流程）
+ * 프로세스에서 문서 게시(프로세스)
  *
  * @author sword
  */
@@ -66,7 +66,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 		} catch (Exception e) {
 			check = false;
 			Exception exception = new ExceptionDocumentInfoProcess(e,
-					"系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+					"JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			LOGGER.error(e, effectivePerson, request, null);
 		}
@@ -90,7 +90,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionDocumentInfoProcess(e,
-						"系统在根据ID查询分类信息时发生异常！ID：" + wi.getCategoryId());
+						"ID로 분류 정보를 조회하는 중 오류가 발생했습니다! ID: " + wi.getCategoryId());
 				result.error(exception);
 				LOGGER.error(e, effectivePerson, request, null);
 			}
@@ -107,13 +107,13 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionDocumentInfoProcess(e,
-						"系统在根据ID查询应用栏目信息时发生异常！ID：" + categoryInfo.getAppId());
+						"ID로 게시판 정보를 조회하는 중 오류가 발생했습니다! ID: " + categoryInfo.getAppId());
 				result.error(exception);
 				LOGGER.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 查询分类设置的编辑表单
+		// 분류에 설정된 편집 양식 조회
 		if (check) {
 			if (StringUtils.isEmpty(categoryInfo.getFormId())) {
 				check = false;
@@ -136,7 +136,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionDocumentInfoProcess(e,
-						"系统在根据ID查询编辑表单时发生异常！ID：" + categoryInfo.getFormId());
+						"ID로 편집 양식을 조회하는 중 오류가 발생했습니다! ID: " + categoryInfo.getFormId());
 				result.error(exception);
 				LOGGER.error(e, effectivePerson, request, null);
 			}
@@ -157,7 +157,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionDocumentInfoProcess(e,
-							"系统在根据ID查询阅读表单时发生异常！ID：" + categoryInfo.getReadFormId());
+							"ID로 읽기 양식을 조회하는 중 오류가 발생했습니다! ID: " + categoryInfo.getReadFormId());
 					result.error(exception);
 					LOGGER.error(e, effectivePerson, request, null);
 				}
@@ -195,7 +195,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 					wi.setCreatorUnitName(effectivePerson.getDistinguishedName());
 					wi.setCreatorTopUnitName(effectivePerson.getDistinguishedName());
 				} else {
-					// 尝试一下根据当前用户获取用户的第一个身份
+					// 현재 사용자로 사용자의 첫 번째 신분 조회 시도
 					wi.setCreatorIdentity(userManagerService.getMajorIdentityWithPerson(effectivePerson.getDistinguishedName()));
 				}
 			}
@@ -228,13 +228,13 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 				document = documentPersistService.save(wi, wi.getDocData(), categoryInfo.getProjection());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在创建文档信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글을 만드는 중 오류가 발생했습니다!");
 				result.error(exception);
 				LOGGER.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 从流程管理中复制所有的附件到CMS
+		// 프로세스 관리의 모든 첨부파일을 CMS로 복사
 		if (check) {
 			if (wi.getWf_attachmentIds() != null && wi.getWf_attachmentIds().length > 0) {
 				FileInfo fileInfo = null;
@@ -275,7 +275,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 			}
 		}
 
-		// 复制流程工单的关联文档到cms文档
+		// 프로세스 업무 문서의 관련 문서를 cms 문서로 복사
 		if (check && StringUtils.isNotBlank(wi.getWf_jobId())) {
 			List<ActionListTypeProcessPlatformWo> wos = ThisApplication.context().applications()
 					.getQuery(effectivePerson.getDebugger(), x_correlation_service_processing.class,
@@ -324,13 +324,13 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 		}
 
 		if (check && !wi.getSkipPermission()) {
-			// 将读者以及作者信息持久化到数据库中
+			// 독자 및 작성자 정보를 데이터베이스에 저장
 			try {
 				documentPersistService.refreshDocumentPermission(document.getId(), wi.getReaderList(),
 						wi.getAuthorList());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在核对文档访问管理权限信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 접근·관리 권한을 확인하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				LOGGER.error(e, effectivePerson, request, null);
 			}
@@ -381,37 +381,37 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 		public static final WrapCopier<Wi, Document> copier = WrapCopierFactory.wi(Wi.class, Document.class, null,
 				JpaObject.FieldsUnmodify);
 
-		@FieldDescribe("文档操作者身份.")
+		@FieldDescribe("문서 조작자 신분.")
 		private String identity = null;
 
-		@FieldDescribe("数据的路径列表.")
+		@FieldDescribe("데이터 경로 목록.")
 		private String[] dataPaths = null;
 
-		@FieldDescribe("启动流程的JobId.")
+		@FieldDescribe("프로세스를 시작한 JobId.")
 		private String wf_jobId = null;
 
-		@FieldDescribe("启动流程的WorkId.")
+		@FieldDescribe("프로세스를 시작한 WorkId.")
 		private String wf_workId = null;
 
-		@FieldDescribe("流程的表单Id.")
+		@FieldDescribe("프로세스의 양식 Id.")
 		private String wf_formId = null;
 
-		@FieldDescribe("启动流程的附件列表.")
+		@FieldDescribe("프로세스를 시작한 첨부파일 목록.")
 		private String[] wf_attachmentIds = null;
 
-		@FieldDescribe("文档数据.")
+		@FieldDescribe("문서 데이터.")
 		private JsonElement docData = null;
 
-		@FieldDescribe("文档读者.")
+		@FieldDescribe("문서 독자.")
 		private List<PermissionInfo> readerList = null;
 
-		@FieldDescribe("文档编辑者.")
+		@FieldDescribe("문서 편집자.")
 		private List<PermissionInfo> authorList = null;
 
-		@FieldDescribe("图片列表.")
+		@FieldDescribe("이미지 목록.")
 		private List<String> cloudPictures = null;
 
-		@FieldDescribe("不修改权限（跳过权限设置，保留原来的设置）.")
+		@FieldDescribe("권한 수정 안 함(권한 설정을 건너뛰고 기존 설정 유지).")
 		private Boolean skipPermission = false;
 
 		public Boolean getSkipPermission() {

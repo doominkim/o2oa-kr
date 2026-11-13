@@ -39,7 +39,7 @@ public class EmbedFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	/** 查找使用表单的embed */
+	/** 양식을 사용하는 embed 조회 */
 	public List<String> listWithForm(String formId) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(Embed.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

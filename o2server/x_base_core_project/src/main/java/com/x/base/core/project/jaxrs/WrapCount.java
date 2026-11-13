@@ -17,7 +17,7 @@ public class WrapCount extends GsonPropertyObject {
 		this.count = o.longValue();
 	}
 
-	@FieldDescribe("数量")
+	@FieldDescribe("수량")
 	private Long count;
 
 	public Long getCount() {

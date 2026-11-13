@@ -1,13 +1,13 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
 
-/** @class ReadLog 阅读记录组件。
- * @o2cn 阅读记录组件
+/** @class ReadLog 열람 기록 컴포넌트.
+ * @o2cn 열람 기록 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var log = this.form.get("name"); //获取组件
- * //方法2
- * var log = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var log = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var log = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process}
@@ -19,28 +19,28 @@ MWF.xApplication.process.Xform.ReadLog = MWF.APPReadLog =  new Class(
         Extends: MWF.APP$Module,
         options: {
             /**
-             * 加载数据后事件。
+             * 데이터 로드 후 이벤트.
              * @event MWF.xApplication.process.Xform.ReadLog#postLoadData
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              * @example
-             * //触发该事件的时候可以获取到流程数据ReadLog
+             * //이 이벤트 발생 시 프로세스 데이터 ReadLog를 가져올 수 있음
              * var readLog = this.target.readLog;
-             * //可以修改readLog达到定制化流程记录的效果
+             * //readLog를 수정하여 프로세스 기록을 맞춤화할 수 있음
              * do something
              */
 
             /**
-             * 加载每行流程信息以后触发，可以通过this.event获得下列信息：
+             * 각 행의 프로세스 정보를 로드한 후 발생, this.event로 다음 정보를 가져올 수 있음:
              * <pre><code>
              *{
-             * "data" : {}, //当前行记录信息，如果是已阅未单条记录（对象），如果是待阅有多条记录（数组）
-             * "node" : node, //当前节点
-             * "log" : object, //指向阅读记录
-             * "type" : "readCompleted"  //"read"表示待阅，"readCompleted"表示已阅
+             * "data" : {}, //현재 행 기록 정보, 열람 완료이면 단일 기록(객체), 열람 대기이면 여러 기록(배열)
+             * "node" : node, //현재 노드
+             * "log" : object, //열람 기록을 가리킴
+             * "type" : "readCompleted"  //"read"는 열람 대기, "readCompleted"는 열람 완료
              *}
              </code></pre>
              * @event MWF.xApplication.process.Xform.ReadLog#postLoadLine
-             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+             * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
              */
             "moduleEvents": ["load", "queryLoad", "postLoad", "postLoadData", "postLoadLine"]
         },
@@ -53,7 +53,7 @@ MWF.xApplication.process.Xform.ReadLog = MWF.APPReadLog =  new Class(
             }
         },
         /**
-         * 激活阅读记录。设置了延迟加载的时候，可以通过这个方法来激活
+         * 열람 기록 활성화. 지연 로드가 설정된 경우 이 메서드로 활성화할 수 있음
          * @example
          * this.form.get("fieldId").active();
          */
@@ -101,7 +101,7 @@ MWF.xApplication.process.Xform.ReadLog = MWF.APPReadLog =  new Class(
                 var code = this.json.displayScript.code;
                 this.readLog.each(function(log){
                     if (!this.json.isShowRead && log.type === "read"){
-                        //不显示待阅
+                        //열람 대기 표시 안 함
                     }else{
                         this.form.Macro.environment.log = log;
                         this.form.Macro.environment.list = null;

@@ -20,11 +20,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 /**
- * 用户投票记录
+ * 사용자 투표 기록
  *
  * @author LIYI
  */
-@Schema(name = "BBSVoteRecord", description = "论坛用户投票记录.")
+@Schema(name = "BBSVoteRecord", description = "포럼 사용자 투표 기록.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSVoteRecord.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class BBSVoteRecord extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -54,72 +54,72 @@ public class BBSVoteRecord extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String forumId_FIELDNAME = "forumId";
-	@FieldDescribe("论坛ID")
+	@FieldDescribe("포럼 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + forumId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + forumId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String forumId = null;
 
 	public static final String sectionId_FIELDNAME = "sectionId";
-	@FieldDescribe("版块ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + sectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String sectionId = null;
 
 	public static final String mainSectionId_FIELDNAME = "mainSectionId";
-	@FieldDescribe("主版块ID")
+	@FieldDescribe("상위 게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + mainSectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mainSectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String mainSectionId = null;
 
 	public static final String subjectId_FIELDNAME = "subjectId";
-	@FieldDescribe("主题ID")
+	@FieldDescribe("주제 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + subjectId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + subjectId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String subjectId = null;
 
 	public static final String optionGroupId_FIELDNAME = "optionGroupId";
-	@FieldDescribe("选项组ID")
+	@FieldDescribe("선택지 그룹 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + optionGroupId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String optionGroupId = null;
 
 	public static final String optionId_FIELDNAME = "optionId";
-	@FieldDescribe("用户投票结果选择项Id")
+	@FieldDescribe("사용자 투표 결과 선택 항목 Id")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + optionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String optionId = "";
 
 	public static final String optionValue_FIELDNAME = "optionValue";
-	@FieldDescribe("用户投票结果选择项,对应选择项属性optionValue")
+	@FieldDescribe("사용자 투표 결과 선택 항목, 선택 항목 속성 optionValue에 대응")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + optionValue_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String optionValue = "";
 
 	public static final String votorName_FIELDNAME = "votorName";
-	@FieldDescribe("投票人")
+	@FieldDescribe("투표자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + votorName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + votorName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String votorName = "";
 
 	public static final String votorNickName_FIELDNAME = "votorNickName";
-	@FieldDescribe("投票人昵称")
+	@FieldDescribe("투표자 닉네임")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + votorNickName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String votorNickName = "";

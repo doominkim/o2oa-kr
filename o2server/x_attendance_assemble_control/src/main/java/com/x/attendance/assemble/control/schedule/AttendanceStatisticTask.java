@@ -8,7 +8,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.schedule.AbstractJob;
 
 /**
- * 定时统计代理，定时对所有的统计需求进行统计
+ * 정기 통계 에이전트, 모든 통계 요청을 정기적으로 통계 처리
  * 
  * @author LIYI
  *

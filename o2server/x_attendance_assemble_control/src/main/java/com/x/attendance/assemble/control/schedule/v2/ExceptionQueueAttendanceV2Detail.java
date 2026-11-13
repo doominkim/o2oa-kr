@@ -12,6 +12,6 @@ public class ExceptionQueueAttendanceV2Detail extends PromptException {
     private static final long serialVersionUID = -2347831783819851010L;
 
     public ExceptionQueueAttendanceV2Detail(String message) {
-        super(  "考勤V2处理考勤数据异常："+message );
+        super(  "근태 V2 근태 데이터 처리 중 오류가 발생했습니다:"+message );
     }
 }

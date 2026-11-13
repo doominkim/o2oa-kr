@@ -23,7 +23,7 @@ import com.x.base.core.project.organization.Person;
 public class ActionReciveSingleAttendance extends BaseAction {
 	/*
 	 * =============================================================================
-	 * =====用于部分更新打卡数据，例如只更新下午打卡数据而不影响上午的打卡数据
+	 * =====출퇴근 데이터 부분 수정용, 예: 오전 기록에 영향 없이 오후 기록만 수정
 	 * =============================================================================
 	 * =====
 	 */
@@ -81,7 +81,7 @@ public class ActionReciveSingleAttendance extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(e,
-						"系统在根据员工姓名，打卡日期查询打卡详细信息ID列表时发生异常！"
+						"시스템이 직원 이름, 기록 날짜로 출퇴근 상세 정보 ID 목록을 조회하는 중 예외가 발생했습니다!"
 						+ "Name:" + wrapIn.getEmpName() + ", RecordDate:" + wrapIn.getRecordDateString());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
@@ -99,7 +99,7 @@ public class ActionReciveSingleAttendance extends BaseAction {
 				attendanceDetail.setMonthString(dateOperation.getMonth(datetime));
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "员工打卡信息中打卡日期格式异常，格式: yyyy-mm-dd. 日期：" + wrapIn.getRecordDateString());
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 체크 정보의 체크 날짜 형식이 올바르지 않습니다. 형식: yyyy-mm-dd. 날짜:" + wrapIn.getRecordDateString());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -109,10 +109,10 @@ public class ActionReciveSingleAttendance extends BaseAction {
 			if (wrapIn.getOnDutyTime() != null && wrapIn.getOnDutyTime().trim().length() > 0) {
 				try {
 					datetime = dateOperation.getDateFromString(wrapIn.getOnDutyTime());
-					attendanceDetail.setOnDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 上午上班打卡时间
+					attendanceDetail.setOnDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 오전 출근 기록 시간
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "员工上午上班打卡时间格式异常，格式: HH:mm:ss. 日期：" + wrapIn.getOnDutyTime());
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 오전 출근 체크 시간 형식이 올바르지 않습니다. 형식: HH:mm:ss. 날짜:" + wrapIn.getOnDutyTime());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -123,10 +123,10 @@ public class ActionReciveSingleAttendance extends BaseAction {
 			if (wrapIn.getMorningOffdutyTime() != null && wrapIn.getMorningOffdutyTime().trim().length() > 0) {
 				try {
 					datetime = dateOperation.getDateFromString(wrapIn.getMorningOffdutyTime());
-					attendanceDetail.setMorningOffDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 上午下班打卡时间
+					attendanceDetail.setMorningOffDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 오전 퇴근 기록 시간
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "员工上午下班打卡时间格式异常，格式: HH:mm:ss. 日期：" + wrapIn.getMorningOffdutyTime());
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 오전 퇴근 체크 시간 형식이 올바르지 않습니다. 형식: HH:mm:ss. 날짜:" + wrapIn.getMorningOffdutyTime());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -137,10 +137,10 @@ public class ActionReciveSingleAttendance extends BaseAction {
 			if (wrapIn.getAfternoonOnDutyTime() != null && wrapIn.getAfternoonOnDutyTime().trim().length() > 0) {
 				try {
 					datetime = dateOperation.getDateFromString(wrapIn.getAfternoonOnDutyTime());
-					attendanceDetail.setAfternoonOnDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 下午上班打卡时间
+					attendanceDetail.setAfternoonOnDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 오후 출근 기록 시간
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "员工下午上班打卡时间格式异常，格式: HH:mm:ss. 日期：" + wrapIn.getAfternoonOnDutyTime());
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 오후 출근 체크 시간 형식이 올바르지 않습니다. 형식: HH:mm:ss. 날짜:" + wrapIn.getAfternoonOnDutyTime());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -151,10 +151,10 @@ public class ActionReciveSingleAttendance extends BaseAction {
 			if (wrapIn.getOffDutyTime() != null && wrapIn.getOffDutyTime().trim().length() > 0) {
 				try {
 					datetime = dateOperation.getDateFromString(wrapIn.getOffDutyTime());
-					attendanceDetail.setOffDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 下午下班打卡时间
+					attendanceDetail.setOffDutyTime(dateOperation.getDateStringFromDate(datetime, "HH:mm:ss")); // 오후 퇴근 기록 시간
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "员工下班打卡时间格式异常，格式: HH:mm:ss. 日期：" + wrapIn.getOffDutyTime());
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 퇴근 체크 시간 형식이 올바르지 않습니다. 형식: HH:mm:ss. 날짜:" + wrapIn.getOffDutyTime());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -181,10 +181,10 @@ public class ActionReciveSingleAttendance extends BaseAction {
 					}
 				}
 			}else{
-				//人员不存在
+				//사용자가 존재하지 않습니다
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(
-						"考勤人员不存在.DistinguishedName:" + distinguishedName );
+						"근태 대상자가 없습니다. DistinguishedName:" + distinguishedName );
 				result.error(exception);
 			}
 		}
@@ -196,14 +196,14 @@ public class ActionReciveSingleAttendance extends BaseAction {
 				result.setData( new Wo( attendanceDetail.getId() ));
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess( e, "系统在保存员工打卡信息时发生异常。" );
+				Exception exception = new ExceptionAttendanceDetailProcess( e, "직원 체크 정보 저장 중 오류가 발생했습니다." );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		if (check) {
-			//分析保存好的考勤数据
+			//저장된 근태 데이터 분석
 			try {
 //				ThisApplication.detailAnalyseQueue.send( attendanceDetail.getId() );
 			} catch ( Exception e1 ) {
@@ -217,24 +217,24 @@ public class ActionReciveSingleAttendance extends BaseAction {
 	
 	public static class Wi {
 
-		@FieldDescribe( "员工标识，<font color='red'>必填</font>，员工的distinguishedName." )
+		@FieldDescribe( "직원 식별자, <font color='red'>필수</font>, 직원의 distinguishedName." )
 		private String empName = null;
 
 		private String empNo = null;
 
-		@FieldDescribe( "打卡日期，格式yyyy-mm-dd，可以为空." )
+		@FieldDescribe( "기록 날짜, 형식 yyyy-mm-dd, 비어 있어도 됨." )
 		private String recordDateString = null;
 
-		@FieldDescribe( "上午上班打卡时间，格式hh24:mi:ss，可以为空，为空就是未打卡." )
+		@FieldDescribe( "오전 출근 기록 시간, 형식 hh24:mi:ss, 비어 있어도 됨, 비어 있으면 미기록." )
 		private String onDutyTime = null;
 
-		@FieldDescribe("上班下午打卡签退时间，打卡策略2和3时使用，格式hh24:mi:ss，可以为空，为空就是未打卡.")
+		@FieldDescribe("오전 근무 퇴근 체크 시간, 기록 정책 2와 3에서 사용, 형식 hh24:mi:ss, 비어 있어도 됨, 비어 있으면 미기록.")
 		private String morningOffdutyTime;
 
-		@FieldDescribe("下午上班打卡签到时间，打卡策略2和3时使用，格式hh24:mi:ss，可以为空，为空就是未打卡.")
+		@FieldDescribe("오후 출근 체크 시간, 기록 정책 2와 3에서 사용, 형식 hh24:mi:ss, 비어 있어도 됨, 비어 있으면 미기록.")
 		private String afternoonOnDutyTime;
 
-		@FieldDescribe( "下午下班打卡时间，hh24:mi:ss，可以为空，为空就是未打卡." )
+		@FieldDescribe( "오후 퇴근 기록 시간, hh24:mi:ss, 비어 있어도 됨, 비어 있으면 미기록." )
 		private String offDutyTime = null;
 
 		public String getMorningOffdutyTime() { return morningOffdutyTime; }

@@ -62,7 +62,7 @@ public class DocumentViewRecordService {
 
 	public void deleteByDocument( EntityManagerContainer emc, String docId ) throws Exception {
 		if( docId == null ){
-			throw new Exception("文档对象document为空！");
+			throw new Exception("게시글 객체 document가 비어 있습니다!");
 		}
 		List<String> ids = null;
 		DocumentViewRecord permission = null;

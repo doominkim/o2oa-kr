@@ -272,7 +272,7 @@ public class PersistenceXmlHelper {
 		properties.put("openjpa.QueryCompilationCache", "false");
 		properties.put("openjpa.LockManager", "none");
 		properties.put("openjpa.jdbc.ResultSetType", "scroll-insensitive");
-		/* 如果启用本地初始化会导致classLoad的问题 */
+		/* 로컬 초기화를 사용하면 classLoad 문제가 발생함 */
 		properties.put("openjpa.DynamicEnhancementAgent", "false");
 		properties.put("openjpa.jdbc.SynchronizeMappings", "buildSchema(ForeignKeys=false)");
 		properties.put("openjpa.Log", "DefaultLevel=WARN");
@@ -282,7 +282,7 @@ public class PersistenceXmlHelper {
 	private static Properties propertiesExternalSlice(String className) throws Exception {
 		Properties properties = propertiesBaseSlice(className);
 		properties.put("openjpa.jdbc.DBDictionary", Config.externalDataSources().dictionary());
-		/* 如果是DB2 添加 Schema,mysql 不需要Schema 如果用了Schema H2数据库就会报错说没有Schema */
+		/* DB2이면 Schema 추가, mysql은 Schema 불필요, Schema를 사용하면 H2 데이터베이스에서 Schema가 없다는 오류 발생 */
 		if (StringUtils.isNotBlank(Config.externalDataSources().schema())) {
 			properties.put("openjpa.jdbc.Schema", Config.externalDataSources().schema());
 		}
@@ -314,9 +314,9 @@ public class PersistenceXmlHelper {
 		properties.put("openjpa.QueryCache", "false");
 		properties.put("openjpa.LockManager", "none");
 		properties.put("openjpa.jdbc.ResultSetType", "scroll-insensitive");
-		// 使用ture支持多线程访问,但是是通过lock同步执行的.
+		// true를 사용하면 멀티스레드 접근을 지원하지만 lock으로 동기 실행됨.
 		properties.put("openjpa.Multithreaded", "true");
-		/* 如果启用本地初始化会导致classLoad的问题 */
+		/* 로컬 초기화를 사용하면 classLoad 문제가 발생함 */
 		properties.put("openjpa.DynamicEnhancementAgent", "false");
 		properties.put("openjpa.jdbc.SynchronizeMappings", "buildSchema(ForeignKeys=false)");
 		return properties;
@@ -325,7 +325,7 @@ public class PersistenceXmlHelper {
 	private static Properties propertiesExternalSingle(String className) throws Exception {
 		Properties properties = propertiesBaseSingle(className);
 		properties.put("openjpa.jdbc.DBDictionary", Config.externalDataSources().dictionary());
-		/* 如果是DB2 添加 Schema,mysql 不需要Schema 如果用了Schema H2数据库就会报错说没有Schema */
+		/* DB2이면 Schema 추가, mysql은 Schema 불필요, Schema를 사용하면 H2 데이터베이스에서 Schema가 없다는 오류 발생 */
 		if (StringUtils.isNotBlank(Config.externalDataSources().schema())) {
 			properties.put("openjpa.jdbc.Schema", Config.externalDataSources().schema());
 		}

@@ -7,9 +7,9 @@ public class ActionExecutorStatusWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 8851351880636501257L;
 
-	@FieldDescribe("是否繁忙")
+	@FieldDescribe("사용 중 여부")
 	private Boolean busy;
-	@FieldDescribe("队列长度")
+	@FieldDescribe("큐 길이")
 	private Integer size;
 
 	public Boolean getBusy() {

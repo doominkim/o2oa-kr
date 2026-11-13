@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  * |------------------------------------------------------------------------------|
- * | O2OA 活力办公 创意无限    o2.js                                                 |
+ * | O2OA 활력 있는 업무 무한한 창의    o2.js                                                 |
  * |------------------------------------------------------------------------------|
  * | Distributed under the AGPL license:                                          |
  * |------------------------------------------------------------------------------|
@@ -107,7 +107,7 @@ public class Learn {
 			Business business = new Business(emc);
 			Model model = this.refreshmodel(business, modelId);
 			final String modelName = model.getName();
-			logger.info("神经网络多层感知机 ({}) 学习开始.", modelName);
+			logger.info("신경망 다층 퍼셉트론 ({}) 학습 시작.", modelName);
 			emc.beginTransaction(Model.class);
 			model.setStatus(Model.STATUS_LEARNING);
 			model.setTotalError(1.0d);
@@ -131,13 +131,13 @@ public class Learn {
 							if (Objects.equals(LearningEvent.Type.EPOCH_ENDED, learningEvent.getEventType())) {
 								emc.beginTransaction(Model.class);
 								o.setIntermediateNnet(encode(neuralNetwork));
-								logger.info("神经网络多层感知机 ({}) 学习进度 {} / {}, 总误差: {}, 单次耗时: {}.", modelName,
+								logger.info("신경망 다층 퍼셉트론 ({}) 학습 진행률 {} / {}, 총 오차: {}, 1회 소요 시간: {}.", modelName,
 										neuralNetwork.getLearningRule().getCurrentIteration(), maxIteration,
 										neuralNetwork.getLearningRule().getErrorFunction().getTotalError(),
 										stamp.stampSeconds());
 								if (stop) {
 									neuralNetwork.stopLearning();
-									logger.info("神经网络多层感知机 ({}) 学习停止.", modelName);
+									logger.info("신경망 다층 퍼셉트론 ({}) 학습 중지.", modelName);
 									o.setStatus("");
 								} else {
 									o.setStatus(Model.STATUS_LEARNING);
@@ -150,11 +150,11 @@ public class Learn {
 						}
 					}
 				});
-				logger.info("神经网络多层感知机 ({}) 数据集准备就绪.", modelName);
-				/* 训练数据集 */
+				logger.info("신경망 다층 퍼셉트론 ({}) 데이터셋 준비 완료.", modelName);
+				/* 학습 데이터셋 */
 				DataSet learnSet = this.learnOrValidationSet(business, model, inTextBag, outTextBag, Entry.TYPE_LEARN);
 				this.saveDataSet(learnSet, model, Entry.TYPE_LEARN);
-				/* 测试数据集 */
+				/* 테스트 데이터셋 */
 				DataSet validationSet = this.learnOrValidationSet(business, model, inTextBag, outTextBag,
 						Entry.TYPE_VALIDATION);
 				this.saveDataSet(validationSet, model, Entry.TYPE_VALIDATION);
@@ -175,7 +175,7 @@ public class Learn {
 //					logger.debug("save nnet file to ", file.getAbsolutePath());
 //				}
 				if (neuralNetwork.getLearningRule().getErrorFunction().getTotalError() > maxError) {
-					logger.print("神经网络多层感知机 ({}) 学习失败, 耗时: {}, 总误差: {}, 未能达到预期值: {}.", modelName,
+					logger.print("신경망 다층 퍼셉트론 ({}) 학습 실패, 소요 시간: {}, 총 오차: {}, 기대값 미달: {}.", modelName,
 							stamp.consumingMilliseconds(),
 							neuralNetwork.getLearningRule().getErrorFunction().getTotalError(), maxError);
 					emc.beginTransaction(Model.class);
@@ -184,7 +184,7 @@ public class Learn {
 					model.setStatus(Model.STATUS_EXCESSIVE);
 					emc.commit();
 				} else {
-					logger.print("神经网络多层感知机 ({}) 学习完成.", modelName);
+					logger.print("신경망 다층 퍼셉트론 ({}) 학습 완료.", modelName);
 					if (!validationSet.isEmpty()) {
 						Evaluation evaluation = new Evaluation();
 						evaluation.addEvaluator(new ClassifierEvaluator.MultiClass(validationSet.getColumnNames()));
@@ -195,7 +195,7 @@ public class Learn {
 						model.setValidationMeanSquareError(evaluationResult.getMeanSquareError());
 						model.setStatus(Model.STATUS_COMPLETED);
 						emc.commit();
-						logger.print("神经网络多层感知机 ({}) 测试数据数量: {}, 测试结果集标准方差: {}.", modelName, validationSet.size(),
+						logger.print("신경망 다층 퍼셉트론 ({}) 테스트 데이터 개수: {}, 테스트 결과셋 표준 편차: {}.", modelName, validationSet.size(),
 								evaluationResult.getMeanSquareError());
 					} else {
 						emc.beginTransaction(Model.class);
@@ -273,7 +273,7 @@ public class Learn {
 		return data;
 	}
 
-	/* 生成输入值包 */
+	/* 입력값 패키지 생성 */
 	private InTextBag inTextBag(Business business, Model model) throws Exception {
 		EntityManager em = business.entityManagerContainer().get(InText.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -288,7 +288,7 @@ public class Learn {
 		return inTextBag;
 	}
 
-	/* 生成输出值包 */
+	/* 출력값 패키지 생성 */
 	private OutTextBag outTextBag(Business business, Model model) throws Exception {
 		List<OutText> os = business.entityManagerContainer().listEqual(OutText.class, OutText.model_FIELDNAME,
 				model.getId());
@@ -339,7 +339,7 @@ public class Learn {
 			return this.list.size();
 		}
 
-		/* 将outText转换为outValue进行保存 */
+		/* outText를 outValue로 변환해 저장 */
 		public void saveToOutValue(Business business) throws Exception {
 			List<OutValue> os = new ArrayList<>();
 			for (OutText text : list) {
@@ -382,7 +382,7 @@ public class Learn {
 			return this.list.size();
 		}
 
-		/* 将InText转换为InValue进行保存 */
+		/* InText를 InValue로 변환해 저장 */
 		public void saveToInValue(Business business) throws Exception {
 			List<InValue> os = new ArrayList<>();
 			InText text = null;
@@ -396,7 +396,7 @@ public class Learn {
 				inValue.setInTextSerial(text.getSerial());
 				os.add(inValue);
 			}
-			/* 批量保存 */
+			/* 일괄 저장 */
 			for (List<InValue> values : ListTools.batch(os, 1000)) {
 				business.entityManagerContainer().beginTransaction(InValue.class);
 				for (InValue o : values) {

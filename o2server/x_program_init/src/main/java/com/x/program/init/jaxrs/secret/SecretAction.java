@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("secret")
-@JaxrsDescribe("密钥")
+@JaxrsDescribe("비밀 키")
 public class SecretAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SecretAction.class);
 
-	@JaxrsMethodDescribe(value = "检查是否需要设置初始密码.", action = ActionCheck.class)
+	@JaxrsMethodDescribe(value = "초기 비밀번호 설정 필요 여부 확인.", action = ActionCheck.class)
 	@GET
 	@Path("check")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -45,7 +45,7 @@ public class SecretAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置初始密钥.", action = ActionSet.class)
+	@JaxrsMethodDescribe(value = "초기 키 설정.", action = ActionSet.class)
 	@POST
 	@Path("set")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -63,7 +63,7 @@ public class SecretAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "取消设置初始密钥.", action = ActionSetCancel.class)
+	@JaxrsMethodDescribe(value = "초기 키 설정 취소.", action = ActionSetCancel.class)
 	@GET
 	@Path("set/cancel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

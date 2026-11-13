@@ -25,7 +25,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Mapping", description = "流程平台字段映射.")
+@Schema(name = "Mapping", description = "프로세스 플랫폼 필드 매핑.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.Mapping.table, uniqueConstraints = {
@@ -47,12 +47,12 @@ public class Mapping extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.process = Objects.toString(this.process, "");
@@ -76,46 +76,46 @@ public class Mapping extends SliceJpaObject {
 		this.application = Objects.toString(application, "");
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
-	/* flag标志位 */
-	/* Entity 默认字段结束 */
+	/* flag 플래그 비트 */
+	/* Entity 기본 필드 끝 */
 
 	public static final String enable_FIELDNAME = "enable";
-	@FieldDescribe("是否启用.")
+	@FieldDescribe("사용 여부.")
 	@Column(name = ColumnNamePrefix + enable_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean enable;
 
 	public static final String name_FIELDNAME = "name";
 	@RestrictFlag
-	@FieldDescribe("名称.")
+	@FieldDescribe("이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, simplyString = true)
 	private String name;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("描述.")
+	@FieldDescribe("설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String application_FIELDNAME = "application";
-	@FieldDescribe("所属应用.")
+	@FieldDescribe("소속 앱.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + application_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + application_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationExists = { @CitationExist(type = Application.class) })
 	private String application;
 
 	public static final String process_FIELDNAME = "process";
-	@FieldDescribe("所属流程.")
+	@FieldDescribe("소속 프로세스.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + process_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + process_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationExists = { @CitationExist(type = Process.class) })
 	private String process;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("映射方案.")
+	@FieldDescribe("매핑 방안.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)
@@ -123,7 +123,7 @@ public class Mapping extends SliceJpaObject {
 	private String data;
 
 	public static final String tableName_FIELDNAME = "tableName";
-	@FieldDescribe("映射表名称")
+	@FieldDescribe("매핑 테이블 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + tableName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + tableName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

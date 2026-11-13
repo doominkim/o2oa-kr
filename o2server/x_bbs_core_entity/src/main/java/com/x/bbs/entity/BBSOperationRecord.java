@@ -19,11 +19,11 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * 系统操作日志信息表
+ * 시스템 작업 로그 정보 테이블
  * 
  * @author LIYI
  */
-@Schema(name = "BBSOperationRecord", description = "论坛操作日志.")
+@Schema(name = "BBSOperationRecord", description = "포럼 작업 로그.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSOperationRecord.table, uniqueConstraints = {
@@ -44,7 +44,7 @@ public class BBSOperationRecord extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -53,116 +53,116 @@ public class BBSOperationRecord extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String forumId_FIELDNAME = "forumId";
-	@FieldDescribe("论坛ID")
+	@FieldDescribe("포럼 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + forumId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + forumId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String forumId = "";
 
 	public static final String forumName_FIELDNAME = "forumName";
-	@FieldDescribe("论坛名称")
+	@FieldDescribe("포럼 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + forumName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String forumName = "";
 
 	public static final String sectionId_FIELDNAME = "sectionId";
-	@FieldDescribe("版块ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + sectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sectionId = "";
 
 	public static final String sectionName_FIELDNAME = "sectionName";
-	@FieldDescribe("版块名称")
+	@FieldDescribe("게시판 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + sectionName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sectionName = "";
 
 	public static final String mainSectionId_FIELDNAME = "mainSectionId";
-	@FieldDescribe("主版块ID")
+	@FieldDescribe("상위 게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + mainSectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mainSectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String mainSectionId = "";
 
 	public static final String mainSectionName_FIELDNAME = "mainSectionName";
-	@FieldDescribe("主版块名称")
+	@FieldDescribe("상위 게시판 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + mainSectionName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mainSectionName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String mainSectionName = "";
 
 	public static final String subjectId_FIELDNAME = "subjectId";
-	@FieldDescribe("主题ID")
+	@FieldDescribe("주제 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + subjectId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + subjectId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String subjectId = "";
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("主题名称：标题")
+	@FieldDescribe("주제명: 제목")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title = "";
 
 	public static final String objectId_FIELDNAME = "objectId";
-	@FieldDescribe("操作对象ID")
+	@FieldDescribe("작업 대상 ID")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + objectId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + objectId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String objectId = "";
 
 	public static final String objectName_FIELDNAME = "objectName";
-	@FieldDescribe("操作对象名称")
+	@FieldDescribe("작업 대상 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + objectName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + objectName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String objectName = "";
 
 	public static final String objectType_FIELDNAME = "objectType";
-	@FieldDescribe("操作对象类别：论坛、版块、主题、回复")
+	@FieldDescribe("작업 대상 유형: 포럼, 게시판, 주제, 답글")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + objectType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + objectType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String objectType = "";
 
 	public static final String optType_FIELDNAME = "optType";
-	@FieldDescribe("操作方式：登入，登出，新增，修改，删除，查看")
+	@FieldDescribe("작업 방식: 로그인, 로그아웃, 추가, 수정, 삭제, 조회")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + optType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + optType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String optType = "未知";
 
 	public static final String operatorName_FIELDNAME = "operatorName";
-	@FieldDescribe("操作人姓名")
+	@FieldDescribe("작업자 이름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + operatorName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + operatorName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String operatorName = "";
 
 	public static final String hostname_FIELDNAME = "hostname";
-	@FieldDescribe("主机名称")
+	@FieldDescribe("호스트 이름")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + hostname_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + hostname_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String hostname = "";
 
 	public static final String hostIp_FIELDNAME = "hostIp";
-	@FieldDescribe("主机IP地址")
+	@FieldDescribe("호스트 IP 주소")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + hostIp_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + hostname_FIELDNAME)
 	@CheckPersist(allowEmpty = true)

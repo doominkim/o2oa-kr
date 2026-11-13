@@ -32,8 +32,8 @@ abstract class BaseAction extends StandardJaxrsAction {
 	private static Date cachedPackServerTokenDate;
 
 	/**
-	 * 获取当前sso完成后的token
-	 * @return 认证成功返回token，否则返回null
+	 * 현재 sso 완료 후 token 조회
+	 * @return 인증 성공 시 token, 아니면 null 반환
 	 */
 	public String getPackServerSSOToken() {
 		if ((StringUtils.isNotEmpty(cachedPackServerToken) && (null != cachedPackServerTokenDate))
@@ -44,7 +44,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 		if (StringUtils.isNotEmpty(token)) {
 			cachedPackServerToken = token;
 			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.HOUR, 24); // token 24小时缓存
+			cal.add(Calendar.HOUR, 24); // token 24시간 캐시
 			cachedPackServerTokenDate = cal.getTime();
 			return cachedPackServerToken;
 		}
@@ -52,27 +52,27 @@ abstract class BaseAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 登录apppack服务器
-	 * @return 认证成功返回token，否则返回null
+	 * apppack 서버 로그인
+	 * @return 인증 성공 시 token, 아니면 null 반환
 	 */
 	private String login2AppPackServer() {
 		try {
 			String url = Config.collect().appPackServerApi(Collect.ADDRESS_APPPACK_AUTH);
 			Map<String, String> map = new HashMap<>();
-			map.put("collectName", Config.collect().getName()); // o2云账号
-			map.put("password", Config.collect().getPassword()); // o2云密码
+			map.put("collectName", Config.collect().getName()); // o2 클라우드 계정
+			map.put("password", Config.collect().getPassword()); // o2 클라우드 비밀번호
 			String result = HttpConnection.postAsString(url, null, XGsonBuilder.instance().toJson(map));
-			logger.info("打包服务器认证，结果: " + result);
+			logger.info("패키징 서버 인증, 결과: " + result);
 			Type type = new TypeToken<AppPackResult<AuthTokenData>>() {
 			}.getType();
 			AppPackResult<AuthTokenData> packResult = XGsonBuilder.instance().fromJson(result, type);
 			if (StringUtils.isNotEmpty(packResult.getResult()) && packResult.getResult().equals(AppPackResult.result_success)) {
 				return packResult.getData().getToken();
 			} else {
-				logger.info("打包服务器认证失败");
+				logger.info("패키징 서버 인증 실패");
 			}
 		} catch (Exception e) {
-			logger.info("登录app打包服务器失败");
+			logger.info("app 패키징 서버 로그인에 실패했습니다");
 			logger.error(e);
 		}
 		return null;
@@ -84,11 +84,11 @@ abstract class BaseAction extends StandardJaxrsAction {
 		try {
 			String collectNameEncode = URLEncoder.encode(Config.collect().getName(), DefaultCharset.name);
 			String url = Config.collect().appPackServerApi(String.format(Collect.ADDRESS_APPPACK_INFO, collectNameEncode));
-			logger.info("打包信息请求，url：" + url);
+			logger.info("패키징 정보 요청, url:" + url);
 			ArrayList<NameValuePair> heads = new ArrayList<>();
 			heads.add(new NameValuePair("token", getPackServerSSOToken()));
 			String result = HttpConnection.getAsString(url, heads);
-			logger.info("获取到打包信息，结果: " + result);
+			logger.info("패키징 정보 수신, 결과: " + result);
 			Type type = new TypeToken<AppPackResult<PackInfoFromServer>>() {
 			}.getType();
 			AppPackResult<PackInfoFromServer> appPackResult = XGsonBuilder.instance().fromJson(result, type);
@@ -146,44 +146,44 @@ abstract class BaseAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 打包信息对象
+	 * 패키징 정보 객체
 	 */
 	public static class PackInfoFromServer extends GsonPropertyObject {
 
 		private String id;
 		private String appName;
-		// o2oa 服务器信息
-		private String o2ServerProtocol; // 中心服务器协议 http | https
-		private String o2ServerHost; // 中心服务器地址  ip 或 域名
-		private String o2ServerPort; // 中心服务器端口 端口号
+		// o2oa 서버 정보
+		private String o2ServerProtocol; // 중앙 서버 프로토콜 http | https
+		private String o2ServerHost; // 중앙 서버 주소  ip 또는 도메인
+		private String o2ServerPort; // 중앙 서버 포트 포트 번호
 		private String o2ServerContext; //  /x_program_center
-		// collect 账号
+		// collect 계정
 		private String collectName;
 		private String createTime;
-		// 打包状态 0 准备（入库）1 开始打包 2 打包结束 3 反馈结果完成
+		// 패키징 상태 0 준비(저장) 1 패키징 시작 2 패키징 종료 3 결과 피드백 완료
 		private String packStatus;
 
-		private String appLogoPath; // logo图片地址 相对路径
-		private String apkPath; // apk下载地址 相对路径
+		private String appLogoPath; // logo 이미지 주소 상대 경로
+		private String apkPath; // apk 다운로드 주소 상대 경로
 
-		// 版本名称
+		// 버전 이름
 		private String versionName;
-		// 版本号 100
+		// 버전 번호 100
 		private String buildNo;
-		// 是否使用外部包名，2: 就是用 net.zoneland.x.bpm.mobile.v1.zoneXBPM.outer 作为apk的applicationId，默认使用老的applicationId，兼容老的版本
+		// 외부 패키지명 사용 여부, 2: net.zoneland.x.bpm.mobile.v1.zoneXBPM.outer 를 apk의 applicationId로 사용, 기본값은 기존 applicationId 사용(구버전 호환)
 		private String isPackAppIdOuter;
 
-		// 代理地址
+		// 프록시 주소
 		private String urlMapping;
 
-		//错误信息
+		//오류 정보
 		private String packErrorLogs;
 
-		// 2 表示要删除华为推送包，防止不是华为手机打开app需要安装HMS服务框架
+		// 2 는 화웨이 푸시 패키지 삭제를 의미, 화웨이가 아닌 휴대폰에서 app 실행 시 HMS 서비스 프레임워크 설치가 필요하지 않도록 함
 		private String deleteHuawei;
 
 
-		private AppPackApkFile appFile; // 关联的下载文件
+		private AppPackApkFile appFile; // 연결된 다운로드 파일
 
 
 		public String getPackErrorLogs() {

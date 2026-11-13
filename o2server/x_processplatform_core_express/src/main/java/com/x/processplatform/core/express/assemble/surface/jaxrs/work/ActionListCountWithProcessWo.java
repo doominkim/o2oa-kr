@@ -9,16 +9,16 @@ public class ActionListCountWithProcessWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 3947731081213211239L;
 
-	@FieldDescribe("流程标志.")
-	@Schema(description = "流程标志.")
+	@FieldDescribe("프로세스 식별자.")
+	@Schema(description = "프로세스 식별자.")
 	private String value;
 
-	@FieldDescribe("流程名称.")
-	@Schema(description = "流程名称.")
+	@FieldDescribe("프로세스 이름.")
+	@Schema(description = "프로세스 이름.")
 	private String name;
 
-	@FieldDescribe("数量.")
-	@Schema(description = "数量.")
+	@FieldDescribe("수량.")
+	@Schema(description = "수량.")
 	private Long count;
 
 	public ActionListCountWithProcessWo() {

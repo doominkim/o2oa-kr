@@ -7,6 +7,6 @@ class ExceptionFileIncorrect extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionFileIncorrect(String name) {
-		super("name: {}, 文件错误.", name);
+		super("name: {}, 파일 오류.", name);
 	}
 }

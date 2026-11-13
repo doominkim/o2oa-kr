@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class Application 门户中嵌入的系统component对象或网页iframe（模块部署中配置的网页URL）。
- * @o2cn 嵌入的系统应用
+/** @class Application 포털에 삽입된 시스템 component 객체 또는 웹 페이지 iframe(모듈 배포에 설정된 웹 페이지 URL).
+ * @o2cn 삽입된 시스템 앱
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var application = this.form.get("fieldId"); //获取组件
- * //方法2
- * var application = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var application = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var application = this.target; //컴포넌트 자체의 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Portal}
@@ -18,9 +18,9 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
     Extends: MWF.APP$Module,
     options: {
         /**
-         * component对象初始化后，加载之前触发，this.event可获取component对象。
+         * component 객체 초기화 후 로드 전에 발생, this.event로 component 객체를 가져올 수 있음.
          * @event MWF.xApplication.process.Xform.Application#queryLoadApplication
-         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|组件事件说明}
+         * @see {@link https://www.yuque.com/o2oa/ixsnyt/hm5uft#i0zTS|컴포넌트 이벤트 설명}
          */
         "moduleEvents": ["load", "queryLoad", "postLoad", "queryLoadApplication"]
     },
@@ -49,8 +49,8 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         }
     },
     /**
-     * @summary 当组件被设置为延迟激活，通过active方法激活
-     * @param {Function} callback 激活后的回调方法（不保证组件加载完成），另外已经激活过该方法还会被执行。
+     * @summary 컴포넌트가 지연 활성화로 설정된 경우 active 메서드로 활성화
+     * @param {Function} callback 활성화 후 콜백 메서드(컴포넌트 로드 완료는 보장하지 않음), 이미 활성화된 경우에도 이 메서드는 실행됨.
      * @example
      * var app = this.form.get("fieldId");
      * app.active(function(){
@@ -65,8 +65,8 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         }
     },
     /**
-     * @summary 重新加载嵌入对象
-     * @param {Function} callback 重载后的回调
+     * @summary 삽입된 객체 다시 로드
+     * @param {Function} callback 다시 로드 후 콜백
      * @example
      * this.form.get("fieldId").reload()
      */
@@ -75,7 +75,7 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         this.loadApplication( callback );
     },
     /**
-     * @summary 清除当前嵌入的对象
+     * @summary 현재 삽입된 객체 지우기
      * @example
      * this.form.get("fieldId").clean()
      */
@@ -118,11 +118,11 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         }.bind(this))
     },
     /**
-     * @summary 加载Iframe
-     * @param {String} src iframe的src，如'https://www.baidu.com/'
+     * @summary Iframe 로드
+     * @param {String} src iframe의 src, 예: 'https://www.baidu.com/'
      * @example
-     * this.form.get("fieldId").clean(); //清除当前嵌入的对象
-     * this.form.get("fieldId").loadIframe('https://www.baidu.com/'); //加载iframe
+     * this.form.get("fieldId").clean(); //현재 삽입된 객체 지우기
+     * this.form.get("fieldId").loadIframe('https://www.baidu.com/'); //iframe 로드
      */
     loadIframe: function( src, callback ){
         var attr = {
@@ -135,30 +135,30 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         };
 
         /**
-         * @summary 当模块部署中配置的是@url:开头的链接时，嵌入的iframe.
+         * @summary 모듈 배포 설정이 @url:로 시작하는 링크일 때 삽입되는 iframe.
          * @member {Object}
          * @example
-         * var iframe = this.form.get("fieldId").iframe; //获取iframe
-         * iframe.src; //获取iframe的地址
+         * var iframe = this.form.get("fieldId").iframe; //iframe 가져오기
+         * iframe.src; //iframe 주소 가져오기
          */
         this.iframe = new Element("iframe", attr).inject( this.node );
         this.loaded = true;
         if(callback)callback();
     },
     /**
-     * @summary 加载系统组件
-     * @param {String} path 组件的路径，如'Calendar'
-     * @param {Object|null} [status] 组件的状态
-     * @param {Object|null} [options] 组件的选项
-     * @param {Function} [callback] 加载后的回调
+     * @summary 시스템 컴포넌트 로드
+     * @param {String} path 컴포넌트 경로, 예: 'Calendar'
+     * @param {Object|null} [status] 컴포넌트 상태
+     * @param {Object|null} [options] 컴포넌트 옵션
+     * @param {Function} [callback] 로드 후 콜백
      * @example
-     * this.form.get("fieldId").clean(); //清除当前嵌入的对象
-     * this.form.get("fieldId").loadComponent('Calendar'); //加载日程安排
+     * this.form.get("fieldId").clean(); //현재 삽입된 객체 지우기
+     * this.form.get("fieldId").loadComponent('Calendar'); //일정 로드
      * @example
-     * this.form.get("fieldId").clean(); //清除当前嵌入的对象
+     * this.form.get("fieldId").clean(); //현재 삽입된 객체 지우기
      * this.form.get("fieldId").loadComponent('cms.Module', {
      *  "columnId":"25434995-45d2-4c9a-a344-55ad0deff071"
-     *  }); //加载id为25434995-45d2-4c9a-a344-55ad0deff071的内容管理栏目
+     *  }); //id가 25434995-45d2-4c9a-a344-55ad0deff071인 콘텐츠 관리 게시판 로드
      */
     loadComponent: function ( path, status, options, callback ) {
         var clazz = MWF.xApplication;
@@ -176,17 +176,17 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
                 opt.embededParent = this.node;
 
                 /**
-                 * @summary 嵌入的component对象.
+                 * @summary 삽입된 component 객체.
                  * @member {Object}
                  * @example
-                 * var app = this.form.get("fieldId").component; //获取component对象
-                 * app.recordStatus(); //获取应用的当前状态
-                 * app.refresh();      //刷新应用
-                 * app.dialog(option); //弹出一个对话框（详见MWF.widget.Dialog）
-                 * app.notice(content, type, target, where, offset); //显示一个通知消息
-                 * app.confirm(type, e, title, text, width, height, ok, cancel); //显示一个确认框
-                 * app.alert(type, e, title, text, width, height); //弹出一个信息框
-                 * app.addEvent(type, fun); //为应用绑定一个事件
+                 * var app = this.form.get("fieldId").component; //component 객체 가져오기
+                 * app.recordStatus(); //앱의 현재 상태 가져오기
+                 * app.refresh();      //앱 새로 고침
+                 * app.dialog(option); //대화 상자 표시(MWF.widget.Dialog 참고)
+                 * app.notice(content, type, target, where, offset); //알림 메시지 표시
+                 * app.confirm(type, e, title, text, width, height, ok, cancel); //확인 창 표시
+                 * app.alert(type, e, title, text, width, height); //정보 창 표시
+                 * app.addEvent(type, fun); //앱에 이벤트 바인딩
                  */
                 this.component = new clazz.Main(this.form.app.desktop, opt);
                 this.component.status = status;
@@ -227,11 +227,11 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         }
     },
     /**
-     * @summary 获取获取表单设计配置的component对象的路径
-     * @param {Function} callback 获取路径后的回调方法，参数为路径
+     * @summary 양식 디자인에 설정된 component 객체의 경로 가져오기
+     * @param {Function} callback 경로를 가져온 후의 콜백 메서드, 인자는 경로
      * @example
      * this.form.get("fieldId").getComponentPath(function(path){
-     *     //path为路径
+     *     //path는 경로
      * })
      */
     getComponentPath: function(callback){
@@ -252,8 +252,8 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         })
     },
     /**
-     * @summary 获取表单设计配置的component对象的参数
-     * @return 设置的参数
+     * @summary 양식 디자인에 설정된 component 객체의 인자 가져오기
+     * @return 설정된 인자
      * @example
      * var param = this.form.get("fieldId").getComponentOptions()
      */
@@ -270,8 +270,8 @@ MWF.xApplication.process.Xform.Application = MWF.APPApplication =  new Class(
         return params;
     },
     /**
-     * @summary 获取表单设计配置的component对象的状态
-     * @return 设置的状态
+     * @summary 양식 디자인에 설정된 component 객체의 상태 가져오기
+     * @return 설정된 상태
      * @example
      * var param = this.form.get("fieldId").getComponentStatus()
      */

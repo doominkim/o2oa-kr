@@ -19,7 +19,7 @@ import com.x.bbs.entity.BBSSectionInfo;
 import com.x.bbs.entity.BBSSubjectInfo;
 
 /**
- * Document正式发布后，向所有的阅读者推送消息通知
+ * Document 정식 게시 후 모든 열람자에게 메시지 알림 푸시
  */
 public class QueueNewReplyNotify extends AbstractQueue<BBSReplyInfo> {
 	
@@ -88,16 +88,16 @@ public class QueueNewReplyNotify extends AbstractQueue<BBSReplyInfo> {
 
 		MessageWo wo = composeMessageWo( forumInfo, sectionInfo, subjectInfo, replyInfo );
 		if( send_pushMessage && StringUtils.isNotEmpty( replyMessageNotifyType )){
-			//尝试发送pushMessage
+			//pushMessage 전송 시도
 			List<String> managerAndModerator = caculatePerson( forumInfo, sectionInfo, replyMessageNotifyType );
-			//去一下重复
+			//중복 제거
 			HashSet<String> set = new HashSet<String>( managerAndModerator );
 			managerAndModerator.clear();
 			managerAndModerator.addAll(set);
 
-			//向管理员发送Message通知
+			//관리자에게 Message 알림 전송
 			MessageFactory.notifyManager_forNewReply( managerAndModerator, wo );
-			//向主题发表者发送Message通知
+			//주제 작성자에게 Message 알림 전송
 			if( needNotifySubjectCreator( replyMessageNotifyType ) ){
 				MessageFactory.notifySubjectCreator_forNewReply( subjectInfo.getCreatorName(), wo );
 			}
@@ -106,7 +106,7 @@ public class QueueNewReplyNotify extends AbstractQueue<BBSReplyInfo> {
 	}
 
 	/**
-	 * 根据指定的推送配置计算需要接收通知的人员列表
+	 * 지정 푸시 설정에 따라 알림을 받을 사용자 목록 계산
 	 * @param forumInfo
 	 * @param sectionInfo
 	 * @param replyMessageNotifyType
@@ -115,7 +115,7 @@ public class QueueNewReplyNotify extends AbstractQueue<BBSReplyInfo> {
 	private List<String> caculatePerson( BBSForumInfo forumInfo, BBSSectionInfo sectionInfo, String replyMessageNotifyType ) {
 		List<String> persons = new ArrayList<>();
 		String[] sendPersonTypeConfig = null;
-		//回复消息通知类别：一共3位，第1位是否通知分区管理员ForumManagerList，第2位是否通知版主ModeratorNames，第3位是否通知发贴人，0-不通知|1-通知
+		//답글 메시지 알림 유형: 총 3자리, 1번째는 구역 관리자 ForumManagerList 알림 여부, 2번째는 게시판 관리자 ModeratorNames 알림 여부, 3번째는 작성자 알림 여부, 0-알림 안 함|1-알림
 		if( StringUtils.isNotEmpty( replyMessageNotifyType )) {
 			sendPersonTypeConfig = replyMessageNotifyType.split(",");
 		}
@@ -143,13 +143,13 @@ public class QueueNewReplyNotify extends AbstractQueue<BBSReplyInfo> {
 	}
 
 	/**
-	 * 根据通知类型配置，检查是否需要向主题发表人发送通知
+	 * 알림 유형 설정에 따라 주제 작성자에게 알림을 보낼지 확인
 	 * @param replyMessageNotifyType
 	 * @return
 	 */
 	private boolean needNotifySubjectCreator( String replyMessageNotifyType ) {
 		String[] sendPersonTypeConfig = null;
-		//回复消息通知类别：一共3位，第1位是否通知分区管理员ForumManagerList，第2位是否通知版主ModeratorNames，第3位是否通知发贴人，0-不通知|1-通知
+		//답글 메시지 알림 유형: 총 3자리, 1번째는 구역 관리자 ForumManagerList 알림 여부, 2번째는 게시판 관리자 ModeratorNames 알림 여부, 3번째는 작성자 알림 여부, 0-알림 안 함|1-알림
 		if( StringUtils.isNotEmpty( replyMessageNotifyType )) {
 			sendPersonTypeConfig = replyMessageNotifyType.split(",");
 		}

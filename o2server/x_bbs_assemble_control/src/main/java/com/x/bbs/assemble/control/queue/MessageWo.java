@@ -6,37 +6,37 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 public class MessageWo{
 
-    @FieldDescribe("主贴ID或者回复ID")
+    @FieldDescribe("원글 ID 또는 답글 ID")
     private String id;
 
-    @FieldDescribe("标题：主题或者回复的标题")
+    @FieldDescribe("제목: 주제 또는 답글의 제목")
     private String title;
 
     @FieldDescribe("Subject | Subject")
     private String type;
 
-    @FieldDescribe("主贴ID.")
+    @FieldDescribe("원글 ID.")
     private String subjectId;
 
-    @FieldDescribe("回贴ID")
+    @FieldDescribe("답글 ID")
     private String replyId;
 
-    @FieldDescribe("论坛分区Id")
+    @FieldDescribe("포럼 구역 Id")
     private String forumId;
 
-    @FieldDescribe("论坛分区名称")
+    @FieldDescribe("포럼 구역 이름")
     private String forumName;
 
-    @FieldDescribe("版块Id")
+    @FieldDescribe("게시판 Id")
     private String selectionId;
 
-    @FieldDescribe("版块名称")
+    @FieldDescribe("게시판 이름")
     private String selectionName;
 
-    @FieldDescribe("操作者")
+    @FieldDescribe("작업자")
     private String createPerson;
 
-    @FieldDescribe("操作时间")
+    @FieldDescribe("작업 시간")
     private Date createTime;
 
     public String getReplyId() {

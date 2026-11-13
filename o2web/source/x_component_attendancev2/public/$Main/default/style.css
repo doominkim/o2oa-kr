@@ -161,26 +161,26 @@
 }
 
 
-/* 变量  */
+/* 변수  */
 :root {
-  /* 考勤颜色变量 (인디고 테마: 정상 ok, 지각·조퇴 wait, 결근·누락 danger) */
-  /* 正常 */
+  /* 근태 색상 변수 (인디고 테마: 정상 ok, 지각·조퇴 wait, 결근·누락 danger) */
+  /* 정상 */
   --att-record-status-normal-color: #20C997;
-  /* 早退 */
+  /* 조퇴 */
   --att-record-status-early-color: #F0C325;
-  /* 迟到 */
+  /* 지각 */
   --att-record-status-late-color: #F0C325;
-  /* 严重迟到 */
+  /* 심각한 지각 */
   --att-record-status-serilate-color: #F08A3C;
-  /* 未打卡 */
+  /* 미체크 */
   --att-record-status-nosign-color: #F0504F;
-  /* 外勤 */
+  /* 외근 */
   --att-record-status-fieldwork-color: #8E6BD8;
-  /* 申诉 */
+  /* 이의 신청 */
   --att-record-status-appeal-color: #5B8FCB;
-  /* 外出请假 */
+  /* 외출·휴가 */
   --att-record-status-leave-color: #2768B0;
-  /* 旷工 */
+  /* 무단결근 */
   --att-record-status-absenteeism-color: #F0504F;
 
   --att-color-bg: #F4F5F7;
@@ -250,39 +250,39 @@
 .color-999 {
   color: #999999;
 }
-/* 外勤 */
+/* 외근 */
 .color-fieldWork {
   color: var(--att-record-status-fieldwork-color);
 }
-/* 正常 */
+/* 정상 */
 .color-normal {
   color: var(--att-record-status-normal-color);
 }
-/* 早退 */
+/* 조퇴 */
 .color-early {
   color: var(--att-record-status-early-color);
 }
-/* 迟到 */
+/* 지각 */
 .color-late {
   color: var(--att-record-status-late-color);
 }
-/* 严重迟到 */
+/* 심각한 지각 */
 .color-serilate {
   color: var(--att-record-status-serilate-color);
 }
-/* 未打卡 */
+/* 미체크 */
 .color-nosign {
   color: var(--att-record-status-nosign-color);
 }
-/* 申诉 */
+/* 이의 신청 */
 .color-appeal {
   color: var(--att-record-status-appeal-color);
 }
-/* 请假 */
+/* 휴가 */
 .color-leave {
   color: var(--att-record-status-leave-color);
 }
-/* 节假日 */
+/* 공휴일 */
 .color-holiday {
   color: var(--att-record-status-leave-color);
 }
@@ -428,7 +428,7 @@
   background: no-repeat center 24px / 32px 32px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23C4C8CF' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M4 18 8 7h16l4 11v7H4z'/%3E%3Cpath d='M4 18h7l1.5 3h7L21 18h7'/%3E%3C/svg%3E");
 }
 
-/* 滚动的 table */
+/* 스크롤되는 table */
 .scroll-table {
   margin: 0;
   border: none;
@@ -594,7 +594,7 @@
   background-color: #ffffff;
   margin: 0;
 }
-/* form 表单弹出窗口 */
+/* form 양식 팝업 창 */
 .index_page_form_container {
   width: 540px;
   background-color: white;
@@ -602,7 +602,7 @@
   border-left: 1px solid var(--att-line);
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.06);
 }
-/* 主页顶层样式 */
+/* 메인 페이지 최상위 스타일 */
 .manager-box {
   position: relative;
   overflow: auto;
@@ -890,7 +890,7 @@
   line-height: 24px;
 }
 
-/* 灰色背景的卡片 */
+/* 회색 배경 카드 */
 .a-card {
   /*border: 1px solid #dedede;*/
   list-style: none;

@@ -51,9 +51,9 @@ o2.widget.MWFRaphael = MWFRaphael = {
 		var arc_t_h = height-r-r;
 		var arc_t_w = width-r-r;
 		
-		//先得到圆角path------------------------------------------------------
+		//먼저 둥근 모서리 path 얻기------------------------------------------------------
 		//    |
-		//----------  这个位置的圆角
+		//----------  이 위치의 둥근 모서리
 		//    |  *
 		var arcPath1 = Raphael.parsePathString(MWFRaphael.getArcPath(beginPoint.x, beginPoint.y, r));
 		
@@ -61,28 +61,28 @@ o2.widget.MWFRaphael = MWFRaphael = {
 		var r_c_p_y = beginPoint.y;
 		
 		//	  |  *
-		//----------  这个位置的圆角
+		//----------  이 위치의 둥근 모서리
 		//    |  
 		var arcPath2 = Raphael.transformPath(arcPath1, "r-90,"+r_c_p_x+","+r_c_p_y+"T0,-"+arc_t_h);
 		//var arcPath2 = Raphael.transformPath(arcPath1, "r-90,"+r_c_p_x+","+r_c_p_y);
 		
 		
 		//	* |  
-		//----------  这个位置的圆角
+		//----------  이 위치의 둥근 모서리
 		//    |  
 		r_c_p_y = r_c_p_y - arc_t_h;
 		var arcPath3 = Raphael.transformPath(arcPath2, "r-90,"+r_c_p_x+","+r_c_p_y+"T-"+arc_t_w+",0");
 		
 		//    |  
-		//----------  这个位置的圆角
+		//----------  이 위치의 둥근 모서리
 		//  * |  
 		r_c_p_x = r_c_p_x - arc_t_w;
 		var arcPath4 = Raphael.transformPath(arcPath3, "r-90,"+r_c_p_x+","+r_c_p_y+"T0,"+arc_t_h);
-		//先得到圆角path------------------------------------------------------
+		//먼저 둥근 모서리 path 얻기------------------------------------------------------
 		
-		//得到四个边的path----------------------------------------------------
+		//네 변의 path 얻기----------------------------------------------------
 		//      |   | 
-		//----------|----   右边
+		//----------|----   오른쪽
 		//      |   |
 		var h_l_f_x = x+width;
 		var h_l_f_y = y+height-r;
@@ -91,7 +91,7 @@ o2.widget.MWFRaphael = MWFRaphael = {
 		var hLine1 = Raphael.parsePathString("M"+h_l_f_x+","+h_l_f_y+"L"+h_l_t_x+","+h_l_t_y);
 		
 		//  ————|———— 
-		//--------------   上边
+		//--------------   위쪽
 		//      |  
 		var w_l_f_x = x+width-r;
 		var w_l_f_y = y;
@@ -100,15 +100,15 @@ o2.widget.MWFRaphael = MWFRaphael = {
 		var wLine1 = Raphael.parsePathString("M"+w_l_f_x+","+w_l_f_y+"L"+w_l_t_x+","+w_l_t_y);
 		
 		//  |   |    
-		//--|-----------   左边
+		//--|-----------   왼쪽
 		//  |   |   
 		var hLine2 = Raphael.transformPath(hLine1, "t-"+width+",0"+"R180");
 		
 		//      | 
-		//--------------   下边
+		//--------------   아래쪽
 		//  ————|————
 		var wLine2 = Raphael.transformPath(wLine1, "t0,"+height+"R180");
-		//得到四个边的path----------------------------------------------------
+		//네 변의 path 얻기----------------------------------------------------
 		
 		//return ""+arcPath1+hLine1+arcPath2+wLine1+arcPath3+hLine2+arcPath4+wLine2+"Z";
 		
@@ -135,9 +135,9 @@ o2.widget.MWFRaphael = MWFRaphael = {
 		var x3 = x+r;
 		var y3 = y;
 		
-		//三次贝塞尔曲线公式
-		//B(t)=P0(1-t)*(1-t)*(1-t)+3P1t(1-t)*(1-t)+3P2t*t(1-t)+P3t*t*t;  t属于[0,1]
-		//假设t=0.5
+		//3차 베지에 곡선 공식
+		//B(t)=P0(1-t)*(1-t)*(1-t)+3P1t(1-t)*(1-t)+3P2t*t(1-t)+P3t*t*t;  t는 [0,1]에 속함
+		//t=0.5라고 가정
 		var b = Math.sqrt((r*r)/2);
 		var Bx = x0+b;
 		var By = y3+b;

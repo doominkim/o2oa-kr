@@ -72,10 +72,10 @@ public class ActionLeaveLedgerBatchDelete extends BaseAction {
 
     static void validateParameters(Wi wi) throws Exception {
         if (wi == null || StringUtils.isBlank(wi.getLeaveTypeId())) {
-            throw new ExceptionEmptyParameter("假期类型ID");
+            throw new ExceptionEmptyParameter("휴가 유형 ID");
         }
         if (StringUtils.isBlank(wi.getGrantPeriod())) {
-            throw new ExceptionEmptyParameter("发放周期");
+            throw new ExceptionEmptyParameter("지급 주기");
         }
     }
 
@@ -93,10 +93,10 @@ public class ActionLeaveLedgerBatchDelete extends BaseAction {
 
         private static final long serialVersionUID = -1758785747192285855L;
 
-        @FieldDescribe("假期类型ID")
+        @FieldDescribe("휴가 유형 ID")
         private String leaveTypeId;
 
-        @FieldDescribe("发放周期")
+        @FieldDescribe("지급 주기")
         private String grantPeriod;
 
         public String getLeaveTypeId() {
@@ -120,13 +120,13 @@ public class ActionLeaveLedgerBatchDelete extends BaseAction {
 
         private static final long serialVersionUID = 3245191947421139026L;
 
-        @FieldDescribe("删除的批次数量")
+        @FieldDescribe("삭제된 배치 수")
         private int deletedRows;
 
-        @FieldDescribe("创建的流水数量")
+        @FieldDescribe("생성된 내역 수")
         private int transactionRows;
 
-        @FieldDescribe("更新的账户数量")
+        @FieldDescribe("업데이트된 계정 수")
         private int accountRows;
 
         public int getDeletedRows() {

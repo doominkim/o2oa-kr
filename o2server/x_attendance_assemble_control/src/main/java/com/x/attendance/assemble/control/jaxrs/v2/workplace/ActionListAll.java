@@ -27,7 +27,7 @@ public class ActionListAll extends BaseAction {
 			if (list != null) {
 				wos = Wo.copier.copy(list);
 			}
-			// 用 createTime 降序排序
+			// createTime 내림차순 정렬
 			wos.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
 		}
 		result.setData(wos);

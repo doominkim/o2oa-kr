@@ -36,7 +36,7 @@ class ActionList extends BaseAction {
 		static WrapCopier<Recycle, Wo> copier = WrapCopierFactory.wo(Recycle.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("文件类型")
+		@FieldDescribe("파일 유형")
 		private String contentType;
 
 		public String getContentType() {

@@ -11,12 +11,12 @@ public class ActionManageResetWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -3686768943199603543L;
 
-	@FieldDescribe("重置待阅人身份.")
-	@Schema(description = "重置待阅人身份.")
+	@FieldDescribe("열람 대기자 신분 재설정.")
+	@Schema(description = "열람 대기자 신분 재설정.")
 	private List<String> identityList;
 
-	@FieldDescribe("待阅意见.")
-	@Schema(description = "待阅意见.")
+	@FieldDescribe("열람 대기 의견.")
+	@Schema(description = "열람 대기 의견.")
 	private String opinion;
 
 	public List<String> getIdentityList() {

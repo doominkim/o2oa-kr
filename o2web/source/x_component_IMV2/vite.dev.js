@@ -12,13 +12,13 @@ const componentName = componentPath.replace('x_component_', '').split('_').join(
 const viteConfig = {
   server: {
     fs: {
-      // 允许为项目根目录的上一级提供服务
+      // 프로젝트 루트 디렉터리의 상위 경로 서비스 허용
       allow: ['..']
     },
     // https: {
     //     key: readFileSync('key.pem'),
     //     cert: readFileSync('cert.pem'),
-    //     passphrase: '1234', // 将此行替换为您的密码
+    //     passphrase: '1234', // 이 줄을 사용자의 비밀번호로 교체
     // },
     host: '0.0.0.0',
     port: '5556',

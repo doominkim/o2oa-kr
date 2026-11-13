@@ -63,7 +63,7 @@ class ActionDelete extends BaseAction {
 			if (StringUtils.equalsIgnoreCase(application.getDefaultForm(), form.getId())) {
 				throw new ExceptionUsedDefaultForm(form.getName(), form.getId());
 			}
-			// 校验是否有在使用的节点
+			// 사용 중인 노드 존재 여부 확인
 			this.checkUsedWithAgent(business, form);
 			this.checkUsedWithBegin(business, form);
 			this.checkUsedWithCancel(business, form);
@@ -78,7 +78,7 @@ class ActionDelete extends BaseAction {
 			this.checkUsedWithPublish(business, form);
 			this.checkUsedWithService(business, form);
 			this.checkUsedWithSplit(business, form);
-			// 先删除FormField
+			// 먼저 FormField 삭제
 			List<String> formFieldIds = business.formField().listWithForm(form.getId());
 			List<String> formVersionIds = emc.idsEqual(FormVersion.class, FormVersion.form_FIELDNAME, form.getId());
 			if (!ListTools.isEmpty(formFieldIds)) {

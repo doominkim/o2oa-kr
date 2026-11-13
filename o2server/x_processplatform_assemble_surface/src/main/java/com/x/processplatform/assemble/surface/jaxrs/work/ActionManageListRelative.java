@@ -40,7 +40,7 @@ class ActionManageListRelative extends BaseAction {
 			Work work = emc.find(id, Work.class, ExceptionWhen.not_found);
 			Process process = business.process().pick(work.getProcess());
 			Application application = business.application().pick(work.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (!business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process)) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
@@ -61,7 +61,7 @@ class ActionManageListRelative extends BaseAction {
 		List<String> list = business.work().listWithJob(work.getJob());
 		List<String> ids = new ArrayList<>();
 		for (String str : list) {
-			// 排除自己
+			// 자신 제외
 			if (!StringUtils.equals(work.getId(), str)) {
 				ids.add(str);
 			}
@@ -77,10 +77,10 @@ class ActionManageListRelative extends BaseAction {
 
 		static WrapCopier<Work, Wo> copier = WrapCopierFactory.wo(Work.class, Wo.class, null, Excludes);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
-		@FieldDescribe("权限")
+		@FieldDescribe("권한")
 		private Control control;
 
 		public Long getRank() {

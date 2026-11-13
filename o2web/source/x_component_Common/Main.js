@@ -1,7 +1,7 @@
 MWF.xApplication.Common = MWF.xApplication.Common || {
 	options: {
-		"multitask": false,	//允许多窗口运行
-		"executable": true	//可执行
+		"multitask": false,	//다중 창 실행 허용
+		"executable": true	//실행 가능
 	}
 };
 MWF.require("MWF.xDesktop.Window", null, false);
@@ -56,8 +56,8 @@ MWF.xApplication.Common.Main = new Class({
 		"desktopReload": true,
 		"style": "default",
 		"name": "Common",
-		"icon": "", //图标
-		"title": "", //标题
+		"icon": "", //아이콘
+		"title": "", //제목
 		"event": null,
 		"width": "800",
 		"height": "600",
@@ -603,7 +603,7 @@ MWF.xApplication.Common.Main = new Class({
 	},
 
 
-	//application事件
+	//application 이벤트
 	onQueryLoad: function () { },
 	onQueryLoadWindow: function () { },
 	onLoadWindow: function () { },
@@ -635,7 +635,7 @@ MWF.xApplication.Common.Main = new Class({
 			if (!target) target = this.window.content;
 			if (!type) type = "ok";
 			var noticeTarget = target || layout.layout.contentNode;
-			// 移动端如果向下滚动了就看不到了
+			// 모바일에서 아래로 스크롤하면 보이지 않음
 			if (layout.mobile) {
 				noticeTarget = $(document.body);
 			}
@@ -705,7 +705,7 @@ MWF.xApplication.Common.Main = new Class({
 					y = y - parseFloat(height);
 				}
 				if (y < 0) y = 0;
-				// 鼠标位置往左偏移
+				// 마우스 위치 왼쪽으로 오프셋
 				x = x - 20;
 			}
 

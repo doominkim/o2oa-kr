@@ -70,32 +70,32 @@ public class OperatorDataValidator implements Runnable {
 			
 			if( !colmlist.get(0).isEmpty() && !colmlist.get(2).isEmpty() ){
 				
-				cacheImportRowDetail.setEmployeeName( colmlist.get(0).trim() );  //员工姓名
+				cacheImportRowDetail.setEmployeeName( colmlist.get(0).trim() );  //직원 이름
 				
 				if( colmlist.get(1) != null && !colmlist.get(1).trim().isEmpty()){
-					cacheImportRowDetail.setEmployeeNo( colmlist.get(1).trim() );    //员工号
+					cacheImportRowDetail.setEmployeeNo( colmlist.get(1).trim() );    //사번
 				}
 				
-				cacheImportRowDetail.setRecordDateString( colmlist.get(2) ); //打卡日期
+				cacheImportRowDetail.setRecordDateString( colmlist.get(2) ); //체크 날짜
 				
 				if( colmlist.size() > 3 ){
-					cacheImportRowDetail.setOnDutyTime( colmlist.get(3) );    //上午上班打卡时间
+					cacheImportRowDetail.setOnDutyTime( colmlist.get(3) );    //오전 출근 기록 시간
 				}
 				if( colmlist.size() > 4 ){
-					cacheImportRowDetail.setMorningOffDutyTime( colmlist.get(4) );    //上午下班打卡时间
+					cacheImportRowDetail.setMorningOffDutyTime( colmlist.get(4) );    //오전 퇴근 기록 시간
 				}
 				if( colmlist.size() > 5 ){
-					cacheImportRowDetail.setAfternoonOnDutyTime( colmlist.get(5) );    //下午上班打卡时间
+					cacheImportRowDetail.setAfternoonOnDutyTime( colmlist.get(5) );    //오후 출근 기록 시간
 				}
 				
 				if( colmlist.size() > 6 ){
-					cacheImportRowDetail.setOffDutyTime( colmlist.get(6) );   //下午下班打卡时间
+					cacheImportRowDetail.setOffDutyTime( colmlist.get(6) );   //오후 퇴근 기록 시간
 				}
 				
-				cacheImportRowDetail.setCheckStatus( "success" );         //设置数据检查状态为正常
+				cacheImportRowDetail.setCheckStatus( "success" );         //데이터 검사 상태를 정상으로 설정
 				
 				if( checkSuccess ) {
-					//查询人员是否存在
+					//사용자 존재 여부 조회
 					personExists = checkPersonExists( cacheImportFileStatus, cacheImportRowDetail.getEmployeeName() );
 					if( !personExists ) {
 						checkSuccess = false;
@@ -124,11 +124,11 @@ public class OperatorDataValidator implements Runnable {
 				}
 				
 				if( checkSuccess ) {
-					//下面检查三个日期和时间格式是否正常，并且进行转换
+					//아래에서 세 가지 날짜·시간 형식이 정상인지 검사하고 변환
 					try{
 						datetime = dateOperation.getDateFromString( cacheImportRowDetail.getRecordDateString() );
 						cacheImportRowDetail.setRecordDate( datetime );
-						cacheImportRowDetail.setRecordDateStringFormated( dateOperation.getDateStringFromDate( datetime, "YYYY-MM-DD") ); //打卡日期
+						cacheImportRowDetail.setRecordDateStringFormated( dateOperation.getDateStringFromDate( datetime, "YYYY-MM-DD") ); //체크 날짜
 						cacheImportRowDetail.setRecordYearString( dateOperation.getYear( datetime ) );
 						cacheImportRowDetail.setRecordMonthString( dateOperation.getMonth(datetime) );
 						if( Integer.parseInt( cacheImportRowDetail.getRecordYearString() ) > dateOperation.getYearNumber( new Date() )
@@ -136,7 +136,7 @@ public class OperatorDataValidator implements Runnable {
 						) {
 							throw new Exception("record date error:" + cacheImportRowDetail.getRecordDateString() );
 						}
-						//设置一下该文件中所有数据的日期范围
+						//이 파일 전체 데이터의 날짜 범위 설정
 						cacheImportFileStatus.sendStartTime(datetime);
 						cacheImportFileStatus.sendEndTime( datetime );
 					}catch( Exception e ){
@@ -151,7 +151,7 @@ public class OperatorDataValidator implements Runnable {
 					if( cacheImportRowDetail.getOnDutyTime() != null && cacheImportRowDetail.getOnDutyTime().trim().length() > 0 ){
 						try{
 							datetime = dateOperation.getDateFromString( cacheImportRowDetail.getOnDutyTime() );
-							cacheImportRowDetail.setOnDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //上午上班打卡时间
+							cacheImportRowDetail.setOnDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //오전 출근 기록 시간
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
@@ -165,7 +165,7 @@ public class OperatorDataValidator implements Runnable {
 					if( cacheImportRowDetail.getMorningOffDutyTime() != null && cacheImportRowDetail.getMorningOffDutyTime().trim().length() > 0 ){
 						try{
 							datetime = dateOperation.getDateFromString( cacheImportRowDetail.getMorningOffDutyTime() );
-							cacheImportRowDetail.setMorningOffDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //上午下班打卡时间
+							cacheImportRowDetail.setMorningOffDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //오전 퇴근 기록 시간
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
@@ -179,7 +179,7 @@ public class OperatorDataValidator implements Runnable {
 					if( cacheImportRowDetail.getAfternoonOnDutyTime() != null && cacheImportRowDetail.getAfternoonOnDutyTime().trim().length() > 0 ){
 						try{
 							datetime = dateOperation.getDateFromString( cacheImportRowDetail.getAfternoonOnDutyTime() );
-							cacheImportRowDetail.setAfternoonOnDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //上午下班打卡时间
+							cacheImportRowDetail.setAfternoonOnDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //오전 퇴근 기록 시간
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
@@ -193,7 +193,7 @@ public class OperatorDataValidator implements Runnable {
 					if( cacheImportRowDetail.getOffDutyTime() != null && cacheImportRowDetail.getOffDutyTime().trim().length() > 0 ){
 						try{
 							datetime = dateOperation.getDateFromString( cacheImportRowDetail.getOffDutyTime() );
-							cacheImportRowDetail.setOffDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //下班打卡时间
+							cacheImportRowDetail.setOffDutyTimeFormated( dateOperation.getDateStringFromDate( datetime, "HH:mm:ss") ); //퇴근 출퇴근 기록 시간
 						}catch( Exception e ){
 							checkSuccess = false;
 							cacheImportRowDetail.setCheckStatus("error");
@@ -219,10 +219,10 @@ public class OperatorDataValidator implements Runnable {
 
 	private Boolean checkPersonExists( StatusImportFileDetail cacheImportFileStatus, String personName ) {
 		if( !cacheImportFileStatus.getPersonList().isEmpty() && cacheImportFileStatus.getPersonList().contains( personName ) ) {
-			//如果已经缓存了，那么肯定存在的
+			//이미 캐시되어 있으면 반드시 존재함
 			return true;
 		}else {
-			//检查人员是否存在
+			//사용자 존재 여부 확인
 			try{
 				personName = userManagerService.checkPersonExists( personName );
 				if( personName == null || personName.isEmpty() ) {

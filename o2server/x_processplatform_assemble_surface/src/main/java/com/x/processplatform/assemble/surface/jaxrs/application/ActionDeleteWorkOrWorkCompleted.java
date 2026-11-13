@@ -51,7 +51,7 @@ class ActionDeleteWorkOrWorkCompleted extends BaseAction {
 				throw new ExceptionEntityNotExist(flag,Application.class);
 			}
 
-			/** 先删除content内容,删除内容的时候在方法内进行批量删除,在方法内部进行beginTransaction和commit */
+			/** 먼저 content 내용 삭제, 메서드 내에서 일괄 삭제하며 beginTransaction과 commit 수행 */
 			this.deleteTask(business, application);
 			this.deleteTaskCompleted(business, application, onlyRemoveNotCompleted);
 			this.deleteRead(business, application);
@@ -105,7 +105,7 @@ class ActionDeleteWorkOrWorkCompleted extends BaseAction {
 		List<String> ids = onlyRemoveNotCompleted
 				? business.attachment().listWithApplicationWithCompleted(application.getId(), false)
 				: business.attachment().listWithApplication(application.getId());
-		/** 附件需要单独处理删除 */
+		/** 첨부파일은 별도로 삭제 처리 필요 */
 		EntityManagerContainer emc = business.entityManagerContainer();
 		for (List<String> list : ListTools.batch(ids, 1000)) {
 			emc.beginTransaction(Attachment.class);

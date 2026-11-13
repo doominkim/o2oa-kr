@@ -21,22 +21,22 @@ public class Calculate extends GsonPropertyObject {
 	public static final String GROUPMERGETYPE_INTERSECTION = "intersection";
 	public static final String GROUPMERGETYPE_SUM = "sum";
 
-	@FieldDescribe("是否是分类视图")
+	@FieldDescribe("분류 뷰 여부")
 	public Boolean isGroup;
 
-	@FieldDescribe("是否总计")
+	@FieldDescribe("합계 여부")
 	public Boolean isAmount;
 
-	@FieldDescribe("排序类型")
+	@FieldDescribe("정렬 유형")
 	public String orderType;
 
-	@FieldDescribe("排序列")
+	@FieldDescribe("정렬 열")
 	public String orderColumn;
 
-	@FieldDescribe("分类自定义标记")
+	@FieldDescribe("분류 사용자 정의 표시")
 	public List<String> groupSpecifiedList;
 
-	@FieldDescribe("分类视图标题")
+	@FieldDescribe("분류 뷰 제목")
 	public String title;
 
 	@FieldDescribe("specified,item,intersection,sum")
@@ -44,7 +44,7 @@ public class Calculate extends GsonPropertyObject {
 
 	public List<CalculateEntry> calculateList;
 	
-	@FieldDescribe("图表")
+	@FieldDescribe("차트")
 	public List<String> chart;
 	
 	public Boolean available() {

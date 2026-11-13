@@ -21,21 +21,21 @@ public class Meeting extends ConfigObject {
 		return new Meeting();
 	}
 
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	private Boolean enable;
-	@FieldDescribe("openMeeting单点序号")
+	@FieldDescribe("openMeeting SSO 순번")
 	private String oauth2Id;
-	@FieldDescribe("openMeeting端口")
+	@FieldDescribe("openMeeting 포트")
 	private Integer port;
-	@FieldDescribe("openMeeting服务器")
+	@FieldDescribe("openMeeting 서버")
 	private String host;
-	@FieldDescribe("openMeeting管理员账户")
+	@FieldDescribe("openMeeting 관리자 계정")
 	private String user;
-	@FieldDescribe("openMeeting管理员密码")
+	@FieldDescribe("openMeeting 관리자 비밀번호")
 	private String pass;
-	@FieldDescribe("openMeeting协议")
+	@FieldDescribe("openMeeting 프로토콜")
 	private String httpProtocol;
-	@FieldDescribe("匿名用户是否可以访问附件")
+	@FieldDescribe("익명 사용자의 첨부파일 접근 허용 여부")
 	private Boolean anonymousAccessAttachment;
 
 	public String getHttpProtocol() {

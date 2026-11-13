@@ -27,7 +27,7 @@ import com.x.file.core.entity.open.FileType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Attachment2", description = "云文件新个人文件.")
+@Schema(name = "Attachment2", description = "클라우드 파일 신규 개인 파일.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Personal.Attachment2.table, uniqueConstraints = {
@@ -51,23 +51,23 @@ public class Attachment2 extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
 		this.lastUpdateTime = new Date();
-		/* 如果为顶层，那么将目录设置为空 */
+		/* 최상위이면 디렉터리를 비움 */
 		this.folder = StringUtils.trimToEmpty(this.folder);
-		/* 如果扩展名为空去掉null */
+		/* 확장자가 비어 있으면 null 제거 */
 		this.extension = StringUtils.trimToEmpty(extension);
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public Attachment2() {
 
@@ -101,87 +101,87 @@ public class Attachment2 extends SliceJpaObject {
 	}
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("文件名称.")
+	@FieldDescribe("파일 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true, citationNotExists =
-	/* 同一个用户同一个目录正常状态下不能有重名 */
+	/* 같은 사용자의 같은 디렉터리 내 정상 상태 이름 중복 불가 */
 	@CitationNotExist(fields = { "name", "id" }, type = Attachment2.class, equals = {
 			@Equal(property = "person", field = "person"), @Equal(property = "folder", field = "folder"),
 			@Equal(property = "status", field = "status") }))
 	private String name;
 
 	public static final String extension_FIELDNAME = "extension";
-	@FieldDescribe("扩展名,必须要有扩展名的文件才允许上传.")
+	@FieldDescribe("확장자, 확장자가 있는 파일만 업로드 허용.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + extension_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true)
 	private String extension;
 
 	public static final String length_FIELDNAME = "length";
-	@FieldDescribe("文件大小.")
+	@FieldDescribe("파일 크기.")
 	@Index(name = TABLE + IndexNameMiddle + length_FIELDNAME)
 	@Column(name = ColumnNamePrefix + length_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long length;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("文件所属分类.")
+	@FieldDescribe("파일 소속 분류.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;
 
 	public static final String folder_FIELDNAME = "folder";
-	@FieldDescribe("文件所属目录.")
+	@FieldDescribe("파일 소속 디렉터리.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + folder_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + folder_FIELDNAME)
-	/* 上级目录必须存在 */
+	/* 상위 디렉터리가 반드시 존재해야 함 */
 	@CheckPersist(allowEmpty = false)
 	private String folder;
 
 	public static final String originFile_FIELDNAME = "originFile";
-	@FieldDescribe("真实文件id.")
+	@FieldDescribe("실제 파일 id.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + originFile_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + originFile_FIELDNAME)
-	/* 文件必须存在 */
+	/* 파일이 반드시 존재해야 함 */
 	@CheckPersist(allowEmpty = false)
 	private String originFile;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("文件状态：正常|已删除")
+	@FieldDescribe("파일 상태: 정상|삭제됨")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String status = FileStatus.VALID.getName();
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Date lastUpdateTime;
 
 	public static final String lastUpdatePerson_FIELDNAME = "lastUpdatePerson";
-	@FieldDescribe("最后更新人员")
+	@FieldDescribe("최종 수정 사용자")
 	@Column(length = length_255B, name = ColumnNamePrefix + lastUpdatePerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdatePerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String lastUpdatePerson;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("文件描述.")
+	@FieldDescribe("파일 설명.")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String fileVersion_FIELDNAME = "fileVersion";
-	@FieldDescribe("文件版本")
+	@FieldDescribe("파일 버전")
 	@Column(name = ColumnNamePrefix + fileVersion_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer fileVersion;

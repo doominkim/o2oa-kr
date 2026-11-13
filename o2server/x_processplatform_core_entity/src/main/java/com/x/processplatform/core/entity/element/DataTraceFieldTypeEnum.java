@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author sword
- * 流程中配置需要记录数据变化的字段配置方式
+ * 프로세스에서 데이터 변경을 기록할 필드 설정 방식
  */
 public enum DataTraceFieldTypeEnum {
 

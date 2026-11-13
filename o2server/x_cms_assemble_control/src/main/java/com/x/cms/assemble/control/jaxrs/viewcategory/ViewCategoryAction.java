@@ -28,12 +28,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("viewcategory")
-@JaxrsDescribe("信息列表与分类关联管理")
+@JaxrsDescribe("정보 목록-분류 연결 관리")
 public class ViewCategoryAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ViewCategoryAction.class);
 
-	@JaxrsMethodDescribe(value = "获取全部的视图分类关联信息列表.", action = ActionListAll.class)
+	@JaxrsMethodDescribe(value = "전체 뷰-분류 연결 정보 목록 조회.", action = ActionListAll.class)
 	@GET
 	@Path("list/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,13 +51,13 @@ public class ViewCategoryAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定分类的全部视图分类关联信息信息列表.", action = ActionListByCategory.class)
+	@JaxrsMethodDescribe(value = "지정 분류의 전체 뷰-분류 연결 정보 목록 조회.", action = ActionListByCategory.class)
 	@GET
 	@Path("list/category/{categoryId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listByCategoryId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("分类ID") @PathParam("categoryId") String categoryId) {
+			@JaxrsParameterDescribe("분류ID") @PathParam("categoryId") String categoryId) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<List<ActionListByCategory.Wo>> result = new ActionResult<>();
 		try {
@@ -70,13 +70,13 @@ public class ViewCategoryAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取指定视图的全部视图分类关联信息信息列表.", action = ActionListByView.class)
+	@JaxrsMethodDescribe(value = "지정 뷰의 전체 뷰-분류 연결 정보 목록 조회.", action = ActionListByView.class)
 	@GET
 	@Path("list/view/{viewId}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listByViewId( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列表ID") @PathParam("viewId") String viewId) {
+			@JaxrsParameterDescribe("목록 ID") @PathParam("viewId") String viewId) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<List<ActionListByView.Wo>> result = new ActionResult<>();
 		try {
@@ -89,13 +89,13 @@ public class ViewCategoryAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID获取列表信息对象.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "ID로 목록 정보 객체 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列表分类关联信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("목록-분류 연결 정보 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -108,7 +108,7 @@ public class ViewCategoryAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建列表信息对象.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "목록 정보 객체 생성.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -129,13 +129,13 @@ public class ViewCategoryAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除列表信息对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 목록 정보 객체 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("列表分类关联信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("목록-분류 연결 정보 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		try {
@@ -148,13 +148,13 @@ public class ViewCategoryAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据ID删除列表信息对象.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 목록 정보 객체 삭제.", action = ActionDelete.class)
 	@GET
 	@Path("{id}/mockdeletetoget")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteMockDeleteToGet( @Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-						@JaxrsParameterDescribe("列表分类关联信息ID") @PathParam("id") String id) {
+						@JaxrsParameterDescribe("목록-분류 연결 정보 ID") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		try {

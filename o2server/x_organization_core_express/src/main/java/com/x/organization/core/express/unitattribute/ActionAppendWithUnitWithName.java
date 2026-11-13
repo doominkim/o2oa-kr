@@ -29,13 +29,13 @@ class ActionAppendWithUnitWithName extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("属性值")
+		@FieldDescribe("속성 값")
 		List<String> attributeList = new ArrayList<>();
 
-		@FieldDescribe("属性名称")
+		@FieldDescribe("속성 이름")
 		private String name;
 
-		@FieldDescribe("组织")
+		@FieldDescribe("조직")
 		private String unit;
 
 		public List<String> getAttributeList() {

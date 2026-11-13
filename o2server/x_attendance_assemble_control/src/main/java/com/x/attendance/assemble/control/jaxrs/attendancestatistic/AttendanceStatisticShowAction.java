@@ -27,20 +27,20 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("statisticshow")
-@JaxrsDescribe("考勤数据统计信息管理服务（已弃用）")
+@JaxrsDescribe("근태 데이터 통계 정보 관리 서비스(사용 중단)")
 public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AttendanceStatisticShowAction.class);
 
-	@JaxrsMethodDescribe(value = "查询员工指定月份的统计数据", action = ActionShowStmForPerson.class)
+	@JaxrsMethodDescribe(value = "직원의 지정 월 통계 데이터 조회", action = ActionShowStmForPerson.class)
 	@GET
 	@Path("person/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStmForPerson(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计员工姓名") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 직원 이름") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStmForPerson.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -50,7 +50,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStmForPerson().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -58,15 +58,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询指定组织所有员工指定月份的统计数据", action = ActionShowStForPersonInUnit.class)
+	@JaxrsMethodDescribe(value = "지정 조직 전체 직원의 지정 월 통계 데이터 조회", action = ActionShowStForPersonInUnit.class)
 	@GET
 	@Path("persons/unit/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStForPersonInUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计员工姓名") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 직원 이름") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStForPersonInUnit.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -76,7 +76,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStForPersonInUnit().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -84,15 +84,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询指定组织所有员工指定月份的统计数据，包括下级组织", action = ActionShowStForPersonInUnitSubNested.class)
+	@JaxrsMethodDescribe(value = "지정 조직 전체 직원의 지정 월 통계 데이터 조회(하위 조직 포함)", action = ActionShowStForPersonInUnitSubNested.class)
 	@GET
 	@Path("persons/unit/subnested/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStForPersonInUnitSubNested(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("统计员工姓名") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("통계 직원 이름") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStForPersonInUnitSubNested.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -103,7 +103,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -111,15 +111,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织指定月份的统计数据", action = ActionShowStmForUnitSubnested.class)
+	@JaxrsMethodDescribe(value = "조직의 지정 월 통계 데이터 조회", action = ActionShowStmForUnitSubnested.class)
 	@GET
 	@Path("unit/subnested/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStmForUnitSubnested(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("统计组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("통계 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStmForUnitSubnested.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -129,7 +129,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStmForUnitSubnested().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -137,15 +137,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询顶层组织指定月份的统计数据", action = ActionShowStForUnitInTopUnit.class)
+	@JaxrsMethodDescribe(value = "최상위 조직의 지정 월 통계 데이터 조회", action = ActionShowStForUnitInTopUnit.class)
 	@GET
 	@Path("unit/topUnit/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStForUnitInTopUnit(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("统计顶层组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("통계 최상위 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStForUnitInTopUnit.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -155,7 +155,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStForUnitInTopUnit().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -163,15 +163,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织指定月份的统计数据", action = ActionShowStmForUnit.class)
+	@JaxrsMethodDescribe(value = "조직의 지정 월 통계 데이터 조회", action = ActionShowStmForUnit.class)
 	@GET
 	@Path("unit/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStmForUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStmForUnit.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -181,7 +181,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStmForUnit().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -189,15 +189,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织指定月份的统计数据", action = ActionSumStForUnit.class)
+	@JaxrsMethodDescribe(value = "조직의 지정 월 통계 데이터 조회", action = ActionSumStForUnit.class)
 	@GET
 	@Path("unit/sum/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void sumUnitStatistic(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<ActionSumStForUnit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -207,7 +207,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionSumStForUnit().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -215,15 +215,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询顶层组织指定月份的统计数据", action = ActionShowStmForTopUnit.class)
+	@JaxrsMethodDescribe(value = "최상위 조직의 지정 월 통계 데이터 조회", action = ActionShowStmForTopUnit.class)
 	@GET
 	@Path("topUnit/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStmForTopUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计顶层组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 최상위 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStmForTopUnit.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -233,7 +233,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStmForTopUnit().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -241,15 +241,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织指定月份每日的统计数据", action = ActionShowStmForTopUnit.class)
+	@JaxrsMethodDescribe(value = "조직의 지정 월 일별 통계 데이터 조회", action = ActionShowStmForTopUnit.class)
 	@GET
 	@Path("unit/day/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStdForUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStdForUnit.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -259,7 +259,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStdForUnit().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -267,15 +267,15 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询顶层组织指定月份每日的统计数据", action = ActionShowStdForTopUnit.class)
+	@JaxrsMethodDescribe(value = "최상위 조직의 지정 월 일별 통계 데이터 조회", action = ActionShowStdForTopUnit.class)
 	@GET
 	@Path("topUnit/day/{name}/{year}/{month}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStdForTopUnit(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("统计顶层组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计周期年份") @PathParam("year") String year,
-			@JaxrsParameterDescribe("统计周期月份") @PathParam("month") String month) {
+			@JaxrsParameterDescribe("통계 최상위 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 주기 연도") @PathParam("year") String year,
+			@JaxrsParameterDescribe("통계 주기 월") @PathParam("month") String month) {
 		ActionResult<List<ActionShowStdForTopUnit.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -285,7 +285,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStdForTopUnit().execute(request, effectivePerson, name, year, month);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -293,14 +293,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织指定日期的统计数据", action = ActionShowStdForUnitWithDate.class)
+	@JaxrsMethodDescribe(value = "조직의 지정 날짜 통계 데이터 조회", action = ActionShowStdForUnitWithDate.class)
 	@GET
 	@Path("unit/day/{name}/{date}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStdForUnitWithDate(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("统计组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计日期") @PathParam("date") String date) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("통계 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 날짜") @PathParam("date") String date) {
 		ActionResult<List<ActionShowStdForUnitWithDate.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -310,7 +310,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStdForUnitWithDate().execute(request, effectivePerson, name, date);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -318,14 +318,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "查询组织指定日期的统计数据", action = ActionShowStdForUnitInTopUnitWithDate.class)
+	@JaxrsMethodDescribe(value = "조직의 지정 날짜 통계 데이터 조회", action = ActionShowStdForUnitInTopUnitWithDate.class)
 	@GET
 	@Path("unit/day/topUnit/{name}/{date}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void showStdForUnitInTopUnitWithDate(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("统计组织名称") @PathParam("name") String name,
-			@JaxrsParameterDescribe("统计日期") @PathParam("date") String date) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("통계 조직명") @PathParam("name") String name,
+			@JaxrsParameterDescribe("통계 날짜") @PathParam("date") String date) {
 		ActionResult<List<ActionShowStdForUnitInTopUnitWithDate.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -335,7 +335,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 				result = new ActionShowStdForUnitInTopUnitWithDate().execute(request, effectivePerson, name, date);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -343,14 +343,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的个人月份统计数据,下一页", action = ActionListStmForPersonNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 개인 월별 통계 데이터 목록, 다음 페이지", action = ActionListStmForPersonNextWithFilter.class)
 	@PUT
 	@Path("filter/personMonth/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStmForPersonNextWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStmForPersonNextWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -361,7 +361,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -369,14 +369,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的个人月份统计数据,上一页", action = ActionListStmForPersonPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 개인 월별 통계 데이터 목록, 이전 페이지", action = ActionListStmForPersonPrevWithFilter.class)
 	@PUT
 	@Path("filter/personMonth/list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStmForPersonPrevWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStmForPersonPrevWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -387,7 +387,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -395,14 +395,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的组织月份统计数据,下一页", action = ActionListStmForUnitNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 조직 월별 통계 데이터 목록, 다음 페이지", action = ActionListStmForUnitNextWithFilter.class)
 	@PUT
 	@Path("filter/unitMonth/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStmForUnitNextWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStmForUnitNextWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -413,7 +413,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -421,14 +421,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的组织月份统计数据,上一页", action = ActionListStmForUnitPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 조직 월별 통계 데이터 목록, 이전 페이지", action = ActionListStmForUnitPrevWithFilter.class)
 	@PUT
 	@Path("filter/unitMonth/list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStmForUnitPrevWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStmForUnitPrevWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -439,7 +439,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -447,14 +447,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的顶层组织月份统计数据,下一页", action = ActionListStmForTopUnitNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 최상위 조직 월별 통계 데이터 목록, 다음 페이지", action = ActionListStmForTopUnitNextWithFilter.class)
 	@PUT
 	@Path("filter/topUnitMonth/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStmForTopUnitNextWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStmForTopUnitNextWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -465,7 +465,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -473,14 +473,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的顶层组织月份统计数据,上一页", action = ActionListStmForTopUnitPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 최상위 조직 월별 통계 데이터 목록, 이전 페이지", action = ActionListStmForTopUnitPrevWithFilter.class)
 	@PUT
 	@Path("filter/topUnitMonth/list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStmForTopUnitPrevWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStmForTopUnitPrevWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -491,7 +491,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -499,14 +499,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的组织每日统计数据,下一页", action = ActionListStdForUnitNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 조직 일별 통계 데이터 목록, 다음 페이지", action = ActionListStdForUnitNextWithFilter.class)
 	@PUT
 	@Path("filter/unitDay/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStdForUnitNextWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStdForUnitNextWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -517,7 +517,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -525,14 +525,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的组织每日统计数据,上一页", action = ActionListStdForUnitPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 조직 일별 통계 데이터 목록, 이전 페이지", action = ActionListStdForUnitPrevWithFilter.class)
 	@PUT
 	@Path("filter/unitDay/list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStdForUnitPrevWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStdForUnitPrevWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -543,7 +543,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -551,14 +551,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的顶层组织每日统计数据,下一页", action = ActionListStdForTopUnitNextWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 최상위 조직 일별 통계 데이터 목록, 다음 페이지", action = ActionListStdForTopUnitNextWithFilter.class)
 	@PUT
 	@Path("filter/topUnitDay/list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStdForTopUnitNextWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStdForTopUnitNextWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -569,7 +569,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -577,14 +577,14 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示根据过滤条件的顶层组织每日统计数据,上一页", action = ActionListStdForTopUnitPrevWithFilter.class)
+	@JaxrsMethodDescribe(value = "필터 조건에 따른 최상위 조직 일별 통계 데이터 목록, 이전 페이지", action = ActionListStdForTopUnitPrevWithFilter.class)
 	@PUT
 	@Path("filter/topUnitDay/list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listStdForTopUnitPrevWithFilter(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("上一页最后一条信息ID") @PathParam("id") String id,
-			@JaxrsParameterDescribe("每页显示信息条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("이전 페이지 마지막 정보 ID") @PathParam("id") String id,
+			@JaxrsParameterDescribe("페이지당 표시 정보 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListStdForTopUnitPrevWithFilter.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -595,7 +595,7 @@ public class AttendanceStatisticShowAction extends StandardJaxrsAction {
 						jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionAttendanceSettingProcess(e, "获取所有数据统计信息列表时发生异常！");
+				Exception exception = new ExceptionAttendanceSettingProcess(e, "전체 데이터 통계 목록을 가져오는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

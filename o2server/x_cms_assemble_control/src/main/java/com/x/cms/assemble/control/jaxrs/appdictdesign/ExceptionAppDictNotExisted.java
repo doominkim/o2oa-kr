@@ -7,6 +7,6 @@ class ExceptionAppDictNotExisted extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionAppDictNotExisted(String str) {
-		super("标识为:{}, 的数据字典不存在.", str);
+		super("식별자 {}인 데이터 사전이 없습니다.", str);
 	}
 }

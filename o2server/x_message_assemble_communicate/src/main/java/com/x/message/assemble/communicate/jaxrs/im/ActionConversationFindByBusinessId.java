@@ -38,7 +38,7 @@ public class ActionConversationFindByBusinessId extends BaseAction {
 			List<IMConversation> list = business.imConversationFactory()
 					.listConversationWithPersonAndBusinessId(effectivePerson.getDistinguishedName(), businessId);
 			if (list != null && !list.isEmpty()) {
-				// 存在 返回结果
+				// 존재함. 결과 반환
 				List<Wo> wos = Wo.copier.copy(list);
 				result.setData(wos);
 			} else {

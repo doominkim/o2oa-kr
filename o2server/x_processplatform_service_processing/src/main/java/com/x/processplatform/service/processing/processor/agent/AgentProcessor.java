@@ -27,7 +27,7 @@ public class AgentProcessor extends AbstractAgentProcessor {
 
 	@Override
 	protected Work arriving(AeiObjects aeiObjects, Agent agent) {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.agentArrive(aeiObjects.getWork().getActivityToken(), agent));
 		return aeiObjects.getWork();
 	}
@@ -38,7 +38,7 @@ public class AgentProcessor extends AbstractAgentProcessor {
 
 	@Override
 	protected List<Work> executing(AeiObjects aeiObjects, Agent agent) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.agentExecute(aeiObjects.getWork().getActivityToken(), agent));
 		List<Work> results = new ArrayList<>();
 		if (StringUtils.isNotEmpty(agent.getScript()) || StringUtils.isNotEmpty(agent.getScriptText())) {
@@ -57,7 +57,7 @@ public class AgentProcessor extends AbstractAgentProcessor {
 
 	@Override
 	protected Optional<Route> inquiring(AeiObjects aeiObjects, Agent agent) throws Exception {
-		// 发送ProcessingSignal
+		// ProcessingSignal 발송
 		aeiObjects.getProcessingAttributes().push(Signal.agentInquire(aeiObjects.getWork().getActivityToken(), agent));
 		if (StringUtils.isNotEmpty(aeiObjects.getWork().getDestinationActivity())
 				&& Objects.nonNull(aeiObjects.getWork().getDestinationActivityType())
@@ -68,9 +68,9 @@ public class AgentProcessor extends AbstractAgentProcessor {
 				Route route = new Route();
 				route.setActivity(activity.getId());
 				route.setActivityType(activity.getActivityType());
-				// 清理掉goBackStore
+				// goBackStore 정리
 				aeiObjects.getWork().setGoBackStore(null);
-				// 清理掉退回到的activityToken标志
+				// 반려 대상 activityToken 표시 정리
 				aeiObjects.getWork().setGoBackActivityToken(null);
 				return Optional.of(route);
 			}

@@ -1,9 +1,9 @@
 /**
- * 统一消息推送执行脚本，使用在messages.json配置文件
- * 方法返回boolean类型，true表示满足发送条件且接受对body消息内容的修改，false表示不发送
- * 变量message表示消息体，原始消息的格式{type:'',person,:'',title,'',body:null}，是一个obj对象
- * 变量body表示消息内容，每个消息类型的消息体可能不同，是一个Gson的JsonObject对象
- * 以下excute方法表示拟稿状态的待办不发送消息;excute1方法表示变更或者添加body对象中的modifyFlag参数;excute2方法示例获取message对象的属性值
+ * 통합 메시지 푸시 실행 스크립트, messages.json 설정 파일에서 사용
+ * 메서드는 boolean 타입을 반환하며, true는 발송 조건을 만족하고 body 메시지 내용 수정을 수용함을, false는 발송하지 않음을 의미
+ * 변수 message는 메시지 본문으로, 원본 메시지 형식은 {type:'',person,:'',title,'',body:null}인 obj 객체
+ * 변수 body는 메시지 내용으로, 메시지 유형마다 본문이 다를 수 있으며 Gson의 JsonObject 객체
+ * 아래 excute 메서드는 기안 상태의 결재 대기 메시지를 보내지 않음, excute1 메서드는 body 객체의 modifyFlag 매개변수를 변경 또는 추가, excute2 메서드는 message 객체의 속성값 조회 예시
  */
 function excute() {
     if(body.has("first") && body.has("workCreateType")){

@@ -18,8 +18,8 @@ public class Proxy extends ProxyServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		// 如果没有扩大requestBufferSize那么会有下面的报错.默认为4096增加到32K
-		// 把responseBufferSize也增加到32K,默认16K.
+		// requestBufferSize를 늘리지 않으면 아래 오류 발생. 기본값 4096에서 32K로 증가
+		// responseBufferSize도 32K로 증가, 기본값 16K.
 		// {
 		// "servlet":"com.x.server.console.server.web.Proxy-2d14237e",
 		// "message":"Bad Gateway",

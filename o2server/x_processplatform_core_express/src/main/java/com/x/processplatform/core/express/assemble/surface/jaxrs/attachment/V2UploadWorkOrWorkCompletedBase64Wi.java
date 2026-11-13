@@ -9,16 +9,16 @@ public class V2UploadWorkOrWorkCompletedBase64Wi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5544072979836413166L;
 
-	@FieldDescribe("附件位置.")
-	@Schema(description = "附件位置.")
+	@FieldDescribe("첨부파일 위치.")
+	@Schema(description = "첨부파일 위치.")
 	private String site;
 
-	@FieldDescribe("附件内容,base64编码文本.")
-	@Schema(description = "附件内容,base64编码文本.")
+	@FieldDescribe("첨부파일 내용, base64 인코딩 텍스트.")
+	@Schema(description = "첨부파일 내용, base64 인코딩 텍스트.")
 	private String content;
 
-	@FieldDescribe("文件名.")
-	@Schema(description = "文件名.")
+	@FieldDescribe("파일 이름.")
+	@Schema(description = "파일 이름.")
 	private String fileName;
 
 	public String getSite() {

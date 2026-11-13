@@ -621,7 +621,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
                     }
 
                 }.bind(this),
-                event: "mouseenter" //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+                event: "mouseenter" //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
             }
         }
     },
@@ -706,7 +706,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
                     this.setNormalStye(node, command)
                 }
 
-                var title = (command.title || "");  //+ ( command.key ? (" 快捷键:" + command.key) : "" );
+                var title = (command.title || "");  //+ ( command.key ? (" 단축키:" + command.key) : "" );
                 node.set("title", title);
 
                 if( !event || event=="mouseover" ){
@@ -820,7 +820,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
         if (e.ctrlKey)controlKeys.push("Ctrl");
         if (e.shiftKey)controlKeys.push("Shift");
         if (e.altKey)controlKeys.push("Alt");
-        if (![16, 17, 18].contains(e.keyCode)) { //16 是 Shift, 17 是 Ctrl， 18 是Alt
+        if (![16, 17, 18].contains(e.keyCode)) { //16은 Shift, 17은 Ctrl, 18은 Alt
             return controlKeys.length == 0 ? e.key.capitalize() : ( controlKeys.join(" + ") + " + " + e.key.capitalize() );
         } else {
             return controlKeys.join(" + ");
@@ -1363,7 +1363,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
                     }
                 }
             }.bind(this));
-            //var str = "月份|收入|支出\n"+
+            //var str = "월|수입|지출\n"+
             //    "----|----|---\n"+
             //    "8   |1000|500\n"+
             //    "9   |1200|600\n"+
@@ -1382,8 +1382,8 @@ MWF.xApplication.MinderEditor.Commands = new Class({
         this.previewOpened = true;
     },
     initZoomArea : function( container ){
-        this.editor.contentNode.addEvent("mousewheel", function (ev) { //鼠标滚轮事件
-            if (ev.wheel > 0) { //向上滚动，放大
+        this.editor.contentNode.addEvent("mousewheel", function (ev) { //마우스 휠 이벤트
+            if (ev.wheel > 0) { //위로 스크롤, 확대
                 this.minder.execCommand('zoomIn');
                 if ( this.zoompanIndicator) {
                     var marginTop = parseInt(this.zoompanIndicator.getStyle("margin-top"));
@@ -1391,7 +1391,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
                         this.zoompanIndicator.setStyle("margin-top", (marginTop - 10) + "px");
                     }
                 }
-            } else if(ev.wheel < 0)  {  //向下滚动，缩小
+            } else if(ev.wheel < 0)  {  //아래로 스크롤, 축소
                 this.minder.execCommand('zoomOut');
                 if ( this.zoompanIndicator) {
                     var totalHeight = parseInt(this.zoompan.getStyle("height"));

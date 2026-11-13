@@ -28,7 +28,7 @@ import com.x.correlation.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Correlation", description = "关联内容.")
+@Schema(name = "Correlation", description = "관련 콘텐츠.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Content.Correlation.TABLE, uniqueConstraints = {
@@ -55,12 +55,12 @@ public class Correlation extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
@@ -81,23 +81,23 @@ public class Correlation extends SliceJpaObject {
 	}
 
 	@Transient
-	@FieldDescribe("关联内容标题.")
+	@FieldDescribe("연관 콘텐츠 제목.")
 	private String targetTitle;
 
 	@Transient
-	@FieldDescribe("关联内容分类,processPlatform:流程名称,cms:应用名称.")
+	@FieldDescribe("연관 콘텐츠 분류, processPlatform: 프로세스 이름, cms: 앱 이름.")
 	private String targetCategory;
 
 	@Transient
-	@FieldDescribe("关联内容创建时间")
+	@FieldDescribe("연관 콘텐츠 생성 시간")
 	private Date targetStartTime;
 
 	@Transient
-	@FieldDescribe("关联内容创建人")
+	@FieldDescribe("연관 콘텐츠 생성자")
 	private String targetCreatorPerson;
 
 	@Transient
-	@FieldDescribe("来源视图")
+	@FieldDescribe("출처 뷰")
 	private String view;
 
 	public String getView() {
@@ -157,55 +157,55 @@ public class Correlation extends SliceJpaObject {
 	}
 
 	public static final String FROMTYPE_FIELDNAME = "fromType";
-	@FieldDescribe("源类型cms,processPlatform.")
+	@FieldDescribe("원본 유형 cms, processPlatform.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + FROMTYPE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + FROMTYPE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String fromType;
 
 	public static final String TARGETTYPE_FIELDNAME = "targetType";
-	@FieldDescribe("关联目标类型,cms.processPlatform.")
+	@FieldDescribe("연관 대상 유형, cms.processPlatform.")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + TARGETTYPE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + TARGETTYPE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String targetType;
 
 	public static final String FROMBUNDLE_FIELDNAME = "fromBundle";
-	@FieldDescribe("源标识.")
+	@FieldDescribe("원본 식별자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + FROMBUNDLE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + FROMBUNDLE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String fromBundle;
 
 	public static final String TARGETBUNDLE_FIELDNAME = "targetBundle";
-	@FieldDescribe("关联目标标识.")
+	@FieldDescribe("연관 대상 식별자.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + TARGETBUNDLE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + TARGETBUNDLE_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String targetBundle;
 
 	public static final String PERSON_FIELDNAME = "person";
-	@FieldDescribe("文件所有者")
+	@FieldDescribe("파일 소유자")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + PERSON_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + PERSON_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String SITE_FIELDNAME = "site";
-	@FieldDescribe("关联内容框分类.")
+	@FieldDescribe("연관 콘텐츠 박스 분류.")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + SITE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	@Index(name = TABLE + IndexNameMiddle + SITE_FIELDNAME)
 	private String site;
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
-	@FieldDescribe("排序号,升序排列,为空在最后")
+	@FieldDescribe("정렬 번호, 오름차순, 비어 있으면 마지막")
 	@Column(name = ColumnNamePrefix + orderNumber_FIELDNAME)
 	private Integer orderNumber;
 
 	public static final String PROPERTIES_FIELDNAME = "properties";
-	@Schema(description = "属性存储字段.")
-	@FieldDescribe("属性存储字段.")
+	@Schema(description = "속성 저장 필드.")
+	@FieldDescribe("속성 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + PROPERTIES_FIELDNAME)

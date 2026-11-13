@@ -334,7 +334,7 @@ MWF.xApplication.Attendance.MyAppeal.Appeal = new Class({
                 startTime : {  text: lp.startTime, tType : "datetime" },
                 endTime : {  text:lp.endTime, tType : "datetime" },
                 appealDescription : { text: lp.appealDescriptoin }
-                //opinion1 : { text :"审批意见" }
+                //opinion1 : { text :"결재 의견" }
             }
         }, this.app);
         this.document.load();
@@ -581,7 +581,7 @@ MWF.xApplication.Attendance.MyAppeal.Appeal = new Class({
 //                 startTime : {  text: lp.startTime, tType : "datetime" },
 //                 endTime : {  text:lp.endTime, tType : "datetime" },
 //                 appealDescription : { text: lp.appealDescriptoin }
-//                 //opinion1 : { text :"审批意见" }
+//                 //opinion1 : { text :"결재 의견" }
 //             }
 //         }, this.app,this.css);
 //         this.document.load();

@@ -7,6 +7,6 @@ public class ExceptionGroupNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionGroupNotExists( String name ) {
-		super("群组信息不存在！Group:" + name );
+		super("그룹 정보가 없습니다! Group:" + name );
 	}
 }

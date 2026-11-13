@@ -52,10 +52,10 @@ class ActionRecordItemListPaging extends BaseAction {
 
 		private static final long serialVersionUID = -907555682909071665L;
 
-		@FieldDescribe("导入记录ID.")
+		@FieldDescribe("가져오기 기록 ID.")
 		private String recordId;
 
-		@FieldDescribe("状态：导入成功|导入失败.")
+		@FieldDescribe("상태: 가져오기 성공|가져오기 실패.")
 		private String status;
 
 		public String getRecordId() {

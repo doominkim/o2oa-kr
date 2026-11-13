@@ -56,7 +56,7 @@ public class Merge extends AbstractJob {
 					}
 				}
 			} while (!targets.isEmpty());
-			logger.print("完成{}个已完成工作合并, 耗时:{}.", count.intValue(), stamp.consumingMilliseconds());
+			logger.print("완료된 업무 문서 {}개 병합 완료, 소요 시간:{}.", count.intValue(), stamp.consumingMilliseconds());
 		} catch (Exception e) {
 			throw new JobExecutionException(e);
 		}

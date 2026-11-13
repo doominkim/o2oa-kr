@@ -18,11 +18,11 @@ import com.x.bbs.entity.BBSConfigSetting_;
 
 
 /**
- * 类   名：BBSConfigSettingFactory<br/>
- * 实体类：BBSConfigSetting<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSConfigSettingFactory<br/>
+ * 엔티티 클래스: BBSConfigSetting<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
 **/
 public class BBSConfigSettingFactory extends AbstractFactory {
 
@@ -30,12 +30,12 @@ public class BBSConfigSettingFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSConfigSetting实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSConfigSetting 엔티티 정보 객체 조회" )
 	public BBSConfigSetting get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, BBSConfigSetting.class, ExceptionWhen.none);
 	}
 	
-	//@MethodDescribe( "列示全部的BBSConfigSetting实体信息列表" )
+	//@MethodDescribe( "전체 BBSConfigSetting 엔티티 정보 목록 조회" )
 	@SuppressWarnings("unused")
 	public List<BBSConfigSetting> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSConfigSetting.class);
@@ -45,7 +45,7 @@ public class BBSConfigSettingFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSConfigSetting实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSConfigSetting 엔티티 정보 목록 조회" )
 	public List<BBSConfigSetting> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSConfigSetting>();
@@ -58,7 +58,7 @@ public class BBSConfigSettingFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "根据指定的配置编码获取配置的值" )
+	//@MethodDescribe( "지정한 설정 코드로 설정 값 조회" )
 	public String getValueWithConfigCode(String configCode) throws Exception {
 		if( configCode == null || configCode.isEmpty() ){
 			throw new Exception( "config code is null, can not find any system setting!" );

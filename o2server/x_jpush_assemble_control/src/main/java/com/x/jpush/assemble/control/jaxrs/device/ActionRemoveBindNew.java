@@ -69,7 +69,7 @@ public class ActionRemoveBindNew extends BaseAction {
 			result.setData(wraps);
 		} catch (Exception e) {
 			logger.error(e);
-			throw new IllegalArgumentException("系统在设备解除绑定时发生异常!", e);
+			throw new IllegalArgumentException("기기 연결을 해제하는 중 오류가 발생했습니다!", e);
 		}
 
 		logger.info("action 'ActionRemoveBindNew' execute completed!");

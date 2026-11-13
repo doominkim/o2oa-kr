@@ -65,9 +65,9 @@ class ActionHtmlToImage extends BaseAction {
 		Work work = null;
 		EntityManagerContainer emc = business.entityManagerContainer();
 		if (StringUtils.isNotBlank(wi.getWorkId())) {
-			// 后面要重新保存
+			// 뒤에서 다시 저장해야 함
 			work = emc.find(wi.getWorkId(), Work.class);
-			// 判断work是否存在
+			// work 존재 여부 판단
 			if (null == work) {
 				throw new ExceptionEntityNotExist(wi.getWorkId(), Work.class);
 			}
@@ -164,7 +164,7 @@ class ActionHtmlToImage extends BaseAction {
 		attachment.setPerson(effectivePerson.getDistinguishedName());
 		attachment.setLastUpdatePerson(effectivePerson.getDistinguishedName());
 		attachment.setSite(site);
-		// 用于判断目录的值
+		// 디렉터리 값 판단용
 		attachment.setWorkCreateTime(work.getCreateTime());
 		attachment.setApplication(work.getApplication());
 		attachment.setProcess(work.getProcess());

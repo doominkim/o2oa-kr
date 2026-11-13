@@ -94,16 +94,16 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -125007357898871894L;
 
-		@FieldDescribe("成员群组对象")
+		@FieldDescribe("멤버 그룹 객체")
 		private List<Wo> woGroupList = new ArrayList<>();
 
-		@FieldDescribe("成员个人对象")
+		@FieldDescribe("멤버 개인 객체")
 		private List<WoPerson> woPersonList = new ArrayList<>();
 
-		@FieldDescribe("成员组织对象")
+		@FieldDescribe("멤버 조직 객체")
 		private List<WoUnit> woUnitList = new ArrayList<>();
 
-		@FieldDescribe("成员身份对象")
+		@FieldDescribe("멤버 신분 객체")
 		private List<WoIdentity> woIdentityList = new ArrayList<>();
 
 		static WrapCopier<Group, Wo> copier = WrapCopierFactory.wo(Group.class, Wo.class, null,

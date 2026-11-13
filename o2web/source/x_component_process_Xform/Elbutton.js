@@ -1,17 +1,17 @@
 MWF.xDesktop.requireApp("process.Xform", "$ElModule", null, false);
-/** @class Elbutton 基于Element UI的按钮组件。
- * @o2cn 按钮组件
+/** @class Elbutton Element UI 기반 버튼 컴포넌트.
+ * @o2cn 버튼 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var button = this.form.get("name"); //获取组件
- * //方法2
- * var button = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var button = this.form.get("name"); //컴포넌트 가져오기
+ * //방법 2
+ * var button = this.target; //컴포넌트 이벤트 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/button|Element UI Button 按钮}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/button|Element UI Button 버튼}
  */
 MWF.xApplication.process.Xform.Elbutton = MWF.APPElbutton =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elbutton# */
@@ -19,17 +19,17 @@ MWF.xApplication.process.Xform.Elbutton = MWF.APPElbutton =  new Class(
     Implements: [Events],
     Extends: MWF.APP$ElModule,
     /**
-     * @summary 组件的配置信息，同时也是Vue组件的data。
+     * @summary 컴포넌트 설정 정보이자 Vue 컴포넌트의 data.
      * @member MWF.xApplication.process.Xform.Elbutton#json {JsonObject}
      * @example
-     *  //可以在脚本中获取此对象，下面两行代码是等价的，它们获取的是同一个对象
-     * var json = this.form.get("elbutton").json;       //获取组件的json对象
-     * var json = this.form.get("elbutton").vm.$data;   //获取Vue组件的data数据，
+     *  //스크립트에서 이 객체를 가져올 수 있으며, 아래 두 줄의 코드는 동일한 객체를 가져옴
+     * var json = this.form.get("elbutton").json;       //컴포넌트의 json 객체 조회
+     * var json = this.form.get("elbutton").vm.$data;   //Vue 컴포넌트의 data 데이터 조회,
      *
-     * //通过json对象操作Element组件
-     * json.bttype = "success"; //将按钮样式改为success
-     * json.loading = true;     //将按钮显示为加载中状态
-     * json.disabled = true;    //将按钮设置为禁用
+     * //json 객체로 Element 컴포넌트 조작
+     * json.bttype = "success"; //버튼 스타일을 success로 변경
+     * json.loading = true;     //버튼을 로딩 중 상태로 표시
+     * json.disabled = true;    //버튼을 비활성화
      */
 
     _appendVueData: function(){

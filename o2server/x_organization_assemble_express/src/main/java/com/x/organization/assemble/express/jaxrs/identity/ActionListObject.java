@@ -173,16 +173,16 @@ class ActionListObject extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private List<String> identityList = new ArrayList<>();
 
-		@FieldDescribe("是否关联查询身份所属组织、角色信息")
+		@FieldDescribe("신분 소속 조직·역할 정보 연관 조회 여부")
 		private Boolean referenceFlag;
 
-		@FieldDescribe("是否关联查询身份所属群组信息")
+		@FieldDescribe("신분 소속 그룹 정보 연관 조회 여부")
 		private Boolean referenceGroupFlag;
 
-		@FieldDescribe("是否递归查询上级组织或群组，默认false")
+		@FieldDescribe("상위 조직 또는 그룹 재귀 조회 여부, 기본값 false")
 		private Boolean recursiveFlag;
 
 		public List<String> getIdentityList() {
@@ -225,16 +225,16 @@ class ActionListObject extends BaseAction {
 		static WrapCopier<Identity, Wo> copier = WrapCopierFactory.wo(Identity.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible));
 
-		@FieldDescribe("匹配字段")
+		@FieldDescribe("일치 필드")
 		private String matchKey;
 
-		@FieldDescribe("组织对象")
+		@FieldDescribe("조직 객체")
 		private WoUnit woUnit;
 
-		@FieldDescribe("组织职务对象")
+		@FieldDescribe("조직 직무 객체")
 		private List<WoUnitDuty> woUnitDutyList;
 
-		@FieldDescribe("群组对象")
+		@FieldDescribe("그룹 객체")
 		private List<WoGroup> woGroupList;
 
 		public String getMatchKey() {
@@ -277,7 +277,7 @@ class ActionListObject extends BaseAction {
 		static WrapCopier<Unit, WoUnit> copier = WrapCopierFactory.wo(Unit.class, WoUnit.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible, Unit.controllerList_FIELDNAME));
 
-		@FieldDescribe("上级组织对象.")
+		@FieldDescribe("상위 조직 객체.")
 		private WoUnit woSupDirectUnit;
 
 		private List<String> unitIdList;
@@ -303,7 +303,7 @@ class ActionListObject extends BaseAction {
 
 		private static final long serialVersionUID = -2375022310349169180L;
 
-		@FieldDescribe("组织对象")
+		@FieldDescribe("조직 객체")
 		private WoUnit woUnit;
 
 		static WrapCopier<UnitDuty, WoUnitDuty> copier = WrapCopierFactory.wo(UnitDuty.class, WoUnitDuty.class, null,
@@ -322,7 +322,7 @@ class ActionListObject extends BaseAction {
 
 		private static final long serialVersionUID = 1430979713075568834L;
 
-		@FieldDescribe("上级群组对象列表.")
+		@FieldDescribe("상위 그룹 객체 목록.")
 		private List<WoGroup> woSupGroupList;
 
 		static WrapCopier<Group, WoGroup> copier = WrapCopierFactory.wo(Group.class, WoGroup.class, null,

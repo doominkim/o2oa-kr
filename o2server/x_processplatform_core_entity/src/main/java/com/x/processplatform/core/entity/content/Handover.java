@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author sword
  */
-@Schema(name = "Handover", description = "权限交接.")
+@Schema(name = "Handover", description = "권한 인계.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Content.Handover.table, uniqueConstraints = {
@@ -48,7 +48,7 @@ public class Handover extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -82,33 +82,33 @@ public class Handover extends SliceJpaObject {
 	}
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("标题.")
+	@FieldDescribe("제목.")
 	@Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String creator_FIELDNAME = "creator";
-	@FieldDescribe("创建用户.")
+	@FieldDescribe("생성 사용자.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + creator_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creator;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("用户.")
+	@FieldDescribe("사용자.")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String targetPerson_FIELDNAME = "targetPerson";
-	@FieldDescribe("目标用户.")
+	@FieldDescribe("대상 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + targetPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String targetPerson;
 
 	public static final String targetIdentity_FIELDNAME = "targetIdentity";
-	@FieldDescribe("目标用户身份.")
+	@FieldDescribe("대상 사용자 신분.")
 	@Column(length = length_255B, name = ColumnNamePrefix + targetIdentity_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + targetIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
@@ -121,19 +121,19 @@ public class Handover extends SliceJpaObject {
 	private String type;
 
 	public static final String scheme_FIELDNAME = "scheme";
-	@FieldDescribe("权限交接方案：all|所有有权限的文档(默认)、application|指定应用下有权限的文档、process|指定流程下有权限的文档、job|指定有权限的文档.")
+	@FieldDescribe("권한 인계 방안: all|권한이 있는 모든 문서(기본값), application|지정 앱 내 권한이 있는 문서, process|지정 프로세스 내 권한이 있는 문서, job|지정된 권한이 있는 문서.")
 	@Column(length = length_64B, name = ColumnNamePrefix + scheme_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String scheme;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态：wait：待运行|processing：运行中|processed：运行完成|cancel：已取消.")
+	@FieldDescribe("상태: wait: 실행 대기|processing: 실행 중|processed: 실행 완료|cancel: 취소됨.")
 	@Column(length = length_64B, name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String status;
 
 	public static final String handoverJobList_FIELDNAME = "handoverJobList";
-	@FieldDescribe("已交接的文档列表.")
+	@FieldDescribe("인계된 문서 목록.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
 			+ handoverJobList_FIELDNAME, joinIndex = @Index(name = TABLE + IndexNameMiddle + handoverJobList_FIELDNAME
@@ -145,22 +145,22 @@ public class Handover extends SliceJpaObject {
 	private List<String> handoverJobList;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private HandoverProperties properties;
 
-	@FieldDescribe("应用列表.")
+	@FieldDescribe("앱 목록.")
 	@Transient
 	private List<String> applicationList;
 
-	@FieldDescribe("流程列表.")
+	@FieldDescribe("프로세스 목록.")
 	@Transient
 	private List<String> processList;
 
-	@FieldDescribe("工作列表.")
+	@FieldDescribe("업무 문서 목록.")
 	@Transient
 	private List<String> jobList;
 

@@ -14,7 +14,7 @@ public class ExternalDataSource extends ConfigObject {
 
     private static final long serialVersionUID = -2098883883740436217L;
 
-	// 无需保存
+	// 저장 불필요
     private transient String _password;
 
     public ExternalDataSource() {
@@ -63,7 +63,7 @@ public class ExternalDataSource extends ConfigObject {
     public static final Integer DEFAULT_MAXIDLETIME = 300;
 
     public static final Boolean DEFAULT_AUTOCOMMIT = false;
-    // 20240428修改为空值,取消默认的SCHEMA这样可以手工适陪各种postgres变种版本.
+    // 20240428 빈 값으로 변경, 기본 SCHEMA를 취소하여 다양한 postgres 변형 버전에 수동으로 맞출 수 있게 함.
     // public static final String DEFAULT_SCHEMA = "X";
     public static final String DEFAULT_SCHEMA = "";
 
@@ -95,51 +95,51 @@ public class ExternalDataSource extends ConfigObject {
         return o;
     }
 
-    @FieldDescribe("是否启用,如果启用多个数据库,那么必须是相同类型的,不能混用,且用户名密码必须一致.")
+    @FieldDescribe("사용 여부, 여러 데이터베이스를 사용하면 같은 유형이어야 하고 혼용할 수 없으며 사용자 이름과 비밀번호가 같아야 함.")
     private Boolean enable;
-    @FieldDescribe("jdbc连接地址.")
+    @FieldDescribe("jdbc 연결 주소.")
     private String url;
-    @FieldDescribe("数据库jdbc连接用户名.")
+    @FieldDescribe("데이터베이스 jdbc 연결 사용자 이름.")
     private String username;
-    @FieldDescribe("数据库jdbc连接密码.")
+    @FieldDescribe("데이터베이스 jdbc 연결 비밀번호.")
     private String password;
-    @FieldDescribe("数据库驱动类名.")
+    @FieldDescribe("데이터베이스 드라이버 클래스 이름.")
     private String driverClassName;
-    @FieldDescribe("方言类.")
+    @FieldDescribe("방언 클래스.")
     private String dictionary;
-    @FieldDescribe("最大使用连接数.")
+    @FieldDescribe("최대 사용 연결 수.")
     private Integer maxTotal;
-    @FieldDescribe("最大空闲连接数.")
+    @FieldDescribe("최대 유휴 연결 수.")
     private Integer maxIdle;
-    @FieldDescribe("启用统计,默认启用.")
+    @FieldDescribe("통계 사용, 기본값 사용.")
     private Boolean statEnable;
-    @FieldDescribe("统计方式配置,默认mergeStat.")
+    @FieldDescribe("통계 방식 설정, 기본값 mergeStat.")
     private String statFilter;
-    @FieldDescribe("设置此数据库存储的类,默认情况下存储所有类型,如果需要对每个类进行单独的控制以达到高性能,可以将不同的类存储到不同的节点上提高性能.可以使用通配符*.")
+    @FieldDescribe("이 데이터베이스에 저장할 클래스 설정, 기본적으로 모든 유형을 저장하며, 고성능을 위해 클래스별로 개별 제어가 필요하면 다른 클래스를 다른 노드에 저장하여 성능을 높일 수 있음. 와일드카드 * 사용 가능.")
     private List<String> includes;
-    @FieldDescribe("在此节点上不存储的类,和includes一起设置实际存储的类,可以使用通配符*.")
+    @FieldDescribe("이 노드에 저장하지 않을 클래스, includes와 함께 실제 저장 클래스를 설정, 와일드카드 * 사용 가능.")
     private List<String> excludes;
-    @FieldDescribe("默认日志级别,FATAL, ERROR, WARN, INFO, TRACE. 完整的配置为DefaultLevel=WARN, Tool=TRACE, Enhance=TRACE, METADATA=TRACE, Runtime=TRACE, Query=TRACE, DataCache=TRACE, JDBC=TRACE, SQL=TRACE.")
+    @FieldDescribe("기본 로그 레벨, FATAL, ERROR, WARN, INFO, TRACE. 전체 설정은 DefaultLevel=WARN, Tool=TRACE, Enhance=TRACE, METADATA=TRACE, Runtime=TRACE, Query=TRACE, DataCache=TRACE, JDBC=TRACE, SQL=TRACE.")
     private String logLevel = DEFAULT_LOGLEVEL;
-    @FieldDescribe("事务隔离级别:default,none,read-uncommitted,read-committed,repeatable-read,serializable.默认使用default(数据库设置的事务级别).")
+    @FieldDescribe("트랜잭션 격리 수준: default, none, read-uncommitted, read-committed, repeatable-read, serializable. 기본값 default(데이터베이스에 설정된 트랜잭션 수준).")
     private String transactionIsolation;
-    @FieldDescribe("测试入池连接,默认false.")
+    @FieldDescribe("풀 진입 연결 테스트, 기본값 false.")
     private Boolean testConnectionOnCheckin;
-    @FieldDescribe("测试出池连接,默认false.")
+    @FieldDescribe("풀 반출 연결 테스트, 기본값 false.")
     private Boolean testConnectionOnCheckout;
-    @FieldDescribe("空闲阈值,默认300秒.")
+    @FieldDescribe("유휴 임계값, 기본값 300초.")
     private Integer maxIdleTime;
-    @FieldDescribe("自动提交,默认为false.")
+    @FieldDescribe("자동 커밋, 기본값 false.")
     private Boolean autoCommit = DEFAULT_AUTOCOMMIT;
-    @FieldDescribe("模式.")
+    @FieldDescribe("스키마.")
     private String schema = DEFAULT_SCHEMA;
-    @FieldDescribe("启用记录统计日志.")
+    @FieldDescribe("통계 로그 기록 사용.")
     private Boolean logStatEnable;
-    @FieldDescribe("统计日志输出间隔,单位分钟,默认180.")
+    @FieldDescribe("통계 로그 출력 간격, 단위 분, 기본값 180.")
     private Integer logStatInterval;
-    @FieldDescribe("是否启用执行慢sql记录.")
+    @FieldDescribe("느린 sql 실행 기록 사용 여부.")
     private Boolean slowSqlEnable;
-    @FieldDescribe("执行慢sql记录阈值,毫秒数,默认3000毫秒.")
+    @FieldDescribe("느린 sql 실행 기록 임계값, 밀리초, 기본값 3000밀리초.")
     private Integer slowSqlThreshold;
 
     public Boolean getLogStatEnable() {

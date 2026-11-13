@@ -80,10 +80,10 @@ public class ActionListAllAppType extends BaseAction {
 	}
 
 	public static class Wo extends GsonPropertyObject {
-		@FieldDescribe("栏目类别名称")
+		@FieldDescribe("게시판 유형 이름")
 		private String appType;
 
-		@FieldDescribe("栏目数量")
+		@FieldDescribe("게시판 수")
 		private Integer count;
 
 		public Wo( String _appType, Integer _count ) {

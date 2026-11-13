@@ -24,12 +24,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("personattribute")
-@JaxrsDescribe("个人属性接口")
+@JaxrsDescribe("사용자 속성 API")
 public class PersonAttributeAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PersonAttributeAction.class);
 
-	@JaxrsMethodDescribe(value = "查询个人属性的值.", action = ActionListAttributeWithPersonWithName.class)
+	@JaxrsMethodDescribe(value = "사용자 속성값 조회.", action = ActionListAttributeWithPersonWithName.class)
 	@POST
 	@Path("list/attribute/person/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -47,7 +47,7 @@ public class PersonAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "批量根据个人查询个人属性名称", action = ActionListNameWithPerson.class)
+	@JaxrsMethodDescribe(value = "사용자 기준으로 사용자 속성 이름 일괄 조회", action = ActionListNameWithPerson.class)
 	@POST
 	@Path("list/name/person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -65,7 +65,7 @@ public class PersonAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "覆盖个人属性值.", action = ActionSetWithPersonWithName.class)
+	@JaxrsMethodDescribe(value = "사용자 속성값 덮어쓰기.", action = ActionSetWithPersonWithName.class)
 	@POST
 	@Path("set/person/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -83,7 +83,7 @@ public class PersonAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "添加个人属性值.", action = ActionAppendWithPersonWithName.class)
+	@JaxrsMethodDescribe(value = "사용자 속성값 추가.", action = ActionAppendWithPersonWithName.class)
 	@POST
 	@Path("append/person/name")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -101,7 +101,7 @@ public class PersonAttributeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "根据个人查询个人属性对象.", action = ActionListWithPersonObject.class)
+	@JaxrsMethodDescribe(value = "사용자 기준으로 사용자 속성 객체 조회.", action = ActionListWithPersonObject.class)
 	@POST
 	@Path("list/person/object")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

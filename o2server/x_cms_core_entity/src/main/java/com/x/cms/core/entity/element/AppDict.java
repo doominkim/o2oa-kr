@@ -24,7 +24,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AppDict", description = "内容管理字典.")
+@Schema(name = "AppDict", description = "콘텐츠 관리 사전.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Element.AppDict.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class AppDict extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -54,43 +54,43 @@ public class AppDict extends SliceJpaObject {
 
 	}
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("栏目ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + appId_FIELDNAME)
 	@CheckPersist(citationExists = {
-			/* 检查关联的Application需存在 */
+			/* 연결된 Application 존재 여부 확인 */
 			@CitationExist(type = AppInfo.class) })
 	private String appId;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("字典名称.")
+	@FieldDescribe("사전 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(citationNotExists =
-	/* 同一个应用下不能有重名 */
+	/* 같은 앱 안에서 이름 중복 불가 */
 	@CitationNotExist(fields = { "id", "alias",
 			"name" }, type = AppDict.class, equals = @Equal(property = "appId", field = "appId")))
 	private String name;
 
 	public static final String alias_FIELDNAME = "alias";
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ alias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + alias_FIELDNAME)
 	@CheckPersist(citationNotExists =
-	/* 同一个应用下不能有重名 */
+	/* 같은 앱 안에서 이름 중복 불가 */
 	@CitationNotExist(fields = { "id", "alias",
 			"name" }, type = AppDict.class, equals = @Equal(property = "appId", field = "appId")))
 	private String alias;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明.")
+	@FieldDescribe("설명.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ description_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + description_FIELDNAME)
@@ -98,7 +98,7 @@ public class AppDict extends SliceJpaObject {
 	private String description;
 
 	public static final String creatorUid_FIELDNAME = "creatorUid";
-	@FieldDescribe("信息创建人UID")
+	@FieldDescribe("정보 작성자 UID")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + creatorUid_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + creatorUid_FIELDNAME)
 	private String creatorUid;

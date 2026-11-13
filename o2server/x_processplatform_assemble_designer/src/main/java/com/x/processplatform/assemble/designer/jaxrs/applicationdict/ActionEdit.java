@@ -58,7 +58,7 @@ class ActionEdit extends BaseAction {
 			for (ApplicationDictItem o : adds) {
 				o.setItemCategory(ItemCategory.pp_dict);
 				o.setBundle(dict.getId());
-				/** 将数据字典和数据存放在同一个分区 */
+				/** 데이터 사전과 데이터를 같은 파티션에 저장 */
 				o.setDistributeFactor(dict.getDistributeFactor());
 				o.setApplication(application.getId());
 				emc.persist(o, CheckPersistType.all);
@@ -84,7 +84,7 @@ class ActionEdit extends BaseAction {
 				Arrays.asList(JpaObject.createTime_FIELDNAME, JpaObject.updateTime_FIELDNAME,
 						JpaObject.sequence_FIELDNAME, JpaObject.distributeFactor_FIELDNAME));
 
-		@FieldDescribe("字典数据(json格式).")
+		@FieldDescribe("사전 데이터(json 형식).")
 		private JsonElement data;
 
 		public JsonElement getData() {

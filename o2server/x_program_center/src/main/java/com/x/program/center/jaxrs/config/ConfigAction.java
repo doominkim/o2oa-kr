@@ -40,7 +40,7 @@ public class ConfigAction extends StandardJaxrsAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConfigAction.class);
 	private static final String OPERATIONID_PREFIX = "ConfigAction::";
 
-	@JaxrsMethodDescribe(value = "获取设置.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "설정 조회.", action = ActionGet.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -56,7 +56,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取人员设置.", action = ActionGetPerson.class)
+	@JaxrsMethodDescribe(value = "사용자 설정 조회.", action = ActionGetPerson.class)
 	@GET
 	@Path("person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -73,7 +73,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新人员设置.", action = ActionSetPerson.class)
+	@JaxrsMethodDescribe(value = "사용자 설정 업데이트.", action = ActionSetPerson.class)
 	@PUT
 	@Path("person")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -91,7 +91,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取密钥设置.", action = ActionGetToken.class)
+	@JaxrsMethodDescribe(value = "키 설정 조회.", action = ActionGetToken.class)
 	@GET
 	@Path("token")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -108,7 +108,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新密钥设置.", action = ActionSetToken.class)
+	@JaxrsMethodDescribe(value = "키 설정 업데이트.", action = ActionSetToken.class)
 	@PUT
 	@Path("token")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -126,7 +126,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取云服务器设置.", action = ActionGetCollect.class)
+	@JaxrsMethodDescribe(value = "클라우드 서버 설정 조회.", action = ActionGetCollect.class)
 	@GET
 	@Path("collect")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -143,7 +143,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新云服务器设置.", action = ActionSetCollect.class)
+	@JaxrsMethodDescribe(value = "클라우드 서버 설정 업데이트.", action = ActionSetCollect.class)
 	@PUT
 	@Path("collect")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -161,7 +161,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取中心服务器设置.", action = ActionGetCenterServer.class)
+	@JaxrsMethodDescribe(value = "중앙 서버 설정 조회.", action = ActionGetCenterServer.class)
 	@GET
 	@Path("centerserver")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -178,7 +178,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新中心服务器设置.", action = ActionSetCenterServer.class)
+	@JaxrsMethodDescribe(value = "중앙 서버 설정 업데이트.", action = ActionSetCenterServer.class)
 	@PUT
 	@Path("centerserver")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -196,7 +196,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取代理配置.", action = ActionGetProxy.class)
+	@JaxrsMethodDescribe(value = "프록시 설정 조회.", action = ActionGetProxy.class)
 	@GET
 	@Path("proxy")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -213,7 +213,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新代理配置.", action = ActionSetProxy.class)
+	@JaxrsMethodDescribe(value = "프록시 설정 업데이트.", action = ActionSetProxy.class)
 	@PUT
 	@Path("proxy")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -231,7 +231,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取门户配置.", action = ActionGetPortal.class)
+	@JaxrsMethodDescribe(value = "포털 설정 조회.", action = ActionGetPortal.class)
 	@GET
 	@Path("portal")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -248,7 +248,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新门户配置.", action = ActionSetPortal.class)
+	@JaxrsMethodDescribe(value = "포털 설정 업데이트.", action = ActionSetPortal.class)
 	@PUT
 	@Path("portal")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -266,7 +266,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取所有配置文件信息", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "모든 설정 파일 정보 조회", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -283,7 +283,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "打开config文件", action = ActionOpen.class)
+	@JaxrsMethodDescribe(value = "config 파일 열기", action = ActionOpen.class)
 	@POST
 	@Path("open")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -301,7 +301,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "打开运行环境的config文件", action = ActionOpenRuntimeConfig.class)
+	@JaxrsMethodDescribe(value = "실행 환경의 config 파일 열기", action = ActionOpenRuntimeConfig.class)
 	@POST
 	@Path("open/run/time/config")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -319,7 +319,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "保存config文件", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "config 파일 저장", action = ActionSave.class)
 	@POST
 	@Path("save")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -337,7 +337,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "获取三元管理设置.", action = ActionGetTernaryManagement.class)
+	@JaxrsMethodDescribe(value = "삼원 관리 설정 조회.", action = ActionGetTernaryManagement.class)
 	@GET
 	@Path("ternary/management")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -355,7 +355,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新三元管理设置.", action = ActionSetTernaryManagement.class)
+	@JaxrsMethodDescribe(value = "삼원 관리 설정 업데이트.", action = ActionSetTernaryManagement.class)
 	@POST
 	@Path("ternary/management")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -373,7 +373,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "更改管理员密码.", action = ActionChangePassword.class)
+	@JaxrsMethodDescribe(value = "관리자 비밀번호 변경.", action = ActionChangePassword.class)
 	@POST
 	@Path("change/password")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -391,10 +391,10 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@Operation(summary = "列示所有可配置实体类名称.", operationId = OPERATIONID_PREFIX + "listEntity", responses = {
+	@Operation(summary = "설정 가능한 모든 엔티티 클래스 이름 나열.", operationId = OPERATIONID_PREFIX + "listEntity", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListEntity.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示所有可配置实体类名称.", action = ActionListEntity.class)
+	@JaxrsMethodDescribe(value = "설정 가능한 모든 엔티티 클래스 이름 나열.", action = ActionListEntity.class)
 	@GET
 	@Path("list/entity")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -411,10 +411,10 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示所有可配置应用名称.", operationId = OPERATIONID_PREFIX + "listApplication", responses = {
+	@Operation(summary = "설정 가능한 모든 앱 이름 나열.", operationId = OPERATIONID_PREFIX + "listApplication", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListApplication.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示所有可配置应用名称.", action = ActionListApplication.class)
+	@JaxrsMethodDescribe(value = "설정 가능한 모든 앱 이름 나열.", action = ActionListApplication.class)
 	@GET
 	@Path("list/application")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -431,10 +431,10 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示所有节点数据备份.", operationId = OPERATIONID_PREFIX + "listDumpData", responses = {
+	@Operation(summary = "모든 노드 데이터 백업 나열.", operationId = OPERATIONID_PREFIX + "listDumpData", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListDumpData.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示所有节点数据备份.", action = ActionListDumpData.class)
+	@JaxrsMethodDescribe(value = "모든 노드 데이터 백업 나열.", action = ActionListDumpData.class)
 	@GET
 	@Path("list/dump/data")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -451,10 +451,10 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "列示本节点数据备份.", operationId = OPERATIONID_PREFIX + "listDumpDataCurrentNode", responses = {
+	@Operation(summary = "현재 노드 데이터 백업 나열.", operationId = OPERATIONID_PREFIX + "listDumpDataCurrentNode", responses = {
 			@ApiResponse(content = {
 					@Content(array = @ArraySchema(schema = @Schema(implementation = ActionListDumpDataCurrentNode.Wo.class))) }) })
-	@JaxrsMethodDescribe(value = "列示本节点数据备份.", action = ActionListDumpDataCurrentNode.class)
+	@JaxrsMethodDescribe(value = "현재 노드 데이터 백업 나열.", action = ActionListDumpDataCurrentNode.class)
 	@GET
 	@Path("list/dump/data/current/node")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -472,7 +472,7 @@ public class ConfigAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取当前产品的license信息.", action = ActionGetLicenseInfo.class)
+	@JaxrsMethodDescribe(value = "현재 제품의 license 정보 조회.", action = ActionGetLicenseInfo.class)
 	@GET
 	@Path("license")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -252,7 +252,7 @@ public class Business {
             return true;
         }
         Query q = this.entityManagerContainer().find(view.getQuery(), Query.class);
-        // 在所属query的管理人员中
+        // 소속 query의 관리자 목록에 포함
         if (null != q && ListTools.contains(q.getControllerList(), effectivePerson.getDistinguishedName())) {
             return true;
         }
@@ -279,7 +279,7 @@ public class Business {
             return true;
         }
         Query q = this.entityManagerContainer().find(stat.getQuery(), Query.class);
-        // 在所属query的管理人员中
+        // 소속 query의 관리자 목록에 포함
         if (null != q && ListTools.contains(q.getControllerList(), effectivePerson.getDistinguishedName())) {
             return true;
         }
@@ -312,7 +312,7 @@ public class Business {
             return true;
         }
         Query q = this.entityManagerContainer().find(statement.getQuery(), Query.class);
-        // 在所属query的管理人员中
+        // 소속 query의 관리자 목록에 포함
         if (null != q && ListTools.contains(q.getControllerList(), effectivePerson.getDistinguishedName())) {
             return true;
         }
@@ -363,7 +363,7 @@ public class Business {
             return true;
         }
         Query q = this.entityManagerContainer().find(model.getQuery(), Query.class);
-        // 在所属query的管理人员中
+        // 소속 query의 관리자 목록에 포함
         if (null != q && ListTools.contains(q.getControllerList(), effectivePerson.getDistinguishedName())) {
             return true;
         }

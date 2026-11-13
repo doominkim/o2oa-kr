@@ -31,7 +31,7 @@ public class IndexFactory extends AbstractFactory {
     }
 
     /**
-     * 判断当前用户,如果是管理员或者服务器那么强制返回指定用户
+     * 현재 사용자 판단, 관리자 또는 서버이면 지정 사용자를 강제로 반환
      * 
      * @param effectivePerson
      * @param person
@@ -55,7 +55,7 @@ public class IndexFactory extends AbstractFactory {
     }
 
     /**
-     * 根据将访问的目录填充用户所有权限,通过是否在可管理人员列表中进行判断,如果是系统管理员直接返回null,在后续的搜索中表示没有任何限制.
+     * 접근할 디렉터리에 따라 사용자의 모든 권한을 채움, 관리 가능 사용자 목록 포함 여부로 판단, 시스템 관리자면 바로 null을 반환하여 이후 검색에서 제한 없음을 의미.
      * 
      * @param person
      * @param category

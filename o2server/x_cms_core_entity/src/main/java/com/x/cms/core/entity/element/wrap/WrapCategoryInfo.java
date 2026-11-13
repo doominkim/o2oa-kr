@@ -10,7 +10,7 @@ public class WrapCategoryInfo extends CategoryInfo {
 
 	private static final long serialVersionUID = 1439909268641168987L;
 
-	@FieldDescribe("分类扩展信息")
+	@FieldDescribe("분류 확장 정보")
 	private WrapCategoryExt categoryExt;
 
 	public static WrapCopier<CategoryInfo, WrapCategoryInfo> outCopier = WrapCopierFactory.wo(CategoryInfo.class, WrapCategoryInfo.class,

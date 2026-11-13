@@ -31,7 +31,7 @@ public class ActionListRoom extends BaseAction {
 	public ActionResult<List<Wo>> execute() throws Exception {
 		ActionResult<List<Wo>> result = new ActionResult<>();
 		List<Wo> wos = new ArrayList<>();
-		/* 如果启用了再加载 */
+		/* 사용 중이면 다시 로드 */
 		if (BooleanUtils.isTrue(Config.meeting().getEnable())) {
 			String sid = this.login();
 			String address = Config.meeting().getHttpProtocol() + "://" + Config.meeting().getHost() + ":"

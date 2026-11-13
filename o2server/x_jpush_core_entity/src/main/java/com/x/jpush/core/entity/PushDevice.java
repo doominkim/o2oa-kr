@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * Copyright © 2021 O2. All rights reserved.
  */
 
-@Schema(name = "PushDevice", description = "消息推送设备.")
+@Schema(name = "PushDevice", description = "메시지 푸시 기기.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.PushDevice.table, uniqueConstraints = {
@@ -44,7 +44,7 @@ public class PushDevice extends SliceJpaObject {
 
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -62,42 +62,42 @@ public class PushDevice extends SliceJpaObject {
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
 
     private static final String deviceId_FIELDNAME = "deviceId";
-    @FieldDescribe("设备id，发送推送消息用的设备唯一编码")
+    @FieldDescribe("기기 id(푸시 메시지 발송용 기기 고유 코드)")
     @Column(name = ColumnNamePrefix + deviceId_FIELDNAME, length = JpaObject.length_255B)
     @Index(name = TABLE + IndexNameMiddle + deviceId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String deviceId;
 
-    //推送通道类型
+    //푸시 채널 유형
     public static final String DEVICE_TYPE_IOS = "ios";
     public static final String DEVICE_TYPE_ANDROID = "android";
 
     private static final String deviceType_FIELDNAME = "deviceType";
-    @FieldDescribe("设备类型：ios|android")
+    @FieldDescribe("기기 유형: ios|android")
     @Column(name = ColumnNamePrefix + deviceType_FIELDNAME, length = JpaObject.length_16B)
     @Index(name = TABLE + IndexNameMiddle + deviceType_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String deviceType;
 
-    //推送通道类型
-    public static final String PUSH_TYPE_JPUSH = "jpush"; // 极光推送
-    public static final String PUSH_TYPE_HUAWEI = "huawei"; // 华为推送
+    //푸시 채널 유형
+    public static final String PUSH_TYPE_JPUSH = "jpush"; // JPush 푸시
+    public static final String PUSH_TYPE_HUAWEI = "huawei"; // 화웨이 푸시
 
     private static final String pushType_FIELDNAME = "pushType";
-    @FieldDescribe("推送通道类型：jpush|huawei")
+    @FieldDescribe("푸시 채널 유형: jpush|huawei")
     @Column(name = ColumnNamePrefix + pushType_FIELDNAME, length = JpaObject.length_16B)
     @Index(name = TABLE + IndexNameMiddle + pushType_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String pushType;
 
     private static final String person_FIELDNAME = "person";
-    @FieldDescribe("人员标识")
+    @FieldDescribe("인원 식별자")
     @Column(name = ColumnNamePrefix + person_FIELDNAME, length = JpaObject.length_255B)
     @Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
     @CheckPersist(allowEmpty = false)
@@ -105,7 +105,7 @@ public class PushDevice extends SliceJpaObject {
 
 
     private static final String unique_FIELDNAME = "unique";
-    @FieldDescribe("唯一编码，md5(deviceType+deviceId+pushType+person)")
+    @FieldDescribe("고유 코드, md5(deviceType+deviceId+pushType+person)")
     @Column(name = ColumnNamePrefix + unique_FIELDNAME, length = JpaObject.length_255B)
     @Index(name = TABLE + IndexNameMiddle + unique_FIELDNAME)
     @CheckPersist(allowEmpty = false)

@@ -14,7 +14,7 @@ import com.x.cms.core.entity.CategoryInfo;
 
 public class SearchService {
 
-	// @MethodDescribe("根据用户列出所有可见的已发布文档涉及的应用栏目以及文档数量")
+	// @MethodDescribe("사용자별로 열람 가능한 모든 게시 문서에 관련된 앱 게시판과 문서 수 나열")
 	public List<AppFilter> listAppInfoSearchFilter(EntityManagerContainer emc, List<String> app_ids, String docStatus,
 			String categoryId) throws Exception {
 		if (app_ids == null) {
@@ -26,7 +26,7 @@ public class SearchService {
 		AppInfo appInfo = null;
 		Business business = new Business(emc);
 
-		// 先distinct用户可以访问的文档涉及到多少个可以访问的应用栏目
+		// 먼저 사용자가 접근 가능한 문서에 관련된 접근 가능한 앱 게시판 수를 distinct
 		appids_user = business.getSearchFactory().listDistinctAppInfoFromDocument(app_ids, docStatus, categoryId);
 		if (appids_user != null && appids_user.size() > 0) {
 			for (String appid : appids_user) {
@@ -41,7 +41,7 @@ public class SearchService {
 		return appFilterList;
 	}
 
-	// @MethodDescribe("根据用户列出所有可见的已发布文档涉及的应用分类以及文档数量")
+	// @MethodDescribe("사용자별로 열람 가능한 모든 게시 문서에 관련된 앱 분류와 문서 수 나열")
 	public List<CategoryFilter> listCategorySearchFilter(EntityManagerContainer emc, List<String> app_ids,
 			String docStatus, String categoryId) throws Exception {
 		if (app_ids == null) {
@@ -53,7 +53,7 @@ public class SearchService {
 		CategoryInfo categoryInfo = null;
 		AppInfo appInfo = null;
 		Business business = new Business(emc);
-		// 先distinct用户可以访问的文档涉及到多少个可以访问的分类
+		// 먼저 사용자가 접근 가능한 문서에 관련된 접근 가능한 분류 수를 distinct
 		categoryids_user = business.getSearchFactory().listDistinctCategoryFromDocument(app_ids, docStatus, categoryId);
 		if (categoryids_user != null && categoryids_user.size() > 0) {
 			for (String _categoryId : categoryids_user) {
@@ -72,7 +72,7 @@ public class SearchService {
 		return categoryFilterList;
 	}
 
-	// @MethodDescribe("根据用户列出所有可见的已发布文档涉及的拟稿顶层组织以及文档数量")
+	// @MethodDescribe("사용자별로 열람 가능한 모든 게시 문서에 관련된 기안 최상위 조직과 문서 수 나열")
 	public List<TopUnitNameFilter> listTopUnitNameSearchFilter(EntityManagerContainer emc, List<String> app_ids,
 			String docStatus, String categoryId) throws Exception {
 		if (app_ids == null) {
@@ -82,11 +82,11 @@ public class SearchService {
 		TopUnitNameFilter topUnitFilter = null;
 		List<String> topUnitNames = null;
 		Business business = new Business(emc);
-		// 先distinct用户可以访问的文档涉及到多少个可以访问的分类
+		// 먼저 사용자가 접근 가능한 문서에 관련된 접근 가능한 분류 수를 distinct
 		topUnitNames = business.getSearchFactory().listDistinctTopUnitNameFromDocument(app_ids, docStatus, categoryId);
 		if (topUnitNames != null && topUnitNames.size() > 0) {
 			for (String creatorTopUnitName : topUnitNames) {
-				// 循环进行数据统计
+				// 반복하여 데이터 통계
 				topUnitFilter = new TopUnitNameFilter(creatorTopUnitName, creatorTopUnitName,
 						business.getSearchFactory().getTopUnitDocumentCount(app_ids, creatorTopUnitName, docStatus,
 								categoryId));
@@ -96,7 +96,7 @@ public class SearchService {
 		return topUnitFilterList;
 	}
 
-	// @MethodDescribe("根据用户列出所有可见的已发布文档涉及的拟稿组织以及文档数量")
+	// @MethodDescribe("사용자별로 열람 가능한 모든 게시 문서에 관련된 기안 조직과 문서 수 나열")
 	public List<UnitNameFilter> listUnitNameSearchFilter(EntityManagerContainer emc, List<String> app_ids,
 			String docStatus, String categoryId) throws Exception {
 		if (app_ids == null) {
@@ -106,11 +106,11 @@ public class SearchService {
 		UnitNameFilter unitNameFilter = null;
 		List<String> unitNames = null;
 		Business business = new Business(emc);
-		// 先distinct用户可以访问的文档涉及到多少个可以访问的分类
+		// 먼저 사용자가 접근 가능한 문서에 관련된 접근 가능한 분류 수를 distinct
 		unitNames = business.getSearchFactory().listDistinctUnitNameFromDocument(app_ids, docStatus, categoryId);
 		if (unitNames != null && unitNames.size() > 0) {
 			for (String creatorUnitName : unitNames) {
-				// 循环进行数据统计
+				// 반복하여 데이터 통계
 				unitNameFilter = new UnitNameFilter(creatorUnitName, creatorUnitName, business.getSearchFactory()
 						.getUnitDocumentCount(app_ids, creatorUnitName, docStatus, categoryId));
 				unitFilterList.add(unitNameFilter);

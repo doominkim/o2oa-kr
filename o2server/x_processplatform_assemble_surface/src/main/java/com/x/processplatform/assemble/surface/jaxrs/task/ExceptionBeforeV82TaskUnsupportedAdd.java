@@ -7,7 +7,7 @@ class ExceptionBeforeV82TaskUnsupportedAdd extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionBeforeV82TaskUnsupportedAdd(String id) {
-		super("当前待办不支持加签操作,请联系管理员.: {}.", id);
+		super("현재 결재 대기는 결재자 추가를 지원하지 않습니다. 관리자에게 문의하세요.: {}.", id);
 	}
 
 }

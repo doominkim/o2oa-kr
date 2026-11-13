@@ -11,21 +11,21 @@ public class V2AddSplitWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 5556104841725659921L;
 
-	@FieldDescribe("添加的拆分值.")
-	@Schema(description = "添加的拆分值.")
+	@FieldDescribe("추가할 분할 값.")
+	@Schema(description = "추가할 분할 값.")
 	private List<String> splitValueList;
 
-	@FieldDescribe("是否排除已经存在的拆分值.")
-	@Schema(description = "是否排除已经存在的拆分值.")
+	@FieldDescribe("이미 존재하는 분할 값 제외 여부.")
+	@Schema(description = "이미 존재하는 분할 값 제외 여부.")
 	private Boolean trimExist;
 
-	@FieldDescribe("添加分支的工作日志标识.")
-	@Schema(description = "添加分支的工作日志标识.")
+	@FieldDescribe("분기를 추가할 업무 문서 로그 식별자.")
+	@Schema(description = "분기를 추가할 업무 문서 로그 식별자.")
 	private String workLog;
 
-	@FieldDescribe("路由.")
+	@FieldDescribe("경로.")
 	private String routeName;
-	@FieldDescribe("办理意见.")
+	@FieldDescribe("처리 의견.")
 	private String opinion;
 
 	public String getRouteName() {

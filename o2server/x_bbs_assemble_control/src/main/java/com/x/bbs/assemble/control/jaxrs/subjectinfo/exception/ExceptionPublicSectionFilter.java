@@ -7,6 +7,6 @@ public class ExceptionPublicSectionFilter extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionPublicSectionFilter( Throwable e ) {
-		super("根据指定条件查询所有公开的分区信息时发生异常.", e );
+		super("조건에 맞는 공개 분류 정보를 조회하는 중 오류가 발생했습니다.", e );
 	}
 }

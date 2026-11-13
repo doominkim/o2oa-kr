@@ -19,7 +19,7 @@ import com.x.processplatform.assemble.surface.JobControlBuilder;
 import com.x.processplatform.core.entity.content.Review;
 
 /**
- * 获取Review
+ * Review 조회
  * 
  * @author zhour
  *

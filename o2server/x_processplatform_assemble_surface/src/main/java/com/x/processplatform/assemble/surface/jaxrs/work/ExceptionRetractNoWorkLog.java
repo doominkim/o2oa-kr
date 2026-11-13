@@ -7,6 +7,6 @@ class ExceptionRetractNoWorkLog extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionRetractNoWorkLog(String workId) {
-		super("无法定位召回,工作:{}.", workId);
+		super("회수 위치를 찾을 수 없습니다, 문서: {}.", workId);
 	}
 }

@@ -20,11 +20,11 @@ import com.x.mind.entity.MindVersionInfo_;
 
 
 /**
- * 类   名：MindVersionInfoFactory<br/>
- * 实体类：MindVersionInfo<br/>
- * 作   者：O2LEE<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-11-15 17:17:26 
+ * 클래스 이름: MindVersionInfoFactory<br/>
+ * 엔티티 클래스: MindVersionInfo<br/>
+ * 작성자: O2LEE<br/>
+ * 소속: O2 Team<br/>
+ * 일시: 2016-11-15 17:17:26 
 **/
 public class MindVersionInfoFactory extends AbstractFactory {
 
@@ -33,7 +33,7 @@ public class MindVersionInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的脑图版本实体信息对象
+	 * 지정 Id의 마인드맵 버전 엔티티 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -43,7 +43,7 @@ public class MindVersionInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 根据ID列表获取历史版本信息列表
+	 * ID 목록으로 이전 버전 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception 
@@ -61,7 +61,7 @@ public class MindVersionInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 获取指定Id的脑图版本内容信息对象
+	 * 지정 Id의 마인드맵 버전 내용 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -71,14 +71,14 @@ public class MindVersionInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据脑图ID获取该脑图所有的版本信息
+	 * 마인드맵 ID로 해당 마인드맵의 모든 버전 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception 
 	 */
 	public List<String> listVersionsWithMindId(String mindId) throws Exception {
 		if( StringUtils.isEmpty( mindId ) ){
-			new Exception("脑图ID为空，无法查询版本信息列表！");
+			new Exception("마인드맵 ID가 비어 있어 버전 정보 목록을 조회할 수 없습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get(MindVersionInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -90,7 +90,7 @@ public class MindVersionInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据ID查询某个脑图的历史版本数量
+	 * ID로 마인드맵의 이전 버전 수 조회
 	 * @param mindId
 	 * @return
 	 * @throws Exception
@@ -106,14 +106,14 @@ public class MindVersionInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据脑图ID获取一个最早的版本信息ID
+	 * 마인드맵 ID로 가장 오래된 버전 정보 ID 조회
 	 * @param mindId
 	 * @return
 	 * @throws Exception 
 	 */
 	public MindVersionInfo getEarliestVersionInfoId(String mindId) throws Exception {
 		if( StringUtils.isEmpty( mindId ) ){
-			new Exception("脑图ID为空，无法查询版本信息！");
+			new Exception("마인드맵 ID가 비어 있어 버전 정보를 조회할 수 없습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get(MindVersionInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -130,7 +130,7 @@ public class MindVersionInfoFactory extends AbstractFactory {
 
 	public MindVersionInfo getLatestVersionWithMind(String mindId) throws Exception {
 		if( StringUtils.isEmpty( mindId ) ){
-			new Exception("脑图ID为空，无法查询版本信息！");
+			new Exception("마인드맵 ID가 비어 있어 버전 정보를 조회할 수 없습니다!");
 		}
 		EntityManager em = this.entityManagerContainer().get(MindVersionInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

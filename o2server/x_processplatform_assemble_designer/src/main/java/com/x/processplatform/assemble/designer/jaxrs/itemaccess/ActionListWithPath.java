@@ -47,7 +47,7 @@ class ActionListWithPath extends BaseAction {
         public static final WrapCopier<ItemAccess, Wo> copier = WrapCopierFactory.wo(ItemAccess.class, Wo.class, null,
                 ListTools.toList(JpaObject.FieldsInvisibleIncludeProperites));
 
-        @FieldDescribe("流程名称.")
+        @FieldDescribe("프로세스 이름.")
         private String processName;
 
         public String getProcessName() {

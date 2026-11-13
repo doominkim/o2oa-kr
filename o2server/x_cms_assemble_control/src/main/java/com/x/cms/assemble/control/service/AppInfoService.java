@@ -60,7 +60,7 @@ public class AppInfoService {
 		emc.beginTransaction( Script.class);
 		emc.beginTransaction( File.class);
 
-		//还有栏目下的所有列表视图，以及所有的列表视图列信息
+		//게시판 아래 모든 목록 뷰와 모든 목록 뷰 열 정보도 포함
 		ids = business.getViewFactory().listByAppId( id );
 		if( ListTools.isNotEmpty( ids ) ){
 			View view = null;
@@ -70,7 +70,7 @@ public class AppInfoService {
 				view = emc.find( del_id, View.class );
 				feildIds = business.getViewFieldConfigFactory().listByViewId( del_id );
 				viewReleIds = business.getViewCategoryFactory().listByViewId( del_id );
-				//删除列表配置的列
+				//목록 설정 열 삭제
 				if( ListTools.isNotEmpty( feildIds ) ){
 					for( String feild_id : feildIds ){
 						viewFieldConfig = emc.find( feild_id, ViewFieldConfig.class );
@@ -79,7 +79,7 @@ public class AppInfoService {
 						}
 					}
 				}
-				//删除列表与分类的关联信息
+				//목록과 분류의 연결 정보 삭제
 				if( ListTools.isNotEmpty( viewReleIds ) ){
 					for( String rele_id : viewReleIds ){
 						viewCategory = emc.find( rele_id, ViewCategory.class );
@@ -88,14 +88,14 @@ public class AppInfoService {
 						}
 					}
 				}
-				//删除列表信息
+				//목록 정보 삭제
 				if( view != null ) {
 					emc.remove( view, CheckRemoveType.all  );
 				}
 			}
 		}
 
-		//还有栏目下的所有数据字典以及数据字典配置的列信息
+		//게시판 아래 모든 데이터 사전과 데이터 사전 설정 열 정보도 포함
 		ids = business.getAppDictFactory().listWithAppInfo( id );
 		if( ListTools.isNotEmpty( ids ) ){
 			AppDict appDict = null;
@@ -118,25 +118,25 @@ public class AppInfoService {
 			}
 		}
 
-		//删除栏目脚本信息
+		//게시판 스크립트 정보 삭제
 		List<Script> scriptList = business.getScriptFactory().listScriptWithApp( id);
 		for (Script script : scriptList){
 			emc.remove(script);
 		}
 
-		//删除栏目资源信息
+		//게시판 리소스 정보 삭제
 		List<File> fileList = business.fileFactory().listWithApplicationObject( id);
 		for (File file : fileList){
 			emc.remove(file);
 		}
 
-		//删除栏目配置支持信息
+		//게시판 설정 지원 정보 삭제
 		AppInfoConfig appInfoConfig = business.appInfoConfigFactory().get( id );
 		if( appInfoConfig != null ){
 			emc.remove( appInfoConfig, CheckRemoveType.all );
 		}
 
-		//删除栏目信息
+		//게시판 정보 삭제
 		appInfo = emc.find( id, AppInfo.class );
 		if( appInfo != null ){
 			emc.remove( appInfo, CheckRemoveType.all );
@@ -164,7 +164,7 @@ public class AppInfoService {
 	}
 
 	/**
-	 * 新增或者更新栏目信息
+	 * 게시판 정보 추가 또는 갱신
 	 * @param emc
 	 * @param wrapIn
 	 * @param config
@@ -181,7 +181,7 @@ public class AppInfoService {
 		appInfoConfig = emc.find( wrapIn.getId(), AppInfoConfig.class );
 
 		emc.beginTransaction( AppInfo.class );
-		if( appInfo == null ){//新增一个栏目信息
+		if( appInfo == null ){//게시판 정보 1건 추가
 			appInfo = new AppInfo();
 			wrapIn.copyTo( appInfo );
 			if( StringUtils.isNotEmpty( wrapIn.getId() ) ){
@@ -224,7 +224,7 @@ public class AppInfoService {
 	}
 
 	/**
-	 * 新增或者更新栏目配置支持信息
+	 * 게시판 설정 지원 정보 추가 또는 갱신
 	 * @param emc
 	 * @param appId
 	 * @param config
@@ -237,7 +237,7 @@ public class AppInfoService {
 		appInfo = emc.find( appId, AppInfo.class );
 		appInfoConfig = emc.find( appId, AppInfoConfig.class );
 
-		if( appInfo == null ){//新增一个栏目信息
+		if( appInfo == null ){//게시판 정보 1건 추가
 			throw new Exception("appinfo not exists!id=" + appId );
 		}
 

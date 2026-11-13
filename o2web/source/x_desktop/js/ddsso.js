@@ -52,7 +52,7 @@ o2.addReady(function () {
                                     timeStamp: _config.timeStamp,
                                     nonceStr: _config.nonceStr,
                                     signature: _config.signature,
-                                    type:0, //0表示H5微应用的jsapi。
+                                    type:0, //0은 H5 마이크로 앱의 jsapi를 의미.
                                     jsApiList: ['runtime.info']
                                 });
                                 dd.error(function (err) {
@@ -72,20 +72,20 @@ o2.addReady(function () {
                                                     // console.log(dd.pc);
                                                     // console.log(dd.android);
                                                     // console.log(dd.ios);
-                                                    // 如果有参数 开始启动流程
+                                                    // 파라미터가 있으면 프로세스 시작
                                                     if (processId && applicationId) {
-                                                        //console.debug('获取到了流程信息 processId:'+processId+', applicationId:'+applicationId);
+                                                        //console.debug('프로세스 정보 조회됨 processId:'+processId+', applicationId:'+applicationId);
                                                         o2.Actions.load("x_processplatform_assemble_surface").ProcessAction.getWithProcessWithApplication(processId, applicationId, function (json) {
                                                             //console.debug(json);
                                                             if (json.data) {
                                                                 MWF.xDesktop.requireApp("process.TaskCenter", "ProcessStarter", function () {
-                                                                    //console.debug('启动流程');
+                                                                    //console.debug('프로세스 시작');
                                                                     var starter = new MWF.xApplication.process.TaskCenter.ProcessStarter(json.data, layout.app, {
                                                                         "workData": {},
                                                                         "identity": null,
                                                                         "latest": false,
                                                                         "onStarted": function (data, title, processName) {
-                                                                            //console.debug('启动流程成功。。。。');
+                                                                            //console.debug('프로세스 시작 성공...');
                                                                             var currentTask = [];
                                                                             data.each(function (work) {
                                                                                 if (work.currentTaskIndex != -1) currentTask.push(work.taskList[work.currentTaskIndex].work);
@@ -101,7 +101,7 @@ o2.addReady(function () {
                                                                                 layout.mobile = true;
                                                                                 layout.openApplication(null, "process.Work", options);
                                                                             } else {
-                                                                                //console.error('没有task');
+                                                                                //console.error('task 없음');
                                                                                 uri.toURI().go();
                                                                             }
                                                                         }.bind(this)
@@ -113,7 +113,7 @@ o2.addReady(function () {
                                                     } else {
                                                         if (redirect) {
                                                             var uri = redirect;
-                                                            if (dd.pc) { // 判断是否是PC端，目前测试这个参数可用
+                                                            if (dd.pc) { // PC 여부 판단, 현재 테스트상 이 파라미터 사용 가능
                                                                 uri = redirect.replace("workmobilewithaction.html", "work.html");
                                                                 uri = uri.replace("cmsdocMobile.html", "cmsdoc.html");
                                                             }
@@ -124,7 +124,7 @@ o2.addReady(function () {
                                                             }
                                                         } else {
                                                             var uri = "../x_desktop/appMobile.html?app=process.TaskCenter";
-                                                            if (dd.pc) { // 判断是否是PC端，目前测试这个参数可用
+                                                            if (dd.pc) { // PC 여부 판단, 현재 테스트상 이 파라미터 사용 가능
                                                                 uri = "../x_desktop/app.html?app=process.TaskCenter"
                                                             }
                                                             history.replaceState(null, "page", uri);

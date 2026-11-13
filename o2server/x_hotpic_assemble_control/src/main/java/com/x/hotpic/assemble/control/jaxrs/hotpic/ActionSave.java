@@ -21,7 +21,7 @@ import com.x.hotpic.assemble.control.service.HotPictureInfoService;
 import com.x.hotpic.entity.HotPictureInfo;
 
 /**
- * 热点图片保存
+ * 인기 이미지 저장
  * @author sword
  */
 public class ActionSave extends BaseAction {

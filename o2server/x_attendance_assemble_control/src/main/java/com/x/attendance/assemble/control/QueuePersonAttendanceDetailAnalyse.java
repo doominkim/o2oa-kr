@@ -15,7 +15,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.queue.AbstractQueue;
 
 /**
- * 对单个员工的打卡信息进行分析的队列
+ * 직원 한 명의 출퇴근 정보를 분석하는 큐
  */
 public class QueuePersonAttendanceDetailAnalyse extends AbstractQueue<String> {
 

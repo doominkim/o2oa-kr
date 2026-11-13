@@ -39,7 +39,7 @@ class ActionListWithName extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("组织职务名称.")
+		@FieldDescribe("조직 직무명.")
 		private List<String> nameList = new ArrayList<>();
 
 		public List<String> getNameList() {

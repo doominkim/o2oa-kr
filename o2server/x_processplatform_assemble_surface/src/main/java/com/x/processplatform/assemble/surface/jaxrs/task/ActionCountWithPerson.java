@@ -57,7 +57,7 @@ class ActionCountWithPerson extends BaseAction {
 
 		private static final long serialVersionUID = -8936840122823873535L;
 
-		@FieldDescribe("待办数量")
+		@FieldDescribe("결재 대기 수")
 		private Long count = 0L;
 
 		public Long getCount() {

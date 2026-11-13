@@ -36,7 +36,7 @@ public class ActionDelete extends BaseAction {
             }
             AttendanceV2WorkPlace workPlace = emc.find(id, AttendanceV2WorkPlace.class);
             if (workPlace == null) {
-                throw new ExceptionNotExistObject(id+"工作地点");
+                throw new ExceptionNotExistObject(id+"근무 장소");
             }
             List<AttendanceV2Group> groupList = business.getAttendanceV2ManagerFactory().listGroupWithWorkPlaceId(id);
             if (groupList != null && !groupList.isEmpty()) {

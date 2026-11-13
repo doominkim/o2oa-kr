@@ -3,7 +3,7 @@
         <div class="index_page_header_title">{{$.lp.recordManagerTitle}}</div>
     </div>
     <div class="manager-box-content">
-        <!--人员组织选择  -->
+        <!--사용자·조직 선택  -->
         <div style="margin-right: 10px;float: left;">
             <o-org-person-selector
                 oo-prop="{'isRequried': true, 'selectorTitle': $.lp.detailTable.filterSelectTitle, 'placeholder': $.lp.detailTable.filterEmptyPlaceholder, 'value': $.filterList, 'units': $.units}"
@@ -67,6 +67,6 @@
             </tr>
         </table>
     </div>
-    <!-- 分页组件 -->
+    <!-- 페이지네이션 컴포넌트 -->
     <o-pager oo-prop="$.pagerData" @refresh-data="loadData"></o-pager>
 </div>

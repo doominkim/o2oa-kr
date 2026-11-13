@@ -27,20 +27,20 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("statement")
-@JaxrsDescribe("语句")
+@JaxrsDescribe("구문")
 public class StatementAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StatementAction.class);
 
-    @JaxrsMethodDescribe(value = "V8版本新版本查询语句,取消mode参数,增加自动count,增加自动内置参数判断,替换V2版本.", action = ActionExecute.class)
+    @JaxrsMethodDescribe(value = "V8 버전 신규 쿼리 구문, mode 매개변수 제거, 자동 count 추가, 자동 내장 매개변수 판단 추가, V2 버전 대체.", action = ActionExecute.class)
     @POST
     @Path("{flag}/execute/page/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void execute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("页码") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<Object> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -52,13 +52,13 @@ public class StatementAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "根据查询列示语句对象.", action = ActionListWithQuery.class)
+    @JaxrsMethodDescribe(value = "쿼리 기준 구문 객체 목록.", action = ActionListWithQuery.class)
     @POST
     @Path("list/query/{queryFlag}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("查询标识") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("쿼리 식별자") @PathParam("queryFlag") String queryFlag, JsonElement jsonElement) {
         ActionResult<List<ActionListWithQuery.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -70,13 +70,13 @@ public class StatementAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取语句内容.", action = ActionGet.class)
+    @JaxrsMethodDescribe(value = "구문 내용 조회.", action = ActionGet.class)
     @GET
     @Path("{id}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
         ActionResult<ActionGet.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -88,13 +88,13 @@ public class StatementAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "获取语句的格式.", action = ActionGetFormat.class)
+    @JaxrsMethodDescribe(value = "구문 형식 조회.", action = ActionGetFormat.class)
     @GET
     @Path("{id}/format")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void getFormat(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+            @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
         ActionResult<ActionGetFormat.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -106,16 +106,16 @@ public class StatementAction extends StandardJaxrsAction {
         asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
     }
 
-    @JaxrsMethodDescribe(value = "执行语句V2,可以同时执行查询结果及查询总数.", action = ActionExecuteV2.class)
+    @JaxrsMethodDescribe(value = "구문 실행 V2, 쿼리 결과와 전체 건수를 동시에 조회 가능.", action = ActionExecuteV2.class)
     @POST
     @Path("{flag}/execute/mode/{mode}/page/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void executeV2(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-            @JaxrsParameterDescribe("标识") @PathParam("flag") String flag,
-            @JaxrsParameterDescribe("执行模式：data|count|all") @PathParam("mode") String mode,
-            @JaxrsParameterDescribe("页码") @PathParam("page") Integer page,
-            @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+            @JaxrsParameterDescribe("식별자") @PathParam("flag") String flag,
+            @JaxrsParameterDescribe("실행 모드: data|count|all") @PathParam("mode") String mode,
+            @JaxrsParameterDescribe("페이지 번호") @PathParam("page") Integer page,
+            @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<Object> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

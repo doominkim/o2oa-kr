@@ -39,7 +39,7 @@ import com.x.organization.core.entity.UnitDuty_;
 import com.x.organization.core.entity.Unit_;
 
 /**
- * 清空人员组织数据
+ * 사용자 조직 데이터 비우기
  */
 public class ActionWipeAll extends BaseAction {
 	
@@ -57,9 +57,9 @@ public class ActionWipeAll extends BaseAction {
 		Wo wo = new Wo();
 		Business business = null;
 		
-		// 先获取需要删除的数据
+		// 삭제할 데이터 먼저 조회
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			logger.info("开始删除人员组织所有数据--------start");
+			logger.info("사용자 조직 전체 데이터 삭제 시작--------start");
 			 business = new Business(emc);
 			this.listUnit(business);
 			this.listPerson(business);
@@ -74,21 +74,21 @@ public class ActionWipeAll extends BaseAction {
 			emc.beginTransaction( Identity.class );
 			emc.beginTransaction( Person.class );
 			//emc.beginTransaction( Unit.class );
-			logger.info("开始删除职务--------");
+			logger.info("직무 삭제 시작--------");
 			this.deleteDutys(emc,business);
-			logger.info("开始删除群组--------");
+			logger.info("그룹 삭제 시작--------");
 			this.deleteGroups(emc,business);
-			logger.info("开始删除身份--------");
+			logger.info("신분 삭제 시작--------");
 			this.deleteIdentitys(emc,business);
 
-			logger.info("开始删除人员属性--------");
+			logger.info("사용자 속성 삭제 시작--------");
 			this.deletePersonAttributes(emc,business);
-			logger.info("开始删除组织属性--------");
+			logger.info("조직 속성 삭제 시작--------");
 			this.deleteUnitAttributes(emc,business);
 
-			logger.info("开始删除人员--------");
+			logger.info("사용자 삭제 시작--------");
 			this.deletePersons(emc,business);
-			logger.info("开始删除组织--------");
+			logger.info("조직 삭제 시작--------");
 			this.deleteUnits(emc,business);
 			emc.commit();
 
@@ -101,9 +101,9 @@ public class ActionWipeAll extends BaseAction {
 			CacheManager.notify(Unit.class);
 			
 			wo.setFlag("사용자 데이터를 비웠습니다.");
-			logger.info("开始删除人员组织所有数据--------end");
+			logger.info("사용자 조직 전체 데이터 삭제 시작--------end");
 		} catch (Exception e) {
-			logger.info("系统在查询所有组织人员信息时发生异常。" );
+			logger.info("시스템에서 전체 조직 사용자 정보를 조회하는 중 예외가 발생했습니다." );
 			wo.setFlag("사용자 데이터를 비우지 못했습니다.");
 			e.printStackTrace();
 		}
@@ -330,7 +330,7 @@ public class ActionWipeAll extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("返回的结果标识")
+		@FieldDescribe("반환 결과 식별자")
 		private String flag;
 
 		public String getFlag() {

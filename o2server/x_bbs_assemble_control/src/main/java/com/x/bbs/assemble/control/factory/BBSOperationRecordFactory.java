@@ -17,11 +17,11 @@ import com.x.bbs.entity.BBSOperationRecord;
 import com.x.bbs.entity.BBSOperationRecord_;
 
 /**
- * 类   名：BBSOperationRecordFactory<br/>
- * 实体类：BBSOperationRecord<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-05-20 17:17:26
+ * 클래스명: BBSOperationRecordFactory<br/>
+ * 엔티티 클래스: BBSOperationRecord<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-05-20 17:17:26
 **/
 public class BBSOperationRecordFactory extends AbstractFactory {
 
@@ -29,12 +29,12 @@ public class BBSOperationRecordFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSOperationRecord实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSOperationRecord 엔티티 정보 객체 조회" )
 	public BBSOperationRecord get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSOperationRecord.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSOperationRecord实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSOperationRecord 엔티티 정보 목록 조회" )
 	public List<BBSOperationRecord> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSOperationRecord>();
@@ -47,7 +47,7 @@ public class BBSOperationRecordFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 
-	//@MethodDescribe( "获取所有有操作的用户姓名列表，去重复" )
+	//@MethodDescribe( "작업 이력이 있는 사용자 이름 목록 조회, 중복 제거" )
 	public List<String> distinctAllOperationUserNames() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSOperationRecord.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

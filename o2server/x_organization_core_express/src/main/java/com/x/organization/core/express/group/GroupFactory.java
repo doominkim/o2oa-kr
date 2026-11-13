@@ -16,17 +16,17 @@ public class GroupFactory {
 
 	private AbstractContext context;
 
-	/** 判断群组是否拥有指定角色中的一个或者多个 */
+	/** 그룹이 지정 역할 중 하나 이상을 보유했는지 확인 */
 	public Boolean hasRole(String group, List<String> values) throws Exception {
 		return ActionHasRole.execute(context, group, values);
 	}
 
-	/** 判断群组是否拥有指定角色中的一个或者多个 */
+	/** 그룹이 지정 역할 중 하나 이상을 보유했는지 확인 */
 	public Boolean hasRole(String group, String... values) throws Exception {
 		return ActionHasRole.execute(context, group, Arrays.asList(values));
 	}
 
-	/** 获取单个群组的distinguishedName */
+	/** 단일 그룹의 distinguishedName 조회 */
 	public String get(String value) throws Exception {
 		List<String> os = ActionList.execute(context, Arrays.asList(value));
 		if (ListTools.isEmpty(os)) {
@@ -36,17 +36,17 @@ public class GroupFactory {
 		}
 	}
 
-	/** 批量获取群组的distinguishedName */
+	/** 그룹 distinguishedName 일괄 조회 */
 	public List<String> list(List<String> values) throws Exception {
 		return ActionList.execute(context, values);
 	}
 
-	/** 批量获取群组的distinguishedName */
+	/** 그룹 distinguishedName 일괄 조회 */
 	public List<String> list(String... values) throws Exception {
 		return ActionList.execute(context, Arrays.asList(values));
 	}
 
-	/** 获取群组对象 */
+	/** 그룹 객체 조회 */
 	public Group getObject(String value) throws Exception {
 		List<? extends Group> os = ActionListObject.execute(context, Arrays.asList(value));
 		if (ListTools.isEmpty(os)) {
@@ -56,80 +56,80 @@ public class GroupFactory {
 		}
 	}
 
-	/** 批量获取群组对象 */
+	/** 그룹 객체 일괄 조회 */
 	public List<Group> listObject(List<String> values) throws Exception {
 		List<? extends Group> os = ActionListObject.execute(context, values);
 		return (List<Group>) os;
 	}
 
-	/** 批量获取群组对象 */
+	/** 그룹 객체 일괄 조회 */
 	public List<Group> listObject(String... values) throws Exception {
 		List<? extends Group> os = ActionListObject.execute(context, Arrays.asList(values));
 		return (List<Group>) os;
 	}
 
-	/** 根据群组获取群组的直接下级群组 */
+	/** 그룹의 직속 하위 그룹 조회 */
 	public List<String> listWithGroupSubDirect(List<String> values) throws Exception {
 		return ActionListWithGroupSubDirect.execute(context, values);
 	}
 
-	/** 根据群组获取群组的直接下级群组 */
+	/** 그룹의 직속 하위 그룹 조회 */
 	public List<String> listWithGroupSubDirect(String... values) throws Exception {
 		return ActionListWithGroupSubDirect.execute(context, Arrays.asList(values));
 	}
 
-	/** 根据群组获取群组的递归下级群组 */
+	/** 그룹의 재귀 하위 그룹 조회 */
 	public List<String> listWithGroupSubNested(List<String> values) throws Exception {
 		return ActionListWithGroupSubNested.execute(context, values);
 	}
 
-	/** 根据群组获取群组的递归下级群组 */
+	/** 그룹의 재귀 하위 그룹 조회 */
 	public List<String> listWithGroupSubNested(String... values) throws Exception {
 		return ActionListWithGroupSubNested.execute(context, Arrays.asList(values));
 	}
 
-	/** 根据群组获取群组的直接上级群组 */
+	/** 그룹의 직속 상위 그룹 조회 */
 	public List<String> listWithGroupSupDirect(List<String> values) throws Exception {
 		return ActionListWithGroupSupDirect.execute(context, values);
 	}
 
-	/** 根据群组获取群组的直接上级群组 */
+	/** 그룹의 직속 상위 그룹 조회 */
 	public List<String> listWithGroupSupDirect(String... values) throws Exception {
 		return ActionListWithGroupSupDirect.execute(context, Arrays.asList(values));
 	}
 
-	/** 根据群组获取群组的递归上级群组 */
+	/** 그룹의 재귀 상위 그룹 조회 */
 	public List<String> listWithGroupSupNested(List<String> values) throws Exception {
 		return ActionListWithGroupSupNested.execute(context, values);
 	}
 
-	/** 根据群组获取群组的递归上级群组 */
+	/** 그룹의 재귀 상위 그룹 조회 */
 	public List<String> listWithGroupSupNested(String... values) throws Exception {
 		return ActionListWithGroupSupNested.execute(context, Arrays.asList(values));
 	}
 
-	/** 查询人员所在的群组 */
+	/** 사용자가 속한 그룹 조회 */
 	public List<String> listWithPerson(List<String> values) throws Exception {
 		return listWithPersonReference(values, true, true, true);
 	}
 
-	/** 查询人员所在的群组 */
+	/** 사용자가 속한 그룹 조회 */
 	public List<String> listWithPerson(String... values) throws Exception {
 		return listWithPersonReference(Arrays.asList(values), true, true, true);
 	}
 
-	/** 查询人员所在的群组 */
+	/** 사용자가 속한 그룹 조회 */
 	public List<String> listWithPerson(EffectivePerson effectivePerson) throws Exception {
 		return listWithPersonReference(ListTools.toList(effectivePerson.getDistinguishedName()), true, true, true);
 	}
 
 	/**
-	 * 查询人员及关联身份、组织所在的群组
+	 * 사용자 및 연관 신분·조직이 속한 그룹 조회
 	 *
-	 * @param values             用户
-	 * @param recursiveGroupFlag 是否递归查询上级群组
-	 * @param referenceFlag      是否包含查找人员身份成员、人员归属组织成员的所属群组
-	 * @param recursiveOrgFlag   是否递归人员归属组织的上级组织所属群组，前提referenceFlag为true
+	 * @param values             사용자
+	 * @param recursiveGroupFlag 상위 그룹 재귀 조회 여부
+	 * @param referenceFlag      사용자 신분 구성원·사용자 소속 조직 구성원이 속한 그룹 포함 여부
+	 * @param recursiveOrgFlag   사용자 소속 조직의 상위 조직이 속한 그룹 재귀 조회 여부, referenceFlag가 true일 때만 적용
 	 * @return
 	 * @throws Exception
 	 */
@@ -138,23 +138,23 @@ public class GroupFactory {
 		return ActionListWithPerson.execute(context, values, recursiveGroupFlag, referenceFlag, recursiveOrgFlag);
 	}
 
-	/** 查询身份所在的群组 */
+	/** 신분이 속한 그룹 조회 */
 	public List<String> listWithIdentity(List<String> values) throws Exception {
 		return listWithIdentityReference(values, true, true, true);
 	}
 
-	/** 查询身份所在的群组 */
+	/** 신분이 속한 그룹 조회 */
 	public List<String> listWithIdentity(String... values) throws Exception {
 		return listWithIdentityReference(Arrays.asList(values), true, true, true);
 	}
 
 	/**
-	 * 查询身份及关联组织所在的群组
+	 * 신분 및 연관 조직이 속한 그룹 조회
 	 *
-	 * @param values             身份
-	 * @param recursiveGroupFlag 是否递归查询上级群组
-	 * @param referenceFlag      是否包含查找人员身份成员、人员归属组织成员的所属群组
-	 * @param recursiveOrgFlag   是否递归人员归属组织的上级组织所属群组，前提referenceFlag为true
+	 * @param values             신분
+	 * @param recursiveGroupFlag 상위 그룹 재귀 조회 여부
+	 * @param referenceFlag      사용자 신분 구성원·사용자 소속 조직 구성원이 속한 그룹 포함 여부
+	 * @param recursiveOrgFlag   사용자 소속 조직의 상위 조직이 속한 그룹 재귀 조회 여부, referenceFlag가 true일 때만 적용
 	 * @return
 	 * @throws Exception
 	 */

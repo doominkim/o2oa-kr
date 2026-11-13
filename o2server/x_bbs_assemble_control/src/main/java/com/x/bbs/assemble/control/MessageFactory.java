@@ -15,7 +15,7 @@ public class MessageFactory {
 	private static Logger logger = LoggerFactory.getLogger( MessageFactory.class );
 
 	/**
-	 * 新的回复，通知相关管理员
+	 * 새 답글, 관련 관리자에게 알림
 	 * @param persons
 	 * @param messageWo
 	 * @throws Exception
@@ -29,7 +29,7 @@ public class MessageFactory {
 	}
 
 	/**
-	 * 新的回复，通知主题创建者
+	 * 새 답글, 주제 작성자에게 알림
 	 * @param persons
 	 * @param messageWo
 	 * @throws Exception
@@ -44,7 +44,7 @@ public class MessageFactory {
 	}
 
 	/**
-	 * 新的回复，通知相关管理员
+	 * 새 답글, 관련 관리자에게 알림
 	 * @param person
 	 * @param messageWo
 	 * @throws Exception
@@ -59,7 +59,7 @@ public class MessageFactory {
 	}
 
 	/**
-	 * 新的回复，通知主题创建者
+	 * 새 답글, 주제 작성자에게 알림
 	 * @param person
 	 * @param messageWo
 	 * @throws Exception
@@ -74,7 +74,7 @@ public class MessageFactory {
 	}
 
 	/**
-	 * 新的主题发表，通知相关管理员
+	 * 새 주제 게시, 관련 관리자에게 알림
 	 * @param persons
 	 * @param messageWo
 	 * @throws Exception
@@ -88,7 +88,7 @@ public class MessageFactory {
 	}
 
 	/**
-	 * 新的主题发表，通知相关管理员
+	 * 새 주제 게시, 관련 관리자에게 알림
 	 * @param person
 	 * @param messageWo
 	 * @throws Exception

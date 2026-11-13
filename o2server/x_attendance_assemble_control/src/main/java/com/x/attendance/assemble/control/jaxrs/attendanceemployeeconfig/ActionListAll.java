@@ -30,18 +30,18 @@ public class ActionListAll extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				result.error(e);
-				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "系统查询所有人员考勤配置时发生异常.");
+				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "전체 인원 근태 설정을 조회하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 		if (check && attendanceEmployeeConfigList != null) {
-			// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+			// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 			try {
 				wraps = Wo.copier.copy(attendanceEmployeeConfigList);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象时发生异常.");
+				Exception exception = new ExceptionAttendanceEmployeeProcess(e, "조회된 객체를 출력용 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

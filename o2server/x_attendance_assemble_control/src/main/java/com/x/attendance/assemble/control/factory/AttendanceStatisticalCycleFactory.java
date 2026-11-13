@@ -15,7 +15,7 @@ import com.x.attendance.entity.AttendanceStatisticalCycle;
 import com.x.attendance.entity.AttendanceStatisticalCycle_;
 import com.x.base.core.project.exception.ExceptionWhen;
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
  */
 public class AttendanceStatisticalCycleFactory extends AbstractFactory {
 	
@@ -23,12 +23,12 @@ public class AttendanceStatisticalCycleFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的AttendanceStatisticalCycle信息对象")
+	//@MethodDescribe("지정 Id의 AttendanceStatisticalCycle 정보 객체 조회")
 	public AttendanceStatisticalCycle get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceStatisticalCycle.class, ExceptionWhen.none);
 	}
 	
-	//@MethodDescribe("列示全部的AttendanceStatisticalCycle信息列表")
+	//@MethodDescribe("전체 AttendanceStatisticalCycle 정보 목록 조회")
 	@SuppressWarnings("unused")
 	public List<AttendanceStatisticalCycle> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceStatisticalCycle.class);
@@ -38,7 +38,7 @@ public class AttendanceStatisticalCycleFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceStatisticalCycle信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceStatisticalCycle 정보 목록 조회")
 	public List<AttendanceStatisticalCycle> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<AttendanceStatisticalCycle>();
@@ -51,7 +51,7 @@ public class AttendanceStatisticalCycleFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("根据参数列示AttendanceStatisticalCycle信息列表")
+	//@MethodDescribe("매개변수로 AttendanceStatisticalCycle 정보 목록 조회")
 	public List<String> listByParameter( String topUnitName, String organizatinName, String cycleYear, String cycleMonth ) throws Exception{
 		EntityManager em = this.entityManagerContainer().get(AttendanceStatisticalCycle.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

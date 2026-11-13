@@ -11,6 +11,6 @@ public class ExceptionConfigError extends LanguagePromptException {
     private static final long serialVersionUID = -3068848622774913903L;
 
     public ExceptionConfigError() {
-        super("微信公众号配置文件未启用");
+        super("WeChat 공식 계정 설정이 사용되지 않고 있습니다");
     }
 }

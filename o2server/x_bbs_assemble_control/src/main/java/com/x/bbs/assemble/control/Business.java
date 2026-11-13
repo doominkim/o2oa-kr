@@ -176,7 +176,7 @@ public class Business {
 	}
 
 	/**
-	 * 判断用户是否管理员权限
+	 * 사용자 관리자 권한 여부 판단
 	 * 1、person.isManager()
 	 * 2、xadmin
 	 * 3、CMSManager
@@ -186,7 +186,7 @@ public class Business {
 	 * @throws Exception
 	 */
 	public boolean isManager(EffectivePerson person) throws Exception {
-		// 如果用户的身份是平台的超级管理员，那么就是超级管理员权限
+		// 사용자 신분이 플랫폼 최고 관리자이면 최고 관리자 권한
 		if ( person.isManager() ) {
 			return true;
 		} else {

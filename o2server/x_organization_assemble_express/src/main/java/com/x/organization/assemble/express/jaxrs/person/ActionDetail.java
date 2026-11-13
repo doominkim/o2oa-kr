@@ -54,7 +54,7 @@ class ActionDetail extends BaseAction {
             } else {
                 Wo wo = new Wo();
                 if (Config.token().isInitialManager(flag)) {
-                    // 如果是xadmin单独处理
+                    // xadmin이면 별도 처리
                     wo.setDistinguishedName(Config.token().initialManagerInstance().getDistinguishedName());
                 } else {
                     Person person = business.person().pick(flag);
@@ -354,17 +354,17 @@ class ActionDetail extends BaseAction {
             return BooleanUtils.isNotFalse(fetchPersonAttribute);
         }
 
-        @FieldDescribe("是否获取身份.")
+        @FieldDescribe("신분 조회 여부.")
         private Boolean fetchIdentity;
-        @FieldDescribe("是否获取组织.")
+        @FieldDescribe("조직 조회 여부.")
         private Boolean fetchUnit;
-        @FieldDescribe("是否获取组织职务.")
+        @FieldDescribe("조직 직무 조회 여부.")
         private Boolean fetchUnitDuty;
-        @FieldDescribe("是否获取群组.")
+        @FieldDescribe("그룹 조회 여부.")
         private Boolean fetchGroup;
-        @FieldDescribe("是否获取角色.")
+        @FieldDescribe("역할 조회 여부.")
         private Boolean fetchRole;
-        @FieldDescribe("是否获取个人属性.")
+        @FieldDescribe("사용자 속성 조회 여부.")
         private Boolean fetchPersonAttribute;
 
         public void setFetchIdentity(Boolean fetchIdentity) {

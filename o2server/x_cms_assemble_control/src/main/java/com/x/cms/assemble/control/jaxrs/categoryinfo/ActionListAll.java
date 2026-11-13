@@ -41,7 +41,7 @@ public class ActionListAll extends BaseAction {
 				categoryInfoList = categoryInfoServiceAdv.listAll();
 			} catch ( Exception e ) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess( e, "查询所有分类信息对象时发生异常。" );
+				Exception exception = new ExceptionCategoryInfoProcess( e, "전체 분류 정보 객체를 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -57,7 +57,7 @@ public class ActionListAll extends BaseAction {
 						result.setData(wos);
 					} catch ( Exception e ) {
 						check = false;
-						Exception exception = new ExceptionCategoryInfoProcess( e, "将查询出来的分类信息对象转换为可输出的数据信息时发生异常。" );
+						Exception exception = new ExceptionCategoryInfoProcess( e, "조회한 분류 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다." );
 						result.error( exception );
 						logger.error( e, effectivePerson, request, null);
 					}
@@ -75,7 +75,7 @@ public class ActionListAll extends BaseAction {
 
 		static WrapCopier<CategoryInfo, Wo> copier = WrapCopierFactory.wo( CategoryInfo.class, Wo.class, null, ListTools.toList(JpaObject.FieldsInvisible));
 		
-		@FieldDescribe("扩展信息JSON内容")
+		@FieldDescribe("확장 정보 JSON 내용")
 		private String extContent = null;
 
 		public String getExtContent() {

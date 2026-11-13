@@ -46,20 +46,20 @@ export default content({
             form: {
                 policyName: "",
                 leaveTypeId: "",
-                grantCron: "", // 定时器
+                grantCron: "", // 타이머
                 grantScopeType: "ALL", // ALL | DEPARTMENT
                 grantScopeList: [], // Concrete grant scope list.
                 grantExcludeList: [], // Excluded identities for the grant scope.
-                grantAmountTypeUseScript: false, // 是否启用脚本计算额度
+                grantAmountTypeUseScript: false, // 스크립트로 한도 계산 사용 여부
                 grantAmount: 0, // Grant amount.
-                grantScript: "", // 脚本内容
+                grantScript: "", // 스크립트 내용
                 expireType: "AFTER_GRANT", // AFTER_GRANT / THIS_YEAR / NEXT_YEAR
-                expireValue: "", // 当 expireType = AFTER_GRANT 时使用.
+                expireValue: "", // expireType = AFTER_GRANT 일 때 사용.
                 expireMonthDay: "",
                 carryForward: false, // Whether carry-forward is allowed.
                 maxCarryForward: 0, // Maximum carry-forward amount.
                 policyVersion: "1",
-                active: true, // 是否启用
+                active: true, // 사용 여부
             },
             expireTypeList: [
                 { key: "THIS_YEAR", name: lp.leaveManagerV2.policy.expireTypeTHIS_YEAR },
@@ -106,7 +106,7 @@ export default content({
             form.expireMonthDay = "";
         }
     },
-    // 定时器表达式工具加载
+    // 타이머 표현식 도구 로드
     loadGrantCronClick() {
         const cronTarget = this.dom.querySelector("#grantCronNode");
         o2.requireApp("Template", "widget.CronPicker", () => {
@@ -118,7 +118,7 @@ export default content({
                 {
                     style: "design",
                     position: {
-                        //node 固定的位置
+                        //node 고정 위치
                         x: "right",
                         y: "auto",
                     },
@@ -145,7 +145,7 @@ export default content({
 
         });
     },
-    // 额度脚本编辑器加载
+    // 한도 스크립트 편집기 로드
     async loadScriptEditor() {
         await this.tick();
         // MWF.require("MWF.widget.ScriptArea", null, false);

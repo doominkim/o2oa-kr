@@ -55,7 +55,7 @@ class ActionInstallOrUpdate extends BaseAction {
                 throw new ExceptionAccessDenied(Config.collect().getName());
             }
             CacheManager.notify(InstallLog.class);
-            logger.info("{}发起安装或更新应用：{}", effectivePerson.getDistinguishedName(), app.getName());
+            logger.info("{}이(가) 앱 설치 또는 업데이트 시작: {}", effectivePerson.getDistinguishedName(), app.getName());
             Wo wo = new Wo();
             wo.setValue(false);
             byte[] bytes = ConnectionAction.getBinary(
@@ -99,19 +99,19 @@ class ActionInstallOrUpdate extends BaseAction {
 
     public static class InstallWo extends GsonPropertyObject {
 
-        @FieldDescribe("流程应用")
+        @FieldDescribe("프로세스 앱")
         private List<String> processPlatformList = new ArrayList<>();
 
-        @FieldDescribe("门户应用")
+        @FieldDescribe("포털 앱")
         private List<String> portalList = new ArrayList<>();
 
-        @FieldDescribe("统计应用")
+        @FieldDescribe("통계 앱")
         private List<String> queryList = new ArrayList<>();
 
-        @FieldDescribe("内容管理应用")
+        @FieldDescribe("콘텐츠 관리 앱")
         private List<String> cmsList = new ArrayList<>();
 
-        @FieldDescribe("服务管理应用")
+        @FieldDescribe("서비스 관리 앱")
         private List<String> serviceModuleList = new ArrayList<>();
 
         public List<String> getProcessPlatformList() {

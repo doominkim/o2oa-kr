@@ -32,12 +32,12 @@ import com.x.base.core.project.logger.LoggerFactory;
  */
 
 @Path("apppack")
-@JaxrsDescribe("移动客户端在线打包服务")
+@JaxrsDescribe("모바일 클라이언트 온라인 패키징 서비스")
 public class AppPackAction extends BaseAction  {
 
     private static Logger logger = LoggerFactory.getLogger(AppPackAction.class);
 
-    @JaxrsMethodDescribe(value = "检测打包服务器.", action = ActionConnectPackServer.class)
+    @JaxrsMethodDescribe(value = "패키징 서버 점검.", action = ActionConnectPackServer.class)
     @GET
     @Path("server/connect")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -55,7 +55,7 @@ public class AppPackAction extends BaseAction  {
     }
 
 
-    @JaxrsMethodDescribe(value = "获取最近一次打包信息.", action = ActionPackInfo.class)
+    @JaxrsMethodDescribe(value = "최근 패키징 정보 조회.", action = ActionPackInfo.class)
     @GET
     @Path("pack/info")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -73,7 +73,7 @@ public class AppPackAction extends BaseAction  {
     }
 
 
-    @JaxrsMethodDescribe(value = "获取最近一次打包logo.", action = ActionPackInfoLogoDownload.class)
+    @JaxrsMethodDescribe(value = "최근 패키징 logo 조회.", action = ActionPackInfoLogoDownload.class)
     @GET
     @Path("pack/info/logo")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ public class AppPackAction extends BaseAction  {
     }
 
 
-    @JaxrsMethodDescribe(value = "提交资料，发起 Android app 打包.", action = ActionAndroidPack.class)
+    @JaxrsMethodDescribe(value = "자료 제출, Android app 패키징 요청.", action = ActionAndroidPack.class)
     @POST
     @Path("pack/info/android/start")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -102,13 +102,13 @@ public class AppPackAction extends BaseAction  {
                                  @JaxrsParameterDescribe("o2ServerPort") @FormDataParam("o2ServerPort") String o2ServerPort,
                                  @JaxrsParameterDescribe("o2ServerContext") @FormDataParam("o2ServerContext") String o2ServerContext,
                                  @JaxrsParameterDescribe("isPackAppIdOuter") @FormDataParam("isPackAppIdOuter") String isPackAppIdOuter,
-                                 @JaxrsParameterDescribe("是否删除华为HMS") @FormDataParam("deleteHuawei") String deleteHuawei,
+                                 @JaxrsParameterDescribe("화웨이 HMS 삭제 여부") @FormDataParam("deleteHuawei") String deleteHuawei,
                                  @JaxrsParameterDescribe("urlMapping") @FormDataParam("urlMapping") String urlMapping,
-                                 @JaxrsParameterDescribe("版本名称") @FormDataParam("appVersionName") String appVersionName,
-                                 @JaxrsParameterDescribe("版本编号") @FormDataParam("appBuildNo") String appBuildNo,
-                           @JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-                           @JaxrsParameterDescribe("附件标识") @FormDataParam(FILE_FIELD) final byte[] bytes,
-                           @JaxrsParameterDescribe("上传文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition){
+                                 @JaxrsParameterDescribe("버전 이름") @FormDataParam("appVersionName") String appVersionName,
+                                 @JaxrsParameterDescribe("버전 번호") @FormDataParam("appBuildNo") String appBuildNo,
+                           @JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+                           @JaxrsParameterDescribe("첨부파일 식별자") @FormDataParam(FILE_FIELD) final byte[] bytes,
+                           @JaxrsParameterDescribe("파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition){
         ActionResult<ActionAndroidPack.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -122,7 +122,7 @@ public class AppPackAction extends BaseAction  {
 
 
 
-    @JaxrsMethodDescribe(value = "使用原来的资料重新进行 Android app 打包.", action = ActionAndroidRePack.class)
+    @JaxrsMethodDescribe(value = "기존 자료로 Android app 다시 패키징.", action = ActionAndroidRePack.class)
     @GET
     @Path("pack/info/android/repack")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -140,12 +140,12 @@ public class AppPackAction extends BaseAction  {
     }
 
 
-    @JaxrsMethodDescribe(value = "下载app包", action = ActionPackFileDownload.class)
+    @JaxrsMethodDescribe(value = "app 패키지 다운로드", action = ActionPackFileDownload.class)
     @GET
     @Path("pack/info/file/download/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void download(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                         @JaxrsParameterDescribe("app下载标识") @PathParam("id") String id) {
+                         @JaxrsParameterDescribe("app 다운로드 식별자") @PathParam("id") String id) {
         ActionResult<ActionPackFileDownload.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -159,7 +159,7 @@ public class AppPackAction extends BaseAction  {
 
 
 
-    @JaxrsMethodDescribe(value = "查询最新发布的app下载包.", action = ActionLastPackFileInfo.class)
+    @JaxrsMethodDescribe(value = "최신 배포 app 다운로드 패키지 조회.", action = ActionLastPackFileInfo.class)
     @GET
     @Path("pack/info/file/last")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -177,10 +177,10 @@ public class AppPackAction extends BaseAction  {
     }
 
 
-    // 清除所有发布的包
+    // 배포된 모든 패키지 삭제
 
-    // 发布app到本地服务器
-    @JaxrsMethodDescribe(value = "发布apk文件到本地服务器.", action = ActionPublishAPK2Local.class)
+    // app을 로컬 서버에 배포
+    @JaxrsMethodDescribe(value = "apk 파일을 로컬 서버에 배포.", action = ActionPublishAPK2Local.class)
     @POST
     @Path("pack/info/file/publish")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

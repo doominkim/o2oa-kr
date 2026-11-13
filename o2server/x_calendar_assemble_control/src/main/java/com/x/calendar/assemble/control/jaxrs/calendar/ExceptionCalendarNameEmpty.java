@@ -7,6 +7,6 @@ class ExceptionCalendarNameEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCalendarNameEmpty() {
-		super("操作传入的日历名称name为空，无法进行查询或者保存操作.");
+		super("캘린더 이름 name이 비어 있어 조회하거나 저장할 수 없습니다.");
 	}
 }

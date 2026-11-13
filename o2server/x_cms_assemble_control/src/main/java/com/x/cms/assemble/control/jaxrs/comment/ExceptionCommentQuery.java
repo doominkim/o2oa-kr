@@ -7,6 +7,6 @@ class ExceptionCommentQuery extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCommentQuery( Throwable e, String message ) {
-		super("系统在查询评论信息时发生异常。Message:" + message, e );
+		super("댓글 정보를 조회하는 중 오류가 발생했습니다. Message:" + message, e );
 	}
 }

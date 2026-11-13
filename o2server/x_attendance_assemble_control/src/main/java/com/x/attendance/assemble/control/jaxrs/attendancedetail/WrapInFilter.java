@@ -7,32 +7,32 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class WrapInFilter extends GsonPropertyObject {
 
-	@FieldDescribe("参与查询的员工标识，人员DistinguishedName")
+	@FieldDescribe("조회 대상 직원 식별자, 사용자 DistinguishedName")
 	private String q_empName;
 
 	private List<String> topUnitNames;
 
-	@FieldDescribe("参与查询的顶层组织（公司）标识，组织DistinguishedName")
+	@FieldDescribe("조회 대상 최상위 조직(회사) 식별자, 조직 DistinguishedName")
 	private String q_topUnitName;
 	
 	private List<String> unitNames;
 
-	@FieldDescribe("参与查询的组织（部门）标识，组织DistinguishedName")
+	@FieldDescribe("조회 대상 조직(부서) 식별자, 조직 DistinguishedName")
 	private String q_unitName;
 
-	@FieldDescribe("查询数据的年份, yyyy")
+	@FieldDescribe("조회 데이터 연도, yyyy")
 	private String q_year;
 
-	@FieldDescribe("查询数据的月份, mm")
+	@FieldDescribe("조회 데이터 월, mm")
 	private String q_month;
 
-	@FieldDescribe("查询数据的统计周期年份，一般与数据日期的年份一致")
+	@FieldDescribe("조회 데이터의 통계 주기 연도, 보통 데이터 날짜의 연도와 같음")
 	private String cycleYear;
 
-	@FieldDescribe("查询数据的统计周期月份，一般与数据日期的月份一致")
+	@FieldDescribe("조회 데이터의 통계 주기 월, 보통 데이터 날짜의 월과 같음")
 	private String cycleMonth;
 
-	@FieldDescribe("查询数据的具体日期，yyyy-mm-dd")
+	@FieldDescribe("조회 데이터의 구체적 날짜, yyyy-mm-dd")
 	private String q_date;
 
 	private int recordStatus = 999;

@@ -60,7 +60,7 @@ class V2Terminate extends BaseAction {
 			String identity = business.organization().identity()
 					.getMajorWithPerson(person);
 			if (StringUtils.isEmpty(identity)) {
-				// 如果直接报错,那么管理员和cipher无法进行终止.
+				// 바로 오류를 내면 관리자와 cipher가 종료할 수 없음.
 				if (effectivePerson.isManager()) {
 					identity = effectivePerson.getDistinguishedName();
 				} else {

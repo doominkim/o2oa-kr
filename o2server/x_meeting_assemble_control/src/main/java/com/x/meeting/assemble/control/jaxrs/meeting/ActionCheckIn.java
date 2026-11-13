@@ -12,7 +12,7 @@ import com.x.base.core.project.http.EffectivePerson;
 import com.x.meeting.core.entity.Meeting;
 
 /**
- * 会议签到
+ * 회의 출석 체크
  *
  */
 class ActionCheckIn extends BaseAction {
@@ -38,7 +38,7 @@ class ActionCheckIn extends BaseAction {
 
 	public static class Wo {
 		
-		@FieldDescribe("已签到的人员列表")
+		@FieldDescribe("출석 체크한 사용자 목록")
 		private List<String> checkinPersonList;
 
 		public List<String> getCheckinPersonList() {

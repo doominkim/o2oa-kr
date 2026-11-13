@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("touch")
-@JaxrsDescribe("触发流程定时任务")
+@JaxrsDescribe("프로세스 예약 작업 실행")
 public class TouchAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TouchAction.class);
 
-	@JaxrsMethodDescribe(value = "立即执行标识待办过期任务.", action = ActionExpire.class)
+	@JaxrsMethodDescribe(value = "결재 대기 만료 표시 작업 즉시 실행.", action = ActionExpire.class)
 	@GET
 	@Path("expire")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -43,7 +43,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行过期待办默认流转任务.", action = ActionPassExpired.class)
+	@JaxrsMethodDescribe(value = "만료 결재 대기 기본 진행 작업 즉시 실행.", action = ActionPassExpired.class)
 	@GET
 	@Path("passexpired")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -60,7 +60,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行触发滞留工作任务.", action = ActionTouchDetained.class)
+	@JaxrsMethodDescribe(value = "체류 업무 문서 작업 트리거 즉시 실행.", action = ActionTouchDetained.class)
 	@GET
 	@Path("touchdetained")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

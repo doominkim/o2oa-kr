@@ -28,7 +28,7 @@ public class ActionSaveConfig extends BaseAction {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
 
-			/* 判断当前用户是否有权限访问 */
+			/* 현재 사용자의 접근 권한 여부 판단 */
 			if(!business.isManager(effectivePerson)) {
 				throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());
 			}
@@ -36,11 +36,11 @@ public class ActionSaveConfig extends BaseAction {
 			Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
 			if(BooleanUtils.isTrue(wi.getEnableOnline())){
 				if(StringUtils.isBlank(wi.getOnlineProduct())){
-					throw new ExceptionCustomError("请配置线上会议产品");
+					throw new ExceptionCustomError("온라인 회의 제품을 설정하세요");
 				}
 				if(wi.getOnlineProduct().equals(Wi.ONLINE_PROJECT_HST)){
 					if(StringUtils.isBlank(wi.getOnlineConfig().getHstUrl())){
-						throw new ExceptionCustomError("请配置好视通服务地址");
+						throw new ExceptionCustomError("HST 서비스 주소를 설정하세요");
 					}
 				}
 			}

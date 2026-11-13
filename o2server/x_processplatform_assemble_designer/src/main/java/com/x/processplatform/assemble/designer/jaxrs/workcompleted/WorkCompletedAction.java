@@ -23,18 +23,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("workcompleted")
-@JaxrsDescribe("已完成工作")
+@JaxrsDescribe("완료된 업무 문서")
 public class WorkCompletedAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(WorkCompletedAction.class);
 
-	@JaxrsMethodDescribe(value = "指定process合并DataItem数据到WorkCompleted,并删除Item表中的数据.", action = ActionMergeWithProcess.class)
+	@JaxrsMethodDescribe(value = "지정 process의 DataItem 데이터를 WorkCompleted에 병합하고 Item 테이블의 데이터 삭제.", action = ActionMergeWithProcess.class)
 	@GET
 	@Path("process/{processFlag}/merge/data")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void mergeDataWithProcess(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("流程标识") @PathParam("processFlag") String processFlag) {
+			@JaxrsParameterDescribe("프로세스 식별자") @PathParam("processFlag") String processFlag) {
 		ActionResult<ActionMergeWithProcess.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -46,14 +46,14 @@ public class WorkCompletedAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "指定application合并DataItem数据到WorkCompleted,并删除Item表中的数据.", action = ActionMergeWithApplication.class)
+	@JaxrsMethodDescribe(value = "지정 application의 DataItem 데이터를 WorkCompleted에 병합하고 Item 테이블의 데이터 삭제.", action = ActionMergeWithApplication.class)
 	@GET
 	@Path("application/{applicationFlag}/merge/data")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void mergeDataWithApplication(@Suspended final AsyncResponse asyncResponse,
 			@Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("applicationFlag") String applicationFlag) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("applicationFlag") String applicationFlag) {
 		ActionResult<ActionMergeWithApplication.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

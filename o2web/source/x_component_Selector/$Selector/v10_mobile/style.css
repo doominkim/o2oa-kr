@@ -1,4 +1,4 @@
-/*第一层*/
+/*첫 번째 레벨*/
 .MWF_selector_node{
   transform-origin: bottom !important;
   transition: height .2s,opacity .2s,transform .2s
@@ -28,7 +28,7 @@
   background-color: #FFFFFF;
 }
 .multiple_mode .MWF_selector_contentNode{
-  /*2.5rem是tab高度， 0.625rem是tab的margin-bottom*/
+  /*2.5rem은 tab 높이, 0.625rem은 tab의 margin-bottom*/
   height: calc( 100% - 10.875rem - 2.5rem - 0.625rem );
 }
 .multiple_mode .MWF_selector_contentNode > div{

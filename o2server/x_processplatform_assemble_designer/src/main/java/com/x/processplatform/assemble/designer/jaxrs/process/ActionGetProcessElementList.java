@@ -92,10 +92,10 @@ class ActionGetProcessElementList extends BaseAction {
 
 		private static final long serialVersionUID = 1178481980432997496L;
 
-		@FieldDescribe("节点信息.")
+		@FieldDescribe("노드 정보.")
 		private List<Activity> activityList;
 
-		@FieldDescribe("路由信息.")
+		@FieldDescribe("경로 정보.")
 		private List<Route> routeList;
 
 		public List<Activity> getActivityList() {
@@ -138,7 +138,7 @@ class ActionGetProcessElementList extends BaseAction {
 
 		@FieldDescribe("元素类型（route|begin|agent|...）.")
 		private String elementType;
-		@FieldDescribe("元素ID.")
+		@FieldDescribe("요소 ID.")
 		private String elementId;
 
 		public String getElementType() {

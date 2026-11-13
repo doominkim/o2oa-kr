@@ -32,7 +32,7 @@ public class ActionLeaveTypeListWithAccount extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             String searchPerson = effectivePerson.getDistinguishedName();
             Business business = new Business(emc);
-            // 如果传入的人员标识不为空，并且当前用户是管理员，则使用传入的人员标识进行查询
+            // 전달된 사용자 식별자가 비어 있지 않고 현재 사용자가 관리자이면 전달된 사용자 식별자로 조회
             if (StringUtils.isNotBlank(person) && business.isManager(effectivePerson)) {
                 searchPerson = person;
             }
@@ -64,7 +64,7 @@ public class ActionLeaveTypeListWithAccount extends BaseAction {
                 Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("当前用户假期账户")
+        @FieldDescribe("현재 사용자 휴가 계정")
         private AttendanceV2LeaveAccount account;
 
         public AttendanceV2LeaveAccount getAccount() {

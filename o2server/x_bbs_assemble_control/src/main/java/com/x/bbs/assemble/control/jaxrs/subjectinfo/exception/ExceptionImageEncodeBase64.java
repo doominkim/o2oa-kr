@@ -7,6 +7,6 @@ public class ExceptionImageEncodeBase64 extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionImageEncodeBase64( Throwable e, String id ) {
-		super("将图片文件编码为Base64编码时发生异常.ID:" + id, e );
+		super("이미지 파일을 Base64로 인코딩하는 중 오류가 발생했습니다. ID:" + id, e );
 	}
 }

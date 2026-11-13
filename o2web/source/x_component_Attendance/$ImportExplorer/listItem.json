@@ -67,7 +67,7 @@
         "downStyles": "documentActionNode_down"
       }
 //    },{
-//      "title" : "查看校验结果",
+//      "title" : "검증 결과 보기",
 //      "action" : "openVaild",
 //      "styles" : "actionOpenVaildNode",
 //      "overStyles" : "actionOpenVaildNode_over",

@@ -65,7 +65,7 @@ MWF.xDesktop.Authentication = new Class({
             if (xhr) {
                 try {
                     var responseJSON = JSON.parse(xhr.responseText);
-                    message = responseJSON.message; //message为错误提示文本
+                    message = responseJSON.message; //message는 오류 안내 텍스트
                 } catch (e) {
                 }
             }
@@ -226,7 +226,7 @@ MWF.xDesktop.Authentication = new Class({
         form.create();
     },
     openChangePasswordForm: function (options, callback) {
-        //options 里应该包括 userName
+        //options에 userName이 포함되어야 함
         var opt = Object.merge(this.popupOptions || {}, options || {}, {
             onPostOk: function (json) {
                 if (callback) callback(json);
@@ -279,7 +279,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
         //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         //         COMMON.AjaxModule.loadDom("../o2_lib/adapter/adapter.js", function () {
         //             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        //                 //暂时隐藏此功能
+        //                 //이 기능 임시 숨김
         //                 this.cameraLoginIcon = new Element("div", { "styles": this.explorer.css.cameraLoginIcon }).inject(this.formTopContentNode);
         //                 this.cameraLoginIcon.addEvent("click", function () {
         //                     if (!this.isCameraLogin) {
@@ -393,7 +393,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
         this.canvas.destroy();
         return { "data": formData, "size": blob.size };
     },
-    //检测出身份
+    //신분 감지
     checkUserFace: function (formData) {
 
         var faceset = window.location.host;
@@ -436,7 +436,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
                     this.cameraLoginConfig.errorCount = 0;
                     this.cameraLoginVideoInfoNode.set("text", MWF.LP.desktop.login["camera_logining_" + this.cameraLoginConfig.step]);
                 } else {
-                    //可能是照片
+                    //사진일 수 있음
                     this.cameraLoginConfig.errorCount++;
                 }
             } else {
@@ -448,11 +448,11 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
             this.checkCameraLogin();
         }.bind(this));
     },
-    //检测微笑
+    //미소 감지
     checkUserSmile: function (attr) {
         return attr.smile.value > attr.smile.threshold;
     },
-    //检测抬头
+    //고개 들기 감지
     checkUserPitch: function (attr) {
         return attr.headpose.pitch_angle < -10;
     },
@@ -583,7 +583,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
             this.bindLogin = json.data.bindLogin;
             this.captchaLogin = json.data.captchaLogin;
             this.twoFactorLogin = json.data.twoFactorLogin;
-            if( this.codeLogin && this.twoFactorLogin ){ //如果两个都是true，以短信登录为准
+            if( this.codeLogin && this.twoFactorLogin ){ //둘 다 true이면 문자 로그인 우선
                 this.twoFactorLogin = false;
             }
         }.bind(this));
@@ -647,7 +647,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
 
             this.form = new MForm(this.formTableArea, this.data, {
                 style: this.options.popupStyle,
-                verifyType: "single",	//batch一起校验，或alert弹出
+                verifyType: "single",	//batch로 함께 검증하거나 alert로 표시
                 isEdited: this.isEdited || this.isNew,
                 itemTemplate: {
                     credential: {
@@ -942,7 +942,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
             MWF.xDesktop.requireApp("Template", "MForm", function () {
                 this.bindform = new MForm(this.bindLoginContainer, {}, {
                     style: "o2platform",
-                    verifyType: "single",	//batch一起校验，或alert弹出
+                    verifyType: "single",	//batch로 함께 검증하거나 alert로 표시
                     isEdited: this.isEdited || this.isNew,
                     itemTemplate: {
                         bindLoginTitle: { value: this.lp.bingLoginTitle, type: "innerText" }
@@ -950,7 +950,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
                 }, this.app, this.css);
                 this.bindform.load();
 
-                //如果只有二维码登录
+                //QR 코드 로그인만 있는 경우
                 // if(this.disableUserLogin){
                 //     this.showBindCodeLogin();
                 // }
@@ -1049,7 +1049,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
             this.options.height = parseInt(this.options.height) + this.oauthArea.getSize().y;
             this.isPlusOauthSize = true;
         }
-        if (this.oauthListNode || (!this.captchaLogin && !this.bindLogin)) { //留高度给二维码
+        if (this.oauthListNode || (!this.captchaLogin && !this.bindLogin)) { //QR 코드용 높이 확보
             this.options.height = this.options.height - 60;
         }
         if (this.oauthListNode && this.captchaLogin) {
@@ -1322,7 +1322,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
         this.explorer.openResetPasswordForm();
         this.close();
     },
-    gotoChangePassword : function( options ){ //密码过期
+    gotoChangePassword : function( options ){ //비밀번호 만료
         this.explorer.openChangePasswordForm( options, function(){
             this.explorer.loadLogin();
         }.bind(this));
@@ -1429,9 +1429,9 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
     afterLogin: function (json) {
         if (json.type === "error") {
             if (this.app) this.app.notice(json.message, "error");
-        } else if( json.data.passwordExpired ){ //密码过期
+        } else if( json.data.passwordExpired ){ //비밀번호 만료
             var userName = json.data.distinguishedName;
-            this.explorer.logout( function(){ //注销再到密码修改页
+            this.explorer.logout( function(){ //로그아웃 후 비밀번호 변경 페이지로
                 this.gotoChangePassword({
                     userName : userName
                 });
@@ -1501,7 +1501,7 @@ MWF.xDesktop.Authentication.LoginForm = new Class({
                  this.captchaLoginData = d;
 
                 this.actions.loginByTwoFactor(d, function (json){
-                    if( json.data.passwordExpired ){ //密码过期
+                    if( json.data.passwordExpired ){ //비밀번호 만료
                         //var userName = json.data.distinguishedName;
                         this.gotoChangePassword({
                             userName : d.credential,
@@ -1653,7 +1653,7 @@ MWF.xDesktop.Authentication.SignUpForm = new Class({
         MWF.xDesktop.requireApp("Template", "MForm", function () {
             this.form = new MForm(this.formTableArea, this.data, {
                 style: this.options.popupStyle,
-                verifyType: "batchSingle",	//batch一起校验，或alert弹出
+                verifyType: "batchSingle",	//batch로 함께 검증하거나 alert로 표시
                 isEdited: this.isEdited || this.isNew,
                 onPostLoad: function () {
                     var form = this.form;
@@ -1965,7 +1965,7 @@ MWF.xDesktop.Authentication.SignUpForm = new Class({
     //    this.highTextNode = new Element( "div", {styles : this.css.passwordStrengthText, text : this.lp.high }).inject( highNode );
     //},
     //getPasswordLevel: function( password ){
-    //    // Level（级别）
+    //    // Level(등급)
     //    //  •0-3 : [easy]
     //    //  •4-6 : [midium]
     //    //  •7-9 : [strong]
@@ -2060,7 +2060,7 @@ MWF.xDesktop.Authentication.SignUpForm = new Class({
     }
 });
 
-//忘记密码
+//비밀번호 찾기
 MWF.xDesktop.Authentication.ResetPasswordForm = new Class({
     Extends: MPopupForm,
     Implements: [Options, Events],
@@ -2166,7 +2166,7 @@ MWF.xDesktop.Authentication.ResetPasswordForm = new Class({
         MWF.xDesktop.requireApp("Template", "MForm", function () {
             this.stepForm_1 = new MForm(this.stepNode_1, {}, {
                 style: this.options.popupStyle,
-                verifyType: "single",	//batch一起校验，或alert弹出
+                verifyType: "single",	//batch로 함께 검증하거나 alert로 표시
                 isEdited: this.isEdited || this.isNew,
                 itemTemplate: {
                     name: {
@@ -2240,7 +2240,7 @@ MWF.xDesktop.Authentication.ResetPasswordForm = new Class({
         MWF.xDesktop.requireApp("Template", "MForm", function () {
             this.stepForm_2 = new MForm(this.stepNode_2, {}, {
                 style: this.options.popupStyle,
-                verifyType: "single",	//batch一起校验，或alert弹出
+                verifyType: "single",	//batch로 함께 검증하거나 alert로 표시
                 isEdited: this.isEdited || this.isNew,
                 itemTemplate: {
                     password: {
@@ -2478,7 +2478,7 @@ MWF.xDesktop.Authentication.ResetPasswordForm = new Class({
     //    this.highTextNode = new Element( "div", {styles : this.css.passwordStrengthText, text : this.lp.high }).inject( highNode );
     //},
     //getPasswordLevel: function( password ){
-    //    /*Level（级别）
+    //    /*Level(등급)
     //     •0-3 : [easy]
     //     •4-6 : [midium]
     //     •7-9 : [strong]
@@ -2532,7 +2532,7 @@ MWF.xDesktop.Authentication.ResetPasswordForm = new Class({
     }
 });
 
-//密码过期
+//비밀번호 만료
 MWF.xDesktop.Authentication.ChangePasswordForm = new Class({
     Extends: MPopupForm,
     Implements: [Options, Events],
@@ -2591,7 +2591,7 @@ MWF.xDesktop.Authentication.ChangePasswordForm = new Class({
         MWF.xDesktop.requireApp("Template", "MForm", function () {
             this.form = new MForm(this.formTableArea, this.data, {
                 style: this.options.popupStyle,
-                verifyType: "single",	//batch一起校验，或alert弹出
+                verifyType: "single",	//batch로 함께 검증하거나 alert로 표시
                 isEdited: this.isEdited || this.isNew,
                 onPostLoad: function () {
                     var form = this.form;
@@ -2786,7 +2786,7 @@ MWF.xDesktop.Authentication.ChangePasswordForm = new Class({
             oldPassword : data.password,
             newPassword : data.newPassword,
             confirmPassword : data.confirmPassword
-            //isEncrypted : "n" //是否启用加密,默认不加密,启用(y)。注意:使用加密先要在服务器运行 create encrypt key"
+            //isEncrypted : "n" //암호화 사용 여부, 기본은 암호화 안 함, 사용(y). 주의: 암호화를 사용하려면 먼저 서버에서 create encrypt key 실행"
         }
         //o2.Actions.load("x_organization_assemble_personal").ResetAction.setPasswordAnonymous( d, function (json) {
         MWF.Actions.get("x_organization_assemble_personal").setPasswordAnonymous( d, function (json) {

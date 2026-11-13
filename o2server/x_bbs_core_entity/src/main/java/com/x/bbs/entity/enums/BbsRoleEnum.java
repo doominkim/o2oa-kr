@@ -2,7 +2,7 @@ package com.x.bbs.entity.enums;
 
 
 /**
- * 论坛角色枚举类
+ * 포럼 역할 열거형 클래스
  * @author sword
  */
 public enum BbsRoleEnum {

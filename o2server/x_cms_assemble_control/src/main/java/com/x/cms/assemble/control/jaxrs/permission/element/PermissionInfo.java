@@ -5,7 +5,7 @@ import com.x.base.core.project.organization.OrganizationDefinition;
 
 public class PermissionInfo {
 
-	@FieldDescribe( "权限类别：读者|阅读|作者|管理" )
+	@FieldDescribe( "권한 유형: 독자|열람|작성자|관리" )
 	private String permission =  PermissionName.READER ;
 
 	@FieldDescribe( "使用者类别：所有人|组织|人员|群组" )

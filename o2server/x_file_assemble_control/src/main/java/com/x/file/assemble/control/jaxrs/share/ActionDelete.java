@@ -26,7 +26,7 @@ class ActionDelete extends BaseAction {
 			if (null == share) {
 				throw new ExceptionAttachmentNotExist(id);
 			}
-			/* 判断文件的所有者是否是当前用户 */
+			/* 파일 소유자가 현재 사용자인지 판단 */
 			if (!StringUtils.equals(effectivePerson.getDistinguishedName(), share.getPerson())) {
 				throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());
 			}
@@ -42,7 +42,7 @@ class ActionDelete extends BaseAction {
 				ListOrderedSet<String> set = new ListOrderedSet<>();
 				set.addAll(shareCancels);
 				shareCancels = set.asList();
-				/* 发送取消共享通知 */
+				/* 공유 취소 알림 발송 */
 				for (String str : shareCancels) {
 					this.message_send_attachment_shareCancel(share, str);
 				}

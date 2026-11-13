@@ -7,6 +7,6 @@ class ExceptionRoleNotExist extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionRoleNotExist(String flag) {
-		super("角色:{}, 不存在.", flag);
+		super("역할: {}이(가) 없습니다.", flag);
 	}
 }

@@ -36,7 +36,7 @@ public class ActionMsgListObject extends BaseAction {
                 throw new ExceptionEmptyId();
             }
             List<IMMsg> msgList = business.imConversationFactory().listMsgObject(wi.getMsgIdList());
-            if (msgList == null) { // 有可能搜不到
+            if (msgList == null) { // 검색되지 않을 수 있음
                 msgList = new ArrayList<>();
             }
             List<Wo> wos = Wo.copier.copy(msgList);
@@ -59,7 +59,7 @@ public class ActionMsgListObject extends BaseAction {
 
 
         private static final long serialVersionUID = 3649112474402515842L;
-        @FieldDescribe("消息id列表")
+        @FieldDescribe("메시지 id 목록")
         private List<String> msgIdList;
 
         public List<String> getMsgIdList() {
@@ -78,7 +78,7 @@ public class ActionMsgListObject extends BaseAction {
         static WrapCopier<IMMsg, Wo> copier = WrapCopierFactory.wo(IMMsg.class, Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("引用消息.")
+        @FieldDescribe("인용 메시지.")
         private IMMsg quoteMessage;
 
         public IMMsg getQuoteMessage() {

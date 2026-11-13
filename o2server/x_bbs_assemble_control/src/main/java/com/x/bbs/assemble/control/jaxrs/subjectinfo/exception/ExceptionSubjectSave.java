@@ -7,6 +7,6 @@ public class ExceptionSubjectSave extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjectSave( Throwable e ) {
-		super("保存主题信息时发生异常.", e );
+		super("주제 정보를 저장하는 중 오류가 발생했습니다.", e );
 	}
 }

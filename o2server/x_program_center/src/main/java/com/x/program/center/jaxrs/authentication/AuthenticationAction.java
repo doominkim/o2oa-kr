@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("authentication")
-@JaxrsDescribe("认证")
+@JaxrsDescribe("인증")
 public class AuthenticationAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(AuthenticationAction.class);
 
-	@JaxrsMethodDescribe(value = "转发对当前用户的身份识别", action = ActionWho.class)
+	@JaxrsMethodDescribe(value = "현재 사용자 신원 식별 전달", action = ActionWho.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

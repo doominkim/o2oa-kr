@@ -7,7 +7,7 @@ public class ExceptionCountEmpty extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 	
 	public ExceptionCountEmpty() {
-		super("每页条目数 count 为空， 无法进行查询." );
+		super("페이지당 항목 수 count가 비어 있어 조회할 수 없습니다." );
 	}
 	
 }

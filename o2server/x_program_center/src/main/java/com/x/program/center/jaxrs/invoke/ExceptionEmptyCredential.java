@@ -7,6 +7,6 @@ class ExceptionEmptyCredential extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionEmptyCredential() {
-		super("名称为空.");
+		super("이름이 비어 있습니다.");
 	}
 }

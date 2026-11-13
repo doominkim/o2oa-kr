@@ -7,6 +7,6 @@ class ExceptionRetract extends LanguagePromptException {
 	private static final long serialVersionUID = 1040883405179987063L;
 
 	ExceptionRetract(String workId) {
-		super("撤回失败,工作:{}.", workId);
+		super("회수 실패, 문서: {}.", workId);
 	}
 }

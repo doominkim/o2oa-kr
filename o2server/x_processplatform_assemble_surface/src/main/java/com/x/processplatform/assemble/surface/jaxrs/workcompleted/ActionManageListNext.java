@@ -27,7 +27,7 @@ class ActionManageListNext extends BaseAction {
 			throws Exception {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<List<Wo>> result = new ActionResult<>();
-			/** 避免后面输出空值 */
+			/** 뒤에서 빈 값이 출력되지 않도록 함 */
 			result.setData(new ArrayList<Wo>());
 			Business business = new Business(emc);
 			Application application = business.application().pick(applicationFlag);
@@ -51,7 +51,7 @@ class ActionManageListNext extends BaseAction {
 							inTerms, null, null, null, null, true, DESC);
 				}
 			}
-			/* 添加权限 */
+			/* 권한 추가 */
 			if (null != result.getData()) {
 				for (Wo wo : result.getData()) {
 					WorkCompleted o = emc.find(wo.getId(), WorkCompleted.class);

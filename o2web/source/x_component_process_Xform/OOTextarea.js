@@ -150,7 +150,7 @@ MWF.xApplication.process.Xform.OOTextarea = MWF.APPOOTextarea = new Class({
                 const o = {
                     valueMissing: MWF.xApplication.process.Xform.LP.requiredHint.replace('{label}', label),
                 }
-                //通过 e.detail 获取 验证有效性状态对象：ValidityState
+                //e.detail로 유효성 상태 객체 ValidityState 조회
                 for (const k in o){
                     if (e.detail[k]){
                         if (o[k]){

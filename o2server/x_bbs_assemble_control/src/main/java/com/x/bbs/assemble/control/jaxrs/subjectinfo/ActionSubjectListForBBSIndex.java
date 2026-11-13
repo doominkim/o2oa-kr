@@ -34,7 +34,7 @@ import com.x.bbs.entity.BBSSectionInfo;
 import com.x.bbs.entity.BBSSubjectInfo;
 
 /**
- * 论坛首页每个版块的贴子列表
+ * 포럼 홈 게시판별 게시글 목록
  * @author O2LEE
  *
  */
@@ -70,7 +70,7 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 				result.setData( result_cache.getData() );
 				result.setCount( result_cache.getCount() );
 			} else {
-				//继续进行数据查询
+				//데이터 조회 계속
 				result = getSubjectQueryResult(wrapIn, request, effectivePerson, page, count);
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -133,7 +133,7 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 			}
 		}
 
-		//查询的最大条目数
+		//조회 최대 항목 수
 		selectTotal = page * count;
 		if( check ){
 			if( selectTotal > 0 ){
@@ -156,7 +156,7 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 				int endIndex = page * count;
 
 				try{
-					//内存分页
+					//메모리 페이징
 					subjectInfoList = subjectInfoServiceAdv.listSubjectInSectionForPage( wrapIn.getSearchContent(), wrapIn.getForumId(), wrapIn.getMainSectionId(), wrapIn.getSectionId(), wrapIn.getCreatorName(), wrapIn.getNeedPicture(), null, selectTotal, viewSectionIds ,null,null);
 					if(ListTools.isNotEmpty( subjectInfoList ) ){
 						try {
@@ -190,7 +190,7 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 	}
 
 	/**
-	 *  将带@形式的人员标识修改为人员的姓名并且赋值到xxShort属性里
+	 *  @ 형식의 사용자 식별자를 사용자 이름으로 바꿔 xxShort 속성에 할당
 	 *
 	 * @param subject
 	 */
@@ -218,32 +218,32 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 
 	public static class Wi{
 
-		@FieldDescribe( "贴子ID." )
+		@FieldDescribe( "게시글 ID." )
 		private String subjectId = null;
 
-		@FieldDescribe( "投标选项ID." )
+		@FieldDescribe( "투표 선택지 ID." )
 		private String voteOptionId = null;
 
-		@FieldDescribe( "贴子所属论坛ID." )
+		@FieldDescribe( "게시글 소속 포럼 ID." )
 		private String forumId = null;
 
-		@FieldDescribe( "贴子所属主版块ID." )
+		@FieldDescribe( "게시글 소속 상위 게시판 ID." )
 		private String mainSectionId = null;
 
-		@FieldDescribe( "贴子所属版块ID." )
+		@FieldDescribe( "게시글 소속 게시판 ID." )
 		private String sectionId = null;
 
-		@FieldDescribe( "标题模糊搜索关键词" )
+		@FieldDescribe( "제목 유사 검색 키워드" )
 		private String searchContent = null;
 
-		@FieldDescribe( "创建者名称." )
+		@FieldDescribe( "작성자 이름." )
 		private String creatorName = null;
 
-		@FieldDescribe( "是否只查询有大图的贴子." )
+		@FieldDescribe( "큰 이미지가 있는 게시글만 조회할지 여부." )
 		private Boolean needPicture = false;
 
-		@FieldDescribe( "是否包含置顶贴." )
-		private Boolean withTopSubject = false; // 是否包含置顶贴
+		@FieldDescribe( "상단 고정글 포함 여부." )
+		private Boolean withTopSubject = false; // 상단 고정글 포함 여부
 
 		public static List<String> Excludes = new ArrayList<String>( JpaObject.FieldsUnmodify );
 
@@ -358,19 +358,19 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 		@FieldDescribe("ID")
 		private String id = "";
 
-		@FieldDescribe("论坛ID")
+		@FieldDescribe("포럼 ID")
 		private String forumId = "";
 
-		@FieldDescribe("版块ID")
+		@FieldDescribe("게시판 ID")
 		private String sectionId = "";
 
-		@FieldDescribe("主版块ID")
+		@FieldDescribe("상위 게시판 ID")
 		private String mainSectionId = "";
 
-		@FieldDescribe("首页图片ID")
+		@FieldDescribe("홈 이미지 ID")
 		private String picId = "";
 
-		@FieldDescribe("主题名称：标题")
+		@FieldDescribe("주제명: 제목")
 		private String title = "";
 
 		@FieldDescribe("主题类别：讨论，新闻等等,根据版块设置")
@@ -379,52 +379,52 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 		@FieldDescribe("主题的类别,不同的类别有不同的操作:信息|问题|投票")
 		private String typeCategory = "信息";
 
-		@FieldDescribe("主题摘要")
+		@FieldDescribe("주제 요약")
 		private String summary = null;
 
-		@FieldDescribe("最新回复时间")
+		@FieldDescribe("최근 답글 시간")
 		private Date latestReplyTime = null;
 
-		@FieldDescribe("发贴用户")
+		@FieldDescribe("작성 사용자")
 		private String creatorName = null;
 
-		@FieldDescribe("发贴用户昵称")
+		@FieldDescribe("작성 사용자 닉네임")
 		private String nickName = null;
 
-		@FieldDescribe("最新回复用户")
+		@FieldDescribe("최근 답글 사용자")
 		private String latestReplyUser = null;
 
-		@FieldDescribe("最新回复用户昵称")
+		@FieldDescribe("최근 답글 사용자 닉네임")
 		private String latestReplyUserNickName = "";
 
-		@FieldDescribe("最新回复ID")
+		@FieldDescribe("최근 답글 ID")
 		private String latestReplyId = null;
 
-		@FieldDescribe("回复数量")
+		@FieldDescribe("답글 수")
 		private Long replyTotal = 0L;
 
-		@FieldDescribe("查看数量")
+		@FieldDescribe("조회 수")
 		private Long viewTotal = 0L;
 
-		@FieldDescribe("主题热度")
+		@FieldDescribe("주제 인기도")
 		private Long hot = 0L;
 
-		@FieldDescribe("是否为置顶主题")
+		@FieldDescribe("상단 고정 주제 여부")
 		private Boolean isTopSubject = false;
 
-		@FieldDescribe("精华主题")
+		@FieldDescribe("우수 주제")
 		private Boolean isCreamSubject = false;
 
-		@FieldDescribe("是否已解决:为问题贴准备")
+		@FieldDescribe("해결 여부: 질문 글용")
 		private Boolean isCompleted = false;
 
-		@FieldDescribe("版主推荐主题")
+		@FieldDescribe("게시판 관리자 추천 주제")
 		private Boolean isRecommendSubject = false;
 
-		@FieldDescribe( "创建人姓名" )
+		@FieldDescribe( "작성자 이름" )
 		private String creatorNameShort = "";
 
-		@FieldDescribe( "当前用户是否已经投票过." )
+		@FieldDescribe( "현재 사용자의 투표 여부." )
 		private Boolean voted = false;
 
 		public String getCreatorName() {

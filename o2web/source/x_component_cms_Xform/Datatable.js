@@ -7,7 +7,7 @@ MWF.CMSDatatableFeature = {
         this.form.saveFormData();
     },
     saveArrayData: function(type, index, toIndex, data){
-        if( this.isMergeRead ){ //合并且只读，不处理
+        if( this.isMergeRead ){ //병합 및 읽기 전용, 처리하지 않음
             return;
         }
         var method = ['insertLine','addLine'].contains(type) ? 'add' : type;

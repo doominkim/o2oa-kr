@@ -24,9 +24,9 @@ class ActionGet extends BaseAction {
 				throw new ExceptionEntityNotExist(id, Building.class);
 			}
 			Wo wo = Wo.copier.copy(building);
-			/* 添加Room信息 */
+			/* Room 정보 추가 */
 			WrapTools.setRoom(business, wo);
-			/* 添加将来的Meeting信息 */
+			/* 향후 Meeting 정보 추가 */
 			WrapTools.setFutureMeeting(business, wo.getRoomList(), true);
 			result.setData(wo);
 			return result;

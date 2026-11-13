@@ -12,16 +12,16 @@ export default content({
             lp,
             showClear: false,
             placeholder: lp.components.timeMinutesSelectorClosePlaceholder,
-            value: "", // 选择的分钟数 数字 如 30
-            showValue: "", // 前端显示的时间 格式： x小时x分钟
-            key:"", // 反写回去的对象key值，多层用.分割 如 form.startTime
+            value: "", // 선택한 분 수(숫자), 예: 30
+            showValue: "", // 프론트엔드 표시 시간 형식: x시간x분
+            key:"", // 되돌려 쓸 객체 key 값, 다단계는 .으로 구분, 예: form.startTime
             hourList: [],
             chooseHour: '',
             minuteList: [],
             chooseMinute: '',
         };
     },
-    // 组件事件
+    // 컴포넌트 이벤트
     afterRender() {
       if (this.bind.value != '') {
         const v = parseInt(this.bind.value);
@@ -36,9 +36,9 @@ export default content({
         }
       }
       this.showValueChange()
-      // 初始化 hourList 
+      // hourList 초기화 
       this.initHourList();
-      // 初始化 minuteList
+      // minuteList 초기화
       this.initMiniteList();
       this.selectorDom = this.dom.querySelector(".o-time-minutes-selctor");
       let bindDom = this.dom.querySelector(".input");
@@ -52,9 +52,9 @@ export default content({
         this.selectorDom.hide();
         this.$parent.dom.removeEventListener('mousedown', this.hideEvent);
     },
-    // 选择器关闭
+    // 선택기 닫기
     selectoOutHide(e) {
-      // 计算下拉框的范围，范围外点击隐藏
+      // 드롭다운 범위 계산, 범위 밖 클릭 시 숨김
         const eCoor = this.selectorDom.getBoundingClientRect();
         const elementCoords =  {
           width: this.selectorDom.clientWidth,
@@ -69,7 +69,7 @@ export default content({
           this.selectorHide();
         }
     },
-    // 添加选择器关闭时间
+    // 선택기 닫기 이벤트 추가
     addCloseEventToParent() {
       this.hideEvent = this.selectoOutHide.bind(this);
       this.$parent.dom.addEventListener('mousedown', this.hideEvent );
@@ -87,11 +87,11 @@ export default content({
       if (this.bind.chooseHour == '') {
         minuteList.push('');
       } else {
-        if (this.bind.chooseHour == '0') { // 0小时的时候不能有0分钟
+        if (this.bind.chooseHour == '0') { // 0시간일 때는 0분 불가
           for (let index = 1; index < 60; index++) {
             minuteList.push(`${index}`);
           }
-        } else { // 有小时的时候 可以有0分钟
+        } else { // 시간이 있을 때는 0분 가능
           for (let index = 0; index < 60; index++) {
             minuteList.push(`${index}`);
           }
@@ -100,7 +100,7 @@ export default content({
       this.bind.minuteList = minuteList;
       
     },
-    // 切换
+    // 전환
     changeChooseHour(hour) {
       debugger;
       this.bind.chooseHour = hour
@@ -150,7 +150,7 @@ export default content({
       } else {
         this.bind.value = '';
       }
-      // 显示
+      // 표시
       this.showValueChange();
       this.selectorHide();
       this.spitOutValue();

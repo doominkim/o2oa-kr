@@ -11,37 +11,37 @@ import com.x.cms.core.express.tools.filter.term.LikeTerm;
 
 public class WrapInQueryDocumentCommentInfo {
 	
-	@FieldDescribe("用于排列的属性.")
+	@FieldDescribe("정렬에 사용할 속성.")
 	private String orderField = "orderNumber";
 
-	@FieldDescribe("排序方式：DESC | ASC.")
+	@FieldDescribe("정렬 방식: DESC | ASC.")
 	private String orderType = "ASC";
 	
-	@FieldDescribe("搜索条件：栏目ID")
+	@FieldDescribe("검색 조건: 게시판ID")
 	private String appId;
 
-	@FieldDescribe("搜索条件：分类ID")
+	@FieldDescribe("검색 조건: 분류ID")
 	private String categoryId;
 
-	@FieldDescribe("搜索条件：文档ID")
+	@FieldDescribe("검색 조건: 문서ID")
 	private String documentId;
 
-	@FieldDescribe("搜索条件：评论标题")
+	@FieldDescribe("검색 조건: 댓글 제목")
 	private String title;
 
-	@FieldDescribe("搜索条件：上级评论ID")
+	@FieldDescribe("검색 조건: 상위 댓글ID")
 	private String parentId;
 
-	@FieldDescribe("搜索条件：创建人姓名")
+	@FieldDescribe("검색 조건: 작성자 이름")
 	private String creatorName;
 
-	@FieldDescribe("搜索条件：评论审核状态：无审核|待审核|审核通过")
+	@FieldDescribe("검색 조건: 댓글 심사 상태: 심사 없음|심사 대기|심사 통과")
 	private String commentAuditStatus;
 
-	@FieldDescribe("搜索条件：审核人")
+	@FieldDescribe("검색 조건: 심사자")
 	private String auditorName;
 	
-	@FieldDescribe("评论的权限：私信评论 | 公开评论 | 全部评论.")
+	@FieldDescribe("댓글 권한: 비공개 댓글 | 공개 댓글 | 전체 댓글.")
 	private String permission = "private | public | all";
 	
 	private Long rank = 0L;	
@@ -143,14 +143,14 @@ public class WrapInQueryDocumentCommentInfo {
 	}
 
 	/**
-	 * 根据传入的查询参数，组织一个完整的QueryFilter对象
+	 * 전달된 조회 파라미터로 완전한 QueryFilter 객체 구성
 	 * @return
 	 */
 	public QueryFilter getQueryFilter() {
 		QueryFilter queryFilter = new QueryFilter();		
 		queryFilter.setJoinType( "and" );
 		
-		//组织查询条件对象
+		//조회 조건 객체 구성
 		if( StringUtils.isNotEmpty( this.getTitle() )) {
 			queryFilter.addLikeTerm( new LikeTerm( "title", this.getTitle() ) );
 		}

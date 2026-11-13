@@ -36,7 +36,7 @@ public class ImageBase64Action extends StandardJaxrsAction {
 	private static Logger logger = LoggerFactory.getLogger(ImageBase64Action.class);
 
 	@Path("base64")
-	// @HttpMethodDescribe(value = "灏哢RL鎸囧悜鐨勫浘鐗囪浆鎹㈡垚base64String", request =
+	// @HttpMethodDescribe(value = "URL이 가리키는 이미지를 base64String으로 변환", request =
 	// JsonElement.class , response = String.class )
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

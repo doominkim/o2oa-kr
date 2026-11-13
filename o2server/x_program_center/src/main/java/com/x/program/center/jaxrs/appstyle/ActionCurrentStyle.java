@@ -43,11 +43,11 @@ class ActionCurrentStyle extends BaseAction {
 				Portal portal = business.entityManagerContainer().flag(appStyle.getIndexPortal(), Portal.class);
 				if (null != portal && StringUtils.isNotEmpty(portal.getFirstPage())) {
 					Page page = business.entityManagerContainer().find(portal.getFirstPage(), Page.class);
-					// 设置了indexPortal就不判断hasMobile
+					// indexPortal을 설정하면 hasMobile을 판단하지 않음
 					if (null != page) {
 						wo.setIndexType(AppStyle.INDEXTYPE_PORTAL);
 						wo.setIndexPortal(portal.getId());
-						// 兼容值后期废弃
+						// 호환용 값, 추후 폐기
 						wo.setIndexId(portal.getId());
 					}
 				}
@@ -63,13 +63,13 @@ class ActionCurrentStyle extends BaseAction {
 
 		private static final long serialVersionUID = 1100871693389441652L;
 
-		// 兼容值后期废弃
+		// 호환용 값, 추후 폐기
 		private String indexId;
 
 		static WrapCopier<AppStyle, Wo> copier = WrapCopierFactory.wo(AppStyle.class, Wo.class, null,
 				ListTools.toList(JpaObject.FieldsInvisible));
 
-		@FieldDescribe("门户列表")
+		@FieldDescribe("포털 목록")
 		private List<WoPortal> portalList = new ArrayList<>();
 
 		public List<WoPortal> getPortalList() {

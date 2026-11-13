@@ -363,7 +363,7 @@ MWF.xApplication.MinderEditor.RightToolbar = new Class({
     },
     setTooltipsSize : function(){
         var noneC = { bottom : 0, y : 0 };
-        var containTop = this.editor.Content_Offset_Top + 5; //73横向菜单的高度， 5是间距
+        var containTop = this.editor.Content_Offset_Top + 5; //73은 가로 메뉴 높이, 5는 간격
         var y = this.editor.content.getSize().y - containTop;
         var styleC = this.styleActive ? this.styleTooltip.getCoordinates() : noneC;
         if( this.resourceActive ){
@@ -377,7 +377,7 @@ MWF.xApplication.MinderEditor.RightToolbar = new Class({
             var height = y - top - 10;
             this.noteTooltip.setStyles({
                 "top" : top,
-                "height" : Math.min( height , 500 ) //500是 notetoooltip 的最大高度
+                "height" : Math.min( height , 500 ) //500은 notetoooltip의 최대 높이
             });
             //var noteC = this.noteActive ? this.noteTooltip.getCoordinates() : noneC;
         }

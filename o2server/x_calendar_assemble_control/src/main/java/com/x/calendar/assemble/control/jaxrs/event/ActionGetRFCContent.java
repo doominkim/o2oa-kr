@@ -40,7 +40,7 @@ public class ActionGetRFCContent extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统根据ID查询指定日历记录信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "ID로 캘린더 기록 정보를 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -52,7 +52,7 @@ public class ActionGetRFCContent extends BaseAction {
 				wrap.setValue( content );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionEventProcess( e, "系统在获取日程信息的RFC内容时发生异常.ID:" + id );
+				Exception exception = new ExceptionEventProcess( e, "일정 정보의 RFC 내용을 가져오는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

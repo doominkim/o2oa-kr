@@ -44,18 +44,18 @@ public class ActionCheckQrCode extends BaseAction {
         wo.setApplicationList(new ArrayList<AbstractWoProxy.Application>());
         Map.Entry<String, CenterServer> firstCenter = Config.nodes().centerServers().first();
         if (firstCenter == null) {
-            throw new ExceptionProxyEmpty("中心服务");
+            throw new ExceptionProxyEmpty("센터 서비스");
         }
         String protocol = firstCenter.getValue().getHttpProtocol();
         if (StringUtils.isEmpty(protocol)) {
-            throw new ExceptionProxyEmpty("http访问协议");
+            throw new ExceptionProxyEmpty("http 접근 프로토콜");
         }
         wo.setHttpProtocol(protocol);
 
         AbstractWoProxy.Center center = new AbstractWoProxy.Center();
         String centerHost = firstCenter.getValue().getProxyHost();
         if (StringUtils.isEmpty(centerHost)) {
-            throw new ExceptionProxyEmpty("中心服务器代理Host");
+            throw new ExceptionProxyEmpty("센터 서버 프록시 Host");
         }
         center.setProxyHost(centerHost);
         center.setProxyPort(firstCenter.getValue().getProxyPort());
@@ -66,7 +66,7 @@ public class ActionCheckQrCode extends BaseAction {
                 WebServer webServer = en.getValue().getWeb();
                 if (null != webServer && BooleanUtils.isTrue(webServer.getEnable())) {
                     AbstractWoProxy.Web web = new AbstractWoProxy.Web();
-                    web.setProxyHost(StringUtils.isNotEmpty(webServer.getProxyHost()) ? webServer.getProxyHost() : centerHost); // 没有配置使用中心服务器host
+                    web.setProxyHost(StringUtils.isNotEmpty(webServer.getProxyHost()) ? webServer.getProxyHost() : centerHost); // 중앙 서버 host 사용이 설정되지 않았습니다
                     web.setProxyPort(webServer.getProxyPort());
                     wo.setWeb(web);
                 }
@@ -74,29 +74,29 @@ public class ActionCheckQrCode extends BaseAction {
                 if (null != applicationServer && BooleanUtils.isTrue(applicationServer.getEnable())) {
                     AbstractWoProxy.Application application = new AbstractWoProxy.Application();
                     application.setNode(en.getKey());
-                    application.setProxyHost(StringUtils.isNotEmpty(applicationServer.getProxyHost()) ? applicationServer.getProxyHost() : centerHost);// 没有配置使用中心服务器host
+                    application.setProxyHost(StringUtils.isNotEmpty(applicationServer.getProxyHost()) ? applicationServer.getProxyHost() : centerHost);// 중앙 서버 host 사용이 설정되지 않았습니다
                     application.setProxyPort(applicationServer.getProxyPort());
                     wo.getApplicationList().add(application);
                 }
             }
         }
         if (wo.getWeb() == null) {
-            throw new ExceptionProxyEmpty("web服务器");
+            throw new ExceptionProxyEmpty("web 서버");
         }
 
         String url = protocol + "://" + wo.getWeb().getProxyHost() + ":" + wo.getWeb().getProxyPort() + "/x_desktop/appMobileConnectCheck.html";
-        logger.info("扫码测试连接的地址： " + url);
+        logger.info("QR 스캔 연결 테스트 주소: " + url);
 
         /**
-         * 生成二维码
+         * QR 코드 생성
          */
-        int width = 200; // 二维码图片宽度
-        int height = 200; // 二维码图片高度
-        String format = "png";// 二维码的图片格式
+        int width = 200; // QR 코드 이미지 너비
+        int height = 200; // QR 코드 이미지 높이
+        String format = "png";// QR 코드 이미지 형식
 
         Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
         // hints.put(EncodeHintType.CHARACTER_SET, DefaultCharset.name); //
-        // 内容所使用字符集编码
+        // 내용에 사용하는 문자셋 인코딩
         hints.put(EncodeHintType.MARGIN, "1");
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q.toString());
 
@@ -118,7 +118,7 @@ public class ActionCheckQrCode extends BaseAction {
 
     public static class Wo extends  AbstractWoProxy {
 
-        @FieldDescribe("二维码图片base64")
+        @FieldDescribe("QR 코드 이미지 base64")
         private String qrcode;
 
         public String getQrcode() {

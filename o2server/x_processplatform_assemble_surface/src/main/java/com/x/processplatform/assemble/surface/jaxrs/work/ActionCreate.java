@@ -38,9 +38,9 @@ class ActionCreate extends BaseCreateAction {
 	ActionResult<List<Wo>> execute(EffectivePerson effectivePerson, String processFlag, JsonElement jsonElement)
 			throws Exception {
 		LOGGER.debug("execute:{}, processFlag:{}.", effectivePerson::getDistinguishedName, () -> processFlag);
-		// 新建工作id
+		// 새 업무 문서 id
 		String workId = "";
-		// 已存在草稿id
+		// 기존 초안 id
 		String lastestWorkId = "";
 		String identity = "";
 		Process process = null;
@@ -70,7 +70,7 @@ class ActionCreate extends BaseCreateAction {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 			if (BooleanUtils.isTrue(wi.getLatest())) {
-				// 判断是否是要直接打开之前创建的草稿,草稿的判断标准:有待办无任何已办
+				// 이전에 생성한 초안을 직접 열지 판단, 초안 판단 기준:결재 대기는 있고 처리 완료는 없음
 				workId = lastestWorkId = this.latest(business, process, identity);
 			}
 		}
@@ -80,16 +80,16 @@ class ActionCreate extends BaseCreateAction {
 			this.copyAttachment(workId, wi.getAttachmentList(), effectivePerson);
 		}
 
-		// 设置Work信息
+		// Work 정보 설정
 		if (BooleanUtils.isTrue(wi.getSkipDraftCheck())) {
 			this.updateWorkDraftCheck(workId);
 		}
 		if (BooleanUtils.isFalse(wi.getLatest()) || (StringUtils.isEmpty(lastestWorkId))) {
 			updateWork(identity, workId, wi.getTitle(), wi.getParentWork());
-			// 驱动工作,使用非队列方式
+			// 업무 문서 구동, 비큐 방식 사용
 			this.processingCreateWork(workId);
 		} else {
-			// 如果是草稿,准备后面的直接打开
+			// 초안이면 이후 직접 열기 준비
 			workId = lastestWorkId;
 		}
 		List<Wo> wos = assemble(effectivePerson, workId);

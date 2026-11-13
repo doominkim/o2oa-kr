@@ -14,7 +14,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@Schema(name = "IMMsgCollection", description = "消息收藏.")
+@Schema(name = "IMMsgCollection", description = "메시지 즐겨찾기.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.IMMsgCollection.table, uniqueConstraints = {
@@ -41,20 +41,20 @@ public class IMMsgCollection extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
 
 
     public static final String messageId_FIELDNAME = "messageId";
-    @FieldDescribe("消息id， 关联的消息.")
+    @FieldDescribe("메시지 id, 연결된 메시지.")
     @Column(length = length_64B, name = ColumnNamePrefix + messageId_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String messageId;
 
     public static final String createPerson_FIELDNAME = "createPerson";
-    @FieldDescribe("消息收藏人")
+    @FieldDescribe("메시지 즐겨찾기 사용자")
     @Column(name = ColumnNamePrefix + createPerson_FIELDNAME)
     @CheckPersist(allowEmpty = false)
     private String createPerson;

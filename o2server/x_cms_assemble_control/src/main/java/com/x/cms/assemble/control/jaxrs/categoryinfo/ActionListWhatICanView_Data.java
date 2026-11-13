@@ -53,45 +53,45 @@ public class ActionListWhatICanView_Data extends BaseAction {
 			isXAdmin = userManagerService.isManager( effectivePerson );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+			Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
 
-		if (check) {// 判断用户是否该栏目的管理者
+		if (check) {// 사용자가 해당 게시판의 관리자인지 확인
 			try {
 				if ( appInfoServiceAdv.isAppInfoManager( appId, personName, unitNames, groupNames, roleNames )) {
 					appManager = true;
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		if (check) {// 判断用户是否该栏目的发布者
+		if (check) {// 사용자가 해당 게시판의 발행자인지 확인
 			try {
 				if (appInfoServiceAdv.isAppInfoPublisher( appId, personName, unitNames, groupNames, roleNames )) {
 					appPublisher = true;
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		if (check) {// 判断用户是否该栏目的访问者
+		if (check) {// 사용자가 해당 게시판의 접근자인지 확인
 			try {
 				if (appInfoServiceAdv.isAppInfoViewer( appId, personName, unitNames, groupNames )) {
 					appViewer = true;
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -109,7 +109,7 @@ public class ActionListWhatICanView_Data extends BaseAction {
 						ids = categoryInfoServiceAdv.listIdsByAppId( appId );
 					} catch (Exception e) {
 						check = false;
-						Exception exception = new ExceptionCategoryInfoProcess(e, "根据应用栏目ID查询分类信息对象时发生异常。AppId:" + appId);
+						Exception exception = new ExceptionCategoryInfoProcess(e, "게시판 ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. AppId:" + appId);
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -123,7 +123,7 @@ public class ActionListWhatICanView_Data extends BaseAction {
 									null, null, "数据", null, 1000, isXAdmin );
 						} catch (Exception e) {
 							check = false;
-							Exception exception = new ExceptionCategoryInfoProcess(e, "系统在检查用户是否是平台管理员时发生异常。Name:" + personName);
+							Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
 							result.error(exception);
 							logger.error(e, effectivePerson, request, null);
 						}
@@ -137,7 +137,7 @@ public class ActionListWhatICanView_Data extends BaseAction {
 						categoryInfoList = categoryInfoServiceAdv.list(ids);
 					} catch (Exception e) {
 						check = false;
-						Exception exception = new ExceptionCategoryInfoProcess(e, "根据ID列表查询分类信息对象时发生异常。");
+						Exception exception = new ExceptionCategoryInfoProcess(e, "ID 목록으로 분류 정보 객체를 조회하는 중 오류가 발생했습니다.");
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -174,7 +174,7 @@ public class ActionListWhatICanView_Data extends BaseAction {
 
 		static WrapCopier<CategoryInfo, Wo> copier = WrapCopierFactory.wo( CategoryInfo.class, Wo.class, null, ListTools.toList(JpaObject.FieldsInvisible));
 
-		@FieldDescribe("扩展信息JSON内容")
+		@FieldDescribe("확장 정보 JSON 내용")
 		private String extContent = null;
 
 		public String getExtContent() {

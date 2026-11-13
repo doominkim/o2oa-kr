@@ -39,15 +39,15 @@ public class Host {
 	}
 
 	public static boolean innerIp(String ip) {
-		// // 匹配10.0.0.0 - 10.255.255.255的网段
+		// // 10.0.0.0 - 10.255.255.255 대역 일치
 		// String pattern_10 =
 		// "^(\\D)*10(\\.([2][0-4]\\d|[2][5][0-5]|[01]?\\d?\\d)){3}";
 		//
-		// // 匹配172.16.0.0 - 172.31.255.255的网段
+		// // 172.16.0.0 - 172.31.255.255 대역 일치
 		// String pattern_172 =
 		// "172\\.([1][6-9]|[2]\\d|3[01])(\\.([2][0-4]\\d|[2][5][0-5]|[01]?\\d?\\d)){2}";
 		//
-		// // 匹配192.168.0.0 - 192.168.255.255的网段
+		// // 192.168.0.0 - 192.168.255.255 대역 일치
 		// String pattern_192 =
 		// "192\\.168(\\.([2][0-4]\\d|[2][5][0-5]|[01]?\\d?\\d)){2}";
 		String pattern = "((192\\.168|172\\.([1][6-9]|[2]\\d|3[01]))"
@@ -63,7 +63,7 @@ public class Host {
 			return false;
 		}
 		/**
-		 * 判断IP格式和范围
+		 * IP 형식과 범위 판단
 		 */
 		String rexp = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
 
@@ -75,34 +75,34 @@ public class Host {
 	}
 
 	/**
-	 * 生成机器码（基于MAC地址和硬件信息）
+	 * 머신 코드 생성(MAC 주소와 하드웨어 정보 기반)
 	 */
 	public static String generateMachineCode() {
 		try {
 			StringBuilder sb = new StringBuilder();
 
-			// 1. 获取MAC地址
+			// 1. MAC 주소 조회
 			String macAddress = getMacAddress();
 			sb.append(macAddress);
 
-			// 2. 获取其他系统信息
+			// 2. 기타 시스템 정보 조회
 			String osArch = System.getProperty("os.arch");
 			String userName = System.getProperty("user.name");
 
 			sb.append("#").append(osArch).append("#").append(userName);
 
-			// 3. 生成MD5哈希作为机器码
-			logger.debug("机器码信息: {}", sb.toString());
+			// 3. MD5 해시를 머신 코드로 생성
+			logger.debug("머신 코드 정보: {}", sb.toString());
 			return MD5Tool.getMD5Str(sb.toString());
 
 		} catch (Exception e) {
-			logger.warn("生成机器码失败: {}", e.getMessage());
+			logger.warn("머신 코드 생성 실패: {}", e.getMessage());
 		}
 		return "";
 	}
 
 	/**
-	 * 获取主MAC地址
+	 * 기본 MAC 주소 조회
 	 */
 	private static String getMacAddress() {
 		try {

@@ -6,7 +6,7 @@ class ExceptionFailureLocked extends PromptException {
 
 	private static final long serialVersionUID = 1859164370743532895L;
 
-	public static String defaultMessage = "您已经被锁定, 解锁时间： {} .";
+	public static String defaultMessage = "계정이 잠겼습니다. 잠금 해제 시간: {} .";
 
 	ExceptionFailureLocked(String time) {
 		super(defaultMessage, time);

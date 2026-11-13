@@ -6,7 +6,7 @@
 //public class SignalStackLogProperties extends JsonProperties {
 //
 //	private static final long serialVersionUID = 5194057760551594662L;
-//	@FieldDescribe("信号栈.")
+//	@FieldDescribe("신호 스택.")
 //	private SignalStack signalStack;
 //
 //	public SignalStack getSignalStack() {

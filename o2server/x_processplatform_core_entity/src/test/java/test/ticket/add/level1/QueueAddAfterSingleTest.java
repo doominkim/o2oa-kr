@@ -21,7 +21,7 @@ class QueueAddAfterSingleTest {
 
 	private static Gson gson = new Gson();
 
-	@DisplayName("A后加签EFG,FEG任意处理")
+	@DisplayName("A 뒤에 EFG 추가 결재, FEG 임의 처리")
 	@Test
 	@Order(1)
 	void test01() {

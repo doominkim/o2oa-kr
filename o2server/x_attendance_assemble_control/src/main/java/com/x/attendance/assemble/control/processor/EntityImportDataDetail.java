@@ -8,15 +8,15 @@ public class EntityImportDataDetail extends AbStractDataForOperator {
 	private String file_id = null;
 	
 	/**
-	 * 第几个ExcelSheet
+	 * 몇 번째 ExcelSheet
 	 */
 	private int sheetIndex = 0;
 	/**
-	 * 当前数据行数
+	 * 현재 데이터 행 수
 	 */
 	private int curRow = 0;
 	/**
-	 * 当前数据内容
+	 * 현재 데이터 내용
 	 */
 	private List<String> colmlist = null;
 

@@ -10,5 +10,5 @@ public class ExceptionFileNameEmpty extends LanguagePromptException {
 
     private static final long serialVersionUID = -8045803301464102031L;
 
-    ExceptionFileNameEmpty(){ super("文件名称不能为空！"); }
+    ExceptionFileNameEmpty(){ super("파일 이름은 비워 둘 수 없습니다!"); }
 }

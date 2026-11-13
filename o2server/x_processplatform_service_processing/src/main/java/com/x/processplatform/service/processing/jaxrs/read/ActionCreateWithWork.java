@@ -31,7 +31,7 @@ import com.x.processplatform.service.processing.ProcessPlatformKeyClassifyExecut
 
 /**
  * 
- * @author zhour 对工作添加待阅,选择是否重发通知
+ * @author zhour 업무 문서에 열람 대기 추가, 알림 재발송 여부 선택
  */
 class ActionCreateWithWork extends BaseAction {
 
@@ -92,7 +92,7 @@ class ActionCreateWithWork extends BaseAction {
 							o.setUnit(unit);
 							o.setSender(sender);
 							updates.add(o);
-							/* 同步映射字段 */
+							/* 매핑 필드 동기화 */
 							o.copyProjectionFields(work);
 						} else {
 							Read read = new Read(work, identity, unit, person);

@@ -19,7 +19,7 @@ class ActionCreate extends BaseAction {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = gson.fromJson(jsonElement, Wi.class);
 		UnexpectedErrorLog o = Wi.copier.copy(wi);
-		/** 默认使用传递过来的id,如果不存在那么重新赋值 */
+		/** 기본적으로 전달된 id 사용, 없으면 새로 할당 */
 		if (StringUtils.isEmpty(o.getId())) {
 			o.setId(StringTools.uniqueToken());
 		}

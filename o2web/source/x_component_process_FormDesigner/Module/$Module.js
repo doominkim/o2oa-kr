@@ -1113,7 +1113,7 @@ MWF.xApplication.process.FormDesigner.Module.$Module = MWF.FC$Module = new Class
 
 		if (this.json.recoveryStyles) Object.each(this.json.recoveryStyles, function(value, key){
 			if ((value.indexOf("x_processplatform_assemble_surface")!=-1 || value.indexOf("x_portal_assemble_surface")!=-1)){
-				//需要运行时处理
+				//런타임 처리 필요
 			}else{
 				this.node.setStyle(key, value);
 				delete this.json.styles[key];
@@ -1362,7 +1362,7 @@ MWF.xApplication.process.FormDesigner.Module.$Module = MWF.FC$Module = new Class
 		return obj;
 	},
 
-	//脚本附签上的脚本编辑器
+	//스크립트 탭의 스크립트 편집기
 	addScriptJsEditor: function (propertyName, jsEditor) {
 		if( !this.scriptJsEditors )this.scriptJsEditors = {};
 		this.scriptJsEditors[propertyName] = jsEditor;

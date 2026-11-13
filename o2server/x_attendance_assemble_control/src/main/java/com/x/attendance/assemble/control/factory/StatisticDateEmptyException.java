@@ -7,6 +7,6 @@ class StatisticDateEmptyException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	StatisticDateEmptyException() {
-		super("统计日期不能为空.");
+		super("통계 날짜는 비워 둘 수 없습니다.");
 	}
 }

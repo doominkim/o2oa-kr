@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 分类信息基础功能服务类
+ * 분류 정보 기본 기능 서비스 클래스
  *
  * @author O2LEE
  */
@@ -38,12 +38,12 @@ public class CategoryInfoFactory extends ElementFactory {
 		return this.pick(flag, CategoryInfo.class);
 	}
 
-	//@MethodDescribe("获取指定Id的CategoryInfo分类信息对象")
+	//@MethodDescribe("지정한 Id의 CategoryInfo 분류 정보 객체 조회")
 	public CategoryInfo get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, CategoryInfo.class );
 	}
 
-	//@MethodDescribe("列示全部的CategoryInfo分类信息列表")
+	//@MethodDescribe("전체 CategoryInfo 분류 정보 목록 조회")
 	@SuppressWarnings("unused")
 	public List<CategoryInfo> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( CategoryInfo.class );
@@ -53,7 +53,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		return em.createQuery(cq).getResultList();
 	}
 
-	//@MethodDescribe("列示全部的CategoryInfo分类信息列表")
+	//@MethodDescribe("전체 CategoryInfo 분류 정보 목록 조회")
 	public List<String> listAllIds() throws Exception {
 		EntityManager em = this.entityManagerContainer().get( CategoryInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -121,7 +121,7 @@ public class CategoryInfoFactory extends ElementFactory {
 	}
 
 	/**
-	 * 根据需要过滤的栏目列表和信息类型以及返回最大条目数量列示栏目信息ID列表
+	 * 필터링할 게시판 목록, 정보 유형, 최대 반환 건수에 따라 게시판 정보 ID 목록 조회
 	 * @param appIds
 	 * @param documentType
 	 * @param maxCount
@@ -136,11 +136,11 @@ public class CategoryInfoFactory extends ElementFactory {
 		TypedQuery<String> query = null;
 		Predicate p = null;
 
-		//需要过滤的栏目ID为空
+		//필터링할 게시판 ID가 비어 있음
 		if( ListTools.isEmpty( appIds )) {
 			p = CriteriaBuilderTools.predicate_and(cb, null, root.get( CategoryInfo_.appId ).in( appIds ) );
 		}
-		//查询指定信息类别下的所有分类信息列表
+		//지정한 정보 유형의 모든 분류 정보 목록 조회
 		if( StringUtils.isNotEmpty( documentType ) && !"全部".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, null, cb.equal( root.get( CategoryInfo_.documentType ), documentType ) );
 		}
@@ -165,7 +165,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		return em.createQuery( cq.where(p) ).setMaxResults(maxCount).getResultList();
 	}
 
-	//@MethodDescribe("根据应用ID列示所有的CategoryInfo分类信息数量")
+	//@MethodDescribe("앱 ID로 모든 CategoryInfo 분류 정보 수 조회")
 	public Long countByAppId( String appId, String documentType ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(CategoryInfo.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -179,7 +179,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
 
-	//@MethodDescribe("根据分类ID列示所有下级CategoryInfo分类信息列表")
+	//@MethodDescribe("분류 ID로 모든 하위 CategoryInfo 분류 정보 목록 조회")
 	public List<String> listByParentId( String categoryId ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get( CategoryInfo.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -190,7 +190,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		return em.createQuery( cq.where(p) ).setMaxResults(100).getResultList();
 	}
 
-	//@MethodDescribe("对分类信息进行模糊查询，并且返回信息列表.")
+	//@MethodDescribe("분류 정보를 유사 검색하여 정보 목록 반환.")
 	public List<String> listLike(String keyStr, String documentType ) throws Exception {
 		String str = keyStr.replaceAll("_", "\\\\_");
 		str = str.replaceAll("%", "\\\\%");
@@ -262,7 +262,7 @@ public class CategoryInfoFactory extends ElementFactory {
 	}
 
 	/**
-	 * 查询用户在限定应用内有权限发布的分类
+	 * 한정된 앱 안에서 사용자가 발행 권한을 가진 분류 조회
 	 * @param inAppInfoIds
 	 * @param personName
 	 * @param unitNames
@@ -309,14 +309,14 @@ public class CategoryInfoFactory extends ElementFactory {
 	}
 
 	/**
-	 * 根据权限查询用户可以发布文档的分类ID列表(根据权限, 不检测allPeopleView和allPeoplePublish)
-	 * 可管理的分类也属于可发布的分类
+	 * 권한에 따라 사용자가 문서를 발행할 수 있는 분류 ID 목록 조회(권한 기준, allPeopleView와 allPeoplePublish 미확인)
+	 * 관리 가능한 분류도 발행 가능한 분류에 포함
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
-	 * @param inAppInfoIds  - 需要限定的栏目ID列表
-	 * @param inCategoryIds  - 栏目ID的最大范围
-	 * @param excludCategoryIds - 需要排除的栏目ID
+	 * @param inAppInfoIds  - 한정할 게시판 ID 목록
+	 * @param inCategoryIds  - 게시판 ID의 최대 범위
+	 * @param excludCategoryIds - 제외할 게시판 ID
 	 * @return
 	 * @throws Exception
 	 */
@@ -330,11 +330,11 @@ public class CategoryInfoFactory extends ElementFactory {
 
 		Predicate p = null;
 		Predicate p_filter = null;
-		//限定栏目范围
+		//게시판 범위 한정
 		if( ListTools.isNotEmpty( inAppInfoIds )) {
 			p_filter = root.get( CategoryInfo_.appId ).in( inAppInfoIds );
 		}
-		//限定范围
+		//범위 한정
 		if( ListTools.isNotEmpty( inCategoryIds )) {
 			if( p_filter == null ) {
 				p_filter = root.get( CategoryInfo_.id ).in( inCategoryIds );
@@ -342,7 +342,7 @@ public class CategoryInfoFactory extends ElementFactory {
 				p_filter = cb.and( p_filter, root.get( CategoryInfo_.id ).in( inCategoryIds ));
 			}
 		}
-		//排除指定的ID列表
+		//지정한 ID 목록 제외
 		if( ListTools.isNotEmpty( excludCategoryIds )) {
 			if( p_filter == null ) {
 				p_filter = cb.not( root.get( CategoryInfo_.id ).in( excludCategoryIds ));
@@ -352,7 +352,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		}
 		Predicate p_permission = null;
 		if( StringUtils.isNotEmpty( personName )) {
-			//可以管理的栏目，肯定可以发布信息
+			//관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.isMember( personName, root.get( CategoryInfo_.manageablePersonList ));
 			p_permission = cb.or( p_permission, cb.isMember( personName, root.get( CategoryInfo_.publishablePersonList )));
 		}
@@ -371,7 +371,7 @@ public class CategoryInfoFactory extends ElementFactory {
 			}
 		}
 
-		//使用新的条件将两个条件组合起来
+		//새 조건으로 두 조건을 결합
 		if( p_filter != null ) {
 			p = p_filter;
 		}
@@ -392,14 +392,14 @@ public class CategoryInfoFactory extends ElementFactory {
 	}
 
 	/**
-	 * 根据权限查询用户可以访问文档的分类ID列表(根据权限, 不检测allPeopleView和allPeoplePublish)
-	 * 可发布、可管理的分类也属于可见分类
+	 * 권한에 따라 사용자가 문서에 접근할 수 있는 분류 ID 목록 조회(권한 기준, allPeopleView와 allPeoplePublish 미확인)
+	 * 발행·관리 가능한 분류도 열람 가능한 분류에 포함
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames
-	 * @param inAppInfoIds  - 需要限定的栏目ID列表
-	 * @param inCategoryIds  - 栏目ID的最大范围
-	 * @param excludCategoryIds - 需要排除的栏目ID
+	 * @param inAppInfoIds  - 한정할 게시판 ID 목록
+	 * @param inCategoryIds  - 게시판 ID의 최대 범위
+	 * @param excludCategoryIds - 제외할 게시판 ID
 	 * @return
 	 * @throws Exception
 	 */
@@ -413,11 +413,11 @@ public class CategoryInfoFactory extends ElementFactory {
 
 		Predicate p = null;
 		Predicate p_filter = null;
-		//限定栏目范围
+		//게시판 범위 한정
 		if( ListTools.isNotEmpty( inAppInfoIds )) {
 			p_filter = root.get( CategoryInfo_.appId ).in( inAppInfoIds );
 		}
-		//限定范围
+		//범위 한정
 		if( ListTools.isNotEmpty( inCategoryIds )) {
 			if( p_filter == null ) {
 				p_filter = root.get( CategoryInfo_.id ).in( inCategoryIds );
@@ -425,7 +425,7 @@ public class CategoryInfoFactory extends ElementFactory {
 				p_filter = cb.and( p_filter, root.get( CategoryInfo_.id ).in( inCategoryIds ));
 			}
 		}
-		//排除指定的ID列表
+		//지정한 ID 목록 제외
 		if( ListTools.isNotEmpty( excludCategoryIds )) {
 			if( p_filter == null ) {
 				p_filter = cb.not( root.get( CategoryInfo_.id ).in( excludCategoryIds ));
@@ -436,7 +436,7 @@ public class CategoryInfoFactory extends ElementFactory {
 
 		Predicate p_permission = null;
 		if( StringUtils.isNotEmpty( personName )) {
-			//可以管理的栏目，肯定可以发布信息
+			//관리할 수 있는 게시판에는 반드시 정보를 발행할 수 있음
 			p_permission = cb.isMember( personName, root.get( CategoryInfo_.manageablePersonList ));
 			p_permission = cb.or( p_permission, cb.isMember( personName, root.get( CategoryInfo_.publishablePersonList )));
 		}
@@ -459,7 +459,7 @@ public class CategoryInfoFactory extends ElementFactory {
 			}
 		}
 
-		//使用新的条件将两个条件组合起来
+		//새 조건으로 두 조건을 결합
 		if( p_filter != null ) {
 			p = p_filter;
 		}
@@ -480,7 +480,7 @@ public class CategoryInfoFactory extends ElementFactory {
 	}
 
 	/**
-	 * 查询所有用户都可以发布的分类ID列表
+	 * 모든 사용자가 발행할 수 있는 분류 ID 목록 조회
 	 * @param inAppInfoIds
 	 * @param inCategoryIds
 	 * @param excludCategoryIds
@@ -511,7 +511,7 @@ public class CategoryInfoFactory extends ElementFactory {
 	}
 
 	/**
-	 * 查询所有用户都可以发布的分类ID列表(检测allPeopleView和allPeoplePublish)
+	 * 모든 사용자가 발행할 수 있는 분류 ID 목록 조회(allPeopleView와 allPeoplePublish 확인)
 	 * @param inAppInfoIds
 	 * @param inCategoryIds
 	 * @param excludCategoryIds
@@ -547,7 +547,7 @@ public class CategoryInfoFactory extends ElementFactory {
 	}
 
 	/**
-	 * 查询指定用户，组织，群组可以管理的分类列表
+	 * 지정한 사용자, 조직, 그룹이 관리할 수 있는 분류 목록 조회
 	 * @param personName
 	 * @param unitNames
 	 * @param groupNames

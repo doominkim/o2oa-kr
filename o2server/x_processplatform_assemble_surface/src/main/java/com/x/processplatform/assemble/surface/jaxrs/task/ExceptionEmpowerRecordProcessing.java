@@ -7,7 +7,7 @@ class ExceptionEmpowerRecordProcessing extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionEmpowerRecordProcessing(String job) {
-		super("授权记录失败,job: {}.", job);
+		super("권한 위임 기록 실패, job: {}.", job);
 	}
 
 }

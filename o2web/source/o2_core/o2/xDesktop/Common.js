@@ -959,7 +959,7 @@ layout.startProcess = function (app, process, data, identity, callback, target, 
             const processArea = content.querySelector('.index-starter-content');
             createStartableProcess(json.data, processArea, options, p.dlg);
 
-            //搜索
+            //검색
             const input = content.querySelector('oo-input');
             input.addEvent('keydown', (e) => {
                 if (e.key === 'enter') {

@@ -56,7 +56,7 @@
               <template #title>
                 <div class="item_server_item_slot">{{lp._storageServer.files[type]}}</div>
                 <!--              <div class="systemconfig_item_info">-->
-                <!--                <button class="mainColor_bg">添加存储节点</button>-->
+                <!--                <button class="mainColor_bg">저장소 노드 추가</button>-->
                 <!--              </div>-->
               </template>
 

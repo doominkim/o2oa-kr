@@ -32,7 +32,7 @@ public class ActionSubjectSetCream extends BaseAction {
 			}
 		}
 
-		// 查询版块信息是否存在
+		// 게시판 정보 존재 여부 조회
 		if (check) {
 			try {
 				subjectInfo = subjectInfoServiceAdv.get(id);
@@ -64,7 +64,7 @@ public class ActionSubjectSetCream extends BaseAction {
 				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSubjectOperation(e, "用户在设置精华主题信息时发生异常！");
+				Exception exception = new ExceptionSubjectOperation(e, "추천 게시물로 지정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

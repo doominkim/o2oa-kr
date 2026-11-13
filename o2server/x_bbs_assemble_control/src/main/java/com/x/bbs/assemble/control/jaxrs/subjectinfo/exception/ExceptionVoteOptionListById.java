@@ -7,6 +7,6 @@ public class ExceptionVoteOptionListById extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionVoteOptionListById( Throwable e, String id ) {
-		super("系统在根据ID查询主题的投票选项时发生异常.ID:" + id, e );
+		super("ID로 주제의 투표 항목을 조회하는 중 오류가 발생했습니다. ID:" + id, e );
 	}
 }

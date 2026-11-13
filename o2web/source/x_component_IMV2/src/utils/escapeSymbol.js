@@ -249,7 +249,7 @@ const htmlSymbols = () => {
 }
 
 /**
- * 编码后的字符串还原
+ * 인코딩된 문자열 복원
  * @param text
  * @returns {string}
  */

@@ -7,6 +7,6 @@ class InfoIdEmptyException extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	InfoIdEmptyException() {
-		super("信息Id为空，无法继续查询或者保存数据。" );
+		super("정보 ID가 비어 있어 데이터를 조회하거나 저장할 수 없습니다." );
 	}
 }

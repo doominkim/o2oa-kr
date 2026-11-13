@@ -17,7 +17,7 @@ import com.x.attendance.entity.AttendanceStatisticRequireLog;
 import com.x.attendance.entity.AttendanceStatisticRequireLog_;
 import com.x.base.core.project.exception.ExceptionWhen;
 /**
- * 员工考勤需求配置服务器
+ * 직원 근태 요구 설정 서비스
  */
 public class AttendanceStatisticRequireLogFactory extends AbstractFactory {
 	
@@ -25,12 +25,12 @@ public class AttendanceStatisticRequireLogFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的AttendanceStatisticRequireLog信息对象")
+	//@MethodDescribe("지정 Id의 AttendanceStatisticRequireLog 정보 객체 조회")
 	public AttendanceStatisticRequireLog get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, AttendanceStatisticRequireLog.class, ExceptionWhen.none);
 	}
 	
-//	@MethodDescribe("列示全部的AttendanceStatisticRequireLog信息列表")
+//	@MethodDescribe("전체 AttendanceStatisticRequireLog 정보 목록 조회")
 	@SuppressWarnings("unused")
 	public List<AttendanceStatisticRequireLog> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceStatisticRequireLog.class);
@@ -40,7 +40,7 @@ public class AttendanceStatisticRequireLogFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceStatisticRequireLog信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceStatisticRequireLog 정보 목록 조회")
 	public List<AttendanceStatisticRequireLog> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<AttendanceStatisticRequireLog>();
@@ -53,7 +53,7 @@ public class AttendanceStatisticRequireLogFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe("根据统计名称，统计Key，处理状态，列示AttendanceStatisticRequireLog信息列表")
+	//@MethodDescribe("통계 이름, 통계 Key, 처리 상태로 AttendanceStatisticRequireLog 정보 목록 조회")
 	public List<AttendanceStatisticRequireLog> getByNameKeyAndStatus( String name, String key, String stauts ) throws Exception {
 		EntityManager em = this.entityManagerContainer().get(AttendanceStatisticRequireLog.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -100,7 +100,7 @@ public class AttendanceStatisticRequireLogFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据统计的类型以及处理状态获取所有符合条件的统计需求对象列表
+	 * 통계 유형과 처리 상태로 조건에 맞는 모든 통계 요청 객체 목록 조회
 	 * 
 	 * @param statisticType：PERSON_PER_MONTH|UNIT_PER_MONTH|TOPUNIT_PER_MONTH|UNIT_PER_DAY|TOPUNIT_PER_DAY
 	 * @param processStatus：WAITING|PROCESSING|COMPLETE|ERROR

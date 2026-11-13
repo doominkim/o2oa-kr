@@ -27,7 +27,7 @@ import com.x.processplatform.assemble.surface.WorkCompletedControlBuilder;
 import com.x.processplatform.core.entity.content.WorkCompleted;
 
 /**
- * 为指定的用户根据WorkCompleted直接创建WorkCompleted
+ * 지정 사용자에 대해 WorkCompleted로 WorkCompleted 직접 생성
  * 
  * @author zhour
  *
@@ -70,10 +70,10 @@ class ActionCreateWithWorkCompleted extends BaseAction {
 
 		private static final long serialVersionUID = 6222459992132813639L;
 
-		@FieldDescribe("已完成工作")
+		@FieldDescribe("완료된 업무 문서")
 		private String workCompleted;
 
-		@FieldDescribe("可阅读人员")
+		@FieldDescribe("열람 가능 사용자")
 		private List<String> personList = new ArrayList<>();
 
 		public String getWorkCompleted() {

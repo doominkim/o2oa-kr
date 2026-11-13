@@ -22,7 +22,7 @@ public class MessageFactory extends AbstractFactory {
 
 
 	/**
-	 * 查询用户对象
+	 * 사용자 객체 조회
 	 * @param credential
 	 * @return
 	 * @throws Exception

@@ -44,7 +44,7 @@ class ActionListWithGroupTree extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("群组")
+		@FieldDescribe("그룹")
 		private List<String> groupList = new ArrayList<>();
 
 		public List<String> getGroupList() {
@@ -64,22 +64,22 @@ class ActionListWithGroupTree extends BaseAction {
 		static WrapCopier<Group, Wo> copier = WrapCopierFactory.wo(Group.class, Wo.class, ListTools.toList(Group.id_FIELDNAME, Group.distinguishedName_FIELDNAME),
 				null);
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectGroupCount = 0L;
 
-		@FieldDescribe("直接下级用户数量")
+		@FieldDescribe("직속 하위 사용자 수")
 		private Long subDirectPersonCount = 0L;
 
-		@FieldDescribe("直接下级身份数量")
+		@FieldDescribe("직속 하위 신분 수")
 		private Long subDirectIdentityCount = 0L;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectOrgCount = 0L;
 
-		@FieldDescribe("直接下级组织")
+		@FieldDescribe("직속 하위 조직")
 		private List<WoUnit> subUnits = new ArrayList<>();
 
-		@FieldDescribe("直接下级群组")
+		@FieldDescribe("직속 하위 그룹")
 		private List<Wo> subGroups = new ArrayList<>();
 
 		public List<Wo> getSubGroups() {
@@ -139,13 +139,13 @@ class ActionListWithGroupTree extends BaseAction {
 				ListTools.toList(Unit.id_FIELDNAME, Unit.distinguishedName_FIELDNAME, Unit.levelName_FIELDNAME),
 				null);
 
-		@FieldDescribe("直接下级身份成员数量")
+		@FieldDescribe("직속 하위 신분 구성원 수")
 		private Long subDirectUnitCount = 0L;
 
-		@FieldDescribe("直接下级组织数量")
+		@FieldDescribe("직속 하위 조직 수")
 		private Long subDirectIdentityCount = 0L;
 
-		@FieldDescribe("直接下级组织")
+		@FieldDescribe("직속 하위 조직")
 		private List<WoUnit> subUnits = new ArrayList<>();
 
 		public Long getSubDirectUnitCount() {

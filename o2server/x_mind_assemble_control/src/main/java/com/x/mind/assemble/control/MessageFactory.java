@@ -15,7 +15,7 @@ public class MessageFactory {
 	private static Logger logger = LoggerFactory.getLogger( MessageFactory.class );
 
 	/**
-     * 文件发送通知
+     * 파일 발송 알림
 	 * @param persons
      * @param messageWo
      * @throws Exception
@@ -29,7 +29,7 @@ public class MessageFactory {
 	}
 
 	/**
-     * 文件分享通知
+     * 파일 공유 알림
 	 * @param persons
      * @param messageWo
      * @throws Exception
@@ -44,7 +44,7 @@ public class MessageFactory {
 	}
 
 	/**
-     * 文件发送通知
+     * 파일 발송 알림
 	 * @param person
      * @param messageWo
      * @throws Exception
@@ -59,7 +59,7 @@ public class MessageFactory {
 	}
 
 	/**
-	 * 文件分享通知
+	 * 파일 공유 알림
 	 * @param person
 	 * @param messageWo
 	 * @throws Exception

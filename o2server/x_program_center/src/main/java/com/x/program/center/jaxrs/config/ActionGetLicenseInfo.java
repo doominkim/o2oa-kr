@@ -37,21 +37,21 @@ class ActionGetLicenseInfo extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("客户名称.")
+		@FieldDescribe("고객 이름.")
 		private String name;
-		@FieldDescribe("顶层组织名称.")
+		@FieldDescribe("최상위 조직 이름.")
 		private String unitName;
-		@FieldDescribe("邮箱.")
+		@FieldDescribe("이메일.")
 		private String email;
-		@FieldDescribe("版本号.")
+		@FieldDescribe("버전 번호.")
 		private String version;
-		@FieldDescribe("版本类型.")
+		@FieldDescribe("버전 유형.")
 		private String versionType;
-		@FieldDescribe("授权模式.")
+		@FieldDescribe("라이선스 모드.")
 		private String model;
-		@FieldDescribe("授权时间.")
+		@FieldDescribe("라이선스 일시.")
 		private Date startTime;
-		@FieldDescribe("授权到期时间.")
+		@FieldDescribe("라이선스 만료 일시.")
 		private Date expireTime;
 
 		public String getName() {

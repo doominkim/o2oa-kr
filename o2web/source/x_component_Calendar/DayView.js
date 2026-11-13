@@ -1013,7 +1013,7 @@ MWFCalendarDayView.Calendar.Day = new Class({
     getTimeRange: function( bDate1,  eDate1 ){
         var bDate = typeOf(bDate1) == "string" ? Date.parse(bDate1) : bDate1;
         var eDate = typeOf(eDate1) == "string" ? Date.parse(eDate1) : eDate1;
-        if( eDate <= this.startTime ){ //比当天天12点更晚
+        if( eDate <= this.startTime ){ //당일 12시보다 늦음
             return null;
         }
         if( this.endTime <= bDate ){

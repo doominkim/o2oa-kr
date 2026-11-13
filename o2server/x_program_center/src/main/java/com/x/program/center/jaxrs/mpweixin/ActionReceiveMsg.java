@@ -22,8 +22,8 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.program.center.core.entity.MPWeixinMenu;
 
 /**
- * 微信公众号接收到消息的处理
- * 暂时不做处理
+ * 위챗 공식 계정 수신 메시지 처리
+ * 당분간 처리하지 않음
  * Created by fancyLou on 3/8/21.
  * Copyright © 2021 O2. All rights reserved.
  */
@@ -34,38 +34,38 @@ public class ActionReceiveMsg extends BaseAction {
 
 
     ActionResult<Wo> execute(String signature, Long timestamp, String nonce, String echostr, InputStream inputStream) throws Exception {
-        logger.info("微信公众号接收消息,signature:{}, timestamp:{}, nonce:{}, echostr:{}.", signature, timestamp, nonce, echostr);
+        logger.info("위챗 공식 계정 메시지 수신,signature:{}, timestamp:{}, nonce:{}, echostr:{}.", signature, timestamp, nonce, echostr);
         Wo wo = new Wo();
         ActionResult<Wo> actionResult = new ActionResult<>();
 
-        if (inputStream != null) { // 解析消息
+        if (inputStream != null) { // 메시지 파싱
             Map<String, String> map = xmlToMap(inputStream);
             String msgType = map.get("MsgType");
 
-            if (WX_MSG_RECEIVE_TYPE_EVENT.equals(msgType)) { // 事件出发
+            if (WX_MSG_RECEIVE_TYPE_EVENT.equals(msgType)) { // 이벤트 발생
                 String event = map.get("Event");
                 String eventKey = map.get("EventKey");
-                logger.info("接收到事件消息： event: {} , eventKey: {}", event, eventKey);
-                //TODO 目前只处理菜单点击事件和订阅公众号的事件 其他消息类型暂不处理
-                if (StringUtils.isNotEmpty(event) && event.equalsIgnoreCase(WX_MSG_RECEIVE_EVENT_CLICK)) { //点击菜单事件
+                logger.info("이벤트 메시지 수신: event: {} , eventKey: {}", event, eventKey);
+                //TODO 현재 메뉴 클릭 이벤트와 공식 계정 구독 이벤트만 처리, 다른 메시지 유형은 처리하지 않음
+                if (StringUtils.isNotEmpty(event) && event.equalsIgnoreCase(WX_MSG_RECEIVE_EVENT_CLICK)) { //메뉴 클릭 이벤트
                     MPWeixinMenu menu = findMenuWithEventKey(eventKey);
                     if (menu != null) {
                         String content = menu.getContent();
                         String toUser = map.get("FromUserName");
                         String fromUser = map.get("ToUserName");
-                        // 特殊消息处理 默认是回复文字消息 如果是媒体消息 需要配置特殊的头 media:image: 后面跟微信素材的mediaId
+                        // 특수 메시지 처리. 기본은 텍스트 메시지 응답, 미디어 메시지면 특수 헤더 media:image: 뒤에 위챗 소재 mediaId 지정 필요
                         if (content.startsWith(WX_MSG_BACK_MEDIA_KEY_IMAGE)) {
                             String mediaId = content.substring(WX_MSG_BACK_MEDIA_KEY_IMAGE.length());
                             String xml = imageMessageBack(toUser, fromUser, mediaId);
-                            logger.info("回复点击菜单消息： {}", xml);
+                            logger.info("메뉴 클릭 응답 메시지: {}", xml);
                             wo.setText(xml);
                         } else if (content.startsWith(WX_MSG_BACK_MEDIA_KEY_VOICE)) {
                             String mediaId = content.substring(WX_MSG_BACK_MEDIA_KEY_VOICE.length());
                             String xml = voiceMessageBack(toUser, fromUser, mediaId);
-                            logger.info("回复点击菜单消息： {}", xml);
+                            logger.info("메뉴 클릭 응답 메시지: {}", xml);
                             wo.setText(xml);
                         } else if (content.startsWith(WX_MSG_BACK_MEDIA_KEY_VIDEO)) {
-                            // 视频消息需要多两个字段 title和description 用｜分割  如： mediaId|title|description
+                            // 동영상 메시지는 title 과 description 두 필드가 더 필요, |로 구분  예: mediaId|title|description
                             String videoContent = content.substring(WX_MSG_BACK_MEDIA_KEY_VIDEO.length());
                             String xml = null;
                             try {
@@ -75,7 +75,7 @@ public class ActionReceiveMsg extends BaseAction {
                                 logger.error(e);
                                 xml = txtMessageBack(toUser, fromUser, content);
                             }
-                            logger.info("回复点击菜单消息： {}", xml);
+                            logger.info("메뉴 클릭 응답 메시지: {}", xml);
                             wo.setText(xml);
                         } else if (content.startsWith(WX_MSG_BACK_MEDIA_KEY_SCRIPT)) {
                             String scriptId = content.substring(WX_MSG_BACK_MEDIA_KEY_SCRIPT.length());
@@ -84,40 +84,40 @@ public class ActionReceiveMsg extends BaseAction {
                                 Thread thread1 = new Thread(runner1);
                                 thread1.start();
                             }
-                            //执行脚本了 不回复消息
+                            //스크립트 실행됨, 메시지 응답 안 함
                             wo.setText("success");
                             actionResult.setData(wo);
                             return actionResult;
                         } else {
                             String xml = txtMessageBack(toUser, fromUser, content);
-                            logger.info("回复点击菜单消息： {}", xml);
+                            logger.info("메뉴 클릭 응답 메시지: {}", xml);
                             wo.setText(xml);
                         }
                         actionResult.setData(wo);
                         return actionResult;
                     } else {
-                        logger.info("没有查询到对应的 eventKey：{}", eventKey);
+                        logger.info("해당 eventKey를 찾지 못함: {}", eventKey);
                     }
-                } else if (WX_MSG_RECEIVE_EVENT_SUBSCRIBE.equalsIgnoreCase(event)) { // 订阅事件
+                } else if (WX_MSG_RECEIVE_EVENT_SUBSCRIBE.equalsIgnoreCase(event)) { // 구독 이벤트
                     MPWeixinMenu menu = findMenuWithEventKey(WX_MSG_RECEIVE_EVENT_SUBSCRIBE);
                     if (menu != null) {
                         String content = menu.getContent();
                         String toUser = map.get("FromUserName");
                         String fromUser = map.get("ToUserName");
                         String xml = txtMessageBack(toUser, fromUser, content);
-                        logger.info("回复关注公众号的消息： {}", xml);
+                        logger.info("공식 계정 팔로우 응답 메시지: {}", xml);
                         wo.setText(xml);
                         actionResult.setData(wo);
                         return actionResult;
                     } else {
-                        logger.info("没有查询到对应的 eventKey：{}", eventKey);
+                        logger.info("해당 eventKey를 찾지 못함: {}", eventKey);
                     }
                 }
-            } else if (WX_MSG_RECEIVE_TYPE_TEXT.equalsIgnoreCase(msgType)) { // 接收到文本消息
+            } else if (WX_MSG_RECEIVE_TYPE_TEXT.equalsIgnoreCase(msgType)) { // 텍스트 메시지 수신
                 String text = map.get("Content");
                 String toUser = map.get("FromUserName");
-                logger.info("接收到文本消息： text: {} ", text);
-                //TODO 目前支持异步执行服务脚本，这里必须马上返回 否则会超时，脚本里面可以调用微信客服消息进行回复. 脚本id暂时先保存到配置文件
+                logger.info("텍스트 메시지 수신: text: {} ", text);
+                //TODO 현재 서비스 스크립트 비동기 실행 지원, 여기서 즉시 반환해야 함(아니면 타임아웃), 스크립트에서 위챗 고객센터 메시지로 응답 가능. 스크립트 id는 임시로 설정 파일에 저장
                 String id = Config.mpweixin().getScriptId();
                 if (StringUtils.isNotBlank(id)) {
                     ExecuteServiceScriptThread runner1 = new ExecuteServiceScriptThread(toUser, text, id);
@@ -125,18 +125,18 @@ public class ActionReceiveMsg extends BaseAction {
                     thread1.start();
                 }
             } else {
-                logger.info("未处理消息类型, MsgType: {}", msgType);
+                logger.info("처리하지 않는 메시지 유형, MsgType: {}", msgType);
             }
         } else {
-            logger.info("没有获取到消息内容 inputStream 为空！");
+            logger.info("메시지 내용을 가져오지 못했습니다. inputStream 이 비어 있습니다!");
         }
-        wo.setText("success");//不回复消息
+        wo.setText("success");//메시지 응답 안 함
         actionResult.setData(wo);
         return actionResult;
     }
 
 
-    // 回复文本消息
+    // 텍스트 메시지 응답
     private String txtMessageBack(String toUser, String from, String content) {
         long time = new Date().getTime();
         String xml = "<xml>" +
@@ -149,7 +149,7 @@ public class ActionReceiveMsg extends BaseAction {
         return xml;
     }
 
-    // 回复图片消息
+    // 이미지 메시지 응답
     private String imageMessageBack(String toUser, String from, String mediaId) {
         long time = new Date().getTime();
         String xml = "<xml>" +
@@ -162,7 +162,7 @@ public class ActionReceiveMsg extends BaseAction {
         return xml;
     }
 
-    // 回复音频消息
+    // 음성 메시지 응답
     private String voiceMessageBack(String toUser, String from, String mediaId) {
         long time = new Date().getTime();
         String xml = "<xml>" +
@@ -175,7 +175,7 @@ public class ActionReceiveMsg extends BaseAction {
         return xml;
     }
 
-    //回复视频消息
+    //동영상 메시지 응답
     private String videoMessageBack(String toUser, String from, String mediaId, String title, String description) {
         long time = new Date().getTime();
         String xml = "<xml>" +
@@ -198,7 +198,7 @@ public class ActionReceiveMsg extends BaseAction {
 
 
     /**
-     * 读取xml
+     * xml 읽기
      *
      * @param ins
      * @return
@@ -212,12 +212,12 @@ public class ActionReceiveMsg extends BaseAction {
 
         try {
             SAXReader reader = new SAXReader();
-            // 1. 禁止 DOCTYPE
+            // 1. DOCTYPE 금지
             reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-            // 2. 禁止实体
+            // 2. 엔티티 금지
             reader.setFeature("http://xml.org/sax/features/external-general-entities", false);
             reader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-            // 3. ⭐ 禁止外部 DTD（修复漏洞的关键）
+            // 3. ⭐ 외부 DTD 금지(취약점 수정의 핵심)
             reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
             Document doc = reader.read(ins);
@@ -265,9 +265,9 @@ public class ActionReceiveMsg extends BaseAction {
                     body.setOpenId(toUser);
                     ActionResponse result = CipherConnectionAction.post(false,
                             Config.url_x_program_center_jaxrs("invoke", scriptId, "execute"), body);
-                    logger.info("执行脚本结果： " + result.toJson());
+                    logger.info("스크립트 실행 결과: " + result.toJson());
                 } else {
-                    logger.warn("没有配置服务脚本id");
+                    logger.warn("서비스 스크립트 id 미설정");
                 }
             } catch (Exception e) {
                 logger.error(e);
@@ -276,10 +276,10 @@ public class ActionReceiveMsg extends BaseAction {
     }
 
     /**
-     * 脚本执行传入对象
+     * 스크립트 실행 전달 객체
      */
     public static class ScriptExecuteBody extends GsonPropertyObject {
-        // 微信公众号 用户的 openId
+        // 위챗 공식 계정 사용자의 openId
         private String openId;
         private String keyword;
 

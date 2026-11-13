@@ -7,6 +7,6 @@ class ExceptionFileInfoNotExists extends LanguagePromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionFileInfoNotExists( String id ) {
-		super("指定的文件不存在:{}.", id );
+		super("지정한 파일이 없습니다: {}.", id );
 	}
 }

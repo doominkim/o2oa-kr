@@ -19,8 +19,8 @@ public class WrapString extends GsonPropertyObject {
 		this.value = Objects.toString(o, "");
 	}
 
-	@FieldDescribe("字符串值.")
-	@Schema(description = "字符串值.")
+	@FieldDescribe("문자열 값.")
+	@Schema(description = "문자열 값.")
 	private String value;
 
 	public String getValue() {

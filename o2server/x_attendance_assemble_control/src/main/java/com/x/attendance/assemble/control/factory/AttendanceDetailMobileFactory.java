@@ -15,7 +15,7 @@ import com.x.attendance.assemble.control.Business;
 import com.x.attendance.entity.AttendanceDetailMobile;
 import com.x.attendance.entity.AttendanceDetailMobile_;
 /**
- * 系统配置信息表基础功能服务类
+ * 시스템 설정 정보 테이블 기본 기능 서비스 클래스
  */
 public class AttendanceDetailMobileFactory extends AbstractFactory {
 	
@@ -45,7 +45,7 @@ public class AttendanceDetailMobileFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定人员指定日期的所有移动打卡信息
+	 * 지정 사용자의 지정 날짜 모든 모바일 출퇴근 정보 조회
 	 * @param empName
 	 * @param recordDateString
 	 * @return
@@ -67,7 +67,7 @@ public class AttendanceDetailMobileFactory extends AbstractFactory {
 		return em.createQuery(cq.where( p ).orderBy(cb.asc(root.get(AttendanceDetailMobile_.recordDate)))).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的AttendanceDetailMobile信息列表")
+	//@MethodDescribe("지정 Id의 AttendanceDetailMobile 정보 목록 조회")
 	public List<AttendanceDetailMobile> list(List<String> ids) throws Exception {
 		List<AttendanceDetailMobile> resultList = null;
 		if( ids == null || ids.size() == 0 ){
@@ -99,10 +99,10 @@ public class AttendanceDetailMobileFactory extends AbstractFactory {
 			p = cb.and( p, cb.equal( root.get( AttendanceDetailMobile_.signDescription ), signDescription ) );
 		}
 		if( StringUtils.isNotEmpty( startDate ) ){
-			if( StringUtils.isNotEmpty( endDate ) && !endDate.equals( startDate ) ){//查询日期区间
+			if( StringUtils.isNotEmpty( endDate ) && !endDate.equals( startDate ) ){//날짜 구간 조회
 				p = cb.and( p, cb.between( root.get( AttendanceDetailMobile_.recordDateString ), startDate, endDate ));
 			}else{
-				//查询startDate当天
+				//startDate 당일 조회
 				p = cb.and( p, cb.equal( root.get( AttendanceDetailMobile_.recordDateString ), startDate ) );
 			}
 		}
@@ -130,10 +130,10 @@ public class AttendanceDetailMobileFactory extends AbstractFactory {
 			p = cb.and( p, cb.equal( root.get( AttendanceDetailMobile_.signDescription ), signDescription ) );
 		}
 		if( StringUtils.isNotEmpty( startDate ) ){
-			if( StringUtils.isNotEmpty( endDate ) && !endDate.equals( startDate ) ){//查询日期区间
+			if( StringUtils.isNotEmpty( endDate ) && !endDate.equals( startDate ) ){//날짜 구간 조회
 				p = cb.and( p, cb.between( root.get( AttendanceDetailMobile_.recordDateString ), startDate, endDate ));
 			}else{
-				//查询startDate当天
+				//startDate 당일 조회
 				p = cb.and( p, cb.equal( root.get( AttendanceDetailMobile_.recordDateString ), startDate ) );
 			}
 		}

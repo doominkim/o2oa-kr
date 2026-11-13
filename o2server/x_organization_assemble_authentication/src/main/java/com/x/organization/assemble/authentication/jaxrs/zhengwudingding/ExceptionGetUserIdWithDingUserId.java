@@ -7,6 +7,6 @@ class ExceptionGetUserIdWithDingUserId extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionGetUserIdWithDingUserId(Integer errcode, String errmsg) {
-		super("用钉钉userId交换政务钉钉userId错误, 代码{}, 消息:{}.", errcode, errmsg);
+		super("DingTalk userId를 정부용 DingTalk userId로 변환하는 중 오류, 코드 {}, 메시지: {}.", errcode, errmsg);
 	}
 }

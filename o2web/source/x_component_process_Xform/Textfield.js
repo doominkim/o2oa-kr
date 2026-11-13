@@ -1,18 +1,18 @@
 MWF.xDesktop.requireApp("process.Xform", "$Input", null, false);
-/** @class Textfield 文本输入框。
- * @o2cn 文本输入框
+/** @class Textfield 텍스트 입력 상자.
+ * @o2cn 텍스트 입력 상자
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var field = this.form.get("fieldId"); //获取组件对象
- * //方法2
- * var field = this.target; //在组件本身的脚本中获取，比如事件脚本、默认值脚本、校验脚本等等
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var field = this.form.get("fieldId"); //컴포넌트 객체 조회
+ * //방법 2
+ * var field = this.target; //컴포넌트 자체 스크립트(이벤트 스크립트, 기본값 스크립트, 검증 스크립트 등)에서 조회
  *
- * var data = field.getData(); //获取值
- * field.setData("字符串值"); //设置值
- * field.hide(); //隐藏字段
- * var id = field.json.id; //获取字段标识
- * var flag = field.isEmpty(); //字段是否为空
+ * var data = field.getData(); //값 조회
+ * field.setData("문자열 값"); //값 설정
+ * field.hide(); //필드 숨기기
+ * var id = field.json.id; //필드 식별자 조회
+ * var flag = field.isEmpty(); //필드가 비어 있는지 여부
  * @extends MWF.xApplication.process.Xform.$Input
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
@@ -48,7 +48,7 @@ MWF.xApplication.process.Xform.Textfield = MWF.APPTextfield =  new Class({
         if (!v && v!==0){
             if (this.json.description){
             var size, w;
-                if( this.node.offsetParent === null ){ //隐藏
+                if( this.node.offsetParent === null ){ //숨김
                     size = { y: 26 }
                 }else{
                      size = this.node.getFirst().getSize();

@@ -72,11 +72,11 @@ class ActionReset extends BaseAction {
 	public static class Wi extends GsonPropertyObject {
 
 		private static final long serialVersionUID = -575178712890850120L;
-		@FieldDescribe("用户标识")
+		@FieldDescribe("사용자 식별자")
 		private String credential;
-		@FieldDescribe("密码")
+		@FieldDescribe("비밀번호")
 		private String password;
-		@FieldDescribe("认证码")
+		@FieldDescribe("인증 코드")
 		private String codeAnswer;
 
 		public String getCredential() {

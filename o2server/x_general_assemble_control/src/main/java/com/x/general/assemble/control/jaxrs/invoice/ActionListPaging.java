@@ -62,13 +62,13 @@ class ActionListPaging extends BaseAction {
 
 	public class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("发票号码")
+		@FieldDescribe("영수증 번호")
 		private String number;
 
-		@FieldDescribe("申请状态")
+		@FieldDescribe("신청 상태")
 		private String applyStatus;
 
-		@FieldDescribe("文件名称")
+		@FieldDescribe("파일 이름")
 		private String name;
 
 		public String getName() {

@@ -21,13 +21,13 @@ class ActionHasPerson extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("*用户")
+		@FieldDescribe("*사용자")
 		private String person;
 
-		@FieldDescribe("*组织")
+		@FieldDescribe("*조직")
 		private String unit;
 
-		@FieldDescribe("*是否递归查找组织(true|false)")
+		@FieldDescribe("*조직 재귀 조회 여부(true|false)")
 		private Boolean recursive = true;
 
 		public String getPerson() {

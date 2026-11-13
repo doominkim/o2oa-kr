@@ -53,10 +53,10 @@ class ActionRegistApplications extends BaseAction {
 
 		private static final long serialVersionUID = -201106956161862479L;
 
-		@FieldDescribe("节点名")
+		@FieldDescribe("노드명")
 		private String node;
 
-		@FieldDescribe("服务器时间")
+		@FieldDescribe("서버 시간")
 		private Date serverTime;
 
 		public String getNode() {

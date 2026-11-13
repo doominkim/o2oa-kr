@@ -1,50 +1,50 @@
 /***************************
-	HTML编辑器，使用前需要引入mootools js 文件和 o2 文件
-	本文件可能用到的其他文件：
-	../SimpleEditor/Actions 文件夹存放操作执行时需要的 js文件
-	../SimpleEditor/<style> 存放对应样式的文件
-	../SimpleEditor/<style>/editor.html 编辑器模板文件
-	../SimpleEditor/<style>/css.wcss 编辑器样式文件
-	../SimpleEditor/<style>/toolbarItems.json 操作对应的属性配置文件
-	公用方法：
-	var text = getContent()	获取编辑器的内容，返回字符串
-	setContent(text)	传入字符串，设置编辑器的内容
-	setDisable(boolean)	传入boolean使编辑器失效或有效
-	setSubmitNodeDisable(boolean)	传入boolean使提交按钮失效或有效
-	setCustomInfo(text)	传入文本，设置自定义区的内容
-	setIframeHeight()	如果有iframe，同步编辑器和iframe的高度
+	HTML 에디터. 사용 전에 mootools js 파일과 o2 파일을 불러와야 함
+	이 파일에서 사용할 수 있는 다른 파일:
+	../SimpleEditor/Actions 폴더에 작업 실행 시 필요한 js 파일 저장
+	../SimpleEditor/<style> 해당 스타일 파일 저장
+	../SimpleEditor/<style>/editor.html 에디터 템플릿 파일
+	../SimpleEditor/<style>/css.wcss 에디터 스타일 파일
+	../SimpleEditor/<style>/toolbarItems.json 작업에 대응하는 속성 설정 파일
+	공용 메서드:
+	var text = getContent()	에디터 내용 조회, 문자열 반환
+	setContent(text)	문자열을 전달해 에디터 내용 설정
+	setDisable(boolean)	boolean을 전달해 에디터 비활성화 또는 활성화
+	setSubmitNodeDisable(boolean)	boolean을 전달해 제출 버튼 비활성화 또는 활성화
+	setCustomInfo(text)	텍스트를 전달해 사용자 정의 영역 내용 설정
+	setIframeHeight()	iframe이 있으면 에디터와 iframe 높이 동기화
 
-	初始化样例如下
-	参数说明： container 编辑器的容器，必要
-				textarea 存储值的文本区，必要
-				iframe	 如果编辑器包含在iframe中，那么传入iframe对象，否则传入null
+	초기화 예시는 다음과 같음
+	매개변수 설명: container 에디터 컨테이너, 필수
+				textarea 값을 저장하는 텍스트 영역, 필수
+				iframe	 에디터가 iframe 안에 있으면 iframe 객체를, 아니면 null 전달
 	var editor; 
 	function iniEditor(){
 		var container = document.id( "container" );  
 		var textarea = document.id( "demoTest" );		
 		o2.require("o2.widget.SimpleEditor", function(){
 			editor = new o2.widget.SimpleEditor({
-				"style": "default",			//使用的样式文件夹
-				"title": "",				//编辑器标题
-				"hasTitleNode" : true,		//是否有标题区
-				"editorDisabled": false,	//编辑区是否能进行编辑
-				"hasToolbar" : true,		//是否生成操作条
-				"toolbarDisable": false,	//操作条是否失效
-				"hasSubmit" : true,			//是否形成提交按钮
-				"submitDisable" : false,	//提交按钮是否失效
-				"hasCustomArea" : true,		//是否有提示区
-				"paragraphise": false,		//回车是否形成段落
-				"minHeight": 200,			//最小高度
-				"maxHeight": 717,			//编辑区的最大高度
-				"overFlow" : "visible",		//可选项为 visible, auto 和 max ,visible 高度随内容变化， auto 内容高度超过minHeight时滚动条，max 内容高度超过maxHeight时滚动条(ie6 和 文档模式为杂项时，失效)
-				"width": "95%",				//编辑器的宽度
-				"action": "Image | Emotion",	//操作条上面有哪些操作，如果是all，表示使用 toolbarItems.json 里配置的所有操作，否则传入操作的 action ，用 空格隔开，比如 "Image | Emotion"
-				"limit" : 0,				//输入长度限制，0表示无限制
+				"style": "default",			//사용할 스타일 폴더
+				"title": "",				//에디터 제목
+				"hasTitleNode" : true,		//제목 영역 여부
+				"editorDisabled": false,	//편집 영역 편집 가능 여부
+				"hasToolbar" : true,		//도구 모음 생성 여부
+				"toolbarDisable": false,	//도구 모음 비활성화 여부
+				"hasSubmit" : true,			//제출 버튼 생성 여부
+				"submitDisable" : false,	//제출 버튼 비활성화 여부
+				"hasCustomArea" : true,		//안내 영역 여부
+				"paragraphise": false,		//Enter 시 단락 생성 여부
+				"minHeight": 200,			//최소 높이
+				"maxHeight": 717,			//편집 영역 최대 높이
+				"overFlow" : "visible",		//선택값은 visible, auto, max. visible은 내용에 따라 높이 변경, auto는 내용 높이가 minHeight를 넘으면 스크롤바, max는 내용 높이가 maxHeight를 넘으면 스크롤바(ie6 및 문서 모드가 쿼크 모드일 때 무효)
+				"width": "95%",				//에디터 너비
+				"action": "Image | Emotion",	//도구 모음에 표시할 작업. all이면 toolbarItems.json에 설정된 모든 작업 사용, 아니면 작업의 action을 공백으로 구분해 전달, 예: "Image | Emotion"
+				"limit" : 0,				//입력 길이 제한, 0은 제한 없음
 				"onQueryLoad": function(){
 					return true;
 				},
 				"onPostLoad": function(){
-					editor.setCustomInfo("这是一个测试" );
+					editor.setCustomInfo("테스트입니다" );
 				},
 				"onSubmitForm": function(){
 					editor.saveContent();
@@ -73,9 +73,9 @@ o2.widget.SimpleEditor = new Class({
 		"minHeight": 200,
 		"maxHeight": 717,
 		"limit" : 0,
-		"overFlow" : "visible",		//可选项为 visible, auto 和 max ,visible 高度随内容变化， auto 内容高度超过minHeight时滚动条，max 内容高度超过maxHeight时滚动条(ie6 和 文档模式为杂项时，失效)
+		"overFlow" : "visible",		//선택값은 visible, auto, max. visible은 내용에 따라 높이 변경, auto는 내용 높이가 minHeight를 넘으면 스크롤바, max는 내용 높이가 maxHeight를 넘으면 스크롤바(ie6 및 문서 모드가 쿼크 모드일 때 무효)
  		"width": "95%",
-		"action": "all"	//操作条上面有哪些操作，如果是all，表示使用 toolbarItems.json 里配置的所有操作，否则传入操作的 action ，用 空格隔开，比如 "Image Emotion"
+		"action": "all"	//도구 모음에 표시할 작업. all이면 toolbarItems.json에 설정된 모든 작업 사용, 아니면 작업의 action을 공백으로 구분해 전달, 예: "Image Emotion"
 	},
 	initialize: function( options, container, data, iframe, bindObject){
 		
@@ -83,7 +83,7 @@ o2.widget.SimpleEditor = new Class({
 
 		this.setOptions(options);
 		
-		// action 具体的操作初始化在 EditorToolbarButton 类中执行
+		// action 구체적인 작업 초기화는 EditorToolbarButton 클래스에서 실행
 		
 		this.bindObject = bindObject;
 
@@ -610,7 +610,7 @@ o2.widget.SimpleEditor = new Class({
 				}
 			} else {
 				if (Browser.name == "ie" ){
-					//ie 会自动插入 p,改成插入换行
+					//ie는 자동으로 p를 삽입하므로 줄바꿈 삽입으로 변경
 					var r = this.selection.getRange();
 					var node = this.selection.getNode();
 					if( r ){
@@ -799,7 +799,7 @@ o2.widget.SimpleEditor.ToolbarButton = new Class({
 		this.toolbarNode = toolbarNode;
 		this.css = css;		
 		if(this.options.id!="")this.buttonID = this.options.id;
-		this.modifiyStyle = false; //尚未开发
+		this.modifiyStyle = false; //아직 개발되지 않음
 		this.isActive = false;
 		this.dialogs = {};
 	},
@@ -1079,7 +1079,7 @@ o2.widget.SimpleEditor.Dialog = new Class({
 	Implements: [Options, Events],
 	options: {
 		"style": "default",
-		"fx": false	,	//动画效果
+		"fx": false	,	//애니메이션 효과
 		"title": "dialog",
 		"width": "300",
 		"height": "150",
@@ -1247,7 +1247,7 @@ o2.widget.SimpleEditor.Dialog = new Class({
 			 this.content.set("html", responseHTML);
 			 }.bind(this),
 			 onFailure: function(xhr){
-			 alert("回退出现错误："+xhr.status+" "+xhr.statusText);
+			 alert("되돌리기 중 오류가 발생했습니다: "+xhr.status+" "+xhr.statusText);
 			 window.close();
 			 }
 			 });*/

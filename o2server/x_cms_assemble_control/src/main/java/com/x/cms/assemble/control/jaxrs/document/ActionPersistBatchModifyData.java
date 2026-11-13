@@ -31,7 +31,7 @@ public class ActionPersistBatchModifyData extends BaseAction {
 			wi = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionDocumentInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。");
+			Exception exception = new ExceptionDocumentInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다.");
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -43,7 +43,7 @@ public class ActionPersistBatchModifyData extends BaseAction {
 				CacheManager.notify(Document.class);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在根据ID批量修改数据时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "ID로 데이터를 일괄 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -54,10 +54,10 @@ public class ActionPersistBatchModifyData extends BaseAction {
 
 	public static class Wi{
 		
-		@FieldDescribe( "需要批量修改数据的文档ID列表" )
+		@FieldDescribe( "데이터를 일괄 수정할 문서ID 목록" )
 		private List<String> docIds = null;
 		
-		@FieldDescribe( "需要批量修改数据定义" )
+		@FieldDescribe( "일괄 수정할 데이터 정의" )
 		private List<WiDataChange> dataChanges = null;
 
 		public List<String> getDocIds() {
@@ -79,22 +79,22 @@ public class ActionPersistBatchModifyData extends BaseAction {
 	
 	public static class WiDataChange{
 		
-		@FieldDescribe( "数据路径或者属性名." )
+		@FieldDescribe( "데이터 경로 또는 속성명." )
 		private String dataPath = null;
 		
-		@FieldDescribe( "数据类型: String | Integer | Boolean | Date." )
+		@FieldDescribe( "데이터 유형: String | Integer | Boolean | Date." )
 		private String dataType = "String";
 		
-		@FieldDescribe( "数据值:" )
+		@FieldDescribe( "데이터 값:" )
 		private String dataString = null;
 		
-		@FieldDescribe( "数据值:" )
+		@FieldDescribe( "데이터 값:" )
 		private Integer dataInteger = null;
 		
-		@FieldDescribe( "数据值:" )
+		@FieldDescribe( "데이터 값:" )
 		private Integer dataBoolean = null;
 		
-		@FieldDescribe( "数据值:" )
+		@FieldDescribe( "데이터 값:" )
 		private Integer dataDate = null;
 	
 		public String getDataPath() {

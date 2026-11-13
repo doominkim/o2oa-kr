@@ -42,7 +42,7 @@ public class ActionDelete extends BaseAction {
 			}
 		}
 
-		// 查询版块信息，判断版块信息是否存在
+		// 게시판 정보 조회, 존재 여부 판단
 		if (check) {
 			try {
 				sectionInfo = sectionInfoServiceAdv.get(id);
@@ -53,7 +53,7 @@ public class ActionDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "根据指定ID查询版块信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionSectionInfoProcess(e, "지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -64,15 +64,15 @@ public class ActionDelete extends BaseAction {
 				forumInfo = forumInfoServiceAdv.get( sectionInfo.getForumId() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + sectionInfo.getForumId());
+				Exception exception = new ExceptionSectionInfoProcess(e, "ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + sectionInfo.getForumId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 判断用户是否有权限进行版块删除：1、系统管理员 2、论坛设置的管理员	
+		// 사용자의 게시판 삭제 권한 판단: 1. 시스템 관리자 2. 포럼에 설정된 관리자	
 		if ( check ) {
-			if ( !ThisApplication.isForumManager( effectivePerson, forumInfo ) ) {//无权限进行版块删除操作
+			if ( !ThisApplication.isForumManager( effectivePerson, forumInfo ) ) {//게시판 삭제 권한이 없습니다
 				check = false;
 				String forumName = "없거나 삭제된 포럼";
 				if( forumInfo != null ) {
@@ -84,35 +84,35 @@ public class ActionDelete extends BaseAction {
 			}
 		}
 
-		// 判断版块内是否含有子版块
+		// 게시판 내 하위 게시판 포함 여부 판단
 		if (check) {
 			try {
 				count = sectionInfoServiceAdv.countSubSectionByMainSectionId( id );
 				if (count > 0) {
 					check = false;
-					Exception exception = new ExceptionSectionCanNotDelete("版块中仍存在"+ count +"个子版块，无法继续进行删除操作！ID=" + id);
+					Exception exception = new ExceptionSectionCanNotDelete("섹션에 아직 "+ count +"개의 하위 섹션이 있어 삭제할 수 없습니다! ID=" + id);
 					result.error(exception);
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "系统在根据版块ID查询主题信息数量时发生异常.ID:" + id);
+				Exception exception = new ExceptionSectionInfoProcess(e, "섹션 ID로 주제 수를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 				
-		// 判断版块内是否含有主题
+		// 게시판 내 주제 포함 여부 판단
 		if (check) {
 			try {
 				count = subjectInfoServiceAdv.countByMainAndSubSectionId(id, true);
 				if ( count > 0 ) {
 					check = false;
-					Exception exception = new ExceptionSectionCanNotDelete("版块中仍存在"+ count +"个主题，无法继续进行删除操作！ID=" + id);
+					Exception exception = new ExceptionSectionCanNotDelete("섹션에 아직 "+ count +"개의 주제가 있어 삭제할 수 없습니다! ID=" + id);
 					result.error(exception);
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "系统在根据版块ID查询主题信息数量时发生异常.ID:" + id);
+				Exception exception = new ExceptionSectionInfoProcess(e, "섹션 ID로 주제 수를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -120,7 +120,7 @@ public class ActionDelete extends BaseAction {
 
 		if (check) {
 			try {
-				// 已经没有子版块和任何贴子信息了，所以只需要删除相应的权限信息即可
+				// 하위 게시판과 게시글이 모두 없으므로 관련 권한 정보만 삭제
 				sectionInfoServiceAdv.delete( id );
 				wo.setId( id );
 
@@ -131,7 +131,7 @@ public class ActionDelete extends BaseAction {
 				operationRecordService.sectionOperation(effectivePerson.getDistinguishedName(), sectionInfo, "DELETE", hostIp, hostName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "根据指定ID删除版块信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionSectionInfoProcess(e, "지정한 ID의 섹션 정보를 삭제하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

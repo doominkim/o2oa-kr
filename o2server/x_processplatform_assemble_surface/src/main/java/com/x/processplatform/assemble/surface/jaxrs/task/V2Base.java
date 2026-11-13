@@ -69,52 +69,52 @@ abstract class V2Base extends StandardJaxrsAction {
 			return true;
 		}
 
-		@FieldDescribe("应用标识.")
-		@Schema(description = "应用标识.")
+		@FieldDescribe("앱 식별자.")
+		@Schema(description = "앱 식별자.")
 		private List<String> applicationList;
 
-		@FieldDescribe("流程标识.")
-		@Schema(description = "流程标识.")
+		@FieldDescribe("프로세스 식별자.")
+		@Schema(description = "프로세스 식별자.")
 		private List<String> processList;
 
-		@FieldDescribe("是否查找同版本流程待办:true(默认查找)|false.")
-		@Schema(description = "是否查找同版本流程待办:true(默认查找)|false.")
+		@FieldDescribe("동일 버전 프로세스 결재 대기 조회 여부:true(기본 조회)|false.")
+		@Schema(description = "동일 버전 프로세스 결재 대기 조회 여부:true(기본 조회)|false.")
 		private Boolean relateEditionProcess = true;
 
-		@FieldDescribe("是否排除草稿待办:false(默认不排除)|true.")
-		@Schema(description = "是否排除草稿待办:false(默认不排除)|true.")
+		@FieldDescribe("초안 결재 대기 제외 여부:false(기본 제외 안 함)|true.")
+		@Schema(description = "초안 결재 대기 제외 여부:false(기본 제외 안 함)|true.")
 		private Boolean isExcludeDraft;
 
-		@FieldDescribe("开始时间,格式为:yyyy-MM-dd HH:mm:ss.")
-		@Schema(description = "开始时间,格式为:yyyy-MM-dd HH:mm:ss.")
+		@FieldDescribe("시작 시간, 형식:yyyy-MM-dd HH:mm:ss.")
+		@Schema(description = "시작 시간, 형식:yyyy-MM-dd HH:mm:ss.")
 		private String startTime;
 
-		@FieldDescribe("结束时间,格式为:yyyy-MM-dd HH:mm:ss.")
-		@Schema(description = "结束时间,格式为:yyyy-MM-dd HH:mm:ss.")
+		@FieldDescribe("종료 시간, 형식:yyyy-MM-dd HH:mm:ss.")
+		@Schema(description = "종료 시간, 형식:yyyy-MM-dd HH:mm:ss.")
 		private String endTime;
 
-		@FieldDescribe("活动名称.")
-		@Schema(description = "活动名称.")
+		@FieldDescribe("활동 이름.")
+		@Schema(description = "활동 이름.")
 		private List<String> activityNameList;
 
-		@FieldDescribe("创建工作人员.")
-		@Schema(description = "创建工作人员.")
+		@FieldDescribe("업무 문서 생성 사용자.")
+		@Schema(description = "업무 문서 생성 사용자.")
 		private List<String> creatorPersonList;
 
-		@FieldDescribe("创建工作身份所属组织.")
-		@Schema(description = "创建工作身份所属组织.")
+		@FieldDescribe("업무 문서 생성 신분의 소속 조직.")
+		@Schema(description = "업무 문서 생성 신분의 소속 조직.")
 		private List<String> creatorUnitList;
 
-		@FieldDescribe("开始年月,格式为文本格式 yyyy-MM.")
-		@Schema(description = "开始年月,格式为文本格式 yyyy-MM.")
+		@FieldDescribe("시작 연월, 텍스트 형식 yyyy-MM.")
+		@Schema(description = "시작 연월, 텍스트 형식 yyyy-MM.")
 		private List<String> startTimeMonthList;
 
-		@FieldDescribe("搜索关键字,搜索范围为:标题,意见,文号,创建人,创建部门.")
-		@Schema(description = "搜索关键字,搜索范围为:标题,意见,文号,创建人,创建部门.")
+		@FieldDescribe("검색 키워드, 검색 범위:제목, 의견, 문서번호, 생성자, 생성 부서.")
+		@Schema(description = "검색 키워드, 검색 범위:제목, 의견, 문서번호, 생성자, 생성 부서.")
 		private String key;
 
-		@FieldDescribe("标题.")
-		@Schema(description = "标题.")
+		@FieldDescribe("제목.")
+		@Schema(description = "제목.")
 		private String title;
 
 		public List<String> getApplicationList() {
@@ -239,28 +239,28 @@ abstract class V2Base extends StandardJaxrsAction {
 			return true;
 		}
 
-		@FieldDescribe("是否关联工作.")
-		@Schema(description = "是否关联工作.")
+		@FieldDescribe("업무 문서 연관 여부.")
+		@Schema(description = "업무 문서 연관 여부.")
 		private Boolean relateWork;
 
-		@FieldDescribe("是否关联已完成工作.")
-		@Schema(description = "是否关联已完成工作.")
+		@FieldDescribe("완료된 업무 문서 연관 여부.")
+		@Schema(description = "완료된 업무 문서 연관 여부.")
 		private Boolean relateWorkCompleted;
 
-		@FieldDescribe("是否关联已办.")
-		@Schema(description = "是否关联已办.")
+		@FieldDescribe("처리 완료 연관 여부.")
+		@Schema(description = "처리 완료 연관 여부.")
 		private Boolean relateTaskCompleted;
 
-		@FieldDescribe("是否关联待阅.")
-		@Schema(description = "是否关联待阅.")
+		@FieldDescribe("열람 대기 연관 여부.")
+		@Schema(description = "열람 대기 연관 여부.")
 		private Boolean relateRead;
 
-		@FieldDescribe("是否关联已阅.")
-		@Schema(description = "是否关联已阅.")
+		@FieldDescribe("열람 완료 연관 여부.")
+		@Schema(description = "열람 완료 연관 여부.")
 		private Boolean relateReadCompleted;
 
-		@FieldDescribe("是否关联参阅.")
-		@Schema(description = "是否关联参阅.")
+		@FieldDescribe("참조 연관 여부.")
+		@Schema(description = "참조 연관 여부.")
 		private Boolean relateReview;
 
 		public Boolean getRelateWork() {

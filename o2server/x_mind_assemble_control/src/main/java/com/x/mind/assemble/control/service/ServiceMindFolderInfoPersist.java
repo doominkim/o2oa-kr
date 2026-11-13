@@ -9,14 +9,14 @@ import com.x.base.core.entity.annotation.CheckRemoveType;
 import com.x.mind.entity.MindFolderInfo;
 
 /**
- * 脑图文件夹信息持久化操作服务类：保存、更新、删除
+ * 마인드맵 폴더 정보 영속화 작업 서비스 클래스: 저장, 수정, 삭제
  * @author O2LEE
  *
  */
 class ServiceMindFolderInfoPersist{
 	
 	/**
-	 * 保存一个脑图目录
+	 * 마인드맵 디렉터리 저장
 	 * @param mindFolderInfo
 	 * @return
 	 * @throws Exception 
@@ -43,7 +43,7 @@ class ServiceMindFolderInfoPersist{
 	}
 
 	/**
-	 * 根据ID删除文件夹信息
+	 * ID로 폴더 정보 삭제
 	 * @param emc
 	 * @param folderId
 	 * @return

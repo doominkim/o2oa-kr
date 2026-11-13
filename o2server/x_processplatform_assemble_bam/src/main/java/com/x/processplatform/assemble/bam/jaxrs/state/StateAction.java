@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("state")
-@JaxrsDescribe("运行统计")
+@JaxrsDescribe("실행 통계")
 public class StateAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(StateAction.class);
 
-	@JaxrsMethodDescribe(value = "获取全局统计.", action = ActionSummary.class)
+	@JaxrsMethodDescribe(value = "전체 통계 조회.", action = ActionSummary.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -43,7 +43,7 @@ public class StateAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取运行情况.", action = ActionRunning.class)
+	@JaxrsMethodDescribe(value = "실행 현황 조회.", action = ActionRunning.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ public class StateAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取根据组织,个人的统计.", action = ActionOrganization.class)
+	@JaxrsMethodDescribe(value = "조직·개인별 통계 조회.", action = ActionOrganization.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -75,7 +75,7 @@ public class StateAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取根据应用的统计.", action = ActionCategory.class)
+	@JaxrsMethodDescribe(value = "앱별 통계 조회.", action = ActionCategory.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -91,7 +91,7 @@ public class StateAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "触发根据应用的统计.", action = ActionCategoryTrigger.class)
+	@JaxrsMethodDescribe(value = "앱별 통계 트리거.", action = ActionCategoryTrigger.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -107,7 +107,7 @@ public class StateAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "触发获取应用.", action = ActionApplicationStubsTrigger.class)
+	@JaxrsMethodDescribe(value = "앱 조회 트리거.", action = ActionApplicationStubsTrigger.class)
 	@GET
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)

@@ -61,7 +61,7 @@ MWF.xApplication.cms.Xform.ProcessActionbar = MWF.CMSProcessActionbar =  new Cla
                 this.setToolbars(CMSActions, this.toolbarNode, this.readonly);
             }
 
-            if( this.json.multiTools ){ //自定义操作和系统操作混合的情况，用 system : true 来区分系统和自定义
+            if( this.json.multiTools ){ //사용자 정의 작업과 시스템 작업이 섞인 경우 system : true로 시스템과 사용자 정의를 구분
                 var jsonStr = JSON.stringify(this.json.multiTools);
                 jsonStr = o2.bindJson(jsonStr, {"lp": MWF.xApplication.process.Xform.LP.form});
                 this.json.multiTools = JSON.parse(jsonStr);

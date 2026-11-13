@@ -53,7 +53,7 @@ class ActionListWithPersonLike extends BaseAction {
             try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
                 Business business = new Business(emc);
                 List<String> identities = business.organization().identity().listWithPerson(effectivePerson);
-                // 去除部门以及上级部门,如果设置了一级部门可用,那么一级部门下属的二级部门也可用
+                // 부서 및 상위 부서 제거, 1단계 부서가 사용 가능하면 그 하위 2단계 부서도 사용 가능
                 List<String> units = business.organization().unit().listWithPersonSupNested(effectivePerson);
                 List<String> roles = business.organization().role().listWithPerson(effectivePerson);
                 List<String> groups = business.organization().group().listWithIdentity(identities);
@@ -115,7 +115,7 @@ class ActionListWithPersonLike extends BaseAction {
 
     /**
      * 
-     * 从Process中获取可以启动的Process的application.
+     * Process에서 시작 가능한 Process의 application 조회.
      */
     private List<String> listFromProcess(Business business, EffectivePerson effectivePerson, List<String> roles,
             List<String> identities, List<String> units, List<String> groups, String key) throws Exception {

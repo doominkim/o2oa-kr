@@ -1,4 +1,4 @@
-//该附件类不用于文档表单的展现
+//이 첨부파일 클래스는 문서 양식 표시에 사용하지 않음
 MWF.require("MWF.widget.AttachmentController", null,false);
 
 MWF.xApplication.cms.Document.Attachment = new Class({
@@ -25,7 +25,7 @@ MWF.xApplication.cms.Document.Attachment = new Class({
     loadAttachmentController: function () {
         var options = {
             "style": "cms",
-            "title": MWF.xApplication.cms.Document.LP.attachmentArea, //"附件区域",
+            "title": MWF.xApplication.cms.Document.LP.attachmentArea, //"첨부파일 영역",
             "size": this.options.size ,
             "resize": true,
             //"attachmentCount": this.json.attachmentCount || 0,
@@ -233,7 +233,7 @@ MWF.xApplication.cms.Document.Attachment = new Class({
         MWF.require("MWF.widget.AttachmentSelector", function() {
             var options = {
                 "style" : "cms",
-                "title": MWF.xApplication.cms.Document.LP.selectAttachment, //"选择附件"
+                "title": MWF.xApplication.cms.Document.LP.selectAttachment, //"첨부파일 선택"
                 "listStyle": "icon",
                 "selectType" : "all",
                 "size": "max",

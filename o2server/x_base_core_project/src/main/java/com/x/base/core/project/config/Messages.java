@@ -58,130 +58,130 @@ public class Messages extends ConfigObject {
 		super();
 	}
 
-	@FieldDescribe("消费器配置.")
+	@FieldDescribe("소비자 설정.")
 	private Map<String, JsonElement> consumers = new LinkedHashMap<>();
 
-	@FieldDescribe("装载器脚本.")
+	@FieldDescribe("로더 스크립트.")
 	private Map<String, String> loaders = new LinkedHashMap<>();
 
-	@FieldDescribe("过滤器脚本.")
+	@FieldDescribe("필터 스크립트.")
 	private Map<String, String> filters = new LinkedHashMap<>();
 
-	@FieldDescribe("创建应用.")
+	@FieldDescribe("앱 생성.")
 	private Message application_create;
-	@FieldDescribe("更新应用.")
+	@FieldDescribe("앱 수정.")
 	private Message application_update;
-	@FieldDescribe("删除应用.")
+	@FieldDescribe("앱 삭제.")
 	private Message application_delete;
-	@FieldDescribe("创建流程.")
+	@FieldDescribe("결재 생성.")
 	private Message process_create;
-	@FieldDescribe("更新流程.")
+	@FieldDescribe("결재 수정.")
 	private Message process_update;
-	@FieldDescribe("删除流程.")
+	@FieldDescribe("결재 삭제.")
 	private Message process_delete;
-	@FieldDescribe("有新的工作通过消息节点.")
+	@FieldDescribe("새 문서가 메시지 노드를 통과함.")
 	private Message activity_message;
-	@FieldDescribe("工作完成转已完成工作.")
+	@FieldDescribe("문서 완료, 완료 문서로 전환.")
 	private Message work_to_workCompleted;
-	@FieldDescribe("创建工作.")
+	@FieldDescribe("문서 생성.")
 	private Message work_create;
-	@FieldDescribe("删除工作.")
+	@FieldDescribe("문서 삭제.")
 	private Message work_delete;
-	@FieldDescribe("创建已完成工作.")
+	@FieldDescribe("완료 문서 생성.")
 	private Message workCompleted_create;
-	@FieldDescribe("删除已完成工作.")
+	@FieldDescribe("완료 문서 삭제.")
 	private Message workCompleted_delete;
-	@FieldDescribe("待办完成转已办.")
+	@FieldDescribe("결재 대기 처리, 결재 완료로 전환.")
 	private Message task_to_taskCompleted;
-	@FieldDescribe("创建待办.")
+	@FieldDescribe("결재 대기 생성.")
 	private Message task_create;
-	@FieldDescribe("删除待办.")
+	@FieldDescribe("결재 대기 삭제.")
 	private Message task_delete;
-	@FieldDescribe("待办即将过期催办.")
+	@FieldDescribe("결재 대기 기한 임박 독촉.")
 	private Message task_urge;
-	@FieldDescribe("待办过期.")
+	@FieldDescribe("결재 대기 기한 초과.")
 	private Message task_expire;
-	@FieldDescribe("待办提醒.")
+	@FieldDescribe("결재 대기 알림.")
 	private Message task_press;
-	@FieldDescribe("创建已办.")
+	@FieldDescribe("결재 완료 생성.")
 	private Message taskCompleted_create;
-	@FieldDescribe("删除已办.")
+	@FieldDescribe("결재 완료 삭제.")
 	private Message taskCompleted_delete;
-	@FieldDescribe("待阅转已阅.")
+	@FieldDescribe("열람 대기를 열람 완료로 전환.")
 	private Message read_to_readCompleted;
-	@FieldDescribe("创建待阅.")
+	@FieldDescribe("열람 대기 생성.")
 	private Message read_create;
-	@FieldDescribe("删除待阅.")
+	@FieldDescribe("열람 대기 삭제.")
 	private Message read_delete;
-	@FieldDescribe("创建已阅.")
+	@FieldDescribe("열람 완료 생성.")
 	private Message readCompleted_create;
-	@FieldDescribe("删除已阅.")
+	@FieldDescribe("열람 완료 삭제.")
 	private Message readCompleted_delete;
-	@FieldDescribe("创建参阅.")
+	@FieldDescribe("참조 문서 생성.")
 	private Message review_create;
-	@FieldDescribe("删除参阅.")
+	@FieldDescribe("참조 문서 삭제.")
 	private Message review_delete;
-	@FieldDescribe("会议邀请.")
+	@FieldDescribe("회의 초대.")
 	private Message meeting_invite;
-	@FieldDescribe("删除会议.")
+	@FieldDescribe("회의 삭제.")
 	private Message meeting_delete;
-	@FieldDescribe("会议邀请接受.")
+	@FieldDescribe("회의 초대 수락.")
 	private Message meeting_accept;
-	@FieldDescribe("会议邀请拒绝.")
+	@FieldDescribe("회의 초대 거절.")
 	private Message meeting_reject;
-	@FieldDescribe("创建附件.")
+	@FieldDescribe("첨부파일 생성.")
 	private Message attachment_create;
-	@FieldDescribe("删除附件.")
+	@FieldDescribe("첨부파일 삭제.")
 	private Message attachment_delete;
-	@FieldDescribe("附件分享.")
+	@FieldDescribe("첨부파일 공유.")
 	private Message attachment_share;
-	@FieldDescribe("附件取消分享.")
+	@FieldDescribe("첨부파일 공유 취소.")
 	private Message attachment_shareCancel;
-	@FieldDescribe("附件可编辑设置.")
+	@FieldDescribe("첨부파일 편집 가능 설정.")
 	private Message attachment_editor;
-	@FieldDescribe("附件可编辑取消.")
+	@FieldDescribe("첨부파일 편집 가능 취소.")
 	private Message attachment_editorCancel;
-	@FieldDescribe("附件可编辑修改.")
+	@FieldDescribe("첨부파일 편집 가능 변경.")
 	private Message attachment_editorModify;
-	@FieldDescribe("日历通知.")
+	@FieldDescribe("캘린더 알림.")
 	private Message calendar_alarm;
-	@FieldDescribe("自定义消息创建.")
+	@FieldDescribe("사용자 정의 메시지 생성.")
 	private Message custom_create;
-	@FieldDescribe("工作管理任务创建.")
+	@FieldDescribe("업무 관리 작업 생성.")
 	private Message teamwork_taskCreate;
-	@FieldDescribe("工作管理任务更新.")
+	@FieldDescribe("업무 관리 작업 수정.")
 	private Message teamwork_taskUpdate;
-	@FieldDescribe("工作管理任务删除.")
+	@FieldDescribe("업무 관리 작업 삭제.")
 	private Message teamwork_taskDelete;
-	@FieldDescribe("工作管理任务超时.")
+	@FieldDescribe("업무 관리 작업 기한 초과.")
 	private Message teamwork_taskOvertime;
-	@FieldDescribe("工作管理聊天.")
+	@FieldDescribe("업무 관리 채팅.")
 	private Message teamwork_chat;
-	@FieldDescribe("内容管理发布.")
+	@FieldDescribe("콘텐츠 관리 게시.")
 	private Message cms_publish;
-	@FieldDescribe("内容管理发布创建者通知.")
+	@FieldDescribe("콘텐츠 관리 게시 작성자 알림.")
 	private Message cms_publish_to_creator;
-	@FieldDescribe("论坛创建贴子.")
+	@FieldDescribe("게시판 글 작성.")
 	private Message bbs_subjectCreate;
-	@FieldDescribe("论坛创建回复.")
+	@FieldDescribe("게시판 댓글 작성.")
 	private Message bbs_replyCreate;
-	@FieldDescribe("脑图发送.")
+	@FieldDescribe("마인드맵 전송.")
 	private Message mind_fileSend;
-	@FieldDescribe("脑图分享.")
+	@FieldDescribe("마인드맵 공유.")
 	private Message mind_fileShare;
-	@FieldDescribe("聊聊消息.")
+	@FieldDescribe("채팅 메시지.")
 	private Message im_create;
-	@FieldDescribe("聊聊消息.")
+	@FieldDescribe("채팅 메시지.")
 	private Message im_revoke;
-	@FieldDescribe("聊聊消息.")
+	@FieldDescribe("채팅 메시지.")
 	private Message im_conversation_delete;
-	@FieldDescribe("聊聊消息.")
+	@FieldDescribe("채팅 메시지.")
 	private Message im_conversation_update;
-	@FieldDescribe("打卡提醒消息.")
+	@FieldDescribe("출퇴근 체크 알림 메시지.")
 	private Message attendance_checkInAlert;
-	@FieldDescribe("打卡异常提醒消息.")
+	@FieldDescribe("출퇴근 이상 알림 메시지.")
 	private Message attendance_checkInException;
-	@FieldDescribe("自定义消息.")
+	@FieldDescribe("사용자 정의 메시지.")
 	private Map<String, Message> custom = new LinkedHashMap<>();
 
 	public static Messages defaultInstance() {
@@ -888,7 +888,7 @@ public class Messages extends ConfigObject {
 		}
 	}
 
-	@FieldDescribe("清理设置.")
+	@FieldDescribe("정리 설정.")
 	private Clean clean;
 
 	public Clean clean() {
@@ -909,13 +909,13 @@ public class Messages extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "30 30 6 * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
-		@FieldDescribe("消息保留天数")
+		@FieldDescribe("메시지 보관 일수")
 		private Integer keep = DEFAULT_KEEP;
 
 		public Integer getKeep() {
@@ -961,13 +961,13 @@ public class Messages extends ConfigObject {
 
 		public static final String DEFAULT_CRON = "30 30 6 * * ?";
 
-		@FieldDescribe("是否启用")
+		@FieldDescribe("사용 여부")
 		private Boolean enable = DEFAULT_ENABLE;
 
-		@FieldDescribe("定时cron表达式")
+		@FieldDescribe("정기 실행 cron 표현식")
 		private String cron = DEFAULT_CRON;
 
-		@FieldDescribe("消息保留天数")
+		@FieldDescribe("메시지 보관 일수")
 		private Integer keep = DEFAULT_KEEP;
 
 		public Integer getKeep() {

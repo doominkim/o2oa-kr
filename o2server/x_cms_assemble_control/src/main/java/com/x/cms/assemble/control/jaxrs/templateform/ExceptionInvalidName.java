@@ -7,7 +7,7 @@ class ExceptionInvalidName extends LanguagePromptException {
 	private static final long serialVersionUID = 6984800093761853101L;
 
 	ExceptionInvalidName(String name) {
-		super("名称校验不通过:{}.", name);
+		super("이름 검증에 실패했습니다: {}.", name);
 	}
 
 }

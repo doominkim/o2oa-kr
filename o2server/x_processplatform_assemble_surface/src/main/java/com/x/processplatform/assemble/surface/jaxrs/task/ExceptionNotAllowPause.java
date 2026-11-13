@@ -7,7 +7,7 @@ class ExceptionNotAllowPause extends LanguagePromptException {
 	private static final long serialVersionUID = -5515077418025884395L;
 
 	ExceptionNotAllowPause(String id) {
-		super("不允许进行待办挂起: {}.", id);
+		super("결재 대기를 보류할 수 없습니다: {}.", id);
 	}
 
 }

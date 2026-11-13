@@ -3,12 +3,12 @@ package com.x.attendance.assemble.control.jaxrs.v2.leavemanager.model;
 public class AttendanceV2LeaveTransactionEnums {
     
     public enum BizTypeEnum {
-        GRANT("GRANT"), // 发放
-        USE("USE"), // 使用
-        CANCEL("CANCEL"), // 取消
-        EXPIRE("EXPIRE"), // 过期
-        CARRYFORWARD("CARRYFORWARD"), // 结转
-        ADJUST("ADJUST"); // 调整
+        GRANT("GRANT"), // 지급
+        USE("USE"), // 사용
+        CANCEL("CANCEL"), // 취소
+        EXPIRE("EXPIRE"), // 만료
+        CARRYFORWARD("CARRYFORWARD"), // 이월
+        ADJUST("ADJUST"); // 조정
 
         private String value;
  

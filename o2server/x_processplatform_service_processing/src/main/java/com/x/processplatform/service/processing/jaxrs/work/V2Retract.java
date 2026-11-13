@@ -123,7 +123,7 @@ class V2Retract extends BaseAction {
 				List<String> activityTokens = activityTokenOfNodes(nodes);
 
 				aeiObjects.getTasks().stream().filter(o -> activityTokens.contains(o.getActivityToken())).forEach(o -> {
-					// 标记应为撤回删除
+					// 회수 삭제로 표시
 					o.setRouteName("retract");
 					aeiObjects.getDeleteTasks().add(o);
 				});

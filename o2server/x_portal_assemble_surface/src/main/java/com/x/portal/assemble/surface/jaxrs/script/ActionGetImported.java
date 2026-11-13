@@ -87,10 +87,10 @@ class ActionGetImported extends BaseAction {
 			this.importedList = importedList;
 		}
 
-		@FieldDescribe("门户应用名称.")
+		@FieldDescribe("포털 앱 이름.")
 		private String portalName;
 
-		@FieldDescribe("门户应用别名.")
+		@FieldDescribe("포털 앱 별칭.")
 		private String portalAlias;
 
 		public String getPortalName() {

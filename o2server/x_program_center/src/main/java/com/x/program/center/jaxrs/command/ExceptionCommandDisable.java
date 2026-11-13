@@ -7,7 +7,7 @@ class ExceptionCommandDisable extends PromptException {
 	private static final long serialVersionUID = -7889121412455371301L;
 
 	public ExceptionCommandDisable() {
-		super("禁止命令执行.");
+		super("명령 실행이 금지되어 있습니다.");
 	}
 
 }

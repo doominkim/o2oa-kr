@@ -120,12 +120,12 @@ class V2GoBack extends BaseAction {
 				emc.beginTransaction(Task.class);
 				emc.beginTransaction(Read.class);
 				emc.beginTransaction(WorkLog.class);
-				// 重新设置表单
+				// 양식 재설정
 				String formId = business.element().lookupSuitableForm(work.getProcess(), manual.getId());
 				if (StringUtils.isNotBlank(formId)) {
 					work.setForm(formId);
 				}
-				// 调度强制把这个标志设置为true,这样可以避免在拟稿状态就调度,系统认为是拟稿状态,默认不创建待办.
+				// 스케줄링 시 이 플래그를 강제로 true로 설정, 초안 상태에서 스케줄링할 때 시스템이 초안 상태로 판단해 기본적으로 결재 대기를 생성하지 않는 것을 방지.
 				work.setWorkThroughManual(true);
 				work.setDestinationActivity(manual.getId());
 				work.setDestinationActivityType(manual.getActivityType());
@@ -145,7 +145,7 @@ class V2GoBack extends BaseAction {
 				if (ListTools.isNotEmpty(param.distinguishedNameList)) {
 					work.setTickets(manual.identitiesToTickets(param.distinguishedNameList));
 					/*
-					 * 增加退回时 act=goBack标记
+					 * 반려 시 act=goBack 표시 추가
 					 */
 					work.getTickets().bubble().forEach(o -> o.act(Tickets.ACT_GOBACK));
 				}
@@ -160,7 +160,7 @@ class V2GoBack extends BaseAction {
 		}
 
 		private void removeTask(Business business, Work work) throws Exception {
-			// 删除可能的待办
+			// 남아 있을 수 있는 결재 대기 삭제
 			List<Task> os = business.entityManagerContainer().listEqual(Task.class, Task.work_FIELDNAME, work.getId());
 			os.stream().forEach(o -> {
 				try {

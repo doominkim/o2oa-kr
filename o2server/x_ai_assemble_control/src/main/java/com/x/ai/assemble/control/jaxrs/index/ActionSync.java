@@ -31,7 +31,7 @@ class ActionSync extends BaseAction {
 		if (BooleanUtils.isNotTrue(aiConfig.getO2AiEnable())
 				|| StringUtils.isBlank(aiConfig.getO2AiBaseUrl())
 				|| StringUtils.isBlank(aiConfig.getO2AiToken())) {
-			throw new ExceptionCustom("请先启用o2智能体并进行相关配置.");
+			throw new ExceptionCustom("먼저 o2 에이전트를 활성화하고 관련 설정을 하십시오.");
 		}
 		for(String appId : aiConfig.getKnowledgeIndexAppList()){
 			appId = appId.contains("|") ? StringUtils.substringBefore(appId, "|") : appId;

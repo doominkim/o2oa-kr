@@ -12,31 +12,31 @@ import com.x.processplatform.core.entity.content.WorkCompleted;
  **/
 public class DataWi extends GsonPropertyObject {
 
-    @FieldDescribe("操作数据保存的用户")
+    @FieldDescribe("작업 데이터를 저장한 사용자")
     private String operator;
 
-    @FieldDescribe("变更业务数据")
+    @FieldDescribe("변경된 업무 데이터")
     private JsonElement jsonElement;
 
-    @FieldDescribe("所有业务数据")
+    @FieldDescribe("전체 업무 데이터")
     private JsonElement data;
 
-    @FieldDescribe("应用")
+    @FieldDescribe("앱")
     private String application;
 
-    @FieldDescribe("流程")
+    @FieldDescribe("프로세스")
     private String process;
 
-    @FieldDescribe("工作")
+    @FieldDescribe("문서")
     private String job;
 
-    @FieldDescribe("节点")
+    @FieldDescribe("노드")
     private String activity;
 
-    @FieldDescribe("节点名称")
+    @FieldDescribe("노드 이름")
     private String activityName;
 
-    @FieldDescribe("是否删除操作")
+    @FieldDescribe("삭제 작업 여부")
     private Boolean deleted = false;
 
 

@@ -13,14 +13,14 @@ class ActionHolidayPostTest {
     void buildHolidaySetsYearAndApiSource() throws Exception {
         ActionHolidayPost.Wi wi = new ActionHolidayPost.Wi();
         wi.setDateString("2026-10-01");
-        wi.setName("国庆节");
+        wi.setName("국경절");
         wi.setOffDay(true);
 
         AttendanceV2Holiday holiday = ActionHolidayPost.buildHoliday(wi);
 
         assertEquals(2026, holiday.getYear());
         assertEquals("2026-10-01", holiday.getDateString());
-        assertEquals("国庆节", holiday.getName());
+        assertEquals("국경절", holiday.getName());
         assertEquals(true, holiday.getOffDay());
         assertEquals(AttendanceV2Holiday.SOURCE_API, holiday.getSource());
     }

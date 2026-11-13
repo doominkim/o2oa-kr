@@ -7,6 +7,6 @@ class ExceptionEmptyQuery extends LanguagePromptException {
 	private static final long serialVersionUID = 8891390969539772549L;
 
 	ExceptionEmptyQuery() {
-		super("搜索关键字不能为空.");
+		super("검색어는 비워 둘 수 없습니다.");
 	}
 }

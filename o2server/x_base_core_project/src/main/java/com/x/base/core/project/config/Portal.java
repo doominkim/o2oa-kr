@@ -25,11 +25,11 @@ public class Portal extends ConfigObject {
 
 	}
 
-	@FieldDescribe("url转换配置.")
+	@FieldDescribe("url 변환 설정.")
 	@Deprecated(since = "7.2", forRemoval = true)
 	private LinkedHashMap<String, String> urlMapping;
 
-	@FieldDescribe("定制首页面设置.")
+	@FieldDescribe("사용자 정의 홈 페이지 설정.")
 	private IndexPage indexPage;
 
 	public IndexPage getIndexPage() {
@@ -39,7 +39,7 @@ public class Portal extends ConfigObject {
 		return this.indexPage;
 	}
 
-	@FieldDescribe("定制登录页面设置.")
+	@FieldDescribe("사용자 정의 로그인 페이지 설정.")
 	private LoginPage loginPage;
 
 	public LoginPage getLoginPage() {
@@ -69,11 +69,11 @@ public class Portal extends ConfigObject {
 			this.page = "";
 		}
 
-		@FieldDescribe("是否启用定制登录页面.")
+		@FieldDescribe("사용자 정의 로그인 페이지 사용 여부.")
 		private Boolean enable;
-		@FieldDescribe("指定登录页面所属的portal,可以用id,name,alias.")
+		@FieldDescribe("로그인 페이지가 속한 portal 지정, id, name, alias 사용 가능.")
 		private String portal;
-		@FieldDescribe("指定的登录页面,可以使用name,alias,id")
+		@FieldDescribe("지정한 로그인 페이지, name, alias, id 사용 가능")
 		private String page;
 
 		public Boolean getEnable() {
@@ -114,11 +114,11 @@ public class Portal extends ConfigObject {
 			this.page = "";
 		}
 
-		@FieldDescribe("是否启用定制的首页面.")
+		@FieldDescribe("사용자 정의 홈 페이지 사용 여부.")
 		private Boolean enable;
-		@FieldDescribe("指定首页面所属的portal,可以用id,name,alias.")
+		@FieldDescribe("홈 페이지가 속한 portal 지정, id, name, alias 사용 가능.")
 		private String portal;
-		@FieldDescribe("指定的首页面,可以使用name,alias,id")
+		@FieldDescribe("지정한 홈 페이지, name, alias, id 사용 가능")
 		private String page;
 
 		public Boolean getEnable() {

@@ -27,7 +27,7 @@ import com.x.cms.core.entity.enums.DocumentStatus;
 import com.x.cms.core.entity.query.DocumentNotify;
 
 /**
- * 定时发布待发布文档
+ * 게시 대기 문서 예약 게시
  * 
  * @author sword
  */
@@ -40,9 +40,9 @@ public class PublishWaitDocumentTask extends AbstractJob {
 		try {
 			List<String> ids = queryWaitPublishDocIds();
 			if (ListTools.isNotEmpty(ids)) {
-				LOGGER.info("开始定时发布文档数量{}.", ids.size());
+				LOGGER.info("예약 게시 문서 수 {} 시작.", ids.size());
 				ids.stream().forEach(this::publishDocument);
-				LOGGER.info("结束定时发布文档数量{}.", ids.size());
+				LOGGER.info("예약 게시 문서 수 {} 종료.", ids.size());
 			}
 		} catch (Exception e) {
 			LOGGER.error(e);
@@ -67,9 +67,9 @@ public class PublishWaitDocumentTask extends AbstractJob {
 				documentNotify.setDocumentId(id);
 				ThisApplication.queueSendDocumentNotify.send(documentNotify);
 			}
-			LOGGER.info("完成发布文档：{}", document.getTitle());
+			LOGGER.info("문서 게시 완료: {}", document.getTitle());
 		} catch (Exception e) {
-			LOGGER.warn("发布文档：{}，异常：{}", id, e.getMessage());
+			LOGGER.warn("문서 게시: {}, 예외: {}", id, e.getMessage());
 		}
 	}
 

@@ -27,7 +27,7 @@ import javax.persistence.criteria.Root;
 
 class ActionUploadCallback extends BaseAction {
 
-	// @HttpMethodDescribe(value = "创建Attachment对象,如果没有上级目录用(0)替代.", response =
+	// @HttpMethodDescribe(value = "Attachment 객체 생성, 상위 디렉터리가 없으면 (0)으로 대체.", response =
 	// WrapOutId.class)
 	ActionResult<Wo<WoObject>> execute(EffectivePerson effectivePerson, String folderId, String callback,
 			String fileName, byte[] bytes, FormDataContentDisposition disposition) throws Exception {
@@ -51,19 +51,19 @@ class ActionUploadCallback extends BaseAction {
 			if (null == mapping) {
 				throw new ExceptionAllocateStorageMaapingCallback(callback);
 			}
-			/** 由于需要校验要把所有的必要字段进行填写 */
+			/** 검증을 위해 모든 필수 필드를 채워야 함 */
 
-			/** 文件名编码转换 */
+			/** 파일명 인코딩 변환 */
 			if (StringUtils.isEmpty(fileName)) {
 				fileName = new String(disposition.getFileName().getBytes(DefaultCharset.charset_iso_8859_1),
 						DefaultCharset.charset);
 			}
 			fileName = FilenameUtils.getName(fileName);
-			/** 禁止不带扩展名的文件上传 */
+			/** 확장자 없는 파일 업로드 금지 */
 			if (StringUtils.isEmpty(FilenameUtils.getExtension(fileName))) {
 				throw new ExceptionEmptyExtensionCallback(callback, fileName);
 			}
-			/** 同一目录下文件名唯一 */
+			/** 같은 디렉터리 내 파일명은 고유 */
 			if (this.exist(business, fileName, folderId)) {
 				throw new ExceptionSameNameFileExistCallback(callback, fileName);
 			}

@@ -23,12 +23,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("complex")
-@JaxrsDescribe("复合操作")
+@JaxrsDescribe("복합 작업")
 public class ComplexAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ComplexAction.class);
 
-	@JaxrsMethodDescribe(value = "获取指定个人的顶层文件.", action = ActionTop.class)
+	@JaxrsMethodDescribe(value = "지정 사용자의 최상위 파일 조회.", action = ActionTop.class)
 	@GET
 	@Path("top")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -45,13 +45,13 @@ public class ComplexAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取个人在指定分类下的文件.", action = ActionFolder.class)
+	@JaxrsMethodDescribe(value = "사용자의 지정 분류 내 파일 조회.", action = ActionFolder.class)
 	@GET
 	@Path("folder/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getWithFolderSubDirect(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("文件夹标识") @PathParam("id") String id) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("폴더 식별자") @PathParam("id") String id) {
 		ActionResult<ActionFolder.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

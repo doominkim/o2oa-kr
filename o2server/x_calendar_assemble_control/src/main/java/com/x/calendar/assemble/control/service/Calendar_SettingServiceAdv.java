@@ -10,7 +10,7 @@ import com.x.calendar.core.entity.Calendar_SettingLobValue;
 
 
 /**
- * 日程管理系统设置服务类
+ * 일정 관리 시스템 설정 서비스 클래스
  * @author O2LEE
  *
  */
@@ -19,7 +19,7 @@ public class Calendar_SettingServiceAdv{
 	private Calendar_SettingService calendar_SettingService = new Calendar_SettingService();
 	
 	/**
-	 * 获取所有的系统设置信息
+	 * 모든 시스템 설정 정보 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -32,7 +32,7 @@ public class Calendar_SettingServiceAdv{
 	}
 
 	/**
-	 * 根据ID获取指定的系统设置信息
+	 * ID로 지정 시스템 설정 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -46,7 +46,7 @@ public class Calendar_SettingServiceAdv{
 	}
 
 	/**
-	 * 保存系统设置信息
+	 * 시스템 설정 정보 저장
 	 * @param calendar_Setting
 	 * @return
 	 * @throws Exception
@@ -69,7 +69,7 @@ public class Calendar_SettingServiceAdv{
 	}
 
 	/**
-	 * 根据设置编码获取指定的设置信息
+	 * 설정 코드로 지정 설정 정보 조회
 	 * @param code
 	 * @return
 	 * @throws Exception
@@ -83,7 +83,7 @@ public class Calendar_SettingServiceAdv{
 	}
 	
 	/**
-	 * 根据编码获取指定的设置信息的具体配置值
+	 * 코드로 지정 설정 정보의 구체적 설정 값 조회
 	 * @param code
 	 * @return
 	 * @throws Exception
@@ -106,7 +106,7 @@ public class Calendar_SettingServiceAdv{
 	}
 
 	/**
-	 * 根据ID获取配置值信息
+	 * ID로 설정 값 정보 조회
 	 * @param id
 	 * @return
 	 * @throws Exception

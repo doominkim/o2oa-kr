@@ -18,8 +18,8 @@ public final class AiAgent {
 	private static final Logger logger = LoggerFactory.getLogger(AiAgent.class);
 
 	/**
-	 * 启动阶段错误输出窗口。 这段时间内 stderr 会打印到主服务器 console。 超过这个时间后仍会继续读取
-	 * stderr，但不再打印，避免子进程阻塞。
+	 * 시작 단계 오류 출력 구간. 이 시간 동안 stderr는 메인 서버 console에 출력됨. 이 시간 이후에도 계속
+	 * stderr를 읽지만 출력하지 않아 자식 프로세스 블로킹을 방지.
 	 */
 	private static final Duration STARTUP_ERROR_WINDOW = Duration.ofSeconds(30);
 
@@ -108,10 +108,10 @@ public final class AiAgent {
 
 		pb.directory(dir.toFile());
 
-		// 正常输出不要
+		// 표준 출력 불필요
 		pb.redirectOutput(ProcessBuilder.Redirect.DISCARD);
 
-		// 错误输出保留为 PIPE，供父进程读取
+		// 오류 출력은 PIPE로 유지해 부모 프로세스가 읽도록 함
 		pb.redirectError(ProcessBuilder.Redirect.PIPE);
 
 		return pb;
@@ -129,10 +129,10 @@ public final class AiAgent {
 					if (System.nanoTime() <= deadlineNanos) {
 						System.err.println("[aiagent] " + line);
 					}
-					// 超过启动窗口后不打印，但仍继续读取，避免 stderr 堵塞
+					// 시작 구간 이후에는 출력하지 않지만 stderr 막힘을 피하려고 계속 읽음
 				}
 			} catch (IOException e) {
-				// 这里通常发生在进程退出或流关闭时，不必升级成错误
+				// 보통 프로세스 종료나 스트림 닫힘 시 발생하므로 오류로 격상할 필요 없음
 			}
 		}, "aiagent-stderr-reader");
 		t.setDaemon(true);

@@ -11,13 +11,13 @@ public class WiAttachment  extends GsonPropertyObject {
 
     private static final long serialVersionUID = 6570042412000311813L;
 
-    @FieldDescribe("附件标识.")
+    @FieldDescribe("첨부파일 식별자.")
     private String id;
 
-    @FieldDescribe("附件名称.")
+    @FieldDescribe("첨부파일 이름.")
     private String name;
 
-    @FieldDescribe("附件分类.")
+    @FieldDescribe("첨부파일 분류.")
     private String site;
 
     public String getId() {

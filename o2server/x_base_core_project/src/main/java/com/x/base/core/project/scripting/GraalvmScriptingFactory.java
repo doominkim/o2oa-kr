@@ -422,7 +422,7 @@ public class GraalvmScriptingFactory {
 		}
 
 		/**
-		 * 对jsonElement抽取可能是身份,个人,组织,群组的文本值,不进行递归的抽取,仅抽取地一层
+		 * jsonElement에서 신분, 개인, 조직, 그룹일 수 있는 텍스트 값 추출, 재귀 추출하지 않고 첫 단계만 추출
 		 *
 		 */
 		public static List<String> stringOrDistinguishedNameAsList(JsonElement jsonElement) {

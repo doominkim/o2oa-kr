@@ -8,7 +8,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 import com.x.base.core.project.tools.Crypto;
 
 /**
- * 第三方附件存储配置
+ * 서드파티 첨부파일 스토리지 설정
  *
  * @author sword
  */
@@ -16,7 +16,7 @@ public class ExternalStorageSource extends ConfigObject {
 
 	private static final long serialVersionUID = 5926439816241094368L;
 
-	// 无需保存
+	// 저장 불필요
 	private transient String _password;
 
 	public static ExternalStorageSource defaultInstance() {
@@ -47,27 +47,27 @@ public class ExternalStorageSource extends ConfigObject {
 	public static final Boolean DEFAULT_DEEPPATH = false;
 	public static final String DEFAULT_STORE = "";
 
-	@FieldDescribe("协议,可选值ftp、sftp、webdav、file、ali")
+	@FieldDescribe("프로토콜, 가능한 값 ftp, sftp, webdav, file, ali")
 	private StorageProtocol protocol;
-	@FieldDescribe("登录用户名.")
+	@FieldDescribe("로그인 사용자 이름.")
 	private String username;
-	@FieldDescribe("登录密码.")
+	@FieldDescribe("로그인 비밀번호.")
 	private String password;
-	@FieldDescribe("主机地址或阿里云endpoint.")
+	@FieldDescribe("호스트 주소 또는 알리클라우드 endpoint.")
 	private String host;
-	@FieldDescribe("端口.")
+	@FieldDescribe("포트.")
 	private Integer port;
-	@FieldDescribe("前缀路径.")
+	@FieldDescribe("접두 경로.")
 	private String prefix;
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	private Boolean enable;
-	@FieldDescribe("设置权重.")
+	@FieldDescribe("가중치 설정.")
 	private Integer weight;
-	@FieldDescribe("存储节点名,对应存储名称,阿里云为bucket(桶)名称.")
+	@FieldDescribe("스토리지 노드 이름, 스토리지 이름에 대응, 알리클라우드는 bucket 이름.")
 	private String name;
-	@FieldDescribe("是否使用更深的路径.")
+	@FieldDescribe("더 깊은 경로 사용 여부.")
 	private Boolean deepPath;
-	@FieldDescribe("配置名称.")
+	@FieldDescribe("설정 이름.")
 	private String store;
 
 	public String getStore() {

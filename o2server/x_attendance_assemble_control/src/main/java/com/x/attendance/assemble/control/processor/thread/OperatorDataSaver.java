@@ -59,7 +59,7 @@ public class OperatorDataSaver implements Runnable {
 		
 		
 		if( check ) {
-			// 1、对每一条进行检查，如果在不需要考勤的人员名单里，那么就不进行存储(未判断)。
+			// 1. 각 항목을 검사하여 근태 제외 사용자 명단에 있으면 저장하지 않음(미판단).
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				attendanceDetail = attendanceDetailServiceAdv.save( attendanceDetail );
 				cacheImportFileStatus.sendStartTime( attendanceDetail.getRecordDate() );
@@ -67,7 +67,7 @@ public class OperatorDataSaver implements Runnable {
 				cacheImportFileStatus.increaseProcess_save_count( 1 );
 			} catch (Exception e) {
 				cacheImportFileStatus.increaseErrorCount( 1 );
-				logger.warn( "文件["+ file_id +"]，数据保存时发生未知异常.ID:" + file_id );
+				logger.warn( "파일["+ file_id +"], 데이터 저장 중 알 수 없는 예외가 발생했습니다. ID:" + file_id );
 				logger.error(e );
 			}
 		}

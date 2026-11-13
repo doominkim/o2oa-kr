@@ -13,7 +13,7 @@ public class JpushConfig extends ConfigObject {
     private static final String O2_master_secret_default = "96ee7e2e0daffd51bac57815";
 
 
-    // 自助打包的outer包使用的key
+    // 자체 패키징한 outer 패키지에서 사용하는 key
     private static final String O2_app_key_outer = "24a4af5965d2c325b33c243d";
     private static final String O2_master_secret_outer = "a7b5689399307b29957e7dce";
 
@@ -26,25 +26,25 @@ public class JpushConfig extends ConfigObject {
         this.appKey = O2_app_key_default;
         this.masterSecret = O2_master_secret_default;
         this.thirdPartyChannel = o2oaOfficialPushChannel();
-        this.badgeClass = ""; // 默认不设置
+        this.badgeClass = ""; // 기본값은 설정하지 않음
     }
 
 
-    @FieldDescribe("是否启用.")
+    @FieldDescribe("사용 여부.")
     private Boolean enable;
-    @FieldDescribe("极光推送应用的AppKey")
+    @FieldDescribe("JPush 앱의 AppKey")
     private String appKey;
-    @FieldDescribe("极光推送应用的Master Secret")
+    @FieldDescribe("JPush 앱의 Master Secret")
     private String masterSecret;
     // "thirdPartyChannel": { "xiaomi": {"channel_id": ""}, "huawei": { "importance": "NORMAL", "category": "WORK" } }
-    @FieldDescribe("第三方通道参数配置")
+    @FieldDescribe("서드파티 채널 파라미터 설정")
     private ThirdPartyChannel thirdPartyChannel;
-    @FieldDescribe("Android应用入口Activity类")
+    @FieldDescribe("Android 앱 진입 Activity 클래스")
     private String badgeClass;
 
 
 
-    // o2oa 官方 app 小米和华为通道
+    // o2oa 공식 app 샤오미 및 화웨이 채널
     ThirdPartyChannel o2oaOfficialPushChannel() {
         ThirdPartyChannel map = new ThirdPartyChannel();
         Xiaomi xiaomi = new Xiaomi();
@@ -67,7 +67,7 @@ public class JpushConfig extends ConfigObject {
 
 
     /**
-     * 获取给自助打包生成的 外部包名 的app使用的config
+     * 자체 패키징으로 생성된 외부 패키지명 app에서 사용하는 config 조회
      * @return
      */
     public JpushConfig getOuterApplicationJpushConfig() {
@@ -146,15 +146,15 @@ public class JpushConfig extends ConfigObject {
 
     public static class ThirdPartyChannel extends GsonPropertyObject {
 
-        @FieldDescribe("小米推送通道参数")
+        @FieldDescribe("샤오미 푸시 채널 파라미터")
         private Xiaomi xiaomi;
-        @FieldDescribe("华为推送通道参数")
+        @FieldDescribe("화웨이 푸시 채널 파라미터")
         private Huawei huawei;
-        @FieldDescribe("OPPO推送通道参数")
+        @FieldDescribe("OPPO 푸시 채널 파라미터")
         private Oppo oppo;
-        @FieldDescribe("荣耀推送通道参数")
+        @FieldDescribe("아너(Honor) 푸시 채널 파라미터")
         private Honor honor;
-        @FieldDescribe("VIVO推送通道参数")
+        @FieldDescribe("VIVO 푸시 채널 파라미터")
         private Vivo vivo;
 
         public Vivo getVivo() {
@@ -202,7 +202,7 @@ public class JpushConfig extends ConfigObject {
     public static class Vivo extends GsonPropertyObject {
 
         private static final long serialVersionUID = 4441517807393020333L;
-        @FieldDescribe("vivo厂商消息场景标识")
+        @FieldDescribe("vivo 제조사 메시지 시나리오 식별자")
         private String category;
 
         public String getCategory() {
@@ -217,11 +217,11 @@ public class JpushConfig extends ConfigObject {
     public static class Oppo  extends GsonPropertyObject {
 
         private static final long serialVersionUID = 2691848272185396738L;
-        @FieldDescribe("android 通知 channel_id")
+        @FieldDescribe("android 알림 channel_id")
         private String channel_id;
-        @FieldDescribe("OPPO 厂商消息场景标识")
+        @FieldDescribe("OPPO 제조사 메시지 시나리오 식별자")
         private String category;
-        @FieldDescribe("OPPO通知栏消息提醒等级")
+        @FieldDescribe("OPPO 알림 표시줄 메시지 알림 등급")
         private Integer notify_level;
 
         public String getChannel_id() {
@@ -252,7 +252,7 @@ public class JpushConfig extends ConfigObject {
     public static class Xiaomi extends GsonPropertyObject {
 
         private static final long serialVersionUID = -372457646001459805L;
-        @FieldDescribe("小米推送的channel_id")
+        @FieldDescribe("샤오미 푸시의 channel_id")
         private String channel_id;
 
         public String getChannel_id() {
@@ -267,9 +267,9 @@ public class JpushConfig extends ConfigObject {
     public static class Huawei extends GsonPropertyObject {
 
         private static final long serialVersionUID = 7441536586208244234L;
-        @FieldDescribe("华为通知栏消息智能分类")
+        @FieldDescribe("화웨이 알림 표시줄 메시지 스마트 분류")
         private String importance;
-        @FieldDescribe("华为厂商消息场景标识")
+        @FieldDescribe("화웨이 제조사 메시지 시나리오 식별자")
         private String category;
 
         public String getImportance() {
@@ -293,7 +293,7 @@ public class JpushConfig extends ConfigObject {
 
 
         private static final long serialVersionUID = -6989617318639425429L;
-        @FieldDescribe("荣耀通知栏消息智能分类")
+        @FieldDescribe("아너(Honor) 알림 표시줄 메시지 스마트 분류")
         private String importance;
 
         public String getImportance() {

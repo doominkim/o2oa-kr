@@ -20,7 +20,7 @@ public class HotPictureInfoServiceAdv {
 	private HotPictureInfoService hotPictureInfoService = new HotPictureInfoService();
 	
 	/**
-	 * 根据传入的ID从数据库查询HotPictureInfo对象
+	 * 전달받은 ID로 데이터베이스에서 HotPictureInfo 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -37,7 +37,7 @@ public class HotPictureInfoServiceAdv {
 	}
 	
 	/**
-	 * 向数据库保存HotPictureInfo对象
+	 * HotPictureInfo 객체를 데이터베이스에 저장
 	 * @param _hotPictureInfo
 	 */
 	public HotPictureInfo save( HotPictureInfo _hotPictureInfo ) throws Exception {
@@ -55,7 +55,7 @@ public class HotPictureInfoServiceAdv {
 	}
 	
 	/**
-	 * 根据ID从数据库中删除HotPictureInfo对象
+	 * ID로 데이터베이스에서 HotPictureInfo 객체 삭제
 	 * @param id
 	 * @throws Exception
 	 */
@@ -180,7 +180,7 @@ public class HotPictureInfoServiceAdv {
 	
 	public void documentExistsCheck() {
 		List<HotPictureInfo> allHotPictureInfoList = null;
-		// 1、先查询出所有的信息列表，按照排序号和更新时间倒排序
+		// 1. 먼저 전체 정보 목록을 정렬 번호와 수정 시간 역순으로 조회
 		try {
 			allHotPictureInfoList = listAll();
 		} catch (Exception e) {

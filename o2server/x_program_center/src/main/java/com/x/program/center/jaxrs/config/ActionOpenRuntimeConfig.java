@@ -18,7 +18,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 获取运行中的配置文件
+ * 실행 중인 설정 파일 조회
  * @author sword
  */
 public class ActionOpenRuntimeConfig extends BaseAction {
@@ -55,7 +55,7 @@ public class ActionOpenRuntimeConfig extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject{
 
-		@FieldDescribe("config文件名")
+		@FieldDescribe("config 파일 이름")
 		private String fileName;
 
 		public String getFileName() {
@@ -69,7 +69,7 @@ public class ActionOpenRuntimeConfig extends BaseAction {
 
 	public static class Wo extends GsonPropertyObject {
 
-		@FieldDescribe("config文件内容")
+		@FieldDescribe("config 파일 내용")
 		private String fileContent;
 
 		public String getFileContent() {

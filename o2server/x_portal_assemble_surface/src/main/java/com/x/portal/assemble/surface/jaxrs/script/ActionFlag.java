@@ -77,7 +77,7 @@ class ActionFlag extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 
-		@FieldDescribe("已经导入的脚本")
+		@FieldDescribe("이미 가져온 스크립트")
 		private List<String> importedList;
 
 		public List<String> getImportedList() {

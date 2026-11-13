@@ -75,7 +75,7 @@ public class ActionQueryGetControl extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionCategoryInfoProcess( e, "根据ID查询分类信息对象时发生异常。ID:" + id );
+					Exception exception = new ExceptionCategoryInfoProcess( e, "ID로 분류 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + id );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -90,7 +90,7 @@ public class ActionQueryGetControl extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionCategoryInfoProcess( e, "根据指定id查询应用栏目信息对象时发生异常。ID:" + categoryInfo.getAppId() );
+					Exception exception = new ExceptionCategoryInfoProcess( e, "지정한 id로 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + categoryInfo.getAppId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -127,7 +127,7 @@ public class ActionQueryGetControl extends BaseAction {
 					categoryInfo.getManageableGroupList().retainAll( groupNames );
 					categoryInfo.getManageableUnitList().retainAll( unitNames );
 
-					//有栏目管理权限的用户一定有分类管理权限
+					//게시판 관리 권한이 있는 사용자는 반드시 분류 관리 권한도 있음
 					if( ListTools.isNotEmpty( appInfo.getManageableGroupList())
 							|| ListTools.isNotEmpty( appInfo.getManageableUnitList())
 							|| ListTools.contains( appInfo.getManageablePersonList(), personName )){
@@ -136,10 +136,10 @@ public class ActionQueryGetControl extends BaseAction {
 						woControl.setAllowVisit( true );
 					}
 
-					//如果没有栏目的管理权限 ，那么判断是否拥有分类的管理权限
+					//게시판 관리 권한이 없으면 분류 관리 권한이 있는지 확인
 					if( !woControl.getAllowManage() ){
 						if( woControl.getAllowPublish() ){
-							//判断是否有管理权限
+							//관리 권한 여부 확인
 							if( ListTools.isNotEmpty( categoryInfo.getManageableGroupList())
 									|| ListTools.isNotEmpty( categoryInfo.getManageableUnitList())
 									|| ListTools.contains( categoryInfo.getManageablePersonList(), personName )){
@@ -150,7 +150,7 @@ public class ActionQueryGetControl extends BaseAction {
 						}
 					}
 
-					//有栏目发布权限的用户一定有分类发布权限
+					//게시판 발행 권한이 있는 사용자는 반드시 분류 발행 권한도 있음
 					if( !woControl.getAllowPublish() ){
 						if( ListTools.isNotEmpty( appInfo.getPublishableGroupList())
 								|| ListTools.isNotEmpty( appInfo.getPublishableUnitList())
@@ -160,14 +160,14 @@ public class ActionQueryGetControl extends BaseAction {
 						}
 					}
 
-					//如果用户只有栏目的查看权限，那么需要再判断一下用户是否有分类的管理、发布、查看权限
+					//사용자에게 게시판 열람 권한만 있으면 분류의 관리·발행·열람 권한이 있는지 추가로 확인
 					if( appInfo.getAllPeopleView() || appInfo.getAnonymousAble()
 							|| ListTools.isNotEmpty(appInfo.getViewableGroupList())
 							|| ListTools.isNotEmpty( appInfo.getViewableUnitList())
 							|| ListTools.contains( appInfo.getViewablePersonList(), personName )){
-						//判断分类相关权限
+						//분류 관련 권한 확인
 						if( !woControl.getAllowManage() ){
-							//判断是否有管理权限
+							//관리 권한 여부 확인
 							if( ListTools.isNotEmpty( categoryInfo.getManageableGroupList())
 									|| ListTools.isNotEmpty( categoryInfo.getManageableUnitList())
 									|| ListTools.contains( categoryInfo.getManageablePersonList(), personName )){
@@ -177,14 +177,14 @@ public class ActionQueryGetControl extends BaseAction {
 							}
 						}
 						if( !woControl.getAllowPublish() ){
-							//判断是否有发布权限
+							//발행 권한 여부 확인
 							if( categoryInfo.getAllPeoplePublish() ){
 								woControl.setAllowPublish( true );
 								woControl.setAllowVisit( true );
 							}
 						}
 						if( !woControl.getAllowPublish() ){
-							//判断是否有发布权限
+							//발행 권한 여부 확인
 							if( ListTools.isNotEmpty( categoryInfo.getPublishableGroupList())
 									|| ListTools.isNotEmpty( categoryInfo.getPublishableUnitList())
 									|| ListTools.contains( categoryInfo.getPublishablePersonList(), personName )){
@@ -193,13 +193,13 @@ public class ActionQueryGetControl extends BaseAction {
 							}
 						}
 						if( !woControl.getAllowVisit() ){
-							//判断是否有访问权限
+							//접근 권한 여부 확인
 							if( categoryInfo.getAllPeopleView() || categoryInfo.getAnonymousAble() ){
 								woControl.setAllowVisit( true );
 							}
 						}
 						if( !woControl.getAllowVisit() ){
-							//判断是否有访问权限
+							//접근 권한 여부 확인
 							if( ListTools.isNotEmpty( categoryInfo.getViewableGroupList())
 									|| ListTools.isNotEmpty( categoryInfo.getViewableUnitList())
 									|| ListTools.contains( categoryInfo.getViewablePersonList(), personName )){
@@ -234,13 +234,13 @@ public class ActionQueryGetControl extends BaseAction {
 	
 	public static class WoControl extends GsonPropertyObject {
 
-		@FieldDescribe("是否允许查看.")
+		@FieldDescribe("열람 허용 여부.")
 		private Boolean allowVisit = false;
 
-		@FieldDescribe("是否允许发布文档.")
+		@FieldDescribe("문서 발행 허용 여부.")
 		private Boolean allowPublish = false;
 
-		@FieldDescribe("是否允许管理：删除、编辑.")
+		@FieldDescribe("관리 허용 여부: 삭제·편집.")
 		private Boolean allowManage = false;
 
 		public Boolean getAllowVisit() {

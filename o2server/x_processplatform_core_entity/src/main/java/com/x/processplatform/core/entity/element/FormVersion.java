@@ -24,7 +24,7 @@ import com.x.base.core.project.gson.XGsonBuilder;
 import com.x.processplatform.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "FormVersion", description = "流程平台表单历史版本.")
+@Schema(name = "FormVersion", description = "프로세스 플랫폼 양식 이력 버전.")
 @Entity
 @ContainerEntity(dumpSize = 5, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Element.FormVersion.table, uniqueConstraints = {
@@ -47,19 +47,19 @@ public class FormVersion extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	@Override
 	public void onPersist() throws Exception {
 		// nothing
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public FormVersion() {
 
@@ -72,21 +72,21 @@ public class FormVersion extends SliceJpaObject {
 	}
 
 	public static final String form_FIELDNAME = "form";
-	@FieldDescribe("所属表单.")
+	@FieldDescribe("소속 양식.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + form_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + form_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String form;
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("操作人.")
+	@FieldDescribe("작업자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ person_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String person;
 
 	public static final String data_FIELDNAME = "data";
-	@FieldDescribe("文本内容.")
+	@FieldDescribe("텍스트 내용.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + data_FIELDNAME)

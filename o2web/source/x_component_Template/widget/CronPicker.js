@@ -7,12 +7,12 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
 	Extends: MTooltips,
 	options: {
         style : "default",
-        axis: "y",      //箭头在x轴还是y轴上展现
-        position : { //node 固定的位置
-            x : "auto", //x 轴上left center right, auto 系统自动计算
-            y : "auto" //y轴上top middle bottom,  auto 系统自动计算
+        axis: "y",      //화살표를 x축에 표시할지 y축에 표시할지
+        position : { //node 고정 위치
+            x : "auto", //x축의 left center right, auto는 시스템 자동 계산
+            y : "auto" //y축의 top middle bottom,  auto는 시스템 자동 계산
         },
-        event : "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
+        event : "click", //이벤트 유형, target이 있을 때 유효, mouseenter는 mouseleave에 대응, click은 container의  click에 대응
         modules : ["second","mintue","hour","date","month","week","year"],
         moudulesLp : { second : "초", mintue : "분", hour : "시", date : "일", month : "월", week : "요일", year : "년"},
         isShowResult : true,

@@ -35,7 +35,7 @@ import com.x.processplatform.core.entity.element.Process;
 
 /**
  * 
- * 在管理界面下获取相关联的所有信息,需要control权限,同时需要添加一个permission
+ * 관리 화면에서 연관된 모든 정보 조회, control 권한 필요, 동시에 permission 추가 필요
  */
 class ActionManageGetAssignment extends BaseAction {
 
@@ -53,7 +53,7 @@ class ActionManageGetAssignment extends BaseAction {
 			workCompleted = emc.find(id, WorkCompleted.class);
 			Process process = business.process().pick(workCompleted.getProcess());
 			Application application = business.application().pick(workCompleted.getApplication());
-			// 需要对这个应用的管理权限
+			// 이 앱에 대한 관리 권한 필요
 			if (BooleanUtils
 					.isNotTrue(business.ifPersonCanManageApplicationOrProcess(effectivePerson, application, process))) {
 				throw new ExceptionAccessDenied(effectivePerson);

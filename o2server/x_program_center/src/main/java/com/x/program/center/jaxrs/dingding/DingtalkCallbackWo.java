@@ -9,12 +9,12 @@ import com.x.base.core.project.gson.GsonPropertyObject;
  */
 public class DingtalkCallbackWo extends GsonPropertyObject {
 
-    @FieldDescribe("消息体签名")
-    private String msg_signature; //消息体签名
-    @FieldDescribe("时间戳")
+    @FieldDescribe("메시지 본문 서명")
+    private String msg_signature; //메시지 본문 서명
+    @FieldDescribe("타임스탬프")
     private String timeStamp;
-    @FieldDescribe("随机字符串")
+    @FieldDescribe("무작위 문자열")
     private String nonce;
-    @FieldDescribe("字符串“success”加密值")
+    @FieldDescribe("문자열 「success」 암호화 값")
     private String encrypt;
 }

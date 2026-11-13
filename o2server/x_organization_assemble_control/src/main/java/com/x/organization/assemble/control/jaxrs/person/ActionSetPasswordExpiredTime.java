@@ -35,7 +35,7 @@ class ActionSetPasswordExpiredTime extends BaseAction {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             ActionResult<Wo> result = new ActionResult<>();
             Business business = new Business(emc);
-            // 排除xadmin
+            // xadmin 제외
             if (Config.token().isInitialManager(flag)) {
                 throw new ExceptionDenyChangeInitialManagerPassword();
             } else {
@@ -65,8 +65,8 @@ class ActionSetPasswordExpiredTime extends BaseAction {
     
     public static class Wi extends GsonPropertyObject {
 
-    	@FieldDescribe("到期日期.")
-    	@Schema(description = "到期日期.")
+    	@FieldDescribe("만료 일자.")
+    	@Schema(description = "만료 일자.")
         private Date passwordExpiredTime;
 
         public Date getPasswordExpiredTime() {

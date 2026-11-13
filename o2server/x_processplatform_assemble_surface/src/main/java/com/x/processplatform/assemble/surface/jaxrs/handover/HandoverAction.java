@@ -24,18 +24,18 @@ import java.util.List;
  * @author sword
  */
 @Path("handover")
-@JaxrsDescribe("权限交接")
+@JaxrsDescribe("권한 인계")
 public class HandoverAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(HandoverAction.class);
 
-	@JaxrsMethodDescribe(value = "获取指定的对象信息.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "지정 객체 정보 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -47,7 +47,7 @@ public class HandoverAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -64,14 +64,14 @@ public class HandoverAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "分页列示对象.", action = ActionListPaging.class)
+	@JaxrsMethodDescribe(value = "객체 페이지 목록.", action = ActionListPaging.class)
 	@POST
 	@Path("list/paging/{page}/size/{size}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-							 @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-							 @JaxrsParameterDescribe("每页数量") @PathParam("size") Integer size) {
+							 @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+							 @JaxrsParameterDescribe("페이지당 개수") @PathParam("size") Integer size) {
 		ActionResult<List<ActionListPaging.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -83,13 +83,13 @@ public class HandoverAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "取消权限交接.", action = ActionCancel.class)
+	@JaxrsMethodDescribe(value = "권한 인계 취소.", action = ActionCancel.class)
 	@POST
 	@Path("{id}/cancel")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void cancel(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+					@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionCancel.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -101,13 +101,13 @@ public class HandoverAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "运行权限交接.", action = ActionProcess.class)
+	@JaxrsMethodDescribe(value = "권한 인계 실행.", action = ActionProcess.class)
 	@POST
 	@Path("{id}/process")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void process(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-					   @JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+					   @JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionProcess.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

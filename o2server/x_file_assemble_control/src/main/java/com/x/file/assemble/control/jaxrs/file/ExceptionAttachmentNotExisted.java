@@ -7,6 +7,6 @@ class ExceptionAttachmentNotExisted extends PromptException {
 	private static final long serialVersionUID = 7750207007061165350L;
 
 	ExceptionAttachmentNotExisted(String id) {
-		super("指定的Attachmenet: {} 不存在.", id);
+		super("지정한 Attachmenet: {}이(가) 없습니다.", id);
 	}
 }

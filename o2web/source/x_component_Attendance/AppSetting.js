@@ -11,7 +11,7 @@ MWF.xApplication.Attendance.AppSetting = new Class({
     decodeData : function( data ){
         //{
         //    'configCode':'APPEALABLE',
-        //    'configName':'申诉功能启用状态',
+        //    'configName':'이의 신청 기능 사용 상태',
         //    'configValue':'false',
         //    'ordernumber':1
         //}
@@ -91,7 +91,7 @@ MWF.xApplication.Attendance.AppSetting = new Class({
             APPEAL_AUDIFLOWTYPE : { text : lp.appealAuditFlowType,
                 type : "select",
                 value : d.APPEAL_AUDIFLOWTYPE ,
-                selectValue : this.dataJson.APPEAL_AUDIFLOWTYPE.selectContent.split("|"), //["人员属性","所属部门职位","指定人","汇报对象"],
+                selectValue : this.dataJson.APPEAL_AUDIFLOWTYPE.selectContent.split("|"), //["사용자 속성","소속 부서 직위","지정 사용자","보고 대상"],
                 selectText : lp.appealAuditFlowTypeSelectText,
                 event : {
                     change : function( item, ev ){
@@ -104,7 +104,7 @@ MWF.xApplication.Attendance.AppSetting = new Class({
             APPEAL_AUDITOR_TYPE : { text : lp.appealAuditorType,
                 type : "select",
                 value : d.APPEAL_AUDITOR_TYPE ,
-                selectValue : this.dataJson.APPEAL_AUDITOR_TYPE.selectContent.split("|"), //["人员属性","所属部门职位","指定人","汇报对象"],
+                selectValue : this.dataJson.APPEAL_AUDITOR_TYPE.selectContent.split("|"), //["사용자 속성","소속 부서 직위","지정 사용자","보고 대상"],
                 event : {
                     change : function( item, ev ){
                         this.formTableArea.getElement("[item='valueArea']").setStyle( "display" , (item.getValue() == "汇报对象" || item.getValue() == lp.reportTo) ? "none" : "" );
@@ -135,12 +135,12 @@ MWF.xApplication.Attendance.AppSetting = new Class({
                 }
             }
             //,
-            //APPEAL_CHECKER_TYPE : { text : "考勤结果申诉复核人确定方式",
+            //APPEAL_CHECKER_TYPE : { text : "근태 결과 이의 신청 검토자 지정 방식",
             //    type : "select",
             //    value : d.APPEAL_CHECKER_TYPE ,
-            //    selectValue : ["无","人员属性","所属部门职位","指定人"] //,"指定角色"]
+            //    selectValue : ["없음","사용자 속성","소속 부서 직위","지정 사용자"] //,"지정 역할"]
             //},
-            //APPEAL_CHECKER_VALUE : { text : "考勤结果申诉复核人确定内容",
+            //APPEAL_CHECKER_VALUE : { text : "근태 결과 이의 신청 검토자 지정 내용",
             //    type : "text",
             //    value : d.APPEAL_CHECKER_VALUE
             //}

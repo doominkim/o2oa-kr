@@ -31,12 +31,12 @@ public class StatisticTopUnitForMonthFactory extends AbstractFactory {
 		super(business);
 	}
 
-	//@MethodDescribe("获取指定Id的StatisticTopUnitForMonth信息对象")
+	//@MethodDescribe("지정 Id의 StatisticTopUnitForMonth 정보 객체 조회")
 	public StatisticTopUnitForMonth get( String id ) throws Exception {
 		return this.entityManagerContainer().find(id, StatisticTopUnitForMonth.class, ExceptionWhen.none);
 	}
 	
-	//@MethodDescribe("列示全部的StatisticTopUnitForMonth信息列表")
+	//@MethodDescribe("전체 StatisticTopUnitForMonth 정보 목록 조회")
 	public List<String> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(StatisticTopUnitForMonth.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -46,7 +46,7 @@ public class StatisticTopUnitForMonthFactory extends AbstractFactory {
 		return em.createQuery(cq).getResultList();
 	}
 	
-	//@MethodDescribe("列示指定Id的StatisticTopUnitForMonth信息列表")
+	//@MethodDescribe("지정 Id의 StatisticTopUnitForMonth 정보 목록 조회")
 	public List<StatisticTopUnitForMonth> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<StatisticTopUnitForMonth>();
@@ -84,7 +84,7 @@ public class StatisticTopUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询下一页的信息数据
+	 * 다음 페이지 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -94,13 +94,13 @@ public class StatisticTopUnitForMonthFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<StatisticTopUnitForMonth> listIdsNextWithFilter( String id, Integer count, Object sequence, WrapInFilterStatisticTopUnitForMonth wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( StatisticTopUnitForMonth.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<StatisticTopUnitForMonth> cq = cb.createQuery(StatisticTopUnitForMonth.class);
 		Root<StatisticTopUnitForMonth> root = cq.from(StatisticTopUnitForMonth.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -133,7 +133,7 @@ public class StatisticTopUnitForMonthFactory extends AbstractFactory {
 	}	
 	
 	/**
-	 * 查询上一页的文档信息数据
+	 * 이전 페이지 문서 정보 데이터 조회
 	 * @param id
 	 * @param count
 	 * @param sequence
@@ -143,13 +143,13 @@ public class StatisticTopUnitForMonthFactory extends AbstractFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<StatisticTopUnitForMonth> listIdsPrevWithFilter( String id, Integer count, Object sequence, WrapInFilterStatisticTopUnitForMonth wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( StatisticTopUnitForMonth.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<StatisticTopUnitForMonth> cq = cb.createQuery(StatisticTopUnitForMonth.class);
 		Root<StatisticTopUnitForMonth> root = cq.from(StatisticTopUnitForMonth.class);
 
-		String order = wrapIn.getOrder();//排序方式
+		String order = wrapIn.getOrder();//정렬 방식
 		if( order == null || order.isEmpty() ){
 			order = "DESC";
 		}
@@ -182,13 +182,13 @@ public class StatisticTopUnitForMonthFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 查询符合的文档信息总数
+	 * 조건에 맞는 문서 정보 총수 조회
 	 * @param wrapIn
 	 * @return
 	 * @throws Exception
 	 */
 	public long getCountWithFilter( WrapInFilterStatisticTopUnitForMonth wrapIn ) throws Exception {
-		//先获取上一页最后一条的sequence值，如果有值的话，以此sequence值作为依据取后续的count条数据
+		//이전 페이지 마지막 항목의 sequence 값을 먼저 가져와, 값이 있으면 이 sequence 값을 기준으로 이후 count건 조회
 		EntityManager em = this.entityManagerContainer().get( StatisticTopUnitForMonth.class );
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);

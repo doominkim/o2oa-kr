@@ -56,7 +56,7 @@ onMounted(()=>{
     o2.requireApp("Template", "widget.CronPicker", ()=>{
       const cronPicker = new MWF.xApplication.Template.widget.CronPicker( component.content, node, component, {}, {
         style : "design",
-        position : { //node 固定的位置
+        position : { //node 고정 위치
           x : "right",
           y : "auto"
         },

@@ -22,7 +22,7 @@ public class PDFKeyWordPosition extends PDFTextStripper {
         super();
     }
 
-    // 获取坐标信息
+    // 좌표 정보 조회
     public Map<String, List<Position>> getCoordinate(List<String> keywordList, PDDocument document) throws IOException {
         super.setSortByPosition(true);
         this.keywordList = keywordList;

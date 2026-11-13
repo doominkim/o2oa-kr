@@ -190,7 +190,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 	}
 
 	/**
-	 * 判断id在实体类中是否可用
+	 * id가 엔티티 클래스에서 사용 가능한지 판단
 	 *
 	 * @param id
 	 * @param cls
@@ -213,7 +213,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 			throws Exception {
 		EntityManager em = startTransaction ? this.beginTransaction(cls) : this.get(cls);
 		T t = null;
-		/* 判断字段长度在定义范围之内否则db2会报错 */
+		/* 필드 길이가 정의 범위 내인지 판단, 아니면 db2에서 오류 발생 */
 		if (StringUtils.isNotEmpty(id) && JpaObjectTools.withinDefinedLength(id, cls, JpaObject.id_FIELDNAME)) {
 			t = em.find(cls, id);
 		}
@@ -1002,7 +1002,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return new ArrayList<>(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<String> ids(Class<T> cls, Predicate predicate) throws Exception {
 		EntityManager em = this.get(cls);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -1384,20 +1384,20 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<T> fetch(Class<T> clz, Predicate predicate) throws Exception {
 		List<T> os = fetch(clz, JpaObject.singularAttributeField(clz, true, true), predicate);
 		return os;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<W> fetch(Class<T> clz, WrapCopier<T, W> copier,
 			Predicate predicate) throws Exception {
 		List<T> os = fetch(clz, copier.getCopyFields(), predicate);
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<T> fetch(Class<T> clz, List<String> attributes,
 			Predicate predicate) throws Exception {
 		List<T> list = new ArrayList<>();
@@ -1952,7 +1952,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return list;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<T> fetchDescPaging(Class<T> clz, Predicate predicate, Integer page, Integer count,
 			String orderAttribute) throws Exception {
 		List<T> os = fetchDescPaging(clz, JpaObject.singularAttributeField(clz, true, true), predicate, page, count,
@@ -1960,7 +1960,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return os;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<W> fetchDescPaging(Class<T> clz,
 			WrapCopier<T, W> copier, Predicate predicate, Integer page, Integer count, String orderAttribute)
 			throws Exception {
@@ -1968,7 +1968,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<T> fetchDescPaging(Class<T> clz,
 			List<String> fetchAttributes, Predicate predicate, Integer page, Integer pageSize, String orderAttribute)
 			throws Exception {
@@ -1997,7 +1997,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return list;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<T> fetchAscPaging(Class<T> clz, Predicate predicate, Integer page, Integer count,
 			String orderAttribute) throws Exception {
 		List<T> os = fetchAscPaging(clz, JpaObject.singularAttributeField(clz, true, true), predicate, page, count,
@@ -2005,7 +2005,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return os;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<W> fetchAscPaging(Class<T> clz,
 			WrapCopier<T, W> copier, Predicate predicate, Integer page, Integer count, String orderAttribute)
 			throws Exception {
@@ -2013,7 +2013,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<T> fetchAscPaging(Class<T> clz,
 			List<String> fetchAttributes, Predicate predicate, Integer page, Integer pageSize, String orderAttribute)
 			throws Exception {
@@ -2042,7 +2042,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return list;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<W> fetchEqualAscPaging(Class<T> clz,
 			WrapCopier<T, W> copier, String equalAttribute, Object equalValue, Integer page, Integer count,
 			String orderAttribute) throws Exception {
@@ -2051,14 +2051,14 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<T> fetchEqualAscPaging(Class<T> clz, String equalAttribute, Object equalValue,
 			Integer page, Integer count, String orderAttribute) throws Exception {
 		return fetchEqualAscPaging(clz, JpaObject.singularAttributeField(clz, true, true), equalAttribute, equalValue,
 				page, count, orderAttribute);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<T> fetchEqualAscPaging(Class<T> clz,
 			List<String> fetchAttributes, String equalAttribute, Object equalValue, Integer page, Integer pageSize,
 			String orderAttribute) throws Exception {
@@ -2087,7 +2087,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return list;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<W> fetchEqualDescPaging(Class<T> clz,
 			WrapCopier<T, W> copier, String equalAttribute, Object equalValue, Integer page, Integer count,
 			String orderAttribute) throws Exception {
@@ -2096,14 +2096,14 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<T> fetchEqualDescPaging(Class<T> clz, String equalAttribute, Object equalValue,
 			Integer page, Integer count, String orderAttribute) throws Exception {
 		return fetchEqualDescPaging(clz, JpaObject.singularAttributeField(clz, true, true), equalAttribute, equalValue,
 				page, count, orderAttribute);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<T> fetchEqualDescPaging(Class<T> clz,
 			List<String> fetchAttributes, String equalAttribute, Object equalValue, Integer page, Integer pageSize,
 			String orderAttribute) throws Exception {
@@ -2132,7 +2132,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return list;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<W> fetchEqualAndEqualDescPaging(Class<T> clz,
 			WrapCopier<T, W> copier, String equalAttribute, Object equalValue, String otherEqualAttribute,
 			Object otherEqualValue, Integer page, Integer count, String orderAttribute) throws Exception {
@@ -2141,7 +2141,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<T> fetchEqualAndEqualDescPaging(Class<T> clz, String equalAttribute,
 			Object equalValue, String otherEqualAttribute, Object otherEqualValue, Integer page, Integer count,
 			String orderAttribute) throws Exception {
@@ -2149,7 +2149,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 				equalValue, otherEqualAttribute, otherEqualValue, page, count, orderAttribute);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<T> fetchEqualAndEqualDescPaging(Class<T> clz,
 			List<String> fetchAttributes, String equalAttribute, Object equalValue, String otherEqualAttribute,
 			Object otherEqualValue, Integer page, Integer pageSize, String orderAttribute) throws Exception {
@@ -2179,7 +2179,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return list;
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<W> fetchEqualAndNotEqualDescPaging(Class<T> clz,
 			WrapCopier<T, W> copier, String equalAttribute, Object equalValue, String otherNotEqualAttribute,
 			Object otherNotEqualValue, Integer page, Integer count, String orderAttribute) throws Exception {
@@ -2188,7 +2188,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 		return copier.copy(os);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject> List<T> fetchEqualAndNotEqualDescPaging(Class<T> clz, String equalAttribute,
 			Object equalValue, String otherNotEqualAttribute, Object otherNotEqualValue, Integer page, Integer count,
 			String orderAttribute) throws Exception {
@@ -2196,7 +2196,7 @@ public class EntityManagerContainer extends EntityManagerContainerBasic {
 				equalValue, otherNotEqualAttribute, otherNotEqualValue, page, count, orderAttribute);
 	}
 
-	/* 仅在单一数据库可用 */
+	/* 단일 데이터베이스에서만 사용 가능 */
 	public <T extends JpaObject, W extends GsonPropertyObject> List<T> fetchEqualAndNotEqualDescPaging(Class<T> clz,
 			List<String> fetchAttributes, String equalAttribute, Object equalValue, String otherNotEqualAttribute,
 			Object otherNotEqualValue, Integer page, Integer pageSize, String orderAttribute) throws Exception {

@@ -71,12 +71,12 @@ abstract class BaseAction extends StandardJaxrsAction {
                         record -> AttendanceV2CheckInRecord.CHECKIN_RESULT_PreCheckIn
                                 .equals(record.getCheckInResult()));
                 if (allCompleted) {
-                    LOGGER.info("当天打卡已全部完成，发起考勤数据生成，Date：{} person: {}", date,
+                    LOGGER.info("당일 체크가 모두 완료되어 근태 데이터 생성 시작, Date: {} person: {}", date,
                             peopleDn);
                     ThisApplication.queueV2Detail
                             .send(new QueueAttendanceV2DetailModel(peopleDn, date, true));
                 } else if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("当天打卡未全部完成，不发起考勤数据生成，Date：{} person: {}", date,
+                    LOGGER.debug("당일 체크가 모두 완료되지 않아 근태 데이터를 생성하지 않음, Date: {} person: {}", date,
                             peopleDn);
                 }
             } catch (Exception e) {
@@ -103,23 +103,23 @@ abstract class BaseAction extends StandardJaxrsAction {
 
         @Override
         public List<AttendanceV2CheckInRecord> call() throws Exception {
-            // 查询打卡记录
+            // 출퇴근 기록 조회
             String today = DateTools.format(checkInDate, DateTools.format_yyyyMMdd);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("日期：{}", today);
+                LOGGER.debug("날짜: {}", today);
             }
             try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-                // 查询当前用户的考勤组
+                // 현재 사용자의 근태 그룹 조회
                 Business business = new Business(emc);
-                // 按照时间顺序查询出打卡列表
+                // 시간순으로 체크 목록 조회
                 List<AttendanceV2CheckInRecord> recordList = business.getAttendanceV2ManagerFactory()
                         .listRecordWithPersonAndDate(person, today);
                 if (group.getCheckType().equals(AttendanceV2Group.CHECKTYPE_Arrangement)) {
-                    // 排班制数据处理 排班制有可能有跨天的打卡 所以要先查询昨天的打卡记录
+                    // 교대제 데이터 처리: 교대제는 날짜를 넘기는 체크가 있을 수 있어 어제 체크 기록을 먼저 조회
                     Date yesterday = DateTools.addDay(checkInDate, -1);
                     String yesterdayString = DateTools.format(yesterday, DateTools.format_yyyyMMdd);
                     if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("昨天日期：{}", yesterdayString);
+                        LOGGER.debug("어제 날짜: {}", yesterdayString);
                     }
                     List<AttendanceV2CheckInRecord> yesterdayRecordList = business.getAttendanceV2ManagerFactory()
                             .listRecordWithPersonAndDate(person, yesterdayString);
@@ -132,7 +132,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                     if (yesterdayRecordList != null && !yesterdayRecordList.isEmpty()) {
                         AttendanceV2CheckInRecord last = yesterdayRecordList.get(
                                 yesterdayRecordList.size() - 1);
-                        // 昨天的数据 并且跨天
+                        // 어제 데이터이며 날짜를 넘김
                         if (last.getOffDutyNextDay()) {
                             Date onDutyAfterTime;
                             if (StringUtils.isEmpty(last.getPreDutyTimeAfterLimit())) {
@@ -140,15 +140,15 @@ abstract class BaseAction extends StandardJaxrsAction {
                                         today + " " + last.getPreDutyTime(),
                                         DateTools.format_yyyyMMddHHmm);
                                 onDutyAfterTime = DateTools.addMinutes(onDutyAfterTime,
-                                        60);// 跨天的最后一条数据 超过 60 分钟
+                                        60);// 날짜를 넘긴 마지막 데이터가 60분 초과
                             } else {
                                 onDutyAfterTime = DateTools.parse(
                                         today + " " + last.getPreDutyTimeAfterLimit(),
                                         DateTools.format_yyyyMMddHHmm);
                             }
-                            // 如果没有在限制时间结束前 就是返回昨天的打卡记录
+                            // 제한 시간 종료 전이 아니면 어제 체크 기록 반환
                             if (!checkInDate.after(onDutyAfterTime)) {
-                                LOGGER.info("返回昨日的数据，有跨天的还未完成的打卡");
+                                LOGGER.info("어제 데이터 반환, 날짜를 넘겨 아직 완료되지 않은 체크 있음");
                                 return yesterdayRecordList;
                             }
                         }
@@ -158,15 +158,15 @@ abstract class BaseAction extends StandardJaxrsAction {
                     recordList = dealShiftForRecord(shift, emc, business, person, group,
                             checkInDate, today, recordList);
                 }
-                // 如果没有数据，可能是自由工时 或者 休息日没有班次信息的情况下 只需要生成一条上班一条下班的打卡记录
+                // 데이터가 없으면 자유 근무이거나 휴일에 교대 정보가 없는 경우이므로 출근 1건, 퇴근 1건의 체크 기록만 생성
                 if (recordList == null || recordList.isEmpty()) {
                     recordList = new ArrayList<>();
-                    // 上班打卡
+                    // 출근 체크
                     AttendanceV2CheckInRecord onDutyRecord = savePreCheckInRecord(emc, person,
                             AttendanceV2CheckInRecord.OnDuty, group, null, today,
                             null, null, null, false);
                     recordList.add(onDutyRecord);
-                    // 下班打卡
+                    // 퇴근 체크
                     AttendanceV2CheckInRecord offDutyRecord = savePreCheckInRecord(emc, person,
                             AttendanceV2CheckInRecord.OffDuty, group, null, today,
                             null, null, null, false);
@@ -202,46 +202,46 @@ abstract class BaseAction extends StandardJaxrsAction {
                 AttendanceV2CheckInRecord record = emc.find(recordId,
                         AttendanceV2CheckInRecord.class);
                 if (record == null) {
-                    throw new ExceptionNotExistObject("打卡记录");
+                    throw new ExceptionNotExistObject("체크 기록");
                 }
                 String today = DateTools.format(checkTime, DateTools.format_yyyyMMdd);
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("打卡日期：{}", today);
+                    LOGGER.debug("체크 날짜: {}", today);
                 }
                 String checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL;
-                // 是否有班次信息
+                // 교대 정보 유무
                 if (StringUtils.isNotEmpty(record.getShiftId())) {
                     AttendanceV2Shift shift = business.getAttendanceV2ManagerFactory()
                             .pick(record.getShiftId(), AttendanceV2Shift.class);
                     if (shift == null) {
-                        throw new ExceptionNotExistObject("班次对象");
+                        throw new ExceptionNotExistObject("근무조 객체");
                     }
                     if (StringUtils.isNotEmpty(record.getPreDutyTimeBeforeLimit())) {
                         Date beforeOnDuty = parseRecordDutyTime(record,
                                 record.getPreDutyTimeBeforeLimit());
-                        if (checkTime.before(beforeOnDuty)) { // 不到开始时间不能打卡
-                            throw new ExceptionTimeError("不到开始时间不能打卡");
+                        if (checkTime.before(beforeOnDuty)) { // 시작 시간 전에는 체크할 수 없습니다
+                            throw new ExceptionTimeError("시작 시간 전에는 체크할 수 없습니다");
                         }
                     }
                     if (StringUtils.isNotEmpty(record.getPreDutyTimeAfterLimit())) {
                         Date afterDuty = parseRecordDutyTime(record,
                                 record.getPreDutyTimeAfterLimit());
-                        if (checkTime.after(afterDuty)) { // 超过结束时间不能打卡
-                            throw new ExceptionTimeError("超过结束时间不能打卡");
+                        if (checkTime.after(afterDuty)) { // 종료 시간이 지나 체크할 수 없습니다
+                            throw new ExceptionTimeError("종료 시간이 지나 체크할 수 없습니다");
                         }
                     }
                     String dutyTimeString = record.getRecordDateString() + " " + record.getPreDutyTime();
                     String checkTimeString = DateTools.format(checkTime, DateTools.format_yyyyMMddHHmm);
-                    // 上班打卡
+                    // 출근 체크
                     if (record.getCheckInType().equals(AttendanceV2CheckInRecord.OnDuty)) {
                         Date dutyTime = parseRecordDutyTime(record, record.getPreDutyTime());
                         checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL;
-                        // 迟到
-                        // 当前打卡时间大于需要打卡的时间 并且不是同一时间，防止比如 9:00 打卡判断成迟到
+                        // 지각
+                        // 현재 체크 시간이 체크해야 할 시간보다 크고 같은 시간이 아님. 예: 9:00 체크가 지각으로 판단되는 것 방지
                         if (checkTime.after(dutyTime) && !dutyTimeString.equals(checkTimeString)) {
                             checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_Late;
                         }
-                        // 严重迟到
+                        // 심각한 지각
                         if (shift.getSeriousTardinessLateMinutes() > 0) {
                             Date seriousLateTime = DateTools.addMinutes(dutyTime,
                                     shift.getSeriousTardinessLateMinutes());
@@ -249,7 +249,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                                 checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_SeriousLate;
                             }
                         }
-                        // 可以晚到
+                        // 늦게 와도 됨
                         if (StringUtils.isNotEmpty(shift.getLateAndEarlyOnTime())) {
                             int minute = -1;
                             try {
@@ -267,12 +267,12 @@ abstract class BaseAction extends StandardJaxrsAction {
                     } else if (record.getCheckInType().equals(AttendanceV2CheckInRecord.OffDuty)) {
                         Date offDutyTime = parseRecordDutyTime(record, record.getPreDutyTime());
                         checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL;
-                        // 早退
-                        // 当前打卡时间小于需要打卡的时间 并且不是同一时间，防止比如 18:00 打卡判断成早退
+                        // 조퇴
+                        // 현재 체크 시간이 체크해야 할 시간보다 작고 같은 시간이 아님. 예: 18:00 체크가 조퇴로 판단되는 것 방지
                         if (checkTime.before(offDutyTime) && !dutyTimeString.equals(checkTimeString)) {
                             checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_Early;
                         }
-                        // 可以早走
+                        // 일찍 가도 됨
                         if (StringUtils.isNotEmpty(shift.getLateAndEarlyOffTime())) {
                             int minute = -1;
                             try {
@@ -287,22 +287,22 @@ abstract class BaseAction extends StandardJaxrsAction {
                                 }
                             }
                         }
-                        // 工作时长检查
+                        // 근무 시간 검사
                         if (checkInResult.equals(AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL)
                             && BooleanUtils.isTrue(shift.getNeedLimitWorkTime())
                             && shift.getWorkTime() > 0) {
-                            // 当前打卡的  recordString  查询对应的打卡记录，因为有可能跨天 需要查同一组打卡记录
+                            // 현재 체크의 recordString으로 해당 체크 기록 조회, 날짜를 넘길 수 있으므로 같은 그룹의 체크 기록 조회 필요
                             List<AttendanceV2CheckInRecord> recordList = business.getAttendanceV2ManagerFactory()
                                     .listRecordWithPersonAndDate(record.getUserId(),
                                             record.getRecordDateString());
                             if (recordList == null || recordList.isEmpty()) {
                                 throw new ExceptionNoTodayRecordList();
                             }
-                            // 确定是最后一条打卡
+                            // 마지막 체크로 확정
                             if (record.getId()
                                     .equals(recordList.get(recordList.size() - 1).getId())) {
                                 long realWorkTime = 0;
-                                // 上班打卡
+                                // 출근 체크
                                 List<AttendanceV2CheckInRecord> onDutyList = recordList.stream()
                                         .filter(
                                                 (r) -> r.getCheckInType()
@@ -310,7 +310,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                                         .sorted(Comparator.comparing(
                                                 AttendanceV2CheckInRecord::getRecordDate))
                                         .collect(Collectors.toList());
-                                // 下班打卡
+                                // 퇴근 체크
                                 List<AttendanceV2CheckInRecord> offDutyList = recordList.stream()
                                         .filter(
                                                 (r) -> r.getCheckInType()
@@ -329,10 +329,10 @@ abstract class BaseAction extends StandardJaxrsAction {
                                                          - onDuty.getRecordDate().getTime());
                                     }
                                 }
-                                if (realWorkTime < shift.getWorkTime()) { // 工作时长不足 标记未早退
+                                if (realWorkTime < shift.getWorkTime()) { // 근무 시간 부족, 조퇴로 표시
                                     checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_Early;
                                     LOGGER.info(
-                                            "时长不足，标记为早退，person {} , realWorkTime {} , needWorkTime {}",
+                                            "시간 부족, 조퇴로 표시, person {} , realWorkTime {} , needWorkTime {}",
                                             record.getUserId(), "" + realWorkTime,
                                             "" + shift.getWorkTime());
                                 }
@@ -342,7 +342,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                     }
                 }
 
-                // 更新打卡
+                // 체크 업데이트
                 emc.beginTransaction(AttendanceV2CheckInRecord.class);
                 record.setRecordDate(checkTime);
                 record.setCheckInResult(checkInResult);
@@ -381,7 +381,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                 }
                 emc.check(record, CheckPersistType.all);
                 emc.commit();
-                LOGGER.info("checkIn 打卡 数据记录， 打卡人员：{}, 打卡日期：{}, 打卡结果：{} ",
+                LOGGER.info("checkIn 체크 데이터 기록, 체크 사용자: {}, 체크 날짜: {}, 체크 결과: {} ",
                         record.getUserId(), today, checkInResult);
                 return record;
             }
@@ -391,11 +391,11 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 
     /**
-     * 检查打卡结果是否异常，生成对应的申诉数据 这个方法是给打卡的时候用的，所以也有可能是原来异常的打卡，现在正常了。 比如提前打卡了早退了，但是下班后又更新了打卡，这个时候要删除申诉数据
+     * 체크 결과 이상 여부를 검사해 해당 소명 데이터 생성. 이 메서드는 체크 시 사용하므로 원래 이상이던 체크가 지금은 정상일 수도 있음. 예: 일찍 체크해 조퇴였으나 퇴근 후 체크를 업데이트한 경우 소명 데이터를 삭제해야 함
      *
-     * @param record   打卡记录
-     * @param emc      数据库操作对象
-     * @param business 业务对象
+     * @param record   체크 기록
+     * @param emc      데이터베이스 조작 객체
+     * @param business 업무 객체
      */
     protected void generateAppealInfo(AttendanceV2CheckInRecord record, boolean fieldWorkMarkError,
             EntityManagerContainer emc, Business business) {
@@ -406,9 +406,9 @@ abstract class BaseAction extends StandardJaxrsAction {
                 }
                 List<AttendanceV2AppealInfo> appealList = business.getAttendanceV2ManagerFactory()
                         .listAppealInfoWithRecordId(record.getId());
-                if (record.checkResultException(fieldWorkMarkError)) { // 异常数据
+                if (record.checkResultException(fieldWorkMarkError)) { // 이상 데이터
                     if (appealList != null && !appealList.isEmpty()) {
-                        LOGGER.info("当前打卡记录已经有申诉数据存在，不需要重复生成！{}",
+                        LOGGER.info("현재 체크 기록에 소명 데이터가 이미 있어 중복 생성할 필요가 없습니다! {}",
                                 record.getId());
                         return;
                     }
@@ -420,9 +420,9 @@ abstract class BaseAction extends StandardJaxrsAction {
                     emc.beginTransaction(AttendanceV2AppealInfo.class);
                     emc.persist(appealInfo, CheckPersistType.all);
                     emc.commit();
-                    LOGGER.info("生成对应的异常打卡申请数据, {}", appealInfo.toString());
-                } else if (StringUtils.isEmpty(record.getAppealId())) {  // 正常数据 // 申诉过的数据不用删除
-                    // 正常的打卡记录 需要删除原来有的异常AttendanceV2AppealInfo数据，有可能打卡记录修改过，现在已经是正常的了
+                    LOGGER.info("해당 이상 체크 신청 데이터 생성, {}", appealInfo.toString());
+                } else if (StringUtils.isEmpty(record.getAppealId())) {  // 정상 데이터 // 소명된 데이터는 삭제하지 않음
+                    // 정상 체크 기록은 기존 이상 AttendanceV2AppealInfo 데이터를 삭제해야 함. 체크 기록이 수정되어 지금은 정상일 수 있음
                     if (appealList != null && !appealList.isEmpty()) {
                         List<String> deleteIds = new ArrayList<>();
                         for (AttendanceV2AppealInfo appealInfo : appealList) {
@@ -441,10 +441,10 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 
     /**
-     * 找出对应的打卡记录
+     * 해당 체크 기록 찾기
      *
-     * @param recordList   记录列表
-     * @param currentIndex 第几次
+     * @param recordList   기록 목록
+     * @param currentIndex 몇 번째
      * @param checkType    OnDuty OffDuty
      */
     protected AttendanceV2CheckInRecord hasCheckedRecord(List<AttendanceV2CheckInRecord> recordList,
@@ -462,7 +462,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
 
     /**
-     * 根据班次处理预存打卡记录
+     * 교대에 따라 사전 저장 체크 기록 처리
      *
      * @param shift
      * @param emc
@@ -480,15 +480,15 @@ abstract class BaseAction extends StandardJaxrsAction {
             List<AttendanceV2CheckInRecord> recordList) throws Exception {
         List<AttendanceV2ShiftCheckTime> timeList = shift.getProperties().getTimeList();
         if (timeList == null || timeList.isEmpty()) {
-            LOGGER.info("没有对应的上下班打卡时间");
+            LOGGER.info("해당하는 출퇴근 체크 시간이 없습니다");
             // return null;
-            throw new ExceptionEmptyParameter("没有对应的上下班打卡时间");
+            throw new ExceptionEmptyParameter("해당하는 출퇴근 체크 시간이 없습니다");
         }
-        // 如果没有数据，先根据班次打卡信息 预存打卡数据
+        // 데이터가 없으면 먼저 교대 체크 정보에 따라 체크 데이터 사전 저장
         if (recordList == null) {
             recordList = createNewRecordList(shift, emc, person, group, today, timeList);
         } else if (recordList.size() < (timeList.size() * 2)) {
-            // 这里是为了处理异常数据，生成recordList的逻辑在上面，但是有可能有异常导致recordList数据保存不全，比如数据库异常
+            // 이상 데이터 처리를 위한 부분. recordList 생성 로직은 위에 있지만 데이터베이스 오류 등으로 recordList 데이터가 완전히 저장되지 않을 수 있음
             List<AttendanceV2CheckInRecord> recordListNew = createNewRecordList(shift, emc, person,
                     group, today, timeList, false);
             for (AttendanceV2CheckInRecord newRecord : recordListNew) {
@@ -511,15 +511,15 @@ abstract class BaseAction extends StandardJaxrsAction {
                     emc.commit();
                 }
             }
-            // 删除老的数据
+            // 기존 데이터 삭제
             deleteOldRecordList(recordList, emc, business);
-            // 自动处理 已经过来的打卡记录 记录为未打卡
+            // 이미 지난 체크 기록을 미체크로 자동 처리
             dealWithOvertimeRecord(emc, business,
                     BooleanUtils.isTrue(group.getFieldWorkMarkError()),
                     nowDate, recordListNew);
             return recordListNew;
         }
-        // 自动处理 已经过来的打卡记录 记录为未打卡
+        // 이미 지난 체크 기록을 미체크로 자동 처리
         dealWithOvertimeRecord(emc, business, BooleanUtils.isTrue(group.getFieldWorkMarkError()),
                 nowDate, recordList);
         return recordList;
@@ -538,7 +538,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                 date = record.getRecordDateString();
             }
             deleteIds.add(record.getId());
-            // 如果有异常数据也必须一起删除
+            // 이상 데이터가 있으면 함께 삭제해야 함
             List<AttendanceV2AppealInfo> appealList = business.getAttendanceV2ManagerFactory()
                     .listAppealInfoWithRecordId(record.getId());
             if (appealList != null && !appealList.isEmpty()) {
@@ -554,7 +554,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
         emc.delete(AttendanceV2CheckInRecord.class, deleteIds);
         emc.commit();
-        LOGGER.info("打卡记录删除：{}, {}, {} ", personDn, date, ListTools.toStringJoin(deleteIds));
+        LOGGER.info("체크 기록 삭제: {}, {}, {} ", personDn, date, ListTools.toStringJoin(deleteIds));
     }
 
     private List<AttendanceV2CheckInRecord> createNewRecordList(AttendanceV2Shift shift,
@@ -568,13 +568,13 @@ abstract class BaseAction extends StandardJaxrsAction {
             List<AttendanceV2ShiftCheckTime> timeList, boolean reuseExisting) throws Exception {
         List<AttendanceV2CheckInRecord> recordList = new ArrayList<>();
         for (AttendanceV2ShiftCheckTime shiftCheckTime : timeList) {
-            // 上班打卡
+            // 출근 체크
             AttendanceV2CheckInRecord onDutyRecord = savePreCheckInRecord(emc, person,
                     AttendanceV2CheckInRecord.OnDuty, group, shift, today,
                     shiftCheckTime.getOnDutyTime(), shiftCheckTime.getOnDutyTimeBeforeLimit(),
                     shiftCheckTime.getOnDutyTimeAfterLimit(), false, reuseExisting);
             recordList.add(onDutyRecord);
-            // 下班打卡
+            // 퇴근 체크
 
             AttendanceV2CheckInRecord offDutyRecord = savePreCheckInRecord(emc, person,
                     AttendanceV2CheckInRecord.OffDuty, group, shift, today,
@@ -587,14 +587,14 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 查找已经存在的打卡记录
+     * 기존 체크 기록 조회
      */
     private AttendanceV2CheckInRecord findRecordByExist(List<AttendanceV2CheckInRecord> recordList,
             String dutyType, String today, String dutyTime) {
         if (recordList == null || recordList.isEmpty()) {
             return null;
         }
-        // 打卡时间
+        // 체크 시간
         if (StringUtils.isEmpty(dutyTime)) {
             if (AttendanceV2CheckInRecord.OnDuty.equals(dutyType)) {
                 dutyTime = "09:00";
@@ -622,7 +622,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 处理超过时间的打卡记录 标记为未打卡
+     * 시간이 지난 체크 기록을 미체크로 표시
      *
      * @param emc
      * @param nowDate
@@ -634,28 +634,28 @@ abstract class BaseAction extends StandardJaxrsAction {
             throws Exception {
         for (int i = 0; i < recordList.size(); i++) {
             AttendanceV2CheckInRecord record = recordList.get(i);
-            // 不是预打卡数据 跳过
+            // 사전 체크 데이터가 아니면 건너뜀
             if (record.getCheckInResult()
                     .equals(AttendanceV2CheckInRecord.CHECKIN_RESULT_PreCheckIn)) {
-                if (StringUtils.isNotEmpty(record.getPreDutyTimeAfterLimit())) { // 有打卡结束限制
+                if (StringUtils.isNotEmpty(record.getPreDutyTimeAfterLimit())) { // 체크 종료 제한 있음
                     Date onDutyAfterTime = parseRecordDutyTime(record,
                             record.getPreDutyTimeAfterLimit());
-                    if (nowDate.after(onDutyAfterTime)) { // 超过了打卡结束限制时间，直接生成未打卡数据
+                    if (nowDate.after(onDutyAfterTime)) { // 체크 종료 제한 시간을 넘겨 바로 미체크 데이터 생성
                         update2NoCheckInRecord(emc, record);
                         generateAppealInfo(record, fieldWorkMarkError, emc, business);
                     }
                 } else {
                     Date onDutyTime = parseRecordDutyTime(record, record.getPreDutyTime());
                     if (nowDate.after(onDutyTime)) {
-                        // 查询下一条数据 下班打卡
+                        // 다음 데이터 조회: 퇴근 체크
                         if (i < recordList.size() - 1) {
                             AttendanceV2CheckInRecord nextRecord = recordList.get(i + 1);
                             Date offDutyTime = parseRecordDutyTime(nextRecord,
                                     nextRecord.getPreDutyTime());
                             long minutes = (offDutyTime.getTime() - onDutyTime.getTime()) / 60000
-                                           / 2; // 一半间隔时间
+                                           / 2; // 간격 시간의 절반
                             Date middleTime = DateTools.addMinutes(onDutyTime, (int) minutes);
-                            if (nowDate.after(middleTime)) { // 生成未打卡数据
+                            if (nowDate.after(middleTime)) { // 미체크 데이터 생성
                                 update2NoCheckInRecord(emc, record);
                                 generateAppealInfo(record, fieldWorkMarkError, emc, business);
                             }
@@ -668,9 +668,9 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 预存打卡数据保存
+     * 사전 저장 체크 데이터 저장
      *
-     * @offDutyNextDay 是否是次日 最后一条下班打卡才有
+     * @offDutyNextDay 익일 여부, 마지막 퇴근 체크에만 있음
      */
     private AttendanceV2CheckInRecord savePreCheckInRecord(EntityManagerContainer emc,
             String person, String dutyType,
@@ -686,7 +686,7 @@ abstract class BaseAction extends StandardJaxrsAction {
             AttendanceV2Group group, AttendanceV2Shift shift, String today,
             String dutyTime, String dutyTimeBeforeLimit, String dutyTimeAfterLimit,
             boolean offDutyNextDay, boolean reuseExisting) throws Exception {
-        // 打卡时间
+        // 체크 시간
         if (StringUtils.isEmpty(dutyTime)) {
             if (AttendanceV2CheckInRecord.OnDuty.equals(dutyType)) {
                 dutyTime = "09:00";
@@ -733,13 +733,13 @@ abstract class BaseAction extends StandardJaxrsAction {
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
         emc.persist(noCheckRecord, CheckPersistType.all);
         emc.commit();
-        LOGGER.info("打卡记录保存：{}, {}, {} ", person, today,
+        LOGGER.info("체크 기록 저장: {}, {}, {} ", person, today,
                 AttendanceV2CheckInRecord.CHECKIN_RESULT_PreCheckIn);
         return noCheckRecord;
     }
 
     /**
-     * 更新为 未打卡
+     * 미체크로 업데이트
      *
      * @param emc
      * @param record
@@ -779,15 +779,15 @@ abstract class BaseAction extends StandardJaxrsAction {
             }
         }, ThisApplication.forkJoinPool());
     }
-    // 外勤打卡如果有配置脚本，就执行脚本
+    // 외근 체크에 스크립트가 설정되어 있으면 스크립트 실행
     private void fieldWorkScriptInvoke(String recordId) throws Exception {
         try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
             AttendanceV2CheckInRecord record = emc.find(recordId, AttendanceV2CheckInRecord.class);
             if (record == null) {
-                throw new ExceptionNotExistObject("打卡记录");
+                throw new ExceptionNotExistObject("체크 기록");
             }
             if (BooleanUtils.isNotTrue(record.getFieldWork())) {
-                LOGGER.debug("不是外勤打卡记录，不执行外勤打卡脚本，recordId: {}", recordId);
+                LOGGER.debug("외근 체크 기록이 아니어서 외근 체크 스크립트를 실행하지 않음, recordId: {}", recordId);
                 return;
             }
             String invokeScriptName = null;
@@ -799,11 +799,11 @@ abstract class BaseAction extends StandardJaxrsAction {
                 }
             }
             if (StringUtils.isEmpty(invokeScriptName)) {
-                LOGGER.debug("没有配置外勤打卡执行脚本，不执行外勤打卡脚本");
+                LOGGER.debug("외근 체크 실행 스크립트가 설정되지 않아 외근 체크 스크립트를 실행하지 않음");
                 return;
             }
             if (  StringUtils.isNotEmpty(record.getFieldWorkJobId())) {
-                LOGGER.debug("外勤打卡脚本已执行过，不重复执行，recordId: {}", recordId);
+                LOGGER.debug("외근 체크 스크립트가 이미 실행되어 중복 실행하지 않음, recordId: {}", recordId);
                 return;
             }
             FieldWorkScriptInvokeBody body = new FieldWorkScriptInvokeBody();
@@ -813,15 +813,15 @@ abstract class BaseAction extends StandardJaxrsAction {
             FieldWorkScriptInvokeResponse wo = response.getData(
                     FieldWorkScriptInvokeResponse.class);
             if (wo != null && StringUtils.isNotEmpty(wo.getJobid())) {
-                LOGGER.debug("外勤打卡执行脚本完成，jobid: {}", wo.getJobid());
+                LOGGER.debug("외근 체크 스크립트 실행 완료, jobid: {}", wo.getJobid());
                 emc.beginTransaction(AttendanceV2CheckInRecord.class);
                 record.startFieldWorkJob(wo.getJobid());
                 emc.persist(record, CheckPersistType.all);
                 emc.commit();
             } else {
-                LOGGER.debug("外勤打卡执行脚本完成，response: {}", response);
+                LOGGER.debug("외근 체크 스크립트 실행 완료, response: {}", response);
             }
-            LOGGER.info("外勤打卡执行脚本完成，recordId: {}, invokeScriptName: {}", recordId,
+            LOGGER.info("외근 체크 스크립트 실행 완료, recordId: {}, invokeScriptName: {}", recordId,
                     invokeScriptName);
         }
     }
@@ -829,7 +829,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
     public static class FieldWorkScriptInvokeBody extends GsonPropertyObject {
 
-        @FieldDescribe("外勤 invoke 脚本执行的 post 对象")
+        @FieldDescribe("외근 invoke 스크립트 실행용 post 객체")
         private AttendanceV2CheckInRecord record;
 
         public AttendanceV2CheckInRecord getRecord() {
@@ -843,7 +843,7 @@ abstract class BaseAction extends StandardJaxrsAction {
 
     public static class FieldWorkScriptInvokeResponse extends GsonPropertyObject {
 
-        @FieldDescribe("外勤 invoke 脚本执行后的返回结果")
+        @FieldDescribe("외근 invoke 스크립트 실행 후 반환 결과")
         private String jobid;
 
         public String getJobid() {
@@ -890,37 +890,37 @@ abstract class BaseAction extends StandardJaxrsAction {
         private String from;
 
 
-        // 外部来源字段
-        @FieldDescribe("用户唯一标识")
+        // 외부 출처 필드
+        @FieldDescribe("사용자 고유 식별자")
         private String person;
 
-        @FieldDescribe("打卡时间(Unix 时间戳)")
+        @FieldDescribe("체크 시간(Unix 타임스탬프)")
         private Long checkInTime;
 
-        @FieldDescribe("来源， 比如门禁系统")
+        @FieldDescribe("출처, 예: 출입 통제 시스템")
         private String source;
 
-        @FieldDescribe("是否生成异常数据")
+        @FieldDescribe("이상 데이터 생성 여부")
         private Boolean generateErrorInfo;
 
 
-        // 移动端 打卡字段
-        @FieldDescribe("打卡对象id")
+        // 모바일 체크 필드
+        @FieldDescribe("체크 대상 id")
         private String recordId;
 
-        @FieldDescribe("打卡类型，OnDuty OffDuty")
+        @FieldDescribe("출퇴근 체크 유형, OnDuty OffDuty")
         private String checkInType;
 
-        @FieldDescribe("打卡工作场所id，范围内打卡需传入")
+        @FieldDescribe("체크 근무지 id, 범위 내 체크 시 전달 필요")
         private String workPlaceId;
 
-        @FieldDescribe("是否外勤打卡.")
+        @FieldDescribe("외근 체크 여부.")
         private Boolean fieldWork;
 
-        @FieldDescribe("外勤打卡说明")
+        @FieldDescribe("외근 체크 설명")
         private String signDescription;
 
-        @FieldDescribe("外勤打卡拍照附件文件ID列表")
+        @FieldDescribe("외근 체크 사진 첨부파일 ID 목록")
         private List<String> fieldWorkPhotoFileIdList;
 
         @FieldDescribe("来源设备：Mac|Windows|IOS|Android|其他")
@@ -929,16 +929,16 @@ abstract class BaseAction extends StandardJaxrsAction {
         @FieldDescribe("其他说明备注")
         private String description;
 
-        @FieldDescribe("当前位置经度")
+        @FieldDescribe("현재 위치 경도")
         private String longitude;
 
-        @FieldDescribe("当前位置纬度")
+        @FieldDescribe("현재 위치 위도")
         private String latitude;
 
-        @FieldDescribe("当前位置地点描述")
+        @FieldDescribe("현재 위치 장소 설명")
         private String recordAddress;
 
-        @FieldDescribe("打卡数据来源： USER_CHECK（用户打卡） FAST_CHECK（极速打卡） ")
+        @FieldDescribe("체크 데이터 출처: USER_CHECK(사용자 체크) FAST_CHECK(빠른 체크) ")
         private String sourceType;
 
 

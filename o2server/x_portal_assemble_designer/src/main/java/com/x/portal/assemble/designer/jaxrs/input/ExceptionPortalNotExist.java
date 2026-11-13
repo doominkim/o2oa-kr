@@ -7,10 +7,10 @@ class ExceptionPortalNotExist extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionPortalNotExist(String flag) {
-		super("站点:{}不存在.", flag);
+		super("포털: {}이(가) 없습니다.", flag);
 	}
 
 	ExceptionPortalNotExist(String id, String name, String alias) {
-		super("站点id:{},name:{},alias:{}不存在.", id, name, alias);
+		super("포털 id: {}, name: {}, alias: {}이(가) 없습니다.", id, name, alias);
 	}
 }

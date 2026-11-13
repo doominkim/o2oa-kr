@@ -44,12 +44,12 @@ public class ActionMsgListWithConversationByPage extends BaseAction {
 			}
 			List<IMConversation> conversationList = business.imConversationFactory().listConversationWithPerson2(effectivePerson.getDistinguishedName());
 			if (conversationList == null || conversationList.isEmpty()) {
-				throw new ExceptionConversationCheckError("没有找到对应的会话信息，请检查会话ID是否正确.");
+				throw new ExceptionConversationCheckError("해당 대화방 정보를 찾을 수 없습니다. 대화방 ID가 올바른지 확인하세요.");
 			}
 			final String conversationId = wi.getConversationId();
 			Optional<IMConversation> conversation = conversationList.stream().filter( c -> c.getId().equals(conversationId)).findAny();
 			if (conversation.isEmpty()) {
-				throw new ExceptionConversationCheckError("没有找到对应的会话信息，请检查会话ID是否正确.");
+				throw new ExceptionConversationCheckError("해당 대화방 정보를 찾을 수 없습니다. 대화방 ID가 올바른지 확인하세요.");
 			}
 			IMConversationExt ext = business.imConversationFactory().getConversationExt(effectivePerson.getDistinguishedName(), wi.getConversationId());
 			Date lastDeleteTime = null;
@@ -79,7 +79,7 @@ public class ActionMsgListWithConversationByPage extends BaseAction {
 
 		private static final long serialVersionUID = 33404493425589133L;
 
-		@FieldDescribe("会话id")
+		@FieldDescribe("대화 id")
 		private String conversationId;
 
 		public String getConversationId() {
@@ -97,7 +97,7 @@ public class ActionMsgListWithConversationByPage extends BaseAction {
 		static WrapCopier<IMMsg, Wo> copier = WrapCopierFactory.wo(IMMsg.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("引用消息.")
+		@FieldDescribe("인용 메시지.")
 		private IMMsg quoteMessage;
 
 		public IMMsg getQuoteMessage() {

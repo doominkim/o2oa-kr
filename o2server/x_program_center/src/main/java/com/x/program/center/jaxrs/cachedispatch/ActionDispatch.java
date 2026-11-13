@@ -59,7 +59,7 @@ class ActionDispatch extends BaseAction {
 				}
 			}
 		} else {
-			logger.debug("{}通知center更新自身缓存:{}", wi.getClassName(), entry.getKey());
+			logger.debug("{} center에 자체 캐시 갱신 통지:{}", wi.getClassName(), entry.getKey());
 			List<Entry<String, CenterServer>> centerList = Config.nodes().centerServers().orderedEntry();
 			for (Entry<String, CenterServer> centerEntry : centerList) {
 				try {

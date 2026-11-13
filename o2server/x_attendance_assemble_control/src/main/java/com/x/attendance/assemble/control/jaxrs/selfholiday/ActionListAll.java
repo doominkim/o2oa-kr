@@ -28,11 +28,11 @@ public class ActionListAll extends BaseAction {
 		try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {			
 			business = new Business(emc);					
 			attendanceSelfHolidayFactory  = business.getAttendanceSelfHolidayFactory();			
-			//获取所有应用列表
+			//모든 앱 목록 조회
 			ids = attendanceSelfHolidayFactory.listAll();			
-			//查询ID IN ids 的所有应用信息列表
+			//ID IN ids 인 모든 앱 정보 목록 조회
 			attendanceSelfHolidayList = attendanceSelfHolidayFactory.list( ids );	
-			//将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+			//조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 			wraps = Wo.copier.copy( attendanceSelfHolidayList );
 			
 		} catch (Throwable th) {

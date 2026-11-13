@@ -8,11 +8,11 @@ var MGrid = new Class({
         isNew: false,
         isEdited: false,
         showNotEmptyFlag : false,
-        verifyType : "batch",	//batch一起校验，或alert弹出
-        //batch，所有item的错误都校验，每个item所有错误一起校验，错误显示在Item的字段后或指定区域；
-        //batchSingle, 所有item的错误都校验，每个item只校验一个错误，错误显示在Item的字段后或指定区域；
-        //alert，验证时遇到一个不成功的Item用app.notice()弹出消息后中断,
-        //single，验证时遇到一个不成功的Item在字段后面或指定区域显示错误信息后中断
+        verifyType : "batch",	//batch로 함께 검증하거나 alert로 표시
+        //batch: 모든 item의 오류를 검증하고 각 item의 모든 오류를 함께 검증, 오류는 Item 필드 뒤 또는 지정 영역에 표시;
+        //batchSingle: 모든 item의 오류를 검증하되 각 item은 오류 하나만 검증, 오류는 Item 필드 뒤 또는 지정 영역에 표시;
+        //alert: 검증 중 실패한 Item을 만나면 app.notice()로 메시지를 띄운 뒤 중단,
+        //single: 검증 중 실패한 Item을 만나면 필드 뒤 또는 지정 영역에 오류 정보를 표시한 뒤 중단
 
         itemTemplate : null,
 
@@ -78,16 +78,16 @@ var MGrid = new Class({
         this.trObjs_removed = null;
         this.trObjs_new = null;
 
-        this.thTemplate = null;	//属性  lable button_add styles class
-        this.trTemplate = null; //属性 item sequence button_remove lable styles class
+        this.thTemplate = null;	//속성  lable button_add styles class
+        this.trTemplate = null; //속성 item sequence button_remove lable styles class
 
-        this.valSeparator = /,|;|\^\^|\|/g; //如果是多值对象，作为用户选择的多个值的分隔符
+        this.valSeparator = /,|;|\^\^|\|/g; //다중 값 객체이면 사용자가 선택한 여러 값의 구분자
     },
     load: function () {
         this.fireEvent("queryLoad");
 
 
-        //如果itemTemplate没有name赋值Key
+        //itemTemplate에 name이 없으면 Key를 할당
         for (var it in this.itemTemplate) {
             if (!this.itemTemplate[it]["name"]) {
                 this.itemTemplate[it]["name"] = it;
@@ -95,7 +95,7 @@ var MGrid = new Class({
             this.itemTemplate[it]["key"] = it;
         }
 
-        //如果itemTemplate没有name和Key不一致，那么根据name赋值itemTemplate
+        //itemTemplate의 name과 Key가 다르면 name에 따라 itemTemplate 할당
         var json = {};
         for (var it in this.itemTemplate) {
             if (it != this.itemTemplate[it]["name"]) {
@@ -398,7 +398,7 @@ var MGrid = new Class({
     },
     replaceTr : function( oldTrObjOr_Index, data, isNew, unid, sourceData ){
         var oldTrObj;
-        if( typeof oldTrObjOr_Index == "string" ){ //如果传入的是  _index
+        if( typeof oldTrObjOr_Index == "string" ){ //_index가 전달된 경우
             oldTrObj = this.trObjs[ oldTrObjOr_Index ];
         }else{
             oldTrObj = oldTrObjOr_Index;
@@ -909,7 +909,7 @@ var MGridTr = new Class({
     },
 
     getItemsKeyValue : function(separator , onlyModified ) {
-        //separator 多值合并分隔符
+        //separator 다중 값 병합 구분자
         var key_value = {};
         for (var it in this.items ) {
             var item = this.items[it];

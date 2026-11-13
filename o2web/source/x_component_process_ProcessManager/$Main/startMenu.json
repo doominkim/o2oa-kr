@@ -17,7 +17,7 @@
   },
 
 //  {
-//    "title": "视图配置",
+//    "title": "뷰 설정",
 //    "id": "1.1",
 //    "action": "viewConfig",
 //    "icon": "process_view.png",
@@ -25,7 +25,7 @@
 //    "sub": []
 //  },
 //  {
-//    "title": "统计配置",
+//    "title": "통계 설정",
 //    "id": "1.1",
 //    "action": "statConfig",
 //    "icon": "process_stat.png",
@@ -57,7 +57,7 @@
     "sub": []
   },
 //  {
-//    "title": "数据映射",
+//    "title": "데이터 매핑",
 //    "id": "1.1",
 //    "action": "projectionConfig",
 //    "icon": "process_projection.png",

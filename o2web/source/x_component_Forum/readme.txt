@@ -1,61 +1,61 @@
 /**
- * 论坛角色信息管理
+ * 포럼 역할 정보 관리
  *
- * 论坛角色>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
- * 论坛访客(FORUM_GUEST):论坛访客
- * 		0、论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
+ * 포럼 역할>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ * 포럼 방문자(FORUM_GUEST): 포럼 방문자
+ * 		0. 포럼 표시(FORUM_VIEW): 사용자가 BBS 시스템에서 이 포럼에 접근할 수 있음
  *
- * 论坛管理员(FORUM_SUPER_MANAGER):论坛管理员，拥有该论坛管理的最大权限
- *      0、论坛可见（FORUM_VIEW）:用户可以BBS系统中访问该论坛
- * 		1、论坛信息管理（FORUM_INFO_MANAGEMENT）：用户拥有对论坛的版块增加，删除，修改权限
- * 		1、论坛发布主题（FORUM_SUBJECT_PUBLISH）:用户可以在论坛中所有版块发布主题
- * 		2、论坛发表回复（FORUM_REPLY_PUBLISH）：用户可以回复论坛中所有主题
- * 		3、论坛主题推荐（FORUM_SUBJECT_RECOMMEND）:用户可以在指定论坛中所有版块对指定主题进行推荐到论坛首页
- * 		4、论坛主题置顶（FORUM_SUBJECT_STICK）：用户拥有对论坛中所有的主题的置顶权限
- * 		5、论坛主题申精（FORUM_SUBJECT_CREAM）：用户拥有对论坛中所有的主题的精华主题设置权限
- * 		6、论坛主题管理（FORUM_SUBJECT_MANAGEMENT）：用户拥有对论坛中所有的主题的锁定删除权限
- * 		7、论坛回贴管理（FORUM_REPLY_MANAGEMENT）：用户拥有对论坛中所有的回复的删除权限
- * 		8、论坛权限管理（FORUM_PERMISSION_MANAGEMENT）：用户拥有对论坛的用户进行该论坛权限设置的权限
- * 		9、论坛配置管理（FORUM_CONFIG_MANAGEMENT）：用户拥有对论坛的参数配置进行设置的权限
+ * 포럼 관리자(FORUM_SUPER_MANAGER): 포럼 관리자, 이 포럼 관리의 최대 권한 보유
+ *      0. 포럼 표시(FORUM_VIEW): 사용자가 BBS 시스템에서 이 포럼에 접근할 수 있음
+ * 		1. 포럼 정보 관리(FORUM_INFO_MANAGEMENT): 포럼 게시판 추가, 삭제, 수정 권한 보유
+ * 		1. 포럼 주제 게시(FORUM_SUBJECT_PUBLISH): 포럼의 모든 게시판에 주제 게시 가능
+ * 		2. 포럼 답글 작성(FORUM_REPLY_PUBLISH): 포럼의 모든 주제에 답글 가능
+ * 		3. 포럼 주제 추천(FORUM_SUBJECT_RECOMMEND): 지정 포럼의 모든 게시판에서 지정 주제를 포럼 첫 화면에 추천 가능
+ * 		4. 포럼 주제 상단 고정(FORUM_SUBJECT_STICK): 포럼의 모든 주제에 대한 상단 고정 권한 보유
+ * 		5. 포럼 주제 추천글 지정(FORUM_SUBJECT_CREAM): 포럼의 모든 주제에 대한 추천글 설정 권한 보유
+ * 		6. 포럼 주제 관리(FORUM_SUBJECT_MANAGEMENT): 포럼의 모든 주제에 대한 잠금·삭제 권한 보유
+ * 		7. 포럼 답글 관리(FORUM_REPLY_MANAGEMENT): 포럼의 모든 답글에 대한 삭제 권한 보유
+ * 		8. 포럼 권한 관리(FORUM_PERMISSION_MANAGEMENT): 포럼 사용자에 대한 포럼 권한 설정 권한 보유
+ * 		9. 포럼 설정 관리(FORUM_CONFIG_MANAGEMENT): 포럼 매개변수 설정 권한 보유
  *
  *
- * 版块角色>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
- * 版块访客(SECTION_GUEST):版块访客
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
+ * 게시판 역할>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ * 게시판 방문자(SECTION_GUEST): 게시판 방문자
+ * 		0. 포럼 열람(SECTION_VIEW): BBS 시스템에서 해당 게시판 접근 가능
  *
- * 版块主(SECTION_MANAGER):拥有版块及版块内容管理的最大权限
- *      0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、发布主题（SECTION_SUBJECT_PUBLISH）:用户可以在指定版块中发布主题
- *		2、审核主题（SECTION_SUBJECT_AUDIT）:用户可以审核在指定版块中发布的主题，如果主题需要审核
- * 		3、主题管理（SECTION_SUBJECT_MANAGEMENT）:用户可以在指定版块中对已发布主题进行查询删除
- * 		4、发表回复（SECTION_REPLY_PUBLISH）:用户可以在指定版块中对所有主题进行回复
- *		5、审核回复（SECTION_REPLY_AUDIT）:用户可以审核在指定版块中的所有回复内容，如果回复需要审核
- *		6、回贴管理（SECTION_REPLY_MANAGEMENT）:用户可以在指定版块中对回复进行查询或者删除
- * 		7、版块主题推荐（SECTION_SUBJECT_RECOMMEND）:用户可以在指定版块中对指定主题进行推荐操作
- * 		8、版块主题置顶（SECTION_SUBJECT_STICK）:用户可以在指定版块中对指定主题进行置顶操作
- * 		9、版块主题申精（SECTION_SUBJECT_CREAM）:用户可以在指定版块中对指定主题进行精华主题设置操作
- * 		10、版块权限管理（SECTION_PERMISSION_MANAGEMENT）:用户可以对论坛用户进行指定版块的权限管理
- * 		11、版块配置管理（SECTION_CONFIG_MANAGEMENT）:用户可以对指定版块进行系统参数配置修改
+ * 게시판 관리자(SECTION_MANAGER): 게시판 및 게시판 콘텐츠 관리의 최고 권한 보유
+ *      0. 포럼 열람(SECTION_VIEW): BBS 시스템에서 해당 게시판 접근 가능
+ * 		1. 주제 게시(SECTION_SUBJECT_PUBLISH): 지정 게시판에 주제 게시 가능
+ *		2. 주제 검토(SECTION_SUBJECT_AUDIT): 주제 검토가 필요한 경우 지정 게시판에 게시된 주제 검토 가능
+ * 		3. 주제 관리(SECTION_SUBJECT_MANAGEMENT): 지정 게시판에서 게시된 주제 조회·삭제 가능
+ * 		4. 답글 작성(SECTION_REPLY_PUBLISH): 지정 게시판의 모든 주제에 답글 가능
+ *		5. 답글 검토(SECTION_REPLY_AUDIT): 답글 검토가 필요한 경우 지정 게시판의 모든 답글 내용 검토 가능
+ *		6. 답글 관리(SECTION_REPLY_MANAGEMENT): 사용자가 지정 게시판에서 답글을 조회하거나 삭제할 수 있음
+ * 		7. 게시판 주제 추천(SECTION_SUBJECT_RECOMMEND): 사용자가 지정 게시판에서 지정 주제를 추천할 수 있음
+ * 		8. 게시판 주제 상단 고정(SECTION_SUBJECT_STICK): 사용자가 지정 게시판에서 지정 주제를 상단 고정할 수 있음
+ * 		9. 게시판 주제 우수글 지정(SECTION_SUBJECT_CREAM): 사용자가 지정 게시판에서 지정 주제를 우수 주제로 설정할 수 있음
+ * 		10. 게시판 권한 관리(SECTION_PERMISSION_MANAGEMENT): 사용자가 포럼 사용자의 지정 게시판 권한을 관리할 수 있음
+ * 		11. 게시판 설정 관리(SECTION_CONFIG_MANAGEMENT): 사용자가 지정 게시판의 시스템 매개변수 설정을 수정할 수 있음
  *
- * 主题发布者(SECTION_SUBJECT_PUBLISHER):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、发布主题（SECTION_SUBJECT_PUBLISH）:用户可以在指定版块中发布主题
+ * 주제 게시자(SECTION_SUBJECT_PUBLISHER): 지정 게시판 내 주제 게시 허용
+ * 		0. 포럼 열람(SECTION_VIEW): BBS 시스템에서 해당 게시판 접근 가능
+ * 		1. 주제 게시(SECTION_SUBJECT_PUBLISH): 지정 게시판에 주제 게시 가능
  *
- * 主题回复者(SECTION_REPLY_PUBLISHER):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、发表回复（SECTION_REPLY_PUBLISH）:用户可以在指定版块中对所有主题进行回复
+ * 주제 답글 작성자(SECTION_REPLY_PUBLISHER): 지정 게시판 내 주제 게시 허용
+ * 		0. 포럼 열람(SECTION_VIEW): BBS 시스템에서 해당 게시판 접근 가능
+ * 		1. 답글 작성(SECTION_REPLY_PUBLISH): 사용자가 지정 게시판의 모든 주제에 답글을 달 수 있음
  *
- * 主题推荐者(SECTION_RECOMMENDER):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、版块主题推荐（SECTION_SUBJECT_RECOMMEND）:用户可以在指定版块中对指定主题进行推荐操作
+ * 주제 추천자(SECTION_RECOMMENDER): 지정 게시판 내 주제 게시 허용
+ * 		0. 포럼 열람(SECTION_VIEW): BBS 시스템에서 해당 게시판 접근 가능
+ * 		1. 게시판 주제 추천(SECTION_SUBJECT_RECOMMEND): 사용자가 지정 게시판에서 지정 주제를 추천할 수 있음
  *
- * 主题审核者(SECTION_SUBJECT_AUDITOR):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、审核主题（SECTION_SUBJECT_AUDIT）:用户可以审核在指定版块中发布的主题，如果主题需要审核
+ * 주제 검토자(SECTION_SUBJECT_AUDITOR): 지정 게시판 내 주제 게시 허용
+ * 		0. 포럼 열람(SECTION_VIEW): BBS 시스템에서 해당 게시판 접근 가능
+ * 		1. 주제 검토(SECTION_SUBJECT_AUDIT): 주제에 검토가 필요한 경우 사용자가 지정 게시판에 게시된 주제를 검토할 수 있음
  *
- * 回复审核者(SECTION_REPLY_AUDITOR):允许在指定版块内发布主题
- * 		0、论坛可见（SECTION_VIEW）:用户可以BBS系统中访问该版块
- * 		1、审核回复（SECTION_REPLY_AUDIT）:用户可以审核在指定版块中的所有回复内容，如果回复需要审核 *
+ * 답글 검토자(SECTION_REPLY_AUDITOR): 지정 게시판 내 주제 게시 허용
+ * 		0. 포럼 열람(SECTION_VIEW): BBS 시스템에서 해당 게시판 접근 가능
+ * 		1. 답글 검토(SECTION_REPLY_AUDIT): 답글에 검토가 필요한 경우 사용자가 지정 게시판의 모든 답글 내용을 검토할 수 있음 *
  *
  * @author LIYI
  *

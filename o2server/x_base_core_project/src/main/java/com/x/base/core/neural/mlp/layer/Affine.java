@@ -42,7 +42,7 @@ public class Affine implements Layer {
 		this.w = new MultilayerPerceptronMatrix(input, output);
 		this.b = new MultilayerPerceptronMatrix(1, output);
 		Random random = new SecureRandom();
-		// 初始化Relu激活函数
+		// Relu 활성화 함수 초기화
 		float factor = (float) Math.sqrt(2.0 / (float) input);
 		w.visit((r, c, v) -> w.set(r, c, random.nextFloat() * factor));
 		b.set(0f);

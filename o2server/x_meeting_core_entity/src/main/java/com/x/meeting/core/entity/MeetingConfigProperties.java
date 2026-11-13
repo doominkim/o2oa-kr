@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 会议系统扩展配置
+ * 회의 시스템 확장 설정
  * @author sword
  */
 public class MeetingConfigProperties extends JsonProperties {
@@ -20,49 +20,49 @@ public class MeetingConfigProperties extends JsonProperties {
 	public static final String ONLINE_PROJECT_HST = "好视通";
 	public static final String ONLINE_PROJECT_QT = "其他";
 
-	@FieldDescribe("会议申请流程")
+	@FieldDescribe("회의 신청 프로세스")
 	private Map<String, String> process;
 
-	@FieldDescribe("一周开始日期")
+	@FieldDescribe("주 시작 요일")
 	private String weekBegin = "1";
 
-	@FieldDescribe("是否允许移动端创建会议")
+	@FieldDescribe("모바일에서 회의 생성 허용 여부")
 	private Boolean mobileCreateEnable = true;
 
-	@FieldDescribe("我的会议视图")
+	@FieldDescribe("내 회의 뷰")
 	private String toMyMeetingViewName = "";
 
-	@FieldDescribe("月视图")
+	@FieldDescribe("월 뷰")
 	private String toMonthViewName = "";
 
-	@FieldDescribe("周视图")
+	@FieldDescribe("주 뷰")
 	private String toWeekViewName = "";
 
-	@FieldDescribe("日视图")
+	@FieldDescribe("일 뷰")
 	private String toDayViewName = "";
 
-	@FieldDescribe("会议列表视图")
+	@FieldDescribe("회의 목록 뷰")
 	private String toListViewName = "";
 
-	@FieldDescribe("会议室视图")
+	@FieldDescribe("회의실 뷰")
 	private String toRoomViewName = "";
 
-	@FieldDescribe("会议详情可见范围")
+	@FieldDescribe("회의 상세 공개 범위")
 	private List<String> meetingViewer = new ArrayList<>();
 
-	@FieldDescribe("会议类型")
+	@FieldDescribe("회의 유형")
 	private List<String> typeList = new ArrayList<>();
 
 	@FieldDescribe("")
 	private List<String> disableViewList = new ArrayList<>();
 
-	@FieldDescribe("是否启用线上会议")
+	@FieldDescribe("온라인 회의 사용 여부")
 	private Boolean enableOnline = false;
 
 	@FieldDescribe("线上会议产品，如：好视通")
 	private String onlineProduct = ONLINE_PROJECT_QT;
 
-	@FieldDescribe("线上会议配置(json对象：{" +
+	@FieldDescribe("온라인 회의 설정(json 객체: {" +
 			"'hstUrl':'好视通服务地址','hstKey':'好视通服务接口KEY','hstSecret':'好视通服务接口SECRET'," +
 			"'hstAuth':'是否启用好视通会议鉴权登录，默认false','o2ToHstUid':'O2与好视通映射的唯一ID字段'}")
 	private OnlineConfig onlineConfig = new OnlineConfig();

@@ -14,31 +14,31 @@ import com.x.base.core.project.tools.ListTools;
 
 public class ZhengwuDingding extends ConfigObject {
 
-	@FieldDescribe("是否启用.")
+	@FieldDescribe("사용 여부.")
 	private Boolean enable;
-	@FieldDescribe("政务钉钉appId")
+	@FieldDescribe("정무 딩톡 appId")
 	private String appId;
-	@FieldDescribe("政务钉钉appSecret")
+	@FieldDescribe("정무 딩톡 appSecret")
 	private String appSecret;
-	@FieldDescribe("政务钉钉agentId")
+	@FieldDescribe("정무 딩톡 agentId")
 	private String agentId;
-	@FieldDescribe("回调信号触发同步检查,默认每10分钟运行一次,如果期间内有政务钉钉回调信号接收到,那么触发同步任务进行人员同步.")
+	@FieldDescribe("콜백 신호로 동기화 점검 트리거, 기본값은 10분마다 1회 실행, 해당 기간에 정무 딩톡 콜백 신호를 수신하면 사용자 동기화 작업 트리거.")
 	private String syncCron;
-	@FieldDescribe("强制拉入同步cron,默认在每天的8点和12点强制进行同步.")
+	@FieldDescribe("강제 동기화 cron, 기본값 매일 8시와 12시에 강제 동기화.")
 	private String forceSyncCron;
-	@FieldDescribe("oapi服务器地址")
+	@FieldDescribe("oapi 서버 주소")
 	private String oapiAddress;
-	@FieldDescribe("政务钉钉corpId")
+	@FieldDescribe("정무 딩톡 corpId")
 	private String corpId;
-	@FieldDescribe("政务钉钉corpSecret")
+	@FieldDescribe("정무 딩톡 corpSecret")
 	private String corpSecret;
-	@FieldDescribe("title分隔符")
+	@FieldDescribe("title 구분자")
 	private List<String> titleSplit = new ArrayList<>();
-	@FieldDescribe("title对应个人属性名称")
+	@FieldDescribe("title에 대응하는 개인 속성 이름")
 	private String personAttributeTitleName;
-	@FieldDescribe("政务钉钉nonce")
+	@FieldDescribe("정무 딩톡 nonce")
 	private String nonce;
-	@FieldDescribe("推送消息到政务钉钉消息")
+	@FieldDescribe("정무 딩톡 메시지로 메시지 푸시")
 	private Boolean messageEnable;
 
 	public static ZhengwuDingding defaultInstance() {

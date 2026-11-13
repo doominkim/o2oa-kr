@@ -21,7 +21,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceStatisticalCycle", description = "考勤统计回收.")
+@Schema(name = "AttendanceStatisticalCycle", description = "근태 통계 회수.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceStatisticalCycle.table, uniqueConstraints = {
@@ -45,7 +45,7 @@ public class AttendanceStatisticalCycle extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -54,71 +54,71 @@ public class AttendanceStatisticalCycle extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String topUnitName_FIELDNAME = "topUnitName";
-	@FieldDescribe("顶层组织名称")
+	@FieldDescribe("최상위 조직명")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ topUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String topUnitName;
 
 	public static final String unitName_FIELDNAME = "unitName";
-	@FieldDescribe("组织名称")
+	@FieldDescribe("조직명")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ unitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String unitName;
 
 	public static final String cycleYear_FIELDNAME = "cycleYear";
-	@FieldDescribe("统计周期年份")
+	@FieldDescribe("통계 주기 연도")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + cycleYear_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cycleYear;
 
 	public static final String cycleMonth_FIELDNAME = "cycleMonth";
-	@FieldDescribe("统计周期月份")
+	@FieldDescribe("통계 주기 월")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + cycleMonth_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cycleMonth;
 
 	public static final String cycleStartDateString_FIELDNAME = "cycleStartDateString";
-	@FieldDescribe("月周期开始日期")
+	@FieldDescribe("월 주기 시작일")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + cycleStartDateString_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cycleStartDateString;
 
 	public static final String cycleEndDateString_FIELDNAME = "cycleEndDateString";
-	@FieldDescribe("月周期结束日期")
+	@FieldDescribe("월 주기 종료일")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + cycleEndDateString_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String cycleEndDateString;
 
 	public static final String cycleStartDate_FIELDNAME = "cycleStartDate";
-	@FieldDescribe("月周期开始日期")
+	@FieldDescribe("월 주기 시작일")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + cycleStartDate_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date cycleStartDate;
 
 	public static final String cycleEndDate_FIELDNAME = "cycleEndDate";
-	@FieldDescribe("月周期结束日期")
+	@FieldDescribe("월 주기 종료일")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + cycleEndDate_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date cycleEndDate;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明备注")
+	@FieldDescribe("비고")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;

@@ -49,20 +49,20 @@ public class ActionDelete extends BaseAction {
                 if (!effectivePerson.isSecurityManager() && !business.editable(effectivePerson, unit)) {
                     throw new ExceptionAccessDenied(effectivePerson, unit);
                 }
-                /** 由于有关联所以要分段提交，提交UnitDuty的成员删除。 */
+                /** 연관 관계가 있어 나누어 커밋, UnitDuty 멤버 삭제 커밋. */
                 this.removeMemberOfUnitDuty(business, identity);
             }
-            /** group的身份成员删除。 */
+            /** group의 신분 멤버 삭제. */
             this.removeMemberOfGroup(business, identity);
 
-            /** 由于前面pick出来的需要重新取出 */
+            /** 앞에서 pick한 것은 다시 조회해야 함 */
             identity = emc.find(identity.getId(), Identity.class);
-            // /** 删除下属身份 */
+            // /** 하위 신분 삭제 */
             // emc.beginTransaction(Identity.class);
             // this.removeMemberOfJunior(business, identity);
             // emc.commit();
-            /** 最后进行身份的删除 */
-            /* 设置主身份 */
+            /** 마지막으로 신분 삭제 */
+            /* 주 신분 설정 */
             final String id = identity.getId();
             List<Identity> others = emc.listEqual(Identity.class, Identity.person_FIELDNAME, identity.getPerson())
                     .stream().filter(o -> !StringUtils.equals(id, o.getId()))

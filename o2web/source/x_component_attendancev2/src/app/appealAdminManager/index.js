@@ -19,9 +19,9 @@ export default content({
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
-      // 搜索表单
+      // 검색 양식
       form: {
         users: [],
         startDate: '',
@@ -29,11 +29,11 @@ export default content({
         recursive: true
       },
       filterList: [],
-      units: [], // 控制组织选择的范围
+      units: [], // 조직 선택 범위 제어
     };
   },
   beforeRender() {
-    // 当前用户的选择范围
+    // 현재 사용자의 선택 범위
     if (content.myDutyList && content.myDutyList.length > 0) {
       let units = [];
       for (let i = 0; i < content.myDutyList.length; i++) {
@@ -168,7 +168,7 @@ export default content({
     }
     return "";
   },
-  // 处理
+  // 처리
   clickDealAppeal(appeal) {
     var _self = this;
     o2.api.page.confirm(

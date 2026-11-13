@@ -35,7 +35,7 @@ public class ActionGetMobile extends BaseAction {
 				attendanceDetailMobile = attendanceDetailServiceAdv.getMobile(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在根据ID查询员工手机打卡信息时发生异常！ID:" + id);
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "ID로 직원 모바일 체크 정보를 조회하는 중 오류가 발생했습니다! ID:" + id);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -53,7 +53,7 @@ public class ActionGetMobile extends BaseAction {
 				result.setData(wrap);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工手机打卡信息为输出对象时发生异常.");
+				Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 모바일 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}

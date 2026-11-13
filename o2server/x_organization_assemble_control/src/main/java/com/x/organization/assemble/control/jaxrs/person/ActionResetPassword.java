@@ -22,7 +22,7 @@ class ActionResetPassword extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);
-			// 排除xadmin
+			// xadmin 제외
 			if (Config.token().isInitialManager(flag)) {
 				throw new ExceptionDenyResetInitialManagerPassword();
 			} else {

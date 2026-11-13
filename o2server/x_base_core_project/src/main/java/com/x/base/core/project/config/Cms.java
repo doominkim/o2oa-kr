@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 内容管理配置
+ * 콘텐츠 관리 설정
  * @author sword
  */
 public class Cms extends ConfigObject {
@@ -27,7 +27,7 @@ public class Cms extends ConfigObject {
     public Cms() {
     }
 
-    @FieldDescribe("事件扩充.")
+    @FieldDescribe("이벤트 확장.")
     private ExtensionEvents extensionEvents;
 
     public ExtensionEvents getExtensionEvents() {
@@ -44,9 +44,9 @@ public class Cms extends ConfigObject {
 
     public static class ExtensionEvents {
 
-        @FieldDescribe("文档附件上传.")
+        @FieldDescribe("문서 첨부파일 업로드.")
         private DocExtensionEvents docAttachmentUploadEvents = new DocExtensionEvents();
-        @FieldDescribe("文档附件下载.")
+        @FieldDescribe("문서 첨부파일 다운로드.")
         private DocExtensionEvents docAttachmentDownloadEvents = new DocExtensionEvents();
 
         public DocExtensionEvents getDocAttachmentUploadEvents() {

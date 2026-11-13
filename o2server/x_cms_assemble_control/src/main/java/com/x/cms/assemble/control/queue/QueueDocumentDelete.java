@@ -5,7 +5,7 @@ import com.x.base.core.project.queue.AbstractQueue;
 import com.x.cms.assemble.control.ThisApplication;
 
 /**
- * Document删除时也需要检查一下热点图片里的数据是否已经删除掉了
+ * Document 삭제 시 핫 이미지의 데이터도 삭제되었는지 확인 필요
  *
  */
 public class QueueDocumentDelete extends AbstractQueue<String> {

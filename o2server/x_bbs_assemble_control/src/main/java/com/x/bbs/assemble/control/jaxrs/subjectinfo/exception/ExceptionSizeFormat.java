@@ -7,6 +7,6 @@ public class ExceptionSizeFormat extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSizeFormat( String size ) {
-		super("请求参数size格式不合法, 要求为数字.Size:" + size );
+		super("요청 매개변수 size 형식이 올바르지 않습니다. 숫자여야 합니다. Size:" + size );
 	}
 }

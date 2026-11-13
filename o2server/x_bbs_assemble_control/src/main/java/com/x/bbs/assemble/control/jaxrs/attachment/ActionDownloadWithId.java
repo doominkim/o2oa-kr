@@ -16,7 +16,7 @@ public class ActionDownloadWithId extends BaseAction {
 		BBSSubjectAttachment attachment = subjectInfoServiceAdv.getAttachment(id);
 		
 		if ( null == attachment ) {
-			throw new Exception("附件不存在。id:" + id ) ;
+			throw new Exception("첨부 파일이 없습니다. id:" + id ) ;
 		}else {
 			StorageMapping mapping = ThisApplication.context().storageMappings().get(BBSSubjectAttachment.class, attachment.getStorage());
 			Wo wo = new Wo(attachment.readContent(mapping), 

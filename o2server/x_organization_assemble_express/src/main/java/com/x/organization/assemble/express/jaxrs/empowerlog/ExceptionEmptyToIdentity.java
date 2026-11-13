@@ -7,6 +7,6 @@ class ExceptionEmptyToIdentity extends PromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionEmptyToIdentity() {
-		super("被委托人不能为空.");
+		super("수임자는 비워 둘 수 없습니다.");
 	}
 }

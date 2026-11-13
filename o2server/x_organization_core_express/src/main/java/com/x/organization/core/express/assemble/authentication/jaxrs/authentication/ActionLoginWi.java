@@ -9,12 +9,12 @@ public class ActionLoginWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 633273224231633398L;
 
-	@FieldDescribe("用户标识.")
-	@Schema(description = "用户标识.")
+	@FieldDescribe("사용자 식별자.")
+	@Schema(description = "사용자 식별자.")
 	private String credential;
 
-	@FieldDescribe("密码.")
-	@Schema(description = "密码.")
+	@FieldDescribe("비밀번호.")
+	@Schema(description = "비밀번호.")
 	private String password;
 
 	public String getPassword() {

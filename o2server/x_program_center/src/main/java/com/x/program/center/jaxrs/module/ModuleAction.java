@@ -28,12 +28,12 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("module")
-@JaxrsDescribe("模块")
+@JaxrsDescribe("모듈")
 public class ModuleAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ModuleAction.class);
 
-	@JaxrsMethodDescribe(value = "列示云服务器上模块分类.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "클라우드 서버의 모듈 분류 나열.", action = ActionList.class)
 	@PUT
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -51,7 +51,7 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示云服务器上模块及其数量.", action = ActionListCategory.class)
+	@JaxrsMethodDescribe(value = "클라우드 서버의 모듈과 수량 나열.", action = ActionListCategory.class)
 	@GET
 	@Path("list/category")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -68,13 +68,13 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取云端模块,并和本地模块进行对比.", action = ActionCompare.class)
+	@JaxrsMethodDescribe(value = "클라우드 모듈을 조회해 로컬 모듈과 비교.", action = ActionCompare.class)
 	@GET
 	@Path("{id}/compare")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void compare(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionCompare.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -86,15 +86,15 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "上传模块文件,并和本地模块进行对比.", action = ActionCompareUpload.class)
+	@JaxrsMethodDescribe(value = "모듈 파일을 업로드해 로컬 모듈과 비교.", action = ActionCompareUpload.class)
 	@PUT
 	@Path("compare/upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void compareUpload(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@FormDataParam(FILE_FIELD) final byte[] bytes,
-			@JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-			@JaxrsParameterDescribe(".xapp文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+			@JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+			@JaxrsParameterDescribe(".xapp 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
 		ActionResult<ActionCompareUpload.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -106,14 +106,14 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	// @JaxrsMethodDescribe(value = "上传模块文件.", action = ActionUpload.class)
+	// @JaxrsMethodDescribe(value = "모듈 파일 업로드.", action = ActionUpload.class)
 	// @POST
 	// @Consumes(MediaType.MULTIPART_FORM_DATA)
 	// @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	// public void upload(@Suspended final AsyncResponse asyncResponse, @Context
 	// HttpServletRequest request,
 	// @FormDataParam(FILE_FIELD) final byte[] bytes,
-	// @JaxrsParameterDescribe(".xapp文件") @FormDataParam(FILE_FIELD) final
+	// @JaxrsParameterDescribe(".xapp 파일") @FormDataParam(FILE_FIELD) final
 	// FormDataContentDisposition disposition) {
 	// ActionResult<ActionUpload.Wo> result = new ActionResult<>();
 	// EffectivePerson effectivePerson = this.effectivePerson(request);
@@ -126,13 +126,13 @@ public class ModuleAction extends StandardJaxrsAction {
 	// asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	// }
 
-	@JaxrsMethodDescribe(value = "写入模块.", action = ActionWrite.class)
+	@JaxrsMethodDescribe(value = "모듈 쓰기.", action = ActionWrite.class)
 	@PUT
 	@Path("write/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public synchronized void write(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("输出文件标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("출력 파일 식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionWrite.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -144,7 +144,7 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出本地模块.", action = ActionOutput.class)
+	@JaxrsMethodDescribe(value = "로컬 모듈 내보내기.", action = ActionOutput.class)
 	@PUT
 	@Path("output")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -162,12 +162,12 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出本地模块.", action = ActionOutputFile.class)
+	@JaxrsMethodDescribe(value = "로컬 모듈 내보내기.", action = ActionOutputFile.class)
 	@GET
 	@Path("output/{flag}/file")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void outputFile(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("输出文件标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("출력 파일 식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionOutputFile.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -179,7 +179,7 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示本地存储的导出模块结构.", action = ActionListStructure.class)
+	@JaxrsMethodDescribe(value = "로컬에 저장된 내보낸 모듈 구조 나열.", action = ActionListStructure.class)
 	@GET
 	@Path("output/list/structure")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -196,7 +196,7 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "本地模块结构.", action = ActionOutputStructure.class)
+	@JaxrsMethodDescribe(value = "로컬 모듈 구조.", action = ActionOutputStructure.class)
 	@GET
 	@Path("output/structure")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -213,13 +213,13 @@ public class ModuleAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除模块结构.", action = ActionRemoveStructure.class)
+	@JaxrsMethodDescribe(value = "모듈 구조 삭제.", action = ActionRemoveStructure.class)
 	@DELETE
 	@Path("remove/structure/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void removeStructure(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								@JaxrsParameterDescribe("模块结构id") @PathParam("id") String id) {
+								@JaxrsParameterDescribe("모듈 구조 id") @PathParam("id") String id) {
 		ActionResult<ActionRemoveStructure.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

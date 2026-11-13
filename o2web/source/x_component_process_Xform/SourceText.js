@@ -1,12 +1,12 @@
 MWF.xDesktop.requireApp("process.Xform", "$Module", null, false);
-/** @class SourceText 数据文本组件。
- * @o2cn 数据文本
+/** @class SourceText 데이터 텍스트 컴포넌트.
+ * @o2cn 데이터 텍스트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var sourceText = this.form.get("fieldId"); //获取组件
- * //方法2
- * var sourceText = this.target; //在组件本身的脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var sourceText = this.form.get("fieldId"); //컴포넌트 가져오기
+ * //방법 2
+ * var sourceText = this.target; //컴포넌트 자체의 스크립트에서 가져오기
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Portal}

@@ -37,9 +37,9 @@ public class ActionListAll extends BaseAction {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				Business business = new Business(emc);
 				FormFactory formFactory = business.getFormFactory();
-				List<String> ids = formFactory.listAll();// 获取所有表单模板列表
-				List<Form> formList = emc.list( Form.class, ids );// 查询ID IN ids 的所有表单模板信息列表
-				wraps = Wo.copier.copy( formList );// 将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				List<String> ids = formFactory.listAll();// 모든 양식 템플릿 목록 조회
+				List<Form> formList = emc.list( Form.class, ids );// ID IN ids인 모든 양식 템플릿 정보 목록 조회
+				wraps = Wo.copier.copy( formList );// 조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 				SortTools.desc(wraps, "createTime" );
 				CacheManager.put(cacheCategory, cacheKey, wraps );
 				result.setData(wraps);

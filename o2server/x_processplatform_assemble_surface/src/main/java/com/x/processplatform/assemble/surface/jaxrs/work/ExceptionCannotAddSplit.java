@@ -7,6 +7,6 @@ class ExceptionCannotAddSplit extends LanguagePromptException {
 	private static final long serialVersionUID = -3439770681867963457L;
 
 	ExceptionCannotAddSplit(String id) {
-		super("工作: {}, 当前状态不可增加分支.", id);
+		super("문서: {}, 현재 상태에서는 분기를 추가할 수 없습니다.", id);
 	}
 }

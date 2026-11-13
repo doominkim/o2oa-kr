@@ -13,19 +13,19 @@ abstract class BaseAction {
 
 	static class WoAbstract extends GsonPropertyObject {
 
-		@FieldDescribe("身份")
+		@FieldDescribe("신분")
 		private List<String> identityList = new ArrayList<>();
 
-		@FieldDescribe("应用")
+		@FieldDescribe("앱")
 		private String application;
 
-		@FieldDescribe("流程版本")
+		@FieldDescribe("프로세스 버전")
 		private String edition;
 
-		@FieldDescribe("流程")
+		@FieldDescribe("프로세스")
 		private String process;
 
-		@FieldDescribe("工作")
+		@FieldDescribe("문서")
 		private String work;
 
 		public String getWork() {

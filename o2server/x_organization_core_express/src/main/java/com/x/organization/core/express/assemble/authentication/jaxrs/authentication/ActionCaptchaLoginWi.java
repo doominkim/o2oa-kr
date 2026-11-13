@@ -9,20 +9,20 @@ public class ActionCaptchaLoginWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 216758837350255868L;
 
-	@FieldDescribe("用户凭证.")
-	@Schema(description = "用户凭证.")
+	@FieldDescribe("사용자 자격 증명.")
+	@Schema(description = "사용자 자격 증명.")
 	private String credential;
 
-	@FieldDescribe("密码.")
-	@Schema(description = "密码.")
+	@FieldDescribe("비밀번호.")
+	@Schema(description = "비밀번호.")
 	private String password;
 
-	@FieldDescribe("图片认证码编号.")
-	@Schema(description = "图片认证码编号.")
+	@FieldDescribe("이미지 인증 코드 번호.")
+	@Schema(description = "이미지 인증 코드 번호.")
 	private String captcha;
 
-	@FieldDescribe("图片认证码.")
-	@Schema(description = "图片认证码.")
+	@FieldDescribe("이미지 인증 코드.")
+	@Schema(description = "이미지 인증 코드.")
 	private String captchaAnswer;
 
 	public String getPassword() {

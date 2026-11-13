@@ -7,6 +7,6 @@ public class ExceptionSubjectNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSubjectNotExists( String id ) {
-		super("指定ID的主题信息不存在.ID:" + id );
+		super("지정한 ID의 주제 정보가 없습니다. ID:" + id );
 	}
 }

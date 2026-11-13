@@ -108,7 +108,7 @@ MWF.xApplication.cms.FormDesigner.Module.Commend = MWF.CMSFCCommend = new Class(
 
 		if (this.json.recoveryStyles) Object.each(this.json.recoveryStyles, function(value, key){
 			if ((value.indexOf("x_processplatform_assemble_surface")!=-1 || value.indexOf("x_portal_assemble_surface")!=-1)){
-				//需要运行时处理
+				//런타임 처리 필요
 			}else{
 				button.setStyle(key, value);
 				delete this.json.styles[key];

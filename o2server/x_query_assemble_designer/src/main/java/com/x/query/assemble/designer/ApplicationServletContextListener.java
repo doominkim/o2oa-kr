@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebListener;
 import com.x.base.core.project.Context;
 
 /**
- * web应用初始化
+ * web 앱 초기화
  * 
  * @author sword
  */

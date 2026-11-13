@@ -40,7 +40,7 @@ class ActionCreate extends BaseAction {
 			}
 			TemplateForm o = emc.find(wi.getId(), TemplateForm.class);
 			emc.beginTransaction(TemplateForm.class);
-			/** 设计端的ID都是由前台提供的,这里的拷贝需要拷贝id */
+			/** 디자인 측 ID는 모두 프런트에서 제공하므로 여기서 복사 시 id도 복사해야 함 */
 			if (null != o) {
 				Wi.copier.copy(wi, o);
 				emc.check(o, CheckPersistType.all);

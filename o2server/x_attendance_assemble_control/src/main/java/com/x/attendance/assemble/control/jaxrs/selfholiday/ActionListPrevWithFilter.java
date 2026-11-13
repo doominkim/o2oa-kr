@@ -52,23 +52,23 @@ public class ActionListPrevWithFilter extends BaseAction {
 				EntityManagerContainer emc = EntityManagerContainerFactory.instance().create();
 				Business business = new Business(emc);
 				
-				//查询出ID对应的记录的sequence
+				//ID에 해당하는 기록의 sequence 조회
 				Object sequence = null;
 				if( id == null || "(0)".equals(id) || id.isEmpty() ){
-					//logger.info( "第一页查询，没有id传入" );
+					//logger.info( "첫 페이지 조회, 전달된 id 없음" );
 				}else{
 					if (!StringUtils.equalsIgnoreCase(id,StandardJaxrsAction.EMPTY_SYMBOL)) {
 						sequence = PropertyUtils.getProperty(emc.find( id, AttendanceSelfHoliday.class ),  JpaObject.sequence_FIELDNAME);
 					}
 				}
 				
-				//处理一下顶层组织，查询下级顶层组织
+				//최상위 조직 처리, 하위 최상위 조직 조회
 				if( StringUtils.isNotEmpty( wrapIn.getQ_topUnitName() ) ){
 					topUnitNames.add( wrapIn.getQ_topUnitName() );
 					try{
 						unitNameList = userManagerService.listSubUnitNameWithParent( wrapIn.getQ_topUnitName() );
 					}catch(Exception e){
-						Exception exception = new ExceptionSelfHolidayProcess( e, "系统根据顶层组织名称查询所有下级组织列表时发生异常.Name:" + wrapIn.getQ_topUnitName() );
+						Exception exception = new ExceptionSelfHolidayProcess( e, "최상위 조직 이름으로 전체 하위 조직 목록을 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getQ_topUnitName() );
 						result.error( exception );
 						logger.error( e, currentPerson, request, null);
 					}
@@ -80,13 +80,13 @@ public class ActionListPrevWithFilter extends BaseAction {
 					wrapIn.setTopUnitNames( topUnitNames );
 				}
 				
-				//处理一下组织,查询下级组织
+				//조직 처리, 하위 조직 조회
 				if( StringUtils.isNotEmpty( wrapIn.getQ_unitName() ) ){
 					unitNames.add(wrapIn.getQ_unitName());
 					try{
 						unitNameList = userManagerService.listSubUnitNameWithParent( wrapIn.getQ_unitName() );
 					}catch(Exception e){
-						Exception exception = new ExceptionSelfHolidayProcess( e, "系统根据组织名称查询所有下级组织列表时发生异常.Name:" + wrapIn.getQ_unitName() );
+						Exception exception = new ExceptionSelfHolidayProcess( e, "조직 이름으로 전체 하위 조직 목록을 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getQ_unitName() );
 						result.error( exception );
 						logger.error( e, currentPerson, request, null);
 					}
@@ -98,16 +98,16 @@ public class ActionListPrevWithFilter extends BaseAction {
 					wrapIn.setUnitNames(unitNames);
 				}
 				
-				//从数据库中查询符合条件的一页数据对象
+				//데이터베이스에서 조건에 맞는 한 페이지 데이터 객체 조회
 				detailList = business.getAttendanceSelfHolidayFactory().listIdsPrevWithFilter( id, count, sequence, wrapIn );
 				
-				//从数据库中查询符合条件的对象总数
+				//데이터베이스에서 조건에 맞는 객체 총수 조회
 				total = business.getAttendanceSelfHolidayFactory().getCountWithFilter( wrapIn );
 
-				//将所有查询出来的有状态的对象转换为可以输出的过滤过属性的对象
+				//조회한 상태 있는 객체를 출력 가능한 속성 필터링 객체로 변환
 				wraps = Wo.copier.copy( detailList );
 				
-				//对查询的列表进行排序
+				//조회 목록 정렬
 				result.setCount( total );
 				result.setData(wraps);
 

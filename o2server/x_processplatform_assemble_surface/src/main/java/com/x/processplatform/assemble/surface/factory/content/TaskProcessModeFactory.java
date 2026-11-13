@@ -36,7 +36,7 @@ public class TaskProcessModeFactory extends AbstractFactory {
 		if(os.size() > 0){
 			return os.get(0);
 		}
-		//兼容流程版本升级出现的节点id和路由id不同的影响
+		//프로세스 버전 업그레이드로 노드 id와 경로 id가 달라지는 영향 호환
 		if(StringUtils.isNotBlank(wi.getActivityAlias()) || StringUtils.isNotBlank(wi.getActivityName()) || StringUtils.isNotBlank(wi.getRouteName())){
 			p = cb.equal(root.get(TaskProcessMode_.person), person);
 			p = cb.and(p, cb.equal(root.get(TaskProcessMode_.process), wi.getProcess()));

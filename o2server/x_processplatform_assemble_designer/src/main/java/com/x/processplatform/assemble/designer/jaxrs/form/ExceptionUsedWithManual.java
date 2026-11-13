@@ -11,6 +11,6 @@ class ExceptionUsedWithManual extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionUsedWithManual(String name, String id, List<String> names) {
-		super("表单 name:{} id:{}, 被流程的人工节点使用: {}.", name, id, StringUtils.join(names, ","));
+		super("양식 name: {} id: {}을(를) 프로세스의 사람 처리 노드가 사용 중입니다: {}.", name, id, StringUtils.join(names, ","));
 	}
 }

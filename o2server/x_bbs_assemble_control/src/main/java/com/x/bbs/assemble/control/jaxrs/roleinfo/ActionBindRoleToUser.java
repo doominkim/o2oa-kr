@@ -39,7 +39,7 @@ public class ActionBindRoleToUser extends BaseAction {
 		} catch (Exception e) {
 			check = false;
 			Exception exception = new ExceptionRoleInfoProcess(e,
-					"系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+					"JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -55,7 +55,7 @@ public class ActionBindRoleToUser extends BaseAction {
 			}
 		}
 		if (check) {
-			// 遍历所有的对象，检查对象是否真实存在
+			// 모든 대상을 순회하며 실제 존재 여부 확인
 			if ("人员".equals(wrapIn.getBindObject().getObjectType())) {
 				try {
 					object = userManagerService.getPersonNameByFlag(bindObject.getObjectName());
@@ -140,22 +140,22 @@ public class ActionBindRoleToUser extends BaseAction {
 		@FieldDescribe("人员名称")
 		private String userName = null;
 
-		@FieldDescribe("论坛Id")
+		@FieldDescribe("포럼 Id")
 		private String forumId = null;
 
-		@FieldDescribe("区段Id")
+		@FieldDescribe("구역 Id")
 		private String sectionId = null;
 
-		@FieldDescribe("绑定角色")
+		@FieldDescribe("연결 역할")
 		private String bindRoleCode = null;
 
-		@FieldDescribe("绑定对象")
+		@FieldDescribe("연결 대상")
 		private BindObject bindObject = null;
 
-		@FieldDescribe("绑定角色列表")
+		@FieldDescribe("연결 역할 목록")
 		private List<String> bindRoleCodes = null;
 
-		@FieldDescribe("绑定对象列表")
+		@FieldDescribe("연결 대상 목록")
 		private List<BindObject> bindObjectArray = null;
 
 		public String getUnitName() {

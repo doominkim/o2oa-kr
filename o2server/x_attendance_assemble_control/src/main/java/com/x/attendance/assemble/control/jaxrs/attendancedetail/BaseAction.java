@@ -38,19 +38,19 @@ public class BaseAction extends StandardJaxrsAction{
 
 	public static class WoSignFeature{
 
-		@FieldDescribe("下一次打卡次数，第一次为1")
+		@FieldDescribe("다음 기록 차수, 첫 번째는 1")
 		private Integer signSeq = 1;
 
-		@FieldDescribe("打卡日期：yyyy-mm-dd.")
+		@FieldDescribe("기록 날짜: yyyy-mm-dd.")
 		private String signDate = null;
 
-		@FieldDescribe("打卡时间：HH:mi:ss.")
+		@FieldDescribe("기록 시간: HH:mi:ss.")
 		private String signTime = null;
 
 		@FieldDescribe("打卡操作名称：上班打卡|下班打卡|午休打卡|上午下班打卡|下午上班打卡(根据不同的打卡策略稍有不同)....")
 		private String checkinType = "上班打卡";
 
-		@FieldDescribe("最晚打卡时间")
+		@FieldDescribe("최종 기록 시간")
 		private Date latestSignTime;
 
 		public String getSignTime() { return signTime; }
@@ -77,8 +77,8 @@ public class BaseAction extends StandardJaxrsAction{
 
 
 	/**
-	 * 计算下一次打卡是什么打卡
-	 * 3-四次打卡（上午下午都打上班下班卡）
+	 * 다음 기록이 어떤 기록인지 계산
+	 * 3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 	 *
 	 * @param wraps
 	 * @param scheduleSetting
@@ -101,7 +101,7 @@ public class BaseAction extends StandardJaxrsAction{
 			return null;
 		}
 
-		//计算，上班下班时间
+		//출근·퇴근 시간 계산
 		onDutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getOnDutyTime() );
 		morningOffdutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getMiddayRestStartTime() );
 		afternoonOndutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getMiddayRestEndTime() );
@@ -110,9 +110,9 @@ public class BaseAction extends StandardJaxrsAction{
 		signRecordStatus = getSignRecordStatus( wraps, onDutyTime, morningOffdutyTime, afternoonOndutyTime, offDutyTime );
 
 		if( ListTools.isEmpty( wraps )){
-			//一次都没有打过，看看当前时间是上班还是下午，如果是上午，就是上午签到，如果是下午，就是下午签到
+			//한 번도 기록하지 않았으면 현재 시간이 오전인지 오후인지 확인, 오전이면 오전 출근 체크, 오후면 오후 출근 체크
 			if( now.after(afternoonOndutyTime)){
-				//在下午下班时间之后了，下午上班签到打卡
+				//오후 퇴근 시간 이후, 오후 출근 체크 기록
 				woSignFeature.setSignSeq(1);
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON_ONDUTY );
 				woSignFeature.setSignTime(scheduleSetting.getOnDutyTime());
@@ -123,29 +123,29 @@ public class BaseAction extends StandardJaxrsAction{
 			}
 		}else{
 			woSignFeature.setSignSeq(2);
-			//当前是什么区间
+			//현재 구간
 			if( onDutyTime.after(now)){
-				//上午上班之前，无论几次，都只可能是上午的下班卡
+				//오전 출근 전에는 횟수와 관계없이 오전 퇴근 기록만 가능
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_MORNING_OFFDUTY );
 				woSignFeature.setSignTime(scheduleSetting.getMiddayRestStartTime());
 				woSignFeature.setSignSeq(2);
 			}else if( now.after(onDutyTime) && morningOffdutyTime.after(now)){
-				//上午上班时段: 上午签退
+				//오전 근무 시간대: 오전 퇴근 체크
 				woSignFeature.setSignSeq(2);
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_MORNING_OFFDUTY );
 				woSignFeature.setSignTime(scheduleSetting.getMiddayRestStartTime());
 			}else if( now.after(morningOffdutyTime) && afternoonOndutyTime.after( now )){
-				//午休时段：前一次打卡有可能上午签到卡，可能下午签到卡
-				if( signRecordStatus.alreadyOnduty ){ //已经上午签到过了，只有一次卡，应该就是签到
+				//점심 휴식 시간대: 이전 기록은 오전 출근 체크일 수도, 오후 출근 체크일 수도 있음
+				if( signRecordStatus.alreadyOnduty ){ //이미 오전 출근 체크함, 기록이 1회뿐이면 출근 체크
 					woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_MORNING_OFFDUTY );
 					woSignFeature.setSignTime(scheduleSetting.getMiddayRestStartTime());
 				}else if( signRecordStatus.alreadyAfternoonOnDuty){
-					//如果上午没有签到，是下午的签到的话，第二次就应该是下午签退打卡了
+					//오전 출근 체크 없이 오후 출근 체크였다면 두 번째는 오후 퇴근 기록
 					woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 					woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
 				}
 			}else if( now.after(afternoonOndutyTime) && offDutyTime.after(now)){
-				//下午上班时段，如果前一次是下午签到，那么下一次就应该是下午签退了，否则，就是下午签到
+				//오후 근무 시간대: 이전이 오후 출근 체크면 다음은 오후 퇴근 체크, 아니면 오후 출근 체크
 				if( signRecordStatus.alreadyAfternoonOnDuty){
 					woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY  );
 					woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
@@ -154,7 +154,7 @@ public class BaseAction extends StandardJaxrsAction{
 					woSignFeature.setSignTime(scheduleSetting.getMiddayRestEndTime());
 				}
 			}else{
-				//下午下班之后，只可能是下午的签到签退卡了
+				//오후 퇴근 이후에는 오후 출근·퇴근 체크 기록만 가능
 				if( signRecordStatus.alreadyAfternoonOnDuty){
 					woSignFeature.setSignSeq(-1);
 					woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY  );
@@ -169,8 +169,8 @@ public class BaseAction extends StandardJaxrsAction{
 	}
 
 	/**
-	 * 计算下一次打卡是什么打卡
-	 * 2-三次打卡（上午上班，下午下班加中午一次共三次）
+	 * 다음 기록이 어떤 기록인지 계산
+	 * 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회)
 	 *
 	 * @param wraps
 	 * @param scheduleSetting
@@ -187,7 +187,7 @@ public class BaseAction extends StandardJaxrsAction{
 		Date morningOffdutyTime = null, afternoonOndutyTime = null;
 		String todayDateStr = dateOperation.getDateStringFromDate( now, "YYYY-MM-DD");
 
-		//计算，上班下班时间
+		//출근·퇴근 시간 계산
 		if( StringUtils.isNotEmpty( scheduleSetting.getOnDutyTime())) {
 			onDutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getOnDutyTime() );
 		}
@@ -203,43 +203,43 @@ public class BaseAction extends StandardJaxrsAction{
 		signRecordStatus = getSignRecordStatus( wraps, onDutyTime, morningOffdutyTime, afternoonOndutyTime, offDutyTime );
 
 		if( ListTools.isEmpty( wraps )){
-			//一次都没有打过，只能打上班卡
+			//한 번도 기록하지 않았으면 출근 기록만 가능
 			if( woSignFeature.getSignSeq() == 0 ){
 				woSignFeature.setSignSeq(1);
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
 				woSignFeature.setSignTime(scheduleSetting.getOnDutyTime());
 			}
 		}else{
-			//打了一次，之后，有可能是中午签到打卡，有可能是下午下班签退打卡
+			//1회 기록 후에는 정오 출근 체크 기록 또는 오후 퇴근 체크 기록 가능
 			woSignFeature.setSignSeq( wraps.size() + 1 );
-			//可能是午休或者下班卡了，上班打不可能打了
-			//看当前时间，有没有过中午签到时间
-			if( morningOffdutyTime !=null && morningOffdutyTime.before( now ) ){//现在已经是午休之后了
-				//看看下班没，如果下班了，就直接打下班卡了，否则，还可以打个午休卡
+			//점심 휴식 또는 퇴근 기록만 가능, 출근 기록은 불가
+			//현재 시간이 정오 체크 시간을 지났는지 확인
+			if( morningOffdutyTime !=null && morningOffdutyTime.before( now ) ){//현재는 점심 휴식 이후
+				//퇴근했는지 확인, 퇴근했으면 바로 퇴근 기록, 아니면 점심 휴식 기록도 가능
 				if( offDutyTime !=null && offDutyTime.before( now ) ){
-					//下班了，要么打下班卡
+					//퇴근함, 퇴근 기록만 가능
 					if( !signRecordStatus.alreadyOffDuty ){
 						woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 						woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
 					}else{
-						//下班卡打过了，不用再打卡了
+						//퇴근 기록 완료, 더 기록할 필요 없음
 						woSignFeature.setSignSeq(-1);
 						woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 						woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
 					}
 				}else{
-					//还没有下午，可以打午休卡，看看是否已经打过午休卡了
+					//아직 오후가 아님, 점심 휴식 기록 가능, 이미 했는지 확인
 					if( !signRecordStatus.alreadyAfternoon ){
-						//没有打过午休卡，那么可以打一下午休卡
+						//점심 휴식 기록이 없으므로 점심 휴식 기록 가능
 						woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON );
 						woSignFeature.setSignTime(scheduleSetting.getMiddayRestEndTime());
 					}else{
-						//午休卡打过了，看看下班卡打过没有，如果没有，可以打下班卡
+						//점심 휴식 기록 완료, 퇴근 기록 여부 확인, 없으면 퇴근 기록 가능
 						if( !signRecordStatus.alreadyOffDuty ){
 							woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 							woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
 						}else{
-							//下班卡打过了，不用再打卡了
+							//퇴근 기록 완료, 더 기록할 필요 없음
 							woSignFeature.setSignSeq(-1);
 							woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 							woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
@@ -247,18 +247,18 @@ public class BaseAction extends StandardJaxrsAction{
 					}
 				}
 			}else{
-				//现在在午休之前，要么上班卡，要么午休卡，已经打过一次了，肯定不能再打上班卡了，看看是否已经打过了午休卡
+				//현재는 점심 휴식 이전, 출근 기록 또는 점심 휴식 기록인데 이미 1회 기록했으므로 출근 기록은 불가, 점심 휴식 기록 여부 확인
 				if( !signRecordStatus.alreadyAfternoon ){
-					//没有打过午休卡，那么可以打午休卡
+					//점심 휴식 기록이 없으므로 점심 휴식 기록 가능
 					woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON );
 					woSignFeature.setSignTime(scheduleSetting.getMiddayRestEndTime());
 				}else{
-					//午休卡打过了，看看下班卡打过没有，如果没有，可以打下班卡
+					//점심 휴식 기록 완료, 퇴근 기록 여부 확인, 없으면 퇴근 기록 가능
 					if( !signRecordStatus.alreadyOffDuty ){
 						woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 						woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
 					}else{
-						//下班卡打过了，不用再打卡了
+						//퇴근 기록 완료, 더 기록할 필요 없음
 						woSignFeature.setSignSeq(-1);
 						woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 						woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
@@ -271,8 +271,8 @@ public class BaseAction extends StandardJaxrsAction{
 	}
 
 	/**
-	 * 计算下一次打卡是什么打卡
-	 * 1-两次打卡（上午上班，下午下班）
+	 * 다음 기록이 어떤 기록인지 계산
+	 * 1-2회 기록(오전 출근, 오후 퇴근)
 	 * @param wraps
 	 * @param scheduleSetting
 	 * @return
@@ -280,18 +280,18 @@ public class BaseAction extends StandardJaxrsAction{
 	protected WoSignFeature getWoSignFeatureWithProxy1(List<ActionListMyMobileRecordToday.WoMobileRecord> wraps, AttendanceScheduleSetting scheduleSetting) {
 		WoSignFeature woSignFeature = new WoSignFeature();
 		if( ListTools.isEmpty( wraps )){
-			//一次都没有打过，不管几点，都是上班打卡
+			//한 번도 기록하지 않았으면 시간과 관계없이 출근 기록
 			woSignFeature.setSignSeq(1);
 			woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
 			woSignFeature.setSignTime(scheduleSetting.getOnDutyTime());
 		}else{
-			//打了一次，就是下班打卡，打了两次，就没有了
+			//1회 기록했으면 퇴근 기록, 2회 기록했으면 없음
 			if( wraps.size() == 1 ){
 				woSignFeature.setSignSeq(2);
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 				woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
 			}else{
-				woSignFeature.setSignSeq(-1); //没有需要的打卡了
+				woSignFeature.setSignSeq(-1); //필요한 기록 없음
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY );
 				woSignFeature.setSignTime(scheduleSetting.getOffDutyTime());
 			}
@@ -328,16 +328,16 @@ public class BaseAction extends StandardJaxrsAction{
 		@FieldDescribe("是否上午上班打卡过了ONDUTY")
 		private Boolean alreadyOnduty = false;
 
-		@FieldDescribe("是否上午下班打卡过了MORNING_OFFDUTY.")
+		@FieldDescribe("오전 퇴근 기록 MORNING_OFFDUTY 여부.")
 		private Boolean alreadyMorningOffDuty = false;
 
 		@FieldDescribe("是否下午上班打卡过了AFTERNOON_ONDUTY")
 		private Boolean alreadyAfternoonOnDuty = false;
 
-		@FieldDescribe("是否下午下班打卡过了OFFDUTY.")
+		@FieldDescribe("오후 퇴근 기록 OFFDUTY 여부.")
 		private Boolean alreadyOffDuty = false;
 
-		@FieldDescribe("是否午间打卡过了AfternoonSign.")
+		@FieldDescribe("정오 기록 AfternoonSign 여부.")
 		private Boolean alreadyAfternoon = false;
 
 		public Boolean getAlreadyOnduty() { return alreadyOnduty; }
@@ -373,7 +373,7 @@ public class BaseAction extends StandardJaxrsAction{
 
 		private static final long serialVersionUID = -5076990764713538973L;
 
-		@FieldDescribe("考勤申诉内容")
+		@FieldDescribe("근태 이의 신청 내용")
 		private WoAttendanceAppealAuditInfo appealAuditInfo = null;
 
 		public WoAttendanceAppealAuditInfo getAppealAuditInfo() { return appealAuditInfo; }

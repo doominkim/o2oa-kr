@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("distinguishedname")
-@JaxrsDescribe("组织专有标识接口.")
+@JaxrsDescribe("조직 고유 식별자 API.")
 public class DistinguishedNameAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DistinguishedNameAction.class);
 
-	@JaxrsMethodDescribe(value = "批量检查组织专有标识是否存在.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "조직 고유 식별자 존재 여부 일괄 확인.", action = ActionList.class)
 	@POST
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

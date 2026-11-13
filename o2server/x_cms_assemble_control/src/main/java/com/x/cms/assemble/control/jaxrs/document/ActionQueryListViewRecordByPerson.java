@@ -40,7 +40,7 @@ public class ActionQueryListViewRecordByPerson extends BaseAction {
 				ids = documentViewRecordServiceAdv.listByPerson( name, 100 );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionServiceLogic( e,"系统在根据人员姓名查询文档访问信息列表时发生异常。Name：" + name );
+				Exception exception = new ExceptionServiceLogic( e,"사용자 이름으로 게시글 접근 기록 목록을 조회하는 중 오류가 발생했습니다. Name: " + name );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -52,7 +52,7 @@ public class ActionQueryListViewRecordByPerson extends BaseAction {
 					documentViewRecordList = documentViewRecordServiceAdv.list(ids);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionServiceLogic( e,"系统在根据访问记录ID列表查询访问记录信息列表时发生异常。" );
+					Exception exception = new ExceptionServiceLogic( e,"접근 기록 ID 목록으로 접근 기록 목록을 조회하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -67,7 +67,7 @@ public class ActionQueryListViewRecordByPerson extends BaseAction {
 					result.setData( wraps );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionServiceLogic( e,"系统将查询结果转换为可输出的数据信息时发生异常。" );
+					Exception exception = new ExceptionServiceLogic( e,"조회 결과를 출력용 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}

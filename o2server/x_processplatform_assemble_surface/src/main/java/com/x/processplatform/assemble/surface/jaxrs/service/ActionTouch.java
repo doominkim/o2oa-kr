@@ -109,7 +109,7 @@ class ActionTouch extends BaseAction {
 						}
 						record.getProperties().getNextManualList().add(nextManual);
 					});
-			/* 去重 */
+			/* 중복 제거 */
 			//record.getProperties().setNextManualTaskIdentityList(ListTools.trim(nextTaskIdentities, true, true));
 			return record;
 		}

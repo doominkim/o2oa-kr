@@ -6,7 +6,7 @@ class ExceptionInvalidPassword extends LanguagePromptException {
 
 	private static final long serialVersionUID = 1859164370743532895L;
 
-	public static String defaultMessage = "用户名,密码不正确.";
+	public static String defaultMessage = "사용자 이름 또는 비밀번호가 올바르지 않습니다.";
 
 	ExceptionInvalidPassword() {
 		super(defaultMessage);

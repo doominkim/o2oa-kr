@@ -22,7 +22,7 @@ public class ActionHolidayDelete extends BaseAction {
             ActionResult<Wo> result = new ActionResult<>();
             AttendanceV2Holiday holiday = emc.find(id, AttendanceV2Holiday.class);
             if (holiday == null) {
-                throw new ExceptionNotExistObject("无法找到指定ID的节假日数据，ID：" + id);
+                throw new ExceptionNotExistObject("지정한 ID의 휴일 데이터를 찾을 수 없습니다. ID:" + id);
             }
             validateCanDelete(holiday);
             emc.beginTransaction(AttendanceV2Holiday.class);
@@ -37,7 +37,7 @@ public class ActionHolidayDelete extends BaseAction {
 
     static void validateCanDelete(AttendanceV2Holiday holiday) throws Exception {
         if (!AttendanceV2Holiday.SOURCE_API.equals(holiday.getSource())) {
-            throw new ExceptionWithMessage("只能删除前端接口新增的节假日数据");
+            throw new ExceptionWithMessage("프런트엔드 인터페이스로 추가한 휴일 데이터만 삭제할 수 있습니다");
         }
     }
 

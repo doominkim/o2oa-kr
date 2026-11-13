@@ -7,7 +7,7 @@ public class ActionAssignCreateWo extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 2912634603504823685L;
 
-	@FieldDescribe("标识")
+	@FieldDescribe("식별자")
 	private String id;
 
 	@FieldDescribe("job")

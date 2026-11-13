@@ -14,8 +14,8 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 考勤打卡记录分析服务类
- * 2、一天三次打卡：打上班，下班两次卡外，中午休息时间也需要打一次卡，以确保员工在公司活动
+ * 근태 출퇴근 기록 분석 서비스 클래스
+ * 2. 하루 3회 체크: 출근·퇴근 2회 외에 점심 휴식 시간에도 1회 체크하여 직원의 회사 내 활동 확인
  */
 class ComposeDetailWithMobileInSignProxy2 {
 	
@@ -23,10 +23,10 @@ class ComposeDetailWithMobileInSignProxy2 {
 	private DateOperation dateOperation = new DateOperation();
 
 	/**
-	 * 组织一个完整的打卡记录，有午休时间记录
-	 * 1、上班打卡时间：最早的一次打卡就是上班打卡时间
-	 * 2、中午打卡时间，计算午休开始和结束时间内，最晚的那一次打卡时间作为午休打卡时间
-	 * 3、下班打卡时间：取最晚的一次打卡
+	 * 점심 휴식 시간 기록이 있는 완전한 출퇴근 기록 구성
+	 * 1. 출근 기록 시간: 가장 이른 기록이 출근 기록 시간
+	 * 2. 점심 기록 시간: 점심 휴식 시작~종료 시간 내 가장 늦은 기록을 점심 기록 시간으로 사용
+	 * 3. 퇴근 기록 시간: 가장 늦은 기록 사용
 	 * @param mobileDetails
 	 * @param scheduleSetting
 	 * @param debugger
@@ -50,7 +50,7 @@ class ComposeDetailWithMobileInSignProxy2 {
 
 		String afternonnOnDutyTime =  getAfternoonOnDutyTime( mobileDetails, scheduleSetting.getMiddayRestStartTime(), scheduleSetting.getMiddayRestEndTime() );
 
-		//组织员工当天的考勤打卡记录
+		//직원의 당일 근태 출퇴근 기록 구성
 		AttendanceDetail detail = new AttendanceDetail();
 		detail.setEmpNo( mobileDetail.getEmpNo() );
 		detail.setEmpName( mobileDetail.getEmpName() );
@@ -61,16 +61,16 @@ class ComposeDetailWithMobileInSignProxy2 {
 			detail.setMonthString( dateOperation.getMonth( mobileDetail.getRecordDate() ) );
 		}
 		detail.setRecordDateString( mobileDetail.getRecordDateString() );
-		detail.setOnDutyTime( onDutyTime ); //最早的一次打卡作为当天的上班签到打卡
+		detail.setOnDutyTime( onDutyTime ); //가장 이른 기록을 당일 출근 기록으로 사용
 		if( StringUtils.equals( afternonnOnDutyTime, onDutyTime )){
 			detail.setAfternoonOnDutyTime( null );
 		}else{
-			detail.setAfternoonOnDutyTime( afternonnOnDutyTime ); //午休打卡时间
+			detail.setAfternoonOnDutyTime( afternonnOnDutyTime ); //점심 휴식 기록 시간
 		}
 		if( StringUtils.equals(offDutyTime, onDutyTime ) || StringUtils.equals( afternonnOnDutyTime, offDutyTime ) ){
 			detail.setOffDutyTime( null );
 		}else{
-			detail.setOffDutyTime( offDutyTime ); //最晚的一次打卡作为当天的下班签退打卡
+			detail.setOffDutyTime( offDutyTime ); //가장 늦은 기록을 당일 퇴근 기록으로 사용
 		}
 		detail.setRecordStatus( 0 );
 		detail.setBatchName( "FromMobile_" + dateOperation.getNowTimeChar() );
@@ -78,7 +78,7 @@ class ComposeDetailWithMobileInSignProxy2 {
 	}
 
 	/**
-	 * 计算午休开始和结束时间内，最晚的那一次打卡时间作为午休打卡时间
+	 * 점심 휴식 시작~종료 시간 내 가장 늦은 기록을 점심 휴식 기록 시간으로 사용
 	 * @param mobileDetails
 	 * @param middayRestStartTime
 	 * @param middayRestEndTime
@@ -108,7 +108,7 @@ class ComposeDetailWithMobileInSignProxy2 {
 	}
 
 	/**
-	 * 将最晚的一次打卡时间设置为下班打卡时间
+	 * 가장 늦은 기록 시간을 퇴근 기록 시간으로 설정
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception
@@ -133,7 +133,7 @@ class ComposeDetailWithMobileInSignProxy2 {
 	}
 
 	/**
-	 * 将第一次打卡时间，设置为上班打卡时间
+	 * 첫 기록 시간을 출근 기록 시간으로 설정
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception
@@ -156,7 +156,7 @@ class ComposeDetailWithMobileInSignProxy2 {
 	}
 
 	/**
-	 * 获取打卡地址
+	 * 출퇴근 기록 주소 조회
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception
@@ -184,7 +184,7 @@ class ComposeDetailWithMobileInSignProxy2 {
 	}
 
 	/**
-	 * 获取设备信息
+	 * 기기 정보 조회
 	 * @param mobileDetails
 	 * @return
 	 * @throws Exception

@@ -23,12 +23,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 文档基础信息类
+ * 문서 기본 정보 클래스
  *
  * @author O2LEE
  *
  */
-@Schema(name = "Document", description = "内容管理文档.")
+@Schema(name = "Document", description = "콘텐츠 관리 문서.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Document.table, indexes = {
@@ -46,7 +46,7 @@ public class Document extends SliceJpaObject {
 	public static final String DOCUMENT_TYPE_INFO = "信息";
 	public static final String DOCUMENT_TYPE_DATA = "数据";
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 	@Override
 	public void onPersist() throws Exception {
 		if (StringTools.utf8Length(this.getTitle()) > length_255B) {
@@ -74,19 +74,19 @@ public class Document extends SliceJpaObject {
 	private String id = createId();
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String summary_FIELDNAME = "summary";
-	@FieldDescribe("文档摘要")
+	@FieldDescribe("문서 요약")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + summary_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String summary;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("文档标题")
+	@FieldDescribe("문서 제목")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + title_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -99,109 +99,109 @@ public class Document extends SliceJpaObject {
 	private String documentType = "信息";
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("栏目ID")
+	@FieldDescribe("게시판 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String appId;
 
 	public static final String appName_FIELDNAME = "appName";
-	@FieldDescribe("栏目名称")
+	@FieldDescribe("게시판 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + appName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String appName;
 
 	public static final String appAlias_FIELDNAME = "appAlias";
-	@FieldDescribe("栏目别名")
+	@FieldDescribe("게시판 별칭")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + appAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String appAlias;
 
 	public static final String categoryId_FIELDNAME = "categoryId";
-	@FieldDescribe("分类ID")
+	@FieldDescribe("분류ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + categoryId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + categoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String categoryId;
 
 	public static final String categoryName_FIELDNAME = "categoryName";
-	@FieldDescribe("分类名称")
+	@FieldDescribe("분류 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + categoryName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String categoryName;
 
 	public static final String categoryAlias_FIELDNAME = "categoryAlias";
-	@FieldDescribe("分类别名")
+	@FieldDescribe("분류 별칭")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + categoryAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String categoryAlias;
 
 	public static final String form_FIELDNAME = "form";
-	@FieldDescribe("绑定的表单模板ID")
+	@FieldDescribe("바인딩된 양식 템플릿 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + form_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String form;
 
 	public static final String formName_FIELDNAME = "formName";
-	@FieldDescribe("绑定的表单模板名称")
+	@FieldDescribe("바인딩된 양식 템플릿 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + formName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String formName;
 
 	public static final String importBatchName_FIELDNAME = "importBatchName";
-	@FieldDescribe("文件导入的批次号：一般是分类ID+时间缀")
+	@FieldDescribe("파일 가져오기 배치 번호: 보통 분류ID+타임스탬프")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + importBatchName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + importBatchName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String importBatchName;
 
 	public static final String readFormId_FIELDNAME = "readFormId";
-	@FieldDescribe("绑定的阅读表单模板ID")
+	@FieldDescribe("연결된 열람 양식 템플릿 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + readFormId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readFormId;
 
 	public static final String readFormName_FIELDNAME = "readFormName";
-	@FieldDescribe("绑定的阅读表单模板名称")
+	@FieldDescribe("연결된 열람 양식 템플릿 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + readFormName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String readFormName;
 
 	public static final String ppFormId_FIELDNAME = "ppFormId";
-	@FieldDescribe("流程平台表单ID")
+	@FieldDescribe("프로세스 플랫폼 양식 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + ppFormId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String ppFormId;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("创建人，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorPerson;
 
 	public static final String creatorIdentity_FIELDNAME = "creatorIdentity";
-	@FieldDescribe("创建人Identity，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 Identity, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorIdentity;
 
 	public static final String creatorUnitName_FIELDNAME = "creatorUnitName";
-	@FieldDescribe("创建人组织，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 조직, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorUnitName;
 
 	public static final String creatorTopUnitName_FIELDNAME = "creatorTopUnitName";
-	@FieldDescribe("创建人顶层组织，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 최상위 조직, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorTopUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorTopUnitName;
 
 	public static final String docStatus_FIELDNAME = "docStatus";
-	@FieldDescribe("文档状态: published | waitPublish | draft | archived")
+	@FieldDescribe("문서 상태: published | waitPublish | draft | archived")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + docStatus_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + docStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -214,25 +214,25 @@ public class Document extends SliceJpaObject {
 	private String description = null;
 
 	public static final String viewCount_FIELDNAME = "viewCount";
-	@FieldDescribe("文档被查看次数")
+	@FieldDescribe("문서 조회 횟수")
 	@Column(name = ColumnNamePrefix + viewCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long viewCount = 0L;
 
 	public static final String commendCount_FIELDNAME = "commendCount";
-	@FieldDescribe("文档被赞次数")
+	@FieldDescribe("문서 좋아요 수")
 	@Column(name = ColumnNamePrefix + commendCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long commendCount = 0L;
 
 	public static final String commentCount_FIELDNAME = "commentCount";
-	@FieldDescribe("文档评论次数")
+	@FieldDescribe("문서 댓글 수")
 	@Column(name = ColumnNamePrefix + commentCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long commentCount = 0L;
 
 	public static final String publishTime_FIELDNAME = "publishTime";
-	@FieldDescribe("文档发布时间")
+	@FieldDescribe("문서 게시 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + publishTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + publishTime_FIELDNAME)
@@ -240,7 +240,7 @@ public class Document extends SliceJpaObject {
 	private Date publishTime;
 
 	public static final String modifyTime_FIELDNAME = "modifyTime";
-	@FieldDescribe("文档修改时间")
+	@FieldDescribe("문서 수정 시간")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = ColumnNamePrefix + modifyTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + modifyTime_FIELDNAME)
@@ -248,19 +248,19 @@ public class Document extends SliceJpaObject {
 	private Date modifyTime;
 
 	public static final String isTop_FIELDNAME = "isTop";
-	@FieldDescribe("是否置顶")
+	@FieldDescribe("상단 고정 여부")
 	@Column(name = ColumnNamePrefix + isTop_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean isTop = false;
 
 	public static final String isAllRead_FIELDNAME = "isAllRead";
-	@FieldDescribe("是否全员可读")
+	@FieldDescribe("전원 열람 가능 여부")
 	@Column(name = ColumnNamePrefix + isAllRead_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean isAllRead = false;
 
 	public static final String hasIndexPic_FIELDNAME = "hasIndexPic";
-	@FieldDescribe("是否含有首页图片")
+	@FieldDescribe("대표 이미지 포함 여부")
 	@Column(name = ColumnNamePrefix + hasIndexPic_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean hasIndexPic = false;
@@ -272,48 +272,48 @@ public class Document extends SliceJpaObject {
 	private Boolean reviewed = false;
 
 	public static final String indexPics_FIELDNAME = "indexPics";
-	@FieldDescribe("首页图片，取自pictureList的前3个图片用于列表展示")
+	@FieldDescribe("대표 이미지, pictureList의 앞 3개 이미지를 목록 표시에 사용")
 	@Column(name = ColumnNamePrefix + indexPics_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String indexPics;
 
 	public static final String sequenceTitle_FIELDNAME = "sequenceTitle";
-	@FieldDescribe("用于标题排序的sequence")
+	@FieldDescribe("제목 정렬용 sequence")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sequenceTitle_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sequenceTitle_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sequenceTitle = "";
 
 	public static final String sequenceAppAlias_FIELDNAME = "sequenceAppAlias";
-	@FieldDescribe("用于栏目别名排序的sequence")
+	@FieldDescribe("게시판 별칭 정렬용 sequence")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sequenceAppAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sequenceAppAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sequenceAppAlias = "";
 
 	public static final String sequenceCategoryAlias_FIELDNAME = "sequenceCategoryAlias";
-	@FieldDescribe("用于分类别名排序的sequence")
+	@FieldDescribe("분류 별칭 정렬용 sequence")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sequenceCategoryAlias_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sequenceCategoryAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sequenceCategoryAlias = "";
 
 	public static final String sequenceCreatorPerson_FIELDNAME = "sequenceCreatorPerson";
-	@FieldDescribe("用于创建者排序的sequence")
+	@FieldDescribe("작성자 정렬용 sequence")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sequenceCreatorPerson_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sequenceCreatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sequenceCreatorPerson = "";
 
 	public static final String sequenceCreatorUnitName_FIELDNAME = "sequenceCreatorUnitName";
-	@FieldDescribe("用于创建者组织排序的sequence")
+	@FieldDescribe("작성자 조직 정렬용 sequence")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + sequenceCreatorUnitName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sequenceCreatorUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String sequenceCreatorUnitName = "";
 
 	public static final String readPersonList_FIELDNAME = "readPersonList";
-	@FieldDescribe("阅读人员")
+	@FieldDescribe("열람 사용자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -326,7 +326,7 @@ public class Document extends SliceJpaObject {
 	private List<String> readPersonList;
 
 	public static final String readUnitList_FIELDNAME = "readUnitList";
-	@FieldDescribe("阅读组织")
+	@FieldDescribe("열람 조직")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -339,7 +339,7 @@ public class Document extends SliceJpaObject {
 	private List<String> readUnitList;
 
 	public static final String readGroupList_FIELDNAME = "readGroupList";
-	@FieldDescribe("阅读群组")
+	@FieldDescribe("열람 그룹")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -352,7 +352,7 @@ public class Document extends SliceJpaObject {
 	private List<String> readGroupList;
 
 	public static final String authorPersonList_FIELDNAME = "authorPersonList";
-	@FieldDescribe("作者人员")
+	@FieldDescribe("작성자 사용자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -365,7 +365,7 @@ public class Document extends SliceJpaObject {
 	private List<String> authorPersonList;
 
 	public static final String authorUnitList_FIELDNAME = "authorUnitList";
-	@FieldDescribe("作者组织")
+	@FieldDescribe("작성자 조직")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -378,7 +378,7 @@ public class Document extends SliceJpaObject {
 	private List<String> authorUnitList;
 
 	public static final String authorGroupList_FIELDNAME = "authorGroupList";
-	@FieldDescribe("作者群组")
+	@FieldDescribe("작성자 그룹")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -391,7 +391,7 @@ public class Document extends SliceJpaObject {
 	private List<String> authorGroupList;
 
 	public static final String managerList_FIELDNAME = "managerList";
-	@FieldDescribe("管理者")
+	@FieldDescribe("관리자")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -404,7 +404,7 @@ public class Document extends SliceJpaObject {
 	private List<String> managerList;
 
 	public static final String pictureList_FIELDNAME = "pictureList";
-	@FieldDescribe("首页图片列表")
+	@FieldDescribe("대표 이미지 목록")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@OrderColumn(name = ORDERCOLUMNCOLUMN)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle
@@ -417,7 +417,7 @@ public class Document extends SliceJpaObject {
 	private List<String> pictureList;
 
 	public static final String properties_FIELDNAME = "properties";
-	@FieldDescribe("属性对象存储字段.")
+	@FieldDescribe("속성 객체 저장 필드.")
 	@Persistent
 	@Strategy(JsonPropertiesValueHandler)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + properties_FIELDNAME)
@@ -540,7 +540,7 @@ public class Document extends SliceJpaObject {
 	private Date dateTimeValue03;
 
 	public static final String OBJECTSECURITYCLEARANCE_FIELDNAME = "objectSecurityClearance";
-	@FieldDescribe("客体密级标识.")
+	@FieldDescribe("객체 보안 등급 식별자.")
 	@Column(name = ColumnNamePrefix + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + OBJECTSECURITYCLEARANCE_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -1120,7 +1120,7 @@ public class Document extends SliceJpaObject {
 	}
 
 	// -------------------Reader-------------------------
-	// -------------------2020-06-12 改为只存储DistinguishedName后两段，第一段可能会在运行过程中修改
+	// -------------------2020-06-12 DistinguishedName의 뒤 두 부분만 저장하도록 변경, 첫 부분은 실행 중 수정될 수 있음
 	public void addToReadPersonList(String readPerson) {
 		this.readPersonList = addStringToList(this.readPersonList, getShortTargetFlag(readPerson));
 	}
@@ -1133,7 +1133,7 @@ public class Document extends SliceJpaObject {
 		this.readGroupList = addStringToList(this.readGroupList, getShortTargetFlag(readGroup));
 	}
 
-	// --------------------完整的标识要删除，并且也要删除只存储2段的标识
+	// --------------------전체 식별자를 삭제하고, 2부분만 저장한 식별자도 삭제해야 함
 	public void removeFromReadPersonList(String readPerson) {
 		removeStringFromList(this.readPersonList, readPerson);
 		removeStringFromList(this.readPersonList, getShortTargetFlag(readPerson));
@@ -1150,7 +1150,7 @@ public class Document extends SliceJpaObject {
 	}
 
 	// -------------------Author-------------------------
-	// -------------------2020-06-12 改为只存储DistinguishedName后两段，第一段可能会在运行过程中修改
+	// -------------------2020-06-12 DistinguishedName의 뒤 두 부분만 저장하도록 변경, 첫 부분은 실행 중 수정될 수 있음
 	public void addToAuthorPersonList(String authorPerson) {
 		this.authorPersonList = addStringToList(this.authorPersonList, getShortTargetFlag(authorPerson));
 	}
@@ -1163,7 +1163,7 @@ public class Document extends SliceJpaObject {
 		this.authorGroupList = addStringToList(this.authorGroupList, getShortTargetFlag(authorGroup));
 	}
 
-	// --------------------完整的标识要删除，并且也要删除只存储2段的标识
+	// --------------------전체 식별자를 삭제하고, 2부분만 저장한 식별자도 삭제해야 함
 	public void removeFromAuthorPersonList(String authorPerson) {
 		removeStringFromList(this.authorPersonList, authorPerson);
 		removeStringFromList(this.authorPersonList, getShortTargetFlag(authorPerson));
@@ -1180,19 +1180,19 @@ public class Document extends SliceJpaObject {
 	}
 
 	// -------------------Manager-------------------------
-	// -------------------2020-06-12 改为只存储DistinguishedName后两段，第一段可能会在运行过程中修改
+	// -------------------2020-06-12 DistinguishedName의 뒤 두 부분만 저장하도록 변경, 첫 부분은 실행 중 수정될 수 있음
 	public void addToManagerList(String manager) {
 		addStringToList(this.managerList, getShortTargetFlag(manager));
 	}
 
-	// --------------------完整的标识要删除，并且也要删除只存储2段的标识
+	// --------------------전체 식별자를 삭제하고, 2부분만 저장한 식별자도 삭제해야 함
 	public void removeFromManagerList(String manager) {
 		removeStringFromList(this.managerList, manager);
 		removeStringFromList(this.managerList, getShortTargetFlag(manager));
 	}
 
 	/**
-	 * 获取只取两段的组织、人员、群组名称distinguishedName标识，默认应该有3段，第一段变动比较频繁，不适合作为权限标识
+	 * 조직, 사용자, 그룹 이름의 distinguishedName 식별자를 두 부분만 조회, 기본 3부분이며 첫 부분은 자주 변경되어 권한 식별자로 적합하지 않음
 	 *
 	 * @param distinguishedName
 	 * @return
@@ -1205,7 +1205,7 @@ public class Document extends SliceJpaObject {
 			if (array.length == 3) {
 				target = sb.append(array[1]).append("@").append(array[2]).toString();
 			} else if (array.length == 2) {
-				// 2段
+				// 2단계
 				target = sb.append(array[0]).append("@").append(array[1]).toString();
 			} else {
 				target = array[0];
@@ -1235,7 +1235,7 @@ public class Document extends SliceJpaObject {
 	}
 
 	/**
-	 * 支持提供排序的列名
+	 * 정렬 지원 열 이름
 	 */
 	public static final String[] documentFieldNames = { appAlias_FIELDNAME, appId_FIELDNAME, appName_FIELDNAME,
 			categoryAlias_FIELDNAME, categoryId_FIELDNAME, categoryName_FIELDNAME, commendCount_FIELDNAME,
@@ -1245,13 +1245,13 @@ public class Document extends SliceJpaObject {
 			updateTime_FIELDNAME };
 
 	/**
-	 * 判断指定的列名是否已经创建了对应的sequence列
+	 * 지정한 열 이름에 대응하는 sequence 열이 생성되었는지 판단
 	 *
-	 * @param orderField - 列名
+	 * @param orderField - 열 이름
 	 * @return
 	 */
 	public static Boolean isFieldInSequence(String orderField) {
-		// 判断排序列情况
+		// 정렬 열 상태 판단
 		if (StringUtils.isEmpty(orderField)) {
 			return true;
 		}
@@ -1289,9 +1289,9 @@ public class Document extends SliceJpaObject {
 	}
 
 	/**
-	 * 根据指定的列名，获取对应的sequence列
+	 * 지정한 열 이름에 대응하는 sequence 열 조회
 	 *
-	 * @param fieldName - 列名
+	 * @param fieldName - 열 이름
 	 * @return
 	 */
 	public static String getSequnceFieldNameWithProperty(String fieldName) {

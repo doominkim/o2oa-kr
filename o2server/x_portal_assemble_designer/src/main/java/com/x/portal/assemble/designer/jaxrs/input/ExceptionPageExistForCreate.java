@@ -7,6 +7,6 @@ class ExceptionPageExistForCreate extends PromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionPageExistForCreate(String id) {
-		super("创建页面冲突, id:{}.");
+		super("페이지 생성 충돌, id: {}.");
 	}
 }

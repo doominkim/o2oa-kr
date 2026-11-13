@@ -1,5 +1,5 @@
 <template>
-  <!-- 微信菜单管理 -->
+  <!-- WeChat 메뉴 관리 -->
   <div class="systemconfig_area">
     <div
       class="systemconfig_item_info"
@@ -7,13 +7,13 @@
     ></div>
     <div class="menu_setting_area" ref="mpwxMenuNode">
       <!-- <div style="margin: 30px 0 30px 0;font-size:16px;font-weight: 400;">{{lp._appTools.mpMenu.mpweixinInfo}}</div> -->
-      <!-- 编辑区 -->
+      <!-- 편집 영역 -->
       <div class="menu_preview_area">
         <div class="mobile_menu_preview">
           <div class="mobile_hd tc">{{ lp._appTools.mpMenu.mpweixin }}</div>
           <div class="mobile_bd">
             <ul class="pre_menu_list grid_line" ref="mpwxMenuListNode">
-              <!-- 菜单展现 -->
+              <!-- 메뉴 표시 -->
               <li
                 v-for="item in menuList"
                 :key="item.id"
@@ -23,13 +23,13 @@
                 <a class="pre_menu_link" href="javascript:void(0);"
                   ><span class="js_l1Title">{{ item.name }}</span></a
                 >
-                <!-- 子菜单 -->
+                <!-- 하위 메뉴 -->
                 <div
                   class="sub_pre_menu_box js_l2TitleBox"
                   v-if="showSubId == item.id"
                 >
                   <ul class="sub_pre_menu_list">
-                    <!-- 新增按钮 -->
+                    <!-- 추가 버튼 -->
                     <li
                       class="js_addMenuBox"
                       @click="createSubMenu($event, item)"
@@ -62,7 +62,7 @@
                 </div>
               </li>
 
-              <!-- 第一层新增按钮 -->
+              <!-- 1단계 추가 버튼 -->
               <li
                 class="js_addMenuBox pre_menu_item grid_item no_extra"
                 @click="createNewFirstMenuMock"
@@ -83,7 +83,7 @@
               class="global_mod float_layout menu_form_hd js_second_title_bar"
               ref="mpwxMenuFormHeaderNode"
             >
-              <!-- 菜单名称 和 删除按钮 -->
+              <!-- 메뉴 이름과 삭제 버튼 -->
               <h4 class="global_info">{{ currentMenu.name || "" }}</h4>
               <button
               style="float:right;"
@@ -95,8 +95,8 @@
               </button>
             </div>
             <div class="menu_form_bd" ref="mpwxMenuFormNode">
-              <!-- 菜单表单内容 -->
-              <!-- 名称 -->
+              <!-- 메뉴 양식 내용 -->
+              <!-- 이름 -->
               <div class="frm_control_group js_setNameBox">
                 <label class="frm_label"
                   ><strong class="title js_menuTitle">{{
@@ -114,7 +114,7 @@
                   <p class="frm_tips js_titleNolTips">{{ inputNameTips() }}</p>
                 </div>
               </div>
-              <!-- 排序 -->
+              <!-- 정렬 -->
               <div class="frm_control_group js_setNameBox">
                 <label class="frm_label"
                   ><strong class="title js_menuTitle">{{
@@ -134,7 +134,7 @@
                   </p>
                 </div>
               </div>
-              <!-- 菜单类型 -->
+              <!-- 메뉴 유형 -->
               <div class="frm_control_group">
                 <BaseRadio :label="lp._appTools.mpMenu.formRadioLabel"
                       :options="[
@@ -144,7 +144,7 @@
                       ]"
                       v-model:value="currentMenu.type"/>
               </div>
-              <!-- 类型不同显示的具体内容不同 -->
+              <!-- 유형에 따라 표시 내용이 다름 -->
               <div class="menu_content_container">
                 <!-- click -->
                 <div class="menu_content" v-if="currentMenu.type == 'click'">
@@ -189,7 +189,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- 小程序 -->
+                <!-- 미니 프로그램 -->
                 <div
                   class="menu_content"
                   v-if="currentMenu.type == 'miniprogram'"
@@ -257,14 +257,14 @@
           </div>
         </div>
       </div>
-      <!-- 发布按钮 -->
+      <!-- 게시 버튼 -->
       <div class="btn-box" style="justify-content: start; margin-top: 30px">
         <button class="mainColor_bg" @click="menuPublishToWeixin($event)">
           {{ lp._appTools.mpMenu.publishMpweixin }}
         </button>
       </div>
 
-      <!-- 关注回复 -->
+      <!-- 구독 시 자동 응답 -->
       <div
         style="
           height: 40px;
@@ -312,10 +312,10 @@ import { component, lp, o2 } from "@o2oa/component";
 import { doMPWeixinMenuAction } from "@/util/acrions";
 import BaseRadio from '@/components/item/BaseRadio.vue';
 
-const menuList = ref([]); // 菜单列表
-const showSubId = ref(""); // 哪个菜单的子菜单需要显示
-const mpweixinSubscribe = ref({}); // 订阅
-const currentMenu = ref({}); // 选中的菜单
+const menuList = ref([]); // 메뉴 목록
+const showSubId = ref(""); // 하위 메뉴를 표시할 메뉴
+const mpweixinSubscribe = ref({}); // 구독
+const currentMenu = ref({}); // 선택된 메뉴
 
 const load = () => {
   loadMenuList();
@@ -325,7 +325,7 @@ const load = () => {
 const loadMenuList = () => {
   doMPWeixinMenuAction("menuWeixinList").then((data) => {
     let menus = data.button || [];
-    //去除 subscribe
+    //subscribe 제거
     let subscribe = null;
     for (let index = 0; index < menus.length; index++) {
       const element = menus[index];
@@ -339,10 +339,10 @@ const loadMenuList = () => {
     menuList.value = menus;
     if (menus.length > 0) {
       if (showSubId.value === "") {
-        showSubId.value = menus[0].id; //初始化 showSubId 表示哪个子菜单是显示的
+        showSubId.value = menus[0].id; //showSubId 초기화: 표시 중인 하위 메뉴를 의미
       }
       if (!currentMenu.value.id || currentMenu.value.id === "") {
-        currentMenu.value = menus[0]; //初始化 currentMenuId 表示当前选中的菜单ID
+        currentMenu.value = menus[0]; //currentMenuId 초기화: 현재 선택된 메뉴 ID를 의미
       }
     }
   });
@@ -406,17 +406,17 @@ const inputNameTips = () => {
   }
   return nameTips;
 };
-// 第一层新增按钮
+// 1단계 추가 버튼
 const createNewFirstMenuMock = () => {
-  //最多可创建3个
+  //최대 3개까지 생성 가능
   if (menuList.value.length >= 3) {
     component.notice(lp._appTools.mpMenu.msgFirstMaxLen, "error");
     return;
   }
-  // 排序号生成
+  // 정렬 번호 생성
   let order = "000001";
   if (menuList.value.length > 0) {
-    let bigestOrder = menuList.value[menuList.value.length - 1].order; //最后一条是最大的号码
+    let bigestOrder = menuList.value[menuList.value.length - 1].order; //마지막 항목이 가장 큰 번호
     console.log("최대 order " + bigestOrder);
     const intOrder = parseInt(bigestOrder);
     if (!isNaN(intOrder)) {
@@ -429,40 +429,40 @@ const createNewFirstMenuMock = () => {
     }
     console.log("최대 order " + intOrder);
   }
-  // id mock_开头 正式保存的时候知道是新增的 可以清除 后台生成id
+  // id가 mock_로 시작 정식 저장 시 신규임을 알 수 있어 제거하고 백엔드에서 id 생성
   let body = {
     id: "mock_" + o2.uuid(),
     name: lp._appTools.mpMenu.defaultNewName,
-    type: "click", //默认文字消息
+    type: "click", //기본 텍스트 메시지
     order: order,
-    o2Level: "1", // 1第一层级菜单
+    o2Level: "1", // 1 첫 번째 레벨 메뉴
   };
   menuList.value.push(body);
-  currentMenu.value = body; // 当前菜单
+  currentMenu.value = body; // 현재 메뉴
   showSubId.value = body.id; //
 };
-// 点击第一层菜单
+// 1단계 메뉴 클릭
 const clickFirstMenu = (ev, menu) => {
-  currentMenu.value = menu; // 当前菜单
+  currentMenu.value = menu; // 현재 메뉴
   showSubId.value = menu.id; //
   ev.stopPropagation();
 };
-// 点击子菜单
+// 하위 메뉴 클릭
 const clickSubMenu = (ev, parentId, menu) => {
-  currentMenu.value = menu; // 当前菜单
+  currentMenu.value = menu; // 현재 메뉴
   showSubId.value = parentId; //
   ev.stopPropagation();
 };
-// 子菜单是否显示新增按钮
+// 하위 메뉴 추가 버튼 표시 여부
 const showSubCreateMenuBtn = (menu) => {
   return !menu.sub_button || menu.sub_button.length < 5;
 };
-// 子菜单新增按钮点击
+// 하위 메뉴 추가 버튼 클릭
 const createSubMenu = (ev, parentMenu) => {
   console.debug("추가 클릭, 상위 메뉴: " + parentMenu.name);
   ev.stopPropagation();
   let sub = parentMenu.sub_button;
-  //最多可创建5个
+  //최대 5개까지 생성 가능
   if (sub && sub.length >= 5) {
     component.notice(lp._appTools.mpMenu.menuMsgSubMaxLen, "error");
     return;
@@ -471,10 +471,10 @@ const createSubMenu = (ev, parentMenu) => {
     component.notice(lp._appTools.mpMenu.menuMsgParentNotSave, "error");
     return;
   }
-  // 排序号生成
+  // 정렬 번호 생성
   let order = "000001";
   if (sub && sub.length > 0) {
-    let bigestOrder = sub[0].order; //第一条 因为上面已经排序过了 所以第一条是最大的
+    let bigestOrder = sub[0].order; //첫 번째 항목 위에서 이미 정렬했으므로 첫 번째 항목이 가장 큼
     const intOrder = parseInt(bigestOrder);
     if (!isNaN(intOrder)) {
       let o = intOrder + 1;
@@ -485,14 +485,14 @@ const createSubMenu = (ev, parentMenu) => {
       order = os;
     }
   }
-  // id mock_开头 正式保存的时候知道是新增的 可以清除 后台生成id
+  // id가 mock_로 시작 정식 저장 시 신규임을 알 수 있어 제거하고 백엔드에서 id 생성
   let body = {
     id: "mock_" + o2.uuid(),
     name: lp._appTools.mpMenu.defaultNewName,
     parentId: parentMenu.id,
-    type: "click", //默认文字消息
+    type: "click", //기본 텍스트 메시지
     order: order,
-    o2Level: "2", // 2第二层级菜单
+    o2Level: "2", // 2 두 번째 레벨 메뉴
   };
   if (sub) {
     parentMenu.sub_button.push(body);
@@ -505,7 +505,7 @@ const createSubMenu = (ev, parentMenu) => {
       menuList.value[index] = parentMenu;
     }
   }
-  currentMenu.value = body; // 当前菜单
+  currentMenu.value = body; // 현재 메뉴
   showSubId.value = parentMenu.id; //
 };
 const removeMenuData = (menu) => {
@@ -538,15 +538,15 @@ const removeMenuData = (menu) => {
   showSubId.value = "";
   if (menuList.value.length > 0) {
     if (showSubId.value === "") {
-      showSubId.value = menuList.value[0].id; //初始化 showSubId 表示哪个子菜单是显示的
+      showSubId.value = menuList.value[0].id; //showSubId 초기화: 표시 중인 하위 메뉴를 의미
     }
     if (!currentMenu.value.id || currentMenu.value.id === "") {
-      currentMenu.value = menuList.value[0]; //初始化 currentMenuId 表示当前选中的菜单ID
+      currentMenu.value = menuList.value[0]; //currentMenuId 초기화: 현재 선택된 메뉴 ID를 의미
     }
   }
 };
 
-// 删除当前菜单
+// 현재 메뉴 삭제
 const clickDeleteMenu = (ev) => {
   ev.stopPropagation();
   if (currentMenu.value.id && currentMenu.value.id.startsWith("mock_")) {
@@ -576,7 +576,7 @@ const clickDeleteMenu = (ev) => {
     );
   }
 };
-// 更新list中的数据对象
+// list 안의 데이터 객체 갱신
 const setMenuData = (menu) => {
       if (menuList.value.length > 0) {
           for (let index = 0; index < menuList.value.length; index++) {
@@ -605,7 +605,7 @@ const setMenuData = (menu) => {
           currentMenu.value = menu;
       }
   };
-// 保持菜单
+// 메뉴 저장
 const saveMenu = () => {
   if (!currentMenu.value.name || currentMenu.value.name === "") {
     component.notice(lp._appTools.mpMenu.formNameErrorEmpty, "error");
@@ -627,7 +627,7 @@ const saveMenu = () => {
     component.notice(lp._appTools.mpMenu.formOrderErrorEmpty, "error");
     return;
   }
-  //数字
+  //숫자
   var reg = /^[\d]+$/;
   var s = reg.test(currentMenu.value.order);
   if (s === false) {
@@ -640,12 +640,12 @@ const saveMenu = () => {
   }
   if (!currentMenu.value.sub_button || currentMenu.value.sub_button.length == 0) {
     const type = currentMenu.value.type;
-    if (type === "view") { //网页
+    if (type === "view") { //웹 페이지
         if (!currentMenu.value.url || currentMenu.value.url === "") {
            component.notice(lp._appTools.mpMenu.formTypeUrlErrorEmpty, "error");
             return;
         }
-    } else if (type === "miniprogram") { //小程序
+    } else if (type === "miniprogram") { //미니 프로그램
         if (!currentMenu.value.appid || currentMenu.value.appid === "") {
             component.notice(lp._appTools.mpMenu.formTypeMiniprogramAppidErrorEmpty, "error");
             return;
@@ -659,30 +659,30 @@ const saveMenu = () => {
             return;
         }
          
-    } else { //消息
+    } else { //메시지
         if (!currentMenu.value.content || currentMenu.value.content === "") {
           component.notice(lp._appTools.mpMenu.formTypeMsgErrorEmpty, "error");
             return;
         }
-        //新建的菜单 click类型需要设置key 
+        //새로 만든 메뉴 click 유형은 key 설정 필요 
         currentMenu.value.key = currentMenu.value.id;
     }
   }
 
   let newMenu = currentMenu.value;
   if (newMenu.id.startsWith('mock_')) {
-      delete newMenu.id; //新增要删除id
+      delete newMenu.id; //삭제할 id 추가
   }
-  //写入数据 远程写入 还有 上级数组中
-  if (!newMenu.id) { //新增
+  //데이터 기록 원격 기록 및 상위 배열에도 기록
+  if (!newMenu.id) { //신규
       doMPWeixinMenuAction("menuAdd", newMenu).then(
           (data) => {
-            newMenu.id = data.id;//更新id
+            newMenu.id = data.id;//id 갱신
             setMenuData(newMenu);
             component.notice(lp._appTools.mpMenu.menuSaveSuccess, "success");
           }
         );
-  }else { // 更新
+  }else { // 수정
        doMPWeixinMenuAction("menuUpdate", newMenu.id, newMenu).then(
           (data) => {
             setMenuData(newMenu);
@@ -691,7 +691,7 @@ const saveMenu = () => {
         );
   }
 };
-// 发布菜单到微信公众号
+// 메뉴를 WeChat 공식 계정에 게시
 const menuPublishToWeixin = (ev) => {
   if (menuList.value.length > 0) {
     component.confirm(
@@ -717,28 +717,28 @@ const menuPublishToWeixin = (ev) => {
     );
   }
 };
-// 保持订阅回复信息
+// 구독 응답 정보 저장
 const saveSubscribe = (e) => {
   if (!mpweixinSubscribe.value.content || mpweixinSubscribe.value.content === "") {
       component.notice(lp._appTools.mpMenu.subscribeContentErrorEmpty, "error");
       return;
   }
   let newSubs = mpweixinSubscribe.value;
-  //新建的菜单 click类型需要设置key 
+  //새로 만든 메뉴 click 유형은 key 설정 필요 
   if (newSubs.id.startsWith('mock_')) {
-      delete newSubs.id; //新增要删除id
+      delete newSubs.id; //삭제할 id 추가
   }
-  //写入数据 远程写入 还有 上级数组中
-  if (!newSubs.id) { //新增
+  //데이터 기록 원격 기록 및 상위 배열에도 기록
+  if (!newSubs.id) { //신규
       doMPWeixinMenuAction("menuAdd", newSubs).then(
           (data) => {
-            newSubs.id = data.id; //更新id
+            newSubs.id = data.id; //id 갱신
             mpweixinSubscribe.value = newSubs;
             component.notice(lp._appTools.mpMenu.menuSaveSuccess, "success");
           }
         );
        
-  }else { // 更新
+  }else { // 수정
     doMPWeixinMenuAction("menuUpdate", newSubs.id, newSubs).then(
           (data) => {
             component.notice(lp._appTools.mpMenu.menuSaveSuccess, "success");

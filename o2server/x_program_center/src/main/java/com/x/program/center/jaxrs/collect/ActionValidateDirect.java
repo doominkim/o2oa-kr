@@ -42,7 +42,7 @@ class ActionValidateDirect extends BaseAction {
 			Config.collect().setPassword(password);
 			Config.collect().save();
 			this.configFlush(effectivePerson);
-			/* 人员和应用市场同步 */
+			/* 사용자 및 앱 마켓 동기화 */
 			ThisApplication.context().scheduleLocal(CollectPerson.class);
 		}
 		result.setData(wo);

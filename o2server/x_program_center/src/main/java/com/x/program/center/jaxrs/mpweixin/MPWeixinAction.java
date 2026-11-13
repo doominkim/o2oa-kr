@@ -32,17 +32,17 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 微信公众号接口 Created by fancyLou on 3/8/21. Copyright © 2021 O2. All rights
+ * 위챗 공식 계정 인터페이스 Created by fancyLou on 3/8/21. Copyright © 2021 O2. All rights
  * reserved.
  */
 
 @Path("mpweixin")
-@JaxrsDescribe("微信公众号接口")
+@JaxrsDescribe("위챗 공식 계정 인터페이스")
 public class MPWeixinAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(MPWeixinAction.class);
 
-	@JaxrsMethodDescribe(value = "给微信公众号后台检测服务器配置.", action = ActionCheckMPWeixin.class)
+	@JaxrsMethodDescribe(value = "위챗 공식 계정 백엔드의 서버 설정 검증용.", action = ActionCheckMPWeixin.class)
 	@GET
 	@Path("check")
 	public void check(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
@@ -60,7 +60,7 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "微信公众号接收消息.", action = ActionReceiveMsg.class)
+	@JaxrsMethodDescribe(value = "위챗 공식 계정 메시지 수신.", action = ActionReceiveMsg.class)
 	@POST
 	@Path("check")
 	public void receiveMsg(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
@@ -78,7 +78,7 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "发送微信公众号模板消息.", action = ActionSendTemplateMessage.class)
+	@JaxrsMethodDescribe(value = "위챗 공식 계정 템플릿 메시지 발송.", action = ActionSendTemplateMessage.class)
 	@POST
 	@Path("message/template/send")
 	public void sendMsg(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, JsonElement jsonElement) {
@@ -92,20 +92,20 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	// ///////       media  素材  /////////////////////
+	// ///////       media  소재  /////////////////////
 
-	@JaxrsMethodDescribe(value = "上传永久素材到微信服务器.", action = ActionUploadMediaForever.class)
+	@JaxrsMethodDescribe(value = "위챗 서버에 영구 소재 업로드.", action = ActionUploadMediaForever.class)
 	@POST
 	@Path("media/add/forever")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	public void addMedia(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-								 @JaxrsParameterDescribe("类型： image、voice、video 、thumb") @FormDataParam("type") String type,
-								 @JaxrsParameterDescribe("视频标题 video的类型必须传") @FormDataParam("videoTitle") String videoTitle,
-								 @JaxrsParameterDescribe("视频介绍 video的类型必须传") @FormDataParam("videoIntroduction") String videoIntroduction,
-								 @JaxrsParameterDescribe("附件名称") @FormDataParam(FILENAME_FIELD) String fileName,
-								 @JaxrsParameterDescribe("附件标识") @FormDataParam(FILE_FIELD) final byte[] bytes,
-								 @JaxrsParameterDescribe("上传文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition){
+								 @JaxrsParameterDescribe("유형: image, voice, video , thumb") @FormDataParam("type") String type,
+								 @JaxrsParameterDescribe("동영상 제목, video 유형이면 필수") @FormDataParam("videoTitle") String videoTitle,
+								 @JaxrsParameterDescribe("동영상 소개, video 유형이면 필수") @FormDataParam("videoIntroduction") String videoIntroduction,
+								 @JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
+								 @JaxrsParameterDescribe("첨부파일 식별자") @FormDataParam(FILE_FIELD) final byte[] bytes,
+								 @JaxrsParameterDescribe("파일 업로드") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition){
 		ActionResult<ActionUploadMediaForever.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -120,9 +120,9 @@ public class MPWeixinAction extends StandardJaxrsAction {
 
 
 
-	// /menu/* 需要管理员权限
+	// /menu/* 관리자 권한 필요
 
-	@JaxrsMethodDescribe(value = "微信菜单列表查看.", action = ActionListAllMenu.class)
+	@JaxrsMethodDescribe(value = "위챗 메뉴 목록 조회.", action = ActionListAllMenu.class)
 	@GET
 	@Path("menu/list/weixin")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -138,7 +138,7 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "微信公众号关注回复的菜单对象.", action = ActionSubscribeMenu.class)
+	@JaxrsMethodDescribe(value = "위챗 공식 계정 팔로우 응답 메뉴 객체.", action = ActionSubscribeMenu.class)
 	@GET
 	@Path("menu/subscribe")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -154,7 +154,7 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "给微信公众号创建菜单，【注意这个接口会把公众号菜单全部替换掉！】.", action = ActionCreateMenu.class)
+	@JaxrsMethodDescribe(value = "위챗 공식 계정 메뉴 생성,【주의: 이 인터페이스는 공식 계정 메뉴를 모두 교체함!】.", action = ActionCreateMenu.class)
 	@GET
 	@Path("menu/create/to/weixin")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -170,7 +170,7 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建一个菜单项.", action = ActionAddMenu.class)
+	@JaxrsMethodDescribe(value = "메뉴 항목 생성.", action = ActionAddMenu.class)
 	@POST
 	@Path("menu/add")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -187,13 +187,13 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新一个菜单项.", action = ActionUpdateMenu.class)
+	@JaxrsMethodDescribe(value = "메뉴 항목 수정.", action = ActionUpdateMenu.class)
 	@POST
 	@Path("menu/update/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void menuUpdate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionUpdateMenu.Wo> result = new ActionResult<>();
 		try {
 			result = new ActionUpdateMenu().execute(id, jsonElement);
@@ -204,13 +204,13 @@ public class MPWeixinAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "删除一个菜单项.", action = ActionDeleteMenu.class)
+	@JaxrsMethodDescribe(value = "메뉴 항목 삭제.", action = ActionDeleteMenu.class)
 	@DELETE
 	@Path("menu/delete/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void menuDelete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id) {
 		ActionResult<ActionDeleteMenu.Wo> result = new ActionResult<>();
 		try {
 			result = new ActionDeleteMenu().execute(id);

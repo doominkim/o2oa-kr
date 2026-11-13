@@ -262,11 +262,11 @@ public class BaseAction extends StandardJaxrsAction {
 
 		private static final long serialVersionUID = -6077066445665811296L;
 
-		@FieldDescribe("可读.")
+		@FieldDescribe("열람 가능.")
 		private Boolean allowRead = false;
-		@FieldDescribe("可写.")
+		@FieldDescribe("쓰기 가능.")
 		private Boolean allowEdit = false;
-		@FieldDescribe("可管理.")
+		@FieldDescribe("관리 가능.")
 		private Boolean allowControl = false;
 
 		public Boolean getAllowRead() {

@@ -7,6 +7,6 @@ class ExceptionNameColumnEmpty extends PromptException {
 	private static final long serialVersionUID = -2139584911736169462L;
 
 	ExceptionNameColumnEmpty() {
-		super("姓名列不能为空.");
+		super("이름 열은 비워 둘 수 없습니다.");
 	}
 }

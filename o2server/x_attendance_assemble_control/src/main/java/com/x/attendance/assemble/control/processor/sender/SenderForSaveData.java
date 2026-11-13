@@ -13,7 +13,7 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 /**
- * 将EXCEL分析出来的数据发送到队列，由相应的处理器进行数据存储操作
+ * EXCEL에서 분석한 데이터를 큐로 보내 해당 처리기가 데이터 저장 수행
  * 
  * @author O2LEE
  *
@@ -26,12 +26,12 @@ public class SenderForSaveData {
 		
 		String file_id = cacheImportFileStatus.getFileId();
 		
-		//如果数据校验完成 ，并且全部成功，那么可以进行数据保存，先单线程删除数据
+		//데이터 검증이 완료되고 모두 성공하면 데이터를 저장할 수 있음, 먼저 단일 스레드로 데이터 삭제
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business( emc );
 			AttendanceDetail detail = null;
 			
-			// 先删除这一个文件ID下的所有记录
+			// 먼저 이 파일 ID의 모든 기록 삭제
 			List<String> ids = business.getAttendanceDetailFactory().listByBatchName( file_id );
 			emc.beginTransaction(AttendanceDetail.class);
 			if (ids != null && ids.size() > 0) {
@@ -46,15 +46,15 @@ public class SenderForSaveData {
 			logger.error( e );
 		}
 		
-		//开始对数据进行保存，发送到queue-consumerFileDataSaver
+		//데이터 저장 시작, queue-consumerFileDataSaver로 전송
 		logger.info("file["+ file_id +"], system will send save data to queeu, record total:" + cacheImportFileStatus.getDetailList().size() );
 		
-		//将错误数据量恢复为0
+		//오류 데이터 수를 0으로 복원
 		cacheImportFileStatus.setErrorCount( 0 );
 		for ( EntityImportDataDetail cacheImportRowDetail : cacheImportFileStatus.getDetailList() ) {
 			if( cacheImportRowDetail != null ) {
 				try {
-					//將數據推入隊列，在队列中进行数据持久化存储
+					//데이터를 큐에 넣어 큐에서 데이터 영구 저장
 					cacheImportRowDetail.setFile_id( file_id );
 					cacheImportRowDetail.setData_type("saveData");
 					cacheImportFileStatus.increaseProcess_save_total( 1 );
@@ -63,7 +63,7 @@ public class SenderForSaveData {
 					logger.error( e );
 				}
 			}else {
-				logger.warn( "需要保存的数据为空......" );
+				logger.warn( "저장할 데이터가 비어 있습니다......" );
 			}
 		}
 	}

@@ -65,8 +65,8 @@ class ActionCopy extends BaseAction {
 		if (null == fileMapping) {
 			throw new ExceptionAllocateStorageMaaping();
 		}
-		/** 由于这里需要根据craeteTime创建path,先进行赋值,再进行校验,最后保存 */
-		/** 禁止不带扩展名的文件上传 */
+		/** createTime으로 path를 생성해야 하므로 먼저 값을 할당하고 검증한 뒤 저장 */
+		/** 확장자 없는 파일 업로드 금지 */
 		if (StringUtils.isEmpty(FilenameUtils.getExtension(attachment.getName()))) {
 			throw new ExceptionEmptyExtension(attachment.getName());
 		}
@@ -77,7 +77,7 @@ class ActionCopy extends BaseAction {
 			attachment.readContent(attachmentMapping, baos);
 			try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray())) {
 				if ((scale > 0) && ArrayUtils.contains(IMAGE_EXTENSIONS, file.getExtension())) {
-					/** 进行图形缩放 */
+					/** 이미지 축소·확대 수행 */
 					BufferedImage image = ImageIO.read(bais);
 					BufferedImage scalrImage = Scalr.resize(image, scale);
 					try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {

@@ -9,7 +9,7 @@ public class Org extends GsonPropertyObject {
 
 	// "retData": {
 	// "orgNumber": 100016000,
-	// "name": "互联网+事业部",
+	// "name": "인터넷+사업부",
 	// "type": 1,
 	// "parentId": 1,
 	// "fullName": "",

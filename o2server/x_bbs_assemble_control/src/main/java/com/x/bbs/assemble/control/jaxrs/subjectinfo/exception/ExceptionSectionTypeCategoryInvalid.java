@@ -7,11 +7,11 @@ public class ExceptionSectionTypeCategoryInvalid extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	public ExceptionSectionTypeCategoryInvalid( String type ) {
-		super("系统传入的版块[主题分类]不合法，无法进行数据保存！分类：" + type );
+		super("섹션 [주제 분류] 값이 올바르지 않아 저장할 수 없습니다! 분류: " + type );
 	}
 	
 	public ExceptionSectionTypeCategoryInvalid( String[] type ) {
-		super("系统传入的版块[主题分类]不合法，无法进行数据保存！分类：" + type );
+		super("섹션 [주제 분류] 값이 올바르지 않아 저장할 수 없습니다! 분류: " + type );
 	}
 	
 }

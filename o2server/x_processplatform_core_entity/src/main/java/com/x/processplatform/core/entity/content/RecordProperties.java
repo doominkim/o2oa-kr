@@ -14,64 +14,64 @@ public class RecordProperties extends JsonProperties {
 
 	private static final long serialVersionUID = 4021727898101550914L;
 
-	@FieldDescribe("record中记录的处理人排序值.")
+	@FieldDescribe("record에 기록된 처리자 정렬 값.")
 	private Integer personOrderNumber = null;
 
-	@FieldDescribe("record中记录的处理人身份排序值.")
+	@FieldDescribe("record에 기록된 처리자 신분 정렬 값.")
 	private Integer identityOrderNumber = null;
 
-	@FieldDescribe("record中记录的处理人身份所在组织排序值.")
+	@FieldDescribe("record에 기록된 처리자 신분 소속 조직 정렬 값.")
 	private Integer unitOrderNumber = null;
 
-	@FieldDescribe("record中记录的处理人身份所在组织层级名.")
+	@FieldDescribe("record에 기록된 처리자 신분 소속 조직 계층 이름.")
 	private String unitLevelName = "";
 
-	@FieldDescribe("record中记录的处理人身份所拥有的组织职务,向上递归.")
+	@FieldDescribe("record에 기록된 처리자 신분이 보유한 조직 직무, 상위로 재귀.")
 	private List<String> unitDutyList = new ArrayList<>();
 
-	@FieldDescribe("后续人工环节")
+	@FieldDescribe("후속 수동 단계")
 	private List<NextManual> nextManualList = new ArrayList<>();
 
-	@FieldDescribe("后续人工环节处理人")
+	@FieldDescribe("후속 수동 단계 처리자")
 	private List<String> nextManualTaskIdentityList = new ArrayList<>();
 
-	@FieldDescribe("授权给处理人")
+	@FieldDescribe("위임받은 처리자")
 	private String empowerToPerson;
 
-	@FieldDescribe("授权给处理人的身份")
+	@FieldDescribe("위임받은 처리자의 신분")
 	private String empowerToIdentity;
 
-	@FieldDescribe("授权自身份")
+	@FieldDescribe("위임 원 신분")
 	private String empowerFromIdentity;
 
-	@FieldDescribe("授权给处理人的组织")
+	@FieldDescribe("위임받은 처리자의 조직")
 	private String empowerToUnit;
 
-	@FieldDescribe("路由名称")
+	@FieldDescribe("경로 이름")
 	private String routeName;
 
-	@FieldDescribe("意见")
+	@FieldDescribe("의견")
 	private String opinion;
 
-	@FieldDescribe("多媒体意见")
+	@FieldDescribe("멀티미디어 의견")
 	private String mediaOpinion;
 
-	@FieldDescribe("开始时间.")
+	@FieldDescribe("시작 시간.")
 	private Date startTime;
 
-	@FieldDescribe("耗时")
+	@FieldDescribe("소요 시간")
 	private Long elapsed;
 
-	@FieldDescribe("活动组")
+	@FieldDescribe("활동 그룹")
 	private String fromGroup;
 
-	@FieldDescribe("意见组")
+	@FieldDescribe("의견 그룹")
 	private String fromOpinionGroup;
 
-	@FieldDescribe("发起撤回的已办标识")
+	@FieldDescribe("회수를 시작한 처리 완료 식별자")
 	private String retractTaskCompleted;
 
-	@FieldDescribe("已办标识")
+	@FieldDescribe("처리 완료 식별자")
 	private String taskCompleted;
 
 	public String getTaskCompleted() {
@@ -122,17 +122,17 @@ public class RecordProperties extends JsonProperties {
 			// nothing
 		}
 
-		@FieldDescribe("活动")
+		@FieldDescribe("활동")
 		private String activity;
-		@FieldDescribe("活动类型")
+		@FieldDescribe("활동 유형")
 		private ActivityType activityType;
-		@FieldDescribe("活动名称")
+		@FieldDescribe("활동 이름")
 		private String activityName;
-		@FieldDescribe("活动别名")
+		@FieldDescribe("활동 별칭")
 		private String activityAlias;
-		@FieldDescribe("活动活动令牌")
+		@FieldDescribe("활동 토큰")
 		private String activityToken;
-		@FieldDescribe("待办处理人")
+		@FieldDescribe("결재 대기 처리자")
 		private List<String> taskIdentityList = new ArrayList<>();
 
 		public List<String> getTaskIdentityList() {

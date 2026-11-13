@@ -11,7 +11,7 @@
         </div>
       </div>
 
-<!--      <button style="margin-left:0" @click="addSSOConfig">添加鉴权配置</button>-->
+<!--      <button style="margin-left:0" @click="addSSOConfig">인증 설정 추가</button>-->
     </div>
 
     <div class="item_info">

@@ -35,7 +35,7 @@ class ActionUpdate extends BaseAction {
 			if (null == attachment) {
 				throw new ExceptionEntityNotExist(id, Attachment.class);
 			}
-			/* 判断文件的所有者是否是当前用户 */
+			/* 파일 소유자가 현재 사용자인지 판단 */
 			if (!StringUtils.equals(effectivePerson.getDistinguishedName(), attachment.getPerson())) {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
@@ -54,7 +54,7 @@ class ActionUpdate extends BaseAction {
 			if(StringUtils.isNotBlank(wi.getName()) && !StringTools.isFileName(wi.getName())){
 				throw new ExceptionFileNameInvalid(wi.getName());
 			}
-			/* 从共享用户和共享编辑者里面去掉当前用户和创建者 */
+			/* 공유 사용자와 공유 편집자에서 현재 사용자와 생성자 제거 */
 			shareList = ListUtils.subtract(shareList,
 					ListTools.toList(attachment.getPerson(), effectivePerson.getDistinguishedName()));
 			editorList = ListUtils.subtract(editorList,
@@ -70,23 +70,23 @@ class ActionUpdate extends BaseAction {
 			List<String> editorAdds = ListUtils.subtract(editorList, oldEditorList);
 			List<String> shareCancels = ListUtils.subtract(oldShareList, shareList);
 			List<String> editorCancels = ListUtils.subtract(oldEditorList, editorList);
-			/* 发送共享通知 */
+			/* 공유 알림 발송 */
 			for (String str : shareAdds) {
 				this.message_send_attachment_share(attachment, str);
 //				FileShareMessage message = new FileShareMessage(str, attachment.getId());
 //				Collaboration.send(message);
 			}
-			/* 发送编辑通知 */
+			/* 편집 알림 발송 */
 			for (String str : editorAdds) {
 				this.message_send_attachment_editor(attachment, str);
 //				FileModifyMessage message = new FileModifyMessage(str, attachment.getId());
 //				Collaboration.send(message);
 			}
-			/* 发送取消共享通知 */
+			/* 공유 취소 알림 발송 */
 			for (String str : shareCancels) {
 				this.message_send_attachment_shareCancel(attachment, str);
 			}
-			/* 发送取消共享编辑通知 */
+			/* 공유 편집 취소 알림 발송 */
 			for (String str : editorCancels) {
 				this.message_send_attachment_editorCancel(attachment, str);
 			}

@@ -35,7 +35,7 @@ class ActionOrder extends BaseAction {
 			if (null == identity) {
 				throw new ExceptionIdentityNotExist(flag);
 			}
-			/** 重新加载对象,之前是从缓存中取得 */
+			/** 객체 다시 로드, 이전에는 캐시에서 가져옴 */
 			identity = emc.find(identity.getId(), Identity.class);
 			Unit unit = business.unit().pick(identity.getUnit());
 			if (null == unit) {
@@ -50,7 +50,7 @@ class ActionOrder extends BaseAction {
 				if (null == followIdentity) {
 					throw new ExceptionIdentityNotExist(followFlag);
 				}
-				/** 重新加载对象,之前是从缓存中取得 */
+				/** 객체 다시 로드, 이전에는 캐시에서 가져옴 */
 				followIdentity = emc.find(followIdentity.getId(), Identity.class);
 				if (followIdentity.equals(identity)) {
 					throw new ExceptionSameNotOrder(flag, followFlag);
@@ -58,7 +58,7 @@ class ActionOrder extends BaseAction {
 			}
 			List<Identity> os = this.list(business, identity.getUnit());
 			os = ListUtils.subtract(os, ListTools.toList(identity));
-			/** 至少有2条数据才需要排序 */
+			/** 데이터가 2건 이상일 때만 정렬 */
 			if (!os.isEmpty()) {
 				os = business.identity().sort(os);
 				if (null == followIdentity) {

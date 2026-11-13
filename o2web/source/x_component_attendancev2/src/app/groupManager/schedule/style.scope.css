@@ -98,7 +98,7 @@
   text-align: center;
 }
 
-/* 选中的框 */
+/* 선택된 상자 */
 .schedule_selectedFrame {
   position: absolute;
   border: 3px solid var(--oo-color-main);
@@ -167,7 +167,7 @@
   flex-direction: row;
   align-items: center;
 }
-/* 色块 */
+/* 색상 블록 */
 .shift_color_item {
   width: 8px;
   height: 8px;

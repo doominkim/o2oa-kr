@@ -47,9 +47,9 @@ public class ActionListDingdingSyncRecord extends BaseAction {
         static final WrapCopier<DingdingQywxSyncRecord, Wo> copier =
                 WrapCopierFactory.wo(DingdingQywxSyncRecord.class, Wo.class, null, JpaObject.FieldsInvisible);
 
-        @FieldDescribe("同步打卡记录的开始时间")
+        @FieldDescribe("출퇴근 기록 동기화 시작 시간")
         private Date dateFromFormat;
-        @FieldDescribe("同步打卡记录的结束时间")
+        @FieldDescribe("출퇴근 기록 동기화 종료 시간")
         private Date dateToFormat;
 
         public void formatDate() {

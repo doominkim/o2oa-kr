@@ -55,7 +55,7 @@ class ActionListShareToMe extends BaseAction {
 				}
 			}
 			shareIds = ListTools.trim(shareIds, true, true);
-			//去除设置屏蔽的共享文件
+			//차단 설정된 공유 파일 제외
 			List<String> shieldIds = business.share().listWithShieldUser1(effectivePerson.getDistinguishedName());
 			shareIds = ListUtils.subtract(shareIds, shieldIds);
 			List<Wo> wos = Wo.copier.copy(emc.list(Share.class, shareIds));
@@ -79,10 +79,10 @@ class ActionListShareToMe extends BaseAction {
 		static final WrapCopier<Share, Wo> copier = WrapCopierFactory.wo(Share.class, Wo.class, null,
 				JpaObject.FieldsInvisible);
 
-		@FieldDescribe("文件类型")
+		@FieldDescribe("파일 유형")
 		private String contentType;
 
-		@FieldDescribe("文件描述")
+		@FieldDescribe("파일 설명")
 		private String description;
 
 		public String getContentType() {

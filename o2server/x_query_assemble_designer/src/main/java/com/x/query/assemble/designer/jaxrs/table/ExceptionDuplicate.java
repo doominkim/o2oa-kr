@@ -7,6 +7,6 @@ class ExceptionDuplicate extends LanguagePromptException {
 	private static final long serialVersionUID = -9089355008820123519L;
 
 	ExceptionDuplicate(String queryName, String fieldName, Object value) {
-		super("与 {} 的数据表标识冲突, 冲突字段名{}, 冲突值:{}.", queryName, fieldName, value);
+		super("{}의 데이터 테이블 식별자와 충돌합니다, 충돌 필드 이름 {}, 충돌 값: {}.", queryName, fieldName, value);
 	}
 }

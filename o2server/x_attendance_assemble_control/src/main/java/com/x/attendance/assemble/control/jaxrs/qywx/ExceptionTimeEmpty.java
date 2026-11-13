@@ -9,6 +9,6 @@ import com.x.base.core.project.exception.PromptException;
 class ExceptionTimeEmpty extends PromptException {
 
     public ExceptionTimeEmpty() {
-        super("传入的时间参数不正确！");
+        super("전달된 시간 매개변수가 올바르지 않습니다!");
     }
 }

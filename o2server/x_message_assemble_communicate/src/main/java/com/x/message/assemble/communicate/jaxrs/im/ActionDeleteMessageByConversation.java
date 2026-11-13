@@ -26,22 +26,22 @@ public class ActionDeleteMessageByConversation extends BaseAction {
     ActionResult<Wo> execute(EffectivePerson effectivePerson, JsonElement jsonElement)
             throws Exception {
         if (!effectivePerson.isManager()) {
-            throw new ExceptionConversationCheckError("没有权限，需要管理员操作");
+            throw new ExceptionConversationCheckError("권한이 없습니다. 관리자가 처리해야 합니다");
         }
         Wi wi = this.convertToWrapIn(jsonElement, Wi.class);
         if (StringUtils.isEmpty(wi.getConversationId()) && StringUtils.isEmpty(wi.getBeforeDay())) {
-            throw new ExceptionConversationCheckError("至少需要一个参数");
+            throw new ExceptionConversationCheckError("매개변수가 하나 이상 필요합니다");
         }
         if (StringUtils.isNotEmpty(wi.getBeforeDay())) {
             var date = DateTools.parseDate(wi.getBeforeDay());
             if (date == null) {
-                throw new ExceptionConversationCheckError("日期不正确！");
+                throw new ExceptionConversationCheckError("날짜가 올바르지 않습니다!");
             }
             if (date.after(new Date())) {
-                throw new ExceptionConversationCheckError("日期不正确！");
+                throw new ExceptionConversationCheckError("날짜가 올바르지 않습니다!");
             }
         }
-        LOGGER.info("消息删除开始执行 执行人：{} ，删除条件：{}", effectivePerson.getDistinguishedName(), wi.toString());
+        LOGGER.info("메시지 삭제 실행 시작 실행자:{} , 삭제 조건:{}", effectivePerson.getDistinguishedName(), wi.toString());
         ActionResult<Wo> result = new ActionResult<>();
         Wo wo = new Wo();
         startThread(wi);
@@ -58,7 +58,7 @@ public class ActionDeleteMessageByConversation extends BaseAction {
             try {
                 deleteMessages(wi);
             } catch (Exception e) {
-                LOGGER.info("删除消息任务失败，{}", wi.toString());
+                LOGGER.info("메시지 삭제 작업 실패, {}", wi.toString());
                 LOGGER.error(e);
             }
         });
@@ -75,7 +75,7 @@ public class ActionDeleteMessageByConversation extends BaseAction {
             int count = 0;
             boolean hasMore = true;
             while (hasMore) {
-                // 因为正在删除数据，所以一直只查询第一页
+                // 데이터를 삭제 중이므로 항상 첫 페이지만 조회
                 List<IMMsg> msgList = business.imConversationFactory()
                         .listMsgWithConversation(1, 20, wi.getConversationId(), beforeDate);
                 if (null != msgList && !msgList.isEmpty()) {
@@ -93,7 +93,7 @@ public class ActionDeleteMessageByConversation extends BaseAction {
                     hasMore = false;
                 }
             }
-            LOGGER.info("  删除消息数量 " + count + " ！！！！！！！！！");
+            LOGGER.info("  삭제한 메시지 수 " + count + " ！！！！！！！！！");
         }
     }
 
@@ -101,10 +101,10 @@ public class ActionDeleteMessageByConversation extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("会话id")
+        @FieldDescribe("대화 id")
         private String conversationId;
 
-        @FieldDescribe("截止日期(yyyy-MM-dd), 任务会删除这个截止日期以前的所有消息数据 .")
+        @FieldDescribe("마감일(yyyy-MM-dd). 작업이 이 마감일 이전의 모든 메시지 데이터를 삭제합니다 .")
         private String beforeDay;
 
         public String getBeforeDay() {

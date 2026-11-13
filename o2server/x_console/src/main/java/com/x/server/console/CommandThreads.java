@@ -93,7 +93,7 @@ public class CommandThreads {
 	}
 
 	/**
-	 * 读取本地文件中的内容并写入commandQueue
+	 * 로컬 파일 내용을 읽어 commandQueue에 기록
 	 * 
 	 * @param commandQueue
 	 * @return
@@ -102,22 +102,22 @@ public class CommandThreads {
 	private static void fromFile(LinkedBlockingQueue<String> commandQueue) throws InterruptedException {
 		try (RandomAccessFile file = new RandomAccessFile(Config.base() + "/command.swap", "rw");
 				FileChannel channel = file.getChannel()) {
-			FileLock lock = channel.lock(); // 锁定文件
+			FileLock lock = channel.lock(); // 파일 잠금
 			if (file.length() > 0) {
 				ByteBuffer buffer = ByteBuffer.allocate((int) file.length());
 				channel.read(buffer);
 				buffer.flip();
 				commandQueue.put(new String(buffer.array(), StandardCharsets.UTF_8));
-				file.setLength(0); // 清空文件
+				file.setLength(0); // 파일 비우기
 			}
-			lock.release(); // 释放文件锁
+			lock.release(); // 파일 잠금 해제
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * 从System.console读取输入值并写入commandQueue,需要使用System.console如果使用system.in导致windows控制台没有输出,可以盲打.
+	 * System.console에서 입력값을 읽어 commandQueue에 기록, System.console을 사용해야 함. system.in을 쓰면 windows 콘솔에 출력이 없어 입력이 보이지 않음.
 	 * 
 	 * @param commandQueue
 	 * @param reader

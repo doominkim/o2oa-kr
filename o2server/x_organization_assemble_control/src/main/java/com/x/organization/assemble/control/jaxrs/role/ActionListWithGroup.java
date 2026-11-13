@@ -56,14 +56,14 @@ class ActionListWithGroup extends BaseAction {
 	}
 
 	private List<Wo> list(Business business, String groupFlag) throws Exception {
-		/** 检查Group是否存在 */
+		/** Group 존재 여부 확인 */
 		Group group = business.group().pick(groupFlag);
 		if (null == group) {
 			throw new ExceptionGroupNotExist(groupFlag);
 		}
 		List<String> groups = new ArrayList<>();
 		groups.addAll(business.group().listSupNested(group.getId()));
-		/* 将自己加入到查询中 */
+		/* 자신을 조회에 추가 */
 		groups.add(group.getId());
 		EntityManager em = business.entityManagerContainer().get(Role.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();

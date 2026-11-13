@@ -25,7 +25,7 @@ import com.x.file.core.entity.open.FileStatus;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Folder2", description = "云文件个人新文件夹.")
+@Schema(name = "Folder2", description = "클라우드 파일 개인 신규 폴더.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.Personal.Folder2.table, uniqueConstraints = {
@@ -46,16 +46,16 @@ public class Folder2 extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		this.lastUpdateTime = new Date();
-		/* 如果为顶层，那么将上级目录设置为空 */
+		/* 최상위이면 상위 디렉터리를 비움 */
 		this.superior = StringUtils.trimToEmpty(this.superior);
 	}
 
@@ -71,40 +71,40 @@ public class Folder2 extends SliceJpaObject {
 		this.lastUpdateTime = new Date();
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String person_FIELDNAME = "person";
-	@FieldDescribe("所属用户.")
+	@FieldDescribe("소속 사용자.")
 	@Column(length = length_255B, name = ColumnNamePrefix + person_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + person_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String person;
 
 	public static final String name_FIELDNAME = "name";
-	@FieldDescribe("分类名称.")
+	@FieldDescribe("분류 이름.")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, fileNameString = true, citationNotExists =
-	/* 同一个用户同一个目录下不能有重名 */
+	/* 같은 사용자의 같은 디렉터리 내 이름 중복 불가 */
 	@CitationNotExist(fields = { "name", "id" }, type = Folder2.class, equals = {
 			@Equal(property = "person", field = "person"), @Equal(property = "superior", field = "superior"),
 			@Equal(property = "status", field = "status") }))
 	private String name;
 
 	public static final String superior_FIELDNAME = "superior";
-	@FieldDescribe("上级目录ID。")
+	@FieldDescribe("상위 디렉터리 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + superior_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + superior_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String superior;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("文件状态：正常|已删除")
+	@FieldDescribe("파일 상태: 정상|삭제됨")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String status = FileStatus.VALID.getName();
 
 	public static final String lastUpdateTime_FIELDNAME = "lastUpdateTime";
-	@FieldDescribe("最后更新时间")
+	@FieldDescribe("최종 수정 시간")
 	@Column(name = ColumnNamePrefix + lastUpdateTime_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + lastUpdateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

@@ -7,7 +7,7 @@ class ExceptionNotManual extends PromptException {
 	private static final long serialVersionUID = -7038279889683420366L;
 
 	ExceptionNotManual(String activityId) {
-		super("非人工节点:{}.", activityId);
+		super("사람 처리 단계가 아닙니다: {}.", activityId);
 	}
 
 }

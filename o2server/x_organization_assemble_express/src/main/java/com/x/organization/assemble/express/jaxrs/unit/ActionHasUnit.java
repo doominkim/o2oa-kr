@@ -19,7 +19,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 校验组织是否包含指定组织
+ * 조직이 지정 조직을 포함하는지 확인
  */
 class ActionHasUnit extends BaseAction {
 
@@ -46,13 +46,13 @@ class ActionHasUnit extends BaseAction {
 
     public static class Wi extends GsonPropertyObject {
 
-        @FieldDescribe("*子组织，查询该组织是否是unit的子组织")
+        @FieldDescribe("*하위 조직, 이 조직이 unit의 하위 조직인지 조회")
         private String subUnit;
 
-        @FieldDescribe("*组织")
+        @FieldDescribe("*조직")
         private String unit;
 
-        @FieldDescribe("*是否递归查找组织(true|false), 默认为true")
+        @FieldDescribe("*조직 재귀 조회 여부(true|false), 기본값 true")
         private Boolean recursive = true;
 
         public String getSubUnit() {

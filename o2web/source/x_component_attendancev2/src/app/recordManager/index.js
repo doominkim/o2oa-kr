@@ -21,18 +21,18 @@ export default content({
         endDate: "",
         recursive: true,
       },
-      units: [], // 控制组织选择的范围
+      units: [], // 조직 선택 범위 제어
       filterList:[],
       pagerData: {
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
     };
   },
   beforeRender() {
-    // 当前用户的选择范围
+    // 현재 사용자의 선택 범위
     if (content.myDutyList && content.myDutyList.length > 0) {
       let units = [];
       for (let i = 0; i < content.myDutyList.length; i++) {
@@ -52,7 +52,7 @@ export default content({
       this.loadRecordlList();
     }
   },
-  // 打开更多详细内容
+  // 상세 내용 더 보기
   openMore(record) {
     this.$parent.openRecordDetailVm({bind: { record: record }});
   },
@@ -194,11 +194,11 @@ export default content({
     return "";
   },
 
-   // excel导入请假数据
+   // excel로 휴가 데이터 가져오기
    importExcel() {
      chooseSingleFile((file)=> this._uploadExcel(file))
   },
-  // 读取选择的文件并上传到服务器
+  // 선택한 파일을 읽어 서버에 업로드
   async _uploadExcel(file) {
     const fileExt = file.name.substring(file.name.lastIndexOf("."));
     console.debug("파일 이름", file.name, fileExt);
@@ -234,7 +234,7 @@ export default content({
       );
     }
   },
-  // 下载导入结果
+  // 가져오기 결과 다운로드
   downloadImportResult(resultFlag) {
     if (resultFlag) {
       const dAction = o2.Actions.load("x_attendance_assemble_control").LeaveAction.action;
@@ -244,7 +244,7 @@ export default content({
       window.open(o2.filterUrl(url));
     }
   },
-  // 下载excel模板
+  // excel 템플릿 다운로드
   excelTemplateDownload() {
     const dAction = o2.Actions.load("x_attendance_assemble_control").RecordAction.action;
     let url =  dAction.getAddress() + dAction.actions.template.uri;

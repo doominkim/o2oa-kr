@@ -14,7 +14,7 @@ import com.x.jpush.core.entity.PushDevice;
 import com.x.jpush.core.entity.PushDevice_;
 
 /**
- * 示例数据表基础功能服务类
+ * 예시 데이터 테이블 기본 기능 서비스 클래스
  */
 public class PushDeviceFactory extends AbstractFactory {
 
@@ -23,7 +23,7 @@ public class PushDeviceFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据unique 查询设备
+	 * unique로 기기 조회
 	 * 
 	 * @param unique
 	 * @return
@@ -44,7 +44,7 @@ public class PushDeviceFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 设备是否存在
+	 * 기기 존재 여부
 	 * 
 	 * @param unique md5(deviceType+deviceId+pushType+person)
 	 * @return
@@ -65,7 +65,7 @@ public class PushDeviceFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询用户的极光推送的设备列表
+	 * 사용자의 JPush 푸시 기기 목록 조회
 	 * 
 	 * @param person
 	 * @return
@@ -76,7 +76,7 @@ public class PushDeviceFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 查询用户的华为推送的设备列表
+	 * 사용자의 화웨이 푸시 기기 목록 조회
 	 * 
 	 * @param person
 	 * @return

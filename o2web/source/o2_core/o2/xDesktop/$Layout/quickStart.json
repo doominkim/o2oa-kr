@@ -1,7 +1,7 @@
 {
   "navi": [
     //		{
-    //			"title": "流程管理",
+    //			"title": "프로세스 관리",
     //			"action": "process.ApplicationExplorer",
     //			"icon": "process.png"
     //		},
@@ -11,7 +11,7 @@
       "icon": "task.png"
     },
     //    {
-    //      "title": "内容管理",
+    //      "title": "콘텐츠 관리",
     //      "action": "cms.Index",
     //      "icon": "cms.png"
     //    },
@@ -22,7 +22,7 @@
     },
 
     //        {
-    //          "title": "邮件系统",
+    //          "title": "메일 시스템",
     //          "action": "VsettanMail",
     //          "icon": "mail.png"
     //        },

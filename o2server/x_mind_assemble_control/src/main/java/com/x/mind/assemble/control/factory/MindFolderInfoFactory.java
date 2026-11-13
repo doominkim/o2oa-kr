@@ -17,11 +17,11 @@ import com.x.mind.entity.MindFolderInfo_;
 
 
 /**
- * 类   名：MindFolderInfoFactory<br/>
- * 实体类：MindFolderInfo<br/>
- * 作   者：O2LEE<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-11-15 17:17:26 
+ * 클래스 이름: MindFolderInfoFactory<br/>
+ * 엔티티 클래스: MindFolderInfo<br/>
+ * 작성자: O2LEE<br/>
+ * 소속: O2 Team<br/>
+ * 일시: 2016-11-15 17:17:26 
 **/
 public class MindFolderInfoFactory extends AbstractFactory {
 
@@ -30,7 +30,7 @@ public class MindFolderInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 获取指定Id的脑图文件夹实体信息对象
+	 * 지정 Id의 마인드맵 폴더 엔티티 정보 객체 조회
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -40,7 +40,7 @@ public class MindFolderInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示指定Id的脑图文件夹实体信息列表
+	 * 지정 Id의 마인드맵 폴더 엔티티 정보 목록 조회
 	 * @param ids
 	 * @return
 	 * @throws Exception
@@ -59,7 +59,7 @@ public class MindFolderInfoFactory extends AbstractFactory {
 	}
 	
 	/**
-	 * 列示全部的脑图文件夹实体信息列表
+	 * 전체 마인드맵 폴더 엔티티 정보 목록 조회
 	 * @return
 	 * @throws Exception
 	 */
@@ -73,7 +73,7 @@ public class MindFolderInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询符合条件的目录信息条目数量
+	 * 조건에 맞는 디렉터리 정보 건수 조회
 	 * @param parentId
 	 * @param folderId
 	 * @param name
@@ -106,7 +106,7 @@ public class MindFolderInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据条件查询符合条件的目录信息
+	 * 조건에 맞는 디렉터리 정보 조회
 	 * @param parentId
 	 * @param folderId
 	 * @param name
@@ -139,7 +139,7 @@ public class MindFolderInfoFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据文件夹ID，获取所有下级文件夹个数
+	 * 폴더 ID로 모든 하위 폴더 수 조회
 	 * @param folderId
 	 * @return
 	 * @throws Exception

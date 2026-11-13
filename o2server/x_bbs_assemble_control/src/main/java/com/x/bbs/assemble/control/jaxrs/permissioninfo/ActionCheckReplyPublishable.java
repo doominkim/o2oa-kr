@@ -39,7 +39,7 @@ public class ActionCheckReplyPublishable extends BaseAction {
 				result.error(exception);
 			}
 		}
-		if (check) {// 获取用户的权限列表
+		if (check) {// 사용자 권한 목록 조회
 			if ("anonymous".equalsIgnoreCase(effectivePerson.getTokenType().name())) {
 				roleAndPermission = new RoleAndPermission();
 			} else {
@@ -49,7 +49,7 @@ public class ActionCheckReplyPublishable extends BaseAction {
 					check = false;
 					publishAble = false;
 					Exception exception = new ExceptionPermissionInfoProcess(e,
-							"获取用户的论坛访问权限列表时发生异常.Person:" + effectivePerson.getDistinguishedName());
+							"사용자의 포럼 접근 권한 목록을 가져오는 중 오류가 발생했습니다. Person:" + effectivePerson.getDistinguishedName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -61,7 +61,7 @@ public class ActionCheckReplyPublishable extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				publishAble = false;
-				Exception exception = new ExceptionPermissionInfoProcess(e, "根据指定ID查询主题信息时发生异常.ID:" + subjectId);
+				Exception exception = new ExceptionPermissionInfoProcess(e, "지정한 ID로 주제 정보를 조회하는 중 오류가 발생했습니다. ID:" + subjectId);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -81,14 +81,14 @@ public class ActionCheckReplyPublishable extends BaseAction {
 				}
 			}
 		}
-		if (check && publishAble) { // 再判断用户是否可以在主题所在的版块进行回复
+		if (check && publishAble) { // 사용자가 주제가 속한 게시판에서 답글을 달 수 있는지 다시 판단
 			try {
 				sectionInfo = sectionInfoService.get(subjectInfo.getSectionId());
 			} catch (Exception e) {
 				check = false;
 				publishAble = false;
 				Exception exception = new ExceptionPermissionInfoProcess(e,
-						"根据指定ID查询版块信息时发生异常.ID:" + subjectInfo.getSectionId());
+						"지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + subjectInfo.getSectionId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -101,7 +101,7 @@ public class ActionCheckReplyPublishable extends BaseAction {
 				result.error(exception);
 			} else {
 				if ("所有人".equals(sectionInfo.getReplyPublishAble())) {
-				} else {// 判断权限
+				} else {// 권한 판단
 					checkUserPermission = "SECTION_REPLY_PUBLISH_" + sectionInfo.getId();
 					hasPermission = checkUserPermission(checkUserPermission, roleAndPermission.getPermissionInfoList());
 					if (!hasPermission) {
@@ -123,7 +123,7 @@ public class ActionCheckReplyPublishable extends BaseAction {
 		
 		public static List<String> Excludes = new ArrayList<String>();
 		
-		//是否拥有权限
+		//권한 보유 여부
 		private Boolean checkResult = false;
 
 		public Boolean getCheckResult() {

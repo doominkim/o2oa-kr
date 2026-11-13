@@ -32,11 +32,11 @@ import com.x.bbs.assemble.control.jaxrs.replyinfo.exception.ExceptionReplyInfoPr
 import com.x.bbs.assemble.control.jaxrs.roleinfo.exception.ExceptionRoleInfoProcess;
 
 @Path("user/reply")
-@JaxrsDescribe("主量回复服务")
+@JaxrsDescribe("답글 관리 서비스")
 public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 	private static Logger logger = LoggerFactory.getLogger(ReplyInfoManagerUserAction.class);
 
-	@JaxrsMethodDescribe(value = "创建新的回贴信息或者更新回贴信息.", action = ActionSave.class)
+	@JaxrsMethodDescribe(value = "새 답글 정보 생성 또는 답글 정보 수정.", action = ActionSave.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -51,7 +51,7 @@ public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionSave().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionReplyInfoProcess(e, "创建新的回贴信息或者更新回贴信息时发生异常！");
+				Exception exception = new ExceptionReplyInfoProcess(e, "댓글을 생성 또는 수정하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -59,7 +59,7 @@ public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "采纳回复信息.", action = ActionAcceptReply.class)
+	@JaxrsMethodDescribe(value = "답글 채택.", action = ActionAcceptReply.class)
 	@Path("accept")
 	@PUT
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -75,7 +75,7 @@ public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionAcceptReply().execute(request, effectivePerson, jsonElement);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionRoleInfoProcess(e, "采纳回复信息时发生异常！");
+				Exception exception = new ExceptionRoleInfoProcess(e, "댓글 채택 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -84,19 +84,19 @@ public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 	}
 
 	/**
-	 * 用户只有自己的回复可以删除 管理员和版主可以删除其他回复内容
+	 * 사용자는 본인 답글만 삭제 가능, 관리자와 게시판 관리자는 다른 답글도 삭제 가능
 	 * 
 	 * @param request
 	 * @param id
 	 * @return
 	 */
-	@JaxrsMethodDescribe(value = "根据ID删除指定的回贴信息.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "ID로 지정 답글 정보 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("回复信息ID") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("답글 정보 ID") @PathParam("id") String id) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -112,7 +112,7 @@ public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionDelete().execute(request, effectivePerson, id);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据ID删除指定的回贴信息时发生异常！");
+				Exception exception = new ExceptionReplyInfoProcess(e, "ID로 지정한 댓글을 삭제하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -120,14 +120,14 @@ public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示我发表的回贴,下一页.", action = ActionListMyReplyForPages.class)
+	@JaxrsMethodDescribe(value = "내가 작성한 답글 목록, 다음 페이지.", action = ActionListMyReplyForPages.class)
 	@PUT
 	@Path("my/list/page/{page}/count/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listMyReplyForPage(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("前一页最后一条记录ID") @PathParam("page") Integer page,
-			@JaxrsParameterDescribe("每页显示条目数量") @PathParam("count") Integer count, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("이전 페이지 마지막 레코드 ID") @PathParam("page") Integer page,
+			@JaxrsParameterDescribe("페이지당 표시 항목 수") @PathParam("count") Integer count, JsonElement jsonElement) {
 		ActionResult<List<ActionListMyReplyForPages.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		Boolean check = true;
@@ -137,7 +137,7 @@ public class ReplyInfoManagerUserAction extends StandardJaxrsAction {
 				result = new ActionListMyReplyForPages().execute(request, effectivePerson, page, count);
 			} catch (Exception e) {
 				result = new ActionResult<>();
-				Exception exception = new ExceptionReplyInfoProcess(e, "列示我发表的回贴下一页时发生异常！");
+				Exception exception = new ExceptionReplyInfoProcess(e, "내가 작성한 댓글의 다음 페이지를 조회하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

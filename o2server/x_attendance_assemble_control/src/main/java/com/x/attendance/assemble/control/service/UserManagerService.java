@@ -16,7 +16,7 @@ import com.x.base.core.project.organization.Unit;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 用户组织顶层组织信息管理服务类
+ * 사용자 조직 최상위 조직 정보 관리 서비스 클래스
  * 
  * @author LIYI
  *
@@ -34,10 +34,10 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据员工获取所在组织 如果用户有多个身份，则取组织级别最大的组织名称
+	 * 직원의 소속 조직 조회, 사용자 신분이 여러 개면 조직 등급이 가장 높은 조직 이름 사용
 	 * 
 	 * @param personName dn
-	 * @return unit 也是 dn
+	 * @return unit 역시 dn
 	 * @throws Exception
 	 */
 	public String getUnitNameWithPersonName(String personName) throws Exception {
@@ -89,7 +89,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据身份名称获取组织名称
+	 * 신분 이름으로 조직 이름 조회
 	 * 
 	 * @param identity
 	 * @return
@@ -108,7 +108,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据身份名称获取组织名称
+	 * 신분 이름으로 조직 이름 조회
 	 * 
 	 * @param identity
 	 * @return
@@ -128,7 +128,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据身份名称获取顶层组织名称
+	 * 신분 이름으로 최상위 조직 이름 조회
 	 * 
 	 * @param identity
 	 * @return
@@ -147,7 +147,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 检查组织名称是否有效
+	 * 조직 이름 유효성 확인
 	 * 
 	 * @param unitName
 	 * @return
@@ -165,7 +165,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据员工姓名获取顶层组织名称，多个身份只取第一个身份
+	 * 직원 이름으로 최상위 조직 이름 조회, 신분이 여러 개면 첫 번째 신분만 사용
 	 * 
 	 * @param personName
 	 * @return
@@ -177,7 +177,7 @@ public class UserManagerService {
 		Business business = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			// 兼容一下传过来的personName有可能是个人，有可能是身份
+			// 전달된 personName이 개인일 수도, 신분일 수도 있으므로 호환 처리
 			personName = business.organization().person().get(personName);
 			identity = getIdentityWithPerson(personName);
 			if (StringUtils.isNotEmpty(identity)) {
@@ -191,7 +191,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据个人姓名获取所有身份中组织等级最高的一个身份
+	 * 개인 이름으로 모든 신분 중 조직 등급이 가장 높은 신분 조회
 	 * 
 	 * @param personName
 	 * @return
@@ -206,7 +206,7 @@ public class UserManagerService {
 		Business business = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			// 兼容一下传过来的personName有可能是个人，有可能是身份
+			// 전달된 personName이 개인일 수도, 신분일 수도 있으므로 호환 처리
 			personName = business.organization().person().get(personName);
 			identities = business.organization().identity().listWithPerson(personName);
 			if (identities != null && !identities.isEmpty()) {
@@ -224,7 +224,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 获取上级组织名称
+	 * 상위 조직 이름 조회
 	 * 
 	 * @param unitName
 	 * @return
@@ -258,7 +258,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据组织名称获取顶层组织名称(递归)
+	 * 조직 이름으로 최상위 조직 이름 조회(재귀)
 	 * 
 	 * @param unitName
 	 * @return
@@ -320,7 +320,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据上级组织名称获取所有下级组织名称列表
+	 * 상위 조직 이름으로 모든 하위 조직 이름 목록 조회
 	 * 
 	 * @param parentUnitName
 	 * @return
@@ -343,7 +343,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据组织名称获取所有人(递归)
+	 * 조직 이름으로 모든 사용자 조회(재귀)
 	 *
 	 * @param Unit
 	 * @return
@@ -358,7 +358,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据人员姓名获取人员姓名
+	 * 사용자 이름으로 사용자 이름 조회
 	 * 
 	 * @param name
 	 * @return
@@ -376,7 +376,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据个人姓名，根据个人姓名获取主身份
+	 * 개인 이름으로 주 신분 조회
 	 *
 	 * @param personName
 	 * @return
@@ -387,7 +387,7 @@ public class UserManagerService {
 		Business business = null;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			business = new Business(emc);
-			// 兼容一下传过来的perosnName有可能是个人，有可能是身份
+			// 전달된 perosnName이 개인일 수도, 신분일 수도 있으므로 호환 처리
 			personName = business.organization().person().get(personName);
 			identities = business.organization().identity().listWithPerson(personName);
 			if (ListTools.isNotEmpty(identities)) {
@@ -408,7 +408,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据人员身份信息获取人员姓名
+	 * 사용자 신분 정보로 사용자 이름 조회
 	 * 
 	 * @param identityName
 	 * @return
@@ -426,7 +426,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 检查人员是否存在
+	 * 사용자 존재 여부 확인
 	 * 
 	 * @param personName
 	 * @return
@@ -486,7 +486,7 @@ public class UserManagerService {
 	}
 
 	/**
-	 * 根据个人获取汇报对象
+	 * 개인으로 보고 대상 조회
 	 * 
 	 * @param personName
 	 * @return
@@ -538,13 +538,13 @@ public class UserManagerService {
 			try {
 				unitName = getUnitNameWithPersonName(personName);
 			} catch (NullPointerException ex) {
-				throw new Exception("根据个人查询组织信息发生异常。person:" + personName);
+				throw new Exception("개인으로 조직 정보를 조회하는 중 오류가 발생했습니다. person:" + personName);
 			}
 			if (unitName == null || unitName.isEmpty()) {
 				try {
 					unitName = getUnitNameWithIdentity(personName);
 				} catch (NullPointerException ex) {
-					throw new Exception("根据个人查询组织信息发生异常。person:" + personName);
+					throw new Exception("개인으로 조직 정보를 조회하는 중 오류가 발생했습니다. person:" + personName);
 				}
 			}
 			if (unitName == null || unitName.isEmpty()) {
@@ -553,7 +553,7 @@ public class UserManagerService {
 				try {
 					return business.organization().unitDuty().listIdentityWithUnitWithName(unitName, dutyName);
 				} catch (NullPointerException ex) {
-					throw new Exception("根据组织查询组织职位时发生异常。unitName:" + unitName + ", dutyName:" + dutyName);
+					throw new Exception("조직으로 조직 직무를 조회하는 중 오류가 발생했습니다. unitName:" + unitName + ", dutyName:" + dutyName);
 				}
 			}
 		}
@@ -573,15 +573,15 @@ public class UserManagerService {
 			try {
 				unitName = getUnitNameWithIdentity(identity);
 			} catch (NullPointerException ex) {
-				throw new Exception("根据个人身份查询组织信息发生异常。identity:" + identity);
+				throw new Exception("개인 소속으로 조직 정보를 조회하는 중 오류가 발생했습니다. identity:" + identity);
 			}
 			if (unitName == null || unitName.isEmpty()) {
-				throw new Exception("根据个人身份未查询到所属的组织信息。identity:" + identity);
+				throw new Exception("개인 소속으로 상위 조직 정보를 찾을 수 없습니다. identity:" + identity);
 			} else {
 				try {
 					return business.organization().unitDuty().listIdentityWithUnitWithName(unitName, dutyName);
 				} catch (NullPointerException ex) {
-					throw new Exception("根据组织查询组织职位时发生异常。unitName:" + unitName + ", dutyName:" + dutyName);
+					throw new Exception("조직으로 조직 직무를 조회하는 중 오류가 발생했습니다. unitName:" + unitName + ", dutyName:" + dutyName);
 				}
 			}
 		}

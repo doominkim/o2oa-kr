@@ -26,12 +26,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("sso")
-@JaxrsDescribe("单点登录")
+@JaxrsDescribe("SSO 로그인")
 public class SsoAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(SsoAction.class);
 
-	@JaxrsMethodDescribe(value = "POST方法,使用token进行Sso登陆。格式加密后的credential#1970年毫秒数", action = ActionPostLogin.class)
+	@JaxrsMethodDescribe(value = "POST 방식, token으로 Sso 로그인. 형식: 암호화된 credential#1970년 기준 밀리초", action = ActionPostLogin.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -48,14 +48,14 @@ public class SsoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "GET方法,使用token进行Sso登陆。格式加密后的credential#1970年毫秒数", action = ActionGetLogin.class)
+	@JaxrsMethodDescribe(value = "GET 방식, token으로 Sso 로그인. 형식: 암호화된 credential#1970년 기준 밀리초", action = ActionGetLogin.class)
 	@GET
 	@Path("client/{client}/token/{token}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getLogin(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@Context HttpServletResponse response, @JaxrsParameterDescribe("标识") @PathParam("client") String client,
-			@JaxrsParameterDescribe("令牌") @PathParam("token") String token) {
+			@Context HttpServletResponse response, @JaxrsParameterDescribe("식별자") @PathParam("client") String client,
+			@JaxrsParameterDescribe("토큰") @PathParam("token") String token) {
 		ActionResult<ActionGetLogin.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -67,7 +67,7 @@ public class SsoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "POST方法,进行3DES加密,用于不方便进行加密的场景.", action = ActionPostEncrypt.class)
+	@JaxrsMethodDescribe(value = "POST 방식, 3DES 암호화 수행, 암호화가 불편한 경우에 사용.", action = ActionPostEncrypt.class)
 	@POST
 	@Path("encrypt")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -85,15 +85,15 @@ public class SsoAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "GET方法,进行3DES加密,用于不方便进行加密的场景.", action = ActionGetEncrypt.class)
+	@JaxrsMethodDescribe(value = "GET 방식, 3DES 암호화 수행, 암호화가 불편한 경우에 사용.", action = ActionGetEncrypt.class)
 	@GET
 	@Path("encrypt/client/{client}/key/{key}/credential/{credential}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void getEncrypt(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@Context HttpServletResponse response, @JaxrsParameterDescribe("标识") @PathParam("client") String client,
-			@JaxrsParameterDescribe("口令") @PathParam("key") String key,
-			@JaxrsParameterDescribe("凭证") @PathParam("credential") String credential) {
+			@Context HttpServletResponse response, @JaxrsParameterDescribe("식별자") @PathParam("client") String client,
+			@JaxrsParameterDescribe("암호") @PathParam("key") String key,
+			@JaxrsParameterDescribe("자격 증명") @PathParam("credential") String credential) {
 		ActionResult<ActionGetEncrypt.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

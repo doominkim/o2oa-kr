@@ -7,6 +7,6 @@ class ExceptionDenyDeleteDefaultRole extends LanguagePromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionDenyDeleteDefaultRole(String name) {
-		super("不能删除系统默认角色:{}.", name);
+		super("시스템 기본 역할은 삭제할 수 없습니다: {}.", name);
 	}
 }

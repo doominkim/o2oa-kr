@@ -47,7 +47,7 @@ public class ActionGetConfig extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAppInfoProcess( e, "根据指定id查询栏目配置支持信息对象时发生异常。id:" + id );
+					Exception exception = new ExceptionAppInfoProcess( e, "지정한 id로 게시판 설정 정보 객체를 조회하는 중 오류가 발생했습니다. id:" + id );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}

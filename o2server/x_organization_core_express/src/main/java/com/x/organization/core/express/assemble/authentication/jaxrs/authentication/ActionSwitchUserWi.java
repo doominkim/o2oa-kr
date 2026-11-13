@@ -9,8 +9,8 @@ public class ActionSwitchUserWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 8266452052001813770L;
 	
-	@FieldDescribe("用户凭证.")
-	@Schema(description = "用户凭证.")
+	@FieldDescribe("사용자 자격 증명.")
+	@Schema(description = "사용자 자격 증명.")
 	private String credential;
 
 	public String getCredential() {

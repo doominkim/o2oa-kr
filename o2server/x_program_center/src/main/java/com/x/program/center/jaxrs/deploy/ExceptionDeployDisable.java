@@ -7,7 +7,7 @@ class ExceptionDeployDisable extends PromptException {
 	private static final long serialVersionUID = -5285650034988505084L;
 
 	public ExceptionDeployDisable() {
-		super("禁用部署.");
+		super("배포가 비활성화되었습니다.");
 	}
 
 }

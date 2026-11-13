@@ -8,7 +8,7 @@ o2.widget.monaco = {
                 this.isLoadding = true;
                 o2.load("monaco", {"sequence": true}, function(){
                     var currentScriptPath = window.location.href;
-                    var baseUrl = currentScriptPath.substring(0, currentScriptPath.lastIndexOf('/') + 1) + '../o2_lib/'; // 计算 baseUrl
+                    var baseUrl = currentScriptPath.substring(0, currentScriptPath.lastIndexOf('/') + 1) + '../o2_lib/'; // baseUrl 계산
                     require.config({
                         baseUrl: baseUrl,
                         paths: { "vs": "vs/min/vs" }

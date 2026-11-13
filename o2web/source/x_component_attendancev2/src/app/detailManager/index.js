@@ -14,7 +14,7 @@ export default content({
   bind() {
     return {
       lp,
-      // 搜索表单
+      // 검색 양식
       form: {
         userId: '',
         startDate: '',
@@ -22,18 +22,18 @@ export default content({
         recursive: true
       },
       filterList: [],
-      units: [], // 控制组织选择的范围
+      units: [], // 조직 선택 범위 제어
       detailList: [],
       pagerData: {
         page: 1,
         totalCount: 0,
         totalPage: 1,
-        size: 15, // 每页条目数
+        size: 15, // 페이지당 항목 수
       },
     };
   },
   beforeRender() {
-    // 前一天 当天没有数据
+    // 전날 당일 데이터 없음
     const today = new Date();
     let year = today.getFullYear();
     let m =  today.getMonth(); 
@@ -51,7 +51,7 @@ export default content({
     const chooseDate = `${year}-${month}-${day}`;
     this.bind.form.startDate = chooseDate;
     this.bind.form.endDate = chooseDate;
-    // 当前用户的选择范围
+    // 현재 사용자의 선택 범위
     if (content.myDutyList && content.myDutyList.length > 0) {
       let units = [];
       for (let i = 0; i < content.myDutyList.length; i++) {
@@ -145,7 +145,7 @@ export default content({
     }
     return person;
   },
-  // 格式化工作时长
+  // 근무 시간 포맷
   formatWorkTimeDuration(workTime) {
     return convertMinutesToHoursAndMinutes(workTime);
   },

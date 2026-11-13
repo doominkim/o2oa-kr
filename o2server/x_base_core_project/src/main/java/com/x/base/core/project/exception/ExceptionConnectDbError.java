@@ -5,6 +5,6 @@ public class ExceptionConnectDbError extends PromptException {
 	private static final long serialVersionUID = 8121998765154409958L;
 
 	public ExceptionConnectDbError() {
-		super("连接到数据库异常，请联系管理员.");
+		super("데이터베이스 연결에 실패했습니다. 관리자에게 문의하십시오.");
 	}
 }

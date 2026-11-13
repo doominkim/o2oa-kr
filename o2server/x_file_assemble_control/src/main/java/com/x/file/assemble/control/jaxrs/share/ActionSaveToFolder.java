@@ -37,14 +37,14 @@ class ActionSaveToFolder extends BaseAction {
 				if (folder == null) {
 					throw new ExceptionFolderNotExist(folderId);
 				}
-				/* 判断目录的所有者是否是当前用户 */
+				/* 디렉터리 소유자가 현재 사용자인지 판단 */
 				if (!StringUtils.equals(effectivePerson.getDistinguishedName(), folder.getPerson())) {
 					throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName(), folderId);
 				}
 			}else{
 				folderId = Business.TOP_FOLD;
 			}
-			/* 判断文件的分享用户是否包含当前用户 */
+			/* 파일 공유 사용자에 현재 사용자가 포함되는지 판단 */
 			if(!Share.SHARE_TYPE_PASSWORD.equals(share.getShareType())) {
 				if(!hasPermission(business,effectivePerson,share)){
 					throw new ExceptionAccessDenied(effectivePerson.getDistinguishedName());
@@ -61,7 +61,7 @@ class ActionSaveToFolder extends BaseAction {
 				throw new ExceptionFieldEmpty(Share.fileId_FIELDNAME);
 			}
 
-			/* 转存文件或目录到指定的目录下 */
+			/* 파일 또는 디렉터리를 지정 디렉터리로 저장 */
 			saveToFolder(business, share, fileId, folderId, effectivePerson);
 
 			Wo wo = new Wo();

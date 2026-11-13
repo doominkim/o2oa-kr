@@ -5,11 +5,11 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class Projection extends GsonPropertyObject {
 
-	@FieldDescribe("数据路径")
+	@FieldDescribe("데이터 경로")
 	private String path = "";
-	@FieldDescribe("映射字段类型")
+	@FieldDescribe("매핑 필드 유형")
 	private String type = "";
-	@FieldDescribe("数据名称")
+	@FieldDescribe("데이터 이름")
 	private String name = "";
 
 	public String getPath() {

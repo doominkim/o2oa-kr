@@ -56,7 +56,7 @@ public class ActionListByPage extends BaseAction {
         static WrapCopier<AttendanceV2AppealInfo, Wo> copier = WrapCopierFactory.wo(AttendanceV2AppealInfo.class, Wo.class, null,
                 JpaObject.FieldsInvisible);
 
-        @FieldDescribe("打卡记录")
+        @FieldDescribe("체크 기록")
         private AttendanceV2CheckInRecord record;
 
         public AttendanceV2CheckInRecord getRecord() {

@@ -7,6 +7,6 @@ class ExceptionCalendarNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionCalendarNotExists( String id ) {
-		super("日历信息不存在.ID:" + id );
+		super("캘린더 정보가 없습니다. ID:" + id );
 	}
 }

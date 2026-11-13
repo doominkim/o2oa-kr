@@ -15,40 +15,40 @@ public class ActionPostWi extends GsonPropertyObject {
 
     private static final long serialVersionUID = 1360655000630283661L;
 
-    @FieldDescribe("检索目录.")
-    @Schema(description = "检索目录.")
+    @FieldDescribe("검색 디렉터리.")
+    @Schema(description = "검색 디렉터리.")
     private List<Directory> directoryList = new ArrayList<>();
 
-    @FieldDescribe("搜索内容.")
-    @Schema(description = "搜索内容.")
+    @FieldDescribe("검색 내용.")
+    @Schema(description = "검색 내용.")
     private String query;
 
-    @FieldDescribe("分页.")
-    @Schema(description = "分页.")
+    @FieldDescribe("페이지.")
+    @Schema(description = "페이지.")
     private Integer page;
 
-    @FieldDescribe("数量.")
-    @Schema(description = "数量.")
+    @FieldDescribe("수량.")
+    @Schema(description = "수량.")
     private Integer size;
 
-    @FieldDescribe("人员.")
-    @Schema(description = "人员.")
+    @FieldDescribe("사용자.")
+    @Schema(description = "사용자.")
     private String person;
 
-    @FieldDescribe("显示的固定字段.")
-    @Schema(description = "显示的固定字段.")
+    @FieldDescribe("표시할 고정 필드.")
+    @Schema(description = "표시할 고정 필드.")
     List<String> fixedFieldList = new ArrayList<>();
 
-    @FieldDescribe("显示的动态字段.")
-    @Schema(description = "显示的动态字段.")
+    @FieldDescribe("표시할 동적 필드.")
+    @Schema(description = "표시할 동적 필드.")
     List<String> dynamicFieldList = new ArrayList<>();
 
-    @FieldDescribe("过滤条件.")
-    @Schema(description = "过滤条件.")
+    @FieldDescribe("필터 조건.")
+    @Schema(description = "필터 조건.")
     List<Filter> filterList = new ArrayList<>();
 
-    @FieldDescribe("排序字段.")
-    @Schema(description = "排序字段.")
+    @FieldDescribe("정렬 필드.")
+    @Schema(description = "정렬 필드.")
     Sort sort;
 
     public Sort getSort() {

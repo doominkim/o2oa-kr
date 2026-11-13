@@ -65,7 +65,7 @@ public class ActionSave extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionReplyInfoProcess(e,
-						"系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+						"JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -86,7 +86,7 @@ public class ActionSave extends BaseAction {
 				result.error(exception);
 			}
 		}
-		// 查询关联的主题信息是否存在
+		// 연관 주제 정보 존재 여부 조회
 		if (check) {
 			try {
 				subjectInfo = subjectInfoService.get(wrapIn.getSubjectId());
@@ -97,13 +97,13 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据指定ID查询主题信息时发生异常.ID:" + wrapIn.getSubjectId());
+				Exception exception = new ExceptionReplyInfoProcess(e, "지정한 ID로 주제 정보를 조회하는 중 오류가 발생했습니다. ID:" + wrapIn.getSubjectId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 判断主题是否允许用户回复，已锁定的主题不允许用户进行回复
+		// 주제의 사용자 답글 허용 여부 판단, 잠긴 주제는 답글 불가
 		if (check) {
 			if ("已锁定".equals(subjectInfo.getSubjectStatus())) {
 				check = false;
@@ -112,7 +112,7 @@ public class ActionSave extends BaseAction {
 			}
 		}
 
-		// 判断主题所在的版块是否允许用户回复，或者用户是否有权限进行主题回复
+		// 주제가 속한 게시판의 사용자 답글 허용 여부 또는 사용자의 주제 답글 권한 판단
 		if (check) {
 			try {
 				sectionInfo = sectionInfoServiceAdv.get(subjectInfo.getSectionId());
@@ -124,13 +124,13 @@ public class ActionSave extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionReplyInfoProcess(e,
-						"根据指定ID查询版块信息时发生异常.ID:" + subjectInfo.getSectionId());
+						"지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + subjectInfo.getSectionId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
-		// 开始判断用户是否有对版内的主题权限进行回复
+		// 사용자의 게시판 내 주제 답글 권한 판단 시작
 		if (check) {
 			if ("根据权限".equals(sectionInfo.getReplyPublishAble())) {
 				try {
@@ -152,7 +152,7 @@ public class ActionSave extends BaseAction {
 				}
 			}
 		}
-		// 再查询用户是否有主版块的回复权限
+		// 사용자의 상위 게시판 답글 권한 추가 조회
 		if ( subjectInfo != null && !subjectInfo.getMainSectionId().equals(subjectInfo.getSectionId())) {
 			if (check) {
 				try {
@@ -165,14 +165,14 @@ public class ActionSave extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionReplyInfoProcess(e,
-							"根据指定ID查询版块信息时发生异常.ID:" + subjectInfo.getMainSectionId());
+							"지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + subjectInfo.getMainSectionId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
 			}
 			if (check) {
 				if ("根据权限".equals(sectionInfo.getReplyPublishAble())) {
-					// 那么要开始判断用户是否有对版内的主题权限进行回复
+					// 사용자의 게시판 내 주제 답글 권한 판단 시작
 					try {
 						hasPermission = UserPermissionService.hasPermission(effectivePerson.getDistinguishedName(),
 								"SECTION_REPLY_PUBLISH_" + subjectInfo.getMainSectionId());
@@ -191,7 +191,7 @@ public class ActionSave extends BaseAction {
 				}
 			}
 		}
-		// 判断主题所在的论坛是否允许用户回复，或者用户是否有权限进行主题回复
+		// 주제가 속한 포럼의 사용자 답글 허용 여부 또는 사용자의 주제 답글 권한 판단
 		if (check) {
 			try {
 				forumInfo = forumInfoServiceAdv.get(subjectInfo.getForumId());
@@ -203,14 +203,14 @@ public class ActionSave extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionReplyInfoProcess(e,
-						"系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + subjectInfo.getForumId());
+						"ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + subjectInfo.getForumId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 		if (check) {
 			if ("根据权限".equals(forumInfo.getReplyPublishAble())) {
-				// 那么要开始判断用户是否有对论坛分区的主题权限进行回复
+				// 사용자의 포럼 구역 주제 답글 권한 판단 시작
 				try {
 					hasPermission = UserPermissionService.hasPermission(effectivePerson.getDistinguishedName(),
 							"FORUM_REPLY_PUBLISH_" + subjectInfo.getForumId());
@@ -229,7 +229,7 @@ public class ActionSave extends BaseAction {
 			}
 		}
 
-		// 权限判断完成，开始保存回复内容
+		// 권한 판단 완료, 답글 내용 저장 시작
 		if (check) {
 			wrapIn.setForumId(subjectInfo.getForumId());
 			wrapIn.setForumName(subjectInfo.getForumName());
@@ -259,7 +259,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e, "将用户传入的信息转换为一个回复信息对象时发生异常。");
+				Exception exception = new ExceptionReplyInfoProcess(e, "사용자가 전달한 정보를 댓글 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -282,14 +282,14 @@ public class ActionSave extends BaseAction {
 				operationRecordService.replyOperation(effectivePerson.getDistinguishedName(), replyInfo, "CREATE", hostIp, hostName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e, "系统在保存回复信息时发生异常。");
+				Exception exception = new ExceptionReplyInfoProcess(e, "댓글 저장 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 
 		if ( check ) {
-			//根据论坛(Forum)、版块(Selection)以及主版块(MainSelection)相关配置判断该回帖是否允许消息提醒和邮件提醒发贴人
+			//포럼(Forum), 게시판(Selection), 상위 게시판(MainSelection) 설정에 따라 해당 답글의 작성자 메시지 알림·메일 알림 허용 여부 판단
 			try {
 				ThisApplication.queueNewReplyNotify.send( replyInfo );
 			} catch (Exception e) {

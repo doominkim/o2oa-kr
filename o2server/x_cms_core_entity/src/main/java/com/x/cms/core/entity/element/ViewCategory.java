@@ -21,7 +21,7 @@ import com.x.cms.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "ViewCategory", description = "内容管理视图分类.")
+@Schema(name = "ViewCategory", description = "콘텐츠 관리 뷰 분류.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Element.ViewCategory.table, uniqueConstraints = {
@@ -42,7 +42,7 @@ public class ViewCategory extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -58,27 +58,27 @@ public class ViewCategory extends SliceJpaObject {
 	public void setEditor(String editor) {
 		this.editor = editor;
 	}
-	/* ==============================================以上为 JpaObject 默认字段 */
+	/* ==============================================위는 JpaObject 기본 필드 */
 
 	/*
-	 * =====================================更新运行方法
+	 * =====================================실행 메서드 업데이트
 	 * =======================================
 	 */
 	public static final String editor_FIELDNAME = "editor";
-	@FieldDescribe("最后的编辑者.")
+	@FieldDescribe("마지막 편집자.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + editor_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String editor;
 
 	public static final String viewId_FIELDNAME = "viewId";
-	@FieldDescribe("列表ID.")
+	@FieldDescribe("목록 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + viewId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + viewId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String viewId;
 
 	public static final String categoryId_FIELDNAME = "categoryId";
-	@FieldDescribe("分类ID.")
+	@FieldDescribe("분류 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + categoryId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + categoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)

@@ -16,10 +16,10 @@
     "width" : "20%"
   },
   //  {
-  //    "title": "考勤状态",
+  //    "title": "근태 상태",
   //    "headStyles": "normalThNode",
   //    "contentStyles": "normalTdNode",
-  //    "item": "function( d ){  var status=''; if(d.isGetSelfHolidays){ status = '请假' }else if(d.isAbsent){ status = '缺勤' }else if(d.isLate){ status = '迟到' }else if(d.isLeaveEarlier){ status = '早退' }else{ status = '正常' }; return status; }",
+  //    "item": "function( d ){  var status=''; if(d.isGetSelfHolidays){ status = '휴가' }else if(d.isAbsent){ status = '결근' }else if(d.isLate){ status = '지각' }else if(d.isLeaveEarlier){ status = '조퇴' }else{ status = '정상' }; return status; }",
   //    "name" : "status",
   //    "width" : "10%"
   //  },
@@ -48,7 +48,7 @@
     "width" : "20%"
   }
   //{
-  //  "title" : "审批意见",
+  //  "title" : "결재 의견",
    // "headStyles" : "normalThNode",
    // "contentStyles" : "normalTdNode",
    // "item" : "opinion1",
@@ -56,20 +56,20 @@
    // "width" : "15%"
   //}
   //  {
-  //    "title" : "操作",
+  //    "title" : "작업",
   //    "headStyles" : "normalThNode",
   //    "contentStyles" : "normalTdNode",
   //    "item" : "actions",
   //    "name" : "actions",
   //    "width" : "10%",
   //    "sub" : [{
-  //      "title" : "同意",
+  //      "title" : "동의",
   //      "action" : "agree",
   //      "styles" : "actionAgreeNode",
   //      "overStyles" : "actionAgreeNode_over",
   //      "downStyles" : "actionAgreeNode_down"
   //    }, {
-  //      "title" : "不同意",
+  //      "title" : "동의 안 함",
   //      "action" : "deny",
   //      "styles" : "actionDenyNode",
   //      "overStyles" : "actionDenyNode_over",

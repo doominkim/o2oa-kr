@@ -37,13 +37,13 @@ public class ActionDelete extends BaseAction {
 				result.error(exception);
 			}
 		}
-		// 判断主题信息是否存在
+		// 주제 정보 존재 여부 판단
 		if (check) {
 			try {
 				replyInfo = replyInfoService.get(id);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据指定ID查询回复信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionReplyInfoProcess(e, "지정한 ID로 댓글 정보를 조회하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -60,11 +60,11 @@ public class ActionDelete extends BaseAction {
 				String config_BBS_REPLY_DELETETYPE = configSettingService.getValueWithConfigCode("BBS_REPLY_DELETETYPE");
 
 				if(StringUtils.equals( "Recursively", config_BBS_REPLY_DELETETYPE )){
-					//递归删除
+					//재귀 삭제
 					List<String> subIds = replyInfoService.listAllSubReplyIds(id, null);
 					if (ListTools.isNotEmpty(subIds)) {
 						for (String replyId : subIds) {
-							logger.debug("删除下级回复信息，ID=" + replyId);
+							logger.debug("하위 답글 정보 삭제, ID=" + replyId);
 							replyInfoService.delete(replyId);
 						}
 					}
@@ -83,7 +83,7 @@ public class ActionDelete extends BaseAction {
 				operationRecordService.replyOperation(effectivePerson.getDistinguishedName(), replyInfo, "DELETE", hostIp, hostName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionReplyInfoProcess(e, "根据指定ID删除回复信息时发生异常.ID:" + id);
+				Exception exception = new ExceptionReplyInfoProcess(e, "지정한 ID로 댓글 정보를 삭제하는 중 오류가 발생했습니다. ID:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

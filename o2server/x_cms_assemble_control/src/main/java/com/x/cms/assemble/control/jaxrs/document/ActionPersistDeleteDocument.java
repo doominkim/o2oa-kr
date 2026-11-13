@@ -26,7 +26,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 删除文档
+ * 문서 삭제
  * @author sword
  */
 public class ActionPersistDeleteDocument extends BaseAction {
@@ -41,7 +41,7 @@ public class ActionPersistDeleteDocument extends BaseAction {
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			Business business = new Business( emc );
 
-			//先判断需要操作的文档信息是否存在，根据ID进行一次查询，如果不存在不允许继续操作
+			//먼저 조작할 문서 정보가 있는지 ID로 한 번 조회, 없으면 계속 진행할 수 없음
 			Document document = business.getDocumentFactory().get( id );
 			if (null == document) {
 				throw new ExceptionDocumentNotExists( id );
@@ -50,14 +50,14 @@ public class ActionPersistDeleteDocument extends BaseAction {
 				throw new ExceptionAccessDenied(effectivePerson);
 			}
 
-			//进行数据库持久化操作
+			//데이터베이스 영속화 작업 수행
 			emc.beginTransaction( Document.class );
 			emc.beginTransaction( Item.class );
 			emc.beginTransaction( FileInfo.class );
 			emc.beginTransaction( DocumentCommentInfo.class );
 
 
-			//删除与该文档有关的所有数据信息
+			//해당 문서와 관련된 모든 데이터 정보 삭제
 			DocumentDataHelper documentDataHelper = new DocumentDataHelper( emc, document );
 			documentDataHelper.remove();
 
@@ -89,7 +89,7 @@ public class ActionPersistDeleteDocument extends BaseAction {
 				emc.beginTransaction( DocumentCommend.class );
 				emc.delete(DocumentCommend.class, commendIds);
 			}
-			//删除文档信息
+			//문서 정보 삭제
 			emc.remove( document, CheckRemoveType.all );
 			emc.beginTransaction(DocumentEvent.class);
 			DocumentEvent documentEvent = DocumentEvent.deleteEventInstance(document);
@@ -111,7 +111,7 @@ public class ActionPersistDeleteDocument extends BaseAction {
 			wo.setId( document.getId() );
 			result.setData( wo );
 
-			//检查是否需要删除热点图片
+			//핫 이미지 삭제 필요 여부 확인
 			try {
 				ThisApplication.queueDocumentDelete.send( id );
 			} catch ( Exception e1 ) {

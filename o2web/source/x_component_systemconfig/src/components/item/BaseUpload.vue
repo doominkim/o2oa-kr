@@ -45,7 +45,7 @@ function clearFile(){
 }
 function uploadChange(){
   uploadFile(uploadNode.value.files);
-  // 清空文件输入
+  // 파일 입력 비우기
   uploadNode.value.value = '';
 }
 function removeFile(file){

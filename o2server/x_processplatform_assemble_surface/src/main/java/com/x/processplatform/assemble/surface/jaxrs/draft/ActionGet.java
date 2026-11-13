@@ -65,7 +65,7 @@ class ActionGet extends BaseAction {
 			wo.setData(draft.getProperties().getData());
 			Work work = this.mockWork(application, process, draft.getPerson(), draft.getIdentity(), draft.getUnit(),
 					draft.getTitle());
-			// 设置id值与workid相同.save可以判断
+			// id 값을 workid와 동일하게 설정.save에서 판단 가능
 			work.setId(draft.getId());
 			String form = this.findForm(business, process);
 			if (StringUtils.isEmpty(form)) {
@@ -94,13 +94,13 @@ class ActionGet extends BaseAction {
 
 		private static final long serialVersionUID = -3079311013584307428L;
 
-		@FieldDescribe("业务数据.")
+		@FieldDescribe("업무 데이터.")
 		private Data data;
 
-		@FieldDescribe("工作.")
+		@FieldDescribe("업무 문서.")
 		private WoWork work;
 
-		@FieldDescribe("附件")
+		@FieldDescribe("첨부파일")
 		private List<WoAttachment> attachmentList = new ArrayList<>();
 
 		public List<WoAttachment> getAttachmentList() {

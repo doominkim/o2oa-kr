@@ -11,7 +11,7 @@ import com.x.jpush.core.entity.PushDevice;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * android 端 app使用 当前服务器启用了哪种推送渠道 极光还是华为
+ * android 앱에서 사용: 현재 서버가 사용하는 푸시 채널(JPush 또는 화웨이)
  *
  * Created by fancyLou on 9/14/21.
  * Copyright © 2021 O2. All rights reserved.
@@ -31,12 +31,12 @@ public class ActionConfigPushType extends BaseAction {
 
     /**
      *
-     * 向外输出的结果对象包装类
+     * 외부 출력 결과 객체 래퍼 클래스
      *
      */
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("推送通道类型：jpush")
+        @FieldDescribe("푸시 채널 유형: jpush")
         private String pushType;
 
 

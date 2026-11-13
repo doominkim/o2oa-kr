@@ -7,7 +7,7 @@ class ExceptionGoBack extends LanguagePromptException {
 	private static final long serialVersionUID = 3674258561301135294L;
 
 	ExceptionGoBack(String activity, String task) {
-		super("回退失败, activity: {}, task:{}.", activity, task);
+		super("반송 실패, activity: {}, task: {}.", activity, task);
 	}
 
 }

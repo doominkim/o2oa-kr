@@ -27,18 +27,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("prompterrorlog")
-@JaxrsDescribe("提示错误")
+@JaxrsDescribe("안내 오류")
 public class PromptErrorLogAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PromptErrorLogAction.class);
 
-	@JaxrsMethodDescribe(value = "获取提示错误.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "안내 오류 조회.", action = ActionGet.class)
 	@GET
 	@Path("{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("错误标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("오류 식별자") @PathParam("id") String id) {
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		try {
@@ -50,7 +50,7 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "记录提示错误.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "안내 오류 기록.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -66,14 +66,14 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示提示错误,下一页.", action = ActionListNext.class)
+	@JaxrsMethodDescribe(value = "안내 오류 나열, 다음 페이지.", action = ActionListNext.class)
 	@GET
 	@Path("list/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("错误标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("오류 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListNext.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListNext().execute(id, count);
@@ -84,14 +84,14 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示提示错误,上一页.", action = ActionListPrev.class)
+	@JaxrsMethodDescribe(value = "안내 오류 나열, 이전 페이지.", action = ActionListPrev.class)
 	@GET
 	@Path("list/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("错误标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("오류 식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count) {
 		ActionResult<List<ActionListPrev.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListPrev().execute(id, count);
@@ -102,7 +102,7 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "按loggerName统计提示错误数量.", action = ActionCountWithLoggerName.class)
+	@JaxrsMethodDescribe(value = "loggerName별 안내 오류 수 통계.", action = ActionCountWithLoggerName.class)
 	@GET
 	@Path("count/loggername")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -119,7 +119,7 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "按exceptionClass统计提示错误数量.", action = ActionCountWithExceptionClass.class)
+	@JaxrsMethodDescribe(value = "exceptionClass별 안내 오류 수 통계.", action = ActionCountWithExceptionClass.class)
 	@GET
 	@Path("count/exceptionclass")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -136,15 +136,15 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定loggerName错误,下一页.", action = ActionListNextWithLoggerName.class)
+	@JaxrsMethodDescribe(value = "지정 loggerName 오류 나열, 다음 페이지.", action = ActionListNextWithLoggerName.class)
 	@GET
 	@Path("list/{id}/next/{count}/loggername/{loggerName}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithLoggerName(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("日志名") @PathParam("loggerName") String loggerName) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("로그 이름") @PathParam("loggerName") String loggerName) {
 		ActionResult<List<ActionListNextWithLoggerName.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -156,15 +156,15 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定loggerName错误,上一页.", action = ActionListPrevWithLoggerName.class)
+	@JaxrsMethodDescribe(value = "지정 loggerName 오류 나열, 이전 페이지.", action = ActionListPrevWithLoggerName.class)
 	@GET
 	@Path("list/{id}/prev/{count}/loggername/{loggerName}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithLoggerName(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("日志名") @PathParam("loggerName") String loggerName) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("로그 이름") @PathParam("loggerName") String loggerName) {
 		ActionResult<List<ActionListPrevWithLoggerName.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -176,15 +176,15 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定exceptionClass错误,下一页.", action = ActionListNextWithExceptionClass.class)
+	@JaxrsMethodDescribe(value = "지정 exceptionClass 오류 나열, 다음 페이지.", action = ActionListNextWithExceptionClass.class)
 	@GET
 	@Path("list/{id}/next/{count}/exceptionclass/{exceptionClass}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithExceptionClass(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("错误名") @PathParam("exceptionClass") String exceptionClass) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("오류 이름") @PathParam("exceptionClass") String exceptionClass) {
 		ActionResult<List<ActionListNextWithExceptionClass.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -196,15 +196,15 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示指定exceptionClass错误,上一页.", action = ActionListPrevWithExceptionClass.class)
+	@JaxrsMethodDescribe(value = "지정 exceptionClass 오류 나열, 이전 페이지.", action = ActionListPrevWithExceptionClass.class)
 	@GET
 	@Path("list/{id}/prev/{count}/exceptionclass/{exceptionClass}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithExceptionClass(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("错误名") @PathParam("exceptionClass") String exceptionClass) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("오류 이름") @PathParam("exceptionClass") String exceptionClass) {
 		ActionResult<List<ActionListPrevWithExceptionClass.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -216,15 +216,15 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示PromptErrorLog,指定日期,下一页.", action = ActionListNextWithDate.class)
+	@JaxrsMethodDescribe(value = "PromptErrorLog 나열, 지정 날짜, 다음 페이지.", action = ActionListNextWithDate.class)
 	@GET
 	@Path("list/{id}/next/{count}/date/{date}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listNextWithDate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("指定日期") @PathParam("date") String date) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("지정 날짜") @PathParam("date") String date) {
 		ActionResult<List<ActionListNextWithDate.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListNextWithDate().execute(id, count, date);
@@ -235,15 +235,15 @@ public class PromptErrorLogAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示PromptErrorLog,指定日期,上一页.", action = ActionListPrevWithDate.class)
+	@JaxrsMethodDescribe(value = "PromptErrorLog 나열, 지정 날짜, 이전 페이지.", action = ActionListPrevWithDate.class)
 	@GET
 	@Path("list/{id}/prev/{count}/date/{date}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listPrevWithDate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("返回数量") @PathParam("count") Integer count,
-			@JaxrsParameterDescribe("指定日期") @PathParam("date") String date) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("반환 수량") @PathParam("count") Integer count,
+			@JaxrsParameterDescribe("지정 날짜") @PathParam("date") String date) {
 		ActionResult<List<ActionListPrevWithDate.Wo>> result = new ActionResult<>();
 		try {
 			result = new ActionListPrevWithDate().execute(id, count, date);

@@ -7,17 +7,17 @@ public class ActionWorkProcessingWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = -6499166223522045961L;
 
-	@FieldDescribe("记录类型.")
+	@FieldDescribe("기록 유형.")
 	private String recordType;
-	@FieldDescribe("路由.")
+	@FieldDescribe("경로.")
 	private String routeName;
-	@FieldDescribe("办理意见.")
+	@FieldDescribe("처리 의견.")
 	private String opinion;
-	@FieldDescribe("工作记录.")
+	@FieldDescribe("업무 문서 기록.")
 	private String workLog;
-	@FieldDescribe("处理人组织专有标识.")
+	@FieldDescribe("처리자 조직 전용 식별자.")
 	private String distinguishedName;
-	@FieldDescribe("串号.")
+	@FieldDescribe("일련번호.")
 	private String series;
 
 	public String getRouteName() {

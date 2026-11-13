@@ -21,12 +21,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("touch")
-@JaxrsDescribe("触发流程定时任务")
+@JaxrsDescribe("프로세스 예약 작업 실행")
 public class TouchAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TouchAction.class);
 
-	@JaxrsMethodDescribe(value = "立即执行已完成工作合并任务.", action = ActionMerge.class)
+	@JaxrsMethodDescribe(value = "완료된 업무 문서 병합 작업 즉시 실행.", action = ActionMerge.class)
 	@GET
 	@Path("merge")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -43,7 +43,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行删除滞留草稿任务.", action = ActionDeleteDraft.class)
+	@JaxrsMethodDescribe(value = "장기 체류 초안 삭제 작업 즉시 실행.", action = ActionDeleteDraft.class)
 	@GET
 	@Path("deletedraft")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -60,7 +60,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行记录长期滞留工作,待办,待阅任务.", action = ActionLogLongDetained.class)
+	@JaxrsMethodDescribe(value = "장기 체류 업무 문서, 결재 대기, 열람 대기 기록 작업 즉시 실행.", action = ActionLogLongDetained.class)
 	@GET
 	@Path("loglongdetained")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -77,7 +77,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行触发延时任务.", action = ActionTouchDelay.class)
+	@JaxrsMethodDescribe(value = "지연 작업 트리거 즉시 실행.", action = ActionTouchDelay.class)
 	@GET
 	@Path("touchdelay")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -94,7 +94,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行催办任务.", action = ActionUrge.class)
+	@JaxrsMethodDescribe(value = "독촉 작업 즉시 실행.", action = ActionUrge.class)
 	@GET
 	@Path("urge")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -111,7 +111,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行清理事件.", action = ActionCleanEvent.class)
+	@JaxrsMethodDescribe(value = "정리 이벤트 즉시 실행.", action = ActionCleanEvent.class)
 	@GET
 	@Path("cleanevent")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -128,7 +128,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行任务转交事件.", action = ActionHandoverJob.class)
+	@JaxrsMethodDescribe(value = "작업 전달 이벤트 즉시 실행.", action = ActionHandoverJob.class)
 	@GET
 	@Path("handoverjob")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -145,7 +145,7 @@ public class TouchAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "立即执行归档数据条目.", action = ActionMergeItem.class)
+	@JaxrsMethodDescribe(value = "데이터 항목 보관 즉시 실행.", action = ActionMergeItem.class)
 	@GET
 	@Path("mergeitem")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

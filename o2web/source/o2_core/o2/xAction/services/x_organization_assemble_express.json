@@ -1,5 +1,5 @@
 {
-  //群组**************************************************************
+  //그룹**************************************************************
   //data: {"groupList": []}
   "listGroup": {"uri": "/jaxrs/group/list/object", "method": "POST"},  //그룹 객체 조회
   "listSubGroupDirect": {"uri": "/jaxrs/group/list/group/sub/direct/object", "method": "POST"},  //직속 하위 그룹 조회
@@ -16,7 +16,7 @@
 
 
 
-  //角色**************************************************************
+  //역할**************************************************************
   //data: {"roleList":[]}
   "listRole": {"uri": "/jaxrs/role/list/object", "method": "POST"},  //객체 배열 조회
   //data: {"personList":[]}
@@ -25,7 +25,7 @@
 
 
 
-  //人员**************************************************************
+  //사용자**************************************************************
   //data: {"person":"","roleList":[""]}
   "personHasRole": {"uri": "/jaxrs/person/has/role", "method": "POST"}, //사용자의 모든 역할
 
@@ -59,7 +59,7 @@
   //*****************************************************************
 
 
-  //人员属性***********************************************************
+  //사용자 속성***********************************************************
   //data: {"attributeList":[],"name":"","person":""}
   "appendPersonAttribute": {"uri": "/jaxrs/personattribute/append/person/name", "method": "POST"}, //사용자 속성 값 추가
   "setPersonAttribute": {"uri": "/jaxrs/personattribute/set/person/name", "method": "POST"}, //사용자 속성 값 덮어쓰기
@@ -73,7 +73,7 @@
   //******************************************************************
 
 
-  //身份***************************************************************
+  //신분***************************************************************
   //data: {"identityList": []}
   "listIdentity": {"uri": "/jaxrs/identity/list/object", "method": "POST"}, //소속 객체 조회
 
@@ -87,7 +87,7 @@
   //******************************************************************
 
 
-  //组织***************************************************************
+  //조직***************************************************************
   //data: {"unitList": []}
   "listUnit": {"uri": "/jaxrs/unit/list/object", "method": "POST"}, //조직 객체 조회
   "listUnitSubDirect": {"uri": "/jaxrs/unit/list/unit/sub/direct/object", "method": "POST"}, //지정 조직의 직속 하위 조직 조회
@@ -122,7 +122,7 @@
 
   "listWithIdentity" :{"uri": "/jaxrs/unit/list/identity", "method": "POST"},
 
-  //组织职务***********************************************************
+  //조직 직무***********************************************************
   //data: {"name":"","unit":""}
   "getDuty": {"uri": "/jaxrs/unitduty/list/identity/unit/name/object", "method": "POST"}, //조직의 직무 값 조회
   "getDutyValue": {"uri": "/jaxrs/unitduty/list/identity/unit/name", "method": "POST"}, //조직의 직무 값 조회
@@ -139,7 +139,7 @@
 
 
 
-  //组织属性***********************************************************
+  //조직 속성***********************************************************
   //data: {"attributeList":[],"name":"","unit":""}
   "appendUnitAttribute": {"uri": "/jaxrs/unitattribute/append/unit/name", "method": "POST"}, //조직 속성 값 추가
   "setUnitAttribute": {"uri": "/jaxrs/unitattribute/set/unit/name", "method": "POST"}, //조직 속성 값 덮어쓰기
@@ -152,7 +152,7 @@
   "listUnitAllAttribute": {"uri": "/jaxrs/unitattribute/list/unit/object", "method": "POST"}, //조직의 모든 속성 나열
   //******************************************************************
 
-  //授权情况查询：
+  //위임 현황 조회:
   "listEmpowerWithIdentity" : {"uri": "/jaxrs/empower/list/identity/object", "method": "POST"}
   //*****
 }

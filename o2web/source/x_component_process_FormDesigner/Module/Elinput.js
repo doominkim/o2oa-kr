@@ -14,7 +14,7 @@ MWF.xApplication.process.FormDesigner.Module.Elinput = MWF.FCElinput = new Class
 		this.moduleName = "elinput";
 	},
 	_createElementHtml: function(){
-		//var html = "<el-input placeholder=\"请输入内容\"></el-input>";
+		//var html = "<el-input placeholder=\"내용을 입력하십시오\"></el-input>";
 		var html = "<el-input";
 		// if (this.json.description) html += " placeholder=\""+this.json.description+"\"";
 		// html += " type=\""+(this.json.inputType || "text")+"\"";

@@ -47,7 +47,7 @@ public class ActionViewWithForum extends BaseAction {
 				result.setData( result_cache.getData() );
 				result.setCount( result_cache.getCount() );
 			} else {
-				//继续进行数据查询
+				//데이터 조회 계속
 				result = getSectionQueryResult( request, effectivePerson, forumId, isBBSManager );
 				CacheManager.put( cacheCategory, cacheKey, result );
 			}
@@ -87,12 +87,12 @@ public class ActionViewWithForum extends BaseAction {
 				result.error( exception );
 			}
 		}
-		if( check ){ //查询论坛信息是否存在
+		if( check ){ //포럼 정보 존재 여부 조회
 			try{
 				forumInfo = forumInfoServiceAdv.get( forumId );
 			}catch( Exception e ){
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess( e, "系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + forumId );
+				Exception exception = new ExceptionSectionInfoProcess( e, "ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + forumId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -104,7 +104,7 @@ public class ActionViewWithForum extends BaseAction {
 				result.error( exception );
 			}
 		}
-		//如果不是匿名用户，则查询该用户所有能访问的版块信息
+		//익명 사용자가 아니면 해당 사용자가 접근 가능한 모든 게시판 정보 조회
 		if( check ){
 			methodExcuteResult = UserPermissionService.getViewSectionIdsFromUserPermission( effectivePerson );
 			if( methodExcuteResult.getSuccess() ){
@@ -118,7 +118,7 @@ public class ActionViewWithForum extends BaseAction {
 				logger.warn( methodExcuteResult.getMessage() );
 			}
 		}
-		if( check ){//从数据库查询主版块列表
+		if( check ){//데이터베이스에서 상위 게시판 목록 조회
 			try {
 				sectionInfoList = sectionInfoServiceAdv.viewMainSectionByForumId( forumId, viewableSectionIds );
 				if (sectionInfoList == null) {
@@ -126,7 +126,7 @@ public class ActionViewWithForum extends BaseAction {
 				}
 			} catch (Exception e) {
 				result.error(e);
-				Exception exception = new ExceptionSectionInfoProcess( e, "根据指定论坛分区ID查询所有主版块信息时发生异常.Forum:" + forumId );
+				Exception exception = new ExceptionSectionInfoProcess( e, "포럼 분류 ID로 전체 상위 섹션 정보를 조회하는 중 오류가 발생했습니다. Forum:" + forumId );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -137,7 +137,7 @@ public class ActionViewWithForum extends BaseAction {
 					wraps = Wo.copier.copy( sectionInfoList );
 					result.setData(wraps);
 				} catch (Exception e) {
-					Exception exception = new ExceptionSectionInfoProcess( e, "系统在转换所有BBS版块信息为输出对象时发生异常." );
+					Exception exception = new ExceptionSectionInfoProcess( e, "BBS 섹션 정보를 출력 객체로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}		
@@ -154,7 +154,7 @@ public class ActionViewWithForum extends BaseAction {
 		
 		public static WrapCopier< BBSSectionInfo, Wo > copier = WrapCopierFactory.wo( BBSSectionInfo.class, Wo.class, null, JpaObject.FieldsInvisible);
 		
-		//版块的子版块信息列表
+		//게시판의 하위 게시판 정보 목록
 		private List<Wo> subSections = null;
 
 		public List<Wo> getSubSections() {

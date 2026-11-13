@@ -7,6 +7,6 @@ class ExceptionErrorInstallPackage extends PromptException {
 	private static final long serialVersionUID = -9050250987376957535L;
 
 	ExceptionErrorInstallPackage() {
-		super("错误的安装包.");
+		super("잘못된 설치 패키지입니다.");
 	}
 }

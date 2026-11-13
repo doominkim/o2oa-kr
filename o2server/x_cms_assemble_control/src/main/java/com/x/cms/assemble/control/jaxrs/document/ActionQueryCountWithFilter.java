@@ -65,7 +65,7 @@ public class ActionQueryCountWithFilter extends BaseAction {
 
     public static class Wo extends GsonPropertyObject {
 
-        @FieldDescribe("查询到的文档数量")
+        @FieldDescribe("조회된 문서 수")
         Long docCount = 0L;
 
         public Long getDocCount() {

@@ -19,7 +19,7 @@ onMounted(() => {
 })
 
 watch(msgBody, async () =>  {
-  await nextTick() // 等待DOM 更新完成
+  await nextTick() // DOM 업데이트 완료 대기
   const links = textSpanContentRef.value?.querySelectorAll('a')
   if (links && links.length) {
     links.forEach(link => {

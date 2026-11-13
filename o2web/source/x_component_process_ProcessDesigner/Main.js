@@ -687,7 +687,7 @@ MWF.xApplication.process.ProcessDesigner.Main = new Class({
             if (this.process.panel){
                 var pSize = this.paperNode.getSize();
 
-                // 判断窗口大小是否真的改变了
+                // 창 크기가 실제로 바뀌었는지 판단
                 var sizeChanged = true;
                 if (this._lastPaperSize &&
                     this._lastPaperSize.x === pSize.x &&
@@ -695,10 +695,10 @@ MWF.xApplication.process.ProcessDesigner.Main = new Class({
                     sizeChanged = false;
                 }
 
-                // 记录当前尺寸
+                // 현재 크기 기록
                 this._lastPaperSize = {x: pSize.x, y: pSize.y};
 
-                // 如果窗口大小改变了，重置面板位置到右上角
+                // 창 크기가 바뀌었으면 패널 위치를 오른쪽 위로 재설정
                 if (sizeChanged) {
                     this.process.panel.modulePanel.container.position({
                         relativeTo: this.paperNode,

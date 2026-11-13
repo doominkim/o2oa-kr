@@ -37,7 +37,7 @@ public class DumpDataTask implements Job {
 				if (dir.exists() && dir.isDirectory()) {
 					final List<File> list = new ArrayList<>();
 					try (Stream<Path> children = Files.list(dir.toPath())) {
-						children.filter(Files::isDirectory) // 只保留目录，不列示文件
+						children.filter(Files::isDirectory) // 디렉터리만 유지하고 파일은 나열하지 않음
 								.filter(p -> DIR_NAME_PATTERN.matcher(p.getFileName().toString()).matches())
 								.sorted(Comparator.comparing(p -> p.getFileName().toString(),
 										Comparator.reverseOrder()))

@@ -7,6 +7,6 @@ class ExceptionEventNotExists extends PromptException {
 	private static final long serialVersionUID = 1859164370743532895L;
 
 	ExceptionEventNotExists( String id ) {
-		super("指定的日历事件信息不存在.ID:" + id );
+		super("지정한 일정 정보가 없습니다. ID:" + id );
 	}
 }

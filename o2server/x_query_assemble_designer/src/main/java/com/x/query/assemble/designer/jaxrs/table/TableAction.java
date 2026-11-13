@@ -30,18 +30,18 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("table")
-@JaxrsDescribe("表")
+@JaxrsDescribe("테이블")
 public class TableAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TableAction.class);
 
-	@JaxrsMethodDescribe(value = "根据query列示table对象.", action = ActionListWithQuery.class)
+	@JaxrsMethodDescribe(value = "query 기준 table 객체 목록.", action = ActionListWithQuery.class)
 	@GET
 	@Path("list/query/{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listWithQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("查询标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("쿼리 식별자") @PathParam("flag") String flag) {
 		ActionResult<List<ActionListWithQuery.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -53,13 +53,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "编译指定应用所有表,执行后需要立即重新启动，支持集群环境.", action = ActionBuildQueryDispatch.class)
+	@JaxrsMethodDescribe(value = "지정 앱의 모든 테이블 컴파일, 실행 후 즉시 재시작 필요, 클러스터 환경 지원.", action = ActionBuildQueryDispatch.class)
 	@GET
 	@Path("{query}/build/dispatch")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public synchronized void buildDispatch(@Suspended final AsyncResponse asyncResponse,
-			@Context HttpServletRequest request, @JaxrsParameterDescribe("应用标识") @PathParam("query") String query) {
+			@Context HttpServletRequest request, @JaxrsParameterDescribe("앱 식별자") @PathParam("query") String query) {
 		ActionResult<ActionBuildQueryDispatch.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -71,13 +71,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "编译指定应用所有表,执行后需要立即重新启动，仅对当前服务器.", action = ActionBuildQuery.class)
+	@JaxrsMethodDescribe(value = "지정 앱의 모든 테이블 컴파일, 실행 후 즉시 재시작 필요, 현재 서버에만 적용.", action = ActionBuildQuery.class)
 	@GET
 	@Path("query/{query}/build")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void buildQuery(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("应用标识") @PathParam("query") String query) {
+			@JaxrsParameterDescribe("앱 식별자") @PathParam("query") String query) {
 		ActionResult<ActionBuildQuery.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -89,13 +89,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "根据标识获取表.", action = ActionGet.class)
+	@JaxrsMethodDescribe(value = "식별자로 테이블 조회.", action = ActionGet.class)
 	@GET
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void get(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionGet.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -107,13 +107,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "标识表状态为草稿.", action = ActionStatusDraft.class)
+	@JaxrsMethodDescribe(value = "테이블 상태를 초안으로 표시.", action = ActionStatusDraft.class)
 	@GET
 	@Path("{flag}/status/draft")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void statusDraft(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionStatusDraft.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -125,13 +125,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "标识表状态为编译.", action = ActionStatusBuild.class)
+	@JaxrsMethodDescribe(value = "테이블 상태를 컴파일로 표시.", action = ActionStatusBuild.class)
 	@GET
 	@Path("{flag}/status/build")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void statusBuild(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionStatusBuild.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -143,7 +143,7 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "创建表.", action = ActionCreate.class)
+	@JaxrsMethodDescribe(value = "테이블 생성.", action = ActionCreate.class)
 	@POST
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -160,13 +160,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新表.", action = ActionEdit.class)
+	@JaxrsMethodDescribe(value = "테이블 수정.", action = ActionEdit.class)
 	@PUT
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<ActionEdit.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -178,13 +178,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "设置表权限.", action = ActionEditPermission.class)
+	@JaxrsMethodDescribe(value = "테이블 권한 설정.", action = ActionEditPermission.class)
 	@POST
 	@Path("{id}/permission")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updatePermission(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionEditPermission.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -196,13 +196,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result, jsonElement));
 	}
 
-	@JaxrsMethodDescribe(value = "删除表,同时会级联删除语句.", action = ActionDelete.class)
+	@JaxrsMethodDescribe(value = "테이블 삭제, 구문도 연쇄 삭제.", action = ActionDelete.class)
 	@DELETE
 	@Path("{flag}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag) {
 		ActionResult<ActionDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -214,14 +214,14 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "获取表中某一行数据", action = ActionRowGet.class)
+	@JaxrsMethodDescribe(value = "테이블의 특정 행 데이터 조회", action = ActionRowGet.class)
 	@GET
 	@Path("{tableFlag}/row/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rowGet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("行标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("행 식별자") @PathParam("id") String id) {
 		ActionResult<Object> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -233,14 +233,14 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "通过where 获取表中的数据,格式为jpql语法,o.name='zhangsan'", action = ActionListRowSelectWhere.class)
+	@JaxrsMethodDescribe(value = "where로 테이블 데이터 조회, jpql 문법 형식, o.name='zhangsan'", action = ActionListRowSelectWhere.class)
 	@GET
 	@Path("list/{tableFlag}/row/select/where/{where}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listRowSelectWhere(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("where语句") @PathParam("where") String where) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("where 구문") @PathParam("where") String where) {
 		ActionResult<List<?>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -252,14 +252,14 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "通过where 统计数量", action = ActionRowCountWhere.class)
+	@JaxrsMethodDescribe(value = "where로 건수 통계", action = ActionRowCountWhere.class)
 	@GET
 	@Path("{tableFlag}/row/count/where/{where}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rowCountWhere(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("where语句") @PathParam("where") String where) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("where 구문") @PathParam("where") String where) {
 		ActionResult<ActionRowCountWhere.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -271,13 +271,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "指定表中插入数据.", action = ActionRowInsert.class)
+	@JaxrsMethodDescribe(value = "지정 테이블에 데이터 삽입.", action = ActionRowInsert.class)
 	@POST
 	@Path("{tableFlag}/row")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rowInsert(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag, JsonElement jsonElement) {
 		ActionResult<ActionRowInsert.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -289,14 +289,14 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定表中指定行数据.", action = ActionRowUpdate.class)
+	@JaxrsMethodDescribe(value = "지정 테이블의 지정 행 데이터 수정.", action = ActionRowUpdate.class)
 	@PUT
 	@Path("{tableFlag}/row/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rowUpdate(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("行标识") @PathParam("id") String id, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("행 식별자") @PathParam("id") String id, JsonElement jsonElement) {
 		ActionResult<ActionRowUpdate.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -308,14 +308,14 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定表中指定行数据.", action = ActionRowDelete.class)
+	@JaxrsMethodDescribe(value = "지정 테이블의 지정 행 데이터 수정.", action = ActionRowDelete.class)
 	@DELETE
 	@Path("{tableFlag}/row/{id}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rowDelete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("行标识") @PathParam("id") String id) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("행 식별자") @PathParam("id") String id) {
 		ActionResult<ActionRowDelete.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -327,13 +327,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "更新指定表中指定行数据.", action = ActionRowDeleteAll.class)
+	@JaxrsMethodDescribe(value = "지정 테이블의 지정 행 데이터 수정.", action = ActionRowDeleteAll.class)
 	@DELETE
 	@Path("{tableFlag}/row/delete/all")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rowDeleteAll(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag) {
 		ActionResult<ActionRowDeleteAll.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -345,15 +345,15 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示表中的行对象,下一页.", action = ActionListRowNext.class)
+	@JaxrsMethodDescribe(value = "테이블 행 객체 목록, 다음 페이지.", action = ActionListRowNext.class)
 	@GET
 	@Path("list/{tableFlag}/row/{id}/next/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listRowNext(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<JsonObject>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -365,15 +365,15 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示表中的行对象,上一页.", action = ActionListRowPrev.class)
+	@JaxrsMethodDescribe(value = "테이블 행 객체 목록, 이전 페이지.", action = ActionListRowPrev.class)
 	@GET
 	@Path("list/{tableFlag}/row/{id}/prev/{count}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void listRowPrev(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("标识") @PathParam("id") String id,
-			@JaxrsParameterDescribe("数量") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("식별자") @PathParam("id") String id,
+			@JaxrsParameterDescribe("수량") @PathParam("count") Integer count) {
 		ActionResult<List<JsonObject>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -385,13 +385,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "执行语句.", action = ActionExecute.class)
+	@JaxrsMethodDescribe(value = "구문 실행.", action = ActionExecute.class)
 	@POST
 	@Path("{flag}/execute")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void execute(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("标识") @PathParam("flag") String flag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("식별자") @PathParam("flag") String flag, JsonElement jsonElement) {
 		ActionResult<Object> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -403,13 +403,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "导出行对象。", action = ActionRowExport.class)
+	@JaxrsMethodDescribe(value = "행 객체 내보내기.", action = ActionRowExport.class)
 	@GET
 	@Path("export/{tableFlag}/count/{count}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void exportRow(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag,
-			@JaxrsParameterDescribe("数量(最大2000)") @PathParam("count") Integer count) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag,
+			@JaxrsParameterDescribe("수량(최대 2000)") @PathParam("count") Integer count) {
 		ActionResult<ActionRowExport.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -421,13 +421,13 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "指定表中批量保存或更新数据.", action = ActionRowSave.class)
+	@JaxrsMethodDescribe(value = "지정 테이블에 데이터 일괄 저장 또는 수정.", action = ActionRowSave.class)
 	@POST
 	@Path("{tableFlag}/row/save")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void rowSave(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-			@JaxrsParameterDescribe("表标识") @PathParam("tableFlag") String tableFlag, JsonElement jsonElement) {
+			@JaxrsParameterDescribe("테이블 식별자") @PathParam("tableFlag") String tableFlag, JsonElement jsonElement) {
 		ActionResult<ActionRowSave.Wo> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {
@@ -439,7 +439,7 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "列示所有table对象.", action = ActionManageList.class)
+	@JaxrsMethodDescribe(value = "전체 table 객체 목록.", action = ActionManageList.class)
 	@GET
 	@Path("list/manage")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -456,7 +456,7 @@ public class TableAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@JaxrsMethodDescribe(value = "在服务器重新编译dynamicEntity之后需要重新初始化EntityManagerContainerFactory.", action = ActionReloadDynamic.class)
+	@JaxrsMethodDescribe(value = "서버에서 dynamicEntity 재컴파일 후 EntityManagerContainerFactory를 다시 초기화해야 함.", action = ActionReloadDynamic.class)
 	@GET
 	@Path("reload/dynamic")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

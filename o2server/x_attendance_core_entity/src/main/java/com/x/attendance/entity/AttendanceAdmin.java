@@ -19,7 +19,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceAdmin", description = "考勤管理配置")
+@Schema(name = "AttendanceAdmin", description = "근태 관리 설정")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.AttendanceAdmin.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceAdmin.table
@@ -39,7 +39,7 @@ public class AttendanceAdmin extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -48,46 +48,46 @@ public class AttendanceAdmin extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String unitName_FIELDNAME = "unitName";
-	@FieldDescribe("组织名称")
+	@FieldDescribe("조직명")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ unitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String unitName = "";
 
 	public static final String unitOu_FIELDNAME = "unitOu";
-	@FieldDescribe("组织编号")
+	@FieldDescribe("조직 번호")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + unitOu_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + unitOu_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String unitOu = "";
 
 	public static final String adminName_FIELDNAME = "adminName";
-	@FieldDescribe("管理员姓名")
+	@FieldDescribe("관리자 이름")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + adminName_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + adminName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String adminName = "";
 
 	public static final String admin_FIELDNAME = "admin";
-	@FieldDescribe("管理员标识")
+	@FieldDescribe("관리자 식별자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + admin_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + adminName_FIELDNAME)
 	private String admin = "";
 
 	public static final String adminLevel_FIELDNAME = "adminLevel";
-	@FieldDescribe("管理级别:UNIT|TOPUNIT")
+	@FieldDescribe("관리 등급:UNIT|TOPUNIT")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + adminLevel_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String adminLevel = "TOPUNIT";

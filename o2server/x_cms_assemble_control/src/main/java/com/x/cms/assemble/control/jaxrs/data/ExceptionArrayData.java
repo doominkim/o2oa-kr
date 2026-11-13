@@ -7,6 +7,6 @@ class ExceptionArrayData extends LanguagePromptException {
 	private static final long serialVersionUID = -665095222445791960L;
 
 	ExceptionArrayData( ) {
-		super("更新的数据不能为数组.");
+		super("수정할 데이터는 배열일 수 없습니다.");
 	}
 }

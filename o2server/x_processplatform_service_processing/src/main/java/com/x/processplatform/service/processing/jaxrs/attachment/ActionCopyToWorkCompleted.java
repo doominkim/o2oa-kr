@@ -32,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  *
- * @author zhour 复制指定的附件到work,仅拷贝内容,并清除其他附带的信息
+ * @author zhour 지정 첨부파일을 work로 복사, 내용만 복사하고 기타 부가 정보 제거
  */
 class ActionCopyToWorkCompleted extends BaseAction {
 
@@ -160,7 +160,7 @@ class ActionCopyToWorkCompleted extends BaseAction {
 
 		private static final long serialVersionUID = -6570525404862979338L;
 
-		@FieldDescribe("附件对象")
+		@FieldDescribe("첨부파일 객체")
 		private List<WiAttachment> attachmentList = new ArrayList<>();
 
 		public List<WiAttachment> getAttachmentList() {

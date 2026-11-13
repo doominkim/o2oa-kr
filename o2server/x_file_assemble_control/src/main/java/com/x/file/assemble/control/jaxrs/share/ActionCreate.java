@@ -32,7 +32,7 @@ import com.x.file.core.entity.personal.Folder2;
 import com.x.file.core.entity.personal.Share;
 
 /**
- * 分享文件
+ * 파일 공유
  * 
  * @author sword
  */
@@ -91,7 +91,7 @@ public class ActionCreate extends BaseAction {
 				emc.persist(share, CheckPersistType.all);
 			}
 			emc.commit();
-			logger.info("{}分享文件:{}", effectivePerson.getDistinguishedName(), share.getName());
+			logger.info("{} 파일 공유: {}", effectivePerson.getDistinguishedName(), share.getName());
 			wo.setId(share.getId());
 			share.copyTo(tempShare);
 		}
@@ -159,13 +159,13 @@ public class ActionCreate extends BaseAction {
 			ListOrderedSet<String> set = new ListOrderedSet<>();
 			set.addAll(shareAdds);
 			shareAdds = set.asList();
-			/* 发送共享通知 */
+			/* 공유 알림 발송 */
 			for (String str : shareAdds) {
 				this.message_send_attachment_share(share, str);
 			}
 			shareAdds.clear();
 		} catch (Exception e) {
-			logger.warn("文件分享消息发送异常：{}", e.getMessage());
+			logger.warn("파일 공유 메시지 발송 오류: {}", e.getMessage());
 		}
 	}
 

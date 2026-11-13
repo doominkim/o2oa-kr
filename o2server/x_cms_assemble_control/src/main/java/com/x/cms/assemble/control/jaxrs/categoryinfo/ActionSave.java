@@ -31,7 +31,7 @@ import com.x.cms.core.entity.element.ViewCategory;
 
 
 /**
- * 保存分类信息
+ * 분류 정보 저장
  * @author sword
  */
 public class ActionSave extends BaseAction {
@@ -68,7 +68,7 @@ public class ActionSave extends BaseAction {
 					identityName = userManagerService.getPersonIdentity( effectivePerson.getDistinguishedName(), identityName);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionCategoryInfoProcess(e, "系统获取人员身份名称时发生异常，指定身份：" + identityName);
+					Exception exception = new ExceptionCategoryInfoProcess(e, "사용자 소속 이름을 가져오는 중 오류가 발생했습니다. 지정 소속: " + identityName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -119,7 +119,7 @@ public class ActionSave extends BaseAction {
 				wi.setId( CategoryInfo.createId() );
 			}
 			try {
-				//先查询原来的分类信息，如果有的话，后续需要对比一下是否修改了分类名称，如果修改了分类名称 ，那么需要修改所有文档中记录的分类名称
+				//기존 분류 정보를 먼저 조회하고, 있으면 분류 이름 변경 여부를 비교해 변경되었으면 모든 문서에 기록된 분류 이름을 수정해야 함
 				old_categoryInfo = categoryInfoServiceAdv.get( wi.getId() );
 			} catch (Exception e) {
 				check = false;
@@ -140,12 +140,12 @@ public class ActionSave extends BaseAction {
 					if( appInfo.getSendNotify() == null) {
 						wi.setSendNotify( true );
 					}else {
-						//继承栏目的通知配置
+						//게시판의 알림 설정 상속
 						wi.setSendNotify( appInfo.getSendNotify() );
 					}
 				}
 			}else {
-				//数据就默认为false，不通知
+				//데이터는 기본값 false, 알림 안 함
 				if( wi.getSendNotify() == null ) {
 					wi.setSendNotify( false );
 				}
@@ -162,13 +162,13 @@ public class ActionSave extends BaseAction {
 				if( old_categoryInfo != null ) {
 					if( !old_categoryInfo.getCategoryName().equalsIgnoreCase( categoryInfo.getCategoryName() ) ||
 							 !old_categoryInfo.getCategoryAlias().equalsIgnoreCase( categoryInfo.getCategoryAlias() )	) {
-						//修改了分类名称，增加删除栏目批量操作（对分类和文档）的信息
+						//분류 이름이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 						new CmsBatchOperationPersistService().addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_CATEGORY,
 								CmsBatchOperationProcessService.OPT_TYPE_UPDATENAME,  categoryInfo.getId(), old_categoryInfo.getCategoryName(), "更新分类名称：ID=" + categoryInfo.getId() );
 					}
 					if(  permissionQueryService.hasDiffrentViewPermissionInCategory( old_categoryInfo, categoryInfo )) {
-						//修改了栏目名称或者别名，增加删除栏目批量操作（对分类和文档）的信息
+						//게시판 이름 또는 별칭이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 						new CmsBatchOperationPersistService().addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_CATEGORY,
 								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  categoryInfo.getId(), categoryInfo.getCategoryName(), "变更分类可见权限：ID=" + categoryInfo.getId() );
@@ -201,7 +201,7 @@ public class ActionSave extends BaseAction {
 		public static WrapCopier<Wi, CategoryInfo> copier = WrapCopierFactory.wi(Wi.class, CategoryInfo.class, null,
 				JpaObject.FieldsUnmodify);
 
-		@FieldDescribe("用户保存的身份")
+		@FieldDescribe("사용자가 저장한 신분")
 		private String identity = null;
 
 		@FieldDescribe("扩展信息JSON内容")

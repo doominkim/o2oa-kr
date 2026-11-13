@@ -50,7 +50,7 @@ class ActionUpdateWithWorkPath extends BaseAction {
 				}
 				String[] paths = path.split(PATH_SPLIT);
 				updateData(business, work, wi.getJsonElement(), paths);
-				/* updateTitleSerial 和 updateData 方法内进行了提交 */
+				/* updateTitleSerial과 updateData 메서드 내에서 커밋함 */
 
 				wi.init(work);
 				JsonObject jsonObject = new JsonObject();

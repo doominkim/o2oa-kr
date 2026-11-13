@@ -12,7 +12,7 @@ import com.x.cms.core.entity.DocumentCommend;
 import com.x.cms.core.entity.DocumentCommentInfo;
 
 /**
- * 文档点赞信息持久化管理的服务类
+ * 문서 좋아요 정보 영속화 관리 서비스 클래스
  *
  * @author O2LEE
  */

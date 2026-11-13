@@ -17,7 +17,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "AttendanceEmployeeConfig", description = "考勤雇员配置.")
+@Schema(name = "AttendanceEmployeeConfig", description = "근태 직원 설정.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceEmployeeConfig.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceEmployeeConfig.table
@@ -37,7 +37,7 @@ public class AttendanceEmployeeConfig extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -46,55 +46,55 @@ public class AttendanceEmployeeConfig extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 	public static final String topUnitName_FIELDNAME = "topUnitName";
-	@FieldDescribe("顶层组织名称distinguishedName")
+	@FieldDescribe("최상위 조직 이름 distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + topUnitName_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String topUnitName = "";
 
 	public static final String topUnitOu_FIELDNAME = "topUnitOu";
-	@FieldDescribe("顶层组织编号distinguishedName")
+	@FieldDescribe("최상위 조직 번호 distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + topUnitOu_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String topUnitOu = "";
 
 	public static final String unitName_FIELDNAME = "unitName";
-	@FieldDescribe("组织名称distinguishedName")
+	@FieldDescribe("조직 이름 distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + unitName_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String unitName = "";
 
 	public static final String unitOu_FIELDNAME = "unitOu";
-	@FieldDescribe("组织编号")
+	@FieldDescribe("조직 번호")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + unitOu_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String unitOu = "";
 
 	public static final String employeeName_FIELDNAME = "employeeName";
-	@FieldDescribe("员工姓名distinguishedName")
+	@FieldDescribe("직원 이름 distinguishedName")
 	@Column( length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix + employeeName_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String employeeName = "";
 
 	public static final String employeeNumber_FIELDNAME = "employeeNumber";
-	@FieldDescribe("员工号")
+	@FieldDescribe("사번")
 	@Column( length = JpaObject.length_96B, name = ColumnNamePrefix + employeeNumber_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String employeeNumber = "";
 
 	public static final String empInTopUnitTime_FIELDNAME = "empInTopUnitTime";
-	@FieldDescribe("员工入职时间")
+	@FieldDescribe("직원 입사일")
 	@Column( length = JpaObject.length_32B, name = ColumnNamePrefix + empInTopUnitTime_FIELDNAME )
 	@CheckPersist(allowEmpty = true)
 	private String empInTopUnitTime = "1900-01-01";
@@ -103,7 +103,7 @@ public class AttendanceEmployeeConfig extends SliceJpaObject {
 	public static final String CONFIGTYPE_NOTREQUIRED = "NOTREQUIRED";
 
 	public static final String configType_FIELDNAME = "configType";
-	@FieldDescribe("配置类型:REQUIRED（需要考勤）|NOTREQUIRED（不需要考勤）")
+	@FieldDescribe("설정 유형:REQUIRED(근태 필요)|NOTREQUIRED(근태 불필요)")
 	@Column( length = JpaObject.length_16B, name = ColumnNamePrefix + configType_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String configType = "";

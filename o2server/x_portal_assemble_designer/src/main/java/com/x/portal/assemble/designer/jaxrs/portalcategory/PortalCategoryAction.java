@@ -22,12 +22,12 @@ import com.x.base.core.project.logger.Logger;
 import com.x.base.core.project.logger.LoggerFactory;
 
 @Path("portalcategory")
-@JaxrsDescribe("门户分类")
+@JaxrsDescribe("포털 분류")
 public class PortalCategoryAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(PortalCategoryAction.class);
 
-	@JaxrsMethodDescribe(value = "查看用户可管理的portalcategory.", action = ActionList.class)
+	@JaxrsMethodDescribe(value = "사용자가 관리할 수 있는 portalcategory 조회.", action = ActionList.class)
 	@GET
 	@Path("list")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

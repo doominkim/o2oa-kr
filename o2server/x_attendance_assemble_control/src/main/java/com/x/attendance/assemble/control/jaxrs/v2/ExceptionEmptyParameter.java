@@ -8,6 +8,6 @@ public class ExceptionEmptyParameter extends PromptException {
 	private static final long serialVersionUID = -4002941653651110788L;
 
 	public ExceptionEmptyParameter(String name) {
-		super(name + "不能为空.");
+		super(name + "비워 둘 수 없습니다.");
 	}
 }

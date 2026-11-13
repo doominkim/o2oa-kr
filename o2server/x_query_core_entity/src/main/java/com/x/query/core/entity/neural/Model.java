@@ -52,7 +52,7 @@ import com.x.base.core.project.tools.MapTools;
 import com.x.query.core.entity.PersistenceProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Model", description = "数据中心神经网络模型.")
+@Schema(name = "Model", description = "데이터 센터 신경망 모델.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Neural.Model.table, uniqueConstraints = {
@@ -74,7 +74,7 @@ public class Model extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	@CheckRemove(citationNotExists = { @CitationNotExist(type = Entry.class, fields = Entry.model_FIELDNAME),
@@ -84,13 +84,13 @@ public class Model extends SliceJpaObject {
 			@CitationNotExist(type = OutValue.class, fields = OutValue.model_FIELDNAME) })
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String PROPERTY_MLP_HIDDENLAYERCOUNT = "hiddenLayerCount";
 	public static final Integer DEFAULT_MLP_HIDDENLAYERCOUNT = 2;
@@ -198,44 +198,44 @@ public class Model extends SliceJpaObject {
 	}
 
 	public static final String neuralNetworkType_FIELDNAME = "neuralNetworkType";
-	@FieldDescribe("神经网络类型:" + NEURALNETWORKTYPE_MLP + ".")
+	@FieldDescribe("신경망 유형:" + NEURALNETWORKTYPE_MLP + ".")
 	@Column(length = length_32B, name = ColumnNamePrefix + neuralNetworkType_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String neuralNetworkType;
 
 	public static final String dataType_FIELDNAME = "dataType";
-	@FieldDescribe("数据类型:" + DATATYPE_CMS + "," + DATATYPE_PROCESSPLATFORM)
+	@FieldDescribe("데이터 유형:" + DATATYPE_CMS + "," + DATATYPE_PROCESSPLATFORM)
 	@Column(length = length_32B, name = ColumnNamePrefix + dataType_FIELDNAME)
 	@CheckPersist(allowEmpty = true, simplyString = false)
 	private String dataType;
 
 	public static final String name_FIELDNAME = "name";
 	@Flag
-	@FieldDescribe("名称")
+	@FieldDescribe("이름")
 	@Column(length = length_255B, name = ColumnNamePrefix + name_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + name_FIELDNAME)
 	@CheckPersist(allowEmpty = false, citationNotExists =
-	/* 检查不重名 */
+	/* 이름 중복 검사 */
 	@CitationNotExist(type = Model.class, fields = { "id", "name", "alias" }))
 	private String name;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明")
+	@FieldDescribe("설명")
 	@Column(length = length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
 
 	public static final String alias_FIELDNAME = "alias";
 	@Flag
-	@FieldDescribe("别名.")
+	@FieldDescribe("별칭.")
 	@Column(length = length_255B, name = ColumnNamePrefix + alias_FIELDNAME)
 	@CheckPersist(allowEmpty = true, citationNotExists =
-	/* 同一个应用下不可重名 */
+	/* 같은 앱 안에서 이름 중복 불가 */
 	@CitationNotExist(type = Model.class, fields = { "id", "name", "alias" }))
 	private String alias;
 
 	public static final String inValueScriptText_FIELDNAME = "inValueScriptText";
-	@FieldDescribe("输入值脚本,脚本中的操作对象是inValues,对象类型Set")
+	@FieldDescribe("입력값 스크립트, 스크립트의 조작 대상은 inValues, 객체 유형 Set")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + inValueScriptText_FIELDNAME)
@@ -243,7 +243,7 @@ public class Model extends SliceJpaObject {
 	private String inValueScriptText;
 
 	public static final String outValueScriptText_FIELDNAME = "outValueScriptText";
-	@FieldDescribe("输出值脚本,脚本中的操作对象是outValues,对象类型Set")
+	@FieldDescribe("출력값 스크립트, 스크립트의 조작 대상은 outValues, 객체 유형 Set")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + outValueScriptText_FIELDNAME)
@@ -251,7 +251,7 @@ public class Model extends SliceJpaObject {
 	private String outValueScriptText;
 
 	public static final String attachmentScriptText_FIELDNAME = "attachmentScriptText";
-	@FieldDescribe("附件过滤脚本,脚本中的操作对象是attachments,对象类型List,内容是附件名称,可以删除不要进行分词的附件名.")
+	@FieldDescribe("첨부파일 필터 스크립트, 스크립트의 조작 대상은 attachments, 객체 유형 List, 내용은 첨부파일 이름이며 형태소 분석이 필요 없는 첨부파일 이름을 삭제할 수 있음.")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_10M, name = ColumnNamePrefix + attachmentScriptText_FIELDNAME)
@@ -259,7 +259,7 @@ public class Model extends SliceJpaObject {
 	private String attachmentScriptText;
 
 	public static final String processList_FIELDNAME = "processList";
-	@FieldDescribe("包含流程.")
+	@FieldDescribe("포함 프로세스.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + processList_FIELDNAME, joinIndex = @Index(name = TABLE
 			+ IndexNameMiddle + processList_FIELDNAME + JoinIndexNameSuffix))
@@ -270,7 +270,7 @@ public class Model extends SliceJpaObject {
 	private List<String> processList;
 
 	public static final String applicationList_FIELDNAME = "applicationList";
-	@FieldDescribe("包含应用.")
+	@FieldDescribe("포함 앱.")
 	@PersistentCollection(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + applicationList_FIELDNAME, joinIndex = @Index(name = TABLE
 			+ IndexNameMiddle + applicationList_FIELDNAME + JoinIndexNameSuffix))
@@ -281,31 +281,31 @@ public class Model extends SliceJpaObject {
 	private List<String> applicationList;
 
 	public static final String analyzeType_FIELDNAME = "analyzeType";
-	@FieldDescribe("分析类型,default,full,customized")
+	@FieldDescribe("분석 유형, default, full, customized")
 	@Column(length = length_32B, name = ColumnNamePrefix + analyzeType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String analyzeType;
 
 	public static final String maxResult_FIELDNAME = "maxResult";
-	@FieldDescribe("最大输出值")
+	@FieldDescribe("최대 출력값")
 	@Column(name = ColumnNamePrefix + maxResult_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer maxResult;
 
 	public static final String inValueCount_FIELDNAME = "inValueCount";
-	@FieldDescribe("输入数量")
+	@FieldDescribe("입력 개수")
 	@Column(name = ColumnNamePrefix + inValueCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer inValueCount;
 
 	public static final String outValueCount_FIELDNAME = "outValueCount";
-	@FieldDescribe("输出数量")
+	@FieldDescribe("출력 개수")
 	@Column(name = ColumnNamePrefix + outValueCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer outValueCount;
 
 	public static final String propertyMap_FIELDNAME = "propertyMap";
-	@FieldDescribe("神经网络参数.")
+	@FieldDescribe("신경망 매개변수.")
 	@CheckPersist(allowEmpty = true)
 	@PersistentMap(fetch = FetchType.EAGER)
 	@ContainerTable(name = TABLE + ContainerTableNameMiddle + propertyMap_FIELDNAME, joinIndex = @Index(name = TABLE
@@ -317,41 +317,41 @@ public class Model extends SliceJpaObject {
 	private LinkedHashMap<String, String> propertyMap;
 
 	public static final String startDate_FIELDNAME = "startDate";
-	@FieldDescribe("开始时间")
+	@FieldDescribe("시작 시간")
 	@Column(name = ColumnNamePrefix + startDate_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + startDate_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date startDate;
 
 	public static final String endDate_FIELDNAME = "endDate";
-	@FieldDescribe("开始时间")
+	@FieldDescribe("시작 시간")
 	@Column(name = ColumnNamePrefix + endDate_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + endDate_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date endDate;
 
 	public static final String entryCount_FIELDNAME = "entryCount";
-	@FieldDescribe("条目数量")
+	@FieldDescribe("항목 개수")
 	@Column(name = ColumnNamePrefix + entryCount_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + entryCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer entryCount;
 
 	public static final String effectiveEntryCount_FIELDNAME = "effectiveEntryCount";
-	@FieldDescribe("有效条目数量")
+	@FieldDescribe("유효 항목 개수")
 	@Column(name = ColumnNamePrefix + effectiveEntryCount_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + effectiveEntryCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer effectiveEntryCount;
 
 	public static final String status_FIELDNAME = "status";
-	@FieldDescribe("状态,generating or learning")
+	@FieldDescribe("상태, generating or learning")
 	@Column(length = length_32B, name = ColumnNamePrefix + status_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String status;
 
 	public static final String nnet_FIELDNAME = "nnet";
-	@FieldDescribe("方案二进制代码")
+	@FieldDescribe("방안 바이너리 코드")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_100M, name = ColumnNamePrefix + nnet_FIELDNAME)
@@ -359,7 +359,7 @@ public class Model extends SliceJpaObject {
 	private String nnet;
 
 	public static final String intermediateNnet_FIELDNAME = "intermediateNnet";
-	@FieldDescribe("方案二进制代码")
+	@FieldDescribe("방안 바이너리 코드")
 	@Lob
 	@Basic(fetch = FetchType.EAGER)
 	@Column(length = JpaObject.length_100M, name = ColumnNamePrefix + intermediateNnet_FIELDNAME)
@@ -367,31 +367,31 @@ public class Model extends SliceJpaObject {
 	private String intermediateNnet;
 
 	public static final String generatingPercent_FIELDNAME = "generatingPercent";
-	@FieldDescribe("当前条目生成进度")
+	@FieldDescribe("현재 항목 생성 진행률")
 	@Column(name = ColumnNamePrefix + generatingPercent_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer generatingPercent;
 
 	public static final String totalError_FIELDNAME = "totalError";
-	@FieldDescribe("学习总错误,当前均方误差")
+	@FieldDescribe("학습 총 오차, 현재 평균 제곱 오차")
 	@Column(name = ColumnNamePrefix + totalError_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double totalError;
 
 	public static final String learnEntryCount_FIELDNAME = "learnEntryCount";
-	@FieldDescribe("学习条目数量")
+	@FieldDescribe("학습 항목 개수")
 	@Column(name = ColumnNamePrefix + learnEntryCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer learnEntryCount;
 
 	public static final String validationEntryCount_FIELDNAME = "validationEntryCount";
-	@FieldDescribe("测试条目数量")
+	@FieldDescribe("테스트 항목 개수")
 	@Column(name = ColumnNamePrefix + validationEntryCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer validationEntryCount;
 
 	public static final String validationMeanSquareError_FIELDNAME = "validationMeanSquareError";
-	@FieldDescribe("测试结果")
+	@FieldDescribe("테스트 결과")
 	@Column(name = ColumnNamePrefix + validationMeanSquareError_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double validationMeanSquareError;

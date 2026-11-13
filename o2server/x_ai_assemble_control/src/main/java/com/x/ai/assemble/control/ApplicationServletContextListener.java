@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebListener;
 import com.x.base.core.project.Context;
 
 /**
- * 应用启停监听
+ * 앱 시작·종료 리스너
  * @author sword
  */
 @WebListener

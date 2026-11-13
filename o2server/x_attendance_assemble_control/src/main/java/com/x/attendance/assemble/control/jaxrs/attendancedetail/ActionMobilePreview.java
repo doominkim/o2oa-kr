@@ -23,7 +23,7 @@ import com.x.base.core.project.logger.LoggerFactory;
 import com.x.base.core.project.tools.ListTools;
 
 /**
- * 预打卡，根据当前人以及对应的排班设置，给出打卡的预判断
+ * 사전 기록: 현재 사용자와 해당 근무 배정 설정으로 기록 결과 사전 판단
  */
 public class ActionMobilePreview extends BaseAction {
 
@@ -42,14 +42,14 @@ public class ActionMobilePreview extends BaseAction {
 		WoScheduleSetting woScheduleSetting = null;
 		String signDate = dateOperation.getDateStringFromDate( new Date(), "YYYY-MM-DD");
 
-		//先查询该员工所有的考勤数据
+		//먼저 해당 직원의 모든 근태 데이터 조회
 		if (check) {
 			try {
 				attendanceDetailMobileList = attendanceDetailServiceAdv.listAttendanceDetailMobile( effectivePerson.getDistinguishedName(), signDate );
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAttendanceDetailProcess(e,
-						"根据条件查询员工手机打卡信息列表时发生异常.DistinguishedName:" + effectivePerson.getDistinguishedName() + ",Date:" + signDate);
+						"조건으로 직원 모바일 체크 정보 목록을 조회하는 중 오류가 발생했습니다. DistinguishedName:" + effectivePerson.getDistinguishedName() + ",Date:" + signDate);
 				result.error(exception);
 				logger.error(e, currentPerson, request, null);
 			}
@@ -61,30 +61,30 @@ public class ActionMobilePreview extends BaseAction {
 					wraps = WoMobileRecord.copier.copy(attendanceDetailMobileList);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAttendanceDetailProcess(e, "系统在转换员工手机打卡信息为输出对象时发生异常.");
+					Exception exception = new ExceptionAttendanceDetailProcess(e, "직원 모바일 체크 정보를 출력 객체로 변환하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, currentPerson, request, null);
 				}
 			}
 		}
 
-		//根据当前时间和排班设置，计算当前预打卡信息
+		//현재 시간과 근무 배정 설정으로 현재 사전 기록 정보 계산
 		WoSign woSignFeature = null;
 		if (check) {
-			//打卡策略：1-两次打卡（上午上班，下午下班） 2-三次打卡（上午上班，下午下班加中午一次共三次） 3-四次打卡（上午下午都打上班下班卡）
+			//기록 정책: 1-2회 기록(오전 출근, 오후 퇴근) 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회) 3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 				scheduleSetting = attendanceScheduleSettingServiceAdv.getAttendanceScheduleSettingWithPerson( effectivePerson.getDistinguishedName(), effectivePerson.getDebugger() );
 
 			if( scheduleSetting != null ){
 				woScheduleSetting = WoScheduleSetting.copier.copy(scheduleSetting);
 
 				if( woScheduleSetting.getSignProxy() == 3 ){
-					//3-四次打卡（上午下午都打上班下班卡）
+					//3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 					woSignFeature = this.getWoSignWithProxy3(wraps, woScheduleSetting);
 				}else if( woScheduleSetting.getSignProxy() == 2 ){
-					//2-三次打卡（上午上班，下午下班加中午一次共三次）
+					//2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회)
 					woSignFeature = this.getWoSignWithProxy2(wraps, woScheduleSetting);
 				}else{
-					//1-两次打卡（上午上班，下午下班）
+					//1-2회 기록(오전 출근, 오후 퇴근)
 					woSignFeature = this.getWoSignWithProxy1(wraps, woScheduleSetting);
 				}
 			}
@@ -99,8 +99,8 @@ public class ActionMobilePreview extends BaseAction {
 	}
 
 	/**
-	 * 计算下一次打卡是什么打卡
-	 * 1-两次打卡（上午上班，下午下班）
+	 * 다음 기록이 어떤 기록인지 계산
+	 * 1-2회 기록(오전 출근, 오후 퇴근)
 	 * @param wraps
 	 * @param scheduleSetting
 	 * @return
@@ -109,18 +109,18 @@ public class ActionMobilePreview extends BaseAction {
 		WoSign woSignFeature = new WoSign();
 		Date now = new Date();
 		String recordDateString = dateOperation.getDateStringFromDate( now, "YYYY-MM-DD");
-		//排班设置中的上班时间
+		//근무 배정 설정의 출근 시간
 		Date onDutyTime = dateOperation.getDateFromString( recordDateString+ " " + scheduleSetting.getOnDutyTime() );
-		//排班设置中的迟到时间
+		//근무 배정 설정의 지각 시간
 		Date lateStartTime = dateOperation.getDateFromString( recordDateString+ " " + scheduleSetting.getLateStartTime() );
-		//排班中的缺勤时间
+		//근무 배정의 결근 시간
 		Date absenceStartTime = dateOperation.getDateFromString( recordDateString + " " + scheduleSetting.getAbsenceStartTime() );
-		//排班中的早退时间
+		//근무 배정의 조퇴 시간
 		Date leaveEarlyStartTime = dateOperation.getDateFromString( recordDateString + " " + scheduleSetting.getLeaveEarlyStartTime() );
-		//排班设置中的下班时间
+		//근무 배정 설정의 퇴근 시간
 		Date offDutyTime = dateOperation.getDateFromString( recordDateString+ " " + scheduleSetting.getOffDutyTime() );
 
-		//根据当前时间和排班设置，判断当前时间是落在哪个区间
+		//현재 시간과 근무 배정 설정으로 현재 시간이 어느 구간인지 판단
 		if(onDutyTime.after(now)){
 			woSignFeature.setSignSeq(1);
 			woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
@@ -131,7 +131,7 @@ public class ActionMobilePreview extends BaseAction {
 			woSignFeature.setSignSeq(2);
 			woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
 		}else if(absenceStartTime.before(now) && leaveEarlyStartTime.after(now)){
-			//过了缺勤时间就算是第二次打卡-签退
+			//결근 시간이 지나면 두 번째 기록-퇴근 체크로 간주
 			woSignFeature.setSignSeq(4);
 			woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY);
 		}else{
@@ -142,8 +142,8 @@ public class ActionMobilePreview extends BaseAction {
 	}
 
 	/**
-	 * 计算下一次打卡是什么打卡
-	 * 2-三次打卡（上午上班，下午下班加中午一次共三次）
+	 * 다음 기록이 어떤 기록인지 계산
+	 * 2-3회 기록(오전 출근, 오후 퇴근, 정오 1회 포함 총 3회)
 	 *
 	 * @param wraps
 	 * @param scheduleSetting
@@ -160,32 +160,32 @@ public class ActionMobilePreview extends BaseAction {
 		Date morningOffdutyTime = null, afternoonOndutyTime = null;
 		String todayDateStr = dateOperation.getDateStringFromDate( now, "YYYY-MM-DD");
 
-		//计算，上班下班时间
+		//출근·퇴근 시간 계산
 		if( StringUtils.isNotEmpty( scheduleSetting.getOnDutyTime())) {
-			//排班设置中的上班时间
+			//근무 배정 설정의 출근 시간
 			onDutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getOnDutyTime() );
 		}
 		if( StringUtils.isNotEmpty( scheduleSetting.getOffDutyTime())) {
-			//排班设置中的下班时间
+			//근무 배정 설정의 퇴근 시간
 			offDutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getOffDutyTime() );
 		}
 		if( StringUtils.isNotEmpty( scheduleSetting.getMiddayRestStartTime())) {
-			//排班设置中的午休开始时间
+			//근무 배정 설정의 점심 휴식 시작 시간
 			morningOffdutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getMiddayRestStartTime() );
 		}
 		if( StringUtils.isNotEmpty( scheduleSetting.getMiddayRestEndTime())) {
-			//排班设置中的午休结束时间
+			//근무 배정 설정의 점심 휴식 종료 시간
 			afternoonOndutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getMiddayRestEndTime() );
 		}
-		//排班设置中的迟到时间
+		//근무 배정 설정의 지각 시간
 		Date lateStartTime = dateOperation.getDateFromString( todayDateStr+ " " + scheduleSetting.getLateStartTime() );
-		//排班中的缺勤时间
+		//근무 배정의 결근 시간
 		Date absenceStartTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getAbsenceStartTime() );
-		//排班中的早退时间
+		//근무 배정의 조퇴 시간
 		Date leaveEarlyStartTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getLeaveEarlyStartTime() );
 		signRecordStatus = getSignRecordStatus( wraps, onDutyTime, morningOffdutyTime, afternoonOndutyTime, offDutyTime );
 
-		//根据当前时间和排班设置，判断当前时间是落在哪个区间
+		//현재 시간과 근무 배정 설정으로 현재 시간이 어느 구간인지 판단
 		if(onDutyTime.after(now)){
 			woSignFeature.setSignSeq(1);
 			woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
@@ -201,11 +201,11 @@ public class ActionMobilePreview extends BaseAction {
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
 			}
 		}else if(morningOffdutyTime.before(now) && afternoonOndutyTime.after(now)){
-			//过了午休开始时间就算是第二次打卡-中午签到
+			//점심 휴식 시작 시간이 지나면 두 번째 기록-정오 출근 체크로 간주
 			woSignFeature.setSignSeq(1);
 			woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON);
 		}else if(afternoonOndutyTime.before(now) && leaveEarlyStartTime.after(now)){
-			//过了午休结束时间-可能是中午签到或下午下班签退
+			//점심 휴식 종료 시간 경과-정오 출근 체크 또는 오후 퇴근 체크일 수 있음
 			if(signRecordStatus.getAlreadyAfternoon()){
 				woSignFeature.setSignSeq(1);
 				woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON);
@@ -221,8 +221,8 @@ public class ActionMobilePreview extends BaseAction {
 	}
 
 	/**
-	 * 计算下一次打卡是什么打卡
-	 * 3-四次打卡（上午下午都打上班下班卡）
+	 * 다음 기록이 어떤 기록인지 계산
+	 * 3-4회 기록(오전·오후 모두 출근·퇴근 기록)
 	 *
 	 * @param wraps
 	 * @param scheduleSetting
@@ -245,22 +245,22 @@ public class ActionMobilePreview extends BaseAction {
 			return null;
 		}
 
-		//计算，上班下班时间
+		//출근·퇴근 시간 계산
 		onDutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getOnDutyTime() );
 		morningOffdutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getMiddayRestStartTime() );
 		afternoonOndutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getMiddayRestEndTime() );
 		offDutyTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getOffDutyTime() );
-		//排班设置中的迟到时间(上午迟到，下午迟到)
+		//근무 배정 설정의 지각 시간(오전 지각, 오후 지각)
 		Date lateStartTime = dateOperation.getDateFromString( todayDateStr+ " " + scheduleSetting.getLateStartTime() );
 		Date lateStartTimeAfternoon = dateOperation.getDateFromString( todayDateStr+ " " + scheduleSetting.getLateStartTimeAfternoon());
-		//排班中的缺勤时间
+		//근무 배정의 결근 시간
 		Date absenceStartTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getAbsenceStartTime() );
-		//排班中的早退时间(上午早退，下午早退)
+		//근무 배정의 조퇴 시간(오전 조퇴, 오후 조퇴)
 		Date leaveEarlyStartTimeMorning = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getLeaveEarlyStartTimeMorning() );
 		Date leaveEarlyStartTime = dateOperation.getDateFromString( todayDateStr + " " + scheduleSetting.getLeaveEarlyStartTime() );
 		signRecordStatus = getSignRecordStatus( wraps, onDutyTime, morningOffdutyTime, afternoonOndutyTime, offDutyTime );
 
-		//根据当前时间和排班设置，判断当前时间是落在哪个区间
+		//현재 시간과 근무 배정 설정으로 현재 시간이 어느 구간인지 판단
 		if(onDutyTime.after(now)){
 			woSignFeature.setSignSeq(1);
 			woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
@@ -269,11 +269,11 @@ public class ActionMobilePreview extends BaseAction {
 			woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
 		}else if(lateStartTime.before(now) && leaveEarlyStartTimeMorning.after(now)) {
 			if(signRecordStatus.getAlreadyOnduty()){
-				//上午已打过上班卡，此时结果为上午早退
+				//오전 출근 기록이 이미 있으므로 결과는 오전 조퇴
 				woSignFeature.setSignSeq(4);
 				woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_MORNING_OFFDUTY);
 			}else{
-				//上午没打过上班卡,即当前是第一次打卡,此时结果为上午迟到
+				//오전 출근 기록 없음, 즉 현재 첫 기록이므로 결과는 오전 지각
 				woSignFeature.setSignSeq(2);
 				woSignFeature.setCheckinType( AttendanceDetailMobile.CHECKIN_TYPE_ONDUTY );
 				if (absenceStartTime.after(now)) {
@@ -282,7 +282,7 @@ public class ActionMobilePreview extends BaseAction {
 				}
 			}
 		}else if(leaveEarlyStartTimeMorning.before(now) && morningOffdutyTime.after(now)){
-			//过了上午早退时间就算第二次打卡-上午下班打卡
+			//오전 조퇴 시간이 지나면 두 번째 기록-오전 퇴근 기록으로 간주
 			if (absenceStartTime.after(now)) {
 				woSignFeature.setSignSeq(1);
 				woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_MORNING_OFFDUTY);
@@ -292,23 +292,23 @@ public class ActionMobilePreview extends BaseAction {
 			}
 
 		}else if(morningOffdutyTime.before(now) && afternoonOndutyTime.after(now)){
-			//此时打卡，可能是上午下班打卡，可能是下午上班打卡
+			//이때 기록은 오전 퇴근 기록일 수도, 오후 출근 기록일 수도 있음
 			woSignFeature.setSignSeq(1);
 			if(signRecordStatus.getAlreadyMorningOffDuty()){
-				//已经打卡上午下班卡,此时是下午上班卡
+				//오전 퇴근 기록이 이미 있으므로 이번은 오후 출근 기록
 				woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON_ONDUTY);
 			}else{
-				//未打卡上午下班卡,此时是上午下班卡
+				//오전 퇴근 기록이 없으므로 이번은 오전 퇴근 기록
 				woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_MORNING_OFFDUTY);
 			}
 		}else if(afternoonOndutyTime.before(now) && leaveEarlyStartTime.after(now)){
-			//过了午休结束时间-下午上班签到或下午下班
+			//점심 휴식 종료 시간 경과-오후 출근 체크 또는 오후 퇴근
 			if(signRecordStatus.getAlreadyAfternoonOnDuty()){
-				//已经打过下午上班卡-此时是下午下班卡
+				//오후 출근 기록이 이미 있으므로 이번은 오후 퇴근 기록
 				woSignFeature.setSignSeq(4);
 				woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_OFFDUTY);
 			}else{
-				//未打过下午上班卡-此时是下午上班卡
+				//오후 출근 기록이 없으므로 이번은 오후 출근 기록
 				woSignFeature.setSignSeq(1);
 				woSignFeature.setCheckinType(AttendanceDetailMobile.CHECKIN_TYPE_AFTERNOON_ONDUTY);
 			}
@@ -345,7 +345,7 @@ public class ActionMobilePreview extends BaseAction {
 
 	public static class Wo{
 
-		@FieldDescribe("下一次打卡信息")
+		@FieldDescribe("다음 출퇴근 기록 정보")
 		private WoSign feature;
 
 		public WoSign getFeature() { return feature; }
@@ -363,7 +363,7 @@ public class ActionMobilePreview extends BaseAction {
 
 	public static class WoSign{
 
-		@FieldDescribe("预打卡结果类型：1正常|2迟到|3缺勤|4早退|5已完成")
+		@FieldDescribe("사전 기록 결과 유형: 1정상|2지각|3결근|4조퇴|5완료")
 		private Integer signSeq = 1;
 
 		@FieldDescribe("打卡操作名称：上班打卡|下班打卡|午休打卡|上午下班打卡|下午上班打卡(根据不同的打卡策略稍有不同)....")

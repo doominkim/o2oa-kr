@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.ticket.Tickets;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ParallelAddAfterParallelAndAfterQueueTest {
 
-	@DisplayName("B后加签EFG,EFG并行处理，F后加签IJK，IJK串行处理,即并行-后加签并行-后加签串行,ACEG并行和IJK串行混合处理")
+	@DisplayName("B 뒤에 EFG 추가 결재, EFG 병렬 처리, F 뒤에 IJK 추가 결재, IJK 순차 처리, 즉 병렬-후 추가 결재 병렬-후 추가 결재 순차, ACEG 병렬과 IJK 순차 혼합 처리")
 	@Test
 	@Order(1)
 	void test01() {
@@ -70,7 +70,7 @@ class ParallelAddAfterParallelAndAfterQueueTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B后加签EFG,EFG并行处理，F后加签IJK，IJK串行处理,即并行-后加签并行-后加签串行,ACEG先处理,IJK后处理")
+	@DisplayName("B 뒤에 EFG 추가 결재, EFG 병렬 처리, F 뒤에 IJK 추가 결재, IJK 순차 처리, 즉 병렬-후 추가 결재 병렬-후 추가 결재 순차, ACEG 먼저 처리, IJK 나중 처리")
 	@Test
 	@Order(2)
 	void test02() {
@@ -123,7 +123,7 @@ class ParallelAddAfterParallelAndAfterQueueTest {
 		Assertions.assertEquals("", value);
 	}
 
-	@DisplayName("B后加签EFG,EFG并行处理，F后加签IJK，IJK串行处理,即并行-后加签并行-后加签串行,IJK先处理,ACEG后处理")
+	@DisplayName("B 뒤에 EFG 추가 결재, EFG 병렬 처리, F 뒤에 IJK 추가 결재, IJK 순차 처리, 즉 병렬-후 추가 결재 병렬-후 추가 결재 순차, IJK 먼저 처리, ACEG 나중 처리")
 	@Test
 	@Order(3)
 	void test03() {

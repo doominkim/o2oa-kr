@@ -14,17 +14,17 @@ import com.x.base.core.project.gson.GsonPropertyObject;
 
 public class WiDesigner extends GsonPropertyObject {
 
-    @FieldDescribe("搜索关键字.")
+    @FieldDescribe("검색 키워드.")
     private String keyword;
-    @FieldDescribe("是否区分大小写.")
+    @FieldDescribe("대소문자 구분 여부.")
     private Boolean caseSensitive;
-    @FieldDescribe("是否全字匹配.")
+    @FieldDescribe("전체 단어 일치 여부.")
     private Boolean matchWholeWord;
-    @FieldDescribe("是否正则表达式匹配.")
+    @FieldDescribe("정규식 일치 여부.")
     private Boolean matchRegExp;
-    @FieldDescribe("设计类型：script|form|page|widget|process")
+    @FieldDescribe("설계 유형: script|form|page|widget|process")
     private List<String> designerTypes = new ArrayList<>();
-    @FieldDescribe("模块的应用列表.")
+    @FieldDescribe("모듈의 앱 목록.")
     private List<ModuleApp> moduleAppList = new ArrayList<>();
 
     public String getKeyword() {
@@ -103,10 +103,10 @@ public class WiDesigner extends GsonPropertyObject {
     }
 
     public class ModuleApp extends GsonPropertyObject {
-        @FieldDescribe("应用ID.")
+        @FieldDescribe("앱 ID.")
         private String appId;
 
-        @FieldDescribe("设计列表.")
+        @FieldDescribe("설계 목록.")
         private List<Designer> designerList;
 
         public String getAppId() {
@@ -128,10 +128,10 @@ public class WiDesigner extends GsonPropertyObject {
 
     public class Designer extends GsonPropertyObject {
 
-        @FieldDescribe("设计类型.")
+        @FieldDescribe("설계 유형.")
         private String designerType;
 
-        @FieldDescribe("设计ID列表.")
+        @FieldDescribe("설계 ID 목록.")
         private List<String> designerIdList;
 
         public String getDesignerType() {

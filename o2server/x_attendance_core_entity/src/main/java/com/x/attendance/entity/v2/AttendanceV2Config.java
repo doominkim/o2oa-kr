@@ -22,12 +22,12 @@ import org.apache.openjpa.persistence.Persistent;
 import org.apache.openjpa.persistence.jdbc.Strategy;
 
 /**
- * 考勤配置
+ * 근태 설정
  * Created by fancyLou on 2023/2/28.
  * Copyright © 2023 O2. All rights reserved.
  */
 
-@Schema(name = "AttendanceV2Config", description = "考勤配置信息.")
+@Schema(name = "AttendanceV2Config", description = "근태 설정 정보.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AttendanceV2Config.table, uniqueConstraints = @UniqueConstraint(name = PersistenceProperties.AttendanceV2Config.table
@@ -48,7 +48,7 @@ public class AttendanceV2Config extends SliceJpaObject {
         this.id = id;
     }
 
-    @FieldDescribe("数据库主键,自动生成.")
+    @FieldDescribe("데이터베이스 기본 키, 자동 생성.")
     @Id
     @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
     private String id = createId();
@@ -60,96 +60,96 @@ public class AttendanceV2Config extends SliceJpaObject {
     }
     /*
      * =============================================================================
-     * ===== 以上为 JpaObject 默认字段
+     * ===== 위는 JpaObject 기본 필드
      * =============================================================================
      * =====
      */
 
     /*
      * =============================================================================
-     * ===== 以下为具体不同的业务及数据表字段要求
+     * ===== 아래는 업무별 데이터 테이블 필드 요구사항
      * =============================================================================
      * =====
      */
 
 
     public static final String appealEnable_FIELDNAME = "appealEnable";
-    @FieldDescribe("是否开启补卡申诉功能")
+    @FieldDescribe("보정 체크 이의 신청 기능 사용 여부")
     @Column(name = ColumnNamePrefix + appealEnable_FIELDNAME)
     private Boolean appealEnable = false;
 
     public static final String appealMaxTimes_FIELDNAME = "appealMaxTimes";
-    @FieldDescribe("每个月最多申诉次数，0不限制")
+    @FieldDescribe("월 최대 이의 신청 횟수, 0은 무제한")
     @Column(  name = ColumnNamePrefix + appealMaxTimes_FIELDNAME)
     private Integer appealMaxTimes = 0;
 
     public static final String processId_FIELDNAME = "processId";
-    @FieldDescribe("自定义流程id")
+    @FieldDescribe("사용자 정의 프로세스 id")
     @Column(name = ColumnNamePrefix + processId_FIELDNAME)
     private String processId;
 
     public static final String processName_FIELDNAME = "processName";
-    @FieldDescribe("自定义流程名称")
+    @FieldDescribe("사용자 정의 프로세스 이름")
     @Column(name = ColumnNamePrefix + processName_FIELDNAME)
     private String processName;
 
     public static final String onDutyFastCheckInEnable_FIELDNAME = "onDutyFastCheckInEnable";
-    @FieldDescribe("上班极速打卡，app端有效")
+    @FieldDescribe("출근 빠른 체크, app에서만 유효")
     @Column(name = ColumnNamePrefix + onDutyFastCheckInEnable_FIELDNAME)
     private Boolean onDutyFastCheckInEnable = false;
 
     public static final String offDutyFastCheckInEnable_FIELDNAME = "offDutyFastCheckInEnable";
-    @FieldDescribe("下班极速打卡，app端有效")
+    @FieldDescribe("퇴근 빠른 체크, app에서만 유효")
     @Column(name = ColumnNamePrefix + offDutyFastCheckInEnable_FIELDNAME)
     private Boolean offDutyFastCheckInEnable = false;
 
     public static final String checkInAlertEnable_FIELDNAME = "checkInAlertEnable";
-    @FieldDescribe("打卡提醒，上班前，下班后会收到提醒，不要忘记打卡.")
+    @FieldDescribe("체크 알림, 출근 전·퇴근 후 알림을 받아 체크를 잊지 않도록 함.")
     @Column(name = ColumnNamePrefix + checkInAlertEnable_FIELDNAME)
     private Boolean checkInAlertEnable = false;
 
     public static final String exceptionAlertEnable_FIELDNAME = "exceptionAlertEnable";
-    @FieldDescribe("异常打卡提醒，次日将收到异常打卡提醒.")
+    @FieldDescribe("비정상 체크 알림, 익일에 비정상 체크 알림을 받음.")
     @Column(name = ColumnNamePrefix + exceptionAlertEnable_FIELDNAME)
     private Boolean exceptionAlertEnable = false;
 
     public static final String exceptionAlertTime_FIELDNAME = "exceptionAlertTime";
-    @FieldDescribe("异常打卡提醒时间：HH:mm")
+    @FieldDescribe("비정상 체크 알림 시간: HH:mm")
     @Column(length = length_8B, name = ColumnNamePrefix + exceptionAlertTime_FIELDNAME)
     private String exceptionAlertTime = "09:30";
 
-    // 0 表示当天，1表示次日
+    // 0은 당일, 1은 익일
     public static final String exceptionAlertDateNumber_FIELDNAME = "exceptionAlertDateNumber";
-    @FieldDescribe("异常打卡提醒日期计算值")
+    @FieldDescribe("비정상 체크 알림 날짜 계산 값")
     @Column(  name = ColumnNamePrefix + exceptionAlertDateNumber_FIELDNAME)
     private Integer exceptionAlertDateNumber = 1;
 
-    // 记录任务执行的日期，用于判断当天是否已经执行过提醒任务了
+    // 작업 실행 날짜 기록, 당일 알림 작업 실행 여부 판단용
     public static final String exceptionAlertDate_FIELDNAME = "exceptionAlertDate";
-    @FieldDescribe("异常打卡定时执行日期：yyyy-MM-dd .")
+    @FieldDescribe("비정상 체크 예약 실행 날짜: yyyy-MM-dd .")
     @Column(length = length_32B, name = ColumnNamePrefix + exceptionAlertDate_FIELDNAME)
     private String exceptionAlertDate;
 
-    // 统计定时任务表达式
+    // 통계 예약 작업 표현식
     public static final String detailStatisticCronString_FIELDNAME = "detailStatisticCronString";
-    @FieldDescribe("统计定时任务表达式 .")
+    @FieldDescribe("통계 예약 작업 표현식 .")
     @Column(length = length_1K, name = ColumnNamePrefix + detailStatisticCronString_FIELDNAME)
     private String detailStatisticCronString;
 
 
     public static final String closeOldAttendance_FIELDNAME = "closeOldAttendance";
-    @FieldDescribe("关闭旧版考勤，移动端旧版打卡界面会有提示.")
+    @FieldDescribe("구버전 근태 종료, 모바일 구버전 체크 화면에 안내 표시.")
     @Column(name = ColumnNamePrefix + closeOldAttendance_FIELDNAME)
     private Boolean closeOldAttendance = false;
 
 
     public static final String faceDetectionEnable_FIELDNAME = "faceDetectionEnable";
-    @FieldDescribe("是否启用人脸比对.")
+    @FieldDescribe("얼굴 인식 비교 사용 여부.")
     @Column(name = ColumnNamePrefix + faceDetectionEnable_FIELDNAME)
     private Boolean faceDetectionEnable = false;
 
     public static final String properties_FIELDNAME = "properties";
-    @FieldDescribe("属性对象存储字段.")
+    @FieldDescribe("속성 객체 저장 필드.")
     @Persistent(fetch = FetchType.EAGER)
     @Strategy(JsonPropertiesValueHandler)
     @Column(length = JpaObject.length_4K, name = ColumnNamePrefix + properties_FIELDNAME)

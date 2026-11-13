@@ -18,11 +18,11 @@ import com.x.bbs.entity.BBSSubjectAttachment;
 import com.x.bbs.entity.BBSSubjectAttachment_;
 
 /**
- * 类   名：BBSSubjectAttachmentFactory<br/>
- * 实体类：BBSSubjectAttachment<br/>
- * 作   者：Liyi<br/>
- * 单   位：O2 Team<br/>
- * 日   期：2016-08-10 17:17:26
+ * 클래스명: BBSSubjectAttachmentFactory<br/>
+ * 엔티티 클래스: BBSSubjectAttachment<br/>
+ * 작성자: Liyi<br/>
+ * 소속: O2 Team<br/>
+ * 날짜: 2016-08-10 17:17:26
 **/
 public class BBSSubjectAttachmentFactory extends AbstractFactory {
 
@@ -30,12 +30,12 @@ public class BBSSubjectAttachmentFactory extends AbstractFactory {
 		super(business);
 	}
 	
-	//@MethodDescribe( "获取指定Id的BBSSubjectAttachment实体信息对象" )
+	//@MethodDescribe( "지정 Id의 BBSSubjectAttachment 엔티티 정보 객체 조회" )
 	public BBSSubjectAttachment get( String id ) throws Exception {
 		return this.entityManagerContainer().find( id, BBSSubjectAttachment.class, ExceptionWhen.none );
 	}
 	
-	//@MethodDescribe( "列示指定Id的BBSSubjectAttachment实体信息列表" )
+	//@MethodDescribe( "지정 Id의 BBSSubjectAttachment 엔티티 정보 목록 조회" )
 	public List<BBSSubjectAttachment> list(List<String> ids) throws Exception {
 		if( ids == null || ids.size() == 0 ){
 			return new ArrayList<BBSSubjectAttachment>();
@@ -48,7 +48,7 @@ public class BBSSubjectAttachmentFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "根据主题ID列示BBSSubjectAttachment实体信息列表" )
+	//@MethodDescribe( "주제 ID로 BBSSubjectAttachment 엔티티 정보 목록 조회" )
 	public List<BBSSubjectAttachment> listBySubjectId( String subjectId ) throws Exception {
 		if( subjectId == null || subjectId.isEmpty() ){
 			throw new Exception("subject id is null!");
@@ -61,7 +61,7 @@ public class BBSSubjectAttachmentFactory extends AbstractFactory {
 		return em.createQuery(cq.where(p)).getResultList();
 	}
 	
-	//@MethodDescribe( "列示全部的BBSSubjectAttachment实体信息列表" )
+	//@MethodDescribe( "전체 BBSSubjectAttachment 엔티티 정보 목록 조회" )
 	public List<BBSSubjectAttachment> listAll() throws Exception {
 		EntityManager em = this.entityManagerContainer().get(BBSSubjectAttachment.class);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -70,9 +70,9 @@ public class BBSSubjectAttachmentFactory extends AbstractFactory {
 	}
 
 	/**
-	 * 根据指定的版块ID查询所有的附件信息ID列表
+	 * 지정 게시판 ID로 전체 첨부파일 정보 ID 목록 조회
 	 * @param sectionId
-	 * @param queryMainSectionId 是否查询主版块ID
+	 * @param queryMainSectionId 주 게시판 ID 조회 여부
 	 * @return
 	 * @throws Exception 
 	 */

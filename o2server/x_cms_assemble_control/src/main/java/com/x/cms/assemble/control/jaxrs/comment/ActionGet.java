@@ -53,7 +53,7 @@ public class ActionGet extends BaseAction {
 					}
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new CommentQueryException( e, "根据指定id查询应用栏目信息对象时发生异常。ID:" + id );
+					Exception exception = new CommentQueryException( e, "지정한 id로 게시판 정보 객체를 조회하는 중 오류가 발생했습니다. ID:" + id );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -67,7 +67,7 @@ public class ActionGet extends BaseAction {
 					CacheManager.put(cacheCategory, cacheKey, wo);
 					result.setData( wo );
 				} catch (Exception e) {
-					Exception exception = new CommentQueryException( e, "将查询出来的应用栏目信息对象转换为可输出的数据信息时发生异常。" );
+					Exception exception = new CommentQueryException( e, "조회한 게시판 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다." );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -81,7 +81,7 @@ public static class Wo extends DocumentCommentInfo {
 		
 		private Long rank;
 
-		@FieldDescribe("内容")
+		@FieldDescribe("내용")
 		private String content = "";
 		
 		public String getContent() {

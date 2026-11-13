@@ -3,8 +3,8 @@ import { lp } from "@o2oa/component";
 
 
 /**
- * 根据打卡对象，如果是外勤打卡，输出外勤打卡的格式化信息
- * @param {*} record 打卡对象 
+ * 출퇴근 체크 객체 기준으로 외근 체크이면 외근 체크 서식 정보 출력
+ * @param {*} record 출퇴근 체크 객체 
  */
 function fieldWorkFormat(record) {
   if (record && record.fieldWork) {
@@ -23,8 +23,8 @@ function fieldWorkFormat(record) {
 }
 
 /**
- * 是否为空
- * 数字0也是不为空
+ * 비어 있는지 여부
+ * 숫자 0도 비어 있지 않음
  * @param {*} data
  * @returns
  */
@@ -43,7 +43,7 @@ function isEmpty(data) {
 }
 
 /**
- * 是否整数 包含正负
+ * 정수 여부(양수·음수 포함)
  * @param {*} inputData
  * @returns
  */
@@ -55,12 +55,12 @@ function isInt(inputData) {
   }
 }
 /**
- * 是否负整数 包含0
+ * 음의 정수 여부(0 포함)
  * @param {*} inputData
  * @returns
  */
 function isNegtiveInt(inputData) {
-  const regNeg = /^\-[1-9][0-9]*$/; // 负整数
+  const regNeg = /^\-[1-9][0-9]*$/; // 음의 정수
   if (regNeg.test(inputData)) {
     return true;
   } else {
@@ -68,12 +68,12 @@ function isNegtiveInt(inputData) {
   }
 }
 /**
- * 是否正整数
+ * 양의 정수 여부
  * @param {*} inputData
  * @returns
  */
 function isPositiveInt(inputData) {
-  const regPos = /^\d+$/; // 正整数
+  const regPos = /^\d+$/; // 양의 정수
   if (regPos.test(inputData)) {
     return true;
   } else {
@@ -82,10 +82,10 @@ function isPositiveInt(inputData) {
 }
 
 /**
- * 换取多语言文字
- * @param {*} lp 语言包
- * @param {*} key 文字的key值，多层用.隔开，如 form.name
- * @param {*} options 变量替换对象，如{name: 'abc'}, 会把 form.name里面的 {name} 替换成 abc
+ * 다국어 텍스트 변환
+ * @param {*} lp 언어 팩
+ * @param {*} key 텍스트의 key 값, 여러 단계는 .으로 구분, 예: form.name
+ * @param {*} options 변수 치환 객체, 예: {name: 'abc'}, form.name 안의 {name}을 abc로 치환
  * @returns
  */
 function lpFormat(lp, key, options) {
@@ -100,11 +100,11 @@ function lpFormat(lp, key, options) {
 }
 
 /**
- * 给对象设置值，也可以是数组
- * 比如 key='a.b' v=1 就会给data对象的a属性下的b属性设置值为1 或者 key='0.b' v=1 会给data数组的第一个对象中的b属性设置值为1
- * @param {*} key 多层用.分割
- * @param {*} v  存储的值
- * @param {*} data 存储对象
+ * 객체에 값 설정, 배열도 가능
+ * 예: key='a.b' v=1이면 data 객체의 a 속성 아래 b 속성 값을 1로 설정, key='0.b' v=1이면 data 배열 첫 번째 객체의 b 속성 값을 1로 설정
+ * @param {*} key 여러 단계는 .으로 구분
+ * @param {*} v  저장할 값
+ * @param {*} data 저장 대상 객체
  * @returns
  */
 function setJSONValue(key, v, data) {
@@ -121,16 +121,16 @@ function setJSONValue(key, v, data) {
     } else {
       var nexId = idList[i + 1];
       if (o2.typeOf(nexId) === "number") {
-        //下一个ID是数字
+        //다음 ID가 숫자
         if (!data[id] && o2.typeOf(data[id]) !== "array") {
           data[id] = [];
         }
         if (nexId > data[id].length) {
-          //超过了最大下标，丢弃
+          //최대 인덱스 초과, 버림
           return;
         }
       } else {
-        //下一个ID是字符串
+        //다음 ID가 문자열
         if (!data[id] || o2.typeOf(data[id]) !== "object") {
           data[id] = {};
         }
@@ -140,7 +140,7 @@ function setJSONValue(key, v, data) {
   }
 }
 
-// 格式化日期为 YYYY-MM-DD 格式
+// 날짜를 YYYY-MM-DD 형식으로 변환
 const formatDate = (date) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -149,17 +149,17 @@ const formatDate = (date) => {
     day < 10 ? "0" + day : day
   }`;
 };
-// 格式化日期为  YYYY-MM
+// 날짜를  YYYY-MM 형식으로 변환
 const formatMonth = (date) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   return `${year}-${month < 10 ? "0" + month : month}`;
 }
 
-// 格式化分钟数为 xx小时xx分钟
+// 분 수를 xx시간xx분 형식으로 변환
 const convertMinutesToHoursAndMinutes = (minutes) => {
-  var hours = Math.floor(minutes / 60); // 取得小时数
-  var remainingMinutes = Math.floor(minutes % 60); // 取得剩余的分钟数
+  var hours = Math.floor(minutes / 60); // 시간 수 계산
+  var remainingMinutes = Math.floor(minutes % 60); // 남은 분 수 계산
   var result = "";
 
   if (hours > 0) {
@@ -174,9 +174,9 @@ const convertMinutesToHoursAndMinutes = (minutes) => {
 };
 
 /**
- * 数组转化为二维数组
- * @param {*} arr 一维数组
- * @param {*} subSize 子数组长度
+ * 배열을 2차원 배열로 변환
+ * @param {*} arr 1차원 배열
+ * @param {*} subSize 하위 배열 길이
  * @returns 
  */
 const  convertTo2DArray = (arr, subSize) => {
@@ -188,8 +188,8 @@ const  convertTo2DArray = (arr, subSize) => {
 }
 
 /**
- * loading 展示
- * @param {*} component 组件本身
+ * loading 표시
+ * @param {*} component 컴포넌트 자체
  */
 const showLoading = async (component, newText) => {
   const loading = (await import(`../components/o-loading/index.js`)).default;
@@ -201,9 +201,9 @@ const showLoading = async (component, newText) => {
   await new Promise((resolve) => window.requestAnimationFrame(resolve));
 }
 /**
- * 关闭 loading 
- * 需要和 showLoading 一起使用
- * @param {*} component 组件本身
+ * loading 닫기 
+ * showLoading과 함께 사용해야 함
+ * @param {*} component 컴포넌트 자체
  */
 const hideLoading = async (component) => {
   if (component.loadingVm) {
@@ -224,7 +224,7 @@ const formatPersonName = (person) => {
   return person;
 }
 /**
- * 获取传入日期所在的月份所有日期
+ * 전달된 날짜가 속한 달의 모든 날짜 가져오기
  * @param {Date} inputDate 
  * @returns []
  */
@@ -233,9 +233,9 @@ const getAllDatesInMonth = (inputDate) => {
   const currentDate = new Date(inputDate);
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
-  // 确定月份的第一天
+  // 해당 월의 첫날 확정
   const firstDayOfMonth = new Date(year, month, 1);
-  // 从第一天开始，递增日期直到月份变化
+  // 첫날부터 월이 바뀔 때까지 날짜 증가
   let currentDateInMonth = firstDayOfMonth;
   while (currentDateInMonth.getMonth() === month) {
     result.push(new Date(currentDateInMonth));
@@ -244,7 +244,7 @@ const getAllDatesInMonth = (inputDate) => {
   return result;
 }
 /**
- * localStorage 存储
+ * localStorage 저장
  * @param {*} key 
  * @param {*} item 
  */
@@ -252,21 +252,21 @@ const storageSet = (key, item) => {
   localStorage.setItem(key, JSON.stringify(item));
 }
 /**
- * localStorage 获取存储数据
+ * localStorage 저장 데이터 가져오기
  * @param {*} key 
  * @returns 
  */
 const storageGet = (key) => {
   const item = localStorage.getItem(key);
-  // 使用JSON.parse将字符串还原为JavaScript对象
+  // JSON.parse로 문자열을 JavaScript 객체로 복원
   return JSON.parse(item);
 }
 
 /**
- * 替换字符串特定内容
- * @param {*} originalString 原字符串
- * @param {*} searchString  被替换的内容
- * @param {*} replacement 替换成的内容
+ * 문자열의 특정 내용 치환
+ * @param {*} originalString 원본 문자열
+ * @param {*} searchString  치환될 내용
+ * @param {*} replacement 치환할 내용
  * @returns 
  */
 const replaceCustomString = (originalString, searchString, replacement) => {
@@ -275,8 +275,8 @@ const replaceCustomString = (originalString, searchString, replacement) => {
 }
 
 /**
- * 根据传入的数字个数，生成Excel列名数组，如：A,B,C,....,AA,AB,AC,....
- * @param len 数量
+ * 전달된 숫자 개수에 따라 Excel 열 이름 배열 생성, 예: A,B,C,....,AA,AB,AC,....
+ * @param len 개수
  * @returns {*[]}
  */
 const generateExcelColumnNames = (len) =>{
@@ -295,17 +295,17 @@ const generateExcelColumnNames = (len) =>{
 }
 
 /**
- * 选择单个文件功能，并触发回调函数
- * @param callback 回调函数，返回选中的文件
+ * 단일 파일 선택 기능, 콜백 함수 호출
+ * @param callback 콜백 함수, 선택한 파일 반환
  */
 const chooseSingleFile = (callback) => {
   const input = document.createElement('input');
   input.type = 'file';
   input.style.display = 'none';
-  // 添加 change 事件监听器，接收上传的文件
+  // change 이벤트 리스너 추가, 업로드된 파일 수신
   input.addEventListener('change', (event) => {
     const files = event.target.files;
-    // 处理上传的文件
+    // 업로드된 파일 처리
     if (files && files.length > 0) {
       const file = files[0]
       if (callback) {
@@ -318,33 +318,33 @@ const chooseSingleFile = (callback) => {
 
 
 /**
- * WGS-84 转 GCJ-02 (火星坐标系)
- * 适用于中国大陆地区
+ * WGS-84에서 GCJ-02(화성 좌표계)로 변환
+ * 중국 본토 지역에 적용
  */
 const WGS84_TO_GCJ02 = {
-  // 常量定义
-  a: 6378245.0, // 克拉索夫斯基椭球长半轴
-  f: 1.0 / 298.3, // 克拉索夫斯基椭球扁率
-  ee: 0.00669342162296594323, // 偏心率平方
+  // 상수 정의
+  a: 6378245.0, // 크라소프스키 타원체 장반경
+  f: 1.0 / 298.3, // 크라소프스키 타원체 편평률
+  ee: 0.00669342162296594323, // 이심률 제곱
   pi: 3.1415926535897932384626, // π
   x_pi: 3.14159265358979324 * 3000.0 / 180.0,
 
   /**
-   * 判断坐标是否在中国境内
-   * 注：港澳台及国外坐标不建议转换
+   * 좌표가 중국 내에 있는지 판단
+   * 참고: 홍콩·마카오·대만 및 해외 좌표는 변환을 권장하지 않음
    */
   isInChina(lat, lon) {
     return (lon >= 72.004 && lon <= 135.05 && lat >= 3.86 && lat <= 53.55);
   },
 
   /**
-   * 主转换函数
-   * @param {number} lat WGS-84 纬度
-   * @param {number} lon WGS-84 经度
+   * 주 변환 함수
+   * @param {number} lat WGS-84 위도
+   * @param {number} lon WGS-84 경도
    * @returns {object} {latitude: gcjLat, longitude: gcjLon}
    */
   transform(lat, lon) {
-    // 如果不在国内，直接返回原坐标（国外不加密）
+    // 국내가 아니면 원래 좌표를 그대로 반환(해외는 암호화하지 않음)
     if (!this.isInChina(lat, lon)) {
       return { latitude: lat, longitude: lon };
     }
@@ -367,7 +367,7 @@ const WGS84_TO_GCJ02 = {
     };
   },
 
-  // 纬度偏移量计算
+  // 위도 오프셋 계산
   transformLat(x, y) {
     let ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
     ret += (20.0 * Math.sin(6.0 * x * this.pi) + 20.0 * Math.sin(2.0 * x * this.pi)) * 2.0 / 3.0;
@@ -376,7 +376,7 @@ const WGS84_TO_GCJ02 = {
     return ret;
   },
 
-  // 经度偏移量计算
+  // 경도 오프셋 계산
   transformLon(x, y) {
     let ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
     ret += (20.0 * Math.sin(6.0 * x * this.pi) + 20.0 * Math.sin(2.0 * x * this.pi)) * 2.0 / 3.0;
@@ -387,31 +387,31 @@ const WGS84_TO_GCJ02 = {
 };
 
 /**
- * 计算两个经纬度之间的距离（单位：米）
- * @param {number} lat1 起点纬度
- * @param {number} lon1 起点经度
- * @param {number} lat2 终点纬度
- * @param {number} lon2 终点经度
- * @returns {number} 距离（米）
+ * 두 위경도 사이의 거리 계산(단위: 미터)
+ * @param {number} lat1 시작점 위도
+ * @param {number} lon1 시작점 경도
+ * @param {number} lat2 끝점 위도
+ * @param {number} lon2 끝점 경도
+ * @returns {number} 거리(미터)
  */
 function getDistance(lat1, lon1, lat2, lon2) {
-  const R = 6378137; // 地球半径（单位：米，使用 WGS84 标准）
+  const R = 6378137; // 지구 반경(단위: 미터, WGS84 표준 사용)
   const rad = Math.PI / 180;
 
-  // 将角度转为弧度
+  // 각도를 라디안으로 변환
   const lat1Rad = lat1 * rad;
   const lat2Rad = lat2 * rad;
   const deltaLat = (lat2 - lat1) * rad;
   const deltaLon = (lon2 - lon1) * rad;
 
-  // Haversine 公式核心计算
+  // Haversine 공식 핵심 계산
   const a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
             Math.cos(lat1Rad) * Math.cos(lat2Rad) *
             Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2);
   
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   
-  return R * c; // 返回距离（米）
+  return R * c; // 거리 반환(미터)
 }
 
 export {

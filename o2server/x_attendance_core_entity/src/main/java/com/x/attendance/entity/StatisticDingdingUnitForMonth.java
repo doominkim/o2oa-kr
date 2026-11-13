@@ -16,7 +16,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "StatisticDingdingUnitForMonth", description = "考勤钉钉组织按月统计.")
+@Schema(name = "StatisticDingdingUnitForMonth", description = "근태 DingTalk 조직 월별 통계.")
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.StatisticDingdingUnitForMonth.table, uniqueConstraints = {
@@ -39,7 +39,7 @@ public class StatisticDingdingUnitForMonth extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -48,78 +48,78 @@ public class StatisticDingdingUnitForMonth extends SliceJpaObject {
 	}
 	/*
 	 * =============================================================================
-	 * ===== 以上为 JpaObject 默认字段
+	 * ===== 위는 JpaObject 기본 필드
 	 * =============================================================================
 	 * =====
 	 */
 
 	/*
 	 * =============================================================================
-	 * ===== 以下为具体不同的业务及数据表字段要求
+	 * ===== 아래는 업무별 데이터 테이블 필드 요구사항
 	 * =============================================================================
 	 * =====
 	 */
 
 	public static final String o2Unit_FIELDNAME = "o2Unit";
-	@FieldDescribe("O2用户所在的组织")
+	@FieldDescribe("O2 사용자 소속 조직")
 	@Column( length = length_128B, name = ColumnNamePrefix + o2Unit_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String o2Unit;
 
 	public static final String statisticYear_FIELDNAME = "statisticYear";
-	@FieldDescribe("统计年份")
+	@FieldDescribe("통계 연도")
 	@Column( length = JpaObject.length_16B, name = ColumnNamePrefix + statisticYear_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String statisticYear;
 
 	public static final String statisticMonth_FIELDNAME = "statisticMonth";
-	@FieldDescribe("统计月份")
+	@FieldDescribe("통계 월")
 	@Column( length = JpaObject.length_16B, name = ColumnNamePrefix + statisticMonth_FIELDNAME )
 	@CheckPersist(allowEmpty = false)
 	private String statisticMonth;
 
 	public static final String workDayCount_FIELDNAME = "workDayCount";
-	@FieldDescribe("出勤天数")
+	@FieldDescribe("출근 일수")
 	@Column( name = ColumnNamePrefix + workDayCount_FIELDNAME )
 	private Long workDayCount;
 
 	public static final String onDutyTimes_FIELDNAME = "onDutyTimes";
-	@FieldDescribe("上班签到人数")
+	@FieldDescribe("출근 체크 인원")
 	@Column( name = ColumnNamePrefix + onDutyTimes_FIELDNAME )
 	private Long onDutyTimes;
 
 	public static final String offDutyTimes_FIELDNAME = "offDutyTimes";
-	@FieldDescribe("下班签到人数")
+	@FieldDescribe("퇴근 체크 인원")
 	@Column( name = ColumnNamePrefix + offDutyTimes_FIELDNAME )
 	private Long offDutyTimes;
 
 	public static final String resultNormal_FIELDNAME = "resultNormal";
-	@FieldDescribe("正常签到次数")
+	@FieldDescribe("정상 출근 체크 횟수")
 	@Column( name = ColumnNamePrefix + resultNormal_FIELDNAME )
 	private Long resultNormal;
 
 	public static final String lateTimes_FIELDNAME = "lateTimes";
-	@FieldDescribe("迟到人数")
+	@FieldDescribe("지각 인원")
 	@Column( name = ColumnNamePrefix + lateTimes_FIELDNAME )
 	private Long lateTimes;
 
 	public static final String seriousLateTimes_FIELDNAME = "seriousLateTimes";
-	@FieldDescribe("严重迟到人数")
+	@FieldDescribe("심각한 지각 인원")
 	@Column( name = ColumnNamePrefix + seriousLateTimes_FIELDNAME )
 	private Long seriousLateTimes;
 
 	public static final String leaveEarlyTimes_FIELDNAME = "leaveEarlyTimes";
-	@FieldDescribe("早退人数")
+	@FieldDescribe("조퇴 인원")
 	@Column( name = ColumnNamePrefix + leaveEarlyTimes_FIELDNAME )
 	private Long leaveEarlyTimes;
 
 	public static final String absenteeismTimes_FIELDNAME = "absenteeismTimes";
-	@FieldDescribe("旷工人数")
+	@FieldDescribe("무단결근 인원")
 	@Column( name = ColumnNamePrefix + absenteeismTimes_FIELDNAME )
 	private Long absenteeismTimes;
 
 	public static final String notSignedCount_FIELDNAME = "notSignedCount";
-	@FieldDescribe("未打卡人数")
+	@FieldDescribe("미체크 인원")
 	@Column( name = ColumnNamePrefix + notSignedCount_FIELDNAME )
 	private Long notSignedCount;
 

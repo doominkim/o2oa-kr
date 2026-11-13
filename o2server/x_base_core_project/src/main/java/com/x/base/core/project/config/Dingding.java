@@ -16,61 +16,61 @@ import com.x.base.core.project.tools.DefaultCharset;
 
 public class Dingding extends ConfigObject {
 
-	@FieldDescribe("是否启用")
+	@FieldDescribe("사용 여부")
 	private Boolean enable;
 
-	@FieldDescribe("钉钉corpId")
+	@FieldDescribe("딩톡 corpId")
 	private String corpId;
 
 	@FieldDescribe("agentId")
 	private String agentId;
 
-	@FieldDescribe("应用的key,唯一标识")
+	@FieldDescribe("앱의 key, 고유 식별자")
 	private String appKey;
 
-	@FieldDescribe("应用的密钥")
+	@FieldDescribe("앱의 비밀 키")
 	private String appSecret;
 
-	@FieldDescribe("回调信号触发同步检查,默认每10分钟运行一次,如果期间内有钉钉回调信号接收到,那么触发同步任务进行人员同步.")
+	@FieldDescribe("콜백 신호로 동기화 검사 실행, 기본 10분마다 실행, 그 사이 딩톡 콜백 신호를 받으면 사용자 동기화 작업 실행.")
 	private String syncCron;
 
-	@FieldDescribe("强制拉入同步cron,默认在每天的8点和12点强制进行同步.")
+	@FieldDescribe("강제 동기화 cron, 기본값 매일 8시와 12시에 강제 동기화.")
 	private String forceSyncCron;
 
-	@FieldDescribe("是否仅同步人员(新用户创建和根据手机号码绑定钉钉ID).")
+	@FieldDescribe("사용자만 동기화할지 여부(신규 사용자 생성 및 휴대폰 번호로 딩톡 ID 연결).")
 	private Boolean syncPersonOnly;
 
-	@FieldDescribe("oapi服务器地址")
+	@FieldDescribe("oapi 서버 주소")
 	private String oapiAddress;
 
-	@FieldDescribe("回调token")
+	@FieldDescribe("콜백 token")
 	private String token = "";
 
-	@FieldDescribe("回调encodingAesKey")
+	@FieldDescribe("콜백 encodingAesKey")
 	private String encodingAesKey = "";
 
-	@FieldDescribe("钉钉消息打开工作的url地址，如：https://sample.o2oa.net/x_desktop/")
+	@FieldDescribe("딩톡 메시지에서 업무 문서를 여는 url 주소, 예: https://sample.o2oa.net/x_desktop/")
 	private String workUrl = "";
 
-	@FieldDescribe("钉钉消息处理完成后跳转到特定的门户页面的Id")
+	@FieldDescribe("딩톡 메시지 처리 완료 후 이동할 특정 포털 페이지의 Id")
 	private String messageRedirectPortal = "";
 
-	@FieldDescribe("是否启用消息推送")
+	@FieldDescribe("메시지 푸시 사용 여부")
 	private Boolean messageEnable;
 
-	@FieldDescribe("是否开启钉钉扫码登录")
+	@FieldDescribe("딩톡 QR 코드 로그인 사용 여부")
 	private Boolean scanLoginEnable;
 
-	@FieldDescribe("钉钉扫码登录的AppId")
+	@FieldDescribe("딩톡 QR 코드 로그인 AppId")
 	private String scanLoginAppId;
 
-	@FieldDescribe("钉钉扫码登录的appSecret")
+	@FieldDescribe("딩톡 QR 코드 로그인 appSecret")
 	private String scanLoginAppSecret;
 
-	@FieldDescribe("是否启用考勤信息")
+	@FieldDescribe("근태 정보 사용 여부")
 	private Boolean attendanceSyncEnable;
 
-	@FieldDescribe("是否同步关联组织(上下级组织)")
+	@FieldDescribe("관련 조직(상하위 조직) 동기화 여부")
 	private Boolean syncUnionOrgEnable;
 
 	public static Dingding defaultInstance() {

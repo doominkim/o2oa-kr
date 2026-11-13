@@ -40,7 +40,7 @@ class ActionListPrev extends BaseAction {
 		static WrapCopier<Stat, Wo> copier = WrapCopierFactory.wo(Stat.class, Wo.class,
 				JpaObject.singularAttributeField(Stat.class, true, true), null);
 
-		@FieldDescribe("排序号")
+		@FieldDescribe("정렬 번호")
 		private Long rank;
 
 		public Long getRank() {

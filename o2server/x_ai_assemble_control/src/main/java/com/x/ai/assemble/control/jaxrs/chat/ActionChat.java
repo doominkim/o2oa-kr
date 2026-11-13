@@ -103,7 +103,7 @@ public class ActionChat extends BaseAction {
                         if (model != null) {
                             aiChat(wi, sse, eventSink, model, effectivePerson);
                         } else {
-                            logger.warn("未配置可用的模型");
+                            logger.warn("사용 가능한 모델이 설정되지 않았습니다.");
                             actionResult.setMessage("사용 가능한 모델을 설정하도록 관리자에게 문의하세요.");
                             this.sendMsg(sse, eventSink, EVENT_NAME_MESSAGE, gson.toJson(actionResult));
                         }

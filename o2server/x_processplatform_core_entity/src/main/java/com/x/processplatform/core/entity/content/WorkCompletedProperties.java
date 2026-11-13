@@ -14,37 +14,37 @@ public class WorkCompletedProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -299664500202382316L;
 
-	@FieldDescribe("合并数据对象")
+	@FieldDescribe("데이터 객체 병합")
 	private Data data;
 
-	@FieldDescribe("合并已办对象")
+	@FieldDescribe("처리 완료 객체 병합")
 	private List<TaskCompleted> taskCompletedList = new ArrayList<>();
 
-	@FieldDescribe("合并已阅对象")
+	@FieldDescribe("열람 완료 객체 병합")
 	private List<ReadCompleted> readCompletedList = new ArrayList<>();
 
-	@FieldDescribe("合并参阅对象")
+	@FieldDescribe("참조 열람 객체 병합")
 	private List<Review> reviewList = new ArrayList<>();
 
-	@FieldDescribe("合并记录对象")
+	@FieldDescribe("기록 객체 병합")
 	private List<Record> recordList = new ArrayList<>();
 
-	@FieldDescribe("合并工作日志对象")
+	@FieldDescribe("업무 로그 객체 병합")
 	private List<WorkLog> workLogList = new ArrayList<>();
 
-	@FieldDescribe("合并工作Form")
+	@FieldDescribe("업무 문서 Form 병합")
 	private StoreForm storeForm;
 
-	@FieldDescribe("合并工作Form,移动端.")
+	@FieldDescribe("업무 문서 Form 병합, 모바일.")
 	private StoreForm mobileStoreForm;
 
-	@FieldDescribe("标题")
+	@FieldDescribe("제목")
 	private String title;
 
-	@FieldDescribe("父工作,在当前工作是通过子流程调用时产生.")
+	@FieldDescribe("상위 업무 문서, 현재 업무 문서가 하위 프로세스 호출로 생성된 경우.")
 	private String parentWork;
 
-	@FieldDescribe("父工作Job,在当前工作是通过子流程调用时产生.")
+	@FieldDescribe("상위 업무 문서 Job, 현재 업무 문서가 하위 프로세스 호출로 생성된 경우.")
 	private String parentJob;
 
 	public String getParentWork() {

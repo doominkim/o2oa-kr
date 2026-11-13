@@ -16,10 +16,10 @@ public class ChartWi extends GsonPropertyObject {
     public static final String GENERATE_TYPE_MCP = "mcp";
     public static final Map<String, Object> OPTION_DEFAULT  = Map.of("maxTurns", 5);
 
-    @FieldDescribe("输入内容.")
+    @FieldDescribe("입력 내용.")
     private String input;
 
-    @FieldDescribe("线索标识.")
+    @FieldDescribe("스레드 식별자.")
     private String clueId;
 
     private String person;
@@ -28,14 +28,14 @@ public class ChartWi extends GsonPropertyObject {
 
     private Boolean thinkingEnabled;
 
-    @FieldDescribe("ai模式：chat|rag|mcp.")
+    @FieldDescribe("ai 모드: chat|rag|mcp.")
     private String generateType;
 
-    @FieldDescribe("附件标识列表.")
+    @FieldDescribe("첨부파일 식별자 목록.")
     private List<String> referenceIdList;
 
     private List<String> permissionList;
-    @FieldDescribe("模型名称.")
+    @FieldDescribe("모델 이름.")
     private String endpointName;
 
     public String getInput() {

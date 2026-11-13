@@ -7,6 +7,6 @@ class ExceptionRoomNotExist extends PromptException {
 	private static final long serialVersionUID = 4132300948670472899L;
 
 	ExceptionRoomNotExist(String flag) {
-		super("会议室 {}, 不存在.", flag);
+		super("회의실 {}이(가) 없습니다.", flag);
 	}
 }

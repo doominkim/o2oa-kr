@@ -64,7 +64,7 @@ MWF.xApplication.process.FormDesigner.Module.Datatable = MWF.FCDatatable = new C
 		if (styles.sectionKeyStyles) this.copyStyles(styles.sectionKeyStyles, "sectionByStyles");
 	},
 	setImpExpTableStyles: function(){
-		//设置导入导出表格样式
+		//가져오기·내보내기 표 스타일 설정
 		if(this.form.templateStyles && this.form.templateStyles.table){
 			this.json.impExpTableStyles = Object.merge(this.json.impExpTableStyles||{}, this.form.templateStyles.table.styles||{});
 			this.json.impExpTableTitleStyles = Object.merge(this.json.impExpTableTitleStyles||{}, this.form.templateStyles.table.titleStyles||{});
@@ -152,7 +152,7 @@ MWF.xApplication.process.FormDesigner.Module.Datatable = MWF.FCDatatable = new C
 	// _getDroppableNodes: function(){
 	// 	var nodes = [this.form.node].concat(this.form.moduleElementNodeList, this.form.moduleContainerNodeList, this.form.moduleComponentNodeList);
 	// 	this.form.moduleList.each( function(module){
-	// 		//数据网格不能往数据模板里拖
+	// 		//데이터 그리드는 데이터 템플릿 안으로 끌어 넣을 수 없음
 	// 		if( module.moduleName === "datatemplate" ){
 	// 			var subDoms = this.form.getModuleNodes(module.node);
 	// 			nodes.erase( module.node );
@@ -434,9 +434,9 @@ MWF.xApplication.process.FormDesigner.Module.Datatable = MWF.FCDatatable = new C
 		}.bind(this);
 
 		if( name === "impexpType" ){
-			//允许导入
+			//가져오기 허용
 			var importenable  = this.json.impexpType === "impexp" || this.json.impexpType === "imp";
-			//允许导出
+			//내보내기 허용
 			var exportenable  = this.json.impexpType === "impexp" || this.json.impexpType === "exp";
 
 			if( this.impexpNode )this.impexpNode.destroy();

@@ -15,7 +15,7 @@ import com.x.base.core.entity.annotation.ContainerEntity;
 import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(name = "Code", description = "服务管理短信验证码.")
+@Schema(name = "Code", description = "서비스 관리 SMS 인증 코드.")
 @Entity
 @ContainerEntity(dumpSize = 1000, type = ContainerEntity.Type.log, reference = ContainerEntity.Reference.soft)
 @Table(name = PersistenceProperties.Code.TABLE, uniqueConstraints = {
@@ -37,12 +37,12 @@ public class Code extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 
 	public void onPersist() throws Exception {
 		if(this.getVerifyNumber() == null){
@@ -50,28 +50,28 @@ public class Code extends SliceJpaObject {
 		}
 	}
 
-	/* 更新运行方法 */
+	/* 실행 메서드 업데이트 */
 
 	public static final String mobile_FIELDNAME = "mobile";
-	@FieldDescribe("验证的手机号.")
+	@FieldDescribe("인증 휴대폰 번호.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + mobile_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String mobile;
 
 	public static final String answer_FIELDNAME = "answer";
-	@FieldDescribe("code密码值.")
+	@FieldDescribe("code 비밀번호 값.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + answer_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String answer;
 
 	public static final String meta_FIELDNAME = "meta";
-	@FieldDescribe("关联的内容,还不知道干啥")
+	@FieldDescribe("연관 내용, 용도 미확인")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + meta_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String meta;
 
 	public static final String verifyNumber_FIELDNAME = "verifyNumber";
-	@FieldDescribe("验证次数")
+	@FieldDescribe("인증 횟수")
 	@Column(name = ColumnNamePrefix + verifyNumber_FIELDNAME)
 	private Integer verifyNumber;
 

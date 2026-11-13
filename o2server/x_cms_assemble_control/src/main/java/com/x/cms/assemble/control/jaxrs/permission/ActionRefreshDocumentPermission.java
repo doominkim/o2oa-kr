@@ -30,7 +30,7 @@ public class ActionRefreshDocumentPermission extends BaseAction {
 	private static final Logger logger = LoggerFactory.getLogger(ActionRefreshDocumentPermission.class);
 
 	protected ActionResult<Wo> execute(HttpServletRequest request, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
-		logger.info("{}操作刷新文档权限信息：{}", effectivePerson.getDistinguishedName(), jsonElement.toString());
+		logger.info("{} 작업 문서 권한 정보 새로고침: {}", effectivePerson.getDistinguishedName(), jsonElement.toString());
 		ActionResult<Wo> result = new ActionResult<>();
 		Document document = null;
 		Wi wi = null;
@@ -48,7 +48,7 @@ public class ActionRefreshDocumentPermission extends BaseAction {
 		if (check) {
 			if ( StringUtils.isEmpty(wi.getDocId())) {
 				check = false;
-				Exception exception = new ExceptionServiceLogic("文档ID为空，无法为文档添加权限。");
+				Exception exception = new ExceptionServiceLogic("게시글 ID가 비어 있어 게시글에 권한을 추가할 수 없습니다.");
 				result.error(exception);
 			}
 		}
@@ -58,12 +58,12 @@ public class ActionRefreshDocumentPermission extends BaseAction {
 				document = documentQueryService.get(wi.getDocId());
 				if (document == null) {
 					check = false;
-					Exception exception = new ExceptionServiceLogic("文档不存在。ID：" + wi.getDocId());
+					Exception exception = new ExceptionServiceLogic("게시글이 없습니다. ID: " + wi.getDocId());
 					result.error(exception);
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionServiceLogic(e, "系统在根据文档ID查询文档信息时发生异常。ID：" + wi.getDocId());
+				Exception exception = new ExceptionServiceLogic(e, "게시글 ID로 게시글 정보를 조회하는 중 오류가 발생했습니다. ID: " + wi.getDocId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -94,7 +94,7 @@ public class ActionRefreshDocumentPermission extends BaseAction {
 				CacheManager.notify(Document.class);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionServiceLogic(e, "系统在为文档设置用户访问权限过程中发生异常。ID：" + wi.getDocId());
+				Exception exception = new ExceptionServiceLogic(e, "게시글에 사용자 접근 권한을 설정하는 중 오류가 발생했습니다. ID: " + wi.getDocId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -110,10 +110,10 @@ public class ActionRefreshDocumentPermission extends BaseAction {
 
 		public static List<String> Excludes = new ArrayList<String>(JpaObject.FieldsUnmodify);
 
-		@FieldDescribe("文档ID.")
+		@FieldDescribe("문서ID.")
 		private String docId = null;
 
-		@FieldDescribe("文档权限列表：List<PermissionInfo>")
+		@FieldDescribe("문서 권한 목록: List<PermissionInfo>")
 		private List<PermissionInfo> permissionList = null;
 
 		public String getDocId() {

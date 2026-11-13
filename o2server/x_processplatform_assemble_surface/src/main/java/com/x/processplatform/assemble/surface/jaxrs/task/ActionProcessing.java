@@ -126,7 +126,7 @@ class ActionProcessing extends BaseAction {
 			param.opinion = wi.getOpinion();
 			param.mediaOpinion = wi.getMediaOpinion();
 			param.ignoreEmpowerIdentityList = wi.getIgnoreEmpowerIdentityList();
-			// 兼容合并distinguishedNameList和appendTaskIdentityList
+			// distinguishedNameList와 appendTaskIdentityList 호환 병합
 			param.distinguishedNameList = business.organization().distinguishedName().list(Stream
 					.concat(Stream.<List<String>>of(wi.getDistinguishedNameList()),
 							Stream.<List<String>>of(wi.getAppendTaskIdentityList()))
@@ -154,7 +154,7 @@ class ActionProcessing extends BaseAction {
 				throw new ExceptionEntityNotExist(WorkLog.class);
 			}
 			param.workLog = workLog;
-			// 后续要用到routeName要先进行updateTask
+			// 이후 routeName을 사용하려면 먼저 updateTask를 수행해야 함
 			updateTask(business, param);
 			Pair<Manual, Route> pair = initGetManualAndRoute(business, task);
 			param.manual = pair.first();
@@ -209,7 +209,7 @@ class ActionProcessing extends BaseAction {
 	}
 
 	/**
-	 * 调用人工环节工作流转后执行脚本
+	 * 수동 단계 업무 문서 진행 후 실행 스크립트 호출
 	 * 
 	 * @throws Exception
 	 */
@@ -254,24 +254,24 @@ class ActionProcessing extends BaseAction {
 
 	private void updateTask(Business business, Param param) throws Exception {
 		business.entityManagerContainer().beginTransaction(Task.class);
-		// 如果有输入新的路由决策覆盖原有决策
+		// 새 경로 결정을 입력하면 기존 결정을 덮어씀
 		if (StringUtils.isNotEmpty(param.routeName)) {
 			param.task.setRouteName(param.routeName);
 		}
-		// 如果有新的流程意见那么覆盖原有流程意见,null表示没有传过来,""可能是前端传过来的改为空值.
+		// 새 프로세스 의견이 있으면 기존 프로세스 의견을 덮어씀, null은 전달되지 않음을 의미, ""는 프론트엔드에서 빈 값으로 바꿔 전달했을 수 있음.
 		if (null != param.opinion) {
 			param.task.setOpinion(param.opinion);
 		}
-		// 强制覆盖多媒体意见
+		// 멀티미디어 의견 강제 덮어쓰기
 		param.task.setMediaOpinion(param.mediaOpinion);
 		if (StringUtils.isEmpty(param.task.getOpinion())) {
 			Process process = business.process().pick(param.task.getProcess());
 			if ((null != process) && BooleanUtils.isTrue(process.getRouteNameAsOpinion())) {
-				// 将路由名作为办理意见写入
+				// 경로명을 처리 의견으로 기록
 				param.task.setOpinion(param.task.getRouteName());
 			}
 		}
-		// 更新routeAlias
+		// routeAlias 업데이트
 		if ((null != param.route) && (!StringUtils.equals(param.route.getAlias(), param.task.getRouteAlias()))) {
 			param.task.setRouteAlias(param.route.getAlias());
 		}
@@ -286,7 +286,7 @@ class ActionProcessing extends BaseAction {
 				taskCompletedId, param.series);
 	}
 
-	// 8.2以后版本使用reset替代append
+	// 8.2 이후 버전은 append 대신 reset 사용
 	private void processingAppendTaskAppend(Param param) throws Exception {
 		com.x.processplatform.core.express.service.processing.jaxrs.task.V2ResetWi req = new com.x.processplatform.core.express.service.processing.jaxrs.task.V2ResetWi();
 		req.setDistinguishedNameList(param.distinguishedNameList);
@@ -301,7 +301,7 @@ class ActionProcessing extends BaseAction {
 		this.processingProcessingWork(param, ProcessingAttributes.TYPE_TASK);
 		boolean flag = true;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 流程流转到取消环节，此时工作已被删除.flag =true 代表存在,false 已经被删除
+			// 프로세스가 취소 단계로 진행되어 업무 문서가 이미 삭제됨.flag =true 는 존재, false 는 이미 삭제됨
 			if ((emc.countEqual(Work.class, Work.job_FIELDNAME, param.task.getJob()) == 0)
 					&& (emc.countEqual(WorkCompleted.class, WorkCompleted.job_FIELDNAME, param.task.getJob()) == 0)) {
 				flag = false;
@@ -312,7 +312,7 @@ class ActionProcessing extends BaseAction {
 			rec = this.recordTaskProcessing(Record.TYPE_TASK, param.workLog.getJob(), param.workLog.getId(),
 					taskCompletedId, param.series);
 		} else {
-//			// 这里的record不需要写入到数据库,work和workCompleted都消失了,可能走了cancel环节,这里的rec仅作为返回值生成wo
+//			// 여기의 record는 DB에 기록할 필요 없음, work와 workCompleted가 모두 사라져 cancel 단계로 갔을 수 있음, 여기의 rec는 wo를 생성하는 반환값으로만 사용
 			rec = new Record(param.workLog);
 			rec.setType(Record.TYPE_TASK);
 			rec.setOpinion(param.task.getOpinion());
@@ -335,7 +335,7 @@ class ActionProcessing extends BaseAction {
 		if (StringUtils.isBlank(resp.getId())) {
 			throw new ExceptionProcessingTask(param.task.getId());
 		} else {
-			// 获得已办id
+			// 처리 완료 id 조회
 			return resp.getId();
 		}
 	}
@@ -356,7 +356,7 @@ class ActionProcessing extends BaseAction {
 	}
 
 	/**
-	 * 处理退回操作
+	 * 반려 작업 처리
 	 * 
 	 * @throws Exception
 	 */
@@ -395,7 +395,7 @@ class ActionProcessing extends BaseAction {
 		this.processingWorkGoBack(param.work.getId(), param.series, param.work.getJob());
 		boolean flag = true;
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-			// 流程流转到取消环节，此时工作已被删除.flag =true 代表存在,false 已经被删除
+			// 프로세스가 취소 단계로 진행되어 업무 문서가 이미 삭제됨.flag =true 는 존재, false 는 이미 삭제됨
 			if ((emc.countEqual(Work.class, Work.job_FIELDNAME, param.work.getJob()) == 0)
 					&& (emc.countEqual(WorkCompleted.class, WorkCompleted.job_FIELDNAME, param.work.getJob()) == 0)) {
 				flag = false;
@@ -406,7 +406,7 @@ class ActionProcessing extends BaseAction {
 			return this.recordTaskProcessing(Record.TYPE_GOBACK, param.workLog.getJob(), param.workLog.getId(),
 					taskCompletedId, param.series);
 		} else {
-			// 这里的record不需要写入到数据库,work和workCompleted都消失了,可能走了cancel环节,这里的rec仅作为返回值生成wo
+			// 여기의 record는 DB에 기록할 필요 없음, work와 workCompleted가 모두 사라져 cancel 단계로 갔을 수 있음, 여기의 rec는 wo를 생성하는 반환값으로만 사용
 			rec = new Record(param.workLog);
 			rec.setType(Record.TYPE_GOBACK);
 			rec.setOpinion(param.task.getOpinion());
@@ -418,10 +418,10 @@ class ActionProcessing extends BaseAction {
 
 	/**
 	 * 
-	 * 先过滤掉connected=false<br>
-	 * 过滤掉非manual环节<br>
-	 * 过滤掉workLog的type=goBack<br>
-	 * 如果有记录goBackActivityToken值,那么仅从这个位置开始.
+	 * 먼저 connected=false 필터링<br>
+	 * manual이 아닌 단계 필터링<br>
+	 * workLog의 type=goBack 필터링<br>
+	 * goBackActivityToken 값이 기록되어 있으면 이 위치부터만 시작.
 	 * 
 	 * @param nodes
 	 * @param activityToken
@@ -497,7 +497,7 @@ class ActionProcessing extends BaseAction {
 	}
 
 	/**
-	 * 在 type=prev的设置下获取调用后台goBack所需参数
+	 * type=prev 설정에서 백엔드 goBack 호출에 필요한 매개변수 조회
 	 * 
 	 * @param manual
 	 * @param option
@@ -524,7 +524,7 @@ class ActionProcessing extends BaseAction {
 	}
 
 	/**
-	 * 在 type=define的设置下获取调用后台goBack所需参数
+	 * type=define 설정에서 백엔드 goBack 호출에 필요한 매개변수 조회
 	 * 
 	 * @param manual
 	 * @param option
@@ -563,7 +563,7 @@ class ActionProcessing extends BaseAction {
 	}
 
 	/**
-	 * 在 type=any的设置下获取调用后台goBack所需参数
+	 * type=any 설정에서 백엔드 goBack 호출에 필요한 매개변수 조회
 	 * 
 	 * @param manual
 	 * @param option
@@ -620,10 +620,10 @@ class ActionProcessing extends BaseAction {
 
 	public static final class OptionGoBack {
 
-		// 退回的活动对象
+		// 반려 대상 활동 객체
 		private String activity;
 
-		// 路由方式
+		// 경로 방식
 		private String way;
 
 		public String getActivity() {

@@ -35,7 +35,7 @@ if ((!('innerText' in document.createElement('a'))) && ('getSelection' in window
     });
     HTMLElement.prototype.__defineSetter__('innerText', function(text) {
         /**
-         * @Desc: 解决FireFox节点内容删除后text为null，出现报错的问题
+         * @Desc: FireFox에서 노드 내용을 삭제한 뒤 text가 null이 되어 오류가 나는 문제 해결
          * @Editor: Naixor
          * @Date: 2015.9.16
          */
@@ -103,7 +103,7 @@ if ((!('innerText' in document.createElement('a'))) && ('getSelection' in window
         '.': 190
     };
 
-// 小写适配
+// 소문자 대응
     for (var key in keymap) {
         if (keymap.hasOwnProperty(key)) {
             keymap[key.toLowerCase()] = keymap[key];
@@ -157,9 +157,9 @@ MWF.xApplication.MinderEditor.Key = function(){
         // Shift, Control, Alt KeyCode ignored.
         if ([16, 17, 18, 91].indexOf(keyEvent.keyCode) === -1) {
             /**
-             * 解决浏览器输入法状态下对keyDown的keyCode判断不准确的问题,使用keyIdentifier,
-             * 可以解决chrome和safari下的各种问题,其他浏览器依旧有问题,然而那并不影响我们对特
-             * 需判断的按键进行判断(比如Space在safari输入法态下就是229,其他的就不是)
+             * 브라우저 입력기 상태에서 keyDown의 keyCode 판단이 부정확한 문제를 해결하기 위해 keyIdentifier를 사용,
+             * chrome과 safari의 여러 문제는 해결되며, 다른 브라우저에는 여전히 문제가 있지만 특정
+             * 판단이 필요한 키의 판단에는 영향이 없음(예: Space는 safari 입력기 상태에서 229이고, 다른 경우는 그렇지 않음)
              * @editor Naixor
              * @Date 2015-12-2
              */

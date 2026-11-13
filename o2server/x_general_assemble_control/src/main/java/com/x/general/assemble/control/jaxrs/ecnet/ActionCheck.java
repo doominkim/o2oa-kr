@@ -47,20 +47,20 @@ public class ActionCheck extends BaseAction {
 
 		private static final long serialVersionUID = 7549440867585619008L;
 
-		@FieldDescribe("位置.")
-		@Schema(description = "位置.")
+		@FieldDescribe("위치.")
+		@Schema(description = "위치.")
 		private Integer pos = 0;
 
-		@FieldDescribe("原始值.")
-		@Schema(description = "原始值.")
+		@FieldDescribe("원래 값.")
+		@Schema(description = "원래 값.")
 		private String origin = "";
 
-		@FieldDescribe("纠正值.")
-		@Schema(description = "纠正值.")
+		@FieldDescribe("수정 값.")
+		@Schema(description = "수정 값.")
 		private String correct = "";
 
-		@FieldDescribe("纠正项.")
-		@Schema(description = "纠正项.")
+		@FieldDescribe("수정 항목.")
+		@Schema(description = "수정 항목.")
 		private List<WoItem> itemList = new ArrayList<>();
 
 		public String getOrigin() {
@@ -102,20 +102,20 @@ public class ActionCheck extends BaseAction {
 
 		private static final long serialVersionUID = 8709219948318947232L;
 
-		@FieldDescribe("原始值.")
-		@Schema(description = "原始值.")
+		@FieldDescribe("원래 값.")
+		@Schema(description = "원래 값.")
 		private String origin;
 
-		@FieldDescribe("纠正值.")
-		@Schema(description = "纠正值.")
+		@FieldDescribe("수정 값.")
+		@Schema(description = "수정 값.")
 		private String correct;
 
-		@FieldDescribe("开始位置.")
-		@Schema(description = "开始位置.")
+		@FieldDescribe("시작 위치.")
+		@Schema(description = "시작 위치.")
 		private Integer begin;
 
-		@FieldDescribe("结束位置.")
-		@Schema(description = "结束位置.")
+		@FieldDescribe("종료 위치.")
+		@Schema(description = "종료 위치.")
 		private Integer end;
 
 		public String getOrigin() {

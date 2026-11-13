@@ -15,32 +15,32 @@ public class ActionPostWi extends GsonPropertyObject {
 
 	private static final long serialVersionUID = 1360655000630283661L;
 
-	@FieldDescribe("搜索内容.")
-	@Schema(description = "搜索内容.")
+	@FieldDescribe("검색 내용.")
+	@Schema(description = "검색 내용.")
 	private String query;
 
-	@FieldDescribe("分页.")
-	@Schema(description = "分页.")
+	@FieldDescribe("페이지.")
+	@Schema(description = "페이지.")
 	private Integer page;
 
-	@FieldDescribe("数量.")
-	@Schema(description = "数量.")
+	@FieldDescribe("수량.")
+	@Schema(description = "수량.")
 	private Integer size;
 
-	@FieldDescribe("人员.")
-	@Schema(description = "人员.")
+	@FieldDescribe("사용자.")
+	@Schema(description = "사용자.")
 	private String person;
 
-	@FieldDescribe("过滤条件.")
-	@Schema(description = "过滤条件.")
+	@FieldDescribe("필터 조건.")
+	@Schema(description = "필터 조건.")
 	private List<Filter> filterList = new ArrayList<>();
 
-	@FieldDescribe("检索分类.")
-	@Schema(description = "检索分类.")
+	@FieldDescribe("검색 분류.")
+	@Schema(description = "검색 분류.")
 	private String category = "";
 
-	@FieldDescribe("检索仓库.")
-	@Schema(description = "检索仓库.")
+	@FieldDescribe("검색 저장소.")
+	@Schema(description = "검색 저장소.")
 	private String key = "";
 
 	public String getCategory() {

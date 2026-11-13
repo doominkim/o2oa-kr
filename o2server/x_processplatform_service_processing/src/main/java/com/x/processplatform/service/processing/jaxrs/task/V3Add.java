@@ -21,7 +21,7 @@ import com.x.processplatform.core.express.service.processing.jaxrs.task.V3AddWo;
 import com.x.processplatform.service.processing.ProcessPlatformKeyClassifyExecutorFactory;
 
 /**
- * @since 8.2 tickets 加签
+ * @since 8.2 tickets 결재자 추가
  */
 class V3Add extends BaseAction {
 

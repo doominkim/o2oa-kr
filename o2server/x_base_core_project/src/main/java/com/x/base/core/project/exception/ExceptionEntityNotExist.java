@@ -10,7 +10,7 @@ public class ExceptionEntityNotExist extends LanguagePromptException {
 
 	private static final long serialVersionUID = -7354813827434276962L;
 
-	public static String defaultMessage = "标识为:{} 的 {} 对象不存在.";
+	public static String defaultMessage = "식별자: {} 인 {} 객체가 없습니다.";
 
 	public ExceptionEntityNotExist(String flag, JpaObject jpa) {
 		super(defaultMessage, flag, (null == jpa) ? null : jpa.nameOfEntity());
@@ -30,12 +30,12 @@ public class ExceptionEntityNotExist extends LanguagePromptException {
 	}
 
 	public <T extends JpaObject> ExceptionEntityNotExist(String flag) {
-		super("标识为:{} 的对象不存在.", flag);
+		super("식별자: {} 인 객체가 없습니다.", flag);
 		this.setLanguageKey(this.getClass().getName()+"_1");
 	}
 
 	public <T extends JpaObject> ExceptionEntityNotExist(Class<T> cls) {
-		super("类型为: {} 的对象不存在.", cls.getSimpleName());
+		super("유형: {} 인 객체가 없습니다.", cls.getSimpleName());
 		this.setLanguageKey(this.getClass().getName()+"_2");
 	}
 

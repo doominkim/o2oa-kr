@@ -48,12 +48,12 @@ public class ActionLoginWithCode extends BaseAction {
 			if (resp == null) {
 				throw new ExceptionGetAccessTokenFail();
 			}
-			logger.info("获取到用户openid accessToken ，" + resp.toString());
+			logger.info("사용자 openid accessToken 획득," + resp.toString());
 
 			Business business = new Business(emc);
-			// openid 查询用户
+			// openid로 사용자 조회
 			String personId = business.person().getWithCredential(resp.getOpenid());
-			if (StringUtils.isEmpty(personId)) { // 未绑定用户
+			if (StringUtils.isEmpty(personId)) { // 바인딩되지 않은 사용자
 				Wo wo = new Wo();
 				wo.setUnbind(true);
 				wo.setMpwxopenId(resp.getOpenid());
@@ -85,10 +85,10 @@ public class ActionLoginWithCode extends BaseAction {
 		}
 		static WrapCopier<Person, Wo> copier = WrapCopierFactory.wo(Person.class, Wo.class, null, Excludes);
 
-		@FieldDescribe("登录token")
+		@FieldDescribe("로그인 token")
 		private String token;
 
-		@FieldDescribe("未绑定标识， 如果是 true，前端需要获取对象中的mpwxopenId字段，进行绑定操作")
+		@FieldDescribe("미바인딩 표시, true이면 프론트엔드에서 객체의 mpwxopenId 필드를 가져와 바인딩 작업을 해야 함")
 		private Boolean unbind;
 
 		public Boolean getUnbind() {

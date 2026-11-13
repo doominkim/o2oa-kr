@@ -1,5 +1,5 @@
 
-// 用于拖拽节点时屏蔽键盘事件
+// 노드 드래그 시 키보드 이벤트 차단용
 MWF.xApplication.MinderEditor.Drag = new Class({
     initialize : function( editor ){
         this.editor = editor;
@@ -132,12 +132,12 @@ MWF.xApplication.MinderEditor.FSM = new Class({
         this.debug = new MWF.xApplication.MinderEditor.Debug('fsm');
     },
     /**
-     * 状态跳转
+     * 상태 전환
      *
-     * 会通知所有的状态跳转监视器
+     * 모든 상태 전환 감시자에게 알림
      *
-     * @param  {string} newState  新状态名称
-     * @param  {any} reason 跳转的原因，可以作为参数传递给跳转监视器
+     * @param  {string} newState  새 상태 이름
+     * @param  {any} reason 전환 사유, 전환 감시자에게 매개변수로 전달 가능
      */
     jump: function(newState, reason) {
         if (!reason) throw new Error('Please tell fsm the reason to jump');
@@ -146,7 +146,7 @@ MWF.xApplication.MinderEditor.FSM = new Class({
         var notify = [oldState, newState].concat([].slice.call(arguments, 1));
         var i, handler;
 
-        // 跳转前
+        // 전환 전
         for (i = 0; i < this.handlers.length; i++) {
             handler = this.handlers[i];
             if (this.handlerConditionMatch(handler.condition, 'before', oldState, newState)) {
@@ -157,7 +157,7 @@ MWF.xApplication.MinderEditor.FSM = new Class({
         this.currentState = newState;
         this.debug.log('[{0}] {1} -> {2}', reason, oldState, newState);
 
-        // 跳转后
+        // 전환 후
         for (i = 0; i < this.handlers.length; i++) {
             handler = this.handlers[i];
             if (this.handlerConditionMatch(handler.condition, 'after', oldState, newState)) {
@@ -167,24 +167,24 @@ MWF.xApplication.MinderEditor.FSM = new Class({
         return this.currentState;
     },
     /**
-     * 返回当前状态
+     * 현재 상태 반환
      * @return {string}
      */
     state : function() {
         return this.currentState;
     },
     /**
-     * 添加状态跳转监视器
+     * 상태 전환 감시자 추가
      *
      * @param {string} condition
-     *     监视的时机
-     *         "* => *" （默认）
+     *     감시 시점
+     *         "* => *" (기본값)
      *
      * @param  {Function} handler
-     *     监视函数，当状态跳转的时候，会接收三个参数
-     *         * from - 跳转前的状态
-     *         * to - 跳转后的状态
-     *         * reason - 跳转的原因
+     *     감시 함수, 상태 전환 시 세 개의 매개변수를 받음
+     *         * from - 전환 전 상태
+     *         * to - 전환 후 상태
+     *         * reason - 전환 사유
      */
     when : function(condition, handler) {
         this.debug.log('[{0}] {1} ', condition, handler );
@@ -225,7 +225,7 @@ MWF.xApplication.MinderEditor.FSM = new Class({
     }
 });
 
-//键盘事件接收/分发器
+//키보드 이벤트 수신/분배기
 MWF.xApplication.MinderEditor.Receiver = new Class({
     initialize: function( editor ){
         this.editor = editor;
@@ -234,11 +234,11 @@ MWF.xApplication.MinderEditor.Receiver = new Class({
         this.fsm = editor.fsm;
         this.key = editor.key;
 
-        // 接收事件的 div
+        // 이벤트를 받는 div
         var element = this.element = document.createElement('div');
         element.contentEditable = true;
         /**
-         * @Desc: 增加tabindex属性使得element的contenteditable不管是trur还是false都能有focus和blur事件
+         * @Desc: tabindex 속성을 추가해 element의 contenteditable이 true든 false든 focus와 blur 이벤트를 갖도록 함
          * @Editor: Naixor
          * @Date: 2015.09.14
          */
@@ -255,19 +255,19 @@ MWF.xApplication.MinderEditor.Receiver = new Class({
         this.minder.on('receiverfocus', this.selectAll.bind(this));
 
         this.minder.on('readonly', function() {
-            // 屏蔽minder的事件接受，删除receiver和popmenu
+            // minder의 이벤트 수신 차단, receiver와 popmenu 삭제
             this.minder.disable();
             this.element.parentElement.removeChild(this.element);
             //this.editor.popmenu.$container.removeChild(editor.popmenu.$element);
         }.bind(this));
 
-        // 侦听器，接收到的事件会派发给所有侦听器
+        // 리스너, 수신된 이벤트는 모든 리스너에 전달됨
         this.listeners = [];
 
     },
     selectAll: function() {
         if(layout.mobile)return;
-        // 保证有被选中的
+        // 선택된 항목이 있도록 보장
         if (!this.element.innerHTML) this.element.innerHTML = '&nbsp;';
         var range = document.createRange();
         var selection = window.getSelection();
@@ -277,7 +277,7 @@ MWF.xApplication.MinderEditor.Receiver = new Class({
         this.element.focus();
     },
     /**
-     * @Desc: 增加enable和disable方法用于解决热核态的输入法屏蔽问题
+     * @Desc: 입력기 차단 문제 해결을 위해 enable과 disable 메서드 추가
      * @Editor: Naixor
      * @Date: 2015.09.14
      */
@@ -288,7 +288,7 @@ MWF.xApplication.MinderEditor.Receiver = new Class({
         this.element.setAttribute("contenteditable", false);
     },
     /**
-     * @Desc: hack FF下div contenteditable的光标丢失BUG
+     * @Desc: hack FF에서 div contenteditable의 커서 소실 BUG
      * @Editor: Naixor
      * @Date: 2015.10.15
      */
@@ -299,14 +299,14 @@ MWF.xApplication.MinderEditor.Receiver = new Class({
         this.element.focus();
     },
     /**
-     * 以此事件代替通过mouse事件来判断receiver丢失焦点的事件
+     * mouse 이벤트로 receiver 포커스 소실을 판단하는 대신 이 이벤트 사용
      * @editor Naixor
      * @Date 2015-12-2
      */
     onblur: function (handler) {
         this.element.onblur = handler;
     },
-    // 侦听指定状态下的事件，如果不传 state，侦听所有状态
+    // 지정 상태의 이벤트 수신, state를 전달하지 않으면 모든 상태 수신
     listen : function(state, listener) {
         if (arguments.length == 1) {
             listener = state;
@@ -328,18 +328,18 @@ MWF.xApplication.MinderEditor.Receiver = new Class({
         for (var i = 0; i < this.listeners.length; i++) {
 
             listener = this.listeners[i];
-            // 忽略不在侦听状态的侦听器
+            // 수신 상태가 아닌 리스너 무시
             if (listener.notifyState != '*' && listener.notifyState != this.fsm.state()) {
                 continue;
             }
 
             /**
              *
-             * 对于所有的侦听器，只允许一种处理方式：跳转状态。
-             * 如果侦听器确定要跳转，则返回要跳转的状态。
-             * 每个事件只允许一个侦听器进行状态跳转
-             * 跳转动作由侦听器自行完成（因为可能需要在跳转时传递 reason），返回跳转结果即可。
-             * 比如：
+             * 모든 리스너는 한 가지 처리 방식만 허용: 상태 전환.
+             * 리스너가 전환을 결정하면 전환할 상태를 반환.
+             * 각 이벤트는 하나의 리스너만 상태 전환 가능
+             * 전환 동작은 리스너가 직접 수행(전환 시 reason 전달이 필요할 수 있으므로), 전환 결과만 반환하면 됨.
+             * 예:
              *
              * ```js
              *  receiver.listen('normal', function(e) {

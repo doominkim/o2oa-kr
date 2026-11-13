@@ -254,8 +254,8 @@ MWF.xApplication.cms.ColumnManager.LP={
 	"enableProcess": "Enable the approval process",
 	"disableProcess": "Disable the approval process",
 	"documentTypeSelectValue": [
-		"信息",
-		"数据"
+		"정보",
+		"데이터"
 	],
 	"documentTypeSelectText": [
 		"Information",

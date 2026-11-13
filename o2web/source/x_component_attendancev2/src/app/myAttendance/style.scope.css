@@ -203,11 +203,11 @@
   line-height: 18px;
   text-align: center;
 }
-/* 正常 */
+/* 정상 */
 .record-status-normal {
   background-color: var(--att-record-status-normal-color)!important;
 }
-/* 早退 */
+/* 조퇴 */
 .record-status-early {
   background-color:var(--att-record-status-early-color)!important;
 }
@@ -216,31 +216,31 @@
 .item-record-status-tag.record-status-late {
   color: #4A3B00;
 }
-/* 迟到 */
+/* 지각 */
 .record-status-late {
   background-color: var(--att-record-status-late-color)!important;
 }
-/* 严重迟到 */
+/* 심각한 지각 */
 .record-status-serilate {
   background-color: var(--att-record-status-serilate-color)!important;
 }
-/* 未打卡 */
+/* 미체크 */
 .record-status-nosign {
   background-color: var(--att-record-status-nosign-color)!important;
 }
-/* 外勤打卡 */
+/* 외근 체크 */
 .record-status-fieldwork {
   background-color: var(--att-record-status-fieldwork-color)!important;
 }
-/* 申诉 */
+/* 이의 신청 */
 .record-status-appeal {
   background-color: var(--att-record-status-appeal-color)!important;
 }
-/* 请假 */
+/* 휴가 */
 .record-status-leave {
   background-color: var(--att-record-status-leave-color)!important;
 }
-/* 旷工 */
+/* 무단결근 */
 .record-status-absenteeism {
   background-color: var(--att-record-status-absenteeism-color)!important;
 }

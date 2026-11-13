@@ -28,11 +28,11 @@ class ActionAuth extends BaseAction {
 
 	ActionResult<Wo> execute(EffectivePerson effectivePerson, String response_type, String client_id,
 			String redirect_uri, String scope, String state) throws Exception {
-		// response_type：表示授权类型，必选项，此处的值固定为"code"
-		// client_id：表示客户端的ID，必选项
-		// redirect_uri：表示重定向URI，可选项
-		// scope：表示申请的权限范围，可选项
-		// state：表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
+		// response_type: 권한 부여 유형, 필수 항목, 값은 "code"로 고정
+		// client_id: 클라이언트 ID, 필수 항목
+		// redirect_uri: 리다이렉트 URI, 선택 항목
+		// scope: 요청 권한 범위, 선택 항목
+		// state: 클라이언트의 현재 상태, 임의 값 지정 가능하며 인증 서버가 이 값을 그대로 반환함.
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 			ActionResult<Wo> result = new ActionResult<>();
 			Business business = new Business(emc);

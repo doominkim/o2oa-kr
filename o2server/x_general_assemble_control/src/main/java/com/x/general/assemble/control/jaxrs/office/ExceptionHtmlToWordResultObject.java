@@ -7,7 +7,7 @@ class ExceptionHtmlToWordResultObject extends PromptException {
 	private static final long serialVersionUID = -4908883340253465376L;
 
 	ExceptionHtmlToWordResultObject(String flag) {
-		super("指定的Word结果不存在:{}.", flag);
+		super("지정한 Word 결과가 없습니다: {}.", flag);
 	}
 
 }

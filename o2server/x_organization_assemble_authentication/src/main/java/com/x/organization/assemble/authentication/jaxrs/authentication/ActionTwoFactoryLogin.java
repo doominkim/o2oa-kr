@@ -24,7 +24,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 双因素认证，用户名密码认证成功后发送短信验证码，然后再校验验证码(校验验证码走codeLogin接口)
+ * 2단계 인증. 사용자 이름·비밀번호 인증 성공 후 SMS 인증 코드를 보내고 인증 코드를 확인(확인은 codeLogin 인터페이스 사용)
  */
 class ActionTwoFactoryLogin extends BaseAction {
 
@@ -55,7 +55,7 @@ class ActionTwoFactoryLogin extends BaseAction {
                     throw new ExceptionPersonNotExistOrInvalidPassword();
                 }
             } else {
-                // 普通用户登录,也有可能拥有管理员角色.增加相同标识(name允许重复)的认证
+                // 일반 사용자 로그인. 관리자 역할을 가질 수도 있음. 같은 식별자(name 중복 허용)의 인증 추가
                 List<String> people = this.listWithCredential(business, wi.getCredential());
                 Person person = null;
                 if (people.isEmpty()) {
@@ -96,7 +96,7 @@ class ActionTwoFactoryLogin extends BaseAction {
         if (StringUtils.isEmpty(wi.getPassword())) {
             throw new ExceptionPasswordEmpty();
         }
-        // 可以通过设置跳过图片验证码.
+        // 설정으로 이미지 인증 코드를 건너뛸 수 있음.
         if (BooleanUtils.isTrue(Config.person().getCaptchaLogin())
                 && (StringUtils.isEmpty(wi.getCaptcha()) || StringUtils.isEmpty(
                 wi.getCaptchaAnswer()))) {
@@ -139,7 +139,7 @@ class ActionTwoFactoryLogin extends BaseAction {
 
         private static final long serialVersionUID = 1398135678113303824L;
 
-        @FieldDescribe("口令是否过期")
+        @FieldDescribe("비밀번호 만료 여부")
         private Boolean passwordExpired = false;
 
         public Boolean getPasswordExpired() {

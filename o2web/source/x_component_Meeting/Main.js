@@ -18,7 +18,7 @@ MWF.xApplication.Meeting.MainPc = new Class({
         "isMax": true,
         "sideBarEnable" : true,
         "settingEnable" : true,
-        "meeting": '', //立即打开的会议id
+        "meeting": '', //즉시 열 회의 id
         "title": MWF.xApplication.Meeting.LP.title
     },
     onQueryLoad: function(){
@@ -863,11 +863,11 @@ MWF.xApplication.Meeting.MainMobile = new Class({
             };
         };
 
-        date.increment('month', -1); //上月
+        date.increment('month', -1); //지난달
         months.push( getObj(date) );
-        date.increment('month', 1); //本月
+        date.increment('month', 1); //이번 달
         months.push( getObj(date) );
-        date.increment('month', 1); //下月
+        date.increment('month', 1); //다음 달
         months.push( getObj(date) );
 
         return months;
@@ -923,10 +923,10 @@ MWF.xApplication.Meeting.MainMobile = new Class({
         }
 
         if (d.status === 'wait' && d.myWaitAccept) {
-            //会议邀请
+            //회의 초대
             d.meetingStatus = 'invite';
         }else if (d.status === 'wait' && d.myReject) {
-            //会议拒绝
+            //회의 거절
             d.meetingStatus = 'reject';
         } else {
             d.meetingStatus = d.status;
@@ -1355,7 +1355,7 @@ MWF.xApplication.Meeting.Config = new Class({
                     change: function (item, ev) {
                         var value = item.getValue();
                         this.contentNode.getElement("div.onlineArea").setStyle("display", value === "true" ? "" : "none");
-                        // if( this.onlineProduct.getValue() === "好视通" && value === "true" && !this.scriptEditor )this.loadScriptEditor();
+                        // if( this.onlineProduct.getValue() === "하오스퉁" && value === "true" && !this.scriptEditor )this.loadScriptEditor();
                         this.setSize();
                     }.bind(this)
                 }
@@ -1370,7 +1370,7 @@ MWF.xApplication.Meeting.Config = new Class({
                     change: function (item, ev ) {
                         var value = item.getValue();
                         this.contentNode.getElement("div.onlineConfigArea").setStyle("display", value === "好视通" ? "" : "none");
-                        // if( value === "好视通" && this.enableOnline.getValue() === "true" &&  !this.scriptEditor )this.loadScriptEditor();
+                        // if( value === "하오스퉁" && this.enableOnline.getValue() === "true" &&  !this.scriptEditor )this.loadScriptEditor();
                         this.setSize();
                     }.bind(this)
                 }
@@ -1402,7 +1402,7 @@ MWF.xApplication.Meeting.Config = new Class({
             this.o2ToHstUid.load();
 
 
-            // if( d.onlineProduct === "好视通" && d.enableOnline ){
+            // if( d.onlineProduct === "하오스퉁" && d.enableOnline ){
             //     this.loadScriptEditor();
             // }
 
@@ -1426,10 +1426,10 @@ MWF.xApplication.Meeting.Config = new Class({
     //     var json;
     //     if( !this.configData.onlineConfig ){
     //         json = {
-    //             'hstUrl':'好视通服务地址',
-    //             'hstKey':'好视通服务接口KEY',
-    //             'hstSecret':'好视通服务接口SECRET',
-    //             'hstUserSync':'是否启用O2到好视通人员同步'
+    //             'hstUrl':'하오스퉁 서비스 주소',
+    //             'hstKey':'하오스퉁 서비스 인터페이스 KEY',
+    //             'hstSecret':'하오스퉁 서비스 인터페이스 SECRET',
+    //             'hstUserSync':'O2에서 하오스퉁으로 사용자 동기화 사용 여부'
     //         }
     //     }else{
     //         json = this.configData.onlineConfig;

@@ -25,7 +25,7 @@ abstract class BaseAction extends StandardJaxrsAction {
   private static final Logger LOGGER = LoggerFactory.getLogger(BaseAction.class);
 
     /**
-     * 先删除老的记录
+     * 기존 기록 먼저 삭제
      * @param personDn
      * @param date yyyy-MM-dd
      * @param emc
@@ -33,12 +33,12 @@ abstract class BaseAction extends StandardJaxrsAction {
      * @throws Exception
      */
     protected void deleteOldRecords(String personDn, String date, EntityManagerContainer emc, Business business) throws Exception {
-        // 查询是否有存在的数据
+        // 기존 데이터 존재 여부 조회
         List<AttendanceV2CheckInRecord> oldRecordList = business.getAttendanceV2ManagerFactory().listRecordWithPersonAndDate(personDn, date);
         List<String> deleteIds = new ArrayList<>();
         for (AttendanceV2CheckInRecord record : oldRecordList) {
             deleteIds.add(record.getId());
-            // 如果有异常数据也必须一起删除
+            // 이상 데이터가 있으면 함께 삭제해야 함
             List<AttendanceV2AppealInfo> appealList = business.getAttendanceV2ManagerFactory().listAppealInfoWithRecordId(record.getId());
             if (appealList != null && !appealList.isEmpty()) {
                 List<String> appealListDeleteIds = new ArrayList<>();
@@ -53,12 +53,12 @@ abstract class BaseAction extends StandardJaxrsAction {
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
         emc.delete(AttendanceV2CheckInRecord.class, deleteIds);
         emc.commit();
-        LOGGER.info("打卡记录删除：{}, {}, {} ", personDn, date, ListTools.toStringJoin(deleteIds));
+        LOGGER.info("체크 기록 삭제: {}, {}, {} ", personDn, date, ListTools.toStringJoin(deleteIds));
     }
 
 
     /**
-     * 保存打卡数据
+     * 체크 데이터 저장
      * @param dutyType
      * @param person
      * @param date
@@ -76,7 +76,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         AttendanceV2CheckInRecord noCheckRecord = new AttendanceV2CheckInRecord();
         noCheckRecord.setCheckInType(dutyType);
         noCheckRecord.setUserId(person);
-        // 打卡时间
+        // 체크 시간
         if (StringUtils.isEmpty(preDutyTime)) {
             if (AttendanceV2CheckInRecord.OnDuty.equals(dutyType)) {
                 preDutyTime = "09:00";
@@ -85,27 +85,27 @@ abstract class BaseAction extends StandardJaxrsAction {
             }
         }
         String checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL;
-        // 根据班次判断打卡结果
+        // 교대에 따라 체크 결과 판단
         if (shift != null) {
             if (recordDate != null) {
                 String dutyTimeString = date + " " + preDutyTime;
                 String checkTimeString = DateTools.format(recordDate, DateTools.format_yyyyMMddHHmm);
-                // 上班打卡
+                // 출근 체크
                 if (dutyType.equals(AttendanceV2CheckInRecord.OnDuty)) {
                     Date dutyTime = DateTools.parse(date + " " + preDutyTime, DateTools.format_yyyyMMddHHmm);
                     checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL;
-                    // 迟到
+                    // 지각
                     if (recordDate.after(dutyTime) && !dutyTimeString.equals(checkTimeString)) {
                         checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_Late;
                     }
-                    // 严重迟到
+                    // 심각한 지각
                     if (shift.getSeriousTardinessLateMinutes() > 0) {
                         Date seriousLateTime = DateTools.addMinutes(dutyTime, shift.getSeriousTardinessLateMinutes());
                         if (recordDate.after(seriousLateTime)) {
                             checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_SeriousLate;
                         }
                     }
-                    // 可以晚到
+                    // 늦게 와도 됨
                     if (StringUtils.isNotEmpty(shift.getLateAndEarlyOnTime())) {
                         int minute = -1;
                         try {
@@ -122,11 +122,11 @@ abstract class BaseAction extends StandardJaxrsAction {
                 } else if (dutyType.equals(AttendanceV2CheckInRecord.OffDuty)) {
                     Date offDutyTime = DateTools.parse(date + " " + preDutyTime, DateTools.format_yyyyMMddHHmm);
                     checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_NORMAL;
-                    // 早退
+                    // 조퇴
                     if (recordDate.before(offDutyTime) && !dutyTimeString.equals(checkTimeString)) {
                         checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_Early;
                     }
-                    // 可以早走
+                    // 일찍 가도 됨
                     if (StringUtils.isNotEmpty(shift.getLateAndEarlyOffTime())) {
                         int minute = -1;
                         try {
@@ -142,7 +142,7 @@ abstract class BaseAction extends StandardJaxrsAction {
                     }
 
                 }
-            } else { // 没有打卡
+            } else { // 체크 없음
                 recordDate = DateTools.parse(date+" "+preDutyTime, DateTools.format_yyyyMMddHHmm);
                 checkInResult = AttendanceV2CheckInRecord.CHECKIN_RESULT_NotSigned;
             }
@@ -169,7 +169,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
         emc.persist(noCheckRecord, CheckPersistType.all);
         emc.commit();
-        LOGGER.info("打卡记录保存：{}, {}, {} ", person, date, checkInResult);
+        LOGGER.info("체크 기록 저장: {}, {}, {} ", person, date, checkInResult);
     }
 
 }

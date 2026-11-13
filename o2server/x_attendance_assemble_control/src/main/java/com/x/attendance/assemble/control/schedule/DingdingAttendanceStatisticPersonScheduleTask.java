@@ -13,8 +13,8 @@ import com.x.base.core.project.schedule.AbstractJob;
 import com.x.base.core.project.tools.DateTools;
 
 /**
- * 钉钉考勤结果统计定时器
- * 每天晚上3点定时处理钉钉考勤的个人统计数据
+ * DingTalk 근태 결과 통계 타이머
+ * 매일 밤 3시에 DingTalk 근태 개인 통계 데이터 정기 처리
  * Created by fancyLou on 2020-04-05.
  * Copyright © 2020 O2. All rights reserved.
  */
@@ -25,9 +25,9 @@ public class DingdingAttendanceStatisticPersonScheduleTask extends AbstractJob {
     @Override
     public void schedule(JobExecutionContext jobExecutionContext) throws Exception {
         try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-            //前一天 0点到23点
+            //전날 0시부터 23시까지
             Date from = new Date();
-            from = DateTools.addDay(from, -1);//前面一天
+            from = DateTools.addDay(from, -1);//전날
 //            ThisApplication.personStatisticQueue.send(from);
         }
     }

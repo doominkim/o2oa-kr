@@ -1305,7 +1305,7 @@ MWF.xApplication.portal.PageDesigner.Script.Item = new Class({
         MWF.release(this);
     },
 
-    //绑定aec需要修改ace源码。
+    //aec 바인딩에는 ace 소스 수정 필요.
     bind: function(){
         this.value = this.data[this.key];
         if (this.data.editors){

@@ -58,7 +58,7 @@ public class ActionSave extends BaseAction {
 		}
 
 		if( check ){
-			//先看看视图信息是否存在，如果不存在
+			//먼저 뷰 정보 존재 여부 확인, 없으면
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				Business business = new Business(emc);
 				view = business.getViewFactory().get( wi.getViewId() );
@@ -78,14 +78,14 @@ public class ActionSave extends BaseAction {
 
 		if( check ){
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
-				//获取到当前用户信息
+				//현재 사용자 정보 조회
 				Business business = new Business(emc);
 				view = business.getViewFactory().get( wi.getId() );
 				viewFieldConfig = business.getViewFieldConfigFactory().get( wi.getId() );
 
-				if( viewFieldConfig == null ){//新增
+				if( viewFieldConfig == null ){//신규
 					viewFieldConfig = Wi.copier.copy( wi );
-					//如果JSON给过来的ID不为空，那么使用用户传入的ID
+					//JSON으로 전달된 ID가 비어 있지 않으면 사용자가 전달한 ID 사용
 					if( wi.getId() != null && !wi.getId().isEmpty() ){
 						viewFieldConfig.setId( wi.getId() );
 					}
@@ -98,7 +98,7 @@ public class ActionSave extends BaseAction {
 					emc.commit();
 					logService.log( emc,  effectivePerson.getDistinguishedName(), viewFieldConfig.getFieldName(), "", "", "", viewFieldConfig.getId(), "VIEWFIELDCONFIG", "新增" );
 				}else{
-					//更新
+					//수정
 					wi.copyTo( viewFieldConfig, JpaObject.FieldsUnmodify  );
 
 					emc.beginTransaction( ViewFieldConfig.class );
@@ -127,7 +127,7 @@ public class ActionSave extends BaseAction {
 			if( view.getFieldConfigList() == null ){
 				view.setFieldConfigList( new ArrayList<String>() );
 			}
-			//看看是否已经包含配置ID
+			//설정 ID가 이미 포함되어 있는지 확인
 			if( !view.getFieldConfigList().contains( viewFieldConfigId )){
 				view.getFieldConfigList().add( viewFieldConfigId );
 			}else{

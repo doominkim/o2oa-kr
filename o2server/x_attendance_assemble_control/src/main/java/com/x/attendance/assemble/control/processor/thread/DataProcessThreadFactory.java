@@ -14,27 +14,27 @@ public class DataProcessThreadFactory {
 	
 	private static DataProcessThreadFactory single = null;
 	/** 
-     * 当一个任务通过execute(Runnable)方法欲添加到线程池时： 
-     * 1.如果此时线程池中的数量小于corePoolSize，即使线程池中的线程都处于空闲状态，也要创建新的线程来处理被添加的任务。 
-     * 2.如果此时线程池中的数量等于 corePoolSize，但是缓冲队列 workQueue未满，那么任务被放入缓冲队列。 
-     * 3.如果此时线程池中的数量大于corePoolSize，缓冲队列workQueue满，并且线程池中的数量小于maximumPoolSize，建新的线程来处理被添加的任务。 
-     * 4.如果此时线程池中的数量大于corePoolSize，缓冲队列workQueue满，并且线程池中的数量等于maximumPoolSize，那么通过 
-     * handler所指定的策略来处理此任务。也就是：处理任务的优先级为：核心线程corePoolSize、任务队列workQueue、最大线程maximumPoolSize 
-     * ，如果三者都满了，使用handler处理被拒绝的任务。  
+     * 작업이 execute(Runnable) 메서드로 스레드 풀에 추가될 때: 
+     * 1. 스레드 풀의 스레드 수가 corePoolSize보다 작으면, 풀의 스레드가 모두 유휴 상태여도 추가된 작업을 처리할 새 스레드를 생성. 
+     * 2. 스레드 풀의 스레드 수가 corePoolSize와 같지만 버퍼 큐 workQueue가 가득 차지 않았으면 작업을 버퍼 큐에 넣음. 
+     * 3. 스레드 풀의 스레드 수가 corePoolSize보다 크고 버퍼 큐 workQueue가 가득 찼으며 풀의 스레드 수가 maximumPoolSize보다 작으면 추가된 작업을 처리할 새 스레드를 생성. 
+     * 4. 스레드 풀의 스레드 수가 corePoolSize보다 크고 버퍼 큐 workQueue가 가득 찼으며 풀의 스레드 수가 maximumPoolSize와 같으면 다음을 통해 
+     * handler가 지정한 정책으로 이 작업을 처리한다. 즉, 작업 처리 우선순위는 코어 스레드 corePoolSize, 작업 큐 workQueue, 최대 스레드 maximumPoolSize 
+     * , 세 가지가 모두 가득 차면 handler로 거부된 작업을 처리한다.  
      *  
-     * 5.当线程池中的线程数量大于corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止。这样，线程池可以动态的调整池中的线程数。 
+     * 5. 스레드 풀의 스레드 수가 corePoolSize보다 클 때, 어떤 스레드의 유휴 시간이 keepAliveTime을 넘으면 해당 스레드를 종료한다. 이렇게 스레드 풀은 풀 안의 스레드 수를 동적으로 조정할 수 있다. 
      */  
 	private static ThreadPoolExecutor threadpool = null;
 	 
 	private DataProcessThreadFactory() {
 		/** 
 	     * Param:  
-	     * corePoolSize - 池中所保存的线程数，包括空闲线程。  
-	     * maximumPoolSize - 池中允许的最大线程数(采用LinkedBlockingQueue时没有作用)。  
-	     * keepAliveTime -当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间，线程池维护线程所允许的空闲时间。  
-	     * unit - keepAliveTime参数的时间单位，线程池维护线程所允许的空闲时间的单位:秒 。  
-	     * workQueue - 执行前用于保持任务的队列（缓冲队列）。此队列仅保持由execute 方法提交的 Runnable 任务。  
-	     * RejectedExecutionHandler -线程池对拒绝任务的处理策略(重试添加当前的任务，自动重复调用execute()方法) 
+	     * corePoolSize - 풀에 유지하는 스레드 수(유휴 스레드 포함).  
+	     * maximumPoolSize - 풀에서 허용하는 최대 스레드 수(LinkedBlockingQueue 사용 시 효과 없음).  
+	     * keepAliveTime - 스레드 수가 코어 수보다 클 때, 초과된 유휴 스레드가 종료 전 새 작업을 기다리는 최대 시간(스레드 풀이 유지하는 스레드의 허용 유휴 시간).  
+	     * unit - keepAliveTime 매개변수의 시간 단위, 스레드 풀이 유지하는 스레드의 허용 유휴 시간 단위: 초.  
+	     * workQueue - 실행 전 작업을 보관하는 큐(버퍼 큐). 이 큐는 execute 메서드로 제출된 Runnable 작업만 보관한다.  
+	     * RejectedExecutionHandler - 스레드 풀의 거부 작업 처리 정책(현재 작업 재추가 시도, execute() 메서드 자동 반복 호출) 
 	     */
 		threadpool = new ThreadPoolExecutor( 20, 40, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadPoolExecutor.DiscardOldestPolicy() );
 	}

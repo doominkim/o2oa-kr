@@ -9,8 +9,8 @@ public class ActionListWithPersonWithApplicationFilterWi extends GsonPropertyObj
 
 	private static final long serialVersionUID = -2305165705076347869L;
 
-	@FieldDescribe("可启动流程终端类型,可选值 client,mobile,all.")
-	@Schema(description = "可启动流程终端类型,可选值 client,mobile,all.")
+	@FieldDescribe("프로세스를 시작할 수 있는 단말 유형, 가능한 값 client,mobile,all.")
+	@Schema(description = "프로세스를 시작할 수 있는 단말 유형, 가능한 값 client,mobile,all.")
 	private String startableTerminal;
 
 	public String getStartableTerminal() {

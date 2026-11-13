@@ -32,7 +32,7 @@ public class DocumentInfoService {
 	}
 
 	/**
-	 * 根据指定分类里的文档ID，支持按指定列排序
+	 * 지정한 분류의 문서 ID 조회, 지정한 열 기준 정렬 지원
 	 * 
 	 * @param emc
 	 * @param categoryId
@@ -101,7 +101,7 @@ public class DocumentInfoService {
 	}
 
 	/**
-	 * 从Document表里，忽略权限根据条件查询文档数量
+	 * Document 테이블에서 권한을 무시하고 조건에 따라 문서 수 조회
 	 * 
 	 * @param emc
 	 * @param queryFilter
@@ -144,7 +144,7 @@ public class DocumentInfoService {
 					document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "新增");
 			emc.persist(log, CheckPersistType.all);
 		} else {
-			// 有一些数据不需要更新
+			// 일부 데이터는 갱신 불필요
 			Date createTime = null;
 			String createPerson = null;
 			String creatorIdentity = null;
@@ -153,7 +153,7 @@ public class DocumentInfoService {
 			Date publishTime = null;
 			Long viewCount = wrapIn.getViewCount();
 
-			// 先把原来的值 记录下来
+			// 먼저 기존 값 기록
 			if (wrapIn.getViewCount() == null || wrapIn.getViewCount() < document.getViewCount()) {
 				viewCount = document.getViewCount();
 			}
@@ -175,7 +175,7 @@ public class DocumentInfoService {
 			if (document.getPublishTime() != null) {
 				publishTime = document.getPublishTime();
 			}
-			// objectSecurityClearance通过Data的保存来修改
+			// objectSecurityClearance는 Data 저장을 통해 수정
 			wrapIn.copyTo(document, ListTools.toList(JpaObject.FieldsUnmodify, Document.isTop_FIELDNAME,
 					Document.isAllRead_FIELDNAME));
 			document.setViewCount(viewCount);
@@ -228,9 +228,9 @@ public class DocumentInfoService {
 	}
 
 	/**
-	 * 对Document信息进行分页查询（忽略权限） document和Review除了sequence还有5个排序列支持title, appAlias,
-	 * categoryAlias, creatorPerson, creatorUnitName的分页查询 除了sequence和title,
-	 * appAlias, categoryAlias, categoryName, creatorUnitName之外，其他的列排序全部在内存进行分页
+	 * Document 정보 페이지 조회(권한 무시) document와 Review는 sequence 외에 5개 정렬 열 title, appAlias,
+	 * categoryAlias, creatorPerson, creatorUnitName의 페이지 조회 지원 sequence와 title,
+	 * appAlias, categoryAlias, categoryName, creatorUnitName 외의 다른 열 정렬은 모두 메모리에서 페이지 처리
 	 * 
 	 * @param emc
 	 * @param pageSize
@@ -254,13 +254,13 @@ public class DocumentInfoService {
 		String sequenceFieldValue = null;
 		Object obj = null;
 
-		// 校正排序列情况
+		// 정렬 열 보정
 		orderField = Document.getSequnceFieldNameWithProperty(orderField);
 
-		// 如果有指定lastId值 ，需要查询该ID对应的文档的sequence
+		// lastId 값이 지정되면 해당 ID 문서의 sequence 조회 필요
 		if (StringUtils.isNotEmpty(lastId) && !StringUtils.equalsIgnoreCase(lastId, StandardJaxrsAction.EMPTY_SYMBOL)) {
 			document = emc.find(lastId, Document.class);
-			if (document != null) {// 查询出ID对应的记录的sequence
+			if (document != null) {// ID에 해당하는 기록의 sequence 조회
 				obj = PropertyUtils.getProperty(document, orderField);
 				if (obj != null) {
 					sequenceFieldValue = obj.toString();
@@ -272,9 +272,9 @@ public class DocumentInfoService {
 	}
 
 	/**
-	 * 对Document信息进行分页查询（忽略权限） document和Review除了sequence还有5个排序列支持title, appAlias,
-	 * categoryAlias, creatorPerson, creatorUnitName的分页查询 除了sequence和title,
-	 * appAlias, categoryAlias, categoryName, creatorUnitName之外，其他的列排序全部在内存进行分页
+	 * Document 정보 페이지 조회(권한 무시) document와 Review는 sequence 외에 5개 정렬 열 title, appAlias,
+	 * categoryAlias, creatorPerson, creatorUnitName의 페이지 조회 지원 sequence와 title,
+	 * appAlias, categoryAlias, categoryName, creatorUnitName 외의 다른 열 정렬은 모두 메모리에서 페이지 처리
 	 * 
 	 * @param emc
 	 * @param pageSize
@@ -298,13 +298,13 @@ public class DocumentInfoService {
 		String sequenceFieldValue = null;
 		Object obj = null;
 
-		// 校正排序列情况
+		// 정렬 열 보정
 		orderField = Document.getSequnceFieldNameWithProperty(orderField);
 
-		// 如果有指定lastId值 ，需要查询该ID对应的文档的sequence
+		// lastId 값이 지정되면 해당 ID 문서의 sequence 조회 필요
 		if (StringUtils.isNotEmpty(lastId) && !StringUtils.equalsIgnoreCase(lastId, StandardJaxrsAction.EMPTY_SYMBOL)) {
 			document = emc.find(lastId, Document.class);
-			if (document != null) {// 查询出ID对应的记录的sequence
+			if (document != null) {// ID에 해당하는 기록의 sequence 조회
 				obj = PropertyUtils.getProperty(document, orderField);
 				if (obj != null) {
 					sequenceFieldValue = obj.toString();
@@ -364,7 +364,7 @@ public class DocumentInfoService {
 	}
 
 	/**
-	 * 删除指定ID的文档
+	 * 지정 ID의 문서 삭제
 	 * 
 	 * @param emc
 	 * @param docId
@@ -380,7 +380,7 @@ public class DocumentInfoService {
 		List<String> allFileInfoIds = null;
 		Document document = emc.find(docId, Document.class);
 
-		// 删除与该文档有关的所有数据信息
+		// 해당 문서와 관련된 모든 데이터 정보 삭제
 		DocumentDataHelper documentDataHelper = new DocumentDataHelper(emc, document);
 		documentDataHelper.remove();
 
@@ -414,12 +414,12 @@ public class DocumentInfoService {
 		}
 		emc.commit();
 
-		// 压入队列，检查热点图片是否仍存在，如果存在则删除
+		// 큐에 넣고 핫 이미지가 아직 존재하는지 확인하여 존재하면 삭제
 		ThisApplication.queueDocumentDelete.send(document.getId());
 	}
 
 	/**
-	 * 查询指定文档按path0排序的Item列表
+	 * 지정 문서의 path0 정렬 Item 목록 조회
 	 * 
 	 * @param emc
 	 * @param docIds

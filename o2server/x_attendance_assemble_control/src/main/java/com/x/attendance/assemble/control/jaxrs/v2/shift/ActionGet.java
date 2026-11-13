@@ -27,7 +27,7 @@ public class ActionGet extends BaseAction {
             Business business = new Business(emc);
             AttendanceV2Shift shift = business.getAttendanceV2ManagerFactory().pick(id, AttendanceV2Shift.class);
             if (shift == null) {
-                throw new ExceptionNotExistObject("班次:" + id);
+                throw new ExceptionNotExistObject("근무조:" + id);
             }
             result.setData( Wo.copier.copy(shift));
         }

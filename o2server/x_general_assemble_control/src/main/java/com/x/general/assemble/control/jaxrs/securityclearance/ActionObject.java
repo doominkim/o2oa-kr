@@ -15,7 +15,7 @@ import com.x.base.core.project.organization.Person;
 import com.x.general.assemble.control.Business;
 
 /**
- * 客体不高于主体
+ * 객체는 주체보다 높을 수 없음
  */
 public class ActionObject extends BaseAction {
 

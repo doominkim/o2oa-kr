@@ -37,7 +37,7 @@ public class ActionDelete extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceSettingProcess( e, "系统根据ID查询指定考勤系统配置信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionAttendanceSettingProcess( e, "ID로 근태 시스템 설정을 조회하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -48,7 +48,7 @@ public class ActionDelete extends BaseAction {
 				result.setData( new Wo( id ) );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAttendanceSettingProcess( e, "根据ID删除考勤系统配置信息时发生异常.ID:" + id );
+				Exception exception = new ExceptionAttendanceSettingProcess( e, "ID로 근태 시스템 설정을 삭제하는 중 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

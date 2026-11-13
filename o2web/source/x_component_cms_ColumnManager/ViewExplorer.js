@@ -239,7 +239,7 @@ MWF.xApplication.cms.ColumnManager.ViewExplorer = new Class({
 
         this.loadSelectFormDialog( function( e, form ){
             this.pasteItem(data, 0, form);
-        }.bind(this),  MWF.CMSCM.LP.view.selectRelativeFormNoticeText ); //"请选择需粘贴视图的关联表单"
+        }.bind(this),  MWF.CMSCM.LP.view.selectRelativeFormNoticeText ); //"뷰를 붙여넣을 관련 양식을 선택하십시오"
 
     },
     pasteItem: function(data, i, form){
@@ -580,7 +580,7 @@ MWF.xApplication.cms.ColumnManager.ViewExplorer.View = new Class({
         //var selectForm = function(){
         //    this.explorer.loadSelectFormDialog( function( e, form ){
         //        this._saveItemAs(item, form);
-        //    }.bind(this), "请选择需粘贴视图的关联表单", item.id);
+        //    }.bind(this), "뷰를 붙여넣을 관련 양식을 선택하십시오", item.id);
         //}.bind(this);
         //this.explorer.app.restActions.getForm(item.formId, function( json ){
         //    if( json && json.data && json.data.id  ){

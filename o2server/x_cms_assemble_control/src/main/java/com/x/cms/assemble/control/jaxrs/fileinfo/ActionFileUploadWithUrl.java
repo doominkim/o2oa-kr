@@ -170,19 +170,19 @@ public class ActionFileUploadWithUrl extends BaseAction {
 
 		private static final long serialVersionUID = 5113558862906097036L;
 
-		@FieldDescribe("*内容管理文档id.")
+		@FieldDescribe("*콘텐츠 관리 문서id.")
 		private String docId;
 
-		@FieldDescribe("*文件名称,带扩展名的文件名.")
+		@FieldDescribe("*파일 이름, 확장자를 포함한 파일 이름.")
 		private String fileName;
 
-		@FieldDescribe("*附件来源url地址.")
+		@FieldDescribe("*첨부파일 원본 url 주소.")
 		private String fileUrl;
 
-		@FieldDescribe("*附件分类.")
+		@FieldDescribe("*첨부파일 분류.")
 		private String site;
 
-		@FieldDescribe("上传人员（仅对管理员生效）.")
+		@FieldDescribe("업로드 사용자(관리자에게만 적용).")
 		private String person;
 
 		public String getDocId() {

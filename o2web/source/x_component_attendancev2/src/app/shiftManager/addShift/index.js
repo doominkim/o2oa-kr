@@ -20,15 +20,15 @@ export default content({
             lp,
             fTitle: lp.addShift,
             form: {
-                shiftName: "", //班次名称
-                seriousTardinessLateMinutes: "0", // 严重迟到分钟数
-                absenteeismLateMinutes: "0", // 旷工迟到分钟数
-                lateAndEarlyOnTime: "", // 上班最多可晚时间
-                lateAndEarlyOffTime: "", // 下班最多可早走时间
-                workTime: 0, // 工作时长分钟数.
-                needLimitWorkTime: true, // 工作时长不足是否记为早退.
+                shiftName: "", //근무조 이름
+                seriousTardinessLateMinutes: "0", // 심각한 지각 분 수
+                absenteeismLateMinutes: "0", // 결근 처리 지각 분 수
+                lateAndEarlyOnTime: "", // 출근 최대 허용 지각 시간
+                lateAndEarlyOffTime: "", // 퇴근 최대 허용 조기 퇴근 시간
+                workTime: 0, // 근무 시간(분).
+                needLimitWorkTime: true, // 근무 시간 부족 시 조퇴 처리 여부.
             },
-            timeType: 1,  // 打卡次数 1:每天两次 2:每次4次 3:每天6次
+            timeType: 1,  // 출퇴근 체크 횟수 1:하루 2회 2:하루 4회 3:하루 6회
             time1: {
                 onDutyTime: "",
                 onDutyTimeBeforeLimit: "",
@@ -37,7 +37,7 @@ export default content({
                 offDutyTimeBeforeLimit: "",
                 offDutyTimeAfterLimit: "",
                 offDutyNextDay: false,
-                restPeriod: "", // 休息时间段，格式为 "HH:mm-HH:mm"，例如 "12:00-13:00" 表示中午休息时间为 12:00 到 13:00
+                restPeriod: "", // 휴식 시간대, 형식은 "HH:mm-HH:mm", 예: "12:00-13:00"은 점심 휴식 시간이 12:00부터 13:00까지임을 의미
                 restPeriodStart: "",
                 restPeriodEnd: ""
             },
@@ -49,7 +49,7 @@ export default content({
                 offDutyTimeBeforeLimit: "",
                 offDutyTimeAfterLimit: "",
                 offDutyNextDay: false,
-                restPeriod: "", // 休息时间段，格式为 "HH:mm-HH:mm"，例如 "12:00-13:00" 表示中午休息时间为 12:00 到 13:00
+                restPeriod: "", // 휴식 시간대, 형식은 "HH:mm-HH:mm", 예: "12:00-13:00"은 점심 휴식 시간이 12:00부터 13:00까지임을 의미
                 restPeriodStart: "",
                 restPeriodEnd: ""
             },
@@ -61,7 +61,7 @@ export default content({
                 offDutyTimeBeforeLimit: "",
                 offDutyTimeAfterLimit: "",
                 offDutyNextDay: false,
-                restPeriod: "", // 休息时间段，格式为 "HH:mm-HH:mm"，例如 "12:00-13:00" 表示中午休息时间为 12:00 到 13:00
+                restPeriod: "", // 휴식 시간대, 형식은 "HH:mm-HH:mm", 예: "12:00-13:00"은 점심 휴식 시간이 12:00부터 13:00까지임을 의미
                 restPeriodStart: "",
                 restPeriodEnd: ""
             },
@@ -103,22 +103,22 @@ export default content({
         }
         this.calWorkTime();
     },
-    // 前端显示
+    // 프론트엔드 표시
     formatWorkTime(workTime) {
         return convertMinutesToHoursAndMinutes(workTime);
     },
-    // 计算 workTime
+    // workTime 계산
     calWorkTime() {
         let workTime = 0;
         if (this.bind.timeType === 1) {
             workTime = this._calTimeMinute(this.bind.time1);
         } else if (this.bind.timeType === 2) {
-            this.bind.time1.offDutyNextDay = false;// 最后一个下班才能是跨天的
+            this.bind.time1.offDutyNextDay = false;// 마지막 퇴근만 날짜를 넘길 수 있음
             workTime += this._calTimeMinute(this.bind.time1);
             workTime += this._calTimeMinute(this.bind.time2);
         } else if (this.bind.timeType === 3) {
-            this.bind.time1.offDutyNextDay = false;// 最后一个下班才能是跨天的
-            this.bind.time2.offDutyNextDay = false;// 最后一个下班才能是跨天的
+            this.bind.time1.offDutyNextDay = false;// 마지막 퇴근만 날짜를 넘길 수 있음
+            this.bind.time2.offDutyNextDay = false;// 마지막 퇴근만 날짜를 넘길 수 있음
             workTime += this._calTimeMinute(this.bind.time1);
             workTime += this._calTimeMinute(this.bind.time2);
             workTime += this._calTimeMinute(this.bind.time3);
@@ -141,10 +141,10 @@ export default content({
             offDutyDate.setHours(offDutyTimehour);
             offDutyDate.setMinutes(offDutyTimeminute);
             if (time.offDutyNextDay) {
-                // 增加 1 天
+                // 1일 추가
                 offDutyDate.setDate(offDutyDate.getDate() + 1);
             }
-            workTime = (offDutyDate.getTime() - onDutyDate.getTime()) / 1000 / 60; // 分钟数
+            workTime = (offDutyDate.getTime() - onDutyDate.getTime()) / 1000 / 60; // 분 수
         }
         return workTime;
     },
@@ -185,7 +185,7 @@ export default content({
         delete result.restPeriodEnd;
         return result;
     },
-    // o time picker 控件使用
+    // o time picker 컨트롤 사용
     setTimeValue(key, value) {
         if (key && (key.endsWith(".restPeriodStart") || key.endsWith(".restPeriodEnd"))) {
             this.setRestPeriodValue(key, value);
@@ -194,7 +194,7 @@ export default content({
         }
         this.calWorkTime();
     },
-    // o time minute selector 控件返回结果使用
+    // o time minute selector 컨트롤 반환 결과 사용
     setSelectorValue(key, value) {
         setJSONValue(key, value, this.bind);
     },
@@ -238,7 +238,7 @@ export default content({
                 o2.api.page.notice(lp.shiftForm.restPeriodNeedComplete, 'error');
                 return ;
             }
-            this.bind.time1.offDutyNextDay = false; // 最后一个下班才能是跨天的
+            this.bind.time1.offDutyNextDay = false; // 마지막 퇴근만 날짜를 넘길 수 있음
             myForm.properties.timeList.push(this.buildTimeForSubmit(this.bind.time1));
             myForm.properties.timeList.push(this.buildTimeForSubmit(this.bind.time2));
         } else if (this.bind.timeType === 3) {
@@ -254,8 +254,8 @@ export default content({
                 o2.api.page.notice(lp.shiftForm.restPeriodNeedComplete, 'error');
                 return ;
             }
-            this.bind.time1.offDutyNextDay = false;// 最后一个下班才能是跨天的
-            this.bind.time2.offDutyNextDay = false;// 最后一个下班才能是跨天的
+            this.bind.time1.offDutyNextDay = false;// 마지막 퇴근만 날짜를 넘길 수 있음
+            this.bind.time2.offDutyNextDay = false;// 마지막 퇴근만 날짜를 넘길 수 있음
             myForm.properties.timeList.push(this.buildTimeForSubmit(this.bind.time1));
             myForm.properties.timeList.push(this.buildTimeForSubmit(this.bind.time2));
             myForm.properties.timeList.push(this.buildTimeForSubmit(this.bind.time3));

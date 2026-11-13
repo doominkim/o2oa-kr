@@ -32,7 +32,7 @@ abstract class BaseAction extends StandardJaxrsAction {
             .<String>of(Indexs.FIELD_INDEXTIME, Indexs.FIELD_CREATETIME, Indexs.FIELD_UPDATETIME)
             .collect(Collectors.toUnmodifiableList());
 
-    // 默认维度字段
+    // 기본 차원 필드
     protected static final List<String> FACET_FIELDS = Stream.<String>of(Indexs.FIELD_CATEGORY,
             Indexs.FIELD_CREATETIMEMONTH, Indexs.FIELD_UPDATETIMEMONTH,
             Indexs.FIELD_CREATORPERSON, Indexs.FIELD_CREATORUNIT).collect(Collectors.toUnmodifiableList());
@@ -69,7 +69,7 @@ abstract class BaseAction extends StandardJaxrsAction {
     }
 
     /**
-     * 对默认维度字段进行判断如果过滤字段有了这个字段那么就删除这个维度
+     * 기본 차원 필드 판단, 필터 필드에 이 필드가 있으면 해당 차원 삭제
      * 
      * @param filters
      * @return

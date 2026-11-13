@@ -1,17 +1,17 @@
 MWF.xDesktop.requireApp("process.Xform", "$ElModule", null, false);
-/** @class Elicon 基于Element UI的图标组件。
- * @o2cn 图标组件
+/** @class Elicon Element UI 기반 아이콘 컴포넌트.
+ * @o2cn 아이콘 컴포넌트
  * @example
- * //可以在脚本中获取该组件
- * //方法1：
- * var icon = this.form.get("name"); //获取组件
- * //方法2
- * var icon = this.target; //在组件事件脚本中获取
+ * //스크립트에서 이 컴포넌트를 가져올 수 있음
+ * //방법 1:
+ * var icon = this.form.get("name"); //컴포넌트 조회
+ * //방법 2
+ * var icon = this.target; //컴포넌트 이벤트 스크립트에서 조회
  * @extends MWF.xApplication.process.Xform.$Module
  * @o2category FormComponents
  * @o2range {Process|CMS|Portal}
  * @hideconstructor
- * @see {@link https://element.eleme.cn/#/zh-CN/component/icon|Element UI Icon 图标}
+ * @see {@link https://element.eleme.cn/#/zh-CN/component/icon|Element UI Icon 아이콘}
  */
 MWF.xApplication.process.Xform.Elicon = MWF.APPElicon =  new Class(
     /** @lends MWF.xApplication.process.Xform.Elicon# */

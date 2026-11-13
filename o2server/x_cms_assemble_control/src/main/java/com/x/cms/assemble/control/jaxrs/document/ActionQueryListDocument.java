@@ -67,7 +67,7 @@ public class ActionQueryListDocument extends BaseAction {
 	}
 
 	public static class Wi extends GsonPropertyObject {
-		@FieldDescribe( "文档id" )
+		@FieldDescribe( "문서id" )
 		private List<String> docIds = new ArrayList<>();
 
 		public List<String> getDocIds() {

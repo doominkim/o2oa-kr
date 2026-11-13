@@ -325,7 +325,7 @@ MWF.xApplication.cms.Module.Main = new Class({
 		if( !this.isAdmin )return;
 		this.moveAction = new Element("div", {
 			"styles": this.css.moveDocumentAction,
-			"text" : this.lp.move //"移动"
+			"text" : this.lp.move //"이동"
 		}).inject(this.titleActionBar);
 		this.moveIcon = new Element("i.o2icon-folder-move", {
 			"styles": this.css.actionIcon
@@ -336,19 +336,19 @@ MWF.xApplication.cms.Module.Main = new Class({
 				if( this.view ){
 					var itemIds = this.view.getSelectedIds();
 					if (!itemIds.length) {
-						this.notice( _self.lp.selectDocNotice, "error"); //"请先选择文档"
+						this.notice( _self.lp.selectDocNotice, "error"); //"먼저 문서를 선택하십시오"
 						return;
 					}
 					this.loadSelectColumnDialog( function( data ){
 						if( data && data.id ){
 							var text = _self.lp.moveDocConfirmContent.replace("{count}", itemIds.length ).replace("{category}", data.categoryName);
-							//"移动后将在本分类删除，确定要移动选中的"+itemIds.length+"个文档到"+data.categoryName+"？";
+							//"이동 후 이 분류에서 삭제됩니다. 선택한 "+itemIds.length+"개 문서를 "+data.categoryName+"(으)로 이동하시겠습니까?";
 							this.confirm("warn", e, _self.lp.moveDocConfirmTitle, text, 350, 120, function(){
 								_self.restActions.moveDocumentToCategory({
 									ids : itemIds,
 									categoryId : data.id
 								}, function(){
-									_self.notice( _self.lp.moveDocSuccessNotice, "success"); //"移动成功"
+									_self.notice( _self.lp.moveDocSuccessNotice, "success"); //"이동되었습니다"
 									_self.view.reload();
 									this.close();
 								}.bind(this))
@@ -397,7 +397,7 @@ MWF.xApplication.cms.Module.Main = new Class({
 					if (itemIds.length) {
 						_self.readyRemove = true;
 						var text = _self.lp.clearDocConfirmContent.replace("{count}", itemIds.length);
-						// var text = "删除后无法恢复，确定要删除选中的"+itemIds.length+"个文档？";
+						// var text = "삭제 후 복구할 수 없습니다. 선택한 "+itemIds.length+"개 문서를 삭제하시겠습니까?";
 						this.confirm("warn", e, _self.lp.clearDocConfirmTitle, text, 350, 120, function(){
 
 							_self.removeDocumentList(itemIds);
@@ -467,8 +467,8 @@ MWF.xApplication.cms.Module.Main = new Class({
 	//			var itemIds = this.view.getSelectedIds();
 	//			if (itemIds.length) {
 	//				_self.readyRemove = true;
-	//				var text = "删除后无法恢复，确定要删除选中的"+itemIds.length+"个文档？";
-	//				this.confirm("warn", e, "清除确认", text, 350, 120, function(){
+	//				var text = "삭제 후 복구할 수 없습니다. 선택한 "+itemIds.length+"개 문서를 삭제하시겠습니까?";
+	//				this.confirm("warn", e, "삭제 확인", text, 350, 120, function(){
 	//
 	//					_self.removeDocumentList(itemIds);
 	//
@@ -479,7 +479,7 @@ MWF.xApplication.cms.Module.Main = new Class({
 	//					this.close();
 	//				});
 	//			}else{
-	//				this.notice("请先选择文档","error")
+	//				this.notice("먼저 문서를 선택하십시오","error")
 	//			}
 	//		}.bind(this)
 	//	});
@@ -763,12 +763,12 @@ MWF.xApplication.cms.Module.Main = new Class({
 			var flag = false;
 			if (someItem){
 				if( newCategory ){
-					if( newCategory.id !== someItem.document.categoryId ){ //如果已有文档的分类和新分类不一样，直接新建
+					if( newCategory.id !== someItem.document.categoryId ){ //기존 문서의 분류가 새 분류와 다르면 바로 새로 만듦
 						this.saveItemAsNew(data, success, failure, true, newCategory)
-					}else{ //如果已有文档的分类和新分类一样，需要询问
+					}else{ //기존 문서의 분류가 새 분류와 같으면 확인 필요
 						flag = true;
 					}
-				}else{  //如果使用原有分类，需要询问
+				}else{  //기존 분류를 사용하면 확인 필요
 					flag = true;
 				}
 
@@ -1309,7 +1309,7 @@ MWF.xApplication.cms.Module.NaviCategory = new Class({
 		if( j ){
 			this.extContent = JSON.parse( j );
 		}
-		if( !this.extContent || !this.extContent.reveal || this.extContent.reveal.length == 0 ){ //兼容以前的设置
+		if( !this.extContent || !this.extContent.reveal || this.extContent.reveal.length == 0 ){ //이전 설정과 호환
 			this.extContent = { reveal : [] };
 			this.app.restActions.listViewByCategory( this.data.id, function(json){
 				( json.data || [] ).each( function(d){

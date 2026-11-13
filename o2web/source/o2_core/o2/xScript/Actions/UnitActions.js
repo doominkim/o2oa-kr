@@ -12,7 +12,7 @@ MWF.xScript.Actions.UnitActions = new Class({
         this.actionPath = "/xScript/Actions/unitAction.json";
 		this.action = new MWF.xDesktop.Actions.RestActions(this.actionPath, "x_organization_assemble_express");
     },
-    //群组--------
+    //그룹--------
     listGroup: invoke("listGroup"),
     listSubGroupDirect: invoke("listSubGroupDirect"),
     listSubGroupNested: invoke("listSubGroupNested"),
@@ -22,11 +22,11 @@ MWF.xScript.Actions.UnitActions = new Class({
     listGroupWithIdentity: invoke("listGroupWithIdentity"),
     groupHasRole: invoke("groupHasRole"),
 
-    //角色--------
+    //역할--------
     listRole: invoke("listRole"),
     listRoleWithPerson: invoke("listRoleWithPerson"),
 
-    //人员--------
+    //사용자--------
     personHasRole: invoke("personHasRole"),
     getPerson: invoke("getPerson"),
     listPerson: invoke("listPerson"),
@@ -43,19 +43,19 @@ MWF.xScript.Actions.UnitActions = new Class({
     listPersonWithAttributeValue: invoke("listPersonWithAttributeValue"),
     listPersonWithAttribute: invoke("listPersonWithAttribute"),
 
-    //人员属性-------
+    //사용자 속성-------
     appendPersonAttribute: invoke("appendPersonAttribute"),
     setPersonAttribute: invoke("setPersonAttribute"),
     getPersonAttribute: invoke("getPersonAttribute"),
     listPersonAttributeName: invoke("listPersonAttributeName"),
 
-    //身份----------
+    //신분----------
     listIdentity: invoke("listIdentity"),
     listIdentityWithPerson: invoke("listIdentityWithPerson"),
     listIdentityWithUnitDirect: invoke("listIdentityWithUnitDirect"),
     listIdentityWithUnitNested: invoke("listIdentityWithUnitNested"),
 
-    //组织----------
+    //조직----------
     listUnit: invoke("listUnit"),
     listUnitSubDirect: invoke("listUnitSubDirect"),
     listUnitSubNested: invoke("listUnitSubNested"),
@@ -70,13 +70,13 @@ MWF.xScript.Actions.UnitActions = new Class({
     listUnitWithAttribute: invoke("listUnitWithAttribute"),
     listUnitWithDuty: invoke("listUnitWithDuty"),
 
-    //组织职务-------
+    //조직 직무-------
     getDuty: invoke("getDuty"),
     listDutyNameWithIdentity: invoke("listDutyNameWithIdentity"),
     listDutyNameWithUnit: invoke("listDutyNameWithUnit"),
     listUnitAllDuty: invoke("listUnitAllDuty"),
 
-    //组织属性-------
+    //조직 속성-------
     appendUnitAttribute: invoke("appendUnitAttribute"),
     setUnitAttribute: invoke("setUnitAttribute"),
     getUnitAttribute: invoke("getUnitAttribute"),

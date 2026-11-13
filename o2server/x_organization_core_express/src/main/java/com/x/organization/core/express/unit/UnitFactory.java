@@ -16,7 +16,7 @@ public class UnitFactory {
 
 	private AbstractContext context;
 
-	/** 获取单个组织的distinguishedName */
+	/** 단일 조직의 distinguishedName 조회 */
 	public String get(String value) throws Exception {
 		List<String> os = ActionList.execute(context, Arrays.asList(value), false);
 		if (ListTools.isEmpty(os)) {
@@ -35,22 +35,22 @@ public class UnitFactory {
 		}
 	}
 
-	/** 校验用户是否在指定组织中注册身份. */
+	/** 사용자가 지정 조직에 신분을 등록했는지 확인. */
 	public Boolean checkHasPerson(String person, String unit, Boolean recursive) throws Exception {
 		return ActionHasPerson.execute(context, person, unit, recursive);
 	}
 
-	/** 根据身份和组织等级,获取组织的distinguishedName */
+	/** 신분과 조직 레벨로 조직의 distinguishedName 조회 */
 	public String getWithIdentityWithLevel(String identity, Integer level) throws Exception {
 		return ActionGetWithIdentityWithLevel.execute(context, identity, level);
 	}
 
-	/** 根据身份和组织属性,获取组织的distinguishedName */
+	/** 신분과 조직 속성으로 조직의 distinguishedName 조회 */
 	public String getWithIdentityWithType(String identity, String type) throws Exception {
 		return ActionGetWithIdentityWithType.execute(context, identity, type);
 	}
 
-	/** 批量获取组织的distinguishedName */
+	/** 조직 distinguishedName 일괄 조회 */
 	public List<String> list(List<String> values) throws Exception {
 		return ActionList.execute(context, values, false);
 	}
@@ -59,23 +59,23 @@ public class UnitFactory {
 		return ActionList.execute(context, values, useNameFind);
 	}
 
-	/** 批量获取组织的distinguishedName */
+	/** 조직 distinguishedName 일괄 조회 */
 	public List<String> list(String... values) throws Exception {
 		return ActionList.execute(context, Arrays.asList(values), false);
 	}
 
-	/** 查询所有组织 */
+	/** 전체 조직 조회 */
 	public List<String> listAll() throws Exception {
 		return ActionListAll.execute(context);
 	}
 
-	/** 查询所有组织对象 */
+	/** 전체 조직 객체 조회 */
 	public List<Unit> listAllObject() throws Exception {
 		List<? extends Unit> os = ActionListAllObject.execute(context);
 		return (List<Unit>) os;
 	}
 
-	/** 获取组织对象 */
+	/** 조직 객체 조회 */
 	public Unit getObject(String value) throws Exception {
 		List<? extends Unit> os = ActionListObject.execute(context, Arrays.asList(value), false);
 		if (ListTools.isEmpty(os)) {
@@ -94,7 +94,7 @@ public class UnitFactory {
 		}
 	}
 
-	/** 批量获取组织对象 */
+	/** 조직 객체 일괄 조회 */
 	public List<Unit> listObject(List<String> values) throws Exception {
 		List<? extends Unit> os = ActionListObject.execute(context, values, false);
 		return (List<Unit>) os;
@@ -105,13 +105,13 @@ public class UnitFactory {
 		return (List<Unit>) os;
 	}
 
-	/** 批量获取组织对象 */
+	/** 조직 객체 일괄 조회 */
 	public List<Unit> listObject(String... values) throws Exception {
 		List<? extends Unit> os = ActionListObject.execute(context, Arrays.asList(values), false);
 		return (List<Unit>) os;
 	}
 
-	/** 根据身份获取所在组织 */
+	/** 신분이 속한 조직 조회 */
 	public String getWithIdentity(String value) throws Exception {
 		List<String> os = ActionListWithIdentity.execute(context, Arrays.asList(value));
 		if (ListTools.isEmpty(os)) {
@@ -121,129 +121,129 @@ public class UnitFactory {
 		}
 	}
 
-	/** 批量根据身份获取组织 */
+	/** 신분으로 조직 일괄 조회 */
 	public List<String> listWithIdentity(List<String> values) throws Exception {
 		return ActionListWithIdentity.execute(context, values);
 	}
 
-	/** 批量根据身份获取组织 */
+	/** 신분으로 조직 일괄 조회 */
 	public List<String> listWithIdentity(String... values) throws Exception {
 		return ActionListWithIdentity.execute(context, Arrays.asList(values));
 	}
 
-	/** 批量根据身份获取组织,并递归查找其上层组织 */
+	/** 신분으로 조직 일괄 조회 및 상위 조직 재귀 조회 */
 	public List<String> listWithIdentitySupNested(List<String> values) throws Exception {
 		return ActionListWithIdentitySupNested.execute(context, values);
 	}
 
-	/** 批量根据身份获取组织,并递归查找其上层组织 */
+	/** 신분으로 조직 일괄 조회 및 상위 조직 재귀 조회 */
 	public List<String> listWithIdentitySupNested(String... values) throws Exception {
 		return ActionListWithIdentitySupNested.execute(context, Arrays.asList(values));
 	}
 
-	/** 批量查询指定组织层级的组织 */
+	/** 지정 조직 레벨의 조직 일괄 조회 */
 	public List<String> listWithLevel(List<Integer> values) throws Exception {
 		return ActionListWithLevel.execute(context, values);
 	}
 
-	/** 批量查询指定组织层级的组织 */
+	/** 지정 조직 레벨의 조직 일괄 조회 */
 	public List<String> listWithLevel(Integer... values) throws Exception {
 		return ActionListWithLevel.execute(context, Arrays.asList(values));
 	}
 
-	/** 批量查询指定组织层级的组织对象 */
+	/** 지정 조직 레벨의 조직 객체 일괄 조회 */
 	public List<Unit> listWithLevelObject(List<Integer> values) throws Exception {
 		List<? extends Unit> os = ActionListWithLevelObject.execute(context, values);
 		return (List<Unit>) os;
 	}
 
-	/** 批量查询指定组织层级的组织对象 */
+	/** 지정 조직 레벨의 조직 객체 일괄 조회 */
 	public List<Unit> listWithLevelObject(Integer... values) throws Exception {
 		List<? extends Unit> os = ActionListWithLevelObject.execute(context, Arrays.asList(values));
 		return (List<Unit>) os;
 	}
 
-	/** 批量个人获取所在的组织 */
+	/** 개인이 속한 조직 일괄 조회 */
 	public List<String> listWithPerson(List<String> values) throws Exception {
 		return ActionListWithPerson.execute(context, values);
 	}
 
-	/** 批量个人获取所在的组织 */
+	/** 개인이 속한 조직 일괄 조회 */
 	public List<String> listWithPerson(String... values) throws Exception {
 		return ActionListWithPerson.execute(context, Arrays.asList(values));
 	}
 
-	/** 批量个人获取所在的组织 */
+	/** 개인이 속한 조직 일괄 조회 */
 	public List<String> listWithPerson(EffectivePerson effectivePerson) throws Exception {
 		return ActionListWithPerson.execute(context, ListTools.toList(effectivePerson.getDistinguishedName()));
 	}
 
-	/** 批量个人获取所在的组织,并递归其上级组织 */
+	/** 개인이 속한 조직 일괄 조회 및 상위 조직 재귀 조회 */
 	public List<String> listWithPersonSupNested(EffectivePerson effectivePerson) throws Exception {
 		return ActionListWithPersonSupNested.execute(context, ListTools.toList(effectivePerson.getDistinguishedName()));
 	}
 
-	/** 批量个人获取所在的组织,并递归其上级组织 */
+	/** 개인이 속한 조직 일괄 조회 및 상위 조직 재귀 조회 */
 	public List<String> listWithPersonSupNested(List<String> values) throws Exception {
 		return ActionListWithPersonSupNested.execute(context, values);
 	}
 
-	/** 批量个人获取所在的组织,并递归其上级组织 */
+	/** 개인이 속한 조직 일괄 조회 및 상위 조직 재귀 조회 */
 	public List<String> listWithPersonSupNested(String... values) throws Exception {
 		return ActionListWithPersonSupNested.execute(context, Arrays.asList(values));
 	}
 
-	/** 查找拥有组织属性的组织 */
+	/** 조직 속성을 가진 조직 조회 */
 	public List<String> listWithUnitAttribute(String name, String attribute) throws Exception {
 		return ActionListWithUnitAttribute.execute(context, name, attribute);
 	}
 
-	/** 查找拥有组织职务的组织 */
+	/** 조직 직무를 가진 조직 조회 */
 	public List<String> listWithUnitDuty(String name, String attribute) throws Exception {
 		return ActionListWithUnitDuty.execute(context, name, attribute);
 	}
 
-	/** 根据组织获取组织的直接下级组织 */
+	/** 조직의 직속 하위 조직 조회 */
 	public List<String> listWithUnitSubDirect(List<String> values) throws Exception {
 		return ActionListWithUnitSubDirect.execute(context, values);
 	}
 
-	/** 根据组织获取组织的直接下级组织 */
+	/** 조직의 직속 하위 조직 조회 */
 	public List<String> listWithUnitSubDirect(String... values) throws Exception {
 		return ActionListWithUnitSubDirect.execute(context, Arrays.asList(values));
 	}
 
-	/** 根据组织获取组织的嵌套下级组织 */
+	/** 조직의 중첩 하위 조직 조회 */
 	public List<String> listWithUnitSubNested(List<String> values) throws Exception {
 		return ActionListWithUnitSubNested.execute(context, values);
 	}
 
-	/** 根据组织获取组织的嵌套下级组织 */
+	/** 조직의 중첩 하위 조직 조회 */
 	public List<String> listWithUnitSubNested(String... values) throws Exception {
 		return ActionListWithUnitSubNested.execute(context, Arrays.asList(values));
 	}
 
-	/** 根据组织获取组织的直接上级组织 */
+	/** 조직의 직속 상위 조직 조회 */
 	public List<String> listWithUnitSupDirect(List<String> values) throws Exception {
 		return ActionListWithUnitSupDirect.execute(context, values);
 	}
 
-	/** 根据组织获取组织的直接上级组织 */
+	/** 조직의 직속 상위 조직 조회 */
 	public List<String> listWithUnitSupDirect(String... values) throws Exception {
 		return ActionListWithUnitSupDirect.execute(context, Arrays.asList(values));
 	}
 
-	/** 根据组织获取组织的嵌套上级组织 */
+	/** 조직의 중첩 상위 조직 조회 */
 	public List<String> listWithUnitSupNested(List<String> values) throws Exception {
 		return ActionListWithUnitSupNested.execute(context, values);
 	}
 
-	/** 根据组织获取组织的嵌套上级组织 */
+	/** 조직의 중첩 상위 조직 조회 */
 	public List<String> listWithUnitSupNested(String... values) throws Exception {
 		return ActionListWithUnitSupNested.execute(context, Arrays.asList(values));
 	}
 
-	/** 根据组织获取排序号 */
+	/** 조직의 정렬 번호 조회 */
 	public Integer getOrderNumber(String value, Integer defaultValue) throws Exception {
 		List<? extends Unit> os = ActionListObject.execute(context, Arrays.asList(value), false);
 		if (os.isEmpty()) {
@@ -253,7 +253,7 @@ public class UnitFactory {
 		}
 	}
 
-	/** 根据组织获取层级排序号 */
+	/** 조직의 계층 정렬 번호 조회 */
 	public String getLevelOrderNumber(String value, String defaultValue) throws Exception {
 		List<? extends Unit> os = ActionListObject.execute(context, Arrays.asList(value), false);
 		if (os.isEmpty()) {
@@ -263,7 +263,7 @@ public class UnitFactory {
 		}
 	}
 
-	/** 根据组织获取层级排序号 */
+	/** 조직의 계층 정렬 번호 조회 */
 	public String getLevelName(String value, String defaultValue) throws Exception {
 		List<? extends Unit> os = ActionListObject.execute(context, Arrays.asList(value), false);
 		if (os.isEmpty()) {

@@ -151,7 +151,7 @@ class V2AddSplit extends BaseAction {
 	}
 
 	/**
-	 * 进行回溯定位到前一次进行拆分的节点
+	 * 역추적하여 이전 분할 노드로 위치 지정
 	 */
 //	private Node findSplitNode(WorkLogTree tree, Node currentNode) {
 //		Nodes nodes = currentNode.upTo(ActivityType.split, ActivityType.manual, ActivityType.choice);

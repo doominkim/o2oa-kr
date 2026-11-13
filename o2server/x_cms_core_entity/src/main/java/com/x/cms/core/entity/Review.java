@@ -24,7 +24,7 @@ import com.x.base.core.project.annotation.FieldDescribe;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(name = "Review", description = "内容管理权限.")
+@Schema(name = "Review", description = "콘텐츠 관리 권한.")
 @Entity
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Table(name = PersistenceProperties.Review.table, uniqueConstraints = {
@@ -56,132 +56,132 @@ public class Review extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
 
-	/* 以上为 JpaObject 默认字段 */
+	/* 위는 JpaObject 기본 필드 */
 	@Override
 	public void onPersist() throws Exception {
 	}
 
 	public static final String documentType_FIELDNAME = "documentType";
-	@FieldDescribe("文档类型：信息|数据.")
+	@FieldDescribe("문서 유형: 정보|데이터.")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + documentType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String documentType;
 
 	public static final String appId_FIELDNAME = "appId";
-	@FieldDescribe("栏目ID.")
+	@FieldDescribe("게시판 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + appId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String appId;
 
 	public static final String appName_FIELDNAME = "appName";
-	@FieldDescribe("栏目名称.")
+	@FieldDescribe("게시판 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ appName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appName;
 
 	public static final String appAlias_FIELDNAME = "appAlias";
-	@FieldDescribe("栏目别名.")
+	@FieldDescribe("게시판 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ appAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appAlias;
 
 	public static final String categoryId_FIELDNAME = "categoryId";
-	@FieldDescribe("分类ID.")
+	@FieldDescribe("분류 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + categoryId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String categoryId;
 
 	public static final String categoryName_FIELDNAME = "categoryName";
-	@FieldDescribe("分类名称.")
+	@FieldDescribe("분류 이름.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ categoryName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryName;
 
 	public static final String categoryAlias_FIELDNAME = "categoryAlias";
-	@FieldDescribe("分类别名.")
+	@FieldDescribe("분류 별칭.")
 	@Column(length = AbstractPersistenceProperties.processPlatform_name_length, name = ColumnNamePrefix
 			+ categoryAlias_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryAlias;
 
 	public static final String docId_FIELDNAME = "docId";
-	@FieldDescribe("文档ID.")
+	@FieldDescribe("문서ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + docId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String docId;
 
 	public static final String docSequence_FIELDNAME = "docSequence";
-	@FieldDescribe("文档Sequence.")
+	@FieldDescribe("문서 Sequence.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + docSequence_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String docSequence;
 
 	public static final String docStatus_FIELDNAME = "docStatus";
-	@FieldDescribe("文档状态.")
+	@FieldDescribe("문서 상태.")
 	@Column(length = length_32B, name = ColumnNamePrefix + docStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String docStatus;
 
 	public static final String title_FIELDNAME = "title";
-	@FieldDescribe("文档标题.")
+	@FieldDescribe("문서 제목.")
 	@Column(length = length_255B, name = ColumnNamePrefix + title_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String title;
 
 	public static final String creatorPerson_FIELDNAME = "creatorPerson";
-	@FieldDescribe("拟稿人")
+	@FieldDescribe("기안자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorPerson_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String creatorPerson;
 
 	public static final String creatorIdentity_FIELDNAME = "creatorIdentity";
-	@FieldDescribe("创建人Identity")
+	@FieldDescribe("작성자 Identity")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorIdentity;
 
 	public static final String creatorUnitName_FIELDNAME = "creatorUnitName";
-	@FieldDescribe("创建人组织")
+	@FieldDescribe("작성자 조직")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorUnitName;
 
 	public static final String creatorTopUnitName_FIELDNAME = "creatorTopUnitName";
-	@FieldDescribe("创建人顶层组织，可能为空，如果由系统创建。")
+	@FieldDescribe("작성자 최상위 조직, 시스템이 생성한 경우 비어 있을 수 있음.")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ creatorTopUnitName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String creatorTopUnitName;
 
 	public static final String docCreateTime_FIELDNAME = "docCreateTime";
-	@FieldDescribe("document的拟稿时间.")
+	@FieldDescribe("document의 기안 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
-	/* 结束时间不能为空,如果为空排序可能出错 */
+	/* 종료 시간은 비어 있을 수 없음, 비어 있으면 정렬 오류 가능 */
 	@Column(name = ColumnNamePrefix + docCreateTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date docCreateTime;
 
 	public static final String publishTime_FIELDNAME = "publishTime";
-	@FieldDescribe("document的发布时间.")
+	@FieldDescribe("document의 게시 시간.")
 	@Temporal(TemporalType.TIMESTAMP)
-	/* 结束时间不能为空,如果为空排序可能出错 */
+	/* 종료 시간은 비어 있을 수 없음, 비어 있으면 정렬 오류 가능 */
 	@Column(name = ColumnNamePrefix + publishTime_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date publishTime;
 
 	public static final String permissionObj_FIELDNAME = "permissionObj";
-	@FieldDescribe("权限拥有者")
+	@FieldDescribe("권한 소유자")
 	@Column(length = AbstractPersistenceProperties.organization_name_length, name = ColumnNamePrefix
 			+ permissionObj_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + permissionObj_FIELDNAME)
@@ -189,7 +189,7 @@ public class Review extends SliceJpaObject {
 	private String permissionObj;
 
 	public static final String permissionObjType_FIELDNAME = "permissionObjType";
-	@FieldDescribe("权限拥有者类型: PERSON|IDENTITY|UNIT|GROUP|ROLE")
+	@FieldDescribe("권한 소유자 유형: PERSON|IDENTITY|UNIT|GROUP|ROLE")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + permissionObjType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String permissionObjType;

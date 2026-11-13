@@ -27,7 +27,7 @@ import java.util.List;
  * Copyright © 2023 O2. All rights reserved.
  */
 @Path("v2/leave")
-@JaxrsDescribe("外出数据管理")
+@JaxrsDescribe("외출 데이터 관리")
 public class LeaveAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(LeaveAction.class);
@@ -35,7 +35,7 @@ public class LeaveAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "保存外出数据信息.", action = ActionPost.class)
+    @JaxrsMethodDescribe(value = "외출 데이터 정보 저장.", action = ActionPost.class)
     @POST
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -54,11 +54,11 @@ public class LeaveAction extends StandardJaxrsAction {
 
 
 
-    @JaxrsMethodDescribe(value = "删除外出数据信息.", action = ActionDelete.class)
+    @JaxrsMethodDescribe(value = "외출 데이터 정보 삭제.", action = ActionDelete.class)
     @GET
     @Path("delete/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void  delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("外出数据Id") @PathParam("id") String id) {
+    public void  delete(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request, @JaxrsParameterDescribe("외출 데이터 Id") @PathParam("id") String id) {
         ActionResult<ActionDelete.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -71,14 +71,14 @@ public class LeaveAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "分页查询外出数据列表.", action =  ActionListByPage.class)
+    @JaxrsMethodDescribe(value = "외출 데이터 목록 페이지 조회.", action =  ActionListByPage.class)
     @POST
     @Path("list/{page}/size/{size}")
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     @Consumes(MediaType.APPLICATION_JSON)
     public void listByPaging(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                             @JaxrsParameterDescribe("分页") @PathParam("page") Integer page,
-                             @JaxrsParameterDescribe("数量") @PathParam("size") Integer size, JsonElement jsonElement) {
+                             @JaxrsParameterDescribe("페이지") @PathParam("page") Integer page,
+                             @JaxrsParameterDescribe("수량") @PathParam("size") Integer size, JsonElement jsonElement) {
         ActionResult<List<ActionListByPage.Wo>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -91,7 +91,7 @@ public class LeaveAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "获取导入外出数据的模版.", action = ActionExcelTemplate.class)
+    @JaxrsMethodDescribe(value = "외출 데이터 가져오기 템플릿 조회.", action = ActionExcelTemplate.class)
     @GET
     @Path("template")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -108,14 +108,14 @@ public class LeaveAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "上传Excel导入外出数据.", action = ActionImportExcel.class)
+    @JaxrsMethodDescribe(value = "Excel 업로드로 외출 데이터 가져오기.", action = ActionImportExcel.class)
     @POST
     @Path("import")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
     public void input(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
                       @FormDataParam(FILE_FIELD) final byte[] bytes,
-                      @JaxrsParameterDescribe("Excel文件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+                      @JaxrsParameterDescribe("Excel 파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionImportExcel.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -128,12 +128,12 @@ public class LeaveAction extends StandardJaxrsAction {
     }
 
 
-    @JaxrsMethodDescribe(value = "获取导入结果.", action = ActionGetImportResult.class)
+    @JaxrsMethodDescribe(value = "가져오기 결과 조회.", action = ActionGetImportResult.class)
     @GET
     @Path("import/result/flag/{flag}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void getResult(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
-                          @JaxrsParameterDescribe("导入文件返回的结果标记") @PathParam("flag") String flag) {
+                          @JaxrsParameterDescribe("가져오기 파일 반환 결과 표시") @PathParam("flag") String flag) {
         ActionResult<ActionGetImportResult.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

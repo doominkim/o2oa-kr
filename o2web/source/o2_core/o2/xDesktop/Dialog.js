@@ -208,7 +208,7 @@ o2.xDesktop.Dialog = o2.DDL = new Class({
         }
     },
     getAction: function(){
-        //未完成................................
+        //미완료................................
         if (this.options.isClose){
             this.closeAction = new Element("div", {"styles": this.css.closeAction}).inject(this.titleAction);
             this.closeAction.addEvent("click", this.close.bind(this));
@@ -314,7 +314,7 @@ o2.xDesktop.Dialog = o2.DDL = new Class({
     },
     reCenter: function(){
 	    var size;
-	    if( this.node.offsetParent === null ){ //如果是隐藏的
+	    if( this.node.offsetParent === null ){ //숨겨진 경우
             size = this.node.measure(function(){
                 return this.getSize();
             });
@@ -898,7 +898,7 @@ o2.DL.open = function(options){
 
     if( options.width !== "auto" && options.height !== "auto" ){
 
-        //如果是百分比
+        //백분율인 경우
         if( "string" == typeOf(options.width)  && (1 < options.width.length && "%" == options.width.substr(options.width.length - 1, 1)) ){
             options.width = parseInt( container.getSize().x * parseInt(options.width, 10) / 100, 10);
         }
