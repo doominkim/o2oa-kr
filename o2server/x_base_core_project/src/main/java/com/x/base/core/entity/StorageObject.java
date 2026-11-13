@@ -56,6 +56,10 @@ public abstract class StorageObject extends SliceJpaObject {
 			fs.setFilesCache(new NullFilesCache());
 			fs.setCacheStrategy(CacheStrategy.ON_RESOLVE);
 			fs.init();
+			// 무료 배포판에 min provider jar가 없어 직접 구현한 S3 provider를 등록한다.
+			if (!fs.hasProvider(MinFileProvider.SCHEME)) {
+				fs.addProvider(MinFileProvider.SCHEME, new MinFileProvider());
+			}
 			fileSystemManagerInstance = fs;
 
 		}

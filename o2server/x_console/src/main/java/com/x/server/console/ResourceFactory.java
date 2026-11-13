@@ -10,6 +10,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.config.CenterServer;
 import com.x.base.core.project.config.Config;
 import com.x.base.core.project.config.DataServer;
+import com.x.base.core.project.config.ExternalDataSource;
 import com.x.base.core.project.tools.ClassLoaderTools;
 import com.x.base.core.project.tools.H2Tools;
 import com.x.base.core.project.tools.JarTools;
@@ -81,7 +82,54 @@ public class ResourceFactory {
 	 * @throws Exception
 	 */
 	private static void initDataSources() throws Exception {
-		internal();
+		if (BooleanUtils.isTrue(Config.externalDataSources().enable())) {
+			external();
+		} else {
+			internal();
+		}
+	}
+
+	/**
+	 * 외부 DB(config/externalDataSources.json)의 활성 항목마다 Druid 데이터소스를 만들어 jndi에 등록한다.
+	 * 이름은 ExternalDataSources.name()과 같아야 PersistenceXmlHelper의 ConnectionFactoryName과 맞는다.
+	 */
+	private static void external() throws Exception {
+		disableDruidMysqlUsePingMethod();
+		for (ExternalDataSource ds : Config.externalDataSources()) {
+			if (BooleanUtils.isNotTrue(ds.getEnable())) {
+				continue;
+			}
+			DruidDataSourceC3P0Adapter dataSource = new DruidDataSourceC3P0Adapter();
+			dataSource.setJdbcUrl(ds.getUrl());
+			dataSource.setDriverClass(ds.getDriverClassName());
+			dataSource.setUser(ds.getUsername());
+			dataSource.setPassword(ds.getPassword());
+			dataSource.setMaxPoolSize(ds.getMaxTotal());
+			dataSource.setMinPoolSize(ds.getMaxIdle());
+			dataSource.setAcquireIncrement(2);
+			DruidDataSource druidDataSource = (DruidDataSource) FieldUtils.readField(dataSource, "dataSource", true);
+			druidDataSource.setTestWhileIdle(true);
+			druidDataSource.setValidationQuery("SELECT 1");
+			druidDataSource.setTestOnBorrow(false);
+			druidDataSource.setTestOnReturn(false);
+			if (BooleanUtils.isTrue(ds.getStatEnable())) {
+				dataSource.setFilters(ds.getStatFilter());
+				if (BooleanUtils.isTrue(ds.getSlowSqlEnable())) {
+					Properties properties = new Properties();
+					properties.setProperty("druid.stat.slowSqlMillis", ds.getSlowSqlThreshold().toString());
+					properties.setProperty("druid.stat.logSlowSql", "true");
+					dataSource.setProperties(properties);
+				}
+				if (BooleanUtils.isTrue(ds.getLogStatEnable())) {
+					druidDataSource.setStatLogger(new DruidStatLogger());
+					druidDataSource.setTimeBetweenLogStatsMillis(60000L * ds.getLogStatInterval());
+				}
+			}
+			dataSource.setAutoCommitOnClose(false);
+			String name = Config.externalDataSources().name(ds);
+			new Resource(Config.RESOURCE_JDBC_PREFIX + name, dataSource);
+			dataSources.add(dataSource);
+		}
 	}
 
 	/**

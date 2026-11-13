@@ -24,8 +24,12 @@ public class ExternalDataSources extends CopyOnWriteArrayList<ExternalDataSource
     }
 
     public Boolean enable() {
+        for (ExternalDataSource o : this) {
+            if (BooleanUtils.isTrue(o.getEnable())) {
+                return true;
+            }
+        }
         return false;
-
     }
 
     public String name(ExternalDataSource externalDataSource) throws Exception {

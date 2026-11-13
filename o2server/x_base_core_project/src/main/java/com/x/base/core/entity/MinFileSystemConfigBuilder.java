@@ -3,7 +3,6 @@ package com.x.base.core.entity;
 import org.apache.commons.vfs2.FileSystem;
 import org.apache.commons.vfs2.FileSystemConfigBuilder;
 import org.apache.commons.vfs2.FileSystemOptions;
-import org.apache.commons.vfs2.provider.http.HttpFileSystem;
 
 /**
  * The config builder for various MinIo cloud oss configuration options.
@@ -15,6 +14,10 @@ public class MinFileSystemConfigBuilder extends FileSystemConfigBuilder {
     private static final String USE_HTTPS                = "useHttps";
     private static final String TASK_TIME_OUT            = "taskTimeOut";
     private static final String CREATE_BUCKET            = "createBucket";
+    private static final String REGION                   = "region";
+
+    /** SigV4 서명 리전 기본값. */
+    public static final String DEFAULT_REGION = "ap-northeast-2";
 
     private static final MinFileSystemConfigBuilder BUILDER = new MinFileSystemConfigBuilder();
 
@@ -33,7 +36,7 @@ public class MinFileSystemConfigBuilder extends FileSystemConfigBuilder {
 
     @Override
     protected Class<? extends FileSystem> getConfigClass() {
-        return HttpFileSystem.class;
+        return MinFileSystem.class;
     }
 
     void setOption(FileSystemOptions opts, String name, Object value) {
@@ -110,9 +113,9 @@ public class MinFileSystemConfigBuilder extends FileSystemConfigBuilder {
     }
 
     /**
-     * download upload task time out
+     * Connect / socket / pool wait timeout of each S3 request.
      * @param opts
-     * @param timeOut unit seconds
+     * @param timeOut unit milliseconds
      */
     public void setTaskTimeOut(FileSystemOptions opts, Long timeOut) {
         final MinFileSystemConfigBuilder builder = new MinFileSystemConfigBuilder();
@@ -123,7 +126,18 @@ public class MinFileSystemConfigBuilder extends FileSystemConfigBuilder {
     public long getTaskTimeOut(FileSystemOptions opts) {
         final MinFileSystemConfigBuilder builder = new MinFileSystemConfigBuilder();
 
-        return builder.getLong(opts, TASK_TIME_OUT, 120);
+        return builder.getLong(opts, TASK_TIME_OUT, 120000L);
+    }
+
+    /**
+     * SigV4 signing region, {@value #DEFAULT_REGION} by default.
+     */
+    public String getRegion(FileSystemOptions opts) {
+        return getStringOption(opts, REGION, DEFAULT_REGION);
+    }
+
+    public void setRegion(FileSystemOptions opts, String region) {
+        setOption(opts, REGION, region);
     }
 
     /**
