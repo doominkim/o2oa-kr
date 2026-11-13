@@ -1,0 +1,68 @@
+name: image
+
+# Builds the groupware image (official release + this fork's web build and patched
+# server classes) and pushes ghcr.io/<owner>/o2oa-kr:<commit sha> for the platform repo.
+on:
+  push:
+    branches: [feat/ko-locale]
+    paths: ["o2web/**", "o2server/**", "deploy/**", "gulpfile.js", "package.json", "package-lock.json", ".github/workflows/image.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "11"
+
+      - name: Read release pin
+        run: cat deploy/release.env >> "$GITHUB_ENV"
+
+      - name: Cache release zip
+        id: release-cache
+        uses: actions/cache@v4
+        with:
+          path: release.zip
+          key: o2server-${{ env.RELEASE_SHA256 }}
+
+      - name: Download release
+        if: steps.release-cache.outputs.cache-hit != 'true'
+        run: curl -fsSL --retry 3 -o release.zip "$RELEASE_URL"
+
+      - name: Build web
+        run: |
+          npm ci
+          npx gulp build_web
+
+      - name: Assemble distribution
+        run: deploy/build-dist.sh release.zip "$JAVA_HOME" dist
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: dist
+          file: deploy/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/o2oa-kr:${{ github.sha }}

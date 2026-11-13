@@ -1,0 +1,4 @@
+# Fork sources that do not compile against the 10.1.0 release libraries.
+# Their changes (display text only) ship once the image is built from a full Maven build.
+o2server/x_calendar_assemble_control/src/main/java/com/x/calendar/assemble/control/service/Calendar_EventServiceAdv.java
+o2server/x_organization_assemble_authentication/src/main/java/com/x/organization/assemble/authentication/jaxrs/authentication/BaseAction.java
