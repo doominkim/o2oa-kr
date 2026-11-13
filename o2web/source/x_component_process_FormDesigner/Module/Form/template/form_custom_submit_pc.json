@@ -2,7 +2,7 @@
   "pcData" : {
     "json": {
       "id": "",
-      "name": "自定义提交表单PC端模板",
+      "name": "사용자 정의 제출 양식 PC 템플릿",
       "type": "Form",
       "mode": "PC",
       "application": "",
@@ -44,7 +44,7 @@
         "submitTopNode": {
           "id": "submitTopNode",
           "type": "Div",
-          "description": "弹出框的顶部",
+          "description": "팝업 상단",
           "defaultValue": {
             "code": "",
             "html": ""
@@ -103,7 +103,7 @@
           "id": "routeGroupTitle",
           "type": "Label",
           "valueType": "text",
-          "text": "选择决策组",
+          "text": "경로 그룹 선택",
           "isSaved": true,
           "pid": "db627f2f-ec8d-4c02-ba90-2e083ebd9dafrouteGroupTitle",
           "moduleName": "label",
@@ -158,7 +158,7 @@
           "id": "routeOpinionTile",
           "type": "Label",
           "valueType": "text",
-          "text": "填写意见",
+          "text": "의견 입력",
           "isSaved": true,
           "pid": "db627f2f-ec8d-4c02-ba90-2e083ebd9dafrouteOpinionTile",
           "moduleName": "label",
@@ -212,7 +212,7 @@
           "id": "orgsTile",
           "type": "Label",
           "valueType": "text",
-          "text": "选择人员",
+          "text": "사용자 선택",
           "isSaved": true,
           "pid": "db627f2f-ec8d-4c02-ba90-2e083ebd9daforgsTile",
           "moduleName": "label",
@@ -244,7 +244,7 @@
           "id": "submitTopTextNode",
           "type": "Label",
           "valueType": "text",
-          "text": "继续流转",
+          "text": "결재 진행",
           "isSaved": true,
           "pid": "PC27a62ca3-d11b-4be3-b4cc-9b44fb44ad03submitTopTextNode",
           "moduleName": "label",
@@ -347,7 +347,7 @@
           "id": "okButton",
           "type": "Label",
           "valueType": "text",
-          "text": "确定",
+          "text": "확인",
           "isSaved": true,
           "pid": "PCdb627f2f-ec8d-4c02-ba90-2e083ebd9dafokButton",
           "moduleName": "label",
@@ -368,7 +368,7 @@
         "submitButtonNode": {
           "id": "submitButtonNode",
           "type": "Div",
-          "description": "弹出框的操作条",
+          "description": "팝업 작업 표시줄",
           "defaultValue": {
             "code": "",
             "html": ""
@@ -389,7 +389,7 @@
           "id": "cancelButton",
           "type": "Label",
           "valueType": "text",
-          "text": "取消",
+          "text": "취소",
           "isSaved": true,
           "pid": "db627f2f-ec8d-4c02-ba90-2e083ebd9dafcancelButton",
           "moduleName": "label",
@@ -523,7 +523,7 @@
           "section": "no",
           "sectionBy": "person",
           "properties": {
-            "placeholder": "请在此处填写流程意见"
+            "placeholder": "여기에 결재 의견을 입력하세요"
           },
           "isSaved": true,
           "pid": "PCdb627f2f-ec8d-4c02-ba90-2e083ebd9dafinputTextarea",
@@ -585,7 +585,7 @@
             "html": ""
           },
           "properties": {
-            "text": "手写"
+            "text": "손글씨"
           },
           "isSaved": true,
           "pid": "PC2a8d8627-b9ee-487d-9205-e096f5b583e9handwritingAction",
@@ -625,7 +625,7 @@
           "id": "routeSelectorTitle",
           "type": "Label",
           "valueType": "text",
-          "text": "选择决策",
+          "text": "경로 선택",
           "isSaved": true,
           "pid": "db627f2f-ec8d-4c02-ba90-2e083ebd9dafrouteSelectorTile",
           "moduleName": "label",
@@ -659,7 +659,7 @@
             }
           },
           "properties": {
-            "text": "这里的queryLoad加载源码，load事件执行初始化"
+            "text": "여기서 queryLoad 이벤트로 소스를 불러오고 load 이벤트에서 초기화합니다"
           },
           "isSaved": true,
           "pid": "PC2a8d8627-b9ee-487d-9205-e096f5b583e9div_loadSubmitForm",
@@ -672,7 +672,7 @@
         "submitButtonNode_embedded": {
           "id": "submitButtonNode_embedded",
           "type": "Div",
-          "description": "作为子表单嵌入在表单是的操作条",
+          "description": "하위 양식으로 삽입될 때의 작업 표시줄",
           "defaultValue": {
             "code": "",
             "html": ""
@@ -692,7 +692,7 @@
           "id": "okButton_embedded",
           "type": "Label",
           "valueType": "text",
-          "text": "继续流转",
+          "text": "결재 진행",
           "isSaved": true,
           "pid": "PCdb627f2f-ec8d-4c02-ba90-2e083ebd9dafokButton_embed",
           "moduleName": "label",
@@ -713,7 +713,7 @@
         "submitTopNode_embedded": {
           "id": "submitTopNode_embedded",
           "type": "Div",
-          "description": "作为子表单嵌入的TITLE",
+          "description": "하위 양식으로 삽입될 때의 TITLE",
           "defaultValue": {
             "code": "",
             "html": ""
@@ -735,7 +735,7 @@
           "id": "submitTopTextNode_embedded",
           "type": "Label",
           "valueType": "text",
-          "text": "继续流转",
+          "text": "결재 진행",
           "isSaved": true,
           "pid": "PCdb627f2f-ec8d-4c02-ba90-2e083ebd9dafsubmitTopTextNode_embedded",
           "moduleName": "label",
@@ -758,13 +758,13 @@
       "subformList": [],
       "$version": "5.2"
     },
-    "html": "<div class=\"css2a8d8627b9ee487d9205e096f5b583e9\" id=\"2a8d8627-b9ee-487d-9205-e096f5b583e9\" mwftype=\"form\" style=\"\"><div id=\"submitNode\" mwftype=\"div\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(238, 238, 238);\"><div id=\"submitInnerNode\" mwftype=\"div\" style=\"\"><div id=\"submitTopNode_embedded\" mwftype=\"div\" style=\"height: 40px; color: rgb(51, 51, 51); line-height: 50px; font-size: 16px; border-top-left-radius: 8px; border-top-right-radius: 8px;\"><div id=\"submitTopTextNode_embedded\" mwftype=\"label\" style=\"height: 40px; padding-left: 30px; float: left;\">继续流转</div></div><div id=\"submitTopNode\" mwftype=\"div\" style=\"height: 40px; color: rgb(51, 51, 51); line-height: 50px; font-size: 16px; border-top-left-radius: 8px; border-top-right-radius: 8px; display: none; cursor: move;\"><div id=\"submitTopTextNode\" mwftype=\"label\" style=\"height: 40px; padding-left: 30px; float: left;\">继续流转</div><div id=\"submitTopActionNode\" mwftype=\"div\" style=\"height: 40px; float: right;\"><div id=\"submitTopCloseActionNode\" mwftype=\"div\" style=\"background: url(&quot;/o2_core/o2/widget/$Dialog/user/img/close.png&quot;) center center no-repeat; width: 30px; height: 40px; float: right; cursor: pointer;\"></div></div></div><div id=\"submitContentWrapNode\" mwftype=\"div\" style=\"overflow: hidden; margin-top: 3px; background-color: rgb(255, 255, 255);\"><div id=\"submitContentNode\" mwftype=\"div\" style=\"padding: 0px 20px; text-align: left; line-height: 20px; overflow: hidden auto;\"><div id=\"submitContentInnerNode\" mwftype=\"div\" style=\"padding: 10px; overflow: hidden; background-color: rgb(255, 255, 255);\"><div id=\"submitContentTable\" mwftype=\"table\" style=\"background-color: rgb(255, 255, 255); margin: 10px 0px;\"><table width=\"100%\" align=\"center\" border=\"0\" cellspacing=\"1\" cellpadding=\"0\"><tbody><tr><td width=\"50%\\\" id=\"submitContentTable_table$Td\" rowspan=\"1\" colspan=\"1\" mwftype=\"table$Td\" style=\"\"><div id=\"routeGroupTitle\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">选择决策组</div></td><td id=\"submitContentTable_table$Td_1\" mwftype=\"table$Td\" style=\"\"><div id=\"routeSelectorTitle\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">选择决策</div></td></tr><tr><td id=\"submitContentTable_table$Td_2\" mwftype=\"table$Td\" style=\"\"><div id=\"routeGroupArea\" mwftype=\"div\" style=\"border-right: 1px solid rgb(238, 238, 238); height: 100px; overflow: auto; background-color: rgb(255, 255, 255);\"></div></td><td id=\"submitContentTable_table$Td_3\" valign=\"top\" mwftype=\"table$Td\" style=\"\"><div id=\"routeSelectorArea\" mwftype=\"div\" style=\"overflow: hidden; min-height: 40px; background-color: rgb(255, 255, 255);\"></div></td></tr><tr><td id=\"submitContentTable_table$Td_4\" rowspan=\"1\" colspan=\"2\" mwftype=\"table$Td\" style=\"\"><div id=\"routeOpinionTile\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">填写意见</div></td></tr><tr><td id=\"submitContentTable_table$Td_6\" mwftype=\"table$Td\" style=\"\"><div id=\"inputOpinionNode\" mwftype=\"div\" style=\"height: 199px; border-right: 1px solid rgb(238, 238, 238); overflow: hidden;\"><div id=\"inputTextarea\" mwftype=\"textarea\" placeholder=\"请在此处填写流程意见\" style=\"position: relative; padding-right: 2px; border-width: 0px; border-bottom-style: solid; border-bottom-color: rgb(204, 204, 204); border-top-style: initial; border-top-color: initial; border-left-style: initial; border-left-color: initial; border-right-style: initial; border-right-color: initial;\"><textarea style=\"background: rgb(255, 255, 255); width: 100%; border: 1px solid rgb(238, 238, 238); color: rgb(102, 102, 102); height: 190px; margin-right: 1px; font-size: 100%; resize: none; padding: 3px; overflow: hidden auto;\"></textarea></div><div id=\"mediaActionArea\" mwftype=\"div\" style=\"position: relative; height: 25px; line-height: 25px; top: -32px; margin-right: 5px;\"><div id=\"handwritingAction\" mwftype=\"div\" style=\"float: right; border: 1px solid rgb(102, 129, 165); border-radius: 3px; cursor: pointer; padding-left: 24px; padding-right: 5px; margin-left: 5px; background: url(&quot;/x_component_process_Work/$Processor/default/write.png&quot;) 5px center no-repeat; width: 28px; height: 25px;\">手写</div></div></div></td><td id=\"submitContentTable_table$Td_7\" mwftype=\"table$Td\" style=\"\"><div id=\"selectIdeaNode\" mwftype=\"div\" style=\"height: 199px; border-width: 1px 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: initial; border-top-color: rgb(238, 238, 238); border-right-color: rgb(238, 238, 238); border-bottom-color: rgb(238, 238, 238); border-left-color: initial; border-image: initial;\"><div id=\"selectIdeaAreaNode\" mwftype=\"div\" style=\"height: 199px; overflow: auto; background-color: rgb(255, 255, 255);\"></div></div></td></tr><tr><td id=\"submitContentTable_table$Td_8\" rowspan=\"1\" colspan=\"2\" mwftype=\"table$Td\" style=\"\"><div id=\"orgsTile\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">选择人员</div></td></tr><tr><td id=\"submitContentTable_table$Td_10\" rowspan=\"1\" colspan=\"2\" mwftype=\"table$Td\" style=\"\"><div id=\"orgsArea\" mwftype=\"div\" style=\"\"></div></td></tr></tbody></table></div></div></div></div><div id=\"submitButtonNode_embedded\" mwftype=\"div\" style=\"height: 60px; text-align: right; padding-right: 20px; background-color: rgb(255, 255, 255);\"><div id=\"okButton_embedded\" mwftype=\"label\" style=\"margin: 15px 5px; border-radius: 20px; height: 30px; color: rgb(255, 255, 255); width: 80px; background-color: rgb(74, 144, 226); text-align: center; line-height: 30px; cursor: pointer; display: inline-block;\">继续流转</div></div><div id=\"submitButtonNode\" mwftype=\"div\" style=\"height: 60px; text-align: right; padding-right: 20px; background-color: rgb(255, 255, 255); display: none;\"><div id=\"okButton\" mwftype=\"label\" style=\"margin: 15px 5px; border-radius: 20px; height: 30px; color: rgb(255, 255, 255); width: 80px; background-color: rgb(74, 144, 226); text-align: center; line-height: 30px; cursor: pointer; display: inline-block;\">确定</div><div id=\"cancelButton\" mwftype=\"label\" style=\"margin: 15px 5px; border-radius: 20px; height: 30px; color: rgb(255, 255, 255); width: 80px; background-color: rgb(153, 153, 153); text-align: center; line-height: 30px; cursor: pointer; display: inline-block;\">取消</div></div></div></div><div id=\"div_loadSubmitForm\" mwftype=\"div\" style=\"display: none;\">这里的queryLoad加载源码，load事件执行初始化</div></div>",
+    "html": "<div class=\"css2a8d8627b9ee487d9205e096f5b583e9\" id=\"2a8d8627-b9ee-487d-9205-e096f5b583e9\" mwftype=\"form\" style=\"\"><div id=\"submitNode\" mwftype=\"div\" style=\"background-color: rgb(255, 255, 255); border: 1px solid rgb(238, 238, 238);\"><div id=\"submitInnerNode\" mwftype=\"div\" style=\"\"><div id=\"submitTopNode_embedded\" mwftype=\"div\" style=\"height: 40px; color: rgb(51, 51, 51); line-height: 50px; font-size: 16px; border-top-left-radius: 8px; border-top-right-radius: 8px;\"><div id=\"submitTopTextNode_embedded\" mwftype=\"label\" style=\"height: 40px; padding-left: 30px; float: left;\">결재 진행</div></div><div id=\"submitTopNode\" mwftype=\"div\" style=\"height: 40px; color: rgb(51, 51, 51); line-height: 50px; font-size: 16px; border-top-left-radius: 8px; border-top-right-radius: 8px; display: none; cursor: move;\"><div id=\"submitTopTextNode\" mwftype=\"label\" style=\"height: 40px; padding-left: 30px; float: left;\">결재 진행</div><div id=\"submitTopActionNode\" mwftype=\"div\" style=\"height: 40px; float: right;\"><div id=\"submitTopCloseActionNode\" mwftype=\"div\" style=\"background: url(&quot;/o2_core/o2/widget/$Dialog/user/img/close.png&quot;) center center no-repeat; width: 30px; height: 40px; float: right; cursor: pointer;\"></div></div></div><div id=\"submitContentWrapNode\" mwftype=\"div\" style=\"overflow: hidden; margin-top: 3px; background-color: rgb(255, 255, 255);\"><div id=\"submitContentNode\" mwftype=\"div\" style=\"padding: 0px 20px; text-align: left; line-height: 20px; overflow: hidden auto;\"><div id=\"submitContentInnerNode\" mwftype=\"div\" style=\"padding: 10px; overflow: hidden; background-color: rgb(255, 255, 255);\"><div id=\"submitContentTable\" mwftype=\"table\" style=\"background-color: rgb(255, 255, 255); margin: 10px 0px;\"><table width=\"100%\" align=\"center\" border=\"0\" cellspacing=\"1\" cellpadding=\"0\"><tbody><tr><td width=\"50%\\\" id=\"submitContentTable_table$Td\" rowspan=\"1\" colspan=\"1\" mwftype=\"table$Td\" style=\"\"><div id=\"routeGroupTitle\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">경로 그룹 선택</div></td><td id=\"submitContentTable_table$Td_1\" mwftype=\"table$Td\" style=\"\"><div id=\"routeSelectorTitle\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">경로 선택</div></td></tr><tr><td id=\"submitContentTable_table$Td_2\" mwftype=\"table$Td\" style=\"\"><div id=\"routeGroupArea\" mwftype=\"div\" style=\"border-right: 1px solid rgb(238, 238, 238); height: 100px; overflow: auto; background-color: rgb(255, 255, 255);\"></div></td><td id=\"submitContentTable_table$Td_3\" valign=\"top\" mwftype=\"table$Td\" style=\"\"><div id=\"routeSelectorArea\" mwftype=\"div\" style=\"overflow: hidden; min-height: 40px; background-color: rgb(255, 255, 255);\"></div></td></tr><tr><td id=\"submitContentTable_table$Td_4\" rowspan=\"1\" colspan=\"2\" mwftype=\"table$Td\" style=\"\"><div id=\"routeOpinionTile\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">의견 입력</div></td></tr><tr><td id=\"submitContentTable_table$Td_6\" mwftype=\"table$Td\" style=\"\"><div id=\"inputOpinionNode\" mwftype=\"div\" style=\"height: 199px; border-right: 1px solid rgb(238, 238, 238); overflow: hidden;\"><div id=\"inputTextarea\" mwftype=\"textarea\" placeholder=\"여기에 결재 의견을 입력하세요\" style=\"position: relative; padding-right: 2px; border-width: 0px; border-bottom-style: solid; border-bottom-color: rgb(204, 204, 204); border-top-style: initial; border-top-color: initial; border-left-style: initial; border-left-color: initial; border-right-style: initial; border-right-color: initial;\"><textarea style=\"background: rgb(255, 255, 255); width: 100%; border: 1px solid rgb(238, 238, 238); color: rgb(102, 102, 102); height: 190px; margin-right: 1px; font-size: 100%; resize: none; padding: 3px; overflow: hidden auto;\"></textarea></div><div id=\"mediaActionArea\" mwftype=\"div\" style=\"position: relative; height: 25px; line-height: 25px; top: -32px; margin-right: 5px;\"><div id=\"handwritingAction\" mwftype=\"div\" style=\"float: right; border: 1px solid rgb(102, 129, 165); border-radius: 3px; cursor: pointer; padding-left: 24px; padding-right: 5px; margin-left: 5px; background: url(&quot;/x_component_process_Work/$Processor/default/write.png&quot;) 5px center no-repeat; width: 28px; height: 25px;\">손글씨</div></div></div></td><td id=\"submitContentTable_table$Td_7\" mwftype=\"table$Td\" style=\"\"><div id=\"selectIdeaNode\" mwftype=\"div\" style=\"height: 199px; border-width: 1px 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: initial; border-top-color: rgb(238, 238, 238); border-right-color: rgb(238, 238, 238); border-bottom-color: rgb(238, 238, 238); border-left-color: initial; border-image: initial;\"><div id=\"selectIdeaAreaNode\" mwftype=\"div\" style=\"height: 199px; overflow: auto; background-color: rgb(255, 255, 255);\"></div></div></td></tr><tr><td id=\"submitContentTable_table$Td_8\" rowspan=\"1\" colspan=\"2\" mwftype=\"table$Td\" style=\"\"><div id=\"orgsTile\" mwftype=\"label\" style=\"height: 30px; color: rgb(51, 51, 51); line-height: 30px; overflow: hidden; padding-left: 20px; font-size: 14px; font-weight: bold; background-color: rgb(238, 238, 238);\">사용자 선택</div></td></tr><tr><td id=\"submitContentTable_table$Td_10\" rowspan=\"1\" colspan=\"2\" mwftype=\"table$Td\" style=\"\"><div id=\"orgsArea\" mwftype=\"div\" style=\"\"></div></td></tr></tbody></table></div></div></div></div><div id=\"submitButtonNode_embedded\" mwftype=\"div\" style=\"height: 60px; text-align: right; padding-right: 20px; background-color: rgb(255, 255, 255);\"><div id=\"okButton_embedded\" mwftype=\"label\" style=\"margin: 15px 5px; border-radius: 20px; height: 30px; color: rgb(255, 255, 255); width: 80px; background-color: rgb(74, 144, 226); text-align: center; line-height: 30px; cursor: pointer; display: inline-block;\">결재 진행</div></div><div id=\"submitButtonNode\" mwftype=\"div\" style=\"height: 60px; text-align: right; padding-right: 20px; background-color: rgb(255, 255, 255); display: none;\"><div id=\"okButton\" mwftype=\"label\" style=\"margin: 15px 5px; border-radius: 20px; height: 30px; color: rgb(255, 255, 255); width: 80px; background-color: rgb(74, 144, 226); text-align: center; line-height: 30px; cursor: pointer; display: inline-block;\">확인</div><div id=\"cancelButton\" mwftype=\"label\" style=\"margin: 15px 5px; border-radius: 20px; height: 30px; color: rgb(255, 255, 255); width: 80px; background-color: rgb(153, 153, 153); text-align: center; line-height: 30px; cursor: pointer; display: inline-block;\">취소</div></div></div></div><div id=\"div_loadSubmitForm\" mwftype=\"div\" style=\"display: none;\">여기서 queryLoad 이벤트로 소스를 불러오고 load 이벤트에서 초기화합니다</div></div>",
     "isNewForm": false
   },
   "mobileData": {
     "json": {
       "id": "",
-      "name": "新建表单",
+      "name": "새 양식",
       "type": "Form",
       "mode": "Mobile",
       "description": "",

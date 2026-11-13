@@ -378,7 +378,7 @@
 .MWF_selector_cancelActionNode{
   font-size: 16px !important;
   font-weight: normal;
-  font-family: "Microsoft YaHei", "SimSun", "宋体", serif;
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
   border-radius: var(--oo-default-radius);
   height: 2.75em;
   padding: 0.375em 0.8em;
@@ -391,7 +391,7 @@
   flex: 2;
 }
 .MWF_selector_okActionNode{
-  font-family: "Microsoft YaHei", "SimSun", "宋体", serif;
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
   font-size: 16px !important;
   font-weight: normal;
   border-radius: var(--oo-default-radius);

@@ -9,7 +9,7 @@ MWF.xApplication.MinderEditor.FontFamily = new Class({
         "style": "minderFont",
         "width": "240px",
         "height": "28px",
-        "defaultOptionLp" : "字体",
+        "defaultOptionLp" : "글꼴",
         "textField" : "name",
         "valueField" : "val",
         "event" : "mouseenter",
@@ -22,20 +22,20 @@ MWF.xApplication.MinderEditor.FontFamily = new Class({
     },
     _loadData : function( callback ){
         var fontFamilyList = [{
-            name: '宋体',
-            val: '宋体,SimSun'
+            name: '맑은 고딕',
+            val: 'Malgun Gothic, Apple SD Gothic Neo, Noto Sans KR, sans-serif'
         }, {
-            name: 'Microsoft YaHei',
-            val: 'Microsoft YaHei,Microsoft YaHei'
+            name: 'Noto Sans KR',
+            val: 'Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif'
         }, {
-            name: '楷体',
-            val: '楷体,楷体_GB2312,SimKai'
+            name: '바탕',
+            val: 'Batang, AppleMyungjo, Noto Serif KR, serif'
         }, {
-            name: '黑体',
-            val: '黑体, SimHei'
+            name: '돋움',
+            val: 'Dotum, Apple SD Gothic Neo, sans-serif'
         }, {
-            name: '隶书',
-            val: '隶书, SimLi'
+            name: '굴림',
+            val: 'Gulim, Apple SD Gothic Neo, sans-serif'
         }, {
             name: 'Andale Mono',
             val: 'andale mono'
@@ -76,7 +76,7 @@ MWF.xApplication.MinderEditor.FontSize = new Class({
         "style": "minderFont",
         "width": "80px",
         "height": "28px",
-        "defaultOptionLp" : "字号",
+        "defaultOptionLp" : "글꼴 크기",
         "isSetSelectedValue" : true,
         "isChangeOptionStyle" : true,
         "emptyOptionEnable" : false,
@@ -118,52 +118,52 @@ MWF.xApplication.MinderEditor.PriorityImage = new Class({
             {
                 command : "0",
                 position : "0 -180px",
-                title : "移除优先级"
+                title : "우선순위 제거"
             },
             {
                 command : "1",
                 position : "0 0px",
-                title : "优先级1"
+                title : "우선순위 1"
             },
             {
                 command : "2",
                 position : "0 -20px",
-                title : "优先级2"
+                title : "우선순위 2"
             },
             {
                 command : "3",
                 position : "0 -40px",
-                title : "优先级3"
+                title : "우선순위 3"
             },
             {
                 command : "4",
                 position : "0 -60px",
-                title : "优先级4"
+                title : "우선순위 4"
             },
             {
                 command : "5",
                 position : "0 -80px",
-                title : "优先级5"
+                title : "우선순위 5"
             },
             {
                 command : "6",
                 position : "0 -100px",
-                title : "优先级6"
+                title : "우선순위 6"
             },
             {
                 command : "7",
                 position : "0 -120px",
-                title : "优先级7"
+                title : "우선순위 7"
             },
             {
                 command : "8",
                 position : "0 -140px",
-                title : "优先级8"
+                title : "우선순위 8"
             },
             {
                 command : "9",
                 position : "0 -160px",
-                title : "优先级9"
+                title : "우선순위 9"
             }
         ];
         if(callback)callback( list );
@@ -339,52 +339,52 @@ MWF.xApplication.MinderEditor.ProgressImage = new Class({
             {
                 command : "0",
                 position : "0 -180px",
-                title : "移除进度"
+                title : "진행률 제거"
             },
             {
                 command : "1",
                 position : "0 0px",
-                title : "未开始"
+                title : "시작 전"
             },
             {
                 command : "2",
                 position : "0 -20px",
-                title : "完成1/8"
+                title : "1/8 완료"
             },
             {
                 command : "3",
                 position : "0 -40px",
-                title : "完成2/8"
+                title : "2/8 완료"
             },
             {
                 command : "4",
                 position : "0 -60px",
-                title : "完成3/8"
+                title : "3/8 완료"
             },
             {
                 command : "5",
                 position : "0 -80px",
-                title : "完成4/8"
+                title : "4/8 완료"
             },
             {
                 command : "6",
                 position : "0 -100px",
-                title : "完成5/8"
+                title : "5/8 완료"
             },
             {
                 command : "7",
                 position : "0 -120px",
-                title : "完成6/8"
+                title : "6/8 완료"
             },
             {
                 command : "8",
                 position : "0 -140px",
-                title : "完成7/8"
+                title : "7/8 완료"
             },
             {
                 command : "9",
                 position : "0 -160px",
-                title : "全部完成"
+                title : "모두 완료"
             }
         ];
         if(callback)callback( list );
@@ -554,7 +554,7 @@ MWF.xApplication.MinderEditor.SaveTooltips = new Class({
     _customNode : function( node, contentNode ){
 
         var div = new Element("div", {
-            "text" :  (this.app.autoSaveInter / 60000) + "分钟自动保存一次",
+            "text" :  (this.app.autoSaveInter / 60000) + "분마다 자동 저장",
             "styles" : { "margin" : "10px" }
         }).inject( contentNode );
         new Element("input",{
@@ -619,7 +619,7 @@ MWF.xApplication.MinderEditor.HyperLinkForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "链接"
+        "title" : "링크"
     },
     _createTableContent: function () {
 
@@ -642,16 +642,16 @@ MWF.xApplication.MinderEditor.HyperLinkForm = new Class({
             style : "v10", mvcStyle: "v10",
             hasColon : true,
             itemTemplate: {
-                url: { type: 'oo-input', text : "链接地址",  notEmpty : true,
+                url: { type: 'oo-input', text : "링크 주소",  notEmpty : true,
                     validRule : { isInvalid : function( value, it ){
                         var urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
                         var R_URL = new RegExp(urlRegex, 'i');
                         return R_URL.test( value )
                     }.bind(this)},
-                    validMessage : { isInvalid : "请输入正确的链接" },
-                    attr : { placeholder : "必填：以 http(s):// 或 ftp:// 开头" }
+                    validMessage : { isInvalid : "올바른 링크를 입력하세요" },
+                    attr : { placeholder : "필수: http(s):// 또는 ftp://로 시작" }
                 },
-                title: { type: 'oo-input', text : "提示文本", attr : { placeholder : "选填：鼠标在链接上悬停时提示的文本" } }
+                title: { type: 'oo-input', text : "도움말 텍스트", attr : { placeholder : "선택: 링크에 마우스를 올렸을 때 표시할 텍스트" } }
             }
         }, this.app);
         this.form.load();
@@ -663,7 +663,7 @@ MWF.xApplication.MinderEditor.HyperLinkForm = new Class({
 
             this.okActionNode = new Element("oo-button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -677,7 +677,7 @@ MWF.xApplication.MinderEditor.HyperLinkForm = new Class({
 
         this.removeAction = new Element("oo-button.inputCancelButton", {
             "styles": this.css.inputCancelButton,
-            "text": "删除链接",
+            "text": "링크 삭제",
             'type':'cancel'
         }).inject(this.formBottomNode);
 
@@ -691,7 +691,7 @@ MWF.xApplication.MinderEditor.HyperLinkForm = new Class({
 
         this.cancelActionNode = new Element("oo-button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭",
+            "text": "닫기",
             'type':'cancel'
         }).inject(this.formBottomNode);
 
@@ -732,7 +732,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "图片"
+        "title" : "이미지"
     },
     createContent: function () {
 
@@ -761,7 +761,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
             "    <td styles='formTableValue14' item='url' colspan='3'></td></tr>" +
             "<tr><td styles='formTableTitle' lable='title'></td>" +
             "    <td styles='formTableValue14' item='title' colspan='3'></td></tr>" +
-            "<tr><td styles='formTableTitle'>预览：</td>" +
+            "<tr><td styles='formTableTitle'>미리 보기: </td>" +
             "    <td styles='formTableValue14' item='preview' colspan='3'></td></tr>" +
             "</table>";
         this.linkContainer.set("html", html);
@@ -773,18 +773,18 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
             style : "minder",
             hasColon : true,
             itemTemplate: {
-                url: { text : "图片地址",  notEmpty : true,
+                url: { text : "이미지 주소",  notEmpty : true,
                     validRule : { isInvalid : function( value, it ){
                         var R_URL = /^https?\:\/\/\w+/;
                         return R_URL.test( value )
                     }.bind(this)},
-                    validMessage : { isInvalid : "请输入正确的链接" },
-                    attr : { placeholder : "必填：以 http(s):// 开始" },
+                    validMessage : { isInvalid : "올바른 링크를 입력하세요" },
+                    attr : { placeholder : "필수: http(s)://로 시작" },
                     event : { blur : function( it ){
                         if( it.getValue() )it.form.getItem("preview").setValue( it.getValue() )
                     }.bind(this)}
                 },
-                title: { text : "提示文本", attr : { placeholder : "选填：鼠标在图片上悬停时提示的文本" } },
+                title: { text : "도움말 텍스트", attr : { placeholder : "선택: 이미지에 마우스를 올렸을 때 표시할 텍스트" } },
                 preview : { type : "img", defaultValue : data.url || "", style : { "max-width" : "400px", "max-height" : "260px" } }
             }
         }, this.app);
@@ -808,7 +808,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
             style : "minder",
             hasColon : true,
             itemTemplate: {
-                title2: { text : "提示文本", attr : { placeholder : "选填：鼠标在图片上悬停时提示的文本" } }
+                title2: { text : "도움말 텍스트", attr : { placeholder : "선택: 이미지에 마우스를 올렸을 때 표시할 텍스트" } }
             }
         }, this.app);
         this.uploadform.load();
@@ -835,7 +835,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
 
         var tabNode = new Element("div.formTabNode", {
             "styles": this.css.formTabNode,
-            "text" : "外链图片"
+            "text" : "외부 링크 이미지"
         }).inject(this.tabContainer);
         tabNode.addEvents({
             "mouseover" : function(){ if( _self.currentTabNode != this.node)this.node.setStyles(_self.css.formTabNode_over) }.bind({node : tabNode }),
@@ -853,7 +853,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
 
         var tabNode = new Element("div.tabNode", {
             "styles": this.css.formTabNode,
-            "text" : "上传图片"
+            "text" : "이미지 업로드"
         }).inject(this.tabContainer);
         tabNode.addEvents({
             "mouseover" : function(){ if( _self.currentTabNode != this.node)this.node.setStyles(_self.css.formTabNode_over) }.bind({node : tabNode }),
@@ -873,7 +873,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
 
             this.okActionNode = new Element("button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -883,7 +883,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
 
         this.removeAction = new Element("button.inputCancelButton", {
             "styles": this.css.inputCancelButton,
-            "text": "删除图片"
+            "text": "이미지 삭제"
         }).inject(this.formBottomNode);
 
         this.removeAction.addEvent("click", function (e) {
@@ -892,7 +892,7 @@ MWF.xApplication.MinderEditor.ImageForm = new Class({
 
         this.cancelActionNode = new Element("button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭"
+            "text": "닫기"
         }).inject(this.formBottomNode);
 
         this.cancelActionNode.addEvent("click", function (e) {
@@ -983,7 +983,7 @@ MWF.xApplication.MinderEditor.SaveAsForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "另存为"
+        "title" : "다른 이름으로 저장"
     },
     _createTableContent: function () {
 
@@ -1000,8 +1000,8 @@ MWF.xApplication.MinderEditor.SaveAsForm = new Class({
             style : "minder",
             hasColon : true,
             itemTemplate: {
-                folder: { text : "选择文件夹",  notEmpty : true, attr : { readonly : true }, defaultValue : "根目录" },
-                newname: { text : "新文件名称" }
+                folder: { text : "폴더 선택",  notEmpty : true, attr : { readonly : true }, defaultValue : "루트 폴더" },
+                newname: { text : "새 파일 이름" }
             }
         }, this.app);
         this.form.load();
@@ -1013,7 +1013,7 @@ MWF.xApplication.MinderEditor.SaveAsForm = new Class({
 
             this.okActionNode = new Element("button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -1023,7 +1023,7 @@ MWF.xApplication.MinderEditor.SaveAsForm = new Class({
 
         this.cancelActionNode = new Element("button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭"
+            "text": "닫기"
         }).inject(this.formBottomNode);
 
         this.cancelActionNode.addEvent("click", function (e) {
@@ -1061,7 +1061,7 @@ MWF.xApplication.MinderEditor.NewNameForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "重命名"
+        "title" : "이름 바꾸기"
     },
     _createTableContent: function () {
 
@@ -1076,7 +1076,7 @@ MWF.xApplication.MinderEditor.NewNameForm = new Class({
             style : "minder",
             hasColon : true,
             itemTemplate: {
-                newname: { text : "新文件名称", notEmpty : true }
+                newname: { text : "새 파일 이름", notEmpty : true }
             }
         }, this.app);
         this.form.load();
@@ -1088,7 +1088,7 @@ MWF.xApplication.MinderEditor.NewNameForm = new Class({
 
             this.okActionNode = new Element("button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -1098,7 +1098,7 @@ MWF.xApplication.MinderEditor.NewNameForm = new Class({
 
         this.cancelActionNode = new Element("button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭"
+            "text": "닫기"
         }).inject(this.formBottomNode);
 
         this.cancelActionNode.addEvent("click", function (e) {
@@ -1373,7 +1373,7 @@ MWF.xApplication.MinderEditor.ExportForm = new Class({
         "hasIcon": false,
         "draggable": true,
         "hasBottom" : false,
-        "title" : "选择导出的文件类型"
+        "title" : "내보낼 파일 형식 선택"
     },
     _createTableContent : function( callback ){
         this.css = this.app.css;

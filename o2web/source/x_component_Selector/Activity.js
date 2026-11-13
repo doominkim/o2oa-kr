@@ -62,10 +62,10 @@ MWF.xApplication.Selector.Activity = new Class({
                     processName: processJson.data.name,
                     process: process,
                     type: 'draft',
-                    name: "草稿",
+                    name: "임시저장",
                     unique: aid,
                     id: aid,
-                    distinguishedName: '草稿'+'@'+'draft-'+aid+'@'+'draft-'+aid+'@'+process+'@draft@A'
+                    distinguishedName: '임시저장'+'@'+'draft-'+aid+'@'+'draft-'+aid+'@'+process+'@draft@A'
                 }
                 if (callback) callback.apply(this, [{data: d}]);
             });
@@ -227,10 +227,10 @@ MWF.xApplication.Selector.Activity.ItemCategory = new Class({
                     processName: this.data.name,
                     process: this.data.id,
                     type: 'draft',
-                    name: "草稿",
+                    name: "임시저장",
                     unique: 'draft-'+this.data.id,
                     id: 'draft-'+this.data.id,
-                    distinguishedName: '草稿'+'@'+'draft-'+this.data.id+'@'+'draft-'+this.data.id+'@'+this.data.id+'@draft@A'
+                    distinguishedName: '임시저장'+'@'+'draft-'+this.data.id+'@'+'draft-'+this.data.id+'@'+this.data.id+'@draft@A'
                 });
                 activityList.forEach(function(data){
                     var d = {

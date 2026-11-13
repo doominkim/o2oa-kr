@@ -44,7 +44,7 @@ o2.widget.Calendar = o2.Calendar = new Class({
 		// "enableSeconds": null,  //一个function, 参数为日期，hour，minutes
 	},
 	initialize: function(node, options){
-		Locale.use("zh-CHS");
+		Locale.use(o2.dateLocale());
 		this.setOptions(options);
 		this.options.defaultTime = ""+this.options.baseDate.getHours()+":"+this.options.baseDate.getMinutes()+":"+this.options.baseDate.getSeconds();
 

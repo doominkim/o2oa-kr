@@ -8,7 +8,7 @@ MWF.xApplication.MinderEditor.ExpandLevel = new Class({
         "height": "30px",
         "textField" : "text",
         "valueField" : "value",
-        "defaultOptionLp" : "展开节点",
+        "defaultOptionLp" : "노드 펼치기",
         "isSetSelectedValue" : false,
         "isChangeOptionStyle" : false,
         "emptyOptionEnable" : false,
@@ -26,25 +26,25 @@ MWF.xApplication.MinderEditor.ExpandLevel = new Class({
         var levelList = [
             {
                 value : '1',
-                text : "展开到一级节点"
+                text : "1단계 노드까지 펼치기"
             },{
                 value : '2',
-                text : "展开到二级节点"
+                text : "2단계 노드까지 펼치기"
             },{
                 value : '3',
-                text : "展开到三级节点"
+                text : "3단계 노드까지 펼치기"
             },{
                 value : '4',
-                text : "展开到四级节点"
+                text : "4단계 노드까지 펼치기"
             },{
                 value : '5',
-                text : "展开到五级节点"
+                text : "5단계 노드까지 펼치기"
             },{
                 value : '6',
-                text : "展开到六级节点"
+                text : "6단계 노드까지 펼치기"
             },{
                 value : '999',
-                text : "展开全部"
+                text : "모두 펼치기"
             }
         ];
         if(callback)callback( levelList );
@@ -66,7 +66,7 @@ MWF.xApplication.MinderEditor.SelectAll = new Class({
         "height": "30px",
         "textField" : "text",
         "valueField" : "value",
-        "defaultOptionLp" : "选择节点",
+        "defaultOptionLp" : "노드 선택",
         "isSetSelectedValue" : false,
         "isChangeOptionStyle" : false,
         "emptyOptionEnable" : false,
@@ -84,22 +84,22 @@ MWF.xApplication.MinderEditor.SelectAll = new Class({
         var levelList = [
             {
                 value : 'all',
-                text : "全选"
+                text : "모두 선택"
             },{
                 value : 'revert',
-                text : "反选"
+                text : "선택 반전"
             },{
                 value : 'siblings',
-                text : "选择兄弟节点"
+                text : "형제 노드 선택"
             },{
                 value : 'level',
-                text : "选择同级节点"
+                text : "같은 수준 노드 선택"
             },{
                 value : 'path_',
-                text : "选择路径"
+                text : "경로 선택"
             },{
                 value : 'tree',
-                text : "选择子树"
+                text : "하위 트리 선택"
             }
         ];
         if(callback)callback( levelList );
@@ -203,32 +203,32 @@ MWF.xApplication.MinderEditor.Template = new Class({
             {
                 command : "default",
                 picture : "default.png",
-                title : "思维导图"
+                title : "마인드맵"
             },
             {
                 command : "structure",
                 picture : "structure.png",
-                title : "目录组织图"
+                title : "목차 구조도"
             },
             {
                 command : "filetree",
                 picture : "filetree.png",
-                title : "组织结构图"
+                title : "조직도"
             },
             {
                 command : "right",
                 picture : "right.png",
-                title : "逻辑结构图"
+                title : "논리 구조도"
             },
             {
                 command : "fish-bone",
                 picture : "fish-bone.png",
-                title : "鱼骨图"
+                title : "피시본 다이어그램"
             },
             {
                 command : "tianpan",
                 picture : "tianpan.png",
-                title : "天盘"
+                title : "방사형"
             }
         ];
         var template = this.app.options.template;
@@ -381,83 +381,83 @@ MWF.xApplication.MinderEditor.Theme = new Class({
         var list = [
             {
                 command : 'classic',
-                text : "经典"
+                text : "클래식"
             },
             {
                 command : 'classic-compact',
-                text : "经典紧凑"
+                text : "클래식 압축"
             },
             {
                 command : 'fresh-blue',
-                text : "蓝色"
+                text : "파랑"
             },
             {
                 command : 'fresh-blue-compat',
-                text : "蓝色紧凑"
+                text : "파랑 압축"
             },
             {
                 command : 'fresh-green',
-                text : "绿色"
+                text : "초록"
             },
             {
                 command : 'fresh-green-compat',
-                text : "绿色紧凑"
+                text : "초록 압축"
             },
             {
                 command : 'fresh-pink',
-                text : "粉色"
+                text : "분홍"
             },
             {
                 command : 'fresh-pink-compat',
-                text : "粉色紧凑"
+                text : "분홍 압축"
             },
             {
                 command : 'fresh-purple',
-                text : "紫色"
+                text : "보라"
             },
             {
                 command : 'fresh-purple-compat',
-                text : "紫色紧凑"
+                text : "보라 압축"
             },
             {
                 command : 'fresh-red',
-                text : "红色"
+                text : "빨강"
             },
             {
                 command : 'fresh-red-compat',
-                text : "红色紧凑"
+                text : "빨강 압축"
             },
             {
                 command : 'fresh-soil',
-                text : "黄色"
+                text : "노랑"
             },
             {
                 command : 'fresh-soil-compat',
-                text : "黄色紧凑"
+                text : "노랑 압축"
             },
             {
                 command : 'snow',
-                text : "冷光"
+                text : "쿨 라이트"
             },
             {
                 command : 'snow-compact',
-                text : "冷光紧凑"
+                text : "쿨 라이트 압축"
             },
             {
                 command : 'tianpan',
-                text : "天盘"
+                text : "방사형"
             },
             {
                 command : 'tianpan-compact',
-                text : "天盘紧凑"
+                text : "방사형 압축"
             },
             {
                 command : 'fish',
-                text : "鱼骨图"
+                text : "피시본 다이어그램"
             },
             {
                 command : 'wire',
-                text : "线条"
+                text : "선"
             }
         ];
         var theme = this.app.options.theme;

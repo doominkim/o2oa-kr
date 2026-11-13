@@ -103,7 +103,7 @@ const loadExpandData = async (row) => {
     }
   } catch (error) {
     row.expandError = true;
-    console.error('加载展开数据失败:', error);
+    console.error('펼침 데이터 불러오기 실패:', error);
   } finally {
     row.expandLoading = false;
   }

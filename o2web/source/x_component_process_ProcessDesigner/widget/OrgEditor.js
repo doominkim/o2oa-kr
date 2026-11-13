@@ -52,7 +52,7 @@ MWF.xApplication.process.ProcessDesigner.widget.OrgEditor = new Class({
             if( this.currentItem ){
                 var d = this.currentItem.getData();
 
-                if( !d.title || !d.name || d.name === "未命名" ){
+                if( !d.title || !d.name || d.name === "이름 없음" ){
                     MWF.xDesktop.notice("error", {"y":"top", "x": "left"}, this.lp.notice.saveRouteOrgNoName, ev.target);
                     return;
                 }
@@ -74,14 +74,14 @@ MWF.xApplication.process.ProcessDesigner.widget.OrgEditor = new Class({
                         this.loadDefaultProperty();
                     }
                     this.scrollNode.scrollTo(0,0);
-                    this.upNode.set("text","添加选择项");
+                    this.upNode.set("text","선택 항목 추가");
                 }else{
                     MWF.xDesktop.notice("error", {"y":"top", "x": "right"}, this.lp.orgEditor.conflictNotice+"："+ d.name, ev.target);
                 }
 
             }else if( this.defaultProperty ){
                 var d = this.defaultData;
-                if( !d.title || !d.name || d.name === "未命名"){
+                if( !d.title || !d.name || d.name === "이름 없음"){
                     MWF.xDesktop.notice("error", {"y":"top", "x": "left"}, this.lp.notice.saveRouteOrgNoName, ev.target);
                     return;
                 }

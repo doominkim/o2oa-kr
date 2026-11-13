@@ -41,8 +41,8 @@
   // ****************TaskGroup*********************
   "taskGroupSave":{"uri":"/jaxrs/task_list","method": "POST"},
   "taskGroupGet":{"uri":"/jaxrs/task_list/taskgroup/{taskGroupId}/tasklist/{taskListId}","method": "GET"},
-  "taskGroupRemove":{"uri":"/jaxrs/task_list/remove/{id}","method": "DELETE"},  //物理删除
-  "taskGroupDelete":{"uri":"/jaxrs/task_list/delete/{id}","method": "DELETE"},  //软删除
+  "taskGroupRemove":{"uri":"/jaxrs/task_list/remove/{id}","method": "DELETE"},  //물리 삭제
+  "taskGroupDelete":{"uri":"/jaxrs/task_list/delete/{id}","method": "DELETE"},  //소프트 삭제
 
   // ****************TaskGroup*********************
 

@@ -1424,7 +1424,7 @@ MWF.xApplication.process.Xform.$Module = MWF.APP$Module =  new Class(
             data = '';
         }
         if (paths.length > 8) {
-            throw new Error(`路径"${paths.join('/')}"层级超过限制(8级)，当前: ${paths.length}`);
+            throw new Error(`경로 "${paths.join('/')}"의 단계가 제한(8단계)을 초과했습니다. 현재: ${paths.length}`);
         }
         var hasPath = paths.length > 0;
         var action, methodName, args;

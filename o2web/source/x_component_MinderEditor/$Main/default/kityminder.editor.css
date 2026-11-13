@@ -55,7 +55,7 @@ div.minder-editor-container {
   bottom: 0;
   left: 0;
   right: 0;
-  font-family: Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
 }
 .minder-editor {
   position: absolute;

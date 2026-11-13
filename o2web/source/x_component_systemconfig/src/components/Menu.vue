@@ -38,12 +38,12 @@
     </div>
 
     <div class="menuBottom">
-      <div class="menuTitleText" @click="(e)=>{layout.openApplication(e,'ConfigDesigner')}">JSON配置</div>
+      <div class="menuTitleText" @click="(e)=>{layout.openApplication(e,'ConfigDesigner')}">JSON 설정</div>
     </div>
 
 <!--    <div class="menuItem" @click="(e)=>{layout.openApplication(e,'ConfigDesigner')}">-->
 <!--      <div class="menuItemIcon"><i class="o2icon-log"></i></div>-->
-<!--      <div class="menuItemText">JSON配置</div>-->
+<!--      <div class="menuItemText">JSON 설정</div>-->
 <!--    </div>-->
 
 

@@ -137,46 +137,46 @@ function imUploadFile(conversationId, type, formData, file, progressCallback) {
         action.action.targetModule = {
             module: {
                 addFormDataMessage: (file) => {
-                    console.log('创建进度条', file);
+                    console.log('진행률 표시줄 생성', file);
                     //返回一个对象，用于处理进度条
                     return {
                         //在上传完成，失败或取消时，清除进度条
                         clearMessageProgress: () => {
-                            console.log('清除进度条', file);
+                            console.log('진행률 표시줄 제거', file);
                         },
                         //更新进度条
                         updateProgress: (progress) => {
-                            console.log('更新进度条', file, progress);
+                            console.log('진행률 표시줄 업데이트', file, progress);
                             if (progressCallback) {
                                 progressCallback(progress)
                             }
                         },
                         //更新进度条标题
                         setMessageTitle: (title) => {
-                            console.log('更新进度条标题', file, title);
+                            console.log('진행률 표시줄 제목 업데이트', file, title);
                         },
                         //更新进度条文本
                         setMessageText: (text) => {
-                            console.log('更新进度条文本', file, text);
+                            console.log('진행률 표시줄 텍스트 업데이트', file, text);
                         },
                         //开始上传
                         transferStart: () => {
-                            console.log('开始上传', file);
+                            console.log('업로드 시작', file);
                         },
 
                         //上传失败
                         transferFailed: () => {
-                            console.log('上传失败', file);
+                            console.log('업로드 실패', file);
                         },
 
                         //上传取消
                         transferCanceled: () => {
-                            console.log('上传取消', file);
+                            console.log('업로드 취소', file);
                         },
 
                         //上传完成
                         transferComplete: () => {
-                            console.log('上传完成', file);
+                            console.log('업로드 완료', file);
                         },
 
                         //这个data为了兼容，防止代码报错，实际上并没有用到

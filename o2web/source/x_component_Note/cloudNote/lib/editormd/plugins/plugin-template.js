@@ -18,31 +18,31 @@
 		var langs = {
 			"zh-cn" : {
 				toolbar : {
-					table : "表格"
+					table : "표"
 				},
 				dialog : {
 					table : {
-						title      : "添加表格",
-						cellsLabel : "单元格数",
-						alignLabel : "对齐方式",
-						rows       : "行数",
-						cols       : "列数",
-						aligns     : ["默认", "左对齐", "居中对齐", "右对齐"]
+						title      : "표 추가",
+						cellsLabel : "셀 수",
+						alignLabel : "정렬 방식",
+						rows       : "행 수",
+						cols       : "열 수",
+						aligns     : ["기본값", "왼쪽 정렬", "가운데 정렬", "오른쪽 정렬"]
 					}
 				}
 			},
 			"zh-tw" : {
 				toolbar : {
-					table : "添加表格"
+					table : "표 추가"
 				},
 				dialog : {
 					table : {
-						title      : "添加表格",
-						cellsLabel : "單元格數",
-						alignLabel : "對齊方式",
-						rows       : "行數",
-						cols       : "列數",
-						aligns     : ["默認", "左對齊", "居中對齊", "右對齊"]
+						title      : "표 추가",
+						cellsLabel : "셀 수",
+						alignLabel : "정렬 방식",
+						rows       : "행 수",
+						cols       : "열 수",
+						aligns     : ["기본값", "왼쪽 정렬", "가운데 정렬", "오른쪽 정렬"]
 					}
 				}
 			},

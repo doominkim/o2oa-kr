@@ -36,7 +36,7 @@
 		"margin-left": "22px",
 		"margin-right": "22px",
 		"color": "#FFF",
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"background-position": "center center",
 		"cursor": "move",
 		"font-size": "12px"

@@ -2,7 +2,7 @@
 	"item":[
 		{
 			"id" : "Image",
-			"title" : "插入图片",
+			"title" : "이미지 삽입",
 			"type" : "button",
  			"pic" : o2.session.path+"/widget/$SimpleEditor/default/img/picture.gif",
 			"picDisable" : o2.session.path+"/widget/$SimpleEditor/default/img/picture_gray.gif",
@@ -14,7 +14,7 @@
 		},
 		{
 			"id" : "Emotion",
-			"title" : "插入表情",
+			"title" : "이모티콘 삽입",
 			"type" : "button",
  			"pic" : o2.session.path+"/widget/$SimpleEditor/default/img/emotion.gif",
 			"picDisable" : o2.session.path+"/widget/$SimpleEditor/default/img/emotion_gray.gif",

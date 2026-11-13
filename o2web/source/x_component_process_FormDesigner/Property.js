@@ -1125,7 +1125,7 @@ MWF.xApplication.process.FormDesigner.Property = MWF.FCProperty = new Class({
                             var _self = this;
                             if( typeOf(this.data[name]) === "array" && this.data[name].length > 0 ){
                                 //this.form.designer.lp.selectIcon
-                                this.form.designer.confirm( "", node, "导入字段确认", "本操作从数据模板的内部组件获取字段。如果执行本操作，之前配置的字段会被替换，是否继续？", 300, 200, function(){
+                                this.form.designer.confirm( "", node, "필드 가져오기 확인", "이 작업은 데이터 템플릿 내부 구성요소에서 필드를 가져옵니다. 실행하면 이전에 설정한 필드가 대체됩니다. 계속하시겠습니까?", 300, 200, function(){
                                     if( !_self.module.getExpImpFieldJson )return;
                                     filedConfigurator.data = _self.module.getExpImpFieldJson();
                                     filedConfigurator.reloadContent();
@@ -2392,7 +2392,7 @@ MWF.xApplication.process.FormDesigner.Property = MWF.FCProperty = new Class({
                     //如果是门户设计器，则不加载活动选择器
                     //因为门户设计器没有活动，只有页面
 
-                    node.textContent = "门户中无活动";
+                    node.textContent = "포털에는 활동이 없습니다";
                 }else if (["cms.FormDesigner"].includes(appName)){
                     //如果是CMS设计器，只有已发布或未发布
                     var property = this;

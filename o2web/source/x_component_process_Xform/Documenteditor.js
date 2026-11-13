@@ -776,12 +776,12 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             if (table && !table.hasClass("doc_layout_headIssuance")) {
                 var unitWidth = o2.getTextSize(this.layout_issuanceUnit.get("text"), {
                     "font-size": "16pt",
-                    "font-family": "'Times New Roman',仿宋_GB2312",
+                    "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
                     "letter-spacing": "-0.4pt"
                 }).x;
                 var dateWidth = o2.getTextSize(this.layout_issuanceDate.get("text"), {
                     "font-size": "16pt",
-                    "font-family": "'Times New Roman',仿宋_GB2312",
+                    "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
                     "letter-spacing": "-0.4pt"
                 }).x;
 
@@ -1155,12 +1155,12 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             text = text.replace(/\u3000*/g, "");
             if (!text || text==MWF.xApplication.process.Xform.LP.documentEditor.attachmentInfor){
                 this.layout_attachmentText.empty();
-                this["attachmentTextEditor"].insertHtml("<div aria-label=\"分页符\" class=\"cke_pagebreak\" contenteditable=\"false\" data-cke-display-name=\"pagebreak\" data-cke-pagebreak=\"1\" style=\"page-break-after: always\" title=\"分页符\"></div>" +
-                    "<div style=\"font-family:黑体;font-size:16pt;\">附件1</div>" +
+                this["attachmentTextEditor"].insertHtml("<div aria-label=\"페이지 나누기\" class=\"cke_pagebreak\" contenteditable=\"false\" data-cke-display-name=\"pagebreak\" data-cke-pagebreak=\"1\" style=\"page-break-after: always\" title=\"페이지 나누기\"></div>" +
+                    "<div style=\"font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;font-size:16pt;\">첨부 1</div>" +
                     "<div><span>　</span></div>" +
-                    "<div style=\"font-family: 方正小标宋简体; font-size: 22pt; text-align: center;\">附件标题</div>" +
+                    "<div style=\"font-family: AppleMyungjo, Batang, Noto Serif KR, serif; font-size: 22pt; text-align: center;\">첨부 제목</div>" +
                     "<div><span>　</span></div>" +
-                    "<div>　　附件内容</div>");
+                    "<div>　　첨부 내용</div>");
             }
         }.bind(this));
     },
@@ -2602,20 +2602,20 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             language: o2.language,
 
             // format_tags: '标题一;标题二;标题三;标题四;正文', // entries is displayed in "Paragraph format"
-            format_tags: '标题一;标题二;正文(标题三,四)', // entries is displayed in "Paragraph format"
-            'format_标题一': {
-                name: '标题一(三号黑体)',
+            format_tags: '제목1;제목2;본문(제목3,4)', // entries is displayed in "Paragraph format"
+            'format_제목1': {
+                name: '제목 1(16pt 고딕)',
                 element: 'div',
                 styles: {
-                    'font-family': '黑体',
+                    'font-family': 'Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif',
                     'font-size': '16pt'
                 }
             },
-            'format_标题二': {
-                name: '标题二(三号楷体)',
+            'format_제목2': {
+                name: '제목 2(16pt 명조)',
                 element: 'div',
                 styles: {
-                    'font-family': '楷体_GB2312',
+                    'font-family': 'AppleMyungjo, Batang, Noto Serif KR, serif',
                     'font-size': '16pt'
                 }
             },
@@ -2623,7 +2623,7 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             //     name: '标题三',
             //     element: 'div',
             //     styles: {
-            //         'font-family': '仿宋_GB2312',
+            //         'font-family': 'AppleMyungjo, Batang, Noto Serif KR, serif',
             //         'font-size': '16pt'
             //     }
             // },
@@ -2631,15 +2631,15 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
             //     name: '标题四',
             //     element: 'div',
             //     styles: {
-            //         'font-family': '仿宋_GB2312',
+            //         'font-family': 'AppleMyungjo, Batang, Noto Serif KR, serif',
             //         'font-size': '16pt'
             //     }
             // },
-            'format_正文(标题三,四)': {
-                name: '正文(标题三,四)',
+            'format_본문(제목3,4)': {
+                name: '본문(제목 3, 4)',
                 element: 'div',
                 styles: {
-                    'font-family': '仿宋_GB2312',
+                    'font-family': 'AppleMyungjo, Batang, Noto Serif KR, serif',
                     'font-size': '16pt'
                 }
             }
@@ -2692,25 +2692,25 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
         if (editorName){
             editorConfig.removeButtons = editorConfig.removeButtons.split(/,\s*/).erase("PageBreak").join(",");
             var tags = editorConfig.format_tags.split(/;\s*/);
-            if (tags.indexOf("附件标题")==-1){
-                editorConfig.format_tags = "附件标题"+((editorConfig.format_tags) ? ";" : "")+editorConfig.format_tags;
+            if (tags.indexOf("첨부제목")==-1){
+                editorConfig.format_tags = "첨부제목"+((editorConfig.format_tags) ? ";" : "")+editorConfig.format_tags;
             }
-            if (tags.indexOf("附件序号")==-1){
-                editorConfig.format_tags = "附件序号"+((editorConfig.format_tags) ? ";" : "")+editorConfig.format_tags;
+            if (tags.indexOf("첨부번호")==-1){
+                editorConfig.format_tags = "첨부번호"+((editorConfig.format_tags) ? ";" : "")+editorConfig.format_tags;
             }
-            if (!editorConfig["format_附件序号"]) editorConfig["format_附件序号"] = {
-                name: '附件序号',
+            if (!editorConfig["format_첨부번호"]) editorConfig["format_첨부번호"] = {
+                name: '첨부 번호',
                 element: 'div',
                 styles: {
-                    'font-family': '黑体',
+                    'font-family': 'Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif',
                     'font-size': '16pt'
                 }
             };
-            if (!editorConfig["format_附件标题"]) editorConfig["format_附件标题"] = {
-                name: '附件标题',
+            if (!editorConfig["format_첨부제목"]) editorConfig["format_첨부제목"] = {
+                name: '첨부 제목',
                 element: 'div',
                 styles: {
-                    'font-family': '方正小标宋简体',
+                    'font-family': 'AppleMyungjo, Batang, Noto Serif KR, serif',
                     'font-size': '22pt',
                     'text-align': 'center'
                 }
@@ -3776,12 +3776,12 @@ MWF.xApplication.process.Xform.Documenteditor = MWF.APPDocumenteditor =  new Cla
                 if (table && !table.hasClass("doc_layout_headIssuance")){
                     var unitWidth = o2.getTextSize(this.layout_issuanceUnit.get("text"), {
                         "font-size":"16pt",
-                        "font-family":"'Times New Roman',仿宋_GB2312",
+                        "font-family":"AppleMyungjo, Batang, Noto Serif KR, serif",
                         "letter-spacing": "-0.2pt"
                     }).x;
                     var dateWidth = o2.getTextSize(this.layout_issuanceDate.get("text"), {
                         "font-size":"16pt",
-                        "font-family":"'Times New Roman',仿宋_GB2312",
+                        "font-family":"AppleMyungjo, Batang, Noto Serif KR, serif",
                         "letter-spacing": "-0.2pt"
                     }).x;
 

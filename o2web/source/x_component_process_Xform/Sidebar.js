@@ -357,7 +357,7 @@ MWF.xApplication.process.Xform.Sidebar = MWF.APPSidebar =  new Class(
                 "id": o2.uuid(),
                 "asyncSupported": false,
                 "soleDirect": false,
-                "name": "继续流转",
+                "name": "계속 진행",
                 "alias": "",
                 "selectConfigList": []
             }];

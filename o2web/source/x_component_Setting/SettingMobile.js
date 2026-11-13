@@ -169,11 +169,11 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
                 this.packInfo = json.data;
                 this.showPackInfoDetail();
             } else {
-                console.log("查询打包信息失败。。。")
+                console.log("패키징 정보 조회에 실패했습니다.")
                 this.loadConfigProxy();
             }
         }.bind(this), function(err){
-            console.log("错误拉，没有找到打包信息！");
+            console.log("오류: 패키징 정보를 찾지 못했습니다!");
             console.log(err);
             this.hiddenLoading();
             this.loadConfigProxy();
@@ -384,7 +384,7 @@ MWF.xApplication.Setting.AppPackOnlineDocument = new Class({
                 this.app.notice(error, "error", this.contentAreaNode);
             }.bind(this));
         } else {
-            console.log("没有打包信息，不能发布");
+            console.log("패키징 정보가 없어 배포할 수 없습니다");
         }
     },
     // 重新输入 提交表单
@@ -803,7 +803,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
         new Element("i", { "class": "icon14_menu_add" }).inject(span);
         addLi.addEvents({
             "click": function (ev) {
-                console.log("点击了新增，属于 " + parentMenu.name);
+                console.log("새 하위 메뉴 추가 클릭, 상위 메뉴: " + parentMenu.name);
                 this.createNewSubMenuMock(parentMenu);
                 ev.stopPropagation()
             }.bind(this)
@@ -912,7 +912,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
         let order = "000001";
         if (this.menuList && this.menuList.length > 0) {
             let bigestOrder = this.menuList[this.menuList.length-1].order;//最后一条是最大的号码
-            console.log("最大的order " + bigestOrder);
+            console.log("가장 큰 order " + bigestOrder);
             const intOrder = parseInt(bigestOrder);
             if (!isNaN(intOrder)) {
                 let o = intOrder + 1;
@@ -922,7 +922,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
                 }
                 order = os;
             }
-            console.log("最大的order " + intOrder);
+            console.log("가장 큰 order " + intOrder);
         }
         // id mock_开头 正式保存的时候知道是新增的 可以清除 后台生成id
         let body = {
@@ -970,7 +970,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
     deleteAction: function(menu) {
         if (menu.id) {
             if (menu.id.startsWith("mock_")) {
-                console.log("没有保存到数据库的数据 直接删除就行。");
+                console.log("DB에 저장되지 않은 데이터이므로 바로 삭제합니다.");
                 this.removeDataUI(menu);
             }else {
                 this.confirm(this.lp.alert, this.lp.mobile_mpweixin_menu_delete_alert_msg, function () {
@@ -994,7 +994,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
                 const element = this.menuList[index];
                 if (element.id === menu.id) {
                     this.menuList.erase(menu);
-                    console.log("删除成功。。。。。上级")
+                    console.log("삭제 완료(상위 메뉴)")
                     break;
                 }
                 var flag = false;
@@ -1004,7 +1004,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument = new Class({
                         if (child.id === menu.id) {
                             flag = true;
                             element.sub_button.erase(menu);
-                            console.log("删除成功。。。。子级。")
+                            console.log("삭제 완료(하위 메뉴)")
                         }
                     }
                 }
@@ -1285,7 +1285,7 @@ MWF.xApplication.Setting.MPWeixinMenuSettingDocument.MenuForm = new Class({
         this.menu.order = order;
         //父菜单 只需要name和order
         if (this.haSubMenus && this.haSubMenus === true) {
-            console.log("存在子菜单菜单");
+            console.log("하위 메뉴가 있습니다");
         }else {
             var type = this.menu.type;
             if (type === "view") { //网页

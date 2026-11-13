@@ -1862,8 +1862,8 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             });
 
             const buttonHtml = `
-            <oo-button class="button-ok" style="width: 6rem"  text="查询" left-icon="search"></oo-button>
-            <oo-button class="button-cancel" type="cancel" text="重置" left-icon="process-cancel"></oo-button>
+            <oo-button class="button-ok" style="width: 6rem"  text="조회" left-icon="search"></oo-button>
+            <oo-button class="button-cancel" type="cancel" text="초기화" left-icon="process-cancel"></oo-button>
         `;
             this.viewSearchActionArea.insertAdjacentHTML("beforeend", buttonHtml);
 
@@ -1944,7 +1944,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                 this.fulltextSearchButton = new Element("oo-button");
                 this.fulltextSearchButton.setAttribute('type', 'default');
                 if (!o2.isMediaMobile()) this.fulltextSearchButton.setAttribute('left-icon', 'search');
-                this.fulltextSearchButton.setAttribute('text', '查询');
+                this.fulltextSearchButton.setAttribute('text', '조회');
                 this.viewFulltextSearchAreaNode.appendChild(this.fulltextSearchButton);
 
                 this.fulltextSearchButton.addEventListener('click', ()=>{
@@ -1965,7 +1965,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
                     var div = new Element('div.search-fulltext-more', {styles: {'font-size': '1.15rem'}});
                     this.moreSearchButton = new Element("oo-button");
                     this.moreSearchButton.setAttribute('type', (o2.isMediaMobile()) ? 'icon' : 'icon-light');
-                    this.moreSearchButton.setAttribute('title', '更多筛选');
+                    this.moreSearchButton.setAttribute('title', '추가 필터');
                     this.moreSearchButton.setAttribute('left-icon', o2.isMediaMobile() ? 'search' : 'jiekoupeizhi2');
                     div.appendChild(this.moreSearchButton);
                     this.viewFulltextSearchAreaNode.appendChild(div);
@@ -2005,7 +2005,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
         },
 
         _showFilterSearch: function(ignoreAction){
-            this.moreSearchButton?.setAttribute('title', '全文检索');
+            this.moreSearchButton?.setAttribute('title', '전체 텍스트 검색');
             this.fulltextSearchInput?.addClass('hide');
             this.fulltextSearchButton?.addClass('hide');
             this.viewSearchAreaNode?.removeClass('hide');
@@ -2023,7 +2023,7 @@ MWF.xApplication.query.Query.Viewer = MWF.QViewer = new Class(
             if(!ignoreAction)this._cancelFilter();
         },
         _hideFilterSearch: function( ignoreAction ){
-            this.moreSearchButton?.setAttribute('title', '更多筛选');
+            this.moreSearchButton?.setAttribute('title', '추가 필터');
             this.fulltextSearchInput?.removeClass('hide');
             this.fulltextSearchButton?.removeClass('hide');
             this.viewSearchAreaNode?.addClass('hide');
@@ -4919,7 +4919,7 @@ MWF.xApplication.query.Query.Viewer.Exporter = new Class({
             </div>
             ${rangeHtml}
             <div>
-                <div style="padding: 0.8em 1em; font-size: 1.14286rem; display: ${this.options.allowSelectColumn?'block':'none'};">选择列</div>
+                <div style="padding: 0.8em 1em; font-size: 1.14286rem; display: ${this.options.allowSelectColumn?'block':'none'};">열 선택</div>
                 <div class="selector"></div>
             </div>
         </div>

@@ -4,7 +4,7 @@ CKEDITOR.plugins.add( 'doc_subject', {
         editor.widgets.add( 'doc_subject', {
             draggable: false,
             template:
-                '<div class="o2_editorPlugin_doc_subject">文件标题</div>',
+                '<div class="o2_editorPlugin_doc_subject">문서 제목</div>',
 
             allowedContent:
                 'div(o2_editorPlugin_doc_subject)',

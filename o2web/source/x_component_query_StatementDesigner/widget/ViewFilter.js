@@ -1413,10 +1413,10 @@ MWF.xApplication.query.StatementDesigner.widget.ViewFilter.ItemParameter = new C
         var value = "";
         if( this.data.valueType === "script" ){
             var code = (this.data.valueScript && this.data.valueScript.code) ? this.data.valueScript.code : "";
-            value =  " " + (lp.script||"脚本") +":\"" + code.substr(0, 200) + "\"";
+            value =  " " + (lp.script||"스크립트") +":\"" + code.substr(0, 200) + "\"";
         }else{
             value = (this.data.formatType === "numberValue") ? (" " + this.data.value) : (" \"" + this.data.value + "\"");
-            value = " " + (lp.input||"输入") + ":" + value;
+            value = " " + (lp.input||"입력") + ":" + value;
         }
         return this.data.title + " " + this.data.parameter + value;
     },
@@ -1515,7 +1515,7 @@ MWF.xApplication.query.StatementDesigner.widget.ViewFilter.ItemFilter = new Clas
         var lp = MWF.APPDSMD.LP.filter;
         var value = "";
         if( this.data.code && this.data.code.code ){
-            value =  " " + (lp.script||"脚本") +":\"" + this.data.code.code.substr(0, 200) + "\"";
+            value =  " " + (lp.script||"스크립트") +":\"" + this.data.code.code.substr(0, 200) + "\"";
         }else if( this.data.value ){
             value = this.data.formatType === "numberValue" ? this.data.value : " \""+this.data.value+"\""
         }
@@ -1544,10 +1544,10 @@ MWF.xApplication.query.StatementDesigner.widget.ViewFilter.ItemParameterForm = n
         var value = "";
         if( this.data.valueType === "script" ){
             var code = (this.data.valueScript && this.data.valueScript.code) ? this.data.valueScript.code : "";
-            value =  " " + (lp.script||"脚本") +":\"" + code.substr(0, 200) + "\"";
+            value =  " " + (lp.script||"스크립트") +":\"" + code.substr(0, 200) + "\"";
         }else{
             value = (this.data.formatType === "numberValue") ? (" " + this.data.value) : (" \"" + this.data.value + "\"");
-            value = " " + (lp.input||"输入") + ":" + value;
+            value = " " + (lp.input||"입력") + ":" + value;
         }
         return (this.data.title || "") + " " + this.data.parameter + value;
     },

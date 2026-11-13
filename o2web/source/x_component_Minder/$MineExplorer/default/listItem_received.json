@@ -26,7 +26,7 @@
     {
       "name": "creator",
       "head": {
-        "html": "<th styles='listViewTableCenterTh'>创建人</th>",
+        "html": "<th styles='listViewTableCenterTh'>작성자</th>",
         "width": "11%"
       },
       "content": {
@@ -48,7 +48,7 @@
         "html": "<td styles='listViewTableImgTd' valign='middle' align='center'><div item='sharedIcon' styles='listSharedIcon' class='ooicon-share mainColor_color'></div></td>",
         "items": {
           "sharedIcon" : {
-            "attr" : "title^^已分享",
+            "attr" : "title^^공유됨",
             "show" : "function(d){ return d.shared }",
             "event" : "click^^function(d, ev){ this.showShareRecord(ev) }"
           }

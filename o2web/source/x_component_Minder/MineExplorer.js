@@ -238,7 +238,7 @@ MWF.xApplication.Minder.MineExplorer.Tree.Node = new Class({
     },
     edit : function( ev ){
         var form = new MWF.xApplication.Minder.FolderForm(this.explorer, this.data, {
-            title : "编辑目录"
+            title : "폴더 편집"
         }, {
             app: this.app
         });

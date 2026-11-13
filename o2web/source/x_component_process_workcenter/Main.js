@@ -389,7 +389,7 @@ MWF.xApplication.process.workcenter.Main = new Class({
 			var map = {}, mapById = {};
 			data[0].each(function (d) {
 				if (d.processList && d.processList.length){
-					var type = d.applicationCategory || "未分类";
+					var type = d.applicationCategory || "미분류";
 					if( !map[type] )map[type] = [];
 					map[type].push(d);
 
@@ -399,7 +399,7 @@ MWF.xApplication.process.workcenter.Main = new Class({
 				}
 			});
 			data[2].each(function (d) {
-				var type = d.appType || "未分类";
+				var type = d.appType || "미분류";
 				if( !map[type] )map[type] = [];
 				map[type].push(d);
 
@@ -423,8 +423,8 @@ MWF.xApplication.process.workcenter.Main = new Class({
 			array.sort(function (a1, b1) {
 				var a = a1.key, b = b1.key;
 
-				if( a === "未分类" )return 1;
-				if( b === "未分类" )return -1;
+				if( a === "미분류" )return 1;
+				if( b === "미분류" )return -1;
 
 				var n = !isNaN(a - 0), n2 = !isNaN(b - 0);
 				if (n && n2) {

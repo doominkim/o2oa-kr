@@ -6,9 +6,9 @@ CKEDITOR.plugins.add( 'doc_attachment', {
             template:
                 '<table class="o2_editorPlugin_doc_attachment" width="100%" cellpadding="0" cellspacing="0" border="0">' +
                 '   <tr><td class="o2_editorPlugin_doc_attachment_title_td">' +
-                '       <span>　　</span><span class="o2_editorPlugin_doc_attachment_title">附件：</span>' +
+                '       <span>　　</span><span class="o2_editorPlugin_doc_attachment_title">첨부:</span>' +
                 '   </td><td class="o2_editorPlugin_doc_attachment_title_content_td">' +
-                '       <span class="o2_editorPlugin_doc_attachment_content">附件名称</span>' +
+                '       <span class="o2_editorPlugin_doc_attachment_content">첨부 파일명</span>' +
                 '   </td></tr>' +
                 '</table>',
 

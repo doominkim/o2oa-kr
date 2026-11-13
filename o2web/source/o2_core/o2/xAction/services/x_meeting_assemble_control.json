@@ -1,8 +1,8 @@
 {
   "getCurrentPerson" : {"uri": "/jaxrs/person"},
 
-  "listUnitWithPerson": {"uri": "/jaxrs/unit/list/person/object", "method": "POST"}, //获取人员所在的组织
-  "listUnitWithPersonSupNested" :  {"uri": "/jaxrs/unit/list/person/sup/nested", "method": "POST"}, //获取人员所在的所有组织
+  "listUnitWithPerson": {"uri": "/jaxrs/unit/list/person/object", "method": "POST"}, //사용자가 속한 조직 조회
+  "listUnitWithPersonSupNested" :  {"uri": "/jaxrs/unit/list/person/sup/nested", "method": "POST"}, //사용자가 속한 모든 조직 조회
 
   "addBuilding": {"uri": "/jaxrs/building","method": "POST"},
   "listBuilding": {"uri": "/jaxrs/building/list"},

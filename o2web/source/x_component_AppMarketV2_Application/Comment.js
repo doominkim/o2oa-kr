@@ -451,7 +451,7 @@ MWF.xApplication.AppMarketV2.Application.Comment.ViewPage= new Class({
         }
         var cleardiv = new Element("div",{"style":"clear:both"}).inject(content);
         var commentdiv = new Element("div").inject(content);
-        new Element("div",{"class":"comment_dlg_title","text":"评论："}).inject(commentdiv);
+        new Element("div",{"class":"comment_dlg_title","text":"댓글: "}).inject(commentdiv);
         inputdiv = new Element("div",{"class":"comment_dlg_input_div"}).inject(commentdiv);
         commentcontentNode = new Element("textarea",{"class":"comment_dlg_input"}).inject(inputdiv);
         o2.DL.open({

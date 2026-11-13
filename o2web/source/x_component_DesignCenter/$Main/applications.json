@@ -2,37 +2,37 @@
   {
     "name": "ApplicationExplorer",
     "path": "process.ApplicationExplorer",
-    "title": "流程管理平台",
+    "title": "프로세스 관리 플랫폼",
     "iconPath": "appicon.png"
   },
   {
     "name": "PortalExplorer",
     "path": "portal.PortalExplorer",
-    "title": "门户管理平台",
+    "title": "포털 관리 플랫폼",
     "iconPath": "appicon.png"
   },
   {
     "name": "cmsManager",
     "path": "cms.Column",
-    "title": "内容管理平台",
+    "title": "게시판 관리 플랫폼",
     "iconPath": "appicon.png"
   },
   {
     "name": "DataExplorer",
     "path": "query.QueryExplorer",
-    "title": "数据中心平台",
+    "title": "데이터 센터 플랫폼",
     "iconPath": "appicon.png"
   },
   {
     "name": "service.ServiceManager",
     "path": "service.ServiceManager",
-    "title": "服务管理",
+    "title": "서비스 관리",
     "iconPath": "appicon.png"
   },
   {
     "name": "AppCenter",
     "path": "AppCenter",
-    "title": "应用管理",
+    "title": "앱 관리",
     "iconPath": "appicon.png",
     "allowList": ["xadmin", "Manager"]
   }

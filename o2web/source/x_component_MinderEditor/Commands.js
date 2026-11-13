@@ -40,7 +40,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
         this.commands = {
             undo: {
                 icon: "undo",
-                locale: "撤销",
+                locale: "실행 취소",
                 modle : ["edit"],
                 key: "Ctrl + Z",
                 disable: function () {
@@ -52,7 +52,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             },
             redo: {
                 icon: "redo",
-                locale: "重做",
+                locale: "다시 실행",
                 modle : ["edit"],
                 key: "Ctrl + Y",
                 disable: function () {
@@ -65,7 +65,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             appendChild: {
                 icon: "insert_sub",
                 modle : ["edit"],
-                locale: layout.mobile ? "下级" : "插入下级主题",
+                locale: layout.mobile ? "하위" : "하위 주제 삽입",
                 key: ["Tab", "Insert"],
                 isDefaultKey: true,
                 disable: function () {
@@ -78,7 +78,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             appendParent: {
                 icon: "insert_par",
                 modle : ["edit"],
-                locale: layout.mobile ? "上级" : "插入上级主题",
+                locale: layout.mobile ? "상위" : "상위 주제 삽입",
                 key: "Shit + Tab",
                 disable: function () {
                     return this.minder.queryCommandState('AppendParentNode') === -1;
@@ -90,7 +90,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             appendSibling: {
                 icon: "insert_sibling",
                 modle : ["edit"],
-                locale: layout.mobile ? "同级" : "插入同级主题",
+                locale: layout.mobile ? "같은 수준" : "같은 수준 주제 삽입",
                 key: "Enter",
                 isDefaultKey: true,
                 disable: function () {
@@ -103,7 +103,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             arrangeUp: {
                 icon: "up",
                 modle : ["edit"],
-                locale: "上移",
+                locale: "위로 이동",
                 key: "Alt + Up",
                 isDefaultKey: true,
                 disable: function () {
@@ -116,7 +116,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             arrangeDown: {
                 icon: "down",
                 modle : ["edit"],
-                locale: "下移",
+                locale: "아래로 이동",
                 key: "Alt + Down",
                 isDefaultKey: true,
                 disable: function () {
@@ -129,7 +129,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             edit: {
                 icon: "edit",
                 modle : ["edit"],
-                locale: "编辑",
+                locale: "편집",
                 key: "F2",
                 disable: function () {
                     return this.minder.queryCommandState('text') === -1
@@ -141,7 +141,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             remove: {
                 icon: "delete",
                 modle : ["edit"],
-                locale: "删除",
+                locale: "삭제",
                 key: "Delete",
                 isDefaultKey: true,
                 disable: function () {
@@ -154,7 +154,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             hyperLink: {
                 icon: "link",
                 modle : ["edit"],
-                locale: "链接",
+                locale: "링크",
                 key: "Alt + L",
                 disable: function () {
                     return this.minder.queryCommandState('HyperLink') === -1
@@ -166,7 +166,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             image: {
                 icon: "image",
                 modle : ["edit"],
-                locale: "图片",
+                locale: "이미지",
                 key: "Alt + M",
                 disable: function () {
                     return this.minder.queryCommandState('Image') === -1
@@ -176,7 +176,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
                 }.bind(this)
             },
             note: {
-                title: "备注",
+                title: "메모",
                 modle : ["edit"],
                 disable: function () {
                     return this.minder.queryCommandState('note') === -1
@@ -194,7 +194,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             priority: {
                 icon: "priority",
                 modle : ["edit"],
-                locale: "优先级",
+                locale: "우선순위",
                 key: "Alt + G",
                 disable: function () {
                     return this.minder.queryCommandState("priority") === -1
@@ -209,7 +209,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             progress: {
                 icon: "progress",
                 modle : ["edit"],
-                locale: "进度",
+                locale: "진행률",
                 key: "Alt + P",
                 disable: function () {
                     return this.minder.queryCommandState("progress") === -1
@@ -222,7 +222,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
                 }.bind(this)
             },
             resource: {
-                title: "标签",
+                title: "태그",
                 modle : ["edit"],
                 disable: function () {
                     return this.minder.queryCommandState('resource') === -1
@@ -240,7 +240,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             template: {
                 icon: "template",
                 modle : ["edit","read"],
-                title: "模板",
+                title: "템플릿",
                 disable: function () {
                     return this.minder.queryCommandState('template') === -1
                 }.bind(this),
@@ -251,7 +251,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             theme: {
                 icon: "theme",
                 modle : ["edit","read"],
-                title: "主题",
+                title: "테마",
                 disable: function () {
                     return this.minder.queryCommandState('theme') === -1
                 }.bind(this),
@@ -263,7 +263,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             resetlayout: {
                 icon: "resetlayout",
                 modle : ["edit","read"],
-                title: "整理布局",
+                title: "레이아웃 정리",
                 key: "Ctrl + Shift + L",
                 isDefaultKey: true,
                 disable: function () {
@@ -276,7 +276,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             clearstyle: {
                 icon: "clear",
                 modle : ["edit"],
-                locale: "清除样式",
+                locale: "스타일 지우기",
                 disable: function () {
                     return this.minder.queryCommandState('clearstyle') === -1
                 }.bind(this),
@@ -287,7 +287,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             copystyle: {
                 icon: "copystyle",
                 modle : ["edit"],
-                locale: "拷贝样式",
+                locale: "스타일 복사",
                 disable: function () {
                     return this.minder.queryCommandState('copystyle') === -1
                 }.bind(this),
@@ -298,7 +298,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             pastestyle: {
                 icon: "pastestyle",
                 modle : ["edit"],
-                locale: "粘贴样式",
+                locale: "스타일 붙여넣기",
                 disable: function () {
                     return this.minder.queryCommandState('pastestyle') === -1
                 }.bind(this),
@@ -308,7 +308,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             },
 
             fontfamily: {
-                title: "字体",
+                title: "글꼴",
                 modle : ["edit"],
                 //key : "Alt + T",
                 disable: function () {
@@ -322,7 +322,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
                 }.bind(this)
             },
             fontsize: {
-                title: "字号",
+                title: "글꼴 크기",
                 modle : ["edit"],
                 //key : "Alt + H",
                 disable: function () {
@@ -338,7 +338,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             italic: {
                 icon: "italic",
                 modle : ["edit"],
-                title: "斜体",
+                title: "기울임꼴",
                 key: "Ctrl + I",
                 isDefaultKey: true,
                 disable: function () {
@@ -351,7 +351,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             bold: {
                 icon: "bold",
                 modle : ["edit"],
-                title: "加粗",
+                title: "굵게",
                 key: "Ctrl + B",
                 isDefaultKey: true,
                 disable: function () {
@@ -364,7 +364,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             forecolor: {
                 icon: "forecolor",
                 modle : ["edit"],
-                title: "字体颜色",
+                title: "글꼴 색",
                 action: function () {
                     ( this.minder.queryCommandState('forecolor') === -1 || !this.currentForecolor ) || this.minder.execCommand('forecolor', this.currentForecolor);
                 }.bind(this),
@@ -378,7 +378,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             background: {
                 icon: "background",
                 modle : ["edit"],
-                title: "背景颜色",
+                title: "배경색",
                 action: function () {
                     ( this.minder.queryCommandState('background') === -1 || !this.currentBackgroundcolor ) || this.minder.execCommand('background', this.currentBackgroundcolor);
                 }.bind(this),
@@ -393,7 +393,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             expandLevel: {
                 icon: "expand",
                 modle : ["edit","read"],
-                title: "展开节点",
+                title: "노드 펼치기",
                 //key : "Alt + N",
                 disable: function () {
                     return false;
@@ -408,7 +408,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             selectAll: {
                 icon: "select",
                 modle : ["edit","read"],
-                title: "选择",
+                title: "선택",
                 //key : "Alt + S",
                 disable: function () {
                     return false;
@@ -422,7 +422,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             },
             zoom : {
                 module : ["edit","read"],
-                title : "缩放",
+                title : "확대/축소",
                 disable : function(){ return false },
                 init : function( container, command ){
                     this.initZoomArea(container, command);
@@ -431,7 +431,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             camera : {
                 icon: "camera",
                 module : ["edit","read"],
-                title : "根节点居中",
+                title : "루트 노드 가운데 정렬",
                 disable: function () {
                     return false;
                 }.bind(this),
@@ -442,7 +442,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             preview : {
                 icon: "preview",
                 module : ["edit","read"],
-                title : "预览",
+                title : "미리 보기",
                 active : true,
                 disable: function () {
                     return false;
@@ -461,7 +461,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             move : {
                 icon: "move",
                 module : ["edit","read"],
-                title : "允许拖拽",
+                title : "끌기 허용",
                 disable: function () {
                     return false;
                 }.bind(this),
@@ -477,7 +477,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             search: {
                 icon: "search",
                 module : ["edit","read"],
-                title : "搜索",
+                title : "검색",
                 key : "Ctrl + F",
                 active : false,
                 setDisable: function () {
@@ -497,7 +497,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             help : {
                 icon: "help",
                 modle : ["edit","read"],
-                title: "帮助",
+                title: "도움말",
                 key : "Ctrl + Alt + H",
                 disable: function () {
                     return false;
@@ -512,7 +512,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             save : {
                 icon: "save",
                 modle : ["edit"],
-                locale: "保存",
+                locale: "저장",
                 key : "Ctrl + S",
                 disable: function () {
                     return false;
@@ -527,7 +527,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             export : {
                 icon: "export",
                 modle : ["edit"],
-                locale: "导出",
+                locale: "내보내기",
                 disable: function () {
                     return false;
                 }.bind(this),
@@ -538,7 +538,7 @@ MWF.xApplication.MinderEditor.Commands = new Class({
             menu : {
                 icon: "menu",
                 modle : ["edit"],
-                locale: "菜单",
+                locale: "메뉴",
                 disable: function () {
                     return false;
                 }.bind(this),
@@ -1105,11 +1105,11 @@ MWF.xApplication.MinderEditor.Commands = new Class({
         } else {
             this.resourceMaskNode.setStyle("display", "");
         }
-        this.addResourceInput.placeholder = "选择节点编辑标签";
+        this.addResourceInput.placeholder = "노드를 선택해 태그를 편집하세요";
     },
     setResourceNormal: function () {
         if (this.resourceMaskNode)this.resourceMaskNode.setStyle("display", "none");
-        this.addResourceInput.placeholder = "输入文字添加标签";
+        this.addResourceInput.placeholder = "태그를 입력하세요";
     },
     initResource: function (container, command) {
         this.resourceNode = new Element("div.resourceNode", {
@@ -1117,10 +1117,10 @@ MWF.xApplication.MinderEditor.Commands = new Class({
         }).inject(container);
         var inputContainer = new Element("div", {styles: {overflow: "hidden"}}).inject(this.resourceNode);
         this.addResourceInput = new Element("input", {
-            placeholder: "输入文字添加标签", styles: this.css.addResourceInput
+            placeholder: "태그를 입력하세요", styles: this.css.addResourceInput
         }).inject(inputContainer);
         this.addResourceBotton = new Element("div", {
-            text: "添加",
+            text: "추가",
             styles: this.css.addResourceBotton,
             events: {
                 click: function () {
@@ -1299,19 +1299,19 @@ MWF.xApplication.MinderEditor.Commands = new Class({
         var command = this.commands["note"];
         if (!this.noteTextNode) {
             var titleNode = new Element("div", {
-                "text": "备注",
+                "text": "메모",
                 "styles": this.css.noteTitleNode
             }).inject(container);
 
             new Element("a", {
-                text: "支持GFM语法",
+                text: "GFM 문법 지원",
                 href: "../x_component_MinderEditor/$Commands/GFMDescription.html",
                 "target": "_blank",
                 "styles": this.css.noteLinkNode
             }).inject(titleNode);
 
             this.noteTextNode = new Element("div", {
-                text: "请选择节点添加备注",
+                text: "메모를 추가할 노드를 선택하세요",
                 "styles": this.css.noteTextNode
             }).inject(container);
         }

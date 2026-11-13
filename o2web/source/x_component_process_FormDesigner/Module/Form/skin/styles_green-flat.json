@@ -1,5 +1,5 @@
 {
-  "name": "绿色扁平",
+  "name": "녹색 플랫",
   "form": {
     "styles":{
       "background-color": "#e3f3f0"
@@ -7,7 +7,7 @@
   },
   "label": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "background-color": "#038d73",
         "height": "40px",
@@ -21,7 +21,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "left",
         "font-size": "24px",
@@ -33,7 +33,7 @@
     },
 
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {
         "background-color": "#fafafa", //#ECF6F4
         "height": "40px",
@@ -49,7 +49,7 @@
 
   "div": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "background-color": "#038d73",
         "height": "40px",
@@ -63,7 +63,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "left",
         "font-size": "24px",
@@ -74,7 +74,7 @@
       }
     },
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {
         "background-color": "#fafafa", //#ECF6F4
         "height": "40px",
@@ -87,7 +87,7 @@
       }
     },
     "sectionContainer": {
-      "name": "区段容器",
+      "name": "섹션 컨테이너",
       "styles": {
         "background-color":"#FFF",
         "border":"1px solid #E1E1E1",
@@ -95,7 +95,7 @@
       }
     },
     "content" : {
-      "name": "内容容器",
+      "name": "콘텐츠 컨테이너",
       "styles": {
         "width": "1300px",
         "min-width": "0px",

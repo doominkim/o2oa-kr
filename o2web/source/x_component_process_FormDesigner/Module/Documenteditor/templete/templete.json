@@ -1,42 +1,42 @@
 {
   "standard": {
-    "name": "标准公文类",
+    "name": "표준 공문",
     "file": "standard.html",
     "layouts": {
     }
   },
   "meeting": {
-    "name": "纪要通报类",
+    "name": "회의록·통보",
     "file": "meeting.html",
     "layouts": {
     }
   },
   "letter": {
-    "name": "信函类",
+    "name": "서신",
     "file": "letter.html",
     "layouts": {
     }
   },
   "command": {
-    "name": "命令类",
+    "name": "명령",
     "file": "command.html",
     "layouts": {
     }
   },
   "party": {
-    "name": "党委纪委类",
+    "name": "당위원회·기율위원회",
     "file": "party.html",
     "layouts": {
     }
   },
   "party-meeting": {
-    "name": "党委纪要类",
+    "name": "당위원회 회의록",
     "file": "party-meeting.html",
     "layouts": {
     }
   },
   "empty": {
-    "name": "空模板（仅正文）",
+    "name": "빈 템플릿(본문만)",
     "file": "empty.html",
     "layouts": {
     }

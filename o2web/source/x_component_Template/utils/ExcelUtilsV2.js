@@ -82,7 +82,7 @@ MWF.ExcelUtilsV2 = {
             if (/[0-9]/.test(char)) {
                 numbers += char;
             } else {
-                throw new Error(str+'不是正确的单元格格式');
+                throw new Error(str+'은(는) 올바른 셀 형식이 아닙니다');
             }
         }
 
@@ -103,7 +103,7 @@ MWF.ExcelUtilsV2 = {
         }
 
         if (numbers === "") {
-            throw new Error(str+'不是正确的单元格格式');
+            throw new Error(str+'은(는) 올바른 셀 형식이 아닙니다');
         }
 
         return {
@@ -319,15 +319,15 @@ MWF.ExcelExporter = new Class({
             'hasTitle': true,
             'headText': '',
             'headStyle': {
-                font: { name: '宋体', family: 4, size: 20, bold: true },
+                font: { name: 'Malgun Gothic', family: 4, size: 20, bold: true },
                 alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
             },
             'columnTitleStyle': {
-                font: { name: '宋体', family: 4, size: 12, bold: true },
+                font: { name: 'Malgun Gothic', family: 4, size: 12, bold: true },
                 alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
             },
             'columnContentStyle': {
-                font: { name: '宋体', family: 4, size: 12, bold: false },
+                font: { name: 'Malgun Gothic', family: 4, size: 12, bold: false },
                 alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
             },
             sheetName: "",
@@ -397,16 +397,16 @@ MWF.ExcelExporter.Sheet = new Class({
         'hasTitle': true,
         'headText': '',
         'headStyle': {
-            font: { name: '宋体', family: 4, size: 20, bold: true },
+            font: { name: 'Malgun Gothic', family: 4, size: 20, bold: true },
             alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
         },
         'columnTitleStyle': {
-            font: { name: '宋体', family: 4, size: 12, bold: true },
+            font: { name: 'Malgun Gothic', family: 4, size: 12, bold: true },
             border: { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} },
             alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
         },
         'columnContentStyle': {
-            font: { name: '宋体', family: 4, size: 12, bold: false },
+            font: { name: 'Malgun Gothic', family: 4, size: 12, bold: false },
             border: { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} },
             alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
         },
@@ -514,7 +514,7 @@ MWF.ExcelExporter.Sheet = new Class({
     },
 
     _setTitleCellStyle: function (cell){
-        //cell.font = { name: '宋体', family: 4, size: 12, bold: true };
+        //cell.font = { name: 'Malgun Gothic', family: 4, size: 12, bold: true };
         // cell.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFFFFF'} };
         //cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
         Object.each(this.options.columnTitleStyle || {}, function (value, key){

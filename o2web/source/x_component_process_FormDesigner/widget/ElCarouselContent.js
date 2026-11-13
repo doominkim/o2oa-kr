@@ -93,9 +93,9 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 	},
 	getTitle: function(){
 		if( this.data.type === "img" ){
-			return "图片";
+			return "이미지";
 		}else if( this.data.type === "text" ){
-			return "文本";
+			return "텍스트";
 		}else{
 			return "";
 		}
@@ -183,7 +183,7 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 		var parentTextList = [];
 		var parent = this;
 		while (parent){
-			parentTextList.push( parent.data.type==="text" ? "文本" : "图片");
+			parentTextList.push( parent.data.type==="text" ? "텍스트" : "이미지");
 			parent = parent.parentNode;
 		}
 		return parentTextList.reverse().join(".");
@@ -226,7 +226,7 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 				}).inject(this.propertyArea);
 
 				tr = new Element("tr").inject(this.propertyTable);
-				var td = new Element("td", { text: "类型" }).inject(tr);
+				var td = new Element("td", { text: "유형" }).inject(tr);
 				td = new Element("td").inject(tr);
 				var div = new Element( "div").inject(td);
 				var radio_type_1 = new Element( "input", {
@@ -248,7 +248,7 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 						}.bind(this)
 					}
 				}).inject( div );
-				new Element( "span", { "text" : "图片" }).inject(div);
+				new Element( "span", { "text" : "이미지" }).inject(div);
 
 				var radio_type_2 = new Element( "input", {
 					"type" : "radio",
@@ -269,15 +269,15 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 						}.bind(this)
 					}
 				}).inject( div );
-				new Element( "span", { "text" : "文本" }).inject(div);
+				new Element( "span", { "text" : "텍스트" }).inject(div);
 
 
 				// var tr = new Element("tr").inject(this.propertyTable);
-				// var td = new Element("td", { text: "数据路径" }).inject(tr);
+				// var td = new Element("td", { text: "데이터 경로" }).inject(tr);
 				// td = new Element("td").inject(tr);
 				// this.pathInput = new Element("input", {
 				// 	value: this.data.dataPath || "",
-				// 	placeholder: "如: title",
+				// 	placeholder: "예: title",
 				// 	events: {
 				// 		blur: function () {
 				// 			this.data.dataPath = this.pathInput.get("value");
@@ -294,7 +294,7 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 				td = new Element("td", { "colspan": "2" }).inject(tr);
 				MWF.require("MWF.widget.Maplist", function() {
 					var maplist = this.maplist = new MWF.widget.Maplist(td, {
-						"title": "样式",
+						"title": "스타일",
 						"collapse": false,
 						"onChange": function () {
 							this.data.styles = maplist.toJson();
@@ -319,12 +319,12 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 				var tr = new Element("div").inject(this.propertyArea);
 				this.srcScriptTr = tr;
 				new Element("div", {
-					"text" : "通过this.event可以获得当前条目的数据，最终返回图片资源地址文本。" +
-						"系统通用图片获取方法为o2.xDesktop.getImageSrc(imgId)；该方法可用于图片编辑器、html编辑上传的图片；附件、资源文件不可以用本方法。"
+					"text" : "this.event로 현재 항목의 데이터를 가져올 수 있으며, 최종적으로 이미지 리소스 주소 텍스트를 반환합니다." +
+						"시스템 공통 이미지 조회 메서드는 o2.xDesktop.getImageSrc(imgId)입니다. 이미지 편집기와 HTML 편집기로 업로드한 이미지에 사용할 수 있으며, 첨부파일과 리소스 파일에는 사용할 수 없습니다."
 				}).inject( tr );
 				MWF.require("MWF.widget.ScriptArea", function(){
 					this.srcScriptEditor = new MWF.widget.ScriptArea(tr, {
-						"title": "图片资源(src)脚本",
+						"title": "이미지 리소스(src) 스크립트",
 						"isbind": false,
 						"mode": "javascript",
 						"maxObj": this.tree.editor.options.maxObj,
@@ -356,11 +356,11 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 				var tr = new Element("div").inject(this.propertyArea);
 				this.textScriptTr = tr;
 				new Element("div", {
-					"text" : "通过this.event可以获得当前条目的数据，最终返回图片文本内容文本。"
+					"text" : "this.event로 현재 항목의 데이터를 가져올 수 있으며, 최종적으로 텍스트 내용을 반환합니다."
 				}).inject( tr );
 				MWF.require("MWF.widget.ScriptArea", function(){
 					this.textScriptEditor = new MWF.widget.ScriptArea(tr, {
-						"title": "文本内容脚本",
+						"title": "텍스트 내용 스크립트",
 						"isbind": false,
 						"mode": "javascript",
 						"maxObj": this.tree.editor.options.maxObj,
@@ -387,11 +387,11 @@ MWF.xApplication.process.FormDesigner.widget.ElCarouselContent.Tree.Node = new C
 				//clickScript
 				var tr = new Element("div").inject(this.propertyArea);
 				new Element("div", {
-					"text" : "通过this.event[0]可以获得当前条目的数据,通过this.event[1]可获取Event对象。"
+					"text" : "this.event[0]로 현재 항목의 데이터를, this.event[1]로 Event 객체를 가져올 수 있습니다."
 				}).inject( tr );
 				MWF.require("MWF.widget.ScriptArea", function(){
 					this.clickScriptEditor = new MWF.widget.ScriptArea(tr, {
-						"title": "点击事件脚本",
+						"title": "클릭 이벤트 스크립트",
 						"isbind": false,
 						"mode": "javascript",
 						"maxObj": this.tree.editor.options.maxObj,

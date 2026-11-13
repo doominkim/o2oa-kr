@@ -35,7 +35,7 @@ MWF.xApplication.IMV2.Starter = new Class({
         } else if (this.options.businessType === "process") {
             if (this.options.businessId) {
                 //TODO 如果已经存在是否考虑可创建多个，那就需要提示创建新的还是打开老的
-                console.log("根据流程的job id查询，会话是否存在，如果存在，则打开，如果不存在，则创建。jobId: " + this.options.businessId);
+                console.log("결재 job id로 대화방이 있는지 조회합니다. 있으면 열고, 없으면 만듭니다. jobId: " + this.options.businessId);
                 this.findConversationByBusinessId();
             } else {
                 this.app.notice(this.lp.msgNoBusinessId, "error");
@@ -86,7 +86,7 @@ MWF.xApplication.IMV2.Starter = new Class({
         overlay.className = 'loading-overlay';
         const spinner = document.createElement('div');
         spinner.className = 'loading-spinner';
-        const text = document.createTextNode('加载中...');
+        const text = document.createTextNode('불러오는 중...');
         overlay.appendChild(spinner);
         overlay.appendChild(text);
         document.body.appendChild(overlay);
@@ -166,7 +166,7 @@ MWF.xApplication.IMV2.Starter = new Class({
                     const conv = conversationList[index];
                     var conversationItem = new Element("div", {"class": "conversation-item"}).inject(this.conversationChooseListNode);
                     new Element("span", {"text": "【" + conv.title + "】"}).inject(conversationItem);
-                    new Element("span", {"text": "打开", "style": "color: #4A90E2;"}).inject(conversationItem);
+                    new Element("span", {"text": "열기", "style": "color: #4A90E2;"}).inject(conversationItem);
                     conversationItem.store("conversation", conv);
                     conversationItem.addEvents({
                         "click": function (e) {
@@ -434,7 +434,7 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
                 if (e.code === 13) {
                     e.stopPropagation();
                     var searchInputVal = this.shareSearchInputNode.get("value");
-                    console.log('搜索内容: ' + searchInputVal)
+                    console.log('검색어: ' + searchInputVal)
                     this.searchConversationAndPerson(searchInputVal);
                 }
             }.bind(this));
@@ -522,7 +522,7 @@ MWF.xApplication.IMV2.ShareToConversation = new Class({
         return itemNode;
     },
     clickPersonItem: function (person) {
-        console.log('点击人员', person);
+        console.log('사용자 클릭', person);
         MWF.require("MWF.widget.Mask", function () {
             this.mask = new MWF.widget.Mask({"style": "desktop", "zIndex": 50000});
             this.mask.loadNode(this.app.content);

@@ -10,7 +10,7 @@ layout.mobile = true;
 o2.addReady(function () {
     o2.load(["../o2_lib/mootools/plugin/mBox.Notice.js", "../o2_lib/mootools/plugin/mBox.Tooltip.js", "../o2_core/o2/widget/Common.js"], { "sequence": true }, function () {
         //MWF.defaultPath = "../x_desktop"+MWF.defaultPath;
-        MWF.loadLP("zh-cn");
+        MWF.loadLP(MWF.language);
         MWF.require("MWF.xDesktop.Layout", function () {
             MWF.require("MWF.xDesktop.Authentication", null, false);
             MWF.require("MWF.xDesktop.Common", null, false);
@@ -56,7 +56,7 @@ o2.addReady(function () {
                                     jsApiList: ['runtime.info']
                                 });
                                 dd.error(function (err) {
-                                    console.error('钉钉脚本错误 error: ' + JSON.stringify(err));
+                                    console.error('DingTalk 스크립트 오류 error: ' + JSON.stringify(err));
                                 });
                                 dd.ready(function() {
                                     dd.runtime.permission.requestAuthCode({
@@ -133,14 +133,14 @@ o2.addReady(function () {
                                                     }
 
                                                 }.bind(this), "failure": function (xhr, text, error) {
-                                                    layout.notice('钉钉单点认证失败！', 'error');
+                                                    layout.notice('DingTalk SSO 인증에 실패했습니다!', 'error');
                                                     history.replaceState(null, "page", "../x_desktop/appMobile.html?app=process.TaskCenter");
                                                     "appMobile.html?app=process.TaskCenter".toURI().go();
                                                 }.bind(this)
                                             });
                                         }.bind(this),
                                         onFail: function (err) {
-                                            layout.notice('钉钉认证失败', 'error');
+                                            layout.notice('DingTalk 인증에 실패했습니다', 'error');
                                             console.error(err);
                                         }
                                     });
@@ -148,7 +148,7 @@ o2.addReady(function () {
 
 
                             }.bind(this), "failure": function (xhr, text, error) {
-                                layout.notice('请求失败！', 'error');
+                                layout.notice('요청에 실패했습니다!', 'error');
                                 console.error(xhr);
                                 console.error(error);
                              }.bind(this)

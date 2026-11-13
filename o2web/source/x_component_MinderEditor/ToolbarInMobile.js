@@ -105,7 +105,7 @@ MWF.xApplication.MinderEditor.ToolbarInMobile = new Class({
             }
         }).inject(this.container, 'top');
         new Element("i.ooicon-zoom_in", {style:'font-size:16px;padding-right:4px;'}).inject(zoomInAction);
-        new Element("div", {text: '放大'}).inject(zoomInAction);
+        new Element("div", {text: '확대'}).inject(zoomInAction);
 
         var zoomOutAction = new Element("div", {
             styles: buttonStyles,
@@ -116,7 +116,7 @@ MWF.xApplication.MinderEditor.ToolbarInMobile = new Class({
             }
         }).inject(this.container, 'top');
         new Element("i.ooicon-zoom_out", {style:'font-size:16px;padding-right:4px;'}).inject(zoomOutAction);
-        new Element("div", {text: '缩小'}).inject(zoomOutAction);
+        new Element("div", {text: '축소'}).inject(zoomOutAction);
 
         var handFlag = false;
         var handAction = new Element("div", {
@@ -130,7 +130,7 @@ MWF.xApplication.MinderEditor.ToolbarInMobile = new Class({
             }
         }).inject(this.container, 'top');
         new Element("i.ooicon-finger2", {style:'font-size:16px;padding-right:4px;'}).inject(handAction);
-        new Element("div", {text: '拖拽'}).inject(handAction);
+        new Element("div", {text: '끌기'}).inject(handAction);
 
         this.container.getElements("[styles]").each(function (el) {
             if (!el.get("item")) {

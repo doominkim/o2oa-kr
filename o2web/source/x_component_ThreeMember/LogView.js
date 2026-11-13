@@ -1320,7 +1320,7 @@ MWF.xApplication.ThreeMember.LogView.ConfigForm = new Class({
                     module: { text : this.lp.module, notEmpty: true },
                     operation: { text : this.lp.operation, type : "text", notEmpty: true },
                     httpType: { text : this.lp.httpType, type : "select", selectValue: ["", "GET","POST","PUT","DELETE"] , notEmpty: true},
-                    status: { text : this.lp.httpStatus, type : "select", selectValue: ["true", "false"], selectText:["启用","禁用"], notEmpty: true, value: this.data.status === false ? "false": "true" },
+                    status: { text : this.lp.httpStatus, type : "select", selectValue: ["true", "false"], selectText:["사용","사용 안 함"], notEmpty: true, value: this.data.status === false ? "false": "true" },
                     matchUrl: { text : this.lp.httpUrl, notEmpty: true },
                 }
             }, this.app);

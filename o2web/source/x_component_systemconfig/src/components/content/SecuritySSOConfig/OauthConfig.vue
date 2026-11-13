@@ -167,7 +167,7 @@ const editSSOConfig = (data, idx)=>{
   content.show();
 
   o2.DL.open({
-    title: '编辑鉴权配置',
+    title: '인증 설정 편집',
     container,
     maskNode: container,
     width: 580,

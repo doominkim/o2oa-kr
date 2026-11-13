@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>GFM基础书写格式</title>
+    <title>GFM 기본 작성 형식</title>
 
     <link id="prettify-style" href="./prettify-cmd.css" type="text/css" rel="stylesheet">
 
@@ -25,48 +25,48 @@
 <div id="editor-reader-full" class="editor-reader-full-shown" style="position: static;">
     <div id="wmd-preview" class="wmd-preview wmd-preview-full-reader">
         <div class="md-section-divider"></div>
-        <p data-anchor-id="vpmx">GFM 是 Github 拓展的基于 Markdown 的一种纯文本的书写格式。</p>
+        <p data-anchor-id="vpmx">GFM은 GitHub가 Markdown을 기반으로 확장한 일반 텍스트 작성 형식입니다.</p>
 
         <div class="md-section-divider"></div>
-        <h2 data-anchor-id="0op9" id="基础书写格式">基础书写格式</h2>
+        <h2 data-anchor-id="0op9" id="기본-작성-형식">기본 작성 형식</h2>
 
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="q2cg" id="段落">段落</h3>
+        <h3 data-anchor-id="q2cg" id="단락">단락</h3>
 
-        <p data-anchor-id="sbds">在 Markdown 中，连续的一行或多行就是一个段落。用空行来进行切段。</p>
+        <p data-anchor-id="sbds">Markdown에서는 연속된 한 줄 또는 여러 줄이 하나의 단락이 됩니다. 빈 줄로 단락을 나눕니다.</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="6pb4" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="pun">这是第一个段落</span></code></li>
-            <li class="L1"><code class="language-gfm"><span class="pun">我跟上面是同一个段落</span></code></li>
+            <li class="L0"><code class="language-gfm"><span class="pun">첫 번째 단락입니다</span></code></li>
+            <li class="L1"><code class="language-gfm"><span class="pun">위와 같은 단락입니다</span></code></li>
             <li class="L2"><code class="language-gfm"></code></li>
-            <li class="L3"><code class="language-gfm"><span class="pun">这是第二个段落</span></code></li>
+            <li class="L3"><code class="language-gfm"><span class="pun">두 번째 단락입니다</span></code></li>
         </ol></pre>
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="citx" id="大纲">大纲</h3>
+        <h3 data-anchor-id="citx" id="개요">개요</h3>
 
-        <p data-anchor-id="9atw">Markdown 中，使用 <code>#</code> 来定义大纲标题，有多少个 <code>#</code>，就表示是几级的大纲。比如：</p>
+        <p data-anchor-id="9atw">Markdown에서는 <code>#</code>으로 개요 제목을 정의하며, <code>#</code>의 개수가 개요 수준을 나타냅니다. 예:</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="92o3" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="com"># 这是一级标题（会生成&lt;h1&gt;标签）</span></code></li>
+            <li class="L0"><code class="language-gfm"><span class="com"># 1단계 제목입니다(&lt;h1&gt; 태그가 생성됩니다)</span></code></li>
             <li class="L1"><code class="language-gfm"></code></li>
-            <li class="L2"><code class="language-gfm"><span class="pun">这里是段落内容</span></code></li>
+            <li class="L2"><code class="language-gfm"><span class="pun">단락 내용입니다</span></code></li>
             <li class="L3"><code class="language-gfm"></code></li>
-            <li class="L4"><code class="language-gfm"><span class="com">## 这里是二级标题（会生成&lt;h2&gt;标签）</span></code></li>
+            <li class="L4"><code class="language-gfm"><span class="com">## 2단계 제목입니다(&lt;h2&gt; 태그가 생성됩니다)</span></code></li>
             <li class="L5"><code class="language-gfm"></code></li>
-            <li class="L6"><code class="language-gfm"><span class="pun">这里是段落内容</span></code></li>
+            <li class="L6"><code class="language-gfm"><span class="pun">단락 내용입니다</span></code></li>
             <li class="L7"><code class="language-gfm"></code></li>
             <li class="L8"><code class="language-gfm"><span class="pun">...</span></code></li>
             <li class="L9"><code class="language-gfm"></code></li>
-            <li class="L0"><code class="language-gfm"><span class="com">###### 这里是六级标题</span></code></li>
+            <li class="L0"><code class="language-gfm"><span class="com">###### 6단계 제목입니다</span></code></li>
         </ol></pre>
-        <p data-anchor-id="upfh">这种书写方式非常直观自然。</p>
+        <p data-anchor-id="upfh">이 작성 방식은 매우 직관적이고 자연스럽습니다.</p>
 
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="7nka" id="引用内容">引用内容</h3>
+        <h3 data-anchor-id="7nka" id="인용">인용</h3>
 
-        <p data-anchor-id="md05">引用部分的内容只需要在行首加上 <code>&gt;</code> 就可以了。比如：</p>
+        <p data-anchor-id="md05">인용할 내용은 줄 앞에 <code>&gt;</code>만 붙이면 됩니다. 예:</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="2apm" style=""><ol class="linenums">
@@ -76,139 +76,140 @@
                     class="pun">,</span><span class="pln"> that </span><span class="kwd">is</span><span class="pln"> a question</span><span
                     class="pun">.</span></code></li>
         </ol></pre>
-        <p data-anchor-id="yi40">看起来是这样的：</p>
+        <p data-anchor-id="yi40">다음과 같이 표시됩니다:</p>
         <blockquote data-anchor-id="rcsg" class="white-blockquote">
             <p>To be or not to be, that is a question.</p>
         </blockquote>
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="ca9i" id="强调文本">强调文本</h3>
+        <h3 data-anchor-id="ca9i" id="강조-텍스트">강조 텍스트</h3>
 
-        <p data-anchor-id="mmaq">您可以使用<strong>加粗</strong>和<em>斜体</em>来格式化文本内容。</p>
+        <p data-anchor-id="mmaq"><strong>굵게</strong>와 <em>기울임꼴</em>로 텍스트 서식을 지정할 수 있습니다.</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="uxo1" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="pun">加粗使用:</span><span class="pln"> </span><span
-                    class="pun">**这种语法**</span></code></li>
-            <li class="L1"><code class="language-gfm"><span class="pun">斜体使用:</span><span class="pln"> </span><span
-                    class="pun">*这种语法*</span><span class="pln"> </span><span class="pun">或</span><span
-                    class="pln"> _</span><span class="pun">这种语法</span><span class="pln">_</span></code></li>
-            <li class="L2"><code class="language-gfm"><span class="pun">还可以混合使用：**加粗文本中的</span><span
-                    class="pln">_</span><span class="pun">斜体</span><span class="pln">_</span><span class="pun">**</span></code>
+            <li class="L0"><code class="language-gfm"><span class="pun">굵게:</span><span class="pln"> </span><span
+                    class="pun">**이런 문법**</span></code></li>
+            <li class="L1"><code class="language-gfm"><span class="pun">기울임꼴:</span><span class="pln"> </span><span
+                    class="pun">*이런 문법*</span><span class="pln"> </span><span class="pun">또는</span><span
+                    class="pln"> _</span><span class="pun">이런 문법</span><span class="pln">_</span></code></li>
+            <li class="L2"><code class="language-gfm"><span class="pun">함께 쓸 수도 있습니다: **굵은 텍스트 안의 </span><span
+                    class="pln">_</span><span class="pun">기울임꼴</span><span class="pln">_</span><span class="pun">**</span></code>
             </li>
         </ol></pre>
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="tg2m" id="删除线">删除线</h3>
+        <h3 data-anchor-id="tg2m" id="취소선">취소선</h3>
 
-        <p data-anchor-id="r07a">你可以使用 ~~ 包裹一段文本让它拥有
-            <del>删除效果</del>
+        <p data-anchor-id="r07a">텍스트를 ~~로 감싸면
+            <del>취소선 효과</del>
+            를 줄 수 있습니다.
         </p>
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="lgdz" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="pun">这样来~~删除一段文本~~</span></code></li>
+            <li class="L0"><code class="language-gfm"><span class="pun">이렇게 ~~텍스트에 취소선~~을 긋습니다</span></code></li>
         </ol></pre>
         <div class="md-section-divider"></div>
-        <h2 data-anchor-id="nmhu" id="超链接">超链接</h2>
+        <h2 data-anchor-id="nmhu" id="하이퍼링크">하이퍼링크</h2>
 
-        <p data-anchor-id="gnhz">通过 <code>[文本](url)</code> 的形式来添加超链接。比如这个是一个<a href="http://www.o2oa.net"
-                                                                               target="_blank">O2官网</a>的超连接。</p>
+        <p data-anchor-id="gnhz"><code>[텍스트](url)</code> 형식으로 하이퍼링크를 추가합니다. 예를 들어 다음은 <a href="http://www.o2oa.net"
+                                                                               target="_blank">O2 공식 사이트</a>로 가는 하이퍼링크입니다.</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="y8kn" style=""><ol class="linenums">
-            <li class="L0"><code><span class="pun">[2官网](</span><span class="pln">http</span><span class="pun">:</span><span
-                    class="com">//o2oa.net) - 活力办公，创意无限</span></code></li>
+            <li class="L0"><code><span class="pun">[O2 공식 사이트](</span><span class="pln">http</span><span class="pun">:</span><span
+                    class="com">//o2oa.net) - 활기찬 업무, 무한한 창의력</span></code></li>
         </ol></pre>
         <div class="md-section-divider"></div>
-        <h2 data-anchor-id="z94z" id="列表">列表</h2>
+        <h2 data-anchor-id="z94z" id="목록">목록</h2>
 
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="rrgr" id="无序列表">无序列表</h3>
+        <h3 data-anchor-id="rrgr" id="순서-없는-목록">순서 없는 목록</h3>
 
-        <p data-anchor-id="s7fo">在行首添加 <code>*</code> 或 <code>-</code> 可以开启列表模式，比如</p>
+        <p data-anchor-id="s7fo">줄 앞에 <code>*</code> 또는 <code>-</code>를 붙이면 목록 모드가 됩니다. 예:</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="pptp" style=""><ol class="linenums">
             <li class="L0"><code class="language-gfm"><span class="pun">*</span><span class="pln"> </span><span
-                    class="pun">第一，...</span></code></li>
+                    class="pun">첫째, ...</span></code></li>
             <li class="L1"><code class="language-gfm"><span class="pun">*</span><span class="pln"> </span><span
-                    class="pun">第二，...</span></code></li>
+                    class="pun">둘째, ...</span></code></li>
             <li class="L2"><code class="language-gfm"><span class="pun">*</span><span class="pln"> </span><span
-                    class="pun">第三，...</span></code></li>
+                    class="pun">셋째, ...</span></code></li>
             <li class="L3"><code class="language-gfm"></code></li>
             <li class="L4"><code class="language-gfm"><span class="pun">-</span><span class="pln"> </span><span
-                    class="pun">首先，...</span></code></li>
+                    class="pun">먼저, ...</span></code></li>
             <li class="L5"><code class="language-gfm"><span class="pun">-</span><span class="pln"> </span><span
-                    class="pun">其次，...</span></code></li>
+                    class="pun">다음으로, ...</span></code></li>
             <li class="L6"><code class="language-gfm"><span class="pun">-</span><span class="pln"> </span><span
-                    class="pun">最后，...</span></code></li>
+                    class="pun">마지막으로, ...</span></code></li>
         </ol></pre>
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="hlrd" id="有序列表">有序列表</h3>
+        <h3 data-anchor-id="hlrd" id="순서-있는-목록">순서 있는 목록</h3>
 
-        <p data-anchor-id="xc8d">在行首添加数字，就可以开启有序列表模式，比如：</p>
+        <p data-anchor-id="xc8d">줄 앞에 숫자를 붙이면 순서 있는 목록 모드가 됩니다. 예:</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="qdfd" style=""><ol class="linenums">
             <li class="L0"><code class="language-gfm"><span class="lit">1.</span><span class="pln"> </span><span
-                    class="pun">打开冰箱</span></code></li>
+                    class="pun">냉장고 문을 연다</span></code></li>
             <li class="L1"><code class="language-gfm"><span class="lit">2.</span><span class="pln"> </span><span
-                    class="pun">把大象放进去</span></code></li>
+                    class="pun">코끼리를 넣는다</span></code></li>
             <li class="L2"><code class="language-gfm"><span class="lit">3.</span><span class="pln"> </span><span
-                    class="pun">关上冰箱</span></code></li>
+                    class="pun">냉장고 문을 닫는다</span></code></li>
         </ol></pre>
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="l9ci" id="列表嵌套">列表嵌套</h3>
+        <h3 data-anchor-id="l9ci" id="중첩-목록">중첩 목록</h3>
 
-        <p data-anchor-id="hh4i">在上一级列表的基础上加两个空格，即可嵌套列表</p>
+        <p data-anchor-id="hh4i">상위 목록보다 공백 두 칸을 더 들여 쓰면 목록을 중첩할 수 있습니다</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="54pb" style=""><ol class="linenums">
             <li class="L0"><code class="language-gfm"><span class="lit">1.</span><span class="pln"> </span><span
-                    class="pun">打开冰箱</span></code></li>
+                    class="pun">냉장고 문을 연다</span></code></li>
             <li class="L1"><code class="language-gfm"><span class="pln">  </span><span class="lit">1.</span><span
-                    class="pln"> </span><span class="pun">用右手打开</span></code></li>
+                    class="pln"> </span><span class="pun">오른손으로 연다</span></code></li>
             <li class="L2"><code class="language-gfm"><span class="pln">  </span><span class="lit">2.</span><span
-                    class="pln"> </span><span class="pun">轻轻地打开</span></code></li>
+                    class="pln"> </span><span class="pun">살살 연다</span></code></li>
             <li class="L3"><code class="language-gfm"><span class="lit">2.</span><span class="pln"> </span><span
-                    class="pun">把大象放进去</span></code></li>
+                    class="pun">코끼리를 넣는다</span></code></li>
             <li class="L4"><code class="language-gfm"><span class="pln">  </span><span class="pun">*</span><span
-                    class="pln"> </span><span class="pun">不要吐槽</span></code></li>
+                    class="pln"> </span><span class="pun">태클 금지</span></code></li>
             <li class="L5"><code class="language-gfm"><span class="pln">    </span><span class="pun">*</span><span
-                    class="pln"> </span><span class="pun">大象太大</span></code></li>
+                    class="pln"> </span><span class="pun">코끼리가 너무 크다</span></code></li>
             <li class="L6"><code class="language-gfm"><span class="pln">    </span><span class="pun">*</span><span
-                    class="pln"> </span><span class="pun">冰箱太小</span></code></li>
+                    class="pln"> </span><span class="pun">냉장고가 너무 작다</span></code></li>
             <li class="L7"><code class="language-gfm"><span class="pln">    </span><span class="pun">*</span><span
-                    class="pln"> </span><span class="pun">例子很无聊</span></code></li>
+                    class="pln"> </span><span class="pun">예시가 지루하다</span></code></li>
             <li class="L8"><code class="language-gfm"><span class="lit">3.</span><span class="pln"> </span><span
-                    class="pun">关上冰箱</span></code></li>
+                    class="pun">냉장고 문을 닫는다</span></code></li>
         </ol></pre>
-        <p data-anchor-id="zbwc">整体效果：</p>
+        <p data-anchor-id="zbwc">전체 결과:</p>
         <blockquote data-anchor-id="0zo2" class="white-blockquote">
             <ol>
-                <li>打开冰箱 <br>
+                <li>냉장고 문을 연다 <br>
                     <ol>
-                        <li>用右手打开</li>
-                        <li>轻轻地打开</li>
+                        <li>오른손으로 연다</li>
+                        <li>살살 연다</li>
                     </ol>
                 </li>
-                <li>把大象放进去 <br>
+                <li>코끼리를 넣는다 <br>
                     <ul>
-                        <li>不要吐槽</li>
-                        <li>大象太大</li>
-                        <li>冰箱太小</li>
-                        <li>例子很无聊</li>
+                        <li>태클 금지</li>
+                        <li>코끼리가 너무 크다</li>
+                        <li>냉장고가 너무 작다</li>
+                        <li>예시가 지루하다</li>
                     </ul>
                 </li>
-                <li>关上冰箱</li>
+                <li>냉장고 문을 닫는다</li>
             </ol>
         </blockquote>
         <div class="md-section-divider"></div>
-        <h2 data-anchor-id="h26m" id="表格">表格</h2>
+        <h2 data-anchor-id="h26m" id="표">표</h2>
 
-        <p data-anchor-id="auai">表格使用了直观的定义方式，使用 <code>-</code> 和 <code>|</code> 分割行和列。</p>
+        <p data-anchor-id="auai">표는 직관적인 방식으로 정의하며, <code>-</code>와 <code>|</code>로 행과 열을 나눕니다.</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="1bjw" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="pun">月份|收入|支出</span></code></li>
+            <li class="L0"><code class="language-gfm"><span class="pun">월|수입|지출</span></code></li>
             <li class="L1"><code class="language-gfm"><span class="pun">----|----|---</span></code></li>
             <li class="L2"><code class="language-gfm"><span class="lit">8</span><span class="pln">   </span><span
                     class="pun">|</span><span class="lit">1000</span><span class="pun">|</span><span
@@ -220,13 +221,13 @@
                     class="pun">|</span><span class="lit">1400</span><span class="pun">|</span><span
                     class="lit">650</span></code></li>
         </ol></pre>
-        <p data-anchor-id="jgya">看起来效果如下：</p>
+        <p data-anchor-id="jgya">다음과 같이 표시됩니다:</p>
         <table data-anchor-id="1nfi" class="table table-striped-white table-bordered">
             <thead>
             <tr>
-                <th>月份</th>
-                <th>收入</th>
-                <th>支出</th>
+                <th>월</th>
+                <th>수입</th>
+                <th>지출</th>
             </tr>
             </thead>
             <tbody>
@@ -247,11 +248,11 @@
             </tr>
             </tbody>
         </table>
-        <p data-anchor-id="ff3k">其中，航标题后的一行使用的横杆数量是不要求的，只是为了排版好看才人工对齐。比如你可以这样来定义上述表格。</p>
+        <p data-anchor-id="ff3k">제목 행 다음 줄의 가로줄 개수는 정해져 있지 않으며, 보기 좋게 맞춘 것일 뿐입니다. 예를 들어 위 표를 이렇게 정의해도 됩니다.</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="js9l" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="pun">月份|收入|之处</span></code></li>
+            <li class="L0"><code class="language-gfm"><span class="pun">월|수입|지출</span></code></li>
             <li class="L1"><code class="language-gfm"><span class="pun">-|-|-</span></code></li>
             <li class="L2"><code class="language-gfm"><span class="lit">8</span><span class="pun">|</span><span
                     class="lit">1000</span><span class="pun">|</span><span class="lit">500</span></code></li>
@@ -260,11 +261,11 @@
             <li class="L4"><code class="language-gfm"><span class="lit">10</span><span class="pun">|</span><span
                     class="lit">1400</span><span class="pun">|</span><span class="lit">650</span></code></li>
         </ol></pre>
-        <p data-anchor-id="t5yx">你还可以使用 <code>:</code> 指定列的对齐方式。</p>
+        <p data-anchor-id="t5yx"><code>:</code>로 열 정렬 방식을 지정할 수도 있습니다.</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="rfs0" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="pun">月份（居中对齐）|收入（右对齐）|支出（左对齐）</span></code></li>
+            <li class="L0"><code class="language-gfm"><span class="pun">월(가운데 정렬)|수입(오른쪽 정렬)|지출(왼쪽 정렬)</span></code></li>
             <li class="L1"><code class="language-gfm"><span
                     class="pun">:--------------:|-------------:|:------------</span></code></li>
             <li class="L2"><code class="language-gfm"><span class="lit">8</span><span class="pln">               </span><span
@@ -277,13 +278,13 @@
                     class="pun">|</span><span class="lit">1400</span><span class="pln">          </span><span
                     class="pun">|</span><span class="lit">650</span></code></li>
         </ol></pre>
-        <p data-anchor-id="hk7m">看起来效果如下：</p>
+        <p data-anchor-id="hk7m">다음과 같이 표시됩니다:</p>
         <table data-anchor-id="7col" class="table table-striped-white table-bordered">
             <thead>
             <tr>
-                <th style="text-align:center;">月份（居中对齐）</th>
-                <th style="text-align:right;">收入（右对齐）</th>
-                <th style="text-align:left;">支出（左对齐）</th>
+                <th style="text-align:center;">월(가운데 정렬)</th>
+                <th style="text-align:right;">수입(오른쪽 정렬)</th>
+                <th style="text-align:left;">지출(왼쪽 정렬)</th>
             </tr>
             </thead>
             <tbody>
@@ -305,30 +306,30 @@
             </tbody>
         </table>
         <div class="md-section-divider"></div>
-        <h2 data-anchor-id="sb2h" id="代码">代码</h2>
+        <h2 data-anchor-id="sb2h" id="코드">코드</h2>
 
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="6qcb" id="行内代码">行内代码</h3>
+        <h3 data-anchor-id="6qcb" id="인라인-코드">인라인 코드</h3>
 
-        <p data-anchor-id="pp5g">在文本中使用 <code>`</code> 包裹的内容会被识别为代码，比如</p>
+        <p data-anchor-id="pp5g">텍스트에서 <code>`</code>로 감싼 내용은 코드로 인식됩니다. 예:</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="3tlj" style=""><ol class="linenums">
-            <li class="L0"><code class="language-gfm"><span class="pun">现在你可以不用</span><span class="pln"> </span><span
-                    class="str">`document.getElementById()`</span><span class="pln"> </span><span class="pun">了，现代浏览器都把复制了</span><span
-                    class="pln"> </span><span class="str">`id`</span><span class="pln"> </span><span class="pun">属性的元素放在了全局变量里。</span></code>
+            <li class="L0"><code class="language-gfm"><span class="pun">이제</span><span class="pln"> </span><span
+                    class="str">`document.getElementById()`</span><span class="pln"> </span><span class="pun">를 쓰지 않아도 됩니다. 최신 브라우저는</span><span
+                    class="pln"> </span><span class="str">`id`</span><span class="pln"> </span><span class="pun">속성이 있는 요소를 전역 변수에 넣어 둡니다.</span></code>
             </li>
         </ol></pre>
-        <p data-anchor-id="02kr">渲染出来是：</p>
+        <p data-anchor-id="02kr">렌더링 결과:</p>
         <blockquote data-anchor-id="1e9m" class="white-blockquote">
-            <p>现在你可以不用 <code>document.getElementById()</code> 了，现代浏览器都把复制了 <code>id</code> 属性的元素放在了全局变量里。</p>
+            <p>이제 <code>document.getElementById()</code> 를 쓰지 않아도 됩니다. 최신 브라우저는 <code>id</code> 속성이 있는 요소를 전역 변수에 넣어 둡니다.</p>
         </blockquote>
         <div class="md-section-divider"></div>
-        <h3 data-anchor-id="44wd" id="多行代码">多行代码</h3>
+        <h3 data-anchor-id="44wd" id="여러-줄-코드">여러 줄 코드</h3>
 
-        <p data-anchor-id="d74q">使用 <code>```</code> 来包裹多行的内容成为代码。</p>
+        <p data-anchor-id="d74q">여러 줄 내용을 <code>```</code>로 감싸면 코드가 됩니다.</p>
 
-        <p data-anchor-id="ux7c">比如：</p>
+        <p data-anchor-id="ux7c">예:</p>
 
         <div class="md-section-divider"></div>
         <pre class="prettyprint linenums prettyprinted" data-anchor-id="6urz" style=""><ol class="linenums">

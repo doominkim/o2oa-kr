@@ -1742,7 +1742,7 @@ _p[11] = {
         function checkBaseConstructorCall(targetClass, classname) {
             var code = targetClass.toString();
             if (!/this\.callBase/.test(code)) {
-                throw new Error(classname + " : 类构造函数没有调用父类的构造函数！为了安全，请调用父类的构造函数");
+                throw new Error(classname + " : 클래스 생성자가 부모 클래스 생성자를 호출하지 않았습니다! 안전을 위해 부모 클래스 생성자를 호출하세요");
             }
         }
         var KITY_INHERIT_FLAG = "__KITY_INHERIT_FLAG_" + +new Date();

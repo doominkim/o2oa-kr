@@ -32,7 +32,7 @@
 	},
 	"tabTextNode": {
 		"display": "inline",
-		"font-family": "MicrosoftYaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"font-size": "1rem",
         "color": "#151515"
 	},
@@ -53,7 +53,7 @@
 		"font-size": "1rem",
 		"margin-top": "0px",
 		"display": "inline",
-		"font-family": "MicrosoftYaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "color": "#2E82F7"
 	},
 

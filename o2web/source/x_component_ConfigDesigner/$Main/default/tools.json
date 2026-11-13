@@ -1,53 +1,53 @@
 {
   "label": {
     "icon": "label.png",
-    "text": "文本",
+    "text": "텍스트",
     "className": "Label"
   },
   "textfield": {
     "icon": "textfield.png",
-    "text": "域",
+    "text": "필드",
     "className": "Textfield"
   },
   "personfield": {
     "icon": "personfield.png",
-    "text": "人员",
+    "text": "사용자",
     "className": "Personfield"
   },
   "calendar": {
     "icon": "calendar.png",
-    "text": "日期选择",
+    "text": "날짜 선택",
     "className": "Calendar"
   },
   "textarea": {
     "icon": "textarea.png",
-    "text": "多行文本",
+    "text": "여러 줄 텍스트",
     "className": "Textarea"
   },
   "select": {
     "icon": "select.png",
-    "text": "下拉框",
+    "text": "드롭다운",
     "className": "Select"
   },
   "radio": {
     "icon": "radio.png",
-    "text": "单选框",
+    "text": "라디오 버튼",
     "className": "Radio"
   },
   "checkbox": {
     "icon": "checkbox.png",
-    "text": "多选框",
+    "text": "체크박스",
     "className": "Checkbox"
   },
   "button": {
     "icon": "button.png",
-    "text": "按钮",
+    "text": "버튼",
     "className": "Button"
   },
 
   "Actionbar": {
     "icon": "actionbar.png",
-    "text": "操作条",
+    "text": "작업 표시줄",
     "className": "Actionbar"
   },
 
@@ -58,22 +58,22 @@
   },
   "image": {
     "icon": "attachment.png",
-    "text": "附件",
+    "text": "첨부파일",
     "className": "Attachment"
   },
   "div": {
     "icon": "div.png",
-    "text": "容器",
+    "text": "컨테이너",
     "className": "Div"
   },
   "table": {
     "icon": "table.png",
-    "text": "表格",
+    "text": "표",
     "className": "Table"
   },
   "datagrid": {
     "icon": "datagrid.png",
-    "text": "数据网格",
+    "text": "데이터 그리드",
     "className": "Datagrid"
   },
   "html": {
@@ -84,22 +84,22 @@
 
   "tab": {
     "icon": "tabs.png",
-    "text": "分页",
+    "text": "탭",
     "className": "Tab"
   },
   "tree": {
     "icon": "tree.png",
-    "text": "树",
+    "text": "트리",
     "className": "Tree"
   },
   "log": {
     "icon": "log.png",
-    "text": "流程记录",
+    "text": "프로세스 기록",
     "className": "Log"
   },
   "monitor": {
     "icon": "monitor.png",
-    "text": "流程监控",
+    "text": "프로세스 모니터",
     "className": "Monitor"
   },
   "iframe": {
@@ -109,12 +109,12 @@
   },
   "htmledit": {
     "icon": "htmleditor.png",
-    "text": "HTML编辑器",
+    "text": "HTML 편집기",
     "className": "Htmleditor"
   },
   "office": {
     "icon": "office.png",
-    "text": "Office控件",
+    "text": "Office 컨트롤",
     "className": "Office"
   }
 }

@@ -8,14 +8,14 @@ function staticData() {
                 "id": "im",
                 "isNative": true,
                 "nativeKey": "im",
-                "name": "消息",
+                "name": "메시지",
                 "iconClass": "ooicon-message"
             },
             {
                 "id": "contact",
                 "isNative": true,
                 "nativeKey": "contact",
-                "name": "通讯录",
+                "name": "주소록",
                 "iconClass": "ooicon-contacts"
             },
             {
@@ -23,21 +23,21 @@ function staticData() {
                 "isMain": true,
                 "isNative": true,
                 "nativeKey": "home",
-                "name": "首页",
+                "name": "홈",
                 "iconClass": "ooicon-home"
             },
             {
                 "id": "app",
                 "isNative": true,
                 "nativeKey": "app",
-                "name": "应用",
+                "name": "앱",
                 "iconClass": "ooicon-app-center"
             },
             {
                 "id": "settings",
                 "isNative": true,
                 "nativeKey": "settings",
-                "name": "设置",
+                "name": "설정",
                 "iconClass": "ooicon-config"
             }
         ],

@@ -144,7 +144,7 @@ const receiverBoxClass = () => {
            @click="clickOpenQuoteMsg(msg.quoteMessage)">
         <div class="im-chat-quote-message-desc" ref="quoteDescRef"  v-html="quoteMsgContent(msg.quoteMessage, quoteMessageBody)"></div>
         <div class="im-chat-quote-message-image" v-if=" quoteMessageBody && quoteMessageBody.type === 'image' ">
-          <img :src="fileUrl(quoteMessageBody)" alt="图片">
+          <img :src="fileUrl(quoteMessageBody)" alt="이미지">
         </div>
       </div>
     </div>
@@ -166,7 +166,7 @@ const receiverBoxClass = () => {
            @click="clickOpenQuoteMsg(msg.quoteMessage)">
         <div class="im-chat-quote-message-desc" ref="quoteDescRef" v-html="quoteMsgContent(msg.quoteMessage, quoteMessageBody)"></div>
         <div class="im-chat-quote-message-image" v-if=" quoteMessageBody && quoteMessageBody.type === 'image' ">
-          <img :src="fileUrl(quoteMessageBody)" alt="图片">
+          <img :src="fileUrl(quoteMessageBody)" alt="이미지">
         </div>
       </div>
     </div>

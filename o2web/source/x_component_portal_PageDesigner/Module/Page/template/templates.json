@@ -1,32 +1,32 @@
 [
   {
     "name": "page.json",
-    "title": "空白页面",
+    "title": "빈 페이지",
     "icon": "page.png"
   },
   {
     "name": "page_common.json",
-    "title": "通用表单模板",
+    "title": "일반 페이지 템플릿",
     "icon": "page_common.png"
   },
   {
     "name": "page_tab.json",
-    "title": "标准表单样式(蓝色)",
+    "title": "표준 페이지 스타일(파란색)",
     "icon": "page_tab.png"
   },
   {
     "name": "page_tab_red.json",
-    "title": "标准表单样式(红色)",
+    "title": "표준 페이지 스타일(빨간색)",
     "icon": "page_tab_red.png"
   },
   {
     "name": "page_tab.json",
-    "title": "传统表单样式",
+    "title": "클래식 페이지 스타일",
     "icon": "page_tab.png"
   },
   {
     "name": "page_project.json",
-    "title": "立项表单模板",
+    "title": "프로젝트 승인 페이지 템플릿",
     "icon": "page_project.png"
   }
 ]

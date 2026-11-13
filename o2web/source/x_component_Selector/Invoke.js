@@ -24,7 +24,7 @@ MWF.xApplication.Selector.Invoke = new Class({
             if (json.data.length){
                 var categoryMap = {};
                 json.data.forEach(d=>{
-                    if( !d.category )d.category = '未分类';
+                    if( !d.category )d.category = '미분류';
                     if( !categoryMap[d.category] )categoryMap[d.category] = [];
                     categoryMap[d.category].push(d);
                 });

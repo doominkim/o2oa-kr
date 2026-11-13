@@ -6,7 +6,7 @@ o2.widget.CalendarPage = o2.CalendarPage = new Class({
 
 	initialize: function(node, options){
 
-		Locale.use("zh-CHS");
+		Locale.use(o2.dateLocale());
 		this.setOptions(options);
 
 		this.path = o2.session.path+"/widget/$Calendar/";

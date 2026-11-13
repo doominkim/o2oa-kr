@@ -109,7 +109,7 @@ async function editComponent(cmpt, index) {
   const height = Math.min(size.y * 0.9, 720);
 
   o2.DL.open({
-    title: '编辑组件',
+    title: '구성요소 편집',
     container,
     maskNode: container,
     width,

@@ -1,0 +1,354 @@
+{
+  "o2web/source/x_component_Attendance/Actions/action.json": [
+    {
+      "text": "\"listUnitWithPerson\": {\"uri\": \"/jaxrs/unit/list/person/object\", \"method\": \"POST\"}, //获取人员所在的所有组织",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "\"listUnitSubDirect\": {\"uri\": \"/jaxrs/unit/list/unit/sub/direct/object\", \"method\": \"POST\"}, //查询指定组织的直接下级组织",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "\"getPersonAttribute\": {\"uri\": \"/jaxrs/personattribute/list/attribute/person/name\", \"method\": \"POST\"}, //查询人员属性的值",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "/*{'q_Year':'2016','q_Name':'五一劳动节','q_Month':'03'}*/",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "获取指定年月的打卡数据列表",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "Data：{'q_empName':'林玲','q_year':'2016','q_month':'03'}",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "备注：",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "1、q_empName如果不传则取所有用户的数据",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "2、如果未指定年份或者月份，则获取数据库里最近一个月份的数据",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "/*8、查询打卡数据 下一页（分页）.",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "Data：{'q_topUnitName':'兰德纵横','q_year':'2016','q_month':'03','q_date':''2016-03-31',order':'DESC','key':'recordDateString'}",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "备注：key 排序列，q_topUnitName|q_empName|q_unitName",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "9、查询打卡数据 上一页（分页）.",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "Data：{'q_topUnitName':'兰德纵横','q_year':'2016','q_month':'03','q_date':''2016-03-31','order':'DESC','key':'recordDateString'}",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "1、q_empName如果不传则取当前登录用户的数据",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "/*Data：{'q_unitName':'开发部','q_year':'2016','q_month':'03'}",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "备注：如果未指定年份或者月份，则获取数据库里最近一个月份的数据*/",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "/*Data：{'q_topUnitName':'兰德纵横','q_year':'2016','q_month':'03'}",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "备注：file_id为指定的导入文件ID，在导入过程，导入文件的ID会被记录到打卡记录的batchName属性中*/",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "/*分页查询",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "detailId:  打卡记录ID",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "empName:  员工姓名，打卡和申诉应该是同一个人",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "unitName:  打卡员工所在部门",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "topUnitName:  打卡员工所在公司",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "yearString:   打卡年份",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "monthString:   打卡月份",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "status:    审批状态:0-待处理，1-审批通过，-1-审批不能过，2-需要下一次审批",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "appealReason:   申诉理由",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "processPerson1:   第一审批人",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    },
+    {
+      "text": "processPerson2:   第二审批人*/",
+      "reason": "주석 안의 API 설명(JSON 주석을 검사 도구가 문자열로 오인식), 화면 비노출"
+    }
+  ],
+  "o2web/source/x_component_query_Query/ImporterRecord.js": [
+    {
+      "text": "导入成功",
+      "reason": "서버가 저장·반환하는 가져오기 상태 값과 비교"
+    },
+    {
+      "text": "导入失败",
+      "reason": "서버가 저장·반환하는 가져오기 상태 값과 비교"
+    },
+    {
+      "text": "部分成功",
+      "reason": "서버가 저장·반환하는 가져오기 상태 값과 비교"
+    }
+  ],
+  "o2web/source/x_component_query_Query/Importer.js": [
+    {
+      "text": "待导入",
+      "reason": "서버가 저장·반환하는 가져오기 상태 값과 비교"
+    },
+    {
+      "text": "导入中",
+      "reason": "서버가 저장·반환하는 가져오기 상태 값과 비교"
+    },
+    {
+      "text": "导入成功",
+      "reason": "서버가 저장·반환하는 가져오기 상태 값과 비교"
+    },
+    {
+      "text": "部分成功",
+      "reason": "서버가 저장·반환하는 가져오기 상태 값과 비교"
+    },
+    {
+      "text": "作者",
+      "reason": "서버로 보내는 CMS 권한 값(permission)"
+    },
+    {
+      "text": "阅读",
+      "reason": "서버로 보내는 CMS 권한 값(permission)"
+    },
+    {
+      "text": "组织",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    },
+    {
+      "text": "群组",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    },
+    {
+      "text": "人员",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    },
+    {
+      "text": "角色",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    }
+  ],
+  "o2web/source/x_component_query_Query/$ImporterRecord/default/detailListItem.json": [
+    {
+      "text": "\"condition\": \"function( d ){ return ['导入失败','部分成功'].contains(this.explorer.data.status) && ['','导入失败'].contains(this.explorer.currentStatus) }\",",
+      "reason": "서버 가져오기 상태 값과 비교하는 조건식"
+    },
+    {
+      "text": "\"condition\": \"function( d ){ return ['导入成功','部分成功'].contains(this.explorer.data.status) && ['','导入成功'].contains(this.explorer.currentStatus) && this.explorer.importerJSON.type!=='dynamicTable'}\",",
+      "reason": "서버 가져오기 상태 값과 비교하는 조건식"
+    },
+    {
+      "text": "\"condition\": \"function( d ){ return ['cms','process'].contains(d.docType) && d.docId && d.status==='导入成功'}\",",
+      "reason": "서버 가져오기 상태 값과 비교하는 조건식"
+    }
+  ],
+  "o2web/source/x_component_query_Query/MultiImporter.js": [
+    {
+      "text": "覆盖",
+      "reason": "Excel 데이터의 $operation 열 값과 비교하는 작업 코드"
+    }
+  ],
+  "o2web/source/x_component_Attendance/MyDetail.js": [
+    {
+      "text": "全天",
+      "reason": "서버에 저장된 근태 데이터 값(全天/上午/下午)과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "上午",
+      "reason": "서버에 저장된 근태 데이터 값(全天/上午/下午)과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "下午",
+      "reason": "서버에 저장된 근태 데이터 값(全天/上午/下午)과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "汇报对象",
+      "reason": "서버 설정값(APPEAL_AUDITOR_TYPE/APPEAL_AUDIFLOW_ID)의 기존 중국어 값과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "所属部门职位",
+      "reason": "서버 설정값(APPEAL_AUDITOR_TYPE/APPEAL_AUDIFLOW_ID)의 기존 중국어 값과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "人员属性",
+      "reason": "서버 설정값(APPEAL_AUDITOR_TYPE/APPEAL_AUDIFLOW_ID)의 기존 중국어 값과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "指定人",
+      "reason": "서버 설정값(APPEAL_AUDITOR_TYPE/APPEAL_AUDIFLOW_ID)의 기존 중국어 값과 비교(기존 데이터 호환)"
+    }
+  ],
+  "o2web/source/x_component_Attendance/MyIndex.js": [
+    {
+      "text": "全天",
+      "reason": "서버에 저장된 근태 데이터 값(全天/上午/下午)과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "上午",
+      "reason": "서버에 저장된 근태 데이터 값(全天/上午/下午)과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "下午",
+      "reason": "서버에 저장된 근태 데이터 값(全天/上午/下午)과 비교(기존 데이터 호환)"
+    }
+  ],
+  "o2web/source/x_component_Attendance/AppSetting.js": [
+    {
+      "text": "汇报对象",
+      "reason": "서버 설정값(APPEAL_AUDITOR_TYPE/APPEAL_AUDIFLOW_ID)의 기존 중국어 값과 비교(기존 데이터 호환)"
+    },
+    {
+      "text": "无",
+      "reason": "서버 설정값(APPEAL_AUDITOR_TYPE/APPEAL_AUDIFLOW_ID)의 기존 중국어 값과 비교(기존 데이터 호환)"
+    }
+  ],
+  "o2web/source/x_component_cms_Xform/Form.js": [
+    {
+      "text": "继续流转",
+      "reason": "폼 설계에 저장된 기존 툴바 버튼 텍스트와 비교(id 비교와 병행)"
+    },
+    {
+      "text": "作者",
+      "reason": "서버로 보내는 CMS 권한 값(permission)"
+    },
+    {
+      "text": "阅读",
+      "reason": "서버로 보내는 CMS 권한 값(permission)"
+    },
+    {
+      "text": "人员",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    },
+    {
+      "text": "组织",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    },
+    {
+      "text": "群组",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    },
+    {
+      "text": "角色",
+      "reason": "서버로 보내는 CMS 권한 대상 유형 값(permissionObjectType)"
+    }
+  ],
+  "o2web/source/x_component_cms_Index/Main.js": [
+    {
+      "text": "全部",
+      "reason": "서버로 보내는 documentType 필터 값"
+    }
+  ],
+  "o2web/source/x_component_cms_Index/Newer.js": [
+    {
+      "text": "信息",
+      "reason": "서버 분류 데이터의 documentType 값과 비교"
+    }
+  ],
+  "o2web/source/x_component_cms_Index/$Starter/zh-cn.js": [
+    {
+      "text": "信息",
+      "reason": "Starter.js/Newer.js가 서버 분류의 documentType 값(信息)과 비교하는 값"
+    }
+  ],
+  "o2web/source/x_component_Forum/$Setting/listItemSection.json": [
+    {
+      "text": "\"sectionStatus\": { \"styles\" : \"function(d){ return d.sectionStatus == '启用' ? {'color':'green'} : {'color':'#845a5a'} }\" },",
+      "reason": "서버가 반환하는 섹션 상태 값(启用)과 비교"
+    }
+  ],
+  "o2web/source/x_component_Forum/Setting.js": [
+    {
+      "text": "人员",
+      "reason": "서버로 보내는 권한 대상 유형 값(objectType)"
+    },
+    {
+      "text": "组织",
+      "reason": "서버로 보내는 권한 대상 유형 값(objectType)"
+    },
+    {
+      "text": "#人员",
+      "reason": "서버로 보내는 권한 대상 유형 값(objectType)"
+    },
+    {
+      "text": "#组织",
+      "reason": "서버로 보내는 권한 대상 유형 값(objectType)"
+    },
+    {
+      "text": "是",
+      "reason": "sectionGrade 내부 플래그 값(설정 후 같은 함수 흐름에서 비교해 true로 변환)"
+    }
+  ],
+  "o2web/source/x_component_Forum/TopNode.js": [
+    {
+      "text": "O2社区",
+      "reason": "서버 BBS_LOGO_NAME 기본 설정값과 비교"
+    }
+  ],
+  "o2web/source/x_component_query_ImporterDesigner/$Importer/importer.html": [
+    {
+      "text": "value=\"信息\"",
+      "reason": "서버에 저장되는 documentType 값(信息/数据)과 그 비교식"
+    },
+    {
+      "text": "text{($.data.documenttype)!=\"='数据'?'checked':''}/\"",
+      "reason": "서버에 저장되는 documentType 값(信息/数据)과 그 비교식"
+    },
+    {
+      "text": "value=\"数据\"",
+      "reason": "서버에 저장되는 documentType 값(信息/数据)과 그 비교식"
+    },
+    {
+      "text": "text{($.data.documenttype)=\"=='数据'?'checked':''}/\"",
+      "reason": "서버에 저장되는 documentType 값(信息/数据)과 그 비교식"
+    }
+  ]
+}

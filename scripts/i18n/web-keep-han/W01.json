@@ -1,0 +1,1252 @@
+{
+  "o2web/source/x_desktop/js/initialScriptText.js": [
+    {
+      "text": "一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分钟之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约{delta}小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始不到1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始約1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始一个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分鐘之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約{delta}小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始不到1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始一個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    }
+  ],
+  "o2web/source/x_desktop/js/initialServiceScriptText.js": [
+    {
+      "text": "一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分钟之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约{delta}小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始不到1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始約1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始一个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分鐘之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約{delta}小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始不到1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始一個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    }
+  ],
+  "o2web/source/x_desktop/js/mooToolsScriptText.js": [
+    {
+      "text": "一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分钟之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约{delta}小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始不到1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始約1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始一个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分鐘之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約{delta}小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始不到1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始一個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    }
+  ],
+  "o2web/source/x_desktop/ssr/commonScript.js": [
+    {
+      "text": "一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "七",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "八",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "九",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "十二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期一",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期二",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期三",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期四",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期五",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "星期六",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "日",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1分钟前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分钟之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约1小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大约{delta}小时前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}天前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}星期前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}个月前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "1年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}年前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始不到1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始約1分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}分钟",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始约{delta}小时",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始一个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}个月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "从现在开始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "不到1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1分鐘前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "{delta}分鐘之前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約1小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "大約{delta}小時前",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始不到1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約1分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}分鐘",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始約{delta}小時",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}天",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}星期",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始一個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}個月",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始1年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    },
+    {
+      "text": "從現在開始{delta}年",
+      "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
+    }
+  ],
+  "o2web/source/x_component_ForumDocument/Main.js": [
+    {
+      "text": "投票",
+      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
+    },
+    {
+      "text": "问题",
+      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
+    }
+  ],
+  "o2web/source/x_component_ForumDocument/Mobile.js": [
+    {
+      "text": "问题",
+      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
+    },
+    {
+      "text": "投票",
+      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
+    }
+  ],
+  "o2web/source/x_component_ForumDocument/$Main/default/listItemReply.json": [
+    {
+      "text": "\"condition\" : \"function( d ){ return ( layout.desktop.session.user.distinguishedName == this.view.data.creatorName && ( this.view.data.typeCategory == this.lp.question || this.view.data.typeCategory == '问题' ) && !this.view.data.acceptReplyId); }\",",
+      "reason": "저장된 게시물 유형(typeCategory) '问题' 비교 조건식"
+    }
+  ]
+}

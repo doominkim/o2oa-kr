@@ -36,7 +36,7 @@
     "selectList": [
       {
         "id": "C9482DD3ACC000016AB1C5701D801823",
-        "displayName": "标题",
+        "displayName": "제목",
         "events": {
           "queryLoad": {
             "code": "",
@@ -56,7 +56,7 @@
       },
       {
         "id": "C9482DD3CE20000114B8F3881A656F20",
-        "displayName": "日期",
+        "displayName": "날짜",
         "events": {
           "queryLoad": {
             "code": "",
@@ -76,7 +76,7 @@
       },
       {
         "id": "C9482DD3EFA000013A6F1B3D815016C5",
-        "displayName": "数字",
+        "displayName": "숫자",
         "events": {
           "queryLoad": {
             "code": "",
@@ -96,7 +96,7 @@
       },
       {
         "id": "C9482DD47A10000132A71D231EA0FC20",
-        "displayName": "布尔值",
+        "displayName": "불리언",
         "events": {
           "queryLoad": {
             "code": "",
@@ -116,7 +116,7 @@
       },
       {
         "id": "C9482DD500E000018C58F6F01F9D3700",
-        "displayName": "文本数组",
+        "displayName": "텍스트 배열",
         "events": {
           "queryLoad": {
             "code": "",
@@ -136,7 +136,7 @@
       },
       {
         "id": "C9482DD51F50000186C41CE0193A1241",
-        "displayName": "日期数组",
+        "displayName": "날짜 배열",
         "events": {
           "queryLoad": {
             "code": "",
@@ -156,7 +156,7 @@
       },
       {
         "id": "C9482E4C8C900001CEE19E001BF0138F",
-        "displayName": "身份",
+        "displayName": "소속",
         "events": {
           "queryLoad": {
             "code": "",
@@ -178,7 +178,7 @@
     "calculateFieldList": [
       {
         "id": "C9482DF45F200001FE257880BB043D00",
-        "displayName": "计算_身份",
+        "displayName": "계산_소속",
         "events": {
           "queryLoad": {
             "code": "",
@@ -199,7 +199,7 @@
       },
       {
         "id": "C9482E382C50000165A216601F242230",
-        "displayName": "计算_文本数组",
+        "displayName": "계산_텍스트 배열",
         "events": {
           "queryLoad": {
             "code": "",
@@ -224,9 +224,9 @@
   "availableUnitList": [],
   "isNewImporter": true,
   "application": "de6d9aa1-8bc4-430d-b4ff-ef4be7dd68e0",
-  "applicationName": "BUG管理",
+  "applicationName": "버그 관리",
   "vid": "97499527-eeb1-416d-befc-f0758f465768",
   "vtype": "Importer",
   "pid": "97499527-eeb1-416d-befc-f0758f46576897499527-eeb1-416d-befc-f0758f465768",
-  "queryName": "BUG管理"
+  "queryName": "버그 관리"
 }

@@ -1,5 +1,5 @@
 {
-  "name": "空样式",
+  "name": "빈 스타일",
   "form": {
     "styles":{
       "background-color": "#ffffff"
@@ -7,33 +7,33 @@
   },
   "label": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {}
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {}
     },
 
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {}
     }
   },
 
   "div": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {}
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {}
     },
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {}
     }
   },

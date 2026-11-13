@@ -356,11 +356,11 @@ MWF.xApplication.process.Xform.Widget = MWF.APPWidget =  new Class(
                         this.getWidgetData(json.data);
                         if (callback) callback();
                     }.bind(this), function(xhr){
-                        let err = new Error("获取部件设计出错");
+                        let err = new Error("위젯 설계를 가져오는 중 오류가 발생했습니다");
                         if (xhr.responseText){
                             try{
                                 const json = JSON.parse(xhr.responseText);
-                                err = new Error("获取部件设计出错："+json.message);
+                                err = new Error("위젯 설계를 가져오는 중 오류가 발생했습니다: "+json.message);
                             }catch(e){}   
                         }
                         throw err;

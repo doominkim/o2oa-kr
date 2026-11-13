@@ -129,7 +129,7 @@
     "color": "#666666",
     "font-weight": "normal",
     "line-height": "40px",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "15px"
   },
 
@@ -190,7 +190,7 @@
     "background-color": "#fff",
     "min-height": "29px",
     "color": "#666666",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "14px",
     "cursor": "pointer"
   },
@@ -426,7 +426,7 @@
     "height": "40px",
     "margin": "0px",
     "line-height" :"40px",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "14px",
     "color" : "#333",
     "padding-left" : "38px",
@@ -450,7 +450,7 @@
     "height": "40px",
     "margin": "0px",
     "line-height" :"40px",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "14px",
     "color" : "#333",
     "padding-left" : "8px",
@@ -498,7 +498,7 @@
     "padding-left" : "40px",
     "height" : "40px",
     "line-height" : "40px",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "14px"
   },
   "naviItemNode_current" : {
@@ -508,7 +508,7 @@
     "padding-left" : "40px",
     "height" : "40px",
     "line-height" : "40px",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "14px"
   },
   "naviItemNode_over" : {

@@ -1261,7 +1261,7 @@ MWF.xApplication.query.ViewDesigner.widget.ViewFilter.Item = new Class({
                 value = " \""+this.data.value+"\""+((this.data.comparison=="range") ? ", \""+this.data.otherValue+"\"" : "");
             }
         }else if( this.data.code && this.data.code.code ){
-            value =  " " + (lp.script||"脚本") +":\"" + this.data.code.code.substr(0, 200) + "\"";
+            value =  " " + (lp.script||"스크립트") +":\"" + this.data.code.code.substr(0, 200) + "\"";
         }
         return lp[this.data.logic]+" "+this.data.path+" "+lp[this.data.comparison] + " "+value;
     },

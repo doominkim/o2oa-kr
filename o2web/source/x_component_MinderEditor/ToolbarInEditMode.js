@@ -215,7 +215,7 @@ MWF.xApplication.MinderEditor.RightToolbar = new Class({
         var styleLazyLoding = "  lazyLoading='" + (this.styleActive ? "false" : "true") + "'";
         var html="";
         if( items.contains("font") ){
-            html += "<div styles='" + (this.styleActive ? "rightToolbarItem_style_active" : "rightToolbarItem_style") +"' title='文本样式' action='switchStyle'></div>"+
+            html += "<div styles='" + (this.styleActive ? "rightToolbarItem_style_active" : "rightToolbarItem_style") +"' title='텍스트 스타일' action='switchStyle'></div>"+
                 "<div styles='tooltipNode' id='styleTooltip' style='display:" + (this.styleActive ? "" : "none") +";'>"+
                 "   <div styles='closeNode' action='closeStyle'></div>"+
                 "   <div style='width: 100%; height: 100%;'>"+
@@ -230,7 +230,7 @@ MWF.xApplication.MinderEditor.RightToolbar = new Class({
                 "</div>";
         }
         if( items.contains("resource") ){
-            html += "<div styles='" + (this.resourceActive ? "rightToolbarItem_resource_active" : "rightToolbarItem_resource") +"' title='标签' action='switchResource'></div>"+
+            html += "<div styles='" + (this.resourceActive ? "rightToolbarItem_resource_active" : "rightToolbarItem_resource") +"' title='태그' action='switchResource'></div>"+
                 "<div styles='tooltipNode_resource' id='resourceTooltip' style='display:" + (this.resourceActive ? "" : "none") +";'>"+
                 "   <div styles='closeNode' action='closeResource'></div>"+
                 "   <div item='resource' styles='resourceToolbarItem' lazyLoading='" + (this.resourceActive ? "false" : "true") + "'></div>" +
@@ -238,7 +238,7 @@ MWF.xApplication.MinderEditor.RightToolbar = new Class({
                 "</div>";
         }
         if( items.contains("note") ){
-            html += "<div styles='" + (this.noteActive ? "rightToolbarItem_note_active" : "rightToolbarItem_note") +"' title='备注' action='switchNote'></div>"+
+            html += "<div styles='" + (this.noteActive ? "rightToolbarItem_note_active" : "rightToolbarItem_note") +"' title='메모' action='switchNote'></div>"+
                 "<div styles='tooltipNode_note' id='noteTooltip' style='display:" + (this.noteActive ? "" : "none") +";'>"+
                 "   <div styles='closeNode' action='closeNote'></div>"+
                 "   <div item='note' styles='noteToolbarItem' lazyLoading='" + (this.noteActive ? "false" : "true") + "'></div>" +
@@ -246,7 +246,7 @@ MWF.xApplication.MinderEditor.RightToolbar = new Class({
                 "</div>"
         }
         /*
-            "<div styles='" + (this.styleActive ? "rightToolbarItem_style_active" : "rightToolbarItem_style") +"' title='文本样式' action='switchStyle'></div>"+
+            "<div styles='" + (this.styleActive ? "rightToolbarItem_style_active" : "rightToolbarItem_style") +"' title='텍스트 스타일' action='switchStyle'></div>"+
             "<div styles='tooltipNode' id='styleTooltip' style='display:" + (this.styleActive ? "" : "none") +";'>"+
             "   <div styles='closeNode' action='closeStyle'></div>"+
             "   <div style='width: 100%; height: 100%;'>"+
@@ -259,13 +259,13 @@ MWF.xApplication.MinderEditor.RightToolbar = new Class({
             "   </div>"+
                 //"   <div styles='arrowNode'></div>"+
             "</div>"+
-            "<div styles='" + (this.resourceActive ? "rightToolbarItem_resource_active" : "rightToolbarItem_resource") +"' title='标签' action='switchResource'></div>"+
+            "<div styles='" + (this.resourceActive ? "rightToolbarItem_resource_active" : "rightToolbarItem_resource") +"' title='태그' action='switchResource'></div>"+
             "<div styles='tooltipNode_resource' id='resourceTooltip' style='display:" + (this.resourceActive ? "" : "none") +";'>"+
             "   <div styles='closeNode' action='closeResource'></div>"+
             "   <div item='resource' styles='resourceToolbarItem' lazyLoading='" + (this.resourceActive ? "false" : "true") + "'></div>" +
                 //"   <div styles='arrowNode'></div>"+
             "</div>"+
-            "<div styles='" + (this.noteActive ? "rightToolbarItem_note_active" : "rightToolbarItem_note") +"' title='备注' action='switchNote'></div>"+
+            "<div styles='" + (this.noteActive ? "rightToolbarItem_note_active" : "rightToolbarItem_note") +"' title='메모' action='switchNote'></div>"+
             "<div styles='tooltipNode_note' id='noteTooltip' style='display:" + (this.noteActive ? "" : "none") +";'>"+
             "   <div styles='closeNode' action='closeNote'></div>"+
             "   <div item='note' styles='noteToolbarItem' lazyLoading='" + (this.noteActive ? "false" : "true") + "'></div>" +

@@ -109,7 +109,7 @@ const  deleteCollectionList = async () => {
   }
   const result = await imAction('msgCollectionRemove', body)
   if (result) {
-    console.info(`删除收藏成功 `, result)
+    console.info(`즐겨찾기 삭제 성공 `, result)
     // 清除列表数据
     collectionMsgList.value = collectionMsgList.value.filter((c) => !deleteList.includes(c.id))
   }

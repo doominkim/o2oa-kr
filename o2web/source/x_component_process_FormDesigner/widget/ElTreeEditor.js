@@ -677,7 +677,7 @@ MWF.xApplication.process.FormDesigner.widget.ElTreeEditor.Tree.Node = new Class(
 
 
 				var tr = new Element("tr").inject(this.propertyTable);
-				var td = new Element("td", { text: "文本" }).inject(tr);
+				var td = new Element("td", { text: "텍스트" }).inject(tr);
 				td = new Element("td").inject(tr);
 				this.labelInput = new Element("input", {
 					value: this.data.label || "[none]",
@@ -711,7 +711,7 @@ MWF.xApplication.process.FormDesigner.widget.ElTreeEditor.Tree.Node = new Class(
 				td = new Element("td", { "colspan": "2" }).inject(tr);
 				MWF.require("MWF.widget.Maplist", function() {
 					var maplist = new MWF.widget.Maplist(td, {
-						"title": "其他属性",
+						"title": "기타 속성",
 						"collapse": false,
 						"onChange": function () {
 							// var oldData = this.data[name];

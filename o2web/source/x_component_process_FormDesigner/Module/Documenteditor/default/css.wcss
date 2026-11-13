@@ -101,7 +101,7 @@
         "width": "15.6cm",
         "position": "relative",
         "font-size": "16pt",
-        "font-family": "'仿宋', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "1.02cm",
         "letter-spacing": "-0.01cm"
     },
@@ -110,14 +110,14 @@
         "padding-top": "1.5cm",
         "color": "red",
         "font-size": "1.8cm",
-        "font-family": "'宋体', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "normal",
         "overflow": "hidden"
     },
     "doc_layout_fileno": {
         "overflow": "hidden",
         "font-size": "16pt",
-        "font-family": "'仿宋', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "1.02cm",
         "text-align": "center",
         "margin-top": "1.04cm"
@@ -130,7 +130,7 @@
     "doc_layout_subject": {
         "overflow": "hidden",
         "font-size": "22.0pt",
-        "font-family": "'宋体', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "1.02cm",
         "margin": "auto",
         "margin-top": "1.04cm",
@@ -139,13 +139,13 @@
     },
     "doc_layout_mainSend": {
         "font-size": "16pt",
-        "font-family": "'仿宋', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "1.02cm",
         "margin-top": "1.02cm"
     },
     "doc_layout_filetext": {
         "font-size": "16pt",
-        "font-family": "'仿宋', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "1.02cm"
     },
 	

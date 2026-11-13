@@ -35,21 +35,21 @@
 		var langs = {
 			"zh-cn" : {
 				toolbar : {
-					emoji : "Emoji 表情"
+					emoji : "Emoji 이모티콘"
 				},
 				dialog : {
 					emoji : {
-						title : "Emoji 表情"
+						title : "Emoji 이모티콘"
 					}
 				}
 			},
 			"zh-tw" : {
 				toolbar : {
-					emoji : "Emoji 表情"
+					emoji : "Emoji 이모티콘"
 				},
 				dialog : {
 					emoji : {
-						title : "Emoji 表情"
+						title : "Emoji 이모티콘"
 					}
 				}
 			},

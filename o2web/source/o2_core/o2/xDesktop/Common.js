@@ -448,7 +448,7 @@ function decodeAddress(base64Payload, keyString) {
         );
         return sjcl.codec.utf8String.fromBits(decryptedBitArray);
     } catch (error) {
-        throw new Error("解析服务出错。错误详情: " + error.message);
+        throw new Error("서비스 분석 중 오류가 발생했습니다. 오류 상세: " + error.message);
     }
 }
 
@@ -780,7 +780,7 @@ function getNaviData(data) {
     const menu = [];
     let n = 0;
     data.forEach((app) => {
-        const categoryName = app.applicationCategory || '未分类';
+        const categoryName = app.applicationCategory || '미분류';
         let category = menu.find((m) => {
             return m.text === categoryName
         });
@@ -811,8 +811,8 @@ function getNaviData(data) {
     });
     menu.unshift({
         "img": `../x_component_process_ApplicationExplorer/$Main/default/icon/application.png`,
-        "title": '全部',
-        "text": '全部',
+        "title": '전체',
+        "text": '전체',
         "selected": true,
         "count": n
     });
@@ -856,13 +856,13 @@ function createStartableProcess(data, node, options, dlg) {
             processHtml += `
                 <dl data-process-id="${process.id}" data-application-id="${process.application}" data-title="${process.name}">
                     <dt><div>${process.name}</div><div class="ooicon-arrow_forward"></div></dt>
-                    <dd>${process.description || '此流程没有描述'}</dd>
+                    <dd>${process.description || '이 결재에 대한 설명이 없습니다.'}</dd>
                 </dl>
             `
         });
 
         const html = `
-            <div class="index-starter-process-application" data-application-name="${app.id}" data-category-name="${app.applicationCategory || '未分类'}">
+            <div class="index-starter-process-application" data-application-name="${app.id}" data-category-name="${app.applicationCategory || '미분류'}">
                 <div class="index-starter-process-application-title">${app.name}</div>
                 <div class="index-starter-process-area">
                     ${processHtml}
@@ -890,7 +890,7 @@ function searchProcess(key, processData, processArea, options, dlg, app) {
     if (key) {
         const keyWord = key.toString().toLowerCase();
         const searchData = [{
-            name: '“' + key + '” 的搜索结果',
+            name: '"' + key + '" 검색 결과',
             processList: []
         }];
         processData.forEach((app) => {
@@ -921,11 +921,11 @@ layout.startProcess = function (app, process, data, identity, callback, target, 
         </div>
         <div class="index-starter-area">
             <div class="index-starter-search">
-                <oo-input type="search" left-icon="search" style="width:100%" placeholder="输入关键字，搜索可启动流程"></oo-input>
+                <oo-input type="search" left-icon="search" style="width:100%" placeholder="검색어를 입력해 기안 가능한 결재를 찾으세요"></oo-input>
             </div>
             <div class="index-starter-content"></div>
             <div class="index-starter-buttons">
-                <oo-button type="cancel" text="取消"></oo-button>
+                <oo-button type="cancel" text="취소"></oo-button>
             </div>
         </div>
     `;

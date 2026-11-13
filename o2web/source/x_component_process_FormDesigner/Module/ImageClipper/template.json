@@ -1,6 +1,6 @@
 {
 	"id": "",
-	"name": "设置图片",
+	"name": "이미지 설정",
 	"type": "ImageClipper",
 	"description": "",
 	"clipperType": "size",

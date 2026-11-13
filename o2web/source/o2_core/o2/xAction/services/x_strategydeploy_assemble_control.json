@@ -20,11 +20,11 @@
 
   ///////////////////////////////////////////////新的组织//////////////////////////////////
   //data: {"personList": []}
-  "listIdentityWithPerson": {"uri": "/jaxrs/identity/list/person/object", "method": "POST"}, //查询人员的身份对象
+  "listIdentityWithPerson": {"uri": "/jaxrs/identity/list/person/object", "method": "POST"}, //사용자의 소속 객체 조회
   //data: {"identityList":[]}
-  "listUnitWithIdentity": {"uri": "/jaxrs/unit/list/identity/object", "method": "POST"}, //获取身份所在的组织
+  "listUnitWithIdentity": {"uri": "/jaxrs/unit/list/identity/object", "method": "POST"}, //소속이 속한 조직 조회
   //data: {"identityList":[]}
-  "listWithIdentityObject": {"uri": "/jaxrs/person/list/identity/object", "method": "POST"}, //获取身份对应的人员
+  "listWithIdentityObject": {"uri": "/jaxrs/person/list/identity/object", "method": "POST"}, //소속에 해당하는 사용자 조회
 
   //data:{"name":"部门正值","unit":"xxxx@0458bd06-00c7-448a-9ca1-f9178d4b2234@U"}
   "getUnitDuty":{"uri":"/jaxrs/unitduty/list/identity/unit/name","method":"POST"},

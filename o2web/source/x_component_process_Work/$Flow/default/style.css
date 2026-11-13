@@ -291,7 +291,7 @@
     border-radius: 8px;
     border: 1px solid #DEDEDE;
     padding: 5px;
-    font-family: "Microsoft YaHei";
+    font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
 }
 
 .o2flow-invalid-bg{
@@ -431,7 +431,7 @@
     height: 20px;
     line-height: 20px;
     font-size: 14px;
-    font-family: MicrosoftYaHei;
+    font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
 }
 
 .o2flow-radio2-area{
@@ -457,7 +457,7 @@
     height: 20px;
     line-height: 20px;
     font-size: 14px;
-    font-family: MicrosoftYaHei;
+    font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
 }
 
 .o2flow-route-container {

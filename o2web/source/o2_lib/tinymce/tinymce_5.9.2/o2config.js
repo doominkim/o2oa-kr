@@ -26,7 +26,7 @@ o2.TinyMCEConfig =  function ( mobile ) {
                     fileNode.addEvent("change", function(event){
                         var file= fileNode.files[0];
                         if(!/image\/\w+/.test(file.type)){           //判断获取的是否为图片文件
-                            MWF.xDesktop.notice('请选择图片格式文件',"error");
+                            MWF.xDesktop.notice('이미지 형식의 파일을 선택하세요',"error");
                             return false;
                         }
                         var reader=new FileReader();

@@ -1,5 +1,5 @@
 {
-  "name": "手机蓝白",
+  "name": "모바일 블루 화이트",
   "form": {
     "textareaDisableResize": true,
     "confirmStyle": "blue_flat_confirm",
@@ -41,7 +41,7 @@
       "style": "blue_flat_notice",
       "promptPosition": "center",
       "isTitle": true,
-      "title": "提交成功",
+      "title": "제출했습니다",
       "width": 440,
       "height": "auto",
       "promptCloseTime": 5,
@@ -66,12 +66,12 @@
       "style" : "blue_flat_mobile",
       "width" : "700",
       "height" : "510",
-      "hasLetter" : false, //字母
-      "hasTop" : true, //可选、已选的标题
+      "hasLetter" : false, //알파벳
+      "hasTop" : true, //선택 가능, 선택됨 제목
       "level1Indent" : 0,
       "indent" : 14, //46
       "tabStyle" : "blue_flat_mobile",
-      "hasShuttle" : false, //穿梭按钮
+      "hasShuttle" : false, //이동 버튼
       "searchbarInTopNode" : false,
       "hasSelectedSearchbar" : true,
       "contentUrl" : "../x_component_Selector/$Selector/blue_flat_mobile/selector.html",

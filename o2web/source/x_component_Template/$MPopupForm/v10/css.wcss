@@ -33,7 +33,7 @@
     "text-align": "left"
   },
   "formTopTextNode" : {
-    //"font-family" : "PingFang-SC-Medium",
+    //"font-family" : "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "height" : "50px",
     "line-height" : "50px",
     "padding-left" : "18px",
@@ -118,7 +118,7 @@
     "margin": "auto",
     "font-size": "14px",
     "color": "#666",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "position" : "relative"
   },
   "formTableContainer" : {

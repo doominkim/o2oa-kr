@@ -1,0 +1,20 @@
+{
+  "o2web/source/o2_core/o2/widget/Tablet.js": [
+    {
+      "text": "宋体,SimSun",
+      "reason": "글꼴 font-family 값(글꼴 이름 자체, 글꼴 작업 범위)"
+    }
+  ],
+  "o2web/source/o2_core/o2/xAction/services/x_cms_assemble_control.js": [
+    {
+      "text": "全部",
+      "reason": "서버로 보내는 documentType 조회 값(서버가 '全部'를 비교)"
+    }
+  ],
+  "o2web/source/x_component_process_Xform/Office.js": [
+    {
+      "text": "浙江兰德纵横网络技术股份有限公司",
+      "reason": "NTKO 오피스 컨트롤 라이선스 makerCaption(makerKey와 짝인 등록 회사명)"
+    }
+  ]
+}

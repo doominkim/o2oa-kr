@@ -21,7 +21,7 @@
   position: relative;
   margin-bottom: 15px;
   border: 1px solid #ddd;
-  font-family: "Meiryo UI", "Microsoft YaHei", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", monospace, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
 }
 .editormd *, .editormd *:before, .editormd *:after {
   -webkit-box-sizing: border-box;
@@ -682,7 +682,7 @@
   float: left;
   border-right: 1px solid #ddd;
   font-size: 14px;
-  font-family: "YaHei Consolas Hybrid", Consolas, "微软雅黑", "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", courier, monospace;
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
   line-height: 1.6;
   margin-top: 35px;
 }
@@ -3174,7 +3174,7 @@
   -webkit-text-size-adjust: 100%;
   color: #333;
   overflow: hidden;
-  font-family: "Microsoft YaHei", Helvetica, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", "Monaco", monospace, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   word-wrap: break-word;
@@ -3904,7 +3904,7 @@
 }
 .editormd-preview-container .sequence-diagram text, .editormd-preview-container .flowchart text, .editormd-html-preview .sequence-diagram text, .editormd-html-preview .flowchart text {
   font-size: 15px !important;
-  font-family: "YaHei Consolas Hybrid", Consolas, "Microsoft YaHei", "Malgun Gothic", "Segoe UI", Helvetica, Arial !important;
+  font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif !important;
 }
 
 /*! Pretty printing styles. Used with prettify.js. */

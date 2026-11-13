@@ -1559,7 +1559,7 @@ o2.widget.Tablet.ToolbarMobile = new Class({
             if( item.name === "collect" ){
                 this.isCollectNode = new Element('oo-checkbox-group', {styles: this.css["isCollect_mobile"]}).inject(this.tablet.container);
                 new Element('oo-checkbox',{
-                    text: '收藏', value: 'yes'
+                    text: '즐겨찾기', value: 'yes'
                 }).inject(this.isCollectNode);
             }
         }.bind(this));
@@ -3210,7 +3210,7 @@ o2.widget.Tablet.FontFamily = new Class({
         "style": "minderFont",
         "width": "120px",
         "height": "28px",
-        "defaultOptionLp": "字体",
+        "defaultOptionLp": "글꼴",
         "textField": "name",
         "valueField": "val",
         "event": "mouseenter",
@@ -3227,20 +3227,20 @@ o2.widget.Tablet.FontFamily = new Class({
     },
     _loadData: function( callback ){
         var fontFamilyList = [{
-            name: '宋体',
-            val: '宋体,SimSun'
+            name: '맑은 고딕',
+            val: 'Malgun Gothic, Apple SD Gothic Neo, Noto Sans KR, sans-serif'
         }, {
-            name: '微软雅黑',
-            val: '微软雅黑,Microsoft YaHei'
+            name: 'Noto Sans KR',
+            val: 'Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif'
         }, {
-            name: '楷体',
-            val: '楷体,楷体_GB2312,SimKai'
+            name: '바탕',
+            val: 'Batang, AppleMyungjo, Noto Serif KR, serif'
         }, {
-            name: '黑体',
-            val: '黑体, SimHei'
+            name: '돋움',
+            val: 'Dotum, Apple SD Gothic Neo, sans-serif'
         }, {
-            name: '隶书',
-            val: '隶书, SimLi'
+            name: '굴림',
+            val: 'Gulim, Apple SD Gothic Neo, sans-serif'
         }, {
             name: 'Andale Mono',
             val: 'andale mono'

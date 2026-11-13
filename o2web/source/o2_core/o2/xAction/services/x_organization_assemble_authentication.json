@@ -21,41 +21,41 @@
   },
   "getLoginMode": {
     "uri": "/jaxrs/authentication/mode"
-  }, //图片验证码默认可用，mode获取扫描二维码和手机验证码是否可用
+  }, //이미지 인증 코드는 기본 사용, mode로 QR 코드 스캔과 휴대폰 인증 코드 사용 가능 여부 조회
   "getAuthentication": {
     "uri": "/jaxrs/authentication"
-  }, //获取当前登录用户
+  }, //현재 로그인 사용자 조회
   "loginByPassword": {
     "uri": "/jaxrs/authentication",
     "method": "POST"
-  }, //用户登录.credential=xxxx,password=xxxx
+  }, //사용자 로그인.credential=xxxx,password=xxxx
   "getLoginCaptcha": {
     "uri": "/jaxrs/authentication/captcha/width/{width}/height/{height}"
-  }, //验证码
+  }, //인증 코드
   "loginByCaptcha": {
     "uri": "/jaxrs/authentication/captcha",
     "method": "POST"
   },
   "createCredentialCode": {
     "uri": "/jaxrs/authentication/code/credential/{credential}"
-  }, //发送短信验证码
+  }, //SMS 인증 코드 발송
   "checkCredential": {
     "uri": "/jaxrs/authentication/check/credential/{credential}"
-  }, //检查用户名是否存在
+  }, //사용자 이름 존재 여부 확인
   "loginByCode": {
     "uri": "/jaxrs/authentication/code",
     "method": "POST"
-  }, //使用短信验证码登录
+  }, //SMS 인증 코드로 로그인
   "loginByTwoFactor": {
     "uri": "/jaxrs/authentication/two/factory/login",
     "method": "POST"
-  }, //双因素登录认证
+  }, //2단계 로그인 인증
   "getLoginBind": {
     "uri": "/jaxrs/authentication/bind"
-  }, //扫描的二维码
+  }, //스캔한 QR 코드
   "checkBindStatus": {
     "uri": "/jaxrs/authentication/bind/meta/{meta}"
-  }, //通过二维码进行登录，轮询判断是否登录
+  }, //QR 코드로 로그인, 폴링으로 로그인 여부 판단
   "getOauthServer": {
     "uri": "/jaxrs/authentication/oauth/name/{name}",
     "method": "GET"

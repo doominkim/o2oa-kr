@@ -6,7 +6,7 @@
     //			"icon": "process.png"
     //		},
     {
-      "title": "办公中心",
+      "title": "업무함",
       "action": "process.TaskCenter",
       "icon": "task.png"
     },
@@ -16,7 +16,7 @@
     //      "icon": "cms.png"
     //    },
     {
-      "title": "企业网盘",
+      "title": "웹하드",
       "action": "File",
       "icon": "file.png"
     },
@@ -27,12 +27,12 @@
     //          "icon": "mail.png"
     //        },
     {
-      "title": "组织管理",
+      "title": "조직 관리",
       "action": "Organization",
       "icon": "org.png"
     },
     {
-      "title": "个人设置",
+      "title": "개인 설정",
       "action": "Profile",
       "icon": "profile.png"
     }

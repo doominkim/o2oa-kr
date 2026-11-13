@@ -215,71 +215,71 @@
         </table>
         <div id="text{$.pid}dateTimeRangeArea" style="display: text{($.rangeType=='dateTime')?'block':'none'};">
             <div style="line-height: 24px;padding:5px 0px;">
-                //起止日期时间<br/>
+                //시작·종료 일시<br/>
                 return ["2023-01-01 08:00:00", "2023-03-03 18:00:00"];<br/>
-                //起止日期时间数组<br/>
+                //시작·종료 일시 배열<br/>
                 return [ ["2023-01-01 08:00:00", "2023-03-03 18:00:00"], ... ];
             </div>
             <div class="MWFScriptArea" name="dateTimeRangeScript" title="{{$.lp.rangeByDatetime}} (S)"></div>
         </div>
         <div id="text{$.pid}dateAndTimeRangeArea" style="display: text{($.rangeType=='dateAndTime')?'block':'none'};">
             <div style="line-height: 24px;padding:5px 0px;">
-                //起止日期<br/>
+                //시작·종료 날짜<br/>
                 return ["2023-01-01", "2023-03-03"];<br/>
-                //起止日期数组<br/>
+                //시작·종료 날짜 배열<br/>
                 return [ ["2023-01-01", "2023-03-03"], ... ];
             </div>
             <div class="MWFScriptArea" name="dateRangeScript" title="{{$.lp.rangeByDate}} (S)"></div>
             <div style="line-height: 24px;padding:5px 0px;">
-                //起止时间<br/>
+                //시작·종료 시간<br/>
                 return ["08:00:00", "18:00:00"];<br/>
-                //起止时间数组<br/>
+                //시작·종료 시간 배열<br/>
                 return [ ["08:00:00", "18:00:00"], ... ];
             </div>
             <div class="MWFScriptArea" name="timeRangeScript" title="{{$.lp.rangeByTime}} (S)"></div>
         </div>
         <div id="text{$.pid}otherRangeArea" style="display: text{($.rangeType=='other')?'block':'none'};">
             <div style="line-height: 24px;padding:5px 0px;">
-                var date = this.event.date; //获取传入的日期<br/>
-                return date > new Date().clearTime();   //晚于当前日期，则可选;
+                var date = this.event.date; //전달된 날짜 가져오기<br/>
+                return date > new Date().clearTime();   //현재 날짜보다 늦으면 선택 가능;
             </div>
             <div class="MWFScriptArea" name="enableDate" title="{{$.lp.enableDate}} (S)"></div>
             <div style="line-height: 24px;padding:5px 0px;">
-                //该脚本用于选择小时界面的判断<br/>
-                var {date, hour} = this.event; //获取传入的日期（日期类型，包括小时）和小时（数字类型）<br/>
-                return hour >= 8 //每天8点之后可选<br/>
-                /***早于当前日期和小时可选***/<br/>
+                //시 선택 화면에서 쓰는 판단 스크립트<br/>
+                var {date, hour} = this.event; //전달된 날짜(Date 형식, 시 포함)와 시(숫자) 가져오기<br/>
+                return hour >= 8 //매일 8시 이후 선택 가능<br/>
+                /***현재 날짜·시 이전 선택 가능***/<br/>
                 return this.event.date <= new Date().setMinutes(0, 0, 0);
             </div>
             <div class="MWFScriptArea" name="enableHour" title="{{$.lp.enableHour}} (S)"></div>
             <div style="line-height: 24px;padding:5px 0px;">
-                //该脚本用于选择分界面的判断<br/>
-                var {date, hour, minute} = this.event; //获取传入的日期（日期类型，包括小时和分）、小时和分（数字类型）<br/>
-                return hour > 8 || (hour === 8 && minute >= 30); //每天8点30分之后可选<br/>
-                /***早于当前日期、时分可选***/<br/>
+                //분 선택 화면에서 쓰는 판단 스크립트<br/>
+                var {date, hour, minute} = this.event; //전달된 날짜(Date 형식, 시·분 포함), 시·분(숫자) 가져오기<br/>
+                return hour > 8 || (hour === 8 && minute >= 30); //매일 8시 30분 이후 선택 가능<br/>
+                /***현재 날짜·시·분 이전 선택 가능***/<br/>
                 return this.event.date <= new Date().setSeconds(0, 0);
             </div>
             <div class="MWFScriptArea" name="enableMinute" title="{{$.lp.enableMinute}} (S)"></div>
             <div style="line-height: 24px;padding:5px 0px;">
-                //该脚本用于选择秒界面的判断<br/>
-                var {date, hour, minute, second} = this.event; //获取传入的日期（日期类型，包括时分秒）、时分秒（数字类型）<br/>
+                //초 선택 화면에서 쓰는 판단 스크립트<br/>
+                var {date, hour, minute, second} = this.event; //전달된 날짜(Date 형식, 시·분·초 포함), 시·분·초(숫자) 가져오기<br/>
                 return hour > 8 ||<br/>
                 (hour === 8 && minute > 30) ||<br/>
-                (hour === 8 && minute === 30 && second >= 30) //每天8点30分30秒之后可选<br/>
-                /***早于当前日期、时分秒可选***/<br/>
+                (hour === 8 && minute === 30 && second >= 30) //매일 8시 30분 30초 이후 선택 가능<br/>
+                /***현재 날짜·시·분·초 이전 선택 가능***/<br/>
                 return this.event.date < new Date(endTime).setMilliseconds(0);
             </div>
             <div class="MWFScriptArea" name="enableSecond" title="{{$.lp.enableSecond}} (S)"></div>
             <div style="line-height: 24px;padding:5px 0px;">
-                //该脚本用于选择年份界面的判断<br/>
-                var year = this.event.year; //获取传入的年份(number) <br/>
-                return year >= new Date().getFullYear(); //晚于当前年份可选
+                //연도 선택 화면에서 쓰는 판단 스크립트<br/>
+                var year = this.event.year; //전달된 연도 가져오기(number) <br/>
+                return year >= new Date().getFullYear(); //현재 연도 이후 선택 가능
             </div>
             <div class="MWFScriptArea" name="enableYear" title="{{$.lp.enableYear}} (S)"></div>
             <div style="line-height: 24px;padding:5px 0px;">
-                //该脚本用于选择月份界面的判断<br/>
-                var month = this.event.month; //获取传入的月份YYYY-MM<br/>
-                return month >= '2025-07'; //晚于2025年7月可选
+                //월 선택 화면에서 쓰는 판단 스크립트<br/>
+                var month = this.event.month; //전달된 월 가져오기(YYYY-MM)<br/>
+                return month >= '2025-07'; //2025년 7월 이후 선택 가능
             </div>
             <div class="MWFScriptArea" name="enableMonth" title="{{$.lp.enableMonth}} (S)"></div>
         </div>

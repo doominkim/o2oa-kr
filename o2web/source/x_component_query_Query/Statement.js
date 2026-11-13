@@ -1585,7 +1585,7 @@ MWF.xApplication.query.Query.Statement.Exporter = new Class({
             </div>
             <div style="color: #666;">${ lp.description.replace("{count}", total )}</div>
             <div>
-                <div style="padding: 0.8em 1em; font-size: 1.14286rem; display: ${this.options.allowSelectColumn?'block':'none'};">选择列</div>
+                <div style="padding: 0.8em 1em; font-size: 1.14286rem; display: ${this.options.allowSelectColumn?'block':'none'};">열 선택</div>
                 <div class="selector"></div>
             </div>
         </div>

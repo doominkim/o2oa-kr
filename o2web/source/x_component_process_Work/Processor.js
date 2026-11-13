@@ -1287,7 +1287,7 @@ MWF.xApplication.process.Work.Processor = new Class({
                 "id": o2.uuid(),
                 "asyncSupported": false,
                 "soleDirect": false,
-                "name": "继续流转",
+                "name": "계속 진행",
                 "alias": "",
                 "selectConfigList": []
             }];

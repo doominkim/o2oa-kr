@@ -8,8 +8,8 @@
                     <div class="content-container" id="app_content"></div>
                     <div class="content-mask"></div>
                     <div class="content-operation-button">
-                        <button class="mainColor_bg" v-if="currentItem" @click="updatePageItem">修改</button>
-                        <button class="mainColor_bg" v-if="currentItem" @click="deletePageItem($event)">删除</button>
+                        <button class="mainColor_bg" v-if="currentItem" @click="updatePageItem">수정</button>
+                        <button class="mainColor_bg" v-if="currentItem" @click="deletePageItem($event)">삭제</button>
                     </div>
                 </div>
                 <div class="bar">
@@ -32,16 +32,16 @@
             </div>
             <div class="app-layout-form">
                 <button class="mainColor_bg" style="margin-left: 100px;" v-if="ev.length < 5"
-                    @click="newPageItem">新增</button>
+                    @click="newPageItem">추가</button>
             </div>
         </div>
         <el-dialog v-model="dialogVisible" :title="dialogTitle" :close-on-click-modal="false" @closed="closedDialog">
             <AppLayoutForm v-if="dialogVisible" :item="dialogPageItem" @savePageItem="(item) => {
-                console.debug('保存数据', item)
+                console.debug('데이터 저장', item)
                 const index = ev.findIndex((p) => p.id === item.id)
-                if (index > -1) { // 修改
+                if (index > -1) { // 수정
                     ev.splice(index, 1, item)
-                } else { // 新增 TODO 校验相同页面
+                } else { // 추가 TODO 같은 페이지 검증
                     ev.push(item)
                 }
                 if (item.isMain === true) {
@@ -70,7 +70,7 @@ const newPageItem = () => {
     const newItem = s.defaultAppHomePageList[0];
     newItem.id = o2.uuid();
     dialogPageItem.value = newItem;
-    dialogTitle.value = '新增页面';
+    dialogTitle.value = '페이지 추가';
     dialogVisible.value = true;
 }
 // 更新页面
@@ -78,9 +78,9 @@ const updatePageItem = () => {
     if (!currentItem.value) {
         return
     }
-    console.debug('=====> 打开更新页面')
+    console.debug('=====> 페이지 수정 열기')
     dialogPageItem.value = copyObject(currentItem.value);
-    dialogTitle.value = '修改页面';
+    dialogTitle.value = '페이지 수정';
     dialogVisible.value = true;
 }
 const closedDialog = () => {
@@ -93,8 +93,8 @@ const deletePageItem = (e) => {
     if (!currentItem.value) {
         return
     }
-    const msg = `确定要删除【${currentItem.value.name}】这个页面吗？`
-    component.confirm("warn", e, "删除页面", msg, 380, 120, (dlg) => {
+    const msg = `[${currentItem.value.name}] 페이지를 삭제하시겠습니까?`
+    component.confirm("warn", e, "페이지 삭제", msg, 380, 120, (dlg) => {
         _realDeletePage();
         dlg.close();
     }, dlg => dlg.close());
@@ -102,7 +102,7 @@ const deletePageItem = (e) => {
 }
 const _realDeletePage = () => {
     const index = ev.value.findIndex((p) => p.id === currentItem.value.id)
-    console.debug('删除', index)
+    console.debug('삭제', index)
     if (index > -1) {
         const item = ev.value[index]
         ev.value.splice(index, 1)

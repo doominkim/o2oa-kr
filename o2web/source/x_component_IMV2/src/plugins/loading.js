@@ -10,6 +10,6 @@ export default {
 
         const appInstance = createApp(Loading); // 创建 Loading 组件的独立实例
         appInstance.mount(container); // 挂载到 DOM
-        console.log('注册插件成功！！！！！！！！')
+        console.log('플러그인 등록 성공!')
     },
 };

@@ -1,55 +1,55 @@
 {
   "application_create": {
     "consumers": [],
-    "description": "创建应用."
+    "description": "앱 생성."
   },
   "application_update": {
     "consumers": [],
-    "description": "更新应用."
+    "description": "앱 수정."
   },
   "application_delete": {
     "consumers": [],
-    "description": "删除应用."
+    "description": "앱 삭제."
   },
   "process_create": {
     "consumers": [],
-    "description": "创建流程."
+    "description": "프로세스 생성."
   },
   "process_update": {
     "consumers": [],
-    "description": "更新流程."
+    "description": "프로세스 수정."
   },
   "process_delete": {
     "consumers": [],
-    "description": "删除流程."
+    "description": "프로세스 삭제."
   },
   "activity_message": {
     "consumers": [],
-    "description": "有新的工作通过消息节点."
+    "description": "새 작업이 메시지 노드를 통과함."
   },
   "work_to_workCompleted": {
     "consumers": [],
-    "description": "工作完成转已完成工作."
+    "description": "작업이 완료되어 완료된 작업으로 전환됨."
   },
   "work_create": {
     "consumers": [],
-    "description": "创建工作."
+    "description": "작업 생성."
   },
   "work_delete": {
     "consumers": [],
-    "description": "删除工作."
+    "description": "작업 삭제."
   },
   "workCompleted_create": {
     "consumers": [],
-    "description": "创建已完成工作."
+    "description": "완료된 작업 생성."
   },
   "workCompleted_delete": {
     "consumers": [],
-    "description": "删除已完成工作."
+    "description": "완료된 작업 삭제."
   },
   "task_to_taskCompleted": {
     "consumers": [],
-    "description": "待办完成转已办."
+    "description": "결재 대기가 처리되어 결재 완료로 전환됨."
   },
   "task_create": {
     "consumers": [
@@ -60,11 +60,11 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "创建待办."
+    "description": "결재 대기 생성."
   },
   "task_delete": {
     "consumers": [],
-    "description": "删除待办."
+    "description": "결재 대기 삭제."
   },
   "task_urge": {
     "consumers": [
@@ -75,7 +75,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "待办即将过期催办."
+    "description": "결재 대기 기한 임박 독촉."
   },
   "task_expire": {
     "consumers": [
@@ -86,7 +86,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "待办过期."
+    "description": "결재 대기 기한 초과."
   },
   "task_press": {
     "consumers": [
@@ -97,19 +97,19 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "待办提醒."
+    "description": "결재 대기 알림."
   },
   "taskCompleted_create": {
     "consumers": [],
-    "description": "创建已办."
+    "description": "결재 완료 생성."
   },
   "taskCompleted_delete": {
     "consumers": [],
-    "description": "删除已办."
+    "description": "결재 완료 삭제."
   },
   "read_to_readCompleted": {
     "consumers": [],
-    "description": "待阅转已阅."
+    "description": "열람 대기가 열람 완료로 전환됨."
   },
   "read_create": {
     "consumers": [
@@ -120,27 +120,27 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "创建待阅."
+    "description": "열람 대기 생성."
   },
   "read_delete": {
     "consumers": [],
-    "description": "删除待阅."
+    "description": "열람 대기 삭제."
   },
   "readCompleted_create": {
     "consumers": [],
-    "description": "创建已阅."
+    "description": "열람 완료 생성."
   },
   "readCompleted_delete": {
     "consumers": [],
-    "description": "删除已阅."
+    "description": "열람 완료 삭제."
   },
   "review_create": {
     "consumers": [],
-    "description": "创建参阅."
+    "description": "참조 문서 생성."
   },
   "review_delete": {
     "consumers": [],
-    "description": "删除参阅."
+    "description": "참조 문서 삭제."
   },
   "meeting_invite": {
     "consumers": [
@@ -151,11 +151,11 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "会议邀请."
+    "description": "회의 초대."
   },
   "meeting_delete": {
     "consumers": [],
-    "description": "删除会议."
+    "description": "회의 삭제."
   },
   "meeting_accept": {
     "consumers": [
@@ -166,7 +166,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "会议邀请接受."
+    "description": "회의 초대 수락."
   },
   "meeting_reject": {
     "consumers": [
@@ -177,15 +177,15 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "会议邀请拒绝."
+    "description": "회의 초대 거절."
   },
   "attachment_create": {
     "consumers": [],
-    "description": "创建附件."
+    "description": "첨부파일 생성."
   },
   "attachment_delete": {
     "consumers": [],
-    "description": "删除附件."
+    "description": "첨부파일 삭제."
   },
   "attachment_share": {
     "consumers": [
@@ -196,7 +196,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "附件分享."
+    "description": "첨부파일 공유."
   },
   "attachment_shareCancel": {
     "consumers": [
@@ -207,19 +207,19 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "附件取消分享."
+    "description": "첨부파일 공유 취소."
   },
   "attachment_editor": {
     "consumers": [],
-    "description": "附件可编辑设置."
+    "description": "첨부파일 편집 가능 설정."
   },
   "attachment_editorCancel": {
     "consumers": [],
-    "description": "附件可编辑取消."
+    "description": "첨부파일 편집 가능 취소."
   },
   "attachment_editorModify": {
     "consumers": [],
-    "description": "附件可编辑修改."
+    "description": "첨부파일 편집 가능 수정."
   },
   "calendar_alarm": {
     "consumers": [
@@ -230,7 +230,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "日历通知."
+    "description": "캘린더 알림."
   },
   "custom_create": {
     "consumers": [
@@ -241,7 +241,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "自定义消息创建."
+    "description": "사용자 정의 메시지 생성."
   },
   "teamwork_taskCreate": {
     "consumers": [
@@ -252,7 +252,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "工作管理任务创建."
+    "description": "업무 관리 작업 생성."
   },
   "teamwork_taskUpdate": {
     "consumers": [
@@ -263,7 +263,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "工作管理任务更新."
+    "description": "업무 관리 작업 수정."
   },
   "teamwork_taskDelete": {
     "consumers": [
@@ -274,7 +274,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "工作管理任务删除."
+    "description": "업무 관리 작업 삭제."
   },
   "teamwork_taskOvertime": {
     "consumers": [
@@ -285,7 +285,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "工作管理任务超时."
+    "description": "업무 관리 작업 기한 초과."
   },
   "teamwork_chat": {
     "consumers": [
@@ -296,11 +296,11 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "工作管理聊天."
+    "description": "업무 관리 메신저."
   },
   "cms_publish": {
     "consumers": [],
-    "description": "内容管理发布."
+    "description": "게시판 게시."
   },
   "cms_publish_to_creator": {
     "consumers": [
@@ -311,7 +311,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "内容管理发布创建者通知."
+    "description": "게시판 게시 작성자 알림."
   },
   "bbs_subjectCreate": {
     "consumers": [
@@ -322,7 +322,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "论坛创建贴子."
+    "description": "포럼 게시물 생성."
   },
   "bbs_replyCreate": {
     "consumers": [
@@ -333,7 +333,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "论坛创建回复."
+    "description": "포럼 댓글 생성."
   },
   "mind_fileSend": {
     "consumers": [
@@ -344,7 +344,7 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "脑图发送."
+    "description": "마인드맵 보내기."
   },
   "mind_fileShare": {
     "consumers": [
@@ -355,14 +355,14 @@
       {"consumer": "qiyeweixin"},
       {"consumer": "mpweixin"}
     ],
-    "description": "脑图分享."
+    "description": "마인드맵 공유."
   },
   "im_create": {
     "consumers": [
       {"consumer": "ws"},
       {"consumer": "pmsinner"}
     ],
-    "description": "聊聊消息."
+    "description": "메신저 메시지."
   },
   "custom": {},
   "clean": {

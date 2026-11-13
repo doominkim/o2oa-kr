@@ -345,7 +345,7 @@ MWF.xApplication.process.Work.Flow  = MWF.ProcessFlow = new Class({
                 "id": o2.uuid(),
                 "asyncSupported": false,
                 "soleDirect": false,
-                "name": "继续流转",
+                "name": "계속 진행",
                 "alias": "",
                 "selectConfigList": []
             }];

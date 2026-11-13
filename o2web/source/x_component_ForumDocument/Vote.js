@@ -532,7 +532,7 @@ MWF.xApplication.ForumDocument.Vote = new Class({
                         blur : function( item, ev ){ if( item.getValue() == "" )item.setValue(this.lp.option) }.bind(this)
                     }},
                     optionPictureId : { type : "imageClipper",
-                        text : "图片",
+                        text : "이미지",
                         notEmpty : true,
                         disable : ( !contentUsePicture ),
                         style : {

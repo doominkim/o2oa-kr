@@ -61,7 +61,7 @@
 				<div class="MWFScriptArea" name="viewScript" title="{{$.lp.view}}{{$.lp.script}} (S)"></div>
 			</div>
 			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="editTable">
-				<tr title="如果没有立即载入，需要使用this.form.get(viewId).active()加载">
+				<tr title="즉시 불러오지 않으면 this.form.get(viewId).active()로 불러와야 합니다">
 					<td class="editTableTitle">{{$.lp.loadNow}}:</td>
 					<td class="editTableValue">
 						<input type="radio" name="loadView" value="yes" text{($.loadView!='no')?'checked':''}/>{{$.lp.yes}}
@@ -171,7 +171,7 @@
 							<option value="notLike">{{$.lp.notLike}}(not-like)</option>
 <!--							<option value="range">{{$.lp.range}}(range)</option>-->
 							<option value="in">{{$.lp.in}}(in)</option>
-							<option value="notIn">不包含(notIn)</option>
+							<option value="notIn">포함하지 않음(notIn)</option>
 						</select></td>
 					</tr>
 					<tr style="display:none">
@@ -190,7 +190,7 @@
 						</td>
 					</tr>
 				</table>
-				<div title="值" class="MWFFilterFormulaArea"></div>
+				<div title="값" class="MWFFilterFormulaArea"></div>
 			</div>
 			<div class="actionAreaNode_vf"></div>
 			<div style="height: 20px; line-height: 20px; text-align:center; background-color: #eeeeee">{{$.lp.defaultFilter}}</div>

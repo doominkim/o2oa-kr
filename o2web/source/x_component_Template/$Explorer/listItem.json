@@ -9,7 +9,7 @@
     "width" : "5%"
   },
   {
-    "title" : "姓名",
+    "title" : "이름",
     "headStyles" : "normalThNode",
     "contentStyles" : "normalTdNode",
     "item" : "empName",
@@ -17,7 +17,7 @@
     "width" : "15%"
   },
   {
-    "title" : "日期",
+    "title" : "날짜",
     "headStyles" : "normalThNode",
     "contentStyles" : "normalTdNode",
     //"sort" : "desc,asc",
@@ -28,16 +28,16 @@
   },
 
   {
-    "title" : "说明",
+    "title" : "설명",
     "headStyles" : "normalThNode",
     "contentStyles" : "normalTdNode",
-    "item" : "function( data ){ if(data.isHoliday){return '节假日'}else if(data.isWeekend){return '周末'}else if(data.isWorkday){return '调休工作日'}else{return '工作日'}  }",
+    "item" : "function( data ){ if(data.isHoliday){return '휴일'}else if(data.isWeekend){return '주말'}else if(data.isWorkday){return '대체 근무일'}else{return '근무일'}  }",
     "name" : "description",
     "width" : "10%"
   },
 
   {
-    "title" : "上班打卡时间",
+    "title" : "출근 체크 시간",
     "headStyles" : "normalThNode",
     "contentStyles" : "normalTdNode",
     "item" : "onDutyTime",
@@ -45,7 +45,7 @@
     "width" : "15%"
   },
   {
-    "title" : "下班打卡时间",
+    "title" : "퇴근 체크 시간",
     "headStyles" : "normalThNode",
     "contentStyles" : "normalTdNode",
     "item" : "offDutyTime",
@@ -53,24 +53,24 @@
     "width" : "15%"
   },
   {
-    "title": "考勤状态",
+    "title": "근태 상태",
     "headStyles": "normalThNode",
     "contentStyles": "normalTdNode",
-    "item": "function( d ){  var status=''; if(d.isGetSelfHolidays){ status = '请假' }else if(d.isAbsent){ status = '缺勤' }else if(d.isLate){ status = '迟到' }else if(d.isLeaveEarlier){ status = '早退' }else{ status = '正常' }; return status; }",
+    "item": "function( d ){  var status=''; if(d.isGetSelfHolidays){ status = '휴가' }else if(d.isAbsent){ status = '결근' }else if(d.isLate){ status = '지각' }else if(d.isLeaveEarlier){ status = '조퇴' }else{ status = '정상' }; return status; }",
     "name" : "status",
     "width" : "10%"
   } ,
   {
-    "title": "申诉状态",
+    "title": "이의 신청 상태",
     "headStyles": "normalThNode",
     "contentStyles": "normalTdNode",
-    "item": "function( d ){  if(d.appealStatus==1){ return '申诉中' }else if(d.appealStatus==-1){ return '申诉未通过' }else if(d.appealStatus==9){ return '申诉通过' }else{ return '' } }",
+    "item": "function( d ){  if(d.appealStatus==1){ return '이의 신청 중' }else if(d.appealStatus==-1){ return '이의 신청 반려' }else if(d.appealStatus==9){ return '이의 신청 승인' }else{ return '' } }",
     "name" : "appealStatus",
     "width" : "10%"
   },
   {
     "access" : "admin",
-    "title" : "申诉",
+    "title" : "이의 신청",
     "headStyles" : "normalThNode",
     "contentStyles" : "normalTdNode",
     "item" : "actions",
@@ -78,7 +78,7 @@
     "width" : "10%",
     "sub" : [{
       "access" : "admin",
-      "title" : "删除",
+      "title" : "삭제",
       "action" : "remove",
 //      "styles" : "actionAppealNode",
 //      "overStyles" : "actionAppealNode_over",
@@ -89,7 +89,7 @@
       "icon" : "delete.png",
       "overIcon" : "delete_over.png"
     },{
-      "title" : "查看申诉信息",
+      "title" : "이의 신청 정보 보기",
       "action" : "seeAppeal",
       "condition" : "function( d ){ if( d.appealStatus ){ return true }else{ return false } }",
       "styles" : "documentActionDeleteNode",

@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td class="editTableTitle">{{$.lp.canSelectCount}}:</td>
-                <td class="editTableValue"><input title="0 表示不限制数量" type="text" name="count" value="text{$.count}" class="editTableInput"/></td>
+                <td class="editTableValue"><input title="0은 수량 제한 없음" type="text" name="count" value="text{$.count}" class="editTableInput"/></td>
             </tr>
             <tr>
                 <td class="editTableTitle">{{$.lp.showOptions}}:</td>
@@ -104,13 +104,13 @@
         <div id="text{$.pid}selectEditItemScript" style="display: text{($.itemType=='script')?'block':'none'}" class="MWFScriptArea" name="itemScript" title="{{$.lp.optionScript}} (S)"></div>
         <div id="text{$.pid}selectEditItemDynamic" style="display: text{($.itemType=='dynamic')?'block':'none'}">
             <div style="line-height: 20px;padding:5px;">
-                //动态计算指每次输入的时候（出现可选列表）都会重新计算可选值<br/>
-                //可以通过this.event.value 获取当前输入的值<br/>
-                //需要通过 this.event.callback( options ) 将选项回传给组件<br/>
+                //동적 계산은 입력할 때마다(선택 목록이 나타날 때) 선택 가능한 값을 다시 계산합니다<br/>
+                //this.event.value로 현재 입력한 값을 가져올 수 있습니다<br/>
+                //this.event.callback( options )로 옵션을 구성요소에 돌려줘야 합니다<br/>
                 if( ( this.event.value || "" ).indexOf("a") > -1 ){<br/>
-                &nbsp;&nbsp;this.event.callback( [{text:"文本1", value:"aaa"}, {text:"文本2", value:"aa"}] )<br/>
+                &nbsp;&nbsp;this.event.callback( [{text:"텍스트1", value:"aaa"}, {text:"텍스트2", value:"aa"}] )<br/>
                 }else{<br/>
-                &nbsp;&nbsp;this.event.callback( [{text:"文本3", value:"bbb"}, {text:"文本4", value:"bb"}] )<br/>
+                &nbsp;&nbsp;this.event.callback( [{text:"텍스트3", value:"bbb"}, {text:"텍스트4", value:"bb"}] )<br/>
                 }
             </div>
             <div class="MWFScriptArea" name="itemDynamic" title="{{$.lp.optionDynamicScript}} (S)"></div>

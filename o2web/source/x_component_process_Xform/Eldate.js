@@ -39,7 +39,7 @@ MWF.xApplication.process.Xform.Eldate = MWF.APPEldate =  new Class(
     },
     _loadMergeReadContentNode: function( contentNode, data ){
         var d = o2.typeOf( data.data ) === "array" ? data.data : [data.data];
-        contentNode.set("text", d.join( this.json.rangeSeparator ? " "+this.json.rangeSeparator+" " : " 至 " ) );
+        contentNode.set("text", d.join( this.json.rangeSeparator ? " "+this.json.rangeSeparator+" " : " ~ " ) );
     },
     _queryLoaded: function(){
         this._loadReadEditAbeld();

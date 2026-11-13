@@ -3862,7 +3862,7 @@ MWF.xApplication.Selector.Person.BreadcrumbsItem = new Class({
             }).inject(this.breadcrumbs.node);
         }
         this.node = new Element('div', {
-            text: this.isRoot ?  '顶层' : this.category._getShowName(),
+            text: this.isRoot ?  '최상위' : this.category._getShowName(),
             styles: this.css.breadcrumbsItem
         }).inject(this.breadcrumbs.node);
         this.node.addEvent('click', function (ev){

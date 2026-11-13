@@ -455,17 +455,17 @@ MWF.xApplication.Template.MPopupForm = MPopupForm = new Class({
             this.form = new MForm(this.formTableArea, {empName: "xadmin"}, {
                 isEdited: this.isEdited || this.isNew,
                 itemTemplate: {
-                    empName: {text: "姓名", type: "innertext"},
-                    departmentName: {text: "部门", tType: "department", notEmpty: true},
-                    recordDateString: {text: "日期", tType: "date"},
-                    status: {text: "状态", tType: "number"},
+                    empName: {text: "이름", type: "innertext"},
+                    departmentName: {text: "부서", tType: "department", notEmpty: true},
+                    recordDateString: {text: "날짜", tType: "date"},
+                    status: {text: "상태", tType: "number"},
                     appealReason: {
-                        text: "下拉框",
+                        text: "드롭다운",
                         type: "select",
-                        selectValue: ["测试1", "测试2"]
+                        selectValue: ["테스트1", "테스트2"]
                     },
-                    appealDescription: {text: "描述", type: "textarea"},
-                    opinion1: {text: "测试", type: "button", "value": "测试"}
+                    appealDescription: {text: "설명", type: "textarea"},
+                    opinion1: {text: "테스트", type: "button", "value": "테스트"}
                 }
             }, this.app);
             this.form.load();

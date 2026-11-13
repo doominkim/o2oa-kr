@@ -45,14 +45,14 @@
     width:34px;
     height:21px;
     font-size:16px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(74,144,226,1);
     line-height:21px;
 }
 .o2_appmarket_application_introduce_memo_name{
     height:51px;
     font-size:36px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:47px;
     overflow:hidden;
@@ -61,7 +61,7 @@
     width:437px;
     height:51px;
     font-size:36px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:47px;
 }
@@ -69,7 +69,7 @@
     width:90%;
     height:19px;
     font-size:14px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(102,102,102,1);
     line-height:19px;
 }
@@ -77,7 +77,7 @@
     width:90%;
     height:19px;
     font-size:14px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(153,153,153,1);
     line-height:19px;
     margin-top:40px;
@@ -86,7 +86,7 @@
     width:870px;
     height:280px;
     font-size:18px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:30px;
     overflow: hidden;
@@ -112,7 +112,7 @@
     width:22px;
     height:24px;
     font-size:18px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(102,102,102,1);
     line-height:24px;
     margin-left:8px;
@@ -127,7 +127,7 @@
     width:88px;
     height:37px;
     font-size:28px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(74,144,226,1);
     line-height:37px;
     margin:0px 0px 20px 20px;
@@ -144,7 +144,7 @@
     width:94px;
     height:29px;
     font-size:22px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(255,255,255,1);
     line-height:29px;
     padding-top:15px;
@@ -163,7 +163,7 @@
     width: 143px;
     height: 29px;
     font-size: 22px;
-    font-family: MicrosoftYaHei;
+    font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color: #666666;
     line-height: 29px;
     padding-top:15px;
@@ -182,7 +182,7 @@
     width: 97px;
     height: 20px;
     font-size: 16px;
-    font-family: MicrosoftYaHei;
+    font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color: #4A90E2;
     line-height: 21px;
     float:left;
@@ -192,7 +192,7 @@
     width: 240px;
     height: 58px;
     font-size: 16px;
-    font-family: MicrosoftYaHei;
+    font-family: Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color: #333333;
     line-height: 30px;
     margin-top:70px;
@@ -209,7 +209,7 @@
     width:143px;
     height:29px;
     font-size:22px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(102,102,102,1);
     line-height:29px;
     padding-top:10px;
@@ -234,7 +234,7 @@
     border-color: #4A90E2;
     height:26px;
     font-size:20px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     line-height:26px;
     margin:40px 20px 40px 20px;
     cursor: pointer;
@@ -247,7 +247,7 @@
 .o2_appmarket_application_introduce_tab{
     height:26px;
     font-size:20px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);;
     line-height:26px;
     margin:40px 20px 40px 20px;
@@ -271,7 +271,7 @@
     width:200px;
     height:30px;
     font-size:28px;
-    font-family:MicrosoftYaHei-Bold,MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     font-weight:bold;
     color:rgba(51,51,51,1);
     line-height:29px;
@@ -309,7 +309,7 @@
     width:90%;
     height:183px;
     font-size:150px;
-    font-family:MicrosoftYaHeiLight;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:213px;
     margin:auto auto;
@@ -357,7 +357,7 @@
     width:144px;
     height:29px;
     font-size:20px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(102,102,102,1);
     line-height:29px;
     left:26px;
@@ -368,7 +368,7 @@
     width:420px;
     height:21px;
     font-size:16px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(102,102,102,1);
     line-height:21px;
 }
@@ -399,7 +399,7 @@
     width:147px;
     height:24px;
     font-size:18px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:24px;
     float:left;
@@ -416,14 +416,14 @@
     width:399px;
     height:26px;
     font-size:20px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:26px;
 
 }
 .o2_appmarket_application_comment_content_title_a{
     font-size:20px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:26px;
     text-decoration: none;
@@ -432,7 +432,7 @@
     width:90%;
     height:58%;
     font-size:16px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:21px;
     padding-top:10px;
@@ -442,7 +442,7 @@
     width:60px;
     height:20px;
     font-size:15px;
-    font-family:MicrosoftYaHei;
+    font-family:Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     color:rgba(51,51,51,1);
     line-height:20px;
     margin: 10px 0px 10px 0px;

@@ -8,10 +8,10 @@ if (!window.FormData || !window.WebSocket || !window.JSON){
         "            <div style=\"height:540px; width: 920px; position: relative; top: -540px\">\n" +
         "                <div style=\"background-image: url(img/warn1.png); background-repeat: no-repeat; background-position:center center; width: 90px; height: 80px; float:left; margin-left: 144px; margin-top: 74px\"></div>\n" +
         "                <div style=\"color: #333333; width: 530px; height: 80px; float:left; margin-left: 30px; margin-top: 74px; font-size: 28px; line-height: 40px;\" id=\"browser_error_area_text\">\n" +
-        "                    您的浏览器版本过低啦！~系统已经不支持IE9及以下版本了!\n" +
+        "                    브라우저 버전이 너무 낮습니다! 시스템은 IE9 이하 버전을 더 이상 지원하지 않습니다!\n" +
         "                </div>\n" +
         "                <div style=\"color: #666666; width: 650px; text-align:center; height: 50px; float:left; margin-left: 144px; margin-top: 60px; font-size: 28px; line-height: 40px; border-bottom: 2px solid #999999\" id=\"browser_error_area_up_text\">\n" +
-        "                    请升级您的浏览器：\n" +
+        "                    브라우저를 업그레이드하세요:\n" +
         "                </div>\n" +
         "                <div style=\"width: 100px; height: 100px; float:left; margin-left: 144px; margin-top: 20px\">\n" +
         "                    <div style=\"background-position: center; background-repeat: no-repeat; background-image: url(img/logo_edge.png); width: 100px; height: 100px;\"></div>\n" +

@@ -1402,7 +1402,7 @@ MWF.xApplication.query.Query.Importer.Row = new Class({
                 }
 
                 this.setDataWithField(this.document, "documentTitleField", "title", false);
-                if( !this.document.title )this.document.title = "无标题";
+                if( !this.document.title )this.document.title = "제목 없음";
 
                 this.setDataWithField(this.document, "documentSummaryField", "summary", false);
 
@@ -1419,7 +1419,7 @@ MWF.xApplication.query.Query.Importer.Row = new Class({
                 }
 
                 this.setDataWithField(this.work, "processTitleField", "title", false);
-                if( !this.work.title )this.work.title = "无标题";
+                if( !this.work.title )this.work.title = "제목 없음";
 
                 if( json.data.processStatus === "completed" ){
                     this.work.form = json.data.processForm || "";

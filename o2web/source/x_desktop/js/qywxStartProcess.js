@@ -473,7 +473,7 @@ o2.addReady(function () {
                     }.bind(this), "failure": function (xhr, text, error) {
                         var n = document.getElementById("loaddingArea");
                         if (n) { n.destroy(); }
-                        document.id("layout").set("html", "<div>企业微信单点异常！</div>")
+                        document.id("layout").set("html", "<div>WeCom SSO 로그인 중 오류가 발생했습니다!</div>")
                     }.bind(this)
                 });
             });

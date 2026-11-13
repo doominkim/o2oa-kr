@@ -8,7 +8,7 @@ CKEDITOR.plugins.add( 'ecnet', {
             }
         });
         editor.ui.addButton( 'ecnet', {
-            label: '智能纠错',
+            label: '스마트 교정',
             command: 'ecnet',
             toolbar: 'tools'
         });

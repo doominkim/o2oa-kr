@@ -4,7 +4,7 @@ CKEDITOR.plugins.add( 'doc_mainSend', {
         editor.widgets.add( 'doc_mainSend', {
             draggable: false,
             template:
-                '<div class="o2_editorPlugin_doc_mainSend">主送单位</div>',
+                '<div class="o2_editorPlugin_doc_mainSend">수신 기관</div>',
 
             allowedContent:
                 'div(o2_editorPlugin_doc_mainSend)',

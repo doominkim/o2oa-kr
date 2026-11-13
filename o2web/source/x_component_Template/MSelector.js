@@ -7,7 +7,7 @@ var MSelector = new Class({
         "style": "default",
         "width": "230px",
         "height": "30px",
-        "defaultOptionLp" : "请选择",
+        "defaultOptionLp" : "선택하세요",
         "trigger" : "delay", //immediately
         "isSetSelectedValue" : true,
         "isChangeOptionStyle" : true,

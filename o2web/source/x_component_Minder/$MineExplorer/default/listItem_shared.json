@@ -85,7 +85,7 @@
     },
 
     {
-      "name": "分享对象",
+      "name": "공유 대상",
       "head": {
         "html": "<th styles='listViewTableTh' lable='shareTarget'></th>"
       },
@@ -97,7 +97,7 @@
             "event" : "click^^function(d, ev){ this.showShareRecord(ev) }"
           },
           "sharedIcon" : {
-            "attr" : "title^^已分享",
+            "attr" : "title^^공유됨",
             "event" : "click^^function(d, ev){ this.showShareRecord(ev) }"
           }
         }

@@ -1,7 +1,7 @@
 [
   {
 
-    "title": "我的考勤",
+    "title": "내 근태",
     "id": "3",
     "sub": [
           {
@@ -28,7 +28,7 @@
   },
   {
     "access": "admin_dept",
-    "title": "考勤统计",
+    "title": "근태 통계",
     "id": "14",
     "sub": [
         {
@@ -59,7 +59,7 @@
   },
   {
     "access": "dingding",
-    "title": "钉钉考勤统计",
+    "title": "DingTalk 근태 통계",
     "id": "14",
     "sub": [
       {
@@ -84,7 +84,7 @@
   },
   {
     "access": "qywx",
-    "title": "企业微信考勤统计",
+    "title": "WeCom 근태 통계",
     "id": "14",
     "sub": [
       {

@@ -88,7 +88,7 @@ MWF.xApplication.Minder.Tree = new Class({
 
         var rootData = {
             id : "root",
-            name : "根目录",
+            name : "루트 폴더",
             orderNumber : "1",
             description : ""
         };
@@ -318,7 +318,7 @@ MWF.xApplication.Minder.ShareForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "脑图分享"
+        "title" : "마인드맵 공유"
     },
     _createTableContent: function () {
 
@@ -328,7 +328,7 @@ MWF.xApplication.Minder.ShareForm = new Class({
             "<tr><td styles='formTableTitle' lable='shareTo' width='18%'></td>" +
             "    <td styles='formTableValue14' item='shareTo'></td></tr>" +
             "<tr><td styles='formTableTitle' width='18%'></td>" +
-            "    <td styles='formTableValue14'>邀请其他人查看此文档</td></tr>" +
+            "    <td styles='formTableValue14'>다른 사람을 초대해 이 문서 보기</td></tr>" +
             "</table>";
         this.formTableArea.set("html", html);
 
@@ -337,14 +337,14 @@ MWF.xApplication.Minder.ShareForm = new Class({
             style : "minder",
             hasColon : true,
             itemTemplate: {
-                fileName : { text : "脑图名称", type : "innerHTML", value : function(){
+                fileName : { text : "마인드맵 이름", type : "innerHTML", value : function(){
                     var name = [];
                     this.checkedItemData.each( function(d){
                         name.push(d.name );
                     });
                     return name.join("<br>");
                 }.bind(this)},
-                shareTo: { type : "org", orgType:["person","unit","group"],text : "分享对象", notEmpty : true, count : 0, style : {
+                shareTo: { type : "org", orgType:["person","unit","group"],text : "공유 대상", notEmpty : true, count : 0, style : {
                     "min-height" : "100px"
                 } }
             }
@@ -358,7 +358,7 @@ MWF.xApplication.Minder.ShareForm = new Class({
 
             this.okActionNode = new Element("button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -368,7 +368,7 @@ MWF.xApplication.Minder.ShareForm = new Class({
 
         this.cancelActionNode = new Element("button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭"
+            "text": "닫기"
         }).inject(this.formBottomNode);
 
         this.cancelActionNode.addEvent("click", function (e) {
@@ -405,7 +405,7 @@ MWF.xApplication.Minder.ShareForm = new Class({
                 this.app.restActions.shareMind( d.id, json, function(){
                     count++;
                     if( count ==  this.checkedItemData.length){
-                        this.app.notice( "分享成功！" );
+                        this.app.notice( "공유했습니다!" );
                         this.close();
                     }
                 }.bind(this));
@@ -425,7 +425,7 @@ MWF.xApplication.Minder.NewNameForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "新建脑图"
+        "title" : "새 마인드맵"
     },
     _createTableContent: function () {
 
@@ -439,7 +439,7 @@ MWF.xApplication.Minder.NewNameForm = new Class({
 
         var html = layout.mobile ?
             "<table width='100%' bordr='0' cellpadding='7' cellspacing='0' styles='formTable'>" +
-            `<tr><td styles='formTableValue14' colspan='3' style='color:#999999;'>在“${currentFolderData.name}”下创建脑图：</td></tr>` +
+            `<tr><td styles='formTableValue14' colspan='3' style='color:#999999;'>"${currentFolderData.name}" 아래에 마인드맵 만들기: </td></tr>` +
             "<tr><td styles='formTableValue14' item='name' colspan='3'></td></tr>" +
             "</table>" :
             "<table width='100%' bordr='0' cellpadding='7' cellspacing='0' styles='formTable' style='margin-top: 20px; '>" +
@@ -454,8 +454,8 @@ MWF.xApplication.Minder.NewNameForm = new Class({
             style : "v10", mvcStyle: "v10",
             hasColon : true,
             itemTemplate: {
-                folder: { type: 'oo-input', text : "文件夹",  notEmpty : true, attr : { readonly : true }, defaultValue : currentFolderData.name || "根目录" },
-                name: { type: 'oo-input', text : "名称", notEmpty : true }
+                folder: { type: 'oo-input', text : "폴더",  notEmpty : true, attr : { readonly : true }, defaultValue : currentFolderData.name || "루트 폴더" },
+                name: { type: 'oo-input', text : "이름", notEmpty : true }
             }
         }, this.app);
         this.form.load();
@@ -469,7 +469,7 @@ MWF.xApplication.Minder.NewNameForm = new Class({
 
             this.okActionNode = new Element("oo-button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -483,7 +483,7 @@ MWF.xApplication.Minder.NewNameForm = new Class({
 
         this.cancelActionNode = new Element("oo-button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭",
+            "text": "닫기",
             'type':'cancel'
         }).inject(this.formBottomNode);
 
@@ -549,7 +549,7 @@ MWF.xApplication.Minder.FolderForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "新建文件夹"
+        "title" : "새 폴더"
     },
     _createTableContent: function () {
 
@@ -562,7 +562,7 @@ MWF.xApplication.Minder.FolderForm = new Class({
         var currentFolderData = this.explorer.getCurrentFolderData ? this.explorer.getCurrentFolderData() : {};
 
         var html = layout.mobile ? "<table width='100%' bordr='0' cellpadding='7' cellspacing='0' styles='formTable'>" +
-            `<tr><td styles='formTableValue14' colspan='3' style='color:#999999;'>在“${currentFolderData.name}”下创建目录：</td></tr>` +
+            `<tr><td styles='formTableValue14' colspan='3' style='color:#999999;'>"${currentFolderData.name}" 아래에 폴더 만들기: </td></tr>` +
             "<tr><td styles='formTableValue14' item='name' colspan='3'></td></tr>" +
             "</table>" : "<table width='100%' bordr='0' cellpadding='7' cellspacing='0' styles='formTable' style='margin-top: 20px; '>" +
             "<tr><td styles='formTableValue14' item='name' colspan='3'></td></tr>" +
@@ -574,7 +574,7 @@ MWF.xApplication.Minder.FolderForm = new Class({
             style : "v10", mvcStyle: "v10",
             hasColon : true,
             itemTemplate: {
-                name: { type: 'oo-input', text : "名称", notEmpty : true }
+                name: { type: 'oo-input', text : "이름", notEmpty : true }
             }
         }, this.app);
         this.form.load();
@@ -586,7 +586,7 @@ MWF.xApplication.Minder.FolderForm = new Class({
 
             this.okActionNode = new Element("oo-button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -600,7 +600,7 @@ MWF.xApplication.Minder.FolderForm = new Class({
 
         this.cancelActionNode = new Element("oo-button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭",
+            "text": "닫기",
             'type':'cancel'
         }).inject(this.formBottomNode);
 
@@ -642,7 +642,7 @@ MWF.xApplication.Minder.ReNameForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "重命名脑图",
+        "title" : "마인드맵 이름 바꾸기",
         "id" : ""
     },
     _createTableContent: function () {
@@ -663,7 +663,7 @@ MWF.xApplication.Minder.ReNameForm = new Class({
             style : "v10", mvcStyle: "v10",
             hasColon : true,
             itemTemplate: {
-                name: { type: 'oo-input', text : "名称", notEmpty : true }
+                name: { type: 'oo-input', text : "이름", notEmpty : true }
             }
         }, this.app);
         this.form.load();
@@ -675,7 +675,7 @@ MWF.xApplication.Minder.ReNameForm = new Class({
 
             this.okActionNode = new Element("oo-button.inputOkButton", {
                 "styles": this.css.inputOkButton,
-                "text": "确定"
+                "text": "확인"
             }).inject(this.formBottomNode);
 
             this.okActionNode.addEvent("click", function (e) {
@@ -689,7 +689,7 @@ MWF.xApplication.Minder.ReNameForm = new Class({
 
         this.cancelActionNode = new Element("oo-button.inputCancelButton", {
             "styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-            "text": "关闭",
+            "text": "닫기",
             'type':'cancel'
         }).inject(this.formBottomNode);
 
@@ -713,7 +713,7 @@ MWF.xApplication.Minder.ReNameForm = new Class({
                 var d = json.data;
                 d.name = data.name;
                 this.app.restActions.saveMind( d, function( json ){
-                    this.app.notice("重命名成功");
+                    this.app.notice("이름을 바꿨습니다");
                     this.explorer?.currentView?.reload();
                     this.fireEvent('save');
                     this.close();
@@ -866,7 +866,7 @@ MWF.xApplication.Minder.Toolbar = new Class({
     rename : function(){
         var data = this.explorer.currentView.getCheckedItemData();
         if( data.length == 0 ){
-            this.app.notice("请先选择文件","error");
+            this.app.notice("먼저 파일을 선택하세요","error");
             return;
         }
         var form = new MWF.xApplication.Minder.ReNameForm(this.explorer, {
@@ -882,17 +882,17 @@ MWF.xApplication.Minder.Toolbar = new Class({
         var _self = this;
         var ids = this.explorer.currentView.getCheckedItemIds();
         if( ids.length == 0 ){
-            this.app.notice("请先选择文件","error");
+            this.app.notice("먼저 파일을 선택하세요","error");
             return;
         }
 
-        this.app.confirm("warn", e, "删除文件确认", "是否删除选中的"+ids.length+"个文件？删除的文件会放到回收站。", 350, 120, function () {
+        this.app.confirm("warn", e, "파일 삭제 확인", "선택한 파일 "+ids.length+"개를 삭제하시겠습니까? 삭제한 파일은 휴지통으로 이동합니다.", 350, 120, function () {
             var count = 0;
             ids.each( function(id){
                 _self.app.restActions.recycleMind( id , function(){
                     count++;
                     if( ids.length == count ){
-                        _self.app.notice("成功删除"+count+"个文件，您可以从回收站找到文件。");
+                        _self.app.notice("파일 "+count+"개를 삭제했습니다. 휴지통에서 찾을 수 있습니다.");
                         _self.explorer.currentView.reload();
                     }
                 });
@@ -906,17 +906,17 @@ MWF.xApplication.Minder.Toolbar = new Class({
         var _self = this;
         var ids = this.explorer.currentView.getCheckedItemIds();
         if( ids.length == 0 ){
-            this.app.notice("请先选择文件","error");
+            this.app.notice("먼저 파일을 선택하세요","error");
             return;
         }
 
-        this.app.confirm("warn", e, "彻底删除文件确认", "删除的文件无法恢复！是否彻底删除选中的"+ids.length+"个文件？", 350, 120, function () {
+        this.app.confirm("warn", e, "영구 삭제 확인", "삭제한 파일은 복구할 수 없습니다! 선택한 파일 "+ids.length+"개를 영구 삭제하시겠습니까?", 350, 120, function () {
             var count = 0;
             ids.each( function(id){
                 _self.app.restActions.deleteMind( id , function(){
                     count++;
                     if( ids.length == count ){
-                        _self.app.notice("成功删除"+count+"个文件");
+                        _self.app.notice("파일 "+count+"개를 삭제했습니다");
                         _self.explorer.currentView.reload();
                     }
                 });
@@ -930,17 +930,17 @@ MWF.xApplication.Minder.Toolbar = new Class({
         var _self = this;
         var ids = this.explorer.currentView.getCheckedItemIds();
         if( ids.length == 0 ){
-            this.app.notice("请先选择文件","error");
+            this.app.notice("먼저 파일을 선택하세요","error");
             return;
         }
 
-        this.app.confirm("warn", e, "彻底删除文件确认", "删除的文件无法恢复！是否彻底删除选中的"+ids.length+"个文件？", 350, 120, function () {
+        this.app.confirm("warn", e, "영구 삭제 확인", "삭제한 파일은 복구할 수 없습니다! 선택한 파일 "+ids.length+"개를 영구 삭제하시겠습니까?", 350, 120, function () {
             var count = 0;
             ids.each( function(id){
                 _self.app.restActions.destroyFromRecycle( id , function(){
                     count++;
                     if( ids.length == count ){
-                        _self.app.notice("成功删除"+count+"个文件");
+                        _self.app.notice("파일 "+count+"개를 삭제했습니다");
                         _self.explorer.currentView.reload();
                     }
                 });
@@ -954,7 +954,7 @@ MWF.xApplication.Minder.Toolbar = new Class({
         var _self = this;
         var ids = this.explorer.currentView.getCheckedItemIds();
         if( ids.length == 0 ){
-            this.app.notice("请先选择文件","error");
+            this.app.notice("먼저 파일을 선택하세요","error");
             return;
         }
         var count = 0;
@@ -962,7 +962,7 @@ MWF.xApplication.Minder.Toolbar = new Class({
             _self.app.restActions.restoreMind( id , function(){
                 count++;
                 if( ids.length == count ){
-                    _self.app.notice("成功恢复"+count+"个文件");
+                    _self.app.notice("파일 "+count+"개를 복원했습니다");
                     _self.explorer.currentView.reload();
                 }
             });
@@ -1063,7 +1063,7 @@ MWF.xApplication.Minder.Toolbar = new Class({
     share : function(){
         var data = this.explorer.currentView.getCheckedItemData();
         if( data.length == 0 ){
-            this.app.notice("请先选择文件","error");
+            this.app.notice("먼저 파일을 선택하세요","error");
             return;
         }
         var form = new MWF.xApplication.Minder.ShareForm(this.explorer, {}, {
@@ -1302,16 +1302,16 @@ MWF.xApplication.Minder.ShareTooltip = new Class({
         var html =
                 "<div style='overflow: hidden;padding:15px 20px 20px 10px;height:16px;line-height:16px;'>" +
                 //"   <div style='font-size: 12px;color:#666; float: right'>"+ this.lp.applyPerson  +":" + data.applicant.split("@")[0] +"</div>" +
-                "   <div style='font-size: 16px;color:#333;float: left;'>分享细节</div>"+
+                "   <div style='font-size: 16px;color:#333;float: left;'>공유 상세</div>"+
                 "</div>"+
             "<div style='font-size: 14px;color:#333;padding:0px 10px 15px 20px;'>"+ data.name +"</div>"+
             "<div style='height:1px;margin:0px 20px;border-bottom:1px solid #ccc;'></div>"+
             "<table width='100%' bordr='0' cellpadding='7' cellspacing='0' style='margin:13px 13px 13px 13px;'>" +
-            "<tr><td style='"+titleStyle+"' width='70'>个人:</td>" +
+            "<tr><td style='"+titleStyle+"' width='70'>개인: </td>" +
             "    <td style='"+valueStyle+"'>" + this.getCn( data.sharePersonList ) + "</td></tr>" +
-            "<tr><td style='"+titleStyle+"'>组织:</td>" +
+            "<tr><td style='"+titleStyle+"'>조직: </td>" +
             "    <td style='"+valueStyle+"'>" + this.getCn( data.shareUnitList ) + "</td></tr>" +
-            "<tr><td style='"+titleStyle+"'>群组:</td>" +
+            "<tr><td style='"+titleStyle+"'>그룹: </td>" +
             "    <td style='"+valueStyle+"'>" + this.getCn( data.shareGroupList ) + "</td></tr>" +
             "</table>";
         return "";
@@ -1329,7 +1329,7 @@ MWF.xApplication.Minder.ShareRecordForm = new Class({
         "hasTop": true,
         "hasIcon": false,
         "draggable": true,
-        "title" : "分享记录"
+        "title" : "공유 기록"
     },
     _createTableContent: function () {
 
@@ -1338,7 +1338,7 @@ MWF.xApplication.Minder.ShareRecordForm = new Class({
 
         this.cancelActionNode = new Element("button.inputCancelButton", {
             "styles": this.css.inputCancelButton_long,
-            "text": "关闭"
+            "text": "닫기"
         }).inject(this.formBottomNode);
 
         this.cancelActionNode.addEvent("click", function (e) {

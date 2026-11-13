@@ -2,8 +2,8 @@
 	"item":[
 		{
 			"id" : "Image",
- 			"text" : "图片",
-			"title" : "插入图片",
+ 			"text" : "이미지",
+			"title" : "이미지 삽입",
 			"type" : "button",
  			"pic" : o2.session.path+"/widget/$SimpleEditor/default/img/picture.gif",
 			"picDisable" : o2.session.path+"/widget/$SimpleEditor/default/img/picture_gray.gif",
@@ -15,8 +15,8 @@
 		},
 		{
 			"id" : "Emotion",
- 			"text" : "表情",
-			"title" : "插入表情",
+ 			"text" : "이모티콘",
+			"title" : "이모티콘 삽입",
 			"type" : "button",
  			"pic" : o2.session.path+"/widget/$SimpleEditor/default/img/emotion.gif",
 			"picDisable" : o2.session.path+"/widget/$SimpleEditor/default/img/emotion_gray.gif",

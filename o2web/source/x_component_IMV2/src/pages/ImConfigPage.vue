@@ -114,7 +114,7 @@ const inputConversationCheckInvoke = (e) => {
 const saveConfig = async (config) => {
   console.debug('save config==== > ', config)
   const res = await imAction('config', config)
-  console.info('保存配置', res)
+  console.info('설정 저장', res)
   if (res) {
     eventBus.publish(EventName.changeIMConfig)
     $OOUI.notice.success(lp.alert, lp.msgSettingsSaveSuccess)

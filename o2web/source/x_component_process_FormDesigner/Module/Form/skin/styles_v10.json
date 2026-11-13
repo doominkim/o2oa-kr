@@ -1,5 +1,5 @@
 {
-    "name": "空样式",
+    "name": "빈 스타일",
     "form": {
         "styles": {
             "background-color": "#f7f7f7",
@@ -13,7 +13,7 @@
     },
     "label": {
         "title": {
-            "name": "表单标题",
+            "name": "양식 제목",
             "properties": {
                 "class": "form-title-label"
             },
@@ -27,7 +27,7 @@
         },
 
         "section": {
-            "name": "区段标题",
+            "name": "섹션 제목",
             "styles": {
                 "padding": "0.8em 1em",
                 "font-size": "1.142857rem",
@@ -44,7 +44,7 @@
 
     "div": {
         "layout": {
-            "name": "表单主体",
+            "name": "양식 본체",
             "styles": {
                 "overflow": "auto",
                 "position": "relative",
@@ -55,7 +55,7 @@
             }
         },
         "formArea": {
-            "name": "表单内容",
+            "name": "양식 콘텐츠",
             "styles": {
                 "width": "80%",
                 "margin": "auto",
@@ -67,7 +67,7 @@
             }
         },
         "section": {
-            "name": "内容区段",
+            "name": "콘텐츠 섹션",
             "styles": {
                 "padding": "2em 3em",
                 "display": "flex",
@@ -152,20 +152,20 @@
     },
     "log": {
         "standard": {
-            "name": "标准样式",
+            "name": "표준 스타일",
             "styles": {
                 "flex": "1 1 100%"
             },
             "properties": {
                 "class": "form-log"
             },
-            "textStyle": "<div class=\"logItem\"><div style=\"flex: 0 0 4em\"><div class=\"logItemIcon\" style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{person}/icon');\"></div></div><div style=\"flex: 1;     display: flex; justify-content: space-between; align-items: center;\"><div><div><font style='color:#ff5400;'>{person}</font>（{department}）选择<font style='color: var(--oo-color-main)'>【{route}】</font></div><div>处理意见：<font>{opinion}</font></div></div><div><b>{activity}</b></div></div><div style=\"flex: 0 0 11.85em; display: block\">{img}</div><div>{time}</div></div>",
-            "textTaskStyle": "<div class=\"logItem\"><div style=\"flex: 0 0 4em\"><div class=\"logItemIcon\" style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{person}/icon');\"></div></div><div style=\"flex: 1;     display: flex; justify-content: space-between; align-items: center;\"><div><div><font style='color:#ff5400;'>{person}</font>（{department}）<font style='color: var(--oo-color-main)'>{route}</font></div><div></div></div><div><b>{activity}</b></div></div><div style=\"flex: 0 0 11.85em; display: block\">{img}</div><div>{time}</div></div>",
+            "textStyle": "<div class=\"logItem\"><div style=\"flex: 0 0 4em\"><div class=\"logItemIcon\" style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{person}/icon');\"></div></div><div style=\"flex: 1;     display: flex; justify-content: space-between; align-items: center;\"><div><div><font style='color:#ff5400;'>{person}</font>({department}) 선택<font style='color: var(--oo-color-main)'>[{route}]</font></div><div>처리 의견: <font>{opinion}</font></div></div><div><b>{activity}</b></div></div><div style=\"flex: 0 0 11.85em; display: block\">{img}</div><div>{time}</div></div>",
+            "textTaskStyle": "<div class=\"logItem\"><div style=\"flex: 0 0 4em\"><div class=\"logItemIcon\" style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{person}/icon');\"></div></div><div style=\"flex: 1;     display: flex; justify-content: space-between; align-items: center;\"><div><div><font style='color:#ff5400;'>{person}</font>({department})<font style='color: var(--oo-color-main)'>{route}</font></div><div></div></div><div><b>{activity}</b></div></div><div style=\"flex: 0 0 11.85em; display: block\">{img}</div><div>{time}</div></div>",
             "mode": "default"
         },
 
         "simple": {
-            "name": "简单样式",
+            "name": "간단 스타일",
             "styles": {
                 "flex": "1 1 100%"
             },

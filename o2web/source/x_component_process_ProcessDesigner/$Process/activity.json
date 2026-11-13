@@ -2,7 +2,7 @@
   "manual": {
     "process": "",
     "id": "",
-    "name": "未命名",
+    "name": "이름 없음",
     "alias": "",
     "description": "",
     "position": "",
@@ -13,23 +13,23 @@
     "form": "",
 
 
-    "beforeArriveScript": "",     //工作到达前
+    "beforeArriveScript": "",     //작업 도착 전
     "beforeArriveScriptText": "",
-    "afterArriveScript": "",      //工作到达后
+    "afterArriveScript": "",      //작업 도착 후
     "afterArriveScriptText": "",
-    "beforeExecuteScript": "",    //活动执行前
+    "beforeExecuteScript": "",    //활동 실행 전
     "beforeExecuteScriptText": "",
-    "afterExecuteScript": "",     //活动执行后
+    "afterExecuteScript": "",     //활동 실행 후
     "afterExecuteScriptText": "",
-    "beforeInquireScript": "",    //路由查询前
+    "beforeInquireScript": "",    //경로 조회 전
     "beforeInquireScriptText": "",
-    "afterInquireScript": "",     //路由查询后
+    "afterInquireScript": "",     //경로 조회 후
     "afterInquireScriptText": "",
-    "manualBeforeTaskScript": "", //待办处理前
+    "manualBeforeTaskScript": "", //결재 대기 처리 전
     "manualBeforeTaskScriptText": "",
-    "manualAfterTaskScript": "",  //待办处理后
+    "manualAfterTaskScript": "",  //결재 대기 처리 후
     "manualAfterTaskScriptText": "",
-    "manualStayScript": "",       //等待人工处理时
+    "manualStayScript": "",       //사람 처리 대기 중
     "manualStayScriptText": "",
 
     "routeList": [],
@@ -86,7 +86,7 @@
   },
   "begin": {
     "process": "",
-    "name":"开始",
+    "name":"시작",
     "id": "",
     "alias": "",
     "description": "",
@@ -133,7 +133,7 @@
   },
   "end": {
     "process": "",
-    "name":"结束",
+    "name":"종료",
     "id": "",
     "alias": "",
     "description": "",
@@ -174,7 +174,7 @@
   },
   "cancel": {
     "process": "",
-    "name":"取消",
+    "name":"취소",
     "id": "",
     "alias": "",
     "description": "",
@@ -214,7 +214,7 @@
     "type": "cancel"
   },
   "condition": {
-    "name":"条件",
+    "name":"조건",
     "process": "",
     "id": "",
     "alias": "",
@@ -264,7 +264,7 @@
     "type": "condition"
   },
   "choice": {
-    "name":"选择",
+    "name":"선택",
     "process": "",
     "id": "",
     "alias": "",
@@ -315,7 +315,7 @@
   },
 
   "split": {
-    "name":"拆分",
+    "name":"분할",
     "process": "",
     "id": "",
     "alias": "",
@@ -362,7 +362,7 @@
     "type": "split"
   },
   "parallel": {
-    "name":"并行",
+    "name":"병렬",
     "process": "",
     "id": "",
     "alias": "",
@@ -409,7 +409,7 @@
     "type": "parallel"
   },
   "merge": {
-    "name":"合并",
+    "name":"병합",
     "process": "",
     "id": "",
     "alias": "",
@@ -456,7 +456,7 @@
     "type": "merge"
   },
   "invoke": {
-    "name":"服务调用",
+    "name":"서비스 호출",
     "process": "",
     "id": "",
     "alias": "",
@@ -525,7 +525,7 @@
     "type": "invoke"
   },
   "agent": {
-    "name":"脚本",
+    "name":"스크립트",
     "process": "",
     "id": "",
     "alias": "",
@@ -575,7 +575,7 @@
     "type": "agent"
   },
   "service": {
-    "name":"服务",
+    "name":"서비스",
     "alias":"",
     "description":"",
     "position":"",
@@ -610,7 +610,7 @@
 //    "afterInquireScript": ""
 //  },
   "embed": {
-    "name":"流程调用",
+    "name":"프로세스 호출",
     "process": "",
     "id": "",
     "alias": "",
@@ -675,7 +675,7 @@
     "type": "embed"
   },
   "publish": {
-    "name":"数据发布",
+    "name":"데이터 게시",
     "process": "",
     "id": "",
     "alias": "",
@@ -744,7 +744,7 @@
     "type": "publish"
   },
   "delay": {
-    "name":"定时",
+    "name":"타이머",
     "alias":"",
     "description":"",
     "position":"",

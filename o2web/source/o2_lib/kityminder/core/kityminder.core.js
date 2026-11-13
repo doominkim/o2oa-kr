@@ -7938,7 +7938,7 @@ _p[63] = {
     value: function(require, exports, module) {
         var data = _p.r(12);
         data.registerProtocol("json", module.exports = {
-            fileDescription: "KityMinder 格式",
+            fileDescription: "KityMinder 형식",
             fileExtension: ".km",
             dataType: "text",
             mineType: "application/json",
@@ -8069,7 +8069,7 @@ _p[64] = {
             if (node.children) node.children.forEach(_cleanUp);
         }
         data.registerProtocol("markdown", module.exports = {
-            fileDescription: "Markdown/GFM 格式",
+            fileDescription: "Markdown/GFM 형식",
             fileExtension: ".md",
             mineType: "text/markdown",
             dataType: "text",
@@ -8231,7 +8231,7 @@ _p[65] = {
                 }, function(err) {
                     // 这里处理 reject，出错基本上是因为跨域，
                     // 出错后依然导出，只不过没有图片。
-                    alert("脑图的节点中包含跨域图片，导出的 png 中节点图片不显示，你可以替换掉这些跨域的图片并重试。");
+                    alert("마인드맵 노드에 교차 도메인 이미지가 있어 내보낸 PNG에 노드 이미지가 표시되지 않습니다. 교차 도메인 이미지를 바꾼 뒤 다시 시도하세요.");
                     DomURL.revokeObjectURL(svgDataUrl);
                     document.body.appendChild(canvas);
                     return generateDataUrl(canvas);
@@ -8251,7 +8251,7 @@ _p[65] = {
             }
         }
         data.registerProtocol("png", module.exports = {
-            fileDescription: "PNG 图片",
+            fileDescription: "PNG 이미지",
             fileExtension: ".png",
             mineType: "image/png",
             dataType: "base64",
@@ -8499,7 +8499,7 @@ _p[66] = {
             svgDom.style.display = "inline";
         }
         data.registerProtocol("svg", module.exports = {
-            fileDescription: "SVG 矢量图",
+            fileDescription: "SVG 벡터 이미지",
             fileExtension: ".svg",
             mineType: "image/svg+xml",
             dataType: "text",
@@ -8731,12 +8731,12 @@ _p[67] = {
             }
             if (!node) return;
             if (/^\s*$/.test(node.data.text)) {
-                node.data.text = "分支主题";
+                node.data.text = "하위 주제";
             }
             return encode(exportNode(node));
         }
         data.registerProtocol("text", module.exports = {
-            fileDescription: "大纲文本",
+            fileDescription: "개요 텍스트",
             fileExtension: ".txt",
             dataType: "text",
             mineType: "text/plain",

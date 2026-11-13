@@ -3690,7 +3690,7 @@ MDomItem.OOInput = new Class({
     },
     getErrorText: function () {
         var label = this.options.label || this.options.text;
-        label = !!label ? `“${label.replace(/　/g, '')}”` :  '此字段';
+        label = !!label ? `“${label.replace(/　/g, '')}”` :  '이 필드';
         return MWF.xApplication.Template.LP.MDomItem.emptyTip.replace("{text}", label);
     },
     getClassName: function () {

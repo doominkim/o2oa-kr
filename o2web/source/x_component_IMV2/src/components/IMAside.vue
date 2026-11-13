@@ -35,12 +35,12 @@ const clickChoosePersonCreateChat = () => {
       "type": 'identity',
       "count": 0,
       "style": "v10",
-      "title": '通讯录',
+      "title": '주소록',
       "units":topUnitList,
       "firstLevelSelectable": true,
       "resultType": "person",
       "onPostLoadContent": function () {
-        this.titleTextNode.set("text", '通讯录')
+        this.titleTextNode.set("text", '주소록')
       },
       "onComplete":  (items) => {
         console.log(items)
@@ -60,7 +60,7 @@ const clickChoosePersonCreateChat = () => {
 }
 
 const newConversation = async (personList, type) => {
-  console.debug('====> 创建聊天 ', personList, type)
+  console.debug('====> 대화 만들기 ', personList, type)
   debugger
   loadingStore.showLoading()
   const res = await imAction('create', {
@@ -88,7 +88,7 @@ const toggleTab = (tab) => {
 
 const chatWithPerson =  (personDn) => {
   if (!personDn || personDn === layout.session.user.distinguishedName) {
-    console.error('传入参数错误', personDn)
+    console.error('전달된 매개변수 오류', personDn)
     return
   }
   toggleTab(0) // 切换到聊天列表

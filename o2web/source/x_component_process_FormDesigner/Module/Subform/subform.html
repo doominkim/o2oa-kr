@@ -20,7 +20,7 @@
 		    <td class="editTableTitle">{{$.lp.description}}:</td>
 		    <td class="editTableValue"><input type="text" name="description" value="text{$.description}" class="editTableInput"/></td>
 		  </tr>
-			<tr title="延时加载为是时，需要使用this.form.get(subformId).active()加载">
+			<tr title="지연 로드를 사용하면 this.form.get(subformId).active()로 불러와야 합니다">
 				<td class="editTableTitle">{{$.lp.delayedLoading}}:</td>
 				<td class="editTableValue">
 					<input type="radio" name="isDelay" value="true" text{($.isDelay)?'checked':''}/>{{$.lp.yes}}

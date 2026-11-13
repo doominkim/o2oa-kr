@@ -724,7 +724,7 @@ MWF.xApplication.process.Xform.$Input = MWF.APP$Input =  new Class(
             switch (data.operateor){
                 case "isnull":
                     if (!v){
-                        return !ev ? data.prompt : "不在选项中";
+                        return !ev ? data.prompt : "선택 항목에 없습니다";
                     }
                     break;
                 case "notnull":

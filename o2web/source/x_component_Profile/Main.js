@@ -256,8 +256,14 @@ MWF.xApplication.Profile.Main = new Class({
 
         this.languageSelectNode = this.tab.pages[0].contentNode.getElement("select");
         this.languageSelectNode.empty();
-        if (!this.personData.language) this.personData.language = "zh-CN";
         var lps = layout.config.supportedLanguages;
+        if (!this.personData.language) {
+            // Unset language: preselect the language currently shown, so saving the profile keeps it.
+            var current = (o2.language || "").toLowerCase();
+            this.personData.language = Object.keys(lps).filter(function(key){
+                return key.toLowerCase() === current;
+            })[0] || "ko";
+        }
         Object.keys(lps).each(function(key){
             var option = new Element("option", {"value": key, "text": lps[key]}).inject(this.languageSelectNode);
             if (this.personData.language === key) option.set("selected", true);
@@ -1383,7 +1389,7 @@ MWF.xApplication.Profile.emPowerPopupForm = new Class({
                             "background": "#FFFFFF",
                             "border": "1px solid #DEDEDE",
                             "border-radius": "4px",
-                            "font-family": "MicrosoftYaHei",
+                            "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
                             "padding":"0 5px",
                             "font-size": "14px",
                             "color": "#666666",

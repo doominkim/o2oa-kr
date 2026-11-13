@@ -3,21 +3,21 @@
         <el-form label-position="top">
             <el-form-item>
                 <el-radio-group v-model="pageItem.isNative">
-                    <el-radio :label="true">原生页面</el-radio>
-                    <el-radio :label="false">门户页面</el-radio>
+                    <el-radio :label="true">네이티브 페이지</el-radio>
+                    <el-radio :label="false">포털 페이지</el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="原生页面" v-if="pageItem.isNative === true">
+            <el-form-item label="네이티브 페이지" v-if="pageItem.isNative === true">
                 <div class="al-checkbox-group">
                     <div v-for="item in s.defaultAppHomePageList"
                         :class="item.nativeKey === pageItem.nativeKey ? 'al-checkbox-button mainColor_bg' : 'al-checkbox-button'"
                         :key="item.nativeKey" @click="chooseNative(item)">{{ item.name }}</div>
                 </div>
             </el-form-item>
-            <el-form-item label="门户选择" v-else>
+            <el-form-item label="포털 선택" v-else>
                 <div style="display: flex;flex-direction: column; gap: 8px;padding: 0 12px;">
-                    <el-select v-model="portal.portalId" size="default" placeholder="请选择门户" @change="(p) => {
-                        console.debug('选择了 ', p)
+                    <el-select v-model="portal.portalId" size="default" placeholder="포털을 선택하세요" @change="(p) => {
+                        console.debug('선택함 ', p)
                         if (p === 'default') {
                             portal.portalId = ''
                             pageItem.name = ''
@@ -35,27 +35,27 @@
                             :label="portal.name"></el-option>
                     </el-select>
                     <!-- <el-input type="text" v-model="portal.pageId" placeholder="请输入页面名称" class="item_input" size="default" /> -->
-                    <el-input type="text" v-model="portal.portalParameters" placeholder="请输入门户参数" class="item_input"
+                    <el-input type="text" v-model="portal.portalParameters" placeholder="포털 매개변수를 입력하세요" class="item_input"
                         size="default" />
-                    <el-switch v-model="portal.hiddenAppBar" active-text="隐藏标题栏">
+                    <el-switch v-model="portal.hiddenAppBar" active-text="제목 표시줄 숨기기">
                     </el-switch>
                 </div>
 
             </el-form-item>
-            <el-form-item label="页面名称">
+            <el-form-item label="페이지 이름">
                 <div style="display: flex;flex-direction: column; gap: 8px;padding: 0 12px;">
-                    <el-input type="text" v-model="pageItem.name" placeholder="请输入页面名称" class="item_input"
+                    <el-input type="text" v-model="pageItem.name" placeholder="페이지 이름을 입력하세요" class="item_input"
                         size="default" />
                 </div>
             </el-form-item>
-            <el-form-item label="页面图标">
+            <el-form-item label="페이지 아이콘">
                 <div class="icon-container">
                     <div class="icon-btn"  @click="chooseIcon($event)">
                         <i :class="pageItem.iconClass + ' icon'"></i>
                     </div>
                     <div class="icon-pick-container" v-if="showIconPicker">
                         <AppLayoutIconPicker :current="pageItem.iconClass" @picked="(icon) => {
-                            console.debug('icon 选中 ', icon)
+                            console.debug('icon 선택됨 ', icon)
                             if (icon) {
                                 pageItem.iconClass = icon
                             }
@@ -66,13 +66,13 @@
                
                
             </el-form-item>
-            <el-form-item label="是否主页">
+            <el-form-item label="홈 페이지 여부">
                 <el-switch v-model="pageItem.isMain">
                 </el-switch>
             </el-form-item>
 
             <el-form-item>
-                <button class="mainColor_bg" @click.prevent="onSubmit()">保存</button>
+                <button class="mainColor_bg" @click.prevent="onSubmit()">저장</button>
             </el-form-item>
         </el-form>
         
@@ -129,12 +129,12 @@ const chooseIcon = (e) => {
 
 const onSubmit = () => {
     if (!pageItem.value.name) {
-        component.notice("页面名称不能为空！", "error");
+        component.notice("페이지 이름을 입력하세요.", "error");
         return
     }
     if (pageItem.value.isNative !== true) {
         if (!portal.value.portalId) {
-            component.notice("请选择门户！", "error");
+            component.notice("포털을 선택하세요.", "error");
             return
         }
         pageItem.value.portal = portal.value

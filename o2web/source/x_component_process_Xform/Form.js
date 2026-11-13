@@ -4671,7 +4671,7 @@ MWF.xApplication.process.Xform.Form = MWF.APPForm = new Class(
 
         var ids = o2.name.cns(activity.lastIdentityList);
         var idsStr = (ids.length>8) ? ids.slice(0,8).join(', ')+' ...' : ids.join(', ');
-        var itemInfo = new Element('div', {styles: this.css.goBack_activity_info, text: '处理人：'+idsStr, title: ids.join(',')}).inject(itemContent);
+        var itemInfo = new Element('div', {styles: this.css.goBack_activity_info, text: '처리자: '+idsStr, title: ids.join(',')}).inject(itemContent);
 
 
         item.addEvent("click", function(e){
@@ -6417,7 +6417,7 @@ MWF.xApplication.process.Xform.Form = MWF.APPForm = new Class(
             workOrWorkcompleted = this.businessData.work
         }
         if (!workOrWorkcompleted) {
-            console.error('工作对象不存在！！！！！！')
+            console.error('문서 객체가 존재하지 않습니다!')
             this.app.notice(MWF.xApplication.process.Xform.LP.noPermissionOrWorkNotExisted, "warn");
             return
         }
@@ -6432,13 +6432,13 @@ MWF.xApplication.process.Xform.Form = MWF.APPForm = new Class(
             title: workOrWorkcompleted.title,
             body: JSON.stringify(workOrWorkcompleted)
         };
-        console.log('发送的消息体', jsonBody)
+        console.log('보낼 메시지 본문', jsonBody)
         this._imSendMessage(jsonBody);
 
     },
     _imSendMessage: function(jsonBody) {
         this._imConversationPicker((conv) => {
-            console.debug('选择了', conv)
+            console.debug('선택한 대화', conv)
             if (conv) {
                 const date = new Date();
                 const pad = (n) => n.toString().padStart(2, '0');
@@ -6450,12 +6450,12 @@ MWF.xApplication.process.Xform.Form = MWF.APPForm = new Class(
                     createTime: time,
                     sendStatus: 1,
                 }
-                console.debug('发送消息', shareMessage)
+                console.debug('메시지 보내기', shareMessage)
                 o2.Actions.load('x_message_assemble_communicate').ImAction.msgCreate(shareMessage,   (json) =>{
-                    console.log('发送消息成功', json);
+                    console.log('메시지 보내기 성공', json);
                     this._imDialogOpen()
                 }, (err) => {
-                    console.error('发送消息失败', err)
+                    console.error('메시지 보내기 실패', err)
                 });
             }
         })
@@ -6463,7 +6463,7 @@ MWF.xApplication.process.Xform.Form = MWF.APPForm = new Class(
     _imDialogOpen: function() {
         var dialog = o2.DL.open({
             "style" : "o2",
-            "title": "提示",
+            "title": "알림",
             "width": "400",
             "height" : "200",
             "isMax": false,
@@ -6473,19 +6473,19 @@ MWF.xApplication.process.Xform.Form = MWF.APPForm = new Class(
             "isTitle": true,
             "offset": {"x":-200, "y": -100},
             "mask": true,
-            "text": "是否要打开聊天窗口？",
+            "text": "메신저 창을 여시겠습니까?",
             "container": this.app.content,
             "duration": 200,
             "buttonList": [
                 {
-                    "text": "确定",
+                    "text": "확인",
                     "action": function(){
                         layout.openApplication(null, 'IMV2')
                         dialog.close();
                     }.bind(this)
                 },
                 {
-                    "text": "取消",
+                    "text": "취소",
                     "action": function(){
                         dialog.close();
                     }.bind(this)
@@ -6521,7 +6521,7 @@ MWF.xApplication.process.Xform.Form = MWF.APPForm = new Class(
             const selector = new MWF.xApplication.Template.Selector.Custom(this.app.content, {
                 "style": "v10", //选择框样式
                 "count": 1, //允许选择个数
-                "title": "会话选择", //选择框标题
+                "title": "대화 선택", //选择框标题
                 "hasLetter" : false, //是否点击字母搜索
                 "hasTop" : true, //可选、已选的标题
                 "level1Indent" : 0, //第一层的缩进

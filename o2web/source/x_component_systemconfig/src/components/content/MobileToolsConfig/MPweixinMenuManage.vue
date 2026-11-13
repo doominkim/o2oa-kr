@@ -417,7 +417,7 @@ const createNewFirstMenuMock = () => {
   let order = "000001";
   if (menuList.value.length > 0) {
     let bigestOrder = menuList.value[menuList.value.length - 1].order; //最后一条是最大的号码
-    console.log("最大的order " + bigestOrder);
+    console.log("최대 order " + bigestOrder);
     const intOrder = parseInt(bigestOrder);
     if (!isNaN(intOrder)) {
       let o = intOrder + 1;
@@ -427,7 +427,7 @@ const createNewFirstMenuMock = () => {
       }
       order = os;
     }
-    console.log("最大的order " + intOrder);
+    console.log("최대 order " + intOrder);
   }
   // id mock_开头 正式保存的时候知道是新增的 可以清除 后台生成id
   let body = {
@@ -459,7 +459,7 @@ const showSubCreateMenuBtn = (menu) => {
 };
 // 子菜单新增按钮点击
 const createSubMenu = (ev, parentMenu) => {
-  console.debug("点击了新增，属于 " + parentMenu.name);
+  console.debug("추가 클릭, 상위 메뉴: " + parentMenu.name);
   ev.stopPropagation();
   let sub = parentMenu.sub_button;
   //最多可创建5个
@@ -514,7 +514,7 @@ const removeMenuData = (menu) => {
       const element = menuList.value[index];
       if (element.id === menu.id) {
         menuList.value.erase(menu);
-        console.log("删除成功。。。。。上级");
+        console.log("삭제 성공(상위)");
         break;
       }
       var flag = false;
@@ -524,7 +524,7 @@ const removeMenuData = (menu) => {
           if (child.id === menu.id) {
             flag = true;
             element.sub_button.erase(menu);
-            console.log("删除成功。。。。子级。");
+            console.log("삭제 성공(하위)");
           }
         }
       }

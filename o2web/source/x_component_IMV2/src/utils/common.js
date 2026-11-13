@@ -226,41 +226,41 @@ const friendlyTime = (date) => {
     const now = new Date()
     const timeDifference = now.getTime() - input.getTime()
     if (timeDifference < 0) {
-        return '未来'
+        return '미래'
     }
     const second = timeDifference / 1000
     if (second < 60) {
-        return '刚刚'
+        return '방금'
     }
     const minutes = second / 60
     if (minutes < 60) {
-        return `${Math.floor(minutes)} 分钟前`
+        return `${Math.floor(minutes)}분 전`
     }
     const hours = minutes / 60
     if (hours < 24) {
-        return `${Math.floor(hours)} 小时前`
+        return `${Math.floor(hours)}시간 전`
     }
     const days = hours / 24
     if (Math.floor(days) === 1) {
         const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
         if (input.getDate() === yesterday.getDate()) {
-            return '昨天'
+            return '어제'
         } else {
-            return '前天'
+            return '그저께'
         }
     } else if (Math.floor(days) === 2) {
         const beforeYesterday = new Date(new Date().setDate(new Date().getDate() - 2))
         if (input.getDate() === beforeYesterday.getDate()) {
-            return '前天'
+            return '그저께'
         } else {
-            return '大前天'
+            return '3일 전'
         }
     } else if (days < 31) {
-        return `${Math.floor(days)} 天前`
+        return `${Math.floor(days)}일 전`
     } else if (days >= 31 && days <= 2 * 31) {
-        return '一个月前'
+        return '1개월 전'
     } else if (days >= 2 * 31 && days <= 3 * 31) {
-        return '2个月前'
+        return '2개월 전'
     } else {
         return ymd(input)
     }
@@ -297,16 +297,16 @@ const chatMsgShowTimeFormat = (date) => {
         if (Math.floor(days) === 1) {
             const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
             if (input.getDate() === yesterday.getDate()) {
-                return `昨天 ${hour}:${m}`
+                return `어제 ${hour}:${m}`
             } else {
-                return `前天 ${hour}:${m}`
+                return `그저께 ${hour}:${m}`
             }
         } else if (Math.floor(days) === 2) {
             const beforeYesterday = new Date(new Date().setDate(new Date().getDate() - 2))
             if (input.getDate() === beforeYesterday.getDate()) {
-                return `前天 ${hour}:${m}`
+                return `그저께 ${hour}:${m}`
             } else {
-                return `大前天 ${hour}:${m}`
+                return `3일 전 ${hour}:${m}`
             }
         } else if (now.getFullYear() === input.getFullYear()) {
             return `${month}-${d} ${hour}:${m}`
@@ -485,7 +485,7 @@ const createContextMenu = (options) => {
     const menuList = options.menuList
 
     if (!menuList || !callback) {
-        console.error('没有传入正确的参数 ！')
+        console.error('올바른 매개변수가 전달되지 않았습니다!')
         return
     }
     closeContextMenu()
@@ -516,7 +516,7 @@ const createContextMenu = (options) => {
             event.preventDefault()
             // 获取绑定的数据
             const menu = JSON.parse(event.target.dataset.menu)
-            console.debug('=====> 点击了菜单', menu)
+            console.debug('=====> 메뉴 클릭', menu)
             callback(menu)
             closeContextMenu()
         })
@@ -546,7 +546,7 @@ const conversationPicker = async (eventBus) => {
     return new Promise((res, _) => {
         const name = 'im-main-forward'
         eventBus.subscribe(name, (data) => {
-            console.debug("选择返回", data)
+            console.debug("선택 결과 반환", data)
             res(data)
             eventBus.unsubscribe(name)
         })

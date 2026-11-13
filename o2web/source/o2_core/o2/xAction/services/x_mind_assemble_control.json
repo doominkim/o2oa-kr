@@ -18,20 +18,20 @@
   "listMyReceivedMind" : {"uri":"/jaxrs/mind/filter/recived/{id}/next/{count}","method": "PUT"},
 
   "saveMind" : { "uri" : "/jaxrs/mind/save" , "method": "POST" },
-  "getMind" : { "uri" : "/jaxrs/mind/view/{id}" }, //带正文
-  "getMindBaseInfor" : { "uri" : "/jaxrs/mind/{id}" }, //基本信息，不带正文
+  "getMind" : { "uri" : "/jaxrs/mind/view/{id}" }, //본문 포함
+  "getMindBaseInfor" : { "uri" : "/jaxrs/mind/{id}" }, //기본 정보, 본문 제외
   "deleteMind": { "uri": "/jaxrs/mind/{id}/destorymind", "method": "DELETE" },
-  "recycleMind" : {"uri":"/jaxrs/mind/recycle/{id}", "method": "DELETE" }, //放入回收站
-  "destroyFromRecycle" : {"uri":"/jaxrs/mind/{recycleId}/destoryrecycle", "method": "DELETE" }, //放入回收站
-  "restoreMind" : {"uri":"/jaxrs/mind/restore/{id}"}, //从回收站恢复
+  "recycleMind" : {"uri":"/jaxrs/mind/recycle/{id}", "method": "DELETE" }, //휴지통으로 이동
+  "destroyFromRecycle" : {"uri":"/jaxrs/mind/{recycleId}/destoryrecycle", "method": "DELETE" }, //휴지통으로 이동
+  "restoreMind" : {"uri":"/jaxrs/mind/restore/{id}"}, //휴지통에서 복원
   //{"name":"","folderId":"root","description":"","creator":"","creatorUnit":"","shared":"","orderField":"","orderType":""}
   "listNextMindWithFilter" : {"uri":"/jaxrs/mind/filter/list/{id}/next/{count}", "method": "PUT"},
 
   "uploadMindIcon" : {"uri":"/jaxrs/mind/{mindId}/icon/size/{size}", "method": "POST", "enctype": "formData"},
   "getMindIcon" : {"uri":"/jaxrs/mind/{id}/icon"},
 
-  "listVersionsWithMindId" : {"uri":"/jaxrs/mind/list/{id}/version"}, //根据脑图ID获取脑图所有的版本信息
-  "viewMindVersionWithId": {"uri":"/jaxrs/mind/version/{versionid}"}, //根据历史版本信息ID获取脑图信息，包括脑图内容
+  "listVersionsWithMindId" : {"uri":"/jaxrs/mind/list/{id}/version"}, //마인드맵 ID로 마인드맵의 모든 버전 정보 조회
+  "viewMindVersionWithId": {"uri":"/jaxrs/mind/version/{versionid}"}, //이력 버전 정보 ID로 마인드맵 정보 조회, 마인드맵 내용 포함
 
 
   "clazz": "x_mind_assemble_control"

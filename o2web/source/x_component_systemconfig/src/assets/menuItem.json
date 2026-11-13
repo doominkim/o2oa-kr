@@ -1,36 +1,36 @@
 [{
   "children": [{
-    "title": "基础配置",
+    "title": "기본 설정",
     "component": "",
     "icon": "config"
   }, {
-    "title": "界面配置",
+    "title": "화면 설정",
     "component": "",
     "icon": "ui"
   }, {
-    "title": "Web资源部署",
+    "title": "Web 리소스 배포",
     "component": "",
     "icon": "webres"
   }, {
-    "title": "服务部署",
+    "title": "서비스 배포",
     "component": "",
     "icon": "service"
   }]
 },{
   "children": [{
-    "title": "基础配置",
+    "title": "기본 설정",
     "component": "",
     "icon": "config"
   }, {
-    "title": "界面配置",
+    "title": "화면 설정",
     "component": "",
     "icon": "ui"
   }, {
-    "title": "Web资源部署",
+    "title": "Web 리소스 배포",
     "component": "",
     "icon": "webres"
   }, {
-    "title": "服务部署",
+    "title": "서비스 배포",
     "component": "",
     "icon": "service"
   }]

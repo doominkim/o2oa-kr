@@ -184,7 +184,7 @@
         <div style="white-space: pre">
     exceljs style sample:
     return {
-        font: { name: '宋体', family: 4, size: 10, bold: false },
+        font: { name: '맑은 고딕', family: 4, size: 10, bold: false },
         border: { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} },
         fill: { type: 'pattern', pattern:'solid',  fgColor:{argb:'FFFFFF'} },
         alignment :  { vertical: 'middle', horizontal: 'center' } //wrapText: true
@@ -438,24 +438,24 @@
 
 
                     <div style="display:none" id="text{$.id}viewCustomFilterOrgOptionScriptDiv">
-                        <div style="padding: 5px;color:dodgerblue;cursor: pointer;" onclick="this.nextElementSibling.showModal()">人员组织选项，说明样例。</div>
+                        <div style="padding: 5px;color:dodgerblue;cursor: pointer;" onclick="this.nextElementSibling.showModal()">사용자·조직 선택 옵션 예시 설명</div>
                         <dialog style="border: 1px solid #ccc;border-radius: 8px;box-shadow: 0 2px 10px rgba(0,0,0,0.1);margin: auto;">
-                            <h3>人员选择选项</h3>
+                            <h3>사용자 선택 옵션</h3>
                             <pre>return {
-     "count": 0, //选择数量，0表示不限制
-     "title": "", //选择界面的title
-     "groups": [], //选择的群组范围，选择群组时有效。
-     "units": [], //选择的组织范围，选择身份和组织时有效。
-     "dutys": [], //选择的职务范围，选择身份时有效。
-     "roles": [], //选择的角色范围，选择角色时有效。
-     "noUnit" : false, //在选择身份的时候，是否只使用include选项。
-     "include" : [], //增加的可选项。选择身份的时候，没有传units表示选中全员，include不生效，可以使用onUnit选项表示只使用include选项。
-     "exclude" : [], //排除的可选项
-     "expandSubEnable" : true, //是否允许展开下一层，选择身份和组织时有效
-     "selectAllEnable" : true,  //分类是否允许全选下一层，选择身份和组织时有效
-     "zIndex": 1000 //选择界面的zIndex
+     "count": 0, //선택 개수, 0이면 제한 없음
+     "title": "", //선택 화면의 title
+     "groups": [], //선택할 그룹 범위, 그룹 선택 시 적용
+     "units": [], //선택할 조직 범위, 소속·조직 선택 시 적용
+     "dutys": [], //선택할 직무 범위, 소속 선택 시 적용
+     "roles": [], //선택할 역할 범위, 역할 선택 시 적용
+     "noUnit" : false, //소속 선택 시 include 옵션만 사용할지 여부
+     "include" : [], //추가 선택 항목. 소속 선택 시 units를 전달하지 않으면 전체 인원이 선택되어 include가 적용되지 않으며, noUnit 옵션으로 include 옵션만 사용하도록 할 수 있음
+     "exclude" : [], //제외할 선택 항목
+     "expandSubEnable" : true, //하위 단계 펼치기 허용 여부, 소속·조직 선택 시 적용
+     "selectAllEnable" : true,  //분류에서 하위 단계 전체 선택 허용 여부, 소속·조직 선택 시 적용
+     "zIndex": 1000 //선택 화면의 zIndex
 }</pre>
-                            <button onclick="this.parentElement.close()">关闭</button>
+                            <button onclick="this.parentElement.close()">닫기</button>
                         </dialog>
                         <div name="text{$.id}viewCustomFilterOrgOptionScript" title="{{$.lp.selectOrgOptionScript}}"></div>
                     </div>

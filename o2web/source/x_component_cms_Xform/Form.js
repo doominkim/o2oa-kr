@@ -2057,7 +2057,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
         _shareToIMOnPc: async function () {
             const document = this.businessData.document
             if (!document) {
-                console.error('文档对象不存在！！！！！！')
+                console.error('문서 객체가 존재하지 않습니다!')
                 this.app.notice(MWF.xApplication.process.Xform.LP.noPermissionOrDocumentNotExisted, "warn");
                 return
             }
@@ -2073,7 +2073,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                 categoryAlias: document.categoryAlias, // cms 分类别名
                 body: JSON.stringify(document)
             };
-            console.log('发送的消息体', jsonBody)
+            console.log('전송할 메시지 본문', jsonBody)
             this._imSendMessage(jsonBody);
         },
         /**

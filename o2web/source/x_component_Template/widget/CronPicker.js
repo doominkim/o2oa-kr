@@ -14,7 +14,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
         },
         event : "click", //事件类型，有target 时有效， mouseenter对应mouseleave，click 对应 container 的  click
         modules : ["second","mintue","hour","date","month","week","year"],
-        moudulesLp : { second : "秒", mintue : "分钟", hour : "小时", date : "日", month : "月", week : "周", year : "年"},
+        moudulesLp : { second : "초", mintue : "분", hour : "시", date : "일", month : "월", week : "요일", year : "년"},
         isShowResult : true,
         isShowText : true,
         value : ""
@@ -136,9 +136,9 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             "       <div item='second'></div>" +
             "   </td>" +
             "    <td styles='formTableValue14' style='vertical-align: top;'>" +
-            "       <div>允许的通配符[, - * /]</div>" +
-            "       <div>从 <span item='sfrom'></span>-<span item='sto'></span> 秒</div>" +
-            "       <div>从<span item='sbegin'></span>秒开始,每<span item='scount'></span>秒执行一次</div>" +
+            "       <div>허용 와일드카드 [, - * /]</div>" +
+            "       <div>범위 <span item='sfrom'></span>-<span item='sto'></span> 초</div>" +
+            "       <div><span item='sbegin'></span>초부터 <span item='scount'></span>초마다 실행</div>" +
             "       <div></div>" +
             "</td></tr>" +
             "<tr><td styles='formTableValue14' item='sspecify' colspan='2' style='padding-left: 10px;'></td></tr>" +
@@ -150,7 +150,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             style : this.formStyle,
             hasColon : true,
             itemTemplate: {
-                second : { type:"radio" ,selectValue : ["secondly","cycle","from","specify"], selectText: ["每秒","周期","","指定"], defaultValue : "secondly", event : {
+                second : { type:"radio" ,selectValue : ["secondly","cycle","from","specify"], selectText: ["매초","주기","","지정"], defaultValue : "secondly", event : {
                     click : function(){ this.setValue() }.bind(this)
                 }},
                 sfrom : { tType : "number",   event : {  blur : function(){ this.setValue() }.bind(this) } },
@@ -250,9 +250,9 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             "       <div item='mintue'></div>" +
             "   </td>" +
             "    <td styles='formTableValue14' style='vertical-align: top;'>" +
-            "       <div>允许的通配符[, - * /]</div>" +
-            "       <div>从 <span item='mfrom'></span>-<span item='mto'></span> 分钟</div>" +
-            "       <div>从<span item='mbegin'></span>分钟开始,每<span item='mcount'></span>分钟执行一次</div>" +
+            "       <div>허용 와일드카드 [, - * /]</div>" +
+            "       <div>범위 <span item='mfrom'></span>-<span item='mto'></span> 분</div>" +
+            "       <div><span item='mbegin'></span>분부터 <span item='mcount'></span>분마다 실행</div>" +
             "       <div></div>" +
             "</td></tr>" +
             "<tr><td styles='formTableValue14' item='mspecify' colspan='2' style='padding-left: 10px;'></td></tr>" +
@@ -264,7 +264,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             style : this.formStyle,
             hasColon : true,
             itemTemplate: {
-                mintue : { type:"radio" ,selectValue : ["mintuely","cycle","from","specify"], selectText: ["每分钟","周期","","指定"],defaultValue : "mintuely", event : {
+                mintue : { type:"radio" ,selectValue : ["mintuely","cycle","from","specify"], selectText: ["매분","주기","","지정"],defaultValue : "mintuely", event : {
                     click : function(){ this.setValue() }.bind(this)
                 }},
                 mfrom : { tType : "number", event : {  blur : function(){ this.setValue() }.bind(this) } },
@@ -337,9 +337,9 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             "       <div item='hour'></div>" +
             "   </td>" +
             "    <td styles='formTableValue14' style='vertical-align: top;'>" +
-            "       <div>允许的通配符[, - * /]</div>" +
-            "       <div>从 <span item='hfrom'></span>-<span item='hto'></span> 小时</div>" +
-            "       <div>从<span item='hbegin'></span>小时开始,每<span item='hcount'></span>小时执行一次</div>" +
+            "       <div>허용 와일드카드 [, - * /]</div>" +
+            "       <div>범위 <span item='hfrom'></span>-<span item='hto'></span> 시</div>" +
+            "       <div><span item='hbegin'></span>시부터 <span item='hcount'></span>시간마다 실행</div>" +
             "       <div></div>" +
             "</td></tr>" +
             "<tr><td styles='formTableValue14' item='hspecify' colspan='2' style='padding-left: 10px;'></td></tr>" +
@@ -351,7 +351,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             style : this.formStyle,
             hasColon : true,
             itemTemplate: {
-                hour : { type:"radio" ,selectValue : ["hourly","cycle","from","specify"], selectText: ["每小时","周期","","指定"], defaultValue : "hourly",  event : {
+                hour : { type:"radio" ,selectValue : ["hourly","cycle","from","specify"], selectText: ["매시","주기","","지정"], defaultValue : "hourly",  event : {
                     click : function(){ this.setValue() }.bind(this)
                 }},
                 hfrom : { tType : "number", event : {  blur : function(){ this.setValue() }.bind(this) } },
@@ -424,11 +424,11 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             "       <div item='date'></div>" +
             "   </td>" +
             "    <td styles='formTableValue14' style='vertical-align: top;'>" +
-            "       <div>允许的通配符[, - * / L W ?]</div>" +
+            "       <div>허용 와일드카드 [, - * / L W ?]</div>" +
             "       <div>　</div>" +
-            "       <div>从 <span item='dfrom'></span>-<span item='dto'></span> 日</div>" +
-            "       <div>从<span item='dbegin'></span>日开始,每<span item='dcount'></span>天执行一次</div>" +
-            "       <div>每月<span item='dnearly'></span>号最近的那个工作日</div>" +
+            "       <div>범위 <span item='dfrom'></span>-<span item='dto'></span> 일</div>" +
+            "       <div><span item='dbegin'></span>일부터 <span item='dcount'></span>일마다 실행</div>" +
+            "       <div>매월 <span item='dnearly'></span>일에서 가장 가까운 근무일</div>" +
             "       <div></div>" +
             "       <div></div>" +
             "</td></tr>" +
@@ -441,7 +441,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             style : this.formStyle,
             hasColon : true,
             itemTemplate: {
-                date : { type:"radio" ,selectValue : ["daily","notspecify","cycle","from", "nearly", "last","specify"], selectText: ["每天","不指定","周期","","","本月最后一天","指定"], defaultValue : "daily", event : {
+                date : { type:"radio" ,selectValue : ["daily","notspecify","cycle","from", "nearly", "last","specify"], selectText: ["매일","지정 안 함","주기","","","이번 달 마지막 날","지정"], defaultValue : "daily", event : {
                     click : function(){ this.setValue() }.bind(this)
                 }},
                 dfrom : { tType : "number", event : {  blur : function(){ this.setValue() }.bind(this) } },
@@ -532,10 +532,10 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             "       <div item='month'></div>" +
             "   </td>" +
             "    <td styles='formTableValue14' style='vertical-align: top;'>" +
-            "       <div>允许的通配符[, - * / ?]</div>" +
+            "       <div>허용 와일드카드 [, - * / ?]</div>" +
             "       <div>　</div>" +
-            "       <div>从 <span item='mofrom'></span>-<span item='moto'></span> 月</div>" +
-            "       <div>从<span item='mobegin'></span>月开始,每<span item='mocount'></span>月执行一次</div>" +
+            "       <div>범위 <span item='mofrom'></span>-<span item='moto'></span> 월</div>" +
+            "       <div><span item='mobegin'></span>월부터 <span item='mocount'></span>개월마다 실행</div>" +
             "       <div></div>" +
             "</td></tr>" +
             "<tr><td styles='formTableValue14' item='mospecify' colspan='2' style='padding-left: 10px;'></td></tr>" +
@@ -547,7 +547,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             style : this.formStyle,
             hasColon : true,
             itemTemplate: {
-                month : { type:"radio" ,selectValue : ["monthly","notspecify","cycle","from", "specify"], selectText: ["每月","不指定","周期","","指定"], defaultValue : "monthly", event : {
+                month : { type:"radio" ,selectValue : ["monthly","notspecify","cycle","from", "specify"], selectText: ["매월","지정 안 함","주기","","지정"], defaultValue : "monthly", event : {
                     click : function(){ this.setValue() }.bind(this)
                 }},
                 mofrom : { tType : "number", event : {  blur : function(){ this.setValue() }.bind(this) } },
@@ -626,11 +626,11 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             "       <div item='week'></div>" +
             "   </td>" +
             "    <td styles='formTableValue14' style='vertical-align: top;'>" +
-            "       <div>允许的通配符[, - * / L # ?]</div>" +
+            "       <div>허용 와일드카드 [, - * / L # ?]</div>" +
             "       <div>　</div>" +
-            "       <div>从星期 <span item='wfrom'></span>-<span item='wto'></span> </div>" +
-            "       <div>第<span item='wnumber'></span>周的星期<span item='wday'></span></div>" +
-            "       <div>本月最后一个星期<span item='wlast'></span></div>" +
+            "       <div>요일 범위 <span item='wfrom'></span>-<span item='wto'></span> </div>" +
+            "       <div><span item='wnumber'></span>번째 주의 요일 <span item='wday'></span></div>" +
+            "       <div>이번 달 마지막 주의 요일 <span item='wlast'></span></div>" +
             "       <div></div>" +
             "</td></tr>" +
             "<tr><td styles='formTableValue14' item='wspecify' colspan='2' style='padding-left: 10px;'></td></tr>" +
@@ -642,7 +642,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             style : this.formStyle,
             hasColon : true,
             itemTemplate: {
-                week : { type:"radio" ,selectValue : ["weekly","notspecify","cycle","from", "last","specify"], selectText: ["每周","不指定","周期","","","指定"], defaultValue : "notspecify", event : {
+                week : { type:"radio" ,selectValue : ["weekly","notspecify","cycle","from", "last","specify"], selectText: ["매주","지정 안 함","주기","","","지정"], defaultValue : "notspecify", event : {
                     click : function(){ this.setValue() }.bind(this)
                 }},
                 wfrom : { tType : "number", event : {  blur : function(){ this.setValue() }.bind(this) } },
@@ -728,9 +728,9 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             "       <div item='year'></div>" +
             "   </td>" +
             "    <td styles='formTableValue14' style='vertical-align: top;'>" +
-            "       <div>允许的通配符[, - * /] 非必填</div>" +
+            "       <div>허용 와일드카드 [, - * /] 선택 입력</div>" +
             "       <div>　</div>" +
-            "       <div>从<span item='yfrom'></span>-<span item='yto'></span>年</div>" +
+            "       <div>범위 <span item='yfrom'></span>-<span item='yto'></span>년</div>" +
             "</td></tr>" +
             "</table>";
         this.yearNode.set("html", html);
@@ -740,7 +740,7 @@ MWF.xApplication.Template.widget.CronPicker = new Class({
             style : this.formStyle,
             hasColon : true,
             itemTemplate: {
-                year : { type:"radio" ,selectValue : ["notspecify","yearly","cycle"], selectText: ["不指定","每年","周期"], defaultValue : "notspecify", event : {
+                year : { type:"radio" ,selectValue : ["notspecify","yearly","cycle"], selectText: ["지정 안 함","매년","주기"], defaultValue : "notspecify", event : {
                     click : function(){ this.setValue() }.bind(this)
                 }},
                 yfrom : { tType : "number", event : {  blur : function(){ this.setValue() }.bind(this) } },

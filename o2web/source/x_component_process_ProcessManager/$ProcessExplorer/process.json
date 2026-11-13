@@ -1,5 +1,5 @@
 {
-	"name": "新建流程",
+	"name": "새 프로세스",
 	"alias": "",
 	"description": "",
 	"processCategory": "",
@@ -57,7 +57,7 @@
 			"process": "",
 			"activityType": "end",
 			"activity": "ea30593c-2170-4a09-91aa-69bef6d6b715",
-			"name": "开始",
+			"name": "시작",
 			"alias": "",
 			"description": "",
 			"track": "",

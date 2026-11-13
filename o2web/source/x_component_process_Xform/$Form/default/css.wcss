@@ -851,7 +851,7 @@
         "width": "490px",
         "border": "0px",
         "font-size": "14px",
-        "font-family": "'Microsoft YaHei','Microsoft YaHei','SimSun','宋体'",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "overflow": "auto"
     },
     "attachmentOCRImageAreaNode": {
@@ -1107,7 +1107,7 @@
         "background": "#ffffff",
         "box-shadow": "0 0 10px rgba(0, 0, 0, 0.1)",
         "font-size": "16pt",
-        "font-family": "'仿宋_GB2312', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "1.02cm",
         "letter-spacing": "-0.01cm"
     },

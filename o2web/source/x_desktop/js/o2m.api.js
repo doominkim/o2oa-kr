@@ -46,7 +46,7 @@
         version: {
             v: "1.1.0",
             build: "2021.01.20",
-            info: "O2OA 活力办公 创意无限. Copyright © 2021, o2oa.net O2 Team All rights reserved."
+            info: "O2OA 활기찬 업무, 무한한 창의. Copyright © 2021, o2oa.net O2 Team All rights reserved."
         },
         log: function (message) {
             window.o2android && window.o2android.o2mLog ? window.o2android.o2mLog(message) : window.webkit.messageHandlers.o2mLog.postMessage(message);
@@ -183,7 +183,7 @@
      */
     this.o2m.portalLoaded = function (callback, iconClassName, menuList) {
         if (!callback && !menuList) {
-            console.error('参数不正确，callback 和 menuList 为空')
+            console.error('매개변수가 올바르지 않습니다. callback과 menuList가 비어 있습니다')
             return;
         }
         const body = {
@@ -210,7 +210,7 @@
             window.o2android.postMessage(JSON.stringify(body));
             console.debug('o2android portalLoaded loaded =============== ');
         } else {
-            console.error('portalLoaded 执行失败，环境读取失败')
+            console.error('portalLoaded 실행 실패: 환경 정보를 읽지 못했습니다')
         }
     }
 
@@ -236,14 +236,14 @@
      */
     this.o2m.uploadFile = function (args) {
         if (!args) {
-            console.error("o2m.uploadFile， 参数错误！")
+            console.error("o2m.uploadFile: 매개변수 오류!")
             return;
         }
         const callback = args.callback ? args.callback : null;
         if (callback && typeof callback === "function") {
             o2m._uploadFileCallback  = callback;
         } else {
-            console.error("o2m.uploadFile 缺少参数 callback")
+            console.error("o2m.uploadFile: callback 매개변수가 누락되었습니다")
             return;
         }
         const onlyTakePhoto = args.onlyTakePhoto || false;
@@ -275,7 +275,7 @@
     const _notification_post = function (body, onFail) {
         if (body == null) {
             if (onFail && typeof onFail === "function") {
-                onFail("参数异常！");
+                onFail("매개변수 오류!");
                 return
             }
         }
@@ -288,7 +288,7 @@
             window.webkit.messageHandlers.o2mNotification.postMessage(message);
         } else {
             if (onFail && typeof onFail === "function") {
-                onFail("请在O2OA移动端使用！");
+                onFail("O2OA 모바일 앱에서 사용하세요!");
             }
         }
     };
@@ -305,7 +305,7 @@
         const onFail = alert && alert.onFail ? alert.onFail : null;
         if (message === "") {
             if (typeof onFail === "function") {
-                onFail("消息内容不能为空！");
+                onFail("메시지 내용은 비워 둘 수 없습니다!");
             }
             return;
         }
@@ -358,20 +358,20 @@
         console.log("notification confirm back, click button index: " + index);
     };
     const _o2m_n_confirm = function (c) {
-        const buttonLabels = c && c.buttonLabels ? c.buttonLabels : ["确定", "取消"];
+        const buttonLabels = c && c.buttonLabels ? c.buttonLabels : ["확인", "취소"];
         const message = c && c.message ? c.message : "";
         const title = c && c.title ? c.title : "";
         const onSuccess = c && c.onSuccess ? c.onSuccess : null;
         const onFail = c && c.onFail ? c.onFail : null;
         if (message === "") {
             if (typeof onFail === "function") {
-                onFail("消息内容message不能为空！");
+                onFail("메시지 내용(message)은 비워 둘 수 없습니다!");
             }
             return;
         }
         if (buttonLabels.length != 2) {
             if (typeof onFail === "function") {
-                onFail("按钮名称数组长度只能是2！");
+                onFail("버튼 이름 배열의 길이는 2여야 합니다!");
             }
             return;
         }
@@ -399,7 +399,7 @@
      * <pre><code class='language-js'>{
      *  "title": "提示",  //消息标题，可为空
      *  "message": "这里是消息内容", //消息内容
-     *  "buttonLabels": ["确定", "取消"], //按钮名称 Array[String]
+     *  "buttonLabels": ["확인", "취소"], //按钮名称 Array[String]
      *  "onSuccess": function,  //成功回调
      *  "onFail": function, //失败回调
      * }</code></pre>
@@ -427,20 +427,20 @@
         console.log("notification prompt back, click button result: " + result);
     };
     const _o2m_n_prompt = function (c) {
-        const buttonLabels = c && c.buttonLabels ? c.buttonLabels : ["确定", "取消"];
+        const buttonLabels = c && c.buttonLabels ? c.buttonLabels : ["확인", "취소"];
         const message = c && c.message ? c.message : "";
         const title = c && c.title ? c.title : "";
         const onSuccess = c && c.onSuccess ? c.onSuccess : null;
         const onFail = c && c.onFail ? c.onFail : null;
         if (message === "") {
             if (typeof onFail === "function") {
-                onFail("消息内容message不能为空！");
+                onFail("메시지 내용(message)은 비워 둘 수 없습니다!");
             }
             return;
         }
         if (buttonLabels.length != 2) {
             if (typeof onFail === "function") {
-                onFail("按钮名称数组长度只能是2！");
+                onFail("버튼 이름 배열의 길이는 2여야 합니다!");
             }
             return;
         }
@@ -551,7 +551,7 @@
         const onFail = c && c.onFail ? c.onFail : null;
         if (message === "") {
             if (typeof onFail === "function") {
-                onFail("消息内容message不能为空！");
+                onFail("메시지 내용(message)은 비워 둘 수 없습니다!");
             }
             return;
         }
@@ -598,14 +598,14 @@
     };
     const _o2m_n_actionSheet = function (c) {
         const title = c && c.title ? c.title : "";
-        const cancelButton = c && c.cancelButton ? c.cancelButton : "取消";
+        const cancelButton = c && c.cancelButton ? c.cancelButton : "취소";
         const otherButtons = c && c.otherButtons ? c.otherButtons : [];
         const tooManyButtons = c && c.tooManyButtons ? c.tooManyButtons : false;
         const onSuccess = c && c.onSuccess ? c.onSuccess : null;
         const onFail = c && c.onFail ? c.onFail : null;
         if (otherButtons.length < 1) {
             if (typeof onFail === "function") {
-                onFail("其他按钮列表不能为空！");
+                onFail("기타 버튼 목록은 비워 둘 수 없습니다!");
             }
             return;
         }
@@ -780,7 +780,7 @@
     const _util_post = function (body, onFail) {
         if (body == null) {
             if (onFail && typeof onFail === "function") {
-                onFail("参数异常！");
+                onFail("매개변수 오류!");
                 return;
             }
         }
@@ -793,7 +793,7 @@
             window.webkit.messageHandlers.o2mUtil.postMessage(message);
         } else {
             if (onFail && typeof onFail === "function") {
-                onFail("请在O2OA移动端使用！");
+                onFail("O2OA 모바일 앱에서 사용하세요!");
             }
         }
     };
@@ -1692,7 +1692,7 @@
     const _biz_post = function (body, onFail) {
         if (body == null) {
             if (onFail && typeof onFail === "function") {
-                onFail("参数异常！");
+                onFail("매개변수 오류!");
                 return;
             }
         }
@@ -1705,7 +1705,7 @@
             window.webkit.messageHandlers.o2mBiz.postMessage(message);
         } else {
             if (onFail && typeof onFail === "function") {
-                onFail("请在O2OA移动端使用！");
+                onFail("O2OA 모바일 앱에서 사용하세요!");
             }
         }
     };
@@ -1722,7 +1722,7 @@
         } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.closeWork) {
             window.webkit.messageHandlers.closeWork.postMessage("");
         } else {
-            console.log("请在O2OA移动端使用, workClose");
+            console.log("O2OA 모바일 앱에서 사용하세요, workClose");
         }
     }
     /**

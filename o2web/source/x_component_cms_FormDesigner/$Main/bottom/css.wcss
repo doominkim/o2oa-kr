@@ -347,7 +347,7 @@
             "font-size": "16px",
             "color": "#666",
             "overflow": "hidden",
-            "font-family": "Microsoft YaHei"
+            "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif"
         },
         "templateActionNode": {
             "width": "280px",
@@ -362,7 +362,7 @@
             "line-height": "30px",
             "padding-left": "65px",
             "font-size": "16px",
-            "font-family": "Microsoft YaHei",
+            "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
             "border-radius": "3px",
             "border": "1px solid #354f67",
             "color": "#FFF",
@@ -380,7 +380,7 @@
             "line-height": "30px",
             "padding-left": "40px",
             "font-size": "16px",
-            "font-family": "Microsoft YaHei",
+            "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
             "border-radius": "3px",
             "color": "#FFF",
             "margin-top": "20px",

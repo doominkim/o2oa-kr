@@ -13,7 +13,7 @@
       "name": "work",
       "content": {
         "html": "<div styles='sectionItemNode'>"+
-        "<div styles='sectionRemoveNode' item='remove' title='删除版块'></div>"+
+        "<div styles='sectionRemoveNode' item='remove' title='섹션 삭제'></div>"+
         "<div styles='sectionItemTopNode'>"+
         " <div styles='sectionItemTopIconNode'>"+
         "   <img styles='sectionItemTopIcon' item='icon'>"+

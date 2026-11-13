@@ -1,9 +1,9 @@
 {
   "getId" : {"uri":"/jaxrs/uuid/random"},
 
-  "login" : {"uri":"/jaxrs/login","method":"POST"}, //登陆并获取权限列表
+  "login" : {"uri":"/jaxrs/login","method":"POST"}, //로그인 후 권한 목록 조회
 
-  "getUserInfor" : {"uri":"/jaxrs/userinfo", "method":"PUT"}, //查看指定用户的论坛用户信息 { "userName":"" }
+  "getUserInfor" : {"uri":"/jaxrs/userinfo", "method":"PUT"}, //지정 사용자의 포럼 사용자 정보 조회 { "userName":"" }
 
   "getBBSName" : {"uri" : "/jaxrs/setting/bbsName"},
   "listSystemSettingAll": {"uri" : "/jaxrs/user/setting/all"},
@@ -13,20 +13,20 @@
   "saveSystemSetting" : {"uri":"/jaxrs/user/setting", "method":"PUT"},
 
   "getCategory" : {"uri":"/jaxrs/forum/{id}"},
-  "listCategoryAll": {"uri" : "/jaxrs/forum/view/all"}, //根据权限访问
-  "listCategoryAllByAdmin" : {"uri" : "/jaxrs/user/forum/all"}, //完全权限访问
-  /*{'q_Year':'2016','q_Name':'五一劳动节','q_Month':'03'}*/
+  "listCategoryAll": {"uri" : "/jaxrs/forum/view/all"}, //권한에 따라 접근
+  "listCategoryAllByAdmin" : {"uri" : "/jaxrs/user/forum/all"}, //전체 권한으로 접근
+  /*{'q_Year':'2016','q_Name':'근로자의 날','q_Month':'03'}*/
   //"listHolidayFilter" : {"uri" : "/jaxrs/attendanceworkdayconfig/filter", "method": "PUT"},
   "saveCategory": {"uri" : "/jaxrs/user/forum", "method": "POST"},
   "deleteCategory" : {"uri":"/jaxrs/user/forum/{id}","method": "DELETE"},
   "deleteCategoryForce" : {"uri":"/jaxrs/forum/force/{id}","method": "DELETE"},
 
-  "getSection" : {"uri":"/jaxrs/section/{id}"}, //根据ID查询版块信息(可匿名访问)
-  "listSection": {"uri" : "/jaxrs/section/viewforum/{forumId}"}, //根据论坛ID获取所有版块的信息列表(可匿名访问)
-  "listSectionByAdmin": {"uri" : "/jaxrs/user/section/forum/{forumId}"}, //根据论坛ID获取所有版块的信息列表
-  "listSubSection": {"uri" : "/jaxrs/section/viewsub/{sectionId}"}, //根据主版块ID查询所有的子版块信息列表(可匿名访问)
-  "listSubSectionByAdmin": {"uri" : "/jaxrs/user/section/sub/{sectionId}"}, //根据主版块ID查询所有的子版块信息列表
-  "listSectionAll": {"uri" : "/jaxrs/user/section/all"}, //查询所有的版块信息列表
+  "getSection" : {"uri":"/jaxrs/section/{id}"}, //ID로 섹션 정보 조회(익명 접근 가능)
+  "listSection": {"uri" : "/jaxrs/section/viewforum/{forumId}"}, //포럼 ID로 모든 섹션 정보 목록 조회(익명 접근 가능)
+  "listSectionByAdmin": {"uri" : "/jaxrs/user/section/forum/{forumId}"}, //포럼 ID로 모든 섹션 정보 목록 조회
+  "listSubSection": {"uri" : "/jaxrs/section/viewsub/{sectionId}"}, //상위 섹션 ID로 모든 하위 섹션 정보 목록 조회(익명 접근 가능)
+  "listSubSectionByAdmin": {"uri" : "/jaxrs/user/section/sub/{sectionId}"}, //상위 섹션 ID로 모든 하위 섹션 정보 목록 조회
+  "listSectionAll": {"uri" : "/jaxrs/user/section/all"}, //전체 섹션 정보 목록 조회
   "saveSection": {"uri" : "/jaxrs/user/section", "method": "POST"},
   "deleteSection" : {"uri":"/jaxrs/user/section/{id}","method": "DELETE"},
   "deleteSectionForce" : {"uri":"/jaxrs/user/section/force/{id}","method": "DELETE"},
@@ -38,10 +38,10 @@
   "listPermissionByForum": {"uri" : "/jaxrs/user/permission/forum/{forumId}"},
   "listPermissionBySection": {"uri" : "/jaxrs/user/permission/section/{sectionId}"},
 
-  "listSectionPermission" : {"uri" :"/jaxrs/permission/section/{sectionId}"}, //查询用户在指定板块中的所有操作权限.
-  "listSubjectPermission" : {"uri" :"/jaxrs/permission/subject/{subjectId}"}, //查询用户对指定主题的所有操作权限.
-  "listSubjectPublishPermission" : {"uri" :"/jaxrs/permission/subjectPublishable/{sectionId}"}, //查询用户中否可以在指定版块中发布主题.
-  "listReplyPublishPermission" : {"uri" :"/jaxrs/permission/replyPublishable/{subjectId}"}, //查询用户是否可以对指定主题进行回复.
+  "listSectionPermission" : {"uri" :"/jaxrs/permission/section/{sectionId}"}, //지정 섹션에서 사용자의 모든 작업 권한 조회.
+  "listSubjectPermission" : {"uri" :"/jaxrs/permission/subject/{subjectId}"}, //지정 주제에 대한 사용자의 모든 작업 권한 조회.
+  "listSubjectPublishPermission" : {"uri" :"/jaxrs/permission/subjectPublishable/{sectionId}"}, //사용자가 지정 섹션에 주제를 게시할 수 있는지 조회.
+  "listReplyPublishPermission" : {"uri" :"/jaxrs/permission/replyPublishable/{subjectId}"}, //사용자가 지정 주제에 댓글을 달 수 있는지 조회.
 
   //根据角色编码查询所有的人员部门群组绑定信息列表
   //{"bindRoleCode":"FORUM_PERMISSION_MANAGER_0ba0f2c7-31ee-472f-895e-977d79482e9f"}
@@ -93,18 +93,18 @@
   "listSubjectWithSubjectTypeForPage": {"uri" : "/jaxrs/subject/filter/listsubjectinfo/page/{page}/count/{count}", "method": "POST"},
   //根据版块ID查询所有的置顶贴：子版块，版块，论坛，全局置顶全部取到(可匿名访问)
   "listTopSubject" : {"uri":"/jaxrs/subject/top/{sectionId}"},
-  "setCream" : {"uri":"/jaxrs/user/subject/setCream/{id}"},   //设置精华
-  "cancelCream" : {"uri":"/jaxrs/user/subject/nonCream/{id}"},  //取消精华
-  "topToBBS" : {"uri":"/jaxrs/user/subject/topToBBS/{id}"},   //设置全局置顶
-  "cancelTopToBBS" : {"uri":"/jaxrs/user/subject/nonTopToBBS/{id}"},  //取消全局置顶
-  "topToForum" : {"uri":"/jaxrs/user/subject/topToForum/{id}"},   //设置分区置顶
-  "cancelTopToForum" : {"uri":"/jaxrs/user/subject/nonTopToForum/{id}"},  //取消分区置顶
-  "topToMainSection" : {"uri":"/jaxrs/user/subject/topToMainSection/{id}"},   //设置主版块置顶
-  "cancelTopToMainSection" : {"uri":"/jaxrs/user/subject/nonTopToMainSection/{id}"},  //取消主版块置顶
-  "topToSection" : {"uri":"/jaxrs/user/subject/topToSection/{id}"},   //设置版块置顶
-  "cancelTopToSection" : {"uri":"/jaxrs/user/subject/nonTopToSection/{id}"},  //取消版块置顶
-  "setRecommend" : {"uri":"/jaxrs/user/subject/setRecommendToBBSIndex/{id}"},   //推荐到首页
-  "cancelRecommend" : {"uri":"/jaxrs/user/subject/nonRecommendToBBSIndex/{id}"},  //取消推荐到首页
+  "setCream" : {"uri":"/jaxrs/user/subject/setCream/{id}"},   //추천 게시물 설정
+  "cancelCream" : {"uri":"/jaxrs/user/subject/nonCream/{id}"},  //추천 게시물 해제
+  "topToBBS" : {"uri":"/jaxrs/user/subject/topToBBS/{id}"},   //전체 상단 고정 설정
+  "cancelTopToBBS" : {"uri":"/jaxrs/user/subject/nonTopToBBS/{id}"},  //전체 상단 고정 해제
+  "topToForum" : {"uri":"/jaxrs/user/subject/topToForum/{id}"},   //분류 상단 고정 설정
+  "cancelTopToForum" : {"uri":"/jaxrs/user/subject/nonTopToForum/{id}"},  //분류 상단 고정 해제
+  "topToMainSection" : {"uri":"/jaxrs/user/subject/topToMainSection/{id}"},   //상위 섹션 상단 고정 설정
+  "cancelTopToMainSection" : {"uri":"/jaxrs/user/subject/nonTopToMainSection/{id}"},  //상위 섹션 상단 고정 해제
+  "topToSection" : {"uri":"/jaxrs/user/subject/topToSection/{id}"},   //섹션 상단 고정 설정
+  "cancelTopToSection" : {"uri":"/jaxrs/user/subject/nonTopToSection/{id}"},  //섹션 상단 고정 해제
+  "setRecommend" : {"uri":"/jaxrs/user/subject/setRecommendToBBSIndex/{id}"},   //홈에 추천
+  "cancelRecommend" : {"uri":"/jaxrs/user/subject/nonRecommendToBBSIndex/{id}"},  //홈 추천 해제
   "lock" : {"uri":"/jaxrs/user/subject/lock/{id}"},
   "unlock" : {"uri":"/jaxrs/user/subject/unlock/{id}"},
 

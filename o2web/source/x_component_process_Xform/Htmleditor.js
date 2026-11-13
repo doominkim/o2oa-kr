@@ -122,7 +122,7 @@ MWF.xApplication.process.Xform.Htmleditor = MWF.APPHtmleditor =  new Class(
                             img.src = base64;
                         })
                         .catch(err => {
-                            console.warn("图片处理失败：", err.message, img.src);
+                            console.warn("이미지 처리 실패: ", err.message, img.src);
                             img.destroy();
                         });
             }.bind(this));
@@ -141,7 +141,7 @@ MWF.xApplication.process.Xform.Htmleditor = MWF.APPHtmleditor =  new Class(
                     const toHeight =  img.offsetHeight || img.naturalHeight;
 
                     if (width <= 0 || height <= 0) {
-                        reject(new Error("图片尺寸无效，无法转换"));
+                        reject(new Error("이미지 크기가 올바르지 않아 변환할 수 없습니다"));
                         return;
                     }
 
@@ -156,7 +156,7 @@ MWF.xApplication.process.Xform.Htmleditor = MWF.APPHtmleditor =  new Class(
                     const base64Str = canvas.toDataURL(format, quality);
                     resolve(base64Str);
                 } catch (error) {
-                    reject(new Error(`转换失败：${error.message}`));
+                    reject(new Error(`변환 실패: ${error.message}`));
                 }
             };
 
@@ -177,14 +177,14 @@ MWF.xApplication.process.Xform.Htmleditor = MWF.APPHtmleditor =  new Class(
             const handleError = () => {
                 img.removeEventListener('load', handleLoad);
                 img.removeEventListener('error', handleError);
-                reject(new Error(`图片加载失败：${img.src}`));
+                reject(new Error(`이미지 로드 실패: ${img.src}`));
             };
 
             // 图片已加载完成
             if (img.complete) {
                 // 检查加载状态（避免缓存的失败图片）
                 if (img.naturalWidth === 0) {
-                    reject(new Error(`图片加载异常：${img.src}`));
+                    reject(new Error(`이미지 로드 오류: ${img.src}`));
                 } else {
                     parseImg();
                 }

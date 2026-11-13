@@ -75,7 +75,7 @@ MWF.xApplication.Template.widget.ColorPicker = new Class({
                 this.createLaterPickedNode( this.laterPickedColor );
             }
             this.themeArea = new Element("div").inject( this.contentNode );
-            new Element("div", {styles : this.css.titleNode, text : "主题颜色" }).inject( this.themeArea );
+            new Element("div", {styles : this.css.titleNode, text : "테마 색" }).inject( this.themeArea );
 
             this.themeNode = new Element("div", {styles : this.css.colorContainer }).inject( this.themeArea );
             var themeColorList = [
@@ -99,7 +99,7 @@ MWF.xApplication.Template.widget.ColorPicker = new Class({
             }
 
             this.standardArea = new Element("div").inject( this.contentNode );
-            new Element("div", {styles : this.css.titleNode, text : "标准颜色" }).inject( this.standardArea );
+            new Element("div", {styles : this.css.titleNode, text : "표준 색" }).inject( this.standardArea );
             this.standardNode = new Element("div", {styles : this.css.colorContainer }).inject( this.standardArea );
             var standardColorList = [
                 "#c00000", "#ff0000","#ffc000","#ffff00","#92d050","#00b050","#00b0f0","#0070c0","#002060","#7030a0"
@@ -147,7 +147,7 @@ MWF.xApplication.Template.widget.ColorPicker = new Class({
             this.laterPickedNode.empty();
         }else{
             this.laterPickedArea = new Element("div").inject( this.contentNode );
-            new Element("div", {styles : this.css.titleNode, text : "最近使用" }).inject( this.laterPickedArea );
+            new Element("div", {styles : this.css.titleNode, text : "최근 사용" }).inject( this.laterPickedArea );
             this.laterPickedNode = new Element("div", {styles : this.css.colorContainer }).inject( this.laterPickedArea );
         }
         for( var i=0; i< colorList.length; i++ ){

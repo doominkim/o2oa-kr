@@ -28,7 +28,7 @@
 	"tabTextNode": {
         "line-height": "30px",
         "display": "inline",
-        "font-family": "MicrosoftYaHei",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "font-size": "14px",
         "color": "#666666",
         "text-align": "center"
@@ -55,7 +55,7 @@
 	"tabTextNodeCurrent": {
 		"line-height": "30px",
         "display": "inline",
-        "font-family": "MicrosoftYaHei",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "font-size": "14px",
         "color": "#FFFFFF",
         "text-align": "center"

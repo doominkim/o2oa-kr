@@ -12,16 +12,16 @@
 		"height": "50px",
 		"line-height": "50px",
 		"text-align": "center",
-		"border-bottom": "1px solid #e6e6e6",
+		"border-bottom": "0px solid #EDEFF2",
 	},
 	"todayNode": {
 	    "height": "50px",
     	"line-height": "50px",
     	"float": "right",
     	"width": "40px",
-    	"color": "#4A90E2",
+    	"color": "#2768B0",
     	"cursor": "pointer",
-        "font-size": "16px",
+        "font-size": "12px",
         "text-align": "left"
 	},
 
@@ -42,11 +42,12 @@
 	"dateCurrent": {
 		"margin-left": "22px",
 		"margin-right": "22px",
-		"color": "#4A90E2",
-		"font-family": "Microsoft YaHei",
+		"color": "#222222",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"background-position": "center center",
 		"cursor": "pointer",
-		"font-size": "16px"
+		"font-weight": "bold",
+		"font-size": "18px"
 	},
 	"dateCurrentText": {
 		"cursor": "pointer"
@@ -60,15 +61,15 @@
 		"padding": "2px",
 		"float": "left",
 		"height": "330px",
-		"font-size": "14px"
+		"font-size": "13px"
 	},
 
 	"calendarDaysContentTd": {
 		"text-align": "center",
 		"cursor": "pointer",
 		"border": "1px solid #FFF",
-		"font-size": "14px",
-		"border-radius": "20px"
+		"font-size": "13px",
+		"border-radius": "0px"
 	},
 
 	"calendarMonthsContent": {
@@ -112,29 +113,30 @@
         "border-radius": "20px"
 	},
 	"gray_homepage": {
-		"background-color": "transparent",
+		"background": "transparent",
 		"border": "1px solid #FFF",
-		"color": "#cccccc"
+		"color": "#BBBBBB"
 	},
 	"today_homepage": {
-		"border": "1px solid #4A90E2",
+		"border": "1px solid transparent",
 		"color": "#ffffff",
-		"background-color": "#4A90E2;"
+		"font-weight": "bold",
+		"background": "radial-gradient(circle at center, #2768B0 0, #2768B0 14px, transparent 15px)"
 	},
 	"current_homepage": {
-		"background-color": "#8E8E8E",
-		"border": "1px solid #8E8E8E",
-		"color": "#FFF"
+		"background": "radial-gradient(circle at center, #EAF2FB 0, #EAF2FB 14px, transparent 15px)",
+		"border": "1px solid transparent",
+		"color": "#2768B0"
 	},
 	"normal_homepage": {
-		"background-color": "transparent",
+		"background": "transparent",
 		"border": "1px solid #FFF",
-		"color": "#333333"
+		"color": "#222222"
 	},
 	"past_homepage": {
-        "background-color": "transparent",
+        "background": "transparent",
         "border": "1px solid #fff",
-        "color": "#999999"
+        "color": "#222222"
     },
 
 

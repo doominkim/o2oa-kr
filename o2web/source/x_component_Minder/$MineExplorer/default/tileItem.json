@@ -3,7 +3,7 @@
     "html": "<div styles='tileListNode'></div>"
   },
   "headSetting": {
-    "html": "<div styles='tileToolbar'><div styles='tileSelectAllNode' class='ooicon-radio-unchecked' item='selectAll'>全选</div></div>"
+    "html": "<div styles='tileToolbar'><div styles='tileSelectAllNode' class='ooicon-radio-unchecked' item='selectAll'>모두 선택</div></div>"
   },
   "documentSetting": {
     "html": "<div styles='tileNode'></div>",
@@ -28,7 +28,7 @@
           "thumbnail" : {
           },
           "sharedIcon" : {
-            "attr" : "title^^已分享",
+            "attr" : "title^^공유됨",
             "show" : "function(d){ return d.shared }",
             "event" : "click^^function(d, ev){ this.showShareRecord(ev) }"
           }

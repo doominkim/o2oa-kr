@@ -1,5 +1,5 @@
 {
-  "name": "蓝白扁平",
+  "name": "파란색 플랫",
   "form": {
     "styles":{
       "background-color": "#f1f4f9"
@@ -7,7 +7,7 @@
   },
   "label": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "background-color": "#3c76b7",
         "height": "40px",
@@ -20,7 +20,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "center",
         "font-size": "36px",
@@ -32,7 +32,7 @@
     },
 
     "section": {
-      "name": "区段标题",
+      "name": "구역 제목",
       "styles": {
         "background-color": "#f1f4f9",
         "height": "35px",
@@ -48,7 +48,7 @@
 
   "div": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "background-color": "#3c76b7",
         "height": "40px",
@@ -61,7 +61,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "center",
         "font-size": "24px",
@@ -72,7 +72,7 @@
       }
     },
     "section": {
-      "name": "区段标题",
+      "name": "구역 제목",
       "styles": {
         "background-color": "#F1F4F9",
         "height": "38px",
@@ -85,7 +85,7 @@
       }
     },
     "sectionContainer": {
-      "name": "区段容器",
+      "name": "구역 컨테이너",
       "styles": {
         "background-color":"#FFF",
         "border":"1px solid #E1E1E1",
@@ -93,7 +93,7 @@
       }
     },
     "content" : {
-      "name": "内容容器",
+      "name": "콘텐츠 컨테이너",
       "styles": {
         "width": "1300px",
         "min-width": "0px",

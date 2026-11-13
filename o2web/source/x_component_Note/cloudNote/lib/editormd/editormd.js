@@ -228,97 +228,97 @@
         
         lang : {
             name        : "zh-cn",
-            description : "开源在线Markdown编辑器<br/>Open source online Markdown editor.",
-            tocTitle    : "目录",
+            description : "오픈 소스 온라인 Markdown 편집기<br/>Open source online Markdown editor.",
+            tocTitle    : "목차",
             toolbar     : {
-                undo             : "撤销（Ctrl+Z）",
-                redo             : "重做（Ctrl+Y）",
-                bold             : "粗体",
-                del              : "删除线",
-                italic           : "斜体",
-                quote            : "引用",
-                ucwords          : "将每个单词首字母转成大写",
-                uppercase        : "将所选转换成大写",
-                lowercase        : "将所选转换成小写",
-                h1               : "标题1",
-                h2               : "标题2",
-                h3               : "标题3",
-                h4               : "标题4",
-                h5               : "标题5",
-                h6               : "标题6",
-                "list-ul"        : "无序列表",
-                "list-ol"        : "有序列表",
-                hr               : "横线",
-                link             : "链接",
-                "reference-link" : "引用链接",
-                image            : "添加图片",
-                code             : "行内代码",
-                "preformatted-text" : "预格式文本 / 代码块（缩进风格）",
-                "code-block"     : "代码块（多语言风格）",
-                table            : "添加表格",
-                datetime         : "日期时间",
-                emoji            : "Emoji表情",
-                "html-entities"  : "HTML实体字符",
-                pagebreak        : "插入分页符",
-                "goto-line"      : "跳转到行",
-                watch            : "关闭实时预览",
-                unwatch          : "开启实时预览",
-                preview          : "全窗口预览HTML（按 Shift + ESC还原）",
-                fullscreen       : "全屏（按ESC还原）",
-                clear            : "清空",
-                search           : "搜索",
-                help             : "使用帮助",
-                info             : "关于" + editormd.title
+                undo             : "실행 취소(Ctrl+Z)",
+                redo             : "다시 실행(Ctrl+Y)",
+                bold             : "굵게",
+                del              : "취소선",
+                italic           : "기울임꼴",
+                quote            : "인용",
+                ucwords          : "각 단어 첫 글자를 대문자로 변환",
+                uppercase        : "선택 영역을 대문자로 변환",
+                lowercase        : "선택 영역을 소문자로 변환",
+                h1               : "제목1",
+                h2               : "제목2",
+                h3               : "제목3",
+                h4               : "제목4",
+                h5               : "제목5",
+                h6               : "제목6",
+                "list-ul"        : "글머리 기호 목록",
+                "list-ol"        : "번호 매기기 목록",
+                hr               : "가로줄",
+                link             : "링크",
+                "reference-link" : "참조 링크",
+                image            : "이미지 추가",
+                code             : "인라인 코드",
+                "preformatted-text" : "서식 지정 텍스트 / 코드 블록(들여쓰기 방식)",
+                "code-block"     : "코드 블록(다중 언어 방식)",
+                table            : "표 추가",
+                datetime         : "날짜 시간",
+                emoji            : "Emoji 이모티콘",
+                "html-entities"  : "HTML 엔티티 문자",
+                pagebreak        : "페이지 나누기 삽입",
+                "goto-line"      : "줄 이동",
+                watch            : "실시간 미리보기 끄기",
+                unwatch          : "실시간 미리보기 켜기",
+                preview          : "전체 창 HTML 미리보기(Shift + ESC로 복원)",
+                fullscreen       : "전체 화면(ESC로 복원)",
+                clear            : "비우기",
+                search           : "검색",
+                help             : "도움말",
+                info             : editormd.title + " 정보"
             },
             buttons : {
-                enter  : "确定",
-                cancel : "取消",
-                close  : "关闭"
+                enter  : "확인",
+                cancel : "취소",
+                close  : "닫기"
             },
             dialog : {
                 link : {
-                    title    : "添加链接",
-                    url      : "链接地址",
-                    urlTitle : "链接标题",
-                    urlEmpty : "错误：请填写链接地址。"
+                    title    : "링크 추가",
+                    url      : "링크 주소",
+                    urlTitle : "링크 제목",
+                    urlEmpty : "오류: 링크 주소를 입력하세요."
                 },
                 referenceLink : {
-                    title    : "添加引用链接",
-                    name     : "引用名称",
-                    url      : "链接地址",
-                    urlId    : "链接ID",
-                    urlTitle : "链接标题",
-                    nameEmpty: "错误：引用链接的名称不能为空。",
-                    idEmpty  : "错误：请填写引用链接的ID。",
-                    urlEmpty : "错误：请填写引用链接的URL地址。"
+                    title    : "참조 링크 추가",
+                    name     : "참조 이름",
+                    url      : "링크 주소",
+                    urlId    : "링크 ID",
+                    urlTitle : "링크 제목",
+                    nameEmpty: "오류: 참조 링크 이름은 비워 둘 수 없습니다.",
+                    idEmpty  : "오류: 참조 링크 ID를 입력하세요.",
+                    urlEmpty : "오류: 참조 링크 URL 주소를 입력하세요."
                 },
                 image : {
-                    title    : "添加图片",
-                    url      : "图片地址",
-                    link     : "图片链接",
-                    alt      : "图片描述",
-                    uploadButton     : "本地上传",
-                    imageURLEmpty    : "错误：图片地址不能为空。",
-                    uploadFileEmpty  : "错误：上传的图片不能为空。",
-                    formatNotAllowed : "错误：只允许上传图片文件，允许上传的图片文件格式有："
+                    title    : "이미지 추가",
+                    url      : "이미지 주소",
+                    link     : "이미지 링크",
+                    alt      : "이미지 설명",
+                    uploadButton     : "로컬 업로드",
+                    imageURLEmpty    : "오류: 이미지 주소는 비워 둘 수 없습니다.",
+                    uploadFileEmpty  : "오류: 업로드할 이미지를 선택하세요.",
+                    formatNotAllowed : "오류: 이미지 파일만 업로드할 수 있습니다. 허용되는 이미지 형식: "
                 },
                 preformattedText : {
-                    title             : "添加预格式文本或代码块", 
-                    emptyAlert        : "错误：请填写预格式文本或代码的内容。"
+                    title             : "서식 지정 텍스트 또는 코드 블록 추가", 
+                    emptyAlert        : "오류: 서식 지정 텍스트 또는 코드 내용을 입력하세요."
                 },
                 codeBlock : {
-                    title             : "添加代码块",                    
-                    selectLabel       : "代码语言：",
-                    selectDefaultText : "请选择代码语言",
-                    otherLanguage     : "其他语言",
-                    unselectedLanguageAlert : "错误：请选择代码所属的语言类型。",
-                    codeEmptyAlert    : "错误：请填写代码内容。"
+                    title             : "코드 블록 추가",                    
+                    selectLabel       : "코드 언어: ",
+                    selectDefaultText : "코드 언어를 선택하세요",
+                    otherLanguage     : "기타 언어",
+                    unselectedLanguageAlert : "오류: 코드 언어를 선택하세요.",
+                    codeEmptyAlert    : "오류: 코드 내용을 입력하세요."
                 },
                 htmlEntities : {
-                    title : "HTML 实体字符"
+                    title : "HTML 엔티티 문자"
                 },
                 help : {
-                    title : "使用帮助"
+                    title : "도움말"
                 }
             }
         }
@@ -3898,7 +3898,7 @@
             toc                  : true,
             tocm                 : false,
             tocStartLevel        : 1,
-            tocTitle             : "目录",
+            tocTitle             : "목차",
             tocDropdown          : false,
             tocContainer         : "",
             markdown             : "",
@@ -4536,8 +4536,8 @@
 
             case "cn-week-day" :
             case "cn-wd" :
-                    var cnWeekDays = ["日", "一", "二", "三", "四", "五", "六"];
-                    datefmt = "星期" + cnWeekDays[weekDay];
+                    var cnWeekDays = ["일", "월", "화", "수", "목", "금", "토"];
+                    datefmt = cnWeekDays[weekDay] + "요일";
                 break;
 
             case "week-day" :

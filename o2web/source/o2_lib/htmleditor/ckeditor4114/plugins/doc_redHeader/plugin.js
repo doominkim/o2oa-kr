@@ -7,7 +7,7 @@ CKEDITOR.plugins.add( 'doc_redHeader', {
         editor.widgets.add( 'doc_redHeader', {
             draggable: false,
             template:
-                '<div class="o2_editorPlugin_redHeader"><div class="o2_editorPlugin_redHeader_content">文件红头</div></div>',
+                '<div class="o2_editorPlugin_redHeader"><div class="o2_editorPlugin_redHeader_content">문서 머리글</div></div>',
 
             editables: {
                 content: {

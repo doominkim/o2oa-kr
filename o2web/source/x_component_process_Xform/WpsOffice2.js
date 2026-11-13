@@ -34,7 +34,7 @@ MWF.xApplication.process.Xform.WpsOffice2 = MWF.APPWpsOffice2 =  new Class({
         }
 
         if(!layout.serviceAddressList["x_wpsfile2_assemble_control"]){
-            this.node.set("html","<h3><font color=red>请先安装wps私有化应用</font></h3>");
+            this.node.set("html","<h3><font color=red>먼저 WPS 사내 구축형 앱을 설치하세요</font></h3>");
             return false;
         }
         this.action = o2.Actions.load("x_wpsfile2_assemble_control");

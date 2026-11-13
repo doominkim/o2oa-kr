@@ -179,7 +179,7 @@
         "line-height": "26px"
     },
     "inputTextarea": {
-        "font-family": "Microsoft YaHei",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "border": "0px",
         "overflow": "auto",
         "width": "381px",
@@ -189,7 +189,7 @@
         "background": "#FFF"
     },
     "inputTextarea_wide": {
-        "font-family": "Microsoft YaHei",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "border": "0px",
         "overflow": "auto",
         "width": "493px",
@@ -199,7 +199,7 @@
         "background": "#FFF"
     },
     "inputTextarea_wide_flow": {
-        "font-family": "Microsoft YaHei",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "border": "0px",
         "overflow": "auto",
         "width": "443px",

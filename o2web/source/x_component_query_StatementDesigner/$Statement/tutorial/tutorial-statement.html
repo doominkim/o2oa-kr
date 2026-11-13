@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>O2OA API: Tutorial: 查询语句配置 | O2OA开发平台</title>
+    <title>O2OA API: Tutorial: 쿼리문 설정 | O2OA 개발 플랫폼</title>
 
     <link type="text/css" rel="stylesheet" href="/api/styles/vendor/prism-custom.css">
 
@@ -24,41 +24,41 @@
             <header>
 
 
-                <h2>查询语句配置</h2>
+                <h2>쿼리문 설정</h2>
             </header>
 
             <article>
-                <h2>语法</h2>
-                <h3>1、JPQL语法</h3>
-                <p>查询语句支持JPA JPQL语句，如下面的语句从系统表Task中获取待办：</p>
+                <h2>문법</h2>
+                <h3>1. JPQL 문법</h3>
+                <p>쿼리문은 JPA JPQL 문을 지원합니다. 예를 들어 다음 문은 시스템 테이블 Task에서 결재 대기 항목을 가져옵니다.</p>
                 <pre class="prettyprint source lang-sql"><code>SELECT o FROM Task o WHERE o.person = :person
 </code></pre>
                 <p><img src="img/jpql.png" alt="JPQL">
-                    JPQL官网：<a href="https://www.objectdb.com/java/jpa/query/jpql/structure">https://www.objectdb.com/java/jpa/query/jpql/structure</a><br/>
-                    中文简介：<a href="https://www.codercto.com/a/4338.html">https://www.codercto.com/a/4338.html</a></p>
-                <h3>2、原生SQL语法</h3>
-                <p>在v8.0及以后版本中，查询语句支持原生的SQL 语法，如下面的语句从系统表Task中获取待办：</p>
+                    JPQL 공식 사이트: <a href="https://www.objectdb.com/java/jpa/query/jpql/structure">https://www.objectdb.com/java/jpa/query/jpql/structure</a><br/>
+                    중국어 소개: <a href="https://www.codercto.com/a/4338.html">https://www.codercto.com/a/4338.html</a></p>
+                <h3>2. 네이티브 SQL 문법</h3>
+                <p>v8.0 이상 버전에서는 쿼리문이 네이티브 SQL 문법을 지원합니다. 예를 들어 다음 문은 시스템 테이블 Task에서 결재 대기 항목을 가져옵니다.</p>
                 <pre class="prettyprint source lang-sql"><code>SELECT * FROM PP_C_TASK WHERE xperson = :person
 </code></pre>
                 <p><img src="img/sql.png" alt="SQL">
-                    w3schoole网站：<a href="https://www.w3schools.com/sql/default.asp">https://www.w3schools.com/sql/default.asp</a><br/>
-                    中文网站：<a href="https://www.runoob.com/sql/sql-tutorial.html">https://www.runoob.com/sql/sql-tutorial.html</a>
+                    w3schools 사이트: <a href="https://www.w3schools.com/sql/default.asp">https://www.w3schools.com/sql/default.asp</a><br/>
+                    중국어 사이트: <a href="https://www.runoob.com/sql/sql-tutorial.html">https://www.runoob.com/sql/sql-tutorial.html</a>
                 </p>
                 <h3></h3>
 
-                <h3>3、表、字段和值的差异</h3>
+                <h3>3. 테이블, 필드, 값의 차이</h3>
                 <table>
                     <thead>
                     <tr>
-                        <th width="120"><strong>差异项</strong></th>
+                        <th width="120"><strong>차이 항목</strong></th>
                         <th><strong>JPQL</strong></th>
                         <th><strong>SQL</strong></th>
-                        <th><strong>说明</strong></th>
+                        <th><strong>설명</strong></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>系统表名</td>
+                        <td>시스템 테이블명</td>
                         <td>Task <br/> TaskCompleted <br/> Read <br/> ReadCompleted <br/> Work <br/> WorkCompleted <br/>
                             Review <br/> Record <br/> Document <br/> com.x.cms.core.entity.Review <br/> DocumentViewRecord <br/> DocumentCommentInfo
                         </td>
@@ -66,123 +66,123 @@
                             PP_C_REVIEW <br/> PP_C_Record <br/> CMS_DOCUMENT <br/> CMS_REVIEW <br/> CMS_DOCUMENT_VIEWRECORD <br/> CMS_DOCUMENT_COMMENTINFO
                         </td>
                         <td>
-                            待办 <br/> 已办 <br/> 待阅 <br/> 已阅 <br/> 流程实例 <br/> 已完成流程实例 <br/>
-                            流程可阅读 <br/> 流转记录 <br/> 内容管理文档 <br/> 内容管理可阅读 <br/> 内容管理阅读记录 <br/> 内容管理评论记录
+                            결재 대기 <br/> 결재 완료 <br/> 열람 대기 <br/> 열람 완료 <br/> 프로세스 인스턴스 <br/> 완료된 프로세스 인스턴스 <br/>
+                            프로세스 열람 권한 <br/> 처리 기록 <br/> 게시판 게시글 <br/> 게시판 열람 권한 <br/> 게시판 열람 기록 <br/> 게시판 댓글 기록
                         </td>
                     </tr>
                     <tr>
-                        <td>数据表名（自建表）</td>
+                        <td>데이터 테이블명(사용자 생성 테이블)</td>
                         <td>TableName</td>
                         <td>QRY_DYN_TABLENAME</td>
-                        <td>假如创建数据表设置的名称为“TableName”，则SQL取的名称为 &quot;QRY_DYN_&quot;前缀加名称的大写。</td>
+                        <td>데이터 테이블을 만들 때 이름을 "TableName"으로 설정했다면 SQL에서 쓰는 이름은 &quot;QRY_DYN_&quot; 접두사에 이름을 대문자로 붙인 것입니다.</td>
                     </tr>
                     <tr>
-                        <td>字段名</td>
+                        <td>필드명</td>
                         <td>id</td>
                         <td>xid</td>
-                        <td>字段以id为例，SQL的字段为&quot;x&quot;前缀加字段名。</td>
+                        <td>id 필드를 예로 들면 SQL의 필드는 &quot;x&quot; 접두사에 필드명을 붙인 것입니다.</td>
                     </tr>
                     <tr>
-                        <td>值</td>
-                        <td><code>SELECT o FROM Task o WHERE o.person = '张三@zhangsan@P'</code> 或 <code>SELECT o FROM
-                            Task o WHERE o.person = &quot;张三@zhangsan@P&quot;</code></td>
-                        <td><code>SELECT * FROM PP_C_TASK WHERE xperson = '张三@zhangsan@P'</code></td>
-                        <td>JPQL的值可以使用单引号和双引号，SQL只能使用单引号。建议都使用单引号。</td>
+                        <td>값</td>
+                        <td><code>SELECT o FROM Task o WHERE o.person = '홍길동@hong@P'</code> 또는 <code>SELECT o FROM
+                            Task o WHERE o.person = &quot;홍길동@hong@P&quot;</code></td>
+                        <td><code>SELECT * FROM PP_C_TASK WHERE xperson = '홍길동@hong@P'</code></td>
+                        <td>JPQL 값에는 작은따옴표와 큰따옴표를 모두 쓸 수 있지만 SQL에는 작은따옴표만 쓸 수 있습니다. 둘 다 작은따옴표 사용을 권장합니다.</td>
                     </tr>
                     </tbody>
                 </table>
 
-                <h2 id="where">where子句传参</h2>
-                <h3>1、用冒号动态传参</h3>
-                <p>查询语句中的where语句的值可以使用json传入，如：<br/>查询语句的设计为 ：</p>
+                <h2 id="where">where 절 매개변수 전달</h2>
+                <h3>1. 콜론으로 동적 매개변수 전달</h3>
+                <p>쿼리문의 where 절 값은 json으로 전달할 수 있습니다. 예:<br/>쿼리문 설계:</p>
                 <pre class="prettyprint source lang-sql"><code>select o from tableName o where o.name=:n
 </code></pre>
-                <p>在调用查询语句服务的时候传入 json：</p>
+                <p>쿼리문 서비스를 호출할 때 json 전달:</p>
                 <pre class="prettyprint source lang-json"><code>{
   "parameter": {
     "n" : "zhangsan"
   }
 }
 </code></pre>
-                <p>最终系统在后台根据这些设计拼接成为如下语句：</p>
+                <p>최종적으로 시스템이 백엔드에서 이 설계를 바탕으로 다음 문을 조합합니다.</p>
                 <pre class="prettyprint source lang-sql"><code>select o from tableName o where o.name='zhangsan'
 </code></pre>
-                <p>如下图所示：<br/>
-                    <img src="img/para1.png" alt="用冒号动态传参">
-                    了解JPQL语句动态传参可以点击链接查看：https://www.objectdb.com/java/jpa/query/parameter</p>
-                <h3>2、用问号和数字动态传参</h3>
-                <p>在V8.0中，平台支持用问号加数字的形式来传where语句的值，作用和冒号动态传参类似，如：<br/>查询语句的设计为 ：</p>
+                <p>아래 그림과 같습니다.<br/>
+                    <img src="img/para1.png" alt="콜론으로 동적 매개변수 전달">
+                    JPQL 문의 동적 매개변수 전달은 다음 링크에서 확인할 수 있습니다: https://www.objectdb.com/java/jpa/query/parameter</p>
+                <h3>2. 물음표와 숫자로 동적 매개변수 전달</h3>
+                <p>V8.0에서는 물음표와 숫자 형식으로 where 절 값을 전달할 수 있으며, 콜론 동적 매개변수 전달과 비슷하게 동작합니다. 예:<br/>쿼리문 설계:</p>
                 <pre class="prettyprint source lang-sql"><code>select o from tableName o where o.name= ?1
 </code></pre>
-                <p>在调用查询语句服务的时候传入 json：</p>
+                <p>쿼리문 서비스를 호출할 때 json 전달:</p>
                 <pre class="prettyprint source lang-json"><code>{
   "parameter": {
     "?1" : "zhangsan"
   }
 }
 </code></pre>
-                <p>最终系统在后台根据这些设计拼接成为如下语句：</p>
+                <p>최종적으로 시스템이 백엔드에서 이 설계를 바탕으로 다음 문을 조합합니다.</p>
                 <pre class="prettyprint source lang-sql"><code>select o from tableName o where o.name='zhangsan'
 </code></pre>
-                <p>如下图所示：<br/>
-                    <img src="img/para2.png" alt="用问号和数字动态传参"></p>
-                <h3>3、默认参数</h3>
-                <p>系统中有一些默认参数，对这些默认参数，系统会自动赋值。</p>
+                <p>아래 그림과 같습니다.<br/>
+                    <img src="img/para2.png" alt="물음표와 숫자로 동적 매개변수 전달"></p>
+                <h3>3. 기본 매개변수</h3>
+                <p>시스템에는 몇 가지 기본 매개변수가 있으며, 시스템이 이 매개변수에 값을 자동으로 할당합니다.</p>
                 <table>
                     <thead>
                     <tr>
-                        <th><strong>默认参数</strong></th>
-                        <th><strong>含义</strong></th>
-                        <th><strong>类型</strong></th>
+                        <th><strong>기본 매개변수</strong></th>
+                        <th><strong>의미</strong></th>
+                        <th><strong>유형</strong></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>person</td>
-                        <td>当前人</td>
-                        <td>字符串</td>
+                        <td>현재 사용자</td>
+                        <td>문자열</td>
                     </tr>
                     <tr>
                         <td>identityList</td>
-                        <td>当前人身份列表</td>
-                        <td>数组</td>
+                        <td>현재 사용자 소속 목록</td>
+                        <td>배열</td>
                     </tr>
                     <tr>
                         <td>unitList</td>
-                        <td>当前人所在直接组织</td>
-                        <td>数组</td>
+                        <td>현재 사용자의 직속 조직</td>
+                        <td>배열</td>
                     </tr>
                     <tr>
                         <td>unitAllList</td>
-                        <td>当前人所在所有组织</td>
-                        <td>数组</td>
+                        <td>현재 사용자가 속한 모든 조직</td>
+                        <td>배열</td>
                     </tr>
                     <tr>
                         <td>groupList</td>
-                        <td>当前人所在群组</td>
-                        <td>数组</td>
+                        <td>현재 사용자가 속한 그룹</td>
+                        <td>배열</td>
                     </tr>
                     <tr>
                         <td>roleList</td>
-                        <td>当前人拥有的角色</td>
-                        <td>数组</td>
+                        <td>현재 사용자가 가진 역할</td>
+                        <td>배열</td>
                     </tr>
                     </tbody>
                 </table>
-                <p>如有如下语句：</p>
+                <p>다음과 같은 문이 있다고 가정합니다.</p>
                 <pre class="prettyprint source lang-json"><code>select o from Task o where o.person = :person
 </code></pre>
-                <p>参数<code>:person</code>为当前人，<br/>在v8.0之前，外部传入参数 {person: &quot;&quot;}即可；<br/>在v8.0之后，系统将自动解析这些默认参数，不需要再传入。<br/>如当前人是<code>张三@zhangsan@P</code>，系统解析后自动拼接如下：
+                <p>매개변수 <code>:person</code>은 현재 사용자입니다.<br/>v8.0 이전에는 외부에서 {person: &quot;&quot;} 매개변수를 전달하면 됩니다.<br/>v8.0 이후에는 시스템이 이 기본 매개변수를 자동으로 해석하므로 따로 전달할 필요가 없습니다.<br/>현재 사용자가 <code>홍길동@hong@P</code>이면 시스템이 해석한 뒤 다음과 같이 자동 조합합니다.
                 </p>
-                <pre class="prettyprint source lang-json"><code>select o from Task o where o.person = &quot;张三@zhangsan@P&quot;
+                <pre class="prettyprint source lang-json"><code>select o from Task o where o.person = &quot;홍길동@hong@P&quot;
 </code></pre>
 
-                <h2 id="filterlist">过滤条件</h2>
-                <h3>1、JPQL过滤条件</h3>
-                <p>查询语句中的where语句的条件还可以从<code>filterList</code>传入，如有下列查询语句：</p>
+                <h2 id="filterlist">필터 조건</h2>
+                <h3>1. JPQL 필터 조건</h3>
+                <p>쿼리문의 where 절 조건은 <code>filterList</code>로도 전달할 수 있습니다. 다음과 같은 쿼리문이 있다고 가정합니다.</p>
                 <pre class="prettyprint source lang-sql"><code>SELECT o FROM Task o
 </code></pre>
-                <p>在调用查询语句的时候传入filterList</p>
+                <p>쿼리문을 호출할 때 filterList 전달</p>
                 <pre class="prettyprint source lang-javascript"><code>{
     "filterList": [
         {
@@ -193,21 +193,21 @@
         }
     ],
     "parameter": {
-        "o_title": "%关于%"
+        "o_title": "%회의%"
     }
 }
 </code></pre>
-                <p>最终系统在后台根据这些设计拼接成为如下语句：</p>
-                <pre class="prettyprint source lang-sql"><code>select o from Task o where o.title like '%关于%'
+                <p>최종적으로 시스템이 백엔드에서 이 설계를 바탕으로 다음 문을 조합합니다.</p>
+                <pre class="prettyprint source lang-sql"><code>select o from Task o where o.title like '%회의%'
 </code></pre>
-                <p>如下图所示：<br/>
-                    <img src="img/filterlist_jpql.png" alt="JPQL过滤条件">
+                <p>아래 그림과 같습니다.<br/>
+                    <img src="img/filterlist_jpql.png" alt="JPQL 필터 조건">
                 </p>
-                <h3>2、原生SQL过滤条件</h3>
-                <p>查询语句中的where语句的条件还可以从<code>filterList</code>传入，如有下列查询语句：</p>
+                <h3>2. 네이티브 SQL 필터 조건</h3>
+                <p>쿼리문의 where 절 조건은 <code>filterList</code>로도 전달할 수 있습니다. 다음과 같은 쿼리문이 있다고 가정합니다.</p>
                 <pre class="prettyprint source lang-sql"><code>SELECT * FROM PP_C_TASK
 </code></pre>
-                <p>在调用查询语句的时候传入filterList</p>
+                <p>쿼리문을 호출할 때 filterList 전달</p>
                 <pre class="prettyprint source lang-javascript"><code>{
     "filterList": [
         {
@@ -218,68 +218,68 @@
         }
     ],
     "parameter": {
-        "xtitle": "%关于%"
+        "xtitle": "%회의%"
     }
 }
 </code></pre>
-                <p>最终系统在后台根据这些设计拼接成为如下语句：</p>
-                <pre class="prettyprint source lang-sql"><code>SELECT * FROM PP_C_TASK where xtitle like '%关于%'
+                <p>최종적으로 시스템이 백엔드에서 이 설계를 바탕으로 다음 문을 조합합니다.</p>
+                <pre class="prettyprint source lang-sql"><code>SELECT * FROM PP_C_TASK where xtitle like '%회의%'
 </code></pre>
-                <p>如下图所示：<br/>
-                    <img src="img/filterlist_sql.png" alt="SQL过滤条件">
+                <p>아래 그림과 같습니다.<br/>
+                    <img src="img/filterlist_sql.png" alt="SQL 필터 조건">
                 </p>
-                <h3>3、过滤条件参数说明</h3>
+                <h3>3. 필터 조건 매개변수 설명</h3>
                 <pre class="prettyprint source lang-json"><code>{
     "filterList": [
         {
-    	    "path":"o.title", //sql中使用xtitle
+    	    "path":"o.title", //sql에서는 xtitle 사용
             "comparison":"like",
-            "value":"o_title", //sql中使用xtitle
+            "value":"o_title", //sql에서는 xtitle 사용
             "formatType":"textValue"
         }
     ],
     "parameter": {
-        "o_title": "%关于%" //sql中使用xtitle
+        "o_title": "%회의%" //sql에서는 xtitle 사용
     }
 }
 </code></pre>
                 <h4>path</h4>
                 <ul>
                     <li>String</li>
-                    <li>要过滤的data数据的路径 <br/>在JPQL中形式为查询语句中的&quot;表别名.字段名&quot;，如&quot;o.title&quot;。<br/>在SQL中形式为查询语句中的&quot;字段名&quot;，如&quot;xtitle&quot;。</li>
+                    <li>필터링할 data 데이터의 경로 <br/>JPQL에서는 쿼리문의 &quot;테이블 별칭.필드명&quot; 형식입니다(예: &quot;o.title&quot;).<br/>SQL에서는 쿼리문의 &quot;필드명&quot; 형식입니다(예: &quot;xtitle&quot;).</li>
                 </ul>
                 <h4>comparison</h4>
                 <ul>
                     <li>String</li>
-                    <li>比较运算符，可选值：<br/>equals 或 == ：表示等于。<br/>notEquals 或 != ：表示不等于。<br/>greaterThan 或 &gt; ：表示大于。<br/>greaterThanOrEqualTo
-                        或 =&gt; ：表示大于或等于。<br/>lessThan 或 &lt; ：表示小于。<br/>lessThanOrEqualTo 或 &lt;= ：表示小于等于。<br/>like
-                        ：表示部分匹配。<br/>notLike ：表示不匹配。<br/>in ：表示在某几个特定的值当中。
+                    <li>비교 연산자. 사용 가능한 값:<br/>equals 또는 == : 같음.<br/>notEquals 또는 != : 같지 않음.<br/>greaterThan 또는 &gt; : 보다 큼.<br/>greaterThanOrEqualTo
+                        또는 =&gt; : 크거나 같음.<br/>lessThan 또는 &lt; : 보다 작음.<br/>lessThanOrEqualTo 또는 &lt;= : 작거나 같음.<br/>like
+                        : 부분 일치.<br/>notLike : 일치하지 않음.<br/>in : 지정한 여러 값 중 하나에 해당.
                     </li>
                 </ul>
                 <h4>formatType</h4>
                 <ul>
                     <li>String</li>
-                    <li>过滤数据的数据类型，可选值：<br/>textValue ：文本。<br/>numberValue ：数字。<br/>dateTimeValue ：日期时间。<br/>dateValue ：仅日期。<br/>timeValue
-                    ：仅时间。<br/>booleanValue ：布尔值。</li>
+                    <li>필터링할 데이터의 데이터 유형. 사용 가능한 값:<br/>textValue : 텍스트.<br/>numberValue : 숫자.<br/>dateTimeValue : 날짜 시간.<br/>dateValue : 날짜만.<br/>timeValue
+                    : 시간만.<br/>booleanValue : 불리언 값.</li>
                 </ul>
                 <h4>value</h4>
                 <ul>
                     <li>String | Number | Boolean</li>
-                    <li>过滤的值，根据formatType提供匹配的数据类型的值。</li>
+                    <li>필터링할 값. formatType에 맞는 데이터 유형의 값을 제공합니다.</li>
                 </ul>
 
-                <h2>其他注意事项</h2>
-                <h3>1、日期格式的写法</h3>
-                <p>在sql中，日期格式使用文本即可，如 :&quot;2019-12-31&quot;, &quot;23:59:59&quot;, &quot;2020-01-03
-                    13:59:59&quot;。<br/>
-                    在jpql中，对日期格式有特殊的写法，格式如下：<br/>
+                <h2>기타 주의사항</h2>
+                <h3>1. 날짜 형식 작성법</h3>
+                <p>sql에서는 날짜 형식을 텍스트로 쓰면 됩니다. 예:&quot;2019-12-31&quot;, &quot;23:59:59&quot;, &quot;2020-01-03
+                    13:59:59&quot;.<br/>
+                    jpql에서는 날짜 형식에 특별한 작성법이 있으며 형식은 다음과 같습니다.<br/>
                     Date - {d 'yyyy-mm-dd'} - for example: {d '2019-12-31'}<br/>
                     Time - {t 'hh:mm:ss'} - for example: {t '23:59:59'}<br/>
                     Timestamp(DateTime) - {ts 'yyyy-mm-dd hh:mm:ss'} - for example: {ts '2020-01-03 13:59:59'}
-                    <br/>示例如下图：<br/>
-                    <img src="img/datetime.png" alt="日期格式"></p>
-                <h3>2、like的写法</h3>
-                <p>如果运算符用的是 like，模糊查询，值为 &quot;%{value}%&quot;。</p>
+                    <br/>예시는 아래 그림과 같습니다.<br/>
+                    <img src="img/datetime.png" alt="날짜 형식"></p>
+                <h3>2. like 작성법</h3>
+                <p>연산자로 like를 쓰면 부분 일치 검색이며 값은 &quot;%{value}%&quot;입니다.</p>
             </article>
 
         </section>
@@ -311,7 +311,7 @@
 <footer class="layout-footer">
     <div class="container">
         Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Sun Mar 26 2023
-        21:52:34 GMT+0800 (中国标准时间)
+        21:52:34 GMT+0800 (중국 표준시)
     </div>
 </footer>
 

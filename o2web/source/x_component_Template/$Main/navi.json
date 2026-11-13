@@ -1,6 +1,6 @@
 [
   {
-    "title": "多媒体",
+    "title": "멀티미디어",
     "id": "10",
     "expand": false,
     "action" : "openMediaRecorder"
@@ -11,7 +11,7 @@
   },
   {
     "access" :"admin_dept",
-    "title": "部门考勤月报",
+    "title": "부서 근태 월간 보고서",
     "id": "15",
     "expand": false,
     "action" : "openDepartmentIndex"
@@ -22,14 +22,14 @@
   },
   {
     "access" :"admin",
-    "title": "维护",
+    "title": "유지 관리",
     "id": "20",
     "expand": false,
     "sub": [
       {
         "id" : "20.1",
         "access" : "admin",
-        "title" : "法定假期",
+        "title" : "공휴일",
         "action" : "openHolidaySetting"
       }
     ]

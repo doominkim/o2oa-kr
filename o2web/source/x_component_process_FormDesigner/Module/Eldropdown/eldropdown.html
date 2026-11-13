@@ -151,12 +151,12 @@
 		</table>
 		<div id="text{$.pid}dataJson" class="MWFElTDropdownData" name="dataJson" style="display: text{($.dataType=='script')?'none':''}"></div>
 		<div id="text{$.pid}dataScript" style="display: text{($.dataType=='script')?'':'none'}">
-			<div style="padding: 5px;">脚本返回选项数组，格式如下：<br/>return [{ <br/>
-				  "label" : "", //显示的文本, string<br/>
-				&nbsp;&nbsp;"command" : "", //指令,菜单项的点击事件（command）可以接收到,string/number/object <br/>
-				&nbsp;&nbsp;"disabled" : false, //是否禁用, boolean<br/>
-				&nbsp;&nbsp;"divided" : false, //是否显示分割线，boolean<br/>
-				&nbsp;&nbsp;"icon" : "" // 图标类名, string<br/>
+			<div style="padding: 5px;">스크립트는 옵션 배열을 반환합니다. 형식:<br/>return [{ <br/>
+				  "label" : "", //표시 텍스트, string<br/>
+				&nbsp;&nbsp;"command" : "", //명령, 메뉴 항목 클릭 이벤트(command)에서 받을 수 있음, string/number/object <br/>
+				&nbsp;&nbsp;"disabled" : false, //사용 안 함 여부, boolean<br/>
+				&nbsp;&nbsp;"divided" : false, //구분선 표시 여부, boolean<br/>
+				&nbsp;&nbsp;"icon" : "" // 아이콘 클래스명, string<br/>
 				}, ...]; </div>
 			<div class="MWFScriptArea" name="dataScript"></div>
 		</div>
@@ -175,7 +175,7 @@
 		</div>
 	</div>
 	<div title="{{$.lp.power}}"  class="MWFTab">
-        <!-- 可阅读配置 -->
+        <!-- 열람 권한 설정 -->
         <div style="height:26px; text-align: center; line-height: 26px; background-color: #EEE; border-top: 1px solid #999; border-bottom: 1px solid #999; font-weight:bold;">{{$.lp.readConfig}}</div>
         <div style="padding: 5px; color: #999999; ">{{$.lp.readConfigInfo}}</div>
         

@@ -317,7 +317,7 @@ MWF.xApplication.process.Xform.OODatetime = MWF.APPOODatetime = new Class({
     _afterLoadOONodeDownloading: function (){
         let value = this._getBusinessData();
         if(this.json.dataType && this.json.dataType.endsWith('range')){
-            this.downloadingValueNode.set('text', Array.isArray(value) ? value.map(v=>!v?'-':v).join(this.json.separator || ' 至 ') : value||'-');
+            this.downloadingValueNode.set('text', Array.isArray(value) ? value.map(v=>!v?'-':v).join(this.json.separator || ' ~ ') : value||'-');
         }else{
             this.downloadingValueNode.set('text', Array.isArray(value) ? value.filter(v=>!!v).join(this.json.separator || '') : value||'-');
         }

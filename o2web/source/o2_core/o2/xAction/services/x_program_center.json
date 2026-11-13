@@ -112,7 +112,7 @@
   "removeDictionary": {"uri": "/jaxrs/dict/{id}","method": "DELETE"},
 
   "getDictRoot": {"uri": "/jaxrs/dict/{dictFlag}/data"},
-  "getDictData": {"uri": "/jaxrs/dict/{dictFlag}/{path}/data"}, //path:路径(多层路径以.分割，如person.name)
+  "getDictData": {"uri": "/jaxrs/dict/{dictFlag}/{path}/data"}, //path:경로(여러 단계 경로는 .으로 구분, 예: person.name)
   "setDictData": {"uri": "/jaxrs/dict/{dictFlag}/{path}/data", "method": "PUT"},
   "addDictData": {"uri": "/jaxrs/dict/{dictFlag}/{path}/data", "method": "POST"},
   "deleteDictData": {"uri": "/jaxrs/dict/{dictFlag}/{path}/data", "method": "DELETE"},

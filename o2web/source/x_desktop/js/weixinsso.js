@@ -7,7 +7,7 @@ layout.desktop = layout;
 layout.session = layout.session || {};
 o2.addReady(function () {
 
-        MWF.loadLP("zh-cn");
+        MWF.loadLP(MWF.language);
 
         MWF.require("MWF.xDesktop.Layout", function () {
             MWF.require("MWF.xDesktop.Authentication", null, false);
@@ -29,7 +29,7 @@ o2.addReady(function () {
                             if (actionCallback) actionCallback();
                         };
                         if (mode && mode === "snsapi_privateinfo") { // 获取用户详细信息，更新到Person
-                            console.log("获取用户详细信息，更新到Person")
+                            console.log("사용자 상세 정보를 가져와 Person에 업데이트")
                             action.invoke({
                                 "name": "userdetail", "async": true, "parameter": { "code":  code}, "success":  function(json) {
                                 // 完成认证 关闭页面
@@ -40,21 +40,21 @@ o2.addReady(function () {
                                         window.location.reload();
                                     }
                                 } else {
-                                    console.error("没有引入企业微信js！！！");
-                                    document.id("layout").set("html", "<div>更新成功，可以关闭页面了！</div>");
+                                    console.error("WeCom js가 로드되지 않았습니다!!!");
+                                    document.id("layout").set("html", "<div>업데이트했습니다. 이제 페이지를 닫아도 됩니다!</div>");
                                 }
                             }.bind(this), "failure": function (xhr, text, error) {
-                                    console.log("企业微信单点异常 11111")
-                                    document.id("layout").set("html", "<div>企业微信单点异常！</div>")
+                                    console.log("WeCom SSO 오류 11111")
+                                    document.id("layout").set("html", "<div>WeCom SSO 로그인 중 오류가 발생했습니다!</div>")
                                 }.bind(this)
                             });
                         } else { // 默认的单点登录
-                            console.log("默认的单点登录")
+                            console.log("기본 SSO 로그인")
                             action.invoke({
                                 "name": "sso", "async": true, "parameter": { "code":  code}, "success": function (json) {
-                                    console.log("认证成功")
+                                    console.log("인증 성공")
                                     if (redirect) {
-                                        console.log("---------------------准备跳转 redirect 地址")
+                                        console.log("---------------------redirect 주소로 이동 준비")
                                         history.replaceState(null, "page", redirect);
                                         window.location.replace(redirect);
                                         if (redirect.includes("#/")) {
@@ -65,8 +65,8 @@ o2.addReady(function () {
                                         "appMobile.html?app=process.TaskCenter".toURI().go();
                                     }
                                 }.bind(this), "failure": function (xhr, text, error) {
-                                    console.log("企业微信单点异常 222222")
-                                    document.id("layout").set("html", "<div>企业微信单点异常！</div>")
+                                    console.log("WeCom SSO 오류 222222")
+                                    document.id("layout").set("html", "<div>WeCom SSO 로그인 중 오류가 발생했습니다!</div>")
                                 }.bind(this)
                             });
                         }

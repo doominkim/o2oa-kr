@@ -76,12 +76,12 @@ const clickAddMember = () => {
       "type": 'identity',
       "count": 0,
       "style": "v10",
-      "title": '通讯录',
+      "title": '주소록',
       "units": topUnitList,
       "firstLevelSelectable": true,
       "resultType": "person",
       "onPostLoadContent": function () {
-        this.titleTextNode.set("text", '通讯录')
+        this.titleTextNode.set("text", '주소록')
       },
       "onComplete":  (items) => {
         console.log(items)
@@ -120,7 +120,7 @@ const isSelfMember = (person) => {
 const clickRemoveMember = (person) => {
   if (isGroupAdmin.value) {
     if (memberList.value.length <= 2) {
-      console.error('人数太少 不能再删除')
+      console.error('인원이 너무 적어 더 삭제할 수 없습니다')
       return
     }
     if (person ===  layout.session.user.distinguishedName) {
@@ -191,7 +191,7 @@ const updateConversationInfo = async (conv) => {
   conv.id = conversation.id
   const result = await imAction('update', conv)
   if (result) {
-    console.debug(`修改会话对象成功 `, result)
+    console.debug(`대화 상대 변경 성공 `, result)
     await loadConversationOnline()
   }
 }
@@ -218,13 +218,13 @@ const quitChat = async () => {
   if (isGroup.value && isGroupAdmin.value) {
     const result = await imAction('deleteGroupConversation', conversation.id)
     if (result) {
-      console.info(`解散群聊成功 `, result)
+      console.info(`그룹 대화 해산 성공 `, result)
       updateOrDeleteConversation(null)
     }
   } else if (!isGroup.value) {
     const result = await imAction('deleteSingleConversation', conversation.id)
     if (result) {
-      console.info(`删除单聊成功 `, result)
+      console.info(`1:1 대화 삭제 성공 `, result)
       updateOrDeleteConversation(null)
     }
   }
@@ -243,7 +243,7 @@ const quitGroup = async () => {
    if (isGroup.value && !isGroupAdmin.value) { // 群聊并且不是管理员
      const result = await imAction('quitGroupSelf', conversation.id)
      if (result) {
-       console.info(`普通成员退出群聊成功 `, result)
+       console.info(`일반 멤버 그룹 대화 나가기 성공 `, result)
        updateOrDeleteConversation(null)
      }
    }
@@ -299,8 +299,8 @@ const quitGroup = async () => {
               </div>
             </div>
 
-            <div class="im-chat-info-member-tag-admin" v-if="isGroupAdminMember(person)">群主</div>
-            <div class="im-chat-info-member-tag-self"  v-if="isSelfMember(person)">本人</div>
+            <div class="im-chat-info-member-tag-admin" v-if="isGroupAdminMember(person)">방장</div>
+            <div class="im-chat-info-member-tag-self"  v-if="isSelfMember(person)">나</div>
 
           </div>
           <div class="im-chat-info-members-item pointer"  v-if="isGroupAdmin" @click="clickAddMember">

@@ -1,5 +1,5 @@
 {
-  "name": "手机蓝白",
+  "name": "모바일 블루 화이트",
   "form": {
     "styles":{
       "background-color": "#ffffff",
@@ -8,7 +8,7 @@
   },
   "label": {
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "center",
         "font-size": "18px",
@@ -20,7 +20,7 @@
       }
     },
     "tabletitle": {
-      "name": "表格标题",
+      "name": "표 제목",
       "styles": {
         "height": "auto",
         "background-color": "transparent",
@@ -34,7 +34,7 @@
       }
     },
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {
         "height": "18px",
         "background-color": "#ffffff",
@@ -51,7 +51,7 @@
 
   "div": {
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "height": "40px",
         "background-color": "#ffffff",
@@ -64,7 +64,7 @@
       }
     },
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {
         "background-color": "#ffffff",
         "line-height": "18px",

@@ -78,7 +78,7 @@
   "createImportModel":{ "uri": "/jaxrs/importmodel", "method": "POST" },
   "deleteImportModel" : { "uri": "/jaxrs/importmodel/{flag}", "method": "DELETE" },
 
-  "buildAllTable" : { "uri" : "/jaxrs/table/build/all" }, //编译表对象生成实体类进行数据库建表,执行后需要重新启动.
+  "buildAllTable" : { "uri" : "/jaxrs/table/build/all" }, //테이블 객체를 컴파일해 엔티티 클래스를 생성하고 데이터베이스 테이블 생성, 실행 후 재시작 필요.
   "listTableNext" : {"uri": "/jaxrs/table/list/{id}/next/{count}"},
   "listTable" : {"uri": "/jaxrs/table/list/query/{id}"},
   "listTablePrev" : {"uri": "/jaxrs/table/list/{id}/prev/{count}"},
@@ -93,15 +93,15 @@
 
   "listRowNext" : { "uri" : "/jaxrs/table/list/{tableFlag}/row/{id}/next/{count}" },
   "listRowPrev" : { "uri" : "/jaxrs/table/list/{tableFlag}/row/{id}/prev/{count}" },
-  "listRowSelectWhere" : { "uri" : "/jaxrs/table/list/{tableFlag}/row/select/where/{where}" }, //通过where 获取表中的数据,格式为jpql语法,o.name='zhangsan'
-  "getRow" : { "uri": "/jaxrs/table/{tableFlag}/row/{id}" }, //获取表中某一行数据
-  "updateRow":{ "uri": "/jaxrs/table/{tableFlag}/row/{id}", "method": "PUT" }, //更新指定表中指定行数据.
-  "insertRow":{ "uri": "/jaxrs/table/{tableFlag}/row", "method": "POST" },//插入一行
-  "countRowWhere" : { "uri": "/jaxrs/table/{tableFlag}/row/count/where/{where}"},//通过where 统计数量
-  "deleteRow" : { "uri": "/jaxrs/table/{tableFlag}/row/{id}", "method": "DELETE" }, //更新指定表中指定行数据.
-  "deleteAllRow" : { "uri": "/jaxrs/table/{tableFlag}/row/delete/all", "method": "DELETE"}, //通过where 统计数量
-  "exportRow" : { "uri": "/jaxrs/table/export/{tableFlag}/count/{count}", "method": "GET"}, //导出行对象。
-  "rowSave":{ "uri": "/jaxrs/table/{tableFlag}/row/save", "method": "POST" }, //指定表中批量保存或更新数据
+  "listRowSelectWhere" : { "uri" : "/jaxrs/table/list/{tableFlag}/row/select/where/{where}" }, //where 조건으로 테이블 데이터 조회, 형식은 jpql 문법,o.name='zhangsan'
+  "getRow" : { "uri": "/jaxrs/table/{tableFlag}/row/{id}" }, //테이블의 특정 행 데이터 조회
+  "updateRow":{ "uri": "/jaxrs/table/{tableFlag}/row/{id}", "method": "PUT" }, //지정 테이블의 지정 행 데이터 수정.
+  "insertRow":{ "uri": "/jaxrs/table/{tableFlag}/row", "method": "POST" },//행 삽입
+  "countRowWhere" : { "uri": "/jaxrs/table/{tableFlag}/row/count/where/{where}"},//where 조건으로 개수 집계
+  "deleteRow" : { "uri": "/jaxrs/table/{tableFlag}/row/{id}", "method": "DELETE" }, //지정 테이블의 지정 행 데이터 수정.
+  "deleteAllRow" : { "uri": "/jaxrs/table/{tableFlag}/row/delete/all", "method": "DELETE"}, //where 조건으로 개수 집계
+  "exportRow" : { "uri": "/jaxrs/table/export/{tableFlag}/count/{count}", "method": "GET"}, //행 객체 내보내기.
+  "rowSave":{ "uri": "/jaxrs/table/{tableFlag}/row/save", "method": "POST" }, //지정 테이블에 데이터 일괄 저장 또는 수정
 
   "clazz": "x_query_assemble_designer"
 }

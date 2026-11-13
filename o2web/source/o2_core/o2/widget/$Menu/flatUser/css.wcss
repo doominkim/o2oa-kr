@@ -34,7 +34,7 @@
 		"background-color": "#FFF",
 		"cursor": "pointer",
 		"color": "#333333",
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"text-align": "left",
 		"font-size": "12px",
 		"white-space": "nowrap"

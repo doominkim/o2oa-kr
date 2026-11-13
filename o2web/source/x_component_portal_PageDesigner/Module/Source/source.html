@@ -38,7 +38,7 @@
                 <td class="editTableTitle"></td>
                 <td class="editTableValue">
                     <input type="radio" name="sourceType" value="o2" text{($.sourceType!='other')?'checked':''} onclick="if (this.checked){ $('text{$.pid}sourceO2Area').setStyle('display', 'block'); $('text{$.pid}sourceOtherArea').setStyle('display', 'none')}"/>{{$.lp.systemSource}}
-                    <input type="radio" name="sourceType" value="other" text{($.sourceType=='other')?'checked':''} onclick="if (this.checked){ $('text{$.pid}sourceO2Area').setStyle('display', 'none'); $('text{$.pid}sourceOtherArea').setStyle('display', 'block')}"/>外部数据源
+                    <input type="radio" name="sourceType" value="other" text{($.sourceType=='other')?'checked':''} onclick="if (this.checked){ $('text{$.pid}sourceO2Area').setStyle('display', 'none'); $('text{$.pid}sourceOtherArea').setStyle('display', 'block')}"/>외부 데이터 소스
                 </td>
             </tr>
         </table>
@@ -73,7 +73,7 @@
                 <td class="editTableTitle">{{$.lp.path}}:</td>
                 <td class="editTableValue">
                     <input type="text" name="path" value="text{$.path}" class="editTableInput"/>
-                    <div style="color:#999;padding: 5px;">如:/jaxrs/invoke/product/execute<div>
+                    <div style="color:#999;padding: 5px;">예: /jaxrs/invoke/product/execute<div>
                 </td>
             </tr>
             <tr>

@@ -103,16 +103,16 @@ MWF.QMultiImporter = new Class(
             for( var i=1; i<this.importerList.length; i++ ){
                 var impoter = this.importerList[i];
                 if( !impoter.json.application ){
-                    throw new Error(`存在未设置导入模型应用的配置（application）`);
+                    throw new Error(`앱(application)이 설정되지 않은 가져오기 모델 설정이 있습니다`);
                 }
                 if( !impoter.json.name ){
-                    throw new Error(`存在未设置导入模型名称的配置（name）`);
+                    throw new Error(`이름(name)이 설정되지 않은 가져오기 모델 설정이 있습니다`);
                 }
                 if( !impoter.json.dataType ){
-                    throw new Error(`存在未设置导入模型类型的配置（dataType）`);
+                    throw new Error(`유형(dataType)이 설정되지 않은 가져오기 모델 설정이 있습니다`);
                 }
                 if( !['master', 'slave'].includes(impoter.json.dataType) ){
-                    throw new Error(`数据类型超过了限制（dataType的值应该限定为"master"和"slave"）`);
+                    throw new Error(`데이터 유형이 허용 범위를 벗어났습니다(dataType 값은 "master" 또는 "slave"여야 합니다)`);
                 }
             }
 
@@ -127,14 +127,14 @@ MWF.QMultiImporter = new Class(
                 for( var i=1; i<masters.length; i++ ){
                     var impoter = masters[i];
                     if( mainType !== impoter.json.type ){
-                        throw new Error(`主文档的导入类型（导入目标为内容管理或流程）不唯一`);
+                        throw new Error(`주 문서의 가져오기 유형(가져오기 대상: 게시판 또는 프로세스)이 하나로 통일되어 있지 않습니다`);
                     }
                     var target = impoter.json.type === 'cms' ? impoter.json.data.category : impoter.json.data.process;
                     if( mainTarget.id !== target.id ){
-                        throw new Error(`主文档的导入目标不一致（${mainTarget.name}，${target.name}）`);
+                        throw new Error(`주 문서의 가져오기 대상이 일치하지 않습니다(${mainTarget.name}, ${target.name})`);
                     }
                     if( !impoter.json.matchMasterKeys || impoter.json.matchMasterKeys.length === 0 ){
-                        throw new Error(`第二主文档（master）未设置和主文档的匹配关系（matchMasterKeys）`);
+                        throw new Error(`두 번째 주 문서(master)에 주 문서와의 매칭 관계(matchMasterKeys)가 설정되지 않았습니다`);
                     }
                 }
             }
@@ -146,10 +146,10 @@ MWF.QMultiImporter = new Class(
                 for( var i=1; i<slaves.length; i++ ){
                     var impoter = slaves[i];
                     if( !impoter.json.path ){
-                        throw new Error(`从文档（slave）未设置路径（path）`);
+                        throw new Error(`하위 문서(slave)에 경로(path)가 설정되지 않았습니다`);
                     }
                     if( !impoter.json.matchMasterKeys || impoter.json.matchMasterKeys.length === 0 ){
-                        throw new Error(`从文档（slave）未设置和主文档的匹配关系（matchMasterKeys）`);
+                        throw new Error(`하위 문서(slave)에 주 문서와의 매칭 관계(matchMasterKeys)가 설정되지 않았습니다`);
                     }
                 }
             }
@@ -219,7 +219,7 @@ MWF.QMultiImporter = new Class(
                 case 'process':
                     body.processList = [importer.json.data.process]; break;
                 default:
-                    this.notice('导入失败，导入模型的导入目标设置成了数据表，请联系管理员！', 'error');
+                    this.notice('가져오기에 실패했습니다. 가져오기 모델의 대상이 데이터 테이블로 설정되어 있습니다. 관리자에게 문의하세요!', 'error');
                     return;
             }
             this.matchViewJson = o2.Actions.load('x_program_center').InvokeAction.execute('o2ExcelViewCopyer', body, (json)=>{
@@ -284,8 +284,8 @@ MWF.QMultiImporter = new Class(
                             return imp.name === importer.json.name;
                         });
                         if(!dataExisted){
-                            var errorText = `导入模型"${importer.json.name}"在导入的Excel文件中未找到同名的sheet表。
-                            请重新下载模板再填写数据重复此操作。`;
+                            var errorText = `가져온 Excel 파일에서 가져오기 모델 "${importer.json.name}"과(와) 이름이 같은 시트를 찾지 못했습니다.
+                            템플릿을 다시 내려받아 데이터를 입력한 뒤 다시 시도하세요.`;
                             this.app.notice(errorText, 'error');
                             throw new Error(errorText);
                         }
@@ -304,7 +304,7 @@ MWF.QMultiImporter = new Class(
                             return imp.json.name === name;
                         });
                         if( !importer ){
-                            console.warn(`未找到名称为${name}的导入模型，跳过该sheet表的数据导入。`);
+                            console.warn(`이름이 ${name}인 가져오기 모델을 찾지 못해 이 시트의 데이터 가져오기를 건너뜁니다.`);
                             checkOpenDlg();
                         }else{
                             var p = importer.importFromExcel(data, this.progressDialog, ()=>{
@@ -374,7 +374,7 @@ MWF.QMultiImporter = new Class(
                             htmlArray.push( result.importer._getErrorContentHtml() );
                         }else{
                             htmlArray.push(
-                                `<tr><td style=${contentStyleStr}><div style='color:green;'>校验通过</div></td></tr>`
+                                `<tr><td style=${contentStyleStr}><div style='color:green;'>검증 통과</div></td></tr>`
                             );
                         }
                         htmlArray.push( "</table>" );
@@ -397,7 +397,7 @@ MWF.QMultiImporter = new Class(
             var div = new Element("div", { style : "flex:1;height: calc( 100% - 30px );" });
             var dlg = o2.DL.open({
                 "style" : "user",
-                "title": '导入详情',
+                "title": '가져오기 상세',
                 "content": div,
                 "offset": {"y": 0},
                 "isMax": true,
@@ -406,7 +406,7 @@ MWF.QMultiImporter = new Class(
                 "buttonList": [
                     {
                         "type": "cancel",
-                        "text": '关闭',
+                        "text": '닫기',
                         "action": function () { dlg.close(); }
                     }
                 ],
@@ -660,7 +660,7 @@ MWF.QMultiImporter = new Class(
                 if( r.importer !== this.getMainImporter() ){
                     r.importer.progressBar.hide();
                 }else{
-                    r.importer.progressBar.setMessageTitle(`正在往“${this.getTarget().name}”导入数据`);
+                    r.importer.progressBar.setMessageTitle(`"${this.getTarget().name}"(으)로 데이터를 가져오는 중`);
                 }
             })
 
@@ -687,7 +687,7 @@ MWF.QMultiImporter = new Class(
 
             if(this.totalCount === 0){
                 if(this.progressDialog)this.progressDialog.close();
-                this.notice('从Excel文件中未获取到需要导入的数据，导入结束', 'error')
+                this.notice('Excel 파일에서 가져올 데이터를 찾지 못해 가져오기를 종료합니다', 'error')
             }
 
             var actionPromises = [];
@@ -722,7 +722,7 @@ MWF.QMultiImporter = new Class(
                         var isMaster = result.importer.isMaster();
                         result.masterBusinessData.forEach((d)=>{
                             if(!d.id){
-                                this.logFailure(result, d, '根据关键字未在系统和主表中匹配到主数据。');
+                                this.logFailure(result, d, '키 값으로 시스템과 주 테이블에서 일치하는 주 데이터를 찾지 못했습니다.');
                             }else{
                                 var promise;
                                 switch (this.getTargetType()) {
@@ -838,7 +838,7 @@ MWF.QMultiImporter = new Class(
                 return Promise.all(ps2).then(()=> {
                     const method = o2.Actions.load('x_cms_assemble_control').DataAction.updateWithDocument;
                     return method(data.id, data, (json) => {
-                        return this.logSuccess(result, data, '修改数据');
+                        return this.logSuccess(result, data, '데이터 수정');
                     }, (xhr) => {
                         this.logFailure(result, data, this.getErrorText(xhr));
                         return true;
@@ -853,7 +853,7 @@ MWF.QMultiImporter = new Class(
                 return Promise.all(ps2).then(()=>{
                     const method = o2.Actions.load('x_cms_assemble_control').DataAction.updateWithDocument;
                     return method(data.id, partFlag ? data : data.docData, (json)=>{
-                        return this.logSuccess(result, data, '修改数据');
+                        return this.logSuccess(result, data, '데이터 수정');
                     }, (xhr)=>{
                         this.logFailure(result, data, this.getErrorText(xhr));
                         return true;
@@ -865,7 +865,7 @@ MWF.QMultiImporter = new Class(
             const method = o2.Actions.load('x_cms_assemble_control').DocumentAction.persist_publishContent;
             return method(data, (json)=>{
                 data.id = json.data.id;
-                return this.logSuccess(result, data, '创建文档');
+                return this.logSuccess(result, data, '문서 생성');
             }, (xhr)=>{
                 this.logFailure(result, data, this.getErrorText(xhr));
                 return true;
@@ -878,7 +878,7 @@ MWF.QMultiImporter = new Class(
                 return Promise.all(ps2).then(()=> {
                     const method = o2.Actions.load('x_processplatform_assemble_surface').DataAction.updateWithJob;
                     return method(data.id, data, (json) => {
-                        return this.logSuccess(result, data, '修改数据');
+                        return this.logSuccess(result, data, '데이터 수정');
                     }, (xhr) => {
                         this.logFailure(result, data, this.getErrorText(xhr))
                         return true;
@@ -893,7 +893,7 @@ MWF.QMultiImporter = new Class(
                 return Promise.all(ps2).then(()=> {
                     const method = o2.Actions.load('x_processplatform_assemble_surface').DataAction.updateWithJob;
                     return method(data.id, partFlag ? data : data.data, (json) => {
-                        return this.logSuccess(result, data, '修改数据');
+                        return this.logSuccess(result, data, '데이터 수정');
                     }, (xhr) => {
                         this.logFailure(result, data, this.getErrorText(xhr))
                         return true;
@@ -913,7 +913,7 @@ MWF.QMultiImporter = new Class(
             const method = o2.Actions.load('x_processplatform_assemble_surface').WorkCompletedAction.create;
             return method(this.getTarget().id, data, (json)=>{
                 data.id = json.data.id;
-                return this.logSuccess(result, data, '发起流程(结束)');
+                return this.logSuccess(result, data, '프로세스 기안(종료)');
             }, (xhr)=>{
                 this.logFailure(result, data, this.getErrorText(xhr));
                 return true;
@@ -923,7 +923,7 @@ MWF.QMultiImporter = new Class(
             const method = o2.Actions.load('x_processplatform_assemble_surface').WorkAction.create;
             return method(this.getTarget().id, data, (json)=>{
                 data.id = json.data[0].job;
-                return this.logSuccess(result, data, '发起流程');
+                return this.logSuccess(result, data, '프로세스 기안');
             }, (xhr)=>{
                 this.logFailure(result, data, this.getErrorText(xhr));
                 return true;
@@ -1330,7 +1330,7 @@ MWF.QMultiImporter.Importer = new Class({
                                 resolve({status: 'success', importer: this});
                             }else{
                                 //this.openImportedErrorDlg();
-                                this.progressBar.setMessageText('导入失败：校验未通过');
+                                this.progressBar.setMessageText('가져오기 실패: 검증을 통과하지 못했습니다');
                                 resolve({status: 'error', importer: this});
                             }
                         }.bind(this));
@@ -1920,19 +1920,19 @@ MWF.QMultiImporter.ProgressBar = new Class({
         this.status = "ready";
 
         this.lp = Object.assign(this.lp, {
-            "openImportRecordDetail": "查看导入日志",
-            "importSuccess" : "导入文档成功！",
-            "importPartSuccessTitle": "部分导入成功",
-            "importFailTitle": "导入失败",
-            "checkDataTitle": "数据导入",
-            "checkDataContent": "正在检查数据...",
-            "importDataTitle": "正在导入数据",
-            "importDataContent": "开始导入文档，共{count}条",
-            "readyToImportData": "正在准备导入文档",
-            "readyToImportData1": "正在准备导入文档...",
-            "importSpeed": "条/秒",
-            "importingDataContent": "正导入文档: {speed}条/秒,共{total}条,剩余{remaining}条",
-            "importingDataErrorContent": ",出错{errorCount}条",
+            "openImportRecordDetail": "가져오기 로그 보기",
+            "importSuccess" : "문서를 가져왔습니다!",
+            "importPartSuccessTitle": "일부 가져오기 성공",
+            "importFailTitle": "가져오기 실패",
+            "checkDataTitle": "데이터 가져오기",
+            "checkDataContent": "데이터 확인 중...",
+            "importDataTitle": "데이터 가져오는 중",
+            "importDataContent": "문서 가져오기를 시작합니다. 총 {count}건",
+            "readyToImportData": "문서 가져오기 준비 중",
+            "readyToImportData1": "문서 가져오기 준비 중...",
+            "importSpeed": "건/초",
+            "importingDataContent": "문서 가져오는 중: {speed}건/초, 총 {total}건, 남은 {remaining}건",
+            "importingDataErrorContent": ", 오류 {errorCount}건",
         })
 
     },

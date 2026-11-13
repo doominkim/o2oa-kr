@@ -37,7 +37,7 @@ function decryptAesGcmSync(base64Payload, keyString) {
     // 7. 将解密出来的 bitArray 还原为 UTF-8 文本
     return sjcl.codec.utf8String.fromBits(decryptedBitArray);
   } catch (error) {
-    throw new Error("同步解密失败：密文损坏或密钥不匹配。错误详情: " + error.message);
+    throw new Error("동기 복호화에 실패했습니다. 암호문이 손상되었거나 키가 일치하지 않습니다. 오류 상세: " + error.message);
   }
 }
 

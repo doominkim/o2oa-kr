@@ -3,42 +3,42 @@ import {serverStatus, echoServer} from '../../common/action.js';
 
 const template = `
 <div class="pane_content" style="padding: 2rem 2rem">
-    <div class="input_title">执行服务器初始化</div>
+    <div class="input_title">서버 초기화 실행</div>
     
     <div class="infoArea">
         <div oo-if="$.status==='waiting' || $.status==='running' || $.status==='starting'" class="loading" oo-element="testLoading"></div>
         <div oo-if="$.status==='success' || $.status==='started'" class="icon ooicon-check"></div>
         <div oo-if="$.status==='unknown'" class="icon ooicon-error" style="color:#ffc42bde"></div>
         
-        <div oo-if="$.status==='waiting'" class="info">等待服务器执行初始化 ... </div>
-        <div oo-if="$.status==='running'" class="info">服务器初始化正在执行中 ... </div>
-        <div oo-if="$.status==='starting'" class="info">正在启动O2OA(翱途)服务器 ... </div>
+        <div oo-if="$.status==='waiting'" class="info">서버 초기화 실행을 기다리는 중 ... </div>
+        <div oo-if="$.status==='running'" class="info">서버 초기화를 실행하는 중 ... </div>
+        <div oo-if="$.status==='starting'" class="info">O2OA 서버를 시작하는 중 ... </div>
         
-        <div oo-if="$.status==='success'" class="info">服务器初始化执行成功，即将启动O2OA(翱途)服务器！</div>
-        <div oo-if="$.status==='started'" class="info">服务器初始化执行成功，O2OA(翱途)服务器已启动！</div>
-        <div oo-if="$.status==='started'" class="info"><oo-button style="margin-left:0" @click="gotoIndex">进入系统登录页面</oo-button></div>
+        <div oo-if="$.status==='success'" class="info">서버 초기화에 성공했습니다. 곧 O2OA 서버를 시작합니다!</div>
+        <div oo-if="$.status==='started'" class="info">서버 초기화에 성공했습니다. O2OA 서버가 시작되었습니다!</div>
+        <div oo-if="$.status==='started'" class="info"><oo-button style="margin-left:0" @click="gotoIndex">시스템 로그인 페이지로 이동</oo-button></div>
         
         <div oo-if="$.status==='failure' || $.status==='stop'" class="icon ooicon-cancel"></div>
-        <div oo-if="$.status==='failure'" class="info">服务器初始化执行失败 </div>
+        <div oo-if="$.status==='failure'" class="info">서버 초기화에 실패했습니다 </div>
         <div oo-if="$.status==='failure'" class="info" style="font-size: 0.875rem; color: red; text-align: center;">{{$.failureMessage || $.messages.join(', ')}}</div>
-        <div oo-if="$.status==='failure'" class="info" style="font-size: 0.875rem; color: #666666">您可以重启服务器后重新进行初始化配置！</div>
+        <div oo-if="$.status==='failure'" class="info" style="font-size: 0.875rem; color: #666666">서버를 다시 시작한 후 초기 설정을 다시 진행할 수 있습니다!</div>
         
-        <div oo-if="$.status==='unknown'" class="info">无法获取服务器状态，请查看服务器控制台信息</div>
+        <div oo-if="$.status==='unknown'" class="info">서버 상태를 가져올 수 없습니다. 서버 콘솔 정보를 확인하세요</div>
         
-        <div oo-if="$.status==='stop'" class="info">初始化服务器已关闭，您可以再次手工启动服务器，以完成初始化配置。</div>
+        <div oo-if="$.status==='stop'" class="info">초기화 서버가 종료되었습니다. 서버를 다시 수동으로 시작해 초기 설정을 완료할 수 있습니다.</div>
         
 <!--        <div class="line">-->
-<!--            <div oo-if="$.secret.passStr" class="info"><span class="icon ooicon-check"></span>管理员密码已设置</div>-->
-<!--            <div oo-if="!$.secret.passStr" class="info"><span class="icon ooicon-cancel"></span>管理员密码未设置</div>-->
+<!--            <div oo-if="$.secret.passStr" class="info"><span class="icon ooicon-check"></span>관리자 비밀번호가 설정되었습니다</div>-->
+<!--            <div oo-if="!$.secret.passStr" class="info"><span class="icon ooicon-cancel"></span>관리자 비밀번호가 설정되지 않았습니다</div>-->
 <!--        </div>-->
 <!--        -->
 <!--        <div class="line">-->
-<!--            <div class="info"><span class="icon ooicon-check"></span>数据库：{{$.database.type}}</div>-->
+<!--            <div class="info"><span class="icon ooicon-check"></span>데이터베이스: {{$.database.type}}</div>-->
 <!--        </div>-->
 <!--        -->
 <!--        <div class="line">-->
-<!--            <div oo-if="$.restore.name" class="info"><span class="icon ooicon-check"></span>导入数据文件：{{$.restore.name}}</div>-->
-<!--            <div oo-if="!$.restore.name" class="info"><span class="icon ooicon-cancel"></span>不导入数据文件</div>-->
+<!--            <div oo-if="$.restore.name" class="info"><span class="icon ooicon-check"></span>가져올 데이터 파일: {{$.restore.name}}</div>-->
+<!--            <div oo-if="!$.restore.name" class="info"><span class="icon ooicon-cancel"></span>데이터 파일을 가져오지 않음</div>-->
 <!--        </div>-->
     </div>
   

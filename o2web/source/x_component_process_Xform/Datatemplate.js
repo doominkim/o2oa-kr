@@ -3271,7 +3271,7 @@ MWF.xApplication.process.Xform.Datatemplate.Importer = new Class({
 		this.template.json.excelFieldConfig.each(function (config, i) {
 			const fieldJson = this.form.json.moduleList[config.field];
 			if( !fieldJson ){
-				console.warn(`从数据模板中未找到导入导出配置的字段:${config.title}（${ config.field }）`);
+				console.warn(`데이터 템플릿에서 가져오기/내보내기 설정 필드를 찾을 수 없습니다: ${config.title}(${ config.field })`);
 				return;
 			}
 			this.fieldArray.push({

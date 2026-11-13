@@ -945,7 +945,7 @@ MWF.xApplication.query.StatementDesigner.Statement = new Class({
         }catch (e) {
             parameter = {};
         }
-        parameter[ ["sql", "sqlScript"].contains(this.json.format) ? "xtitle" : "o_title" ] = "%关于%";
+        parameter[ ["sql", "sqlScript"].contains(this.json.format) ? "xtitle" : "o_title" ] = "%회의%";
         this.jsonEditor.editor.setValue( JSON.stringify(parameter, null, 4) );
 
     },

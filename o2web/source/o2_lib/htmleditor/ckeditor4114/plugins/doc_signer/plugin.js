@@ -8,8 +8,8 @@ CKEDITOR.plugins.add( 'doc_copiesSecretPriority', {
             template:
                 '<div class="o2_editorPlugin_doc_subject">' +
                 '<div class="o2_editorPlugin_doc_copies">000001</div>' +
-                '<div class="o2_editorPlugin_doc_secret">机密★1年</div>' +
-                '<div class="o2_editorPlugin_doc_priority">特急</div>' +
+                '<div class="o2_editorPlugin_doc_secret">기밀★1년</div>' +
+                '<div class="o2_editorPlugin_doc_priority">특급</div>' +
                 '</div>',
 
             // editables: {

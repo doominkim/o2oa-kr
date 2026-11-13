@@ -1831,7 +1831,7 @@ MWF.xApplication.process.Xform.Log = MWF.APPLog =  new Class(
 
             var person = task.person.substring(0, task.person.indexOf("@"));
             if( task.processingType !== "empower" && task.empowerFromIdentity){
-                person = person+" 代 "+o2.name.cn(task.empowerFromIdentity||"");
+                person = person+" ("+o2.name.cn(task.empowerFromIdentity||"")+" 대리)";
             }
             html = html.replace(/\{person\}/g, person ).replace(/{personDn}/g, task.person || '');
             html = html.replace(/\{department\}/g, task.unit.substring(0, task.unit.indexOf("@")));

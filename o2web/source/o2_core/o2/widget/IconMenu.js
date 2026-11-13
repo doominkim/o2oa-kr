@@ -47,7 +47,7 @@ MWF.widget.IconMenu = new Class({
             input = new Element('oo-input', {
                 'right-icon': 'search',
                 'style': 'display:block;padding:0.3rem 0.5rem;',
-                'placeholder': '输入关键字搜索',
+                'placeholder': '검색어를 입력하세요',
                 'autocomplete': "off"
             }).inject( iconMenu.node );
             input.addEvent('click', (ev)=>{

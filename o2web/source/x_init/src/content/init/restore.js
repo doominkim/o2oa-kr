@@ -4,28 +4,28 @@ import {uploadRestore, cancelRestore} from '../../common/action.js';
 
 const template = `
 <div class="pane_content" style="padding: 2rem 2rem">
-    <div class="input_title">初始化数据</div>
+    <div class="input_title">초기 데이터</div>
     <div class="upload_area" @dragover="dragover" @drop="drop" @dragout="dragout">
-        <div>将zip文件拖动到此处</div>
-        <div>或</div>
-        <oo-button @click="selectFile">选择zip文件</oo-button>
+        <div>zip 파일을 여기로 끌어 놓으세요</div>
+        <div>또는</div>
+        <oo-button @click="selectFile">zip 파일 선택</oo-button>
     </div>
     <div class="upload_name" oo-if="!!$.restore.name">
-        <div><span>已上传存储文件：</span><span style="color:var(--oo-color-main)">{{$.restore.name}}</span></div>
-        <oo-button class="delete_button" @click="deleteUpload">删除</oo-button>
+        <div><span>업로드한 파일: </span><span style="color:var(--oo-color-main)">{{$.restore.name}}</span></div>
+        <oo-button class="delete_button" @click="deleteUpload">삭제</oo-button>
     </div>
     <div class="upload_name">
-        <div style="font-size: 0.875rem; color:#666666">如果需要导入数据，请上传数据zip文件，如果不需要，可直接点击“下一步”</div>
+        <div style="font-size: 0.875rem; color:#666666">데이터를 가져오려면 데이터 zip 파일을 업로드하세요. 필요 없으면 바로 "다음"을 클릭하세요</div>
     </div>
 </div>
 <div class="actions">
-    <oo-button type="cancel" @click="stepPrev">上一步</oo-button>
-    <oo-button @click="nextStep">下一步</oo-button>
+    <oo-button type="cancel" @click="stepPrev">이전</oo-button>
+    <oo-button @click="nextStep">다음</oo-button>
 </div>
 <input type="file" @change="uploadFile" oo-element="uploadFileNode" style="display: none"/>
 <div class="maskNode" oo-if="$.status==='uploading'">
     <div class="loading"></div>
-    <div>正在上传数据文件 ... </div>
+    <div>데이터 파일을 업로드하는 중 ... </div>
 </div>
 `;
 const style = `

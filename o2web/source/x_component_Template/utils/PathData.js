@@ -30,13 +30,13 @@ MWF.PathDataHandler = new Class({
     },
     create: function(id, pathList, data, ...args){
         if (data === undefined) {
-            throw new Error('创建操作必须提供data参数');
+            throw new Error('생성 작업에는 data 매개변수가 필요합니다');
         }
         return this._execute('create', id, pathList, data, ...args);
     },
     update: function(id, pathList, data, ...args){
         if (data === undefined) {
-            throw new Error('更新操作必须提供data参数');
+            throw new Error('업데이트 작업에는 data 매개변수가 필요합니다');
         }
         return this._execute('update', id, pathList, data, ...args);
     },
@@ -46,22 +46,22 @@ MWF.PathDataHandler = new Class({
     _safeDynamicCall: function(methodName, args){ // 私有方法：动态调用安全封装
         if (typeof this.action[methodName] !== 'function') {
             var availableMethods = Object.keys(this.action).filter(k => typeof this.action[k] === 'function');
-            throw new Error(`调用的方法不存在: ${methodName} (可用方法: ${availableMethods.join(', ')})`);
+            throw new Error(`호출한 메서드가 없습니다: ${methodName} (사용 가능한 메서드: ${availableMethods.join(', ')})`);
         }
         try {
             return this.action[methodName](...args);
         } catch (e) {
-            throw new Error(`调用${methodName}失败: ${e.message}`);
+            throw new Error(`${methodName} 호출 실패: ${e.message}`);
         }
     },
     // 私有方法：参数验证
     _validateParameters: function (type, id, paths){
         if (typeof id !== 'string' || !id.trim()) {
-            throw new Error('文档ID必须是有效字符串');
+            throw new Error('문서 ID는 유효한 문자열이어야 합니다');
         }
 
         if (paths.some(p => typeof p !== 'string' && typeof p !== 'number')) {
-            throw new Error('路径元素必须是字符串或数字');
+            throw new Error('경로 요소는 문자열 또는 숫자여야 합니다');
         }
     },
     _execute: function (type, id, paths = [], ...args){
@@ -77,13 +77,13 @@ MWF.PathDataHandler = new Class({
 
             // 3. 路径深度验证
             if (paths.length > 8) {
-                throw new Error(`路径层级超过限制(8级)，当前: ${paths.length}`);
+                throw new Error(`경로 단계가 제한(8단계)을 초과했습니다. 현재: ${paths.length}`);
             }
 
 
             var baseMethod = this.methodMap[type];
             if (!baseMethod) {
-                throw new Error(`不支持的操作类型: ${type} (支持: ${Object.keys(this.methodMap).join(', ')})`);
+                throw new Error(`지원하지 않는 작업 유형: ${type} (지원: ${Object.keys(this.methodMap).join(', ')})`);
             }
 
             // 6. 动态方法处理
@@ -104,7 +104,7 @@ MWF.PathDataHandler = new Class({
             return this._safeDynamicCall(methodName, callArgs);
 
         } catch (error) {
-            console.error(`PathData操作失败[${type}]`, {
+            console.error(`PathData 작업 실패[${type}]`, {
                 documentId: id,
                 paths: paths,
                 error: {

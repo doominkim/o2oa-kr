@@ -27,10 +27,10 @@
     </div>
     <div class="layout-right" data-o2-element="rightNode">
         <div class="page">
-            <div class="chat-top" data-o2-element="titleNode">模型设置</div>
+            <div class="chat-top" data-o2-element="titleNode">모델 설정</div>
             <div class="model-wrap">
                 <oo-button data-o2-events="click:newModel:new" style="width: 7em;">
-                    新建模型
+                    새 모델
                 </oo-button>
                 <div class="model-list">
 
@@ -42,7 +42,7 @@
                         <div class="model-item-2" data-o2-events="click:newModel:edit:{{$.id}}">
                             <div class="model-item-2-1">
 
-                                {{$.name}}{{if $.enable}}(已启用){{end if}}{{if !$.enable}}(未启用){{end if}}</div>
+                                {{$.name}}{{if $.enable}}(사용 중){{end if}}{{if !$.enable}}(사용 안 함){{end if}}</div>
                             <div class="model-item-2-2">{{$.desc}}</div>
                         </div>
                         {{if $.type === "llama"}}

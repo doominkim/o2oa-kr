@@ -236,7 +236,7 @@ MWF.xApplication.Selector.ProcessActivity.ItemCategory = new Class({
                     processData.endList || []
                 );
                 activityList.unshift({
-                    name: "草稿",
+                    name: "임시저장",
                     id: 'draft-'+this.data.id
                 });
                 activityList.forEach(function(data){

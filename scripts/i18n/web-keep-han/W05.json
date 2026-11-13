@@ -1,0 +1,16 @@
+{
+  "o2web/source/x_component_process_FormDesigner/Module/Form/template/form_reimbursement.json": [
+    {
+      "text": "\"dutyValue\": \"[{\\\"name\\\":\\\"正职领导\\\",\\\"id\\\":\\\"C7937194A7600001A8EA1F1015C71E29\\\",\\\"code\\\":\\\"return this.workContext.getWork().creatorDepartment\\\"}]\",",
+      "reason": "조직 직무(duty) 이름 참조: 서버 조직 데이터의 직무명·id로 조회하는 값"
+    },
+    {
+      "text": "\"dutyValue\": \"[{\\\"name\\\":\\\"正职领导\\\",\\\"id\\\":\\\"C75B186F81C0000162761E0F22151B6F\\\",\\\"code\\\":\\\"return this.workContext.getWork().creatorDepartment\\\"}]\",",
+      "reason": "조직 직무(duty) 이름 참조: 서버 조직 데이터의 직무명·id로 조회하는 값"
+    },
+    {
+      "text": "\"dutyValue\": \"[{\\\"name\\\":\\\"正职领导\\\",\\\"id\\\":\\\"C7937C0A00500001BCF570B1132A10D4\\\",\\\"code\\\":\\\"return this.workContext.getWork().creatorDepartment\\\"}]\"",
+      "reason": "조직 직무(duty) 이름 참조: 서버 조직 데이터의 직무명·id로 조회하는 값"
+    }
+  ]
+}

@@ -2,9 +2,9 @@
   {
     "type": "MWFToolBarButton",
     "img": "save.png",
-    "title": "保存工作",
+    "title": "작업 저장",
     "action": "saveWork",
-    "text": "保存",
+    "text": "저장",
     "id": "action_saveData",
     "control": "allowSave",
     "condition": "",

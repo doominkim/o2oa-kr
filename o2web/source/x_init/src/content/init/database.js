@@ -4,43 +4,43 @@ import {listDatabase, testDatabase, h2Check, h2Upgrade, h2Cancel, setDatabase, c
 
 const template = `
 <div class="pane_content" style="padding: 2rem 2rem">
-    <div class="input_title" style="padding: 0.5rem 0; margin-top: 0">选择数据库</div>
+    <div class="input_title" style="padding: 0.5rem 0; margin-top: 0">데이터베이스 선택</div>
     <div oo-if="$.databaseConfigured!==true && $.databaseConfigured!==false" style="padding: 3rem 2rem; text-align: center">
         <div class="icon loading" style="display: block; height: 40px; width: 40px; margin: auto"></div>
     </div>
     
     <div oo-else-if="$.databaseConfigured===true" style="padding: 3rem 2rem; text-align: center">
         <div class="icon ooicon-check"></div>
-        <div style="padding: 1rem 0; color: var(--oo-color-text2)">您已初始化了数据库设置！请直接点击“下一步”</div>
-        <div style="padding: 1rem 0; font-size: 0.875rem; color: var(--oo-color-text3)">如需修改，请启动服务器后，进入“系统配置”-“服务器配置”-“数据库配置”中修改</div>
+        <div style="padding: 1rem 0; color: var(--oo-color-text2)">데이터베이스 설정이 이미 초기화되었습니다! "다음"을 클릭하세요</div>
+        <div style="padding: 1rem 0; font-size: 0.875rem; color: var(--oo-color-text3)">변경하려면 서버를 시작한 후 "시스템 설정"-"서버 설정"-"데이터베이스 설정"에서 변경하세요</div>
     </div>
     
     <div  oo-else style="color:#777777; font-size: 0.875rem">
         <div style="padding: 0.5em 0.3em; margin-top: 0.5rem; border: 1px solid #cccccc; border-radius: 0.5rem">
             <oo-radio-group name="database_type" col="4" oo-model="database.type" @change="changeDb" oo-element="databaseTypeNode">
-                <oo-radio value="h2" name="database_type" style="margin: 0.3em 0em 0.3em 0">H2(内置数据库)</oo-radio>
+                <oo-radio value="h2" name="database_type" style="margin: 0.3em 0em 0.3em 0">H2(내장 데이터베이스)</oo-radio>
                 <oo-radio oo-each="$.databaseList" oo-item="db"  value="{{db.value.type}}" text="{{$.databaseName[db.value.type] || db.value.type}}" style="margin: 0.3em 0em 0.3em 0"></oo-radio>
             </oo-radio-group>
         </div>
     </div>
     <div oo-if="$.database.type!=='h2' && $.database.type!=='$configured'">
-        <div class="input_title" style="padding: 0.5rem 0; margin-top: 1rem">数据库配置</div>
+        <div class="input_title" style="padding: 0.5rem 0; margin-top: 1rem">데이터베이스 설정</div>
         <div style="color:#777777; font-size: 0.875rem">
             <div style="padding: 0.5em 0.3em; margin-top: 0.5rem; border: 1px solid #cccccc; border-radius: 0.5rem">
-                <oo-textarea label="数据库连接：" style="margin-top:0.5rem; width: 98%" oo-model="externalDataSources.url" spellcheck="false"></oo-textarea>
+                <oo-textarea label="데이터베이스 연결: " style="margin-top:0.5rem; width: 98%" oo-model="externalDataSources.url" spellcheck="false"></oo-textarea>
                 <div style="margin-top:1rem; margin-bottom:1rem; width: 98%; display: flex; justify-content: space-between;">
-                    <oo-input label="用户名：　　" style="width: 48%" oo-model="externalDataSources.username"></oo-input>
-                    <oo-input label="密码：" style="width: 48%" oo-model="externalDataSources.password"></oo-input>
+                    <oo-input label="사용자 이름: " style="width: 48%" oo-model="externalDataSources.username"></oo-input>
+                    <oo-input label="비밀번호: " style="width: 48%" oo-model="externalDataSources.password"></oo-input>
                     <oo-input label="schema：" style="width: 48%" oo-model="externalDataSources.schema"></oo-input>
                 </div>
                 
                 <div style="width: 98%; display: flex; justify-content: space-between;">
                     <div style="font-size: 0.725rem; width: calc(100% - 8.5rem); padding-left: 0.5rem; display: flex; align-items: center;">
                         <div class="loading" oo-element="testLoading"></div>
-                        <div oo-if="$.testDbMessage==='success'" style="color: green">连接成功！</div>
-                        <div oo-if="$.testDbMessage && $.testDbMessage!=='success'"  style="color: red">连接失败:{{$.testDbMessage}}</div>
+                        <div oo-if="$.testDbMessage==='success'" style="color: green">연결에 성공했습니다!</div>
+                        <div oo-if="$.testDbMessage && $.testDbMessage!=='success'"  style="color: red">연결 실패: {{$.testDbMessage}}</div>
                     </div>
-                    <oo-button @click="test" style="width: 8.5rem;">测试数据库连接</oo-button>
+                    <oo-button @click="test" style="width: 8.5rem;">데이터베이스 연결 테스트</oo-button>
                 </div>
                
             </div>
@@ -48,8 +48,8 @@ const template = `
     </div>
 </div>
 <div class="actions">
-    <oo-button type="cancel" @click="stepPrev">上一步</oo-button>
-    <oo-button @click="nextStep">下一步</oo-button>
+    <oo-button type="cancel" @click="stepPrev">이전</oo-button>
+    <oo-button @click="nextStep">다음</oo-button>
 </div>
 `;
 const style = `
@@ -96,12 +96,12 @@ export default component({
                 oracle: 'Oracle',
                 postgresql: 'PostgreSQL',
                 mysql: 'MySQL',
-                dm: '达梦',
-                kingbase: '人大金仓V7',
-                kingbase8: '人大金仓V8',
+                dm: 'DM(Dameng)',
+                kingbase: 'KingbaseES V7',
+                kingbase8: 'KingbaseES V8',
                 informix: 'Informix',
-                gbase: '南大通用',
-                // gbasemysql: '南大通用(MySql)',
+                gbase: 'GBase',
+                // gbasemysql: 'GBase(MySql)',
                 db2: 'DB2'
             },
             externalDataSources: {},

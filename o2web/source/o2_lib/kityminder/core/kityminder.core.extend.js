@@ -3403,7 +3403,7 @@ window.kityminder.data.registerProtocol('freemind', (function(minder) {
     }
 
     return {
-        fileDescription: 'Freemind 格式',
+        fileDescription: 'Freemind 형식',
         fileExtension: '.mm',
         dataType: 'text',
 
@@ -3412,7 +3412,7 @@ window.kityminder.data.registerProtocol('freemind', (function(minder) {
                 try {
                     resolve(xml2km(local));
                 } catch (e) {
-                    reject(new Error('XML 文件损坏！'));
+                    reject(new Error('XML 파일이 손상되었습니다!'));
                 }
             });
         },
@@ -3509,7 +3509,7 @@ window.kityminder.data.registerProtocol('xmind', (function(minder) {
     };
 
     return {
-        fileDescription: 'XMind 格式',
+        fileDescription: 'XMind 형식',
         fileExtension: '.xmind',
         dataType: 'blob',
         mineType: 'application/octet-stream',
@@ -3795,7 +3795,7 @@ window.kityminder.data.registerProtocol('mindmanager', (function(minder) {
     }
 
     return {
-        fileDescription: 'MindManager 格式',
+        fileDescription: 'MindManager 형식',
         fileExtension: '.mmap',
         dataType: 'blob',
 

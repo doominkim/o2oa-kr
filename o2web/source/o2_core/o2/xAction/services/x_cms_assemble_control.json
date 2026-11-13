@@ -146,7 +146,7 @@
   "addQueryView": {"uri": "/jaxrs/queryview/design", "method": "POST"},
   "updateQueryView": {"uri": "/jaxrs/queryview/design/{id}","method": "PUT"},
   "deleteQueryView": {"uri": "/jaxrs/queryview/design/{id}","method": "DELETE"},
-  "getQueryViewContent": {"uri": "/jaxrs/queryview/design/flag/{flag}"}, //获取QueryView内容.
+  "getQueryViewContent": {"uri": "/jaxrs/queryview/design/flag/{flag}"}, //QueryView 내용 조회.
   "loadQueryView": {"uri": "/jaxrs/queryview/design/flag/{flag}/simulate","method": "PUT"},
 
 
@@ -159,11 +159,11 @@
   "addDocument": {"uri" : "/jaxrs/document", "method": "POST"},
   "updateDocument" : {"uri":"/jaxrs/document","method":"POST"},
   "removeDocument" : {"uri":"/jaxrs/document/{id}","method": "DELETE"},
-  "publishDocument" : {"uri":"/jaxrs/document/publish/{id}","method":"PUT"},  //发布文档信息
-  "cancelPublishDocument" : {"uri":"/jaxrs/document/publish/{id}/cancel","method":"PUT"}, //取消发布文档信息
-  "archiveDocument" : {"uri":"/jaxrs/document/achive/{id}","method":"PUT"}, //归档文档信息
-  "redraftDocument" : {"uri":"/jaxrs/document/draft/{id}","method":"PUT"}, //恢复为草稿
-  "publishDocumentComplex" : {  "uri":"/jaxrs/document/publish/content","method":"PUT" },  //直接一次性发布
+  "publishDocument" : {"uri":"/jaxrs/document/publish/{id}","method":"PUT"},  //게시글 게시
+  "cancelPublishDocument" : {"uri":"/jaxrs/document/publish/{id}/cancel","method":"PUT"}, //게시글 게시 취소
+  "archiveDocument" : {"uri":"/jaxrs/document/achive/{id}","method":"PUT"}, //게시글 보관
+  "redraftDocument" : {"uri":"/jaxrs/document/draft/{id}","method":"PUT"}, //임시저장으로 되돌리기
+  "publishDocumentComplex" : {  "uri":"/jaxrs/document/publish/content","method":"PUT" },  //한 번에 바로 게시
   "moveDocumentToCategory" : { "uri" : "/jaxrs/document/category/change" , "method":"PUT" },
 
   //"getCategory" : {"uri":"/jaxrs/categoryinfo/{id}"},
@@ -253,7 +253,7 @@
   "listCategoryArchiveFilterAttribute": {"uri" : "/jaxrs/searchfilter/list/archive/filter/category/{categoryId}"},
 
   //---module---
-  "achiveDocument" : {"uri":"/jaxrs/document/achive/{id}","method":"PUT"}, //归档文档信息
+  "achiveDocument" : {"uri":"/jaxrs/document/achive/{id}","method":"PUT"}, //게시글 보관
 
   "importDocumentFormExcel": {"uri" : "/jaxrs/document/import/category/{categoryId}", "method": "POST", "enctype": "formData"},
   "deleteDocumentWithBatchName" :  {"uri":"/jaxrs/document/batch/{batchId}","method":"DELETE"},
@@ -264,7 +264,7 @@
   "getCategoryByAlias" : {"uri":"/jaxrs/categoryinfo/alias/{alias}"},
 
   //{  docIds : docIds, dataChanges : dataChanges }
-  "batchModifyData" :  {"uri":"/jaxrs/document/batch/data/modify","method":"PUT"}, //批量修改数据
+  "batchModifyData" :  {"uri":"/jaxrs/document/batch/data/modify","method":"PUT"}, //데이터 일괄 수정
 
   //评论
   "listCommentNextWithFilter" : {"uri":"/jaxrs/comment/list/{id}/next/{count}","method":"PUT"},

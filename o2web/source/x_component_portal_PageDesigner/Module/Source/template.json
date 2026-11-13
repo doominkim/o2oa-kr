@@ -6,11 +6,11 @@
     "sourceType": "o2",
     "httpMethod": "GET",
 
-	"first": "第一页",
-	"last": "最后一页",
+	"first": "처음",
+	"last": "마지막",
 	"pages": 8,
 	"jumper": false,
-	"jumperText": "到第{n}页",
+	"jumperText": "{n}페이지로 이동",
 	"pageSize": 10,
 
 	"defaultValue": {

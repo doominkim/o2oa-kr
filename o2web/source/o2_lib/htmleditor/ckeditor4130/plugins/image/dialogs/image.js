@@ -624,7 +624,7 @@
 								id: "browseLocal",
 								style: "display:inline-block;margin-bottom:4px;",
 								align: "center",
-								label: "选择本地图片",//c.lang.common.browseServer,
+								label: "로컬 이미지 선택",//c.lang.common.browseServer,
 								hidden: !( editor.config.reference && editor.config.referenceType ),
 								onClick: function (e) {
 									//var fileNode = document.getElementById("fckLocalFileUpload");
@@ -642,7 +642,7 @@
 											fileNode.addEvent("change", function(event){
 												var file= fileNode.files[0];
 												if(!/image\/\w+/.test(file.type)){           //判断获取的是否为图片文件
-													MWF.xDesktop.notice("请确保文件为图像文件","error");
+													MWF.xDesktop.notice("파일이 이미지 파일인지 확인하세요","error");
 													return false;
 												}
 												var reader=new FileReader();
@@ -687,13 +687,13 @@
 								id: "browseFiles",
 								style: "display:inline-block;margin-bottom:4px;",
 								align: "center",
-								label: "选择云文件图片",//c.lang.common.browseServer,
+								label: "클라우드 파일 이미지 선택",//c.lang.common.browseServer,
 								hidden: !0, //!( editor.config.reference && editor.config.referenceType ), //editor.config.filebrowserFilesImage ? !1 : !0, //!0,
 								onClick: function (e) {
 									MWF.xDesktop.requireApp("File", "FileSelector", function(){
 										( new MWF.xApplication.File.FileSelector( document.body ,{
 											"style" : "default",
-											"title": "选择云文件图片",
+											"title": "클라우드 파일 이미지 선택",
 											"reference" :  editor.config.reference,
 											"referenceType" : editor.config.referenceType,
 											"listStyle": "preview",
@@ -712,7 +712,7 @@
 								id: "browseDocumentAttachment",
 								style: "display:inline-block;margin-bottom:4px;",
 								align: "center",
-								label: "选择本文档图片",//c.lang.common.browseServer,
+								label: "이 문서의 이미지 선택",//c.lang.common.browseServer,
 								hidden: !0, //editor.config.filebrowserCurrentDocumentImage ? !1 : !0,
 								onClick: function (e) {
 									var txtUrlElement = this.getDialog().getContentElement("info", "txtUrl");
@@ -729,7 +729,7 @@
                             hidden: !editor.config.enablePreview,
                             id: "data-prv",
                             type: "checkbox",
-                            label: "允许浏览大图",
+                            label: "큰 이미지 보기 허용",
                             "default": true,
                             setup: function (type, element) {
                                 if (IMAGE == type) {
@@ -755,7 +755,7 @@
 								id: "base64enable",
 								type: "checkbox",
 								requiredContent: "img{src}",
-								label: "存为Base64编码",
+								label: "Base64로 인코딩해 저장",
 								setup: setupCheckbox,
 								commit: commitCheckbox
 							}]

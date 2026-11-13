@@ -188,9 +188,9 @@ MWF.xApplication.Minder.MainPc = new Class({
         var hourC = diffValue / hour;
         var minC = diffValue / minute;
         if (yesterday.getFullYear() == dateTimeStamp.getFullYear() && yesterday.getMonth() == dateTimeStamp.getMonth() && yesterday.getDate() == dateTimeStamp.getDate()) {
-            result = "昨天 " + dateTimeStamp.getHours() + ":" + dateTimeStamp.getMinutes();
+            result = "어제 " + dateTimeStamp.getHours() + ":" + dateTimeStamp.getMinutes();
         } else if (beforYesterday.getFullYear() == dateTimeStamp.getFullYear() && beforYesterday.getMonth() == dateTimeStamp.getMonth() && beforYesterday.getDate() == dateTimeStamp.getDate()) {
-            result = "前天 " + dateTimeStamp.getHours() + ":" + dateTimeStamp.getMinutes();
+            result = "그저께 " + dateTimeStamp.getHours() + ":" + dateTimeStamp.getMinutes();
         } else if (yearC > 1) {
             result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
         } else if (monthC >= 1) {
@@ -198,15 +198,15 @@ MWF.xApplication.Minder.MainPc = new Class({
             // s.getFullYear()+"年";
             result = dateTimeStamp.getFullYear() + "-" + (dateTimeStamp.getMonth() + 1) + "-" + dateTimeStamp.getDate();
         } else if (weekC >= 1) {
-            result = parseInt(weekC) + "周前";
+            result = parseInt(weekC) + "주 전";
         } else if (dayC >= 1) {
-            result = parseInt(dayC) + "天前";
+            result = parseInt(dayC) + "일 전";
         } else if (hourC >= 1) {
-            result = parseInt(hourC) + "小时前";
+            result = parseInt(hourC) + "시간 전";
         } else if (minC >= 1) {
-            result = parseInt(minC) + "分钟前";
+            result = parseInt(minC) + "분 전";
         } else
-            result = "刚刚";
+            result = "방금";
         return result;
     }
 });
@@ -259,7 +259,7 @@ MWF.xApplication.Minder.MainMobile = new Class({
         p.then((json)=>{
             var rootData = {
                 id : "root",
-                name : "根目录",
+                name : "루트 폴더",
                 orderNumber : "1",
                 description : "",
                 selected: true,
@@ -367,9 +367,9 @@ MWF.xApplication.Minder.MainMobile = new Class({
             }
         };
 
-        this.confirm("warn", event, "删除文件确认", `是否删除文件：${data.name}。`, 350, 120, function () {
+        this.confirm("warn", event, "파일 삭제 확인", `${data.name} 파일을 삭제하시겠습니까?`, 350, 120, function () {
             o2.Actions.load('x_mind_assemble_control').MindInfoAction.destoryFromNormal(data.id, ()=> {
-                _self.notice("成功删除文件。");
+                _self.notice("파일을 삭제했습니다.");
                 _self.loadList();
             });
             this.close();

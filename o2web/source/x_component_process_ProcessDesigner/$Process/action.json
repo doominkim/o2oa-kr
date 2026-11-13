@@ -2,39 +2,39 @@
   "default": [
     {
       "icon": "router.png",
-      "text": "创建路由",
+      "text": "경로 만들기",
       "action": "quickCreateRouter"
     },
     {
       "icon": "copy.png",
-      "text": "拷贝活动",
+      "text": "활동 복사",
       "action": "quickCopyActivity"
     },
     {
       "icon": "delete.png",
-      "text": "删除活动",
+      "text": "활동 삭제",
       "action": "quickDeletActivity"
     },
     {
       "icon": "parallel.png",
-      "text": "创建并行活动",
+      "text": "병렬 활동 만들기",
       "action": "quickParallelActivity"
     },
     {
       "icon": "series.png",
-      "text": "创建串行活动",
+      "text": "순차 활동 만들기",
       "action": "quickSeriesActivity"
     }
   ],
   "manual": [
     {
       "icon": "form.png",
-      "text": "设置表单",
+      "text": "양식 설정",
       "action": "quickSetForm"
     },
     {
       "icon": "target.png",
-      "text": "设置处理人",
+      "text": "처리자 설정",
       "action": "quickSetTask"
     }
   ],

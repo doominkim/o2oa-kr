@@ -34,11 +34,11 @@
 
   ///////////////////////////////////////////////新的组织//////////////////////////////////
   //data: {"personList": []}
-  "listIdentityWithPerson": {"uri": "/jaxrs/identity/list/person/object", "method": "POST"}, //查询人员的身份对象
+  "listIdentityWithPerson": {"uri": "/jaxrs/identity/list/person/object", "method": "POST"}, //사용자의 소속 객체 조회
   //data: {"identityList":[]}
-  "listUnitWithIdentity": {"uri": "/jaxrs/unit/list/identity/object", "method": "POST"}, //获取身份所在的组织
+  "listUnitWithIdentity": {"uri": "/jaxrs/unit/list/identity/object", "method": "POST"}, //소속이 속한 조직 조회
   //data: {"identityList":[]}
-  "listWithIdentityObject": {"uri": "/jaxrs/person/list/identity/object", "method": "POST"}, //获取身份对应的人员
+  "listWithIdentityObject": {"uri": "/jaxrs/person/list/identity/object", "method": "POST"}, //소속에 해당하는 사용자 조회
 
   //data:{"name":"部门正值","unit":"xxxx@0458bd06-00c7-448a-9ca1-f9178d4b2234@U"}
   "getUnitDuty":{"uri":"/jaxrs/unitduty/list/identity/unit/name","method":"POST"},
@@ -145,8 +145,8 @@
   "saveCategory" : {"uri" : "/jaxrs/okrconfigworktype","method" : "POST"},
   "getCategory" : {"uri" : "/jaxrs/okrconfigworktype/{id}","method":"GET"},
   "listCategoryAll" : {"uri" : "/jaxrs/okrconfigworktype/all"},
-  "getCategoryCountAll" : {"uri" : "/jaxrs/okrconfigworktype/countAll","method":"GET"},  //查询所有工作类别信息并且统计中心工作数量（统计所有中心工作）
-  "getCategoryMyCountAll" : {"uri" : "/jaxrs/okrconfigworktype/my/countAll","method":"GET"},  //查询所有工作类别信息并且统计中心工作数量（带权限）
+  "getCategoryCountAll" : {"uri" : "/jaxrs/okrconfigworktype/countAll","method":"GET"},  //모든 업무 유형 정보 조회 및 중심 업무 수 집계(모든 중심 업무 집계)
+  "getCategoryMyCountAll" : {"uri" : "/jaxrs/okrconfigworktype/my/countAll","method":"GET"},  //모든 업무 유형 정보 조회 및 중심 업무 수 집계(권한 적용)
 
   "listAttachment" : {"uri":"/jaxrs/okrattachmentfileinfo/list/work/{documentid}"},
   "getAttachment": {"uri": "/jaxrs/okrattachmentfileinfo/{id}"},

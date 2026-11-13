@@ -167,7 +167,7 @@ MWF.xApplication.AI.Knowledge = new Class({
     },
     sync : function (){
         this.action.IndexAction.syncToKnowledge(function (json) {
-            $OOUI.notice.warn(this.lp.common.tip, "同步中，请耐心等待");
+            $OOUI.notice.warn(this.lp.common.tip, "동기화 중입니다. 잠시 기다려 주세요");
             this.syncBtn.set("disabled",true);
             this.refresh();
         }.bind(this));

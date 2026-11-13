@@ -2,7 +2,7 @@
   "pcData": {
     "json": {
       "id": "",
-      "name": "数据录入表单",
+      "name": "데이터 입력 양식",
       "type": "Form",
       "mode": "PC",
       "description": "",
@@ -288,7 +288,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "录入人：",
+          "text": "입력자: ",
           "script": {
             "code": "",
             "html": ""
@@ -422,7 +422,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "录入时间：",
+          "text": "입력 일시: ",
           "script": {
             "code": "",
             "html": ""
@@ -714,7 +714,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "标题：",
+          "text": "제목: ",
           "script": {
             "code": "",
             "html": ""
@@ -988,7 +988,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "描述：",
+          "text": "설명: ",
           "script": {
             "code": "",
             "html": ""
@@ -1762,7 +1762,7 @@
           "description": "",
           "valueType": "text",
           "hiddenCondition": "none",
-          "text": "日期：",
+          "text": "날짜: ",
           "script": {
             "code": "",
             "html": ""
@@ -1913,7 +1913,7 @@
           "description": "",
           "valueType": "text",
           "hiddenCondition": "none",
-          "text": "地点：",
+          "text": "장소: ",
           "script": {
             "code": "",
             "html": ""
@@ -2058,21 +2058,21 @@
       },
       "fieldList": {},
       "formStyleType": "blue-simple",
-      "applicationName": "新表单测试"
+      "applicationName": "새 양식 테스트"
     },
-    "html": "<div id=\"93455de0-9955-4d5f-a520-829d303404cb\" mwftype=\"form\"><div id=\"div\" mwftype=\"div\"><div id=\"actionbar\" mwftype=\"actionbar\"><div><div title=\"关闭文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close_over.png\" MWFButtonAction=\"closeDocument\" MWFButtonText=\"关闭\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\"></span><span>关闭</span></div><div title=\"编辑文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit_over.png\" MWFButtonAction=\"editDocument\" MWFButtonText=\"编辑\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\"></span><span>编辑</span></div><div title=\"保存文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save_over.png\" MWFButtonAction=\"saveDocument\" MWFButtonText=\"保存\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\"></span><span>保存</span></div><div title=\"发布文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit_over.png\" MWFButtonAction=\"publishDocument\" MWFButtonText=\"发布\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\"></span><span>发布</span></div><div title=\"设置热点\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular_over.png\" MWFButtonAction=\"setPopularDocument\" MWFButtonText=\"设置热点\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\"></span><span>设置热点</span></div><div title=\"删除文件\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del_over.png\" MWFButtonAction=\"deleteDocument\" MWFButtonText=\"删除\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\"></span><span>删除</span></div></div></div><div id=\"label\" mwftype=\"label\">(C)Text</div><div id=\"table\" mwftype=\"table\"><table width=\"100%\" align=\"center\" border=\"0\" cellspacing=\"5\" cellpadding=\"3\"><tbody><tr><td id=\"table_table$Td_2\" mwftype=\"table$Td\"><div id=\"label_1\" mwftype=\"label\">录入人：</div></td><td id=\"table_table$Td_3\" mwftype=\"table$Td\"><div id=\"label_2\" mwftype=\"label\">(C)Text</div></td><td id=\"table_table$Td_4\" mwftype=\"table$Td\"><div id=\"label_1_1\" mwftype=\"label\">录入时间：</div></td><td id=\"table_table$Td_5\" mwftype=\"table$Td\"><div id=\"label_2_1\" mwftype=\"label\">(C)Text</div></td></tr><tr><td id=\"table_table$Td\" mwftype=\"table$Td\"><div id=\"label_3\" mwftype=\"label\">标题：</div></td><td id=\"table_table$Td_1\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"subject\" mwftype=\"textfield\"><div></div><div>subject</div></div></td></tr><tr><td id=\"table_table$Td_6\" mwftype=\"table$Td\"><div id=\"label_4\" mwftype=\"label\">日期：</div></td><td id=\"table_table$Td_7\" mwftype=\"table$Td\"><div id=\"calendar\" mwftype=\"calendar\"><div></div><div>calendar</div></div></td><td id=\"table_table$Td_8\" mwftype=\"table$Td\"><div id=\"label_5\" mwftype=\"label\">地点：</div></td><td id=\"table_table$Td_9\" mwftype=\"table$Td\"><div id=\"address\" mwftype=\"textfield\"><div></div><div>address</div></div></td></tr><tr><td id=\"table_table$Td_16\" mwftype=\"table$Td\"><div id=\"label_10\" mwftype=\"label\">描述：</div></td><td id=\"table_table$Td_17\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"explain\" mwftype=\"textarea\"><div></div><div>explain</div></div></td></tr></tbody></table></div><div id=\"attachment\" mwftype=\"itmleditor\"><div><div><div><div><div title=\"上传\"><div></div></div><div title=\"删除\"><div></div></div><div title=\"替换\"><div></div></div><div></div><div title=\"下载\"><div></div></div></div></div><div><div><div title=\"列表\"><div></div></div><div title=\"图标\"><div></div></div><div title=\"预览\"><div></div></div></div></div><div><div><div title=\"简洁模式\"><div></div></div></div></div></div><div class=\"contentScrollNode\"><div class=\"content\"></div></div><div><div></div></div></div></div><div id=\"actionbar_1\" mwftype=\"actionbar\"><div><div title=\"关闭文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close_over.png\" MWFButtonAction=\"closeDocument\" MWFButtonText=\"关闭\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\"></span><span>关闭</span></div><div title=\"编辑文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit_over.png\" MWFButtonAction=\"editDocument\" MWFButtonText=\"编辑\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\"></span><span>编辑</span></div><div title=\"保存文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save_over.png\" MWFButtonAction=\"saveDocument\" MWFButtonText=\"保存\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\"></span><span>保存</span></div><div title=\"发布文档\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit_over.png\" MWFButtonAction=\"publishDocument\" MWFButtonText=\"发布\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\"></span><span>发布</span></div><div title=\"设置热点\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular_over.png\" MWFButtonAction=\"setPopularDocument\" MWFButtonText=\"设置热点\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\"></span><span>设置热点</span></div><div title=\"删除文件\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del_over.png\" MWFButtonAction=\"deleteDocument\" MWFButtonText=\"删除\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\"></span><span>删除</span></div></div></div></div></div>",
+    "html": "<div id=\"93455de0-9955-4d5f-a520-829d303404cb\" mwftype=\"form\"><div id=\"div\" mwftype=\"div\"><div id=\"actionbar\" mwftype=\"actionbar\"><div><div title=\"게시글 닫기\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close_over.png\" MWFButtonAction=\"closeDocument\" MWFButtonText=\"닫기\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\"></span><span>닫기</span></div><div title=\"게시글 편집\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit_over.png\" MWFButtonAction=\"editDocument\" MWFButtonText=\"편집\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\"></span><span>편집</span></div><div title=\"게시글 저장\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save_over.png\" MWFButtonAction=\"saveDocument\" MWFButtonText=\"저장\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\"></span><span>저장</span></div><div title=\"게시글 게시\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit_over.png\" MWFButtonAction=\"publishDocument\" MWFButtonText=\"게시\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\"></span><span>게시</span></div><div title=\"인기 게시글 설정\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular_over.png\" MWFButtonAction=\"setPopularDocument\" MWFButtonText=\"인기 게시글 설정\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\"></span><span>인기 게시글 설정</span></div><div title=\"파일 삭제\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del_over.png\" MWFButtonAction=\"deleteDocument\" MWFButtonText=\"삭제\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\"></span><span>삭제</span></div></div></div><div id=\"label\" mwftype=\"label\">(C)Text</div><div id=\"table\" mwftype=\"table\"><table width=\"100%\" align=\"center\" border=\"0\" cellspacing=\"5\" cellpadding=\"3\"><tbody><tr><td id=\"table_table$Td_2\" mwftype=\"table$Td\"><div id=\"label_1\" mwftype=\"label\">입력자: </div></td><td id=\"table_table$Td_3\" mwftype=\"table$Td\"><div id=\"label_2\" mwftype=\"label\">(C)Text</div></td><td id=\"table_table$Td_4\" mwftype=\"table$Td\"><div id=\"label_1_1\" mwftype=\"label\">입력 일시: </div></td><td id=\"table_table$Td_5\" mwftype=\"table$Td\"><div id=\"label_2_1\" mwftype=\"label\">(C)Text</div></td></tr><tr><td id=\"table_table$Td\" mwftype=\"table$Td\"><div id=\"label_3\" mwftype=\"label\">제목: </div></td><td id=\"table_table$Td_1\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"subject\" mwftype=\"textfield\"><div></div><div>subject</div></div></td></tr><tr><td id=\"table_table$Td_6\" mwftype=\"table$Td\"><div id=\"label_4\" mwftype=\"label\">날짜: </div></td><td id=\"table_table$Td_7\" mwftype=\"table$Td\"><div id=\"calendar\" mwftype=\"calendar\"><div></div><div>calendar</div></div></td><td id=\"table_table$Td_8\" mwftype=\"table$Td\"><div id=\"label_5\" mwftype=\"label\">장소: </div></td><td id=\"table_table$Td_9\" mwftype=\"table$Td\"><div id=\"address\" mwftype=\"textfield\"><div></div><div>address</div></div></td></tr><tr><td id=\"table_table$Td_16\" mwftype=\"table$Td\"><div id=\"label_10\" mwftype=\"label\">설명: </div></td><td id=\"table_table$Td_17\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"explain\" mwftype=\"textarea\"><div></div><div>explain</div></div></td></tr></tbody></table></div><div id=\"attachment\" mwftype=\"itmleditor\"><div><div><div><div><div title=\"업로드\"><div></div></div><div title=\"삭제\"><div></div></div><div title=\"바꾸기\"><div></div></div><div></div><div title=\"다운로드\"><div></div></div></div></div><div><div><div title=\"목록\"><div></div></div><div title=\"아이콘\"><div></div></div><div title=\"미리보기\"><div></div></div></div></div><div><div><div title=\"간결 모드\"><div></div></div></div></div></div><div class=\"contentScrollNode\"><div class=\"content\"></div></div><div><div></div></div></div></div><div id=\"actionbar_1\" mwftype=\"actionbar\"><div><div title=\"게시글 닫기\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close_over.png\" MWFButtonAction=\"closeDocument\" MWFButtonText=\"닫기\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/close.png\"></span><span>닫기</span></div><div title=\"게시글 편집\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit_over.png\" MWFButtonAction=\"editDocument\" MWFButtonText=\"편집\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/edit.png\"></span><span>편집</span></div><div title=\"게시글 저장\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save_over.png\" MWFButtonAction=\"saveDocument\" MWFButtonText=\"저장\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/save.png\"></span><span>저장</span></div><div title=\"게시글 게시\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit_over.png\" MWFButtonAction=\"publishDocument\" MWFButtonText=\"게시\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/submit.png\"></span><span>게시</span></div><div title=\"인기 게시글 설정\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular_over.png\" MWFButtonAction=\"setPopularDocument\" MWFButtonText=\"인기 게시글 설정\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/popular.png\"></span><span>인기 게시글 설정</span></div><div title=\"파일 삭제\" MWFnodetype=\"MWFToolBarButton\" MWFButtonImage=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\" MWFButtonImageOver=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del_over.png\" MWFButtonAction=\"deleteDocument\" MWFButtonText=\"삭제\"><span><img src=\"../x_component_cms_FormDesigner/Module/Actionbar/default/tools/xform_blue_simple/del.png\"></span><span>삭제</span></div></div></div></div></div>",
     "id": "",
     "isNewForm": true
   },
   "mobileData": {
     "json": {
       "id": "",
-      "name": "数据录入表单",
+      "name": "데이터 입력 양식",
       "type": "Form",
       "mode": "Mobile",
       "description": "",
       "application": "",
-      "applicationName": "新表单测试",
+      "applicationName": "새 양식 테스트",
       "styles": {
         "background-color": "#f0f0f0"
       },
@@ -2353,7 +2353,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "录入人：",
+          "text": "입력자: ",
           "script": {
             "code": "",
             "html": ""
@@ -2487,7 +2487,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "录入时间：",
+          "text": "입력 일시: ",
           "script": {
             "code": "",
             "html": ""
@@ -2784,7 +2784,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "标题：",
+          "text": "제목: ",
           "script": {
             "code": "",
             "html": ""
@@ -3058,7 +3058,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "描述：",
+          "text": "설명: ",
           "script": {
             "code": "",
             "html": ""
@@ -3835,7 +3835,7 @@
           "description": "",
           "valueType": "text",
           "hiddenCondition": "none",
-          "text": "日期：",
+          "text": "날짜: ",
           "script": {
             "code": "",
             "html": ""
@@ -3986,7 +3986,7 @@
           "description": "",
           "valueType": "text",
           "hiddenCondition": "none",
-          "text": "地点：",
+          "text": "장소: ",
           "script": {
             "code": "",
             "html": ""
@@ -4132,7 +4132,7 @@
       "fieldList": {},
       "formStyleType": "defaultMobile"
     },
-    "html": "<div id=\"93455de0-9955-4d5f-a520-829d303404cb_undefined\" mwftype=\"form\"><div id=\"div\" mwftype=\"div\"><div id=\"actionbar\" mwftype=\"actionbar\">移动端不支持此组件(actionbar)</div><div id=\"label\" mwftype=\"label\">(C)Text</div><div id=\"table\" mwftype=\"table\"><table width=\"90%\" align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\"><tbody><tr><td id=\"table_table$Td_2\" mwftype=\"table$Td\"><div id=\"label_1\" mwftype=\"label\">录入人：</div></td><td id=\"table_table$Td_3\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"label_2\" mwftype=\"label\">(C)Text</div></td></tr><tr><td id=\"table_table$Td_4\" mwftype=\"table$Td\"><div id=\"label_1_1\" mwftype=\"label\">录入时间：</div></td><td id=\"table_table$Td_5\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"label_2_1\" mwftype=\"label\">(C)Text</div></td></tr><tr><td id=\"table_table$Td\" mwftype=\"table$Td\"><div id=\"label_3\" mwftype=\"label\">标题：</div></td><td id=\"table_table$Td_1\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"subject\" mwftype=\"textfield\"><div></div><div>subject</div></div></td></tr><tr><td id=\"table_table$Td_6\" mwftype=\"table$Td\"><div id=\"label_4\" mwftype=\"label\">日期：</div></td><td id=\"table_table$Td_7\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"calendar\" mwftype=\"calendar\"><div></div><div>calendar</div></div></td></tr><tr><td id=\"table_table$Td_8\" mwftype=\"table$Td\"><div id=\"label_5\" mwftype=\"label\">地点：</div></td><td id=\"table_table$Td_9\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"address\" mwftype=\"textfield\"><div></div><div>address</div></div></td></tr><tr><td id=\"table_table$Td_16\" mwftype=\"table$Td\"><div id=\"label_10\" mwftype=\"label\">描述：</div></td><td id=\"table_table$Td_17\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"explain\" mwftype=\"textarea\"><div></div><div>explain</div></div></td></tr></tbody></table></div><div id=\"attachment\" mwftype=\"itmleditor\"><div><div><div><div><div title=\"上传\"><div></div></div><div title=\"删除\"><div></div></div><div title=\"替换\"><div></div></div><div></div><div title=\"下载\"><div></div></div></div></div><div><div><div title=\"列表\"><div></div></div><div title=\"图标\"><div></div></div><div title=\"预览\"><div></div></div></div></div><div><div><div title=\"简洁模式\"><div></div></div></div></div></div><div class=\"contentScrollNode\"><div class=\"content\"></div></div><div><div></div></div></div></div><div id=\"actionbar_1\" mwftype=\"actionbar\">移动端不支持此组件(actionbar)</div></div></div>",
+    "html": "<div id=\"93455de0-9955-4d5f-a520-829d303404cb_undefined\" mwftype=\"form\"><div id=\"div\" mwftype=\"div\"><div id=\"actionbar\" mwftype=\"actionbar\">모바일에서는 이 구성요소를 지원하지 않습니다(actionbar)</div><div id=\"label\" mwftype=\"label\">(C)Text</div><div id=\"table\" mwftype=\"table\"><table width=\"90%\" align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\"><tbody><tr><td id=\"table_table$Td_2\" mwftype=\"table$Td\"><div id=\"label_1\" mwftype=\"label\">입력자: </div></td><td id=\"table_table$Td_3\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"label_2\" mwftype=\"label\">(C)Text</div></td></tr><tr><td id=\"table_table$Td_4\" mwftype=\"table$Td\"><div id=\"label_1_1\" mwftype=\"label\">입력 일시: </div></td><td id=\"table_table$Td_5\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"label_2_1\" mwftype=\"label\">(C)Text</div></td></tr><tr><td id=\"table_table$Td\" mwftype=\"table$Td\"><div id=\"label_3\" mwftype=\"label\">제목: </div></td><td id=\"table_table$Td_1\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"subject\" mwftype=\"textfield\"><div></div><div>subject</div></div></td></tr><tr><td id=\"table_table$Td_6\" mwftype=\"table$Td\"><div id=\"label_4\" mwftype=\"label\">날짜: </div></td><td id=\"table_table$Td_7\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"calendar\" mwftype=\"calendar\"><div></div><div>calendar</div></div></td></tr><tr><td id=\"table_table$Td_8\" mwftype=\"table$Td\"><div id=\"label_5\" mwftype=\"label\">장소: </div></td><td id=\"table_table$Td_9\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"address\" mwftype=\"textfield\"><div></div><div>address</div></div></td></tr><tr><td id=\"table_table$Td_16\" mwftype=\"table$Td\"><div id=\"label_10\" mwftype=\"label\">설명: </div></td><td id=\"table_table$Td_17\" rowspan=\"1\" colspan=\"3\" mwftype=\"table$Td\"><div id=\"explain\" mwftype=\"textarea\"><div></div><div>explain</div></div></td></tr></tbody></table></div><div id=\"attachment\" mwftype=\"itmleditor\"><div><div><div><div><div title=\"업로드\"><div></div></div><div title=\"삭제\"><div></div></div><div title=\"바꾸기\"><div></div></div><div></div><div title=\"다운로드\"><div></div></div></div></div><div><div><div title=\"목록\"><div></div></div><div title=\"아이콘\"><div></div></div><div title=\"미리보기\"><div></div></div></div></div><div><div><div title=\"간결 모드\"><div></div></div></div></div></div><div class=\"contentScrollNode\"><div class=\"content\"></div></div><div><div></div></div></div></div><div id=\"actionbar_1\" mwftype=\"actionbar\">모바일에서는 이 구성요소를 지원하지 않습니다(actionbar)</div></div></div>",
     "id": "",
     "isNewForm": true
   }

@@ -73,12 +73,12 @@ MWF.xApplication.process.ProcessManager.widget.ApplicationSelector = new Class({
     loadAction: function(){
         this.cancelActionNode = new Element("button", {
             "styles": this.css.cancelActionNode,
-            "text": "取 消"
+            "text": "취소"
         }).inject(this.actionNode);
 
         this.okActionNode = new Element("button", {
             "styles": this.css.okActionNode,
-            "text": "确　定"
+            "text": "확인"
         }).inject(this.actionNode);
 
         this.okActionNode.addEvent("click", function(){

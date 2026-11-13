@@ -1,0 +1,12 @@
+{
+  "o2web/source/x_component_ForumPerson/$Main/default/listItem.json": [
+    {
+      "text": "\"condition\": \"function( d ){ return (d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && this.isAdmin() || (d.creatorName == this.app.userName) }\",",
+      "reason": "typeCategory 비교값 '投票'은 서버에 저장된 게시물 유형 코드라 유지"
+    },
+    {
+      "text": "\"show\": \"function( d ){ return false; return !((d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.isAdmin() || (d.creatorName == this.app.userName))) }\"",
+      "reason": "typeCategory 비교값 '投票'은 서버에 저장된 게시물 유형 코드라 유지"
+    }
+  ]
+}

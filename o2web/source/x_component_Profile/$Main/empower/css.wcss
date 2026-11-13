@@ -38,7 +38,7 @@
     "overflow" : "hidden",
     "text-overflow" : "ellipsis",
     "white-space":"nowrap",
-    "font-family": "MicrosoftYaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "16px",
     "color": "#333333"
   },
@@ -117,7 +117,7 @@
     "margin": "auto",
     "font-size": "14px",
     "color": "#666",
-    "font-family": "Microsoft YaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "overflow" : "hidden",
     "position" : "relative"
   },
@@ -182,7 +182,7 @@
     "float" : "right",
     "color" : "#FFFFFF",
     "font-size" : "16px",
-    "font-family": "MicrosoftYaHei"
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif"
 
   },
   "formCancelActionNode" : {
@@ -198,7 +198,7 @@
     "float" : "right",
     "color" : "#666666",
     "font-size" : "16px",
-    "font-family": "MicrosoftYaHei"
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif"
   },
   "colorNode" : {
     "float" : "left",
@@ -249,7 +249,7 @@
     "margin": "0 5px 10px 0",
     "padding": "0 5px",
     "background-color": "white",
-    "font-family": "MicrosoftYaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "cursor": "pointer"
     },
     "inputTimeUnformatWidth" : {
@@ -266,7 +266,7 @@
     "margin": "0 0 10px 5px",
     "padding": "0 5px",
     "background-color": "white",
-    "font-family": "MicrosoftYaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "cursor": "pointer"
     },
     "inputPerson" : {
@@ -279,7 +279,7 @@
     "line-height": "36px",
     "background-color": "#FFFFFF",
     "color": "#666666",
-    "font-family": "MicrosoftYaHei",
+    "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
     "font-size": "14px",
     "margin": "0 0 10px 0",
     "padding": "0 5px",
@@ -411,7 +411,7 @@
       "margin-bottom": "10px",
       "color": "#333333",
       "float": "left",
-      "font-family": "MicrosoftYaHei"
+      "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif"
     },
     "formTableTitle2" : {
     "color" : "#333",

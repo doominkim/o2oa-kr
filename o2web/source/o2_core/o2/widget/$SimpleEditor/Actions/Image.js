@@ -65,7 +65,7 @@ o2.widget.SimpleEditor.Actions.Image = new Class({
         html += "  <table width='100%' style='padding:2px;'>";
         html += "    <tr>";
         html += "       <td width='50' style='padding:2px;'>"
-        html += "         <span style='font-size:12px;color:#888;'>图片地址</span>"
+        html += "         <span style='font-size:12px;color:#888;'>이미지 주소</span>"
         html += "      </td>"
         html += "      <td width='210' style='padding:2px;'>"
         html += "         <input type='text' style='width:200px;border:1px solid #ccc;font-size:12px;' name='webImage' id='webImage' value='http://'>"
@@ -73,19 +73,19 @@ o2.widget.SimpleEditor.Actions.Image = new Class({
         html += "    </tr>";
         html += "    <tr>";
         html += "       <td width='50' style='padding:2px;'>"
-        html += "         <span style='font-size:12px;color:#888;'>图片大小</span>"
+        html += "         <span style='font-size:12px;color:#888;'>이미지 크기</span>"
         html += "      </td>"
         html += "      <td width='210' style='padding:2px;'>"
-        html += "         <label style='font-size:12px;color:#888;display:inline-block;'>宽</label>"
+        html += "         <label style='font-size:12px;color:#888;display:inline-block;'>너비</label>"
         html += "         <input type='text' style='width:40px;border:1px solid #ccc;font-size:12px;display:inline-block;' name='imageWidth' id='imageWidth' value=''>"
-        html += "         <label style='font-size:12px;color:#888;display:inline-block;'>高</label>"
+        html += "         <label style='font-size:12px;color:#888;display:inline-block;'>높이</label>"
         html += "         <input type='text' style='width:40px;border:1px solid #ccc;font-size:12px;display:inline-block;' name='imageHeight' id='imageHeight' value=''>"
-        html += "         <image src='" + o2.session.path + "/widget/$SimpleEditor/default/img/refresh.png' style='cursor:pointer;' id='imageRefresh' title='重置大小'>"
+        html += "         <image src='" + o2.session.path + "/widget/$SimpleEditor/default/img/refresh.png' style='cursor:pointer;' id='imageRefresh' title='크기 초기화'>"
         html += "      </td>"
         html += "    </tr>";
         html += "    <tr>";
         html += "       <td width='50' style='padding:2px;'>"
-        html += "         <span style='font-size:12px;color:#888;'>图片说明</span>"
+        html += "         <span style='font-size:12px;color:#888;'>이미지 설명</span>"
         html += "      </td>"
         html += "      <td width='210' style='padding:2px;'>"
         html += "         <input type='text' style='width:200px;border:1px solid #ccc;font-size:12px;' name='imageTitle' id='imageTitle' value=''>"

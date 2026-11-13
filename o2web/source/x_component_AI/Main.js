@@ -370,7 +370,7 @@ MWF.xApplication.AI.Main = new Class({
                                     </div> 
                                     <div class="references-section">
                                          <div class="references-title">
-                                            <i class="ooicon-canyue"></i>参考资料
+                                            <i class="ooicon-canyue"></i>참고 자료
                                          </div>
                                         <div class="reference-grid">
                                     </div>
@@ -405,7 +405,7 @@ MWF.xApplication.AI.Main = new Class({
                                     <div class="ref-favicon hide">W</div>
                                     <div class="ref-info">
                                         <div class="ref-title">${ragDoc.title}</div>
-                                        <div class="ref-source">${ragDoc.documentMode === "embed"?"知识库":"问答"}</div>
+                                        <div class="ref-source">${ragDoc.documentMode === "embed"?"지식 베이스":"질의응답"}</div>
                                     </div>`;
                                 referenceItem.set("html",referenceHtml);
 
@@ -632,13 +632,13 @@ MWF.xApplication.AI.Main = new Class({
               <div class="aitype"></div>
               <div class="msg-container">
                   <div class="reasoning">
-                    <div class="reasoning-tool" ><i class="ooicon-zhankai"></i><span>深度思考</span> </div>
+                    <div class="reasoning-tool" ><i class="ooicon-zhankai"></i><span>심층 추론</span> </div>
                     <div class="reasoning-content"></div>
                    </div>
                   <div class="markdown-body"></div>
                   <div class="references-section">
                      <div class="references-title">
-                        <i class="ooicon-canyue"></i>参考资料
+                        <i class="ooicon-canyue"></i>참고 자료
                      </div>
                     <div class="reference-grid">
                     </div>
@@ -787,7 +787,7 @@ MWF.xApplication.AI.Main = new Class({
 
                             if(messageType === "extend.toolCall"){
 
-                                loadingNode.getElement(".shining-animation").getFirst().set("text","正在调用工具" + parsed.name)
+                                loadingNode.getElement(".shining-animation").getFirst().set("text","도구 호출 중: " + parsed.name)
                                 loadingNode.show();
 
 
@@ -805,7 +805,7 @@ MWF.xApplication.AI.Main = new Class({
                                     <div class="ref-favicon hide">W</div>
                                     <div class="ref-info">
                                         <div class="ref-title">${parsed.title}</div>
-                                        <div class="ref-source">${parsed.documentMode === "embed"?"知识库":"问答"}</div>
+                                        <div class="ref-source">${parsed.documentMode === "embed"?"지식 베이스":"질의응답"}</div>
                                     </div>`;
                                 referenceItem.set("html",referenceHtml);
 
@@ -852,7 +852,7 @@ MWF.xApplication.AI.Main = new Class({
 
                                 if(reasoning_content){
 
-                                    loadingNode.getElement(".shining-animation").getFirst().set("text","深度思考中")
+                                    loadingNode.getElement(".shining-animation").getFirst().set("text","심층 추론 중")
                                     loadingNode.show();
 
                                     reasoningNode.show();

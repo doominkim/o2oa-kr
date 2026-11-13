@@ -102,7 +102,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
         }
         this.createNode();
         this.getData( function(){
-            var name = this.data.name || this.options.title || "新建脑图";
+            var name = this.data.name || this.options.title || "새 마인드맵";
             name = name.length > 30 ? name.substr(0,30) : name;
             this.setTitle( name );
             this.loadApplicationContent();
@@ -431,19 +431,19 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
         return status;
     },
     startAutoSave : function(){
-        this.notice("开启自动保存");
+        this.notice("자동 저장을 켰습니다");
         this.autoSave = true;
         this.autosaveInterval = setInterval( function(){
             if( this.updateTime ){
                 if( !this.saveTime || this.saveTime < this.updateTime ){
-                    this.save( "自动保存成功" );
+                    this.save( "자동 저장했습니다" );
                     this.saveTime = this.updateTime.clone();
                 }
             }
         }.bind(this), this.autoSaveInter )
     },
     stopAutoSave : function(){
-        this.notice("关闭自动保存");
+        this.notice("자동 저장을 껐습니다");
         this.autoSave = false;
         if( this.autosaveInterval ){
             clearInterval( this.autosaveInterval );
@@ -470,7 +470,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
                     formData.append('site', id);
 
                     //this.restActions.uploadMindIcon( id, 180, function(){
-                    //    this.notice( "另存成功" );
+                    //    this.notice( "다른 이름으로 저장했습니다" );
                     //}.bind(this), null,formData, img, false )
 
                     MWF.xDesktop.uploadImage( id, "mindInfo", formData, img,
@@ -478,19 +478,19 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
                             data.id = id;
                             data.icon = json3.data.id;
                             this.restActions.saveMind( data, function(json4){
-                                this.notice( "另存成功" );
+                                this.notice( "다른 이름으로 저장했습니다" );
                             }.bind(this))
                         }.bind(this)
                     );
 
                 }.bind(this), function(){
-                    this.notice( "另存成功，但由于脑图中有外网图片，浏览器无法生成缩略图" );
+                    this.notice( "다른 이름으로 저장했지만, 마인드맵에 외부 이미지가 있어 브라우저에서 썸네일을 만들 수 없습니다" );
                 }.bind(this))
             }.bind(this))
         }.bind(this));
     },
     setNewName: function( newname ){
-        this.save( "重命名成功", newname, null )
+        this.save( "이름을 바꿨습니다", newname, null )
     },
     save: function ( noticetText, newName , folder) {
         var content = this.minder.exportJson();
@@ -499,7 +499,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
 
         var callback_save = function(id, flag, toPngFail){
             this.data.content = contentStr;
-            var text = toPngFail ? "另存成功，但由于脑图中有外网图片，浏览器无法生成缩略图" : "保存成功";
+            var text = toPngFail ? "다른 이름으로 저장했지만, 마인드맵에 외부 이미지가 있어 브라우저에서 썸네일을 만들 수 없습니다" : "저장했습니다";
             this.restActions.saveMind( this.data, function(json4){
                 if( flag ){
                     this.restActions.getMind( id, function( json5 ){
@@ -525,7 +525,7 @@ MWF.xApplication.MinderEditor.MainPc = new Class({
 
                 //this.restActions.uploadMindIcon( id, 180, function(){
                 //    if( newName )this.setTitle(newName);
-                //    this.notice( noticetText || "保存成功" );
+                //    this.notice( noticetText || "저장했습니다" );
                 //}.bind(this), null,formData, img, false )
 
                 MWF.xDesktop.uploadImage( id, "mindInfo", formData, img,
@@ -667,7 +667,7 @@ MWF.xApplication.MinderEditor.MainMobile = new Class({
         }
         this.createNode();
         this.getData( function(){
-            var name = this.data.name || this.options.title || "新建脑图";
+            var name = this.data.name || this.options.title || "새 마인드맵";
             name = name.length > 30 ? name.substr(0,30) : name;
             this.setTitle( name );
             this.loadApplicationContent();

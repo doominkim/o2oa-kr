@@ -1,0 +1,14 @@
+{
+  "o2web/source/x_component_Template/$Explorer/complexListItem2.json": [
+    {
+      "text": "\"sectionStatus\": { \"styles\" : \"function(d){ return d.sectionStatus == '启用' ? {'color':'green'} : {'color':'#845a5a'} }\" },",
+      "reason": "서버(BBSSectionInfoFactory)가 저장·비교하는 섹션 상태 값 '启用'과 비교"
+    }
+  ],
+  "o2web/source/x_component_cms_Column/Main.js": [
+    {
+      "text": "模板",
+      "reason": "서버 제공 양식 템플릿 이름에서 '模板' 접미어를 제거하는 문자열 처리 값"
+    }
+  ]
+}

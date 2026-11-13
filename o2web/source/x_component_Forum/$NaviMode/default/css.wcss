@@ -6,7 +6,7 @@
 		"float" : "left",
 		"width" : "160px",
 		"color" : "#333",
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"font-size": "14px",
 		"text-align" : "center",
 		"background-color" : "#F7F7F7"
@@ -282,7 +282,7 @@
 		"background-color": "#fff",
 		"color": "#333",
 		"line-height": "35px",
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"font-size": "14px"
 	},
 
@@ -350,7 +350,7 @@
 		"color": "#666666",
 		//"line-height": "39px",
 		"cursor": "pointer",
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"font-size": "12px",
 		"background-color": "#fff"
 	},
@@ -463,7 +463,7 @@
 		"background": "url("+"../x_component_cms_Module/$ViewExplorer/default/icon/editing_over.png) no-repeat center center"
 	},
 	"topNode" : {
-		"font-family": "Microsoft YaHei",
+		"font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
 		"color" : "#999",
 		"background-color" : "#fff",
 		"overflow" : "hidden",

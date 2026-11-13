@@ -1,5 +1,5 @@
 {
-  "name": "蓝白扁平",
+  "name": "파란색 플랫",
   "form": {
     "textareaDisableResize" : true,
     "confirmStyle" : "blue_flat_confirm",
@@ -25,12 +25,12 @@
       "style" : "blue_flat",
       "width" : "700",
       "height" : "510",
-      "hasLetter" : false, //字母
-      "hasTop" : true, //可选、已选的标题
+      "hasLetter" : false, //알파벳
+      "hasTop" : true, //선택 가능·선택됨 제목
       "level1Indent" : 0,
       "indent" : 36,
       "tabStyle" : "blue_flat",
-      "hasShuttle" : true, //穿梭按钮
+      "hasShuttle" : true, //이동 버튼
       "searchbarInTopNode" : false,
       "hasSelectedSearchbar" : true,
       "itemHeight" : 27
@@ -61,7 +61,7 @@
       }
     },
     "noticeStyle" : {
-      "title" : "温馨提示",
+      "title" : "안내",
       "footer" : " ",
       "delayClose" : 3000,
       "setStyles" : {
@@ -105,7 +105,7 @@
       }
     },
     "noticeErrorStyle" : {
-      "title" : "出错啦",
+      "title" : "오류가 발생했습니다",
       "setStyles" :  {
         "container": {
           "border":"1px solid #FFDDCD",
@@ -117,7 +117,7 @@
       }
     },
     "noticeSuccessStyle" : {
-      "title" : "成功",
+      "title" : "성공",
       "setStyles" :  {
         "container": {
           "border":"1px solid #7ACC29",
@@ -129,7 +129,7 @@
       }
     },
     "noticeOkStyle" : {
-      "title" : "成功",
+      "title" : "성공",
       "setStyles" :  {
         "container": {
           "border":"1px solid #7ACC29",
@@ -141,7 +141,7 @@
       }
     },
     "noticeNoticeStyle" : {
-      "title" : "提示",
+      "title" : "안내",
       "setStyles" :  {
         "container": {
           "border":"1px solid #CC9B29",

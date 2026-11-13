@@ -96,7 +96,7 @@ const cmsAppTitle = (msgBody) => {
   <div v-if="msgBody">
     <!-- image -->
     <div v-if="msgBody.type === 'image'" class="img-chat">
-      <img :src="imageUrl(msgBody)" alt="图片">
+      <img :src="imageUrl(msgBody)" alt="이미지">
     </div>
     <!-- audio -->
     <audio v-if="msgBody.type === 'audio'" :src="getImFileDownloadUrl(msgBody.fileId)" controls preload
@@ -111,7 +111,7 @@ const cmsAppTitle = (msgBody) => {
     <div v-if="isVideo(msgBody)" class="img-chat">
       <video controls preload  >
         <source :src="fileDownloadUrl(msgBody)"  />
-        <a :href="fileDownloadUrl(msgBody)">下载</a>
+        <a :href="fileDownloadUrl(msgBody)">다운로드</a>
       </video>
     </div>
     <span v-else-if="msgBody.type === 'file'" style="display: flex;gap: 5px;align-items: center;">

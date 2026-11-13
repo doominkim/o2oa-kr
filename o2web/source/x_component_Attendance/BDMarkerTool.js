@@ -302,7 +302,7 @@ if(typeof BMapLib._toolInUse == "undefined"){
             this._map = map;
             this._opts = {
                 icon: MarkerTool.SYS_ICONS[8], //默认选择红色雨滴样式
-                followText: "点击地图添加工作场所", //鼠标跟随文字提示
+                followText: "지도를 클릭해 근무지를 추가하세요", //鼠标跟随文字提示
                 autoClose: true //是否添加完毕标注就关闭此工具
             };
 

@@ -86,7 +86,7 @@
           },
           "minCount": "1",
           "excelName": {
-            "code": "return \"数据模板.xls\""
+            "code": "return \"데이터 템플릿.xls\""
           },
           "showSectionKey": true,
           "keyContentSeparator": "：",
@@ -190,7 +190,7 @@
           "id": "label_dt",
           "type": "Label",
           "valueType": "text",
-          "text": "项目:",
+          "text": "항목:",
           "isSaved": true,
           "pid": "PCb37758f9-c06b-48a1-a4b1-fea5b52c1538label_dt",
           "preprocessing": "y",
@@ -264,7 +264,7 @@
             "code": "",
             "html": ""
           },
-          "label": "标　　题",
+          "label": "제목",
           "showIcon": "no",
           "compute": "create",
           "section": "no",
@@ -303,7 +303,7 @@
             "code": "",
             "html": ""
           },
-          "label": "说　　明",
+          "label": "설명",
           "showIcon": "no",
           "compute": "create",
           "section": "no",
@@ -339,7 +339,7 @@
           "type": "OOCheckGroup",
           "itemType": "values",
           "itemValues": [
-            "全选|yes"
+            "전체 선택|yes"
           ],
           "countPerline": "0",
           "defaultValue": {
@@ -390,7 +390,7 @@
         },
         "button_delete_total": {
           "id": "button_delete_total",
-          "name": "删除选中项",
+          "name": "선택 항목 삭제",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -425,7 +425,7 @@
         },
         "button_add_total": {
           "id": "button_add_total",
-          "name": "添加项目",
+          "name": "항목 추가",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -462,7 +462,7 @@
           "type": "OOCheckGroup",
           "itemType": "values",
           "itemValues": [
-            "选中|yes"
+            "선택|yes"
           ],
           "countPerline": "0",
           "defaultValue": {
@@ -504,7 +504,7 @@
         },
         "button_delete": {
           "id": "button_delete",
-          "name": "删除",
+          "name": "삭제",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -538,7 +538,7 @@
         },
         "button_add": {
           "id": "button_add",
-          "name": "添加",
+          "name": "추가",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -578,7 +578,7 @@
             "code": "",
             "html": ""
           },
-          "label": "内　　容",
+          "label": "내용",
           "showIcon": "no",
           "compute": "create",
           "section": "no",
@@ -615,7 +615,7 @@
         }
       }
     },
-    "html": "<div mwftype=\"div\" id=\"div_dt_1\" style=\"overflow: hidden;\"><div mwftype=\"div\" id=\"div_dt_2\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5rem; float: right; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selectAll\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-checkbox-group label=\"\" style=\"float: left;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selectAll</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete_total\" text=\"删除选中项\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add_total\" text=\"添加项目\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"datatemplate\" id=\"datatemplate\" style=\"\"><div o2icon=\"datatemplate\" style=\"width: 104px; height: 16px; color: rgb(153, 153, 153); font-size: 12px; position: static; margin: 0px; border-bottom: 1px solid rgb(204, 204, 204); border-right: 1px solid rgb(204, 204, 204);\"><div style=\"width: 19px; height: 16px; background: url(&quot;../x_component_process_FormDesigner/Module/Datatemplate/default/icon/datatemplate.png&quot;) 0px center no-repeat; float: left;\"></div><div style=\"line-height: 16px; height: 16px; width: 80px; float: right;\">Datatemplate</div></div><div mwftype=\"div\" id=\"div_dt_3\" style=\"margin-top: 1em;\"><div mwftype=\"div\" id=\"div_dt_4\" style=\"overflow: hidden; display: flex; justify-content: space-between; align-items: center;\"><div mwftype=\"div\" id=\"div_dt_5\" style=\"float: left; color: rgb(102, 102, 102);\"><div mwftype=\"label\" id=\"label_dt\" style=\"float: left; font-weight: bold; font-size: 1em; border-left: 3px solid var(--oo-color-main); padding-left: 5px;\">项目:</div><div mwftype=\"label\" id=\"label_sequence\" style=\"float: left; font-weight: bold; font-size: 1em;\"></div></div><div mwftype=\"div\" id=\"div_dt_6\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5em; font-size: 1em; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selected\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-checkbox-group label=\"\" style=\"float: left;\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selected</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete\" text=\"删除\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add\" text=\"添加\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"div\" id=\"div_1\" style=\"\" class=\"form-content-area\"><oo-input mwftype=\"OOInput\" id=\"OOInput\" placeholder=\"OOInput\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"标　　题\" readonly=\"true\"></oo-input><oo-input mwftype=\"OOInput\" id=\"OOInput_1\" placeholder=\"OOInput_1\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"说　　明\" readonly=\"true\"></oo-input><oo-textarea mwftype=\"OOTextarea\" id=\"OOTextarea_1\" placeholder=\"OOTextarea_1\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"内　　容\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OOTextarea_1</div></oo-textarea></div></div></div>"
+    "html": "<div mwftype=\"div\" id=\"div_dt_1\" style=\"overflow: hidden;\"><div mwftype=\"div\" id=\"div_dt_2\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5rem; float: right; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selectAll\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-checkbox-group label=\"\" style=\"float: left;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selectAll</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete_total\" text=\"선택 항목 삭제\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add_total\" text=\"항목 추가\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"datatemplate\" id=\"datatemplate\" style=\"\"><div o2icon=\"datatemplate\" style=\"width: 104px; height: 16px; color: rgb(153, 153, 153); font-size: 12px; position: static; margin: 0px; border-bottom: 1px solid rgb(204, 204, 204); border-right: 1px solid rgb(204, 204, 204);\"><div style=\"width: 19px; height: 16px; background: url(&quot;../x_component_process_FormDesigner/Module/Datatemplate/default/icon/datatemplate.png&quot;) 0px center no-repeat; float: left;\"></div><div style=\"line-height: 16px; height: 16px; width: 80px; float: right;\">Datatemplate</div></div><div mwftype=\"div\" id=\"div_dt_3\" style=\"margin-top: 1em;\"><div mwftype=\"div\" id=\"div_dt_4\" style=\"overflow: hidden; display: flex; justify-content: space-between; align-items: center;\"><div mwftype=\"div\" id=\"div_dt_5\" style=\"float: left; color: rgb(102, 102, 102);\"><div mwftype=\"label\" id=\"label_dt\" style=\"float: left; font-weight: bold; font-size: 1em; border-left: 3px solid var(--oo-color-main); padding-left: 5px;\">항목:</div><div mwftype=\"label\" id=\"label_sequence\" style=\"float: left; font-weight: bold; font-size: 1em;\"></div></div><div mwftype=\"div\" id=\"div_dt_6\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5em; font-size: 1em; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selected\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-checkbox-group label=\"\" style=\"float: left;\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selected</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete\" text=\"삭제\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add\" text=\"추가\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"div\" id=\"div_1\" style=\"\" class=\"form-content-area\"><oo-input mwftype=\"OOInput\" id=\"OOInput\" placeholder=\"OOInput\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"제목\" readonly=\"true\"></oo-input><oo-input mwftype=\"OOInput\" id=\"OOInput_1\" placeholder=\"OOInput_1\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"설명\" readonly=\"true\"></oo-input><oo-textarea mwftype=\"OOTextarea\" id=\"OOTextarea_1\" placeholder=\"OOTextarea_1\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"내용\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OOTextarea_1</div></oo-textarea></div></div></div>"
   },
   "mobileData": {
     "json": {
@@ -704,7 +704,7 @@
           },
           "minCount": "1",
           "excelName": {
-            "code": "return \"数据模板.xls\""
+            "code": "return \"데이터 템플릿.xls\""
           },
           "showSectionKey": true,
           "keyContentSeparator": "：",
@@ -808,7 +808,7 @@
           "id": "label_dt",
           "type": "Label",
           "valueType": "text",
-          "text": "项目:",
+          "text": "항목:",
           "isSaved": true,
           "pid": "PCb37758f9-c06b-48a1-a4b1-fea5b52c1538label_dt",
           "preprocessing": "y",
@@ -882,7 +882,7 @@
             "code": "",
             "html": ""
           },
-          "label": "标　　题",
+          "label": "제목",
           "showIcon": "no",
           "compute": "create",
           "section": "no",
@@ -921,7 +921,7 @@
             "code": "",
             "html": ""
           },
-          "label": "说　　明",
+          "label": "설명",
           "showIcon": "no",
           "compute": "create",
           "section": "no",
@@ -957,7 +957,7 @@
           "type": "OOCheckGroup",
           "itemType": "values",
           "itemValues": [
-            "全选|yes"
+            "전체 선택|yes"
           ],
           "countPerline": "0",
           "defaultValue": {
@@ -1008,7 +1008,7 @@
         },
         "button_delete_total": {
           "id": "button_delete_total",
-          "name": "删除选中项",
+          "name": "선택 항목 삭제",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -1043,7 +1043,7 @@
         },
         "button_add_total": {
           "id": "button_add_total",
-          "name": "添加项目",
+          "name": "항목 추가",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -1080,7 +1080,7 @@
           "type": "OOCheckGroup",
           "itemType": "values",
           "itemValues": [
-            "选中|yes"
+            "선택|yes"
           ],
           "countPerline": "0",
           "defaultValue": {
@@ -1125,7 +1125,7 @@
         },
         "button_delete": {
           "id": "button_delete",
-          "name": "删除",
+          "name": "삭제",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -1159,7 +1159,7 @@
         },
         "button_add": {
           "id": "button_add",
-          "name": "添加",
+          "name": "추가",
           "type": "OOButton",
           "dataType": "text",
           "disabled": false,
@@ -1199,7 +1199,7 @@
             "code": "",
             "html": ""
           },
-          "label": "内　　容",
+          "label": "내용",
           "showIcon": "no",
           "compute": "create",
           "section": "no",
@@ -1236,7 +1236,7 @@
         }
       }
     },
-    "html": "<div mwftype=\"div\" id=\"div_dt_1\" style=\"overflow: hidden;\"><div mwftype=\"div\" id=\"div_dt_2\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5rem; float: right; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selectAll\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"display:none !important;\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" skin-mode=\"mobile\"><oo-checkbox-group label=\"\" style=\"float: left;\" label-style=\"display:none !important;\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selectAll</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete_total\" text=\"删除选中项\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add_total\" text=\"添加项目\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"datatemplate\" id=\"datatemplate\" style=\"\"><div o2icon=\"datatemplate\" style=\"width: 104px; height: 16px; color: rgb(153, 153, 153); font-size: 12px; position: static; margin: 0px; border-bottom: 1px solid rgb(204, 204, 204); border-right: 1px solid rgb(204, 204, 204);\"><div style=\"width: 19px; height: 16px; background: url(&quot;../x_component_process_FormDesigner/Module/Datatemplate/default/icon/datatemplate.png&quot;) 0px center no-repeat; float: left;\"></div><div style=\"line-height: 16px; height: 16px; width: 80px; float: right;\">Datatemplate</div></div><div mwftype=\"div\" id=\"div_dt_3\" style=\"margin-top: 1em;\"><div mwftype=\"div\" id=\"div_dt_4\" style=\"overflow: hidden; display: flex; justify-content: space-between; align-items: center;\"><div mwftype=\"div\" id=\"div_dt_5\" style=\"float: left; color: rgb(102, 102, 102);\"><div mwftype=\"label\" id=\"label_dt\" style=\"float: left; font-weight: bold; font-size: 1em; border-left: 3px solid var(--oo-color-main); padding-left: 5px;\">项目:</div><div mwftype=\"label\" id=\"label_sequence\" style=\"float: left; font-weight: bold; font-size: 1em;\"></div></div><div mwftype=\"div\" id=\"div_dt_6\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5em; font-size: 1em; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selected\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"display:none;\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" skin-mode=\"mobile\"><oo-checkbox-group label=\"\" style=\"float: left;\" label-style=\"display:none;\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selected</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete\" text=\"删除\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add\" text=\"添加\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"div\" id=\"div_1\" style=\"\" class=\"form-content-area\"><oo-input mwftype=\"OOInput\" id=\"OOInput\" placeholder=\"OOInput\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"标　　题\" readonly=\"true\" skin-mode=\"mobile\"></oo-input><oo-input mwftype=\"OOInput\" id=\"OOInput_1\" placeholder=\"OOInput_1\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"说　　明\" readonly=\"true\" skin-mode=\"mobile\"></oo-input><oo-textarea mwftype=\"OOTextarea\" id=\"OOTextarea_1\" placeholder=\"OOTextarea_1\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"内　　容\" readonly=\"true\" skin-mode=\"mobile\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OOTextarea_1</div></oo-textarea></div></div></div>"
+    "html": "<div mwftype=\"div\" id=\"div_dt_1\" style=\"overflow: hidden;\"><div mwftype=\"div\" id=\"div_dt_2\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5rem; float: right; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selectAll\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"display:none !important;\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" skin-mode=\"mobile\"><oo-checkbox-group label=\"\" style=\"float: left;\" label-style=\"display:none !important;\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selectAll</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete_total\" text=\"선택 항목 삭제\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add_total\" text=\"항목 추가\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"datatemplate\" id=\"datatemplate\" style=\"\"><div o2icon=\"datatemplate\" style=\"width: 104px; height: 16px; color: rgb(153, 153, 153); font-size: 12px; position: static; margin: 0px; border-bottom: 1px solid rgb(204, 204, 204); border-right: 1px solid rgb(204, 204, 204);\"><div style=\"width: 19px; height: 16px; background: url(&quot;../x_component_process_FormDesigner/Module/Datatemplate/default/icon/datatemplate.png&quot;) 0px center no-repeat; float: left;\"></div><div style=\"line-height: 16px; height: 16px; width: 80px; float: right;\">Datatemplate</div></div><div mwftype=\"div\" id=\"div_dt_3\" style=\"margin-top: 1em;\"><div mwftype=\"div\" id=\"div_dt_4\" style=\"overflow: hidden; display: flex; justify-content: space-between; align-items: center;\"><div mwftype=\"div\" id=\"div_dt_5\" style=\"float: left; color: rgb(102, 102, 102);\"><div mwftype=\"label\" id=\"label_dt\" style=\"float: left; font-weight: bold; font-size: 1em; border-left: 3px solid var(--oo-color-main); padding-left: 5px;\">항목:</div><div mwftype=\"label\" id=\"label_sequence\" style=\"float: left; font-weight: bold; font-size: 1em;\"></div></div><div mwftype=\"div\" id=\"div_dt_6\" style=\"display: inline-grid; grid-template-columns: auto auto auto; gap: 0.5em; font-size: 1em; align-items: center;\"><div mwftype=\"OOCheckGroup\" id=\"checkbox_selected\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"display:none;\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" skin-mode=\"mobile\"><oo-checkbox-group label=\"\" style=\"float: left;\" label-style=\"display:none;\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">checkbox_selected</div></div></div><oo-button mwftype=\"OOButton\" id=\"button_delete\" text=\"삭제\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button><oo-button mwftype=\"OOButton\" id=\"button_add\" text=\"추가\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"light\"></oo-button></div></div><div mwftype=\"div\" id=\"div_1\" style=\"\" class=\"form-content-area\"><oo-input mwftype=\"OOInput\" id=\"OOInput\" placeholder=\"OOInput\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"제목\" readonly=\"true\" skin-mode=\"mobile\"></oo-input><oo-input mwftype=\"OOInput\" id=\"OOInput_1\" placeholder=\"OOInput_1\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" label=\"설명\" readonly=\"true\" skin-mode=\"mobile\"></oo-input><oo-textarea mwftype=\"OOTextarea\" id=\"OOTextarea_1\" placeholder=\"OOTextarea_1\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"내용\" readonly=\"true\" skin-mode=\"mobile\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OOTextarea_1</div></oo-textarea></div></div></div>"
   }
 }
 

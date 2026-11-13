@@ -27,7 +27,7 @@ const loadEmojiJson = () => {
   fetch(url)
       .then(response => {
         if (!response.ok) {
-          console.error('网络响应错误, emoji.json读取错误');
+          console.error('네트워크 응답 오류, emoji.json 읽기 오류');
         }
         return response.json(); // 解析为 JSON
       })
@@ -37,7 +37,7 @@ const loadEmojiJson = () => {
         currentEmojiList.value = data[ currentEmojiType.value]
       })
       .catch(error => {
-        console.error('请求失败:', error);
+        console.error('요청 실패:', error);
       });
 }
 const clickStopClose = (e) => {
@@ -45,12 +45,12 @@ const clickStopClose = (e) => {
 }
 const clickChooseEmoji = (e, emoji) => {
   e.stopPropagation()
-  console.debug('===========> 点击了 emoji ', emoji)
+  console.debug('===========> emoji 클릭 ', emoji)
   chooseEmoji(emoji)
 }
 const clickChooseEmojiType = (e, emojiType) => {
   e.stopPropagation()
-  console.debug('===========> 点击了 emoji type ', emojiType)
+  console.debug('===========> emoji type 클릭 ', emojiType)
   currentEmojiType.value = emojiType
   currentEmojiList.value = emojiData.value[emojiType]
 }

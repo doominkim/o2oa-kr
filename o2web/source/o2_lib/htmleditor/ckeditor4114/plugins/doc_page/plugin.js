@@ -47,7 +47,7 @@ CKEDITOR.plugins.add( 'doc_page', {
 //         editor.widgets.add( 'doc_redHeader', {
 //             draggable: false,
 //             template:
-//                 '<div class="o2_editorPlugin_redHeader"><div class="o2_editorPlugin_redHeader_content">文件红头</div></div>',
+//                 '<div class="o2_editorPlugin_redHeader"><div class="o2_editorPlugin_redHeader_content">문서 머리글</div></div>',
 //
 //             editables: {
 //                 content: {
@@ -71,8 +71,8 @@ CKEDITOR.plugins.add( 'doc_page', {
 //             template:
 //                 '<div class="o2_editorPlugin_doc_copiesSecretPriority">' +
 //                 '<div class="o2_editorPlugin_doc_copies">000001</div>' +
-//                 '<div class="o2_editorPlugin_doc_secret">机密★1年</div>' +
-//                 '<div class="o2_editorPlugin_doc_priority">特急</div>' +
+//                 '<div class="o2_editorPlugin_doc_secret">기밀★1년</div>' +
+//                 '<div class="o2_editorPlugin_doc_priority">특급</div>' +
 //                 '</div>',
 //
 //             allowedContent:
@@ -96,7 +96,7 @@ CKEDITOR.plugins.add( 'doc_page', {
 //         editor.widgets.add( 'doc_fileno', {
 //             draggable: false,
 //             template:
-//                 '<div class="o2_editorPlugin_doc_fileno">浙移发〔2019〕20号</div>',
+//                 '<div class="o2_editorPlugin_doc_fileno">○○발〔2019〕20호</div>',
 //             allowedContent: 'div(o2_editorPlugin_doc_fileno)',
 //             requiredContent: 'div(o2_editorPlugin_doc_fileno);',
 //             upcast: function( element ) {

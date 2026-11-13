@@ -7,7 +7,7 @@
         </div>
         <div class="main_view_editor_header_tool">
             <div data-o2-element="saveNode"  class="main_view_editor_header_tool_save" data-o2-events="click:save;">
-                保存
+                저장
             </div>
             <div data-o2-element="showCommentNode" data-o2-events="click:showComment" class="icon_op" >
                 <i class="icon-ops  icon_comment"></i>
@@ -27,10 +27,10 @@
             <div data-o2-element="restoreNode" data-o2-events="click:restore" class="icon_op">
                 <i class="icon-ops  icon_restore"></i>
             </div>
-            <div data-o2-element="saveShareNode" data-o2-events="click:saveShare" class="icon_op" title="保存我的笔记">
+            <div data-o2-element="saveShareNode" data-o2-events="click:saveShare" class="icon_op" title="내 메모에 저장">
                 <i class="icon-ops  icon_save_note"></i>
             </div>
-            <div data-o2-element="shieldShareNode" data-o2-events="click:shieldShare" class="icon_op" title="屏蔽该分享">
+            <div data-o2-element="shieldShareNode" data-o2-events="click:shieldShare" class="icon_op" title="이 공유 숨기기">
                 <i class="icon-ops  icon_shield"></i>
             </div>
         </div>
@@ -46,7 +46,7 @@
     <div style="height: 56px;position: absolute;width:100%;margin:0 10px;">
         <div style="width:50%;float:left;line-height: 56px;height: 56px;padding-left:20px;">
             <span ><select id="leftVerson" ></select></span>
-            <span style="float:right;margin-right: 20px;cursor: pointer;" data-o2-element="closeVersionNode" data-o2-events="click:closeVersion">关闭比较</span>
+            <span style="float:right;margin-right: 20px;cursor: pointer;" data-o2-element="closeVersionNode" data-o2-events="click:closeVersion">비교 닫기</span>
         </div>
         <div style="width:50%;float:right;line-height: 56px;height: 56px;padding-left:30px;padding-right:20px;">
             <span ><select id="rightVerson" ></select></span>
@@ -66,20 +66,20 @@
         <table>
             <tbody>
             <tr>
-                <td class="td-l">创建时间 :</td>
+                <td class="td-l">생성일시: </td>
                 <td class="td-r" data-o2-element="createTimeNode">2020/03/05 10:36</td>
             </tr>
             <tr>
-                <td class="td-l">修改时间 :</td>
+                <td class="td-l">수정일시: </td>
                 <td class="td-r" data-o2-element="updateTimeNode">2020/03/22 11:07</td>
             </tr>
             <tr>
-                <td class="td-l">标签 :</td>
-                <td class="td-r" style="color:#ffad69;cursor: pointer" data-o2-element="tagNode" title="点击添加标签" data-o2-events="click:showAddTag">无标签</td>
+                <td class="td-l">태그: </td>
+                <td class="td-r" style="color:#ffad69;cursor: pointer" data-o2-element="tagNode" title="클릭해서 태그 추가" data-o2-events="click:showAddTag">태그 없음</td>
             </tr>
             <tr>
-                <td class="td-l">分组 :</td>
-                <td class="td-r" style="color:#ffad69;cursor: pointer" data-o2-element="categoryNode" title="点击切换" data-o2-events="click:showFolderList"></td>
+                <td class="td-l">그룹: </td>
+                <td class="td-r" style="color:#ffad69;cursor: pointer" data-o2-element="categoryNode" title="클릭해서 변경" data-o2-events="click:showFolderList"></td>
             </tr>
             </tbody></table>
     </div>
@@ -96,13 +96,13 @@
 </div>
 <div class="comment_container" data-o2-element = "commentNode" style="display: none">
     <div class="comment_header">
-        <span>评论</span>
+        <span>댓글</span>
         <div data-o2-element = "closeCommentNode"  data-o2-events="click:closeComment;" class="icon icon_close comment_header_icon" ></div>
     </div>
     <div class="comment_content">
         <div class="comment_content_send">
-            <textarea data-o2-element="commentInputNode"  class="comment_input" placeholder="输入评论…" style="height: 60px;"></textarea>
-            <div class="comment_sendBtn" data-o2-element="addCommentNode" data-o2-events="click:addComment;">评论</div>
+            <textarea data-o2-element="commentInputNode"  class="comment_input" placeholder="댓글을 입력하세요…" style="height: 60px;"></textarea>
+            <div class="comment_sendBtn" data-o2-element="addCommentNode" data-o2-events="click:addComment;">댓글</div>
         </div>
         <div class="comment_itemlist"  data-o2-element="commentListNode">
         </div>
@@ -115,49 +115,49 @@
         <div class="group_item" data-o2-element="addTopNode" data-o2-events="click:addTop;">
             <i class="group_item_icon icon icon_top"></i>
             <div class="group_item_title">
-                置顶
+                상단 고정
             </div>
         </div>
         <div class="group_item" data-o2-element="removeTopNode" data-o2-events="click:removeTop;">
             <i class="group_item_icon icon icon_top"></i>
             <div class="group_item_title">
-                取消置顶
+                상단 고정 해제
             </div>
         </div>
         <div class="group_item" data-o2-element="addStarNode" data-o2-events="click:addStar;">
             <i class="group_item_icon icon icon_star"></i>
             <div class="group_item_title">
-                加星
+                별표
             </div>
         </div>
         <div class="group_item" data-o2-element="removeStarNode" data-o2-events="click:removeStar;">
             <i class="group_item_icon icon icon_star"></i>
             <div class="group_item_title">
-                取消加星
+                별표 해제
             </div>
         </div>
         <div class="group_item" data-o2-element="showVersionNode" data-o2-events="click:showVersion;">
             <i class="group_item_icon icon icon_version"></i>
             <div class="group_item_title">
-                查看历史版本
+                이전 버전 보기
             </div>
         </div>
         <div class="group_item" data-o2-element="printNode" data-o2-events="click:print;">
             <i class="group_item_icon icon icon_print"></i>
             <div class="group_item_title">
-                打印
+                인쇄
             </div>
         </div>
         <div class="group_item" data-o2-element="exportWordNode" data-o2-events="click:exportWord;">
             <i class="group_item_icon icon icon_word"></i>
             <div class="group_item_title">
-                导出为word
+                Word로 내보내기
             </div>
         </div>
         <div class="group_item" data-o2-element="deleteNode" data-o2-events="click:delete;">
             <i class="group_item_icon icon icon_menu_recycle"></i>
             <div class="group_item_title">
-                删除
+                삭제
             </div>
         </div>
     </div>
@@ -166,5 +166,5 @@
      style="z-index:999;width: 200px;  top: 184px; height:100px;right: 10px;">
     <div data-o2-element="tagsNode">
     </div>
-    <input class="tags" data-o2-element="addTagNode" placeholder="添加标签" data-o2-events="keydown:addTag">
+    <input class="tags" data-o2-element="addTagNode" placeholder="태그 추가" data-o2-events="keydown:addTag">
 </div>

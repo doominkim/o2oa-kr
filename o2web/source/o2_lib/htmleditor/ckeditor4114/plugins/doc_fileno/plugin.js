@@ -4,7 +4,7 @@ CKEDITOR.plugins.add( 'doc_fileno', {
         editor.widgets.add( 'doc_fileno', {
             draggable: false,
             template:
-                '<div class="o2_editorPlugin_doc_fileno">浙移发〔2019〕20号</div>',
+                '<div class="o2_editorPlugin_doc_fileno">○○발〔2019〕20호</div>',
 
             // editables: {
             //     content: {

@@ -8,7 +8,7 @@ layout.session = layout.session || {};
 
 o2.addReady(function () {
   o2.load(["../o2_lib/mootools/plugin/mBox.Notice.js", "../o2_lib/mootools/plugin/mBox.Tooltip.js"], { "sequence": true }, function () {
-    MWF.loadLP("zh-cn");
+    MWF.loadLP(MWF.language);
     MWF.require("MWF.xDesktop.Layout", function () {
       MWF.require("MWF.xDesktop.Authentication", null, false);
       MWF.require("MWF.xDesktop.Common", null, false);
@@ -48,7 +48,7 @@ o2.addReady(function () {
                 }.bind(this)
               });
             }).catch(function (error) {
-              console.log('获取异常', error);
+              console.log('가져오기 오류', error);
             });
 
            

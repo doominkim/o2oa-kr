@@ -1,14 +1,14 @@
 {
-  "name": "公文样式",
+  "name": "공문 스타일",
   "form": {
     "styles":{
       "background-color": "#ffffff",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "label": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "height": "40px",
         "line-height": "40px",
@@ -21,7 +21,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "center",
         "font-size": "36px",
@@ -29,12 +29,12 @@
         "font-weight": "bold",
         "color": "#fd1113",
         "height": "60px",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
 
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {
         "height": "40px",
         "background-color": "#f7f7f7",
@@ -49,7 +49,7 @@
 
   "div": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "height": "40px",
         "line-height": "40px",
@@ -62,7 +62,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "center",
         "font-size": "36px",
@@ -73,7 +73,7 @@
       }
     },
     "section": {
-      "name": "区段标题",
+      "name": "섹션 제목",
       "styles": {
         "padding": "20px 0px",
         "background-color": "#FFF",
@@ -424,7 +424,7 @@
       "line-height": "30px",
       "font-size": "18px",
       "color": "#666",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "calendar": {
@@ -441,7 +441,7 @@
       "line-height": "30px",
       "font-size": "18px",
       "color": "#666",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "number": {
@@ -458,7 +458,7 @@
       "line-height": "30px",
       "font-size": "18px",
       "color": "#666",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "currency": {
@@ -475,7 +475,7 @@
       "line-height": "30px",
       "font-size": "18px",
       "color": "#666",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     },
     "symbolStyles": {
       "padding-left": "2px",
@@ -496,7 +496,7 @@
       "line-height": "30px",
       "color": "#666",
       "font-size": "18px",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "combox": {
@@ -513,7 +513,7 @@
       "line-height": "30px",
       "color": "#666",
       "font-size": "18px",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "personfield": {
@@ -531,7 +531,7 @@
       "line-height": "30px",
       "color": "#666",
       "font-size": "18px",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "orgfield": {
@@ -549,7 +549,7 @@
       "line-height": "30px",
       "color": "#666",
       "font-size": "18px",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "org": {
@@ -567,7 +567,7 @@
       "line-height": "30px",
       "color": "#666",
       "font-size": "18px",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "select": {
@@ -584,7 +584,7 @@
       "line-height": "30px",
       "font-size": "18px",
       "color": "#666",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "textarea": {
@@ -597,7 +597,7 @@
       "border": "0px",
       "color": "#666",
       "font-size": "18px",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "opinion": {
@@ -610,7 +610,7 @@
       "border": "0px",
       "color": "#666",
       "font-size": "18px",
-      "font-family": "宋体"
+      "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
     }
   },
   "actionbar": {

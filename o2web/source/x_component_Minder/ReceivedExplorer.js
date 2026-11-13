@@ -120,7 +120,7 @@ MWF.xApplication.Minder.ReceivedExplorer.List = new Class({
                 "id" : documentData.id,
                 "isEdited" : false,
                 "isNew" : false,
-                "noticeText" : "分享的文件只能查看"
+                "noticeText" : "공유받은 파일은 보기만 할 수 있습니다"
             });
         }
     },

@@ -1,5 +1,5 @@
 {
-  "name": "集团样式",
+  "name": "그룹 스타일",
   "form": {
     "styles":{
       "background-color": "#f0f0f0"
@@ -7,7 +7,7 @@
   },
   "label": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "background-color": "#3c76b7",
         "height": "40px",
@@ -20,7 +20,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "center",
         "font-size": "36px",
@@ -32,7 +32,7 @@
     },
 
     "section": {
-      "name": "区段标题",
+      "name": "구역 제목",
       "styles": {
         "background-color": "#f7f7f7",
         "height": "35px",
@@ -48,7 +48,7 @@
 
   "div": {
     "banner": {
-      "name": "横幅",
+      "name": "배너",
       "styles": {
         "background-color": "#3c76b7",
         "height": "40px",
@@ -61,7 +61,7 @@
     },
 
     "title": {
-      "name": "标题",
+      "name": "제목",
       "styles": {
         "text-align": "center",
         "font-size": "24px",
@@ -72,7 +72,7 @@
       }
     },
     "section": {
-      "name": "区段标题",
+      "name": "구역 제목",
       "styles": {
         "background-color": "#f7f7f7",
         "height": "35px",

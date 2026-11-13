@@ -10,8 +10,8 @@ MWF.xApplication.process.Xform.OOLog = MWF.APPOOLog =  new Class({
                         </div>
                         <div style="flex: 1;     display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                            <div><font style='color:#ff5400;'>{person}</font>（{department}）选择<font style='color: var(--oo-color-main)'>【{route}】</font></div>
-                            <div>处理意见：<font>{opinion}</font></div>
+                            <div><font style='color:#ff5400;'>{person}</font>({department}) 선택: <font style='color: var(--oo-color-main)'>[{route}]</font></div>
+                            <div>처리 의견: <font>{opinion}</font></div>
                             </div>
                             <div><b>{activity}</b></div>
                         </div>

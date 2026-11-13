@@ -2,12 +2,12 @@
   "pcData":{
     "json": {
       "id": "1fdf5b46-d255-4b6d-932e-4df15cc187cf",
-      "name": "首页NEW",
+      "name": "홈NEW",
       "type": "Form",
       "mode": "PC",
       "description": "",
       "application": "55032f76-616e-4aa8-80d5-a58affa38d69",
-      "applicationName": "战略管理门户",
+      "applicationName": "전략 관리 포털",
       "styles": {},
       "properties": {},
       "cssLinks": [],
@@ -1052,8 +1052,8 @@
               "html": ""
             },
             "loadData": {
-              "code": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"您暂时没有工作需要处理！\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"您暂时没有工作需要处理！\";\n    }else if(l==\"traditional\"){\n        v = \"您暫時沒有工作需要處理！\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\n// var subList = this.target.subSourceItems;\n// var thisDate = new Date();\n// for(i=0;i<subList.length;i++){\n//     var sub = subList[i].node;\n//     var div = sub.getElements(\"div[name='sortIcon']\");\n//     var ct = subList[i].data.createTime;\n//     var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n//     if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n//         //div[0].style.backgroundColor=\"#F66363\";\n//         var tmp = sub.getElements(\"div[name='title']\");\n//         new Element(\"div\",{\n//             \"styles\":{\n//                 \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//                 \"display\":\"inline-block\",\n//                 \"width\":\"24px\",\n//                 \"height\":\"16px\",\n//                 \"margin-left\":\"10px\"\n//             }\n//         }).inject(tmp[0]);\n//         // new Element(\"img\",{\n//         //     // \"styles\":{\n//         //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//         //     //     \"display\":\"inline-block\",\n//         //     //     \"width\":\"24px\",\n//         //     //     \"height\":\"16px\"\n//         //     // },\n//         //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n//         //     \"width\":\"24px\",\n//         //     \"height\":\"16px\"\n//         // }).inject(tmp[0]);\n//     }\n//     if(i===1){\n//         //div[0].style.backgroundColor=\"#4F7BBD\";\n//     }\n//     if(i===2){\n//         //div[0].style.backgroundColor=\"#F5A624\";\n//     }\n// }",
-              "html": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"您暂时没有工作需要处理！\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"您暂时没有工作需要处理！\";\n    }else if(l==\"traditional\"){\n        v = \"您暫時沒有工作需要處理！\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\n// var subList = this.target.subSourceItems;\n// var thisDate = new Date();\n// for(i=0;i<subList.length;i++){\n//     var sub = subList[i].node;\n//     var div = sub.getElements(\"div[name='sortIcon']\");\n//     var ct = subList[i].data.createTime;\n//     var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n//     if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n//         //div[0].style.backgroundColor=\"#F66363\";\n//         var tmp = sub.getElements(\"div[name='title']\");\n//         new Element(\"div\",{\n//             \"styles\":{\n//                 \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//                 \"display\":\"inline-block\",\n//                 \"width\":\"24px\",\n//                 \"height\":\"16px\",\n//                 \"margin-left\":\"10px\"\n//             }\n//         }).inject(tmp[0]);\n//         // new Element(\"img\",{\n//         //     // \"styles\":{\n//         //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//         //     //     \"display\":\"inline-block\",\n//         //     //     \"width\":\"24px\",\n//         //     //     \"height\":\"16px\"\n//         //     // },\n//         //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n//         //     \"width\":\"24px\",\n//         //     \"height\":\"16px\"\n//         // }).inject(tmp[0]);\n//     }\n//     if(i===1){\n//         //div[0].style.backgroundColor=\"#4F7BBD\";\n//     }\n//     if(i===2){\n//         //div[0].style.backgroundColor=\"#F5A624\";\n//     }\n// }"
+              "code": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"처리할 문서가 없습니다!\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"traditional\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\n// var subList = this.target.subSourceItems;\n// var thisDate = new Date();\n// for(i=0;i<subList.length;i++){\n//     var sub = subList[i].node;\n//     var div = sub.getElements(\"div[name='sortIcon']\");\n//     var ct = subList[i].data.createTime;\n//     var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n//     if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n//         //div[0].style.backgroundColor=\"#F66363\";\n//         var tmp = sub.getElements(\"div[name='title']\");\n//         new Element(\"div\",{\n//             \"styles\":{\n//                 \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//                 \"display\":\"inline-block\",\n//                 \"width\":\"24px\",\n//                 \"height\":\"16px\",\n//                 \"margin-left\":\"10px\"\n//             }\n//         }).inject(tmp[0]);\n//         // new Element(\"img\",{\n//         //     // \"styles\":{\n//         //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//         //     //     \"display\":\"inline-block\",\n//         //     //     \"width\":\"24px\",\n//         //     //     \"height\":\"16px\"\n//         //     // },\n//         //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n//         //     \"width\":\"24px\",\n//         //     \"height\":\"16px\"\n//         // }).inject(tmp[0]);\n//     }\n//     if(i===1){\n//         //div[0].style.backgroundColor=\"#4F7BBD\";\n//     }\n//     if(i===2){\n//         //div[0].style.backgroundColor=\"#F5A624\";\n//     }\n// }",
+              "html": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"처리할 문서가 없습니다!\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"traditional\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\n// var subList = this.target.subSourceItems;\n// var thisDate = new Date();\n// for(i=0;i<subList.length;i++){\n//     var sub = subList[i].node;\n//     var div = sub.getElements(\"div[name='sortIcon']\");\n//     var ct = subList[i].data.createTime;\n//     var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n//     if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n//         //div[0].style.backgroundColor=\"#F66363\";\n//         var tmp = sub.getElements(\"div[name='title']\");\n//         new Element(\"div\",{\n//             \"styles\":{\n//                 \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//                 \"display\":\"inline-block\",\n//                 \"width\":\"24px\",\n//                 \"height\":\"16px\",\n//                 \"margin-left\":\"10px\"\n//             }\n//         }).inject(tmp[0]);\n//         // new Element(\"img\",{\n//         //     // \"styles\":{\n//         //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n//         //     //     \"display\":\"inline-block\",\n//         //     //     \"width\":\"24px\",\n//         //     //     \"height\":\"16px\"\n//         //     // },\n//         //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n//         //     \"width\":\"24px\",\n//         //     \"height\":\"16px\"\n//         // }).inject(tmp[0]);\n//     }\n//     if(i===1){\n//         //div[0].style.backgroundColor=\"#4F7BBD\";\n//     }\n//     if(i===2){\n//         //div[0].style.backgroundColor=\"#F5A624\";\n//     }\n// }"
             }
           },
           "properties": {},
@@ -1880,8 +1880,8 @@
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"专题分析\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"专题分析\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"주제 분석\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"주제 분석\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -2023,8 +2023,8 @@
           "src": "",
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"专题分析\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"专题分析\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"주제 분석\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"주제 분석\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -2095,8 +2095,8 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"专题分析\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"专题分析\";\r\n}else if(l==\"traditional\"){\r\n    v = \"專題分析\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"专题分析\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"专题分析\";\r\n}else if(l==\"traditional\"){\r\n    v = \"專題分析\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"주제 분석\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"traditional\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"주제 분석\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"traditional\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
@@ -2240,13 +2240,13 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"专题分析\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"专题分析\";\r\n}else if(l==\"traditional\"){\r\n    v = \"專題分析\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"专题分析\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"专题分析\";\r\n}else if(l==\"traditional\"){\r\n    v = \"專題分析\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"주제 분석\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"traditional\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"주제 분석\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"traditional\"){\r\n    v = \"주제 분석\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"专题分析\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"专题分析\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"주제 분석\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"주제 분석\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -2525,8 +2525,8 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"战略公告\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略公告\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略公告\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"战略公告\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略公告\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略公告\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"전략 공지\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"전략 공지\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
@@ -2599,8 +2599,8 @@
           "src": "",
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略公告\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略公告\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 공지\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 공지\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -2741,8 +2741,8 @@
           "httpMethod": "PUT",
           "moduleName": "Source",
           "requestBody": {
-            "code": "return {\"appAliasList\": [\"战略公告\"]};",
-            "html": "return {\"appAliasList\": [\"战略公告\"]};"
+            "code": "return {\"appAliasList\": [\"전략 공지\"]};",
+            "html": "return {\"appAliasList\": [\"전략 공지\"]};"
           },
           "parameters": {},
           "isSaved": true,
@@ -3377,7 +3377,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "©2018 O2OA门户模板。",
+          "text": "©2018 O2OA 포털 템플릿.",
           "script": {
             "code": "",
             "html": ""
@@ -4521,8 +4521,8 @@
               "html": ""
             },
             "loadData": {
-              "code": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"您暂时没有工作需要处理！\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"您暂时没有工作需要处理！\";\n    }else if(l==\"traditional\"){\n        v = \"您暫時沒有工作需要處理！\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\nvar subList = this.target.subSourceItems;\nvar thisDate = new Date();\nfor(i=0;i<subList.length;i++){\n    var sub = subList[i].node;\n    var div = sub.getElements(\"div[name='sortIcon']\");\n    var ct = subList[i].data.createTime;\n    var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n    /*\n    if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n        div[0].style.backgroundColor=\"#F66363\";\n        var tmp = sub.getElements(\"div[name='title']\");\n        new Element(\"div\",{\n            \"styles\":{\n                \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n                \"display\":\"inline-block\",\n                \"width\":\"24px\",\n                \"height\":\"16px\",\n                \"margin-left\":\"10px\"\n            }\n        }).inject(tmp[0]);\n        // new Element(\"img\",{\n        //     // \"styles\":{\n        //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n        //     //     \"display\":\"inline-block\",\n        //     //     \"width\":\"24px\",\n        //     //     \"height\":\"16px\"\n        //     // },\n        //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n        //     \"width\":\"24px\",\n        //     \"height\":\"16px\"\n        // }).inject(tmp[0]);\n    }\n    */\n    \n    if(i===1){\n        div[0].style.backgroundColor=\"#4F7BBD\";\n    }\n    if(i===2){\n        div[0].style.backgroundColor=\"#F5A624\";\n    }\n}",
-              "html": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"您暂时没有工作需要处理！\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"您暂时没有工作需要处理！\";\n    }else if(l==\"traditional\"){\n        v = \"您暫時沒有工作需要處理！\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\nvar subList = this.target.subSourceItems;\nvar thisDate = new Date();\nfor(i=0;i<subList.length;i++){\n    var sub = subList[i].node;\n    var div = sub.getElements(\"div[name='sortIcon']\");\n    var ct = subList[i].data.createTime;\n    var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n    /*\n    if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n        div[0].style.backgroundColor=\"#F66363\";\n        var tmp = sub.getElements(\"div[name='title']\");\n        new Element(\"div\",{\n            \"styles\":{\n                \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n                \"display\":\"inline-block\",\n                \"width\":\"24px\",\n                \"height\":\"16px\",\n                \"margin-left\":\"10px\"\n            }\n        }).inject(tmp[0]);\n        // new Element(\"img\",{\n        //     // \"styles\":{\n        //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n        //     //     \"display\":\"inline-block\",\n        //     //     \"width\":\"24px\",\n        //     //     \"height\":\"16px\"\n        //     // },\n        //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n        //     \"width\":\"24px\",\n        //     \"height\":\"16px\"\n        // }).inject(tmp[0]);\n    }\n    */\n    \n    if(i===1){\n        div[0].style.backgroundColor=\"#4F7BBD\";\n    }\n    if(i===2){\n        div[0].style.backgroundColor=\"#F5A624\";\n    }\n}"
+              "code": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"처리할 문서가 없습니다!\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"traditional\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\nvar subList = this.target.subSourceItems;\nvar thisDate = new Date();\nfor(i=0;i<subList.length;i++){\n    var sub = subList[i].node;\n    var div = sub.getElements(\"div[name='sortIcon']\");\n    var ct = subList[i].data.createTime;\n    var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n    /*\n    if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n        div[0].style.backgroundColor=\"#F66363\";\n        var tmp = sub.getElements(\"div[name='title']\");\n        new Element(\"div\",{\n            \"styles\":{\n                \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n                \"display\":\"inline-block\",\n                \"width\":\"24px\",\n                \"height\":\"16px\",\n                \"margin-left\":\"10px\"\n            }\n        }).inject(tmp[0]);\n        // new Element(\"img\",{\n        //     // \"styles\":{\n        //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n        //     //     \"display\":\"inline-block\",\n        //     //     \"width\":\"24px\",\n        //     //     \"height\":\"16px\"\n        //     // },\n        //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n        //     \"width\":\"24px\",\n        //     \"height\":\"16px\"\n        // }).inject(tmp[0]);\n    }\n    */\n    \n    if(i===1){\n        div[0].style.backgroundColor=\"#4F7BBD\";\n    }\n    if(i===2){\n        div[0].style.backgroundColor=\"#F5A624\";\n    }\n}",
+              "html": "var subList = this.target.subSourceItems;\nif(subList.length==0){\n    var v = \"처리할 문서가 없습니다!\";\n    var l = this.data.langu;\n    if(l==\"simplified\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"traditional\"){\n        v = \"처리할 문서가 없습니다!\";\n    }else if(l==\"english\"){\n    \tv = \"Nothing work to do right now!\";\n    }\n\n    var noWork = new Element(\"div\",{\n        \"styles\":{\n            \"width\":\"300px\",\n            \"margin\":\"-10px auto 0px auto\"\n        }\n    }).inject(this.target.node);\n    new Element(\"div\",{\n        \"styles\":{\n            \"margin-left\":\"100px\",\n            \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_daiban.png)\",\n            \"width\":\"60px\",\n            \"height\":\"60px\"\n        }\n    }).inject(noWork);\n    new Element(\"div\",{\n        \"styles\":{\n            \"color\":\"#999999\",\n            \"margin-top\":\"10px\"\n        },\n        \"text\":v\n    }).inject(noWork)\n    \n    //this.target.node.set(\"text\",v);\n    this.target.node.setStyles({\n        \"text-align\":\"center\",\n        \"padding-top\":\"100px\",\n        \"font-size\":\"16px\",\n        \"font-weight\":\"blod\"\n    })    \n}\n\n\nvar subList = this.target.subSourceItems;\nvar thisDate = new Date();\nfor(i=0;i<subList.length;i++){\n    var sub = subList[i].node;\n    var div = sub.getElements(\"div[name='sortIcon']\");\n    var ct = subList[i].data.createTime;\n    var curDate = new Date(ct.replace(/-/g,\"/\"));\n    \n    /*\n    if(thisDate.getFullYear()==curDate.getFullYear() && thisDate.getMonth()==curDate.getMonth() && thisDate.getDate()==curDate.getDate()){\n        div[0].style.backgroundColor=\"#F66363\";\n        var tmp = sub.getElements(\"div[name='title']\");\n        new Element(\"div\",{\n            \"styles\":{\n                \"background-image\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n                \"display\":\"inline-block\",\n                \"width\":\"24px\",\n                \"height\":\"16px\",\n                \"margin-left\":\"10px\"\n            }\n        }).inject(tmp[0]);\n        // new Element(\"img\",{\n        //     // \"styles\":{\n        //     //     \"background\":\"url(../x_component_Strategy/$Main/default/icon/icon_new_red.png)\",\n        //     //     \"display\":\"inline-block\",\n        //     //     \"width\":\"24px\",\n        //     //     \"height\":\"16px\"\n        //     // },\n        //     \"src\":\"http://dev.o2oa.io../x_component_Strategy/$Main/default/icon/icon_new_red.png\",\n        //     \"width\":\"24px\",\n        //     \"height\":\"16px\"\n        // }).inject(tmp[0]);\n    }\n    */\n    \n    if(i===1){\n        div[0].style.backgroundColor=\"#4F7BBD\";\n    }\n    if(i===2){\n        div[0].style.backgroundColor=\"#F5A624\";\n    }\n}"
             }
           },
           "properties": {},
@@ -4931,8 +4931,8 @@
           },
           "events": {
             "click": {
-              "code": "// if (layout.desktop.apps[\"TaskCenter\"]){\n//     layout.desktop.apps[\"TaskCenter\"].close();\n// }\n\n// var app = layout.desktop.openApplication(this.event, \"process.TaskCenter\",null,{\n//     status:{\n//         \"navi\":\"todo\"\n//     }\n// });\n\n//this.page.toPage(\"办公中心\");\nthis.page.toPage(\"办公中心NEW\");",
-              "html": "// if (layout.desktop.apps[\"TaskCenter\"]){\n//     layout.desktop.apps[\"TaskCenter\"].close();\n// }\n\n// var app = layout.desktop.openApplication(this.event, \"process.TaskCenter\",null,{\n//     status:{\n//         \"navi\":\"todo\"\n//     }\n// });\n\n//this.page.toPage(\"办公中心\");\nthis.page.toPage(\"办公中心NEW\");"
+              "code": "// if (layout.desktop.apps[\"TaskCenter\"]){\n//     layout.desktop.apps[\"TaskCenter\"].close();\n// }\n\n// var app = layout.desktop.openApplication(this.event, \"process.TaskCenter\",null,{\n//     status:{\n//         \"navi\":\"todo\"\n//     }\n// });\n\n//this.page.toPage(\"업무함\");\nthis.page.toPage(\"업무함NEW\");",
+              "html": "// if (layout.desktop.apps[\"TaskCenter\"]){\n//     layout.desktop.apps[\"TaskCenter\"].close();\n// }\n\n// var app = layout.desktop.openApplication(this.event, \"process.TaskCenter\",null,{\n//     status:{\n//         \"navi\":\"todo\"\n//     }\n// });\n\n//this.page.toPage(\"업무함\");\nthis.page.toPage(\"업무함NEW\");"
             },
             "dblclick": {
               "code": "",
@@ -6055,8 +6055,8 @@
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略公告\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略公告\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 공지\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 공지\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -6265,8 +6265,8 @@
           "httpMethod": "PUT",
           "moduleName": "Source",
           "requestBody": {
-            "code": "return {\"appAliasList\": [\"专题分析\"]};",
-            "html": "return {\"appAliasList\": [\"专题分析\"]};"
+            "code": "return {\"appAliasList\": [\"주제 분석\"]};",
+            "html": "return {\"appAliasList\": [\"주제 분석\"]};"
           },
           "parameters": {},
           "isSaved": true,
@@ -6280,13 +6280,13 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"战略公告\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略公告\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略公告\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"战略公告\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略公告\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略公告\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"전략 공지\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"전략 공지\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 공지\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略公告\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略公告\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 공지\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 공지\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -6504,8 +6504,8 @@
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略资讯\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略资讯\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 소식\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 소식\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -6574,13 +6574,13 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"战略资讯\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略资讯\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略資訊\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"战略资讯\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略资讯\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略資訊\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"전략 소식\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"전략 소식\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略资讯\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略资讯\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 소식\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 소식\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -6794,8 +6794,8 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"战略资讯\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略资讯\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略資訊\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"战略资讯\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"战略资讯\";\r\n}else if(l==\"traditional\"){\r\n    v = \"戰略資訊\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"전략 소식\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"전략 소식\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"traditional\"){\r\n    v = \"전략 소식\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
@@ -6868,8 +6868,8 @@
           "src": "",
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略资讯\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"战略资讯\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 소식\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"전략 소식\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -7010,8 +7010,8 @@
           "httpMethod": "PUT",
           "moduleName": "Source",
           "requestBody": {
-            "code": "return {\"appAliasList\": [\"战略资讯\"]};",
-            "html": "return {\"appAliasList\": [\"战略资讯\"]};"
+            "code": "return {\"appAliasList\": [\"전략 소식\"]};",
+            "html": "return {\"appAliasList\": [\"전략 소식\"]};"
           },
           "parameters": {},
           "isSaved": true,
@@ -7237,8 +7237,8 @@
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"部门简介\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"部门简介\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"부서 소개\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"부서 소개\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -7306,13 +7306,13 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"部门简介\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"traditional\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"部门简介\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"traditional\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"부서 소개\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"traditional\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"부서 소개\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"traditional\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"部门简介\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"部门简介\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"부서 소개\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"부서 소개\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -7525,8 +7525,8 @@
           "valueType": "script",
           "text": "",
           "script": {
-            "code": "var v = \"部门简介\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"traditional\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
-            "html": "var v = \"部门简介\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"traditional\"){\r\n    v = \"部门简介\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
+            "code": "var v = \"부서 소개\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"traditional\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;",
+            "html": "var v = \"부서 소개\";\r\nvar l = this.data.langu;\r\nif(l==\"simplified\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"traditional\"){\r\n    v = \"부서 소개\";\r\n}else if(l==\"english\"){\r\n\tv = \"Announcements\";\r\n}\r\n\r\nreturn v;"
           },
           "events": {
             "click": {
@@ -7599,8 +7599,8 @@
           "src": "",
           "events": {
             "click": {
-              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"部门简介\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
-              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"部门简介\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
+              "code": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"부서 소개\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});",
+              "html": "layout.desktop.openApplication(this.event, \"cms.Module\", {\n    \"columnAlias\": \"부서 소개\",\n    \"appId\": \"cms.Module000b481a-54d7-48d0-894b-570c041278b9\"\n});"
             },
             "dblclick": {
               "code": "",
@@ -7740,8 +7740,8 @@
           "httpMethod": "PUT",
           "moduleName": "Source",
           "requestBody": {
-            "code": "return {\"appAliasList\": [\"部门简介\"]};",
-            "html": "return {\"appAliasList\": [\"部门简介\"]};"
+            "code": "return {\"appAliasList\": [\"부서 소개\"]};",
+            "html": "return {\"appAliasList\": [\"부서 소개\"]};"
           },
           "parameters": {},
           "isSaved": true,
@@ -7831,8 +7831,8 @@
           },
           "events": {
             "click": {
-              "code": "this.page.toPage(\"首页NEW\");",
-              "html": "this.page.toPage(\"首页NEW\");"
+              "code": "this.page.toPage(\"홈NEW\");",
+              "html": "this.page.toPage(\"홈NEW\");"
             },
             "dblclick": {
               "code": "",
@@ -7900,7 +7900,7 @@
           "type": "Label",
           "description": "",
           "valueType": "script",
-          "text": "主页",
+          "text": "홈",
           "script": {
             "code": "return this.data.lp.homepage.name;",
             "html": "return this.data.lp.homepage.name;"
@@ -10948,8 +10948,8 @@
           },
           "events": {
             "click": {
-              "code": "this.page.toPage(\"战略部署NEW\");",
-              "html": "this.page.toPage(\"战略部署NEW\");"
+              "code": "this.page.toPage(\"전략 배치NEW\");",
+              "html": "this.page.toPage(\"전략 배치NEW\");"
             },
             "dblclick": {
               "code": "",
@@ -11024,8 +11024,8 @@
           },
           "events": {
             "click": {
-              "code": "this.page.toPage(\"工作纲要统揽NEW\");",
-              "html": "this.page.toPage(\"工作纲要统揽NEW\");"
+              "code": "this.page.toPage(\"업무 요강 총괄NEW\");",
+              "html": "this.page.toPage(\"업무 요강 총괄NEW\");"
             },
             "dblclick": {
               "code": "",
@@ -11096,8 +11096,8 @@
           },
           "events": {
             "click": {
-              "code": "this.page.toPage(\"工作汇报部署NEW\");",
-              "html": "this.page.toPage(\"工作汇报部署NEW\");"
+              "code": "this.page.toPage(\"업무 보고 배치NEW\");",
+              "html": "this.page.toPage(\"업무 보고 배치NEW\");"
             },
             "dblclick": {
               "code": "",
@@ -11168,8 +11168,8 @@
           },
           "events": {
             "click": {
-              "code": "this.page.toPage(\"工作汇报统揽NEW\");",
-              "html": "this.page.toPage(\"工作汇报统揽NEW\");"
+              "code": "this.page.toPage(\"업무 보고 총괄NEW\");",
+              "html": "this.page.toPage(\"업무 보고 총괄NEW\");"
             },
             "dblclick": {
               "code": "",
@@ -11240,8 +11240,8 @@
           },
           "events": {
             "click": {
-              "code": "this.page.toPage(\"办公中心NEW\");",
-              "html": "this.page.toPage(\"办公中心NEW\");"
+              "code": "this.page.toPage(\"업무함NEW\");",
+              "html": "this.page.toPage(\"업무함NEW\");"
             },
             "dblclick": {
               "code": "",
@@ -11449,7 +11449,7 @@
           "type": "Label",
           "description": "",
           "valueType": "text",
-          "text": "战略管理系统",
+          "text": "전략 관리 시스템",
           "script": {
             "code": "",
             "html": ""
@@ -11523,14 +11523,14 @@
       "formStyleType": "none",
       "pid": "1fdf5b46-d255-4b6d-932e-4df15cc187cf1fdf5b46-d255-4b6d-932e-4df15cc187cf"
     },
-    "html": "<div id=\"1fdf5b46-d255-4b6d-932e-4df15cc187cf\" mwftype=\"form\"><div id=\"div_container\" mwftype=\"div\"><div id=\"div_top\" mwftype=\"div\"><div id=\"div_banner\" mwftype=\"div\"><img id=\"image_9\" src=\"http://192.168.10.206:20020/x_file_assemble_control/jaxrs/file/b69592e3-14ae-4737-b645-d9c74d689d86/download/stream\" mwftype=\"image\"><div id=\"label_16\" mwftype=\"label\">战略管理系统</div></div><div id=\"div\" mwftype=\"div\"><div id=\"label_12\" mwftype=\"label\">(T)Text</div><div id=\"label_13\" mwftype=\"label\">(T)Text</div><div id=\"label_14\" mwftype=\"label\">(T)Text</div></div><div id=\"div_link\" mwftype=\"div\"></div></div><div id=\"div_middle\" mwftype=\"div\"><div id=\"div_content\" mwftype=\"div\"><div id=\"div_8\" mwftype=\"div\"><div id=\"div_1\" mwftype=\"div\"></div><div id=\"div_5\" mwftype=\"div\"><div id=\"div_3\" mwftype=\"div\"><img id=\"image_1\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_shouye_click.png\" mwftype=\"image\"><div id=\"label_2\" mwftype=\"label\">主页</div></div><div id=\"div_navi_1\" mwftype=\"div\"><img id=\"image_2\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_nianbushu.png\" mwftype=\"image\"><div id=\"label_3\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_2\" mwftype=\"div\"><img id=\"image_3\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_ndgzhbzl_n.png\" mwftype=\"image\"><div id=\"label_4\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_3\" mwftype=\"div\"><img id=\"image_4\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_ybgzhbbs_y.png\" mwftype=\"image\"><div id=\"label_6\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_4\" mwftype=\"div\"><img id=\"image_5\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_ydgzhbzl_y.png\" mwftype=\"image\"><div id=\"label_19\" mwftype=\"label\">(C)Text</div></div><div id=\"div_info\" mwftype=\"div\"><img id=\"image_6\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_zhanlue.png\" mwftype=\"image\"><div id=\"label_23\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_6\" mwftype=\"div\"><img id=\"image_7\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_bangong.png\" mwftype=\"image\"><div id=\"label_24\" mwftype=\"label\">(C)Text</div></div><div id=\"div_29\" mwftype=\"div\"><img id=\"image_8\" src=\"../x_component_Strategy/$Main/default/icon/pic_moren.png\" mwftype=\"image\"><div id=\"div_37\" mwftype=\"div\"><div id=\"label_25\" mwftype=\"label\">(C)Text</div><div id=\"label_8\" mwftype=\"label\">(C)Text</div></div></div></div></div><div id=\"div_9\" mwftype=\"div\"><div id=\"div_12_1\" mwftype=\"div\"><div id=\"Source_Img\" mwftype=\"source\"><div id=\"SubSource_Img\" mwftype=\"subSource\"><div id=\"div_img\" mwftype=\"div\"><img id=\"image_3_1\" src=\"../x_component_portal_PageDesigner/Module/Image/default/icon/image1.png\" mwftype=\"image\"></div><div id=\"div_16_1\" mwftype=\"div\"><div id=\"div_28\" mwftype=\"div\"><div id=\"picButtons\" mwftype=\"div\"><div id=\"div_30\" mwftype=\"div\"></div><div id=\"div_31\" mwftype=\"div\"></div><div id=\"div_32\" mwftype=\"div\"></div><div id=\"div_33\" mwftype=\"div\"></div><div id=\"div_34\" mwftype=\"div\"></div></div></div><div id=\"SourceText_4_1\" mwftype=\"sourceText\">(T)Text</div></div></div><div id=\"div_40\" mwftype=\"div\"><div id=\"div_44\" mwftype=\"div\" background=\"\"></div></div><div id=\"div_41\" mwftype=\"div\"><div id=\"div_43\" mwftype=\"div\" background=\"\"></div></div></div></div><div id=\"div_15_1\" mwftype=\"div\"><div id=\"div_todo\" mwftype=\"div\"><div id=\"div_35\" mwftype=\"div\"><div id=\"tab_todo\" mwftype=\"div\"><div id=\"label_17\" mwftype=\"label\">(C)Text</div><div id=\"Source_8\" mwftype=\"source\"></div></div><div id=\"tab_toread\" mwftype=\"div\"><div id=\"label_18\" mwftype=\"label\">(C)Text</div><div id=\"Source_6\" mwftype=\"source\"></div></div></div><div id=\"task_content\" mwftype=\"div\"><div id=\"Source_3\" mwftype=\"source\"><div id=\"SubSource_3\" mwftype=\"subSource\" display=\"inline-block\"><div id=\"div_21\" mwftype=\"div\"><div id=\"SourceText_9\" name=\"sortIcon\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_11\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_10\" name=\"title\" mwftype=\"sourceText\">(T)Text</div></div></div></div><div id=\"Source_toread\" mwftype=\"source\"><div id=\"SubSource_6\" mwftype=\"subSource\" display=\"inline-block\"><div id=\"div_36\" mwftype=\"div\"><div id=\"SourceText_15\" name=\"sortIcon\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_16\" name=\"title\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_17\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div><div id=\"div_20\" mwftype=\"div\"><div id=\"label_11\" mwftype=\"label\">(C)Text</div></div></div></div></div><div id=\"div_10\" mwftype=\"div\"><div id=\"div_23\" mwftype=\"div\"><div id=\"div_15\" mwftype=\"div\"><div id=\"div_14\" mwftype=\"div\"><div id=\"div_38_1\" mwftype=\"div\"><div id=\"div_39_1\" mwftype=\"div\"></div><div id=\"label_20_1\" mwftype=\"label\">(C)Text</div></div><div id=\"div_17_1\" mwftype=\"div\"><div id=\"div_13_1\" mwftype=\"div\"><div id=\"label_9_1\" mwftype=\"label\">(C)Text</div><img id=\"image_16_1\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source_1_1\" mwftype=\"source\"><div id=\"SubSource_2\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_46\" mwftype=\"div\"><div id=\"label_1\" mwftype=\"label\">•</div><div id=\"div_47\" mwftype=\"div\"></div><div id=\"div_48\" mwftype=\"div\"><div id=\"SourceText_1\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div><div id=\"div_12\" mwftype=\"div\"><div id=\"div_bulletin\" mwftype=\"div\"><div id=\"div_38\" mwftype=\"div\"><div id=\"div_39\" mwftype=\"div\"></div><div id=\"label_20\" mwftype=\"label\">(C)Text</div></div><div id=\"div_17\" mwftype=\"div\"><div id=\"div_13\" mwftype=\"div\"><div id=\"label_9\" mwftype=\"label\">(C)Text</div><img id=\"image_16\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source_1\" mwftype=\"source\"><div id=\"SubSource\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_45\" mwftype=\"div\"><div id=\"label_21\" mwftype=\"label\">•</div><div id=\"div_24\" mwftype=\"div\"></div><div id=\"div_42\" mwftype=\"div\"><div id=\"SourceText_3\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div></div><div id=\"div_22\" mwftype=\"div\"><div id=\"div_2\" mwftype=\"div\"><div id=\"div_6\" mwftype=\"div\"><div id=\"div_7\" mwftype=\"div\"><div id=\"div_16\" mwftype=\"div\"></div><div id=\"label_10\" mwftype=\"label\">(C)Text</div></div><div id=\"div_18\" mwftype=\"div\"><div id=\"div_19\" mwftype=\"div\"><div id=\"label_15\" mwftype=\"label\">(C)Text</div><img id=\"image\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source\" mwftype=\"source\"><div id=\"SubSource_4\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_52\" mwftype=\"div\"><div id=\"label_7\" mwftype=\"label\">•</div><div id=\"div_53\" mwftype=\"div\"></div><div id=\"div_54\" mwftype=\"div\"><div id=\"SourceText\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div><div id=\"div_12_2\" mwftype=\"div\"><div id=\"div_bulletin_1\" mwftype=\"div\"><div id=\"div_38_2\" mwftype=\"div\"><div id=\"div_39_2\" mwftype=\"div\"></div><div id=\"label_20_2\" mwftype=\"label\">(C)Text</div></div><div id=\"div_17_2\" mwftype=\"div\"><div id=\"div_13_2\" mwftype=\"div\"><div id=\"label_9_2\" mwftype=\"label\">(C)Text</div><img id=\"image_16_2\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source_1_2\" mwftype=\"source\"><div id=\"SubSource_1\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_49\" mwftype=\"div\"><div id=\"label_5\" mwftype=\"label\">•</div><div id=\"div_50\" mwftype=\"div\"></div><div id=\"div_51\" mwftype=\"div\"><div id=\"SourceText_2\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div></div></div></div></div><div id=\"div_bottom\" mwftype=\"div\"><div id=\"label\" mwftype=\"label\">©2018 O2OA门户模板。</div></div></div></div>",
+    "html": "<div id=\"1fdf5b46-d255-4b6d-932e-4df15cc187cf\" mwftype=\"form\"><div id=\"div_container\" mwftype=\"div\"><div id=\"div_top\" mwftype=\"div\"><div id=\"div_banner\" mwftype=\"div\"><img id=\"image_9\" src=\"http://192.168.10.206:20020/x_file_assemble_control/jaxrs/file/b69592e3-14ae-4737-b645-d9c74d689d86/download/stream\" mwftype=\"image\"><div id=\"label_16\" mwftype=\"label\">전략 관리 시스템</div></div><div id=\"div\" mwftype=\"div\"><div id=\"label_12\" mwftype=\"label\">(T)Text</div><div id=\"label_13\" mwftype=\"label\">(T)Text</div><div id=\"label_14\" mwftype=\"label\">(T)Text</div></div><div id=\"div_link\" mwftype=\"div\"></div></div><div id=\"div_middle\" mwftype=\"div\"><div id=\"div_content\" mwftype=\"div\"><div id=\"div_8\" mwftype=\"div\"><div id=\"div_1\" mwftype=\"div\"></div><div id=\"div_5\" mwftype=\"div\"><div id=\"div_3\" mwftype=\"div\"><img id=\"image_1\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_shouye_click.png\" mwftype=\"image\"><div id=\"label_2\" mwftype=\"label\">홈</div></div><div id=\"div_navi_1\" mwftype=\"div\"><img id=\"image_2\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_nianbushu.png\" mwftype=\"image\"><div id=\"label_3\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_2\" mwftype=\"div\"><img id=\"image_3\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_ndgzhbzl_n.png\" mwftype=\"image\"><div id=\"label_4\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_3\" mwftype=\"div\"><img id=\"image_4\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_ybgzhbbs_y.png\" mwftype=\"image\"><div id=\"label_6\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_4\" mwftype=\"div\"><img id=\"image_5\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_ydgzhbzl_y.png\" mwftype=\"image\"><div id=\"label_19\" mwftype=\"label\">(C)Text</div></div><div id=\"div_info\" mwftype=\"div\"><img id=\"image_6\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_zhanlue.png\" mwftype=\"image\"><div id=\"label_23\" mwftype=\"label\">(C)Text</div></div><div id=\"div_navi_6\" mwftype=\"div\"><img id=\"image_7\" src=\"../x_component_Strategy/$Main/default/icon/navi/icon_bangong.png\" mwftype=\"image\"><div id=\"label_24\" mwftype=\"label\">(C)Text</div></div><div id=\"div_29\" mwftype=\"div\"><img id=\"image_8\" src=\"../x_component_Strategy/$Main/default/icon/pic_moren.png\" mwftype=\"image\"><div id=\"div_37\" mwftype=\"div\"><div id=\"label_25\" mwftype=\"label\">(C)Text</div><div id=\"label_8\" mwftype=\"label\">(C)Text</div></div></div></div></div><div id=\"div_9\" mwftype=\"div\"><div id=\"div_12_1\" mwftype=\"div\"><div id=\"Source_Img\" mwftype=\"source\"><div id=\"SubSource_Img\" mwftype=\"subSource\"><div id=\"div_img\" mwftype=\"div\"><img id=\"image_3_1\" src=\"../x_component_portal_PageDesigner/Module/Image/default/icon/image1.png\" mwftype=\"image\"></div><div id=\"div_16_1\" mwftype=\"div\"><div id=\"div_28\" mwftype=\"div\"><div id=\"picButtons\" mwftype=\"div\"><div id=\"div_30\" mwftype=\"div\"></div><div id=\"div_31\" mwftype=\"div\"></div><div id=\"div_32\" mwftype=\"div\"></div><div id=\"div_33\" mwftype=\"div\"></div><div id=\"div_34\" mwftype=\"div\"></div></div></div><div id=\"SourceText_4_1\" mwftype=\"sourceText\">(T)Text</div></div></div><div id=\"div_40\" mwftype=\"div\"><div id=\"div_44\" mwftype=\"div\" background=\"\"></div></div><div id=\"div_41\" mwftype=\"div\"><div id=\"div_43\" mwftype=\"div\" background=\"\"></div></div></div></div><div id=\"div_15_1\" mwftype=\"div\"><div id=\"div_todo\" mwftype=\"div\"><div id=\"div_35\" mwftype=\"div\"><div id=\"tab_todo\" mwftype=\"div\"><div id=\"label_17\" mwftype=\"label\">(C)Text</div><div id=\"Source_8\" mwftype=\"source\"></div></div><div id=\"tab_toread\" mwftype=\"div\"><div id=\"label_18\" mwftype=\"label\">(C)Text</div><div id=\"Source_6\" mwftype=\"source\"></div></div></div><div id=\"task_content\" mwftype=\"div\"><div id=\"Source_3\" mwftype=\"source\"><div id=\"SubSource_3\" mwftype=\"subSource\" display=\"inline-block\"><div id=\"div_21\" mwftype=\"div\"><div id=\"SourceText_9\" name=\"sortIcon\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_11\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_10\" name=\"title\" mwftype=\"sourceText\">(T)Text</div></div></div></div><div id=\"Source_toread\" mwftype=\"source\"><div id=\"SubSource_6\" mwftype=\"subSource\" display=\"inline-block\"><div id=\"div_36\" mwftype=\"div\"><div id=\"SourceText_15\" name=\"sortIcon\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_16\" name=\"title\" mwftype=\"sourceText\">(T)Text</div><div id=\"SourceText_17\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div><div id=\"div_20\" mwftype=\"div\"><div id=\"label_11\" mwftype=\"label\">(C)Text</div></div></div></div></div><div id=\"div_10\" mwftype=\"div\"><div id=\"div_23\" mwftype=\"div\"><div id=\"div_15\" mwftype=\"div\"><div id=\"div_14\" mwftype=\"div\"><div id=\"div_38_1\" mwftype=\"div\"><div id=\"div_39_1\" mwftype=\"div\"></div><div id=\"label_20_1\" mwftype=\"label\">(C)Text</div></div><div id=\"div_17_1\" mwftype=\"div\"><div id=\"div_13_1\" mwftype=\"div\"><div id=\"label_9_1\" mwftype=\"label\">(C)Text</div><img id=\"image_16_1\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source_1_1\" mwftype=\"source\"><div id=\"SubSource_2\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_46\" mwftype=\"div\"><div id=\"label_1\" mwftype=\"label\">•</div><div id=\"div_47\" mwftype=\"div\"></div><div id=\"div_48\" mwftype=\"div\"><div id=\"SourceText_1\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div><div id=\"div_12\" mwftype=\"div\"><div id=\"div_bulletin\" mwftype=\"div\"><div id=\"div_38\" mwftype=\"div\"><div id=\"div_39\" mwftype=\"div\"></div><div id=\"label_20\" mwftype=\"label\">(C)Text</div></div><div id=\"div_17\" mwftype=\"div\"><div id=\"div_13\" mwftype=\"div\"><div id=\"label_9\" mwftype=\"label\">(C)Text</div><img id=\"image_16\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source_1\" mwftype=\"source\"><div id=\"SubSource\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_45\" mwftype=\"div\"><div id=\"label_21\" mwftype=\"label\">•</div><div id=\"div_24\" mwftype=\"div\"></div><div id=\"div_42\" mwftype=\"div\"><div id=\"SourceText_3\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div></div><div id=\"div_22\" mwftype=\"div\"><div id=\"div_2\" mwftype=\"div\"><div id=\"div_6\" mwftype=\"div\"><div id=\"div_7\" mwftype=\"div\"><div id=\"div_16\" mwftype=\"div\"></div><div id=\"label_10\" mwftype=\"label\">(C)Text</div></div><div id=\"div_18\" mwftype=\"div\"><div id=\"div_19\" mwftype=\"div\"><div id=\"label_15\" mwftype=\"label\">(C)Text</div><img id=\"image\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source\" mwftype=\"source\"><div id=\"SubSource_4\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_52\" mwftype=\"div\"><div id=\"label_7\" mwftype=\"label\">•</div><div id=\"div_53\" mwftype=\"div\"></div><div id=\"div_54\" mwftype=\"div\"><div id=\"SourceText\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div><div id=\"div_12_2\" mwftype=\"div\"><div id=\"div_bulletin_1\" mwftype=\"div\"><div id=\"div_38_2\" mwftype=\"div\"><div id=\"div_39_2\" mwftype=\"div\"></div><div id=\"label_20_2\" mwftype=\"label\">(C)Text</div></div><div id=\"div_17_2\" mwftype=\"div\"><div id=\"div_13_2\" mwftype=\"div\"><div id=\"label_9_2\" mwftype=\"label\">(C)Text</div><img id=\"image_16_2\" src=\"../x_component_Strategy/$Main/default/icon/icon_2all.png\" mwftype=\"image\"></div><div id=\"Source_1_2\" mwftype=\"source\"><div id=\"SubSource_1\" mwftype=\"subSource\" sub=\"yes\" subitem=\"yes\"><div id=\"div_49\" mwftype=\"div\"><div id=\"label_5\" mwftype=\"label\">•</div><div id=\"div_50\" mwftype=\"div\"></div><div id=\"div_51\" mwftype=\"div\"><div id=\"SourceText_2\" mwftype=\"sourceText\">(T)Text</div></div></div></div></div></div></div></div></div></div></div></div><div id=\"div_bottom\" mwftype=\"div\"><div id=\"label\" mwftype=\"label\">©2018 O2OA 포털 템플릿.</div></div></div></div>",
     "id": "",
     "isNewPage": false
   },
   "mobileData": {
     "json": {
       "id": "",
-      "name": "新建表单",
+      "name": "새 양식",
       "type": "Form",
       "mode": "Mobile",
       "description": "",

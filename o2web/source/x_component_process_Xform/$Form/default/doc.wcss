@@ -37,7 +37,7 @@
         "min-height": "22.5cm",
         "position": "relative",
         "font-size": "16pt",
-        "font-family": "'仿宋_GB2312', serif",
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif",
         "line-height": "1.02cm",
         "letter-spacing": "-0.01cm"
     },

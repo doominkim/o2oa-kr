@@ -340,11 +340,11 @@ MWF.xApplication.process.FormDesigner.widget.SectionMerger = new Class({
 			'    </div>' +
 			'    <div class="sectionMergeReadHtmlScriptArea">' +
 			'        <div class="MWFScriptArea" name="sectionMergeReadHtmlScript" title="'+this.lp.sectionMergeReadHtmlScript+' (S)"></div>' +
-			'        <div style="padding: 10px;color:#999">返回需展现的html</div>' +
+			'        <div style="padding: 10px;color:#999">표시할 html을 반환합니다</div>' +
 			'    </div>    ' +
 			'    <div class="sectionMergeReadDataScriptArea">' +
 			'        <div class="MWFScriptArea" name="sectionMergeReadDataScript" title="'+this.lp.sectionMergeReadDataScript+' (S)"></div>' +
-			'        <div style="padding: 10px;color:#999">返回删除区段后合并的数据,不保存到后台</div>' +
+			'        <div style="padding: 10px;color:#999">구간을 제거하고 병합한 데이터를 반환합니다. 서버에는 저장하지 않습니다</div>' +
 			'    </div>    ' +
 			'</div>' +
 			'<div class="sectionMergeEditArea">' +
@@ -356,15 +356,15 @@ MWF.xApplication.process.FormDesigner.widget.SectionMerger = new Class({
 			'    </table>' +
 			'    <div class="sectionMergeEditScriptArea">' +
 			'        <div class="MWFScriptArea" name="sectionMergeEditScript" title="'+this.lp.sectionMergeEditScript+' (S)"></div>' +
-			'        <div style="padding: 10px;color:#999">通过this.data[fieldId]获取字段数据，返回删除区段后合并的数据。</div>' +
+			'        <div style="padding: 10px;color:#999">this.data[fieldId]로 필드 데이터를 가져와 구간을 제거하고 병합한 데이터를 반환합니다.</div>' +
 			'    </div>' +
 			'</div>' +
 			'<div class="sectionMergeSortScriptArea">' +
 			'    <div class="MWFScriptArea" name="sectionMergeSortScript" title="'+this.lp.sectionMergeSortScript+' (S)"></div>' +
-			'    <div style="padding: 10px;color:#999">排序脚本通过this.event.a和this.event.b获取数据，处理后返回正数表示升序，负数表示降序。this.event.a和this.event.b值如: <br/>' +
+			'    <div style="padding: 10px;color:#999">정렬 스크립트는 this.event.a와 this.event.b로 데이터를 가져오며, 처리 후 양수를 반환하면 오름차순, 음수를 반환하면 내림차순입니다. this.event.a와 this.event.b 값 예: <br/>' +
 			'        { <br/>' +
-			'        key: "张三@zhangsan@P", //区段值 <br/>' +
-			'        data: "内容" //字段内容 <br/>' +
+			'        key: "홍길동@zhangsan@P", //구간 값 <br/>' +
+			'        data: "내용" //필드 내용 <br/>' +
 			'        }' +
 			'    </div>' +
 			'</div>'

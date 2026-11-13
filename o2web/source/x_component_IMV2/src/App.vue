@@ -64,7 +64,7 @@ onMounted(() => {
   loadImConfig()
   // 监听 websocket 消息
   if (layout.desktop && layout.desktop.socket && layout.desktop.socket.addImListener) {
-    console.debug('websocket 消息 addImListener => ')
+    console.debug('websocket 메시지 addImListener => ')
     layout.desktop.socket.addImListener("im_revoke", imWsRevokeMessage);
     layout.desktop.socket.addImListener("im_create", imWsCreateMessage);
     layout.desktop.socket.addImListener("im_conversation", imWsConversationMessage);
@@ -115,7 +115,7 @@ const openConversationForOutside = (conversation) => {
       currentConversation.value = conversation
       eventBus.publish( EventName.initOpenedConversation, conversation)
     } else {
-      console.error('当前用户不能打开这个会话', conversation)
+      console.error('현재 사용자는 이 대화방을 열 수 없습니다', conversation)
     }
   })
 }
@@ -138,18 +138,18 @@ provide('im-app', {
 
 // websocket 创建消息
 const imWsCreateMessage = (msg) => {
-  console.debug('websocket 消息 创建=====> ', msg)
+  console.debug('websocket 메시지 생성=====> ', msg)
   eventBus.publish( EventName.wsAddMsg, msg )
   eventBus.publish( EventName.refreshMyConversation ) // 刷新列表
 }
 // websocket 撤回消息
 const imWsRevokeMessage = (msg) => {
-  console.debug('websocket 消息 撤回=====> ', msg)
+  console.debug('websocket 메시지 회수=====> ', msg)
   eventBus.publish( EventName.wsRevokeMsg, msg )
 }
 // websocket 会话更新消息
 const imWsConversationMessage = (conversation) => {
-  console.debug('websocket 消息 会话更新=====> ', conversation)
+  console.debug('websocket 메시지 대화방 업데이트=====> ', conversation)
   eventBus.publish( EventName.refreshMyConversation ) // 刷新列表
 }
 
@@ -205,7 +205,7 @@ const openMsg = (msg) => {
       layout.openApplication(null, "OnlyOfficeEditor", options);
       return;
     } else if (body.fileExtension && (body.fileExtension.toLowerCase() === "mp4" || body.fileExtension.toLowerCase() === "avi" || body.fileExtension.toLowerCase() === "ogg")) {
-      console.log('视频文件无需下载！')
+      console.log('동영상 파일은 다운로드할 필요가 없습니다!')
       return;
     }
     window.open(getImFileDownloadUrl(body.fileId));

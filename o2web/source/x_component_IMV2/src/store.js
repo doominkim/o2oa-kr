@@ -21,7 +21,7 @@ export const windowState = defineStore('windowState', {
 export const useLoadingStore = defineStore('loading', {
     state: () => ({
         isLoading: false,
-        loadingText: '加载中...'
+        loadingText: '불러오는 중...'
     }),
     actions: {
         showLoading(text) {
@@ -81,7 +81,7 @@ export const uploadFileList = defineStore('uploadFileList', {
     actions: {
         async addUploadFileAndSendMessage (file, conversationId)  {
             if (!file || !conversationId) {
-                console.error('没有传入 file 或者 conversationId')
+                console.error('file 또는 conversationId가 전달되지 않았습니다')
                 return
             }
             const formData = new FormData();
@@ -143,7 +143,7 @@ export const uploadFileList = defineStore('uploadFileList', {
                 };
                 const result = await imAction('msgCreate', message);
                 if (result) {
-                    console.log('发送消息成功', result);
+                    console.log('메시지 전송 성공', result);
                 }
             }
         },

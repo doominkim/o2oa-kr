@@ -70,7 +70,7 @@ const clickPersonIdentity = async (identity) => {
       emit('chatWithPerson', person.distinguishedName)
     }
   } else {
-    console.error('错误的对象', identity)
+    console.error('잘못된 대상', identity)
   }
 }
 // 点击展开

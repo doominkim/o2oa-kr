@@ -48,7 +48,7 @@ MWF.xApplication.Template.Selector.Custom = new Class({
     options: {
         "style": "default",
         "count": 0,
-        "title": "选择列表",
+        "title": "선택 목록",
         "values": [],
         "selectableItems": [],
         "names": [],

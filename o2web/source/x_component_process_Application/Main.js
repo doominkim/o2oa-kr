@@ -941,7 +941,7 @@ MWF.xApplication.process.Application.AllList = new Class({
 			data.creatorPersonName = data.creatorPerson.split("@")[0];
 			data.creatorUnitName = data.creatorUnit.split("@")[0];
 			if(data.completed) {
-				data.activityName = "结束";
+				data.activityName = "종료";
 			}else {
 				if(data.taskList.length >0){
 					data.activityName = data.taskList[0].activityName;
@@ -1180,9 +1180,9 @@ MWF.xApplication.process.Application.WorkList = new Class({
 	delete : function(id,e){
 		var _self = this;
 
-		this.app.confirm("warn", e,"删除确认！！", {
-			"html": "<br/>请选择删除方式？ <br/><input type='radio' value='soft' name='delete_type'/>软删除（可恢复）" +
-				"<br/><input type='radio' value='delete' name='delete_type'/>硬删除（不能恢复）<div class='checkInfor'></div>"
+		this.app.confirm("warn", e,"삭제 확인", {
+			"html": "<br/>삭제 방식을 선택하세요. <br/><input type='radio' value='soft' name='delete_type'/>소프트 삭제(복구 가능)" +
+				"<br/><input type='radio' value='delete' name='delete_type'/>영구 삭제(복구 불가)<div class='checkInfor'></div>"
 
 		}, 400, 200, function(){
 			var inputs = this.content.getElements("input");
@@ -1196,12 +1196,12 @@ MWF.xApplication.process.Application.WorkList = new Class({
 			}
 			if (flag){
 				_self.action[flag === "soft"?"SnapAction":"WorkAction"][flag === "soft"?"typeAbandoned":"delete"]( id , function(){
-					_self.app.notice("成功删除工作。");
+					_self.app.notice("작업을 삭제했습니다.");
 					_self.refresh();
 				});
 				this.close();
 			}else{
-				this.content.getElement(".checkInfor").set("text", "请选择删除方式！").setStyle("color", "red");
+				this.content.getElement(".checkInfor").set("text", "삭제 방식을 선택하세요.").setStyle("color", "red");
 			}
 		}, function(){
 			this.close();
@@ -1269,9 +1269,9 @@ MWF.xApplication.process.Application.WorkCompletedList = new Class({
 	delete : function(id,e){
 		var _self = this;
 
-		this.app.confirm("warn", e,"删除确认！！", {
-			"html": "<br/>请选择删除方式？ <br/><input type='radio' value='soft' name='delete_type'/>软删除（可恢复）" +
-				"<br/><input type='radio' value='delete' name='delete_type'/>硬删除（不能恢复）<div class='checkInfor'></div>"
+		this.app.confirm("warn", e,"삭제 확인", {
+			"html": "<br/>삭제 방식을 선택하세요. <br/><input type='radio' value='soft' name='delete_type'/>소프트 삭제(복구 가능)" +
+				"<br/><input type='radio' value='delete' name='delete_type'/>영구 삭제(복구 불가)<div class='checkInfor'></div>"
 
 		}, 400, 200, function(){
 			var inputs = this.content.getElements("input");
@@ -1285,12 +1285,12 @@ MWF.xApplication.process.Application.WorkCompletedList = new Class({
 			}
 			if (flag){
 				_self.action[flag === "soft"?"SnapAction":"WorkCompletedAction"][flag === "soft"?"typeAbandonedWorkCompleted":"manageDelete"]( id , function(){
-					_self.app.notice("成功删除工作。");
+					_self.app.notice("작업을 삭제했습니다.");
 					_self.refresh();
 				});
 				this.close();
 			}else{
-				this.content.getElement(".checkInfor").set("text", "请选择删除方式！").setStyle("color", "red");
+				this.content.getElement(".checkInfor").set("text", "삭제 방식을 선택하세요.").setStyle("color", "red");
 			}
 		}, function(){
 			this.close();
@@ -1340,10 +1340,10 @@ MWF.xApplication.process.Application.SnapList = new Class({
 	},
 	delete : function(id,e){
 		var _self = this;
-		this.app.confirm("warn", e, "删除确认", "删除后不能恢复。", 350, 120, function () {
+		this.app.confirm("warn", e, "삭제 확인", "삭제 후에는 복구할 수 없습니다.", 350, 120, function () {
 
 			_self.action.SnapAction.delete( id , function(){
-				_self.app.notice("成功删除");
+				_self.app.notice("삭제했습니다.");
 				_self.refresh();
 			});
 			this.close();
@@ -1549,7 +1549,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 			},
 			setArchive : {
 				action : "setArchive",
-				text : "修改配置",
+				text : "설정 수정",
 				icon : "icon-upload"
 			},
 			rollback : {
@@ -1652,7 +1652,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 			});
 			form.edit()
 		}else {
-			this.app.notice("请先选择文件","error");
+			this.app.notice("문서를 먼저 선택하세요","error");
 			return;
 		}
 
@@ -1668,7 +1668,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 			});
 			form.edit()
 		}else {
-			this.app.notice("请先选择文件","error");
+			this.app.notice("문서를 먼저 선택하세요","error");
 			return;
 		}
 
@@ -1678,9 +1678,9 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 		var _self = this;
 		var dataList = this.explorer.selectedList;
 
-		this.app.confirm("warn", e,"删除确认！！", {
-			"html": "<br/>请选择删除方式？ <br/><input type='radio' value='soft' name='delete_type'/>软删除（可恢复）" +
-				"<br/><input type='radio' value='delete' name='delete_type'/>硬删除（不能恢复）<div class='checkInfor'></div>"
+		this.app.confirm("warn", e,"삭제 확인", {
+			"html": "<br/>삭제 방식을 선택하세요. <br/><input type='radio' value='soft' name='delete_type'/>소프트 삭제(복구 가능)" +
+				"<br/><input type='radio' value='delete' name='delete_type'/>영구 삭제(복구 불가)<div class='checkInfor'></div>"
 
 		}, 400, 200, function(){
 			var inputs = this.content.getElements("input");
@@ -1704,7 +1704,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 						_self.action.SnapAction.typeAbandoned( data.id , function(){
 							count++;
 							if( dataList.length == count ){
-								_self.app.notice("成功删除"+count+"个工作。");
+								_self.app.notice("작업 "+count+"건을 삭제했습니다.");
 								_self.explorer.refresh();
 							}
 						});
@@ -1713,7 +1713,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 						_self.action.WorkAction.delete( data.id , function(){
 							count++;
 							if( dataList.length == count ){
-								_self.app.notice("成功删除"+count+"个工作。");
+								_self.app.notice("작업 "+count+"건을 삭제했습니다.");
 								_self.explorer.refresh();
 							}
 						});
@@ -1725,7 +1725,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 
 
 			}else{
-				this.content.getElement(".checkInfor").set("text", "请选择删除方式！").setStyle("color", "red");
+				this.content.getElement(".checkInfor").set("text", "삭제 방식을 선택하세요.").setStyle("color", "red");
 			}
 		}, function(){
 			this.close();
@@ -1734,13 +1734,13 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 	processing : function (e){
 		var _self = this;
 		var dataList = this.explorer.selectedList;
-		this.app.confirm("warn", e, "尝试流转确认", "是否尝试流转选中的"+dataList.length+"个文档？", 350, 120, function () {
+		this.app.confirm("warn", e, "진행 시도 확인", "선택한 문서 "+dataList.length+"건의 진행을 시도하시겠습니까?", 350, 120, function () {
 			var count = 0;
 			dataList.each( function(data){
 				_self.action.WorkAction.processing( data.id , {},function(){
 					count++;
 					if( dataList.length == count ){
-						_self.app.notice("成功处理"+count+"个文档。");
+						_self.app.notice("문서 "+count+"건을 처리했습니다.");
 						_self.explorer.refresh();
 					}
 				});
@@ -1755,9 +1755,9 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 		var _self = this;
 		var dataList = this.explorer.selectedList;
 
-		this.app.confirm("warn", e,"删除确认！！", {
-			"html": "<br/>请选择删除方式？ <br/><input type='radio' value='soft' name='delete_type'/>软删除（可恢复）" +
-				"<br/><input type='radio' value='delete' name='delete_type'/>硬删除（不能恢复）<div class='checkInfor'></div>"
+		this.app.confirm("warn", e,"삭제 확인", {
+			"html": "<br/>삭제 방식을 선택하세요. <br/><input type='radio' value='soft' name='delete_type'/>소프트 삭제(복구 가능)" +
+				"<br/><input type='radio' value='delete' name='delete_type'/>영구 삭제(복구 불가)<div class='checkInfor'></div>"
 
 		}, 400, 280, function(){
 			var inputs = this.content.getElements("input");
@@ -1781,7 +1781,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 						_self.action.SnapAction.typeAbandonedWorkCompleted( data.id , function(){
 							count++;
 							if( dataList.length == count ){
-								_self.app.notice("成功删除"+count+"个工作。");
+								_self.app.notice("작업 "+count+"건을 삭제했습니다.");
 								_self.explorer.refresh();
 							}
 						});
@@ -1790,7 +1790,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 						_self.action.WorkCompletedAction.manageDelete( data.id , function(){
 							count++;
 							if( dataList.length == count ){
-								_self.app.notice("成功删除"+count+"个工作。");
+								_self.app.notice("작업 "+count+"건을 삭제했습니다.");
 								_self.explorer.refresh();
 							}
 						});
@@ -1804,7 +1804,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 
 
 			}else{
-				this.content.getElement(".checkInfor").set("text", "请选择删除方式！").setStyle("color", "red");
+				this.content.getElement(".checkInfor").set("text", "삭제 방식을 선택하세요.").setStyle("color", "red");
 			}
 		}, function(){
 			this.close();
@@ -1813,7 +1813,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 	endWork : function (e){
 		var _self = this;
 		var dataList = this.explorer.selectedList;
-		this.app.confirm("warn", e, "结束确认", "是否结束选中的"+dataList.length+"个文档？", 350, 120, function () {
+		this.app.confirm("warn", e, "종료 확인", "선택한 문서 "+dataList.length+"건을 종료하시겠습니까?", 350, 120, function () {
 			var count = 0;
 			dataList.each( function(data){
 
@@ -1831,7 +1831,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 					_self.action.WorkAction.V2Reroute(data.id, body, function (json) {
 						count++;
 						if( dataList.length == count ){
-							_self.app.notice("成功结束"+count+"个文档。");
+							_self.app.notice("문서 "+count+"건을 종료했습니다.");
 							_self.explorer.refresh();
 						}
 					});
@@ -1846,13 +1846,13 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 	delSnap : function (e){
 		var _self = this;
 		var dataList = this.explorer.selectedList;
-		this.app.confirm("warn", e, "删除确认", "是否删除选中的"+dataList.length+"个文档？删除后不能恢复。", 350, 120, function () {
+		this.app.confirm("warn", e, "삭제 확인", "선택한 문서 "+dataList.length+"건을 삭제하시겠습니까? 삭제 후에는 복구할 수 없습니다.", 350, 120, function () {
 			var count = 0;
 			dataList.each( function(data){
 				_self.action.SnapAction.delete( data.id , function(){
 					count++;
 					if( dataList.length == count ){
-						_self.app.notice("成功删除"+count+"个文档。");
+						_self.app.notice("문서 "+count+"건을 삭제했습니다.");
 						_self.explorer.refresh();
 					}
 				});
@@ -1865,13 +1865,13 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 	restore: function (e){
 		var _self = this;
 		var dataList = this.explorer.selectedList;
-		this.app.confirm("warn", e, "恢复确认", "是否恢复选中的"+dataList.length+"个文档？", 350, 120, function () {
+		this.app.confirm("warn", e, "복구 확인", "선택한 문서 "+dataList.length+"건을 복구하시겠습니까?", 350, 120, function () {
 			var count = 0;
 			dataList.each( function(data){
 				_self.action.SnapAction.restore( data.id , function(){
 					count++;
 					if( dataList.length == count ){
-						_self.app.notice("成功恢复"+count+"个文档。");
+						_self.app.notice("문서 "+count+"건을 복구했습니다.");
 						_self.explorer.refresh();
 					}
 				});
@@ -1884,13 +1884,13 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 	delArchive : function (e){
 		var _self = this;
 		var dataList = this.explorer.selectedList;
-		this.app.confirm("warn", e, "删除确认", "是否删除选中的"+dataList.length+"个配置？删除后不能恢复。", 350, 120, function () {
+		this.app.confirm("warn", e, "삭제 확인", "선택한 설정 "+dataList.length+"건을 삭제하시겠습니까? 삭제 후에는 복구할 수 없습니다.", 350, 120, function () {
 			var count = 0;
 			dataList.each( function(data){
 				o2.Actions.load("x_processplatform_assemble_designer").MergeItemPlanAction.delete( data.id , function(){
 					count++;
 					if( dataList.length == count ){
-						_self.app.notice("成功删除"+count+"个配置。");
+						_self.app.notice("설정 "+count+"건을 삭제했습니다.");
 						_self.explorer.refresh();
 					}
 				});
@@ -1903,13 +1903,13 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 	delSerial : function (e){
 		var _self = this;
 		var dataList = this.explorer.selectedList;
-		this.app.confirm("warn", e, "删除确认", "是否删除选中的"+dataList.length+"个流水号？删除后不能恢复。", 350, 120, function () {
+		this.app.confirm("warn", e, "삭제 확인", "선택한 일련번호 "+dataList.length+"건을 삭제하시겠습니까? 삭제 후에는 복구할 수 없습니다.", 350, 120, function () {
 			var count = 0;
 			dataList.each( function(data){
 				_self.action.SerialNumberAction.delete( data.id , function(){
 					count++;
 					if( dataList.length == count ){
-						_self.app.notice("成功删除"+count+"个流水号。");
+						_self.app.notice("일련번호 "+count+"건을 삭제했습니다.");
 						_self.explorer.refresh();
 					}
 				});
@@ -1931,7 +1931,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 		var _self = this;
 
 		var reviewNode = new Element("div",{"class":"control","style":"margin:10px"});
-		var personNode =  new Element("textarea",{"class":"textarea","placeholder":"参阅人员选择"});
+		var personNode =  new Element("textarea",{"class":"textarea","placeholder":"참조자 선택"});
 		personNode.inject(reviewNode);
 		personNode.addEvent("click",function(){
 			var opt = {
@@ -1954,7 +1954,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 		}.bind(this));
 
 		var reviewDlg = o2.DL.open({
-			"title": "增加参阅",
+			"title": "참조 추가",
 			"width": "400px",
 			"height": "260px",
 			"mask": true,
@@ -1966,7 +1966,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 			}.bind(this),
 			"buttonList": [
 				{
-					"text": "确认",
+					"text": "확인",
 					"action": function () {
 						var personList = personNode.retrieve("dataList") ;
 						var arr = [];
@@ -1990,14 +1990,14 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 
 						});
 
-						_self.app.notice("增加成功。","success");
+						_self.app.notice("추가했습니다.","success");
 						_self.explorer.refresh();
 
 						reviewDlg.close();
 					}.bind(this)
 				},
 				{
-					"text": "关闭",
+					"text": "닫기",
 					"action": function () {
 						reviewDlg.close();
 					}.bind(this)
@@ -2021,7 +2021,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 		debugger
 		var _self = this;
 		var reviewNode = new Element("div",{"class":"control","style":"margin:10px"});
-		var personNode =  new Element("textarea",{"class":"textarea","placeholder":"参阅人员选择"});
+		var personNode =  new Element("textarea",{"class":"textarea","placeholder":"참조자 선택"});
 		personNode.inject(reviewNode);
 		personNode.addEvent("click",function(){
 			var opt = {
@@ -2043,7 +2043,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 		}.bind(this));
 
 		var reviewDlg = o2.DL.open({
-			"title": "增加参阅",
+			"title": "참조 추가",
 			"width": "400px",
 			"height": "260px",
 			"mask": true,
@@ -2055,7 +2055,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 			}.bind(this),
 			"buttonList": [
 				{
-					"text": "确认",
+					"text": "확인",
 					"action": function () {
 						var personList = personNode.retrieve("dataList") ;
 						var arr = [];
@@ -2079,14 +2079,14 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 
 						});
 
-						_self.app.notice("增加成功。","success");
+						_self.app.notice("추가했습니다.","success");
 						_self.explorer.refresh();
 
 						reviewDlg.close();
 					}.bind(this)
 				},
 				{
-					"text": "关闭",
+					"text": "닫기",
 					"action": function () {
 						reviewDlg.close();
 					}.bind(this)
@@ -2116,7 +2116,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 			});
 			form.edit()
 		}else {
-			this.app.notice("请先选择文件","error");
+			this.app.notice("문서를 먼저 선택하세요","error");
 			return;
 		}
 	},
@@ -2132,7 +2132,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 
 		var _self = this;
 		var dlg = new MWF.xDesktop.Dialog({
-			"title": "调度",
+			"title": "단계 이동",
 			"style": "user",
 			"top": p.y-100,
 			"left": p.x,
@@ -2359,8 +2359,8 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 		debugger
 		var data = this.explorer.selectedList[0];
 		var node = new Element("div", { "styles": this.css.rollbackAreaNode });
-		var html = "<div style=\"line-height: 30px; height: 30px; color: #333333; overflow: hidden;float:left;\">请选择文件要回溯到的位置：</div>";
-		html += "<div style=\"line-height: 30px; height: 30px; color: #333333; overflow: hidden;float:right;\"><input class='rollback_flowOption' checked type='checkbox' />并尝试继续流转</div>";
+		var html = "<div style=\"line-height: 30px; height: 30px; color: #333333; overflow: hidden;float:left;\">문서를 되돌릴 위치를 선택하세요: </div>";
+		html += "<div style=\"line-height: 30px; height: 30px; color: #333333; overflow: hidden;float:right;\"><input class='rollback_flowOption' checked type='checkbox' />되돌린 후 진행 시도</div>";
 		html += "<div style=\"clear:both; margin-bottom:10px; margin-top:10px; overflow-y:auto;\"></div>";
 		node.set("html", html);
 		var rollbackItemNode = node.getLast();
@@ -2451,7 +2451,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 					var activityNode = new Element("div", { "styles": this.css.rollbackItemActivityNode, "text": log.fromActivityName }).inject(div);
 					var timeNode = new Element("div", { "styles": this.css.rollbackItemTimeNode, "text": log.arrivedTime }).inject(div);
 					div = new Element("div", { "styles": { "overflow": "hidden" } }).inject(contentNode);
-					var taskTitleNode = new Element("div", { "styles": this.css.rollbackItemTaskTitleNode, "text":  "办理人: " }).inject(div);
+					var taskTitleNode = new Element("div", { "styles": this.css.rollbackItemTaskTitleNode, "text":  "처리자: " }).inject(div);
 
 					if (log.taskCompletedList.length) {
 						log.taskCompletedList.each(function (o) {
@@ -2468,7 +2468,7 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 							var taskNode = new Element("div", { "styles": this.css.rollbackItemTaskNode, "text": text }).inject(div);
 						}.bind(this));
 					} else {
-						var text = "系统自动处理";
+						var text = "시스템 자동 처리";
 						var taskNode = new Element("div", { "styles": this.css.rollbackItemTaskNode, "text": text }).inject(div);
 					}
 
@@ -2551,9 +2551,9 @@ MWF.xApplication.process.Application.Toolbar = new Class({
 
 		var searchNode = new Element("div.ft_titleSearchArea",{"style":"width:300px"}).inject(this.toolabrRightNode);
 		var searchIconNode = new Element("div.ft_filterIcon",{"html":'<icon class="o2icon-sousuo mainColor_color"></icon>'}).inject(searchNode);
-		var searchBtn = new Element("div",{"class":"ft_searchButton mainColor_bg","text":"搜索"}).inject(searchNode);
+		var searchBtn = new Element("div",{"class":"ft_searchButton mainColor_bg","text":"검색"}).inject(searchNode);
 		var searchInput = new Element("div.ft_titleInputArea").inject(searchNode);
-		new Element("input",{"placeholder" : "请输入关键字"}).inject(searchInput);
+		new Element("input",{"placeholder" : "키워드를 입력하세요"}).inject(searchInput);
 
 	},
 	getListType : function(){
@@ -2600,7 +2600,7 @@ MWF.xApplication.process.Application.AddArchiveForm = new Class({
 		"hasTop": true,
 		"hasIcon": false,
 		"draggable": true,
-		"title" : "新增归档配置",
+		"title" : "보관 설정 추가",
 		"id" : ""
 	},
 	_createTableContent: function () {
@@ -2624,18 +2624,18 @@ MWF.xApplication.process.Application.AddArchiveForm = new Class({
 			style : "attendance",
 			hasColon : true,
 			itemTemplate: {
-				name: {text: "名称", notEmpty: true, type: "oo-input", style: {"width": "100%"}},
+				name: {text: "이름", notEmpty: true, type: "oo-input", style: {"width": "100%"}},
 				enable: {
-					text: "是否启用",
+					text: "사용 여부",
 					notEmpty: true,
 					type: "oo-radiogroup",
 					selectValue: ["true", "false"],
-					selectText: ["是", "否"]
+					selectText: ["예", "아니요"]
 				},
-				startTime: {text: "开始时间", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
-				completedTime: {text: "结束时间", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
+				startTime: {text: "시작 시간", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
+				completedTime: {text: "종료 시간", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
 				process: {
-					"text": "流程",
+					"text": "프로세스",
 					"type": "oo-select",
 					"selectValue": selectValue,
 					"selectText": selectText,
@@ -2652,7 +2652,7 @@ MWF.xApplication.process.Application.AddArchiveForm = new Class({
 
 			this.okActionNode = new Element("button.inputOkButton", {
 				"styles": this.css.inputOkButton,
-				"text": "确定"
+				"text": "확인"
 			}).inject(this.formBottomNode);
 
 			this.okActionNode.addEvent("click", function (e) {
@@ -2662,7 +2662,7 @@ MWF.xApplication.process.Application.AddArchiveForm = new Class({
 
 		this.cancelActionNode = new Element("button.inputCancelButton", {
 			"styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-			"text": "关闭"
+			"text": "닫기"
 		}).inject(this.formBottomNode);
 
 		this.cancelActionNode.addEvent("click", function (e) {
@@ -2691,7 +2691,7 @@ MWF.xApplication.process.Application.AddArchiveForm = new Class({
 				"startTime" : data.startTime,
 				"completedTime" : data.completedTime,
 			}).then(function (){
-				this.app.notice("添加成功");
+				this.app.notice("추가했습니다");
 				this.explorer.refresh();
 				this.close();
 			}.bind(this));
@@ -2708,7 +2708,7 @@ MWF.xApplication.process.Application.SetArchiveForm = new Class({
 		"hasTop": true,
 		"hasIcon": false,
 		"draggable": true,
-		"title" : "修改归档配置",
+		"title" : "보관 설정 수정",
 		"id" : ""
 	},
 	_createTableContent: function () {
@@ -2732,18 +2732,18 @@ MWF.xApplication.process.Application.SetArchiveForm = new Class({
 			style : "attendance",
 			hasColon : true,
 			itemTemplate: {
-				name: {text: "名称", notEmpty: true, type: "oo-input", style: {"width": "100%"}},
+				name: {text: "이름", notEmpty: true, type: "oo-input", style: {"width": "100%"}},
 				enable: {
-					text: "是否启用",
+					text: "사용 여부",
 					notEmpty: true,
 					type: "oo-radiogroup",
 					selectValue: ["true", "false"],
-					selectText: ["是", "否"]
+					selectText: ["예", "아니요"]
 				},
-				startTime: {text: "开始时间", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
-				completedTime: {text: "结束时间", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
+				startTime: {text: "시작 시간", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
+				completedTime: {text: "종료 시간", style: {"width": "100%"}, notEmpty: true, type: "oo-datetime"},
 				process: {
-					"text": "流程",
+					"text": "프로세스",
 					"type": "oo-select",
 					"selectValue": selectValue,
 					"selectText": selectText,
@@ -2760,7 +2760,7 @@ MWF.xApplication.process.Application.SetArchiveForm = new Class({
 
 			this.okActionNode = new Element("button.inputOkButton", {
 				"styles": this.css.inputOkButton,
-				"text": "确定"
+				"text": "확인"
 			}).inject(this.formBottomNode);
 
 			this.okActionNode.addEvent("click", function (e) {
@@ -2770,7 +2770,7 @@ MWF.xApplication.process.Application.SetArchiveForm = new Class({
 
 		this.cancelActionNode = new Element("button.inputCancelButton", {
 			"styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-			"text": "关闭"
+			"text": "닫기"
 		}).inject(this.formBottomNode);
 
 		this.cancelActionNode.addEvent("click", function (e) {
@@ -2799,7 +2799,7 @@ MWF.xApplication.process.Application.SetArchiveForm = new Class({
 				"startTime" : data.startTime,
 				"completedTime" : data.completedTime,
 			}).then(function (){
-				this.app.notice("更新成功");
+				this.app.notice("수정했습니다");
 				this.explorer.refresh();
 				this.close();
 			}.bind(this));
@@ -2818,7 +2818,7 @@ MWF.xApplication.process.Application.AddSerSialForm = new Class({
 		"hasTop": true,
 		"hasIcon": false,
 		"draggable": true,
-		"title" : "新增流水号",
+		"title" : "일련번호 추가",
 		"id" : ""
 	},
 	_createTableContent: function () {
@@ -2841,10 +2841,10 @@ MWF.xApplication.process.Application.AddSerSialForm = new Class({
 			style : "attendance",
 			hasColon : true,
 			itemTemplate: {
-				name: { text : "关键字", notEmpty : true },
-				serial: { text : "流水号", notEmpty : true },
+				name: { text : "키워드", notEmpty : true },
+				serial: { text : "일련번호", notEmpty : true },
 				process: {
-					"text": "流程",
+					"text": "프로세스",
 					"type": "text",
 					"notEmpty" : true,
 					"defaultValue":this.data.processName,
@@ -2885,7 +2885,7 @@ MWF.xApplication.process.Application.AddSerSialForm = new Class({
 
 			this.okActionNode = new Element("button.inputOkButton", {
 				"styles": this.css.inputOkButton,
-				"text": "确定"
+				"text": "확인"
 			}).inject(this.formBottomNode);
 
 			this.okActionNode.addEvent("click", function (e) {
@@ -2895,7 +2895,7 @@ MWF.xApplication.process.Application.AddSerSialForm = new Class({
 
 		this.cancelActionNode = new Element("button.inputCancelButton", {
 			"styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-			"text": "关闭"
+			"text": "닫기"
 		}).inject(this.formBottomNode);
 
 		this.cancelActionNode.addEvent("click", function (e) {
@@ -2915,7 +2915,7 @@ MWF.xApplication.process.Application.AddSerSialForm = new Class({
 				"name" : data.name,
 				"serial" : data.serial
 			}).then(function (){
-				this.app.notice("添加成功");
+				this.app.notice("추가했습니다");
 				this.explorer.refresh();
 				this.close();
 			}.bind(this));
@@ -2932,7 +2932,7 @@ MWF.xApplication.process.Application.AdjustTimeForm = new Class({
 		"hasTop": true,
 		"hasIcon": false,
 		"draggable": true,
-		"title" : "调整流程发起时间",
+		"title" : "프로세스 시작 시간 조정",
 		"id" : ""
 	},
 	_createTableContent: function () {
@@ -2940,8 +2940,8 @@ MWF.xApplication.process.Application.AdjustTimeForm = new Class({
 		var html = "<table width='100%' bordr='0' cellpadding='7' cellspacing='0' styles='formTable' style='margin-top: 20px; '>" +
 			"<tr><td styles='formTableTitle' lable='startTime2' width='25%'></td>" +
 			"    <td styles='formTableValue14' item='startTime2' colspan='3'></td></tr>" +
-			"<tr><td styles='formTableTitle' width='25%'>备注：</td>" +
-			"    <td styles='formTableValue14'  colspan='3'>修改后会把跟流程所有相关的时间都会往前或者往后一起调整，包括流程记录等。</td></tr>" +
+			"<tr><td styles='formTableTitle' width='25%'>비고: </td>" +
+			"    <td styles='formTableValue14'  colspan='3'>수정하면 프로세스 기록 등 해당 프로세스와 관련된 모든 시간이 함께 앞당겨지거나 늦춰집니다.</td></tr>" +
 			"</table>";
 		this.formTableArea.set("html", html);
 
@@ -2950,7 +2950,7 @@ MWF.xApplication.process.Application.AdjustTimeForm = new Class({
 			style : "minder",
 			hasColon : true,
 			itemTemplate: {
-				startTime2: { text : "发起时间", notEmpty : true ,tType:"datetime"}
+				startTime2: { text : "시작 시간", notEmpty : true ,tType:"datetime"}
 			}
 		}, this.app);
 		this.form.load();
@@ -2962,7 +2962,7 @@ MWF.xApplication.process.Application.AdjustTimeForm = new Class({
 
 			this.okActionNode = new Element("button.inputOkButton", {
 				"styles": this.css.inputOkButton,
-				"text": "确定"
+				"text": "확인"
 			}).inject(this.formBottomNode);
 
 			this.okActionNode.addEvent("click", function (e) {
@@ -2972,7 +2972,7 @@ MWF.xApplication.process.Application.AdjustTimeForm = new Class({
 
 		this.cancelActionNode = new Element("button.inputCancelButton", {
 			"styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-			"text": "关闭"
+			"text": "닫기"
 		}).inject(this.formBottomNode);
 
 		this.cancelActionNode.addEvent("click", function (e) {
@@ -2998,7 +2998,7 @@ MWF.xApplication.process.Application.AdjustTimeForm = new Class({
 				"id" : data.id,
 				"adjustMinutes" : minutesDiff
 			}).then(function (){
-				this.app.notice("更新成功");
+				this.app.notice("수정했습니다");
 				this.explorer.refresh();
 				this.close();
 			}.bind(this));
@@ -3016,7 +3016,7 @@ MWF.xApplication.process.Application.SetSerSialForm = new Class({
 		"hasTop": true,
 		"hasIcon": false,
 		"draggable": true,
-		"title" : "设置流水号",
+		"title" : "일련번호 설정",
 		"id" : ""
 	},
 	_createTableContent: function () {
@@ -3032,7 +3032,7 @@ MWF.xApplication.process.Application.SetSerSialForm = new Class({
 			style : "minder",
 			hasColon : true,
 			itemTemplate: {
-				serial: { text : "流水号", notEmpty : true }
+				serial: { text : "일련번호", notEmpty : true }
 			}
 		}, this.app);
 		this.form.load();
@@ -3044,7 +3044,7 @@ MWF.xApplication.process.Application.SetSerSialForm = new Class({
 
 			this.okActionNode = new Element("button.inputOkButton", {
 				"styles": this.css.inputOkButton,
-				"text": "确定"
+				"text": "확인"
 			}).inject(this.formBottomNode);
 
 			this.okActionNode.addEvent("click", function (e) {
@@ -3054,7 +3054,7 @@ MWF.xApplication.process.Application.SetSerSialForm = new Class({
 
 		this.cancelActionNode = new Element("button.inputCancelButton", {
 			"styles": (this.isEdited || this.isNew || this.getEditPermission() ) ? this.css.inputCancelButton : this.css.inputCancelButton_long,
-			"text": "关闭"
+			"text": "닫기"
 		}).inject(this.formBottomNode);
 
 		this.cancelActionNode.addEvent("click", function (e) {
@@ -3073,7 +3073,7 @@ MWF.xApplication.process.Application.SetSerSialForm = new Class({
 				"process" : data.process,
 				"serial" : data.serial
 			}).then(function (){
-				this.app.notice("更新成功");
+				this.app.notice("수정했습니다");
 				this.explorer.refresh();
 				this.close();
 			}.bind(this));
@@ -4198,7 +4198,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 		var attachmentTableTheadNode = new Element("thead").inject(attachmentTableNode);
 		var attachmentTableTbodyNode = new Element("tbody").inject(attachmentTableNode);
 		var attachmentTableTheadTrNode = new Element("tr").inject(attachmentTableTheadNode);
-		Array.each(["附件名称", "上传环节", "上传人", "上传时间", "标识","大小" ,"排序","操作"], function (text) {
+		Array.each(["첨부파일 이름", "업로드 단계", "업로드한 사람", "업로드 시간", "식별자","크기" ,"정렬","작업"], function (text) {
 			new Element("th", {"text": text}).inject(attachmentTableTheadTrNode);
 		});
 
@@ -4216,10 +4216,10 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 			}.bind(this));
 
 			var tdOpNode = new Element("td").inject(trNode);
-			var deleteButton = new Element("button", {"text": "删除", "class": "button"}).inject(tdOpNode);
+			var deleteButton = new Element("button", {"text": "삭제", "class": "button"}).inject(tdOpNode);
 			deleteButton.addEvent("click", function (e) {
 				_self = this;
-				this.app.confirm("warn", e, "提示", "确认是否删除", 350, 120, function () {
+				this.app.confirm("warn", e, "안내", "삭제하시겠습니까?", 350, 120, function () {
 					_self.app.action.AttachmentAction.delete(attachment.id,function(json){
 						_self.loadAttachement();
 					},null,false);
@@ -4228,7 +4228,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 					this.close();
 				});
 			}.bind(this));
-			var downButton = new Element("button", {"text": "下载", "class": "button"}).inject(tdOpNode);
+			var downButton = new Element("button", {"text": "다운로드", "class": "button"}).inject(tdOpNode);
 			downButton.addEvent("click", function () {
 
 				var locate = window.location;
@@ -4243,7 +4243,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 			}.bind(this));
 
 
-			var sortButton = new Element("button", {"text": "排序", "class": "button"}).inject(tdOpNode);
+			var sortButton = new Element("button", {"text": "정렬", "class": "button"}).inject(tdOpNode);
 			sortButton.addEvent("click", function () {
 
 				var sortNode = new Element("div", {"class": "control", "style": "margin:10px"});
@@ -4251,7 +4251,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 				inputNode.inject(sortNode);
 
 				var sortDlg = o2.DL.open({
-					"title": "排序号修改",
+					"title": "정렬 순서 수정",
 					"width": "400px",
 					"height": "260px",
 					"mask": true,
@@ -4263,7 +4263,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 					}.bind(this),
 					"buttonList": [
 						{
-							"text": "确认",
+							"text": "확인",
 							"action": function () {
 								var orderNumber = inputNode.get("value");
 
@@ -4276,7 +4276,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 							}.bind(this)
 						},
 						{
-							"text": "关闭",
+							"text": "닫기",
 							"action": function () {
 								sortDlg.close();
 							}.bind(this)
@@ -4304,19 +4304,19 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 		});
 		var uploadSite = new Element("input",{
 			"class":"input",
-			"placeholder":"对应上传的附件标识",
+			"placeholder":"업로드할 첨부파일 식별자",
 			"style" :"width:200px;float:left"
 		}).inject(attachmentUploadDiv);
-		var uploadButton = new Element("button", {"text": "上传", "class": "button"}).inject(attachmentUploadDiv);
+		var uploadButton = new Element("button", {"text": "업로드", "class": "button"}).inject(attachmentUploadDiv);
 
 		uploadButton.addEvent("click", function () {
 
 			if(uploadSite.get("value")==""){
-				this.app.notice("对应上传的附件标识不能为空","error");
+				this.app.notice("업로드할 첨부파일 식별자를 입력하세요","error");
 				return false;
 			}
 			var options = {
-				"title": "附件区域"
+				"title": "첨부파일 영역"
 			};
 
 			var site = uploadSite.get("value");
@@ -4377,7 +4377,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 			isEdited: true,
 			itemTemplate: {
 				fieldList: {
-					"text": "字段列表",
+					"text": "필드 목록",
 					"type": "select",
 					"style": {"max-width": "150px"},
 					"selectValue": function () {
@@ -4403,7 +4403,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 					}
 				},
 				fieldType: {
-					"text": "字段类型",
+					"text": "필드 유형",
 					"type": "select",
 					"style": {"max-width": "150px"},
 					"selectValue": function () {
@@ -4416,11 +4416,11 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 						}.bind(this)
 					}
 				},
-				fieldName: {text: "字段名", "type": "text", "style": {"min-width": "100px"}},
-				fieldValue: {text: "字段值", "type": "textarea", "style": {"width": "100%","margin-left": "10px"}},
+				fieldName: {text: "필드 이름", "type": "text", "style": {"min-width": "100px"}},
+				fieldValue: {text: "필드 값", "type": "textarea", "style": {"width": "100%","margin-left": "10px"}},
 
 				action: {
-					"value": "修改", type: "button", className: "filterButton", event: {
+					"value": "수정", type: "button", className: "filterButton", event: {
 						click: function (e) {
 							var result = this.form.getResult(false, null, false, false, false);
 
@@ -4436,7 +4436,7 @@ MWF.xApplication.process.Application.ManageWorkForm = new Class({
 							}
 
 							_self = this;
-							this.app.confirm("warn", e.node, "提示", "确认是否修改", 350, 120, function () {
+							this.app.confirm("warn", e.node, "안내", "수정하시겠습니까?", 350, 120, function () {
 								if(_self.isCompletedWork){
 									_self.app.action.DataAction.updateWithWorkCompleted(_self.data.id,workData,function (json){},null,false);
 								}else{

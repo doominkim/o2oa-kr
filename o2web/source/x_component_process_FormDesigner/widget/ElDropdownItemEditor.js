@@ -88,7 +88,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 
 
 				var tr = new Element("tr").inject(this.propertyTable);
-				var td = new Element("td", { text: "文本" }).inject(tr);
+				var td = new Element("td", { text: "텍스트" }).inject(tr);
 				td = new Element("td").inject(tr);
 				this.labelInput = new Element("input", {
 					value: this.data.label || "[none]",
@@ -104,7 +104,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 				}).inject(td);
 
 				tr = new Element("tr").inject(this.propertyTable);
-				td = new Element("td", { text: "指令" }).inject(tr);
+				td = new Element("td", { text: "명령" }).inject(tr);
 				td = new Element("td").inject(tr);
 				this.idCommand = new Element("input", {
 					value: this.data.command || "",
@@ -119,7 +119,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 				}).inject(td);
 
 				tr = new Element("tr").inject(this.propertyTable);
-				td = new Element("td", { text: "禁用" }).inject(tr);
+				td = new Element("td", { text: "사용 안 함" }).inject(tr);
 				td = new Element("td").inject(tr);
 				var div = new Element( "div").inject(td);
 				var radio_disabled_1 = new Element( "input", {
@@ -135,7 +135,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 						}.bind(this)
 					}
 				}).inject( div );
-				new Element( "span", { "text" : "是" }).inject(div);
+				new Element( "span", { "text" : "예" }).inject(div);
 				var radio_disabled_2 = new Element( "input", {
 					"type" : "radio",
 					"checked" : !this.data.disabled,
@@ -149,10 +149,10 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 						}.bind(this)
 					}
 				}).inject( div );
-				new Element( "span", { "text" : "否" }).inject(div);
+				new Element( "span", { "text" : "아니요" }).inject(div);
 
 				tr = new Element("tr").inject(this.propertyTable);
-				td = new Element("td", { text: "显示分割线" }).inject(tr);
+				td = new Element("td", { text: "구분선 표시" }).inject(tr);
 				td = new Element("td").inject(tr);
 				div = new Element( "div").inject(td);
 				var radio_divided_1 = new Element( "input", {
@@ -168,7 +168,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 						}.bind(this)
 					}
 				}).inject( div );
-				new Element( "span", { "text" : "是" }).inject(div);
+				new Element( "span", { "text" : "예" }).inject(div);
 				var radio_divided_2 = new Element( "input", {
 					"type" : "radio",
 					"checked" : !this.data.divided,
@@ -182,10 +182,10 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 						}.bind(this)
 					}
 				}).inject( div );
-				new Element( "span", { "text" : "否" }).inject(div);
+				new Element( "span", { "text" : "아니요" }).inject(div);
 
 				tr = new Element("tr").inject(this.propertyTable);
-				td = new Element("td", { text: "图标" }).inject(tr);
+				td = new Element("td", { text: "아이콘" }).inject(tr);
 				td = new Element("td").inject(tr);
 				var div = new Element("div", {
 					style: "overflow:hidden;height:30px;line-height:30px;"
@@ -195,7 +195,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 					style: "float:left; width:30px;height:30px;font-size:20px;margin-top:2px;"
 				}).inject(div);
 				new Element("div",{
-					text : "选择图标",
+					text : "아이콘 선택",
 					style: "float:left; padding:0px 20px; height:24px;line-height:24px; border:1px solid #ccc; border-radius:5px;cursor:pointer",
 					events: {
 						click: this.loadElSelectIcon.bind(this)
@@ -240,7 +240,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 			}
 		});
 		var dlg = o2.DL.open({
-			"title": "选择图标",
+			"title": "아이콘 선택",
 			"isTitle": true,
 			"width": 400,
 			"height": 500,
@@ -248,7 +248,7 @@ MWF.xApplication.process.FormDesigner.widget.ElDropdownItemEditor.Tree.Node = ne
 			"buttonList": [
 				{
 					"type": "ok",
-					"text": "关闭",
+					"text": "닫기",
 					"action": function(){this.close();}
 				}
 			],

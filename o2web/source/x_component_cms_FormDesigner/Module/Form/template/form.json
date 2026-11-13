@@ -2,7 +2,7 @@
   "pcData": {
     "json": {
       "id": "",
-      "name": "新建表单",
+      "name": "새 양식",
       "type": "Form",
       "mode": "PC",
       "description": "",
@@ -159,7 +159,7 @@
   "mobileData": {
     "json": {
       "id": "",
-      "name": "新建表单",
+      "name": "새 양식",
       "type": "Form",
       "mode": "Mobile",
       "description": "",

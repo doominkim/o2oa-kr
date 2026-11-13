@@ -12,7 +12,7 @@ const eventBus = inject('eventBus')
 const windowStateInstance = windowState();
 
 onMounted(() => {
-  console.debug('onMounted ====>  MsgHistory 消息', msg)
+  console.debug('onMounted ====>  MsgHistory 메시지', msg)
   loadMsgList()
 })
 onUnmounted(() => {

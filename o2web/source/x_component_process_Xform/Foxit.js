@@ -167,7 +167,7 @@ MWF.xApplication.process.Xform.Foxit = MWF.APPFoxit =  new Class({
 
 
         //var callbackUrl = o2.filterUrl(host + "/x_processplatform_assemble_surface/jaxrs/attachment/update/"+attId+"/work/" + this.form.businessData.work.id);
-        //callbackUrl = callbackUrl + "?"+o2.tokenName+"=" + xtoken + "&fileName=文件正文.ofd";
+        //callbackUrl = callbackUrl + "?"+o2.tokenName+"=" + xtoken + "&fileName=문서본문.ofd";
 
 
         if(this.iframe){
@@ -202,7 +202,7 @@ MWF.xApplication.process.Xform.Foxit = MWF.APPFoxit =  new Class({
 
 
         var callbackUrl = o2.filterUrl(host + "/x_processplatform_assemble_surface/jaxrs/attachment/update/"+this.documentId+"/work/" + this.form.businessData.work.id);
-        callbackUrl = callbackUrl + "?"+o2.tokenName+"=" + xtoken + "&fileName=文件正文.ofd";
+        callbackUrl = callbackUrl + "?"+o2.tokenName+"=" + xtoken + "&fileName=문서본문.ofd";
 
 
         if(this.iframe){

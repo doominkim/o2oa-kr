@@ -303,11 +303,11 @@ o2.widget.Paging = new Class({
         var _self = this;
         var countChanger = this.countChanger = new Element("input.countChanger", {
             "styles": this.css.pageJumper,
-            "title": o2.LP.widget.countChangerTitle || "每页条数",
+            "title": o2.LP.widget.countChangerTitle || "페이지당 개수",
         }).inject(this.node);
         this.countChangerText = new Element("div.countChangerText", {
             "styles": this.css.pageJumperText,
-            "text": o2.LP.widget.countChangerText || "条/页",
+            "text": o2.LP.widget.countChangerText || "개/페이지",
             "value": this.options.countPerPage
         }).inject(this.node);
         countChanger.addEvents({

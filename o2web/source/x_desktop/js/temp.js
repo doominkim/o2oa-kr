@@ -135,7 +135,7 @@ var x = {
         "line-height": "26px"
     },
     "inputTextarea": {
-        "font-family": "Microsoft YaHei",
+        "font-family": "Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif",
         "border": "0px",
         "overflow": "auto",
         "width": "99%",

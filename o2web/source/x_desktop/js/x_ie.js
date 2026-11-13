@@ -43,7 +43,7 @@ COMMON.DOM.addReady(function(){
                     document.title = layout.config.systemTitle || layout.config.systemName;
 
                     //MWF.defaultPath = "../x_desktop"+MWF.defaultPath;
-                    MWF.loadLP("zh-cn");
+                    MWF.loadLP(MWF.language);
                     MWF.require("MWF.xDesktop.Layout", function(){
                         layout.desktop = new MWF.xDesktop.Layout("layout", {
                             "style": "default",

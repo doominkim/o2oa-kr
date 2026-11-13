@@ -23,7 +23,7 @@ layout.addReady(function(){
                     console.error(err);
                 })
             } else {
-                console.error('没有传入微信code无法绑定');
+                console.error('WeChat code가 전달되지 않아 연동할 수 없습니다');
             }
         };
         var _redirectTo = function (redirect) {

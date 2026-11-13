@@ -4,7 +4,7 @@
 	"type": "Comment",
 	"description": "",
     "mode": "default", //default table or text
-    "textStyle": "<font style='color:#ff5400;'>{person}</font>（{department}） 选择【{route}】，提交于： {time}，处理意见：<font style='color:#00F'>{opinion}</font>",  //"{person}({department})在[{activity}]中选择[{route}]，提交于：{time}，处理意见：{opinion}",
+    "textStyle": "<font style='color:#ff5400;'>{person}</font>({department}) [{route}] 선택, 제출: {time}, 처리 의견: <font style='color:#00F'>{opinion}</font>",  //"{person}({department}) [{activity}]에서 [{route}] 선택, 제출: {time}, 처리 의견: {opinion}",
 	"filterScript": {
 		"code": "",
 		"html": ""

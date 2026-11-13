@@ -1,6 +1,6 @@
 {
     "pcData": {
-        "html": "<div mwftype=\"form\" id=\"877617e6-0fcd-439e-a361-d1a4097393fd\" class=\"form-layout\" style=\"\"><div id=\"actionbar\" mwftype=\"actionbar\" class=\"form-toolbar-area\" style=\"\"><div class=\"form-toolbar\" style=\"background-color: rgb(255, 255, 255); padding: 0px 1em; overflow-wrap: normal; word-break: keep-all; cursor: pointer; height: auto; display: flex; font-size: 1em; margin: 0px auto; border-top: 0px; border-bottom: 0px; flex-wrap: wrap; gap: 0.5em 0.3em;\"><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"close\" title=\"关闭文档\" mwfbuttonaction=\"closeWork\" mwfbuttontext=\"关闭\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-close\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">关闭</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"save\" title=\"保存文档\" mwfbuttonaction=\"saveWork\" mwfbuttontext=\"保存\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-save\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">保存</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-submit\" title=\"继续流转文档\" mwfbuttonaction=\"flowWork\" mwfbuttontext=\"继续流转\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-submit\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">继续流转</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"control-panel\" title=\"调度文档\" mwfbuttonaction=\"rerouteWork\" mwfbuttontext=\"调度\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-control-panel\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">调度</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-split\" title=\"增加拆分分支\" mwfbuttonaction=\"addSplit\" mwfbuttontext=\"增加分支\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-split\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">增加分支</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"retract\" title=\"待办撤回\" mwfbuttonaction=\"retractWork\" mwfbuttontext=\"撤回\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-retract\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">撤回</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-rollback\" title=\"回溯到指定的环节，不保留流程记录\" mwfbuttonaction=\"rollback\" mwfbuttontext=\"流程回溯\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-rollback\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">流程回溯</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"delete\" title=\"删除文件\" mwfbuttonaction=\"deleteWork\" mwfbuttontext=\"删除文档\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-delete\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">删除文档</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-end\" title=\"结束文件流转\" mwfbuttonaction=\"terminate\" mwfbuttontext=\"终止文件\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-end\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">终止文件</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"print\" title=\"打印文档\" mwfbuttonaction=\"printWork\" mwfbuttontext=\"打印\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-print\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">打印</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"publish\" title=\"催促办理\" mwfbuttonaction=\"pressWork\" mwfbuttontext=\"催促办理\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-publish\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">催促办理</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"stop\" title=\"待办挂起\" mwfbuttonaction=\"pauseTask\" mwfbuttontext=\"挂起\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-stop\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">挂起</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-begin\" title=\"从挂起状态恢复\" mwfbuttonaction=\"resumeTask\" mwfbuttontext=\"挂起恢复\" style=\"display: flex; position: static; float: left; border: 0.071em solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: rgb(230, 230, 230) 0px 0px 0px 0px;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-begin\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">挂起恢复</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"file_download\" title=\"一键下载\" mwfbuttonaction=\"downloadAll\" mwfbuttontext=\"一键下载\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-file_download\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">一键下载</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"work-management\" title=\"流程监控\" mwfbuttonaction=\"monitor\" mwfbuttontext=\"流程监控\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-work-management\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">流程监控</span></div></div></div><div mwftype=\"div\" id=\"div\" style=\"overflow: auto; position: relative; padding: 2em 0px 3em;\" class=\"form-content\"><div mwftype=\"div\" id=\"div_1\" style=\"width: 80%; margin: auto; min-width: 42em; max-width: 86em; display: flex; flex-direction: column; gap: 2em;\"><div mwftype=\"label\" id=\"label\" style=\"font-weight: normal; color: var(--oo-color-main-deep); text-align: center; font-size: 2.25em; padding: 0.3em;\"></div><div mwftype=\"div\" id=\"div_9\" style=\"\" class=\"form-content-work-status\"><div mwftype=\"div\" id=\"div_26\" style=\"\"><div mwftype=\"div\" id=\"div_32\" style=\"\" class=\"ooicon-a-flowprocess\"></div><div mwftype=\"label\" id=\"label_6\" style=\"\">当前活动：</div><div mwftype=\"label\" id=\"label_5\" style=\"\"></div></div><div mwftype=\"div\" id=\"div_33\" style=\"\"><div mwftype=\"div\" id=\"div_34\" style=\"\" class=\"ooicon-clock\"></div><div mwftype=\"label\" id=\"label_9\" style=\"\">拟稿人：</div><div mwftype=\"label\" id=\"label_13\" style=\"\"></div><div mwftype=\"label\" id=\"label_11\" style=\"\"></div></div></div><div mwftype=\"div\" id=\"div_2\" style=\"\"><div mwftype=\"label\" id=\"label_1\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">基本信息</div><div mwftype=\"div\" id=\"div_11\" style=\"display: flex; background-color: rgb(255, 255, 255); gap: 1em 2em; flex-wrap: wrap; position: relative;\" class=\"form-content-area\"><div mwftype=\"div\" id=\"div_7\" style=\"display: flex;\" class=\"content-item flex\"><div mwftype=\"label\" id=\"label_1_1\" style=\"text-align: right;\" class=\"item-label\">起草人员</div><div mwftype=\"div\" id=\"div_35\" style=\"flex: 1 1 0%; display: flex; align-items: center; background-color: rgb(247, 247, 247); padding: 0.5em 0.6em;\"><oo-org mwftype=\"common\" id=\"common\" style=\"\" type=\"text\"></oo-org></div></div><oo-datetime mwftype=\"OODatetime\" id=\"createTime\" placeholder=\"createTime\" read=\"true\" style=\"\" right-icon=\"calendar\" readmode=\"false\" label=\"起草时间\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">createTime</div></oo-datetime><oo-input mwftype=\"OOInput\" id=\"currentActivity\" placeholder=\"currentActivity\" style=\"\" readmode=\"false\" type=\"text\" label=\"当前活动\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><oo-input mwftype=\"OOInput\" id=\"filetypeName\" placeholder=\"filetypeName\" style=\"\" readmode=\"false\" type=\"text\" label=\"文件类型\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><oo-input mwftype=\"OOInput\" id=\"contactPerson\" placeholder=\"contactPerson\" style=\"\" readmode=\"false\" type=\"text\" label=\"联系人员\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" innerhtml=\"\" required=\"true\"></oo-input><oo-input mwftype=\"OOInput\" id=\"contactPhone\" placeholder=\"contactPhone\" style=\"\" readmode=\"false\" type=\"text\" label=\"联系电话\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input></div></div><div mwftype=\"div\" id=\"div_3\" style=\"\"><div mwftype=\"label\" id=\"label_2\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">流程信息\n</div><div mwftype=\"div\" id=\"div_3_1\" style=\"display: flex; background-color: rgb(255, 255, 255); gap: 1em 2em; flex-wrap: wrap; position: relative;\" class=\"form-content-area\"><div mwftype=\"div\" id=\"div_6\" style=\"\" class=\"content-item flex\"><div mwftype=\"label\" id=\"label_23\" style=\"\" class=\"item-label\">密　　级</div><div mwftype=\"div\" id=\"div_40\" style=\"\" class=\"flex\"><oo-select mwftype=\"OOSelect\" id=\"secret\" placeholder=\"secret\" style=\"min-width: 6em;\" readmode=\"false\" label=\"\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" auto-size=\"true\"></oo-select><div mwftype=\"label\" id=\"label_24\" style=\"display: inline-block; margin-left: 0.5em; margin-right: 0.5em;\">★</div><oo-input mwftype=\"OOInput\" id=\"deadline\" placeholder=\"deadline\" style=\"\" readmode=\"false\" type=\"number\" label=\"\" input-style=\"appearance: none;\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><div mwftype=\"label\" id=\"label_3\" style=\"display: inline-block; margin-left: 0.5em;\">年</div></div></div><div mwftype=\"div\" id=\"div_4\" style=\"\" class=\"content-item flex\"><div mwftype=\"label\" id=\"label_22\" style=\"\" class=\"item-label\">文　　号</div><div mwftype=\"div\" id=\"div_36\" style=\"flex: 1 1 0%; gap: 1em;\" class=\"flex\"><oo-input mwftype=\"OOInput\" id=\"fileno\" placeholder=\"fileno\" style=\"flex: 1 1 0%; font-weight: bold;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" required=\"true\" validity=\"请先正确设置公文文号\" readonly=\"true\"></oo-input><oo-button mwftype=\"OOButton\" id=\"OOButton\" text=\"设置文号\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"default\"></oo-button></div></div><oo-select mwftype=\"OOSelect\" id=\"priority\" placeholder=\"priority\" style=\"\" readmode=\"false\" label=\"紧急程度\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-select><oo-input mwftype=\"OOInput\" id=\"copies\" placeholder=\"copies\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"number\" label=\"印数（份）\" readonly=\"true\"></oo-input><oo-input mwftype=\"OOInput\" id=\"subject\" placeholder=\"subject\" style=\"flex: 1 1 100%;\" readonly=\"true\" disabled=\"false\" readmode=\"false\" label=\"标　　题\" requir=\"\" type=\"text\" autocomp=\"\" required=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><oo-selector mwftype=\"OOOrg\" id=\"mainSend\" placeholder=\"mainSend\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" right-icon=\"unit\" readmode=\"false\" label=\"主送单位\" required=\"true\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Org/default/icon/field.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">mainSend</div></oo-selector><div mwftype=\"OORadioGroup\" id=\"OORadioGroup\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-radio-group style=\"float: left;\" label=\"单选按钮\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-radio-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 100%; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">OORadioGroup</div></div></div><div mwftype=\"OOCheckGroup\" id=\"OOCheckGroup\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-checkbox-group style=\"float: left;\" label=\"复选框\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">OOCheckGroup</div></div></div><oo-selector mwftype=\"OOOrg\" id=\"OOOrg\" placeholder=\"OOOrg\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" right-icon=\"person\" readmode=\"false\" label=\"办理人员\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Org/default/icon/field.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OOOrg</div></oo-selector><oo-datetime mwftype=\"OODatetime\" id=\"OODatetime\" placeholder=\"OODatetime\" read=\"true\" right-icon=\"calendar\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"办理期限\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OODatetime</div></oo-datetime><oo-select mwftype=\"OOAddress\" id=\"OOAddress\" placeholder=\"OOAddress\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readonly=\"true\" readmode=\"false\" label=\"地址\"></oo-select><oo-textarea mwftype=\"OOTextarea\" id=\"remark\" placeholder=\"remark\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"备　　注\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">remark</div></oo-textarea></div></div><div mwftype=\"div\" id=\"div_5\" style=\"\"><div mwftype=\"label\" id=\"label_4\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">其他信息</div><div mwftype=\"div\" id=\"div_8\" style=\"padding: 2em 3em; display: flex; background-color: rgb(255, 255, 255); gap: 1em 2em; flex-wrap: wrap; position: relative;\" class=\"form-content-area\"><oo-files mwftype=\"OOFiles\" id=\"OOFiles\" placeholder=\"OOFiles\" readonly=\"true\" style=\"flex: 1 1 100%;\" type=\"file\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" file-button-style=\"simple\" label=\"参考文件\"></oo-files><div id=\"datatable\" mwftype=\"datatable\" width=\"100%\" border=\"0\" class=\"form-datatable\" style=\"border: 1px solid rgb(222, 222, 222); border-radius: 4px; flex: 1 1 100%;\"><table border=\"0\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\" align=\"center\" class=\"form-datatable\" style=\"\"><tbody><tr><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title\" style=\"text-align: left; padding: 0px 0.7em; width: 20%;\">名称</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_1\" style=\"text-align: left; padding: 0px 0.7em; width: 15%;\">类型</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_2\" style=\"text-align: left; padding: 0px 0.7em; width: 10%;\">单价</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_4\" style=\"text-align: left; padding: 0px 0.7em; width: 10%;\">数量</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_5\" style=\"text-align: left; padding: 0px 0.7em; width: 15%;\">价格</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_3\" style=\"text-align: left; padding: 0px 0.7em;\">备注</th></tr><tr><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data\" style=\"\"><oo-input mwftype=\"OOInput\" id=\"OOInput\" placeholder=\"OOInput\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" readonly=\"true\"></oo-input></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_1\" style=\"\"><oo-select mwftype=\"OOSelect\" id=\"OOSelect\" placeholder=\"OOSelect\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readonly=\"true\" readmode=\"false\"></oo-select></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_2\" style=\"\"><oo-currency mwftype=\"OOCurrency\" id=\"price\" placeholder=\"price\" right-icon=\"currency\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" readonly=\"true\"></oo-currency></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_4\" style=\"\"><oo-input mwftype=\"OOInput\" id=\"count\" placeholder=\"count\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"number\" readonly=\"true\"></oo-input></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_5\" style=\"\"><oo-currency mwftype=\"OOCurrency\" id=\"totalPrice\" placeholder=\"totalPrice\" style=\"\" right-icon=\"currency\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" readonly=\"true\"></oo-currency></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_3\" style=\"\"><oo-input mwftype=\"OOInput\" id=\"OOInput_3\" placeholder=\"OOInput_3\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" readonly=\"true\"></oo-input></td></tr></tbody></table></div></div></div><div mwftype=\"div\" id=\"div_28\" style=\"\" class=\"\"><div mwftype=\"label\" id=\"label_18\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">附件信息</div><div mwftype=\"div\" id=\"div_29\" style=\"\" class=\"form-content-area\"><div mwftype=\"attachment\" id=\"attachment\" style=\"flex: 1 1 100%;\" data-mwf-el-type=\"MWFFormDesignerAttachment\"><div style=\"border: 1px solid rgb(222, 222, 222); border-radius: 4px; background: transparent; overflow: hidden;\"><div style=\"display: none; height: 0px; overflow: hidden;\">Attachment</div><div style=\"padding: 0.2em 0px; background-color: rgb(247, 247, 247); overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; border-top-left-radius: 4px; border-top-right-radius: 4px;\"><div style=\"overflow: hidden; margin-left: 0.714em; border-radius: 3px;\"><div style=\"border-radius: 3px; display: flex; align-items: center;\"><div title=\"上传\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/upload_gray.png&quot;);\"></div></div><div title=\"从企业网盘选择\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/drive_gray.png&quot;);\"></div></div><div title=\"删除\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/delete_gray.png&quot;);\"></div></div><div title=\"替换\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/replace_gray.png&quot;);\"></div></div><div class=\"separateNode\" style=\"width: 1px; height: 1.14286em; margin: 0px 0.357em; border-left: 1px solid rgb(188, 188, 188); background-color: rgb(241, 241, 241);\"></div><div title=\"下载\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/download_gray.png&quot;);\"></div></div></div></div><div style=\"overflow: hidden; margin-left: 0.714em; border-radius: 3px;\"><div style=\"border-radius: 3px; display: flex; align-items: center;\"><div title=\"列表\" style=\"cursor: pointer; background: transparent;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/list.png&quot;);\"></div></div><div title=\"序列\" style=\"cursor: pointer; background: transparent;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/seq.png&quot;);\"></div></div><div title=\"图标\" style=\"cursor: pointer; background: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/selectedbg.png&quot;);\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/icon.png&quot;);\"></div></div><div title=\"预览\" style=\"cursor: pointer; background: transparent;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/preview.png&quot;);\"></div></div></div></div><div style=\"overflow: hidden; margin-left: 0.714em; border-radius: 3px; float: right; margin-right: 7px;\"><div style=\"border-radius: 3px; display: flex; align-items: center;\"><div title=\"简洁模式\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/min.png&quot;);\"></div></div></div></div></div><div class=\"contentScrollNode\" style=\"overflow: auto; min-height: 9.3em;\"><div class=\"content\"></div></div><div style=\"display: none;\"><div style=\"height: 7px; cursor: row-resize;\"></div></div></div></div></div></div><div mwftype=\"div\" id=\"div_21\" style=\"\" class=\"\"><div mwftype=\"label\" id=\"label_17\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">流程信息</div><div mwftype=\"div\" id=\"div_23\" style=\"\" class=\"form-content-area\"><div mwftype=\"log\" id=\"log_4\" style=\"flex: 1 1 100%;\" class=\"form-log\" data-mwf-el-type=\"MWFFormDesignerLog\"><div style=\"width: 70px; height: 24px; color: rgb(153, 153, 153); font-size: 12px; position: static; margin: auto;\"><div style=\"width: 24px; height: 24px; background: url(&quot;../x_component_process_FormDesigner/Module/Log/default/icon/log.png&quot;) 5px center no-repeat; float: left;\"></div><div style=\"line-height: 24px; height: 24px; width: 44px; float: right;\">LOG</div></div></div></div></div></div></div></div>",
+        "html": "<div mwftype=\"form\" id=\"877617e6-0fcd-439e-a361-d1a4097393fd\" class=\"form-layout\" style=\"\"><div id=\"actionbar\" mwftype=\"actionbar\" class=\"form-toolbar-area\" style=\"\"><div class=\"form-toolbar\" style=\"background-color: rgb(255, 255, 255); padding: 0px 1em; overflow-wrap: normal; word-break: keep-all; cursor: pointer; height: auto; display: flex; font-size: 1em; margin: 0px auto; border-top: 0px; border-bottom: 0px; flex-wrap: wrap; gap: 0.5em 0.3em;\"><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"close\" title=\"문서 닫기\" mwfbuttonaction=\"closeWork\" mwfbuttontext=\"닫기\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-close\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">닫기</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"save\" title=\"문서 저장\" mwfbuttonaction=\"saveWork\" mwfbuttontext=\"저장\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-save\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">저장</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-submit\" title=\"문서 결재 진행\" mwfbuttonaction=\"flowWork\" mwfbuttontext=\"결재 진행\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-submit\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">결재 진행</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"control-panel\" title=\"문서 단계 이동\" mwfbuttonaction=\"rerouteWork\" mwfbuttontext=\"단계 이동\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-control-panel\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">단계 이동</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-split\" title=\"분할 분기 추가\" mwfbuttonaction=\"addSplit\" mwfbuttontext=\"분기 추가\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-split\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">분기 추가</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"retract\" title=\"결재 대기 회수\" mwfbuttonaction=\"retractWork\" mwfbuttontext=\"회수\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-retract\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">회수</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-rollback\" title=\"지정한 단계로 되돌리며 결재 기록은 남기지 않습니다\" mwfbuttonaction=\"rollback\" mwfbuttontext=\"결재 되돌리기\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-rollback\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">결재 되돌리기</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"delete\" title=\"문서 삭제\" mwfbuttonaction=\"deleteWork\" mwfbuttontext=\"문서 삭제\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-delete\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">문서 삭제</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-end\" title=\"문서 결재 종료\" mwfbuttonaction=\"terminate\" mwfbuttontext=\"문서 종료\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-end\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">문서 종료</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"print\" title=\"문서 인쇄\" mwfbuttonaction=\"printWork\" mwfbuttontext=\"인쇄\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-print\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">인쇄</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"publish\" title=\"독촉\" mwfbuttonaction=\"pressWork\" mwfbuttontext=\"독촉\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-publish\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">독촉</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"stop\" title=\"결재 대기 보류\" mwfbuttonaction=\"pauseTask\" mwfbuttontext=\"보류\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-stop\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">보류</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"process-begin\" title=\"보류 상태에서 재개\" mwfbuttonaction=\"resumeTask\" mwfbuttontext=\"재개\" style=\"display: flex; position: static; float: left; border: 0.071em solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: rgb(230, 230, 230) 0px 0px 0px 0px;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-process-begin\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">재개</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"file_download\" title=\"일괄 다운로드\" mwfbuttonaction=\"downloadAll\" mwfbuttontext=\"일괄 다운로드\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-file_download\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">일괄 다운로드</span></div><div mwfnodetype=\"MWFToolBarButton\" mwfbuttonimage=\"\" mwfbuttonicon=\"work-management\" title=\"결재 모니터\" mwfbuttonaction=\"monitor\" mwfbuttontext=\"결재 모니터\" style=\"display: flex; position: static; float: left; border: 1px solid rgb(204, 204, 204); color: inherit; background-color: rgb(255, 255, 255); height: 2.3em; padding-left: 0.5em; padding-right: 0.5em; cursor: pointer; border-radius: 0.2em; align-items: baseline; box-shadow: none;\"><span style=\"display: block; float: left; padding: 0.5em 0.071em 0.071em; cursor: pointer; margin-right: 3px;\"><span class=\"ooicon-work-management\" style=\"display: block;\"></span></span><span style=\"display: block; float: left; height: 2.3em; padding-left: 0.142em; padding-right: 0.142em; line-height: 2.3em; cursor: pointer;\">결재 모니터</span></div></div></div><div mwftype=\"div\" id=\"div\" style=\"overflow: auto; position: relative; padding: 2em 0px 3em;\" class=\"form-content\"><div mwftype=\"div\" id=\"div_1\" style=\"width: 80%; margin: auto; min-width: 42em; max-width: 86em; display: flex; flex-direction: column; gap: 2em;\"><div mwftype=\"label\" id=\"label\" style=\"font-weight: normal; color: var(--oo-color-main-deep); text-align: center; font-size: 2.25em; padding: 0.3em;\"></div><div mwftype=\"div\" id=\"div_9\" style=\"\" class=\"form-content-work-status\"><div mwftype=\"div\" id=\"div_26\" style=\"\"><div mwftype=\"div\" id=\"div_32\" style=\"\" class=\"ooicon-a-flowprocess\"></div><div mwftype=\"label\" id=\"label_6\" style=\"\">현재 단계: </div><div mwftype=\"label\" id=\"label_5\" style=\"\"></div></div><div mwftype=\"div\" id=\"div_33\" style=\"\"><div mwftype=\"div\" id=\"div_34\" style=\"\" class=\"ooicon-clock\"></div><div mwftype=\"label\" id=\"label_9\" style=\"\">기안자: </div><div mwftype=\"label\" id=\"label_13\" style=\"\"></div><div mwftype=\"label\" id=\"label_11\" style=\"\"></div></div></div><div mwftype=\"div\" id=\"div_2\" style=\"\"><div mwftype=\"label\" id=\"label_1\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">기본 정보</div><div mwftype=\"div\" id=\"div_11\" style=\"display: flex; background-color: rgb(255, 255, 255); gap: 1em 2em; flex-wrap: wrap; position: relative;\" class=\"form-content-area\"><div mwftype=\"div\" id=\"div_7\" style=\"display: flex;\" class=\"content-item flex\"><div mwftype=\"label\" id=\"label_1_1\" style=\"text-align: right;\" class=\"item-label\">기안자</div><div mwftype=\"div\" id=\"div_35\" style=\"flex: 1 1 0%; display: flex; align-items: center; background-color: rgb(247, 247, 247); padding: 0.5em 0.6em;\"><oo-org mwftype=\"common\" id=\"common\" style=\"\" type=\"text\"></oo-org></div></div><oo-datetime mwftype=\"OODatetime\" id=\"createTime\" placeholder=\"createTime\" read=\"true\" style=\"\" right-icon=\"calendar\" readmode=\"false\" label=\"기안 시간\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">createTime</div></oo-datetime><oo-input mwftype=\"OOInput\" id=\"currentActivity\" placeholder=\"currentActivity\" style=\"\" readmode=\"false\" type=\"text\" label=\"현재 단계\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><oo-input mwftype=\"OOInput\" id=\"filetypeName\" placeholder=\"filetypeName\" style=\"\" readmode=\"false\" type=\"text\" label=\"문서 유형\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><oo-input mwftype=\"OOInput\" id=\"contactPerson\" placeholder=\"contactPerson\" style=\"\" readmode=\"false\" type=\"text\" label=\"담당자\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" innerhtml=\"\" required=\"true\"></oo-input><oo-input mwftype=\"OOInput\" id=\"contactPhone\" placeholder=\"contactPhone\" style=\"\" readmode=\"false\" type=\"text\" label=\"연락처\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input></div></div><div mwftype=\"div\" id=\"div_3\" style=\"\"><div mwftype=\"label\" id=\"label_2\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">결재 정보\n</div><div mwftype=\"div\" id=\"div_3_1\" style=\"display: flex; background-color: rgb(255, 255, 255); gap: 1em 2em; flex-wrap: wrap; position: relative;\" class=\"form-content-area\"><div mwftype=\"div\" id=\"div_6\" style=\"\" class=\"content-item flex\"><div mwftype=\"label\" id=\"label_23\" style=\"\" class=\"item-label\">보안 등급</div><div mwftype=\"div\" id=\"div_40\" style=\"\" class=\"flex\"><oo-select mwftype=\"OOSelect\" id=\"secret\" placeholder=\"secret\" style=\"min-width: 6em;\" readmode=\"false\" label=\"\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" auto-size=\"true\"></oo-select><div mwftype=\"label\" id=\"label_24\" style=\"display: inline-block; margin-left: 0.5em; margin-right: 0.5em;\">★</div><oo-input mwftype=\"OOInput\" id=\"deadline\" placeholder=\"deadline\" style=\"\" readmode=\"false\" type=\"number\" label=\"\" input-style=\"appearance: none;\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><div mwftype=\"label\" id=\"label_3\" style=\"display: inline-block; margin-left: 0.5em;\">년</div></div></div><div mwftype=\"div\" id=\"div_4\" style=\"\" class=\"content-item flex\"><div mwftype=\"label\" id=\"label_22\" style=\"\" class=\"item-label\">문서번호</div><div mwftype=\"div\" id=\"div_36\" style=\"flex: 1 1 0%; gap: 1em;\" class=\"flex\"><oo-input mwftype=\"OOInput\" id=\"fileno\" placeholder=\"fileno\" style=\"flex: 1 1 0%; font-weight: bold;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" required=\"true\" validity=\"먼저 공문 문서번호를 올바르게 설정하세요\" readonly=\"true\"></oo-input><oo-button mwftype=\"OOButton\" id=\"OOButton\" text=\"문서번호 설정\" style=\"pointer-events: auto;\" disabled=\"false\" type=\"default\"></oo-button></div></div><oo-select mwftype=\"OOSelect\" id=\"priority\" placeholder=\"priority\" style=\"\" readmode=\"false\" label=\"긴급도\" readonly=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-select><oo-input mwftype=\"OOInput\" id=\"copies\" placeholder=\"copies\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"number\" label=\"인쇄 부수\" readonly=\"true\"></oo-input><oo-input mwftype=\"OOInput\" id=\"subject\" placeholder=\"subject\" style=\"flex: 1 1 100%;\" readonly=\"true\" disabled=\"false\" readmode=\"false\" label=\"제목\" requir=\"\" type=\"text\" autocomp=\"\" required=\"true\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-input><oo-selector mwftype=\"OOOrg\" id=\"mainSend\" placeholder=\"mainSend\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" right-icon=\"unit\" readmode=\"false\" label=\"수신처\" required=\"true\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Org/default/icon/field.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">mainSend</div></oo-selector><div mwftype=\"OORadioGroup\" id=\"OORadioGroup\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-radio-group style=\"float: left;\" label=\"라디오 버튼\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-radio-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 100%; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">OORadioGroup</div></div></div><div mwftype=\"OOCheckGroup\" id=\"OOCheckGroup\" style=\"border: 1px dashed rgb(204, 204, 204); border-radius: 0.2857em; cursor: pointer; overflow: hidden; margin: 3px; user-select: none; position: relative; top: auto; left: auto; min-width: 120px; opacity: 1; background: rgb(255, 255, 255); display: inline-grid; grid-template-columns: auto 1fr; align-items: center; min-height: 1.5em;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"><oo-checkbox-group style=\"float: left;\" label=\"체크박스\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\"></oo-checkbox-group><div style=\"display: flex; align-items: center; gap: 0.25em; padding: 0px 0.2em;\"><div style=\"width: 1em; height: 1em; border-radius: 2px; border: 1px solid rgb(153, 153, 153); float: left;\"></div><div style=\"white-space: nowrap; color: rgb(153, 153, 153); font-family: Verdana, Geneva, sans-serif; text-overflow: ellipsis; padding: 2px;\">OOCheckGroup</div></div></div><oo-selector mwftype=\"OOOrg\" id=\"OOOrg\" placeholder=\"OOOrg\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" right-icon=\"person\" readmode=\"false\" label=\"처리자\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Org/default/icon/field.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OOOrg</div></oo-selector><oo-datetime mwftype=\"OODatetime\" id=\"OODatetime\" placeholder=\"OODatetime\" read=\"true\" right-icon=\"calendar\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"처리 기한\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">OODatetime</div></oo-datetime><oo-select mwftype=\"OOAddress\" id=\"OOAddress\" placeholder=\"OOAddress\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readonly=\"true\" readmode=\"false\" label=\"주소\"></oo-select><oo-textarea mwftype=\"OOTextarea\" id=\"remark\" placeholder=\"remark\" style=\"flex: 1 1 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" label=\"비고\" readonly=\"true\"><div style=\"background: url(&quot;../x_component_process_FormDesigner/Module/Textfield/default/icon/inputtext.png&quot;) center center no-repeat; width: 18px; height: 18px; float: right;\"></div><div style=\"white-space: nowrap; margin-right: 18px; overflow: hidden; margin-left: 2px; line-height: 18px; color: rgb(119, 119, 119); font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-overflow: ellipsis;\">remark</div></oo-textarea></div></div><div mwftype=\"div\" id=\"div_5\" style=\"\"><div mwftype=\"label\" id=\"label_4\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">기타 정보</div><div mwftype=\"div\" id=\"div_8\" style=\"padding: 2em 3em; display: flex; background-color: rgb(255, 255, 255); gap: 1em 2em; flex-wrap: wrap; position: relative;\" class=\"form-content-area\"><oo-files mwftype=\"OOFiles\" id=\"OOFiles\" placeholder=\"OOFiles\" readonly=\"true\" style=\"flex: 1 1 100%;\" type=\"file\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" file-button-style=\"simple\" label=\"참고 문서\"></oo-files><div id=\"datatable\" mwftype=\"datatable\" width=\"100%\" border=\"0\" class=\"form-datatable\" style=\"border: 1px solid rgb(222, 222, 222); border-radius: 4px; flex: 1 1 100%;\"><table border=\"0\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\" align=\"center\" class=\"form-datatable\" style=\"\"><tbody><tr><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title\" style=\"text-align: left; padding: 0px 0.7em; width: 20%;\">이름</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_1\" style=\"text-align: left; padding: 0px 0.7em; width: 15%;\">유형</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_2\" style=\"text-align: left; padding: 0px 0.7em; width: 10%;\">단가</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_4\" style=\"text-align: left; padding: 0px 0.7em; width: 10%;\">수량</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_5\" style=\"text-align: left; padding: 0px 0.7em; width: 15%;\">가격</th><th mwftype=\"datatable$Title\" id=\"datatable_datatable$Title_3\" style=\"text-align: left; padding: 0px 0.7em;\">비고</th></tr><tr><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data\" style=\"\"><oo-input mwftype=\"OOInput\" id=\"OOInput\" placeholder=\"OOInput\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" readonly=\"true\"></oo-input></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_1\" style=\"\"><oo-select mwftype=\"OOSelect\" id=\"OOSelect\" placeholder=\"OOSelect\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readonly=\"true\" readmode=\"false\"></oo-select></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_2\" style=\"\"><oo-currency mwftype=\"OOCurrency\" id=\"price\" placeholder=\"price\" right-icon=\"currency\" style=\"\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" readonly=\"true\"></oo-currency></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_4\" style=\"\"><oo-input mwftype=\"OOInput\" id=\"count\" placeholder=\"count\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"number\" readonly=\"true\"></oo-input></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_5\" style=\"\"><oo-currency mwftype=\"OOCurrency\" id=\"totalPrice\" placeholder=\"totalPrice\" style=\"\" right-icon=\"currency\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" readonly=\"true\"></oo-currency></td><td mwftype=\"datatable$Data\" id=\"datatable_datatable$Data_3\" style=\"\"><oo-input mwftype=\"OOInput\" id=\"OOInput_3\" placeholder=\"OOInput_3\" style=\"width: 100%;\" label-style=\"width:6.2vw; min-width:4.3em; max-width:9em\" label-align=\"right\" view-style=\"background-color:#f7f7f7\" readmode=\"false\" type=\"text\" readonly=\"true\"></oo-input></td></tr></tbody></table></div></div></div><div mwftype=\"div\" id=\"div_28\" style=\"\" class=\"\"><div mwftype=\"label\" id=\"label_18\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">첨부파일 정보</div><div mwftype=\"div\" id=\"div_29\" style=\"\" class=\"form-content-area\"><div mwftype=\"attachment\" id=\"attachment\" style=\"flex: 1 1 100%;\" data-mwf-el-type=\"MWFFormDesignerAttachment\"><div style=\"border: 1px solid rgb(222, 222, 222); border-radius: 4px; background: transparent; overflow: hidden;\"><div style=\"display: none; height: 0px; overflow: hidden;\">Attachment</div><div style=\"padding: 0.2em 0px; background-color: rgb(247, 247, 247); overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; border-top-left-radius: 4px; border-top-right-radius: 4px;\"><div style=\"overflow: hidden; margin-left: 0.714em; border-radius: 3px;\"><div style=\"border-radius: 3px; display: flex; align-items: center;\"><div title=\"업로드\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/upload_gray.png&quot;);\"></div></div><div title=\"웹하드에서 선택\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/drive_gray.png&quot;);\"></div></div><div title=\"삭제\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/delete_gray.png&quot;);\"></div></div><div title=\"바꾸기\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/replace_gray.png&quot;);\"></div></div><div class=\"separateNode\" style=\"width: 1px; height: 1.14286em; margin: 0px 0.357em; border-left: 1px solid rgb(188, 188, 188); background-color: rgb(241, 241, 241);\"></div><div title=\"다운로드\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/download_gray.png&quot;);\"></div></div></div></div><div style=\"overflow: hidden; margin-left: 0.714em; border-radius: 3px;\"><div style=\"border-radius: 3px; display: flex; align-items: center;\"><div title=\"목록\" style=\"cursor: pointer; background: transparent;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/list.png&quot;);\"></div></div><div title=\"순서\" style=\"cursor: pointer; background: transparent;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/seq.png&quot;);\"></div></div><div title=\"아이콘\" style=\"cursor: pointer; background: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/selectedbg.png&quot;);\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/icon.png&quot;);\"></div></div><div title=\"미리보기\" style=\"cursor: pointer; background: transparent;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/preview.png&quot;);\"></div></div></div></div><div style=\"overflow: hidden; margin-left: 0.714em; border-radius: 3px; float: right; margin-right: 7px;\"><div style=\"border-radius: 3px; display: flex; align-items: center;\"><div title=\"간단 모드\" style=\"cursor: pointer;\"><div style=\"width: 1.857em; height: 1.857em; background-repeat: no-repeat; background-position: center center; background-image: url(&quot;../o2_core/o2/widget/$AttachmentController/v10/icon/min.png&quot;);\"></div></div></div></div></div><div class=\"contentScrollNode\" style=\"overflow: auto; min-height: 9.3em;\"><div class=\"content\"></div></div><div style=\"display: none;\"><div style=\"height: 7px; cursor: row-resize;\"></div></div></div></div></div></div><div mwftype=\"div\" id=\"div_21\" style=\"\" class=\"\"><div mwftype=\"label\" id=\"label_17\" style=\"padding: 0.8em 1em; font-size: 1.14286rem; background-color: rgb(255, 255, 255); font-weight: bold; box-shadow: rgb(222, 222, 222) 0px -1px 0px 0px inset; border-left: 4px solid var(--oo-color-main);\" class=\"form-content-section\">결재 정보</div><div mwftype=\"div\" id=\"div_23\" style=\"\" class=\"form-content-area\"><div mwftype=\"log\" id=\"log_4\" style=\"flex: 1 1 100%;\" class=\"form-log\" data-mwf-el-type=\"MWFFormDesignerLog\"><div style=\"width: 70px; height: 24px; color: rgb(153, 153, 153); font-size: 12px; position: static; margin: auto;\"><div style=\"width: 24px; height: 24px; background: url(&quot;../x_component_process_FormDesigner/Module/Log/default/icon/log.png&quot;) 5px center no-repeat; float: left;\"></div><div style=\"line-height: 24px; height: 24px; width: 44px; float: right;\">LOG</div></div></div></div></div></div></div></div>",
         "isNewForm": false,
         "json": {
             "$version": "5.2",
@@ -11,7 +11,7 @@
                 "html": ""
             },
             "application": "204be54d-c00a-45e7-8f69-30261defe214",
-            "applicationName": "公文管理",
+            "applicationName": "공문 관리",
             "appType": "process.FormDesigner",
             "buttonStyle": {
                 "background-color": "#f4f7f6",
@@ -913,7 +913,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "请输入联系人员",
+                    "description": "담당자를 입력하세요",
                     "events": {
                         "blur": {
                             "code": "",
@@ -985,7 +985,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "联系人员",
+                    "label": "담당자",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -1035,7 +1035,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "请输入联系电话",
+                    "description": "연락처를 입력하세요",
                     "editByActivityValue": [],
                     "events": {
                         "blur": {
@@ -1107,7 +1107,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "联系电话",
+                    "label": "연락처",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -1157,7 +1157,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "份数",
+                    "description": "부수",
                     "events": {
                         "blur": {
                             "code": "",
@@ -1229,7 +1229,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "印数（份）",
+                    "label": "인쇄 부수",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -1470,7 +1470,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "起草时间",
+                    "label": "기안 시간",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -1593,7 +1593,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "当前活动",
+                    "label": "현재 단계",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -1788,7 +1788,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "exportActionText": "导出Excel",
+                    "exportActionText": "Excel 내보내기",
                     "id": "datatable",
                     "impexpPosition": "leftTop",
                     "impExpTableContentStyles": {},
@@ -1796,7 +1796,7 @@
                     "impExpTableStyles": {},
                     "impExpTableTitleStyles": {},
                     "impexpType": "none",
-                    "importActionText": "导入Excel",
+                    "importActionText": "Excel 가져오기",
                     "initialized": "yes",
                     "keyContentSeparator": "：",
                     "keyContentSeparatorSectionBy": "：",
@@ -2420,7 +2420,7 @@
                     "isSaved": true,
                     "isShow": true,
                     "moduleName": "datatable$Title",
-                    "name": "名称",
+                    "name": "이름",
                     "pid": "PC877617e6-0fcd-439e-a361-d1a4097393fddatatable_datatable$Title",
                     "preprocessing": "y",
                     "properties": {},
@@ -2505,7 +2505,7 @@
                     "isSaved": true,
                     "isShow": true,
                     "moduleName": "datatable$Title",
-                    "name": "类型",
+                    "name": "유형",
                     "pid": "PC877617e6-0fcd-439e-a361-d1a4097393fddatatable_datatable$Title_1",
                     "preprocessing": "y",
                     "properties": {},
@@ -2590,7 +2590,7 @@
                     "isSaved": true,
                     "isShow": true,
                     "moduleName": "datatable$Title",
-                    "name": "单价",
+                    "name": "단가",
                     "pid": "PC877617e6-0fcd-439e-a361-d1a4097393fddatatable_datatable$Title_2",
                     "preprocessing": "y",
                     "properties": {},
@@ -2675,7 +2675,7 @@
                     "isSaved": true,
                     "isShow": true,
                     "moduleName": "datatable$Title",
-                    "name": "备注",
+                    "name": "비고",
                     "pid": "PC877617e6-0fcd-439e-a361-d1a4097393fddatatable_datatable$Title_3",
                     "preprocessing": "y",
                     "properties": {},
@@ -2759,7 +2759,7 @@
                     "isSaved": true,
                     "isShow": true,
                     "moduleName": "datatable$Title",
-                    "name": "数量",
+                    "name": "수량",
                     "pid": "PC877617e6-0fcd-439e-a361-d1a4097393fddatatable_datatable$Title_4",
                     "preprocessing": "y",
                     "properties": {},
@@ -2844,7 +2844,7 @@
                     "isSaved": true,
                     "isShow": true,
                     "moduleName": "datatable$Title",
-                    "name": "价格",
+                    "name": "가격",
                     "pid": "PC877617e6-0fcd-439e-a361-d1a4097393fddatatable_datatable$Title_5",
                     "preprocessing": "y",
                     "properties": {},
@@ -2866,7 +2866,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "保密期限",
+                    "description": "보안 기한",
                     "events": {
                         "blur": {
                             "code": "",
@@ -4331,10 +4331,10 @@
                     "editByActivityValue": [
                         {
                             "alias": "hgbh",
-                            "distinguishedName": "文印室核稿编号@d52f681e-77d6-4e91-ba05-df595b356b28@A",
+                            "distinguishedName": "인쇄실 검토 번호@d52f681e-77d6-4e91-ba05-df595b356b28@A",
                             "id": "d52f681e-77d6-4e91-ba05-df595b356b28",
-                            "name": "文印室核稿编号",
-                            "processName": "发文管理"
+                            "name": "인쇄실 검토 번호",
+                            "processName": "발신 문서 관리"
                         }
                     ],
                     "events": {
@@ -4414,10 +4414,10 @@
                     "readByActivityValue": [
                         {
                             "alias": "hgbh",
-                            "distinguishedName": "文印室核稿编号@d52f681e-77d6-4e91-ba05-df595b356b28@A",
+                            "distinguishedName": "인쇄실 검토 번호@d52f681e-77d6-4e91-ba05-df595b356b28@A",
                             "id": "d52f681e-77d6-4e91-ba05-df595b356b28",
-                            "name": "文印室核稿编号",
-                            "processName": "发文管理"
+                            "name": "인쇄실 검토 번호",
+                            "processName": "발신 문서 관리"
                         }
                     ],
                     "readByScript": [],
@@ -5133,14 +5133,14 @@
                     "properties": {
                         "label-Align": "right",
                         "label-style": "width:6.2vw; min-width:4.3em; max-width:9em",
-                        "validity": "请先正确设置公文文号",
+                        "validity": "먼저 공문 문서번호를 올바르게 설정하세요",
                         "view-style": "background-color:#f7f7f7"
                     },
                     "readByActivityValue": [
                         {
                             "alias": "hb",
                             "id": "36c69b69-e275-4741-9537-01d21d8da3b5",
-                            "name": "部门会签",
+                            "name": "부서 합의",
                             "process": "cad4a11d-0181-405c-9638-926b0794a773",
                             "type": "manual",
                             "unique": "d6f6d00d-680e-4ab2-8575-324e7204f9a4"
@@ -5148,7 +5148,7 @@
                         {
                             "alias": "bmsh",
                             "id": "46a399bc-da75-4ac9-925e-3f942ef0b5fa",
-                            "name": "部门审核",
+                            "name": "부서 검토",
                             "process": "cad4a11d-0181-405c-9638-926b0794a773",
                             "type": "manual",
                             "unique": "941261f2-4479-4e84-a8cb-89ed46be7044"
@@ -5156,7 +5156,7 @@
                         {
                             "alias": "bgszr",
                             "id": "b3441564-cc55-41aa-a1f8-3cfc0a2ad157",
-                            "name": "办公室主任审核",
+                            "name": "사무실장 검토",
                             "process": "cad4a11d-0181-405c-9638-926b0794a773",
                             "type": "manual",
                             "unique": "d211d82d-73d5-429a-8738-c5929afb9237"
@@ -5296,7 +5296,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "文件类型",
+                    "label": "문서 유형",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -5520,7 +5520,7 @@
                         "padding": "0.8em 1em"
                     },
                     "templateType": "section",
-                    "text": "基本信息",
+                    "text": "기본 정보",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -5608,7 +5608,7 @@
                     "styles": {
                         "text-align": "right"
                     },
-                    "text": "起草人员",
+                    "text": "기안자",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -5872,7 +5872,7 @@
                         "padding": "0.8em 1em"
                     },
                     "templateType": "section",
-                    "text": "流程信息",
+                    "text": "결재 정보",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -5971,7 +5971,7 @@
                         "padding": "0.8em 1em"
                     },
                     "templateType": "section",
-                    "text": "附件信息",
+                    "text": "첨부파일 정보",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6066,7 +6066,7 @@
                         "padding": "0.8em 1em"
                     },
                     "templateType": "section",
-                    "text": "流程信息\n",
+                    "text": "결재 정보\n",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6153,7 +6153,7 @@
                         "html": ""
                     },
                     "styles": {},
-                    "text": "文　　号",
+                    "text": "문서번호",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6240,7 +6240,7 @@
                         "html": ""
                     },
                     "styles": {},
-                    "text": "密　　级",
+                    "text": "보안 등급",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6415,7 +6415,7 @@
                         "display": "inline-block",
                         "margin-left": "0.5em"
                     },
-                    "text": "年",
+                    "text": "년",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6510,7 +6510,7 @@
                         "padding": "0.8em 1em"
                     },
                     "templateType": "section",
-                    "text": "其他信息",
+                    "text": "기타 정보",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6680,7 +6680,7 @@
                         "html": ""
                     },
                     "styles": {},
-                    "text": "当前活动：",
+                    "text": "현재 단계: ",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6765,7 +6765,7 @@
                         "html": ""
                     },
                     "styles": {},
-                    "text": "拟稿人：",
+                    "text": "기안자: ",
                     "type": "Label",
                     "valueType": "text"
                 },
@@ -6869,14 +6869,14 @@
                         "class": "form-log"
                     },
                     "recoveryStyles": null,
-                    "showReadCompletedTitle": "已阅人",
-                    "showReadTitle": "待阅人",
+                    "showReadCompletedTitle": "열람 완료자",
+                    "showReadTitle": "열람 대기자",
                     "sortTypeInCategory": "default",
                     "styles": {
                         "flex": "1 1 100%"
                     },
-                    "textStyle": "<div class=\"logItem\">\r\n    <div class=\"logItem-icon\"\r\n        style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{personDn}/icon');\">\r\n    </div>\r\n    <div class=\"logItem-person-route\">\r\n        <div class=\"logItem-person\">{person}</div>\r\n        <div class=\"logItem-department\">({department})</div>\r\n        <div class=\"logItem-route\">【{route}】</div>\r\n    </div>\r\n    <div class=\"logItem-activity\">{activity}</div>\r\n    <div class=\"logItem-opinion\"><b>处理意见：</b>{opinion}</div>\r\n        <div class=\"logItem-time ooicon-clock\">{time}</div>\r\n        <div class=\"logItem-img\">{img}</div>\r\n</div>",
-                    "textTaskStyle": "<div class=\"logItem logItem-current\">\r\n    <div class=\"logItem-icon\"\r\n        style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{personDn}/icon');\">\r\n    </div>\r\n    <div class=\"logItem-person-route\">\r\n        <div class=\"logItem-person\">{person}</div>\r\n        <div class=\"logItem-department\">({department})</div>\r\n        <div class=\"logItem-route\"><span>&nbsp;</span>{route}</div>\r\n    </div>\r\n    <div class=\"logItem-activity\">{activity}</div>\r\n    <!-- <div class=\"logItem-opinion\"><b>处理意见：</b>{opinion}</div> -->\r\n        <div class=\"logItem-time ooicon-clock\">{time}</div>\r\n        <!-- <div class=\"logItem-img\">{img}</div> -->\r\n</div>",
+                    "textStyle": "<div class=\"logItem\">\r\n    <div class=\"logItem-icon\"\r\n        style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{personDn}/icon');\">\r\n    </div>\r\n    <div class=\"logItem-person-route\">\r\n        <div class=\"logItem-person\">{person}</div>\r\n        <div class=\"logItem-department\">({department})</div>\r\n        <div class=\"logItem-route\">【{route}】</div>\r\n    </div>\r\n    <div class=\"logItem-activity\">{activity}</div>\r\n    <div class=\"logItem-opinion\"><b>처리 의견: </b>{opinion}</div>\r\n        <div class=\"logItem-time ooicon-clock\">{time}</div>\r\n        <div class=\"logItem-img\">{img}</div>\r\n</div>",
+                    "textTaskStyle": "<div class=\"logItem logItem-current\">\r\n    <div class=\"logItem-icon\"\r\n        style=\"background-image: url('/x_organization_assemble_control/jaxrs/person/{personDn}/icon');\">\r\n    </div>\r\n    <div class=\"logItem-person-route\">\r\n        <div class=\"logItem-person\">{person}</div>\r\n        <div class=\"logItem-department\">({department})</div>\r\n        <div class=\"logItem-route\"><span>&nbsp;</span>{route}</div>\r\n    </div>\r\n    <div class=\"logItem-activity\">{activity}</div>\r\n    <!-- <div class=\"logItem-opinion\"><b>처리 의견: </b>{opinion}</div> -->\r\n        <div class=\"logItem-time ooicon-clock\">{time}</div>\r\n        <!-- <div class=\"logItem-img\">{img}</div> -->\r\n</div>",
                     "type": "Log"
                 },
                 "mainSend": {
@@ -6888,7 +6888,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "请选择主送单位",
+                    "description": "수신처를 선택하세요",
                     "dutyRange": "all",
                     "dutyUnitLevelBy": "duty",
                     "editByActivity": [
@@ -7035,7 +7035,7 @@
                     "isReader": "no",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "主送单位",
+                    "label": "수신처",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -7180,7 +7180,7 @@
                     "itemType": "values",
                     "itemValues": [],
                     "keyContentSeparator": "：",
-                    "label": "地址",
+                    "label": "주소",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -7308,7 +7308,7 @@
                     "label": "",
                     "moduleGroup": "O2OA UI",
                     "moduleName": "OOButton",
-                    "name": "设置文号",
+                    "name": "문서번호 설정",
                     "pid": "PC877617e6-0fcd-439e-a361-d1a4097393fdOOButton",
                     "preprocessing": "y",
                     "properties": {},
@@ -7318,10 +7318,10 @@
                     "readByActivityValue": [
                         {
                             "alias": "hgbh",
-                            "distinguishedName": "文印室核稿编号@d52f681e-77d6-4e91-ba05-df595b356b28@A",
+                            "distinguishedName": "인쇄실 검토 번호@d52f681e-77d6-4e91-ba05-df595b356b28@A",
                             "id": "d52f681e-77d6-4e91-ba05-df595b356b28",
-                            "name": "文印室核稿编号",
-                            "processName": "发文管理"
+                            "name": "인쇄실 검토 번호",
+                            "processName": "발신 문서 관리"
                         }
                     ],
                     "recoveryStyles": null,
@@ -7432,13 +7432,13 @@
                     },
                     "itemType": "values",
                     "itemValues": [
-                        "选项一",
-                        "选项二",
-                        "选项三",
-                        "选项四"
+                        "옵션 1",
+                        "옵션 2",
+                        "옵션 3",
+                        "옵션 4"
                     ],
                     "keyContentSeparator": "：",
-                    "label": "复选框",
+                    "label": "체크박스",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -7554,7 +7554,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "办理期限",
+                    "label": "처리 기한",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -7677,7 +7677,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "参考文件",
+                    "label": "참고 문서",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -8108,7 +8108,7 @@
                     "isReader": "no",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "办理人员",
+                    "label": "처리자",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -8247,12 +8247,12 @@
                     },
                     "itemType": "values",
                     "itemValues": [
-                        "选项一",
-                        "选项二",
-                        "选项三"
+                        "옵션 1",
+                        "옵션 2",
+                        "옵션 3"
                     ],
                     "keyContentSeparator": "：",
-                    "label": "单选按钮",
+                    "label": "라디오 버튼",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -8374,11 +8374,11 @@
                     },
                     "itemType": "values",
                     "itemValues": [
-                        "办公用品",
-                        "电子产品",
-                        "医疗保健",
-                        "运动户外",
-                        "家具家装"
+                        "사무용품",
+                        "전자제품",
+                        "의료·건강",
+                        "스포츠·아웃도어",
+                        "가구·인테리어"
                     ],
                     "keyContentSeparator": "：",
                     "moduleGroup": "O2OA UI",
@@ -8551,7 +8551,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "公文紧急程度",
+                    "description": "공문 긴급도",
                     "dictUseCache": true,
                     "events": {
                         "blur": {
@@ -8630,15 +8630,15 @@
                     "itemType": "values",
                     "itemValues": [
                         "|",
-                        "一般",
-                        "紧急",
-                        "特急",
-                        "特提",
-                        "加急",
-                        "平急"
+                        "보통",
+                        "긴급",
+                        "특급",
+                        "최우선",
+                        "급",
+                        "일반 긴급"
                     ],
                     "keyContentSeparator": "：",
-                    "label": "紧急程度",
+                    "label": "긴급도",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -8683,7 +8683,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "请填写备注",
+                    "description": "비고를 입력하세요",
                     "editByActivity": [
                         "true"
                     ],
@@ -8759,7 +8759,7 @@
                     "inputType": "text",
                     "isSaved": true,
                     "keyContentSeparator": "：",
-                    "label": "备　　注",
+                    "label": "비고",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -8816,7 +8816,7 @@
                         "code": "return ''",
                         "html": ""
                     },
-                    "description": "保密等级",
+                    "description": "보안 등급",
                     "dictUseCache": true,
                     "events": {
                         "blur": {
@@ -8894,10 +8894,10 @@
                     },
                     "itemType": "values",
                     "itemValues": [
-                        "无",
-                        "绝密",
-                        "机密",
-                        "秘密"
+                        "없음",
+                        "극비",
+                        "기밀",
+                        "비밀"
                     ],
                     "keyContentSeparator": "：",
                     "mergeTypeEdit": "script",
@@ -8947,7 +8947,7 @@
                         "code": "",
                         "html": ""
                     },
-                    "description": "请输入发文标题",
+                    "description": "발신 문서 제목을 입력하세요",
                     "disabled": false,
                     "editByActivity": [],
                     "editByActivityValue": [],
@@ -9024,7 +9024,7 @@
                     "isSaved": true,
                     "isTitle": false,
                     "keyContentSeparator": "：",
-                    "label": "标　　题",
+                    "label": "제목",
                     "mergeTypeEdit": "script",
                     "mergeTypeRead": "default",
                     "moduleGroup": "O2OA UI",
@@ -9332,7 +9332,7 @@
                     "type": "MWFToolBarButton"
                 }
             ],
-            "name": "新建表单模板",
+            "name": "새 양식 템플릿",
             "nodeStyleWithhideModuleIcon": {
                 "margin-right": "0px"
             },
@@ -9392,7 +9392,7 @@
     "mobileData": {
     "json": {
       "id": "",
-      "name": "新建表单",
+      "name": "새 양식",
       "type": "Form",
       "mode": "Mobile",
       "description": "",

@@ -1,0 +1,58 @@
+{
+  "o2web/source/o2_lib/kityminder/core/kityminder.core.js": [
+    {
+      "text": "老",
+      "reason": "MD5 해시 패딩 계산용 문자(알고리즘 상수, 화면 문구 아님)"
+    },
+    {
+      "text": "耀",
+      "reason": "MD5 해시 패딩 계산용 문자(알고리즘 상수, 화면 문구 아님)"
+    }
+  ],
+  "o2web/source/o2_lib/kityminder/kity/kity.js": [
+    {
+      "text": "脑图",
+      "reason": "글꼴 높이 측정용 샘플 텍스트(_cachedFontHash), 화면에 표시되지 않음"
+    }
+  ],
+  "o2web/source/o2_lib/kityminder/kity/kity_all.js": [
+    {
+      "text": "脑图",
+      "reason": "글꼴 높이 측정용 샘플 텍스트(_cachedFontHash), 화면에 표시되지 않음"
+    }
+  ],
+  "o2web/source/o2_lib/officecontrol/config.json": [
+    {
+      "text": "浙江兰德纵横网络技术股份有限公司",
+      "reason": "iWebOffice 컨트롤 MakerCaption 라이선스 값(Xform/Office.js 기본값과 일치해야 함)"
+    }
+  ],
+  "o2web/source/o2_lib/officecontrol/5040/config.json": [
+    {
+      "text": "浙江兰德纵横网络技术股份有限公司",
+      "reason": "iWebOffice 컨트롤 MakerCaption 라이선스 값(Xform/Office.js 기본값과 일치해야 함)"
+    }
+  ],
+  "o2web/source/o2_lib/tinymce/tinymce_5.9.2/o2config.js": [
+    {
+      "text": "微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;",
+      "reason": "o2.language === \"zh-cn\" 분기 전용 중국어 글꼴 목록(글꼴 값)"
+    },
+    {
+      "text": "苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;",
+      "reason": "o2.language === \"zh-cn\" 분기 전용 중국어 글꼴 목록(글꼴 값)"
+    },
+    {
+      "text": "宋体=simsun,serif;",
+      "reason": "o2.language === \"zh-cn\" 분기 전용 중국어 글꼴 목록(글꼴 값)"
+    },
+    {
+      "text": "仿宋体=FangSong,serif;",
+      "reason": "o2.language === \"zh-cn\" 분기 전용 중국어 글꼴 목록(글꼴 값)"
+    },
+    {
+      "text": "黑体=SimHei,sans-serif;",
+      "reason": "o2.language === \"zh-cn\" 분기 전용 중국어 글꼴 목록(글꼴 값)"
+    }
+  ]
+}

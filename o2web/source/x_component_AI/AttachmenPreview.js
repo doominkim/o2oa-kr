@@ -222,7 +222,7 @@ MWF.xApplication.AI.AttachmenPreview = new Class({
                         }.bind(this),
                         "buttonList": [
                             {
-                                "text": "关闭",
+                                "text": "닫기",
                                 "action": function () {
                                     dlg.close();
                                 }.bind(this)

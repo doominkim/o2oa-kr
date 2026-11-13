@@ -1,5 +1,5 @@
 {
-  "name": "新建流程",
+  "name": "새 프로세스",
   "alias": "",
   "description": "",
   "application": "",
@@ -11,7 +11,7 @@
   "autoList": [],
   "begin": {
     "process": "c4f1073b-dba1-4f18-ab95-6d110a58c977",
-    "name":"开始",
+    "name":"시작",
     "alias":"",
     "description":"",
     "position": "200,60",
@@ -46,7 +46,7 @@
     {
       "id": "ea30593c-2170-4a09-91aa-69bef6d6b715",
       "process": "c4f1073b-dba1-4f18-ab95-6d110a58c977",
-      "name":"结束",
+      "name":"종료",
       "alias":"",
       "description":"",
       "position": "200,330",
@@ -81,7 +81,7 @@
       "process": "c4f1073b-dba1-4f18-ab95-6d110a58c977",
       "activityType": "end",
       "activity": "ea30593c-2170-4a09-91aa-69bef6d6b715",
-      "name": "开始",
+      "name": "시작",
       "alias": "",
       "description": "",
       "track": "",

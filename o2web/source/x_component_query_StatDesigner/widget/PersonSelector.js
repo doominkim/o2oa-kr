@@ -236,11 +236,11 @@ MWF.xApplication.query.StatDesigner.widget.PersonSelector.DutyInput = Class({
     loadAction: function(){
         this.okActionNode = new Element("button", {
             "styles": this.css.dutyOkActionNode,
-            "text": "确　定"
+            "text": "확인"
         }).inject(this.actionNode);
         this.cancelActionNode = new Element("button", {
             "styles": this.css.dutyCancelActionNode,
-            "text": "取 消"
+            "text": "취소"
         }).inject(this.actionNode);
     },
     loadContent: function(){

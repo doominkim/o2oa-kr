@@ -19,7 +19,7 @@
             COMMON.setContentPath("../x_desktop");
             COMMON.AjaxModule.load("mwf", function(){
                 MWF.defaultPath = "../x_desktop"+MWF.defaultPath;
-                MWF.loadLP("zh-cn");
+                MWF.loadLP(MWF.language);
                 MWF.require("MWF.xDesktop.Layout", function(){
                     var preview = window.frameElement.retrieve("preview1");
                     preview1.loadFormData($("layout"));

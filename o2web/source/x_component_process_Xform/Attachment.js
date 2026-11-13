@@ -2259,7 +2259,7 @@ MWF.xApplication.process.Xform.Attachment = MWF.APPAttachment = new Class(
         const options = {
             "attId": att.data.id,
             "attName" : att.data.name,
-            "msg" : "总结分析下该文件",
+            "msg" : "이 파일을 요약하고 분석해 주세요",
             "jars" : jars,
             "appId":  "AI" + att.data.id
         };
@@ -2934,7 +2934,7 @@ MWF.xApplication.process.Xform.AttachmenPreview = new Class({
                         },
                         "buttonList": [
                             {
-                                "text": "关闭",
+                                "text": "닫기",
                                 "action": function () {
                                     dlg.close();
                                 }
@@ -3255,7 +3255,7 @@ MWF.xApplication.process.Xform.AttachmenPreview = new Class({
                         }.bind(this),
                         "buttonList": [
                             {
-                                "text": "关闭",
+                                "text": "닫기",
                                 "action": function () {
                                     dlg.close();
                                 }.bind(this)

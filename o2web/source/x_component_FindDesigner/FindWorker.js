@@ -957,28 +957,28 @@ _worker.findInDesigner_selectConfig = function(formData, key, module, designer, 
         var json = JSON.parse(text);
         json.forEach(function(config, i) {
             var idx = i+1;
-            var propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp默认值脚本(defaultValue)&nbsp";
+            var propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp기본값 스크립트(defaultValue)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.defaultValue.code, propertyName);
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp校验脚本(validation)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp검증 스크립트(validation)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.validation.code, propertyName);
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp隐藏脚本(hiddenScript)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp숨김 스크립트(hiddenScript)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.hiddenScript.code, propertyName);
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp身份选择组织范围脚本(identityRangeKey)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp소속 선택 조직 범위 스크립트(identityRangeKey)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.identityRangeKey.code, propertyName);
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp职务范围脚本(rangeDutyKey)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp직무 범위 스크립트(rangeDutyKey)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.rangeDutyKey.code, propertyName);
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp身份添加脚本(identityIncludeKey)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp소속 추가 스크립트(identityIncludeKey)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.identityIncludeKey.code, propertyName);
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp组织选择组织范围脚本(unitRangeKey)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp조직 선택 조직 범위 스크립트(unitRangeKey)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.unitRangeKey.code, propertyName);
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp排除范围脚本(exclude)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp제외 범위 스크립트(exclude)&nbsp";
             _worker.findInDesigner_selectConfig_script(formData, key, module, designer, propertyDefinition, option, mode, config.exclude.code, propertyName);
 
             var arr = config.rangeDuty;
@@ -987,7 +987,7 @@ _worker.findInDesigner_selectConfig = function(formData, key, module, designer, 
                 var text = v.toString();
                 if (this.keywordRegexp.test(text)){
 
-                    propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp职务范围(rangeDuty)&nbsp";
+                    propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp직무 범위(rangeDuty)&nbsp";
 
                     _worker._findMessageReply(_worker._createFindMessageReplyData(module, designer, "", {
                         "type": formData.type,
@@ -1003,7 +1003,7 @@ _worker.findInDesigner_selectConfig = function(formData, key, module, designer, 
                 }
             });
 
-            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp事件(events)&nbsp";
+            propertyName = propertyDefinition.name+"&nbsp"+idx+"-"+config.name+"&nbsp이벤트(events)&nbsp";
             _worker.findInDesigner_selectConfig_events(formData, key, module, designer, propertyDefinition, option, mode, config.events, propertyName);
         });
     }

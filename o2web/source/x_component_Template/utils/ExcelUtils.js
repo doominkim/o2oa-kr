@@ -7,15 +7,15 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
         'isTemplate': false,
         'headText': '',
         'headStyle': {
-            font: { name: '宋体', family: 4, size: 20, bold: true },
+            font: { name: 'Malgun Gothic', family: 4, size: 20, bold: true },
             alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
         },
         'columnTitleStyle': {
-            font: { name: '宋体', family: 4, size: 12, bold: true },
+            font: { name: 'Malgun Gothic', family: 4, size: 12, bold: true },
             alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
         },
         'columnContentStyle': {
-            font: { name: '宋体', family: 4, size: 12, bold: false },
+            font: { name: 'Malgun Gothic', family: 4, size: 12, bold: false },
             alignment: { vertical: 'middle', horizontal: 'center', wrapText: true }
         }
     },
@@ -232,7 +232,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
         });
 
         var setTitleCellStyle = function (cell){
-            //cell.font = { name: '宋体', family: 4, size: 12, bold: true };
+            //cell.font = { name: 'Malgun Gothic', family: 4, size: 12, bold: true };
             // cell.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFFFFF'} };
             //cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
             Object.each(this.options.columnTitleStyle || {}, function (value, key){
@@ -332,7 +332,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
         //     sheet.getColumn(i+1).width = colWidthArr[i] ? (colWidthArr[i] / 10) : 20;
         //     var cell = titleRow.getCell(i+1);
         //     cell.value = o2.typeOf(title) === 'object' ? title.text : title;
-        //     cell.font = { name: '宋体', family: 4, size: 12, bold: true };
+        //     cell.font = { name: 'Malgun Gothic', family: 4, size: 12, bold: true };
         //     // cell.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFFFFF'} };
         //     cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
         // });
@@ -344,7 +344,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
                     var cell = contentRow.getCell(j+1+offsetColumnIndex);
                     cell.value = content;
                     setDataCellStyle( cell, j );
-                    // cell.font = { name: '宋体', family: 4, size: 12, bold: false };
+                    // cell.font = { name: 'Malgun Gothic', family: 4, size: 12, bold: false };
                     // cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: !isNumber };
                 }.bind(this));
             }.bind(this));
@@ -419,7 +419,7 @@ MWF.xApplication.Template.utils.ExcelUtils = new Class({
     //             // di.t = "s";
     //             di.s = {  //设置副标题样式
     //                 font: {
-    //                     //name: '宋体',
+    //                     //name: 'Malgun Gothic',
     //                     sz: 12,
     //                     color: {rgb: "#FFFF0000"},
     //                     bold: true,

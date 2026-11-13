@@ -7,8 +7,8 @@
   "section": "no",
   "sectionBy": "person",
   "impexpType": "none",
-  "importActionText": "导入Excel",
-  "exportActionText": "导出Excel",
+  "importActionText": "Excel 가져오기",
+  "exportActionText": "Excel 내보내기",
   "maxHeight": "",
   "minWidth": "",
   "sectionByScript": {

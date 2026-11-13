@@ -43,7 +43,7 @@ o2.addReady(function () {
             if (layout.config && layout.config.sessionStorageEnable && window.sessionStorage) window.sessionStorage.setItem("o2LayoutSessionToken", options[o2.tokenName]);
         }
 
-        MWF.loadLP("zh-cn");
+        MWF.loadLP(MWF.language);
 
         MWF.require("MWF.widget.Mask", null, false);
         layout.mask = new MWF.widget.Mask({ "style": "desktop" });

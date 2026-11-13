@@ -1,6 +1,6 @@
 {
   "default": {
-    "name": "默认样式",
+    "name": "기본 스타일",
     "form": {
       "styles":{
         "background-color": "#f0f0f0"
@@ -8,7 +8,7 @@
     },
     "label": {
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -21,7 +21,7 @@
       },
 
       "section": {
-        "name": "区段标题",
+        "name": "구간 제목",
         "styles": {
           "height": "40px",
           "background-color": "#ffffff",
@@ -37,7 +37,7 @@
 
     "div": {
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "height": "40px",
           "background-color": "#ffffff",
@@ -50,7 +50,7 @@
         }
       },
       "section": {
-        "name": "区段",
+        "name": "구간",
         "styles": {
           "margin": "20px auto",
           "background-color": "#ffffff",

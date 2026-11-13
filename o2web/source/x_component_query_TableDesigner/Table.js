@@ -1622,7 +1622,7 @@ MWF.xApplication.query.TableDesigner.Table.ExcelUtils = new Class({
                 // di.t = "s";
                 di.s = {  //设置副标题样式
                     font: {
-                        //name: '宋体',
+                        //name: 'Malgun Gothic',
                         sz: 12,
                         color: {rgb: "#FFFF0000"},
                         bold: true,

@@ -2,45 +2,45 @@
   {
     "name": "Setting",
     "path": "Setting",
-    "title": "系统设置",
+    "title": "시스템 설정",
     "iconPath": "appicon.png",
     "allowList": ["xadmin", "Manager"]
   },
   {
     "name": "AppMarketV2",
     "path": "AppMarketV2",
-    "title": "应用市场",
+    "title": "앱 마켓",
     "iconPath": "appicon.png",
     "allowList": ["xadmin", "Manager"]
   },
   {
     "name": "ANN",
     "path": "ANN",
-    "title": "神经网络模型",
+    "title": "신경망 모델",
     "iconPath": "appicon.png",
     "allowList": ["xadmin", "Manager"]
   },
   {
     "name": "Org",
     "path": "Org",
-    "title": "组织管理",
+    "title": "조직 관리",
     "iconPath": "appicon.png"
   },
   {
     "name": "Profile",
     "path": "Profile",
-    "title": "个人设置",
+    "title": "개인 설정",
     "iconPath": "appicon.png"
   },
   {
     "name": "BAM",
     "path": "BAM",
-    "title": "流程监控",
+    "title": "프로세스 모니터링",
     "iconPath": "appicon.png"
   },
   {
     "name": "LogViewer",
-    "title": "日志",
+    "title": "로그",
     "path": "LogViewer",
     "iconPath": "appicon.png",
     "allowList": ["xadmin", "Manager"]

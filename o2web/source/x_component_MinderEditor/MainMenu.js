@@ -19,27 +19,27 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
 
         this.itemJson = [
             {
-                text : "新建",
+                text : "새로 만들기",
                 action : "openCreate",
                 hasContent : false
             },
             {
-                text : "打开",
+                text : "열기",
                 action : "openRecentFiles",
                 hasContent : true
             },
             {
-                text : "另存为",
+                text : "다른 이름으로 저장",
                 action : "openSaveAs",
                 hasContent : true
             },
             {
-                text : "共享",
+                text : "공유",
                 action : "openShare",
                 hasContent : true
             },
             {
-                text : "历史版本",
+                text : "이전 버전",
                 action : "openFileVersion",
                 hasContent : true
             }
@@ -230,13 +230,13 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
         var _self = this;
         this.empty();
         new Element("div.rightTitleNode", {
-            "text" : "打开",
+            "text" : "열기",
             "styles" : this.css.rightTitleNode
         }).inject( this.rightContentNode );
 
 
         var listTitle = new Element("div.listTitle", {
-            "text" : "最近修改的文件",
+            "text" : "최근 수정한 파일",
             "styles" : this.css.listTitle
         }).inject( this.rightContentNode );
 
@@ -277,19 +277,19 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
                 }).inject( rightNode );
 
                 Element("div.documentMemoNode", {
-                    "text" : "修改于"+d.updateTime,
+                    "text" : "수정: "+d.updateTime,
                     "styles" : this.css.documentMemoNode
                 }).inject( rightNode );
 
             }.bind(this));
             if( !json.data || json.data.length == 0 ){
                 new Element("div.listItemTextNode", {
-                    "text" : "没有找到最近修改的文件",
+                    "text" : "최근 수정한 파일이 없습니다",
                     "styles" : this.css.listItemTextNode
                 }).inject( documentArea );
             }else{
                 var action = new Element("div.listItemActionNode", {
-                    "text" : "打开列表，查看更多文件",
+                    "text" : "목록을 열어 더 많은 파일 보기",
                     "styles" : this.css.listItemActionNode,
                     "events" : {
                         "mouseover" : function(){
@@ -349,7 +349,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
     openSaveAs : function(){
         this.empty();
         new Element("div.rightTitleNode", {
-            "text" : "另存为",
+            "text" : "다른 이름으로 저장",
             "styles" : this.css.rightTitleNode
         }).inject( this.rightContentNode );
 
@@ -357,15 +357,15 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
             "styles" : this.css.rightActionArea
         }).inject( this.rightContentNode );
 
-        this.createActionNode( actionArea, "saveas", "另存为", "保存副本到文件夹", function(){
+        this.createActionNode( actionArea, "saveas", "다른 이름으로 저장", "폴더에 사본 저장", function(){
             this.app.openSaveAsDialog();
             this.hide();
         }.bind(this) );
-        this.createActionNode( actionArea, "edit", "重命名", "重命名此文件", function(){
+        this.createActionNode( actionArea, "edit", "이름 바꾸기", "이 파일 이름 바꾸기", function(){
             this.app.openRenameDialog();
             this.hide();
         }.bind(this) );
-        this.createActionNode( actionArea, "download", "导出", "导出图片到本地", function(){
+        this.createActionNode( actionArea, "download", "내보내기", "이미지를 로컬로 내보내기", function(){
             // this.app.openExportDialog();
             this.exportAsImage();
             this.hide();
@@ -396,20 +396,20 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
             );
 
         }.bind(this), function(){
-            this.app.notice("抱歉，脑图中有外网图片，无法导出","error")
+            this.app.notice("죄송합니다. 마인드맵에 외부 이미지가 있어 내보낼 수 없습니다","error")
         }.bind(this))
     },
     openFileVersion : function(){
         var _self = this;
         this.empty();
         new Element("div.rightTitleNode", {
-            "text" : "历史版本",
+            "text" : "이전 버전",
             "styles" : this.css.rightTitleNode
         }).inject( this.rightContentNode );
 
 
         //var listTitle = new Element("div.listTitle", {
-        //    "text" : "分享记录",
+        //    "text" : "공유 기록",
         //    "styles" : this.css.listTitle
         //}).inject( this.rightContentNode );
 
@@ -425,13 +425,13 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
                     }).inject( listArea );
 
                     new Element("div.listItemTextNode", {
-                        "text" : d.creator.split("@")[0] + "创建于" + d.createTime ,
+                        "text" : d.creator.split("@")[0] + " 생성: " + d.createTime ,
                         "styles" : this.css.listItemTextNode
                     }).inject( listItemNode );
 
                     if( this.app.userName == d.creator ){
                         new Element("div.listItemActionNode", {
-                            "text" : "还原",
+                            "text" : "복원",
                             "styles" : this.css.listItemActionNode,
                             "events" : {
                                 "mouseover" : function(){
@@ -450,14 +450,14 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
                 }.bind(this));
                 if( !json.data || json.data.length == 0 ){
                     new Element("div.listItemTextNode", {
-                        "text" : "没有找到历史版本",
+                        "text" : "이전 버전이 없습니다",
                         "styles" : this.css.listItemTextNode
                     }).inject( listArea );
                 }
             }.bind(this))
         }else{
             new Element("div.listItemTextNode", {
-                "text" : "没有找到历史版本",
+                "text" : "이전 버전이 없습니다",
                 "styles" : this.css.listItemTextNode
             }).inject( listArea );
         }
@@ -474,7 +474,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
         var _self = this;
         this.empty();
         new Element("div.rightTitleNode", {
-            "text" : "共享",
+            "text" : "공유",
             "styles" : this.css.rightTitleNode
         }).inject( this.rightContentNode );
 
@@ -482,13 +482,13 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
             "styles" : this.css.rightActionArea
         }).inject( this.rightContentNode );
 
-        this.createActionNode( actionArea, "share", "分享", "邀请其他人查看文件", function(){
+        this.createActionNode( actionArea, "share", "공유", "다른 사람을 초대해 파일 보기", function(){
            this.app.openShareDialog();
             this.hide();
         }.bind(this));
 
         var listTitle = new Element("div.listTitle", {
-            "text" : "分享记录",
+            "text" : "공유 기록",
             "styles" : this.css.listTitle
         }).inject( this.rightContentNode );
 
@@ -500,7 +500,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
             this.loadShareRecordList()
         }else{
             new Element("div.listItemTextNode", {
-                "text" : "没有找到分享记录",
+                "text" : "공유 기록이 없습니다",
                 "styles" : this.css.listItemTextNode
             }).inject( this.documentArea );
         }
@@ -522,7 +522,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
                 //
                 //if( this.app.userName == d.source ){
                 //    new Element("div.listItemActionNode", {
-                //        "text" : "取消分享",
+                //        "text" : "공유 취소",
                 //        "styles" : this.css.listItemActionNode,
                 //        "events" : {
                 //            "mouseover" : function(){
@@ -561,7 +561,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
                     }).inject( documentNode );
 
                     Element("div.documentTextNode", {
-                        "text" : d.source.split("@")[0] + "分享给" + d.target.split("@")[0],
+                        "text" : d.source.split("@")[0] + " → " + d.target.split("@")[0] + " 공유",
                         "styles" : this.css.documentTextNode
                     }).inject( rightNode );
 
@@ -570,13 +570,13 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
                     }).inject( rightNode );
 
                     Element("div.documentMemoNode", {
-                        "text" : "于"+ d.createTime,
+                        "text" : "공유일: "+ d.createTime,
                         "styles" : this.css.documentMemoNode
                     }).inject( documentBottomNode );
 
                     if( this.app.userName == d.source ){
                         new Element("div.documentActionNode", {
-                            "text" : "取消分享",
+                            "text" : "공유 취소",
                             "styles" : this.css.documentActionNode,
                             "events" : {
                                 "mouseover" : function(){
@@ -595,7 +595,7 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
             }.bind(this));
             if( !json.data || json.data.length == 0 ){
                 new Element("div.listItemTextNode", {
-                    "text" : "没有找到分享记录",
+                    "text" : "공유 기록이 없습니다",
                     "styles" : this.css.listItemTextNode
                 }).inject( this.documentArea );
             }
@@ -603,10 +603,10 @@ MWF.xApplication.MinderEditor.MainMenu = new Class({
     },
     cancelShare : function( ev, data ){
         var _self = this;
-        this.app.confirm("warn", ev, "取消分享确认", "是否取消对"+data.target.split("@")[0]+"的分享?", 350, 120, function () {
+        this.app.confirm("warn", ev, "공유 취소 확인", data.target.split("@")[0]+"님에 대한 공유를 취소하시겠습니까?", 350, 120, function () {
             _self.app.restActions.cancelShareMind( data.id , {}, function(){
                 _self.loadShareRecordList();
-                _self.app.notice( "取消分享成功！" )
+                _self.app.notice( "공유를 취소했습니다!" )
             });
             this.close();
         }, function () {

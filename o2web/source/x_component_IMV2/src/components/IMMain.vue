@@ -188,7 +188,7 @@ const dragDropFileSendMsg = (e) => {
   console.debug(`dragDropFileSendMsg ================>`);
   if (e && e.dataTransfer && e.dataTransfer.files) {
     const files = e.dataTransfer.files;
-    console.debug('拖拽了文件', files);
+    console.debug('드래그한 파일', files);
     [...files].forEach((file) => {
       if (file.type && file.type !== '') {
         _sendFileMsg(file);
@@ -211,14 +211,14 @@ const pasteFileSendMsg = (e) => {
     if (item.kind === 'file') {
       const file = item.getAsFile();
       if (file) {
-        console.debug('粘贴的文件:', file);
+        console.debug('붙여넣은 파일:', file);
         _sendFileMsg(file);
       }
     } else if (item.type.indexOf('image') > -1) {
       // 处理图片类型，可以通过 getAsFile 获取 Blob 对象
       const file = item.getAsFile();
       if (file) {
-        console.debug('粘贴的图片:', file);
+        console.debug('붙여넣은 이미지:', file);
         _sendFileMsg(file);
       }
     }
@@ -254,7 +254,7 @@ const loadMoreMsgData = () => {
 //
 const loadMsgByPage = async () => {
   if (!conversation.value || !conversation.value.id) {
-    console.info(' conversation 已清空', conversation.value);
+    console.info(' conversation 비어 있음', conversation.value);
     return;
   }
   if (isLoading.value) {
@@ -334,7 +334,7 @@ const _sendTextMsg = async (textMessage) => {
 const _sendMsgOnline = async (msg) => {
   const res = await imAction('msgCreate', msg);
   if (res) {
-    console.log('发送消息成功', res);
+    console.log('메시지 전송 성공', res);
   }
 };
 // 输入框回车事件
@@ -414,7 +414,7 @@ const deleteQuoteMessage = () => {
 // 引用消息内容
 const quoteMsgContent = (quoteMessage) => {
   if (!quoteMessage || !quoteMessage.body || !quoteMessage.createPerson) {
-    console.error('错误的引用消息');
+    console.error('잘못된 인용 메시지');
     return '';
   }
   const msgBody = JSON.parse(quoteMessage.body);
@@ -473,7 +473,7 @@ const clickOpenQuoteMsg = (msg) => {
 };
 // 选择表情
 const chooseEmoji = (emoji) => {
-  console.log('选择了表情', emoji);
+  console.log('선택한 이모티콘', emoji);
   const text = inputMsg.value;
   inputMsg.value = text + emoji;
 };
@@ -507,7 +507,7 @@ const msgContextMenu = (msg, e) => {
   menuList.push({id: 'select', text: lp.msgMenuItemSelectMsg});
   // 引用
   menuList.push({id: 'quote', text: lp.msgMenuItemQuoteMsg});
-  console.debug('右键菜单', menuList);
+  console.debug('우클릭 메뉴', menuList);
   createContextMenu({
     callback: (menu) => {
       switch (menu.id) {
@@ -537,20 +537,20 @@ const msgContextMenu = (msg, e) => {
 const _openChooseMode = (msg) => {
   chooseMode.value = true;
   msgSelectedList.value = [msg];
-  console.debug('选择模式', msg);
+  console.debug('선택 모드', msg);
 };
 // 转发
 const _forwardMsg = (msg) => {
   conversationPicker(eventBus).then((conv) => {
     if (conv) {
-      console.debug('转发', msg, conv);
+      console.debug('전달', msg, conv);
       _forwardMsgListOnline(conv, [msg]);
     }
   });
 };
 // 撤回
 const _revokeMsg = (msg) => {
-  console.debug('撤回', msg);
+  console.debug('회수', msg);
   imAction('msgRevoke', msg.id);
   msgList.value.splice(
       msgList.value.findIndex((e) => e.id === msg.id),
@@ -559,12 +559,12 @@ const _revokeMsg = (msg) => {
 };
 // 引用
 const _quoteMsg = (msg) => {
-  console.debug('引用', msg);
+  console.debug('인용', msg);
   quoteMessage.value = msg;
 };
 // 收藏
 const _collectMsg = (msg) => {
-  console.debug('收藏', msg);
+  console.debug('즐겨찾기', msg);
   _collectMsgListOnline([msg]);
 };
 const _collectMsgListOnline = async (msgList) => {
@@ -573,7 +573,7 @@ const _collectMsgListOnline = async (msgList) => {
   };
   const res = await imAction('msgCollectionSave', body);
   if (res) {
-    console.debug('收藏成功', res);
+    console.debug('즐겨찾기 성공', res);
     $OOUI.notice.success(lp.alert, lp.msgCollectionSuccess);
   }
 };
@@ -604,7 +604,7 @@ const clickOneByOneForward = () => {
   }
   conversationPicker(eventBus).then((conv) => {
     if (conv) {
-      console.debug('转发one by one', conv);
+      console.debug('하나씩 전달', conv);
       _forwardMsgListOnline(conv, msgSelectedList.value);
       closeChooseMode();
     }
@@ -643,14 +643,14 @@ const clickMergeForward = () => {
     }
     desc += name + ': ' + content + '\n';
   }
-  let title = '群聊的聊天记录';
+  let title = '그룹 대화 기록';
   if (conversation.value.type === 'single') {
     title =
         conversation.value.personList
             .map((p) => {
               return formatPersonName(p);
             })
-            .join(',') + '的聊天记录';
+            .join(',') + '의 대화 기록';
   }
   const msgbody = {
     body: lp.msgTypeHistory,
@@ -669,7 +669,7 @@ const clickMergeForward = () => {
   };
   conversationPicker(eventBus).then((conv) => {
     if (conv) {
-      console.debug('转发 merge ', conv);
+      console.debug('묶어서 전달 merge ', conv);
       _forwardMsgListOnline(conv, [message]);
       closeChooseMode();
     }

@@ -139,7 +139,7 @@
             <div class="MWFMaplist" name="selectedSetValues" title="{{$.lp.assignValueForResult}}"></div>
         </div>
         <div id="text{$.pid}selectedScriptArea" style="display: text{($.result=='script')?'block':'none'};">
-            <div style="padding: 5px;color:#999">通过this.target.selectedData获取选择的数据</div>
+            <div style="padding: 5px;color:#999">this.target.selectedData로 선택한 데이터를 가져옵니다</div>
             <div class="MWFScriptArea" name="selectedScript" title="{{$.lp.selectResult}} (S)"></div>
         </div>
         <div class="MWFScriptArea" name="defaultSelectedScript" title="{{$.lp.defaultSelectedLineScript}}"></div>
@@ -226,11 +226,11 @@
                         <input type="radio" class="restrictFilterInput_vf" value="restrict" name="text{$.id}viewFilterType" checked  data-notAutoHistory onclick="if (this.checked){
                                 this.getParent('.inputAreaNode_vf').getElements('tr.parameterInputTr').hide();
                                 this.getParent('.inputAreaNode_vf').getElements('tr.filterListInputTr').setStyle('display','');
-                            }"/>通过路径添加默认条件<br>
+                            }"/>경로로 기본 조건 추가<br>
                         <input type="radio" class="restrictParameterInput_form_vf" value="custom" name="text{$.id}viewFilterType" data-notAutoHistory onclick="if (this.checked){
                                 this.getParent('.inputAreaNode_vf').getElements('tr.parameterInputTr').setStyle('display','');
                                 this.getParent('.inputAreaNode_vf').getElements('tr.filterListInputTr').hide();
-                            }"/>通过参数添加默认条件
+                            }"/>매개변수로 기본 조건 추가
                     </td>
                 </table>
                 <div title="{{$.lp.value}}" class="MWFFilterFormulaArea"></div>

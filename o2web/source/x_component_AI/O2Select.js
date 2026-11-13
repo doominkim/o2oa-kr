@@ -12,7 +12,7 @@ MWF.xApplication.AI.O2Select = new Class({
         this.setOptions(options);
         this.html = '<div class="MWF_select_node">' +
             '<div class="MWF_select_content" style="font-size:16px;line-height:21px;color:#333;text-align:center;width:100%;overflow:auto;"></div>' +
-            '<div class="MWF_select_cancelNode" style="color:#32aaff;font-size:18px;background:#fff;height:50px;line-height:50px;border-radius: 10px;text-align:center;margin-top:10px;margin-bottom:10px;">取&nbsp;消</div>' +
+            '<div class="MWF_select_cancelNode" style="color:#32aaff;font-size:18px;background:#fff;height:50px;line-height:50px;border-radius: 10px;text-align:center;margin-top:10px;margin-bottom:10px;">취소</div>' +
             '</div>';
         this.css = {
             mask: {

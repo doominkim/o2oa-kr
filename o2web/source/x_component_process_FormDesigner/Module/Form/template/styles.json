@@ -1,6 +1,6 @@
 {
   "none": {
-    "name": "空样式",
+    "name": "빈 스타일",
     "form": {
       "styles":{
         "background-color": "#ffffff"
@@ -8,33 +8,33 @@
     },
     "label": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {}
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {}
       },
 
       "section": {
-        "name": "区段标题",
+        "name": "구역 제목",
         "styles": {}
       }
     },
 
     "div": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {}
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {}
       },
       "section": {
-        "name": "区段",
+        "name": "구역",
         "styles": {}
       }
     },
@@ -170,7 +170,7 @@
     }
   },
   "default": {
-    "name": "传统样式",
+    "name": "전통 스타일",
     "form": {
       "styles":{
         "background-color": "#f0f0f0"
@@ -178,7 +178,7 @@
     },
     "label": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "background-color": "#3c76b7",
           "height": "40px",
@@ -191,7 +191,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -203,7 +203,7 @@
       },
 
       "section": {
-        "name": "区段标题",
+        "name": "구역 제목",
         "styles": {
           "height": "40px",
           "background-color": "#666666",
@@ -218,7 +218,7 @@
 
     "div": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "background-color": "#3c76b7",
           "height": "40px",
@@ -231,7 +231,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -242,7 +242,7 @@
         }
       },
       "section": {
-        "name": "区段",
+        "name": "구역",
         "styles": {
           "background-color": "#FFF",
           "border": "1px solid #cccccc"
@@ -513,7 +513,7 @@
     }
   },
   "red-simple": {
-    "name": "红色简洁",
+    "name": "빨강 심플",
     "form": {
       "styles":{
         "background-color": "#f0f0f0"
@@ -521,7 +521,7 @@
     },
     "label": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "background-color": "#cc3d3d",
           "height": "40px",
@@ -534,7 +534,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -546,7 +546,7 @@
       },
 
       "section": {
-        "name": "区段标题",
+        "name": "구역 제목",
         "styles": {
           "height": "40px",
           "background-color": "#f7f7f7",
@@ -561,7 +561,7 @@
 
     "div": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "background-color": "#cc3d3d",
           "height": "40px",
@@ -574,7 +574,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -585,7 +585,7 @@
         }
       },
       "section": {
-        "name": "区段",
+        "name": "구역",
         "styles": {
           "padding": "20px 0px",
           "background-color": "#FFF",
@@ -888,7 +888,7 @@
     }
   },
   "blue-simple": {
-    "name": "蓝色简洁",
+    "name": "파랑 심플",
     "form": {
       "styles":{
         "background-color": "#f0f0f0"
@@ -896,7 +896,7 @@
     },
     "label": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "background-color": "#3c76b7",
           "height": "40px",
@@ -909,7 +909,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -921,7 +921,7 @@
       },
 
       "section": {
-        "name": "区段标题",
+        "name": "구역 제목",
         "styles": {
           "height": "40px",
           "background-color": "#f7f7f7",
@@ -936,7 +936,7 @@
 
     "div": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "background-color": "#3c76b7",
           "height": "40px",
@@ -949,7 +949,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -960,7 +960,7 @@
         }
       },
       "section": {
-        "name": "区段",
+        "name": "구역",
         "styles": {
           "padding": "20px 0px",
           "background-color": "#FFF",
@@ -1264,16 +1264,16 @@
   },
 
   "official": {
-    "name": "公文样式",
+    "name": "공문 스타일",
     "form": {
       "styles":{
         "background-color": "#ffffff",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "label": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "height": "40px",
           "line-height": "40px",
@@ -1286,7 +1286,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "36px",
@@ -1294,12 +1294,12 @@
           "font-weight": "bold",
           "color": "#fd1113",
           "height": "60px",
-          "font-family": "宋体"
+          "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
         }
       },
 
       "section": {
-        "name": "区段标题",
+        "name": "구역 제목",
         "styles": {
           "height": "40px",
           "background-color": "#f7f7f7",
@@ -1314,7 +1314,7 @@
 
     "div": {
       "banner": {
-        "name": "横幅",
+        "name": "배너",
         "styles": {
           "height": "40px",
           "line-height": "40px",
@@ -1327,7 +1327,7 @@
       },
 
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "36px",
@@ -1338,7 +1338,7 @@
         }
       },
       "section": {
-        "name": "区段",
+        "name": "구역",
         "styles": {
           "padding": "20px 0px",
           "background-color": "#FFF",
@@ -1529,7 +1529,7 @@
         "line-height": "30px",
         "font-size": "18px",
         "color": "#666",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "calendar": {
@@ -1546,7 +1546,7 @@
         "line-height": "30px",
         "font-size": "18px",
         "color": "#666",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "number": {
@@ -1563,7 +1563,7 @@
         "line-height": "30px",
         "font-size": "18px",
         "color": "#666",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "address": {
@@ -1580,7 +1580,7 @@
         "line-height": "30px",
         "color": "#666",
         "font-size": "18px",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "combox": {
@@ -1597,7 +1597,7 @@
         "line-height": "30px",
         "color": "#666",
         "font-size": "18px",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "personfield": {
@@ -1614,7 +1614,7 @@
         "line-height": "30px",
         "color": "#666",
         "font-size": "18px",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "orgfield": {
@@ -1631,7 +1631,7 @@
         "line-height": "30px",
         "color": "#666",
         "font-size": "18px",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "select": {
@@ -1648,7 +1648,7 @@
         "line-height": "30px",
         "font-size": "18px",
         "color": "#666",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "textarea": {
@@ -1660,7 +1660,7 @@
         "border": "1px solid #999999",
         "color": "#666",
         "font-size": "18px",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "opinion": {
@@ -1672,7 +1672,7 @@
         "border": "1px solid #999999",
         "color": "#666",
         "font-size": "18px",
-        "font-family": "宋体"
+        "font-family": "AppleMyungjo, Batang, Noto Serif KR, serif"
       }
     },
     "actionbar": {
@@ -1684,7 +1684,7 @@
   },
 
   "defaultMobile": {
-    "name": "手机样式",
+    "name": "모바일 스타일",
     "form": {
       "styles":{
         "background-color": "#f0f0f0"
@@ -1692,7 +1692,7 @@
     },
     "label": {
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "text-align": "center",
           "font-size": "24px",
@@ -1705,7 +1705,7 @@
       },
 
       "section": {
-        "name": "区段标题",
+        "name": "구역 제목",
         "styles": {
           "height": "40px",
           "background-color": "#ffffff",
@@ -1721,7 +1721,7 @@
 
     "div": {
       "title": {
-        "name": "标题",
+        "name": "제목",
         "styles": {
           "height": "40px",
           "background-color": "#ffffff",
@@ -1734,7 +1734,7 @@
         }
       },
       "section": {
-        "name": "区段",
+        "name": "구역",
         "styles": {
           "margin": "20px auto",
           "background-color": "#ffffff",

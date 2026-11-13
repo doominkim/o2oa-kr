@@ -549,14 +549,14 @@ MWF.xApplication.process.ProcessDesigner.Property = new Class({
                     content: content,
                     buttonList: [
                         {
-                            text: "确定",
+                            text: "확인",
                             action: function(){
                                 _self.selectFieldsOk(selectedContent, arrayList);
                                 this.close();
                             }
                         },
                         {
-                            text: "关闭",
+                            text: "닫기",
                             type: "cancel",
                             action: function(){
                                 this.close();
@@ -693,8 +693,8 @@ MWF.xApplication.process.ProcessDesigner.Property = new Class({
             if (keys.length){
                 var html = '<table cellspacing="0" cellpadding="5px" style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse"><tr>' +
                     // '<th class="grayColor_bg" style="width: 20px; max-width: 20px; border: 1px solid #cccccc;"></th>' +
-                    '<th class="grayColor_bg" style="text-align:left; border: 1px solid #cccccc;">活动</th>' +
-                    '<th class="grayColor_bg" style="text-align:left; border: 1px solid #cccccc;">退回后处理方式</th>' +
+                    '<th class="grayColor_bg" style="text-align:left; border: 1px solid #cccccc;">활동</th>' +
+                    '<th class="grayColor_bg" style="text-align:left; border: 1px solid #cccccc;">반송 후 처리 방식</th>' +
                     '</tr></table>';
                 node.insertAdjacentHTML('beforeend', html);
                 var table = node.getElement('table');
@@ -1357,7 +1357,7 @@ MWF.xApplication.process.ProcessDesigner.Property = new Class({
                 var iconNode = new Element("div", {"styles": this.process.css.processIconNode}).inject(node);
                 if (icon) iconNode.setStyles({"background": "url("+icon+") center center no-repeat"});
 
-                var clearNode = new Element("div", {"styles": this.process.css.processIconSelectNode, "text": "清除图标"}).inject(node);
+                var clearNode = new Element("div", {"styles": this.process.css.processIconSelectNode, "text": "아이콘 지우기"}).inject(node);
                 clearNode.addEvent("click", function(e){
                     var id = node.get("name");
                     this.data[id] = '';
