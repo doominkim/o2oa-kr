@@ -101,7 +101,7 @@ public class AttendanceQywxDetail extends SliceJpaObject {
 	public static final String EXCEPTION_TYPE_WIFI = "wifi异常";
 	public static final String EXCEPTION_TYPE_UNKOWN_DEVICE = "非常用设备";
 	public static final String EXCEPTION_TYPE_NOSIGN = "未打卡";
-	public static final String EXCEPTION_TYPE_NORMAL = "正常";
+	public static final String EXCEPTION_TYPE_NORMAL = "정상";
 
 	public static final String exception_type_FIELDNAME = "exception_type";
 	@FieldDescribe("异常类型，字符串，包括：时间异常，地点异常，未打卡，wifi异常，非常用设备。如果有多个异常，以分号间隔")

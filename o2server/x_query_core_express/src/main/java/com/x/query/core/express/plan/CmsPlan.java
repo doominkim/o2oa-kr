@@ -510,9 +510,9 @@ public class CmsPlan extends Plan {
 
         private Predicate documentPredicateTypeScope(CriteriaBuilder cb, Root<Document> root) {
             if (StringUtils.equals(this.scope, SCOPE_CMS_DATA)) {
-                return cb.equal(root.get(Document_.documentType), "数据");
+                return cb.equal(root.get(Document_.documentType), "데이터");
             } else if (StringUtils.equals(this.scope, SCOPE_CMS_INFO)) {
-                return cb.equal(root.get(Document_.documentType), "信息");
+                return cb.equal(root.get(Document_.documentType), "정보");
             }
             return null;
         }

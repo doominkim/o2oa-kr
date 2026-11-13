@@ -53,7 +53,7 @@ public class ZhengwuDingding extends ConfigObject {
 	public static final String default_forceSyncCron = "10 45 8,12 * * ?";
 	public static final String default_oapiAddress = "https://oapi.dingtalk.com";
 	public static final List<String> default_titleSplit = ListTools.toList(",", "、", "，", " ", "　");
-	public static final String default_personAttributeTitleName = "职务";
+	public static final String default_personAttributeTitleName = "직무";
 	public static final String default_corpId = "";
 	public static final String default_corpSecret = "";
 	public static final String default_nonce = "o2oa";

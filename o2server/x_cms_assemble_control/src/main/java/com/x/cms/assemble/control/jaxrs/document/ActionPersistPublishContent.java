@@ -198,7 +198,7 @@ public class ActionPersistPublishContent extends BaseAction {
 				document = documentPersistService.save(document, wi.getDocData(), categoryInfo.getProjection());
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在创建文档信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "문서 정보를 생성하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -289,7 +289,7 @@ public class ActionPersistPublishContent extends BaseAction {
 		if (check) {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				logService.log(emc, wi.getCreatorIdentity(), document.getCategoryAlias() + ":" + document.getTitle(),
-						document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "发布");
+						document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "게시");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -303,7 +303,7 @@ public class ActionPersistPublishContent extends BaseAction {
 							wi.getAuthorList());
 				}
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在核对文档访问管理权限信息时发生异常！");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "문서 접근·관리 권한 정보를 확인하는 중 오류가 발생했습니다!");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -396,8 +396,8 @@ public class ActionPersistPublishContent extends BaseAction {
 		@FieldDescribe("객체 보안 등급 식별자")
 		private Integer objectSecurityClearance;
 
-		@FieldDescribe("文档类型，跟随分类类型，信息（默认） | 数据")
-		private String documentType = "信息";
+		@FieldDescribe("문서 유형, 분류 유형을 따름, 정보(기본값) | 데이터")
+		private String documentType = "정보";
 
 		@FieldDescribe("문서 상태: published | waitPublish")
 		private String docStatus = "published";
@@ -441,7 +441,7 @@ public class ActionPersistPublishContent extends BaseAction {
 
 		private Long commentCount = 0L;
 
-		@FieldDescribe("发布时间，当状态为waitPublish时需指定发布时间")
+		@FieldDescribe("게시 시간, 상태가 waitPublish이면 게시 시간을 지정해야 함")
 		private Date publishTime;
 
 		private Date modifyTime;
@@ -481,7 +481,7 @@ public class ActionPersistPublishContent extends BaseAction {
 
 		private List<String> pictureList;
 
-		@FieldDescribe("定时发布文档消息提醒对象(参数同消息发布接口对象).")
+		@FieldDescribe("예약 게시 문서 메시지 알림 객체(메시지 게시 인터페이스 객체와 같은 매개변수).")
 		private DocumentNotify documentNotify;
 
 		@FieldDescribe("업무 데이터 String 값01.")

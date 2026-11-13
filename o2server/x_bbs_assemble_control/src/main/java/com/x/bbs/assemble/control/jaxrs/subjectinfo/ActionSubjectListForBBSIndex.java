@@ -96,7 +96,7 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 					sectionInfo = sectionInfoServiceAdv.get( wrapIn.getSectionId() );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSubjectInfoProcess( e, "根据指定ID查询版块信息时发生异常.ID:" + wrapIn.getSectionId() );
+					Exception exception = new ExceptionSubjectInfoProcess( e, "지정한 ID로 섹션 정보를 조회하는 중 오류가 발생했습니다. ID:" + wrapIn.getSectionId() );
 					result.error( exception );
 					logger.error( e, effectivePerson, request, null);
 				}
@@ -373,11 +373,11 @@ public class ActionSubjectListForBBSIndex extends BaseAction {
 		@FieldDescribe("주제명: 제목")
 		private String title = "";
 
-		@FieldDescribe("主题类别：讨论，新闻等等,根据版块设置")
-		private String type = "新闻";
+		@FieldDescribe("주제 분류: 토론, 뉴스 등, 섹션 설정에 따름")
+		private String type = "뉴스";
 
-		@FieldDescribe("主题的类别,不同的类别有不同的操作:信息|问题|投票")
-		private String typeCategory = "信息";
+		@FieldDescribe("주제 유형, 유형마다 동작이 다름: 정보|질문|투표")
+		private String typeCategory = "정보";
 
 		@FieldDescribe("주제 요약")
 		private String summary = null;

@@ -545,14 +545,14 @@ public class Business {
                 document.getObjectSecurityClearance())) {
             return false;
         }
-        String documentType = "数据";
+        String documentType = "데이터";
         if (documentType.equals(document.getDocumentType())) {
             return true;
         }
         if (BooleanUtils.isTrue(document.getIsAllRead())) {
             return true;
         }
-        String allPerson = "所有人";
+        String allPerson = "모든 사용자";
         if (document.getReadPersonList().contains(getShortTargetFlag(person.getDistinguishedName()))
                 || document.getReadPersonList().contains(allPerson)) {
             return true;

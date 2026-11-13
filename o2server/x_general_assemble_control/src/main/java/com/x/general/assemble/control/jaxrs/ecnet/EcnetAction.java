@@ -29,9 +29,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "EcnetAction", description = "文本纠错.")
+@Tag(name = "EcnetAction", description = "맞춤법 교정.")
 @Path("ecnet")
-@JaxrsDescribe("文本纠错.")
+@JaxrsDescribe("맞춤법 교정.")
 public class EcnetAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(EcnetAction.class);

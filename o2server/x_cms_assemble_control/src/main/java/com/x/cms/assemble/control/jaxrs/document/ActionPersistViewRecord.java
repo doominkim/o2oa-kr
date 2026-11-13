@@ -51,7 +51,7 @@ public class ActionPersistViewRecord extends BaseAction {
 
 	public static class Wi extends GsonPropertyObject {
 		@FieldDescribe("열람 기록 목록")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "Module", fieldValue = "{\"person\": \"阅读人员\", \"viewTime\": \"阅读时间（格式：2020-08-08）\"}")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "Module", fieldValue = "{\"person\": \"열람자\", \"viewTime\": \"열람 시간(형식: 2020-08-08)\"}")
 		private List<ViewRecordWi> recordList;
 
 		public List<ViewRecordWi> getRecordList() {
@@ -65,9 +65,9 @@ public class ActionPersistViewRecord extends BaseAction {
 
 	public static class ViewRecordWi extends GsonPropertyObject {
 
-		@FieldDescribe("阅读人员")
+		@FieldDescribe("열람자")
 		private String person;
-		@FieldDescribe("阅读时间（格式：2020-08-08）")
+		@FieldDescribe("열람 시간(형식: 2020-08-08)")
 		private String viewTime;
 
 		public String getPerson() {

@@ -28,7 +28,7 @@ public class ActionFolderSave extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionFolderSave.class );
 
-	@AuditLog(operation = "保存文件目录")
+	@AuditLog(operation = "폴더 저장")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = null;

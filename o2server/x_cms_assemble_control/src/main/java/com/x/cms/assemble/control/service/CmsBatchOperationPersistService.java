@@ -161,7 +161,7 @@ public class CmsBatchOperationPersistService {
 				for( String docId : ids ) {
 					cmsBatchOperationPersistService.addOperation(
 							CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
-							CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  docId,  docId, "刷新文档权限：ID=" +  docId );
+							CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  docId,  docId, "문서 권한 갱신: ID=" +  docId );
 				}
 			}
 		} catch (Exception e) {

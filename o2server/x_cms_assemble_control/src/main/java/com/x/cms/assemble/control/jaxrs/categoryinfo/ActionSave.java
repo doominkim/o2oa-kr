@@ -98,7 +98,7 @@ public class ActionSave extends BaseAction {
 				unitName = userManagerService.getUnitNameByIdentity(identityName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在根据用户身份信息查询所属组织名称时发生异常。Identity:" + identityName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자 신분 정보로 소속 조직 이름을 조회하는 중 오류가 발생했습니다. Identity:" + identityName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -109,7 +109,7 @@ public class ActionSave extends BaseAction {
 				topUnitName = userManagerService.getTopUnitNameByIdentity(identityName);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在根据用户身份信息查询所属顶层组织名称时发生异常。Identity:" + identityName);
+				Exception exception = new ExceptionCategoryInfoProcess(e, "사용자 신분 정보로 소속 최상위 조직 이름을 조회하는 중 오류가 발생했습니다. Identity:" + identityName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -123,7 +123,7 @@ public class ActionSave extends BaseAction {
 				old_categoryInfo = categoryInfoServiceAdv.get( wi.getId() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "系统在根据ID查询分类信息时发生异常。ID:" + wi.getId() );
+				Exception exception = new ExceptionCategoryInfoProcess(e, "ID로 분류 정보를 조회하는 중 오류가 발생했습니다. ID:" + wi.getId() );
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -135,7 +135,7 @@ public class ActionSave extends BaseAction {
 			wi.setCreatorUnitName(unitName);
 			wi.setCreatorTopUnitName(topUnitName);
 
-			if( StringUtils.equals( "信息", wi.getDocumentType() ) ) {
+			if( StringUtils.equals( "정보", wi.getDocumentType() ) ) {
 				if( wi.getSendNotify() == null ) {
 					if( appInfo.getSendNotify() == null) {
 						wi.setSendNotify( true );
@@ -165,17 +165,17 @@ public class ActionSave extends BaseAction {
 						//분류 이름이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 						new CmsBatchOperationPersistService().addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_CATEGORY,
-								CmsBatchOperationProcessService.OPT_TYPE_UPDATENAME,  categoryInfo.getId(), old_categoryInfo.getCategoryName(), "更新分类名称：ID=" + categoryInfo.getId() );
+								CmsBatchOperationProcessService.OPT_TYPE_UPDATENAME,  categoryInfo.getId(), old_categoryInfo.getCategoryName(), "분류 이름 수정: ID=" + categoryInfo.getId() );
 					}
 					if(  permissionQueryService.hasDiffrentViewPermissionInCategory( old_categoryInfo, categoryInfo )) {
 						//게시판 이름 또는 별칭이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 						new CmsBatchOperationPersistService().addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_CATEGORY,
-								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  categoryInfo.getId(), categoryInfo.getCategoryName(), "变更分类可见权限：ID=" + categoryInfo.getId() );
+								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  categoryInfo.getId(), categoryInfo.getCategoryName(), "분류 공개 권한 변경: ID=" + categoryInfo.getId() );
 					}
-					new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), categoryInfo.getId(), "", "", "", "CATEGORY", "更新");
+					new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), categoryInfo.getId(), "", "", "", "CATEGORY", "수정");
 				}else {
-					new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), categoryInfo.getId(), "", "", "", "CATEGORY", "新增");
+					new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), categoryInfo.getId(), "", "", "", "CATEGORY", "추가");
 				}
 
 				CacheManager.notify(AppInfo.class);
@@ -184,7 +184,7 @@ public class ActionSave extends BaseAction {
 				CacheManager.notify(Document.class);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCategoryInfoProcess(e, "分类信息在保存时发生异常.");
+				Exception exception = new ExceptionCategoryInfoProcess(e, "분류 정보를 저장하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -204,7 +204,7 @@ public class ActionSave extends BaseAction {
 		@FieldDescribe("사용자가 저장한 신분")
 		private String identity = null;
 
-		@FieldDescribe("扩展信息JSON内容")
+		@FieldDescribe("확장 정보 JSON 내용")
 		private String extContent = null;
 
 		public String getIdentity() {

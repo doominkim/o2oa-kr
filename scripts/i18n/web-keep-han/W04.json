@@ -1,12 +1,1 @@
-{
-  "o2web/source/x_component_ForumSearch/$Main/default/listItem.json": [
-    {
-      "text": "\"condition\": \"function( d ){ return (d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.isAdmin() || MWFForum.isSubjectEditor(d)) }\",",
-      "reason": "typeCategory 비교값 \"投票\"(서버에 저장되는 게시물 유형 코드)"
-    },
-    {
-      "text": "\"show\": \"function( d ){ return !((d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.isAdmin() || MWFForum.isSubjectEditor(d))) }\"",
-      "reason": "typeCategory 비교값 \"投票\"(서버에 저장되는 게시물 유형 코드)"
-    }
-  ]
-}
+{}

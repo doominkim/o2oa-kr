@@ -811,7 +811,7 @@ MWF.QMultiImporter = new Class(
                     return;
                 }
                 var hasCover = pathData.some(item=>{
-                    return item.$operation === '覆盖';
+                    return item.$operation === '덮어쓰기';
                 });
                 if( !hasCover ){
                     var handler = this.getPathDataHandler( data );

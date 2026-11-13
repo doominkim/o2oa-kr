@@ -476,27 +476,27 @@ public class AttendanceDetailAnalyseService {
 					//직원 이름 비교, 직원 이름은 고유 키
 					if( detail.getEmpName().equals( selfHoliday.getEmployeeName() ) ){
 						if( selfHoliday.getStartTime().getTime() <= dayWorkStart.getTime() && selfHoliday.getEndTime().getTime() >= ( dayMiddle.getTime() + 2*60*60*1000 )){
-							logger.debug( debugger, detail.getEmpName()+"全天请假了");
+							logger.debug( debugger, detail.getEmpName()+" 종일 휴가");
 							//종일 휴가
 							detail.setIsGetSelfHolidays(true);
 							detail.setLeaveType(selfHoliday.getLeaveType());
-							detail.setSelfHolidayDayTime("全天");
+							detail.setSelfHolidayDayTime("종일");
 							detail.setGetSelfHolidayDays(1.0);
 						}else if( selfHoliday.getEndTime().getTime() <= dayMiddle.getTime() && selfHoliday.getEndTime().getTime() > dayWorkStart.getTime()
 						){
 							//오전 휴가
-							logger.debug( debugger, detail.getEmpName()+"上午休假了");
+							logger.debug( debugger, detail.getEmpName()+" 오전 휴가");
 							detail.setIsGetSelfHolidays(true);
 							detail.setLeaveType(selfHoliday.getLeaveType());
-							detail.setSelfHolidayDayTime("上午");
+							detail.setSelfHolidayDayTime("오전");
 							detail.setGetSelfHolidayDays(0.5);
 						}else if( selfHoliday.getStartTime().getTime() >= dayMiddle.getTime() && selfHoliday.getStartTime().getTime() <= dayWorkEnd.getTime()
 						){
 							//오전 휴가
-							logger.debug( debugger, detail.getEmpName()+"下午休假了");
+							logger.debug( debugger, detail.getEmpName()+" 오후 휴가");
 							detail.setIsGetSelfHolidays( true );
 							detail.setLeaveType(selfHoliday.getLeaveType());
-							detail.setSelfHolidayDayTime("下午");
+							detail.setSelfHolidayDayTime("오후");
 							detail.setGetSelfHolidayDays(0.5);
 						}
 					}

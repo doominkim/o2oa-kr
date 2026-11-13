@@ -573,7 +573,7 @@ MWF.xApplication.Forum.Setting.CategorySettingForm = new Class({
             if( isSingle ){
                 if( data[ dataKey ] ){
                     data[ dataKey ].each( function( p ){
-                        if( p!= "") orgArray.push( { objectName : p, objectType : "人员" } );
+                        if( p!= "") orgArray.push( { objectName : p, objectType : "사용자" } );
                     })
                 }
             }else{
@@ -582,13 +582,13 @@ MWF.xApplication.Forum.Setting.CategorySettingForm = new Class({
                         var flag = p.substr(p.length-1, 1);
                         switch (flag.toLowerCase()){
                             case "p":
-                                orgArray.push( { objectName : p, objectType : "人员" } );
+                                orgArray.push( { objectName : p, objectType : "사용자" } );
                                 break;
                             case "u":
-                                orgArray.push( { objectName : p, objectType : "组织" } );
+                                orgArray.push( { objectName : p, objectType : "조직" } );
                                 break;
                             default:
-                                orgArray.push( { objectName : p, objectType : "人员" } );
+                                orgArray.push( { objectName : p, objectType : "사용자" } );
                         }
                     })
                 }
@@ -1259,7 +1259,7 @@ MWF.xApplication.Forum.Setting.SectionSettingForm = new Class({
             this.data.subjectType = this.data.subjectTypeList.join("|");
         }
         if(this.data.sectionGrade){
-            this.data.sectionGrade = "是";
+            this.data.sectionGrade = "예";
         }
         debugger;
         MWF.xDesktop.requireApp("Template", "MForm", function () {
@@ -1379,7 +1379,7 @@ MWF.xApplication.Forum.Setting.SectionSettingForm = new Class({
             if( isSingle ){
                 if( data[ dataKey ] ){
                     data[ dataKey ].each( function( p ){
-                        if( p!= "") orgArray.push( { objectName : p, objectType : "人员" } );
+                        if( p!= "") orgArray.push( { objectName : p, objectType : "사용자" } );
                     })
                 }
             }else{
@@ -1388,13 +1388,13 @@ MWF.xApplication.Forum.Setting.SectionSettingForm = new Class({
                         var flag = p.substr(p.length-1, 1);
                         switch (flag.toLowerCase()){
                             case "p":
-                                orgArray.push( { objectName : p, objectType : "人员" } );
+                                orgArray.push( { objectName : p, objectType : "사용자" } );
                                 break;
                             case "u":
-                                orgArray.push( { objectName : p, objectType : "组织" } );
+                                orgArray.push( { objectName : p, objectType : "조직" } );
                                 break;
                             default:
-                                orgArray.push( { objectName : p, objectType : "人员" } );
+                                orgArray.push( { objectName : p, objectType : "사용자" } );
                         }
                     })
                 }
@@ -1535,7 +1535,7 @@ MWF.xApplication.Forum.Setting.SectionSettingForm = new Class({
         if(subjectType && subjectType.length>255){
             data.subjectType = this.lp.subjectTypeDefaultValue;
         }
-        if(data.sectionGrade && data.sectionGrade === "是"){
+        if(data.sectionGrade && data.sectionGrade === "예"){
             data.sectionGrade = true;
         }
         debugger;
@@ -2075,13 +2075,13 @@ MWF.xApplication.Forum.Setting.SelectOrgForm = new Class({
     _ok: function (data, callback) {
         var orgArray = [];
         data.person.split(",").each( function( p ){
-            orgArray.push( p+"#人员" )
+            orgArray.push( p+"#사용자" )
         });
         data.department.split(",").each( function( p ){
-            orgArray.push( p+"#组织" )
+            orgArray.push( p+"#조직" )
         });
         data.company.split(",").each( function( p ){
-            orgArray.push( p+"#组织" )
+            orgArray.push( p+"#조직" )
         });
         this.app.restActions.saveRole( data, function(json){
             this.app.restActions.getRole( data.id, function( j ){

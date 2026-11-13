@@ -92,15 +92,15 @@ public class AttendanceDetailMobile extends SliceJpaObject {
 	@CheckPersist(allowEmpty = true)
 	private Date recordDate;
 
-	public static final String CHECKIN_TYPE_ONDUTY = "上午上班打卡";
-	public static final String CHECKIN_TYPE_MORNING_OFFDUTY = "上午下班打卡";
-	public static final String CHECKIN_TYPE_AFTERNOON_ONDUTY = "下午上班打卡";
-	public static final String CHECKIN_TYPE_OFFDUTY = "下午下班打卡";
-	public static final String CHECKIN_TYPE_AFTERNOON = "午间打卡";
+	public static final String CHECKIN_TYPE_ONDUTY = "오전 출근 체크";
+	public static final String CHECKIN_TYPE_MORNING_OFFDUTY = "오전 퇴근 체크";
+	public static final String CHECKIN_TYPE_AFTERNOON_ONDUTY = "오후 출근 체크";
+	public static final String CHECKIN_TYPE_OFFDUTY = "오후 퇴근 체크";
+	public static final String CHECKIN_TYPE_AFTERNOON = "점심 체크";
 	//	public static final String CHECKIN_TYPE_OUTSIDE = "외출 체크";
 
 	public static final String checkin_type_FIELDNAME = "checkin_type";
-	@FieldDescribe("打卡类型。字符串，目前有：上午上班打卡，上午下班打卡，下午上班打卡，下午下班打卡，外出打卡，午间打卡")
+	@FieldDescribe("체크 유형. 문자열이며 현재 오전 출근 체크, 오전 퇴근 체크, 오후 출근 체크, 오후 퇴근 체크, 외근 체크, 점심 체크가 있음")
 	@Column(name = ColumnNamePrefix + checkin_type_FIELDNAME, length = length_32B)
 	private String checkin_type;
 

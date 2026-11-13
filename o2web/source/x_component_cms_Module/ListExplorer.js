@@ -552,7 +552,7 @@ MWF.xApplication.cms.Module.ListExplorer.DefaultList = new Class({
             "statusList": [this.explorer.options.status],
             "orderField" : this.orderField || "publishTime",
             "orderType" : this.orderType || "desc",
-            "documentType": "全部"
+            "documentType": "전체"
         };
         if( this.searchKey && this.searchKey!="" ){
             data.title = this.searchKey;
@@ -660,7 +660,7 @@ MWF.xApplication.cms.Module.ListExplorer.ListForALL = new Class({
             "statusList": [ this.explorer.options.status ],
             "orderField" : this.orderField || "publishTime",
             "orderType" : this.orderType || "desc",
-            "documentType": "全部"
+            "documentType": "전체"
         };
         if( this.searchKey && this.searchKey!="" ){
             data.title = this.searchKey
@@ -749,7 +749,7 @@ MWF.xApplication.cms.Module.ListExplorer.ListForDraft = new Class({
             "statusList": [ "draft" ],
             "orderField" : this.orderField || null,
             "orderType" : this.orderType || null,
-            "documentType": "全部"
+            "documentType": "전체"
         };
         if( this.searchKey && this.searchKey!="" ){
             data.title = this.searchKey
@@ -838,7 +838,7 @@ MWF.xApplication.cms.Module.ListExplorer.ListForDelay = new Class({
             "statusList": [ "waitPublish" ],
             "orderField" : this.orderField || null,
             "orderType" : this.orderType || null,
-            "documentType": "全部"
+            "documentType": "전체"
         };
         if( this.searchKey && this.searchKey!="" ){
             data.title = this.searchKey

@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "论坛", packageName = "com.x.bbs.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "포럼", packageName = "com.x.bbs.assemble.control", containerEntities = {
 		"com.x.bbs.entity.BBSForumInfo", "com.x.bbs.entity.BBSSectionInfo", "com.x.bbs.entity.BBSSubjectInfo",
 		"com.x.bbs.entity.BBSSubjectContent", "com.x.bbs.entity.BBSReplyInfo", "com.x.bbs.entity.BBSSubjectAttachment",
 		"com.x.bbs.entity.BBSOperationRecord", "com.x.bbs.entity.BBSUserInfo", "com.x.bbs.entity.BBSUserRole",

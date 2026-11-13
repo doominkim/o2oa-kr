@@ -22,7 +22,7 @@ public class ActionMindShareCancel extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionMindShareCancel.class );
 
-	@AuditLog(operation = "取消分享脑图文件")
+	@AuditLog(operation = "마인드맵 파일 공유 취소")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String shareRecordId ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();

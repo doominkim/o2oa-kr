@@ -34,15 +34,15 @@ public class AiConfig extends GsonPropertyObject {
     private String desc = "";
 
     @FieldDescribe("지식 베이스 인덱스 앱 목록.")
-    private List<String> knowledgeIndexAppList = List.of("dc45465e-e12e-4767-a404-b3ef9e7260d7|知识库",
-            "e7e2272a-44fd-49bc-aa0b-fb351a3ef5eb|通知公告",
-            "647307ad-bfc6-4914-9ee6-a0b0f3980766|公司新闻",
-            "61c70a3b-55e8-4950-abc0-a7a34efbc74f|规章制度",
-            "a3583660-a58c-4ede-8384-30f60f313df8|热点新闻",
-            "cfc037a8-5b9e-4a2c-bb0c-a6d0d24d2aa2|行业新闻");
+    private List<String> knowledgeIndexAppList = List.of("dc45465e-e12e-4767-a404-b3ef9e7260d7|지식 베이스",
+            "e7e2272a-44fd-49bc-aa0b-fb351a3ef5eb|공지사항",
+            "647307ad-bfc6-4914-9ee6-a0b0f3980766|회사 소식",
+            "61c70a3b-55e8-4950-abc0-a7a34efbc74f|규정·제도",
+            "a3583660-a58c-4ede-8384-30f60f313df8|주요 뉴스",
+            "cfc037a8-5b9e-4a2c-bb0c-a6d0d24d2aa2|업계 뉴스");
 
     @FieldDescribe("Q&A 베이스 인덱스 앱 목록.")
-    private List<String> questionsIndexAppList = List.of("02b8190c-4815-4126-b715-a149618c8002|问答");
+    private List<String> questionsIndexAppList = List.of("02b8190c-4815-4126-b715-a149618c8002|질의응답");
 
     @FieldDescribe("o2 에이전트 첨부파일 파싱 지원 파일 유형.")
     private List<String> o2AiFileList = List.of("pdf", "docx", "doc", "txt", "md", "pptx", "ppt", "xlsx", "xls");

@@ -32,9 +32,9 @@ import com.x.base.core.project.logger.LoggerFactory;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "SnapAction", description = "工作快照接口.")
+@Tag(name = "SnapAction", description = "작업 스냅샷 인터페이스.")
 @Path("snap")
-@JaxrsDescribe("工作快照接口.")
+@JaxrsDescribe("작업 스냅샷 인터페이스.")
 public class SnapAction extends StandardJaxrsAction {
 
     private static Logger logger = LoggerFactory.getLogger(SnapAction.class);

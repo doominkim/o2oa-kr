@@ -26,7 +26,7 @@ public class ActionPersistChangeCategory extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionPersistChangeCategory.class);
 
-	@AuditLog(operation = "移动文档")
+	@AuditLog(operation = "문서 이동")
 	protected ActionResult<Wo> execute(HttpServletRequest request, JsonElement jsonElement, EffectivePerson effectivePerson) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		List<Document> documents = null;
@@ -116,7 +116,7 @@ public class ActionPersistChangeCategory extends BaseAction {
 						//문서 접근 권한 재설정 메시지를 처리 큐로 발송
 						new CmsBatchOperationPersistService().addOperation( 
 								CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT, 
-								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  document.getId(),  document.getId(), "刷新文档权限：ID=" +  document.getId() );
+								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  document.getId(),  document.getId(), "문서 권한 갱신: ID=" +  document.getId() );
 					} catch (Exception e) {
 						Exception exception = new ExceptionDocumentInfoProcess(e, "게시글 접근 권한 재설정 메시지를 처리 대기열에 보내는 중 오류가 발생했습니다!");
 						result.error(exception);

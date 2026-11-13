@@ -126,10 +126,10 @@ public class AttendanceSettingServiceAdv {
 			AttendanceSetting attendanceSetting = this.getByCode("ATTENDANCE_WEEKEND");
 			String configValue =  attendanceSetting.getConfigValue();
 			if(attendanceSetting != null){
-				if( (configValue.indexOf("周六")>-1 && cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY) || (configValue.indexOf("周日")>-1 && cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY)){
+				if( (configValue.indexOf("토요일")>-1 && cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY) || (configValue.indexOf("일요일")>-1 && cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY)){
 					iflag = true;
 				}
-				if(configValue.indexOf("无")>-1 && (cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) ){
+				if(configValue.indexOf("없음")>-1 && (cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) ){
 					iflag = true;
 				}
 			}

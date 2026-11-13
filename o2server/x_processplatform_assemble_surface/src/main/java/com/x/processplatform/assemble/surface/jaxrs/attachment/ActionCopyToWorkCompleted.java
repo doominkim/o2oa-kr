@@ -89,7 +89,7 @@ class ActionCopyToWorkCompleted extends BaseAction {
 
 		@FieldDescribe("첨부파일 객체 목록.")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment",
-				fieldValue = "{'id':'附件id','name':'附件名称','site':'附件框分类','copyFrom':'附件来源(cms|内容管理附件、processPlatform|流程平台附件、x_pan_assemble_control|企业网盘附件，默认为processPlatform)'}")
+				fieldValue = "{'id':'첨부파일 id','name':'첨부파일 이름','site':'첨부파일 영역 분류','copyFrom':'첨부파일 출처(cms|콘텐츠 관리 첨부파일, processPlatform|결재 플랫폼 첨부파일, x_pan_assemble_control|웹하드 첨부파일, 기본값 processPlatform)'}")
 		private List<WiAttachment> attachmentList = new ArrayList<>();
 
 		public List<WiAttachment> getAttachmentList() {

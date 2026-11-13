@@ -37,9 +37,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "TaskAction", description = "待办接口.")
+@Tag(name = "TaskAction", description = "결재 대기 인터페이스.")
 @Path("task")
-@JaxrsDescribe(value = "待办接口.", scope = DescribeScope.commonly)
+@JaxrsDescribe(value = "결재 대기 인터페이스.", scope = DescribeScope.commonly)
 public class TaskAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TaskAction.class);

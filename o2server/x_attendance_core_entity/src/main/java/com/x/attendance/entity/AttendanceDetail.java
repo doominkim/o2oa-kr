@@ -138,19 +138,19 @@ public class AttendanceDetail extends SliceJpaObject {
     @FieldDescribe("휴가 시간대:오전|오후|종일")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + selfHolidayDayTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
-    private String selfHolidayDayTime = "无";
+    private String selfHolidayDayTime = "없음";
 
     public static final String absentDayTime_FIELDNAME = "absentDayTime";
     @FieldDescribe("결근 시간대:오전|오후|종일")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + absentDayTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
-    private String absentDayTime = "无";
+    private String absentDayTime = "없음";
 
     public static final String abnormalDutyDayTime_FIELDNAME = "abnormalDutyDayTime";
     @FieldDescribe("출퇴근 기록 이상 시간대:오전|오후|종일")
     @Column(length = JpaObject.length_32B, name = ColumnNamePrefix + abnormalDutyDayTime_FIELDNAME)
     @CheckPersist(allowEmpty = false)
-    private String abnormalDutyDayTime = "无";
+    private String abnormalDutyDayTime = "없음";
 
     public static final String getSelfHolidayDays_FIELDNAME = "getSelfHolidayDays";
     @FieldDescribe("휴가 일수: 0|0.5|1")
@@ -1262,8 +1262,8 @@ public class AttendanceDetail extends SliceJpaObject {
         this.appealStatus = 0; // 이의 신청 상태
         this.appealProcessor = "";
 
-        this.absentDayTime = "无"; // 결근 시간대: 없음, 오전, 오후, 종일
-        this.selfHolidayDayTime = "无"; // 휴가 시간대: 없음, 오전, 오후, 종일
-        this.abnormalDutyDayTime = "无"; // 출퇴근 기록 이상 시간대: 없음, 오전, 오후, 종일
+        this.absentDayTime = "없음"; // 결근 시간대: 없음, 오전, 오후, 종일
+        this.selfHolidayDayTime = "없음"; // 휴가 시간대: 없음, 오전, 오후, 종일
+        this.abnormalDutyDayTime = "없음"; // 출퇴근 기록 이상 시간대: 없음, 오전, 오후, 종일
     }
 }

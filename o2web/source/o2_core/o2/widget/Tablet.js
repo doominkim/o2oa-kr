@@ -131,7 +131,7 @@ o2.widget.Tablet = o2.Tablet = new Class({
         this.mode = "writing"; //writing은 쓰기 상태, erasing은 지우기 상태, inputing은 입력기
 
         this.currentColor = this.options.color;
-        this.currentFontFamily = "宋体,SimSun";
+        this.currentFontFamily = "SimSun";
         this.currentFontSize = "16px";
 
         this.container = new Element("div.container", {

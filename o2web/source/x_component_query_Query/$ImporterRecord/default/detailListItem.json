@@ -96,7 +96,7 @@
     },
     {
       "name": "errorInfor",
-      "condition": "function( d ){ return ['导入失败','部分成功'].contains(this.explorer.data.status) && ['','导入失败'].contains(this.explorer.currentStatus) }",
+      "condition": "function( d ){ return ['가져오기 실패','일부 가져오기 성공'].contains(this.explorer.data.status) && ['','가져오기 실패'].contains(this.explorer.currentStatus) }",
       "head": {
         "html": "<th styles='normalThNode' lable='errorInfor'></th>"
       },
@@ -111,7 +111,7 @@
     },
     {
 
-      "condition": "function( d ){ return ['导入成功','部分成功'].contains(this.explorer.data.status) && ['','导入成功'].contains(this.explorer.currentStatus) && this.explorer.importerJSON.type!=='dynamicTable'}",
+      "condition": "function( d ){ return ['가져오기 성공','일부 가져오기 성공'].contains(this.explorer.data.status) && ['','가져오기 성공'].contains(this.explorer.currentStatus) && this.explorer.importerJSON.type!=='dynamicTable'}",
       "head": {
         "html": "<th styles='normalThNode' lable='action'></th>"
       },
@@ -122,7 +122,7 @@
             "title": "open",
             "text": "open",
             "action": "open",
-            "condition": "function( d ){ return ['cms','process'].contains(d.docType) && d.docId && d.status==='导入成功'}",
+            "condition": "function( d ){ return ['cms','process'].contains(d.docType) && d.docId && d.status==='가져오기 성공'}",
             "styles": "actionNode"
 //            "mouseoverStyles": "actionDeleteNode_over",
 //            "mousedownStyles": "actionDeleteNode_down"

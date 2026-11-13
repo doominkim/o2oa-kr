@@ -81,7 +81,7 @@ MWF.xApplication.Forum.TopNode = new Class({
         //this.getSystemSetting( "BBS_LOGO_NAME", function( data ){
         this.restActions.getBBSName( function( json ){
             var data = json.data;
-            if( data.configValue && data.configValue!="" && data.configValue!="O2社区" ){
+            if( data.configValue && data.configValue!="" && data.configValue!="O2 커뮤니티" ){
                 this.bbsName = data.configValue;
                 this.topTextNode = new Element("div.topTextNode", {
                     "styles": this.css.topTextNode,

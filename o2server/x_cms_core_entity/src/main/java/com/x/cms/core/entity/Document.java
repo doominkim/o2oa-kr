@@ -43,8 +43,8 @@ public class Document extends SliceJpaObject {
 	public static final String TABLE = PersistenceProperties.Document.table;
 	public static final int STRING_VALUE_MAX_LENGTH = JpaObject.length_255B;
 	public static final String DOC_STATUS_PUBLISH = "published";
-	public static final String DOCUMENT_TYPE_INFO = "信息";
-	public static final String DOCUMENT_TYPE_DATA = "数据";
+	public static final String DOCUMENT_TYPE_INFO = "정보";
+	public static final String DOCUMENT_TYPE_DATA = "데이터";
 
 	/* 위는 JpaObject 기본 필드 */
 	@Override
@@ -68,7 +68,7 @@ public class Document extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -93,10 +93,10 @@ public class Document extends SliceJpaObject {
 	private String title;
 
 	public static final String documentType_FIELDNAME = "documentType";
-	@FieldDescribe("文档类型，跟随分类类型，信息 | 数据")
+	@FieldDescribe("문서 유형, 분류 유형을 따름, 정보 | 데이터")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + documentType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String documentType = "信息";
+	private String documentType = "정보";
 
 	public static final String appId_FIELDNAME = "appId";
 	@FieldDescribe("게시판 ID")
@@ -208,7 +208,7 @@ public class Document extends SliceJpaObject {
 	private String docStatus = "draft";
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("说明备注，可以填写说明信息，如导入信息检验失败原因等")
+	@FieldDescribe("설명 비고, 가져오기 검증 실패 원인 등 설명 정보를 입력할 수 있음")
 	@Column(length = STRING_VALUE_MAX_LENGTH, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description = null;
@@ -266,7 +266,7 @@ public class Document extends SliceJpaObject {
 	private Boolean hasIndexPic = false;
 
 	public static final String reviewed_FIELDNAME = "reviewed";
-	@FieldDescribe("是否已经更新review信息.")
+	@FieldDescribe("review 정보 갱신 여부.")
 	@Column(name = ColumnNamePrefix + reviewed_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Boolean reviewed = false;
@@ -425,92 +425,92 @@ public class Document extends SliceJpaObject {
 	private DocumentProperties properties;
 
 	public static final String stringValue01_FIELDNAME = "stringValue01";
-	@FieldDescribe("业务数据String值01.")
+	@FieldDescribe("업무 데이터 String 값01.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue01;
 
 	public static final String stringValue02_FIELDNAME = "stringValue02";
-	@FieldDescribe("业务数据String值02.")
+	@FieldDescribe("업무 데이터 String 값02.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue02;
 
 	public static final String stringValue03_FIELDNAME = "stringValue03";
-	@FieldDescribe("业务数据String值03.")
+	@FieldDescribe("업무 데이터 String 값03.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue03_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue03_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue03;
 
 	public static final String stringValue04_FIELDNAME = "stringValue04";
-	@FieldDescribe("业务数据String值04.")
+	@FieldDescribe("업무 데이터 String 값04.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue04_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + stringValue04_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue04;
 
 	public static final String stringValue05_FIELDNAME = "stringValue05";
-	@FieldDescribe("业务数据String值05.")
+	@FieldDescribe("업무 데이터 String 값05.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue05_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue05;
 
 	public static final String stringValue06_FIELDNAME = "stringValue06";
-	@FieldDescribe("业务数据String值06.")
+	@FieldDescribe("업무 데이터 String 값06.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue06_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue06;
 
 	public static final String stringValue07_FIELDNAME = "stringValue07";
-	@FieldDescribe("业务数据String值07.")
+	@FieldDescribe("업무 데이터 String 값07.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue07_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue07;
 
 	public static final String stringValue08_FIELDNAME = "stringValue08";
-	@FieldDescribe("业务数据String值08.")
+	@FieldDescribe("업무 데이터 String 값08.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue08_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue08;
 
 	public static final String stringValue09_FIELDNAME = "stringValue09";
-	@FieldDescribe("业务数据String值09.")
+	@FieldDescribe("업무 데이터 String 값09.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue09_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue09;
 
 	public static final String stringValue10_FIELDNAME = "stringValue10";
-	@FieldDescribe("业务数据String值10.")
+	@FieldDescribe("업무 데이터 String 값10.")
 	@Column(length = length_255B, name = ColumnNamePrefix + stringValue10_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String stringValue10;
 
 	public static final String longValue01_FIELDNAME = "longValue01";
-	@FieldDescribe("业务数据Long值01.")
+	@FieldDescribe("업무 데이터 Long 값01.")
 	@Column(name = ColumnNamePrefix + longValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + longValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long longValue01;
 
 	public static final String longValue02_FIELDNAME = "longValue02";
-	@FieldDescribe("业务数据Long值02.")
+	@FieldDescribe("업무 데이터 Long 값02.")
 	@Column(name = ColumnNamePrefix + longValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + longValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Long longValue02;
 
 	public static final String doubleValue01_FIELDNAME = "doubleValue01";
-	@FieldDescribe("业务数据Double值01.")
+	@FieldDescribe("업무 데이터 Double 값01.")
 	@Column(name = ColumnNamePrefix + doubleValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + doubleValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Double doubleValue01;
 
 	public static final String doubleValue02_FIELDNAME = "doubleValue02";
-	@FieldDescribe("业务数据Double值02.")
+	@FieldDescribe("업무 데이터 Double 값02.")
 	@Column(name = ColumnNamePrefix + doubleValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + doubleValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -518,7 +518,7 @@ public class Document extends SliceJpaObject {
 
 	public static final String dateTimeValue01_FIELDNAME = "dateTimeValue01";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值01.")
+	@FieldDescribe("업무 데이터 DateTime 값01.")
 	@Column(name = ColumnNamePrefix + dateTimeValue01_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateTimeValue01_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -526,7 +526,7 @@ public class Document extends SliceJpaObject {
 
 	public static final String dateTimeValue02_FIELDNAME = "dateTimeValue02";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值02.")
+	@FieldDescribe("업무 데이터 DateTime 값02.")
 	@Column(name = ColumnNamePrefix + dateTimeValue02_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + dateTimeValue02_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
@@ -534,7 +534,7 @@ public class Document extends SliceJpaObject {
 
 	public static final String dateTimeValue03_FIELDNAME = "dateTimeValue03";
 	@Temporal(TemporalType.TIMESTAMP)
-	@FieldDescribe("业务数据DateTime值03.")
+	@FieldDescribe("업무 데이터 DateTime 값03.")
 	@Column(name = ColumnNamePrefix + dateTimeValue03_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Date dateTimeValue03;

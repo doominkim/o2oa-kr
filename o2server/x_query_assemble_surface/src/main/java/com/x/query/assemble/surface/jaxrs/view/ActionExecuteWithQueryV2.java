@@ -82,7 +82,7 @@ class ActionExecuteWithQueryV2 extends BaseAction {
 		private List<SelectEntry> orderList;
 
 		@FieldDescribe("필터")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "FilterEntry", fieldValue = "{value='',otherValue='',path='',formatType='',logic='',comparison=''}", fieldSample = "{'logic':'逻辑运算:and|or','path':'data数据的路径:$work.title','comparison':'比较运算符:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7月','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "FilterEntry", fieldValue = "{value='',otherValue='',path='',formatType='',logic='',comparison=''}", fieldSample = "{'logic':'논리 연산:and|or','path':'data 데이터 경로:$work.title','comparison':'비교 연산자:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo|range','value':'7월','formatType':'textValue|numberValue|dateTimeValue|booleanValue'}")
 		private List<FilterEntry> filterList;
 
 		@FieldDescribe("지정 필드 목록")

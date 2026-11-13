@@ -44,9 +44,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "AttachmentAction", description = "附件接口.")
+@Tag(name = "AttachmentAction", description = "첨부파일 인터페이스.")
 @Path("attachment")
-@JaxrsDescribe("附件接口.")
+@JaxrsDescribe("첨부파일 인터페이스.")
 public class AttachmentAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AttachmentAction.class);
@@ -705,7 +705,7 @@ public class AttachmentAction extends StandardJaxrsAction {
             @JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
             @JaxrsParameterDescribe("톈인 확장 필드") @FormDataParam("extraParam") String extraParam,
             @FormDataParam(FILE_FIELD) byte[] bytes,
-            @JaxrsParameterDescribe("附件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+            @JaxrsParameterDescribe("첨부파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -744,7 +744,7 @@ public class AttachmentAction extends StandardJaxrsAction {
             @JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
             @JaxrsParameterDescribe("톈인 확장 필드") @FormDataParam("extraParam") String extraParam,
             @FormDataParam(FILE_FIELD) byte[] bytes,
-            @JaxrsParameterDescribe("附件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+            @JaxrsParameterDescribe("첨부파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -825,7 +825,7 @@ public class AttachmentAction extends StandardJaxrsAction {
             @JaxrsParameterDescribe("콜백 함수명") @PathParam("callback") String callback,
             @JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
             @FormDataParam(FILE_FIELD) final byte[] bytes,
-            @JaxrsParameterDescribe("附件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+            @JaxrsParameterDescribe("첨부파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionUpdateCallback.Wo<ActionUpdateCallback.WoObject>> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {
@@ -852,7 +852,7 @@ public class AttachmentAction extends StandardJaxrsAction {
             @JaxrsParameterDescribe("첨부파일 이름") @FormDataParam(FILENAME_FIELD) String fileName,
             @JaxrsParameterDescribe("톈인 확장 필드") @FormDataParam("extraParam") String extraParam,
             @FormDataParam(FILE_FIELD) byte[] bytes,
-            @JaxrsParameterDescribe("附件") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
+            @JaxrsParameterDescribe("첨부파일") @FormDataParam(FILE_FIELD) final FormDataContentDisposition disposition) {
         ActionResult<ActionUpdate.Wo> result = new ActionResult<>();
         EffectivePerson effectivePerson = this.effectivePerson(request);
         try {

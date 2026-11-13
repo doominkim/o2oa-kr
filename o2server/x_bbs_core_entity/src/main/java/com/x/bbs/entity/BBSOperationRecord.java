@@ -145,7 +145,7 @@ public class BBSOperationRecord extends SliceJpaObject {
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + optType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + optType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String optType = "未知";
+	private String optType = "알 수 없음";
 
 	public static final String operatorName_FIELDNAME = "operatorName";
 	@FieldDescribe("작업자 이름")

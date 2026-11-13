@@ -60,9 +60,9 @@ public class ActionDelete extends BaseAction {
 		//게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 		new CmsBatchOperationPersistService().addOperation(
 				CmsBatchOperationProcessService.OPT_OBJ_CATEGORY,
-				CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "删除分类：ID=" + id );
+				CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "분류 삭제: ID=" + id );
 
-		new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), id, "", "", "", "CATEGORY", "删除");
+		new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), id, "", "", "", "CATEGORY", "삭제");
 
 		CacheManager.notify( AppInfo.class );
 		CacheManager.notify( CategoryInfo.class );

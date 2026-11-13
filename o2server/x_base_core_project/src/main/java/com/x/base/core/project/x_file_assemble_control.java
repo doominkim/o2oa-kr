@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "企业网盘", packageName = "com.x.file.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "웹하드", packageName = "com.x.file.assemble.control", containerEntities = {
 		"com.x.file.core.entity.personal.Folder", "com.x.file.core.entity.personal.Folder2",
 		"com.x.file.core.entity.personal.Attachment", "com.x.file.core.entity.personal.Attachment2",
 		"com.x.file.core.entity.personal.Share", "com.x.file.core.entity.open.File",

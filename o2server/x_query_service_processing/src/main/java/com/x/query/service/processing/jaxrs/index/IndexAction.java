@@ -28,9 +28,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "IndexAction", description = "检索接口.")
+@Tag(name = "IndexAction", description = "색인 인터페이스.")
 @Path("index")
-@JaxrsDescribe("检索接口.")
+@JaxrsDescribe("색인 인터페이스.")
 public class IndexAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(IndexAction.class);

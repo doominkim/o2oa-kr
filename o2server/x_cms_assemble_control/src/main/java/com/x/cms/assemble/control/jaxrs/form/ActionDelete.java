@@ -82,7 +82,7 @@ public class ActionDelete extends BaseAction {
 			if( form != null ){//마지막으로 양식 정보 삭제
 				emc.remove( form, CheckRemoveType.all );
 				emc.commit();
-				logService.log( emc, effectivePerson.getDistinguishedName(), form.getName(), form.getAppId(), "", "", form.getId(), "FORM", "删除");
+				logService.log( emc, effectivePerson.getDistinguishedName(), form.getName(), form.getAppId(), "", "", form.getId(), "FORM", "삭제");
 			}
 			wrap = new WrapOutId( form.getId() );
 

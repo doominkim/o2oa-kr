@@ -27,8 +27,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "StatusAction", description = "组件状态接口.")
-@JaxrsDescribe(value = "组件状态接口.", scope = DescribeScope.commonly)
+@Tag(name = "StatusAction", description = "컴포넌트 상태 인터페이스.")
+@JaxrsDescribe(value = "컴포넌트 상태 인터페이스.", scope = DescribeScope.commonly)
 @Path("status")
 public class StatusAction extends StandardJaxrsAction {
 

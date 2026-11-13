@@ -7,7 +7,7 @@ String literals (comments ignored) are grouped by context:
   annotation  @FieldDescribe / @Jaxrs*Describe API docs   -> ignored (developer-facing)
   log         LOGGER.* / logger.* calls                    -> ignored
   exception   exception classes (super(...)) and `new ...Exception(` -> Chinese or English
-              (two or more Latin words) text must have a Korean entry in
+              (two or more Latin words, no Hangul) text must have a Korean entry in
               o2server/x_base_core_project/src/main/resources/ko-messages.json
               (translated at runtime by KoreanMessages). A literal concatenated with a value
               matches the template form with `{}` on that side.
@@ -20,6 +20,7 @@ import glob, json, os, re, subprocess, sys
 ROOT = subprocess.run(["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True).stdout.strip()
 HAN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 WORDS = re.compile(r"[A-Za-z]{2,}")
+HANGUL = re.compile(r"[\uac00-\ud7a3]")
 ANNOT = re.compile(r"@(FieldDescribe|JaxrsDescribe|JaxrsMethodDescribe|JaxrsParameterDescribe|JaxrsFieldDescribe|Schema|Operation|Parameter)\s*\([^)]*$")
 LOG = re.compile(r"(LOGGER|logger|log|LOG)\s*\.\s*(debug|info|warn|error|trace|print)\s*\([^;]*$")
 
@@ -82,7 +83,7 @@ for f in files:
     hits = []
     for line, raw, pos in literals(src):
         han = bool(HAN.search(raw))
-        if not han and len(WORDS.findall(raw)) < 2:
+        if not han and (len(WORDS.findall(raw)) < 2 or HANGUL.search(raw)):
             continue
         before = src[max(0, pos - 300):pos]
         stmt = before[before.rfind(";") + 1:]

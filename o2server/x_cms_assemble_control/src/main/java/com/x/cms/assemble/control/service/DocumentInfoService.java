@@ -57,7 +57,7 @@ public class DocumentInfoService {
 			return null;
 		}
 		if (StringUtils.isEmpty(documentType)) {
-			documentType = "全部";
+			documentType = "전체";
 		}
 		Business business = new Business(emc);
 		return business.getDocumentFactory().listByAppId(appId, documentType, maxCount);
@@ -140,8 +140,8 @@ public class DocumentInfoService {
 				document.setId(Document.createId());
 			}
 			emc.persist(document, CheckPersistType.all);
-			log = getOperationLog(document.getCreatorPerson(), "用户[" + document.getCreatorPerson() + "]成功创建一个文档信息",
-					document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "新增");
+			log = getOperationLog(document.getCreatorPerson(), "사용자[" + document.getCreatorPerson() + "]님이 문서를 생성했습니다",
+					document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "추가");
 			emc.persist(log, CheckPersistType.all);
 		} else {
 			// 일부 데이터는 갱신 불필요
@@ -203,8 +203,8 @@ public class DocumentInfoService {
 			document.setReviewed(false);
 			emc.check(document, CheckPersistType.all);
 
-			log = getOperationLog(document.getCreatorPerson(), "用户[" + document.getCreatorPerson() + "]成功更新一个文档信息",
-					document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "更新");
+			log = getOperationLog(document.getCreatorPerson(), "사용자[" + document.getCreatorPerson() + "]님이 문서를 수정했습니다",
+					document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "수정");
 			emc.persist(log, CheckPersistType.all);
 		}
 		emc.commit();

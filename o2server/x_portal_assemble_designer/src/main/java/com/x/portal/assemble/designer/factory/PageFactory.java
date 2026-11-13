@@ -19,7 +19,7 @@ import com.x.portal.core.entity.Page_;
 public class PageFactory extends AbstractFactory {
 
 	private List<String> FIRSTPAGE_NAMES = new ArrayList<>(
-			Arrays.asList(new String[] { "index", "default", "首页", "起始页", "first", "homepage" }));
+			Arrays.asList(new String[] { "index", "default", "홈", "시작 페이지", "first", "homepage" }));
 
 	public PageFactory(Business abstractBusiness) throws Exception {
 		super(abstractBusiness);

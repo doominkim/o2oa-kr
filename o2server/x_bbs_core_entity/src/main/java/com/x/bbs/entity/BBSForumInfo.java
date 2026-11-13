@@ -100,11 +100,11 @@ public class BBSForumInfo extends SliceJpaObject {
 	private String forumNotice = "";
 
 	public static final String forumVisible_FIELDNAME = "forumVisible";
-	@FieldDescribe("论坛可见：所有人（默认）|根据权限")
+	@FieldDescribe("포럼 공개 범위: 모든 사용자(기본)|권한에 따라")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + forumVisible_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + forumVisible_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String forumVisible = "所有人";
+	private String forumVisible = "모든 사용자";
 
 	public static final String visiblePermissionList_FIELDNAME = "visiblePermissionList";
 	@FieldDescribe("게시판 공개 범위")
@@ -120,11 +120,11 @@ public class BBSForumInfo extends SliceJpaObject {
 	private List<String> visiblePermissionList;
 
 	public static final String subjectPublishAble_FIELDNAME = "subjectPublishAble";
-	@FieldDescribe("版块发贴权限：所有人（默认）|根据权限")
+	@FieldDescribe("섹션 게시 권한: 모든 사용자(기본)|권한에 따라")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + subjectPublishAble_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + subjectPublishAble_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String subjectPublishAble = "所有人";
+	private String subjectPublishAble = "모든 사용자";
 
 	public static final String publishPermissionList_FIELDNAME = "publishPermissionList";
 	@FieldDescribe("게시 가능 범위")
@@ -140,10 +140,10 @@ public class BBSForumInfo extends SliceJpaObject {
 	private List<String> publishPermissionList;
 
 	public static final String replyPublishAble_FIELDNAME = "replyPublishAble";
-	@FieldDescribe("版块回复权限：所有人（默认）|根据权限")
+	@FieldDescribe("섹션 댓글 권한: 모든 사용자(기본)|권한에 따라")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + replyPublishAble_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String replyPublishAble = "所有人";
+	private String replyPublishAble = "모든 사용자";
 
 	public static final String replyPermissionList_FIELDNAME = "replyPermissionList";
 	@FieldDescribe("답글 가능 범위")
@@ -159,28 +159,28 @@ public class BBSForumInfo extends SliceJpaObject {
 	private List<String> replyPermissionList;
 
 	public static final String indexListStyle_FIELDNAME = "indexListStyle";
-	@FieldDescribe("首页列表样式：经典|简单矩形|图片矩形")
+	@FieldDescribe("첫 화면 목록 스타일: 클래식|단순 사각형|이미지 사각형")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + indexListStyle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String indexListStyle = "经典";
+	private String indexListStyle = "클래식";
 
 	public static final String forumIndexStyle_FIELDNAME = "forumIndexStyle";
-	@FieldDescribe("论坛主页面样式：经典|新闻|照片")
+	@FieldDescribe("포럼 메인 화면 스타일: 클래식|뉴스|사진")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + forumIndexStyle_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String forumIndexStyle = "经典";
+	private String forumIndexStyle = "클래식";
 
 	public static final String subjectType_FIELDNAME = "subjectType";
-	@FieldDescribe("论坛版块默认的主题分类名称,以|分隔,如讨论|新闻")
+	@FieldDescribe("포럼 섹션 기본 주제 분류 이름, |로 구분, 예: 토론|뉴스")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + subjectType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String subjectType = "讨论|新闻";
+	private String subjectType = "토론|뉴스";
 
 	public static final String typeCategory_FIELDNAME = "typeCategory";
-	@FieldDescribe("论坛版块支持的主题类别名称,以|分隔,默认:信息|问题|投票")
+	@FieldDescribe("포럼 섹션이 지원하는 주제 유형 이름, |로 구분, 기본: 정보|질문|투표")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + typeCategory_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String typeCategory = "信息|问题|投票";
+	private String typeCategory = "정보|질문|투표";
 
 	public static final String indexRecommendable_FIELDNAME = "indexRecommendable";
 	@FieldDescribe("첫 페이지 추천 허용: true|false")
@@ -249,11 +249,11 @@ public class BBSForumInfo extends SliceJpaObject {
 	private String forumColor = "";
 
 	public static final String forumStatus_FIELDNAME = "forumStatus";
-	@FieldDescribe("论坛状态：启用|停用")
+	@FieldDescribe("포럼 상태: 사용|사용 중지")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + forumStatus_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + forumStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String forumStatus = "启用";
+	private String forumStatus = "사용";
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
 	@FieldDescribe("정렬 번호")

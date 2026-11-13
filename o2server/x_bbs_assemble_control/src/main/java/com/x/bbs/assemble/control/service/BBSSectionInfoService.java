@@ -359,7 +359,7 @@ public class BBSSectionInfoService {
 					userRole_new.setSectionId( roleInfo.getSectionId() );
 					userRole_new.setObjectName( name );
 					userRole_new.setUniqueId( name );
-					userRole_new.setObjectType( "人员" ); //사용자|조직|그룹
+					userRole_new.setObjectType( "사용자" ); //사용자|조직|그룹
 					userRole_new.setRoleCode( roleInfo.getRoleCode() );
 					userRole_new.setRoleId( roleInfo.getId() );
 					userRole_new.setRoleName( roleInfo.getRoleName() );
@@ -423,8 +423,8 @@ public class BBSSectionInfoService {
 
 	public boolean hasPublishPermission(BBSSectionInfo sectionInfo, EffectivePerson person, List<String> permissionInfoList) throws Exception{
 		String checkUserPermission = "SECTION_SUBJECT_PUBLISH_" + sectionInfo.getId();
-		String allUser = "所有人";
-		System.out.println("可发布人员："+XGsonBuilder.toJson(sectionInfo.getPublishPermissionList()));
+		String allUser = "모든 사용자";
+		System.out.println("게시 가능 사용자: "+XGsonBuilder.toJson(sectionInfo.getPublishPermissionList()));
 		if (allUser.equals(sectionInfo.getSubjectPublishAble())) {
 			return true;
 		}else if(sectionInfo.getPublishPermissionList().contains(person.getDistinguishedName())) {

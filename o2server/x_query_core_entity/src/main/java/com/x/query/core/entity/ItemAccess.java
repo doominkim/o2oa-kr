@@ -165,13 +165,13 @@ public class ItemAccess extends SliceJpaObject {
 
 	@FieldDescribe("조회 가능 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
-			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
+			fieldValue = "{'unique':'활동 고유 코드','name':'활동 이름','alias':'활동 별칭','type':'활동 유형','process':'프로세스 식별자'}")
 	@Transient
 	private List<ItemAccessActivity> readActivityList;
 
 	@FieldDescribe("조회 불가 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
-			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
+			fieldValue = "{'unique':'활동 고유 코드','name':'활동 이름','alias':'활동 별칭','type':'활동 유형','process':'프로세스 식별자'}")
 	@Transient
 	private List<ItemAccessActivity> excludeReadActivityList;
 
@@ -185,13 +185,13 @@ public class ItemAccess extends SliceJpaObject {
 
 	@FieldDescribe("편집 가능 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
-			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
+			fieldValue = "{'unique':'활동 고유 코드','name':'활동 이름','alias':'활동 별칭','type':'활동 유형','process':'프로세스 식별자'}")
 	@Transient
 	private List<ItemAccessActivity> editActivityList;
 
 	@FieldDescribe("편집 불가 프로세스 활동 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ItemAccessActivity",
-			fieldValue = "{'unique':'活动唯一编码','name':'活动名称','alias':'活动别名','type':'活动类型','process':'流程标志'}")
+			fieldValue = "{'unique':'활동 고유 코드','name':'활동 이름','alias':'활동 별칭','type':'활동 유형','process':'프로세스 식별자'}")
 	@Transient
 	private List<ItemAccessActivity> excludeEditActivityList;
 

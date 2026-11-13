@@ -44,7 +44,7 @@ public class ActionListWhatICanManage extends BaseAction {
 			if (check) {
 				if (isXAdmin) {
 					try {
-						appInfoList = appInfoServiceAdv.listAll( null, "全部");
+						appInfoList = appInfoServiceAdv.listAll( null, "전체");
 					} catch (Exception e) {
 						check = false;
 						Exception exception = new ExceptionAppInfoProcess(e, "전체 게시판 정보 객체를 조회하는 중 오류가 발생했습니다");
@@ -56,7 +56,7 @@ public class ActionListWhatICanManage extends BaseAction {
 						List<String> unitNames = userManagerService.listUnitNamesWithPerson( personName );
 						List<String> groupNames = userManagerService.listGroupNamesByPerson( personName );
 						List<String> roleNames = userManagerService.listRoleNamesByPerson( personName );
-						app_ids = permissionQueryService.listManageableAppIdsByPerson( personName, unitNames, groupNames, roleNames, null, null, null, "全部", 1000 );
+						app_ids = permissionQueryService.listManageableAppIdsByPerson( personName, unitNames, groupNames, roleNames, null, null, null, "전체", 1000 );
 						if (app_ids != null && !app_ids.isEmpty()) {
 							try {
 								appInfoList = appInfoServiceAdv.list( app_ids );

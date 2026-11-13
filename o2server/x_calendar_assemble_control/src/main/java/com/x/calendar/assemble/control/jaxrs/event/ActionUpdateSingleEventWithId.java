@@ -33,7 +33,7 @@ public class ActionUpdateSingleEventWithId extends BaseAction {
 	
 	private static Logger logger = LoggerFactory.getLogger( ActionUpdateSingleEventWithId.class );
 
-	@AuditLog(operation = "修改日程事件")
+	@AuditLog(operation = "일정 수정")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String id, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = null;

@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.CENTER, category = ModuleCategory.OFFICIAL, name = "中心", packageName = "com.x.program.center", containerEntities = {
+@Module(type = ModuleType.CENTER, category = ModuleCategory.OFFICIAL, name = "센터", packageName = "com.x.program.center", containerEntities = {
 		"com.x.general.core.entity.ApplicationDict", "com.x.general.core.entity.ApplicationDictItem",
 		"com.x.general.core.entity.area.District", "com.x.organization.core.entity.Custom",
 		"com.x.organization.core.entity.Group", "com.x.organization.core.entity.Identity",

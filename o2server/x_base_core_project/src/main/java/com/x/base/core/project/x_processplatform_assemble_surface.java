@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "流程", packageName = "com.x.processplatform.assemble.surface", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "결재", packageName = "com.x.processplatform.assemble.surface", containerEntities = {
 		"com.x.processplatform.core.entity.content.Snap", "com.x.processplatform.core.entity.content.Draft",
 		"com.x.processplatform.core.entity.content.Attachment", "com.x.processplatform.core.entity.content.Read",
 		"com.x.processplatform.core.entity.content.ReadCompleted", "com.x.processplatform.core.entity.content.Review",

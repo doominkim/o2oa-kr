@@ -35,15 +35,15 @@ public class ImportRecord extends SliceJpaObject {
 
 	private static final String TABLE = PersistenceProperties.Import.ImportRecord.table;
 
-	public static final String STATUS_WAIT = "待导入";
+	public static final String STATUS_WAIT = "가져오기 대기";
 
-	public static final String STATUS_PROCESSING = "导入中";
+	public static final String STATUS_PROCESSING = "가져오는 중";
 
-	public static final String STATUS_SUCCESS = "导入成功";
+	public static final String STATUS_SUCCESS = "가져오기 성공";
 
-	public static final String STATUS_PART_SUCCESS = "部分成功";
+	public static final String STATUS_PART_SUCCESS = "일부 가져오기 성공";
 
-	public static final String STATUS_FAILED = "导入失败";
+	public static final String STATUS_FAILED = "가져오기 실패";
 
 	public String getId() {
 		return id;
@@ -102,7 +102,7 @@ public class ImportRecord extends SliceJpaObject {
 	private Integer count;
 
 	public static final String failCount_FIELDNAME = "failCount";
-	@FieldDescribe("导入失败数量.")
+	@FieldDescribe("가져오기 실패 건수.")
 	@Column(name = ColumnNamePrefix + failCount_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private Integer failCount;

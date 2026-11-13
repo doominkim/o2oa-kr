@@ -92,7 +92,7 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 			roleAndPermission = new RoleAndPermission();
 		}
 		if (check) {
-			if ("所有人".equals(sectionInfo.getReplyPublishAble())) {
+			if ("모든 사용자".equals(sectionInfo.getReplyPublishAble())) {
 				wrap.setReplyPublishAble(true);
 			} else {
 				checkUserPermission = "SECTION_REPLY_PUBLISH_" + sectionInfo.getId();
@@ -156,7 +156,7 @@ public class ActionGetSubjectOperationPermissoin extends BaseAction {
 			if (subjectInfo.getStopReply()) {
 				wrap.setReplyPublishAble(false);
 			}
-			if (!"启用".equals(subjectInfo.getSubjectStatus())) {
+			if (!"사용".equals(subjectInfo.getSubjectStatus())) {
 				wrap.setReplyPublishAble(false);
 			}
 		}

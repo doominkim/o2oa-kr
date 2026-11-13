@@ -226,9 +226,9 @@ public class BaseAction extends StandardJaxrsAction {
             app_key = app_iterator.next().toString();
             wo_app = app_map.get(app_key);
             if (StringUtils.isEmpty(wo_app.getAppType())) {
-                wo_app.setAppType("未分类");
+                wo_app.setAppType("미분류");
             }
-            if ("全部".equalsIgnoreCase(appType) || "all".equalsIgnoreCase(appType)
+            if ("전체".equalsIgnoreCase(appType) || "all".equalsIgnoreCase(appType)
                     || (StringUtils.isNotEmpty(wo_app.getAppType()) && wo_app.getAppType().equalsIgnoreCase(appType))) {
                 wraps.add(wo_app);
             }

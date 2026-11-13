@@ -29,9 +29,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ProcessAction", description = "流程接口.")
+@Tag(name = "ProcessAction", description = "결재 프로세스 인터페이스.")
 @Path("process")
-@JaxrsDescribe("流程接口.")
+@JaxrsDescribe("결재 프로세스 인터페이스.")
 public class ProcessAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ProcessAction.class);

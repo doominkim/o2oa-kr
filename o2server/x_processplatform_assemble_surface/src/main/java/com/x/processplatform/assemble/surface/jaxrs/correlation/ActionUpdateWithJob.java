@@ -62,7 +62,7 @@ class ActionUpdateWithJob extends BaseAction {
 		private static final long serialVersionUID = 8167538341492974963L;
 
 		@FieldDescribe("관련 문서 목록, 문서 지정 site의 관련 문서 데이터를 교체, 비어 있으면 처리하지 않음.")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "SiteTargetWi", fieldValue = "{'site':'关联内容框标识','targetList':[{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','view':'来源视图'}]}")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "SiteTargetWi", fieldValue = "{'site':'관련 콘텐츠 영역 식별자','targetList':[{'type':'관련 대상 유형(cms 또는 processPlatform)','bundle':'관련 대상 식별자','view':'출처 뷰'}]}")
 		private List<SiteTargetWi> siteTargetList;
 
 		public List<SiteTargetWi> getSiteTargetList() {

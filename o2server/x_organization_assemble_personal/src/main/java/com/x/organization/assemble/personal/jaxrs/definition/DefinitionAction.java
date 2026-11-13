@@ -31,9 +31,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "DefinitionAction", description = "用户自定义数据接口.")
+@Tag(name = "DefinitionAction", description = "사용자 정의 데이터 인터페이스.")
 @Path("definition")
-@JaxrsDescribe("用户自定义数据接口.")
+@JaxrsDescribe("사용자 정의 데이터 인터페이스.")
 public class DefinitionAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(DefinitionAction.class);

@@ -42,7 +42,7 @@ class ActionCreate extends BaseAction {
             Wi.copier.copy(wi, personCard);
             personCard.setDistinguishedName(effectivePerson.getDistinguishedName());
             if (personCard.getGroupType().equals("")) {
-                personCard.setGroupType("默认分组");
+                personCard.setGroupType("기본 그룹");
             }
             personCard.setInputTime(DateTools.format(new Date()));
 

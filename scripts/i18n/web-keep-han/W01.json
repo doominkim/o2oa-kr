@@ -1222,31 +1222,5 @@
       "text": "從現在開始{delta}年",
       "reason": "MooTools zh-CHS/zh-CHT 날짜 로케일 정의(중국어 로케일 전용 데이터, 기본 en-US에서는 쓰이지 않음)"
     }
-  ],
-  "o2web/source/x_component_ForumDocument/Main.js": [
-    {
-      "text": "投票",
-      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
-    },
-    {
-      "text": "问题",
-      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
-    }
-  ],
-  "o2web/source/x_component_ForumDocument/Mobile.js": [
-    {
-      "text": "问题",
-      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
-    },
-    {
-      "text": "投票",
-      "reason": "저장된 게시물 유형(typeCategory) 값 비교용, this.lp 값과 함께 기존 데이터 호환"
-    }
-  ],
-  "o2web/source/x_component_ForumDocument/$Main/default/listItemReply.json": [
-    {
-      "text": "\"condition\" : \"function( d ){ return ( layout.desktop.session.user.distinguishedName == this.view.data.creatorName && ( this.view.data.typeCategory == this.lp.question || this.view.data.typeCategory == '问题' ) && !this.view.data.acceptReplyId); }\",",
-      "reason": "저장된 게시물 유형(typeCategory) '问题' 비교 조건식"
-    }
   ]
 }

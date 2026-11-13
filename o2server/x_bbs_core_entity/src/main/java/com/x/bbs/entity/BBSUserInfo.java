@@ -194,10 +194,10 @@ public class BBSUserInfo extends SliceJpaObject {
 	private Date lastOperationTime = null;
 
 	public static final String userStatus_FIELDNAME = "userStatus";
-	@FieldDescribe("用户状态：启用|停用")
+	@FieldDescribe("사용자 상태: 사용|사용 중지")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + userStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String userStatus = "启用";
+	private String userStatus = "사용";
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
 	@FieldDescribe("정렬 번호")

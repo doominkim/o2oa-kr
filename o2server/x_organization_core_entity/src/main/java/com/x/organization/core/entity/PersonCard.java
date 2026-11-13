@@ -65,7 +65,7 @@ public class PersonCard extends SliceJpaObject {
 			this.orderNumber = DateTools.timeOrderNumber();
 		}
 		/*if (null == this.groupType || "" == this.groupType) {
-			this.groupType = "기본 분류";
+			this.groupType = "기본 그룹";
 		}*/
 	}
 

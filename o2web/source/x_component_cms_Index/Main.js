@@ -804,7 +804,7 @@ MWF.xApplication.cms.Index.Column = new Class({
 			filter = {
 				"appIdList": [this.data.id],
 				"statusList": ["published"],
-				"documentType": "全部",
+				"documentType": "전체",
 				"justData": true
 			}
 		}

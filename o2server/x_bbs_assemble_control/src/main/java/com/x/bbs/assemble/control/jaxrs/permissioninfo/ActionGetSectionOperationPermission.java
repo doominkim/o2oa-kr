@@ -38,7 +38,7 @@ public class ActionGetSectionOperationPermission extends BaseAction {
 		wrap.setSubjectPublishAble(sectionInfoService.hasPublishPermission(sectionInfo, effectivePerson, roleAndPermission.getPermissionInfoList()));
 
 		// 게시판 주제 답글 권한 판단
-		if ("所有人".equals(sectionInfo.getReplyPublishAble())) {
+		if ("모든 사용자".equals(sectionInfo.getReplyPublishAble())) {
 			wrap.setReplyPublishAble(true);
 		} else {// 권한 판단
 			checkUserPermission = "SECTION_REPLY_PUBLISH_" + sectionInfo.getId();

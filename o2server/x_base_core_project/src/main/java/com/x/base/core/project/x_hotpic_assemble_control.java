@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "热点图片", packageName = "com.x.hotpic.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "핫 이미지", packageName = "com.x.hotpic.assemble.control", containerEntities = {
 		"com.x.hotpic.entity.HotPictureInfo", "com.x.bbs.entity.BBSSubjectInfo",
 		"com.x.cms.core.entity.Document" }, storageTypes = { StorageType.file }, storeJars = {
 				"x_organization_core_entity", "x_organization_core_express", "x_hotpic_core_entity",

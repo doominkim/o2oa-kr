@@ -720,7 +720,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         noCheckRecord.setPreDutyTimeBeforeLimit(dutyTimeBeforeLimit);
         noCheckRecord.setPreDutyTimeAfterLimit(dutyTimeAfterLimit);
         noCheckRecord.setSourceType(AttendanceV2CheckInRecord.SOURCE_TYPE_AUTO_CHECK);
-        noCheckRecord.setSourceDevice("其他");
+        noCheckRecord.setSourceDevice("기타");
         noCheckRecord.setDescription("시스템 생성, 사전 출퇴근 기록");
         noCheckRecord.setGroupId(group.getId());
         noCheckRecord.setGroupName(group.getGroupName());
@@ -750,7 +750,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
         record.setCheckInResult(AttendanceV2CheckInRecord.CHECKIN_RESULT_NotSigned);
         record.setSourceType(AttendanceV2CheckInRecord.SOURCE_TYPE_AUTO_CHECK);
-        record.setSourceDevice("其他");
+        record.setSourceDevice("기타");
         record.setDescription("시스템 생성, 누락 기록");
         emc.persist(record, CheckPersistType.all);
         emc.commit();
@@ -923,10 +923,10 @@ abstract class BaseAction extends StandardJaxrsAction {
         @FieldDescribe("외근 체크 사진 첨부파일 ID 목록")
         private List<String> fieldWorkPhotoFileIdList;
 
-        @FieldDescribe("来源设备：Mac|Windows|IOS|Android|其他")
+        @FieldDescribe("출처 기기: Mac|Windows|IOS|Android|기타")
         private String sourceDevice;
 
-        @FieldDescribe("其他说明备注")
+        @FieldDescribe("기타 설명 메모")
         private String description;
 
         @FieldDescribe("현재 위치 경도")

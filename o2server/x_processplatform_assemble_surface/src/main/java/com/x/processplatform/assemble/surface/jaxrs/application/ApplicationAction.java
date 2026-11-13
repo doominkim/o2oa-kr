@@ -28,8 +28,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "AnonymousAction", description = "应用接口.")
-@JaxrsDescribe("应用接口.")
+@Tag(name = "AnonymousAction", description = "앱 인터페이스.")
+@JaxrsDescribe("앱 인터페이스.")
 @Path("application")
 public class ApplicationAction extends StandardJaxrsAction {
 

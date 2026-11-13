@@ -179,7 +179,7 @@ public class ReviewService {
 		Boolean categoryHasPermissionControl = categoryPermissionExists(categoryInfo);
 		Boolean appInfoHasPermissionControl = appInfoPermissionExists(appInfo);
 
-		if( "数据".equals( document.getDocumentType() )) {
+		if( "데이터".equals( document.getDocumentType() )) {
 			//데이터는 기본적으로 Review에서 모두 전원 열람으로 설정하고 게시판과 분류로 열람 권한 제어
 			permissionObjs.add( "*" );
 			return permissionObjs;
@@ -188,7 +188,7 @@ public class ReviewService {
 		if( !appInfoHasPermissionControl ) {
 			if( !categoryHasPermissionControl ) {
 				if( !documentHasPermissionControl ) {
-					logger.debug("栏目没有阅读权限限制，分类没有阅读权限限制，文档没有阅读权限限制。文档所有人可见：*");
+					logger.debug("게시판·분류·문서에 열람 권한 제한이 없습니다. 모든 사용자에게 문서 공개: *");
 					permissionObjs.add( "*" );
 				}else {
 					logger.debug("게시판 열람 권한 제한 없음, 분류 열람 권한 제한 없음, 문서 열람 권한 제한 있음. 문서 열람 범위는 문서 권한 기준");
@@ -241,19 +241,19 @@ public class ReviewService {
 			return false;
 		}
 		if( ListTools.isNotEmpty( document.getReadPersonList() ) ) {
-			if( !document.getReadPersonList().contains( "所有人" )) {
+			if( !document.getReadPersonList().contains( "모든 사용자" )) {
 				return true;
 			}else{
 				return false;
 			}
 		}
 		if( ListTools.isNotEmpty( document.getReadUnitList() ) ) {
-			if( !document.getReadUnitList().contains( "所有人" )) {
+			if( !document.getReadUnitList().contains( "모든 사용자" )) {
 				return true;
 			}
 		}
 		if( ListTools.isNotEmpty( document.getReadGroupList() ) ) {
-			if( !document.getReadGroupList().contains( "所有人" )) {
+			if( !document.getReadGroupList().contains( "모든 사용자" )) {
 				return true;
 			}
 		}
@@ -270,7 +270,7 @@ public class ReviewService {
 			return false;
 		}
 		if( ListTools.isNotEmpty( categoryInfo.getViewablePersonList() ) ) {
-			if( !categoryInfo.getViewablePersonList().contains( "所有人" )) {
+			if( !categoryInfo.getViewablePersonList().contains( "모든 사용자" )) {
 				return true;
 			}
 		}
@@ -293,7 +293,7 @@ public class ReviewService {
 			return false;
 		}
 		if( ListTools.isNotEmpty( appInfo.getViewablePersonList() ) ) {
-			if( !appInfo.getViewablePersonList().contains( "所有人" )) {
+			if( !appInfo.getViewablePersonList().contains( "모든 사용자" )) {
 				return true;
 			}
 		}

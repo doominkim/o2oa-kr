@@ -70,12 +70,12 @@ public class DutySheetConfigurator extends GsonPropertyObject {
 		}
 	}
 
-	private static List<String> nameItems = Arrays.asList(new String[] { "职务名称 *", "직무 이름 *", "name" });
-	private static List<String> unitItems = Arrays.asList(new String[] { "职务所在组织唯一编码 *", "직무 소속 조직 고유 코드 *", "unit" });
-	private static List<String> descriptionItems = Arrays.asList(new String[] { "描述","职务描述", "직무 설명", "description" });
-	private static List<String> ipersonItems = Arrays.asList(new String[] { "职务所含人员唯一编码", "직무 구성원 고유 코드", "iperson" });
-	private static List<String> iunitItems = Arrays.asList(new String[] { "职务所含人员所在组织唯一编码", "직무 구성원 소속 조직 고유 코드",  "iunit" });
-	private static List<String> dutyUniqueItems = Arrays.asList(new String[] { "职务编码", "직무 코드",  "dutyUnique"});
+	private static List<String> nameItems = Arrays.asList(new String[] { "직무 이름 *", "직무 이름 *", "name" });
+	private static List<String> unitItems = Arrays.asList(new String[] { "직무 소속 조직 고유 코드 *", "직무 소속 조직 고유 코드 *", "unit" });
+	private static List<String> descriptionItems = Arrays.asList(new String[] { "직무 설명","직무 설명", "직무 설명", "description" });
+	private static List<String> ipersonItems = Arrays.asList(new String[] { "직무 구성원 고유 코드", "직무 구성원 고유 코드", "iperson" });
+	private static List<String> iunitItems = Arrays.asList(new String[] { "직무 구성원 소속 조직 고유 코드", "직무 구성원 소속 조직 고유 코드",  "iunit" });
+	private static List<String> dutyUniqueItems = Arrays.asList(new String[] { "직무 코드", "직무 코드",  "dutyUnique"});
 
 	public String getCellStringValue(Cell cell) {
 		if (null != cell) {

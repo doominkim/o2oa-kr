@@ -34,9 +34,9 @@ public class ImportRecordItem extends SliceJpaObject {
 
 	private static final String TABLE = PersistenceProperties.Import.ImportRecordItem.table;
 
-	public static final String STATUS_SUCCESS = "导入成功";
+	public static final String STATUS_SUCCESS = "가져오기 성공";
 
-	public static final String STATUS_FAILED = "导入失败";
+	public static final String STATUS_FAILED = "가져오기 실패";
 
 	public String getId() {
 		return id;

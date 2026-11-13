@@ -46,7 +46,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<BBSSectionInfo> cq = cb.createQuery(BBSSectionInfo.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.mainSectionName ), mainSectionName );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "主版块" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "상위 섹션" ));
 		cq.orderBy( cb.asc( root.get( BBSSectionInfo_.orderNumber ) ) );
 		return em.createQuery(cq.where(p)).getResultList();
 	}
@@ -85,7 +85,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<BBSSectionInfo> cq = cb.createQuery(BBSSectionInfo.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.forumId ), forumId );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "主版块" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "상위 섹션" ));
 		cq.orderBy( cb.asc( root.get( BBSSectionInfo_.orderNumber ) ) );
 		return em.createQuery(cq.where(p)).getResultList();
 	}
@@ -100,7 +100,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<BBSSectionInfo> cq = cb.createQuery(BBSSectionInfo.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.mainSectionId ), sectionId );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "子版块" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "하위 섹션" ));
 		cq.orderBy( cb.asc( root.get( BBSSectionInfo_.orderNumber ) ) );
 		return em.createQuery(cq.where(p)).getResultList();
 	}
@@ -115,7 +115,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery( String.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.mainSectionId ), sectionId );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "子版块" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "하위 섹션" ));
 		cq.select( root.get( BBSSectionInfo_.id ) );
 		return em.createQuery(cq.where(p)).getResultList();
 	}
@@ -127,7 +127,7 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<BBSSectionInfo> root = cq.from( BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.forumId ), forumId );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "主版块" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "상위 섹션" ));
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
@@ -150,8 +150,8 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<BBSSectionInfo> root = cq.from( BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.mainSectionId ), sectionId );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "启用" ));
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "子版块" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "사용" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "하위 섹션" ));
 		cq.select( cb.count( root ) );
 		return em.createQuery(cq.where(p)).getSingleResult();
 	}
@@ -193,9 +193,9 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<BBSSectionInfo> cq = cb.createQuery(BBSSectionInfo.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.forumId ), forumId );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "主版块" ));
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "启用" ));
-		Predicate or = cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "所有人" );
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "상위 섹션" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "사용" ));
+		Predicate or = cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "모든 사용자" );
 		if( ListTools.isNotEmpty( viewableSectionIds ) ){
 			or = cb.or(p, root.get( BBSSectionInfo_.id ).in( viewableSectionIds ) );
 		}
@@ -214,9 +214,9 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<BBSSectionInfo> cq = cb.createQuery(BBSSectionInfo.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
 		Predicate p = cb.equal( root.get( BBSSectionInfo_.mainSectionId ), sectionId );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "子版块" ));
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "启用" ));
-		Predicate or = cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "所有人" );
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "하위 섹션" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "사용" ));
+		Predicate or = cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "모든 사용자" );
 		if( ListTools.isNotEmpty( viewableSectionIds ) ){
 			or = cb.or(p, root.get( BBSSectionInfo_.id ).in( viewableSectionIds ) );
 		}
@@ -231,9 +231,9 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
-		Predicate p = cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "主版块" );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "所有人" ));
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "启用" ));
+		Predicate p = cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "상위 섹션" );
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "모든 사용자" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "사용" ));
 		if( ListTools.isNotEmpty( forumIds ) ){
 			p = cb.and(p, root.get( BBSSectionInfo_.forumId ).in( forumIds ));
 		}
@@ -247,9 +247,9 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
-		Predicate p = cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "子版块" );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "所有人" ));
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "启用" ));
+		Predicate p = cb.equal( root.get( BBSSectionInfo_.sectionLevel ), "하위 섹션" );
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "모든 사용자" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "사용" ));
 		if( ListTools.isNotEmpty( forumIds ) ){
 			p = cb.and(p, root.get( BBSSectionInfo_.forumId ).in( forumIds ));
 		}
@@ -270,9 +270,9 @@ public class BBSSectionInfoFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<BBSSectionInfo> root = cq.from(BBSSectionInfo.class);
 		Predicate p = root.get( BBSSectionInfo_.forumId ).in( viewforumIds );
-		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "启用" ));
+		p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionStatus ), "사용" ));
 		if( BooleanUtils.isTrue(publicStatus) ){
-			p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "所有人" ));
+			p = cb.and(p, cb.equal( root.get( BBSSectionInfo_.sectionVisible ), "모든 사용자" ));
 		}
 		cq.select( root.get( BBSSectionInfo_.id ) );
 		return em.createQuery(cq.where(p)).getResultList();

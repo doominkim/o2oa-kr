@@ -46,14 +46,14 @@ public class ActionQueryListPrevWithFilter extends BaseAction {
 			wi = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionDocumentInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+			Exception exception = new ExceptionDocumentInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
 		if ( wi == null ) { wi = new Wi(); }
 
 		if( StringUtils.isEmpty( wi.getDocumentType() )) {
-			wi.setDocumentType( "信息" );
+			wi.setDocumentType( "정보" );
 		}
 
 		if( StringUtils.isEmpty( wi.getOrderField() )) {
@@ -75,7 +75,7 @@ public class ActionQueryListPrevWithFilter extends BaseAction {
 				queryFilter = wi.getQueryFilter();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统在获取查询条件信息时发生异常。");
+				Exception exception = new ExceptionDocumentInfoProcess(e, "조회 조건 정보를 가져오는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -235,7 +235,7 @@ public class ActionQueryListPrevWithFilter extends BaseAction {
 							}
 						} catch (Exception e) {
 							check = false;
-							Exception exception = new ExceptionDocumentInfoProcess(e, "系统获取文档数据内容信息时发生异常。Id:" + document.getCategoryId());
+							Exception exception = new ExceptionDocumentInfoProcess(e, "문서 데이터 내용을 가져오는 중 오류가 발생했습니다. Id:" + document.getCategoryId());
 							result.error(exception);
 							logger.error(e, effectivePerson, request, null);
 						}

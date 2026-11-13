@@ -18,7 +18,7 @@ public class ActionPersistArchive extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( ActionPersistArchive.class );
 
-	@AuditLog(operation = "文档归档")
+	@AuditLog(operation = "문서 보관")
 	protected ActionResult<Wo> execute( HttpServletRequest request, String id, EffectivePerson effectivePerson ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
@@ -35,13 +35,13 @@ public class ActionPersistArchive extends BaseAction {
 				document = documentPersistService.refreshDocInfoData( document );
 				CacheManager.notify( Document.class );
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess( e, "系统将文档状态修改为归档状态时发生异常。Id:" + id );
+				Exception exception = new ExceptionDocumentInfoProcess( e, "문서 상태를 보관으로 변경하는 중 오류가 발생했습니다. Id:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 				throw exception;
 			}
 
-			logService.log( emc, effectivePerson.getDistinguishedName(), document.getCategoryAlias() + ":" + document.getTitle(), document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "归档" );
+			logService.log( emc, effectivePerson.getDistinguishedName(), document.getCategoryAlias() + ":" + document.getTitle(), document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "보관" );
 
 			try {
 				documentPersistService.refreshDocumentPermission( id, null, null );
@@ -55,7 +55,7 @@ public class ActionPersistArchive extends BaseAction {
 			wo.setId( document.getId() );
 			result.setData( wo );
 		} catch (Exception e) {
-			Exception exception = new ExceptionDocumentInfoProcess( e, "系统将文档状态修改为归档状态时发生异常。Id:" + id );
+			Exception exception = new ExceptionDocumentInfoProcess( e, "문서 상태를 보관으로 변경하는 중 오류가 발생했습니다. Id:" + id );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 			throw exception;

@@ -69,7 +69,7 @@ MWF.xApplication.Attendance.AppSetting = new Class({
             "    <td styles='formTableValue' item='APPEAL_AUDIFLOWTYPE'></td>"+
             "<tr item='AUDITOR_TYPE' style='display:"+ (d.APPEAL_AUDIFLOWTYPE == "WORKFLOW" ? "none" : "") +"'><td styles='formTableTitle' lable='APPEAL_AUDITOR_TYPE'></td>"+
             "    <td styles='formTableValue' item='APPEAL_AUDITOR_TYPE'></td>"+
-            "<tr item='valueArea' style='display:"+ (d.APPEAL_AUDITOR_TYPE == lp.reportTo || d.APPEAL_AUDITOR_TYPE == "汇报对象" || d.APPEAL_AUDIFLOWTYPE == "WORKFLOW" ? "none" : "") +"' ><td styles='formTableTitle' lable='APPEAL_AUDITOR_VALUE'></td>"+
+            "<tr item='valueArea' style='display:"+ (d.APPEAL_AUDITOR_TYPE == lp.reportTo || d.APPEAL_AUDITOR_TYPE == "보고 대상" || d.APPEAL_AUDIFLOWTYPE == "WORKFLOW" ? "none" : "") +"' ><td styles='formTableTitle' lable='APPEAL_AUDITOR_VALUE'></td>"+
             "    <td styles='formTableValue' style='width: 60%' item='APPEAL_AUDITOR_VALUE'></td>" +
             "<tr item='AUDIFLOW' style='display:"+ (d.APPEAL_AUDIFLOWTYPE == "BUILTIN" ? "none" : "") +"'><td styles='formTableTitle' lable='APPEAL_AUDIFLOW_ID'></td>" +
             "    <td styles='formTableValue' style='width: 60%' item='APPEAL_AUDIFLOW_ID'></td>" +
@@ -107,7 +107,7 @@ MWF.xApplication.Attendance.AppSetting = new Class({
                 selectValue : this.dataJson.APPEAL_AUDITOR_TYPE.selectContent.split("|"), //["사용자 속성","소속 부서 직위","지정 사용자","보고 대상"],
                 event : {
                     change : function( item, ev ){
-                        this.formTableArea.getElement("[item='valueArea']").setStyle( "display" , (item.getValue() == "汇报对象" || item.getValue() == lp.reportTo) ? "none" : "" );
+                        this.formTableArea.getElement("[item='valueArea']").setStyle( "display" , (item.getValue() == "보고 대상" || item.getValue() == lp.reportTo) ? "none" : "" );
                     }.bind(this)
                 }
             },
@@ -121,7 +121,7 @@ MWF.xApplication.Attendance.AppSetting = new Class({
                 orgType: ["process"],
                 count : 1,
                 isEdited : this.isEdited || this.isNew,
-                value : (!d.APPEAL_AUDIFLOW_ID||d.APPEAL_AUDIFLOW_ID== lp.none || d.APPEAL_AUDIFLOW_ID=="无") ?"":d.APPEAL_AUDIFLOW_ID,
+                value : (!d.APPEAL_AUDIFLOW_ID||d.APPEAL_AUDIFLOW_ID== lp.none || d.APPEAL_AUDIFLOW_ID=="없음") ?"":d.APPEAL_AUDIFLOW_ID,
                 defaultValue : "",
                 orgWidgetOptions : {
                     "lazy": false,
@@ -178,7 +178,7 @@ MWF.xApplication.Attendance.AppSetting = new Class({
         var data = this.document.getResult(true,",",true,false,false);
         if(data){
             var APPEAL_AUDIFLOW_ID = data.APPEAL_AUDIFLOW_ID;
-            if(!!APPEAL_AUDIFLOW_ID &&APPEAL_AUDIFLOW_ID!=this.app.lp.none &&APPEAL_AUDIFLOW_ID!="无"&&APPEAL_AUDIFLOW_ID!=""&&!!this.document.items.APPEAL_AUDIFLOW_ID.orgObject){
+            if(!!APPEAL_AUDIFLOW_ID &&APPEAL_AUDIFLOW_ID!=this.app.lp.none &&APPEAL_AUDIFLOW_ID!="없음"&&APPEAL_AUDIFLOW_ID!=""&&!!this.document.items.APPEAL_AUDIFLOW_ID.orgObject){
                 data.APPEAL_AUDIFLOW_ID = this.document.items.APPEAL_AUDIFLOW_ID.orgObject[0].data.id;
             }
             var arr = this.encodeData( this.data, data );

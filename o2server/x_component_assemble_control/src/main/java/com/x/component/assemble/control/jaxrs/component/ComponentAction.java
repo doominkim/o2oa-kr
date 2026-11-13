@@ -37,9 +37,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ComponentAction", description = "组件接口.")
+@Tag(name = "ComponentAction", description = "컴포넌트 인터페이스.")
 @Path("component")
-@JaxrsDescribe(value = "组件接口.", scope = DescribeScope.system)
+@JaxrsDescribe(value = "컴포넌트 인터페이스.", scope = DescribeScope.system)
 public class ComponentAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ComponentAction.class);

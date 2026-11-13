@@ -47,8 +47,8 @@ public class BaseAction extends StandardJaxrsAction{
 		@FieldDescribe("기록 시간: HH:mi:ss.")
 		private String signTime = null;
 
-		@FieldDescribe("打卡操作名称：上班打卡|下班打卡|午休打卡|上午下班打卡|下午上班打卡(根据不同的打卡策略稍有不同)....")
-		private String checkinType = "上班打卡";
+		@FieldDescribe("체크 작업 이름: 출근 체크|퇴근 체크|점심 체크|오전 퇴근 체크|오후 출근 체크(체크 정책에 따라 다소 다름)....")
+		private String checkinType = "출근 체크";
 
 		@FieldDescribe("최종 기록 시간")
 		private Date latestSignTime;
@@ -325,13 +325,13 @@ public class BaseAction extends StandardJaxrsAction{
 
 	public static class SignRecordStatus {
 
-		@FieldDescribe("是否上午上班打卡过了ONDUTY")
+		@FieldDescribe("오전 출근 체크 여부 ONDUTY")
 		private Boolean alreadyOnduty = false;
 
 		@FieldDescribe("오전 퇴근 기록 MORNING_OFFDUTY 여부.")
 		private Boolean alreadyMorningOffDuty = false;
 
-		@FieldDescribe("是否下午上班打卡过了AFTERNOON_ONDUTY")
+		@FieldDescribe("오후 출근 체크 여부 AFTERNOON_ONDUTY")
 		private Boolean alreadyAfternoonOnDuty = false;
 
 		@FieldDescribe("오후 퇴근 기록 OFFDUTY 여부.")

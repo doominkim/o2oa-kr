@@ -151,94 +151,94 @@ public class ActionControl extends ActionBase {
 
 	private static Option osOption() {
 		return Option.builder(CMD_OS).longOpt("operatingSystem").argName("repeat").numberOfArgs(1).optionalArg(true)
-				.hasArgs().desc("显示操作系统信息,间隔2秒.").build();
+				.hasArgs().desc("운영체제 정보 표시, 2초 간격.").build();
 	}
 
 	private static Option hsOption() {
 		return Option.builder(CMD_HS).longOpt("httpStatus").argName("repeat").optionalArg(true).hasArgs()
-				.desc("Http服务线程状态,间隔5秒.").build();
+				.desc("HTTP 서비스 스레드 상태, 5초 간격.").build();
 	}
 
 	private static Option hdOption() {
-		return Option.builder(CMD_HD).longOpt("heapDump").hasArg(false).desc("生成堆转储文件.").build();
+		return Option.builder(CMD_HD).longOpt("heapDump").hasArg(false).desc("힙 덤프 파일 생성.").build();
 	}
 
 	private static Option cdfOption() {
-		return Option.builder(CMD_CDF).longOpt("cleanDiscardFile").hasArg(false).desc("清楚废弃的附件数据.").build();
+		return Option.builder(CMD_CDF).longOpt("cleanDiscardFile").hasArg(false).desc("폐기된 첨부파일 데이터 정리.").build();
 	}
 
 	private static Option tdOption() {
-		return Option.builder(CMD_TD).longOpt("threadDump").hasArg(false).desc("生成线程转储文件.").build();
+		return Option.builder(CMD_TD).longOpt("threadDump").hasArg(false).desc("스레드 덤프 파일 생성.").build();
 	}
 
 	private static Option ecOption() {
 		return Option.builder(CMD_EC).longOpt("eraseContent").argName("type").hasArg().optionalArg(false)
-				.desc("清空实例数据,保留设计数据,type可选值: bbs,cms,log,processPlatform,message,org或者实体类名.").build();
+				.desc("인스턴스 데이터를 비우고 설계 데이터는 유지, type 선택값: bbs,cms,log,processPlatform,message,org 또는 엔티티 클래스 이름.").build();
 	}
 
 	private static Option clh2Option() {
-		return Option.builder(CMD_CLH2).longOpt("compactLocalH2").desc("压缩本地H2数据库.").build();
+		return Option.builder(CMD_CLH2).longOpt("compactLocalH2").desc("로컬 H2 데이터베이스 압축.").build();
 	}
 
 	private static Option ddOption() {
 		return Option.builder(CMD_DD).longOpt("dumpData").argName("path").hasArg().optionalArg(true)
-				.desc("导出数据库服务器的数据转换成json格式保存到本地文件.").build();
+				.desc("데이터베이스 서버의 데이터를 json 형식으로 변환해 로컬 파일로 저장.").build();
 	}
 
 	private static Option rdOption() {
 		return Option.builder(CMD_RD).longOpt("restoreData").argName("path or date").hasArg()
-				.desc("将导出的json格式数据恢复到数据库服务器.").build();
+				.desc("내보낸 json 형식 데이터를 데이터베이스 서버로 복원.").build();
 	}
 
 	private static Option ufOption() {
-		return Option.builder(CMD_UF).longOpt("updateFile").argName("path").hasArg().desc("升级服务器,升级前请注意备份.").build();
+		return Option.builder(CMD_UF).longOpt("updateFile").argName("path").hasArg().desc("서버 업그레이드, 업그레이드 전에 백업하세요.").build();
 	}
 
 	private static Option hostOption() {
-		return Option.builder(CMD_HOST).longOpt("host").hasArg(false).desc("生成机器码.").build();
+		return Option.builder(CMD_HOST).longOpt("host").hasArg(false).desc("머신 코드 생성.").build();
 	}
 
 	private static Option ddlOption() {
 		return Option.builder(CMD_DDL).longOpt("DataDefinitionLanguage").argName("type").hasArg()
-				.desc("导出数据定义语句:建表语句:build,数据库创建:createDB,数据库删除dropDB.").build();
+				.desc("데이터 정의문 내보내기: 테이블 생성문: build, 데이터베이스 생성: createDB, 데이터베이스 삭제: dropDB.").build();
 	}
 
 	private static Option rstOption() {
 		return Option.builder(CMD_RST).longOpt("restartApplication").argName("name").hasArg()
-				.desc("重启指定应用: 应用名称:name, 不带.war").build();
+				.desc("지정 앱 재시작: 앱 이름: name, .war 제외").build();
 	}
 
 	private static Option scOption() {
-		return Option.builder(CMD_SC).longOpt("showCluster").desc("显示集群信息.").build();
+		return Option.builder(CMD_SC).longOpt("showCluster").desc("클러스터 정보 표시.").build();
 	}
 
 	private static Option enOption() {
 		return Option.builder(CMD_EN).longOpt("encrypt password text.").argName("text").numberOfArgs(1).hasArg()
-				.desc("密码文本加密.").build();
+				.desc("비밀번호 텍스트 암호화.").build();
 	}
 
 	private static Option deOption() {
 		return Option.builder(CMD_DE).longOpt("decrypt password text.").argName("text").numberOfArgs(1).hasArg()
-				.desc("密码文本解密.").hasArg().build();
+				.desc("비밀번호 텍스트 복호화.").hasArg().build();
 	}
 
 	private static Option gcOption() {
-		return Option.builder(CMD_GC).longOpt("jvm garbage collection").hasArg(false).desc("垃圾收集.").build();
+		return Option.builder(CMD_GC).longOpt("jvm garbage collection").hasArg(false).desc("가비지 컬렉션.").build();
 	}
 
 	private static Option initResourceFactoryOption() {
-		return Option.builder(CMD_INITRESOURCEFACTORY).longOpt("init resource factory").hasArg(false).desc("初始资源工厂.")
+		return Option.builder(CMD_INITRESOURCEFACTORY).longOpt("init resource factory").hasArg(false).desc("리소스 팩토리 초기화.")
 				.build();
 	}
 
 	private static Option flushConfigOption() {
 		return Option.builder(CMD_FLUSHCONFIG).longOpt("flush config").hasArg(false)
-				.desc("重置Config对象,不更新externalDataSources,externalStorageSources.").build();
+				.desc("Config 객체 초기화, externalDataSources·externalStorageSources는 갱신하지 않음.").build();
 	}
 
 	private static Option regenerateConfigOption() {
 		return Option.builder(CMD_REGENERATECONFIG).longOpt("regenerate config").hasArg(false)
-				.desc("重新生成Config对象,销毁所有配置对象.").build();
+				.desc("Config 객체를 다시 만들고 모든 설정 객체를 폐기.").build();
 	}
 
 	private void ec(CommandLine cmd) throws Exception {

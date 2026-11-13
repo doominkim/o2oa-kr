@@ -311,7 +311,7 @@ MWF.xApplication.cms.Index.Newer = new Class({
     },
     isIgnoreTitle : function(){
         if( this.options.ignoreTitle )return true;
-        return this.categoryData && ( ![this.lp.documentTypeInfor, "信息"].contains(this.categoryData.documentType));
+        return this.categoryData && ( ![this.lp.documentTypeInfor, "정보"].contains(this.categoryData.documentType));
     },
     checkSubject: function(){
         if( this.categoryData ){

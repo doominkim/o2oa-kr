@@ -24,9 +24,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "EchoAction", description = "应用响应接口.")
+@Tag(name = "EchoAction", description = "앱 응답 인터페이스.")
 @Path("echo")
-@JaxrsDescribe(value = "应用响应接口.", scope = DescribeScope.system)
+@JaxrsDescribe(value = "앱 응답 인터페이스.", scope = DescribeScope.system)
 public class EchoAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "EchoAction::";

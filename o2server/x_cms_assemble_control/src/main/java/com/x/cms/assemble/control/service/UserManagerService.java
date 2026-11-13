@@ -98,10 +98,10 @@ public class UserManagerService {
 			business = new Business(emc);
 			return business.organization().unit().getWithIdentity(identity);
 		} catch (NullPointerException e) {
-			System.out.println("根据身份获取所属组织名称时发生NullPointerException异常。identity：" + identity);
+			System.out.println("신분으로 소속 조직 이름을 조회하는 중 NullPointerException이 발생했습니다. identity: " + identity);
 			return null;
 		} catch (Exception e) {
-			System.out.println("根据身份获取所属组织名称时发生异常。identity：" + identity);
+			System.out.println("신분으로 소속 조직 이름을 조회하는 중 오류가 발생했습니다. identity: " + identity);
 			throw e;
 		}
 	}

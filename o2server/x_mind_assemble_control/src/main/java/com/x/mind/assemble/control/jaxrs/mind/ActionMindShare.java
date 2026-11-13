@@ -33,7 +33,7 @@ public class ActionMindShare extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionMindShare.class );
 
-	@AuditLog(operation = "分享脑图文件")
+	@AuditLog(operation = "마인드맵 파일 공유")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String mindId, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();
@@ -81,7 +81,7 @@ public class ActionMindShare extends BaseAction {
 				mindShareRecord = new MindShareRecord();
 				mindShareRecord.setSource( effectivePerson.getDistinguishedName() );
 				mindShareRecord.setFileId( mindBaseInfo.getId() );
-				mindShareRecord.setFileStatus( "正常" );
+				mindShareRecord.setFileStatus( "정상" );
 				mindShareRecord.setFileType("MIND");
 				mindShareRecord.setName( mindBaseInfo.getName() );
 				mindShareRecord.setId( MindShareRecord.createId() );
@@ -94,7 +94,7 @@ public class ActionMindShare extends BaseAction {
 				mindShareRecord = new MindShareRecord();
 				mindShareRecord.setSource( effectivePerson.getDistinguishedName() );
 				mindShareRecord.setFileId( mindBaseInfo.getId() );
-				mindShareRecord.setFileStatus( "正常" );
+				mindShareRecord.setFileStatus( "정상" );
 				mindShareRecord.setFileType("MIND");
 				mindShareRecord.setName( mindBaseInfo.getName() );
 				mindShareRecord.setId( MindShareRecord.createId() );
@@ -107,7 +107,7 @@ public class ActionMindShare extends BaseAction {
 				mindShareRecord = new MindShareRecord();
 				mindShareRecord.setSource( effectivePerson.getDistinguishedName() );
 				mindShareRecord.setFileId( mindBaseInfo.getId() );
-				mindShareRecord.setFileStatus( "正常" );
+				mindShareRecord.setFileStatus( "정상" );
 				mindShareRecord.setFileType("MIND");
 				mindShareRecord.setName( mindBaseInfo.getName() );
 				mindShareRecord.setId( MindShareRecord.createId() );

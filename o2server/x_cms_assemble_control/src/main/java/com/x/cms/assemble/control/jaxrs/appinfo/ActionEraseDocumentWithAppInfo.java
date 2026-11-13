@@ -30,7 +30,7 @@ public class ActionEraseDocumentWithAppInfo extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionEraseDocumentWithAppInfo.class);
 
-	@AuditLog(operation = "删除栏目下所有的文档")
+	@AuditLog(operation = "게시판의 모든 문서 삭제")
 	protected ActionResult<Wo> execute(HttpServletRequest request, String id, EffectivePerson effectivePerson) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		AppInfo appInfo = null;

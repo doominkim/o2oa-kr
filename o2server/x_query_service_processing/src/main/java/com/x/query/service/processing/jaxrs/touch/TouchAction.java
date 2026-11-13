@@ -29,8 +29,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Path("touch")
-@Tag(name = "TouchAction", description = "触发任务.")
-@JaxrsDescribe("触发任务.")
+@Tag(name = "TouchAction", description = "작업 실행.")
+@JaxrsDescribe("작업 실행.")
 public class TouchAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TouchAction.class);

@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 @OpenAPIDefinition(servers = {
-		@Server(url = "../../x_component_assemble_control", description = "current server.") }, info = @Info(title = "组件服务.", version = Version.VALUE, description = "o2server x_component_assemble_control interface", license = @License(name = "AGPL-3.0", url = "https://www.o2oa.net/license.html"), contact = @Contact(url = "https://www.o2oa.net", name = "o2oa", email = "admin@o2oa.net")))
+		@Server(url = "../../x_component_assemble_control", description = "current server.") }, info = @Info(title = "컴포넌트 서비스.", version = Version.VALUE, description = "o2server x_component_assemble_control interface", license = @License(name = "AGPL-3.0", url = "https://www.o2oa.net/license.html"), contact = @Contact(url = "https://www.o2oa.net", name = "o2oa", email = "admin@o2oa.net")))
 @ApplicationPath("jaxrs")
 public class ActionApplication extends AbstractActionApplication {
 

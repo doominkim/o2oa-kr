@@ -998,19 +998,19 @@ MWF.xApplication.Attendance.MyIndex = new Class({
     isAskForLevel : function( d , ap ){
         if( ap == "am" ){
             //d.selfHolidayDayTime == "종일" || d.selfHolidayDayTime == "오전"
-            return  d.isGetSelfHolidays && ( ["全天","上午",this.app.lp.wholeDay, this.app.lp.am ].contains(d.selfHolidayDayTime) )
+            return  d.isGetSelfHolidays && ( ["종일","오전",this.app.lp.wholeDay, this.app.lp.am ].contains(d.selfHolidayDayTime) )
         }else{
             // return  d.isGetSelfHolidays && ( d.selfHolidayDayTime == "종일" || d.selfHolidayDayTime == "오후" )
-            return  d.isGetSelfHolidays && ( ["全天","下午",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.selfHolidayDayTime ) )
+            return  d.isGetSelfHolidays && ( ["종일","오후",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.selfHolidayDayTime ) )
         }
     },
     isAbsent : function(d , ap ){
         if( ap == "am" ){
             // return  d.isAbsent && ( d.absentDayTime == "종일" || d.absentDayTime == "오전" )
-            return  d.isAbsent && ["全天","上午",this.app.lp.wholeDay, this.app.lp.am ].contains(d.absentDayTime);
+            return  d.isAbsent && ["종일","오전",this.app.lp.wholeDay, this.app.lp.am ].contains(d.absentDayTime);
         }else{
             // return  d.isAbsent && ( d.absentDayTime == "종일" || d.absentDayTime == "오후" )
-            return  d.isAbsent && ["全天","下午",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.absentDayTime);
+            return  d.isAbsent && ["종일","오후",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.absentDayTime);
         }
     },
     isLate : function(d, ap ){
@@ -1028,9 +1028,9 @@ MWF.xApplication.Attendance.MyIndex = new Class({
     isAbnormalDuty : function(d , ap ){
         if( ap == "am" ){
             // return  d.isAbnormalDuty && ( d.abnormalDutyDayTime == "종일" || d.abnormalDutyDayTime == "오전" )
-            return  d.isAbnormalDuty && ["全天","上午",this.app.lp.wholeDay, this.app.lp.am ].contains(d.abnormalDutyDayTime)
+            return  d.isAbnormalDuty && ["종일","오전",this.app.lp.wholeDay, this.app.lp.am ].contains(d.abnormalDutyDayTime)
         }else{
-            return  d.isAbnormalDuty && ["全天","下午",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.abnormalDutyDayTime);
+            return  d.isAbnormalDuty && ["종일","오후",this.app.lp.wholeDay, this.app.lp.pm ].contains(d.abnormalDutyDayTime);
         }
     },
     isHoliday : function( d, ap ){

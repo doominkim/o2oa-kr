@@ -31,9 +31,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "CacheAction", description = "缓存操作接口.")
+@Tag(name = "CacheAction", description = "캐시 작업 인터페이스.")
 @Path("cache")
-@JaxrsDescribe(value = "缓存操作接口", scope = DescribeScope.system)
+@JaxrsDescribe(value = "캐시 작업 인터페이스", scope = DescribeScope.system)
 public class CacheAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(CacheAction.class);

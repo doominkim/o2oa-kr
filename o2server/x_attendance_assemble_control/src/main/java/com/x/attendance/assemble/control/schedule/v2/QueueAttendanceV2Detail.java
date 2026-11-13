@@ -409,7 +409,7 @@ public class QueueAttendanceV2Detail extends AbstractQueue<QueueAttendanceV2Deta
     private void updateRecord2NoCheckIn(EntityManagerContainer emc, AttendanceV2CheckInRecord record) throws Exception {
         record.setCheckInResult(AttendanceV2CheckInRecord.CHECKIN_RESULT_NotSigned);
         record.setSourceType(AttendanceV2CheckInRecord.SOURCE_TYPE_AUTO_CHECK);
-        record.setSourceDevice("其他");
+        record.setSourceDevice("기타");
         record.setDescription("시스템 생성, 미체크 기록");
         emc.beginTransaction(AttendanceV2CheckInRecord.class);
         emc.persist(record, CheckPersistType.all);
@@ -459,7 +459,7 @@ public class QueueAttendanceV2Detail extends AbstractQueue<QueueAttendanceV2Deta
         noCheckRecord.setPreDutyTimeBeforeLimit(dutyTimeBeforeLimit);
         noCheckRecord.setPreDutyTimeAfterLimit(dutyTimeAfterLimit);
         noCheckRecord.setSourceType(AttendanceV2CheckInRecord.SOURCE_TYPE_AUTO_CHECK);
-        noCheckRecord.setSourceDevice("其他");
+        noCheckRecord.setSourceDevice("기타");
         noCheckRecord.setDescription("시스템 생성, 미체크 기록");
         noCheckRecord.setGroupId(group.getId());
         noCheckRecord.setGroupName(group.getGroupName());

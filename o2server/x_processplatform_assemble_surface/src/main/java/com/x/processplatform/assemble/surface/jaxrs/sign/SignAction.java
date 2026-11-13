@@ -29,9 +29,9 @@ import com.x.base.core.project.logger.LoggerFactory;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "SignAction", description = "文档签批接口.")
+@Tag(name = "SignAction", description = "문서 서명 인터페이스.")
 @Path("sign")
-@JaxrsDescribe("文档签批接口.")
+@JaxrsDescribe("문서 서명 인터페이스.")
 public class SignAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(SignAction.class);

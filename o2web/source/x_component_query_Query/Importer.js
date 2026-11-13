@@ -1301,11 +1301,11 @@ MWF.xApplication.query.Query.Importer.Row = new Class({
             if( json.type === "cms" ){
                 if( columnJson.isName ) {
                     if (columnJson.isAuthor) {
-                        array = this.parseCMSReadAndAuthor(data, "作者");
+                        array = this.parseCMSReadAndAuthor(data, "작성자");
                         this.document.authorList = this.document.authorList.concat(array)
                     }
                     if (columnJson.isReader) {
-                        array = this.parseCMSReadAndAuthor(data, "阅读");
+                        array = this.parseCMSReadAndAuthor(data, "열람");
                         this.document.readerList = this.document.readerList.concat(array)
                     }
                 }
@@ -1371,11 +1371,11 @@ MWF.xApplication.query.Query.Importer.Row = new Class({
 
                 if( json.type === "cms" ){
                     if( fieldJson.isAuthor ){
-                        var array = this.parseCMSReadAndAuthor( data, "作者" );
+                        var array = this.parseCMSReadAndAuthor( data, "작성자" );
                         this.document.authorList = this.document.authorList.concat( array )
                     }
                     if( fieldJson.isReader ){
-                        var array = this.parseCMSReadAndAuthor( data, "阅读" );
+                        var array = this.parseCMSReadAndAuthor( data, "열람" );
                         this.document.readerList = this.document.readerList.concat( array )
                     }
 
@@ -1574,7 +1574,7 @@ MWF.xApplication.query.Query.Importer.Row = new Class({
         return string.toInt().toString() === string;
     },
     parseCMSReadAndAuthor : function( data, t ){
-        var cnArray = ["组织","群组","人员","人员","角色"];
+        var cnArray = ["조직","그룹","사용자","사용자","역할"];
         var keyArray = ["U","G","I","P","R"];
         if( typeOf(data) !== "array" )data = [data];
         return data.map( function( d ){
@@ -1771,10 +1771,10 @@ MWF.xApplication.query.Query.Importer.ProgressBar = new Class({
             this.actions.getImportModelRecordStatus( this.recordId, function( json ){
                 var data = json.data;
                 this.status = data.status;
-                if( data.status === "待导入" ) { //다른 사용자가 가져오기 중이거나 이전 가져오기가 아직 완료되지 않았습니다
+                if( data.status === "가져오기 대기" ) { //다른 사용자가 가져오기 중이거나 이전 가져오기가 아직 완료되지 않았습니다
                     this.setMessageTitle(this.lp.importWaitingTitle);
                     this.setMessageText(this.lp.importWaitingContent);
-                }else if( data.status === "导入中" ){ //가져오기 중
+                }else if( data.status === "가져오는 중" ){ //가져오기 중
                     this.setMessageTitle( this.lp.importDataTitle );
                     this.setMessageText( this.lp.importDataContent.replace( "{count}", data.executeCount));
                     this.updateProgress( data );
@@ -1867,7 +1867,7 @@ MWF.xApplication.query.Query.Importer.ProgressBar = new Class({
             timeStr = ""+s.toInt()+lp.second;
         }
 
-        if( data.status === "导入成功" ){
+        if( data.status === "가져오기 성공" ){
             var size = data.count;
             var speed = (size * 1000)/ms ;
             var u = lp.importSpeed;
@@ -1876,7 +1876,7 @@ MWF.xApplication.query.Query.Importer.ProgressBar = new Class({
             this.setMessageTitle( lp.importSuccessTitle );
             var text = lp.importSuccessContent.replace("{total}",size).replace("{speed}",speed).replace("{timeStr}",timeStr);
             this.setMessageText( text );
-        }else if(data.status === "部分成功"){
+        }else if(data.status === "일부 가져오기 성공"){
             var size = data.count;
             var speed = (size * 1000)/ms ;
             var u = lp.importSpeed;

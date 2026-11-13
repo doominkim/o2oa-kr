@@ -17,7 +17,7 @@ public class ActionPersistTopDocument extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionPersistTopDocument.class);
 
-	@AuditLog(operation = "文档置顶")
+	@AuditLog(operation = "문서 상단 고정")
 	protected ActionResult<Wo> execute(HttpServletRequest request, String id, EffectivePerson effectivePerson ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Document document = null;
@@ -48,7 +48,7 @@ public class ActionPersistTopDocument extends BaseAction {
 				wo.setId( document.getId() );
 				result.setData( wo );				
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "文档置顶时发生异常。Id:" + id);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "문서를 상단 고정하는 중 오류가 발생했습니다. Id:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 				throw exception;
@@ -58,7 +58,7 @@ public class ActionPersistTopDocument extends BaseAction {
 		if (check) {
 			new CmsBatchOperationPersistService().addOperation( 
 					CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT, 
-					CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  document.getId(),  document.getId(), "刷新文档权限：ID=" +  document.getId() );
+					CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  document.getId(),  document.getId(), "문서 권한 갱신: ID=" +  document.getId() );
 		}
 
 		CacheManager.notify( Document.class );

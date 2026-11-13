@@ -44,7 +44,7 @@ public class Invoke extends SliceJpaObject {
 
 	private static final long serialVersionUID = 8877822163007579542L;
 	private static final String TABLE = PersistenceProperties.Invoke.TABLE;
-	public static final String CATEGORY_DEFAULT = "未分类";
+	public static final String CATEGORY_DEFAULT = "미분류";
 
 	@Override
 	public String getId() {

@@ -22,7 +22,7 @@ public class ActionMindRecycle extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionMindRecycle.class );
 
-	@AuditLog(operation = "将脑图文件放入回收站")
+	@AuditLog(operation = "마인드맵 파일을 휴지통으로 이동")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String mindId ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();

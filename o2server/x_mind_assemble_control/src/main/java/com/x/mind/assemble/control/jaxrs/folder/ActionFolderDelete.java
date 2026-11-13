@@ -22,7 +22,7 @@ public class ActionFolderDelete extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionFolderDelete.class );
 
-	@AuditLog(operation = "删除文件目录")
+	@AuditLog(operation = "폴더 삭제")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String folderId ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();

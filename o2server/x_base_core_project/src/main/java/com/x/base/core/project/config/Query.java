@@ -270,7 +270,7 @@ public class Query extends ConfigObject {
 
         public static final String DEFAULT_CREATORUNITUNKNOWN = UNKNOWN;
         public static final String DEFAULT_CREATORPERSONUNKNOWN = UNKNOWN;
-        public static final String DEFAULT_CREATORPERSONCIPHER = "系统服务";
+        public static final String DEFAULT_CREATORPERSONCIPHER = "시스템 서비스";
 
         @FieldDescribe("사용 여부.")
         @Schema(description = "사용 여부.")

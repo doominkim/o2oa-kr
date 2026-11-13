@@ -145,7 +145,7 @@ public class CategoryInfoService {
 		categoryExt = emc.find( object.getId(), CategoryExt.class );
 		appInfo = emc.find( object.getAppId(), AppInfo.class );
 
-		if( appInfo == null ){ throw new Exception("应用栏目信息不存在！"); }
+		if( appInfo == null ){ throw new Exception("게시판 정보가 없습니다!"); }
 
 		//기본 목록 이름 보충
 		if ( StringUtils.isNotEmpty( object.getDefaultViewId() ) ) {
@@ -181,8 +181,8 @@ public class CategoryInfoService {
 			if( StringUtils.isEmpty( categoryInfo.getDocumentType() ) ) {
 				categoryInfo.setDocumentType( appInfo.getDocumentType() );
 			}
-			if( !"信息".equals(categoryInfo.getDocumentType()) && !"数据".equals( categoryInfo.getDocumentType() )) {
-				categoryInfo.setDocumentType( "信息" );
+			if( !"정보".equals(categoryInfo.getDocumentType()) && !"데이터".equals( categoryInfo.getDocumentType() )) {
+				categoryInfo.setDocumentType( "정보" );
 			}
 			if( categoryInfo.getCreateTime() == null ) {
 				categoryInfo.setCreateTime(new Date());
@@ -202,8 +202,8 @@ public class CategoryInfoService {
 			if( StringUtils.isEmpty( categoryInfo.getDocumentType() ) ) {
 				categoryInfo.setDocumentType( appInfo.getDocumentType() );
 			}
-			if( !"信息".equals(categoryInfo.getDocumentType()) && !"数据".equals( categoryInfo.getDocumentType() )) {
-				categoryInfo.setDocumentType( "信息" );
+			if( !"정보".equals(categoryInfo.getDocumentType()) && !"데이터".equals( categoryInfo.getDocumentType() )) {
+				categoryInfo.setDocumentType( "정보" );
 			}
 
 			emc.beginTransaction( CategoryInfo.class );

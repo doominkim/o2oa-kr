@@ -4,7 +4,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "消息通讯", packageName = "com.x.message.assemble.communicate", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "메시지 통신", packageName = "com.x.message.assemble.communicate", containerEntities = {
         "com.x.message.core.entity.Instant", "com.x.message.core.entity.Message",
         "com.x.message.core.entity.Mass", "com.x.organization.core.entity.Person",
         "com.x.message.core.entity.IMMsg", "com.x.message.core.entity.IMConversation",

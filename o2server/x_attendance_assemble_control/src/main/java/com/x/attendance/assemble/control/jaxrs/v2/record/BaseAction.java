@@ -157,7 +157,7 @@ abstract class BaseAction extends StandardJaxrsAction {
         noCheckRecord.setPreDutyTimeBeforeLimit(dutyTimeBeforeLimit);
         noCheckRecord.setPreDutyTimeAfterLimit(dutyTimeAfterLimit);
         noCheckRecord.setSourceType(AttendanceV2CheckInRecord.SOURCE_TYPE_SYSTEM_IMPORT);
-        noCheckRecord.setSourceDevice("其他");
+        noCheckRecord.setSourceDevice("기타");
         noCheckRecord.setDescription("");
         noCheckRecord.setGroupId(group.getId());
         noCheckRecord.setGroupName(group.getGroupName());

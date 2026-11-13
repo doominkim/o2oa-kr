@@ -28,9 +28,9 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-@Tag(name = "OfficeAction", description = "office文件转换.")
+@Tag(name = "OfficeAction", description = "Office 파일 변환.")
 @Path("office")
-@JaxrsDescribe("office文件转换.")
+@JaxrsDescribe("Office 파일 변환.")
 public class OfficeAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OfficeAction.class);

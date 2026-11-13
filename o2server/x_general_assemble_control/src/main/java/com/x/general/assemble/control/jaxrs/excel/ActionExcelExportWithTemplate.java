@@ -93,7 +93,7 @@ class ActionExcelExportWithTemplate extends BaseAction {
 
 		@FieldDescribe("excel로 변환할 내용, 목록의 1번째 값은 excel 첫 번째 sheet 내용, 2번째 값은 2번째 sheet 내용에 대응하며 이후 동일")
 		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "SheetData",
-				fieldValue = "{'sheetName':'excel的sheet名称，可以为空','startRow':'数字类型，表示数据开始行，从第0行开始','dataList':'二维数据列表'}")
+				fieldValue = "{'sheetName':'엑셀 시트 이름, 비워 둘 수 있음','startRow':'숫자, 데이터 시작 행(0행부터)','dataList':'2차원 데이터 목록'}")
 		private List<SheetData> sheetDataList;
 
 		public String getTemplateUrl() {

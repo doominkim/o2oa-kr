@@ -140,7 +140,7 @@ public class ActionAppealCreate extends BaseAction {
 				String unitLevelName = null;
 				if( StringUtils.isEmpty(appeal_auditor_type)) {
 					message = "소명 심사자 유형이 설정되지 않았습니다!";
-				}else if( "无".equals( appeal_auditor_type.trim() )){//현재 사용자 처리
+				}else if( "없음".equals( appeal_auditor_type.trim() )){//현재 사용자 처리
 					attendanceAppealAuditInfo.setProcessPerson1( effectivePerson.getDistinguishedName() );
 					attendanceAppealAuditInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 첫 번째 처리자를 현재 처리자로 설정
 					attendanceAppealInfo.setCurrentProcessor( effectivePerson.getDistinguishedName() );// 첫 번째 처리자를 현재 처리자로 설정
@@ -163,7 +163,7 @@ public class ActionAppealCreate extends BaseAction {
 		
 		//이의 신청 재검토자 조회
 		if (check && (!StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW))) {
-			if( StringUtils.isNotEmpty( appeal_checker_type )   && !"无".equals( appeal_checker_type  ) ) {
+			if( StringUtils.isNotEmpty( appeal_checker_type )   && !"없음".equals( appeal_checker_type  ) ) {
 				try {
 					appealCheckPersonName = attendanceAppealInfoServiceAdv.getAppealCheckPerson( personName, attendanceAppealInfo.getUnitName(), wrapIn.getIdentity() );
 					attendanceAppealAuditInfo.setProcessPerson2( appealCheckPersonName );
@@ -177,7 +177,7 @@ public class ActionAppealCreate extends BaseAction {
 			}
 		}
 		if (check && (!StringUtils.equals(appeal_flowType_value,AppealConfig.APPEAL_AUDIFLOWTYPE_WORKFLOW))) {
-			if( StringUtils.isNotEmpty( appeal_checker_type )  && !StringUtils.equals( appeal_checker_type, "无" ) ) {
+			if( StringUtils.isNotEmpty( appeal_checker_type )  && !StringUtils.equals( appeal_checker_type, "없음" ) ) {
 				if( StringUtils.isEmpty(appealCheckPersonName) ) {
 					//이의 신청 재검토자가 존재하지 않습니다
 					check = false;

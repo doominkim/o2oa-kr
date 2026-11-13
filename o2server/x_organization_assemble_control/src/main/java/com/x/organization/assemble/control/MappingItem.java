@@ -69,26 +69,26 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> personMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("姓名", "name", MappingItemValueType.string));
-		list.add(new MappingItem("显示名", "display", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("工号", "employee", MappingItemValueType.string));
-		list.add(new MappingItem("性别", "genderType", MappingItemValueType.genderType));
-		list.add(new MappingItem("密码", "password", MappingItemValueType.string));
-		list.add(new MappingItem("密码到期时间", "passwordExpiredTime", MappingItemValueType.date));
-		list.add(new MappingItem("排序号", "orderNumber", MappingItemValueType.integer));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("표시 이름", "display", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("사번", "employee", MappingItemValueType.string));
+		list.add(new MappingItem("성별", "genderType", MappingItemValueType.genderType));
+		list.add(new MappingItem("비밀번호", "password", MappingItemValueType.string));
+		list.add(new MappingItem("비밀번호 만료 시간", "passwordExpiredTime", MappingItemValueType.date));
+		list.add(new MappingItem("정렬 순서", "orderNumber", MappingItemValueType.integer));
 		// list.add(new MappingItem("식별자", "id", MappingItemValueType.string));
-		list.add(new MappingItem("邮件", "mail", MappingItemValueType.string));
-		list.add(new MappingItem("手机", "mobile", MappingItemValueType.string));
-		list.add(new MappingItem("固定电话", "officePhone", MappingItemValueType.string));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
-		list.add(new MappingItem("入职时间", "boardDate", MappingItemValueType.date));
-		list.add(new MappingItem("出生日期", "birthday", MappingItemValueType.date));
-		list.add(new MappingItem("头像", "icon", MappingItemValueType.string));
-		list.add(new MappingItem("签名", "signature", MappingItemValueType.string));
-		list.add(new MappingItem("微信", "weixin", MappingItemValueType.string));
+		list.add(new MappingItem("이메일", "mail", MappingItemValueType.string));
+		list.add(new MappingItem("휴대전화", "mobile", MappingItemValueType.string));
+		list.add(new MappingItem("유선 전화", "officePhone", MappingItemValueType.string));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("입사일", "boardDate", MappingItemValueType.date));
+		list.add(new MappingItem("생년월일", "birthday", MappingItemValueType.date));
+		list.add(new MappingItem("프로필 사진", "icon", MappingItemValueType.string));
+		list.add(new MappingItem("서명", "signature", MappingItemValueType.string));
+		list.add(new MappingItem("위챗", "weixin", MappingItemValueType.string));
 		list.add(new MappingItem("QQ", "qq", MappingItemValueType.string));
-		list.add(new MappingItem("管理者", "controllerList", MappingItemValueType.stringList));
+		list.add(new MappingItem("관리자", "controllerList", MappingItemValueType.stringList));
 		return list;
 	}
 
@@ -100,14 +100,14 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> groupMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("显示名", "display", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("排序号", "orderNumber", MappingItemValueType.integer));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
-		list.add(new MappingItem("人员成员", "personList", MappingItemValueType.stringList));
-		list.add(new MappingItem("群组成员", "groupList", MappingItemValueType.stringList));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("표시 이름", "display", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("정렬 순서", "orderNumber", MappingItemValueType.integer));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("사용자 구성원", "personList", MappingItemValueType.stringList));
+		list.add(new MappingItem("그룹 구성원", "groupList", MappingItemValueType.stringList));
 		return list;
 	}
 
@@ -119,14 +119,14 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> roleMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("显示名", "display", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("排序号", "orderNumber", MappingItemValueType.integer));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
-		list.add(new MappingItem("人员成员", "personList", MappingItemValueType.stringList));
-		list.add(new MappingItem("群组成员", "groupList", MappingItemValueType.stringList));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("표시 이름", "display", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("정렬 순서", "orderNumber", MappingItemValueType.integer));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("사용자 구성원", "personList", MappingItemValueType.stringList));
+		list.add(new MappingItem("그룹 구성원", "groupList", MappingItemValueType.stringList));
 		return list;
 	}
 
@@ -138,16 +138,16 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> companyMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("显示名", "display", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("简称", "shortName", MappingItemValueType.string));
-		list.add(new MappingItem("上级公司", "superior", MappingItemValueType.string));
-		list.add(new MappingItem("级别", "level", MappingItemValueType.integer));
-		list.add(new MappingItem("排序号", "orderNumber", MappingItemValueType.integer));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
-		list.add(new MappingItem("管理者", "controllerList", MappingItemValueType.stringList));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("표시 이름", "display", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("약칭", "shortName", MappingItemValueType.string));
+		list.add(new MappingItem("상위 회사", "superior", MappingItemValueType.string));
+		list.add(new MappingItem("레벨", "level", MappingItemValueType.integer));
+		list.add(new MappingItem("정렬 순서", "orderNumber", MappingItemValueType.integer));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("관리자", "controllerList", MappingItemValueType.stringList));
 		return list;
 	}
 
@@ -159,16 +159,16 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> departmentMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("显示名", "display", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("简称", "shortName", MappingItemValueType.string));
-		list.add(new MappingItem("上级部门", "superior", MappingItemValueType.string));
-		list.add(new MappingItem("所属公司", "company", MappingItemValueType.string));
-		list.add(new MappingItem("级别", "level", MappingItemValueType.integer));
-		list.add(new MappingItem("排序号", "orderNumber", MappingItemValueType.integer));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("표시 이름", "display", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("약칭", "shortName", MappingItemValueType.string));
+		list.add(new MappingItem("상위 부서", "superior", MappingItemValueType.string));
+		list.add(new MappingItem("소속 회사", "company", MappingItemValueType.string));
+		list.add(new MappingItem("레벨", "level", MappingItemValueType.integer));
+		list.add(new MappingItem("정렬 순서", "orderNumber", MappingItemValueType.integer));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
 		return list;
 	}
 
@@ -180,15 +180,15 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> identityMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("显示名", "display", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("所属人员", "person", MappingItemValueType.string));
-		list.add(new MappingItem("所属部门", "department", MappingItemValueType.string));
-		list.add(new MappingItem("排序号", "orderNumber", MappingItemValueType.integer));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("下属身份", "juniorList", MappingItemValueType.stringList));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("표시 이름", "display", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("소속 사용자", "person", MappingItemValueType.string));
+		list.add(new MappingItem("소속 부서", "department", MappingItemValueType.string));
+		list.add(new MappingItem("정렬 순서", "orderNumber", MappingItemValueType.integer));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("하위 신분", "juniorList", MappingItemValueType.stringList));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
 		return list;
 	}
 
@@ -200,12 +200,12 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> personAttributeMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("人员", "person", MappingItemValueType.string));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("属性值", "attributeList", MappingItemValueType.stringList));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("사용자", "person", MappingItemValueType.string));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("속성 값", "attributeList", MappingItemValueType.stringList));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
 		return list;
 	}
 
@@ -217,12 +217,12 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> companyAttributeMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("公司", "company", MappingItemValueType.string));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("属性值", "attributeList", MappingItemValueType.stringList));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("회사", "company", MappingItemValueType.string));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("속성 값", "attributeList", MappingItemValueType.stringList));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
 		return list;
 	}
 
@@ -234,12 +234,12 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> companyDutyMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("公司", "company", MappingItemValueType.string));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("成员", "identityList", MappingItemValueType.stringList));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("회사", "company", MappingItemValueType.string));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("구성원", "identityList", MappingItemValueType.stringList));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
 		return list;
 	}
 
@@ -251,12 +251,12 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> departmentAttributeMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("部门", "department", MappingItemValueType.string));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("属性值", "attributeList", MappingItemValueType.stringList));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("부서", "department", MappingItemValueType.string));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("속성 값", "attributeList", MappingItemValueType.stringList));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
 		return list;
 	}
 
@@ -268,12 +268,12 @@ public class MappingItem extends GsonPropertyObject {
 
 	public static List<MappingItem> departmentDutyMappings() {
 		List<MappingItem> list = new ArrayList<>();
-		list.add(new MappingItem("名称", "name", MappingItemValueType.string));
-		list.add(new MappingItem("唯一编码", "unique", MappingItemValueType.string));
-		list.add(new MappingItem("部门", "department", MappingItemValueType.string));
-		list.add(new MappingItem("标识", "id", MappingItemValueType.string));
-		list.add(new MappingItem("成员", "identityList", MappingItemValueType.stringList));
-		list.add(new MappingItem("创建时间", "createTime", MappingItemValueType.date));
+		list.add(new MappingItem("이름", "name", MappingItemValueType.string));
+		list.add(new MappingItem("고유 코드", "unique", MappingItemValueType.string));
+		list.add(new MappingItem("부서", "department", MappingItemValueType.string));
+		list.add(new MappingItem("ID", "id", MappingItemValueType.string));
+		list.add(new MappingItem("구성원", "identityList", MappingItemValueType.stringList));
+		list.add(new MappingItem("생성 시간", "createTime", MappingItemValueType.date));
 		return list;
 	}
 
@@ -309,7 +309,7 @@ public class MappingItem extends GsonPropertyObject {
 				cell = row.getCell(i);
 				if (null != cell) {
 					String str = cell.getStringCellValue();
-					if (StringUtils.isEmpty(str) || StringUtils.equals(str, "结果")
+					if (StringUtils.isEmpty(str) || StringUtils.equals(str, "결과")
 							|| StringUtils.equals(str, "result")) {
 						return i;
 					}

@@ -43,7 +43,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import javax.ws.rs.ApplicationPath;
 
 @OpenAPIDefinition(servers = {
-		@Server(url = "../../x_processplatform_assemble_surface", description = "current server.") }, info = @Info(title = "流程应用前端服务", version = Version.VALUE, description = "o2server x_processplatform_assemble_surface interface", license = @License(name = "AGPL-3.0", url = "https://www.o2oa.net/license.html"), contact = @Contact(url = "https://www.o2oa.net", name = "o2oa", email = "admin@o2oa.net")))
+		@Server(url = "../../x_processplatform_assemble_surface", description = "current server.") }, info = @Info(title = "결재 앱 프런트엔드 서비스", version = Version.VALUE, description = "o2server x_processplatform_assemble_surface interface", license = @License(name = "AGPL-3.0", url = "https://www.o2oa.net/license.html"), contact = @Contact(url = "https://www.o2oa.net", name = "o2oa", email = "admin@o2oa.net")))
 @ApplicationPath("jaxrs")
 public class ActionApplication extends AbstractActionApplication {
 

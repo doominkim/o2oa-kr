@@ -26,7 +26,7 @@ public class ActionSave extends BaseAction {
 	
 	private static Logger logger = LoggerFactory.getLogger( ActionSave.class );
 
-	@AuditLog(operation = "保存日历")
+	@AuditLog(operation = "캘린더 저장")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = null;
@@ -110,7 +110,7 @@ public class ActionSave extends BaseAction {
 				result.setData( new Wo( calendar.getId() ) );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionCalendarInfoProcess( e, "保存日历信息时发生异常." );
+				Exception exception = new ExceptionCalendarInfoProcess( e, "캘린더 정보 저장 중 예외가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

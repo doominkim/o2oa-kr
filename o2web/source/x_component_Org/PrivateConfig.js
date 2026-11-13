@@ -53,7 +53,7 @@ MWF.xApplication.Org.PrivateConfig.ConfigContent = new Class({
         this.data["limitQueryOuter"]=[];
         this.data["limitQueryAll"]=[];
         this.data["explain"]="";
-        this.data["status"]="发布";
+        this.data["status"]="게시";
         this.contentNode = this.content.node;
         this.mode = "read";
     },

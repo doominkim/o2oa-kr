@@ -45,7 +45,7 @@ public class ActionUpdate extends BaseAction {
 
             personCard.copyTo(entityPerson);
             if (entityPerson.getGroupType().equals("")) {
-                entityPerson.setGroupType("默认分组");
+                entityPerson.setGroupType("기본 그룹");
             }
 
             emc.check(entityPerson, CheckPersistType.all);

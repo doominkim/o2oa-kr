@@ -4,7 +4,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "流程监控", packageName = "com.x.processplatform.assemble.bam", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "결재 모니터링", packageName = "com.x.processplatform.assemble.bam", containerEntities = {
 		"com.x.processplatform.core.entity.content.Attachment", "com.x.processplatform.core.entity.content.Read",
 		"com.x.processplatform.core.entity.content.ReadCompleted", "com.x.processplatform.core.entity.content.Review",
 		"com.x.processplatform.core.entity.content.SerialNumber", "com.x.processplatform.core.entity.content.Task",

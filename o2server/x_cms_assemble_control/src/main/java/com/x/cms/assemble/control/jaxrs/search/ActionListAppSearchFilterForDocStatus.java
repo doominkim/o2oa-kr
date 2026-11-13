@@ -33,7 +33,7 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 		Boolean isAnonymous = effectivePerson.isAnonymous();
 		String personName = effectivePerson.getDistinguishedName();
 		// 문서 유형: 전체|정보|데이터
-		String documentType = "信息";
+		String documentType = "정보";
 		if (check) {
 			try {
 				isXAdmin = userManagerService.isManager( effectivePerson);
@@ -51,7 +51,7 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 					app_ids = appInfoServiceAdv.listAllIds(documentType);
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSearchProcess(e, "系统在查询所有栏目信息ID列表时发生异常。");
+					Exception exception = new ExceptionSearchProcess(e, "전체 게시판 정보 ID 목록을 조회하는 중 오류가 발생했습니다.");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -65,7 +65,7 @@ class ActionListAppSearchFilterForDocStatus extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionSearchProcess( e,
-							"系统在根据用户权限查询所有可见的栏目信息时发生异常。Name:" + personName );
+							"사용자 권한으로 조회 가능한 게시판 정보를 조회하는 중 오류가 발생했습니다. Name:" + personName );
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}

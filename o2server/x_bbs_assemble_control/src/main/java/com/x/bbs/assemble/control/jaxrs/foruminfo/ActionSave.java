@@ -71,7 +71,7 @@ public class ActionSave extends BaseAction {
 			wrapIn = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionForumInfoProcess(e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+			Exception exception = new ExceptionForumInfoProcess(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -104,7 +104,7 @@ public class ActionSave extends BaseAction {
 			typeCategory = wrapIn.getTypeCategory().split("\\|");
 			if (typeCategory != null && typeCategory.length > 0) {
 				for (String category : typeCategory) {
-					if (!"信息".equals(category) && !"问题".equals(category) && !"投票".equals(category)) {
+					if (!"정보".equals(category) && !"질문".equals(category) && !"투표".equals(category)) {
 						check = false;
 						Exception exception = new ExceptionForumTypeCategoryInvalid(category);
 						result.error(exception);
@@ -114,7 +114,7 @@ public class ActionSave extends BaseAction {
 		}
 		if (check) {
 			if ( StringUtils.isNotEmpty( wrapIn.getSubjectType() )) {
-				wrapIn.setSubjectType("新闻|讨论");
+				wrapIn.setSubjectType("뉴스|토론");
 			}
 		}
 		if (check) {
@@ -156,7 +156,7 @@ public class ActionSave extends BaseAction {
 			forumInfo = Wi.copier.copy(wrapIn);
 			
 			List<String> arrayList = new ArrayList<>(); 
-			if( StringUtils.equals( wrapIn.getForumVisible(), "根据权限" )) {
+			if( StringUtils.equals( wrapIn.getForumVisible(), "권한에 따라" )) {
 				if( StringUtils.isNotEmpty( wrapIn.getForumVisibleResult())) {
 					arrayList.clear();
 					Collections.addAll(arrayList, wrapIn.getForumVisibleResult().split( "," ));
@@ -182,7 +182,7 @@ public class ActionSave extends BaseAction {
 				
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionForumInfoProcess(e, "系统在保存BBS论坛分区信息时发生异常.");
+				Exception exception = new ExceptionForumInfoProcess(e, "BBS 포럼 분류 정보를 저장하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

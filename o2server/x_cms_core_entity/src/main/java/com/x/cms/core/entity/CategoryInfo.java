@@ -39,7 +39,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author O2LEE
  *
  */
-@Schema(name = "CategoryInfo", description = "内容管理目录分类信息.")
+@Schema(name = "CategoryInfo", description = "콘텐츠 관리 분류 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.CategoryInfo.table, uniqueConstraints = {
@@ -51,7 +51,7 @@ public class CategoryInfo extends SliceJpaObject {
 
 	private static final long serialVersionUID = 3856138316794473794L;
 	private static final String TABLE = PersistenceProperties.CategoryInfo.table;
-	public static final String DOCUMENT_TYPE_DATA = "数据";
+	public static final String DOCUMENT_TYPE_DATA = "데이터";
 
 	@Override
 	public String getId() {
@@ -63,7 +63,7 @@ public class CategoryInfo extends SliceJpaObject {
 		this.id = id;
 	}
 
-	@FieldDescribe("数据库主键,自动生成.")
+	@FieldDescribe("데이터베이스 기본 키, 자동 생성.")
 	@Id
 	@Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 	private String id = createId();
@@ -106,11 +106,11 @@ public class CategoryInfo extends SliceJpaObject {
 	private String appName;
 
 	public static final String documentType_FIELDNAME = "documentType";
-	@FieldDescribe("默认文档类型：信息 | 数据")
+	@FieldDescribe("기본 문서 유형: 정보 | 데이터")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + documentType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + documentType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
-	private String documentType = "信息";
+	private String documentType = "정보";
 
 	public static final String parentId_FIELDNAME = "parentId";
 	@FieldDescribe("상위 분류 ID")
@@ -128,10 +128,10 @@ public class CategoryInfo extends SliceJpaObject {
 	private String categoryAlias;
 
 	public static final String workflowType_FIELDNAME = "workflowType";
-	@FieldDescribe("流程类型：禁用审批流|自由审批流|固定审批流")
+	@FieldDescribe("프로세스 유형: 결재 프로세스 사용 안 함|자유 결재 프로세스|고정 결재 프로세스")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + workflowType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
-	private String workflowType = "禁用审批流";
+	private String workflowType = "결재 프로세스 사용 안 함";
 
 	public static final String workflowAppId_FIELDNAME = "workflowAppId";
 	@FieldDescribe("프로세스 앱 ID")
@@ -194,13 +194,13 @@ public class CategoryInfo extends SliceJpaObject {
 	private String defaultViewName;
 
 	public static final String categorySeq_FIELDNAME = "categorySeq";
-	@FieldDescribe("分类信息排序号")
+	@FieldDescribe("분류 정보 정렬 번호")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + categorySeq_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + categorySeq_FIELDNAME)
 	private String categorySeq;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("分类信息说明")
+	@FieldDescribe("분류 정보 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
@@ -213,7 +213,7 @@ public class CategoryInfo extends SliceJpaObject {
 	private String categoryIcon;
 
 	public static final String categoryMemo_FIELDNAME = "categoryMemo";
-	@FieldDescribe("备注信息")
+	@FieldDescribe("비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + categoryMemo_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String categoryMemo;
@@ -263,19 +263,19 @@ public class CategoryInfo extends SliceJpaObject {
 	private Boolean allPeoplePublish = true;
 
 	public static final String importViewAppId_FIELDNAME = "importViewAppId";
-	@FieldDescribe("是数据导入绑定的数据视图栏目ID.")
+	@FieldDescribe("데이터 가져오기에 연결된 데이터 뷰의 게시판 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + importViewAppId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String importViewAppId = null;
 
 	public static final String importViewId_FIELDNAME = "importViewId";
-	@FieldDescribe("是数据导入绑定的数据视图ID.")
+	@FieldDescribe("데이터 가져오기에 연결된 데이터 뷰 ID.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + importViewId_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String importViewId = null;
 
 	public static final String importViewName_FIELDNAME = "importViewName";
-	@FieldDescribe("是数据导入绑定的数据视图名称.")
+	@FieldDescribe("데이터 가져오기에 연결된 데이터 뷰 이름.")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + importViewName_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String importViewName = null;

@@ -26,9 +26,9 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-@Tag(name = "SerialNumberAction", description = "流水号接口.")
+@Tag(name = "SerialNumberAction", description = "일련번호 인터페이스.")
 @Path("serialnumber")
-@JaxrsDescribe("流水号接口.")
+@JaxrsDescribe("일련번호 인터페이스.")
 public class SerialNumberAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(SerialNumberAction.class);

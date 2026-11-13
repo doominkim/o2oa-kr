@@ -1,26 +1,4 @@
 {
-  "o2web/source/o2_lib/kityminder/core/kityminder.core.js": [
-    {
-      "text": "老",
-      "reason": "MD5 해시 패딩 계산용 문자(알고리즘 상수, 화면 문구 아님)"
-    },
-    {
-      "text": "耀",
-      "reason": "MD5 해시 패딩 계산용 문자(알고리즘 상수, 화면 문구 아님)"
-    }
-  ],
-  "o2web/source/o2_lib/kityminder/kity/kity.js": [
-    {
-      "text": "脑图",
-      "reason": "글꼴 높이 측정용 샘플 텍스트(_cachedFontHash), 화면에 표시되지 않음"
-    }
-  ],
-  "o2web/source/o2_lib/kityminder/kity/kity_all.js": [
-    {
-      "text": "脑图",
-      "reason": "글꼴 높이 측정용 샘플 텍스트(_cachedFontHash), 화면에 표시되지 않음"
-    }
-  ],
   "o2web/source/o2_lib/officecontrol/config.json": [
     {
       "text": "浙江兰德纵横网络技术股份有限公司",

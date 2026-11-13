@@ -45,7 +45,7 @@ public class ActionSave extends BaseAction {
 			}else {
 				try {
 					unitName = userManagerService.checkUnitNameExists(wrapIn.getUnitName());
-					System.out.println(">>>>>>>>>wrapIn.getUnitName()不为空，判断unitName是否存在！ unitName：" + unitName );
+					System.out.println(">>>>>>>>>wrapIn.getUnitName()이 비어 있지 않아 unitName 존재 여부를 확인합니다! unitName: " + unitName );
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAttendanceScheduleProcess(e, "조직 이름으로 조직 정보를 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getUnitName());

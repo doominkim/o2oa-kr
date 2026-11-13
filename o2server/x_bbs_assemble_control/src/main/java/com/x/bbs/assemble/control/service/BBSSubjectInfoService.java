@@ -275,7 +275,7 @@ public class BBSSubjectInfoService {
 		if ( null != subjectInfo ) {
 			forumInfo = emc.find( subjectInfo.getForumId(), BBSForumInfo.class );
 			sectionInfo = emc.find( subjectInfo.getSectionId(), BBSSectionInfo.class );
-			if( sectionInfo!= null && sectionInfo.getSectionLevel().equals( "子版块" ) && !sectionInfo.getId().equals( sectionInfo.getMainSectionId() )){
+			if( sectionInfo!= null && sectionInfo.getSectionLevel().equals( "하위 섹션" ) && !sectionInfo.getId().equals( sectionInfo.getMainSectionId() )){
 				mainSectionInfo = emc.find( subjectInfo.getMainSectionId(), BBSSectionInfo.class );
 			}
 			attachmentIds = subjectInfo.getAttachmentList();
@@ -524,12 +524,12 @@ public class BBSSubjectInfoService {
 		subjectInfo = emc.find( subjectId, BBSSubjectInfo.class );
 		emc.beginTransaction( BBSSubjectInfo.class );
 		if( lock ){
-			subjectInfo.setSubjectStatus( "已锁定" );
+			subjectInfo.setSubjectStatus( "잠김" );
 			subjectInfo.setStopReply( lock );
 			subjectInfo.setScreamSetterName( setterName );
 			subjectInfo.setScreamSetterTime( new Date() );
 		}else{
-			subjectInfo.setSubjectStatus( "启用" );
+			subjectInfo.setSubjectStatus( "사용" );
 			subjectInfo.setStopReply( lock );
 			subjectInfo.setScreamSetterName( setterName );
 			subjectInfo.setScreamSetterTime( new Date() );

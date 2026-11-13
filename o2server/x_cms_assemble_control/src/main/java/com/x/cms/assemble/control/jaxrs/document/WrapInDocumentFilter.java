@@ -26,7 +26,7 @@ public class WrapInDocumentFilter {
 	@FieldDescribe( "정렬 방식: ASC|DESC." )
 	private String orderType = "DESC";
 
-	@FieldDescribe( "是否需要查询数据，默认不查询." )
+	@FieldDescribe( "데이터 조회 여부, 기본값은 조회하지 않음." )
 	private Boolean needData = false;
 
 	@FieldDescribe("대표 이미지 포함 여부")
@@ -77,8 +77,8 @@ public class WrapInDocumentFilter {
 	@FieldDescribe( "필터 조건으로 사용할 게시자 소속 조직, 여러 개 가능, String 배열." )
 	private List<String> creatorUnitNameList;
 
-	@FieldDescribe( "文档类型：全部(默认值) | 信息 | 数据" )
-	private String documentType = "全部";
+	@FieldDescribe( "문서 유형: 전체(기본값) | 정보 | 데이터" )
+	private String documentType = "전체";
 
 	@FieldDescribe( "필터 조건으로 사용할 CMS 문서 키워드, 보통 제목, String, 부분 일치 조회." )
 	private String title;
@@ -86,55 +86,55 @@ public class WrapInDocumentFilter {
 	@FieldDescribe("파일 가져오기 배치 번호: 보통 분류ID+타임스탬프")
 	private String importBatchName;
 
-	@FieldDescribe("业务数据String值01.")
+	@FieldDescribe("업무 데이터 String 값01.")
 	private String stringValue01;
 
-	@FieldDescribe("业务数据String值02.")
+	@FieldDescribe("업무 데이터 String 값02.")
 	private String stringValue02;
 
-	@FieldDescribe("业务数据String值03.")
+	@FieldDescribe("업무 데이터 String 값03.")
 	private String stringValue03;
 
-	@FieldDescribe("业务数据String值04.")
+	@FieldDescribe("업무 데이터 String 값04.")
 	private String stringValue04;
 
-	@FieldDescribe("业务数据String值05.")
+	@FieldDescribe("업무 데이터 String 값05.")
 	private String stringValue05;
 
-	@FieldDescribe("业务数据String值06.")
+	@FieldDescribe("업무 데이터 String 값06.")
 	private String stringValue06;
 
-	@FieldDescribe("业务数据String值07.")
+	@FieldDescribe("업무 데이터 String 값07.")
 	private String stringValue07;
 
-	@FieldDescribe("业务数据String值08.")
+	@FieldDescribe("업무 데이터 String 값08.")
 	private String stringValue08;
 
-	@FieldDescribe("业务数据String值09.")
+	@FieldDescribe("업무 데이터 String 값09.")
 	private String stringValue09;
 
-	@FieldDescribe("业务数据String值10.")
+	@FieldDescribe("업무 데이터 String 값10.")
 	private String stringValue10;
 
-	@FieldDescribe("业务数据Long值01.")
+	@FieldDescribe("업무 데이터 Long 값01.")
 	private Long longValue01;
 
-	@FieldDescribe("业务数据Long值02.")
+	@FieldDescribe("업무 데이터 Long 값02.")
 	private Long longValue02;
 
-	@FieldDescribe("业务数据Double值01.")
+	@FieldDescribe("업무 데이터 Double 값01.")
 	private Double doubleValue01;
 
-	@FieldDescribe("业务数据Double值02.")
+	@FieldDescribe("업무 데이터 Double 값02.")
 	private Double doubleValue02;
 
-	@FieldDescribe( "业务数据DateTime值01，可以传入1个(开始时间)或者2个(开始和结束时间), 格式：yyyy-MM-dd HH:mm:ss或者yyyy-mm-dd." )
+	@FieldDescribe( "업무 데이터 DateTime 값01, 1개(시작 시간) 또는 2개(시작·종료 시간) 전달 가능, 형식: yyyy-MM-dd HH:mm:ss 또는 yyyy-mm-dd." )
 	private List<String> dateTimeValue01List;
 
-	@FieldDescribe( "业务数据DateTime值02，可以传入1个(开始时间)或者2个(开始和结束时间), 格式：yyyy-MM-dd HH:mm:ss或者yyyy-mm-dd." )
+	@FieldDescribe( "업무 데이터 DateTime 값02, 1개(시작 시간) 또는 2개(시작·종료 시간) 전달 가능, 형식: yyyy-MM-dd HH:mm:ss 또는 yyyy-mm-dd." )
 	private List<String> dateTimeValue02List;
 
-	@FieldDescribe( "业务数据DateTime值03，可以传入1个(开始时间)或者2个(开始和结束时间), 格式：yyyy-MM-dd HH:mm:ss或者yyyy-mm-dd." )
+	@FieldDescribe( "업무 데이터 DateTime 값03, 1개(시작 시간) 또는 2개(시작·종료 시간) 전달 가능, 형식: yyyy-MM-dd HH:mm:ss 또는 yyyy-mm-dd." )
 	private List<String> dateTimeValue03List;
 
 	public String getTopFlag() {
@@ -465,9 +465,9 @@ public class WrapInDocumentFilter {
 
 		//문서 유형: 전체 | 정보 | 데이터
 		if( StringUtils.isNotEmpty( this.getDocumentType())) {
-			if( "信息".equals( this.getDocumentType() )) {
+			if( "정보".equals( this.getDocumentType() )) {
 				queryFilter.addEqualsTerm( new EqualsTerm( "documentType", this.getDocumentType() ) );
-			}else if( "数据".equals( this.getDocumentType() )) {
+			}else if( "데이터".equals( this.getDocumentType() )) {
 				queryFilter.addEqualsTerm( new EqualsTerm( "documentType", this.getDocumentType() ) );
 			}
 		}

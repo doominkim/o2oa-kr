@@ -26,9 +26,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "FireScheduleAction", description = "触发定时任务接口.")
+@Tag(name = "FireScheduleAction", description = "예약 작업 실행 인터페이스.")
 @Path("fireschedule")
-@JaxrsDescribe(value = "触发定时任务接口.", scope = DescribeScope.system)
+@JaxrsDescribe(value = "예약 작업 실행 인터페이스.", scope = DescribeScope.system)
 public class FireScheduleAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "FireScheduleAction::";

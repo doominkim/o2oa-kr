@@ -18,7 +18,7 @@ public class ActionPersistUnCommend extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionPersistUnCommend.class);
 
-	@AuditLog(operation = "取消文档点赞")
+	@AuditLog(operation = "문서 좋아요 취소")
 	protected ActionResult<Wo> execute(HttpServletRequest request, String docId, EffectivePerson effectivePerson ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Boolean check = true;

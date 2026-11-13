@@ -8,13 +8,13 @@ public class PermissionInfo {
 	@FieldDescribe( "권한 유형: 독자|열람|작성자|관리" )
 	private String permission =  PermissionName.READER ;
 
-	@FieldDescribe( "使用者类别：所有人|组织|人员|群组" )
+	@FieldDescribe( "사용 대상 분류: 모든 사용자|조직|사용자|그룹" )
 	private String permissionObjectType = "";
 
-	@FieldDescribe( "使用者编码：所有人|组织编码|人员UID|群组编码" )
+	@FieldDescribe( "사용 대상 코드: 모든 사용자|조직 코드|사용자 UID|그룹 코드" )
 	private String permissionObjectCode = "";
 
-	@FieldDescribe( "使用者名称：所有人|组织名称|人员名称|群组名称" )
+	@FieldDescribe( "사용 대상 이름: 모든 사용자|조직 이름|사용자 이름|그룹 이름" )
 	private String permissionObjectName = "";
 
 	public PermissionInfo() {}
@@ -26,11 +26,11 @@ public class PermissionInfo {
 		this.permissionObjectCode = permissionObjectCode;
 		this.permissionObjectName = permissionObjectName;
 		if(OrganizationDefinition.isPersonDistinguishedName(permissionObjectName)){
-			this.permissionObjectType = "人员";
+			this.permissionObjectType = "사용자";
 		}else if(OrganizationDefinition.isUnitDistinguishedName(permissionObjectName)){
-			this.permissionObjectType = "组织";
+			this.permissionObjectType = "조직";
 		}else if(OrganizationDefinition.isGroupDistinguishedName(permissionObjectName)){
-			this.permissionObjectType = "群组";
+			this.permissionObjectType = "그룹";
 		}
 	}
 

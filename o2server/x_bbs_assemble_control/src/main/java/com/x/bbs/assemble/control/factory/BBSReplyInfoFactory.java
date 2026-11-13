@@ -437,8 +437,8 @@ public class BBSReplyInfoFactory extends AbstractFactory {
 		Root<BBSReplyInfo> root = cq.from( BBSReplyInfo.class );
 		Predicate p = cb.equal( root.get( BBSReplyInfo_.parentId ), replyId );
 		p = cb.and( p, cb.or(
-				cb.equal( root.get( BBSReplyInfo_.replyAuditStatus ), "无审核" ),
-				cb.equal( root.get( BBSReplyInfo_.replyAuditStatus ), "审核通过" )
+				cb.equal( root.get( BBSReplyInfo_.replyAuditStatus ), "검토 없음" ),
+				cb.equal( root.get( BBSReplyInfo_.replyAuditStatus ), "검토 통과" )
 		));
 		if( StringUtils.equalsIgnoreCase( orderType, "DESC")){
 			cq.orderBy( cb.desc( root.get( BBSReplyInfo_.createTime ) ) );

@@ -127,18 +127,18 @@ public class BBSPermissionInfo extends SliceJpaObject {
 	private String mainSectionName = "";
 
 	public static final String permissionType_FIELDNAME = "permissionType";
-	@FieldDescribe("权限类别：论坛权限|版块权限|其他权限")
+	@FieldDescribe("권한 유형: 포럼 권한|섹션 권한|기타 권한")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + permissionType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + permissionType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String permissionType = "其他权限";
+	private String permissionType = "기타 권한";
 
 	public static final String permissionFunction_FIELDNAME = "permissionFunction";
 	@FieldDescribe("권한 기능: 권한 코드의 일부로 권한의 주요 기능을 설명")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + permissionFunction_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + permissionFunction_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String permissionFunction = "其他权限";
+	private String permissionFunction = "기타 권한";
 
 	public static final String permissionName_FIELDNAME = "permissionName";
 	@FieldDescribe("권한 이름")

@@ -35,7 +35,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  *
  * @author LIYI
  */
-@Schema(name = "BBSSubjectInfo", description = "论坛主题信息.")
+@Schema(name = "BBSSubjectInfo", description = "포럼 주제 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.content, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.BBSSubjectInfo.table, uniqueConstraints = {
@@ -131,18 +131,18 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private String title = "";
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("主题类别：讨论，新闻等等,根据版块设置")
+	@FieldDescribe("주제 분류: 토론, 뉴스 등, 섹션 설정에 따름")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + type_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String type = "新闻";
+	private String type = "뉴스";
 
 	public static final String typeCategory_FIELDNAME = "typeCategory";
-	@FieldDescribe("主题的类别,不同的类别有不同的操作:信息|问题|投票")
+	@FieldDescribe("주제 유형, 유형마다 동작이 다름: 정보|질문|투표")
 	@Column(length = JpaObject.length_64B, name = ColumnNamePrefix + typeCategory_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + typeCategory_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String typeCategory = "信息";
+	private String typeCategory = "정보";
 
 	public static final String summary_FIELDNAME = "summary";
 	@FieldDescribe("주제 요약")
@@ -350,10 +350,10 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private String lastUpdateUser = "";
 
 	public static final String subjectAuditStatus_FIELDNAME = "subjectAuditStatus";
-	@FieldDescribe("主题审核状态：无审核|待审核|审核通过")
+	@FieldDescribe("주제 검토 상태: 검토 없음|검토 대기|검토 통과")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + subjectAuditStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String subjectAuditStatus = "无审核";
+	private String subjectAuditStatus = "검토 없음";
 
 	public static final String auditorName_FIELDNAME = "auditorName";
 	@FieldDescribe("심사자 이름")
@@ -362,10 +362,10 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private String auditorName = null;
 
 	public static final String subjectStatus_FIELDNAME = "subjectStatus";
-	@FieldDescribe("主题状态：启用|关闭|锁定    锁定后是不允许任何人修改和回复的")
+	@FieldDescribe("주제 상태: 사용|닫힘|잠김    잠기면 누구도 수정·댓글을 달 수 없음")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + subjectStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String subjectStatus = "启用";
+	private String subjectStatus = "사용";
 
 	public static final String voteLimitTime_FIELDNAME = "voteLimitTime";
 	@FieldDescribe("투표 마감 시간")
@@ -381,7 +381,7 @@ public class BBSSubjectInfo extends SliceJpaObject {
 	private Boolean voteResultVisible = false;
 
 	public static final String votePersonVisible_FIELDNAME = "votePersonVisible";
-	@FieldDescribe("投票人信息是否可见")
+	@FieldDescribe("투표자 정보 공개 여부")
 	@Column(name = ColumnNamePrefix + votePersonVisible_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private Boolean votePersonVisible = false;

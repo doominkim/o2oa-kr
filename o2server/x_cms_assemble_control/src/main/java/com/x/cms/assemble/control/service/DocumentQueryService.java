@@ -105,7 +105,7 @@ public class DocumentQueryService {
                 }
             }
         } catch (Exception e) {
-            System.out.println("系统在根据文档查询文档数据时发生异常，ID:" + document.getId());
+            System.out.println("문서로 문서 데이터를 조회하는 중 오류가 발생했습니다. ID:" + document.getId());
             throw e;
         }
     }

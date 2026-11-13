@@ -801,7 +801,7 @@ MWF.xApplication.ForumSection.Explorer = new Class({
             "name" : "type"
         }).inject(selectNode);
         var subjectTypeName = "";
-        if((this.viewType.filterData.subjectType) && this.viewType.filterData.subjectType!="请选择主题类别"){
+        if((this.viewType.filterData.subjectType) && this.viewType.filterData.subjectType!="주제 분류 필터"){
 			subjectTypeName = this.viewType.filterData.subjectType;
 		}
         var selectNotice = this.lp.selectSubjectType;

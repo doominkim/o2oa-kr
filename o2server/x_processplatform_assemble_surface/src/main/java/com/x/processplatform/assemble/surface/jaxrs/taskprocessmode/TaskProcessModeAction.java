@@ -28,9 +28,9 @@ import javax.ws.rs.core.MediaType;
 /**
  * @author sword
  */
-@Tag(name = "TaskProcessModeAction", description = "任务处理方式记录接口.")
+@Tag(name = "TaskProcessModeAction", description = "작업 처리 방식 기록 인터페이스.")
 @Path("mode")
-@JaxrsDescribe("任务处理方式记录接口.")
+@JaxrsDescribe("작업 처리 방식 기록 인터페이스.")
 public class TaskProcessModeAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(TaskProcessModeAction.class);

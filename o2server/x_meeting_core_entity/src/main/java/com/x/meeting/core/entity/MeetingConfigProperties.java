@@ -17,8 +17,8 @@ public class MeetingConfigProperties extends JsonProperties {
 
 	private static final long serialVersionUID = -271015360526750885L;
 
-	public static final String ONLINE_PROJECT_HST = "好视通";
-	public static final String ONLINE_PROJECT_QT = "其他";
+	public static final String ONLINE_PROJECT_HST = "FSMeeting";
+	public static final String ONLINE_PROJECT_QT = "기타";
 
 	@FieldDescribe("회의 신청 프로세스")
 	private Map<String, String> process;
@@ -59,12 +59,12 @@ public class MeetingConfigProperties extends JsonProperties {
 	@FieldDescribe("온라인 회의 사용 여부")
 	private Boolean enableOnline = false;
 
-	@FieldDescribe("线上会议产品，如：好视通")
+	@FieldDescribe("온라인 회의 제품, 예: FSMeeting")
 	private String onlineProduct = ONLINE_PROJECT_QT;
 
 	@FieldDescribe("온라인 회의 설정(json 객체: {" +
-			"'hstUrl':'好视通服务地址','hstKey':'好视通服务接口KEY','hstSecret':'好视通服务接口SECRET'," +
-			"'hstAuth':'是否启用好视通会议鉴权登录，默认false','o2ToHstUid':'O2与好视通映射的唯一ID字段'}")
+			"'hstUrl':'FSMeeting 서비스 주소','hstKey':'FSMeeting 서비스 API KEY','hstSecret':'FSMeeting 서비스 API SECRET'," +
+			"'hstAuth':'FSMeeting 회의 인증 로그인 사용 여부, 기본값 false','o2ToHstUid':'O2와 FSMeeting을 매핑하는 고유 ID 필드'}")
 	private OnlineConfig onlineConfig = new OnlineConfig();
 
 	public Map<String, String> getProcess() {
@@ -196,19 +196,19 @@ public class MeetingConfigProperties extends JsonProperties {
 
 	public static class OnlineConfig{
 
-		@FieldDescribe("好视通服务地址如：https://ip:8443")
+		@FieldDescribe("FSMeeting 서비스 주소, 예: https://ip:8443")
 		private String hstUrl = "";
 
-		@FieldDescribe("好视通服务接口KEY")
+		@FieldDescribe("FSMeeting 서비스 API KEY")
 		private String hstKey = "4QY08Kyh";
 
-		@FieldDescribe("好视通服务接口SECRET")
+		@FieldDescribe("FSMeeting 서비스 API SECRET")
 		private String hstSecret = "HpQi5csSMrufkM)b&#YWVlr7o*wWUG3G";
 
-		@FieldDescribe("是否启用好视通会议鉴权登录")
+		@FieldDescribe("FSMeeting 회의 인증 로그인 사용 여부")
 		private Boolean hstAuth = false;
 
-		@FieldDescribe("O2与好视通映射的唯一ID字段")
+		@FieldDescribe("O2와 FSMeeting을 매핑하는 고유 ID 필드")
 		private String o2ToHstUid = "employee";
 
 		public String getHstUrl() {

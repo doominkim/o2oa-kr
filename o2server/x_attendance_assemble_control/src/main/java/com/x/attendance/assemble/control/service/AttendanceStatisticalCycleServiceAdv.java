@@ -600,7 +600,7 @@ public class AttendanceStatisticalCycleServiceAdv {
 					cycles = attendanceStatisticCycleService.listAll( emc );
 					if(cycles.size()>0){
 						for( AttendanceStatisticalCycle attendanceStatisticalCycle : cycles ){
-							System.out.println( ">>>>>>>>>>遍历：cycles="+attendanceStatisticalCycle.getTopUnitName()+", unitName="+attendanceStatisticalCycle.getUnitName()+", cycleYear="+attendanceStatisticalCycle.getCycleYear()+", cycleMonth="+ attendanceStatisticalCycle.getCycleMonth() );
+							System.out.println( ">>>>>>>>>>순회: cycles="+attendanceStatisticalCycle.getTopUnitName()+", unitName="+attendanceStatisticalCycle.getUnitName()+", cycleYear="+attendanceStatisticalCycle.getCycleYear()+", cycleMonth="+ attendanceStatisticalCycle.getCycleMonth() );
 							if( attendanceStatisticalCycle.getTopUnitName().equals(cycle.getTopUnitName())
 									&& attendanceStatisticalCycle.getUnitName().equals(cycle.getUnitName())
 									&& attendanceStatisticalCycle.getCycleYear().equals(cycle.getCycleYear())

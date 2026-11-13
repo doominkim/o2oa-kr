@@ -33,7 +33,7 @@ public class ActionListNextWithFilter extends BaseAction {
 			wi = this.convertToWrapIn(jsonElement, Wi.class);
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionAppInfoProcess(e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+			Exception exception = new ExceptionAppInfoProcess(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -68,7 +68,7 @@ public class ActionListNextWithFilter extends BaseAction {
 						null, null, true, DESC);
 			} catch (Exception e) {
 				result.error(e);
-				logger.warn("系统在分页查询栏目信息列表时发生异常。");
+				logger.warn("게시판 정보 목록을 페이지 조회하는 중 오류가 발생했습니다.");
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
@@ -86,8 +86,8 @@ public class ActionListNextWithFilter extends BaseAction {
 		@FieldDescribe("필터 조건으로 쓰는 CMS 앱 키워드, 보통 앱 이름, String, 유사 검색.")
 		private String key;
 
-		@FieldDescribe("文档类型：全部 | 信息 | 数据")
-		private String documentType = "信息";
+		@FieldDescribe("문서 유형: 전체 | 정보 | 데이터")
+		private String documentType = "정보";
 
 		public List<String> getAppIdList() {
 			return appIdList;

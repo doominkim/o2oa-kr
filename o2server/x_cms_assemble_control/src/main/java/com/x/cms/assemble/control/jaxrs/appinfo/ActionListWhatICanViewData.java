@@ -47,7 +47,7 @@ public class ActionListWhatICanViewData extends BaseAction {
 		} else {
 			if (check) {
 				try {
-					wos_out = listViewAbleAppInfoByPermission( personName, isAnonymous, null,  "all", "数据", isXAdmin, 1000 );
+					wos_out = listViewAbleAppInfoByPermission( personName, isAnonymous, null,  "all", "데이터", isXAdmin, 1000 );
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAppInfoProcess(e, "사용자 권한으로 볼 수 있는 전체 분류 정보를 조회하는 중 오류가 발생했습니다. Name:" + personName);

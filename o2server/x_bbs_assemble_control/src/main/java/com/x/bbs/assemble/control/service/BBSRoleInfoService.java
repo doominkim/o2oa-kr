@@ -414,7 +414,7 @@ public class BBSRoleInfoService {
 		BBSRoleInfo roleInfo = roleInfoFactory.getRoleByCode( roleCode );
         if( roleInfo == null ){
         	roleInfo = new BBSRoleInfo( creatorName,  _bBSForumInfo.getId(), _bBSForumInfo.getForumName(), null, null, null, null,
-        			"论坛角色", roleName, roleCode, description, _bBSForumInfo.getOrderNumber() );
+        			"포럼 역할", roleName, roleCode, description, _bBSForumInfo.getOrderNumber() );
         	emc.beginTransaction( BBSRoleInfo.class );
         	emc.persist( roleInfo, CheckPersistType.all );
         	if( ListTools.isNotEmpty( permissionCodeList ) ){
@@ -458,7 +458,7 @@ public class BBSRoleInfoService {
 		BBSRoleInfo roleInfo = roleInfoFactory.getRoleByCode( roleCode );
         if( roleInfo == null ){
         	roleInfo = new BBSRoleInfo( creatorName, _sectionInfo.getForumId(), _sectionInfo.getForumName(), _sectionInfo.getId(), _sectionInfo.getSectionName(), _sectionInfo.getMainSectionId(), _sectionInfo.getMainSectionName(),
-        			"版块角色", roleName, roleCode, description, _sectionInfo.getOrderNumber() );
+        			"섹션 역할", roleName, roleCode, description, _sectionInfo.getOrderNumber() );
         	emc.beginTransaction( BBSRoleInfo.class );
         	emc.persist( roleInfo, CheckPersistType.all );
         	if( ListTools.isNotEmpty( permissionCodeList ) ){

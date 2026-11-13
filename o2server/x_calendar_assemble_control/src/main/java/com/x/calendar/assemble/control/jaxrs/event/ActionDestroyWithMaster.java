@@ -20,7 +20,7 @@ public class ActionDestroyWithMaster extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionDestroyWithMaster.class );
 
-	@AuditLog(operation = "删除日程事件")
+	@AuditLog(operation = "일정 삭제")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String eventId ) throws Exception {
 		//LogUtil.INFO( ">>>>>>ActionDestroyWithMaster.execute......" );
 		ActionResult<Wo> result = new ActionResult<>();
@@ -82,7 +82,7 @@ public class ActionDestroyWithMaster extends BaseAction {
 					if( !(ThisApplication.isCalendarManager(effectivePerson, calendar) 
 							|| ThisApplication.isCalendarPublisher(effectivePerson, unitNames, groupNames, calendar )) ) {//권한 없음
 						check = false;
-						Exception exception = new ExceptionInsufficientPermissions( "您没有权限从日历中删除日程事件.日历:" + calendar.getName() );
+						Exception exception = new ExceptionInsufficientPermissions( "캘린더에서 일정을 삭제할 권한이 없습니다. 캘린더:" + calendar.getName() );
 						result.error( exception );
 					}
 				}				

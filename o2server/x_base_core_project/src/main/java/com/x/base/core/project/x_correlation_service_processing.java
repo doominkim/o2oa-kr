@@ -4,7 +4,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.SERVICE, category = ModuleCategory.OFFICIAL, name = "关联内容服务", packageName = "com.x.correlation.service.processing", containerEntities = {
+@Module(type = ModuleType.SERVICE, category = ModuleCategory.OFFICIAL, name = "관련 콘텐츠 서비스", packageName = "com.x.correlation.service.processing", containerEntities = {
 		"com.x.correlation.core.entity.content.Correlation", "com.x.processplatform.core.entity.content.Review",
 		"com.x.cms.core.entity.Review", "com.x.processplatform.core.entity.content.Work",
 		"com.x.processplatform.core.entity.content.WorkCompleted",

@@ -119,7 +119,7 @@ public class ActionListWhatICanView_AllType extends BaseAction {
 							List<String> inAppInfoIds = new ArrayList<>();
 							inAppInfoIds.add( appId );
 							ids = permissionQueryService.listViewableCategoryIdByPerson(
-									personName, isAnonymous, unitNames, groupNames, roleNames, inAppInfoIds, null, null, "全部", null,1000, isXAdmin );
+									personName, isAnonymous, unitNames, groupNames, roleNames, inAppInfoIds, null, null, "전체", null,1000, isXAdmin );
 						} catch (Exception e) {
 							check = false;
 							Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);

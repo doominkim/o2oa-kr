@@ -269,7 +269,7 @@ public class BBSPermissionInfoService {
 		BBSPermissionInfoFactory permissionInfoFactory = business.permissionInfoFactory();
 		BBSPermissionInfo permissionInfo = permissionInfoFactory.getPermissionByCode( permissionCode );
         if( permissionInfo == null ){
-        	permissionInfo = new BBSPermissionInfo(  _bBSForumInfo.getId(), _bBSForumInfo.getForumName(), null, null, null, null, "论坛权限",  permissionName, permissionFunction, permissionCode,  description, _bBSForumInfo.getOrderNumber() );
+        	permissionInfo = new BBSPermissionInfo(  _bBSForumInfo.getId(), _bBSForumInfo.getForumName(), null, null, null, null, "포럼 권한",  permissionName, permissionFunction, permissionCode,  description, _bBSForumInfo.getOrderNumber() );
         	emc.beginTransaction( BBSPermissionInfo.class );
         	emc.persist( permissionInfo, CheckPersistType.all );
         	emc.commit();
@@ -291,7 +291,7 @@ public class BBSPermissionInfoService {
 		BBSPermissionInfo permissionInfo = permissionInfoFactory.getPermissionByCode( permissionCode );
         if( permissionInfo == null ){
         	permissionInfo = new BBSPermissionInfo(  _sectionInfo.getForumId(), _sectionInfo.getForumName(), _sectionInfo.getId(), _sectionInfo.getSectionName(), _sectionInfo.getMainSectionId(), _sectionInfo.getMainSectionName(), 
-        			"版块权限",  permissionName, permissionFunction, permissionCode,  description, _sectionInfo.getOrderNumber() );
+        			"섹션 권한",  permissionName, permissionFunction, permissionCode,  description, _sectionInfo.getOrderNumber() );
         	emc.beginTransaction( BBSPermissionInfo.class );
         	emc.persist( permissionInfo, CheckPersistType.all );
         	emc.commit();

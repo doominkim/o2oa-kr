@@ -59,7 +59,7 @@ public class ActionListAllManageableAppType extends BaseAction {
 				List<String> appIdsForType = null;
 				if(ListTools.isNotEmpty( appTypes ) ){
 					for( String appType : appTypes ) {
-						if( !"未分类".equals( appType )) {
+						if( !"미분류".equals( appType )) {
 							appIdsForType = appInfoServiceAdv.listAppIdsWithAppType( appType );
 							if( !isManager && ListTools.isNotEmpty( appIdsForType ) ){
 								List<String> unitNames = userManagerService.listUnitNamesWithPerson( personName );
@@ -90,7 +90,7 @@ public class ActionListAllManageableAppType extends BaseAction {
 				}
 
 				if( appIdsForType.size() > 0 ) {
-					wos.add( new Wo( "未分类", Long.parseLong( appIdsForType.size() + "") ));
+					wos.add( new Wo( "미분류", Long.parseLong( appIdsForType.size() + "") ));
 				}
 
 				CacheManager.put(cacheCategory, cacheKey, wos);

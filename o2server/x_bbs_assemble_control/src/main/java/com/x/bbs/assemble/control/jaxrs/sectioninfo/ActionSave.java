@@ -57,7 +57,7 @@ public class ActionSave extends BaseAction {
 			wrapIn = this.convertToWrapIn( jsonElement, Wi.class );
 		} catch (Exception e ) {
 			check = false;
-			Exception exception = new ExceptionSectionInfoProcess( e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString() );
+			Exception exception = new ExceptionSectionInfoProcess( e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString() );
 			result.error( exception );
 			logger.error( e, effectivePerson, request, null);
 		}
@@ -83,7 +83,7 @@ public class ActionSave extends BaseAction {
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionSectionInfoProcess(e,
-						"系统在根据ID获取BBS论坛分区信息时发生异常！ID:" + wrapIn.getForumId());
+						"ID로 BBS 포럼 분류 정보를 가져오는 중 오류가 발생했습니다! ID:" + wrapIn.getForumId());
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -129,7 +129,7 @@ public class ActionSave extends BaseAction {
 				wrapIn.setSubjectType(forumInfo.getSubjectType());
 			}
 			if (wrapIn.getSubjectType() == null || wrapIn.getSubjectType().isEmpty()) {
-				wrapIn.setSubjectType("新闻|讨论");
+				wrapIn.setSubjectType("뉴스|토론");
 			}
 		}
 		if (check) {
@@ -137,7 +137,7 @@ public class ActionSave extends BaseAction {
 				typeCategory = wrapIn.getTypeCategory().split("\\|");
 				if (typeCategory != null && typeCategory.length > 0) {
 					for (String category : typeCategory) {
-						if (!"信息".equals(category) && !"问题".equals(category) && !"投票".equals(category)) {
+						if (!"정보".equals(category) && !"질문".equals(category) && !"투표".equals(category)) {
 							check = false;
 							Exception exception = new ExceptionSectionTypeCategoryInvalid(category);
 							result.error(exception);
@@ -164,7 +164,7 @@ public class ActionSave extends BaseAction {
 						}
 					} catch (Exception e) {
 						check = false;
-						Exception exception = new ExceptionSectionInfoProcess(e, "系统根据人员唯一标识查询人员信息时发生异常.Name:" + name);
+						Exception exception = new ExceptionSectionInfoProcess(e, "사용자 고유 식별자로 사용자 정보를 조회하는 중 오류가 발생했습니다. Name:" + name);
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 						break;
@@ -188,7 +188,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "将用户传入的信息转换为一个版块信息对象时发生异常。");
+				Exception exception = new ExceptionSectionInfoProcess(e, "사용자가 전달한 정보를 섹션 정보 객체로 변환하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -198,13 +198,13 @@ public class ActionSave extends BaseAction {
 			if (sectionInfo.getMainSectionId() == null || sectionInfo.getMainSectionId().isEmpty() || sectionInfo.getId().equals(sectionInfo.getMainSectionId())) {
 				sectionInfo.setMainSectionId(sectionInfo.getId());
 				sectionInfo.setMainSectionName(sectionInfo.getSectionName());
-				sectionInfo.setSectionLevel("主版块");
+				sectionInfo.setSectionLevel("상위 섹션");
 			} else {
 				try {
 					sectionInfo_sub = sectionInfoServiceAdv.get(sectionInfo.getMainSectionId());
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSectionInfoProcess(e, "根据指定主版ID查询子版块信息时发生异常.MainId:" + sectionInfo.getMainSectionId());
+					Exception exception = new ExceptionSectionInfoProcess(e, "지정한 상위 섹션 ID로 하위 섹션 정보를 조회하는 중 오류가 발생했습니다. MainId:" + sectionInfo.getMainSectionId());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -212,7 +212,7 @@ public class ActionSave extends BaseAction {
 					if (sectionInfo_sub != null) {
 						sectionInfo.setMainSectionId(sectionInfo_sub.getId());
 						sectionInfo.setMainSectionName(sectionInfo_sub.getSectionName());
-						sectionInfo.setSectionLevel("子版块");
+						sectionInfo.setSectionLevel("하위 섹션");
 					} else {
 						check = false;
 						Exception exception = new ExceptionSectionNotExists(sectionInfo.getMainSectionId());
@@ -224,7 +224,7 @@ public class ActionSave extends BaseAction {
 
 		if (check) {
 			List<String> arrayList = new ArrayList<>(); 
-			if( StringUtils.equals( wrapIn.getSectionVisible(), "根据权限" )) {
+			if( StringUtils.equals( wrapIn.getSectionVisible(), "권한에 따라" )) {
 				if( StringUtils.isNotEmpty( wrapIn.getSectionVisibleResult() )) {
 					arrayList.clear();
 					Collections.addAll(arrayList, wrapIn.getSectionVisibleResult().split( "," ));
@@ -234,7 +234,7 @@ public class ActionSave extends BaseAction {
 				sectionInfo.setVisiblePermissionList( new ArrayList<>() );
 			}
 			
-			if( StringUtils.equals( wrapIn.getReplyPublishAble(), "根据权限" )) {
+			if( StringUtils.equals( wrapIn.getReplyPublishAble(), "권한에 따라" )) {
 				if( StringUtils.isNotEmpty( wrapIn.getReplyPublishResult() )) {
 					arrayList.clear();
 					Collections.addAll(arrayList, wrapIn.getReplyPublishResult().split( "," ));
@@ -244,7 +244,7 @@ public class ActionSave extends BaseAction {
 				sectionInfo.setReplyPermissionList( new ArrayList<>() );
 			}
 
-			if( StringUtils.equals( wrapIn.getSubjectPublishAble(), "根据权限" )) {
+			if( StringUtils.equals( wrapIn.getSubjectPublishAble(), "권한에 따라" )) {
 				if( StringUtils.isNotEmpty( wrapIn.getSubjectPublishResult() )) {
 					arrayList.clear();
 					Collections.addAll(arrayList, wrapIn.getSubjectPublishResult().split( "," ));
@@ -277,7 +277,7 @@ public class ActionSave extends BaseAction {
 				}
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionSectionInfoProcess(e, "保存版块信息时发生异常.");
+				Exception exception = new ExceptionSectionInfoProcess(e, "섹션 정보를 저장하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}

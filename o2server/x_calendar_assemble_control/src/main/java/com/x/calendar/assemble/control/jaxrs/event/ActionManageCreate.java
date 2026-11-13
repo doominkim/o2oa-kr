@@ -26,7 +26,7 @@ public class ActionManageCreate extends BaseAction {
 	
 	private static Logger logger = LoggerFactory.getLogger( ActionManageCreate.class );
 
-	@AuditLog(operation = "保存日程事件")
+	@AuditLog(operation = "일정 저장")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = null;

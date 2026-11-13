@@ -1320,7 +1320,7 @@ MWF.xApplication.cms.Column.PopupForm = new Class({
             pcdata.json.appId = id;
             pcdata.json.appName = name;
             // pcdata.json.alias = "";
-            pcdata.json.name = pcdata.json.name.replace("模板", "")
+            pcdata.json.name = pcdata.json.name.replace("템플릿", "")
         }
 
         if(mobiledata){

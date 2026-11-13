@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "AI大模型对接", packageName = "com.x.ai.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "AI 대규모 언어 모델 연동", packageName = "com.x.ai.assemble.control", containerEntities = {
         "com.x.ai.core.entity.File", "com.x.processplatform.core.entity.content.Attachment",
         "com.x.ai.core.entity.AiModel", "com.x.ai.core.entity.Clue", "com.x.ai.core.entity.Completion",
         "com.x.cms.core.entity.FileInfo", "com.x.cms.core.entity.Document","com.x.query.core.entity.Item"},

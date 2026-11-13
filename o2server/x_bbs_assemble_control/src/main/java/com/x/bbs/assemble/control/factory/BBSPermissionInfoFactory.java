@@ -84,7 +84,7 @@ public class BBSPermissionInfoFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery( String.class );
 		Root<BBSPermissionInfo> root = cq.from( BBSPermissionInfo.class );
 		Predicate p = cb.equal( root.get( BBSPermissionInfo_.forumId ), forumId );
-		p = cb.and( p, cb.equal( root.get( BBSPermissionInfo_.permissionType ), "论坛权限" ));
+		p = cb.and( p, cb.equal( root.get( BBSPermissionInfo_.permissionType ), "포럼 권한" ));
 		cq.select( root.get( BBSPermissionInfo_.id ) );
 		return em.createQuery( cq.where(p) ).getResultList();
 	}

@@ -982,29 +982,29 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
 
         var d = this.data;
         var status = [];
-        if(d.isGetSelfHolidays && ( d.selfHolidayDayTime == appLp.wholeDay || d.selfHolidayDayTime == "全天")) {
+        if(d.isGetSelfHolidays && ( d.selfHolidayDayTime == appLp.wholeDay || d.selfHolidayDayTime == "종일")) {
             status.push( appLp.levelAsked )
-        }else if( d.isAbnormalDuty && (d.abnormalDutyDayTime == appLp.wholeDay || d.abnormalDutyDayTime == "全天")){
+        }else if( d.isAbnormalDuty && (d.abnormalDutyDayTime == appLp.wholeDay || d.abnormalDutyDayTime == "종일")){
             status.push( appLp.abNormalDuty )
         }else if(d.isLackOfTime  ) {
             status.push( appLp.lackOfTime )
         }else{
-            if( d.isGetSelfHolidays && ( d.selfHolidayDayTime == appLp.am || d.selfHolidayDayTime == "上午" ) ){
+            if( d.isGetSelfHolidays && ( d.selfHolidayDayTime == appLp.am || d.selfHolidayDayTime == "오전" ) ){
                 status.push( appLp.levelAsked )
             }else if(d.isLate){
                 status.push( appLp.late )
-            }else if(d.isAbsent && ["上午","全天",appLp.am, appLp.wholeDay].contains(d.absentDayTime) ){
+            }else if(d.isAbsent && ["오전","종일",appLp.am, appLp.wholeDay].contains(d.absentDayTime) ){
                 status.push( appLp.absent )
-            }else if( d.isAbnormalDuty && ["上午","全天",appLp.am, appLp.wholeDay].contains(d.abnormalDutyDayTime)){
+            }else if( d.isAbnormalDuty && ["오전","종일",appLp.am, appLp.wholeDay].contains(d.abnormalDutyDayTime)){
                 status.push( appLp.abNormalDuty )
             }
-            if( d.isGetSelfHolidays && ( d.selfHolidayDayTime == "下午" || d.selfHolidayDayTime == appLp.pm ) ){
+            if( d.isGetSelfHolidays && ( d.selfHolidayDayTime == "오후" || d.selfHolidayDayTime == appLp.pm ) ){
                 status.push( appLp.levelAsked );
                 //}else if(d.isLeaveEarlier){
                 //    status.push( '조퇴')
-            }else if(d.isAbsent && ( d.absentDayTime == "下午" || d.absentDayTime == appLp.pm ) ){
+            }else if(d.isAbsent && ( d.absentDayTime == "오후" || d.absentDayTime == appLp.pm ) ){
                 status.push( appLp.abNormalDuty)
-            }else if(d.isAbnormalDuty && ( d.abnormalDutyDayTime == "下午" || d.abnormalDutyDayTime == appLp.pm ) ){
+            }else if(d.isAbnormalDuty && ( d.abnormalDutyDayTime == "오후" || d.abnormalDutyDayTime == appLp.pm ) ){
                 status.push( appLp.abNormalDuty )
             }
         }
@@ -1189,7 +1189,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
             }.bind(this))
         }.bind(this),null,false);
         if( setting.APPEAL_AUDITOR_TYPE && setting.APPEAL_AUDITOR_TYPE.configValue!="" && setting.APPEAL_AUDITOR_VALUE && setting.APPEAL_AUDITOR_VALUE.configValue!=""){
-            if( setting.APPEAL_AUDITOR_TYPE.configValue == lp.reportTo || setting.APPEAL_AUDITOR_TYPE.configValue == "汇报对象" ) {
+            if( setting.APPEAL_AUDITOR_TYPE.configValue == lp.reportTo || setting.APPEAL_AUDITOR_TYPE.configValue == "보고 대상" ) {
                 var d = {"personList": [layout.desktop.session.user.distinguishedName] };
                 this.app.orgActions.listPersonSupDirectValue( d, function( json ){
                     var superior = json.data.personList;
@@ -1204,7 +1204,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
                         }
                     }
                 }.bind(this), null, false );
-            }else if( setting.APPEAL_AUDITOR_TYPE.configValue == "所属部门职位" || setting.APPEAL_AUDITOR_TYPE.configValue == lp.unitDuty ){
+            }else if( setting.APPEAL_AUDITOR_TYPE.configValue == "소속 부서 직무" || setting.APPEAL_AUDITOR_TYPE.configValue == lp.unitDuty ){
                 this.app.personActions.getPerson( function( json ){
                     json.data.woIdentityList.each( function( id ){
                         var unit = id.woUnit;
@@ -1223,7 +1223,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
                         }.bind(this),null ,false)
                     }.bind(this))
                 }.bind(this), null, false );
-            }else if( setting.APPEAL_AUDITOR_TYPE.configValue == "人员属性" || setting.APPEAL_AUDITOR_TYPE.configValue == lp.personAttribute ){
+            }else if( setting.APPEAL_AUDITOR_TYPE.configValue == "사용자 속성" || setting.APPEAL_AUDITOR_TYPE.configValue == lp.personAttribute ){
                 this.app.personActions.getPerson( function( json ){
                     var attribute = setting.APPEAL_AUDITOR_VALUE.configValue;
                     json.data.woPersonAttributeList.each( function( attr ){
@@ -1243,7 +1243,7 @@ MWF.xApplication.Attendance.MyDetail.Appeal = new Class({
                     var text = lp.noPersonAttribute.replace("{att}", setting.APPEAL_AUDITOR_VALUE.configValue);
                     this.app.notice( text, "error");
                 }
-            }else if( setting.APPEAL_AUDITOR_TYPE.configValue == "指定人" || setting.APPEAL_AUDITOR_TYPE.configValue == lp.assignedPerson){
+            }else if( setting.APPEAL_AUDITOR_TYPE.configValue == "지정 사용자" || setting.APPEAL_AUDITOR_TYPE.configValue == lp.assignedPerson){
                 var p = setting.APPEAL_AUDITOR_TYPE.configValue;
                 if( p.split("@")[ p.split("@").length - 1].toLowerCase() == "i"  ){
                     result.push( this.getPersonByIdentity( p ) )

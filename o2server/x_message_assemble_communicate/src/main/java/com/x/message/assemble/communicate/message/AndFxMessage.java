@@ -254,7 +254,7 @@ public class AndFxMessage extends GsonPropertyObject {
 		m.setClient_id("5d3fdc22dbdd7a668be5fbff");
 		m.setSender("10086102021");
 		m.setUuid(StringUtils.replace(StringTools.uniqueToken(), "-", ""));
-		m.setContent(gson.toJson(AndFxMessage.getContentInst("智慧办公消息","O2OA测试标题1", "O2OA测试消息内容1", null)));
+		m.setContent(gson.toJson(AndFxMessage.getContentInst("스마트 오피스 메시지","O2OA 테스트 제목1", "O2OA 테스트 메시지 내용1", null)));
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("appKey=" + m.getAppKey())
 				.append("client_id=" + m.getClient_id())

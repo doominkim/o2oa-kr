@@ -22,7 +22,7 @@ public class ActionPersistDeleteWithBatch extends BaseAction {
 	
 	protected static final int SQL_STATEMENT_IN_BATCH = 1000;
 
-	@AuditLog(operation = "根据导入批次号删除文档")
+	@AuditLog(operation = "가져오기 배치 번호로 문서 삭제")
 	protected ActionResult<Wo> execute( HttpServletRequest request, String importBatchName, EffectivePerson effectivePerson ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		List<String> docIds = null;
@@ -45,12 +45,12 @@ public class ActionPersistDeleteWithBatch extends BaseAction {
 							emc.remove( document, CheckRemoveType.all );
 							i++;
 							if( i%100 == 0 ) {
-								System.out.println( ">>>>>>>>>正在删除第条"+i+"数据......" );
+								System.out.println( ">>>>>>>>>삭제 중: 번째"+i+"데이터......" );
 							}
 							
 							new CmsBatchOperationPersistService().addOperation( 
 									CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT, 
-									CmsBatchOperationProcessService.OPT_TYPE_DELETE,  document.getId(),  document.getId(), "文档删除：ID=" +  document.getId() );
+									CmsBatchOperationProcessService.OPT_TYPE_DELETE,  document.getId(),  document.getId(), "문서 삭제: ID=" +  document.getId() );
 							
 							//핫 이미지 삭제 필요 여부 확인
 							try {
@@ -66,7 +66,7 @@ public class ActionPersistDeleteWithBatch extends BaseAction {
 				}
 				result.setCount( Long.parseLong( docIds.size() + "") );
 			}
-			logService.log( emc, effectivePerson.getDistinguishedName(), "按批次号删除导入文档信息！" + importBatchName, appId, categoryId, null, "", "DOCUMENT", "删除" );
+			logService.log( emc, effectivePerson.getDistinguishedName(), "가져오기 배치 번호로 가져온 문서 정보 삭제!" + importBatchName, appId, categoryId, null, "", "DOCUMENT", "삭제" );
 
 			Wo wo = new Wo();
 			wo.setId( importBatchName );

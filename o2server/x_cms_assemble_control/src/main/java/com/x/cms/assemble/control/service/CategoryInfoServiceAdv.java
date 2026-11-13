@@ -319,7 +319,7 @@ public class CategoryInfoServiceAdv {
 				categoryInfo_entity.setViewableUnitList( categoryInfo.getViewableUnitList() );
 				categoryInfo_entity.setViewableGroupList( categoryInfo.getViewableGroupList() );
 				if( StringUtils.isEmpty( categoryInfo_entity.getDocumentType() )) {
-					categoryInfo_entity.setDocumentType( "信息" );
+					categoryInfo_entity.setDocumentType( "정보" );
 				}
 				emc.check(categoryInfo_entity , CheckPersistType.all );
 				emc.commit();

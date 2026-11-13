@@ -39,7 +39,7 @@ public class ActionFileUploadWithUrl extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ActionFileUploadWithUrl.class);
 
-	@AuditLog(operation = "上传附件")
+	@AuditLog(operation = "첨부파일 업로드")
 	protected ActionResult<Wo> execute(EffectivePerson effectivePerson,
 										JsonElement jsonElement) throws Exception {
 		logger.debug("ActionFileUploadWithUrl receive:{}.", jsonElement.toString());

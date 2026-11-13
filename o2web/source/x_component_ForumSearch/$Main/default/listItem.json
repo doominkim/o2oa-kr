@@ -155,13 +155,13 @@
             //"access": "admin",
             "title": "edit",
             "action": "edit",
-            "condition": "function( d ){ return (d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.isAdmin() || MWFForum.isSubjectEditor(d)) }",
+            "condition": "function( d ){ return (d.typeCategory!='투표' && d.typeCategory!=this.app.lp.vote) && (this.isAdmin() || MWFForum.isSubjectEditor(d)) }",
             "styles": "actionEditNode",
             "mouseoverStyles": "actionEditNode_over",
             "mousedownStyles": "actionEditNode_over"
           },
           "placeholder" : {
-            "show": "function( d ){ return !((d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.isAdmin() || MWFForum.isSubjectEditor(d))) }"
+            "show": "function( d ){ return !((d.typeCategory!='투표' && d.typeCategory!=this.app.lp.vote) && (this.isAdmin() || MWFForum.isSubjectEditor(d))) }"
           },
           "remove": {
             "title": "remove",

@@ -55,7 +55,7 @@ public class AttendanceDetailMobileAnalyseService {
 					if( attendanceDetail != null ){
 						emc.beginTransaction( AttendanceDetail.class );
 						attendanceDetail.setRecordStatus( 0 );//미분석으로 설정
-						if( "上班打卡".equals( attendanceDetailMobile.getSignDescription() )){
+						if( "출근 체크".equals( attendanceDetailMobile.getSignDescription() )){
 							if( attendanceDetail.getOnDutyTime() == null ){
 								onDutyTime = dateOperation.getDateFromString( attendanceDetailMobile.getSignTime() );
 								if( signTime.before( onDutyTime )){
@@ -86,7 +86,7 @@ public class AttendanceDetailMobileAnalyseService {
 					attendanceDetail.setMonthString( dateOperation.getMonth( createTime ) );			
 				}
 				attendanceDetail.setRecordDateString( attendanceDetailMobile.getRecordDateString() );
-				if( "上班打卡".equals( attendanceDetailMobile.getSignDescription() )){
+				if( "출근 체크".equals( attendanceDetailMobile.getSignDescription() )){
 					attendanceDetail.setOnDutyTime( attendanceDetailMobile.getSignTime() );
 				}else{
 					//출근 체크가 아니면 모두 퇴근 체크로 갱신

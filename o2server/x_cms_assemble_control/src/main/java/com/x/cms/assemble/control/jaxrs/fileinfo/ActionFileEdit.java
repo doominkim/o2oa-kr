@@ -29,7 +29,7 @@ class ActionFileEdit extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ActionFileEdit.class);
 
-	@AuditLog(operation = "编辑附件")
+	@AuditLog(operation = "첨부파일 편집")
 	ActionResult<Wo> execute(HttpServletRequest request, EffectivePerson effectivePerson, String id, String docId,
 			JsonElement jsonElement) {
 		logger.debug("receive id:{}, jsonElement:{}.", id, jsonElement);

@@ -3899,7 +3899,7 @@
             "blDepartment"
           ],
           "identityValue": [],
-          "dutyValue": "[{\"name\":\"正职领导\",\"id\":\"C75B186F81C0000162761E0F22151B6F\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
+          "dutyValue": "[{\"name\":\"정 책임자\",\"id\":\"C75B186F81C0000162761E0F22151B6F\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
           "inputStyles": {
             "height": "26px",
             "color": "#666"
@@ -13370,7 +13370,7 @@
             "blDepartment"
           ],
           "identityValue": [],
-          "dutyValue": "[{\"name\":\"正职领导\",\"id\":\"C75B186F81C0000162761E0F22151B6F\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
+          "dutyValue": "[{\"name\":\"정 책임자\",\"id\":\"C75B186F81C0000162761E0F22151B6F\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
           "inputStyles": {
             "height": "26px",
             "color": "#666",

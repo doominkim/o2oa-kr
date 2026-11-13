@@ -30,9 +30,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "SysResourceAction", description = "系统资源接口.")
+@Tag(name = "SysResourceAction", description = "시스템 리소스 인터페이스.")
 @Path("sysresource")
-@JaxrsDescribe(value = "系统资源接口.", scope = DescribeScope.system)
+@JaxrsDescribe(value = "시스템 리소스 인터페이스.", scope = DescribeScope.system)
 public class SysResourceAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SysResourceAction.class);

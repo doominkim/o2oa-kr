@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 import com.x.base.core.entity.StorageType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "考勤管理", packageName = "com.x.attendance.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "근태 관리", packageName = "com.x.attendance.assemble.control", containerEntities = {
         "com.x.attendance.entity.AttendanceAdmin", "com.x.attendance.entity.AttendanceAppealInfo",
         "com.x.attendance.entity.AttendanceAppealAuditInfo",
         "com.x.attendance.entity.AttendanceDetail",

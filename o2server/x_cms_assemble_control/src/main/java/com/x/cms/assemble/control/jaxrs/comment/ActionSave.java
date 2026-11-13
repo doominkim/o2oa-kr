@@ -42,7 +42,7 @@ public class ActionSave extends BaseAction {
 				}
 			}
 			documentCommentInfo.setAuditorName( "" );
-			documentCommentInfo.setCommentAuditStatus( "通过" );
+			documentCommentInfo.setCommentAuditStatus( "통과" );
 		} catch (Exception e) {
 			check = false;
 			Exception exception = new ExceptionCommentPersist(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());

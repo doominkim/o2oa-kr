@@ -9,7 +9,7 @@ public class AttendanceV2ConfigProperties extends JsonProperties {
 
     private static final long serialVersionUID = 2401225663110698389L;
 
-    final List<String> defaultList = Collections.singletonList("考勤管理员");
+    final List<String> defaultList = Collections.singletonList("근태 관리자");
 
     @FieldDescribe("휴가 관리 기본 데이터 초기화 여부.")
     private Boolean leaveTypeInitialized = false;
@@ -19,7 +19,7 @@ public class AttendanceV2ConfigProperties extends JsonProperties {
     private Integer checkInAlertOnDutyBeforeMinutes = 10;
     @FieldDescribe("중국 공휴일 데이터 동기화 사용 여부")
     private Boolean chineseHolidaySyncEnable = true;
-    @FieldDescribe("考勤管理员职务名称")
+    @FieldDescribe("근태 관리자 직무 이름")
     private List<String> statisticUnitDutyNameList =  defaultList;
     @FieldDescribe("외근 체크 실행 스크립트")
     private String fieldWorkExecuteScript;

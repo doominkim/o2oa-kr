@@ -6577,7 +6577,7 @@
             "height": "26px",
             "color": "#666"
           },
-          "dutyValue": "[{\"name\":\"正职领导\",\"id\":\"C7937194A7600001A8EA1F1015C71E29\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
+          "dutyValue": "[{\"name\":\"정 책임자\",\"id\":\"C7937194A7600001A8EA1F1015C71E29\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
           "moduleName": "personfield"
         },
         "projectNumber": {
@@ -9940,7 +9940,7 @@
             "blDepartment"
           ],
           "identityValue": [],
-          "dutyValue": "[{\"name\":\"正职领导\",\"id\":\"C75B186F81C0000162761E0F22151B6F\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
+          "dutyValue": "[{\"name\":\"정 책임자\",\"id\":\"C75B186F81C0000162761E0F22151B6F\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]",
           "inputStyles": {
             "height": "26px",
             "color": "#666",
@@ -12362,7 +12362,7 @@
             "text-align": "right"
           },
           "moduleName": "personfield",
-          "dutyValue": "[{\"name\":\"正职领导\",\"id\":\"C7937C0A00500001BCF570B1132A10D4\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]"
+          "dutyValue": "[{\"name\":\"정 책임자\",\"id\":\"C7937C0A00500001BCF570B1132A10D4\",\"code\":\"return this.workContext.getWork().creatorDepartment\"}]"
         },
         "table_table$Td_7": {
           "id": "table_table$Td_7",

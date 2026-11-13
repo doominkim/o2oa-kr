@@ -292,10 +292,10 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
     load: function (callback) {
         o2.Actions.load("x_query_assemble_surface").ImportModelAction.getRecord(this.options.recordId, function (json) {
             this.data = json.data;
-            this.currentStatus = ["导入成功","导入失败"].contains(this.data.status) ? this.data.status : "";
+            this.currentStatus = ["가져오기 성공","가져오기 실패"].contains(this.data.status) ? this.data.status : "";
             this.createNode();
             this.setBaseInfor();
-            if( this.data.status === "部分成功" ){
+            if( this.data.status === "일부 가져오기 성공" ){
                 this.createTab();
             }
             if(!this.dlg)this.openDlg();
@@ -309,7 +309,7 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
             this.loadView();
             this.dlg.button.getElements("input[type='button']").each(function (button) {
                 if( [this.lp.reExecuteImport,this.lp.exportErrorDataToExcel].contains(button.get("value"))){
-                    button.setStyle("display", this.data.status === "导入成功" ? "none" : "")
+                    button.setStyle("display", this.data.status === "가져오기 성공" ? "none" : "")
                 }
             }.bind(this))
         }.bind(this));
@@ -318,7 +318,7 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
         this.node = new Element("div", { style : "padding:0px;"});
         if(this.dlg)this.node.inject(this.dlg.content);
         this.inforNode = new Element("div", { style : "padding:0px;"}).inject(this.node);
-        if( this.data.status === "部分成功" ){
+        if( this.data.status === "일부 가져오기 성공" ){
             this.tabNode = new Element("div", { "styles": this.css.tabNode }).inject(this.node);
         }
         this.viewNode = new Element("div", { style : "padding:0px;"}).inject(this.node);
@@ -326,8 +326,8 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
     createTab: function(){
         [
             {"text": this.lp.importStatusList[0], "value": ""},
-            {"text": this.lp.importStatusList[1], "value": "导入成功"},
-            {"text": this.lp.importStatusList[2], "value": "导入失败"}
+            {"text": this.lp.importStatusList[1], "value": "가져오기 성공"},
+            {"text": this.lp.importStatusList[2], "value": "가져오기 실패"}
          ].each(function (obj, i) {
             var tabItemNode = new Element("div", {
                 "styles": this.css.tabItemNode,
@@ -388,7 +388,7 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
                 _self.dlg = null;
             }
         };
-        if( this.data.status === "导入成功" ){
+        if( this.data.status === "가져오기 성공" ){
             opt.buttonList.splice(0, 2);
         }
         this.dlg = o2.DL.open(opt);
@@ -564,7 +564,7 @@ MWF.xApplication.query.Query.ImporterRecord.Detail = new Class({
         }else{
             o2.Actions.load("x_query_assemble_surface").ImportModelAction.recordItemListPaging( 1, 100000, {
                 "recordId": this.options.recordId,
-                "status": "导入失败"
+                "status": "가져오기 실패"
             }, function(json){
                 var errorData = [];
                 json.data.each(function(d){
@@ -599,7 +599,7 @@ MWF.xApplication.query.Query.ImporterRecord.DetailView = new Class({
         if(!count)count=15;
         if(!pageNum)pageNum = 1;
 
-        if( this.explorer.importerJSON.type==='dynamicTable' && this.explorer.currentStatus === "导入失败" ){
+        if( this.explorer.importerJSON.type==='dynamicTable' && this.explorer.currentStatus === "가져오기 실패" ){
             if( !this.explorer.viewData ){
                 this.explorer.viewData = JSON.parse(this.explorer.data.data);
             }
@@ -610,7 +610,7 @@ MWF.xApplication.query.Query.ImporterRecord.DetailView = new Class({
             var start = count*(pageNum-1), end = count*pageNum;
             for( var i=start; i<end && i<data.count; i++ ){
                 data.data.push({
-                    status: "导入失败",
+                    status: "가져오기 실패",
                     createTime: this.explorer.data.createTime,
                     distribution: this.explorer.data.distribution || "",
                     srcData : this.explorer.viewData[i] || []

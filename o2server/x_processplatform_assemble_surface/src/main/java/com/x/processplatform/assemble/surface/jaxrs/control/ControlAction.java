@@ -28,9 +28,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ControlAction", description = "权限接口.")
+@Tag(name = "ControlAction", description = "권한 인터페이스.")
 @Path("control")
-@JaxrsDescribe("权限接口.")
+@JaxrsDescribe("권한 인터페이스.")
 public class ControlAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ControlAction.class);

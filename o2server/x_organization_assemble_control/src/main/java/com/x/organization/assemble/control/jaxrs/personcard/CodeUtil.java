@@ -71,7 +71,7 @@ public class CodeUtil {
 				outg.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
 				// 새 패널에 텍스트 그리기
 				outg.setColor(Color.BLACK);
-				outg.setFont(new Font("楷体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
+				outg.setFont(new Font("KaiTi", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 				int strWidth = outg.getFontMetrics().stringWidth(note);
 				if (strWidth > WIDTH) {
 					// //길이가 너무 길면 앞부분만 자름
@@ -85,7 +85,7 @@ public class CodeUtil {
 					Graphics2D outg2 = outImage2.createGraphics();
 					outg2.drawImage(outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
 					outg2.setColor(Color.BLACK);
-					outg2.setFont(new Font("宋体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
+					outg2.setFont(new Font("SimSun", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 					outg2.drawString(note2, 200 - strWidth2 / 2,
 							outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight()) / 2 + 5);
 					outg2.dispose();
@@ -156,7 +156,7 @@ public class CodeUtil {
 				outg.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
 				// 새 패널에 텍스트 그리기
 				outg.setColor(Color.BLACK);
-				outg.setFont(new Font("楷体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
+				outg.setFont(new Font("KaiTi", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 				int strWidth = outg.getFontMetrics().stringWidth(note);
 				if (strWidth > WIDTH) {
 					// //길이가 너무 길면 앞부분만 자름
@@ -170,7 +170,7 @@ public class CodeUtil {
 					Graphics2D outg2 = outImage2.createGraphics();
 					outg2.drawImage(outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
 					outg2.setColor(Color.BLACK);
-					outg2.setFont(new Font("宋体", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
+					outg2.setFont(new Font("SimSun", Font.BOLD, 30)); // 글꼴, 글꼴 스타일, 글꼴 크기
 					outg2.drawString(note2, 200 - strWidth2 / 2,
 							outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight()) / 2 + 5);
 					outg2.dispose();

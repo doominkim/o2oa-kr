@@ -28,9 +28,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "SearchAction", description = "搜索接口.")
+@Tag(name = "SearchAction", description = "검색 인터페이스.")
 @Path("search")
-@JaxrsDescribe("搜索接口.")
+@JaxrsDescribe("검색 인터페이스.")
 public class SearchAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchAction.class);

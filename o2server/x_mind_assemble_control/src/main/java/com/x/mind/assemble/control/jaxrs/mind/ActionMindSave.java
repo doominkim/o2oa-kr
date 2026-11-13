@@ -31,7 +31,7 @@ public class ActionMindSave extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionMindSave.class );
 
-	@AuditLog(operation = "保存脑图文件")
+	@AuditLog(operation = "마인드맵 파일 저장")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = null;

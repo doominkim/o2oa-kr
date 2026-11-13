@@ -29,7 +29,7 @@ public class ActionMoveToFolder extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionMoveToFolder.class );
 
-	@AuditLog(operation = "移动文件目录")
+	@AuditLog(operation = "폴더 이동")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String folderId, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = null;

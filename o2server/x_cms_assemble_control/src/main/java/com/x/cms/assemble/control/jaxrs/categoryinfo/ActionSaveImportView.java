@@ -26,7 +26,7 @@ public class ActionSaveImportView extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( ActionSaveImportView.class );
 
-	@AuditLog(operation = "修改分类文档导入视图")
+	@AuditLog(operation = "분류 문서 가져오기 뷰 수정")
 	protected ActionResult<Wo> execute(  HttpServletRequest request, EffectivePerson effectivePerson, String categoryId, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		CategoryInfo categoryInfo = null;

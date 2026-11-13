@@ -34,9 +34,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ExmailAction", description = "腾讯企业邮接口.")
+@Tag(name = "ExmailAction", description = "텐센트 기업 메일 인터페이스.")
 @Path("exmail")
-@JaxrsDescribe("腾讯企业邮接口.")
+@JaxrsDescribe("텐센트 기업 메일 인터페이스.")
 public class ExmailAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExmailAction.class);

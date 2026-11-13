@@ -60,7 +60,7 @@ public class Timertask_BatchOperationTask extends AbstractJob {
 							cmsBatchOperationPersistService.addOperation(
 									CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
 									CmsBatchOperationProcessService.OPT_TYPE_PERMISSION, docId, docId,
-									"刷新文档权限：ID=" + docId);
+									"문서 권한 갱신: ID=" + docId);
 						}
 					} else {
 						logger.debug("Timertask_BatchOperationTask -> not found any unreview document in database.");

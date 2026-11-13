@@ -374,7 +374,7 @@ MWF.xApplication.ForumDocument.Main = new Class({
 					},
 					typeCategory :{ type : "select", selectValue : typeCategorySelectValue , notEmpty : true, event : {
 						change : function(item, ev){
-							if( item.getValue() == this.lp.vote || item.getValue() == "投票"){
+							if( item.getValue() == this.lp.vote || item.getValue() == "투표"){
 								this.contentDiv.getElements( "[item='voteArea']").setStyle("display","");
 								this.loadVoteArea();
 							}else{
@@ -416,7 +416,7 @@ MWF.xApplication.ForumDocument.Main = new Class({
 			}, this, this.css);
 			this.form.load();
 		}.bind(this), true);
-		if( this.data.typeCategory == this.lp.vote || this.data.typeCategory == "投票"){
+		if( this.data.typeCategory == this.lp.vote || this.data.typeCategory == "투표"){
 			this.contentDiv.getElement( "[item='voteArea']").setStyle("display","");
 			this.loadVoteArea();
 		}
@@ -536,12 +536,12 @@ MWF.xApplication.ForumDocument.Main = new Class({
 		if( !data ){ //검증 실패
 			// 투표 검증
 			var typeCategory = this.form.getItem("typeCategory");
-			if( typeCategory.getValue() == this.lp.vote || typeCategory.getValue() == "投票"){
+			if( typeCategory.getValue() == this.lp.vote || typeCategory.getValue() == "투표"){
 				this.vote.getVoteInfor()
 			}
 			return;
 		}
-		if( data.typeCategory == this.lp.vote || data.typeCategory == "投票"){
+		if( data.typeCategory == this.lp.vote || data.typeCategory == "투표"){
 			var voteData = this.vote.getVoteInfor();
 			if( !voteData )return;
 			for( var key in voteData ){
@@ -607,7 +607,7 @@ MWF.xApplication.ForumDocument.Main = new Class({
 			"styles" : this.css.subjectConainer
 		}).inject( contentConainer );
 
-		if( this.data.typeCategory == this.lp.question || this.data.typeCategory =="问题"){
+		if( this.data.typeCategory == this.lp.question || this.data.typeCategory =="질문"){
 			this.satisfiedReplyViewConainer = new Element("div.satisfiedReplyViewConainer",{
 				"styles" : this.css.replyViewConainer
 			}).inject( contentConainer );
@@ -620,7 +620,7 @@ MWF.xApplication.ForumDocument.Main = new Class({
 		this.createPagingBar();
 
 		this.createSubject();
-		if( this.data.typeCategory == this.lp.question || this.data.typeCategory =="问题") {
+		if( this.data.typeCategory == this.lp.question || this.data.typeCategory =="질문") {
 			if( this.data.acceptReplyId ){
 				this.createSatisfiedReplyView();
 			}
@@ -800,9 +800,9 @@ MWF.xApplication.ForumDocument.Main = new Class({
 				"styles" : this.css.toolbarPrime,
 				"title" : (this.data.screamSetterName || "").split("@")[0]+ this.lp.at + this.data.screamSetterTime + this.lp.setPrime
 			}).inject( this.toolbarRight );
-		}else if( this.data.typeCategory == this.lp.vote || this.data.typeCategory == "投票"){
+		}else if( this.data.typeCategory == this.lp.vote || this.data.typeCategory == "투표"){
 			new Element( "div.vote", { "styles" : this.css.toolbarVote, "title" : this.lp.vote }).inject( this.toolbarRight );
-		}else if( this.data.typeCategory == this.lp.question || this.data.typeCategory =="问题"){
+		}else if( this.data.typeCategory == this.lp.question || this.data.typeCategory =="질문"){
 			new Element( "div.question", { "styles" : this.css.toolbarQuestion, "title" : this.lp.question }).inject( this.toolbarRight );
 		}
 
@@ -1078,7 +1078,7 @@ MWF.xApplication.ForumDocument.Main = new Class({
 			})
 		}
 
-		if( this.data.typeCategory != this.lp.vote && this.data.typeCategory!="投票"){
+		if( this.data.typeCategory != this.lp.vote && this.data.typeCategory!="투표"){
 			if( this.permission.manageAble || this.permission.editAble || this.data.creatorName == this.userName || MWFForum.isSubjectEditor(this.data) ){
 				action = new Element("div", {
 					"styles" : this.css.actionItem,
@@ -1824,7 +1824,7 @@ debugger;
 			this.app.loadAttachment(attachmentArea);
 		}
 
-		if( this.data.typeCategory == this.lp.vote  || this.data.typeCategory =="投票"){
+		if( this.data.typeCategory == this.lp.vote  || this.data.typeCategory =="투표"){
 			var voteArea = itemNode.getElement("[item='vote']");
 			MWF.xDesktop.requireApp("ForumDocument", "Vote", function(){
 				this.vote = new MWF.xApplication.ForumDocument.Vote(voteArea, this.app, {

@@ -366,8 +366,8 @@ public class ActionMobilePreview extends BaseAction {
 		@FieldDescribe("사전 기록 결과 유형: 1정상|2지각|3결근|4조퇴|5완료")
 		private Integer signSeq = 1;
 
-		@FieldDescribe("打卡操作名称：上班打卡|下班打卡|午休打卡|上午下班打卡|下午上班打卡(根据不同的打卡策略稍有不同)....")
-		private String checkinType = "上班打卡";
+		@FieldDescribe("체크 작업 이름: 출근 체크|퇴근 체크|점심 체크|오전 퇴근 체크|오후 출근 체크(체크 정책에 따라 다소 다름)....")
+		private String checkinType = "출근 체크";
 
 		public Integer getSignSeq() { return signSeq; }
 

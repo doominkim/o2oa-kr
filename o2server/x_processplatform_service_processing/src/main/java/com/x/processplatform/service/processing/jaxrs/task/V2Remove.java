@@ -18,7 +18,7 @@ import com.x.processplatform.core.entity.content.Task;
 import com.x.processplatform.core.entity.content.Work;
 import com.x.processplatform.service.processing.ProcessPlatformKeyClassifyExecutorFactory;
 
-@Deprecated(since = "8.2,要删除掉和ActionDelete重复.", forRemoval = true)
+@Deprecated(since = "8.2, ActionDelete와 중복이므로 삭제 예정.", forRemoval = true)
 class V2Remove extends BaseAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(V2Remove.class);

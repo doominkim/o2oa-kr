@@ -41,7 +41,7 @@
           "createTime" : { "value" : "function(d){ return d.createTime.split(' ')[0] }" },
           "creatorName": { "value" : "function(d){ return d.creatorName.split('@')[0] }" },
           "sectionType": {  },
-          "sectionStatus": { "styles" : "function(d){ return d.sectionStatus == '启用' ? {'color':'green'} : {'color':'#845a5a'} }" },
+          "sectionStatus": { "styles" : "function(d){ return d.sectionStatus == '사용' ? {'color':'green'} : {'color':'#845a5a'} }" },
           "remove" : {
             "condition" : "function(d){ return this.explorer.forumAdminObj[d.forumId]  || this.app.access.isAdmin() }", //|| this.app.access.isSectionManager( d )
             "action" : "remove"

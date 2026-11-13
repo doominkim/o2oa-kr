@@ -22,7 +22,7 @@ public class ActionAppInfoPublisherSave extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( ActionAppInfoPublisherSave.class );
 
-	@AuditLog(operation = "保存栏目发布者")
+	@AuditLog(operation = "게시판 게시자 저장")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String appId, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wi = null;
@@ -69,8 +69,8 @@ public class ActionAppInfoPublisherSave extends BaseAction {
 
 		//갱신 완료
 		if( check ){
-			String description = "栏目："+appId+"权限变更";
-			new LogService().log( null,  effectivePerson.getDistinguishedName(), description, appId, "", "", appId, "APPINFO_PUBLISHER", "发布权限变更" );
+			String description = "게시판: "+appId+"권한 변경";
+			new LogService().log( null,  effectivePerson.getDistinguishedName(), description, appId, "", "", appId, "APPINFO_PUBLISHER", "게시 권한 변경" );
 
 			CacheManager.notify( AppInfo.class );
 			Wo wo = new Wo();
@@ -82,7 +82,7 @@ public class ActionAppInfoPublisherSave extends BaseAction {
 			try {
 				new CmsBatchOperationPersistService().addOperation(
 						CmsBatchOperationProcessService.OPT_OBJ_APPINFO,
-						CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  appId,  appId, "栏目发布权限变更：ID=" +  appId );
+						CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  appId,  appId, "게시판 게시 권한 변경: ID=" +  appId );
 			}catch( Exception e ) {
 				e.printStackTrace();
 			}

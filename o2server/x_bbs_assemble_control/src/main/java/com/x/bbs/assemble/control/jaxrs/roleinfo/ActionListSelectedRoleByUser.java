@@ -54,7 +54,7 @@ public class ActionListSelectedRoleByUser extends BaseAction {
 				personName = userManagerService.getPersonNameByFlag( wrapIn.getUserName() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "人员信息查询时发生异常！Person:" + wrapIn.getUserName() );
+				Exception exception = new ExceptionRoleInfoProcess( e, "사용자 정보를 조회하는 중 오류가 발생했습니다! Person:" + wrapIn.getUserName() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -68,10 +68,10 @@ public class ActionListSelectedRoleByUser extends BaseAction {
 		}
 		if (check) {
 			try {
-				roleInfoList = roleInfoService.listRoleByObjectUniqueId(wrapIn.getUserName(), "人员");
+				roleInfoList = roleInfoService.listRoleByObjectUniqueId(wrapIn.getUserName(), "사용자");
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "역할이 연결된 대상의 고유 식별자로 역할 목록을 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getUserName() + ", Type:人员" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "역할이 연결된 대상의 고유 식별자로 역할 목록을 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getUserName() + ", Type:사용자" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

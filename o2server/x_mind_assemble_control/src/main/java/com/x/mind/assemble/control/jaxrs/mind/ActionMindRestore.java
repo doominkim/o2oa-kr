@@ -22,7 +22,7 @@ public class ActionMindRestore extends BaseAction {
 
 	private Logger logger = LoggerFactory.getLogger( ActionMindRestore.class );
 
-	@AuditLog(operation = "恢复脑图文件")
+	@AuditLog(operation = "마인드맵 파일 복원")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String recycleId ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();

@@ -131,7 +131,7 @@ public class CmsBatchOperationProcessService {
 						emc.commit();
 						cmsBatchOperationPersistService.addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
-								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION, document.getId(), document.getId(), "栏目权限变更引起文档Review变更：ID=" + document.getId() );
+								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION, document.getId(), document.getId(), "게시판 권한 변경에 따른 문서 Review 변경: ID=" + document.getId() );
 					}
 
 				}
@@ -179,7 +179,7 @@ public class CmsBatchOperationProcessService {
 						logger.info( "refreshDocumentReviewInCagetory -> Send docment permission operation to queue[queueBatchOperation], document:" + document.getTitle()  );
 						cmsBatchOperationPersistService.addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
-								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION, document.getId(), document.getId(), "分类权限变更引起文档Review变更：ID=" + document.getId() );
+								CmsBatchOperationProcessService.OPT_TYPE_PERMISSION, document.getId(), document.getId(), "분류 권한 변경에 따른 문서 Review 변경: ID=" + document.getId() );
 					}
 
 				}
@@ -368,7 +368,7 @@ public class CmsBatchOperationProcessService {
 										documentInfoService.delete( emc, docId );
 										new CmsBatchOperationPersistService().addOperation(
 												CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
-												CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "栏目删除引起文档删除：ID=" + id );
+												CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "게시판 삭제에 따른 문서 삭제: ID=" + id );
 										logger.info( "deleteDocumentInApp -> cms processing batch operation: remove document("+ currenteWhileCount +"/" + totalWhileCount + "): " + docId );
 									}catch( Exception e ) {
 										e.printStackTrace();
@@ -506,7 +506,7 @@ public class CmsBatchOperationProcessService {
 								documentInfoService.delete( emc, docId );
 								new CmsBatchOperationPersistService().addOperation(
 										CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
-										CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "分类删除引起文档删除：ID=" + id );
+										CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "분류 삭제에 따른 문서 삭제: ID=" + id );
 								logger.info( "deleteDocumentInCategory -> cms processing batch operation: remove document("+ currenteWhileCount +"/" + totalWhileCount + "): " + docId );
 							}catch( Exception e ) {
 								e.printStackTrace();

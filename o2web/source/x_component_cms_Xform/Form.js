@@ -769,7 +769,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                                 if (this[t.action]) this[t.action](e);
                             }
                         }.bind(this);
-                        if (tool.text === "继续流转" || tool.id === "action_processWork") {
+                        if (tool.text === "다음 단계로 진행" || tool.id === "action_processWork") {
                             //입력기가 활성화되면 입력기가 닫힐 때까지 잠시 대기 필요
                             window.setTimeout(clickFun, 100)
                         } else {
@@ -1017,19 +1017,19 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                     var type;
                     switch (flag.toLowerCase()) {
                         case "i":
-                            type = "人员"; //"신분";
+                            type = "사용자"; //"신분";
                             break;
                         case "p":
-                            type = "人员";
+                            type = "사용자";
                             break;
                         case "u":
-                            type = "组织";
+                            type = "조직";
                             break;
                         case "g":
-                            type = "群组";
+                            type = "그룹";
                             break;
                         case "r":
-                            type = "角色";
+                            type = "역할";
                             break;
                         default:
                             type = "";
@@ -1045,7 +1045,7 @@ MWF.xApplication.cms.Xform.Form = MWF.CMSForm = new Class(
                             name = dn.split("@")[0];
                         }
                         result.push({
-                            permission: t === "author" ? "作者" : "阅读",
+                            permission: t === "author" ? "작성자" : "열람",
                             permissionObjectType: type,
                             permissionObjectName: name,
                             permissionObjectCode: dn

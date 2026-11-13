@@ -35,7 +35,7 @@ public class ActionQueryCountWithFilter extends BaseAction {
         }
 
         if (StringUtils.isEmpty(wi.getDocumentType())) {
-            wi.setDocumentType("信息");
+            wi.setDocumentType("정보");
         }
 
         if (ListTools.isEmpty(wi.getStatusList())) {

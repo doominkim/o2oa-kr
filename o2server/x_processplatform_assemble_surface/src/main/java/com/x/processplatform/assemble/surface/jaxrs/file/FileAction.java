@@ -31,9 +31,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "FileAction", description = "文件接口.")
+@Tag(name = "FileAction", description = "파일 인터페이스.")
 @Path("file")
-@JaxrsDescribe("文件接口.")
+@JaxrsDescribe("파일 인터페이스.")
 public class FileAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileAction.class);

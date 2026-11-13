@@ -111,7 +111,7 @@ public class ActionGetAllWithPermission extends BaseAction {
 					Iterator<BBSForumInfo> it = forumInfoList.iterator();
 					while (it.hasNext()) {
 						BBSForumInfo forumInfo = it.next();
-						if(!forumInfo.getForumStatus().equalsIgnoreCase("停用")) {
+						if(!forumInfo.getForumStatus().equalsIgnoreCase("사용 중지")) {
 							bbsForumInfoList.add(forumInfo);
 						}
 					}

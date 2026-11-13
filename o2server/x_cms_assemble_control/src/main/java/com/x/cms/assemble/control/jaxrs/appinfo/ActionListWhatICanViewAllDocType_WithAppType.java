@@ -67,7 +67,7 @@ public class ActionListWhatICanViewAllDocType_WithAppType extends BaseAction {
 							wo.setWrapOutCategoryList(emc.fetch(cateIds, WoCategory.copier2));
 						}
 						if (StringUtils.isBlank(wo.getAppType())) {
-							wo.setAppType("未分类");
+							wo.setAppType("미분류");
 						}
 						wos.add(wo);
 					}

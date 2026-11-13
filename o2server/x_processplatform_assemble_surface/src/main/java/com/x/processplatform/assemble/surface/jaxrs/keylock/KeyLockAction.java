@@ -27,9 +27,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "KeyLockAction", description = "工作锁接口.")
+@Tag(name = "KeyLockAction", description = "작업 잠금 인터페이스.")
 @Path("keylock")
-@JaxrsDescribe("工作锁接口.")
+@JaxrsDescribe("작업 잠금 인터페이스.")
 public class KeyLockAction extends BaseAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(KeyLockAction.class);

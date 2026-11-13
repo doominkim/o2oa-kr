@@ -32,7 +32,7 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionPersistPublishAndNotify.class);
 
-	@AuditLog(operation = "发布一个文档")
+	@AuditLog(operation = "문서 게시")
 	protected ActionResult<Wo> execute(HttpServletRequest request, String id, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		List<FileInfo> cloudPictures = null;
@@ -86,7 +86,7 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 				}
 
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统将文档状态修改为发布状态时发生异常。Id:" + id);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "문서 상태를 게시로 변경하는 중 오류가 발생했습니다. Id:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 				throw exception;
@@ -97,7 +97,7 @@ public class ActionPersistPublishAndNotify extends BaseAction {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				logService.log(emc, effectivePerson.getDistinguishedName(),
 						document.getCategoryAlias() + ":" + document.getTitle(), document.getAppId(),
-						document.getCategoryId(), document.getId(), "", "DOCUMENT", "发布");
+						document.getCategoryId(), document.getId(), "", "DOCUMENT", "게시");
 			} catch (Throwable th) {
 				th.printStackTrace();
 				result.error(th);

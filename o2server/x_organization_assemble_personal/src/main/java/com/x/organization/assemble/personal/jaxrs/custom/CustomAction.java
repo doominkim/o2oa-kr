@@ -32,9 +32,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "CustomAction", description = "个性化数据接口.")
+@Tag(name = "CustomAction", description = "개인화 데이터 인터페이스.")
 @Path("custom")
-@JaxrsDescribe("个性化数据接口.")
+@JaxrsDescribe("개인화 데이터 인터페이스.")
 public class CustomAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomAction.class);

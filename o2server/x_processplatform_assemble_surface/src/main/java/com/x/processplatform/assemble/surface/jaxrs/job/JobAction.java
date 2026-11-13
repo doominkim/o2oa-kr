@@ -29,9 +29,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "JobAction", description = "任务接口.")
+@Tag(name = "JobAction", description = "잡(Job) 인터페이스.")
 @Path("job")
-@JaxrsDescribe("任务接口.")
+@JaxrsDescribe("잡(Job) 인터페이스.")
 public class JobAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JobAction.class);

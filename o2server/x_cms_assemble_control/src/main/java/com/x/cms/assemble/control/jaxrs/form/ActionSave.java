@@ -69,7 +69,7 @@ public class ActionSave extends BaseAction {
 				emc.persist(form, CheckPersistType.all);
 				emc.commit();
 				logService.log(emc, effectivePerson.getDistinguishedName(), form.getName(), form.getAppId(), "", "",
-						form.getId(), "FORM", "新增");
+						form.getId(), "FORM", "추가");
 				wo.setId(form.getId());
 				result.setData(wo);
 			} else {
@@ -83,7 +83,7 @@ public class ActionSave extends BaseAction {
 				emc.commit();
 
 				logService.log(emc, effectivePerson.getDistinguishedName(), form.getName(), form.getAppId(), "", "",
-						form.getId(), "FORM", "更新");
+						form.getId(), "FORM", "수정");
 
 				wo.setId(form.getId());
 				result.setData(wo);

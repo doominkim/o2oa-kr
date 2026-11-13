@@ -26,9 +26,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "OpenApiAction", description = "OpenAPI接口规范.")
+@Tag(name = "OpenApiAction", description = "OpenAPI 인터페이스 규격.")
 @Path("openapi")
-@JaxrsDescribe(value = "OpenAPI接口规范.", scope = DescribeScope.system)
+@JaxrsDescribe(value = "OpenAPI 인터페이스 규격.", scope = DescribeScope.system)
 public class OpenApiAction extends StandardJaxrsAction {
 
 	private static final String OPERATIONID_PREFIX = "OpenApiAction::";

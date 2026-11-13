@@ -29,7 +29,7 @@ public class ActionMindIconUpdate extends BaseAction {
 	
 	private static Logger logger = LoggerFactory.getLogger(ActionMindIconUpdate.class);
 
-	@AuditLog(operation = "更新缩略图")
+	@AuditLog(operation = "썸네일 갱신")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String mindId, 
 			Integer size, byte[] bytes, FormDataContentDisposition disposition) {
 		ActionResult<Wo> result = new ActionResult<>();

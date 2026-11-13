@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "日程管理", packageName = "com.x.calendar.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "일정 관리", packageName = "com.x.calendar.assemble.control", containerEntities = {
 		"com.x.calendar.core.entity.Calendar", "com.x.calendar.core.entity.Calendar_Event","com.x.calendar.core.entity.Calendar_EventComment",
 		"com.x.calendar.core.entity.Calendar_EventRepeatMaster", "com.x.calendar.core.entity.Calendar_Setting",
 		"com.x.calendar.core.entity.Calendar_SettingLobValue" }, storageTypes = { StorageType.calendar }, storeJars = {

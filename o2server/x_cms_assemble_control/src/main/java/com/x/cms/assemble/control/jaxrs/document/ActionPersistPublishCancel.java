@@ -16,7 +16,7 @@ public class ActionPersistPublishCancel extends BaseAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(ActionPersistPublishCancel.class);
 
-	@AuditLog(operation = "取消文档发布状态")
+	@AuditLog(operation = "문서 게시 상태 취소")
 	protected ActionResult<Wo> execute(HttpServletRequest request, String id, EffectivePerson effectivePerson) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Document document = null;
@@ -61,7 +61,7 @@ public class ActionPersistPublishCancel extends BaseAction {
 			try ( EntityManagerContainer emc = EntityManagerContainerFactory.instance().create() ) {
 				logService.log(emc, effectivePerson.getDistinguishedName(),
 						document.getCategoryAlias() + ":" + document.getTitle(), document.getAppId(),
-						document.getCategoryId(), document.getId(), "", "DOCUMENT", "取消发布");
+						document.getCategoryId(), document.getId(), "", "DOCUMENT", "게시 취소");
 			} catch (Throwable th) {
 				th.printStackTrace();
 				result.error(th);

@@ -24,16 +24,16 @@ public class ChatTest {
 
     private static final String END_SSE = "[DONE]";
     private static final String CHAT_SYSTEM_MESSAGE =
-            "你是一个专业且友好的助手，擅长以清晰、有条理的方式回答问题。当前与你对话的用户的身份标识为：%s，请在处理用户请求时将此标识作为上下文参考。"
-                    + "无论回答什么问题，请始终使用 Markdown 格式组织你的回复，遵循以下规则："
-                    + "1.使用标题（## 或 ###）来组织主要内容或分段。"
-                    + "2.使用项目符号（- 或 *）或编号（1. 2. 3.）列出列表项。"
-                    + "3.使用 加粗 表示强调，斜体 表示次级强调。"
-                    + "4.对于代码或技术内容，使用 ``` 包裹。"
-                    + "5.如果需要引用，使用 > 符号。"
-                    + "6.确保段落之间有空行，保持排版整洁。"
-                    + "7.如果问题涉及表格，使用 Markdown 表格格式。"
-                    + "你的目标是以简洁、结构化的 Markdown 格式提供准确且有用的回答。如果用户明确要求其他格式，优先遵循用户要求。";
+            "당신은 전문적이고 친절한 도우미이며, 명확하고 체계적으로 질문에 답하는 데 능숙합니다. 현재 대화 중인 사용자의 식별자는 %s이며, 사용자 요청을 처리할 때 이 식별자를 맥락으로 참고하세요."
+                    + "어떤 질문에 답하든 항상 Markdown 형식으로 답변을 구성하고 다음 규칙을 따르세요:"
+                    + "1. 제목(## 또는 ###)으로 주요 내용이나 단락을 구성합니다."
+                    + "2. 글머리 기호(- 또는 *)나 번호(1. 2. 3.)로 목록 항목을 나열합니다."
+                    + "3. 굵게로 강조를, 기울임꼴로 보조 강조를 나타냅니다."
+                    + "4. 코드나 기술 내용은 ```로 감쌉니다."
+                    + "5. 인용이 필요하면 > 기호를 사용합니다."
+                    + "6. 단락 사이에 빈 줄을 넣어 깔끔하게 정리합니다."
+                    + "7. 표가 필요한 질문에는 Markdown 표 형식을 사용합니다."
+                    + "목표는 간결하고 구조화된 Markdown 형식으로 정확하고 유용한 답변을 제공하는 것입니다. 사용자가 다른 형식을 명시적으로 요청하면 사용자 요청을 우선합니다.";
 
     public static void main(String[] args) {
         o2Chat();
@@ -47,7 +47,7 @@ public class ChatTest {
         Gson gson = new Gson();
         Map<String, Object> wi = new HashMap<>();
         wi.put("generateType", "chat");
-        wi.put("input", "你好");
+        wi.put("input", "안녕하세요");
         String json = gson.toJson(wi);
         ClientConfig config = new ClientConfig().register(SseFeature.class);
         config.property(ClientProperties.CONNECT_TIMEOUT, 60000);
@@ -87,7 +87,7 @@ public class ChatTest {
         wi.put("model", "qwen-turbo");
         wi.put("stream", true);
         wi.put("messages", List.of(Map.of("role", "system", "content", CHAT_SYSTEM_MESSAGE),
-                Map.of("role", "user", "content", "你好，请介绍一下你自己")));
+                Map.of("role", "user", "content", "안녕하세요, 자기소개를 해 주세요")));
         String json = gson.toJson(wi);
         ClientConfig config = new ClientConfig().register(SseFeature.class);
         config.property(ClientProperties.CONNECT_TIMEOUT, 60000);
@@ -129,7 +129,7 @@ public class ChatTest {
         wi.put("model", "deepseek-chat");
         wi.put("stream", true);
         wi.put("messages", List.of(Map.of("role", "system", "content", CHAT_SYSTEM_MESSAGE),
-                Map.of("role", "user", "content", "你好，请介绍一下你自己")));
+                Map.of("role", "user", "content", "안녕하세요, 자기소개를 해 주세요")));
         String json = gson.toJson(wi);
         ClientConfig config = new ClientConfig().register(SseFeature.class);
         config.property(ClientProperties.CONNECT_TIMEOUT, 60000);

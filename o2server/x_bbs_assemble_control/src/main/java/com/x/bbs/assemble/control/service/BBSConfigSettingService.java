@@ -300,9 +300,9 @@ public class BBSConfigSettingService{
 			logger.error(e);
 		}
 
-		value = "信息|问题|投票";
+		value = "정보|질문|투표";
 		type = "select";
-		selectContent = "信息|问题|投票";
+		selectContent = "정보|질문|투표";
 		isMultiple = true;
 		description = "주제 유형: 정보|질문|투표 중 다중 선택.";
 		try {

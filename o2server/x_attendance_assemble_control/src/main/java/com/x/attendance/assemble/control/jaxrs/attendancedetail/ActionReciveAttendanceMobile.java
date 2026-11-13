@@ -254,11 +254,11 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 //		@FieldDescribe( "출퇴근 기록 설명: 출근 기록, 퇴근 기록, 비어 있어도 됨." )
 		private String signDescription;
 
-		@FieldDescribe( "其他说明备注, 可以为空." )
+		@FieldDescribe( "기타 설명 메모, 비워 둘 수 있음." )
 		private String description;
 
 		@FieldDescribe( "기록 장소 설명, 비어 있어도 됨." )
-		private String recordAddress = "未知";
+		private String recordAddress = "알 수 없음";
 		
 		@FieldDescribe( "경도, 비어 있어도 됨." )
 		private String longitude;
@@ -266,11 +266,11 @@ public class ActionReciveAttendanceMobile extends BaseAction {
 		@FieldDescribe( "위도, 비어 있어도 됨." )
 		private String latitude;
 
-		@FieldDescribe( "操作设备类别：手机品牌|PAD|PC|其他, 可以为空." )
-		private String optMachineType = "其他";
+		@FieldDescribe( "작업 기기 유형: 휴대폰 브랜드|PAD|PC|기타, 비워 둘 수 있음." )
+		private String optMachineType = "기타";
 
-		@FieldDescribe( "操作设备类别：Mac|Windows|IOS|Android|其他, 可以为空." )
-		private String optSystemName = "其他";
+		@FieldDescribe( "작업 기기 OS: Mac|Windows|IOS|Android|기타, 비워 둘 수 있음." )
+		private String optSystemName = "기타";
 
 		@FieldDescribe( "근무지 설명, 비어 있어도 됨." )
 		private String workAddress = "";

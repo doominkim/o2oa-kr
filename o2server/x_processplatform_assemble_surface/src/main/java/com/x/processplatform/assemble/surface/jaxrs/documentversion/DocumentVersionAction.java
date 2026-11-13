@@ -34,9 +34,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "DocumentVersionAction", description = "版本历史接口.")
+@Tag(name = "DocumentVersionAction", description = "버전 기록 인터페이스.")
 @Path("documentversion")
-@JaxrsDescribe("版本历史接口.")
+@JaxrsDescribe("버전 기록 인터페이스.")
 public class DocumentVersionAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentVersionAction.class);

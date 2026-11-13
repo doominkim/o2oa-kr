@@ -61,7 +61,7 @@ class ActionUpdate extends BaseAction {
 				// 로그 기록
 				emc.beginTransaction(Log.class);
 				logService.log(emc, effectivePerson.getDistinguishedName(), script.getName(), script.getAppId(), "", "",
-						script.getId(), "SCRIPT", "更新");
+						script.getId(), "SCRIPT", "수정");
 				emc.commit();
 
 				Wo wo = new Wo();
@@ -83,7 +83,7 @@ class ActionUpdate extends BaseAction {
 		@FieldDescribe("생성 시간.")
 		private Date createTime;
 
-		@FieldDescribe("更新时间.")
+		@FieldDescribe("수정 시간.")
 		private Date updateTime;
 
 		@FieldDescribe("ID.")

@@ -32,9 +32,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "DataAction", description = "业务数据接口.")
+@Tag(name = "DataAction", description = "업무 데이터 인터페이스.")
 @Path("data")
-@JaxrsDescribe("业务数据接口.")
+@JaxrsDescribe("업무 데이터 인터페이스.")
 public class DataAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataAction.class);

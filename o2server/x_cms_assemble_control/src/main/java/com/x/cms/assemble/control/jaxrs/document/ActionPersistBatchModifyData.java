@@ -20,7 +20,7 @@ public class ActionPersistBatchModifyData extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionPersistBatchModifyData.class);
 
-	@AuditLog(operation = "批量修改文档数据")
+	@AuditLog(operation = "문서 데이터 일괄 수정")
 	protected ActionResult<Wo> execute(HttpServletRequest request, JsonElement jsonElement, EffectivePerson effectivePerson) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Boolean check = true;

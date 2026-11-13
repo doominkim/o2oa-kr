@@ -81,11 +81,11 @@ class ActionCopyToDoc extends BaseAction {
 		private static final long serialVersionUID = 4382689061793305054L;
 
 		@FieldDescribe("프로세스 첨부파일 객체.")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment", fieldValue = "[{'id':'附件id','name':'附件名称','site':'附件位置'}]")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment", fieldValue = "[{'id':'첨부파일 id','name':'첨부파일 이름','site':'첨부파일 위치'}]")
 		private List<WiAttachment> attachmentList = new ArrayList<>();
 
 		@FieldDescribe("콘텐츠 관리 첨부파일 객체.")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment", fieldValue = "[{'id':'附件id','name':'附件名称','site':'附件位置'}]")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment", fieldValue = "[{'id':'첨부파일 id','name':'첨부파일 이름','site':'첨부파일 위치'}]")
 		private List<WiAttachment> fileInfoList = new ArrayList<>();
 
 		public List<WiAttachment> getAttachmentList() {

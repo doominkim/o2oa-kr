@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.SERVICE, category = ModuleCategory.OFFICIAL, name = "数据查询服务", packageName = "com.x.query.service.processing", containerEntities = {
+@Module(type = ModuleType.SERVICE, category = ModuleCategory.OFFICIAL, name = "데이터 조회 서비스", packageName = "com.x.query.service.processing", containerEntities = {
         "com.x.query.core.entity.Item", "com.x.query.core.entity.Query",
         "com.x.query.core.entity.View", "com.x.query.core.entity.Stat",
 //        "com.x.query.core.entity.Reveal",

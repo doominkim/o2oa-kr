@@ -33,7 +33,7 @@ public class ActionListAll extends BaseAction {
 			result.setData((List<Wo>)optional.get());
 		} else {
 			try {
-				appInfoList = appInfoServiceAdv.listAll( null, "全部");
+				appInfoList = appInfoServiceAdv.listAll( null, "전체");
 			} catch (Exception e) {
 				check = false;
 				Exception exception = new ExceptionAppInfoProcess( e, "전체 게시판 정보 객체를 조회하는 중 오류가 발생했습니다" );

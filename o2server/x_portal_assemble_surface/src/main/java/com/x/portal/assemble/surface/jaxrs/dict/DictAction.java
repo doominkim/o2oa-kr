@@ -26,8 +26,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Tag(name = "DictAction", description = "数据字典接口.")
-@JaxrsDescribe("数据字典接口.")
+@Tag(name = "DictAction", description = "데이터 사전 인터페이스.")
+@JaxrsDescribe("데이터 사전 인터페이스.")
 @Path("dict")
 public class DictAction extends StandardJaxrsAction {
 

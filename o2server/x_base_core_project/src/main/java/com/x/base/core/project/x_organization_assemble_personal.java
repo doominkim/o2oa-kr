@@ -4,7 +4,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "组织管理个人", packageName = "com.x.organization.assemble.personal", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "조직 관리 개인", packageName = "com.x.organization.assemble.personal", containerEntities = {
 		"com.x.organization.core.entity.Group", "com.x.organization.core.entity.Role",
 		"com.x.organization.core.entity.Person", "com.x.organization.core.entity.PersonAttribute",
 		"com.x.organization.core.entity.PersonExtend", "com.x.organization.core.entity.Identity",

@@ -119,8 +119,8 @@ class ActionGetProcessElementList extends BaseAction {
 
 		private static final long serialVersionUID = 3133186372114900337L;
 
-		@FieldDescribe("查询元素列表(元素类型:route|begin|agent|...)")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ElementWi", fieldValue = "{\"elementType\": \"元素类型\", \"elementId\": \"元素ID\"}")
+		@FieldDescribe("조회할 요소 목록(요소 유형:route|begin|agent|...)")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "ElementWi", fieldValue = "{\"elementType\": \"요소 유형\", \"elementId\": \"요소 ID\"}")
 		private List<ElementWi> elementWiList;
 
 		public List<ElementWi> getElementWiList() {
@@ -136,7 +136,7 @@ class ActionGetProcessElementList extends BaseAction {
 
 		private static final long serialVersionUID = 1505830298561352310L;
 
-		@FieldDescribe("元素类型（route|begin|agent|...）.")
+		@FieldDescribe("요소 유형（route|begin|agent|...）.")
 		private String elementType;
 		@FieldDescribe("요소 ID.")
 		private String elementId;

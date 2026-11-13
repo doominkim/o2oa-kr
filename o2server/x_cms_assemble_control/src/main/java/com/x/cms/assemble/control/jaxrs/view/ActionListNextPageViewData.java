@@ -105,7 +105,7 @@ public class ActionListNextPageViewData extends BaseAction {
 				}
 			}catch( Exception e ){
 				check = false;
-				Exception exception = new ExceptionViewInfoProcess( e, "系统在根据ID查询分类信息时发生异常。" );
+				Exception exception = new ExceptionViewInfoProcess( e, "ID로 분류 정보를 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -121,7 +121,7 @@ public class ActionListNextPageViewData extends BaseAction {
 				}
 			}catch( Exception e ){
 				check = false;
-				Exception exception = new ExceptionViewInfoProcess( e, "系统在根据ID查询列表视图信息时发生异常。" );
+				Exception exception = new ExceptionViewInfoProcess( e, "ID로 목록 뷰 정보를 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -131,7 +131,7 @@ public class ActionListNextPageViewData extends BaseAction {
 			//전달된 목록의 formId와 분류의 formId가 일치하는지 비교, 다르면 정상 조회 불가
 			if( !category.getFormId().equals( view.getFormId() ) && !category.getReadFormId().equals( view.getFormId() ) ) {
 				check = false;
-				Exception exception = new ExceptionViewInfoProcess( "分类和列表使用的表单不一致，无法正确查询数据。" );
+				Exception exception = new ExceptionViewInfoProcess( "분류와 목록이 사용하는 양식이 달라 데이터를 올바르게 조회할 수 없습니다." );
 				result.error( exception );
 			}
 		}
@@ -148,7 +148,7 @@ public class ActionListNextPageViewData extends BaseAction {
 				}
 			}catch( Exception e ){
 				check = false;
-				Exception exception = new ExceptionViewInfoProcess( e, "系统在根据分类ID查询列表视图ID信息时发生异常。" );
+				Exception exception = new ExceptionViewInfoProcess( e, "분류 ID로 목록 뷰 ID 정보를 조회하는 중 오류가 발생했습니다." );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -192,7 +192,7 @@ public class ActionListNextPageViewData extends BaseAction {
 				queryFilter = wi.getQueryFilter();
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionViewInfoProcess(e, "系统在获取查询条件信息时发生异常。");
+				Exception exception = new ExceptionViewInfoProcess(e, "조회 조건 정보를 가져오는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -323,7 +323,7 @@ public class ActionListNextPageViewData extends BaseAction {
 						}
 						wo.setDocument( woDocument );
 					} catch (Exception e) {
-						Exception exception = new ExceptionViewInfoProcess( e, "系统在将文档信息转换为可输出的数据信息时发生异常。" );
+						Exception exception = new ExceptionViewInfoProcess( e, "문서 정보를 출력 데이터로 변환하는 중 오류가 발생했습니다." );
 						result.error( exception );
 						logger.error( e, effectivePerson, request, null);
 					}
@@ -332,7 +332,7 @@ public class ActionListNextPageViewData extends BaseAction {
 						try {
 							wo.setData( documentQueryService.getDocumentData( _document ) );
 						} catch (Exception e) {
-							Exception exception = new ExceptionViewInfoProcess( e, "系统在根据文档信息获取文档数据信息时发生异常。" );
+							Exception exception = new ExceptionViewInfoProcess( e, "문서 정보로 문서 데이터를 가져오는 중 오류가 발생했습니다." );
 							result.error( exception );
 							logger.error( e, effectivePerson, request, null);
 						}
@@ -368,7 +368,7 @@ public class ActionListNextPageViewData extends BaseAction {
 		@FieldDescribe("값 유형: string | date | time | datetime | boolean | boolean | text 지원")
 		private String fieldType;
 
-		@FieldDescribe("查询文档类型: 全部 | 信息 | 数据 ")
+		@FieldDescribe("조회 문서 유형: 전체 | 정보 | 데이터 ")
 		private String documentType;
 
 		@FieldDescribe("조회할 문서 상태: published | draft | archived")
@@ -453,9 +453,9 @@ public class ActionListNextPageViewData extends BaseAction {
 
 			//문서 유형: 전체 | 정보 | 데이터
 			if( StringUtils.isNotEmpty( this.getDocumentType())) {
-				if( "信息".equals( this.getDocumentType() )) {
+				if( "정보".equals( this.getDocumentType() )) {
 					queryFilter.addEqualsTerm( new EqualsTerm( "documentType", this.getDocumentType() ) );
-				}else if( "数据".equals( this.getDocumentType() )) {
+				}else if( "데이터".equals( this.getDocumentType() )) {
 					queryFilter.addEqualsTerm( new EqualsTerm( "documentType", this.getDocumentType() ) );
 				}
 			}
@@ -489,10 +489,10 @@ public class ActionListNextPageViewData extends BaseAction {
 		@FieldDescribe( "정렬 열 값." )
 		private String orderFieldValue = null;
 
-		@FieldDescribe( "作为输出的CMS文档数据对象." )
+		@FieldDescribe( "출력용 CMS 문서 데이터 객체." )
 		private WoDocument document;
 
-		@FieldDescribe( "文档所有数据信息." )
+		@FieldDescribe( "문서의 전체 데이터 정보." )
 		private Map<?, ?> data;
 
 		public WoDocument getDocument() {

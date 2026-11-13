@@ -54,7 +54,7 @@ public class TemplateForm extends SliceJpaObject {
 
 	public void onPersist() throws Exception {
 		if (StringUtils.isEmpty(this.category)) {
-			this.category = "未分类";
+			this.category = "미분류";
 		}
 
 	}

@@ -43,7 +43,7 @@ public class ActionListSelectedRoleByUnit extends BaseAction {
 				unitName = userManagerService.checkUnitExistsWithFlag( wrapIn.getUnitName() );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "顶层组织信息查询时发生异常！TopUnit:" + wrapIn.getUnitName() );
+				Exception exception = new ExceptionRoleInfoProcess( e, "최상위 조직 정보를 조회하는 중 오류가 발생했습니다! TopUnit:" + wrapIn.getUnitName() );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}
@@ -58,10 +58,10 @@ public class ActionListSelectedRoleByUnit extends BaseAction {
 		}
 		if (check) {
 			try {
-				roleInfoList = roleInfoService.listRoleByObjectUniqueId( wrapIn.getUnitName(), "组织" );
+				roleInfoList = roleInfoService.listRoleByObjectUniqueId( wrapIn.getUnitName(), "조직" );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess( e, "역할이 연결된 대상의 고유 식별자로 역할 목록을 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getUnitName() + ", Type:组织" );
+				Exception exception = new ExceptionRoleInfoProcess( e, "역할이 연결된 대상의 고유 식별자로 역할 목록을 조회하는 중 오류가 발생했습니다. Name:" + wrapIn.getUnitName() + ", Type:조직" );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

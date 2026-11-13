@@ -306,7 +306,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 				wo.setId(document.getId());
 				result.setData(wo);
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "系统将文档状态修改为发布状态时发生异常。Id:" + document.getId());
+				Exception exception = new ExceptionDocumentInfoProcess(e, "문서 상태를 게시로 변경하는 중 오류가 발생했습니다. Id:" + document.getId());
 				result.error(exception);
 				LOGGER.error(e, effectivePerson, request, null);
 				throw exception;
@@ -316,7 +316,7 @@ public class ActionPersistPublishByWorkFlow extends BaseAction {
 		if (check) {
 			try (EntityManagerContainer emc = EntityManagerContainerFactory.instance().create()) {
 				logService.log(emc, wi.getCreatorIdentity(), document.getCategoryAlias() + ":" + document.getTitle(),
-						document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "发布");
+						document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "게시");
 			} catch (Throwable th) {
 				th.printStackTrace();
 				result.error(th);

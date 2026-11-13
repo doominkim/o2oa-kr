@@ -25,7 +25,7 @@ public class ActionSaveExtContent extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionSaveExtContent.class);
 
-	@AuditLog(operation = "保存分类扩展信息")
+	@AuditLog(operation = "분류 확장 정보 저장")
 	protected ActionResult<Wo> execute(HttpServletRequest request, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		CategoryInfo categoryInfo = null;
@@ -75,7 +75,7 @@ public class ActionSaveExtContent extends BaseAction {
 
 			new LogService().log(null, effectivePerson.getDistinguishedName(),
 					categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), categoryInfo.getId(), "", "",
-					"", "CATEGORY", "保存扩展信息");
+					"", "CATEGORY", "확장 정보 저장");
 			
 			Wo wo = new Wo();
 			wo.setId(categoryExt.getId());

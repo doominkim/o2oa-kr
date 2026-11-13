@@ -120,7 +120,7 @@ public class ActionListWhatICanView_Data extends BaseAction {
 							inAppInfoIds.add( appId );
 							ids = permissionQueryService.listViewableCategoryIdByPerson(
 									personName, isAnonymous, unitNames, groupNames, roleNames, inAppInfoIds,
-									null, null, "数据", null, 1000, isXAdmin );
+									null, null, "데이터", null, 1000, isXAdmin );
 						} catch (Exception e) {
 							check = false;
 							Exception exception = new ExceptionCategoryInfoProcess(e, "사용자가 플랫폼 관리자인지 확인하는 중 오류가 발생했습니다. Name:" + personName);
@@ -156,7 +156,7 @@ public class ActionListWhatICanView_Data extends BaseAction {
 						result.setData(wos);
 					} catch (Exception e) {
 						check = false;
-						Exception exception = new ExceptionCategoryInfoProcess(e, "将查询出来的分类信息对象转换为可输出的数据信息时发生异常。");
+						Exception exception = new ExceptionCategoryInfoProcess(e, "조회한 분류 정보 객체를 출력 데이터로 변환하는 중 오류가 발생했습니다.");
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}

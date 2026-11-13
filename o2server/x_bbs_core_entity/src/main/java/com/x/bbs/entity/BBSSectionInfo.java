@@ -89,24 +89,24 @@ public class BBSSectionInfo extends SliceJpaObject {
 	private String forumName = "";
 
 	public static final String mainSectionId_FIELDNAME = "mainSectionId";
-	@FieldDescribe("主版块ID")
+	@FieldDescribe("상위 섹션 ID")
 	@Column(length = JpaObject.length_id, name = ColumnNamePrefix + mainSectionId_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + mainSectionId_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String mainSectionId = "";
 
 	public static final String mainSectionName_FIELDNAME = "mainSectionName";
-	@FieldDescribe("主版块名称")
+	@FieldDescribe("상위 섹션 이름")
 	@Column(length = JpaObject.length_128B, name = ColumnNamePrefix + mainSectionName_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String mainSectionName = "";
 
 	public static final String sectionLevel_FIELDNAME = "sectionLevel";
-	@FieldDescribe("版块级别：主版块|子版块")
+	@FieldDescribe("섹션 수준: 상위 섹션|하위 섹션")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + sectionLevel_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionLevel_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String sectionLevel = "主版块";
+	private String sectionLevel = "상위 섹션";
 
 	public static final String sectionDescription_FIELDNAME = "sectionDescription";
 	@Lob
@@ -132,11 +132,11 @@ public class BBSSectionInfo extends SliceJpaObject {
 	private String sectionNotice = "";
 
 	public static final String sectionVisible_FIELDNAME = "sectionVisible";
-	@FieldDescribe("版块可见：所有人（默认）|根据权限")
+	@FieldDescribe("섹션 공개 범위: 모든 사용자(기본)|권한에 따라")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + sectionVisible_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionVisible_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String sectionVisible = "所有人";
+	private String sectionVisible = "모든 사용자";
 
 	public static final String visiblePermissionList_FIELDNAME = "visiblePermissionList";
 	@FieldDescribe("게시판 공개 범위")
@@ -152,10 +152,10 @@ public class BBSSectionInfo extends SliceJpaObject {
 	private List<String> visiblePermissionList;
 
 	public static final String subjectPublishAble_FIELDNAME = "subjectPublishAble";
-	@FieldDescribe("版块发贴权限：所有人（默认）|根据权限")
+	@FieldDescribe("섹션 게시 권한: 모든 사용자(기본)|권한에 따라")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + subjectPublishAble_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String subjectPublishAble = "所有人";
+	private String subjectPublishAble = "모든 사용자";
 
 	public static final String publishPermissionList_FIELDNAME = "publishPermissionList";
 	@FieldDescribe("게시판 게시 가능 범위")
@@ -171,10 +171,10 @@ public class BBSSectionInfo extends SliceJpaObject {
 	private List<String> publishPermissionList;
 
 	public static final String replyPublishAble_FIELDNAME = "replyPublishAble";
-	@FieldDescribe("版块回复权限：所有人（默认）|根据权限")
+	@FieldDescribe("섹션 댓글 권한: 모든 사용자(기본)|권한에 따라")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + replyPublishAble_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String replyPublishAble = "所有人";
+	private String replyPublishAble = "모든 사용자";
 
 	public static final String replyPermissionList_FIELDNAME = "replyPermissionList";
 	@FieldDescribe("게시판 답글 가능 범위")
@@ -213,22 +213,22 @@ public class BBSSectionInfo extends SliceJpaObject {
 	private List<String> subjectTypeList;
 
 	public static final String sectionType_FIELDNAME = "sectionType";
-	@FieldDescribe("版块类别：图片新闻，普通新闻，公告，经典（默认）")
+	@FieldDescribe("섹션 유형: 이미지 뉴스, 일반 뉴스, 공지, 클래식(기본)")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + sectionType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String sectionType = "经典";
+	private String sectionType = "클래식";
 
 	public static final String subjectType_FIELDNAME = "subjectType";
-	@FieldDescribe("论坛版块默认的主题分类名称,以|分隔,如讨论|新闻, 如果未填写, 则以分区配置为主")
+	@FieldDescribe("포럼 섹션 기본 주제 분류 이름, |로 구분, 예: 토론|뉴스, 입력하지 않으면 분류 설정을 따름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + subjectType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String subjectType = "讨论|新闻";
+	private String subjectType = "토론|뉴스";
 
 	public static final String typeCategory_FIELDNAME = "typeCategory";
-	@FieldDescribe("论坛版块支持的主题类别名称,以|分隔,信息|问题|投票, 如果未填写,则以分区配置为主")
+	@FieldDescribe("포럼 섹션이 지원하는 주제 유형 이름, |로 구분, 정보|질문|투표, 입력하지 않으면 분류 설정을 따름")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + typeCategory_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String typeCategory = "信息|问题|投票";
+	private String typeCategory = "정보|질문|투표";
 
 	public static final String indexRecommendable_FIELDNAME = "indexRecommendable";
 	@FieldDescribe("첫 페이지 추천 허용: true|false")
@@ -285,11 +285,11 @@ public class BBSSectionInfo extends SliceJpaObject {
 	private String creatorName = "";
 
 	public static final String sectionStatus_FIELDNAME = "sectionStatus";
-	@FieldDescribe("版块状态：启用|停用")
+	@FieldDescribe("섹션 상태: 사용|사용 중지")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + sectionStatus_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + sectionStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String sectionStatus = "启用";
+	private String sectionStatus = "사용";
 
 	public static final String orderNumber_FIELDNAME = "orderNumber";
 	@FieldDescribe("정렬 번호")

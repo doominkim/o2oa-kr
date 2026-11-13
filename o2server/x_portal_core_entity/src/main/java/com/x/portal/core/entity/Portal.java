@@ -35,7 +35,7 @@ public class Portal extends SliceJpaObject {
 
 	private static final long serialVersionUID = -7520516033901189347L;
 	private static final String TABLE = PersistenceProperties.Portal.table;
-	public static final String CATEGORY_DEFAULT = "未分类";
+	public static final String CATEGORY_DEFAULT = "미분류";
 
 	@Override
 	public String getId() {

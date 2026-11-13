@@ -28,9 +28,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "MoreLikeThisAction", description = "相似检索.")
+@Tag(name = "MoreLikeThisAction", description = "유사 문서 검색.")
 @Path("morelikethis")
-@JaxrsDescribe("相似检索.")
+@JaxrsDescribe("유사 문서 검색.")
 public class MoreLikeThisAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MoreLikeThisAction.class);

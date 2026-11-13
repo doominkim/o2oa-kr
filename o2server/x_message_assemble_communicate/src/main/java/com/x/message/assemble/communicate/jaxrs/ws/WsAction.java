@@ -32,9 +32,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "WsAction", description = "webSocket接口.")
+@Tag(name = "WsAction", description = "WebSocket 인터페이스.")
 @Path("ws")
-@JaxrsDescribe("webSocket接口.")
+@JaxrsDescribe("WebSocket 인터페이스.")
 public class WsAction extends StandardJaxrsAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WsAction.class);

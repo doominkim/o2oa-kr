@@ -19,7 +19,7 @@ public class WiSiteFileInfo extends GsonPropertyObject {
     private String site;
 
     @FieldDescribe("첨부파일 목록.")
-    @FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment", fieldValue = "[{'id':'附件id','name':'附件名称'}]")
+    @FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment", fieldValue = "[{'id':'첨부파일 id','name':'첨부파일 이름'}]")
     private List<WiAttachment> fileInfoList = new ArrayList<>();
 
     @FieldDescribe("첨부파일 출처(cms 또는 processPlatform).")

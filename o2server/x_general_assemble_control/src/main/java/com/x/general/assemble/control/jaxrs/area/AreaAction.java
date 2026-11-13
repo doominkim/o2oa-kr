@@ -32,9 +32,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "AreaAction", description = "行政区域.")
+@Tag(name = "AreaAction", description = "행정 구역.")
 @Path("area")
-@JaxrsDescribe("行政区域.")
+@JaxrsDescribe("행정 구역.")
 public class AreaAction extends StandardJaxrsAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(AreaAction.class);
@@ -114,7 +114,7 @@ public class AreaAction extends StandardJaxrsAction {
 	public void listStreet(@Suspended final AsyncResponse asyncResponse, @Context HttpServletRequest request,
 			@JaxrsParameterDescribe("시·도") @PathParam("province") String province,
 			@JaxrsParameterDescribe("시") @PathParam("city") String city,
-			@JaxrsParameterDescribe("区") @PathParam("district") String district) {
+			@JaxrsParameterDescribe("구") @PathParam("district") String district) {
 		ActionResult<List<ActionListStreet.Wo>> result = new ActionResult<>();
 		EffectivePerson effectivePerson = this.effectivePerson(request);
 		try {

@@ -3,6 +3,7 @@
 
   han-segments.py extract OUT.json [path ...]   collect segments (default: whole repo)
   han-segments.py apply MAP.json [path ...]     replace segments using {"chinese": "korean"}
+  han-segments.py check [path ...]              list remaining segments; exit 1 if any
 
 A segment is the Chinese-bearing part of
   - one comment line, comment markers and surrounding blanks excluded
@@ -31,13 +32,14 @@ os.chdir(ROOT)
 HAN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 JS = (".js", ".cjs", ".mjs", ".ts", ".jsx")
 MARKUP = (".html", ".htm", ".vue", ".xml", ".vm", ".jsp", ".svg", ".xsd", ".ftl", ".tpl")
-LINES = (".md", ".txt", ".yml", ".yaml", ".sql", ".sh", ".py", ".cfg", ".conf")
-HANDLED = (".java", ".json", ".css", ".less", ".properties") + JS + MARKUP + LINES
+LINES = (".gitignore", ".md", ".txt", ".yml", ".yaml", ".sql", ".sh", ".py", ".cfg", ".conf")
+HANDLED = (".java", ".json", ".css", ".wcss", ".less", ".properties", ".gitignore") + JS + MARKUP + LINES
 EXCLUDE_DIRS = (
     "o2web/source/o2_lib/",          # third-party libraries (echarts, pdf.js, ckeditor, ...)
     "o2web/source/o2_core/o2/lp/",   # language packs per locale
     "/fullcalendar/",                # bundled third-party calendar with its locale data
     "x_component_Template/framework/",  # bundled SheetJS builds (codepage tables, font names)
+    "/lib/editormd/",                # bundled editor.md with CodeMirror (third-party)
     "node_modules/",
 )
 EXCLUDE_FILES = re.compile(r"(zh[-_](cn|CN|CHS|CHT|tw|TW|hk|HK)|/zh/|_zh\.|\.zh\.|\.min\.(js|css)$)")
@@ -48,7 +50,8 @@ EXCLUDE_PREFIX = ("scripts/i18n/",)
 
 
 def candidates(paths):
-    files = subprocess.run(["git", "ls-files", "--"] + (paths or ["."]), capture_output=True, text=True).stdout.split()
+    files = subprocess.run(["git", "-c", "core.quotepath=false", "ls-files", "-z", "--"] + (paths or ["."]),
+                           capture_output=True, text=True).stdout.split("\0")
     out = []
     for f in files:
         if f in EXCLUDE_EXACT or f.startswith(EXCLUDE_PREFIX) or any(d in f for d in EXCLUDE_DIRS):
@@ -187,7 +190,7 @@ def spans_of(f, src):
         out = code_spans(src, 0, n, "js")
     elif f.endswith(".json"):
         out = code_spans(src, 0, n, "json")
-    elif f.endswith((".css", ".less")):
+    elif f.endswith((".css", ".wcss", ".less")):
         out = code_spans(src, 0, n, "css")
     elif f.endswith(MARKUP):
         out = markup_spans(src)
@@ -200,9 +203,10 @@ def spans_of(f, src):
 
 
 def main():
-    if len(sys.argv) < 3 or sys.argv[1] not in ("extract", "apply"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("extract", "apply", "check") or (sys.argv[1] != "check" and len(sys.argv) < 3):
         sys.exit(__doc__)
-    mode, table, paths = sys.argv[1], sys.argv[2], sys.argv[3:]
+    mode = sys.argv[1]
+    table, paths = (None, sys.argv[2:]) if mode == "check" else (sys.argv[2], sys.argv[3:])
     keep = keep_texts()
     mapping = json.load(open(table, encoding="utf-8")) if mode == "apply" else None
     found, changed, missing = {}, 0, set()
@@ -218,7 +222,7 @@ def main():
             seg = src[s:e]
             if kind != "comment" and any(seg in k or (len(k) > 1 and k in seg) for k in kept):
                 continue
-            if mode == "extract":
+            if mode in ("extract", "check"):
                 line = src.count("\n", 0, s) + 1
                 found.setdefault(seg, []).append(f"{f}:{line}")
                 continue
@@ -232,6 +236,11 @@ def main():
             out.append(src[last:])
             open(f, "w", encoding="utf-8", errors="surrogateescape").write("".join(out))
             changed += 1
+    if mode == "check":
+        for seg, where in found.items():
+            print(f"{where[0]}: {seg[:100]}")
+        print(f"{len(found)} Chinese segments left")
+        sys.exit(1 if found else 0)
     if mode == "extract":
         ordered = dict(sorted(found.items(), key=lambda kv: -len(kv[1])))
         json.dump({"segments": ordered}, open(table, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

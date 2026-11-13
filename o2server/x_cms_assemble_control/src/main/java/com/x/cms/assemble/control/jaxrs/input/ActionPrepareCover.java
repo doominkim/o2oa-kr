@@ -117,7 +117,7 @@ class ActionPrepareCover extends BaseAction {
 		}
 		for (MatchElement<WrapCategoryInfo, CategoryInfo> m : this.match(business, wi.getCategoryInfoList(),
 				ListUtils.union(this.listWithIds(business, wi.getCategoryInfoList(), CategoryInfo.class),
-						business.getCategoryInfoFactory().listCategoryByAppId(exist.getId(), "全部", 1000000)))) {
+						business.getCategoryInfoFactory().listCategoryByAppId(exist.getId(), "전체", 1000000)))) {
 			if ((null != m.getW()) && (null != m.getT())) {
 				if (!StringUtils.equals(m.getW().getId(), m.getT().getId())) {
 					if (StringUtils.equals(m.getW().getAppId(), m.getT().getAppId())) {

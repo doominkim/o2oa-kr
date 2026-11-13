@@ -138,7 +138,7 @@ public class AttendanceSettingService {
 			logger.error(e);
 		}
 
-		value = "无";
+		value = "없음";
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
@@ -154,7 +154,7 @@ public class AttendanceSettingService {
 		type = "select";
 		selectContent = AppealConfig.APPEAL_CHOOSEVALUE_AUDITTYPE;
 		isMultiple = false;
-		description = "근태 결과 소명 심사자 결정 방식: 선택값: 所属组织职务(소속 조직 직무)|汇报对象(보고 대상)|个人属性(개인 속성)|指定人(지정인). '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 근태 결과 소명 심사자를 정하는 방식입니다.";
+		description = "근태 결과 소명 심사자 결정 방식: 선택값: 소속 부서 직무|보고 대상|사용자 속성|지정 사용자. '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 근태 결과 소명 심사자를 정하는 방식입니다.";
 		try {
 			checkAndInitSystemConfig("APPEAL_AUDITOR_TYPE", "내장 결재의 근태 결과 소명 심사자 결정 방식", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
@@ -162,7 +162,7 @@ public class AttendanceSettingService {
 			logger.error(e);
 		}
 		
-		value = "部门经理";
+		value = "부서장";
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
@@ -174,11 +174,11 @@ public class AttendanceSettingService {
 			logger.error(e);
 		}
 		
-		value = "无";
+		value = "없음";
 		type = "select";
 		selectContent = AppealConfig.APPEAL_CHOOSEVALUE_CHECKTYPE;
 		isMultiple = false;
-		description = "근태 결과 소명 재심사자 결정 방식: 선택값: 无(없음)|所属组织职务(소속 조직 직무)|汇报对象(보고 대상)|个人属性(개인 속성)|指定人(지정인). '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 근태 결과 소명 재심사자를 정하는 방식이며, 无는 재심사가 필요 없음을 뜻합니다.";
+		description = "근태 결과 소명 재심사자 결정 방식: 선택값: 없음|소속 부서 직무|보고 대상|사용자 속성|지정 사용자. '내장 소명 결재("+AppealConfig.APPEAL_AUDIFLOWTYPE_BUILTIN+")'에서 근태 결과 소명 재심사자를 정하는 방식이며, 없음은 재심사가 필요 없음을 뜻합니다.";
 		try {
 			checkAndInitSystemConfig("APPEAL_CHECKER_TYPE", "내장 결재의 근태 결과 소명 재심사자 결정 방식", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {
@@ -186,7 +186,7 @@ public class AttendanceSettingService {
 			logger.error(e);
 		}
 		
-		value = "无";
+		value = "없음";
 		type = "text";
 		selectContent = null;
 		isMultiple = false;
@@ -198,11 +198,11 @@ public class AttendanceSettingService {
 			logger.error(e);
 		}
 
-		value = "无";
+		value = "없음";
 		type = "select";
-		selectContent = "无|周六|周日";
+		selectContent = "없음|토요일|일요일";
 		isMultiple = false;
-		description = "주말 설정: 周六(토요일) 또는 周日(일요일)을 선택합니다. 선택한 요일은 주말, 선택하지 않은 요일은 근무일로 계산합니다";
+		description = "주말 설정: 토요일 또는 일요일을 선택합니다. 선택한 요일은 주말, 선택하지 않은 요일은 근무일로 계산합니다";
 		try {
 			checkAndInitSystemConfig("ATTENDANCE_WEEKEND", "주말 계산 요일 설정", value, description, type, selectContent, isMultiple, ++ordernumber );
 		} catch (Exception e) {

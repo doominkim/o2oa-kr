@@ -318,7 +318,7 @@ public class AppInfoServiceAdv {
 				appInfo_entity.setViewableUnitList( appInfo.getViewableUnitList() );
 				appInfo_entity.setViewableGroupList( appInfo.getViewableGroupList() );
 				if( StringUtils.isEmpty( appInfo_entity.getDocumentType() )) {
-					appInfo_entity.setDocumentType( "信息" );
+					appInfo_entity.setDocumentType( "정보" );
 				}
 				emc.check(appInfo_entity , CheckPersistType.all );
 				emc.commit();

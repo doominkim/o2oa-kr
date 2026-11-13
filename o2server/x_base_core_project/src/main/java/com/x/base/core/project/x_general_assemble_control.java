@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "公共模块", packageName = "com.x.general.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "공통 모듈", packageName = "com.x.general.assemble.control", containerEntities = {
 		"com.x.general.core.entity.area.District", "com.x.general.core.entity.GeneralFile",
 		"com.x.processplatform.core.entity.element.Route", "com.x.general.core.entity.Invoice" }, storageTypes = { StorageType.file,
 				StorageType.general }, storeJars = { "x_organization_core_entity", "x_organization_core_express",

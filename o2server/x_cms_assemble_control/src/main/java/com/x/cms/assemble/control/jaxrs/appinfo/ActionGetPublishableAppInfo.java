@@ -36,9 +36,9 @@ public class ActionGetPublishableAppInfo extends BaseAction {
 			result.setData((Wo)optional.get());
 		} else {
 			if ( isXAdmin ) {
-				wos = listPublishAbleAppInfoByPermission( personName, isAnonymous, null, "all", "全部", isXAdmin, 1000 );
+				wos = listPublishAbleAppInfoByPermission( personName, isAnonymous, null, "all", "전체", isXAdmin, 1000 );
 			} else {
-				List<Wo> wos_out = listPublishAbleAppInfoByPermission( personName, isAnonymous, null,  "all", "全部", isXAdmin, 1000 );
+				List<Wo> wos_out = listPublishAbleAppInfoByPermission( personName, isAnonymous, null,  "all", "전체", isXAdmin, 1000 );
 				for( Wo wo : wos_out ) {
 					if( ListTools.isNotEmpty( wo.getWrapOutCategoryList() )) {
 						wos.add( wo );

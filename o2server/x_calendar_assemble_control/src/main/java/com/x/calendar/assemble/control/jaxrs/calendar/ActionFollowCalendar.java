@@ -22,7 +22,7 @@ public class ActionFollowCalendar extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionFollowCalendar.class );
 
-	@AuditLog(operation = "关注日历")
+	@AuditLog(operation = "캘린더 구독")
 	protected ActionResult<WrapOutBoolean> execute( HttpServletRequest request, EffectivePerson effectivePerson, String id ) throws Exception {
 		ActionResult<WrapOutBoolean> result = new ActionResult<>();
 		Wo wo = new Wo();

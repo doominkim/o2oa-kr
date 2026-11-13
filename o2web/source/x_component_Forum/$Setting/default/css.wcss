@@ -210,7 +210,7 @@
     "color": "#000"
   },
 
-  //section 样式开始
+  //section 스타일 시작
   "sectionNode" : {
     "margin" : "0px 0px 10px 10px",
     "border" : "1px solid #dedede",
@@ -310,7 +310,7 @@
   "sectionItemListItemNode_over" : {
     "color" : "#0258ad"
   },
-  //section 样式结束
+  //section 스타일 끝
 
   "normalTdNode" : {
     "min-height": "30px",

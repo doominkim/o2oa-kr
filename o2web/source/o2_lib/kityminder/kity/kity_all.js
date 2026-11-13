@@ -8076,7 +8076,7 @@ _p[69] = {
             }
             var textContent = text.getContent();
             //text.setContent("百度Fex");
-            text.setContent("脑图");
+            text.setContent("마인드맵");
             var bbox = text.getBoundaryBox(), y = text.getY();
             if (!bbox.height) return {
                 top: 0,

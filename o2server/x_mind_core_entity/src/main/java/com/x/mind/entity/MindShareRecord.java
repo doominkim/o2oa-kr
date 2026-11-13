@@ -86,11 +86,11 @@ public class MindShareRecord extends SliceJpaObject {
 	private String fileType = "MIND";
 
 	public static final String shareType_FIELDNAME = "shareType";
-	@FieldDescribe("共享类型：分享 | 协作")
+	@FieldDescribe("공유 유형: 공유 | 협업")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + shareType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + shareType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String shareType = "分享";
+	private String shareType = "공유";
 
 	public static final String source_FIELDNAME = "source";
 	@FieldDescribe("발신자")
@@ -114,11 +114,11 @@ public class MindShareRecord extends SliceJpaObject {
 	private String targetType = "PERSON";
 
 	public static final String fileStatus_FIELDNAME = "fileStatus";
-	@FieldDescribe("文件类型：正常 | 已删除")
+	@FieldDescribe("파일 상태: 정상 | 삭제됨")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + fileStatus_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + fileStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String fileStatus = "正常";
+	private String fileStatus = "정상";
 
 	public String getFileId() {
 		return fileId;

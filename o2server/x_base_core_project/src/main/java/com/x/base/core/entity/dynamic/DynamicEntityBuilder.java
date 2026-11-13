@@ -133,7 +133,7 @@ public class DynamicEntityBuilder {
 		// @Id
 		// @Column(length = length_id, name = ColumnNamePrefix + id_FIELDNAME)
 		// private String id = createId();
-		AnnotationSpec fieldDescribe = AnnotationSpec.builder(FieldDescribe.class).addMember("value", "\"数据库主键,自动生成.\"")
+		AnnotationSpec fieldDescribe = AnnotationSpec.builder(FieldDescribe.class).addMember("value", "\"데이터베이스 기본 키, 자동 생성.\"")
 				.build();
 		AnnotationSpec id = AnnotationSpec.builder(Id.class).build();
 		AnnotationSpec column = AnnotationSpec.builder(Column.class).addMember("length", "length_id")
@@ -154,7 +154,7 @@ public class DynamicEntityBuilder {
 	private void createBundleField(Builder builder) {
 		Field bundleField = new Field();
 		bundleField.setName(DynamicEntity.BUNDLE_FIELD);
-		bundleField.setDescription("流程实例的JOB");
+		bundleField.setDescription("결재 인스턴스의 JOB");
 		bundleField.setType("string");
 		this.createField(builder, bundleField, String.class);
 	}

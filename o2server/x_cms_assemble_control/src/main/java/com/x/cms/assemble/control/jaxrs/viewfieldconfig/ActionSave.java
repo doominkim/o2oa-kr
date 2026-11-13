@@ -96,7 +96,7 @@ public class ActionSave extends BaseAction {
 					addFieldConfigIdToFieldConfigList( view, viewFieldConfig.getId() );
 
 					emc.commit();
-					logService.log( emc,  effectivePerson.getDistinguishedName(), viewFieldConfig.getFieldName(), "", "", "", viewFieldConfig.getId(), "VIEWFIELDCONFIG", "新增" );
+					logService.log( emc,  effectivePerson.getDistinguishedName(), viewFieldConfig.getFieldName(), "", "", "", viewFieldConfig.getId(), "VIEWFIELDCONFIG", "추가" );
 				}else{
 					//수정
 					wi.copyTo( viewFieldConfig, JpaObject.FieldsUnmodify  );
@@ -107,7 +107,7 @@ public class ActionSave extends BaseAction {
 					addFieldConfigIdToFieldConfigList( view, viewFieldConfig.getId() );
 					emc.commit();
 
-					logService.log( emc,  effectivePerson.getDistinguishedName(), viewFieldConfig.getFieldName(), "", "", "", viewFieldConfig.getId(), "VIEWFIELDCONFIG", "更新" );
+					logService.log( emc,  effectivePerson.getDistinguishedName(), viewFieldConfig.getFieldName(), "", "", "", viewFieldConfig.getId(), "VIEWFIELDCONFIG", "수정" );
 				}
 				wrap = new Wo();
 				wrap.setId( viewFieldConfig.getId() );

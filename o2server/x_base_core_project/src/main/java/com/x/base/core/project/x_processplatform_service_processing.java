@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.SERVICE, category = ModuleCategory.OFFICIAL, name = "流程服务", packageName = "com.x.processplatform.service.processing", containerEntities = {
+@Module(type = ModuleType.SERVICE, category = ModuleCategory.OFFICIAL, name = "결재 서비스", packageName = "com.x.processplatform.service.processing", containerEntities = {
 		"com.x.cms.core.entity.element.Script", "com.x.portal.core.entity.Script",
 		"com.x.cms.core.entity.FileInfo",
 		"com.x.program.center.core.entity.Script", "com.x.processplatform.core.entity.content.Attachment",

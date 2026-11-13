@@ -26,9 +26,9 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-@Tag(name = "ReviewAction", description = "参阅接口.")
+@Tag(name = "ReviewAction", description = "참조 인터페이스.")
 @Path("review")
-@JaxrsDescribe("参阅接口.")
+@JaxrsDescribe("참조 인터페이스.")
 public class ReviewAction extends StandardJaxrsAction {
 
 	private static Logger logger = LoggerFactory.getLogger(ReviewAction.class);

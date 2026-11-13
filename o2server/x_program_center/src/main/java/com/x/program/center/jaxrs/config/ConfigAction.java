@@ -32,8 +32,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ConfigAction", description = "配置接口.")
-@JaxrsDescribe("配置接口.")
+@Tag(name = "ConfigAction", description = "설정 인터페이스.")
+@JaxrsDescribe("설정 인터페이스.")
 @Path("config")
 public class ConfigAction extends StandardJaxrsAction {
 

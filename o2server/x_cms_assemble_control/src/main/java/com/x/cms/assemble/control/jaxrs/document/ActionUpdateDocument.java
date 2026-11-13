@@ -100,15 +100,15 @@ public class ActionUpdateDocument extends BaseAction {
 		private JsonElement data;
 
 		@FieldDescribe("문서 권한 목록, 권한 교체, 비어 있으면 처리하지 않음.")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "PermissionInfo", fieldValue = "{'permission':'权限类别：读者|作者|管理','permissionObjectType':'使用者类别：所有人|组织|人员|群组','permissionObjectCode':'使用者编码：所有人|组织编码|人员UID|群组编码','permissionObjectName':'使用者名称：所有人|组织名称|人员名称|群组名称'}")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "PermissionInfo", fieldValue = "{'permission':'권한 분류: 독자|작성자|관리','permissionObjectType':'사용 대상 분류: 모든 사용자|조직|사용자|그룹','permissionObjectCode':'사용 대상 코드: 모든 사용자|조직 코드|사용자 UID|그룹 코드','permissionObjectName':'사용 대상 이름: 모든 사용자|조직 이름|사용자 이름|그룹 이름'}")
 		private List<PermissionInfo> permissionList;
 
 		@FieldDescribe("관련 문서 목록, 문서 지정 site의 관련 문서 데이터를 교체, 비어 있으면 처리하지 않음.")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "TargetWi", fieldValue = "{'site':'关联内容框标识','targetList':[{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','view':'来源视图'}]}")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "TargetWi", fieldValue = "{'site':'관련 콘텐츠 영역 식별자','targetList':[{'type':'관련 대상 유형(cms 또는 processPlatform)','bundle':'관련 대상 식별자','view':'출처 뷰'}]}")
 		private List<SiteTargetWi> correlationTargetList;
 
 		@FieldDescribe("첨부파일 목록, 문서 지정 site의 첨부파일 목록 교체, 먼저 삭제 후 추가, 비어 있으면 처리하지 않음.")
-		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiSiteFileInfo", fieldValue = "{'site':'附件框分类','fileInfoList':[{'id':'附件id','name':'附件名称'}],'type':'附件来源(cms或processPlatform)'}")
+		@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiSiteFileInfo", fieldValue = "{'site':'첨부파일 영역 분류','fileInfoList':[{'id':'첨부파일 id','name':'첨부파일 이름'}],'type':'첨부파일 출처(cms 또는 processPlatform)'}")
 		private List<WiSiteFileInfo> siteFileInfoList;
 
 		public JsonElement getData() {

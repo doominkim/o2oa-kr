@@ -35,8 +35,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ApplicationDictAction", description = "数据字典接口.")
-@JaxrsDescribe("数据字典接口.")
+@Tag(name = "ApplicationDictAction", description = "데이터 사전 인터페이스.")
+@JaxrsDescribe("데이터 사전 인터페이스.")
 @Path("applicationdict")
 public class ApplicationDictAction extends StandardJaxrsAction {
 

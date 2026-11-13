@@ -4,7 +4,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "脑图", packageName = "com.x.mind.assemble.control", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "마인드맵", packageName = "com.x.mind.assemble.control", containerEntities = {
 		"com.x.mind.entity.MindBaseInfo", "com.x.mind.entity.MindContentInfo", "com.x.mind.entity.MindFolderInfo",
 		"com.x.mind.entity.MindIconInfo", "com.x.mind.entity.MindRecycleInfo", "com.x.mind.entity.MindShareRecord",
 		"com.x.mind.entity.MindVersionInfo", "com.x.mind.entity.MindVersionContent" }, storeJars = {

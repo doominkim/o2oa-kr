@@ -31,7 +31,7 @@ public class ActionDelete extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger( ActionDelete.class );
 
-	@AuditLog(operation = "删除栏目信息")
+	@AuditLog(operation = "게시판 정보 삭제")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String id ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Boolean check = true;
@@ -49,7 +49,7 @@ public class ActionDelete extends BaseAction {
 
 		Long count = 0L;
 		try {
-			count = appInfoServiceAdv.countCategoryByAppId( id, "全部" );
+			count = appInfoServiceAdv.countCategoryByAppId( id, "전체" );
 			if ( count > 0 ){
 				check = false;
 				Exception exception = new ExceptionAppInfoCanNotDelete( count);
@@ -65,12 +65,12 @@ public class ActionDelete extends BaseAction {
 			try {
 				// 게시판 정보 삭제
 				appInfoServiceAdv.delete( id, effectivePerson );
-				new LogService().log( null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), id, "", "", "", "APPINFO", "删除");
+				new LogService().log( null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), id, "", "", "", "APPINFO", "삭제");
 
 				//게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 				new CmsBatchOperationPersistService().addOperation(
 						CmsBatchOperationProcessService.OPT_OBJ_APPINFO,
-						CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "删除栏目：ID=" + id );
+						CmsBatchOperationProcessService.OPT_TYPE_DELETE, id, id, "게시판 삭제: ID=" + id );
 
 				//캐시 갱신
 				CacheManager.notify( AppInfo.class );
@@ -86,7 +86,7 @@ public class ActionDelete extends BaseAction {
 				wo.setId( appInfo.getId() );
 				result.setData( wo );
 			} catch (Exception e) {
-				Exception exception = new ExceptionAppInfoProcess( e, "根据ID执行删除CMS应用信息对象操作时发生未知异常，ID:" + id );
+				Exception exception = new ExceptionAppInfoProcess( e, "ID로 CMS 게시판 정보 객체를 삭제하는 중 알 수 없는 오류가 발생했습니다. ID:" + id );
 				result.error( exception );
 				logger.error( e, effectivePerson, request, null);
 			}

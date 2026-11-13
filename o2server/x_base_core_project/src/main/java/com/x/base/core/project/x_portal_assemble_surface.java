@@ -4,7 +4,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "门户", packageName = "com.x.portal.assemble.surface", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "포털", packageName = "com.x.portal.assemble.surface", containerEntities = {
 		"com.x.portal.core.entity.Portal", "com.x.portal.core.entity.Widget", "com.x.portal.core.entity.Page",
 		"com.x.portal.core.entity.Script", "com.x.portal.core.entity.File", "com.x.cms.core.entity.element.Script",
 		"com.x.processplatform.core.entity.element.Script", "com.x.general.core.entity.ApplicationDict",

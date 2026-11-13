@@ -56,7 +56,7 @@ public class ActionBindRoleToUser extends BaseAction {
 		}
 		if (check) {
 			// 모든 대상을 순회하며 실제 존재 여부 확인
-			if ("人员".equals(wrapIn.getBindObject().getObjectType())) {
+			if ("사용자".equals(wrapIn.getBindObject().getObjectType())) {
 				try {
 					object = userManagerService.getPersonNameByFlag(bindObject.getObjectName());
 					if (object == null) {
@@ -67,11 +67,11 @@ public class ActionBindRoleToUser extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionRoleInfoProcess(e,
-							"人员信息查询时发生异常！Person:" + bindObject.getObjectName());
+							"사용자 정보를 조회하는 중 오류가 발생했습니다! Person:" + bindObject.getObjectName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
-			} else if ("组织".equals(bindObject.getObjectType())) {
+			} else if ("조직".equals(bindObject.getObjectType())) {
 				try {
 					object = userManagerService.checkUnitExistsWithFlag(bindObject.getObjectName());
 					if (object == null) {
@@ -82,11 +82,11 @@ public class ActionBindRoleToUser extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionRoleInfoProcess(e,
-							"组织信息查询时发生异常！Unit:" + bindObject.getObjectName());
+							"조직 정보를 조회하는 중 오류가 발생했습니다! Unit:" + bindObject.getObjectName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
-			} else if ("群组".equals(bindObject.getObjectType())) {
+			} else if ("그룹".equals(bindObject.getObjectType())) {
 				try {
 					object = userManagerService.checkGroupExsitsWithName(bindObject.getObjectName());
 					if (object == null) {
@@ -97,7 +97,7 @@ public class ActionBindRoleToUser extends BaseAction {
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionRoleInfoProcess(e,
-							"群组信息查询时发生异常！Group:" + bindObject.getObjectName());
+							"그룹 정보를 조회하는 중 오류가 발생했습니다! Group:" + bindObject.getObjectName());
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -114,7 +114,7 @@ public class ActionBindRoleToUser extends BaseAction {
 				result.setData(wrap);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionRoleInfoProcess(e, "系统在根据人员姓名以及角色编码列表进行角色绑定时发生异常.");
+				Exception exception = new ExceptionRoleInfoProcess(e, "사용자 이름과 역할 코드 목록으로 역할을 연결하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -134,10 +134,10 @@ public class ActionBindRoleToUser extends BaseAction {
 
 		public static List<String> Excludes = new ArrayList<String>();
 
-		@FieldDescribe("组织名称")
+		@FieldDescribe("조직 이름")
 		private String unitName = null;
 
-		@FieldDescribe("人员名称")
+		@FieldDescribe("사용자 이름")
 		private String userName = null;
 
 		@FieldDescribe("포럼 Id")

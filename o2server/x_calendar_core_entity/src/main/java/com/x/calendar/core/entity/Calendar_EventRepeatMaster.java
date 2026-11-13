@@ -391,11 +391,11 @@ public class Calendar_EventRepeatMaster extends SliceJpaObject implements Clonea
 	private List<String> createdMonthList;
 
 	public static final String repeatStatus_FIELDNAME = "repeatStatus";
-	@FieldDescribe("重复状态：等待生成|生成完成|已删除， 删除的不再生成")
+	@FieldDescribe("반복 상태: 생성 대기|생성 완료|삭제됨, 삭제된 항목은 더 이상 생성하지 않음")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + repeatStatus_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + repeatStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String repeatStatus = "等待生成";
+	private String repeatStatus = "생성 대기";
 
 	public Date getRecurrenceStartTime() {
 		return recurrenceStartTime;

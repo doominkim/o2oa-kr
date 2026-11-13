@@ -25,6 +25,9 @@ import com.x.calendar.core.tools.CriteriaBuilderTools;
  * @author O2LEE
  */
 public class Calendar_EventRepeatMasterFactory extends AbstractFactory {
+
+	/** 레거시 '생성 대기' 상태 값(릴리스 Calendar_EventServiceAdv가 저장). */
+	private static final String LEGACY_STATUS_WAITING = "\u7b49\u5f85\u751f\u6210";
 	
 	public Calendar_EventRepeatMasterFactory( Business business) throws Exception {
 		super(business);
@@ -151,7 +154,8 @@ public class Calendar_EventRepeatMasterFactory extends AbstractFactory {
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<Calendar_EventRepeatMaster> root = cq.from(Calendar_EventRepeatMaster.class);
 		
-		Predicate p = cb.equal( root.get(Calendar_EventRepeatMaster_.repeatStatus ), "等待生成" );
+		// 소스가 릴리스보다 앞서 패치되지 않는 릴리스 Calendar_EventServiceAdv는 레거시 값으로 저장한다.
+		Predicate p = root.get(Calendar_EventRepeatMaster_.repeatStatus).in("생성 대기", LEGACY_STATUS_WAITING);
 		
 		if( ListTools.isNotEmpty( calendarIds )) {
 			p = CriteriaBuilderTools.predicate_and( cb, p, root.get(Calendar_EventRepeatMaster_.calendarId).in( calendarIds ));

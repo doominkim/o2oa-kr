@@ -22,7 +22,7 @@ public class ActionMindDestroyFromNormal extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionMindDestroyFromNormal.class );
 
-	@AuditLog(operation = "删除脑图文件")
+	@AuditLog(operation = "마인드맵 파일 삭제")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String mindId ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wo wo = new Wo();

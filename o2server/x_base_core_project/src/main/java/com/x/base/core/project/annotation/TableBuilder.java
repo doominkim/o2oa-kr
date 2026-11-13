@@ -138,7 +138,7 @@ public class TableBuilder {
 					 ContainerTableColumnProperty  idColumnProperty= new ContainerTableColumnProperty();
 					 idColumnProperty.setName(clz.getSimpleName() + "_XID");
 					 idColumnProperty.setType("VARCHAR");
-					 idColumnProperty.setRemark("主键");;
+					 idColumnProperty.setRemark("기본 키");;
 					 containerTableProperty.getContainerTableColumnProperty().add(idColumnProperty);
 					 
 					 OrderColumn orderColumn = field.getAnnotation(OrderColumn.class);
@@ -146,7 +146,7 @@ public class TableBuilder {
 						 ContainerTableColumnProperty  orderColumnProperty= new ContainerTableColumnProperty();
 						 orderColumnProperty.setName(orderColumn.name());
 						 orderColumnProperty.setType("INTEGER");
-						 orderColumnProperty.setRemark("排序");;
+						 orderColumnProperty.setRemark("정렬");;
 						 containerTableProperty.getContainerTableColumnProperty().add(orderColumnProperty);
 				     }
 				     
@@ -155,7 +155,7 @@ public class TableBuilder {
 						 ContainerTableColumnProperty  elementColumnProperty= new ContainerTableColumnProperty();
 						 elementColumnProperty.setName(elementColumn.name());
 						 elementColumnProperty.setType("VARCHAR");
-						 elementColumnProperty.setRemark("值");
+						 elementColumnProperty.setRemark("값");
 						 elementColumnProperty.setLength(elementColumn.length()+"");
 						 containerTableProperty.getContainerTableColumnProperty().add(elementColumnProperty);
 				     }

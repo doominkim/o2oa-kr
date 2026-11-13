@@ -21,7 +21,7 @@ public class ActionFollowCalendarCancel extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionFollowCalendarCancel.class );
 
-	@AuditLog(operation = "取消关注日历")
+	@AuditLog(operation = "캘린더 구독 취소")
 	protected ActionResult<WrapOutBoolean> execute( HttpServletRequest request, EffectivePerson effectivePerson, String id ) throws Exception {
 		ActionResult<WrapOutBoolean> result = new ActionResult<>();
 		Wo wo = new Wo();

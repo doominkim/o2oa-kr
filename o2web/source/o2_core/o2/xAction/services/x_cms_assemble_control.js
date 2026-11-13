@@ -471,19 +471,19 @@ MWF.xAction.RestActions.Action["x_cms_assemble_control"] = new Class({
     },
     //--index--
     listDocumentFilterNext: function(id, count, data, success, failure, async){
-        if( data && !data.documentType )data.documentType = "全部";
+        if( data && !data.documentType )data.documentType = "전체";
         this.action.invoke({"name": "listDocumentFilterNext","async": async, "data": data, "parameter": {"id": id, "count": count}, "success": success,	"failure": failure});
     },
     listDocumentFilterPrev: function(id, count, data, success, failure, async){
-        if( data && !data.documentType )data.documentType = "全部";
+        if( data && !data.documentType )data.documentType = "전체";
         this.action.invoke({"name": "listDocumentFilterPrev","async": async, "data": data, "parameter": {"id": id, "count": count}, "success": success,	"failure": failure});
     },
     listDraftNext: function(id, count, data, success, failure, async){
-        if( data && !data.documentType )data.documentType = "全部";
+        if( data && !data.documentType )data.documentType = "전체";
         this.action.invoke({"name": "listDraftNext","async": async, "data": data, "parameter": {"id": id, "count": count}, "success": success,	"failure": failure});
     },
     listDraftPrev: function(id, count, data, success, failure, async){
-        if( data && !data.documentType )data.documentType = "全部";
+        if( data && !data.documentType )data.documentType = "전체";
         this.action.invoke({"name": "listDraftPrev","async": async, "data": data, "parameter": {"id": id, "count": count}, "success": success,	"failure": failure});
     },
     //--module--

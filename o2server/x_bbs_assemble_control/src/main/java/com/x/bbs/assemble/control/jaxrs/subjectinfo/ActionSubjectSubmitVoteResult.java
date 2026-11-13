@@ -45,7 +45,7 @@ public class ActionSubjectSubmitVoteResult extends BaseAction {
 			}
 			if ( wrapIn.getOptionGroups() == null || wrapIn.getOptionGroups().isEmpty() ) {
 				check = false;
-				Exception exception = new ExceptionSubjectPropertyEmpty("用户投票选择");
+				Exception exception = new ExceptionSubjectPropertyEmpty("사용자 투표 선택");
 				result.error(exception);
 			}
 		} catch (Exception e) {
@@ -76,13 +76,13 @@ public class ActionSubjectSubmitVoteResult extends BaseAction {
 		}
 
 		if (check) {
-			if ( "投票".equals(subjectInfo.getTypeCategory()) ) {
+			if ( "투표".equals(subjectInfo.getTypeCategory()) ) {
 				try {
 					subjectVoteService.submitVoteResult(effectivePerson, subjectInfo, wrapIn.getOptionGroups());
 					CacheManager.notify( BBSSubjectInfo.class );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionSubjectOperation(e, "系统在保存投票选项信息时发生异常!");
+					Exception exception = new ExceptionSubjectOperation(e, "투표 선택지 정보를 저장하는 중 오류가 발생했습니다!");
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -113,7 +113,7 @@ public class ActionSubjectSubmitVoteResult extends BaseAction {
 
 		private String content = "";
 
-		@FieldDescribe("投票选项组集合")
+		@FieldDescribe("투표 선택지 그룹 목록")
 		private List<WiVoteOptionGroup> optionGroups = null;
 
 		public String getSubjectMachineName() {

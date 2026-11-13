@@ -74,7 +74,7 @@ public class ActionSave extends BaseAction {
 			}
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionAppInfoProcess(e, "系统根据应用栏目名称查询应用栏目信息对象时发生异常。AppName:" + wi.getAppName());
+			Exception exception = new ExceptionAppInfoProcess(e, "게시판 이름으로 게시판 정보를 조회하는 중 오류가 발생했습니다. AppName:" + wi.getAppName());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -103,7 +103,7 @@ public class ActionSave extends BaseAction {
 				unitName = userManagerService.getUnitNameByIdentity( identityName );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess(e, "系统在根据用户身份信息查询所属组织名称时发生异常。Identity:" + identityName);
+				Exception exception = new ExceptionAppInfoProcess(e, "사용자 신분 정보로 소속 조직 이름을 조회하는 중 오류가 발생했습니다. Identity:" + identityName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -113,17 +113,17 @@ public class ActionSave extends BaseAction {
 				topUnitName = userManagerService.getTopUnitNameByIdentity( identityName );
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess(e, "系统在根据用户身份信息查询所属顶层组织名称时发生异常。Identity:" + identityName);
+				Exception exception = new ExceptionAppInfoProcess(e, "사용자 신분 정보로 소속 최상위 조직 이름을 조회하는 중 오류가 발생했습니다. Identity:" + identityName);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
 		}
 		if (check) {
 			if( StringUtils.isEmpty( wi.getDocumentType() ) ) {
-				wi.setDocumentType( "信息" );
+				wi.setDocumentType( "정보" );
 			}else {
-				if( !"信息".equals(wi.getDocumentType()) && !"数据".equals( wi.getDocumentType() )) {
-					wi.setDocumentType( "信息" );
+				if( !"정보".equals(wi.getDocumentType()) && !"데이터".equals( wi.getDocumentType() )) {
+					wi.setDocumentType( "정보" );
 				}
 			}
 		}
@@ -134,7 +134,7 @@ public class ActionSave extends BaseAction {
 			wi.setCreatorUnitName( unitName );
 			wi.setCreatorTopUnitName( topUnitName );
 
-			if( StringUtils.equals( "信息", wi.getDocumentType() ) && wi.getSendNotify() == null ) {
+			if( StringUtils.equals( "정보", wi.getDocumentType() ) && wi.getSendNotify() == null ) {
 				wi.setSendNotify( true );
 			}
 
@@ -150,17 +150,17 @@ public class ActionSave extends BaseAction {
 						//게시판 이름 또는 별칭이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 						new CmsBatchOperationPersistService().addOperation(
 								CmsBatchOperationProcessService.OPT_OBJ_APPINFO,
-								CmsBatchOperationProcessService.OPT_TYPE_UPDATENAME,  appInfo.getId(), old_appInfo.getAppName(), "更新栏目名称：ID=" + appInfo.getId() );
+								CmsBatchOperationProcessService.OPT_TYPE_UPDATENAME,  appInfo.getId(), old_appInfo.getAppName(), "게시판 이름 수정: ID=" + appInfo.getId() );
 					}
 					if(  permissionQueryService.hasDiffrentViewPermissionInAppInfo( old_appInfo, appInfo )) {
 							//게시판 이름 또는 별칭이 수정되어 게시판 삭제 일괄 작업(분류 및 문서 대상) 정보 추가
 							new CmsBatchOperationPersistService().addOperation(
 									CmsBatchOperationProcessService.OPT_OBJ_APPINFO,
-									CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  appInfo.getId(), appInfo.getAppName(), "变更栏目可见权限：ID=" + appInfo.getId() );
+									CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  appInfo.getId(), appInfo.getAppName(), "게시판 공개 권한 변경: ID=" + appInfo.getId() );
 					}
-					new LogService().log(null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), appInfo.getId(), "", "", "", "APPINFO", "更新");
+					new LogService().log(null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), appInfo.getId(), "", "", "", "APPINFO", "수정");
 				}else {
-					new LogService().log(null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), appInfo.getId(), "", "", "", "APPINFO", "新增");
+					new LogService().log(null, effectivePerson.getDistinguishedName(), appInfo.getAppName(), appInfo.getId(), "", "", "", "APPINFO", "추가");
 				}
 
 				// 캐시 갱신
@@ -172,7 +172,7 @@ public class ActionSave extends BaseAction {
 				CacheManager.notify(ViewFieldConfig.class);
 			} catch (Exception e) {
 				check = false;
-				Exception exception = new ExceptionAppInfoProcess(e, "应用栏目信息保存时发生异常。");
+				Exception exception = new ExceptionAppInfoProcess(e, "게시판 정보를 저장하는 중 오류가 발생했습니다.");
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 			}
@@ -187,7 +187,7 @@ public class ActionSave extends BaseAction {
 		@FieldDescribe("작업에 사용할 신분 지정, 선택 매개변수")
 		private String identity = null;
 
-		@FieldDescribe("栏目配置支持信息，JSON")
+		@FieldDescribe("게시판 설정 지원 정보, JSON")
 		private String config = "{}";
 
 		public String getConfig() { return this.config; }

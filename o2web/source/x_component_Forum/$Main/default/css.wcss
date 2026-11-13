@@ -168,7 +168,7 @@
     "color": "#0258ad"
   },
 
-  //推荐样式开始"
+  //추천 스타일 시작"
   "documentListNode_rcm" : {
   //"margin" : "0px 20px 0px 0px"
     "overflow" : "hidden",
@@ -271,7 +271,7 @@
     "overflow" : "hidden",
     "background-color" : "#fff"
   },
-  //tile 样式开始
+  //tile 스타일 시작
   "documentNode" : {
     "margin-right" : "10px",
     "margin-top" : "10px",
@@ -370,9 +370,9 @@
     "color" : "#0258ad",
     "background": "url(../x_component_Forum/$Main/default/icon/dot_over.png) no-repeat left center"
   },
-  //tile 样式结束
+  //tile 스타일 끝
 
-  //list样式开始
+  //list 스타일 시작
   "documentNode_list" : {
     "overflow" : "hidden",
     //"margin" : "0px 0px 10px 0px",
@@ -492,9 +492,9 @@
   "documentItemReplyPersonNode_list_over" : {
     "color" : "#0258ad"
   },
-  //list样式结束
+  //list 스타일 끝
 
-  ///image样式开始
+  ///image 스타일 시작
   "documentItemNode_image" : {
     "overflow" : "hidden",
     "background-color" : "#fff"
@@ -531,7 +531,7 @@
     "float" : "left",
     "width" : "334px"
   }
-  //image样式结束
+  //image 스타일 끝
 
 //  "documentItemIconNode" : {
 //    "top" : "112px",

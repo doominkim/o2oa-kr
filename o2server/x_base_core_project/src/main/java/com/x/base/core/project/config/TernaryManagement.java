@@ -39,16 +39,16 @@ public class TernaryManagement extends ConfigObject {
 	public static final String initPassword = "o2oa@2022";
 
 	public static final String INIT_SYSTEM_MANAGER = "systemManager";
-	public static final String INIT_SYSTEM_MANAGER_DISTINGUISHED_NAME = "系统管理员@systemManager@P";
-	public static final String INIT_SYSTEM_MANAGER_NAME = "系统管理员";
+	public static final String INIT_SYSTEM_MANAGER_DISTINGUISHED_NAME = "시스템 관리자@systemManager@P";
+	public static final String INIT_SYSTEM_MANAGER_NAME = "시스템 관리자";
 
 	public static final String INIT_SECURITY_MANAGER = "securityManager";
-	public static final String INIT_SECURITY_MANAGER_DISTINGUISHED_NAME = "安全管理员@securityManager@P";
-	public static final String INIT_SECURITY_MANAGER_NAME = "安全管理员";
+	public static final String INIT_SECURITY_MANAGER_DISTINGUISHED_NAME = "보안 관리자@securityManager@P";
+	public static final String INIT_SECURITY_MANAGER_NAME = "보안 관리자";
 
 	public static final String INIT_AUDIT_MANAGER = "auditManager";
-	public static final String INIT_AUDIT_MANAGER_DISTINGUISHED_NAME = "安全审计员@auditManager@P";
-	public static final String INIT_AUDIT_MANAGER_NAME = "安全审计员";
+	public static final String INIT_AUDIT_MANAGER_DISTINGUISHED_NAME = "보안 감사자@auditManager@P";
+	public static final String INIT_AUDIT_MANAGER_NAME = "보안 감사자";
 
 	public static final Boolean DEFAULT_SECURITYCLEARANCEENABLE = false;
 	public static final Integer DEFAULT_SYSTEMSECURITYCLEARANCE = 400;
@@ -322,13 +322,13 @@ public class TernaryManagement extends ConfigObject {
 	@FieldDescribe("3권 분립 관리 사용 여부.")
 	private Boolean enable;
 
-	@FieldDescribe("系统管理员账号密码.")
+	@FieldDescribe("시스템 관리자 계정 비밀번호.")
 	private String systemManagerPassword;
 
-	@FieldDescribe("安全管理员账号密码.")
+	@FieldDescribe("보안 관리자 계정 비밀번호.")
 	private String securityManagerPassword;
 
-	@FieldDescribe("安全审计员账号密码.")
+	@FieldDescribe("보안 감사자 계정 비밀번호.")
 	private String auditManagerPassword;
 
 	@FieldDescribe("보안 등급 표시 사용.")
@@ -352,19 +352,19 @@ public class TernaryManagement extends ConfigObject {
 
 	public static Map<String, Integer> defualtSubjectSecurityClearance() {
 		Map<String, Integer> map = new LinkedHashMap<>();
-		map.put("重要", 400);
-		map.put("一般", 300);
-		map.put("内部", 200);
-		map.put("义务", 100);
+		map.put("중요", 400);
+		map.put("보통", 300);
+		map.put("내부", 200);
+		map.put("의무", 100);
 		return map;
 	}
 
 	public static Map<String, Integer> defualtObjectSecurityClearance() {
 		Map<String, Integer> map = new LinkedHashMap<>();
-		map.put("机密", 400);
-		map.put("秘密", 300);
-		map.put("内部", 200);
-		map.put("非密", 100);
+		map.put("기밀", 400);
+		map.put("비밀", 300);
+		map.put("내부", 200);
+		map.put("일반", 100);
 		return map;
 	}
 

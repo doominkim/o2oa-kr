@@ -36,9 +36,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ReadCompletedAction", description = "已阅接口.")
+@Tag(name = "ReadCompletedAction", description = "열람 완료 인터페이스.")
 @Path("readcompleted")
-@JaxrsDescribe("已阅接口.")
+@JaxrsDescribe("열람 완료 인터페이스.")
 public class ReadCompletedAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadCompletedAction.class);

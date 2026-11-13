@@ -17,7 +17,7 @@ public class ActionPersistUnTopDocument extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionPersistUnTopDocument.class);
 
-	@AuditLog(operation = "取消文档置顶")
+	@AuditLog(operation = "문서 상단 고정 취소")
 	protected ActionResult<Wo> execute(HttpServletRequest request, String id, EffectivePerson effectivePerson ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Document document = null;
@@ -56,7 +56,7 @@ public class ActionPersistUnTopDocument extends BaseAction {
 		if (check) {
 			new CmsBatchOperationPersistService().addOperation( 
 					CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT, 
-					CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  document.getId(),  document.getId(), "刷新文档权限：ID=" +  document.getId() );
+					CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  document.getId(),  document.getId(), "문서 권한 갱신: ID=" +  document.getId() );
 		}
 		CacheManager.notify( Document.class );
 

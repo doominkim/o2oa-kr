@@ -33,13 +33,13 @@ public class BaseAction extends StandardJaxrsAction {
 		// wrapIn.getBindObject()를 사용자 목록으로 파싱하여 각 사용자별 권한 분석
 		List<String> userNames = new ArrayList<>();
 		if (bindObject != null) {
-			if ("组织".equals(bindObject.getObjectType())) {
+			if ("조직".equals(bindObject.getObjectType())) {
 				try {
 					userNames = userManagerService.listPersonNamesWithUnitName(bindObject.getObjectName());
 				} catch (Exception e) {
 					throw e;
 				}
-			} else if ("群组".equals(bindObject.getObjectType())) {
+			} else if ("그룹".equals(bindObject.getObjectType())) {
 				try {
 					userNames = userManagerService.listPersonNamesWithGroupName(bindObject.getObjectName());
 				} catch (Exception e) {

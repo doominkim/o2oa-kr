@@ -65,7 +65,7 @@ public class ActionDelete extends BaseAction {
 			emc.commit();
 
 			if( view != null ){
-				logService.log( emc,  effectivePerson.getDistinguishedName(), view.getName(), view.getAppId(), "", "", view.getId(), "VIEW", "删除" );
+				logService.log( emc,  effectivePerson.getDistinguishedName(), view.getName(), view.getAppId(), "", "", view.getId(), "VIEW", "삭제" );
 			}
 
 			Wo wo = new Wo();

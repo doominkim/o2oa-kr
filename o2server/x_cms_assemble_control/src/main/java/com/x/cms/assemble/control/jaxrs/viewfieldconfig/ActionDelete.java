@@ -50,7 +50,7 @@ public class ActionDelete extends BaseAction {
 
 			// 표시 열 설정 정보 1건 삭제 성공
 			logService.log(emc, effectivePerson.getDistinguishedName(), viewFieldConfig.getFieldName(), "", "", "",
-					viewFieldConfig.getId(), "VIEWFIELDCONFIG", "删除");
+					viewFieldConfig.getId(), "VIEWFIELDCONFIG", "삭제");
 
 			wrap = new Wo();
 			wrap.setId(viewFieldConfig.getId());

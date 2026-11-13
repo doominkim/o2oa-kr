@@ -35,7 +35,7 @@ class ActionDelete extends BaseAction {
 
 			// 로그 기록
 			emc.beginTransaction(Log.class);
-			logService.log(emc, effectivePerson.getDistinguishedName(), script.getName(), script.getAppId(), "", "", script.getId(), "SCRIPT", "删除");
+			logService.log(emc, effectivePerson.getDistinguishedName(), script.getName(), script.getAppId(), "", "", script.getId(), "SCRIPT", "삭제");
 			emc.commit();
 
 			Wo wo = new Wo();

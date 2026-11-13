@@ -141,7 +141,7 @@ public class CategoryInfoFactory extends ElementFactory {
 			p = CriteriaBuilderTools.predicate_and(cb, null, root.get( CategoryInfo_.appId ).in( appIds ) );
 		}
 		//지정한 정보 유형의 모든 분류 정보 목록 조회
-		if( StringUtils.isNotEmpty( documentType ) && !"全部".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType ) && !"전체".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, null, cb.equal( root.get( CategoryInfo_.documentType ), documentType ) );
 		}
 		if( p != null ){
@@ -159,7 +159,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		CriteriaQuery<CategoryInfo> cq = cb.createQuery( CategoryInfo.class );
 		Root<CategoryInfo> root = cq.from( CategoryInfo.class );
 		Predicate p = cb.equal(root.get( CategoryInfo_.appId ), appId );
-		if( StringUtils.isNotEmpty( documentType ) && !"全部".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType ) && !"전체".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType ), documentType ));
 		}
 		return em.createQuery( cq.where(p) ).setMaxResults(maxCount).getResultList();
@@ -172,7 +172,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<CategoryInfo> root = cq.from(CategoryInfo.class);
 		Predicate p = cb.equal( root.get(CategoryInfo_.appId), appId );
-		if( StringUtils.isNotEmpty( documentType ) && !"全部".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType ) && !"전체".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType ), documentType ));
 		}
 		cq.select(cb.count(root));
@@ -201,7 +201,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		Root<CategoryInfo> root = cq.from( CategoryInfo.class);
 		Predicate p = cb.like(root.get( CategoryInfo_.categoryName ), "%" + str + "%", '\\');
 		p = cb.or(p, cb.like(root.get( CategoryInfo_.categoryAlias ), str + "%", '\\'));
-		if( StringUtils.isNotEmpty( documentType ) && !"全部".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType ) && !"전체".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType ), documentType ));
 		}
 		cq.select(root.get( CategoryInfo_.id));
@@ -218,7 +218,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		if( myCategoryIds != null && !myCategoryIds.isEmpty() ){
 			p = cb.and( p, root.get( CategoryInfo_.id ).in( myCategoryIds ) );
 		}
-		if( StringUtils.isNotEmpty( documentType) && !"全部".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType) && !"전체".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType), documentType));
 		}
 		return em.createQuery(cq.where( p )).getResultList();
@@ -384,7 +384,7 @@ public class CategoryInfoFactory extends ElementFactory {
 				p = p_permission;
 			}
 		}
-		if( StringUtils.isNotEmpty( documentType) && !"全部".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType) && !"전체".equals(documentType)&& !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType), documentType));
 		}
 		cq.select(root.get( CategoryInfo_.id ));
@@ -472,7 +472,7 @@ public class CategoryInfoFactory extends ElementFactory {
 				p = p_permission;
 			}
 		}
-		if( StringUtils.isNotEmpty( documentType) && !"全部".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType) && !"전체".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType), documentType));
 		}
 		cq.select(root.get( CategoryInfo_.id ));
@@ -504,7 +504,7 @@ public class CategoryInfoFactory extends ElementFactory {
 		if( ListTools.isNotEmpty( excludCategoryIds )) {
 			p = cb.and( p, cb.not( root.get( CategoryInfo_.id ).in( excludCategoryIds )));
 		}
-		if( StringUtils.isNotEmpty( documentType) && !"全部".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType) && !"전체".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType), documentType));
 		}
 		return em.createQuery(cq.where( p )).setMaxResults(maxCount).getResultList();
@@ -540,7 +540,7 @@ public class CategoryInfoFactory extends ElementFactory {
 			p = cb.and( p, cb.not( root.get( CategoryInfo_.id ).in( excludCategoryIds )));
 		}
 		p = cb.and( p, p_all );
-		if( StringUtils.isNotEmpty( documentType) && !"全部".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType) && !"전체".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType), documentType));
 		}
 		return em.createQuery(cq.where( p )).setMaxResults(maxCount).getResultList();
@@ -573,7 +573,7 @@ public class CategoryInfoFactory extends ElementFactory {
 			p = cb.or( p,  root.get( CategoryInfo_.manageableGroupList).in(groupNames));
 		}
 		cq.select(root.get( CategoryInfo_.id ));
-		if( StringUtils.isNotEmpty( documentType) && !"全部".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
+		if( StringUtils.isNotEmpty( documentType) && !"전체".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and( p, cb.equal( root.get( CategoryInfo_.documentType), documentType));
 		}
 		return em.createQuery( cq.where( p ) ).setMaxResults(maxCount).getResultList();

@@ -63,10 +63,10 @@ public class IdentitySheetConfigurator extends GsonPropertyObject {
 		}
 	}
 
-	private static List<String> uniqueItems = Arrays.asList(new String[] { "人员唯一编码 *", "사용자 고유 코드 *", "员工账号 *", "unique" });
-	private static List<String> unitCodeItems = Arrays.asList(new String[] { "组织编号 *", "组织唯一编码 *", "조직 고유 코드 *", "unitCode" });
-	private static List<String> majorItems = Arrays.asList(new String[] { "主兼职", "주/겸직","major" });
-	private static List<String> identityUniqueItems = Arrays.asList(new String[] { "身份编码", "소속 코드",  "identityUnique"});
+	private static List<String> uniqueItems = Arrays.asList(new String[] { "사용자 고유 코드 *", "사용자 고유 코드 *", "사용자 고유 코드 *", "unique" });
+	private static List<String> unitCodeItems = Arrays.asList(new String[] { "조직 고유 코드 *", "조직 고유 코드 *", "조직 고유 코드 *", "unitCode" });
+	private static List<String> majorItems = Arrays.asList(new String[] { "주/겸직", "주/겸직","major" });
+	private static List<String> identityUniqueItems = Arrays.asList(new String[] { "소속 코드", "소속 코드",  "identityUnique"});
 
 	public String getCellStringValue(Cell cell) {
 		if (null != cell) {

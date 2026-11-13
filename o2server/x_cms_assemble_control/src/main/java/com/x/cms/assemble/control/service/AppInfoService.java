@@ -191,7 +191,7 @@ public class AppInfoService {
 				appInfo.setAppAlias( appInfo.getAppName() );
 			}
 			if( StringUtils.isEmpty( appInfo.getAppType() )) {
-				appInfo.setAppType( "未分类" );
+				appInfo.setAppType( "미분류" );
 			}
 			emc.persist( appInfo, CheckPersistType.all);
 		}else{
@@ -201,7 +201,7 @@ public class AppInfoService {
 				appInfo.setAppAlias( appInfo.getAppName() );
 			}
 			if( StringUtils.isEmpty( appInfo.getAppType() )) {
-				appInfo.setAppType( "未分类" );
+				appInfo.setAppType( "미분류" );
 			}
 			emc.check( appInfo, CheckPersistType.all );
 		}

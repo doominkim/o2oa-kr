@@ -365,7 +365,7 @@ public class DocumentPersistService {
 		Document document = permissionService.refreshDocumentPermission(docId, readerList, authorList);
 
 		batchOperationPersistService.addDocumentOperation(CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
-				CmsBatchOperationProcessService.OPT_TYPE_PERMISSION, docId, docId, "刷新文档权限：ID=" + docId);
+				CmsBatchOperationProcessService.OPT_TYPE_PERMISSION, docId, docId, "문서 권한 갱신: ID=" + docId);
 
 		return document;
 	}
@@ -392,11 +392,11 @@ public class DocumentPersistService {
 			if (lock.tryLock()) {
 				AppInfoServiceAdv appInfoService = new AppInfoServiceAdv();
 				DocumentQueryService documentQueryService = new DocumentQueryService();
-				List<String> appIds = appInfoService.listAllIds("信息");
+				List<String> appIds = appInfoService.listAllIds("정보");
 				if (ListTools.isNotEmpty(appIds)) {
 					for (String appId : appIds) {
 						// 지정 App의 모든 문서 Id 조회
-						List<String> documentIds = documentQueryService.listIdsByAppId(appId, "信息", 50000);
+						List<String> documentIds = documentQueryService.listIdsByAppId(appId, "정보", 50000);
 						logger.info("앱 {}의 데이터 총 {}건 새로 고침", appId, documentIds.size());
 						if (ListTools.isNotEmpty(documentIds)) {
 							int count = 0;
@@ -461,7 +461,7 @@ public class DocumentPersistService {
 					CriteriaQuery<String> cq = cb.createQuery(String.class);
 					Root<Document> root = cq.from(Document.class);
 					Predicate p = cb.equal(root.get(Document_.categoryId), categoryId);
-					p = cb.and(p, cb.equal(root.get(Document_.documentType), "信息"));
+					p = cb.and(p, cb.equal(root.get(Document_.documentType), "정보"));
 					cq.select(root.get(Document_.id)).where(p);
 					documentIds = em.createQuery(cq).getResultList();
 				}

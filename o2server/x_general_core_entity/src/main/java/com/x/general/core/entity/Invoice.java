@@ -44,8 +44,8 @@ public class Invoice extends StorageObject {
 	private static final String TABLE = PersistenceProperties.Invoice.table;
 	private static final String BASE_DIR = "invoice";
 	public static final String EXT_PDF = "pdf";
-	public static final String APPLY_STATUS_0 = "未报销";
-	public static final String APPLY_STATUS_1 = "已报销";
+	public static final String APPLY_STATUS_0 = "미정산";
+	public static final String APPLY_STATUS_1 = "정산 완료";
 
 	public String getId() {
 		return id;

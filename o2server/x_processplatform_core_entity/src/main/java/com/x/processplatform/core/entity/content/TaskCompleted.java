@@ -582,14 +582,14 @@ public class TaskCompleted extends SliceJpaObject implements ProjectionInterface
 	@CheckPersist(allowEmpty = false)
 	private String identity;
 
-	@Deprecated(since = "8.2 移动到properties中")
+	@Deprecated(since = "8.2에서 properties로 이동")
 	public static final String empowerToIdentity_FIELDNAME = "empowerToIdentity";
 	@FieldDescribe("처리 위임 대상, processType=empower일 때 위임 대상 기록")
 	@Column(length = length_255B, name = ColumnNamePrefix + empowerToIdentity_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String empowerToIdentity;
 
-	@Deprecated(since = "8.2 移动到properties中")
+	@Deprecated(since = "8.2에서 properties로 이동")
 	public static final String empowerFromIdentity_FIELDNAME = "empowerFromIdentity";
 	@FieldDescribe("위임 원 Identity")
 	@Column(length = length_255B, name = ColumnNamePrefix + empowerFromIdentity_FIELDNAME)

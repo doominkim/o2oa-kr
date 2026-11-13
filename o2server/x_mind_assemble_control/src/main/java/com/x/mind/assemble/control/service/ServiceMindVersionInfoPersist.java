@@ -74,7 +74,7 @@ class ServiceMindVersionInfoPersist{
 		//현재 마인드맵의 버전 수 조회
 		Long  count = business.mindVersionInfoFactory().countMindVersionWithMindId( _mindBaseInfo.getId() );
 		if( count > maxVersionCount ) {
-			System.out.println(">>>>>>>>>>版本数量超过"+ maxVersionCount +"个了，删除最早的一个版本。");
+			System.out.println(">>>>>>>>>>버전 수가 다음을 초과: "+ maxVersionCount +"개, 가장 오래된 버전 하나를 삭제합니다.");
 			deleteEarliestVersion(emc, _mindBaseInfo.getId());
 		}
 		return mindVersionInfo;

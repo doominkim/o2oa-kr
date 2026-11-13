@@ -265,7 +265,7 @@ public class UserPermissionService {
 				} catch (Exception e) {
 					methodExcuteResult.setSuccess(false);
 					methodExcuteResult.error(e);
-					methodExcuteResult.setMessage("系统获取用户所拥有的权限列表时发生异常");
+					methodExcuteResult.setMessage("사용자의 권한 목록을 가져오는 중 오류가 발생했습니다");
 					logger.warn(
 							"system get all permission list from ThisApplication.userPermissionInfoMap got an exception!");
 					logger.error(e);
@@ -277,7 +277,7 @@ public class UserPermissionService {
 				} catch (Exception e) {
 					methodExcuteResult.setSuccess(false);
 					methodExcuteResult.error(e);
-					methodExcuteResult.setMessage("系统从用户所拥有的权限里过滤论坛访问权限时发生异常");
+					methodExcuteResult.setMessage("사용자의 권한 목록에서 포럼 접근 권한을 거르는 중 오류가 발생했습니다");
 					logger.warn("system filter FORUM_VIEW permission from user permission list got an exception!");
 					logger.error(e);
 				}
@@ -310,7 +310,7 @@ public class UserPermissionService {
 				} catch (Exception e) {
 					methodExcuteResult.setSuccess(false);
 					methodExcuteResult.error(e);
-					methodExcuteResult.setMessage("系统获取用户所拥有的权限列表时发生异常");
+					methodExcuteResult.setMessage("사용자의 권한 목록을 가져오는 중 오류가 발생했습니다");
 					logger.warn(
 							"system get all permission list from ThisApplication.userPermissionInfoMap got an exception!");
 					logger.error(e);
@@ -323,7 +323,7 @@ public class UserPermissionService {
 				} catch (Exception e) {
 					methodExcuteResult.setSuccess(false);
 					methodExcuteResult.error(e);
-					methodExcuteResult.setMessage("系统从用户所拥有的权限里过滤论坛访问权限时发生异常");
+					methodExcuteResult.setMessage("사용자의 권한 목록에서 포럼 접근 권한을 거르는 중 오류가 발생했습니다");
 					logger.warn("system filter FORUM_VIEW permission from user permission list got an exception!");
 					logger.error(e);
 				}

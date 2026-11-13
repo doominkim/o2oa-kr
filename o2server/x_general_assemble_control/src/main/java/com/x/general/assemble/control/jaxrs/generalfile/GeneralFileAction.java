@@ -30,15 +30,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.BooleanUtils;
 
-@Tag(name = "GeneralFileAction", description = "通用附件.")
+@Tag(name = "GeneralFileAction", description = "공통 첨부파일.")
 @Path("generalfile")
-@JaxrsDescribe("通用附件.")
+@JaxrsDescribe("공통 첨부파일.")
 public class GeneralFileAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GeneralFileAction.class);
 	private static final String OPERATIONID_PREFIX = "GeneralFileAction::";
 
-	@Operation(summary = "获取通用附件.", operationId = OPERATIONID_PREFIX + "get", responses = {
+	@Operation(summary = "공통 첨부파일 조회.", operationId = OPERATIONID_PREFIX + "get", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionGet.Wo.class)) }) })
 	@JaxrsMethodDescribe(value = "첨부파일 조회.", action = ActionGet.class)
 	@GET

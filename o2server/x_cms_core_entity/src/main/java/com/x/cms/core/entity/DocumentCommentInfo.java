@@ -121,11 +121,11 @@ public class DocumentCommentInfo extends SliceJpaObject {
 	private String creatorName = "";
 
 	public static final String commentAuditStatus_FIELDNAME = "commentAuditStatus";
-	@FieldDescribe("评论审核状态：无审核|待审核|审核通过")
+	@FieldDescribe("댓글 검토 상태: 검토 없음|검토 대기|검토 통과")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + commentAuditStatus_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + commentAuditStatus_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String commentAuditStatus = "无审核";
+	private String commentAuditStatus = "검토 없음";
 
 	public static final String auditorName_FIELDNAME = "auditorName";
 	@FieldDescribe("심사자 이름")

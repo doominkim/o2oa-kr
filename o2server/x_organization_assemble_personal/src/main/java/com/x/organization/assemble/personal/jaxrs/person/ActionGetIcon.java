@@ -104,7 +104,7 @@ class ActionGetIcon extends BaseAction {
 
 	private Font pickFont(int pixel) {
 		// 일반적인 중국어 글꼴 계열명 시도, canDisplay 검사는 하지 않음. 실패 시 논리 글꼴로 매핑
-		String[] families = { "微软雅黑", "宋体", "黑体", "SimHei", "Noto Sans CJK SC", "Source Han Sans SC", // 호스트에 설치되어 있으면 더 좋음
+		String[] families = { "Microsoft YaHei", "SimSun", "SimHei", "SimHei", "Noto Sans CJK SC", "Source Han Sans SC", // 호스트에 설치되어 있으면 더 좋음
 				"Microsoft YaHei", "PingFang SC", "WenQuanYi Zen Hei", "SimHei", Font.SANS_SERIF, "Dialog" // 논리 글꼴 대체
 		};
 		for (String fam : families) {

@@ -5,7 +5,7 @@ import com.x.base.core.project.annotation.Module;
 import com.x.base.core.project.annotation.ModuleCategory;
 import com.x.base.core.project.annotation.ModuleType;
 
-@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "流程设计", packageName = "com.x.processplatform.assemble.designer", containerEntities = {
+@Module(type = ModuleType.ASSEMBLE, category = ModuleCategory.OFFICIAL, name = "결재 설계", packageName = "com.x.processplatform.assemble.designer", containerEntities = {
 		"com.x.processplatform.core.entity.content.Snap", "com.x.processplatform.core.entity.content.DocumentVersion",
 		"com.x.processplatform.core.entity.content.Draft", "com.x.processplatform.core.entity.content.Attachment",
 		"com.x.processplatform.core.entity.content.Read", "com.x.processplatform.core.entity.content.ReadCompleted",

@@ -31,7 +31,7 @@ public class ActionExcelTemplate extends BaseAction {
             Cell cell = row.createCell(0);
             cell.setCellValue("사용자 식별자");
             cell = row.createCell(1);
-            cell.setCellValue("외출 유형: 出差|培训|其他");
+            cell.setCellValue("외출 유형: 출장|교육|기타");
             cell = row.createCell(2);
             cell.setCellValue("시작 시간: yyyy-MM-dd HH:mm:ss");
             cell = row.createCell(3);

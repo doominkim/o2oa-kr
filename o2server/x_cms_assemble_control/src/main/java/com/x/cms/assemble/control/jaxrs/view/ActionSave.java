@@ -55,7 +55,7 @@ public class ActionSave extends BaseAction {
 
 		View view = viewServiceAdv.save(wi, effectivePerson, wi.getFields());
 		new LogService().log(null, effectivePerson.getDistinguishedName(), view.getName(), view.getAppId(), "",
-				"", view.getId(), "VIEW", "保存");
+				"", view.getId(), "VIEW", "저장");
 
 		CacheManager.notify(View.class);
 		CacheManager.notify(ViewFieldConfig.class);

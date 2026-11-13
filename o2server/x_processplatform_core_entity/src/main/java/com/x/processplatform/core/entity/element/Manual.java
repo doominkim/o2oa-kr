@@ -199,7 +199,7 @@ public class Manual extends Activity {
 	}
 
 	public static final String PROCESSINGTASKONCEUNDERSAMEPERSON_FIELDNAME = "processingTaskOnceUnderSamePerson";
-	@Deprecated(since = "如果使用tickets的distingushedName,那么这个设置将要废弃.")
+	@Deprecated(since = "tickets의 distingushedName을 사용하면 이 설정은 폐기될 예정.")
 	@Transient
 	@FieldDescribe("동일 처리자의 다른 신분 결재 대기를 한 번에 병합 처리.")
 	private Boolean processingTaskOnceUnderSamePerson;

@@ -44,12 +44,12 @@ public class ActionCreateWi extends GsonPropertyObject {
 
 	@FieldDescribe("첨부파일 목록")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiAttachment",
-			fieldValue = "{'id':'附件id','name':'附件名称','site':'附件框分类','isSoftCopy':'是否软拷贝，默认false，true表示不拷贝真实存储附件，共用附件，仅支持流程附件','copyFrom':'附件来源(cms或processPlatform，默认为processPlatform)'}")
+			fieldValue = "{'id':'첨부파일 id','name':'첨부파일 이름','site':'첨부파일 영역 분류','isSoftCopy':'소프트 복사 여부, 기본값 false. true면 실제 저장된 첨부파일을 복사하지 않고 공유하며 결재 첨부파일만 지원','copyFrom':'첨부파일 출처(cms 또는 processPlatform, 기본값 processPlatform)'}")
 	private List<WiAttachment> attachmentList = new ArrayList<>();
 
 	@FieldDescribe("관련 문서 목록.")
 	@FieldTypeDescribe(fieldType = "class", fieldTypeName = "TargetWi",
-			fieldValue = "{'type':'关联目标类型(cms或processPlatform)','bundle':'关联目标标识','site':'关联内容框标识','view':'来源视图'}")
+			fieldValue = "{'type':'관련 대상 유형(cms 또는 processPlatform)','bundle':'관련 대상 식별자','site':'관련 콘텐츠 영역 식별자','view':'출처 뷰'}")
 	private List<TargetWi> correlationTargetList;
 
 	public List<WiAttachment> getAttachmentList() {

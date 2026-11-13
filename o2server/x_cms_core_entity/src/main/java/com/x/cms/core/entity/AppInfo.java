@@ -39,7 +39,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author O2LEE
  *
  */
-@Schema(name = "AppInfo", description = "内容管理栏目信息.")
+@Schema(name = "AppInfo", description = "콘텐츠 관리 게시판 정보.")
 @ContainerEntity(dumpSize = 200, type = ContainerEntity.Type.element, reference = ContainerEntity.Reference.strong)
 @Entity
 @Table(name = PersistenceProperties.AppInfo.table, uniqueConstraints = {
@@ -92,22 +92,22 @@ public class AppInfo extends SliceJpaObject {
 	@FieldDescribe("게시판 유형")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + appType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
-	private String appType = "未分类";
+	private String appType = "미분류";
 
 	public static final String documentType_FIELDNAME = "documentType";
-	@FieldDescribe("默认文档类型：信息 | 数据")
+	@FieldDescribe("기본 문서 유형: 정보 | 데이터")
 	@Column(length = JpaObject.length_16B, name = ColumnNamePrefix + documentType_FIELDNAME)
 	@Index(name = TABLE + IndexNameMiddle + documentType_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
-	private String documentType = "信息";
+	private String documentType = "정보";
 
 	public static final String appInfoSeq_FIELDNAME = "appInfoSeq";
-	@FieldDescribe("栏目信息排序号")
+	@FieldDescribe("게시판 정보 정렬 번호")
 	@Column(length = JpaObject.length_96B, name = ColumnNamePrefix + appInfoSeq_FIELDNAME)
 	private String appInfoSeq;
 
 	public static final String description_FIELDNAME = "description";
-	@FieldDescribe("栏目信息说明")
+	@FieldDescribe("게시판 정보 설명")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + description_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String description;
@@ -127,7 +127,7 @@ public class AppInfo extends SliceJpaObject {
 	private String iconColor;
 
 	public static final String appMemo_FIELDNAME = "appMemo";
-	@FieldDescribe("备注信息")
+	@FieldDescribe("비고 정보")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + appMemo_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String appMemo;

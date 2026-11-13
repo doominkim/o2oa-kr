@@ -20,7 +20,7 @@ public class ActionPersistCommend extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionPersistCommend.class);
 
-	@AuditLog(operation = "文档点赞")
+	@AuditLog(operation = "문서 좋아요")
 	protected ActionResult<Wo> execute(HttpServletRequest request, String id, EffectivePerson effectivePerson ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Document document = null;
@@ -50,7 +50,7 @@ public class ActionPersistCommend extends BaseAction {
 				wo.setId( documentCommend.getId() );
 				result.setData( wo );
 			} catch (Exception e) {
-				Exception exception = new ExceptionDocumentInfoProcess(e, "给文档点赞时时发生异常。Id:" + id);
+				Exception exception = new ExceptionDocumentInfoProcess(e, "문서에 좋아요를 누르는 중 오류가 발생했습니다. Id:" + id);
 				result.error(exception);
 				logger.error(e, effectivePerson, request, null);
 				throw exception;

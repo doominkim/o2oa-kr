@@ -4,13 +4,13 @@
 ## externalDataSources
 
 get /jaxrs/externaldatasources/check
-检查是否可以设置外部数据源
+외부 데이터 소스를 설정할 수 있는지 확인
 
 get /jaxrs/externaldatasources/list
-列示可用的外部数据源配置样例.
+사용할 수 있는 외부 데이터 소스 설정 예시 목록.
 
 post /jaxrs/externaldatasources/set
-设置外部数据源.
+외부 데이터 소스 설정.
 {
 "externalDataSources": [{
 "enable": true,
@@ -27,7 +27,7 @@ post /jaxrs/externaldatasources/set
 
 
 post /jaxrs/externaldatasources/validate
-检查数据源是否可以连接.
+데이터 소스에 연결할 수 있는지 확인.
 {
 "externalDataSources": [{
 "enable": true,
@@ -43,46 +43,46 @@ post /jaxrs/externaldatasources/validate
 }
 
 get /jaxrs/externaldatasources/set/cancel
-取消设置外部数据源.
+외부 데이터 소스 설정 취소.
 
 ## h2
 
 get /jaxrs/h2/check
-检查h2服务服务器是否需要升级,jarVersion程序h2版本,localRepositoryDataH2Version本地文件版本,dataBaseFileExists数据库文件是否存在,needUpgrade是否需要升级
+h2 서버 업그레이드 필요 여부 확인, jarVersion 프로그램 h2 버전, localRepositoryDataH2Version 로컬 파일 버전, dataBaseFileExists 데이터베이스 파일 존재 여부, needUpgrade 업그레이드 필요 여부
 
 get /jaxrs/h2/upgrade
-确认需要进行升级
+업그레이드 확인
 
 get /jaxrs/h2/upgrade/cancel
-取消升级
+업그레이드 취소
 
 ## restore
 
 post /jaxrs/restore/upload
-上传zip格式数据包,字段名file
+zip 형식 데이터 패키지 업로드, 필드 이름 file
 
 get /jaxrs/restore/upload/cancel
-取消数据导入
+데이터 가져오기 취소
 
 ## secret
 
 get /jaxrs/secret/check
-检查密码是否为空
+비밀번호가 비어 있는지 확인
 
 post /jaxrs/secret/set
-设置初始管理员密码 {"secret":"o2oa@2022"}
+초기 관리자 비밀번호 설정 {"secret":"o2oa@2022"}
 
 get /jaxrs/secret/cancel
-取消设置初始管理员密码
+초기 관리자 비밀번호 설정 취소
 
 ## server
 
 
 get /jaxrs/server/execute
-执行服务器任务,执行完成后将停止init服务器,随后正常启动.
+서버 작업 실행. 완료되면 init 서버를 멈추고 정상 기동한다.
 
 get /jaxrs/server/execute/status
-获取初始服务器任务执行状态 {"status":"waiting|running|success|failure", "messages":[""],"failureMessage":""}
+초기 서버 작업 실행 상태 조회 {"status":"waiting|running|success|failure", "messages":[""],"failureMessage":""}
 
 get /jaxrs/server/stop
-停止init服务器
+init 서버 중지

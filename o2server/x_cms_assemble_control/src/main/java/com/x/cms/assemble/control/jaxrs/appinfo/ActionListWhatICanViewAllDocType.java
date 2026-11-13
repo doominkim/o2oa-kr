@@ -50,7 +50,7 @@ public class ActionListWhatICanViewAllDocType extends BaseAction {
 					unitNames = userManagerService.listUnitNamesWithPerson(personName);
 					groupNames = userManagerService.listGroupNamesByPerson(personName);
 				}
-				List<String> appIds = business.getAppInfoFactory().listPeopleViewAppInfoIds(personName, unitNames, groupNames, "全部", isManager);
+				List<String> appIds = business.getAppInfoFactory().listPeopleViewAppInfoIds(personName, unitNames, groupNames, "전체", isManager);
 				if(ListTools.isNotEmpty(appIds)){
 					List<AppInfo> apps = emc.list(AppInfo.class, appIds);
 					for(AppInfo appInfo : apps){
@@ -67,7 +67,7 @@ public class ActionListWhatICanViewAllDocType extends BaseAction {
 							wo.setWrapOutCategoryList(emc.fetch(cateIds, WoCategory.copier2));
 						}
 						if (StringUtils.isBlank(wo.getAppType())) {
-							wo.setAppType("未分类");
+							wo.setAppType("미분류");
 						}
 						wos.add(wo);
 					}

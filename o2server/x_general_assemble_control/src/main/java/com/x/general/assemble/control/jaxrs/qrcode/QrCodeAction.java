@@ -29,9 +29,9 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-@Tag(name = "QrCodeAction", description = "二维码.")
+@Tag(name = "QrCodeAction", description = "QR 코드.")
 @Path("qrcode")
-@JaxrsDescribe("二维码")
+@JaxrsDescribe("QR 코드")
 public class QrCodeAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(QrCodeAction.class);

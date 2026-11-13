@@ -35,8 +35,8 @@ public class Handover extends SliceJpaObject {
 
 	private static final String TABLE = PersistenceProperties.Content.Handover.table;
 
-	public static final String TYPE_REPLACE = "替换";
-	public static final String TYPE_EMPOWER = "授权";
+	public static final String TYPE_REPLACE = "교체";
+	public static final String TYPE_EMPOWER = "위임";
 
 	@Override
 	public String getId() {
@@ -115,7 +115,7 @@ public class Handover extends SliceJpaObject {
 	private String targetIdentity;
 
 	public static final String type_FIELDNAME = "type";
-	@FieldDescribe("权限交接类型：替换|授权(默认).")
+	@FieldDescribe("권한 인계 유형: 교체|위임(기본값).")
 	@Column(length = length_64B, name = ColumnNamePrefix + type_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
 	private String type;

@@ -78,7 +78,7 @@ public class ActionListWhatICanPublish extends BaseAction {
 						try {
 							ids = permissionQueryService.listPublishableCategoryIdByPerson(
 									personName, isAnonymous, unitNames, groupNames, roleNames, inAppInfoIds, null,
-									null, "全部", "all", 1000, false );
+									null, "전체", "all", 1000, false );
 						} catch (Exception e) {
 							check = false;
 							Exception exception = new ExceptionCategoryInfoProcess(e,

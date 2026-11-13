@@ -22,7 +22,7 @@ public class ActionSave extends BaseAction {
 	
 	private static Logger logger = LoggerFactory.getLogger( ActionSave.class );
 
-	@AuditLog(operation = "保存系统设置")
+	@AuditLog(operation = "시스템 설정 저장")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, JsonElement jsonElement ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Wi wrapIn = null;

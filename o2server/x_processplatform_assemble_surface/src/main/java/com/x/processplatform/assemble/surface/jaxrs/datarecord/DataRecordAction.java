@@ -28,9 +28,9 @@ import java.util.List;
 /**
  * @author sword
  */
-@Tag(name = "ReadRecordAction", description = "业务数据变更记录接口.")
+@Tag(name = "ReadRecordAction", description = "업무 데이터 변경 기록 인터페이스.")
 @Path("datarecord")
-@JaxrsDescribe("业务数据变更记录接口.")
+@JaxrsDescribe("업무 데이터 변경 기록 인터페이스.")
 public class DataRecordAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataRecordAction.class);

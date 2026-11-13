@@ -131,7 +131,7 @@ public class BaseAction extends StandardJaxrsAction{
 						if (!viewSectionIds.contains(_sectionInfo.getId())) {
 							viewSectionIds.add(_sectionInfo.getId());
 						}
-						if ("主板块".equals(_sectionInfo.getSectionLevel())) {
+						if ("상위 섹션".equals(_sectionInfo.getSectionLevel())) {
 							subSectionInfoList = sectionInfoServiceAdv
 									.listSubSectionByMainSectionId(_sectionInfo.getId());
 							if (subSectionInfoList != null) {

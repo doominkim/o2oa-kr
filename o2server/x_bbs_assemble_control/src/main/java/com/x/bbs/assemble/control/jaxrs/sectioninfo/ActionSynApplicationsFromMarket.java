@@ -35,7 +35,7 @@ public class ActionSynApplicationsFromMarket extends BaseAction {
 			List<String> applicationList = this.getAllApplicationList();
 			logger.info("ActionSynApplicationsFromMarket applicationList:"+applicationList);
 			if(ListTools.isNotEmpty(applicationList)){
-				BBSSectionInfo bBSSectionInfo = sectionInfoServiceAdv.getMainSectionBySectionName("应用市场");
+				BBSSectionInfo bBSSectionInfo = sectionInfoServiceAdv.getMainSectionBySectionName("앱 마켓");
 				bBSSectionInfo.setSubjectTypeList(applicationList);
 				sectionInfoServiceAdv.save(bBSSectionInfo);
 				CacheManager.notify(BBSSectionInfo.class);

@@ -31,9 +31,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "ReadRecordAction", description = "阅读记录接口.")
+@Tag(name = "ReadRecordAction", description = "열람 기록 인터페이스.")
 @Path("readrecord")
-@JaxrsDescribe("阅读记录接口.")
+@JaxrsDescribe("열람 기록 인터페이스.")
 public class ReadRecordAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadRecordAction.class);

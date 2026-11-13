@@ -172,7 +172,7 @@ public class BBSForumInfoService {
 					userRole_new.setForumId( forumInfo.getId() );
 					userRole_new.setObjectName( name );
 					userRole_new.setUniqueId( name );
-					userRole_new.setObjectType( "人员" ); //사용자|조직|그룹
+					userRole_new.setObjectType( "사용자" ); //사용자|조직|그룹
 					userRole_new.setRoleCode( roleInfo.getRoleCode() );
 					userRole_new.setRoleId( roleInfo.getId() );
 					userRole_new.setRoleName( roleInfo.getRoleName() );

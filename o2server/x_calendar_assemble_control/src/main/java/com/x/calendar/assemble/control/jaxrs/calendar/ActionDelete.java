@@ -16,7 +16,7 @@ public class ActionDelete extends BaseAction {
 	
 	private Logger logger = LoggerFactory.getLogger( ActionDelete.class );
 
-	@AuditLog(operation = "删除日历")
+	@AuditLog(operation = "캘린더 삭제")
 	protected ActionResult<Wo> execute( HttpServletRequest request, EffectivePerson effectivePerson, String id ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		Calendar calendar = null;

@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionPersistDeleteDocument extends BaseAction {
 
-	@AuditLog(operation = "删除文档")
+	@AuditLog(operation = "문서 삭제")
 	protected ActionResult<Wo> execute( HttpServletRequest request, String id, EffectivePerson effectivePerson ) throws Exception {
 		ActionResult<Wo> result = new ActionResult<>();
 		List<String> allFileInfoIds = null;
@@ -103,9 +103,9 @@ public class ActionPersistDeleteDocument extends BaseAction {
 
 			new CmsBatchOperationPersistService().addOperation(
 					CmsBatchOperationProcessService.OPT_OBJ_DOCUMENT,
-					CmsBatchOperationProcessService.OPT_TYPE_DELETE,  id, id, "文档删除：ID=" + id );
+					CmsBatchOperationProcessService.OPT_TYPE_DELETE,  id, id, "문서 삭제: ID=" + id );
 
-			logService.log( emc, effectivePerson.getDistinguishedName(), document.getCategoryAlias() + ":" + document.getTitle(), document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "删除" );
+			logService.log( emc, effectivePerson.getDistinguishedName(), document.getCategoryAlias() + ":" + document.getTitle(), document.getAppId(), document.getCategoryId(), document.getId(), "", "DOCUMENT", "삭제" );
 
 			Wo wo = new Wo();
 			wo.setId( document.getId() );

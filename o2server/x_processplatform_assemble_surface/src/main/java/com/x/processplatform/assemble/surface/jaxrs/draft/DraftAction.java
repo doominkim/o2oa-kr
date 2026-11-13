@@ -36,9 +36,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "DraftAction", description = "草稿接口.")
+@Tag(name = "DraftAction", description = "임시 저장 인터페이스.")
 @Path("draft")
-@JaxrsDescribe("草稿接口.")
+@JaxrsDescribe("임시 저장 인터페이스.")
 public class DraftAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DraftAction.class);

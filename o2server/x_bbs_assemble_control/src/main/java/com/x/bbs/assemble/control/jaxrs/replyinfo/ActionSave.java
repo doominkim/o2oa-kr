@@ -105,7 +105,7 @@ public class ActionSave extends BaseAction {
 
 		// 주제의 사용자 답글 허용 여부 판단, 잠긴 주제는 답글 불가
 		if (check) {
-			if ("已锁定".equals(subjectInfo.getSubjectStatus())) {
+			if ("잠김".equals(subjectInfo.getSubjectStatus())) {
 				check = false;
 				Exception exception = new ExceptionSubjectLocked(wrapIn.getSubjectId());
 				result.error(exception);
@@ -132,7 +132,7 @@ public class ActionSave extends BaseAction {
 
 		// 사용자의 게시판 내 주제 답글 권한 판단 시작
 		if (check) {
-			if ("根据权限".equals(sectionInfo.getReplyPublishAble())) {
+			if ("권한에 따라".equals(sectionInfo.getReplyPublishAble())) {
 				try {
 					hasPermission = UserPermissionService.hasPermission(effectivePerson.getDistinguishedName(),
 							"SECTION_REPLY_PUBLISH_" + subjectInfo.getSectionId());
@@ -171,7 +171,7 @@ public class ActionSave extends BaseAction {
 				}
 			}
 			if (check) {
-				if ("根据权限".equals(sectionInfo.getReplyPublishAble())) {
+				if ("권한에 따라".equals(sectionInfo.getReplyPublishAble())) {
 					// 사용자의 게시판 내 주제 답글 권한 판단 시작
 					try {
 						hasPermission = UserPermissionService.hasPermission(effectivePerson.getDistinguishedName(),
@@ -209,7 +209,7 @@ public class ActionSave extends BaseAction {
 			}
 		}
 		if (check) {
-			if ("根据权限".equals(forumInfo.getReplyPublishAble())) {
+			if ("권한에 따라".equals(forumInfo.getReplyPublishAble())) {
 				// 사용자의 포럼 구역 주제 답글 권한 판단 시작
 				try {
 					hasPermission = UserPermissionService.hasPermission(effectivePerson.getDistinguishedName(),

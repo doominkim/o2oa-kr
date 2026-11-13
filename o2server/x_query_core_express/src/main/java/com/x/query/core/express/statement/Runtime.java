@@ -37,7 +37,7 @@ public class Runtime extends GsonPropertyObject {
     public static final String filterList_FIELDNAME = "filterList";
     @FieldDescribe("필터 조건.")
     @FieldTypeDescribe(fieldType = "class", fieldTypeName = "com.x.query.core.express.plan.FilterEntry", fieldValue = "{\"logic\": \"and\", \"path\": \"o.name\", \"comparison\": \"equals\", \"value\": \"name\", \"formatType\": \"textValue\"}", fieldSample = "{\"logic\":\"논리 연산:and\",\"path\":\"data 데이터 경로:o.title\",\"comparison\":\"비교 연산자:equals|notEquals|like|notLike|greaterThan|greaterThanOrEqualTo|lessThan|lessThanOrEqualTo\","
-            + "\"value\":\"7月\",\"formatType\":\"textValue|numberValue|dateTimeValue|booleanValue\"}")
+            + "\"value\":\"7월\",\"formatType\":\"textValue|numberValue|dateTimeValue|booleanValue\"}")
     public List<FilterEntry> filterList = new ArrayList<>();
 
     public static final String parameter_FIELDNAME = "parameter";

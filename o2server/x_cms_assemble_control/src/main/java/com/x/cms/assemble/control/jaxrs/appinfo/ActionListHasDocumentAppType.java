@@ -50,7 +50,7 @@ public class ActionListHasDocumentAppType extends BaseAction {
 					appIds = business.reviewFactory().listApp(personName);
 				}
 				if(ListTools.isNotEmpty(appIds)){
-					final String noneType = "未分类";
+					final String noneType = "미분류";
 					List<BaseAction.Wo> apps = emc.fetch(appIds, BaseAction.Wo.copier3);
 					apps.stream().forEach(app -> {
 						if(StringUtils.isBlank(app.getAppType())){

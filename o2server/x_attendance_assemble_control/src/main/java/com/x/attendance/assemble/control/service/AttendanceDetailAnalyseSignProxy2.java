@@ -36,9 +36,9 @@ class AttendanceDetailAnalyseSignProxy2 {
 		Boolean isNotWorkDay = ( detail.getIsWeekend() && !detail.getIsWorkday()) || detail.getIsHoliday();
 
 		//직원 휴가 상태
-		Boolean isSelfHoliday_FullDay = detail.getIsGetSelfHolidays() && "全天".equalsIgnoreCase( detail.getSelfHolidayDayTime() );
-		Boolean isSelfHoliday_Morning = detail.getIsGetSelfHolidays() && "上午".equalsIgnoreCase( detail.getSelfHolidayDayTime() );
-		Boolean isSelfHoliday_Afternoon = detail.getIsGetSelfHolidays() && "下午".equalsIgnoreCase( detail.getSelfHolidayDayTime() );
+		Boolean isSelfHoliday_FullDay = detail.getIsGetSelfHolidays() && "종일".equalsIgnoreCase( detail.getSelfHolidayDayTime() );
+		Boolean isSelfHoliday_Morning = detail.getIsGetSelfHolidays() && "오전".equalsIgnoreCase( detail.getSelfHolidayDayTime() );
+		Boolean isSelfHoliday_Afternoon = detail.getIsGetSelfHolidays() && "오후".equalsIgnoreCase( detail.getSelfHolidayDayTime() );
 		Boolean isSelfHoliday = isSelfHoliday_Afternoon || isSelfHoliday_Morning || isSelfHoliday_FullDay;
 
 		//먼저 현재 체크 정보의 출퇴근 시간 요건을 초기화. 이 요건은 직원 소속 조직의 근무 일정 정보로 조회한 것
@@ -67,11 +67,11 @@ class AttendanceDetailAnalyseSignProxy2 {
 			if ( onDutyTime == null && offDutyTime == null ) {
 				//직원이 이미 종일 휴가이면 결근이 아니며 근태 결과는 정상
 				if( isSelfHoliday_FullDay || isNotWorkDay ){
-					logger.debug( debugger, "全天请假不计缺勤。" );
+					logger.debug( debugger, "종일 휴가는 결근으로 계산하지 않습니다." );
 					detail.setAttendance( 0.0 );
 					detail.setIsAbsent( false );
 					detail.setAbsence( 0.0 );
-					detail.setAbsentDayTime( "无" );
+					detail.setAbsentDayTime( "없음" );
 					detail.setWorkTimeDuration( 0L );
 				}else{
 					//그렇지 않고 체크도 없고 휴가·주말·공휴일도 아니면 결근으로 처리(직원이 출근·퇴근 체크를 모두 하지 않아 체크 시간이 하나도 없는 경우)
@@ -79,7 +79,7 @@ class AttendanceDetailAnalyseSignProxy2 {
 					detail.setAttendance( 0.0 );
 					detail.setIsAbsent( true );
 					detail.setAbsence( 1.0 );
-					detail.setAbsentDayTime("全天");
+					detail.setAbsentDayTime("종일");
 					detail.setWorkTimeDuration( 0L );
 				}
 			}else{
@@ -92,12 +92,12 @@ class AttendanceDetailAnalyseSignProxy2 {
 				//=========================================================================================================
 				if( onDutyTime != null ){
 
-					logger.debug( debugger, "上午打过卡，时间：onDutyTime=" + onDutyTime );
+					logger.debug( debugger, "오전 체크 완료, 시간: onDutyTime=" + onDutyTime );
 
 					//결근 기준 시간: absenceStartTimes는 설정하지 않아도 되며, 설정하지 않으면 null이 되어 체크 시간이 늦어도 결근으로 처리되지 않음
 					//오전 출근 체크를 함. 근무 일정 설정에 결근 기준 시간이 있으면 직원 결근 여부를 판단하고, 휴가가 아니면 반일 결근으로 처리
 					if( absenceStartTime != null && onDutyTime.after( absenceStartTime )){
-						logger.debug( debugger, "上午打卡时间晚于缺勤计时时间：" + absenceStartTime );
+						logger.debug( debugger, "오전 체크 시간이 결근 기준 시간보다 늦음: " + absenceStartTime );
 						//직원이 이미 휴가를 냈는지 판단
 						if(  isSelfHoliday_Morning || isSelfHoliday_Afternoon || isNotWorkDay ){
 							logger.debug( debugger, "휴가는 출근으로 계산하지 않지만 휴가를 냈으면 결근이 아님" );
@@ -105,14 +105,14 @@ class AttendanceDetailAnalyseSignProxy2 {
 							detail.setAbsence(0.0);
 						}else{
 							logger.debug( debugger, "휴가 아님, 반일 결근" );
-							detail.setAbsentDayTime("上午");
+							detail.setAbsentDayTime("오전");
 							detail.setIsAbsent( true );
 							AttendanceDetailAnalyseCoreService.increaseAbsenceStatusForAttendanceDetail(detail);//결근 일수 증가 + 0.5
 						}
 						AttendanceDetailAnalyseCoreService.increaseAttendanceStatusForAttendanceDetail(detail);//출근 일수 감소 - 0.5
 					}else if( lateStartTime != null && onDutyTime.after( lateStartTime )){
 						//오전 출근 체크를 했고 결근 기준 시간을 넘지 않음. 근무 일정 설정에 지각 기준 시간이 있으면 휴가도 주말도 아닐 때 지각 여부 판단
-						logger.debug( debugger, "上午打卡时间晚于迟到计时时间......" );
+						logger.debug( debugger, "오전 체크 시간이 지각 기준 시간보다 늦음......" );
 						if( isSelfHoliday_Morning || isSelfHoliday_Afternoon || isNotWorkDay ){
 							logger.debug( debugger, "휴가를 냈으면 지각이 아님" );
 							detail.setLateTimeDuration( 0L ); //휴가 중이면 지각이 아님
@@ -129,22 +129,22 @@ class AttendanceDetailAnalyseSignProxy2 {
 				}else{
 					if( offWorkTime.before( now ) ){
 						//출근 체크를 하지 않은 경우
-						logger.debug( debugger, "员工上午缺卡" );
+						logger.debug( debugger, "직원 오전 체크 누락" );
 						if(  isSelfHoliday_Morning || isSelfHoliday_Afternoon || isNotWorkDay ){
 							logger.debug( debugger, "휴가는 근태에 포함하지 않으며 체크가 필요 없고 이상이 아님" );
 							detail.setIsAbsent( false );
-							detail.setAbnormalDutyDayTime("无");
+							detail.setAbnormalDutyDayTime("없음");
 							detail.setIsAbnormalDuty( false );
 						}else{
 							logger.debug(debugger, "체크 없음, 휴가 아님, 근무일이면 결근으로 처리.");
-							detail.setAbnormalDutyDayTime("上午");
+							detail.setAbnormalDutyDayTime("오전");
 							detail.setIsAbnormalDuty(true);
-							detail.setAbsentDayTime("上午");
+							detail.setAbsentDayTime("오전");
 							detail.setIsAbsent(true);
 							AttendanceDetailAnalyseCoreService.increaseAbsenceStatusForAttendanceDetail(detail);
 						}
 						AttendanceDetailAnalyseCoreService.increaseAttendanceStatusForAttendanceDetail(detail);//출근 일수 감소 - 0.5
-						logger.debug( debugger, "上午工作时长, 未打卡：minutes= 0 分钟。" );
+						logger.debug( debugger, "오전 근무 시간, 미체크: minutes= 0분." );
 						detail.setWorkTimeDuration( 0L );
 					}
 				}
@@ -173,11 +173,11 @@ class AttendanceDetailAnalyseSignProxy2 {
 						/*detail.setIsAbsent(false);
 						detail.setAbsence(0.0);*/
 					} else {
-						logger.debug(debugger, "没请假，中午缺卡");
-						if( StringUtils.equals( "上午", detail.getAbnormalDutyDayTime()) ){
-							detail.setAbnormalDutyDayTime("上午|中午");
+						logger.debug(debugger, "휴가 없음, 점심 체크 누락");
+						if( StringUtils.equals( "오전", detail.getAbnormalDutyDayTime()) ){
+							detail.setAbnormalDutyDayTime("오전|점심");
 						}else {
-							detail.setAbnormalDutyDayTime("中午");
+							detail.setAbnormalDutyDayTime("점심");
 						}
 						detail.setIsAbnormalDuty(true);
 					}
@@ -217,7 +217,7 @@ class AttendanceDetailAnalyseSignProxy2 {
 					long minutes = 0L;
 					logger.debug( debugger, "조퇴 계산 시간: leaveEarlyStartTime=" + leaveEarlyStartTime );
 					if( leaveEarlyStartTime != null && offDutyTime.before( leaveEarlyStartTime )){
-						logger.debug( debugger, "下午打卡时间早于早退计时时间" );
+						logger.debug( debugger, "오후 체크 시간이 조퇴 기준 시간보다 이름" );
 						if( isSelfHoliday_Afternoon || isSelfHoliday_Afternoon || isNotWorkDay ){
 							logger.debug( debugger, "휴가·휴일은 근태에 포함하지 않으며 출근·조퇴로 계산하지 않음" );
 							detail.setLeaveEarlierTimeDuration( 0L );
@@ -244,12 +244,12 @@ class AttendanceDetailAnalyseSignProxy2 {
 					//오후 퇴근 체크를 했으므로 하루 전체 근무 시간 계산
 					if( afternoonStartTime != null ){ //오후 출근 시간이 이미 설정됨
 						minutes = dateOperation.getMinutes( afternoonStartTime, offDutyTime);
-						logger.debug( debugger, "计算下午工作时长, 从"+ afternoonStartTime +"~" + offDutyTime + " ：minutes=" + minutes + "분." );
-						logger.debug( debugger, "直接计算全天工作时长, "+ detail.getWorkTimeDuration() +"+" + minutes + "=" + detail.getWorkTimeDuration() + minutes + "분." );
+						logger.debug( debugger, "오후 근무 시간 계산, "+ afternoonStartTime +"~" + offDutyTime + " ：minutes=" + minutes + "분." );
+						logger.debug( debugger, "종일 근무 시간 직접 계산, "+ detail.getWorkTimeDuration() +"+" + minutes + "=" + detail.getWorkTimeDuration() + minutes + "분." );
 						detail.setWorkTimeDuration( detail.getWorkTimeDuration() + minutes );//오전 근무 시간 + 오후 근무 시간 기록
 					}else{
 						minutes = dateOperation.getMinutes( onDutyTime, offDutyTime);
-						logger.debug( debugger, "直接计算全天工作时长, 从"+ onDutyTime +"~" + offDutyTime + " ：minutes=" + minutes + "분." );
+						logger.debug( debugger, "종일 근무 시간 직접 계산, "+ onDutyTime +"~" + offDutyTime + " ：minutes=" + minutes + "분." );
 					}
 				}else{
 					//직원 퇴근 미체크: 아직 체크 시간이 되지 않았거나 체크하지 않은 두 가지 경우
@@ -259,26 +259,26 @@ class AttendanceDetailAnalyseSignProxy2 {
 //						detail.setIsAbnormalDuty(false);
 						logger.debug( debugger, "오늘이 아직 끝나지 않아 결과를 분석하지 않습니다." );
 					}else {
-						logger.debug( debugger, "员工下午未打卡，属于异常状态，缺卡" );
+						logger.debug( debugger, "직원이 오후 체크를 하지 않아 이상 상태(체크 누락)입니다" );
 						if( isSelfHoliday_Afternoon || isSelfHoliday_Afternoon || isNotWorkDay ){
 							logger.debug( debugger, "휴가 또는 비근무일은 근태에 포함하지 않으며 체크가 필요 없고 이상 상태가 아님" );
 							detail.setLeaveEarlierTimeDuration( 0L );
 							detail.setIsLeaveEarlier( false );
 						}else{
-							if( StringUtils.equals( "上午", detail.getAbnormalDutyDayTime()) ){
-								detail.setAbnormalDutyDayTime("上午|下午");
-							}else if( StringUtils.equals( "中午", detail.getAbnormalDutyDayTime()) ){
-								detail.setAbnormalDutyDayTime("中午|下午");
-							}else if( StringUtils.equals( "上午|中午", detail.getAbnormalDutyDayTime()) ){
-								detail.setAbnormalDutyDayTime("上午|中午|下午");
+							if( StringUtils.equals( "오전", detail.getAbnormalDutyDayTime()) ){
+								detail.setAbnormalDutyDayTime("오전|오후");
+							}else if( StringUtils.equals( "점심", detail.getAbnormalDutyDayTime()) ){
+								detail.setAbnormalDutyDayTime("점심|오후");
+							}else if( StringUtils.equals( "오전|점심", detail.getAbnormalDutyDayTime()) ){
+								detail.setAbnormalDutyDayTime("오전|점심|오후");
 							}else{
-								detail.setAbnormalDutyDayTime("下午");
+								detail.setAbnormalDutyDayTime("오후");
 							}
 
-							if( StringUtils.equals( "上午", detail.getAbsentDayTime()) ){
-								detail.setAbsentDayTime("全天");
+							if( StringUtils.equals( "오전", detail.getAbsentDayTime()) ){
+								detail.setAbsentDayTime("종일");
 							}else{
-								detail.setAbsentDayTime("下午");
+								detail.setAbsentDayTime("오후");
 							}
 							detail.setIsAbnormalDuty(true);
 							detail.setIsAbsent(true);
@@ -288,7 +288,7 @@ class AttendanceDetailAnalyseSignProxy2 {
 						AttendanceDetailAnalyseCoreService.increaseAttendanceStatusForAttendanceDetail(detail);//출근 일수 감소 - 0.5
 						//직원 퇴근 미체크, 하루 전체 근무 시간을 계산하되 오후 시간은 계산하지 않음
 						detail.setWorkTimeDuration( 0L );
-						logger.debug( debugger, "员工未签退，全天工作时长暂时记为0分钟，等待补卡或者补提请假申请。" );
+						logger.debug( debugger, "직원이 퇴근 체크를 하지 않아 종일 근무 시간을 일단 0분으로 기록합니다. 보충 체크나 휴가 신청을 기다립니다." );
 					}
 				}
 			}

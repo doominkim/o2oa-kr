@@ -928,7 +928,7 @@ public class Calendar_EventServiceAdv {
 			calendar_EventRepeatMaster.setParticipants(calendar_event.getParticipants());
 			calendar_EventRepeatMaster.setRecurrenceExc(calendar_event.getRecurrenceExc());
 			calendar_EventRepeatMaster.setRecurrenceRule(calendar_event.getRecurrenceRule());
-			calendar_EventRepeatMaster.setRepeatStatus("等待生成");
+			calendar_EventRepeatMaster.setRepeatStatus("생성 대기");
 			calendar_EventRepeatMaster.setSource(calendar_event.getSource());
 			calendar_EventRepeatMaster.setTargetType(calendar_event.getTargetType());
 			calendar_EventRepeatMaster.setTitle(calendar_event.getTitle());

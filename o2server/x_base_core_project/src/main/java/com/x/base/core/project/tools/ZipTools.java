@@ -268,8 +268,8 @@ public class ZipTools {
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("===================");
-		File source = new File("/Users/chengjian/dev/tmp/test/测试文件夹2");
-		File dist = new File("/Users/chengjian/dev/tmp/test/测试文件夹1");
+		File source = new File("/Users/chengjian/dev/tmp/test/테스트폴더2");
+		File dist = new File("/Users/chengjian/dev/tmp/test/테스트폴더1");
 		dist = new File(dist, source.getName());
 		FileUtils.copyDirectory(source, dist);
 		System.out.println("===================");

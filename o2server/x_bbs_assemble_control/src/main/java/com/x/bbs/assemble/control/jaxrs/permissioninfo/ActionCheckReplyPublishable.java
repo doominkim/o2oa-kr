@@ -76,7 +76,7 @@ public class ActionCheckReplyPublishable extends BaseAction {
 				if (subjectInfo.getStopReply()) {
 					publishAble = false;
 				}
-				if (!"启用".equals(subjectInfo.getSubjectStatus())) {
+				if (!"사용".equals(subjectInfo.getSubjectStatus())) {
 					publishAble = false;
 				}
 			}
@@ -100,7 +100,7 @@ public class ActionCheckReplyPublishable extends BaseAction {
 				Exception exception = new ExceptionSectionNotExists(subjectInfo.getSectionId());
 				result.error(exception);
 			} else {
-				if ("所有人".equals(sectionInfo.getReplyPublishAble())) {
+				if ("모든 사용자".equals(sectionInfo.getReplyPublishAble())) {
 				} else {// 권한 판단
 					checkUserPermission = "SECTION_REPLY_PUBLISH_" + sectionInfo.getId();
 					hasPermission = checkUserPermission(checkUserPermission, roleAndPermission.getPermissionInfoList());

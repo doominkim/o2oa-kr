@@ -54,7 +54,7 @@ public class ActionDelete extends BaseAction {
 
 			// 첨부파일 정보 1건 삭제 성공
 			logService.log(emc, effectivePerson.getDistinguishedName(), fileInfo.getName(), fileInfo.getAppId(),
-					fileInfo.getId(), fileInfo.getDocumentId(), fileInfo.getId(), "FILE", "删除");
+					fileInfo.getId(), fileInfo.getDocumentId(), fileInfo.getId(), "FILE", "삭제");
 
 			Wo wo = new Wo();
 			wo.setId( fileInfo.getId() );

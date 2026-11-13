@@ -136,7 +136,7 @@ MWF.xApplication.Meeting.MainPc = new Class({
         return !!this.meetingConfig.enableOnline;
     },
     isAutoCreateOnlineRoom: function(){
-        return this.meetingConfig.enableOnline && this.meetingConfig.onlineProduct === "好视通"
+        return this.meetingConfig.enableOnline && this.meetingConfig.onlineProduct === "FSMeeting"
     },
     openMeeting: function(meeting){
         this.form = new MWF.xApplication.Meeting.MeetingForm(this, {id: meeting}, {}, {app:this});
@@ -1275,7 +1275,7 @@ MWF.xApplication.Meeting.Config = new Class({
                 "   <div class='configTitle' style='margin-top:15px;'>"+this.lp.config.onlineProduct +"</div>" +
                 "   <div item='onlineProduct'></div>"+
 
-                "   <div class='onlineConfigArea' style='display: "+( d.onlineProduct === "好视通" ? "" : "none" )+"'>"+
+                "   <div class='onlineConfigArea' style='display: "+( d.onlineProduct === "FSMeeting" ? "" : "none" )+"'>"+
                 "       <div class='configTitle' style='margin-top:15px;'>"+ this.lp.config.hstUrl +"</div>" +
                 "       <div style='"+ viewStyle2 +"'>" +
                 "           <input type='text' name='hstUrl' value='" + o2.txt(d.onlineConfig.hstUrl || "") + "' style='width:calc(100% - 10px); border:1px solid #ccc'>"+
@@ -1364,12 +1364,12 @@ MWF.xApplication.Meeting.Config = new Class({
 
             this.onlineProductNode = this.contentNode.getElement("[item='onlineProduct']");
             this.onlineProduct = new MDomItem(this.onlineProductNode, {
-                name : "onlineProduct", type : "select", selectValue : ["其他","好视通"], selectText : [this.lp.other,"FSMeeting"],
-                value : d.onlineProduct || "其他",
+                name : "onlineProduct", type : "select", selectValue : ["기타","FSMeeting"], selectText : [this.lp.other,"FSMeeting"],
+                value : d.onlineProduct || "기타",
                 event: {
                     change: function (item, ev ) {
                         var value = item.getValue();
-                        this.contentNode.getElement("div.onlineConfigArea").setStyle("display", value === "好视通" ? "" : "none");
+                        this.contentNode.getElement("div.onlineConfigArea").setStyle("display", value === "FSMeeting" ? "" : "none");
                         // if( value === "하오스퉁" && this.enableOnline.getValue() === "true" &&  !this.scriptEditor )this.loadScriptEditor();
                         this.setSize();
                     }.bind(this)
@@ -1571,7 +1571,7 @@ MWF.xApplication.Meeting.Config = new Class({
                 hstAuth: this.hstAuth.getValue() === "true",
                 o2ToHstUid: this.o2ToHstUid.getValue(),
             };
-            if( this.enableOnline.getValue() === "true" && this.onlineProduct.getValue() === "好视通" ){
+            if( this.enableOnline.getValue() === "true" && this.onlineProduct.getValue() === "FSMeeting" ){
                 if( !onlineConfig.hstUrl || !onlineConfig.hstKey || !onlineConfig.hstSecret ){
                     this.app.notice( this.app.lp.config.onlineConfigNotEmpty, "info" );
                     return;

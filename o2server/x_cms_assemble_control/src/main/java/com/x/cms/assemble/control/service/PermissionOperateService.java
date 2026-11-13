@@ -53,7 +53,7 @@ public class PermissionOperateService {
 		PermissionInfo new_permissionInfo = null;
 		//독자 정보 추가, 독자를 제한하지 않으면 분류에 접근 가능한 모든 사용자가 열람 가능
 		if ( ListTools.isEmpty( readerList ) ) {
-			permissionList.add( new PermissionInfo( PermissionName.READER, "所有人", "所有人", "所有人" ) );
+			permissionList.add( new PermissionInfo( PermissionName.READER, "모든 사용자", "모든 사용자", "모든 사용자" ) );
 		} else {
 			for( PermissionInfo p : readerList ) {				
 //				System.out.println(">>>>>readerList:" + p.getPermissionObjectCode());
@@ -73,11 +73,11 @@ public class PermissionOperateService {
 //				System.out.println(">>>>>authorList:" + p.getPermissionObjectCode());
 				//p가 모든 사람이면 모든 사람이 아닌 독자가 있는지 판단해야 하며, 있으면 모든 사람 열람을 추가할 수 없음
 				Boolean existsReaderPermission = false;
-				if( StringUtils.equals( p.getPermissionObjectCode(), "所有人")) {
+				if( StringUtils.equals( p.getPermissionObjectCode(), "모든 사용자")) {
 					//모든 사람 열람이 아닌 권한이 있는지 판단
 					for(  PermissionInfo p1 : permissionList ) {
-						if( ( StringUtils.equals( p1.getPermission(), "读者") || StringUtils.equals( p1.getPermission(), "阅读"))
-								&& !StringUtils.equals( p1.getPermissionObjectCode(),  "所有人" )) {
+						if( ( StringUtils.equals( p1.getPermission(), "독자") || StringUtils.equals( p1.getPermission(), "열람"))
+								&& !StringUtils.equals( p1.getPermissionObjectCode(),  "모든 사용자" )) {
 							existsReaderPermission = true;
 						}
 					}
@@ -159,27 +159,27 @@ public class PermissionOperateService {
 				
 				if( ListTools.isNotEmpty( permissionList ) ){
 					for( PermissionInfo permission : permissionList ){					
-						if( "管理".equals( permission.getPermission() )) {
+						if( "관리".equals( permission.getPermission() )) {
 							document.addToManagerList(permission.getPermissionObjectCode());
-						}else if( "读者".equals( permission.getPermission() ) || "阅读".equals( permission.getPermission() )) {
-							if( "人员".equals( permission.getPermissionObjectType() )) {
+						}else if( "독자".equals( permission.getPermission() ) || "열람".equals( permission.getPermission() )) {
+							if( "사용자".equals( permission.getPermissionObjectType() )) {
 								document.addToReadPersonList(permission.getPermissionObjectCode());
-							}else if( "部门".equals(  permission.getPermissionObjectType() ) || "组织".equals( permission.getPermissionObjectType() )) {
+							}else if( "부서".equals(  permission.getPermissionObjectType() ) || "조직".equals( permission.getPermissionObjectType() )) {
 								document.addToReadUnitList(permission.getPermissionObjectCode());
-							}else if( "群组".equals( permission.getPermissionObjectType() )) {
+							}else if( "그룹".equals( permission.getPermissionObjectType() )) {
 								document.addToReadGroupList(permission.getPermissionObjectCode());
-							}else if( "所有人".equals( permission.getPermissionObjectCode() )) {
-								document.addToReadPersonList("所有人");
+							}else if( "모든 사용자".equals( permission.getPermissionObjectCode() )) {
+								document.addToReadPersonList("모든 사용자");
 							}
-						}else if( "作者".equals( permission.getPermission() )) {
-							if( "人员".equals( permission.getPermissionObjectType() )) {
+						}else if( "작성자".equals( permission.getPermission() )) {
+							if( "사용자".equals( permission.getPermissionObjectType() )) {
 								document.addToAuthorPersonList(permission.getPermissionObjectCode());
-							}else if( "部门".equals(  permission.getPermissionObjectType() ) || "组织".equals( permission.getPermissionObjectType() )) {
+							}else if( "부서".equals(  permission.getPermissionObjectType() ) || "조직".equals( permission.getPermissionObjectType() )) {
 								document.addToAuthorUnitList(permission.getPermissionObjectCode());
-							}else if( "群组".equals( permission.getPermissionObjectType() )) {
+							}else if( "그룹".equals( permission.getPermissionObjectType() )) {
 								document.addToAuthorGroupList(permission.getPermissionObjectCode());
-							}else if( "所有人".equals( permission.getPermissionObjectCode() )) {
-								document.addToAuthorPersonList("所有人");
+							}else if( "모든 사용자".equals( permission.getPermissionObjectCode() )) {
+								document.addToAuthorPersonList("모든 사용자");
 							}
 						}
 					}
@@ -188,7 +188,7 @@ public class PermissionOperateService {
 				if( ListTools.isEmpty( document.getReadPersonList() ) && ListTools.isEmpty( document.getReadUnitList() ) 
 						&& ListTools.isEmpty( document.getReadGroupList() )) {
 					//열람 범위가 모두 비어 있으면 모든 사람이 접근 가능
-					document.addToReadPersonList("所有人");
+					document.addToReadPersonList("모든 사용자");
 					document.addToReadPersonList(document.getCreatorPerson());
 				}
 				if( ListTools.isEmpty( document.getAuthorPersonList() ) && ListTools.isEmpty( document.getAuthorUnitList() ) 

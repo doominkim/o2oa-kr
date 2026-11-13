@@ -35,7 +35,7 @@ public class ActionQueryListDraftNextWithFilter extends BaseAction {
 			wi = this.convertToWrapIn(jsonElement, Wi.class);
 		} catch (Exception e) {
 			check = false;
-			Exception exception = new ExceptionDocumentInfoProcess(e, "系统在将JSON信息转换为对象时发生异常。JSON:" + jsonElement.toString());
+			Exception exception = new ExceptionDocumentInfoProcess(e, "JSON 정보를 객체로 변환하는 중 오류가 발생했습니다. JSON:" + jsonElement.toString());
 			result.error(exception);
 			logger.error(e, effectivePerson, request, null);
 		}
@@ -52,7 +52,7 @@ public class ActionQueryListDraftNextWithFilter extends BaseAction {
 					documentList = documentQueryService.listMyDraft( effectivePerson.getDistinguishedName(), wi.getCategoryIdList(), wi.getDocumentType() );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionDocumentInfoProcess( e, "系统在查询用户草稿信息列表时发生异常。" );
+					Exception exception = new ExceptionDocumentInfoProcess( e, "사용자 임시 저장 문서 목록을 조회하는 중 오류가 발생했습니다." );
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -77,7 +77,7 @@ public class ActionQueryListDraftNextWithFilter extends BaseAction {
 						CacheManager.put(cacheCategory, cacheKey, wos );
 						result.setData(wos);
 					} catch (Exception e) {
-						Exception exception = new ExceptionDocumentInfoProcess(e, "系统在将分页查询结果转换为可输出的数据信息时发生异常。");
+						Exception exception = new ExceptionDocumentInfoProcess(e, "페이지 조회 결과를 출력 데이터로 변환하는 중 오류가 발생했습니다.");
 						result.error(exception);
 						logger.error(e, effectivePerson, request, null);
 					}
@@ -93,8 +93,8 @@ public class ActionQueryListDraftNextWithFilter extends BaseAction {
 		@FieldDescribe("필터 조건으로 사용할 CMS 분류ID 목록, 여러 개 가능, String 배열.")
 		private List<String> categoryIdList;
 
-		@FieldDescribe( "文档类型：全部 | 信息 | 数据" )
-		private String documentType = "信息";
+		@FieldDescribe( "문서 유형: 전체 | 정보 | 데이터" )
+		private String documentType = "정보";
 
 		public List<String> getCategoryIdList() {
 			return categoryIdList;

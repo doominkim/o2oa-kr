@@ -64,7 +64,7 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<BBSForumInfo> cq = cb.createQuery(BBSForumInfo.class);
 		Root<BBSForumInfo> root = cq.from(BBSForumInfo.class);
-		Predicate p = cb.equal( root.get( BBSForumInfo_.forumVisible ), "所有人" );
+		Predicate p = cb.equal( root.get( BBSForumInfo_.forumVisible ), "모든 사용자" );
 		if( ListTools.isNotEmpty(viewAbleForumIds) ){
 			p = cb.or( p, root.get( BBSForumInfo_.id ).in( viewAbleForumIds ) );
 		}
@@ -78,8 +78,8 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<String> cq = cb.createQuery(String.class);
 		Root<BBSForumInfo> root = cq.from(BBSForumInfo.class);
-		Predicate p = cb.equal( root.get(BBSForumInfo_.forumStatus ), "启用" );
-		p = cb.and( p, cb.equal( root.get(BBSForumInfo_.forumVisible ), "所有人" ) );
+		Predicate p = cb.equal( root.get(BBSForumInfo_.forumStatus ), "사용" );
+		p = cb.and( p, cb.equal( root.get(BBSForumInfo_.forumVisible ), "모든 사용자" ) );
 		cq.select( root.get( BBSForumInfo_.id ) );
 		return em.createQuery( cq.where(p) ).setMaxResults( 1000 ).getResultList();
 	}
@@ -90,7 +90,7 @@ public class BBSForumInfoFactory extends AbstractFactory {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<BBSForumInfo> cq = cb.createQuery(BBSForumInfo.class);
 		Root<BBSForumInfo> root = cq.from(BBSForumInfo.class);
-		Predicate p = cb.equal( root.get(BBSForumInfo_.forumStatus ), "启用" );
+		Predicate p = cb.equal( root.get(BBSForumInfo_.forumStatus ), "사용" );
 		cq.orderBy( cb.asc( root.get( BBSForumInfo_.orderNumber ) ) );
 		return em.createQuery( cq.where(p) ).setMaxResults( 1000 ).getResultList();
 	}

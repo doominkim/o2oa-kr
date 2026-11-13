@@ -75,13 +75,13 @@ public class ActionSave extends BaseAction {
 		}
 		// 정보 검증, 포럼 역할이면 포럼 ID 필수, 게시판 역할이면 게시판 ID 필수
 		if (check) {
-			if ("论坛角色".equals(wrapIn.getRoleType())) {
+			if ("포럼 역할".equals(wrapIn.getRoleType())) {
 				if (wrapIn.getForumId() == null || wrapIn.getForumId().isEmpty()) {
 					check = false;
 					Exception exception = new ExceptionForumIdEmpty();
 					result.error(exception);
 				}
-			} else if ("版块角色".equals(wrapIn.getRoleType())) {
+			} else if ("섹션 역할".equals(wrapIn.getRoleType())) {
 				if (wrapIn.getSectionId() == null || wrapIn.getSectionId().isEmpty()) {
 					check = false;
 					Exception exception = new ExceptionSectionIdEmpty();
@@ -95,7 +95,7 @@ public class ActionSave extends BaseAction {
 		}
 		// 전달된 게시판 ID와 포럼 ID의 유효성 검증
 		if (check) {
-			if ("论坛角色".equals(wrapIn.getRoleType())) {
+			if ("포럼 역할".equals(wrapIn.getRoleType())) {
 				try {
 					forumInfo = forumInfoServiceAdv.get(wrapIn.getForumId());
 					if (forumInfo == null) {
@@ -114,7 +114,7 @@ public class ActionSave extends BaseAction {
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
-			} else if ("版块角色".equals(wrapIn.getRoleType())) {
+			} else if ("섹션 역할".equals(wrapIn.getRoleType())) {
 				try {
 					sectionInfo = sectionInfoServiceAdv.get(wrapIn.getSectionId());
 					if (sectionInfo == null) {

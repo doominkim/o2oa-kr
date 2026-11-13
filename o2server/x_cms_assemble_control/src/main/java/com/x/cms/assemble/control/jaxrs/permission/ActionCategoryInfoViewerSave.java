@@ -68,8 +68,8 @@ public class ActionCategoryInfoViewerSave extends BaseAction {
 		
 		//갱신 완료
 		if( check ){
-			String description = "分类："+categoryId+"权限变更";
-			new LogService().log( null,  effectivePerson.getDistinguishedName(), description, categoryId, "", "", categoryId, "CATEGORYINFO_VIEWER", "可见范围变更" );
+			String description = "분류: "+categoryId+"권한 변경";
+			new LogService().log( null,  effectivePerson.getDistinguishedName(), description, categoryId, "", "", categoryId, "CATEGORYINFO_VIEWER", "공개 범위 변경" );
 
 			CacheManager.notify( AppInfo.class );
 			CacheManager.notify( CategoryInfo.class );
@@ -82,7 +82,7 @@ public class ActionCategoryInfoViewerSave extends BaseAction {
 			try {
 				new CmsBatchOperationPersistService().addOperation( 
 						CmsBatchOperationProcessService.OPT_OBJ_CATEGORY, 
-						CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  categoryId,  categoryId, "分类可见范围变更：ID=" +  categoryId );
+						CmsBatchOperationProcessService.OPT_TYPE_PERMISSION,  categoryId,  categoryId, "분류 공개 범위 변경: ID=" +  categoryId );
 			}catch( Exception e ) {
 				e.printStackTrace();
 			}

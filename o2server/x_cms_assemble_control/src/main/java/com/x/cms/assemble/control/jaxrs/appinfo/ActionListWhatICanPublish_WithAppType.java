@@ -46,7 +46,7 @@ public class ActionListWhatICanPublish_WithAppType extends BaseAction {
 		} else {
 			if (check) {
 				try {
-					wos_out = listPublishAbleAppInfoByPermission( personName, isAnonymous, null,"全部", appType, isXAdmin, 1000 );
+					wos_out = listPublishAbleAppInfoByPermission( personName, isAnonymous, null,"전체", appType, isXAdmin, 1000 );
 				} catch (Exception e) {
 					check = false;
 					Exception exception = new ExceptionAppInfoProcess(e, "사용자 권한으로 볼 수 있는 전체 분류 정보를 조회하는 중 오류가 발생했습니다. Name:" + personName);

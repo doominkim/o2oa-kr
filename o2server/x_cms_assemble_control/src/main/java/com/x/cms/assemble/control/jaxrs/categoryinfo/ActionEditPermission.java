@@ -50,7 +50,7 @@ public class ActionEditPermission extends BaseAction {
 			Wi.copier.copy(wi, categoryInfo);
 			emc.check(categoryInfo, CheckPersistType.all);
 			emc.commit();
-			new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), appInfo.getId(), categoryInfo.getId(), "", "", "CATEGORY", "修改权限");
+			new LogService().log(null, effectivePerson.getDistinguishedName(), categoryInfo.getAppName() + "-" + categoryInfo.getCategoryName(), appInfo.getId(), categoryInfo.getId(), "", "", "CATEGORY", "권한 수정");
 		}
 		CacheManager.notify(AppInfo.class);
 

@@ -1,12 +1,1 @@
-{
-  "o2web/source/x_component_Meeting/Main.js": [
-    {
-      "text": "好视通",
-      "reason": "회의 설정 onlineProduct 저장값이자 비교값(화면 표시는 FSMeeting으로 바꿈)"
-    },
-    {
-      "text": "其他",
-      "reason": "회의 설정 onlineProduct 저장값(화면 표시는 this.lp.other)"
-    }
-  ]
-}
+{}

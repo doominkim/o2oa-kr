@@ -50,7 +50,7 @@ class ActionOauthList extends BaseAction {
 		// 위챗 워크 QR 코드 로그인
 		if (BooleanUtils.isTrue(Config.qiyeweixin().getScanLoginEnable())) {
 			Wo wo = new Wo();
-			wo.setName("企业微信");
+			wo.setName("WeCom");
 			wo.setDisplayName("@O2 WeCom");
 			wo.setIcon(Qiyeweixin.qywxLogo);
 			wos.add(wo);
@@ -58,7 +58,7 @@ class ActionOauthList extends BaseAction {
 		// DingTalk QR 코드 로그인
 		if (BooleanUtils.isTrue(Config.dingding().getScanLoginEnable())) {
 			Wo wo = new Wo();
-			wo.setName("钉钉");
+			wo.setName("DingTalk");
 			wo.setIcon(Dingding.dingdingLogo);
 			wo.setDisplayName("@O2 DingTalk");
 			wos.add(wo);

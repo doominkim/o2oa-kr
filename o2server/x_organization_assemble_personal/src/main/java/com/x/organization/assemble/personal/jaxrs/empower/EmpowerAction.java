@@ -36,9 +36,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "EmpowerAction", description = "授权操作接口.")
+@Tag(name = "EmpowerAction", description = "권한 위임 작업 인터페이스.")
 @Path("empower")
-@JaxrsDescribe("授权操作接口.")
+@JaxrsDescribe("권한 위임 작업 인터페이스.")
 public class EmpowerAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmpowerAction.class);

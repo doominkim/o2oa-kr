@@ -29,8 +29,8 @@ public class ActionSubjectSave extends BaseAction {
 
 	private static  Logger logger = LoggerFactory.getLogger(ActionSubjectSave.class);
 
-	private static final String ANONYMOUS_NAME = "匿名";
-	private static final String TYPE_CATEGORY = "投票";
+	private static final String ANONYMOUS_NAME = "익명";
+	private static final String TYPE_CATEGORY = "투표";
 
 
 	protected ActionResult<Wo> execute(HttpServletRequest request, EffectivePerson effectivePerson,
@@ -52,13 +52,13 @@ public class ActionSubjectSave extends BaseAction {
 		}
 
 		if (StringUtils.isBlank(wrapIn.getTypeCategory())) {
-			wrapIn.setTypeCategory("信息");
+			wrapIn.setTypeCategory("정보");
 		} else {
 			SubjectPropertyValidator.typeCategoryValidate(sectionInfo, wrapIn);
 		}
 
 		if (StringUtils.isBlank(wrapIn.getType())) {
-			wrapIn.setType("未知类别");
+			wrapIn.setType("알 수 없는 분류");
 		} else {
 			SubjectPropertyValidator.subjectTypeValidate(sectionInfo, wrapIn);
 		}
@@ -130,7 +130,7 @@ public class ActionSubjectSave extends BaseAction {
 
 		private String content = "";
 
-		@FieldDescribe("投票选项组集合")
+		@FieldDescribe("투표 선택지 그룹 목록")
 		private List<WiVoteOptionGroup> optionGroups = null;
 
 		public String getSubjectMachineName() {

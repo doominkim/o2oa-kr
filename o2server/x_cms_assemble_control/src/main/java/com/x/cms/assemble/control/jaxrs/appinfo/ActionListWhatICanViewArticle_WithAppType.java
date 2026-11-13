@@ -51,10 +51,10 @@ public class ActionListWhatICanViewArticle_WithAppType extends BaseAction {
 		} else {
 			if (check) {
 				try {
-					wos_out = listViewAbleAppInfoByPermission( personName, isAnonymous, null, appType, "信息", isXAdmin, 1000 );
+					wos_out = listViewAbleAppInfoByPermission( personName, isAnonymous, null, appType, "정보", isXAdmin, 1000 );
 				} catch (Exception e) {
 					check = false;
-					Exception exception = new ExceptionAppInfoProcess(e, "系统在根据用户权限查询所有可见的分类信息时发生异常。Name:" + personName);
+					Exception exception = new ExceptionAppInfoProcess(e, "사용자 권한으로 조회 가능한 분류 정보를 조회하는 중 오류가 발생했습니다. Name:" + personName);
 					result.error(exception);
 					logger.error(e, effectivePerson, request, null);
 				}
@@ -67,7 +67,7 @@ public class ActionListWhatICanViewArticle_WithAppType extends BaseAction {
 							wo.setConfig( appInfoServiceAdv.getConfigJson( wo.getId() ) );
 						} catch (Exception e) {
 							check = false;
-							Exception exception = new ExceptionAppInfoProcess(e, "系统根据ID查询栏目配置支持信息时发生异常。ID=" + wo.getId() );
+							Exception exception = new ExceptionAppInfoProcess(e, "ID로 게시판 설정 지원 정보를 조회하는 중 오류가 발생했습니다. ID=" + wo.getId() );
 							result.error(exception);
 							logger.error(e, effectivePerson, request, null);
 						}

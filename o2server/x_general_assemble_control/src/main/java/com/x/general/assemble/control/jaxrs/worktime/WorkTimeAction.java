@@ -28,9 +28,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "WorkTimeAction", description = "工作时间.")
+@Tag(name = "WorkTimeAction", description = "근무 시간.")
 @Path("worktime")
-@JaxrsDescribe("工作时间.")
+@JaxrsDescribe("근무 시간.")
 public class WorkTimeAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(WorkTimeAction.class);
@@ -57,9 +57,9 @@ public class WorkTimeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "计算开始时间前进指定分钟数后的工作时间.", operationId = OPERATIONID_PREFIX + "forwardMinutes", responses = {
+	@Operation(summary = "시작 시간에서 지정한 분만큼 진행한 뒤의 근무 시간을 계산.", operationId = OPERATIONID_PREFIX + "forwardMinutes", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionForwardMinutes.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "计算开始时间前进指定分钟数后的工作时间.", action = ActionForwardMinutes.class)
+	@JaxrsMethodDescribe(value = "시작 시간에서 지정한 분만큼 진행한 뒤의 근무 시간을 계산.", action = ActionForwardMinutes.class)
 	@GET
 	@Path("forwardminutes/start/{start}/minutes/{minutes}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -78,9 +78,9 @@ public class WorkTimeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "计算开始时间前进指定工作天数后的工作时间.", operationId = OPERATIONID_PREFIX + "forwardDays", responses = {
+	@Operation(summary = "시작 시간에서 지정한 근무일만큼 진행한 뒤의 근무 시간을 계산.", operationId = OPERATIONID_PREFIX + "forwardDays", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionForwardMinutes.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "计算开始时间前进指定工作天数后的工作时间.", action = ActionForwardDays.class)
+	@JaxrsMethodDescribe(value = "시작 시간에서 지정한 근무일만큼 진행한 뒤의 근무 시간을 계산.", action = ActionForwardDays.class)
 	@GET
 	@Path("forwarddays/start/{start}/days/{days}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)
@@ -118,9 +118,9 @@ public class WorkTimeAction extends StandardJaxrsAction {
 		asyncResponse.resume(ResponseFactory.getEntityTagActionResultResponse(request, result));
 	}
 
-	@Operation(summary = "返回指定时间是否是工作时间.", operationId = OPERATIONID_PREFIX + "isWorkTime", responses = {
+	@Operation(summary = "지정한 시간이 근무 시간인지 반환.", operationId = OPERATIONID_PREFIX + "isWorkTime", responses = {
 			@ApiResponse(content = { @Content(schema = @Schema(implementation = ActionIsWorkTime.Wo.class)) }) })
-	@JaxrsMethodDescribe(value = "返回指定时间是否是工作时间.", action = ActionIsWorkTime.class)
+	@JaxrsMethodDescribe(value = "지정한 시간이 근무 시간인지 반환.", action = ActionIsWorkTime.class)
 	@GET
 	@Path("isworktime/{date}")
 	@Produces(HttpMediaType.APPLICATION_JSON_UTF_8)

@@ -200,16 +200,16 @@ public class CmsPermissionService {
 		Root<AppInfo> root = cq.from(AppInfo.class);
 
 		Predicate p = null;
-		if (StringUtils.isNotEmpty(appType) && !StringUtils.equals(appType, "未分类")) {
+		if (StringUtils.isNotEmpty(appType) && !StringUtils.equals(appType, "미분류")) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.equal(root.get(AppInfo.appType_FIELDNAME), appType));
 		}
-		if (StringUtils.isNotEmpty(appType) && StringUtils.equals(appType, "未分类")) {
+		if (StringUtils.isNotEmpty(appType) && StringUtils.equals(appType, "미분류")) {
 			CriteriaBuilderTools.predicate_and(cb, p,
 					CriteriaBuilderTools.predicate_or(cb, cb.isNull(root.get(AppInfo.appType_FIELDNAME)),
 							CriteriaBuilderTools.predicate_or(cb, cb.equal(root.get(AppInfo.appType_FIELDNAME), ""),
-									cb.equal(root.get(AppInfo.appType_FIELDNAME), "未分类"))));
+									cb.equal(root.get(AppInfo.appType_FIELDNAME), "미분류"))));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(AppInfo.documentType_FIELDNAME), documentType));
@@ -282,7 +282,7 @@ public class CmsPermissionService {
 					inAppInfoIds, null, documentType, appType, maxCount);
 			if (ListTools.isNotEmpty(inAppInfoIds) && ListTools.isEmpty(allViewableAppIds)) {
 				allViewableAppIds = new ArrayList<>();
-				allViewableAppIds.add("无可见栏目");
+				allViewableAppIds.add("조회 가능 게시판 없음");
 			}
 		}
 
@@ -310,7 +310,7 @@ public class CmsPermissionService {
 
 		if (ListTools.isEmpty(viewableCategoryInfoIds)) {
 			if (!manager) {
-				viewableCategoryInfoIds.add("没有可用分类");
+				viewableCategoryInfoIds.add("사용 가능 분류 없음");
 			}
 		} else {
 			if (ListTools.isNotEmpty(inCategoryInfoIds)) {
@@ -346,7 +346,7 @@ public class CmsPermissionService {
 		allPublishableAppIds = this.listPublishableAppIdByPerson(emc, personName, isAnonymous, unitNames, groupNames, roleNames,
 				inAppInfoIds, null, documentType, appType, maxCount);
 		if (ListTools.isEmpty(allPublishableAppIds)) {
-			allPublishableAppIds.add("无可发布栏目ID");
+			allPublishableAppIds.add("게시 가능 게시판 없음 ID");
 		}
 		// 내가 직접 문서를 게시할 수 있는 게시판 범위 내에서 전원 열람 가능 분류 ID 목록 조회
 		publishableCategoryInfoIds = addResultToSourceList(this.listAllPeoplePublishCategoryIds(emc,
@@ -367,7 +367,7 @@ public class CmsPermissionService {
 
 		if (ListTools.isEmpty(publishableCategoryInfoIds)) {
 			if (!manager) {
-				publishableCategoryInfoIds.add("没有可用分类");
+				publishableCategoryInfoIds.add("사용 가능 분류 없음");
 			}
 		}
 		publishableCategoryInfoIds = excludListContent(publishableCategoryInfoIds, excludCategoryInfoIds);
@@ -399,7 +399,7 @@ public class CmsPermissionService {
 		if (ListTools.isNotEmpty(inAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, root.get(CategoryInfo.appId_FIELDNAME).in(inAppInfoIds));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(CategoryInfo.documentType_FIELDNAME), documentType));
@@ -425,7 +425,7 @@ public class CmsPermissionService {
 		categoryInfoIds_out.addAll(categoryInfoIds);
 		if (ListTools.isEmpty(categoryInfoIds_out)) {
 			if (!manager) {
-				categoryInfoIds_out.add("没有可用分类");
+				categoryInfoIds_out.add("사용 가능 분류 없음");
 			}
 		}
 		return categoryInfoIds_out;
@@ -467,7 +467,7 @@ public class CmsPermissionService {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.not(root.get(CategoryInfo.id_FIELDNAME).in(excludCategoryInfoIds)));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(CategoryInfo.documentType_FIELDNAME), documentType));
@@ -538,7 +538,7 @@ public class CmsPermissionService {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.not(root.get(CategoryInfo.id_FIELDNAME).in(excludCategoryInfoIds)));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(CategoryInfo.documentType_FIELDNAME), documentType));
@@ -576,7 +576,7 @@ public class CmsPermissionService {
 		categoryInfoIds_out.addAll(categoryInfoIds);
 		if (ListTools.isEmpty(categoryInfoIds_out)) {
 			if (!manager) {
-				categoryInfoIds_out.add("没有可用分类");
+				categoryInfoIds_out.add("사용 가능 분류 없음");
 			}
 		}
 		categoryInfoIds_out = excludListContent(categoryInfoIds_out, excludCategoryInfoIds);
@@ -628,7 +628,7 @@ public class CmsPermissionService {
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.not(root.get(AppInfo.id_FIELDNAME).in(excludAppInfoIds)));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(AppInfo.documentType_FIELDNAME), documentType));
@@ -697,7 +697,7 @@ public class CmsPermissionService {
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.not(root.get(AppInfo.id_FIELDNAME).in(excludAppInfoIds)));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(AppInfo.documentType_FIELDNAME), documentType));
@@ -758,7 +758,7 @@ public class CmsPermissionService {
 		if (ListTools.isNotEmpty(excludAppInfoIds)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.not(root.get(AppInfo.id_FIELDNAME).in(excludAppInfoIds)));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(AppInfo.documentType_FIELDNAME), documentType));
@@ -826,10 +826,10 @@ public class CmsPermissionService {
 		cq.select(root.get(AppInfo.id_FIELDNAME));
 
 		Predicate p = cb.isTrue(root.get(AppInfo.allPeopleView_FIELDNAME));
-		if( StringUtils.isNotEmpty( appType ) && !"all".equalsIgnoreCase( appType ) && !"全部".equalsIgnoreCase( appType )   ){
+		if( StringUtils.isNotEmpty( appType ) && !"all".equalsIgnoreCase( appType ) && !"전체".equalsIgnoreCase( appType )   ){
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.equal(root.get(AppInfo.appType_FIELDNAME), appType));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.equal(root.get(AppInfo.documentType_FIELDNAME), documentType));
 		}
 		appInfoIds = em.createQuery(cq.where(p)).getResultList();
@@ -856,10 +856,10 @@ public class CmsPermissionService {
 		Root<AppInfo> root = cq.from(AppInfo.class);
 		cq.select(root.get(AppInfo.id_FIELDNAME));
 		Predicate p = cb.isTrue(root.get(AppInfo.allPeoplePublish_FIELDNAME));
-		if( StringUtils.isNotEmpty( appType ) && !"all".equalsIgnoreCase( appType ) && !"全部".equalsIgnoreCase( appType )  ){
+		if( StringUtils.isNotEmpty( appType ) && !"all".equalsIgnoreCase( appType ) && !"전체".equalsIgnoreCase( appType )  ){
 			p = CriteriaBuilderTools.predicate_and(cb, p, cb.equal(root.get(AppInfo.appType_FIELDNAME), appType));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType) && !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and(p, cb.equal(root.get(AppInfo.documentType_FIELDNAME), documentType));
 		}
 		appInfoIds = em.createQuery(cq.where(p)).getResultList();
@@ -904,7 +904,7 @@ public class CmsPermissionService {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.not(root.get(CategoryInfo.id_FIELDNAME).in(excludCategoryIds)));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = CriteriaBuilderTools.predicate_and(cb, p,
 					cb.equal(root.get(CategoryInfo.documentType_FIELDNAME), documentType));
@@ -952,7 +952,7 @@ public class CmsPermissionService {
 		if (ListTools.isNotEmpty(excludCategoryIds)) {
 			p = cb.and(p, cb.not(root.get(CategoryInfo.id_FIELDNAME).in(excludCategoryIds)));
 		}
-		if (StringUtils.isNotEmpty(documentType) && !"全部".equals(documentType)
+		if (StringUtils.isNotEmpty(documentType) && !"전체".equals(documentType)
 				&& !"all".equalsIgnoreCase(documentType)) {
 			p = cb.and(p, cb.equal(root.get(CategoryInfo.documentType_FIELDNAME), documentType));
 		}

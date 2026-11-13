@@ -36,9 +36,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "RecordAction", description = "记录接口.")
+@Tag(name = "RecordAction", description = "기록 인터페이스.")
 @Path("record")
-@JaxrsDescribe("记录接口.")
+@JaxrsDescribe("기록 인터페이스.")
 public class RecordAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RecordAction.class);

@@ -82,7 +82,7 @@ public class AttendanceSetting extends SliceJpaObject {
 	public static final String selectContent_FIELDNAME = "selectContent";
 	@FieldDescribe("선택 값, select와 함께 사용, ‘|’로 구분")
 	@Column( length = JpaObject.length_255B, name = ColumnNamePrefix + selectContent_FIELDNAME )
-	private String selectContent = "--无--";
+	private String selectContent = "--없음--";
 
 	public static final String isMultiple_FIELDNAME = "isMultiple";
 	@FieldDescribe("다중 값 허용 여부")

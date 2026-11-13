@@ -93,10 +93,10 @@ public class BBSVoteOption extends SliceJpaObject {
 	private String subjectId = "";
 
 	public static final String optionContentType_FIELDNAME = "optionContentType";
-	@FieldDescribe("选项类别:文字|图片")
+	@FieldDescribe("선택지 유형: 텍스트|이미지")
 	@Column(length = JpaObject.length_32B, name = ColumnNamePrefix + optionContentType_FIELDNAME)
 	@CheckPersist(allowEmpty = false)
-	private String optionContentType = "文字";
+	private String optionContentType = "텍스트";
 
 	public static final String optionGroupId_FIELDNAME = "optionGroupId";
 	@FieldDescribe("선택지 그룹 ID")
@@ -105,7 +105,7 @@ public class BBSVoteOption extends SliceJpaObject {
 	private String optionGroupId = null;
 
 	public static final String optionTextContent_FIELDNAME = "optionTextContent";
-	@FieldDescribe("选项描述值:文字描述内容")
+	@FieldDescribe("선택지 설명 값: 텍스트 설명 내용")
 	@Column(length = JpaObject.length_255B, name = ColumnNamePrefix + optionTextContent_FIELDNAME)
 	@CheckPersist(allowEmpty = true)
 	private String optionTextContent = null;

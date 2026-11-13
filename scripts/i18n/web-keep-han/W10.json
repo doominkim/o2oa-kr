@@ -30,47 +30,5 @@
       "text": "PREFIX a: &lt;http://www.w3.org/2000/10/annotation-ns#>\nPREFIX dc: &lt;http://purl.org/dc/elements/1.1/>\nPREFIX foaf: &lt;http://xmlns.com/foaf/0.1/>\nPREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#>\n\n# Comment!\n\nSELECT ?given ?family\nWHERE {\n  {\n    ?annot a:annotates &lt;http://www.w3.org/TR/rdf-sparql-query/> .\n    ?annot dc:creator ?c .\n    OPTIONAL {?c foaf:givenName ?given ;\n                 foaf:familyName ?family }\n  } UNION {\n    ?c !foaf:knows/foaf:knows? ?thing.\n    ?thing rdfs\n  } MINUS {\n    ?thing rdfs:label \"剛柔流\"@jp\n  }\n  FILTER isBlank(?c)\n}",
       "reason": "CodeMirror SPARQL 데모의 일본어 예시 데이터(剛柔流@jp)"
     }
-  ],
-  "o2web/source/x_component_systemconfig/src/components/content/ServerQueryConfig/query.json": [
-    {
-      "text": "系统服务",
-      "reason": "서버 Query.DEFAULT_CREATORPERSONCIPHER 기본값과 같은 설정값"
-    }
-  ],
-  "o2web/source/x_component_ForumSection/$Main/default/listItem.json": [
-    {
-      "text": "\"condition\": \"function( d ){ return (d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.app.isAdmin || MWFForum.isSubjectEditor(d) ) }\",",
-      "reason": "게시물 typeCategory 비교값(서버 저장값 '投票')"
-    },
-    {
-      "text": "\"show\": \"function( d ){ return !((d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.app.isAdmin || MWFForum.isSubjectEditor(d))) }\"",
-      "reason": "게시물 typeCategory 비교값(서버 저장값 '投票')"
-    }
-  ],
-  "o2web/source/x_component_ForumSection/$Main/default/listItemPrime.json": [
-    {
-      "text": "\"condition\": \"function( d ){ return (d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.app.isAdmin || MWFForum.isSubjectEditor(d)) }\",",
-      "reason": "게시물 typeCategory 비교값(서버 저장값 '投票')"
-    },
-    {
-      "text": "\"show\": \"function( d ){ return !((d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.app.isAdmin || MWFForum.isSubjectEditor(d))) }\"",
-      "reason": "게시물 typeCategory 비교값(서버 저장값 '投票')"
-    }
-  ],
-  "o2web/source/x_component_ForumSection/$Main/default/listItemType.json": [
-    {
-      "text": "\"condition\": \"function( d ){ return (d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.app.isAdmin || MWFForum.isSubjectEditor(d)) }\",",
-      "reason": "게시물 typeCategory 비교값(서버 저장값 '投票')"
-    },
-    {
-      "text": "\"show\": \"function( d ){ return !((d.typeCategory!='投票' && d.typeCategory!=this.app.lp.vote) && (this.app.isAdmin || MWFForum.isSubjectEditor(d))) }\"",
-      "reason": "게시물 typeCategory 비교값(서버 저장값 '投票')"
-    }
-  ],
-  "o2web/source/x_component_ForumSection/Main.js": [
-    {
-      "text": "请选择主题类别",
-      "reason": "필터 subjectType 비교용 기존 센티널 값(표시되지 않음)"
-    }
   ]
 }

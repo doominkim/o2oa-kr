@@ -51,9 +51,9 @@ public class ActionListAllAppType extends BaseAction {
 					unitNames = userManagerService.listUnitNamesWithPerson(personName);
 					groupNames = userManagerService.listGroupNamesByPerson(personName);
 				}
-				List<String> appIds = business.getAppInfoFactory().listPeopleViewAppInfoIds(personName, unitNames, groupNames, "全部", isManager);
+				List<String> appIds = business.getAppInfoFactory().listPeopleViewAppInfoIds(personName, unitNames, groupNames, "전체", isManager);
 				if(ListTools.isNotEmpty(appIds)){
-					final String noneType = "未分类";
+					final String noneType = "미분류";
 					List<BaseAction.Wo> apps = emc.fetch(appIds, BaseAction.Wo.copier3);
 					apps.stream().forEach(app -> {
 						if(StringUtils.isBlank(app.getAppType())){

@@ -27,9 +27,9 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-@Tag(name = "FormAction", description = "表单接口.")
+@Tag(name = "FormAction", description = "양식 인터페이스.")
 @Path("form")
-@JaxrsDescribe("表单接口.")
+@JaxrsDescribe("양식 인터페이스.")
 public class FormAction extends StandardJaxrsAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FormAction.class);

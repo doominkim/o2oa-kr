@@ -57,7 +57,7 @@ public class ActionListHasDocument_WithAppType extends BaseAction {
 					for(AppInfo appInfo : apps){
 						Wo wo = Wo.copier2.copy(appInfo);
 						if(StringUtils.isBlank(wo.getAppType())){
-							wo.setAppType("未分类");
+							wo.setAppType("미분류");
 						}
 						if(wo.getAppType().equals(appType)){
 							try {

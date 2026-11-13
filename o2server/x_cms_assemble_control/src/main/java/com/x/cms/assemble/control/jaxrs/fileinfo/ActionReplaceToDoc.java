@@ -142,7 +142,7 @@ class ActionReplaceToDoc extends BaseAction {
         private static final long serialVersionUID = 4382689061793305054L;
 
         @FieldDescribe("문서 지정 site의 첨부파일 목록 교체, 먼저 삭제 후 추가, 비어 있으면 처리하지 않음.")
-        @FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiFileReplaceInfo", fieldValue = "[{'site':'附件框分类','fileInfoList':[{'id':'附件id','name':'附件名称'}]},'type':'附件来源(cms或processPlatform)']}]")
+        @FieldTypeDescribe(fieldType = "class", fieldTypeName = "WiFileReplaceInfo", fieldValue = "[{'site':'첨부파일 영역 분류','fileInfoList':[{'id':'첨부파일 id','name':'첨부파일 이름'}]},'type':'첨부파일 출처(cms 또는 processPlatform)']}]")
         private List<WiSiteFileInfo> siteFileInfoList;
 
         private String person;
